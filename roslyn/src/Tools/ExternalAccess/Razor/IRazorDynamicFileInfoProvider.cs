@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         );
 
         /// <summary>
-        /// indicate content of a file has updated. the event argument "string" should be same as "filepath" given to <see cref="GetDynamicFileInfoAsync(ProjectId, string, string, CancellationToken)"/>
+        /// indicate content of a file has updated. the event argument "string" should be same as "filepath"
+        // given to <see cref="GetDynamicFileInfoAsync(ProjectId, string, string, CancellationToken)"/>
         /// </summary>
         event EventHandler<string> Updated;
     }

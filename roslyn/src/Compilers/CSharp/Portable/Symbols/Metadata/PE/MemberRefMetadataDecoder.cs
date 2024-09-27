@@ -121,12 +121,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// Search through the members of the <see cref="_containingType"/> type symbol to find the method that matches a particular
+        /// Search through the members of the <see cref="_containingType"/> type symbol to find the method
+        // that matches a particular
         /// signature.
         /// </summary>
-        /// <param name="memberRefOrMethodDef">A MemberRef or a MethodDef handle that can be used to obtain the name and signature of the method</param>
+        /// <param name="memberRefOrMethodDef">A MemberRef or a MethodDef handle that can be used to obtain
+        // the name and signature of the method</param>
         /// <param name="methodsOnly">True to only return a method.</param>
-        /// <returns>The matching method symbol, or null if the inputs do not correspond to a valid method.</returns>
+        /// <returns>The matching method symbol, or null if the inputs do not correspond to a valid
+        // method.</returns>
         internal Symbol FindMember(EntityHandle memberRefOrMethodDef, bool methodsOnly)
         {
             try
@@ -211,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 var field = member as FieldSymbol;
                 TypeWithAnnotations fieldType;
 
-                // Ensure the field symbol matches the { IsByRef, RefCustomModifiers, Type, CustomModifiers } from metadata.
+                // Ensure the field symbol matches the { IsByRef, RefCustomModifiers, Type, CustomModifiers } from
+                // metadata.
                 if (
                     (object)field != null
                     && (field.RefKind != RefKind.None) == fieldInfo.IsByRef
@@ -312,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             Debug.Assert(candidateMethodTypeMap != null);
 
-            // This could be combined into a single return statement with a more complicated expression, but that would
+            // This could be combined into a single return statement with a more complicated expression, but
+            // that would
             // be harder to debug.
 
             if ((candidateParam.RefKind != RefKind.None) != targetParam.IsByRef)
@@ -320,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return false;
             }
 
-            // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just fail to match.
+            // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just
+            // fail to match.
             var substituted = candidateParam.TypeWithAnnotations.SubstituteType(
                 candidateMethodTypeMap
             );
@@ -367,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeWithAnnotations candidateMethodType = candidateMethod.ReturnTypeWithAnnotations;
             TypeSymbol targetReturnType = targetReturnParam.Type;
 
-            // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just fail to match.
+            // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just
+            // fail to match.
             var substituted = candidateMethodType.SubstituteType(candidateMethodTypeMap);
             if (
                 !TypeSymbol.Equals(

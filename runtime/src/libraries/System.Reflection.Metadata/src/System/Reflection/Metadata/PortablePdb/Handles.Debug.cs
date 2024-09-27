@@ -182,8 +182,10 @@ namespace System.Reflection.Metadata
         /// Returns a handle to <see cref="MethodDefinition"/> corresponding to this handle.
         /// </summary>
         /// <remarks>
-        /// The resulting handle is only valid within the context of a <see cref="MetadataReader"/> open on the type system metadata blob,
-        /// which in case of standalone PDB file is a different reader than the one containing this method debug information.
+        /// The resulting handle is only valid within the context of a <see cref="MetadataReader"/> open on
+        // the type system metadata blob,
+        /// which in case of standalone PDB file is a different reader than the one containing this method
+        // debug information.
         /// </remarks>
         public MethodDefinitionHandle ToDefinitionHandle()
         {

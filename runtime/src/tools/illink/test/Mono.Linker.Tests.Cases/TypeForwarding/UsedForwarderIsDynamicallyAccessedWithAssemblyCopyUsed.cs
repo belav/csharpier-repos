@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
@@ -14,7 +15,8 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
         new[] { "Dependencies/ReferenceImplementationLibrary.cs" },
         defines: new[] { "INCLUDE_REFERENCE_IMPL" }
     )]
-    // After compiling the test case we then replace the reference impl with implementation + type forwarder
+    // After compiling the test case we then replace the reference impl with implementation + type
+    // forwarder
     [SetupCompileAfter("Implementation.dll", new[] { "Dependencies/ImplementationLibrary.cs" })]
     [SetupCompileAfter(
         "Forwarder.dll",

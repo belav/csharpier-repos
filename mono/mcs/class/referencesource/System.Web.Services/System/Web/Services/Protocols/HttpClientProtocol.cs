@@ -137,10 +137,12 @@ namespace System.Web.Services.Protocols
     {
         HttpClientType clientType;
 
-        /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.HttpSimpleClientProtocol"]/*' />
+        /// <include file='doc\HttpClientProtocol.uex'
+        // path='docs/doc[@for="HttpSimpleClientProtocol.HttpSimpleClientProtocol"]/*' />
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Web.Services.Protocols.HttpSimpleClientProtocol'/> class.
+        ///       Initializes a new instance of the <see
+        // cref='System.Web.Services.Protocols.HttpSimpleClientProtocol'/> class.
         ///    </para>
         /// </devdoc>
         protected HttpSimpleClientProtocol()
@@ -162,7 +164,8 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.Invoke"]/*' />
+        /// <include file='doc\HttpClientProtocol.uex'
+        // path='docs/doc[@for="HttpSimpleClientProtocol.Invoke"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Invokes a method of a HTTP web service.
@@ -226,7 +229,8 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.BeginInvoke"]/*' />
+        /// <include file='doc\HttpClientProtocol.uex'
+        // path='docs/doc[@for="HttpSimpleClientProtocol.BeginInvoke"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Starts an asynchronous invocation of a method of a HTTP web service.
@@ -260,7 +264,8 @@ namespace System.Web.Services.Protocols
             return BeginSend(requestUri, asyncResult, paramWriter.UsesWriteRequest);
         }
 
-        /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.InitializeAsyncRequest"]/*' />
+        /// <include file='doc\HttpClientProtocol.uex'
+        // path='docs/doc[@for="HttpSimpleClientProtocol.InitializeAsyncRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -304,7 +309,8 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.EndInvoke"]/*' />
+        /// <include file='doc\HttpClientProtocol.uex'
+        // path='docs/doc[@for="HttpSimpleClientProtocol.EndInvoke"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Ends an asynchronous invocation of a method of a HTTP web service.
@@ -357,7 +363,8 @@ namespace System.Web.Services.Protocols
             OperationCompleted(token.UserState, new object[] { parameter }, exception, false);
         }
 
-        /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.InvokeAsync"]/*' />
+        /// <include file='doc\HttpClientProtocol.uex'
+        // path='docs/doc[@for="HttpSimpleClientProtocol.InvokeAsync"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -371,7 +378,8 @@ namespace System.Web.Services.Protocols
             InvokeAsync(methodName, requestUrl, parameters, callback, null);
         }
 
-        /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.InvokeAsync1"]/*' />
+        /// <include file='doc\HttpClientProtocol.uex'
+        // path='docs/doc[@for="HttpSimpleClientProtocol.InvokeAsync1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

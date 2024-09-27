@@ -8,7 +8,8 @@ namespace System.Workflow.ComponentModel.Design
     #region Glyphs
 
     #region Class ConfigErrorGlyph
-    //Class is internal but not sealed as we dont expect the ActivityDesigner writers to supply their own
+    //Class is internal but not sealed as we dont expect the ActivityDesigner writers to supply their
+    // own
     //Glyph instead based on designer actions the smart tag will be shown
     //Exception: StripItemConfigErrorGlyph
     [Obsolete(

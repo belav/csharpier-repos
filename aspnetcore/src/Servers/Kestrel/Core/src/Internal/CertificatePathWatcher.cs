@@ -62,8 +62,10 @@ internal sealed partial class CertificatePathWatcher : IDisposable
     }
 
     /// <summary>
-    /// Returns a token that will fire when any watched <see cref="CertificateConfig"/> is changed on disk.
-    /// The affected <see cref="CertificateConfig"/> will have <see cref="CertificateConfig.FileHasChanged"/>
+    /// Returns a token that will fire when any watched <see cref="CertificateConfig"/> is changed on
+    // disk.
+    /// The affected <see cref="CertificateConfig"/> will have <see
+    // cref="CertificateConfig.FileHasChanged"/>
     /// set to <code>true</code>.
     /// </summary>
     public IChangeToken GetChangeToken()
@@ -73,7 +75,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
 
     /// <summary>
     /// Update the set of <see cref="CertificateConfig"/>s being watched for file changes.
-    /// If a given <see cref="CertificateConfig"/> appears in both lists, it is first removed and then added.
+    /// If a given <see cref="CertificateConfig"/> appears in both lists, it is first removed and then
+    // added.
     /// </summary>
     /// <remarks>
     /// Does not consider targets when watching files that are symlinks.
@@ -120,7 +123,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
 
     /// <summary>
     /// Start watching a certificate's file path for changes.
-    /// <paramref name="certificateConfig"/> must have <see cref="CertificateConfig.IsFileCert"/> set to <code>true</code>.
+    /// <paramref name="certificateConfig"/> must have <see cref="CertificateConfig.IsFileCert"/> set to
+    // <code>true</code>.
     /// </summary>
     /// <remarks>
     /// Internal for testing.
@@ -134,7 +138,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
 
         if (!_metadataForDirectory.TryGetValue(dir, out var dirMetadata))
         {
-            // If we wanted to detected deletions of this whole directory (which we don't since we ignore deletions),
+            // If we wanted to detected deletions of this whole directory (which we don't since we ignore
+            // deletions),
             // we'd probably need to watch the whole directory hierarchy
 
             var fileProvider = _fileProviderFactory(dir);
@@ -152,7 +157,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
 
         if (!_metadataForFile.TryGetValue(path, out var fileMetadata))
         {
-            // PhysicalFileProvider appears to be able to tolerate non-existent files, as long as the directory exists
+            // PhysicalFileProvider appears to be able to tolerate non-existent files, as long as the directory
+            // exists
 
             var disposable = ChangeToken.OnChange(
                 () => dirMetadata.FileProvider.Watch(Path.GetFileName(path)),
@@ -223,8 +229,10 @@ internal sealed partial class CertificatePathWatcher : IDisposable
     }
 
     /// <summary>
-    /// Stop watching a certificate's file path for changes (previously started by <see cref="AddWatchUnsynchronized"/>.
-    /// <paramref name="certificateConfig"/> must have <see cref="CertificateConfig.IsFileCert"/> set to <code>true</code>.
+    /// Stop watching a certificate's file path for changes (previously started by <see
+    // cref="AddWatchUnsynchronized"/>.
+    /// <paramref name="certificateConfig"/> must have <see cref="CertificateConfig.IsFileCert"/> set to
+    // <code>true</code>.
     /// </summary>
     /// <remarks>
     /// Internal for testing.

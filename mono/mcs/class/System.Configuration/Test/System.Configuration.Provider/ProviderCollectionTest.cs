@@ -142,9 +142,9 @@ namespace MonoTests.System.Configuration
         [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_2_ArgNull()
         {
-            /* same as above, but a null
-             * SettingsAttributeDictionary, which causes a
-             * ANE in the ctor. */
+/* same as above, but a null
+* SettingsAttributeDictionary, which causes a
+* ANE in the ctor. */
             SettingsProperty q = new SettingsProperty(
                 "property",
                 typeof(int),

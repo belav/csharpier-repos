@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
         {
             var methodDeclaration = GetSetMethodWorker();
 
-            // The analyzer doesn't report diagnostics when the trivia contains preprocessor directives, so it's safe
+            // The analyzer doesn't report diagnostics when the trivia contains preprocessor directives, so it's
+            // safe
             // to copy the complete leading trivia to both generated methods.
             methodDeclaration = CopyLeadingTrivia(
                 propertyDeclaration,

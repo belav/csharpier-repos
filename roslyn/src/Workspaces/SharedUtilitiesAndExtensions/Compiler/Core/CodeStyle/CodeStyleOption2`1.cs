@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// Creates a new <see cref="ICodeStyleOption2"/> from a specified <paramref name="element"/>.
         /// </summary>
         /// <exception cref="Exception">
-        /// The type of the serialized data does not match the type of <see cref="ICodeStyleOption.Value"/> or the format of the serialized data is invalid.
+        /// The type of the serialized data does not match the type of <see cref="ICodeStyleOption.Value"/>
+        // or the format of the serialized data is invalid.
         /// </exception>
         ICodeStyleOption2 FromXElement(XElement element);
     }

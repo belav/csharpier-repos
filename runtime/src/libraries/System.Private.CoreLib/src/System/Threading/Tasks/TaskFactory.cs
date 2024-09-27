@@ -54,7 +54,7 @@ namespace System.Threading.Tasks
                 );
         }
 
-        /* Constructors */
+/* Constructors */
 
         // ctor parameters provide defaults for the factory, which can be overridden by options provided to
         // specific calls on the factory
@@ -78,8 +78,10 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Initializes a <see cref="TaskFactory"/> instance with the specified configuration.
         /// </summary>
-        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be assigned
-        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is explicitly specified
+        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be
+        // assigned
+        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is
+        // explicitly specified
         /// while calling the factory methods.</param>
         /// <remarks>
         /// This constructor creates a <see cref="TaskFactory"/> instance with a default configuration. The
@@ -161,8 +163,10 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Initializes a <see cref="TaskFactory"/> instance with the specified configuration.
         /// </summary>
-        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be assigned
-        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is explicitly specified
+        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be
+        // assigned
+        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is
+        // explicitly specified
         /// while calling the factory methods.</param>
         /// <param name="creationOptions">
         /// The default <see cref="TaskCreationOptions">
@@ -226,7 +230,7 @@ namespace System.Threading.Tasks
             }
         }
 
-        /* Properties */
+/* Properties */
 
         /// <summary>
         /// Gets the default <see cref="Threading.CancellationToken">CancellationToken</see> of this
@@ -256,7 +260,8 @@ namespace System.Threading.Tasks
         /// </see> value of this TaskFactory.
         /// </summary>
         /// <remarks>
-        /// This property returns the default creation options for this factory.  They will be used to create all
+        /// This property returns the default creation options for this factory.  They will be used to
+        // create all
         /// tasks unless other options are explicitly specified during calls to this factory's methods.
         /// </remarks>
         public TaskCreationOptions CreationOptions => m_defaultCreationOptions;
@@ -266,8 +271,10 @@ namespace System.Threading.Tasks
         /// </see> value of this TaskFactory.
         /// </summary>
         /// <remarks>
-        /// This property returns the default continuation options for this factory.  They will be used to create
-        /// all continuation tasks unless other options are explicitly specified during calls to this factory's methods.
+        /// This property returns the default continuation options for this factory.  They will be used to
+        // create
+        /// all continuation tasks unless other options are explicitly specified during calls to this
+        // factory's methods.
         /// </remarks>
         public TaskContinuationOptions ContinuationOptions => m_defaultContinuationOptions;
 
@@ -280,7 +287,8 @@ namespace System.Threading.Tasks
         /// </summary>
         /// <param name="action">The action delegate to execute asynchronously.</param>
         /// <returns>The started <see cref="Task">Task</see>.</returns>
-        /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref name="action"/>
+        /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref
+        // name="action"/>
         /// argument is null.</exception>
         /// <remarks>
         /// Calling StartNew is functionally equivalent to creating a Task using one of its constructors
@@ -307,11 +315,14 @@ namespace System.Threading.Tasks
         /// Creates and starts a <see cref="Task">Task</see>.
         /// </summary>
         /// <param name="action">The action delegate to execute asynchronously.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <returns>The started <see cref="Task">Task</see>.</returns>
-        /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref name="action"/>
+        /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref
+        // name="action"/>
         /// argument is null.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -374,7 +385,8 @@ namespace System.Threading.Tasks
         /// Creates and starts a <see cref="Task">Task</see>.
         /// </summary>
         /// <param name="action">The action delegate to execute asynchronously.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new <see cref="Task"/></param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new <see cref="Task"/></param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
         /// <see cref="Task">Task.</see></param>
@@ -392,7 +404,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="creationOptions"/> argument specifies an invalid TaskCreationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -457,12 +470,14 @@ namespace System.Threading.Tasks
         /// <param name="action">The action delegate to execute asynchronously.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="action"/>
         /// delegate.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new <see cref="Task"/></param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new <see cref="Task"/></param>
         /// <returns>The started <see cref="Task">Task</see>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref
         /// name="action"/>
         /// argument is null.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -537,7 +552,8 @@ namespace System.Threading.Tasks
         /// <param name="action">The action delegate to execute asynchronously.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="action"/>
         /// delegate.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
         /// <see cref="Task">Task.</see></param>
@@ -555,7 +571,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="creationOptions"/> argument specifies an invalid TaskCreationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -590,7 +607,8 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
         /// <returns>The started <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref
@@ -622,14 +640,17 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new <see cref="Task"/></param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new <see cref="Task"/></param>
         /// <returns>The started <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref
         /// name="function"/>
         /// argument is null.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -661,7 +682,8 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
@@ -702,9 +724,11 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
         /// <see cref="Task{TResult}"/>.</param>
@@ -722,7 +746,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="creationOptions"/> argument specifies an invalid TaskCreationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -755,7 +780,8 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
@@ -790,16 +816,19 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new <see cref="Task"/></param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new <see cref="Task"/></param>
         /// <returns>The started <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the <paramref
         /// name="function"/>
         /// argument is null.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -833,7 +862,8 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
@@ -878,11 +908,13 @@ namespace System.Threading.Tasks
         /// <typeparam name="TResult">The type of the result available through the
         /// <see cref="Task{TResult}">Task</see>.
         /// </typeparam>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
         /// <see cref="Task{TResult}"/>.</param>
@@ -900,7 +932,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="creationOptions"/> argument specifies an invalid TaskCreationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -1896,7 +1929,8 @@ namespace System.Threading.Tasks
         // it has been invoked N times.  This allows us to replace this logic:
         //      Task<Task[]> promise = new Task<Task[]>(...);
         //      int _count = tasksCopy.Length;
-        //      Action<Task> completionAction = delegate {if (Interlocked.Decrement(ref _count) == 0) promise.TrySetResult(tasksCopy);
+        //      Action<Task> completionAction = delegate {if (Interlocked.Decrement(ref _count) == 0)
+        // promise.TrySetResult(tasksCopy);
         //      for (int i=0; i<_count; i++)
         //          tasksCopy[i].AddCompletionAction(completionAction);
         // with this logic:
@@ -2101,7 +2135,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationAction">The action delegate to execute when all tasks in
         /// the <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task">Task</see>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -2112,7 +2147,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task ContinueWhenAll(
@@ -2185,7 +2221,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationAction">The action delegate to execute when all tasks in the <paramref
         /// name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -2207,7 +2244,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -2239,7 +2277,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationAction">The action delegate to execute when all tasks in
         /// the <paramref name="tasks"/> array have completed.</param>
@@ -2273,11 +2312,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationAction">The action delegate to execute when all tasks in
         /// the <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task">Task</see>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -2288,7 +2329,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task ContinueWhenAll<TAntecedentResult>(
@@ -2313,7 +2355,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationAction">The action delegate to execute when all tasks in the <paramref
         /// name="tasks"/> array have completed.</param>
@@ -2359,11 +2402,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationAction">The action delegate to execute when all tasks in the <paramref
         /// name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -2385,7 +2430,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -2461,7 +2507,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -2472,7 +2519,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TResult> ContinueWhenAll<TResult>(
@@ -2553,7 +2601,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -2575,7 +2624,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -2607,7 +2657,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -2645,7 +2696,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -2653,7 +2705,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -2664,7 +2717,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
@@ -2689,7 +2743,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -2739,7 +2794,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -2747,7 +2803,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -2769,7 +2826,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -2804,7 +2862,8 @@ namespace System.Threading.Tasks
         // A Task<Task> that will be completed the first time that Invoke is called.
         // It allows us to replace this logic:
         //      Task<Task> promise = new Task<Task>(...);
-        //      Action<Task> completionAction = delegate(Task completingTask) { promise.TrySetResult(completingTask); }
+        //      Action<Task> completionAction = delegate(Task completingTask) {
+        // promise.TrySetResult(completingTask); }
         //      for (int i=0; i<tasksCopy.Length; i++) tasksCopy[i].AddCompletionAction(completionAction);
         // with this logic:
         //      CompletionOnInvokePromise promise = new CompletionOnInvokePromise(tasksCopy);
@@ -3016,7 +3075,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationAction">The action delegate to execute when one task in the <paramref
         /// name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task">Task</see>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -3027,7 +3087,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task ContinueWhenAny(
@@ -3100,7 +3161,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationAction">The action delegate to execute when one task in the <paramref
         /// name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -3122,7 +3184,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -3198,7 +3261,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -3209,7 +3273,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TResult> ContinueWhenAny<TResult>(
@@ -3290,7 +3355,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -3312,7 +3378,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -3344,7 +3411,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -3382,7 +3450,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -3390,7 +3459,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -3401,7 +3471,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
@@ -3426,7 +3497,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -3476,7 +3548,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <typeparam name="TResult">The type of the result that is returned by the <paramref
         /// name="continuationFunction"/>
         /// delegate and associated with the created <see
@@ -3484,7 +3557,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -3506,7 +3580,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -3538,7 +3613,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationAction">The action delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
@@ -3572,11 +3648,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationAction">The action delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="Task"/>.</returns>
         /// <exception cref="ArgumentNullException">The exception that is thrown when the
@@ -3587,7 +3665,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task ContinueWhenAny<TAntecedentResult>(
@@ -3612,7 +3691,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationAction">The action delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
@@ -3658,11 +3738,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="Task">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationAction">The action delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <param name="continuationOptions">The <see cref="TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
@@ -3684,7 +3766,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>

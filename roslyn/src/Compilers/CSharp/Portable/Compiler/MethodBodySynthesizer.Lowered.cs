@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// See http://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
         /// </summary>
         /// <remarks>
-        /// This method should be kept consistent with MethodBodySynthesizer.ConstructStringSwitchHashFunctionBody
+        /// This method should be kept consistent with
+        // MethodBodySynthesizer.ConstructStringSwitchHashFunctionBody
         /// The control flow in this method mimics lowered "for" loop. It is exactly what we want to emit
         /// to ensure that JIT can do range check hoisting.
         /// </remarks>
@@ -162,13 +163,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     }
 
     /// <summary>
-    /// The synthesized method for computing the hash from a ReadOnlySpan&lt;char&gt; or Span&lt;char&gt;.
+    /// The synthesized method for computing the hash from a ReadOnlySpan&lt;char&gt; or
+    // Span&lt;char&gt;.
     /// Matches the corresponding method for string <see cref="SynthesizedStringSwitchHashMethod"/>.
     /// </summary>
     internal sealed partial class SynthesizedSpanSwitchHashMethod : SynthesizedGlobalMethodSymbol
     {
         /// <remarks>
-        /// This method should be kept consistent with <see cref="SynthesizedStringSwitchHashMethod.ComputeStringHash"/>
+        /// This method should be kept consistent with <see
+        // cref="SynthesizedStringSwitchHashMethod.ComputeStringHash"/>
         /// </remarks>
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,
@@ -293,8 +296,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Given a SynthesizedExplicitImplementationMethod (effectively a tuple (interface method, implementing method, implementing type)),
-        /// construct a BoundBlock body.  Consider the tuple (Interface.Goo, Base.Goo, Derived).  The generated method will look like:
+        /// Given a SynthesizedExplicitImplementationMethod (effectively a tuple (interface method,
+        // implementing method, implementing type)),
+        /// construct a BoundBlock body.  Consider the tuple (Interface.Goo, Base.Goo, Derived).  The
+        // generated method will look like:
         ///
         /// R Interface.Goo&lt;T1, T2, ...&gt;(A1 a1, A2 a2, ...)
         /// {
@@ -353,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Given a SynthesizedSealedPropertyAccessor (an accessor with a reference to the accessor it overrides),
+        /// Given a SynthesizedSealedPropertyAccessor (an accessor with a reference to the accessor it
+        // overrides),
         /// construct a BoundBlock body.
         /// </summary>
         internal override void GenerateMethodBody(
@@ -410,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ) => throw ExceptionUtilities.Unreachable();
 
             /// <summary>
-            /// Given a SynthesizedSealedPropertyAccessor (an accessor with a reference to the accessor it overrides),
+            /// Given a SynthesizedSealedPropertyAccessor (an accessor with a reference to the accessor it
+            // overrides),
             /// construct a BoundBlock body.
             /// </summary>
             internal override void GenerateMethodBody(
@@ -486,7 +493,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 boundHashFactor
             );
 
-            // Generate 'currentHashValue' <= 'currentHashValue + EqualityComparer<valueToHash type>.Default.GetHashCode(valueToHash)'
+            // Generate 'currentHashValue' <= 'currentHashValue + EqualityComparer<valueToHash
+            // type>.Default.GetHashCode(valueToHash)'
             currentHashValue = F.Binary(
                 BinaryOperatorKind.IntAddition,
                 system_Int32,
@@ -545,9 +553,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             //  Expression:
             //
-            //      System.Collections.Generic.EqualityComparer<T_1>.Default.Equals(this.backingFld_1, value.backingFld_1)
+            //      System.Collections.Generic.EqualityComparer<T_1>.Default.Equals(this.backingFld_1,
+            // value.backingFld_1)
             //      ...
-            //      && System.Collections.Generic.EqualityComparer<T_N>.Default.Equals(this.backingFld_N, value.backingFld_N)
+            //      && System.Collections.Generic.EqualityComparer<T_N>.Default.Equals(this.backingFld_N,
+            // value.backingFld_N)
 
             //  prepare symbols
             var equalityComparer_get_Default = F.WellKnownMethod(
@@ -591,7 +601,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Construct a body for a method containing a call to a single other method with the same signature (modulo name).
+        /// Construct a body for a method containing a call to a single other method with the same signature
+        // (modulo name).
         /// </summary>
         /// <param name="F">Bound node factory.</param>
         /// <param name="methodToInvoke">Method to invoke in constructed body.</param>

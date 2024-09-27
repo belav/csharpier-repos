@@ -23,7 +23,8 @@ public sealed partial class SignOutHttpResult : IResult
     /// Initializes a new instance of <see cref="SignOutHttpResult"/> with the
     /// specified authentication schemes.
     /// </summary>
-    /// <param name="authenticationSchemes">The authentication schemes to use when signing out the user.</param>
+    /// <param name="authenticationSchemes">The authentication schemes to use when signing out the
+    // user.</param>
     internal SignOutHttpResult(IList<string> authenticationSchemes)
         : this(authenticationSchemes, properties: null) { }
 
@@ -31,8 +32,10 @@ public sealed partial class SignOutHttpResult : IResult
     /// Initializes a new instance of <see cref="SignOutHttpResult"/> with the
     /// specified authentication scheme and <paramref name="properties"/>.
     /// </summary>
-    /// <param name="authenticationScheme">The authentication schemes to use when signing out the user.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
+    /// <param name="authenticationScheme">The authentication schemes to use when signing out the
+    // user.</param>
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out
+    // operation.</param>
     internal SignOutHttpResult(string authenticationScheme, AuthenticationProperties? properties)
         : this(new[] { authenticationScheme }, properties) { }
 
@@ -40,8 +43,10 @@ public sealed partial class SignOutHttpResult : IResult
     /// Initializes a new instance of <see cref="SignOutHttpResult"/> with the
     /// specified authentication schemes and <paramref name="properties"/>.
     /// </summary>
-    /// <param name="authenticationSchemes">The authentication scheme to use when signing out the user.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
+    /// <param name="authenticationSchemes">The authentication scheme to use when signing out the
+    // user.</param>
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out
+    // operation.</param>
     internal SignOutHttpResult(
         IList<string> authenticationSchemes,
         AuthenticationProperties? properties

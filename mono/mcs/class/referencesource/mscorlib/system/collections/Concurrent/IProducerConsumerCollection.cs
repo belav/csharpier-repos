@@ -58,7 +58,8 @@ namespace System.Collections.Concurrent
         /// <param name="item">The object to add to the <see
         /// cref="IProducerConsumerCollection{T}"/>.</param>
         /// <returns>true if the object was added successfully; otherwise, false.</returns>
-        /// <exception cref="T:System.ArgumentException">The <paramref name="item"/> was invalid for this collection.</exception>
+        /// <exception cref="T:System.ArgumentException">The <paramref name="item"/> was invalid for this
+        // collection.</exception>
         bool TryAdd(T item);
 
         /// <summary>
@@ -66,16 +67,19 @@ namespace System.Collections.Concurrent
         /// </summary>
         /// <param name="item">
         /// When this method returns, if the object was removed and returned successfully, <paramref
-        /// name="item"/> contains the removed object. If no object was available to be removed, the value is
+        /// name="item"/> contains the removed object. If no object was available to be removed, the value
+        // is
         /// unspecified.
         /// </param>
         /// <returns>true if an object was removed and returned successfully; otherwise, false.</returns>
         bool TryTake(out T item);
 
         /// <summary>
-        /// Copies the elements contained in the <see cref="IProducerConsumerCollection{T}"/> to a new array.
+        /// Copies the elements contained in the <see cref="IProducerConsumerCollection{T}"/> to a new
+        // array.
         /// </summary>
-        /// <returns>A new array containing the elements copied from the <see cref="IProducerConsumerCollection{T}"/>.</returns>
+        /// <returns>A new array containing the elements copied from the <see
+        // cref="IProducerConsumerCollection{T}"/>.</returns>
         T[] ToArray();
     }
 

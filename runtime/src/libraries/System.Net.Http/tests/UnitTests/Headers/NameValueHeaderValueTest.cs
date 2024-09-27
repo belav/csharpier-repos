@@ -46,7 +46,8 @@ namespace System.Net.Http.Tests
         [InlineData("te\u00E4xt")]
         public void Ctor_NameInvalidFormat_ThrowFormatException(string value)
         {
-            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are allowed.
+            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are
+            // allowed.
             AssertFormatException(value, null);
         }
 
@@ -77,7 +78,8 @@ namespace System.Net.Http.Tests
         [InlineData("\"token\r\"")]
         public void Ctor_ValueInvalidFormat_ThrowFormatException(string value)
         {
-            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are allowed.
+            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are
+            // allowed.
             AssertFormatException("text", value);
         }
 

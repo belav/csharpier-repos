@@ -79,16 +79,21 @@ namespace System.Net.PeerToPeer
         ///  use the handle. The code is in a try catch block here so that
         ///  we catch these situations and still recover.
         /// </summary>
-        /// <param name="message">The error message that we would like to set as the message for the exception</param>///
+        /// <param name="message">The error message that we would like to set as the message for the
+        // exception</param>///
         /// <param name="hr">The error code</param>
         /// <returns>a PeerToPeerException</returns>
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeSystemNativeMethods.FormatMessage(System.Net.FormatMessageFlags,System.IntPtr,System.UInt32,System.UInt32,System.IntPtr&,System.UInt32,System.IntPtr):System.UInt32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeSystemNativeMethods.LocalFree(System.IntPtr):System.UInt32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeSystemNativeMethods.FormatMessage(System.Net.FormatMessageFlags,System.IntPtr,System.UInt32,System.UInt32,System.IntPtr&,System.UInt32,System.IntPtr):System.UInt32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeSystemNativeMethods.LocalFree(System.IntPtr):System.UInt32" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStringUni(System.IntPtr):System.String" />
         // <SatisfiesLinkDemand Name="Win32Exception..ctor(System.Int32,System.String)" />
         // <SatisfiesLinkDemand Name="Marshal.GetExceptionForHR(System.Int32):System.Exception" />
-        // <ReferencesCritical Name="Method: PeerToPeerOSHelper.get_P2PModuleHandle():System.IntPtr" Ring="1" />
+        // <ReferencesCritical Name="Method: PeerToPeerOSHelper.get_P2PModuleHandle():System.IntPtr"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         internal static PeerToPeerException CreateFromHr(string message, Int32 hr)
@@ -170,7 +175,9 @@ namespace System.Net.PeerToPeer
             : base(info, context) { }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <SatisfiesLinkDemand Name="Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext):System.Void"
+        // />
         // </SecurityKernel>
         [SuppressMessage(
             "Microsoft.Security",
@@ -188,7 +195,9 @@ namespace System.Net.PeerToPeer
         }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <SatisfiesLinkDemand Name="Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext):System.Void"
+        // />
         // </SecurityKernel>
         [SuppressMessage(
             "Microsoft.Security",

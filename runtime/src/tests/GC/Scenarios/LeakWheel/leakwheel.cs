@@ -36,7 +36,7 @@ namespace DefaultNamespace
         {
             // console synchronization Console.SetOut(TextWriter.Synchronized(Console.Out));
 
-            /*max memory will be used. If heap size is bigger than this, */
+/*max memory will be used. If heap size is bigger than this, */
 
             // delete all the objects. Default 10MB
             iMem = 10;
@@ -320,12 +320,12 @@ namespace DefaultNamespace
             Dictionary<int, WeakReference> oTable
         )
         {
-            /**************************************************/
-            /* save new node in a chain, all the node is      */
-            /* refereced by this chain, Table only have their */
-            /* Weakreferece. So when delete a node, only need */
-            /* to delete the ref in this chain.               */
-            /**************************************************/
+/**************************************************/
+/* save new node in a chain, all the node is      */
+/* refereced by this chain, Table only have their */
+/* Weakreferece. So when delete a node, only need */
+/* to delete the ref in this chain.               */
+/**************************************************/
             if (LstNode == null)
                 LstNode = nValue;
             else

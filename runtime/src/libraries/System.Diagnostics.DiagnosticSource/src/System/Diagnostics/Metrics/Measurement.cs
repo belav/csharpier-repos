@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace System.Diagnostics.Metrics
 {
     /// <summary>
-    /// Measurement stores one observed metrics value and its associated tags. This type is used by Observable instruments' Observe() method when reporting current measurements.
+    /// Measurement stores one observed metrics value and its associated tags. This type is used by
+    // Observable instruments' Observe() method when reporting current measurements.
     /// with the associated tags.
     /// </summary>
     public readonly struct Measurement<T>
@@ -76,7 +77,8 @@ namespace System.Diagnostics.Metrics
         /// </summary>
         public T Value { get; }
 
-        // Private helper to copy IEnumerable to array. We have it to avoid adding dependencies on System.Linq
+        // Private helper to copy IEnumerable to array. We have it to avoid adding dependencies on
+        // System.Linq
         private static KeyValuePair<string, object?>[] ToArray(
             IEnumerable<KeyValuePair<string, object?>>? tags
         ) =>

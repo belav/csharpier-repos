@@ -23,14 +23,16 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
     /// </summary>
-    /// <param name="componentType">The type of the component to render. This must implement <see cref="IComponent"/>.</param>
+    /// <param name="componentType">The type of the component to render. This must implement <see
+    // cref="IComponent"/>.</param>
     public RazorComponentResult([DynamicallyAccessedMembers(Component)] Type componentType)
         : this(componentType, ReadOnlyDictionary<string, object?>.Empty) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
     /// </summary>
-    /// <param name="componentType">The type of the component to render. This must implement <see cref="IComponent"/>.</param>
+    /// <param name="componentType">The type of the component to render. This must implement <see
+    // cref="IComponent"/>.</param>
     /// <param name="parameters">Parameters for the component.</param>
     public RazorComponentResult(
         [DynamicallyAccessedMembers(Component)] Type componentType,
@@ -41,7 +43,8 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
     /// </summary>
-    /// <param name="componentType">The type of the component to render. This must implement <see cref="IComponent"/>.</param>
+    /// <param name="componentType">The type of the component to render. This must implement <see
+    // cref="IComponent"/>.</param>
     /// <param name="parameters">Parameters for the component.</param>
     public RazorComponentResult(
         [DynamicallyAccessedMembers(Component)] Type componentType,
@@ -51,7 +54,8 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
         ArgumentNullException.ThrowIfNull(componentType);
         ArgumentNullException.ThrowIfNull(parameters);
 
-        // Note that the Blazor renderer will validate that componentType implements IComponent and throws a suitable
+        // Note that the Blazor renderer will validate that componentType implements IComponent and throws a
+        // suitable
         // exception if not, so we don't need to duplicate that logic here.
         ComponentType = componentType;
         Parameters = parameters ?? EmptyParameters;
@@ -85,8 +89,10 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
     public IReadOnlyDictionary<string, object?> Parameters { get; }
 
     /// <summary>
-    /// Gets or sets a flag to indicate whether streaming rendering should be prevented. If true, the renderer will
-    /// wait for the component hierarchy to complete asynchronous tasks such as loading before supplying the HTML response.
+    /// Gets or sets a flag to indicate whether streaming rendering should be prevented. If true, the
+    // renderer will
+    /// wait for the component hierarchy to complete asynchronous tasks such as loading before supplying
+    // the HTML response.
     /// If false, streaming rendering will be determined by the components being rendered.
     ///
     /// The default value is false.
@@ -96,8 +102,10 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
     /// <summary>
     /// Processes this result in the given <paramref name="httpContext" />.
     /// </summary>
-    /// <param name="httpContext">An <see cref="HttpContext" /> associated with the current request.</param >
-    /// <returns >A <see cref="T:System.Threading.Tasks.Task" /> which will complete when execution is completed.</returns >
+    /// <param name="httpContext">An <see cref="HttpContext" /> associated with the current
+    // request.</param >
+    /// <returns >A <see cref="T:System.Threading.Tasks.Task" /> which will complete when execution is
+    // completed.</returns >
     public Task ExecuteAsync(HttpContext httpContext) =>
         RazorComponentResultExecutor.ExecuteAsync(httpContext, this);
 }

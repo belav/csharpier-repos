@@ -71,7 +71,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        ///    <para>Creates a new instance of the IPEndPoint class with the specified address and port.</para>
+        ///    <para>Creates a new instance of the IPEndPoint class with the specified address and
+        // port.</para>
         /// </devdoc>
         public IPEndPoint(IPAddress address, int port)
         {
@@ -194,7 +195,8 @@ namespace System.Net
             return m_Address.GetHashCode() ^ m_Port;
         }
 
-        // For security, we need to be able to take an IPEndPoint and make a copy that's immutable and not derived.
+        // For security, we need to be able to take an IPEndPoint and make a copy that's immutable and not
+        // derived.
         internal IPEndPoint Snapshot()
         {
             return new IPEndPoint(Address.Snapshot(), Port);

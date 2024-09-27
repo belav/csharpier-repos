@@ -186,7 +186,8 @@ internal abstract partial class Http3Stream
             Log.Http3StreamAbort(TraceIdentifier, errorCode, abortReason);
 
             // Call _http3Output.Stop() prior to poisoning the request body stream or pipe to
-            // ensure that an app that completes early due to the abort doesn't result in header frames being sent.
+            // ensure that an app that completes early due to the abort doesn't result in header frames being
+            // sent.
             _http3Output.Stop();
 
             CancelRequestAbortedToken();
@@ -308,10 +309,13 @@ internal abstract partial class Http3Stream
     )
     {
         // https://httpwg.org/specs/rfc9114.html#rfc.section.4.2.2
-        // "The value is based on the uncompressed size of header fields, including the length of the name and value in octets plus an overhead of 32 octets for each header field.";
-        // We don't include the 32 byte overhead hear so we can accept a little more than the advertised limit.
+        // "The value is based on the uncompressed size of header fields, including the length of the name
+        // and value in octets plus an overhead of 32 octets for each header field.";
+        // We don't include the 32 byte overhead hear so we can accept a little more than the advertised
+        // limit.
         _totalParsedHeaderSize += name.Length + value.Length;
-        // Allow a 2x grace before aborting the stream. We'll check the size limit again later where we can send a 431.
+        // Allow a 2x grace before aborting the stream. We'll check the size limit again later where we can
+        // send a 431.
         if (_totalParsedHeaderSize > ServerOptions.Limits.MaxRequestHeadersTotalSize * 2)
         {
             throw new Http3StreamErrorException(
@@ -390,7 +394,8 @@ internal abstract partial class Http3Stream
                     case HeaderType.NameAndValue:
                         UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
 
-                        // Header and value are new and will get validated (i.e. check name is lower-case, check value doesn't contain newlines)
+                        // Header and value are new and will get validated (i.e. check name is lower-case, check value
+                        // doesn't contain newlines)
                         ValidateHeaderContent(name, value);
                         OnHeader(name, value, checkForNewlineChars: true);
                         break;
@@ -424,7 +429,8 @@ internal abstract partial class Http3Stream
         }
 
         // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2
-        // A request or response containing uppercase header field names MUST be treated as malformed (Section 8.1.2.6).
+        // A request or response containing uppercase header field names MUST be treated as malformed
+        // (Section 8.1.2.6).
         for (var i = 0; i < name.Length; i++)
         {
             if (((uint)name[i] - 65) <= (90 - 65))
@@ -450,19 +456,19 @@ internal abstract partial class Http3Stream
     private void UpdateHeaderParsingState(ReadOnlySpan<byte> value, PseudoHeaderFields headerField)
     {
         // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2.1
-        /*
-           Intermediaries that process HTTP requests or responses (i.e., any
-           intermediary not acting as a tunnel) MUST NOT forward a malformed
-           request or response.  Malformed requests or responses that are
-           detected MUST be treated as a stream error (Section 5.4.2) of type
-           PROTOCOL_ERROR.
+/*
+Intermediaries that process HTTP requests or responses (i.e., any
+intermediary not acting as a tunnel) MUST NOT forward a malformed
+request or response.  Malformed requests or responses that are
+detected MUST be treated as a stream error (Section 5.4.2) of type
+PROTOCOL_ERROR.
 
-           For malformed requests, a server MAY send an HTTP response prior to
-           closing or resetting the stream.  Clients MUST NOT accept a malformed
-           response.  Note that these requirements are intended to protect
-           against several types of common attacks against HTTP; they are
-           deliberately strict because being permissive can expose
-           implementations to these vulnerabilities.*/
+For malformed requests, a server MAY send an HTTP response prior to
+closing or resetting the stream.  Clients MUST NOT accept a malformed
+response.  Note that these requirements are intended to protect
+against several types of common attacks against HTTP; they are
+deliberately strict because being permissive can expose
+implementations to these vulnerabilities.*/
         if (headerField != PseudoHeaderFields.None)
         {
             if (_requestHeaderParsingState == RequestHeaderParsingState.Headers)
@@ -514,7 +520,8 @@ internal abstract partial class Http3Stream
             if ((_parsedPseudoHeaderFields & headerField) == headerField)
             {
                 // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1.1.1-7
-                // All HTTP/3 requests MUST include exactly one valid value for the :method, :scheme, and :path pseudo-header fields
+                // All HTTP/3 requests MUST include exactly one valid value for the :method, :scheme, and :path
+                // pseudo-header fields
                 throw new Http3StreamErrorException(
                     CoreStrings.HttpErrorDuplicatePseudoHeaderField,
                     Http3ErrorCode.MessageError
@@ -687,7 +694,8 @@ internal abstract partial class Http3Stream
 
                 if (!stream.IsCompleted)
                 {
-                    // An error code value other than -1 indicates a value was set and the request didn't gracefully complete.
+                    // An error code value other than -1 indicates a value was set and the request didn't gracefully
+                    // complete.
                     var errorCode = stream._errorCodeFeature.Error;
                     if (errorCode >= 0)
                     {
@@ -1009,7 +1017,8 @@ internal abstract partial class Http3Stream
                 )
             )
             {
-                // if the client supports the same version of WebTransport as Kestrel, make this a WebTransport request
+                // if the client supports the same version of WebTransport as Kestrel, make this a WebTransport
+                // request
                 if (
                     ((AspNetCore.Http.IHeaderDictionary)HttpRequestHeaders).TryGetValue(
                         WebTransportSession.CurrentSupportedVersion,
@@ -1032,7 +1041,8 @@ internal abstract partial class Http3Stream
                 != _mandatoryRequestPseudoHeaderFields
         )
         {
-            // All HTTP/3 requests MUST include exactly one valid value for the :method, :scheme, and :path pseudo-header
+            // All HTTP/3 requests MUST include exactly one valid value for the :method, :scheme, and :path
+            // pseudo-header
             // fields, unless it is a CONNECT request. An HTTP request that omits mandatory pseudo-header
             // fields is malformed.
             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1.1.1

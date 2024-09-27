@@ -110,13 +110,15 @@ namespace System.Collections.Generic
                 }
             }
 
-            // See the METHOD__JIT_HELPERS__UNSAFE_ENUM_CAST and METHOD__JIT_HELPERS__UNSAFE_ENUM_CAST_LONG cases in getILIntrinsicImplementation
+            // See the METHOD__JIT_HELPERS__UNSAFE_ENUM_CAST and METHOD__JIT_HELPERS__UNSAFE_ENUM_CAST_LONG
+            // cases in getILIntrinsicImplementation
             if (t.IsEnum)
             {
                 TypeCode underlyingTypeCode = Type.GetTypeCode(Enum.GetUnderlyingType(t));
 
                 // Depending on the enum type, we need to special case the comparers so that we avoid boxing
-                // Note: We have different comparers for Short and SByte because for those types we need to make sure we call GetHashCode on the actual underlying type as the
+                // Note: We have different comparers for Short and SByte because for those types we need to make
+                // sure we call GetHashCode on the actual underlying type as the
                 // implementation of GetHashCode is more complex than for the other types.
                 switch (underlyingTypeCode)
                 {
@@ -500,11 +502,15 @@ namespace System.Collections.Generic
     }
 
 #if FEATURE_CORECLR
-    // NonRandomizedStringEqualityComparer is the comparer used by default with the Dictionary<string,...>
-    // As the randomized string hashing is turned on by default on coreclr, we need to keep the performance not affected
+    // NonRandomizedStringEqualityComparer is the comparer used by default with the
+    // Dictionary<string,...>
+    // As the randomized string hashing is turned on by default on coreclr, we need to keep the
+    // performance not affected
     // as much as possible in the main stream scenarios like Dictionary<string,�>
-    // We use NonRandomizedStringEqualityComparer as default comparer as it doesn�t use the randomized string hashing which
-    // keep the perofrmance not affected till we hit collision threshold and then we switch to the comparer which is using
+    // We use NonRandomizedStringEqualityComparer as default comparer as it doesn�t use the randomized
+    // string hashing which
+    // keep the perofrmance not affected till we hit collision threshold and then we switch to the
+    // comparer which is using
     // randomized string hashing GenericEqualityComparer<string>
 
     internal class NonRandomizedStringEqualityComparer : GenericEqualityComparer<string>
@@ -629,7 +635,8 @@ namespace System.Collections.Generic
         [SecurityCritical]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            // For back-compat we need to serialize the comparers for enums with underlying types other than int as ObjectEqualityComparer
+            // For back-compat we need to serialize the comparers for enums with underlying types other than int
+            // as ObjectEqualityComparer
             if (Type.GetTypeCode(Enum.GetUnderlyingType(typeof(T))) != TypeCode.Int32)
             {
                 info.SetType(typeof(ObjectEqualityComparer<T>));
@@ -724,7 +731,8 @@ namespace System.Collections.Generic
         [SecurityCritical]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            // The LongEnumEqualityComparer does not exist on 4.0 so we need to serialize this comparer as ObjectEqualityComparer
+            // The LongEnumEqualityComparer does not exist on 4.0 so we need to serialize this comparer as
+            // ObjectEqualityComparer
             // to allow for roundtrip between 4.0 and 4.5.
             info.SetType(typeof(ObjectEqualityComparer<T>));
         }
@@ -765,7 +773,8 @@ namespace System.Collections.Generic
     }
 
 #if FEATURE_RANDOMIZED_STRING_HASHING
-    // This type is not serializeable by design.  It does not exist in previous versions and will be removed
+    // This type is not serializeable by design.  It does not exist in previous versions and will be
+    // removed
     // Once we move the framework to using secure hashing by default.
     internal sealed class RandomizedStringEqualityComparer
         : IEqualityComparer<String>,
@@ -854,7 +863,8 @@ namespace System.Collections.Generic
         }
     }
 
-    // This type is not serializeable by design.  It does not exist in previous versions and will be removed
+    // This type is not serializeable by design.  It does not exist in previous versions and will be
+    // removed
     // Once we move the framework to using secure hashing by default.
     internal sealed class RandomizedObjectEqualityComparer
         : IEqualityComparer,

@@ -43,7 +43,8 @@ namespace MS.Internal.Xml.XPath
         {
             get
             {
-                // Query can be ordered in reverse order. So we can't assume like base.Count that last node has greatest position.
+                // Query can be ordered in reverse order. So we can't assume like base.Count that last node has
+                // greatest position.
                 if (count == -1)
                 {
                     Query clone = (Query)this.Clone();
@@ -179,7 +180,7 @@ namespace MS.Internal.Xml.XPath
                     cmpBase < 0 ? XmlNodeOrder.Before
                     : cmpBase > 0 ? XmlNodeOrder.After
                     :
-                    /*default*/XmlNodeOrder.Unknown
+/*default*/XmlNodeOrder.Unknown
                 );
             }
             return cmp;
@@ -193,7 +194,8 @@ namespace MS.Internal.Xml.XPath
 
         // The biggest challenge in this change is preserve backward compatibility with v.1.1
         // To achieve this in all places where we accept from or report to user XPathResultType.
-        // On my best knowledge this happens only in XsltContext.ResolveFunction() / IXsltContextFunction.ReturnType
+        // On my best knowledge this happens only in XsltContext.ResolveFunction() /
+        // IXsltContextFunction.ReturnType
 
 
         protected static XPathResultType GetXPathType(object value)

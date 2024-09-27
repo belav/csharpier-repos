@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// Analyzer are read from the file, owned by the reference, and doesn't change
     /// since the reference is accessed until the reference object is garbage collected.
     ///
-    /// If you need to manage the lifetime of the analyzer reference (and the file stream) explicitly use <see cref="AnalyzerImageReference"/>.
+    /// If you need to manage the lifetime of the analyzer reference (and the file stream) explicitly
+    // use <see cref="AnalyzerImageReference"/>.
     /// </remarks>
     public sealed class AnalyzerFileReference : AnalyzerReference, IEquatable<AnalyzerReference>
     {
@@ -49,10 +50,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public event EventHandler<AnalyzerLoadFailureEventArgs>? AnalyzerLoadFailed;
 
         /// <summary>
-        /// Creates an AnalyzerFileReference with the given <paramref name="fullPath"/> and <paramref name="assemblyLoader"/>.
+        /// Creates an AnalyzerFileReference with the given <paramref name="fullPath"/> and <paramref
+        // name="assemblyLoader"/>.
         /// </summary>
         /// <param name="fullPath">Full path of the analyzer assembly.</param>
-        /// <param name="assemblyLoader">Loader for obtaining the <see cref="Assembly"/> from the <paramref name="fullPath"/></param>
+        /// <param name="assemblyLoader">Loader for obtaining the <see cref="Assembly"/> from the <paramref
+        // name="fullPath"/></param>
         public AnalyzerFileReference(string fullPath, IAnalyzerAssemblyLoader assemblyLoader)
         {
             CompilerPathUtilities.RequireAbsolutePath(fullPath, nameof(fullPath));
@@ -196,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Adds the <see cref="ImmutableArray{T}"/> of <see cref="DiagnosticAnalyzer"/> defined in this assembly reference of given <paramref name="language"/>.
+        /// Adds the <see cref="ImmutableArray{T}"/> of <see cref="DiagnosticAnalyzer"/> defined in this
+        // assembly reference of given <paramref name="language"/>.
         /// </summary>
         internal void AddAnalyzers(
             ImmutableArray<DiagnosticAnalyzer>.Builder builder,
@@ -208,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Adds the <see cref="ImmutableArray{T}"/> of <see cref="ISourceGenerator"/> defined in this assembly reference of given <paramref name="language"/>.
+        /// Adds the <see cref="ImmutableArray{T}"/> of <see cref="ISourceGenerator"/> defined in this
+        // assembly reference of given <paramref name="language"/>.
         /// </summary>
         internal void AddGenerators(
             ImmutableArray<ISourceGenerator>.Builder builder,
@@ -243,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Opens the analyzer dll with the metadata reader and builds a map of language -> analyzer type names.
+        /// Opens the analyzer dll with the metadata reader and builds a map of language -> analyzer type
+        // names.
         /// </summary>
         /// <exception cref="BadImageFormatException">The PE image format is invalid.</exception>
         /// <exception cref="IOException">IO error reading the metadata.</exception>
@@ -614,7 +620,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 // If there were types with the attribute but weren't an analyzer, generate a diagnostic.
-                // If we've reported errors already while trying to instantiate types, don't complain that there are no analyzers.
+                // If we've reported errors already while trying to instantiate types, don't complain that there are
+                // no analyzers.
                 if (builder.Count == initialCount && !reportedError)
                 {
                     _reference.AnalyzerLoadFailed?.Invoke(
@@ -681,7 +688,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 builder.AddRange(analyzers);
 
                 // If there were types with the attribute but weren't an analyzer, generate a diagnostic.
-                // If we've reported errors already while trying to instantiate types, don't complain that there are no analyzers.
+                // If we've reported errors already while trying to instantiate types, don't complain that there are
+                // no analyzers.
                 if (!hasAnalyzers && !reportedError)
                 {
                     _reference.AnalyzerLoadFailed?.Invoke(
@@ -760,8 +768,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 var builder = ArrayBuilder<(string typeName, TExtension analyzer)>.GetInstance();
 
-                // Given the type names, get the actual System.Type and try to create an instance of the type through reflection.
-                // Randomize the order we instantiate analyzers to avoid static constructor/JIT contention, but still return
+                // Given the type names, get the actual System.Type and try to create an instance of the type
+                // through reflection.
+                // Randomize the order we instantiate analyzers to avoid static constructor/JIT contention, but
+                // still return
                 // the list of analyzers in the order of the sorted type names for deterministic purpose.
                 foreach (var typeName in shuffle(analyzerTypeNames))
                 {

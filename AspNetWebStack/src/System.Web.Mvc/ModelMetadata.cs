@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -76,7 +77,8 @@ namespace System.Web.Mvc
         }
 
         /// <summary>
-        /// A reference to the model's container object. Will be non-null if the model represents a property.
+        /// A reference to the model's container object. Will be non-null if the model represents a
+        // property.
         /// </summary>
         public object Container { get; set; }
 
@@ -175,7 +177,8 @@ namespace System.Web.Mvc
                 {
                     IEnumerable<ModelMetadata> originalProperties =
                         Provider.GetMetadataForProperties(Model, RealModelType);
-                    // This will be returned as a copied out array in the common case, so reuse the returned array for performance.
+                    // This will be returned as a copied out array in the common case, so reuse the returned array for
+                    // performance.
                     _propertiesInternal = SortProperties(originalProperties.AsArray());
                     _properties = new ReadOnlyCollection<ModelMetadata>(_propertiesInternal);
                 }
@@ -304,7 +307,8 @@ namespace System.Web.Mvc
             switch (expression.Body.NodeType)
             {
                 case ExpressionType.ArrayIndex:
-                    // ArrayIndex always means a single-dimensional indexer; multi-dimensional indexer is a method call to Get()
+                    // ArrayIndex always means a single-dimensional indexer; multi-dimensional indexer is a method call
+                    // to Get()
                     legalExpression = true;
                     break;
 

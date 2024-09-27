@@ -1057,14 +1057,16 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     {
         //Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovingAverageConvergenceDivergenceFormulaInfo"/> class.
+        /// Initializes a new instance of the <see cref="MovingAverageConvergenceDivergenceFormulaInfo"/>
+        // class.
         /// </summary>
         public MovingAverageConvergenceDivergenceFormulaInfo()
             : this(12, 26) //Defaults
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovingAverageConvergenceDivergenceFormulaInfo"/> class.
+        /// Initializes a new instance of the <see cref="MovingAverageConvergenceDivergenceFormulaInfo"/>
+        // class.
         /// </summary>
         /// <param name="shortPeriod">The short period.</param>
         /// <param name="longPeriod">The long period.</param>
@@ -1124,7 +1126,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="regressionType">Type of the regression.</param>
         /// <param name="polynomialDegree">The polynomial degree.</param>
         /// <param name="forecastingPeriod">The forecasting period.</param>
-        /// <param name="returnApproximationError">if set to <c>true</c> [return approximation error].</param>
+        /// <param name="returnApproximationError">if set to <c>true</c> [return approximation
+        // error].</param>
         /// <param name="returnForecastingError">if set to <c>true</c> [return forecasting error].</param>
         public ForecastingFormulaInfo(
             TimeSeriesAndForecasting.RegressionType regressionType,
@@ -1422,12 +1425,14 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
 
     #region class SeriesFieldList
     /// <summary>
-    /// SeriesFieldInfo class is a OO representation formula input/output data params ("Series1:Y2,Series2.Y4")
+    /// SeriesFieldInfo class is a OO representation formula input/output data params
+    // ("Series1:Y2,Series2.Y4")
     /// </summary>
     internal class SeriesFieldList : List<SeriesFieldInfo>
     {
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -1468,7 +1473,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Parse the string defining the formula's input/output series and fields.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        /// <param name="seriesFields">The series fields list. The series name can be followed by the field names. For example: "Series1:Y,Series1:Y3,Series2:Close"</param>
+        /// <param name="seriesFields">The series fields list. The series name can be followed by the field
+        // names. For example: "Series1:Y,Series1:Y3,Series2:Close"</param>
         /// <param name="formulaFields">The formula fields list.</param>
         /// <returns></returns>
         public static SeriesFieldList FromString(

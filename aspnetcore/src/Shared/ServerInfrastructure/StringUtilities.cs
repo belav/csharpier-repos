@@ -491,7 +491,8 @@ internal static class StringUtilities
     }
 
     /// <summary>
-    /// A faster version of String.Concat(<paramref name="str"/>, <paramref name="separator"/>, <paramref name="number"/>.ToString("X8"))
+    /// A faster version of String.Concat(<paramref name="str"/>, <paramref name="separator"/>,
+    // <paramref name="number"/>.ToString("X8"))
     /// </summary>
     /// <param name="str"></param>
     /// <param name="separator"></param>

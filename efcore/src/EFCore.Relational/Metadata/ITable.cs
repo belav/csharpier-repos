@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a table in the database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface ITable : ITableBase
 {
@@ -72,12 +73,14 @@ public interface ITable : ITableBase
             .FirstOrDefault(c => c != null);
 
     /// <summary>
-    ///     Gets the column with a given name. Returns <see langword="null" /> if no column with the given name is defined.
+    ///     Gets the column with a given name. Returns <see langword="null" /> if no column with the
+    // given name is defined.
     /// </summary>
     new IColumn? FindColumn(string name);
 
     /// <summary>
-    ///     Gets the column mapped to the given property. Returns <see langword="null" /> if no column is mapped to the given property.
+    ///     Gets the column mapped to the given property. Returns <see langword="null" /> if no column
+    // is mapped to the given property.
     /// </summary>
     new IColumn? FindColumn(IProperty property);
 

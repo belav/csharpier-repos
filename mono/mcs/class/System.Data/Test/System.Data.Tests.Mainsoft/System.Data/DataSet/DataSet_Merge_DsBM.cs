@@ -174,7 +174,8 @@ namespace tests.system_data_dll.System_Data
             //		try
             //		{
             //			BeginCase("Merge MissingSchemaAction.AddWithKey - PrimaryKey");
-            //			Compare(dsTarget2.Tables["NewTable"].PrimaryKey[0],dsTarget2.Tables["NewTable"].Columns["NewColumn1"]);
+            
+            // //			Compare(dsTarget2.Tables["NewTable"].PrimaryKey[0],dsTarget2.Tables["NewTable"].Columns["NewColumn1"]);
             //		}
             //		catch(Exception ex)	{exp = ex;}
             //		finally	{EndCase(exp); exp = null;}

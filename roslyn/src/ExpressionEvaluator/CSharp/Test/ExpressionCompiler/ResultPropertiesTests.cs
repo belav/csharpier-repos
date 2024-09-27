@@ -258,7 +258,8 @@ class C
                         GetResultProperties(context, "VM()").ModifierFlags
                     );
 
-                    // Field-like events are borderline since they bind as event accesses, but get emitted as field accesses.
+                    // Field-like events are borderline since they bind as event accesses, but get emitted as field
+                    // accesses.
                     Assert.Equal(
                         DkmEvaluationResultTypeModifierFlags.None,
                         GetResultProperties(context, "E").ModifierFlags

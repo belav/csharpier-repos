@@ -275,7 +275,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <param name="handle">Handle of an entity in an aggregate metadata.</param>
         /// <param name="generation">The generation the entity is defined in.</param>
-        /// <returns>Handle of the entity within the metadata generation <paramref name="generation"/>.</returns>
+        /// <returns>Handle of the entity within the metadata generation <paramref
+        // name="generation"/>.</returns>
         public Handle GetGenerationHandle(Handle handle, out int generation)
         {
             if (handle.IsVirtual)

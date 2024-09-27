@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.IO
 {
     using System;
@@ -19,7 +19,8 @@ namespace System.IO
     public class InternalBufferOverflowException : SystemException
     {
         /// <devdoc>
-        /// <para>Initializes a new default instance of the <see cref='System.IO.InternalBufferOverflowException'/> class.</para>
+        /// <para>Initializes a new default instance of the <see
+        // cref='System.IO.InternalBufferOverflowException'/> class.</para>
         /// </devdoc>
         public InternalBufferOverflowException()
             : base()
@@ -28,7 +29,8 @@ namespace System.IO
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.IO.InternalBufferOverflowException'/> class with the error
+        /// <para>Initializes a new instance of the <see cref='System.IO.InternalBufferOverflowException'/>
+        // class with the error
         ///    message to be displayed
         ///    specified.</para>
         /// </devdoc>

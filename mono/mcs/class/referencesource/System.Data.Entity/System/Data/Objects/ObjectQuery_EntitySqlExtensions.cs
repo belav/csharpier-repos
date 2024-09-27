@@ -161,9 +161,12 @@ namespace System.Data.Objects
 
         /// <summary>
         ///   This method creates a new ObjectQuery instance that represents a scan over
-        ///   the specified <paramref name="entitySet"/>. This ObjectQuery carries the scan as <see cref="DbExpression"/>
-        ///   and as Entity SQL. This is needed to allow case-sensitive metadata access (provided by the <see cref="DbExpression"/> by default).
-        ///   The context specifies the connection on which to execute the query as well as the metadata and result cache.
+        ///   the specified <paramref name="entitySet"/>. This ObjectQuery carries the scan as <see
+        // cref="DbExpression"/>
+        ///   and as Entity SQL. This is needed to allow case-sensitive metadata access (provided by the
+        // <see cref="DbExpression"/> by default).
+        ///   The context specifies the connection on which to execute the query as well as the metadata and
+        // result cache.
         ///   The merge option specifies how the cache should be populated/updated.
         /// </summary>
         /// <param name="entitySet">

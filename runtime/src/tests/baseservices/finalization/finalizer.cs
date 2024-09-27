@@ -6,19 +6,21 @@ using Xunit;
 /*
 public interface IFinalize
 {
-    ~IFinalize();
+~IFinalize();
 }
 
 public class Finalize : IFinalize
 {
-    ~Finalize(){ Console.WriteLine("IFinalize");}
+~Finalize(){ Console.WriteLine("IFinalize");}
 }
 */
 //Test cases:
-//  Finalizers can not have a protection level (i.e public, protected, internal, protected internal, private)
+//  Finalizers can not have a protection level (i.e public, protected, internal, protected internal,
+// private)
 //  Types in namespace can only be public or internal
 // Negative:
-//  Must do checks with reflection as types are scanned at assembly load time resulting in AssemblyLoad failures
+//  Must do checks with reflection as types are scanned at assembly load time resulting in
+// AssemblyLoad failures
 //  Public class with finalizer
 //  internal class with finalizer
 //  Class with finalizer in Abstract base classes

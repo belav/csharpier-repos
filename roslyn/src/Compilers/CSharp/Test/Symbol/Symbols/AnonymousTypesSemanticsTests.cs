@@ -1327,13 +1327,17 @@ public class ClassA
                 // (8,25): error CS0103: The name 'xyz' does not exist in the current context
                 //                aa     = xyz,
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "xyz").WithArguments("xyz"),
-                // (10,29): error CS0246: The type or namespace name 'SSS' could not be found (are you missing a using directive or an assembly reference?)
+                // (10,29): error CS0246: The type or namespace name 'SSS' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //                CCC    = new SSS()
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "SSS").WithArguments("SSS"),
-                // (15,29): error CS0246: The type or namespace name 'SSS' could not be found (are you missing a using directive or an assembly reference?)
+                // (15,29): error CS0246: The type or namespace name 'SSS' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //                aa     = new SSS(),
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "SSS").WithArguments("SSS"),
-                // (19,35): error CS1061: 'ClassA' does not contain a definition for 'aa' and no extension method 'aa' accepting a first argument of type 'ClassA' could be found (are you missing a using directive or an assembly reference?)
+                // (19,35): error CS1061: 'ClassA' does not contain a definition for 'aa' and no extension method
+                // 'aa' accepting a first argument of type 'ClassA' could be found (are you missing a using directive
+                // or an assembly reference?)
                 //                 (new ClassA()).   aa    ,
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "aa")
                     .WithArguments("ClassA", "aa"),
@@ -1529,17 +1533,21 @@ IBlockOperation (2 statements, 2 locals) (OperationKind.Block, Type: null, IsInv
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "xyz")
                     .WithArguments("xyz")
                     .WithLocation(8, 18),
-                // CS0246: The type or namespace name 'SSS' could not be found (are you missing a using directive or an assembly reference?)
+                // CS0246: The type or namespace name 'SSS' could not be found (are you missing a using directive or
+                // an assembly reference?)
                 //             CCC = new SSS()
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "SSS")
                     .WithArguments("SSS")
                     .WithLocation(10, 23),
-                // CS0246: The type or namespace name 'SSS' could not be found (are you missing a using directive or an assembly reference?)
+                // CS0246: The type or namespace name 'SSS' could not be found (are you missing a using directive or
+                // an assembly reference?)
                 //             aa = new SSS(),
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "SSS")
                     .WithArguments("SSS")
                     .WithLocation(15, 22),
-                // CS1061: 'ClassA' does not contain a definition for 'aa' and no extension method 'aa' accepting a first argument of type 'ClassA' could be found (are you missing a using directive or an assembly reference?)
+                // CS1061: 'ClassA' does not contain a definition for 'aa' and no extension method 'aa' accepting a
+                // first argument of type 'ClassA' could be found (are you missing a using directive or an assembly
+                // reference?)
                 //                 (new ClassA()).aa,
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "aa")
                     .WithArguments("ClassA", "aa")
@@ -1580,7 +1588,8 @@ public class ClassA
             var data = Compile(
                 source,
                 1,
-                // (6,16): error CS1674: '<empty anonymous type>': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (6,16): error CS1674: '<empty anonymous type>': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 //         using (var v1 =    new { }   )
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var v1 =    new { }")
                     .WithArguments("<empty anonymous type>")
@@ -1624,7 +1633,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
     null";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1674: '<empty anonymous type>': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // CS1674: '<empty anonymous type>': type used in a using statement must be implicitly convertible
+                // to 'System.IDisposable'.
                 //         using (/*<bind>*/var v1 = new { }/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var v1 = new { }")
                     .WithArguments("<empty anonymous type>")
@@ -2046,7 +2056,8 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0649: Field 'Product.ProductName' is never assigned to, and will always have its default value null
+                // CS0649: Field 'Product.ProductName' is never assigned to, and will always have its default value
+                // null
                 //     public string ProductName;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "ProductName")
                     .WithArguments("Product.ProductName", "null")

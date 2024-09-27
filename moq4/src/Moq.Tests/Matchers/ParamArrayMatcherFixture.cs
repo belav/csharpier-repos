@@ -49,12 +49,12 @@ namespace Moq.Tests.Matchers
 
             matcher.SetupEvaluatedSuccessfully(new object[] { 42, "" }, typeof(object[]));
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private LambdaExpression ToExpression<T>(Expression<Action<T>> expr)
-            After:
-                    LambdaExpression ToExpression<T>(Expression<Action<T>> expr)
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private LambdaExpression ToExpression<T>(Expression<Action<T>> expr)
+After:
+LambdaExpression ToExpression<T>(Expression<Action<T>> expr)
+*/
         }
 
         LambdaExpression ToExpression<T>(Expression<Action<T>> expr)

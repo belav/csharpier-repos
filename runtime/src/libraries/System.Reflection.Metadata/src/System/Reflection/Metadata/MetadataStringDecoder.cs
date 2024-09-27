@@ -40,7 +40,8 @@ namespace System.Reflection.Metadata
         /// </summary>
         /// <param name="encoding">The encoding to use.</param>
         /// <remarks>
-        /// To cache and reuse existing strings. Create a derived class and override <see cref="GetString(byte*, int)"/>
+        /// To cache and reuse existing strings. Create a derived class and override <see
+        // cref="GetString(byte*, int)"/>
         /// </remarks>
         public MetadataStringDecoder(Encoding encoding)
         {
@@ -51,7 +52,8 @@ namespace System.Reflection.Metadata
 
             // Non-enforcement of (encoding is UTF8Encoding) here is by design.
             //
-            // This type is not itself aware of any particular encoding. However, the constructor argument that accepts a
+            // This type is not itself aware of any particular encoding. However, the constructor argument that
+            // accepts a
             // MetadataStringDecoder argument is validated however because it must be a UTF8 decoder.
 
             Encoding = encoding;

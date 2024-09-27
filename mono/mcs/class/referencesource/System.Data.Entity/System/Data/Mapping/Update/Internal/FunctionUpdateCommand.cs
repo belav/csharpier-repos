@@ -223,8 +223,10 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         // efects: Executes the current function command in the given transaction and connection context.
-        // All server-generated values are added to the generatedValues list. If those values are identifiers, they are
-        // also added to the identifierValues dictionary, which associates proxy identifiers for keys in the session
+        // All server-generated values are added to the generatedValues list. If those values are
+        // identifiers, they are
+        // also added to the identifierValues dictionary, which associates proxy identifiers for keys in the
+        // session
         // with their actual values, permitting fix-up of identifiers across relationships.
         internal override long Execute(
             UpdateTranslator translator,
@@ -485,7 +487,8 @@ namespace System.Data.Mapping.Update.Internal
                 }
             }
 
-            // If the result is still zero, it means key values are all the same. Switch to synthetic identifiers
+            // If the result is still zero, it means key values are all the same. Switch to synthetic
+            // identifiers
             // to differentiate.
             for (int i = 0; i < thisInputIdentifierCount; i++)
             {

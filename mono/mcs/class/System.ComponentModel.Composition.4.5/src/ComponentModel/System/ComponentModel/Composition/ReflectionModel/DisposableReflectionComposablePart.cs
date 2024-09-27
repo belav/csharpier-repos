@@ -42,7 +42,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         void IDisposable.Dispose()
         {
-            // NOTE : According to http://msdn.microsoft.com/en-us/library/4bw5ewxy.aspx, the warning is bogus when used with Interlocked API.
+            // NOTE : According to http://msdn.microsoft.com/en-us/library/4bw5ewxy.aspx, the warning is bogus
+            // when used with Interlocked API.
 #pragma warning disable 420
             if (Interlocked.CompareExchange(ref this._isDisposed, 1, 0) == 0)
 #pragma warning restore 420

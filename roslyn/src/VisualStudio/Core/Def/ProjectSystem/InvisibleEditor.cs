@@ -33,10 +33,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private readonly bool _needsUndoRestored;
 
         /// <remarks>
-        /// <para>The optional project is used to obtain an <see cref="IVsProject"/> instance. When this instance is
-        /// provided, Visual Studio will use <see cref="IVsProject.IsDocumentInProject"/> to attempt to locate the
+        /// <para>The optional project is used to obtain an <see cref="IVsProject"/> instance. When this
+        // instance is
+        /// provided, Visual Studio will use <see cref="IVsProject.IsDocumentInProject"/> to attempt to
+        // locate the
         /// specified file within a project. If no project is specified, Visual Studio falls back to using
-        /// <see cref="IVsUIShellOpenDocument4.IsDocumentInAProject2"/>, which performs a much slower query of all
+        /// <see cref="IVsUIShellOpenDocument4.IsDocumentInAProject2"/>, which performs a much slower query
+        // of all
         /// projects in the solution.</para>
         /// </remarks>
         public InvisibleEditor(
@@ -96,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // Try casting the doc data to IVsTextLines first.
-            // If it fails try casting to IVsTextBufferProvider as some files like .aspx use that to provide the buffer
+            // If it fails try casting to IVsTextBufferProvider as some files like .aspx use that to provide the
+            // buffer
             static IVsTextLines RetrieveDocData(IVsInvisibleEditor invisibleEditor, bool needsSave)
             {
                 IVsTextLines? buffer = null;
@@ -186,7 +190,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 if (_needsSave)
                 {
                     // We need to tell this document to save before we get rid of the invisible editor. Otherwise,
-                    // the invisible editor never actually makes the document go away. Check out CLockHolder::ReleaseEditLock
+                    // the invisible editor never actually makes the document go away. Check out
+                    // CLockHolder::ReleaseEditLock
                     // in env\msenv\core\editmgr.cpp for details. We choose this particular technique for saving files
                     // since it's what the old cslangsvc.dll used.
                     var runningDocumentTable4 = (IVsRunningDocumentTable4)

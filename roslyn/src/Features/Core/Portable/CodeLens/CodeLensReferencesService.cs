@@ -29,10 +29,14 @@ namespace Microsoft.CodeAnalysis.CodeLens
             );
 
         /// <summary>
-        /// Set ourselves as an implicit invocation of FindReferences.  This will cause the finding operation to operate
-        /// in serial, not parallel.  We're running ephemerally in the BG and do not want to saturate the system with
-        /// work that then slows the user down.  Also, only process the inheritance hierarchy unidirectionally.  We want
-        /// to find references that could actually call into a particular, not references to other members that could
+        /// Set ourselves as an implicit invocation of FindReferences.  This will cause the finding
+        // operation to operate
+        /// in serial, not parallel.  We're running ephemerally in the BG and do not want to saturate the
+        // system with
+        /// work that then slows the user down.  Also, only process the inheritance hierarchy
+        // unidirectionally.  We want
+        /// to find references that could actually call into a particular, not references to other members
+        // that could
         /// never actually call into this member.
         /// </summary>
         private static readonly FindReferencesSearchOptions s_nonParallelSearch =

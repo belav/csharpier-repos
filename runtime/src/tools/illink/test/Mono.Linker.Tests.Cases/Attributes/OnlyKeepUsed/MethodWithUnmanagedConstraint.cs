@@ -13,8 +13,10 @@ namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
         }
 
         /// <summary>
-        /// The compiler will generate a CustomAttribute that is of type IsUnmanagedAttribute.  By not annotating the attribute
-        /// as being kept we are asserting that the IsUnmanagedAttribute is removed, which is expected because the attribute is
+        /// The compiler will generate a CustomAttribute that is of type IsUnmanagedAttribute.  By not
+        // annotating the attribute
+        /// as being kept we are asserting that the IsUnmanagedAttribute is removed, which is expected
+        // because the attribute is
         /// only needed at compile time
         /// </summary>
         /// <typeparam name="T"></typeparam>

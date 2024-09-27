@@ -246,7 +246,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 new MemoryRegionInfoStartAddressComparer();
             infos.Sort(startAddressComparer);
 
-            // For each method found via MethodLoad events, check to see if it exists in the infos array, and if it does not, build a list to add
+            // For each method found via MethodLoad events, check to see if it exists in the infos array, and if
+            // it does not, build a list to add
             List<MemoryRegionInfo> memoryRegionsToAdd = new List<MemoryRegionInfo>();
             foreach (var methodLoadInfo in info.Values)
             {

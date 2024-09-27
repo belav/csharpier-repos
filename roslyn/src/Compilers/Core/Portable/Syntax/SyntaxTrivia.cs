@@ -70,21 +70,27 @@ namespace Microsoft.CodeAnalysis
         internal int Index { get; }
 
         /// <summary>
-        /// The width of this trivia in characters. If this trivia is a structured trivia then the returned width will
-        /// not include the widths of any leading or trailing trivia present on the child non-terminal node of this
+        /// The width of this trivia in characters. If this trivia is a structured trivia then the returned
+        // width will
+        /// not include the widths of any leading or trailing trivia present on the child non-terminal node
+        // of this
         /// trivia.
         /// </summary>
         internal int Width => UnderlyingNode?.Width ?? 0;
 
         /// <summary>
-        /// The width of this trivia in characters. If this trivia is a structured trivia then the returned width will
-        /// include the widths of any leading or trailing trivia present on the child non-terminal node of this trivia.
+        /// The width of this trivia in characters. If this trivia is a structured trivia then the returned
+        // width will
+        /// include the widths of any leading or trailing trivia present on the child non-terminal node of
+        // this trivia.
         /// </summary>
         internal int FullWidth => UnderlyingNode?.FullWidth ?? 0;
 
         /// <summary>
-        /// The absolute span of this trivia in characters. If this trivia is a structured trivia then the returned span
-        /// will not include spans of any leading or trailing trivia present on the child non-terminal node of this
+        /// The absolute span of this trivia in characters. If this trivia is a structured trivia then the
+        // returned span
+        /// will not include spans of any leading or trailing trivia present on the child non-terminal node
+        // of this
         /// trivia.
         /// </summary>
         public TextSpan Span
@@ -117,8 +123,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The absolute span of this trivia in characters. If this trivia is a structured trivia then the returned span
-        /// will include spans of any leading or trailing trivia present on the child non-terminal node of this trivia.
+        /// The absolute span of this trivia in characters. If this trivia is a structured trivia then the
+        // returned span
+        /// will include spans of any leading or trailing trivia present on the child non-terminal node of
+        // this trivia.
         /// </summary>
         public TextSpan FullSpan
         {
@@ -131,8 +139,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Determines whether this trivia has any diagnostics on it. If this trivia is a structured trivia then the
-        /// returned value will indicate whether this trivia or any of its descendant nodes, tokens or trivia have any
+        /// Determines whether this trivia has any diagnostics on it. If this trivia is a structured trivia
+        // then the
+        /// returned value will indicate whether this trivia or any of its descendant nodes, tokens or
+        // trivia have any
         /// diagnostics on them.
         /// </summary>>
         public bool ContainsDiagnostics => UnderlyingNode?.ContainsDiagnostics ?? false;
@@ -209,9 +219,11 @@ namespace Microsoft.CodeAnalysis
             UnderlyingNode?.IsDocumentationCommentTrivia ?? false;
 
         /// <summary>
-        /// Returns the child non-terminal node representing the syntax tree structure under this structured trivia.
+        /// Returns the child non-terminal node representing the syntax tree structure under this structured
+        // trivia.
         /// </summary>
-        /// <returns>The child non-terminal node representing the syntax tree structure under this structured
+        /// <returns>The child non-terminal node representing the syntax tree structure under this
+        // structured
         /// trivia.</returns>
         public SyntaxNode? GetStructure()
         {
@@ -225,8 +237,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the string representation of this trivia. If this trivia is structured trivia then the returned string
-        /// will not include any leading or trailing trivia present on the StructuredTriviaSyntax node of this trivia.
+        /// Returns the string representation of this trivia. If this trivia is structured trivia then the
+        // returned string
+        /// will not include any leading or trailing trivia present on the StructuredTriviaSyntax node of
+        // this trivia.
         /// </summary>
         /// <returns>The string representation of this trivia.</returns>
         /// <remarks>The length of the returned string is always the same as Span.Length</remarks>
@@ -236,8 +250,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of this trivia. If this trivia is structured trivia then the returned string will
-        /// include any leading or trailing trivia present on the StructuredTriviaSyntax node of this trivia.
+        /// Returns the full string representation of this trivia. If this trivia is structured trivia then
+        // the returned string will
+        /// include any leading or trailing trivia present on the StructuredTriviaSyntax node of this
+        // trivia.
         /// </summary>
         /// <returns>The full string representation of this trivia.</returns>
         /// <remarks>The length of the returned string is always the same as FullSpan.Length</remarks>
@@ -384,7 +400,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Copies all SyntaxAnnotations, if any, from this SyntaxTrivia instance and attaches them to a new instance based on <paramref name="trivia" />.
+        /// Copies all SyntaxAnnotations, if any, from this SyntaxTrivia instance and attaches them to a new
+        // instance based on <paramref name="trivia" />.
         /// </summary>
         public SyntaxTrivia CopyAnnotationsTo(SyntaxTrivia trivia)
         {

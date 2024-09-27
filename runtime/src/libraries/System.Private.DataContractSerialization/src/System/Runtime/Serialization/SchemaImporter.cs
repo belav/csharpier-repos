@@ -1568,7 +1568,8 @@ namespace System.Runtime.Serialization
 
             dataContract.IsReference = isReference;
 
-            // CheckIfCollection has already checked if sequence contains exactly one item with maxOccurs="unbounded" or maxOccurs > 1
+            // CheckIfCollection has already checked if sequence contains exactly one item with
+            // maxOccurs="unbounded" or maxOccurs > 1
             XmlSchemaElement element = (XmlSchemaElement)rootSequence.Items[0];
 
             Debug.Assert(element.Name != null);

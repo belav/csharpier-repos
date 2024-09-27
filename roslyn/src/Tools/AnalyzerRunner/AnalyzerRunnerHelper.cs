@@ -13,7 +13,8 @@ namespace AnalyzerRunner
         {
             var properties = new Dictionary<string, string>
             {
-                // Use the latest language version to force the full set of available analyzers to run on the project.
+                // Use the latest language version to force the full set of available analyzers to run on the
+                // project.
                 { "LangVersion", "latest" },
             };
 

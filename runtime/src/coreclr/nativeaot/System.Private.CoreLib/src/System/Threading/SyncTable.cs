@@ -63,7 +63,8 @@ namespace System.Threading
         private const int DoublingSizeThreshold = 1 << 20;
 
         /// <summary>
-        /// Protects all mutable operations on s_entries, s_freeEntryList, s_unusedEntryIndex. Also protects growing the table.
+        /// Protects all mutable operations on s_entries, s_freeEntryList, s_unusedEntryIndex. Also protects
+        // growing the table.
         /// </summary>
         internal static readonly Lock s_lock = new Lock();
 
@@ -346,7 +347,8 @@ namespace System.Threading
             private int _hashOrNext;
 
             /// <summary>
-            /// The dependent GC handle representing the owner object of this sync entry and the collector responsible
+            /// The dependent GC handle representing the owner object of this sync entry and the collector
+            // responsible
             /// for freeing the entry.
             /// </summary>
             public DependentHandle Owner;

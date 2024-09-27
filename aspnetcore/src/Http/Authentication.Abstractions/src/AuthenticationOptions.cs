@@ -50,7 +50,8 @@ public class AuthenticationOptions
     /// <summary>
     /// Adds an <see cref="AuthenticationScheme"/>.
     /// </summary>
-    /// <typeparam name="THandler">The <see cref="IAuthenticationHandler"/> responsible for the scheme.</typeparam>
+    /// <typeparam name="THandler">The <see cref="IAuthenticationHandler"/> responsible for the
+    // scheme.</typeparam>
     /// <param name="name">The name of the scheme being added.</param>
     /// <param name="displayName">The display name for the scheme.</param>
     public void AddScheme<
@@ -74,33 +75,39 @@ public class AuthenticationOptions
     public string? DefaultScheme { get; set; }
 
     /// <summary>
-    /// Used as the default scheme by <see cref="IAuthenticationService.AuthenticateAsync(HttpContext, string)"/>.
+    /// Used as the default scheme by <see cref="IAuthenticationService.AuthenticateAsync(HttpContext,
+    // string)"/>.
     /// </summary>
     public string? DefaultAuthenticateScheme { get; set; }
 
     /// <summary>
-    /// Used as the default scheme by <see cref="IAuthenticationService.SignInAsync(HttpContext, string, System.Security.Claims.ClaimsPrincipal, AuthenticationProperties)"/>.
+    /// Used as the default scheme by <see cref="IAuthenticationService.SignInAsync(HttpContext, string,
+    // System.Security.Claims.ClaimsPrincipal, AuthenticationProperties)"/>.
     /// </summary>
     public string? DefaultSignInScheme { get; set; }
 
     /// <summary>
-    /// Used as the default scheme by <see cref="IAuthenticationService.SignOutAsync(HttpContext, string, AuthenticationProperties)"/>.
+    /// Used as the default scheme by <see cref="IAuthenticationService.SignOutAsync(HttpContext,
+    // string, AuthenticationProperties)"/>.
     /// </summary>
     public string? DefaultSignOutScheme { get; set; }
 
     /// <summary>
-    /// Used as the default scheme by <see cref="IAuthenticationService.ChallengeAsync(HttpContext, string, AuthenticationProperties)"/>.
+    /// Used as the default scheme by <see cref="IAuthenticationService.ChallengeAsync(HttpContext,
+    // string, AuthenticationProperties)"/>.
     /// </summary>
     public string? DefaultChallengeScheme { get; set; }
 
     /// <summary>
-    /// Used as the default scheme by <see cref="IAuthenticationService.ForbidAsync(HttpContext, string, AuthenticationProperties)"/>.
+    /// Used as the default scheme by <see cref="IAuthenticationService.ForbidAsync(HttpContext, string,
+    // AuthenticationProperties)"/>.
     /// </summary>
     public string? DefaultForbidScheme { get; set; }
 
     /// <summary>
     /// If true, SignIn should throw if attempted with a user is not authenticated.
-    /// A user is considered authenticated if <see cref="ClaimsIdentity.IsAuthenticated"/> returns <see langword="true" /> for the <see cref="ClaimsPrincipal"/> associated with the HTTP request.
+    /// A user is considered authenticated if <see cref="ClaimsIdentity.IsAuthenticated"/> returns <see
+    // langword="true" /> for the <see cref="ClaimsPrincipal"/> associated with the HTTP request.
     /// </summary>
     public bool RequireAuthenticatedSignIn { get; set; } = true;
 

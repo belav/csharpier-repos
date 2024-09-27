@@ -50,7 +50,8 @@ namespace System.ComponentModel
         // Adds a component to the container.
         /// <devdoc>
         ///    <para>
-        ///       Adds the specified component to the <see cref='System.ComponentModel.Container'/> and assigns a name to
+        ///       Adds the specified component to the <see cref='System.ComponentModel.Container'/> and
+        // assigns a name to
         ///       it.
         ///    </para>
         /// </devdoc>
@@ -103,7 +104,8 @@ namespace System.ComponentModel
 
         // Creates a site for the component within the container.
         /// <devdoc>
-        /// <para>Creates a Site <see cref='System.ComponentModel.ISite'/> for the given <see cref='System.ComponentModel.IComponent'/>
+        /// <para>Creates a Site <see cref='System.ComponentModel.ISite'/> for the given <see
+        // cref='System.ComponentModel.IComponent'/>
         /// and assigns the given name to the site.</para>
         /// </devdoc>
         protected virtual ISite CreateSite(IComponent component, string name)

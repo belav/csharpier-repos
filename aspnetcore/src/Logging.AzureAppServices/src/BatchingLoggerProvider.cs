@@ -142,8 +142,10 @@ public abstract class BatchingLoggerProvider : ILoggerProvider, ISupportExternal
     /// Wait for the given <see cref="TimeSpan"/>.
     /// </summary>
     /// <param name="interval">The amount of time to wait.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the delay.</param>
-    /// <returns>A <see cref="Task"/> which completes when the <paramref name="interval"/> has passed or the <paramref name="cancellationToken"/> has been canceled.</returns>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the
+    // delay.</param>
+    /// <returns>A <see cref="Task"/> which completes when the <paramref name="interval"/> has passed or
+    // the <paramref name="cancellationToken"/> has been canceled.</returns>
     protected virtual Task IntervalAsync(TimeSpan interval, CancellationToken cancellationToken)
     {
         return Task.Delay(interval, cancellationToken);

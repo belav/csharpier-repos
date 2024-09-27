@@ -29,7 +29,8 @@ namespace System.Xml
         // Nmtoken parsing
         //-----------------------------------------------
         /// <summary>
-        /// Attempts to parse the input string as an Nmtoken (see the XML spec production [7] &amp;&amp; XML Namespaces spec).
+        /// Attempts to parse the input string as an Nmtoken (see the XML spec production [7] &amp;&amp; XML
+        // Namespaces spec).
         /// Quits parsing when an invalid Nmtoken char is reached or the end of string is reached.
         /// Returns the number of valid Nmtoken chars that were parsed.
         /// </summary>
@@ -58,7 +59,8 @@ namespace System.Xml
         // Nmtoken parsing (no XML namespaces support)
         //-----------------------------------------------
         /// <summary>
-        /// Attempts to parse the input string as an Nmtoken (see the XML spec production [7]) without taking
+        /// Attempts to parse the input string as an Nmtoken (see the XML spec production [7]) without
+        // taking
         /// into account the XML Namespaces spec. What it means is that the ':' character is allowed at any
         /// position and any number of times in the token.
         /// Quits parsing when an invalid Nmtoken char is reached or the end of string is reached.
@@ -96,8 +98,10 @@ namespace System.Xml
         // Name parsing (no XML namespaces support)
         //-----------------------------------------------
         /// <summary>
-        /// Attempts to parse the input string as a Name without taking into account the XML Namespaces spec.
-        /// What it means is that the ':' character does not delimiter prefix and local name, but it is a regular
+        /// Attempts to parse the input string as a Name without taking into account the XML Namespaces
+        // spec.
+        /// What it means is that the ':' character does not delimiter prefix and local name, but it is a
+        // regular
         /// name character, which is allowed to appear at any position and any number of times in the name.
         /// Quits parsing when an invalid Name char is reached or the end of string is reached.
         /// Returns the number of valid Name chars that were parsed.
@@ -448,7 +452,8 @@ namespace System.Xml
         }
 
         /// <summary>
-        /// Throw if the specified name parts are not valid according to the rules of "nodeKind".  Check only rules that are
+        /// Throw if the specified name parts are not valid according to the rules of "nodeKind".  Check
+        // only rules that are
         /// specified by the Flags.
         /// NOTE: Namespaces should be passed using a prefix, ns pair.  "localName" is always string.Empty.
         /// </summary>
@@ -465,7 +470,8 @@ namespace System.Xml
         }
 
         /// <summary>
-        /// Return false if the specified name parts are not valid according to the rules of "nodeKind".  Check only rules that are
+        /// Return false if the specified name parts are not valid according to the rules of "nodeKind".
+        // Check only rules that are
         /// specified by the Flags.
         /// NOTE: Namespaces should be passed using a prefix, ns pair.  "localName" is always string.Empty.
         /// </summary>
@@ -482,7 +488,8 @@ namespace System.Xml
         }
 
         /// <summary>
-        /// Return false or throw if the specified name parts are not valid according to the rules of "nodeKind".  Check only rules
+        /// Return false or throw if the specified name parts are not valid according to the rules of
+        // "nodeKind".  Check only rules
         /// that are specified by the Flags.
         /// NOTE: Namespaces should be passed using a prefix, ns pair.  "localName" is always string.Empty.
         /// </summary>

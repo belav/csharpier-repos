@@ -159,7 +159,8 @@ internal abstract class PropertyOrIndexerAccessorDeclarationBody : MemberBody
         Contract.ThrowIfNull(newPropertyBody.MatchRoot);
 
         // Statements in explicit bodies will be mapped using a match.
-        // We need to special case active statements in root nodes though because the root kinds differ (block vs arrow expr)
+        // We need to special case active statements in root nodes though because the root kinds differ
+        // (block vs arrow expr)
         if (oldStatement == ExplicitBody)
         {
             newStatement = newPropertyBody.ExplicitBody;

@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
-// This controller combines routes on the controller with routes on actions in a REST + navigation property
+// This controller combines routes on the controller with routes on actions in a REST + navigation
+// property
 // style.
 [Route("api/Employee")]
 public class EmployeeController : Controller

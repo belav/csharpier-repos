@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Foreign key extension methods for relational database metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public static class RelationalForeignKeyExtensions
 {
@@ -114,7 +115,8 @@ public static class RelationalForeignKeyExtensions
     /// </summary>
     /// <param name="foreignKey">The foreign key.</param>
     /// <param name="value">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured name.</returns>
     public static string? SetConstraintName(
         this IConventionForeignKey foreignKey,
@@ -153,10 +155,12 @@ public static class RelationalForeignKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IForeignKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IForeignKey" /> that is mapped to the same constraint in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -280,10 +284,12 @@ public static class RelationalForeignKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IMutableForeignKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IMutableForeignKey" /> that is mapped to the same constraint
+    // in a shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -299,10 +305,12 @@ public static class RelationalForeignKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IConventionForeignKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IConventionForeignKey" /> that is mapped to the same
+    // constraint in a shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -318,10 +326,12 @@ public static class RelationalForeignKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IForeignKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IForeignKey" /> that is mapped to the same constraint in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>

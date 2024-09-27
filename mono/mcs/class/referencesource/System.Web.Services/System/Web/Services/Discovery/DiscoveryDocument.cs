@@ -21,7 +21,8 @@ namespace System.Web.Services.Discovery
     [XmlRoot("discovery", Namespace = DiscoveryDocument.Namespace)]
     public sealed class DiscoveryDocument
     {
-        /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.Namespace"]/*' />
+        /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.Namespace"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -29,7 +30,8 @@ namespace System.Web.Services.Discovery
 
         private ArrayList references = new ArrayList();
 
-        /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.DiscoveryDocument"]/*' />
+        /// <include file='doc\DiscoveryDocument.uex'
+        // path='docs/doc[@for="DiscoveryDocument.DiscoveryDocument"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -38,7 +40,8 @@ namespace System.Web.Services.Discovery
         // NOTE, Microsoft: This property is not really ignored by the xml serializer. Instead,
         // the attributes that would go here are configured in WebServicesConfiguration's
         // DiscoveryDocumentSerializer property.
-        /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.References"]/*' />
+        /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.References"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

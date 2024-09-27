@@ -153,7 +153,8 @@ namespace System.IO
             }
         }
 
-        // For files name of the file is returned, for directories the last directory in hierarchy is returned if possible,
+        // For files name of the file is returned, for directories the last directory in hierarchy is
+        // returned if possible,
         // otherwise the fully qualified name s returned
         public abstract String Name { get; }
 

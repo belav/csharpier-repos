@@ -28,7 +28,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>Lazily-computed hash code value.</summary>
         private int? _hashcode;
 
-        /// <summary>Initializes the <see cref="BitVector"/> to be of the specified length and contain all false bits.</summary>
+        /// <summary>Initializes the <see cref="BitVector"/> to be of the specified length and contain all
+        // false bits.</summary>
         private BitVector(int length)
         {
             Debug.Assert(length > 0);
@@ -47,10 +48,12 @@ namespace System.Text.RegularExpressions.Symbolic
             _hashcode = null;
         }
 
-        /// <summary>Creates a <see cref="BitVector"/> of the specified length containing all bits not set.</summary>
+        /// <summary>Creates a <see cref="BitVector"/> of the specified length containing all bits not
+        // set.</summary>
         public static BitVector CreateFalse(int length) => new BitVector(length);
 
-        /// <summary>Creates a <see cref="BitVector"/> of the specified length containing all bits set.</summary>
+        /// <summary>Creates a <see cref="BitVector"/> of the specified length containing all bits
+        // set.</summary>
         public static BitVector CreateTrue(int length)
         {
             var bv = new BitVector(length);
@@ -59,7 +62,8 @@ namespace System.Text.RegularExpressions.Symbolic
             return bv;
         }
 
-        /// <summary>Creates a <see cref="BitVector"/> of the specified length containing all bits not set except for the specified bit, which is set.</summary>
+        /// <summary>Creates a <see cref="BitVector"/> of the specified length containing all bits not set
+        // except for the specified bit, which is set.</summary>
         public static BitVector CreateSingleBit(int length, int i)
         {
             var bv = new BitVector(length);
@@ -85,7 +89,8 @@ namespace System.Text.RegularExpressions.Symbolic
             _blocks[block] |= 1ul << bit;
         }
 
-        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-and of the two input vectors.</summary>
+        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-and of the two input
+        // vectors.</summary>
         public static BitVector And(BitVector x, BitVector y)
         {
             Debug.Assert(x.Length == y.Length);
@@ -102,7 +107,8 @@ namespace System.Text.RegularExpressions.Symbolic
             return new BitVector(x.Length, blocks);
         }
 
-        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-or of the two input vectors.</summary>
+        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-or of the two input
+        // vectors.</summary>
         public static BitVector Or(BitVector x, BitVector y)
         {
             Debug.Assert(x.Length == y.Length);
@@ -119,7 +125,8 @@ namespace System.Text.RegularExpressions.Symbolic
             return new BitVector(x.Length, blocks);
         }
 
-        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-or of the input vectors.</summary>
+        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-or of the input
+        // vectors.</summary>
         public static BitVector Or(ReadOnlySpan<BitVector> bitVectors)
         {
             Debug.Assert(!bitVectors.IsEmpty);
@@ -139,7 +146,8 @@ namespace System.Text.RegularExpressions.Symbolic
             return new BitVector(firstOther.Length, blocks);
         }
 
-        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-not of the input vector.</summary>
+        /// <summary>Create a new <see cref="BitVector"/> that is the bitwise-not of the input
+        // vector.</summary>
         public static BitVector Not(BitVector x)
         {
             ulong[] xBlocks = x._blocks;
@@ -157,8 +165,10 @@ namespace System.Text.RegularExpressions.Symbolic
 
         /// <summary>Clears any bits in <see cref="_blocks"/> not part of <see cref="Length"/>.</summary>
         /// <remarks>
-        /// If the number of bits is not a precise multiple of 64, this resets the extra bits in the last block
-        /// to 0. This enables comparison of BitVectors quickly, without having to special-case the remainder, as
+        /// If the number of bits is not a precise multiple of 64, this resets the extra bits in the last
+        // block
+        /// to 0. This enables comparison of BitVectors quickly, without having to special-case the
+        // remainder, as
         /// all remainders are normalized to contain 0.
         /// </remarks>
         private void ClearRemainderBits()

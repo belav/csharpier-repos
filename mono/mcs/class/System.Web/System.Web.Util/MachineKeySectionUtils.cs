@@ -111,7 +111,8 @@ namespace System.Web.Util
             return sa;
         }
 
-        // validation="HMACSHA256" [SHA1 | MD5 | 3DES | AES | HMACSHA256 | HMACSHA384 | HMACSHA512 | alg:algorithm_name]
+        // validation="HMACSHA256" [SHA1 | MD5 | 3DES | AES | HMACSHA256 | HMACSHA384 | HMACSHA512 |
+        // alg:algorithm_name]
         // [1] http://msdn.microsoft.com/en-us/library/system.web.configuration.machinekeyvalidation.aspx
         // [2] http://msdn.microsoft.com/en-us/library/w8h3skw9.aspx
         public static KeyedHashAlgorithm GetValidationAlgorithm(MachineKeySection section)

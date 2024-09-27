@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SpellCheck
         [Theory, CombinatorialData]
         public async Task TestLotsOfResults(bool mutatingLspWorkspace)
         {
-            // Produce an 'interesting' large string, with varying length identifiers, and varying distances between the spans.
+            // Produce an 'interesting' large string, with varying length identifiers, and varying distances
+            // between the spans.
             var random = new Random(Seed: 0);
             var markup = string.Join(
                 Environment.NewLine,
@@ -531,8 +532,10 @@ class {|Identifier:A|}
 
         //            var results = await RunGetWorkspaceSpellCheckSpansAsync(testLspServer);
 
-        //            // Project.GetSourceGeneratedDocumentsAsync may not return documents in a deterministic order, so we sort
-        //            // the results here to ensure subsequent assertions are not dependent on the order of items provided by the
+        //            // Project.GetSourceGeneratedDocumentsAsync may not return documents in a
+        // deterministic order, so we sort
+        //            // the results here to ensure subsequent assertions are not dependent on the order of
+        // items provided by the
         //            // project.
         //            results = results.Sort((x, y) => x.Uri.ToString().CompareTo(y.Uri.ToString()));
 

@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     An <see cref="EventSource" /> emitting Entity Framework performance counter data.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+// more information and examples.
 /// </remarks>
 public sealed class EntityFrameworkEventSource : EventSource
 {
@@ -41,7 +42,8 @@ public sealed class EntityFrameworkEventSource : EventSource
     ///     The singleton instance of <see cref="EntityFrameworkEventSource" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public static readonly EntityFrameworkEventSource Log = new();
 
@@ -52,7 +54,8 @@ public sealed class EntityFrameworkEventSource : EventSource
     ///     Indicates that a new <see cref="DbContext" /> instance is being initialized.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void DbContextInitializing() => Interlocked.Increment(ref _activeDbContexts);
 
@@ -60,7 +63,8 @@ public sealed class EntityFrameworkEventSource : EventSource
     ///     Indicates that a <see cref="DbContext" /> instance is being disposed.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void DbContextDisposing() => Interlocked.Decrement(ref _activeDbContexts);
 
@@ -68,7 +72,8 @@ public sealed class EntityFrameworkEventSource : EventSource
     ///     Indicates that a query is about to begin execution.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void QueryExecuting() => Interlocked.Increment(ref _totalQueries);
 
@@ -76,32 +81,39 @@ public sealed class EntityFrameworkEventSource : EventSource
     ///     Indicates that changes are about to be saved.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void SavingChanges() => Interlocked.Increment(ref _totalSaveChanges);
 
     /// <summary>
-    ///     Indicates a hit in the compiled query cache, signifying that query compilation will not need to occur.
+    ///     Indicates a hit in the compiled query cache, signifying that query compilation will not need
+    // to occur.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void CompiledQueryCacheHit() => Interlocked.Increment(ref _compiledQueryCacheInfo.Hits);
 
     /// <summary>
-    ///     Indicates a miss in the compiled query cache, signifying that query compilation will need to occur.
+    ///     Indicates a miss in the compiled query cache, signifying that query compilation will need to
+    // occur.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void CompiledQueryCacheMiss() =>
         Interlocked.Increment(ref _compiledQueryCacheInfo.Misses);
 
     /// <summary>
-    ///     Indicates that an operation executed by an <see cref="IExecutionStrategy" /> failed (and may be retried).
+    ///     Indicates that an operation executed by an <see cref="IExecutionStrategy" /> failed (and may
+    // be retried).
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void ExecutionStrategyOperationFailure() =>
         Interlocked.Increment(ref _totalExecutionStrategyOperationFailures);
@@ -110,7 +122,8 @@ public sealed class EntityFrameworkEventSource : EventSource
     ///     Indicates that an optimistic concurrency failure has occurred.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-event-counters">EF Core event counters</see> for
+    // more information and examples.
     /// </remarks>
     public void OptimisticConcurrencyFailure() =>
         Interlocked.Increment(ref _totalOptimisticConcurrencyFailures);
@@ -124,7 +137,8 @@ public sealed class EntityFrameworkEventSource : EventSource
             // NOTE: These counters will NOT be disposed on disable command because we may be introducing
             // a race condition by doing that. We still want to create these lazily so that we aren't adding
             // overhead by at all times even when counters aren't enabled.
-            // On disable, PollingCounters will stop polling for values so it should be fine to leave them around.
+            // On disable, PollingCounters will stop polling for values so it should be fine to leave them
+            // around.
 
             _activeDbContextsCounter ??= new PollingCounter(
                 "active-db-contexts",
@@ -239,7 +253,8 @@ public sealed class EntityFrameworkEventSource : EventSource
         private long _all;
 
         /// <summary>
-        ///     Returns the atomically-calculated hit rate and atomically resets <see cref="Hits" /> and <see cref="Misses" /> to 0.
+        ///     Returns the atomically-calculated hit rate and atomically resets <see cref="Hits" /> and
+        // <see cref="Misses" /> to 0.
         /// </summary>
         internal double CalculateAndReset()
         {

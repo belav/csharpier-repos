@@ -5,15 +5,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
 /// <summary>
 ///     <para>
-///         A factory for key values based on the primary/principal key values taken from various forms of entity data.
+///         A factory for key values based on the primary/principal key values taken from various
+// forms of entity data.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 /// <typeparam name="TKey">The key type.</typeparam>
@@ -27,7 +30,8 @@ public interface IPrincipalKeyValueFactory<TKey> : IPrincipalKeyValueFactory
     object? CreateFromKeyValues(IReadOnlyList<object?> keyValues);
 
     /// <summary>
-    ///     Creates a key object from key values obtained from their indexed position in the given <see cref="ValueBuffer" />.
+    ///     Creates a key object from key values obtained from their indexed position in the given <see
+    // cref="ValueBuffer" />.
     /// </summary>
     /// <param name="valueBuffer">The buffer containing key values.</param>
     /// <returns>The key object, or null if any of the key values were null.</returns>
@@ -35,7 +39,8 @@ public interface IPrincipalKeyValueFactory<TKey> : IPrincipalKeyValueFactory
     object? CreateFromBuffer(ValueBuffer valueBuffer);
 
     /// <summary>
-    ///     Finds the first null in the given in-order array of key values and returns the associated <see cref="IProperty" />.
+    ///     Finds the first null in the given in-order array of key values and returns the associated
+    // <see cref="IProperty" />.
     /// </summary>
     /// <param name="keyValues">The key values.</param>
     /// <returns>The associated property.</returns>
@@ -49,7 +54,8 @@ public interface IPrincipalKeyValueFactory<TKey> : IPrincipalKeyValueFactory
     TKey? CreateFromCurrentValues(IUpdateEntry entry);
 
     /// <summary>
-    ///     Finds the first null key value in the given entry and returns the associated <see cref="IProperty" />.
+    ///     Finds the first null key value in the given entry and returns the associated <see
+    // cref="IProperty" />.
     /// </summary>
     /// <param name="entry">The entry tracking an entity instance.</param>
     /// <returns>The associated property.</returns>

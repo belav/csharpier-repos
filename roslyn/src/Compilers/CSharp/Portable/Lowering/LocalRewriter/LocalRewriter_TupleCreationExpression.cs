@@ -29,10 +29,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Converts the expression for creating a tuple instance into an expression creating a ValueTuple (if short) or nested ValueTuples (if longer).
+        /// Converts the expression for creating a tuple instance into an expression creating a ValueTuple
+        // (if short) or nested ValueTuples (if longer).
         ///
         /// For instance, for a long tuple we'll generate:
-        /// creationExpression(ctor=largestCtor, args=firstArgs+(nested creationExpression for remainder, with smaller ctor and next few args))
+        /// creationExpression(ctor=largestCtor, args=firstArgs+(nested creationExpression for remainder,
+        // with smaller ctor and next few args))
         /// </summary>
         private BoundExpression RewriteTupleCreationExpression(
             BoundTupleExpression node,

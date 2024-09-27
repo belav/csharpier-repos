@@ -29,7 +29,8 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
     }
 
     /// <summary>
-    /// Forbids this library from being unloaded. The library will remain loaded until process termination,
+    /// Forbids this library from being unloaded. The library will remain loaded until process
+    // termination,
     /// regardless of how many times FreeLibrary is called.
     /// </summary>
     public void ForbidUnload()

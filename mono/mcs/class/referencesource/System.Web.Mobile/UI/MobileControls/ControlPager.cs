@@ -13,11 +13,11 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Control pager, a class that provides state as a form is paginated.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Control pager, a class that provides state as a form is paginated.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\ControlPager.uex' path='docs/doc[@for="ControlPager"]/*' />
     [AspNetHostingPermission(
@@ -93,19 +93,19 @@ namespace System.Web.UI.MobileControls
             set { _pageCount = value; }
         }
 
-        /*
-        internal int MaximumPage
-        {
-            get
-            {
-                return _maximumPage;
-            }
-            set
-            {
-                _maximumPage = value;
-            }
-        }
-         */
+/*
+internal int MaximumPage
+{
+get
+{
+return _maximumPage;
+}
+set
+{
+_maximumPage = value;
+}
+}
+*/
 
         /// <include file='doc\ControlPager.uex' path='docs/doc[@for="ControlPager.GetItemPager"]/*' />
         public ItemPager GetItemPager(

@@ -568,9 +568,11 @@ internal abstract class CertificateManager
                         }
                         else
                         {
-                            // Export the key first to an encrypted PEM to avoid issues with System.Security.Cryptography.Cng indicating that the operation is not supported.
+                            // Export the key first to an encrypted PEM to avoid issues with System.Security.Cryptography.Cng
+                            // indicating that the operation is not supported.
                             // This is likely by design to avoid exporting the key by mistake.
-                            // To bypass it, we export the certificate to pem temporarily and then we import it and export it as unprotected PEM.
+                            // To bypass it, we export the certificate to pem temporarily and then we import it and export it as
+                            // unprotected PEM.
                             keyBytes = key.ExportEncryptedPkcs8PrivateKey(
                                 string.Empty,
                                 new PbeParameters(

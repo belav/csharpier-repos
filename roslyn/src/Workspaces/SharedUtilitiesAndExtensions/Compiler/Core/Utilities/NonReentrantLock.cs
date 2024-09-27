@@ -29,20 +29,23 @@ namespace Roslyn.Utilities
     /// Waiters are also "pulsed" when leaving the lock.
     /// </para>
     /// <para>
-    /// All public members of <see cref="NonReentrantLock"/> are thread-safe and may be used concurrently
+    /// All public members of <see cref="NonReentrantLock"/> are thread-safe and may be used
+    // concurrently
     /// from multiple threads.
     /// </para>
     /// </remarks>
     internal sealed class NonReentrantLock
     {
         /// <summary>
-        /// A synchronization object to protect access to the <see cref="_owningThreadId"/> field and to be pulsed
+        /// A synchronization object to protect access to the <see cref="_owningThreadId"/> field and to be
+        // pulsed
         /// when <see cref="Release"/> is called and during cancellation.
         /// </summary>
         private readonly object _syncLock;
 
         /// <summary>
-        /// The <see cref="Environment.CurrentManagedThreadId" /> of the thread that holds the lock. Zero if no thread is holding
+        /// The <see cref="Environment.CurrentManagedThreadId" /> of the thread that holds the lock. Zero if
+        // no thread is holding
         /// the lock.
         /// </summary>
         private volatile int _owningThreadId;
@@ -66,11 +69,13 @@ namespace Roslyn.Utilities
             new NonReentrantLock(useThisInstanceForSynchronization: true);
 
         /// <summary>
-        /// Blocks the current thread until it can enter the <see cref="NonReentrantLock"/>, while observing a
+        /// Blocks the current thread until it can enter the <see cref="NonReentrantLock"/>, while observing
+        // a
         /// <see cref="CancellationToken"/>.
         /// </summary>
         /// <remarks>
-        /// Recursive locking is not supported. i.e. A thread may not call Wait successfully twice without an
+        /// Recursive locking is not supported. i.e. A thread may not call Wait successfully twice without
+        // an
         /// intervening <see cref="Release"/>.
         /// </remarks>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> token to
@@ -152,7 +157,8 @@ namespace Roslyn.Utilities
         /// <remarks>
         /// The calling thread must currently hold the lock.
         /// </remarks>
-        /// <exception cref="InvalidOperationException">The lock is not currently held by the calling thread.</exception>
+        /// <exception cref="InvalidOperationException">The lock is not currently held by the calling
+        // thread.</exception>
         public void Release()
         {
             AssertHasLock();
@@ -175,7 +181,8 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Throw an exception if the lock is not held by the calling thread.
         /// </summary>
-        /// <exception cref="InvalidOperationException">The lock is not currently held by the calling thread.</exception>
+        /// <exception cref="InvalidOperationException">The lock is not currently held by the calling
+        // thread.</exception>
         public void AssertHasLock() => Contract.ThrowIfFalse(LockHeldByMe());
 
         /// <summary>
@@ -240,7 +247,8 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// Since we want to avoid boxing the return from <see cref="NonReentrantLock.DisposableWait"/>, this type must be public.
+        /// Since we want to avoid boxing the return from <see cref="NonReentrantLock.DisposableWait"/>,
+        // this type must be public.
         /// </summary>
         public readonly struct SemaphoreDisposer(NonReentrantLock semaphore) : IDisposable
         {

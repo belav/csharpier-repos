@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
             )
                 return false;
 
-            // We always simplify a static accesses off of this/me.  Otherwise, we fall back to whatever the user's option is.
+            // We always simplify a static accesses off of this/me.  Otherwise, we fall back to whatever the
+            // user's option is.
             if (!symbolInfo.Symbol.IsStatic && optionValue.Value)
                 return false;
 

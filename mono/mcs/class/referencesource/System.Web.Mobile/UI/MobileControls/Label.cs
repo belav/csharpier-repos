@@ -16,11 +16,11 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile Label class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile Label class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\Label.uex' path='docs/doc[@for="Label"]/*' />
     [
         DataBindingHandler(

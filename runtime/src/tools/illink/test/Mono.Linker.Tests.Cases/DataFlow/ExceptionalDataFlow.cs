@@ -924,7 +924,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             catch { }
         }
 
-        // This tests a case where the catch state was being merged with the containing try state incorrectly.
+        // This tests a case where the catch state was being merged with the containing try state
+        // incorrectly.
         // In the bug, the exceptional catch state, which is used in the finally, had too much in it.
         [ExpectedWarning(
             "IL2072",
@@ -942,7 +943,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             nameof(GetWithPublicFields) + "()"
         )]
         // The bug was producing this warning:
-        // [ExpectedWarning ("IL2072", nameof (RequireAll2) + "(Type)", nameof (GetWithPublicConstructors) + "()")]
+        // [ExpectedWarning ("IL2072", nameof (RequireAll2) + "(Type)", nameof (GetWithPublicConstructors) +
+        // "()")]
 
         // Trimmer merges branches going forward.
         [ExpectedWarning(

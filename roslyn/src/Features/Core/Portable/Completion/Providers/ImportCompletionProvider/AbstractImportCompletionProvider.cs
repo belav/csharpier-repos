@@ -78,8 +78,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             if (!ShouldProvideCompletion(completionContext, syntaxContext))
             {
-                // Queue a background task to warm up cache and return immediately if this is not the context to trigger this provider.
-                // `ForceExpandedCompletionIndexCreation` and `UpdateImportCompletionCacheInBackground` are both test only options to
+                // Queue a background task to warm up cache and return immediately if this is not the context to
+                // trigger this provider.
+                // `ForceExpandedCompletionIndexCreation` and `UpdateImportCompletionCacheInBackground` are both
+                // test only options to
                 // make test behavior deterministic.
                 var options = completionContext.CompletionOptions;
                 if (
@@ -109,8 +111,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            // Need regular semantic model because we will use it to get imported namespace symbols. Otherwise we will try to
-            // reach outside of the span and ended up with "node not within syntax tree" error from the speculative model.
+            // Need regular semantic model because we will use it to get imported namespace symbols. Otherwise
+            // we will try to
+            // reach outside of the span and ended up with "node not within syntax tree" error from the
+            // speculative model.
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -129,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             var importedNamespaces = GetImportedNamespaces(syntaxContext, cancellationToken);
 
-            // This hashset will be used to match namespace names, so it must have the same case-sensitivity as the source language.
+            // This hashset will be used to match namespace names, so it must have the same case-sensitivity as
+            // the source language.
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var namespacesInScope = new HashSet<string>(
                 importedNamespaces,
@@ -161,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var targetToken = context.TargetToken;
 
             // If we are immediately after `using` directive adjust position to the start of the next token.
-            // This is a workaround for an issue, when immediately after a `using` directive it is not included into the import scope.
+            // This is a workaround for an issue, when immediately after a `using` directive it is not included
+            // into the import scope.
             // See https://github.com/dotnet/roslyn/issues/67447 for more info.
             if (context.IsRightAfterUsingOrImportDirective)
                 position = targetToken.GetNextToken(includeZeroWidth: true).SpanStart;
@@ -282,9 +288,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             //       replacement span.
             //
             //       For example: If I'm typing "asd", the completion provider could be triggered after "a"
-            //       is typed. Then if I selected type "AsnEncodedData" to commit, by using the approach described
-            //       above, we will get a TextChange of "AsnEncodedDat" with 0 length span, instead of a change of
-            //       the full display text with a span of length 1. This will later mess up span-tracking and end up
+            //       is typed. Then if I selected type "AsnEncodedData" to commit, by using the approach
+            // described
+            //       above, we will get a TextChange of "AsnEncodedDat" with 0 length span, instead of a change
+            // of
+            //       the full display text with a span of length 1. This will later mess up span-tracking and
+            // end up
             //       with "AsnEncodedDatasd" in the code.
             builder.Add(new TextChange(completionItem.Span, insertText));
 
@@ -304,14 +313,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (!IsAddingImportsSupported(document, completionOptions: null))
                     return true;
 
-                // We might need to qualify unimported types to use them in an import directive, because they only affect members of the containing
+                // We might need to qualify unimported types to use them in an import directive, because they only
+                // affect members of the containing
                 // import container (e.g. namespace/class/etc. declarations).
                 //
                 // For example, `List` and `StringBuilder` both need to be fully qualified below:
                 //
-                //      using CollectionOfStringBuilders = System.Collections.Generic.List<System.Text.StringBuilder>;
+                //      using CollectionOfStringBuilders =
+                // System.Collections.Generic.List<System.Text.StringBuilder>;
                 //
-                // However, if we are typing in an C# using directive that is inside a nested import container (i.e. inside a namespace declaration block),
+                // However, if we are typing in an C# using directive that is inside a nested import container (i.e.
+                // inside a namespace declaration block),
                 // then we can add an using in the outer import container instead (this is not allowed in VB).
                 //
                 // For example:
@@ -324,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 //          using CollectionOfStringBuilders = List<StringBuilder>;
                 //      }
                 //
-                // Here we will always choose to qualify the unimported type, just to be consistent and keeps things simple.
+                // Here we will always choose to qualify the unimported type, just to be consistent and keeps things
+                // simple.
                 return await IsInImportsDirectiveAsync(
                         document,
                         completionItem.Span.Start,

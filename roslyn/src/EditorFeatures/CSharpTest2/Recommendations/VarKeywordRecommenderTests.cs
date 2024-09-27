@@ -419,10 +419,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(AddInsideMethod(@"ref readonly $$ int local;"));
         }
 
-        // For a local function, we can't add any tests - sometimes the keyword is offered and sometimes it's not,
-        // depending on whether the keyword is partially written or not. This is because a partially written keyword
+        // For a local function, we can't add any tests - sometimes the keyword is offered and sometimes
+        // it's not,
+        // depending on whether the keyword is partially written or not. This is because a partially written
+        // keyword
         // causes this to be parsed as a local declaration instead. We can't add either test because
-        // VerifyKeywordAsync & VerifyAbsenceAsync check for both cases - with the keyword partially written and without.
+        // VerifyKeywordAsync & VerifyAbsenceAsync check for both cases - with the keyword partially written
+        // and without.
 
         [Fact]
         public async Task TestNotAfterRefExpression()

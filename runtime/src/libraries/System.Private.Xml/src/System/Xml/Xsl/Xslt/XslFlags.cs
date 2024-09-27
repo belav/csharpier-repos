@@ -24,7 +24,8 @@ namespace System.Xml.Xsl
             | XslFlags.Nodeset
             | XslFlags.Rtf,
 
-        // Focus flags. These flags indicate which of the three focus values (context item, context position,
+        // Focus flags. These flags indicate which of the three focus values (context item, context
+        // position,
         // context size) are required for calculation of the expression.
         Current = 0x0100,
         Position = 0x0200,
@@ -44,7 +45,8 @@ namespace System.Xml.Xsl
         // This flag is on for xsl:message and for calls to extension functions.
         SideEffects = 0x4000,
 
-        // Indicates that the corresponding graph vertex has been already visited in flag propagation process.
+        // Indicates that the corresponding graph vertex has been already visited in flag propagation
+        // process.
         Stop = 0x8000,
     }
 }

@@ -22,7 +22,8 @@ namespace System.Xml.Serialization
     {
         Hashtable types = new Hashtable();
 
-        /// <include file='doc\XmlAttributeOverrides.uex' path='docs/doc[@for="XmlAttributeOverrides.Add"]/*' />
+        /// <include file='doc\XmlAttributeOverrides.uex'
+        // path='docs/doc[@for="XmlAttributeOverrides.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -31,7 +32,8 @@ namespace System.Xml.Serialization
             Add(type, string.Empty, attributes);
         }
 
-        /// <include file='doc\XmlAttributeOverrides.uex' path='docs/doc[@for="XmlAttributeOverrides.Add1"]/*' />
+        /// <include file='doc\XmlAttributeOverrides.uex'
+        // path='docs/doc[@for="XmlAttributeOverrides.Add1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -52,7 +54,8 @@ namespace System.Xml.Serialization
             members.Add(member, attributes);
         }
 
-        /// <include file='doc\XmlAttributeOverrides.uex' path='docs/doc[@for="XmlAttributeOverrides.this"]/*' />
+        /// <include file='doc\XmlAttributeOverrides.uex'
+        // path='docs/doc[@for="XmlAttributeOverrides.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -61,7 +64,8 @@ namespace System.Xml.Serialization
             get { return this[type, string.Empty]; }
         }
 
-        /// <include file='doc\XmlAttributeOverrides.uex' path='docs/doc[@for="XmlAttributeOverrides.this1"]/*' />
+        /// <include file='doc\XmlAttributeOverrides.uex'
+        // path='docs/doc[@for="XmlAttributeOverrides.this1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

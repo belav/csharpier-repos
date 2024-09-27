@@ -716,7 +716,8 @@ public class RequestTests : LoggedTest
 
     private IServer CreateServer(out string root, RequestDelegate app)
     {
-        // TODO: We're just doing this to get a dynamic port. This can be removed later when we add support for hot-adding prefixes.
+        // TODO: We're just doing this to get a dynamic port. This can be removed later when we add support
+        // for hot-adding prefixes.
         var dynamicServer = Utilities.CreateHttpServerReturnRoot("/", out root, app, LoggerFactory);
         dynamicServer.Dispose();
         var rootUri = new Uri(root);

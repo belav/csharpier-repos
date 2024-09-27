@@ -21,7 +21,8 @@ internal sealed class DefaultKeyStorageDirectories : IDefaultKeyStorageDirectori
 
     /// <summary>
     /// The default key storage directory.
-    /// On Windows, this currently corresponds to "Environment.SpecialFolder.LocalApplication/ASP.NET/DataProtection-Keys".
+    /// On Windows, this currently corresponds to
+    // "Environment.SpecialFolder.LocalApplication/ASP.NET/DataProtection-Keys".
     /// On Linux and macOS, this currently corresponds to "$HOME/.aspnet/DataProtection-Keys".
     /// </summary>
     /// <remarks>

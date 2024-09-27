@@ -20,7 +20,8 @@ namespace System.Diagnostics
         private string? _processName;
 
         /// <summary>
-        /// Creates an array of <see cref="Process"/> components that are associated with process resources on a
+        /// Creates an array of <see cref="Process"/> components that are associated with process resources
+        // on a
         /// remote computer. These process resources share the specified process name.
         /// </summary>
         [UnsupportedOSPlatform("ios")]
@@ -195,7 +196,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Instructs the Process component to wait the specified number of milliseconds for the associated process to exit.
+        /// Instructs the Process component to wait the specified number of milliseconds for the associated
+        // process to exit.
         /// </summary>
         private bool WaitForExitCore(int milliseconds)
         {
@@ -271,7 +273,8 @@ namespace System.Diagnostics
             get { return GetProcessTimes().ExitTime; }
         }
 
-        /// <summary>Gets the amount of time the process has spent running code inside the operating system core.</summary>
+        /// <summary>Gets the amount of time the process has spent running code inside the operating system
+        // core.</summary>
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [SupportedOSPlatform("maccatalyst")]
@@ -457,8 +460,10 @@ namespace System.Diagnostics
         /// <summary>Sets one or both of the minimum and maximum working set limits.</summary>
         /// <param name="newMin">The new minimum working set limit, or null not to change it.</param>
         /// <param name="newMax">The new maximum working set limit, or null not to change it.</param>
-        /// <param name="resultingMin">The resulting minimum working set limit after any changes applied.</param>
-        /// <param name="resultingMax">The resulting maximum working set limit after any changes applied.</param>
+        /// <param name="resultingMin">The resulting minimum working set limit after any changes
+        // applied.</param>
+        /// <param name="resultingMax">The resulting maximum working set limit after any changes
+        // applied.</param>
         private void SetWorkingSetLimitsCore(
             IntPtr? newMin,
             IntPtr? newMax,
@@ -539,7 +544,8 @@ namespace System.Diagnostics
         /// <param name="startInfo">The start info with which to start the process.</param>
         private unsafe bool StartWithCreateProcess(ProcessStartInfo startInfo)
         {
-            // See knowledge base article Q190351 for an explanation of the following code.  Noteworthy tricky points:
+            // See knowledge base article Q190351 for an explanation of the following code.  Noteworthy tricky
+            // points:
             //    * The handles are duplicated as non-inheritable before they are passed to CreateProcess so
             //      that the child process can not close them
             //    * CreateProcess allows you to redirect all or none of the standard IO handles, so we use

@@ -36,7 +36,8 @@ internal static partial class Interop
         /// <summary>The version of cgroup that's being used. Mutated by tests only.</summary>
         internal static readonly CGroupVersion s_cgroupVersion = FindCGroupVersion();
 
-        /// <summary>Path to the found cgroup memory hierarchy mount path, or null if it couldn't be found.</summary>
+        /// <summary>Path to the found cgroup memory hierarchy mount path, or null if it couldn't be
+        // found.</summary>
         internal static readonly string? s_cgroupMemoryHierarchyMountPath =
             FindCGroupMemoryHierarchyMountPath(s_cgroupVersion);
 
@@ -61,7 +62,8 @@ internal static partial class Interop
             return false;
         }
 
-        /// <summary>Tries to read a field of a specified name from the memory.stat file in the current cgroup (cgroup v1 only).</summary>
+        /// <summary>Tries to read a field of a specified name from the memory.stat file in the current
+        // cgroup (cgroup v1 only).</summary>
         /// <param name="fieldName">Name of the field to read.</param>
         /// <param name="val">Value of the field or 0 if the field was not found.</param>
         /// <returns>true if the field was read successfully; otherwise, false.</returns>
@@ -313,8 +315,10 @@ internal static partial class Interop
             // The root and cgroup path can share a common prefix of the path that should not be appended.
             // Example 1 (docker):
             // hierarchyMount:               /sys/fs/cgroup/cpu
-            // hierarchyRoot:                /docker/87ee2de57e51bc75175a4d2e81b71d162811b179d549d6601ed70b58cad83578
-            // cgroupPathRelativeToMount:    /docker/87ee2de57e51bc75175a4d2e81b71d162811b179d549d6601ed70b58cad83578/my_named_cgroup
+            // hierarchyRoot:
+            // /docker/87ee2de57e51bc75175a4d2e81b71d162811b179d549d6601ed70b58cad83578
+            // cgroupPathRelativeToMount:
+            // /docker/87ee2de57e51bc75175a4d2e81b71d162811b179d549d6601ed70b58cad83578/my_named_cgroup
             // append to the cgroupPath:     /my_named_cgroup
             // final cgroupPath:             /sys/fs/cgroup/cpu/my_named_cgroup
             //
@@ -343,8 +347,10 @@ internal static partial class Interop
         /// <summary>Find the cgroup mount information for the specified subsystem.</summary>
         /// <param name="cgroupVersion">The cgroup version currently in use on the system.</param>
         /// <param name="subsystem">The subsystem, e.g. "memory".</param>
-        /// <param name="root">The path of the directory in the filesystem which forms the root of this mount; null if not found.</param>
-        /// <param name="path">The path of the mount point relative to the process's root directory; null if not found.</param>
+        /// <param name="root">The path of the directory in the filesystem which forms the root of this
+        // mount; null if not found.</param>
+        /// <param name="path">The path of the mount point relative to the process's root directory; null if
+        // not found.</param>
         /// <returns>true if the mount was found; otherwise, null.</returns>
         private static bool TryFindHierarchyMount(
             CGroupVersion cgroupVersion,
@@ -366,8 +372,10 @@ internal static partial class Interop
         /// <param name="cgroupVersion">The cgroup version currently in use on the system.</param>
         /// <param name="mountInfoFilePath">The path to the /mountinfo file. Useful for tests.</param>
         /// <param name="subsystem">The subsystem, e.g. "memory".</param>
-        /// <param name="root">The path of the directory in the filesystem which forms the root of this mount; null if not found.</param>
-        /// <param name="path">The path of the mount point relative to the process's root directory; null if not found.</param>
+        /// <param name="root">The path of the directory in the filesystem which forms the root of this
+        // mount; null if not found.</param>
+        /// <param name="path">The path of the mount point relative to the process's root directory; null if
+        // not found.</param>
         /// <returns>true if the mount was found; otherwise, null.</returns>
         internal static bool TryFindHierarchyMount(
             CGroupVersion cgroupVersion,
@@ -484,7 +492,8 @@ internal static partial class Interop
 
         /// <summary>Find the cgroup relative path for the specified subsystem.</summary>
         /// <param name="cgroupVersion">The cgroup version currently in use on the system.</param>
-        /// <param name="procCGroupFilePath">Path to cgroup directory in procfs for the current process.</param>
+        /// <param name="procCGroupFilePath">Path to cgroup directory in procfs for the current
+        // process.</param>
         /// <param name="subsystem">The subsystem, e.g. "memory".</param>
         /// <param name="path">The found path, or null if it couldn't be found.</param>
         /// <returns>true if a cgroup path for the subsystem is found.</returns>

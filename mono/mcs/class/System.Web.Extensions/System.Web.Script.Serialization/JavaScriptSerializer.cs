@@ -188,11 +188,11 @@ namespace System.Web.Script.Serialization
             {
                 if (obj is String)
                 {
-                    /*
-                     * Take care of the special case whereas in JSON an empty string ("") really means
-                     * an empty value
-                     * (see: https://bugzilla.novell.com/show_bug.cgi?id=328836)
-                     */
+/*
+* Take care of the special case whereas in JSON an empty string ("") really means
+* an empty value
+* (see: https://bugzilla.novell.com/show_bug.cgi?id=328836)
+*/
                     if (String.IsNullOrEmpty((String)obj))
                         return null;
                 }

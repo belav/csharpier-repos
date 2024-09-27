@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
             {
                 TestCode = testCode,
                 FixedCode = fixedCode,
-                // code action is currently generating invalid trees.  Specifically, it transforms `x.Y()` into `x.?Y()`
+                // code action is currently generating invalid trees.  Specifically, it transforms `x.Y()` into
+                // `x.?Y()`
                 // by just rewriting `x.Y` into `x?.Y`.  That is not correct.  the RHS of the `?` should `.Y()` not
                 // `.Y`.
                 CodeActionValidationMode = CodeActionValidationMode.None,

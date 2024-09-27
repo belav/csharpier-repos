@@ -60,10 +60,12 @@ namespace System.CodeDom.Compiler
         public override Task FlushAsync() => _writer.FlushAsync();
 
         /// <summary>
-        /// Clears all buffers for this <see cref="IndentedTextWriter"/> asynchronously and causes any buffered data to be
+        /// Clears all buffers for this <see cref="IndentedTextWriter"/> asynchronously and causes any
+        // buffered data to be
         /// written to the underlying device.
         /// </summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for cancellation requests.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for cancellation
+        // requests.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous flush operation.</returns>
         public override Task FlushAsync(CancellationToken cancellationToken) =>
             cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken)
@@ -83,7 +85,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously outputs tabs to the underlying <see cref="TextWriter"/> based on the current <see cref="Indent"/>.
+        /// Asynchronously outputs tabs to the underlying <see cref="TextWriter"/> based on the current <see
+        // cref="Indent"/>.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         protected virtual async Task OutputTabsAsync()
@@ -187,7 +190,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified <see cref="char"/> to the underlying <see cref="TextWriter"/>, inserting
+        /// Asynchronously writes the specified <see cref="char"/> to the underlying <see
+        // cref="TextWriter"/>, inserting
         /// tabs at the start of every line.
         /// </summary>
         /// <param name="value">The <see cref="char"/> to write.</param>
@@ -200,7 +204,8 @@ namespace System.CodeDom.Compiler
 
         /// <summary>
         /// Asynchronously writes the specified number of <see cref="char"/>s from the specified buffer
-        /// to the underlying <see cref="TextWriter"/>, starting at the specified index, and outputting tabs at the
+        /// to the underlying <see cref="TextWriter"/>, starting at the specified index, and outputting tabs
+        // at the
         /// start of every new line.
         /// </summary>
         /// <param name="buffer">The array to write from.</param>
@@ -214,7 +219,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified string to the underlying <see cref="TextWriter"/>, inserting tabs at the
+        /// Asynchronously writes the specified string to the underlying <see cref="TextWriter"/>, inserting
+        // tabs at the
         /// start of every line.
         /// </summary>
         /// <param name="value">The string to write.</param>
@@ -226,7 +232,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified characters to the underlying <see cref="TextWriter"/>, inserting tabs at the
+        /// Asynchronously writes the specified characters to the underlying <see cref="TextWriter"/>,
+        // inserting tabs at the
         /// start of every line.
         /// </summary>
         /// <param name="buffer">The characters to write.</param>
@@ -242,7 +249,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the contents of the specified <see cref="StringBuilder"/> to the underlying <see cref="TextWriter"/>, inserting tabs at the
+        /// Asynchronously writes the contents of the specified <see cref="StringBuilder"/> to the
+        // underlying <see cref="TextWriter"/>, inserting tabs at the
         /// start of every line.
         /// </summary>
         /// <param name="value">The text to write.</param>
@@ -263,7 +271,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified string to the underlying <see cref="TextWriter"/> without inserting tabs.
+        /// Asynchronously writes the specified string to the underlying <see cref="TextWriter"/> without
+        // inserting tabs.
         /// </summary>
         /// <param name="s">The string to write.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
@@ -397,7 +406,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified <see cref="char"/> to the underlying <see cref="TextWriter"/> followed by a line terminator, inserting tabs
+        /// Asynchronously writes the specified <see cref="char"/> to the underlying <see
+        // cref="TextWriter"/> followed by a line terminator, inserting tabs
         /// at the start of every line.
         /// </summary>
         /// <param name="value">The character to write.</param>
@@ -410,8 +420,10 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified number of characters from the specified buffer followed by a line terminator,
-        /// to the underlying <see cref="TextWriter"/>, starting at the specified index within the buffer, inserting tabs at the start of every line.
+        /// Asynchronously writes the specified number of characters from the specified buffer followed by a
+        // line terminator,
+        /// to the underlying <see cref="TextWriter"/>, starting at the specified index within the buffer,
+        // inserting tabs at the start of every line.
         /// </summary>
         /// <param name="buffer">The buffer containing characters to write.</param>
         /// <param name="index">The index within the buffer to start writing at.</param>
@@ -425,7 +437,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified string followed by a line terminator to the underlying <see cref="TextWriter"/>, inserting
+        /// Asynchronously writes the specified string followed by a line terminator to the underlying <see
+        // cref="TextWriter"/>, inserting
         /// tabs at the start of every line.
         /// </summary>
         /// <param name="value">The string to write.</param>
@@ -438,7 +451,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the specified characters followed by a line terminator to the underlying <see cref="TextWriter"/>, inserting
+        /// Asynchronously writes the specified characters followed by a line terminator to the underlying
+        // <see cref="TextWriter"/>, inserting
         /// tabs at the start of every line.
         /// </summary>
         /// <param name="buffer">The characters to write.</param>
@@ -455,7 +469,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// Asynchronously writes the contents of the specified <see cref="StringBuilder"/> followed by a line terminator to the
+        /// Asynchronously writes the contents of the specified <see cref="StringBuilder"/> followed by a
+        // line terminator to the
         /// underlying <see cref="TextWriter"/>, inserting tabs at the start of every line.
         /// </summary>
         /// <param name="value">The text to write.</param>

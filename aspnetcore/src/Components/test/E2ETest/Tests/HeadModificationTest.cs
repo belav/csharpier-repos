@@ -86,7 +86,8 @@ public class HeadModificationTest : ServerTestBase<ToggleExecutionModeServerFixt
 
         descriptionCheckbox2.Click();
 
-        // Assert that disposing the most recently attached HeadContent causes the previous one to take effect
+        // Assert that disposing the most recently attached HeadContent causes the previous one to take
+        // effect
         AssertDescriptionEquals("Updated description 1");
 
         void AssertDescriptionEquals(string description)

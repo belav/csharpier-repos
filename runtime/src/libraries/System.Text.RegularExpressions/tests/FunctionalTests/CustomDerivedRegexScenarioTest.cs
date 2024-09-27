@@ -30,8 +30,10 @@ namespace System.Text.RegularExpressions.Tests
     }
 
     /// <summary>
-    /// This type was generated using an earlier version of the Regex Source Generator which still overrides Go and FindFirstChar.
-    /// The purpose of this class is to validate that if a derived RegexRunner is invoking the protected Scan methods, they should call
+    /// This type was generated using an earlier version of the Regex Source Generator which still
+    // overrides Go and FindFirstChar.
+    /// The purpose of this class is to validate that if a derived RegexRunner is invoking the protected
+    // Scan methods, they should call
     /// the overridden Go and FindFirstChar methods and return the expected results.
     /// </summary>
     internal class CustomDerivedRegex : Regex

@@ -14,7 +14,8 @@ namespace Mono.Linker.Tests.Cases.Libraries
         new[] { "Dependencies/CopyUsedAssemblyWithMainEntryRoot_Lib.cs" }
     )]
     [KeptMemberInAssembly("lib.dll", typeof(CopyUsedAssemblyWithMainEntryRoot_Lib), "Used()")]
-    // Marked CopyUsed assemblies are not fully marked like Copy assemblies, so the Unused dependency is not kept.
+    // Marked CopyUsed assemblies are not fully marked like Copy assemblies, so the Unused dependency is
+    // not kept.
     [RemovedMemberInAssembly("lib.dll", typeof(CopyUsedAssemblyWithMainEntryRoot_Lib), "Unused()")]
     public class CopyUsedAssemblyWithMainEntryRoot
     {

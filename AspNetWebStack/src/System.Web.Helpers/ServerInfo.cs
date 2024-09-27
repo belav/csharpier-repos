@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -107,7 +108,8 @@ namespace System.Web.Helpers
 
             foreach (string key in serverVariables.AllKeys)
             {
-                // todo: these values contains very long strings with no spaces that distorts table layout - figure out how to deal with it
+                // todo: these values contains very long strings with no spaces that distorts table layout - figure
+                // out how to deal with it
                 if (
                     key.Equals("ALL_HTTP", StringComparison.OrdinalIgnoreCase)
                     || key.Equals("ALL_RAW", StringComparison.OrdinalIgnoreCase)
@@ -255,8 +257,10 @@ namespace System.Web.Helpers
         /// Generates HTML required to display server information.
         /// </summary>
         /// <remarks>
-        /// HTML generated is XHTML 1.0 compliant but not XHTML 1.1 or HTML5 compliant. The reason is that we
-        /// generate &lt;style&gt; tag inside &lt;body&gt; tag, which is not allowed. This is by design for now since ServerInfo
+        /// HTML generated is XHTML 1.0 compliant but not XHTML 1.1 or HTML5 compliant. The reason is that
+        // we
+        /// generate &lt;style&gt; tag inside &lt;body&gt; tag, which is not allowed. This is by design for
+        // now since ServerInfo
         /// is debugging aid and should not be used as a permanent part of any web page.
         /// </remarks>
         [SuppressMessage(
@@ -351,7 +355,8 @@ namespace System.Web.Helpers
                 string value = entry.Value;
                 if (entry.Key == HelpersResources.ServerInfo_LegacyCAS)
                 {
-                    // TODO: suboptimal solution, but its easier to do this than come up with something that works better
+                    // TODO: suboptimal solution, but its easier to do this than come up with something that works
+                    // better
                     css = "warn";
                 }
                 else if (String.IsNullOrEmpty(entry.Value))

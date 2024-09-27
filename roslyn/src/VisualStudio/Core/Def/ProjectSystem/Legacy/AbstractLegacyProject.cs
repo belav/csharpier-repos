@@ -93,11 +93,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 
             if (isVsIntellisenseProject)
             {
-                // IVsIntellisenseProjects are usually used for contained language cases, which means these projects don't have any real
-                // output path that we should consider. Since those point to the same IVsHierarchy as another project, we end up with two projects
-                // with the same output path, which potentially breaks conversion of metadata references to project references. However they're
-                // also used for database projects and a few other cases where there there isn't a "primary" IVsHierarchy.
-                // As a heuristic here we'll ignore the output path if we already have another project tied to the IVsHierarchy.
+                // IVsIntellisenseProjects are usually used for contained language cases, which means these projects
+                // don't have any real
+                // output path that we should consider. Since those point to the same IVsHierarchy as another
+                // project, we end up with two projects
+                // with the same output path, which potentially breaks conversion of metadata references to project
+                // references. However they're
+                // also used for database projects and a few other cases where there there isn't a "primary"
+                // IVsHierarchy.
+                // As a heuristic here we'll ignore the output path if we already have another project tied to the
+                // IVsHierarchy.
                 foreach (var projectId in Workspace.CurrentSolution.ProjectIds)
                 {
                     if (Workspace.GetHierarchy(projectId) == hierarchy)
@@ -369,8 +374,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         /// <summary>
         /// Map of folder item IDs in the workspace to the string version of their path.
         /// </summary>
-        /// <remarks>Using item IDs as a key like this in a long-lived way is considered unsupported by CPS and other
-        /// IVsHierarchy providers, but this code (which is fairly old) still makes the assumptions anyways.</remarks>
+        /// <remarks>Using item IDs as a key like this in a long-lived way is considered unsupported by CPS
+        // and other
+        /// IVsHierarchy providers, but this code (which is fairly old) still makes the assumptions
+        // anyways.</remarks>
         private readonly Dictionary<uint, ImmutableArray<string>> _folderNameMap = new();
 
         private ImmutableArray<string> GetFolderNamesForDocument(uint documentItemID)
@@ -448,11 +455,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 == VSConstants.S_OK
             )
             {
-                // For 'Shared' projects, IVSHierarchy returns a hierarchy item with < character in its name (i.e. <SharedProjectName>)
-                // as a child of the root item. There is no such item in the 'visual' hierarchy in solution explorer and no such folder
-                // is present on disk either. Since this is not a real 'folder', we exclude it from the contents of Document.Folders.
-                // Note: The parent of the hierarchy item that contains < character in its name is VSITEMID.Root. So we don't need to
-                // worry about accidental propagation out of the Shared project to any containing 'Solution' folders - the check for
+                // For 'Shared' projects, IVSHierarchy returns a hierarchy item with < character in its name (i.e.
+                // <SharedProjectName>)
+                // as a child of the root item. There is no such item in the 'visual' hierarchy in solution explorer
+                // and no such folder
+                // is present on disk either. Since this is not a real 'folder', we exclude it from the contents of
+                // Document.Folders.
+                // Note: The parent of the hierarchy item that contains < character in its name is VSITEMID.Root. So
+                // we don't need to
+                // worry about accidental propagation out of the Shared project to any containing 'Solution' folders
+                // - the check for
                 // VSITEMID.Root below already takes care of that.
                 var name = (string)nameObj;
                 if (!name.StartsWith("<", StringComparison.OrdinalIgnoreCase))
@@ -482,11 +494,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         }
 
         /// <summary>
-        /// Get the value of "rootnamespace" property of the project ("" if not defined, which means global namespace),
+        /// Get the value of "rootnamespace" property of the project ("" if not defined, which means global
+        // namespace),
         /// or null if it is unknown or not applicable.
         /// </summary>
         /// <remarks>
-        /// This property has different meaning between C# and VB, each project type can decide how to interpret the value.
+        /// This property has different meaning between C# and VB, each project type can decide how to
+        // interpret the value.
         /// </remarks>>
         private static string GetRootNamespacePropertyValue(IVsHierarchy hierarchy)
         {
@@ -503,7 +517,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             // declared in the compilation.
             //
             // Unfortunately, although being different concepts, default namespace and root namespace are almost
-            // used interchangeably in VS. For example, (1) the value is define in "rootnamespace" property in project
+            // used interchangeably in VS. For example, (1) the value is define in "rootnamespace" property in
+            // project
             // files and, (2) the property name we use to call into hierarchy below to retrieve the value is
             // called "DefaultNamespace".
 

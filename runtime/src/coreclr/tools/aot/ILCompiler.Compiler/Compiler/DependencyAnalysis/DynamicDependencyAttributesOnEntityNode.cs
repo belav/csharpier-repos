@@ -18,7 +18,8 @@ namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
     /// Computes the list of dependencies from DynamicDependencyAttribute.
-    /// https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.dynamicdependencyattribute
+    ///
+    // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.dynamicdependencyattribute
     /// </summary>
     public class DynamicDependencyAttributesOnEntityNode : DependencyNodeCore<NodeFactory>
     {
@@ -127,7 +128,8 @@ namespace ILCompiler.DependencyAnalysis
 
             static MetadataType Linkerify(TypeDesc type)
             {
-                // IL Linker compatibility: illink will call Resolve() that will strip parameter types and genericness
+                // IL Linker compatibility: illink will call Resolve() that will strip parameter types and
+                // genericness
                 // and operate on the definition.
                 while (type.IsParameterizedType)
                     type = ((ParameterizedType)type).ParameterType;

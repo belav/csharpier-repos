@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * TEST:        ToFromIntPtrTest
- * DESCRIPTION: Added ToIntPtr and FromIntPtr methods to adhere to FXCop rule "OperatorOverloadsHaveNamedAlternativeMethods".
- *              See also Casting.cs test.
- */
+* TEST:        ToFromIntPtrTest
+* DESCRIPTION: Added ToIntPtr and FromIntPtr methods to adhere to FXCop rule
+"OperatorOverloadsHaveNamedAlternativeMethods".
+*              See also Casting.cs test.
+*/
 
 using System;
 using System.Runtime.InteropServices;

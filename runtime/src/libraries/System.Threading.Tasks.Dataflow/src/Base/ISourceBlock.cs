@@ -16,27 +16,32 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Threading.Tasks.Dataflow
 {
     /// <summary>Represents a dataflow block that is a source of data.</summary>
-    /// <typeparam name="TOutput">Specifies the type of data supplied by the <see cref="ISourceBlock{TOutput}"/>.</typeparam>
+    /// <typeparam name="TOutput">Specifies the type of data supplied by the <see
+    // cref="ISourceBlock{TOutput}"/>.</typeparam>
     public interface ISourceBlock<out TOutput> : IDataflowBlock
     {
         // IMPLEMENT IMPLICITLY
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
         IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions);
 
         // IMPLEMENT EXPLICITLY
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
         TOutput? ConsumeMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target,
             out bool messageConsumed
         );
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
         bool ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target);
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
         void ReleaseReservation(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target);
     }
 }

@@ -37,7 +37,8 @@ namespace System.Data.EntityClient
         public static readonly EntityProviderFactory Instance = new EntityProviderFactory();
 
         /// <summary>
-        /// Constructs the EntityProviderFactory object, this is private as users shouldn't create it directly
+        /// Constructs the EntityProviderFactory object, this is private as users shouldn't create it
+        // directly
         /// </summary>
         private EntityProviderFactory() { }
 

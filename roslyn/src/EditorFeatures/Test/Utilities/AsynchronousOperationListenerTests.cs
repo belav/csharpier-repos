@@ -337,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             );
             secondTask.CompletesAsyncOperation(asyncToken2);
 
-            // give it two signals since second one might not have started when WaitTask.Wait is called - race condition
+            // give it two signals since second one might not have started when WaitTask.Wait is called - race
+            // condition
             Wait(listener, signal1, signal2);
 
             Assert.True(firstDone, "First didn't finish");

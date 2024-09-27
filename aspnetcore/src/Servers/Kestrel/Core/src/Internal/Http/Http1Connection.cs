@@ -528,7 +528,8 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         Path = string.Empty;
         QueryString = string.Empty;
-        // Clear parsedData for path, queryString and absolute target as we won't check it if we come via this path again,
+        // Clear parsedData for path, queryString and absolute target as we won't check it if we come via
+        // this path again,
         // an setting to null is fast as it doesn't need to use a GC write barrier.
         _parsedPath = _parsedQueryString = null;
         _parsedAbsoluteRequestTarget = null;
@@ -820,7 +821,8 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         }
         else if (RequestTimedOut)
         {
-            // In this case, there is an ongoing request but the start line/header parsing has timed out, so send
+            // In this case, there is an ongoing request but the start line/header parsing has timed out, so
+            // send
             // a 408 response.
             KestrelBadHttpRequestException.Throw(RequestRejectionReason.RequestHeadersTimeout);
         }
@@ -847,7 +849,8 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         // When TLS is used then ALPN is used to negotiate correct version.
         if (ConnectionFeatures.Get<ITlsHandshakeFeature>() == null)
         {
-            // If there is an unrecognized HTTP version, it is the first request on the connection, and the request line
+            // If there is an unrecognized HTTP version, it is the first request on the connection, and the
+            // request line
             // bytes matches the HTTP/2 preface request line bytes then log and return a HTTP/2 GOAWAY frame.
             if (
                 ex.Reason == RequestRejectionReason.UnrecognizedHTTPVersion

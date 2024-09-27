@@ -43,7 +43,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                     }
                     catch (Exception ex)
                     {
-                        //System.ArgumentNullException: {{ResLookup:;Value cannot be null.;ManagedString;mscorlib.dll;mscorlib;ArgumentNull_Generic}}
+                        //System.ArgumentNullException: {{ResLookup:;Value cannot be
+                        // null.;ManagedString;mscorlib.dll;mscorlib;ArgumentNull_Generic}}
                         Assert.Equal(input.Arguments[1].Value, ex.GetType().FullName);
                     }
                 }
@@ -71,7 +72,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                     }
                     catch (Exception ex)
                     {
-                        //System.ArgumentException: {{ResLookup:;The inclusive namespace prefix collection cannot contain null as one of the items.;ManagedString;System.Runtime.Serialization.dll;System.Runtime.Serialization;InvalidInclusivePrefixListCollection}}
+                        //System.ArgumentException: {{ResLookup:;The inclusive namespace prefix collection cannot contain
+                        // null as one of the
+                        // items.;ManagedString;System.Runtime.Serialization.dll;System.Runtime.Serialization;InvalidInclusivePrefixListCollection}}
                         Assert.Equal(input.Arguments[1].Value, ex.GetType().FullName);
                     }
                 }

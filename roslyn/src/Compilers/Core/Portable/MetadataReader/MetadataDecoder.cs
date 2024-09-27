@@ -276,7 +276,8 @@ namespace Microsoft.CodeAnalysis
                     break;
 
                 case SignatureTypeCode.TypeHandle:
-                    // Spec (6th edition): In II.23.2.12 and II.23.2.14, it is implied that the token in (CLASS | VALUETYPE) TypeDefOrRefOrSpecEncoded
+                    // Spec (6th edition): In II.23.2.12 and II.23.2.14, it is implied that the token in (CLASS |
+                    // VALUETYPE) TypeDefOrRefOrSpecEncoded
                     // can be a TypeSpec, when in fact it must be a TypeDef or TypeRef.
                     // See https://github.com/dotnet/roslyn/issues/7970
                     typeSymbol = GetSymbolForTypeHandleOrThrow(
@@ -571,7 +572,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             // tomat: Breaking change
-            // Metadata spec II.23.2.16 (Short form signatures) requires primitive types to be encoded using a short form:
+            // Metadata spec II.23.2.16 (Short form signatures) requires primitive types to be encoded using a
+            // short form:
             //
             //  "The general specification for signatures leaves some leeway in how to encode certain items. For
             //   example, it appears valid to encode a String as either
@@ -580,13 +582,17 @@ namespace Microsoft.CodeAnalysis
             //   Only the short form is valid."
             //
             // Native compilers accept long form signatures (actually IMetadataImport does).
-            // When a MemberRef is emitted the signature blob is copied from the metadata reference to the resulting assembly.
-            // Such assembly doesn't PEVerify but the CLR type loader matches the MemberRef with the original signature
+            // When a MemberRef is emitted the signature blob is copied from the metadata reference to the
+            // resulting assembly.
+            // Such assembly doesn't PEVerify but the CLR type loader matches the MemberRef with the original
+            // signature
             // (since they are identical copies).
             //
             // Roslyn doesn't copy signature blobs to the resulting assembly, it encodes the MemberRef using the
-            // correct short type codes. If we allowed long forms in a signature we would produce IL that PEVerifies but
-            // the type loader isn't able to load it since the MemberRef signature wouldn't match the original signature.
+            // correct short type codes. If we allowed long forms in a signature we would produce IL that
+            // PEVerifies but
+            // the type loader isn't able to load it since the MemberRef signature wouldn't match the original
+            // signature.
             //
             // Rather then producing broken code we report an error at compile time.
 
@@ -641,7 +647,8 @@ namespace Microsoft.CodeAnalysis
 
             Debug.Assert(result != null);
 
-            // Cache the result, but only if it is not a local type because the cache doesn't retain this information.
+            // Cache the result, but only if it is not a local type because the cache doesn't retain this
+            // information.
             if (cache != null && !isNoPiaLocalType)
             {
                 TypeSymbol result1 = cache.GetOrAdd(typeRef, result);
@@ -735,7 +742,8 @@ namespace Microsoft.CodeAnalysis
                 // TypeDef tokens are unique within Module.
                 // This cache makes lookup of top level types about twice as fast, about three times as fast if
                 // EmittedNameToTypeMap in LookupTopLevelType doesn't contain the name.
-                // It is likely that gain for nested types will be bigger because we don't cache names of nested types.
+                // It is likely that gain for nested types will be bigger because we don't cache names of nested
+                // types.
 
                 ConcurrentDictionary<TypeDefinitionHandle, TypeSymbol> cache =
                     GetTypeHandleToTypeMap();
@@ -929,10 +937,13 @@ namespace Microsoft.CodeAnalysis
                     break;
 
                 case HandleKind.TypeSpecification:
-                    // Section 23.2.7 of the CLI spec specifically says that this is not allowed (see comment on method),
+                    // Section 23.2.7 of the CLI spec specifically says that this is not allowed (see comment on
+                    // method),
                     // but, apparently, ilasm turns modopt(int32) into a TypeSpec.
-                    // In addition, managed C++ compiler can use constructed generic types as modifiers, for example Nullable<bool>, etc.
-                    // We will support only cases like these even though it looks like CLR allows any types that can be encoded through a TypeSpec.
+                    // In addition, managed C++ compiler can use constructed generic types as modifiers, for example
+                    // Nullable<bool>, etc.
+                    // We will support only cases like these even though it looks like CLR allows any types that can be
+                    // encoded through a TypeSpec.
 
                     BlobReader memoryReader =
                         this.Module.GetTypeSpecificationSignatureReaderOrThrow(
@@ -989,7 +1000,8 @@ namespace Microsoft.CodeAnalysis
             return type;
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the encoded local variable type is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded local variable type is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         internal ImmutableArray<LocalInfo<TypeSymbol>> DecodeLocalSignatureOrThrow(
             ref BlobReader signatureReader
@@ -1094,7 +1106,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the encoded local variable type is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded local variable type is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         internal LocalInfo<TypeSymbol> DecodeLocalVariableOrThrow(ref BlobReader signatureReader)
         {
@@ -1173,12 +1186,17 @@ namespace Microsoft.CodeAnalysis
             if (typeCode == SignatureTypeCode.TypeHandle)
             {
                 // TypeDefOrRefOrSpec encoded
-                // From the PortablePDB spec: https://github.com/dotnet/runtime/blob/main/src/libraries/System.Reflection.Metadata/specs/PortablePdb-Metadata.md#localconstant-table-0x34
-                // The encoding of the GeneralValue is determined based upon the type expressed by TypeDefOrRefOrSpecEncoded
-                // specified in GeneralConstant. GeneralValue for special types listed in the table below has to be present
+                // From the PortablePDB spec:
+                // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Reflection.Metadata/specs/PortablePdb-Metadata.md#localconstant-table-0x34
+                // The encoding of the GeneralValue is determined based upon the type expressed by
+                // TypeDefOrRefOrSpecEncoded
+                // specified in GeneralConstant. GeneralValue for special types listed in the table below has to be
+                // present
                 // and is encoded as specified.
-                // If the GeneralValue is not present the value of the constant is the default value of the type. If the type
-                // is a reference type the value is a null reference, if the type is a pointer type the value is a null pointer, etc.
+                // If the GeneralValue is not present the value of the constant is the default value of the type. If
+                // the type
+                // is a reference type the value is a null reference, if the type is a pointer type the value is a
+                // null pointer, etc.
                 bool refersToNoPiaLocalType;
                 type = GetSymbolForTypeHandleOrThrow(
                     sigReader.ReadTypeHandle(),
@@ -1383,7 +1401,8 @@ namespace Microsoft.CodeAnalysis
             return DecodeLocalSignatureOrThrow(ref blobReader);
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the encoded parameter type is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded parameter type is
+        // invalid.</exception>
         private void DecodeParameterOrThrow(
             ref BlobReader signatureReader, /*out*/
             ref ParamInfo<TypeSymbol> info
@@ -1567,7 +1586,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Decodes attribute argument type from attribute blob (called FieldOrPropType in the spec).
         /// </summary>
-        /// <exception cref="UnsupportedSignatureContent">If the encoded argument type is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded argument type is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private void DecodeCustomAttributeFieldOrPropTypeOrThrow(
             ref BlobReader argReader,
@@ -1668,7 +1688,8 @@ namespace Microsoft.CodeAnalysis
             throw new UnsupportedSignatureContent();
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the encoded attribute argument is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded attribute argument is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private TypedConstant DecodeCustomAttributeFixedArgumentOrThrow(
             ITypeSymbolInternal type,
@@ -1715,7 +1736,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the encoded attribute argument is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded attribute argument is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private TypedConstant DecodeCustomAttributeElementOrThrow(
             ref BlobReader argReader,
@@ -1725,7 +1747,8 @@ namespace Microsoft.CodeAnalysis
         {
             if (typeCode == SerializationTypeCode.TaggedObject)
             {
-                // Spec: If the parameter kind is System.Object, the value stored represents the "boxed" instance of that value-type.
+                // Spec: If the parameter kind is System.Object, the value stored represents the "boxed" instance of
+                // that value-type.
                 SerializationTypeCode elementTypeCode;
                 TypeSymbol elementType;
                 DecodeCustomAttributeFieldOrPropTypeOrThrow(
@@ -1751,7 +1774,8 @@ namespace Microsoft.CodeAnalysis
             return DecodeCustomAttributePrimitiveElementOrThrow(ref argReader, typeCode, type);
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the encoded attribute argument is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded attribute argument is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private TypedConstant DecodeCustomAttributeElementArrayOrThrow(
             ref BlobReader argReader,
@@ -1787,7 +1811,8 @@ namespace Microsoft.CodeAnalysis
             return CreateArrayTypedConstant(arrayType, values.AsImmutableOrNull());
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the given <paramref name="typeCode"/> is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the given <paramref name="typeCode"/> is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private TypedConstant DecodeCustomAttributePrimitiveElementOrThrow(
             ref BlobReader argReader,
@@ -1917,7 +1942,8 @@ namespace Microsoft.CodeAnalysis
                 : TypedConstantKind.Primitive;
         }
 
-        /// <exception cref="UnsupportedSignatureContent">If the encoded named argument is invalid.</exception>
+        /// <exception cref="UnsupportedSignatureContent">If the encoded named argument is
+        // invalid.</exception>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         public (
             KeyValuePair<string, TypedConstant> nameValuePair,
@@ -1926,9 +1952,12 @@ namespace Microsoft.CodeAnalysis
             SerializationTypeCode elementTypeCode
         ) DecodeCustomAttributeNamedArgumentOrThrow(ref BlobReader argReader)
         {
-            // Ecma-335 23.3 - A NamedArg is simply a FixedArg preceded by information to identify which field or
-            // property it represents. [Note: Recall that the CLI allows fields and properties to have the same name; so
-            // we require a means to disambiguate such situations. end note] FIELD is the single byte 0x53. PROPERTY is
+            // Ecma-335 23.3 - A NamedArg is simply a FixedArg preceded by information to identify which field
+            // or
+            // property it represents. [Note: Recall that the CLI allows fields and properties to have the same
+            // name; so
+            // we require a means to disambiguate such situations. end note] FIELD is the single byte 0x53.
+            // PROPERTY is
             // the single byte 0x54.
 
             var kind = (CustomAttributeNamedArgumentKind)argReader.ReadCompressedInteger();
@@ -2434,14 +2463,17 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Search for the <typeparamref name="MethodSymbol"/> corresponding to the given MethodDef token. Search amongst
+        /// Search for the <typeparamref name="MethodSymbol"/> corresponding to the given MethodDef token.
+        // Search amongst
         /// the supertypes (classes and interfaces) of a designated type.
         /// </summary>
         /// <remarks>
-        /// Generally, the type will be a type that explicitly implements an interface and the method will be the
+        /// Generally, the type will be a type that explicitly implements an interface and the method will
+        // be the
         /// implemented method (i.e. on the interface).
         /// </remarks>
-        /// <param name="searchTypeDef">TypeDef token of the type from which the search should begin.</param>
+        /// <param name="searchTypeDef">TypeDef token of the type from which the search should
+        // begin.</param>
         /// <param name="targetMethodDef">MethodDef token of the target method.</param>
         /// <returns>Corresponding <typeparamref name="MethodSymbol"/> or null, if none is found.</returns>
         private MethodSymbol FindMethodSymbolInSuperType(
@@ -2453,9 +2485,12 @@ namespace Microsoft.CodeAnalysis
             {
                 // We're using queues (i.e. BFS), rather than stacks (i.e. DFS), because we expect the common case
                 // to be implementing a method on an immediate supertype, rather than a remote ancestor.
-                // We're using more than one queue for two reasons: 1) some of our TypeDef tokens come directly from the
-                // metadata tables and we'd prefer not to manipulate the corresponding symbol objects; 2) we bump TypeDefs
-                // to the front of the search order (i.e. ahead of symbols) because a MethodDef can correspond to a TypeDef
+                // We're using more than one queue for two reasons: 1) some of our TypeDef tokens come directly from
+                // the
+                // metadata tables and we'd prefer not to manipulate the corresponding symbol objects; 2) we bump
+                // TypeDefs
+                // to the front of the search order (i.e. ahead of symbols) because a MethodDef can correspond to a
+                // TypeDef
                 // but not to a type ref (i.e. symbol).
                 Queue<TypeDefinitionHandle> typeDefsToSearch = new Queue<TypeDefinitionHandle>();
                 Queue<TypeSymbol> typeSymbolsToSearch = new Queue<TypeSymbol>();
@@ -2532,8 +2567,10 @@ namespace Microsoft.CodeAnalysis
         /// Enqueue the interfaces implemented and the type extended by a given TypeDef.
         /// </summary>
         /// <param name="typeDefsToSearch">Queue of TypeDefs to search.</param>
-        /// <param name="typeSymbolsToSearch">Queue of TypeSymbols (representing typeRefs to search).</param>
-        /// <param name="searchTypeDef">Handle of the TypeDef for which we want to enqueue supertypes.</param>
+        /// <param name="typeSymbolsToSearch">Queue of TypeSymbols (representing typeRefs to
+        // search).</param>
+        /// <param name="searchTypeDef">Handle of the TypeDef for which we want to enqueue
+        // supertypes.</param>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private void EnqueueTypeDefInterfacesAndBaseTypeOrThrow(
             Queue<TypeDefinitionHandle> typeDefsToSearch,
@@ -2591,7 +2628,8 @@ namespace Microsoft.CodeAnalysis
         /// Enqueue the interfaces implemented and the type extended by a given TypeDef.
         /// </summary>
         /// <param name="typeDefsToSearch">Queue of TypeDefs to search.</param>
-        /// <param name="typeSymbolsToSearch">Queue of TypeSymbols (representing typeRefs to search).</param>
+        /// <param name="typeSymbolsToSearch">Queue of TypeSymbols (representing typeRefs to
+        // search).</param>
         /// <param name="typeSymbol">Symbol for which we want to enqueue supertypes.</param>
         protected abstract void EnqueueTypeSymbolInterfacesAndBaseTypes(
             Queue<TypeDefinitionHandle> typeDefsToSearch,
@@ -2603,7 +2641,8 @@ namespace Microsoft.CodeAnalysis
         /// Enqueue the given type as either a def or a ref.
         /// </summary>
         /// <param name="typeDefsToSearch">Queue of TypeDefs to search.</param>
-        /// <param name="typeSymbolsToSearch">Queue of TypeSymbols (representing typeRefs to search).</param>
+        /// <param name="typeSymbolsToSearch">Queue of TypeSymbols (representing typeRefs to
+        // search).</param>
         /// <param name="typeSymbol">Symbol to enqueue.</param>
         protected abstract void EnqueueTypeSymbol(
             Queue<TypeDefinitionHandle> typeDefsToSearch,
@@ -2638,8 +2677,10 @@ namespace Microsoft.CodeAnalysis
         /// searching for the name and signature.
         /// </summary>
         /// <param name="memberRef">A MemberRef token for a method.</param>
-        /// <param name="implementingTypeSymbol">Scope the search to supertypes of the implementing type.</param>
-        /// <param name="methodsOnly">True to only return method symbols, null if the token resolves to a field.</param>
+        /// <param name="implementingTypeSymbol">Scope the search to supertypes of the implementing
+        // type.</param>
+        /// <param name="methodsOnly">True to only return method symbols, null if the token resolves to a
+        // field.</param>
         /// <returns>The corresponding MethodSymbol or null.</returns>
         internal abstract Symbol GetSymbolForMemberRef(
             MemberReferenceHandle memberRef,
@@ -2749,7 +2790,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns a symbol that given token resolves to or null of the token represents an entity that isn't represented by a symbol,
+        /// Returns a symbol that given token resolves to or null of the token represents an entity that
+        // isn't represented by a symbol,
         /// such as vararg MemberRef.
         /// </summary>
         internal Symbol GetSymbolForILToken(EntityHandle token)
@@ -2916,7 +2958,8 @@ namespace Microsoft.CodeAnalysis
         /// True if differences in IsByRef for parameters should be treated as significant.
         /// </param>
         /// <param name="compareReturnType">
-        /// True if differences in return type (or value parameter for setter) should be treated as significant.
+        /// True if differences in return type (or value parameter for setter) should be treated as
+        // significant.
         /// </param>
         /// <returns>True if the accessor signature is appropriate for the containing property.</returns>
         internal bool DoPropertySignaturesMatch(

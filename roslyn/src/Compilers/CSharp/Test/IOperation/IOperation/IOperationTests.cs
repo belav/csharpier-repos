@@ -771,8 +771,10 @@ class C
             var syntaxTree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
-            // We want to get the IOperation for the { throw new Exception(); } first, and then for the containing catch block, to
-            // force the semantic model to bind the inner first. It should reuse that inner block when binding the outer catch.
+            // We want to get the IOperation for the { throw new Exception(); } first, and then for the
+            // containing catch block, to
+            // force the semantic model to bind the inner first. It should reuse that inner block when binding
+            // the outer catch.
 
             var catchBlock = syntaxTree
                 .GetRoot()
@@ -835,8 +837,10 @@ public class C
 
             for (int i = 0; i < 5; i++)
             {
-                // We had a race condition where the first attempt to access a field initializer could cause an assert to be hit,
-                // and potentially more work to be done than was necessary. So we kick off a parallel task to attempt to
+                // We had a race condition where the first attempt to access a field initializer could cause an
+                // assert to be hit,
+                // and potentially more work to be done than was necessary. So we kick off a parallel task to
+                // attempt to
                 // get info on a bunch of different threads at the same time and reproduce the issue.
                 var model = comp.GetSemanticModel(tree);
                 const int nTasks = 10;

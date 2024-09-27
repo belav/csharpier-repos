@@ -27,14 +27,17 @@ public class ComponentStatePersistenceManager
     }
 
     /// <summary>
-    /// Gets the <see cref="ComponentStatePersistenceManager"/> associated with the <see cref="ComponentStatePersistenceManager"/>.
+    /// Gets the <see cref="ComponentStatePersistenceManager"/> associated with the <see
+    // cref="ComponentStatePersistenceManager"/>.
     /// </summary>
     public PersistentComponentState State { get; }
 
     /// <summary>
-    /// Restores the component application state from the given <see cref="IPersistentComponentStateStore"/>.
+    /// Restores the component application state from the given <see
+    // cref="IPersistentComponentStateStore"/>.
     /// </summary>
-    /// <param name="store">The <see cref="IPersistentComponentStateStore"/> to restore the application state from.</param>
+    /// <param name="store">The <see cref="IPersistentComponentStateStore"/> to restore the application
+    // state from.</param>
     /// <returns>A <see cref="Task"/> that will complete when the state has been restored.</returns>
     public async Task RestoreStateAsync(IPersistentComponentStateStore store)
     {
@@ -43,9 +46,11 @@ public class ComponentStatePersistenceManager
     }
 
     /// <summary>
-    /// Persists the component application state into the given <see cref="IPersistentComponentStateStore"/>.
+    /// Persists the component application state into the given <see
+    // cref="IPersistentComponentStateStore"/>.
     /// </summary>
-    /// <param name="store">The <see cref="IPersistentComponentStateStore"/> to restore the application state from.</param>
+    /// <param name="store">The <see cref="IPersistentComponentStateStore"/> to restore the application
+    // state from.</param>
     /// <param name="renderer">The <see cref="Renderer"/> that components are being rendered.</param>
     /// <returns>A <see cref="Task"/> that will complete when the state has been restored.</returns>
     public Task PersistStateAsync(IPersistentComponentStateStore store, Renderer renderer)
@@ -141,8 +146,10 @@ public class ComponentStatePersistenceManager
             {
                 // The callback does not have an associated render mode and we are in a multi-store scenario.
                 // Otherwise, in a single store scenario, we just run the callback.
-                // If the registration callback is null, it's because it was associated with a component and we couldn't infer
-                // its render mode, which means is an SSR only component and we don't need to persist its state at all.
+                // If the registration callback is null, it's because it was associated with a component and we
+                // couldn't infer
+                // its render mode, which means is an SSR only component and we don't need to persist its state at
+                // all.
                 continue;
             }
 

@@ -2263,7 +2263,8 @@ static class E
 }";
             var compilation = (Compilation)CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics(
-                // (8,11): error CS0311: The type 'B' cannot be used as type parameter 'T' in the generic type or method 'E.F<T>(T)'. There is no implicit reference conversion from 'B' to 'A'.
+                // (8,11): error CS0311: The type 'B' cannot be used as type parameter 'T' in the generic type or
+                // method 'E.F<T>(T)'. There is no implicit reference conversion from 'B' to 'A'.
                 //         b.F();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "F")
                     .WithArguments("E.F<T>(T)", "A", "T", "B")
@@ -2323,7 +2324,8 @@ static class E
 }";
             compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics(
-                // (8,11): error CS0311: The type 'B' cannot be used as type parameter 'T' in the generic type or method 'E.F<T>(T)'. There is no implicit reference conversion from 'B' to 'A'.
+                // (8,11): error CS0311: The type 'B' cannot be used as type parameter 'T' in the generic type or
+                // method 'E.F<T>(T)'. There is no implicit reference conversion from 'B' to 'A'.
                 //         b.F();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "F")
                     .WithArguments("E.F<T>(T)", "A", "T", "B")
@@ -2995,7 +2997,8 @@ namespace N
             var model = compilation.GetSemanticModel(tree);
             var info = model.GetSemanticInfoSummary(rightName);
             Assert.NotNull(info.Type);
-            // make sure that the model info for the name 'D' in this context tells us about the type 'N.D' not the type 'D'
+            // make sure that the model info for the name 'D' in this context tells us about the type 'N.D' not
+            // the type 'D'
             Assert.Equal("D", info.Type.Name);
             Assert.Equal("N", info.Type.ContainingNamespace.Name);
         }
@@ -5718,8 +5721,10 @@ public class S
             var structSymbol = model.GetDeclaredSymbol(structDecl);
             var interfaceSymbol = model.GetDeclaredSymbol(interfaceDecl);
 
-            // The missing identifier of the struct declaration is contained in both declaration spans (since it has width zero).
-            // We used to just pick the first matching span, but now we keep looking until we find a "good" match.
+            // The missing identifier of the struct declaration is contained in both declaration spans (since it
+            // has width zero).
+            // We used to just pick the first matching span, but now we keep looking until we find a "good"
+            // match.
             Assert.NotEqual(structSymbol, interfaceSymbol);
             Assert.Equal(TypeKind.Struct, structSymbol.TypeKind);
             Assert.Equal(TypeKind.Interface, interfaceSymbol.TypeKind);
@@ -5995,12 +6000,14 @@ class C
                 Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(Alice: 1, Bob: null)")
                     .WithArguments("System.ValueTuple`2")
                     .WithLocation(6, 31),
-                // (6,32): warning CS8123: The tuple element name 'Alice' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // (6,32): warning CS8123: The tuple element name 'Alice' is ignored because a different name or no
+                // name is specified by the target type '(short, string)'.
                 //         (short X, string Y) = (Alice: 1, Bob: null);
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "Alice: 1")
                     .WithArguments("Alice", "(short, string)")
                     .WithLocation(6, 32),
-                // (6,42): warning CS8123: The tuple element name 'Bob' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // (6,42): warning CS8123: The tuple element name 'Bob' is ignored because a different name or no
+                // name is specified by the target type '(short, string)'.
                 //         (short X, string Y) = (Alice: 1, Bob: null);
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "Bob: null")
                     .WithArguments("Bob", "(short, string)")
@@ -6051,12 +6058,14 @@ namespace System
 
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (6,32): warning CS8123: The tuple element name 'Alice' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // (6,32): warning CS8123: The tuple element name 'Alice' is ignored because a different name or no
+                // name is specified by the target type '(short, string)'.
                 //         (short X, string Y) = (Alice: 1, Bob: null);
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "Alice: 1")
                     .WithArguments("Alice", "(short, string)")
                     .WithLocation(6, 32),
-                // (6,42): warning CS8123: The tuple element name 'Bob' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // (6,42): warning CS8123: The tuple element name 'Bob' is ignored because a different name or no
+                // name is specified by the target type '(short, string)'.
                 //         (short X, string Y) = (Alice: 1, Bob: null);
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "Bob: null")
                     .WithArguments("Bob", "(short, string)")

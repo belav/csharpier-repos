@@ -182,7 +182,7 @@ namespace MonoTests.System.Web.UI.WebControls
             SqlDataSource ds = new SqlDataSource();
             SqlViewPoker sql = new SqlViewPoker(ds, "DefaultView", null);
 
-            /* XXX test parameters */
+/* XXX test parameters */
 
             sql.CancelSelectOnNullParameter = false;
             sql.ConflictDetection = ConflictOptions.CompareAllValues;
@@ -294,7 +294,7 @@ namespace MonoTests.System.Web.UI.WebControls
             sql.DataSourceViewChanged += new EventHandler(sql_DataSourceViewChanged);
             sql.DoOnDataSourceViewChanged();
             eventAssert.IsTrue("SqlDataSourceView"); // Assert include counter the first is zero
-            /* XXX test parameters */
+/* XXX test parameters */
 
             sql.CancelSelectOnNullParameter = false;
             eventAssert.IsTrue("SqlDataSourceView");

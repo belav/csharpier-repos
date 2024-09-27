@@ -13,7 +13,8 @@ using Microsoft.AspNetCore.Internal;
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
-/// Provides correct escaping for Path and PathBase values when needed to reconstruct a request or redirect URI string
+/// Provides correct escaping for Path and PathBase values when needed to reconstruct a request or
+// redirect URI string
 /// </summary>
 [TypeConverter(typeof(PathStringConverter))]
 [DebuggerDisplay("{Value}")]
@@ -62,7 +63,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Provides the path string escaped in a way which is correct for combining into the URI representation.
+    /// Provides the path string escaped in a way which is correct for combining into the URI
+    // representation.
     /// </summary>
     /// <returns>The escaped path value</returns>
     public override string ToString()
@@ -71,7 +73,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Provides the path string escaped in a way which is correct for combining into the URI representation.
+    /// Provides the path string escaped in a way which is correct for combining into the URI
+    // representation.
     /// </summary>
     /// <returns>The escaped path value</returns>
     public string ToUriComponent()
@@ -122,7 +125,8 @@ public readonly struct PathString : IEquatable<PathString>
                 }
                 else
                 {
-                    // We just saw a character we don't want to escape. It's likely there are more, do a vectorized search.
+                    // We just saw a character we don't want to escape. It's likely there are more, do a vectorized
+                    // search.
                     var charsToSkip = value.AsSpan(i).IndexOfAnyExcept(s_validPathChars);
 
                     if (charsToSkip < 0)
@@ -177,7 +181,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Returns an PathString given the path as it is escaped in the URI format. The string MUST NOT contain any
+    /// Returns an PathString given the path as it is escaped in the URI format. The string MUST NOT
+    // contain any
     /// value that is not a path.
     /// </summary>
     /// <param name="uriComponent">The escaped path as it appears in the URI format.</param>
@@ -202,7 +207,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Returns an PathString given the path as from a Uri object. Relative Uri objects are not supported.
+    /// Returns an PathString given the path as from a Uri object. Relative Uri objects are not
+    // supported.
     /// </summary>
     /// <param name="uri">The Uri object</param>
     /// <returns>The resulting PathString</returns>
@@ -221,7 +227,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified <see cref="PathString"/>.
+    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified
+    // <see cref="PathString"/>.
     /// </summary>
     /// <param name="other">The <see cref="PathString"/> to compare.</param>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
@@ -231,11 +238,13 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified <see cref="PathString"/> when compared
+    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified
+    // <see cref="PathString"/> when compared
     /// using the specified comparison option.
     /// </summary>
     /// <param name="other">The <see cref="PathString"/> to compare.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how this <see cref="PathString"/> and value are compared.</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how this <see
+    // cref="PathString"/> and value are compared.</param>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(PathString other, StringComparison comparisonType)
     {
@@ -249,7 +258,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified <see cref="PathString"/> and returns
+    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified
+    // <see cref="PathString"/> and returns
     /// the remaining segments.
     /// </summary>
     /// <param name="other">The <see cref="PathString"/> to compare.</param>
@@ -261,11 +271,13 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified <see cref="PathString"/> when compared
+    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified
+    // <see cref="PathString"/> when compared
     /// using the specified comparison option and returns the remaining segments.
     /// </summary>
     /// <param name="other">The <see cref="PathString"/> to compare.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how this <see cref="PathString"/> and value are compared.</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how this <see
+    // cref="PathString"/> and value are compared.</param>
     /// <param name="remaining">The remaining segments after the match.</param>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
     public bool StartsWithSegments(
@@ -289,7 +301,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified <see cref="PathString"/> and returns
+    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified
+    // <see cref="PathString"/> and returns
     /// the matched and remaining segments.
     /// </summary>
     /// <param name="other">The <see cref="PathString"/> to compare.</param>
@@ -311,11 +324,13 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified <see cref="PathString"/> when compared
+    /// Determines whether the beginning of this <see cref="PathString"/> instance matches the specified
+    // <see cref="PathString"/> when compared
     /// using the specified comparison option and returns the matched and remaining segments.
     /// </summary>
     /// <param name="other">The <see cref="PathString"/> to compare.</param>
-    /// <param name="comparisonType">One of the enumeration values that determines how this <see cref="PathString"/> and value are compared.</param>
+    /// <param name="comparisonType">One of the enumeration values that determines how this <see
+    // cref="PathString"/> and value are compared.</param>
     /// <param name="matched">The matched segments with the original casing in the source value.</param>
     /// <param name="remaining">The remaining segments after the match.</param>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
@@ -369,7 +384,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Compares this PathString value to another value. The default comparison is StringComparison.OrdinalIgnoreCase.
+    /// Compares this PathString value to another value. The default comparison is
+    // StringComparison.OrdinalIgnoreCase.
     /// </summary>
     /// <param name="other">The second PathString for comparison.</param>
     /// <returns>True if both PathString values are equal</returns>
@@ -394,7 +410,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Compares this PathString value to another value. The default comparison is StringComparison.OrdinalIgnoreCase.
+    /// Compares this PathString value to another value. The default comparison is
+    // StringComparison.OrdinalIgnoreCase.
     /// </summary>
     /// <param name="obj">The second PathString for comparison.</param>
     /// <returns>True if both PathString values are equal</returns>
@@ -408,7 +425,8 @@ public readonly struct PathString : IEquatable<PathString>
     }
 
     /// <summary>
-    /// Returns the hash code for the PathString value. The hash code is provided by the OrdinalIgnoreCase implementation.
+    /// Returns the hash code for the PathString value. The hash code is provided by the
+    // OrdinalIgnoreCase implementation.
     /// </summary>
     /// <returns>The hash code</returns>
     public override int GetHashCode()

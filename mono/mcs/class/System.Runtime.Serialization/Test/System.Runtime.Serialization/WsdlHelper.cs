@@ -40,14 +40,14 @@ namespace MonoTests.System.Runtime.Serialization
 {
     public static class WsdlHelper
     {
-        /*
-         * This reads a normal .wsdl file from an embedded resource.
-         *
-         * You can simply fetch them from your server using
-         * 'curl http://yourserver/YourService.svc?singleWsdl > YourService.wsdl',
-         * add the .wsdl file to Test/Resources/WSDL and add it to `TEST_RESOURCE_FILES'
-         * in the Makefile.
-         */
+/*
+* This reads a normal .wsdl file from an embedded resource.
+*
+* You can simply fetch them from your server using
+* 'curl http://yourserver/YourService.svc?singleWsdl > YourService.wsdl',
+* add the .wsdl file to Test/Resources/WSDL and add it to `TEST_RESOURCE_FILES'
+* in the Makefile.
+*/
 
         public static MetadataSet GetMetadataSet(string name)
         {

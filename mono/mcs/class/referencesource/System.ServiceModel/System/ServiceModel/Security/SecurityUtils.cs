@@ -488,7 +488,8 @@ namespace System.ServiceModel.Security
             {
                 return false;
             }
-            // S-1-5-82 is the prefix for the sid that represents the identity that IIS 7.5 Apppool thread runs under.
+            // S-1-5-82 is the prefix for the sid that represents the identity that IIS 7.5 Apppool thread runs
+            // under.
             return (
                 sid.IsWellKnown(WellKnownSidType.LocalSystemSid)
                 || sid.IsWellKnown(WellKnownSidType.NetworkServiceSid)
@@ -814,7 +815,8 @@ namespace System.ServiceModel.Security
             // Code cloned from System.Xml.XmlDictionaryReder.
             byte[][] buffers = new byte[32][];
             byte[] buffer;
-            // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when converting text
+            // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when
+            // converting text
             int count = 384;
             int bufferCount = 0;
             int totalRead = 0;
@@ -1100,9 +1102,11 @@ namespace System.ServiceModel.Security
                     return true;
                 }
 
-                // One of KeyAgreement, KeyEncipherment or DigitalSignature need to be allowed depending on the cipher
+                // One of KeyAgreement, KeyEncipherment or DigitalSignature need to be allowed depending on the
+                // cipher
                 // being used. See RFC 5246 section 7.4.6 for more details.
-                // Additionally, according to msdn docs for PFXImportCertStore, the key specification is set to AT_KEYEXCHANGE
+                // Additionally, according to msdn docs for PFXImportCertStore, the key specification is set to
+                // AT_KEYEXCHANGE
                 // when the data encipherment usage is set.
                 canDoKeyExchange =
                     (
@@ -1369,7 +1373,8 @@ namespace System.ServiceModel.Security
         }
 
         /// <SecurityNote>
-        /// Critical - Calls an UnsafeNativeMethod and a Critical method (GetFipsAlgorithmPolicyKeyFromRegistry)
+        /// Critical - Calls an UnsafeNativeMethod and a Critical method
+        // (GetFipsAlgorithmPolicyKeyFromRegistry)
         /// Safe - processes the return and just returns a bool, which is safe
         /// </SecurityNote>
         internal static bool IsChannelBindingDisabled
@@ -1430,7 +1435,8 @@ namespace System.ServiceModel.Security
                 return false;
             }
 
-            // channel binding of OperationSupportingTokenParameters, OptionalEndpointSupportingTokenParameters, or OptionalOperationSupportingTokenParameters
+            // channel binding of OperationSupportingTokenParameters, OptionalEndpointSupportingTokenParameters,
+            // or OptionalOperationSupportingTokenParameters
             // is not supported in Win7
             if (
                 AreSecurityTokenParametersSuitableForChannelBinding(
@@ -2238,7 +2244,8 @@ namespace System.ServiceModel.Security
             }
         }
 
-        // match the RST with the endpoint filters in case there is at least 1 asymmetric signature in the message
+        // match the RST with the endpoint filters in case there is at least 1 asymmetric signature in the
+        // message
         internal static bool ShouldMatchRstWithEndpointFilter(SecurityBindingElement sbe)
         {
             foreach (
@@ -2407,12 +2414,14 @@ namespace System.ServiceModel.Security
             NetworkCredential credential
         )
         {
-            // because of VSW 564452, we dont use CredentialCache.DefaultNetworkCredentials in our OM. Instead we
+            // because of VSW 564452, we dont use CredentialCache.DefaultNetworkCredentials in our OM. Instead
+            // we
             // use an empty NetworkCredential to denote the default credentials
             if (NetworkCredentialHelper.IsNullOrEmpty(credential))
             {
                 // FYI: this will fail with SecurityException in PT due to Demand for EnvironmentPermission.
-                // Typically a PT app should not have access to DefaultNetworkCredentials. If there is a valid reason,
+                // Typically a PT app should not have access to DefaultNetworkCredentials. If there is a valid
+                // reason,
                 // see UnsafeGetDefaultNetworkCredentials.
                 return CredentialCache.DefaultNetworkCredentials;
             }
@@ -2951,7 +2960,8 @@ namespace System.ServiceModel.Security
             {
                 EncryptedKeyIdentifierClause keyClause =
                     (EncryptedKeyIdentifierClause)keyIdentifierClause;
-                // PreSharp Bug: Parameter 'keyClause' to this public method must be validated: A null-dereference can occur here.
+                // PreSharp Bug: Parameter 'keyClause' to this public method must be validated: A null-dereference
+                // can occur here.
 #pragma warning suppress 56506 // keyClause will not be null due to the if condition above.
                 for (int i = 0; i < keyClause.EncryptingKeyIdentifier.Count; i++)
                 {

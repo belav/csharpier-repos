@@ -866,7 +866,8 @@ namespace LibraryImportGenerator.UnitTests
         /// <summary>
         /// Declaration with parameters with MarshalAs.
         /// </summary>
-        //public static string MarshalUsingParametersAndModifiers(string typeName, string nativeTypeName, string preDeclaration = "") => $$"""
+        //public static string MarshalUsingParametersAndModifiers(string typeName, string nativeTypeName,
+        // string preDeclaration = "") => $$"""
         //    using System.Runtime.InteropServices;
         //    using System.Runtime.InteropServices.Marshalling;
         //    {{preDeclaration}}

@@ -10,7 +10,8 @@ using System.IO;
 namespace System.Text.RegularExpressions.Symbolic
 {
 #if DEBUG
-    /// <summary>Utility for generating unicode category ranges and corresponing binary decision diagrams.</summary>
+    /// <summary>Utility for generating unicode category ranges and corresponing binary decision
+    // diagrams.</summary>
     [ExcludeFromCodeCoverage(Justification = "Used from tests to generate src data files")]
     internal static class UnicodeCategoryRangesGenerator
     {

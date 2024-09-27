@@ -35,33 +35,33 @@
 
 
 /* The tar format and its POSIX successor PAX have a long history which makes for compatability
-   issues when creating and reading files.
-   
-   This is further complicated by a large number of programs with variations on formats
-   One common issue is the handling of names longer than 100 characters.
-   GNU style long names are currently supported.
+issues when creating and reading files.
+
+This is further complicated by a large number of programs with variations on formats
+One common issue is the handling of names longer than 100 characters.
+GNU style long names are currently supported.
 
 This is the ustar (Posix 1003.1) header.
 
 struct header
 {
-    char t_name[100];          //   0 Filename
-    char t_mode[8];            // 100 Permissions
-    char t_uid[8];             // 108 Numerical User ID
-    char t_gid[8];             // 116 Numerical Group ID
-    char t_size[12];           // 124 Filesize
-    char t_mtime[12];          // 136 st_mtime
-    char t_chksum[8];          // 148 Checksum
-    char t_typeflag;           // 156 Type of File
-    char t_linkname[100];      // 157 Target of Links
-    char t_magic[6];           // 257 "ustar" or other...
-    char t_version[2];         // 263 Version fixed to 00
-    char t_uname[32];          // 265 User Name
-    char t_gname[32];          // 297 Group Name
-    char t_devmajor[8];        // 329 Major for devices
-    char t_devminor[8];        // 337 Minor for devices
-    char t_prefix[155];        // 345 Prefix for t_name
-    char t_mfill[12];          // 500 Filler up to 512
+char t_name[100];          //   0 Filename
+char t_mode[8];            // 100 Permissions
+char t_uid[8];             // 108 Numerical User ID
+char t_gid[8];             // 116 Numerical Group ID
+char t_size[12];           // 124 Filesize
+char t_mtime[12];          // 136 st_mtime
+char t_chksum[8];          // 148 Checksum
+char t_typeflag;           // 156 Type of File
+char t_linkname[100];      // 157 Target of Links
+char t_magic[6];           // 257 "ustar" or other...
+char t_version[2];         // 263 Version fixed to 00
+char t_uname[32];          // 265 User Name
+char t_gname[32];          // 297 Group Name
+char t_devmajor[8];        // 329 Major for devices
+char t_devminor[8];        // 337 Minor for devices
+char t_prefix[155];        // 345 Prefix for t_name
+char t_mfill[12];          // 500 Filler up to 512
 };
 
 */
@@ -264,7 +264,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         public readonly static string TMAGIC = "ustar ";
 
         /// <summary>
-        /// The magic tag representing an old GNU tar archive where version is included in magic and overwrites it
+        /// The magic tag representing an old GNU tar archive where version is included in magic and
+        // overwrites it
         /// </summary>
         public readonly static string GNU_TMAGIC = "ustar  ";
 
@@ -273,7 +274,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// Get/set the name for this tar entry.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when attempting to set the property to null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when attempting to set the property to
+        // null.</exception>
         public string Name
         {
             get { return name; }
@@ -333,7 +335,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// Get/set the entry's size.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when setting the size to less than zero.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when setting the size to less than
+        // zero.</exception>
         public long Size
         {
             get { return size; }
@@ -355,7 +358,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <remarks>
         /// The modification time is only accurate to within a second.
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when setting the date time to less than 1/1/1970.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when setting the date time to less than
+        // 1/1/1970.</exception>
         public DateTime ModTime
         {
             get { return modTime; }
@@ -412,7 +416,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// The entry's link name.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when attempting to set LinkName to null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when attempting to set LinkName to
+        // null.</exception>
         public string LinkName
         {
             get { return linkName; }
@@ -450,7 +455,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// <summary>
         /// The entry's version.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when attempting to set Version to null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when attempting to set Version to
+        // null.</exception>
         public string Version
         {
             get { return version; }
@@ -619,7 +625,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         /// </summary>
         /// <remarks>
         /// The default values are user id=0, group id=0, groupname="None", user name=null.
-        /// When the default user name is null the value from Environment.UserName is used. Or "PocketPC" for the Compact framework.
+        /// When the default user name is null the value from Environment.UserName is used. Or "PocketPC"
+        // for the Compact framework.
         /// When the default group name is null the value "None" is used.
         /// </remarks>
         static public void ResetValueDefaults()
@@ -1094,7 +1101,8 @@ namespace ICSharpCode.SharpZipLib.Tar
         }
 
         /// <summary>
-        /// 'Write' header information to buffer provided, updating the <see cref="Checksum">check sum</see>.
+        /// 'Write' header information to buffer provided, updating the <see cref="Checksum">check
+        // sum</see>.
         /// </summary>
         /// <param name="outbuf">output buffer for header information</param>
         public void WriteHeader(byte[] outbuf)
@@ -1150,7 +1158,7 @@ namespace ICSharpCode.SharpZipLib.Tar
 }
 
 /* The original Java file had this header:
- *
+*
 ** Authored by Timothy Gerard Endres
 ** <mailto:time@gjt.org>  <http://www.trustice.com>
 **

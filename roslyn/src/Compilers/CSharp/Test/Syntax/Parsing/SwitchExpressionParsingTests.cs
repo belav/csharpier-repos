@@ -873,7 +873,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             """;
         CreateCompilation(code)
             .VerifyDiagnostics(
-                // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //     default => 2,
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(4, 5)
             );
@@ -959,7 +960,8 @@ public class SwitchExpressionParsingTests : ParsingTests
                 // (3,11): error CS1003: Syntax error, ',' expected
                 //     0 => 1;
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
-                // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //     default => 2;
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(4, 5),
                 // (4,17): error CS1003: Syntax error, ',' expected

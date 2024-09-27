@@ -161,7 +161,8 @@ namespace System.Reflection.Tests
             Assert.Equal(1, constraints.Length);
             Assert.Equal(theU, constraints[0]);
 
-            // This one reports the BaseType to be "U" as expected. The "fix" was that U had a "class" constraint.
+            // This one reports the BaseType to be "U" as expected. The "fix" was that U had a "class"
+            // constraint.
             Assert.Equal(theU, theT.BaseType);
         }
 

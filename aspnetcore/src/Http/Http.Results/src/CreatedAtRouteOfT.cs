@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// with status code Created (201) and Location header.
 /// Targets a registered route.
 /// </summary>
-/// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+/// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+// body.</typeparam>
 public sealed class CreatedAtRoute<TValue>
     : IResult,
         IEndpointMetadataProvider,

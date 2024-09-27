@@ -1053,8 +1053,8 @@ namespace System
         }
 
         /*================================= CheckSymbol ============================
-         ** Check if the specified UnicodeCategory belongs to the symbol categories.
-         ==============================================================================*/
+        ** Check if the specified UnicodeCategory belongs to the symbol categories.
+        ==============================================================================*/
 
         internal static bool CheckSymbol(UnicodeCategory uc)
         {
@@ -1179,8 +1179,8 @@ namespace System
         }
 
         /*================================= IsHighSurrogate ============================
-         ** Check if a char is a high surrogate.
-         ==============================================================================*/
+        ** Check if a char is a high surrogate.
+        ==============================================================================*/
         [Pure]
         public static bool IsHighSurrogate(char c)
         {
@@ -1206,8 +1206,8 @@ namespace System
         }
 
         /*================================= IsLowSurrogate ============================
-         ** Check if a char is a low surrogate.
-         ==============================================================================*/
+        ** Check if a char is a low surrogate.
+        ==============================================================================*/
         [Pure]
         public static bool IsLowSurrogate(char c)
         {
@@ -1233,8 +1233,8 @@ namespace System
         }
 
         /*================================= IsSurrogatePair ============================
-         ** Check if the string specified by the index starts with a surrogate pair.
-         ==============================================================================*/
+        ** Check if the string specified by the index starts with a surrogate pair.
+        ==============================================================================*/
         [Pure]
         public static bool IsSurrogatePair(String s, int index)
         {
@@ -1274,7 +1274,8 @@ namespace System
         // The starting codepoint for Unicode plane 1.  Plane 1 contains 0x010000 ~ 0x01ffff.
         internal const int UNICODE_PLANE01_START = 0x10000;
 
-        // The end codepoint for Unicode plane 16.  This is the maximum code point value allowed for Unicode.
+        // The end codepoint for Unicode plane 16.  This is the maximum code point value allowed for
+        // Unicode.
         // Plane 16 contains 0x100000 ~ 0x10ffff.
         internal const int UNICODE_PLANE16_END = 0x10ffff;
 
@@ -1282,8 +1283,8 @@ namespace System
         internal const int LOW_SURROGATE_END = 0x00dfff;
 
         /*================================= ConvertFromUtf32 ============================
-         ** Convert an UTF32 value into a surrogate pair.
-         ==============================================================================*/
+        ** Convert an UTF32 value into a surrogate pair.
+        ==============================================================================*/
 
         public static String ConvertFromUtf32(int utf32)
         {

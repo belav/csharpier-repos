@@ -451,7 +451,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
 
             if (inlineMethodContext.ContainsAwaitExpression)
             {
-                // If the inline content has 'await' expression, then make sure the caller is changed to 'async' method
+                // If the inline content has 'await' expression, then make sure the caller is changed to 'async'
+                // method
                 // if its return type is awaitable. In all other cases, do nothing.
                 if (
                     callerSymbol is IMethodSymbol callerMethodSymbol
@@ -584,7 +585,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     )
                 )
                 {
-                    // If the callee is invoked as ExpressionStatement, but the inlined expression in the callee can't be
+                    // If the callee is invoked as ExpressionStatement, but the inlined expression in the callee can't
+                    // be
                     // placed under ExpressionStatement
                     // Example:
                     // void Caller()

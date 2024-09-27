@@ -1086,7 +1086,8 @@ namespace System.Numerics
             right.AssertValid();
 
             // gcd(0, 0) =  0
-            // gcd(a, 0) = |a|, for a != 0, since any number is a divisor of 0, and the greatest divisor of a is |a|
+            // gcd(a, 0) = |a|, for a != 0, since any number is a divisor of 0, and the greatest divisor of a is
+            // |a|
             if (left._sign == 0)
                 return BigInteger.Abs(right);
             if (right._sign == 0)
@@ -2095,9 +2096,12 @@ namespace System.Numerics
         // Encapsulate the logic of normalizing the "small" and "large" forms of BigInteger
         // into the "large" form so that Bit Manipulation algorithms can be simplified
         //
-        // uint[] xd    =    the UInt32 array containing the entire big integer in "large" (denormalized) form
-        //                       E.g., the number one (1) and negative one (-1) are both stored as 0x00000001
-        //                       BigInteger values Int32.MinValue < x <= Int32.MaxValue are converted to this
+        // uint[] xd    =    the UInt32 array containing the entire big integer in "large" (denormalized)
+        // form
+        //                       E.g., the number one (1) and negative one (-1) are both stored as
+        // 0x00000001
+        //                       BigInteger values Int32.MinValue < x <= Int32.MaxValue are converted to
+        // this
         //                       format for convenience.
         // int xl       =    the length of xd
         // return bool  =    true for negative numbers

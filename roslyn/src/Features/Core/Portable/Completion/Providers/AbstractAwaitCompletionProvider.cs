@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     /// <summary>
     /// A completion provider for offering <see langword="await"/> keyword.
-    /// This is implemented separately, not as a keyword recommender as it contains extra logic for making container method async.
+    /// This is implemented separately, not as a keyword recommender as it contains extra logic for
+    // making container method async.
     /// </summary>
     internal abstract class AbstractAwaitCompletionProvider : LSPCompletionProvider
     {
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private const string MakeContainerAsync = nameof(MakeContainerAsync);
 
         /// <summary>
-        /// If 'await' should be placed at the current position.  If not present, it means to add 'await' prior
+        /// If 'await' should be placed at the current position.  If not present, it means to add 'await'
+        // prior
         /// to the preceding expression.
         /// </summary>
         private const string AddAwaitAtCurrentPosition = nameof(AddAwaitAtCurrentPosition);
@@ -226,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            // IsComplexTextEdit is true when we want to add async to the container or place await in front of the expression.
+            // IsComplexTextEdit is true when we want to add async to the container or place await in front of
+            // the expression.
             if (!item.IsComplexTextEdit)
                 return await base.GetChangeAsync(document, item, commitKey, cancellationToken)
                     .ConfigureAwait(false);
@@ -298,22 +301,27 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var newText = text.WithChanges(builder);
             var allChanges = builder.ToImmutable();
 
-            // Collapse all text changes down to a single change (for clients that only care about that), but also keep
+            // Collapse all text changes down to a single change (for clients that only care about that), but
+            // also keep
             // all the individual changes around for clients that prefer the fine-grained information.
             return CompletionChange.Create(Utilities.Collapse(newText, allChanges), allChanges);
         }
 
         /// <summary>
-        /// Should <see langword="await"/> be offered, if left of the dot at position is an awaitable expression?
+        /// Should <see langword="await"/> be offered, if left of the dot at position is an awaitable
+        // expression?
         /// <code>
         ///   someTask.$$ // Suggest await completion
         ///   await someTask.$$ // Don't suggest await completion
         /// </code>
         /// </summary>
         /// <returns>
-        ///     <see cref="DotAwaitContext.None"/>, if await can not be suggested for the expression left of the dot.
-        ///     <see cref="DotAwaitContext.AwaitOnly"/>, if await should be suggested for the expression left of the dot, but ConfigureAwait(false) not.
-        ///     <see cref="DotAwaitContext.AwaitAndConfigureAwait"/>, if await should be suggested for the expression left of the dot and ConfigureAwait(false).
+        ///     <see cref="DotAwaitContext.None"/>, if await can not be suggested for the expression left of
+        // the dot.
+        ///     <see cref="DotAwaitContext.AwaitOnly"/>, if await should be suggested for the expression
+        // left of the dot, but ConfigureAwait(false) not.
+        ///     <see cref="DotAwaitContext.AwaitAndConfigureAwait"/>, if await should be suggested for the
+        // expression left of the dot and ConfigureAwait(false).
         /// </returns>
         private DotAwaitContext GetDotAwaitKeywordContext(
             SyntaxContext syntaxContext,

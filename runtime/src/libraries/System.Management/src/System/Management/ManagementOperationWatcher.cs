@@ -7,27 +7,32 @@ using System.Threading;
 namespace System.Management
 {
     /// <summary>
-    /// <para>Represents the method that will handle the <see cref='System.Management.ManagementOperationObserver.ObjectReady'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='System.Management.ManagementOperationObserver.ObjectReady'/> event.</para>
     /// </summary>
     public delegate void ObjectReadyEventHandler(object sender, ObjectReadyEventArgs e);
 
     /// <summary>
-    /// <para>Represents the method that will handle the <see cref='System.Management.ManagementOperationObserver.Completed'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='System.Management.ManagementOperationObserver.Completed'/> event.</para>
     /// </summary>
     public delegate void CompletedEventHandler(object sender, CompletedEventArgs e);
 
     /// <summary>
-    /// <para>Represents the method that will handle the <see cref='System.Management.ManagementOperationObserver.Progress'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='System.Management.ManagementOperationObserver.Progress'/> event.</para>
     /// </summary>
     public delegate void ProgressEventHandler(object sender, ProgressEventArgs e);
 
     /// <summary>
-    /// <para>Represents the method that will handle the <see cref='System.Management.ManagementOperationObserver.ObjectPut'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='System.Management.ManagementOperationObserver.ObjectPut'/> event.</para>
     /// </summary>
     public delegate void ObjectPutEventHandler(object sender, ObjectPutEventArgs e);
 
     /// <summary>
-    ///    <para>Used to manage asynchronous operations and handle management information and events received asynchronously.</para>
+    ///    <para>Used to manage asynchronous operations and handle management information and events
+    // received asynchronously.</para>
     /// </summary>
     /// <example>
     ///    <code lang='C#'>using System;
@@ -147,7 +152,9 @@ namespace System.Management
         public event ObjectPutEventHandler ObjectPut;
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementOperationObserver'/> class. This is the default constructor.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Management.ManagementOperationObserver'/> class. This is the default
+        // constructor.</para>
         /// </summary>
         public ManagementOperationObserver()
         {

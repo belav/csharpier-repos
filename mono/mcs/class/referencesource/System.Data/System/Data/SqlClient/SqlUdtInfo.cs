@@ -56,7 +56,8 @@ namespace System.Data.SqlClient
         }
 
         // VSTFDEVDIV 479671: Type.GetCustomAttributes is an time-expensive call.
-        // Improve UDT serialization performance by caching the resulted UDT type information using type-safe dictionary.
+        // Improve UDT serialization performance by caching the resulted UDT type information using
+        // type-safe dictionary.
         // Use a per-thread cache, so we do not need to synchronize access to it
         [ThreadStatic]
         private static Dictionary<Type, SqlUdtInfo> m_types2UdtInfo;

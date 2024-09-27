@@ -10,8 +10,10 @@ namespace System.Net.WebSockets
     internal static partial class WebSocketValidate
     {
         /// <summary>
-        /// The minimum value for window bits that the websocket per-message-deflate extension can support.<para />
-        /// For the current implementation of deflate(), a windowBits value of 8 (a window size of 256 bytes) is not supported.
+        /// The minimum value for window bits that the websocket per-message-deflate extension can
+        // support.<para />
+        /// For the current implementation of deflate(), a windowBits value of 8 (a window size of 256
+        // bytes) is not supported.
         /// We cannot use silently 9 instead of 8, because the websocket produces raw deflate stream
         /// and thus it needs to know the window bits in advance.
         /// </summary>
@@ -117,7 +119,8 @@ namespace System.Net.WebSockets
                 || closeStatusCode == CloseStatusCodeFailedTLSHandshake
             )
             {
-                // CloseStatus 1006 means Aborted - this will never appear on the wire and is reflected by calling WebSocket.Abort
+                // CloseStatus 1006 means Aborted - this will never appear on the wire and is reflected by calling
+                // WebSocket.Abort
                 throw new ArgumentException(
                     SR.Format(SR.net_WebSockets_InvalidCloseStatusCode, closeStatusCode),
                     nameof(closeStatus)

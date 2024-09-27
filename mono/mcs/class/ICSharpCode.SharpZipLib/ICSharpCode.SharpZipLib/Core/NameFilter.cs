@@ -43,10 +43,13 @@ namespace ICSharpCode.SharpZipLib.Core
     /// <summary>
     /// NameFilter is a string matching class which allows for both positive and negative
     /// matching.
-    /// A filter is a sequence of independant <see cref="Regex"></see> regular expressions separated by semi-colons ';'
+    /// A filter is a sequence of independant <see cref="Regex"></see> regular expressions separated by
+    // semi-colons ';'
     /// Each expression can be prefixed by a plus '+' sign or a minus '-' sign to denote the expression
-    /// is intended to include or exclude names.  If neither a plus or minus sign is found include is the default
-    /// A given name is tested for inclusion before checking exclusions.  Only names matching an include spec
+    /// is intended to include or exclude names.  If neither a plus or minus sign is found include is
+    // the default
+    /// A given name is tested for inclusion before checking exclusions.  Only names matching an include
+    // spec
     /// and not matching an exclude spec are deemed to match the filter.
     /// An empty filter matches any name.
     /// </summary>
@@ -71,7 +74,8 @@ namespace ICSharpCode.SharpZipLib.Core
         /// Test a string to see if it is a valid regular expression.
         /// </summary>
         /// <param name="e">The expression to test.</param>
-        /// <returns>True if expression is a valid <see cref="System.Text.RegularExpressions.Regex"/> false otherwise.</returns>
+        /// <returns>True if expression is a valid <see cref="System.Text.RegularExpressions.Regex"/> false
+        // otherwise.</returns>
         public static bool IsValidExpression(string e)
         {
             bool result = true;
@@ -211,7 +215,8 @@ namespace ICSharpCode.SharpZipLib.Core
                     else
                         toCompile = items[i];
 
-                    // NOTE: Regular expressions can fail to compile here for a number of reasons that cause an exception
+                    // NOTE: Regular expressions can fail to compile here for a number of reasons that cause an
+                    // exception
                     // these are left unhandled here as the caller is responsible for ensuring all is valid.
                     // several functions IsValidFilterExpression and IsValidExpression are provided for such checking
                     if (include)

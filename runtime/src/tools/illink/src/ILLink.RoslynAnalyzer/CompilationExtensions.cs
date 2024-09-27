@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Immutable;
@@ -8,24 +9,29 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ILLink.RoslynAnalyzer
 {
-    // Copied from: https://github.com/dotnet/roslyn/blob/main/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/CompilationExtensions.cs
+    // Copied from:
+    // https://github.com/dotnet/roslyn/blob/main/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/CompilationExtensions.cs
     public static class CompilationExtensions
     {
         /// <summary>
-        /// Gets a type by its metadata name to use for code analysis within a <see cref="Compilation"/>. This method
-        /// attempts to find the "best" symbol to use for code analysis, which is the symbol matching the first of the
+        /// Gets a type by its metadata name to use for code analysis within a <see cref="Compilation"/>.
+        // This method
+        /// attempts to find the "best" symbol to use for code analysis, which is the symbol matching the
+        // first of the
         /// following rules.
         ///
         /// <list type="number">
         ///   <item><description>
-        ///     If only one type with the given name is found within the compilation and its referenced assemblies, that
+        ///     If only one type with the given name is found within the compilation and its referenced
+        // assemblies, that
         ///     type is returned regardless of accessibility.
         ///   </description></item>
         ///   <item><description>
         ///     If the current <paramref name="compilation"/> defines the symbol, that symbol is returned.
         ///   </description></item>
         ///   <item><description>
-        ///     If exactly one referenced assembly defines the symbol in a manner that makes it visible to the current
+        ///     If exactly one referenced assembly defines the symbol in a manner that makes it visible to
+        // the current
         ///     <paramref name="compilation"/>, that symbol is returned.
         ///   </description></item>
         ///   <item><description>
@@ -85,7 +91,8 @@ namespace ILLink.RoslynAnalyzer
             return type;
         }
 
-        // copied from https://github.com/dotnet/roslyn/blob/main/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs
+        // copied from
+        // https://github.com/dotnet/roslyn/blob/main/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs
         private static SymbolVisibility GetResultantVisibility(this ISymbol symbol)
         {
             // Start by assuming it's visible.
@@ -133,7 +140,8 @@ namespace ILLink.RoslynAnalyzer
             return visibility;
         }
 
-        // Copied from: https://github.com/dotnet/roslyn/blob/main/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Utilities/SymbolVisibility.cs
+        // Copied from:
+        // https://github.com/dotnet/roslyn/blob/main/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Utilities/SymbolVisibility.cs
         private enum SymbolVisibility
         {
             Public = 0,

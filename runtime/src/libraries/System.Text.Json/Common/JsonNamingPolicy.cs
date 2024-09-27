@@ -4,7 +4,8 @@
 namespace System.Text.Json
 {
     /// <summary>
-    /// Determines the naming policy used to convert a string-based name to another format, such as a camel-casing format.
+    /// Determines the naming policy used to convert a string-based name to another format, such as a
+    // camel-casing format.
     /// </summary>
 #if BUILDING_SOURCE_GENERATOR
     internal

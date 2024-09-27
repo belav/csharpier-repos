@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,8 @@ namespace Owin
 
         /// <summary>Adds a component to the OWIN pipeline for running a Web API endpoint.</summary>
         /// <param name="builder">The application builder.</param>
-        /// <param name="configuration">The <see cref="HttpConfiguration"/> used to configure the endpoint.</param>
+        /// <param name="configuration">The <see cref="HttpConfiguration"/> used to configure the
+        // endpoint.</param>
         /// <returns>The application builder.</returns>
         [SuppressMessage(
             "Microsoft.Reliability",

@@ -152,7 +152,8 @@ namespace System.Net.Security.Tests
         [PlatformSpecific(TestPlatforms.Linux)]
         public Task ConnectWithRevocation_ServerCertWithoutContext_NoStapledOcsp()
         {
-            // When using specific certificate, OCSP is disabled e.g. when SslStreamCertificateContext is passed in explicitly.
+            // When using specific certificate, OCSP is disabled e.g. when SslStreamCertificateContext is passed
+            // in explicitly.
             return ConnectWithRevocation_WithCallback_Core(
                 X509RevocationMode.Offline,
                 offlineContext: null

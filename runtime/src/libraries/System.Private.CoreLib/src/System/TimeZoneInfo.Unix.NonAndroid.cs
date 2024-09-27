@@ -49,7 +49,8 @@ namespace System
             return bytes;
         }
 
-        // Bitmap covering the ASCII range. The bits is set for the characters [a-z], [A-Z], [0-9], '/', '-', and '_'.
+        // Bitmap covering the ASCII range. The bits is set for the characters [a-z], [A-Z], [0-9], '/',
+        // '-', and '_'.
         private static byte[] asciiBitmap = new byte[]
         {
             0x00,

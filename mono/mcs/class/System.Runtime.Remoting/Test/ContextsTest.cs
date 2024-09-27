@@ -310,10 +310,10 @@ namespace MonoTests.Remoting
             "015 (d1,c1) IContributeEnvoySink(1.d1).GetEnvoySink",
             "016 (d1,c1) IContributeEnvoySink(x.d1).GetEnvoySink",
             "017 (d1,c1) List created",
-            /*				"015 (d1,c1) List created",
-                            "016 (d1,c1) IContributeEnvoySink(1.d1).GetEnvoySink",
-                            "017 (d1,c1) IContributeEnvoySink(x.d1).GetEnvoySink",
-            */
+/*				"015 (d1,c1) List created",
+"016 (d1,c1) IContributeEnvoySink(1.d1).GetEnvoySink",
+"017 (d1,c1) IContributeEnvoySink(x.d1).GetEnvoySink",
+*/
             "018 (d1,c1) <-- ServerContextSink(x.d1) SyncProcessMessage .ctor",
             "019 (d1,c1) <-- ServerContextSink(1.d1) SyncProcessMessage .ctor",
             "020 (d1,c0) <-> global DynamicSink Finish .ctor client:True",

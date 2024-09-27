@@ -9,17 +9,21 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// <summary>
 ///     <para>
 ///         A factory to create transparent identifier to create during query processing.
-///         Transparent identifier is struct of outer and inner elements which is generally created as a result of join methods
+///         Transparent identifier is struct of outer and inner elements which is generally created
+// as a result of join methods
 ///         as intermediate type to hold values from both sources.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public static class TransparentIdentifierFactory
 {

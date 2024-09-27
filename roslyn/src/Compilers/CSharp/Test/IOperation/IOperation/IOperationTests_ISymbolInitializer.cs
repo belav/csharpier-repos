@@ -508,7 +508,8 @@ IFieldInitializerOperation (Field: System.Single C.f) (OperationKind.FieldInitia
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // (4,33): error CS0664: Literal of type double cannot be implicitly converted to type 'float'; use an 'F' suffix to create a literal of this type
+                // (4,33): error CS0664: Literal of type double cannot be implicitly converted to type 'float'; use
+                // an 'F' suffix to create a literal of this type
                 //     private float f /*<bind>*/= 0.0/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_LiteralDoubleCast, "0.0")
                     .WithArguments("F", "float")

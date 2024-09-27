@@ -1,20 +1,20 @@
 /**
- * SendKeysTest.cs: Test cases for SendKeys
- *
- * These tests can only run in ms.net one at a time.
- * Since ms.net apparently hooks the keyboard to
- * implement this, running two tests in a row
- * makes the second test run before the hook
- * of the first test is released, effectively
- * hanging the keyboard. CTRL-ALT-DEL releases
- * the keyboard, but the test still hangs.
- * Running each test separately works.
- *
- * Author:
- *		Andreia Gaita (avidigal@novell.com)
- *
- * (C) 2005 Novell, Inc. (http://www.novell.com)
- *
+* SendKeysTest.cs: Test cases for SendKeys
+*
+* These tests can only run in ms.net one at a time.
+* Since ms.net apparently hooks the keyboard to
+* implement this, running two tests in a row
+* makes the second test run before the hook
+* of the first test is released, effectively
+* hanging the keyboard. CTRL-ALT-DEL releases
+* the keyboard, but the test still hangs.
+* Running each test separately works.
+*
+* Author:
+*		Andreia Gaita (avidigal@novell.com)
+*
+* (C) 2005 Novell, Inc. (http://www.novell.com)
+*
 */
 
 using System;

@@ -2498,7 +2498,8 @@ namespace System.Xml
                             SR.GetString(SR.XmlSpecificBindingNamespace, "xmlns", uri)
                         )
                     );
-                // The addressing namespace and the xmlNamespace are the same length, so add a quick check to try to disambiguate
+                // The addressing namespace and the xmlNamespace are the same length, so add a quick check to try to
+                // disambiguate
                 if (uri.Length == xmlNamespace.Length && uri[18] == 'X' && uri == xmlNamespace)
                     throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         new ArgumentException(

@@ -16,9 +16,12 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
-    //==========================================================================================================================
-    // This class provides various services down to System.Private.CoreLib. (Though we forward most or all of them directly up to Reflection.Core.)
-    //==========================================================================================================================
+    
+    // //==========================================================================================================================
+    // This class provides various services down to System.Private.CoreLib. (Though we forward most or
+    // all of them directly up to Reflection.Core.)
+    
+    // //==========================================================================================================================
     internal sealed class ReflectionExecutionDomainCallbacksImplementation
         : ReflectionExecutionDomainCallbacks
     {

@@ -17,8 +17,10 @@ namespace System.Configuration
 
         /// <summary>
         /// Unique key that identifies an individual instance of a settings group(s). This key is needed
-        /// to identify which instance of a component owns a given group(s) of settings. Usually, the component
-        /// will frame its own key, but this property allows the hosting application to override it if necessary.
+        /// to identify which instance of a component owns a given group(s) of settings. Usually, the
+        // component
+        /// will frame its own key, but this property allows the hosting application to override it if
+        // necessary.
         /// </summary>
         string SettingsKey { get; set; }
 
@@ -33,7 +35,8 @@ namespace System.Configuration
         void SaveComponentSettings();
 
         /// <summary>
-        /// Tells the component to reset its settings. Typically, the component can call Reset on its settings class(es).
+        /// Tells the component to reset its settings. Typically, the component can call Reset on its
+        // settings class(es).
         /// </summary>
         void ResetComponentSettings();
     }

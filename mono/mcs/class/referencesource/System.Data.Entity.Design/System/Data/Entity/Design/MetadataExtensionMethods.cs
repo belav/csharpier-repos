@@ -19,7 +19,8 @@ namespace System.Data.Entity.Design
         /// <summary>
         /// Get the list of primitive types for the given version of Edm
         /// </summary>
-        /// <param name="itemCollection">The item collection from which to retrieve the list of primitive types</param>
+        /// <param name="itemCollection">The item collection from which to retrieve the list of primitive
+        // types</param>
         /// <param name="edmVersion">The version of edm to use</param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(

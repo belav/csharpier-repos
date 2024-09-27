@@ -48,8 +48,10 @@ namespace System.Reflection.Emit.Tests
         {
             get
             {
-                // The Dll/Entrypoint names can be arbitrary as these tests only generate the P/Invoke metadata and do not attempt to invoke them.
-                // Keep the "MethodNames" unique so that if a test fails, the theory member that failed can be identified easily from the log output.
+                // The Dll/Entrypoint names can be arbitrary as these tests only generate the P/Invoke metadata and
+                // do not attempt to invoke them.
+                // Keep the "MethodNames" unique so that if a test fails, the theory member that failed can be
+                // identified easily from the log output.
 
                 yield return new DpmParams()
                 {

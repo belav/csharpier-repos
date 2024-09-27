@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     )
     {
         /// <summary>
-        /// Notification option to disable or suppress an option with <see cref="ReportDiagnostic.Suppress"/>.
+        /// Notification option to disable or suppress an option with <see
+        // cref="ReportDiagnostic.Suppress"/>.
         /// </summary>
         public static NotificationOption2 None => new(ReportDiagnostic.Suppress, false);
 

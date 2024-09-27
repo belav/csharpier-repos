@@ -16,13 +16,14 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Object List Field Collection class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Object List Field Collection class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection"]/*' />
+    /// <include file='doc\ObjectListFieldCollection.uex'
+    // path='docs/doc[@for="ObjectListFieldCollection"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -63,7 +64,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.GetAll"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.GetAll"]/*' />
         public ObjectListField[] GetAll()
         {
             int n = Count;
@@ -75,7 +77,8 @@ namespace System.Web.UI.MobileControls
             return allFields;
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.SetAll"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.SetAll"]/*' />
         public void SetAll(ObjectListField[] value)
         {
             Items = new ArrayList(value);
@@ -89,19 +92,22 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.this"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.this"]/*' />
         public ObjectListField this[int index]
         {
             get { return (ObjectListField)Items[index]; }
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.Add"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.Add"]/*' />
         public void Add(ObjectListField field)
         {
             AddAt(-1, field);
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.AddAt"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.AddAt"]/*' />
         public void AddAt(int index, ObjectListField field)
         {
             if (index == -1)
@@ -138,7 +144,8 @@ namespace System.Web.UI.MobileControls
             _fieldsSetDirty = true;
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.Clear"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.Clear"]/*' />
         public void Clear()
         {
             Items.Clear();
@@ -150,7 +157,8 @@ namespace System.Web.UI.MobileControls
             NotifyOwnerChange();
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.RemoveAt"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.RemoveAt"]/*' />
         public void RemoveAt(int index)
         {
             if ((index >= 0) && (index < Count))
@@ -164,7 +172,8 @@ namespace System.Web.UI.MobileControls
             NotifyOwnerChange();
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.Remove"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.Remove"]/*' />
         public void Remove(ObjectListField field)
         {
             int index = IndexOf(field);
@@ -174,7 +183,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.IndexOf"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.IndexOf"]/*' />
         public int IndexOf(ObjectListField field)
         {
             if (field != null)
@@ -184,7 +194,8 @@ namespace System.Web.UI.MobileControls
             return -1;
         }
 
-        /// <include file='doc\ObjectListFieldCollection.uex' path='docs/doc[@for="ObjectListFieldCollection.IndexOf1"]/*' />
+        /// <include file='doc\ObjectListFieldCollection.uex'
+        // path='docs/doc[@for="ObjectListFieldCollection.IndexOf1"]/*' />
         public int IndexOf(String fieldIDOrName)
         {
             ArrayList fields = Items;

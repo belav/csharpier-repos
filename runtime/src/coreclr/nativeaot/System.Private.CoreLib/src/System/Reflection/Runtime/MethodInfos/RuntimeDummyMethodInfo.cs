@@ -10,7 +10,8 @@ using Internal.Reflection.Core.Execution;
 namespace System.Reflection.Runtime.MethodInfos
 {
     //
-    // Singleton MethodInfo used as a sentinel for _lazy* latches where we can't use "null" as a sentinel.
+    // Singleton MethodInfo used as a sentinel for _lazy* latches where we can't use "null" as a
+    // sentinel.
     //
     internal sealed class RuntimeDummyMethodInfo : RuntimeNamedMethodInfo
     {

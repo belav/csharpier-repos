@@ -739,7 +739,8 @@ class Program
     [Fact]
     public async Task Invoke_Comment_Component_PolicyColon_ReturnComponentPolicies()
     {
-        // Note: This test adds #line pragma comment to simulate that situation in generated Razor source code.
+        // Note: This test adds #line pragma comment to simulate that situation in generated Razor source
+        // code.
         // See example in https://github.com/dotnet/razor/pull/6997
 
         // Arrange & Act

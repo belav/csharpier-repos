@@ -318,7 +318,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (firstRevocationErrorIndex > 0)
                 {
-                    // Assign RevocationStatusUnknown to everything from the first revocation error to the end certificate
+                    // Assign RevocationStatusUnknown to everything from the first revocation error to the end
+                    // certificate
                     X509ChainStatus revocationUnknownStatus = new X509ChainStatus
                     {
                         Status = X509ChainStatusFlags.RevocationStatusUnknown,

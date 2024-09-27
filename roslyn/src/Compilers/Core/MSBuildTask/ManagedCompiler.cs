@@ -435,8 +435,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             get { return _store.GetOrDefault(nameof(UseSharedCompilation), false); }
         }
 
-        // Map explicit platform of "AnyCPU" or the default platform (null or ""), since it is commonly understood in the
-        // managed build process to be equivalent to "AnyCPU", to platform "AnyCPU32BitPreferred" if the Prefer32Bit
+        // Map explicit platform of "AnyCPU" or the default platform (null or ""), since it is commonly
+        // understood in the
+        // managed build process to be equivalent to "AnyCPU", to platform "AnyCPU32BitPreferred" if the
+        // Prefer32Bit
         // property is set.
         internal string? PlatformWith32BitPreference
         {
@@ -792,10 +794,14 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         private bool ValidateBootstrapResponse(BuildResponse? response)
         {
-            // This represents the maximum number of failed connection attempts on the server before we will declare
-            // that the overall build itself failed. Keeping this at zero is not realistic because even in a fully
-            // functioning server connection failures are expected. The server could be too busy to accept connections
-            // fast enough. Anything above this count though is considered worth investigating by the compiler team.
+            // This represents the maximum number of failed connection attempts on the server before we will
+            // declare
+            // that the overall build itself failed. Keeping this at zero is not realistic because even in a
+            // fully
+            // functioning server connection failures are expected. The server could be too busy to accept
+            // connections
+            // fast enough. Anything above this count though is considered worth investigating by the compiler
+            // team.
             //
             const int maxCannotConnectCount = 2;
 
@@ -834,7 +840,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 #endif
 
         /// <summary>
-        /// Log the compiler output to MSBuild. Each language will override this to parse their output and log it
+        /// Log the compiler output to MSBuild. Each language will override this to parse their output and
+        // log it
         /// in the language specific manner. This often involves parsing the raw output and formatting it as
         /// individual messages for MSBuild.
         /// </summary>
@@ -847,9 +854,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         );
 
         /// <summary>
-        /// Used to log a message that should go into both the compiler server log as well as the MSBuild logs
+        /// Used to log a message that should go into both the compiler server log as well as the MSBuild
+        // logs
         ///
-        /// These are intended to be processed by automation in the binlog hence do not change the structure of
+        /// These are intended to be processed by automation in the binlog hence do not change the structure
+        // of
         /// the messages here.
         /// </summary>
         private void LogCompilationMessage(
@@ -882,7 +891,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Fills the provided CommandLineBuilderExtension with those switches and other information that can't go into a response file and
+        /// Fills the provided CommandLineBuilderExtension with those switches and other information that
+        // can't go into a response file and
         /// must go directly onto the command line.
         /// </summary>
         protected override void AddCommandLineCommands(CommandLineBuilderExtension commandLine)
@@ -891,7 +901,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Fills the provided CommandLineBuilderExtension with those switches and other information that can go into a response file.
+        /// Fills the provided CommandLineBuilderExtension with those switches and other information that
+        // can go into a response file.
         /// </summary>
         protected override void AddResponseFileCommands(CommandLineBuilderExtension commandLine)
         {
@@ -951,7 +962,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchIfNotNull("/generatedfilesout:", GeneratedFilesOutputPath);
             commandLine.AppendSwitchIfNotNull("/keycontainer:", KeyContainer);
             commandLine.AppendSwitchIfNotNull("/keyfile:", KeyFile);
-            // If the strings "LogicalName" or "Access" ever change, make sure to search/replace everywhere in vsproject.
+            // If the strings "LogicalName" or "Access" ever change, make sure to search/replace everywhere in
+            // vsproject.
             commandLine.AppendSwitchIfNotNull(
                 "/linkresource:",
                 LinkResources,
@@ -968,7 +980,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchIfNotNull("/errorlog:", ErrorLog);
             commandLine.AppendSwitchIfNotNull("/subsystemversion:", SubsystemVersion);
             commandLine.AppendWhenTrue("/reportanalyzer", _store, nameof(ReportAnalyzer));
-            // If the strings "LogicalName" or "Access" ever change, make sure to search/replace everywhere in vsproject.
+            // If the strings "LogicalName" or "Access" ever change, make sure to search/replace everywhere in
+            // vsproject.
             commandLine.AppendSwitchIfNotNull(
                 "/resource:",
                 Resources,
@@ -1154,7 +1167,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             // error messages before returning a non-zero exit code, so we don't
             // normally need to emit any additional messages now.
             //
-            // If somehow the compiler DID return a non-zero exit code and didn't log an error, we'd like to log that exit code.
+            // If somehow the compiler DID return a non-zero exit code and didn't log an error, we'd like to log
+            // that exit code.
             // We can only do this for the command line compiler: if the inproc compiler was used,
             // we can't tell what if anything it logged as it logs directly to Visual Studio's output window.
             //
@@ -1238,7 +1252,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Checks to see whether all of the passed-in references exist on disk before we launch the compiler.
+        /// Checks to see whether all of the passed-in references exist on disk before we launch the
+        // compiler.
         /// </summary>
         protected bool CheckAllReferencesExistOnDisk()
         {

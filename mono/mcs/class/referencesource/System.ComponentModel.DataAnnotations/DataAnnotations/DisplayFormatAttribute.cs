@@ -3,7 +3,8 @@
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
-    /// Allows overriding various display-related options for a given field. The options have the same meaning as in BoundField.
+    /// Allows overriding various display-related options for a given field. The options have the same
+    // meaning as in BoundField.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [SuppressMessage(

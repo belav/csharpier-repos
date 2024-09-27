@@ -308,7 +308,8 @@ namespace System.Globalization
             return ((((y) % 4) != 0) ? 0 : ((((y) % 100) != 0) ? 1 : ((((y) % 400) != 0) ? 0 : 1)));
         }
 
-        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is invalid.
+        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is
+        // invalid.
         //
 
         public override DateTime ToDateTime(
@@ -433,10 +434,10 @@ namespace System.Globalization
             nLDate = nLunarDay;
         }
 
-        /*
-        //Convert from Lunar to Gregorian
-        //Highly inefficient, but it works based on the forward conversion
-        */
+/*
+//Convert from Lunar to Gregorian
+//Highly inefficient, but it works based on the forward conversion
+*/
         internal bool LunarToGregorian(
             int nLYear,
             int nLMonth,

@@ -20,21 +20,28 @@ namespace System.Text.RegularExpressions.Symbolic
     /// </remarks>
     internal sealed class MintermClassifier
     {
-        /// <summary>An array used when there's a single minterm, in order to map every ASCII character to it trivially.</summary>
+        /// <summary>An array used when there's a single minterm, in order to map every ASCII character to
+        // it trivially.</summary>
         private static readonly int[] AllAsciiIsZeroMintermArray = new int[128];
 
-        /// <summary>Array providing fast mapping from an ASCII character (the array index) to its corresponding minterm ID.</summary>
+        /// <summary>Array providing fast mapping from an ASCII character (the array index) to its
+        // corresponding minterm ID.</summary>
         private readonly int[] _ascii;
 
-        /// <summary>A multi-terminal BDD for mapping any non-ASCII character to its associated minterm ID.</summary>
+        /// <summary>A multi-terminal BDD for mapping any non-ASCII character to its associated minterm
+        // ID.</summary>
         /// <remarks>
-        /// The use of a multi-terminal BDD here is an implementation detail.  Should we decide its important to optimize non-ASCII inputs further,
-        /// or to consolidate the mechanism with the other engines, an alternatie lookup algorithm / data structure could be employed.
+        /// The use of a multi-terminal BDD here is an implementation detail.  Should we decide its
+        // important to optimize non-ASCII inputs further,
+        /// or to consolidate the mechanism with the other engines, an alternatie lookup algorithm / data
+        // structure could be employed.
         /// </remarks>
         private readonly BDD _nonAscii;
 
-        /// <summary>Create a classifier that maps a character to the ID of its associated minterm.</summary>
-        /// <param name="minterms">A BDD for classifying all characters (ASCII and non-ASCII) to their corresponding minterm IDs.</param>
+        /// <summary>Create a classifier that maps a character to the ID of its associated
+        // minterm.</summary>
+        /// <param name="minterms">A BDD for classifying all characters (ASCII and non-ASCII) to their
+        // corresponding minterm IDs.</param>
         /// <param name="solver">The character set solver to use.</param>
         public MintermClassifier(BDD[] minterms, CharSetSolver solver)
         {
@@ -43,7 +50,8 @@ namespace System.Text.RegularExpressions.Symbolic
             if (minterms.Length == 1)
             {
                 // With only a single minterm, the mapping is trivial: everything maps to it (ID 0).
-                // For ASCII, use an array containing all zeros.  For non-ASCII, use a BDD that maps everything to 0.
+                // For ASCII, use an array containing all zeros.  For non-ASCII, use a BDD that maps everything to
+                // 0.
                 _ascii = AllAsciiIsZeroMintermArray;
                 _nonAscii = solver.ReplaceTrue(BDD.True, 0);
                 return;
@@ -79,12 +87,16 @@ namespace System.Text.RegularExpressions.Symbolic
 
             // We can also further optimize the BDD in two ways:
             // 1. We can now remove the ASCII characters from it, as we'll always consult the lookup table first
-            //    for ASCII inputs and thus will never use the BDD for them.  While optional (skipping this step will not
-            //    affect correctness), removing the ASCII values from the BDD reduces the size of the multi-terminal BDD.
+            //    for ASCII inputs and thus will never use the BDD for them.  While optional (skipping this step
+            // will not
+            //    affect correctness), removing the ASCII values from the BDD reduces the size of the
+            // multi-terminal BDD.
             // 2. We can check if every character now maps to the same minterm ID (the same terminal in the
             //    multi-terminal BDD).  This can be relatively common after (1) above is applied, as many
-            //    patterns don't distinguish between any non-ASCII characters (e.g. "[0-9]*").  If every character
-            //    in the BDD now maps to the same minterm, we can replace the BDD with a much simpler/faster/smaller one.
+            //    patterns don't distinguish between any non-ASCII characters (e.g. "[0-9]*").  If every
+            // character
+            //    in the BDD now maps to the same minterm, we can replace the BDD with a much
+            // simpler/faster/smaller one.
             BDD nonAsciiBDD = solver.And(anyCharacterToMintermId, solver.NonAscii);
             nonAsciiBDD = nonAsciiBDD.IsEssentiallyBoolean(out BDD? singleTerminalBDD)
                 ? singleTerminalBDD

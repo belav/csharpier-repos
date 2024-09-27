@@ -7,17 +7,22 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    // This is a lock class that needs to be held in order to perform any mutation of the parts/parts state in the composition
-    // Today's implementation relies on the AppDomain-wide re-entrant lock for changes on the composition, and a narrow lock for changes in
+    // This is a lock class that needs to be held in order to perform any mutation of the parts/parts
+    // state in the composition
+    // Today's implementation relies on the AppDomain-wide re-entrant lock for changes on the
+    // composition, and a narrow lock for changes in
     // the state of the specific ImportEngine
     // Today we make several assumptions to ensure thread-safety:
     // 1. Each composition doesn't change lock affinity
-    // 2. Every part of the system that updates the status of the parts (in our case ImportEngine) needs to hold the same wide - lock
-    // 3. State of the import engine that gets accessed outside of the wide lock needs to be accessed in the context of the narrow lock
+    // 2. Every part of the system that updates the status of the parts (in our case ImportEngine) needs
+    // to hold the same wide - lock
+    // 3. State of the import engine that gets accessed outside of the wide lock needs to be accessed in
+    // the context of the narrow lock
     // 4. Narrow lock CAN be taken inside the wide lock
     // 5. Wide lock CANNOT be taken inside the narrow lock
     // 6. No 3rd party code will EVER get called inside the narrow lock
-    // Sadly, this means that we WILL be calling 3rd party code under a lock, but as long as the lock is re-entrant and they can't invoke us on anotehr thread
+    // Sadly, this means that we WILL be calling 3rd party code under a lock, but as long as the lock is
+    // re-entrant and they can't invoke us on anotehr thread
     // we have no issue, other than potential overlocking
     internal sealed class CompositionLock : IDisposable
     {

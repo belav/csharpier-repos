@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/System.Private.CoreLib/src/System/Collections/HashHelpers.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -150,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         {
             var newSize = 2 * oldSize;
 
-            // Allow the hashtables to grow to maximum possible size (~2G elements) before encountering capacity overflow.
+            // Allow the hashtables to grow to maximum possible size (~2G elements) before encountering capacity
+            // overflow.
             // Note that this check works even when _items.Length overflowed thanks to the (uint) cast
             if ((uint)newSize > MaxPrimeArrayLength && MaxPrimeArrayLength > oldSize)
             {
@@ -168,9 +171,11 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         /// <remarks>This should only be used on 64-bit.</remarks>
         public static ulong GetFastModMultiplier(uint divisor) => ulong.MaxValue / divisor + 1;
 
-        /// <summary>Performs a mod operation using the multiplier pre-computed with <see cref="GetFastModMultiplier"/>.</summary>
+        /// <summary>Performs a mod operation using the multiplier pre-computed with <see
+        // cref="GetFastModMultiplier"/>.</summary>
         /// <remarks>
-        /// PERF: This improves performance in 64-bit scenarios at the expense of performance in 32-bit scenarios. Since
+        /// PERF: This improves performance in 64-bit scenarios at the expense of performance in 32-bit
+        // scenarios. Since
         /// we only build a single AnyCPU binary, we opt for improved performance in the 64-bit scenario.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

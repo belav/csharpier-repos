@@ -197,9 +197,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             //</code>
             //</summary>
             //
-            // We preserve the formatting to let the AbstractDocumentationCommentFormattingService get the unmangled
+            // We preserve the formatting to let the AbstractDocumentationCommentFormattingService get the
+            // unmangled
             // <code> blocks.
-            // AbstractDocumentationCommentFormattingService will normalize whitespace for non-code element later.
+            // AbstractDocumentationCommentFormattingService will normalize whitespace for non-code element
+            // later.
             private static string TrimEachLine(string text)
             {
                 var lines = text.Split(
@@ -218,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         continue;
 
                     // note: this code presumes all whitespace should be treated uniformly (for example that a tab and
-                    // a space are equivalent).  If that turns out to be an issue we will need to revise this to determine
+                    // a space are equivalent).  If that turns out to be an issue we will need to revise this to
+                    // determine
                     // an appropriate strategy for trimming here.
                     maxPrefix = Math.Min(maxPrefix, firstNonWhitespaceOffset.Value);
                 }
@@ -386,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         /// <summary>
-        /// Returns the text for a given type parameter, or null if no documentation was given for the type parameter.
+        /// Returns the text for a given type parameter, or null if no documentation was given for the type
+        // parameter.
         /// </summary>
         public string? GetTypeParameterText(string typeParameterName)
         {
@@ -403,7 +407,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         /// <summary>
-        /// Returns the texts for a given exception, or an empty <see cref="ImmutableArray"/> if no documentation was given for the exception.
+        /// Returns the texts for a given exception, or an empty <see cref="ImmutableArray"/> if no
+        // documentation was given for the exception.
         /// </summary>
         public ImmutableArray<string> GetExceptionTexts(string exceptionName)
         {

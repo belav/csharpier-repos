@@ -228,9 +228,12 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             string fullyQualifiedContainerName
         )
         {
-            // If this is a part of partial type that only contains nested types, then we don't make an info type for
-            // it. That's because we effectively think of this as just being a virtual container just to hold the nested
-            // types, and not something someone would want to explicitly navigate to itself.  Similar to how we think of
+            // If this is a part of partial type that only contains nested types, then we don't make an info
+            // type for
+            // it. That's because we effectively think of this as just being a virtual container just to hold
+            // the nested
+            // types, and not something someone would want to explicitly navigate to itself.  Similar to how we
+            // think of
             // namespaces.
             if (
                 typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
@@ -477,7 +480,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            // Add synthesized properties for record primary constructors that are not backed by an existing field
+            // Add synthesized properties for record primary constructors that are not backed by an existing
+            // field
             // or property.
             if (
                 memberDeclaration is RecordDeclarationSyntax

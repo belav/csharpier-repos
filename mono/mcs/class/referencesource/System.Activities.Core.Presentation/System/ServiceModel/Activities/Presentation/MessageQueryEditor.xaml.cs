@@ -251,7 +251,8 @@ namespace System.ServiceModel.Activities.Presentation
 
                     //get the context
                     //We need to copy over the namespaces from the manager's table 1 by 1. According to MSDN:
-                    //If you specify an existing name table, any namespaces in the name table are not automatically added to XmlNamespaceManager.
+                    //If you specify an existing name table, any namespaces in the name table are not automatically
+                    // added to XmlNamespaceManager.
                     //You must use AddNamespace and RemoveNamespace to add or remove namespaces.
                     XPathMessageContext messageContext = new XPathMessageContext();
                     foreach (string prefix in namespaceManager)

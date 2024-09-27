@@ -28,7 +28,8 @@ public class BadRequestObjectResult : ObjectResult
     /// <summary>
     /// Creates a new <see cref="BadRequestObjectResult"/> instance.
     /// </summary>
-    /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
+    /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation
+    // errors.</param>
     public BadRequestObjectResult([ActionResultObjectValue] ModelStateDictionary modelState)
         : base(new SerializableError(modelState))
     {

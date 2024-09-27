@@ -1644,7 +1644,7 @@ namespace MonoTests.System.Data.Connected.SqlClient
             using (conn)
             {
                 conn.Open();
-                /*int size = conn.PacketSize;*/
+/*int size = conn.PacketSize;*/
                 SqlCommand cmd = conn.CreateCommand();
                 // create a temp stored proc
                 cmd.CommandText = "Create Procedure #sp_tmp_long_params ";
@@ -1709,10 +1709,10 @@ namespace MonoTests.System.Data.Connected.SqlClient
             }
         }
 
-        /**
-         * Verifies whether an enum value is converted to a numeric value when
-         * used as value for a numeric parameter (bug #66630)
-         */
+/**
+* Verifies whether an enum value is converted to a numeric value when
+* used as value for a numeric parameter (bug #66630)
+*/
         [Test]
         public void EnumParameterTest()
         {
@@ -1871,11 +1871,11 @@ namespace MonoTests.System.Data.Connected.SqlClient
                                 new byte[] { 1, 2, 3, 4, 5 },
                                 new byte[] { 1, 2, 3, 4, 5 }
                             );
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.Binary, 5,
-                                DBNull.Value, DBNull.Value,
-                                DBNull.Value);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.Binary, 5,
+DBNull.Value, DBNull.Value,
+DBNull.Value);
+*/
                             rpc_helper_function(
                                 cmd,
                                 SqlDbType.Binary,
@@ -1913,14 +1913,14 @@ namespace MonoTests.System.Data.Connected.SqlClient
                                 "characters",
                                 "characters"
                             );
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.Char, 3,
-                                "characters", "cha       ",
-                                "cha");
-                            rpc_helper_function (cmd, SqlDbType.Char, 3,
-                                string.Empty, "          ",
-                                "   ");
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.Char, 3,
+"characters", "cha       ",
+"cha");
+rpc_helper_function (cmd, SqlDbType.Char, 3,
+string.Empty, "          ",
+"   ");
+*/
                             rpc_helper_function(
                                 cmd,
                                 SqlDbType.Char,
@@ -2072,13 +2072,13 @@ namespace MonoTests.System.Data.Connected.SqlClient
                             break;
                         case 7:
                             // Testing Image
-                            /* NOT WORKING
-                               DBHelper.ExecuteNonQuery (conn,
-                               String.Format(create_query, "image"));
-                               rpc_helper_function (cmd, SqlDbType.Image, 0, );
-                               rpc_helper_function (cmd, SqlDbType.Image, 0, );
-                               rpc_helper_function (cmd, SqlDbType.Image, 0, );
-                               /* NOT WORKING*/
+/* NOT WORKING
+DBHelper.ExecuteNonQuery (conn,
+String.Format(create_query, "image"));
+rpc_helper_function (cmd, SqlDbType.Image, 0, );
+rpc_helper_function (cmd, SqlDbType.Image, 0, );
+rpc_helper_function (cmd, SqlDbType.Image, 0, );
+/* NOT WORKING*/
                             break;
                         case 8:
                             // Test Integer Param
@@ -2312,16 +2312,16 @@ namespace MonoTests.System.Data.Connected.SqlClient
                                 200000000.2344m
                             );
                             // FIXME: we round toward even in SqlParameter.ConvertToFrameworkType
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.Money, 0,
-                                -200000000.234550m, -200000000.2346m, -200000000.2346m);
-                            rpc_helper_function (cmd, SqlDbType.Money, 0,
-                                200000000.234550m, 200000000.2346m, 200000000.2346m);
-                            rpc_helper_function (cmd, SqlDbType.Money, 0,
-                                -200000000.234450m, -200000000.2345m, -200000000.2345m);
-                            rpc_helper_function (cmd, SqlDbType.Money, 0,
-                                200000000.234450m, 200000000.2345m, 200000000.2345m);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.Money, 0,
+-200000000.234550m, -200000000.2346m, -200000000.2346m);
+rpc_helper_function (cmd, SqlDbType.Money, 0,
+200000000.234550m, 200000000.2346m, 200000000.2346m);
+rpc_helper_function (cmd, SqlDbType.Money, 0,
+-200000000.234450m, -200000000.2345m, -200000000.2345m);
+rpc_helper_function (cmd, SqlDbType.Money, 0,
+200000000.234450m, 200000000.2345m, 200000000.2345m);
+*/
                             break;
                         case 23:
                             // Test NChar Param
@@ -2356,20 +2356,20 @@ namespace MonoTests.System.Data.Connected.SqlClient
                                 "   ",
                                 "   "
                             );
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.NChar, 5,
-                                DBNull.Value, DBNull.Value,
-                                DBNull.Value);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.NChar, 5,
+DBNull.Value, DBNull.Value,
+DBNull.Value);
+*/
                             break;
                         case 10:
                             // Test NText Param
                             DBHelper.ExecuteNonQuery(conn, String.Format(create_query, "ntext"));
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.NText, 0, "ntext");
-                            rpc_helper_function (cmd, SqlDbType.NText, 0, "");
-                            rpc_helper_function (cmd, SqlDbType.NText, 0, null);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.NText, 0, "ntext");
+rpc_helper_function (cmd, SqlDbType.NText, 0, "");
+rpc_helper_function (cmd, SqlDbType.NText, 0, null);
+*/
                             break;
                         case 11:
                             // Test NVarChar Param
@@ -2395,12 +2395,12 @@ namespace MonoTests.System.Data.Connected.SqlClient
                                 "nva",
                                 "nva"
                             );
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.NVarChar, 10,
-                                string.Empty, string.Empty, string.Empty);
-                            rpc_helper_function (cmd, SqlDbType.NVarChar, 10,
-                                DBNull.Value, DBNull.Value, DBNull.Value);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.NVarChar, 10,
+string.Empty, string.Empty, string.Empty);
+rpc_helper_function (cmd, SqlDbType.NVarChar, 10,
+DBNull.Value, DBNull.Value, DBNull.Value);
+*/
                             break;
                         case 12:
                             // Test Real Param
@@ -2698,35 +2698,35 @@ namespace MonoTests.System.Data.Connected.SqlClient
                                 4.5432m
                             );
                             // FIXME: we round toward even in SqlParameter.ConvertToFrameworkType
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
-                                -4.543350m, -4.5434m, -4.5434m);
-                            rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
-                                4.543350m, 4.5434m, 4.5434m);
-                            rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
-                                -4.543250m, -4.5433m, -4.5433m);
-                            rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
-                                4.543250m, 4.5433m, 4.5433m);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
+-4.543350m, -4.5434m, -4.5434m);
+rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
+4.543350m, 4.5434m, 4.5434m);
+rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
+-4.543250m, -4.5433m, -4.5433m);
+rpc_helper_function (cmd, SqlDbType.SmallMoney, 0,
+4.543250m, 4.5433m, 4.5433m);
+*/
                             break;
                         case 16:
                             // Test Text Param
                             DBHelper.ExecuteNonQuery(conn, String.Format(create_query, "text"));
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.Text, 0, "text");
-                            rpc_helper_function (cmd, SqlDbType.Text, 0, "");
-                            rpc_helper_function (cmd, SqlDbType.Text, 0, null);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.Text, 0, "text");
+rpc_helper_function (cmd, SqlDbType.Text, 0, "");
+rpc_helper_function (cmd, SqlDbType.Text, 0, null);
+*/
                             break;
                         case 17:
                             // Test TimeStamp Param
-                            /* NOT WORKING
-                               DBHelper.ExecuteNonQuery (conn,
-                               String.Format(create_query,"timestamp"));
-                               rpc_helper_function (cmd, SqlDbType.TimeStamp, 0, "");
-                               rpc_helper_function (cmd, SqlDbType.TimeStamp, 0, "");
-                               rpc_helper_function (cmd, SqlDbType.TimeStamp, 0, null);
-                             */
+/* NOT WORKING
+DBHelper.ExecuteNonQuery (conn,
+String.Format(create_query,"timestamp"));
+rpc_helper_function (cmd, SqlDbType.TimeStamp, 0, "");
+rpc_helper_function (cmd, SqlDbType.TimeStamp, 0, "");
+rpc_helper_function (cmd, SqlDbType.TimeStamp, 0, null);
+*/
                             break;
                         case 18:
                             // Test TinyInt Param
@@ -2770,22 +2770,22 @@ namespace MonoTests.System.Data.Connected.SqlClient
                             break;
                         case 19:
                             // Test UniqueIdentifier Param
-                            /*
-                            DBHelper.ExecuteNonQuery (conn,
-                                    String.Format(create_query,"uniqueidentifier"));
-                            rpc_helper_function (cmd, SqlDbType.UniqueIdentifier, 0, "0f159bf395b1d04f8c2ef5c02c3add96");
-                            rpc_helper_function (cmd, SqlDbType.UniqueIdentifier, 0, null);
-                            */
+/*
+DBHelper.ExecuteNonQuery (conn,
+String.Format(create_query,"uniqueidentifier"));
+rpc_helper_function (cmd, SqlDbType.UniqueIdentifier, 0, "0f159bf395b1d04f8c2ef5c02c3add96");
+rpc_helper_function (cmd, SqlDbType.UniqueIdentifier, 0, null);
+*/
                             break;
                         case 20:
                             // Test VarBinary Param
-                            /* NOT WORKING
-                               DBHelper.ExecuteNonQuery (conn,
-                               String.Format(create_query,"varbinary (10)"));
-                               rpc_helper_function (cmd, SqlDbType.VarBinary, 0,);
-                               rpc_helper_function (cmd, SqlDbType.VarBinary, 0,);
-                               rpc_helper_function (cmd, SqlDbType.VarBinary, 0, null);
-                             */
+/* NOT WORKING
+DBHelper.ExecuteNonQuery (conn,
+String.Format(create_query,"varbinary (10)"));
+rpc_helper_function (cmd, SqlDbType.VarBinary, 0,);
+rpc_helper_function (cmd, SqlDbType.VarBinary, 0,);
+rpc_helper_function (cmd, SqlDbType.VarBinary, 0, null);
+*/
                             break;
                         case 21:
                             // Test Varchar Param
@@ -2811,25 +2811,25 @@ namespace MonoTests.System.Data.Connected.SqlClient
                                 "Var",
                                 "Var"
                             );
-                            /*
-                            rpc_helper_function (cmd, SqlDbType.VarChar, 3,
-                                "Varchar", "Var", "Var");
-                            rpc_helper_function (cmd, SqlDbType.VarChar, 10,
-                                string.Empty, string.Empty, string.Empty);
-                            rpc_helper_function (cmd, SqlDbType.VarChar, 10,
-                                DBNull.Value, DBNull.Value,
-                                DBNull.Value);
-                            */
+/*
+rpc_helper_function (cmd, SqlDbType.VarChar, 3,
+"Varchar", "Var", "Var");
+rpc_helper_function (cmd, SqlDbType.VarChar, 10,
+string.Empty, string.Empty, string.Empty);
+rpc_helper_function (cmd, SqlDbType.VarChar, 10,
+DBNull.Value, DBNull.Value,
+DBNull.Value);
+*/
                             break;
                         case 22:
                             // Test Variant Param
-                            /* NOT WORKING
-                               DBHelper.ExecuteNonQuery (conn,
-                               String.Format(create_query,"variant"));
-                               rpc_helper_function (cmd, SqlDbType.Variant, 0, );
-                               rpc_helper_function (cmd, SqlDbType.Variant, 0, );
-                               rpc_helper_function (cmd, SqlDbType.Variant, 0, null);
-                             */
+/* NOT WORKING
+DBHelper.ExecuteNonQuery (conn,
+String.Format(create_query,"variant"));
+rpc_helper_function (cmd, SqlDbType.Variant, 0, );
+rpc_helper_function (cmd, SqlDbType.Variant, 0, );
+rpc_helper_function (cmd, SqlDbType.Variant, 0, null);
+*/
                             break;
                         default:
                             label = -2;
@@ -3381,8 +3381,8 @@ namespace MonoTests.System.Data.Connected.SqlClient
 
                     cmd.ExecuteNonQuery();
 
-                    /* Copy the param values to variables, just in case if
-                     * tests fail, we don't want the created sp to exist */
+/* Copy the param values to variables, just in case if
+* tests fail, we don't want the created sp to exist */
                     param3Val = (int)cmd.Parameters["@param3"].Value;
                     param1Val = (int)cmd.Parameters["@param1"].Value;
                     rvalVal = (int)cmd.Parameters["@RETURN_VALUE"].Value;

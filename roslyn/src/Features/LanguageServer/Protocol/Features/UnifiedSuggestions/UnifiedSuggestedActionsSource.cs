@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         }
 
         /// <summary>
-        /// Arrange fixes into groups based on the issue (diagnostic being fixed) and prioritize these groups.
+        /// Arrange fixes into groups based on the issue (diagnostic being fixed) and prioritize these
+        // groups.
         /// </summary>
         private static async Task<ImmutableArray<UnifiedSuggestedActionSet>> OrganizeFixesAsync(
             Workspace workspace,
@@ -397,15 +398,19 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         }
 
         /// <summary>
-        /// Return prioritized set of fix groups such that fix group for suppression always show up at the bottom of the list.
+        /// Return prioritized set of fix groups such that fix group for suppression always show up at the
+        // bottom of the list.
         /// </summary>
         /// <remarks>
-        /// Fix groups are returned in priority order determined based on <see cref="ExtensionOrderAttribute"/>.
+        /// Fix groups are returned in priority order determined based on <see
+        // cref="ExtensionOrderAttribute"/>.
         /// Priority for all <see cref="UnifiedSuggestedActionSet"/>s containing fixes is set to <see
         /// cref="CodeActionPriority.Default"/> by default. The only exception is the case where a <see
         /// cref="UnifiedSuggestedActionSet"/> only contains suppression fixes - the priority of such <see
-        /// cref="UnifiedSuggestedActionSet"/>s is set to <see cref="CodeActionPriority.Lowest"/> so that suppression
-        /// fixes always show up last after all other fixes (and refactorings) for the selected line of code.
+        /// cref="UnifiedSuggestedActionSet"/>s is set to <see cref="CodeActionPriority.Lowest"/> so that
+        // suppression
+        /// fixes always show up last after all other fixes (and refactorings) for the selected line of
+        // code.
         /// </remarks>
         private static ImmutableArray<UnifiedSuggestedActionSet> PrioritizeFixGroups(
             Solution originalSolution,
@@ -570,7 +575,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             {
                 var priority = group.Key;
 
-                // diagnostic from things like build shouldn't reach here since we don't support LB for those diagnostics
+                // diagnostic from things like build shouldn't reach here since we don't support LB for those
+                // diagnostics
                 var category = GetFixCategory(groupKey.Item1.Severity);
                 sets.Add(
                     new UnifiedSuggestedActionSet(
@@ -720,7 +726,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         /// Arrange refactorings into groups.
         /// </summary>
         /// <remarks>
-        /// Refactorings are returned in priority order determined based on <see cref="ExtensionOrderAttribute"/>.
+        /// Refactorings are returned in priority order determined based on <see
+        // cref="ExtensionOrderAttribute"/>.
         /// Priority for all <see cref="UnifiedSuggestedActionSet"/>s containing refactorings is set to
         /// <see cref="CodeActionPriority.Low"/> and should show up after fixes but before
         /// suppression fixes in the light bulb menu.

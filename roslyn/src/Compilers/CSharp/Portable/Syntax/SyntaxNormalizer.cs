@@ -575,13 +575,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             else if (currentToken.Parent is PropertyDeclarationSyntax property)
             {
                 // If the current semicolon token belongs to a property
-                // then it is a semicolon at the end of a property typically (but not always) after a property initializer:
+                // then it is a semicolon at the end of a property typically (but not always) after a property
+                // initializer:
                 // public int Prop { get; } = 1; <-- this one
-                // public int Prop { get; }; <-- this produces a syntax error, but the semicolon is still attached to the property
-                // In such cases we need to have 2 line breaks in order to have proper separation between members of a class, struct etc.
+                // public int Prop { get; }; <-- this produces a syntax error, but the semicolon is still attached
+                // to the property
+                // In such cases we need to have 2 line breaks in order to have proper separation between members of
+                // a class, struct etc.
                 // The only exception is when the next token starts a new single-line property.
                 // In such case we want to group these properties together by having only 1 line break.
-                // Note: case, when the property is the last member and needs only 1 line break after it is handled above (the next token is a closing brace then)
+                // Note: case, when the property is the last member and needs only 1 line break after it is handled
+                // above (the next token is a closing brace then)
                 Debug.Assert(
                     ((PropertyDeclarationSyntax)currentToken.Parent).SemicolonToken == currentToken
                 );
@@ -915,6 +919,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
 
             // Rules for function pointer below are taken from:
+            //
             // https://github.com/dotnet/roslyn/blob/1cca63b5d8ea170f8d8e88e1574aa3ebe354c23b/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Formatting/Rules/SpacingFormattingRule.cs#L321-L413
             if (token.Parent.IsKind(SyntaxKind.FunctionPointerType))
             {
@@ -1069,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             // 1. Separator before open brace token
             // 2. Separator after open brace token
             // 3. Separator before close brace token
-            // e.g. `$"{new SomeClass() { A = 2 }}"`, [SomeAttribute(new int[] { 1, 2, 3 })] or `MethodCall(new Arg { A = 1, B = 2 })`
+            // e.g. `$"{new SomeClass() { A = 2 }}"`, [SomeAttribute(new int[] { 1, 2, 3 })] or `MethodCall(new
+            // Arg { A = 1, B = 2 })`
             // Initializers in such context are not expected to be large,
             // so formatting them in single-line fashion looks more compact.
             if (IsSingleLineInitializerContext(token.Parent))
@@ -1737,10 +1743,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         {
             if (node.StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken)
             {
-                //Just for non verbatim strings we want to make sure that the formatting of interpolations does not emit line breaks.
+                //Just for non verbatim strings we want to make sure that the formatting of interpolations does not
+                // emit line breaks.
                 //See: https://github.com/dotnet/roslyn/issues/50742
                 //
-                //The flag _inSingleLineInterpolation is set to true while visiting InterpolatedStringExpressionSyntax and checked in LineBreaksAfter
+                //The flag _inSingleLineInterpolation is set to true while visiting
+                // InterpolatedStringExpressionSyntax and checked in LineBreaksAfter
                 //to suppress adding newlines.
                 var old = _inSingleLineInterpolation;
                 _inSingleLineInterpolation = true;

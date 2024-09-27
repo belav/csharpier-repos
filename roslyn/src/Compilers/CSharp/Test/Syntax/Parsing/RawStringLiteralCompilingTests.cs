@@ -20,7 +20,8 @@ public class RawStringLiteralCompilingTests : CompilingTestBase
                 parseOptions: TestOptions.Regular10
             )
             .VerifyDiagnostics(
-                // (3,22): error CS8936: Feature 'raw string literals' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (3,22): error CS8936: Feature 'raw string literals' is not available in C# 10.0. Please use
+                // language version 11.0 or greater.
                 //     const string s = """ """;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, @""""""" """"""")
                     .WithArguments("raw string literals", "11.0")
@@ -251,7 +252,8 @@ class C
                 parseOptions: TestOptions.Regular9
             )
             .VerifyDiagnostics(
-                // (5,20): error CS8773: Feature 'raw string literals' is not available in C# 9.0. Please use language version 11.0 or greater.
+                // (5,20): error CS8773: Feature 'raw string literals' is not available in C# 9.0. Please use
+                // language version 11.0 or greater.
                 //         var v = $"{"""
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
@@ -261,7 +263,8 @@ class C
                     )
                     .WithArguments("raw string literals", "11.0")
                     .WithLocation(5, 20),
-                // (7,4): error CS8967: Newlines inside a non-verbatim interpolated string are not supported in C# 9.0. Please use language version 11.0 or greater.
+                // (7,4): error CS8967: Newlines inside a non-verbatim interpolated string are not supported in C#
+                // 9.0. Please use language version 11.0 or greater.
                 // """}";
                 Diagnostic(
                         ErrorCode.ERR_NewlinesAreNotAllowedInsideANonVerbatimInterpolatedString,
@@ -356,7 +359,9 @@ class C
 }"
             )
             .VerifyDiagnostics(
-                // (8,17): error CS1061: 'string' does not contain a definition for 'GetAwaiter' and no accessible extension method 'GetAwaiter' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+                // (8,17): error CS1061: 'string' does not contain a definition for 'GetAwaiter' and no accessible
+                // extension method 'GetAwaiter' accepting a first argument of type 'string' could be found (are you
+                // missing a using directive or an assembly reference?)
                 //         var v = await """ """;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, @"await """""" """"""")
                     .WithArguments("string", "GetAwaiter")
@@ -449,7 +454,8 @@ class C
 }"
             )
             .VerifyDiagnostics(
-                // (6,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (6,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         """ """;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, @""""""" """"""").WithLocation(6, 9)
             );
@@ -575,7 +581,8 @@ class C
     {
         CreateCompilation("class C\r\n{\r\nconst string s = \"\"\"\r\n\t\r\n \"\"\";\r\n}")
             .VerifyDiagnostics(
-                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
+                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string
+                // literal: '\t' versus '\u0020'
                 Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "	")
                     .WithArguments(@"\t", @"\u0020")
                     .WithLocation(4, 1)
@@ -587,7 +594,8 @@ class C
     {
         CreateCompilation("class C\r\n{\r\nconst string s = \"\"\"\r\n \r\n\t\"\"\";\r\n}")
             .VerifyDiagnostics(
-                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\u0020' versus '\t'
+                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string
+                // literal: '\u0020' versus '\t'
                 Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, " ")
                     .WithArguments(@"\u0020", @"\t")
                     .WithLocation(4, 1)
@@ -599,7 +607,8 @@ class C
     {
         CreateCompilation("class C\r\n{\r\nconst string s = \"\"\"\r\n \t\r\n  \"\"\";\r\n}")
             .VerifyDiagnostics(
-                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
+                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string
+                // literal: '\t' versus '\u0020'
                 Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, " 	")
                     .WithArguments(@"\t", @"\u0020")
                     .WithLocation(4, 1)
@@ -611,7 +620,8 @@ class C
     {
         CreateCompilation("class C\r\n{\r\nconst string s = \"\"\"\r\n \t\r\n   \"\"\";\r\n}")
             .VerifyDiagnostics(
-                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\t' versus '\u0020'
+                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string
+                // literal: '\t' versus '\u0020'
                 Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, " 	")
                     .WithArguments(@"\t", @"\u0020")
                     .WithLocation(4, 1)
@@ -623,7 +633,8 @@ class C
     {
         CreateCompilation("class C\r\n{\r\nconst string s = \"\"\"\r\n\f\r\n\v\"\"\";\r\n}")
             .VerifyDiagnostics(
-                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string literal: '\f' versus '\v'
+                // (4,1): error CS9003: Line contains different whitespace than the closing line of the raw string
+                // literal: '\f' versus '\v'
                 Diagnostic(ErrorCode.ERR_LineContainsDifferentWhitespace, "")
                     .WithArguments(@"\f", @"\v")
                     .WithLocation(4, 1)

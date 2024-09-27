@@ -12,13 +12,15 @@ namespace System.Reflection.Metadata.Ecma335
         {
             if (value == null)
             {
-                // The encoding of Type for the nullref value for FieldInit is ELEMENT_TYPE_CLASS with a Value of a zero.
+                // The encoding of Type for the nullref value for FieldInit is ELEMENT_TYPE_CLASS with a Value of a
+                // zero.
                 return (SignatureTypeCode)0x12; // TODO
             }
 
             Debug.Assert(!value.GetType().GetTypeInfo().IsEnum);
 
-            // Perf: Note that JIT optimizes each expression val.GetType() == typeof(T) to a single register comparison.
+            // Perf: Note that JIT optimizes each expression val.GetType() == typeof(T) to a single register
+            // comparison.
             // Also the checks are sorted by commonality of the checked types.
 
             if (value.GetType() == typeof(int))

@@ -227,8 +227,10 @@ namespace System
             {
                 currSymbol = info.CurrencySymbolTChar<TChar>();
 
-                // The idea here is to match the currency separators and on failure match the number separators to keep the perf of VB's IsNumeric fast.
-                // The values of decSep are setup to use the correct relevant separator (currency in the if part and decimal in the else part).
+                // The idea here is to match the currency separators and on failure match the number separators to
+                // keep the perf of VB's IsNumeric fast.
+                // The values of decSep are setup to use the correct relevant separator (currency in the if part and
+                // decimal in the else part).
                 decSep = info.CurrencyDecimalSeparatorTChar<TChar>();
                 groupSep = info.CurrencyGroupSeparatorTChar<TChar>();
                 parsingCurrency = true;
@@ -341,7 +343,8 @@ namespace System
 
                         if (digCount < maxDigCount)
                         {
-                            // Handle a case like "53.0". We need to ignore trailing zeros in the fractional part for floating point numbers, so we keep a count of the number of trailing zeros and update digCount later
+                            // Handle a case like "53.0". We need to ignore trailing zeros in the fractional part for floating
+                            // point numbers, so we keep a count of the number of trailing zeros and update digCount later
                             if (ch == '0')
                             {
                                 numberOfTrailingZeros++;
@@ -735,7 +738,8 @@ namespace System
                     }
                 }
 
-                // Parse most digits, up to the potential for overflow, which can't happen until after MaxDigitCount - 1 digits.
+                // Parse most digits, up to the potential for overflow, which can't happen until after MaxDigitCount
+                // - 1 digits.
                 answer = TInteger.CreateTruncating(num - '0'); // first digit
                 index++;
 
@@ -891,7 +895,8 @@ namespace System
             goto DoneAtEndButPotentialOverflow;
         }
 
-        /// <summary>Parses <typeparamref name="TInteger"/> limited to styles that make up NumberStyles.HexNumber.</summary>
+        /// <summary>Parses <typeparamref name="TInteger"/> limited to styles that make up
+        // NumberStyles.HexNumber.</summary>
         internal static ParsingStatus TryParseBinaryIntegerHexNumberStyle<TChar, TInteger>(
             ReadOnlySpan<TChar> value,
             NumberStyles styles,
@@ -1151,8 +1156,10 @@ namespace System
             uint c = *p;
             if (c == 0)
             {
-                // To avoid risking an app-compat issue with pre 4.5 (where some app was illegally using Reflection to examine the internal scale bits), we'll only force
-                // the scale to 0 if the scale was previously positive (previously, such cases were unparsable to a bug.)
+                // To avoid risking an app-compat issue with pre 4.5 (where some app was illegally using Reflection
+                // to examine the internal scale bits), we'll only force
+                // the scale to 0 if the scale was previously positive (previously, such cases were unparsable to a
+                // bug.)
                 value = new decimal(0, 0, 0, sign, (byte)Math.Clamp(-e, 0, 28));
                 return true;
             }

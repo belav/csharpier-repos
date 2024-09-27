@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/Common/tests/System/Collections/IEnumerable.NonGeneric.Tests.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -39,7 +41,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected delegate bool ModifyEnumerable(IEnumerable enumerable);
 
         /// <summary>
-        /// To be implemented in the concrete collections test classes. Returns a set of ModifyEnumerable delegates
+        /// To be implemented in the concrete collections test classes. Returns a set of ModifyEnumerable
+        // delegates
         /// that modify the enumerable passed to them.
         /// </summary>
         protected abstract IEnumerable<ModifyEnumerable> GetModifyEnumerables(
@@ -64,13 +67,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected virtual bool ResetImplemented => true;
 
         /// <summary>
-        /// When calling Current of the enumerator before the first MoveNext, after the end of the collection,
-        /// or after modification of the enumeration, the resulting behavior is undefined. Tests are included
+        /// When calling Current of the enumerator before the first MoveNext, after the end of the
+        // collection,
+        /// or after modification of the enumeration, the resulting behavior is undefined. Tests are
+        // included
         /// to cover two behavioral scenarios:
         ///   - Throwing an InvalidOperationException
         ///   - Returning an undefined value.
         ///
-        /// If this property is set to true, the tests ensure that the exception is thrown. The default value is
+        /// If this property is set to true, the tests ensure that the exception is thrown. The default
+        // value is
         /// false.
         /// </summary>
         protected virtual bool Enumerator_Current_UndefinedOperation_Throws => false;
@@ -86,7 +92,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected virtual EnumerableOrder Order => EnumerableOrder.Sequential;
 
         /// <summary>
-        /// An enum to allow specification of the order of the Enumerable. Used in validation for enumerables.
+        /// An enum to allow specification of the order of the Enumerable. Used in validation for
+        // enumerables.
         /// </summary>
         protected enum EnumerableOrder
         {

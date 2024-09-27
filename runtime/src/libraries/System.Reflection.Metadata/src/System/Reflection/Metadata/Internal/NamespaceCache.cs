@@ -58,9 +58,12 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// This will return a StringHandle for the simple name of a namespace name at the given segment index.
-        /// If no segment index is passed explicitly or the "segment" index is greater than or equal to the number
-        /// of segments, then the last segment is used. "Segment" in this context refers to part of a namespace
+        /// This will return a StringHandle for the simple name of a namespace name at the given segment
+        // index.
+        /// If no segment index is passed explicitly or the "segment" index is greater than or equal to the
+        // number
+        /// of segments, then the last segment is used. "Segment" in this context refers to part of a
+        // namespace
         /// name between dots.
         ///
         /// Example: Given a NamespaceDefinitionHandle to "System.Collections.Generic.Test" called 'handle':
@@ -102,7 +105,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Two distinct namespace handles represent the same namespace if their full names are the same. This
+        /// Two distinct namespace handles represent the same namespace if their full names are the same.
+        // This
         /// method merges builders corresponding to such namespace handles.
         /// </summary>
         private void PopulateNamespaceTable()
@@ -120,7 +124,8 @@ namespace System.Reflection.Metadata.Ecma335
                 // Make sure to add entry for root namespace. The root namespace is special in that even
                 // though it might not have types of its own it always has an equivalent representation
                 // as a nil handle and we don't want to handle it below as dot-terminated virtual namespace.
-                // We use NamespaceDefinitionHandle.FromIndexOfFullName(0) instead of default(NamespaceDefinitionHandle) so
+                // We use NamespaceDefinitionHandle.FromIndexOfFullName(0) instead of
+                // default(NamespaceDefinitionHandle) so
                 // that we never hand back a handle to the user that doesn't have a typeid as that prevents
                 // round-trip conversion to Handle and back. (We may discover other handle aliases for the
                 // root namespace (any nil/empty string will do), but we need this one to always be there.
@@ -203,7 +208,8 @@ namespace System.Reflection.Metadata.Ecma335
                 }
             }
 
-            // Needs to be done outside of foreach (var group in table) to avoid modifying the dictionary while foreach'ing over it.
+            // Needs to be done outside of foreach (var group in table) to avoid modifying the dictionary while
+            // foreach'ing over it.
             if (remaps != null)
             {
                 foreach (var tuple in remaps)
@@ -332,7 +338,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// This will link all parents/children in the given namespaces dictionary up to each other.
         ///
-        /// In some cases, we need to synthesize namespaces that do not have any type definitions or forwarders
+        /// In some cases, we need to synthesize namespaces that do not have any type definitions or
+        // forwarders
         /// of their own, but do have child namespaces. These are returned via the virtualNamespaces out
         /// parameter.
         /// </summary>
@@ -423,7 +430,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         private void EnsureNamespaceTableIsPopulated()
         {
-            // PERF: Branch will rarely be taken; do work in PopulateNamespaceList() so this can be inlined easily.
+            // PERF: Branch will rarely be taken; do work in PopulateNamespaceList() so this can be inlined
+            // easily.
             if (_namespaceTable == null)
             {
                 PopulateNamespaceTable();
@@ -432,10 +440,13 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// An intermediate class used to build NamespaceData instances. This was created because we wanted to
-        /// use ImmutableArrays in NamespaceData, but having ArrayBuilders and ImmutableArrays that served the
+        /// An intermediate class used to build NamespaceData instances. This was created because we wanted
+        // to
+        /// use ImmutableArrays in NamespaceData, but having ArrayBuilders and ImmutableArrays that served
+        // the
         /// same purpose in NamespaceData got ugly. With the current design of how we create our Namespace
-        /// dictionary, this needs to be a class because we have a many-to-one mapping between NamespaceHandles
+        /// dictionary, this needs to be a class because we have a many-to-one mapping between
+        // NamespaceHandles
         /// and NamespaceData. So, the pointer semantics must be preserved.
         ///
         /// This class assumes that the builders will not be modified in any way after the first call to

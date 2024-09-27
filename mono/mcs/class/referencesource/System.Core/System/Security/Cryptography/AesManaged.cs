@@ -12,8 +12,10 @@ using System.Diagnostics.Contracts;
 namespace System.Security.Cryptography
 {
     /// <summary>
-    ///     Managed implementation of the AES algorithm. AES is esentially Rijndael with a fixed block size
-    ///     and iteration count, so we just wrap the RijndaelManaged class and allow only 128 bit blocks to
+    ///     Managed implementation of the AES algorithm. AES is esentially Rijndael with a fixed block
+    // size
+    ///     and iteration count, so we just wrap the RijndaelManaged class and allow only 128 bit blocks
+    // to
     ///     be used.
     /// </summary>
     public sealed class AesManaged : Aes

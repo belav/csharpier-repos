@@ -3,7 +3,8 @@
 
 namespace System.ComponentModel.Composition
 {
-    // We need a public version of CompositionErrorId, so that the QA tests can access and verify the errors.
+    // We need a public version of CompositionErrorId, so that the QA tests can access and verify the
+    // errors.
     public enum ErrorId : int
     {
         Unknown = CompositionErrorId.Unknown,

@@ -163,7 +163,7 @@ namespace System.Configuration
                     config_source = reader.Value;
             }
 
-            /* XXX this stuff shouldn't be here */
+/* XXX this stuff shouldn't be here */
             {
                 if (protection_provider != null)
                 {
@@ -262,13 +262,13 @@ namespace System.Configuration
             else
                 elem = this;
 
-            /*
-             * FIXME: LAMESPEC
-             *
-             * Cache the current values of 'parentElement' and 'saveMode' for later use in
-             * ConfigurationElement.SerializeToXmlElement().
-             *
-             */
+/*
+* FIXME: LAMESPEC
+*
+* Cache the current values of 'parentElement' and 'saveMode' for later use in
+* ConfigurationElement.SerializeToXmlElement().
+*
+*/
             elem.PrepareSave(parentElement, saveMode);
             bool hasValues = elem.HasValues(parentElement, saveMode);
 

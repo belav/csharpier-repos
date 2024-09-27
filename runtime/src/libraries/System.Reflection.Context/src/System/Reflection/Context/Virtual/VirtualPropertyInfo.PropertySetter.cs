@@ -43,7 +43,8 @@ namespace System.Reflection.Context.Virtual
                 CultureInfo? culture
             )
             {
-                // invokeAttr, binder, and culture are ignored, similar to what runtime reflection does with the default binder.
+                // invokeAttr, binder, and culture are ignored, similar to what runtime reflection does with the
+                // default binder.
 
                 if (parameters == null || parameters.Length != 1)
                     throw new TargetParameterCountException();

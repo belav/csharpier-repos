@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 namespace Microsoft.EntityFrameworkCore.Storage.Json;
 
 /// <summary>
-///     A <see cref="JsonValueReaderWriter{TValue}" /> that wraps an existing reader/writer and adds casts to the given type.
+///     A <see cref="JsonValueReaderWriter{TValue}" /> that wraps an existing reader/writer and adds
+// casts to the given type.
 /// </summary>
 public class JsonCastValueReaderWriter<TConverted>
     : JsonValueReaderWriter<TConverted>,

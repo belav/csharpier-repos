@@ -28,8 +28,10 @@ namespace Microsoft.Extensions.Options
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection"/> for the options being configured.</param>
-        /// <param name="name">The default name of the <typeparamref name="TOptions"/> instance, if null <see cref="Options.DefaultName"/> is used.</param>
+        /// <param name="services">The <see cref="IServiceCollection"/> for the options being
+        // configured.</param>
+        /// <param name="name">The default name of the <typeparamref name="TOptions"/> instance, if null
+        // <see cref="Options.DefaultName"/> is used.</param>
         public OptionsBuilder(IServiceCollection services, string? name)
         {
             ThrowHelper.ThrowIfNull(services);

@@ -66,12 +66,12 @@ namespace MonoTests.System.Web.UI.HtmlControls
         {
             HtmlInputFilePoker p = new HtmlInputFilePoker();
 
-            /* MS throws a null exception on both
-             * get_PostedFile and get_Value in this test,
-             * which makes me think (in the PostedFile
-             * case at least) they're directly accessing
-             * Page.Request.Files (which our test doesn't
-             * support) */
+/* MS throws a null exception on both
+* get_PostedFile and get_Value in this test,
+* which makes me think (in the PostedFile
+* case at least) they're directly accessing
+* Page.Request.Files (which our test doesn't
+* support) */
 
             Assert.AreEqual("", p.Accept, "A1");
             Assert.AreEqual(-1, p.MaxLength, "A2");

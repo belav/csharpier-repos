@@ -174,7 +174,8 @@ namespace System.IO.Ports.Tests
                 byte[] xmitBuffer = new byte[1];
                 int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
 
-                //Sleep some random period with of a maximum duration of half the largest possible timeout value for a read method on COM1
+                //Sleep some random period with of a maximum duration of half the largest possible timeout value for
+                // a read method on COM1
                 Thread.Sleep(sleepPeriod);
 
                 com2.Open();
@@ -229,8 +230,10 @@ namespace System.IO.Ports.Tests
 
                 int actualCharIndex = 0;
 
-                /* 1 Additional character gets added to the input buffer when the parity error occurs on the last byte of a stream
-                 We are verifying that besides this everything gets read in correctly. See NDP Whidbey: 24216 for more info on this */
+/* 1 Additional character gets added to the input buffer when the parity error occurs on the last
+byte of a stream
+We are verifying that besides this everything gets read in correctly. See NDP Whidbey: 24216 for
+more info on this */
                 Debug.WriteLine(
                     "Verifying default ParityReplace byte with a parity errro on the last byte"
                 );
@@ -328,7 +331,8 @@ namespace System.IO.Ports.Tests
             actualTime /= NUM_TRYS;
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
 
-            //Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
+            //Verify that the percentage difference between the expected and actual timeout is less then
+            // maxPercentageDifference
             if (maxPercentageDifference < percentageDifference)
             {
                 Fail(
@@ -385,7 +389,8 @@ namespace System.IO.Ports.Tests
                 }
                 else
                 {
-                    //Else parityReplace was set to a value and we should expect this value to be returned on a parity error
+                    //Else parityReplace was set to a value and we should expect this value to be returned on a parity
+                    // error
                     com1.ParityReplace = (byte)parityReplace;
                     expectedChar = parityReplace;
                 }

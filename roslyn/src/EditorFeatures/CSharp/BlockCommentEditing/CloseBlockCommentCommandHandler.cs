@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                 {
                     var (snapshot, position) = caret.Value;
 
-                    // Check that the line is all whitespace ending with an asterisk and a single space (| marks caret position):
+                    // Check that the line is all whitespace ending with an asterisk and a single space (| marks caret
+                    // position):
                     // * |
                     if (
                         position >= 2

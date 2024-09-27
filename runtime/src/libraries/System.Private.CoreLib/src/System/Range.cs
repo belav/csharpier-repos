@@ -41,7 +41,8 @@ namespace System
             End = end;
         }
 
-        /// <summary>Indicates whether the current Range object is equal to another object of the same type.</summary>
+        /// <summary>Indicates whether the current Range object is equal to another object of the same
+        // type.</summary>
         /// <param name="value">An object to compare with this object</param>
         public override bool Equals([NotNullWhen(true)] object? value) =>
             value is Range r && r.Start.Equals(Start) && r.End.Equals(End);
@@ -60,7 +61,8 @@ namespace System
 #endif
         }
 
-        /// <summary>Converts the value of the current Range object to its equivalent string representation.</summary>
+        /// <summary>Converts the value of the current Range object to its equivalent string
+        // representation.</summary>
         public override string ToString()
         {
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
@@ -96,14 +98,17 @@ namespace System
         /// <summary>Create a Range object starting from start index to the end of the collection.</summary>
         public static Range StartAt(Index start) => new Range(start, Index.End);
 
-        /// <summary>Create a Range object starting from first element in the collection to the end Index.</summary>
+        /// <summary>Create a Range object starting from first element in the collection to the end
+        // Index.</summary>
         public static Range EndAt(Index end) => new Range(Index.Start, end);
 
         /// <summary>Create a Range object starting from first element to the end.</summary>
         public static Range All => new Range(Index.Start, Index.End);
 
-        /// <summary>Calculate the start offset and length of range object using a collection length.</summary>
-        /// <param name="length">The length of the collection that the range will be used with. length has to be a positive value.</param>
+        /// <summary>Calculate the start offset and length of range object using a collection
+        // length.</summary>
+        /// <param name="length">The length of the collection that the range will be used with. length has
+        // to be a positive value.</param>
         /// <remarks>
         /// For performance reason, we don't validate the input length parameter against negative values.
         /// It is expected Range will be used with collections which always have non negative length/count.

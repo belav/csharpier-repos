@@ -1523,7 +1523,8 @@ END"
     [MemberData(nameof(IsAsyncData))]
     public async Task Insert_with_trigger_without_metadata_configuration(bool async)
     {
-        // Execute an insert against a table which has a trigger, but which haven't identified as such in our metadata.
+        // Execute an insert against a table which has a trigger, but which haven't identified as such in
+        // our metadata.
         // This causes a specialized exception to be thrown, directing users to the relevant docs.
         using var testStore = SqlServerTestStore.CreateInitialized(DatabaseName);
         using (
@@ -2080,7 +2081,8 @@ END"
 
             blog.FullName = "The Gorilla";
 
-            // The property 'FullName' on entity type 'FullNameBlog' is defined to be read-only after it has been saved,
+            // The property 'FullName' on entity type 'FullNameBlog' is defined to be read-only after it has
+            // been saved,
             // but its value has been modified or marked as modified.
             Assert.Equal(
                 CoreStrings.PropertyReadOnlyAfterSave("FullName", "FullNameBlog"),

@@ -81,7 +81,8 @@ namespace System.Net.NetworkInformation
 
         public override bool IsForwardingEnabled
         {
-            // Is it the right answer? In Vista there is MIB_IPINTERFACEROW.ForwardingEnabled, but not in former versions.
+            // Is it the right answer? In Vista there is MIB_IPINTERFACEROW.ForwardingEnabled, but not in former
+            // versions.
             get { return Win32NetworkInterface.FixedInfo.EnableRouting != 0; }
         }
 

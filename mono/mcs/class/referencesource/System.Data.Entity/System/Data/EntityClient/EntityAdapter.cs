@@ -47,7 +47,8 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Gets or sets whether the IEntityCache.AcceptChanges should be called during a call to IEntityAdapter.Update.
+        /// Gets or sets whether the IEntityCache.AcceptChanges should be called during a call to
+        // IEntityAdapter.Update.
         /// </summary>
         public bool AcceptChangesDuringUpdate
         {
@@ -56,7 +57,8 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Gets of sets the command timeout for update operations. If null, indicates that the default timeout
+        /// Gets of sets the command timeout for update operations. If null, indicates that the default
+        // timeout
         /// for the provider should be used.
         /// </summary>
         Int32? IEntityAdapter.CommandTimeout

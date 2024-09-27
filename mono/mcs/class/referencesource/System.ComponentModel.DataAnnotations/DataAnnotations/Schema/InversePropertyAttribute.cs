@@ -5,7 +5,8 @@ using System.Globalization;
 namespace System.ComponentModel.DataAnnotations.Schema
 {
     /// <summary>
-    /// Specifies the inverse of a navigation property that represents the other end of the same relationship.
+    /// Specifies the inverse of a navigation property that represents the other end of the same
+    // relationship.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [SuppressMessage(
@@ -20,7 +21,8 @@ namespace System.ComponentModel.DataAnnotations.Schema
         /// <summary>
         /// Initializes a new instance of the <see cref="InversePropertyAttribute"/> class.
         /// </summary>
-        /// <param name="property">The navigation property representing the other end of the same relationship.</param>
+        /// <param name="property">The navigation property representing the other end of the same
+        // relationship.</param>
         public InversePropertyAttribute(string property)
         {
             if (string.IsNullOrWhiteSpace(property))

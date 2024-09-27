@@ -94,7 +94,8 @@ namespace System.Text.Json.Serialization.Converters
                 {
                     // It is common for first-time MoveNextAsync() calls to return pending tasks,
                     // since typically that is when underlying network connections are being established.
-                    // For this case only, suppress flushing the current buffer contents (e.g. the leading '[' token of the written array)
+                    // For this case only, suppress flushing the current buffer contents (e.g. the leading '[' token of
+                    // the written array)
                     // to give the stream owner the ability to recover in case of a connection error.
                     state.SuppressFlush = true;
                     goto SuspendDueToPendingTask;

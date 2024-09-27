@@ -41,7 +41,8 @@ namespace System.Web.UI
             // The reason we don't use TaskFactory.FromAsync is that we need the end handler to execute
             // within the current synchronization context, but FromAsync doesn't make that guarantee.
 
-            // The callback that marks the TaskCompletionSource as complete can execute synchronously or asynchronously.
+            // The callback that marks the TaskCompletionSource as complete can execute synchronously or
+            // asynchronously.
             TaskCompletionSource<object> taskCompletionSource = new TaskCompletionSource<object>();
             IAsyncResult asyncResult = _beginHandler(
                 sender,

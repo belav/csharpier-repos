@@ -33,9 +33,9 @@ namespace System.Net.Sockets
         SocketError = (-1),
 
         /*
-         * All Windows Sockets error constants are biased by WSABASEERR from
-         * the "normal"
-         */
+        * All Windows Sockets error constants are biased by WSABASEERR from
+        * the "normal"
+        */
         /// <devdoc>
         ///    <para>
         ///       The base value of all socket error constants. All other socket errors are
@@ -47,8 +47,8 @@ namespace System.Net.Sockets
         ///WSABASEERR = 10000;
 
         /*
-         * Windows Sockets definitions of regular Microsoft C error constants
-         */
+        * Windows Sockets definitions of regular Microsoft C error constants
+        */
         /// <devdoc>
         ///    <para>
         ///       A blocking socket call was canceled.
@@ -92,8 +92,8 @@ namespace System.Net.Sockets
         TooManyOpenSockets = (10000 + 24), //WSAEMFILE
 
         /*
-         * Windows Sockets definitions of regular Berkeley error constants
-         */
+        * Windows Sockets definitions of regular Berkeley error constants
+        */
         /// <devdoc>
         ///    <para>
         ///       Resource temporarily unavailable.
@@ -341,8 +341,8 @@ namespace System.Net.Sockets
         ///    </para>
         /// </devdoc>
         /*
-         * Extended Windows Sockets error constant definitions
-         */
+        * Extended Windows Sockets error constant definitions
+        */
         /// <devdoc>
         ///    <para>
         ///       Network subsystem is unavailable.
@@ -375,15 +375,15 @@ namespace System.Net.Sockets
         TypeNotFound = (10000 + 109), //WSATYPE_NOT_FOUND
 
         /*
-         * Error return codes from gethostbyname() and gethostbyaddr()
-         *              = (when using the resolver). Note that these errors are
-         * retrieved via WSAGetLastError() and must therefore follow
-         * the rules for avoiding clashes with error numbers from
-         * specific implementations or language run-time systems.
-         * For this reason the codes are based at 10000+1001.
-         * Note also that [WSA]NO_ADDRESS is defined only for
-         * compatibility purposes.
-         */
+        * Error return codes from gethostbyname() and gethostbyaddr()
+        *              = (when using the resolver). Note that these errors are
+        * retrieved via WSAGetLastError() and must therefore follow
+        * the rules for avoiding clashes with error numbers from
+        * specific implementations or language run-time systems.
+        * For this reason the codes are based at 10000+1001.
+        * Note also that [WSA]NO_ADDRESS is defined only for
+        * compatibility purposes.
+        */
 
 
 

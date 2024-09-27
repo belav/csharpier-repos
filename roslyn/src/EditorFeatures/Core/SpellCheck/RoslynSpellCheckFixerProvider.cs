@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             if (renameService is null)
                 return (FunctionId.SpellCheckFixer_LanguageDoesNotSupportRename, null);
 
-            // Attempt to figure out what the language would rename here given the position of the misspelled word in
+            // Attempt to figure out what the language would rename here given the position of the misspelled
+            // word in
             // the full token.
             var info = await renameService
                 .GetRenameInfoAsync(document, span.Span.Start, cancellationToken)
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             if (!info.CanRename)
                 return (FunctionId.SpellCheckFixer_LanguageCouldNotGetRenameInfo, null);
 
-            // The subspan we're being asked to rename better fall entirely within the span of the token we're renaming.
+            // The subspan we're being asked to rename better fall entirely within the span of the token we're
+            // renaming.
             var fullTokenSpan = info.TriggerSpan;
             var subSpanBeingRenamed = span.Span.ToTextSpan();
             if (!fullTokenSpan.Contains(subSpanBeingRenamed))

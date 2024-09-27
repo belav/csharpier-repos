@@ -78,7 +78,8 @@ namespace System.Linq.Parallel.Tests
         }
 
         // Get two ranges, both sourced from arrays, with duplicate items in each array.
-        // Used in distinctness tests, in contrast to relying on a Select predicate to generate duplicate items.
+        // Used in distinctness tests, in contrast to relying on a Select predicate to generate duplicate
+        // items.
         public static IEnumerable<object[]> UnionSourceMultipleData(int[] counts)
         {
             foreach (int leftCount in counts)

@@ -245,7 +245,8 @@ class C
             var compilation = CreateCompilation(source);
 
             compilation.VerifyDiagnostics(
-                // (4,12): error CS0246: The type or namespace name 'UndefinedType' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,12): error CS0246: The type or namespace name 'UndefinedType' could not be found (are you
+                // missing a using directive or an assembly reference?)
                 //     void M(UndefinedType x) { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UndefinedType")
                     .WithArguments("UndefinedType")
@@ -500,7 +501,8 @@ class C { }";
                         );
                         VerifySuppressedDiagnostics(compilation, analyzersWithoutSuppressor);
 
-                        // Verify suppressed analyzer diagnostic, except when default severity is Error or diagnostic is not-configurable.
+                        // Verify suppressed analyzer diagnostic, except when default severity is Error or diagnostic is
+                        // not-configurable.
                         if (defaultSeverity == DiagnosticSeverity.Error || !configurable)
                         {
                             VerifySuppressedDiagnostics(compilation, analyzersWithSuppressor);
@@ -726,7 +728,8 @@ class C { }";
             );
             var analyzersAndSuppressors = new DiagnosticAnalyzer[] { analyzer, suppressor };
 
-            // "Suppressed diagnostic ID '{0}' does not match suppressable ID '{1}' for the given suppression descriptor."
+            // "Suppressed diagnostic ID '{0}' does not match suppressable ID '{1}' for the given suppression
+            // descriptor."
             var exceptionMessage = string.Format(
                 CodeAnalysisResources.InvalidDiagnosticSuppressionReported,
                 analyzer.Descriptor.Id,

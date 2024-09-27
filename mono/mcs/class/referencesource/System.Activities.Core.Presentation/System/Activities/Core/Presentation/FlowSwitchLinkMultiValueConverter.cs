@@ -22,7 +22,8 @@ namespace System.Activities.Core.Presentation
             if (isDefaultCase)
             {
                 // Fx.Assert(values.Length == 3, "The multi-binding must have been constructed by FlowSwitchLink.");
-                // For default case, we should have got three bindings. Two binding is possible when the linkModelItem is replaced but the view is not completely re-constructed yet.
+                // For default case, we should have got three bindings. Two binding is possible when the
+                // linkModelItem is replaced but the view is not completely re-constructed yet.
                 return values.Length == 3 ? values[2] : null;
             }
             else

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net;
 using System.Web.Mvc;
@@ -7,7 +8,8 @@ using System.Web.Mvc;
 namespace Microsoft.Web.Mvc.Resources
 {
     /// <summary>
-    /// Augments the RedirectToRouteResult behavior by sending Created HTTP status code in responses to POST, OK HTTP status code otherwise
+    /// Augments the RedirectToRouteResult behavior by sending Created HTTP status code in responses to
+    // POST, OK HTTP status code otherwise
     /// </summary>
     internal class ResourceRedirectToRouteResult : ActionResult
     {

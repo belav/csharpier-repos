@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Microsoft Public License. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Microsoft Public License, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Microsoft Public License.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Microsoft Public License. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Microsoft Public License, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Microsoft Public License.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 
 namespace System.Runtime.InteropServices
@@ -20,7 +20,8 @@ namespace System.Runtime.InteropServices
 
     /// <summary>
     /// Variant is the basic COM type for late-binding. It can contain any other COM data type.
-    /// This type definition precisely matches the unmanaged data layout so that the struct can be passed
+    /// This type definition precisely matches the unmanaged data layout so that the struct can be
+    // passed
     /// to and from COM calls.
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
@@ -49,8 +50,10 @@ namespace System.Runtime.InteropServices
         [FieldOffset(0)]
         private TypeUnion _typeUnion;
 
-        // Decimal is the largest data type and it needs to use the space that is normally unused in TypeUnion._wReserved1, etc.
-        // Hence, it is declared to completely overlap with TypeUnion. A Decimal does not use the first two bytes, and so
+        // Decimal is the largest data type and it needs to use the space that is normally unused in
+        // TypeUnion._wReserved1, etc.
+        // Hence, it is declared to completely overlap with TypeUnion. A Decimal does not use the first two
+        // bytes, and so
         // TypeUnion._vt can still be used to encode the type.
         [FieldOffset(0)]
         private Decimal _decimal;
@@ -169,8 +172,10 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Primitive types are the basic COM types. It includes valuetypes like ints, but also reference types
-        /// like BStrs. It does not include composite types like arrays and user-defined COM types (IUnknown/IDispatch).
+        /// Primitive types are the basic COM types. It includes valuetypes like ints, but also reference
+        // types
+        /// like BStrs. It does not include composite types like arrays and user-defined COM types
+        // (IUnknown/IDispatch).
         /// </summary>
         internal static bool IsPrimitiveType(VarEnum varEnum)
         {

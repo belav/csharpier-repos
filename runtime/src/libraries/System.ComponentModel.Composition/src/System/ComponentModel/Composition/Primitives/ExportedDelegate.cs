@@ -46,7 +46,8 @@ namespace System.ComponentModel.Composition.Primitives
         {
             ParameterInfo[] parameters = _method.GetParameters();
 
-            // This array should contains a lit of all argument types, and the last one is the return type (could be void)
+            // This array should contains a lit of all argument types, and the last one is the return type
+            // (could be void)
             Type[] parameterTypes = new Type[parameters.Length + 1];
             parameterTypes[parameters.Length] = _method.ReturnType;
             for (int i = 0; i < parameters.Length; i++)

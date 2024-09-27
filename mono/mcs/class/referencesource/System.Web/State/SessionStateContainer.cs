@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * HttpSessionState
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* HttpSessionState
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 
 namespace System.Web.SessionState
 {
@@ -89,9 +89,9 @@ namespace System.Web.SessionState
 
         internal HttpSessionStateContainer() { }
 
-        /*
-         * The Id of the session.
-         */
+/*
+* The Id of the session.
+*/
         public String SessionID
         {
             get
@@ -105,9 +105,9 @@ namespace System.Web.SessionState
             }
         }
 
-        /*
-         * The length of a session before it times out, in minutes.
-         */
+/*
+* The length of a session before it times out, in minutes.
+*/
         public int Timeout
         {
             get { return _timeout; }
@@ -132,9 +132,9 @@ namespace System.Web.SessionState
             }
         }
 
-        /*
-         * Is this a new session?
-         */
+/*
+* Is this a new session?
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -144,9 +144,9 @@ namespace System.Web.SessionState
             get { return _newSession; }
         }
 
-        /*
-         * Is session state in a separate process
-         */
+/*
+* Is session state in a separate process
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -156,9 +156,9 @@ namespace System.Web.SessionState
             get { return _mode; }
         }
 
-        /*
-         * Is session state cookieless?
-         */
+/*
+* Is session state cookieless?
+*/
         public bool IsCookieless
         {
             get
@@ -183,10 +183,10 @@ namespace System.Web.SessionState
             get { return _cookieMode; }
         }
 
-        /*
-         * Abandon the session.
-         *
-         */
+/*
+* Abandon the session.
+*
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

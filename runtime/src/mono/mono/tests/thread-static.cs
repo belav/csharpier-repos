@@ -45,7 +45,7 @@ class T
         if (tfailed)
             return 2;
 
-        /* Test access though reflection */
+/* Test access though reflection */
         var = 42;
         FieldInfo fi = typeof(T).GetField("var", BindingFlags.NonPublic | BindingFlags.Static);
         if ((int)fi.GetValue(null) != 42)

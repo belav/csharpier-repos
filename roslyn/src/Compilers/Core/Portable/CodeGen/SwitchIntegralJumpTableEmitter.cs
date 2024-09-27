@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             //      }
 
             //      can be divided into 3 buckets: (1, 2, 4) (100) (200, 201, 202).
-            //      We do this bucketing so that we have reasonable size jump tables for generated switch instructions.
+            //      We do this bucketing so that we have reasonable size jump tables for generated switch
+            // instructions.
 
             //  c)	After bucketing, generate code to perform a binary search on these buckets array,
             //      emitting conditional jumps if current bucket sub-array has more than one bucket and
@@ -353,8 +354,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             this.EmitSwitchBuckets(switchBuckets, low, mid - 1);
 
             // NOTE:    Typically marking a synthetic label needs a hidden sequence point.
-            // NOTE:    Otherwise if you step (F11) to this label debugger may highlight previous (lexically) statement.
-            // NOTE:    We do not need a hidden point in this implementation since we do not interleave jump table
+            // NOTE:    Otherwise if you step (F11) to this label debugger may highlight previous (lexically)
+            // statement.
+            // NOTE:    We do not need a hidden point in this implementation since we do not interleave jump
+            // table
             // NOTE:    and cases so the "previous" statement will always be "switch".
 
             //  secondHalfLabel:
@@ -620,7 +623,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         )
         {
             // switch treats key as an unsigned int.
-            // this ensures that normalization does not introduce [over|under]flows issues with 32bit or shorter keys.
+            // this ensures that normalization does not introduce [over|under]flows issues with 32bit or shorter
+            // keys.
             // 64bit values, however must be checked before 32bit truncation happens.
             if (_keyTypeCode.Is64BitIntegral())
             {

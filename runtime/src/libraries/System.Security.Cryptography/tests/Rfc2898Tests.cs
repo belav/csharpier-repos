@@ -870,6 +870,7 @@ namespace System.Security.Cryptography
             };
 
             // From OpenSSL.
+            //
             // https://github.com/openssl/openssl/blob/6f0ac0e2f27d9240516edb9a23b7863e7ad02898/test/evptests.txt
             // Corroborated on http://stackoverflow.com/questions/5130513/pbkdf2-hmac-sha2-test-vectors,
             // though the SO answer stopped at 25 bytes.
@@ -978,6 +979,7 @@ namespace System.Security.Cryptography
 
             if (PlatformDetection.SupportsSha3)
             {
+                //
                 // https://github.com/openssl/openssl/blob/6821acbffda908ec69769ed7f110cfde57d8ca58/test/recipes/30-test_evp_data/evppbe_pbkdf2.txt#L128-L133
                 yield return new KnownValuesTestCase
                 {
@@ -989,6 +991,7 @@ namespace System.Security.Cryptography
                     AnswerHex = "778B6E237A0F49621549FF70D218D208",
                 };
 
+                //
                 // https://github.com/openssl/openssl/blob/6821acbffda908ec69769ed7f110cfde57d8ca58/test/recipes/30-test_evp_data/evppbe_pbkdf2.txt#L135-L140
                 yield return new KnownValuesTestCase
                 {
@@ -1000,6 +1003,7 @@ namespace System.Security.Cryptography
                     AnswerHex = "9A5F1E45E8B83F1B259BA72D11C59087",
                 };
 
+                //
                 // https://github.com/openssl/openssl/blob/6821acbffda908ec69769ed7f110cfde57d8ca58/test/recipes/30-test_evp_data/evppbe_pbkdf2.txt#L142-L147
                 yield return new KnownValuesTestCase
                 {

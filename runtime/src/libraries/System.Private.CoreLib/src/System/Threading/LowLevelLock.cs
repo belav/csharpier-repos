@@ -6,10 +6,14 @@ using System.Diagnostics;
 namespace System.Threading
 {
     /// <summary>
-    /// A lightweight non-recursive mutex. Waits on this lock are uninterruptible (from Thread.Interrupt(), which is supported
-    /// in some runtimes). That is the main reason this lock type would be used over interruptible locks, such as in a
-    /// low-level-infrastructure component that was historically not susceptible to a pending interrupt, and for compatibility
-    /// reasons, to ensure that it still would not be susceptible after porting that component to managed code.
+    /// A lightweight non-recursive mutex. Waits on this lock are uninterruptible (from
+    // Thread.Interrupt(), which is supported
+    /// in some runtimes). That is the main reason this lock type would be used over interruptible
+    // locks, such as in a
+    /// low-level-infrastructure component that was historically not susceptible to a pending interrupt,
+    // and for compatibility
+    /// reasons, to ensure that it still would not be susceptible after porting that component to
+    // managed code.
     /// </summary>
     internal sealed class LowLevelLock : IDisposable
     {
@@ -31,7 +35,8 @@ namespace System.Threading
         private Thread? _ownerThread;
 #endif
 
-        // Indicates whether a thread has been signaled, but has not yet been released from the wait. See SignalWaiter. Reads
+        // Indicates whether a thread has been signaled, but has not yet been released from the wait. See
+        // SignalWaiter. Reads
         // and writes must occur while _monitor is locked.
         private bool _isAnyWaitingThreadSignaled;
 
@@ -127,11 +132,16 @@ namespace System.Threading
 
         private bool TryAcquire_NoFastPath(int state)
         {
-            // The lock may be available, but there may be waiters. This thread could acquire the lock in that case. Acquiring
-            // the lock means that if this thread is repeatedly acquiring and releasing the lock, it could permanently starve
-            // waiters. Waiting instead in the same situation would deterministically create a lock convoy. Here, we opt for
-            // acquiring the lock to prevent a deterministic lock convoy in that situation, and rely on the system's
-            // waiting/waking implementation to mitigate starvation, even in cases where there are enough logical processors to
+            // The lock may be available, but there may be waiters. This thread could acquire the lock in that
+            // case. Acquiring
+            // the lock means that if this thread is repeatedly acquiring and releasing the lock, it could
+            // permanently starve
+            // waiters. Waiting instead in the same situation would deterministically create a lock convoy.
+            // Here, we opt for
+            // acquiring the lock to prevent a deterministic lock convoy in that situation, and rely on the
+            // system's
+            // waiting/waking implementation to mitigate starvation, even in cases where there are enough
+            // logical processors to
             // accommodate all threads.
             return (state & LockedMask) == 0
                 && Interlocked.CompareExchange(ref _state, state + LockedMask, state) == state;
@@ -172,14 +182,16 @@ namespace System.Threading
 
             _monitor.Acquire();
 
-            // Register this thread as a waiter by incrementing the waiter count. Incrementing the waiter count and waiting on
+            // Register this thread as a waiter by incrementing the waiter count. Incrementing the waiter count
+            // and waiting on
             // the monitor need to appear atomic to SignalWaiter so that its signal won't be lost.
             int state = Interlocked.Add(ref _state, WaiterCountIncrement);
 
             // Wait on the monitor until signaled, repeatedly until the lock can be acquired by this thread
             while (true)
             {
-                // The lock may have been released before the waiter count was incremented above, so try to acquire the lock
+                // The lock may have been released before the waiter count was incremented above, so try to acquire
+                // the lock
                 // with the new state before waiting
                 if (
                     (state & LockedMask) == 0
@@ -221,19 +233,28 @@ namespace System.Threading
 
         private void SignalWaiter()
         {
-            // Since the lock was already released by the caller, there are no guarantees on the state at this point. For
-            // instance, if there was only one thread waiting before the lock was released, then after the lock was released,
-            // another thread may have acquired and released the lock, and signaled the waiter, before the first thread arrives
-            // here. The monitor's lock is used to synchronize changes to the waiter count, so acquire the monitor and recheck
+            // Since the lock was already released by the caller, there are no guarantees on the state at this
+            // point. For
+            // instance, if there was only one thread waiting before the lock was released, then after the lock
+            // was released,
+            // another thread may have acquired and released the lock, and signaled the waiter, before the first
+            // thread arrives
+            // here. The monitor's lock is used to synchronize changes to the waiter count, so acquire the
+            // monitor and recheck
             // the waiter count before signaling.
             _monitor.Acquire();
 
             // Keep track of whether a thread has been signaled but has not yet been released from the wait.
-            // _isAnyWaitingThreadSignaled is set to false when a signaled thread wakes up. Since threads can preempt waiting
-            // threads and acquire the lock (see TryAcquire), it allows for example, one thread to acquire and release the lock
-            // multiple times while there are multiple waiting threads. In such a case, we don't want that thread to signal a
-            // waiter every time it releases the lock, as that will cause unnecessary context switches with more and more
-            // signaled threads waking up, finding that the lock is still locked, and going right back into a wait state. So,
+            // _isAnyWaitingThreadSignaled is set to false when a signaled thread wakes up. Since threads can
+            // preempt waiting
+            // threads and acquire the lock (see TryAcquire), it allows for example, one thread to acquire and
+            // release the lock
+            // multiple times while there are multiple waiting threads. In such a case, we don't want that
+            // thread to signal a
+            // waiter every time it releases the lock, as that will cause unnecessary context switches with more
+            // and more
+            // signaled threads waking up, finding that the lock is still locked, and going right back into a
+            // wait state. So,
             // signal only one waiting thread at a time.
             if ((uint)_state >= WaiterCountIncrement && !_isAnyWaitingThreadSignaled)
             {

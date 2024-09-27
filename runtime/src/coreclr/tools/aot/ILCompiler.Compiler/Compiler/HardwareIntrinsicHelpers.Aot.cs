@@ -18,7 +18,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Generates IL for the IsSupported property that reads this information from a field initialized by the runtime
+        /// Generates IL for the IsSupported property that reads this information from a field initialized
+        // by the runtime
         /// at startup. Only works for intrinsics that the code generator can generate detection code for.
         /// </summary>
         public static MethodIL EmitIsSupportedIL(

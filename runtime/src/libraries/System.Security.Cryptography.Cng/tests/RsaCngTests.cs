@@ -38,7 +38,8 @@ namespace System.Security.Cryptography.Cng.Tests
             {
                 byte[] signature = rsa.SignHash(hash, hashAlgorithm, paddingMode);
 
-                // RSACng.SignHash() is intentionally non-deterministic so we can verify that we got back a signature of the right length
+                // RSACng.SignHash() is intentionally non-deterministic so we can verify that we got back a
+                // signature of the right length
                 // but nothing about the contents.
                 Assert.Equal(expectedSignatureLength, signature.Length);
 
@@ -70,7 +71,8 @@ namespace System.Security.Cryptography.Cng.Tests
             {
                 byte[] signature = rsa.SignData(message, hashAlgorithm, paddingMode);
 
-                // RSACng.SignHash() is intentionally non-deterministic so we can verify that we got back a signature of the right length
+                // RSACng.SignHash() is intentionally non-deterministic so we can verify that we got back a
+                // signature of the right length
                 // but nothing about the contents.
                 Assert.Equal(expectedSignatureLength, signature.Length);
 

@@ -181,9 +181,9 @@ namespace System.ServiceModel.Description
                         continue;
                     }
 
-                    /* OperationInput */
+/* OperationInput */
 
-                    /* Parts, MessagePartDescription */
+/* Parts, MessagePartDescription */
                     resolveMessage(msg, msgdescr.Body, parts);
                     foreach (MessagePartDescription p in parts)
                         msgdescr.Body.Parts.Add(p);
@@ -341,12 +341,12 @@ namespace System.ServiceModel.Description
             string ns
         )
         {
-            /*foreach (XmlSchema xs in importer.Schemas)
-                if (xs.Types [qname] != null)
-                    return resolveParameters ((XmlSchemaElement) xs.Types [qname]., msgdescr, importer);
+/*foreach (XmlSchema xs in importer.Schemas)
+if (xs.Types [qname] != null)
+return resolveParameters ((XmlSchemaElement) xs.Types [qname]., msgdescr, importer);
 
-            //FIXME: What to do here?
-            throw new Exception ("Could not resolve : " + qname.ToString ());*/
+//FIXME: What to do here?
+throw new Exception ("Could not resolve : " + qname.ToString ());*/
             throw new NotImplementedException();
         }
 

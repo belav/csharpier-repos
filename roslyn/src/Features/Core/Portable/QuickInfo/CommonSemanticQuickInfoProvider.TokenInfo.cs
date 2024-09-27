@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             public readonly bool ShowAwaitReturn = showAwaitReturn;
 
             /// <summary>
-            /// The nullable flow state to show in Quick Info; will be <see cref="NullableFlowState.None"/> to show nothing.
+            /// The nullable flow state to show in Quick Info; will be <see cref="NullableFlowState.None"/> to
+            // show nothing.
             /// </summary>
             public readonly NullableFlowState NullableFlowState = nullableFlowState;
         }

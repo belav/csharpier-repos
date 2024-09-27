@@ -32,8 +32,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpMakeStatementAsynchronousCodeFixProvider() { }
 
-        // error CS8414: foreach statement cannot operate on variables of type 'IAsyncEnumerable<int>' because 'IAsyncEnumerable<int>' does not contain a public instance definition for 'GetEnumerator'. Did you mean 'await foreach'?
-        // error CS8418: 'IAsyncDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'. Did you mean 'await using' rather than 'using'?
+        // error CS8414: foreach statement cannot operate on variables of type 'IAsyncEnumerable<int>'
+        // because 'IAsyncEnumerable<int>' does not contain a public instance definition for 'GetEnumerator'.
+        // Did you mean 'await foreach'?
+        // error CS8418: 'IAsyncDisposable': type used in a using statement must be implicitly convertible
+        // to 'System.IDisposable'. Did you mean 'await using' rather than 'using'?
         public sealed override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create("CS8414", "CS8418");
 

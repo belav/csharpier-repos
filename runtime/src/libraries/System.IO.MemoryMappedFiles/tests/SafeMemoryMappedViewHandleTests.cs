@@ -13,7 +13,8 @@ namespace System.IO.MemoryMappedFiles.Tests
     public partial class SafeMemoryMappedViewHandleTests : MemoryMappedFilesTestBase
     {
         /// <summary>
-        /// Tests that external code can use SafeMemoryMappedViewHandle as the result of a P/Invoke on Windows.
+        /// Tests that external code can use SafeMemoryMappedViewHandle as the result of a P/Invoke on
+        // Windows.
         /// </summary>
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]

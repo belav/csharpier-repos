@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace WebMatrix.WebData
         }
 
         /// <summary>
-        /// Creates a new OAuth account with the specified data or update an existing one if it already exists.
+        /// Creates a new OAuth account with the specified data or update an existing one if it already
+        // exists.
         /// </summary>
         /// <param name="provider">The provider.</param>
         /// <param name="providerUserId">The provider userid.</param>
@@ -58,7 +60,8 @@ namespace WebMatrix.WebData
         }
 
         /// <summary>
-        /// Determines whether there exists a local account (as opposed to OAuth account) with the specified userId.
+        /// Determines whether there exists a local account (as opposed to OAuth account) with the specified
+        // userId.
         /// </summary>
         /// <param name="userId">The user id to check for local account.</param>
         /// <returns>

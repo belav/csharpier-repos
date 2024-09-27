@@ -76,7 +76,8 @@ internal static partial class Interop
         {
             Assembly currentAssembly = typeof(Ldap).Assembly;
 
-            // Register callback that tries to load other libraries when the default library "libldap-2.5.so.0" not found
+            // Register callback that tries to load other libraries when the default library "libldap-2.5.so.0"
+            // not found
             AssemblyLoadContext.GetLoadContext(currentAssembly).ResolvingUnmanagedDll += (
                 assembly,
                 ldapName
@@ -100,7 +101,8 @@ internal static partial class Interop
             };
 
             // OpenLdap must be initialized on a single thread, once this is done it allows concurrent calls
-            // By doing so in the static constructor we guarantee this is run before any other methods are called.
+            // By doing so in the static constructor we guarantee this is run before any other methods are
+            // called.
 
             // we call ldap_get_option_int to get an option and trigger the initialization as reccomended by
             // https://www.openldap.org/software//man.cgi?query=ldap_init

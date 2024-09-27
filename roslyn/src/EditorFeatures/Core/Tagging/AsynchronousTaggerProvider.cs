@@ -39,8 +39,10 @@ internal abstract class AsynchronousTaggerProvider<TTag>
         if (tagger is null)
             return null;
 
-        // If we're not able to convert the tagger we instantiated to the type the caller wants, then make sure we
-        // dispose of it now.  The tagger will have added a ref to the underlying tagsource, and we have to make
+        // If we're not able to convert the tagger we instantiated to the type the caller wants, then make
+        // sure we
+        // dispose of it now.  The tagger will have added a ref to the underlying tagsource, and we have to
+        // make
         // sure we return that to the proper starting value.
         if (tagger is not ITagger<T> typedTagger)
         {

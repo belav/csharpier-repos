@@ -150,7 +150,8 @@ namespace System.Net.WebSockets
                 _ => SR.net_WebSockets_Generic,
             };
 
-        // Set the error code only if there is an error (i.e. nativeError >= 0). Otherwise the code fails during deserialization
+        // Set the error code only if there is an error (i.e. nativeError >= 0). Otherwise the code fails
+        // during deserialization
         // as the Exception..ctor() throws on setting HResult to 0. The default for HResult is -2147467259.
         private void SetErrorCodeOnError(int nativeError)
         {

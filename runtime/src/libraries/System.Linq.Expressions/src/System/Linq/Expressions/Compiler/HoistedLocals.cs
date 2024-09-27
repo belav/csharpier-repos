@@ -19,7 +19,8 @@ namespace System.Linq.Expressions.Compiler
     //          object[] locals = new object[1];
     //          locals[0] = new StrongBox<string>();
     //          ((StrongBox<string>)locals[0]).Value = s;
-    //          return ((DynamicMethod)closure.Constants[0]).CreateDelegate(typeof(Func<string>), new Closure(null, locals));
+    //          return ((DynamicMethod)closure.Constants[0]).CreateDelegate(typeof(Func<string>), new
+    // Closure(null, locals));
     //      }
     //
     // ... and the inner as:

@@ -53,7 +53,8 @@ public class Cls
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
             );
             compilation.VerifyDiagnostics(
-                // (6,21): error CS8059: Feature 'out variable declaration' is not available in C# 6. Please use language version 7.0 or greater.
+                // (6,21): error CS8059: Feature 'out variable declaration' is not available in C# 6. Please use
+                // language version 7.0 or greater.
                 //         Test2(Test1(out int x1), x1);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "out")
                     .WithArguments("out variable declaration", "7.0")
@@ -98,12 +99,14 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "Test")
                     .WithArguments("Test")
                     .WithLocation(6, 9),
-                // (6,14): error CS8059: Feature 'out variable declaration' is not available in C# 6. Please use language version 7.0 or greater.
+                // (6,14): error CS8059: Feature 'out variable declaration' is not available in C# 6. Please use
+                // language version 7.0 or greater.
                 //         Test(out int x1);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "out")
                     .WithArguments("out variable declaration", "7.0")
                     .WithLocation(6, 14),
-                // (11,25): error CS8059: Feature 'out variable declaration' is not available in C# 6. Please use language version 7.0 or greater.
+                // (11,25): error CS8059: Feature 'out variable declaration' is not available in C# 6. Please use
+                // language version 7.0 or greater.
                 //         var x = new Cls(out int x2);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "out")
                     .WithArguments("out variable declaration", "7.0")
@@ -127,7 +130,8 @@ public class Cls
             VerifyModelForOutVar(model, x1Decl);
 
             var x2Decl = GetOutVarDeclaration(tree, "x2");
-            //VerifyModelForOutVar(model, x2Decl); Probably fails due to https://github.com/dotnet/roslyn/issues/16348
+            //VerifyModelForOutVar(model, x2Decl); Probably fails due to
+            // https://github.com/dotnet/roslyn/issues/16348
             VerifyModelForOutVarWithoutDataFlow(model, x2Decl);
 
             compilation = CreateCompilation(
@@ -160,7 +164,8 @@ public class Cls
             VerifyModelForOutVar(model, x1Decl);
 
             x2Decl = GetOutVarDeclaration(tree, "x2");
-            //VerifyModelForOutVar(model, x2Decl); Probably fails due to https://github.com/dotnet/roslyn/issues/16348
+            //VerifyModelForOutVar(model, x2Decl); Probably fails due to
+            // https://github.com/dotnet/roslyn/issues/16348
             VerifyModelForOutVarWithoutDataFlow(model, x2Decl);
         }
 
@@ -1497,10 +1502,12 @@ public class Cls
             DeclarationExpressionSyntax decl
         )
         {
-            // see https://github.com/dotnet/roslyn/issues/23006 and https://github.com/dotnet/roslyn/issues/23007 for more detail
+            // see https://github.com/dotnet/roslyn/issues/23006 and
+            // https://github.com/dotnet/roslyn/issues/23007 for more detail
 
             // unlike GetSymbolInfo or GetTypeInfo, GetOperation doesn't use SemanticModel's recovery mode.
-            // what that means is that GetOperation might return null for ones GetSymbol/GetTypeInfo do return info from
+            // what that means is that GetOperation might return null for ones GetSymbol/GetTypeInfo do return
+            // info from
             // error recovery mode
             var typeofExpression = decl.Ancestors()
                 .OfType<TypeOfExpressionSyntax>()
@@ -2609,7 +2616,8 @@ class Test : System.Attribute
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (8,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (8,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p = TakeOutParam(out int x3) && x3 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x3) && x3 > 0")
                     .WithLocation(8, 15),
@@ -2623,7 +2631,8 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
                     .WithArguments("x5")
                     .WithLocation(11, 40),
-                // (10,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (10,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p = TakeOutParam(51, out int x5) &&
                 Diagnostic(
                         ErrorCode.ERR_BadAttributeArgument,
@@ -2637,15 +2646,18 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
                     .WithArguments("x6")
                     .WithLocation(14, 37),
-                // (13,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (13,16): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p1 = TakeOutParam(out int x6) && x6 > 0,
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x6) && x6 > 0")
                     .WithLocation(13, 16),
-                // (14,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (14,16): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //           p2 = TakeOutParam(out int x6) && x6 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x6) && x6 > 0")
                     .WithLocation(14, 16),
-                // (15,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (15,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p = TakeOutParam(out int x7) && x7 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x7) && x7 > 0")
                     .WithLocation(15, 15),
@@ -2741,7 +2753,8 @@ class Test : System.Attribute
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (8,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (8,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(out int x3) && x3 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x3) && x3 > 0")
                     .WithLocation(8, 11),
@@ -2755,7 +2768,8 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
                     .WithArguments("x5")
                     .WithLocation(11, 36),
-                // (10,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (10,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(51, out int x5) &&
                 Diagnostic(
                         ErrorCode.ERR_BadAttributeArgument,
@@ -2769,15 +2783,18 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
                     .WithArguments("x6")
                     .WithLocation(14, 32),
-                // (13,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (13,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(out int x6) && x6 > 0,
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x6) && x6 > 0")
                     .WithLocation(13, 11),
-                // (14,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (14,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //           TakeOutParam(out int x6) && x6 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x6) && x6 > 0")
                     .WithLocation(14, 11),
-                // (15,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (15,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(out int x7) && x7 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out int x7) && x7 > 0")
                     .WithLocation(15, 11),
@@ -2874,7 +2891,8 @@ class Test : System.Attribute
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (8,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (8,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p = TakeOutParam(out var x3) && x3 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x3) && x3 > 0")
                     .WithLocation(8, 15),
@@ -2888,7 +2906,8 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
                     .WithArguments("x5")
                     .WithLocation(11, 40),
-                // (10,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (10,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p = TakeOutParam(51, out var x5) &&
                 Diagnostic(
                         ErrorCode.ERR_BadAttributeArgument,
@@ -2902,15 +2921,18 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
                     .WithArguments("x6")
                     .WithLocation(14, 37),
-                // (13,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (13,16): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p1 = TakeOutParam(out var x6) && x6 > 0,
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x6) && x6 > 0")
                     .WithLocation(13, 16),
-                // (14,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (14,16): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //           p2 = TakeOutParam(out var x6) && x6 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x6) && x6 > 0")
                     .WithLocation(14, 16),
-                // (15,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (15,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(p = TakeOutParam(out var x7) && x7 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x7) && x7 > 0")
                     .WithLocation(15, 15),
@@ -3006,7 +3028,8 @@ class Test : System.Attribute
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (8,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (8,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(out var x3) && x3 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x3) && x3 > 0")
                     .WithLocation(8, 11),
@@ -3020,7 +3043,8 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
                     .WithArguments("x5")
                     .WithLocation(11, 36),
-                // (10,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (10,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(51, out var x5) &&
                 Diagnostic(
                         ErrorCode.ERR_BadAttributeArgument,
@@ -3034,15 +3058,18 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
                     .WithArguments("x6")
                     .WithLocation(14, 32),
-                // (13,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (13,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(out var x6) && x6 > 0,
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x6) && x6 > 0")
                     .WithLocation(13, 11),
-                // (14,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (14,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //           TakeOutParam(out var x6) && x6 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x6) && x6 > 0")
                     .WithLocation(14, 11),
-                // (15,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (15,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [Test(TakeOutParam(out var x7) && x7 > 0)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "TakeOutParam(out var x7) && x7 > 0")
                     .WithLocation(15, 11),
@@ -3217,7 +3244,8 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
                     .WithArguments("var")
                     .WithLocation(6, 18),
-                // (6,18): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (6,18): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //     [Test(p: out var x5)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "var")
                     .WithArguments("7.2")
@@ -3232,7 +3260,8 @@ class Test : System.Attribute
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "Test(p: out var x5)")
                     .WithArguments("Test", "3")
                     .WithLocation(6, 6),
-                // (7,18): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (7,18): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //     [Test(p: out int x6)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "int")
                     .WithArguments("7.2")
@@ -3394,7 +3423,8 @@ public class X
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (25,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (25,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         catch when (TakeOutParam(out var x4) && x4 > 0)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -3404,7 +3434,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(34, 21),
-                // (45,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (45,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -3414,7 +3445,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(58, 34),
-                // (68,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (68,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             catch when (TakeOutParam(out var x9) && x9 > 0) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -3631,7 +3663,8 @@ public class X
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (25,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (25,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         catch when (TakeOutParam(out int x4) && x4 > 0)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -3641,7 +3674,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(34, 21),
-                // (45,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (45,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             int x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -3651,7 +3685,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(58, 34),
-                // (68,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (68,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             catch when (TakeOutParam(out int x9) && x9 > 0) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -4542,17 +4577,20 @@ public class Y
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (9,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (9,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         : base(TakeOutParam(3, out var x3))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
                     .WithLocation(9, 40),
-                // (15,13): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (15,13): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         int x4 = 1;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
                     .WithLocation(15, 13),
-                // (21,39): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (21,39): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //     => Dummy(TakeOutParam(52, out var x5), x5);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                     .WithArguments("x5")
@@ -4562,7 +4600,8 @@ public class Y
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x6")
                     .WithArguments("x6")
                     .WithLocation(24, 28),
-                // (28,28): error CS8196: Reference to an implicitly-typed out variable 'x7' is not permitted in the same argument list.
+                // (28,28): error CS8196: Reference to an implicitly-typed out variable 'x7' is not permitted in the
+                // same argument list.
                 //         : base(out var x7, x7)
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "x7")
                     .WithArguments("x7")
@@ -4577,7 +4616,8 @@ public class Y
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x8")
                     .WithArguments("x8")
                     .WithLocation(32, 41),
-                // (36,41): error CS8196: Reference to an implicitly-typed out variable 'x9' is not permitted in the same argument list.
+                // (36,41): error CS8196: Reference to an implicitly-typed out variable 'x9' is not permitted in the
+                // same argument list.
                 //         : base(TakeOutParam(out var x9, x9))
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "x9")
                     .WithArguments("x9")
@@ -4766,7 +4806,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
                     .WithArguments("x2")
                     .WithLocation(22, 19),
-                // (33,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (33,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         while (TakeOutParam(true, out var x4) && x4);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -4786,7 +4827,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(39, 19),
-                // (47,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (47,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -4806,7 +4848,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
                     .WithArguments("x9")
                     .WithLocation(66, 19),
-                // (69,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (69,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             while (TakeOutParam(true, out var x9) && x9); // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -5300,7 +5343,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
                     .WithArguments("x7")
                     .WithLocation(20, 27),
-                // (22,56): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (22,56): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //     bool Test11(object x11) => TakeOutParam(1, out int x11) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
                     .WithArguments("x11")
@@ -5560,12 +5604,14 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
                     .WithArguments("x7")
                     .WithLocation(43, 15),
-                // (51,54): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (51,54): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         bool f (object o) => TakeOutParam(o, out int x11) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
                     .WithArguments("x11")
                     .WithLocation(51, 54),
-                // (58,54): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (58,54): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         bool f (object o) => TakeOutParam(o, out int x12) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12")
                     .WithArguments("x12")
@@ -5772,7 +5818,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
                     .WithArguments("x7")
                     .WithLocation(20, 27),
-                // (22,54): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (22,54): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //     bool this[object x11] => TakeOutParam(1, out int x11) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
                     .WithArguments("x11")
@@ -6009,7 +6056,8 @@ public class X
             );
 
             compilation.VerifyDiagnostics(
-                // (14,46): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (14,46): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             Dummy(TakeOutParam(true, out var x1), x1);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
                     .WithArguments("x1")
@@ -6024,7 +6072,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
                     .WithArguments("x2")
                     .WithLocation(21, 15),
-                // (26,42): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (26,42): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         Dummy(TakeOutParam(true, out var x3), x3);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -6458,7 +6507,8 @@ class Test
                     .WithArguments("X.Test5")
                     .WithLocation(8, 13),
                 // (12,14): error CS0133: The expression being assigned to 'X.Test61' must be constant
-                //     Test61 = TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0, Test62 = TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0,
+                //     Test61 = TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0, Test62 = TakeOutParam(6, out int x6)
+                // && x6 > 0 ? 1 : 0,
                 Diagnostic(
                         ErrorCode.ERR_NotConstantExpression,
                         "TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0"
@@ -6466,7 +6516,8 @@ class Test
                     .WithArguments("X.Test61")
                     .WithLocation(12, 14),
                 // (12,70): error CS0133: The expression being assigned to 'X.Test62' must be constant
-                //     Test61 = TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0, Test62 = TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0,
+                //     Test61 = TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0, Test62 = TakeOutParam(6, out int x6)
+                // && x6 > 0 ? 1 : 0,
                 Diagnostic(
                         ErrorCode.ERR_NotConstantExpression,
                         "TakeOutParam(6, out int x6) && x6 > 0 ? 1 : 0"
@@ -6627,7 +6678,8 @@ public class X
                     .WithArguments("X.Test5")
                     .WithLocation(12, 24),
                 // (16,25): error CS0133: The expression being assigned to 'X.Test61' must be constant
-                //     const bool Test61 = TakeOutParam(6, out int x6) && x6 > 0, Test62 = TakeOutParam(6, out int x6) && x6 > 0;
+                //     const bool Test61 = TakeOutParam(6, out int x6) && x6 > 0, Test62 = TakeOutParam(6, out int
+                // x6) && x6 > 0;
                 Diagnostic(
                         ErrorCode.ERR_NotConstantExpression,
                         "TakeOutParam(6, out int x6) && x6 > 0"
@@ -6635,7 +6687,8 @@ public class X
                     .WithArguments("X.Test61")
                     .WithLocation(16, 25),
                 // (16,73): error CS0133: The expression being assigned to 'X.Test62' must be constant
-                //     const bool Test61 = TakeOutParam(6, out int x6) && x6 > 0, Test62 = TakeOutParam(6, out int x6) && x6 > 0;
+                //     const bool Test61 = TakeOutParam(6, out int x6) && x6 > 0, Test62 = TakeOutParam(6, out int
+                // x6) && x6 > 0;
                 Diagnostic(
                         ErrorCode.ERR_NotConstantExpression,
                         "TakeOutParam(6, out int x6) && x6 > 0"
@@ -6750,7 +6803,8 @@ class Y
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x3")
                     .WithArguments("x3")
                     .WithLocation(8, 43),
-                // (10,43): error CS8196: Reference to an implicitly-typed out variable 'x4' is not permitted in the same argument list.
+                // (10,43): error CS8196: Reference to an implicitly-typed out variable 'x4' is not permitted in the
+                // same argument list.
                 //     bool Test4 = TakeOutParam(out var x4, x4);
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "x4")
                     .WithArguments("x4")
@@ -6853,7 +6907,8 @@ True"
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (9,45): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (9,45): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     static bool Test1 = TakeOutParam(1, out int x1) && Dummy(x1);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "int x1")
                         .WithArguments(
@@ -7207,7 +7262,8 @@ public unsafe class X
                 // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,58): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,58): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         fixed (int* p = Dummy(TakeOutParam(true, out var x4) && x4))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -7217,7 +7273,8 @@ public unsafe class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(35, 31),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -7227,7 +7284,8 @@ public unsafe class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(53, 34),
-                // (61,63): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (61,63): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             fixed (int* p2 = Dummy(TakeOutParam(true, out var x9) && x9)) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -7676,7 +7734,8 @@ public class X
                 // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x4) && x4)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -7686,7 +7745,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(42, 20),
-                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -7699,7 +7759,8 @@ public class X
                 // (65,9): warning CS0162: Unreachable code detected
                 //         System.Console.WriteLine(x8);
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                  Dummy(TakeOutParam(true, out var x9) && x9) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -7936,7 +7997,8 @@ public class X
                 // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x4) && x4)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -7946,7 +8008,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(42, 20),
-                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -7956,7 +8019,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(65, 34),
-                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                  Dummy(TakeOutParam(true, out var x9) && x9) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -8203,7 +8267,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x2")
                     .WithArguments("x2")
                     .WithLocation(25, 19),
-                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x4) && x4)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -8489,7 +8554,8 @@ public class X
                 // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x4) && x4)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -8499,7 +8565,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(42, 20),
-                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -8512,7 +8579,8 @@ public class X
                 // (65,9): warning CS0162: Unreachable code detected
                 //         System.Console.WriteLine(x8);
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                  Dummy(TakeOutParam(true, out var x9) && x9) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -8749,7 +8817,8 @@ public class X
                 // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x4) && x4)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -8759,7 +8828,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(42, 20),
-                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -8772,7 +8842,8 @@ public class X
                 // (65,9): warning CS0162: Unreachable code detected
                 //         System.Console.WriteLine(x8);
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                  Dummy(TakeOutParam(true, out var x9) && x9) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -9022,7 +9093,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
                     .WithArguments("x1")
                     .WithLocation(13, 54),
-                // (21,47): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (21,47): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x2) && x2)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                     .WithArguments("x2")
@@ -9032,7 +9104,8 @@ public class X
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x2")
                     .WithArguments("x2")
                     .WithLocation(20, 18),
-                // (29,47): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,47): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x3) && x3)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -9052,7 +9125,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x4")
                     .WithArguments("x4")
                     .WithLocation(37, 54),
-                // (45,47): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (45,47): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x5) && x5)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                     .WithArguments("x5")
@@ -9062,7 +9136,8 @@ public class X
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
                     .WithArguments("x5")
                     .WithLocation(44, 19),
-                // (53,47): error CS0136: A local or parameter named 'x6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (53,47): error CS0136: A local or parameter named 'x6' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x6) && x6)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x6")
                     .WithArguments("x6")
@@ -9082,12 +9157,14 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
                     .WithArguments("x8")
                     .WithLocation(69, 52),
-                // (70,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (70,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x8) && x8);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
                     .WithArguments("x8")
                     .WithLocation(70, 47),
-                // (71,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (71,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x8) && x8))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
                     .WithArguments("x8")
@@ -9097,12 +9174,14 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
                     .WithArguments("x9")
                     .WithLocation(77, 23),
-                // (79,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (79,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x9) && x9);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
                     .WithLocation(79, 47),
-                // (80,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (80,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x9) && x9))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -9117,7 +9196,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x10")
                     .WithArguments("x10")
                     .WithLocation(88, 47),
-                // (89,47): error CS0136: A local or parameter named 'x10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (89,47): error CS0136: A local or parameter named 'x10' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x10) && x10))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x10")
                     .WithArguments("x10")
@@ -9132,7 +9212,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x11")
                     .WithArguments("x11")
                     .WithLocation(97, 47),
-                // (98,47): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (98,47): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x11) && x11))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
                     .WithArguments("x11")
@@ -9147,7 +9228,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12")
                     .WithArguments("x12")
                     .WithLocation(105, 20),
-                // (107,47): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (107,47): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //              Dummy(TakeOutParam(true, out var x12) && x12))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12")
                     .WithArguments("x12")
@@ -9984,7 +10066,8 @@ public class X
                 // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,60): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,60): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         foreach (var i in Dummy(TakeOutParam(true, out var x4) && x4))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -9994,7 +10077,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(35, 33),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -10004,7 +10088,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(53, 34),
-                // (61,65): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (61,65): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             foreach (var i2 in Dummy(TakeOutParam(true, out var x9) && x9)) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -10029,7 +10114,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
                     .WithArguments("x14")
                     .WithLocation(99, 57),
-                // (108,22): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (108,22): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         foreach (var x15 in
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15")
                     .WithArguments("x15")
@@ -10286,7 +10372,8 @@ public class X
                 // (101,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(101, 13),
-                // (36,17): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (36,17): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x3 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -10296,7 +10383,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                     .WithArguments("x4")
                     .WithLocation(46, 40),
-                // (52,40): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (52,40): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         if (TakeOutParam(true, out var x5))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                     .WithArguments("x5")
@@ -10306,7 +10394,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(58, 13),
-                // (66,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (66,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -10316,7 +10405,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
                     .WithArguments("x9")
                     .WithLocation(83, 19),
-                // (84,44): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (84,44): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             if (TakeOutParam(true, out var x9)) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -10758,7 +10848,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
                     .WithArguments("let")
                     .WithLocation(12, 23),
-                // (12,23): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (12,23): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         return (o) => let x1 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(12, 23),
                 // (12,27): error CS0103: The name 'x1' does not exist in the current context
@@ -10779,7 +10870,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
                     .WithArguments("let")
                     .WithLocation(17, 23),
-                // (17,23): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (17,23): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         return (o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(17, 23),
                 // (17,36): error CS0103: The name 'o' does not exist in the current context
@@ -10844,7 +10936,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
                     .WithArguments("let")
                     .WithLocation(12, 23),
-                // (12,23): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (12,23): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         return (o) => let x1 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(12, 23),
                 // (12,27): error CS0103: The name 'x1' does not exist in the current context
@@ -10865,7 +10958,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
                     .WithArguments("let")
                     .WithLocation(17, 23),
-                // (17,23): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (17,23): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         return (o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(17, 23),
                 // (17,36): error CS0103: The name 'o' does not exist in the current context
@@ -10906,22 +11000,26 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
                     .WithArguments("x7")
                     .WithLocation(48, 15),
-                // (59,73): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (59,73): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //               (System.Func<object, bool>) (o => TakeOutParam(o, out int x9) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
                     .WithLocation(59, 73),
-                // (65,73): error CS0136: A local or parameter named 'x10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (65,73): error CS0136: A local or parameter named 'x10' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         Dummy((System.Func<object, bool>) (o => TakeOutParam(o, out int x10) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x10")
                     .WithArguments("x10")
                     .WithLocation(65, 73),
-                // (74,73): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (74,73): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         Dummy((System.Func<object, bool>) (o => TakeOutParam(o, out int x11) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
                     .WithArguments("x11")
                     .WithLocation(74, 73),
-                // (80,73): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (80,73): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         Dummy((System.Func<object, bool>) (o => TakeOutParam(o, out int x12) &&
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12")
                     .WithArguments("x12")
@@ -12652,7 +12750,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(35, 21),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -12662,7 +12761,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
                     .WithArguments("x9")
                     .WithLocation(60, 19),
-                // (61,52): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (61,52): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             lock (Dummy(TakeOutParam(true, out var x9) && x9)) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -13046,7 +13146,8 @@ public class X
                     .WithArguments("p")
                     .WithLocation(14, 25),
                 // (19,27): error CS1736: Default parameter value for 'p1' must be a compile-time constant
-                //     void Test61(bool p1 = TakeOutParam(6, out int x6) && x6 > 0, bool p2 = TakeOutParam(6, out int x6) && x6 > 0)
+                //     void Test61(bool p1 = TakeOutParam(6, out int x6) && x6 > 0, bool p2 = TakeOutParam(6, out
+                // int x6) && x6 > 0)
                 Diagnostic(
                         ErrorCode.ERR_DefaultValueMustBeConstant,
                         "TakeOutParam(6, out int x6) && x6 > 0"
@@ -13054,7 +13155,8 @@ public class X
                     .WithArguments("p1")
                     .WithLocation(19, 27),
                 // (19,76): error CS1736: Default parameter value for 'p2' must be a compile-time constant
-                //     void Test61(bool p1 = TakeOutParam(6, out int x6) && x6 > 0, bool p2 = TakeOutParam(6, out int x6) && x6 > 0)
+                //     void Test61(bool p1 = TakeOutParam(6, out int x6) && x6 > 0, bool p2 = TakeOutParam(6, out
+                // int x6) && x6 > 0)
                 Diagnostic(
                         ErrorCode.ERR_DefaultValueMustBeConstant,
                         "TakeOutParam(6, out int x6) && x6 > 0"
@@ -13222,7 +13324,8 @@ public class X
                     .WithArguments("p")
                     .WithLocation(14, 25),
                 // (19,27): error CS1736: Default parameter value for 'p1' must be a compile-time constant
-                //     void Test61(bool p1 = TakeOutParam(6, out var x6) && x6 > 0, bool p2 = TakeOutParam(6, out var x6) && x6 > 0)
+                //     void Test61(bool p1 = TakeOutParam(6, out var x6) && x6 > 0, bool p2 = TakeOutParam(6, out
+                // var x6) && x6 > 0)
                 Diagnostic(
                         ErrorCode.ERR_DefaultValueMustBeConstant,
                         "TakeOutParam(6, out var x6) && x6 > 0"
@@ -13230,7 +13333,8 @@ public class X
                     .WithArguments("p1")
                     .WithLocation(19, 27),
                 // (19,76): error CS1736: Default parameter value for 'p2' must be a compile-time constant
-                //     void Test61(bool p1 = TakeOutParam(6, out var x6) && x6 > 0, bool p2 = TakeOutParam(6, out var x6) && x6 > 0)
+                //     void Test61(bool p1 = TakeOutParam(6, out var x6) && x6 > 0, bool p2 = TakeOutParam(6, out
+                // var x6) && x6 > 0)
                 Diagnostic(
                         ErrorCode.ERR_DefaultValueMustBeConstant,
                         "TakeOutParam(6, out var x6) && x6 > 0"
@@ -13428,7 +13532,8 @@ True"
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (9,52): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (9,52): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     static bool Test1 {get;} = TakeOutParam(1, out int x1) && Dummy(x1);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "int x1")
                         .WithArguments(
@@ -13777,7 +13882,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
                     .WithArguments("v4")
                     .WithLocation(45, 35),
-                // (47,35): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                // (47,35): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider
+                // swapping the expressions on either side of 'equals'.
                 //                                   u4
                 Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
                     .WithArguments("u4")
@@ -13807,7 +13913,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
                     .WithArguments("v5")
                     .WithLocation(61, 35),
-                // (63,35): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                // (63,35): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider
+                // swapping the expressions on either side of 'equals'.
                 //                                   u5
                 Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
                     .WithArguments("u5")
@@ -14138,7 +14245,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
                     .WithArguments("v4")
                     .WithLocation(18, 35),
-                // (20,35): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                // (20,35): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider
+                // swapping the expressions on either side of 'equals'.
                 //                                   u4
                 Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
                     .WithArguments("u4")
@@ -14168,7 +14276,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
                     .WithArguments("v5")
                     .WithLocation(35, 35),
-                // (37,35): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                // (37,35): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider
+                // swapping the expressions on either side of 'equals'.
                 //                                   u5
                 Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
                     .WithArguments("u5")
@@ -14328,7 +14437,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
                     .WithArguments("y1")
                     .WithLocation(16, 62),
-                // (17,62): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (17,62): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   from x2 in new[] { TakeOutParam(2, out var y2) ? y2 : 0}
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2")
                     .WithArguments("y2")
@@ -14338,47 +14448,56 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3")
                     .WithArguments("y3")
                     .WithLocation(18, 62),
-                // (19,51): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (19,51): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                        on TakeOutParam(4, out var y4) ? y4 : 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4")
                     .WithArguments("y4")
                     .WithLocation(19, 51),
-                // (20,58): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (20,58): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                           equals TakeOutParam(5, out var y5) ? y5 : 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5")
                     .WithArguments("y5")
                     .WithLocation(20, 58),
-                // (21,49): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (21,49): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   where TakeOutParam(6, out var y6) && y6 == 1
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6")
                     .WithArguments("y6")
                     .WithLocation(21, 49),
-                // (22,51): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (22,51): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   orderby TakeOutParam(7, out var y7) && y7 > 0,
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7")
                     .WithArguments("y7")
                     .WithLocation(22, 51),
-                // (23,51): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (23,51): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                           TakeOutParam(8, out var y8) && y8 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8")
                     .WithArguments("y8")
                     .WithLocation(23, 51),
-                // (25,47): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (25,47): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   by TakeOutParam(10, out var y10) && y10 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10")
                     .WithArguments("y10")
                     .WithLocation(25, 47),
-                // (24,49): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (24,49): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   group TakeOutParam(9, out var y9) && y9 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9")
                     .WithArguments("y9")
                     .WithLocation(24, 49),
-                // (27,54): error CS0136: A local or parameter named 'y11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (27,54): error CS0136: A local or parameter named 'y11' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   let x11 = TakeOutParam(11, out var y11) && y11 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y11")
                     .WithArguments("y11")
                     .WithLocation(27, 54),
-                // (28,51): error CS0136: A local or parameter named 'y12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (28,51): error CS0136: A local or parameter named 'y12' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   select TakeOutParam(12, out var y12) && y12 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y12")
                     .WithArguments("y12")
@@ -14516,7 +14635,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
                     .WithArguments("y1")
                     .WithLocation(26, 62),
-                // (27,62): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (27,62): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   from x2 in new[] { TakeOutParam(2, out var y2) ? y2 : 0}
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2")
                     .WithArguments("y2")
@@ -14526,47 +14646,56 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3")
                     .WithArguments("y3")
                     .WithLocation(28, 62),
-                // (29,51): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,51): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                        on TakeOutParam(4, out var y4) ? y4 : 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4")
                     .WithArguments("y4")
                     .WithLocation(29, 51),
-                // (30,58): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (30,58): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                           equals TakeOutParam(5, out var y5) ? y5 : 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5")
                     .WithArguments("y5")
                     .WithLocation(30, 58),
-                // (31,49): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (31,49): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   where TakeOutParam(6, out var y6) && y6 == 1
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6")
                     .WithArguments("y6")
                     .WithLocation(31, 49),
-                // (32,51): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (32,51): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   orderby TakeOutParam(7, out var y7) && y7 > 0,
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7")
                     .WithArguments("y7")
                     .WithLocation(32, 51),
-                // (33,51): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (33,51): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                           TakeOutParam(8, out var y8) && y8 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8")
                     .WithArguments("y8")
                     .WithLocation(33, 51),
-                // (35,47): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (35,47): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   by TakeOutParam(10, out var y10) && y10 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10")
                     .WithArguments("y10")
                     .WithLocation(35, 47),
-                // (34,49): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (34,49): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   group TakeOutParam(9, out var y9) && y9 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9")
                     .WithArguments("y9")
                     .WithLocation(34, 49),
-                // (37,54): error CS0136: A local or parameter named 'y11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (37,54): error CS0136: A local or parameter named 'y11' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   let x11 = TakeOutParam(11, out var y11) && y11 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y11")
                     .WithArguments("y11")
                     .WithLocation(37, 54),
-                // (38,51): error CS0136: A local or parameter named 'y12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (38,51): error CS0136: A local or parameter named 'y12' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   select TakeOutParam(12, out var y12) && y12 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y12")
                     .WithArguments("y12")
@@ -14963,54 +15092,65 @@ public class X
                 parseOptions: TestOptions.Regular
             );
 
-            // error CS0412 is misleading and reported due to preexisting bug https://github.com/dotnet/roslyn/issues/12052
+            // error CS0412 is misleading and reported due to preexisting bug
+            // https://github.com/dotnet/roslyn/issues/12052
             compilation.VerifyDiagnostics(
-                // (15,59): error CS0136: A local or parameter named 'y1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (15,59): error CS0136: A local or parameter named 'y1' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   from x2 in new[] { TakeOutParam(out var y1) ? y1 : 1 }
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y1")
                     .WithArguments("y1")
                     .WithLocation(15, 59),
-                // (23,48): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (23,48): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                        on TakeOutParam(out var y2) ? y2 : 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2")
                     .WithArguments("y2")
                     .WithLocation(23, 48),
-                // (33,52): error CS0136: A local or parameter named 'y3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (33,52): error CS0136: A local or parameter named 'y3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                        equals TakeOutParam(out var y3) ? y3 : 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y3")
                     .WithArguments("y3")
                     .WithLocation(33, 52),
-                // (40,46): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (40,46): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   where TakeOutParam(out var y4) && y4 == 1
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4")
                     .WithArguments("y4")
                     .WithLocation(40, 46),
-                // (47,48): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (47,48): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   orderby TakeOutParam(out var y5) && y5 > 1,
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5")
                     .WithArguments("y5")
                     .WithLocation(47, 48),
-                // (56,48): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (56,48): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                           TakeOutParam(out var y6) && y6 > 1
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6")
                     .WithArguments("y6")
                     .WithLocation(56, 48),
-                // (63,46): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (63,46): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   group TakeOutParam(out var y7) && y7 == 3
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7")
                     .WithArguments("y7")
                     .WithLocation(63, 46),
-                // (71,43): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (71,43): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   by TakeOutParam(out var y8) && y8 == 3;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8")
                     .WithArguments("y8")
                     .WithLocation(71, 43),
-                // (77,49): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (77,49): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   let x4 = TakeOutParam(out var y9) && y9 > 0
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9")
                     .WithArguments("y9")
                     .WithLocation(77, 49),
-                // (84,47): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (84,47): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                   select TakeOutParam(out var y10) && y10 > 0;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10")
                     .WithArguments("y10")
@@ -15125,7 +15265,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "y3")
                     .WithArguments("y3")
                     .WithLocation(33, 50),
-                // (40,50): error CS8196: Reference to an implicitly-typed out variable 'y4' is not permitted in the same argument list.
+                // (40,50): error CS8196: Reference to an implicitly-typed out variable 'y4' is not permitted in the
+                // same argument list.
                 //                   where TakeOutParam(out var y4, y4)
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "y4")
                     .WithArguments("y4")
@@ -15139,7 +15280,8 @@ public class X
                 parseOptions: TestOptions.Regular7_3
             );
             compilation.VerifyDiagnostics(
-                // (17,62): error CS0136: A local or parameter named 'y1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (17,62): error CS0136: A local or parameter named 'y1' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                               where TakeOutParam(x1, out var y1)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y1")
                     .WithArguments("y1")
@@ -15154,7 +15296,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "y3")
                     .WithArguments("y3")
                     .WithLocation(33, 50),
-                // (40,50): error CS8196: Reference to an implicitly-typed out variable 'y4' is not permitted in the same argument list.
+                // (40,50): error CS8196: Reference to an implicitly-typed out variable 'y4' is not permitted in the
+                // same argument list.
                 //                   where TakeOutParam(out var y4, y4)
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "y4")
                     .WithArguments("y4")
@@ -15597,7 +15740,8 @@ public class X
             );
 
             compilation.VerifyDiagnostics(
-                // (14,53): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (14,53): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             return Dummy(TakeOutParam(true, out var x1), x1);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
                     .WithArguments("x1")
@@ -15615,7 +15759,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
                     .WithArguments("x2")
                     .WithLocation(21, 22),
-                // (26,49): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (26,49): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         return Dummy(TakeOutParam(true, out var x3), x3);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -16067,7 +16212,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                     .WithArguments("x4")
                     .WithLocation(27, 41),
-                // (37,41): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (37,41): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         switch (TakeOutParam(5, out var x5) ? x5 : 0)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                     .WithArguments("x5")
@@ -16077,7 +16223,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(47, 17),
-                // (60,21): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (60,21): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                 var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -16087,7 +16234,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
                     .WithArguments("x9")
                     .WithLocation(71, 23),
-                // (72,49): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (72,49): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //                 switch (TakeOutParam(9, out var x9) ? x9 : 0)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -16611,23 +16759,27 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
                     .WithArguments("x2")
                     .WithLocation(30, 31),
-                // (40,58): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (40,58): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case 0 when Dummy(TakeOutParam(true, out var x3), x3):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
                     .WithLocation(40, 58),
-                // (51,58): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (51,58): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case 0 when Dummy(TakeOutParam(true, out var x4), x4):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
                     .WithLocation(51, 58),
-                // (62,58): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (62,58): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case 0 when Dummy(TakeOutParam(true, out var x5), x5):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                     .WithArguments("x5")
                     .WithLocation(62, 58),
                 // (102,95): error CS0128: A local variable named 'x8' is already defined in this scope
-                //             case 0 when Dummy(TakeOutParam(true, out var x8), x8, TakeOutParam(false, out var x8), x8):
+                //             case 0 when Dummy(TakeOutParam(true, out var x8), x8, TakeOutParam(false, out var
+                // x8), x8):
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
                     .WithArguments("x8")
                     .WithLocation(102, 95),
@@ -16636,7 +16788,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
                     .WithArguments("x9")
                     .WithLocation(112, 31),
-                // (119,58): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (119,58): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when Dummy(TakeOutParam(true, out var x9), x9):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -16671,12 +16824,14 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
                     .WithArguments("x12")
                     .WithLocation(163, 23),
-                // (175,58): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (175,58): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when Dummy(TakeOutParam(true, out var x13), x13):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13")
                     .WithArguments("x13")
                     .WithLocation(175, 58),
-                // (185,58): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (185,58): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when Dummy(TakeOutParam(true, out var x14), x14):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14")
                     .WithArguments("x14")
@@ -17564,12 +17719,14 @@ public class X
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
                     .WithArguments("x8")
                     .WithLocation(15, 64),
-                // (28,22): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (28,22): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case int x13 when Dummy(x13):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13")
                     .WithArguments("x13")
                     .WithLocation(28, 22),
-                // (38,22): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (38,22): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case int x14 when Dummy(x14):
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14")
                     .WithArguments("x14")
@@ -17751,7 +17908,8 @@ public class X
             );
 
             compilation.VerifyDiagnostics(
-                // (14,52): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (14,52): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             throw Dummy(TakeOutParam(true, out var x1), x1);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
                     .WithArguments("x1")
@@ -17766,7 +17924,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
                     .WithArguments("x2")
                     .WithLocation(21, 21),
-                // (26,48): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (26,48): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         throw Dummy(TakeOutParam(true, out var x3), x3);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -18214,7 +18373,8 @@ public class X
                 // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,49): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,49): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         using (Dummy(TakeOutParam(true, out var x4), x4))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -18224,7 +18384,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(35, 22),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -18234,7 +18395,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(53, 34),
-                // (61,53): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (61,53): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             using (Dummy(TakeOutParam(true, out var x9), x9)) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -18449,7 +18611,8 @@ public class X
                 // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,57): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,57): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         using (var d = Dummy(TakeOutParam(true, out var x4), x4))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -18459,7 +18622,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(35, 30),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -18469,7 +18633,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(53, 34),
-                // (61,61): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (61,61): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             using (var e = Dummy(TakeOutParam(true, out var x9), x9)) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -18684,7 +18849,8 @@ public class X
                 // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,72): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,72): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         using (System.IDisposable d = Dummy(TakeOutParam(true, out var x4), x4))
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -18694,7 +18860,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(35, 45),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -18704,7 +18871,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(53, 34),
-                // (61,76): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (61,76): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             using (System.IDisposable c = Dummy(TakeOutParam(true, out var x9), x9)) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -19177,7 +19345,8 @@ public class X
                 // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var y12 = 12;
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         while (TakeOutParam(true, out var x4) && x4)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                     .WithArguments("x4")
@@ -19187,7 +19356,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                     .WithArguments("x6")
                     .WithLocation(35, 16),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             var x7 = 12;
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                     .WithArguments("x7")
@@ -19197,7 +19367,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                     .WithArguments("x8")
                     .WithLocation(53, 34),
-                // (61,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (61,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             while (TakeOutParam(true, out var x9) && x9) // 2
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                     .WithArguments("x9")
@@ -19806,7 +19977,8 @@ public class X
             );
 
             compilation.VerifyDiagnostics(
-                // (16,59): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (16,59): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             yield return Dummy(TakeOutParam(true, out var x1), x1);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
                     .WithArguments("x1")
@@ -19821,7 +19993,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
                     .WithArguments("x2")
                     .WithLocation(23, 28),
-                // (28,55): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (28,55): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         yield return Dummy(TakeOutParam(true, out var x3), x3);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -19842,7 +20015,8 @@ public class X
                     .WithArguments("x5")
                     .WithLocation(41, 13),
                 // (61,92): error CS0128: A local variable or function named 'x8' is already defined in this scope
-                //         yield return Dummy(TakeOutParam(true, out var x8), x8, TakeOutParam(false, out var x8), x8);
+                //         yield return Dummy(TakeOutParam(true, out var x8), x8, TakeOutParam(false, out var x8),
+                // x8);
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
                     .WithArguments("x8")
                     .WithLocation(61, 92),
@@ -20242,7 +20416,8 @@ a:      Dummy(TakeOutParam(true, out var x12), x12);
             );
 
             compilation.VerifyDiagnostics(
-                // (14,46): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (14,46): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 // b:          Dummy(TakeOutParam(true, out var x1), x1);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
                     .WithArguments("x1")
@@ -20269,7 +20444,8 @@ a:      Dummy(TakeOutParam(true, out var x12), x12);
                 // (21,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(x2, TakeOutParam(true, out var x2));
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(21, 1),
-                // (26,42): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (26,42): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 // a:      Dummy(TakeOutParam(true, out var x3), x3);
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -21099,7 +21275,8 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "Test1")
                     .WithArguments("Test1")
                     .WithLocation(6, 9),
-                // (11,20): warning CS0649: Field 'Cls.var.val' is never assigned to, and will always have its default value 0
+                // (11,20): warning CS0649: Field 'Cls.var.val' is never assigned to, and will always have its
+                // default value 0
                 //         public int val;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "val")
                     .WithArguments("Cls.var.val", "0")
@@ -21228,7 +21405,8 @@ public class Cls
             );
 
             compilation.VerifyDiagnostics(
-                // (7,23): error CS8181: Reference to an implicitly-typed out variable 'x1' is not permitted in the same argument list.
+                // (7,23): error CS8181: Reference to an implicitly-typed out variable 'x1' is not permitted in the
+                // same argument list.
                 //                   out x1);
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "x1")
                     .WithArguments("x1")
@@ -21277,7 +21455,8 @@ public class Cls
             );
 
             compilation.VerifyDiagnostics(
-                // (7,25): error CS8181: Reference to an implicitly-typed out variable 'x1' is not permitted in the same argument list.
+                // (7,25): error CS8181: Reference to an implicitly-typed out variable 'x1' is not permitted in the
+                // same argument list.
                 //               Test1(out x1,
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedOutVariableUsedInTheSameArgumentList, "x1")
                     .WithArguments("x1")
@@ -21603,7 +21782,8 @@ public class Cls
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (25,26): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (25,26): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //         : this(Test1(out var x1), x1)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "var x1")
                         .WithArguments(
@@ -21696,7 +21876,8 @@ public class Cls
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (29,26): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (29,26): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //         : base(Test1(out var x1), x1)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "var x1")
                         .WithArguments(
@@ -22824,7 +23005,8 @@ public class Cls
             );
 
             compilation.VerifyDiagnostics(
-                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Cls.Test1(out int, object)' and 'Cls.Test1(out short, object)'
+                // (6,9): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'Cls.Test1(out int, object)' and 'Cls.Test1(out short, object)'
                 //         Test1(out var x1, null);
                 Diagnostic(ErrorCode.ERR_AmbigCall, "Test1")
                     .WithArguments("Cls.Test1(out int, object)", "Cls.Test1(out short, object)")
@@ -22971,12 +23153,15 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_MethodArgCantBeRefAny, "out System.ArgIterator x")
                     .WithArguments("System.ArgIterator")
                     .WithLocation(11, 25),
-                // (8,25): error CS4012: Parameters or locals of type 'ArgIterator' cannot be declared in async methods or async lambda expressions.
+                // (8,25): error CS4012: Parameters or locals of type 'ArgIterator' cannot be declared in async
+                // methods or async lambda expressions.
                 //         Test2(Test1(out var x1), x1);
                 Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "var")
                     .WithArguments("System.ArgIterator")
                     .WithLocation(8, 25),
-                // (6,16): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (6,16): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     async void Test()
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Test").WithLocation(6, 16)
             );
@@ -23027,12 +23212,14 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_MethodArgCantBeRefAny, "out System.ArgIterator x")
                     .WithArguments("System.ArgIterator")
                     .WithLocation(12, 25),
-                // (8,25): error CS4012: Parameters or locals of type 'ArgIterator' cannot be declared in async methods or async lambda expressions.
+                // (8,25): error CS4012: Parameters or locals of type 'ArgIterator' cannot be declared in async
+                // methods or async lambda expressions.
                 //         Test2(Test1(out System.ArgIterator x1), x1);
                 Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "System.ArgIterator")
                     .WithArguments("System.ArgIterator")
                     .WithLocation(8, 25),
-                // (9,9): error CS4012: Parameters or locals of type 'ArgIterator' cannot be declared in async methods or async lambda expressions.
+                // (9,9): error CS4012: Parameters or locals of type 'ArgIterator' cannot be declared in async
+                // methods or async lambda expressions.
                 //         var x = default(System.ArgIterator);
                 Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "var")
                     .WithArguments("System.ArgIterator")
@@ -23042,7 +23229,9 @@ public class Cls
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x")
                     .WithArguments("x")
                     .WithLocation(9, 13),
-                // (6,16): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (6,16): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     async void Test()
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Test").WithLocation(6, 16)
             );
@@ -23229,7 +23418,8 @@ public class Cls
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (5,13): error CS7036: There is no argument given that corresponds to the required parameter 'i' of 'Program.M(int, out string)'
+                // (5,13): error CS7036: There is no argument given that corresponds to the required parameter 'i'
+                // of 'Program.M(int, out string)'
                 //         if (M(s: out var s))
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                     .WithArguments("i", "Program.M(int, out string)")
@@ -23446,7 +23636,8 @@ public class Cls
             );
 
             compilation.VerifyDiagnostics(
-                // (6,21): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (6,21): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         Test1(x: 1, out var y);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "out var y")
                     .WithArguments("7.2")
@@ -23491,7 +23682,8 @@ public class Cls
             );
 
             compilation.VerifyDiagnostics(
-                // (7,9): error CS7036: There is no argument given that corresponds to the required parameter 'x' of 'Cls.Test1(int, ref int)'
+                // (7,9): error CS7036: There is no argument given that corresponds to the required parameter 'x' of
+                // 'Cls.Test1(int, ref int)'
                 //         Test1(y: ref x, y: out var y);
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Test1")
                     .WithArguments("x", "Cls.Test1(int, ref int)")
@@ -24227,7 +24419,9 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
                     .WithArguments("=")
                     .WithLocation(7, 27),
-                // (8,14): error CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
+                // (8,14): error CS0650: Bad array declarator: To declare a managed array the rank specifier
+                // precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword
+                // before the field type.
                 //         int c[out var x3] = null; // fatal syntax error - 'out' is skipped
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[out var x3]").WithLocation(8, 14),
                 // (8,15): error CS1003: Syntax error, ',' expected
@@ -24235,7 +24429,8 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_SyntaxError, "out")
                     .WithArguments(",")
                     .WithLocation(8, 15),
-                // (8,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (8,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         int c[out var x3] = null; // fatal syntax error - 'out' is skipped
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "var").WithLocation(8, 19),
                 // (8,23): error CS1003: Syntax error, ',' expected
@@ -24243,7 +24438,8 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_SyntaxError, "x3")
                     .WithArguments(",")
                     .WithLocation(8, 23),
-                // (8,23): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (8,23): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         int c[out var x3] = null; // fatal syntax error - 'out' is skipped
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "x3").WithLocation(8, 23),
                 // (10,17): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
@@ -24259,7 +24455,8 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_SyntaxError, ")")
                     .WithArguments("]")
                     .WithLocation(10, 28),
-                // (6,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (6,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         int[out var x1] a = null; // fatal syntax error - 'out' is skipped
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[out var x1]")
                     .WithLocation(6, 12),
@@ -24278,7 +24475,8 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "b")
                     .WithArguments("b(out var)")
                     .WithLocation(7, 13),
-                // (7,19): error CS0825: The contextual keyword 'var' may only appear within a local variable declaration or in script code
+                // (7,19): error CS0825: The contextual keyword 'var' may only appear within a local variable
+                // declaration or in script code
                 //         int b(out var x2) = null; // parsed as a local function with syntax error
                 Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(7, 19),
                 // (8,29): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
@@ -24296,7 +24494,8 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x3")
                     .WithArguments("x3")
                     .WithLocation(8, 23),
-                // (7,13): error CS0177: The out parameter 'x2' must be assigned to before control leaves the current method
+                // (7,13): error CS0177: The out parameter 'x2' must be assigned to before control leaves the
+                // current method
                 //         int b(out var x2) = null; // parsed as a local function with syntax error
                 Diagnostic(ErrorCode.ERR_ParamUnassigned, "b")
                     .WithArguments("x2")
@@ -25308,7 +25507,8 @@ public class X
                     //             var y12 = 12;
                     Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
                         .WithLocation(109, 13),
-                    // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (34,47): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //              Dummy(TakeOutParam(true, out var x4) && x4)
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                         .WithArguments("x4")
@@ -25318,7 +25518,8 @@ public class X
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(42, 20),
-                    // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -25331,7 +25532,8 @@ public class X
                     // (65,9): warning CS0162: Unreachable code detected
                     //         System.Console.WriteLine(x8);
                     Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-                    // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (76,51): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //                  Dummy(TakeOutParam(true, out var x9) && x9) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -25517,12 +25719,14 @@ public class X
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
                         .WithArguments("x8")
                         .WithLocation(29, 52),
-                    // (30,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (30,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //              Dummy(TakeOutParam(true, out var x8) && x8);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
                         .WithArguments("x8")
                         .WithLocation(30, 47),
-                    // (31,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (31,47): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //              Dummy(TakeOutParam(true, out var x8) && x8))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
                         .WithArguments("x8")
@@ -25532,12 +25736,14 @@ public class X
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
                         .WithArguments("x9")
                         .WithLocation(37, 23),
-                    // (39,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (39,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //              Dummy(TakeOutParam(true, out var x9) && x9);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
                         .WithLocation(39, 47),
-                    // (40,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (40,47): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //              Dummy(TakeOutParam(true, out var x9) && x9))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -25721,7 +25927,8 @@ public class X
                     //             var y12 = 12;
                     Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
                         .WithLocation(87, 13),
-                    // (29,57): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (29,57): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //         using (var d,e(Dummy(TakeOutParam(true, out var x4), x4)))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                         .WithArguments("x4")
@@ -25731,7 +25938,8 @@ public class X
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(35, 30),
-                    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -25741,7 +25949,8 @@ public class X
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(53, 34),
-                    // (61,61): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (61,61): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             using (var e,b(Dummy(TakeOutParam(true, out var x9), x9))) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -26190,7 +26399,8 @@ public unsafe class X
                     //             var y12 = 12;
                     Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
                         .WithLocation(87, 13),
-                    // (29,58): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (29,58): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //         fixed (int* p,e(Dummy(TakeOutParam(true, out var x4) && x4)))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                         .WithArguments("x4")
@@ -26200,7 +26410,8 @@ public unsafe class X
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(35, 31),
-                    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -26210,7 +26421,8 @@ public unsafe class X
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(53, 34),
-                    // (61,63): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (61,63): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             fixed (int* p2,b(Dummy(TakeOutParam(true, out var x9) && x9))) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -27126,7 +27338,8 @@ static bool TakeOutParam(object y, out int x)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(20, 13),
-                    // (28,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (28,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -27136,7 +27349,8 @@ static bool TakeOutParam(object y, out int x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(38, 26),
-                    // (45,38): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (45,38): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     catch when (TakeOutParam(out var x9) && x9 > 0) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -27224,7 +27438,8 @@ static bool TakeOutParam(object y, out int x)
                 );
 
                 compilation.VerifyDiagnostics(
-                    // (14,34): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (14,34): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // catch when (TakeOutParam(out var x4) && x4 > 0)
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                         .WithArguments("x4")
@@ -27234,7 +27449,8 @@ static bool TakeOutParam(object y, out int x)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(20, 13),
-                    // (28,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (28,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -27244,7 +27460,8 @@ static bool TakeOutParam(object y, out int x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(38, 26),
-                    // (45,38): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (45,38): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     catch when (TakeOutParam(out var x9) && x9 > 0) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -27264,7 +27481,8 @@ static bool TakeOutParam(object y, out int x)
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15")
                         .WithArguments("x15")
                         .WithLocation(75, 42),
-                    // (85,13): error CS0128: A local variable or function named 'TakeOutParam' is already defined in this scope
+                    // (85,13): error CS0128: A local variable or function named 'TakeOutParam' is already defined in
+                    // this scope
                     // static bool TakeOutParam(object y, out int x)
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "TakeOutParam")
                         .WithArguments("TakeOutParam")
@@ -27457,7 +27675,8 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "x2")
                         .WithArguments("x2")
                         .WithLocation(7, 8),
-                    // (9,31): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (9,31): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam(2, out var x2);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                         .WithArguments("x2")
@@ -27652,7 +27871,8 @@ static bool TakeOutParam(object y, out bool x)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(25, 15),
-                    // (33,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (33,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -27662,7 +27882,8 @@ static bool TakeOutParam(object y, out bool x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(42, 26),
-                    // (50,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (50,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             Dummy(TakeOutParam(true, out var x9) && x9) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -27759,7 +27980,8 @@ static bool TakeOutParam(object y, out bool x)
                 );
 
                 compilation.VerifyDiagnostics(
-                    // (20,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (20,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //         Dummy(TakeOutParam(true, out var x4) && x4)
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                         .WithArguments("x4")
@@ -27773,7 +27995,8 @@ static bool TakeOutParam(object y, out bool x)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(25, 15),
-                    // (33,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (33,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -27783,7 +28006,8 @@ static bool TakeOutParam(object y, out bool x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(42, 26),
-                    // (50,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (50,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             Dummy(TakeOutParam(true, out var x9) && x9) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -28040,7 +28264,8 @@ static class Helpers
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(18, 25),
-                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -28050,7 +28275,8 @@ static class Helpers
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(30, 26),
-                    // (35,57): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (35,57): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     foreach (var i2 in Dummy(TakeOutParam(true, out var x9) && x9)) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -28070,7 +28296,8 @@ static class Helpers
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
                         .WithArguments("x14")
                         .WithLocation(58, 49),
-                    // (64,14): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (64,14): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // foreach (var x15 in
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15")
                         .WithArguments("x15")
@@ -28155,7 +28382,8 @@ static class Helpers
                 );
 
                 compilation.VerifyDiagnostics(
-                    // (15,52): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (15,52): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // foreach (var i in Dummy(TakeOutParam(true, out var x4) && x4))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                         .WithArguments("x4")
@@ -28169,7 +28397,8 @@ static class Helpers
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(18, 25),
-                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -28179,7 +28408,8 @@ static class Helpers
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(30, 26),
-                    // (35,57): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (35,57): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     foreach (var i2 in Dummy(TakeOutParam(true, out var x9) && x9)) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -28199,7 +28429,8 @@ static class Helpers
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
                         .WithArguments("x14")
                         .WithLocation(58, 49),
-                    // (64,14): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (64,14): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // foreach (var x15 in
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15")
                         .WithArguments("x15")
@@ -28522,12 +28753,14 @@ static bool TakeOutParam(bool y, out bool x)
                         .WithArguments("x7")
                         .WithLocation(18, 7),
                     // (20,7): error CS0019: Operator '&&' cannot be applied to operands of type 'bool' and 'int'
-                    // Dummy(TakeOutParam(true, out var x8) && x8, (System.Func<object, bool>) (o => TakeOutParam(o, out var y8) && x8));
+                    // Dummy(TakeOutParam(true, out var x8) && x8, (System.Func<object, bool>) (o => TakeOutParam(o, out
+                    // var y8) && x8));
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "TakeOutParam(true, out var x8) && x8")
                         .WithArguments("&&", "bool", "int")
                         .WithLocation(20, 7),
                     // (20,79): error CS0019: Operator '&&' cannot be applied to operands of type 'bool' and 'int'
-                    // Dummy(TakeOutParam(true, out var x8) && x8, (System.Func<object, bool>) (o => TakeOutParam(o, out var y8) && x8));
+                    // Dummy(TakeOutParam(true, out var x8) && x8, (System.Func<object, bool>) (o => TakeOutParam(o, out
+                    // var y8) && x8));
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "TakeOutParam(o, out var y8) && x8")
                         .WithArguments("&&", "bool", "int")
                         .WithLocation(20, 79),
@@ -28536,7 +28769,8 @@ static bool TakeOutParam(bool y, out bool x)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12")
                         .WithArguments("x12")
                         .WithLocation(37, 9),
-                    // (47,13): error CS0128: A local variable or function named 'TakeOutParam' is already defined in this scope
+                    // (47,13): error CS0128: A local variable or function named 'TakeOutParam' is already defined in
+                    // this scope
                     // static bool TakeOutParam(bool y, out bool x)
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "TakeOutParam")
                         .WithArguments("TakeOutParam")
@@ -28819,7 +29053,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
                         .WithArguments("v4")
                         .WithLocation(28, 29),
-                    // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider
+                    // swapping the expressions on either side of 'equals'.
                     //                             u4
                     Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
                         .WithArguments("u4")
@@ -28839,7 +29074,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
                         .WithArguments("v5")
                         .WithLocation(41, 29),
-                    // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider
+                    // swapping the expressions on either side of 'equals'.
                     //                             u5
                     Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
                         .WithArguments("u5")
@@ -29145,7 +29381,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
                         .WithArguments("v4")
                         .WithLocation(28, 29),
-                    // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider
+                    // swapping the expressions on either side of 'equals'.
                     //                             u4
                     Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
                         .WithArguments("u4")
@@ -29175,7 +29412,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
                         .WithArguments("v5")
                         .WithLocation(41, 29),
-                    // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider
+                    // swapping the expressions on either side of 'equals'.
                     //                             u5
                     Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
                         .WithArguments("u5")
@@ -29572,7 +29810,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(18, 14),
-                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -29582,7 +29821,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(30, 26),
-                    // (35,45): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (35,45): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     using (Dummy(TakeOutParam(true, out var x9), x9)) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -29680,7 +29920,8 @@ static bool TakeOutParam<T>(T y, out T x)
                 );
 
                 compilation.VerifyDiagnostics(
-                    // (15,41): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (15,41): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // using (Dummy(TakeOutParam(true, out var x4), x4))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
                         .WithArguments("x4")
@@ -29690,7 +29931,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
                         .WithArguments("x6")
                         .WithLocation(18, 14),
-                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
                         .WithArguments("x7")
@@ -29700,7 +29942,8 @@ static bool TakeOutParam<T>(T y, out T x)
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
                         .WithArguments("x8")
                         .WithLocation(30, 26),
-                    // (35,45): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (35,45): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     using (Dummy(TakeOutParam(true, out var x9), x9)) // 2
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
                         .WithArguments("x9")
@@ -30362,7 +30605,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 40),
-                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out string x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -30372,7 +30616,8 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x6")
                         .WithArguments("x6")
                         .WithLocation(21, 5),
-                    // (24,12): error CS0136: A local or parameter named 'x6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (24,12): error CS0136: A local or parameter named 'x6' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     string x6 = "6";
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x6")
                         .WithArguments("x6")
@@ -30555,7 +30800,8 @@ class H
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x5")
                         .WithArguments("x5")
                         .WithLocation(16, 29),
-                    // (21,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (21,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out var x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -30830,7 +31076,8 @@ class H
                 );
 
                 compilation.VerifyDiagnostics(
-                    // (2,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block because 'void' is not an iterator interface type
+                    // (2,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block
+                    // because 'void' is not an iterator interface type
                     // yield return H.TakeOutParam(1, out int x1);
                     Diagnostic(
                             ErrorCode.ERR_BadIteratorReturn,
@@ -31017,7 +31264,8 @@ class H
                 );
 
                 compilation.VerifyDiagnostics(
-                    // (2,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block because 'void' is not an iterator interface type
+                    // (2,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block
+                    // because 'void' is not an iterator interface type
                     // yield return H.TakeOutParam(1, out var x1);
                     Diagnostic(
                             ErrorCode.ERR_BadIteratorReturn,
@@ -31960,7 +32208,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 44),
-                    // (17,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (17,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out string x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -32145,7 +32394,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 44),
-                    // (17,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (17,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out var x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -32306,7 +32556,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 43),
-                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out string x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -32383,12 +32634,14 @@ class H
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
                         .WithArguments("x1")
                         .WithLocation(3, 9),
-                    // (6,34): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (6,34): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // while (H.TakeOutParam(2, out int x2)) {}
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                         .WithArguments("x2")
                         .WithLocation(6, 34),
-                    // (8,34): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (8,34): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // while (H.TakeOutParam(3, out int x3)) {}
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                         .WithArguments("x3")
@@ -32398,7 +32651,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 43),
-                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out string x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -32525,7 +32779,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 43),
-                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out var x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -32602,12 +32857,14 @@ class H
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
                         .WithArguments("x1")
                         .WithLocation(3, 9),
-                    // (6,34): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (6,34): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // while (H.TakeOutParam(2, out var x2)) {}
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                         .WithArguments("x2")
                         .WithLocation(6, 34),
-                    // (8,34): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (8,34): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // while (H.TakeOutParam(3, out var x3)) {}
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                         .WithArguments("x3")
@@ -32617,7 +32874,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 43),
-                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out var x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -32784,7 +33042,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 49),
-                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out string x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -32861,12 +33120,14 @@ class H
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
                         .WithArguments("x1")
                         .WithLocation(3, 9),
-                    // (6,40): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (6,40): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // do {} while (H.TakeOutParam(2, out int x2));
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                         .WithArguments("x2")
                         .WithLocation(6, 40),
-                    // (8,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (8,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // do {} while (H.TakeOutParam(3, out int x3));
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                         .WithArguments("x3")
@@ -32876,7 +33137,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 49),
-                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out string x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -33004,7 +33266,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 49),
-                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out var x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -33081,12 +33344,14 @@ class H
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
                         .WithArguments("x1")
                         .WithLocation(3, 9),
-                    // (6,40): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (6,40): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // do {} while (H.TakeOutParam(2, out var x2));
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                         .WithArguments("x2")
                         .WithLocation(6, 40),
-                    // (8,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (8,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     // do {} while (H.TakeOutParam(3, out var x3));
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                         .WithArguments("x3")
@@ -33096,7 +33361,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 49),
-                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out var x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -33357,7 +33623,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 42),
-                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,37): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out string x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -33540,7 +33807,8 @@ class H
                     Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
                         .WithArguments("x4")
                         .WithLocation(12, 42),
-                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (16,34): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //     H.TakeOutParam("52", out var x5);
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
                         .WithArguments("x5")
@@ -35967,12 +36235,14 @@ class H
             );
 
             compilation.VerifyDiagnostics(
-                // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (4,16): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 // static var d = x1;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
                     .WithLocation(4, 16),
-                // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (8,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 //     H.Dummy(x1);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
@@ -36019,12 +36289,14 @@ class H
             );
 
             compilation.VerifyDiagnostics(
-                // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (4,16): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 // static var d = x1;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
                     .WithLocation(4, 16),
-                // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (8,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 //     H.Dummy(x1);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
@@ -36648,12 +36920,14 @@ class H
             );
 
             compilation.VerifyDiagnostics(
-                // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (4,16): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 // static var d = x1;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
                     .WithLocation(4, 16),
-                // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (8,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 //     H.Dummy(x1);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
@@ -36700,12 +36974,14 @@ class H
             );
 
             compilation.VerifyDiagnostics(
-                // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (4,16): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 // static var d = x1;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
                     .WithLocation(4, 16),
-                // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (8,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 //     H.Dummy(x1);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
@@ -37296,12 +37572,14 @@ class H
             );
 
             compilation.VerifyDiagnostics(
-                // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (4,16): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 // static var d = x1;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
                     .WithLocation(4, 16),
-                // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (8,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 //     H.Dummy(x1);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
@@ -37348,12 +37626,14 @@ class H
             );
 
             compilation.VerifyDiagnostics(
-                // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (4,16): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 // static var d = x1;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
                     .WithLocation(4, 16),
-                // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
+                // (8,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'x1'
                 //     H.Dummy(x1);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
                     .WithArguments("x1")
@@ -38008,7 +38288,8 @@ class H
             compilation
                 .GetDeclarationDiagnostics()
                 .Verify(
-                    // (3,24): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                    // (3,24): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or
+                    // indirectly refers to the definition.
                     // H.TakeOutParam(out var x1, x1);
                     Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
                         .WithArguments("x1")
@@ -38068,7 +38349,8 @@ class H
             Assert.True(b.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
-                // (4,5): error CS7019: Type of 'b' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // (4,5): error CS7019: Type of 'b' cannot be inferred since its initializer directly or indirectly
+                // refers to the definition.
                 // var b = H.TakeOutParam(out var x1, a);
                 Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "b")
                     .WithArguments("b")
@@ -38122,7 +38404,8 @@ class H
             Assert.True(b.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
-                // (4,5): error CS7019: Type of 'b' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // (4,5): error CS7019: Type of 'b' cannot be inferred since its initializer directly or indirectly
+                // refers to the definition.
                 // var b = a;
                 Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "b")
                     .WithArguments("b")
@@ -38176,7 +38459,8 @@ class H
             Assert.True(a.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
-                // (3,5): error CS7019: Type of 'a' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // (3,5): error CS7019: Type of 'a' cannot be inferred since its initializer directly or indirectly
+                // refers to the definition.
                 // var a = x1;
                 Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "a")
                     .WithArguments("a")
@@ -38203,7 +38487,8 @@ class H
             Assert.True(x1.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
-                // (4,32): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // (4,32): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or
+                // indirectly refers to the definition.
                 // var b = H.TakeOutParam(out var x1, a);
                 Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
                     .WithArguments("x1")
@@ -38248,7 +38533,8 @@ class H
             Assert.True(x1.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
-                // (3,32): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // (3,32): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or
+                // indirectly refers to the definition.
                 // var a = H.TakeOutParam(out var x1, b);
                 Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
                     .WithArguments("x1")
@@ -38279,7 +38565,8 @@ class H
             Assert.False(x1.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
-                // (4,5): error CS7019: Type of 'b' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // (4,5): error CS7019: Type of 'b' cannot be inferred since its initializer directly or indirectly
+                // refers to the definition.
                 // var b = x1;
                 Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "b")
                     .WithArguments("b")
@@ -38315,7 +38602,8 @@ class H
                 Diagnostic(ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedOutVariable, "x1")
                     .WithArguments("x1")
                     .WithLocation(2, 24),
-                // (2,3): error CS0411: The type arguments for method 'H.TakeOutParam<T>(out T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (2,3): error CS0411: The type arguments for method 'H.TakeOutParam<T>(out T)' cannot be inferred
+                // from the usage. Try specifying the type arguments explicitly.
                 // H.TakeOutParam(out var x1);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "TakeOutParam")
                     .WithArguments("H.TakeOutParam<T>(out T)")
@@ -38361,7 +38649,8 @@ class H
                 parseOptions: TestOptions.Script
             );
             compilation.VerifyDiagnostics(
-                // (2,10): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                // (2,10): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or
+                // indirectly refers to the definition.
                 // H.M((var x1, int x2));
                 Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
                     .WithArguments("x1")
@@ -38388,7 +38677,8 @@ class H
             compilation
                 .GetDeclarationDiagnostics()
                 .Verify(
-                    // (2,10): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or indirectly refers to the definition.
+                    // (2,10): error CS7019: Type of 'x1' cannot be inferred since its initializer directly or
+                    // indirectly refers to the definition.
                     // H.M((var x1, int x2));
                     Diagnostic(ErrorCode.ERR_RecursivelyTypedVariable, "x1")
                         .WithArguments("x1")
@@ -38651,7 +38941,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "TakeOutParam")
                     .WithArguments("TakeOutParam")
                     .WithLocation(8, 19),
-                // (8,39): error CS0246: The type or namespace name 'UndeclaredType' could not be found (are you missing a using directive or an assembly reference?)
+                // (8,39): error CS0246: The type or namespace name 'UndeclaredType' could not be found (are you
+                // missing a using directive or an assembly reference?)
                 //             case !TakeOutParam(3, out UndeclaredType x1):
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UndeclaredType")
                     .WithArguments("UndeclaredType")
@@ -38723,7 +39014,8 @@ class Program
                 && declarator.Parent.Parent.Kind() != SyntaxKind.LocalDeclarationStatement
                 && (declarator.ArgumentList?.Contains(decl)).GetValueOrDefault();
 
-            // We're not able to get type information at such location (out var argument in global code) at this point
+            // We're not able to get type information at such location (out var argument in global code) at this
+            // point
             // See https://github.com/dotnet/roslyn/issues/13569
             AssertInfoForDeclarationExpressionSyntax(
                 model,
@@ -38881,7 +39173,8 @@ public class X
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (6,9): error CS0411: The type arguments for method 'X.TakeOutParam<T>(out T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (6,9): error CS0411: The type arguments for method 'X.TakeOutParam<T>(out T)' cannot be inferred
+                // from the usage. Try specifying the type arguments explicitly.
                 //         TakeOutParam(out var a);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "TakeOutParam")
                     .WithArguments("X.TakeOutParam<T>(out T)")
@@ -38916,12 +39209,14 @@ public class X
                 parseOptions: TestOptions.Regular
             );
             compilation.VerifyDiagnostics(
-                // (7,9): error CS0411: The type arguments for method 'X.TakeOutParam<T>(out T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (7,9): error CS0411: The type arguments for method 'X.TakeOutParam<T>(out T, T)' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //         TakeOutParam(out int b, a);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "TakeOutParam")
                     .WithArguments("X.TakeOutParam<T>(out T, T)")
                     .WithLocation(7, 9),
-                // (9,9): error CS0411: The type arguments for method 'X.TakeOutParam<T>(out T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (9,9): error CS0411: The type arguments for method 'X.TakeOutParam<T>(out T, T)' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //         TakeOutParam(out c, a);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "TakeOutParam")
                     .WithArguments("X.TakeOutParam<T>(out T, T)")
@@ -39462,7 +39757,8 @@ public class C
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "_<T>")
                     .WithArguments("_")
                     .WithLocation(9, 16),
-                // (10,11): error CS0246: The type or namespace name '_' could not be found (are you missing a using directive or an assembly reference?)
+                // (10,11): error CS0246: The type or namespace name '_' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 //         M<_>();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_")
                     .WithArguments("_")
@@ -39518,12 +39814,14 @@ public class C
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             comp.VerifyDiagnostics(
-                // (10,9): error CS0411: The type arguments for method 'C.M<T>(out T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (10,9): error CS0411: The type arguments for method 'C.M<T>(out T)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
                 //         M(out var _);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M")
                     .WithArguments("C.M<T>(out T)")
                     .WithLocation(10, 9),
-                // (11,9): error CS0411: The type arguments for method 'C.M<T>(out T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (11,9): error CS0411: The type arguments for method 'C.M<T>(out T)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
                 //         M(out _);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M")
                     .WithArguments("C.M<T>(out T)")
@@ -39571,12 +39869,14 @@ public class C
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
             comp.VerifyDiagnostics(
-                // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.M(out object)' and 'C.M(out int)'
+                // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.M(out
+                // object)' and 'C.M(out int)'
                 //         M(out var _);
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                     .WithArguments("C.M(out object)", "C.M(out int)")
                     .WithLocation(8, 9),
-                // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.M(out object)' and 'C.M(out int)'
+                // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.M(out
+                // object)' and 'C.M(out int)'
                 //         M(out _);
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                     .WithArguments("C.M(out object)", "C.M(out int)")
@@ -40415,7 +40715,8 @@ class Test : System.Attribute
                 .GetDiagnostics()
                 .Where(d => d.Code != (int)ErrorCode.ERR_BadAttributeArgument)
                 .Verify(
-                    // (10,44): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (10,44): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             [Test(p = TakeOutParam(out int x2) && x1 > 0 && x2 > 0)]
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                         .WithArguments("x2")
@@ -40480,7 +40781,8 @@ class Test : System.Attribute
                 .GetDiagnostics()
                 .Where(d => d.Code != (int)ErrorCode.ERR_BadAttributeArgument)
                 .Verify(
-                    // (10,40): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // (10,40): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because
+                    // that name is used in an enclosing local scope to define a local or parameter
                     //             [Test(TakeOutParam(out int x2) && x1 > 0 && x2 > 0)]
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                         .WithArguments("x2")
@@ -40529,7 +40831,8 @@ public class Cls
             );
 
             compilation.VerifyDiagnostics(
-                // (7,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (7,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         int[Test1(out int x1), x1] _1;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[Test1(out int x1), x1]")
                     .WithLocation(7, 12),
@@ -40538,7 +40841,8 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
                     .WithArguments("x1")
                     .WithLocation(7, 27),
-                // (8,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (8,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         int[Test1(out int x2), x2] x2;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[Test1(out int x2), x2]")
                     .WithLocation(8, 12),
@@ -40665,7 +40969,8 @@ public class X
             var compilation = CreateCompilation(syntaxTree, options: TestOptions.ReleaseExe);
 
             compilation.VerifyDiagnostics(
-                // file.cs(12,16): error CS1674: 'int[*,*]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // file.cs(12,16): error CS1674: 'int[*,*]': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 //         using (int[TakeOutParam(true, out var x1),x1] d = null)
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -40673,7 +40978,8 @@ public class X
                     )
                     .WithArguments("int[*,*]")
                     .WithLocation(12, 16),
-                // file.cs(12,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(12,19): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         using (int[TakeOutParam(true, out var x1),x1] d = null)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -40695,7 +41001,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
                     .WithArguments("x1")
                     .WithLocation(14, 19),
-                // file.cs(20,16): error CS1674: 'int[*,*]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // file.cs(20,16): error CS1674: 'int[*,*]': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 //         using (int[TakeOutParam(true, out var x2),x2] d = null)
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -40703,7 +41010,8 @@ public class X
                     )
                     .WithArguments("int[*,*]")
                     .WithLocation(20, 16),
-                // file.cs(20,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(20,19): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         using (int[TakeOutParam(true, out var x2),x2] d = null)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -40725,7 +41033,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x2")
                     .WithArguments("x2")
                     .WithLocation(21, 19),
-                // file.cs(29,16): error CS1674: 'int[*,*]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // file.cs(29,16): error CS1674: 'int[*,*]': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 //         using (int[TakeOutParam(true, out var x3),x3] d = null)
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -40733,7 +41042,8 @@ public class X
                     )
                     .WithArguments("int[*,*]")
                     .WithLocation(29, 16),
-                // file.cs(29,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(29,19): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         using (int[TakeOutParam(true, out var x3),x3] d = null)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -40745,7 +41055,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "TakeOutParam(true, out var x3)")
                     .WithArguments("bool", "int")
                     .WithLocation(29, 20),
-                // file.cs(29,47): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // file.cs(29,47): error CS0136: A local or parameter named 'x3' cannot be declared in this scope
+                // because that name is used in an enclosing local scope to define a local or parameter
                 //         using (int[TakeOutParam(true, out var x3),x3] d = null)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -40825,7 +41136,8 @@ public class X
             );
 
             compilation.VerifyDiagnostics(
-                // (12,9): error CS1674: 'int[*,*]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (12,9): error CS1674: 'int[*,*]': type used in a using statement must be implicitly convertible
+                // to 'System.IDisposable'.
                 //         using int[TakeOutParam(true, out var x1), x1] d = null;
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -40833,7 +41145,8 @@ public class X
                     )
                     .WithArguments("int[*,*]")
                     .WithLocation(12, 9),
-                // (12,18): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (12,18): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         using int[TakeOutParam(true, out var x1), x1] d = null;
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -40855,7 +41168,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
                     .WithArguments("x1")
                     .WithLocation(13, 15),
-                // (21,9): error CS1674: 'int[*,*]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (21,9): error CS1674: 'int[*,*]': type used in a using statement must be implicitly convertible
+                // to 'System.IDisposable'.
                 //         using int[TakeOutParam(true, out var x2), x2] d = null;
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -40863,7 +41177,8 @@ public class X
                     )
                     .WithArguments("int[*,*]")
                     .WithLocation(21, 9),
-                // (21,18): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (21,18): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         using int[TakeOutParam(true, out var x2), x2] d = null;
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -40973,7 +41288,8 @@ public class X
 
             var compilation = CreateCompilation(syntaxTree, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-                // file.cs(12,17): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(12,17): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         for (int[TakeOutParam(true, out var x1),x1] a = null;;)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -41000,14 +41316,16 @@ public class X
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
                     .WithArguments("a")
                     .WithLocation(12, 53),
-                // file.cs(21,17): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(21,17): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         for (int[TakeOutParam(true, out var x2),x2] a = null;;)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
                         "[TakeOutParam(true, out var x2),x2]"
                     )
                     .WithLocation(21, 17),
-                // file.cs(21,45): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // file.cs(21,45): error CS0136: A local or parameter named 'x2' cannot be declared in this scope
+                // because that name is used in an enclosing local scope to define a local or parameter
                 //         for (int[TakeOutParam(true, out var x2),x2] a = null;;)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
                     .WithArguments("x2")
@@ -41103,7 +41421,8 @@ public class X
                 // (10,17): error CS0227: Unsafe code may only appear if compiling with /unsafe
                 //     unsafe void Test1()
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "Test1").WithLocation(10, 17),
-                // (12,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (12,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         fixed (int[TakeOutParam(true, out var x1), x1] d = null)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -41131,7 +41450,8 @@ public class X
                 // (18,17): error CS0227: Unsafe code may only appear if compiling with /unsafe
                 //     unsafe void Test2()
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "Test2").WithLocation(18, 17),
-                // (20,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (20,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         fixed (int[TakeOutParam(true, out var x2), x2] d = null)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -41159,7 +41479,8 @@ public class X
                 // (24,17): error CS0227: Unsafe code may only appear if compiling with /unsafe
                 //     unsafe void Test3()
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "Test3").WithLocation(24, 17),
-                // (29,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (29,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         fixed (int[TakeOutParam(true, out var x3), x3] d = null)
                 Diagnostic(
                         ErrorCode.ERR_ArraySizeInDeclaration,
@@ -41171,7 +41492,8 @@ public class X
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "TakeOutParam(true, out var x3)")
                     .WithArguments("bool", "int")
                     .WithLocation(29, 20),
-                // (29,47): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (29,47): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //         fixed (int[TakeOutParam(true, out var x3), x3] d = null)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
                     .WithArguments("x3")
@@ -41377,22 +41699,26 @@ class MyAttribute: System.Attribute
                 // [My(C.M(nameof(C.M(out int z1)), z1), z1)]
                 Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "C.M(out int z1)")
                     .WithLocation(2, 16),
-                // (2,5): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (2,5): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [My(C.M(nameof(C.M(out int z1)), z1), z1)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "C.M(nameof(C.M(out int z1)), z1)")
                     .WithLocation(2, 5),
-                // (2,39): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (2,39): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [My(C.M(nameof(C.M(out int z1)), z1), z1)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "z1").WithLocation(2, 39),
                 // (3,16): error CS8081: Expression does not have a name.
                 // [My(C.M(nameof(C.M(out var z2)), z2), z2)]
                 Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "C.M(out var z2)")
                     .WithLocation(3, 16),
-                // (3,5): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (3,5): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [My(C.M(nameof(C.M(out var z2)), z2), z2)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "C.M(nameof(C.M(out var z2)), z2)")
                     .WithLocation(3, 5),
-                // (3,39): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (3,39): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [My(C.M(nameof(C.M(out var z2)), z2), z2)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "z2").WithLocation(3, 39)
             );
@@ -41437,22 +41763,26 @@ class MyAttribute: System.Attribute
                 // [assembly: My(C.M(nameof(C.M(out int z1)), z1), z1)]
                 Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "C.M(out int z1)")
                     .WithLocation(2, 26),
-                // (2,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (2,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [assembly: My(C.M(nameof(C.M(out int z1)), z1), z1)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "C.M(nameof(C.M(out int z1)), z1)")
                     .WithLocation(2, 15),
-                // (2,49): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (2,49): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [assembly: My(C.M(nameof(C.M(out int z1)), z1), z1)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "z1").WithLocation(2, 49),
                 // (3,26): error CS8081: Expression does not have a name.
                 // [assembly: My(C.M(nameof(C.M(out var z2)), z2), z2)]
                 Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "C.M(out var z2)")
                     .WithLocation(3, 26),
-                // (3,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (3,15): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [assembly: My(C.M(nameof(C.M(out var z2)), z2), z2)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "C.M(nameof(C.M(out var z2)), z2)")
                     .WithLocation(3, 15),
-                // (3,49): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (3,49): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [assembly: My(C.M(nameof(C.M(out var z2)), z2), z2)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "z2").WithLocation(3, 49)
             );
@@ -42648,7 +42978,8 @@ True"
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (9,76): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (9,76): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     static event System.Func<bool> Test1 = GetDelegate(TakeOutParam(1, out int x1) && Dummy(x1));
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "int x1")
                         .WithArguments(
@@ -43108,7 +43439,8 @@ public class MyAttribute : System.Attribute
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,13): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (6,13): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //         [My(M2(out var x))]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "M2(out var x)")
                     .WithLocation(6, 13),
@@ -43185,7 +43517,8 @@ public class MyAttribute : System.Attribute
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,16): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+                // (6,16): error CS1660: Cannot convert lambda expression to type 'string' because it is not a
+                // delegate type
                 //         [My(() => { [My(M2(out var x))] static string M2(out int x) => throw null; })]
                 Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                     .WithArguments("lambda expression", "string")
@@ -43336,7 +43669,8 @@ class C
                     .WithArguments("local")
                     .WithLocation(6, 14),
                 // (6,39): error CS1736: Default parameter value for 'parameter' must be a compile-time constant
-                //         void local(string parameter = () => { static string M2(out int x, string y = M2(out var a, "b")) => throw null; }) { }
+                //         void local(string parameter = () => { static string M2(out int x, string y = M2(out var
+                // a, "b")) => throw null; }) { }
                 Diagnostic(
                         ErrorCode.ERR_DefaultValueMustBeConstant,
                         @"() => { static string M2(out int x, string y = M2(out var a, ""b"")) => throw null; }"
@@ -43478,7 +43812,8 @@ class C
             var comp = CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (5,39): error CS1736: Default parameter value for 'parameter' must be a compile-time constant
-                    //         var lam = (string parameter = () => { static string M2(out int x, string y = M2(out var a, "b")) => throw null; }) => { };
+                    //         var lam = (string parameter = () => { static string M2(out int x, string y = M2(out var
+                    // a, "b")) => throw null; }) => { };
                     Diagnostic(
                             ErrorCode.ERR_DefaultValueMustBeConstant,
                             @"() => { static string M2(out int x, string y = M2(out var a, ""b"")) => throw null; }"

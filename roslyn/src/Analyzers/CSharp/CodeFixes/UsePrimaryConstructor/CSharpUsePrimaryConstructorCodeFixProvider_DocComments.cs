@@ -139,7 +139,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             if (existingConstructorDocComment == default)
                 return typeDeclarationLeadingTrivia;
 
-            // If both type and the constructor have doc comments then merge them.  Otherwise, just move the constructor
+            // If both type and the constructor have doc comments then merge them.  Otherwise, just move the
+            // constructor
             // docs to the type level.
             return InsertOrReplaceDocComments(
                 typeDeclarationLeadingTrivia,
@@ -213,8 +214,10 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             SyntaxTriviaList typeDeclarationLeadingTrivia
         )
         {
-            // now, if we're removing any members, and they had doc comments, and we don't already have doc comments for
-            // that parameter in our final doc comment, then move them to there, converting from `<summary>` doc comments to
+            // now, if we're removing any members, and they had doc comments, and we don't already have doc
+            // comments for
+            // that parameter in our final doc comment, then move them to there, converting from `<summary>` doc
+            // comments to
             // `<param name="x">` doc comments.
 
             // Keep the <param> tags ordered by the order they are in the constructor parameters.

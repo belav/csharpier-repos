@@ -340,8 +340,10 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 var syntaxFacts =
                     originalDocument.GetRequiredLanguageService<ISyntaxFactsService>();
 
-                // We may hit a location multiple times due to how we do FAR for linked symbols, but each linked symbol
-                // is allowed to report the entire set of references it think it is compatible with.  So ensure we're
+                // We may hit a location multiple times due to how we do FAR for linked symbols, but each linked
+                // symbol
+                // is allowed to report the entire set of references it think it is compatible with.  So ensure
+                // we're
                 // hitting each location only once.
                 //
                 // Note Use DistinctBy (.Net6) once available.

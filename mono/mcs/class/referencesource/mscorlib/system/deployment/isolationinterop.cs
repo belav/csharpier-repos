@@ -2180,9 +2180,9 @@ namespace System.Deployment.Internal.Isolation
         }
 
         /*
-            What's the point of this?  We already know the identity, we're passing it
-            in on the commandline.
-         */
+        What's the point of this?  We already know the identity, we're passing it
+        in on the commandline.
+        */
         [SecuritySafeCritical]
         public IDefinitionIdentity GetAssemblyIdentity(
             UInt32 Flags,

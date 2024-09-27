@@ -888,12 +888,16 @@ namespace System.Windows.Forms
             get { return dataSource; }
             set
             {
-                /* The System.Windows.Forms.DataGridView class supports the standard Windows Forms data-binding model. This means the data source can be of any type that implements:
-                 - the System.Collections.IList interface, including one-dimensional arrays.
-                 - the System.ComponentModel.IListSource interface, such as the System.Data.DataTable and System.Data.DataSet classes.
-                 - the System.ComponentModel.IBindingList interface, such as the System.ComponentModel.Collections.BindingList<> class.
-                 - the System.ComponentModel.IBindingListView interface, such as the System.Windows.Forms.BindingSource class.
-                */
+/* The System.Windows.Forms.DataGridView class supports the standard Windows Forms data-binding
+model. This means the data source can be of any type that implements:
+- the System.Collections.IList interface, including one-dimensional arrays.
+- the System.ComponentModel.IListSource interface, such as the System.Data.DataTable and
+System.Data.DataSet classes.
+- the System.ComponentModel.IBindingList interface, such as the
+System.ComponentModel.Collections.BindingList<> class.
+- the System.ComponentModel.IBindingListView interface, such as the
+System.Windows.Forms.BindingSource class.
+*/
                 if (
                     !(
                         value == null
@@ -3245,7 +3249,8 @@ namespace System.Windows.Forms
                 }
             }
 
-            // Mark rows/columns in between selected cells as included if the selection mode isn't FullHeaderSelect.
+            // Mark rows/columns in between selected cells as included if the selection mode isn't
+            // FullHeaderSelect.
             switch (selectionMode)
             {
                 case DataGridViewSelectionMode.CellSelect:
@@ -7912,12 +7917,16 @@ namespace System.Windows.Forms
 
         private void DoBinding()
         {
-            /* The System.Windows.Forms.DataGridView class supports the standard Windows Forms data-binding model. This means the data source can be of any type that implements:
-             - the System.Collections.IList interface, including one-dimensional arrays.
-             - the System.ComponentModel.IListSource interface, such as the System.Data.DataTable and System.Data.DataSet classes.
-             - the System.ComponentModel.IBindingList interface, such as the System.ComponentModel.Collections.BindingList<> class.
-             - the System.ComponentModel.IBindingListView interface, such as the System.Windows.Forms.BindingSource class.
-            */
+/* The System.Windows.Forms.DataGridView class supports the standard Windows Forms data-binding
+model. This means the data source can be of any type that implements:
+- the System.Collections.IList interface, including one-dimensional arrays.
+- the System.ComponentModel.IListSource interface, such as the System.Data.DataTable and
+System.Data.DataSet classes.
+- the System.ComponentModel.IBindingList interface, such as the
+System.ComponentModel.Collections.BindingList<> class.
+- the System.ComponentModel.IBindingListView interface, such as the
+System.Windows.Forms.BindingSource class.
+*/
 
             if (dataSource != null && DataManager != null)
             {

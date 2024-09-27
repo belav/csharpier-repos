@@ -495,7 +495,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.Contains("state", () => app.FindElement(By.Id("test-state")).Text);
         AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
 
-        // After we press back, we should end up at the "/ProgrammaticNavigationCases" page so we know browser history has not been replaced
+        // After we press back, we should end up at the "/ProgrammaticNavigationCases" page so we know
+        // browser history has not been replaced
         // If history had been replaced we would have ended up at the "/" page
         Browser.Navigate().Back();
         Browser.True(
@@ -513,7 +514,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             () => testSelector.SelectedOption.GetAttribute("value")
         );
 
-        // But still we should be able to navigate back, and end up at the "/ProgrammaticNavigationCases" page
+        // But still we should be able to navigate back, and end up at the "/ProgrammaticNavigationCases"
+        // page
         Browser.Navigate().Back();
         Browser.True(
             () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
@@ -541,8 +543,10 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.Contains("state", () => app.FindElement(By.Id("test-state")).Text);
         AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
 
-        // After we press back, we should end up at the "/" page so we know browser history has been replaced
-        // If history would not have been replaced we would have ended up at the "/ProgrammaticNavigationCases" page
+        // After we press back, we should end up at the "/" page so we know browser history has been
+        // replaced
+        // If history would not have been replaced we would have ended up at the
+        // "/ProgrammaticNavigationCases" page
         Browser.Navigate().Back();
         Browser.True(() => Browser.Url.EndsWith("/", StringComparison.Ordinal));
         AssertHighlightedLinks(
@@ -573,12 +577,14 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.Contains("programmatic navigation", () => app.FindElement(By.Id("test-info")).Text);
 
         // We navigate to the /Other page
-        // This will also test our new NavigateTo(string uri) overload (it should not replace the browser history)
+        // This will also test our new NavigateTo(string uri) overload (it should not replace the browser
+        // history)
         app.FindElement(By.Id("do-other-navigation")).Click();
         Browser.True(() => Browser.Url.EndsWith("/Other", StringComparison.Ordinal));
         AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
 
-        // After we press back, we should end up at the "/ProgrammaticNavigationCases" page so we know browser history has not been replaced
+        // After we press back, we should end up at the "/ProgrammaticNavigationCases" page so we know
+        // browser history has not been replaced
         // If history had been replaced we would have ended up at the "/" page
         Browser.Navigate().Back();
         Browser.True(
@@ -586,7 +592,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         );
         AssertHighlightedLinks("Programmatic navigation cases");
 
-        // For completeness, we will test if the normal NavigateTo(string uri, bool forceLoad) overload will also
+        // For completeness, we will test if the normal NavigateTo(string uri, bool forceLoad) overload will
+        // also
         // NOT change the browser's history. So we basically repeat what we have done above.
         app.FindElement(By.Id("do-other-navigation2")).Click();
         Browser.True(() => Browser.Url.EndsWith("/Other", StringComparison.Ordinal));
@@ -612,7 +619,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             () => testSelector.SelectedOption.GetAttribute("value")
         );
 
-        // But still we should be able to navigate back, and end up at the "/ProgrammaticNavigationCases" page
+        // But still we should be able to navigate back, and end up at the "/ProgrammaticNavigationCases"
+        // page
         Browser.Navigate().Back();
         Browser.True(
             () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
@@ -639,8 +647,10 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.True(() => Browser.Url.EndsWith("/Other", StringComparison.Ordinal));
         AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
 
-        // After we press back, we should end up at the "/" page so we know browser history has been replaced
-        // If history would not have been replaced we would have ended up at the "/ProgrammaticNavigationCases" page
+        // After we press back, we should end up at the "/" page so we know browser history has been
+        // replaced
+        // If history would not have been replaced we would have ended up at the
+        // "/ProgrammaticNavigationCases" page
         Browser.Navigate().Back();
         Browser.True(() => Browser.Url.EndsWith("/", StringComparison.Ordinal));
         AssertHighlightedLinks(
@@ -678,7 +688,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             () => testSelector.SelectedOption.GetAttribute("value")
         );
 
-        // After we press back, we should end up at the "/" page so we know browser history has been replaced
+        // After we press back, we should end up at the "/" page so we know browser history has been
+        // replaced
         Browser.Navigate().Back();
         Browser.True(() => Browser.Url.EndsWith("/", StringComparison.Ordinal));
         Browser.WaitUntilTestSelectorReady();
@@ -832,7 +843,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         SetUrlViaPushState("/mytestpath");
 
-        // Both navigation locks have initiated their "location changing" handlers and are displaying navigation controls
+        // Both navigation locks have initiated their "location changing" handlers and are displaying
+        // navigation controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
         Browser.Exists(By.CssSelector("#navigation-lock-1 > div.blocking-controls"));
 
@@ -881,7 +893,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         SetUrlViaPushState(relativeUriPostNavigation);
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -942,7 +955,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         SetUrlViaPushState(relativeUriPostNavigation);
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The navigation was blocked
@@ -971,7 +985,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         SetUrlViaPushState(relativeUriPostNavigation);
 
-        // The navigation was not blocked because the lock was removed when the navigation lock component was disposed
+        // The navigation was not blocked because the lock was removed when the navigation lock component
+        // was disposed
         Browser.Equal(
             expectedAbsoluteUriPostNavigation,
             () => app.FindElement(By.Id("test-info")).Text
@@ -1000,7 +1015,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         SetUrlViaPushState(relativeCanceledUri);
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -1073,7 +1089,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         Browser.Navigate().Back();
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -1134,7 +1151,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         Browser.FindElement(By.Id("programmatic-navigation")).Click();
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -1199,7 +1217,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         Browser.FindElement(By.Id("internal-link-navigation")).Click();
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -1269,7 +1288,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         Browser.Navigate().Back();
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -1382,7 +1402,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         // Add another history entry
         Browser.FindElement(By.Id("programmatic-navigation")).Click();
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The state was captured in the programmatically-initiated navigation.
@@ -1452,7 +1473,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         Browser.FindElement(By.Id("programmatic-navigation")).Click();
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -1489,7 +1511,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         Browser.FindElement(By.Id("internal-link-navigation")).Click();
 
-        // The navigation lock has initiated its "location changing" handler and is displaying navigation controls
+        // The navigation lock has initiated its "location changing" handler and is displaying navigation
+        // controls
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The location was reverted to what it was before the navigation started
@@ -1512,7 +1535,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
     [Fact]
     public void CanArriveAtRouteWithExtension()
     {
-        // This is an odd test, but it's primarily here to verify routing for routeablecomponentfrompackage isn't available due to
+        // This is an odd test, but it's primarily here to verify routing for routeablecomponentfrompackage
+        // isn't available due to
         // some unknown reason
         SetUrlViaPushState("/Default.html");
 

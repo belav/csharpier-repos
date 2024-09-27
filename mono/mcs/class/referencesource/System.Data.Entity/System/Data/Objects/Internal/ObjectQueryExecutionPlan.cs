@@ -24,7 +24,8 @@ namespace System.Data.Objects.Internal
     >>;
 
     /// <summary>
-    /// Represents the 'compiled' form of all elements (query + result assembly) required to execute a specific <see cref="ObjectQuery"/>
+    /// Represents the 'compiled' form of all elements (query + result assembly) required to execute a
+    // specific <see cref="ObjectQuery"/>
     /// </summary>
     internal sealed class ObjectQueryExecutionPlan
     {
@@ -34,7 +35,8 @@ namespace System.Data.Objects.Internal
         internal readonly MergeOption MergeOption;
         internal readonly CompiledQueryParameters CompiledQueryParameters;
 
-        /// <summary>If the query yields entities from a single entity set, the value is stored here.</summary>
+        /// <summary>If the query yields entities from a single entity set, the value is stored
+        // here.</summary>
         private readonly EntitySet _singleEntitySet;
 
         private ObjectQueryExecutionPlan(
@@ -154,7 +156,8 @@ namespace System.Data.Objects.Internal
                 false
             );
 
-            // attempt to determine entity information for this query (e.g. which entity type and which entity set)
+            // attempt to determine entity information for this query (e.g. which entity type and which entity
+            // set)
             //EntityType rootEntityType = null;
 
             EntitySet singleEntitySet = null;

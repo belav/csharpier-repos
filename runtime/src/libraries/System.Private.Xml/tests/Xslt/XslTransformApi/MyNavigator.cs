@@ -72,7 +72,8 @@ public class MyNavigator : XPathNavigator
         get { return _xn.XmlLang; }
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.IsEmptyElement"]/*' />
+    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.IsEmptyElement"]/*'
+    // />
     public override bool IsEmptyElement
     {
         get { return _xn.IsEmptyElement; }
@@ -97,19 +98,22 @@ public class MyNavigator : XPathNavigator
         return _xn.GetAttribute(localName, namespaceURI);
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToAttribute"]/*' />
+    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToAttribute"]/*'
+    // />
     public override bool MoveToAttribute(string localName, string namespaceURI)
     {
         return _xn.MoveToAttribute(localName, namespaceURI);
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToFirstAttribute"]/*' />
+    /// <include file='doc\XPathNavigator.uex'
+    // path='docs/doc[@for="XPathNavigator.MoveToFirstAttribute"]/*' />
     public override bool MoveToFirstAttribute()
     {
         return _xn.MoveToFirstAttribute();
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToNextAttribute"]/*' />
+    /// <include file='doc\XPathNavigator.uex'
+    // path='docs/doc[@for="XPathNavigator.MoveToNextAttribute"]/*' />
     public override bool MoveToNextAttribute()
     {
         return _xn.MoveToNextAttribute();
@@ -122,19 +126,22 @@ public class MyNavigator : XPathNavigator
         return _xn.GetNamespace(name);
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToNamespace"]/*' />
+    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToNamespace"]/*'
+    // />
     public override bool MoveToNamespace(string name)
     {
         return _xn.MoveToNamespace(name);
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToFirstNamespace1"]/*' />
+    /// <include file='doc\XPathNavigator.uex'
+    // path='docs/doc[@for="XPathNavigator.MoveToFirstNamespace1"]/*' />
     public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
     {
         return _xn.MoveToFirstNamespace(namespaceScope);
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToNextNamespace1"]/*' />
+    /// <include file='doc\XPathNavigator.uex'
+    // path='docs/doc[@for="XPathNavigator.MoveToNextNamespace1"]/*' />
     public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
     {
         return _xn.MoveToNextNamespace(namespaceScope);
@@ -147,7 +154,8 @@ public class MyNavigator : XPathNavigator
         return _xn.MoveToNext();
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToPrevious"]/*' />
+    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToPrevious"]/*'
+    // />
     public override bool MoveToPrevious()
     {
         return _xn.MoveToPrevious();
@@ -165,7 +173,8 @@ public class MyNavigator : XPathNavigator
         get { return _xn.HasChildren; }
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToFirstChild"]/*' />
+    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.MoveToFirstChild"]/*'
+    // />
     public override bool MoveToFirstChild()
     {
         return _xn.MoveToFirstChild();
@@ -195,7 +204,8 @@ public class MyNavigator : XPathNavigator
         return _xn.MoveToId(id);
     }
 
-    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.IsSamePosition"]/*' />
+    /// <include file='doc\XPathNavigator.uex' path='docs/doc[@for="XPathNavigator.IsSamePosition"]/*'
+    // />
     public override bool IsSamePosition(XPathNavigator other)
     {
         return _xn.IsSamePosition(other);

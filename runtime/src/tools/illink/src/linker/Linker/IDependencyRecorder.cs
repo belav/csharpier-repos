@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 //
 // IDependencyRecorder.cs
@@ -40,7 +41,8 @@ namespace Mono.Linker
         /// <param name="source">The source of the dependency (for example the caller method).</param>
         /// <param name="target">The target of the dependency (for example the callee method).</param>
         /// <param name="marked">true if the target is also marked by the MarkStep.</param>
-        /// <remarks>The source and target are typically Cecil metadata objects (MethodDefinition, TypeDefinition, ...)
+        /// <remarks>The source and target are typically Cecil metadata objects (MethodDefinition,
+        // TypeDefinition, ...)
         /// but they can also be ILLink steps or really any other object.</remarks>
         void RecordDependency(object source, object target, bool marked);
 
@@ -48,8 +50,10 @@ namespace Mono.Linker
         /// Reports a dependency detected by ILLink, with a well-defined reason for keeping the dependency.
         /// </summary>
         /// <param name="target">The target of the dependency (for example the callee method).</param>
-        /// <param name="reason">The reason for including the target dependency (for example a direct call from another method).</param>
-        /// <param name="marked">true if the target is also marked by the MarkStep as a result of this particular reason.</param>
+        /// <param name="reason">The reason for including the target dependency (for example a direct call
+        // from another method).</param>
+        /// <param name="marked">true if the target is also marked by the MarkStep as a result of this
+        // particular reason.</param>
         /// <remarks>The target is typically a Cecil metadata object (MethodDefinition, TypeDefinition, ...)
         /// but can also be ILLink steps or really any other object. "marked" may be false for a target that
         /// is still marked for some other reason.</remarks>

@@ -136,7 +136,8 @@ namespace System.Formats.Tar.Tests
         ) => Read_Archive_File_LongSymbolicLink_Async_Internal(format, testFormat);
 
         [Theory]
-        // Neither V7 not Ustar can handle a path that does not have separators that can be split under 100 bytes
+        // Neither V7 not Ustar can handle a path that does not have separators that can be split under 100
+        // bytes
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
@@ -380,8 +381,10 @@ namespace System.Formats.Tar.Tests
         {
             // Currently sparse entries are not supported.
 
-            // There are PAX archives archives in the golang folder that have extended attributes for treating a regular file as a sparse file.
-            // Sparse entries were created for the GNU format, so they are very rare entry types which are excluded from this test method:
+            // There are PAX archives archives in the golang folder that have extended attributes for treating a
+            // regular file as a sparse file.
+            // Sparse entries were created for the GNU format, so they are very rare entry types which are
+            // excluded from this test method:
             // pax-nil-sparse-data, pax-nil-sparse-hole, pax-sparse-big
 
             await using MemoryStream archiveStream = GetTarMemoryStream(

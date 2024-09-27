@@ -330,8 +330,10 @@ namespace System.ServiceModel.Security
                 {
                     result.Endpoint.Behaviors.Add(channelBehaviors[i]);
                 }
-                // add a behavior that removes the UI channel initializer added by the client credentials since there should be no UI
-                // initializer popped up as part of obtaining the federation token (the UI should already have been popped up for the main channel)
+                // add a behavior that removes the UI channel initializer added by the client credentials since
+                // there should be no UI
+                // initializer popped up as part of obtaining the federation token (the UI should already have been
+                // popped up for the main channel)
                 result.Endpoint.Behaviors.Add(new InteractiveInitializersRemovingBehavior());
 
                 return new RequestChannelFactory<IWsTrustFeb2005SecurityTokenService>(result);
@@ -372,7 +374,8 @@ namespace System.ServiceModel.Security
                     ClientRuntime behavior
                 )
                 {
-                    // it is very unlikely that InteractiveChannelInitializers will be null, this is defensive in case ClientRuntime every has a
+                    // it is very unlikely that InteractiveChannelInitializers will be null, this is defensive in case
+                    // ClientRuntime every has a
                     // bug.  I am OK with this as ApplyingClientBehavior is a one-time channel setup.
                     if (behavior != null && behavior.InteractiveChannelInitializers != null)
                     {

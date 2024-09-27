@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.DependencyModel
             ThrowHelper.ThrowIfNull(stream);
 
             // Custom encoder is required to fix https://github.com/dotnet/runtime/issues/3678
-            // Since the JSON is only written to a file that is read by the SDK (and not transmitted over the wire),
+            // Since the JSON is only written to a file that is read by the SDK (and not transmitted over the
+            // wire),
             // it is safe to skip escaping certain characters in this scenario
             // (that would otherwise be escaped, by default, as part of defense-in-depth, such as +).
             var options = new JsonWriterOptions
@@ -493,7 +494,8 @@ namespace Microsoft.Extensions.DependencyModel
                     else
                     {
                         // Add a placeholder item
-                        // We need to generate a pseudo-path because there could be multiple different asset groups with placeholders
+                        // We need to generate a pseudo-path because there could be multiple different asset groups with
+                        // placeholders
                         // Only the last path segment matters, the rest is basically just a GUID.
                         string pseudoPathFolder =
                             assetType == DependencyContextStrings.RuntimeAssetType

@@ -14,17 +14,21 @@ using static Microsoft.Interop.SyntaxFactoryExtensions;
 namespace Microsoft.Interop
 {
     /// <summary>
-    /// Base code generator for generating the body of a source-generated P/Invoke and providing customization for how to invoke/define the native method.
+    /// Base code generator for generating the body of a source-generated P/Invoke and providing
+    // customization for how to invoke/define the native method.
     /// </summary>
     /// <remarks>
     /// This type enables multiple code generators for P/Invoke-style marshalling
-    /// to reuse the same basic method body, but with different designs of how to emit the target native method.
+    /// to reuse the same basic method body, but with different designs of how to emit the target native
+    // method.
     /// This enables users to write code generators that work with slightly different semantics.
     /// For example, the source generator for [LibraryImport] emits the target P/Invoke as
     /// a local function inside the generated stub body.
     /// However, other managed-to-native code generators using a P/Invoke style might want to define
-    /// the target DllImport outside of the stub as a static non-local function or as a function pointer field.
-    /// This refactoring allows the code generator to have control over where the target method is declared
+    /// the target DllImport outside of the stub as a static non-local function or as a function pointer
+    // field.
+    /// This refactoring allows the code generator to have control over where the target method is
+    // declared
     /// and how it is declared.
     /// </remarks>
     internal sealed class ManagedToNativeVTableMethodGenerator
@@ -36,7 +40,8 @@ namespace Microsoft.Interop
         private const string VirtualMethodTableIdentifier =
             $"__vtable{StubCodeContext.GeneratedNativeIdentifierSuffix}";
 
-        // Error code representing success. This maps to S_OK for Windows HRESULT semantics and 0 for POSIX errno semantics.
+        // Error code representing success. This maps to S_OK for Windows HRESULT semantics and 0 for POSIX
+        // errno semantics.
         private const int SuccessErrorCode = 0;
         private readonly bool _setLastError;
         private readonly BoundGenerators _marshallers;
@@ -101,7 +106,8 @@ namespace Microsoft.Interop
                 )
             )
             {
-                // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
+                // If we need a different native return identifier, then recreate the context with the correct
+                // identifier before we generate any code.
                 _context = new ManagedToNativeStubCodeContext(
                     ReturnIdentifier,
                     $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}"
@@ -125,7 +131,8 @@ namespace Microsoft.Interop
         {
             var setupStatements = new List<StatementSyntax>
             {
-                // var (<thisParameter>, <virtualMethodTable>) = ((IUnmanagedVirtualMethodTableProvider)this).GetVirtualMethodTableInfoForKey(typeof(<containingTypeName>));
+                // var (<thisParameter>, <virtualMethodTable>) =
+                // ((IUnmanagedVirtualMethodTableProvider)this).GetVirtualMethodTableInfoForKey(typeof(<containingTypeName>));
                 AssignmentStatement(
                     DeclarationExpression(
                         IdentifierName("var"),
@@ -259,9 +266,12 @@ namespace Microsoft.Interop
                 );
             }
 
-            // Keep the this object alive across the native call, similar to how we handle marshalling managed delegates.
-            // We do this right after the NotifyForSuccessfulInvoke phase as that phase is where the delegate objects are kept alive.
-            // If we ever move the "this" object handling out of this type, we'll move the handling to be emitted in that phase.
+            // Keep the this object alive across the native call, similar to how we handle marshalling managed
+            // delegates.
+            // We do this right after the NotifyForSuccessfulInvoke phase as that phase is where the delegate
+            // objects are kept alive.
+            // If we ever move the "this" object handling out of this type, we'll move the handling to be
+            // emitted in that phase.
             // GC.KeepAlive(this);
             tryStatements.Add(
                 MethodInvocationStatement(

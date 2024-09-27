@@ -38,8 +38,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
     using LspDocumentSymbol = DocumentSymbol;
 
     /// <summary>
-    /// Responsible for updating data related to Document outline. It is expected that all public methods on this type
-    /// do not need to be on the UI thread. Two properties: <see cref="SortOption"/> and <see cref="SearchText"/> are
+    /// Responsible for updating data related to Document outline. It is expected that all public
+    // methods on this type
+    /// do not need to be on the UI thread. Two properties: <see cref="SortOption"/> and <see
+    // cref="SearchText"/> are
     /// intended to be bound to a WPF view and should only be set from the UI thread.
     /// </summary>
     internal sealed partial class DocumentOutlineViewModel : INotifyPropertyChanged, IDisposable
@@ -144,8 +146,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             _workQueue.AddWork(cancelExistingWork: true);
 
         /// <summary>
-        /// Keeps track if we're currently in the middle of navigating or not.  For example, when the user clicks on an
-        /// item, we will navigate to it.  That will then kick of a caret move.  This flag helps us realize the caret move
+        /// Keeps track if we're currently in the middle of navigating or not.  For example, when the user
+        // clicks on an
+        /// item, we will navigate to it.  That will then kick of a caret move.  This flag helps us realize
+        // the caret move
         /// is not user driven, so we don't then start the work to go expand/select something.
         /// </summary>
         /// <remarks>This property is not bound to the UI.</remarks>
@@ -165,7 +169,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         }
 
         /// <summary>
-        /// Keeps track of all the inputs/computed-state for the last values we presented on the UI.  Used so we can
+        /// Keeps track of all the inputs/computed-state for the last values we presented on the UI.  Used
+        // so we can
         /// track prior state forward (like which nodes are expanded).
         /// </summary>
         /// <remarks>This property is not bound to the UI.</remarks>
@@ -183,7 +188,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             }
         }
 
-        /// <remarks>This property is bound to the UI. However, it is only read/written by the UI. We only act as
+        /// <remarks>This property is bound to the UI. However, it is only read/written by the UI. We only
+        // act as
         /// storage for the value. When this value is true, UI updates are deferred.</remarks>
         public Visibility Visibility
         {
@@ -199,7 +205,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             }
         }
 
-        /// <remarks>This property is bound to the UI.  However, it is only read/written by the UI.  We only act as
+        /// <remarks>This property is bound to the UI.  However, it is only read/written by the UI.  We only
+        // act as
         /// storage for the value.  When the value changes, the sorting is actually handled by
         /// DocumentSymbolDataViewModelSorter.</remarks>
         public SortOption SortOption
@@ -216,7 +223,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             }
         }
 
-        /// <remarks>This property is bound to the UI.  However, it is read/written by the UI, and also read by us when
+        /// <remarks>This property is bound to the UI.  However, it is read/written by the UI, and also read
+        // by us when
         /// computing the model to know what to filter it down to.</remarks>
         public string SearchText
         {
@@ -236,7 +244,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             }
         }
 
-        /// <remarks>This property is bound to the UI.  It is only read by the UI, but can be read/written by us.</remarks>
+        /// <remarks>This property is bound to the UI.  It is only read by the UI, but can be read/written
+        // by us.</remarks>
         public ImmutableArray<DocumentSymbolDataViewModel> DocumentSymbolViewModelItems
         {
             get
@@ -244,7 +253,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 _threadingContext.ThrowIfNotOnUIThread();
                 return _documentSymbolViewModelItems_doNotAccessDirectly;
             }
-            // Setting this only happens from within this type once we've computed new items or filtered down the existing set.
+            // Setting this only happens from within this type once we've computed new items or filtered down
+            // the existing set.
             private set
             {
                 _threadingContext.ThrowIfNotOnUIThread();
@@ -300,7 +310,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 )
                 .ConfigureAwait(false);
 
-            // Now, go back to the UI and grab the prior view state we set, and the current UI values we want to update the data with.
+            // Now, go back to the UI and grab the prior view state we set, and the current UI values we want to
+            // update the data with.
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             if (_isDisposed)
                 return;
@@ -323,7 +334,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             var searchTextChanged = searchText != lastPresentedViewState.SearchText;
             var oldViewModelItems = lastPresentedViewState.ViewModelItems;
 
-            // if we got new data or the user changed the search text, recompute our items to correspond to this new state.
+            // if we got new data or the user changed the search text, recompute our items to correspond to this
+            // new state.
             // Apply whatever the current search text is to what the model returned, and produce the new items.
             var newViewModelItems = GetDocumentSymbolItemViewModels(
                 sortOption,
@@ -333,7 +345,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             // If the search text changed, just show everything in expanded form, so the user can see everything
             // that matched, without anything being hidden.
             //
-            // in the case of no search text change, attempt to keep the same open/close expansion state from before.
+            // in the case of no search text change, attempt to keep the same open/close expansion state from
+            // before.
             if (!searchTextChanged)
             {
                 ApplyOldStateToNewItems(
@@ -344,7 +357,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 );
             }
 
-            // Now create an interval tree out of the view models.  This will allow us to easily find the intersecting
+            // Now create an interval tree out of the view models.  This will allow us to easily find the
+            // intersecting
             // view models given any position in the file with any particular text snapshot.
             var intervalTree = SimpleIntervalTree.Create(
                 new IntervalIntrospector(),
@@ -394,8 +408,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 ImmutableArray<DocumentSymbolDataViewModel> newItems
             )
             {
-                // Walk through the old items, mapping their spans forward and keeping track if they were expanded or
-                // collapsed.  Then walk through the new items and see if they have the same span as a prior item.  If
+                // Walk through the old items, mapping their spans forward and keeping track if they were expanded
+                // or
+                // collapsed.  Then walk through the new items and see if they have the same span as a prior item.
+                // If
                 // so, preserve the expansion state.
                 using var _ = PooledDictionary<
                     Span,
@@ -433,7 +449,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             {
                 foreach (var item in oldItems)
                 {
-                    // EdgeInclusive so that if we type on the end of an existing item it maps forward to the new full span.
+                    // EdgeInclusive so that if we type on the end of an existing item it maps forward to the new full
+                    // span.
                     var mapped = item.Data.SelectionRangeSpan.TranslateTo(
                         newSnapshot,
                         SpanTrackingMode.EdgeInclusive
@@ -532,7 +549,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 if (overlappingModels.Length == 0)
                     return;
 
-                // Order from smallest to largest.  The smallest is the innermost and should be the one we actually select.
+                // Order from smallest to largest.  The smallest is the innermost and should be the one we actually
+                // select.
                 // The others are the parents and we should expand those so the innermost one is visible.
                 overlappingModels = overlappingModels.Sort(
                     static (m1, m2) =>

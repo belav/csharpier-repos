@@ -4,10 +4,12 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures the Unicode based on the <see cref="UnicodeAttribute" /> applied on the property.
+///     A convention that configures the Unicode based on the <see cref="UnicodeAttribute" />
+// applied on the property.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class UnicodeAttributeConvention : PropertyAttributeConventionBase<UnicodeAttribute>
 {

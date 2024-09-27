@@ -123,7 +123,8 @@ namespace Mono.ApiTools
             ApiChange change
         )
         {
-            // FIXME: this doesn't render changes in the accessor visibility (a protected setter can become public for instance).
+            // FIXME: this doesn't render changes in the accessor visibility (a protected setter can become
+            // public for instance).
             change.Append(" {");
             if (tgtGetter != null)
             {

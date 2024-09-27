@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
     /// Service to keep track of build-only diagnostics reported from explicit Build/Rebuild commands.
-    /// Note that this service only keeps track of those diagnostics that can never be reported from live analysis.
+    /// Note that this service only keeps track of those diagnostics that can never be reported from
+    // live analysis.
     /// </summary>
     internal interface IBuildOnlyDiagnosticsService : IWorkspaceService
     {

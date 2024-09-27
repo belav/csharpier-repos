@@ -327,7 +327,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         /// </summary>
         public ImmutableArray<T> ToImmutableAndFree()
         {
-            // This is mostly the same as 'MoveToImmutable', but avoids delegating to that method since 'Free' contains
+            // This is mostly the same as 'MoveToImmutable', but avoids delegating to that method since 'Free'
+            // contains
             // fast paths to avoid caling 'Clear' in some cases.
             ImmutableArray<T> result;
             if (Count == 0)
@@ -363,7 +364,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             var pool = _pool;
             if (pool != null)
             {
-                // According to the statistics of a C# compiler self-build, the most commonly used builder size is 0.  (808003 uses).
+                // According to the statistics of a C# compiler self-build, the most commonly used builder size is
+                // 0.  (808003 uses).
                 // The distant second is the Count == 1 (455619), then 2 (106362) ...
                 // After about 50 (just 67) we have a long tail of infrequently used builder sizes.
                 // However we have builders with size up to 50K   (just one such thing)

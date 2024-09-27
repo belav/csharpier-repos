@@ -39,8 +39,10 @@ public class SauceConnectServer : IDisposable
             throw new InvalidOperationException("Sauce connect singleton already created.");
         }
 
-        // The assembly level attribute AssemblyFixture takes care of this being being instantiated before tests run
-        // and disposed after tests are run, gracefully shutting down the server when possible by calling Dispose on
+        // The assembly level attribute AssemblyFixture takes care of this being being instantiated before
+        // tests run
+        // and disposed after tests are run, gracefully shutting down the server when possible by calling
+        // Dispose on
         // the singleton.
         Instance = this;
         _diagnosticsMessageSink = diagnosticsMessageSink;
@@ -129,7 +131,8 @@ public class SauceConnectServer : IDisposable
         process.BeginOutputReadLine();
         process.BeginErrorReadLine();
 
-        // The Sauce connect server has to be up for the entirety of the tests and is only shutdown when the application (i.e. the test) exits.
+        // The Sauce connect server has to be up for the entirety of the tests and is only shutdown when the
+        // application (i.e. the test) exits.
         AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
             ProcessCleanup(process, pidFilePath);
 
@@ -138,7 +141,8 @@ public class SauceConnectServer : IDisposable
         {
             logOutput.TryAdd(e.Data);
 
-            // We avoid logging on the output here because it is unreliable. We can only log in the diagnostics sink.
+            // We avoid logging on the output here because it is unreliable. We can only log in the diagnostics
+            // sink.
             lock (_diagnosticsMessageSink)
             {
                 _diagnosticsMessageSink.OnMessage(new DiagnosticMessage(e.Data));
@@ -187,7 +191,8 @@ Captured output lines:
 
     private static Process StartSentinelProcess(Process process, string sentinelFile, int timeout)
     {
-        // This sentinel process will start and will kill any rouge sauce connect server that wasn't torn down via normal means.
+        // This sentinel process will start and will kill any rouge sauce connect server that wasn't torn
+        // down via normal means.
         var psi = new ProcessStartInfo
         {
             FileName = "powershell",

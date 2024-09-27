@@ -255,20 +255,20 @@ namespace Mono.Unix
             return len;
         }
 
-        /*
-         * Marshal a C `char **'.  ANSI C `main' requirements are assumed:
-         *
-         *   stringArray is an array of pointers to C strings
-         *   stringArray has a terminating NULL string.
-         *
-         * For example:
-         *   stringArray[0] = "string 1";
-         *   stringArray[1] = "string 2";
-         *   stringArray[2] = NULL
-         *
-         * The terminating NULL is required so that we know when to stop looking
-         * for strings.
-         */
+/*
+* Marshal a C `char **'.  ANSI C `main' requirements are assumed:
+*
+*   stringArray is an array of pointers to C strings
+*   stringArray has a terminating NULL string.
+*
+* For example:
+*   stringArray[0] = "string 1";
+*   stringArray[1] = "string 2";
+*   stringArray[2] = NULL
+*
+* The terminating NULL is required so that we know when to stop looking
+* for strings.
+*/
         public static string[] PtrToStringArray(IntPtr stringArray)
         {
             return PtrToStringArray(stringArray, UnixEncoding.Instance);
@@ -291,15 +291,15 @@ namespace Mono.Unix
             return count;
         }
 
-        /*
-         * Like PtrToStringArray(IntPtr), but it allows the user to specify how
-         * many strings to look for in the array.  As such, the requirement for a
-         * terminating NULL element is not required.
-         *
-         * Usage is similar to ANSI C `main': count is argc, stringArray is argv.
-         * stringArray[count] is NOT accessed (though ANSI C requires that
-         * argv[argc] = NULL, which PtrToStringArray(IntPtr) requires).
-         */
+/*
+* Like PtrToStringArray(IntPtr), but it allows the user to specify how
+* many strings to look for in the array.  As such, the requirement for a
+* terminating NULL element is not required.
+*
+* Usage is similar to ANSI C `main': count is argc, stringArray is argv.
+* stringArray[count] is NOT accessed (though ANSI C requires that
+* argv[argc] = NULL, which PtrToStringArray(IntPtr) requires).
+*/
         public static string[] PtrToStringArray(int count, IntPtr stringArray)
         {
             return PtrToStringArray(count, stringArray, UnixEncoding.Instance);

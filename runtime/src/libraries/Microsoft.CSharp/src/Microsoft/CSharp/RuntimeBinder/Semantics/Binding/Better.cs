@@ -18,7 +18,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         private static readonly byte[][] s_betterConversionTable =
         {
-            //          BYTE    SHORT   INT     LONG    FLOAT   DOUBLE  DECIMAL CHAR    BOOL    SBYTE   USHORT  UINT    ULONG   IPTR     UIPTR    OBJECT
+            //          BYTE    SHORT   INT     LONG    FLOAT   DOUBLE  DECIMAL CHAR    BOOL    SBYTE   USHORT
+            // UINT    ULONG   IPTR     UIPTR    OBJECT
             new byte[] /* BYTE*/
             {
                 3,
@@ -490,8 +491,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         //    Foo(y:"a")
         // After rearranging the parameter types we will have:
         //   (string, int, long) and (string, string, long)
-        // By rearranging the arguments as such we make sure that any specified named arguments appear in the same position for both
-        // methods and we also maintain the relative order of the other parameters (the type long appears after int in the above example)
+        // By rearranging the arguments as such we make sure that any specified named arguments appear in
+        // the same position for both
+        // methods and we also maintain the relative order of the other parameters (the type long appears
+        // after int in the above example)
 
         private static TypeArray RearrangeNamedArguments(
             TypeArray pta,
@@ -530,16 +533,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             var prgexpr = args.prgexpr;
-            // We then go over the specified arguments and put the type for any named argument in the right position in the array.
+            // We then go over the specified arguments and put the type for any named argument in the right
+            // position in the array.
             for (int iParam = 0; iParam < args.carg; iParam++)
             {
                 if (prgexpr[iParam] is ExprNamedArgumentSpecification named)
                 {
-                    // We find the index of the type of the argument in the method parameter list and store that in a temp
+                    // We find the index of the type of the argument in the method parameter list and store that in a
+                    // temp
                     int index = FindName(methProp.ParameterNames, named.Name);
                     CType tempType = pta[index];
 
-                    // Starting from the current position in the type list up until the location of the type of the optional argument
+                    // Starting from the current position in the type list up until the location of the type of the
+                    // optional argument
                     //  We shift types by one:
                     //   before: (int, string, long)
                     //   after: (string, int, long)
@@ -798,15 +804,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             /*
             Effectively, we pick the best item from a set using a non-transitive ranking function
             So, pick the first item (candidate) and compare against next (contender), if there is
-                no next, goto phase 2
+            no next, goto phase 2
             If first is better, move to next contender, if none proceed to phase 2
             If second is better, make the contender the candidate and make the item following
-                contender into the new contender, if there is none, goto phase 2
+            contender into the new contender, if there is none, goto phase 2
             If neither, make contender+1 into candidate and contender+2 into contender, if possible,
-                otherwise, if contender was last, return null, otherwise if new candidate is last,
-                goto phase 2
+            otherwise, if contender was last, return null, otherwise if new candidate is last,
+            goto phase 2
             Phase 2: compare all items before candidate to candidate
-                If candidate always better, return it, otherwise return null
+            If candidate always better, return it, otherwise return null
             */
 
             // Record two method that are ambiguous for error reporting.

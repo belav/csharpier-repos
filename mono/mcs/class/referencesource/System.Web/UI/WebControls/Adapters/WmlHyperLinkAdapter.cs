@@ -23,7 +23,8 @@ namespace System.Web.UI.WebControls.Adapters
             String text = Control.Text;
             if (text.Length == 0)
             {
-                // Whidbey 18195 UNDONE: This solution is somewhat ad hoc, awaiting spec resolution on IStaticTextControl
+                // Whidbey 18195 UNDONE: This solution is somewhat ad hoc, awaiting spec resolution on
+                // IStaticTextControl
                 // in M2.  For now, take text from first IStaticTextControl or DataboundLiteralControl.
                 foreach (Control child in Control.Controls)
                 {
@@ -51,7 +52,8 @@ namespace System.Web.UI.WebControls.Adapters
 
             targetUrl = Control.GetCountClickUrl(targetUrl);
 
-            // If cookieless mode is on, we need to apply the app path modifier for if the request is authenticated
+            // If cookieless mode is on, we need to apply the app path modifier for if the request is
+            // authenticated
             HttpContext context = HttpContext.Current;
             Debug.Assert(context != null);
             bool cookieless = CookielessHelperClass.UseCookieless(

@@ -48,7 +48,8 @@ namespace System.ServiceModel.Activities.Dispatcher
         // AsyncResult.AsyncWaitHandle before proceeding to update any of the fields of the context.
         int lockingTransaction;
 
-        //We are keeping a reference to both the transaction object and the hash code to avoid calling the GetHashCode multiple times
+        //We are keeping a reference to both the transaction object and the hash code to avoid calling the
+        // GetHashCode multiple times
         Transaction lockingTransactionObject;
 
         // This is the queue of TransactionWaitAsyncResult objects that are waiting for the
@@ -189,7 +190,8 @@ namespace System.ServiceModel.Activities.Dispatcher
         // Used only by PPD.
         internal bool IsPermanentlyRemoved { get; set; }
 
-        // If there's a directory, only it can write to this collection as long as the isntance is locked.  Otherwise,
+        // If there's a directory, only it can write to this collection as long as the isntance is locked.
+        // Otherwise,
         // only this class can.
         internal HashSet<InstanceKey> AssociatedKeys { get; private set; }
         internal ReadOnlyCollection<BookmarkInfo> Bookmarks { get; set; }
@@ -470,7 +472,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             CompletedAsyncResult.End(result);
         }
 
-        // PersistenceProviderDirectory calls Open in an async path.  Do not introduce blocking work to this method
+        // PersistenceProviderDirectory calls Open in an async path.  Do not introduce blocking work to this
+        // method
         // without changing PersistenceProviderDirectory to call BeginOpen instead.
         protected override void OnOpen(TimeSpan timeout) { }
 
@@ -643,7 +646,8 @@ namespace System.ServiceModel.Activities.Dispatcher
         )
         {
             ThrowIfDisposedOrNotOpen();
-            // The transaction to enlist on is in Transaction.Current. The actual enlistment, if needed, will be made in
+            // The transaction to enlist on is in Transaction.Current. The actual enlistment, if needed, will be
+            // made in
             // TransactionWaitAsyncResult when it is notified that it has the transaction lock.
             return new TransactionWaitAsyncResult(
                 Transaction.Current,
@@ -705,7 +709,8 @@ namespace System.ServiceModel.Activities.Dispatcher
         }
 
         // Dequeue and schedule the top element on queue of waiting TransactionWaitAsyncResult objects.
-        // Before returning this also makes the transaction represented by the dequeued TransactionWaitAsyncResult
+        // Before returning this also makes the transaction represented by the dequeued
+        // TransactionWaitAsyncResult
         // the owner of the transaction "lock" for this context.
         internal void ScheduleNextTransactionWaiter()
         {
@@ -812,8 +817,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            // If we are detaching and it is NOT permanently removed, finish the detach by calling RemoveInstance non-transactionally.
-            // It will be marked as permanently removed in OnClosing and OnFaulted and it will have already been removed, so we don't
+            // If we are detaching and it is NOT permanently removed, finish the detach by calling
+            // RemoveInstance non-transactionally.
+            // It will be marked as permanently removed in OnClosing and OnFaulted and it will have already been
+            // removed, so we don't
             // want to try to remove it again.
             if (detachThis)
             {

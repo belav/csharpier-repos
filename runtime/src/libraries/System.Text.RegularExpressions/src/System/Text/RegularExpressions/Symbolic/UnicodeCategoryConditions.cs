@@ -7,7 +7,8 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions.Symbolic
 {
-    /// <summary>Utility class providing singleton <see cref="BDD"/>s for evaluating whether a character is part of a particular Unicode category.</summary>
+    /// <summary>Utility class providing singleton <see cref="BDD"/>s for evaluating whether a character
+    // is part of a particular Unicode category.</summary>
     internal static class UnicodeCategoryConditions
     {
         /// <summary>The number of values in <see cref="UnicodeCategory"/>.</summary>
@@ -34,7 +35,8 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 #endif
 
-        /// <summary>Gets a <see cref="BDD"/> that represents the specified <see cref="UnicodeCategory"/>.</summary>
+        /// <summary>Gets a <see cref="BDD"/> that represents the specified <see
+        // cref="UnicodeCategory"/>.</summary>
         public static BDD GetCategory(UnicodeCategory category) =>
             Volatile.Read(ref s_categories[(int)category])
             ?? Interlocked.CompareExchange(

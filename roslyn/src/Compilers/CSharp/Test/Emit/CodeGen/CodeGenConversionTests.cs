@@ -787,7 +787,8 @@ class Program
 
             CreateCompilation(source)
                 .VerifyEmitDiagnostics(
-                    // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //         var x = ICloneable.Clone is object;
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "ICloneable.Clone is object")
                         .WithLocation(8, 17)

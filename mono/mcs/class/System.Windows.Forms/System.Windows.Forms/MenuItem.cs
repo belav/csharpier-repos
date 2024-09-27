@@ -900,37 +900,37 @@ namespace System.Windows.Forms
 
         internal string GetShortCutText()
         {
-            /* Ctrl+A - Ctrl+Z */
+/* Ctrl+A - Ctrl+Z */
             if (Shortcut >= Shortcut.CtrlA && Shortcut <= Shortcut.CtrlZ)
                 return GetShortCutTextCtrl()
                     + "+"
                     + (char)((int)'A' + (int)(Shortcut - Shortcut.CtrlA));
 
-            /* Alt+0 - Alt+9 */
+/* Alt+0 - Alt+9 */
             if (Shortcut >= Shortcut.Alt0 && Shortcut <= Shortcut.Alt9)
                 return GetShortCutTextAlt()
                     + "+"
                     + (char)((int)'0' + (int)(Shortcut - Shortcut.Alt0));
 
-            /* Alt+F1 - Alt+F2 */
+/* Alt+F1 - Alt+F2 */
             if (Shortcut >= Shortcut.AltF1 && Shortcut <= Shortcut.AltF9)
                 return GetShortCutTextAlt()
                     + "+F"
                     + (char)((int)'1' + (int)(Shortcut - Shortcut.AltF1));
 
-            /* Ctrl+0 - Ctrl+9 */
+/* Ctrl+0 - Ctrl+9 */
             if (Shortcut >= Shortcut.Ctrl0 && Shortcut <= Shortcut.Ctrl9)
                 return GetShortCutTextCtrl()
                     + "+"
                     + (char)((int)'0' + (int)(Shortcut - Shortcut.Ctrl0));
 
-            /* Ctrl+F0 - Ctrl+F9 */
+/* Ctrl+F0 - Ctrl+F9 */
             if (Shortcut >= Shortcut.CtrlF1 && Shortcut <= Shortcut.CtrlF9)
                 return GetShortCutTextCtrl()
                     + "+F"
                     + (char)((int)'1' + (int)(Shortcut - Shortcut.CtrlF1));
 
-            /* Ctrl+Shift+0 - Ctrl+Shift+9 */
+/* Ctrl+Shift+0 - Ctrl+Shift+9 */
             if (Shortcut >= Shortcut.CtrlShift0 && Shortcut <= Shortcut.CtrlShift9)
                 return GetShortCutTextCtrl()
                     + "+"
@@ -938,7 +938,7 @@ namespace System.Windows.Forms
                     + "+"
                     + (char)((int)'0' + (int)(Shortcut - Shortcut.CtrlShift0));
 
-            /* Ctrl+Shift+A - Ctrl+Shift+Z */
+/* Ctrl+Shift+A - Ctrl+Shift+Z */
             if (Shortcut >= Shortcut.CtrlShiftA && Shortcut <= Shortcut.CtrlShiftZ)
                 return GetShortCutTextCtrl()
                     + "+"
@@ -946,7 +946,7 @@ namespace System.Windows.Forms
                     + "+"
                     + (char)((int)'A' + (int)(Shortcut - Shortcut.CtrlShiftA));
 
-            /* Ctrl+Shift+F1 - Ctrl+Shift+F9 */
+/* Ctrl+Shift+F1 - Ctrl+Shift+F9 */
             if (Shortcut >= Shortcut.CtrlShiftF1 && Shortcut <= Shortcut.CtrlShiftF9)
                 return GetShortCutTextCtrl()
                     + "+"
@@ -954,17 +954,17 @@ namespace System.Windows.Forms
                     + "+F"
                     + (char)((int)'1' + (int)(Shortcut - Shortcut.CtrlShiftF1));
 
-            /* F1 - F9 */
+/* F1 - F9 */
             if (Shortcut >= Shortcut.F1 && Shortcut <= Shortcut.F9)
                 return "F" + (char)((int)'1' + (int)(Shortcut - Shortcut.F1));
 
-            /* Shift+F1 - Shift+F9 */
+/* Shift+F1 - Shift+F9 */
             if (Shortcut >= Shortcut.ShiftF1 && Shortcut <= Shortcut.ShiftF9)
                 return GetShortCutTextShift()
                     + "+F"
                     + (char)((int)'1' + (int)(Shortcut - Shortcut.ShiftF1));
 
-            /* Special cases */
+/* Special cases */
             switch (Shortcut)
             {
                 case Shortcut.AltBksp:

@@ -21,6 +21,7 @@ using Microsoft.Win32.SafeHandles;
 namespace System.Security.AccessControl
 {
     // Derive this list of values from winnt.h and MSDN docs:
+    //
     // https://docs.microsoft.com/en-us/windows/desktop/sync/synchronization-object-security-and-access-rights
 
     // In order to call ReleaseMutex, you must have an ACL granting you

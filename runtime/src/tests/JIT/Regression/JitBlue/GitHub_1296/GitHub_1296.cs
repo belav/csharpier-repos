@@ -43,10 +43,12 @@ public class Program
         }
     }
 
-    // Caller method takes 5 parameters.  4 in register and 1 on the stack.  The important details here are that
+    // Caller method takes 5 parameters.  4 in register and 1 on the stack.  The important details here
+    // are that
     //  * Must take a value type as a parameter
     //  * The value type must be of size 1, 2, 4 or 8
-    //  * That parameter must be passed on the stack.  Typically this is the 5th parameter and beyond for
+    //  * That parameter must be passed on the stack.  Typically this is the 5th parameter and beyond
+    // for
     //    static methods, or 4th and beyond for instance methods.
     static int Caller(
         int regParam1,
@@ -80,7 +82,8 @@ public class Program
         return Callee(stackParam1, regParam1, regParam2, regParam3, regParam4);
     }
 
-    // Callee method takes 5 parameters.  4 in register and 1 on the stack.  The important details here are that
+    // Callee method takes 5 parameters.  4 in register and 1 on the stack.  The important details here
+    // are that
     //  * Must take a value type as a parameter
     //  * The value type must be of size 1, 2, 4 or 8
     //  * That parameter must be passed in register.  Typically this is the 4th parameter or before for

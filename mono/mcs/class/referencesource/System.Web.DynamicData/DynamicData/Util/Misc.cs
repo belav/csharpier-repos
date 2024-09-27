@@ -365,7 +365,8 @@ namespace System.Web.DynamicData
         }
 
         /// <devdoc>
-        /// Walks up the stack of NamingContainers starting at 'control' to find a control with the ID 'controlID'.
+        /// Walks up the stack of NamingContainers starting at 'control' to find a control with the ID
+        // 'controlID'.
         /// Copied from DataBoundControlHelper.FindControl (System.Web)
         /// </devdoc>
         public static Control FindControl(Control control, string controlID)

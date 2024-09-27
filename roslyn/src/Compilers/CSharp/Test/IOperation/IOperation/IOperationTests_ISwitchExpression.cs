@@ -157,7 +157,8 @@ ISwitchExpressionOperation (0 arms, IsExhaustive: False) (OperationKind.SwitchEx
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(7,25): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+                // file.cs(7,25): warning CS8509: The switch expression does not handle all possible values of its
+                // input type (it is not exhaustive). For example, the pattern '_' is not covered.
                 //         y = /*<bind>*/x switch { }/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("_")
@@ -584,7 +585,8 @@ ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExp
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(7,42): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                // file.cs(7,42): error CS8510: The pattern is unreachable. It has already been handled by a
+                // previous arm of the switch expression or it is impossible to match.
                 //         y = /*<bind>*/x switch { _ => 5, 1 => 2 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "1").WithLocation(7, 42),
             };
@@ -677,7 +679,9 @@ ISwitchExpressionOperation (2 arms, IsExhaustive: False) (OperationKind.SwitchEx
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(7,25): warning CS8846: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered. However, a pattern with a 'when' clause might successfully match this value.
+                // file.cs(7,25): warning CS8846: The switch expression does not handle all possible values of its
+                // input type (it is not exhaustive). For example, the pattern '0' is not covered. However, a pattern
+                // with a 'when' clause might successfully match this value.
                 //         y = /*<bind>*/x switch { 1 => 2, _ when false => 5 }/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
                     .WithArguments("0")
@@ -822,7 +826,8 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: False) (OperationKind.SwitchEx
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(7,54): error CS0128: A local variable or function named 'z' is already defined in this scope
+                // file.cs(7,54): error CS0128: A local variable or function named 'z' is already defined in this
+                // scope
                 //         y = /*<bind>*/x switch { int z when x is int z => 5 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "z")
                     .WithArguments("z")

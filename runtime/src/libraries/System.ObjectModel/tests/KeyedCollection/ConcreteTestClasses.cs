@@ -53,7 +53,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
@@ -83,7 +84,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
@@ -113,7 +115,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
@@ -143,7 +146,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
@@ -173,7 +177,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
@@ -204,7 +209,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
@@ -235,7 +241,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()
@@ -266,7 +273,8 @@ namespace System.Collections.ObjectModel.Tests
         private static int s_item = 1;
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected override IEnumerable GetInvalidValues()

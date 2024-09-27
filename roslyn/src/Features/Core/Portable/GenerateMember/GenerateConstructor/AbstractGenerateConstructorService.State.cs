@@ -323,8 +323,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 
                 foreach (var constructor in constructors)
                 {
-                    // Don't bother delegating to an implicit constructor. We don't want to add `: base()` as that's just
-                    // redundant for subclasses and `: this()` won't even work as we won't have an implicit constructor once
+                    // Don't bother delegating to an implicit constructor. We don't want to add `: base()` as that's
+                    // just
+                    // redundant for subclasses and `: this()` won't even work as we won't have an implicit constructor
+                    // once
                     // we add this new constructor.
                     if (constructor.IsImplicitlyDeclared)
                         continue;

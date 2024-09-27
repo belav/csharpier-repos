@@ -741,7 +741,8 @@ namespace System.Xml
                         value = value * 10 + ch;
                         offset++;
                     }
-                    // More than 8 characters (7 sig figs and a decimal) and int -> float conversion is lossy, so use double
+                    // More than 8 characters (7 sig figs and a decimal) and int -> float conversion is lossy, so use
+                    // double
                     if (count > 8)
                     {
                         result = (float)((double)value / (double)pow10);

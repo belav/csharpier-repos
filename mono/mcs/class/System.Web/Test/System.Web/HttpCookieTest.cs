@@ -62,7 +62,7 @@ namespace MonoTests.System.Web
             Assert.AreEqual("value", cookie[null], "cookie[null] getter");
             Assert.AreEqual("value", cookie.Values.ToString(), "Values getter");
 
-            /* make sure HasKeys is still false for single valued cookies */
+/* make sure HasKeys is still false for single valued cookies */
             Assert.IsFalse(cookie.HasKeys);
         }
 
@@ -82,7 +82,7 @@ namespace MonoTests.System.Web
         [Test]
         public void PropertySetters()
         {
-            /* test the setters for settle Properties */
+/* test the setters for settle Properties */
             HttpCookie cookie = new HttpCookie("name");
 
             cookie.Domain = "novell.com";
@@ -137,7 +137,7 @@ namespace MonoTests.System.Web
             Assert.AreEqual("value2", cookie.Value, "Value getter");
             Assert.AreEqual("value2", cookie.Values.ToString(), "Values getter");
 
-            /* make sure HasKeys is still false for single valued cookies */
+/* make sure HasKeys is still false for single valued cookies */
             Assert.IsFalse(cookie.HasKeys);
         }
 
@@ -154,7 +154,7 @@ namespace MonoTests.System.Web
             Assert.AreEqual("value1", cookie.Value, "Value getter");
             Assert.AreEqual("value1", cookie.Values.ToString(), "Values getter");
 
-            /* make sure HasKeys is back to false */
+/* make sure HasKeys is back to false */
             Assert.IsFalse(cookie.HasKeys);
         }
 

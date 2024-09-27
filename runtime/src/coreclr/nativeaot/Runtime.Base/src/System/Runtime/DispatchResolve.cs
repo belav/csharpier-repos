@@ -13,7 +13,7 @@ namespace System.Runtime
             MethodTable* pTgtType,
             MethodTable* pItfType,
             ushort itfSlotNumber,
-            /* out */MethodTable** ppGenericContext
+/* out */MethodTable** ppGenericContext
         )
         {
             // Start at the current type and work up the inheritance chain
@@ -105,7 +105,8 @@ namespace System.Runtime
             {
                 // For variant interface dispatch, the algorithm is to walk the parent hierarchy, and at each level
                 // attempt to dispatch exactly first, and then if that fails attempt to dispatch variantly. This can
-                // result in interesting behavior such as a derived type only overriding one particular instantiation
+                // result in interesting behavior such as a derived type only overriding one particular
+                // instantiation
                 // and funneling all the dispatches to it, but its the algorithm.
 
                 bool fDoVariantLookup = false; // do not check variance for first scan of dispatch map
@@ -183,7 +184,8 @@ namespace System.Runtime
                 }
 
                 // Arrays are covariant even though you can both get and set elements (type safety is maintained by
-                // runtime type checks during set operations). This extends to generic interfaces implemented on those
+                // runtime type checks during set operations). This extends to generic interfaces implemented on
+                // those
                 // arrays. We handle this by forcing all generic interfaces on arrays to behave as though they were
                 // covariant (over their one type parameter corresponding to the array element type).
                 if (fArrayCovariance && pItfType->IsGeneric)
@@ -200,7 +202,8 @@ namespace System.Runtime
             // It only makes sense to ask for generic context if we're asking about a static method
             bool fStaticDispatch = ppGenericContext != null;
 
-            // We either scan the instance or static portion of the dispatch map. Depends on what the caller wants.
+            // We either scan the instance or static portion of the dispatch map. Depends on what the caller
+            // wants.
             DispatchMap* pMap = pTgtType->DispatchMap;
             DispatchMap.DispatchMapEntry* i = fStaticDispatch
                 ? pMap->GetStaticEntry(

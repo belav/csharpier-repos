@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// A provider that can supply instances of <see cref="ModelMetadata"/>.
 /// </summary>
 /// <remarks>
-/// While not obsolete, implementing or using <see cref="ModelMetadataProvider" /> is preferred over <see cref="IModelMetadataProvider"/>.
+/// While not obsolete, implementing or using <see cref="ModelMetadataProvider" /> is preferred over
+// <see cref="IModelMetadataProvider"/>.
 /// </remarks>
 public interface IModelMetadataProvider
 {
@@ -22,6 +23,7 @@ public interface IModelMetadataProvider
     /// Supplies metadata describing the properties of a <see cref="Type"/>.
     /// </summary>
     /// <param name="modelType">The <see cref="Type"/>.</param>
-    /// <returns>A set of <see cref="ModelMetadata"/> instances describing properties of the <see cref="Type"/>.</returns>
+    /// <returns>A set of <see cref="ModelMetadata"/> instances describing properties of the <see
+    // cref="Type"/>.</returns>
     IEnumerable<ModelMetadata> GetMetadataForProperties(Type modelType);
 }

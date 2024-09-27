@@ -24,20 +24,20 @@ namespace System.Web.Security
     // will reject post-patch tickets as having an invalid format, and post-patch systems
     // will also reject pre-patch tickets as having an invalid format.
 
-    /* Current (v1) ticket format
-     * ==========================
-     *
-     * Serialized ticket format version number: 1 byte
-     * FormsAuthenticationTicket.Version: 1 byte
-     * FormsAuthenticationTicket.IssueDateUtc: 8 bytes
-     * {spacer}: 1 byte
-     * FormsAuthenticationTicket.ExpirationUtc: 8 bytes
-     * FormsAuthenticationTicket.IsPersistent: 1 byte
-     * FormsAuthenticationTicket.Name: 1+ bytes (1+ length prefix, 0+ payload)
-     * FormsAuthenticationTicket.UserData: 1+ bytes (1+ length prefix, 0+ payload)
-     * FormsAuthenticationTicket.CookiePath: 1+ bytes (1+ length prefix, 0+ payload)
-     * {footer}: 1 byte
-     */
+/* Current (v1) ticket format
+* ==========================
+*
+* Serialized ticket format version number: 1 byte
+* FormsAuthenticationTicket.Version: 1 byte
+* FormsAuthenticationTicket.IssueDateUtc: 8 bytes
+* {spacer}: 1 byte
+* FormsAuthenticationTicket.ExpirationUtc: 8 bytes
+* FormsAuthenticationTicket.IsPersistent: 1 byte
+* FormsAuthenticationTicket.Name: 1+ bytes (1+ length prefix, 0+ payload)
+* FormsAuthenticationTicket.UserData: 1+ bytes (1+ length prefix, 0+ payload)
+* FormsAuthenticationTicket.CookiePath: 1+ bytes (1+ length prefix, 0+ payload)
+* {footer}: 1 byte
+*/
 
     internal static class FormsAuthenticationTicketSerializer
     {

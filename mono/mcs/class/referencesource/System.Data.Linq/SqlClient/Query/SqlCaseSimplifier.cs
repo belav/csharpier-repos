@@ -30,8 +30,10 @@ namespace System.Data.Linq.SqlClient
             /// Replace equals and not equals:
             ///
             /// | CASE XXX              |               CASE XXX                            CASE XXX
-            /// |   WHEN AAA THEN MMMM  | != RRRR  ===>    WHEN AAA THEN (MMMM != RRRR) ==>    WHEN AAA THEN true
-            /// |   WHEN BBB THEN NNNN  |                  WHEN BBB THEN (NNNN != RRRR)        WHEN BBB THEN false
+            /// |   WHEN AAA THEN MMMM  | != RRRR  ===>    WHEN AAA THEN (MMMM != RRRR) ==>    WHEN AAA THEN
+            // true
+            /// |   WHEN BBB THEN NNNN  |                  WHEN BBB THEN (NNNN != RRRR)        WHEN BBB THEN
+            // false
             /// |   etc.                |                  etc.                                etc.
             /// |   ELSE OOOO           |                  ELSE (OOOO != RRRR)                 ELSE true
             /// | END                                   END                                 END

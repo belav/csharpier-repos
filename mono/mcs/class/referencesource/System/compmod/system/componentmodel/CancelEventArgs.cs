@@ -28,7 +28,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.CancelEventArgs'/> class with
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.CancelEventArgs'/>
+        // class with
         ///       cancel set to <see langword='false'/>.
         ///    </para>
         /// </devdoc>
@@ -37,7 +38,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.CancelEventArgs'/> class with
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.CancelEventArgs'/>
+        // class with
         ///       cancel set to the given value.
         ///    </para>
         /// </devdoc>

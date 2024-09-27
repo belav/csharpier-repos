@@ -21,10 +21,12 @@ public static partial class HubConnectionExtensions
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
     /// <param name="methodName">The name of the server method to invoke.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -45,16 +47,19 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and argument.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // argument.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
     /// <param name="methodName">The name of the server method to invoke.</param>
     /// <param name="arg1">The first argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -76,17 +81,20 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
     /// <param name="methodName">The name of the server method to invoke.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -109,7 +117,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -117,10 +126,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -144,7 +155,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -153,10 +165,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
     /// <param name="arg4">The fourth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -181,7 +195,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -191,10 +206,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg3">The third argument.</param>
     /// <param name="arg4">The fourth argument.</param>
     /// <param name="arg5">The fifth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -220,7 +237,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -231,10 +249,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg4">The fourth argument.</param>
     /// <param name="arg5">The fifth argument.</param>
     /// <param name="arg6">The sixth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -261,7 +281,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -273,10 +294,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg5">The fifth argument.</param>
     /// <param name="arg6">The sixth argument.</param>
     /// <param name="arg7">The seventh argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -304,7 +327,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -317,10 +341,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg6">The sixth argument.</param>
     /// <param name="arg7">The seventh argument.</param>
     /// <param name="arg8">The eighth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -349,7 +375,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -363,10 +390,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg7">The seventh argument.</param>
     /// <param name="arg8">The eighth argument.</param>
     /// <param name="arg9">The ninth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -396,7 +425,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
@@ -411,10 +441,12 @@ public static partial class HubConnectionExtensions
     /// <param name="arg8">The eighth argument.</param>
     /// <param name="arg9">The ninth argument.</param>
     /// <param name="arg10">The tenth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     [SuppressMessage(
         "ApiDesign",
@@ -445,16 +477,19 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Invokes a streaming hub method on the server using the specified method name, return type and arguments.
+    /// Invokes a streaming hub method on the server using the specified method name, return type and
+    // arguments.
     /// </summary>
     /// <typeparam name="TResult">The return type of the streaming server method.</typeparam>
     /// <param name="hubConnection">The hub connection.</param>
     /// <param name="methodName">The name of the server method to invoke.</param>
     /// <param name="args">The arguments used to invoke the server method.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>
     /// A <see cref="Task{TResult}"/> that represents the asynchronous invoke.
-    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the streamed hub method values.
+    /// The <see cref="Task{TResult}.Result"/> property returns a <see cref="ChannelReader{T}"/> for the
+    // streamed hub method values.
     /// </returns>
     public static async Task<ChannelReader<TResult>> StreamAsChannelCoreAsync<TResult>(
         this HubConnection hubConnection,
@@ -470,7 +505,8 @@ public static partial class HubConnectionExtensions
             .ConfigureAwait(false);
         var outputChannel = Channel.CreateUnbounded<TResult>();
 
-        // Intentionally avoid passing the CancellationToken to RunChannel. The token is only meant to cancel the intial setup, not the enumeration.
+        // Intentionally avoid passing the CancellationToken to RunChannel. The token is only meant to
+        // cancel the intial setup, not the enumeration.
         _ = RunChannel(inputChannel, outputChannel);
 
         return outputChannel.Reader;
@@ -493,7 +529,8 @@ public static partial class HubConnectionExtensions
                     {
                         if (!await outputChannel.Writer.WaitToWriteAsync().ConfigureAwait(false))
                         {
-                            // Failed to write to the output channel because it was closed. Nothing really we can do but abort here.
+                            // Failed to write to the output channel because it was closed. Nothing really we can do but abort
+                            // here.
                             return;
                         }
                     }

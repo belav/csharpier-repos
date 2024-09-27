@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Allocates resumable states, i.e. states that resume execution of the state machine after await expression or yield return.
+    /// Allocates resumable states, i.e. states that resume execution of the state machine after await
+    // expression or yield return.
     /// </summary>
     internal sealed class ResumableStateMachineStateAllocator
     {
@@ -19,19 +20,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly StateMachineState _firstState;
 
         /// <summary>
-        /// The number of the next generated resumable state (i.e. state that resumes execution of the state machine after await expression or yield return).
+        /// The number of the next generated resumable state (i.e. state that resumes execution of the state
+        // machine after await expression or yield return).
         /// </summary>
         private StateMachineState _nextState;
 
 #if DEBUG
         /// <summary>
-        /// EnC support: states in this state machine that were matched to states of the previous generation state machine.
+        /// EnC support: states in this state machine that were matched to states of the previous generation
+        // state machine.
         /// </summary>
         private BitVector _matchedStates = BitVector.Empty;
 #endif
 
         /// <summary>
-        /// EnC support: number of states in this state machine that match states of the previous generation state machine.
+        /// EnC support: number of states in this state machine that match states of the previous generation
+        // state machine.
         /// </summary>
         private int _matchedStateCount;
 
@@ -84,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// True if any of the states generated for any previous state machine has not been allocated in this version.
+        /// True if any of the states generated for any previous state machine has not been allocated in
+        // this version.
         /// </summary>
         public bool HasMissingStates =>
             _matchedStateCount

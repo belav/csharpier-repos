@@ -6,12 +6,15 @@ using System.Collections.Generic;
 namespace System.Diagnostics.Metrics
 {
     /// <summary>
-    /// ObservableGauge is an observable Instrument that reports non-additive value(s) when the instrument is being observed.
+    /// ObservableGauge is an observable Instrument that reports non-additive value(s) when the
+    // instrument is being observed.
     /// e.g. the current room temperature
     /// Use Meter.CreateObservableGauge methods to create the observable counter object.
     /// </summary>
     /// <remarks>
-    /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
+    /// This class supports only the following generic parameter types: <see cref="byte" />, <see
+    // cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double"
+    // />, and <see cref="decimal" />
     /// </remarks>
     public sealed class ObservableGauge<T> : ObservableInstrument<T>
         where T : struct

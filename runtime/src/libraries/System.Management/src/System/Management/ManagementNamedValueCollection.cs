@@ -31,18 +31,22 @@ namespace System.Management
         ///    of the <see cref='System.Management.ManagementNamedValueCollection'/> class.
         /// </overload>
         /// <summary>
-        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class, which is empty. This is
+        /// <para> Initializes a new instance of the <see
+        // cref='System.Management.ManagementNamedValueCollection'/> class, which is empty. This is
         ///    the default constructor.</para>
         /// </summary>
         public ManagementNamedValueCollection() { }
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class that is serializable
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Management.ManagementNamedValueCollection'/> class that is serializable
         ///    and uses the specified <see cref='System.Runtime.Serialization.SerializationInfo'/>
         ///    and <see cref='System.Runtime.Serialization.StreamingContext'/>.</para>
         /// </summary>
-        /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate with data.</param>
-        /// <param name='context'>The destination (see <see cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
+        /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate
+        // with data.</param>
+        /// <param name='context'>The destination (see <see
+        // cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
 #if NET8_0_OR_GREATER
         [Obsolete(
             Obsoletions.LegacyFormatterImplMessage,
@@ -131,7 +135,8 @@ namespace System.Management
 
         /// <summary>
         ///    <para>Creates a clone of the collection. Individual values
-        ///       are cloned. If a value does not support cloning, then a <see cref='System.NotSupportedException'/>
+        ///       are cloned. If a value does not support cloning, then a <see
+        // cref='System.NotSupportedException'/>
         ///       is thrown. </para>
         /// </summary>
         /// <returns>

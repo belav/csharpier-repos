@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * PropertyMapper.cs
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* PropertyMapper.cs
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -24,16 +24,16 @@ namespace System.Web.UI
         private const char OM_CHAR = '.';
         private const string STR_OM_CHAR = ".";
 
-        /*
-         * Maps persisted attribute names to the object model equivalents.
-         * This class should not be instantiated by itself.
-         */
+/*
+* Maps persisted attribute names to the object model equivalents.
+* This class should not be instantiated by itself.
+*/
         private PropertyMapper() { }
 
-        /*
-         * Returns the PropertyInfo or FieldInfo corresponding to the
-         * specified property name.
-         */
+/*
+* Returns the PropertyInfo or FieldInfo corresponding to the
+* specified property name.
+*/
         internal static MemberInfo GetMemberInfo(
             Type ctrlType,
             string name,
@@ -153,12 +153,12 @@ namespace System.Web.UI
             return true;
         }
 
-        /*
-         * Maps the specified persisted name to its object model equivalent.
-         * The convention is to map all dashes to dots.
-         * For example :  Font-Size maps to Font.Size
-         *                HeaderStyle-Font-Name maps to HeaderStyle.Font.Name
-         */
+/*
+* Maps the specified persisted name to its object model equivalent.
+* The convention is to map all dashes to dots.
+* For example :  Font-Size maps to Font.Size
+*                HeaderStyle-Font-Name maps to HeaderStyle.Font.Name
+*/
         internal static string MapNameToPropertyName(string attrName)
         {
             return attrName.Replace(PERSIST_CHAR, OM_CHAR);
@@ -211,10 +211,10 @@ namespace System.Web.UI
             return currentObject;
         }
 
-        /*
-         * Walks the object model using the mapped property name to get the
-         * value of an instance's property.
-         */
+/*
+* Walks the object model using the mapped property name to get the
+* value of an instance's property.
+*/
         internal static PropertyDescriptor GetMappedPropertyDescriptor(
             object obj,
             string mappedName,
@@ -232,10 +232,10 @@ namespace System.Web.UI
             return properties[propertyName];
         }
 
-        /*
-         * Walks the object model using the mapped property name to set the
-         * value of an instance's property.
-         */
+/*
+* Walks the object model using the mapped property name to set the
+* value of an instance's property.
+*/
         internal static void SetMappedPropertyValue(
             object obj,
             string mappedName,

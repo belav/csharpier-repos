@@ -325,7 +325,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                     );
 
                     // Trim spaces of each component of the file name.
-                    // Note that path normalization changed between 4.6.1 and 4.6.2 and GetFullPath no longer trims trailing spaces.
+                    // Note that path normalization changed between 4.6.1 and 4.6.2 and GetFullPath no longer trims
+                    // trailing spaces.
                     // See https://blogs.msdn.microsoft.com/jeremykuhne/2016/06/21/more-on-new-net-path-handling/
                     this.FullFilePath = string.Join(
                         "\\",
@@ -417,7 +418,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                     return false;
                 }
 
-                // We check to see if file path of the new file matches the filepath of any other existing file or if the Folders and FileName matches any of the document then
+                // We check to see if file path of the new file matches the filepath of any other existing file or
+                // if the Folders and FileName matches any of the document then
                 // we say that the file already exists.
                 if (
                     this.SelectedProject.Documents.Where(n => n != null)
@@ -674,11 +676,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             {
                 if (_areFoldersValidIdentifiers)
                 {
-                    /*
-                    var workspace = this.SelectedProject.Solution.Workspace as VisualStudioWorkspaceImpl;
-                    var project = workspace?.GetHostProject(this.SelectedProject.Id) as AbstractProject;
-                    return !(project?.IsWebSite == true);
-                    */
+/*
+var workspace = this.SelectedProject.Solution.Workspace as VisualStudioWorkspaceImpl;
+var project = workspace?.GetHostProject(this.SelectedProject.Id) as AbstractProject;
+return !(project?.IsWebSite == true);
+*/
                     return false;
                 }
 

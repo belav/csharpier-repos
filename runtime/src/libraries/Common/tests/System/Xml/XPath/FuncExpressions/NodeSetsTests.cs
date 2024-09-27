@@ -185,7 +185,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// Expected: Selects all paraB element descendants of the paraA element children of the context node.
+        /// Expected: Selects all paraB element descendants of the paraA element children of the context
+        // node.
         /// paraA//paraB
         /// </summary>
         [Theory]
@@ -291,7 +292,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// Expected: Selects all paraB element nodes with paraA parents that are children of the context node.
+        /// Expected: Selects all paraB element nodes with paraA parents that are children of the context
+        // node.
         /// paraA/paraB
         /// </summary>
         [Theory]
@@ -335,7 +337,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// Expected: Selects all paraB element nodes with paraA parents that are children of the document root.
+        /// Expected: Selects all paraB element nodes with paraA parents that are children of the document
+        // root.
         /// /paraA/paraB
         /// </summary>
         [Theory]

@@ -275,7 +275,8 @@ internal abstract class BaseView
     }
 
     /// <summary>
-    /// Writes the specified <paramref name="value"/> without HTML encoding to the <paramref name="writer"/>.
+    /// Writes the specified <paramref name="value"/> without HTML encoding to the <paramref
+    // name="writer"/>.
     /// </summary>
     /// <param name="writer">The <see cref="TextWriter"/> instance to write to.</param>
     /// <param name="value">The <see cref="object"/> to write.</param>

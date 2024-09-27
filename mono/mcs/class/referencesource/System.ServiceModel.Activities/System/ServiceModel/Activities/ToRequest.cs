@@ -107,7 +107,8 @@ namespace System.ServiceModel.Activities
             }
 
             // Send.ChannelCacheEnabled must be set before we call this.MessageVersion
-            // because this.MessageVersion will cache description and description resolution depends on the value of ChannelCacheEnabled
+            // because this.MessageVersion will cache description and description resolution depends on the
+            // value of ChannelCacheEnabled
             this.Send.InitializeChannelCacheEnabledSetting(context);
 
             // MessageVersion is cached for perf reasons since it is fixed for each definition of Send

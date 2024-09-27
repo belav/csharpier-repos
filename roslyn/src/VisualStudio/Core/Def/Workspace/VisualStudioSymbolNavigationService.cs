@@ -105,7 +105,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return null;
             }
 
-            // See if there's another .Net language service that can handle navigating to this metadata symbol (for example, F#).
+            // See if there's another .Net language service that can handle navigating to this metadata symbol
+            // (for example, F#).
             var docCommentId = symbol.GetDocumentationCommentId();
             var assemblyName = symbol.ContainingAssembly.Identity.Name;
             if (docCommentId != null && assemblyName != null)
@@ -164,7 +165,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     );
                 }
 
-                // Note: we'll fallback to Metadata-As-Source if we fail to get IVsNavInfo, but that should never happen.
+                // Note: we'll fallback to Metadata-As-Source if we fail to get IVsNavInfo, but that should never
+                // happen.
             }
 
             // Generate new source or retrieve existing source for the symbol in question

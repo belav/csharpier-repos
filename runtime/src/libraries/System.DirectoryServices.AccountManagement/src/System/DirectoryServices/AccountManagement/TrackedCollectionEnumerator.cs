@@ -187,10 +187,12 @@ namespace System.DirectoryServices.AccountManagement
         // The enumerator for our inner list, combinedValues.
         private IEnumerator _enumerator;
 
-        // True when we reach the end of combinedValues (no more values to enumerate in the TrackedCollection)
+        // True when we reach the end of combinedValues (no more values to enumerate in the
+        // TrackedCollection)
         private bool _endReached;
 
-        // When this enumerator was constructed, to detect changes made to the TrackedCollection after it was constructed
+        // When this enumerator was constructed, to detect changes made to the TrackedCollection after it
+        // was constructed
         private readonly DateTime _creationTime = DateTime.UtcNow;
         private readonly TrackedCollection<T> _trackedCollection;
 

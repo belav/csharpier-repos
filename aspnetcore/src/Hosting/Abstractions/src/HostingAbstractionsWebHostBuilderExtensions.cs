@@ -19,7 +19,8 @@ public static class HostingAbstractionsWebHostBuilderExtensions
     /// Use the given configuration settings on the web host.
     /// </summary>
     /// <param name="hostBuilder">The <see cref="IWebHostBuilder"/> to configure.</param>
-    /// <param name="configuration">The <see cref="IConfiguration"/> containing settings to be used.</param>
+    /// <param name="configuration">The <see cref="IConfiguration"/> containing settings to be
+    // used.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder UseConfiguration(
         this IWebHostBuilder hostBuilder,
@@ -36,10 +37,12 @@ public static class HostingAbstractionsWebHostBuilderExtensions
 
     /// <summary>
     /// Set whether startup errors should be captured in the configuration settings of the web host.
-    /// When enabled, startup exceptions will be caught and an error page will be returned. If disabled, startup exceptions will be propagated.
+    /// When enabled, startup exceptions will be caught and an error page will be returned. If disabled,
+    // startup exceptions will be propagated.
     /// </summary>
     /// <param name="hostBuilder">The <see cref="IWebHostBuilder"/> to configure.</param>
-    /// <param name="captureStartupErrors"><c>true</c> to use startup error page; otherwise <c>false</c>.</param>
+    /// <param name="captureStartupErrors"><c>true</c> to use startup error page; otherwise
+    // <c>false</c>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder CaptureStartupErrors(
         this IWebHostBuilder hostBuilder,
@@ -153,11 +156,13 @@ public static class HostingAbstractionsWebHostBuilderExtensions
     }
 
     /// <summary>
-    /// Indicate whether the host should listen on the URLs configured on the <see cref="IWebHostBuilder"/>
+    /// Indicate whether the host should listen on the URLs configured on the <see
+    // cref="IWebHostBuilder"/>
     /// instead of those configured on the <see cref="IServer"/>.
     /// </summary>
     /// <param name="hostBuilder">The <see cref="IWebHostBuilder"/> to configure.</param>
-    /// <param name="preferHostingUrls"><c>true</c> to prefer URLs configured on the <see cref="IWebHostBuilder"/>; otherwise <c>false</c>.</param>
+    /// <param name="preferHostingUrls"><c>true</c> to prefer URLs configured on the <see
+    // cref="IWebHostBuilder"/>; otherwise <c>false</c>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder PreferHostingUrls(
         this IWebHostBuilder hostBuilder,
@@ -174,7 +179,8 @@ public static class HostingAbstractionsWebHostBuilderExtensions
     /// Specify if startup status messages should be suppressed.
     /// </summary>
     /// <param name="hostBuilder">The <see cref="IWebHostBuilder"/> to configure.</param>
-    /// <param name="suppressStatusMessages"><c>true</c> to suppress writing of hosting startup status messages; otherwise <c>false</c>.</param>
+    /// <param name="suppressStatusMessages"><c>true</c> to suppress writing of hosting startup status
+    // messages; otherwise <c>false</c>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder SuppressStatusMessages(
         this IWebHostBuilder hostBuilder,

@@ -26,7 +26,8 @@ public class RouteData
     }
 
     /// <summary>
-    /// Creates a new instance of <see cref="RouteData"/> instance with values copied from <paramref name="other"/>.
+    /// Creates a new instance of <see cref="RouteData"/> instance with values copied from <paramref
+    // name="other"/>.
     /// </summary>
     /// <param name="other">The other <see cref="RouteData"/> instance to copy.</param>
     public RouteData(RouteData other)
@@ -116,13 +117,15 @@ public class RouteData
     /// <see cref="Values"/>, and merging <paramref name="dataTokens"/> into <see cref="DataTokens"/>.
     /// </para>
     /// <para>
-    /// Call <see cref="RouteDataSnapshot.Restore"/> to restore the state of this <see cref="RouteData"/>
+    /// Call <see cref="RouteDataSnapshot.Restore"/> to restore the state of this <see
+    // cref="RouteData"/>
     /// to the state at the time of calling
     /// <see cref="PushState(IRouter, RouteValueDictionary, RouteValueDictionary)"/>.
     /// </para>
     /// </summary>
     /// <param name="router">
-    /// An <see cref="IRouter"/> to append to <see cref="Routers"/>. If <c>null</c>, then <see cref="Routers"/>
+    /// An <see cref="IRouter"/> to append to <see cref="Routers"/>. If <c>null</c>, then <see
+    // cref="Routers"/>
     /// will not be changed.
     /// </param>
     /// <param name="values">
@@ -130,7 +133,8 @@ public class RouteData
     /// <see cref="Values"/> will not be changed.
     /// </param>
     /// <param name="dataTokens">
-    /// A <see cref="RouteValueDictionary"/> to merge into <see cref="DataTokens"/>. If <c>null</c>, then
+    /// A <see cref="RouteValueDictionary"/> to merge into <see cref="DataTokens"/>. If <c>null</c>,
+    // then
     /// <see cref="DataTokens"/> will not be changed.
     /// </param>
     /// <returns>A <see cref="RouteDataSnapshot"/> that captures the current state.</returns>

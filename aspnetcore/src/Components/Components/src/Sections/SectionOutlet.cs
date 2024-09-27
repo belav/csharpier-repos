@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace Microsoft.AspNetCore.Components.Sections;
 
 /// <summary>
-/// Renders content provided by <see cref="SectionContent"/> components with matching <see cref="SectionId"/>s.
+/// Renders content provided by <see cref="SectionContent"/> components with matching <see
+// cref="SectionId"/>s.
 /// </summary>
 public sealed class SectionOutlet : IComponent, IDisposable
 {
@@ -17,14 +18,16 @@ public sealed class SectionOutlet : IComponent, IDisposable
     private SectionContent? _currentContentProvider;
 
     /// <summary>
-    /// Gets or sets the <see cref="string"/> ID that determines which <see cref="SectionContent"/> instances will provide
+    /// Gets or sets the <see cref="string"/> ID that determines which <see cref="SectionContent"/>
+    // instances will provide
     /// content to this instance.
     /// </summary>
     [Parameter]
     public string? SectionName { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="object"/> ID that determines which <see cref="SectionContent"/> instances will provide
+    /// Gets or sets the <see cref="object"/> ID that determines which <see cref="SectionContent"/>
+    // instances will provide
     /// content to this instance.
     /// </summary>
     [Parameter]

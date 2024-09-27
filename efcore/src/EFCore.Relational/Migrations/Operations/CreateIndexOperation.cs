@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     A <see cref="MigrationOperation" /> for creating a new index.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 [DebuggerDisplay("CREATE INDEX {Name} ON {Table}")]
 public class CreateIndexOperation : MigrationOperation, ITableMigrationOperation
@@ -21,7 +22,8 @@ public class CreateIndexOperation : MigrationOperation, ITableMigrationOperation
     public virtual string Name { get; set; } = null!;
 
     /// <summary>
-    ///     The schema that contains the index, or <see langword="null" /> if the default schema should be used.
+    ///     The schema that contains the index, or <see langword="null" /> if the default schema should
+    // be used.
     /// </summary>
     public virtual string? Schema { get; set; }
 
@@ -62,7 +64,8 @@ public class CreateIndexOperation : MigrationOperation, ITableMigrationOperation
     public virtual bool IsUnique { get; set; }
 
     /// <summary>
-    ///     A set of values indicating whether each corresponding index column has descending sort order.
+    ///     A set of values indicating whether each corresponding index column has descending sort
+    // order.
     /// </summary>
     public virtual bool[]? IsDescending
     {

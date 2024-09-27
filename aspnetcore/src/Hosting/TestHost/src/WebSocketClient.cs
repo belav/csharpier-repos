@@ -50,7 +50,8 @@ public class WebSocketClient
     /// Establishes a WebSocket connection to an endpoint.
     /// </summary>
     /// <param name="uri">The <see cref="Uri" /> of the endpoint.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to terminate the connection.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to terminate the
+    // connection.</param>
     public async Task<WebSocket> ConnectAsync(Uri uri, CancellationToken cancellationToken)
     {
         WebSocketFeature? webSocketFeature = null;

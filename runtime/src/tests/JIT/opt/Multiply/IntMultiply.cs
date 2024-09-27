@@ -112,7 +112,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith11(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA instructions which is slower.
+            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA
+            // instructions which is slower.
 
             // X64: imul
             return value * 11;
@@ -129,7 +130,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith13(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA instructions which is slower.
+            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA
+            // instructions which is slower.
 
             // X64: imul
             return value * 13;
@@ -138,7 +140,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith14(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 4 instructions which is too slow.
+            // We expect 'imul' since the alternative replacement sequence would require 4 instructions which is
+            // too slow.
 
             // X64: imul
             return value * 14;
@@ -147,7 +150,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith15(ulong value)
         {
-            // We expect these instructions since the alternative replacement sequence would require 2 three-component LEA instructions which is slower.
+            // We expect these instructions since the alternative replacement sequence would require 2
+            // three-component LEA instructions which is slower.
 
             // X64:      mov [[REG0:[a-z]+]], [[REG1:[a-z]+]]
             // X64-NEXT: shl [[REG0]], 4
@@ -183,7 +187,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith19(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA instructions which is slower.
+            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA
+            // instructions which is slower.
 
             // X64: imul
             return value * 19;
@@ -200,7 +205,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith21(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA instructions which is slower.
+            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA
+            // instructions which is slower.
 
             // X64: imul
             return value * 21;
@@ -209,7 +215,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith22(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA instructions and 1 ADD instruction which is slower.
+            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA
+            // instructions and 1 ADD instruction which is slower.
 
             // X64: imul
             return value * 22;
@@ -218,7 +225,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith23(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 1 three-component LEA instruction, 1 SHL instruction, and 1 ADD instruction which is slower.
+            // We expect 'imul' since the alternative replacement sequence would require 1 three-component LEA
+            // instruction, 1 SHL instruction, and 1 ADD instruction which is slower.
 
             // X64: imul
             return value * 23;
@@ -235,7 +243,8 @@ namespace CodeGenTests
         [MethodImpl(MethodImplOptions.NoInlining)]
         static ulong UInt64_MultiplyWith25(ulong value)
         {
-            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA instructions which is slower.
+            // We expect 'imul' since the alternative replacement sequence would require 2 three-component LEA
+            // instructions which is slower.
 
             // X64: imul
             return value * 25;

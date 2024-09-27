@@ -36,7 +36,8 @@ public class Runtime_55140
         return -Increment() + _value;
     }
 
-    // Test that the SUB(NEG(a), NEG(b)) => SUB(b, a) transform does not reorder persistent side effects.
+    // Test that the SUB(NEG(a), NEG(b)) => SUB(b, a) transform does not reorder persistent side
+    // effects.
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int TestSubNegNeg()
     {

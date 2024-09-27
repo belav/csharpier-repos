@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Text.Json.Serialization.Converters
 {
     /// <summary>
-    /// Inherited by built-in converters serializing types as JSON primitives that support property name serialization.
+    /// Inherited by built-in converters serializing types as JSON primitives that support property name
+    // serialization.
     /// </summary>
     internal abstract class JsonPrimitiveConverter<T> : JsonConverter<T>
     {

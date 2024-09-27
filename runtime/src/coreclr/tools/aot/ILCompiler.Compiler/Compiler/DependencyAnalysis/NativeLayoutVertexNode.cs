@@ -12,17 +12,25 @@ using Internal.TypeSystem;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// Wrapper nodes for native layout vertex structures. These wrapper nodes are "abstract" as they do not
-    /// generate any data. They are used to keep track of the dependency nodes required by a Vertex structure.
+    /// Wrapper nodes for native layout vertex structures. These wrapper nodes are "abstract" as they do
+    // not
+    /// generate any data. They are used to keep track of the dependency nodes required by a Vertex
+    // structure.
     ///
-    /// Any node in the graph that references data in the native layout blob needs to create one of these
+    /// Any node in the graph that references data in the native layout blob needs to create one of
+    // these
     /// NativeLayoutVertexNode nodes, and track it as a dependency of itself.
-    /// Example: MethodCodeNodes that are saved to the table in the ExactMethodInstantiationsNode reference
-    /// signatures stored in the native layout blob, so a NativeLayoutPlacedSignatureVertexNode node is created
-    /// and returned as a static dependency of the associated MethodCodeNode (in the GetStaticDependencies API).
+    /// Example: MethodCodeNodes that are saved to the table in the ExactMethodInstantiationsNode
+    // reference
+    /// signatures stored in the native layout blob, so a NativeLayoutPlacedSignatureVertexNode node is
+    // created
+    /// and returned as a static dependency of the associated MethodCodeNode (in the
+    // GetStaticDependencies API).
     ///
-    /// Each NativeLayoutVertexNode that gets marked in the graph will register itself with the NativeLayoutInfoNode,
-    /// so that the NativeLayoutInfoNode can write it later to the native layout blob during the call to its GetData API.
+    /// Each NativeLayoutVertexNode that gets marked in the graph will register itself with the
+    // NativeLayoutInfoNode,
+    /// so that the NativeLayoutInfoNode can write it later to the native layout blob during the call to
+    // its GetData API.
     /// </summary>
     public abstract class NativeLayoutVertexNode : DependencyNodeCore<NodeFactory>
     {
@@ -71,16 +79,22 @@ namespace ILCompiler.DependencyAnalysis
     /// Any NativeLayoutVertexNode that needs to expose the native layout Vertex after it has been saved
     /// needs to derive from this NativeLayoutSavedVertexNode class.
     ///
-    /// A nativelayout Vertex should typically only be exposed for Vertex offset fetching purposes, after the native
+    /// A nativelayout Vertex should typically only be exposed for Vertex offset fetching purposes,
+    // after the native
     /// writer is saved (Vertex offsets get generated when the native writer gets saved).
     ///
-    /// It is important for whoever derives from this class to produce unified Vertices. Calling the WriteVertex method
-    /// multiple times should always produce the same exact unified Vertex each time (hence the assert in SetSavedVertex).
+    /// It is important for whoever derives from this class to produce unified Vertices. Calling the
+    // WriteVertex method
+    /// multiple times should always produce the same exact unified Vertex each time (hence the assert
+    // in SetSavedVertex).
     /// All nativewriter.Getxyz methods return unified Vertices.
     ///
-    /// When exposing a saved Vertex that is a result of a section placement operation (Section.Place(...)), always make
-    /// sure a unified Vertex is being placed in the section (Section.Place creates a PlacedVertex structure that wraps the
-    /// Vertex to be placed, so if the Vertex to be placed is unified, there will only be a single unified PlacedVertex
+    /// When exposing a saved Vertex that is a result of a section placement operation
+    // (Section.Place(...)), always make
+    /// sure a unified Vertex is being placed in the section (Section.Place creates a PlacedVertex
+    // structure that wraps the
+    /// Vertex to be placed, so if the Vertex to be placed is unified, there will only be a single
+    // unified PlacedVertex
     /// structure created for that placed Vertex).
     /// </summary>
     public abstract class NativeLayoutSavedVertexNode : NativeLayoutVertexNode
@@ -866,12 +880,17 @@ namespace ILCompiler.DependencyAnalysis
 
         public override Vertex WriteVertex(NodeFactory factory)
         {
-            // This vertex doesn't need to assert as marked, as it simply represents the concept of an existing vertex which has been placed.
+            // This vertex doesn't need to assert as marked, as it simply represents the concept of an existing
+            // vertex which has been placed.
 
-            // Always use the NativeLayoutInfo blob for names and sigs, even if the associated types/methods are written elsewhere.
-            // This saves space, since we can Unify more signatures, allows optimizations in comparing sigs in the same module, and
-            // prevents the dynamic type loader having to know about other native layout sections (since sigs contain types). If we are
-            // using a non-native layout info writer, write the sig to the native layout info, and refer to it by offset in its own
+            // Always use the NativeLayoutInfo blob for names and sigs, even if the associated types/methods are
+            // written elsewhere.
+            // This saves space, since we can Unify more signatures, allows optimizations in comparing sigs in
+            // the same module, and
+            // prevents the dynamic type loader having to know about other native layout sections (since sigs
+            // contain types). If we are
+            // using a non-native layout info writer, write the sig to the native layout info, and refer to it
+            // by offset in its own
             // section.  At runtime, we will assume all names and sigs are in the native layout and find it.
 
             Vertex signature = _signatureToBePlaced.WriteVertex(factory);
@@ -906,7 +925,8 @@ namespace ILCompiler.DependencyAnalysis
             if (SavedVertex != null)
                 return SavedVertex;
 
-            // This vertex doesn't need to assert as marked, as it simply represents the concept of an existing vertex which has been placed.
+            // This vertex doesn't need to assert as marked, as it simply represents the concept of an existing
+            // vertex which has been placed.
 
             NativeWriter writer = GetNativeWriter(factory);
 
@@ -954,7 +974,8 @@ namespace ILCompiler.DependencyAnalysis
             if (SavedVertex != null)
                 return SavedVertex;
 
-            // This vertex doesn't need to assert as marked, as it simply represents the concept of an existing vertex which has been placed.
+            // This vertex doesn't need to assert as marked, as it simply represents the concept of an existing
+            // vertex which has been placed.
 
             VertexSequence sequence = new VertexSequence();
             foreach (NativeLayoutVertexNode vertex in _vertices)
@@ -1018,8 +1039,10 @@ namespace ILCompiler.DependencyAnalysis
             Debug.Assert(NeedsEntrypoint(_method));
             unboxingStub = _method.OwningType.IsValueType && !_method.Signature.IsStatic;
             IMethodNode methodEntryPointNode = factory.MethodEntrypoint(_method, unboxingStub);
-            // Note: We don't set the IsUnboxingStub flag on template methods (all template lookups performed at runtime are performed with this flag not set,
-            // since it can't always be conveniently computed for a concrete method before looking up its template)
+            // Note: We don't set the IsUnboxingStub flag on template methods (all template lookups performed at
+            // runtime are performed with this flag not set,
+            // since it can't always be conveniently computed for a concrete method before looking up its
+            // template)
             unboxingStub = false;
             return methodEntryPointNode;
         }
@@ -1479,7 +1502,8 @@ namespace ILCompiler.DependencyAnalysis
             else if (_type.IsDelegate && _isUniversalCanon)
             {
                 // For USG delegate, we need to write the signature of the Invoke method to the native layout.
-                // This signature is used by the calling convention converter to marshal parameters during delegate calls.
+                // This signature is used by the calling convention converter to marshal parameters during delegate
+                // calls.
                 yield return new DependencyListEntry(
                     context.NativeLayout.MethodSignatureVertex(
                         _type.GetMethod("Invoke", null).GetTypicalMethodDefinition().Signature
@@ -1553,7 +1577,8 @@ namespace ILCompiler.DependencyAnalysis
 
                 // We also need to write out the signatures of interesting methods in the type's vtable, which
                 // will be needed by the calling convention translation logic at runtime, when the type's methods
-                // get invoked. This logic gathers nodes for entries *unconditionally* present. (entries may be conditionally
+                // get invoked. This logic gathers nodes for entries *unconditionally* present. (entries may be
+                // conditionally
                 // present if a type has a vtable which has a size computed by usage not by IL contents)
                 List<NativeLayoutVertexNode> vtableSignatureNodeEntries = null;
                 int currentVTableIndexUnused = 0;
@@ -1611,7 +1636,8 @@ namespace ILCompiler.DependencyAnalysis
             {
                 // We also need to write out the signatures of interesting methods in the type's vtable, which
                 // will be needed by the calling convention translation logic at runtime, when the type's methods
-                // get invoked. This logic gathers nodes for entries *conditionally* present. (entries may be conditionally
+                // get invoked. This logic gathers nodes for entries *conditionally* present. (entries may be
+                // conditionally
                 // present if a type has a vtable which has a size computed by usage not by IL contents)
 
                 int currentVTableIndexUnused = 0;
@@ -1821,7 +1847,8 @@ namespace ILCompiler.DependencyAnalysis
                     if (field.HasRva || field.IsLiteral)
                         continue;
 
-                    // NOTE: The order and contents of the signature vertices emitted here is what we consider a field ordinal for the
+                    // NOTE: The order and contents of the signature vertices emitted here is what we consider a field
+                    // ordinal for the
                     // purpose of NativeLayoutFieldOffsetGenericDictionarySlotNode.
 
                     FieldStorage fieldStorage = FieldStorage.Instance;
@@ -1915,11 +1942,13 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         /// <summary>
-        /// Process the vtable entries of a type by calling operation with the vtable index, declaring method, and implementing method
+        /// Process the vtable entries of a type by calling operation with the vtable index, declaring
+        // method, and implementing method
         /// Process them in order from 0th entry to last.
         /// Skip generic virtual methods, as they are not present in the vtable itself
         /// Do not adjust vtable index for generic dictionary slot
-        /// The vtable index is only actually valid if whichEntries is set to VTableEntriesToProcess.AllInVTable
+        /// The vtable index is only actually valid if whichEntries is set to
+        // VTableEntriesToProcess.AllInVTable
         /// </summary>
         private static void ProcessVTableEntriesForCallingConventionSignatureGeneration(
             NodeFactory factory,

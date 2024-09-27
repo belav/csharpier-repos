@@ -698,8 +698,10 @@ namespace System.Net.Http.Functional.Tests
             var cts = new CancellationTokenSource();
             using HttpClient httpClient = CreateHttpClient();
 
-            // Give client time to read the headers.  There's a race condition here, but if it occurs and the client hasn't finished reading
-            // the headers by when we want it to, the test should still pass, it just won't be testing what we want it to.
+            // Give client time to read the headers.  There's a race condition here, but if it occurs and the
+            // client hasn't finished reading
+            // the headers by when we want it to, the test should still pass, it just won't be testing what we
+            // want it to.
             // The same applies to the Task.Delay below.
             httpClient.Timeout =
                 cancelMode == 2 ? TimeSpan.FromSeconds(1) : Timeout.InfiniteTimeSpan;
@@ -773,8 +775,10 @@ namespace System.Net.Http.Functional.Tests
                     await Task.WhenAny(serverHandling, tcs.Task);
                     if (cancelMode != 2)
                     {
-                        // If using a timeout to cancel requests, it's possible the server's processing could have gotten interrupted,
-                        // so we want to ignore any exceptions from the server when in that mode.  For anything else, let exceptions propagate.
+                        // If using a timeout to cancel requests, it's possible the server's processing could have gotten
+                        // interrupted,
+                        // so we want to ignore any exceptions from the server when in that mode.  For anything else, let
+                        // exceptions propagate.
                         await serverHandling;
                     }
                 }
@@ -1618,7 +1622,8 @@ namespace System.Net.Http.Functional.Tests
             using var server = new LoopbackServer();
             await server.ListenAsync();
 
-            // Ignore all failures from the server. This includes being disposed of before ever accepting a connection,
+            // Ignore all failures from the server. This includes being disposed of before ever accepting a
+            // connection,
             // which is possible if the client times out so quickly that it hasn't initiated a connection yet.
             _ = server.AcceptConnectionAsync(async connection =>
             {

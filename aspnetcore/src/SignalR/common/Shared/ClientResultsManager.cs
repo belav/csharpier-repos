@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
 // Common type used by our HubLifetimeManager implementations to manage client results.
-// Handles cancellation, cleanup, and completion, so any bugs or improvements can be made in a single place
+// Handles cancellation, cleanup, and completion, so any bugs or improvements can be made in a
+// single place
 internal sealed class ClientResultsManager : IInvocationBinder
 {
     private readonly ConcurrentDictionary<
@@ -69,7 +70,8 @@ internal sealed class ClientResultsManager : IInvocationBinder
     {
         var result = _pendingInvocations.TryAdd(invocationId, invocationInfo);
         Debug.Assert(result);
-        // Should have a 50% chance of happening once every 2.71 quintillion invocations (see UUID in Wikipedia)
+        // Should have a 50% chance of happening once every 2.71 quintillion invocations (see UUID in
+        // Wikipedia)
         if (!result)
         {
             invocationInfo.Complete(
@@ -152,7 +154,8 @@ internal sealed class ClientResultsManager : IInvocationBinder
         throw new NotImplementedException();
     }
 
-    // Custom TCS type to avoid the extra allocation that would be introduced if we managed the cancellation separately
+    // Custom TCS type to avoid the extra allocation that would be introduced if we managed the
+    // cancellation separately
     // Also makes it easier to keep track of the CancellationTokenRegistration for disposal
     internal sealed class TaskCompletionSourceWithCancellation<T> : TaskCompletionSource<T>
     {
@@ -177,7 +180,8 @@ internal sealed class ClientResultsManager : IInvocationBinder
             _token = cancellationToken;
         }
 
-        // Needs to be called after adding the completion to the dictionary in order to avoid synchronous completions of the token registration
+        // Needs to be called after adding the completion to the dictionary in order to avoid synchronous
+        // completions of the token registration
         // not canceling when the dictionary hasn't been updated yet.
         public void RegisterCancellation()
         {
@@ -196,7 +200,8 @@ internal sealed class ClientResultsManager : IInvocationBinder
 
         public new void SetCanceled()
         {
-            // TODO: RedisHubLifetimeManager will want to notify the other server (if there is one) about the cancellation
+            // TODO: RedisHubLifetimeManager will want to notify the other server (if there is one) about the
+            // cancellation
             // so it can clean up state and potentially forward that info to the connection
             _clientResultsManager.TryCompleteResult(
                 _connectionId,

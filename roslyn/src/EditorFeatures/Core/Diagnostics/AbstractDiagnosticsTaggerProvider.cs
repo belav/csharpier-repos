@@ -16,8 +16,10 @@ using Microsoft.VisualStudio.Text.Tagging;
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
 /// <summary>
-/// Base type of all diagnostic taggers (classification, squiggles, suggestions, inline-diags).  Subclasses can control
-/// things by overriding functionality in this type.  Internally, this will switch to either a pull or push cased
+/// Base type of all diagnostic taggers (classification, squiggles, suggestions, inline-diags).
+// Subclasses can control
+/// things by overriding functionality in this type.  Internally, this will switch to either a pull
+// or push cased
 /// approach at instantiation time depending on our internal feature flag.
 /// </summary>
 internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag> : ITaggerProvider
@@ -26,8 +28,10 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag> : ITagge
     protected readonly IGlobalOptionService GlobalOptions;
 
     /// <summary>
-    /// Underlying diagnostic tagger responsible for the syntax/semantic and compiler/analyzer split.  The ordering of
-    /// these taggers is not relevant.  They are not executed serially.  Rather, they all run concurrently, notifying us
+    /// Underlying diagnostic tagger responsible for the syntax/semantic and compiler/analyzer split.
+    // The ordering of
+    /// these taggers is not relevant.  They are not executed serially.  Rather, they all run
+    // concurrently, notifying us
     /// (potentially concurrently as well) when change occur.
     /// </summary>
     private readonly ImmutableArray<SingleDiagnosticKindPullTaggerProvider> _diagnosticsTaggerProviders;
@@ -68,7 +72,8 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag> : ITagge
     }
 
     // Functionality for subclasses to control how this diagnostic tagging operates.  All the individual
-    // SingleDiagnosticKindTaggerProvider will defer to these to do the work so that they otherwise operate
+    // SingleDiagnosticKindTaggerProvider will defer to these to do the work so that they otherwise
+    // operate
     // identically.
 
     protected abstract ImmutableArray<IOption2> Options { get; }
@@ -89,7 +94,8 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag> : ITagge
 
     /// <summary>
     /// Get the <see cref="DiagnosticDataLocation"/> that should have the tag applied to it.
-    /// In most cases, this is the <see cref="DiagnosticData.DataLocation"/> but overrides can change it (e.g. unnecessary classifications).
+    /// In most cases, this is the <see cref="DiagnosticData.DataLocation"/> but overrides can change it
+    // (e.g. unnecessary classifications).
     /// </summary>
     /// <param name="diagnosticData">the diagnostic containing the location(s).</param>
     /// <returns>an array of locations that should have the tag applied.</returns>
@@ -126,9 +132,12 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag> : ITagge
         IDiagnosticService diagnosticService
     )
     {
-        // OnTextChanged is added for diagnostics in source generated files: it's possible that the analyzer driver
-        // executed on content which was produced by a source generator but is not yet reflected in an open text
-        // buffer for that generated file. In this case, we need to update the tags after the buffer updates (which
+        // OnTextChanged is added for diagnostics in source generated files: it's possible that the analyzer
+        // driver
+        // executed on content which was produced by a source generator but is not yet reflected in an open
+        // text
+        // buffer for that generated file. In this case, we need to update the tags after the buffer updates
+        // (which
         // triggers a text changed event) to ensure diagnostics are positioned correctly.
         return TaggerEventSources.Compose(
             TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer),

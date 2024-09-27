@@ -487,7 +487,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Converts <see cref="IAssemblyName"/> to <see cref="AssemblyName"/> with all metadata fields filled.
+        /// Converts <see cref="IAssemblyName"/> to <see cref="AssemblyName"/> with all metadata fields
+        // filled.
         /// </summary>
         /// <returns>
         /// Assembly name with Version, Culture and PublicKeyToken components filled in:
@@ -665,7 +666,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Selects the candidate assembly with the largest version number.  Uses culture as a tie-breaker if it is provided.
+        /// Selects the candidate assembly with the largest version number.  Uses culture as a tie-breaker
+        // if it is provided.
         /// All candidates are assumed to have the same name and must include versions and cultures.
         /// </summary>
         internal static IAssemblyName GetBestMatch(

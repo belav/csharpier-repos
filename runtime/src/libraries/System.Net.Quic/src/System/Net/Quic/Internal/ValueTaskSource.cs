@@ -39,23 +39,29 @@ internal sealed class ValueTaskSource : IValueTaskSource
     }
 
     /// <summary>
-    /// Returns <c>true</c> is this task source was completed, i.e. <see cref="TrySetResult"/> or <see cref="TrySetException(Exception)"/> was called.
+    /// Returns <c>true</c> is this task source was completed, i.e. <see cref="TrySetResult"/> or <see
+    // cref="TrySetException(Exception)"/> was called.
     /// </summary>
     public bool IsCompleted =>
         (State)Volatile.Read(ref Unsafe.As<State, byte>(ref _state)) == State.Completed;
 
     /// <summary>
-    /// Returns <c>true</c> is this task source was completed successfully, i.e. <see cref="TrySetResult"/> was called and set the result.
+    /// Returns <c>true</c> is this task source was completed successfully, i.e. <see
+    // cref="TrySetResult"/> was called and set the result.
     /// </summary>
     public bool IsCompletedSuccessfully =>
         IsCompleted
         && _valueTaskSource.GetStatus(_valueTaskSource.Version) == ValueTaskSourceStatus.Succeeded;
 
     /// <summary>
-    /// Tries to transition from <see cref="State.None"/> to <see cref="State.Awaiting"/>. Only the first call is able to do that so the result can be used to determine whether to invoke an operation or not.
+    /// Tries to transition from <see cref="State.None"/> to <see cref="State.Awaiting"/>. Only the
+    // first call is able to do that so the result can be used to determine whether to invoke an operation
+    // or not.
     /// </summary>
-    /// <param name="valueTask">A value task representing the result. In case this method returns <c>false</c>, it'll still contain a value task that'll get set with the original operation.</param>
-    /// <param name="keepAlive">An object to hold during a P/Invoke call. It'll get release with setting the result/exception.</param>
+    /// <param name="valueTask">A value task representing the result. In case this method returns
+    // <c>false</c>, it'll still contain a value task that'll get set with the original operation.</param>
+    /// <param name="keepAlive">An object to hold during a P/Invoke call. It'll get release with setting
+    // the result/exception.</param>
     /// <param name="cancellationToken">A cancellation token which might cancel the value task.</param>
     /// <returns><c>true</c> if this is the first call; otherwise, <c>false</c>.</returns>
     public bool TryInitialize(
@@ -66,10 +72,12 @@ internal sealed class ValueTaskSource : IValueTaskSource
     {
         lock (this)
         {
-            // Set up value task either way, so the the caller can get the result even if they do not start the operation.
+            // Set up value task either way, so the the caller can get the result even if they do not start the
+            // operation.
             valueTask = new ValueTask(this, _valueTaskSource.Version);
 
-            // Cancellation might kick off synchronously, re-entering the lock and changing the state to completed.
+            // Cancellation might kick off synchronously, re-entering the lock and changing the state to
+            // completed.
             if (_state == State.None)
             {
                 // Register cancellation if the token can be cancelled and the task is not completed yet.
@@ -125,7 +133,8 @@ internal sealed class ValueTaskSource : IValueTaskSource
                         _state = State.Completed;
 
                         // Swap the cancellation registration so the one that's been registered gets eventually Disposed.
-                        // Ideally, we would dispose it here, but if the callbacks kicks in, it tries to take the lock held by this thread leading to deadlock.
+                        // Ideally, we would dispose it here, but if the callbacks kicks in, it tries to take the lock held
+                        // by this thread leading to deadlock.
                         cancellationRegistration = _cancellationRegistration;
                         _cancellationRegistration = default;
 
@@ -160,25 +169,30 @@ internal sealed class ValueTaskSource : IValueTaskSource
         finally
         {
             // Dispose the cancellation if registered.
-            // Must be done outside of lock since Dispose will wait on pending cancellation callbacks which require taking the lock.
+            // Must be done outside of lock since Dispose will wait on pending cancellation callbacks which
+            // require taking the lock.
             cancellationRegistration.Dispose();
         }
     }
 
     /// <summary>
-    /// Tries to transition from <see cref="State.Awaiting"/> to <see cref="State.Completed"/>. Only the first call is able to do that.
+    /// Tries to transition from <see cref="State.Awaiting"/> to <see cref="State.Completed"/>. Only the
+    // first call is able to do that.
     /// </summary>
-    /// <returns><c>true</c> if this is the first call that set the result; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if this is the first call that set the result; otherwise,
+    // <c>false</c>.</returns>
     public bool TrySetResult()
     {
         return TryComplete(null);
     }
 
     /// <summary>
-    /// Tries to transition from <see cref="State.Awaiting"/> to <see cref="State.Completed"/>. Only the first call is able to do that.
+    /// Tries to transition from <see cref="State.Awaiting"/> to <see cref="State.Completed"/>. Only the
+    // first call is able to do that.
     /// </summary>
     /// <param name="exception">The exception to set as a result of the value task.</param>
-    /// <returns><c>true</c> if this is the first call that set the result; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if this is the first call that set the result; otherwise,
+    // <c>false</c>.</returns>
     public bool TrySetException(Exception exception)
     {
         return TryComplete(exception);

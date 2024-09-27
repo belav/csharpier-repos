@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Primitives
     public static class ChangeToken
     {
         /// <summary>
-        /// Registers the <paramref name="changeTokenConsumer"/> action to be called whenever the token produced changes.
+        /// Registers the <paramref name="changeTokenConsumer"/> action to be called whenever the token
+        // produced changes.
         /// </summary>
         /// <param name="changeTokenProducer">Produces the change token.</param>
         /// <param name="changeTokenConsumer">Action called when the token changes.</param>
@@ -39,7 +40,8 @@ namespace Microsoft.Extensions.Primitives
         }
 
         /// <summary>
-        /// Registers the <paramref name="changeTokenConsumer"/> action to be called whenever the token produced changes.
+        /// Registers the <paramref name="changeTokenConsumer"/> action to be called whenever the token
+        // produced changes.
         /// </summary>
         /// <param name="changeTokenProducer">Produces the change token.</param>
         /// <param name="changeTokenConsumer">Action called when the token changes.</param>

@@ -123,7 +123,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
+                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type
+                // as the containing type
                 //     public static C1 operator >>>(C1 x, C2 y)
                 Diagnostic(ErrorCode.ERR_BadShiftOperatorSignature, op).WithLocation(12, 31)
             );
@@ -181,7 +182,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
+                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type
+                // as the containing type
                 //     public static C1 operator >>>(C1 x, C2 y)
                 Diagnostic(ErrorCode.ERR_BadShiftOperatorSignature, op).WithLocation(12, 31)
             );
@@ -239,7 +241,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
+                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type
+                // as the containing type
                 //     public static C1 operator >>>(C1 x, C2 y)
                 Diagnostic(ErrorCode.ERR_BadShiftOperatorSignature, op).WithLocation(12, 31)
             );
@@ -297,7 +300,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
+                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type
+                // as the containing type
                 //     public static C1 operator >>>(C1 x, C2 y)
                 Diagnostic(ErrorCode.ERR_BadShiftOperatorSignature, op).WithLocation(12, 31)
             );
@@ -355,7 +359,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
+                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type
+                // as the containing type
                 //     public static C1 operator >>>(C1 x, C2 y)
                 Diagnostic(ErrorCode.ERR_BadShiftOperatorSignature, op).WithLocation(12, 31)
             );
@@ -413,7 +418,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type as the containing type
+                // (12,31): error CS0564: The first operand of an overloaded shift operator must have the same type
+                // as the containing type
                 //     public static C1 operator >>>(C1 x, C2 y)
                 Diagnostic(ErrorCode.ERR_BadShiftOperatorSignature, op).WithLocation(12, 31)
             );

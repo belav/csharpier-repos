@@ -16,11 +16,11 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Literal Text class. This is the control created for literal text in a form.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Literal Text class. This is the control created for literal text in a form.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\LiteralText.uex' path='docs/doc[@for="LiteralText"]/*' />
     [ControlBuilderAttribute(typeof(LiteralTextControlBuilder)), ToolboxItem(false)]
     [AspNetHostingPermission(
@@ -176,11 +176,11 @@ namespace System.Web.UI.MobileControls
         }
     }
 
-    /*
-     * Control builder for literal text.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Control builder for literal text.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\LiteralText.uex' path='docs/doc[@for="LiteralTextControlBuilder"]/*' />
     [AspNetHostingPermission(
@@ -196,7 +196,8 @@ namespace System.Web.UI.MobileControls
     )]
     public class LiteralTextControlBuilder : MobileControlBuilder
     {
-        /// <include file='doc\LiteralText.uex' path='docs/doc[@for="LiteralTextControlBuilder.AllowWhitespaceLiterals"]/*' />
+        /// <include file='doc\LiteralText.uex'
+        // path='docs/doc[@for="LiteralTextControlBuilder.AllowWhitespaceLiterals"]/*' />
         public override bool AllowWhitespaceLiterals()
         {
             return true;

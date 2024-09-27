@@ -163,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         }
                     }
 
-                    // Note(DustinCa): Docs say that GetNameOfLocation should return S_FALSE if a name could not be found.
+                    // Note(DustinCa): Docs say that GetNameOfLocation should return S_FALSE if a name could not be
+                    // found.
                     // Also, that's what the old native code does, so we should do it here.
                     pbstrName = null;
                     piLineOffset = 0;
@@ -434,7 +435,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
                             // If a span is provided, and the requested position falls in that span, then just
                             // move the requested position to the start of the span.
-                            // Length will be used to determine if we need further analysis, which is only required when text spans multiple lines.
+                            // Length will be used to determine if we need further analysis, which is only required when text
+                            // spans multiple lines.
                             if (initialBreakpointSpan.Contains(point))
                             {
                                 point = initialBreakpointSpan.Start;

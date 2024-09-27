@@ -154,7 +154,7 @@ public class ComponentFactoryTest
         // Arrange
         var componentType = typeof(ComponentWithInjectProperties);
         var renderer = new RendererWithResolveComponentForRenderMode(
-            /* won't be used */new ComponentWithRenderMode()
+/* won't be used */new ComponentWithRenderMode()
         );
         var factory = new ComponentFactory(new DefaultComponentActivator(), renderer);
 
@@ -224,7 +224,8 @@ public class ComponentFactoryTest
     {
         // Arrange
         // Notice that the requested component type is not the same as the resolved component type. This
-        // is intentional and shows that component factories are allowed to substitute other component types.
+        // is intentional and shows that component factories are allowed to substitute other component
+        // types.
         var resolvedComponent = new ComponentWithInjectProperties();
         var componentType = typeof(ComponentWithNonInjectableProperties);
         var callSiteRenderMode = new TestRenderMode();
@@ -260,7 +261,8 @@ public class ComponentFactoryTest
         var componentActivator = new DefaultComponentActivator();
         var factory = new ComponentFactory(componentActivator, renderer);
 
-        // Even though the two rendermodes are literally the same object, we don't allow specifying any nonnull
+        // Even though the two rendermodes are literally the same object, we don't allow specifying any
+        // nonnull
         // rendermode at the callsite if there's a nonnull fixed rendermode
         var callsiteRenderMode = componentType.GetCustomAttribute<RenderModeAttribute>().Mode;
 

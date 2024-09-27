@@ -12,7 +12,8 @@ namespace System.Collections.Generic
         /// </summary>
         /// <remarks>
         /// On .NET Framework, when a duplicate key is added to a Dictionary, the exception message doesn't
-        /// list the duplicate element name. This method ensures the duplicate element name is logged in the exception message.
+        /// list the duplicate element name. This method ensures the duplicate element name is logged in the
+        // exception message.
         /// </remarks>
         internal static Dictionary<string, T> LibraryCollectionToDictionary<T>(
             this IReadOnlyList<T> collection

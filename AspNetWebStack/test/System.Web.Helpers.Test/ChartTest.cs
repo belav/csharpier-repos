@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Drawing;
@@ -98,22 +99,22 @@ namespace System.Web.Helpers.Test
         public void ConstructorLoadsTheme()
         {
             //Vanilla theme
-            /*
-             * <Chart Palette="SemiTransparent" BorderColor="#000" BorderWidth="2" BorderlineDashStyle="Solid">
-                <ChartAreas>
-                    <ChartArea _Template_="All" Name="Default">
-                            <AxisX>
-                                <MinorGrid Enabled="False" />
-                                <MajorGrid Enabled="False" />
-                            </AxisX>
-                            <AxisY>
-                                <MajorGrid Enabled="False" />
-                                <MinorGrid Enabled="False" />
-                            </AxisY>
-                    </ChartArea>
-                </ChartAreas>
-                </Chart>
-             */
+/*
+* <Chart Palette="SemiTransparent" BorderColor="#000" BorderWidth="2" BorderlineDashStyle="Solid">
+<ChartAreas>
+<ChartArea _Template_="All" Name="Default">
+<AxisX>
+<MinorGrid Enabled="False" />
+<MajorGrid Enabled="False" />
+</AxisX>
+<AxisY>
+<MajorGrid Enabled="False" />
+<MinorGrid Enabled="False" />
+</AxisY>
+</ChartArea>
+</ChartAreas>
+</Chart>
+*/
             var chart = new Chart(
                 GetContext(),
                 GetVirtualPathProvider(),
@@ -138,22 +139,22 @@ namespace System.Web.Helpers.Test
         public void ConstructorLoadsThemeAndTemplate()
         {
             //Vanilla theme
-            /*
-             * <Chart Palette="SemiTransparent" BorderColor="#000" BorderWidth="2" BorderlineDashStyle="Solid">
-                <ChartAreas>
-                    <ChartArea _Template_="All" Name="Default">
-                            <AxisX>
-                                <MinorGrid Enabled="False" />
-                                <MajorGrid Enabled="False" />
-                            </AxisX>
-                            <AxisY>
-                                <MajorGrid Enabled="False" />
-                                <MinorGrid Enabled="False" />
-                            </AxisY>
-                    </ChartArea>
-                </ChartAreas>
-                </Chart>
-             */
+/*
+* <Chart Palette="SemiTransparent" BorderColor="#000" BorderWidth="2" BorderlineDashStyle="Solid">
+<ChartAreas>
+<ChartArea _Template_="All" Name="Default">
+<AxisX>
+<MinorGrid Enabled="False" />
+<MajorGrid Enabled="False" />
+</AxisX>
+<AxisY>
+<MajorGrid Enabled="False" />
+<MinorGrid Enabled="False" />
+</AxisY>
+</ChartArea>
+</ChartAreas>
+</Chart>
+*/
             var template = WriteTemplate(
                 @"<Chart BorderlineDashStyle=""DashDot""><Legends><Legend BackColor=""Red"" /></Legends></Chart>"
             );

@@ -11,16 +11,20 @@ namespace Roslyn.Utilities
     internal static class ImmutableHashMapExtensions
     {
         /// <summary>
-        /// Obtains the value for the specified key from a dictionary, or adds a new value to the dictionary where the key did not previously exist.
+        /// Obtains the value for the specified key from a dictionary, or adds a new value to the dictionary
+        // where the key did not previously exist.
         /// </summary>
         /// <typeparam name="TKey">The type of key stored by the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of value stored by the dictionary.</typeparam>
         /// <typeparam name="TArg">The type of argument supplied to the value factory.</typeparam>
-        /// <param name="location">The variable or field to atomically update if the specified <paramref name="key" /> is not in the dictionary.</param>
+        /// <param name="location">The variable or field to atomically update if the specified <paramref
+        // name="key" /> is not in the dictionary.</param>
         /// <param name="key">The key for the value to retrieve or add.</param>
-        /// <param name="valueProvider">The function to execute to obtain the value to insert into the dictionary if the key is not found. Returns null if the value can't be obtained.</param>
+        /// <param name="valueProvider">The function to execute to obtain the value to insert into the
+        // dictionary if the key is not found. Returns null if the value can't be obtained.</param>
         /// <param name="factoryArgument">The argument to pass to the value factory.</param>
-        /// <returns>The value obtained from the dictionary or <paramref name="valueProvider" /> if it was not present.</returns>
+        /// <returns>The value obtained from the dictionary or <paramref name="valueProvider" /> if it was
+        // not present.</returns>
         public static TValue? GetOrAdd<TKey, TValue, TArg>(
             ref ImmutableHashMap<TKey, TValue> location,
             TKey key,

@@ -12,7 +12,8 @@ namespace System.Security.Cryptography.Xml
         private readonly CanonicalXmlDocument _c14nDoc;
         private readonly C14NAncestralNamespaceContextManager _ancMgr;
 
-        // private static string defaultXPathWithoutComments = "(//. | //@* | //namespace::*)[not(self::comment())]";
+        // private static string defaultXPathWithoutComments = "(//. | //@* |
+        // //namespace::*)[not(self::comment())]";
         // private static string defaultXPathWithoutComments = "(//. | //@* | //namespace::*)";
         // private static string defaultXPathWithComments = "(//. | //@* | //namespace::*)";
         // private static string defaultXPathWithComments = "(//. | //@* | //namespace::*)";

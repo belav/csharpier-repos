@@ -4,7 +4,8 @@ using System.Web.UI.WebControls;
 namespace System.Web.DynamicData
 {
     /// <summary>
-    /// Interface implemented by the object that drives field template. Typically, this is the DynamicControl.
+    /// Interface implemented by the object that drives field template. Typically, this is the
+    // DynamicControl.
     /// </summary>
     public interface IFieldTemplateHost
     {

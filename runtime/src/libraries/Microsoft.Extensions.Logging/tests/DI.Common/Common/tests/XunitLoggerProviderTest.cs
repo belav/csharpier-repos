@@ -63,7 +63,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                 "This is a" + Environment.NewLine + "multi-line" + Environment.NewLine + "message"
             );
 
-            // The lines after the first one are indented more because the indentation was calculated based on the timestamp's actual length.
+            // The lines after the first one are indented more because the indentation was calculated based on
+            // the timestamp's actual length.
             var expectedOutput =
                 "| [TIMESTAMP] TestCategory Information: This is a"
                 + Environment.NewLine

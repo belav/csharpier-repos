@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.AddAwait
 {
     /// <summary>
-    /// This refactoring complements the AddAwait fixer. It allows adding `await` and `await ... .ConfigureAwait(false)` even there is no compiler error to trigger the fixer.
+    /// This refactoring complements the AddAwait fixer. It allows adding `await` and `await ...
+    // .ConfigureAwait(false)` even there is no compiler error to trigger the fixer.
     /// </summary>
     [
         ExportCodeRefactoringProvider(

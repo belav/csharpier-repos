@@ -52,7 +52,8 @@ namespace System.Diagnostics.Contracts
         private static bool _assertingMustUseRewriter;
 
         /// <summary>
-        /// This method is used internally to trigger a failure indicating to the "programmer" that he is using the interface incorrectly.
+        /// This method is used internally to trigger a failure indicating to the "programmer" that he is
+        // using the interface incorrectly.
         /// It is NEVER used to indicate failure of actual contracts at runtime.
         /// </summary>
         [SecuritySafeCritical]
@@ -102,7 +103,8 @@ namespace System.Diagnostics.Contracts
 
         /// <summary>
         /// Without contract rewriting, failing Assert/Assumes end up calling this method.
-        /// Code going through the contract rewriter never calls this method. Instead, the rewriter produced failures call
+        /// Code going through the contract rewriter never calls this method. Instead, the rewriter produced
+        // failures call
         /// System.Runtime.CompilerServices.ContractHelper.RaiseContractFailedEvent, followed by
         /// System.Runtime.CompilerServices.ContractHelper.TriggerFailure.
         /// </summary>
@@ -433,10 +435,12 @@ namespace System.Runtime.CompilerServices
         /// The method should not perform any failure (assert/throw) itself.
         /// This method has 3 functions:
         /// 1. Call any contract hooks (such as listeners to Contract failed events)
-        /// 2. Determine if the listeneres deem the failure as handled (then resultFailureMessage should be set to null)
+        /// 2. Determine if the listeneres deem the failure as handled (then resultFailureMessage should be
+        // set to null)
         /// 3. Produce a localized resultFailureMessage used in advertising the failure subsequently.
         /// </summary>
-        /// <param name="resultFailureMessage">Should really be out (or the return value), but partial methods are not flexible enough.
+        /// <param name="resultFailureMessage">Should really be out (or the return value), but partial
+        // methods are not flexible enough.
         /// On exit: null if the event was handled and should not trigger a failure.
         ///          Otherwise, returns the localized failure message</param>
         [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
@@ -605,7 +609,8 @@ namespace System.Runtime.CompilerServices
                     innerException
                 );
             }
-            // May need to rethink Assert.Fail w/ TaskDialogIndirect as a model.  Window title.  Main instruction.  Content.  Expanded info.
+            // May need to rethink Assert.Fail w/ TaskDialogIndirect as a model.  Window title.  Main
+            // instruction.  Content.  Expanded info.
             // Optional info like string for collapsed text vs. expanded text.
             String windowTitle = Environment.GetResourceString(GetResourceNameForFailure(kind));
             const int numStackFramesToSkip = 2; // To make stack traces easier to read

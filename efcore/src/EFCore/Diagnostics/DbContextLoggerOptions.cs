@@ -7,10 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
 ///     Formatting options for use with <see cref="FormattingDbContextLogger" />
-///     and <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />.
+///     and <see
+// cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-simple-logging">EF Core simple logging</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-simple-logging">EF Core simple logging</see> for
+// more information and examples.
 /// </remarks>
 [Flags]
 public enum DbContextLoggerOptions
@@ -26,12 +28,14 @@ public enum DbContextLoggerOptions
     SingleLine = 1,
 
     /// <summary>
-    ///     Include the event <see cref="LogLevel" /> in each log message. The level is included by default.
+    ///     Include the event <see cref="LogLevel" /> in each log message. The level is included by
+    // default.
     /// </summary>
     Level = 1 << 1,
 
     /// <summary>
-    ///     Includes the event <see cref="DbLoggerCategory" /> in each message. The category is included by default.
+    ///     Includes the event <see cref="DbLoggerCategory" /> in each message. The category is included
+    // by default.
     /// </summary>
     Category = 1 << 2,
 
@@ -41,7 +45,8 @@ public enum DbContextLoggerOptions
     Id = 1 << 3,
 
     /// <summary>
-    ///     Includes a UTC timestamp in each message. The local time is included by default. Use <see cref="DefaultWithUtcTime" />
+    ///     Includes a UTC timestamp in each message. The local time is included by default. Use <see
+    // cref="DefaultWithUtcTime" />
     ///     to include all default options but change timestamps to UTC.
     /// </summary>
     UtcTime = 1 << 4,
@@ -52,19 +57,23 @@ public enum DbContextLoggerOptions
     LocalTime = 1 << 5,
 
     /// <summary>
-    ///     The default used by <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />.
+    ///     The default used by <see
+    // cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />.
     /// </summary>
     /// <remarks>
-    ///     Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see cref="LocalTime" />.
+    ///     Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see
+    // cref="LocalTime" />.
     /// </remarks>
     DefaultWithLocalTime = Level | Category | Id | LocalTime,
 
     /// <summary>
-    ///     The same defaults as used by <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />,
+    ///     The same defaults as used by <see
+    // cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />,
     ///     but with UTC timestamps.
     /// </summary>
     /// <remarks>
-    ///     Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see cref="UtcTime" />.
+    ///     Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see
+    // cref="UtcTime" />.
     /// </remarks>
     DefaultWithUtcTime = Level | Category | Id | UtcTime,
 }

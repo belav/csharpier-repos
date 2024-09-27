@@ -154,7 +154,8 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
                 await TestBasicNavigation(project.ProjectName, page);
             }
 
-            // The PWA template supports offline use. By now, the browser should have cached everything it needs,
+            // The PWA template supports offline use. By now, the browser should have cached everything it
+            // needs,
             // so we can continue working even without the server.
             await page.GotoAsync("about:blank");
             await browser.SetOfflineAsync(true);
@@ -207,11 +208,13 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
                 await aspNetProcess.VisitInBrowserAsync(page);
                 await TestBasicNavigation(project.ProjectName, page);
 
-                // Note: we don't want to use aspNetProcess.ListeningUri because that isn't necessarily the HTTPS URI
+                // Note: we don't want to use aspNetProcess.ListeningUri because that isn't necessarily the HTTPS
+                // URI
                 listeningUri = new Uri(page.Url).GetLeftPart(UriPartial.Authority);
             }
 
-            // The PWA template supports offline use. By now, the browser should have cached everything it needs,
+            // The PWA template supports offline use. By now, the browser should have cached everything it
+            // needs,
             // so we can continue working even without the server.
             // Since this is the hosted project, backend APIs won't work offline, so we need to skip "fetchdata"
             await page.GotoAsync("about:blank");

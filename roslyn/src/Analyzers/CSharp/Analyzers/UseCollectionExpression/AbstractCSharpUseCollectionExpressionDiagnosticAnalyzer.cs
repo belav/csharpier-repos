@@ -89,10 +89,14 @@ internal abstract class AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer
             if (!IsSupported(compilation))
                 return;
 
-            // We wrap the SyntaxNodeAction within a CodeBlockStartAction, which allows us to get callbacks for object
-            // creation expression nodes, but analyze nodes across the entire code block and eventually report fading
-            // diagnostics with location outside this node. Without the containing CodeBlockStartAction, our reported
-            // diagnostic would be classified as a non-local diagnostic and would not participate in lightbulb for
+            // We wrap the SyntaxNodeAction within a CodeBlockStartAction, which allows us to get callbacks for
+            // object
+            // creation expression nodes, but analyze nodes across the entire code block and eventually report
+            // fading
+            // diagnostics with location outside this node. Without the containing CodeBlockStartAction, our
+            // reported
+            // diagnostic would be classified as a non-local diagnostic and would not participate in lightbulb
+            // for
             // computing code fixes.
             context.RegisterCodeBlockStartAction<SyntaxKind>(InitializeWorker);
         });

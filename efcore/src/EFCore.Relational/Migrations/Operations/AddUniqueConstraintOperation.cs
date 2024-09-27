@@ -7,13 +7,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     A <see cref="MigrationOperation" /> to add a new unique constraint.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 [DebuggerDisplay("ALTER TABLE {Table} ADD CONSTRAINT {Name} UNIQUE")]
 public class AddUniqueConstraintOperation : MigrationOperation, ITableMigrationOperation
 {
     /// <summary>
-    ///     The schema that contains the table, or <see langword="null" /> if the default schema should be used.
+    ///     The schema that contains the table, or <see langword="null" /> if the default schema should
+    // be used.
     /// </summary>
     public virtual string? Schema { get; set; }
 
@@ -33,7 +35,8 @@ public class AddUniqueConstraintOperation : MigrationOperation, ITableMigrationO
     public virtual string[] Columns { get; set; } = null!;
 
     /// <summary>
-    ///     Creates a new <see cref="AddUniqueConstraintOperation" /> from the specified unique constraint.
+    ///     Creates a new <see cref="AddUniqueConstraintOperation" /> from the specified unique
+    // constraint.
     /// </summary>
     /// <param name="uniqueConstraint">The unique constraint.</param>
     /// <returns>The operation.</returns>

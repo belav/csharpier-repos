@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis
         private WeakReference<SemanticModel>? _model;
 
         /// <summary>
-        /// A cached task that can be returned once the tree has already been created. This is only set if <see cref="SupportsSyntaxTree"/> returns true,
+        /// A cached task that can be returned once the tree has already been created. This is only set if
+        // <see cref="SupportsSyntaxTree"/> returns true,
         /// so the inner value can be non-null.
         /// </summary>
         private Task<SyntaxTree>? _syntaxTreeResultTask;
@@ -69,8 +70,10 @@ namespace Microsoft.CodeAnalysis
             HasTextChanged(otherDocument, ignoreUnchangeableDocument: false);
 
         /// <summary>
-        /// Get the current syntax tree for the document if the text is already loaded and the tree is already parsed.
-        /// In almost all cases, you should call <see cref="GetSyntaxTreeAsync"/> to fetch the tree, which will parse the tree
+        /// Get the current syntax tree for the document if the text is already loaded and the tree is
+        // already parsed.
+        /// In almost all cases, you should call <see cref="GetSyntaxTreeAsync"/> to fetch the tree, which
+        // will parse the tree
         /// if it's not already parsed.
         /// </summary>
         public bool TryGetSyntaxTree([NotNullWhen(returnValue: true)] out SyntaxTree? syntaxTree)
@@ -98,8 +101,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Get the current syntax tree version for the document if the text is already loaded and the tree is already parsed.
-        /// In almost all cases, you should call <see cref="GetSyntaxVersionAsync"/> to fetch the version, which will load the tree
+        /// Get the current syntax tree version for the document if the text is already loaded and the tree
+        // is already parsed.
+        /// In almost all cases, you should call <see cref="GetSyntaxVersionAsync"/> to fetch the version,
+        // which will load the tree
         /// if it's not already available.
         /// </summary>
         public bool TryGetSyntaxVersion(out VersionStamp version)
@@ -122,7 +127,8 @@ namespace Microsoft.CodeAnalysis
             DocumentState.TryGetTopLevelChangeTextVersion(out version);
 
         /// <summary>
-        /// Gets the version of the syntax tree. This is generally the newer of the text version and the project's version.
+        /// Gets the version of the syntax tree. This is generally the newer of the text version and the
+        // project's version.
         /// </summary>
         public async Task<VersionStamp> GetSyntaxVersionAsync(
             CancellationToken cancellationToken = default
@@ -157,10 +163,14 @@ namespace Microsoft.CodeAnalysis
         /// Gets the <see cref="SyntaxTree" /> for this document asynchronously.
         /// </summary>
         /// <returns>
-        /// The returned syntax tree can be <see langword="null"/> if the <see cref="SupportsSyntaxTree"/> returns <see
-        /// langword="false"/>. This function may cause computation to occur the first time it is called, but will return
-        /// a cached result every subsequent time.  <see cref="SyntaxTree"/>'s can hold onto their roots lazily. So calls
-        /// to <see cref="SyntaxTree.GetRoot"/> or <see cref="SyntaxTree.GetRootAsync"/> may end up causing computation
+        /// The returned syntax tree can be <see langword="null"/> if the <see cref="SupportsSyntaxTree"/>
+        // returns <see
+        /// langword="false"/>. This function may cause computation to occur the first time it is called,
+        // but will return
+        /// a cached result every subsequent time.  <see cref="SyntaxTree"/>'s can hold onto their roots
+        // lazily. So calls
+        /// to <see cref="SyntaxTree.GetRoot"/> or <see cref="SyntaxTree.GetRootAsync"/> may end up causing
+        // computation
         /// to occur at that point.
         /// </returns>
         public Task<SyntaxTree?> GetSyntaxTreeAsync(CancellationToken cancellationToken = default)
@@ -180,9 +190,11 @@ namespace Microsoft.CodeAnalysis
             // check to see if we already have the tree before actually going async
             if (TryGetSyntaxTree(out var tree))
             {
-                // stash a completed result task for this value for the next request (to reduce extraneous allocations of tasks)
+                // stash a completed result task for this value for the next request (to reduce extraneous
+                // allocations of tasks)
                 // don't use the actual async task because it depends on a specific cancellation token
-                // its okay to cache the task and hold onto the SyntaxTree, because the DocumentState already keeps the SyntaxTree alive.
+                // its okay to cache the task and hold onto the SyntaxTree, because the DocumentState already keeps
+                // the SyntaxTree alive.
                 Interlocked.CompareExchange(ref _syntaxTreeResultTask, Task.FromResult(tree), null);
 
                 return _syntaxTreeResultTask.AsNullable();
@@ -203,8 +215,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the root node of the current syntax tree if the syntax tree has already been parsed and the tree is still cached.
-        /// In almost all cases, you should call <see cref="GetSyntaxRootAsync"/> to fetch the root node, which will parse
+        /// Gets the root node of the current syntax tree if the syntax tree has already been parsed and the
+        // tree is still cached.
+        /// In almost all cases, you should call <see cref="GetSyntaxRootAsync"/> to fetch the root node,
+        // which will parse
         /// the document if necessary.
         /// </summary>
         public bool TryGetSyntaxRoot([NotNullWhen(returnValue: true)] out SyntaxNode? root)
@@ -251,8 +265,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the current semantic model for this document if the model is already computed and still cached.
-        /// In almost all cases, you should call <see cref="GetSemanticModelAsync"/>, which will compute the semantic model
+        /// Gets the current semantic model for this document if the model is already computed and still
+        // cached.
+        /// In almost all cases, you should call <see cref="GetSemanticModelAsync"/>, which will compute the
+        // semantic model
         /// if necessary.
         /// </summary>
         public bool TryGetSemanticModel(
@@ -309,7 +325,8 @@ namespace Microsoft.CodeAnalysis
                     return result;
                 }
 
-                // It looks like someone has set it. Try to reuse same semantic model, or assign the new model if that
+                // It looks like someone has set it. Try to reuse same semantic model, or assign the new model if
+                // that
                 // fails. The lock is required since there is no compare-and-set primitive for WeakReference<T>.
                 lock (original)
                 {
@@ -349,7 +366,8 @@ namespace Microsoft.CodeAnalysis
                 .GetDocument(this.Id)!;
 
         /// <summary>
-        /// Creates a new instance of this document updated to have a syntax tree rooted by the specified syntax node.
+        /// Creates a new instance of this document updated to have a syntax tree rooted by the specified
+        // syntax node.
         /// </summary>
         public Document WithSyntaxRoot(SyntaxNode root) =>
             this
@@ -384,7 +402,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Get the text changes between this document and a prior version of the same document.
-        /// The changes, when applied to the text of the old document, will produce the text of the current document.
+        /// The changes, when applied to the text of the old document, will produce the text of the current
+        // document.
         /// </summary>
         public async Task<IEnumerable<TextChange>> GetTextChangesAsync(
             Document oldDocument,
@@ -473,7 +492,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the list of <see cref="DocumentId"/>s that are linked to this
         /// <see cref="Document" />. <see cref="Document"/>s are considered to be linked if they
-        /// share the same <see cref="TextDocument.FilePath" />. This <see cref="DocumentId"/> is excluded from the
+        /// share the same <see cref="TextDocument.FilePath" />. This <see cref="DocumentId"/> is excluded
+        // from the
         /// result.
         /// </summary>
         public ImmutableArray<DocumentId> GetLinkedDocumentIds()
@@ -483,8 +503,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a branched version of this document that has its semantic model frozen in whatever state it is available at the time,
-        /// assuming a background process is constructing the semantics asynchronously. Repeated calls to this method may return
+        /// Creates a branched version of this document that has its semantic model frozen in whatever state
+        // it is available at the time,
+        /// assuming a background process is constructing the semantics asynchronously. Repeated calls to
+        // this method may return
         /// documents with increasingly more complete semantics.
         ///
         /// Use this method to gain access to potentially incomplete semantics quickly.
@@ -518,11 +540,13 @@ namespace Microsoft.CodeAnalysis
         private AsyncLazy<DocumentOptionSet>? _cachedOptions;
 
         /// <summary>
-        /// Returns the options that should be applied to this document. This consists of global options from <see cref="Solution.Options"/>,
+        /// Returns the options that should be applied to this document. This consists of global options
+        // from <see cref="Solution.Options"/>,
         /// merged with any settings the user has specified at the document levels.
         /// </summary>
         /// <remarks>
-        /// This method is async because this may require reading other files. In files that are already open, this is expected to be cheap and complete synchronously.
+        /// This method is async because this may require reading other files. In files that are already
+        // open, this is expected to be cheap and complete synchronously.
         /// </remarks>
         [PerformanceSensitive(
             "https://github.com/dotnet/roslyn/issues/23582",

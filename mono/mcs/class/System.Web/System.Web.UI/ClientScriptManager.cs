@@ -613,7 +613,8 @@ namespace System.Web.UI
             eventValidationPos = 0;
         }
 
-        // Implemented following the description in http://odetocode.com/Blogs/scott/archive/2006/03/20/3145.aspx
+        // Implemented following the description in
+        // http://odetocode.com/Blogs/scott/archive/2006/03/20/3145.aspx
         int CalculateEventHash(string uniqueId, string argument)
         {
             int uniqueIdHash = uniqueId.GetHashCode();

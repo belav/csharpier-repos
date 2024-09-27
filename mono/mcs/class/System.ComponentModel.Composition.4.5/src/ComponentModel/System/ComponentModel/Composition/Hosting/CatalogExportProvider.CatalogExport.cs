@@ -151,7 +151,8 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected override CatalogPart GetPart()
             {
-                // we need to ensure that the part gets created only once, as the export contract requires that the same value be returned on subsequent calls
+                // we need to ensure that the part gets created only once, as the export contract requires that the
+                // same value be returned on subsequent calls
                 if (this._part == null)
                 {
                     CatalogPart part = this.GetPartCore();

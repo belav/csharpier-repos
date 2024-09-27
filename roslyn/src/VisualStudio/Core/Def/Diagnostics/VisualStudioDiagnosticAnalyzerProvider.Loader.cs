@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 try
                 {
                     // We want to load the analyzer assembly assets in default context.
-                    // Use Assembly.Load instead of Assembly.LoadFrom to ensure that if the assembly is ngen'ed, then the native image gets loaded.
+                    // Use Assembly.Load instead of Assembly.LoadFrom to ensure that if the assembly is ngen'ed, then
+                    // the native image gets loaded.
                     return Assembly.Load(AssemblyName.GetAssemblyName(fullPath));
                 }
                 catch (Exception)

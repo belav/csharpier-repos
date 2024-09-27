@@ -408,8 +408,10 @@ namespace System.PrivateUri.Tests
         }
 
         /// <summary>
-        /// First column contains input characters found to be potential issues with the current implementation.
-        /// The second column contains the current (.NET Core 2.1/Framework 4.7.2) Uri behavior for Uri normalization.
+        /// First column contains input characters found to be potential issues with the current
+        // implementation.
+        /// The second column contains the current (.NET Core 2.1/Framework 4.7.2) Uri behavior for Uri
+        // normalization.
         /// </summary>
         private static readonly string[,] s_checkIsReservedEscapingStrings =
         {
@@ -485,7 +487,8 @@ namespace System.PrivateUri.Tests
         };
 
         /// <summary>
-        /// This test validates behavior differences caused by the incorrect conditional expression found in function
+        /// This test validates behavior differences caused by the incorrect conditional expression found in
+        // function
         /// CheckIsReserved().
         /// </summary>
         [Fact]

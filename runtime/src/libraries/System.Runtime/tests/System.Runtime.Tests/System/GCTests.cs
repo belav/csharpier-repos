@@ -924,7 +924,8 @@ namespace System.Tests
             GCNotificationStatus result = GCNotificationStatus.Failed;
             Thread cancelProc = null;
 
-            // Since we need to test an infinite (or very large) wait but the API won't return, spawn off a thread which
+            // Since we need to test an infinite (or very large) wait but the API won't return, spawn off a
+            // thread which
             // will cancel the wait after a few seconds
             //
             bool cancelTimeout = (timeout == -1) || (timeout > 10000);
@@ -1050,7 +1051,8 @@ namespace System.Tests
                             memoryInfo1.HighMemoryLoadThresholdBytes
                         );
 
-                        // Even though we have allocated, the overall load may decrease or increase depending what other processes are doing.
+                        // Even though we have allocated, the overall load may decrease or increase depending what other
+                        // processes are doing.
                         // It cannot go above total available though.
                         scenario = nameof(memoryInfo2.MemoryLoadBytes);
                         Assert.InRange(
@@ -1294,9 +1296,11 @@ namespace System.Tests
         [StructLayout(LayoutKind.Sequential)]
         struct EmbeddedValueType<T>
         {
-            // There's a few extra fields here to ensure any reads and writes to Value reasonably are not just offset 0.
+            // There's a few extra fields here to ensure any reads and writes to Value reasonably are not just
+            // offset 0.
             // This is a low-level smoke check that can give a bit of confidence in pointer arithmetic.
-            // The CLR is permitted to reorder fields and ignore the sequential consistency of value types if they contain
+            // The CLR is permitted to reorder fields and ignore the sequential consistency of value types if
+            // they contain
             // managed references, but it will never hurt the test.
             object _1;
             byte _2;

@@ -26,7 +26,8 @@ namespace System.Web.UI.WebControls
         private int virtualCount;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.PagedDataSource'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.PagedDataSource'/>
+        // class.</para>
         /// </devdoc>
         public PagedDataSource()
         {
@@ -49,7 +50,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Indicates whether to implement page semantics on top of the underlying datasource.</para>
+        ///    <para>Indicates whether to implement page semantics on top of the underlying
+        // datasource.</para>
         /// </devdoc>
         public bool AllowPaging
         {

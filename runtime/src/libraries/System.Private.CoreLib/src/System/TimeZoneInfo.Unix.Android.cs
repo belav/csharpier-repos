@@ -187,32 +187,36 @@ namespace System
             return AndroidTzDataInstance.GetTimeZoneIds();
         }
 
-        /*
-        * Android v4.3 Timezone support infrastructure.
-        *
-        * Android tzdata files are found in the format of
-        * Header <Beginning of Entry Index> Entry Entry Entry ... Entry <Beginning of Data Index> <TZDATA>
-        *
-        * https://github.com/aosp-mirror/platform_bionic/blob/master/libc/tzcode/bionic.cpp
-        *
-        * The header (24 bytes) contains the following information
-        * signature - 12 bytes of the form "tzdata2012f\0" where 2012f is subject to change
-        * index offset - 4 bytes that denotes the offset at which the index of the tzdata file starts
-        * data offset - 4 bytes that denotes the offset at which the data of the tzdata file starts
-        * final offset - 4 bytes that used to denote the final offset, which we don't use but will note.
-        *
-        * Each Data Entry (52 bytes) can be used to generate a TimeZoneInfo and contain the following information
-        * id - 40 bytes that contain the id of the time zone data entry timezone<id>
-        * byte offset - 4 bytes that denote the offset from the data offset timezone<id> data can be found
-        * length - 4 bytes that denote the length of the data for timezone<id>
-        * unused - 4 bytes that used to be raw GMT offset, but now is always 0 since tzdata2014f (L).
-        *
-        * This is needed in order to read Android v4.3 tzdata files.
-        *
-        * Android 10+ moved the up-to-date tzdata location to a module updatable via the Google Play Store and the
-        * database location changed (https://source.android.com/devices/architecture/modular-system/runtime#time-zone-data-interactions)
-        * The older locations still exist (at least the `/system/usr/share/zoneinfo` one) but they won't be updated.
-        */
+/*
+* Android v4.3 Timezone support infrastructure.
+*
+* Android tzdata files are found in the format of
+* Header <Beginning of Entry Index> Entry Entry Entry ... Entry <Beginning of Data Index> <TZDATA>
+*
+* https://github.com/aosp-mirror/platform_bionic/blob/master/libc/tzcode/bionic.cpp
+*
+* The header (24 bytes) contains the following information
+* signature - 12 bytes of the form "tzdata2012f\0" where 2012f is subject to change
+* index offset - 4 bytes that denotes the offset at which the index of the tzdata file starts
+* data offset - 4 bytes that denotes the offset at which the data of the tzdata file starts
+* final offset - 4 bytes that used to denote the final offset, which we don't use but will note.
+*
+* Each Data Entry (52 bytes) can be used to generate a TimeZoneInfo and contain the following
+information
+* id - 40 bytes that contain the id of the time zone data entry timezone<id>
+* byte offset - 4 bytes that denote the offset from the data offset timezone<id> data can be found
+* length - 4 bytes that denote the length of the data for timezone<id>
+* unused - 4 bytes that used to be raw GMT offset, but now is always 0 since tzdata2014f (L).
+*
+* This is needed in order to read Android v4.3 tzdata files.
+*
+* Android 10+ moved the up-to-date tzdata location to a module updatable via the Google Play Store
+and the
+* database location changed
+(https://source.android.com/devices/architecture/modular-system/runtime#time-zone-data-interactions)
+* The older locations still exist (at least the `/system/usr/share/zoneinfo` one) but they won't be
+updated.
+*/
         private sealed class AndroidTzData
         {
             private string[] _ids;
@@ -248,7 +252,8 @@ namespace System
             {
                 // On Android, time zone data is found in tzdata
                 // Based on https://github.com/mono/mono/blob/main/mcs/class/corlib/System/TimeZoneInfo.Android.cs
-                // Also follows the locations found at the bottom of https://github.com/aosp-mirror/platform_bionic/blob/master/libc/tzcode/bionic.cpp
+                // Also follows the locations found at the bottom of
+                // https://github.com/aosp-mirror/platform_bionic/blob/master/libc/tzcode/bionic.cpp
                 string[] tzFileDirList = new string[]
                 {
                     GetApexTimeDataRoot() + "/etc/tz/", // Android 10+, TimeData module where the updates land
@@ -383,7 +388,8 @@ namespace System
                 out int dataOffset
             )
             {
-                // tzdata files are expected to start with the form of "tzdata2012f\0" depending on the year of the tzdata used which is 2012 in this example
+                // tzdata files are expected to start with the form of "tzdata2012f\0" depending on the year of the
+                // tzdata used which is 2012 in this example
                 // since we're not differentiating on year, check for tzdata and the ending \0
                 var tz = (ushort)TZif_ToInt16(buffer.Slice(0, 2));
                 var data = (uint)TZif_ToInt32(buffer.Slice(2, 4));

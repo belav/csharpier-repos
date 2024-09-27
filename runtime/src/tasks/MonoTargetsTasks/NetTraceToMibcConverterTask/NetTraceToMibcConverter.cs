@@ -21,7 +21,8 @@ using Microsoft.Build.Utilities;
 public class NetTraceToMibcConverter : ToolTask
 {
     /// <summary>
-    /// List of all assemblies referenced in a .nettrace file. Important when you run traces against an executable on a different machine / device
+    /// List of all assemblies referenced in a .nettrace file. Important when you run traces against an
+    // executable on a different machine / device
     /// </summary>
     [Required]
     public ITaskItem[] Assemblies { get; set; } = Array.Empty<ITaskItem>();

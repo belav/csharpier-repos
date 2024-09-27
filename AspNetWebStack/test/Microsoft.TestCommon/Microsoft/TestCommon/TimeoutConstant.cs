@@ -1,10 +1,12 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 namespace Microsoft.TestCommon
 {
     /// <summary>
-    /// MSTest timeout constants for use with the <see cref="Microsoft.VisualStudio.TestTools.UnitTesting.TimeoutAttribute"/>.
+    /// MSTest timeout constants for use with the <see
+    // cref="Microsoft.VisualStudio.TestTools.UnitTesting.TimeoutAttribute"/>.
     /// </summary>
     public class TimeoutConstant
     {

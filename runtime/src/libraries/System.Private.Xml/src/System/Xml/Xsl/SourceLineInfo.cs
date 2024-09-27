@@ -72,7 +72,8 @@ namespace System.Xml.Xsl
         }
 
         /// <summary>
-        /// Magic number 0xfeefee is used in PDB to denote a section of IL that does not map to any user code.
+        /// Magic number 0xfeefee is used in PDB to denote a section of IL that does not map to any user
+        // code.
         /// When VS debugger steps into IL marked with 0xfeefee, it will continue the step until it reaches
         /// some user code.
         /// </summary>

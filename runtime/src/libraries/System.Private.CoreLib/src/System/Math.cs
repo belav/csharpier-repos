@@ -1,8 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+//
+//
+//
 // ===================================================================================================
-// Portions of the code implemented below are based on the 'Berkeley SoftFloat Release 3e' algorithms.
+// Portions of the code implemented below are based on the 'Berkeley SoftFloat Release 3e'
+// algorithms.
+//
+//
+//
 // ===================================================================================================
 
 using System.Diagnostics;
@@ -17,7 +24,8 @@ using System.Runtime.Versioning;
 namespace System
 {
     /// <summary>
-    /// Provides constants and static methods for trigonometric, logarithmic, and other common mathematical functions.
+    /// Provides constants and static methods for trigonometric, logarithmic, and other common
+    // mathematical functions.
     /// </summary>
     public static partial class Math
     {
@@ -88,8 +96,10 @@ namespace System
         }
 
         /// <summary>Returns the absolute value of a native signed integer.</summary>
-        /// <param name="value">A number that is greater than <see cref="IntPtr.MinValue" />, but less than or equal to <see cref="IntPtr.MaxValue" />.</param>
-        /// <returns>A native signed integer, x, such that 0 \u2264 x \u2264 <see cref="IntPtr.MaxValue" />.</returns>
+        /// <param name="value">A number that is greater than <see cref="IntPtr.MinValue" />, but less than
+        // or equal to <see cref="IntPtr.MaxValue" />.</param>
+        /// <returns>A native signed integer, x, such that 0 \u2264 x \u2264 <see cref="IntPtr.MaxValue"
+        // />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static nint Abs(nint value)
         {
@@ -591,12 +601,14 @@ namespace System
             return value;
         }
 
-        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="min" /> and <paramref name="max" />.</summary>
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref
+        // name="min" /> and <paramref name="max" />.</summary>
         /// <param name="value">The value to be clamped.</param>
         /// <param name="min">The lower bound of the result.</param>
         /// <param name="max">The upper bound of the result.</param>
         /// <returns>
-        ///   <paramref name="value" /> if <paramref name="min" /> \u2264 <paramref name="value" /> \u2264 <paramref name="max" />.
+        ///   <paramref name="value" /> if <paramref name="min" /> \u2264 <paramref name="value" /> \u2264
+        // <paramref name="max" />.
         ///
         ///   -or-
         ///
@@ -730,12 +742,14 @@ namespace System
             return value;
         }
 
-        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="min" /> and <paramref name="max" />.</summary>
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref
+        // name="min" /> and <paramref name="max" />.</summary>
         /// <param name="value">The value to be clamped.</param>
         /// <param name="min">The lower bound of the result.</param>
         /// <param name="max">The upper bound of the result.</param>
         /// <returns>
-        ///   <paramref name="value" /> if <paramref name="min" /> \u2264 <paramref name="value" /> \u2264 <paramref name="max" />.
+        ///   <paramref name="value" /> if <paramref name="min" /> \u2264 <paramref name="value" /> \u2264
+        // <paramref name="max" />.
         ///
         ///   -or-
         ///
@@ -937,7 +951,8 @@ namespace System
         /// <summary>Returns the larger of two native signed integers.</summary>
         /// <param name="val1">The first of two native signed integers to compare.</param>
         /// <param name="val2">The second of two native signed integers to compare.</param>
-        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is larger.</returns>
+        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is
+        // larger.</returns>
         [NonVersionable]
         public static nint Max(nint val1, nint val2)
         {
@@ -998,7 +1013,8 @@ namespace System
         /// <summary>Returns the larger of two native unsigned integers.</summary>
         /// <param name="val1">The first of two native unsigned integers to compare.</param>
         /// <param name="val2">The second of two native unsigned integers to compare.</param>
-        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is larger.</returns>
+        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is
+        // larger.</returns>
         [CLSCompliant(false)]
         [NonVersionable]
         public static nuint Max(nuint val1, nuint val2)
@@ -1087,7 +1103,8 @@ namespace System
         /// <summary>Returns the smaller of two native signed integers.</summary>
         /// <param name="val1">The first of two native signed integers to compare.</param>
         /// <param name="val2">The second of two native signed integers to compare.</param>
-        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is smaller.</returns>
+        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is
+        // smaller.</returns>
         [NonVersionable]
         public static nint Min(nint val1, nint val2)
         {
@@ -1148,7 +1165,8 @@ namespace System
         /// <summary>Returns the smaller of two native unsigned integers.</summary>
         /// <param name="val1">The first of two native unsigned integers to compare.</param>
         /// <param name="val2">The second of two native unsigned integers to compare.</param>
-        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is smaller.</returns>
+        /// <returns>Parameter <paramref name="val1" /> or <paramref name="val2" />, whichever is
+        // smaller.</returns>
         [CLSCompliant(false)]
         [NonVersionable]
         public static nuint Min(nuint val1, nuint val2)
@@ -1185,7 +1203,8 @@ namespace System
         /// <param name="d">The number whose reciprocal is to be estimated.</param>
         /// <returns>An estimate of the reciprocal of <paramref name="d" />.</returns>
         /// <remarks>
-        ///    <para>On ARM64 hardware this may use the <c>FRECPE</c> instruction which performs a single Newton-Raphson iteration.</para>
+        ///    <para>On ARM64 hardware this may use the <c>FRECPE</c> instruction which performs a single
+        // Newton-Raphson iteration.</para>
         ///    <para>On hardware without specialized support, this may just return <c>1.0 / d</c>.</para>
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1207,8 +1226,10 @@ namespace System
         /// <param name="d">The number whose reciprocal square root is to be estimated.</param>
         /// <returns>An estimate of the reciprocal square root <paramref name="d" />.</returns>
         /// <remarks>
-        ///    <para>On ARM64 hardware this may use the <c>FRSQRTE</c> instruction which performs a single Newton-Raphson iteration.</para>
-        ///    <para>On hardware without specialized support, this may just return <c>1.0 / Sqrt(d)</c>.</para>
+        ///    <para>On ARM64 hardware this may use the <c>FRSQRTE</c> instruction which performs a single
+        // Newton-Raphson iteration.</para>
+        ///    <para>On hardware without specialized support, this may just return <c>1.0 /
+        // Sqrt(d)</c>.</para>
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double ReciprocalSqrtEstimate(double d)

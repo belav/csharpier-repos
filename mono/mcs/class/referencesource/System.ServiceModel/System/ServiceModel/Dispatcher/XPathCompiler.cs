@@ -568,8 +568,10 @@ namespace System.ServiceModel.Dispatcher
                     literal = -literal;
                 }
 
-                // To maximize code branch commonality, we canonacalize the relation expressions so that the non-literal
-                // is always to the left and the literal to the right. If this makes us swap expressions, we must also flip
+                // To maximize code branch commonality, we canonacalize the relation expressions so that the
+                // non-literal
+                // is always to the left and the literal to the right. If this makes us swap expressions, we must
+                // also flip
                 // relation operators appropriately.
                 if (leftNumber)
                 {

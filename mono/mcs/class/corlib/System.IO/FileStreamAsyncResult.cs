@@ -36,7 +36,7 @@ namespace System.IO
 {
     class FileStreamAsyncResult : IAsyncResult
     {
-        /* Same structure in the runtime */
+/* Same structure in the runtime */
         object state;
         bool completed;
         bool done;

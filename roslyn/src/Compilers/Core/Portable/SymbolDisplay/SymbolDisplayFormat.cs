@@ -117,10 +117,12 @@ namespace Microsoft.CodeAnalysis
             );
 
         /// <summary>
-        /// Formats the names of all types and namespaces in a fully qualified style (including the global alias).
+        /// Formats the names of all types and namespaces in a fully qualified style (including the global
+        // alias).
         /// </summary>
         /// <remarks>
-        /// The current behavior will not output the fully qualified style as expected for member symbols (such as properties) because memberOptions is not set.
+        /// The current behavior will not output the fully qualified style as expected for member symbols
+        // (such as properties) because memberOptions is not set.
         /// For example, MyNamespace.MyClass.MyPublicProperty will return as MyPublicProperty.
         /// The current behavior displayed here will be maintained for backwards compatibility.
         /// </remarks>
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis
             );
 
         /// <summary>
-        /// this.QualifiedNameArity = containingSymbol.QualifiedNameArity + "." + this.Name + "`" + this.Arity
+        /// this.QualifiedNameArity = containingSymbol.QualifiedNameArity + "." + this.Name + "`" +
+        // this.Arity
         /// </summary>
         internal static readonly SymbolDisplayFormat QualifiedNameArityFormat =
             new SymbolDisplayFormat(
@@ -273,7 +276,8 @@ namespace Microsoft.CodeAnalysis
         public SymbolDisplayGlobalNamespaceStyle GlobalNamespaceStyle { get; }
 
         /// <summary>
-        /// Determines how types are qualified (e.g. Nested vs Containing.Nested vs Namespace.Containing.Nested).
+        /// Determines how types are qualified (e.g. Nested vs Containing.Nested vs
+        // Namespace.Containing.Nested).
         /// </summary>
         public SymbolDisplayTypeQualificationStyle TypeQualificationStyle { get; }
 
@@ -329,16 +333,19 @@ namespace Microsoft.CodeAnalysis
         internal SymbolDisplayCompilerInternalOptions CompilerInternalOptions { get; }
 
         /// <summary>
-        /// Constructs a new instance of <see cref="SymbolDisplayFormat"/> accepting a variety of optional parameters.
+        /// Constructs a new instance of <see cref="SymbolDisplayFormat"/> accepting a variety of optional
+        // parameters.
         /// </summary>
         /// <param name="globalNamespaceStyle">
         /// The settings that determine how the global namespace is displayed.
         /// </param>
         /// <param name="typeQualificationStyle">
-        /// The settings that determine how types are qualified (e.g. Nested vs Containing.Nested vs Namespace.Containing.Nested).
+        /// The settings that determine how types are qualified (e.g. Nested vs Containing.Nested vs
+        // Namespace.Containing.Nested).
         /// </param>
         /// <param name="genericsOptions">
-        /// The settings that determine how generics (on types and methods) should be described (i.e. the level of detail).
+        /// The settings that determine how generics (on types and methods) should be described (i.e. the
+        // level of detail).
         /// </param>
         /// <param name="memberOptions">
         /// The settings that determine how fields, properties, events, and methods are displayed.
@@ -350,7 +357,8 @@ namespace Microsoft.CodeAnalysis
         /// The settings that determine how extension methods are displayed.
         /// </param>
         /// <param name="parameterOptions">
-        /// The settings that determine how parameters (of methods, properties/indexers, and delegates) are displayed.
+        /// The settings that determine how parameters (of methods, properties/indexers, and delegates) are
+        // displayed.
         /// </param>
         /// <param name="propertyStyle">
         /// The settings that determine how properties are displayed.
@@ -434,12 +442,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see cref="SymbolDisplayMiscellaneousOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see
+        // cref="SymbolDisplayMiscellaneousOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object representing how miscellaneous symbols will be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see
+        // cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
         public SymbolDisplayFormat WithMiscellaneousOptions(
             SymbolDisplayMiscellaneousOptions options
         )
@@ -461,12 +471,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see cref="SymbolDisplayMiscellaneousOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see
+        // cref="SymbolDisplayMiscellaneousOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying additional parameters for how miscellaneous symbols will be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with an additional set of <see cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with an additional set of <see
+        // cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
         public SymbolDisplayFormat AddMiscellaneousOptions(
             SymbolDisplayMiscellaneousOptions options
         )
@@ -475,12 +487,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat without the specified <see cref="SymbolDisplayMiscellaneousOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat without the specified <see
+        // cref="SymbolDisplayMiscellaneousOptions"/>.
         /// </summary>
         /// <param name="options">
-        /// An object specifying which parameters should not be applied to how miscellaneous symbols will be formatted.
+        /// An object specifying which parameters should not be applied to how miscellaneous symbols will be
+        // formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, without the specified <see cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, without the specified <see
+        // cref="SymbolDisplayMiscellaneousOptions"/>.</returns>
         public SymbolDisplayFormat RemoveMiscellaneousOptions(
             SymbolDisplayMiscellaneousOptions options
         )
@@ -489,12 +504,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see cref="SymbolDisplayGenericsOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see
+        // cref="SymbolDisplayGenericsOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying how generic symbols will be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see cref="SymbolDisplayGenericsOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see
+        // cref="SymbolDisplayGenericsOptions"/>.</returns>
         public SymbolDisplayFormat WithGenericsOptions(SymbolDisplayGenericsOptions options)
         {
             return new SymbolDisplayFormat(
@@ -514,25 +531,30 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see cref="SymbolDisplayGenericsOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see
+        // cref="SymbolDisplayGenericsOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying additional parameters for how generic symbols will be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with an additional set of <see cref="SymbolDisplayGenericsOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with an additional set of <see
+        // cref="SymbolDisplayGenericsOptions"/>.</returns>
         public SymbolDisplayFormat AddGenericsOptions(SymbolDisplayGenericsOptions options)
         {
             return this.WithGenericsOptions(this.GenericsOptions | options);
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with a set of <see cref="SymbolDisplayGenericsOptions"/> stripped away from the original object.
+        /// Creates a copy of the SymbolDisplayFormat but with a set of <see
+        // cref="SymbolDisplayGenericsOptions"/> stripped away from the original object.
         /// </summary>
         /// <param name="options">
-        /// An object specifying which parameters should not be applied to how generic symbols will be formatted.
+        /// An object specifying which parameters should not be applied to how generic symbols will be
+        // formatted.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayGenericsOptions"/> stripped away from the original object.
+        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayGenericsOptions"/>
+        // stripped away from the original object.
         /// </returns>
         public SymbolDisplayFormat RemoveGenericsOptions(SymbolDisplayGenericsOptions options)
         {
@@ -540,12 +562,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see cref="SymbolDisplayMemberOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see
+        // cref="SymbolDisplayMemberOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying how members will be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see cref="SymbolDisplayMemberOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see
+        // cref="SymbolDisplayMemberOptions"/>.</returns>
         public SymbolDisplayFormat WithMemberOptions(SymbolDisplayMemberOptions options)
         {
             return new SymbolDisplayFormat(
@@ -565,13 +589,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see cref="SymbolDisplayMemberOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see
+        // cref="SymbolDisplayMemberOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying additional parameters for how members will be formatted.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see cref="SymbolDisplayMemberOptions"/>.
+        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see
+        // cref="SymbolDisplayMemberOptions"/>.
         /// </returns>
         public SymbolDisplayFormat AddMemberOptions(SymbolDisplayMemberOptions options)
         {
@@ -579,13 +605,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with a set of <see cref="SymbolDisplayMemberOptions"/> stripped away from the original object.
+        /// Creates a copy of the SymbolDisplayFormat but with a set of <see
+        // cref="SymbolDisplayMemberOptions"/> stripped away from the original object.
         /// </summary>
         /// <param name="options">
         /// An object specifying which parameters should not be applied to how members will be formatted.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayMemberOptions"/> stripped away from the original object.
+        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayMemberOptions"/>
+        // stripped away from the original object.
         /// </returns>
         public SymbolDisplayFormat RemoveMemberOptions(SymbolDisplayMemberOptions options)
         {
@@ -593,13 +621,16 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see cref="SymbolDisplayKindOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see
+        // cref="SymbolDisplayKindOptions"/>.
         /// </summary>
         /// <param name="options">
-        /// An object specifying parameters with which symbols belonging to kind keywords should be formatted.
+        /// An object specifying parameters with which symbols belonging to kind keywords should be
+        // formatted.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with a replaced set of <see cref="SymbolDisplayKindOptions"/>.
+        /// A duplicate of the SymbolDisplayFormat, with a replaced set of <see
+        // cref="SymbolDisplayKindOptions"/>.
         /// </returns>
         public SymbolDisplayFormat WithKindOptions(SymbolDisplayKindOptions options)
         {
@@ -620,13 +651,16 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see cref="SymbolDisplayKindOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see
+        // cref="SymbolDisplayKindOptions"/>.
         /// </summary>
         /// <param name="options">
-        /// An object specifying additional parameters with which symbols belonging to kind keywords should be formatted.
+        /// An object specifying additional parameters with which symbols belonging to kind keywords should
+        // be formatted.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see cref="SymbolDisplayKindOptions"/>.
+        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see
+        // cref="SymbolDisplayKindOptions"/>.
         /// </returns>
         public SymbolDisplayFormat AddKindOptions(SymbolDisplayKindOptions options)
         {
@@ -634,13 +668,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with a set of <see cref="SymbolDisplayKindOptions"/> stripped away from the original object.
+        /// Creates a copy of the SymbolDisplayFormat but with a set of <see
+        // cref="SymbolDisplayKindOptions"/> stripped away from the original object.
         /// </summary>
         /// <param name="options">
         /// The settings that determine other characteristics of how symbols are displayed.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayKindOptions"/> stripped away from the original object.
+        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayKindOptions"/>
+        // stripped away from the original object.
         /// </returns>
         public SymbolDisplayFormat RemoveKindOptions(SymbolDisplayKindOptions options)
         {
@@ -648,12 +684,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see cref="SymbolDisplayParameterOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see
+        // cref="SymbolDisplayParameterOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying how parameters should be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see cref="SymbolDisplayParameterOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see
+        // cref="SymbolDisplayParameterOptions"/>.</returns>
         public SymbolDisplayFormat WithParameterOptions(SymbolDisplayParameterOptions options)
         {
             return new SymbolDisplayFormat(
@@ -673,13 +711,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see cref="SymbolDisplayParameterOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see
+        // cref="SymbolDisplayParameterOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying additional parameters on how parameters should be formatted.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see cref="SymbolDisplayParameterOptions"/>.
+        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see
+        // cref="SymbolDisplayParameterOptions"/>.
         /// </returns>
         public SymbolDisplayFormat AddParameterOptions(SymbolDisplayParameterOptions options)
         {
@@ -687,13 +727,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with a set of <see cref="SymbolDisplayParameterOptions"/> stripped away from the original object.
+        /// Creates a copy of the SymbolDisplayFormat but with a set of <see
+        // cref="SymbolDisplayParameterOptions"/> stripped away from the original object.
         /// </summary>
         /// <param name="options">
         /// An object specifying parameters that should not be applied when formatting parameters.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayParameterOptions"/> stripped away from the original object.
+        /// A duplicate of the SymbolDisplayFormat, with a set of <see
+        // cref="SymbolDisplayParameterOptions"/> stripped away from the original object.
         /// </returns>
         public SymbolDisplayFormat RemoveParameterOptions(SymbolDisplayParameterOptions options)
         {
@@ -701,12 +743,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced <see cref="SymbolDisplayGlobalNamespaceStyle"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced <see
+        // cref="SymbolDisplayGlobalNamespaceStyle"/>.
         /// </summary>
         /// <param name="style">
         /// An object specifying parameters on how namespace symbols should be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see cref="SymbolDisplayGlobalNamespaceStyle"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see
+        // cref="SymbolDisplayGlobalNamespaceStyle"/>.</returns>
         public SymbolDisplayFormat WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle style)
         {
             return new SymbolDisplayFormat(
@@ -726,12 +770,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see cref="SymbolDisplayLocalOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see
+        // cref="SymbolDisplayLocalOptions"/>.
         /// </summary>
         /// <param name="options">
         /// An object specifying parameters on how symbols belonging to locals should be formatted.
         /// </param>
-        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see cref="SymbolDisplayLocalOptions"/>.</returns>
+        /// <returns>A duplicate of the SymbolDisplayFormat, with a replaced set of <see
+        // cref="SymbolDisplayLocalOptions"/>.</returns>
         public SymbolDisplayFormat WithLocalOptions(SymbolDisplayLocalOptions options)
         {
             return new SymbolDisplayFormat(
@@ -751,13 +797,16 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see cref="SymbolDisplayLocalOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with an additional set of <see
+        // cref="SymbolDisplayLocalOptions"/>.
         /// </summary>
         /// <param name="options">
-        /// An object specifying additional parameters on how symbols belonging to locals should be formatted.
+        /// An object specifying additional parameters on how symbols belonging to locals should be
+        // formatted.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see cref="SymbolDisplayLocalOptions"/>.
+        /// A duplicate of the SymbolDisplayFormat, with an additional set of <see
+        // cref="SymbolDisplayLocalOptions"/>.
         /// </returns>
         public SymbolDisplayFormat AddLocalOptions(SymbolDisplayLocalOptions options)
         {
@@ -765,13 +814,16 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with a set of <see cref="SymbolDisplayLocalOptions"/> stripped away from the original object.
+        /// Creates a copy of the SymbolDisplayFormat but with a set of <see
+        // cref="SymbolDisplayLocalOptions"/> stripped away from the original object.
         /// </summary>
         /// <param name="options">
-        /// An object specifying parameters that should not be applied when formatting symbols belonging to locals.
+        /// An object specifying parameters that should not be applied when formatting symbols belonging to
+        // locals.
         /// </param>
         /// <returns>
-        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayLocalOptions"/> stripped away from the original object.
+        /// A duplicate of the SymbolDisplayFormat, with a set of <see cref="SymbolDisplayLocalOptions"/>
+        // stripped away from the original object.
         /// </returns>
         public SymbolDisplayFormat RemoveLocalOptions(SymbolDisplayLocalOptions options)
         {
@@ -779,21 +831,24 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with added set of <see cref="SymbolDisplayCompilerInternalOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with added set of <see
+        // cref="SymbolDisplayCompilerInternalOptions"/>.
         /// </summary>
         internal SymbolDisplayFormat AddCompilerInternalOptions(
             SymbolDisplayCompilerInternalOptions options
         ) => WithCompilerInternalOptions(this.CompilerInternalOptions | options);
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with a set of <see cref="SymbolDisplayCompilerInternalOptions"/> stripped away from the original object.
+        /// Creates a copy of the SymbolDisplayFormat but with a set of <see
+        // cref="SymbolDisplayCompilerInternalOptions"/> stripped away from the original object.
         /// </summary>
         internal SymbolDisplayFormat RemoveCompilerInternalOptions(
             SymbolDisplayCompilerInternalOptions options
         ) => WithCompilerInternalOptions(this.CompilerInternalOptions & ~options);
 
         /// <summary>
-        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see cref="SymbolDisplayCompilerInternalOptions"/>.
+        /// Creates a copy of the SymbolDisplayFormat but with replaced set of <see
+        // cref="SymbolDisplayCompilerInternalOptions"/>.
         /// </summary>
         internal SymbolDisplayFormat WithCompilerInternalOptions(
             SymbolDisplayCompilerInternalOptions options

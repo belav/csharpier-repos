@@ -149,7 +149,8 @@ namespace System.Composition.Convention
         /// Select which of the available constructors will be used to instantiate the part.
         /// </summary>
         /// <param name="constructorSelector">Filter that selects a single constructor.</param>
-        /// <param name="importConfiguration">Action configuring the parameters of the selected constructor.</param>
+        /// <param name="importConfiguration">Action configuring the parameters of the selected
+        // constructor.</param>
         /// <returns>A part builder allowing further configuration of the part.</returns>
         public PartConventionBuilder SelectConstructor(
             Func<IEnumerable<ConstructorInfo>, ConstructorInfo> constructorSelector,
@@ -492,7 +493,8 @@ namespace System.Composition.Convention
         /// Add the specified metadata to the part.
         /// </summary>
         /// <param name="name">The metadata name.</param>
-        /// <param name="getValueFromPartType">A function mapping the part type to the metadata value.</param>
+        /// <param name="getValueFromPartType">A function mapping the part type to the metadata
+        // value.</param>
         /// <returns>A part builder allowing further configuration of the part.</returns>
         public PartConventionBuilder AddPartMetadata(
             string name,
@@ -532,7 +534,8 @@ namespace System.Composition.Convention
                 else
                 {
                     Type attrType = attr.GetType();
-                    // Perf optimization, relies on short circuit evaluation, often a property attribute is an ExportAttribute
+                    // Perf optimization, relies on short circuit evaluation, often a property attribute is an
+                    // ExportAttribute
                     if (
                         attrType != s_exportAttributeType
                         && attrType
@@ -695,10 +698,12 @@ namespace System.Composition.Convention
                     | BindingFlags.DeclaredOnly
             );
 
-            // First see if any of these constructors have the ImportingConstructorAttribute if so then we are already done
+            // First see if any of these constructors have the ImportingConstructorAttribute if so then we are
+            // already done
             foreach (ConstructorInfo ci in constructors)
             {
-                // We have a constructor configuration we must log a warning then not bother with ConstructorAttributes
+                // We have a constructor configuration we must log a warning then not bother with
+                // ConstructorAttributes
                 Attribute[] attributes = Attribute.GetCustomAttributes(
                     ci,
                     typeof(ImportingConstructorAttribute),
@@ -853,7 +858,8 @@ namespace System.Composition.Convention
                                     else
                                     {
                                         // We really only need to create this list once and then cache it, it never goes back to null
-                                        // Its perfectly okay if we make a list a few times on different threads, effectively though once we have
+                                        // Its perfectly okay if we make a list a few times on different threads, effectively though once we
+                                        // have
                                         // cached one we will never make another.
                                         if (s_onImportsSatisfiedAttributeList == null)
                                         {

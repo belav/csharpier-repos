@@ -3,15 +3,15 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    _SspiSessionCache.cs
+_SspiSessionCache.cs
 
 Abstract:
-    The file implements trivial SSPI credential caching mechanism based on lru list
+The file implements trivial SSPI credential caching mechanism based on lru list
 
 
 Author:
 
-    Alexei Vopilov    20-Oct-2004
+Alexei Vopilov    20-Oct-2004
 
 Revision History:
 
@@ -24,7 +24,8 @@ namespace System.Net.Security
     using System.Threading;
 
     //
-    // Implements delayed SSPI handle release, like a finalizable object though the handles are kept alive until being pushed out
+    // Implements delayed SSPI handle release, like a finalizable object though the handles are kept
+    // alive until being pushed out
     // by the newly incoming ones.
     //
     internal static class SSPIHandleCache

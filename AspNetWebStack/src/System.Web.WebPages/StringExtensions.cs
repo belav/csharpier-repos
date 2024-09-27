@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -39,7 +40,8 @@ namespace System.Web.WebPages
 
         public static decimal AsDecimal(this string value)
         {
-            // Decimal.TryParse does not work consistently for some locales. For instance for lt-LT, it accepts but ignores decimal values so "12.12" is parsed as 1212.
+            // Decimal.TryParse does not work consistently for some locales. For instance for lt-LT, it accepts
+            // but ignores decimal values so "12.12" is parsed as 1212.
             return As<Decimal>(value);
         }
 
@@ -133,7 +135,8 @@ namespace System.Web.WebPages
             }
             catch
             {
-                // eat all exceptions and return the defaultValue, assumption is that its always a parse/format exception
+                // eat all exceptions and return the defaultValue, assumption is that its always a parse/format
+                // exception
             }
             return defaultValue;
         }
@@ -164,7 +167,8 @@ namespace System.Web.WebPages
 
         public static bool IsDecimal(this string value)
         {
-            // For some reason, Decimal.TryParse incorrectly parses floating point values as decimal value for some cultures.
+            // For some reason, Decimal.TryParse incorrectly parses floating point values as decimal value for
+            // some cultures.
             // For example, 12.5 is parsed as 125 in lt-LT.
             return Is<Decimal>(value);
         }

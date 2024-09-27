@@ -230,18 +230,18 @@ namespace MonoTests.System.Data
             ds.AcceptChanges();
             DataRowComparer<DataRow> c = DataRowComparer.Default;
             Assert.IsTrue(c.GetHashCode(r1) == c.GetHashCode(r2), "#1");
-            /*
-            // LAMESPEC: .NET fails here
-            r2 ["col2"] = "baz";
-            r2.AcceptChanges ();
-            Assert.IsFalse (c.GetHashCode (r1) == c.GetHashCode (r2), "#2");
-            ds.AcceptChanges (); // now r2 original value is "baz"
-            r2 ["col2"] = "bar";
-            Assert.IsFalse (c.GetHashCode (r1) == c.GetHashCode (r2), "#3");
-            // LAMESPEC: .NET fails here
-            DataRow r3 = dt.Rows.Add (new object [] {"foo", "baz"});
-            Assert.IsFalse (c.GetHashCode (r1) == c.GetHashCode (r3), "#4");
-            */
+/*
+// LAMESPEC: .NET fails here
+r2 ["col2"] = "baz";
+r2.AcceptChanges ();
+Assert.IsFalse (c.GetHashCode (r1) == c.GetHashCode (r2), "#2");
+ds.AcceptChanges (); // now r2 original value is "baz"
+r2 ["col2"] = "bar";
+Assert.IsFalse (c.GetHashCode (r1) == c.GetHashCode (r2), "#3");
+// LAMESPEC: .NET fails here
+DataRow r3 = dt.Rows.Add (new object [] {"foo", "baz"});
+Assert.IsFalse (c.GetHashCode (r1) == c.GetHashCode (r3), "#4");
+*/
         }
 
         [Test]

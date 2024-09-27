@@ -27,7 +27,8 @@ namespace System.Collections.Immutable
             private readonly Comparers _comparers;
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="ImmutableDictionary{TKey, TValue}.MutationInput"/> struct.
+            /// Initializes a new instance of the <see cref="ImmutableDictionary{TKey, TValue}.MutationInput"/>
+            // struct.
             /// </summary>
             /// <param name="root">The root.</param>
             /// <param name="comparers">The comparers.</param>
@@ -39,7 +40,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="ImmutableDictionary{TKey, TValue}.MutationInput"/> struct.
+            /// Initializes a new instance of the <see cref="ImmutableDictionary{TKey, TValue}.MutationInput"/>
+            // struct.
             /// </summary>
             /// <param name="map">The map.</param>
             internal MutationInput(ImmutableDictionary<TKey, TValue> map)

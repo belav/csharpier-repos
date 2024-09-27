@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace System.Net.Http
 {
     // **Note** on `Task.ConfigureAwait(continueOnCapturedContext: true)` for the WebAssembly Browser.
-    // the JavaScript objects have thread affinity, it is necessary that the continuations run the same thread as the start of the async method.
+    // the JavaScript objects have thread affinity, it is necessary that the continuations run the same
+    // thread as the start of the async method.
     internal sealed class BrowserHttpHandler : HttpMessageHandler
     {
         private static readonly HttpRequestOptionsKey<bool> EnableStreamingRequest =
@@ -398,7 +399,8 @@ namespace System.Net.Http
                     ? new StreamContent(new WasmHttpReadStream(fetchResponse))
                     : new BrowserHttpContent(fetchResponse);
 
-                // Some of the headers may not even be valid header types in .NET thus we use TryAddWithoutValidation
+                // Some of the headers may not even be valid header types in .NET thus we use
+                // TryAddWithoutValidation
                 // CORS will only allow access to certain headers on browser.
                 BrowserHttpInterop.GetResponseHeaders(
                     fetchResponse.FetchResponse,

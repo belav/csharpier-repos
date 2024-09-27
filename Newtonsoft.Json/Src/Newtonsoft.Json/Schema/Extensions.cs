@@ -37,7 +37,9 @@ namespace Newtonsoft.Json.Schema
     /// Contains the JSON schema extension methods.
     /// </para>
     /// <note type="caution">
-    /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+    /// JSON Schema validation has been moved to its own package. See <see
+    // href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more
+    // details.
     /// </note>
     /// </summary>
     [Obsolete(
@@ -50,7 +52,9 @@ namespace Newtonsoft.Json.Schema
         /// Determines whether the <see cref="JToken"/> is valid.
         /// </para>
         /// <note type="caution">
-        /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+        /// JSON Schema validation has been moved to its own package. See <see
+        // href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more
+        // details.
         /// </note>
         /// </summary>
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
@@ -79,12 +83,15 @@ namespace Newtonsoft.Json.Schema
         /// Determines whether the <see cref="JToken"/> is valid.
         /// </para>
         /// <note type="caution">
-        /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+        /// JSON Schema validation has been moved to its own package. See <see
+        // href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more
+        // details.
         /// </note>
         /// </summary>
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
         /// <param name="schema">The schema to test with.</param>
-        /// <param name="errorMessages">When this method returns, contains any error messages generated while validating. </param>
+        /// <param name="errorMessages">When this method returns, contains any error messages generated
+        // while validating. </param>
         /// <returns>
         /// 	<c>true</c> if the specified <see cref="JToken"/> is valid; otherwise, <c>false</c>.
         /// </returns>
@@ -110,7 +117,9 @@ namespace Newtonsoft.Json.Schema
         /// Validates the specified <see cref="JToken"/>.
         /// </para>
         /// <note type="caution">
-        /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+        /// JSON Schema validation has been moved to its own package. See <see
+        // href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more
+        // details.
         /// </note>
         /// </summary>
         /// <param name="source">The source <see cref="JToken"/> to test.</param>
@@ -128,7 +137,9 @@ namespace Newtonsoft.Json.Schema
         /// Validates the specified <see cref="JToken"/>.
         /// </para>
         /// <note type="caution">
-        /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+        /// JSON Schema validation has been moved to its own package. See <see
+        // href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more
+        // details.
         /// </note>
         /// </summary>
         /// <param name="source">The source <see cref="JToken"/> to test.</param>

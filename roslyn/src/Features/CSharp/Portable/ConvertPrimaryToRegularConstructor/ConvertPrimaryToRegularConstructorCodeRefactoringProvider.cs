@@ -52,8 +52,10 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         if (typeDeclaration?.ParameterList is null)
             return;
 
-        // Converting a record to a non-primary-constructor form is a lot more work (for example, having to synthesize a
-        // Deconstruct method, and figure out how to specify properties, etc.).  We can consider adding support for that
+        // Converting a record to a non-primary-constructor form is a lot more work (for example, having to
+        // synthesize a
+        // Deconstruct method, and figure out how to specify properties, etc.).  We can consider adding
+        // support for that
         // scenario later if desired.
         if (typeDeclaration is RecordDeclarationSyntax)
             return;
@@ -122,8 +124,10 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
         );
 
-        // We may have to update multiple files (in the case of a partial type).  Use a solution-editor to make that
-        // simple.  We will insert the regular constructor into the partial part containing the primary constructor.
+        // We may have to update multiple files (in the case of a partial type).  Use a solution-editor to
+        // make that
+        // simple.  We will insert the regular constructor into the partial part containing the primary
+        // constructor.
         var solution = document.Project.Solution;
         var solutionEditor = new SolutionEditor(solution);
         var mainDocumentEditor = await solutionEditor
@@ -138,14 +142,16 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             list.Target?.Identifier.ValueText == "method"
         );
 
-        // Find the references to all the parameters.  This will help us determine how they're used and what change we
+        // Find the references to all the parameters.  This will help us determine how they're used and what
+        // change we
         // may need to make.
         var parameterReferences = await GetParameterReferencesAsync().ConfigureAwait(false);
 
         // Determine the fields we'll need to synthesize for each parameter.
         var parameterToSynthesizedFields = CreateSynthesizedFields();
 
-        // Find any field/properties whose initializer references a primary constructor parameter.  These initializers
+        // Find any field/properties whose initializer references a primary constructor parameter.  These
+        // initializers
         // will have to move inside the constructor we generate.
         var initializedFieldsAndProperties = await GetExistingAssignedFieldsOrPropertiesAsync()
             .ConfigureAwait(false);
@@ -167,7 +173,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
 
         async ValueTask<SemanticModel> GetSemanticModelAsync(Document document)
         {
-            // Ensure that if we get a semantic model for another document this named type is contained in, that we only
+            // Ensure that if we get a semantic model for another document this named type is contained in, that
+            // we only
             // produce that semantic model once.
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
@@ -194,8 +201,10 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     .ConfigureAwait(false);
                 foreach (var reference in references)
                 {
-                    // We may hit a location multiple times due to how we do FAR for linked symbols, but each linked symbol
-                    // is allowed to report the entire set of references it think it is compatible with.  So ensure we're
+                    // We may hit a location multiple times due to how we do FAR for linked symbols, but each linked
+                    // symbol
+                    // is allowed to report the entire set of references it think it is compatible with.  So ensure
+                    // we're
                     // hitting each location only once.
                     //
                     // Note Use DistinctBy (.Net6) once available.
@@ -241,7 +250,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                 out var result
             );
 
-            // Compiler already knows which primary constructor parameters ended up becoming fields.  So just defer to it.  We'll
+            // Compiler already knows which primary constructor parameters ended up becoming fields.  So just
+            // defer to it.  We'll
             // create real fields for all these cases.
 
             foreach (var member in namedType.GetMembers())
@@ -581,7 +591,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         )
             where TListSyntax : SyntaxNode
         {
-            // Since we're moving parameters from the constructor to the type, attempt to dedent them if appropriate.
+            // Since we're moving parameters from the constructor to the type, attempt to dedent them if
+            // appropriate.
 
             var typeLeadingWhitespace = GetLeadingWhitespace(typeDeclaration);
             var constructorLeadingWhitespace = GetLeadingWhitespace(constructorDeclaration);
@@ -625,7 +636,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         {
             using var _1 = ArrayBuilder<StatementSyntax>.GetInstance(out var assignmentStatements);
 
-            // First, if we're making a real field for a primary constructor parameter, assign the parameter to it.
+            // First, if we're making a real field for a primary constructor parameter, assign the parameter to
+            // it.
             foreach (var parameter in parameters)
             {
                 if (!parameterToSynthesizedFields.TryGetValue(parameter, out var field))

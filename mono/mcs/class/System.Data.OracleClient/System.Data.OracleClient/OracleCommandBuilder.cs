@@ -108,7 +108,8 @@ namespace System.Data.OracleClient
         }
 
         [Browsable(false)]
-        //[DataSysDescription ("The character used in a text command as the opening quote for quoting identifiers that contain special characters.")]
+        //[DataSysDescription ("The character used in a text command as the opening quote for quoting
+        // identifiers that contain special characters.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string QuotePrefix
         {
@@ -124,7 +125,8 @@ namespace System.Data.OracleClient
         }
 
         [Browsable(false)]
-        //[DataSysDescription ("The character used in a text command as the closing quote for quoting identifiers that contain special characters.")]
+        //[DataSysDescription ("The character used in a text command as the closing quote for quoting
+        // identifiers that contain special characters.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string QuoteSuffix
         {
@@ -574,12 +576,12 @@ namespace System.Data.OracleClient
             return true;
         }
 
-        /*private bool IncludedInUpdate (DataRow schemaRow) {
-            // If the parameter has one of these properties, then we don't include it in the insert:
-            // AutoIncrement, Hidden, RowVersion
+/*private bool IncludedInUpdate (DataRow schemaRow) {
+// If the parameter has one of these properties, then we don't include it in the insert:
+// AutoIncrement, Hidden, RowVersion
 
-            return true;
-        }*/
+return true;
+}*/
 
         private bool IncludedInWhereClause(DataRow schemaRow)
         {

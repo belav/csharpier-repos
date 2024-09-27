@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                         loggingFileName = Path.Combine(loggingFileName, $"server.{processId}.log");
                     }
 
-                    // Open allowing sharing. We allow multiple processes to log to the same file, so we use share mode to allow that.
+                    // Open allowing sharing. We allow multiple processes to log to the same file, so we use share mode
+                    // to allow that.
                     _loggingStream = new FileStream(
                         loggingFileName,
                         FileMode.OpenOrCreate,

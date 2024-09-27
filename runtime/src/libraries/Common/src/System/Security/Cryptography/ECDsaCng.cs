@@ -12,7 +12,8 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="curve">The <see cref="ECCurve"/> representing the curve.</param>
         /// <exception cref="ArgumentNullException">if <paramref name="curve" /> is null.</exception>
-        /// <exception cref="PlatformNotSupportedException">if <paramref name="curve" /> does not contain an Oid with a FriendlyName.</exception>
+        /// <exception cref="PlatformNotSupportedException">if <paramref name="curve" /> does not contain an
+        // Oid with a FriendlyName.</exception>
         [SupportedOSPlatform("windows")]
         public ECDsaCng(ECCurve curve)
         {

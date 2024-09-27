@@ -530,7 +530,8 @@ namespace System
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static bool ToBoolean(char value)
         {
             return ((IConvertible)value).ToBoolean(null);
@@ -720,21 +721,24 @@ namespace System
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static char ToChar(float value)
         {
             return ((IConvertible)value).ToChar(null);
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static char ToChar(double value)
         {
             return ((IConvertible)value).ToChar(null);
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static char ToChar(decimal value)
         {
             return ((IConvertible)value).ToChar(null);
@@ -2923,7 +2927,8 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the specified string, which encodes binary data as Base64 digits, to the equivalent byte array.
+        /// Converts the specified string, which encodes binary data as Base64 digits, to the equivalent
+        // byte array.
         /// </summary>
         /// <param name="s">The string to convert</param>
         /// <returns>The array of bytes represented by the specifed Base64 string.</returns>
@@ -2947,7 +2952,8 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the specified range of a Char array, which encodes binary data as Base64 digits, to the equivalent byte array.
+        /// Converts the specified range of a Char array, which encodes binary data as Base64 digits, to the
+        // equivalent byte array.
         /// </summary>
         /// <param name="inArray">Chars representing Base64 encoding characters</param>
         /// <param name="offset">A position within the input array.</param>
@@ -3149,7 +3155,8 @@ namespace System
                                 continue;
 
                             // The equality char is only legal at the end of the input.
-                            // Jump after the loop to make it easier for the JIT register predictor to do a good job for the loop itself:
+                            // Jump after the loop to make it easier for the JIT register predictor to do a good job for the
+                            // loop itself:
                             case intEq:
                                 goto _EqualityCharEncountered;
 
@@ -3292,7 +3299,8 @@ namespace System
 
                 // We want to be as fast as possible and filter out spaces with as few comparisons as possible.
                 // We end up accepting a number of illegal chars as legal white-space chars.
-                // This is ok: as soon as we hit them during actual decode we will recognise them as illegal and throw.
+                // This is ok: as soon as we hit them during actual decode we will recognise them as illegal and
+                // throw.
                 if (c <= intSpace)
                     usefulInputLength--;
                 else if (c == intEq)
@@ -3308,7 +3316,8 @@ namespace System
             // We will notice it at decode when we see a '=' at the wrong place.
             Contract.Assert(0 <= padding);
 
-            // Perf: reuse the variable that stored the number of '=' to store the number of bytes encoded by the
+            // Perf: reuse the variable that stored the number of '=' to store the number of bytes encoded by
+            // the
             // last group that contains the '=':
             if (padding != 0)
             {

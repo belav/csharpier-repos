@@ -33,7 +33,8 @@ namespace System.Xml.Schema
 
         SchemaAttDef attDef;
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.DefaultValue"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAttribute.DefaultValue"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -45,7 +46,8 @@ namespace System.Xml.Schema
             set { defaultValue = value; }
         }
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.FixedValue"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAttribute.FixedValue"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -79,7 +81,8 @@ namespace System.Xml.Schema
             set { name = value; }
         }
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.RefName"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.RefName"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -90,7 +93,8 @@ namespace System.Xml.Schema
             set { refName = (value == null ? XmlQualifiedName.Empty : value); }
         }
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.SchemaTypeName"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAttribute.SchemaTypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -101,7 +105,8 @@ namespace System.Xml.Schema
             set { typeName = (value == null ? XmlQualifiedName.Empty : value); }
         }
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.SchemaType"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAttribute.SchemaType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -123,7 +128,8 @@ namespace System.Xml.Schema
             set { use = value; }
         }
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.QualifiedName"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAttribute.QualifiedName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -133,7 +139,8 @@ namespace System.Xml.Schema
             get { return qualifiedName; }
         }
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.AttributeType"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAttribute.AttributeType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -156,7 +163,8 @@ namespace System.Xml.Schema
             }
         }
 
-        /// <include file='doc\XmlSchemaAttribute.uex' path='docs/doc[@for="XmlSchemaAttribute.AttributeSchemaType"]/*' />
+        /// <include file='doc\XmlSchemaAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAttribute.AttributeSchemaType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

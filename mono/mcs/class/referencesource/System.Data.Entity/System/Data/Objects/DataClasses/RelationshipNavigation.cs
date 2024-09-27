@@ -39,8 +39,10 @@ namespace System.Data.Objects.DataClasses
         /// <param name="relationshipName">Canonical-space name of the relationship.</param>
         /// <param name="from">Name of the role which is the source of the navigation.</param>
         /// <param name="to">Name of the role which is the destination of the navigation.</param>
-        /// <param name="fromAccessor">The navigation property which is the source of the navigation.</param>
-        /// <param name="toAccessor">The navigation property which is the destination of the navigation.</param>
+        /// <param name="fromAccessor">The navigation property which is the source of the
+        // navigation.</param>
+        /// <param name="toAccessor">The navigation property which is the destination of the
+        // navigation.</param>
         internal RelationshipNavigation(
             string relationshipName,
             string from,
@@ -112,7 +114,8 @@ namespace System.Data.Objects.DataClasses
 
         /// <summary>
         /// Navigation property name for the destination of this navigation.
-        /// NOTE: There is not a FromPropertyAccessor property on RelationshipNavigation because it is not currently accessed anywhere
+        /// NOTE: There is not a FromPropertyAccessor property on RelationshipNavigation because it is not
+        // currently accessed anywhere
         ///       It is only used to calculate the "reverse" RelationshipNavigation.
         /// </summary>
         internal NavigationPropertyAccessor ToPropertyAccessor

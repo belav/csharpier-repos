@@ -19,7 +19,8 @@ public static class AngularCliMiddlewareExtensions
     /// sure not to enable the Angular CLI server.
     /// </summary>
     /// <param name="spaBuilder">The <see cref="ISpaBuilder"/>.</param>
-    /// <param name="npmScript">The name of the script in your package.json file that launches the Angular CLI process.</param>
+    /// <param name="npmScript">The name of the script in your package.json file that launches the
+    // Angular CLI process.</param>
     public static void UseAngularCliServer(this ISpaBuilder spaBuilder, string npmScript)
     {
         ArgumentNullException.ThrowIfNull(spaBuilder);

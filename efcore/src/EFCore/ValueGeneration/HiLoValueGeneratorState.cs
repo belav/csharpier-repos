@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 ///     The thread safe state used by <see cref="HiLoValueGenerator{TValue}" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see>
+// for more information and examples.
 /// </remarks>
 public class HiLoValueGeneratorState : IDisposable
 {
@@ -84,9 +85,11 @@ public class HiLoValueGeneratorState : IDisposable
     /// <param name="getNewLowValue">
     ///     A function to get the next low value if needed.
     /// </param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>The value to be assigned to a property.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual async ValueTask<TValue> NextAsync<TValue>(
         Func<CancellationToken, Task<long>> getNewLowValue,
         CancellationToken cancellationToken = default

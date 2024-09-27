@@ -22,10 +22,10 @@ using WebCtrlStyle = System.Web.UI.WebControls.Style;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile Style class.
-     * This class can be used to define external styles that can be referenced by other controls.
-     */
+/*
+* Mobile Style class.
+* This class can be used to define external styles that can be referenced by other controls.
+*/
     /// <include file='doc\Style.uex' path='docs/doc[@for="Style"]/*' />
     [
         ControlBuilderAttribute(typeof(MobileControlBuilder)),
@@ -157,7 +157,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IStateManager.IsTrackingViewState"]/*' />
+        /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IStateManager.IsTrackingViewState"]/*'
+        // />
         /// <internalonly/>
         protected bool IsTrackingViewState
         {
@@ -199,12 +200,12 @@ namespace System.Web.UI.MobileControls
         {
             // VSWHIDBEY 236464. The bag needs to be set dirty not individual items.
             State.SetDirty(true);
-            /*
-                        foreach (StateItem item in State.Values)
-                        {
-                            item.IsDirty = true;
-                        }
-            */
+/*
+foreach (StateItem item in State.Values)
+{
+item.IsDirty = true;
+}
+*/
         }
 
         internal void Refresh()
@@ -611,7 +612,8 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
 
-        /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IParserAccessor.AddParsedSubObject"]/*' />
+        /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IParserAccessor.AddParsedSubObject"]/*'
+        // />
         /// <internalonly/>
         protected void AddParsedSubObject(Object o)
         {

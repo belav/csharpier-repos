@@ -79,11 +79,16 @@ namespace System
                 de.target = targetName;
             }
 
-            // Due to a number of additions (delegate signature binding relaxation, delegates with open this or closed over the
-            // first parameter and delegates over generic methods) we need to send a deal more information than previously. We can
-            // get this by serializing the target MethodInfo. We still need to send the same information as before though (the
-            // DelegateEntry above) for backwards compatibility. And we want to send the MethodInfo (which is serialized via an
-            // ISerializable holder) as a top-level child of the info for the same reason as the target above -- we wouldn't have an
+            // Due to a number of additions (delegate signature binding relaxation, delegates with open this or
+            // closed over the
+            // first parameter and delegates over generic methods) we need to send a deal more information than
+            // previously. We can
+            // get this by serializing the target MethodInfo. We still need to send the same information as
+            // before though (the
+            // DelegateEntry above) for backwards compatibility. And we want to send the MethodInfo (which is
+            // serialized via an
+            // ISerializable holder) as a top-level child of the info for the same reason as the target above --
+            // we wouldn't have an
             // order of deserialization guarantee otherwise.
             String methodInfoName = "method" + targetIndex;
             info.AddValue(methodInfoName, method);
@@ -179,7 +184,8 @@ namespace System
                     deiter = deiter.delegateEntry;
                 }
 
-                // If the sender is as recent as us they'll have provided MethodInfos for each delegate. Look for these and pack
+                // If the sender is as recent as us they'll have provided MethodInfos for each delegate. Look for
+                // these and pack
                 // them into an ordered array if present.
                 MethodInfo[] methods = new MethodInfo[count];
                 int i;
@@ -252,7 +258,8 @@ namespace System
                 if (de.targetTypeName == null || de.targetTypeName.Length == 0)
                     ThrowInsufficientState("TargetTypeName");
 
-                // We cannot use Type.GetType directly, because of AppCompat - assembly names starting with '[' would fail to load.
+                // We cannot use Type.GetType directly, because of AppCompat - assembly names starting with '['
+                // would fail to load.
                 RuntimeType type = (RuntimeType)Assembly.GetType_Compat(de.assembly, de.type);
                 RuntimeType targetType = (RuntimeType)
                     Assembly.GetType_Compat(de.targetTypeAssembly, de.targetTypeName);
@@ -330,7 +337,8 @@ namespace System
 
                 for (DelegateEntry de = m_delegateEntry; de != null; de = de.Entry)
                 {
-                    // Be careful to match the index we pass to GetDelegate (used to look up extra information for each delegate) to
+                    // Be careful to match the index we pass to GetDelegate (used to look up extra information for each
+                    // delegate) to
                     // the order we process the entries: we're actually looking at them in reverse order.
                     --count;
                     invocationList[count] = GetDelegate(de, maxindex - count);

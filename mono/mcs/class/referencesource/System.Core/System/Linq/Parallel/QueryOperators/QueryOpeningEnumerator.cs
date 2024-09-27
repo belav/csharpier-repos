@@ -39,15 +39,20 @@ namespace System.Linq.Parallel
 
         // -- Cancellation and Dispose fields--
         // Disposal of the queryOpeningEnumerator can trigger internal cancellation and so it is important
-        // that the internal cancellation signal is available both at this level, and deep in query execution
+        // that the internal cancellation signal is available both at this level, and deep in query
+        // execution
         // Also, it is useful to track the cause of cancellation so that appropriate exceptions etc can be
         // throw from the execution managers.
-        // => Both the topLevelDisposeFlag and the topLevelCancellationSignal are defined here, and will be shared
-        //    down to QuerySettings and to the QueryTaskGroupStates that are associated with actual task-execution.
-        // => whilst these are the definitions, it is best to consider QuerySettings as the true owner of these.
+        // => Both the topLevelDisposeFlag and the topLevelCancellationSignal are defined here, and will be
+        // shared
+        //    down to QuerySettings and to the QueryTaskGroupStates that are associated with actual
+        // task-execution.
+        // => whilst these are the definitions, it is best to consider QuerySettings as the true owner of
+        // these.
         private readonly Shared<bool> m_topLevelDisposedFlag = new Shared<bool>(false); //a shared<bool> so that it can be referenced by others.
 
-        // a top-level cancellation signal is required so that QueryOpeningEnumerator.Dispose() can tear things down.
+        // a top-level cancellation signal is required so that QueryOpeningEnumerator.Dispose() can tear
+        // things down.
         // This cancellationSignal will be used as the actual internal signal in QueryTaskGroupState.
         private readonly CancellationTokenSource m_topLevelCancellationTokenSource =
             new CancellationTokenSource();
@@ -110,30 +115,37 @@ namespace System.Linq.Parallel
 
             //Note: if Dispose has been called on a different thread to the thread that is enumerating,
             //then there is a ---- where m_openedQueryEnumerator is instantiated but not disposed.
-            //Best practice is that Dispose() should only be called by the owning thread, hence this cannot occur in correct usage scenarios.
+            //Best practice is that Dispose() should only be called by the owning thread, hence this cannot
+            // occur in correct usage scenarios.
 
             // Open the query operator if called for the first time.
 
             if (m_openedQueryEnumerator == null)
             {
-                // To keep the MoveNext method body small, the code that executes first time only is in a separate method.
-                // It appears that if the method becomes too large, we observe a performance regression. This may have
+                // To keep the MoveNext method body small, the code that executes first time only is in a separate
+                // method.
+                // It appears that if the method becomes too large, we observe a performance regression. This may
+                // have
                 // to do with method inlining. See bug 706485.
                 OpenQuery();
             }
 
             bool innerMoveNextResult = m_openedQueryEnumerator.MoveNext();
 
-            // This provides cancellation-testing for the consumer-side of the buffers that appears in each scenario:
+            // This provides cancellation-testing for the consumer-side of the buffers that appears in each
+            // scenario:
             //   Non-order-preserving (defaultMergeHelper)
             //       - asynchronous channel (pipelining)
             //       - synchronous channel  (stop-and-go)
             //   Order-preserving (orderPreservingMergeHelper)
             //       - internal results buffer.
-            // This moveNext is consuming data out of buffers, hence the inner moveNext is expected to be very fast.
+            // This moveNext is consuming data out of buffers, hence the inner moveNext is expected to be very
+            // fast.
             // => thus we only test for cancellation per-N-iterations.
-            // NOTE: the cancellation check occurs after performing moveNext in case the cancellation caused no data
-            //       to be produced.. We need to ensure that users sees an OCE rather than simply getting no data. (see Bug702254)
+            // NOTE: the cancellation check occurs after performing moveNext in case the cancellation caused no
+            // data
+            //       to be produced.. We need to ensure that users sees an OCE rather than simply getting no
+            // data. (see Bug702254)
             if ((m_moveNextIteration & CancellationState.POLL_INTERVAL) == 0)
             {
                 CancellationState.ThrowWithStandardMessageIfCanceled(
@@ -178,7 +190,8 @@ namespace System.Linq.Parallel
                 );
 
                 // Now that we have opened the query, and got our hands on a supplied cancellation token
-                // we can perform an early cancellation check so that we will not do any major work if the token is already canceled.
+                // we can perform an early cancellation check so that we will not do any major work if the token is
+                // already canceled.
                 CancellationState.ThrowWithStandardMessageIfCanceled(
                     m_querySettings.CancellationState.ExternalCancellationToken
                 );

@@ -11,12 +11,12 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
 /*
- * This class contains the logic for suppressing diagnostics that are
- * emitted by the linker analyzers when encountering the framework-provided
- * `Map` invocations. Pending the completion of https://github.com/dotnet/roslyn/issues/68669,
- * this workaround is necessary to apply these suppressions for `Map` invocations that the RDG
- * is able to generate code at compile time for that the analyzer is not able to resolve.
- */
+* This class contains the logic for suppressing diagnostics that are
+* emitted by the linker analyzers when encountering the framework-provided
+* `Map` invocations. Pending the completion of https://github.com/dotnet/roslyn/issues/68669,
+* this workaround is necessary to apply these suppressions for `Map` invocations that the RDG
+* is able to generate code at compile time for that the analyzer is not able to resolve.
+*/
 
 namespace Microsoft.AspNetCore.Http.RequestDelegateGenerator;
 

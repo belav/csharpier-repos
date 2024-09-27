@@ -25,13 +25,17 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             new DiagnosticResult(descriptor);
 
         /// <summary>
-        /// Create a <see cref="DiagnosticResult"/> with the diagnostic message created with the provided arguments.
-        /// A <see cref="DiagnosticResult"/> with the <see cref="DiagnosticResult.Message"/> property set instead of just the <see cref="DiagnosticResult.MessageArguments"/> property
-        /// binds more strongly to the "correct" diagnostic as the test harness will match the diagnostic on the exact message instead of just on the message arguments.
+        /// Create a <see cref="DiagnosticResult"/> with the diagnostic message created with the provided
+        // arguments.
+        /// A <see cref="DiagnosticResult"/> with the <see cref="DiagnosticResult.Message"/> property set
+        // instead of just the <see cref="DiagnosticResult.MessageArguments"/> property
+        /// binds more strongly to the "correct" diagnostic as the test harness will match the diagnostic on
+        // the exact message instead of just on the message arguments.
         /// </summary>
         /// <param name="descriptor">The diagnostic descriptor</param>
         /// <param name="arguments">The arguments to use to format the diagnostic message</param>
-        /// <returns>A <see cref="DiagnosticResult"/> with a <see cref="DiagnosticResult.Message"/> set with the <paramref name="descriptor"/>'s message format and the <paramref name="arguments"/>.</returns>
+        /// <returns>A <see cref="DiagnosticResult"/> with a <see cref="DiagnosticResult.Message"/> set with
+        // the <paramref name="descriptor"/>'s message format and the <paramref name="arguments"/>.</returns>
         public static DiagnosticResult DiagnosticWithArguments(
             DiagnosticDescriptor descriptor,
             params object[] arguments
@@ -165,7 +169,8 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                         reportSuppressedDiagnostics: false,
                         analyzerExceptionFilter: ex =>
                         {
-                            // We're hunting down a intermittent issue that causes NullReferenceExceptions deep in Roslyn. To ensure that we get an actionable dump, we're going to FailFast here to force a process dump.
+                            // We're hunting down a intermittent issue that causes NullReferenceExceptions deep in Roslyn. To
+                            // ensure that we get an actionable dump, we're going to FailFast here to force a process dump.
                             if (ex is NullReferenceException)
                             {
                                 // Break a debugger here so there's a chance to investigate if someone is already attached.
@@ -207,11 +212,13 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             }
 
             /// <summary>
-            /// Verify any expected invariants on the final compilation after the source generators have been applied.
+            /// Verify any expected invariants on the final compilation after the source generators have been
+            // applied.
             /// </summary>
             /// <param name="compilation">The compilation.</param>
             /// <remarks>
-            /// This function is useful for basic semantic testing of the generated code and can be used instead of verification testing of an exact match to the expected source output.
+            /// This function is useful for basic semantic testing of the generated code and can be used instead
+            // of verification testing of an exact match to the expected source output.
             /// </remarks>
             protected virtual void VerifyFinalCompilation(Compilation compilation) { }
         }

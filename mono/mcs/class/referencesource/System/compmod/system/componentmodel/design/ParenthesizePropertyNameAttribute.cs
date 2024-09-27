@@ -10,7 +10,8 @@ namespace System.ComponentModel
     using System.Security.Permissions;
 
     /// <devdoc>
-    ///    <para>Provides a value indicating whether the name of the associated property is parenthesized in the
+    ///    <para>Provides a value indicating whether the name of the associated property is
+    // parenthesized in the
     ///       properties window.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
@@ -35,7 +36,8 @@ namespace System.ComponentModel
             : this(false) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the System.ComponentModel.Design.ParenthesizePropertyNameAttribute
+        /// <para>Initializes a new instance of the
+        // System.ComponentModel.Design.ParenthesizePropertyNameAttribute
         /// class, using the specified value to indicate whether the attribute is
         /// marked for display with parentheses.</para>
         /// </devdoc>
@@ -81,7 +83,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        /// <para>Gets a value indicating whether this attribute is set to <see langword='true'/> by default.</para>
+        /// <para>Gets a value indicating whether this attribute is set to <see langword='true'/> by
+        // default.</para>
         /// </devdoc>
         public override bool IsDefaultAttribute()
         {

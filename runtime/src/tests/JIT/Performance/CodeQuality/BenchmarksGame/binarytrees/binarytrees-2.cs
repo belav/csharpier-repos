@@ -3,14 +3,15 @@
 
 // Adapted from binary-trees C# .NET Core #2 program
 // http://benchmarksgame.alioth.debian.org/u64q/program.php?test=binarytrees&lang=csharpcore&id=2
-// aka (as of 2017-09-01) rev 1.3 of https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/binarytrees/binarytrees.csharp-2.csharp?root=benchmarksgame&view=log
+// aka (as of 2017-09-01) rev 1.3 of
+// https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/binarytrees/binarytrees.csharp-2.csharp?root=benchmarksgame&view=log
 // Best-scoring single-threaded C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/
+http://benchmarksgame.alioth.debian.org/
 
-   contributed by Marek Safar
-   *reset*
+contributed by Marek Safar
+*reset*
 */
 
 using System;

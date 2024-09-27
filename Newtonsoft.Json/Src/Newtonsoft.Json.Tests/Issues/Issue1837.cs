@@ -45,7 +45,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void AllStrictEqualityTests()
         {
-            // this is a bit cargo-culty; making absolutely sure no false positives caused by instance equivalence
+            // this is a bit cargo-culty; making absolutely sure no false positives caused by instance
+            // equivalence
             var lhs = new TestData();
             var rhs = new TestData();
 
@@ -62,12 +63,14 @@ namespace Newtonsoft.Json.Tests.Issues
             target = lhs.Scientific;
             Assert.IsTrue(BooleanQueryExpression.EqualsWithStrictMatch(target, rhs.Scientific));
 
-            // given x === y, if Type(x) is String, then return true if x and y are exactly the same sequence of characters (same length and same characters in corresponding positions); otherwise, return false.
+            // given x === y, if Type(x) is String, then return true if x and y are exactly the same sequence of
+            // characters (same length and same characters in corresponding positions); otherwise, return false.
             target = lhs.DerpString;
             AssertNone(StrictEquality, target, rhs.HerpString);
             AssertAll(StrictEquality, target, rhs.DerpString);
 
-            // given x === y, if Type(x) is Boolean, return true if x and y are both true or both false; otherwise, return false.
+            // given x === y, if Type(x) is Boolean, return true if x and y are both true or both false;
+            // otherwise, return false.
             target = lhs.True;
             AssertAll(StrictEquality, target, rhs.True);
             AssertNone(
@@ -107,7 +110,8 @@ namespace Newtonsoft.Json.Tests.Issues
         // used by asserters to perform the comparison
         public delegate bool Comparator(JValue lhs, JValue rhs);
 
-        // there was going to be an abstractEquality, but check the exception for it's implementation for why that's skipped for now
+        // there was going to be an abstractEquality, but check the exception for it's implementation for
+        // why that's skipped for now
         private readonly Comparator StrictEquality = (lhs, rhs) =>
             BooleanQueryExpression.EqualsWithStrictMatch(lhs, rhs);
 
@@ -149,7 +153,8 @@ namespace Newtonsoft.Json.Tests.Issues
     }
 
     /// <summary>
-    /// Holds (practically) all the different possible javascript types and variants of possible values gathered from the algorithm and (imperfect) observation
+    /// Holds (practically) all the different possible javascript types and variants of possible values
+    // gathered from the algorithm and (imperfect) observation
     /// </summary>
     public class TestData
     {
@@ -179,7 +184,8 @@ namespace Newtonsoft.Json.Tests.Issues
         public readonly JValue False;
         public readonly JValue[] Boolies;
 
-        // JSON.stringify({"lol": new Date("2018-09-02") - new Date("2018-09-01")}) returns "{"lol":86400000}", and so is indistinguishable from a number
+        // JSON.stringify({"lol": new Date("2018-09-02") - new Date("2018-09-01")}) returns
+        // "{"lol":86400000}", and so is indistinguishable from a number
         //public readonly JToken Timespan1;
         //public readonly JToken Timespan2;
         //public readonly JToken[] Timespans;

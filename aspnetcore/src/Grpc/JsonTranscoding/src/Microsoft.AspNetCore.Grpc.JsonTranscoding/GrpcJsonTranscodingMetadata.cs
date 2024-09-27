@@ -15,7 +15,8 @@ public sealed class GrpcJsonTranscodingMetadata
     /// Creates a new instance of <see cref="GrpcJsonTranscodingMetadata"/> with the provided Protobuf
     /// <see cref="Google.Protobuf.Reflection.MethodDescriptor"/> and <see cref="Google.Api.HttpRule"/>.
     /// </summary>
-    /// <param name="methodDescriptor">The Protobuf <see cref="Google.Protobuf.Reflection.MethodDescriptor"/>.</param>
+    /// <param name="methodDescriptor">The Protobuf <see
+    // cref="Google.Protobuf.Reflection.MethodDescriptor"/>.</param>
     /// <param name="httpRule">The <see cref="Google.Api.HttpRule"/>.</param>
     public GrpcJsonTranscodingMetadata(MethodDescriptor methodDescriptor, HttpRule httpRule)
     {

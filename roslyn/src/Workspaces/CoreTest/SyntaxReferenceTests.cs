@@ -65,7 +65,8 @@ public class C<>
 
             var tree = solution.Projects.First().Documents.First().GetSyntaxTreeAsync().Result;
 
-            // this is an expected TypeParameterSyntax with a missing identifier token (it is zero-length w/ an error attached to it)
+            // this is an expected TypeParameterSyntax with a missing identifier token (it is zero-length w/ an
+            // error attached to it)
             var node = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<CS.Syntax.TypeParameterSyntax>()
@@ -93,7 +94,8 @@ End Class
 
             var tree = solution.Projects.First().Documents.First().GetSyntaxTreeAsync().Result;
 
-            // this is an expected TypeParameterSyntax with a missing identifier token (it is zero-length w/ an error attached to it)
+            // this is an expected TypeParameterSyntax with a missing identifier token (it is zero-length w/ an
+            // error attached to it)
             var node = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<VB.Syntax.TypeParameterSyntax>()

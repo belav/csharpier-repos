@@ -357,7 +357,8 @@ public abstract class ComponentRenderingTestBase
         var specialStyleDiv = appElement.FindElement(By.ClassName("special-style"));
         Assert.Equal("50px", specialStyleDiv.GetCssValue("padding"));
 
-        // This style is isolated to the component and comes from the bundle that gets generated for BasicTestApp
+        // This style is isolated to the component and comes from the bundle that gets generated for
+        // BasicTestApp
         // and that includes the @import for the TestContentPackage.bundle.scp.css file
         Assert.Equal("20px", specialStyleDiv.GetCssValue("font-size"));
 
@@ -507,7 +508,8 @@ public abstract class ComponentRenderingTestBase
             () => Browser.SwitchTo().ActiveElement().GetAttribute("id")
         );
 
-        // As well as actually focusing and triggering the onfocusin event, we should not be seeing any errors
+        // As well as actually focusing and triggering the onfocusin event, we should not be seeing any
+        // errors
         var log = Browser.Manage().Logs.GetLog(LogType.Browser).ToArray();
         Assert.DoesNotContain(log, entry => entry.Level == LogLevel.Severe);
     }

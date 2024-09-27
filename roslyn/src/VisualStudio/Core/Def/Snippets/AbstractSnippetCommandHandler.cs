@@ -101,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return true;
             }
 
-            // Insert snippet/show picker only if we don't have a selection: the user probably wants to indent instead
+            // Insert snippet/show picker only if we don't have a selection: the user probably wants to indent
+            // instead
             if (args.TextView.Selection.IsEmpty)
             {
                 if (

@@ -34,8 +34,8 @@ namespace System.Text.RegularExpressions
         internal Group[] _groups;
 
         /*
-         * Nonpublic constructor
-         */
+        * Nonpublic constructor
+        */
 #if SILVERLIGHT
         internal GroupCollection(Match match, Dictionary<Int32, Int32> caps)
         {
@@ -48,8 +48,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * The object on which to synchronize
-         */
+        * The object on which to synchronize
+        */
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -59,8 +59,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * ICollection
-         */
+        * ICollection
+        */
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -70,8 +70,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * ICollection
-         */
+        * ICollection
+        */
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -137,8 +137,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * Caches the group objects
-         */
+        * Caches the group objects
+        */
         internal Group GetGroupImpl(int groupnum)
         {
             if (groupnum == 0)
@@ -165,8 +165,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * As required by ICollection
-         */
+        * As required by ICollection
+        */
         /// <devdoc>
         ///    <para>
         ///       Copies all the elements of the collection to the given array
@@ -185,8 +185,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * As required by ICollection
-         */
+        * As required by ICollection
+        */
         /// <devdoc>
         ///    <para>
         ///       Provides an enumerator in the same order as Item[].
@@ -199,17 +199,17 @@ namespace System.Text.RegularExpressions
     }
 
     /*
-     * This non-public enumerator lists all the captures
-     * Should it be public?
-     */
+    * This non-public enumerator lists all the captures
+    * Should it be public?
+    */
     internal class GroupEnumerator : IEnumerator
     {
         internal GroupCollection _rgc;
         internal int _curindex;
 
         /*
-         * Nonpublic constructor
-         */
+        * Nonpublic constructor
+        */
         internal GroupEnumerator(GroupCollection rgc)
         {
             _curindex = -1;
@@ -217,8 +217,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * As required by IEnumerator
-         */
+        * As required by IEnumerator
+        */
         public bool MoveNext()
         {
             int size = _rgc.Count;
@@ -232,16 +232,16 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * As required by IEnumerator
-         */
+        * As required by IEnumerator
+        */
         public Object Current
         {
             get { return Capture; }
         }
 
         /*
-         * Returns the current capture
-         */
+        * Returns the current capture
+        */
         public Capture Capture
         {
             get
@@ -254,8 +254,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * Reset to before the first item
-         */
+        * Reset to before the first item
+        */
         public void Reset()
         {
             _curindex = -1;

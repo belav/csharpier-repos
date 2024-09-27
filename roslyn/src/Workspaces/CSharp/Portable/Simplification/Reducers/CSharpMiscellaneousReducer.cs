@@ -189,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     // in a subset of cases where all of the following are met:
                     //
                     // 1. This is an 'if' statement
-                    // 1. The 'if' statement does not have an 'else' clause and is not part of a larger 'if'/'else if'/'else' sequence
+                    // 1. The 'if' statement does not have an 'else' clause and is not part of a larger 'if'/'else
+                    // if'/'else' sequence
                     // 2. The 'if' statement is not considered multiline
                     if (!node.Parent.IsKind(SyntaxKind.IfStatement))
                     {

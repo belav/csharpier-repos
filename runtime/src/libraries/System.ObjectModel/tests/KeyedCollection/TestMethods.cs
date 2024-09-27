@@ -1594,7 +1594,8 @@ namespace System.Collections.ObjectModel.Tests
                 GenerateValue,
                 GetKeyForItem
             );
-            // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
+            // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with
+            // null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
             TKey keyNotIn = itemNotIn.Key;
             if (keyNotIn == null)
             {
@@ -1647,7 +1648,8 @@ namespace System.Collections.ObjectModel.Tests
                 GenerateValue,
                 GetKeyForItem
             );
-            // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
+            // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with
+            // null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
             TKey keyNotIn = itemNotIn.Key;
             if (keyNotIn == null)
             {
@@ -1709,7 +1711,8 @@ namespace System.Collections.ObjectModel.Tests
                 GenerateValue,
                 GetKeyForItem
             );
-            // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
+            // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with
+            // null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
             TKey keyNotIn = itemNotIn.Key;
             if (keyNotIn == null)
             {
@@ -2009,7 +2012,8 @@ namespace System.Collections.ObjectModel.Tests
         protected abstract TKey GetKeyForItem(TValue item);
 
         /// <summary>
-        ///     When overridden in a derived class, Gets an instance of the list under test containing the given items.
+        ///     When overridden in a derived class, Gets an instance of the list under test containing the
+        // given items.
         /// </summary>
         /// <param name="items">The items to initialize the list with.</param>
         /// <returns>An instance of the list under test containing the given items.</returns>
@@ -2050,7 +2054,8 @@ namespace System.Collections.ObjectModel.Tests
             : base(false, false, false, false, true, true) { }
 
         /// <summary>
-        ///     When overridden in a derived class, Gets an instance of the list under test containing the given items.
+        ///     When overridden in a derived class, Gets an instance of the list under test containing the
+        // given items.
         /// </summary>
         /// <param name="items">The items to initialize the list with.</param>
         /// <returns>An instance of the list under test containing the given items.</returns>

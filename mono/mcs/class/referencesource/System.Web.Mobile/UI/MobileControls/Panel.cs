@@ -166,11 +166,11 @@ namespace System.Web.UI.MobileControls
         }
     }
 
-    /*
-     * Control builder for panels.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Control builder for panels.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\Panel.uex' path='docs/doc[@for="PanelControlBuilder"]/*' />
     [AspNetHostingPermission(

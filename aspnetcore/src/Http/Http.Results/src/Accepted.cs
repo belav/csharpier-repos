@@ -20,7 +20,8 @@ public sealed class Accepted : IResult, IEndpointMetadataProvider, IStatusCodeHt
     /// Initializes a new instance of the <see cref="Accepted"/> class with the values
     /// provided.
     /// </summary>
-    /// <param name="location">The location at which the status of requested content can be monitored.</param>
+    /// <param name="location">The location at which the status of requested content can be
+    // monitored.</param>
     internal Accepted(string? location)
     {
         Location = location;
@@ -30,7 +31,8 @@ public sealed class Accepted : IResult, IEndpointMetadataProvider, IStatusCodeHt
     /// Initializes a new instance of the <see cref="Accepted"/> class with the values
     /// provided.
     /// </summary>
-    /// <param name="locationUri">The location at which the status of requested content can be monitored.</param>
+    /// <param name="locationUri">The location at which the status of requested content can be
+    // monitored.</param>
     internal Accepted(Uri locationUri)
     {
         if (locationUri.IsAbsoluteUri)

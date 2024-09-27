@@ -324,53 +324,62 @@ namespace System.Web.Configuration
         private static String s_versionHeader = null;
         private Version _requestValidationMode;
 
-        /*         <!--
-        httpRuntime Attributes:
-          asyncPreloadMode="None" [None | Form | FormMultiPart | AllFormTypes | NonForm | All]
-          executionTimeout="[seconds]" - time in seconds before request is automatically timed out
-          maxRequestLength="[KBytes]" - KBytes size of maximum request length to accept
-          requestLengthDiskThreshold="[KBytes]" - KBytes threshold to use disk for posted content temporary storage
-          useFullyQualifiedRedirectUrl="[true|false]" - Fully qualifiy the URL for client redirects
-          minFreeThreads="[count]" - minimum number of free thread to allow execution of new requests
-          minLocalRequestFreeThreads="[count]" - minimum number of free thread to allow execution of new local requests
-          appRequestQueueLimit="[count]" - maximum number of requests queued for the application; the sum of requests in all application queues is bounded from above by the global requestQueueLimit in the processModel section
-          enableKernelOutputCache="[true|false]" - enable the http.sys cache on IIS6 and higher - default is true
-          enableVersionHeader="[true|false]" - outputs X-AspNet-Version header with each request
-          requireRootedSaveAsPath="[true|false]" - the filename argument to SaveAs methods must be a rooted path
-          enable="[true|false]" - enable processing requests for this application
-          waitChangeNotification="[seconds]" - time in seconds to wait for another file change notification before restarting the AppDomain
-          maxWaitChangeNotification="[seconds]" - maximum time in seconds to wait from the first file change notification before restarting the AppDomain
-          enableHeaderChecking="[true|false]" - when true, CRLF pairs in response headers are encoded
-          encoderType="[typename]" - type used for custom HTTP encoding (HTML encoding, URL encoding, etc.)
-          requestValidationMode="[version]" - "2.0" to turn request validation on only for pages, "4.0" for the entire pipeline, "4.5" to enable granular request validation
-          requestValidationType="[typename]" - type used for custom request validation
-          RequestPathInvalidCharacters="[string]" - comma seperated list of chars in the URL to reject
-          maxUrlLength="[int]" - Max length of Request.Path
-          maxQueryStringLength="[int]"  - Max length of QueryString
-          relaxedUrlToFileSystemMapping = "false"
-          allowDynamicModuleRegistration="[true|flase]" - used to block RegisterModule method calls
-          targetFramework="[string]" - framework version behavior to trigger CLR "quirks mode" settings
-        -->
-        <httpRuntime
-            asyncPreloadMode="None"
-            executionTimeout="110"
-            maxRequestLength="4096"
-            requestLengthDiskThreshold="80"
-            useFullyQualifiedRedirectUrl="false"
-            minFreeThreads="8"
-            minLocalRequestFreeThreads="4"
-            appRequestQueueLimit="5000"
-            enableVersionHeader="true"
-            requireRootedSaveAsPath="true"
-            enable="true"
-            encoderType="System.Web.Util.HttpEncoder"
-            requestValidationMode="4.0"
-            requestValidationType="System.Web.Util.RequestValidator"
-            RequestPathInvalidCharacters="<,>,*,%,&,:,\,?"
-            maxUrlLength="260"
-            maxQueryStringLength="4096"
-            relaxedUrlToFileSystemMapping = "false"
-            allowDynamicModuleRegistration = "true"
+/*         <!--
+httpRuntime Attributes:
+asyncPreloadMode="None" [None | Form | FormMultiPart | AllFormTypes | NonForm | All]
+executionTimeout="[seconds]" - time in seconds before request is automatically timed out
+maxRequestLength="[KBytes]" - KBytes size of maximum request length to accept
+requestLengthDiskThreshold="[KBytes]" - KBytes threshold to use disk for posted content temporary
+storage
+useFullyQualifiedRedirectUrl="[true|false]" - Fully qualifiy the URL for client redirects
+minFreeThreads="[count]" - minimum number of free thread to allow execution of new requests
+minLocalRequestFreeThreads="[count]" - minimum number of free thread to allow execution of new local
+requests
+appRequestQueueLimit="[count]" - maximum number of requests queued for the application; the sum of
+requests in all application queues is bounded from above by the global requestQueueLimit in the
+processModel section
+enableKernelOutputCache="[true|false]" - enable the http.sys cache on IIS6 and higher - default is
+true
+enableVersionHeader="[true|false]" - outputs X-AspNet-Version header with each request
+requireRootedSaveAsPath="[true|false]" - the filename argument to SaveAs methods must be a rooted
+path
+enable="[true|false]" - enable processing requests for this application
+waitChangeNotification="[seconds]" - time in seconds to wait for another file change notification
+before restarting the AppDomain
+maxWaitChangeNotification="[seconds]" - maximum time in seconds to wait from the first file change
+notification before restarting the AppDomain
+enableHeaderChecking="[true|false]" - when true, CRLF pairs in response headers are encoded
+encoderType="[typename]" - type used for custom HTTP encoding (HTML encoding, URL encoding, etc.)
+requestValidationMode="[version]" - "2.0" to turn request validation on only for pages, "4.0" for
+the entire pipeline, "4.5" to enable granular request validation
+requestValidationType="[typename]" - type used for custom request validation
+RequestPathInvalidCharacters="[string]" - comma seperated list of chars in the URL to reject
+maxUrlLength="[int]" - Max length of Request.Path
+maxQueryStringLength="[int]"  - Max length of QueryString
+relaxedUrlToFileSystemMapping = "false"
+allowDynamicModuleRegistration="[true|flase]" - used to block RegisterModule method calls
+targetFramework="[string]" - framework version behavior to trigger CLR "quirks mode" settings
+-->
+<httpRuntime
+asyncPreloadMode="None"
+executionTimeout="110"
+maxRequestLength="4096"
+requestLengthDiskThreshold="80"
+useFullyQualifiedRedirectUrl="false"
+minFreeThreads="8"
+minLocalRequestFreeThreads="4"
+appRequestQueueLimit="5000"
+enableVersionHeader="true"
+requireRootedSaveAsPath="true"
+enable="true"
+encoderType="System.Web.Util.HttpEncoder"
+requestValidationMode="4.0"
+requestValidationType="System.Web.Util.RequestValidator"
+RequestPathInvalidCharacters="<,>,*,%,&,:,\,?"
+maxUrlLength="260"
+maxQueryStringLength="4096"
+relaxedUrlToFileSystemMapping = "false"
+allowDynamicModuleRegistration = "true"
 />
 */
 
@@ -615,7 +624,8 @@ namespace System.Web.Configuration
             set { base[_propTargetFramework] = value; }
         }
 
-        // method is used to provide a FrameworkName to be used for the AppDomainSetup.TargetFrameworkName property
+        // method is used to provide a FrameworkName to be used for the AppDomainSetup.TargetFrameworkName
+        // property
         internal FrameworkName GetTargetFrameworkName()
         {
             string targetFramework = TargetFramework; // only read from property once so the value can't change in the middle of processing
@@ -629,7 +639,8 @@ namespace System.Web.Configuration
                 Version version;
                 if (!Version.TryParse(targetFramework, out version))
                 {
-                    // if this doesn't parse as a valid Version object, throw an exception containing the erroneous line in config
+                    // if this doesn't parse as a valid Version object, throw an exception containing the erroneous line
+                    // in config
                     PropertyInformation targetFrameworkPropInfo = ElementInformation.Properties[
                         "targetFramework"
                     ];
@@ -984,7 +995,8 @@ namespace System.Web.Configuration
             return charsDecoded;
         }
 
-        // This is called as the last step of the deserialization process before the newly created section is seen by the consumer.
+        // This is called as the last step of the deserialization process before the newly created section
+        // is seen by the consumer.
         // We can use it to change defaults on-the-fly.
         protected override void SetReadOnly()
         {

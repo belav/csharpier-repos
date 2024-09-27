@@ -10,8 +10,10 @@ using Xunit;
 
 namespace System.Tests.Types
 {
-    // The "_Unmodified" tests use GetXxxType() and are essentially a baseline since they don't return modifiers.
-    // The "_Modified" tests are based on the same types but use GetModifiedXxxType() in order to return the modifiers.
+    // The "_Unmodified" tests use GetXxxType() and are essentially a baseline since they don't return
+    // modifiers.
+    // The "_Modified" tests are based on the same types but use GetModifiedXxxType() in order to return
+    // the modifiers.
     public partial class ModifiedTypeTests
     {
         private const BindingFlags Bindings =
@@ -1029,7 +1031,8 @@ namespace System.Tests.Types
                 e.GenericParameterAttributes
             );
             Assert.True(e.GetGenericParameterConstraints().Length == 1);
-            // The 'unmanaged' constraint is a modreq of type 'System.Runtime.InteropServices.' applied to 'ValueType'.
+            // The 'unmanaged' constraint is a modreq of type 'System.Runtime.InteropServices.' applied to
+            // 'ValueType'.
             Assert.Equal(typeof(ValueType).Project(), e.GetGenericParameterConstraints()[0]);
             // The 'UnmanagedType' modreq is not available for unmodified types.
             Assert.Equal(

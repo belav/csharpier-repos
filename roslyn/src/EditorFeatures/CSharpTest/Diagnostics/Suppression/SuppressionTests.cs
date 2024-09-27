@@ -984,7 +984,8 @@ class Class
             public class DiagnosticWithBadIdSuppressionTests
                 : CSharpPragmaWarningDisableSuppressionTests
             {
-                // Analyzer driver generates a no-location analyzer exception diagnostic, which we don't intend to test here.
+                // Analyzer driver generates a no-location analyzer exception diagnostic, which we don't intend to
+                // test here.
                 protected override bool IncludeNoLocationDiagnostics => false;
 
                 private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
@@ -1132,7 +1133,8 @@ class Class
                 [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
                 public async Task TestCompilerDiagnosticsCannotBeSuppressed()
                 {
-                    // Another test verifies we have a pragma warning action for this source, this verifies there are no other suppression actions.
+                    // Another test verifies we have a pragma warning action for this source, this verifies there are no
+                    // other suppression actions.
                     await TestActionCountAsync(
                         @"
 class Class
@@ -1191,7 +1193,8 @@ class Class
                 [WorkItem("https://github.com/dotnet/roslyn/issues/38587")]
                 public async Task TestCompilerDiagnosticsCannotBeSuppressed()
                 {
-                    // Another test verifies we have a pragma warning action for this source, this verifies there are no other suppression actions.
+                    // Another test verifies we have a pragma warning action for this source, this verifies there are no
+                    // other suppression actions.
                     await TestActionCountAsync(
                         @"
 class Class
@@ -2209,7 +2212,8 @@ using System.Diagnostics.CodeAnalysis;
                 [Fact]
                 public async Task TestSuppressionWithExistingGlobalSuppressionsDocument3()
                 {
-                    // Own custom file named GlobalSuppressions.cs + existing GlobalSuppressions2.cs with global suppressions
+                    // Own custom file named GlobalSuppressions.cs + existing GlobalSuppressions2.cs with global
+                    // suppressions
                     var initialMarkup =
                         @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Proj1"">

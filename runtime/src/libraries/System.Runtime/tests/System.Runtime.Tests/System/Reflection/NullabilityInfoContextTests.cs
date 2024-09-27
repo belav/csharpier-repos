@@ -2150,7 +2150,8 @@ namespace System.Reflection.Tests
         {
             Type type = typeof(TypeWithNullableContext);
 
-            // bool NotNullWhenParameter([DisallowNull] string? disallowNull, [NotNullWhen(true)] ref string? notNullWhen, Type? nullableType);
+            // bool NotNullWhenParameter([DisallowNull] string? disallowNull, [NotNullWhen(true)] ref string?
+            // notNullWhen, Type? nullableType);
             ParameterInfo[] notNullWhenParameters = type.GetMethod("NotNullWhenParameter", flags)!
                 .GetParameters();
             NullabilityInfo disallowNull = nullabilityContext.Create(notNullWhenParameters[0]);
@@ -2164,7 +2165,8 @@ namespace System.Reflection.Tests
                 nullabilityContext.Create(notNullWhenParameters[1]).ReadState
             );
 
-            // bool MaybeNullParameters([MaybeNull] string maybeNull, [MaybeNullWhen(false)] out string maybeNullWhen, Type? nullableType)
+            // bool MaybeNullParameters([MaybeNull] string maybeNull, [MaybeNullWhen(false)] out string
+            // maybeNullWhen, Type? nullableType)
             ParameterInfo[] maybeNullParameters = type.GetMethod("MaybeNullParameters", flags)!
                 .GetParameters();
             NullabilityInfo maybeNull = nullabilityContext.Create(maybeNullParameters[0]);
@@ -2178,7 +2180,8 @@ namespace System.Reflection.Tests
                 nullabilityContext.Create(maybeNullParameters[1]).ReadState
             );
 
-            // string? AllowNullParameter([AllowNull] string allowNull, [NotNullIfNotNull(nameof(allowNull))] string? notNullIfNotNull)
+            // string? AllowNullParameter([AllowNull] string allowNull, [NotNullIfNotNull(nameof(allowNull))]
+            // string? notNullIfNotNull)
             ParameterInfo[] allowNullParameter = type.GetMethod("AllowNullParameter", flags)!
                 .GetParameters();
             NullabilityInfo allowNull = nullabilityContext.Create(allowNullParameter[0]);
@@ -2192,7 +2195,8 @@ namespace System.Reflection.Tests
                 nullabilityContext.Create(allowNullParameter[1]).ReadState
             );
 
-            // [return: NotNullIfNotNull(nameof(nullable))] public string? NullableNotNullIfNotNullReturn(string? nullable, [NotNull] ref string? readNotNull)
+            // [return: NotNullIfNotNull(nameof(nullable))] public string?
+            // NullableNotNullIfNotNullReturn(string? nullable, [NotNull] ref string? readNotNull)
             ParameterInfo[] nullableNotNullIfNotNullReturn = type.GetMethod(
                         "NullableNotNullIfNotNullReturn",
                         flags
@@ -2213,7 +2217,8 @@ namespace System.Reflection.Tests
                 nullabilityContext.Create(nullableNotNullIfNotNullReturn[0]).ReadState
             );
 
-            // public bool TryGetOutParameters(string id, [NotNullWhen(true)] out string? value, [MaybeNullWhen(false)] out string value2)
+            // public bool TryGetOutParameters(string id, [NotNullWhen(true)] out string? value,
+            // [MaybeNullWhen(false)] out string value2)
             ParameterInfo[] tryGetOutParameters = type.GetMethod("TryGetOutParameters", flags)!
                 .GetParameters();
             NullabilityInfo notNullWhenParam = nullabilityContext.Create(tryGetOutParameters[1]);
@@ -2302,7 +2307,8 @@ namespace System.Reflection.Tests
 
         public static IEnumerable<object[]> NestedGenericsReturnParameterData()
         {
-            // public IEnumerable<Tuple<(string name, object? value), int>?> MethodReturnsEnumerableNonTupleNonNonNullValueTupleNonNullNon() => null!;
+            // public IEnumerable<Tuple<(string name, object? value), int>?>
+            // MethodReturnsEnumerableNonTupleNonNonNullValueTupleNonNullNon() => null!;
             yield return new object[]
             {
                 "MethodReturnsEnumerableNonTupleNonNonNullValueTupleNonNullNon",
@@ -2314,7 +2320,8 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
             };
 
-            // public IEnumerable<Tuple<(string? name, object value)?, int>?>? MethodReturnsEnumerableNullTupleNullNonNullValueTupleNullNonNull() => null!;
+            // public IEnumerable<Tuple<(string? name, object value)?, int>?>?
+            // MethodReturnsEnumerableNullTupleNullNonNullValueTupleNullNonNull() => null!;
             yield return new object[]
             {
                 "MethodReturnsEnumerableNullTupleNullNonNullValueTupleNullNonNull",
@@ -2326,7 +2333,8 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
             };
 
-            // public IEnumerable<Tuple<Tuple<string, object?>, int>?> MethodReturnsEnumerableNonTupleNonNonNullTupleNonNullNon() => null!;
+            // public IEnumerable<Tuple<Tuple<string, object?>, int>?>
+            // MethodReturnsEnumerableNonTupleNonNonNullTupleNonNullNon() => null!;
             yield return new object[]
             {
                 "MethodReturnsEnumerableNonTupleNonNonNullTupleNonNullNon",
@@ -2338,7 +2346,8 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
             };
 
-            // public IEnumerable<GenericStruct<Tuple<string, object?>?, int>?>? MethodReturnsEnumerableNullStructNullNonNonTupleNonNullNull() => null;
+            // public IEnumerable<GenericStruct<Tuple<string, object?>?, int>?>?
+            // MethodReturnsEnumerableNullStructNullNonNonTupleNonNullNull() => null;
             yield return new object[]
             {
                 "MethodReturnsEnumerableNullStructNullNonNullTupleNonNullNull",
@@ -2350,7 +2359,8 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
             };
 
-            // public IEnumerable<Tuple<GenericStruct<string, object?>?, int>?>? MethodReturnsEnumerableNullTupleNullNonNullStructNonNullNull() => null;
+            // public IEnumerable<Tuple<GenericStruct<string, object?>?, int>?>?
+            // MethodReturnsEnumerableNullTupleNullNonNullStructNonNullNull() => null;
             yield return new object[]
             {
                 "MethodReturnsEnumerableNullTupleNullNonNullStructNonNullNull",
@@ -2362,7 +2372,8 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
             };
 
-            // public IEnumerable<(GenericStruct<string, object?> str, int? count)> MethodReturnsEnumerableNonValueTupleNonNullNonTupleNonNullNon() => null!;
+            // public IEnumerable<(GenericStruct<string, object?> str, int? count)>
+            // MethodReturnsEnumerableNonValueTupleNonNullNonTupleNonNullNon() => null!;
             yield return new object[]
             {
                 "MethodReturnsEnumerableNonValueTupleNonNullNonStructNonNullNon",

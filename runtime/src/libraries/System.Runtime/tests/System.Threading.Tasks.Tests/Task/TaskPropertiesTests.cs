@@ -95,13 +95,15 @@ namespace System.Threading.Tasks.Tests
         }
 
         /// <summary>
-        /// Create as many tasks as the options combination allow and start them and check to ensure that the options are correct
+        /// Create as many tasks as the options combination allow and start them and check to ensure that
+        // the options are correct
         /// </summary>
         internal static void TaskOptionTest(bool runSync)
         {
             // Read Parameters
 
-            //Get the number of combinations of all options to try, currently there are four options and this relies on the product implementation
+            //Get the number of combinations of all options to try, currently there are four options and this
+            // relies on the product implementation
             //that each option is bit field
             int allOptions = 1;
             int y = Enum.GetNames(typeof(TaskCreationOptions)).Length - 1;

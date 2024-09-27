@@ -385,7 +385,8 @@ namespace System.Net.WebSockets.Client.Tests
                     true,
                     cts.Token
                 );
-                // Need a short delay as per WebSocket rfc6455 section 5.5.1 there isn't a requirement to receive any
+                // Need a short delay as per WebSocket rfc6455 section 5.5.1 there isn't a requirement to receive
+                // any
                 // data fragments after a close has been sent. The delay allows the received data fragment to be
                 // available before calling close. The WinRT MessageWebSocket implementation doesn't allow receiving
                 // after a call to Close.
@@ -545,8 +546,10 @@ namespace System.Net.WebSockets.Client.Tests
                 Assert.Equal(WebSocketMessageType.Close, r.MessageType);
                 Assert.Equal(WebSocketState.Closed, cws.State);
 
-                // Closing an already-closed ClientWebSocket should be a no-op. Any other behavior (e.g., throwing exception)
-                // would give way to race conditions between (1) CloseAsync being called and (2) the server's response close
+                // Closing an already-closed ClientWebSocket should be a no-op. Any other behavior (e.g., throwing
+                // exception)
+                // would give way to race conditions between (1) CloseAsync being called and (2) the server's
+                // response close
                 // frame being received after CloseOutputAsync.
                 await cws.CloseAsync(
                     WebSocketCloseStatus.NormalClosure,
@@ -555,7 +558,8 @@ namespace System.Net.WebSockets.Client.Tests
                 );
                 Assert.Equal(WebSocketState.Closed, cws.State);
 
-                // Call CloseAsync one more time on the already-closed ClientWebSocket for good measure. Again, this should be a no-op.
+                // Call CloseAsync one more time on the already-closed ClientWebSocket for good measure. Again, this
+                // should be a no-op.
                 await cws.CloseAsync(
                     WebSocketCloseStatus.NormalClosure,
                     "",
@@ -594,9 +598,12 @@ namespace System.Net.WebSockets.Client.Tests
                     CancellationToken.None
                 );
 
-                // There is a race condition in the above.  If the ReceiveAsync receives the sent close message from the server,
-                // then it will complete successfully and the socket will close successfully.  If the CloseAsync receive the sent
-                // close message from the server, then the receive async will end up getting aborted along with the socket.
+                // There is a race condition in the above.  If the ReceiveAsync receives the sent close message from
+                // the server,
+                // then it will complete successfully and the socket will close successfully.  If the CloseAsync
+                // receive the sent
+                // close message from the server, then the receive async will end up getting aborted along with the
+                // socket.
                 try
                 {
                     await t;

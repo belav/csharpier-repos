@@ -234,7 +234,8 @@ namespace Mono.ServiceContractTool
         {
             var type = context.ContractType;
 
-            // remove such OperationContract methods that do not have AsyncPattern parameter. It is sort of hack as it does not check the value (it might be "false").
+            // remove such OperationContract methods that do not have AsyncPattern parameter. It is sort of hack
+            // as it does not check the value (it might be "false").
             var l = new List<CodeMemberMethod>();
             foreach (CodeMemberMethod cm in type.Members)
             {

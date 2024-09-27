@@ -189,7 +189,8 @@ internal sealed class DynamicDependencyAttribute : Attribute
     /// with the specified signature of a member on a <see cref="System.Type"/>.
     /// </summary>
     /// <param name="memberSignature">The signature of the member depended on.</param>
-    /// <param name="type">The <see cref="System.Type"/> containing <paramref name="memberSignature"/>.</param>
+    /// <param name="type">The <see cref="System.Type"/> containing <paramref
+    // name="memberSignature"/>.</param>
     public DynamicDependencyAttribute(string memberSignature, Type type)
     {
         MemberSignature = memberSignature;
@@ -202,7 +203,8 @@ internal sealed class DynamicDependencyAttribute : Attribute
     /// </summary>
     /// <param name="memberSignature">The signature of the member depended on.</param>
     /// <param name="typeName">The full name of the type containing the specified member.</param>
-    /// <param name="assemblyName">The assembly name of the type containing the specified member.</param>
+    /// <param name="assemblyName">The assembly name of the type containing the specified
+    // member.</param>
     public DynamicDependencyAttribute(string memberSignature, string typeName, string assemblyName)
     {
         MemberSignature = memberSignature;
@@ -228,7 +230,8 @@ internal sealed class DynamicDependencyAttribute : Attribute
     /// </summary>
     /// <param name="memberTypes">The types of members depended on.</param>
     /// <param name="typeName">The full name of the type containing the specified members.</param>
-    /// <param name="assemblyName">The assembly name of the type containing the specified members.</param>
+    /// <param name="assemblyName">The assembly name of the type containing the specified
+    // members.</param>
     public DynamicDependencyAttribute(
         DynamicallyAccessedMemberTypes memberTypes,
         string typeName,
@@ -310,7 +313,8 @@ internal sealed class DynamicDependencyAttribute : Attribute
 ///
 /// If the attribute is applied to a method it's treated as a special case and it implies
 /// the attribute should be applied to the "this" parameter of the method. As such the attribute
-/// should only be used on instance methods of types assignable to System.Type (or string, but no methods
+/// should only be used on instance methods of types assignable to System.Type (or string, but no
+// methods
 /// will use it there).
 /// </remarks>
 [AttributeUsage(

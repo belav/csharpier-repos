@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -138,12 +139,14 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext
         )
         {
-            // If the Activator throws an exception, we want to propagate it back up the call stack, since the application
+            // If the Activator throws an exception, we want to propagate it back up the call stack, since the
+            // application
             // developer should know that this was an invalid type to try to bind to.
             return Activator.CreateInstance(bindingContext.ModelType);
         }
 
-        // Called when the property setter null check failed, allows us to add our own error message to ModelState.
+        // Called when the property setter null check failed, allows us to add our own error message to
+        // ModelState.
         internal static EventHandler<ModelValidatedEventArgs> CreateNullCheckFailedHandler(
             ModelMetadata modelMetadata,
             object incomingValue
@@ -288,7 +291,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 out skipProperties
             );
 
-            // Eliminate provided properties from requiredProperties; leaving just *missing* required properties.
+            // Eliminate provided properties from requiredProperties; leaving just *missing* required
+            // properties.
             requiredProperties.ExceptWith(dto.Results.Select(r => r.Key.PropertyName));
 
             foreach (string missingRequiredProperty in requiredProperties)
@@ -298,7 +302,8 @@ namespace System.Web.Http.ModelBinding.Binders
                     missingRequiredProperty
                 );
 
-                // Update Model as SetProperty() would: Place null value where validator will check for non-null. This
+                // Update Model as SetProperty() would: Place null value where validator will check for non-null.
+                // This
                 // ensures a failure result from a required validator (if any) even for a non-nullable property.
                 // (Otherwise, propertyMetadata.Model is likely already null.)
                 ModelMetadata propertyMetadata = bindingContext.PropertyMetadata[

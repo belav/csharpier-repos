@@ -5,8 +5,8 @@
 using Xunit;
 
 /**
- * A simple Com+ application.
- */
+* A simple Com+ application.
+*/
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -15,12 +15,12 @@ namespace DefaultNamespace
 
     public class SafeCStep
     {
-        /**
-         * The main entry point for the application.
-         *
-         * @param args Array of parameters passed to the application
-         * via the command line.
-         */
+/**
+* The main entry point for the application.
+*
+* @param args Array of parameters passed to the application
+* via the command line.
+*/
         [Fact]
         public static void TestEntryPoint()
         {

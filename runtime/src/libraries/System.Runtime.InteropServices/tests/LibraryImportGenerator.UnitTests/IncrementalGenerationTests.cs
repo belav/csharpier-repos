@@ -106,7 +106,8 @@ namespace LibraryImportGenerator.UnitTests
                 runResult.TrackedSteps[StepNames.GenerateSingleStub],
                 step =>
                 {
-                    // The calculated stub information will differ since we have a new syntax tree for where to report diagnostics.
+                    // The calculated stub information will differ since we have a new syntax tree for where to report
+                    // diagnostics.
                     Assert.Collection(
                         step.Outputs,
                         output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)

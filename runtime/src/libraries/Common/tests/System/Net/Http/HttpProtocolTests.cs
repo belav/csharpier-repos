@@ -454,7 +454,8 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("\n")]
         public async Task GetAsync_ResponseHasNormalLineEndings_Success(string lineEnding)
         {
-            // Using an unusually high timeout as this test can take a longer time to execute on busy CI machines.
+            // Using an unusually high timeout as this test can take a longer time to execute on busy CI
+            // machines.
             TimeSpan timeout = TimeSpan.FromMilliseconds(
                 TestHelper.PassingTestTimeoutMilliseconds * 5
             );

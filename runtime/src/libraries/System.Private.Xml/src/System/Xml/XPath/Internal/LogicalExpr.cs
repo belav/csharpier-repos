@@ -78,7 +78,8 @@ namespace MS.Internal.Xml.XPath
 
         private delegate bool cmpXslt(Operator.Op op, object val1, object val2);
 
-        //                  Number,                       String,                        Boolean,                     NodeSet,                      Navigator
+        //                  Number,                       String,                        Boolean,
+        // NodeSet,                      Navigator
         private static readonly cmpXslt?[][] s_CompXsltE =
         {
             new cmpXslt?[] { new cmpXslt(cmpNumberNumber), null, null, null, null },
@@ -152,7 +153,7 @@ namespace MS.Internal.Xml.XPath
             },
         };
 
-        /*cmpXslt:*/
+/*cmpXslt:*/
         private static bool cmpQueryQueryE(Operator.Op op, object val1, object val2)
         {
             Debug.Assert(op == Operator.Op.EQ || op == Operator.Op.NE);
@@ -185,7 +186,7 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        /*cmpXslt:*/
+/*cmpXslt:*/
         private static bool cmpQueryQueryO(Operator.Op op, object val1, object val2)
         {
             Debug.Assert(

@@ -62,12 +62,14 @@ class C
             );
 
             comp.VerifyDiagnostics(
-                // (10,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('RefG<string>')
+                // (10,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('RefG<string>')
                 //         var x2 = stackalloc RefG<string>[10];
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "RefG<string>")
                     .WithArguments("RefG<string>")
                     .WithLocation(10, 29),
-                // (12,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('TypedReference')
+                // (12,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('TypedReference')
                 //         var x4 = stackalloc System.TypedReference[10];
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "System.TypedReference")
                     .WithArguments("System.TypedReference")
@@ -170,7 +172,8 @@ namespace System {
             );
 
             comp.VerifyDiagnostics(
-                // (7,28): error CS0246: The type or namespace name 'RefStruct' could not be found (are you missing a using directive or an assembly reference?)
+                // (7,28): error CS0246: The type or namespace name 'RefStruct' could not be found (are you missing
+                // a using directive or an assembly reference?)
                 //     void Method(dynamic d, RefStruct r)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "RefStruct")
                     .WithArguments("RefStruct")
@@ -204,7 +207,8 @@ namespace System {
                         "stackalloc[] { (1, null) }"
                     )
                     .WithLocation(13, 18),
-                // (14,18): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('Action')
+                // (14,18): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('Action')
                 //         var p5 = stackalloc[] { () => { } };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc[] { () => { } }")
                     .WithArguments("System.Action")
@@ -216,7 +220,8 @@ namespace System {
                         "stackalloc[] { new {} , new { i = 0 } }"
                     )
                     .WithLocation(15, 18),
-                // (16,18): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                // (16,18): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('dynamic')
                 //         var p7 = stackalloc[] { d };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc[] { d }")
                     .WithArguments("dynamic")
@@ -293,7 +298,8 @@ namespace System {
                         "stackalloc[] { (1, null) }"
                     )
                     .WithLocation(13, 32),
-                // (14,32): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('Action')
+                // (14,32): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('Action')
                 //         var p5 = c ? default : stackalloc[] { () => { } };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc[] { () => { } }")
                     .WithArguments("System.Action")
@@ -305,7 +311,8 @@ namespace System {
                         "stackalloc[] { new {} , new { i = 0 } }"
                     )
                     .WithLocation(15, 32),
-                // (16,32): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                // (16,32): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('dynamic')
                 //         var p7 = c ? default : stackalloc[] { d };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc[] { d }")
                     .WithArguments("dynamic")
@@ -485,12 +492,14 @@ unsafe class Test
             );
 
             comp.VerifyDiagnostics(
-                // (7,20): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('string')
+                // (7,20): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('string')
                 //         var obj1 = stackalloc[] { "" };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, @"stackalloc[] { """" }")
                     .WithArguments("string")
                     .WithLocation(7, 20),
-                // (8,20): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('<empty anonymous type>')
+                // (8,20): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('<empty anonymous type>')
                 //         var obj2 = stackalloc[] { new {} };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc[] { new {} }")
                     .WithArguments("<empty anonymous type>")
@@ -577,12 +586,14 @@ unsafe class Test
             );
 
             comp.VerifyDiagnostics(
-                // (7,34): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('string')
+                // (7,34): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('string')
                 //         var obj1 = c ? default : stackalloc[] { "" };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, @"stackalloc[] { """" }")
                     .WithArguments("string")
                     .WithLocation(7, 34),
-                // (8,34): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('<empty anonymous type>')
+                // (8,34): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('<empty anonymous type>')
                 //         var obj2 = c ? default : stackalloc[] { new {} };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc[] { new {} }")
                     .WithArguments("<empty anonymous type>")
@@ -785,7 +796,8 @@ class Test
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (6,15): error CS8370: Feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,15): error CS8370: Feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         lock (stackalloc int[3] { 1, 2, 3 }) {}
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -795,7 +807,8 @@ class Test
                     Diagnostic(ErrorCode.ERR_LockNeedsReference, "stackalloc int[3] { 1, 2, 3 }")
                         .WithArguments("int*")
                         .WithLocation(6, 15),
-                    // (7,15): error CS8370: Feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,15): error CS8370: Feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         lock (stackalloc int[ ] { 1, 2, 3 }) {}
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -805,7 +818,8 @@ class Test
                     Diagnostic(ErrorCode.ERR_LockNeedsReference, "stackalloc int[ ] { 1, 2, 3 }")
                         .WithArguments("int*")
                         .WithLocation(7, 15),
-                    // (8,15): error CS8370: Feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,15): error CS8370: Feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         lock (stackalloc    [ ] { 1, 2, 3 }) {}
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -861,17 +875,20 @@ class Test
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (7,44): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,44): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var q1 = from item in array select stackalloc int[3] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 44),
-                    // (8,44): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,44): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var q2 = from item in array select stackalloc int[ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(8, 44),
-                    // (9,44): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (9,44): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var q3 = from item in array select stackalloc    [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -891,7 +908,8 @@ class Test
                         )
                         .WithArguments("System.Span<int>")
                         .WithLocation(7, 37),
-                    // (7,44): error CS8353: A result of a stackalloc expression of type 'Span<int>' cannot be used in this context because it may be exposed outside of the containing method
+                    // (7,44): error CS8353: A result of a stackalloc expression of type 'Span<int>' cannot be used in
+                    // this context because it may be exposed outside of the containing method
                     //         var q1 = from item in array select stackalloc int[3] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_EscapeStackAlloc, "stackalloc int[3] { 1, 2, 3 }")
                         .WithArguments("System.Span<int>")
@@ -904,7 +922,8 @@ class Test
                         )
                         .WithArguments("System.Span<int>")
                         .WithLocation(8, 37),
-                    // (8,44): error CS8353: A result of a stackalloc expression of type 'Span<int>' cannot be used in this context because it may be exposed outside of the containing method
+                    // (8,44): error CS8353: A result of a stackalloc expression of type 'Span<int>' cannot be used in
+                    // this context because it may be exposed outside of the containing method
                     //         var q2 = from item in array select stackalloc int[ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_EscapeStackAlloc, "stackalloc int[ ] { 1, 2, 3 }")
                         .WithArguments("System.Span<int>")
@@ -917,7 +936,8 @@ class Test
                         )
                         .WithArguments("System.Span<int>")
                         .WithLocation(9, 37),
-                    // (9,44): error CS8353: A result of a stackalloc expression of type 'Span<int>' cannot be used in this context because it may be exposed outside of the containing method
+                    // (9,44): error CS8353: A result of a stackalloc expression of type 'Span<int>' cannot be used in
+                    // this context because it may be exposed outside of the containing method
                     //         var q3 = from item in array select stackalloc    [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_EscapeStackAlloc, "stackalloc    [ ] { 1, 2, 3 }")
                         .WithArguments("System.Span<int>")
@@ -946,17 +966,20 @@ class Test
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (7,45): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,45): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var q1 = from item in array let v = stackalloc int[3] { 1, 2, 3 } select v;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 45),
-                    // (8,45): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,45): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var q2 = from item in array let v = stackalloc int[ ] { 1, 2, 3 } select v;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(8, 45),
-                    // (9,45): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (9,45): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var q3 = from item in array let v = stackalloc    [ ] { 1, 2, 3 } select v;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -1035,7 +1058,8 @@ class Test
                 //         Span<int> p = stackalloc int[await Task.FromResult(1)] { await Task.FromResult(2) };
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "await Task.FromResult(1)")
                     .WithLocation(8, 38),
-                // (8,9): error CS4012: Parameters or locals of type 'Span<int>' cannot be declared in async methods or async lambda expressions.
+                // (8,9): error CS4012: Parameters or locals of type 'Span<int>' cannot be declared in async methods
+                // or async lambda expressions.
                 //         Span<int> p = stackalloc int[await Task.FromResult(1)] { await Task.FromResult(2) };
                 Diagnostic(ErrorCode.ERR_BadSpecialByRefLocal, "Span<int>")
                     .WithArguments("System.Span<int>")
@@ -1131,13 +1155,16 @@ unsafe class Test
             );
 
             comp.VerifyDiagnostics(
-                // (6,40): error CS0623: Array initializers can only be used in a variable or field initializer. Try using a new expression instead.
+                // (6,40): error CS0623: Array initializers can only be used in a variable or field initializer. Try
+                // using a new expression instead.
                 //         var obj1 = stackalloc int[1] { { 42 } };
                 Diagnostic(ErrorCode.ERR_ArrayInitInBadPlace, "{ 42 }").WithLocation(6, 40),
-                // (7,40): error CS0623: Array initializers can only be used in a variable or field initializer. Try using a new expression instead.
+                // (7,40): error CS0623: Array initializers can only be used in a variable or field initializer. Try
+                // using a new expression instead.
                 //         var obj2 = stackalloc int[ ] { { 42 } };
                 Diagnostic(ErrorCode.ERR_ArrayInitInBadPlace, "{ 42 }").WithLocation(7, 40),
-                // (8,40): error CS0623: Array initializers can only be used in a variable or field initializer. Try using a new expression instead.
+                // (8,40): error CS0623: Array initializers can only be used in a variable or field initializer. Try
+                // using a new expression instead.
                 //         var obj3 = stackalloc    [ ] { { 42 } };
                 Diagnostic(ErrorCode.ERR_ArrayInitInBadPlace, "{ 42 }").WithLocation(8, 40)
             );
@@ -1161,14 +1188,17 @@ unsafe class Test
             );
 
             comp.VerifyDiagnostics(
-                // (6,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (6,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         stackalloc[] {1};
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "stackalloc[] {1}").WithLocation(6, 9),
-                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         stackalloc int[] {1};
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "stackalloc int[] {1}")
                     .WithLocation(7, 9),
-                // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         stackalloc int[1] {1};
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "stackalloc int[1] {1}")
                     .WithLocation(8, 9)
@@ -1191,7 +1221,8 @@ unsafe class Test
             );
 
             comp.VerifyDiagnostics(
-                // (6,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('int[]')
+                // (6,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('int[]')
                 //         var obj1 = stackalloc int[][] { 1 };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "int")
                     .WithArguments("int[]")
@@ -1335,7 +1366,8 @@ unsafe class Test
             );
 
             comp.VerifyDiagnostics(
-                // (11,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is not possible.
+                // (11,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is
+                // not possible.
                 //         double* obj5 = stackalloc int[3] { 1, 2, 3 };
                 Diagnostic(
                         ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1343,7 +1375,8 @@ unsafe class Test
                     )
                     .WithArguments("int", "double*")
                     .WithLocation(11, 24),
-                // (20,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is not possible.
+                // (20,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is
+                // not possible.
                 //         double* obj5 = stackalloc int[] { 1, 2, 3 };
                 Diagnostic(
                         ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1351,7 +1384,8 @@ unsafe class Test
                     )
                     .WithArguments("int", "double*")
                     .WithLocation(20, 24),
-                // (29,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is not possible.
+                // (29,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is
+                // not possible.
                 //         double* obj5 = stackalloc[] { 1, 2, 3 };
                 Diagnostic(
                         ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1478,7 +1512,8 @@ unsafe class Test
             );
 
             comp.VerifyDiagnostics(
-                // (11,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is not possible.
+                // (11,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is
+                // not possible.
                 //         double* obj5 = stackalloc int[3] { 1, 2, 3 };
                 Diagnostic(
                         ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1486,7 +1521,8 @@ unsafe class Test
                     )
                     .WithArguments("int", "double*")
                     .WithLocation(11, 24),
-                // (20,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is not possible.
+                // (20,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is
+                // not possible.
                 //         double* obj5 = stackalloc int[] { 1, 2, 3 };
                 Diagnostic(
                         ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1494,7 +1530,8 @@ unsafe class Test
                     )
                     .WithArguments("int", "double*")
                     .WithLocation(20, 24),
-                // (29,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is not possible.
+                // (29,24): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double*' is
+                // not possible.
                 //         double* obj5 = stackalloc[] { 1, 2, 3 };
                 Diagnostic(
                         ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1605,7 +1642,8 @@ class Test
                     TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (6,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is not possible.
+                    // (6,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is not
+                    // possible.
                     //         double x = stackalloc int[3] { 1, 2, 3 };        // implicit
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1613,7 +1651,8 @@ class Test
                         )
                         .WithArguments("int", "double")
                         .WithLocation(6, 20),
-                    // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not possible.
+                    // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not
+                    // possible.
                     //         short y = (short)stackalloc int[3] { 1, 2, 3 };  // explicit
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1621,7 +1660,8 @@ class Test
                         )
                         .WithArguments("int", "short")
                         .WithLocation(7, 19),
-                    // (12,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is not possible.
+                    // (12,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is
+                    // not possible.
                     //         double x = stackalloc int[] { 1, 2, 3 };          // implicit
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1629,7 +1669,8 @@ class Test
                         )
                         .WithArguments("int", "double")
                         .WithLocation(12, 20),
-                    // (13,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not possible.
+                    // (13,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not
+                    // possible.
                     //         short y = (short)stackalloc int[] { 1, 2, 3 };    // explicit
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1637,7 +1678,8 @@ class Test
                         )
                         .WithArguments("int", "short")
                         .WithLocation(13, 19),
-                    // (18,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is not possible.
+                    // (18,20): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'double' is
+                    // not possible.
                     //         double x = stackalloc[] { 1, 2, 3 };          // implicit
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1645,7 +1687,8 @@ class Test
                         )
                         .WithArguments("int", "double")
                         .WithLocation(18, 20),
-                    // (19,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not possible.
+                    // (19,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'short' is not
+                    // possible.
                     //         short y = (short)stackalloc[] { 1, 2, 3 };    // explicit
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -1672,7 +1715,8 @@ class Test
 }"
                 )
                 .VerifyDiagnostics(
-                    // (6,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //         Span<int> a1 = stackalloc int [3] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Span<int>")
                         .WithArguments("Span<>")
@@ -1685,7 +1729,8 @@ class Test
                         )
                         .WithArguments("System.Span`1")
                         .WithLocation(6, 24),
-                    // (7,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //         Span<int> a2 = stackalloc int [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Span<int>")
                         .WithArguments("Span<>")
@@ -1698,7 +1743,8 @@ class Test
                         )
                         .WithArguments("System.Span`1")
                         .WithLocation(7, 24),
-                    // (8,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a using directive or an assembly reference?)
+                    // (8,9): error CS0246: The type or namespace name 'Span<>' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //         Span<int> a3 = stackalloc     [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Span<int>")
                         .WithArguments("Span<>")
@@ -1820,24 +1866,30 @@ class Test
                     TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (7,59): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>' is not possible.
-                    //         var x1 = true ? stackalloc int [3] { 1, 2, 3, } : (Span<int>)stackalloc short [3] { (short)1, (short)2, (short)3 };
+                    // (7,59): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>'
+                    // is not possible.
+                    //         var x1 = true ? stackalloc int [3] { 1, 2, 3, } : (Span<int>)stackalloc short [3] {
+                    // (short)1, (short)2, (short)3 };
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
                             "(Span<int>)stackalloc short [3] { (short)1, (short)2, (short)3 }"
                         )
                         .WithArguments("short", "System.Span<int>")
                         .WithLocation(7, 59),
-                    // (8,59): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>' is not possible.
-                    //         var x2 = true ? stackalloc int [ ] { 1, 2, 3, } : (Span<int>)stackalloc short [ ] { (short)1, (short)2, (short)3 };
+                    // (8,59): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>'
+                    // is not possible.
+                    //         var x2 = true ? stackalloc int [ ] { 1, 2, 3, } : (Span<int>)stackalloc short [ ] {
+                    // (short)1, (short)2, (short)3 };
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
                             "(Span<int>)stackalloc short [ ] { (short)1, (short)2, (short)3 }"
                         )
                         .WithArguments("short", "System.Span<int>")
                         .WithLocation(8, 59),
-                    // (9,59): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>' is not possible.
-                    //         var x3 = true ? stackalloc     [ ] { 1, 2, 3, } : (Span<int>)stackalloc       [ ] { (short)1, (short)2, (short)3 };
+                    // (9,59): error CS8346: Conversion of a stackalloc expression of type 'short' to type 'Span<int>'
+                    // is not possible.
+                    //         var x3 = true ? stackalloc     [ ] { 1, 2, 3, } : (Span<int>)stackalloc       [ ] {
+                    // (short)1, (short)2, (short)3 };
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
                             "(Span<int>)stackalloc       [ ] { (short)1, (short)2, (short)3 }"
@@ -1890,17 +1942,20 @@ class Test
                     TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (8,18): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'System.Span<int>' and 'System.Span<short>'
+                    // (8,18): error CS0173: Type of conditional expression cannot be determined because there is no
+                    // implicit conversion between 'System.Span<int>' and 'System.Span<short>'
                     //         var x1 = true ? stackalloc int [3] { 1, 2, 3 } : a;
                     Diagnostic(ErrorCode.ERR_InvalidQM, "true ? stackalloc int [3] { 1, 2, 3 } : a")
                         .WithArguments("System.Span<int>", "System.Span<short>")
                         .WithLocation(8, 18),
-                    // (9,18): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'System.Span<int>' and 'System.Span<short>'
+                    // (9,18): error CS0173: Type of conditional expression cannot be determined because there is no
+                    // implicit conversion between 'System.Span<int>' and 'System.Span<short>'
                     //         var x2 = true ? stackalloc int [ ] { 1, 2, 3 } : a;
                     Diagnostic(ErrorCode.ERR_InvalidQM, "true ? stackalloc int [ ] { 1, 2, 3 } : a")
                         .WithArguments("System.Span<int>", "System.Span<short>")
                         .WithLocation(9, 18),
-                    // (10,18): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'System.Span<int>' and 'System.Span<short>'
+                    // (10,18): error CS0173: Type of conditional expression cannot be determined because there is no
+                    // implicit conversion between 'System.Span<int>' and 'System.Span<short>'
                     //         var x3 = true ? stackalloc     [ ] { 1, 2, 3 } : a;
                     Diagnostic(ErrorCode.ERR_InvalidQM, "true ? stackalloc     [ ] { 1, 2, 3 } : a")
                         .WithArguments("System.Span<int>", "System.Span<short>")
@@ -1952,7 +2007,8 @@ class Test
                     TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (6,13): error CS0019: Operator '==' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
+                    // (6,13): error CS0019: Operator '==' cannot be applied to operands of type 'Span<int>' and
+                    // 'Span<int>'
                     //         if (stackalloc int[3] { 1, 2, 3 } == stackalloc int[3] { 1, 2, 3 }) { }
                     Diagnostic(
                             ErrorCode.ERR_BadBinaryOps,
@@ -1960,7 +2016,8 @@ class Test
                         )
                         .WithArguments("==", "System.Span<int>", "System.Span<int>")
                         .WithLocation(6, 13),
-                    // (7,13): error CS0019: Operator '==' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
+                    // (7,13): error CS0019: Operator '==' cannot be applied to operands of type 'Span<int>' and
+                    // 'Span<int>'
                     //         if (stackalloc int[ ] { 1, 2, 3 } == stackalloc int[ ] { 1, 2, 3 }) { }
                     Diagnostic(
                             ErrorCode.ERR_BadBinaryOps,
@@ -1968,7 +2025,8 @@ class Test
                         )
                         .WithArguments("==", "System.Span<int>", "System.Span<int>")
                         .WithLocation(7, 13),
-                    // (8,13): error CS0019: Operator '==' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
+                    // (8,13): error CS0019: Operator '==' cannot be applied to operands of type 'Span<int>' and
+                    // 'Span<int>'
                     //         if (stackalloc    [ ] { 1, 2, 3 } == stackalloc    [ ] { 1, 2, 3 }) { }
                     Diagnostic(
                             ErrorCode.ERR_BadBinaryOps,
@@ -2002,12 +2060,14 @@ class Test
                     parseOptions: parseOptions
                 )
                 .VerifyDiagnostics(
-                    // (7,24): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // (7,24): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use
+                    // language version 7.3 or greater.
                     //         Span<int> x1 = stackalloc int [3] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
                         .WithArguments("stackalloc initializer", "7.3")
                         .WithLocation(7, 24),
-                    // (7,24): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language version 7.2 or greater.
+                    // (7,24): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language
+                    // version 7.2 or greater.
                     //         Span<int> x1 = stackalloc int [3] { 1, 2, 3 };
                     Diagnostic(
                             ErrorCode.ERR_FeatureNotAvailableInVersion7,
@@ -2015,12 +2075,14 @@ class Test
                         )
                         .WithArguments("ref structs", "7.2")
                         .WithLocation(7, 24),
-                    // (8,24): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // (8,24): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use
+                    // language version 7.3 or greater.
                     //         Span<int> x2 = stackalloc int [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
                         .WithArguments("stackalloc initializer", "7.3")
                         .WithLocation(8, 24),
-                    // (8,24): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language version 7.2 or greater.
+                    // (8,24): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language
+                    // version 7.2 or greater.
                     //         Span<int> x2 = stackalloc int [ ] { 1, 2, 3 };
                     Diagnostic(
                             ErrorCode.ERR_FeatureNotAvailableInVersion7,
@@ -2028,12 +2090,14 @@ class Test
                         )
                         .WithArguments("ref structs", "7.2")
                         .WithLocation(8, 24),
-                    // (9,24): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // (9,24): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use
+                    // language version 7.3 or greater.
                     //         Span<int> x3 = stackalloc     [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
                         .WithArguments("stackalloc initializer", "7.3")
                         .WithLocation(9, 24),
-                    // (9,24): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language version 7.2 or greater.
+                    // (9,24): error CS8107: Feature 'ref structs' is not available in C# 7.0. Please use language
+                    // version 7.2 or greater.
                     //         Span<int> x3 = stackalloc     [ ] { 1, 2, 3 };
                     Diagnostic(
                             ErrorCode.ERR_FeatureNotAvailableInVersion7,
@@ -2098,7 +2162,8 @@ public class Test
                     options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
                 )
                 .VerifyDiagnostics(
-                    // (6,16): error CS1674: 'Span<int>': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                    // (6,16): error CS1674: 'Span<int>': type used in a using statement must be implicitly convertible
+                    // to 'System.IDisposable'
                     //         using (var v1 = stackalloc int [3] { 1, 2, 3 })
                     Diagnostic(
                             ErrorCode.ERR_NoConvToIDisp,
@@ -2106,7 +2171,8 @@ public class Test
                         )
                         .WithArguments("System.Span<int>")
                         .WithLocation(6, 16),
-                    // (7,16): error CS1674: 'Span<int>': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                    // (7,16): error CS1674: 'Span<int>': type used in a using statement must be implicitly convertible
+                    // to 'System.IDisposable'
                     //         using (var v2 = stackalloc int [ ] { 1, 2, 3 })
                     Diagnostic(
                             ErrorCode.ERR_NoConvToIDisp,
@@ -2114,7 +2180,8 @@ public class Test
                         )
                         .WithArguments("System.Span<int>")
                         .WithLocation(7, 16),
-                    // (8,16): error CS1674: 'Span<int>': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                    // (8,16): error CS1674: 'Span<int>': type used in a using statement must be implicitly convertible
+                    // to 'System.IDisposable'
                     //         using (var v3 = stackalloc     [ ] { 1, 2, 3 })
                     Diagnostic(
                             ErrorCode.ERR_NoConvToIDisp,
@@ -2147,7 +2214,8 @@ public class Test
                     options: TestOptions.ReleaseDll.WithAllowUnsafe(true)
                 )
                 .VerifyDiagnostics(
-                    // (6,40): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'IDisposable' is not possible.
+                    // (6,40): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'IDisposable'
+                    // is not possible.
                     //         using (System.IDisposable v1 = stackalloc int [3] { 1, 2, 3 })
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -2155,7 +2223,8 @@ public class Test
                         )
                         .WithArguments("int", "System.IDisposable")
                         .WithLocation(6, 40),
-                    // (7,40): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'IDisposable' is not possible.
+                    // (7,40): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'IDisposable'
+                    // is not possible.
                     //         using (System.IDisposable v2 = stackalloc int [ ] { 1, 2, 3 })
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -2163,7 +2232,8 @@ public class Test
                         )
                         .WithArguments("int", "System.IDisposable")
                         .WithLocation(7, 40),
-                    // (8,40): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'IDisposable' is not possible.
+                    // (8,40): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'IDisposable'
+                    // is not possible.
                     //         using (System.IDisposable v3 = stackalloc     [ ] { 1, 2, 3 })
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -2364,17 +2434,20 @@ public class Test
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (7,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         N(stackalloc int [3] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 11),
-                    // (8,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         N(stackalloc int [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(8, 11),
-                    // (9,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (9,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         N(stackalloc     [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -2413,32 +2486,38 @@ public class Test
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (6,24): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,24): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         int length1 = (stackalloc int [3] { 1, 2, 3 }).Length;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(6, 24),
-                    // (7,24): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,24): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         int length2 = (stackalloc int [ ] { 1, 2, 3 }).Length;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 24),
-                    // (8,24): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,24): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         int length3 = (stackalloc     [ ] { 1, 2, 3 }).Length;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(8, 24),
-                    // (10,23): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (10,23): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         int length4 = stackalloc int [3] { 1, 2, 3 }.Length;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(10, 23),
-                    // (11,23): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (11,23): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         int length5 = stackalloc int [ ] { 1, 2, 3 }.Length;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(11, 23),
-                    // (12,23): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (12,23): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         int length6 = stackalloc     [ ] { 1, 2, 3 }.Length;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -2474,17 +2553,20 @@ unsafe public class Test
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (7,16): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,16): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         Invoke(stackalloc int [3] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 16),
-                    // (8,16): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,16): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         Invoke(stackalloc int [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(8, 16),
-                    // (9,16): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (9,16): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         Invoke(stackalloc     [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -2527,7 +2609,8 @@ class Program
 }"
                 )
                 .VerifyDiagnostics(
-                    // (7,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                    // (7,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('dynamic')
                     //         var d1 = stackalloc dynamic [3] { d };
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
                         .WithArguments("dynamic")
@@ -2540,12 +2623,14 @@ class Program
                         )
                         .WithArguments("3")
                         .WithLocation(7, 18),
-                    // (8,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                    // (8,29): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('dynamic')
                     //         var d2 = stackalloc dynamic [ ] { d };
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
                         .WithArguments("dynamic")
                         .WithLocation(8, 29),
-                    // (9,18): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                    // (9,18): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('dynamic')
                     //         var d3 = stackalloc         [ ] { d };
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc         [ ] { d }")
                         .WithArguments("dynamic")
@@ -2575,7 +2660,8 @@ class Program
 }"
                 )
                 .VerifyDiagnostics(
-                    // (8,39): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                    // (8,39): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('dynamic')
                     //         Span<dynamic> d1 = stackalloc dynamic [3] { d };
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
                         .WithArguments("dynamic")
@@ -2588,12 +2674,14 @@ class Program
                         )
                         .WithArguments("3")
                         .WithLocation(8, 28),
-                    // (9,39): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                    // (9,39): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('dynamic')
                     //         Span<dynamic> d2 = stackalloc dynamic [ ] { d };
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "dynamic")
                         .WithArguments("dynamic")
                         .WithLocation(9, 39),
-                    // (10,28): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('dynamic')
+                    // (10,28): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('dynamic')
                     //         Span<dynamic> d3 = stackalloc         [ ] { d };
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc         [ ] { d }")
                         .WithArguments("dynamic")
@@ -2619,17 +2707,20 @@ class Program
 }";
             CreateCompilationWithMscorlibAndSpan(source, parseOptions: TestOptions.Regular7_3)
                 .VerifyDiagnostics(
-                    // (8,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         N(stackalloc int [3] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(8, 11),
-                    // (9,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (9,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         N(stackalloc int [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(9, 11),
-                    // (10,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (10,11): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         N(stackalloc     [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -2671,17 +2762,20 @@ class Program
 }";
             CreateCompilationWithMscorlibAndSpan(source, parseOptions: TestOptions.Regular7_3)
                 .VerifyDiagnostics(
-                    // (6,19): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,19): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x1 = (stackalloc int [3] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(6, 19),
-                    // (7,19): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,19): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x2 = (stackalloc int [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 19),
-                    // (8,19): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,19): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x3 = (stackalloc     [ ] { 1, 2, 3 });
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -2707,32 +2801,38 @@ class Program
 }";
             CreateCompilationWithMscorlibAndSpan(source, parseOptions: TestOptions.Regular7_3)
                 .VerifyDiagnostics(
-                    // (6,18): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,18): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x1 = stackalloc int [3] { 1, 2, 3 } ?? stackalloc int [3] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(6, 18),
-                    // (6,52): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,52): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x1 = stackalloc int [3] { 1, 2, 3 } ?? stackalloc int [3] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(6, 52),
-                    // (7,18): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,18): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x2 = stackalloc int [ ] { 1, 2, 3 } ?? stackalloc int [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 18),
-                    // (7,52): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (7,52): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x2 = stackalloc int [ ] { 1, 2, 3 } ?? stackalloc int [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(7, 52),
-                    // (8,18): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,18): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x3 = stackalloc     [ ] { 1, 2, 3 } ?? stackalloc     [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
                         .WithLocation(8, 18),
-                    // (8,52): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (8,52): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         var x3 = stackalloc     [ ] { 1, 2, 3 } ?? stackalloc     [ ] { 1, 2, 3 };
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -2740,7 +2840,8 @@ class Program
                 );
             CreateCompilationWithMscorlibAndSpan(source)
                 .VerifyDiagnostics(
-                    // (6,18): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
+                    // (6,18): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and
+                    // 'Span<int>'
                     //         var x1 = stackalloc int [3] { 1, 2, 3 } ?? stackalloc int [3] { 1, 2, 3 };
                     Diagnostic(
                             ErrorCode.ERR_BadBinaryOps,
@@ -2748,7 +2849,8 @@ class Program
                         )
                         .WithArguments("??", "System.Span<int>", "System.Span<int>")
                         .WithLocation(6, 18),
-                    // (7,18): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
+                    // (7,18): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and
+                    // 'Span<int>'
                     //         var x2 = stackalloc int [ ] { 1, 2, 3 } ?? stackalloc int [ ] { 1, 2, 3 };
                     Diagnostic(
                             ErrorCode.ERR_BadBinaryOps,
@@ -2756,7 +2858,8 @@ class Program
                         )
                         .WithArguments("??", "System.Span<int>", "System.Span<int>")
                         .WithLocation(7, 18),
-                    // (8,18): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and 'Span<int>'
+                    // (8,18): error CS0019: Operator '??' cannot be applied to operands of type 'Span<int>' and
+                    // 'Span<int>'
                     //         var x3 = stackalloc     [ ] { 1, 2, 3 } ?? stackalloc     [ ] { 1, 2, 3 };
                     Diagnostic(
                             ErrorCode.ERR_BadBinaryOps,

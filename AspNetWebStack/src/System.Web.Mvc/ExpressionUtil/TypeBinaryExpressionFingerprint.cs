@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
@@ -24,6 +25,7 @@ namespace System.Web.Mvc.ExpressionUtil
             TypeOperand = typeOperand;
         }
 
+        //
         // http://msdn.microsoft.com/en-us/library/system.linq.expressions.typebinaryexpression.typeoperand.aspx
         public Type TypeOperand { get; private set; }
 

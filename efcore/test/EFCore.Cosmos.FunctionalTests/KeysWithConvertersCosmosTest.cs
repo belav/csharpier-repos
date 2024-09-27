@@ -172,8 +172,10 @@ public class KeysWithConvertersCosmosTest
             //     b =>
             //         {
             //             b.Property(e => e.Id).HasConversion(IntClassKey.Converter);
-            //             b.HasMany(e => e.OptionalDependents).WithOne(e => e.Principal).HasForeignKey(e => e.PrincipalId);
-            //             b.HasMany(e => e.RequiredDependents).WithOne(e => e.Principal).HasForeignKey(e => e.PrincipalId);
+            //             b.HasMany(e => e.OptionalDependents).WithOne(e => e.Principal).HasForeignKey(e =>
+            // e.PrincipalId);
+            //             b.HasMany(e => e.RequiredDependents).WithOne(e => e.Principal).HasForeignKey(e =>
+            // e.PrincipalId);
             //         });
             //
             // modelBuilder.Entity<IntClassKeyOptionalDependent>(
@@ -191,20 +193,25 @@ public class KeysWithConvertersCosmosTest
             //         });
 
             // modelBuilder.Entity<BareIntClassKeyPrincipal>(
-            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer); });
+            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer); });
             //
             // modelBuilder.Entity<BareIntClassKeyOptionalDependent>(
             //     b =>
             //         {
-            //             b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer);
-            //             b.Property(e => e.PrincipalId).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer);
+            //             b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer);
+            //             b.Property(e => e.PrincipalId).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer);
             //         });
             //
             // modelBuilder.Entity<BareIntClassKeyRequiredDependent>(
             //     b =>
             //         {
-            //             b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer);
-            //             b.Property(e => e.PrincipalId).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer);
+            //             b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer);
+            //             b.Property(e => e.PrincipalId).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer);
             //         });
 
             modelBuilder.Entity<ComparableIntStructKeyPrincipal>(b =>
@@ -395,13 +402,16 @@ public class KeysWithConvertersCosmosTest
             //     b => { b.Property(e => e.Id).HasConversion(IntClassKey.Converter); });
             //
             // modelBuilder.Entity<BareIntClassKeyPrincipalShadow>(
-            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer); });
+            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer); });
             //
             // modelBuilder.Entity<BareIntClassKeyOptionalDependentShadow>(
-            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer); });
+            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer); });
             //
             // modelBuilder.Entity<BareIntClassKeyRequiredDependentShadow>(
-            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter, BareIntClassKey.Comparer); });
+            //     b => { b.Property(e => e.Id).HasConversion(BareIntClassKey.Converter,
+            // BareIntClassKey.Comparer); });
 
             modelBuilder.Entity<ComparableIntStructKeyPrincipalShadow>(b =>
             {

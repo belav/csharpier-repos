@@ -101,7 +101,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
 
         configuration.AddEnvironmentVariables(prefix: "ASPNETCORE_");
 
-        // SetDefaultContentRoot needs to be added between 'ASPNETCORE_' and 'DOTNET_' in order to match behavior of the non-slim WebApplicationBuilder.
+        // SetDefaultContentRoot needs to be added between 'ASPNETCORE_' and 'DOTNET_' in order to match
+        // behavior of the non-slim WebApplicationBuilder.
         SetDefaultContentRoot(options, configuration);
 
         // Add the default host environment variable configuration source.
@@ -119,7 +120,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
             }
         );
 
-        // Ensure the same behavior of the non-slim WebApplicationBuilder by adding the default "app" Configuration sources
+        // Ensure the same behavior of the non-slim WebApplicationBuilder by adding the default "app"
+        // Configuration sources
         ApplyDefaultAppConfigurationSlim(
             _hostApplicationBuilder.Environment,
             configuration,
@@ -183,7 +185,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
 
         var configuration = new ConfigurationManager();
 
-        // empty builder should still default the ContentRoot as usual. This is the expected behavior for all WebApplicationBuilders.
+        // empty builder should still default the ContentRoot as usual. This is the expected behavior for
+        // all WebApplicationBuilders.
         SetDefaultContentRoot(options, configuration);
 
         _hostApplicationBuilder = Microsoft.Extensions.Hosting.Host.CreateEmptyApplicationBuilder(
@@ -246,11 +249,13 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
     private ServiceDescriptor InitializeHosting(BootstrapHostBuilder bootstrapHostBuilder)
     {
         // This applies the config from ConfigureWebHostDefaults
-        // Grab the GenericWebHostService ServiceDescriptor so we can append it after any user-added IHostedServices during Build();
+        // Grab the GenericWebHostService ServiceDescriptor so we can append it after any user-added
+        // IHostedServices during Build();
         var genericWebHostServiceDescriptor = bootstrapHostBuilder.RunDefaultCallbacks();
 
         // Grab the WebHostBuilderContext from the property bag to use in the ConfigureWebHostBuilder. Then
-        // grab the IWebHostEnvironment from the webHostContext. This also matches the instance in the IServiceCollection.
+        // grab the IWebHostEnvironment from the webHostContext. This also matches the instance in the
+        // IServiceCollection.
         var webHostContext = (WebHostBuilderContext)
             bootstrapHostBuilder.Properties[typeof(WebHostBuilderContext)];
         Environment = webHostContext.HostingEnvironment;
@@ -302,16 +307,24 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
     {
         if (options.ContentRootPath is null && configuration[HostDefaults.ContentRootKey] is null)
         {
-            // Logic taken from https://github.com/dotnet/runtime/blob/dc5a6c8be1644915c14c4a464447b0d54e223a46/src/libraries/Microsoft.Extensions.Hosting/src/HostingHostBuilderExtensions.cs#L209-L227
+            // Logic taken from
+            // https://github.com/dotnet/runtime/blob/dc5a6c8be1644915c14c4a464447b0d54e223a46/src/libraries/Microsoft.Extensions.Hosting/src/HostingHostBuilderExtensions.cs#L209-L227
 
-            // If we're running anywhere other than C:\Windows\system32, we default to using the CWD for the ContentRoot.
-            // However, since many things like Windows services and MSIX installers have C:\Windows\system32 as there CWD which is not likely
-            // to really be the home for things like appsettings.json, we skip changing the ContentRoot in that case. The non-"default" initial
-            // value for ContentRoot is AppContext.BaseDirectory (e.g. the executable path) which probably makes more sense than the system32.
+            // If we're running anywhere other than C:\Windows\system32, we default to using the CWD for the
+            // ContentRoot.
+            // However, since many things like Windows services and MSIX installers have C:\Windows\system32 as
+            // there CWD which is not likely
+            // to really be the home for things like appsettings.json, we skip changing the ContentRoot in that
+            // case. The non-"default" initial
+            // value for ContentRoot is AppContext.BaseDirectory (e.g. the executable path) which probably makes
+            // more sense than the system32.
 
-            // In my testing, both Environment.CurrentDirectory and Environment.SystemDirectory return the path without
-            // any trailing directory separator characters. I'm not even sure the casing can ever be different from these APIs, but I think it makes sense to
-            // ignore case for Windows path comparisons given the file system is usually (always?) going to be case insensitive for the system path.
+            // In my testing, both Environment.CurrentDirectory and Environment.SystemDirectory return the path
+            // without
+            // any trailing directory separator characters. I'm not even sure the casing can ever be different
+            // from these APIs, but I think it makes sense to
+            // ignore case for Windows path comparisons given the file system is usually (always?) going to be
+            // case insensitive for the system path.
             string cwd = System.Environment.CurrentDirectory;
             if (
                 !OperatingSystem.IsWindows()
@@ -335,7 +348,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         string[]? args
     )
     {
-        // Logic taken from https://github.com/dotnet/runtime/blob/6149ca07d2202c2d0d518e10568c0d0dd3473576/src/libraries/Microsoft.Extensions.Hosting/src/HostingHostBuilderExtensions.cs#L229-L256
+        // Logic taken from
+        // https://github.com/dotnet/runtime/blob/6149ca07d2202c2d0d518e10568c0d0dd3473576/src/libraries/Microsoft.Extensions.Hosting/src/HostingHostBuilderExtensions.cs#L229-L256
 
         var reloadOnChange = GetReloadConfigOnChangeValue(configuration);
 
@@ -393,7 +407,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         IServiceCollection services
     )
     {
-        // Add the necessary services for the slim WebApplicationBuilder, taken from https://github.com/dotnet/runtime/blob/6149ca07d2202c2d0d518e10568c0d0dd3473576/src/libraries/Microsoft.Extensions.Hosting/src/HostingHostBuilderExtensions.cs#L266
+        // Add the necessary services for the slim WebApplicationBuilder, taken from
+        // https://github.com/dotnet/runtime/blob/6149ca07d2202c2d0d518e10568c0d0dd3473576/src/libraries/Microsoft.Extensions.Hosting/src/HostingHostBuilderExtensions.cs#L266
         services.AddLogging(logging =>
         {
             logging.AddConfiguration(configuration.GetSection("Logging"));
@@ -415,17 +430,20 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
     public IWebHostEnvironment Environment { get; private set; }
 
     /// <summary>
-    /// A collection of services for the application to compose. This is useful for adding user provided or framework provided services.
+    /// A collection of services for the application to compose. This is useful for adding user provided
+    // or framework provided services.
     /// </summary>
     public IServiceCollection Services => _hostApplicationBuilder.Services;
 
     /// <summary>
-    /// A collection of configuration providers for the application to compose. This is useful for adding new configuration sources and providers.
+    /// A collection of configuration providers for the application to compose. This is useful for
+    // adding new configuration sources and providers.
     /// </summary>
     public ConfigurationManager Configuration => _hostApplicationBuilder.Configuration;
 
     /// <summary>
-    /// A collection of logging providers for the application to compose. This is useful for adding new logging providers.
+    /// A collection of logging providers for the application to compose. This is useful for adding new
+    // logging providers.
     /// </summary>
     public ILoggingBuilder Logging => _hostApplicationBuilder.Logging;
 
@@ -459,8 +477,10 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
     /// <returns>A configured <see cref="WebApplication"/>.</returns>
     public WebApplication Build()
     {
-        // ConfigureContainer callbacks run after ConfigureServices callbacks including the one that adds GenericWebHostService by default.
-        // One nice side effect is this gives a way to configure an IHostedService that starts after the server and stops beforehand.
+        // ConfigureContainer callbacks run after ConfigureServices callbacks including the one that adds
+        // GenericWebHostService by default.
+        // One nice side effect is this gives a way to configure an IHostedService that starts after the
+        // server and stops beforehand.
         _hostApplicationBuilder.Services.Add(_genericWebHostServiceDescriptor);
         Host.ApplyServiceProviderFactory(_hostApplicationBuilder);
         _builtApplication = new WebApplication(_hostApplicationBuilder.Build());
@@ -495,10 +515,12 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         // destination.Run(source)
         // destination.UseEndpoints()
 
-        // Set the route builder so that UseRouting will use the WebApplication as the IEndpointRouteBuilder for route matching
+        // Set the route builder so that UseRouting will use the WebApplication as the IEndpointRouteBuilder
+        // for route matching
         app.Properties.Add(WebApplication.GlobalEndpointRouteBuilderKey, _builtApplication);
 
-        // Only call UseRouting() if there are endpoints configured and UseRouting() wasn't called on the global route builder already
+        // Only call UseRouting() if there are endpoints configured and UseRouting() wasn't called on the
+        // global route builder already
         if (_builtApplication.DataSources.Count > 0)
         {
             // If this is set, someone called UseRouting() when a global route builder was already set
@@ -551,7 +573,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
 
         if (_builtApplication.DataSources.Count > 0)
         {
-            // We don't know if user code called UseEndpoints(), so we will call it just in case, UseEndpoints() will ignore duplicate DataSources
+            // We don't know if user code called UseEndpoints(), so we will call it just in case, UseEndpoints()
+            // will ignore duplicate DataSources
             app.UseEndpoints(_ => { });
         }
 
@@ -580,13 +603,17 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
 
     private void MergeMiddlewareDescriptions(IApplicationBuilder app)
     {
-        // A user's app builds up a list of middleware. Then when the WebApplication is started, middleware is automatically added
-        // if it is required. For example, the app has mapped endpoints but hasn't configured UseRouting/UseEndpoints.
+        // A user's app builds up a list of middleware. Then when the WebApplication is started, middleware
+        // is automatically added
+        // if it is required. For example, the app has mapped endpoints but hasn't configured
+        // UseRouting/UseEndpoints.
         //
         // This method updates the middleware descriptions to include automatically added middleware.
-        // The app's middleware list is inserted into the new pipeline to create the best representation possible of the middleware pipeline.
+        // The app's middleware list is inserted into the new pipeline to create the best representation
+        // possible of the middleware pipeline.
         //
-        // If the debugger isn't attached then there won't be middleware description collections in the properties and this does nothing.
+        // If the debugger isn't attached then there won't be middleware description collections in the
+        // properties and this does nothing.
 
         Debug.Assert(_builtApplication is not null);
 
@@ -609,7 +636,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         }
     }
 
-    // This type exists so the place where the source pipeline is wired into the destination pipeline can be identified.
+    // This type exists so the place where the source pipeline is wired into the destination pipeline
+    // can be identified.
     private sealed class WireSourcePipeline(IApplicationBuilder builtApplication)
     {
         private readonly IApplicationBuilder _builtApplication = builtApplication;

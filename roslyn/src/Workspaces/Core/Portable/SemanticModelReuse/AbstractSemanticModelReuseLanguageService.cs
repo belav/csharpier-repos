@@ -59,9 +59,12 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             var previousSyntaxTree = previousSemanticModel.SyntaxTree;
             var currentSyntaxTree = currentBodyNode.SyntaxTree;
 
-            // This operation is only valid if top-level equivalent trees were passed in.  If they're not equivalent
-            // then something very bad happened as we did that document.Project.GetDependentSemanticVersionAsync was
-            // still the same.  Log information so we can be alerted if this isn't being as successful as we expect.
+            // This operation is only valid if top-level equivalent trees were passed in.  If they're not
+            // equivalent
+            // then something very bad happened as we did that document.Project.GetDependentSemanticVersionAsync
+            // was
+            // still the same.  Log information so we can be alerted if this isn't being as successful as we
+            // expect.
             var isEquivalentTo = previousSyntaxTree.IsEquivalentTo(
                 currentSyntaxTree,
                 topLevel: true
@@ -79,19 +82,25 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 .ConfigureAwait(false);
             var previousBodyNode = GetPreviousBodyNode(previousRoot, currentRoot, currentBodyNode);
 
-            // Trivia is ignore when comparing two trees for equivalence at top level, since it has no effect to API shape
-            // and it'd be safe to drop in the new method body as long as the shape doesn't change. However, trivia changes
+            // Trivia is ignore when comparing two trees for equivalence at top level, since it has no effect to
+            // API shape
+            // and it'd be safe to drop in the new method body as long as the shape doesn't change. However,
+            // trivia changes
             // around the method do make it tricky to decide whether a position is safe for speculation.
 
             // class C { void M() { return; } }";
-            //                    ^ this is the position used to set OriginalPositionForSpeculation when creating the speculative model.
+            //                    ^ this is the position used to set OriginalPositionForSpeculation when
+            // creating the speculative model.
             //
             // class C {            void M() { return null; } }";
-            //                               ^ it's unsafe to use the speculative model at this position, even though it's part of the
+            //                               ^ it's unsafe to use the speculative model at this position, even
+            // though it's part of the
             //                                 method body and after OriginalPositionForSpeculation.
 
-            // Given that the common use case for us is continuously editing/typing inside a method body, we believe we can be conservative
-            // in creating speculative model with those kind of trivia change, by requiring the method body block not to shift position,
+            // Given that the common use case for us is continuously editing/typing inside a method body, we
+            // believe we can be conservative
+            // in creating speculative model with those kind of trivia change, by requiring the method body
+            // block not to shift position,
             // w/o sacrificing performance in those common scenarios.
             if (previousBodyNode.SpanStart != currentBodyNode.SpanStart)
                 return null;
@@ -111,7 +120,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         {
             if (currentBodyNode is TAccessorDeclarationSyntax currentAccessor)
             {
-                // in the case of an accessor, have to find the previous accessor in the previous prop/event corresponding
+                // in the case of an accessor, have to find the previous accessor in the previous prop/event
+                // corresponding
                 // to the current prop/event.
 
                 var currentContainer = GetBasePropertyDeclaration(currentAccessor);

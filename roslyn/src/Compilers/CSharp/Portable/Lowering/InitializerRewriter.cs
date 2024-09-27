@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(!submissionResultType.IsVoidType());
 
-                // Note: The trailing expression was already converted to the submission result type in Binder.BindGlobalStatement.
+                // Note: The trailing expression was already converted to the submission result type in
+                // Binder.BindGlobalStatement.
                 boundStatements.Add(
                     new BoundReturnStatement(
                         lastStatement.Syntax,
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns the expression if the statement is actually an expression (ExpressionStatementSyntax with no trailing semicolon).
+        /// Returns the expression if the statement is actually an expression (ExpressionStatementSyntax
+        // with no trailing semicolon).
         /// </summary>
         internal static BoundExpression GetTrailingScriptExpression(BoundStatement statement)
         {

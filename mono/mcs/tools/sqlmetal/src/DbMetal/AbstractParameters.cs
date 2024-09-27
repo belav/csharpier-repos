@@ -532,7 +532,8 @@ namespace DbMetal
         }
 
         /// <summary>
-        /// Internal class. I wrote it because I was thinking that the .NET framework already had such a class.
+        /// Internal class. I wrote it because I was thinking that the .NET framework already had such a
+        // class.
         /// At second thought, I may have made a confusion with STL
         /// (interesting, isn't it?)
         /// </summary>

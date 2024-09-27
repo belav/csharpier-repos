@@ -25,7 +25,8 @@ public sealed class HubConnectionOptions
     public TimeSpan KeepAliveInterval { get; set; } = HubConnection.DefaultKeepAliveInterval;
 
     /// <summary>
-    /// Amount of serialized messages in bytes we'll buffer when using Stateful Reconnect until applying backpressure to sends from the client.
+    /// Amount of serialized messages in bytes we'll buffer when using Stateful Reconnect until applying
+    // backpressure to sends from the client.
     /// </summary>
     /// <remarks>Defaults to 100,000 bytes.</remarks>
     public long StatefulReconnectBufferSize { get; set; } =

@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis.AddParameter
     internal static class AddParameterService
     {
         /// <summary>
-        /// Checks if there are indications that there might be more than one declarations that need to be fixed.
-        /// The check does not look-up if there are other declarations (this is done later in the CodeAction).
+        /// Checks if there are indications that there might be more than one declarations that need to be
+        // fixed.
+        /// The check does not look-up if there are other declarations (this is done later in the
+        // CodeAction).
         /// </summary>
         public static bool HasCascadingDeclarations(IMethodSymbol method)
         {

@@ -3,7 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    // Represents a segment of a URL that is not a separator. It contains subsegments such as literals and parameters.
+    // Represents a segment of a URL that is not a separator. It contains subsegments such as literals
+    // and parameters.
     internal sealed class ContentPathSegment : PathSegment
     {
         public ContentPathSegment(IList<PathSubsegment> subsegments)

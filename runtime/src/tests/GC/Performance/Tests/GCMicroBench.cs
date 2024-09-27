@@ -53,7 +53,8 @@ namespace GC_Microbenchmarks
     public class GCMicroBench
     {
         // the minimum size of a segment
-        // if reserved mem increases by more than MinSegmentSize, then we can assume we've allocated a new segment
+        // if reserved mem increases by more than MinSegmentSize, then we can assume we've allocated a new
+        // segment
         public const long MinSegmentSize = 4 * 1024 * 1024;
         public const string ObjTypeParam = "/objtype:";
         public const string ConditionParam = "/condition:";

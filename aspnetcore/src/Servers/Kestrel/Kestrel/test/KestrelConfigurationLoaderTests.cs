@@ -401,7 +401,8 @@ public class KestrelConfigurationLoaderTests
                 .AddInMemoryCollection(endpointConfig)
                 .Build();
 
-            // With all of the configuration certs removed, the only place left to check is the CertificateManager.
+            // With all of the configuration certs removed, the only place left to check is the
+            // CertificateManager.
             // We don't want to depend on machine state, so we cheat and say we already looked.
             serverOptions.IsDevelopmentCertificateLoaded = true;
             Assert.Null(serverOptions.DevelopmentCertificate);
@@ -688,7 +689,8 @@ public class KestrelConfigurationLoaderTests
 
             var listenOptions = serverOptions.CodeBackedListenOptions.Single();
             listenOptions.Build();
-            // In a perfect world, it would match certificate.SerialNumber, but there's no way for an eager UseHttps
+            // In a perfect world, it would match certificate.SerialNumber, but there's no way for an eager
+            // UseHttps
             // to do that before Configure is called.
             Assert.Equal(
                 listenOptions.HttpsOptions.ServerCertificate?.SerialNumber,
@@ -1019,7 +1021,8 @@ public class KestrelConfigurationLoaderTests
                 new[]
                 {
                     new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"),
-                    // We shouldn't need to specify a real cert, because KestrelConfigurationLoader should check whether the endpoint requires a cert before trying to load it.
+                    // We shouldn't need to specify a real cert, because KestrelConfigurationLoader should check whether
+                    // the endpoint requires a cert before trying to load it.
                     new KeyValuePair<string, string>(
                         "Endpoints:End1:Certificate:Path",
                         "fakecert.pfx"
@@ -1374,11 +1377,13 @@ public class KestrelConfigurationLoaderTests
                 .RegisterChangeCallback(_ => fileTcs.SetResult(), state: null);
 
             // Clobber link/ directory symlink - this will effectively cause the cert to be updated.
-            // Unfortunately, it throws (file exists) if we don't delete the old one first so it's not a single, clean FS operation.
+            // Unfortunately, it throws (file exists) if we don't delete the old one first so it's not a single,
+            // clean FS operation.
             dirLink.Delete();
             dirLink = Directory.CreateSymbolicLink(Path.Combine(tempDir, "link"), "./new");
 
-            // This can fail in local runs where the timeout is 5 seconds and polling period is 4 seconds - just re-run
+            // This can fail in local runs where the timeout is 5 seconds and polling period is 4 seconds - just
+            // re-run
             await fileTcs.Task.DefaultTimeout();
 
             Assert.Equal(1, endpointConfigurationCallCount);
@@ -1399,7 +1404,8 @@ public class KestrelConfigurationLoaderTests
 
     [ConditionalTheory]
     [InlineData("http1", HttpProtocols.Http1)]
-    // [InlineData("http2", HttpProtocols.Http2)] // Not supported due to missing ALPN support. https://github.com/dotnet/corefx/issues/33016
+    // [InlineData("http2", HttpProtocols.Http2)] // Not supported due to missing ALPN support.
+    // https://github.com/dotnet/corefx/issues/33016
     [InlineData("http1AndHttp2", HttpProtocols.Http1AndHttp2)] // Gracefully falls back to HTTP/1
     [OSSkipCondition(OperatingSystems.Linux)]
     [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win7)]
@@ -1412,7 +1418,8 @@ public class KestrelConfigurationLoaderTests
     [InlineData("http1", HttpProtocols.Http1)]
     [InlineData("http2", HttpProtocols.Http2)]
     [InlineData("http1AndHttp2", HttpProtocols.Http1AndHttp2)]
-    // [InlineData("http1AndHttp2andHttp3", HttpProtocols.Http1AndHttp2AndHttp3)] // HTTP/3 not currently supported on macOS
+    // [InlineData("http1AndHttp2andHttp3", HttpProtocols.Http1AndHttp2AndHttp3)] // HTTP/3 not
+    // currently supported on macOS
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
     public void DefaultConfigSectionCanSetProtocols_NonWin7(string input, HttpProtocols expected) =>
         DefaultConfigSectionCanSetProtocols(input, expected);
@@ -1499,7 +1506,8 @@ public class KestrelConfigurationLoaderTests
 
     [ConditionalTheory]
     [InlineData("http1", HttpProtocols.Http1)]
-    // [InlineData("http2", HttpProtocols.Http2)] // Not supported due to missing ALPN support. https://github.com/dotnet/corefx/issues/33016
+    // [InlineData("http2", HttpProtocols.Http2)] // Not supported due to missing ALPN support.
+    // https://github.com/dotnet/corefx/issues/33016
     [InlineData("http1AndHttp2", HttpProtocols.Http1AndHttp2)] // Gracefully falls back to HTTP/1
     [OSSkipCondition(OperatingSystems.Linux)]
     [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win7)]

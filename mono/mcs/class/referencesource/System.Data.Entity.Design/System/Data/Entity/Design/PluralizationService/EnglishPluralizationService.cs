@@ -449,7 +449,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "alumnus", "alumni" },
         };
 
-        // this list contains all the plural words that being treated as singluar form, for example, "they" -> "they"
+        // this list contains all the plural words that being treated as singluar form, for example, "they"
+        // -> "they"
         private List<string> _knownConflictingPluralList = new List<string>()
         {
             "they",
@@ -983,7 +984,8 @@ namespace System.Data.Entity.Design.PluralizationServices
                 return prefixWord + newSuffixWord;
             }
 
-            // y takes ys as plural form if preceded by a vowel, but ies if preceded by a consonant, e.g. stays, skies
+            // y takes ys as plural form if preceded by a vowel, but ies if preceded by a consonant, e.g. stays,
+            // skies
             if (
                 PluralizationServiceUtil.TryInflectOnSuffixInWord(
                     suffixWord,
@@ -1198,7 +1200,8 @@ namespace System.Data.Entity.Design.PluralizationServices
                 return prefixWord + newSuffixWord;
             }
 
-            // [cs]h and ss that take es as plural form, this is being moved up since the sses will be override by the ses
+            // [cs]h and ss that take es as plural form, this is being moved up since the sses will be override
+            // by the ses
             if (
                 PluralizationServiceUtil.TryInflectOnSuffixInWord(
                     suffixWord,
@@ -1288,7 +1291,8 @@ namespace System.Data.Entity.Design.PluralizationServices
                 return prefixWord + newSuffixWord;
             }
 
-            // y takes ys as plural form if preceded by a vowel, but ies if preceded by a consonant, e.g. stays, skies
+            // y takes ys as plural form if preceded by a vowel, but ies if preceded by a consonant, e.g. stays,
+            // skies
             if (
                 PluralizationServiceUtil.TryInflectOnSuffixInWord(
                     suffixWord,
@@ -1506,7 +1510,8 @@ namespace System.Data.Entity.Design.PluralizationServices
 
         /// <summary>
         /// This method allow you to add word to internal PluralizationService of English.
-        /// If the singluar or the plural value was already added by this method, then an ArgumentException will be thrown.
+        /// If the singluar or the plural value was already added by this method, then an ArgumentException
+        // will be thrown.
         /// </summary>
         /// <param name="singular"></param>
         /// <param name="plural"></param>

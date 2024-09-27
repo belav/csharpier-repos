@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol;
 public interface IHubProtocol
 {
     /// <summary>
-    /// Gets the name of the protocol. The name is used by SignalR to resolve the protocol between the client and server.
+    /// Gets the name of the protocol. The name is used by SignalR to resolve the protocol between the
+    // client and server.
     /// </summary>
     string Name { get; }
 
@@ -29,12 +30,14 @@ public interface IHubProtocol
     TransferFormat TransferFormat { get; }
 
     /// <summary>
-    /// Creates a new <see cref="HubMessage"/> from the specified serialized representation, and using the specified binder.
+    /// Creates a new <see cref="HubMessage"/> from the specified serialized representation, and using
+    // the specified binder.
     /// </summary>
     /// <param name="input">The serialized representation of the message.</param>
     /// <param name="binder">The binder used to parse the message.</param>
     /// <param name="message">When this method returns <c>true</c>, contains the parsed message.</param>
-    /// <returns>A value that is <c>true</c> if the <see cref="HubMessage"/> was successfully parsed; otherwise, <c>false</c>.</returns>
+    /// <returns>A value that is <c>true</c> if the <see cref="HubMessage"/> was successfully parsed;
+    // otherwise, <c>false</c>.</returns>
     bool TryParseMessage(
         ref ReadOnlySequence<byte> input,
         IInvocationBinder binder,

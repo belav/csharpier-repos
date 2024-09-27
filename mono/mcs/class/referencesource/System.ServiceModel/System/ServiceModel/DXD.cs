@@ -7,7 +7,8 @@ namespace System.ServiceModel
     using System.Collections.Generic;
     using System.Xml;
 
-    // NOTE: This is a dynamic dictionary of XmlDictionaryStrings for the Binary Encoder to dynamically encode should
+    // NOTE: This is a dynamic dictionary of XmlDictionaryStrings for the Binary Encoder to dynamically
+    // encode should
     // the string not exist in the static cache.
     // When adding or removing memebers please keep the capacity of the XmlDictionary field current.
     static class DXD
@@ -21,7 +22,8 @@ namespace System.ServiceModel
 
         static DXD()
         {
-            // Each string added to the XmlDictionary will keep a reference to the XmlDictionary so this class does
+            // Each string added to the XmlDictionary will keep a reference to the XmlDictionary so this class
+            // does
             // not need to keep a reference.
             XmlDictionary dictionary = new XmlDictionary(137);
 

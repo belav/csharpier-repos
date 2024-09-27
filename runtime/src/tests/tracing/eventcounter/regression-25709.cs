@@ -103,7 +103,8 @@ namespace EventCounterRegressionTests
                 // workingset counter also adds a huge amount of time, which makes the test fail in
                 // debug CIs.
                 // This gives us 2 + 1 (EventSource delay) + 1 (Reflection delay) = 4 maximum possible increments
-                // for the very first callback we get in EventListener. Setting the check to 4 to compensate for these.
+                // for the very first callback we get in EventListener. Setting the check to 4 to compensate for
+                // these.
                 if (myListener.MaxIncrement > 4)
                 {
                     Console.WriteLine(

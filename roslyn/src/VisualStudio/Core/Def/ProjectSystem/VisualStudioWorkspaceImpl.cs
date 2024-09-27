@@ -77,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private readonly SemaphoreSlim _gate = new SemaphoreSlim(initialCount: 1);
 
         /// <summary>
-        /// A <see cref="ForegroundThreadAffinitizedObject"/> to make assertions that stuff is on the right thread.
+        /// A <see cref="ForegroundThreadAffinitizedObject"/> to make assertions that stuff is on the right
+        // thread.
         /// </summary>
         private readonly ForegroundThreadAffinitizedObject _foregroundObject;
 
@@ -89,8 +90,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         >.Empty;
 
         /// <summary>
-        /// A map to fetch the path to a rule set file for a project. This right now is only used to implement
-        /// <see cref="TryGetRuleSetPathForProject(ProjectId)"/> and any other use is extremely suspicious, since direct use of this is out of
+        /// A map to fetch the path to a rule set file for a project. This right now is only used to
+        // implement
+        /// <see cref="TryGetRuleSetPathForProject(ProjectId)"/> and any other use is extremely suspicious,
+        // since direct use of this is out of
         /// sync with the Workspace if there is active batching happening.
         /// </summary>
         /// <remarks>Should be updated with <see cref="ImmutableInterlocked"/>.</remarks>
@@ -178,7 +181,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         internal void SubscribeExternalErrorDiagnosticUpdateSourceToSolutionBuildEvents()
         {
-            // TODO: further understand if this needs the foreground thread for any reason. UIContexts are safe to read from the UI thread;
+            // TODO: further understand if this needs the foreground thread for any reason. UIContexts are safe
+            // to read from the UI thread;
             // it's not clear to me why this is being asserted.
             _foregroundObject.AssertIsForeground();
 
@@ -194,7 +198,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return;
             }
 
-            // This pattern ensures that we are called whenever the build starts/completes even if it is already in progress.
+            // This pattern ensures that we are called whenever the build starts/completes even if it is already
+            // in progress.
             KnownUIContexts.SolutionBuildingContext.WhenActivated(() =>
             {
                 KnownUIContexts.SolutionBuildingContext.UIContextChanged += (
@@ -230,7 +235,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _threadingContext.DisposalToken
             );
 
-            // Fetch the session synchronously on the UI thread; if this doesn't happen before we try using this on
+            // Fetch the session synchronously on the UI thread; if this doesn't happen before we try using this
+            // on
             // the background thread then we will experience hangs like we see in this bug:
             // https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=190808 or
             // https://devdiv.visualstudio.com/DevDiv/_workitems?id=296981&_a=edit
@@ -255,22 +261,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 )
                 .ConfigureAwait(true);
 
-            // Update our fields first, so any asynchronous work that needs to use these is able to see the service.
-            // WARNING: if we do .ConfigureAwait(true) here, it means we're trying to transition to the UI thread while
-            // semaphore is acquired; if the UI thread is blocked trying to acquire the semaphore, we could deadlock.
+            // Update our fields first, so any asynchronous work that needs to use these is able to see the
+            // service.
+            // WARNING: if we do .ConfigureAwait(true) here, it means we're trying to transition to the UI
+            // thread while
+            // semaphore is acquired; if the UI thread is blocked trying to acquire the semaphore, we could
+            // deadlock.
             using (await _gate.DisposableWaitAsync().ConfigureAwait(false))
             {
                 _openFileTracker = openFileTracker;
                 _memoryListener = memoryListener;
             }
 
-            // This must be called after the _openFileTracker was assigned; this way we know that a file added from the project system either got checked
+            // This must be called after the _openFileTracker was assigned; this way we know that a file added
+            // from the project system either got checked
             // in CheckForAddedFileBeingOpenMaybeAsync, or we catch it here.
             await openFileTracker
                 .CheckForOpenFilesThatWeMissedAsync(_threadingContext.DisposalToken)
                 .ConfigureAwait(false);
 
-            // Switch to a background thread to avoid loading option providers on UI thread (telemetry is reading options).
+            // Switch to a background thread to avoid loading option providers on UI thread (telemetry is
+            // reading options).
             await TaskScheduler.Default;
 
             var logDelta = _globalOptions.GetOption(
@@ -366,8 +377,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             return null;
         }
 
-        // TODO: consider whether this should be going to the project system directly to get this path. This is only called on interactions from the
-        // Solution Explorer in the SolutionExplorerShim, where if we just could more directly get to the rule set file it'd simplify this.
+        // TODO: consider whether this should be going to the project system directly to get this path. This
+        // is only called on interactions from the
+        // Solution Explorer in the SolutionExplorerShim, where if we just could more directly get to the
+        // rule set file it'd simplify this.
         internal override string? TryGetRuleSetPathForProject(ProjectId projectId)
         {
             // _projectToRuleSetFilePath is immutable, so can be used outside of locks
@@ -433,7 +446,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 .GetProjectChanges()
                 .ToList();
 
-            // first make sure we can edit the document we will be updating (check them out from source control, etc)
+            // first make sure we can edit the document we will be updating (check them out from source control,
+            // etc)
             var changedDocs = projectChanges
                 .SelectMany(pd =>
                     pd.GetChangedDocuments(onlyGetDocumentsWithTextChanges: true)
@@ -791,15 +805,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         internal override void ApplyMappedFileChanges(SolutionChanges solutionChanges)
         {
-            // Get the original text changes from all documents and call the span mapping service to get span mappings for the text changes.
+            // Get the original text changes from all documents and call the span mapping service to get span
+            // mappings for the text changes.
             // Create mapped text changes using the mapped spans and original text changes' text.
 
-            // Mappings for opened razor files are retrieved via the LSP client making a request to the razor server.
-            // If we wait for the result on the UI thread, we will hit a bug in the LSP client that brings us to a code path
-            // using ConfigureAwait(true).  This deadlocks as it then attempts to return to the UI thread which is already blocked by us.
+            // Mappings for opened razor files are retrieved via the LSP client making a request to the razor
+            // server.
+            // If we wait for the result on the UI thread, we will hit a bug in the LSP client that brings us to
+            // a code path
+            // using ConfigureAwait(true).  This deadlocks as it then attempts to return to the UI thread which
+            // is already blocked by us.
             // Instead, we invoke this in JTF run which will mitigate deadlocks when the ConfigureAwait(true)
             // tries to switch back to the main thread in the LSP client.
-            // Link to LSP client bug for ConfigureAwait(true) - https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
+            // Link to LSP client bug for ConfigureAwait(true) -
+            // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
             var mappedChanges = _threadingContext.JoinableTaskFactory.Run(
                 () => GetMappedTextChangesAsync(solutionChanges)
             );
@@ -807,9 +826,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // Group the mapped text changes by file, then apply all mapped text changes for the file.
             foreach (var changesForFile in mappedChanges)
             {
-                // It doesn't matter which of the file's projectIds we pass to the invisible editor, so just pick the first.
+                // It doesn't matter which of the file's projectIds we pass to the invisible editor, so just pick
+                // the first.
                 var projectId = changesForFile.Value.First().ProjectId;
-                // Make sure we only take distinct changes - we'll have duplicates from different projects for linked files or multi-targeted files.
+                // Make sure we only take distinct changes - we'll have duplicates from different projects for
+                // linked files or multi-targeted files.
                 var distinctTextChanges = changesForFile
                     .Value.Select(change => change.TextChange)
                     .Distinct()
@@ -1213,7 +1234,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 initialText.Write(writer);
             }
 
-            // TODO: restore document ID hinting -- we previously ensured that the AddFromFile will introduce the document ID being used here.
+            // TODO: restore document ID hinting -- we previously ensured that the AddFromFile will introduce
+            // the document ID being used here.
             // (tracked by https://devdiv.visualstudio.com/DevDiv/_workitems/edit/677956)
             return projectItems.AddFromFile(filePath);
         }
@@ -1347,7 +1369,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// Opens a file and retrieves the window frame.
         /// </summary>
         /// <param name="filePath">the file path of the file to open.</param>
-        /// <param name="projectId">used to retrieve the IVsHierarchy to ensure the file is opened in a matching context.</param>
+        /// <param name="projectId">used to retrieve the IVsHierarchy to ensure the file is opened in a
+        // matching context.</param>
         /// <param name="frame">the window frame.</param>
         /// <returns></returns>
         private bool TryGetFrame(
@@ -1572,7 +1595,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         }
 
         /// <summary>
-        /// The <see cref="VisualStudioWorkspace"/> currently supports only a subset of <see cref="DocumentInfo"/>
+        /// The <see cref="VisualStudioWorkspace"/> currently supports only a subset of <see
+        // cref="DocumentInfo"/>
         /// changes.
         /// </summary>
         private static void FailIfDocumentInfoChangesNotSupported(
@@ -1656,7 +1680,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             _foregroundObject.AssertIsForeground();
 
-            // Note: this method does not actually call into any workspace code here to change the workspace's context. The assumption is updating the running document table or
+            // Note: this method does not actually call into any workspace code here to change the workspace's
+            // context. The assumption is updating the running document table or
             // IVsHierarchies will raise the appropriate events which we are subscribed to.
 
             var hierarchy = GetHierarchy(documentId.ProjectId);
@@ -1666,7 +1691,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return;
             }
 
-            // The hierarchy might be supporting multitargeting; in that case, let's update the context. Unfortunately the IVsHierarchies that support this
+            // The hierarchy might be supporting multitargeting; in that case, let's update the context.
+            // Unfortunately the IVsHierarchies that support this
             // don't necessarily let us read it first, so we have to fire-and-forget here.
             string? projectSystemNameForProjectId = null;
 
@@ -1687,7 +1713,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return;
             }
 
-            // The hierarchy might be supporting multitargeting; in that case, let's update the context. Unfortunately the IVsHierarchies that support this
+            // The hierarchy might be supporting multitargeting; in that case, let's update the context.
+            // Unfortunately the IVsHierarchies that support this
             // don't necessarily let us read it first, so we have to fire-and-forget here.
             hierarchy.SetProperty(
                 VSConstants.VSITEMID_ROOT,
@@ -1704,9 +1731,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var itemId = hierarchy.TryGetItemId(filePath);
             if (itemId != VSConstants.VSITEMID_NIL)
             {
-                // Is this owned by a shared asset project? If so, we need to put the shared asset project into the running document table, and need to set the
-                // current hierarchy as the active context of that shared hierarchy. This is kept as a loop that we do multiple times in the case that you
-                // have multiple pointers. This used to be the case for multitargeting projects, but that was now handled by setting the active context property
+                // Is this owned by a shared asset project? If so, we need to put the shared asset project into the
+                // running document table, and need to set the
+                // current hierarchy as the active context of that shared hierarchy. This is kept as a loop that we
+                // do multiple times in the case that you
+                // have multiple pointers. This used to be the case for multitargeting projects, but that was now
+                // handled by setting the active context property
                 // above. Some project systems out there might still be supporting it, so we'll support it too.
                 while (
                     SharedProjectUtilities.TryGetItemInSharedAssetsProject(
@@ -1768,7 +1798,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var queryEdit = (IVsQueryEditQuerySave2)
                 ServiceProvider.GlobalProvider.GetService(typeof(SVsQueryEditQuerySave));
 
-            // make sure given document id actually exist in current solution and the file is marked as supporting modifications
+            // make sure given document id actually exist in current solution and the file is marked as
+            // supporting modifications
             // and actually has non null file path
             var fileNames = documents.Select(GetFilePath).ToArray();
 
@@ -1959,15 +1990,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         ?.GetUIContext()
             );
 
-            // UIContexts can be "zombied" if UIContexts aren't supported because we're in a command line build or in
+            // UIContexts can be "zombied" if UIContexts aren't supported because we're in a command line build
+            // or in
             // other scenarios.
             if (uiContext == null || uiContext.IsZombie)
                 return;
 
-            // Note: it's safe to read CurrentSolution here outside of any sort of lock.  We do all work here on the UI
-            // thread, so that acts as a natural ordering mechanism here.  If, say, a BG piece of work was mutating this
-            // solution (either adding or removing a project) then that work will also have enqueued the next refresh
-            // operation on the UI thread.  So we'll always eventually reach a fixed point where the task for that
+            // Note: it's safe to read CurrentSolution here outside of any sort of lock.  We do all work here on
+            // the UI
+            // thread, so that acts as a natural ordering mechanism here.  If, say, a BG piece of work was
+            // mutating this
+            // solution (either adding or removing a project) then that work will also have enqueued the next
+            // refresh
+            // operation on the UI thread.  So we'll always eventually reach a fixed point where the task for
+            // that
             // language will check the latest CurrentSolution we have and will set the IsActive bit accordingly.
             uiContext.IsActive = this.CurrentSolution.Projects.Any(p => p.Language == language);
         }

@@ -28,7 +28,8 @@ public class StaticFileMiddleware
     /// <param name="next">The next middleware in the pipeline.</param>
     /// <param name="hostingEnv">The <see cref="IWebHostEnvironment"/> used by this middleware.</param>
     /// <param name="options">The configuration options.</param>
-    /// <param name="loggerFactory">An <see cref="ILoggerFactory"/> instance used to create loggers.</param>
+    /// <param name="loggerFactory">An <see cref="ILoggerFactory"/> instance used to create
+    // loggers.</param>
     public StaticFileMiddleware(
         RequestDelegate next,
         IWebHostEnvironment hostingEnv,

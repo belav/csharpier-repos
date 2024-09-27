@@ -201,7 +201,8 @@ namespace System.Reflection.Tests
                 Assert.NotSame(r1, r2);
             }
 
-            // Don't use xunit's sequence Equality assert here - we want to exercise our object's Equals() methods and not bypass because
+            // Don't use xunit's sequence Equality assert here - we want to exercise our object's Equals()
+            // methods and not bypass because
             // of a passing reference equality check.
             T[] a1 = r1.ToArray();
             T[] a2 = r2.ToArray();
@@ -285,12 +286,16 @@ namespace System.Reflection.Tests
             }
         }
 
-        // For the tests that exercise Type objects and friends, we'll use a single MetadataLoadContext to keep the test methods from being
+        // For the tests that exercise Type objects and friends, we'll use a single MetadataLoadContext to
+        // keep the test methods from being
         // bound too tightly to the fact that the Types are coming from a MetadataLoadContext.
         //
-        // This is a simple MetadataLoadContext designed to do the minimal work to make test assembly work across various runtime scenarios.
-        // The assumptions are that our test metadata only references the basic System.Runtime types. To keep test environment issues
-        // from being a road block, we'll redirect any reference to "mscorlib", "System.Runtime", etc. to our designed core assembly.
+        // This is a simple MetadataLoadContext designed to do the minimal work to make test assembly work
+        // across various runtime scenarios.
+        // The assumptions are that our test metadata only references the basic System.Runtime types. To
+        // keep test environment issues
+        // from being a road block, we'll redirect any reference to "mscorlib", "System.Runtime", etc. to
+        // our designed core assembly.
         //
         private static MetadataLoadContext TestMetadataLoadContext =>
             s_lazyTestMetadataLoadContext.Value;
@@ -309,7 +314,8 @@ namespace System.Reflection.Tests
 
             if (File.Exists(Path.Combine(loc, "UseRuntimeTypes.txt")))
             {
-                // Disable projection so that are Reflection tests run against the runtime types. This is used primarily to verify
+                // Disable projection so that are Reflection tests run against the runtime types. This is used
+                // primarily to verify
                 // the *test* code for correctness.
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;

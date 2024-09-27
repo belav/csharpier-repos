@@ -10,8 +10,10 @@ namespace Microsoft.EntityFrameworkCore;
 ///     SQLite specific extension methods for <see cref="DbContextOptionsBuilder" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+// and
+///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+// for more information and examples.
 /// </remarks>
 public static class SqliteDbContextOptionsBuilderExtensions
 {
@@ -21,17 +23,23 @@ public static class SqliteDbContextOptionsBuilderExtensions
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The connection or connection string must be set before the <see cref="DbContext" /> is used to connect
-    ///         to a database. Set a connection using <see cref="RelationalDatabaseFacadeExtensions.SetDbConnection" />.
-    ///         Set a connection string using <see cref="RelationalDatabaseFacadeExtensions.SetConnectionString" />.
+    ///         The connection or connection string must be set before the <see cref="DbContext" /> is
+    // used to connect
+    ///         to a database. Set a connection using <see
+    // cref="RelationalDatabaseFacadeExtensions.SetDbConnection" />.
+    ///         Set a connection string using <see
+    // cref="RelationalDatabaseFacadeExtensions.SetConnectionString" />.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using
+    // DbContextOptions</see>, and
+    ///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF
+    // Core</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder UseSqlite(
         this DbContextOptionsBuilder optionsBuilder,
@@ -53,12 +61,15 @@ public static class SqliteDbContextOptionsBuilderExtensions
     ///     Configures the context to connect to a SQLite database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+    // and
+    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
     /// <param name="connectionString">The connection string of the database to connect to.</param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder UseSqlite(
         this DbContextOptionsBuilder optionsBuilder,
@@ -81,17 +92,23 @@ public static class SqliteDbContextOptionsBuilderExtensions
     ///     Configures the context to connect to a SQLite database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+    // and
+    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
     /// <param name="connection">
-    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the connection is
-    ///     in the open state then EF will not open or close the connection. If the connection is in the closed
-    ///     state then EF will open and close the connection as needed. The caller owns the connection and is
+    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the
+    // connection is
+    ///     in the open state then EF will not open or close the connection. If the connection is in the
+    // closed
+    ///     state then EF will open and close the connection as needed. The caller owns the connection
+    // and is
     ///     responsible for its disposal.
     /// </param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder UseSqlite(
         this DbContextOptionsBuilder optionsBuilder,
@@ -103,21 +120,27 @@ public static class SqliteDbContextOptionsBuilderExtensions
     ///     Configures the context to connect to a SQLite database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+    // and
+    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
     /// <param name="connection">
-    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the connection is
-    ///     in the open state then EF will not open or close the connection. If the connection is in the closed
+    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the
+    // connection is
+    ///     in the open state then EF will not open or close the connection. If the connection is in the
+    // closed
     ///     state then EF will open and close the connection as needed.
     /// </param>
     /// <param name="contextOwnsConnection">
     ///     If <see langword="true" />, then EF will take ownership of the connection and will
-    ///     dispose it in the same way it would dispose a connection created by EF. If <see langword="false" />, then the caller still
+    ///     dispose it in the same way it would dispose a connection created by EF. If <see
+    // langword="false" />, then the caller still
     ///     owns the connection and is responsible for its disposal.
     /// </param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder UseSqlite(
         this DbContextOptionsBuilder optionsBuilder,
@@ -145,17 +168,23 @@ public static class SqliteDbContextOptionsBuilderExtensions
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The connection or connection string must be set before the <see cref="DbContext" /> is used to connect
-    ///         to a database. Set a connection using <see cref="RelationalDatabaseFacadeExtensions.SetDbConnection" />.
-    ///         Set a connection string using <see cref="RelationalDatabaseFacadeExtensions.SetConnectionString" />.
+    ///         The connection or connection string must be set before the <see cref="DbContext" /> is
+    // used to connect
+    ///         to a database. Set a connection using <see
+    // cref="RelationalDatabaseFacadeExtensions.SetDbConnection" />.
+    ///         Set a connection string using <see
+    // cref="RelationalDatabaseFacadeExtensions.SetConnectionString" />.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using
+    // DbContextOptions</see>, and
+    ///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF
+    // Core</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
@@ -169,13 +198,16 @@ public static class SqliteDbContextOptionsBuilderExtensions
     ///     Configures the context to connect to a SQLite database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+    // and
+    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+    // for more information and examples.
     /// </remarks>
     /// <typeparam name="TContext">The type of context to be configured.</typeparam>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
     /// <param name="connectionString">The connection string of the database to connect to.</param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
@@ -194,18 +226,24 @@ public static class SqliteDbContextOptionsBuilderExtensions
     ///     Configures the context to connect to a SQLite database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+    // and
+    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+    // for more information and examples.
     /// </remarks>
     /// <typeparam name="TContext">The type of context to be configured.</typeparam>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
     /// <param name="connection">
-    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the connection is
-    ///     in the open state then EF will not open or close the connection. If the connection is in the closed
-    ///     state then EF will open and close the connection as needed. The caller owns the connection and is
+    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the
+    // connection is
+    ///     in the open state then EF will not open or close the connection. If the connection is in the
+    // closed
+    ///     state then EF will open and close the connection as needed. The caller owns the connection
+    // and is
     ///     responsible for its disposal.
     /// </param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
@@ -220,22 +258,28 @@ public static class SqliteDbContextOptionsBuilderExtensions
     ///     Configures the context to connect to a SQLite database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+    // and
+    ///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+    // for more information and examples.
     /// </remarks>
     /// <typeparam name="TContext">The type of context to be configured.</typeparam>
     /// <param name="optionsBuilder">The builder being used to configure the context.</param>
     /// <param name="connection">
-    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the connection is
-    ///     in the open state then EF will not open or close the connection. If the connection is in the closed
+    ///     An existing <see cref="DbConnection" /> to be used to connect to the database. If the
+    // connection is
+    ///     in the open state then EF will not open or close the connection. If the connection is in the
+    // closed
     ///     state then EF will open and close the connection as needed.
     /// </param>
     /// <param name="contextOwnsConnection">
     ///     If <see langword="true" />, then EF will take ownership of the connection and will
-    ///     dispose it in the same way it would dispose a connection created by EF. If <see langword="false" />, then the caller still
+    ///     dispose it in the same way it would dispose a connection created by EF. If <see
+    // langword="false" />, then the caller still
     ///     owns the connection and is responsible for its disposal.
     /// </param>
-    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific configuration.</param>
+    /// <param name="sqliteOptionsAction">An optional action to allow additional SQLite specific
+    // configuration.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,

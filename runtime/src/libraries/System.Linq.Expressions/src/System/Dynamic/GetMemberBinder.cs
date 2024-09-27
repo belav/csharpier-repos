@@ -8,7 +8,8 @@ using System.Linq.Expressions;
 namespace System.Dynamic
 {
     /// <summary>
-    /// Represents the dynamic get member operation at the call site, providing the binding semantic and the details about the operation.
+    /// Represents the dynamic get member operation at the call site, providing the binding semantic and
+    // the details about the operation.
     /// </summary>
     [RequiresDynamicCode(Expression.CallSiteRequiresDynamicCode)]
     public abstract class GetMemberBinder : DynamicMetaObjectBinder
@@ -17,7 +18,8 @@ namespace System.Dynamic
         /// Initializes a new instance of the <see cref="GetMemberBinder" />.
         /// </summary>
         /// <param name="name">The name of the member to get.</param>
-        /// <param name="ignoreCase">true if the name should be matched ignoring case; false otherwise.</param>
+        /// <param name="ignoreCase">true if the name should be matched ignoring case; false
+        // otherwise.</param>
         protected GetMemberBinder(string name, bool ignoreCase)
         {
             ArgumentNullException.ThrowIfNull(name);
@@ -42,7 +44,8 @@ namespace System.Dynamic
         public bool IgnoreCase { get; }
 
         /// <summary>
-        /// Performs the binding of the dynamic get member operation if the target dynamic object cannot bind.
+        /// Performs the binding of the dynamic get member operation if the target dynamic object cannot
+        // bind.
         /// </summary>
         /// <param name="target">The target of the dynamic get member operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
@@ -52,7 +55,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// When overridden in the derived class, performs the binding of the dynamic get member operation if the target dynamic object cannot bind.
+        /// When overridden in the derived class, performs the binding of the dynamic get member operation
+        // if the target dynamic object cannot bind.
         /// </summary>
         /// <param name="target">The target of the dynamic get member operation.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>

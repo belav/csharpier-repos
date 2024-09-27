@@ -61,7 +61,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
         )
     )
 {
-    // Deliberately using names that could not be actual field/property names in the properties dictionary.
+    // Deliberately using names that could not be actual field/property names in the properties
+    // dictionary.
     public const string AllFieldsName = "<>AllFields";
     public const string AllPropertiesName = "<>AllProperties";
 
@@ -116,7 +117,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
         if (nodeToRemove is not VariableDeclaratorSyntax and not PropertyDeclarationSyntax)
             return false;
 
-        // If it's a property, then it has to be an auto property in order for us to be able to initialize is
+        // If it's a property, then it has to be an auto property in order for us to be able to initialize
+        // is
         // directly outside of a constructor.
         if (nodeToRemove is PropertyDeclarationSyntax property)
         {
@@ -170,7 +172,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
 
         private void OnSymbolEnd(SymbolAnalysisContext context)
         {
-            // Pass along a mapping of field/property name to the constructor parameter name that will replace it.
+            // Pass along a mapping of field/property name to the constructor parameter name that will replace
+            // it.
             var properties = _candidateMembersToRemove
                 .Where(kvp => !_membersThatCannotBeRemoved.Contains(kvp.Key))
                 .ToImmutableDictionary(
@@ -223,7 +226,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
             var startSymbol = (INamedTypeSymbol)context.Symbol;
             var options = context.Options;
 
-            // Ensure that any analyzers for containing types are created and they hear about any reference to their
+            // Ensure that any analyzers for containing types are created and they hear about any reference to
+            // their
             // fields in this nested type.
 
             for (
@@ -251,7 +255,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                 if (analyzer is { HasCandidateMembersToRemove: true })
                 {
                     // Look to see if we have trivial `_x = x` or `this.x = x` assignments.  If so, then the field/prop
-                    // could be a candidate for removal (as long as we determine that all use sites of the field/prop would
+                    // could be a candidate for removal (as long as we determine that all use sites of the field/prop
+                    // would
                     // be able to use the captured primary constructor parameter).
                     context.RegisterOperationAction(
                         analyzer.AnalyzeFieldOrPropertyReference,
@@ -303,7 +308,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                 if (namedType.TypeKind is not (TypeKind.Class or TypeKind.Struct))
                     return null;
 
-                // Don't want to offer on records.  It's completely fine for records to not use primary constructs and
+                // Don't want to offer on records.  It's completely fine for records to not use primary constructs
+                // and
                 // instead use init-properties.
                 if (namedType.IsRecord)
                     return null;
@@ -313,7 +319,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                     return null;
 
                 // Need to see if there is a single constructor that either calls `base(...)` or has no constructor
-                // initializer (and thus implicitly calls `base()`), and that all other constructors call `this(...)`.
+                // initializer (and thus implicitly calls `base()`), and that all other constructors call
+                // `this(...)`.
                 if (
                     !TryFindPrimaryConstructorCandidate(
                         namedType,
@@ -343,7 +350,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                 )
                     return null;
 
-                // Now ensure the constructor body is something that could be converted to a primary constructor (i.e.
+                // Now ensure the constructor body is something that could be converted to a primary constructor
+                // (i.e.
                 // only assignments to instance fields/props on this).
                 var candidateMembersToRemove = PooledDictionary<
                     ISymbol,
@@ -470,7 +478,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                 Dictionary<ISymbol, IParameterSymbol> candidateMembersToRemove
             )
             {
-                // Quick pass.  Must all be assignment expressions.  Don't have to do any more analysis if we see anything beyond that.
+                // Quick pass.  Must all be assignment expressions.  Don't have to do any more analysis if we see
+                // anything beyond that.
                 if (
                     !block.Statements.All(static s =>
                         s is ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax }
@@ -512,7 +521,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                 }
 
                 // If we have a mutation of one of the parameters, and the parameter was referenced in multiple
-                // assignments, then we can't convert this over if the order of actual members in the type is not the
+                // assignments, then we can't convert this over if the order of actual members in the type is not
+                // the
                 // same as the order of members we were assigning to.
                 foreach (var group in orderedParameterAssignments.GroupBy(t => t.parameter))
                 {
@@ -630,7 +640,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
 
                 // Looks good, both the left and right sides are legal.
 
-                // If we have an assignment of the form `private_member = param`, then that member can be a candidate for removal.
+                // If we have an assignment of the form `private_member = param`, then that member can be a
+                // candidate for removal.
                 if (
                     member.DeclaredAccessibility == Accessibility.Private
                     && !member.GetAttributes().Any()
@@ -666,7 +677,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
             if (_membersThatCannotBeRemoved.Contains(member))
                 return;
 
-            // we only care about reference to members in our candidate-removal set.  Can ignore everything else.
+            // we only care about reference to members in our candidate-removal set.  Can ignore everything
+            // else.
             if (!_candidateMembersToRemove.TryGetValue(member, out var parameter))
                 return;
 
@@ -677,7 +689,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                 return;
             }
 
-            // it's either `this.field` or just `field`.  We can replace with a reference to 'paramName' *if* that
+            // it's either `this.field` or just `field`.  We can replace with a reference to 'paramName' *if*
+            // that
             // name in the current location doesn't bind to something else.
             var symbols = semanticModel.LookupSymbols(
                 operation.Syntax.SpanStart,

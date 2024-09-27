@@ -17,7 +17,8 @@ public sealed class ManagedAuthenticatedEncryptorDescriptor : IAuthenticatedEncr
     /// <summary>
     /// Initializes a new instance of <see cref="ManagedAuthenticatedEncryptorDescriptor"/>.
     /// </summary>
-    /// <param name="configuration">The <see cref="ManagedAuthenticatedEncryptorConfiguration"/>.</param>
+    /// <param name="configuration">The <see
+    // cref="ManagedAuthenticatedEncryptorConfiguration"/>.</param>
     /// <param name="masterKey">The master key.</param>
     public ManagedAuthenticatedEncryptorDescriptor(
         ManagedAuthenticatedEncryptorConfiguration configuration,

@@ -15,12 +15,14 @@ namespace System.Tests
         // is slightly too accurate when writing tests meant to run against libm implementations
         // for various platforms. 2^-8 (approx. 3.91e-03) seems to be as accurate as we can get.
         //
-        // The tests themselves will take CrossPlatformMachineEpsilon and adjust it according to the expected result
+        // The tests themselves will take CrossPlatformMachineEpsilon and adjust it according to the
+        // expected result
         // so that the delta used for comparison will compare the most significant digits and ignore
         // any digits that are outside the half precision range (3-4 digits).
         //
         // For example, a test with an expect result in the format of 0.xxxxxxxxx will use
-        // CrossPlatformMachineEpsilon for the variance, while an expected result in the format of 0.0xxxxxxxxx
+        // CrossPlatformMachineEpsilon for the variance, while an expected result in the format of
+        // 0.0xxxxxxxxx
         // will use CrossPlatformMachineEpsilon / 10 and expected result in the format of x.xxxxxx will
         // use CrossPlatformMachineEpsilon * 10.
         private static Half CrossPlatformMachineEpsilon => (Half)3.90625e-03f;

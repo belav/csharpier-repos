@@ -29,14 +29,17 @@ namespace System.Threading.Tasks
     [DebuggerTypeProxy(typeof(DebugView))]
     public class ConcurrentExclusiveSchedulerPair
     {
-        /// <summary>A processing mode to denote what kinds of tasks are currently being processed on this thread.</summary>
+        /// <summary>A processing mode to denote what kinds of tasks are currently being processed on this
+        // thread.</summary>
         private readonly ThreadLocal<ProcessingMode> m_threadProcessingMode =
             new ThreadLocal<ProcessingMode>();
 
-        /// <summary>The scheduler used to queue and execute "concurrent" tasks that may run concurrently with other concurrent tasks.</summary>
+        /// <summary>The scheduler used to queue and execute "concurrent" tasks that may run concurrently
+        // with other concurrent tasks.</summary>
         private readonly ConcurrentExclusiveTaskScheduler m_concurrentTaskScheduler;
 
-        /// <summary>The scheduler used to queue and execute "exclusive" tasks that must run exclusively while no other tasks for this pair are running.</summary>
+        /// <summary>The scheduler used to queue and execute "exclusive" tasks that must run exclusively
+        // while no other tasks for this pair are running.</summary>
         private readonly ConcurrentExclusiveTaskScheduler m_exclusiveTaskScheduler;
 
         /// <summary>The underlying task scheduler to which all work should be scheduled.</summary>
@@ -59,22 +62,26 @@ namespace System.Threading.Tasks
         private int m_processingCount;
 
         /// <summary>Completion state for a task representing the completion of this pair.</summary>
-        /// <remarks>Lazily-initialized only if the scheduler pair is shutting down or if the Completion is requested.</remarks>
+        /// <remarks>Lazily-initialized only if the scheduler pair is shutting down or if the Completion is
+        // requested.</remarks>
         private CompletionState? m_completionState;
 
-        /// <summary>Lazily-initialized work item for processing when targeting the default scheduler.</summary>
+        /// <summary>Lazily-initialized work item for processing when targeting the default
+        // scheduler.</summary>
         private SchedulerWorkItem? m_threadPoolWorkItem;
 
         /// <summary>A constant value used to signal unlimited processing.</summary>
         private const int UNLIMITED_PROCESSING = -1;
 
-        /// <summary>Constant used for m_processingCount to indicate that an exclusive task is being processed.</summary>
+        /// <summary>Constant used for m_processingCount to indicate that an exclusive task is being
+        // processed.</summary>
         private const int EXCLUSIVE_PROCESSING_SENTINEL = -1;
 
         /// <summary>Default MaxItemsPerTask to use for processing if none is specified.</summary>
         private const int DEFAULT_MAXITEMSPERTASK = UNLIMITED_PROCESSING;
 
-        /// <summary>Default MaxConcurrencyLevel is the processor count if not otherwise specified.</summary>
+        /// <summary>Default MaxConcurrencyLevel is the processor count if not otherwise
+        // specified.</summary>
         private static int DefaultMaxConcurrencyLevel => Environment.ProcessorCount;
 
         /// <summary>Gets the sync obj used to protect all state on this instance.</summary>
@@ -94,7 +101,8 @@ namespace System.Threading.Tasks
             : this(taskScheduler, DefaultMaxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK) { }
 
         /// <summary>
-        /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler with a maximum concurrency level.
+        /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler with a
+        // maximum concurrency level.
         /// </summary>
         /// <param name="taskScheduler">The target scheduler on which this pair should execute.</param>
         /// <param name="maxConcurrencyLevel">The maximum number of tasks to run concurrently.</param>
@@ -105,12 +113,14 @@ namespace System.Threading.Tasks
             : this(taskScheduler, maxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK) { }
 
         /// <summary>
-        /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler with a maximum
+        /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler with a
+        // maximum
         /// concurrency level and a maximum number of scheduled tasks that may be processed as a unit.
         /// </summary>
         /// <param name="taskScheduler">The target scheduler on which this pair should execute.</param>
         /// <param name="maxConcurrencyLevel">The maximum number of tasks to run concurrently.</param>
-        /// <param name="maxItemsPerTask">The maximum number of tasks to process for each underlying scheduled task used by the pair.</param>
+        /// <param name="maxItemsPerTask">The maximum number of tasks to process for each underlying
+        // scheduled task used by the pair.</param>
         public ConcurrentExclusiveSchedulerPair(
             TaskScheduler taskScheduler,
             int maxConcurrencyLevel,
@@ -129,12 +139,14 @@ namespace System.Threading.Tasks
             m_maxConcurrencyLevel = maxConcurrencyLevel;
             m_maxItemsPerTask = maxItemsPerTask;
 
-            // Downgrade to the underlying scheduler's max degree of parallelism if it's lower than the user-supplied level
+            // Downgrade to the underlying scheduler's max degree of parallelism if it's lower than the
+            // user-supplied level
             int mcl = taskScheduler.MaximumConcurrencyLevel;
             if (mcl > 0 && mcl < m_maxConcurrencyLevel)
                 m_maxConcurrencyLevel = mcl;
 
-            // Treat UNLIMITED_PROCESSING/-1 for both MCL and MIPT as the biggest possible value so that we don't
+            // Treat UNLIMITED_PROCESSING/-1 for both MCL and MIPT as the biggest possible value so that we
+            // don't
             // have to special case UNLIMITED_PROCESSING later on in processing.
             if (m_maxConcurrencyLevel == UNLIMITED_PROCESSING)
                 m_maxConcurrencyLevel = int.MaxValue;
@@ -156,7 +168,8 @@ namespace System.Threading.Tasks
 
         /// <summary>Informs the scheduler pair that it should not accept any more tasks.</summary>
         /// <remarks>
-        /// Calling <see cref="Complete"/> is optional, and it's only necessary if the <see cref="Completion"/>
+        /// Calling <see cref="Complete"/> is optional, and it's only necessary if the <see
+        // cref="Completion"/>
         /// will be relied on for notification of all processing being completed.
         /// </remarks>
         public void Complete()
@@ -171,7 +184,8 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Gets a <see cref="Task"/> that will complete when the scheduler has completed processing.</summary>
+        /// <summary>Gets a <see cref="Task"/> that will complete when the scheduler has completed
+        // processing.</summary>
         public Task Completion => EnsureCompletionStateInitialized();
 
         /// <summary>Gets the lazily-initialized completion state.</summary>
@@ -301,15 +315,18 @@ namespace System.Threading.Tasks
         public TaskScheduler ExclusiveScheduler => m_exclusiveTaskScheduler;
 
         /// <summary>Gets the number of tasks waiting to run concurrently.</summary>
-        /// <remarks>This does not take the necessary lock, as it's only called from under the debugger.</remarks>
+        /// <remarks>This does not take the necessary lock, as it's only called from under the
+        // debugger.</remarks>
         private int ConcurrentTaskCountForDebugger => m_concurrentTaskScheduler.m_tasks.Count;
 
         /// <summary>Gets the number of tasks waiting to run exclusively.</summary>
-        /// <remarks>This does not take the necessary lock, as it's only called from under the debugger.</remarks>
+        /// <remarks>This does not take the necessary lock, as it's only called from under the
+        // debugger.</remarks>
         private int ExclusiveTaskCountForDebugger => m_exclusiveTaskScheduler.m_tasks.Count;
 
         /// <summary>Notifies the pair that new work has arrived to be processed.</summary>
-        /// <param name="fairly">Whether tasks should be scheduled fairly with regards to other tasks.</param>
+        /// <param name="fairly">Whether tasks should be scheduled fairly with regards to other
+        // tasks.</param>
         /// <remarks>Must only be called while holding the lock.</remarks>
         private void ProcessAsyncIfNecessary(bool fairly = false)
         {
@@ -348,9 +365,12 @@ namespace System.Threading.Tasks
                                 GetCreationOptionsForTask(fairly)
                             );
                             processingTask.Start(m_underlyingTaskScheduler);
-                            // When we call Start, if the underlying scheduler throws in QueueTask, TPL will fault the task and rethrow
-                            // the exception.  To deal with that, we need a reference to the task object, so that we can observe its exception.
-                            // Hence, we separate creation and starting, so that we can store a reference to the task before we attempt QueueTask.
+                            // When we call Start, if the underlying scheduler throws in QueueTask, TPL will fault the task and
+                            // rethrow
+                            // the exception.  To deal with that, we need a reference to the task object, so that we can observe
+                            // its exception.
+                            // Hence, we separate creation and starting, so that we can store a reference to the task before we
+                            // attempt QueueTask.
                         }
                         catch (Exception e)
                         {
@@ -359,7 +379,8 @@ namespace System.Threading.Tasks
                         }
                     }
                 }
-                // If there are no waiting exclusive tasks, there are concurrent tasks, and we haven't reached our maximum
+                // If there are no waiting exclusive tasks, there are concurrent tasks, and we haven't reached our
+                // maximum
                 // concurrency level for processing, let's start processing more concurrent tasks.
                 else
                 {
@@ -415,9 +436,12 @@ namespace System.Threading.Tasks
                 );
         }
 
-        /// <summary>Queues concurrent or exclusive task processing to the ThreadPool if the underlying scheduler is the default.</summary>
-        /// <param name="fairly">Whether tasks should be scheduled fairly with regards to other tasks.</param>
-        /// <returns>true if we're targeting the thread pool such that a worker could be queued; otherwise, false.</returns>
+        /// <summary>Queues concurrent or exclusive task processing to the ThreadPool if the underlying
+        // scheduler is the default.</summary>
+        /// <param name="fairly">Whether tasks should be scheduled fairly with regards to other
+        // tasks.</param>
+        /// <returns>true if we're targeting the thread pool such that a worker could be queued; otherwise,
+        // false.</returns>
         private bool TryQueueThreadPoolWorkItem(bool fairly)
         {
             if (TaskScheduler.Default == m_underlyingTaskScheduler)
@@ -575,7 +599,8 @@ namespace System.Threading.Tasks
         private sealed class CompletionState : Task
         {
             /// <summary>Whether the scheduler has had completion requested.</summary>
-            /// <remarks>This variable is not volatile, so to guarantee safe reading reads, Volatile.Read is used in TryExecuteTaskInline.</remarks>
+            /// <remarks>This variable is not volatile, so to guarantee safe reading reads, Volatile.Read is
+            // used in TryExecuteTaskInline.</remarks>
             internal bool m_completionRequested;
 
             /// <summary>Whether completion processing has been queued.</summary>
@@ -585,7 +610,8 @@ namespace System.Threading.Tasks
             internal List<Exception>? m_exceptions;
         }
 
-        /// <summary>Reusable immutable work item that can be scheduled to the thread pool to run processing.</summary>
+        /// <summary>Reusable immutable work item that can be scheduled to the thread pool to run
+        // processing.</summary>
         private sealed class SchedulerWorkItem : IThreadPoolWorkItem
         {
             private readonly ConcurrentExclusiveSchedulerPair _pair;
@@ -628,7 +654,8 @@ namespace System.Threading.Tasks
 
             /// <summary>Initializes the scheduler.</summary>
             /// <param name="pair">The parent pair.</param>
-            /// <param name="maxConcurrencyLevel">The maximum degree of concurrency this scheduler may use.</param>
+            /// <param name="maxConcurrencyLevel">The maximum degree of concurrency this scheduler may
+            // use.</param>
             /// <param name="processingMode">The processing mode of this scheduler.</param>
             internal ConcurrentExclusiveTaskScheduler(
                 ConcurrentExclusiveSchedulerPair pair,
@@ -694,7 +721,8 @@ namespace System.Threading.Tasks
 
             /// <summary>Tries to execute the task synchronously on this scheduler.</summary>
             /// <param name="task">The task to execute.</param>
-            /// <param name="taskWasPreviouslyQueued">Whether the task was previously queued to the scheduler.</param>
+            /// <param name="taskWasPreviouslyQueued">Whether the task was previously queued to the
+            // scheduler.</param>
             /// <returns>true if the task could be executed; otherwise, false.</returns>
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
             {
@@ -865,8 +893,10 @@ namespace System.Threading.Tasks
             public TaskScheduler TargetScheduler => m_pair.m_underlyingTaskScheduler;
         }
 
-        /// <summary>Gets an enumeration for debugging that represents the current state of the scheduler pair.</summary>
-        /// <remarks>This is only for debugging.  It does not take the necessary locks to be useful for runtime usage.</remarks>
+        /// <summary>Gets an enumeration for debugging that represents the current state of the scheduler
+        // pair.</summary>
+        /// <remarks>This is only for debugging.  It does not take the necessary locks to be useful for
+        // runtime usage.</remarks>
         private ProcessingMode ModeForDebugger
         {
             get
@@ -917,7 +947,8 @@ namespace System.Threading.Tasks
             return options;
         }
 
-        /// <summary>Provides an enumeration that represents the current state of the scheduler pair.</summary>
+        /// <summary>Provides an enumeration that represents the current state of the scheduler
+        // pair.</summary>
         [Flags]
         private enum ProcessingMode : byte
         {

@@ -58,10 +58,12 @@ namespace ILCompiler.Reflection.ReadyToRun
         }
 
         /// <summary>
-        /// Parse core header fields common to global R2R file header and per assembly headers in composite R2R images.
+        /// Parse core header fields common to global R2R file header and per assembly headers in composite
+        // R2R images.
         /// </summary>
         /// <param name="image">PE image</param>
-        /// <param name="curOffset">Index in the image byte array to the start of the ReadyToRun core header</param>
+        /// <param name="curOffset">Index in the image byte array to the start of the ReadyToRun core
+        // header</param>
         public void ParseCoreHeader(byte[] image, ref int curOffset)
         {
             Flags = NativeReader.ReadUInt32(image, ref curOffset);
@@ -88,7 +90,9 @@ namespace ILCompiler.Reflection.ReadyToRun
     }
 
     /// <summary>
-    /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/readytorun.h">src/inc/readytorun.h</a> READYTORUN_HEADER
+    /// based on <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/readytorun.h">src/inc/readytorun.h</a>
+    // READYTORUN_HEADER
     /// </summary>
     public class ReadyToRunHeader : ReadyToRunCoreHeader
     {
@@ -126,7 +130,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// </summary>
         /// <param name="image">PE image</param>
         /// <param name="rva">Relative virtual address of the ReadyToRun header</param>
-        /// <param name="curOffset">Index in the image byte array to the start of the ReadyToRun header</param>
+        /// <param name="curOffset">Index in the image byte array to the start of the ReadyToRun
+        // header</param>
         /// <exception cref="BadImageFormatException">The signature must be 0x00525452</exception>
         public ReadyToRunHeader(byte[] image, int rva, int curOffset)
         {

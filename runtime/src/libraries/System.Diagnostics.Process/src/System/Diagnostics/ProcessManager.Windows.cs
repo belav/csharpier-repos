@@ -21,7 +21,8 @@ namespace System.Diagnostics
             return IsProcessRunning(processId, ".");
         }
 
-        /// <summary>Gets whether the process with the specified ID on the specified machine is currently running.</summary>
+        /// <summary>Gets whether the process with the specified ID on the specified machine is currently
+        // running.</summary>
         /// <param name="processId">The process ID.</param>
         /// <param name="machineName">The machine name.</param>
         /// <returns>true if the process is running; otherwise, false.</returns>
@@ -29,7 +30,8 @@ namespace System.Diagnostics
         {
             // Performance optimization for the local machine:
             // First try to OpenProcess by id, if valid handle is returned verify that process is running
-            // When the attempt to open a handle fails due to lack of permissions enumerate all processes and compare ids
+            // When the attempt to open a handle fails due to lack of permissions enumerate all processes and
+            // compare ids
             // Attempt to open handle for Idle process (processId == 0) fails with ERROR_INVALID_PARAMETER
             if (processId != 0 && !IsRemoteMachine(machineName))
             {
@@ -126,7 +128,8 @@ namespace System.Diagnostics
             }
             else
             {
-                // local case: do not use performance counter and also attempt to get the matching (by pid) process only
+                // local case: do not use performance counter and also attempt to get the matching (by pid) process
+                // only
                 ProcessInfo[] processInfos = NtProcessInfoHelper.GetProcessInfos(processId);
                 if (processInfos.Length == 1)
                 {
@@ -160,7 +163,8 @@ namespace System.Diagnostics
             }
             else
             {
-                // local case: do not use performance counter and also attempt to get the matching (by pid) process only
+                // local case: do not use performance counter and also attempt to get the matching (by pid) process
+                // only
 
                 string? processName = Interop.Kernel32.GetProcessName((uint)processId);
                 if (processName is not null)
@@ -261,7 +265,8 @@ namespace System.Diagnostics
                 tp.Privileges.Luid = luid;
                 tp.Privileges.Attributes = Interop.Advapi32.SEPrivileges.SE_PRIVILEGE_ENABLED;
 
-                // AdjustTokenPrivileges can return true even if it didn't succeed (when ERROR_NOT_ALL_ASSIGNED is returned).
+                // AdjustTokenPrivileges can return true even if it didn't succeed (when ERROR_NOT_ALL_ASSIGNED is
+                // returned).
                 Interop.Advapi32.AdjustTokenPrivileges(tokenHandle, false, &tp, 0, null, null);
             }
             finally
@@ -290,7 +295,8 @@ namespace System.Diagnostics
                 throw new Win32Exception(Interop.Errors.ERROR_ACCESS_DENIED);
             }
 
-            // If the handle is invalid because the process has exited, only throw an exception if throwIfExited is true.
+            // If the handle is invalid because the process has exited, only throw an exception if throwIfExited
+            // is true.
             // Assume the process is still running if the error was ERROR_ACCESS_DENIED for better performance
             if (result != Interop.Errors.ERROR_ACCESS_DENIED && !IsProcessRunning(processId))
             {
@@ -473,7 +479,8 @@ namespace System.Diagnostics
         {
             try
             {
-                // We don't want to call library.Close() here because that would cause us to unload all of the perflibs.
+                // We don't want to call library.Close() here because that would cause us to unload all of the
+                // perflibs.
                 // On the next call to GetProcessInfos, we'd have to load them all up again, which is SLOW!
                 PerformanceCounterLib library = PerformanceCounterLib.GetPerformanceCounterLib(
                     machineName,

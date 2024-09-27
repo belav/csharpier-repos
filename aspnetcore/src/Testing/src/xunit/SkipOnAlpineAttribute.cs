@@ -25,7 +25,8 @@ public class SkipOnAlpineAttribute : Attribute, ITestCondition
 
     public string SkipReason => "Test cannot run on Alpine Linux.";
 
-    // This logic is borrowed from https://github.com/dotnet/runtime/blob/6a5a78bec9a6e14b4aa52cd5ac558f6cf5c6a211/src/libraries/Common/tests/TestUtilities/System/PlatformDetection.Unix.cs
+    // This logic is borrowed from
+    // https://github.com/dotnet/runtime/blob/6a5a78bec9a6e14b4aa52cd5ac558f6cf5c6a211/src/libraries/Common/tests/TestUtilities/System/PlatformDetection.Unix.cs
     private static bool IsAlpine { get; } =
         RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
         && File.Exists("/etc/os-release")

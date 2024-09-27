@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * Interface implemented by objects that need to expose string properties
- * with arbitrary names.
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Interface implemented by objects that need to expose string properties
+* with arbitrary names.
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.UI
 {
     /// <devdoc>
@@ -17,18 +17,18 @@ namespace System.Web.UI
     /// </devdoc>
     public interface IAttributeAccessor
     {
-        /*
-         * Get the string value of a named property
-         */
+/*
+* Get the string value of a named property
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         string GetAttribute(string key);
 
-        /*
-         * Set a named property with a string value
-         */
+/*
+* Set a named property with a string value
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

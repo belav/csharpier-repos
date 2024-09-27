@@ -22,8 +22,10 @@ using Xunit;
 
 namespace BenchmarksGame
 {
-    //[MaxIterationCount(40)] // the default 20 is not enough, the benchmark has multimodal distribution and needs more runs
-    //[BenchmarkCategory(Categories.Runtime, Categories.BenchmarksGame, Categories.JIT, Categories.NoWASM)]
+    //[MaxIterationCount(40)] // the default 20 is not enough, the benchmark has multimodal distribution
+    // and needs more runs
+    //[BenchmarkCategory(Categories.Runtime, Categories.BenchmarksGame, Categories.JIT,
+    // Categories.NoWASM)]
     public class BinaryTrees_6
     {
         const int MinDepth = 4;

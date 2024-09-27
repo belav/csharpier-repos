@@ -17,47 +17,47 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
 
-    /*
-     * See
-     * http://xws/gxa/main/specs/security/security_profiles/SecurityProfiles.doc
-     * for details on security protocols
+/*
+* See
+* http://xws/gxa/main/specs/security/security_profiles/SecurityProfiles.doc
+* for details on security protocols
 
-     * Concrete implementations are required to me thread safe after
-     * Open() is called;
+* Concrete implementations are required to me thread safe after
+* Open() is called;
 
-     * instances of concrete protocol factories are scoped to a
-     * channel/listener factory;
+* instances of concrete protocol factories are scoped to a
+* channel/listener factory;
 
-     * Each channel/listener factory must have a
-     * SecurityProtocolFactory set on it before open/first use; the
-     * factory instance cannot be changed once the factory is opened
-     * or listening;
+* Each channel/listener factory must have a
+* SecurityProtocolFactory set on it before open/first use; the
+* factory instance cannot be changed once the factory is opened
+* or listening;
 
-     * security protocol instances are scoped to a channel and will be
-     * created by the Create calls on protocol factories;
+* security protocol instances are scoped to a channel and will be
+* created by the Create calls on protocol factories;
 
-     * security protocol instances are required to be thread-safe.
+* security protocol instances are required to be thread-safe.
 
-     * for typical subclasses, factory wide state and immutable
-     * settings are expected to be on the ProtocolFactory itself while
-     * channel-wide state is maintained internally in each security
-     * protocol instance;
+* for typical subclasses, factory wide state and immutable
+* settings are expected to be on the ProtocolFactory itself while
+* channel-wide state is maintained internally in each security
+* protocol instance;
 
-     * the security protocol instance set on a channel cannot be
-     * changed; however, the protocol instance may change internal
-     * state; this covers RM's SCT renego case; by keeping state
-     * change internal to protocol instances, we get better
-     * coordination with concurrent message security on channels;
+* the security protocol instance set on a channel cannot be
+* changed; however, the protocol instance may change internal
+* state; this covers RM's SCT renego case; by keeping state
+* change internal to protocol instances, we get better
+* coordination with concurrent message security on channels;
 
-     * the primary pivot in creating a security protocol instance is
-     * initiator (client) vs. responder (server), NOT sender vs
-     * receiver
+* the primary pivot in creating a security protocol instance is
+* initiator (client) vs. responder (server), NOT sender vs
+* receiver
 
-     * Create calls for input and reply channels will contain the
-     * listener-wide state (if any) created by the corresponding call
-     * on the factory;
+* Create calls for input and reply channels will contain the
+* listener-wide state (if any) created by the corresponding call
+* on the factory;
 
-     */
+*/
 
     // Whether we need to add support for targetting different SOAP roles is tracked by 19144
 
@@ -847,7 +847,8 @@ namespace System.ServiceModel.Security
             expectSignedTokens = this.expectChannelSignedTokens;
             expectBasicTokens = this.expectChannelBasicTokens;
             expectEndorsingTokens = this.expectChannelEndorsingTokens;
-            // in case the channelSupportingTokenAuthenticators is empty return null so that its Count does not get accessed.
+            // in case the channelSupportingTokenAuthenticators is empty return null so that its Count does not
+            // get accessed.
             return (
                 Object.ReferenceEquals(
                     this.channelSupportingTokenAuthenticatorSpecification,

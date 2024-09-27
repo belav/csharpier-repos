@@ -14,7 +14,8 @@ namespace System.Reflection.Runtime.General
     internal static partial class TypeResolver
     {
         //
-        // Main routine to resolve a typeDef/Ref/Spec. Also accepts ModifiedTypes (will unwrap and ignore the custom modifiers.)
+        // Main routine to resolve a typeDef/Ref/Spec. Also accepts ModifiedTypes (will unwrap and ignore
+        // the custom modifiers.)
         //
         internal static RuntimeTypeInfo Resolve(
             this Handle typeDefRefOrSpec,
@@ -288,7 +289,8 @@ namespace System.Reflection.Runtime.General
             }
             if (outerTypeInfo != null)
             {
-                // It was a nested type. We've already resolved the containing type recursively - just find the nested among its direct children.
+                // It was a nested type. We've already resolved the containing type recursively - just find the
+                // nested among its direct children.
                 Type? resolvedType = outerTypeInfo.GetNestedType(
                     name,
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly

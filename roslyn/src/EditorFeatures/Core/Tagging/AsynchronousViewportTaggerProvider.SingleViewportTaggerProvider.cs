@@ -23,8 +23,10 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag>
     where TTag : ITag
 {
     /// <summary>
-    /// Actual <see cref="AsynchronousViewTaggerProvider{TTag}"/> responsible for tagging a particular span (or spans)
-    /// of the view.  Inherits all behavior of a normal view tagger, except for determining what spans to tag and what
+    /// Actual <see cref="AsynchronousViewTaggerProvider{TTag}"/> responsible for tagging a particular
+    // span (or spans)
+    /// of the view.  Inherits all behavior of a normal view tagger, except for determining what spans
+    // to tag and what
     /// cadence to tag them at.
     /// </summary>
     private sealed class SingleViewportTaggerProvider(
@@ -59,8 +61,10 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag>
         ) => _callback.CreateEventSource(textView, subjectBuffer);
 
         protected override TaggerDelay EventChangeDelay
-            // If we're in view, tag at the cadence the feature wants for visible code.  Otherwise, if we're out of
-            // view, tag at the slowest cadence to reduce the amount of resources used for things that may never even be
+            // If we're in view, tag at the cadence the feature wants for visible code.  Otherwise, if we're out
+            // of
+            // view, tag at the slowest cadence to reduce the amount of resources used for things that may never
+            // even be
             // looked at.
             =>
             _viewPortToTag == ViewPortToTag.InView
@@ -75,7 +79,8 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag>
             this.ThreadingContext.ThrowIfNotOnUIThread();
             Contract.ThrowIfNull(textView);
 
-            // if we're the current view, attempt to just get what's visible, plus 10 lines above and below.  This will
+            // if we're the current view, attempt to just get what's visible, plus 10 lines above and below.
+            // This will
             // ensure that moving up/down a few lines tends to have immediate accurate results.
             var visibleSpanOpt = textView.GetVisibleLinesSpan(
                 subjectBuffer,
@@ -96,7 +101,8 @@ internal abstract partial class AsynchronousViewportTaggerProvider<TTag>
             if (_viewPortToTag is ViewPortToTag.InView)
                 return SpecializedCollections.SingletonEnumerable(visibleSpan);
 
-            // For the above/below tagger, broaden the span to to the requested portion above/below what's visible, then
+            // For the above/below tagger, broaden the span to to the requested portion above/below what's
+            // visible, then
             // subtract out the visible range.
             var widenedSpanOpt = textView.GetVisibleLinesSpan(
                 subjectBuffer,

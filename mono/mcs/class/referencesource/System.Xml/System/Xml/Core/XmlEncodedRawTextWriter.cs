@@ -10,7 +10,8 @@
 // This batch file will execute the following commands:
 //
 //   cl.exe /C /EP /D _XML_UTF8_TEXT_WRITER XmlRawTextWriterGenerator.cxx > XmlUtf8RawTextWriter.cs
-//   cl.exe /C /EP /D _XML_ENCODED_TEXT_WRITER XmlRawTextWriterGenerator.cxx > XmlEncodedRawTextWriter.cs
+//   cl.exe /C /EP /D _XML_ENCODED_TEXT_WRITER XmlRawTextWriterGenerator.cxx >
+// XmlEncodedRawTextWriter.cs
 //
 // Because these two implementations of XmlTextWriter are so similar, the C++ preprocessor
 // is used to generate each implementation from one template file, using macros and ifdefs.
@@ -140,7 +141,8 @@ namespace System.Xml
 
             this.writer = writer;
             this.encoding = writer.Encoding;
-            // the buffer is allocated will OVERFLOW in order to reduce checks when writing out constant size markup
+            // the buffer is allocated will OVERFLOW in order to reduce checks when writing out constant size
+            // markup
             if (settings.Async)
             {
                 bufLen = ASYNCBUFSIZE;
@@ -164,7 +166,8 @@ namespace System.Xml
             this.stream = stream;
             this.encoding = settings.Encoding;
 
-            // the buffer is allocated will OVERFLOW in order to reduce checks when writing out constant size markup
+            // the buffer is allocated will OVERFLOW in order to reduce checks when writing out constant size
+            // markup
             if (settings.Async)
             {
                 bufLen = ASYNCBUFSIZE;
@@ -474,7 +477,8 @@ namespace System.Xml
                 ChangeTextContentMark(false);
             }
 
-            // VSTFDEVDIV bug #583965: Inconsistency between Silverlight 2 and Dev10 in the way a single xmlns attribute is serialized
+            // VSTFDEVDIV bug #583965: Inconsistency between Silverlight 2 and Dev10 in the way a single xmlns
+            // attribute is serialized
             // Resolved as: Won't fix (breaking change)
 
             if (prefix.Length == 0)
@@ -625,7 +629,8 @@ namespace System.Xml
 
             if (checkCharacters && !xmlCharType.IsCharData(ch))
             {
-                // we just have a single char, not a surrogate, therefore we have to pass in '\0' for the second char
+                // we just have a single char, not a surrogate, therefore we have to pass in '\0' for the second
+                // char
                 throw XmlConvert.CreateInvalidCharException(ch, '\0');
             }
 
@@ -905,7 +910,8 @@ namespace System.Xml
             }
             finally
             {
-                // Move last buffer character to the beginning of the buffer (so that previous character can always be determined)
+                // Move last buffer character to the beginning of the buffer (so that previous character can always
+                // be determined)
                 bufChars[0] = bufChars[bufPos - 1];
 
                 // Reset buffer position
@@ -1766,7 +1772,8 @@ namespace System.Xml
 
             if (checkCharacters)
             {
-                // This method will never be called on surrogates, so it is ok to pass in '\0' to the CreateInvalidCharException
+                // This method will never be called on surrogates, so it is ok to pass in '\0' to the
+                // CreateInvalidCharException
                 throw XmlConvert.CreateInvalidCharException((char)ch, '\0');
             }
             else
@@ -1840,7 +1847,8 @@ namespace System.Xml
             }
         }
 
-        // Following methods do not check whether pDst is beyond the bufSize because the buffer was allocated with a OVERFLOW to accomodate
+        // Following methods do not check whether pDst is beyond the bufSize because the buffer was
+        // allocated with a OVERFLOW to accomodate
         // for the writes of small constant-length string as below.
 
         // Entitize '<' as "&lt;".  Return an updated pointer.

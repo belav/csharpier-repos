@@ -23,7 +23,8 @@ namespace System.Management
     /// class Sample_ManagementPath
     /// {
     ///     public static int Main(string[] args) {
-    ///         ManagementPath path = new ManagementPath( "\\\\MyServer\\MyNamespace:Win32_logicaldisk='c:'");
+    ///         ManagementPath path = new ManagementPath(
+    // "\\\\MyServer\\MyNamespace:Win32_logicaldisk='c:'");
     ///
     ///         // Results of full path parsing
     ///         Console.WriteLine("Path: " + path.Path);
@@ -74,7 +75,8 @@ namespace System.Management
     {
         private static ManagementPath defaultPath = new ManagementPath("//./root/cimv2");
 
-        //Used to minimize the cases in which new wbemPath (WMI object path parser) objects need to be constructed
+        //Used to minimize the cases in which new wbemPath (WMI object path parser) objects need to be
+        // constructed
         //This is done for performance reasons.
         private bool isWbemPathShared;
 
@@ -181,13 +183,15 @@ namespace System.Management
         ///    of the <see cref='System.Management.ManagementPath'/> class.
         /// </overload>
         /// <summary>
-        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class that is empty. This is the default constructor.</para>
+        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class
+        // that is empty. This is the default constructor.</para>
         /// </summary>
         public ManagementPath()
             : this((string)null) { }
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class for the given path.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class for
+        // the given path.</para>
         /// </summary>
         /// <param name='path'> The object path. </param>
         public ManagementPath(string path)
@@ -233,7 +237,8 @@ namespace System.Management
 
         /// <summary>
         ///    <para>Gets or sets the default scope path used when no scope is specified.
-        ///       The default scope is /-/ \\.\root\cimv2, and can be changed by setting this property.</para>
+        ///       The default scope is /-/ \\.\root\cimv2, and can be changed by setting this
+        // property.</para>
         /// </summary>
         /// <value>
         ///    <para>By default the scope value is /-/ \\.\root\cimv2, or a different scope path if
@@ -420,7 +425,8 @@ namespace System.Management
         }
 
         /// <summary>
-        ///    <para> Sets the path as a new singleton object path. This means that it is a path to an instance but
+        ///    <para> Sets the path as a new singleton object path. This means that it is a path to an
+        // instance but
         ///       there are no key values.</para>
         /// </summary>
         public void SetAsSingleton()
@@ -567,7 +573,8 @@ namespace System.Management
                 return;
 
             //Get the server & namespace part from the existing path, and concatenate the given relPath.
-            //NOTE : we need to do this because IWbemPath doesn't have a function to set the relative path alone...
+            //NOTE : we need to do this because IWbemPath doesn't have a function to set the relative path
+            // alone...
             string newPath = string.Empty;
             string nsPath = this.GetNamespacePath(
                 (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
@@ -1077,7 +1084,8 @@ namespace System.Management
     internal sealed class ManagementPathConverter : ExpandableObjectConverter
     {
         /// <summary>
-        /// Determines if this converter can convert an object in the given source type to the native type of the converter.
+        /// Determines if this converter can convert an object in the given source type to the native type
+        // of the converter.
         /// </summary>
         /// <param name='context'>An ITypeDescriptorContext that provides a format context.</param>
         /// <param name='sourceType'>A Type that represents the type you wish to convert from.</param>
@@ -1094,7 +1102,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Gets a value indicating whether this converter can convert an object to the given destination type using the context.
+        /// Gets a value indicating whether this converter can convert an object to the given destination
+        // type using the context.
         /// </summary>
         /// <param name='context'>An ITypeDescriptorContext that provides a format context.</param>
         /// <param name='destinationType'>A Type that represents the type you wish to convert to.</param>
@@ -1118,7 +1127,8 @@ namespace System.Management
         ///      throw a NotSupportedException.
         /// </summary>
         /// <param name='context'>An ITypeDescriptorContext that provides a format context.</param>
-        /// <param name='culture'>A CultureInfo object. If a null reference (Nothing in Visual Basic) is passed, the current culture is assumed.</param>
+        /// <param name='culture'>A CultureInfo object. If a null reference (Nothing in Visual Basic) is
+        // passed, the current culture is assumed.</param>
         /// <param name='value'>The Object to convert.</param>
         /// <param name='destinationType'>The Type to convert the value parameter to.</param>
         /// <returns>An Object that represents the converted value.</returns>

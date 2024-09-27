@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace Microsoft.Win32
 {
     using System;
@@ -13,7 +13,8 @@ namespace Microsoft.Win32
     using System.Security.Permissions;
 
     /// <devdoc>
-    /// <para>Provides data for the <see cref='Microsoft.Win32.SystemEvents.SessionEnded'/> event.</para>
+    /// <para>Provides data for the <see cref='Microsoft.Win32.SystemEvents.SessionEnded'/>
+    // event.</para>
     /// </devdoc>
     [HostProtectionAttribute(MayLeakOnAbort = true)]
     [System.Security.Permissions.PermissionSetAttribute(
@@ -29,7 +30,8 @@ namespace Microsoft.Win32
         private readonly SessionEndReasons reason;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='Microsoft.Win32.SessionEndedEventArgs'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='Microsoft.Win32.SessionEndedEventArgs'/>
+        // class.</para>
         /// </devdoc>
         public SessionEndedEventArgs(SessionEndReasons reason)
         {

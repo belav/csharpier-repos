@@ -293,7 +293,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             {
                 Assert.Equal(e.City, a.City);
 
-                // The best we can do for Concat without server-side ordering is sort the characters (concatenating without ordering
+                // The best we can do for Concat without server-side ordering is sort the characters (concatenating
+                // without ordering
                 // and without a delimiter is somewhat dubious anyway).
                 Assert.Equal(
                     e.Customers.OrderBy(c => c).ToArray(),

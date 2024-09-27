@@ -14,7 +14,8 @@ namespace System.Security.Claims
     using System.Collections.Generic;
 
     /// <summary>
-    /// This internal class is used to wrap role claims that can be set on GenericPrincipal.  They need to be kept distinct from other claims.
+    /// This internal class is used to wrap role claims that can be set on GenericPrincipal.  They need
+    // to be kept distinct from other claims.
     /// ClaimsIdentity has a property the holds this type.  Since it is internal, few checks are
     /// made on parameters.
     /// </summary>

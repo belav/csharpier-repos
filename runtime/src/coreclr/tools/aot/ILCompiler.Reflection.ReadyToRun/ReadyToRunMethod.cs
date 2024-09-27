@@ -88,7 +88,9 @@ namespace ILCompiler.Reflection.ReadyToRun
     /// A runtime function corresponds to a contiguous fragment of code that implements a method.
     /// </summary>
     /// <remarks>
-    /// Based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/pal/inc/pal.h">src/pal/inc/pal.h</a> _RUNTIME_FUNCTION
+    /// Based on <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/pal/inc/pal.h">src/pal/inc/pal.h</a>
+    // _RUNTIME_FUNCTION
     /// </remarks>
     public class RuntimeFunction
     {
@@ -135,7 +137,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         public int UnwindRVA { get; }
 
         /// <summary>
-        /// The start offset of the runtime function with is non-zero for methods with multiple runtime functions
+        /// The start offset of the runtime function with is non-zero for methods with multiple runtime
+        // functions
         /// </summary>
         public int CodeOffset { get; }
 
@@ -603,7 +606,8 @@ namespace ILCompiler.Reflection.ReadyToRun
 
         /// <summary>
         /// Get the RVAs of the runtime functions for each method
-        /// based on <a href="https://github.com/dotnet/coreclr/blob/master/src/zap/zapcode.cpp">ZapUnwindInfo::Save</a>
+        /// based on <a
+        // href="https://github.com/dotnet/coreclr/blob/master/src/zap/zapcode.cpp">ZapUnwindInfo::Save</a>
         /// </summary>
         private void ParseRuntimeFunctions(bool partial)
         {

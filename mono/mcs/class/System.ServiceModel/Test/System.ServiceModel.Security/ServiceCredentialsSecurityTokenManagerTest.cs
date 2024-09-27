@@ -109,34 +109,34 @@ namespace MonoTests.System.ServiceModel.Security
             issued.InitRequirement(r);
             Assert.IsTrue(mgr.IsIssued(r), "issued");
 
-            /*
-                        r = new RecipientServiceModelSecurityTokenRequirement ();
-                        MySecureConversationSecurityTokenParameters sc =
-                            new MySecureConversationSecurityTokenParameters (
-                                new SymmetricSecurityBindingElement (new X509SecurityTokenParameters ()),
-                                false,
-                                new ChannelProtectionRequirements ());
-                        r.Properties [ReqType.IssuerBindingContextProperty] =
-                            new BindingContext (new CustomBinding (), new BindingParameterCollection ());
-                        r.Properties [ReqType.MessageSecurityVersionProperty] =
-                            MessageSecurityVersion.Default;
-                        r.Properties [ReqType.ChannelParametersCollectionProperty] =
-                            new ChannelParameterCollection ();
-                        r.Properties [ReqType.IssuedSecurityTokenParametersProperty] = sc.Clone ();
-                        r.Properties [ReqType.IssuerBindingProperty] =
-                            new CustomBinding (new HttpTransportBindingElement ());
-                        r.Properties [ReqType.MessageDirectionProperty] =
-                            MessageDirection.Input;
-                        r.SecureConversationSecurityBindingElement =
-                            new SymmetricSecurityBindingElement (
-                                new X509SecurityTokenParameters ());
-                        r.SecurityAlgorithmSuite = SecurityAlgorithmSuite.Default;
-                        r.Properties [ReqType.SupportSecurityContextCancellationProperty] = true;
-                        r.ListenUri = new Uri ("http://localhost:8080");
-                        r.KeySize = 256;
-                        sc.InitRequirement (r);
-                        Assert.IsFalse (mgr.IsIssued (r), "sc");
-            */
+/*
+r = new RecipientServiceModelSecurityTokenRequirement ();
+MySecureConversationSecurityTokenParameters sc =
+new MySecureConversationSecurityTokenParameters (
+new SymmetricSecurityBindingElement (new X509SecurityTokenParameters ()),
+false,
+new ChannelProtectionRequirements ());
+r.Properties [ReqType.IssuerBindingContextProperty] =
+new BindingContext (new CustomBinding (), new BindingParameterCollection ());
+r.Properties [ReqType.MessageSecurityVersionProperty] =
+MessageSecurityVersion.Default;
+r.Properties [ReqType.ChannelParametersCollectionProperty] =
+new ChannelParameterCollection ();
+r.Properties [ReqType.IssuedSecurityTokenParametersProperty] = sc.Clone ();
+r.Properties [ReqType.IssuerBindingProperty] =
+new CustomBinding (new HttpTransportBindingElement ());
+r.Properties [ReqType.MessageDirectionProperty] =
+MessageDirection.Input;
+r.SecureConversationSecurityBindingElement =
+new SymmetricSecurityBindingElement (
+new X509SecurityTokenParameters ());
+r.SecurityAlgorithmSuite = SecurityAlgorithmSuite.Default;
+r.Properties [ReqType.SupportSecurityContextCancellationProperty] = true;
+r.ListenUri = new Uri ("http://localhost:8080");
+r.KeySize = 256;
+sc.InitRequirement (r);
+Assert.IsFalse (mgr.IsIssued (r), "sc");
+*/
         }
 
         [Test]

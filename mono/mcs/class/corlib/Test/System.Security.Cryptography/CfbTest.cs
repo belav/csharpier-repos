@@ -224,7 +224,8 @@ namespace MonoTests.System.Security.Cryptography
         protected override void CFB(SymmetricAlgorithm algo)
         {
             algo.Mode = CipherMode.CFB;
-            // System.Security.Cryptography.CryptographicException : Feedback size for the cipher feedback mode (CFB) must be 8 bits.
+            // System.Security.Cryptography.CryptographicException : Feedback size for the cipher feedback mode
+            // (CFB) must be 8 bits.
             algo.FeedbackSize = 8;
             CFB(algo, algo.FeedbackSize);
         }

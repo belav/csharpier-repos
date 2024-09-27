@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
 #pragma warning disable RS0030 // Do not used banned API 'Project.LanguageServices', use 'GetExtendedLanguageServices' instead - allow in this helper.
         /// <summary>
-        /// Gets extended host language services, which includes language services from <see cref="Project.LanguageServices"/>.
+        /// Gets extended host language services, which includes language services from <see
+        // cref="Project.LanguageServices"/>.
         /// </summary>
         public static HostLanguageServices GetExtendedLanguageServices(this Project project) =>
             project.Solution.Workspace.Services.GetExtendedLanguageServices(project.Language);

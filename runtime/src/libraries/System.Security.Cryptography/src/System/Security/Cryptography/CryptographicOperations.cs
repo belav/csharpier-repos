@@ -83,7 +83,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -108,7 +109,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -136,16 +138,19 @@ namespace System.Security.Cryptography
         /// <param name="destination">The buffer to receive the hash value.</param>
         /// <returns>The total number of bytes written to <paramref name="destination" />.</returns>
         /// <exception cref="ArgumentException">
-        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash size.</para>
+        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash
+        // size.</para>
         ///   <para>-or-</para>
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         /// </exception>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
         ///   <see langword="null" />.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -171,7 +176,8 @@ namespace System.Security.Cryptography
         /// <param name="source">The data to hash.</param>
         /// <param name="destination">The buffer to receive the hash value.</param>
         /// <param name="bytesWritten">
-        ///   When this method returns, the total number of bytes written into <paramref name="destination"/>.
+        ///   When this method returns, the total number of bytes written into <paramref
+        // name="destination"/>.
         /// </param>
         /// <returns>
         ///   <see langword="false"/> if <paramref name="destination"/> is too small to hold the
@@ -185,7 +191,8 @@ namespace System.Security.Cryptography
         ///   <see langword="null" />.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -230,12 +237,14 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -264,14 +273,17 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash size.</para>
+        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash
+        // size.</para>
         ///   <para>-or-</para>
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -299,7 +311,8 @@ namespace System.Security.Cryptography
         /// <param name="source">The stream to hash.</param>
         /// <param name="destination">The buffer to receive the hash value.</param>
         /// <param name="cancellationToken">
-        ///   The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.
+        ///   The token to monitor for cancellation requests. The default value is <see
+        // cref="CancellationToken.None" />.
         /// </param>
         /// <returns>The total number of bytes written to <paramref name="destination" />.</returns>
         /// <exception cref="ArgumentNullException">
@@ -311,14 +324,17 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash size.</para>
+        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash
+        // size.</para>
         ///   <para>-or-</para>
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -352,7 +368,8 @@ namespace System.Security.Cryptography
         /// <param name="hashAlgorithm">The algorithm used to compute the hash.</param>
         /// <param name="source">The stream to hash.</param>
         /// <param name="cancellationToken">
-        ///   The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.
+        ///   The token to monitor for cancellation requests. The default value is <see
+        // cref="CancellationToken.None" />.
         /// </param>
         /// <returns>The hash of the data.</returns>
         /// <exception cref="ArgumentNullException">
@@ -364,12 +381,14 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -409,7 +428,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -440,7 +460,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -474,16 +495,19 @@ namespace System.Security.Cryptography
         /// <param name="destination">The buffer to receive the HMAC value.</param>
         /// <returns>The total number of bytes written to <paramref name="destination" />.</returns>
         /// <exception cref="ArgumentException">
-        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash size.</para>
+        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated hash
+        // size.</para>
         ///   <para>-or-</para>
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         /// </exception>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
         ///   <see langword="null" />.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -511,7 +535,8 @@ namespace System.Security.Cryptography
         /// <param name="source">The data to compute the HMAC over.</param>
         /// <param name="destination">The buffer to receive the HMAC value.</param>
         /// <param name="bytesWritten">
-        ///   When this method returns, the total number of bytes written into <paramref name="destination"/>.
+        ///   When this method returns, the total number of bytes written into <paramref
+        // name="destination"/>.
         /// </param>
         /// <returns>
         ///   <see langword="false"/> if <paramref name="destination"/> is too small to hold the
@@ -525,7 +550,8 @@ namespace System.Security.Cryptography
         ///   <see langword="null" />.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -573,12 +599,14 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -605,12 +633,14 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -645,14 +675,17 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         ///   <para>-or-</para>
-        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated HMAC size.</para>
+        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated HMAC
+        // size.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -679,7 +712,8 @@ namespace System.Security.Cryptography
         /// <param name="key">The secret key. The key can be any length.</param>
         /// <param name="source">The stream to compute the HMAC over.</param>
         /// <param name="cancellationToken">
-        ///   The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.
+        ///   The token to monitor for cancellation requests. The default value is <see
+        // cref="CancellationToken.None" />.
         /// </param>
         /// <returns>The HMAC of the data.</returns>
         /// <exception cref="ArgumentNullException">
@@ -691,12 +725,14 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -728,7 +764,8 @@ namespace System.Security.Cryptography
         /// <param name="source">The stream to compute the HMAC over.</param>
         /// <param name="destination">The buffer to receive the HMAC value.</param>
         /// <param name="cancellationToken">
-        ///   The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.
+        ///   The token to monitor for cancellation requests. The default value is <see
+        // cref="CancellationToken.None" />.
         /// </param>
         /// <returns>The total number of bytes written to <paramref name="destination" />.</returns>
         /// <exception cref="ArgumentNullException">
@@ -740,14 +777,17 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated HMAC size.</para>
+        ///   <para>The buffer in <paramref name="destination"/> is too small to hold the calculated HMAC
+        // size.</para>
         ///   <para>-or-</para>
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
@@ -784,7 +824,8 @@ namespace System.Security.Cryptography
         /// <param name="key">The secret key. The key can be any length.</param>
         /// <param name="source">The stream to compute the HMAC over.</param>
         /// <param name="cancellationToken">
-        ///   The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.
+        ///   The token to monitor for cancellation requests. The default value is <see
+        // cref="CancellationToken.None" />.
         /// </param>
         /// <returns>The HMAC of the data.</returns>
         /// <exception cref="ArgumentNullException">
@@ -796,12 +837,14 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is empty.</para>
+        ///   <para><paramref name="hashAlgorithm"/> has a <see cref="HashAlgorithmName.Name" /> that is
+        // empty.</para>
         ///   <para>-or-</para>
         ///   <para><paramref name="source" /> does not support reading.</para>
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current platform.
+        ///   <paramref name="hashAlgorithm"/> specifies a hash algorithm not supported by the current
+        // platform.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.

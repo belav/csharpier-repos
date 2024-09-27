@@ -56,8 +56,10 @@ namespace System.Data.EntityClient
         /// <summary>
         /// don't let this be constructed publicly;
         /// </summary>
-        /// <exception cref="EntityCommandCompilationException">Cannot prepare the command definition for execution; consult the InnerException for more information.</exception>
-        /// <exception cref="NotSupportedException">The ADO.NET Data Provider you are using does not support CommandTrees.</exception>
+        /// <exception cref="EntityCommandCompilationException">Cannot prepare the command definition for
+        // execution; consult the InnerException for more information.</exception>
+        /// <exception cref="NotSupportedException">The ADO.NET Data Provider you are using does not support
+        // CommandTrees.</exception>
         internal EntityCommandDefinition(
             DbProviderFactory storeProviderFactory,
             DbCommandTree commandTree
@@ -258,7 +260,8 @@ namespace System.Data.EntityClient
                 {
                     ValidateEdmResultType(baseStructuralType, functionImport);
 
-                    //Note: Defensive check for historic reasons, we expect functionImport.EntitySets.Count > resultSetIndex
+                    //Note: Defensive check for historic reasons, we expect functionImport.EntitySets.Count >
+                    // resultSetIndex
                     EntitySet entitySet =
                         functionImport.EntitySets.Count > resultSetIndex
                             ? functionImport.EntitySets[resultSetIndex]
@@ -525,8 +528,10 @@ namespace System.Data.EntityClient
         /// <param name="entityCommand"></param>
         /// <param name="behavior"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException">behavior must specify CommandBehavior.SequentialAccess</exception>
-        /// <exception cref="InvalidOperationException">input parameters in the entityCommand.Parameters collection must have non-null values.</exception>
+        /// <exception cref="InvalidOperationException">behavior must specify
+        // CommandBehavior.SequentialAccess</exception>
+        /// <exception cref="InvalidOperationException">input parameters in the entityCommand.Parameters
+        // collection must have non-null values.</exception>
         internal DbDataReader Execute(EntityCommand entityCommand, CommandBehavior behavior)
         {
             if (CommandBehavior.SequentialAccess != (behavior & CommandBehavior.SequentialAccess))
@@ -692,7 +697,8 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Updates storeParameter size, precision and scale properties from user provided parameter properties.
+        /// Updates storeParameter size, precision and scale properties from user provided parameter
+        // properties.
         /// </summary>
         /// <param name="entityParameter"></param>
         /// <param name="storeParameter"></param>
@@ -704,14 +710,16 @@ namespace System.Data.EntityClient
         {
             IDbDataParameter dbDataParameter = (IDbDataParameter)storeParameter;
 
-            // DBType is not currently syncable; it's part of the cache key anyway; this is because we can't guarantee
+            // DBType is not currently syncable; it's part of the cache key anyway; this is because we can't
+            // guarantee
             // that the store provider will honor it -- (SqlClient doesn't...)
             //if (entityParameter.IsDbTypeSpecified)
             //{
             //    storeParameter.DbType = entityParameter.DbType;
             //}
 
-            // Give the store provider the opportunity to set the value before any parameter state has been copied from
+            // Give the store provider the opportunity to set the value before any parameter state has been
+            // copied from
             // the EntityParameter.
             TypeUsage parameterTypeUsage = TypeHelpers.GetPrimitiveTypeUsageForScalar(
                 entityParameter.GetTypeUsage()
@@ -722,7 +730,8 @@ namespace System.Data.EntityClient
                 entityParameter.Value
             );
 
-            // Override the store provider parameter state with any explicitly specified values from the EntityParameter.
+            // Override the store provider parameter state with any explicitly specified values from the
+            // EntityParameter.
             if (entityParameter.IsDirectionSpecified)
             {
                 storeParameter.Direction = entityParameter.Direction;

@@ -19,7 +19,8 @@ public class UserClaimsPrincipalFactory<TUser> : IUserClaimsPrincipalFactory<TUs
     /// <summary>
     /// Initializes a new instance of the <see cref="UserClaimsPrincipalFactory{TUser}"/> class.
     /// </summary>
-    /// <param name="userManager">The <see cref="UserManager{TUser}"/> to retrieve user information from.</param>
+    /// <param name="userManager">The <see cref="UserManager{TUser}"/> to retrieve user information
+    // from.</param>
     /// <param name="optionsAccessor">The configured <see cref="IdentityOptions"/>.</param>
     public UserClaimsPrincipalFactory(
         UserManager<TUser> userManager,
@@ -59,7 +60,8 @@ public class UserClaimsPrincipalFactory<TUser> : IUserClaimsPrincipalFactory<TUs
     /// Creates a <see cref="ClaimsPrincipal"/> from an user asynchronously.
     /// </summary>
     /// <param name="user">The user to create a <see cref="ClaimsPrincipal"/> from.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous creation operation, containing the created <see cref="ClaimsPrincipal"/>.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous creation operation, containing
+    // the created <see cref="ClaimsPrincipal"/>.</returns>
     public virtual async Task<ClaimsPrincipal> CreateAsync(TUser user)
     {
         ArgumentNullThrowHelper.ThrowIfNull(user);
@@ -71,7 +73,8 @@ public class UserClaimsPrincipalFactory<TUser> : IUserClaimsPrincipalFactory<TUs
     /// Generate the claims for a user.
     /// </summary>
     /// <param name="user">The user to create a <see cref="ClaimsIdentity"/> from.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous creation operation, containing the created <see cref="ClaimsIdentity"/>.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous creation operation, containing
+    // the created <see cref="ClaimsIdentity"/>.</returns>
     protected virtual async Task<ClaimsIdentity> GenerateClaimsAsync(TUser user)
     {
         var userId = await UserManager.GetUserIdAsync(user).ConfigureAwait(false);
@@ -120,8 +123,10 @@ public class UserClaimsPrincipalFactory<TUser, TRole> : UserClaimsPrincipalFacto
     /// <summary>
     /// Initializes a new instance of the <see cref="UserClaimsPrincipalFactory{TUser, TRole}"/> class.
     /// </summary>
-    /// <param name="userManager">The <see cref="UserManager{TUser}"/> to retrieve user information from.</param>
-    /// <param name="roleManager">The <see cref="RoleManager{TRole}"/> to retrieve a user's roles from.</param>
+    /// <param name="userManager">The <see cref="UserManager{TUser}"/> to retrieve user information
+    // from.</param>
+    /// <param name="roleManager">The <see cref="RoleManager{TRole}"/> to retrieve a user's roles
+    // from.</param>
     /// <param name="options">The configured <see cref="IdentityOptions"/>.</param>
     public UserClaimsPrincipalFactory(
         UserManager<TUser> userManager,
@@ -146,7 +151,8 @@ public class UserClaimsPrincipalFactory<TUser, TRole> : UserClaimsPrincipalFacto
     /// Generate the claims for a user.
     /// </summary>
     /// <param name="user">The user to create a <see cref="ClaimsIdentity"/> from.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous creation operation, containing the created <see cref="ClaimsIdentity"/>.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous creation operation, containing
+    // the created <see cref="ClaimsIdentity"/>.</returns>
     protected override async Task<ClaimsIdentity> GenerateClaimsAsync(TUser user)
     {
         var id = await base.GenerateClaimsAsync(user).ConfigureAwait(false);

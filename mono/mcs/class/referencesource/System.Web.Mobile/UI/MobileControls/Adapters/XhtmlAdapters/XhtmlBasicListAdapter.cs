@@ -31,13 +31,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlListAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicListAdapter.uex' path='docs/doc[@for="XhtmlListAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicListAdapter.uex' path='docs/doc[@for="XhtmlListAdapter.Control"]/*'
+        // />
         protected new List Control
         {
             get { return base.Control as List; }
         }
 
-        /// <include file='doc\XhtmlBasicListAdapter.uex' path='docs/doc[@for="XhtmlListAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicListAdapter.uex' path='docs/doc[@for="XhtmlListAdapter.Render"]/*'
+        // />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             if (Control.HasControls())
@@ -56,7 +58,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             ConditionalExitLayout(writer, Style);
         }
 
-        /// <include file='doc\XhtmlBasicListAdapter.uex' path='docs/doc[@for="XhtmlListAdapter.RenderList"]/*' />
+        /// <include file='doc\XhtmlBasicListAdapter.uex'
+        // path='docs/doc[@for="XhtmlListAdapter.RenderList"]/*' />
         protected virtual void RenderList(XhtmlMobileTextWriter writer)
         {
             MobileListItemCollection items = Control.Items;

@@ -8,13 +8,15 @@ using StreamJsonRpc;
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 
 /// <summary>
-/// A wrapper which takes a service but actually sends calls to it through JsonRpc to ensure we can actually use the service across a wire.
+/// A wrapper which takes a service but actually sends calls to it through JsonRpc to ensure we can
+// actually use the service across a wire.
 /// </summary>
 internal sealed class BrokeredServiceProxy<T> : IAsyncDisposable
     where T : class
 {
     /// <summary>
-    /// A task that cane awaited to assert the rest of the fields in this class being assigned and non-null.
+    /// A task that cane awaited to assert the rest of the fields in this class being assigned and
+    // non-null.
     /// </summary>
     private readonly Task _createConnectionTask;
 

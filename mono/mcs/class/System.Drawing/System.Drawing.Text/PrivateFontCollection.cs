@@ -56,14 +56,16 @@ namespace System.Drawing.Text
             if (!File.Exists(fname))
                 throw new FileNotFoundException();
 
-            // note: MS throw the same exception FileNotFoundException if the file exists but isn't a valid font file
+            // note: MS throw the same exception FileNotFoundException if the file exists but isn't a valid font
+            // file
             Status status = GDIPlus.GdipPrivateAddFontFile(_nativeFontCollection, fname);
             GDIPlus.CheckStatus(status);
         }
 
         public void AddMemoryFont(IntPtr memory, int length)
         {
-            // note: MS throw FileNotFoundException if something is bad with the data (except for a null pointer)
+            // note: MS throw FileNotFoundException if something is bad with the data (except for a null
+            // pointer)
             Status status = GDIPlus.GdipPrivateAddMemoryFont(_nativeFontCollection, memory, length);
             GDIPlus.CheckStatus(status);
         }

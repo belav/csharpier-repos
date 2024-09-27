@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a primary or alternate key on an entity type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IKey : IReadOnlyKey, IAnnotatable
 {
@@ -17,8 +18,10 @@ public interface IKey : IReadOnlyKey, IAnnotatable
     new IReadOnlyList<IProperty> Properties { get; }
 
     /// <summary>
-    ///     Gets the entity type the key is defined on. This may be different from the type that <see cref="Properties" />
-    ///     are defined on when the key is defined a derived type in an inheritance hierarchy (since the properties
+    ///     Gets the entity type the key is defined on. This may be different from the type that <see
+    // cref="Properties" />
+    ///     are defined on when the key is defined a derived type in an inheritance hierarchy (since the
+    // properties
     ///     may be defined on a base type).
     /// </summary>
     new IEntityType DeclaringEntityType { get; }
@@ -39,10 +42,12 @@ public interface IKey : IReadOnlyKey, IAnnotatable
 
     /// <summary>
     ///     <para>
-    ///         Gets a factory for key values based on the key values taken from various forms of entity data.
+    ///         Gets a factory for key values based on the key values taken from various forms of entity
+    // data.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -53,10 +58,12 @@ public interface IKey : IReadOnlyKey, IAnnotatable
 
     /// <summary>
     ///     <para>
-    ///         Gets a factory for key values based on the key values taken from various forms of entity data.
+    ///         Gets a factory for key values based on the key values taken from various forms of entity
+    // data.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>

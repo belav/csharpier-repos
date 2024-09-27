@@ -57,7 +57,8 @@ namespace System.Xml.Linq
         int hashCode;
 
         /// <summary>
-        /// Constructor, internal so that external users must go through the Get() method to create an XName.
+        /// Constructor, internal so that external users must go through the Get() method to create an
+        // XName.
         /// </summary>
         internal XName(XNamespace ns, string localName)
         {
@@ -149,7 +150,8 @@ namespace System.Xml.Linq
         /// <summary>
         /// Converts a string formatted as an expanded XML name ({namespace}localname) to an XName object.
         /// </summary>
-        /// <param name="expandedName">A string containing an expanded XML name in the format: {namespace}localname.</param>
+        /// <param name="expandedName">A string containing an expanded XML name in the format:
+        // {namespace}localname.</param>
         /// <returns>An XName object constructed from the expanded name.</returns>
         [CLSCompliant(false)]
         public static implicit operator XName(string expandedName)
@@ -158,7 +160,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="XName"/> is equal to the current <see cref="XName"/>.
+        /// Determines whether the specified <see cref="XName"/> is equal to the current <see
+        // cref="XName"/>.
         /// </summary>
         /// <param name="obj">The XName to compare to the current XName.</param>
         /// <returns>
@@ -299,7 +302,8 @@ namespace System.Xml.Linq
         const int NamespacesCapacity = 32; // Starting capacity of XNamespace table, which must be power of 2
 
         /// <summary>
-        /// Constructor, internal so that external users must go through the Get() method to create an XNamespace.
+        /// Constructor, internal so that external users must go through the Get() method to create an
+        // XNamespace.
         /// </summary>
         internal XNamespace(string namespaceName)
         {
@@ -352,7 +356,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Gets the XNamespace object that corresponds to the xml uri (http://www.w3.org/XML/1998/namespace).
+        /// Gets the XNamespace object that corresponds to the xml uri
+        // (http://www.w3.org/XML/1998/namespace).
         /// </summary>
         public static XNamespace Xml
         {
@@ -411,11 +416,13 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="XNamespace"/> is equal to the current <see cref="XNamespace"/>.
+        /// Determines whether the specified <see cref="XNamespace"/> is equal to the current <see
+        // cref="XNamespace"/>.
         /// </summary>
         /// <param name="obj">The XNamespace to compare to the current XNamespace.</param>
         /// <returns>
-        /// true if the specified <see cref="XNamespace"/> is equal to the current XNamespace; otherwise false.
+        /// true if the specified <see cref="XNamespace"/> is equal to the current XNamespace; otherwise
+        // false.
         /// </returns>
         /// <remarks>
         /// For two <see cref="XNamespace"/> objects to be equal they must have the same
@@ -472,8 +479,10 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="XName"/> created from this XNamespace <see cref="XName"/> and a portion of the passed in
-        /// local name parameter.  The returned XName object is guaranteed to be atomic (i.e. the only one in the system for
+        /// Returns an <see cref="XName"/> created from this XNamespace <see cref="XName"/> and a portion of
+        // the passed in
+        /// local name parameter.  The returned XName object is guaranteed to be atomic (i.e. the only one
+        // in the system for
         /// this particular expanded name).
         /// </summary>
         internal XName GetName(string localName, int index, int count)
@@ -497,8 +506,10 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="XNamespace"/> created from a portion of the passed in namespace name parameter.  The returned XNamespace
-        /// object is guaranteed to be atomic (i.e. the only one in the system for this particular namespace name).
+        /// Returns an <see cref="XNamespace"/> created from a portion of the passed in namespace name
+        // parameter.  The returned XNamespace
+        /// object is guaranteed to be atomic (i.e. the only one in the system for this particular namespace
+        // name).
         /// </summary>
         internal static XNamespace Get(string namespaceName, int index, int count)
         {
@@ -514,7 +525,8 @@ namespace System.Xml.Linq
             if (count == 0)
                 return None;
 
-            // Use CompareExchange to ensure that exactly one XHashtable<WeakReference> is used to store namespaces
+            // Use CompareExchange to ensure that exactly one XHashtable<WeakReference> is used to store
+            // namespaces
             if (namespaces == null)
                 Interlocked.CompareExchange(
                     ref namespaces,
@@ -563,7 +575,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// This function is used by the <![CDATA[XHashtable<XName>]]> to extract the local name part from an XName.  The hash table
+        /// This function is used by the <![CDATA[XHashtable<XName>]]> to extract the local name part from
+        // an XName.  The hash table
         /// uses the local name as the hash key.
         /// </summary>
         private static string ExtractLocalName(XName n)
@@ -573,7 +586,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// This function is used by the <![CDATA[XHashtable<WeakReference>]]> to extract the XNamespace that the WeakReference is
+        /// This function is used by the <![CDATA[XHashtable<WeakReference>]]> to extract the XNamespace
+        // that the WeakReference is
         /// referencing.  In cases where the XNamespace has been cleaned up, this function returns null.
         /// </summary>
         private static string ExtractNamespace(WeakReference r)
@@ -587,9 +601,12 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Ensure that an XNamespace object for 'namespaceName' has been atomically created.  In other words, all outstanding
-        /// references to this particular namespace, on any thread, must all be to the same object.  Care must be taken,
-        /// since other threads can be concurrently calling this method, and the target of a WeakReference can be cleaned up
+        /// Ensure that an XNamespace object for 'namespaceName' has been atomically created.  In other
+        // words, all outstanding
+        /// references to this particular namespace, on any thread, must all be to the same object.  Care
+        // must be taken,
+        /// since other threads can be concurrently calling this method, and the target of a WeakReference
+        // can be cleaned up
         /// at any time by the GC.
         /// </summary>
         private static XNamespace EnsureNamespace(ref WeakReference refNmsp, string namespaceName)
@@ -599,7 +616,8 @@ namespace System.Xml.Linq
             // Keep looping until a non-null namespace has been retrieved
             while (true)
             {
-                // Save refNmsp in local variable, so we can work on a value that will not be changed by another thread
+                // Save refNmsp in local variable, so we can work on a value that will not be changed by another
+                // thread
                 refOld = refNmsp;
 
                 if (refOld != null)
@@ -622,52 +640,77 @@ namespace System.Xml.Linq
     }
 
     /// <summary>
-    /// This is a thread-safe hash table which maps string keys to values of type TValue.  It is assumed that the string key is embedded in the hashed value
-    /// and can be extracted via a call to ExtractKeyDelegate (in order to save space and allow cleanup of key if value is released due to a WeakReference
+    /// This is a thread-safe hash table which maps string keys to values of type TValue.  It is assumed
+    // that the string key is embedded in the hashed value
+    /// and can be extracted via a call to ExtractKeyDelegate (in order to save space and allow cleanup
+    // of key if value is released due to a WeakReference
     /// TValue releasing its target).
     /// </summary>
     /// <remarks>
     /// All methods on this class are thread-safe.
     ///
-    /// When the hash table fills up, it is necessary to resize it and rehash all contents.  Because this can be expensive,
-    /// a lock is taken, and one thread is responsible for the resize.  Other threads which need to add values must wait
+    /// When the hash table fills up, it is necessary to resize it and rehash all contents.  Because
+    // this can be expensive,
+    /// a lock is taken, and one thread is responsible for the resize.  Other threads which need to add
+    // values must wait
     /// for the resize to be complete.
     ///
     /// Thread-Safety Notes
     /// ===================
     ///
-    /// 1. Because performance and scalability are such a concern with the global name table, I have avoided the use of
-    ///    BIFALOs (Big Fat Locks).  Instead, I use CompareExchange, Interlocked.Increment, memory barriers, atomic state objects,
-    ///    etc. to avoid locks.  Any changes to code which accesses these variables should be carefully reviewed and tested,
-    ///    as it can be *very* tricky.  In particular, if you don't understand the CLR memory model or if you don't know
-    ///    what a memory barrier is, DON'T attempt to modify this code.  A good discussion of these topics can be found at
+    /// 1. Because performance and scalability are such a concern with the global name table, I have
+    // avoided the use of
+    ///    BIFALOs (Big Fat Locks).  Instead, I use CompareExchange, Interlocked.Increment, memory
+    // barriers, atomic state objects,
+    ///    etc. to avoid locks.  Any changes to code which accesses these variables should be carefully
+    // reviewed and tested,
+    ///    as it can be *very* tricky.  In particular, if you don't understand the CLR memory model or
+    // if you don't know
+    ///    what a memory barrier is, DON'T attempt to modify this code.  A good discussion of these
+    // topics can be found at
     ///    <![CDATA[http://discuss.develop.com/archives/wa.exe?A2=ind0203B&L=DOTNET&P=R375]]>.
     ///
-    /// 2. Because I am not sure if the CLR spec has changed since versions 1.0/1.1, I am assuming the weak memory model that
-    ///    is described in the ECMA spec, in which normal writes can be reordered.  This means I must introduce more memory
+    /// 2. Because I am not sure if the CLR spec has changed since versions 1.0/1.1, I am assuming the
+    // weak memory model that
+    ///    is described in the ECMA spec, in which normal writes can be reordered.  This means I must
+    // introduce more memory
     ///    barriers than otherwise would be necessary.
     ///
     /// 3. There are several thread-safety concepts and patterns I utilize in this code:
-    ///      a. Publishing -- There are a small number of places where state is exposed, or published, to multiple threads.
-    ///                       These places are marked with the comment "PUBLISH", and are key locations to consider when
+    ///      a. Publishing -- There are a small number of places where state is exposed, or published,
+    // to multiple threads.
+    ///                       These places are marked with the comment "PUBLISH", and are key locations
+    // to consider when
     ///                       reviewing the code for thread-safety.
     ///
-    ///      b. Immutable objects -- Immutable objects initialize their fields once in their constructor and then never modify
-    ///                              them again.  As long as care is taken to ensure that initial field values are visible to
-    ///                              other threads before publishing the immutable object itself, immutable objects are
+    ///      b. Immutable objects -- Immutable objects initialize their fields once in their constructor
+    // and then never modify
+    ///                              them again.  As long as care is taken to ensure that initial field
+    // values are visible to
+    ///                              other threads before publishing the immutable object itself,
+    // immutable objects are
     ///                              completely thread-safe.
     ///
-    ///      c. Atomic state objects -- Locks typically are taken when several pieces of state must be updated atomically.  In
-    ///                                 other words, there is a window in which state is inconsistent, and that window must
-    ///                                 be protected from view by locking.  However, if a new object is created each time state
-    ///                                 changes (or state changes substantially), then during creation the new object is only
-    ///                                 visible to a single thread.  Once construction is complete, an assignment (guaranteed
-    ///                                 atomic) can replace the old state object with the new state object, thus publishing a
+    ///      c. Atomic state objects -- Locks typically are taken when several pieces of state must be
+    // updated atomically.  In
+    ///                                 other words, there is a window in which state is inconsistent,
+    // and that window must
+    ///                                 be protected from view by locking.  However, if a new object is
+    // created each time state
+    ///                                 changes (or state changes substantially), then during creation
+    // the new object is only
+    ///                                 visible to a single thread.  Once construction is complete, an
+    // assignment (guaranteed
+    ///                                 atomic) can replace the old state object with the new state
+    // object, thus publishing a
     ///                                 consistent view to all threads.
     ///
-    ///      d. Retry -- When several threads contend over shared state which only one is allowed to possess, it is possible
-    ///                  to avoid locking by repeatedly attempting to acquire the shared state.  The CompareExchange method
-    ///                  is useful for atomically ensuring that only one thread succeeds, and other threads are notified that
+    ///      d. Retry -- When several threads contend over shared state which only one is allowed to
+    // possess, it is possible
+    ///                  to avoid locking by repeatedly attempting to acquire the shared state.  The
+    // CompareExchange method
+    ///                  is useful for atomically ensuring that only one thread succeeds, and other
+    // threads are notified that
     ///                  they must retry.
     ///
     /// 4. All variables which can be written by multiple threads are marked "SHARED STATE".
@@ -680,7 +723,8 @@ namespace System.Xml.Linq
 
         /// <summary>
         /// Prototype of function which is called to extract a string key value from a hashed value.
-        /// Returns null if the hashed value is invalid (e.g. value has been released due to a WeakReference TValue being cleaned up).
+        /// Returns null if the hashed value is invalid (e.g. value has been released due to a WeakReference
+        // TValue being cleaned up).
         /// </summary>
         public delegate string ExtractKeyDelegate(TValue value);
 
@@ -701,7 +745,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Add a value to the hash table, hashed based on a string key embedded in it.  Return the added value (may be a different object than "value").
+        /// Add a value to the hash table, hashed based on a string key embedded in it.  Return the added
+        // value (may be a different object than "value").
         /// </summary>
         public TValue Add(TValue value)
         {
@@ -724,11 +769,13 @@ namespace System.Xml.Linq
                 {
                     XHashtableState newState = state.Resize();
 
-                    // Use memory barrier to ensure that the resized XHashtableState object is fully constructed before it is assigned
+                    // Use memory barrier to ensure that the resized XHashtableState object is fully constructed before
+                    // it is assigned
 #if !SILVERLIGHT //
                     Thread.MemoryBarrier();
 #else // SILVERLIGHT
-                    // According to this document "http://my/sites/juddhall/ThreadingFeatureCrew/Shared Documents/System.Threading - FX Audit Proposal.docx"
+                    // According to this document "http://my/sites/juddhall/ThreadingFeatureCrew/Shared
+                    // Documents/System.Threading - FX Audit Proposal.docx"
                     // The MemoryBarrier method usage is busted (mostly - don't know about ours) and should be removed.
 
                     // Replacing with Interlocked.CompareExchange for now (with no effect)
@@ -745,16 +792,23 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// This class contains all the hash table state.  Rather than creating a bucket object, buckets are structs
-        /// packed into an array.  Buckets with the same truncated hash code are linked into lists, so that collisions
+        /// This class contains all the hash table state.  Rather than creating a bucket object, buckets are
+        // structs
+        /// packed into an array.  Buckets with the same truncated hash code are linked into lists, so that
+        // collisions
         /// can be disambiguated.
         /// </summary>
         /// <remarks>
-        /// Note that the "buckets" and "entries" arrays are never themselves written by multiple threads.  Instead, the
-        /// *contents* of the array are written by multiple threads.  Resizing the hash table does not modify these variables,
-        /// or even modify the contents of these variables.  Instead, resizing makes an entirely new XHashtableState object
-        /// in which all entries are rehashed.  This strategy allows reader threads to continue finding values in the "old"
-        /// XHashtableState, while writer threads (those that need to add a new value to the table) are blocked waiting for
+        /// Note that the "buckets" and "entries" arrays are never themselves written by multiple threads.
+        // Instead, the
+        /// *contents* of the array are written by multiple threads.  Resizing the hash table does not
+        // modify these variables,
+        /// or even modify the contents of these variables.  Instead, resizing makes an entirely new
+        // XHashtableState object
+        /// in which all entries are rehashed.  This strategy allows reader threads to continue finding
+        // values in the "old"
+        /// XHashtableState, while writer threads (those that need to add a new value to the table) are
+        // blocked waiting for
         /// the resize to complete.
         /// </remarks>
         private sealed class XHashtableState
@@ -784,7 +838,8 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// If this table is not full, then just return "this".  Otherwise, create and return a new table with
+            /// If this table is not full, then just return "this".  Otherwise, create and return a new table
+            // with
             /// additional capacity, and rehash all values in the table.
             /// </summary>
             public XHashtableState Resize()
@@ -803,7 +858,8 @@ namespace System.Xml.Linq
 
                     if (entryIdx == EndOfList)
                     {
-                        // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to resize
+                        // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to
+                        // resize
                         entryIdx = Interlocked.CompareExchange(
                             ref buckets[bucketIdx],
                             FullList,
@@ -820,7 +876,8 @@ namespace System.Xml.Linq
 
                         if (entries[entryIdx].Next == EndOfList)
                         {
-                            // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to resize
+                            // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to
+                            // resize
                             entryIdx = Interlocked.CompareExchange(
                                 ref entries[entryIdx].Next,
                                 FullList,
@@ -839,7 +896,8 @@ namespace System.Xml.Linq
                     );
                 }
 
-                // Double number of valid entries; if result is less than current capacity, then use current capacity
+                // Double number of valid entries; if result is less than current capacity, then use current
+                // capacity
                 if (newSize < buckets.Length / 2)
                 {
                     newSize = buckets.Length;
@@ -880,7 +938,8 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Attempt to find "key" in the table.  If the key exists, return the associated value in "value" and
+            /// Attempt to find "key" in the table.  If the key exists, return the associated value in "value"
+            // and
             /// return true.  Otherwise return false.
             /// </summary>
             public bool TryGetValue(string key, int index, int count, out TValue value)
@@ -901,8 +960,10 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Attempt to add "value" to the table, hashed by an embedded string key.  If a value having the same key already exists,
-            /// then return the existing value in "newValue".  Otherwise, return the newly added value in "newValue".
+            /// Attempt to add "value" to the table, hashed by an embedded string key.  If a value having the
+            // same key already exists,
+            /// then return the existing value in "newValue".  Otherwise, return the newly added value in
+            // "newValue".
             ///
             /// If the hash table is full, return false.  Otherwise, return true.
             /// </summary>
@@ -916,7 +977,8 @@ namespace System.Xml.Linq
                 // Assume "value" will be added and returned as "newValue"
                 newValue = value;
 
-                // Extract the key from the value.  If it's null, then value is invalid and does not need to be added to table.
+                // Extract the key from the value.  If it's null, then value is invalid and does not need to be
+                // added to table.
                 key = extractKey(value);
                 if (key == null)
                     return true;
@@ -924,8 +986,10 @@ namespace System.Xml.Linq
                 // Compute hash code over entire length of key
                 hashCode = ComputeHashCode(key, 0, key.Length);
 
-                // Assume value is not yet in the hash table, and prepare to add it (if table is full, return false).
-                // Use the entry index returned from Increment, which will never be zero, as zero conflicts with EndOfList.
+                // Assume value is not yet in the hash table, and prepare to add it (if table is full, return
+                // false).
+                // Use the entry index returned from Increment, which will never be zero, as zero conflicts with
+                // EndOfList.
                 // Although this means that the first entry will never be used, it avoids the need to initialize all
                 // starting buckets to the EndOfList value.
                 newEntry = Interlocked.Increment(ref numEntries);
@@ -935,12 +999,14 @@ namespace System.Xml.Linq
                 entries[newEntry].Value = value;
                 entries[newEntry].HashCode = hashCode;
 
-                // Ensure that all writes to the entry can't be reordered past this barrier (or other threads might see new entry
+                // Ensure that all writes to the entry can't be reordered past this barrier (or other threads might
+                // see new entry
                 // in list before entry has been initialized!).
 #if !SILVERLIGHT //
                 Thread.MemoryBarrier();
 #else // SILVERLIGHT
-                // According to this document "http://my/sites/juddhall/ThreadingFeatureCrew/Shared Documents/System.Threading - FX Audit Proposal.docx"
+                // According to this document "http://my/sites/juddhall/ThreadingFeatureCrew/Shared
+                // Documents/System.Threading - FX Audit Proposal.docx"
                 // The MemoryBarrier method usage is busted (mostly - don't know about ours) and should be removed.
 
                 // Replacing with Interlocked.CompareExchange for now (with no effect)
@@ -953,7 +1019,8 @@ namespace System.Xml.Linq
                 while (!FindEntry(hashCode, key, 0, key.Length, ref entryIndex))
                 {
                     // PUBLISH (buckets slot)
-                    // No matching entry found, so add the new entry to the end of the list ("entryIndex" is index of last entry)
+                    // No matching entry found, so add the new entry to the end of the list ("entryIndex" is index of
+                    // last entry)
                     if (entryIndex == 0)
                         entryIndex = Interlocked.CompareExchange(
                             ref buckets[hashCode & (buckets.Length - 1)],
@@ -968,14 +1035,18 @@ namespace System.Xml.Linq
                         );
 
                     // Return true only if the CompareExchange succeeded (happens when replaced value is EndOfList).
-                    // Return false if the linked list turned out to be full because another thread is currently resizing
-                    // the hash table.  In this case, entries[newEntry] is orphaned (not part of any linked list) and the
-                    // Add needs to be performed on the new hash table.  Otherwise, keep looping, looking for new end of list.
+                    // Return false if the linked list turned out to be full because another thread is currently
+                    // resizing
+                    // the hash table.  In this case, entries[newEntry] is orphaned (not part of any linked list) and
+                    // the
+                    // Add needs to be performed on the new hash table.  Otherwise, keep looping, looking for new end of
+                    // list.
                     if (entryIndex <= EndOfList)
                         return entryIndex == EndOfList;
                 }
 
-                // Another thread already added the value while this thread was trying to add, so return that instance instead.
+                // Another thread already added the value while this thread was trying to add, so return that
+                // instance instead.
                 // Note that entries[newEntry] will be orphaned (not part of any linked list) in this case
                 newValue = entries[entryIndex].Value;
 
@@ -983,9 +1054,12 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Searches a linked list of entries, beginning at "entryIndex".  If "entryIndex" is 0, then search starts at a hash bucket instead.
-            /// Each entry in the list is matched against the (hashCode, key, index, count) key.  If a matching entry is found, then its
-            /// entry index is returned in "entryIndex" and true is returned.  If no matching entry is found, then the index of the last entry
+            /// Searches a linked list of entries, beginning at "entryIndex".  If "entryIndex" is 0, then search
+            // starts at a hash bucket instead.
+            /// Each entry in the list is matched against the (hashCode, key, index, count) key.  If a matching
+            // entry is found, then its
+            /// entry index is returned in "entryIndex" and true is returned.  If no matching entry is found,
+            // then the index of the last entry
             /// in the list (or 0 if list is empty) is returned in "entryIndex" and false is returned.
             /// </summary>
             /// <remarks>
@@ -1017,7 +1091,8 @@ namespace System.Xml.Linq
                         string keyCompare = extractKey(entries[currentIndex].Value);
 
                         // If the key is invalid, then attempt to remove the current entry from the linked list.
-                        // This is thread-safe in the case where the Next field points to another entry, since once a Next field points
+                        // This is thread-safe in the case where the Next field points to another entry, since once a Next
+                        // field points
                         // to another entry, it will never be modified to be EndOfList or FullList.
                         if (keyCompare == null)
                         {
@@ -1062,7 +1137,8 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Compute hash code for a string key (index, count substring of "key").  The algorithm used is the same on used in NameTable.cs in System.Xml.
+            /// Compute hash code for a string key (index, count substring of "key").  The algorithm used is the
+            // same on used in NameTable.cs in System.Xml.
             /// </summary>
             private static int ComputeHashCode(string key, int index, int count)
             {
@@ -1074,7 +1150,8 @@ namespace System.Xml.Linq
                 for (int i = index; i < end; i++)
                     hashCode += (hashCode << 7) ^ key[i];
 
-                // Mix up hash code a bit more and clear the sign bit.  This code was taken from NameTable.cs in System.Xml.
+                // Mix up hash code a bit more and clear the sign bit.  This code was taken from NameTable.cs in
+                // System.Xml.
                 hashCode -= hashCode >> 17;
                 hashCode -= hashCode >> 11;
                 hashCode -= hashCode >> 5;
@@ -1082,8 +1159,10 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Hash table entry.  The "Value" and "HashCode" fields are filled during initialization, and are never changed.  The "Next"
-            /// field is updated when a new entry is chained to this one, and therefore care must be taken to ensure that updates to
+            /// Hash table entry.  The "Value" and "HashCode" fields are filled during initialization, and are
+            // never changed.  The "Next"
+            /// field is updated when a new entry is chained to this one, and therefore care must be taken to
+            // ensure that updates to
             /// this field are thread-safe.
             /// </summary>
             private struct Entry
@@ -1594,7 +1673,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Walks the tree starting with "this" node and returns first annotation of type <see cref="SaveOptions"/>
+        /// Walks the tree starting with "this" node and returns first annotation of type <see
+        // cref="SaveOptions"/>
         ///   found in the ancestors.
         /// </summary>
         /// <returns>The effective <see cref="SaveOptions"/> for this <see cref="XObject"/></returns>
@@ -2079,7 +2159,8 @@ namespace System.Xml.Linq
         /// <summary>
         /// Creates an <see cref="XmlReader"/> for the node.
         /// </summary>
-        /// <returns>An <see cref="XmlReader"/> that can be used to read the node and its descendants.</returns>
+        /// <returns>An <see cref="XmlReader"/> that can be used to read the node and its
+        // descendants.</returns>
         public XmlReader CreateReader()
         {
             return new XNodeReader(this, null);
@@ -2089,9 +2170,11 @@ namespace System.Xml.Linq
         /// Creates an <see cref="XmlReader"/> for the node.
         /// </summary>
         /// <param name="readerOptions">
-        /// Options to be used for the returned reader. These override the default usage of annotations from the tree.
+        /// Options to be used for the returned reader. These override the default usage of annotations from
+        // the tree.
         /// </param>
-        /// <returns>An <see cref="XmlReader"/> that can be used to read the node and its descendants.</returns>
+        /// <returns>An <see cref="XmlReader"/> that can be used to read the node and its
+        // descendants.</returns>
         public XmlReader CreateReader(ReaderOptions readerOptions)
         {
             return new XNodeReader(this, null, readerOptions);
@@ -2216,7 +2299,8 @@ namespace System.Xml.Linq
         /// (<see cref="XObject.NodeType"/>) of the first node encountered
         /// in the reader.
         /// </summary>
-        /// <param name="reader">An <see cref="XmlReader"/> positioned at the node to read into this <see cref="XNode"/>.</param>
+        /// <param name="reader">An <see cref="XmlReader"/> positioned at the node to read into this <see
+        // cref="XNode"/>.</param>
         /// <returns>An <see cref="XNode"/> that contains the nodes read from the reader.</returns>
         /// <exception cref="InvalidOperationException">
         /// Thrown if the <see cref="XmlReader"/> is not positioned on a recognized node type.
@@ -2308,7 +2392,8 @@ namespace System.Xml.Linq
 
         /// <summary>
         /// Provides the formatted XML text representation.
-        /// You can use the SaveOptions as an annotation on this node or its ancestors, then this method will use those options.
+        /// You can use the SaveOptions as an annotation on this node or its ancestors, then this method
+        // will use those options.
         /// </summary>
         /// <returns>A formatted XML string.</returns>
         public override string ToString()
@@ -2321,7 +2406,8 @@ namespace System.Xml.Linq
         /// </summary>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         /// <returns>An XML string.</returns>
         public string ToString(SaveOptions options)
@@ -3050,13 +3136,16 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns the descendant <see cref="XElement"/>s of this <see cref="XContainer"/>.  Note this method will
-        /// not return itself in the resulting IEnumerable.  See <see cref="XElement.DescendantsAndSelf()"/> if you
+        /// Returns the descendant <see cref="XElement"/>s of this <see cref="XContainer"/>.  Note this
+        // method will
+        /// not return itself in the resulting IEnumerable.  See <see cref="XElement.DescendantsAndSelf()"/>
+        // if you
         /// need to include the current <see cref="XElement"/> in the results.
         /// <seealso cref="XElement.DescendantsAndSelf()"/>
         /// </summary>
         /// <returns>
-        /// An IEnumerable of <see cref="XElement"/> with all of the descendants below this <see cref="XContainer"/> in the XML tree.
+        /// An IEnumerable of <see cref="XElement"/> with all of the descendants below this <see
+        // cref="XContainer"/> in the XML tree.
         /// </returns>
         public IEnumerable<XElement> Descendants()
         {
@@ -3064,10 +3153,12 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns the Descendant <see cref="XElement"/>s with the passed in <see cref="XName"/> as an IEnumerable
+        /// Returns the Descendant <see cref="XElement"/>s with the passed in <see cref="XName"/> as an
+        // IEnumerable
         /// of XElement.
         /// </summary>
-        /// <param name="name">The <see cref="XName"/> to match against descendant <see cref="XElement"/>s.</param>
+        /// <param name="name">The <see cref="XName"/> to match against descendant <see
+        // cref="XElement"/>s.</param>
         /// <returns>An <see cref="IEnumerable"/> of <see cref="XElement"/></returns>
         public IEnumerable<XElement> Descendants(XName name)
         {
@@ -3108,7 +3199,8 @@ namespace System.Xml.Linq
         /// Returns all of the child elements of this <see cref="XContainer"/>.
         /// </summary>
         /// <returns>
-        /// An <see cref="IEnumerable"/> over all of this <see cref="XContainer"/>'s child <see cref="XElement"/>s.
+        /// An <see cref="IEnumerable"/> over all of this <see cref="XContainer"/>'s child <see
+        // cref="XElement"/>s.
         /// </returns>
         public IEnumerable<XElement> Elements()
         {
@@ -3116,13 +3208,16 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns the child elements of this <see cref="XContainer"/> that match the <see cref="XName"/> passed in.
+        /// Returns the child elements of this <see cref="XContainer"/> that match the <see cref="XName"/>
+        // passed in.
         /// </summary>
         /// <param name="name">
-        /// The <see cref="XName"/> to match against the <see cref="XElement"/> children of this <see cref="XContainer"/>.
+        /// The <see cref="XName"/> to match against the <see cref="XElement"/> children of this <see
+        // cref="XContainer"/>.
         /// </param>
         /// <returns>
-        /// An <see cref="IEnumerable"/> of <see cref="XElement"/> children of this <see cref="XContainer"/> that have
+        /// An <see cref="IEnumerable"/> of <see cref="XElement"/> children of this <see cref="XContainer"/>
+        // that have
         /// a matching <see cref="XName"/>.
         /// </returns>
         public IEnumerable<XElement> Elements(XName name)
@@ -3136,7 +3231,8 @@ namespace System.Xml.Linq
         /// <seealso cref="XElement.Attributes()"/>
         /// </overloads>
         /// <summary>
-        /// Returns the content of this <see cref="XContainer"/> as an <see cref="IEnumerable"/> of <see cref="object"/>.  Note
+        /// Returns the content of this <see cref="XContainer"/> as an <see cref="IEnumerable"/> of <see
+        // cref="object"/>.  Note
         /// that the content does not include <see cref="XAttribute"/>s.
         /// <seealso cref="XElement.Attributes()"/>
         /// </summary>
@@ -4547,7 +4643,8 @@ namespace System.Xml.Linq
         /// The <see cref="XName"/> of the <see cref="XAttribute"/> to get.
         /// </param>
         /// <returns>
-        /// The <see cref="XAttribute"/> with the <see cref="XName"/> passed in.  If there is no <see cref="XAttribute"/>
+        /// The <see cref="XAttribute"/> with the <see cref="XName"/> passed in.  If there is no <see
+        // cref="XAttribute"/>
         /// with this <see cref="XName"/> then null is returned.
         /// </returns>
         public XAttribute Attribute(XName name)
@@ -4574,7 +4671,8 @@ namespace System.Xml.Linq
         /// <seealso cref="XContainer.Elements()"/>
         /// </summary>
         /// <returns>
-        /// An <see cref="IEnumerable"/> of <see cref="XAttribute"/> containing all of the <see cref="XAttribute"/>s
+        /// An <see cref="IEnumerable"/> of <see cref="XAttribute"/> containing all of the <see
+        // cref="XAttribute"/>s
         /// associated with this <see cref="XElement"/>.
         /// </returns>
         public IEnumerable<XAttribute> Attributes()
@@ -4583,7 +4681,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns the <see cref="XAttribute"/>(s) associated with this <see cref="XElement"/> that has the passed
+        /// Returns the <see cref="XAttribute"/>(s) associated with this <see cref="XElement"/> that has the
+        // passed
         /// in <see cref="XName"/>.
         /// <seealso cref="XElement.Attributes()"/>
         /// </summary>
@@ -5152,8 +5251,10 @@ namespace System.Xml.Linq
         /// no indenting then use the SaveOptions version of Save (see
         /// <see cref="XElement.Save(string, SaveOptions)"/>) enabling
         /// SaveOptions.DisableFormatting.
-        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace declarations.
-        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method will use those options.
+        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace
+        // declarations.
+        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method
+        // will use those options.
         /// </remarks>
         /// <param name="fileName">
         /// The name of the file to output the XML to.
@@ -5175,7 +5276,8 @@ namespace System.Xml.Linq
         /// </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine)]
@@ -5199,8 +5301,10 @@ namespace System.Xml.Linq
         /// no indenting then use the SaveOptions version of Save (see
         /// <see cref="XElement.Save(Stream, SaveOptions)"/>) enabling
         /// SaveOptions.DisableFormatting.
-        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace declarations.
-        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method will use those options.
+        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace
+        // declarations.
+        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method
+        // will use those options.
         /// </remarks>
         /// <param name="stream">
         /// The <see cref="Stream"/> to output this <see cref="XElement"/> to.
@@ -5218,7 +5322,8 @@ namespace System.Xml.Linq
         /// </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(Stream stream, SaveOptions options)
         {
@@ -5237,8 +5342,10 @@ namespace System.Xml.Linq
         /// no indenting then use the SaveOptions version of Save (see
         /// <see cref="XElement.Save(TextWriter, SaveOptions)"/>) enabling
         /// SaveOptions.DisableFormatting.
-        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace declarations.
-        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method will use those options.
+        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace
+        // declarations.
+        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method
+        // will use those options.
         /// </remarks>
         /// <param name="textWriter">
         /// The <see cref="TextWriter"/> to output this <see cref="XElement"/> to.
@@ -5256,7 +5363,8 @@ namespace System.Xml.Linq
         /// </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(TextWriter textWriter, SaveOptions options)
         {
@@ -6930,7 +7038,8 @@ namespace System.Xml.Linq
         /// </summary>
         /// <remarks>
         /// If LoadOptions.PreserveWhitespace is enabled then
-        /// the underlying <see cref="XmlReaderSettings"/> property <see cref="XmlReaderSettings.IgnoreWhitespace"/>
+        /// the underlying <see cref="XmlReaderSettings"/> property <see
+        // cref="XmlReaderSettings.IgnoreWhitespace"/>
         /// is set to false.
         /// </remarks>
         /// <param name="stream">
@@ -7138,8 +7247,10 @@ namespace System.Xml.Linq
         /// no indenting then use the SaveOptions version of Save (see
         /// <see cref="XDocument.Save(string, SaveOptions)"/>) enabling
         /// SaveOptions.DisableFormatting.
-        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace declarations.
-        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method will use those options.
+        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace
+        // declarations.
+        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method
+        // will use those options.
         /// </remarks>
         /// <param name="fileName">
         /// The name of the file to output the XML to.
@@ -7161,7 +7272,8 @@ namespace System.Xml.Linq
         /// </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine)]
@@ -7193,8 +7305,10 @@ namespace System.Xml.Linq
         /// no indenting then use the SaveOptions version of Save (see
         /// <see cref="XDocument.Save(Stream, SaveOptions)"/>) enabling
         /// SaveOptions.DisableFormatting
-        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace declarations.
-        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method will use those options.
+        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace
+        // declarations.
+        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method
+        // will use those options.
         /// </remarks>
         /// <param name="stream">
         /// The <see cref="Stream"/> to output this <see cref="XDocument"/> to.
@@ -7212,7 +7326,8 @@ namespace System.Xml.Linq
         /// </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(Stream stream, SaveOptions options)
         {
@@ -7239,8 +7354,10 @@ namespace System.Xml.Linq
         /// no indenting then use the SaveOptions version of Save (see
         /// <see cref="XDocument.Save(TextWriter, SaveOptions)"/>) enabling
         /// SaveOptions.DisableFormatting
-        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace declarations.
-        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method will use those options.
+        /// There is also an option SaveOptions.OmitDuplicateNamespaces for removing duplicate namespace
+        // declarations.
+        /// Or instead use the SaveOptions as an annotation on this node or its ancestors, then this method
+        // will use those options.
         /// </remarks>
         /// <param name="textWriter">
         /// The <see cref="TextWriter"/> to output this <see cref="XDocument"/> to.
@@ -7258,7 +7375,8 @@ namespace System.Xml.Linq
         /// </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(TextWriter textWriter, SaveOptions options)
         {
@@ -8781,7 +8899,8 @@ namespace System.Xml.Linq
         /// Creates a <see cref="XStreamingElement"/> node with a given name and content
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
-        /// <param name="content">The content to assign to the new <see cref="XStreamingElement"/> node</param>
+        /// <param name="content">The content to assign to the new <see cref="XStreamingElement"/>
+        // node</param>
         public XStreamingElement(XName name, object content)
             : this(name)
         {
@@ -8792,7 +8911,8 @@ namespace System.Xml.Linq
         /// Creates a <see cref="XStreamingElement"/> node with a given name and content
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
-        /// <param name="content">An array containing content to assign to the new <see cref="XStreamingElement"/> node</param>
+        /// <param name="content">An array containing content to assign to the new <see
+        // cref="XStreamingElement"/> node</param>
         public XStreamingElement(XName name, params object[] content)
             : this(name)
         {
@@ -8860,7 +8980,8 @@ namespace System.Xml.Linq
         /// <param name="fileName">Name of file to write content to</param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
@@ -8891,7 +9012,8 @@ namespace System.Xml.Linq
         /// <param name="stream"><see cref="Stream"/> to write to </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(Stream stream, SaveOptions options)
         {
@@ -8919,7 +9041,8 @@ namespace System.Xml.Linq
         /// <param name="textWriter"><see cref="TextWriter"/> to write to </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(TextWriter textWriter, SaveOptions options)
         {
@@ -8931,7 +9054,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Save the contents of an <see cref="XStreamingElement"/> to an XML writer, not preserving whitepace
+        /// Save the contents of an <see cref="XStreamingElement"/> to an XML writer, not preserving
+        // whitepace
         /// </summary>
         /// <param name="writer"><see cref="XmlWriter"/> to write to </param>
         public void Save(XmlWriter writer)
@@ -8958,7 +9082,8 @@ namespace System.Xml.Linq
         /// </summary>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the content is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         /// <returns>An XML string</returns>
         public string ToString(SaveOptions options)
@@ -9300,7 +9425,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="IEnumerable"/> of <see cref="XNode"/> over the descendants of a set of nodes
+        /// Returns an <see cref="IEnumerable"/> of <see cref="XNode"/> over the descendants of a set of
+        // nodes
         /// </summary>
         public static IEnumerable<XNode> DescendantNodes<T>(this IEnumerable<T> source)
             where T : XContainer
@@ -9311,7 +9437,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="IEnumerable"/> of <see cref="XElement"/> containing the descendants (children
+        /// Returns an <see cref="IEnumerable"/> of <see cref="XElement"/> containing the descendants
+        // (children
         /// and their children down to the leaf level).  This is done for each <see cref="XElement"/> in
         /// this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </summary>
@@ -9329,13 +9456,17 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="IEnumerable"/> of <see cref="XElement"/> containing the descendants (children
-        /// and their children down to the leaf level) that have a matching <see cref="XName"/>.  This is done
-        /// for each <see cref="XElement"/> in the target <see cref="IEnumerable"/> of <see cref="XElement"/>.
+        /// Returns an <see cref="IEnumerable"/> of <see cref="XElement"/> containing the descendants
+        // (children
+        /// and their children down to the leaf level) that have a matching <see cref="XName"/>.  This is
+        // done
+        /// for each <see cref="XElement"/> in the target <see cref="IEnumerable"/> of <see
+        // cref="XElement"/>.
         /// </summary>
         /// <returns>
         /// An <see cref="IEnumerable"/> of <see cref="XElement"/> containing the descendants (children
-        /// and their children down to the leaf level) that have a matching <see cref="XName"/>.  This is done
+        /// and their children down to the leaf level) that have a matching <see cref="XName"/>.  This is
+        // done
         /// for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
         public static IEnumerable<XElement> Descendants<T>(this IEnumerable<T> source, XName name)
@@ -9368,13 +9499,15 @@ namespace System.Xml.Linq
         /// <summary>
         /// Returns an <see cref="IEnumerable"/> of <see cref="XElement"/> containing the
         /// <see cref="XElement"/> and it's descendants (children and children's children down
-        /// to the leaf nodes).  This is done for each <see cref="XElement"/> in this <see cref="IEnumerable"/>
+        /// to the leaf nodes).  This is done for each <see cref="XElement"/> in this <see
+        // cref="IEnumerable"/>
         /// of <see cref="XElement"/>.
         /// </summary>
         /// <returns>
         /// An <see cref="IEnumerable"/> of <see cref="XElement"/> containing the
         /// <see cref="XElement"/> and it's descendants (children and children's children down
-        /// to the leaf nodes).  This is done for each <see cref="XElement"/> in this <see cref="IEnumerable"/>
+        /// to the leaf nodes).  This is done for each <see cref="XElement"/> in this <see
+        // cref="IEnumerable"/>
         /// of <see cref="XElement"/>.
         /// </returns>
         public static IEnumerable<XElement> DescendantsAndSelf(this IEnumerable<XElement> source)
@@ -9424,7 +9557,8 @@ namespace System.Xml.Linq
 
         /// <summary>
         /// Returns an <see cref="IEnumerable"/> of <see cref="XElement"/> containing the child elements
-        /// with a matching for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
+        /// with a matching for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see
+        // cref="XElement"/>.
         /// </summary>
         /// <returns>
         /// An <see cref="IEnumerable"/> of <see cref="XElement"/> containing the child elements
@@ -9440,7 +9574,8 @@ namespace System.Xml.Linq
 
         /// <summary>
         /// Returns an <see cref="IEnumerable"/> of <see cref="XElement"/> containing the child elements
-        /// with a matching for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
+        /// with a matching for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see
+        // cref="XElement"/>.
         /// </summary>
         /// <returns>
         /// An <see cref="IEnumerable"/> of <see cref="XElement"/> containing the child elements
@@ -9469,7 +9604,8 @@ namespace System.Xml.Linq
 
         /// <summary>
         /// Removes each <see cref="XNode"/> represented in this <see cref="IEnumerable"/>
-        /// T which must be a derived from <see cref="XNode"/>.  Note that this method uses snapshot semantics
+        /// T which must be a derived from <see cref="XNode"/>.  Note that this method uses snapshot
+        // semantics
         /// (copies the <see cref="XNode"/>s to a List before deleting each).
         /// </summary>
         public static void Remove<T>(this IEnumerable<T> source)
@@ -11225,7 +11361,8 @@ namespace System.Xml.Linq
             //    Go up the tree (but don't go higher than the root of this reader)
             //    and find the closest namespace declaration attribute which declares the same prefix
             //    If it declares that prefix to the exact same URI as ours does then ours is a duplicate
-            //    Note that if we find a namespace declaration for the same prefix but with a different URI, then we don't have a dupe!
+            //    Note that if we find a namespace declaration for the same prefix but with a different URI,
+            // then we don't have a dupe!
             XElement element = candidateAttribute.parent as XElement;
             if (element == root || element == null)
             {
@@ -11236,7 +11373,8 @@ namespace System.Xml.Linq
             while (element != null)
             {
                 // Search all attributes of this element for the same prefix declaration
-                // Trick - a declaration for the same prefix will have the exact same XName - so we can do a quick ref comparison of names
+                // Trick - a declaration for the same prefix will have the exact same XName - so we can do a quick
+                // ref comparison of names
                 // (The default ns decl is represented by an XName "xmlns{}", even if you try to create
                 //  an attribute with XName "xmlns{http://www.w3.org/2000/xmlns/}" it will fail,
                 //  because it's treated as a declaration of prefix "xmlns" which is invalid)
@@ -11273,10 +11411,12 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Finds a first attribute (starting with the parameter) which is not a duplicate namespace attribute
+        /// Finds a first attribute (starting with the parameter) which is not a duplicate namespace
+        // attribute
         /// </summary>
         /// <param name="candidate">The attribute to start with</param>
-        /// <returns>The first attribute which is not a namespace attribute or null if the end of attributes has bean reached</returns>
+        /// <returns>The first attribute which is not a namespace attribute or null if the end of attributes
+        // has bean reached</returns>
         XAttribute GetFirstNonDuplicateNamespaceAttribute(XAttribute candidate)
         {
             Debug.Assert(

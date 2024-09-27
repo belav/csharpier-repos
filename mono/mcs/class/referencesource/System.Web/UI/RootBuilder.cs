@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements the root builder
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Implements the root builder
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -53,8 +53,10 @@ namespace System.Web.UI
         }
 
         /// <summary>
-        /// The method gets called when the CodeDom tree is fully built.  The way it is used is by first overriding
-        /// ProcessGeneratedCode to keep track of the CodeCompileUnit, and to then have the ability to modify
+        /// The method gets called when the CodeDom tree is fully built.  The way it is used is by first
+        // overriding
+        /// ProcessGeneratedCode to keep track of the CodeCompileUnit, and to then have the ability to
+        // modify
         /// the CodeCompileUnit in this method
         /// </summary>
         protected internal virtual void OnCodeGenerationComplete() { }

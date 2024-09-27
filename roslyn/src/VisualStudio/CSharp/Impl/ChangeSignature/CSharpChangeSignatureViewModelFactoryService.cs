@@ -74,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ChangeSignature
             return parts.ToArray();
         }
 
-        // Use LangVersion Preview to ensure that all types parse correctly. If the user types in a type only available
+        // Use LangVersion Preview to ensure that all types parse correctly. If the user types in a type
+        // only available
         // in a preview version, they'll get a diagnostic after everything is generated
         public override bool IsTypeNameValid(string typeName) =>
             !SyntaxFactory

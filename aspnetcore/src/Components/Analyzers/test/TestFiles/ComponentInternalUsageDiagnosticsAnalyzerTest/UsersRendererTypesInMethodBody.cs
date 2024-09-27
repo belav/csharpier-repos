@@ -22,7 +22,7 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
 
             var range = /*MMNewObject2*/
             new ArrayRange<string>(null, 0);
-            /*MMInvocation*/range.Clone();
+/*MMInvocation*/range.Clone();
         }
     }
 }

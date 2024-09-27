@@ -108,7 +108,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                         DeploymentParameters.Configuration,
                         targetFramework
                     );
-                    // CurrentDirectory will point to bin/{config}/{tfm}, but the config and static files aren't copied, point to the app base instead.
+                    // CurrentDirectory will point to bin/{config}/{tfm}, but the config and static files aren't copied,
+                    // point to the app base instead.
                     DeploymentParameters.EnvironmentVariables["DOTNET_CONTENTROOT"] =
                         DeploymentParameters.ApplicationPath;
                 }
@@ -167,7 +168,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 {
                     Logger.LogInformation("host process ID {pid} shut down", HostProcess.Id);
 
-                    // If TrySetResult was called above, this will just silently fail to set the new state, which is what we want
+                    // If TrySetResult was called above, this will just silently fail to set the new state, which is
+                    // what we want
                     started.TrySetException(
                         new Exception(
                             $"Command exited unexpectedly with exit code: {HostProcess.ExitCode}"
@@ -210,7 +212,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 if (DeploymentParameters.StatusMessagesEnabled)
                 {
                     // The timeout here is large, because we don't know how long the test could need
-                    // We cover a lot of error cases above, but I want to make sure we eventually give up and don't hang the build
+                    // We cover a lot of error cases above, but I want to make sure we eventually give up and don't hang
+                    // the build
                     // just in case we missed one -anurse
                     await started.Task.WaitAsync(TimeSpan.FromMinutes(10));
                 }

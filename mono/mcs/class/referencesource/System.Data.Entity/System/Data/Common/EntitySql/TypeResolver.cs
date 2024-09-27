@@ -29,7 +29,8 @@ namespace System.Data.Common.EntitySql
     }
 
     /// <summary>
-    /// Abstract class representing an eSQL expression classified as <see cref="ExpressionResolutionClass.MetadataMember"/>.
+    /// Abstract class representing an eSQL expression classified as <see
+    // cref="ExpressionResolutionClass.MetadataMember"/>.
     /// </summary>
     internal abstract class MetadataMember : ExpressionResolution
     {
@@ -90,7 +91,8 @@ namespace System.Data.Common.EntitySql
     }
 
     /// <summary>
-    /// Represents an eSQL metadata member expression classified as <see cref="MetadataMemberClass.Namespace"/>.
+    /// Represents an eSQL metadata member expression classified as <see
+    // cref="MetadataMemberClass.Namespace"/>.
     /// </summary>
     internal sealed class MetadataNamespace : MetadataMember
     {
@@ -108,7 +110,8 @@ namespace System.Data.Common.EntitySql
     }
 
     /// <summary>
-    /// Represents an eSQL metadata member expression classified as <see cref="MetadataMemberClass.Type"/>.
+    /// Represents an eSQL metadata member expression classified as <see
+    // cref="MetadataMemberClass.Type"/>.
     /// </summary>
     internal sealed class MetadataType : MetadataMember
     {
@@ -132,7 +135,8 @@ namespace System.Data.Common.EntitySql
     }
 
     /// <summary>
-    /// Represents an eSQL metadata member expression classified as <see cref="MetadataMemberClass.EnumMember"/>.
+    /// Represents an eSQL metadata member expression classified as <see
+    // cref="MetadataMemberClass.EnumMember"/>.
     /// </summary>
     internal sealed class MetadataEnumMember : MetadataMember
     {
@@ -159,7 +163,8 @@ namespace System.Data.Common.EntitySql
     }
 
     /// <summary>
-    /// Represents an eSQL metadata member expression classified as <see cref="MetadataMemberClass.FunctionGroup"/>.
+    /// Represents an eSQL metadata member expression classified as <see
+    // cref="MetadataMemberClass.FunctionGroup"/>.
     /// </summary>
     internal sealed class MetadataFunctionGroup : MetadataMember
     {
@@ -186,7 +191,8 @@ namespace System.Data.Common.EntitySql
     }
 
     /// <summary>
-    /// Represents an eSQL metadata member expression classified as <see cref="MetadataMemberClass.InlineFunctionGroup"/>.
+    /// Represents an eSQL metadata member expression classified as <see
+    // cref="MetadataMemberClass.InlineFunctionGroup"/>.
     /// </summary>
     internal sealed class InlineFunctionGroup : MetadataMember
     {
@@ -539,13 +545,15 @@ namespace System.Data.Common.EntitySql
             Debug.Assert(!String.IsNullOrEmpty(name), "name must not be empty");
 
             //
-            // In the case of Name1.Name2...NameN and if backward compatibility mode is on, then resolve Name1 as namespace only, ignore any other possible resolutions.
+            // In the case of Name1.Name2...NameN and if backward compatibility mode is on, then resolve Name1
+            // as namespace only, ignore any other possible resolutions.
             //
             bool resolveAsNamespaceOnly =
                 partOfQualifiedName && _resolveLeftMostUnqualifiedNameAsNamespaceOnly;
 
             //
-            // In the case of Name1.Name2...NameN, ignore functions while resolving Name1: functions don't have members.
+            // In the case of Name1.Name2...NameN, ignore functions while resolving Name1: functions don't have
+            // members.
             //
             bool includeFunctions = !partOfQualifiedName;
 

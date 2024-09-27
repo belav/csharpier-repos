@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Specialized;
 using System.ComponentModel.DataAnnotations;
@@ -961,7 +962,8 @@ namespace System.Web.WebPages.Validation.Test
 
         public void Dispose()
         {
-            // Reset ScopeStorage (written via e.g. ValidationHelper.InvalidCssClass) between tests to avoid unexpected interactions.
+            // Reset ScopeStorage (written via e.g. ValidationHelper.InvalidCssClass) between tests to avoid
+            // unexpected interactions.
             ScopeStorage.CurrentProvider = new StaticScopeStorageProvider();
             ScopeStorage.GlobalScope.Clear();
         }

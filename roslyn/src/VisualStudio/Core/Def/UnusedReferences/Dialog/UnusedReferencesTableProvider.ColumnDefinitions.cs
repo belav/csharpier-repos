@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
     {
         internal class ReferenceImageMonikers
         {
-            // Change this to use KnownMonikers.NuGetNoColor once we are able to move to Microsoft.VisualStudio.ImageCatalog v16.9
+            // Change this to use KnownMonikers.NuGetNoColor once we are able to move to
+            // Microsoft.VisualStudio.ImageCatalog v16.9
             public static ImageMoniker Package =>
                 new() { Guid = KnownImageIds.ImageCatalogGuid, Id = 3902 };
             public static ImageMoniker Project => KnownMonikers.Application;
@@ -64,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         }
 
         /// <summary>
-        /// Creates an element to display within the TableControl comprised of both an image and text string.
+        /// Creates an element to display within the TableControl comprised of both an image and text
+        // string.
         /// </summary>
         internal static FrameworkElement CreateGridElement(
             ImageMoniker imageMoniker,

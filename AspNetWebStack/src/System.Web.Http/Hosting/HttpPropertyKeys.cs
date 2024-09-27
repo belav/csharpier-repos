@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net.Http;
 using System.Threading;
@@ -24,18 +25,21 @@ namespace System.Web.Http.Hosting
         public static readonly string HttpRouteDataKey = "MS_HttpRouteData";
 
         /// <summary>
-        /// Provides a key for the <see cref="System.Web.Http.Controllers.HttpActionDescriptor"/> associated with this request.
+        /// Provides a key for the <see cref="System.Web.Http.Controllers.HttpActionDescriptor"/> associated
+        // with this request.
         /// </summary>
         public static readonly string HttpActionDescriptorKey = "MS_HttpActionDescriptor";
 
         /// <summary>
-        /// Provides a key for the current <see cref="SynchronizationContext"/> stored in <see cref="HttpRequestMessage.Properties"/>.
+        /// Provides a key for the current <see cref="SynchronizationContext"/> stored in <see
+        // cref="HttpRequestMessage.Properties"/>.
         /// If <see cref="SynchronizationContext.Current"/> is <c>null</c> then no context is stored.
         /// </summary>
         public static readonly string SynchronizationContextKey = "MS_SynchronizationContext";
 
         /// <summary>
-        /// Provides a key for the collection of resources that should be disposed when a request is disposed.
+        /// Provides a key for the collection of resources that should be disposed when a request is
+        // disposed.
         /// </summary>
         public static readonly string DisposableRequestResourcesKey =
             "MS_DisposableRequestResources";
@@ -78,17 +82,20 @@ namespace System.Web.Http.Hosting
         public static readonly string NoRouteMatched = "MS_NoRouteMatched";
 
         /// <summary>
-        /// Provides a key that indicates whether error details are to be included in the response for this HTTP request.
+        /// Provides a key that indicates whether error details are to be included in the response for this
+        // HTTP request.
         /// </summary>
         public static readonly string IncludeErrorDetailKey = "MS_IncludeErrorDetail";
 
         /// <summary>
-        /// Provides a key for the parsed query string stored in <see cref="HttpRequestMessage.Properties"/>.
+        /// Provides a key for the parsed query string stored in <see
+        // cref="HttpRequestMessage.Properties"/>.
         /// </summary>
         public static readonly string RequestQueryNameValuePairsKey = "MS_QueryNameValuePairs";
 
         /// <summary>
-        /// Provides the original query string for the parsed query string stored in <see cref="HttpRequestMessage.Properties"/>
+        /// Provides the original query string for the parsed query string stored in <see
+        // cref="HttpRequestMessage.Properties"/>
         /// under the key <see cref="HttpPropertyKeys.RequestQueryNameValuePairsKey" />.
         /// </summary>
         public static readonly string CachedRequestQueryKey = "MS_CachedRequestQuery";

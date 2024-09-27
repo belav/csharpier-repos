@@ -53,11 +53,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
         {
             // For the single document case, that is the only doc we want to process.
             //
-            // Note: context.Document may be null in the case where the client is asking about a document that we have
+            // Note: context.Document may be null in the case where the client is asking about a document that
+            // we have
             // since removed from the workspace.  In this case, we don't really have anything to process.
-            // GetPreviousResults will be used to properly realize this and notify the client that the doc is gone.
+            // GetPreviousResults will be used to properly realize this and notify the client that the doc is
+            // gone.
             //
-            // Only consider open documents here (and only closed ones in the WorkspaceSpellCheckingHandler).  Each
+            // Only consider open documents here (and only closed ones in the WorkspaceSpellCheckingHandler).
+            // Each
             // handler treats those as separate worlds that they are responsible for.
             if (context.Document == null)
             {

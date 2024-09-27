@@ -99,23 +99,23 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors
 
         public override Expr Visit(Expr e)
         {
-            /*
-            Instruction inst;
-            if (this.instructionLookup.TryGetValue (e, out inst)) {
-                var seq = inst.SequencePoint;
-                if (seq != null) {
-                    this.SourceCodeFileName = seq.Document.Url;
-                    var instStart = new CodePosition(seq.StartLine, seq.StartColumn);
-                    if (this.StartPosition.IsEmpty || instStart < this.StartPosition) {
-                        this.StartPosition = instStart;
-                    }
-                    var instEnd = new CodePosition (seq.EndLine, seq.EndColumn);
-                    if (this.EndPosition.IsEmpty || instEnd > this.EndPosition) {
-                        this.EndPosition = instEnd;
-                    }
-                }
-            }
-            */
+/*
+Instruction inst;
+if (this.instructionLookup.TryGetValue (e, out inst)) {
+var seq = inst.SequencePoint;
+if (seq != null) {
+this.SourceCodeFileName = seq.Document.Url;
+var instStart = new CodePosition(seq.StartLine, seq.StartColumn);
+if (this.StartPosition.IsEmpty || instStart < this.StartPosition) {
+this.StartPosition = instStart;
+}
+var instEnd = new CodePosition (seq.EndLine, seq.EndColumn);
+if (this.EndPosition.IsEmpty || instEnd > this.EndPosition) {
+this.EndPosition = instEnd;
+}
+}
+}
+*/
 
             return base.Visit(e);
         }

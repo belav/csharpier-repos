@@ -19,12 +19,12 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile PhoneCall class.
-     * The PhoneCall control is for initiating a voice call on a cell phone.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile PhoneCall class.
+* The PhoneCall control is for initiating a voice call on a cell phone.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\PhoneCall.uex' path='docs/doc[@for="PhoneCall"]/*' />
     [
         DataBindingHandler(

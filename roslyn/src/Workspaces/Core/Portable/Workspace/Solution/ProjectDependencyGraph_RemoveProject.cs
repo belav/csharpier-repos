@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis
         {
             Contract.ThrowIfFalse(_projectIds.Contains(projectId));
 
-            // Project ID set and direct forward references are trivially updated by removing the key corresponding to
+            // Project ID set and direct forward references are trivially updated by removing the key
+            // corresponding to
             // the project getting removed.
             var projectIds = _projectIds.Remove(projectId);
             var referencesMap = ComputeNewReferencesMapForRemovedProject(
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis
                 projectId
             );
 
-            // The direct reverse references map is updated by removing the key for the project getting removed, and
+            // The direct reverse references map is updated by removing the key for the project getting removed,
+            // and
             // also updating any direct references to the removed project.
             var reverseReferencesMap = ComputeNewReverseReferencesMapForRemovedProject(
                 existingForwardReferencesMap: _referencesMap,
@@ -52,12 +54,16 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Computes a new <see cref="_referencesMap"/> for the removal of a project.
         /// </summary>
-        /// <param name="existingForwardReferencesMap">The <see cref="_referencesMap"/> prior to the removal.</param>
-        /// <param name="existingReverseReferencesMap">The <see cref="_lazyReverseReferencesMap"/> prior to the removal.
-        /// This map serves as a hint to the removal process; i.e. it is assumed correct if it contains data, but may be
+        /// <param name="existingForwardReferencesMap">The <see cref="_referencesMap"/> prior to the
+        // removal.</param>
+        /// <param name="existingReverseReferencesMap">The <see cref="_lazyReverseReferencesMap"/> prior to
+        // the removal.
+        /// This map serves as a hint to the removal process; i.e. it is assumed correct if it contains
+        // data, but may be
         /// omitted without impacting correctness.</param>
         /// <param name="removedProjectId">The ID of the project which is being removed.</param>
-        /// <returns>The <see cref="_referencesMap"/> for the project dependency graph once the project is removed.</returns>
+        /// <returns>The <see cref="_referencesMap"/> for the project dependency graph once the project is
+        // removed.</returns>
         private static ImmutableDictionary<
             ProjectId,
             ImmutableHashSet<ProjectId>
@@ -110,7 +116,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Computes a new <see cref="_lazyReverseReferencesMap"/> for the removal of a project.
         /// </summary>
-        /// <param name="existingReverseReferencesMap">The <see cref="_lazyReverseReferencesMap"/> prior to the removal,
+        /// <param name="existingReverseReferencesMap">The <see cref="_lazyReverseReferencesMap"/> prior to
+        // the removal,
         /// or <see langword="null"/> if the value prior to removal was not computed for the graph.</param>
         private static ImmutableDictionary<
             ProjectId,
@@ -146,7 +153,8 @@ namespace Microsoft.CodeAnalysis
 
             var builder = existingReverseReferencesMap.ToBuilder();
 
-            // Iterate over each project referenced by 'removedProjectId', which is now being removed. Update the
+            // Iterate over each project referenced by 'removedProjectId', which is now being removed. Update
+            // the
             // reverse references map for the project to no longer include 'removedProjectId' in the list.
             foreach (var referencedProjectId in forwardReferences)
             {
@@ -175,7 +183,8 @@ namespace Microsoft.CodeAnalysis
         {
             var builder = existingTransitiveReferencesMap.ToBuilder();
 
-            // Iterate over each project and invalidate the transitive references for the project if the project has an
+            // Iterate over each project and invalidate the transitive references for the project if the project
+            // has an
             // existing transitive reference to 'removedProjectId'.
             foreach (var (project, references) in existingTransitiveReferencesMap)
             {
@@ -210,7 +219,8 @@ namespace Microsoft.CodeAnalysis
         {
             var builder = existingReverseTransitiveReferencesMap.ToBuilder();
 
-            // Iterate over each project and invalidate the transitive reverse references for the project if the project
+            // Iterate over each project and invalidate the transitive reverse references for the project if the
+            // project
             // has an existing transitive reverse reference to 'removedProjectId'.
             foreach (var (project, references) in existingReverseTransitiveReferencesMap)
             {

@@ -3,7 +3,8 @@
 
 
 // Uncomment to turn on logging of non-dictionary strings written to binary writers.
-// This can help identify element/attribute name/ns that could be written as XmlDictionaryStrings to get better compactness and performance.
+// This can help identify element/attribute name/ns that could be written as XmlDictionaryStrings to
+// get better compactness and performance.
 // #define LOG_NON_DICTIONARY_WRITES
 
 using System.Buffers.Binary;
@@ -135,7 +136,8 @@ namespace System.Xml
         private void WriteTextNodeRaw<T>(XmlBinaryNodeType nodeType, T value)
             where T : unmanaged
         {
-            // GetTextNodeBuffer performs bounds checks and ensures returned buffer has size of at least (1 + Unsafe.SizeOf<T>())
+            // GetTextNodeBuffer performs bounds checks and ensures returned buffer has size of at least (1 +
+            // Unsafe.SizeOf<T>())
             byte[] buffer = GetTextNodeBuffer(1 + Unsafe.SizeOf<T>(), out int offset);
 
             Debug.Assert(
@@ -156,7 +158,8 @@ namespace System.Xml
         private void WriteRaw<T>(T value)
             where T : unmanaged
         {
-            // GetBuffer performs bounds checks and ensures returned buffer has size of at least (Unsafe.SizeOf<T>())
+            // GetBuffer performs bounds checks and ensures returned buffer has size of at least
+            // (Unsafe.SizeOf<T>())
             byte[] buffer = GetBuffer(Unsafe.SizeOf<T>(), out int offset);
 
             Debug.Assert(offset >= 0 && offset + Unsafe.SizeOf<T>() <= buffer.Length, "WriteRaw");
@@ -1331,7 +1334,8 @@ namespace System.Xml
             {
                 if (reader.CanReadBinaryContent)
                 {
-                    // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when converting text
+                    // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when
+                    // converting text
                     _bytes ??= new byte[384];
                     int count;
                     while ((count = reader.ReadValueAsBase64(_bytes, 0, _bytes.Length)) > 0)

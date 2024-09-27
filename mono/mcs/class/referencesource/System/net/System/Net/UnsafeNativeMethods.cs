@@ -289,18 +289,18 @@ namespace System.Net
             private ManualResetEvent m_RasEvent;
             private bool m_Suppressed;
 
-            /* Consider removing
-            internal void Close()
-            {
-                ManualResetEvent rasEvent = m_RasEvent;
-                m_RasEvent = null;
-                m_Suppressed = false;
-                if (rasEvent != null)
-                {
-                    rasEvent.Close();
-                }
-            }
-            */
+/* Consider removing
+internal void Close()
+{
+ManualResetEvent rasEvent = m_RasEvent;
+m_RasEvent = null;
+m_Suppressed = false;
+if (rasEvent != null)
+{
+rasEvent.Close();
+}
+}
+*/
 
             static RasHelper()
             {
@@ -598,15 +598,15 @@ namespace System.Net
                 [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxDeviceName + 1)]
                 internal string szDeviceName;
 
-                /* None of these are supported on Windows 98.
-                   MSDN lies twice: there is no dwSessionId at all, and szPhonebook and dwSubEntry are not on Win98.
-                                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=MAX_PATH)]
-                                internal string szPhonebook;
-                                internal uint dwSubEntry;
-                                internal Guid guidEntry;
-                                internal uint dwFlags;
-                                internal ulong luid;
-                */
+/* None of these are supported on Windows 98.
+MSDN lies twice: there is no dwSessionId at all, and szPhonebook and dwSubEntry are not on Win98.
+[MarshalAs(UnmanagedType.ByValTStr, SizeConst=MAX_PATH)]
+internal string szPhonebook;
+internal uint dwSubEntry;
+internal Guid guidEntry;
+internal uint dwFlags;
+internal ulong luid;
+*/
             }
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
@@ -621,10 +621,10 @@ namespace System.Net
 
                 [MarshalAs(UnmanagedType.ByValTStr, SizeConst = RAS_MaxDeviceName + 1)]
                 internal string szDeviceName;
-                /* Not supported on Windows 98.
-                                [MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxPhoneNumber + 1)]
-                                internal string szPhoneNumber;
-                */
+/* Not supported on Windows 98.
+[MarshalAs(UnmanagedType.ByValTStr, SizeConst=RAS_MaxPhoneNumber + 1)]
+internal string szPhoneNumber;
+*/
             }
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
@@ -649,10 +649,10 @@ namespace System.Net
 
                 [MarshalAs(UnmanagedType.ByValTStr, SizeConst = DNLEN + 1)]
                 internal string szDomain;
-                /* Not supported on Windows 98.
-                                internal uint dwSubEntry;
-                                internal uint dwCallbackId;
-                */
+/* Not supported on Windows 98.
+internal uint dwSubEntry;
+internal uint dwCallbackId;
+*/
             }
 
             const int RASCS_PAUSED = 0x1000;
@@ -861,7 +861,8 @@ namespace System.Net
         }
 
 #if !FEATURE_PAL
-        // Because the regular SafeNetHandles tries to bind this MustRun method on type initialization, failing
+        // Because the regular SafeNetHandles tries to bind this MustRun method on type initialization,
+        // failing
         // on legacy platforms.
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
         internal static class SafeNetHandlesXPOrLater
@@ -964,19 +965,19 @@ namespace System.Net
 
 #if !FEATURE_PAL
 
-            /*
-            // Consider removing.
-            [DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
-            internal static extern  bool CertGetCertificateChain(
-                [In] IntPtr                 chainEngine,
-                [In] SafeFreeCertContext    certContext,
-                [In] IntPtr                 time,
-                [In] SafeCloseStore         additionalStore,
-                [In] ref ChainParameters    certCP,
-                [In] int                    flags,
-                [In] IntPtr                 reserved,
-                [Out] out SafeFreeCertChain  chainContext);
-            */
+/*
+// Consider removing.
+[DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
+internal static extern  bool CertGetCertificateChain(
+[In] IntPtr                 chainEngine,
+[In] SafeFreeCertContext    certContext,
+[In] IntPtr                 time,
+[In] SafeCloseStore         additionalStore,
+[In] ref ChainParameters    certCP,
+[In] int                    flags,
+[In] IntPtr                 reserved,
+[Out] out SafeFreeCertChain  chainContext);
+*/
 
             [DllImport(CRYPT32, ExactSpelling = true, SetLastError = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -991,14 +992,14 @@ namespace System.Net
             internal static extern bool CertFreeCertificateContext( // Suppressing returned status check, it's always==TRUE,
                 [In] IntPtr certContext
             );
-            /*
-            // Consider removing.
-            [DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern bool CertCloseStore(
-                [In] IntPtr hCertStore,
-                [In] int dwFlags);
-            */
+/*
+// Consider removing.
+[DllImport(CRYPT32, ExactSpelling=true, SetLastError=true)]
+[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+internal static extern bool CertCloseStore(
+[In] IntPtr hCertStore,
+[In] int dwFlags);
+*/
 
 #endif // !FEATURE_PAL
 
@@ -1044,17 +1045,17 @@ namespace System.Net
                 [In] int optionLength
             );
 
-            /* Consider removing
-            [DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            internal static extern SocketError setsockopt(
-                                               [In] IntPtr handle,
-                                               [In] SocketOptionLevel optionLevel,
-                                               [In] SocketOptionName optionName,
-                                               [In] ref int optionValue,
-                                               [In] int optionLength
-                                               );
-            */
+/* Consider removing
+[DllImport(WS2_32, ExactSpelling=true, SetLastError=true)]
+[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+internal static extern SocketError setsockopt(
+[In] IntPtr handle,
+[In] SocketOptionLevel optionLevel,
+[In] SocketOptionName optionName,
+[In] ref int optionValue,
+[In] int optionLength
+);
+*/
 
 #if !FEATURE_PAL
             [DllImport(WININET, ExactSpelling = true, SetLastError = true)]
@@ -1102,7 +1103,8 @@ namespace System.Net
         //
         // 1) structs
         // for structs, by default, the whole layout is pushed on the stack as it is.
-        // in order to pass a pointer to the managed layout, we need to specify either the ref or out keyword.
+        // in order to pass a pointer to the managed layout, we need to specify either the ref or out
+        // keyword.
         //
         //      a) for IN and OUT:
         //      [In, Out] ref Struct ([In, Out] is optional here)
@@ -1268,12 +1270,12 @@ namespace System.Net
                 internal IntPtr fileHandle;
             }
 
-            /*
-               typedef struct _SOCKET_ADDRESS {
-                   PSOCKADDR lpSockaddr;
-                   INT iSockaddrLength;
-               } SOCKET_ADDRESS, *PSOCKET_ADDRESS;
-            */
+/*
+typedef struct _SOCKET_ADDRESS {
+PSOCKADDR lpSockaddr;
+INT iSockaddrLength;
+} SOCKET_ADDRESS, *PSOCKET_ADDRESS;
+*/
             [StructLayout(LayoutKind.Sequential)]
             internal struct SOCKET_ADDRESS
             {
@@ -1281,12 +1283,12 @@ namespace System.Net
                 internal int iSockaddrLength;
             }
 
-            /*
-               typedef struct _SOCKET_ADDRESS_LIST {
-                   INT             iAddressCount;
-                   SOCKET_ADDRESS  Address[1];
-               } SOCKET_ADDRESS_LIST, *PSOCKET_ADDRESS_LIST, FAR *LPSOCKET_ADDRESS_LIST;
-            */
+/*
+typedef struct _SOCKET_ADDRESS_LIST {
+INT             iAddressCount;
+SOCKET_ADDRESS  Address[1];
+} SOCKET_ADDRESS_LIST, *PSOCKET_ADDRESS_LIST, FAR *LPSOCKET_ADDRESS_LIST;
+*/
             [StructLayout(LayoutKind.Sequential)]
             internal struct SOCKET_ADDRESS_LIST
             {
@@ -1303,7 +1305,8 @@ namespace System.Net
                 internal int postBufferLength; // Length of Buffer
             }
 
-            // CharSet=Auto here since WSASocket has A and W versions. We can use Auto cause the method is not used under constrained execution region
+            // CharSet=Auto here since WSASocket has A and W versions. We can use Auto cause the method is not
+            // used under constrained execution region
             [DllImport(WS2_32, CharSet = CharSet.Auto, SetLastError = true)]
             internal static extern SafeCloseSocket.InnerSafeCloseSocket WSASocket(
                 [In] AddressFamily addressFamily,
@@ -2373,129 +2376,129 @@ namespace System.Net
                 [In] int dwReserved //must be 0
             );
 
-            /*********
-            NOT USED SO FAR
-                    unsafe private extern static SafeUnlockUrlCacheEntryStream RetrieveUrlCacheEntryStream(
-                                                    [In]      string    urlName,
-                                                    [In]      byte*     entryPtr,               //was [Out]
-                                                    [In, Out] ref int   entryBufSize,
-                                                    [In]      bool      randomRead,
-                                                    [In]      int       dwReserved
-                                                    );
-        
-                    unsafe internal static extern bool ReadUrlCacheEntryStream(
-                                                    [In]      SafeUnlockUrlCacheEntryStream  urlCacheStream,
-                                                    [In]      int       offset,
-                                                    [In]      byte*     bufferPtr,
-                                                    [In, Out] ref int   bufferSz,
-                                                    [In]      int       dwReserved                      //must be 0
-                                                    );
-        
-                    internal static extern bool UnlockUrlCacheEntryStream(
-                                            [In] IntPtr         urlCacheStream,
-                                            [In] int            dwReserved                      //mustbe 0
-                                            );
-        
-                    unsafe internal static extern bool GetUrlCacheEntryInfoEx(
-                                            [In]      string    url,
-                                            [In]      byte*     entryPtr,                       //was [Out]
-                                            [In, Out] ref int   entryBufSize,
-                                            [In]      IntPtr    lpszReserved,                   //was[Out] must pass null
-                                            [In]      IntPtr    lpdwReserved,                   //was[In, Out] must pass null
-                                            [In]      IntPtr    lpReserved,                     //must pass null
-                                            [In]      int       dwFlags                         //reserved must be 0
-                                            );
-        
-                    internal static extern IntPtr  FindFirstUrlCacheGroup(
-                                            [In]  _WinInetCache.GroupFlag     flags,
-                                            [In]  _WinInetCache.GroupSrchType searchFilter,
-                                            [In]  IntPtr                     searchConditionPtr, //must be null
-                                            [In]  int                        searchConditionSz,  //must be 0
-                                            [Out] out WinInet.GroupId        groupId,
-                                            [In]  IntPtr                     lpReserved          //was [In,Out] must be IntPtr.Zero
-                                            );
-        
-                    internal static extern bool FindNextUrlCacheGroup(
-                                            [In]  IntPtr                    hFind,
-                                            [Out] out _WinInetCache.GroupId  groupId,
-                                            [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
-                                            );
-        
-                    internal static extern bool GetUrlCacheGroupAttribute(
-                                            [In]   _WinInetCache.GroupId     groupId,
-                                            [In]   int                      flags,              //must 0
-                                            [In]   _WinInetCache.GroupAttr   attr,
-                                            [Out] out _WinInetCache.GroupInfo groupInfo,
-                                            [In, Out] ref int               groupInfoSize,
-                                            [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
-                                            );
-        
-                    internal static extern bool SetUrlCacheGroupAttribute(
-                                            [In]  _WinInetCache.GroupId      groupId,
-                                            [In]  int                       flags,              //must be 0
-                                            [In]  _WinInetCache.GroupAttr    attr,
-                                            [In]  _WinInetCache.GroupInfo    groupInfo,
-                                            [In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
-                                            );
-        
-                    internal static extern WinInet.GroupId CreateUrlCacheGroup(
-                                            [In]  _WinInetCache.GroupFlag    flags,
-                                            [In]  IntPtr                    lpReserved          //must be IntPtr.Zero
-                                            );
-        
-                    internal static extern bool DeleteUrlCacheGroup(
-                                            [In]  _WinInetCache.GroupId      groupId,
-                                            [In]  _WinInetCache.GroupFlag    flags,
-                                            [In]  IntPtr                    lpReserved          //must be IntPtr.Zero
-                                            );
-        
-        
-                    internal static extern bool SetUrlCacheEntryGroup(
-                                            [In] string                     urlName,
-                                            [In] _WinInetCache.GroupSetFlag  flags,
-                                            [In] _WinInetCache.GroupId       groupId,
-                                            [In] IntPtr                     groupAttributes,    // must pass NULL
-                                            [In] int                        groupAttrCount,     // must pass 0
-                                            [In] IntPtr                     lpReserved          // must pass NULL
-                                            );
-        
-                    unsafe internal static extern IntPtr FindFirstUrlCacheEntryEx(
-                                            [In]      byte*             searchPattern,      //must be null
-                                            [In]      int               dwFlags,            //must be 0
-                                            [In]      CacheEntry.EntryType srchFilter,
-                                            [In]      WinInet.GroupId   groupId,
-                                            [In]      byte*             entryPtr,           //was [out]
-                                            [In, Out] ref int           entryBufSize,
-                                            [Out]     void*             lpReserved,         // must pass NULL
-                                            [In]      void*             lpReserved2,        //was [In,Out] must be IntPtr.Zero
-                                            [In]      void*             lpReserved3         // must pass NULL
-                                            );
-        
-                    unsafe internal static extern bool FindNextUrlCacheEntryEx(
-                                            [In]     IntPtr             enumHandle,
-                                            [In]     byte*              entryPtr,           //was [Out]
-                                            [In, Out]ref int            entryBufSize,
-                                            [In]     void*              lpReserved,         // [Out] must pass NULL
-                                            [In]     void*              lpReserved2,        // [In] [Out] must pass NULL
-                                            [In]     void*              lpReserved3         // must pass NULL
-                                            );
-        
-                    unsafe internal static extern IntPtr FindFirstUrlCacheEntry(
-                                            [In]     string             searchPattern,
-                                            [In]     byte*              entryPtr,           //was [Out]
-                                            [In, Out]ref int            entryBufSize
-                                            );
-        
-        
-                    unsafe internal static extern bool FindNextUrlCacheEntry(
-                                            [In]     IntPtr             enumHandle,
-                                            [In]     byte*              entryPtr,           //was [Out]
-                                            [In, Out]ref int            entryBufSize
-                                            );
-        
-                    internal static extern bool FindCloseUrlCache( [In] IntPtr enumHandle);
-        
-            /**********/
+/*********
+NOT USED SO FAR
+unsafe private extern static SafeUnlockUrlCacheEntryStream RetrieveUrlCacheEntryStream(
+[In]      string    urlName,
+[In]      byte*     entryPtr,               //was [Out]
+[In, Out] ref int   entryBufSize,
+[In]      bool      randomRead,
+[In]      int       dwReserved
+);
+
+unsafe internal static extern bool ReadUrlCacheEntryStream(
+[In]      SafeUnlockUrlCacheEntryStream  urlCacheStream,
+[In]      int       offset,
+[In]      byte*     bufferPtr,
+[In, Out] ref int   bufferSz,
+[In]      int       dwReserved                      //must be 0
+);
+
+internal static extern bool UnlockUrlCacheEntryStream(
+[In] IntPtr         urlCacheStream,
+[In] int            dwReserved                      //mustbe 0
+);
+
+unsafe internal static extern bool GetUrlCacheEntryInfoEx(
+[In]      string    url,
+[In]      byte*     entryPtr,                       //was [Out]
+[In, Out] ref int   entryBufSize,
+[In]      IntPtr    lpszReserved,                   //was[Out] must pass null
+[In]      IntPtr    lpdwReserved,                   //was[In, Out] must pass null
+[In]      IntPtr    lpReserved,                     //must pass null
+[In]      int       dwFlags                         //reserved must be 0
+);
+
+internal static extern IntPtr  FindFirstUrlCacheGroup(
+[In]  _WinInetCache.GroupFlag     flags,
+[In]  _WinInetCache.GroupSrchType searchFilter,
+[In]  IntPtr                     searchConditionPtr, //must be null
+[In]  int                        searchConditionSz,  //must be 0
+[Out] out WinInet.GroupId        groupId,
+[In]  IntPtr                     lpReserved          //was [In,Out] must be IntPtr.Zero
+);
+
+internal static extern bool FindNextUrlCacheGroup(
+[In]  IntPtr                    hFind,
+[Out] out _WinInetCache.GroupId  groupId,
+[In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
+);
+
+internal static extern bool GetUrlCacheGroupAttribute(
+[In]   _WinInetCache.GroupId     groupId,
+[In]   int                      flags,              //must 0
+[In]   _WinInetCache.GroupAttr   attr,
+[Out] out _WinInetCache.GroupInfo groupInfo,
+[In, Out] ref int               groupInfoSize,
+[In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
+);
+
+internal static extern bool SetUrlCacheGroupAttribute(
+[In]  _WinInetCache.GroupId      groupId,
+[In]  int                       flags,              //must be 0
+[In]  _WinInetCache.GroupAttr    attr,
+[In]  _WinInetCache.GroupInfo    groupInfo,
+[In]  IntPtr                    lpReserved          //was [In,Out] must be IntPtr.Zero
+);
+
+internal static extern WinInet.GroupId CreateUrlCacheGroup(
+[In]  _WinInetCache.GroupFlag    flags,
+[In]  IntPtr                    lpReserved          //must be IntPtr.Zero
+);
+
+internal static extern bool DeleteUrlCacheGroup(
+[In]  _WinInetCache.GroupId      groupId,
+[In]  _WinInetCache.GroupFlag    flags,
+[In]  IntPtr                    lpReserved          //must be IntPtr.Zero
+);
+
+
+internal static extern bool SetUrlCacheEntryGroup(
+[In] string                     urlName,
+[In] _WinInetCache.GroupSetFlag  flags,
+[In] _WinInetCache.GroupId       groupId,
+[In] IntPtr                     groupAttributes,    // must pass NULL
+[In] int                        groupAttrCount,     // must pass 0
+[In] IntPtr                     lpReserved          // must pass NULL
+);
+
+unsafe internal static extern IntPtr FindFirstUrlCacheEntryEx(
+[In]      byte*             searchPattern,      //must be null
+[In]      int               dwFlags,            //must be 0
+[In]      CacheEntry.EntryType srchFilter,
+[In]      WinInet.GroupId   groupId,
+[In]      byte*             entryPtr,           //was [out]
+[In, Out] ref int           entryBufSize,
+[Out]     void*             lpReserved,         // must pass NULL
+[In]      void*             lpReserved2,        //was [In,Out] must be IntPtr.Zero
+[In]      void*             lpReserved3         // must pass NULL
+);
+
+unsafe internal static extern bool FindNextUrlCacheEntryEx(
+[In]     IntPtr             enumHandle,
+[In]     byte*              entryPtr,           //was [Out]
+[In, Out]ref int            entryBufSize,
+[In]     void*              lpReserved,         // [Out] must pass NULL
+[In]     void*              lpReserved2,        // [In] [Out] must pass NULL
+[In]     void*              lpReserved3         // must pass NULL
+);
+
+unsafe internal static extern IntPtr FindFirstUrlCacheEntry(
+[In]     string             searchPattern,
+[In]     byte*              entryPtr,           //was [Out]
+[In, Out]ref int            entryBufSize
+);
+
+
+unsafe internal static extern bool FindNextUrlCacheEntry(
+[In]     IntPtr             enumHandle,
+[In]     byte*              entryPtr,           //was [Out]
+[In, Out]ref int            entryBufSize
+);
+
+internal static extern bool FindCloseUrlCache( [In] IntPtr enumHandle);
+
+/**********/
         }
 
         [SuppressUnmanagedCodeSecurityAttribute]
@@ -4064,8 +4067,10 @@ namespace System.Net
 
             /// <summary>
             /// Method to acquire the V2 token binding
-            /// We tell the difference between a V1 binding and a V2 binding by looking at the HTTP_REQUEST_INFO_TYPE returned from the HTTP request blob
-            /// If we negotiated the new binding type, the value 'HttpRequestInfoTypeSslTokenBinding' will be returned.
+            /// We tell the difference between a V1 binding and a V2 binding by looking at the
+            // HTTP_REQUEST_INFO_TYPE returned from the HTTP request blob
+            /// If we negotiated the new binding type, the value 'HttpRequestInfoTypeSslTokenBinding' will be
+            // returned.
             /// </summary>
             /// <param name="memoryBlob"></param>
             /// <param name="originalAddress"></param>
@@ -4102,8 +4107,10 @@ namespace System.Net
 
             /// <summary>
             /// Compat method to acquire the old V1 token binding
-            /// We tell the difference between a V1 binding and a V2 binding by looking at the HTTP_REQUEST_INFO_TYPE returned from the HTTP request blob
-            /// If we negotiated the old binding type, the value 'HttpRequestInfoTypeSslTokenBindingDraft' will be returned.
+            /// We tell the difference between a V1 binding and a V2 binding by looking at the
+            // HTTP_REQUEST_INFO_TYPE returned from the HTTP request blob
+            /// If we negotiated the old binding type, the value 'HttpRequestInfoTypeSslTokenBindingDraft' will
+            // be returned.
             /// </summary>
             /// <param name="memoryBlob"></param>
             /// <param name="originalAddress"></param>
@@ -4129,7 +4136,8 @@ namespace System.Net
                                 == HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslTokenBindingDraft
                         )
                         {
-                            // Old V1 token binding protocol is being used, so we need to handle this data blob using the old behavior
+                            // Old V1 token binding protocol is being used, so we need to handle this data blob using the old
+                            // behavior
                             return (HTTP_REQUEST_TOKEN_BINDING_INFO_V1*)(
                                 (byte*)(pThisInfo->pInfo) + fixup
                             );
@@ -4358,7 +4366,8 @@ namespace System.Net
         /// Determines whether Token binding is supported on the machine or not
         /// This class is thread safe.
         /// The static method EnsureTokenBindingOSHelperInitialized is used to get that information.
-        /// It calls the load library and caches the result under proper locks to make sure it is thread safe and only one call is made to load library.
+        /// It calls the load library and caches the result under proper locks to make sure it is thread
+        // safe and only one call is made to load library.
         /// </remarks>
         internal static class TokenBindingOSHelper
         {
@@ -4367,9 +4376,20 @@ namespace System.Net
             private static volatile bool s_Initialized = false;
 
             // <SecurityKernel Critical="True" Ring="0">
-            // <CallsSuppressUnmanagedCode Name="UnsafeNclNativeMethods.GetProcAddress(System.Net.SafeLoadLibrary,System.String):System.IntPtr" />
+            // <CallsSuppressUnmanagedCode
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            // Name="UnsafeNclNativeMethods.GetProcAddress(System.Net.SafeLoadLibrary,System.String):System.IntPtr"
+            // />
             // <SatisfiesLinkDemand Name="SafeHandle.get_IsInvalid():System.Boolean" />
-            // <ReferencesCritical Name="Method: SafeLoadLibrary.LoadLibraryEx(System.String):System.Net.SafeLoadLibrary" Ring="1" />
+            // <ReferencesCritical Name="Method:
+            // SafeLoadLibrary.LoadLibraryEx(System.String):System.Net.SafeLoadLibrary" Ring="1" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             private static void EnsureTokenBindingOSHelperInitialized()

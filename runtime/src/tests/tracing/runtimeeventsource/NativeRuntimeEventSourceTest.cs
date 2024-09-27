@@ -45,7 +45,8 @@ namespace Tracing.Tests
                     Listener.EnableKeywords = (EventKeywords)0x4c14fccbd | EventKeywordThreading;
 
                     // Check for events e.g. ThreadPoolIODequeue = 64
-                    // At least some of these events can be found in "src\libraries\System.Private.CoreLib\src\System\Threading\NativeRuntimeEventSource.PortableThreadPool.NativeSinks.cs"
+                    // At least some of these events can be found in
+                    // "src\libraries\System.Private.CoreLib\src\System\Threading\NativeRuntimeEventSource.PortableThreadPool.NativeSinks.cs"
                     Listener.TargetEventIds(63, 64, 65);
 
                     using (Listener listener = new())

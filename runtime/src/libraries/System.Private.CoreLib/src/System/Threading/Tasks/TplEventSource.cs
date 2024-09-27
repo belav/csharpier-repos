@@ -47,7 +47,8 @@ namespace System.Threading.Tasks
         /// </summary>
         public static readonly TplEventSource Log = new TplEventSource();
 
-        // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating the default constructor
+        // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating
+        // the default constructor
         // as you can't make a constructor partial.
         private TplEventSource(int _) { }
 
@@ -141,12 +142,14 @@ namespace System.Threading.Tasks
             public const EventKeywords TasksSetActivityIds = (EventKeywords)0x10000;
 
             /// <summary>
-            /// Relatively Verbose logging meant for debugging the Task library itself. Will probably be removed in the future
+            /// Relatively Verbose logging meant for debugging the Task library itself. Will probably be removed
+            // in the future
             /// </summary>
             public const EventKeywords Debug = (EventKeywords)0x20000;
 
             /// <summary>
-            /// Relatively Verbose logging meant for debugging the Task library itself.  Will probably be removed in the future
+            /// Relatively Verbose logging meant for debugging the Task library itself.  Will probably be
+            // removed in the future
             /// </summary>
             public const EventKeywords DebugActivityId = (EventKeywords)0x40000;
         }

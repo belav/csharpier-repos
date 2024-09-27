@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             _serviceProvider = serviceProvider;
             _optionService = optionService;
 
-            // Start the process of loading the Roslyn package and getting options, but don't wait for it to complete.
+            // Start the process of loading the Roslyn package and getting options, but don't wait for it to
+            // complete.
             // The setting will be refreshed once available.
             InitializeAsync(_threadingContext.DisposalToken).ReportNonFatalErrorAsync().Forget();
         }
@@ -64,8 +65,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
 
         public bool TryFetch(OptionKey2 optionKey, out object? value)
         {
-            // This option is refreshed via the constructor to avoid UI dependencies when retrieving option values. If
-            // we happen to reach this point before the value is available, try to obtain it without blocking, and
+            // This option is refreshed via the constructor to avoid UI dependencies when retrieving option
+            // values. If
+            // we happen to reach this point before the value is available, try to obtain it without blocking,
+            // and
             // otherwise fall back to the default.
             if (
                 optionKey.Option

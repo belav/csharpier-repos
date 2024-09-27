@@ -334,7 +334,8 @@ namespace I18N.CJK
                 GB18030Map m = ranges[i];
                 if (!skip)
                 {
-                    //Console.WriteLine ("---- adding {0:X04} umap. {1:X04} gmap, skip range between {2:X04} and {3:X04}", m.UStart - ustart, m.GStart != 0 ? m.GStart - gstart : 0, m.UStart, m.UEnd);
+                    //Console.WriteLine ("---- adding {0:X04} umap. {1:X04} gmap, skip range between {2:X04} and
+                    // {3:X04}", m.UStart - ustart, m.GStart != 0 ? m.GStart - gstart : 0, m.UStart, m.UEnd);
                     ucount += m.UStart - ustart;
                 }
                 if (m.GStart != 0)
@@ -389,12 +390,14 @@ namespace I18N.CJK
                 throw new Exception(String.Format("should not happen: {0:X04} {1:X04}", u, gbx));
 
             int uidx = IndexForUcs(u);
-            //Console.WriteLine ("U: {0:x04} for {1:x04} [{2:x02} {3:x02}]", uidx, u, (byte) (gbx / 0x100), (byte) (gbx % 0x100));
+            //Console.WriteLine ("U: {0:x04} for {1:x04} [{2:x02} {3:x02}]", uidx, u, (byte) (gbx / 0x100),
+            // (byte) (gbx % 0x100));
             uni2gbxMap[uidx * 2] = (byte)(gbx / 0x100);
             uni2gbxMap[uidx * 2 + 1] = (byte)(gbx % 0x100);
 
             int gidx = IndexForGbx(gbx);
-            //Console.WriteLine ("G: {0:x04} for {1:x04} ({2:x02} {3:x02} {4:x02} {5:x02})", gidx, gbx, b [0], b [1], b [2], b [3]);
+            //Console.WriteLine ("G: {0:x04} for {1:x04} ({2:x02} {3:x02} {4:x02} {5:x02})", gidx, gbx, b [0], b
+            // [1], b [2], b [3]);
             gbx2uniMap[gidx * 2] = (byte)(u / 0x100);
             gbx2uniMap[gidx * 2 + 1] = (byte)(u % 0x100);
         }

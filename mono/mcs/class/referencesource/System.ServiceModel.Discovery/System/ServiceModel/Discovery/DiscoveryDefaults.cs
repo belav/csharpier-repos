@@ -61,9 +61,11 @@ namespace System.ServiceModel.Discovery
                 udpBE.DuplicateMessageHistoryLength = DuplicateMessageHistoryLength;
 
                 // The default value of ManualAddressing on UDP transport is false.
-                // In discovery case, the discovery endpoints will receive all kinds of discovery messages, which sometimes
+                // In discovery case, the discovery endpoints will receive all kinds of discovery messages, which
+                // sometimes
                 // don't match the service contract. In this case, we want the discovery endpoint to ---- the errors
-                // instead of sending fault messages back. So we need to disable auto addressing for the discovery scenario.
+                // instead of sending fault messages back. So we need to disable auto addressing for the discovery
+                // scenario.
                 udpBE.ManualAddressing = true;
 
                 return udpBE;

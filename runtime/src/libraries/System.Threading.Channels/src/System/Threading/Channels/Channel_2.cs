@@ -4,11 +4,14 @@
 namespace System.Threading.Channels
 {
     /// <summary>
-    /// Provides a base class for channels that support reading elements of type <typeparamref name="TRead"/>
+    /// Provides a base class for channels that support reading elements of type <typeparamref
+    // name="TRead"/>
     /// and writing elements of type <typeparamref name="TWrite"/>.
     /// </summary>
-    /// <typeparam name="TWrite">Specifies the type of data that may be written to the channel.</typeparam>
-    /// <typeparam name="TRead">Specifies the type of data that may be read from the channel.</typeparam>
+    /// <typeparam name="TWrite">Specifies the type of data that may be written to the
+    // channel.</typeparam>
+    /// <typeparam name="TRead">Specifies the type of data that may be read from the
+    // channel.</typeparam>
     public abstract class Channel<TWrite, TRead>
     {
         /// <summary>Gets the readable half of this channel.</summary>

@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             var subjectBuffer = args.SubjectBuffer;
             var spans = textView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer);
 
-            // Don't do anything special if there is multi-selection.  It's not clear what sort of semantics that should have.
+            // Don't do anything special if there is multi-selection.  It's not clear what sort of semantics
+            // that should have.
             if (spans.Count != 1)
                 return false;
 
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             if (splitCommentService == null)
                 return false;
 
-            // If there is a selection, ensure that it's all on one-line.  It's not clear what sort of semantics we
+            // If there is a selection, ensure that it's all on one-line.  It's not clear what sort of semantics
+            // we
             // would want if this spanned multiple lines.
             var selectionSpan = spans[0].Span;
             var position = selectionSpan.Start;
@@ -195,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
 
             // If the user hits enter at:    // goo $$ // bar
             //
-            // we don't want to consider this a comment continuation.  They likely were doing some text manipulations
+            // we don't want to consider this a comment continuation.  They likely were doing some text
+            // manipulations
             // that put two comments on the same line, and really just want this to act like a normal enter.
             if (IsFollowedByComment(selectionSpan.End, splitCommentService))
                 return null;
@@ -245,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             // 2. spaces up to the indentation of the current comment
             // 3. the comment prefix (extended out for repeated chars).
 
-            // Then, depending on if the current comment starts with whitespace or not, we will insert those same spaces
+            // Then, depending on if the current comment starts with whitespace or not, we will insert those
+            // same spaces
             // to match.
 
             var commentStartColumn = triviaLine.GetColumnFromLineOffset(
@@ -302,8 +306,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
         {
             var textSnapshot = triviaLine.Snapshot;
 
-            // When hitting enter in a comment consume the whitespace around the caret.  That way the previous line
-            // doesn't have trailing whitespace, and the text following the caret is placed at the right location.
+            // When hitting enter in a comment consume the whitespace around the caret.  That way the previous
+            // line
+            // doesn't have trailing whitespace, and the text following the caret is placed at the right
+            // location.
             var replacementStart = selectionSpan.Start;
             var replacementEnd = selectionSpan.End;
             while (replacementStart > triviaLine.Start && textSnapshot[replacementStart - 1] == ' ')

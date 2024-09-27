@@ -8,15 +8,18 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>
 ///     <para>
-///         Represents the mapping between a .NET <see cref="DateTimeOffset" /> type and a database type.
+///         Represents the mapping between a .NET <see cref="DateTimeOffset" /> type and a database
+// type.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class DateTimeOffsetTypeMapping : RelationalTypeMapping
@@ -24,10 +27,14 @@ public class DateTimeOffsetTypeMapping : RelationalTypeMapping
     private const string DateTimeOffsetFormatConst = @"{0:yyyy-MM-dd HH\:mm\:ss.fffffffzzz}";
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public static DateTimeOffsetTypeMapping Default { get; } = new("datetimeoffset");
 

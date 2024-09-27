@@ -226,8 +226,10 @@ namespace ILCompiler.Reflection.ReadyToRun
         );
     }
 
-    // Test implementation of ISignatureTypeProvider<TType, TGenericContext> that uses strings in ilasm syntax as TType.
-    // A real provider in any sort of perf constraints would not want to allocate strings freely like this, but it keeps test code simple.
+    // Test implementation of ISignatureTypeProvider<TType, TGenericContext> that uses strings in ilasm
+    // syntax as TType.
+    // A real provider in any sort of perf constraints would not want to allocate strings freely like
+    // this, but it keeps test code simple.
     public class DisassemblingTypeProvider : StringTypeProviderBase<DisassemblingGenericContext>
     {
         public override string GetGenericMethodParameter(

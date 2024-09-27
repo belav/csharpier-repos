@@ -39,7 +39,8 @@ public partial class ForbidResult : ActionResult
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
     /// specified <paramref name="properties"/>.
     /// </summary>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     public ForbidResult(AuthenticationProperties? properties)
         : this(Array.Empty<string>(), properties) { }
@@ -49,7 +50,8 @@ public partial class ForbidResult : ActionResult
     /// specified authentication scheme and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     public ForbidResult(string authenticationScheme, AuthenticationProperties? properties)
         : this(new[] { authenticationScheme }, properties) { }
@@ -59,7 +61,8 @@ public partial class ForbidResult : ActionResult
     /// specified authentication schemes and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     public ForbidResult(IList<string> authenticationSchemes, AuthenticationProperties? properties)
     {
@@ -73,7 +76,8 @@ public partial class ForbidResult : ActionResult
     public IList<string> AuthenticationSchemes { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="AuthenticationProperties"/> used to perform the authentication challenge.
+    /// Gets or sets the <see cref="AuthenticationProperties"/> used to perform the authentication
+    // challenge.
     /// </summary>
     public AuthenticationProperties? Properties { get; set; }
 

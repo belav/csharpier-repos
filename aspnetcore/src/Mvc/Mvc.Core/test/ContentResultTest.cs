@@ -362,8 +362,10 @@ public class ContentResultTest
 
     private static IServiceCollection CreateServices()
     {
-        // An array pool could return a buffer which is greater or equal to the size of the default character
-        // chunk size. Since the tests here depend on a specific character buffer size to test boundary conditions,
+        // An array pool could return a buffer which is greater or equal to the size of the default
+        // character
+        // chunk size. Since the tests here depend on a specific character buffer size to test boundary
+        // conditions,
         // make sure to only return a buffer of that size.
         var charArrayPool = new Mock<ArrayPool<char>>();
         charArrayPool

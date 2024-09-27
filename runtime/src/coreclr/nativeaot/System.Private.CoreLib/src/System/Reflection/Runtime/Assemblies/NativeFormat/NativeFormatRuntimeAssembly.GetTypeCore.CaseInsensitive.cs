@@ -66,11 +66,14 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
             // Collect all of the *non-nested* types and type-forwards.
             //
             //   The keys are full typenames in lower-cased form.
-            //   The value is a tuple containing either a TypeDefinitionHandle or TypeForwarderHandle and the associated Reader
+            //   The value is a tuple containing either a TypeDefinitionHandle or TypeForwarderHandle and the
+            // associated Reader
             //      for that handle.
             //
-            // We do not store nested types here. The container type is resolved and chosen first, then the nested type chosen from
-            // that. If we chose the wrong container type and fail the match as a result, that's too bad. (The desktop CLR has the
+            // We do not store nested types here. The container type is resolved and chosen first, then the
+            // nested type chosen from
+            // that. If we chose the wrong container type and fail the match as a result, that's too bad. (The
+            // desktop CLR has the
             // same issue.)
             //
 

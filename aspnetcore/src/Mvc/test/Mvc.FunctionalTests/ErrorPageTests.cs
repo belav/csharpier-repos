@@ -92,7 +92,8 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
         {
             options.AdditionalReferencePaths.Add(typeof(string).Assembly.Location);
 
-            // Workaround for incorrectly generated deps file. The build output has all of the binaries required to compile. We'll grab these and
+            // Workaround for incorrectly generated deps file. The build output has all of the binaries required
+            // to compile. We'll grab these and
             // add it to the list of assemblies runtime compilation uses.
             foreach (var path in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll"))
             {

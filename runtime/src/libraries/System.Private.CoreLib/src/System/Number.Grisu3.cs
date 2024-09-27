@@ -7,15 +7,21 @@ namespace System
 {
     internal static partial class Number
     {
-        // This is a port of the `Grisu3` implementation here: https://github.com/google/double-conversion/blob/a711666ddd063eb1e4b181a6cb981d39a1fc8bac/double-conversion/fast-dtoa.cc
-        // The backing algorithm and the proofs behind it are described in more detail here: http://www.cs.tufts.edu/~nr/cs257/archive/florian-loitsch/printf.pdf
+        // This is a port of the `Grisu3` implementation here:
+        // https://github.com/google/double-conversion/blob/a711666ddd063eb1e4b181a6cb981d39a1fc8bac/double-conversion/fast-dtoa.cc
+        // The backing algorithm and the proofs behind it are described in more detail here:
+        // http://www.cs.tufts.edu/~nr/cs257/archive/florian-loitsch/printf.pdf
+        //
         // ========================================================================================================================================
         //
         // Overview:
         //
-        // The general idea behind Grisu3 is to leverage additional bits and cached powers of ten to generate the correct digits.
-        // The algorithm is imprecise for some numbers. Fortunately, the algorithm itself can determine this scenario and gives us
-        // a result indicating success or failure. We must fallback to a different algorithm for the failing scenario.
+        // The general idea behind Grisu3 is to leverage additional bits and cached powers of ten to
+        // generate the correct digits.
+        // The algorithm is imprecise for some numbers. Fortunately, the algorithm itself can determine this
+        // scenario and gives us
+        // a result indicating success or failure. We must fallback to a different algorithm for the failing
+        // scenario.
         internal static class Grisu3
         {
             private const int CachedPowersDecimalExponentDistance = 8;
@@ -477,8 +483,10 @@ namespace System
             }
 
             // The counted version of Grisu3 only generates requestedDigits number of digits.
-            // This version does not generate the shortest representation, and with enough requested digits 0.1 will at some point print as 0.9999999...
-            // Grisu3 is too imprecise for real halfway cases (1.5 will not work) and therefore the rounding strategy for halfway cases is irrelevant.
+            // This version does not generate the shortest representation, and with enough requested digits 0.1
+            // will at some point print as 0.9999999...
+            // Grisu3 is too imprecise for real halfway cases (1.5 will not work) and therefore the rounding
+            // strategy for halfway cases is irrelevant.
             private static bool TryRunCounted(
                 in DiyFp w,
                 int requestedDigits,
@@ -517,10 +525,12 @@ namespace System
 
                 // We now have (double)(scaledW * 10^-mk).
                 //
-                // DigitGenCounted will generate the first requestedDigits of scaledW and return together with a kappa such that:
+                // DigitGenCounted will generate the first requestedDigits of scaledW and return together with a
+                // kappa such that:
                 //      scaledW ~= buffer * 10^kappa.
                 //
-                // It will not always be exactly the same since DigitGenCounted only produces a limited number of digits.
+                // It will not always be exactly the same since DigitGenCounted only produces a limited number of
+                // digits.
 
                 bool result = TryDigitGenCounted(
                     in scaledW,
@@ -540,11 +550,13 @@ namespace System
             // If the function returns true then:
             //      v == (double)(buffer * 10^decimalExponent)
             //
-            // The digits in the buffer are the shortest representation possible (no 0.09999999999999999 instead of 0.1).
+            // The digits in the buffer are the shortest representation possible (no 0.09999999999999999 instead
+            // of 0.1).
             // The shorter representation will even be chosen if the longer one would be closer to v.
             //
             // The last digit will be closest to the actual v.
-            // That is, even if several digits might correctly yield 'v' when read again, the closest will be computed.
+            // That is, even if several digits might correctly yield 'v' when read again, the closest will be
+            // computed.
             private static bool TryRunShortest(
                 in DiyFp boundaryMinus,
                 in DiyFp w,
@@ -554,8 +566,10 @@ namespace System
                 out int decimalExponent
             )
             {
-                // boundaryMinus and boundaryPlus are the boundaries between v and its closest floating-point neighbors.
-                // Any number strictly between boundaryMinus and boundaryPlus will round to v when converted to a double.
+                // boundaryMinus and boundaryPlus are the boundaries between v and its closest floating-point
+                // neighbors.
+                // Any number strictly between boundaryMinus and boundaryPlus will round to v when converted to a
+                // double.
                 // Grisu3 will never output representations that lie exactly on a boundary.
 
                 Debug.Assert(boundaryPlus.e == w.e);
@@ -587,9 +601,12 @@ namespace System
                 DiyFp scaledW = w.Multiply(in tenMk);
                 Debug.Assert(scaledW.e == (boundaryPlus.e + tenMk.e + DiyFp.SignificandSize));
 
-                // In theory, it would be possible to avoid some recomputations by computing the difference between w
-                // and boundaryMinus/Plus (a power of 2) and to compute scaledBoundaryMinus/Plus by subtracting/adding
-                // from scaledW. However, the code becomes much less readable and the speed enhancements are not terrific.
+                // In theory, it would be possible to avoid some recomputations by computing the difference between
+                // w
+                // and boundaryMinus/Plus (a power of 2) and to compute scaledBoundaryMinus/Plus by
+                // subtracting/adding
+                // from scaledW. However, the code becomes much less readable and the speed enhancements are not
+                // terrific.
 
                 DiyFp scaledBoundaryMinus = boundaryMinus.Multiply(in tenMk);
                 DiyFp scaledBoundaryPlus = boundaryPlus.Multiply(in tenMk);
@@ -597,8 +614,10 @@ namespace System
                 // DigitGen will generate the digits of scaledW. Therefore, we have:
                 //      v == (double)(scaledW * 10^-mk)
                 //
-                // Set decimalExponent == -mk and pass it to DigitGen and if scaledW is not an integer than it will be updated.
-                // For instance, if scaledW == 1.23 then the buffer will be filled with "123" and the decimalExponent will be decreased by 2.
+                // Set decimalExponent == -mk and pass it to DigitGen and if scaledW is not an integer than it will
+                // be updated.
+                // For instance, if scaledW == 1.23 then the buffer will be filled with "123" and the
+                // decimalExponent will be decreased by 2.
 
                 bool result = TryDigitGenShortest(
                     in scaledBoundaryMinus,
@@ -659,14 +678,16 @@ namespace System
             // Returns false if it fails, in which case the generated digits in the buffer should not be used.
             //
             // Preconditions:
-            //      w is correct up to 1 ulp (unit in last place). That is, its error must be strictly less than a unit of its last digit.
+            //      w is correct up to 1 ulp (unit in last place). That is, its error must be strictly less than
+            // a unit of its last digit.
             //      MinimalTargetExponent <= w.e <= MaximalTargetExponent
             //
             // Postconditions:
             //      Returns false if the procedure fails; otherwise:
             //      * buffer is not null-terminated, but length contains the number of digits.
             //      * The representation in buffer is the most precise representation of requestedDigits digits.
-            //      * buffer contains at most requestedDigits digits of w. If there are less than requestedDigits digits then some trailing '0's have been removed.
+            //      * buffer contains at most requestedDigits digits of w. If there are less than
+            // requestedDigits digits then some trailing '0's have been removed.
             //      * kappa is such that w = buffer * 10^kappa + eps with |eps| < 10^kappa / 2.
             //
             // This procedure takes into account the imprecision of its input numbers.
@@ -700,13 +721,17 @@ namespace System
                 // Modulo by one is an and.
                 ulong fractionals = w.f & (one.f - 1);
 
-                // We deviate from the original algorithm here and do some early checks to determine if we can satisfy requestedDigits.
-                // If we determine that we can't, we exit early and avoid most of the heavy lifting that the algorithm otherwise does.
+                // We deviate from the original algorithm here and do some early checks to determine if we can
+                // satisfy requestedDigits.
+                // If we determine that we can't, we exit early and avoid most of the heavy lifting that the
+                // algorithm otherwise does.
                 //
                 // When fractionals is zero, we can easily determine if integrals can satisfy requested digits:
-                //      If requestedDigits >= 11, integrals is not able to exhaust the count by itself since 10^(11 -1) > uint.MaxValue >= integrals.
+                //      If requestedDigits >= 11, integrals is not able to exhaust the count by itself since 10^(11
+                // -1) > uint.MaxValue >= integrals.
                 //      If integrals < 10^(requestedDigits - 1), integrals cannot exhaust the count.
-                //      Otherwise, integrals might be able to exhaust the count and we need to execute the rest of the code.
+                //      Otherwise, integrals might be able to exhaust the count and we need to execute the rest of
+                // the code.
                 if (
                     (fractionals == 0)
                     && (
@@ -822,7 +847,8 @@ namespace System
             // Returns false if it fails, in which case the generated digits in the buffer should not be used.
             //
             // Preconditions:
-            //      low, w and high are correct up to 1 ulp (unit in the last place). That is, their error must be less than a unit of their last digits.
+            //      low, w and high are correct up to 1 ulp (unit in the last place). That is, their error must
+            // be less than a unit of their last digits.
             //      low.e() == w.e() == high.e()
             //      low < w < high, and taking into account their error: low~ <= high~
             //      kMinimalTargetExponent <= w.e() <= kMaximalTargetExponent
@@ -830,8 +856,10 @@ namespace System
             // Postconditions:
             //      Returns false if procedure fails; otherwise:
             //      * buffer is not null-terminated, but len contains the number of digits.
-            //      * buffer contains the shortest possible decimal digit-sequence such that LOW < buffer * 10^kappa < HIGH, where LOW and HIGH are the correct values of low and high (without their error).
-            //      * If more than one decimal representation gives the minimal number of decimal digits then the one closest to W (where W is the correct value of w) is chosen.
+            //      * buffer contains the shortest possible decimal digit-sequence such that LOW < buffer *
+            // 10^kappa < HIGH, where LOW and HIGH are the correct values of low and high (without their error).
+            //      * If more than one decimal representation gives the minimal number of decimal digits then
+            // the one closest to W (where W is the correct value of w) is chosen.
             //
             // This procedure takes into account the imprecision of its input numbers.
             // If the precision is not enough to guarantee all the postconditions then false is returned.
@@ -852,7 +880,8 @@ namespace System
             // For example, the first digit after the point would be computed by
             //      (0x567890abcdef * 10) >> 48. -> 3
             //
-            // The whole thing becomes slightly more complicated because we want to stop once we have enough digits.
+            // The whole thing becomes slightly more complicated because we want to stop once we have enough
+            // digits.
             // That is, once the digits inside the buffer represent 'w' we can stop.
             //
             // Everything inside the interval low - high represents w.
@@ -883,7 +912,8 @@ namespace System
                 // are certain to lie in the interval. We will use this fact later on.
                 //
                 // We will now start by generating the digits within the uncertain interval.
-                // Later, we will weed out representations that lie outside the safe interval and thus might lie outside the correct interval.
+                // Later, we will weed out representations that lie outside the safe interval and thus might lie
+                // outside the correct interval.
 
                 ulong unit = 1;
 
@@ -1003,7 +1033,8 @@ namespace System
                 }
             }
 
-            // Returns a cached power-of-ten with a binary exponent in the range [minExponent; maxExponent] (boundaries included).
+            // Returns a cached power-of-ten with a binary exponent in the range [minExponent; maxExponent]
+            // (boundaries included).
             private static DiyFp GetCachedPowerForBinaryExponentRange(
                 int minExponent,
                 int maxExponent,
@@ -1034,7 +1065,8 @@ namespace System
             //
             // If (2 * rest) > tenKappa then the buffer needs to be round up.
             // rest can have an error of +/- 1 unit.
-            // This function accounts for the imprecision and returns false if the rounding direction cannot be unambiguously determined.
+            // This function accounts for the imprecision and returns false if the rounding direction cannot be
+            // unambiguously determined.
             //
             // Preconditions:
             //      rest < tenKappa
@@ -1105,8 +1137,10 @@ namespace System
                 return false;
             }
 
-            // Adjusts the last digit of the generated number and screens out generated solutions that may be inaccurate.
-            // A solution may be inaccurate if it is outside the safe interval or if we cannot provide that it is closer to the input than a neighboring representation of the same length.
+            // Adjusts the last digit of the generated number and screens out generated solutions that may be
+            // inaccurate.
+            // A solution may be inaccurate if it is outside the safe interval or if we cannot provide that it
+            // is closer to the input than a neighboring representation of the same length.
             //
             // Input:
             //      buffer containing the digits of tooHigh / 10^kappa
@@ -1118,7 +1152,8 @@ namespace System
             //      unit = the common multiplier
             //
             // Output:
-            //      Returns true if the buffer is guaranteed to contain the closest representable number to the input.
+            //      Returns true if the buffer is guaranteed to contain the closest representable number to the
+            // input.
             //
             // Modifies the generated digits in the buffer to approach (round towards) w.
             private static bool TryRoundWeedShortest(
@@ -1173,7 +1208,8 @@ namespace System
                 //
                 // Note that the value of buffer could lie anywhere inside the range tooLow to tooHigh.
                 //
-                // boundaryLow, boundaryHigh and w are approximations of the real boundaries and v (the input number).
+                // boundaryLow, boundaryHigh and w are approximations of the real boundaries and v (the input
+                // number).
                 // They are guaranteed to be precise up to one unit.
                 // In fact the error is guaranteed to be strictly less than one unit.
                 //
@@ -1183,17 +1219,21 @@ namespace System
                 // If the number inside the buffer lies inside the unsafe interval but not inside the safe interval
                 // then we simply do not know and bail out (returning false).
                 //
-                // Similarly we have to take into account the imprecision of 'w' when finding the closest representation of 'w'.
-                // If we have two potential representations, and one is closer to both wLow and wHigh, then we know it is closer to the actual value v.
+                // Similarly we have to take into account the imprecision of 'w' when finding the closest
+                // representation of 'w'.
+                // If we have two potential representations, and one is closer to both wLow and wHigh, then we know
+                // it is closer to the actual value v.
                 //
-                // By generating the digits of tooHigh we got the largest (closest to tooHigh) buffer that is still in the unsafe interval.
+                // By generating the digits of tooHigh we got the largest (closest to tooHigh) buffer that is still
+                // in the unsafe interval.
                 // In the case where wHigh < buffer < tooHigh we try to decrement the buffer.
                 // This way the buffer approaches (rounds towards) w.
                 //
                 // There are 3 conditions that stop the decrementation process:
                 //   1) the buffer is already below wHigh
                 //   2) decrementing the buffer would make it leave the unsafe interval
-                //   3) decrementing the buffer would yield a number below wHigh and farther away than the current number.
+                //   3) decrementing the buffer would yield a number below wHigh and farther away than the current
+                // number.
                 //
                 // In other words:
                 //      (buffer{-1} < wHigh) && wHigh - buffer{-1} > buffer - wHigh
@@ -1221,7 +1261,8 @@ namespace System
 
                 // We have approached w+ as much as possible.
                 // We now test if approaching w- would require changing the buffer.
-                // If yes, then we have two possible representations close to w, but we cannot decide which one is closer.
+                // If yes, then we have two possible representations close to w, but we cannot decide which one is
+                // closer.
                 if (
                     (rest < bigDistance)
                     && ((unsafeInterval - rest) >= tenKappa)

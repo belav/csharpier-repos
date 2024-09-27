@@ -29,7 +29,8 @@ namespace System.Net.Http.Functional.Tests
                         };
                         request.Headers.Host = "foo.com:345";
 
-                        // We need to use ResponseHeadersRead here, otherwise we will hang trying to buffer the response body.
+                        // We need to use ResponseHeadersRead here, otherwise we will hang trying to buffer the response
+                        // body.
                         Task<HttpResponseMessage> responseTask = client.SendAsync(
                             TestAsync,
                             request,
@@ -118,7 +119,8 @@ namespace System.Net.Http.Functional.Tests
                             Version = UseVersion,
                         };
                         request.Headers.Host = "foo.com:345";
-                        // We need to use ResponseHeadersRead here, otherwise we will hang trying to buffer the response body.
+                        // We need to use ResponseHeadersRead here, otherwise we will hang trying to buffer the response
+                        // body.
                         Task<HttpResponseMessage> responseTask = client.SendAsync(
                             TestAsync,
                             request,

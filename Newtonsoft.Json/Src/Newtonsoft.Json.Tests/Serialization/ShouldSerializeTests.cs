@@ -287,7 +287,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         //      Console.WriteLine(sw.ToString());
 
         //      string xml = @"<?xml version=""1.0"" encoding=""utf-16""?>
-        //<OptionalOrder xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        //<OptionalOrder xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+        // xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
         //  <FirstOrder>First</FirstOrder>
         //</OptionalOrder>";
 
@@ -307,7 +308,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         //      Console.WriteLine(sw.ToString());
 
         //      //      string xml = @"<?xml version=""1.0"" encoding=""utf-16""?>
-        //      //<OptionalOrder xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        //      //<OptionalOrder xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+        // xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
         //      //  <FirstOrder>First</FirstOrder>
         //      //</OptionalOrder>";
 
@@ -407,7 +409,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //Console.WriteLine(sw);
 
             //JavaScriptSerializer s = new JavaScriptSerializer();
-            //Console.WriteLine(s.Serialize(new {html = @"<script>hi</script>; & ! ^ * ( ) ! @ # $ % ^ ' "" - , . / ; : [ { } ] ; ' - _ = + ? ` ~ \ |"}));
+            //Console.WriteLine(s.Serialize(new {html = @"<script>hi</script>; & ! ^ * ( ) ! @ # $ % ^ ' "" - ,
+            // . / ; : [ { } ] ; ' - _ = + ? ` ~ \ |"}));
 
             string json = JsonConvert.SerializeObject(joe, Formatting.Indented);
 

@@ -103,7 +103,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.NotSet"]/*' />
         NotSet,
 
-        /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.ApplicationCache"]/*' />
+        /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.ApplicationCache"]/*'
+        // />
         ApplicationCache,
 
         /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.SessionState"]/*' />
@@ -115,7 +116,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.Internal"]/*' />
         Internal,
 
-        /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.None // currently not used"]/*' />
+        /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.None // currently not
+        // used"]/*' />
         None // currently not used
         ,
     }

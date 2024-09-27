@@ -205,9 +205,11 @@ namespace System
             return matches.Any();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Helper for the GetCustomAttribute() family.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private static Attribute OneOrNull(IEnumerable<CustomAttributeData> results)
         {
             IEnumerator<CustomAttributeData> enumerator = results.GetEnumerator();
@@ -219,11 +221,15 @@ namespace System
             return result.Instantiate();
         }
 
-        //==============================================================================================================================
-        // Helper for the GetCustomAttributes() methods that take a specific attribute type. For desktop compatibility,
-        // we return a freshly allocated array of the specific attribute type even though the api's return type promises only an Attribute[].
+        
+        // //==============================================================================================================================
+        // Helper for the GetCustomAttributes() methods that take a specific attribute type. For desktop
+        // compatibility,
+        // we return a freshly allocated array of the specific attribute type even though the api's return
+        // type promises only an Attribute[].
         // There are known store apps that cast the results of apis and expect the cast to work.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         [UnconditionalSuppressMessage(
             "AotAnalysis",
             "IL3050:RequiresDynamicCode",

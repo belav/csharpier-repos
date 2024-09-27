@@ -74,7 +74,8 @@ namespace System.Data.Common
                 false
             )
         {
-            // useOdbcRules is only used to parse the connection string, not to parse restrictions because values don't apply there
+            // useOdbcRules is only used to parse the connection string, not to parse restrictions because
+            // values don't apply there
             // the hashtable doesn't need clone since it isn't shared with anything else
         }
 

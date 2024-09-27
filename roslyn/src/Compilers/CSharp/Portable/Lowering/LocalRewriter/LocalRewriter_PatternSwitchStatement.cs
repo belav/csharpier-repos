@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// We revise the returned label for a leaf so that all leaves in the same switch section are given the same label.
+            /// We revise the returned label for a leaf so that all leaves in the same switch section are given
+            // the same label.
             /// This enables the switch emitter to produce better code.
             /// </summary>
             protected override LabelSymbol GetDagNodeLabel(BoundDecisionDagNode dag)
@@ -50,8 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     SyntaxNode? section = d.Syntax.Parent;
 
-                    // It is possible that the leaf represents a compiler-generated default for a switch statement in the EE.
-                    // In that case d.Syntax is the whole switch statement, and its parent is null. We are only interested
+                    // It is possible that the leaf represents a compiler-generated default for a switch statement in
+                    // the EE.
+                    // In that case d.Syntax is the whole switch statement, and its parent is null. We are only
+                    // interested
                     // in leaves that result from explicit switch case labels in a switch section.
                     if (section?.Kind() == SyntaxKind.SwitchSection)
                     {
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         // If the expression is a constant, we leave it alone (the decision dag lowering code needs
-                        // to see that constant). But we add an additional leading statement with the instrumented expression.
+                        // to see that constant). But we add an additional leading statement with the instrumented
+                        // expression.
                         result.Add(_factory.ExpressionStatement(instrumentedExpression));
                     }
                 }
@@ -120,12 +124,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out _
                 );
 
-                // In a switch statement, there is a hidden sequence point after evaluating the input at the start of
-                // the code to handle the decision dag. This is necessary so that jumps back from a `when` clause into
+                // In a switch statement, there is a hidden sequence point after evaluating the input at the start
+                // of
+                // the code to handle the decision dag. This is necessary so that jumps back from a `when` clause
+                // into
                 // the decision dag do not appear to jump back up to the enclosing construct.
                 if (GenerateInstrumentation)
                 {
-                    // Since there may have been no code to evaluate the input, add a no-op for any previous sequence point to bind to.
+                    // Since there may have been no code to evaluate the input, add a no-op for any previous sequence
+                    // point to bind to.
                     if (result.Count == 0)
                         result.Add(_factory.NoOp(NoOpStatementFlavor.Default));
 

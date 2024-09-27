@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Net.Http.Headers;
@@ -9,7 +10,8 @@ namespace System.Net.Http.Formatting
 {
     /// <summary>
     /// Represents the result of content negotiation performed using
-    /// <see cref="IContentNegotiator.Negotiate(Type, HttpRequestMessage, IEnumerable{MediaTypeFormatter})"/>
+    /// <see cref="IContentNegotiator.Negotiate(Type, HttpRequestMessage,
+    // IEnumerable{MediaTypeFormatter})"/>
     /// </summary>
     public class ContentNegotiationResult
     {
@@ -51,7 +53,8 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// The media type that is associated with the formatter chosen for serialization. Can be <c>null</c>.
+        /// The media type that is associated with the formatter chosen for serialization. Can be
+        // <c>null</c>.
         /// </summary>
         public MediaTypeHeaderValue MediaType { get; set; }
     }

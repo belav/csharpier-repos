@@ -169,7 +169,8 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal static int CompareContent(Arc arc1, Arc arc2)
         {
-            // Compare arcs based on IndexOfWord, IsRuleRef, SpecialTransitionIndex, Optional, and RequiredConfidence.
+            // Compare arcs based on IndexOfWord, IsRuleRef, SpecialTransitionIndex, Optional, and
+            // RequiredConfidence.
             // SemanticTag, StartState, EndState, Weight, and SerializeIndex are not factors.
             if (arc1._iWord != arc2._iWord)
                 return arc1._iWord - arc2._iWord;
@@ -849,7 +850,8 @@ namespace System.Speech.Internal.SrgsCompiler
 #endif
 
         // Sort arcs in a state based on type, and then on index.
-        // Arcs loaded from a file have their index preserved where possible. New dynamic states have index == INFINITE,
+        // Arcs loaded from a file have their index preserved where possible. New dynamic states have index
+        // == INFINITE,
         private int SortRank()
         {
             int ret = 0;

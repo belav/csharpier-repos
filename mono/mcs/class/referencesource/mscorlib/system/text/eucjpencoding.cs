@@ -33,7 +33,8 @@ namespace System.Text
     //  4.  For JIS X 0212, Remove the lead byte, & 0xFF7F, and use the CP20936 table to convert.
     //
     // Regarding Normalization:
-    //  Forms KC & KD are precluded because of things like halfwidth Katakana that has compatibility mappings
+    //  Forms KC & KD are precluded because of things like halfwidth Katakana that has compatibility
+    // mappings
     //  Form D is precluded because of 0x00a8, which changes to space + dierises.
     //
     // I think that IsAlwaysNormalized should probably return true for form C (but not certain)

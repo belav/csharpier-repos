@@ -7,7 +7,8 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Serialization.Converters
 {
-    // Converter for F# sets: https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpset-1.html
+    // Converter for F# sets:
+    // https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpset-1.html
     internal sealed class FSharpSetConverter<TSet, TElement>
         : IEnumerableDefaultConverter<TSet, TElement>
         where TSet : IEnumerable<TElement>

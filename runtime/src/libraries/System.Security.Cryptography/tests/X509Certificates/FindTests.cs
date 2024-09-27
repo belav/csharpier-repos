@@ -938,7 +938,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void TestByApplicationPolicy_NoPolicyAlwaysMatches()
         {
-            // PfxCer doesn't have any application policies which means it's good for all usages (even nonsensical ones.)
+            // PfxCer doesn't have any application policies which means it's good for all usages (even
+            // nonsensical ones.)
             RunSingleMatchTest_PfxCer(X509FindType.FindByApplicationPolicy, "2.2");
         }
 

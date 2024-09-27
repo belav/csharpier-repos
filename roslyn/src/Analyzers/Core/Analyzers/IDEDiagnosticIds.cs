@@ -168,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public const string UseTupleSwapDiagnosticId = "IDE0180";
 
-        // Don't use "IDE0190". It corresponds to the deleted field UseParameterNullCheckingId which was previously shipped.
+        // Don't use "IDE0190". It corresponds to the deleted field UseParameterNullCheckingId which was
+        // previously shipped.
 
         public const string RemoveUnnecessaryLambdaExpressionDiagnosticId = "IDE0200";
 

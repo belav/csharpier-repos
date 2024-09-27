@@ -128,7 +128,8 @@ public enum W3CLoggingFields : long
 
     /// <summary>
     /// Flag for logging properties that are part of the <see cref="ConnectionInfo"/>
-    /// Includes <see cref="ClientIpAddress"/>, <see cref="ServerIpAddress"/> and <see cref="ServerPort"/>.
+    /// Includes <see cref="ClientIpAddress"/>, <see cref="ServerIpAddress"/> and <see
+    // cref="ServerPort"/>.
     /// </summary>
     ConnectionInfoFields = ClientIpAddress | ServerIpAddress | ServerPort,
 

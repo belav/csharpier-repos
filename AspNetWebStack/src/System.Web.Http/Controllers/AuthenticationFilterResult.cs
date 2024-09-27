@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net.Http;
@@ -68,7 +69,8 @@ namespace System.Web.Http.Controllers
             }
 
             // Run challenge on all filters (passing the result of each into the next). If a filter failed, the
-            // challenges run on the failure result. If no filter failed, the challenges run on the original inner
+            // challenges run on the failure result. If no filter failed, the challenges run on the original
+            // inner
             // result.
             HttpAuthenticationChallengeContext challengeContext =
                 new HttpAuthenticationChallengeContext(_context, result);

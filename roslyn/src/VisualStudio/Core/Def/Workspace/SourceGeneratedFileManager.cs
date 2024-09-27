@@ -31,7 +31,8 @@ using Task = System.Threading.Tasks.Task;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     /// <summary>
-    /// Provides the support for opening files pointing to source generated documents, and keeping the content updated accordingly.
+    /// Provides the support for opening files pointing to source generated documents, and keeping the
+    // content updated accordingly.
     /// </summary>
     [Export(typeof(SourceGeneratedFileManager))]
     internal sealed class SourceGeneratedFileManager : IOpenTextBufferEventListener
@@ -44,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private readonly VisualStudioDocumentNavigationService _visualStudioDocumentNavigationService;
 
         /// <summary>
-        /// The temporary directory that we'll create file names under to act as a prefix we can later recognize and use.
+        /// The temporary directory that we'll create file names under to act as a prefix we can later
+        // recognize and use.
         /// </summary>
         private readonly string _temporaryDirectory;
 
@@ -55,10 +57,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private readonly VisualStudioWorkspace _visualStudioWorkspace;
 
         /// <summary>
-        /// When we have to put a placeholder file on disk, we put it in a directory named by the GUID portion of the DocumentId.
-        /// We store the actual DocumentId (which includes the ProjectId) and some other textual information in
-        /// <see cref="_directoryInfoOnDiskByContainingDirectoryId"/>, so that way we don't have to pack the information into the path itself.
-        /// If we put the GUIDs and string names directly as components of the path, we quickly run into MAX_PATH. If we had a way to do virtual
+        /// When we have to put a placeholder file on disk, we put it in a directory named by the GUID
+        // portion of the DocumentId.
+        /// We store the actual DocumentId (which includes the ProjectId) and some other textual information
+        // in
+        /// <see cref="_directoryInfoOnDiskByContainingDirectoryId"/>, so that way we don't have to pack the
+        // information into the path itself.
+        /// If we put the GUIDs and string names directly as components of the path, we quickly run into
+        // MAX_PATH. If we had a way to do virtual
         /// monikers that don't run into MAX_PATH issues then we absolutely would want to get rid of this.
         /// </summary>
         /// <remarks>All accesses should be on the UI thread.</remarks>
@@ -105,8 +111,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             TextSpan sourceSpan
         )
         {
-            // We will create an file name to represent this generated file; the Visual Studio shell APIs imply you can use a URI,
-            // but most URIs are blocked other than file:// and http://; they also get extra handling to attempt to download the file so
+            // We will create an file name to represent this generated file; the Visual Studio shell APIs imply
+            // you can use a URI,
+            // but most URIs are blocked other than file:// and http://; they also get extra handling to attempt
+            // to download the file so
             // those aren't really usable anyways.
             // The file name we create is <temp path>\<document id in GUID form>\<hint name>
 
@@ -115,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _directoryInfoOnDiskByContainingDirectoryId.Add(document.Id.Id, document.Identity);
             }
 
-            // We must always ensure the file name portion of the path is just the hint name, which matches the compiler's choice so
+            // We must always ensure the file name portion of the path is just the hint name, which matches the
+            // compiler's choice so
             // debugging works properly.
             var temporaryFilePath = Path.Combine(
                 _temporaryDirectory,
@@ -222,7 +231,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         () => openFile.RefreshFileAsync(CancellationToken.None).AsTask()
                     );
 
-                    // Update the RDT flags to ensure the file can't be saved or appears in any MRUs as it's a temporary generated file name.
+                    // Update the RDT flags to ensure the file can't be saved or appears in any MRUs as it's a temporary
+                    // generated file name.
                     var runningDocumentTable = _serviceProvider.GetService<
                         SVsRunningDocumentTable,
                         IVsRunningDocumentTable4
@@ -281,14 +291,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             private readonly IWorkspaceConfigurationService? _workspaceConfigurationService;
 
             /// <summary>
-            /// A read-only region that we create across the entire file to prevent edits unless we are the one making them.
+            /// A read-only region that we create across the entire file to prevent edits unless we are the one
+            // making them.
             /// It's a dynamic read-only region that will allow edits if <see cref="_updatingBuffer"/> is set.
             /// </summary>
             private readonly IReadOnlyRegion _readOnlyRegion;
             private bool _updatingBuffer = false;
 
             /// <summary>
-            /// A cancellation token used for any background updating of this file; this is cancelled on the UI thread
+            /// A cancellation token used for any background updating of this file; this is cancelled on the UI
+            // thread
             /// when the file is closed.
             /// </summary>
             private readonly CancellationTokenSource _cancellationTokenSource = new();
@@ -299,7 +311,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             private readonly AsyncBatchingWorkQueue _batchingWorkQueue;
 
             /// <summary>
-            /// The <see cref="IVsWindowFrame"/> of the active window. This may be null if we're in the middle of construction and
+            /// The <see cref="IVsWindowFrame"/> of the active window. This may be null if we're in the middle
+            // of construction and
             /// we haven't been given it yet.
             /// </summary>
             private IVsWindowFrame? _windowFrame;
@@ -326,7 +339,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _workspaceConfigurationService =
                     _workspace.Services.GetService<IWorkspaceConfigurationService>();
 
-                // We'll create a read-only region for the file, but it'll be a dynamic region we can temporarily suspend
+                // We'll create a read-only region for the file, but it'll be a dynamic region we can temporarily
+                // suspend
                 // while we're doing edits.
                 using (var readOnlyRegionEdit = _textBuffer.CreateReadOnlyRegionEdit())
                 {
@@ -392,7 +406,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     _documentIdentity.DocumentId.ProjectId
                 );
 
-                // Locals correspond to the equivalently-named fields; we'll assign these and then assign to the fields while on the
+                // Locals correspond to the equivalently-named fields; we'll assign these and then assign to the
+                // fields while on the
                 // UI thread to avoid any potential race where we update the InfoBar while this is running.
                 string? windowFrameMessageToShow;
                 ImageMoniker windowFrameImageMonikerToShow;
@@ -464,7 +479,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         // Allow us to do our own edits
                         _updatingBuffer = true;
 
-                        // Ensure the encoding matches; this is necessary for debugger checksums to match what is in the PDB.
+                        // Ensure the encoding matches; this is necessary for debugger checksums to match what is in the
+                        // PDB.
                         if (
                             _fileManager._textDocumentFactoryService.TryGetTextDocument(
                                 _textBuffer,
@@ -477,7 +493,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                         // HACK: if we do an edit here, that'll change the dirty state of the document, which
                         // will cause us to think a provisional tab is being edited. If we pass in the textDocument
-                        // as an edit tag, the code in Microsoft.VisualStudio.Text.Implementation.TextDocument.TextBufferChangedHandler
+                        // as an edit tag, the code in
+                        // Microsoft.VisualStudio.Text.Implementation.TextDocument.TextBufferChangedHandler
                         // will think this is an edit coming from itself, and will skip the dirty update.
 
                         // We'll ask the editor to do the diffing for us so updates don't refresh the entire buffer
@@ -523,8 +540,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
                 else
                 {
-                    // The user made an edit that meant the source generator that generated this file is no longer generating this file.
-                    // We can't update buffer contents anymore. We'll remove the connection between this buffer and the workspace,
+                    // The user made an edit that meant the source generator that generated this file is no longer
+                    // generating this file.
+                    // We can't update buffer contents anymore. We'll remove the connection between this buffer and the
+                    // workspace,
                     // so this file now appears in Miscellaneous Files.
                     DisconnectFromWorkspaceIfOpen();
                 }
@@ -540,7 +559,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 if (oldProject != null && newProject != null)
                 {
-                    // We'll start this work asynchronously to figure out if we need to change; if the file is closed the cancellationToken
+                    // We'll start this work asynchronously to figure out if we need to change; if the file is closed
+                    // the cancellationToken
                     // is triggered and this will no-op.
                     var asyncToken = _fileManager._listener.BeginAsyncOperation(
                         nameof(OpenSourceGeneratedFile) + "." + nameof(OnWorkspaceChanged)

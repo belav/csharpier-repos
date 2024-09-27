@@ -162,7 +162,8 @@ public class RedisEndToEndTests : VerifiableLoggedTest
     )
     {
         // Regression test:
-        // When multiple connections from the same user were connected and one left, it used to unsubscribe from the user channel
+        // When multiple connections from the same user were connected and one left, it used to unsubscribe
+        // from the user channel
         // Now we keep track of users connections and only unsubscribe when no users are listening
         using (StartVerifiableLog())
         {

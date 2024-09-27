@@ -86,7 +86,8 @@ namespace System.Workflow.Runtime.Hosting
         /// <summary>
         /// DB access done under a transaction and uses a connection enlisted to this transaction.
         /// </summary>
-        /// <param name="dbResourceAllocator">Helper to get database connection/command/store procedure parameters/etc</param>
+        /// <param name="dbResourceAllocator">Helper to get database connection/command/store procedure
+        // parameters/etc</param>
         /// <param name="transaction">The transaction to do this work under</param>
         internal PersistenceDBAccessor(
             DbResourceAllocator dbResourceAllocator,
@@ -114,7 +115,8 @@ namespace System.Workflow.Runtime.Hosting
         /// <summary>
         /// DB access done without a transaction in a newly opened connection
         /// </summary>
-        /// <param name="dbResourceAllocator">Helper to get database connection/command/store procedure parameters/etc</param>
+        /// <param name="dbResourceAllocator">Helper to get database connection/command/store procedure
+        // parameters/etc</param>
         internal PersistenceDBAccessor(DbResourceAllocator dbResourceAllocator, bool enableRetries)
         {
             this.dbResourceAllocator = dbResourceAllocator;
@@ -245,14 +247,16 @@ namespace System.Workflow.Runtime.Hosting
             p1.Value = 0;
             p1.Direction = ParameterDirection.InputOutput;
             command.Parameters.Add(p1);
-            //command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@result", DbType.Int32, ParameterDirection.Output));
+            //command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@result", DbType.Int32,
+            // ParameterDirection.Output));
             DbParameter p2 = this.dbResourceAllocator.NewDbParameter();
             p2.ParameterName = "@currentOwnerID";
             p2.DbType = DbType.Guid;
             p2.Value = Guid.Empty;
             p2.Direction = ParameterDirection.InputOutput;
             command.Parameters.Add(p2);
-            //command.Parameters.Add(new DbParameter(this.dbResourceAllocator.NewDbParameter("@currentOwnerID", DbType.Guid, ParameterDirection.InputOutput));
+            //command.Parameters.Add(new DbParameter(this.dbResourceAllocator.NewDbParameter("@currentOwnerID",
+            // DbType.Guid, ParameterDirection.InputOutput));
 #if DEBUG
             InsertToDbMap(ownerId, connection.Database);
 #endif
@@ -618,14 +622,16 @@ namespace System.Workflow.Runtime.Hosting
                     p1.Value = 0;
                     p1.Direction = ParameterDirection.InputOutput;
                     command.Parameters.Add(p1);
-                    //command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@result", DbType.Int32, ParameterDirection.Output));
+                    //command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@result", DbType.Int32,
+                    // ParameterDirection.Output));
                     DbParameter p2 = this.dbResourceAllocator.NewDbParameter();
                     p2.ParameterName = "@currentOwnerID";
                     p2.DbType = DbType.Guid;
                     p2.Value = Guid.Empty;
                     p2.Direction = ParameterDirection.InputOutput;
                     command.Parameters.Add(p2);
-                    //command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@currentOwnerID", DbType.Guid, ParameterDirection.InputOutput));
+                    //command.Parameters.Add(this.dbResourceAllocator.NewDbParameter("@currentOwnerID", DbType.Guid,
+                    // ParameterDirection.InputOutput));
 #if DEBUG
                     InsertToDbMap(ownerId, connection.Database);
 #endif
@@ -834,9 +840,11 @@ namespace System.Workflow.Runtime.Hosting
 
         /// <summary>
         /// Helper to Public methods RetrieveInstanceState and RetrieveCompletedScope.
-        /// Retrieves an object from the DB by calling the specified stored procedure with specified stored proc params.
+        /// Retrieves an object from the DB by calling the specified stored procedure with specified stored
+        // proc params.
         /// </summary>
-        /// <param name="command">Contains the stored procedure setting to be used to query against the Database</param>
+        /// <param name="command">Contains the stored procedure setting to be used to query against the
+        // Database</param>
         /// <returns>an object to be casted to an activity
         ///     In case of RetrieveInstanceState, only running or suspended instances are returned and
         ///     exception is thrown for completed/terminated/not-found instances

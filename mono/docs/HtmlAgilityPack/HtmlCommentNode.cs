@@ -38,7 +38,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Gets or Sets the HTML between the start and end tags of the object. In the case of a text node, it is equals to OuterHtml.
+        /// Gets or Sets the HTML between the start and end tags of the object. In the case of a text node,
+        // it is equals to OuterHtml.
         /// </summary>
         public override string InnerHtml
         {

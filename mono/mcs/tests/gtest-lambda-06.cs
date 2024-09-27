@@ -1,4 +1,5 @@
 // Inspired by
+//
 // http://blogs.msdn.com/ericlippert/archive/2007/03/28/lambda-expressions-vs-anonymous-methods-part-five.aspx
 
 using System;

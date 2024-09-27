@@ -230,7 +230,8 @@ namespace System.Text.Tests
         public void CustomSubclassMethodOverrides()
         {
             // Ensures that we don't inadvertently implement methods like UTF8Encoding.GetBytes(string)
-            // without accounting for the fact that a subclassed type may have overridden GetBytes(char[], int, int).
+            // without accounting for the fact that a subclassed type may have overridden GetBytes(char[], int,
+            // int).
 
             UTF8Encoding encoding = new CustomUTF8Encoding();
 

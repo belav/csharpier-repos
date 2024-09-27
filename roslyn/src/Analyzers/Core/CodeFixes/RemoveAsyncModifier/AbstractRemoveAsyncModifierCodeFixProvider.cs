@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             var compilation = semanticModel.Compilation;
             var knownTypes = new KnownTypes(compilation);
 
-            // For fix all we need to do nested locals or lambdas first, so order the diagnostics by location descending
+            // For fix all we need to do nested locals or lambdas first, so order the diagnostics by location
+            // descending
             foreach (
                 var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start)
             )
@@ -114,10 +115,13 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                     continue;
                 }
 
-                // We might need to perform control flow analysis as part of the fix, so we need to do it on the original node
-                // so do it up front. Nothing in the fixer changes the reachability of the end of the method so this is safe
+                // We might need to perform control flow analysis as part of the fix, so we need to do it on the
+                // original node
+                // so do it up front. Nothing in the fixer changes the reachability of the end of the method so this
+                // is safe
                 var controlFlow = GetControlFlowAnalysis(generator, semanticModel, node);
-                // If control flow couldn't be computed then its probably an empty block, which means we need to add a return anyway
+                // If control flow couldn't be computed then its probably an empty block, which means we need to add
+                // a return anyway
                 var needsReturnStatementAdded =
                     controlFlow == null || controlFlow.EndPointIsReachable;
 
@@ -251,7 +255,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
         {
             var editor = new SyntaxEditor(node, solutionServices);
 
-            // Look for all return statements, but if we find a new node that can have the async modifier we stop
+            // Look for all return statements, but if we find a new node that can have the async modifier we
+            // stop
             // because that will have its own diagnostic and fix, if applicable
             var returns = node.DescendantNodes(n =>
                     n == node || !IsAsyncSupportingFunctionSyntax(n)
@@ -347,7 +352,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
         }
 
         // Workaround for https://github.com/dotnet/roslyn/issues/43950
-        // Copied from https://github.com/dotnet/roslyn-analyzers/blob/f24a5b42c85be6ee572f3a93bef223767fbefd75/src/Utilities/Workspaces/SyntaxGeneratorExtensions.cs#L68-L74
+        // Copied from
+        // https://github.com/dotnet/roslyn-analyzers/blob/f24a5b42c85be6ee572f3a93bef223767fbefd75/src/Utilities/Workspaces/SyntaxGeneratorExtensions.cs#L68-L74
         private static SyntaxNode TypeExpressionForStaticMemberAccess(
             SyntaxGenerator generator,
             INamedTypeSymbol typeSymbol

@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// An <see cref="IResult"/> that on execution will write an object to the response
 /// with Conflict (409) status code.
 /// </summary>
-/// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+/// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+// body.</typeparam>
 public sealed class Conflict<TValue>
     : IResult,
         IEndpointMetadataProvider,

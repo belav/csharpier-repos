@@ -16,7 +16,8 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.MainDialog
 {
     /// <summary>
-    /// View model used to represent and display the inheritance graph as a tree. This tree is constructed by breadth first searching.
+    /// View model used to represent and display the inheritance graph as a tree. This tree is
+    // constructed by breadth first searching.
     /// If one type is the common base type of several other types, it will be showed multiple time.
     /// </summary>
     internal class BaseTypeTreeNodeViewModel : SymbolViewModel<INamedTypeSymbol>
@@ -41,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
             : base(node, glyphService) { }
 
         /// <summary>
-        /// Use breadth first search to create the inheritance tree. Only non-generated types in the solution will be included in the tree.
+        /// Use breadth first search to create the inheritance tree. Only non-generated types in the
+        // solution will be included in the tree.
         /// </summary>
         public static BaseTypeTreeNodeViewModel CreateBaseTypeTree(
             IGlyphService glyphService,

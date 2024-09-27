@@ -53,8 +53,10 @@ namespace System.Linq.Parallel
         }
 
         /// <summary>
-        /// A variant of WrapEnumerable that accepts a QueryOperatorEnumerator{,} instead of an IEnumerable{}.
-        /// The code duplication is necessary to avoid extra virtual method calls that would otherwise be needed to
+        /// A variant of WrapEnumerable that accepts a QueryOperatorEnumerator{,} instead of an
+        // IEnumerable{}.
+        /// The code duplication is necessary to avoid extra virtual method calls that would otherwise be
+        // needed to
         /// convert the QueryOperatorEnumerator{,} to an IEnumerator{}.
         /// </summary>
         internal static IEnumerable<TElement> WrapQueryEnumerator<TElement, TIgnoreKey>(
@@ -91,12 +93,16 @@ namespace System.Linq.Parallel
         }
 
         /// <summary>
-        /// Accepts an exception, wraps it as if it was crossing the parallel->sequential boundary, and throws the
-        /// wrapped exception. In sequential fallback cases, we use this method to throw exceptions that are consistent
+        /// Accepts an exception, wraps it as if it was crossing the parallel->sequential boundary, and
+        // throws the
+        /// wrapped exception. In sequential fallback cases, we use this method to throw exceptions that are
+        // consistent
         /// with exceptions thrown by PLINQ when the query is executed by worker tasks.
         ///
-        /// The exception will be wrapped into an AggregateException, except for the case when the query is being
-        /// legitimately cancelled, in which case we will propagate the CancellationException with the appropriate
+        /// The exception will be wrapped into an AggregateException, except for the case when the query is
+        // being
+        /// legitimately cancelled, in which case we will propagate the CancellationException with the
+        // appropriate
         /// token.
         /// </summary>
         internal static void ThrowOCEorAggregateException(

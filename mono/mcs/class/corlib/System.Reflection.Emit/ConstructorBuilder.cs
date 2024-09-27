@@ -278,7 +278,7 @@ namespace System.Reflection.Emit
 
             if (permissions != null)
             {
-                /* Check duplicate actions */
+/* Check duplicate actions */
                 foreach (RefEmitPermissionSet set in permissions)
                     if (set.action == action)
                         throw new InvalidOperationException(

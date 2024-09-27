@@ -41,7 +41,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return chain of in-scope namespace nodes for nodes of type Element.  Nodes in the chain might not
+        /// Return chain of in-scope namespace nodes for nodes of type Element.  Nodes in the chain might
+        // not
         /// have this element as their parent.  Since the xmlns:xml namespace node is always in scope, this
         /// method will never return 0 if the specified node is an element.
         /// </summary>
@@ -184,7 +185,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return a location integer that can be easily compared with other locations from the same document
+        /// Return a location integer that can be easily compared with other locations from the same
+        // document
         /// in order to determine the relative document order of two nodes.
         /// </summary>
         public static int GetLocation(XPathNode[] pageNode, int idxNode)
@@ -196,8 +198,10 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return the first element child of the specified node that has the specified name.  If no such child exists,
-        /// then do not set pageNode or idxNode and return false.  Assume that the localName has been atomized with respect
+        /// Return the first element child of the specified node that has the specified name.  If no such
+        // child exists,
+        /// then do not set pageNode or idxNode and return false.  Assume that the localName has been
+        // atomized with respect
         /// to this document's name table, but not the namespaceName.
         /// </summary>
         public static bool GetElementChild(
@@ -233,9 +237,11 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return a following sibling element of the specified node that has the specified name.  If no such
+        /// Return a following sibling element of the specified node that has the specified name.  If no
+        // such
         /// sibling exists, or if the node is not content-typed, then do not set pageNode or idxNode and
-        /// return false.  Assume that the localName has been atomized with respect to this document's name table,
+        /// return false.  Assume that the localName has been atomized with respect to this document's name
+        // table,
         /// but not the namespaceName.
         /// </summary>
         public static bool GetElementSibling(
@@ -249,7 +255,8 @@ namespace MS.Internal.Xml.Cache
             int idx = idxNode;
             Debug.Assert(pageNode != null && idxNode != 0, "Cannot pass null argument(s)");
 
-            // Elements should not be returned as "siblings" of attributes (namespaces don't link to elements, so don't need to check them)
+            // Elements should not be returned as "siblings" of attributes (namespaces don't link to elements,
+            // so don't need to check them)
             if (page[idx].NodeType != XPathNodeType.Attribute)
             {
                 while (true)
@@ -272,7 +279,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return the first child of the specified node that has the specified type (must be a content type).  If no such
+        /// Return the first child of the specified node that has the specified type (must be a content
+        // type).  If no such
         /// child exists, then do not set pageNode or idxNode and return false.
         /// </summary>
         public static bool GetContentChild(
@@ -352,7 +360,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return the first preceding sibling of the specified node.  If no such sibling exists, then do not set
+        /// Return the first preceding sibling of the specified node.  If no such sibling exists, then do
+        // not set
         /// pageNode or idxNode and return false.
         /// </summary>
         public static bool GetPreviousContentSibling(ref XPathNode[] pageNode, ref int idxNode)
@@ -418,7 +427,8 @@ namespace MS.Internal.Xml.Cache
         /// <summary>
         /// Return a previous sibling element of the specified node that has the specified name.  If no such
         /// sibling exists, or if the node is not content-typed, then do not set pageNode or idxNode and
-        /// return false.  Assume that the localName has been atomized with respect to this document's name table,
+        /// return false.  Assume that the localName has been atomized with respect to this document's name
+        // table,
         /// but not the namespaceName.
         /// </summary>
         public static bool GetPreviousElementSibling(
@@ -483,8 +493,10 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return the attribute of the specified node that has the specified name.  If no such attribute exists,
-        /// then do not set pageNode or idxNode and return false.  Assume that the localName has been atomized with respect
+        /// Return the attribute of the specified node that has the specified name.  If no such attribute
+        // exists,
+        /// then do not set pageNode or idxNode and return false.  Assume that the localName has been
+        // atomized with respect
         /// to this document's name table, but not the namespaceName.
         /// </summary>
         public static bool GetAttribute(
@@ -518,7 +530,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Get the next non-virtual (not collapsed text, not namespaces) node that follows the specified node in document order.
+        /// Get the next non-virtual (not collapsed text, not namespaces) node that follows the specified
+        // node in document order.
         /// If no such node exists, then do not set pageNode or idxNode and return false.
         /// </summary>
         public static bool GetFollowing(ref XPathNode[] pageNode, ref int idxNode)
@@ -546,11 +559,14 @@ namespace MS.Internal.Xml.Cache
 
         /// <summary>
         /// Get the next element node that:
-        ///   1. Follows the current node in document order (includes descendants, unlike XPath following axis)
-        ///   2. Precedes the ending node in document order (if pageEnd is null, then all following nodes in the document are considered)
+        ///   1. Follows the current node in document order (includes descendants, unlike XPath following
+        // axis)
+        ///   2. Precedes the ending node in document order (if pageEnd is null, then all following nodes in
+        // the document are considered)
         ///   3. Has the specified QName
         /// If no such element exists, then do not set pageCurrent or idxCurrent and return false.
-        /// Assume that the localName has been atomized with respect to this document's name table, but not the namespaceName.
+        /// Assume that the localName has been atomized with respect to this document's name table, but not
+        // the namespaceName.
         /// </summary>
         public static bool GetElementFollowing(
             ref XPathNode[] pageCurrent,
@@ -658,8 +674,10 @@ namespace MS.Internal.Xml.Cache
 
         /// <summary>
         /// Get the next node that:
-        ///   1. Follows the current node in document order (includes descendants, unlike XPath following axis)
-        ///   2. Precedes the ending node in document order (if pageEnd is null, then all following nodes in the document are considered)
+        ///   1. Follows the current node in document order (includes descendants, unlike XPath following
+        // axis)
+        ///   2. Precedes the ending node in document order (if pageEnd is null, then all following nodes in
+        // the document are considered)
         ///   3. Has the specified XPathNodeType (but Attributes and Namespaces never match)
         /// If no such node exists, then do not set pageCurrent or idxCurrent and return false.
         /// </summary>
@@ -730,9 +748,11 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Scan all nodes that follow the current node in document order, but precede the ending node in document order.
+        /// Scan all nodes that follow the current node in document order, but precede the ending node in
+        // document order.
         /// Return two types of nodes with non-null text:
-        ///   1. Element parents of collapsed text nodes (since it is the element parent that has the collapsed text)
+        ///   1. Element parents of collapsed text nodes (since it is the element parent that has the
+        // collapsed text)
         ///   2. Non-collapsed text nodes
         /// If no such node exists, then do not set pageCurrent or idxCurrent and return false.
         /// </summary>
@@ -804,8 +824,10 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Get the next non-virtual (not collapsed text, not namespaces) node that follows the specified node in document order,
-        /// but is not a descendant.  If no such node exists, then do not set pageNode or idxNode and return false.
+        /// Get the next non-virtual (not collapsed text, not namespaces) node that follows the specified
+        // node in document order,
+        /// but is not a descendant.  If no such node exists, then do not set pageNode or idxNode and return
+        // false.
         /// </summary>
         public static bool GetNonDescendant(ref XPathNode[] pageNode, ref int idxNode)
         {

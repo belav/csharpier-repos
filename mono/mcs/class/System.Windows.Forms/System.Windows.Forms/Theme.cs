@@ -240,10 +240,10 @@ namespace System.Windows.Forms
             }
         }
 
-        /* OS Feature support */
+/* OS Feature support */
         public abstract Version Version { get; }
 
-        /* Default properties */
+/* Default properties */
         public virtual Color ColorScrollBar
         {
             get { return SystemColors.ScrollBar; }
@@ -755,7 +755,8 @@ namespace System.Windows.Forms
         }
 
         #region Principal Theme Methods
-        // To let the theme now that a change of defaults (colors, etc) was detected and force a re-read (and possible recreation of cached resources)
+        // To let the theme now that a change of defaults (colors, etc) was detected and force a re-read
+        // (and possible recreation of cached resources)
         public abstract void ResetDefaults();
 
         // If the theme writes directly to a window instead of a device context
@@ -1139,7 +1140,9 @@ namespace System.Windows.Forms
 
         #region ScrollBar
         // Drawing
-        //public abstract void DrawScrollBar (Graphics dc, Rectangle area, ScrollBar bar, ref Rectangle thumb_pos, ref Rectangle first_arrow_area, ref Rectangle second_arrow_area, ButtonState first_arrow, ButtonState second_arrow, ref int scrollbutton_width, ref int scrollbutton_height, bool vert);
+        //public abstract void DrawScrollBar (Graphics dc, Rectangle area, ScrollBar bar, ref Rectangle
+        // thumb_pos, ref Rectangle first_arrow_area, ref Rectangle second_arrow_area, ButtonState first_arrow,
+        // ButtonState second_arrow, ref int scrollbutton_width, ref int scrollbutton_height, bool vert);
         public abstract void DrawScrollBar(Graphics dc, Rectangle clip_rectangle, ScrollBar bar);
 
         // Sizing

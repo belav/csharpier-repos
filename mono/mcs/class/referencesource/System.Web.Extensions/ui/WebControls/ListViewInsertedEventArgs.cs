@@ -35,7 +35,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets the exception (if any) that occurred during the operation. This property is read-only.</para>
+        ///    <para>Gets the exception (if any) that occurred during the operation. This property is
+        // read-only.</para>
         /// </devdoc>
         public Exception Exception
         {
@@ -61,7 +62,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary Values
         {

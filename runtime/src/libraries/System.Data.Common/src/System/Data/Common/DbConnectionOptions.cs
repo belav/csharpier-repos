@@ -23,7 +23,8 @@ namespace System.Data.Common
         //     quote values using \{ and \}, only driver= and pwd= appear to generically allow quoting
         //     do not strip quotes from value, or add quotes except for driver keyword
         // OLEDB:
-        //     https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/connection-string-syntax#oledb-connection-string-syntax
+        //
+        // https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/connection-string-syntax#oledb-connection-string-syntax
         //     support == -> = in keywords
         //     last key-value pair wins
         //     quote values using \" or \'

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.IO;
 using System.Net.Http.Headers;
@@ -397,7 +398,8 @@ namespace System.Net.Http
             Assert.Null(length);
         }
 
-        // Also confirms content can be serialized multiple times if either buffered or involves a seekable Stream.
+        // Also confirms content can be serialized multiple times if either buffered or involves a seekable
+        // Stream.
         [Theory]
         [InlineData(false, true)]
         [InlineData(true, false)]
@@ -424,7 +426,8 @@ namespace System.Net.Http
             }
         }
 
-        // Also confirms content can be serialized multiple times if either buffered or involves a seekable Stream.
+        // Also confirms content can be serialized multiple times if either buffered or involves a seekable
+        // Stream.
         [Theory]
         [InlineData(false, true)]
         [InlineData(true, false)]
@@ -558,9 +561,11 @@ namespace System.Net.Http
         }
 
         // Unlike Stream.Null, this stream does not support seeking. Bit more like (say) a network stream or
-        // the EmptyReadStream introduced in .NET 5. Note: EmptyReadStream should never be visible to our code
+        // the EmptyReadStream introduced in .NET 5. Note: EmptyReadStream should never be visible to our
+        // code
         // because HttpContentMessageExtensions and HttpRequestMessageExtensions overwrite
-        // HttpResponseMessage.Content (or HttpRequestMessage.Content in one case) when creating an instance.
+        // HttpResponseMessage.Content (or HttpRequestMessage.Content in one case) when creating an
+        // instance.
         private class ReadOnlyStream : Stream
         {
             public override bool CanRead => true;

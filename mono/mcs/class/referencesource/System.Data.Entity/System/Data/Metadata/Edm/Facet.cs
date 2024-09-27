@@ -28,7 +28,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="facetDescription">The object describing this facet</param>
         /// <param name="value">The value of the facet</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is
+        // null</exception>
         private Facet(FacetDescription facetDescription, object value)
             : base(MetadataFlags.Readonly)
         {
@@ -44,7 +45,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="facetDescription">The object describing this facet</param>
         /// <param name="value">The value of the facet</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is
+        // null</exception>
         internal static Facet Create(FacetDescription facetDescription, object value)
         {
             return Create(facetDescription, value, false);
@@ -56,8 +58,10 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="facetDescription">The object describing this facet</param>
         /// <param name="value">The value of the facet</param>
-        /// <param name="bypassKnownValues">true to bypass caching and known values; false otherwise.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is null</exception>
+        /// <param name="bypassKnownValues">true to bypass caching and known values; false
+        // otherwise.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is
+        // null</exception>
         internal static Facet Create(
             FacetDescription facetDescription,
             object value,
@@ -166,7 +170,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Gets/Sets the value of the facet
         /// </summary>
-        /// <exception cref="System.InvalidOperationException">Thrown if the Facet instance is in ReadOnly state</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the Facet instance is in ReadOnly
+        // state</exception>
         [MetadataProperty(typeof(Object), false)]
         public Object Value
         {

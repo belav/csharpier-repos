@@ -331,7 +331,8 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
     [Fact]
     public async Task ErrorsDeserializingMalformedJson_AreReportedForModelsWithoutAnyValidationAttributes()
     {
-        // This test verifies that for a model with ModelMetadata.HasValidators = false, we continue to get an invalid ModelState + validation
+        // This test verifies that for a model with ModelMetadata.HasValidators = false, we continue to get
+        // an invalid ModelState + validation
         // errors from json serialization errors
         // Arrange
         var input = "{Id = \"This string is incomplete";
@@ -372,7 +373,8 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
     [Fact]
     public async Task JsonValidationErrors_AreReportedForModelsWithoutAnyValidationAttributes()
     {
-        // This test verifies that for a model with ModelMetadata.HasValidators = false, we continue to get an invalid ModelState + validation
+        // This test verifies that for a model with ModelMetadata.HasValidators = false, we continue to get
+        // an invalid ModelState + validation
         // errors from json serialization errors
         // Arrange
         var input = "{Id: \"0c92bb85-cfaf-4344-8a9d-f92e88716861\"}";
@@ -413,7 +415,8 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
     [Fact]
     public async Task ErrorsDeserializingMalformedXml_AreReportedForModelsWithoutAnyValidationAttributes()
     {
-        // This test verifies that for a model with ModelMetadata.HasValidators = false, we continue to get an invalid ModelState + validation
+        // This test verifies that for a model with ModelMetadata.HasValidators = false, we continue to get
+        // an invalid ModelState + validation
         // errors from json serialization errors
         // Arrange
         var input =

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -121,7 +122,8 @@ namespace Mono.Linker.Dataflow
             return new StackSlot(MultiValueLattice.Meet(a.Value, b.Value));
         }
 
-        // Merge stacks together. This may return the first stack, the stack length must be the same for the two stacks.
+        // Merge stacks together. This may return the first stack, the stack length must be the same for the
+        // two stacks.
         private static Stack<StackSlot> MergeStack(Stack<StackSlot> a, Stack<StackSlot> b)
         {
             if (a.Count != b.Count)
@@ -284,7 +286,8 @@ namespace Mono.Linker.Dataflow
         {
             MethodDefinition startingMethod = startingMethodIL.Method;
 
-            // Note that the default value of a hoisted local will be MultiValueLattice.Top, not UnknownValue.Instance.
+            // Note that the default value of a hoisted local will be MultiValueLattice.Top, not
+            // UnknownValue.Instance.
             // This ensures that there are no warnings for the "unassigned state" of a parameter.
             // Definite assignment should ensure that there is no way for this to be an analysis hole.
             var interproceduralState = InterproceduralStateLattice.Top;
@@ -923,7 +926,8 @@ namespace Mono.Linker.Dataflow
                     valueToStore.Value
                 );
 
-            // If the targetValue is MethodThisValue do nothing - it should never happen really, and if it does, there's nothing we can track there
+            // If the targetValue is MethodThisValue do nothing - it should never happen really, and if it does,
+            // there's nothing we can track there
         }
 
         private void ScanLdloc(
@@ -966,7 +970,8 @@ namespace Mono.Linker.Dataflow
                 case TypeReference typeReference
                     when ResolveToTypeDefinition(typeReference)
                         is TypeDefinition resolvedDefinition:
-                    // Note that Nullable types without a generic argument (i.e. Nullable<>) will be RuntimeTypeHandleValue / SystemTypeValue
+                    // Note that Nullable types without a generic argument (i.e. Nullable<>) will be
+                    // RuntimeTypeHandleValue / SystemTypeValue
                     if (
                         typeReference is IGenericInstance instance
                         && resolvedDefinition.IsTypeOf(WellKnownType.System_Nullable_T)
@@ -1058,13 +1063,16 @@ namespace Mono.Linker.Dataflow
         }
 
         /// <summary>
-        /// Handles storing the source value in a target <see cref="ReferenceValue"/> or MultiValue of ReferenceValues.
+        /// Handles storing the source value in a target <see cref="ReferenceValue"/> or MultiValue of
+        // ReferenceValues.
         /// </summary>
-        /// <param name="target">A set of <see cref="ReferenceValue"/> that a value is being stored into</param>
+        /// <param name="target">A set of <see cref="ReferenceValue"/> that a value is being stored
+        // into</param>
         /// <param name="source">The value to store</param>
         /// <param name="method">The method body that contains the operation causing the store</param>
         /// <param name="operation">The instruction causing the store</param>
-        /// <exception cref="LinkerFatalErrorException">Throws if <paramref name="target"/> is not a valid target for an indirect store.</exception>
+        /// <exception cref="LinkerFatalErrorException">Throws if <paramref name="target"/> is not a valid
+        // target for an indirect store.</exception>
         protected void StoreInReference(
             MultiValue target,
             MultiValue source,
@@ -1098,7 +1106,8 @@ namespace Mono.Linker.Dataflow
                         HandleStoreParameter(method, parameterValue, operation, source);
                         break;
                     case MethodReturnValue methodReturnValue:
-                        // Ref returns don't have special ReferenceValue values, so assume if the target here is a MethodReturnValue then it must be a ref return value
+                        // Ref returns don't have special ReferenceValue values, so assume if the target here is a
+                        // MethodReturnValue then it must be a ref return value
                         HandleStoreMethodReturnValue(method, methodReturnValue, operation, source);
                         break;
                     case FieldValue fieldValue:
@@ -1127,7 +1136,8 @@ namespace Mono.Linker.Dataflow
                         break;
                     default:
                         // These cases should only be refs to array elements
-                        // References to array elements are not yet tracked and since we don't allow annotations on arrays, they won't cause problems
+                        // References to array elements are not yet tracked and since we don't allow annotations on arrays,
+                        // they won't cause problems
                         break;
                 }
             }
@@ -1224,7 +1234,8 @@ namespace Mono.Linker.Dataflow
                     if (value is not FieldValue fieldValue)
                         continue;
 
-                    // Incomplete handling of ref fields -- if we're storing a reference to a value, pretend it's just the value
+                    // Incomplete handling of ref fields -- if we're storing a reference to a value, pretend it's just
+                    // the value
                     MultiValue valueToStore = DereferenceValue(
                         valueToStoreSlot.Value,
                         locals,
@@ -1345,7 +1356,8 @@ namespace Mono.Linker.Dataflow
         }
 
         /// <summary>
-        /// Assigns a MethodParameterValue to the location of each parameter passed by reference. (i.e. assigns the value to x when passing `ref x` as a parameter)
+        /// Assigns a MethodParameterValue to the location of each parameter passed by reference. (i.e.
+        // assigns the value to x when passing `ref x` as a parameter)
         /// </summary>
         protected void AssignRefAndOutParameters(
             MethodBody callingMethodBody,
@@ -1495,7 +1507,10 @@ namespace Mono.Linker.Dataflow
             out MultiValue methodReturnValue
         );
 
-        // Limit tracking array values to 32 values for performance reasons. There are many arrays much longer than 32 elements in .NET, but the interesting ones for trimming are nearly always less than 32 elements.
+        // Limit tracking array values to 32 values for performance reasons. There are many arrays much
+        // longer than 32 elements in .NET, but the interesting ones for trimming are nearly always less
+        // than
+        // 32 elements.
         private const int MaxTrackedArrayValues = 32;
 
         private static void MarkArrayValuesAsUnknown(ArrayValue arrValue, int curBasicBlock)

@@ -657,7 +657,8 @@ namespace System.Net.Http.Functional.Tests
             }
 
             // Create our failing proxy server.
-            // Bind a port to reserve it, but don't start listening yet. The first Connect() should fail and cause a fail-over.
+            // Bind a port to reserve it, but don't start listening yet. The first Connect() should fail and
+            // cause a fail-over.
             using Socket failingProxyServer = new Socket(
                 AddressFamily.InterNetwork,
                 SocketType.Stream,
@@ -721,7 +722,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient client = CreateHttpClient(handler);
                     handler.Proxy = httpWindowsProxy;
 
-                    // First request is expected to hit the failing proxy server, then failover to the succeeding proxy server.
+                    // First request is expected to hit the failing proxy server, then failover to the succeeding proxy
+                    // server.
                     Assert.Equal("foo", await client.GetStringAsync(uri));
 
                     // Second request should start directly at the succeeding proxy server.
@@ -851,7 +853,8 @@ namespace System.Net.Http.Functional.Tests
         [MemberData(nameof(DestinationHost_MemberData))]
         public async Task ProxyTunnelRequest_PortSpecified_NotStrippedOffInUri(string host)
         {
-            // Https proxy request will use CONNECT tunnel, even the default 443 port is specified, it will not be stripped off.
+            // Https proxy request will use CONNECT tunnel, even the default 443 port is specified, it will not
+            // be stripped off.
             string requestTarget = $"{host}:443";
             string addressUri = $"https://{host}/";
             bool connectionAccepted = false;

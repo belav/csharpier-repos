@@ -14,10 +14,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     <para>
 ///         This interface is used during model creation and allows the metadata to be modified.
-///         Once the model is built, <see cref="IModel" /> represents a read-only view of the same metadata.
+///         Once the model is built, <see cref="IModel" /> represents a read-only view of the same
+// metadata.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072", Justification = "TODO")]
@@ -29,7 +31,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     new IConventionModelBuilder Builder { get; }
 
     /// <summary>
-    ///     Prevents conventions from being executed immediately when a metadata aspect is modified. All the delayed conventions
+    ///     Prevents conventions from being executed immediately when a metadata aspect is modified. All
+    // the delayed conventions
     ///     will be executed after the returned object is disposed.
     /// </summary>
     /// <remarks>
@@ -43,12 +46,15 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     in this model.
     /// </summary>
     /// <remarks>
-    ///     Note that individual entity types can override this access mode, and individual properties of
+    ///     Note that individual entity types can override this access mode, and individual properties
+    // of
     ///     entity types can override the access mode set on the entity type. The value set here will
     ///     be used for any property for which no override has been specified.
     /// </remarks>
-    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null"
+    // /> to clear the mode set.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     PropertyAccessMode? SetPropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
@@ -58,15 +64,18 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyModel.GetPropertyAccessMode" />.
     /// </summary>
-    /// <returns>The configuration source for <see cref="IReadOnlyModel.GetPropertyAccessMode" />.</returns>
+    /// <returns>The configuration source for <see cref="IReadOnlyModel.GetPropertyAccessMode"
+    // />.</returns>
     ConfigurationSource? GetPropertyAccessModeConfigurationSource();
 
     /// <summary>
-    ///     Sets the default change tracking strategy to use for entities in the model. This strategy indicates how the
+    ///     Sets the default change tracking strategy to use for entities in the model. This strategy
+    // indicates how the
     ///     context detects changes to properties for an instance of an entity type.
     /// </summary>
     /// <param name="changeTrackingStrategy">The strategy to use.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     ChangeTrackingStrategy? SetChangeTrackingStrategy(
         ChangeTrackingStrategy? changeTrackingStrategy,
@@ -74,20 +83,24 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     );
 
     /// <summary>
-    ///     Returns the configuration source for <see cref="IReadOnlyModel.GetChangeTrackingStrategy" />.
+    ///     Returns the configuration source for <see cref="IReadOnlyModel.GetChangeTrackingStrategy"
+    // />.
     /// </summary>
-    /// <returns>The configuration source for <see cref="IReadOnlyModel.GetChangeTrackingStrategy" />.</returns>
+    /// <returns>The configuration source for <see cref="IReadOnlyModel.GetChangeTrackingStrategy"
+    // />.</returns>
     ConfigurationSource? GetChangeTrackingStrategyConfigurationSource();
 
     /// <summary>
     ///     Adds a state entity type of default type to the model.
     /// </summary>
     /// <remarks>
-    ///     Shadow entities are not currently supported in a model that is used at runtime with a <see cref="DbContext" />.
+    ///     Shadow entities are not currently supported in a model that is used at runtime with a <see
+    // cref="DbContext" />.
     ///     Therefore, shadow state entity types will only exist in migration model snapshots, etc.
     /// </remarks>
     /// <param name="name">The name of the entity to be added.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddEntityType(string name, bool fromDataAnnotation = false);
 
@@ -95,7 +108,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Adds an entity type to the model.
     /// </summary>
     /// <param name="type">The CLR class that is used to represent instances of the entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddEntityType(
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
@@ -106,12 +120,15 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Adds a shared type entity type to the model.
     /// </summary>
     /// <remarks>
-    ///     Shared type entity type is an entity type which can share CLR type with other types in the model but has
+    ///     Shared type entity type is an entity type which can share CLR type with other types in the
+    // model but has
     ///     a unique name and always identified by the name.
     /// </remarks>
     /// <param name="name">The name of the entity to be added.</param>
-    /// <param name="clrType">The CLR class that is used to represent instances of the entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="clrType">The CLR class that is used to represent instances of the entity
+    // type.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddEntityType(
         string name,
@@ -125,7 +142,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     /// <param name="name">The name of the entity type to be added.</param>
     /// <param name="definingNavigationName">The defining navigation.</param>
     /// <param name="definingEntityType">The defining entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddEntityType(
         string name,
@@ -137,10 +155,12 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     /// <summary>
     ///     Adds an owned entity type with a defining navigation to the model.
     /// </summary>
-    /// <param name="type">The CLR class that is used to represent instances of this entity type.</param>
+    /// <param name="type">The CLR class that is used to represent instances of this entity
+    // type.</param>
     /// <param name="definingNavigationName">The defining navigation.</param>
     /// <param name="definingEntityType">The defining entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddEntityType(
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
@@ -153,11 +173,13 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Adds an owned entity type of default type to the model.
     /// </summary>
     /// <remarks>
-    ///     Shadow entities are not currently supported in a model that is used at runtime with a <see cref="DbContext" />.
+    ///     Shadow entities are not currently supported in a model that is used at runtime with a <see
+    // cref="DbContext" />.
     ///     Therefore, shadow state entity types will only exist in migration model snapshots, etc.
     /// </remarks>
     /// <param name="name">The name of the entity to be added.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddOwnedEntityType(string name, bool fromDataAnnotation = false);
 
@@ -165,7 +187,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Adds an owned entity type to the model.
     /// </summary>
     /// <param name="type">The CLR class that is used to represent instances of the entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddOwnedEntityType(
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
@@ -176,12 +199,15 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Adds an owned shared type entity type to the model.
     /// </summary>
     /// <remarks>
-    ///     Shared type entity type is an entity type which can share CLR type with other types in the model but has
+    ///     Shared type entity type is an entity type which can share CLR type with other types in the
+    // model but has
     ///     a unique name and always identified by the name.
     /// </remarks>
     /// <param name="name">The name of the entity to be added.</param>
-    /// <param name="clrType">The CLR class that is used to represent instances of the entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="clrType">The CLR class that is used to represent instances of the entity
+    // type.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new entity type.</returns>
     IConventionEntityType? AddOwnedEntityType(
         string name,
@@ -190,7 +216,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     );
 
     /// <summary>
-    ///     Gets the entity with the given name. Returns <see langword="null" /> if no entity type with the given name is found
+    ///     Gets the entity with the given name. Returns <see langword="null" /> if no entity type with
+    // the given name is found
     ///     or the given CLR type is being used by shared type entity type
     ///     or the entity type has a defining navigation.
     /// </summary>
@@ -200,7 +227,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
 
     /// <summary>
     ///     Gets the entity type for the given name, defining navigation name
-    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is found.
+    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is
+    // found.
     /// </summary>
     /// <param name="name">The name of the entity type to find.</param>
     /// <param name="definingNavigationName">The defining navigation of the entity type to find.</param>
@@ -213,7 +241,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     );
 
     /// <summary>
-    ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no entity type with the given name is found.
+    ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no
+    // entity type with the given name is found.
     /// </summary>
     /// <param name="type">The type to find the corresponding entity type for.</param>
     /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
@@ -222,7 +251,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
 
     /// <summary>
     ///     Gets the entity type for the given name, defining navigation name
-    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is found.
+    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is
+    // found.
     /// </summary>
     /// <param name="type">The type of the entity type to find.</param>
     /// <param name="definingNavigationName">The defining navigation of the entity type to find.</param>
@@ -240,7 +270,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Removes an entity type from the model.
     /// </summary>
     /// <param name="entityType">The entity type to be removed.</param>
-    /// <returns>The removed entity type, or <see langword="null" /> if the entity type was not found.</returns>
+    /// <returns>The removed entity type, or <see langword="null" /> if the entity type was not
+    // found.</returns>
     IConventionEntityType? RemoveEntityType(IConventionEntityType entityType);
 
     /// <summary>
@@ -275,7 +306,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Removes an entity type with the given type, defining navigation name
     ///     and the defining entity type.
     /// </summary>
-    /// <param name="type">The CLR class that is used to represent instances of this entity type.</param>
+    /// <param name="type">The CLR class that is used to represent instances of this entity
+    // type.</param>
     /// <param name="definingNavigationName">The defining navigation.</param>
     /// <param name="definingEntityType">The defining entity type.</param>
     /// <returns>The entity type that was removed.</returns>
@@ -304,7 +336,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     /// </summary>
     /// <param name="type">The base type.</param>
     /// <param name="condition">An optional condition for filtering entity types.</param>
-    /// <returns>List of entity types corresponding to the least derived types from the given one.</returns>
+    /// <returns>List of entity types corresponding to the least derived types from the given
+    // one.</returns>
     new IEnumerable<IConventionEntityType> FindLeastDerivedEntityTypes(
         Type type,
         Func<IReadOnlyEntityType, bool>? condition = null
@@ -318,7 +351,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     should be configured as shared type entity type.
     /// </summary>
     /// <param name="type">The type of the entity type that should be shared.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     void AddShared(Type type, bool fromDataAnnotation = false);
 
     /// <summary>
@@ -340,11 +374,13 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ConfigurationSource? FindIsSharedConfigurationSource(Type type);
 
     /// <summary>
-    ///     Marks the given entity type as owned, indicating that when discovered entity types using the given type
+    ///     Marks the given entity type as owned, indicating that when discovered entity types using the
+    // given type
     ///     should be configured as owned.
     /// </summary>
     /// <param name="type">The type of the entity type that should be owned.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     void AddOwned(Type type, bool fromDataAnnotation = false);
 
     /// <summary>
@@ -356,7 +392,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     string? RemoveOwned(Type type);
 
     /// <summary>
-    ///     Returns a value indicating whether the entity types using the given type should be configured
+    ///     Returns a value indicating whether the entity types using the given type should be
+    // configured
     ///     as owned types when discovered.
     /// </summary>
     /// <param name="type">The type of the entity type that could be owned.</param>
@@ -382,7 +419,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Marks the given entity type name as ignored.
     /// </summary>
     /// <param name="typeName">The name of the entity type to be ignored.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The name of the ignored entity type.</returns>
     string? AddIgnored(string typeName, bool fromDataAnnotation = false);
 
@@ -390,7 +428,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
     ///     Marks the given entity type as ignored.
     /// </summary>
     /// <param name="type">The entity type to be ignored.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The name of the ignored entity type.</returns>
     string? AddIgnored(Type type, bool fromDataAnnotation = false);
 
@@ -447,7 +486,8 @@ public interface IConventionModel : IReadOnlyModel, IConventionAnnotatable
 
     /// <summary>
     ///     Forces post-processing on the model such that it is ready for use by the runtime. This post-
-    ///     processing happens automatically when using <see cref="DbContext.OnModelCreating" />; this method allows it to be run
+    ///     processing happens automatically when using <see cref="DbContext.OnModelCreating" />; this
+    // method allows it to be run
     ///     explicitly in cases where the automatic execution is not possible.
     /// </summary>
     /// <returns>The finalized model.</returns>

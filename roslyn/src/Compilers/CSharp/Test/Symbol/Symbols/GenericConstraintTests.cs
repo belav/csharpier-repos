@@ -355,7 +355,8 @@ class C1 : A1<C1.C2> // invalid
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (7,7): error CS0311: The type 'C1.C2' cannot be used as type parameter 'T' in the generic type or method 'A1<T>'. There is no implicit reference conversion from 'C1.C2' to 'A2'.
+                    // (7,7): error CS0311: The type 'C1.C2' cannot be used as type parameter 'T' in the generic type or
+                    // method 'A1<T>'. There is no implicit reference conversion from 'C1.C2' to 'A2'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "C1")
                         .WithArguments("A1<T>", "A2", "T", "C1.C2")
                         .WithLocation(7, 7)
@@ -380,7 +381,8 @@ class C1 : A1<C1.C2> // invalid
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,7): error CS0311: The type 'C1.C2' cannot be used as type parameter 'T' in the generic type or method 'A1<T>'. There is no implicit reference conversion from 'C1.C2' to 'A1<C1.C2>.A2'.
+                    // (9,7): error CS0311: The type 'C1.C2' cannot be used as type parameter 'T' in the generic type or
+                    // method 'A1<T>'. There is no implicit reference conversion from 'C1.C2' to 'A1<C1.C2>.A2'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "C1")
                         .WithArguments("A1<T>", "A1<C1.C2>.A2", "T", "C1.C2")
                         .WithLocation(9, 7)
@@ -415,7 +417,8 @@ public class Gen<T> where T : new() { public T t;}
             );
 
             comp2.VerifyDiagnostics(
-                // (5,26): error CS0310: 'PrivateCtorClass' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Gen<T>'
+                // (5,26): error CS0310: 'PrivateCtorClass' must be a non-abstract type with a public parameterless
+                // constructor in order to use it as parameter 'T' in the generic type or method 'Gen<T>'
                 Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "PrivateCtorClass")
                     .WithArguments("Gen<T>", "T", "PrivateCtorClass")
                     .WithLocation(5, 26)
@@ -439,8 +442,10 @@ public class Gen<T> where T : InterfaceConstraint
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,63): error CS0311: The type 'ViolateInterfaceConstraint' cannot be used as type parameter 'T' in the generic type or method 'Gen<T>'.
-                    //                       There is no implicit reference conversion from 'ViolateInterfaceConstraint' to 'InterfaceConstraint'.
+                    // (6,63): error CS0311: The type 'ViolateInterfaceConstraint' cannot be used as type parameter 'T'
+                    // in the generic type or method 'Gen<T>'.
+                    //                       There is no implicit reference conversion from 'ViolateInterfaceConstraint'
+                    // to 'InterfaceConstraint'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Param")
                         .WithArguments(
                             "Gen<T>",
@@ -484,32 +489,38 @@ unsafe interface I
                     Diagnostic(ErrorCode.ERR_BadAccess, "B2")
                         .WithArguments("A<int>.B2")
                         .WithLocation(13, 22),
-                    // (14,31): error CS0453: The type 'A<int>.B1[]' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (14,31): error CS0453: The type 'A<int>.B1[]' must be a non-nullable value type in order to use
+                    // it as parameter 'T' in the generic type or method 'A<T>'
                     //     void M7(A<A<int>.B1[]>.B1 o);
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "o")
                         .WithArguments("A<T>", "T", "A<int>.B1[]")
                         .WithLocation(14, 31),
-                    // (9,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('A<string>.B1')
+                    // (9,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('A<string>.B1')
                     //     void M2(A<string>.B1** o);
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "o")
                         .WithArguments("A<string>.B1")
                         .WithLocation(9, 28),
-                    // (9,28): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (9,28): error CS0453: The type 'string' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     //     void M2(A<string>.B1** o);
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "o")
                         .WithArguments("A<T>", "T", "string")
                         .WithLocation(9, 28),
-                    // (10,30): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('A<A<int>.B2>.B1')
+                    // (10,30): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('A<A<int>.B2>.B1')
                     //     void M3(A<A<int>.B2>.B1* o);
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "o")
                         .WithArguments("A<A<int>.B2>.B1")
                         .WithLocation(10, 30),
-                    // (11,28): error CS0453: The type 'A<int>[]' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (11,28): error CS0453: The type 'A<int>[]' must be a non-nullable value type in order to use it
+                    // as parameter 'T' in the generic type or method 'A<T>'
                     //     void M4(A<A<int>[]>.B1 o);
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "o")
                         .WithArguments("A<T>", "T", "A<int>[]")
                         .WithLocation(11, 28),
-                    // (12,30): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (12,30): error CS0453: The type 'string' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     //     void M5(A<string>.B1[][] o);
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "o")
                         .WithArguments("A<T>", "T", "string")
@@ -519,7 +530,8 @@ unsafe interface I
                     Diagnostic(ErrorCode.ERR_BadTypeArgument, "o")
                         .WithArguments("A<int>*")
                         .WithLocation(8, 27),
-                    // (8,27): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('A<int>')
+                    // (8,27): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('A<int>')
                     //     void M1(A<A<int>*>.B1 o);
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "o")
                         .WithArguments("A<int>")
@@ -633,27 +645,33 @@ class C : I<int, object>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (8,7): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T, U>'
+                    // (8,7): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'I<T, U>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C")
                         .WithArguments("I<T, U>", "T", "int")
                         .WithLocation(8, 7),
-                    // (8,7): error CS0453: The type 'object' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'I<T, U>'
+                    // (8,7): error CS0453: The type 'object' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'I<T, U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C")
                         .WithArguments("I<T, U>", "U", "object")
                         .WithLocation(8, 7),
-                    // (10,10): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T, U>'
+                    // (10,10): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T, U>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "I<int, object>")
                         .WithArguments("I<T, U>", "T", "int")
                         .WithLocation(10, 10),
-                    // (10,10): error CS0453: The type 'object' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'I<T, U>'
+                    // (10,10): error CS0453: The type 'object' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'I<T, U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "I<int, object>")
                         .WithArguments("I<T, U>", "U", "object")
                         .WithLocation(10, 10),
-                    // (11,12): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T, U>'
+                    // (11,12): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T, U>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "I<int, object>")
                         .WithArguments("I<T, U>", "T", "int")
                         .WithLocation(11, 12),
-                    // (11,12): error CS0453: The type 'object' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'I<T, U>'
+                    // (11,12): error CS0453: The type 'object' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'I<T, U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "I<int, object>")
                         .WithArguments("I<T, U>", "U", "object")
                         .WithLocation(11, 12)
@@ -689,23 +707,28 @@ abstract class B : A.I<B>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (12,16): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'A.I<T>'
+                    // (12,16): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'A.I<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "B")
                         .WithArguments("A.I<T>", "T", "B")
                         .WithLocation(12, 16),
-                    // (14,10): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'A.I<T>'
+                    // (14,10): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'A.I<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "A.I<B>")
                         .WithArguments("A.I<T>", "T", "B")
                         .WithLocation(14, 10),
-                    // (15,12): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'A.I<T>'
+                    // (15,12): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'A.I<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "A.I<B>")
                         .WithArguments("A.I<T>", "T", "B")
                         .WithLocation(15, 12),
-                    // (16,12): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'A.I<T>'
+                    // (16,12): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'A.I<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "A.I<B>")
                         .WithArguments("A.I<T>", "T", "B")
                         .WithLocation(16, 12),
-                    // (17,13): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'A.I<T>'
+                    // (17,13): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'A.I<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "A.I<B>")
                         .WithArguments("A.I<T>", "T", "B")
                         .WithLocation(17, 13)
@@ -791,91 +814,113 @@ abstract class C6<T, U> : A<object>, I<object>, B.I<U>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (13,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (13,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C1")
                         .WithArguments("A<T>", "T", "T")
                         .WithLocation(13, 16),
-                    // (13,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (13,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C1")
                         .WithArguments("I<T>", "T", "T")
                         .WithLocation(13, 16),
-                    // (15,28): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (15,28): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "F")
                         .WithArguments("A<T>", "T", "U")
                         .WithLocation(15, 28),
-                    // (15,38): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (15,38): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "a")
                         .WithArguments("I<T>", "T", "U")
                         .WithLocation(15, 38),
-                    // (18,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (18,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C2")
                         .WithArguments("A<T>", "T", "T")
                         .WithLocation(18, 16),
-                    // (18,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (18,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C2")
                         .WithArguments("A<T>", "T", "T")
                         .WithLocation(18, 16),
-                    // (20,30): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (20,30): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "F")
                         .WithArguments("A<T>", "T", "U")
                         .WithLocation(20, 30),
-                    // (20,42): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (20,42): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "a")
                         .WithArguments("A<T>", "T", "U")
                         .WithLocation(20, 42),
-                    // (23,16): error CS0453: The type 'T' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B.C<U>'
+                    // (23,16): error CS0453: The type 'T' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B.C<U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C3")
                         .WithArguments("B.C<U>", "U", "T")
                         .WithLocation(23, 16),
-                    // (23,16): error CS0453: The type 'T' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B.I<U>'
+                    // (23,16): error CS0453: The type 'T' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B.I<U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C3")
                         .WithArguments("B.I<U>", "U", "T")
                         .WithLocation(23, 16),
-                    // (25,30): error CS0453: The type 'U' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B.C<U>'
+                    // (25,30): error CS0453: The type 'U' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B.C<U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "F")
                         .WithArguments("B.C<U>", "U", "U")
                         .WithLocation(25, 30),
-                    // (25,42): error CS0453: The type 'U' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B.I<U>'
+                    // (25,42): error CS0453: The type 'U' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B.I<U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "a")
                         .WithArguments("B.I<U>", "U", "U")
                         .WithLocation(25, 42),
-                    // (28,16): error CS0453: The type 'T' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B.C<U>'
+                    // (28,16): error CS0453: The type 'T' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B.C<U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C4")
                         .WithArguments("B.C<U>", "U", "T")
                         .WithLocation(28, 16),
-                    // (28,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (28,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C4")
                         .WithArguments("A<T>", "T", "T")
                         .WithLocation(28, 16),
-                    // (30,33): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (30,33): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "F")
                         .WithArguments("A<T>", "T", "U")
                         .WithLocation(30, 33),
-                    // (30,50): error CS0453: The type 'U' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B.C<U>'
+                    // (30,50): error CS0453: The type 'U' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B.C<U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "a")
                         .WithArguments("B.C<U>", "U", "U")
                         .WithLocation(30, 50),
-                    // (33,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (33,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C5")
                         .WithArguments("I<T>", "T", "T")
                         .WithLocation(33, 16),
-                    // (33,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (33,16): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "C5")
                         .WithArguments("A<T>", "T", "T")
                         .WithLocation(33, 16),
-                    // (35,31): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (35,31): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "F")
                         .WithArguments("A<T>", "T", "U")
                         .WithLocation(35, 31),
-                    // (35,44): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (35,44): error CS0452: The type 'U' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "a")
                         .WithArguments("I<T>", "T", "U")
                         .WithLocation(35, 44),
-                    // (38,16): error CS0453: The type 'U' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B.I<U>'
+                    // (38,16): error CS0453: The type 'U' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B.I<U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C6")
                         .WithArguments("B.I<U>", "U", "U")
                         .WithLocation(38, 16),
-                    // (40,54): error CS0452: The type 'Y' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (40,54): error CS0452: The type 'Y' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "b")
                         .WithArguments("A<T>", "T", "Y")
                         .WithLocation(40, 54)
@@ -913,23 +958,28 @@ partial class B<T> where T : struct
 }";
             CreateCompilation(source, parseOptions: TestOptions.RegularWithExtendedPartialMethods)
                 .VerifyDiagnostics(
-                    // (10,28): error CS0453: The type 'V' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (10,28): error CS0453: The type 'V' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "U")
                         .WithArguments("A<T>", "T", "V")
                         .WithLocation(10, 28),
-                    // (18,28): error CS0453: The type 'V' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (18,28): error CS0453: The type 'V' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "U")
                         .WithArguments("A<T>", "T", "V")
                         .WithLocation(18, 28),
-                    // (8,36): error CS0453: The type 'U' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (8,36): error CS0453: The type 'U' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "a")
                         .WithArguments("A<T>", "T", "U")
                         .WithLocation(8, 36),
-                    // (8,51): error CS0453: The type 'A<int>' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (8,51): error CS0453: The type 'A<int>' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "b")
                         .WithArguments("A<T>", "T", "A<int>")
                         .WithLocation(8, 51),
-                    // (19,34): error CS0453: The type 'U' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (19,34): error CS0453: The type 'U' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "M5")
                         .WithArguments("A<T>", "T", "U")
                         .WithLocation(11, 34)
@@ -988,7 +1038,8 @@ class C<T> where T : new()
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (8,11): error CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
+                    // (8,11): error CS0304: Cannot create an instance of the variable type 'T' because it does not have
+                    // the new() constraint
                     Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T()")
                         .WithArguments("T")
                         .WithLocation(8, 11)
@@ -1033,11 +1084,13 @@ class C<T> where T : class
 }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (1,7): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'C<T>'
+                    // (1,7): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'C<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "A")
                         .WithArguments("C<T>", "T", "int")
                         .WithLocation(1, 7),
-                    // (2,7): error CS0452: The type 'bool' must be a reference type in order to use it as parameter 'T' in the generic type or method 'C<T>'
+                    // (2,7): error CS0452: The type 'bool' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'C<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "B")
                         .WithArguments("C<T>", "T", "bool")
                         .WithLocation(2, 7),
@@ -1064,19 +1117,23 @@ class C<T> where T : class
 }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (1,7): error CS0453: The type 'int?' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (1,7): error CS0453: The type 'int?' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'I<T>'
                     // using A = C<I<int?>>;
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "A")
                         .WithArguments("I<T>", "T", "int?"),
-                    // (2,7): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type or method 'C<I<int>>.D1<U>'. There is no implicit reference conversion from 'object' to 'I<int>'.
+                    // (2,7): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type
+                    // or method 'C<I<int>>.D1<U>'. There is no implicit reference conversion from 'object' to 'I<int>'.
                     // using B1 = C<I<int>>.D1<object>;
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "B1")
                         .WithArguments("C<I<int>>.D1<U>", "I<int>", "U", "object"),
-                    // (3,7): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'C<T>'
+                    // (3,7): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'C<T>'
                     // using B2 = C<int>.D2<string>;
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "B2")
                         .WithArguments("C<T>", "T", "int"),
-                    // (3,7): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'U' in the generic type or method 'C<int>.D2<U>'
+                    // (3,7): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'U' in the generic type or method 'C<int>.D2<U>'
                     // using B2 = C<int>.D2<string>;
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "B2")
                         .WithArguments("C<int>.D2<U>", "U", "string"),
@@ -1122,33 +1179,41 @@ class C
 }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (11,18): error CS0452: The type 'float' must be a reference type in order to use it as parameter 'T' in the generic type or method 'B<T>'
+                    // (11,18): error CS0452: The type 'float' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'B<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "float")
                         .WithArguments("B<T>", "T", "float")
                         .WithLocation(11, 18),
-                    // (11,12): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (11,12): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B<float>()")
                         .WithLocation(11, 12),
-                    // (10,20): error CS0452: The type 'byte' must be a reference type in order to use it as parameter 'T' in the generic type or method 'B<T>'
+                    // (10,20): error CS0452: The type 'byte' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'B<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "F")
                         .WithArguments("B<T>", "T", "byte")
                         .WithLocation(10, 20),
-                    // (12,19): error CS0452: The type 'double' must be a reference type in order to use it as parameter 'T' in the generic type or method 'B<T>'
+                    // (12,19): error CS0452: The type 'double' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'B<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "o")
                         .WithArguments("B<T>", "T", "double")
                         .WithLocation(12, 19),
-                    // (8,14): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'B<T>'
+                    // (8,14): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'B<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
                         .WithArguments("B<T>", "T", "int")
                         .WithLocation(8, 14),
-                    // (8,8): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (8,8): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B<int>()")
                         .WithLocation(8, 8),
-                    // (9,22): error CS0452: The type 'short' must be a reference type in order to use it as parameter 'T' in the generic type or method 'B<T>'
+                    // (9,22): error CS0452: The type 'short' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'B<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "short")
                         .WithArguments("B<T>", "T", "short")
                         .WithLocation(9, 22),
-                    // (9,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (9,16): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new B<short>()")
                         .WithLocation(9, 16)
                 );
@@ -1172,11 +1237,13 @@ class B
 }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (4,31): error CS0453: The type 'object' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (4,31): error CS0453: The type 'object' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "object")
                         .WithArguments("A<T>", "T", "object")
                         .WithLocation(4, 31),
-                    // (8,31): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'B.F<T>(int)'
+                    // (8,31): error CS0453: The type 'string' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'B.F<T>(int)'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "F<string>")
                         .WithArguments("B.F<T>(int)", "T", "string")
                         .WithLocation(8, 31)
@@ -1195,7 +1262,8 @@ class B
 class C<T> where T : C<T> { }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (5,13): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'C<T>'. There is no implicit reference conversion from 'object' to 'C<object>'.
+                    // (5,13): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C<T>'. There is no implicit reference conversion from 'object' to 'C<object>'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "object")
                         .WithArguments("C<T>", "C<object>", "T", "object")
                         .WithLocation(5, 13)
@@ -1221,11 +1289,13 @@ interface IB
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (1,22): error CS0246: The type or namespace name 'A' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,22): error CS0246: The type or namespace name 'A' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A")
                         .WithArguments("A")
                         .WithLocation(1, 22),
-                    // (3,34): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
+                    // (3,34): error CS0246: The type or namespace name 'B' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B")
                         .WithArguments("B")
                         .WithLocation(3, 34),
@@ -1255,27 +1325,32 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (8,23): error CS0452: The type 'short' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (8,23): error CS0452: The type 'short' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T>'
                     //     event D<I<short>> E;
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "E")
                         .WithArguments("I<T>", "T", "short")
                         .WithLocation(8, 23),
-                    // (5,14): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (5,14): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'I<T>'
                     //     C(I<int> i) { }
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "i")
                         .WithArguments("I<T>", "T", "int")
                         .WithLocation(5, 14),
-                    // (6,13): error CS0452: The type 'byte' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (6,13): error CS0452: The type 'byte' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T>'
                     //     I<byte> P { get; set; }
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "P")
                         .WithArguments("I<T>", "T", "byte")
                         .WithLocation(6, 13),
-                    // (7,29): error CS0452: The type 'float' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (7,29): error CS0452: The type 'float' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T>'
                     //     I<double> this[I<float> index] { get { return null; } }
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "index")
                         .WithArguments("I<T>", "T", "float")
                         .WithLocation(7, 29),
-                    // (7,15): error CS0452: The type 'double' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (7,15): error CS0452: The type 'double' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T>'
                     //     I<double> this[I<float> index] { get { return null; } }
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "this")
                         .WithArguments("I<T>", "T", "double")
@@ -1303,14 +1378,16 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,21): error CS0452: The type 'long' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (6,21): error CS0452: The type 'long' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "long")
                         .WithArguments("I<T>", "T", "long")
                         .WithLocation(6, 21),
                     // (6,9): error CS0149: Method name expected
                     Diagnostic(ErrorCode.ERR_MethodNameExpected, "(delegate(I<long> o) { })")
                         .WithLocation(6, 9),
-                    // (7,13): error CS0452: The type 'short' must be a reference type in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (7,13): error CS0452: The type 'short' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "short")
                         .WithArguments("I<T>", "T", "short")
                         .WithLocation(7, 13),
@@ -1334,7 +1411,8 @@ class C
                 .VerifyDiagnostics(
                     // (4,15): error CS1642: Fixed size buffer fields may only be members of structs
                     Diagnostic(ErrorCode.ERR_FixedNotInStruct, "F").WithLocation(4, 15),
-                    // (4,19): error CS0310: 'C<T>' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'C<T>'
+                    // (4,19): error CS0310: 'C<T>' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'T' in the generic type or method 'C<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "C<T>")
                         .WithArguments("C<T>", "T", "C<T>")
                         .WithLocation(4, 19)
@@ -1427,11 +1505,13 @@ static class C
                     parseOptions: TestOptions.WithoutImprovedOverloadCandidates
                 )
                 .VerifyDiagnostics(
-                    // (7,9): error CS0310: 'I' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'C.E<T>(T)'
+                    // (7,9): error CS0310: 'I' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'C.E<T>(T)'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "i.E")
                         .WithArguments("C.E<T>(T)", "T", "I")
                         .WithLocation(7, 9),
-                    // (9,9): error CS0453: The type 'I' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C.F<T>(T)'
+                    // (9,9): error CS0453: The type 'I' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'C.F<T>(T)'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "i.F")
                         .WithArguments("C.F<T>(T)", "T", "I")
                         .WithLocation(9, 9)
@@ -1747,7 +1827,8 @@ class C
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "F")
                         .WithArguments("F")
                         .WithLocation(5, 25),
-                    // (6,12): error CS0304: Cannot create an instance of the variable type 'U' because it does not have the new() constraint
+                    // (6,12): error CS0304: Cannot create an instance of the variable type 'U' because it does not have
+                    // the new() constraint
                     Diagnostic(ErrorCode.ERR_NoNewTyvar, "new U(G())")
                         .WithArguments("U")
                         .WithLocation(6, 12),
@@ -2152,27 +2233,33 @@ class C<S, T, U, V, W>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (11,15): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a constraint for 'X'
+                    // (11,15): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a
+                    // constraint for 'X'
                     Diagnostic(ErrorCode.ERR_ConWithValCon, "X")
                         .WithArguments("X", "U")
                         .WithLocation(11, 15),
-                    // (16,14): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a constraint for 'X'
+                    // (16,14): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a
+                    // constraint for 'X'
                     Diagnostic(ErrorCode.ERR_ConWithValCon, "X")
                         .WithArguments("X", "U")
                         .WithLocation(16, 14),
-                    // (18,14): error CS0455: Type parameter 'X' inherits conflicting constraints 'A' and 'System.ValueType'
+                    // (18,14): error CS0455: Type parameter 'X' inherits conflicting constraints 'A' and
+                    // 'System.ValueType'
                     Diagnostic(ErrorCode.ERR_BaseConstraintConflict, "X")
                         .WithArguments("X", "A", "System.ValueType")
                         .WithLocation(18, 14),
-                    // (21,22): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a constraint for 'X'
+                    // (21,22): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a
+                    // constraint for 'X'
                     Diagnostic(ErrorCode.ERR_ConWithValCon, "X")
                         .WithArguments("X", "U")
                         .WithLocation(21, 22),
-                    // (26,13): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a constraint for 'X'
+                    // (26,13): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a
+                    // constraint for 'X'
                     Diagnostic(ErrorCode.ERR_ConWithValCon, "X")
                         .WithArguments("X", "U")
                         .WithLocation(26, 13),
-                    // (31,18): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a constraint for 'X'
+                    // (31,18): error CS0456: Type parameter 'U' has the 'struct' constraint so 'U' cannot be used as a
+                    // constraint for 'X'
                     Diagnostic(ErrorCode.ERR_ConWithValCon, "X")
                         .WithArguments("X", "U")
                         .WithLocation(31, 18),
@@ -2255,12 +2342,16 @@ class B2 : A<object>, I<object>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (14,17): error CS0425: The constraints for type parameter 'T' of method 'B1.M2<T>()' must match the constraints for type parameter 'U' of interface method 'I<object>.M2<U>()'. Consider using an explicit interface implementation instead.
+                    // (14,17): error CS0425: The constraints for type parameter 'T' of method 'B1.M2<T>()' must match
+                    // the constraints for type parameter 'U' of interface method 'I<object>.M2<U>()'. Consider using an
+                    // explicit interface implementation instead.
                     //     public void M2<T>() { }
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M2")
                         .WithArguments("T", "B1.M2<T>()", "U", "I<object>.M2<U>()")
                         .WithLocation(14, 17),
-                    // (16,23): error CS0425: The constraints for type parameter 'U' of method 'A<object>.M2<U>()' must match the constraints for type parameter 'U' of interface method 'I<object>.M2<U>()'. Consider using an explicit interface implementation instead.
+                    // (16,23): error CS0425: The constraints for type parameter 'U' of method 'A<object>.M2<U>()' must
+                    // match the constraints for type parameter 'U' of interface method 'I<object>.M2<U>()'. Consider using
+                    // an explicit interface implementation instead.
                     // class B2 : A<object>, I<object>
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I<object>")
                         .WithArguments("U", "A<object>.M2<U>()", "U", "I<object>.M2<U>()")
@@ -2329,27 +2420,39 @@ class C10 : I3<I>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (10,17): error CS0425: The constraints for type parameter 'V' of method 'C1<T, U>.M<V>()' must match the constraints for type parameter 'V' of interface method 'I1<T, U>.M<V>()'. Consider using an explicit interface implementation instead.
+                    // (10,17): error CS0425: The constraints for type parameter 'V' of method 'C1<T, U>.M<V>()' must
+                    // match the constraints for type parameter 'V' of interface method 'I1<T, U>.M<V>()'. Consider using
+                    // an explicit interface implementation instead.
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("V", "C1<T, U>.M<V>()", "V", "I1<T, U>.M<V>()")
                         .WithLocation(10, 17),
-                    // (22,17): error CS0425: The constraints for type parameter 'T' of method 'C4.M<T>()' must match the constraints for type parameter 'V' of interface method 'I1<B, I>.M<V>()'. Consider using an explicit interface implementation instead.
+                    // (22,17): error CS0425: The constraints for type parameter 'T' of method 'C4.M<T>()' must match
+                    // the constraints for type parameter 'V' of interface method 'I1<B, I>.M<V>()'. Consider using an
+                    // explicit interface implementation instead.
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("T", "C4.M<T>()", "V", "I1<B, I>.M<V>()")
                         .WithLocation(22, 17),
-                    // (30,17): error CS0425: The constraints for type parameter 'T' of method 'C6.M<T>()' must match the constraints for type parameter 'V' of interface method 'I1<A, B>.M<V>()'. Consider using an explicit interface implementation instead.
+                    // (30,17): error CS0425: The constraints for type parameter 'T' of method 'C6.M<T>()' must match
+                    // the constraints for type parameter 'V' of interface method 'I1<A, B>.M<V>()'. Consider using an
+                    // explicit interface implementation instead.
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("T", "C6.M<T>()", "V", "I1<A, B>.M<V>()")
                         .WithLocation(30, 17),
-                    // (38,17): error CS0425: The constraints for type parameter 'U' of method 'C7<T>.M<U>()' must match the constraints for type parameter 'U' of interface method 'I2<T>.M<U>()'. Consider using an explicit interface implementation instead.
+                    // (38,17): error CS0425: The constraints for type parameter 'U' of method 'C7<T>.M<U>()' must match
+                    // the constraints for type parameter 'U' of interface method 'I2<T>.M<U>()'. Consider using an
+                    // explicit interface implementation instead.
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("U", "C7<T>.M<U>()", "U", "I2<T>.M<U>()")
                         .WithLocation(38, 17),
-                    // (42,17): error CS0425: The constraints for type parameter 'T' of method 'C8.M<T>()' must match the constraints for type parameter 'U' of interface method 'I2<A>.M<U>()'. Consider using an explicit interface implementation instead.
+                    // (42,17): error CS0425: The constraints for type parameter 'T' of method 'C8.M<T>()' must match
+                    // the constraints for type parameter 'U' of interface method 'I2<A>.M<U>()'. Consider using an
+                    // explicit interface implementation instead.
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("T", "C8.M<T>()", "U", "I2<A>.M<U>()")
                         .WithLocation(42, 17),
-                    // (46,17): error CS0425: The constraints for type parameter 'T' of method 'C9.M<T>()' must match the constraints for type parameter 'U' of interface method 'I2<B>.M<U>()'. Consider using an explicit interface implementation instead.
+                    // (46,17): error CS0425: The constraints for type parameter 'T' of method 'C9.M<T>()' must match
+                    // the constraints for type parameter 'U' of interface method 'I2<B>.M<U>()'. Consider using an
+                    // explicit interface implementation instead.
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("T", "C9.M<T>()", "U", "I2<B>.M<U>()")
                         .WithLocation(46, 17)
@@ -2399,22 +2502,30 @@ class B4 : A4, I
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (16,16): error CS0425: The constraints for type parameter 'T' of method 'A2.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (16,16): error CS0425: The constraints for type parameter 'T' of method 'A2.M<T>()' must match
+                    // the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     // class B2 : A2, I
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                         .WithArguments("T", "A2.M<T>()", "T", "I.M<T>()")
                         .WithLocation(16, 16),
-                    // (23,16): error CS0425: The constraints for type parameter 'T' of method 'A3.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (23,16): error CS0425: The constraints for type parameter 'T' of method 'A3.M<T>()' must match
+                    // the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     // class B3 : A3, I
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                         .WithArguments("T", "A3.M<T>()", "T", "I.M<T>()")
                         .WithLocation(23, 16),
-                    // (28,17): error CS0425: The constraints for type parameter 'T' of method 'A4.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (28,17): error CS0425: The constraints for type parameter 'T' of method 'A4.M<T>()' must match
+                    // the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     //     public void M<T>() { }
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("T", "A4.M<T>()", "T", "I.M<T>()")
                         .WithLocation(28, 17),
-                    // (30,16): error CS0425: The constraints for type parameter 'T' of method 'A4.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (30,16): error CS0425: The constraints for type parameter 'T' of method 'A4.M<T>()' must match
+                    // the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     // class B4 : A4, I
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                         .WithArguments("T", "A4.M<T>()", "T", "I.M<T>()")
@@ -2467,17 +2578,23 @@ class B4 : A4, I { }
 class B5 : A5, I { }";
             CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (2,16): error CS0425: The constraints for type parameter 'T' of method 'A2.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (2,16): error CS0425: The constraints for type parameter 'T' of method 'A2.M<T>()' must match the
+                    // constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     // class B2 : A2, I { }
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                         .WithArguments("T", "A2.M<T>()", "T", "I.M<T>()")
                         .WithLocation(2, 16),
-                    // (3,16): error CS0425: The constraints for type parameter 'T' of method 'A3.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (3,16): error CS0425: The constraints for type parameter 'T' of method 'A3.M<T>()' must match the
+                    // constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     // class B3 : A3, I { }
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                         .WithArguments("T", "A3.M<T>()", "T", "I.M<T>()")
                         .WithLocation(3, 16),
-                    // (4,16): error CS0425: The constraints for type parameter 'T' of method 'A4.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (4,16): error CS0425: The constraints for type parameter 'T' of method 'A4.M<T>()' must match the
+                    // constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     // class B4 : A4, I { }
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                         .WithArguments("T", "A4.M<T>()", "T", "I.M<T>()")
@@ -2523,7 +2640,8 @@ class C<T>
                     Diagnostic(ErrorCode.ERR_DuplicateBound, "IA")
                         .WithArguments("IA", "T")
                         .WithLocation(5, 34),
-                    // (7,15): error CS0265: Partial declarations of 'B<T, U>' have inconsistent constraints for type parameter 'T'
+                    // (7,15): error CS0265: Partial declarations of 'B<T, U>' have inconsistent constraints for type
+                    // parameter 'T'
                     Diagnostic(ErrorCode.ERR_PartialWrongConstraints, "B")
                         .WithArguments("B<T, U>", "T")
                         .WithLocation(7, 15),
@@ -2599,7 +2717,8 @@ partial class E<T> where T : I, B { }
                     Diagnostic(ErrorCode.ERR_ConstraintIsStaticClass, "S")
                         .WithArguments("S")
                         .WithLocation(6, 30),
-                    // (7,15): error CS0265: Partial declarations of 'D<T>' have inconsistent constraints for type parameter 'T'
+                    // (7,15): error CS0265: Partial declarations of 'D<T>' have inconsistent constraints for type
+                    // parameter 'T'
                     // partial class D<T> where T : A, I { }
                     Diagnostic(ErrorCode.ERR_PartialWrongConstraints, "D")
                         .WithArguments("D<T>", "T")
@@ -2614,17 +2733,20 @@ partial class E<T> where T : I, B { }
                     Diagnostic(ErrorCode.ERR_ClassBoundNotFirst, "A")
                         .WithArguments("A")
                         .WithLocation(9, 33),
-                    // (10,15): error CS0265: Partial declarations of 'E<T>' have inconsistent constraints for type parameter 'T'
+                    // (10,15): error CS0265: Partial declarations of 'E<T>' have inconsistent constraints for type
+                    // parameter 'T'
                     // partial class E<T> where T : B { }
                     Diagnostic(ErrorCode.ERR_PartialWrongConstraints, "E")
                         .WithArguments("E<T>", "T")
                         .WithLocation(10, 15),
-                    // (10,30): error CS0701: 'B' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                    // (10,30): error CS0701: 'B' is not a valid constraint. A type used as a constraint must be an
+                    // interface, a non-sealed class or a type parameter.
                     // partial class E<T> where T : B { }
                     Diagnostic(ErrorCode.ERR_BadBoundType, "B")
                         .WithArguments("B")
                         .WithLocation(10, 30),
-                    // (11,33): error CS0701: 'B' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                    // (11,33): error CS0701: 'B' is not a valid constraint. A type used as a constraint must be an
+                    // interface, a non-sealed class or a type parameter.
                     // partial class E<T> where T : I, B { }
                     Diagnostic(ErrorCode.ERR_BadBoundType, "B")
                         .WithArguments("B")
@@ -2644,22 +2766,26 @@ partial class C<T, U> where T : A where U : T { }
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (2,15): error CS0265: Partial declarations of 'B<T, U>' have inconsistent constraints for type parameter 'U'
+                    // (2,15): error CS0265: Partial declarations of 'B<T, U>' have inconsistent constraints for type
+                    // parameter 'U'
                     // partial class B<T, U> where T : A where U : T { }
                     Diagnostic(ErrorCode.ERR_PartialWrongConstraints, "B")
                         .WithArguments("B<T, U>", "U")
                         .WithLocation(2, 15),
-                    // (2,33): error CS0701: 'A' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                    // (2,33): error CS0701: 'A' is not a valid constraint. A type used as a constraint must be an
+                    // interface, a non-sealed class or a type parameter.
                     // partial class B<T, U> where T : A where U : T { }
                     Diagnostic(ErrorCode.ERR_BadBoundType, "A")
                         .WithArguments("A")
                         .WithLocation(2, 33),
-                    // (3,33): error CS0701: 'A' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                    // (3,33): error CS0701: 'A' is not a valid constraint. A type used as a constraint must be an
+                    // interface, a non-sealed class or a type parameter.
                     // partial class B<T, U> where T : A { }
                     Diagnostic(ErrorCode.ERR_BadBoundType, "A")
                         .WithArguments("A")
                         .WithLocation(3, 33),
-                    // (5,33): error CS0701: 'A' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                    // (5,33): error CS0701: 'A' is not a valid constraint. A type used as a constraint must be an
+                    // interface, a non-sealed class or a type parameter.
                     // partial class C<T, U> where T : A where U : T { }
                     Diagnostic(ErrorCode.ERR_BadBoundType, "A")
                         .WithArguments("A")
@@ -2704,19 +2830,24 @@ class D<T> where T : B
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,15): error CS1061: 'X' does not contain a definition for 'H' and no extension method 'H' accepting a first argument of type 'X' could be found (are you missing a using directive or an assembly reference?)
+                    // (23,15): error CS1061: 'X' does not contain a definition for 'H' and no extension method 'H'
+                    // accepting a first argument of type 'X' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     //         o = x.H;
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "H")
                         .WithArguments("X", "H"),
-                    // (3,21): warning CS0649: Field 'A.F' is never assigned to, and will always have its default value null
+                    // (3,21): warning CS0649: Field 'A.F' is never assigned to, and will always have its default value
+                    // null
                     //     internal object F;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
                         .WithArguments("A.F", "null"),
-                    // (7,21): warning CS0649: Field 'B.G' is never assigned to, and will always have its default value null
+                    // (7,21): warning CS0649: Field 'B.G' is never assigned to, and will always have its default value
+                    // null
                     //     internal object G;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "G")
                         .WithArguments("B.G", "null"),
-                    // (11,21): warning CS0649: Field 'C.H' is never assigned to, and will always have its default value null
+                    // (11,21): warning CS0649: Field 'C.H' is never assigned to, and will always have its default value
+                    // null
                     //     internal object H;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "H")
                         .WithArguments("C.H", "null")
@@ -2800,15 +2931,19 @@ class B : A<S, C>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (17,12): error CS1061: 'U1' does not contain a definition for 'F' and no extension method 'F' accepting a first argument of type 'U1' could be found (are you missing a using directive or an assembly reference?)
+                    // (17,12): error CS1061: 'U1' does not contain a definition for 'F' and no extension method 'F'
+                    // accepting a first argument of type 'U1' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     //         u1.F = u2.F;
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "F")
                         .WithArguments("U1", "F"),
-                    // (3,21): warning CS0649: Field 'S.F' is never assigned to, and will always have its default value null
+                    // (3,21): warning CS0649: Field 'S.F' is never assigned to, and will always have its default value
+                    // null
                     //     internal object F;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
                         .WithArguments("S.F", "null"),
-                    // (7,21): warning CS0649: Field 'C.F' is never assigned to, and will always have its default value null
+                    // (7,21): warning CS0649: Field 'C.F' is never assigned to, and will always have its default value
+                    // null
                     //     internal object F;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
                         .WithArguments("C.F", "null")
@@ -2846,7 +2981,9 @@ class C<T, U>
                     Diagnostic(ErrorCode.ERR_BadAccess, "M")
                         .WithArguments("A.M()")
                         .WithLocation(14, 11),
-                    // (15,11): error CS1061: 'U' does not contain a definition for 'M' and no extension method 'M' accepting a first argument of type 'U' could be found (are you missing a using directive or an assembly reference?)
+                    // (15,11): error CS1061: 'U' does not contain a definition for 'M' and no extension method 'M'
+                    // accepting a first argument of type 'U' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
                         .WithArguments("U", "M")
                         .WithLocation(15, 11)
@@ -2880,7 +3017,8 @@ class B : A<object[]>
                     Diagnostic(ErrorCode.ERR_BadArgType, "u")
                         .WithArguments("1", "U", "object[]")
                         .WithLocation(13, 17),
-                    // (15,17): error CS1503: Argument 1: Argument 1: cannot convert from 'U' to 'System.Collections.Generic.IList<object>'
+                    // (15,17): error CS1503: Argument 1: Argument 1: cannot convert from 'U' to
+                    // 'System.Collections.Generic.IList<object>'
                     Diagnostic(ErrorCode.ERR_BadArgType, "u")
                         .WithArguments("1", "U", "System.Collections.Generic.IList<object>")
                         .WithLocation(15, 17)
@@ -2927,15 +3065,21 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (22,11): error CS1061: 'A' does not contain a definition for 'M' and no extension method 'M' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
+                    // (22,11): error CS1061: 'A' does not contain a definition for 'M' and no extension method 'M'
+                    // accepting a first argument of type 'A' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
                         .WithArguments("A", "M")
                         .WithLocation(22, 11),
-                    // (24,12): error CS1061: 'T1' does not contain a definition for 'M' and no extension method 'M' accepting a first argument of type 'T1' could be found (are you missing a using directive or an assembly reference?)
+                    // (24,12): error CS1061: 'T1' does not contain a definition for 'M' and no extension method 'M'
+                    // accepting a first argument of type 'T1' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
                         .WithArguments("T1", "M")
                         .WithLocation(24, 12),
-                    // (27,12): error CS1061: 'T4' does not contain a definition for 'M' and no extension method 'M' accepting a first argument of type 'U1' could be found (are you missing a using directive or an assembly reference?)
+                    // (27,12): error CS1061: 'T4' does not contain a definition for 'M' and no extension method 'M'
+                    // accepting a first argument of type 'U1' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
                         .WithArguments("T4", "M")
                         .WithLocation(27, 12)
@@ -3168,7 +3312,8 @@ class B9 : A<Unknown>
 }";
             CreateCompilationWithMscorlib40AndSystemCore(source)
                 .VerifyDiagnostics(
-                    // (49,14): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a using directive or an assembly reference?)
+                    // (49,14): error CS0246: The type or namespace name 'Unknown' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Unknown")
                         .WithArguments("Unknown")
                         .WithLocation(49, 14)
@@ -3195,22 +3340,26 @@ class C<T>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (10,18): error CS0246: The type or namespace name 'Y' could not be found (are you missing a using directive or an assembly reference?)
+                    // (10,18): error CS0246: The type or namespace name 'Y' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //     where T : A, Y
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Y")
                         .WithArguments("Y")
                         .WithLocation(10, 18),
-                    // (4,15): error CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,15): error CS0246: The type or namespace name 'X' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //     where T : X
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X")
                         .WithArguments("X")
                         .WithLocation(4, 15),
-                    // (5,15): error CS0246: The type or namespace name 'I<>' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,15): error CS0246: The type or namespace name 'I<>' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     where U : I<T>
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "I<T>")
                         .WithArguments("I<>")
                         .WithLocation(5, 15),
-                    // (13,27): error CS0246: The type or namespace name 'Z' could not be found (are you missing a using directive or an assembly reference?)
+                    // (13,27): error CS0246: The type or namespace name 'Z' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //     void M<U>() where U : Z, A { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Z")
                         .WithArguments("Z")
@@ -3331,23 +3480,28 @@ class C<T> where T : IA, IB
 }";
             CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (11,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C2<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
+                    // (11,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C2<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C2<T>", "System.Enum", "T", "string")
                         .WithLocation(11, 16),
-                    // (14,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C3<T>'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
+                    // (14,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C3<T>'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C3<T>", "System.ValueType", "T", "string")
                         .WithLocation(14, 16),
-                    // (17,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C4<T>'. There is no implicit reference conversion from 'string' to 'System.Array'.
+                    // (17,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C4<T>'. There is no implicit reference conversion from 'string' to 'System.Array'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C4<T>", "System.Array", "T", "string")
                         .WithLocation(17, 16),
-                    // (20,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C5<T>'. There is no implicit reference conversion from 'string' to 'int'.
+                    // (20,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C5<T>'. There is no implicit reference conversion from 'string' to 'int'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C5<T>", "int", "T", "string")
                         .WithLocation(20, 16),
-                    // (23,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C6<T>'. There is no implicit reference conversion from 'string' to 'Sealed'.
+                    // (23,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C6<T>'. There is no implicit reference conversion from 'string' to 'Sealed'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C6<T>", "Sealed", "T", "string")
                         .WithLocation(23, 16),
@@ -3355,15 +3509,18 @@ class C<T> where T : IA, IB
                     Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "Static")
                         .WithArguments("Static")
                         .WithLocation(25, 16),
-                    // (26,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C7<T>'. There is no implicit reference conversion from 'string' to 'Static'.
+                    // (26,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C7<T>'. There is no implicit reference conversion from 'string' to 'Static'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C7<T>", "Static", "T", "string")
                         .WithLocation(26, 16),
-                    // (29,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C8<T>'. There is no implicit reference conversion from 'string' to 'Enum'.
+                    // (29,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C8<T>'. There is no implicit reference conversion from 'string' to 'Enum'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C8<T>", "Enum", "T", "string")
                         .WithLocation(29, 16),
-                    // (32,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'C9<T>'. There is no implicit reference conversion from 'string' to 'Struct'.
+                    // (32,16): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'C9<T>'. There is no implicit reference conversion from 'string' to 'Struct'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
                         .WithArguments("C9<T>", "Struct", "T", "string")
                         .WithLocation(32, 16)
@@ -3435,12 +3592,14 @@ class C<T> where T : IA, IB
             // are ignored so there is no constraint error for B.M<string>().
             CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (3,29): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A<T>'. There is no implicit reference conversion from 'object' to 'C'.
+                    // (3,29): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'A<T>'. There is no implicit reference conversion from 'object' to 'C'.
                     //     static void M(A<object> a) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "a")
                         .WithArguments("A<T>", "C", "T", "object")
                         .WithLocation(3, 29),
-                    // (3,29): error CS0012: The type 'C' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (3,29): error CS0012: The type 'C' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(A<object> a) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "a")
                         .WithArguments(
@@ -3448,12 +3607,14 @@ class C<T> where T : IA, IB
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(3, 29),
-                    // (6,11): error CS0311: The type 'string' cannot be used as type parameter 'U' in the generic type or method 'B.M<U>()'. There is no implicit reference conversion from 'string' to 'C'.
+                    // (6,11): error CS0311: The type 'string' cannot be used as type parameter 'U' in the generic type
+                    // or method 'B.M<U>()'. There is no implicit reference conversion from 'string' to 'C'.
                     //         B.M<string>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
                         .WithArguments("B.M<U>()", "C", "U", "string")
                         .WithLocation(6, 11),
-                    // (6,11): error CS0012: The type 'C' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,11): error CS0012: The type 'C' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         B.M<string>();
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "M<string>")
                         .WithArguments(
@@ -3563,7 +3724,9 @@ class C5B : B5
                 }
             );
             compilation3.VerifyDiagnostics(
-                // (3,17): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (3,17): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     void IB1.M1<T1A, U1A>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "T1A")
                     .WithArguments(
@@ -3571,7 +3734,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(3, 17),
-                // (7,22): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,22): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     void IB2.M2<T2A, U2A>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "U2A")
                     .WithArguments(
@@ -3579,7 +3744,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 22),
-                // (11,17): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (11,17): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     void IB3.M3<T3A, U3A>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "T3A")
                     .WithArguments(
@@ -3587,7 +3754,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(11, 17),
-                // (11,22): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (11,22): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     void IB3.M3<T3A, U3A>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "U3A")
                     .WithArguments(
@@ -3595,7 +3764,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(11, 22),
-                // (15,29): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (15,29): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     public override void M1<T1B, U1B>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "T1B")
                     .WithArguments(
@@ -3603,7 +3774,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(15, 29),
-                // (19,34): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (19,34): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     public override void M2<T2B, U2B>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "U2B")
                     .WithArguments(
@@ -3611,7 +3784,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(19, 34),
-                // (23,29): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (23,29): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     public override void M3<T3B, U3B>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "T3B")
                     .WithArguments(
@@ -3619,7 +3794,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(23, 29),
-                // (23,34): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (23,34): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     public override void M3<T3B, U3B>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "U3B")
                     .WithArguments(
@@ -3627,7 +3804,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(23, 34),
-                // (25,13): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (25,13): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 // class C5B : B5
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "B5")
                     .WithArguments(
@@ -3635,7 +3814,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(25, 13),
-                // (27,29): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (27,29): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     public override void M4<T4B, U4B>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "T4B")
                     .WithArguments(
@@ -3643,7 +3824,9 @@ class C5B : B5
                         "d521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(27, 29),
-                // (27,34): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (27,34): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-0788-249e00d004ea, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     public override void M4<T4B, U4B>() { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "U4B")
                     .WithArguments(
@@ -3683,17 +3866,20 @@ class C5B : B5
 }";
             CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'B2'.
+                    // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'B2'.
                     //     static void M(A2<object> a) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "a")
                         .WithArguments("A2<T>", "B2", "T", "object")
                         .WithLocation(4, 30),
-                    // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'I'.
+                    // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'I'.
                     //     static void M(A2<object> a) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "a")
                         .WithArguments("A2<T>", "I", "T", "object")
                         .WithLocation(4, 30),
-                    // (4,30): error CS0012: The type 'B2' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,30): error CS0012: The type 'B2' is defined in an assembly that is not referenced. You must
+                    // add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(A2<object> a) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "a")
                         .WithArguments(
@@ -3701,7 +3887,8 @@ class C5B : B5
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(4, 30),
-                    // (4,30): error CS0012: The type 'I' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,30): error CS0012: The type 'I' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(A2<object> a) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "a")
                         .WithArguments(
@@ -3709,7 +3896,8 @@ class C5B : B5
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(4, 30),
-                    // (3,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A1<T>'. There is no implicit reference conversion from 'object' to 'B1'.
+                    // (3,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'A1<T>'. There is no implicit reference conversion from 'object' to 'B1'.
                     //     static void M(A1<object> a) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "a")
                         .WithArguments("A1<T>", "B1", "T", "object")
@@ -3719,7 +3907,8 @@ class C5B : B5
                     Diagnostic(ErrorCode.ERR_CircularConstraint, "a")
                         .WithArguments("T", "T")
                         .WithLocation(3, 30),
-                    // (3,30): error CS0012: The type 'B1' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (3,30): error CS0012: The type 'B1' is defined in an assembly that is not referenced. You must
+                    // add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(A1<object> a) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "a")
                         .WithArguments(
@@ -3727,7 +3916,8 @@ class C5B : B5
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(3, 30),
-                    // (7,12): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A3.M<T>()'. There is no implicit reference conversion from 'object' to 'B3'.
+                    // (7,12): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'A3.M<T>()'. There is no implicit reference conversion from 'object' to 'B3'.
                     //         A3.M<object>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<object>")
                         .WithArguments("A3.M<T>()", "B3", "T", "object")
@@ -3737,7 +3927,8 @@ class C5B : B5
                     Diagnostic(ErrorCode.ERR_CircularConstraint, "M<object>")
                         .WithArguments("T", "T")
                         .WithLocation(7, 12),
-                    // (7,12): error CS0012: The type 'B3' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,12): error CS0012: The type 'B3' is defined in an assembly that is not referenced. You must
+                    // add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         A3.M<object>();
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "M<object>")
                         .WithArguments(
@@ -3800,17 +3991,21 @@ public class A3
                 references: new MetadataReference[] { new CSharpCompilationReference(compilation2) }
             );
             compilation3.VerifyDiagnostics(
-                // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'B2'.
+                // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                // or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'B2'.
                 //     static void M(A2<object> a) { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "a")
                     .WithArguments("A2<T>", "B2", "T", "object")
                     .WithLocation(4, 30),
-                // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'I'.
+                // (4,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                // or method 'A2<T>'. There is no implicit reference conversion from 'object' to 'I'.
                 //     static void M(A2<object> a) { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "a")
                     .WithArguments("A2<T>", "I", "T", "object")
                     .WithLocation(4, 30),
-                // (4,30): error CS0012: The type 'B2' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (4,30): error CS0012: The type 'B2' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     static void M(A2<object> a) { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "a")
                     .WithArguments(
@@ -3818,7 +4013,9 @@ public class A3
                         "d521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(4, 30),
-                // (4,30): error CS0012: The type 'I' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (4,30): error CS0012: The type 'I' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     static void M(A2<object> a) { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "a")
                     .WithArguments(
@@ -3826,12 +4023,15 @@ public class A3
                         "d521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(4, 30),
-                // (3,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A1<T>'. There is no implicit reference conversion from 'object' to 'B1'.
+                // (3,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                // or method 'A1<T>'. There is no implicit reference conversion from 'object' to 'B1'.
                 //     static void M(A1<object> a) { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "a")
                     .WithArguments("A1<T>", "B1", "T", "object")
                     .WithLocation(3, 30),
-                // (3,30): error CS0012: The type 'B1' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (3,30): error CS0012: The type 'B1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //     static void M(A1<object> a) { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "a")
                     .WithArguments(
@@ -3839,12 +4039,15 @@ public class A3
                         "d521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(3, 30),
-                // (7,12): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A3.M<T>()'. There is no implicit reference conversion from 'object' to 'B3'.
+                // (7,12): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                // or method 'A3.M<T>()'. There is no implicit reference conversion from 'object' to 'B3'.
                 //         A3.M<object>();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<object>")
                     .WithArguments("A3.M<T>()", "B3", "T", "object")
                     .WithLocation(7, 12),
-                // (7,12): error CS0012: The type 'B3' is defined in an assembly that is not referenced. You must add a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,12): error CS0012: The type 'B3' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'd521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //         A3.M<object>();
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "M<object>")
                     .WithArguments(
@@ -3878,7 +4081,8 @@ public class A3
 }";
             CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (3,30): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (3,30): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(A0<object> o) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "o")
                         .WithArguments(
@@ -3886,12 +4090,14 @@ public class A3
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(3, 30),
-                    // (3,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A0<T>'. There is no implicit reference conversion from 'object' to 'B'.
+                    // (3,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'A0<T>'. There is no implicit reference conversion from 'object' to 'B'.
                     //     static void M(A0<object> o) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("A0<T>", "B", "T", "object")
                         .WithLocation(3, 30),
-                    // (4,32): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,32): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(A<I<object>> o) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "o")
                         .WithArguments(
@@ -3899,12 +4105,14 @@ public class A3
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(4, 32),
-                    // (4,32): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic type or method 'A<T>'. There is no implicit reference conversion from 'I<object>' to 'I<B>'.
+                    // (4,32): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic
+                    // type or method 'A<T>'. There is no implicit reference conversion from 'I<object>' to 'I<B>'.
                     //     static void M(A<I<object>> o) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("A<T>", "I<B>", "T", "I<object>")
                         .WithLocation(4, 32),
-                    // (5,36): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,36): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(AIn<IIn<object>> o) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "o")
                         .WithArguments(
@@ -3912,12 +4120,14 @@ public class A3
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(5, 36),
-                    // (5,36): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic type or method 'AIn<T>'. There is no implicit reference conversion from 'IIn<object>' to 'IIn<B>'.
+                    // (5,36): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic
+                    // type or method 'AIn<T>'. There is no implicit reference conversion from 'IIn<object>' to 'IIn<B>'.
                     //     static void M(AIn<IIn<object>> o) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("AIn<T>", "IIn<B>", "T", "IIn<object>")
                         .WithLocation(5, 36),
-                    // (6,38): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,38): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //     static void M(AOut<IOut<object>> o) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "o")
                         .WithArguments(
@@ -3925,7 +4135,9 @@ public class A3
                             "other, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(6, 38),
-                    // (6,38): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic type or method 'AOut<T>'. There is no implicit reference conversion from 'IOut<object>' to 'IOut<B>'.
+                    // (6,38): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic
+                    // type or method 'AOut<T>'. There is no implicit reference conversion from 'IOut<object>' to
+                    // 'IOut<B>'.
                     //     static void M(AOut<IOut<object>> o) { }
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("AOut<T>", "IOut<B>", "T", "IOut<object>")
@@ -3957,35 +4169,44 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (4,23): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,23): error CS0246: The type or namespace name 'B' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B")
                         .WithArguments("B")
                         .WithLocation(4, 23),
-                    // (5,24): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,24): error CS0246: The type or namespace name 'B' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B")
                         .WithArguments("B")
                         .WithLocation(5, 24),
-                    // (6,28): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,28): error CS0246: The type or namespace name 'B' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B")
                         .WithArguments("B")
                         .WithLocation(6, 28),
-                    // (7,30): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,30): error CS0246: The type or namespace name 'B' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B")
                         .WithArguments("B")
                         .WithLocation(7, 30),
-                    // (10,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'A0<T>'. There is no implicit reference conversion from 'object' to 'B'.
+                    // (10,30): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                    // or method 'A0<T>'. There is no implicit reference conversion from 'object' to 'B'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("A0<T>", "B", "T", "object")
                         .WithLocation(10, 30),
-                    // (11,32): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic type or method 'A<T>'. There is no implicit reference conversion from 'I<object>' to 'I<B>'.
+                    // (11,32): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic
+                    // type or method 'A<T>'. There is no implicit reference conversion from 'I<object>' to 'I<B>'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("A<T>", "I<B>", "T", "I<object>")
                         .WithLocation(11, 32),
-                    // (12,36): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic type or method 'AIn<T>'. There is no implicit reference conversion from 'IIn<object>' to 'IIn<B>'.
+                    // (12,36): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic
+                    // type or method 'AIn<T>'. There is no implicit reference conversion from 'IIn<object>' to 'IIn<B>'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("AIn<T>", "IIn<B>", "T", "IIn<object>")
                         .WithLocation(12, 36),
-                    // (13,38): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic type or method 'AOut<T>'. There is no implicit reference conversion from 'IOut<object>' to 'IOut<B>'.
+                    // (13,38): error CS0311: The type 'I<object>' cannot be used as type parameter 'T' in the generic
+                    // type or method 'AOut<T>'. There is no implicit reference conversion from 'IOut<object>' to
+                    // 'IOut<B>'.
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "o")
                         .WithArguments("AOut<T>", "IOut<B>", "T", "IOut<object>")
                         .WithLocation(13, 38)
@@ -4041,7 +4262,8 @@ partial class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (7,18): warning CS8826: Partial method declarations 'void C.M<T, U>(T t, U u)' and 'void C.M<X, Y>(X x, Y y)' have signature differences.
+                    // (7,18): warning CS8826: Partial method declarations 'void C.M<T, U>(T t, U u)' and 'void C.M<X,
+                    // Y>(X x, Y y)' have signature differences.
                     //     partial void M<X, Y>(X x, Y y)
                     Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "M")
                         .WithArguments("void C.M<T, U>(T t, U u)", "void C.M<X, Y>(X x, Y y)")
@@ -4094,12 +4316,16 @@ class C2 : A, I
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (13,15): error CS0425: The constraints for type parameter 'T' of method 'B.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (13,15): error CS0425: The constraints for type parameter 'T' of method 'B.M<T>()' must match the
+                    // constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     // class C1 : B, I
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                         .WithArguments("T", "B.M<T>()", "T", "I.M<T>()")
                         .WithLocation(13, 15),
-                    // (18,21): error CS0425: The constraints for type parameter 'T' of method 'C2.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                    // (18,21): error CS0425: The constraints for type parameter 'T' of method 'C2.M<T>()' must match
+                    // the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                    // interface implementation instead.
                     //     public new void M<T>() { }
                     Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                         .WithArguments("T", "C2.M<T>()", "T", "I.M<T>()")
@@ -4145,7 +4371,9 @@ class D
 }";
             var compilation = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
             compilation.VerifyDiagnostics(
-                // (1,15): error CS0425: The constraints for type parameter 'T' of method 'B.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                // (1,15): error CS0425: The constraints for type parameter 'T' of method 'B.M<T>()' must match the
+                // constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                // interface implementation instead.
                 // class C2 : B, I { }
                 Diagnostic(ErrorCode.ERR_ImplBadConstraints, "I")
                     .WithArguments("T", "B.M<T>()", "T", "I.M<T>()")
@@ -4200,7 +4428,8 @@ class C3 : I
                 // (3,14): error CS0648: '' is a type not supported by the language
                 //     void I.M<T>() { }
                 Diagnostic(ErrorCode.ERR_BogusType, "T").WithArguments("").WithLocation(3, 14),
-                // (5,7): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'IT<T>'. There is no implicit reference conversion from 'A' to '?'.
+                // (5,7): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                // method 'IT<T>'. There is no implicit reference conversion from 'A' to '?'.
                 // class C2 : IT<A>
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "C2")
                     .WithArguments("IT<T>", "?", "T", "A")
@@ -4208,7 +4437,8 @@ class C3 : I
                 // (5,7): error CS0648: '' is a type not supported by the language
                 // class C2 : IT<A>
                 Diagnostic(ErrorCode.ERR_BogusType, "C2").WithArguments("").WithLocation(5, 7),
-                // (8,7): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'IT<T>'. There is no boxing conversion or type parameter conversion from 'T' to '?'.
+                // (8,7): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or
+                // method 'IT<T>'. There is no boxing conversion or type parameter conversion from 'T' to '?'.
                 // class C<T> : IT<T>
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "C")
                     .WithArguments("IT<T>", "?", "T", "T")
@@ -4216,7 +4446,9 @@ class C3 : I
                 // (8,7): error CS0648: '' is a type not supported by the language
                 // class C<T> : IT<T>
                 Diagnostic(ErrorCode.ERR_BogusType, "C").WithArguments("").WithLocation(8, 7),
-                // (14,25): error CS0425: The constraints for type parameter 'T' of method 'C3.M<T>()' must match the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit interface implementation instead.
+                // (14,25): error CS0425: The constraints for type parameter 'T' of method 'C3.M<T>()' must match
+                // the constraints for type parameter 'T' of interface method 'I.M<T>()'. Consider using an explicit
+                // interface implementation instead.
                 //     public virtual void M<T>() where T : A { }
                 Diagnostic(ErrorCode.ERR_ImplBadConstraints, "M")
                     .WithArguments("T", "C3.M<T>()", "T", "I.M<T>()")
@@ -4272,7 +4504,8 @@ class P
 }";
             var compilation = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
             compilation.VerifyDiagnostics(
-                // (5,7): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'I<T>'. There is no implicit reference conversion from 'A' to '?'.
+                // (5,7): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                // method 'I<T>'. There is no implicit reference conversion from 'A' to '?'.
                 // class C : I<A>
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "C")
                     .WithArguments("I<T>", "?", "T", "A")
@@ -4280,7 +4513,8 @@ class P
                 // (5,7): error CS0648: '' is a type not supported by the language
                 // class C : I<A>
                 Diagnostic(ErrorCode.ERR_BogusType, "C").WithArguments("").WithLocation(5, 7),
-                // (7,10): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'I<T>'. There is no implicit reference conversion from 'A' to '?'.
+                // (7,10): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                // method 'I<T>'. There is no implicit reference conversion from 'A' to '?'.
                 //     void I<A>.M<T>() { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "I<A>")
                     .WithArguments("I<T>", "?", "T", "A")
@@ -4291,7 +4525,8 @@ class P
                 // (7,17): error CS0648: '' is a type not supported by the language
                 //     void I<A>.M<T>() { }
                 Diagnostic(ErrorCode.ERR_BogusType, "T").WithArguments("").WithLocation(7, 17),
-                // (13,17): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'A.M<T>()'. There is no implicit reference conversion from 'A' to '?'.
+                // (13,17): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                // method 'A.M<T>()'. There is no implicit reference conversion from 'A' to '?'.
                 //         new A().M<A>();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<A>")
                     .WithArguments("A.M<T>()", "?", "T", "A")
@@ -4301,7 +4536,8 @@ class P
                 Diagnostic(ErrorCode.ERR_BogusType, "M<A>")
                     .WithArguments("")
                     .WithLocation(13, 17),
-                // (15,13): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'I<T>'. There is no implicit reference conversion from 'A' to '?'.
+                // (15,13): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                // method 'I<T>'. There is no implicit reference conversion from 'A' to '?'.
                 //         ((I<A>)new C()).M<A>();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "A")
                     .WithArguments("I<T>", "?", "T", "A")
@@ -4309,7 +4545,8 @@ class P
                 // (15,13): error CS0648: '' is a type not supported by the language
                 //         ((I<A>)new C()).M<A>();
                 Diagnostic(ErrorCode.ERR_BogusType, "A").WithArguments("").WithLocation(15, 13),
-                // (15,25): error CS0311: The type 'A' cannot be used as type parameter 'U' in the generic type or method 'I<A>.M<U>()'. There is no implicit reference conversion from 'A' to '?'.
+                // (15,25): error CS0311: The type 'A' cannot be used as type parameter 'U' in the generic type or
+                // method 'I<A>.M<U>()'. There is no implicit reference conversion from 'A' to '?'.
                 //         ((I<A>)new C()).M<A>();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<A>")
                     .WithArguments("I<A>.M<U>()", "?", "U", "A")
@@ -4519,57 +4756,68 @@ class C4 : B4<I, A, object> { }
 ";
             var compilation = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
             compilation.VerifyDiagnostics(
-                // (1,11): error CS0453: The type 'I' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'IA1_1<T>'
+                // (1,11): error CS0453: The type 'I' must be a non-nullable value type in order to use it as
+                // parameter 'T' in the generic type or method 'IA1_1<T>'
                 // interface IC1 : IB1<I, A, object> { }
                 Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "IC1")
                     .WithArguments("IA1_1<T>", "T", "I")
                     .WithLocation(1, 11),
-                // (1,11): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'IA1_2<T>'. There is no implicit reference conversion from 'A' to 'I'.
+                // (1,11): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                // method 'IA1_2<T>'. There is no implicit reference conversion from 'A' to 'I'.
                 // interface IC1 : IB1<I, A, object> { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "IC1")
                     .WithArguments("IA1_2<T>", "I", "T", "A")
                     .WithLocation(1, 11),
-                // (1,11): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type or method 'IA1_3<T, U>'. There is no implicit reference conversion from 'object' to 'A'.
+                // (1,11): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type
+                // or method 'IA1_3<T, U>'. There is no implicit reference conversion from 'object' to 'A'.
                 // interface IC1 : IB1<I, A, object> { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "IC1")
                     .WithArguments("IA1_3<T, U>", "A", "U", "object")
                     .WithLocation(1, 11),
-                // (2,11): error CS0453: The type 'T' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'IA2_1<T>'
+                // (2,11): error CS0453: The type 'T' must be a non-nullable value type in order to use it as
+                // parameter 'T' in the generic type or method 'IA2_1<T>'
                 // interface IC2<T, U, V> : IB2<T, U, V> { }
                 Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "IC2")
                     .WithArguments("IA2_1<T>", "T", "T")
                     .WithLocation(2, 11),
-                // (2,11): error CS0314: The type 'U' cannot be used as type parameter 'T' in the generic type or method 'IA2_2<T>'. There is no boxing conversion or type parameter conversion from 'U' to 'I'.
+                // (2,11): error CS0314: The type 'U' cannot be used as type parameter 'T' in the generic type or
+                // method 'IA2_2<T>'. There is no boxing conversion or type parameter conversion from 'U' to 'I'.
                 // interface IC2<T, U, V> : IB2<T, U, V> { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "IC2")
                     .WithArguments("IA2_2<T>", "I", "T", "U")
                     .WithLocation(2, 11),
-                // (2,11): error CS0314: The type 'V' cannot be used as type parameter 'U' in the generic type or method 'IA2_3<T, U>'. There is no boxing conversion or type parameter conversion from 'V' to 'U'.
+                // (2,11): error CS0314: The type 'V' cannot be used as type parameter 'U' in the generic type or
+                // method 'IA2_3<T, U>'. There is no boxing conversion or type parameter conversion from 'V' to 'U'.
                 // interface IC2<T, U, V> : IB2<T, U, V> { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "IC2")
                     .WithArguments("IA2_3<T, U>", "U", "U", "V")
                     .WithLocation(2, 11),
-                // (3,11): error CS0453: The type 'object' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'IA3_1<T>'
+                // (3,11): error CS0453: The type 'object' must be a non-nullable value type in order to use it as
+                // parameter 'T' in the generic type or method 'IA3_1<T>'
                 // interface IC3_1 : IB3_1<object> { }
                 Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "IC3_1")
                     .WithArguments("IA3_1<T>", "T", "object")
                     .WithLocation(3, 11),
-                // (4,7): error CS0453: The type 'I' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'IA2_1<T>'
+                // (4,7): error CS0453: The type 'I' must be a non-nullable value type in order to use it as
+                // parameter 'T' in the generic type or method 'IA2_1<T>'
                 // class C2 : IC2<I, A, object> { }
                 Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C2")
                     .WithArguments("IA2_1<T>", "T", "I")
                     .WithLocation(4, 7),
-                // (4,7): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'IA2_2<T>'. There is no implicit reference conversion from 'A' to 'I'.
+                // (4,7): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                // method 'IA2_2<T>'. There is no implicit reference conversion from 'A' to 'I'.
                 // class C2 : IC2<I, A, object> { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "C2")
                     .WithArguments("IA2_2<T>", "I", "T", "A")
                     .WithLocation(4, 7),
-                // (4,7): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type or method 'IA2_3<T, U>'. There is no implicit reference conversion from 'object' to 'A'.
+                // (4,7): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type
+                // or method 'IA2_3<T, U>'. There is no implicit reference conversion from 'object' to 'A'.
                 // class C2 : IC2<I, A, object> { }
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "C2")
                     .WithArguments("IA2_3<T, U>", "A", "U", "object")
                     .WithLocation(4, 7),
-                // (5,7): error CS0453: The type 'object' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'IA3_1<T>'
+                // (5,7): error CS0453: The type 'object' must be a non-nullable value type in order to use it as
+                // parameter 'T' in the generic type or method 'IA3_1<T>'
                 // class C3 : B3<I, A, object>, IC3_1 { }
                 Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C3")
                     .WithArguments("IA3_1<T>", "T", "object")
@@ -5325,11 +5573,13 @@ class C : IA<int, double>, IB<string>, IC<int>, ID<string>
                     Diagnostic(ErrorCode.ERR_BaseConstraintConflict, "V")
                         .WithArguments("V", "double", "int")
                         .WithLocation(19, 28),
-                    // (20,23): error CS0455: Type parameter 'U' inherits conflicting constraints 'string' and 'System.ValueType'
+                    // (20,23): error CS0455: Type parameter 'U' inherits conflicting constraints 'string' and
+                    // 'System.ValueType'
                     Diagnostic(ErrorCode.ERR_BaseConstraintConflict, "U")
                         .WithArguments("U", "string", "System.ValueType")
                         .WithLocation(20, 23),
-                    // (20,23): error CS0455: Type parameter 'U' inherits conflicting constraints 'System.ValueType' and 'struct'
+                    // (20,23): error CS0455: Type parameter 'U' inherits conflicting constraints 'System.ValueType' and
+                    // 'struct'
                     Diagnostic(ErrorCode.ERR_BaseConstraintConflict, "U")
                         .WithArguments("U", "System.ValueType", "struct")
                         .WithLocation(20, 23),
@@ -5390,7 +5640,8 @@ class C : B<int>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (7,33): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'S'
+                    // (7,33): error CS1750: A value of type 'int' cannot be used as a default parameter because there
+                    // are no standard conversions to type 'S'
                     Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
                         .WithArguments("int", "S")
                         .WithLocation(7, 33)
@@ -5421,27 +5672,33 @@ interface I
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,10): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (9,10): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "T")
                         .WithArguments("A<T>", "T", "int")
                         .WithLocation(9, 10),
-                    // (10,10): error CS0453: The type 'A<T>' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B1.B2<T, U>'
+                    // (10,10): error CS0453: The type 'A<T>' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B1.B2<T, U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "T")
                         .WithArguments("B1.B2<T, U>", "U", "A<T>")
                         .WithLocation(10, 10),
-                    // (11,13): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (11,13): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "U")
                         .WithArguments("A<T>", "T", "int")
                         .WithLocation(11, 13),
-                    // (14,13): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (14,13): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "T")
                         .WithArguments("A<T>", "T", "int")
                         .WithLocation(14, 13),
-                    // (15,13): error CS0453: The type 'A<T>' must be a non-nullable value type in order to use it as parameter 'U' in the generic type or method 'B1.B2<T, U>'
+                    // (15,13): error CS0453: The type 'A<T>' must be a non-nullable value type in order to use it as
+                    // parameter 'U' in the generic type or method 'B1.B2<T, U>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "T")
                         .WithArguments("B1.B2<T, U>", "U", "A<T>")
                         .WithLocation(15, 13),
-                    // (16,16): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'A<T>'
+                    // (16,16): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                    // 'T' in the generic type or method 'A<T>'
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "U")
                         .WithArguments("A<T>", "T", "int")
                         .WithLocation(16, 16)
@@ -6304,22 +6561,28 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (11,26): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type or method 'A<T, U>'. There is no implicit reference conversion from 'object' to 'I<object>'.
+                    // (11,26): error CS0311: The type 'object' cannot be used as type parameter 'U' in the generic type
+                    // or method 'A<T, U>'. There is no implicit reference conversion from 'object' to 'I<object>'.
                     //         new A<I<object>, object>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "object")
                         .WithArguments("A<T, U>", "I<object>", "U", "object")
                         .WithLocation(11, 26),
-                    // (12,22): error CS0311: The type 'string' cannot be used as type parameter 'U' in the generic type or method 'B<I<object>>.M<U>()'. There is no implicit reference conversion from 'string' to 'I<object>'.
+                    // (12,22): error CS0311: The type 'string' cannot be used as type parameter 'U' in the generic type
+                    // or method 'B<I<object>>.M<U>()'. There is no implicit reference conversion from 'string' to
+                    // 'I<object>'.
                     //         B<I<object>>.M<string>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
                         .WithArguments("B<I<object>>.M<U>()", "I<object>", "U", "string")
                         .WithLocation(12, 22),
-                    // (12,22): error CS0311: The type 'string' cannot be used as type parameter 'U' in the generic type or method 'B<I<object>>.M<U>()'. There is no implicit reference conversion from 'string' to 'I<string>'.
+                    // (12,22): error CS0311: The type 'string' cannot be used as type parameter 'U' in the generic type
+                    // or method 'B<I<object>>.M<U>()'. There is no implicit reference conversion from 'string' to
+                    // 'I<string>'.
                     //         B<I<object>>.M<string>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
                         .WithArguments("B<I<object>>.M<U>()", "I<string>", "U", "string")
                         .WithLocation(12, 22),
-                    // (13,9): error CS0311: The type 'object' cannot be used as type parameter 'T2' in the generic type or method 'C.M<T1, T2>()'. There is no implicit reference conversion from 'object' to 'I<object>'.
+                    // (13,9): error CS0311: The type 'object' cannot be used as type parameter 'T2' in the generic type
+                    // or method 'C.M<T1, T2>()'. There is no implicit reference conversion from 'object' to 'I<object>'.
                     //         M<object, object>();
                     Diagnostic(
                             ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
@@ -7149,25 +7412,30 @@ class B : A
 ";
             CreateCompilation(source, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (4,21): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                    // (4,21): warning CS8632: The annotation for nullable reference types should only be used in code
+                    // within a '#nullable' annotations context.
                     //     public virtual T? Goo<T>()
                     Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                         .WithLocation(4, 21),
-                    // (12,22): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                    // (12,22): warning CS8632: The annotation for nullable reference types should only be used in code
+                    // within a '#nullable' annotations context.
                     //     public override T? Goo<T>()
                     Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                         .WithLocation(12, 22),
-                    // (12,24): error CS0508: 'B.Goo<T>()': return type must be 'T' to match overridden member 'A.Goo<T>()'
+                    // (12,24): error CS0508: 'B.Goo<T>()': return type must be 'T' to match overridden member
+                    // 'A.Goo<T>()'
                     //     public override T? Goo<T>()
                     Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "Goo")
                         .WithArguments("B.Goo<T>()", "A.Goo<T>()", "T")
                         .WithLocation(12, 24),
-                    // (12,24): error CS0453: The type 'T' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Nullable<T>'
+                    // (12,24): error CS0453: The type 'T' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'Nullable<T>'
                     //     public override T? Goo<T>()
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "Goo")
                         .WithArguments("System.Nullable<T>", "T", "T")
                         .WithLocation(12, 24),
-                    // (6,16): error CS0403: Cannot convert null to type parameter 'T' because it could be a non-nullable value type. Consider using 'default(T)' instead.
+                    // (6,16): error CS0403: Cannot convert null to type parameter 'T' because it could be a
+                    // non-nullable value type. Consider using 'default(T)' instead.
                     //         return null;
                     Diagnostic(ErrorCode.ERR_TypeVarCantBeNull, "null")
                         .WithArguments("T")
@@ -7422,7 +7690,8 @@ class B : A<int>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,46): error CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
+                    // (3,46): error CS0246: The type or namespace name 'X' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X")
                         .WithArguments("X")
                         .WithLocation(3, 46)
@@ -7497,12 +7766,16 @@ class B : A<int, object>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,14): error CS0314: The type 'U' cannot be used as type parameter 'U' in the generic type or method 'A<int, object>.M0<U>()'. There is no boxing conversion or type parameter conversion from 'U' to 'int'.
+                    // (23,14): error CS0314: The type 'U' cannot be used as type parameter 'U' in the generic type or
+                    // method 'A<int, object>.M0<U>()'. There is no boxing conversion or type parameter conversion from 'U'
+                    // to 'int'.
                     //         base.M0<U>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "M0<U>")
                         .WithArguments("A<int, object>.M0<U>()", "int", "U", "U")
                         .WithLocation(23, 14),
-                    // (24,14): error CS0314: The type 'U' cannot be used as type parameter 'U' in the generic type or method 'A<int, object>.M1<U>()'. There is no boxing conversion or type parameter conversion from 'U' to 'int'.
+                    // (24,14): error CS0314: The type 'U' cannot be used as type parameter 'U' in the generic type or
+                    // method 'A<int, object>.M1<U>()'. There is no boxing conversion or type parameter conversion from 'U'
+                    // to 'int'.
                     //         base.M1<U>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "M1<U>")
                         .WithArguments("A<int, object>.M1<U>()", "int", "U", "U")
@@ -7534,7 +7807,8 @@ class B : A<object[]>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (12,14): error CS0311: The type 'U' cannot be used as type parameter 'V' in the generic type or method 'A<object[]>.M1<U, V>()'. There is no implicit reference conversion from 'U' to 'V'.
+                    // (12,14): error CS0311: The type 'U' cannot be used as type parameter 'V' in the generic type or
+                    // method 'A<object[]>.M1<U, V>()'. There is no implicit reference conversion from 'U' to 'V'.
                     //         base.M1<V, U>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M1<V, U>")
                         .WithArguments("A<object[]>.M1<U, V>()", "V", "V", "U")
@@ -7576,11 +7850,14 @@ static class M
 }";
             CreateCompilationWithMscorlib40AndSystemCore(source)
                 .VerifyDiagnostics(
-                    // (15,12): error CS1503: Argument 1: cannot convert from 'U' to 'System.Collections.Generic.IEnumerable<object>'
+                    // (15,12): error CS1503: Argument 1: cannot convert from 'U' to
+                    // 'System.Collections.Generic.IEnumerable<object>'
                     //         M2(o);
                     Diagnostic(ErrorCode.ERR_BadArgType, "o")
                         .WithArguments("1", "U", "System.Collections.Generic.IEnumerable<object>"),
-                    // (19,9): error CS1929: 'U' does not contain a definition for 'E2' and the best extension method overload 'M.E2(System.Collections.Generic.IEnumerable<object>)' requires a receiver of type 'System.Collections.Generic.IEnumerable<object>'
+                    // (19,9): error CS1929: 'U' does not contain a definition for 'E2' and the best extension method
+                    // overload 'M.E2(System.Collections.Generic.IEnumerable<object>)' requires a receiver of type
+                    // 'System.Collections.Generic.IEnumerable<object>'
                     //         o.E2();
                     Diagnostic(ErrorCode.ERR_BadInstanceArgType, "o")
                         .WithArguments(
@@ -7630,11 +7907,13 @@ class E
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (24,19): error CS0453: The type 'C5' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C<T>'
+                    // (24,19): error CS0453: The type 'C5' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'C<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C5")
                         .WithArguments("C<T>", "T", "C5")
                         .WithLocation(24, 19),
-                    // (25,15): error CS0453: The type 'C6' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'C<T>'
+                    // (25,15): error CS0453: The type 'C6' must be a non-nullable value type in order to use it as
+                    // parameter 'T' in the generic type or method 'C<T>'
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "C6")
                         .WithArguments("C<T>", "T", "C6")
                         .WithLocation(25, 15)
@@ -7696,11 +7975,13 @@ class C
 delegate D<T> D<T>() where T : new();";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,13): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    // (3,13): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'D<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "E")
                         .WithArguments("D<T>", "T", "B")
                         .WithLocation(3, 16),
-                    // (13,16): error CS0310: 'C' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    // (13,16): error CS0310: 'C' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'D<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "E")
                         .WithArguments("D<T>", "T", "C")
                         .WithLocation(13, 16),
@@ -7734,7 +8015,8 @@ class B
 delegate void D<out T>() where T : new();";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,32): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    // (3,32): error CS0310: 'B' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'D<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "B")
                         .WithArguments("D<T>", "T", "B")
                         .WithLocation(3, 32)
@@ -7762,11 +8044,13 @@ class C : I<C>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,7): error CS0310: 'C' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (6,7): error CS0310: 'C' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "C")
                         .WithArguments("I<T>", "T", "C")
                         .WithLocation(6, 7),
-                    // (9,16): error CS0310: 'C' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'I<T>'
+                    // (9,16): error CS0310: 'C' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'I<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "I<C>")
                         .WithArguments("I<T>", "T", "C")
                         .WithLocation(9, 16)
@@ -7832,43 +8116,53 @@ class B2 : IB<B2>
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (24,7): error CS0310: 'B2' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IB<T>'
+                    // (24,7): error CS0310: 'B2' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'IB<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "B2")
                         .WithArguments("IB<T>", "T", "B2")
                         .WithLocation(24, 7),
-                    // (14,7): error CS0310: 'A2' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IA<T>'
+                    // (14,7): error CS0310: 'A2' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'IA<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "A2")
                         .WithArguments("IA<T>", "T", "A2")
                         .WithLocation(14, 7),
-                    // (9,7): error CS0310: 'A1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IA<T>'
+                    // (9,7): error CS0310: 'A1' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'IA<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "A1")
                         .WithArguments("IA<T>", "T", "A1")
                         .WithLocation(9, 7),
-                    // (19,7): error CS0310: 'B1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IB<T>'
+                    // (19,7): error CS0310: 'B1' must be a non-abstract type with a public parameterless constructor in
+                    // order to use it as parameter 'T' in the generic type or method 'IB<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "B1")
                         .WithArguments("IB<T>", "T", "B1")
                         .WithLocation(19, 7),
-                    // (22,12): error CS0310: 'B1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IB<T>'
+                    // (22,12): error CS0310: 'B1' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'T' in the generic type or method 'IB<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "IB<B1>")
                         .WithArguments("IB<T>", "T", "B1")
                         .WithLocation(22, 12),
-                    // (22,31): error CS0310: 'B1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IB<T>'
+                    // (22,31): error CS0310: 'B1' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'T' in the generic type or method 'IB<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "i")
                         .WithArguments("IB<T>", "T", "B1")
                         .WithLocation(22, 31),
-                    // (12,12): error CS0310: 'A1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IA<T>'
+                    // (12,12): error CS0310: 'A1' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'T' in the generic type or method 'IA<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "IA<A1>")
                         .WithArguments("IA<T>", "T", "A1")
                         .WithLocation(12, 12),
-                    // (12,19): error CS0310: 'A1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IA<T>'
+                    // (12,19): error CS0310: 'A1' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'T' in the generic type or method 'IA<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "P")
                         .WithArguments("IA<T>", "T", "A1")
                         .WithLocation(12, 19),
-                    // (17,19): error CS0310: 'A2' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IA<T>'
+                    // (17,19): error CS0310: 'A2' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'T' in the generic type or method 'IA<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "P")
                         .WithArguments("IA<T>", "T", "A2")
                         .WithLocation(17, 19),
-                    // (27,31): error CS0310: 'B2' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'IB<T>'
+                    // (27,31): error CS0310: 'B2' must be a non-abstract type with a public parameterless constructor
+                    // in order to use it as parameter 'T' in the generic type or method 'IB<T>'
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "i")
                         .WithArguments("IB<T>", "T", "B2")
                         .WithLocation(27, 31)
@@ -8045,11 +8339,13 @@ public class E { }
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (4,6): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' context.
+                    // (4,6): warning CS8632: The annotation for nullable reference types should only be used in code
+                    // within a '#nullable' context.
                     //     E?[] eNullableArr;
                     Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                         .WithLocation(4, 6),
-                    // (4,10): warning CS0649: Field 'S.eNullableArr' is never assigned to, and will always have its default value null
+                    // (4,10): warning CS0649: Field 'S.eNullableArr' is never assigned to, and will always have its
+                    // default value null
                     //     E?[] eNullableArr;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "eNullableArr")
                         .WithArguments("S.eNullableArr", "null")
@@ -8085,7 +8381,9 @@ public interface IC<T> : IB where T : IB { }";
                 references: new MetadataReference[] { new CSharpCompilationReference(compilation2) }
             );
             compilation3.VerifyDiagnostics(
-                // (1,11): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (1,11): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 // class D : C<D>, IC<D> { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C<D>")
                     .WithArguments(
@@ -8093,21 +8391,27 @@ public interface IC<T> : IB where T : IB { }";
                         "e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 11),
-                // (1,7): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (1,7): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 // class D : C<D>, IC<D> { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments(
                         "IA",
                         "e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (1,7): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (1,7): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 // class D : C<D>, IC<D> { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments(
                         "A",
                         "e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (1,7): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (1,7): error CS0012: The type 'IA' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'e521fe98-c881-45cf-8870-249e00ae400d, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 // class D : C<D>, IC<D> { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments(
@@ -8372,7 +8676,9 @@ class D2 : C<B<object>, A<object>>
 }";
             CreateCompilationWithMscorlib40AndSystemCore(source)
                 .VerifyDiagnostics(
-                    // (18,9): error CS1061: 'X' does not contain a definition for 'E1' and no extension method 'E1' accepting a first argument of type 'X' could be found (are you missing a using directive or an assembly reference?)
+                    // (18,9): error CS1061: 'X' does not contain a definition for 'E1' and no extension method 'E1'
+                    // accepting a first argument of type 'X' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "E1")
                         .WithArguments("X", "E1")
                         .WithLocation(18, 11)
@@ -8408,31 +8714,38 @@ class B<T> : A where T : A
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (15,15): error CS1540: Cannot access protected member 'A.F' via a qualifier of type 'A'; the qualifier must be of type 'B<T>' (or derived from it)
+                    // (15,15): error CS1540: Cannot access protected member 'A.F' via a qualifier of type 'A'; the
+                    // qualifier must be of type 'B<T>' (or derived from it)
                     //         o = t.F;
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "F")
                         .WithArguments("A.F", "A", "B<T>"),
-                    // (16,15): error CS1540: Cannot access protected member 'A.G()' via a qualifier of type 'A'; the qualifier must be of type 'B<T>' (or derived from it)
+                    // (16,15): error CS1540: Cannot access protected member 'A.G()' via a qualifier of type 'A'; the
+                    // qualifier must be of type 'B<T>' (or derived from it)
                     //         o = t.G();
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "G")
                         .WithArguments("A.G()", "A", "B<T>"),
-                    // (17,15): error CS1540: Cannot access protected member 'A.P' via a qualifier of type 'A'; the qualifier must be of type 'B<T>' (or derived from it)
+                    // (17,15): error CS1540: Cannot access protected member 'A.P' via a qualifier of type 'A'; the
+                    // qualifier must be of type 'B<T>' (or derived from it)
                     //         o = t.P;
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "P")
                         .WithArguments("A.P", "A", "B<T>"),
-                    // (18,11): error CS1540: Cannot access protected member 'A.P' via a qualifier of type 'A'; the qualifier must be of type 'B<T>' (or derived from it)
+                    // (18,11): error CS1540: Cannot access protected member 'A.P' via a qualifier of type 'A'; the
+                    // qualifier must be of type 'B<T>' (or derived from it)
                     //         t.P = o;
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "P")
                         .WithArguments("A.P", "A", "B<T>"),
-                    // (19,13): error CS1540: Cannot access protected member 'A.this[int]' via a qualifier of type 'A'; the qualifier must be of type 'B<T>' (or derived from it)
+                    // (19,13): error CS1540: Cannot access protected member 'A.this[int]' via a qualifier of type 'A';
+                    // the qualifier must be of type 'B<T>' (or derived from it)
                     //         o = t[1];
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "t[1]")
                         .WithArguments("A.this[int]", "A", "B<T>"),
-                    // (20,9): error CS1540: Cannot access protected member 'A.this[int]' via a qualifier of type 'A'; the qualifier must be of type 'B<T>' (or derived from it)
+                    // (20,9): error CS1540: Cannot access protected member 'A.this[int]' via a qualifier of type 'A';
+                    // the qualifier must be of type 'B<T>' (or derived from it)
                     //         t[2] = o;
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "t[2]")
                         .WithArguments("A.this[int]", "A", "B<T>"),
-                    // (21,11): error CS1540: Cannot access protected member 'A.E' via a qualifier of type 'A'; the qualifier must be of type 'B<T>' (or derived from it)
+                    // (21,11): error CS1540: Cannot access protected member 'A.E' via a qualifier of type 'A'; the
+                    // qualifier must be of type 'B<T>' (or derived from it)
                     //         t.E += null;
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "E")
                         .WithArguments("A.E", "A", "B<T>"),
@@ -8509,11 +8822,13 @@ class B : A
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (16,19): error CS1540: Cannot access protected member 'A.F' via a qualifier of type 'A'; the qualifier must be of type 'B.C1<T, U, V>' (or derived from it)
+                    // (16,19): error CS1540: Cannot access protected member 'A.F' via a qualifier of type 'A'; the
+                    // qualifier must be of type 'B.C1<T, U, V>' (or derived from it)
                     //             o = t.F;
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "F")
                         .WithArguments("A.F", "A", "B.C1<T, U, V>"),
-                    // (17,19): error CS1540: Cannot access protected member 'A.P' via a qualifier of type 'A'; the qualifier must be of type 'B.C1<T, U, V>' (or derived from it)
+                    // (17,19): error CS1540: Cannot access protected member 'A.P' via a qualifier of type 'A'; the
+                    // qualifier must be of type 'B.C1<T, U, V>' (or derived from it)
                     //             o = t.P;
                     Diagnostic(ErrorCode.ERR_BadProtectedAccess, "P")
                         .WithArguments("A.P", "A", "B.C1<T, U, V>")
@@ -8933,7 +9248,8 @@ static class Program
                     //         provider.GetService<>();
                     Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "provider.GetService<>")
                         .WithLocation(32, 9),
-                    // (32,18): error CS0305: Using the generic method 'K.GetService<T1, T2>()' requires 2 type arguments
+                    // (32,18): error CS0305: Using the generic method 'K.GetService<T1, T2>()' requires 2 type
+                    // arguments
                     //         provider.GetService<>();
                     Diagnostic(ErrorCode.ERR_BadArity, "GetService<>")
                         .WithArguments("K.GetService<T1, T2>()", "method", "2")
@@ -8942,7 +9258,8 @@ static class Program
                     //         provider.GetService<>().ToString();
                     Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "provider.GetService<>")
                         .WithLocation(33, 9),
-                    // (33,18): error CS0305: Using the generic method 'K.GetService<T1, T2>()' requires 2 type arguments
+                    // (33,18): error CS0305: Using the generic method 'K.GetService<T1, T2>()' requires 2 type
+                    // arguments
                     //         provider.GetService<>().ToString();
                     Diagnostic(ErrorCode.ERR_BadArity, "GetService<>")
                         .WithArguments("K.GetService<T1, T2>()", "method", "2")
@@ -8981,7 +9298,9 @@ static class Program
                     //         provider.GetServiceA<>();
                     Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "provider.GetServiceA<>")
                         .WithLocation(11, 9),
-                    // (11,18): error CS1061: 'I' does not contain a definition for 'GetServiceA' and no accessible extension method 'GetServiceA' accepting a first argument of type 'I' could be found (are you missing a using directive or an assembly reference?)
+                    // (11,18): error CS1061: 'I' does not contain a definition for 'GetServiceA' and no accessible
+                    // extension method 'GetServiceA' accepting a first argument of type 'I' could be found (are you
+                    // missing a using directive or an assembly reference?)
                     //         provider.GetServiceA<>();
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "GetServiceA<>")
                         .WithArguments("I", "GetServiceA")
@@ -8990,7 +9309,9 @@ static class Program
                     //         provider.GetServiceA<>().ToString();
                     Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "provider.GetServiceA<>")
                         .WithLocation(12, 9),
-                    // (12,18): error CS1061: 'I' does not contain a definition for 'GetServiceA' and no accessible extension method 'GetServiceA' accepting a first argument of type 'I' could be found (are you missing a using directive or an assembly reference?)
+                    // (12,18): error CS1061: 'I' does not contain a definition for 'GetServiceA' and no accessible
+                    // extension method 'GetServiceA' accepting a first argument of type 'I' could be found (are you
+                    // missing a using directive or an assembly reference?)
                     //         provider.GetServiceA<>().ToString();
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "GetServiceA<>")
                         .WithArguments("I", "GetServiceA")
@@ -9007,7 +9328,9 @@ static class Program
                     //         provider.GetServiceC<>();
                     Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "provider.GetServiceC<>")
                         .WithLocation(17, 9),
-                    // (17,18): error CS1061: 'I' does not contain a definition for 'GetServiceC' and no accessible extension method 'GetServiceC' accepting a first argument of type 'I' could be found (are you missing a using directive or an assembly reference?)
+                    // (17,18): error CS1061: 'I' does not contain a definition for 'GetServiceC' and no accessible
+                    // extension method 'GetServiceC' accepting a first argument of type 'I' could be found (are you
+                    // missing a using directive or an assembly reference?)
                     //         provider.GetServiceC<>();
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "GetServiceC<>")
                         .WithArguments("I", "GetServiceC")
@@ -9016,7 +9339,9 @@ static class Program
                     //         provider.GetServiceC<>().ToString();
                     Diagnostic(ErrorCode.ERR_OmittedTypeArgument, "provider.GetServiceC<>")
                         .WithLocation(18, 9),
-                    // (18,18): error CS1061: 'I' does not contain a definition for 'GetServiceC' and no accessible extension method 'GetServiceC' accepting a first argument of type 'I' could be found (are you missing a using directive or an assembly reference?)
+                    // (18,18): error CS1061: 'I' does not contain a definition for 'GetServiceC' and no accessible
+                    // extension method 'GetServiceC' accepting a first argument of type 'I' could be found (are you
+                    // missing a using directive or an assembly reference?)
                     //         provider.GetServiceC<>().ToString();
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "GetServiceC<>")
                         .WithArguments("I", "GetServiceC")
@@ -9047,12 +9372,14 @@ static class Program
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,9): error CS0308: The non-generic method 'Program.GetServiceA()' cannot be used with type arguments
+                    // (9,9): error CS0308: The non-generic method 'Program.GetServiceA()' cannot be used with type
+                    // arguments
                     //         GetServiceA<>();
                     Diagnostic(ErrorCode.ERR_HasNoTypeVars, "GetServiceA<>")
                         .WithArguments("Program.GetServiceA()", "method")
                         .WithLocation(9, 9),
-                    // (10,9): error CS0308: The non-generic method 'Program.GetServiceA()' cannot be used with type arguments
+                    // (10,9): error CS0308: The non-generic method 'Program.GetServiceA()' cannot be used with type
+                    // arguments
                     //         GetServiceA<>().ToString();
                     Diagnostic(ErrorCode.ERR_HasNoTypeVars, "GetServiceA<>")
                         .WithArguments("Program.GetServiceA()", "method")
@@ -9067,12 +9394,14 @@ static class Program
                     Diagnostic(ErrorCode.ERR_BadArity, "GetServiceB<>")
                         .WithArguments("GetServiceB", "method group", "1")
                         .WithLocation(12, 9),
-                    // (13,9): error CS0305: Using the generic method 'Program.GetServiceC<T1, T2>()' requires 2 type arguments
+                    // (13,9): error CS0305: Using the generic method 'Program.GetServiceC<T1, T2>()' requires 2 type
+                    // arguments
                     //         GetServiceC<>();
                     Diagnostic(ErrorCode.ERR_BadArity, "GetServiceC<>")
                         .WithArguments("Program.GetServiceC<T1, T2>()", "method", "2")
                         .WithLocation(13, 9),
-                    // (14,9): error CS0305: Using the generic method 'Program.GetServiceC<T1, T2>()' requires 2 type arguments
+                    // (14,9): error CS0305: Using the generic method 'Program.GetServiceC<T1, T2>()' requires 2 type
+                    // arguments
                     //         GetServiceC<>().ToString();
                     Diagnostic(ErrorCode.ERR_BadArity, "GetServiceC<>")
                         .WithArguments("Program.GetServiceC<T1, T2>()", "method", "2")
@@ -9113,7 +9442,10 @@ public class C : A<C, C.D>
                 targetFramework: TargetFramework.Mscorlib45
             );
 
-            // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+            // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral,
+            // PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0,
+            // Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime
+            // policy
             DiagnosticDescription expectedDiagnostic = Diagnostic(
                     ErrorCode.WRN_UnifyReferenceMajMin
                 )
@@ -9125,11 +9457,16 @@ public class C : A<C, C.D>
                 )
                 .WithLocation(1, 1);
 
-            // These are unification use-site diagnostics. The original stackoverflow bug here came from checking constraints as part of
-            // unification diagnostic calculation, so we want to verify that these are present to make sure we're testing the correct scenario.
+            // These are unification use-site diagnostics. The original stackoverflow bug here came from
+            // checking constraints as part of
+            // unification diagnostic calculation, so we want to verify that these are present to make sure
+            // we're testing the correct scenario.
             comp.VerifyDiagnostics(
                 expectedDiagnostic,
-                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0,
+                // Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime
+                // policy
                 expectedDiagnostic
             );
 
@@ -9217,7 +9554,10 @@ System.Console.WriteLine(typeof(G).FullName);
             );
 
             comp.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'remapped, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'intermediate' matches identity 'remapped, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'remapped', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'remapped, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'intermediate' matches identity 'remapped, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'remapped', you may need to supply runtime
+                // policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "remapped, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -9271,7 +9611,8 @@ interface Base<N> : Base, ISetup<N> where N : Base<N>.Nest { }
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (5,11): error CS0310: 'N' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'ISetup<T>'
+                // (5,11): error CS0310: 'N' must be a non-abstract type with a public parameterless constructor in
+                // order to use it as parameter 'T' in the generic type or method 'ISetup<T>'
                 // interface Base<N> : Base, ISetup<N> where N : Base<N>.Nest { }
                 Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "Base")
                     .WithArguments("ISetup<T>", "T", "N")

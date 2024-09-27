@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis
                 var gacAssemblyName = CreateAssemblyNameFromFile(assemblyPath);
 
 #pragma warning disable SYSLIB0037
-                // warning SYSLIB0037: 'AssemblyName.ProcessorArchitecture' is obsolete: 'AssemblyName members HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete and not supported.'
+                // warning SYSLIB0037: 'AssemblyName.ProcessorArchitecture' is obsolete: 'AssemblyName members
+                // HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete and not supported.'
                 if (
                     gacAssemblyName.ProcessorArchitecture != ProcessorArchitecture.None
                     && architectureFilter != default(ImmutableArray<ProcessorArchitecture>)

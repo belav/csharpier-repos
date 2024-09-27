@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             public void Done(bool isFullyLoaded)
             {
-                // do nothing, we already await the SearchAsync method which calls this in a finally right before returning.
+                // do nothing, we already await the SearchAsync method which calls this in a finally right before
+                // returning.
                 // used by non-LSP editor API.
             }
 

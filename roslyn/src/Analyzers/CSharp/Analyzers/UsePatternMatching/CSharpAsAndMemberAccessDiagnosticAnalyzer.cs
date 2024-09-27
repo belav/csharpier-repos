@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     }
                     else if (binaryExpression.Kind() is SyntaxKind.NotEqualsExpression)
                     {
-                        // `(a as T)?.Prop != constant` *does not* have the same semantics as `a is T { Prop: not constant }`
+                        // `(a as T)?.Prop != constant` *does not* have the same semantics as `a is T { Prop: not constant
+                        // }`
                         // (specifically, when the type check fails)
                         if (constantValue.Value is not null)
                             return false;
@@ -150,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         return true;
                     }
 
-                    // don't need to check the other relational comparisons. These comparisons do a null check themselves,
+                    // don't need to check the other relational comparisons. These comparisons do a null check
+                    // themselves,
                     // so it's safe to add a null-check with the 'is'.
                     return true;
                 }
@@ -196,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         if (!constantValue.HasValue)
                             return false;
 
-                        // `(a as T)?.Prop is not constant` *does not* have the same semantics as `a is T { Prop: not constant }`
+                        // `(a as T)?.Prop is not constant` *does not* have the same semantics as `a is T { Prop: not
+                        // constant }`
                         // (specifically, when the type check fails)
                         if (constantValue.Value is not null)
                             return false;

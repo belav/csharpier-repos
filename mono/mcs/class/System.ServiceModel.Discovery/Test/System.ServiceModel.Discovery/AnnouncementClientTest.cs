@@ -102,7 +102,8 @@ namespace MonoTests.System.ServiceModel.Discovery
             );
             var edm = new EndpointDiscoveryMetadata();
             ac.AnnounceOnline(edm);
-            // attempt to close the client causes another CommunicationObjectFaultedException - looks like it fails to allow Close() at faulted state unlike other objects.
+            // attempt to close the client causes another CommunicationObjectFaultedException - looks like it
+            // fails to allow Close() at faulted state unlike other objects.
         }
 
         [Test]

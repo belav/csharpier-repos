@@ -76,7 +76,8 @@ namespace HtmlAgilityPack
         /// Initializes a new instance of the HtmlNavigator and loads an HTML document from a stream.
         /// </summary>
         /// <param name="stream">The input stream.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the stream.</param>
         public HtmlNodeNavigator(Stream stream, bool detectEncodingFromByteOrderMarks)
         {
             _doc.Load(stream, detectEncodingFromByteOrderMarks);
@@ -99,7 +100,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="stream">The input stream.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the stream.</param>
         public HtmlNodeNavigator(
             Stream stream,
             Encoding encoding,
@@ -115,7 +117,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="stream">The input stream.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the stream.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
         public HtmlNodeNavigator(
             Stream stream,
@@ -152,7 +155,8 @@ namespace HtmlAgilityPack
         /// Initializes a new instance of the HtmlNavigator and loads an HTML document from a file.
         /// </summary>
         /// <param name="path">The complete file path to be read.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public HtmlNodeNavigator(string path, bool detectEncodingFromByteOrderMarks)
         {
             _doc.Load(path, detectEncodingFromByteOrderMarks);
@@ -175,7 +179,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="path">The complete file path to be read.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public HtmlNodeNavigator(
             string path,
             Encoding encoding,
@@ -191,7 +196,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="path">The complete file path to be read.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
         public HtmlNodeNavigator(
             string path,
@@ -441,7 +447,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Creates a new HtmlNavigator positioned at the same node as this HtmlNavigator.
         /// </summary>
-        /// <returns>A new HtmlNavigator object positioned at the same node as the original HtmlNavigator.</returns>
+        /// <returns>A new HtmlNavigator object positioned at the same node as the original
+        // HtmlNavigator.</returns>
         public override XPathNavigator Clone()
         {
             InternalTrace(null);
@@ -452,8 +459,10 @@ namespace HtmlAgilityPack
         /// Gets the value of the HTML attribute with the specified LocalName and NamespaceURI.
         /// </summary>
         /// <param name="localName">The local name of the HTML attribute.</param>
-        /// <param name="namespaceURI">The namespace URI of the attribute. Unsupported with the HtmlNavigator implementation.</param>
-        /// <returns>The value of the specified HTML attribute. String.Empty or null if a matching attribute is not found or if the navigator is not positioned on an element node.</returns>
+        /// <param name="namespaceURI">The namespace URI of the attribute. Unsupported with the
+        // HtmlNavigator implementation.</param>
+        /// <returns>The value of the specified HTML attribute. String.Empty or null if a matching attribute
+        // is not found or if the navigator is not positioned on an element node.</returns>
         public override string GetAttribute(string localName, string namespaceURI)
         {
             InternalTrace("localName=" + localName + ", namespaceURI=" + namespaceURI);
@@ -480,7 +489,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Determines whether the current HtmlNavigator is at the same position as the specified HtmlNavigator.
+        /// Determines whether the current HtmlNavigator is at the same position as the specified
+        // HtmlNavigator.
         /// </summary>
         /// <param name="other">The HtmlNavigator that you want to compare against.</param>
         /// <returns>true if the two navigators have the same position, otherwise, false.</returns>
@@ -500,7 +510,8 @@ namespace HtmlAgilityPack
         /// Moves to the same position as the specified HtmlNavigator.
         /// </summary>
         /// <param name="other">The HtmlNavigator positioned on the node that you want to move to.</param>
-        /// <returns>true if successful, otherwise false. If false, the position of the navigator is unchanged.</returns>
+        /// <returns>true if successful, otherwise false. If false, the position of the navigator is
+        // unchanged.</returns>
         public override bool MoveTo(XPathNavigator other)
         {
             HtmlNodeNavigator nav = other as HtmlNodeNavigator;
@@ -534,8 +545,10 @@ namespace HtmlAgilityPack
         /// Moves to the HTML attribute with matching LocalName and NamespaceURI.
         /// </summary>
         /// <param name="localName">The local name of the HTML attribute.</param>
-        /// <param name="namespaceURI">The namespace URI of the attribute. Unsupported with the HtmlNavigator implementation.</param>
-        /// <returns>true if the HTML attribute is found, otherwise, false. If false, the position of the navigator does not change.</returns>
+        /// <param name="namespaceURI">The namespace URI of the attribute. Unsupported with the
+        // HtmlNavigator implementation.</param>
+        /// <returns>true if the HTML attribute is found, otherwise, false. If false, the position of the
+        // navigator does not change.</returns>
         public override bool MoveToAttribute(string localName, string namespaceURI)
         {
             InternalTrace("localName=" + localName + ", namespaceURI=" + namespaceURI);
@@ -553,7 +566,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Moves to the first sibling of the current node.
         /// </summary>
-        /// <returns>true if the navigator is successful moving to the first sibling node, false if there is no first sibling or if the navigator is currently positioned on an attribute node.</returns>
+        /// <returns>true if the navigator is successful moving to the first sibling node, false if there is
+        // no first sibling or if the navigator is currently positioned on an attribute node.</returns>
         public override bool MoveToFirst()
         {
             if (_currentnode.ParentNode == null)
@@ -574,7 +588,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Moves to the first HTML attribute.
         /// </summary>
-        /// <returns>true if the navigator is successful moving to the first HTML attribute, otherwise, false.</returns>
+        /// <returns>true if the navigator is successful moving to the first HTML attribute, otherwise,
+        // false.</returns>
         public override bool MoveToFirstAttribute()
         {
             if (!HasAttributes)
@@ -618,8 +633,10 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Moves to the node that has an attribute of type ID whose value matches the specified string.
         /// </summary>
-        /// <param name="id">A string representing the ID value of the node to which you want to move. This argument does not need to be atomized.</param>
-        /// <returns>true if the move was successful, otherwise false. If false, the position of the navigator is unchanged.</returns>
+        /// <param name="id">A string representing the ID value of the node to which you want to move. This
+        // argument does not need to be atomized.</param>
+        /// <returns>true if the move was successful, otherwise false. If false, the position of the
+        // navigator is unchanged.</returns>
         public override bool MoveToId(string id)
         {
             InternalTrace("id=" + id);
@@ -649,7 +666,9 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Moves to the next sibling of the current node.
         /// </summary>
-        /// <returns>true if the navigator is successful moving to the next sibling node, false if there are no more siblings or if the navigator is currently positioned on an attribute node. If false, the position of the navigator is unchanged.</returns>
+        /// <returns>true if the navigator is successful moving to the next sibling node, false if there are
+        // no more siblings or if the navigator is currently positioned on an attribute node. If false, the
+        // position of the navigator is unchanged.</returns>
         public override bool MoveToNext()
         {
             if (_currentnode.NextSibling == null)
@@ -712,7 +731,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Moves to the previous sibling of the current node.
         /// </summary>
-        /// <returns>true if the navigator is successful moving to the previous sibling node, false if there is no previous sibling or if the navigator is currently positioned on an attribute node.</returns>
+        /// <returns>true if the navigator is successful moving to the previous sibling node, false if there
+        // is no previous sibling or if the navigator is currently positioned on an attribute node.</returns>
         public override bool MoveToPrevious()
         {
             if (_currentnode.PreviousSibling == null)

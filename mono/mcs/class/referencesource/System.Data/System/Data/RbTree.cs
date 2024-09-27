@@ -75,31 +75,38 @@ namespace System.Data
     //       32,   32,   32,              // inUsePageCount <      4           0,    1,     2,
     //      256,  256,  256,              // inUsePageCount <     32           4,    8,    16,
     //     1024, 1024,                    // inUsePageCount <    128          32,   64,
-    //     4096, 4096, 4096, 4096, 4096,  // inUsePageCount <   4096         128,  256,   512, 1024, 2048,
+    //     4096, 4096, 4096, 4096, 4096,  // inUsePageCount <   4096         128,  256,   512, 1024,
+    // 2048,
     //     8192, 8192, 8192,              // inUsePageCount <  32768        4096, 8192, 16384
     //    65535                           // inUsePageCount <= 65535
     //};
 
     // the in-ordering of nodes in the tree  (the second graph has duplicate nodes)
-    // for the satellite tree, the main tree node is the clone, GetNodeByIndex always returns the satelliteRootid
+    // for the satellite tree, the main tree node is the clone, GetNodeByIndex always returns the
+    // satelliteRootid
     //      4       |           4
     //    /   \     |     /          \
     //   2     6    |    3  -   3     7
     //  / \   / \   |   / \    / \   / \
     // 1   3 5   7  |  1   5  2   4 8   9
 
-    // PageTable (starting at 32) doubles in size on demand (^16 - ^5 = 11 grows to reach max PageTable size)
+    // PageTable (starting at 32) doubles in size on demand (^16 - ^5 = 11 grows to reach max PageTable
+    // size)
 
     // if a page has no allocated slots, it will be dropped
     // worst case scenario is to repeatedly add/remove on a boundary condition
 
-    // the primary change to support Index using Predicate<DataRow> or Comparison<DataRow> was to eliminate all
-    // unnecessary searching for the node in the main tree when operating on a node in the satellite branch
-    // in all cases except GetNodeByKey(K)& GetIndexByNode(int), we know what that mainTreeNodeID is and can avoid searching
+    // the primary change to support Index using Predicate<DataRow> or Comparison<DataRow> was to
+    // eliminate all
+    // unnecessary searching for the node in the main tree when operating on a node in the satellite
+    // branch
+    // in all cases except GetNodeByKey(K)& GetIndexByNode(int), we know what that mainTreeNodeID is and
+    // can avoid searching
 
     internal abstract class RBTree<K> : System.Collections.IEnumerable
     {
-        // 2^16 #pages * 2^n == total number of nodes.  512 = 32 million, 1024 = 64 million, 2048 = 128m, 4096=256m, 8192=512m, 16284=1 billion
+        // 2^16 #pages * 2^n == total number of nodes.  512 = 32 million, 1024 = 64 million, 2048 = 128m,
+        // 4096=256m, 8192=512m, 16284=1 billion
         // 32K=2 billion.
         internal const int DefaultPageSize = 32; /* 512 = 2^9 32 million nodes*/
         internal const int NIL = 0; // 0th page, 0th slot for each tree till CLR static & generics issue is fixed
@@ -152,12 +159,12 @@ namespace System.Data
         }
 
         /* AllocPage()
-         *  size : Allocates a page of the specified size.
-         *
-         * Look for an unallocated page entry.
-         *   (1) If entry for an unallocated page exists in current pageTable - use it
-         *   (2) else extend pageTable
-         */
+        *  size : Allocates a page of the specified size.
+        *
+        * Look for an unallocated page entry.
+        *   (1) If entry for an unallocated page exists in current pageTable - use it
+        *   (2) else extend pageTable
+        */
         private TreePage AllocPage(int size)
         {
             int freePageIndex = GetIndexOfPageWithFreeSlot(false);
@@ -189,8 +196,8 @@ namespace System.Data
         }
 
         /* MarkPageFull()
-         * Mark the specified page "Full" as all its slots aer in use
-         */
+        * Mark the specified page "Full" as all its slots aer in use
+        */
         private void MarkPageFull(TreePage page)
         {
             // set bit associated with page to mark it as full
@@ -206,8 +213,8 @@ namespace System.Data
         }
 
         /* MarkPageFree()
-         * Mark the specified page as "Free". It has atleast 1 available slot.
-         */
+        * Mark the specified page as "Free". It has atleast 1 available slot.
+        */
         private void MarkPageFree(TreePage page)
         {
             // set bit associated with page to mark it as free
@@ -227,10 +234,10 @@ namespace System.Data
             Int32 value = 0; // 0 based slot position
 
             /*
-             * Assumption: bitMap can have max, exactly 1 bit set.
-             * convert bitMap to int value giving number of 0's to its right
-             * return value between 0 and 31
-             */
+            * Assumption: bitMap can have max, exactly 1 bit set.
+            * convert bitMap to int value giving number of 0's to its right
+            * return value between 0 and 31
+            */
             if ((bitMap & 0xFFFF0000) != 0)
             {
                 value += 16;
@@ -257,9 +264,9 @@ namespace System.Data
         }
 
         /*
-         * FreeNode()
-         * nodeId: The nodeId of the node to be freed
-         */
+        * FreeNode()
+        * nodeId: The nodeId of the node to be freed
+        */
         private void FreeNode(int nodeId)
         {
             TreePage page = _pageTable[nodeId >> 16];
@@ -280,11 +287,12 @@ namespace System.Data
         }
 
         /*
-         * GetIndexOfPageWithFreeSlot()
-         * allocatedPage: If true, look for an allocatedPage with free slot else look for an unallocated page entry in pageTable
-         * return: if allocatedPage is true, return index of a page with at least 1 free slot
-         *            else return index of an unallocated page, pageTable[index] is empty.
-         */
+        * GetIndexOfPageWithFreeSlot()
+        * allocatedPage: If true, look for an allocatedPage with free slot else look for an unallocated page
+        entry in pageTable
+        * return: if allocatedPage is true, return index of a page with at least 1 free slot
+        *            else return index of an unallocated page, pageTable[index] is empty.
+        */
         private int GetIndexOfPageWithFreeSlot(bool allocatedPage)
         {
             int pageTableMapPos = nextFreePageLine;
@@ -352,13 +360,13 @@ namespace System.Data
         }
 
         /*
-         * GetNewNode()
-         * Allocate storage for a new node and assign in the specified key.
-         *
-         * Find a page with free slots or allocate a new page.
-         * Use bitmap associated with page to allocate a slot.
-         * mark the slot as used and return its index.
-         */
+        * GetNewNode()
+        * Allocate storage for a new node and assign in the specified key.
+        *
+        * Find a page with free slots or allocate a new page.
+        * Use bitmap associated with page to allocate a slot.
+        * mark the slot as used and return its index.
+        */
         private int GetNewNode(K key)
         {
             // find page with free slots, if none, allocate a new page
@@ -460,10 +468,10 @@ namespace System.Data
         }
 
         /*
-         * LeftRotate()
-         *
-         * It returns the node id for the root of the rotated tree
-         */
+        * LeftRotate()
+        *
+        * It returns the node id for the root of the rotated tree
+        */
         private int LeftRotate(int root_id, int x_id, int mainTreeNode)
         {
             int y_id = Right(x_id);
@@ -529,10 +537,10 @@ namespace System.Data
         }
 
         /*
-         * RightRotate()
-         *
-         * It returns the node id for the root of the rotated tree
-         */
+        * RightRotate()
+        *
+        * It returns the node id for the root of the rotated tree
+        */
         private int RightRotate(int root_id, int x_id, int mainTreeNode)
         {
             int y_id = Left(x_id);
@@ -594,7 +602,8 @@ namespace System.Data
 
 #if VerifySort
         // This helps validate the sorting of the tree to help catch instances of corruption much sooner.
-        // corruption happens when the data changes without telling the tree or when multi-threads do simultanous write operations
+        // corruption happens when the data changes without telling the tree or when multi-threads do
+        // simultanous write operations
         private int Compare(int root_id, int x_id, int z_id)
         {
             Debug.Assert(NIL != x_id, "nil left");
@@ -606,19 +615,22 @@ namespace System.Data
 #endif
 
         /*
-         * RBInsert()
-         * root_id: root_id of the tree to which a node has to be inserted. it is NIL for inserting to Main tree.
-         * x_id    : node_id of node to be inserted
-         *
-         * returns: The root of the tree to which the specified node was added. its NIL if the node was added to Main RBTree.
-         *
-         * if root_id is NIL -> use CompareNode else use CompareSateliteTreeNode
-         *
-         * Satelite tree creation:
-         * First Duplicate value encountered. Create a *new* tree whose root will have the same key value as the current node.
-         * The Duplicate tree nodes have same key when used with CompareRecords but distinct record ids.
-         * The current record at all times will have the same *key* as the duplicate tree root.
-         */
+        * RBInsert()
+        * root_id: root_id of the tree to which a node has to be inserted. it is NIL for inserting to Main
+        tree.
+        * x_id    : node_id of node to be inserted
+        *
+        * returns: The root of the tree to which the specified node was added. its NIL if the node was added
+        to Main RBTree.
+        *
+        * if root_id is NIL -> use CompareNode else use CompareSateliteTreeNode
+        *
+        * Satelite tree creation:
+        * First Duplicate value encountered. Create a *new* tree whose root will have the same key value as
+        the current node.
+        * The Duplicate tree nodes have same key when used with CompareRecords but distinct record ids.
+        * The current record at all times will have the same *key* as the duplicate tree root.
+        */
         private int RBInsert(int root_id, int x_id, int mainTreeNodeID, int position, bool append)
         {
             unchecked
@@ -665,7 +677,8 @@ namespace System.Data
                     }
                     else
                     {
-                        // Multiple records with same key - insert it to the duplicate record tree associated with current node
+                        // Multiple records with same key - insert it to the duplicate record tree associated with current
+                        // node
                         if (root_id != NIL)
                         {
                             throw ExceptionBuilder.InternalRBTreeError(
@@ -742,7 +755,8 @@ namespace System.Data
                     IncreaseSize(z_id);
                     y_id = z_id; // y_id set to the proposed parent of x_id
 
-                    //int c = (SubTreeSize(y_id)-(position)); // Actually it should be: SubTreeSize(y_id)+1 - (position + 1)
+                    //int c = (SubTreeSize(y_id)-(position)); // Actually it should be: SubTreeSize(y_id)+1 - (position
+                    // + 1)
                     int c = (position) - (SubTreeSize(Left(y_id)));
 
                     if (c <= 0)
@@ -877,7 +891,8 @@ namespace System.Data
         public void UpdateNodeKey(K currentKey, K newKey)
         {
             // swap oldRecord with NewRecord in nodeId associated with oldRecord
-            // if the matched node is a satellite root then also change the key in the associated main tree node.
+            // if the matched node is a satellite root then also change the key in the associated main tree
+            // node.
             NodePath x_id = GetNodeByKey(currentKey);
             if (Parent(x_id.NodeID) == NIL && x_id.NodeID != root) //determine if x_id is a satellite root.
             {
@@ -917,22 +932,23 @@ namespace System.Data
         }
 
         /*
-         * RBDelete()
-         *  root_id: root_id of the tree. it is NIL for Main tree.
-         *  z_id    : node_id of node to be deleted
-         *
-         * returns: The id of the spliced node
-         *
-         * Case 1: Node is in main tree only        (decrease size in main tree)
-         * Case 2: Node's key is shared with a main tree node whose next is non-NIL
-         *                                       (decrease size in both trees)
-         * Case 3: special case of case 2: After deletion, node leaves satelite tree with only 1 node (only root),
-         *             it should collapse the satelite tree - go to case 4. (decrease size in both trees)
-         * Case 4: (1) Node is in Main tree and is a satelite tree root AND
-         *             (2) It is the only node in Satelite tree
-         *                   (Do not decrease size in any tree, as its a collpase operation)
-         *
-         */
+        * RBDelete()
+        *  root_id: root_id of the tree. it is NIL for Main tree.
+        *  z_id    : node_id of node to be deleted
+        *
+        * returns: The id of the spliced node
+        *
+        * Case 1: Node is in main tree only        (decrease size in main tree)
+        * Case 2: Node's key is shared with a main tree node whose next is non-NIL
+        *                                       (decrease size in both trees)
+        * Case 3: special case of case 2: After deletion, node leaves satelite tree with only 1 node (only
+        root),
+        *             it should collapse the satelite tree - go to case 4. (decrease size in both trees)
+        * Case 4: (1) Node is in Main tree and is a satelite tree root AND
+        *             (2) It is the only node in Satelite tree
+        *                   (Do not decrease size in any tree, as its a collpase operation)
+        *
+        */
 
         private int RBDeleteX(int root_id, int z_id, int mainTreeNodeID)
         {
@@ -940,7 +956,8 @@ namespace System.Data
             int y_id; // the spliced node
             int py_id; // for holding spliced node (y_id's) parent
 #if VerifyPath
-            // by knowing the NodePath, when z_id is in a satellite branch we don't have to Search for mainTreeNodeID
+            // by knowing the NodePath, when z_id is in a satellite branch we don't have to Search for
+            // mainTreeNodeID
             (new NodePath(z_id, mainTreeNodeID)).VerifyPath(this);
 #endif
             if (Next(z_id) != NIL)
@@ -1009,7 +1026,8 @@ namespace System.Data
                 {
                     throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidStateinDelete);
                 }
-                // -- it's possible for Next(mNode) to be != NIL and root_id == NIL when, the spliced node is a mNode of some
+                // -- it's possible for Next(mNode) to be != NIL and root_id == NIL when, the spliced node is a
+                // mNode of some
                 // -- satellite tree and its "next" gets assigned to mNode
                 if (root_id != NIL)
                 {
@@ -1045,7 +1063,8 @@ namespace System.Data
 
             if (isCase3)
             {
-                // Collpase satelite tree, by swapping it with the main tree counterpart and freeing the main tree node
+                // Collpase satelite tree, by swapping it with the main tree counterpart and freeing the main tree
+                // node
                 if (mNode == NIL || SubTreeSize(Next(mNode)) != 1)
                 {
                     throw ExceptionBuilder.InternalRBTreeError(RBTreeError.InvalidNodeSizeinDelete);
@@ -1159,11 +1178,11 @@ namespace System.Data
         }
 
         /*
-         * RBDeleteFixup()
-         * Fix the specified tree for RedBlack properties
-         *
-         * returns: The id of the root
-         */
+        * RBDeleteFixup()
+        * Fix the specified tree for RedBlack properties
+        *
+        * returns: The id of the root
+        */
         private int RBDeleteFixup(
             int root_id,
             int x_id,
@@ -1175,7 +1194,8 @@ namespace System.Data
             int w_id;
 
 #if VerifyPath
-            // by knowing the NodePath, when z_id is in a satellite branch we don't have to Search for mainTreeNodeID
+            // by knowing the NodePath, when z_id is in a satellite branch we don't have to Search for
+            // mainTreeNodeID
             (new NodePath(root_id, mainTreeNodeID)).VerifyPath(this);
 #endif
 
@@ -1397,7 +1417,8 @@ namespace System.Data
 
         // To simulate direct access for records[index]= record
         /// <summary>
-        ///  return key associated with the specified value. Specifically, return record for specified index/value
+        ///  return key associated with the specified value. Specifically, return record for specified
+        // index/value
         ///  indexer
         /// </summary>
         /// <exception cref="IndexOutOfRangeException"></exception>
@@ -1425,9 +1446,9 @@ namespace System.Data
         }
 
         /*
-         * GetIndexByRecord()
-         * Gets index of the specified record. returns (-1) if specified record is not found.
-         */
+        * GetIndexByRecord()
+        * Gets index of the specified record. returns (-1) if specified record is not found.
+        */
         public int GetIndexByKey(K key)
         {
             int nodeIndex = -1;
@@ -1440,28 +1461,29 @@ namespace System.Data
         }
 
         /*
-
-         * GetIndexByNode()
-         *
-         * If I am right child then size=my size + size of left child of my parent + 1
-         * go up till root, if right child keep adding to the size.
-         * (1) compute rank in main tree.
-         * (2) if node member of a satelite tree, add to rank its relative rank in that tree.
-         *
-         * Rank:
-         * Case 1: Node is in Main RBTree only
-         *         Its rank/index is its main tree index
-         * Case 2: Node is in a Satelite tree only
-         *         Its rank/index is its satelite tree index
-         * Case 3: Nodes is in both Main and Satelite RBTree (a main tree node can be a satelite tree root)
-         *         Its rank/index is its main tree index + its satelite tree index - 1
-         * Returns the index of the specified node.
-         * returns -1, if the specified Node is tree.NIL.
-         *
-         * Assumption: The specified node always exist in the tree.
-         */
+        
+        * GetIndexByNode()
+        *
+        * If I am right child then size=my size + size of left child of my parent + 1
+        * go up till root, if right child keep adding to the size.
+        * (1) compute rank in main tree.
+        * (2) if node member of a satelite tree, add to rank its relative rank in that tree.
+        *
+        * Rank:
+        * Case 1: Node is in Main RBTree only
+        *         Its rank/index is its main tree index
+        * Case 2: Node is in a Satelite tree only
+        *         Its rank/index is its satelite tree index
+        * Case 3: Nodes is in both Main and Satelite RBTree (a main tree node can be a satelite tree root)
+        *         Its rank/index is its main tree index + its satelite tree index - 1
+        * Returns the index of the specified node.
+        * returns -1, if the specified Node is tree.NIL.
+        *
+        * Assumption: The specified node always exist in the tree.
+        */
         // SQLBU 428961: Serious performance issue when creating DataView
-        // this improves performance when used heavily, like with the default view (creating before rows added)
+        // this improves performance when used heavily, like with the default view (creating before rows
+        // added)
         public int GetIndexByNode(int node)
         {
             Debug.Assert(NIL != node, "GetIndexByNode(NIL)");
@@ -1499,7 +1521,8 @@ namespace System.Data
         }
 
         /// <summary>Determine tree index position from node path.</summary>
-        /// <remarks>This differs from GetIndexByNode which would search for the main tree node instead of just knowing it</remarks>
+        /// <remarks>This differs from GetIndexByNode which would search for the main tree node instead of
+        // just knowing it</remarks>
         private int GetIndexByNodePath(NodePath path)
         {
 #if VerifyIndex && VerifyPath
@@ -1621,7 +1644,8 @@ namespace System.Data
                     && index <= rank + SubTreeSize(Next(x_id)) - 1
                 )
                 {
-                    // node with matching index is in the associated satellite tree. continue searching for index in satellite tree.
+                    // node with matching index is in the associated satellite tree. continue searching for index in
+                    // satellite tree.
                     satelliteRootId = x_id;
                     index = index - rank + 1; // rank is SubTreeSize(Node.left)+1, we do +1 here to offset +1 done in rank. index -= rank;
                     return ComputeNodeByIndex(Next(x_id), index); //satellite tree root
@@ -1706,7 +1730,8 @@ namespace System.Data
         // *****BruteForceImplementation*****
         //
         // iterate over all nodes, InOrder and return index of node with the specified Item
-        // For the short term use a recursive method, later re-write it based on a stack data structure (if needed)
+        // For the short term use a recursive method, later re-write it based on a stack data structure (if
+        // needed)
         public int IndexOf(int nodeId, K item)
         {
             int index = -1;
@@ -2023,7 +2048,8 @@ namespace System.Data
             internal NodeColor nodeColor;
         }
 
-        /// <summary>Represents the node in the tree and the satellite branch it took to get there.</summary>
+        /// <summary>Represents the node in the tree and the satellite branch it took to get
+        // there.</summary>
         private struct NodePath
         {
             /// <summary>Represents the node in the tree</summary>
@@ -2107,8 +2133,8 @@ namespace System.Data
             private Int32 _nextFreeSlotLine; // o based position of next free slot line
 
             /*
-             * size: number of slots per page. Maximum allowed is 64K
-             */
+            * size: number of slots per page. Maximum allowed is 64K
+            */
             internal TreePage(int size)
             {
                 if (size > 64 * 1024)
@@ -2120,9 +2146,9 @@ namespace System.Data
             }
 
             /*
-             * Allocate a free slot from the current page belonging to the specified tree.
-             * return the Id of the allocated slot, or -1 if the current page does not have any free slots.
-             */
+            * Allocate a free slot from the current page belonging to the specified tree.
+            * return the Id of the allocated slot, or -1 if the current page does not have any free slots.
+            */
             internal int AllocSlot(RBTree<K> tree)
             {
                 int segmentPos = 0; // index into _SlotMap

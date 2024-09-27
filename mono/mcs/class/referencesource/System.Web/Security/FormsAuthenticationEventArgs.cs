@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * FormsAuthenticationEventArgs class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* FormsAuthenticationEventArgs class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.Security
 {
     using System.Security.Permissions;
@@ -16,7 +16,8 @@ namespace System.Web.Security
 
     /// <devdoc>
     ///    <SPAN>The
-    ///       event argument passed to the FormsAuthentication_OnAuthenticate event.<SPAN> </SPAN>Contains a FormsIdentity object and the
+    ///       event argument passed to the FormsAuthentication_OnAuthenticate event.<SPAN>
+    // </SPAN>Contains a FormsIdentity object and the
     ///    IPrincipal object used for the context.</SPAN>
     /// </devdoc>
     public sealed class FormsAuthenticationEventArgs : EventArgs

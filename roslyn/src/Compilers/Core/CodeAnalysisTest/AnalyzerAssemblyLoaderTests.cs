@@ -45,41 +45,55 @@ namespace Microsoft.CodeAnalysis.UnitTests
     /// </summary>
     /// <remarks>
     /// These tests often have quirks associated with fundamental limitation issues around either
-    /// .NET Framework, .NET Core or our own legacy decisions. Rather than repeating a specific rationale
+    /// .NET Framework, .NET Core or our own legacy decisions. Rather than repeating a specific
+    // rationale
     /// at all the tests that hit them, the common are outlined below and referenced with the following
     /// comment style within the test.
     ///
     ///    // See limitation 1
     ///
-    /// This allows us to provide central description of the limitations that can be easily referenced in the impacted
+    /// This allows us to provide central description of the limitations that can be easily referenced
+    // in the impacted
     /// tests. For all the descriptions below assume that A.dll depends on B.dll.
     ///
     /// Limitation 1: .NET Framework probing path.
     ///
-    /// The .NET Framework assembly loader will only call AppDomain.AssemblyResolve when it cannot satifisfy a load
-    /// request. One of the places the assembly loader will always consider when looking for dependencies of A.dll
-    /// is the directory that A.dll was loading from (it's added to the probing path). That means if B.dll is in the
+    /// The .NET Framework assembly loader will only call AppDomain.AssemblyResolve when it cannot
+    // satifisfy a load
+    /// request. One of the places the assembly loader will always consider when looking for
+    // dependencies of A.dll
+    /// is the directory that A.dll was loading from (it's added to the probing path). That means if
+    // B.dll is in the
     /// same directory then the runtime will silently load it without a way for us to intervene.
     ///
-    /// Note: this only applies when A.dll is in the Load or LoadFrom context which is always true for these tests
+    /// Note: this only applies when A.dll is in the Load or LoadFrom context which is always true for
+    // these tests
     ///
     /// Limitation 2: Dependency is already loaded.
     ///
-    /// Similar to Limitation 1 is when the dependency, B.dll, is already present in the Load or LoadFrom context
-    /// then that will be used. The runtime will not attempt to load a better version (an exact match for example).
+    /// Similar to Limitation 1 is when the dependency, B.dll, is already present in the Load or
+    // LoadFrom context
+    /// then that will be used. The runtime will not attempt to load a better version (an exact match
+    // for example).
     ///
     /// Limitation 3: Shadow copy breaks up directories
     ///
-    /// The shadow copy loader strategy is to put every analyzer dependency into a different shadow directory. That
-    /// means if A.dll and B.dll are in the same directory for a normal load, they are in different directories
+    /// The shadow copy loader strategy is to put every analyzer dependency into a different shadow
+    // directory. That
+    /// means if A.dll and B.dll are in the same directory for a normal load, they are in different
+    // directories
     /// during a shadow copy load.
     ///
-    /// This causes significant issues in .NET Framework because we don't have the ability to know where a load
-    /// is coming from. The AppDomain.AssemblyResolve event just requests "B, Version=1.0.0.0" but gives no context
-    /// as to where the request is coming from. That means we often end up loading a different copy of B.dll in a
+    /// This causes significant issues in .NET Framework because we don't have the ability to know where
+    // a load
+    /// is coming from. The AppDomain.AssemblyResolve event just requests "B, Version=1.0.0.0" but gives
+    // no context
+    /// as to where the request is coming from. That means we often end up loading a different copy of
+    // B.dll in a
     /// shadow load scenario.
     ///
-    /// Long term this is something that needs to be addressed. Tracked by https://github.com/dotnet/roslyn/issues/66532
+    /// Long term this is something that needs to be addressed. Tracked by
+    // https://github.com/dotnet/roslyn/issues/66532
     ///
     /// </remarks>
     [Collection(AssemblyLoadTestFixtureCollection.Name)]
@@ -316,8 +330,10 @@ Delta: Gamma: Beta: Test B
         }
 
         /// <summary>
-        /// The loaders should not actually look at the contents of the disk until a <see cref="AnalyzerAssemblyLoader.LoadFromPath(string)"/>
-        /// call has occurred. This is historical behavior that doesn't have a clear reason for existing. There
+        /// The loaders should not actually look at the contents of the disk until a <see
+        // cref="AnalyzerAssemblyLoader.LoadFromPath(string)"/>
+        /// call has occurred. This is historical behavior that doesn't have a clear reason for existing.
+        // There
         /// is strong suspicion it's to delay loading of analyzers until absolutely necessary. As such we're
         /// enshrining the behavior here so it is not _accidentally_ changed.
         /// </summary>
@@ -1044,7 +1060,8 @@ Delta: Epsilon: Test E
                     else
                     {
                         // See limitation 1
-                        // Delta2B and Delta2 have the same version, but we prefer Delta2 because it's in the same directory as Epsilon.
+                        // Delta2B and Delta2 have the same version, but we prefer Delta2 because it's in the same directory
+                        // as Epsilon.
                         VerifyDependencyAssemblies(loader, testFixture.Delta2, testFixture.Epsilon);
 
                         var actual = sb.ToString();

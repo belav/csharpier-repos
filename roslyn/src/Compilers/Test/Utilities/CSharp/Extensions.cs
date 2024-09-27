@@ -699,7 +699,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return false;
         }
 
-        // Compare an Object with a TypedConstant.  This compares the TypeConstant's value and ignores the TypeConstant's type.
+        // Compare an Object with a TypedConstant.  This compares the TypeConstant's value and ignores the
+        // TypeConstant's type.
         private static bool AreEqual(ImmutableArray<TypedConstant> tc, object o)
         {
             if (o == null)
@@ -802,20 +803,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     }
 }
 
-// This is deliberately declared in the global namespace so that it will always be discoverable (regardless of usings).
+// This is deliberately declared in the global namespace so that it will always be discoverable
+// (regardless of usings).
 internal static class Extensions
 {
     /// <summary>
-    /// This method is provided as a convenience for testing the SemanticModel.GetDeclaredSymbol implementation.
+    /// This method is provided as a convenience for testing the SemanticModel.GetDeclaredSymbol
+    // implementation.
     /// </summary>
-    /// <param name="declaration">This parameter will be type checked, and a NotSupportedException will be thrown if the type is not currently supported by an overload of GetDeclaredSymbol.</param>
+    /// <param name="declaration">This parameter will be type checked, and a NotSupportedException will
+    // be thrown if the type is not currently supported by an overload of GetDeclaredSymbol.</param>
     internal static Symbol GetDeclaredSymbolFromSyntaxNode(
         this CSharpSemanticModel model,
         Microsoft.CodeAnalysis.SyntaxNode declaration,
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        // NOTE: Do not add types to this condition unless you have verified that there is an overload of SemanticModel.GetDeclaredSymbol
+        // NOTE: Do not add types to this condition unless you have verified that there is an overload of
+        // SemanticModel.GetDeclaredSymbol
         //       that supports the type you're adding.
         if (
             !(

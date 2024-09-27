@@ -7,7 +7,8 @@ namespace System.Net.Sockets
 {
     public partial class SocketException : Win32Exception
     {
-        /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the default error code.</summary>
+        /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class
+        // with the default error code.</summary>
         public SocketException()
             : this(Interop.Sys.GetLastErrorInfo()) { }
 
@@ -25,7 +26,8 @@ namespace System.Net.Sockets
         {
             int nativeErr = (int)error;
 
-            // If an interop error was not found, then don't invoke Info().RawErrno as that will fail with assert.
+            // If an interop error was not found, then don't invoke Info().RawErrno as that will fail with
+            // assert.
             if (SocketErrorPal.TryGetNativeErrorForSocketError(error, out Interop.Error interopErr))
             {
                 nativeErr = interopErr.Info().RawErrno;

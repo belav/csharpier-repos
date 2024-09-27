@@ -12,9 +12,12 @@ namespace Microsoft.CodeAnalysis.Navigation
     internal interface INavigableLocation
     {
         /// <summary>
-        /// Navigates to a location opening or presenting it in a UI if necessary.  This work must happen quickly. Any
-        /// expensive async work must be done by whatever component creates this value. This method is async only to
-        /// allow final clients to call this from a non-UI thread while allowing the navigation to jump to the UI
+        /// Navigates to a location opening or presenting it in a UI if necessary.  This work must happen
+        // quickly. Any
+        /// expensive async work must be done by whatever component creates this value. This method is async
+        // only to
+        /// allow final clients to call this from a non-UI thread while allowing the navigation to jump to
+        // the UI
         /// thread.
         /// </summary>
         Task<bool> NavigateToAsync(NavigationOptions options, CancellationToken cancellationToken);

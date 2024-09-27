@@ -111,7 +111,8 @@ namespace System.Threading
                     dataArray = newDataArray;
                 }
 
-                // If we haven't stored this object in the array yet, do so now.  Then we need to make another pass through
+                // If we haven't stored this object in the array yet, do so now.  Then we need to make another pass
+                // through
                 // the loop, in case another thread resized the array before we made this update.
                 if (s_dataArray![dataIndex] == null)
                 {
@@ -145,7 +146,8 @@ namespace System.Threading
             data._preAllocated = preAllocated;
 
             //
-            // pinData can be any blittable type to be pinned, *or* an instance of object[] each element of which refers to
+            // pinData can be any blittable type to be pinned, *or* an instance of object[] each element of
+            // which refers to
             // an instance of a blittable type to be pinned.
             //
             if (pinData != null)

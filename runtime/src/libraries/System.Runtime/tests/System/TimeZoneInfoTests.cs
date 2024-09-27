@@ -94,7 +94,8 @@ namespace System.Tests
         private static bool s_regLocalSupportsDST = s_regLocal.SupportsDaylightSavingTime;
         private static bool s_localSupportsDST = TimeZoneInfo.Local.SupportsDaylightSavingTime;
 
-        // In 2006, Australia delayed ending DST by a week.  However, Windows says it still ended the last week of March.
+        // In 2006, Australia delayed ending DST by a week.  However, Windows says it still ended the last
+        // week of March.
         private static readonly int s_sydneyOffsetLastWeekOfMarch2006 = s_isWindows ? 10 : 11;
 
         [Fact]
@@ -324,7 +325,8 @@ namespace System.Tests
                 };
         }
 
-        // We test the existence of a specific English time zone name to avoid failures on non-English platforms.
+        // We test the existence of a specific English time zone name to avoid failures on non-English
+        // platforms.
         [ConditionalTheory(nameof(IsEnglishUILanguage))]
         [MemberData(nameof(Platform_TimeZoneNamesTestData))]
         public static void Platform_TimeZoneNames(
@@ -512,11 +514,13 @@ namespace System.Tests
                 TimeZoneInfo.FindSystemTimeZoneById(s_strJohannesburg.ToUpperInvariant())
             );
 
-            // Populate internal cache with all timezones. The implementation takes different path for lookup by id
+            // Populate internal cache with all timezones. The implementation takes different path for lookup by
+            // id
             // when all timezones are populated.
             TimeZoneInfo.GetSystemTimeZones();
 
-            // The timezones used for the tests after GetSystemTimeZones calls have to be different from the ones used before GetSystemTimeZones to
+            // The timezones used for the tests after GetSystemTimeZones calls have to be different from the
+            // ones used before GetSystemTimeZones to
             // exercise the rare path.
             Assert.Equal(
                 TimeZoneInfo.FindSystemTimeZoneById(s_strSydney),
@@ -4189,7 +4193,8 @@ namespace System.Tests
         [Fact]
         public static void TestGetSystemTimeZonesCollections()
         {
-            // This test doing similar checks as TestGetSystemTimeZonesCollectionsCallsOrder does except we need to
+            // This test doing similar checks as TestGetSystemTimeZonesCollectionsCallsOrder does except we need
+            // to
             // run this test without the RemoteExecutor to ensure testing on platforms like Android.
 
             ReadOnlyCollection<TimeZoneInfo> unsortedList = TimeZoneInfo.GetSystemTimeZones(
@@ -4955,14 +4960,14 @@ namespace System.Tests
             //
 
             // Magic bytes "TZif"
-            /* 0000 */0x54,
+/* 0000 */0x54,
             0x5A,
             0x69,
             0x66,
             // Version "2".
-            /* 0004 */0x32,
+/* 0004 */0x32,
             // Fifteen bytes containing zeros reserved for future use.
-            /* 0005 */0x00,
+/* 0005 */0x00,
             0x00,
             0x00,
             0x00,
@@ -4978,32 +4983,32 @@ namespace System.Tests
             0x00,
             0x00,
             // The number of UT/local indicators stored in the file
-            /* 0014 */0x00,
+/* 0014 */0x00,
             0x00,
             0x00,
             0x00,
             // The number of standard/wall indicators stored in the file
-            /* 0018 */0x00,
+/* 0018 */0x00,
             0x00,
             0x00,
             0x00,
             // The number of leap seconds for which data entries are stored in the file
-            /* 001c */0x00,
+/* 001c */0x00,
             0x00,
             0x00,
             0x00,
             // The number of transition times for which data entries are stored in the file
-            /* 0020 */0x00,
+/* 0020 */0x00,
             0x00,
             0x00,
             0x00,
             // The number of local time types for which data entries are stored in the file (must not be zero)
-            /* 0024 */0x00,
+/* 0024 */0x00,
             0x00,
             0x00,
             0x01,
             // The number of bytes of time zone abbreviation strings stored in the file
-            /* 0028 */0x00,
+/* 0028 */0x00,
             0x00,
             0x00,
             0x00,
@@ -5017,7 +5022,7 @@ namespace System.Tests
             //     unsigned char  tt_isdst;
             //     unsigned char  tt_desigidx;
             // };
-            /* 002C */0x00,
+/* 002C */0x00,
             0x00,
             0x00,
             0x00,
@@ -5028,14 +5033,14 @@ namespace System.Tests
             //
 
             //  Magic bytes "TZif"
-            /* 0032 */0x54,
+/* 0032 */0x54,
             0x5A,
             0x69,
             0x66,
             // Version "2"
-            /* 0036 */0x32,
+/* 0036 */0x32,
             // Reserved Bytes
-            /* 0037 */0x00,
+/* 0037 */0x00,
             0x00,
             0x00,
             0x00,
@@ -5051,37 +5056,37 @@ namespace System.Tests
             0x00,
             0x00,
             // The number of UT/local indicators stored in the file
-            /* 0046 */0x00,
+/* 0046 */0x00,
             0x00,
             0x00,
             0x01,
             // The number of standard/wall indicators stored in the file
-            /* 004A */0x00,
+/* 004A */0x00,
             0x00,
             0x00,
             0x01,
             // The number of leap seconds for which data entries are stored in the file
-            /* 004E */0x00,
+/* 004E */0x00,
             0x00,
             0x00,
             0x00,
             // The number of transition times for which data entries are stored in the file
-            /* 0052 */0x00,
+/* 0052 */0x00,
             0x00,
             0x00,
             0x01,
             // The number of local time types for which data entries are stored in the file (must not be zero)
-            /* 0056 */0x00,
+/* 0056 */0x00,
             0x00,
             0x00,
             0x01,
             // The number of bytes of time zone abbreviation strings stored in the file
-            /* 005A */0x00,
+/* 005A */0x00,
             0x00,
             0x00,
             0x0C,
             //  Transition 0 # seconds
-            /* 005E */0xF8,
+/* 005E */0xF8,
             0x00,
             0x00,
             0x00,
@@ -5090,16 +5095,16 @@ namespace System.Tests
             0x00,
             0x00,
             // transition table[0] has the locale time types index
-            /* 0065 */0x00,
+/* 0065 */0x00,
             // ttinfo table[0]: <UtcOffset:-00:30:20, IsDst::00, TZ Abbre Index: 00>
-            /* 0066 */0xFF,
+/* 0066 */0xFF,
             0xFF,
             0xF8,
             0xE4,
             0x00,
             0x00,
             // Zone abbreviation strings: "LMT+01+00"
-            /* 0072 */0x4C,
+/* 0072 */0x4C,
             0x4D,
             0x54,
             0x00,
@@ -5112,15 +5117,16 @@ namespace System.Tests
             0x30,
             0x00,
             // standard/wall indicators values [0, 0, 0, 0, 0]
-            /* 007E */0x00,
+/* 007E */0x00,
             // UT/local indicators [0, 0, 0, 0, 0]
-            /* 007F */0x00,
+/* 007F */0x00,
             // POSIX Rule: <+00>0<+01>,0/0,J365/25
             // 0x0A, 0x3C, 0x2B, 0x30, 0x30, 0x3E, 0x30, 0x3C, 0x2B, 0x30, 0x31,
             // 0x3E, 0x2C, 0x30, 0x2F, 0x30, 0x2C, 0x4A, 0x33, 0x36, 0x35, 0x2F, 0x32, 0x35, 0x0A
         };
 
-        // https://github.com/dotnet/runtime/issues/73031 is the tracking issue to investigate the test failure on Android.
+        // https://github.com/dotnet/runtime/issues/73031 is the tracking issue to investigate the test
+        // failure on Android.
         private static bool CanRunNJulianRuleTest =>
             !PlatformDetection.IsLinuxBionic && RemoteExecutor.IsSupported;
 
@@ -5217,7 +5223,8 @@ namespace System.Tests
 
                         if (!hostInvariantMode)
                         {
-                            // If hostInvariantMode is false, means the child process should enable the globalization invariant mode.
+                            // If hostInvariantMode is false, means the child process should enable the globalization invariant
+                            // mode.
                             // We validate here that by trying to create a culture which should throws in such mode.
                             Assert.Throws<CultureNotFoundException>(
                                 () => CultureInfo.GetCultureInfo("en-US")
@@ -5281,7 +5288,8 @@ namespace System.Tests
                         && (tzi.Id.Contains("Morocco") || tzi.Id.Contains("Volgograd"))
                     )
                     {
-                        // Windows data can report display name with UTC+01:00 offset which is not matching the actual BaseUtcOffset.
+                        // Windows data can report display name with UTC+01:00 offset which is not matching the actual
+                        // BaseUtcOffset.
                         // We special case this in the test to avoid the test failures like:
                         //      01:00 != 00:00:00, dn:(UTC+01:00) Casablanca, sn:Morocco Standard Time
                         //      04:00 != 03:00:00, dn:(UTC+04:00) Volgograd, sn:Volgograd Standard Time
@@ -5387,7 +5395,8 @@ namespace System.Tests
             SupportIanaNamesConversion && RemoteExecutor.IsSupported;
         public static bool DoesNotSupportIanaNamesConversion => !SupportIanaNamesConversion;
 
-        // This test is executed using the remote execution because it needs to run before creating the time zone cache to ensure testing with that state.
+        // This test is executed using the remote execution because it needs to run before creating the time
+        // zone cache to ensure testing with that state.
         // There are already other tests that test after creating the cache.
         [ConditionalFact(nameof(SupportIanaNamesConversionAndRemoteExecution))]
         public static void IsIanaIdWithNotCacheTest()
@@ -5528,15 +5537,18 @@ namespace System.Tests
             Assert.Equal(ianaId, ianaConvertedId);
         }
 
-        // We test the existence of a specific English time zone name to avoid failures on non-English platforms.
+        // We test the existence of a specific English time zone name to avoid failures on non-English
+        // platforms.
         [ConditionalFact(nameof(IsEnglishUILanguageAndRemoteExecutorSupported))]
         public static void TestNameWithInvariantCulture()
         {
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    // We call ICU to get the names. When passing invariant culture name to ICU, it fail and we'll use the abbreviated names at that time.
-                    // We fixed this issue by avoid sending the invariant culture name to ICU and this test is confirming we work fine at that time.
+                    // We call ICU to get the names. When passing invariant culture name to ICU, it fail and we'll use
+                    // the abbreviated names at that time.
+                    // We fixed this issue by avoid sending the invariant culture name to ICU and this test is
+                    // confirming we work fine at that time.
                     CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
                     TimeZoneInfo.ClearCachedData();
 
@@ -6063,7 +6075,8 @@ namespace System.Tests
         /// <remarks>
         /// Windows uses the current daylight savings rules for early times.
         ///
-        /// Other Unix distros use V2 tzfiles, which use local mean time (LMT), which is based on the solar time.
+        /// Other Unix distros use V2 tzfiles, which use local mean time (LMT), which is based on the solar
+        // time.
         /// The Pacific Standard Time LMT is UTC-07:53.  For Sydney, LMT is UTC+10:04.
         /// </remarks>
         private static TimeSpan GetEarlyTimesOffset(string timeZoneId)
@@ -6245,8 +6258,10 @@ namespace System.Tests
                 );
                 if (!File.Exists(tzResourceFilePath))
                 {
-                    // If Windows installed a UI language but did not include the time zone resources DLL for that language,
-                    // then skip this language as .NET will not be able to get the localized resources for that language.
+                    // If Windows installed a UI language but did not include the time zone resources DLL for that
+                    // language,
+                    // then skip this language as .NET will not be able to get the localized resources for that
+                    // language.
                     return 1;
                 }
 

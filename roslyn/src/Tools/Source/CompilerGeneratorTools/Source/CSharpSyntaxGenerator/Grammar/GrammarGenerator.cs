@@ -4,7 +4,8 @@
 
 #nullable disable
 
-// We only support grammar generation in the command line version for now which is the netcoreapp target
+// We only support grammar generation in the command line version for now which is the netcoreapp
+// target
 #if NETCOREAPP
 
 using System;

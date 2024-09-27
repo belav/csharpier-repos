@@ -122,7 +122,8 @@ namespace MonoTests.System.Data.OleDb
                         ExpectedRowsAffected = 3;
                         break;
                     case DataBaseServer.Oracle:
-                        //In .NET the ExpectedRowsAffected is '1', where as in Java it is '-1', this gap is because of jdbc driver for oracle.
+                        //In .NET the ExpectedRowsAffected is '1', where as in Java it is '-1', this gap is because of jdbc
+                        // driver for oracle.
                         ExpectedRowsAffected = -1;
 
                         break;
@@ -680,7 +681,8 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-        //[Test(Description="Call a stored procedure ghsp_pkgAmbig from a package, where ghsp_pkgAmbig is defined both inside and outside of a package.")]
+        //[Test(Description="Call a stored procedure ghsp_pkgAmbig from a package, where ghsp_pkgAmbig is
+        // defined both inside and outside of a package.")]
         public void StoredProcedurePackageambiguity_InsidePackage(OleDbConnection con)
         {
             if (ConnectedDataProvider.GetDbType(con) != DataBaseServer.Oracle)
@@ -722,7 +724,8 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-        //[Test(Description="Call a stored procedure ghsp_pkgAmbig not from a package, where ghsp_pkgAmbig is defined both inside and outside of a package.")]
+        //[Test(Description="Call a stored procedure ghsp_pkgAmbig not from a package, where ghsp_pkgAmbig
+        // is defined both inside and outside of a package.")]
         public void StoredProcedurePackageambiguity_OutsidePackage(OleDbConnection con)
         {
             if (ConnectedDataProvider.GetDbType(con) != DataBaseServer.Oracle)

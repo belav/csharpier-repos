@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
     internal partial class AbstractGenerateEqualsAndGetHashCodeService
     {
         /// <summary>
-        /// Specialized formatter for the "return a == obj.a &amp;&amp; b == obj.b &amp;&amp; c == obj.c &amp;&amp; ...
+        /// Specialized formatter for the "return a == obj.a &amp;&amp; b == obj.b &amp;&amp; c == obj.c
+        // &amp;&amp; ...
         /// code that we spit out.
         /// </summary>
         private class FormatLargeBinaryExpressionRule(ISyntaxFactsService syntaxFacts)

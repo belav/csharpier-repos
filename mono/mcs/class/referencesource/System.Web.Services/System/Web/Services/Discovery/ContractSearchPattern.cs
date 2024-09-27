@@ -15,7 +15,8 @@ namespace System.Web.Services.Discovery
     /// </devdoc>
     public sealed class ContractSearchPattern : DiscoverySearchPattern
     {
-        /// <include file='doc\ContractSearchPattern.uex' path='docs/doc[@for="ContractSearchPattern.Pattern"]/*' />
+        /// <include file='doc\ContractSearchPattern.uex'
+        // path='docs/doc[@for="ContractSearchPattern.Pattern"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -24,7 +25,8 @@ namespace System.Web.Services.Discovery
             get { return "*.asmx"; }
         }
 
-        /// <include file='doc\ContractSearchPattern.uex' path='docs/doc[@for="ContractSearchPattern.GetDiscoveryReference"]/*' />
+        /// <include file='doc\ContractSearchPattern.uex'
+        // path='docs/doc[@for="ContractSearchPattern.GetDiscoveryReference"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

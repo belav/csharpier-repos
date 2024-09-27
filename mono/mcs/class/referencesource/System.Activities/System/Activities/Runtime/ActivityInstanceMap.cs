@@ -121,8 +121,10 @@ namespace System.Activities.Runtime
             );
         }
 
-        // searching secondaryRootInstances list is necessary because instance in InstanceList doesn't have its Parent set until it's fixed up.
-        // so the only way to find out if an instance in InstanceList is a secondary root is to lookup in secondaryRootInstances list.
+        // searching secondaryRootInstances list is necessary because instance in InstanceList doesn't have
+        // its Parent set until it's fixed up.
+        // so the only way to find out if an instance in InstanceList is a secondary root is to lookup in
+        // secondaryRootInstances list.
         private static bool IsNonDefaultSecondaryRoot(
             ActivityInstance instance,
             List<ActivityInstance> secondaryRootInstances
@@ -130,8 +132,10 @@ namespace System.Activities.Runtime
         {
             if (secondaryRootInstances != null && secondaryRootInstances.Contains(instance))
             {
-                // Non-default secondary roots are CompensationParticipant type, and their environment will always have a non-null parent which is the environment owned by a CompensableActivity.
-                // A secondary root whose environment parent is null is the default secondary root, WorkflowCompensationBehavior.
+                // Non-default secondary roots are CompensationParticipant type, and their environment will always
+                // have a non-null parent which is the environment owned by a CompensableActivity.
+                // A secondary root whose environment parent is null is the default secondary root,
+                // WorkflowCompensationBehavior.
                 if (instance.IsEnvironmentOwner && instance.Environment.Parent != null)
                 {
                     return true;
@@ -160,9 +164,12 @@ namespace System.Activities.Runtime
                     continue;
                 }
 
-                // here, find out if the given non-default secondary root references an environment to which a symbol is to be added via DU.
-                // we start from a secondary root instead of starting from the enviroment with the already completed owner that was added symbols.
-                // It is becuase for the case of adding symbols to noSymbols activities, the environment doesn't even exist from which we can start looking for referencing secondary root.
+                // here, find out if the given non-default secondary root references an environment to which a
+                // symbol is to be added via DU.
+                // we start from a secondary root instead of starting from the enviroment with the already completed
+                // owner that was added symbols.
+                // It is becuase for the case of adding symbols to noSymbols activities, the environment doesn't
+                // even exist from which we can start looking for referencing secondary root.
 
                 int[] secondaryRootOriginalQID = new QualifiedId(
                     instanceList.ActivityId
@@ -187,13 +194,18 @@ namespace System.Activities.Runtime
                 {
                     //
                     // for each iteration of this for-loop,
-                    //  we are finding out if at every IdSpace level the map has any map entry whose activity has the CompensableActivity as an implementation decendant.
+                    //  we are finding out if at every IdSpace level the map has any map entry whose activity has the
+                    // CompensableActivity as an implementation decendant.
                     //  The map may not exist for every IdSpace between the root and the CompensableActivity.
-                    //  If the matching map and the entry is found, then we find out if that matching entry's activity is a public decendant of any NoSymbols activity DU is to add variables or arguments to.
+                    //  If the matching map and the entry is found, then we find out if that matching entry's activity
+                    // is a public decendant of any NoSymbols activity DU is to add variables or arguments to.
                     //
-                    // This walk on the definition activity tree determines the hypothetical execution-time chain of instances and environments.
-                    // The ultimate goal is to prevent adding variables or arguments to a NoSymbols activity which has already completed,
-                    //  but its decendant CompensableActivity's compensation or confirmation handlers in the future may need to reference the added variables or arguments.
+                    // This walk on the definition activity tree determines the hypothetical execution-time chain of
+                    // instances and environments.
+                    // The ultimate goal is to prevent adding variables or arguments to a NoSymbols activity which has
+                    // already completed,
+                    //  but its decendant CompensableActivity's compensation or confirmation handlers in the future may
+                    // need to reference the added variables or arguments.
 
                     currentQIDBuilder.Add(parentOfSecondaryRootOriginalQID[i]);
 
@@ -204,7 +216,8 @@ namespace System.Activities.Runtime
                         );
                     if (updatedActivity.MapEntry != null)
                     {
-                        // the activity of this entry either has the CompensableActivity as an implementation decendant, or is the CompensableActivity itself.
+                        // the activity of this entry either has the CompensableActivity as an implementation decendant, or
+                        // is the CompensableActivity itself.
 
                         // walk the same-IdSpace-parent chain of the entry,
                         // look for an entry whose EnvironmentUpdateMap.IsAdditionToNoSymbols is true.
@@ -267,14 +280,16 @@ namespace System.Activities.Runtime
                     string error = null;
                     if (activityInstance.SubState == ActivityInstance.Substate.ResolvingVariables)
                     {
-                        // if the entry has Environment update to do when the instance is in the middle of resolving variable, it is an error.
+                        // if the entry has Environment update to do when the instance is in the middle of resolving
+                        // variable, it is an error.
                         error = SR.CannotUpdateEnvironmentInTheMiddleOfResolvingVariables;
                     }
                     else if (
                         activityInstance.SubState == ActivityInstance.Substate.ResolvingArguments
                     )
                     {
-                        // if the entry has Environment update to do when the instance is in the middle of resolving arguments, it is an error.
+                        // if the entry has Environment update to do when the instance is in the middle of resolving
+                        // arguments, it is an error.
                         error = SR.CannotUpdateEnvironmentInTheMiddleOfResolvingArguments;
                     }
 
@@ -297,7 +312,8 @@ namespace System.Activities.Runtime
                     {
                         //
                         // environment that is referenced by a secondary root
-                        // Adding a variable or argument that requires expression scheduling to this instanceless environment is not allowed.
+                        // Adding a variable or argument that requires expression scheduling to this instanceless
+                        // environment is not allowed.
                         //
                         List<int> dummyIndexes;
                         EnvironmentUpdateMap envMap = updatedActivity.MapEntry.EnvironmentUpdateMap;
@@ -435,7 +451,8 @@ namespace System.Activities.Runtime
                 {
                     if (updatedActivity.IdChanged)
                     {
-                        // this newQualifiedId is the new id for those InstanceLists whose IDs shifted by their parents' ID change
+                        // this newQualifiedId is the new id for those InstanceLists whose IDs shifted by their parents' ID
+                        // change
                         update = new InstanceListNeedingUpdate
                         {
                             InstanceList = list,
@@ -630,9 +647,11 @@ namespace System.Activities.Runtime
                     );
 
                     // create a temporary NoChanges UpdateMap as well as a temporary no change MapEntry
-                    // so that we can create a NativeActivityUpdateContext object in order to invoke UpdateInstance() on an activity which
+                    // so that we can create a NativeActivityUpdateContext object in order to invoke UpdateInstance() on
+                    // an activity which
                     // doesn't have a corresponding map and an map entry.
-                    // The scenario enabled here is scheduling a newly added reference branch to a Parallel inside an activity's implementation.
+                    // The scenario enabled here is scheduling a newly added reference branch to a Parallel inside an
+                    // activity's implementation.
                     participant.UpdateMap = DynamicUpdateMap.DummyMap;
                     participant.MapEntry = DynamicUpdateMapEntry.DummyMapEntry;
                 }
@@ -700,7 +719,8 @@ namespace System.Activities.Runtime
 
             // Schedule evaluation of newly added arguments and newly added variables.
             // This needs to happen after all the invokations of UpdateInstance above, so that newly
-            // added arguments and newly added variables get evaluated before any newly added activities get executed.
+            // added arguments and newly added variables get evaluated before any newly added activities get
+            // executed.
             // We iterate the list in reverse so that parents are always scheduled after (and thus
             // execute before) their children, which may depend on the parents.
             for (int i = this.updateList.Count - 1; i >= 0; i--)
@@ -766,8 +786,10 @@ namespace System.Activities.Runtime
                     )
                     {
                         // schedule added private variable default expressions
-                        // HasPrivateMemberChanged() check disallows addition of private variable default that offsets the private IdSpace,
-                        // However, the added private variable default expression can be an imported activity, which has no affect on the private IdSpace.
+                        // HasPrivateMemberChanged() check disallows addition of private variable default that offsets the
+                        // private IdSpace,
+                        // However, the added private variable default expression can be an imported activity, which has no
+                        // affect on the private IdSpace.
                         // For such case, we want to be able to schedule the imported default expressions here.
                         instance.ResolveNewVariableDefaultsDuringDynamicUpdate(
                             activityExecutor,

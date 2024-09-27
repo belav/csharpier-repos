@@ -72,12 +72,15 @@ namespace System.Data.Objects.Internal
                 // Given the proxy and item parameters, construct one of the following expressions:
                 //
                 // For collections:
-                //  LazyLoadBehavior.LoadCollection(collection, "relationshipName", "targetRoleName", proxy._entityWrapperField)
+                //  LazyLoadBehavior.LoadCollection(collection, "relationshipName", "targetRoleName",
+                // proxy._entityWrapperField)
                 //
                 // For entity references:
-                //  LazyLoadBehavior.LoadReference(item, "relationshipName", "targetRoleName", proxy._entityWrapperField)
+                //  LazyLoadBehavior.LoadReference(item, "relationshipName", "targetRoleName",
+                // proxy._entityWrapperField)
                 //
-                // Both of these expressions return an object of the same type as the first parameter to LoadXYZ method.
+                // Both of these expressions return an object of the same type as the first parameter to LoadXYZ
+                // method.
                 // In many cases, this will be the first parameter.
 
                 if (multiplicity == RelationshipMultiplicity.Many)
@@ -171,13 +174,17 @@ namespace System.Data.Objects.Internal
         }
 
         /// <summary>
-        /// Method called by proxy interceptor delegate to provide lazy loading behavior for navigation properties.
+        /// Method called by proxy interceptor delegate to provide lazy loading behavior for navigation
+        // properties.
         /// </summary>
         /// <typeparam name="TItem">property type</typeparam>
-        /// <param name="propertyValue">The property value whose associated relationship is to be loaded.</param>
+        /// <param name="propertyValue">The property value whose associated relationship is to be
+        // loaded.</param>
         /// <param name="relationshipName">String name of the relationship.</param>
-        /// <param name="targetRoleName">String name of the related end to be loaded for the relationship specified by <paramref name="relationshipName"/>.</param>
-        /// <param name="wrapperObject">Entity wrapper object used to retrieve RelationshipManager for the proxied entity.</param>
+        /// <param name="targetRoleName">String name of the related end to be loaded for the relationship
+        // specified by <paramref name="relationshipName"/>.</param>
+        /// <param name="wrapperObject">Entity wrapper object used to retrieve RelationshipManager for the
+        // proxied entity.</param>
         /// <returns>
         /// True if the value instance was mutated and can be returned
         /// False if the class should refetch the value because the instance has changed

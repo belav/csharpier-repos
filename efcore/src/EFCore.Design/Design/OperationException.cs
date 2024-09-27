@@ -6,7 +6,8 @@ using System.Runtime.Serialization;
 namespace Microsoft.EntityFrameworkCore.Design;
 
 /// <summary>
-///     Represents an exception whose stack trace should, by default, not be reported by the commands.
+///     Represents an exception whose stack trace should, by default, not be reported by the
+// commands.
 /// </summary>
 [Serializable]
 public class OperationException : Exception
@@ -32,7 +33,8 @@ public class OperationException : Exception
         : base(message, innerException) { }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized form.
+    ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized
+    // form.
     /// </summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context being used.</param>

@@ -20,8 +20,10 @@
 // THE SOFTWARE.
 //
 
-//[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Security.Cryptography.ECDiffieHellman))]
-//[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction))]
+//[assembly:
+// System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Security.Cryptography.ECDiffieHellman))]
+//[assembly:
+// System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
     typeof(System.Security.Cryptography.ECDiffieHellmanPublicKey)
 )]

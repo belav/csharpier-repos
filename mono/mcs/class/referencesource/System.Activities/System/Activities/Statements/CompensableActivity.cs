@@ -241,7 +241,8 @@ namespace System.Activities.Statements
                                     Activities =
                                     {
                                         // Need to replace the lambda expression with a CodeActivity for partial trust.
-                                        // new If(env => (elements.Get(env).ElementAt(index.Get(env))).GetType() == typeof(CompensationParticipant))
+                                        // new If(env => (elements.Get(env).ElementAt(index.Get(env))).GetType() ==
+                                        // typeof(CompensationParticipant))
                                         new If
                                         {
                                             Condition = new IfExpression
@@ -263,7 +264,8 @@ namespace System.Activities.Statements
                                         new Assign<int>
                                         {
                                             To = index,
-                                            // Need to replace the lambda expression for partial trust. Using Add expression activity instead of a CodeActivity here.
+                                            // Need to replace the lambda expression for partial trust. Using Add expression activity instead of
+                                            // a CodeActivity here.
                                             // Value = new InArgument<int>(env => index.Get(env) + 1)
                                             Value = new InArgument<int>
                                             {
@@ -438,7 +440,8 @@ namespace System.Activities.Statements
                 || completedInstance.State == ActivityInstanceState.Faulted
             )
             {
-                // we check for faulted as well for one odd case where an exception can be thrown from the body activity itself.
+                // we check for faulted as well for one odd case where an exception can be thrown from the body
+                // activity itself.
                 token.CompensationState = CompensationState.Canceling;
             }
             else
@@ -613,7 +616,8 @@ namespace System.Activities.Statements
         }
     }
 
-    // In order to run in partial trust, we can't have lambda expressions that reference local variables. So this
+    // In order to run in partial trust, we can't have lambda expressions that reference local
+    // variables. So this
     // code activity replaces the lambda expression in this statement:
     // While(env => (assertFlag.Get(env) != false) && index.Get(env) < elements.Get(env).Count())
     class WhileExpression : CodeActivity<bool>
@@ -691,7 +695,8 @@ namespace System.Activities.Statements
         }
     }
 
-    // If(env => (elements.Get(env).ElementAt(index.Get(env))).GetType() == typeof(CompensationParticipant))
+    // If(env => (elements.Get(env).ElementAt(index.Get(env))).GetType() ==
+    // typeof(CompensationParticipant))
     class IfExpression : CodeActivity<bool>
     {
         public InArgument<IEnumerable<Activity>> Elements { get; set; }
@@ -740,7 +745,8 @@ namespace System.Activities.Statements
 
         protected override bool Execute(CodeActivityContext context)
         {
-            // If(env => (elements.Get(env).ElementAt(index.Get(env))).GetType() == typeof(CompensationParticipant))
+            // If(env => (elements.Get(env).ElementAt(index.Get(env))).GetType() ==
+            // typeof(CompensationParticipant))
             return (
                 this.Elements.Get(context).ElementAt(this.Index.Get(context)).GetType()
                 == typeof(CompensationParticipant)

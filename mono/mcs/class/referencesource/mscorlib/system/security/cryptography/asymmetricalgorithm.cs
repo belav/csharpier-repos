@@ -91,13 +91,15 @@ namespace System.Security.Cryptography
             get { return (KeySizes[])LegalKeySizesValue.Clone(); }
         }
 
-        // This method must be implemented by derived classes. In order to conform to the contract, it cannot be abstract.
+        // This method must be implemented by derived classes. In order to conform to the contract, it
+        // cannot be abstract.
         public virtual String SignatureAlgorithm
         {
             get { throw new NotImplementedException(); }
         }
 
-        // This method must be implemented by derived classes. In order to conform to the contract, it cannot be abstract.
+        // This method must be implemented by derived classes. In order to conform to the contract, it
+        // cannot be abstract.
         public virtual String KeyExchangeAlgorithm
         {
             get { throw new NotImplementedException(); }
@@ -123,13 +125,15 @@ namespace System.Security.Cryptography
             return (AsymmetricAlgorithm)CryptoConfig.CreateFromName(algName);
         }
 
-        // This method must be implemented by derived classes. In order to conform to the contract, it cannot be abstract.
+        // This method must be implemented by derived classes. In order to conform to the contract, it
+        // cannot be abstract.
         public virtual void FromXmlString(String xmlString)
         {
             throw new NotImplementedException();
         }
 
-        // This method must be implemented by derived classes. In order to conform to the contract, it cannot be abstract.
+        // This method must be implemented by derived classes. In order to conform to the contract, it
+        // cannot be abstract.
         public virtual String ToXmlString(bool includePrivateParameters)
         {
             throw new NotImplementedException();

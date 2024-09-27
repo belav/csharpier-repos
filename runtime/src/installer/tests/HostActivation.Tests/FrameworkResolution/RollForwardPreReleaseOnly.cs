@@ -178,8 +178,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verifies that rollForward settings behave as expected starting with framework reference
-        // pre-release version 5.1.1-preview.1 which is available and rolling forward to pre-release versions only with available
-        // versions starting with 5.1.1-preview.1. Since the first match is pre-release no roll to latest patch is applied.
+        // pre-release version 5.1.1-preview.1 which is available and rolling forward to pre-release
+        // versions only with available
+        // versions starting with 5.1.1-preview.1. Since the first match is pre-release no roll to latest
+        // patch is applied.
         [Theory] // rollForward                               applyPatches rollForward
         [InlineData(Constants.RollForwardSetting.Disable, null, "5.1.1-preview.1")]
         [InlineData(Constants.RollForwardSetting.LatestPatch, null, "5.1.1-preview.1")]
@@ -202,8 +204,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verifies that rollForward settings behave as expected starting with framework reference
-        // pre-release version 5.1.2-preview.0 and rolling forward to pre-release versions only with available
-        // versions starting with 5.1.2-preview.1. Since the first match is pre-release no roll to latest patch is applied.
+        // pre-release version 5.1.2-preview.0 and rolling forward to pre-release versions only with
+        // available
+        // versions starting with 5.1.2-preview.1. Since the first match is pre-release no roll to latest
+        // patch is applied.
         [Theory] // rollForward                               applyPatches rollForward
         [InlineData(Constants.RollForwardSetting.Disable, null, ResolvedFramework.NotFound)]
         [InlineData(Constants.RollForwardSetting.LatestPatch, null, "5.1.2-preview.1")]
@@ -226,8 +230,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verifies that rollForward settings behave as expected starting with framework reference
-        // pre-release version 5.1.0-preview.1 and rolling forward to pre-release versions only with available
-        // versions starting with 5.1.2-preview.1. Since the first match is pre-release no roll to latest patch is applied.
+        // pre-release version 5.1.0-preview.1 and rolling forward to pre-release versions only with
+        // available
+        // versions starting with 5.1.2-preview.1. Since the first match is pre-release no roll to latest
+        // patch is applied.
         [Theory] // rollForward                               applyPatches rollForward
         [InlineData(Constants.RollForwardSetting.Disable, null, ResolvedFramework.NotFound)]
         [InlineData(Constants.RollForwardSetting.LatestPatch, null, "5.1.1-preview.1")]
@@ -250,8 +256,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verifies that rollForward settings behave as expected starting with framework reference
-        // pre-release version 5.0.0-preview.5 and rolling forward to pre-release versions only with available
-        // versions starting with 5.1.1-preview.1. Since the first match is pre-release no roll to latest patch is applied.
+        // pre-release version 5.0.0-preview.5 and rolling forward to pre-release versions only with
+        // available
+        // versions starting with 5.1.1-preview.1. Since the first match is pre-release no roll to latest
+        // patch is applied.
         [Theory] // rollForward                               applyPatches rollForward
         [InlineData(Constants.RollForwardSetting.Disable, null, ResolvedFramework.NotFound)]
         [InlineData(Constants.RollForwardSetting.LatestPatch, null, ResolvedFramework.NotFound)]
@@ -273,8 +281,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verifies that rollForward settings behave as expected starting with framework reference
-        // pre-release version 4.1.0-preview.6 and rolling forward to pre-release versions only with available
-        // versions starting with 5.1.1-preview.1. Since the first match is pre-release no roll to latest patch is applied.
+        // pre-release version 4.1.0-preview.6 and rolling forward to pre-release versions only with
+        // available
+        // versions starting with 5.1.1-preview.1. Since the first match is pre-release no roll to latest
+        // patch is applied.
         [Theory] // rollForward                               applyPatches rollForward
         [InlineData(Constants.RollForwardSetting.Disable, null, ResolvedFramework.NotFound)]
         [InlineData(Constants.RollForwardSetting.LatestPatch, null, ResolvedFramework.NotFound)]

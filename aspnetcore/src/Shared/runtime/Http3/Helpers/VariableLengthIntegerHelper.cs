@@ -8,7 +8,8 @@ using System.Diagnostics;
 namespace System.Net.Http
 {
     /// <summary>
-    /// Variable length integer encoding and decoding methods. Based on https://tools.ietf.org/html/draft-ietf-quic-transport-24#section-16.
+    /// Variable length integer encoding and decoding methods. Based on
+    // https://tools.ietf.org/html/draft-ietf-quic-transport-24#section-16.
     /// A variable-length integer can use 1, 2, 4, or 8 bytes.
     /// </summary>
     internal static class VariableLengthIntegerHelper

@@ -11,7 +11,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// A <see cref="MissingMetadataTypeSymbol"/> is a special kind of <see cref="ErrorTypeSymbol"/> that represents
+    /// A <see cref="MissingMetadataTypeSymbol"/> is a special kind of <see cref="ErrorTypeSymbol"/>
+    // that represents
     /// a type symbol that was attempted to be read from metadata, but couldn't be
     /// found, because:
     ///   a) The metadata file it lives in wasn't referenced
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (containingAssembly?.IsMissing == true)
                 {
-                    // error CS0012: The type 'Blah' is defined in an assembly that is not referenced. You must add a reference to assembly 'Goo'.
+                    // error CS0012: The type 'Blah' is defined in an assembly that is not referenced. You must add a
+                    // reference to assembly 'Goo'.
                     return new CSDiagnosticInfo(
                         ErrorCode.ERR_NoTypeDef,
                         this,
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             // The usage of C in Beta will be redirected to refer to the source assembly.
                             // If C is not in that source assembly then we give the following warning:
 
-                            // CS7068: Reference to type 'C' claims it is defined in this assembly, but it is not defined in source or any added modules
+                            // CS7068: Reference to type 'C' claims it is defined in this assembly, but it is not defined in
+                            // source or any added modules
                             return new CSDiagnosticInfo(ErrorCode.ERR_MissingTypeInSource, this);
                         }
                         else

@@ -17,7 +17,8 @@ public static class CascadingValueServiceCollectionExtensions
     /// </summary>
     /// <typeparam name="TValue">The value type.</typeparam>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="initialValueFactory">A callback that supplies a fixed value within each service provider scope.</param>
+    /// <param name="initialValueFactory">A callback that supplies a fixed value within each service
+    // provider scope.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddCascadingValue<TValue>(
         this IServiceCollection serviceCollection,
@@ -34,8 +35,10 @@ public static class CascadingValueServiceCollectionExtensions
     /// </summary>
     /// <typeparam name="TValue">The value type.</typeparam>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="name">A name for the cascading value. If set, <see cref="CascadingParameterAttribute"/> can be configured to match based on this name.</param>
-    /// <param name="initialValueFactory">A callback that supplies a fixed value within each service provider scope.</param>
+    /// <param name="name">A name for the cascading value. If set, <see
+    // cref="CascadingParameterAttribute"/> can be configured to match based on this name.</param>
+    /// <param name="initialValueFactory">A callback that supplies a fixed value within each service
+    // provider scope.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddCascadingValue<TValue>(
         this IServiceCollection serviceCollection,
@@ -53,12 +56,14 @@ public static class CascadingValueServiceCollectionExtensions
     /// a <see cref="CascadingValue{TValue}"/> at the root of the component hierarchy.
     ///
     /// With this overload, you can supply a <see cref="CascadingValueSource{TValue}"/> which allows you
-    /// to notify about updates to the value later, causing recipients to re-render. This overload should
+    /// to notify about updates to the value later, causing recipients to re-render. This overload
+    // should
     /// only be used if you plan to update the value dynamically.
     /// </summary>
     /// <typeparam name="TValue">The value type.</typeparam>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="sourceFactory">A callback that supplies a <see cref="CascadingValueSource{TValue}"/> within each service provider scope.</param>
+    /// <param name="sourceFactory">A callback that supplies a <see
+    // cref="CascadingValueSource{TValue}"/> within each service provider scope.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddCascadingValue<TValue>(
         this IServiceCollection serviceCollection,
@@ -66,13 +71,16 @@ public static class CascadingValueServiceCollectionExtensions
     ) => serviceCollection.AddScoped<ICascadingValueSupplier>(sourceFactory);
 
     /// <summary>
-    /// Adds a cascading value to the <paramref name="serviceCollection"/>, if none is already registered
-    /// with the value type. This is equivalent to having a fixed <see cref="CascadingValue{TValue}"/> at
+    /// Adds a cascading value to the <paramref name="serviceCollection"/>, if none is already
+    // registered
+    /// with the value type. This is equivalent to having a fixed <see cref="CascadingValue{TValue}"/>
+    // at
     /// the root of the component hierarchy.
     /// </summary>
     /// <typeparam name="TValue">The value type.</typeparam>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="valueFactory">A callback that supplies a fixed value within each service provider scope.</param>
+    /// <param name="valueFactory">A callback that supplies a fixed value within each service provider
+    // scope.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static void TryAddCascadingValue<TValue>(
         this IServiceCollection serviceCollection,
@@ -87,14 +95,18 @@ public static class CascadingValueServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds a cascading value to the <paramref name="serviceCollection"/>, if none is already registered
-    /// with the value type, regardless of the <paramref name="name"/>. This is equivalent to having a fixed
+    /// Adds a cascading value to the <paramref name="serviceCollection"/>, if none is already
+    // registered
+    /// with the value type, regardless of the <paramref name="name"/>. This is equivalent to having a
+    // fixed
     /// <see cref="CascadingValue{TValue}"/> at the root of the component hierarchy.
     /// </summary>
     /// <typeparam name="TValue">The value type.</typeparam>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="name">A name for the cascading value. If set, <see cref="CascadingParameterAttribute"/> can be configured to match based on this name.</param>
-    /// <param name="valueFactory">A callback that supplies a fixed value within each service provider scope.</param>
+    /// <param name="name">A name for the cascading value. If set, <see
+    // cref="CascadingParameterAttribute"/> can be configured to match based on this name.</param>
+    /// <param name="valueFactory">A callback that supplies a fixed value within each service provider
+    // scope.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static void TryAddCascadingValue<TValue>(
         this IServiceCollection serviceCollection,
@@ -110,17 +122,21 @@ public static class CascadingValueServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds a cascading value to the <paramref name="serviceCollection"/>, if none is already registered
-    /// with the value type. This is equivalent to having a fixed <see cref="CascadingValue{TValue}"/> at
+    /// Adds a cascading value to the <paramref name="serviceCollection"/>, if none is already
+    // registered
+    /// with the value type. This is equivalent to having a fixed <see cref="CascadingValue{TValue}"/>
+    // at
     /// the root of the component hierarchy.
     ///
     /// With this overload, you can supply a <see cref="CascadingValueSource{TValue}"/> which allows you
-    /// to notify about updates to the value later, causing recipients to re-render. This overload should
+    /// to notify about updates to the value later, causing recipients to re-render. This overload
+    // should
     /// only be used if you plan to update the value dynamically.
     /// </summary>
     /// <typeparam name="TValue">The value type.</typeparam>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="sourceFactory">A callback that supplies a <see cref="CascadingValueSource{TValue}"/> within each service provider scope.</param>
+    /// <param name="sourceFactory">A callback that supplies a <see
+    // cref="CascadingValueSource{TValue}"/> within each service provider scope.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static void TryAddCascadingValue<TValue>(
         this IServiceCollection serviceCollection,

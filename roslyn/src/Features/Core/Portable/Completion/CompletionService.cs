@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Completion
         internal abstract CompletionRules GetRules(CompletionOptions options);
 
         /// <summary>
-        /// Returns true if the character recently inserted or deleted in the text should trigger completion.
+        /// Returns true if the character recently inserted or deleted in the text should trigger
+        // completion.
         /// </summary>
         /// <param name="text">The document text to trigger completion within </param>
         /// <param name="caretPosition">The position of the caret after the triggering action.</param>
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="roles">Optional set of roles associated with the editor state.</param>
         /// <param name="options">Optional options that override the default options.</param>
         /// <remarks>
-        /// This API uses SourceText instead of Document so implementations can only be based on text, not syntax or semantics.
+        /// This API uses SourceText instead of Document so implementations can only be based on text, not
+        // syntax or semantics.
         /// </remarks>
         public bool ShouldTriggerCompletion(
             SourceText text,
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Completion
             options.TriggerOnDeletion == true;
 
         /// <summary>
-        /// Returns true if the character recently inserted or deleted in the text should trigger completion.
+        /// Returns true if the character recently inserted or deleted in the text should trigger
+        // completion.
         /// </summary>
         /// <param name="project">The project containing the document and text</param>
         /// <param name="languageServices">Language services</param>
@@ -137,10 +140,12 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="caretPosition">The position of the caret after the triggering action.</param>
         /// <param name="trigger">The potential triggering action.</param>
         /// <param name="options">Options.</param>
-        /// <param name="passThroughOptions">Options originating either from external caller of the <see cref="CompletionService"/> or set externally to <see cref="Solution.Options"/>.</param>
+        /// <param name="passThroughOptions">Options originating either from external caller of the <see
+        // cref="CompletionService"/> or set externally to <see cref="Solution.Options"/>.</param>
         /// <param name="roles">Optional set of roles associated with the editor state.</param>
         /// <remarks>
-        /// We pass the project here to retrieve information about the <see cref="Project.AnalyzerReferences"/>,
+        /// We pass the project here to retrieve information about the <see
+        // cref="Project.AnalyzerReferences"/>,
         /// <see cref="WorkspaceKind"/> and <see cref="Project.Language"/> which are fast operations.
         /// It should not be used for syntactic or semantic operations.
         /// </remarks>
@@ -271,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Completion
             var extensionManager =
                 document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
 
-            // We don't need SemanticModel here, just want to make sure it won't get GC'd before CompletionProviders are able to get it.
+            // We don't need SemanticModel here, just want to make sure it won't get GC'd before
+            // CompletionProviders are able to get it.
             (document, var semanticModel) = await GetDocumentWithFrozenPartialSemanticsAsync(
                     document,
                     cancellationToken
@@ -317,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 var extensionManager =
                     document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
 
-                // We don't need SemanticModel here, just want to make sure it won't get GC'd before CompletionProviders are able to get it.
+                // We don't need SemanticModel here, just want to make sure it won't get GC'd before
+                // CompletionProviders are able to get it.
                 (document, var semanticModel) = await GetDocumentWithFrozenPartialSemanticsAsync(
                         document,
                         cancellationToken
@@ -350,8 +357,10 @@ namespace Microsoft.CodeAnalysis.Completion
             }
         }
 
-        // The FilterItems method might need to handle a large list of items when import completion is enabled and filter text is
-        // very short, i.e. <= 1. Therefore, use pooled list to avoid repeated (potentially LOH) allocations.
+        // The FilterItems method might need to handle a large list of items when import completion is
+        // enabled and filter text is
+        // very short, i.e. <= 1. Therefore, use pooled list to avoid repeated (potentially LOH)
+        // allocations.
         private static readonly ObjectPool<List<MatchResult>> s_listOfMatchResultPool =
             new(factory: () => new());
 
@@ -407,7 +416,8 @@ namespace Microsoft.CodeAnalysis.Completion
         )
         {
 #pragma warning disable RS0030 // Do not used banned APIs
-            // Default implementation just drops the pattern matches and builder, and calls the public overload of FilterItems instead for compatibility.
+            // Default implementation just drops the pattern matches and builder, and calls the public overload
+            // of FilterItems instead for compatibility.
             var filteredItems = FilterItems(
                 document,
                 matchResults.SelectAsArray(item => item.CompletionItem),

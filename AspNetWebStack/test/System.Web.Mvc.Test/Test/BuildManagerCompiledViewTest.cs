@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.IO;
 using Microsoft.TestCommon;
@@ -152,7 +153,8 @@ namespace System.Web.Mvc.Test
             };
 
             // Act & Assert, confirming type name and full stack are available in Exception
-            // Depend on the fact that Activator.CreateInstance cannot create an object without a parameterless ctor
+            // Depend on the fact that Activator.CreateInstance cannot create an object without a parameterless
+            // ctor
             MissingMethodException ex = Assert.Throws<MissingMethodException>(
                 () => view.Render(new Mock<ViewContext>().Object, new Mock<TextWriter>().Object),
                 "No parameterless constructor defined for this object. Object type 'System.Web.Mvc.Test.CompiledTypeViewTest+NoParameterlessCtor'."

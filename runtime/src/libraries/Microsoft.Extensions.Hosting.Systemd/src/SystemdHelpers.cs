@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// Check if the current process is hosted as a systemd Service.
         /// </summary>
         /// <returns>
-        /// <see langword="true" /> if the current process is hosted as a systemd Service; otherwise, <see langword="false" />.
+        /// <see langword="true" /> if the current process is hosted as a systemd Service; otherwise, <see
+        // langword="false" />.
         /// </returns>
         public static bool IsSystemdService() => _isSystemdService;
 

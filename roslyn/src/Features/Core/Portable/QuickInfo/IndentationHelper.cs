@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
     internal static class IndentationHelper
     {
         /// <summary>
-        /// Recomputes span segments so that all text lines appear to have the same reduction in indentation.
-        /// This operation is typically used to align text for display when the initial span does not include all of the first line's identation.
+        /// Recomputes span segments so that all text lines appear to have the same reduction in
+        // indentation.
+        /// This operation is typically used to align text for display when the initial span does not
+        // include all of the first line's identation.
         /// This operation will potentially split spans that cover multiple lines into separate spans.
         /// </summary>
         /// <param name="text"></param>

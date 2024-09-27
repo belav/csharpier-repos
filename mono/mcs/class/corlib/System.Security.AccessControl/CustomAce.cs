@@ -38,9 +38,9 @@ namespace System.Security.AccessControl
         public CustomAce(AceType type, AceFlags flags, byte[] opaque)
             : base(type, flags)
         {
-            /* FIXME: check length of opaque >
-             * MaxOpaqueLength or !multiple of 4
-             */
+/* FIXME: check length of opaque >
+* MaxOpaqueLength or !multiple of 4
+*/
             SetOpaque(opaque);
         }
 

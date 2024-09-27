@@ -5,7 +5,8 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Attributes
 {
     /// <summary>
-    /// The purpose of this test is mainly to provide coverage on the `KeptAttributeOnFixedBufferType` attribute
+    /// The purpose of this test is mainly to provide coverage on the `KeptAttributeOnFixedBufferType`
+    // attribute
     /// </summary>
     [SetupCompileArgument("/unsafe")]
     public class FixedLengthArrayAttributesArePreserved

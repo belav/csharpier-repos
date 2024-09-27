@@ -12,14 +12,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// </summary>
 /// <remarks>
 /// <para>
-/// <see cref="ValueProviderResult"/> can represent a single submitted value or multiple submitted values.
+/// <see cref="ValueProviderResult"/> can represent a single submitted value or multiple submitted
+// values.
 /// </para>
 /// <para>
-/// Use <see cref="FirstValue"/> to consume only a single value, regardless of whether a single value or
+/// Use <see cref="FirstValue"/> to consume only a single value, regardless of whether a single
+// value or
 /// multiple values were submitted.
 /// </para>
 /// <para>
-/// Treat <see cref="ValueProviderResult"/> as an <see cref="IEnumerable{String}"/> to consume all values,
+/// Treat <see cref="ValueProviderResult"/> as an <see cref="IEnumerable{String}"/> to consume all
+// values,
 /// regardless of whether a single value or multiple values were submitted.
 /// </para>
 /// </remarks>
@@ -33,7 +36,8 @@ public readonly struct ValueProviderResult : IEquatable<ValueProviderResult>, IE
     public static ValueProviderResult None = new ValueProviderResult(Array.Empty<string>());
 
     /// <summary>
-    /// Creates a new <see cref="ValueProviderResult"/> using <see cref="CultureInfo.InvariantCulture"/>.
+    /// Creates a new <see cref="ValueProviderResult"/> using <see
+    // cref="CultureInfo.InvariantCulture"/>.
     /// </summary>
     /// <param name="values">The submitted values.</param>
     public ValueProviderResult(StringValues values)
@@ -61,8 +65,10 @@ public readonly struct ValueProviderResult : IEquatable<ValueProviderResult>, IE
     public StringValues Values { get; }
 
     /// <summary>
-    /// Gets the first value based on the order values were provided in the request. Use <see cref="FirstValue"/>
-    /// to get a single value for processing regardless of whether a single or multiple values were provided
+    /// Gets the first value based on the order values were provided in the request. Use <see
+    // cref="FirstValue"/>
+    /// to get a single value for processing regardless of whether a single or multiple values were
+    // provided
     /// in the request.
     /// </summary>
     public string? FirstValue
@@ -139,7 +145,8 @@ public readonly struct ValueProviderResult : IEquatable<ValueProviderResult>, IE
     }
 
     /// <summary>
-    /// Converts the provided <see cref="ValueProviderResult"/> into a comma-separated string containing all
+    /// Converts the provided <see cref="ValueProviderResult"/> into a comma-separated string containing
+    // all
     /// submitted values.
     /// </summary>
     /// <param name="result">The <see cref="ValueProviderResult"/>.</param>
@@ -149,7 +156,8 @@ public readonly struct ValueProviderResult : IEquatable<ValueProviderResult>, IE
     }
 
     /// <summary>
-    /// Converts the provided <see cref="ValueProviderResult"/> into a an array of <see cref="string"/> containing
+    /// Converts the provided <see cref="ValueProviderResult"/> into a an array of <see cref="string"/>
+    // containing
     /// all submitted values.
     /// </summary>
     /// <param name="result">The <see cref="ValueProviderResult"/>.</param>

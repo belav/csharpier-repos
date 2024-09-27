@@ -22,7 +22,8 @@ public class TemplateSegment
     }
 
     /// <summary>
-    /// Constructs a new <see cref="TemplateSegment"/> instance given another <see cref="RoutePatternPathSegment"/>.
+    /// Constructs a new <see cref="TemplateSegment"/> instance given another <see
+    // cref="RoutePatternPathSegment"/>.
     /// </summary>
     /// <param name="other">A <see cref="RoutePatternPathSegment"/> instance.</param>
     public TemplateSegment(RoutePatternPathSegment other)

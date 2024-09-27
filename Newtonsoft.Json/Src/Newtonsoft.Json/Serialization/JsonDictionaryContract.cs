@@ -91,7 +91,8 @@ namespace Newtonsoft.Json.Serialization
         }
 
         /// <summary>
-        /// Gets or sets the function used to create the object. When set this function will override <see cref="JsonContract.DefaultCreator"/>.
+        /// Gets or sets the function used to create the object. When set this function will override <see
+        // cref="JsonContract.DefaultCreator"/>.
         /// </summary>
         /// <value>The function used to create the object.</value>
         public ObjectConstructor<object>? OverrideCreator
@@ -103,7 +104,8 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// Gets a value indicating whether the creator has a parameter with the dictionary values.
         /// </summary>
-        /// <value><c>true</c> if the creator has a parameter with the dictionary values; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if the creator has a parameter with the dictionary values; otherwise,
+        // <c>false</c>.</value>
         public bool HasParameterizedCreator { get; set; }
 
         internal bool HasParameterizedCreatorInternal =>
@@ -234,7 +236,8 @@ namespace Newtonsoft.Json.Serialization
 #if (NET20 || NET35)
             if (DictionaryValueType != null && ReflectionUtils.IsNullableType(DictionaryValueType))
             {
-                // bug in .NET 2.0 & 3.5 that Dictionary<TKey, Nullable<TValue>> throws an error when adding null via IDictionary[key] = object
+                // bug in .NET 2.0 & 3.5 that Dictionary<TKey, Nullable<TValue>> throws an error when adding null
+                // via IDictionary[key] = object
                 // wrapper will handle calling Add(T) instead
                 if (
                     ReflectionUtils.InheritsGenericDefinition(

@@ -229,7 +229,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -313,7 +314,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <note type="inheritinfo">
         /// The implementers should not treat the cardinality-related mismatches as errors, and are not
         /// expected to throw exceptions in those cases.
-        /// For instance, if the import requests exactly one export and the provider has no matching exports or more than one,
+        /// For instance, if the import requests exactly one export and the provider has no matching exports
+        // or more than one,
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>
@@ -564,7 +566,8 @@ namespace System.ComponentModel.Composition.Hosting
                 }
             }
 
-            // if disposableNewPart != null, this means we have created a new instance of something disposable and not used it
+            // if disposableNewPart != null, this means we have created a new instance of something disposable
+            // and not used it
             // Dispose of it now
             disposableNewPart?.Dispose();
 
@@ -786,7 +789,8 @@ namespace System.ComponentModel.Composition.Hosting
         {
             ChangeRejectedException? exception = null;
 
-            // if there is no active atomic composition and rejection is disabled, there's no need to do any of the below
+            // if there is no active atomic composition and rejection is disabled, there's no need to do any of
+            // the below
             if (!EnsureRejection(parentAtomicComposition))
             {
                 return false;

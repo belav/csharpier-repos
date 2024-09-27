@@ -4,7 +4,8 @@
 namespace System.Diagnostics.Tracing
 {
     /// <summary>
-    /// Contains an event level that is defined in an event provider. The level signifies the severity of the event.
+    /// Contains an event level that is defined in an event provider. The level signifies the severity
+    // of the event.
     /// Custom values must be in the range from 16 through 255.
     /// </summary>
     public enum EventLevel
@@ -41,7 +42,9 @@ namespace System.Diagnostics.Tracing
     }
 
     /// <summary>
-    /// Contains an event task that is defined in an event provider. The task identifies a portion of an application or a component that publishes an event. A task is a 16-bit value with 16 top values reserved.
+    /// Contains an event task that is defined in an event provider. The task identifies a portion of an
+    // application or a component that publishes an event. A task is a 16-bit value with 16 top values
+    // reserved.
     /// Custom values must be in the range from 1 through 65534.
     /// </summary>
     public enum EventTask
@@ -53,7 +56,9 @@ namespace System.Diagnostics.Tracing
     }
 
     /// <summary>
-    /// Contains an event opcode that is defined in an event provider. An opcode defines a numeric value that identifies the activity or a point within an activity that the application was performing when it raised the event.
+    /// Contains an event opcode that is defined in an event provider. An opcode defines a numeric value
+    // that identifies the activity or a point within an activity that the application was performing when
+    // it raised the event.
     /// Custom values must be in the range from 11 through 239.
     /// </summary>
     public enum EventOpcode

@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
 public class DbContextHealthCheckTest
 {
-    // Just testing healthy here since it would be complicated to simulate a failure. All of that logic lives in EF anyway.
+    // Just testing healthy here since it would be complicated to simulate a failure. All of that logic
+    // lives in EF anyway.
     [Fact]
     public async Task CheckAsync_DefaultTest_Healthy()
     {
@@ -122,7 +123,8 @@ public class DbContextHealthCheckTest
         );
 
         using var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope();
-        // var registration = Assert.Single(services.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value.Registrations);
+        // var registration =
+        // Assert.Single(services.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value.Registrations);
         var registration = Assert.Single(
             services.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value.Registrations
         );

@@ -98,7 +98,8 @@ namespace System.Security.Cryptography.X509Certificates
         public Oid Oid => _oid;
 
         /// <summary>
-        /// Attempts to export the current key in the X.509 SubjectPublicKeyInfo format into a provided buffer.
+        /// Attempts to export the current key in the X.509 SubjectPublicKeyInfo format into a provided
+        // buffer.
         /// </summary>
         /// <param name="destination">
         /// The byte span to receive the X.509 SubjectPublicKeyInfo data.
@@ -213,7 +214,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         /// <summary>
-        /// Gets the <see cref="ECDsa" /> public key, or <see langword="null" /> if the key is not an ECDsa key.
+        /// Gets the <see cref="ECDsa" /> public key, or <see langword="null" /> if the key is not an ECDsa
+        // key.
         /// </summary>
         /// <returns>
         /// The public key, or <see langword="null" /> if the key is not an ECDsa key.

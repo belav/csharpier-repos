@@ -151,7 +151,8 @@ namespace System.Web.Script.Services
 
         private static bool CheckIfCollectionSequence(XmlSchemaSequence rootSequence)
         {
-            // No support for versioning since schema is not persisted; unknown serialization elements are not removed
+            // No support for versioning since schema is not persisted; unknown serialization elements are not
+            // removed
             if (rootSequence.Items == null || rootSequence.Items.Count == 0)
                 return false;
             if (rootSequence.Items.Count != 1)

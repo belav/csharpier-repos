@@ -37,7 +37,8 @@ namespace ILCompiler.DependencyAnalysis
         public abstract ObjectNodeSection GetSection(NodeFactory factory);
 
         /// <summary>
-        /// Should identical symbols emitted into separate object files be Comdat folded when linked together?
+        /// Should identical symbols emitted into separate object files be Comdat folded when linked
+        // together?
         /// </summary>
         public abstract bool IsShareable { get; }
 

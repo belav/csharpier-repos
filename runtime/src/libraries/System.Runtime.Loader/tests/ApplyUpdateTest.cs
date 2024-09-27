@@ -121,8 +121,8 @@ namespace System.Reflection.Metadata
         )]
         void FirstCallAfterUpdate()
         {
-            /* Tests that updating a method that has not been called before works correctly and that
-             * the JIT/interpreter doesn't have to rely on cached baseline data. */
+/* Tests that updating a method that has not been called before works correctly and that
+* the JIT/interpreter doesn't have to rely on cached baseline data. */
             ApplyUpdateUtil.TestCase(static () =>
             {
                 var assm = typeof(ApplyUpdate.Test.FirstCallAfterUpdate).Assembly;
@@ -185,7 +185,8 @@ namespace System.Reflection.Metadata
         public void CustomAttributeUpdates()
         {
             // Test that _modifying_ custom attribute constructor/property argumments works as expected.
-            // For this test, we don't change which constructor is called, or how many custom attributes there are.
+            // For this test, we don't change which constructor is called, or how many custom attributes there
+            // are.
             ApplyUpdateUtil.TestCase(static () =>
             {
                 var assm =
@@ -366,7 +367,8 @@ namespace System.Reflection.Metadata
         [ConditionalFact(typeof(ApplyUpdateUtil), nameof(ApplyUpdateUtil.IsSupported))]
         public static void TestAddLambdaCapturingThis()
         {
-            // Test that adding a lambda that captures 'this' (to a method that already has a lambda that captures 'this') is supported
+            // Test that adding a lambda that captures 'this' (to a method that already has a lambda that
+            // captures 'this') is supported
             ApplyUpdateUtil.TestCase(static () =>
             {
                 var assm =

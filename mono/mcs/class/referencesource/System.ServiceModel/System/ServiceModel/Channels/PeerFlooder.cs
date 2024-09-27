@@ -410,7 +410,8 @@ namespace System.ServiceModel.Channels
             hopHeader = null;
             try
             {
-                // If a message contains multiple Hopcounts with our name and namespace or the message can't deserialize to a ulong then ignore the HopCount
+                // If a message contains multiple Hopcounts with our name and namespace or the message can't
+                // deserialize to a ulong then ignore the HopCount
                 index = message.Headers.FindHeader(
                     PeerStrings.HopCountElementName,
                     PeerStrings.HopCountElementNamespace
@@ -1016,7 +1017,8 @@ namespace System.ServiceModel.Channels
         }
 
         //user wants to end business. This method is called as a result of EndSend on the flooder.
-        //internal methods do not call this. we are asserting that this method should not be called in case of failed BeginX
+        //internal methods do not call this. we are asserting that this method should not be called in case
+        // of failed BeginX
         public void End()
         {
             if (!(this.doneAdding && this.shouldCallComplete))
@@ -1066,9 +1068,12 @@ namespace System.ServiceModel.Channels
 
         //this method marks the end of BeginX by the flooder.
         //if there were errors during BeginX, this method may be prematurely called
-        //in this case, our only job is to call EndX on successful BeginX calls. we do not report back to caller in this case.
-        //base.Complete will not be called and End() will not be called. User has already received exception during BeginX
-        //if there was no exception during BeginX, excep param is null. In this case, we call base.Complete upon the last EndX
+        //in this case, our only job is to call EndX on successful BeginX calls. we do not report back to
+        // caller in this case.
+        //base.Complete will not be called and End() will not be called. User has already received exception
+        // during BeginX
+        //if there was no exception during BeginX, excep param is null. In this case, we call base.Complete
+        // upon the last EndX
         public void MarkEnd(bool success)
         {
             bool callComplete = false;
@@ -1101,7 +1106,8 @@ namespace System.ServiceModel.Channels
 
         //this is the callback routine for async completion on channel BeginSend() operations.
         //if we are done, simply return. This can happen if user called sync EndX.
-        //if the flooder is still processing BeginSend(), then we probably cant complete. In this case, add the result to pending and return
+        //if the flooder is still processing BeginSend(), then we probably cant complete. In this case, add
+        // the result to pending and return
         //main thread will flush the pending completions in MarkEnd().
         //otherwise, call EndX on the result and remove it from results.
         //if this is the last invoke, signal user using base.Complete AND isCompleted=true

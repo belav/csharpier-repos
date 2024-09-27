@@ -16,7 +16,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 5).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 5).
         /// </param>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="ruleSet"/> is not defined.
@@ -70,7 +71,8 @@ namespace System.Formats.Asn1
         ///   Reads the next value as a NULL with a specified tag.
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 5).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 5).
         /// </param>
         /// <exception cref="AsnContentException">
         ///   the next value does not have the correct tag.

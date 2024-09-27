@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace System.Runtime.CompilerServices
 {
     /// <summary>
-    /// Indicates that the use of <see cref="object"/> on a member is meant to be treated as a dynamically dispatched type.
+    /// Indicates that the use of <see cref="object"/> on a member is meant to be treated as a
+    // dynamically dispatched type.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Field

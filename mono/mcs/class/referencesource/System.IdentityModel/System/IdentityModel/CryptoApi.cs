@@ -110,16 +110,23 @@ namespace System.IdentityModel
         );
 
         //internal const uint CERT_FIND_MD5_HASH = ((int)CERT_COMPARE_MD5_HASH << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_SIGNATURE_HASH = ((int)CERT_COMPARE_SIGNATURE_HASH << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_KEY_IDENTIFIER = ((int)CERT_COMPARE_KEY_IDENTIFIER << (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_SIGNATURE_HASH = ((int)CERT_COMPARE_SIGNATURE_HASH <<
+        // (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_KEY_IDENTIFIER = ((int)CERT_COMPARE_KEY_IDENTIFIER <<
+        // (int)CERT_COMPARE_SHIFT);
         internal const uint CERT_FIND_HASH = CERT_FIND_SHA1_HASH;
 
         //internal const uint CERT_FIND_PROPERTY = ((int)CERT_COMPARE_PROPERTY << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_PUBLIC_KEY = ((int)CERT_COMPARE_PUBLIC_KEY << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_SUBJECT_NAME = ((int)CERT_COMPARE_NAME << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG);
-        //internal const uint CERT_FIND_SUBJECT_ATTR = ((int)CERT_COMPARE_ATTR << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG);
-        //internal const uint CERT_FIND_ISSUER_NAME = ((int)CERT_COMPARE_NAME << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG);
-        //internal const uint CERT_FIND_ISSUER_ATTR = ((int)CERT_COMPARE_ATTR << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG);
+        //internal const uint CERT_FIND_PUBLIC_KEY = ((int)CERT_COMPARE_PUBLIC_KEY <<
+        // (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_SUBJECT_NAME = ((int)CERT_COMPARE_NAME << (int)CERT_COMPARE_SHIFT |
+        // (int)CERT_INFO_SUBJECT_FLAG);
+        //internal const uint CERT_FIND_SUBJECT_ATTR = ((int)CERT_COMPARE_ATTR << (int)CERT_COMPARE_SHIFT |
+        // (int)CERT_INFO_SUBJECT_FLAG);
+        //internal const uint CERT_FIND_ISSUER_NAME = ((int)CERT_COMPARE_NAME << (int)CERT_COMPARE_SHIFT |
+        // (int)CERT_INFO_ISSUER_FLAG);
+        //internal const uint CERT_FIND_ISSUER_ATTR = ((int)CERT_COMPARE_ATTR << (int)CERT_COMPARE_SHIFT |
+        // (int)CERT_INFO_ISSUER_FLAG);
         internal const uint CERT_FIND_SUBJECT_STR_A = (
             (int)CERT_COMPARE_NAME_STR_A << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG
         );
@@ -136,14 +143,19 @@ namespace System.IdentityModel
         internal const uint CERT_FIND_ISSUER_STR = CERT_FIND_ISSUER_STR_W;
 
         //internal const uint CERT_FIND_KEY_SPEC = ((int)CERT_COMPARE_KEY_SPEC << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_ENHKEY_USAGE = ((int)CERT_COMPARE_ENHKEY_USAGE << (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_ENHKEY_USAGE = ((int)CERT_COMPARE_ENHKEY_USAGE <<
+        // (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_CTL_USAGE = CERT_FIND_ENHKEY_USAGE;
-        //internal const uint CERT_FIND_SUBJECT_CERT = ((int)CERT_COMPARE_SUBJECT_CERT << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_ISSUER_OF = ((int)CERT_COMPARE_ISSUER_OF << (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_SUBJECT_CERT = ((int)CERT_COMPARE_SUBJECT_CERT <<
+        // (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_ISSUER_OF = ((int)CERT_COMPARE_ISSUER_OF <<
+        // (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_EXISTING = ((int)CERT_COMPARE_EXISTING << (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_CERT_ID = ((int)CERT_COMPARE_CERT_ID << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_CROSS_CERT_DIST_POINTS = ((int)CERT_COMPARE_CROSS_CERT_DIST_POINTS << (int)CERT_COMPARE_SHIFT);
-        //internal const uint CERT_FIND_PUBKEY_MD5_HASH = ((int)CERT_COMPARE_PUBKEY_MD5_HASH << (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_CROSS_CERT_DIST_POINTS = ((int)CERT_COMPARE_CROSS_CERT_DIST_POINTS
+        // << (int)CERT_COMPARE_SHIFT);
+        //internal const uint CERT_FIND_PUBKEY_MD5_HASH = ((int)CERT_COMPARE_PUBKEY_MD5_HASH <<
+        // (int)CERT_COMPARE_SHIFT);
 
         // Common chain policy flags.
         internal const uint CERT_CHAIN_REVOCATION_CHECK_END_CERT = 0x10000000;
@@ -280,7 +292,8 @@ namespace System.IdentityModel
             [In] uint cbCertEncoded
         );
 
-        // A new store is created if one did not exist. The function fails if the store already exists if dwFlags is set to CERT_STORE_CREATE_NEW_FLAG .
+        // A new store is created if one did not exist. The function fails if the store already exists if
+        // dwFlags is set to CERT_STORE_CREATE_NEW_FLAG .
 
         [DllImport(CAPI.CRYPT32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -382,7 +395,8 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             return CAPI.CertCloseStore(handle, 0);
         }
@@ -410,7 +424,8 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             return CAPI.CertFreeCertificateContext(handle);
         }
@@ -437,7 +452,8 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             CAPI.CertFreeCertificateChain(handle);
             return true;

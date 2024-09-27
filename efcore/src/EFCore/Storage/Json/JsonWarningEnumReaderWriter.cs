@@ -6,7 +6,8 @@ using System.Text.Json;
 namespace Microsoft.EntityFrameworkCore.Storage.Json;
 
 /// <summary>
-///     Reads and writes JSON for <see langword="enum" /> values where string values may be read instead of numeric, and, when this
+///     Reads and writes JSON for <see langword="enum" /> values where string values may be read
+// instead of numeric, and, when this
 ///     happens, a warning is generated.
 /// </summary>
 public sealed class JsonWarningEnumReaderWriter<TEnum> : JsonValueReaderWriter<TEnum>

@@ -78,9 +78,12 @@ namespace System.Collections.Tests
         }
 
         /// <summary>
-        /// MemberData for a Theory to test the IndexOf methods for List. To avoid high code reuse of tests for the 6 IndexOf
-        /// methods in List, delegates are used to cover the basic behavioral cases shared by all IndexOf methods. A bool
-        /// is used to specify the ordering (front-to-back or back-to-front (e.g. LastIndexOf)) that the IndexOf method
+        /// MemberData for a Theory to test the IndexOf methods for List. To avoid high code reuse of tests
+        // for the 6 IndexOf
+        /// methods in List, delegates are used to cover the basic behavioral cases shared by all IndexOf
+        // methods. A bool
+        /// is used to specify the ordering (front-to-back or back-to-front (e.g. LastIndexOf)) that the
+        // IndexOf method
         /// searches in.
         /// </summary>
         public static IEnumerable<object[]> IndexOfTestData()

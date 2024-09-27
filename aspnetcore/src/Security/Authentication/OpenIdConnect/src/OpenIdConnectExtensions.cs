@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class OpenIdConnectExtensions
 {
     /// <summary>
-    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the default
+    // scheme.
     /// The default scheme is specified by <see cref="OpenIdConnectDefaults.AuthenticationScheme"/>.
     /// <para>
     /// OpenID Connect is an identity layer on top of the OAuth 2.0 protocol. It allows clients
@@ -27,7 +28,8 @@ public static class OpenIdConnectExtensions
         builder.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, _ => { });
 
     /// <summary>
-    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the default
+    // scheme.
     /// The default scheme is specified by <see cref="OpenIdConnectDefaults.AuthenticationScheme"/>.
     /// <para>
     /// OpenID Connect is an identity layer on top of the OAuth 2.0 protocol. It allows clients
@@ -35,7 +37,8 @@ public static class OpenIdConnectExtensions
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
-    /// <param name="configureOptions">A delegate to configure <see cref="OpenIdConnectOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure <see
+    // cref="OpenIdConnectOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddOpenIdConnect(
         this AuthenticationBuilder builder,
@@ -43,7 +46,8 @@ public static class OpenIdConnectExtensions
     ) => builder.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, configureOptions);
 
     /// <summary>
-    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the specified scheme.
+    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the specified
+    // scheme.
     /// <para>
     /// OpenID Connect is an identity layer on top of the OAuth 2.0 protocol. It allows clients
     /// to request and receive information about authenticated sessions and end-users.
@@ -51,7 +55,8 @@ public static class OpenIdConnectExtensions
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
-    /// <param name="configureOptions">A delegate to configure <see cref="OpenIdConnectOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure <see
+    // cref="OpenIdConnectOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddOpenIdConnect(
         this AuthenticationBuilder builder,
@@ -65,7 +70,8 @@ public static class OpenIdConnectExtensions
         );
 
     /// <summary>
-    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the specified scheme.
+    /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the specified
+    // scheme.
     /// <para>
     /// OpenID Connect is an identity layer on top of the OAuth 2.0 protocol. It allows clients
     /// to request and receive information about authenticated sessions and end-users.
@@ -74,7 +80,8 @@ public static class OpenIdConnectExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
     /// <param name="displayName">A display name for the authentication handler.</param>
-    /// <param name="configureOptions">A delegate to configure <see cref="OpenIdConnectOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure <see
+    // cref="OpenIdConnectOptions"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddOpenIdConnect(
         this AuthenticationBuilder builder,

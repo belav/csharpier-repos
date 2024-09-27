@@ -73,7 +73,8 @@ namespace System.Activities.Statements
         }
 
         /// <summary>
-        /// Gets or sets EventManager is used to globally manage event queue such that triggered events can be processed in order.
+        /// Gets or sets EventManager is used to globally manage event queue such that triggered events can
+        // be processed in order.
         /// </summary>
         [RequiredArgument]
         public InArgument<StateMachineEventManager> EventManager { get; set; }
@@ -207,7 +208,8 @@ namespace System.Activities.Statements
         {
             InternalState originalInternalState = (InternalState)originalActivity;
 
-            // NOTE: State.Entry/Exit are allowed to be removed, because it doesn't change the execution semantics of SM
+            // NOTE: State.Entry/Exit are allowed to be removed, because it doesn't change the execution
+            // semantics of SM
             // if this removed activity was executing, WF runtime would disallow the update.
             Activity entryActivityMatch = metadata.GetMatch(this.Entry);
             Activity exitActivityMatch = metadata.GetMatch(this.Exit);
@@ -374,7 +376,8 @@ namespace System.Activities.Statements
                 // destination state index.  In that case, the update would fail at UpdateInstance.
                 // To simplify the model, it is more convenient to disallow removing existing transitions
                 // from an executing InternalState.  The only extra restriction it brings, is that it disables
-                // update even if the InternalState is uploaded at State.Entry.  This scenario, however, is uncommon.
+                // update even if the InternalState is uploaded at State.Entry.  This scenario, however, is
+                // uncommon.
                 metadata.DisallowUpdateInsideThisActivity(SR.RemovingTransitionsBlockDU);
             }
         }
@@ -522,7 +525,8 @@ namespace System.Activities.Statements
 
                             Activity originalAction = originalTData.Action;
 
-                            // NOTE: Transition.Action is allowed to be removed, because it doesn't change the execution semantics of SM
+                            // NOTE: Transition.Action is allowed to be removed, because it doesn't change the execution
+                            // semantics of SM
                             // if this removed activity was executing, WF runtime would disallow the update.
                             Activity actionMatch = metadata.GetMatch(updatedTData.Action);
 
@@ -629,12 +633,14 @@ namespace System.Activities.Statements
         }
 
         /// <summary>
-        /// Used for Dynamic Update: after the instance is updated, if the statemachine is already transitioning, the index of the to-be-scheduled state
+        /// Used for Dynamic Update: after the instance is updated, if the statemachine is already
+        // transitioning, the index of the to-be-scheduled state
         /// would need to be updated.
         /// </summary>
         /// <param name="updateContext">Dynamic Update context</param>
         /// <param name="eventManager">Internal StateMachineEventManager</param>
-        /// <returns>True, 1. if update is successful and the instanced is updated with the new indexes, and 2 all the trigger ID in the queue are updated;
+        /// <returns>True, 1. if update is successful and the instanced is updated with the new indexes, and
+        // 2 all the trigger ID in the queue are updated;
         /// false otherwise and the update should fail.</returns>
         private bool UpdateEventManager(
             NativeActivityUpdateContext updateContext,

@@ -66,9 +66,9 @@ namespace System.Web.UI.WebControls
 
         protected BaseDataBoundControl() { }
 
-        /* Used for controls that used to inherit from
-         * WebControl, so the tag can propagate upwards
-         */
+/* Used for controls that used to inherit from
+* WebControl, so the tag can propagate upwards
+*/
         internal BaseDataBoundControl(HtmlTextWriterTag tag)
             : base(tag) { }
 

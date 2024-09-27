@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             if (typeDeclaration == null)
                 return ImmutableArray<CodeAction>.Empty;
 
-            // See if we're already assigning this parameter to a field/property in this type. If so, there's nothing
+            // See if we're already assigning this parameter to a field/property in this type. If so, there's
+            // nothing
             // more for us to do.
             var assignmentStatement = TryFindFieldOrPropertyAssignmentStatement(
                 parameter,
@@ -548,7 +549,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             Debug.Assert(fieldsOrProperties.Length > 0);
             Debug.Assert(parameters.Length == fieldsOrProperties.Length);
 
-            // Process each param+field/prop in order.  Apply the pair to the document getting the updated document.
+            // Process each param+field/prop in order.  Apply the pair to the document getting the updated
+            // document.
             // Then find all the current data in that updated document and move onto the next pair.
 
             var root = await document
@@ -713,7 +715,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 editor
             );
 
-            // If the user had a property that has 'throw NotImplementedException' in it, then remove those throws.
+            // If the user had a property that has 'throw NotImplementedException' in it, then remove those
+            // throws.
             var currentSolution = document.Project.Solution;
             if (isThrowNotImplementedProperty)
             {

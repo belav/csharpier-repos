@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         /// <summary>
         /// This is set only during Exec. Currently, this is required to disambiguate the editor calls to
-        /// <see cref="IVsTextViewFilter.GetPairExtents(int, int, TextSpan[])"/> between GotoBrace and GotoBraceExt commands.
+        /// <see cref="IVsTextViewFilter.GetPairExtents(int, int, TextSpan[])"/> between GotoBrace and
+        // GotoBraceExt commands.
         /// </summary>
         protected uint CurrentlyExecutingCommand { get; private set; }
 

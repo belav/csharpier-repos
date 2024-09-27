@@ -42,7 +42,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="sessionTokenHandler">The sessionTokenHandler to wrap</param>
         /// <param name="wcfSessionAuthenticator">The wcf SessionTokenAuthenticator.</param>
-        /// <param name="sctClaimsHandler">Handler that converts WCF generated IAuthorizationPolicy to <see cref="AuthorizationPolicy"/></param>
+        /// <param name="sctClaimsHandler">Handler that converts WCF generated IAuthorizationPolicy to <see
+        // cref="AuthorizationPolicy"/></param>
         /// <param name="exceptionMapper">Converts token validation exception to SOAP faults.</param>
         public WrappedSessionSecurityTokenAuthenticator(
             SessionSecurityTokenHandler sessionTokenHandler,
@@ -105,7 +106,8 @@ namespace System.ServiceModel.Security
         /// Validates the token using the wrapped token handler and generates IAuthorizationPolicy
         /// wrapping the returned ClaimsIdentities.
         /// </summary>
-        /// <param name="token">Token to be validated. This is always a SecurityContextSecurityToken.</param>
+        /// <param name="token">Token to be validated. This is always a
+        // SecurityContextSecurityToken.</param>
         /// <returns>Read-only collection of IAuthorizationPolicy</returns>
         protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
             SecurityToken token

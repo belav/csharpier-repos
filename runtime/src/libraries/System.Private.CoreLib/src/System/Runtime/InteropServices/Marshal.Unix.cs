@@ -51,14 +51,16 @@ namespace System.Runtime.InteropServices
             return convertedBytes;
         }
 
-        // Returns number of bytes required to convert given string to Ansi string. The return value includes null terminator.
+        // Returns number of bytes required to convert given string to Ansi string. The return value
+        // includes null terminator.
         internal static unsafe int GetAnsiStringByteCount(ReadOnlySpan<char> chars)
         {
             int byteLength = Encoding.UTF8.GetByteCount(chars);
             return checked(byteLength + 1);
         }
 
-        // Converts given string to Ansi string. The destination buffer must be large enough to hold the converted value, including null terminator.
+        // Converts given string to Ansi string. The destination buffer must be large enough to hold the
+        // converted value, including null terminator.
         internal static unsafe void GetAnsiStringBytes(ReadOnlySpan<char> chars, Span<byte> bytes)
         {
             int actualByteLength = Encoding.UTF8.GetBytes(chars, bytes);
@@ -185,7 +187,8 @@ namespace System.Runtime.InteropServices
         /// </summary>
         /// <returns>The last system error.</returns>
         /// <remarks>
-        /// The error is that for the current operating system (for example, errno on Unix, GetLastError on Windows).
+        /// The error is that for the current operating system (for example, errno on Unix, GetLastError on
+        // Windows).
         /// </remarks>
         public static int GetLastSystemError()
         {
@@ -197,7 +200,8 @@ namespace System.Runtime.InteropServices
         /// </summary>
         /// <param name="error">The error to set.</param>
         /// <remarks>
-        /// The error is that for the current operating system (for example, errno on Unix, SetLastError on Windows).
+        /// The error is that for the current operating system (for example, errno on Unix, SetLastError on
+        // Windows).
         /// </remarks>
         public static void SetLastSystemError(int error)
         {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -153,7 +154,8 @@ namespace System.Web.WebPages.Administration.PackageManager
         }
 
         /// <summary>
-        /// Updates a package reference. Installs the package to the App_Data repository if it does not already exist.
+        /// Updates a package reference. Installs the package to the App_Data repository if it does not
+        // already exist.
         /// </summary>
         /// <returns>Warnings encountered when updating the package.</returns>
         public IEnumerable<string> UpdatePackage(IPackage package, AppDomain appDomain)

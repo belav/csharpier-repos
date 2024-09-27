@@ -52,32 +52,38 @@ public class Vec
                     parseOptions: TestOptions.Regular6
                 )
                 .VerifyDiagnostics(
-                    // (7,18): error CS8059: Feature 'binary literals' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (7,18): error CS8059: Feature 'binary literals' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         int i1 = 0b001010; // binary literals
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "")
                         .WithArguments("binary literals", "7.0")
                         .WithLocation(7, 18),
-                    // (8,18): error CS8059: Feature 'digit separators' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (8,18): error CS8059: Feature 'digit separators' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         int i2 = 23_554; // digit separators
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "")
                         .WithArguments("digit separators", "7.0")
                         .WithLocation(8, 18),
-                    // (13,9): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (13,9): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use
+                    // language version 7.0 or greater.
                     //         ref int i3 = ref i1; // ref locals
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "ref")
                         .WithArguments("byref locals and returns", "7.0")
                         .WithLocation(13, 9),
-                    // (13,22): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (13,22): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use
+                    // language version 7.0 or greater.
                     //         ref int i3 = ref i1; // ref locals
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "ref")
                         .WithArguments("byref locals and returns", "7.0")
                         .WithLocation(13, 22),
-                    // (12,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (12,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         int f() => 2;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "f")
                         .WithArguments("local functions", "7.0")
                         .WithLocation(12, 13),
-                    // (14,22): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (14,22): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         string s = o is string k ? k : null; // pattern matching
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "is")
                         .WithArguments("pattern matching", "7.0")
@@ -165,7 +171,8 @@ public class X
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-                // (11,18): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
+                // (11,18): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the
+                // underlying type 'int' instead.
                 //         if (x is Nullable<int> y) Console.WriteLine($"expression {x} is Nullable<int> y");
                 Diagnostic(ErrorCode.ERR_PatternNullableType, "Nullable<int>")
                     .WithArguments("int")
@@ -242,12 +249,14 @@ public class X
                 Diagnostic(ErrorCode.ERR_BadPatternExpression, "null")
                     .WithArguments("<null>")
                     .WithLocation(10, 13),
-                // (11,18): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
+                // (11,18): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the
+                // underlying type 'int' instead.
                 //         if (s is NullableInt x) { } // error: cannot use nullable type
                 Diagnostic(ErrorCode.ERR_PatternNullableType, "NullableInt")
                     .WithArguments("int")
                     .WithLocation(11, 18),
-                // (12,18): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'long'.
+                // (12,18): error CS8121: An expression of type 'string' cannot be handled by a pattern of type
+                // 'long'.
                 //         if (s is long l) { } // error: cannot convert string to long
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "long")
                     .WithArguments("string", "long")
@@ -505,7 +514,8 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-                // (2,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (2,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [Obsolete("" is string s ? s : "")]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, @""""" is string s ? s : """"")
                     .WithLocation(2, 11),
@@ -1068,7 +1078,8 @@ True"
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (9,34): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (9,34): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     static bool Test1 = 1 is int x1 && Dummy(x1);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "x1")
                         .WithArguments(
@@ -1186,7 +1197,8 @@ True"
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (9,41): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (9,41): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     static bool Test1 {get;} = 1 is int x1 && Dummy(x1);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "x1")
                         .WithArguments(
@@ -1300,7 +1312,8 @@ True"
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (12,40): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (12,40): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     public D(object o) : base(2 is var x1 && Dummy(x1))
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "x1")
                         .WithArguments(
@@ -1308,7 +1321,8 @@ True"
                             "7.3"
                         )
                         .WithLocation(12, 40),
-                    // (17,32): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (17,32): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     public D() : this(1 is int x1 && Dummy(x1))
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "x1")
                         .WithArguments(
@@ -3504,12 +3518,14 @@ public class X
                 Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "1 is int[]")
                     .WithArguments("int[]")
                     .WithLocation(8, 27),
-                // (10,33): error CS8121: An expression of type 'long' cannot be handled by a pattern of type 'string'.
+                // (10,33): error CS8121: An expression of type 'long' cannot be handled by a pattern of type
+                // 'string'.
                 //         Console.WriteLine(1L is string s); // error: type mismatch
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "string")
                     .WithArguments("long", "string")
                     .WithLocation(10, 33),
-                // (11,32): error CS8121: An expression of type 'int' cannot be handled by a pattern of type 'int[]'.
+                // (11,32): error CS8121: An expression of type 'int' cannot be handled by a pattern of type
+                // 'int[]'.
                 //         Console.WriteLine(1 is int[] a); // error: expression is never of the provided type
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "int[]")
                     .WithArguments("int", "int[]")
@@ -3781,7 +3797,8 @@ other 6"
                 parseOptions: TestOptions.Regular6
             );
             compilation.VerifyDiagnostics(
-                // (7,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                // (7,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language
+                // version 7.0 or greater.
                 //             case 1 when true:
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "case")
                     .WithArguments("pattern matching", "7.0")
@@ -3990,7 +4007,8 @@ unsafe struct S
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //             if (M is T)
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "M is T").WithLocation(8, 17)
                 );
@@ -4014,10 +4032,12 @@ unsafe struct S
 }";
             var compilation = CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (7,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (7,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //             if (o.Equals is()) {}
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "o.Equals is()").WithLocation(7, 17),
-                    // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //             if (object.Equals is()) {}
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "object.Equals is()")
                         .WithLocation(8, 17)
@@ -4028,16 +4048,20 @@ unsafe struct S
 
             Assert.Equal("o.Equals is()", node.ToString());
 
-            // https://github.com/dotnet/roslyn/issues/27749 : This syntax corresponds to a deconstruction pattern with zero elements, which is not yet supported in IOperation.
+            // https://github.com/dotnet/roslyn/issues/27749 : This syntax corresponds to a deconstruction
+            // pattern with zero elements, which is not yet supported in IOperation.
             //            compilation.VerifyOperationTree(node, expectedOperationTree:
             //@"
-            //IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (Syntax: 'o.Equals is()')
+            //IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (Syntax: 'o.Equals
+            // is()')
             //  Expression:
-            //    IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid, IsImplicit) (Syntax: 'o.Equals is()')
+            //    IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid, IsImplicit) (Syntax: 'o.Equals
+            // is()')
             //      Children(1):
             //          IOperation:  (OperationKind.None, Type: null, IsInvalid) (Syntax: 'o.Equals')
             //            Children(1):
-            //                IParameterReferenceOperation: o (OperationKind.ParameterReference, Type: System.Object, IsInvalid) (Syntax: 'o')
+            //                IParameterReferenceOperation: o (OperationKind.ParameterReference, Type:
+            // System.Object, IsInvalid) (Syntax: 'o')
             //  Pattern:
             //");
         }
@@ -4100,14 +4124,17 @@ public class Vec
                     Diagnostic(ErrorCode.ERR_BadPatternExpression, "null")
                         .WithArguments("<null>")
                         .WithLocation(6, 13),
-                    // (7,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (7,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //         if (Main is 2) {}
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "Main is 2").WithLocation(7, 13),
-                    // (8,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (8,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //         if (delegate {} is 3) {}
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "delegate {} is 3")
                         .WithLocation(8, 13),
-                    // (8,25): warning CS8848: Operator 'is' cannot be used here due to precedence. Use parentheses to disambiguate.
+                    // (8,25): warning CS8848: Operator 'is' cannot be used here due to precedence. Use parentheses to
+                    // disambiguate.
                     //         if (delegate {} is 3) {}
                     Diagnostic(ErrorCode.WRN_PrecedenceInversion, "is")
                         .WithArguments("is")
@@ -4122,14 +4149,17 @@ public class Vec
                     Diagnostic(ErrorCode.ERR_BadPatternExpression, "null")
                         .WithArguments("<null>")
                         .WithLocation(10, 13),
-                    // (11,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (11,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //         if (Main is var x2) {}
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "Main is var x2").WithLocation(11, 13),
-                    // (12,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    // (12,13): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda
+                    // expression, anonymous method, or method group.
                     //         if (delegate {} is var x3) {}
                     Diagnostic(ErrorCode.ERR_LambdaInIsAs, "delegate {} is var x3")
                         .WithLocation(12, 13),
-                    // (12,25): warning CS8848: Operator 'is' cannot be used here due to precedence. Use parentheses to disambiguate.
+                    // (12,25): warning CS8848: Operator 'is' cannot be used here due to precedence. Use parentheses to
+                    // disambiguate.
                     //         if (delegate {} is var x3) {}
                     Diagnostic(ErrorCode.WRN_PrecedenceInversion, "is")
                         .WithArguments("is")
@@ -4561,7 +4591,8 @@ class B
                     parseOptions: TestOptions.Regular6
                 )
                 .VerifyDiagnostics(
-                    // (15,29): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (15,29): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         Console.WriteLine(3 is One + 2); // should print True
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "is")
                         .WithArguments("pattern matching", "7.0")
@@ -4570,7 +4601,8 @@ class B
                     //         Console.WriteLine(3 is One + 2); // should print True
                     Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesConstant, "3 is One + 2")
                         .WithLocation(15, 27),
-                    // (16,35): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (16,35): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         Console.WriteLine(One + 2 is 3); // should print True
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "is")
                         .WithArguments("pattern matching", "7.0")
@@ -4886,7 +4918,8 @@ public class C
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (8,29): error CS0246: The type or namespace name '_' could not be found (are you missing a using directive or an assembly reference?)
+                    // (8,29): error CS0246: The type or namespace name '_' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         Write($"is _: {i is _}, ");
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_")
                         .WithArguments("_")
@@ -4903,7 +4936,8 @@ public class C
                     parseOptions: TestOptions.Regular8
                 )
                 .VerifyDiagnostics(
-                    // (8,29): error CS0246: The type or namespace name '_' could not be found (are you missing a using directive or an assembly reference?)
+                    // (8,29): error CS0246: The type or namespace name '_' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         Write($"is _: {i is _}, ");
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_")
                         .WithArguments("_")
@@ -5054,12 +5088,14 @@ unsafe public class Typ
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
                     .WithArguments("int")
                     .WithLocation(13, 31),
-                // (5,42): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('var')
+                // (5,42): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('var')
                 //     public static void Main(int* a, var* c, Typ* e)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                     .WithArguments("var")
                     .WithLocation(5, 42),
-                // (5,50): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Typ')
+                // (5,50): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('Typ')
                 //     public static void Main(int* a, var* c, Typ* e)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "e")
                     .WithArguments("Typ")
@@ -5241,12 +5277,14 @@ class C
                 Diagnostic(ErrorCode.ERR_BadPatternExpression, "null")
                     .WithArguments("<null>")
                     .WithLocation(6, 30),
-                // (6,38): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a using directive or an assembly reference?)
+                // (6,38): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //         System.Console.Write(null is Missing x);
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Missing")
                     .WithArguments("Missing")
                     .WithLocation(6, 38),
-                // (7,38): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a using directive or an assembly reference?)
+                // (7,38): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //         System.Console.Write(null is Missing);
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Missing")
                     .WithArguments("Missing")
@@ -5261,7 +5299,8 @@ class C
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
                     .WithArguments("Missing")
                     .WithLocation(10, 18),
-                // (11,18): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a using directive or an assembly reference?)
+                // (11,18): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //             case Missing y:
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Missing")
                     .WithArguments("Missing")
@@ -5406,12 +5445,14 @@ public class Program1717
 }";
             CreateCompilation(program)
                 .VerifyDiagnostics(
-                    // (10,18): error CS0266: Cannot implicitly convert type 'double' to 'int?'. An explicit conversion exists (are you missing a cast?)
+                    // (10,18): error CS0266: Cannot implicitly convert type 'double' to 'int?'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //             case double.NaN:
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "double.NaN")
                         .WithArguments("double", "int?")
                         .WithLocation(10, 18),
-                    // (13,18): error CS8121: An expression of type 'int?' cannot be handled by a pattern of type 'string'.
+                    // (13,18): error CS8121: An expression of type 'int?' cannot be handled by a pattern of type
+                    // 'string'.
                     //             case string _:
                     Diagnostic(ErrorCode.ERR_PatternWrongType, "string")
                         .WithArguments("int?", "string")
@@ -5571,7 +5612,8 @@ public class Program738490379
                     // (6,43): error CS1002: ; expected
                     //         if (NotFound is var (M, not int _ or NotFound _) {  }) {}
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "or").WithLocation(6, 43),
-                    // (6,43): error CS0246: The type or namespace name 'or' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,43): error CS0246: The type or namespace name 'or' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         if (NotFound is var (M, not int _ or NotFound _) {  }) {}
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "or")
                         .WithArguments("or")
@@ -5853,7 +5895,8 @@ class Derived : Base
 ";
             var compilation = CreateCompilation(program)
                 .VerifyDiagnostics(
-                    // (12,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                    // (12,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                    // case or it is impossible to match.
                     //             case TDerived td:
                     Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "TDerived td")
                         .WithLocation(12, 18)
@@ -5882,7 +5925,8 @@ public class Program
 ";
             var compilation = CreateCompilation(program)
                 .VerifyDiagnostics(
-                    // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                    // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                    // case or it is impossible to match.
                     //             case IEnumerable<object> s:
                     Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "IEnumerable<object> s")
                         .WithLocation(11, 18)
@@ -5973,12 +6017,14 @@ public class Program
                     parseOptions: TestOptions.Regular7
                 )
                 .VerifyDiagnostics(
-                    // (8,18): error CS8314: An expression of type 'string' cannot be handled by a pattern of type 'U' in C# 7.0. Please use language version 7.1 or greater.
+                    // (8,18): error CS8314: An expression of type 'string' cannot be handled by a pattern of type 'U'
+                    // in C# 7.0. Please use language version 7.1 or greater.
                     //             case U uu:
                     Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "U")
                         .WithArguments("string", "U", "7.0", "7.1")
                         .WithLocation(8, 18),
-                    // (10,18): error CS8314: An expression of type 'string' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                    // (10,18): error CS8314: An expression of type 'string' cannot be handled by a pattern of type 'T'
+                    // in C# 7.0. Please use language version 7.1 or greater.
                     //             case T tt: // Produces a diagnostic about subsumption/unreachability
                     Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
                         .WithArguments("string", "T", "7.0", "7.1")
@@ -5990,7 +6036,8 @@ public class Program
                     parseOptions: TestOptions.Regular7_1
                 )
                 .VerifyDiagnostics(
-                    // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                    // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                    // case or it is impossible to match.
                     //             case T tt: // Produces a diagnostic about subsumption/unreachability
                     Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "T tt").WithLocation(10, 18)
                 );
@@ -6049,7 +6096,8 @@ public class Program
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-                // (7,32): error CS0266: Cannot implicitly convert type 'long' to 'byte'. An explicit conversion exists (are you missing a cast?)
+                // (7,32): error CS0266: Cannot implicitly convert type 'long' to 'byte'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         Console.WriteLine(b is 12L);
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "12L")
                     .WithArguments("long", "byte")
@@ -6456,10 +6504,12 @@ namespace System
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                // case or it is impossible to match.
                 //             case 2:     // subsumed
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "2").WithLocation(9, 18),
-                // (19,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                // (19,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                // case or it is impossible to match.
                 //             case int _:  // subsumed
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "int _").WithLocation(19, 18)
             );
@@ -6559,12 +6609,14 @@ public class Program
                 parseOptions: TestOptions.Regular7
             );
             compilation.VerifyDiagnostics(
-                // (13,28): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Derived' in C# 7.0. Please use language version 7.1 or greater.
+                // (13,28): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Derived'
+                // in C# 7.0. Please use language version 7.1 or greater.
                 //         Console.Write(x is Derived b0);
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Derived")
                     .WithArguments("T", "Derived", "7.0", "7.1")
                     .WithLocation(13, 28),
-                // (16,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Derived' in C# 7.0. Please use language version 7.1 or greater.
+                // (16,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Derived'
+                // in C# 7.0. Please use language version 7.1 or greater.
                 //             case Derived b1:
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Derived")
                     .WithArguments("T", "Derived", "7.0", "7.1")
@@ -6614,12 +6666,14 @@ public class Program
                 parseOptions: TestOptions.Regular7
             );
             compilation.VerifyDiagnostics(
-                // (13,28): error CS8413: An expression of type 'Base' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                // (13,28): error CS8413: An expression of type 'Base' cannot be handled by a pattern of type 'T' in
+                // C# 7.0. Please use language version 7.1 or greater.
                 //         Console.Write(x is T b0);
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
                     .WithArguments("Base", "T", "7.0", "7.1")
                     .WithLocation(13, 28),
-                // (16,18): error CS8413: An expression of type 'Base' cannot be handled by a pattern of type 'T' in C# 7.0. Please use language version 7.1 or greater.
+                // (16,18): error CS8413: An expression of type 'Base' cannot be handled by a pattern of type 'T' in
+                // C# 7.0. Please use language version 7.1 or greater.
                 //             case T b1:
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "T")
                     .WithArguments("Base", "T", "7.0", "7.1")
@@ -6668,12 +6722,14 @@ public class Program
                 parseOptions: TestOptions.Regular7
             );
             compilation.VerifyDiagnostics(
-                // (13,28): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Derived<T>' in C# 7.0. Please use language version 7.1 or greater.
+                // (13,28): error CS8413: An expression of type 'T' cannot be handled by a pattern of type
+                // 'Derived<T>' in C# 7.0. Please use language version 7.1 or greater.
                 //         Console.Write(x is Derived<T> b0);
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Derived<T>")
                     .WithArguments("T", "Derived<T>", "7.0", "7.1")
                     .WithLocation(13, 28),
-                // (16,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Derived<T>' in C# 7.0. Please use language version 7.1 or greater.
+                // (16,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type
+                // 'Derived<T>' in C# 7.0. Please use language version 7.1 or greater.
                 //             case Derived<T> b1:
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Derived<T>")
                     .WithArguments("T", "Derived<T>", "7.0", "7.1")
@@ -6726,12 +6782,14 @@ public class Program
                 parseOptions: TestOptions.Regular7
             );
             compilation.VerifyDiagnostics(
-                // (16,28): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Container<T>.Derived' in C# 7.0. Please use language version 7.1 or greater.
+                // (16,28): error CS8413: An expression of type 'T' cannot be handled by a pattern of type
+                // 'Container<T>.Derived' in C# 7.0. Please use language version 7.1 or greater.
                 //         Console.Write(x is Container<T>.Derived b0);
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Container<T>.Derived")
                     .WithArguments("T", "Container<T>.Derived", "7.0", "7.1")
                     .WithLocation(16, 28),
-                // (19,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type 'Container<T>.Derived' in C# 7.0. Please use language version 7.1 or greater.
+                // (19,18): error CS8413: An expression of type 'T' cannot be handled by a pattern of type
+                // 'Container<T>.Derived' in C# 7.0. Please use language version 7.1 or greater.
                 //             case Container<T>.Derived b1:
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Container<T>.Derived")
                     .WithArguments("T", "Container<T>.Derived", "7.0", "7.1")
@@ -6784,12 +6842,14 @@ public class Program
                 parseOptions: TestOptions.Regular7
             );
             compilation.VerifyDiagnostics(
-                // (16,28): error CS8413: An expression of type 'T[]' cannot be handled by a pattern of type 'Container<T>.Derived[]' in C# 7.0. Please use language version 7.1 or greater.
+                // (16,28): error CS8413: An expression of type 'T[]' cannot be handled by a pattern of type
+                // 'Container<T>.Derived[]' in C# 7.0. Please use language version 7.1 or greater.
                 //         Console.Write(x is Container<T>.Derived[] b0);
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Container<T>.Derived[]")
                     .WithArguments("T[]", "Container<T>.Derived[]", "7.0", "7.1")
                     .WithLocation(16, 28),
-                // (19,18): error CS8413: An expression of type 'T[]' cannot be handled by a pattern of type 'Container<T>.Derived[]' in C# 7.0. Please use language version 7.1 or greater.
+                // (19,18): error CS8413: An expression of type 'T[]' cannot be handled by a pattern of type
+                // 'Container<T>.Derived[]' in C# 7.0. Please use language version 7.1 or greater.
                 //             case Container<T>.Derived[] b1:
                 Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Container<T>.Derived[]")
                     .WithArguments("T[]", "Container<T>.Derived[]", "7.0", "7.1")
@@ -6843,7 +6903,8 @@ public class Program
                 Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "i is long")
                     .WithArguments("long")
                     .WithLocation(14, 13),
-                // (15,18): error CS8121: An expression of type 'int?' cannot be handled by a pattern of type 'long'.
+                // (15,18): error CS8121: An expression of type 'int?' cannot be handled by a pattern of type
+                // 'long'.
                 //         if (i is long l) { }
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "long")
                     .WithArguments("int?", "long")
@@ -6945,7 +7006,8 @@ public class C {
                     parseOptions: TestOptions.Regular7
                 )
                 .VerifyDiagnostics(
-                    // (12,52): error CS8314: An expression of type 'T' cannot be handled by a pattern of type 'Packet<T>' in C# 7.0. Please use language version 7.1 or greater.
+                    // (12,52): error CS8314: An expression of type 'T' cannot be handled by a pattern of type
+                    // 'Packet<T>' in C# 7.0. Please use language version 7.1 or greater.
                     //     static bool M<T>(T p) where T : Packet => p is Packet<T> p1;
                     Diagnostic(ErrorCode.ERR_PatternWrongGenericTypeInVersion, "Packet<T>")
                         .WithArguments("T", "Packet<T>", "7.0", "7.1")
@@ -7017,10 +7079,12 @@ unsafe public class C {
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "z0")
                     .WithArguments("z0")
                     .WithLocation(7, 31),
-                // (7,31): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (7,31): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         var r1 = z is ref int z0;        // syntax error 2
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "z0").WithLocation(7, 31),
-                // (9,23): error CS8121: An expression of type 'TypedReference' cannot be handled by a pattern of type 'object'.
+                // (9,23): error CS8121: An expression of type 'TypedReference' cannot be handled by a pattern of
+                // type 'object'.
                 //         var b1 = x is object o1;         // not allowed 1
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "object")
                     .WithArguments("System.TypedReference", "object")
@@ -7176,7 +7240,8 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics(
-                // (6,17): error CS0039: Cannot convert type 'void' to 'object' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                // (6,17): error CS0039: Cannot convert type 'void' to 'object' via a reference conversion, boxing
+                // conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         var o = Console.WriteLine("world!") as object;
                 Diagnostic(
                         ErrorCode.ERR_NoExplicitBuiltinConv,
@@ -7207,7 +7272,8 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics(
-                // (10,17): error CS0039: Cannot convert type 'void' to 'T' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                // (10,17): error CS0039: Cannot convert type 'void' to 'T' via a reference conversion, boxing
+                // conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         var o = Console.WriteLine("Hello") as T;
                 Diagnostic(
                         ErrorCode.ERR_NoExplicitBuiltinConv,
@@ -7399,7 +7465,8 @@ False";
             var compilation = CreateCompilation(source, options: TestOptions.UnsafeReleaseExe);
             compilation.VerifyDiagnostics();
             // PEVerify:
-            // [ : Program::Main][mdToken=0x6000001][offset 0x00000002] Unmanaged pointers are not a verifiable type.
+            // [ : Program::Main][mdToken=0x6000001][offset 0x00000002] Unmanaged pointers are not a verifiable
+            // type.
             // [ : Program::Main][mdToken= 0x6000001][offset 0x00000002] Unable to resolve token.
             CompileAndVerify(
                 compilation,
@@ -7428,25 +7495,32 @@ False";
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-                // (6,18): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (6,18): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         if (i is default) {} // error 1
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(6, 18),
-                // (7,19): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (7,19): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         if (i is (default)) {} // error 2
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(7, 19),
-                // (8,21): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (8,21): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         if (i is (((default)))) {} // error 3
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(8, 21),
-                // (9,27): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (9,27): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         switch (i) { case default: break; } // error 4
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(9, 27),
-                // (10,28): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (10,28): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         switch (i) { case (default): break; } // error 5
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(10, 28),
-                // (11,27): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (11,27): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         switch (i) { case default when true: break; } // error 6
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(11, 27),
-                // (12,28): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (12,28): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         switch (i) { case (default) when true: break; } // error 7
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(12, 28)
             );
@@ -7507,7 +7581,8 @@ True"
                     parseOptions: TestOptions.Regular7_2
                 )
                 .VerifyDiagnostics(
-                    // (9,65): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // (9,65): error CS8320: Feature 'declaration of expression variables in member initializers and
+                    // queries' is not available in C# 7.2. Please use language version 7.3 or greater.
                     //     static event System.Func<bool> Test1 = GetDelegate(1 is int x1 && Dummy(x1));
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "x1")
                         .WithArguments(
@@ -7649,7 +7724,8 @@ public class C
 }"
                 )
                 .VerifyDiagnostics(
-                    // (10,24): error CS8352: Cannot use variable 'inner' in this context because it may expose referenced variables outside of their declaration scope
+                    // (10,24): error CS8352: Cannot use variable 'inner' in this context because it may expose
+                    // referenced variables outside of their declaration scope
                     //             return ref inner[5];
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "inner")
                         .WithArguments("inner")
@@ -7688,7 +7764,8 @@ public class C
                         )
                         .WithArguments("System.Span<int>")
                         .WithLocation(8, 13),
-                    // (10,24): error CS8352: Cannot use variable 'inner' in this context because it may expose referenced variables outside of their declaration scope
+                    // (10,24): error CS8352: Cannot use variable 'inner' in this context because it may expose
+                    // referenced variables outside of their declaration scope
                     //             return ref inner[5];
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "inner")
                         .WithArguments("inner")
@@ -7721,7 +7798,8 @@ public class C
 }"
                 )
                 .VerifyDiagnostics(
-                    // (12,28): error CS8352: Cannot use variable 'inner' in this context because it may expose referenced variables outside of their declaration scope
+                    // (12,28): error CS8352: Cannot use variable 'inner' in this context because it may expose
+                    // referenced variables outside of their declaration scope
                     //                 return ref inner[5];
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "inner")
                         .WithArguments("inner")
@@ -7755,7 +7833,8 @@ public class C
 }"
                 )
                 .VerifyDiagnostics(
-                    // (12,28): error CS8352: Cannot use variable 'inner' in this context because it may expose referenced variables outside of their declaration scope
+                    // (12,28): error CS8352: Cannot use variable 'inner' in this context because it may expose
+                    // referenced variables outside of their declaration scope
                     //                 return ref inner[5];
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "inner")
                         .WithArguments("inner")
@@ -7839,37 +7918,44 @@ public class C
 "
                 )
                 .VerifyDiagnostics(
-                    // (16,42): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (16,42): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case { Prop: var x }: return x; // error 1
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(16, 42),
-                    // (24,40): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (24,40): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case { Prop: R x }: return x; // error 2
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(24, 40),
-                    // (32,41): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (32,41): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case (var x, var y): return x; // error 3
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(32, 41),
-                    // (40,37): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (40,37): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case (R x, R y): return x; // error 4
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(40, 37),
-                    // (48,37): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (48,37): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case var (x, y): return x; // error 5
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(48, 37),
-                    // (56,32): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (56,32): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case { } x: return x; // error 6
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(56, 32),
-                    // (64,35): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (64,35): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case (_, _) x: return x; // error 7
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
@@ -7953,38 +8039,48 @@ public class C
 "
                 )
                 .VerifyDiagnostics(
-                    // (16,76): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (16,76): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case var _ and {} and { Prop: var _ and {} and var x }: return x; // error 1
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(16, 76),
-                    // (24,74): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (24,74): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case var _ and {} and { Prop: var _ and {} and R x }: return x; // error 2
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(24, 74),
-                    // (32,92): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
-                    //             case var _ and {} and (var _ and {} and var x, var _ and {} and var y): return x; // error 3
+                    // (32,92): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
+                    //             case var _ and {} and (var _ and {} and var x, var _ and {} and var y): return x; //
+                    // error 3
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(32, 92),
-                    // (40,88): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
-                    //             case var _ and {} and (var _ and {} and R x, var _ and {} and R y): return x; // error 4
+                    // (40,88): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
+                    //             case var _ and {} and (var _ and {} and R x, var _ and {} and R y): return x; //
+                    // error 4
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(40, 88),
-                    // (48,54): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (48,54): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case var _ and {} and var (x, y): return x; // error 5
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(48, 54),
-                    // (56,49): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (56,49): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //             case var _ and {} and { } x: return x; // error 6
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(56, 49),
-                    // (64,86): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
-                    //             case var _ and {} and (var _ and {} and _, var _ and {} and _) x: return x; // error 7
+                    // (64,86): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
+                    //             case var _ and {} and (var _ and {} and _, var _ and {} and _) x: return x; // error
+                    // 7
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(64, 86)
@@ -8053,37 +8149,44 @@ public class C
 "
                 )
                 .VerifyDiagnostics(
-                    // (14,46): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (14,46): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is { Prop: var x }) return x; // error 1
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(14, 46),
-                    // (20,44): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (20,44): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is { Prop: R x }) return x; // error 2
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(20, 44),
-                    // (26,45): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (26,45): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is (var x, var y)) return x; // error 3
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(26, 45),
-                    // (32,41): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (32,41): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is (R x, R y)) return x; // error 4
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(32, 41),
-                    // (38,41): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (38,41): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is var (x, y)) return x; // error 5
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(38, 41),
-                    // (44,36): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (44,36): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is { } x) return x; // error 6
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(44, 36),
-                    // (50,39): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (50,39): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is (_, _) x) return x; // error 7
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
@@ -8160,7 +8263,8 @@ public class C
                         )
                         .WithArguments("R")
                         .WithLocation(14, 13),
-                    // (14,80): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (14,80): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is var _ and {} and { Prop: var _ and {} and var x }) return x; // error 1
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
@@ -8173,34 +8277,41 @@ public class C
                         )
                         .WithArguments("R")
                         .WithLocation(20, 13),
-                    // (20,78): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (20,78): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is var _ and {} and { Prop: var _ and {} and R x }) return x; // error 2
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(20, 78),
                     // (26,13): warning CS8794: An expression of type 'R' always matches the provided pattern.
-                    //         if (outer is var _ and {} and (var _ and {} and var x, var _ and {} and var y)) return x; // error 3
+                    //         if (outer is var _ and {} and (var _ and {} and var x, var _ and {} and var y)) return x;
+                    // // error 3
                     Diagnostic(
                             ErrorCode.WRN_IsPatternAlways,
                             "outer is var _ and {} and (var _ and {} and var x, var _ and {} and var y)"
                         )
                         .WithArguments("R")
                         .WithLocation(26, 13),
-                    // (26,96): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
-                    //         if (outer is var _ and {} and (var _ and {} and var x, var _ and {} and var y)) return x; // error 3
+                    // (26,96): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
+                    //         if (outer is var _ and {} and (var _ and {} and var x, var _ and {} and var y)) return x;
+                    // // error 3
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(26, 96),
                     // (32,13): warning CS8794: An expression of type 'R' always matches the provided pattern.
-                    //         if (outer is var _ and {} and (var _ and {} and R x, var _ and {} and R y)) return x; // error 4
+                    //         if (outer is var _ and {} and (var _ and {} and R x, var _ and {} and R y)) return x; //
+                    // error 4
                     Diagnostic(
                             ErrorCode.WRN_IsPatternAlways,
                             "outer is var _ and {} and (var _ and {} and R x, var _ and {} and R y)"
                         )
                         .WithArguments("R")
                         .WithLocation(32, 13),
-                    // (32,92): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
-                    //         if (outer is var _ and {} and (var _ and {} and R x, var _ and {} and R y)) return x; // error 4
+                    // (32,92): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
+                    //         if (outer is var _ and {} and (var _ and {} and R x, var _ and {} and R y)) return x; //
+                    // error 4
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
                         .WithLocation(32, 92),
@@ -8212,7 +8323,8 @@ public class C
                         )
                         .WithArguments("R")
                         .WithLocation(38, 13),
-                    // (38,58): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (38,58): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is var _ and {} and var (x, y)) return x; // error 5
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
@@ -8222,7 +8334,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_IsPatternAlways, "outer is var _ and {} and { } x")
                         .WithArguments("R")
                         .WithLocation(44, 13),
-                    // (44,53): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (44,53): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is var _ and {} and { } x) return x; // error 6
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
@@ -8232,7 +8345,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_IsPatternAlways, "outer is var _ and {} and (_, _) x")
                         .WithArguments("R")
                         .WithLocation(50, 13),
-                    // (50,56): error CS8352: Cannot use variable 'x' in this context because it may expose referenced variables outside of their declaration scope
+                    // (50,56): error CS8352: Cannot use variable 'x' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is var _ and {} and (_, _) x) return x; // error 7
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "x")
                         .WithArguments("x")
@@ -8275,12 +8389,14 @@ public class C
 }"
                 )
                 .VerifyDiagnostics(
-                    // (19,52): error CS8352: Cannot use variable 'rr0' in this context because it may expose referenced variables outside of their declaration scope
+                    // (19,52): error CS8352: Cannot use variable 'rr0' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is { RProp.RProp: var rr0 }) r = rr0; // error
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "rr0")
                         .WithArguments("rr0")
                         .WithLocation(19, 52),
-                    // (23,56): error CS8352: Cannot use variable 'rr1' in this context because it may expose referenced variables outside of their declaration scope
+                    // (23,56): error CS8352: Cannot use variable 'rr1' in this context because it may expose referenced
+                    // variables outside of their declaration scope
                     //         if (outer is { RProp: { RProp: var rr1 }}) r = rr1; // error
                     Diagnostic(ErrorCode.ERR_EscapeVariable, "rr1")
                         .WithArguments("rr1")
@@ -9809,7 +9925,8 @@ class C
                 parseOptions: TestOptions.Regular10
             );
             comp.VerifyDiagnostics(
-                // (5,57): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (5,57): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not
+                // available in C# 10.0. Please use language version 11.0 or greater.
                 //     static bool M(ReadOnlySpan<char> chars) => chars is "";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, @"""""")
                     .WithArguments(
@@ -9868,7 +9985,8 @@ class C
                 parseOptions: TestOptions.Regular10
             );
             comp.VerifyDiagnostics(
-                // (4,63): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (4,63): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not
+                // available in C# 10.0. Please use language version 11.0 or greater.
                 //     static bool M(ReadOnlySpan<char> chars) => chars switch { "" => true, _ => false };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, @"""""")
                     .WithArguments(
@@ -9934,7 +10052,8 @@ class C
                 Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "null")
                     .WithArguments("System.ReadOnlySpan<char>")
                     .WithLocation(5, 58),
-                // (6,58): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (6,58): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //     static bool M2(ReadOnlySpan<char> chars) => chars is default;
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(6, 58)
             );
@@ -9954,7 +10073,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,57): error CS0266: Cannot implicitly convert type 'object' to 'System.ReadOnlySpan<char>'. An explicit conversion exists (are you missing a cast?)
+                // (4,57): error CS0266: Cannot implicitly convert type 'object' to 'System.ReadOnlySpan<char>'. An
+                // explicit conversion exists (are you missing a cast?)
                 //     static bool M(ReadOnlySpan<char> chars) => chars is (object)null;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(object)null")
                     .WithArguments("object", "System.ReadOnlySpan<char>")
@@ -9977,12 +10097,14 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,58): error CS9013: A string 'null' constant is not supported as a pattern for 'ReadOnlySpan<char>'. Use an empty string instead.
+                // (4,58): error CS9013: A string 'null' constant is not supported as a pattern for
+                // 'ReadOnlySpan<char>'. Use an empty string instead.
                 //     static bool M1(ReadOnlySpan<char> chars) => chars is (string)null;
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "(string)null")
                     .WithArguments("System.ReadOnlySpan<char>")
                     .WithLocation(4, 58),
-                // (5,58): error CS9013: A string 'null' constant is not supported as a pattern for 'ReadOnlySpan<char>'. Use an empty string instead.
+                // (5,58): error CS9013: A string 'null' constant is not supported as a pattern for
+                // 'ReadOnlySpan<char>'. Use an empty string instead.
                 //     static bool M2(ReadOnlySpan<char> chars) => chars is default(string);
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "default(string)")
                     .WithArguments("System.ReadOnlySpan<char>")
@@ -10005,7 +10127,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (5,57): error CS9013: A string 'null' constant is not supported as a pattern for 'ReadOnlySpan<char>'. Use an empty string instead.
+                // (5,57): error CS9013: A string 'null' constant is not supported as a pattern for
+                // 'ReadOnlySpan<char>'. Use an empty string instead.
                 //     static bool M(ReadOnlySpan<char> chars) => chars is NullString;
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "NullString")
                     .WithArguments("System.ReadOnlySpan<char>")
@@ -10050,7 +10173,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,63): error CS0266: Cannot implicitly convert type 'object' to 'System.ReadOnlySpan<char>'. An explicit conversion exists (are you missing a cast?)
+                // (4,63): error CS0266: Cannot implicitly convert type 'object' to 'System.ReadOnlySpan<char>'. An
+                // explicit conversion exists (are you missing a cast?)
                 //     static bool M(ReadOnlySpan<char> chars) => chars switch { (object)null => true, _ => false };
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(object)null")
                     .WithArguments("object", "System.ReadOnlySpan<char>")
@@ -10072,7 +10196,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,63): error CS9013: A string 'null' constant is not supported as a pattern for 'ReadOnlySpan<char>'. Use an empty string instead.
+                // (4,63): error CS9013: A string 'null' constant is not supported as a pattern for
+                // 'ReadOnlySpan<char>'. Use an empty string instead.
                 //     static bool M(ReadOnlySpan<char> chars) => chars switch { (string)null => true, _ => false };
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "(string)null")
                     .WithArguments("System.ReadOnlySpan<char>")
@@ -10095,7 +10220,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (5,63): error CS9013: A string 'null' constant is not supported as a pattern for 'ReadOnlySpan<char>'. Use an empty string instead.
+                // (5,63): error CS9013: A string 'null' constant is not supported as a pattern for
+                // 'ReadOnlySpan<char>'. Use an empty string instead.
                 //     static bool M(ReadOnlySpan<char> chars) => chars switch { NullString => true, _ => false };
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "NullString")
                     .WithArguments("System.ReadOnlySpan<char>")
@@ -10123,17 +10249,20 @@ class C
                     parseOptions: TestOptions.RegularPreview
                 )
                 .VerifyDiagnostics(
-                    // (7,13): error CS8518: An expression of type 'ReadOnlySpan<char>' can never match the provided pattern.
+                    // (7,13): error CS8518: An expression of type 'ReadOnlySpan<char>' can never match the provided
+                    // pattern.
                     //         _ = chars is "" and " ";
                     Diagnostic(ErrorCode.ERR_IsPatternImpossible, @"chars is """" and "" """)
                         .WithArguments("System.ReadOnlySpan<char>")
                         .WithLocation(7, 13),
-                    // (8,13): error CS8518: An expression of type 'ReadOnlySpan<char>' can never match the provided pattern.
+                    // (8,13): error CS8518: An expression of type 'ReadOnlySpan<char>' can never match the provided
+                    // pattern.
                     //         _ = chars is "" and not "";
                     Diagnostic(ErrorCode.ERR_IsPatternImpossible, @"chars is """" and not """"")
                         .WithArguments("System.ReadOnlySpan<char>")
                         .WithLocation(8, 13),
-                    // (9,13): error CS8518: An expression of type 'ReadOnlySpan<char>' can never match the provided pattern.
+                    // (9,13): error CS8518: An expression of type 'ReadOnlySpan<char>' can never match the provided
+                    // pattern.
                     //         _ = chars is "" and (" " or not "");
                     Diagnostic(
                             ErrorCode.ERR_IsPatternImpossible,
@@ -10173,7 +10302,8 @@ class C
                     parseOptions: TestOptions.RegularPreview
                 )
                 .VerifyEmitDiagnostics(
-                    // (16,35): warning CS8794: An expression of type 'ReadOnlySpan<char>' always matches the provided pattern.
+                    // (16,35): warning CS8794: An expression of type 'ReadOnlySpan<char>' always matches the provided
+                    // pattern.
                     //         Console.WriteLine("4." + (chars is "" or not ""));
                     Diagnostic(ErrorCode.WRN_IsPatternAlways, @"chars is """" or not """"")
                         .WithArguments("System.ReadOnlySpan<char>")
@@ -10267,7 +10397,8 @@ class C
                     parseOptions: TestOptions.RegularPreview
                 )
                 .VerifyDiagnostics(
-                    // (7,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                    // (7,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+                    // the switch expression or it is impossible to match.
                     //         "" => false,
                     Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, @"""""").WithLocation(7, 9)
                 );
@@ -11659,7 +11790,8 @@ class C
                 parseOptions: TestOptions.Regular10
             );
             comp.VerifyDiagnostics(
-                // (5,49): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (5,49): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not
+                // available in C# 10.0. Please use language version 11.0 or greater.
                 //     static bool M(Span<char> chars) => chars is "";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, @"""""")
                     .WithArguments(
@@ -11717,7 +11849,8 @@ class C
                 parseOptions: TestOptions.Regular10
             );
             comp.VerifyDiagnostics(
-                // (5,55): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (5,55): error CS8936: Feature 'pattern matching ReadOnly/Span<char> on constant string' is not
+                // available in C# 10.0. Please use language version 11.0 or greater.
                 //     static bool M(Span<char> chars) => chars switch { "" => true, _ => false };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, @"""""")
                     .WithArguments(
@@ -11782,7 +11915,8 @@ class C
                 Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "null")
                     .WithArguments("System.Span<char>")
                     .WithLocation(5, 50),
-                // (6,50): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                // (6,50): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal
+                // (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //     static bool M2(Span<char> chars) => chars is default;
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(6, 50)
             );
@@ -11802,7 +11936,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,49): error CS0266: Cannot implicitly convert type 'object' to 'System.Span<char>'. An explicit conversion exists (are you missing a cast?)
+                // (4,49): error CS0266: Cannot implicitly convert type 'object' to 'System.Span<char>'. An explicit
+                // conversion exists (are you missing a cast?)
                 //     static bool M(Span<char> chars) => chars is (object)null;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(object)null")
                     .WithArguments("object", "System.Span<char>")
@@ -11825,12 +11960,14 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,50): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'. Use an empty string instead.
+                // (4,50): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'.
+                // Use an empty string instead.
                 //     static bool M1(Span<char> chars) => chars is (string)null;
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "(string)null")
                     .WithArguments("System.Span<char>")
                     .WithLocation(4, 50),
-                // (5,50): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'. Use an empty string instead.
+                // (5,50): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'.
+                // Use an empty string instead.
                 //     static bool M2(Span<char> chars) => chars is default(string);
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "default(string)")
                     .WithArguments("System.Span<char>")
@@ -11853,7 +11990,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (5,49): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'. Use an empty string instead.
+                // (5,49): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'.
+                // Use an empty string instead.
                 //     static bool M(Span<char> chars) => chars is NullString;
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "NullString")
                     .WithArguments("System.Span<char>")
@@ -11898,7 +12036,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,55): error CS0266: Cannot implicitly convert type 'object' to 'System.Span<char>'. An explicit conversion exists (are you missing a cast?)
+                // (4,55): error CS0266: Cannot implicitly convert type 'object' to 'System.Span<char>'. An explicit
+                // conversion exists (are you missing a cast?)
                 //     static bool M(Span<char> chars) => chars switch { (object)null => true, _ => false };
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(object)null")
                     .WithArguments("object", "System.Span<char>")
@@ -11920,7 +12059,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,55): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'. Use an empty string instead.
+                // (4,55): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'.
+                // Use an empty string instead.
                 //     static bool M(Span<char> chars) => chars switch { (string)null => true, _ => false };
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "(string)null")
                     .WithArguments("System.Span<char>")
@@ -11943,7 +12083,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (5,55): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'. Use an empty string instead.
+                // (5,55): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'.
+                // Use an empty string instead.
                 //     static bool M(Span<char> chars) => chars switch { NullString => true, _ => false };
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "NullString")
                     .WithArguments("System.Span<char>")
@@ -12117,7 +12258,8 @@ class C
                     parseOptions: TestOptions.RegularPreview
                 )
                 .VerifyDiagnostics(
-                    // (7,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                    // (7,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+                    // the switch expression or it is impossible to match.
                     //         "" => false,
                     Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, @"""""").WithLocation(7, 9)
                 );
@@ -12138,12 +12280,14 @@ class Program
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(
-                // (4,56): error CS8121: An expression of type 'ReadOnlySpan<T>' cannot be handled by a pattern of type 'string'.
+                // (4,56): error CS8121: An expression of type 'ReadOnlySpan<T>' cannot be handled by a pattern of
+                // type 'string'.
                 //     static bool F1<T>(ReadOnlySpan<T> span) => span is "";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
                     .WithArguments("System.ReadOnlySpan<T>", "string")
                     .WithLocation(4, 56),
-                // (5,48): error CS8121: An expression of type 'Span<T>' cannot be handled by a pattern of type 'string'.
+                // (5,48): error CS8121: An expression of type 'Span<T>' cannot be handled by a pattern of type
+                // 'string'.
                 //     static bool F2<T>(Span<T> span) => span is "";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
                     .WithArguments("System.Span<T>", "string")
@@ -12177,12 +12321,14 @@ class Program
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyEmitDiagnostics(
-                // (5,56): error CS8121: An expression of type 'ReadOnlySpan<T>' cannot be handled by a pattern of type 'ReadOnlySpan<char>'.
+                // (5,56): error CS8121: An expression of type 'ReadOnlySpan<T>' cannot be handled by a pattern of
+                // type 'ReadOnlySpan<char>'.
                 //     static bool F1<T>(ReadOnlySpan<T> span) => span is ReadOnlySpan<char> _;
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "ReadOnlySpan<char>")
                     .WithArguments("System.ReadOnlySpan<T>", "System.ReadOnlySpan<char>")
                     .WithLocation(5, 56),
-                // (6,48): error CS8121: An expression of type 'Span<T>' cannot be handled by a pattern of type 'Span<char>'.
+                // (6,48): error CS8121: An expression of type 'Span<T>' cannot be handled by a pattern of type
+                // 'Span<char>'.
                 //     static bool F2<T>(Span<T> span) => span is Span<char> _;
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "Span<char>")
                     .WithArguments("System.Span<T>", "System.Span<char>")
@@ -12205,12 +12351,14 @@ class Program
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyEmitDiagnostics(
-                // (4,56): error CS8121: An expression of type 'ReadOnlySpan<T>' cannot be handled by a pattern of type 'ReadOnlySpan<char>'.
+                // (4,56): error CS8121: An expression of type 'ReadOnlySpan<T>' cannot be handled by a pattern of
+                // type 'ReadOnlySpan<char>'.
                 //     static bool F1<T>(ReadOnlySpan<T> span) => span is ReadOnlySpan<char> and "ABC";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "ReadOnlySpan<char>")
                     .WithArguments("System.ReadOnlySpan<T>", "System.ReadOnlySpan<char>")
                     .WithLocation(4, 56),
-                // (5,48): error CS8121: An expression of type 'Span<T>' cannot be handled by a pattern of type 'Span<char>'.
+                // (5,48): error CS8121: An expression of type 'Span<T>' cannot be handled by a pattern of type
+                // 'Span<char>'.
                 //     static bool F2<T>(Span<T> span) => span is Span<char> and "123";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "Span<char>")
                     .WithArguments("System.Span<T>", "System.Span<char>")
@@ -12235,22 +12383,26 @@ class Program
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyEmitDiagnostics(
-                // (4,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type 'ReadOnlySpan<char>'.
+                // (4,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type
+                // 'ReadOnlySpan<char>'.
                 //     static bool F1<T>(object o) => o is ReadOnlySpan<char> _;
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "ReadOnlySpan<char>")
                     .WithArguments("object", "System.ReadOnlySpan<char>")
                     .WithLocation(4, 41),
-                // (5,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type 'Span<char>'.
+                // (5,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type
+                // 'Span<char>'.
                 //     static bool F2<T>(object o) => o is Span<char> _;
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "Span<char>")
                     .WithArguments("object", "System.Span<char>")
                     .WithLocation(5, 41),
-                // (6,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type 'ReadOnlySpan<char>'.
+                // (6,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type
+                // 'ReadOnlySpan<char>'.
                 //     static bool F3<T>(ValueType v) => v is ReadOnlySpan<char> _;
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "ReadOnlySpan<char>")
                     .WithArguments("System.ValueType", "System.ReadOnlySpan<char>")
                     .WithLocation(6, 44),
-                // (7,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type 'Span<char>'.
+                // (7,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type
+                // 'Span<char>'.
                 //     static bool F4<T>(ValueType v) => v is Span<char> _;
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "Span<char>")
                     .WithArguments("System.ValueType", "System.Span<char>")
@@ -12275,22 +12427,26 @@ class Program
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyEmitDiagnostics(
-                // (4,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type 'ReadOnlySpan<char>'.
+                // (4,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type
+                // 'ReadOnlySpan<char>'.
                 //     static bool F1<T>(object o) => o is ReadOnlySpan<char> and "ABC";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "ReadOnlySpan<char>")
                     .WithArguments("object", "System.ReadOnlySpan<char>")
                     .WithLocation(4, 41),
-                // (5,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type 'Span<char>'.
+                // (5,41): error CS8121: An expression of type 'object' cannot be handled by a pattern of type
+                // 'Span<char>'.
                 //     static bool F2<T>(object o) => o is Span<char> and "123";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "Span<char>")
                     .WithArguments("object", "System.Span<char>")
                     .WithLocation(5, 41),
-                // (6,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type 'ReadOnlySpan<char>'.
+                // (6,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type
+                // 'ReadOnlySpan<char>'.
                 //     static bool F3<T>(ValueType v) => v is ReadOnlySpan<char> and "ABC";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "ReadOnlySpan<char>")
                     .WithArguments("System.ValueType", "System.ReadOnlySpan<char>")
                     .WithLocation(6, 44),
-                // (7,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type 'Span<char>'.
+                // (7,44): error CS8121: An expression of type 'ValueType' cannot be handled by a pattern of type
+                // 'Span<char>'.
                 //     static bool F4<T>(ValueType v) => v is Span<char> and "123";
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "Span<char>")
                     .WithArguments("System.ValueType", "System.Span<char>")
@@ -12440,7 +12596,8 @@ class Program
             );
             comp.VerifyEmitDiagnostics(
                 // (4,64): error CS9133: A constant value of type 'ReadOnlySpan<char>' is expected
-                //     static bool F1(ReadOnlySpan<char> span, bool b) => span is b switch { true => "", false => "ABC" };
+                //     static bool F1(ReadOnlySpan<char> span, bool b) => span is b switch { true => "", false =>
+                // "ABC" };
                 Diagnostic(
                         ErrorCode.ERR_ConstantValueOfTypeExpected,
                         @"b switch { true => """", false => ""ABC"" }"
@@ -12484,7 +12641,8 @@ class Program
                         @"new ReadOnlySpan<char>(null) is ""123"""
                     )
                     .WithLocation(7, 43),
-                // (7,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'ReadOnlySpan'.
+                // (7,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type
+                // 'ReadOnlySpan'.
                 //         Expression<Func<bool>> e1 = () => new ReadOnlySpan<char>(null) is "123";
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
@@ -12499,7 +12657,8 @@ class Program
                         @"new Span<char>(null) is ""ABC"""
                     )
                     .WithLocation(8, 43),
-                // (8,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Span'.
+                // (8,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type
+                // 'Span'.
                 //         Expression<Func<bool>> e2 = () => new Span<char>(null) is "ABC";
                 Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "new Span<char>(null)")
                     .WithArguments("Span")
@@ -12527,14 +12686,17 @@ class Program
             );
             comp.VerifyEmitDiagnostics(
                 // (7,43): error CS8514: An expression tree may not contain a switch expression.
-                //         Expression<Func<bool>> e1 = () => new ReadOnlySpan<char>(null) switch { "123" => true, _ => false };
+                //         Expression<Func<bool>> e1 = () => new ReadOnlySpan<char>(null) switch { "123" => true, _
+                // => false };
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeContainsSwitchExpression,
                         @"new ReadOnlySpan<char>(null) switch { ""123"" => true, _ => false }"
                     )
                     .WithLocation(7, 43),
-                // (7,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'ReadOnlySpan'.
-                //         Expression<Func<bool>> e1 = () => new ReadOnlySpan<char>(null) switch { "123" => true, _ => false };
+                // (7,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type
+                // 'ReadOnlySpan'.
+                //         Expression<Func<bool>> e1 = () => new ReadOnlySpan<char>(null) switch { "123" => true, _
+                // => false };
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
                         "new ReadOnlySpan<char>(null)"
@@ -12542,14 +12704,17 @@ class Program
                     .WithArguments("ReadOnlySpan")
                     .WithLocation(7, 43),
                 // (8,43): error CS8514: An expression tree may not contain a switch expression.
-                //         Expression<Func<bool>> e2 = () => new Span<char>(null) switch { "ABC" => true, _ => false };
+                //         Expression<Func<bool>> e2 = () => new Span<char>(null) switch { "ABC" => true, _ => false
+                // };
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeContainsSwitchExpression,
                         @"new Span<char>(null) switch { ""ABC"" => true, _ => false }"
                     )
                     .WithLocation(8, 43),
-                // (8,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'Span'.
-                //         Expression<Func<bool>> e2 = () => new Span<char>(null) switch { "ABC" => true, _ => false };
+                // (8,43): error CS8640: Expression tree cannot contain value of ref struct or restricted type
+                // 'Span'.
+                //         Expression<Func<bool>> e2 = () => new Span<char>(null) switch { "ABC" => true, _ => false
+                // };
                 Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "new Span<char>(null)")
                     .WithArguments("Span")
                     .WithLocation(8, 43)
@@ -12601,12 +12766,14 @@ class Program
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyEmitDiagnostics(
-                // (8,13): error CS9013: A string 'null' constant is not supported as a pattern for 'ReadOnlySpan<char>'. Use an empty string instead.
+                // (8,13): error CS9013: A string 'null' constant is not supported as a pattern for
+                // 'ReadOnlySpan<char>'. Use an empty string instead.
                 //             (string)null => 0,
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "(string)null")
                     .WithArguments("System.ReadOnlySpan<char>")
                     .WithLocation(8, 13),
-                // (28,13): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'. Use an empty string instead.
+                // (28,13): error CS9013: A string 'null' constant is not supported as a pattern for 'Span<char>'.
+                // Use an empty string instead.
                 //             default(string) => 7,
                 Diagnostic(ErrorCode.ERR_PatternSpanCharCannotBeStringNull, "default(string)")
                     .WithArguments("System.Span<char>")
@@ -13350,7 +13517,8 @@ static class C
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "True");
-            // Note: the important thing is that we now assign `System.Exception C.<ExceptionFilterBroken>d__1.<ex>5__3`
+            // Note: the important thing is that we now assign `System.Exception
+            // C.<ExceptionFilterBroken>d__1.<ex>5__3`
             // in the exception filter (at IL_00b6) before accessing `.InnerException` on it.
             verifier.VerifyIL(
                 "C.<ExceptionFilterBroken>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
@@ -14023,12 +14191,14 @@ ref struct G<T>
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "this is G<object>")
                         .WithArguments("is", "G<T>", "G<object>")
                         .WithLocation(17, 18),
-                    // (32,13): error CS8121: An expression of type 'G<T>' cannot be handled by a pattern of type 'G<int>'.
+                    // (32,13): error CS8121: An expression of type 'G<T>' cannot be handled by a pattern of type
+                    // 'G<int>'.
                     //             G<int> => "int",
                     Diagnostic(ErrorCode.ERR_PatternWrongType, "G<int>")
                         .WithArguments("G<T>", "G<int>")
                         .WithLocation(32, 13),
-                    // (33,13): error CS8121: An expression of type 'G<T>' cannot be handled by a pattern of type 'G<object>'.
+                    // (33,13): error CS8121: An expression of type 'G<T>' cannot be handled by a pattern of type
+                    // 'G<object>'.
                     //             G<object> => "object",
                     Diagnostic(ErrorCode.ERR_PatternWrongType, "G<object>")
                         .WithArguments("G<T>", "G<object>")
@@ -14057,7 +14227,8 @@ ref struct G<T> where T : class
 "
                 )
                 .VerifyDiagnostics(
-                    // (6,18): error CS0077: The as operator must be used with a reference type or nullable type ('G<object>' is a non-nullable value type)
+                    // (6,18): error CS0077: The as operator must be used with a reference type or nullable type
+                    // ('G<object>' is a non-nullable value type)
                     //         var y1 = x1 as G<object>;
                     Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "x1 as G<object>")
                         .WithArguments("G<object>")
@@ -14156,7 +14327,8 @@ class C
                     parseOptions: TestOptions.RegularPreview
                 )
                 .VerifyDiagnostics(
-                    // (4,41): error CS0266: Cannot implicitly convert type 'long' to 'byte'. An explicit conversion exists (are you missing a cast?)
+                    // (4,41): error CS0266: Cannot implicitly convert type 'long' to 'byte'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //     static bool M(byte b) => b switch { 1l => true, _ => false };
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1L")
                         .WithArguments("long", "byte")

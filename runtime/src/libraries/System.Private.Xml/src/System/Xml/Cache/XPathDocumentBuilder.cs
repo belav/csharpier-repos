@@ -16,7 +16,8 @@ using System.Xml.XPath;
 namespace MS.Internal.Xml.Cache
 {
     /// <summary>
-    /// Although the XPath data model does not differentiate between text and whitespace, Managed Xml 1.0
+    /// Although the XPath data model does not differentiate between text and whitespace, Managed Xml
+    // 1.0
     /// does.  Therefore, when building from an XmlReader, we must preserve these designations in order
     /// to remain backwards-compatible.
     /// </summary>
@@ -148,7 +149,8 @@ namespace MS.Internal.Xml.Cache
             }
             else
             {
-                // This tree is an XQuery fragment (no document root node), so root will be next node in the current page
+                // This tree is an XQuery fragment (no document root node), so root will be next node in the current
+                // page
                 _doc.SetRootNode(_nodePageFact.NextNodePage, _nodePageFact.NextNodeIndex);
             }
         }
@@ -176,7 +178,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Build an element node and attach it to its parent, if one exists.  Make the element the new parent node.
+        /// Build an element node and attach it to its parent, if one exists.  Make the element the new
+        // parent node.
         /// </summary>
         public void WriteStartElement(string? prefix, string localName, string? ns, string? baseUri)
         {
@@ -210,7 +213,8 @@ namespace MS.Internal.Xml.Cache
                 _idxParent
             );
 
-            // If elements within this document might have IDs, then cache the name of the ID attribute, if one exists
+            // If elements within this document might have IDs, then cache the name of the ID attribute, if one
+            // exists
             if (_elemIdMap != null)
                 _idAttrName = (XmlQualifiedName?)
                     _elemIdMap[new XmlQualifiedName(localName, prefix)];
@@ -273,7 +277,8 @@ namespace MS.Internal.Xml.Cache
                 switch (_textBldr.TextType)
                 {
                     case TextBlockType.Text:
-                        // Collapsed text node can be created if text line number information can be encoded efficiently in parent node
+                        // Collapsed text node can be created if text line number information can be encoded efficiently in
+                        // parent node
                         if (_lineInfo != null)
                         {
                             // If collapsed text node is not on same line as parent, don't collapse text
@@ -484,7 +489,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Write an element text block with the specified text type (whitespace, significant whitespace, or text).
+        /// Write an element text block with the specified text type (whitespace, significant whitespace, or
+        // text).
         /// </summary>
         public void WriteString(string? text, TextBlockType textType)
         {
@@ -575,7 +581,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Build a namespace declaration node.  Attach it to an element parent, if one was previously constructed.
+        /// Build a namespace declaration node.  Attach it to an element parent, if one was previously
+        // constructed.
         /// All namespace declarations are linked together in an in-scope namespace tree.
         /// </summary>
         internal override void WriteNamespaceDeclaration(string prefix, string namespaceName)
@@ -731,7 +738,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Link "prev" element with "next" element, which has a "similar" name.  This increases the performance of searches by element name.
+        /// Link "prev" element with "next" element, which has a "similar" name.  This increases the
+        // performance of searches by element name.
         /// </summary>
         private XPathNodeRef LinkSimilarElements(
             XPathNode[] pagePrev,
@@ -888,7 +896,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Add a sibling node.  If no previous sibling exists, add the node as the first child of the parent.
+        /// Add a sibling node.  If no previous sibling exists, add the node as the first child of the
+        // parent.
         /// If no parent exists, make this node the root of the document.
         /// </summary>
         [MemberNotNull(nameof(_pageSibling))]
@@ -1028,7 +1037,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// This class concatenates adjacent text blocks and tracks TextBlockType and line number information.
+        /// This class concatenates adjacent text blocks and tracks TextBlockType and line number
+        // information.
         /// </summary>
         private struct TextBlockBuilder
         {

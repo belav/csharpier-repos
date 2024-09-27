@@ -10,7 +10,8 @@ namespace System.Net.Sockets
 
     /// <devdoc>
     ///    <para>
-    ///       Specifies the iocontrol codes that the <see cref='System.Net.Sockets.Socket'/> class supports.
+    ///       Specifies the iocontrol codes that the <see cref='System.Net.Sockets.Socket'/> class
+    // supports.
     ///    </para>
     /// </devdoc>
 

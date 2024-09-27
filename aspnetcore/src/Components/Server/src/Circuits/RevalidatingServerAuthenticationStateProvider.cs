@@ -53,8 +53,10 @@ public abstract class RevalidatingServerAuthenticationStateProvider
     /// Determines whether the authentication state is still valid.
     /// </summary>
     /// <param name="authenticationState">The current <see cref="AuthenticationState"/>.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while performing the operation.</param>
-    /// <returns>A <see cref="Task"/> that resolves as true if the <paramref name="authenticationState"/> is still valid, or false if it is not.</returns>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while performing
+    // the operation.</param>
+    /// <returns>A <see cref="Task"/> that resolves as true if the <paramref
+    // name="authenticationState"/> is still valid, or false if it is not.</returns>
     protected abstract Task<bool> ValidateAuthenticationStateAsync(
         AuthenticationState authenticationState,
         CancellationToken cancellationToken

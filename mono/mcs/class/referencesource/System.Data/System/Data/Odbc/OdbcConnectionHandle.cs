@@ -70,7 +70,8 @@ namespace System.Data.Odbc
             // Connect to the driver.  (Using the connection string supplied)
             //Note: The driver doesn't filter out the password in the returned connection string
             //so their is no need for us to obtain the returned connection string
-            // Prepare to handle a ThreadAbort Exception between SQLDriverConnectW and update of the state variables
+            // Prepare to handle a ThreadAbort Exception between SQLDriverConnectW and update of the state
+            // variables
             retcode = Connect(connectionString);
             connection.HandleError(this, retcode);
         }
@@ -135,7 +136,8 @@ namespace System.Data.Odbc
                         break;
                     case IsolationLevel.Snapshot:
                         sql_iso = ODBC32.SQL_TRANSACTION.SNAPSHOT;
-                        // VSDD 414121: Snapshot isolation level must be set through SQL_COPT_SS_TXN_ISOLATION (http://msdn.microsoft.com/en-us/library/ms131709.aspx)
+                        // VSDD 414121: Snapshot isolation level must be set through SQL_COPT_SS_TXN_ISOLATION
+                        // (http://msdn.microsoft.com/en-us/library/ms131709.aspx)
                         isolationAttribute = ODBC32.SQL_ATTR.SQL_COPT_SS_TXN_ISOLATION;
                         break;
                     case IsolationLevel.Chaos:
@@ -238,8 +240,10 @@ namespace System.Data.Odbc
                 }
             }
             //Overactive assert which fires if handle was allocated - but failed to connect to the server
-            //it can more legitmately fire if transaction failed to rollback - but there isn't much we can do in that situation
-            //Debug.Assert((HandleState.Connected == _handleState) || (HandleState.TransactionInProgress == _handleState), "not expected HandleState.Connected");
+            //it can more legitmately fire if transaction failed to rollback - but there isn't much we can do in
+            // that situation
+            //Debug.Assert((HandleState.Connected == _handleState) || (HandleState.TransactionInProgress ==
+            // _handleState), "not expected HandleState.Connected");
             return retcode;
         }
 

@@ -624,12 +624,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 default:
                     return 0;
             }
-            // Note: when adding a warning here, consider whether it should be registered as a nullability warning too
+            // Note: when adding a warning here, consider whether it should be registered as a nullability
+            // warning too
         }
 
         /// <summary>
         /// Returns true if this is a build-only diagnostic that is never reported from
-        /// <see cref="SemanticModel.GetDiagnostics(Text.TextSpan?, System.Threading.CancellationToken)"/> API.
+        /// <see cref="SemanticModel.GetDiagnostics(Text.TextSpan?, System.Threading.CancellationToken)"/>
+        // API.
         /// Diagnostics generated during compilation phases such as lowering, emit, etc.
         /// are example of build-only diagnostics.
         /// </summary>

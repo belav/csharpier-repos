@@ -21,7 +21,8 @@ namespace System.Web.Services.Protocols
     /// </devdoc>
     public abstract class MimeParameterWriter : MimeFormatter
     {
-        /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.UsesWriteRequest"]/*' />
+        /// <include file='doc\MimeParameterWriter.uex'
+        // path='docs/doc[@for="MimeParameterWriter.UsesWriteRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -30,14 +31,16 @@ namespace System.Web.Services.Protocols
             get { return false; }
         }
 
-        /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.RequestEncoding"]/*' />
+        /// <include file='doc\MimeParameterWriter.uex'
+        // path='docs/doc[@for="MimeParameterWriter.RequestEncoding"]/*' />
         public virtual Encoding RequestEncoding
         {
             get { return null; }
             set { }
         }
 
-        /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.GetRequestUrl"]/*' />
+        /// <include file='doc\MimeParameterWriter.uex'
+        // path='docs/doc[@for="MimeParameterWriter.GetRequestUrl"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -46,7 +49,8 @@ namespace System.Web.Services.Protocols
             return url;
         }
 
-        /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.InitializeRequest"]/*' />
+        /// <include file='doc\MimeParameterWriter.uex'
+        // path='docs/doc[@for="MimeParameterWriter.InitializeRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -55,7 +59,8 @@ namespace System.Web.Services.Protocols
             return;
         }
 
-        /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.WriteRequest"]/*' />
+        /// <include file='doc\MimeParameterWriter.uex'
+        // path='docs/doc[@for="MimeParameterWriter.WriteRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common;
 
 public static class TestPortHelper
 {
-    // Copied from https://github.com/aspnet/KestrelHttpServer/blob/47f1db20e063c2da75d9d89653fad4eafe24446c/test/Microsoft.AspNetCore.Server.Kestrel.FunctionalTests/AddressRegistrationTests.cs#L508
+    // Copied from
+    // https://github.com/aspnet/KestrelHttpServer/blob/47f1db20e063c2da75d9d89653fad4eafe24446c/test/Microsoft.AspNetCore.Server.Kestrel.FunctionalTests/AddressRegistrationTests.cs#L508
     //
     // This method is an attempt to safely get a free port from the OS.  Most of the time,
     // when binding to dynamic port "0" the OS increments the assigned port, so it's safe
@@ -31,7 +32,8 @@ public static class TestPortHelper
     }
 
     // IIS Express preregisteres 44300-44399 ports with SSL bindings.
-    // So some tests always have to use ports in this range, and we can't rely on OS-allocated ports without a whole lot of ceremony around
+    // So some tests always have to use ports in this range, and we can't rely on OS-allocated ports
+    // without a whole lot of ceremony around
     // creating self-signed certificates and registering SSL bindings with HTTP.sys
     public static int GetNextSSLPort()
     {

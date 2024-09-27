@@ -83,10 +83,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 this.fnkind = fnkind;
             }
 
-            /***************************************************************************************************
-                Set the values of the BinOpFullSig from the given BinOpSig. The ExpressionBinder is needed to get
-                the predefined types. Returns true iff the predef types are found.
-            ***************************************************************************************************/
+/***************************************************************************************************
+Set the values of the BinOpFullSig from the given BinOpSig. The ExpressionBinder is needed to get
+the predefined types. Returns true iff the predef types are found.
+***************************************************************************************************/
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
             public BinOpFullSig(BinOpSig bos)
             {

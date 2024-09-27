@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         }
 
         /// <summary>
-        /// Translates the value of a constant returned by <see cref="ISymUnmanagedConstant.GetValue(out object)"/> to a <see cref="ConstantValue"/>.
+        /// Translates the value of a constant returned by <see cref="ISymUnmanagedConstant.GetValue(out
+        // object)"/> to a <see cref="ConstantValue"/>.
         /// </summary>
         public static ConstantValue GetSymConstantValue(ITypeSymbolInternal type, object symValue)
         {

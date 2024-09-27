@@ -147,14 +147,14 @@ namespace Commons.Xml.Nvdl
         }
     }
 
-    /*
-    element rules {
-        (schemaType?,
-        trigger*,
-        (rule* | (attribute startMode { xsd:NCName }, mode+)))
-        & foreign
-    }
-    */
+/*
+element rules {
+(schemaType?,
+trigger*,
+(rule* | (attribute startMode { xsd:NCName }, mode+)))
+& foreign
+}
+*/
     public class NvdlRules : NvdlAttributable
     {
         string schemaType;
@@ -198,13 +198,13 @@ namespace Commons.Xml.Nvdl
         }
     }
 
-    /*
-    element trigger {
-        (attribute ns { xsd:string },
-        attribute nameList { list { xsd:NCName } })
-        & foreign
-    }
-    */
+/*
+element trigger {
+(attribute ns { xsd:string },
+attribute nameList { list { xsd:NCName } })
+& foreign
+}
+*/
     public class NvdlTrigger : NvdlAttributable
     {
         string ns;
@@ -226,14 +226,14 @@ namespace Commons.Xml.Nvdl
         }
     }
 
-    /*
-    element mode {
-        (attribute name { xsd:NCName },
-        includedMode*,
-        rule*)
-        & foreign
-    }
-    */
+/*
+element mode {
+(attribute name { xsd:NCName },
+includedMode*,
+rule*)
+& foreign
+}
+*/
     public abstract class NvdlModeBase : NvdlAttributable
     {
         NvdlModeList includedModes = new NvdlModeList();
@@ -306,14 +306,14 @@ namespace Commons.Xml.Nvdl
         }
     }
 
-    /*
-    element namespace {
-        (attribute ns { xsd:string },
-        attribute wildCard {xsd:string{maxLength = "1"}}?,
-        ruleModel)
-        & foreign
-    }
-    */
+/*
+element namespace {
+(attribute ns { xsd:string },
+attribute wildCard {xsd:string{maxLength = "1"}}?,
+ruleModel)
+& foreign
+}
+*/
     public class NvdlNamespace : NvdlRule
     {
         string ns;
@@ -341,16 +341,16 @@ namespace Commons.Xml.Nvdl
         }
     }
 
-    /*
-    element anyNamespace { ruleModel & foreign}
-    */
+/*
+element anyNamespace { ruleModel & foreign}
+*/
     public class NvdlAnyNamespace : NvdlRule { }
 
     public abstract class NvdlAction : NvdlAttributable { }
 
-    /*
-    element cancelNestedActions {foreign}
-    */
+/*
+element cancelNestedActions {foreign}
+*/
     public class NvdlCancelAction : NvdlAction { }
 
     public abstract class NvdlNoCancelAction : NvdlAction
@@ -415,18 +415,18 @@ namespace Commons.Xml.Nvdl
         }
     }
 
-    /*
-    element validate {
-        (schemaType?,
-        (message | option)*,
-        schema,
-        modeUsage) & foreign
-    }
+/*
+element validate {
+(schemaType?,
+(message | option)*,
+schema,
+modeUsage) & foreign
+}
 
-    schema =
-        attribute schema { xsd:anyURI } |
-        element schema {(text | foreignElement), foreignAttribute*}
-    */
+schema =
+attribute schema { xsd:anyURI } |
+element schema {(text | foreignElement), foreignAttribute*}
+*/
     public class NvdlValidate : NvdlNoResultAction
     {
         string schemaType;
@@ -514,14 +514,14 @@ namespace Commons.Xml.Nvdl
         }
     }
 
-    /*
-    (attribute useMode { xsd:NCName } | nestedMode)?,
-    element context {
-        (attribute path { path },
-        (attribute useMode { xsd:NCName } | nestedMode)?)
-        & foreign
-    }*
-    */
+/*
+(attribute useMode { xsd:NCName } | nestedMode)?,
+element context {
+(attribute path { path },
+(attribute useMode { xsd:NCName } | nestedMode)?)
+& foreign
+}*
+*/
     public class NvdlModeUsage
     {
         string useMode;

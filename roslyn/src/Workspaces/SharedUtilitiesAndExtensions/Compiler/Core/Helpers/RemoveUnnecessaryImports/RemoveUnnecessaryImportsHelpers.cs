@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Shared.Helpers.RemoveUnnecessaryImports
                 .LeadingTrivia.SkipWhile(syntaxFacts.IsEndOfLineTrivia)
                 .ToList();
 
-            // If the list ends with 3 newlines remove the last one until there's only 2 newlines to end the leading trivia.
+            // If the list ends with 3 newlines remove the last one until there's only 2 newlines to end the
+            // leading trivia.
             while (
                 trimmedLeadingTrivia.Count >= 3
                 && syntaxFacts.IsEndOfLineTrivia(trimmedLeadingTrivia[^3])

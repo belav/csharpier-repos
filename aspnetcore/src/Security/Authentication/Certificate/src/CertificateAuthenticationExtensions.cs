@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Authentication.Certificate;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Extension methods to add Certificate authentication capabilities to an HTTP application pipeline.
+/// Extension methods to add Certificate authentication capabilities to an HTTP application
+// pipeline.
 /// </summary>
 public static class CertificateAuthenticationAppBuilderExtensions
 {
@@ -17,7 +18,8 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <para>
     /// Certificate authentication uses a authentication handler that validates client certificate and
     /// raises an event where the certificate is resolved to a <see cref="ClaimsPrincipal"/>.
-    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about certificate authentication.
+    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about
+    // certificate authentication.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
@@ -30,7 +32,8 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <para>
     /// Certificate authentication uses a authentication handler that validates client certificate and
     /// raises an event where the certificate is resolved to a <see cref="ClaimsPrincipal"/>.
-    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about certificate authentication.
+    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about
+    // certificate authentication.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
@@ -46,11 +49,13 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <para>
     /// Certificate authentication uses a authentication handler that validates client certificate and
     /// raises an event where the certificate is resolved to a <see cref="ClaimsPrincipal"/>.
-    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about certificate authentication.
+    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about
+    // certificate authentication.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
-    /// <param name="configureOptions">A delegate to configure <see cref="CertificateAuthenticationOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure <see
+    // cref="CertificateAuthenticationOptions"/>.</param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
     public static AuthenticationBuilder AddCertificate(
         this AuthenticationBuilder builder,
@@ -66,12 +71,14 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <para>
     /// Certificate authentication uses a authentication handler that validates client certificate and
     /// raises an event where the certificate is resolved to a <see cref="ClaimsPrincipal"/>.
-    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about certificate authentication.
+    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about
+    // certificate authentication.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
-    /// <param name="configureOptions">A delegate to configure <see cref="CertificateAuthenticationOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure <see
+    // cref="CertificateAuthenticationOptions"/>.</param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
     public static AuthenticationBuilder AddCertificate(
         this AuthenticationBuilder builder,
@@ -88,11 +95,13 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <para>
     /// Certificate authentication uses a authentication handler that validates client certificate and
     /// raises an event where the certificate is resolved to a <see cref="ClaimsPrincipal"/>.
-    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about certicate authentication.
+    /// See <see href="https://tools.ietf.org/html/rfc5246#section-7.4.4"/> to read more about certicate
+    // authentication.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
-    /// <param name="configureOptions">A delegate to configure <see cref="CertificateValidationCacheOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure <see
+    // cref="CertificateValidationCacheOptions"/>.</param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
     public static AuthenticationBuilder AddCertificateCache(
         this AuthenticationBuilder builder,

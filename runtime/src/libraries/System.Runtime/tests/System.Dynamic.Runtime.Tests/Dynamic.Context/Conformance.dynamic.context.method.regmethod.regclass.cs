@@ -584,6 +584,7 @@ namespace System.Dynamic.Runtime.Tests
 {
     public class Test
     {
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass001.regclass001
         [Fact]
         public static void CalledFrom_StaticMethdBody()
@@ -592,6 +593,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.False((bool)mc.Method_ReturnBool(new object(), null));
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass002.regclass002
         [Fact]
         public static void CalledFrom_ExtensionMethodBody()
@@ -600,6 +602,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.False(t.TestMethod());
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass003.regclass003
         [Fact]
         public static void CalledFrom_MemberInitializerOfObjectInitializer()
@@ -625,6 +628,7 @@ namespace System.Dynamic.Runtime.Tests
             public byte[] ByteArray;
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass004.regclass004
         [Fact]
         public static void CalledFrom_PropertyGetBody()
@@ -642,6 +646,7 @@ namespace System.Dynamic.Runtime.Tests
             }
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass005.regclass005
         [Fact]
         public static void CalledFrom_CollectionInitializer()
@@ -661,6 +666,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new List<char?> { 'a', 'b' }, list);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass006.regclass006
         [Fact]
         public static void CalledFrom_CheckedExpression()
@@ -673,6 +679,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(-2147483648, m2);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass007.regclass007
         [Fact]
         public static void CalledFrom_TryCatchFinally()
@@ -696,6 +703,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(result1.Value, result2);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass008.regclass008
         [Fact]
         public static void CalledFrom_ExtensionArgument()
@@ -704,6 +712,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(6, ((int)dy.Method_ReturnInt(null, new char[] { 'a' }, 0)).ExPlus());
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass009.regclass009
         [Fact]
         public static void CalledFrom_ThrowExpression()
@@ -721,6 +730,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.True(passed);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass010.regclass010
         [Fact]
         public static void CalledFrom_UsingExpression()
@@ -744,6 +754,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal("a", result.ToString().Trim());
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass011.regclass011
         [Fact]
         public static void CalledFrom_LockExpression()
@@ -759,6 +770,7 @@ namespace System.Dynamic.Runtime.Tests
 
         private static object s_locker;
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass012.regclass012
         [Fact]
         public static void CalledFrom_ForExpressionBody()
@@ -785,6 +797,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(119, result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass012a.regclass012a
         [Fact]
         public static void CalledFrom_ForExpressionConditions()
@@ -807,6 +820,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(119, result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass015.regclass015
         [Fact]
         public static void CalledFrom_DefaultSectionStatementList()
@@ -831,6 +845,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal('b', c);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass018.regclass018
         [Fact]
         public static void CalledFrom_IteratorCallingLambdaExpression()
@@ -854,6 +869,7 @@ namespace System.Dynamic.Runtime.Tests
             }
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass019.regclass019
         [Fact]
         public static void CalledFrom_ObjectInitializerInsideCollectionInitializer()
@@ -869,6 +885,7 @@ namespace System.Dynamic.Runtime.Tests
 
         private MyClass _myclass = null;
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass020.regclass020
         [Fact]
         public static void CalledFrom_TryCatchFinally_AnonymousMethod_ReferringToTwoDynamicParameters()
@@ -901,6 +918,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(119, result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass021.regclass021
         [Fact]
         public static void CalledFrom_AnonymousType_InsideQueryExpression()
@@ -920,6 +938,7 @@ namespace System.Dynamic.Runtime.Tests
             }
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass021.regclass021
         [Fact]
         public static void CalledFrom_ForeachInsideUsingStatement()
@@ -951,6 +970,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal("Test1Test2", result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass023.regclass023
         [Fact]
         public static void CalledFrom_StaticMethodBody2()
@@ -962,6 +982,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.True(result.Value);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass024.regclass024
         [Fact]
         public static void CalledFrom_StaticMethodBody3()
@@ -974,6 +995,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.True((bool?)mc.Method_ReturnBoolNullable(p));
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass025.regclass025
         [Fact]
         public static void CalledFrom_UsedInMethodArgument()
@@ -988,6 +1010,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new byte?[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, input);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass026.regclass026
         [Fact]
         public static void CalledFrom_GenericMethodArgument()
@@ -1007,6 +1030,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new byte?[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, input);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass027.regclass027
         [Fact]
         public static void CalledFrom_StaticMethodBody4()
@@ -1018,6 +1042,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new byte?[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 }, result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass028.regclass028
         [Fact]
         public static void CalledFrom_GenericStaticMethodBody1()
@@ -1037,6 +1062,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new byte?[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 }, result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass029.regclass029
         [Fact]
         public static void CalledFrom_DelegateInvokeArgument()
@@ -1048,6 +1074,7 @@ namespace System.Dynamic.Runtime.Tests
 
         private delegate void MyDec(byte?[] input);
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass030.regclass030
         [Fact]
         public static void CalledFrom_Constructor()
@@ -1056,6 +1083,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, t._field);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass031.regclass031
         [Fact]
         public static void CalledFrom_FieldInitializerOutOfConstructor()
@@ -1064,6 +1092,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new byte[] { 5, 5, 5 }, t._field);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass032.regclass032
         [Fact]
         public static void CalledFrom_StaticFieldInitializerOutOfConstructor()
@@ -1074,6 +1103,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new byte[] { 1, 0 }, ClassWithStaticConstructor.s_field);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass034.regclass034
         [Fact]
         public static void CalledFrom_ImplicitlyTypeArrayInitializer()
@@ -1089,6 +1119,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new char[] { 'c', 'c' }, array);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass035.regclass035
         [Fact]
         public static void CalledFrom_EqualityOperator()
@@ -1103,6 +1134,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(5, myclass.Field);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass036.regclass036
         [Fact]
         public static void CalledFrom_PlusOperator()
@@ -1130,6 +1162,7 @@ namespace System.Dynamic.Runtime.Tests
             return new Test() { _field = t1._field + t2._field };
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass037.regclass037
         [Fact]
         public static void CalledFrom_StaticMethodBody5()
@@ -1148,6 +1181,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal("z", s);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass038.regclass038
         [Fact]
         public static void CalledFrom_ModuloOperator()
@@ -1169,6 +1203,7 @@ namespace System.Dynamic.Runtime.Tests
             return new Test() { _fieldModulo = t1._fieldModulo % t2._fieldModulo };
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass039.regclass039
         [Fact]
         public static void CalledFrom_StaticMethodBody6()
@@ -1184,6 +1219,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(3M, s);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass040.regclass040
         [Fact]
         public static void CalledFrom_ObjectInitializer_InsideCollectionInitializer()
@@ -1203,6 +1239,7 @@ namespace System.Dynamic.Runtime.Tests
 
         private float _floatField;
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass041.regclass041
         [Fact]
         public static void CalledFrom_StaticPropertySetBody()
@@ -1223,6 +1260,7 @@ namespace System.Dynamic.Runtime.Tests
             }
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass042.regclass042
         [Fact]
         public static void CalledFrom_StaticGetPropertyBody()
@@ -1246,6 +1284,7 @@ namespace System.Dynamic.Runtime.Tests
             set { }
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass043.regclass043
         [Fact]
         public static void CalledFrom_LockBlock()
@@ -1260,6 +1299,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(int.MinValue, result.Value);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass044.regclass044
         [Fact]
         public static void CalledFrom_ForLoopBody()
@@ -1282,6 +1322,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(array1[2], array2[2]);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass045.regclass045
         [Fact]
         public static void CalledFrom_DynamicVariableNamedDynamic()
@@ -1297,6 +1338,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(2342424, p2);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass046.regclass046
         [Fact]
         public static void CalledFrom_ForeachExpression()
@@ -1310,6 +1352,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new List<float?> { 3.4534f }, list);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass047.regclass047
         [Fact]
         public static void CalledFrom_GreaterThanOrEqualToOperator()
@@ -1323,6 +1366,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.True(result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass048.regclass048
         [Fact]
         public static void CalledFrom_StaticMethodBody7()
@@ -1338,6 +1382,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(2342424, p2);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass049.regclass049
         [Fact]
         public static void CalledFrom_GenericStaticMethodBody()
@@ -1352,6 +1397,7 @@ namespace System.Dynamic.Runtime.Tests
             Assert.Equal(new float[] { 3.4534f }, result);
         }
 
+        //
         // ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass05.regclass050
         [Fact]
         public static void CalledFrom_DoWhileExpression()
@@ -2273,7 +2319,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
-    // <Title> Tests regular class regular method used in static method body and parameter contains dynamic.</Title>
+    // <Title> Tests regular class regular method used in static method body and parameter contains
+    // dynamic.</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>

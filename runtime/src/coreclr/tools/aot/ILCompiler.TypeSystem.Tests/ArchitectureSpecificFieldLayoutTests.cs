@@ -596,7 +596,8 @@ namespace TypeSystemTests
         [InlineData("StructStructByte_UInt128StructAuto", "X86", 16, 32)]
         [InlineData("StructStructByte_UInt128StructAuto", "X64Linux", 16, 32)]
         [InlineData("StructStructByte_UInt128StructAuto", "X64Windows", 16, 32)]
-        // Variation of TestAlignmentBehavior_AutoAlignmentRules above that is able to deal with os specific behavior
+        // Variation of TestAlignmentBehavior_AutoAlignmentRules above that is able to deal with os specific
+        // behavior
         public void TestAlignmentBehavior_AutoAlignmentRulesWithOSDependence(
             string wrapperType,
             string osArch,

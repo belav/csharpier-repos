@@ -36,7 +36,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// <para>RefreshOnIssuerKeyNotFound: true</para>
     /// <para>ResponseType: <see cref="OpenIdConnectResponseType.IdToken"/></para>
     /// <para>Scope: <see cref="OpenIdConnectScope.OpenIdProfile"/>.</para>
-    /// <para>TokenValidationParameters: new <see cref="TokenValidationParameters"/> with AuthenticationScheme = authenticationScheme.</para>
+    /// <para>TokenValidationParameters: new <see cref="TokenValidationParameters"/> with
+    // AuthenticationScheme = authenticationScheme.</para>
     /// <para>UseTokenLifetime: false.</para>
     /// </remarks>
     public OpenIdConnectOptions()
@@ -139,7 +140,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     public string? ClientSecret { get; set; }
 
     /// <summary>
-    /// Configuration provided directly by the developer. If provided, then MetadataAddress and the Backchannel properties
+    /// Configuration provided directly by the developer. If provided, then MetadataAddress and the
+    // Backchannel properties
     /// will not be used. This information should not be updated during request processing.
     /// </summary>
     public OpenIdConnectConfiguration? Configuration { get; set; }
@@ -151,7 +153,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     public IConfigurationManager<OpenIdConnectConfiguration>? ConfigurationManager { get; set; }
 
     /// <summary>
-    /// Boolean to set whether the handler should go to user info endpoint to retrieve additional claims or not after creating an identity from id_token received from token endpoint.
+    /// Boolean to set whether the handler should go to user info endpoint to retrieve additional claims
+    // or not after creating an identity from id_token received from token endpoint.
     /// The default is 'false'.
     /// </summary>
     public bool GetClaimsFromUserInfoEndpoint { get; set; }
@@ -173,7 +176,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     public string? MetadataAddress { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="OpenIdConnectEvents"/> to notify when processing OpenIdConnect messages.
+    /// Gets or sets the <see cref="OpenIdConnectEvents"/> to notify when processing OpenIdConnect
+    // messages.
     /// </summary>
     public new OpenIdConnectEvents Events
     {
@@ -182,14 +186,17 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     }
 
     /// <summary>
-    /// Gets or sets the 'max_age'. If set the 'max_age' parameter will be sent with the authentication request. If the identity
-    /// provider has not actively authenticated the user within the length of time specified, the user will be prompted to
+    /// Gets or sets the 'max_age'. If set the 'max_age' parameter will be sent with the authentication
+    // request. If the identity
+    /// provider has not actively authenticated the user within the length of time specified, the user
+    // will be prompted to
     /// re-authenticate. By default no max_age is specified.
     /// </summary>
     public TimeSpan? MaxAge { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="OpenIdConnectProtocolValidator"/> that is used to ensure that the 'id_token' received
+    /// Gets or sets the <see cref="OpenIdConnectProtocolValidator"/> that is used to ensure that the
+    // 'id_token' received
     /// is valid per: http://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation
     /// </summary>
     /// <exception cref="ArgumentNullException">if 'value' is null.</exception>
@@ -201,20 +208,25 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
         };
 
     /// <summary>
-    /// The request path within the application's base path where the user agent will be returned after sign out from the identity provider.
-    /// See post_logout_redirect_uri from http://openid.net/specs/openid-connect-session-1_0.html#RedirectionAfterLogout.
+    /// The request path within the application's base path where the user agent will be returned after
+    // sign out from the identity provider.
+    /// See post_logout_redirect_uri from
+    // http://openid.net/specs/openid-connect-session-1_0.html#RedirectionAfterLogout.
     /// </summary>
     public PathString SignedOutCallbackPath { get; set; }
 
     /// <summary>
-    /// The uri where the user agent will be redirected to after application is signed out from the identity provider.
+    /// The uri where the user agent will be redirected to after application is signed out from the
+    // identity provider.
     /// The redirect will happen after the SignedOutCallbackPath is invoked.
     /// </summary>
-    /// <remarks>This URI can be out of the application's domain. By default it points to the root.</remarks>
+    /// <remarks>This URI can be out of the application's domain. By default it points to the
+    // root.</remarks>
     public string SignedOutRedirectUri { get; set; } = "/";
 
     /// <summary>
-    /// Gets or sets if a metadata refresh should be attempted after a SecurityTokenSignatureKeyNotFoundException. This allows for automatic
+    /// Gets or sets if a metadata refresh should be attempted after a
+    // SecurityTokenSignatureKeyNotFoundException. This allows for automatic
     /// recovery in the event of a signature key rollover. This is enabled by default.
     /// </summary>
     public bool RefreshOnIssuerKeyNotFound { get; set; } = true;
@@ -256,7 +268,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     public PathString RemoteSignOutPath { get; set; }
 
     /// <summary>
-    /// The Authentication Scheme to use with SignOut on the SignOutPath. SignInScheme will be used if this
+    /// The Authentication Scheme to use with SignOut on the SignOutPath. SignInScheme will be used if
+    // this
     /// is not set.
     /// </summary>
     public string? SignOutScheme { get; set; }
@@ -282,7 +295,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// <summary>
     /// Gets or sets the <see cref="TokenHandler"/> used to validate identity tokens.
     /// <para>
-    /// This will be used instead of <see cref="SecurityTokenValidator"/> if <see cref="UseSecurityTokenValidator"/> is <see langword="false"/>.
+    /// This will be used instead of <see cref="SecurityTokenValidator"/> if <see
+    // cref="UseSecurityTokenValidator"/> is <see langword="false"/>.
     /// </para>
     /// </summary>
     public TokenHandler TokenHandler { get; set; }
@@ -295,15 +309,18 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
         new TokenValidationParameters();
 
     /// <summary>
-    /// Indicates that the authentication session lifetime (e.g. cookies) should match that of the authentication token.
+    /// Indicates that the authentication session lifetime (e.g. cookies) should match that of the
+    // authentication token.
     /// If the token does not provide lifetime information then normal session lifetimes will be used.
     /// This is disabled by default.
     /// </summary>
     public bool UseTokenLifetime { get; set; }
 
     /// <summary>
-    /// Indicates if requests to the CallbackPath may also be for other components. If enabled the handler will pass
-    /// requests through that do not contain OpenIdConnect authentication responses. Disabling this and setting the
+    /// Indicates if requests to the CallbackPath may also be for other components. If enabled the
+    // handler will pass
+    /// requests through that do not contain OpenIdConnect authentication responses. Disabling this and
+    // setting the
     /// CallbackPath to a dedicated endpoint may provide better error handling.
     /// This is disabled by default.
     /// </summary>
@@ -322,13 +339,18 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// </summary>
     /// <remarks>
     /// <para>
-    /// The value of <see cref="CookieBuilder.Name"/> is treated as the prefix to the cookie name, and defaults to <see cref="OpenIdConnectDefaults.CookieNoncePrefix"/>.
+    /// The value of <see cref="CookieBuilder.Name"/> is treated as the prefix to the cookie name, and
+    // defaults to <see cref="OpenIdConnectDefaults.CookieNoncePrefix"/>.
     /// </para>
     /// <list type="bullet">
-    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see cref="SameSiteMode.None"/>.</description></item>
-    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to <c>true</c>.</description></item>
-    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to <c>true</c>.</description></item>
-    /// <item><description><see cref="CookieBuilder.SecurePolicy"/> defaults to <see cref="CookieSecurePolicy.SameAsRequest"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see
+    // cref="SameSiteMode.None"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to
+    // <c>true</c>.</description></item>
+    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to
+    // <c>true</c>.</description></item>
+    /// <item><description><see cref="CookieBuilder.SecurePolicy"/> defaults to <see
+    // cref="CookieSecurePolicy.SameAsRequest"/>.</description></item>
     /// </list>
     /// </remarks>
     public CookieBuilder NonceCookie
@@ -339,7 +361,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
 
     /// <summary>
     /// Enables or disables the use of the Proof Key for Code Exchange (PKCE) standard.
-    /// This only applies when the <see cref="ResponseType"/> is set to <see cref="OpenIdConnectResponseType.Code"/>.
+    /// This only applies when the <see cref="ResponseType"/> is set to <see
+    // cref="OpenIdConnectResponseType.Code"/>.
     /// See <see href="https://tools.ietf.org/html/rfc7636"/>.
     /// The default value is `true`.
     /// </summary>
@@ -373,25 +396,32 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// Gets or sets how often an automatic metadata refresh should occur.
     /// </summary>
     /// <value>
-    /// Defaults to <see cref="ConfigurationManager{OpenIdConnectConfiguration}.DefaultAutomaticRefreshInterval" />.
+    /// Defaults to <see
+    // cref="ConfigurationManager{OpenIdConnectConfiguration}.DefaultAutomaticRefreshInterval" />.
     /// </value>
     public TimeSpan AutomaticRefreshInterval { get; set; } =
         ConfigurationManager<OpenIdConnectConfiguration>.DefaultAutomaticRefreshInterval;
 
     /// <summary>
-    /// Gets or sets the minimum time between retrievals, in the event that a retrieval failed, or that a refresh was explicitly requested.
+    /// Gets or sets the minimum time between retrievals, in the event that a retrieval failed, or that
+    // a refresh was explicitly requested.
     /// </summary>
     /// <value>
-    /// Defaults to <see cref="ConfigurationManager{OpenIdConnectConfiguration}.DefaultRefreshInterval" />.
+    /// Defaults to <see cref="ConfigurationManager{OpenIdConnectConfiguration}.DefaultRefreshInterval"
+    // />.
     /// </value>
     public TimeSpan RefreshInterval { get; set; } =
         ConfigurationManager<OpenIdConnectConfiguration>.DefaultRefreshInterval;
 
     /// <summary>
-    /// Gets or sets the <see cref="MapInboundClaims"/> property on the default instance of <see cref="JwtSecurityTokenHandler"/> in SecurityTokenValidator
-    /// and default instance of <see cref="JsonWebTokenHandler"/> in TokenHandler, which is used when determining
-    /// whether or not to map claim types that are extracted when validating a <see cref="JwtSecurityToken"/>.
-    /// <para>If this is set to true, the Claim Type is set to the JSON claim 'name' after translating using this mapping. Otherwise, no mapping occurs.</para>
+    /// Gets or sets the <see cref="MapInboundClaims"/> property on the default instance of <see
+    // cref="JwtSecurityTokenHandler"/> in SecurityTokenValidator
+    /// and default instance of <see cref="JsonWebTokenHandler"/> in TokenHandler, which is used when
+    // determining
+    /// whether or not to map claim types that are extracted when validating a <see
+    // cref="JwtSecurityToken"/>.
+    /// <para>If this is set to true, the Claim Type is set to the JSON claim 'name' after translating
+    // using this mapping. Otherwise, no mapping occurs.</para>
     /// <para>The default value is true.</para>
     /// </summary>
     public bool MapInboundClaims
@@ -406,15 +436,20 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     }
 
     /// <summary>
-    /// Gets or sets whether to use the <see cref="TokenHandler"/> or the <see cref="SecurityTokenValidator"/> for validating identity tokens.
+    /// Gets or sets whether to use the <see cref="TokenHandler"/> or the <see
+    // cref="SecurityTokenValidator"/> for validating identity tokens.
     /// </summary>
     /// <remarks>
     /// The advantages of using TokenHandler are:
     /// <para>There is an Async model.</para>
-    /// <para>The default token handler is a <see cref="JsonWebTokenHandler"/> which is faster than a <see cref="JwtSecurityTokenHandler"/>.</para>
-    /// <para>There is an ability to make use of a Last-Known-Good model for metadata that protects applications when metadata is published with errors.</para>
-    /// SecurityTokenValidator can be used when <see cref="TokenValidatedContext.SecurityToken"/> needs a <see cref="JwtSecurityToken"/>.
-    /// When using TokenHandler, <see cref="TokenValidatedContext.SecurityToken"/> will be a <see cref="JsonWebToken"/>.
+    /// <para>The default token handler is a <see cref="JsonWebTokenHandler"/> which is faster than a
+    // <see cref="JwtSecurityTokenHandler"/>.</para>
+    /// <para>There is an ability to make use of a Last-Known-Good model for metadata that protects
+    // applications when metadata is published with errors.</para>
+    /// SecurityTokenValidator can be used when <see cref="TokenValidatedContext.SecurityToken"/> needs
+    // a <see cref="JwtSecurityToken"/>.
+    /// When using TokenHandler, <see cref="TokenValidatedContext.SecurityToken"/> will be a <see
+    // cref="JsonWebToken"/>.
     /// </remarks>
     public bool UseSecurityTokenValidator { get; set; }
 }

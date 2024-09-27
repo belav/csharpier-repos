@@ -583,7 +583,8 @@ namespace System.ServiceModel
             foreach (ServiceEndpoint endPoint in Description.Endpoints)
                 endPoint.Validate();
 
-            // In 4.0, it seems that if there is no configured ServiceEndpoint, infer them from the service type.
+            // In 4.0, it seems that if there is no configured ServiceEndpoint, infer them from the service
+            // type.
             if (Description.Endpoints.Count == 0)
             {
                 foreach (Type iface in Description.ServiceType.GetInterfaces())

@@ -19,9 +19,9 @@ namespace System.Web
     [System.Runtime.InteropServices.ComVisible(false)]
     internal sealed class NativeMethods
     {
-        /*
-         * ASPNET_ISAPI.DLL
-         */
+/*
+* ASPNET_ISAPI.DLL
+*/
         private NativeMethods() { }
 
         [DllImport("Fusion.dll", CharSet = CharSet.Auto)]

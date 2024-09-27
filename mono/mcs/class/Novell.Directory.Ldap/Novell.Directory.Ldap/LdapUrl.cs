@@ -435,7 +435,8 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <returns> The URL-encoded string.
         ///
-        /// Comment: An illegal character consists of any non graphical US-ASCII character, Unsafe, or reserved characters.
+        /// Comment: An illegal character consists of any non graphical US-ASCII character, Unsafe, or
+        // reserved characters.
         /// </returns>
         public static System.String encode(System.String toEncode)
         {
@@ -501,7 +502,7 @@ namespace Novell.Directory.Ldap
         }
 
         /// <summary> Sets the base distinguished name encapsulated in the URL.</summary>
-        /* package */
+/* package */
         internal virtual void setDN(System.String dn)
         {
             this.dn = dn;
@@ -752,14 +753,14 @@ namespace Novell.Directory.Ldap
             bool novell = false;
             if (dnStart < 0)
             {
-                /*
-                * Kludge. check for ldap://111.222.333.444:389??cn=abc,o=company
-                *
-                * Check for broken Novell referral format.  The dn is in
-                * the scope position, but the required slash is missing.
-                * This is illegal syntax but we need to account for it.
-                * Fortunately it can't be confused with anything real.
-                */
+/*
+* Kludge. check for ldap://111.222.333.444:389??cn=abc,o=company
+*
+* Check for broken Novell referral format.  The dn is in
+* the scope position, but the required slash is missing.
+* This is illegal syntax but we need to account for it.
+* Fortunately it can't be confused with anything real.
+*/
                 dnStart = url.IndexOf("?", scanStart);
                 if (dnStart > 0)
                 {

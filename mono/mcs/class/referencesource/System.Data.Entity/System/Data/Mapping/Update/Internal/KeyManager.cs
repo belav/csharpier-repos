@@ -165,7 +165,8 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         /// <summary>
-        /// Gets all relationship entries constrained by the given identifier. If there is a referential constraint
+        /// Gets all relationship entries constrained by the given identifier. If there is a referential
+        // constraint
         /// where the identifier is the principal, returns results corresponding to the constrained
         /// dependent relationships.
         /// </summary>

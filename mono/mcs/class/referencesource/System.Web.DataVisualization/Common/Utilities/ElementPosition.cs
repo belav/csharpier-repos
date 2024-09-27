@@ -260,7 +260,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Determines whether the specified Object is equal to the current Object.
         /// </summary>
         /// <param name="obj">The Object to compare with the current Object.</param>
-        /// <returns>true if the specified Object is equal to the current Object; otherwise, false.</returns>
+        /// <returns>true if the specified Object is equal to the current Object; otherwise,
+        // false.</returns>
         internal override bool EqualsInternal(object obj)
         {
             ElementPosition pos = obj as ElementPosition;

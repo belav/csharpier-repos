@@ -248,8 +248,10 @@ namespace System
         T16 arg16
     );
 
-    // This should probably technically be T? rather than T to match `IComparer<T>`.  However, the use cases are generally different,
-    // with Comparison<T> typically being used via a lambda, with the T inferred from the type of the collection being sorted,
+    // This should probably technically be T? rather than T to match `IComparer<T>`.  However, the use
+    // cases are generally different,
+    // with Comparison<T> typically being used via a lambda, with the T inferred from the type of the
+    // collection being sorted,
     // and forcing nullable warnings onto all such usage leads to many spurious warnings.
     public delegate int Comparison<in T>(T x, T y);
 

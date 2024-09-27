@@ -288,7 +288,8 @@ namespace System.Xml.Schema
             }
         }
 
-        // SxS: This method processes attributes read from source document and does not expose any resources.
+        // SxS: This method processes attributes read from source document and does not expose any
+        // resources.
         // It's OK to suppress the SxS warning.
         private void ProcessXsiAttributes(out XmlQualifiedName xsiType, out string? xsiNil)
         {

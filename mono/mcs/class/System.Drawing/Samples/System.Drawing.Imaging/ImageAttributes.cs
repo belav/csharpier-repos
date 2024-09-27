@@ -36,7 +36,7 @@ using System.Drawing.Imaging;
 //
 public class SampleDrawingImage
 {
-    /*  DrawImageAbort callback method */
+/*  DrawImageAbort callback method */
     static private bool DrawImageCallback(IntPtr callBackData)
     {
         Console.WriteLine("DrawImageCallback");
@@ -57,7 +57,7 @@ public class SampleDrawingImage
         Bitmap bmpred = new Bitmap(100, 100, PixelFormat.Format32bppArgb);
         Graphics gr = Graphics.FromImage(bmpred);
 
-        /* Sample drawing*/
+/* Sample drawing*/
         Pen cyan = new Pen(Color.Cyan, 0);
         Pen green = new Pen(Color.Green, 0);
         Pen pink = new Pen(Color.Pink, 0);
@@ -67,11 +67,11 @@ public class SampleDrawingImage
         gr.DrawLine(green, 10.0F, 50.0F, 90.0F, 50.0F);
         gr.DrawRectangle(blue, 10.0F, 10.0F, 80.0F, 80.0F);
 
-        /* Draw image without any imageattributes*/
+/* Draw image without any imageattributes*/
         dc.DrawImage(bmpred, 0, 0);
         dc.DrawString("Sample drawing", new Font("Arial", 8), br, 10, 100);
 
-        /* Remmaping colours */
+/* Remmaping colours */
         ColorMap[] clr = new ColorMap[1];
         clr[0] = new ColorMap();
         clr[0].OldColor = Color.Blue;
@@ -90,7 +90,7 @@ public class SampleDrawingImage
         );
         dc.DrawString("Remapping colors", new Font("Arial", 8), br, 110, 100);
 
-        /* Gamma correction on*/
+/* Gamma correction on*/
         imageAttr = new ImageAttributes();
         imageAttr.SetGamma(2);
         dc.DrawImage(
@@ -106,7 +106,7 @@ public class SampleDrawingImage
 
         dc.DrawString("Gamma corrected", new Font("Arial", 8), br, 210, 100);
 
-        /* WrapMode: TitleX */
+/* WrapMode: TitleX */
         imageAttr = new ImageAttributes();
         imageAttr.SetWrapMode(WrapMode.TileFlipX);
 
@@ -123,7 +123,7 @@ public class SampleDrawingImage
 
         dc.DrawString("WrapMode.TileFlipX", new Font("Arial", 8), br, 10, 320);
 
-        /* WrapMode: TitleY */
+/* WrapMode: TitleY */
         imageAttr.SetWrapMode(WrapMode.TileFlipY);
 
         dc.DrawImage(
@@ -139,7 +139,7 @@ public class SampleDrawingImage
 
         dc.DrawString("WrapMode.TileFlipY", new Font("Arial", 8), br, 210, 320);
 
-        /* WrapMode: TitleXY */
+/* WrapMode: TitleXY */
         imageAttr.SetWrapMode(WrapMode.TileFlipXY);
 
         dc.DrawImage(

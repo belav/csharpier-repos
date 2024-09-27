@@ -131,7 +131,8 @@ public class CSharpTestMethodFinderTests
             }
             """;
 
-        // This asserts that we cannot find test methods with aliased attributes because we only do syntactic checks.
+        // This asserts that we cannot find test methods with aliased attributes because we only do
+        // syntactic checks.
         await TestXunitAsync(code);
     }
 

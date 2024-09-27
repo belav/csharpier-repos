@@ -50,28 +50,33 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>
         /// A constant used to specify an unlimited quantity for <see cref="DataflowLinkOptions"/> members
-        /// that provide an upper bound. This field is a constant tied to <see cref="DataflowLinkOptions.Unbounded"/>.
+        /// that provide an upper bound. This field is a constant tied to <see
+        // cref="DataflowLinkOptions.Unbounded"/>.
         /// </summary>
         internal const int Unbounded = DataflowBlockOptions.Unbounded;
 
-        /// <summary>Whether the linked target will have completion and faulting notification propagated to it automatically.</summary>
+        /// <summary>Whether the linked target will have completion and faulting notification propagated to
+        // it automatically.</summary>
         private bool _propagateCompletion;
 
         /// <summary>The maximum number of messages that may be consumed across the link.</summary>
         private int _maxNumberOfMessages = Unbounded;
 
-        /// <summary>Whether the link should be appended to the source?s list of links, or whether it should be prepended.</summary>
+        /// <summary>Whether the link should be appended to the source?s list of links, or whether it should
+        // be prepended.</summary>
         private bool _append = true;
 
         /// <summary>A default instance of <see cref="DataflowLinkOptions"/>.</summary>
         /// <remarks>
-        /// Do not change the values of this instance.  It is shared by all of our blocks when no options are provided by the user.
+        /// Do not change the values of this instance.  It is shared by all of our blocks when no options
+        // are provided by the user.
         /// </remarks>
         internal static readonly DataflowLinkOptions Default = new DataflowLinkOptions();
 
         /// <summary>A cached instance of <see cref="DataflowLinkOptions"/>.</summary>
         /// <remarks>
-        /// Do not change the values of this instance.  It is shared by all of our blocks that need to unlink after one message has been consumed.
+        /// Do not change the values of this instance.  It is shared by all of our blocks that need to
+        // unlink after one message has been consumed.
         /// </remarks>
         internal static readonly DataflowLinkOptions UnlinkAfterOneAndPropagateCompletion =
             new DataflowLinkOptions() { MaxMessages = 1, PropagateCompletion = true };
@@ -79,7 +84,8 @@ namespace System.Threading.Tasks.Dataflow
         /// <summary>Initializes the <see cref="DataflowLinkOptions"/>.</summary>
         public DataflowLinkOptions() { }
 
-        /// <summary>Gets or sets whether the linked target will have completion and faulting notification propagated to it automatically.</summary>
+        /// <summary>Gets or sets whether the linked target will have completion and faulting notification
+        // propagated to it automatically.</summary>
         public bool PropagateCompletion
         {
             get { return _propagateCompletion; }
@@ -93,7 +99,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Gets or sets the maximum number of messages that may be consumed across the link.</summary>
+        /// <summary>Gets or sets the maximum number of messages that may be consumed across the
+        // link.</summary>
         public int MaxMessages
         {
             get { return _maxNumberOfMessages; }
@@ -109,7 +116,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Gets or sets whether the link should be appended to the source?s list of links, or whether it should be prepended.</summary>
+        /// <summary>Gets or sets whether the link should be appended to the source?s list of links, or
+        // whether it should be prepended.</summary>
         public bool Append
         {
             get { return _append; }

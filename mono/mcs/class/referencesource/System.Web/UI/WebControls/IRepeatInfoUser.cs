@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -13,7 +13,8 @@ namespace System.Web.UI.WebControls
     using System.Web.UI;
 
     /// <devdoc>
-    /// <para>Specifies a contract for implementing <see cref='System.Web.UI.WebControls.Repeater'/> objects in list controls.</para>
+    /// <para>Specifies a contract for implementing <see cref='System.Web.UI.WebControls.Repeater'/>
+    // objects in list controls.</para>
     /// </devdoc>
     public interface IRepeatInfoUser
     {
@@ -47,7 +48,8 @@ namespace System.Web.UI.WebControls
         Style GetItemStyle(ListItemType itemType, int repeatIndex);
 
         /// <devdoc>
-        /// <para>Renders the <see cref='System.Web.UI.WebControls.Repeater'/> item with the specified information.</para>
+        /// <para>Renders the <see cref='System.Web.UI.WebControls.Repeater'/> item with the specified
+        // information.</para>
         /// </devdoc>
         void RenderItem(
             ListItemType itemType,

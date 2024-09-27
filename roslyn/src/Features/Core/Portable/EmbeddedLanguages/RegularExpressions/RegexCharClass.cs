@@ -6,7 +6,8 @@
 
 // LICENSING NOTE: The license for this file is from the originating
 // source and not the general https://github.com/dotnet/roslyn license.
-// See https://github.com/dotnet/runtime/blob/5b5bd46c03c86f8545f2c4c8628ac25d875210fe/src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCharClass.cs
+// See
+// https://github.com/dotnet/runtime/blob/5b5bd46c03c86f8545f2c4c8628ac25d875210fe/src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCharClass.cs
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     using static FeaturesResources;
 
     /// <summary>
-    /// Minimal copy of https://github.com/dotnet/corefx/blob/main/src/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCharClass.cs
+    /// Minimal copy of
+    // https://github.com/dotnet/corefx/blob/main/src/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCharClass.cs
     /// Used to accurately determine if something is a WordChar according to the .NET regex engine.
     /// </summary>
     internal static class RegexCharClass
@@ -210,8 +212,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             // values from the Unicode character database, from UnicodeData.txt [UData], plus the U+200C
             // ZERO WIDTH NON-JOINER and U+200D ZERO WIDTH JOINER.
 
-            // Fast lookup in our lookup table for ASCII characters.  This is purely an optimization, and has the
-            // behavior as if we fell through to the switch below (which was actually used to produce the lookup table).
+            // Fast lookup in our lookup table for ASCII characters.  This is purely an optimization, and has
+            // the
+            // behavior as if we fell through to the switch below (which was actually used to produce the lookup
+            // table).
             ReadOnlySpan<byte> asciiLookup = new byte[]
             {
                 0x00,

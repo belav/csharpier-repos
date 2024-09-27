@@ -72,7 +72,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     }
 
     /// <summary>
-    /// Creates an instance of <see cref="CacheTagKey"/> for a specific <see cref="DistributedCacheTagHelper"/>.
+    /// Creates an instance of <see cref="CacheTagKey"/> for a specific <see
+    // cref="DistributedCacheTagHelper"/>.
     /// </summary>
     /// <param name="tagHelper">The <see cref="DistributedCacheTagHelper"/>.</param>
     /// <returns>A new <see cref="CacheTagKey"/>.</returns>

@@ -24,7 +24,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Initializes an instance of <see cref="WrappedUserNameSecurityTokenAuthenticator"/>
         /// </summary>
-        /// <param name="wrappedUserNameSecurityTokenHandler">The UserNameSecurityTokenHandler to wrap.</param>
+        /// <param name="wrappedUserNameSecurityTokenHandler">The UserNameSecurityTokenHandler to
+        // wrap.</param>
         /// <param name="exceptionMapper">Converts token validation exceptions to SOAP faults.</param>
         public WrappedUserNameSecurityTokenAuthenticator(
             UserNameSecurityTokenHandler wrappedUserNameSecurityTokenHandler,

@@ -75,7 +75,8 @@ namespace System.Net
             _httpResponseMessage = _message;
             _requestUri = requestUri;
 
-            // Match Desktop behavior. If the request didn't set a CookieContainer, we don't populate the response's CookieCollection.
+            // Match Desktop behavior. If the request didn't set a CookieContainer, we don't populate the
+            // response's CookieCollection.
             if (cookieContainer != null)
             {
                 _cookies = cookieContainer.GetCookies(requestUri);

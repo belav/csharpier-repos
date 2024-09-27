@@ -658,7 +658,8 @@ partial class C
         [Fact]
         public async Task TestChangeLogicalIdentityReturnsCorrectSymbol_OneDeclaration()
         {
-            // proves that APIs return the correct new symbol even after a change that changes the symbol's logical identity.
+            // proves that APIs return the correct new symbol even after a change that changes the symbol's
+            // logical identity.
             var code =
                 @"class C
 {
@@ -689,7 +690,8 @@ partial class C
         [Fact]
         public async Task TestChangeLogicalIdentityReturnsCorrectSymbol_AllDeclarations()
         {
-            // proves that APIs return the correct new symbol even after a change that changes the symbol's logical identity.
+            // proves that APIs return the correct new symbol even after a change that changes the symbol's
+            // logical identity.
             var code =
                 @"partial class C
 {

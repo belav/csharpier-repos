@@ -19,7 +19,8 @@ namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
 namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 #endif
 {
-    /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter"]/*' />
+    /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+    // path='docs/doc[@for="XhtmlObjectListAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -33,20 +34,24 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlObjectListAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.BackToList"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.BackToList"]/*' />
         internal protected static readonly String BackToList = "__back";
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.ShowMoreFormat"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.ShowMoreFormat"]/*' />
         internal protected static readonly String ShowMoreFormat = "__more{0}";
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.ShowMore"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.ShowMore"]/*' />
         internal protected static readonly String ShowMore = "__more";
         private const int _modeDetails = 1;
 
         private BooleanOption _hasItemDetails = BooleanOption.NotSet;
         private int _visibleTableFieldsCount = -1;
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.Control"]/*' />
         protected new ObjectList Control
         {
             get { return base.Control as ObjectList; }
@@ -81,7 +86,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.CreateTemplatedUI"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.CreateTemplatedUI"]/*' />
         public override void CreateTemplatedUI(bool doDataBind)
         {
             if (Control.ViewMode == ObjectListViewMode.List)
@@ -163,20 +169,23 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             return false;
         }
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.HasCommands"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.HasCommands"]/*' />
         protected bool HasCommands()
         {
             return Control.Commands.Count > 0;
         }
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.HasDefaultCommand"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.HasDefaultCommand"]/*' />
         protected bool HasDefaultCommand()
         {
             String controlDefaultCommand = Control.DefaultCommand;
             return controlDefaultCommand != null && controlDefaultCommand.Length > 0;
         }
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.HasItemDetails"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.HasItemDetails"]/*' />
         protected virtual bool HasItemDetails()
         {
             if (_hasItemDetails == BooleanOption.NotSet)
@@ -216,7 +225,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Return true iff there is exactly one command and it is the default command.
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.OnlyHasDefaultCommand"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.OnlyHasDefaultCommand"]/*' />
         protected bool OnlyHasDefaultCommand()
         {
             return Control.Commands.Count == 1
@@ -231,7 +241,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                 );
         }
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.OnPreRender"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.OnPreRender"]/*' />
         public override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
@@ -244,7 +255,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             return Int32.Parse(arg.Substring(ShowMore.Length), CultureInfo.InvariantCulture);
         }
 
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.Render"]/*' />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             if (Control.ViewMode == ObjectListViewMode.List)
@@ -278,7 +290,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Render the details view
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.RenderItemDetails"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.RenderItemDetails"]/*' />
         protected virtual void RenderItemDetails(XhtmlMobileTextWriter writer, ObjectListItem item)
         {
             if (Control.AllFields.Count == 0)
@@ -485,7 +498,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Render the list view
-        /// <include file='doc\XhtmlBasicObjectListAdapter.uex' path='docs/doc[@for="XhtmlObjectListAdapter.RenderItemsList"]/*' />
+        /// <include file='doc\XhtmlBasicObjectListAdapter.uex'
+        // path='docs/doc[@for="XhtmlObjectListAdapter.RenderItemsList"]/*' />
         protected virtual void RenderItemsList(XhtmlMobileTextWriter writer)
         {
             if (Control.VisibleItemCount == 0)
@@ -518,7 +532,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             Style labelStyle = Control.LabelStyle;
             Color foreColor = (Color)style[Style.ForeColorKey, true];
 
-            // Note: table width is not supported in DTD (the text of the rec says it's supported; a bug in the rec).
+            // Note: table width is not supported in DTD (the text of the rec says it's supported; a bug in the
+            // rec).
             ClearPendingBreakIfDeviceBreaksOnBlockLevel(writer); // we are writing a block level element in all cases.
             ConditionalEnterLayout(writer, Style);
             RenderOpeningListTag(writer, "table");

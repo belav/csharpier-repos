@@ -55,7 +55,8 @@ namespace System.ServiceModel.Syndication
         public Atom10ItemFormatter(SyndicationItem itemToWrite)
             : base(itemToWrite)
         {
-            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base class
+            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base
+            // class
             this.feedSerializer = new Atom10FeedFormatter();
             this.feedSerializer.PreserveAttributeExtensions = this.preserveAttributeExtensions =
                 true;

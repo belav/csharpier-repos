@@ -121,7 +121,8 @@ public class FrebTests : IISFunctionalTestBase
         StopServer();
 
         // The order of freb logs is based on when the requests are complete.
-        // This is non-deterministic here, so we need to check both freb files for a request that was disconnected.
+        // This is non-deterministic here, so we need to check both freb files for a request that was
+        // disconnected.
         AssertFrebLogs(
             result,
             new FrebLogItem("ANCM_INPROC_REQUEST_DISCONNECT"),

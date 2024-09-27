@@ -198,7 +198,8 @@ namespace System.Xml.Xsl.Xslt
             {
                 foreach (XslNode instr in tmpl.Content)
                 {
-                    // Take care of a bizarre case <xsl:template match="/" xml:space="preserve">  <xsl:param name="par"/>
+                    // Take care of a bizarre case <xsl:template match="/" xml:space="preserve">  <xsl:param
+                    // name="par"/>
                     if (instr.NodeType == XslNodeType.Text)
                     {
                         continue;
@@ -625,7 +626,8 @@ namespace System.Xml.Xsl.Xslt
             {
                 foreach (XslNode instr in target.Content)
                 {
-                    // Take care of a bizarre case <xsl:template match="/" xml:space="preserve">  <xsl:param name="par"/>
+                    // Take care of a bizarre case <xsl:template match="/" xml:space="preserve">  <xsl:param
+                    // name="par"/>
                     if (instr.NodeType == XslNodeType.Text)
                     {
                         continue;
@@ -737,9 +739,9 @@ namespace System.Xml.Xsl.Xslt
 
         /*
         protected override XslFlags VisitKey(Key node) {
-            // @match and @use do not affect any flags
-            //ProcessPattern(node.Match);
-            //ProcessExpr(node.Use);
+        // @match and @use do not affect any flags
+        //ProcessPattern(node.Match);
+        //ProcessExpr(node.Use);
         }
         */
 
@@ -887,7 +889,8 @@ namespace System.Xml.Xsl.Xslt
             {
                 if (node.Content.Count != 0)
                 {
-                    // In case of incorrect stylesheet, variable or parameter may have both a 'select' attribute and non-empty content
+                    // In case of incorrect stylesheet, variable or parameter may have both a 'select' attribute and
+                    // non-empty content
                     // NOTE: This code must be in sync with recovery logic in QilGenerator
                     result =
                         xpathAnalyzer.Analyze(node.Select) | VisitChildren(node) | XslFlags.AnyType;
@@ -1556,7 +1559,8 @@ namespace System.Xml.Xsl.Xslt
             | (1 << (int)XslNodeType.ValueOf)
             | (1 << (int)XslNodeType.ValueOfDoe);
 
-        // These are all the node types which can have call-template as a child and are therefor suitable for refactoring
+        // These are all the node types which can have call-template as a child and are therefor suitable
+        // for refactoring
         const int ParentsOfCallTemplate =
             (1 << (int)XslNodeType.Attribute)
             | (1 << (int)XslNodeType.Comment)
@@ -1615,7 +1619,8 @@ namespace System.Xml.Xsl.Xslt
                     if (t < last || costForChild > CallTemplateCost)
                     {
                         //Debug.WriteLine("Node {0} (within {5}) on {1}:{2} has cost {3}; {4} total",
-                        //    child.NodeType, child.SourceLine.Start.Line, child.SourceLine.Start.Pos, costForChild, nodeCost, node.NodeType);
+                        //    child.NodeType, child.SourceLine.Start.Line, child.SourceLine.Start.Pos, costForChild,
+                        // nodeCost, node.NodeType);
 
                         // Refactor this node, moving the current child and all after into a new template
                         Refactor(node, t);
@@ -1684,7 +1689,8 @@ namespace System.Xml.Xsl.Xslt
             XsltLoader.SetInfo(newtemplate, null, fakeCtxInfo);
             newTemplates.Push(newtemplate);
 
-            // Pre-allocate the new content list to minimize the number of resizes (adding some space for any params)
+            // Pre-allocate the new content list to minimize the number of resizes (adding some space for any
+            // params)
             newtemplate.SetContent(new List<XslNode>(content.Count - split + 8));
 
             // Pass parameters from the current scope into the called template
@@ -1712,7 +1718,8 @@ namespace System.Xml.Xsl.Xslt
                         continue;
                     }
 
-                    // Need to create a new QilName (can't reuse the one from the variable, eventhough it's exactly the same)
+                    // Need to create a new QilName (can't reuse the one from the variable, eventhough it's exactly the
+                    // same)
                     var paramname = AstFactory.QName(
                         variable.Name.LocalName,
                         variable.Name.NamespaceUri,

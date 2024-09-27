@@ -1774,7 +1774,8 @@ public class Test
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (7,13): error CS0019: Operator '??' cannot be applied to operands of type 'method group' and 'System.Action'
+                    // (7,13): error CS0019: Operator '??' cannot be applied to operands of type 'method group' and
+                    // 'System.Action'
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "M ?? a")
                         .WithArguments("??", "method group", "System.Action")
                         .WithLocation(7, 13)
@@ -2546,7 +2547,8 @@ class P
                             "using System.Collections.Generic;"
                         )
                         .WithLocation(4, 1),
-                    // (23,26): warning CS8848: Operator 'from' cannot be used here due to precedence. Use parentheses to disambiguate.
+                    // (23,26): warning CS8848: Operator 'from' cannot be used here due to precedence. Use parentheses
+                    // to disambiguate.
                     //         var b = false && from x in src select x;
                     Diagnostic(ErrorCode.WRN_PrecedenceInversion, "from x in src")
                         .WithArguments("from")
@@ -3504,24 +3506,35 @@ class C
         [Fact, WorkItem(529248, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529248")]
         public void TestNullCoalescingOperatorWithNullableConversions()
         {
-            // Native compiler violates the language specification while binding the type for the null coalescing operator (??).
-            // The last bullet in section 7.13 of the specification for binding the type of ?? operator states that:
+            // Native compiler violates the language specification while binding the type for the null
+            // coalescing operator (??).
+            // The last bullet in section 7.13 of the specification for binding the type of ?? operator states
+            // that:
 
-            // SPEC:    Otherwise, if b has a type B and an implicit conversion exists from a to B, the result type is B.
-            // SPEC:    At run-time, a is first evaluated. If a is not null, a is unwrapped to type A0 (if A exists and is nullable)
-            // SPEC:    and converted to type B, and this becomes the result. Otherwise, b is evaluated and becomes the result.
+            // SPEC:    Otherwise, if b has a type B and an implicit conversion exists from a to B, the result
+            // type is B.
+            // SPEC:    At run-time, a is first evaluated. If a is not null, a is unwrapped to type A0 (if A
+            // exists and is nullable)
+            // SPEC:    and converted to type B, and this becomes the result. Otherwise, b is evaluated and
+            // becomes the result.
 
-            // Note that for this test there is no implicit conversion from 's' -> int (SnapshotPoint? -> int), but there is an implicit conversion
+            // Note that for this test there is no implicit conversion from 's' -> int (SnapshotPoint? -> int),
+            // but there is an implicit conversion
             // from stripped type SnapshotPoint -> int.
 
-            // Native compiler instead implements this part based on whether A is a nullable type or not. We maintain compatibility with the native compiler:
+            // Native compiler instead implements this part based on whether A is a nullable type or not. We
+            // maintain compatibility with the native compiler:
 
-            // SPEC PROPOSAL:    Otherwise, if A exists and is a nullable type and if b has a type B and an implicit  conversion exists from A0 to B,
-            // SPEC PROPOSAL:    the result type is B. At run-time, a is first evaluated. If a is not null, a is unwrapped to type A0 and converted to type B,
+            // SPEC PROPOSAL:    Otherwise, if A exists and is a nullable type and if b has a type B and an
+            // implicit  conversion exists from A0 to B,
+            // SPEC PROPOSAL:    the result type is B. At run-time, a is first evaluated. If a is not null, a is
+            // unwrapped to type A0 and converted to type B,
             // SPEC PROPOSAL:    and this becomes the result. Otherwise, b is evaluated and becomes the result.
             //
-            // SPEC PROPOSAL:    Otherwise, if A does not exist or is a non-nullable type and if b has a type B and an implicit conversion exists from a to B,
-            // SPEC PROPOSAL:    the result type is B. At run-time, a is first evaluated. If a is not null, a is converted to type B, and this becomes the result.
+            // SPEC PROPOSAL:    Otherwise, if A does not exist or is a non-nullable type and if b has a type B
+            // and an implicit conversion exists from a to B,
+            // SPEC PROPOSAL:    the result type is B. At run-time, a is first evaluated. If a is not null, a is
+            // converted to type B, and this becomes the result.
             // SPEC PROPOSAL:    Otherwise, b is evaluated and becomes the result.
 
             string source =
@@ -6796,7 +6809,8 @@ class C
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_3);
             comp.VerifyDiagnostics(
-                // (6,14): error CS8652: The feature 'unconstrained type parameters in null coalescing operator' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (6,14): error CS8652: The feature 'unconstrained type parameters in null coalescing operator' is
+                // not available in C# 7.3. Please use language version 8.0 or greater.
                 //         t1 = t1 ?? t2;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "t1 ?? t2")
                     .WithArguments(
@@ -7028,12 +7042,14 @@ namespace BadImageFormatExceptionRepro
 
             var verifier = CompileAndVerify(code, expectedOutput: "Run");
             verifier.VerifyDiagnostics(
-                // (9,33): warning CS0660: 'Program.Wrapper<T>' defines operator == or operator != but does not override Object.Equals(object o)
+                // (9,33): warning CS0660: 'Program.Wrapper<T>' defines operator == or operator != but does not
+                // override Object.Equals(object o)
                 //         private readonly struct Wrapper<T>
                 Diagnostic(ErrorCode.WRN_EqualityOpWithoutEquals, "Wrapper")
                     .WithArguments("BadImageFormatExceptionRepro.Program.Wrapper<T>")
                     .WithLocation(9, 33),
-                // (9,33): warning CS0661: 'Program.Wrapper<T>' defines operator == or operator != but does not override Object.GetHashCode()
+                // (9,33): warning CS0661: 'Program.Wrapper<T>' defines operator == or operator != but does not
+                // override Object.GetHashCode()
                 //         private readonly struct Wrapper<T>
                 Diagnostic(ErrorCode.WRN_EqualityOpWithoutGetHashCode, "Wrapper")
                     .WithArguments("BadImageFormatExceptionRepro.Program.Wrapper<T>")
@@ -7193,16 +7209,19 @@ namespace BadImageFormatExceptionRepro
                 targetFramework: TargetFramework.Net60
             );
             comp.VerifyDiagnostics(
-                // (16,71): error CS8927: An expression tree may not contain an access of static virtual or abstract interface member
+                // (16,71): error CS8927: An expression tree may not contain an access of static virtual or abstract
+                // interface member
                 //             Func<Expression<Func<T, T, bool>>> func = () => (x, y) => x == y;
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAbstractStaticMemberAccess, "x == y")
                     .WithLocation(16, 71),
-                // (29,11): warning CS0660: 'C' defines operator == or operator != but does not override Object.Equals(object o)
+                // (29,11): warning CS0660: 'C' defines operator == or operator != but does not override
+                // Object.Equals(object o)
                 //     class C : I<C>
                 Diagnostic(ErrorCode.WRN_EqualityOpWithoutEquals, "C")
                     .WithArguments("BadImageFormatExceptionRepro.C")
                     .WithLocation(29, 11),
-                // (29,11): warning CS0661: 'C' defines operator == or operator != but does not override Object.GetHashCode()
+                // (29,11): warning CS0661: 'C' defines operator == or operator != but does not override
+                // Object.GetHashCode()
                 //     class C : I<C>
                 Diagnostic(ErrorCode.WRN_EqualityOpWithoutGetHashCode, "C")
                     .WithArguments("BadImageFormatExceptionRepro.C")
@@ -7253,7 +7272,8 @@ namespace BadImageFormatExceptionRepro
                 targetFramework: TargetFramework.Net60
             );
             comp.VerifyDiagnostics(
-                // (16,62): error CS8927: An expression tree may not contain an access of static virtual or abstract interface member
+                // (16,62): error CS8927: An expression tree may not contain an access of static virtual or abstract
+                // interface member
                 //             Func<Expression<Func<T, T>>> func = () => (x) => +x;
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAbstractStaticMemberAccess, "+x")
                     .WithLocation(16, 62)
@@ -7633,7 +7653,8 @@ namespace BadImageFormatExceptionRepro
                 targetFramework: TargetFramework.Net60
             );
             comp.VerifyDiagnostics(
-                // (16,68): error CS8927: An expression tree may not contain an access of static virtual or abstract interface member
+                // (16,68): error CS8927: An expression tree may not contain an access of static virtual or abstract
+                // interface member
                 //             Func<Expression<Func<T, T, T>>> func = () => (x, y) => x && y;
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAbstractStaticMemberAccess, "x && y")
                     .WithLocation(16, 68)
@@ -7695,7 +7716,8 @@ namespace BadImageFormatExceptionRepro
                 targetFramework: TargetFramework.Net60
             );
             comp.VerifyDiagnostics(
-                // (16,68): error CS8927: An expression tree may not contain an access of static virtual or abstract interface member
+                // (16,68): error CS8927: An expression tree may not contain an access of static virtual or abstract
+                // interface member
                 //             Func<Expression<Func<T, T, T>>> func = () => (x, y) => x || y;
                 Diagnostic(ErrorCode.ERR_ExpressionTreeContainsAbstractStaticMemberAccess, "x || y")
                     .WithLocation(16, 68)

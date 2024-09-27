@@ -349,8 +349,10 @@ namespace LibraryImportGenerator.UnitTests
                 CodeSnippets.MarshalAsParametersAndModifiers<object>(UnmanagedType.Interface),
             };
             // TODO: Do we want to limit support of UnmanagedType.Interface to a subset of types?
-            // TODO: Should we block delegate types as they use to have special COM interface marshalling that we have since
-            // blocked? Blocking it would help .NET Framework->.NET migration as there wouldn't be a silent behavior change.
+            // TODO: Should we block delegate types as they use to have special COM interface marshalling that
+            // we have since
+            // blocked? Blocking it would help .NET Framework->.NET migration as there wouldn't be a silent
+            // behavior change.
             yield return new[]
             {
                 ID(),
@@ -1761,7 +1763,8 @@ namespace LibraryImportGenerator.UnitTests
 
         public static IEnumerable<object[]> CodeSnippetsToValidateFallbackForwarder()
         {
-            //yield return new object[] { ID(), CodeSnippets.UserDefinedEntryPoint, TestTargetFramework.Net, true };
+            //yield return new object[] { ID(), CodeSnippets.UserDefinedEntryPoint, TestTargetFramework.Net,
+            // true };
 
             // Confirm that all unsupported target frameworks can be generated.
             {
@@ -1797,7 +1800,8 @@ namespace LibraryImportGenerator.UnitTests
                 yield return new object[] { ID(), code, TestTargetFramework.Framework, true };
             }
 
-            // Confirm that if support is missing for any type (like arrays), we fall back to a forwarder even if other types are supported.
+            // Confirm that if support is missing for any type (like arrays), we fall back to a forwarder even
+            // if other types are supported.
             {
                 string code = CodeSnippets.BasicReturnAndParameterByValue(
                     "System.Runtime.InteropServices.SafeHandle",
@@ -2029,9 +2033,12 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ValidateSnippetsWithMultipleSources(string id, string[] sources)
         {
             TestUtils.Use(id);
-            // To enable us to reuse snippets that have markup locations in our multiple-sources test, we'll strip out the markup locations.
-            // We need to do this as each snippet expects to be able to define all expected markup locations (starting from 0), so including multiple snippets
-            // results in multiple definitions for the same location (which doesn't work). Since we expect no diagnostics, we can strip out the locations.
+            // To enable us to reuse snippets that have markup locations in our multiple-sources test, we'll
+            // strip out the markup locations.
+            // We need to do this as each snippet expects to be able to define all expected markup locations
+            // (starting from 0), so including multiple snippets
+            // results in multiple definitions for the same location (which doesn't work). Since we expect no
+            // diagnostics, we can strip out the locations.
             await VerifyCS.VerifySourceGeneratorAsync(sources.Select(RemoveTestMarkup).ToArray());
         }
 

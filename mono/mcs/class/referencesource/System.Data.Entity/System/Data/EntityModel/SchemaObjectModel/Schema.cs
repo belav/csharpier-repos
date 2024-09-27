@@ -36,8 +36,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
         // if adding properties also add to InitializeObject()!
         private List<EdmSchemaError> _errors = new List<EdmSchemaError>();
 
-        // We need to keep track of functions seperately, since we can't deduce the strong name of the function,
-        // until we have resolved the parameter names. Hence we keep track of functions seperately and add them
+        // We need to keep track of functions seperately, since we can't deduce the strong name of the
+        // function,
+        // until we have resolved the parameter names. Hence we keep track of functions seperately and add
+        // them
         // to the schema types list, in the validate phase
         private List<Function> _functions = null;
 
@@ -370,10 +372,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
             )
             {
                 //For V1 Schemas, we never returned errors for elements in custom namespaces.
-                //But the behavior is not totally correct since the error might have occured inside a known namespace
-                //even though the element that the reader pointing to is in a custom namespace. But if we fix that, it would
+                //But the behavior is not totally correct since the error might have occured inside a known
+                // namespace
+                //even though the element that the reader pointing to is in a custom namespace. But if we fix that,
+                // it would
                 //cause lot of breaking changes for V1 customers since we can not change the xsd for them.
-                //For attributes, we can ignore the errors always since attributes are unordered and custom attributes should always be allowed.
+                //For attributes, we can ignore the errors always since attributes are unordered and custom
+                // attributes should always be allowed.
                 if (
                     (this.SchemaVersion == XmlConstants.EdmVersionForV1)
                     || (this.SchemaVersion == XmlConstants.EdmVersionForV1_1)
@@ -382,7 +387,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     return;
                 }
                 // For V2 Schemas that have custom namespaces, the only thing we would not catch are warnings.
-                //We also need to ignore any errors reported on custom namespace since they would become annotations.
+                //We also need to ignore any errors reported on custom namespace since they would become
+                // annotations.
                 Debug.Assert(
                     this.SchemaVersion >= XmlConstants.EdmVersionForV2
                         || SchemaVersion == XmlConstants.UndefinedVersion,
@@ -397,8 +403,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 }
             }
 
-            //Ignore the warnings for attributes in V2 since we would see warnings for undeclared attributes in empty namespace
-            //that are on elements in custom namespace. For undeclared attributes in known namespace, we would see errors.
+            //Ignore the warnings for attributes in V2 since we would see warnings for undeclared attributes in
+            // empty namespace
+            //that are on elements in custom namespace. For undeclared attributes in known namespace, we would
+            // see errors.
             if (
                 (this.SchemaVersion >= XmlConstants.EdmVersionForV2)
                 && (reader.NodeType == XmlNodeType.Attribute)
@@ -555,8 +563,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 );
             }
 
-            // Check whether the schema namespace is a system namespace. We set the provider manifest to edm provider manifest
-            // if we need to check for system namespace. Otherwise, it will be set to null (if we are loading edm provider manifest)
+            // Check whether the schema namespace is a system namespace. We set the provider manifest to edm
+            // provider manifest
+            // if we need to check for system namespace. Otherwise, it will be set to null (if we are loading
+            // edm provider manifest)
             if (
                 ProviderManifest != null
                 && EdmItemCollection.IsSystemNamespace(ProviderManifest, Namespace)
@@ -942,7 +952,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
             }
 
             string namespaceName;
-            // First check if there is an alias defined by this name. For primitive type namespace, we do not need to resolve
+            // First check if there is an alias defined by this name. For primitive type namespace, we do not
+            // need to resolve
             // any alias, since that's a reserved keyword and we don't allow alias with that name
             if (
                 actualQualification == null
@@ -1002,7 +1013,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 }
                 return false;
             }
-            // For ssdl and provider manifest, make sure that the type is present in this schema or primitive schema
+            // For ssdl and provider manifest, make sure that the type is present in this schema or primitive
+            // schema
             else if (
                 this.DataModel != SchemaDataModelOption.EntityDataModel
                 && type.Schema != this
@@ -1027,7 +1039,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Internal Properties
         /// <summary>
-        /// List containing the current schema and all referenced schemas. Used for alias and namespace lookup.
+        /// List containing the current schema and all referenced schemas. Used for alias and namespace
+        // lookup.
         /// </summary>
         internal AliasResolver AliasResolver
         {

@@ -1403,7 +1403,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ToStringTest()
         {
-            // NB: These were && and || in .NET 3.5 but shipped as AndAlso and OrElse in .NET 4.0; we kept the latter.
+            // NB: These were && and || in .NET 3.5 but shipped as AndAlso and OrElse in .NET 4.0; we kept the
+            // latter.
 
             BinaryExpression e1 = Expression.AndAlso(
                 Expression.Parameter(typeof(bool), "a"),

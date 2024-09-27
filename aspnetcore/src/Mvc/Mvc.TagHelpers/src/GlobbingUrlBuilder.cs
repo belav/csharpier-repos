@@ -76,7 +76,8 @@ public class GlobbingUrlBuilder
     /// <summary>
     /// Builds a list of URLs.
     /// </summary>
-    /// <param name="staticUrl">The statically declared URL. This will always be added to the result.</param>
+    /// <param name="staticUrl">The statically declared URL. This will always be added to the
+    // result.</param>
     /// <param name="includePattern">The file globbing include pattern.</param>
     /// <param name="excludePattern">The file globbing exclude pattern.</param>
     /// <returns>The list of URLs</returns>
@@ -210,7 +211,8 @@ public class GlobbingUrlBuilder
             var yLength = yExtIndex >= 0 ? yExtIndex : y.Length;
             var compareLength = Math.Max(xLength, yLength);
 
-            // In the resulting sequence, we want shorter paths to appear prior to longer paths. For paths of equal
+            // In the resulting sequence, we want shorter paths to appear prior to longer paths. For paths of
+            // equal
             // depth, we'll compare individual segments. The first segment that differs determines the result.
             // For e.g.
             // Foo.cshtml < Foo.xhtml

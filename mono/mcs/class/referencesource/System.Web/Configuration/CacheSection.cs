@@ -18,23 +18,29 @@ namespace System.Web.Configuration
     using System.Xml;
 
     /*
-            <!--
-            cache Attributes:
-              defaultProvider="name" - a name matching a provider in the provider list to use for Object and Internal cache.
-              cacheAPIEnabled="[true|false]" - Enable or disable the user Cache API
-              disableMemoryCollection="[true|false]" - Enable or disable the cache memory collection
-              disableExpiration="[true|false]" - Enable or disable the expiration of items from the cache
-              privateBytesLimit="number" - Represents maximum private bytes (in bytes) allowed. If it's zero, Cache will use an auto-generated limit. Cache will collect memory when the private bytes is near the limit. This works on top of other memory indexes monitored by Cache.
-              percentagePhysicalMemoryUsedLimit="number" - Represents percentage of physical memory process allowed. Cache will collect memory when the private bytes is near the limit. This works on top of other memory indexes monitored by Cache.
-              privateBytesPollTime="timespan" - How often we poll the process memory by calling NtQuerySystemInformation. Default is 2 min.
-               
-            -->
-            <cache cacheAPIEnabled="true" defaultProvider="name" >
-                <providers>
-                    <add name="string" type="string" ... />
-                </providers>
-            </cache>
-      */
+    <!--
+    cache Attributes:
+    defaultProvider="name" - a name matching a provider in the provider list to use for Object and
+    Internal cache.
+    cacheAPIEnabled="[true|false]" - Enable or disable the user Cache API
+    disableMemoryCollection="[true|false]" - Enable or disable the cache memory collection
+    disableExpiration="[true|false]" - Enable or disable the expiration of items from the cache
+    privateBytesLimit="number" - Represents maximum private bytes (in bytes) allowed. If it's zero,
+    Cache will use an auto-generated limit. Cache will collect memory when the private bytes is near the
+    limit. This works on top of other memory indexes monitored by Cache.
+    percentagePhysicalMemoryUsedLimit="number" - Represents percentage of physical memory process
+    allowed. Cache will collect memory when the private bytes is near the limit. This works on top of
+    other memory indexes monitored by Cache.
+    privateBytesPollTime="timespan" - How often we poll the process memory by calling
+    NtQuerySystemInformation. Default is 2 min.
+    
+    -->
+    <cache cacheAPIEnabled="true" defaultProvider="name" >
+    <providers>
+    <add name="string" type="string" ... />
+    </providers>
+    </cache>
+    */
 
     public sealed class CacheSection : ConfigurationSection
     {

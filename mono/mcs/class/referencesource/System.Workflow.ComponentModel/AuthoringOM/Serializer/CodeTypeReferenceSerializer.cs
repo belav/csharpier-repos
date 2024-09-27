@@ -54,7 +54,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 }
             }
             //
-            // If we get a real type make sure that we get the correct fully qualified name for the target framework version
+            // If we get a real type make sure that we get the correct fully qualified name for the target
+            // framework version
             string assemblyFullName = null;
             TypeProvider typeProvider =
                 serializationManager.GetService(typeof(ITypeProvider)) as TypeProvider;

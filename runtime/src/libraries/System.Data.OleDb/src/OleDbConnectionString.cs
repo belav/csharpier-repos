@@ -83,12 +83,15 @@ namespace System.Data.OleDb
         internal UnsafeNativeMethods.IDBCreateSessionCreateSession? DangerousIDBCreateSessionCreateSession;
         internal UnsafeNativeMethods.IDBCreateCommandCreateCommand? DangerousIDBCreateCommandCreateCommand;
 
-        // since IDBCreateCommand interface may not be supported for a particular provider (only IOpenRowset)
+        // since IDBCreateCommand interface may not be supported for a particular provider (only
+        // IOpenRowset)
         // we cache that fact rather than call QueryInterface on every call to Open
         internal bool HaveQueriedForCreateCommand;
 
-        // SxS: if user specifies a value for "File Name=" (UDL) in connection string, OleDbConnectionString will load the connection string
-        // from the UDL file. The UDL file is opened as FileMode.Open, FileAccess.Read, FileShare.Read, allowing concurrent access to it.
+        // SxS: if user specifies a value for "File Name=" (UDL) in connection string, OleDbConnectionString
+        // will load the connection string
+        // from the UDL file. The UDL file is opened as FileMode.Open, FileAccess.Read, FileShare.Read,
+        // allowing concurrent access to it.
         internal OleDbConnectionString(string connectionString, bool validate)
             : base(connectionString)
         {
@@ -317,7 +320,8 @@ namespace System.Data.OleDb
         private static string LoadStringFromFileStorage(string udlfilename)
         {
             // Microsoft Data Link File Format
-            // The first two lines of a .udl file must have exactly the following contents in order to work properly:
+            // The first two lines of a .udl file must have exactly the following contents in order to work
+            // properly:
             //  [oledb]
             //  ; Everything after this line is an OLE DB initstring
             //
@@ -420,9 +424,11 @@ namespace System.Data.OleDb
             ValidateProvider(progid); // will fail on empty 'Provider' value
 
             // initialize to default
-            // If the value is not provided in connection string and OleDbServices registry key has not been set by the provider,
+            // If the value is not provided in connection string and OleDbServices registry key has not been set
+            // by the provider,
             // the default for the provider is -1 (all services are ON).
-            // our default is -13, we turn off ODB.DBPROPVAL_OS_AGR_AFTERSESSION and ODB.DBPROPVAL_OS_CLIENTCURSOR flags
+            // our default is -13, we turn off ODB.DBPROPVAL_OS_AGR_AFTERSESSION and
+            // ODB.DBPROPVAL_OS_CLIENTCURSOR flags
             _oledbServices = DbConnectionStringDefaults.OleDbServices;
 
             bool hasOleDBServices = (

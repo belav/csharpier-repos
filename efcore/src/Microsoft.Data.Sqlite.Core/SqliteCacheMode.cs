@@ -4,7 +4,8 @@
 namespace Microsoft.Data.Sqlite
 {
     /// <summary>
-    ///     Represents the caching modes that can be used when creating a new <see cref="SqliteConnection" />.
+    ///     Represents the caching modes that can be used when creating a new <see
+    // cref="SqliteConnection" />.
     /// </summary>
     public enum SqliteCacheMode
     {
@@ -19,7 +20,8 @@ namespace Microsoft.Data.Sqlite
         Private,
 
         /// <summary>
-        ///     Shared-cache mode. Connections share a cache. This mode can change the behavior of transaction and table
+        ///     Shared-cache mode. Connections share a cache. This mode can change the behavior of
+        // transaction and table
         ///     locking.
         /// </summary>
         /// <seealso href="https://www.sqlite.org/sharedcache.html">SQLite Shared-Cache Mode</seealso>

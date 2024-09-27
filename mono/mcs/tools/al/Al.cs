@@ -752,9 +752,9 @@ namespace Mono.AssemblyLinker
 
             AssemblyBuilder ab;
 
-            /*
-             * Emit Manifest
-             * */
+/*
+* Emit Manifest
+* */
 
             if (isTemplateFile)
                 aname = ReadCustomAttributesFromTemplateFile(templateFile, aname);
@@ -786,9 +786,9 @@ namespace Mono.AssemblyLinker
             foreach (CustomAttributeBuilder cb in cattrs)
                 ab.SetCustomAttribute(cb);
 
-            /*
-             * Emit modules
-             */
+/*
+* Emit modules
+*/
 
             foreach (ModuleInfo mod in inputFiles)
             {
@@ -812,9 +812,9 @@ namespace Mono.AssemblyLinker
                     ab.__AddModule(universe.OpenRawModule(mod.fileName));
             }
 
-            /*
-             * Set entry point
-             */
+/*
+* Set entry point
+*/
 
             if (entryPoint != null)
             {
@@ -839,9 +839,9 @@ namespace Mono.AssemblyLinker
                     Report(1037, "Unable to find the entry point method '" + entryPoint + "'");
             }
 
-            /*
-             * Emit resources
-             */
+/*
+* Emit resources
+*/
 
             ab.DefineVersionInfoResource();
 

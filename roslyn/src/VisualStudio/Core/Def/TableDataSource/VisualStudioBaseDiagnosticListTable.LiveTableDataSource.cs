@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         /// <summary>
         /// Error list diagnostic source for "Build + Intellisense" setting.
-        /// See <see cref="VisualStudioDiagnosticListTableWorkspaceEventListener.VisualStudioDiagnosticListTable.BuildTableDataSource"/>
+        /// See <see
+        // cref="VisualStudioDiagnosticListTableWorkspaceEventListener.VisualStudioDiagnosticListTable.BuildTableDataSource"/>
         /// for error list diagnostic source for "Build only" setting.
         /// </summary>
         protected class LiveTableDataSource
@@ -53,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             /// <summary>
             /// Flag indicating if a build inside Visual Studio is in progress.
-            /// We get build progress updates from <see cref="ExternalErrorDiagnosticUpdateSource.BuildProgressChanged"/>.
+            /// We get build progress updates from <see
+            // cref="ExternalErrorDiagnosticUpdateSource.BuildProgressChanged"/>.
             /// Build progress events are guaranteed to be invoked in a serial fashion during build.
             /// </summary>
             private bool _isBuildRunning;
@@ -204,7 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             {
                 var diagnosticMode = GlobalOptions.GetDiagnosticMode();
 
-                // If we're not in Solution-Crawler mode, then don't add any diagnostics to the table.  Instead, the LSP
+                // If we're not in Solution-Crawler mode, then don't add any diagnostics to the table.  Instead, the
+                // LSP
                 // client will be handling everything.
                 var diagnostics =
                     diagnosticMode != DiagnosticMode.SolutionCrawlerPush
@@ -351,7 +354,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 // Deterministically order the items.
                 //
                 // TODO: unclear why we are comparing OriginalFileSpan and not the final normalized span.  This may
-                // indicate a bug. If it is correct behavior, this should be documented as to why this is the right span
+                // indicate a bug. If it is correct behavior, this should be documented as to why this is the right
+                // span
                 // to be considering.
                 return groupedItems
                     .OrderBy(d => d.Data.DataLocation.UnmappedFileSpan.StartLinePosition)
@@ -575,12 +579,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             //
                             // when live errors are involved, by default, error list will use the following to sort errors
                             // error rank > project rank > project name > file name > line > column
-                            // which will basically make syntax errors show up before declaration error and method body semantic errors
-                            // among same type of errors, leaf project's error will show up first and then projects that depends on the leaf projects
+                            // which will basically make syntax errors show up before declaration error and method body semantic
+                            // errors
+                            // among same type of errors, leaf project's error will show up first and then projects that depends
+                            // on the leaf projects
                             //
-                            // any build errors mixed with live errors will show up at the end. when live errors are on, some of errors
-                            // still left as build errors such as errors produced after CompilationStages.Compile or ones listed here
-                            // http://source.roslyn.io/#Microsoft.CodeAnalysis.CSharp/Compilation/CSharpCompilerDiagnosticAnalyzer.cs,23 or similar ones for VB
+                            // any build errors mixed with live errors will show up at the end. when live errors are on, some of
+                            // errors
+                            // still left as build errors such as errors produced after CompilationStages.Compile or ones listed
+                            // here
+                            //
+                            // http://source.roslyn.io/#Microsoft.CodeAnalysis.CSharp/Compilation/CSharpCompilerDiagnosticAnalyzer.cs,23
+                            // or similar ones for VB
                             // and etc.
                             return ErrorRank.PostBuild;
                         case nameof(ErrorRank.Lexical):

@@ -39,7 +39,8 @@ namespace Internal.Runtime.TypeLoader
 
             public override bool Equals(object obj)
             {
-                // There are no scenarios where we call .Equals to check the componentized equality (we explicitly use IsEqualToEntryByComponentsComparison for that),
+                // There are no scenarios where we call .Equals to check the componentized equality (we explicitly
+                // use IsEqualToEntryByComponentsComparison for that),
                 // so making sure we revert to the reference equality in case someone calls here.
                 return base.Equals(obj);
             }
@@ -113,7 +114,8 @@ namespace Internal.Runtime.TypeLoader
                 Debug.Assert(typeToLookup != null);
                 _typeToLookup = typeToLookup;
                 _genericTypeDefinitionHandle = _typeToLookup.GetTypeDefinition().RuntimeTypeHandle;
-                // _genericTypeArgumentHandles not initialized here to avoid allocation of new array (and it's not used if we initialize _typeToLookup).
+                // _genericTypeArgumentHandles not initialized here to avoid allocation of new array (and it's not
+                // used if we initialize _typeToLookup).
             }
 
             internal GenericTypeLookupData(
@@ -242,7 +244,8 @@ namespace Internal.Runtime.TypeLoader
             new LowLevelDictionary<LazyDictionaryContext, IntPtr>();
 
         //
-        // Return a generic type instantiation using the runtime type system. If the underlying runtime type system does not support
+        // Return a generic type instantiation using the runtime type system. If the underlying runtime type
+        // system does not support
         // this operation, return false.
         //
         internal bool TryLookupConstructedGenericTypeForComponents(

@@ -26,13 +26,16 @@ namespace Microsoft.CodeAnalysis.Emit
         public bool EmitMetadataOnly { get; private set; }
 
         /// <summary>
-        /// Tolerate errors, producing a PE stream and a success result even in the presence of (some) errors.
+        /// Tolerate errors, producing a PE stream and a success result even in the presence of (some)
+        // errors.
         /// </summary>
         public bool TolerateErrors { get; private set; }
 
         /// <summary>
-        /// Unless set (private) members that don't affect the language semantics of the resulting assembly will be excluded
-        /// when emitting metadata-only assemblies as primary output (with <see cref="EmitMetadataOnly"/> on).
+        /// Unless set (private) members that don't affect the language semantics of the resulting assembly
+        // will be excluded
+        /// when emitting metadata-only assemblies as primary output (with <see cref="EmitMetadataOnly"/>
+        // on).
         /// If emitting a secondary output, this flag is required to be false.
         /// </summary>
         public bool IncludePrivateMembers { get; private set; }
@@ -52,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// </summary>
         /// <remarks>
         /// Valid values are 0, 512, 1024, 2048, 4096 and 8192.
-        /// If the value is 0 the file alignment is determined based upon the value of <see cref="Platform"/>.
+        /// If the value is 0 the file alignment is determined based upon the value of <see
+        // cref="Platform"/>.
         /// </remarks>
         public int FileAlignment { get; private set; }
 
@@ -75,11 +79,14 @@ namespace Microsoft.CodeAnalysis.Emit
         /// Assembly name override - file name and extension. If not specified the compilation name is used.
         /// </summary>
         /// <remarks>
-        /// By default the name of the output assembly is <see cref="Compilation.AssemblyName"/>. Only in rare cases it is necessary
+        /// By default the name of the output assembly is <see cref="Compilation.AssemblyName"/>. Only in
+        // rare cases it is necessary
         /// to override the name.
         ///
-        /// CAUTION: If this is set to a (non-null) value other than the existing compilation output name, then internals-visible-to
-        /// and assembly references may not work as expected.  In particular, things that were visible at bind time, based on the
+        /// CAUTION: If this is set to a (non-null) value other than the existing compilation output name,
+        // then internals-visible-to
+        /// and assembly references may not work as expected.  In particular, things that were visible at
+        // bind time, based on the
         /// name of the compilation, may not be visible at runtime and vice-versa.
         /// </remarks>
         public string? OutputNameOverride { get; private set; }
@@ -94,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         /// <summary>
         /// A crypto hash algorithm used to calculate PDB Checksum stored in the PE/COFF File.
-        /// If not specified (the value is <c>default(HashAlgorithmName)</c>) the checksum is not calculated.
+        /// If not specified (the value is <c>default(HashAlgorithmName)</c>) the checksum is not
+        // calculated.
         /// </summary>
         public HashAlgorithmName PdbChecksumAlgorithm { get; private set; }
 
@@ -110,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Emit
         public Encoding? DefaultSourceFileEncoding { get; private set; }
 
         /// <summary>
-        /// If <see cref="DefaultSourceFileEncoding"/> is not specified, the encoding used to parse source files
+        /// If <see cref="DefaultSourceFileEncoding"/> is not specified, the encoding used to parse source
+        // files
         /// that do not declare their encoding via Byte Order Mark and are not UTF-8 encoded.
         /// </summary>
         public Encoding? FallbackSourceFileEncoding { get; private set; }

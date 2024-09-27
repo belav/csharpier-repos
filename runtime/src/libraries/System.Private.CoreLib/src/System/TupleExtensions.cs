@@ -9,7 +9,8 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     /// <summary>
-    /// Provides extension methods for <see cref="Tuple"/> instances to interop with C# tuples features (deconstruction syntax, converting from and to <see cref="ValueTuple"/>).
+    /// Provides extension methods for <see cref="Tuple"/> instances to interop with C# tuples features
+    // (deconstruction syntax, converting from and to <see cref="ValueTuple"/>).
     /// </summary>
     public static class TupleExtensions
     {
@@ -878,7 +879,8 @@ namespace System
 
         #region ToValueTuple
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 1 element.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 1 element.
         /// </summary>
         public static ValueTuple<T1> ToValueTuple<T1>(this Tuple<T1> value)
         {
@@ -886,7 +888,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 2 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 2 elements.
         /// </summary>
         public static ValueTuple<T1, T2> ToValueTuple<T1, T2>(this Tuple<T1, T2> value)
         {
@@ -894,7 +897,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 3 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 3 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3> ToValueTuple<T1, T2, T3>(this Tuple<T1, T2, T3> value)
         {
@@ -902,7 +906,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 4 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 4 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4> ToValueTuple<T1, T2, T3, T4>(
             this Tuple<T1, T2, T3, T4> value
@@ -912,7 +917,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 5 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 5 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5> ToValueTuple<T1, T2, T3, T4, T5>(
             this Tuple<T1, T2, T3, T4, T5> value
@@ -928,7 +934,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 6 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 6 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5, T6> ToValueTuple<T1, T2, T3, T4, T5, T6>(
             this Tuple<T1, T2, T3, T4, T5, T6> value
@@ -945,7 +952,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 7 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 7 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5, T6, T7> ToValueTuple<
             T1,
@@ -969,7 +977,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 8 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 8 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5, T6, T7, ValueTuple<T8>> ToValueTuple<
             T1,
@@ -995,7 +1004,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 9 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 9 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5, T6, T7, ValueTuple<T8, T9>> ToValueTuple<
             T1,
@@ -1022,7 +1032,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 10 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 10 elements.
         /// </summary>
         public static ValueTuple<T1, T2, T3, T4, T5, T6, T7, ValueTuple<T8, T9, T10>> ToValueTuple<
             T1,
@@ -1050,7 +1061,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 11 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 11 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1083,7 +1095,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 12 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 12 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1117,7 +1130,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 13 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 13 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1152,7 +1166,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 14 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 14 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1188,7 +1203,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 15 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 15 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1234,7 +1250,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 16 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 16 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1280,7 +1297,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 17 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 17 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1330,7 +1348,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 18 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 18 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1400,7 +1419,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 19 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 19 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1472,7 +1492,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 20 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 20 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1546,7 +1567,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with 21 elements.
+        /// Make a properly nested <see cref="ValueTuple"/> from a properly nested <see cref="Tuple"/> with
+        // 21 elements.
         /// </summary>
         public static ValueTuple<
             T1,
@@ -1633,7 +1655,8 @@ namespace System
 
         #region ToTuple
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 1 element.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 1 element.
         /// </summary>
         public static Tuple<T1> ToTuple<T1>(this ValueTuple<T1> value)
         {
@@ -1641,7 +1664,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 2 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 2 elements.
         /// </summary>
         public static Tuple<T1, T2> ToTuple<T1, T2>(this ValueTuple<T1, T2> value)
         {
@@ -1649,7 +1673,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 3 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 3 elements.
         /// </summary>
         public static Tuple<T1, T2, T3> ToTuple<T1, T2, T3>(this ValueTuple<T1, T2, T3> value)
         {
@@ -1657,7 +1682,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 4 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 4 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4> ToTuple<T1, T2, T3, T4>(
             this ValueTuple<T1, T2, T3, T4> value
@@ -1667,7 +1693,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 5 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 5 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5> ToTuple<T1, T2, T3, T4, T5>(
             this ValueTuple<T1, T2, T3, T4, T5> value
@@ -1677,7 +1704,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 6 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 6 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6> ToTuple<T1, T2, T3, T4, T5, T6>(
             this ValueTuple<T1, T2, T3, T4, T5, T6> value
@@ -1694,7 +1722,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 7 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 7 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7> ToTuple<T1, T2, T3, T4, T5, T6, T7>(
             this ValueTuple<T1, T2, T3, T4, T5, T6, T7> value
@@ -1712,7 +1741,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 8 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 8 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> ToTuple<
             T1,
@@ -1738,7 +1768,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 9 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 9 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> ToTuple<
             T1,
@@ -1765,7 +1796,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 10 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 10 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> ToTuple<
             T1,
@@ -1793,7 +1825,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 11 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 11 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> ToTuple<
             T1,
@@ -1822,7 +1855,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 12 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 12 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> ToTuple<
             T1,
@@ -1858,7 +1892,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 13 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 13 elements.
         /// </summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> ToTuple<
             T1,
@@ -1896,7 +1931,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 14 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 14 elements.
         /// </summary>
         public static Tuple<
             T1,
@@ -1941,7 +1977,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 15 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 15 elements.
         /// </summary>
         public static Tuple<
             T1,
@@ -1987,7 +2024,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 16 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 16 elements.
         /// </summary>
         public static Tuple<
             T1,
@@ -2033,7 +2071,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 17 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 17 elements.
         /// </summary>
         public static Tuple<
             T1,
@@ -2083,7 +2122,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 18 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 18 elements.
         /// </summary>
         public static Tuple<
             T1,
@@ -2134,7 +2174,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 19 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 19 elements.
         /// </summary>
         public static Tuple<
             T1,
@@ -2206,7 +2247,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 20 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 20 elements.
         /// </summary>
         public static Tuple<
             T1,
@@ -2289,7 +2331,8 @@ namespace System
         }
 
         /// <summary>
-        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with 21 elements.
+        /// Make a properly nested <see cref="Tuple"/> from a properly nested <see cref="ValueTuple"/> with
+        // 21 elements.
         /// </summary>
         public static Tuple<
             T1,

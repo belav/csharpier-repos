@@ -29,7 +29,8 @@ namespace System.Web.Hosting
 
     internal sealed class IIS7WorkerRequest : HttpWorkerRequest
     {
-        // In http.h, Translate is 39 and User-Agent is 40, but in WorkerRequest.cs Translate is unknown and User-Agent is 39
+        // In http.h, Translate is 39 and User-Agent is 40, but in WorkerRequest.cs Translate is unknown and
+        // User-Agent is 39
         private const int IisHeaderTranslate = 39;
         private const string IisHeaderTranslateName = "Translate";
         private const int IisHeaderUserAgent = 40;
@@ -189,7 +190,8 @@ namespace System.Web.Hosting
             }
             _pCookedUrl = pCookedUrl;
 
-            // path-info is the trailing part of the URL, after the script name, but before the query string (if any).
+            // path-info is the trailing part of the URL, after the script name, but before the query string (if
+            // any).
             // E.g., if the URL is "/test.aspx/Something", then path-info is "/Something"
 
             _path = GetUriPathInternal(
@@ -831,7 +833,8 @@ namespace System.Web.Hosting
             }
         }
 
-        // Finish an asynchronous read.  When this returns zero there is no more to be read.  If Request.ContentLength is non-zero,
+        // Finish an asynchronous read.  When this returns zero there is no more to be read.  If
+        // Request.ContentLength is non-zero,
         // do not read more bytes then specified by ContentLength, or an error will occur.
         // This implements Stream.EndRead on HttpBufferlessInputStream, and as such, should throw
         // exceptions as described on MSDN when errors occur.
@@ -1253,7 +1256,8 @@ namespace System.Web.Hosting
                 "SendResponseFromIISAllocatedRequestMemory(IntPtr, int)"
             );
 
-            // WOS 1926509: ASP.NET:  WriteSubstitution in integrated mode needs to support callbacks that return String.Empty
+            // WOS 1926509: ASP.NET:  WriteSubstitution in integrated mode needs to support callbacks that
+            // return String.Empty
             if (data != IntPtr.Zero && length >= 0)
             {
                 AddBodyToCachedResponse(
@@ -1868,7 +1872,8 @@ namespace System.Web.Hosting
             set { _trySkipIisCustomErrors = value; }
         }
 
-        // This should only be used to fix up the handler mapping and paths after a call to HttpContext.RewritePath
+        // This should only be used to fix up the handler mapping and paths after a call to
+        // HttpContext.RewritePath
         internal string ReMapHandlerAndGetHandlerTypeString(
             HttpContext httpContext,
             string path,
@@ -2575,7 +2580,8 @@ namespace System.Web.Hosting
 
         private void SetUnknownResponseHeader(string name, string value, bool replace)
         {
-            // DevDiv 113142 & 255268: We should disable both the HTTP.SYS kernel cache and the IIS user-mode cache
+            // DevDiv 113142 & 255268: We should disable both the HTTP.SYS kernel cache and the IIS user-mode
+            // cache
             // for response with set-cookie header
             if (StringUtil.EqualsIgnoreCase(name, "Set-Cookie"))
             {
@@ -2733,7 +2739,8 @@ namespace System.Web.Hosting
                         {
                             throw new NotSupportedException();
                         }
-                        // Dev10 767257: IIS always sets known "Server" header to an empty string, and an unknown "Server" header with the value
+                        // Dev10 767257: IIS always sets known "Server" header to an empty string, and an unknown "Server"
+                        // header with the value
                         if (index == HttpWorkerRequest.HeaderServer)
                             continue;
 
@@ -3265,7 +3272,8 @@ namespace System.Web.Hosting
             return (GetServerVariableInternal("WEBSOCKET_VERSION") != null);
         }
 
-        // Returns a value indicating whether iiswsock.dll has interpreted the current request as a WebSocket request
+        // Returns a value indicating whether iiswsock.dll has interpreted the current request as a
+        // WebSocket request
         internal bool IsWebSocketRequest()
         {
             return String.Equals(
@@ -3298,7 +3306,8 @@ namespace System.Web.Hosting
             }
         }
 
-        // Returns a Boolean indicating whether the current request is a child request of a parent ASP.NET request
+        // Returns a Boolean indicating whether the current request is a child request of a parent ASP.NET
+        // request
         internal bool GetIsChildRequest()
         {
             bool isChildRequest;

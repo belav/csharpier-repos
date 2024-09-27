@@ -17,7 +17,8 @@ namespace System.Web.UI.WebControls
         private bool _isTracking;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DataKeyArray'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DataKeyArray'/>
+        // class.</para>
         /// </devdoc>
         public DataKeyArray(ArrayList keys)
         {
@@ -33,7 +34,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the value that specifies whether items in the <see cref='System.Web.UI.WebControls.DataKeyArray'/> can be
+        /// <para>Gets the value that specifies whether items in the <see
+        // cref='System.Web.UI.WebControls.DataKeyArray'/> can be
         ///    modified. This property is read-only.</para>
         /// </devdoc>
         public bool IsReadOnly
@@ -42,7 +44,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a value that indicates whether the <see cref='System.Web.UI.WebControls.DataKeyArray'/> is
+        /// <para>Gets a value that indicates whether the <see
+        // cref='System.Web.UI.WebControls.DataKeyArray'/> is
         ///    thread-safe. This property is read-only.</para>
         /// </devdoc>
         public bool IsSynchronized
@@ -51,7 +54,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets the object used to synchronize access to the collection. This property is read-only. </para>
+        ///    <para>Gets the object used to synchronize access to the collection. This property is
+        // read-only. </para>
         /// </devdoc>
         public object SyncRoot
         {
@@ -59,7 +63,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a <see cref='DataKey' qualify='true'/> at the specified index in the collection. This property is read-only.</para>
+        /// <para>Gets a <see cref='DataKey' qualify='true'/> at the specified index in the collection. This
+        // property is read-only.</para>
         /// </devdoc>
         public DataKey this[int index]
         {
@@ -67,7 +72,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies the contents of the entire collection into an <see cref='System.Array' qualify='true'/> appending at
+        /// <para>Copies the contents of the entire collection into an <see cref='System.Array'
+        // qualify='true'/> appending at
         ///    the specified index of the <see cref='System.Array' qualify='true'/>.</para>
         /// </devdoc>
         public void CopyTo(DataKey[] array, int index)
@@ -83,7 +89,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Creates an enumerator for the <see cref='System.Web.UI.WebControls.DataKeyArray'/> used to iterate
+        /// <para>Creates an enumerator for the <see cref='System.Web.UI.WebControls.DataKeyArray'/> used to
+        // iterate
         ///    through the collection.</para>
         /// </devdoc>
         public IEnumerator GetEnumerator()

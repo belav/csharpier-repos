@@ -283,7 +283,8 @@ namespace System.Runtime.Serialization
                 );
 
                 //if (clrType.IsValueType != dcType.IsValueType)
-                //    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)));
+                //    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+                // InvalidDataContractException(SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)));
                 return DataContract.GetStableName(dcType);
             }
             return DataContract.GetStableName(clrType);
@@ -301,7 +302,8 @@ namespace System.Runtime.Serialization
                 clrType
             );
             //if (clrType.IsValueType != dcType.IsValueType)
-            //    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)));
+            //    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+            // InvalidDataContractException(SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)));
             dataContract = DataContract.GetDataContract(dcType);
             if (!SurrogateDataTable.Contains(dataContract))
             {
@@ -677,9 +679,11 @@ namespace System.Runtime.Serialization
             }
             catch (Exception ex)
             {
-                // An exception can be thrown in the designer when a project has a runtime binding redirection for a referenced assembly or a reference dependent assembly.
+                // An exception can be thrown in the designer when a project has a runtime binding redirection for a
+                // referenced assembly or a reference dependent assembly.
                 // Type.IsDefined is known to throw System.IO.FileLoadException.
-                // ClassDataContract.IsNonAttributedTypeValidForSerialization is known to throw System.IO.FileNotFoundException.
+                // ClassDataContract.IsNonAttributedTypeValidForSerialization is known to throw
+                // System.IO.FileNotFoundException.
                 // We guard against all non-critical exceptions.
                 if (Fx.IsFatal(ex))
                 {

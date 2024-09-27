@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -42,7 +43,8 @@ namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
             // https://github.com/dotnet/linker/issues/2921
             // The suppressed warning is issued in the 'if' branch.
             // With feature switched to false, the trimming tools see only the 'else' branch.
-            // The 'else' branch contains trimmer-compatible code, the trimming tools identifies the suppression as redundant.
+            // The 'else' branch contains trimmer-compatible code, the trimming tools identifies the suppression
+            // as redundant.
 
             [ExpectedWarning("IL2121", "IL2072", ProducedBy = Tool.Trimmer)]
             [UnconditionalSuppressMessage("Test", "IL2072")]

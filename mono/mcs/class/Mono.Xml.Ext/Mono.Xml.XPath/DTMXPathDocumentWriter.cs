@@ -278,7 +278,8 @@ namespace Mono.Xml.XPath
             attributes[attributeIndex].LinePosition = linePosition;
         }
 
-        // Followings are skipped: nextNsNode (may be next attribute in the same element, or ancestors' nsNode)
+        // Followings are skipped: nextNsNode (may be next attribute in the same element, or ancestors'
+        // nsNode)
         public void AddNsNode(int declaredElement, string name, string ns, int nextNs)
         {
             if (namespaces.Length < nsIndex + 1)

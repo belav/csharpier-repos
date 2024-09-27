@@ -186,14 +186,14 @@ namespace MonoTests.System.Reflection.Emit
             Assert.IsNull(mb.ReturnTypeCustomAttributes);
         }
 
-        /*
-        public void TestSignature () {
-            MethodBuilder mb = genClass.DefineMethod (
-                "m91", 0, typeof (Console), new Type [1] { typeof (Console) });
+/*
+public void TestSignature () {
+MethodBuilder mb = genClass.DefineMethod (
+"m91", 0, typeof (Console), new Type [1] { typeof (Console) });
 
-            Console.WriteLine (mb.Signature);
-        }
-        */
+Console.WriteLine (mb.Signature);
+}
+*/
 
         [Test]
         public void TestCreateMethodBody()
@@ -290,13 +290,13 @@ namespace MonoTests.System.Reflection.Emit
             // index out of range
 
             // This fails on mono because the mono version accepts a 0 index
-            /*
-            try {
-                mb.DefineParameter (0, 0, "param1");
-                Fail ();
-            } catch (ArgumentOutOfRangeException) {
-            }
-            */
+/*
+try {
+mb.DefineParameter (0, 0, "param1");
+Fail ();
+} catch (ArgumentOutOfRangeException) {
+}
+*/
 
             try
             {
@@ -449,20 +449,20 @@ namespace MonoTests.System.Reflection.Emit
                 new Type[1] { typeof(void) }
             );
 
-            /*
-             * According to the MSDN docs, this method should fail with a
-             * NotSupportedException. In reality, it throws an
-             * InvalidOperationException under MS .NET, and returns the
-             * requested data under mono.
-             */
-            /*
-            try {
-                mb.GetParameters ();
-                Fail ("#161");
-            } catch (InvalidOperationException ex) {
-                Console.WriteLine (ex);
-            }
-            */
+/*
+* According to the MSDN docs, this method should fail with a
+* NotSupportedException. In reality, it throws an
+* InvalidOperationException under MS .NET, and returns the
+* requested data under mono.
+*/
+/*
+try {
+mb.GetParameters ();
+Fail ("#161");
+} catch (InvalidOperationException ex) {
+Console.WriteLine (ex);
+}
+*/
         }
 
         [Test]

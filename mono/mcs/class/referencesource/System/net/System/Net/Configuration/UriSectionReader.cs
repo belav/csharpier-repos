@@ -11,7 +11,8 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    // This class is used to read the <uri> section from a config file directly, without using System.Configuration
+    // This class is used to read the <uri> section from a config file directly, without using
+    // System.Configuration
     internal class UriSectionReader
     {
         private const string rootElementName = "configuration";

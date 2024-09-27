@@ -1488,7 +1488,8 @@ namespace System.Xml.Serialization
                     clrType
                 )
             );
-            //XmlSerializableMissingClrType= Type '{0}' from namespace '{1}' doesnot have corresponding IXmlSerializable type. Please consider adding {2} to '{3}'.
+            //XmlSerializableMissingClrType= Type '{0}' from namespace '{1}' doesnot have corresponding
+            // IXmlSerializable type. Please consider adding {2} to '{3}'.
         }
 
         protected Array EnsureArrayIndex(Array? a, int index, Type elementType)
@@ -2771,7 +2772,8 @@ namespace System.Xml.Serialization
                     }
                 }
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (choiceSource == null)
                     throw new InvalidOperationException(
                         SR.Format(
@@ -3479,7 +3481,8 @@ namespace System.Xml.Serialization
 
                 string? methodName = ReferenceMapping(derived);
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (methodName == null)
                     throw new InvalidOperationException(
                         SR.Format(SR.XmlInternalErrorMethod, derived.TypeDesc!.Name)
@@ -3519,7 +3522,8 @@ namespace System.Xml.Serialization
                         Writer.WriteLine("Reader.ReadStartElement();");
                         string? methodName = ReferenceMapping(enumMapping);
 #if DEBUG
-                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                        // as aspnet_ewp.exe
                         if (methodName == null)
                             throw new InvalidOperationException(
                                 SR.Format(SR.XmlInternalErrorMethod, enumMapping.TypeDesc!.Name)
@@ -5372,7 +5376,8 @@ namespace System.Xml.Serialization
             {
                 string? methodName = ReferenceMapping(element.Mapping);
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (methodName == null)
                     throw new InvalidOperationException(
                         SR.Format(SR.XmlInternalErrorMethod, element.Mapping.TypeDesc!.Name)
@@ -5541,7 +5546,8 @@ namespace System.Xml.Serialization
                 {
                     string? methodName = ReferenceMapping(mapping);
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (methodName == null)
                         throw new InvalidOperationException(
                             SR.Format(SR.XmlInternalErrorMethod, mapping.TypeDesc!.Name)
@@ -5649,7 +5655,8 @@ namespace System.Xml.Serialization
             if (choice != null)
             {
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (choiceSource == null)
                     throw new InvalidOperationException(
                         SR.Format(SR.XmlInternalErrorDetails, "need parent for the " + source)

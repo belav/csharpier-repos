@@ -106,12 +106,12 @@ namespace Cairo
 
         public void InitRotate(double radians)
         {
-            /*
-            double s, c;
-            s = Math.Sin (radians);
-            c = Math.Cos (radians);
-            this.Init (c, s, -s, c, 0, 0);
-            */
+/*
+double s, c;
+s = Math.Sin (radians);
+c = Math.Cos (radians);
+this.Init (c, s, -s, c, 0, 0);
+*/
             NativeMethods.cairo_matrix_init_rotate(this, radians);
         }
 

@@ -219,11 +219,14 @@ All diagnostics:
             {
                 // Displays the text of a warning defined with the #warning directive
                 { "CS1030", ReportDiagnostic.Suppress },
-                // Assuming assembly reference "Assembly Name #1" matches "Assembly Name #2", you may need to supply runtime policy
+                // Assuming assembly reference "Assembly Name #1" matches "Assembly Name #2", you may need to supply
+                // runtime policy
                 { "CS1701", ReportDiagnostic.Suppress },
-                // Assuming assembly reference "Assembly Name #1" matches "Assembly Name #2", you may need to supply runtime policy
+                // Assuming assembly reference "Assembly Name #1" matches "Assembly Name #2", you may need to supply
+                // runtime policy
                 { "CS1702", ReportDiagnostic.Suppress },
-                // Assembly 'AssemblyName1' uses 'TypeName' which has a higher version than referenced assembly 'AssemblyName2'
+                // Assembly 'AssemblyName1' uses 'TypeName' which has a higher version than referenced assembly
+                // 'AssemblyName2'
                 { "CS1705", ReportDiagnostic.Suppress },
                 // Unnecessary using directive.
                 { "CS8019", ReportDiagnostic.Suppress },

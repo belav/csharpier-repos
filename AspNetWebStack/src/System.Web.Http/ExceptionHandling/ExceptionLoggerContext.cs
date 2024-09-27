@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net.Http;
@@ -14,7 +15,8 @@ namespace System.Web.Http.ExceptionHandling
         private readonly ExceptionContext _exceptionContext;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExceptionLoggerContext"/> class using the values provided.
+        /// Initializes a new instance of the <see cref="ExceptionLoggerContext"/> class using the values
+        // provided.
         /// </summary>
         /// <param name="exceptionContext">The exception context.</param>
         public ExceptionLoggerContext(ExceptionContext exceptionContext)
@@ -63,14 +65,18 @@ namespace System.Web.Http.ExceptionHandling
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Some exceptions are caught after a response is already partially sent, which prevents sending a new
-        /// response to handle the exception. In such cases, <see cref="IExceptionLogger"/> will be called to log the
+        /// Some exceptions are caught after a response is already partially sent, which prevents sending a
+        // new
+        /// response to handle the exception. In such cases, <see cref="IExceptionLogger"/> will be called
+        // to log the
         /// exception, but the <see cref="IExceptionHandler"/> will not be called.
         /// </para>
         /// <para>
-        /// If this value is <see langword="true"/>, exceptions from this catch block will be provided to both
+        /// If this value is <see langword="true"/>, exceptions from this catch block will be provided to
+        // both
         /// <see cref="IExceptionLogger"/> and <see cref="IExceptionHandler"/>. If this value is
-        /// see langword="false"/>, exceptions from this catch block cannot be handled and will only be provided to
+        /// see langword="false"/>, exceptions from this catch block cannot be handled and will only be
+        // provided to
         /// <see cref="IExceptionLogger"/>.
         /// </para>
         /// </remarks>

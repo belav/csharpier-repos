@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing
@@ -8,7 +9,8 @@ namespace System.Web.Mvc.Routing
 #endif
 {
     /// <summary>
-    /// Defines a factory that creates a route directly to a set of action descriptors (an attribute route).
+    /// Defines a factory that creates a route directly to a set of action descriptors (an attribute
+    // route).
     /// </summary>
     public interface IDirectRouteFactory
     {

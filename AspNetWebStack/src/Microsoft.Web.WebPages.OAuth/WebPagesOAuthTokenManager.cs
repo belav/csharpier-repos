@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Web.Security;
@@ -11,7 +12,8 @@ using WebMatrix.WebData;
 namespace Microsoft.Web.WebPages.OAuth
 {
     /// <summary>
-    /// WebPages implementation for the <see cref="IOAuthTokenManager"/> interface which store tokens into SimpleMembership database
+    /// WebPages implementation for the <see cref="IOAuthTokenManager"/> interface which store tokens
+    // into SimpleMembership database
     /// </summary>
     internal class WebPagesOAuthTokenManager : IOAuthTokenManager
     {

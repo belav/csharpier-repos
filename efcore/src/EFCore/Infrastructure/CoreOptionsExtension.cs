@@ -10,15 +10,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 /// <summary>
 ///     <para>
 ///         Represents options managed by the core of Entity Framework, as opposed to those managed
-///         by database providers or extensions. These options are set using <see cref="DbContextOptionsBuilder" />.
+///         by database providers or extensions. These options are set using <see
+// cref="DbContextOptionsBuilder" />.
 ///     </para>
 ///     <para>
-///         Instances of this class are designed to be immutable. To change an option, call one of the 'With...'
+///         Instances of this class are designed to be immutable. To change an option, call one of
+// the 'With...'
 ///         methods to obtain a new instance with the option changed.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class CoreOptionsExtension : IDbContextOptionsExtension
@@ -94,14 +97,18 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     public virtual DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
     /// <summary>
-    ///     Override this method in a derived class to ensure that any clone created is also of that class.
+    ///     Override this method in a derived class to ensure that any clone created is also of that
+    // class.
     /// </summary>
-    /// <returns>A clone of this instance, which can be modified before being returned as immutable.</returns>
+    /// <returns>A clone of this instance, which can be modified before being returned as
+    // immutable.</returns>
     protected virtual CoreOptionsExtension Clone() => new(this);
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="internalServiceProvider">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -117,8 +124,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="applicationServiceProvider">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -137,8 +146,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="rootApplicationServiceProvider">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -154,8 +165,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="autoResolve">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -174,8 +187,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="model">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -189,8 +204,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="memoryCache">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -204,8 +221,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="loggerFactory">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -219,8 +238,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="contextLogger">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -234,8 +255,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="sensitiveDataLoggingEnabled">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -251,8 +274,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="detailedErrorsEnabled">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -266,8 +291,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="checksEnabled">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -281,8 +308,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="queryTrackingBehavior">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -298,12 +327,15 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="serviceType">The service contract.</param>
     /// <param name="newImplementationType">The implementation type to use for the service.</param>
-    /// <param name="currentImplementationType">The specific existing implementation type to replace.</param>
+    /// <param name="currentImplementationType">The specific existing implementation type to
+    // replace.</param>
     /// <returns>A new instance with the option changed.</returns>
     public virtual CoreOptionsExtension WithReplacedService(
         Type serviceType,
@@ -321,8 +353,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="maxPoolSize">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -336,10 +370,13 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
-    /// <param name="timeSpan">The maximum time period over which to skip logging checks before checking again.</param>
+    /// <param name="timeSpan">The maximum time period over which to skip logging checks before checking
+    // again.</param>
     /// <returns>A new instance with the option changed.</returns>
     public virtual CoreOptionsExtension WithLoggingCacheTime(TimeSpan timeSpan)
     {
@@ -351,8 +388,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="warningsConfiguration">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -368,8 +407,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="serviceProviderCachingEnabled">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -385,8 +426,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="interceptors">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -401,8 +444,10 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
-    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder" />.
+    ///     Creates a new instance with all options the same as for this instance, but with the given
+    // option changed.
+    ///     It is unusual to call this method directly. Instead use <see cref="DbContextOptionsBuilder"
+    // />.
     /// </summary>
     /// <param name="interceptors">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
@@ -421,7 +466,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     }
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.EnableSensitiveDataLogging" /> method.
+    ///     The option set from the <see cref="DbContextOptionsBuilder.EnableSensitiveDataLogging" />
+    // method.
     /// </summary>
     public virtual bool IsSensitiveDataLoggingEnabled => _sensitiveDataLoggingEnabled;
 
@@ -431,7 +477,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     public virtual bool DetailedErrorsEnabled => _detailedErrorsEnabled;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.EnableThreadSafetyChecks" /> method.
+    ///     The option set from the <see cref="DbContextOptionsBuilder.EnableThreadSafetyChecks" />
+    // method.
     /// </summary>
     public virtual bool ThreadSafetyChecksEnabled => _threadSafetyChecksEnabled;
 
@@ -446,7 +493,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     public virtual ILoggerFactory? LoggerFactory => _loggerFactory;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" /> method.
+    ///     The option set from the <see
+    // cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" /> method.
     /// </summary>
     public virtual IDbContextLogger? DbContextLogger => _contextLogger;
 
@@ -456,23 +504,27 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     public virtual IMemoryCache? MemoryCache => _memoryCache;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.UseInternalServiceProvider" /> method.
+    ///     The option set from the <see cref="DbContextOptionsBuilder.UseInternalServiceProvider" />
+    // method.
     /// </summary>
     public virtual IServiceProvider? InternalServiceProvider => _internalServiceProvider;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.UseApplicationServiceProvider" /> method.
+    ///     The option set from the <see cref="DbContextOptionsBuilder.UseApplicationServiceProvider" />
+    // method.
     /// </summary>
     public virtual IServiceProvider? ApplicationServiceProvider => _applicationServiceProvider;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.UseRootApplicationServiceProvider(IServiceProvider?)" /> method.
+    ///     The option set from the <see
+    // cref="DbContextOptionsBuilder.UseRootApplicationServiceProvider(IServiceProvider?)" /> method.
     /// </summary>
     public virtual IServiceProvider? RootApplicationServiceProvider =>
         _rootApplicationServiceProvider;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.UseRootApplicationServiceProvider(IServiceProvider?)" /> method.
+    ///     The option set from the <see
+    // cref="DbContextOptionsBuilder.UseRootApplicationServiceProvider(IServiceProvider?)" /> method.
     /// </summary>
     public virtual bool AutoResolveRootProvider => _autoResolveResolveRootProvider;
 
@@ -482,24 +534,29 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     public virtual WarningsConfiguration WarningsConfiguration => _warningsConfiguration;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.UseQueryTrackingBehavior" /> method.
+    ///     The option set from the <see cref="DbContextOptionsBuilder.UseQueryTrackingBehavior" />
+    // method.
     /// </summary>
     public virtual QueryTrackingBehavior QueryTrackingBehavior => _queryTrackingBehavior;
 
     /// <summary>
-    ///     The option set from the <see cref="DbContextOptionsBuilder.EnableServiceProviderCaching" /> method.
+    ///     The option set from the <see cref="DbContextOptionsBuilder.EnableServiceProviderCaching" />
+    // method.
     /// </summary>
     public virtual bool ServiceProviderCachingEnabled => _serviceProviderCachingEnabled;
 
     /// <summary>
-    ///     The options set from the <see cref="DbContextOptionsBuilder.ReplaceService{TService,TImplementation}" /> method.
+    ///     The options set from the <see
+    // cref="DbContextOptionsBuilder.ReplaceService{TService,TImplementation}" /> method.
     /// </summary>
     public virtual IReadOnlyDictionary<(Type, Type?), Type>? ReplacedServices => _replacedServices;
 
     /// <summary>
     ///     The option set from the
     ///     <see
-    ///         cref="EntityFrameworkServiceCollectionExtensions.AddDbContextPool{TContext}(IServiceCollection,Action{DbContextOptionsBuilder},int)" />
+    ///
+    // cref="EntityFrameworkServiceCollectionExtensions.AddDbContextPool{TContext}(IServiceCollection,Action{DbContextOptionsBuilder},int)"
+    // />
     ///     method.
     /// </summary>
     public virtual int? MaxPoolSize => _maxPoolSize;
@@ -507,19 +564,23 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     The option set from the
     ///     <see
-    ///         cref="EntityFrameworkServiceCollectionExtensions.AddDbContextPool{TContext}(IServiceCollection,Action{DbContextOptionsBuilder},int)" />
+    ///
+    // cref="EntityFrameworkServiceCollectionExtensions.AddDbContextPool{TContext}(IServiceCollection,Action{DbContextOptionsBuilder},int)"
+    // />
     ///     method.
     /// </summary>
     public virtual TimeSpan LoggingCacheTime => _loggingCacheTime;
 
     /// <summary>
-    ///     The options set from the <see cref="DbContextOptionsBuilder.AddInterceptors(IEnumerable{IInterceptor})" /> method
+    ///     The options set from the <see
+    // cref="DbContextOptionsBuilder.AddInterceptors(IEnumerable{IInterceptor})" /> method
     ///     for scoped interceptors.
     /// </summary>
     public virtual IEnumerable<IInterceptor>? Interceptors => _interceptors;
 
     /// <summary>
-    ///     The options set from the <see cref="DbContextOptionsBuilder.AddInterceptors(IEnumerable{IInterceptor})" /> method
+    ///     The options set from the <see
+    // cref="DbContextOptionsBuilder.AddInterceptors(IEnumerable{IInterceptor})" /> method
     ///     for singleton interceptors.
     /// </summary>
     public virtual IEnumerable<ISingletonInterceptor>? SingletonInterceptors =>

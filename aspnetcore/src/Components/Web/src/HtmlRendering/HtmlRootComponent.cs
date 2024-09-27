@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure;
 namespace Microsoft.AspNetCore.Components.Web.HtmlRendering;
 
 /// <summary>
-/// Represents the output of rendering a root component as HTML. The content can change if the component instance re-renders.
+/// Represents the output of rendering a root component as HTML. The content can change if the
+// component instance re-renders.
 /// </summary>
 public readonly struct HtmlRootComponent
 {
@@ -21,7 +22,8 @@ public readonly struct HtmlRootComponent
     }
 
     /// <summary>
-    /// Gets a <see cref="Task"/> that completes when the component hierarchy has completed asynchronous tasks such as loading.
+    /// Gets a <see cref="Task"/> that completes when the component hierarchy has completed asynchronous
+    // tasks such as loading.
     /// </summary>
     public Task QuiescenceTask { get; }
 

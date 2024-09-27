@@ -12,10 +12,13 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
 /// <summary>
-/// <see cref="ITagHelper"/> implementation targeting elements containing attributes with URL expected values.
+/// <see cref="ITagHelper"/> implementation targeting elements containing attributes with URL
+// expected values.
 /// </summary>
-/// <remarks>Resolves URLs starting with '~/' (relative to the application's 'webroot' setting) that are not
-/// targeted by other <see cref="ITagHelper"/>s. Runs prior to other <see cref="ITagHelper"/>s to ensure
+/// <remarks>Resolves URLs starting with '~/' (relative to the application's 'webroot' setting) that
+// are not
+/// targeted by other <see cref="ITagHelper"/>s. Runs prior to other <see cref="ITagHelper"/>s to
+// ensure
 /// application-relative URLs are resolved.</remarks>
 [HtmlTargetElement("*", Attributes = "[itemid^='~/']")]
 [HtmlTargetElement("a", Attributes = "[href^='~/']")]
@@ -148,7 +151,8 @@ public class UrlResolutionTagHelper : TagHelper
     }
 
     /// <summary>
-    /// Resolves and updates URL values starting with '~/' (relative to the application's 'webroot' setting) for
+    /// Resolves and updates URL values starting with '~/' (relative to the application's 'webroot'
+    // setting) for
     /// <paramref name="output"/>'s <see cref="TagHelperOutput.Attributes"/> whose
     /// <see cref="TagHelperAttribute.Name"/> is <paramref name="attributeName"/>.
     /// </summary>
@@ -223,12 +227,15 @@ public class UrlResolutionTagHelper : TagHelper
     }
 
     /// <summary>
-    /// Tries to resolve the given <paramref name="url"/> value relative to the application's 'webroot' setting.
+    /// Tries to resolve the given <paramref name="url"/> value relative to the application's 'webroot'
+    // setting.
     /// </summary>
     /// <param name="url">The URL to resolve.</param>
-    /// <param name="resolvedUrl">Absolute URL beginning with the application's virtual root. <c>null</c> if
+    /// <param name="resolvedUrl">Absolute URL beginning with the application's virtual root.
+    // <c>null</c> if
     /// <paramref name="url"/> could not be resolved.</param>
-    /// <returns><c>true</c> if the <paramref name="url"/> could be resolved; <c>false</c> otherwise.</returns>
+    /// <returns><c>true</c> if the <paramref name="url"/> could be resolved; <c>false</c>
+    // otherwise.</returns>
     protected bool TryResolveUrl(
         [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string url,
         out string? resolvedUrl
@@ -250,14 +257,17 @@ public class UrlResolutionTagHelper : TagHelper
     }
 
     /// <summary>
-    /// Tries to resolve the given <paramref name="url"/> value relative to the application's 'webroot' setting.
+    /// Tries to resolve the given <paramref name="url"/> value relative to the application's 'webroot'
+    // setting.
     /// </summary>
     /// <param name="url">The URL to resolve.</param>
     /// <param name="resolvedUrl">
-    /// Absolute URL beginning with the application's virtual root. <c>null</c> if <paramref name="url"/> could
+    /// Absolute URL beginning with the application's virtual root. <c>null</c> if <paramref
+    // name="url"/> could
     /// not be resolved.
     /// </param>
-    /// <returns><c>true</c> if the <paramref name="url"/> could be resolved; <c>false</c> otherwise.</returns>
+    /// <returns><c>true</c> if the <paramref name="url"/> could be resolved; <c>false</c>
+    // otherwise.</returns>
     protected bool TryResolveUrl(
         [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string url,
         [NotNullWhen(true)] out IHtmlContent? resolvedUrl

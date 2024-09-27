@@ -7,14 +7,17 @@ namespace Microsoft.CodeAnalysis;
 internal enum StateMachineState
 {
     /// <summary>
-    /// First state of an async iterator state machine that is used to resume the machine after yield return.
-    /// Initial state is not used to resume state machine that yielded. State numbers decrease as the iterator makes progress.
+    /// First state of an async iterator state machine that is used to resume the machine after yield
+    // return.
+    /// Initial state is not used to resume state machine that yielded. State numbers decrease as the
+    // iterator makes progress.
     /// </summary>
     FirstResumableAsyncIteratorState = InitialAsyncIteratorState - 1,
 
     /// <summary>
     /// Initial iterator state of an async iterator.
-    /// Distinct from <see cref="NotStartedOrRunningState"/> so that DisposeAsync can throw in latter case.
+    /// Distinct from <see cref="NotStartedOrRunningState"/> so that DisposeAsync can throw in latter
+    // case.
     /// </summary>
     InitialAsyncIteratorState = -3,
 
@@ -40,7 +43,8 @@ internal enum StateMachineState
 
     /// <summary>
     /// First state in iterator state machine that is used to resume the machine after yield return.
-    /// Initial state is not used to resume state machine that yielded. State numbers increase as the iterator makes progress.
+    /// Initial state is not used to resume state machine that yielded. State numbers increase as the
+    // iterator makes progress.
     /// </summary>
     FirstResumableIteratorState = InitialIteratorState + 1,
 }

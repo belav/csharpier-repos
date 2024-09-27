@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.CookiePolicy;
 
 /// <summary>
-/// Context for <see cref="CookiePolicyOptions.OnDeleteCookie"/> that allows changes to the cookie prior to being deleted.
+/// Context for <see cref="CookiePolicyOptions.OnDeleteCookie"/> that allows changes to the cookie
+// prior to being deleted.
 /// </summary>
 public class DeleteCookieContext
 {
@@ -50,7 +51,8 @@ public class DeleteCookieContext
     public bool HasConsent { get; internal set; }
 
     /// <summary>
-    /// Gets or sets a value that determines if the cookie can be deleted. If set to <see langword="false" />,
+    /// Gets or sets a value that determines if the cookie can be deleted. If set to <see
+    // langword="false" />,
     /// cookie deletion is suppressed.
     /// </summary>
     public bool IssueCookie { get; set; }

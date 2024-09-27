@@ -25,7 +25,8 @@ namespace Mono.Linker.Tests.Cases.Attributes.Csc
     {
         public static void Main()
         {
-            // Use something in the attribute assembly so that the special behavior of not preserving a reference if the only thing that is marked
+            // Use something in the attribute assembly so that the special behavior of not preserving a
+            // reference if the only thing that is marked
             // are attributes is not trigged
             AttributeDefinedInReference_OtherType.Method();
         }

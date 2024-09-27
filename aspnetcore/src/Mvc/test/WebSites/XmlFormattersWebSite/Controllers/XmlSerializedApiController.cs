@@ -20,9 +20,12 @@ public class XmlSerializerApiController : XmlApiControllerBase
                 return;
             }
 
-            // Both kinds of Xml serializers are configured for this application and use custom content-types to do formatter
-            // selection. The globally configured formatters rely on custom content-type to perform conneg which does not play
-            // well the ProblemDetails returning filters that defaults to using application/xml. We'll explicitly select the formatter for this controller.
+            // Both kinds of Xml serializers are configured for this application and use custom content-types to
+            // do formatter
+            // selection. The globally configured formatters rely on custom content-type to perform conneg which
+            // does not play
+            // well the ProblemDetails returning filters that defaults to using application/xml. We'll
+            // explicitly select the formatter for this controller.
             var mvcOptions = context.HttpContext.RequestServices.GetRequiredService<
                 IOptions<MvcOptions>
             >();

@@ -16,8 +16,8 @@ namespace MonoTests.System.Threading.Tasks
         [Category("MultiThreaded")]
         public void PrincipalFlowsToAsyncTask()
         {
-            /* run in different thread to work around problems on platforms
-            * where SynchronizationContext is set (e.g. Xamarin.iOS) */
+/* run in different thread to work around problems on platforms
+* where SynchronizationContext is set (e.g. Xamarin.iOS) */
             Assert.IsTrue(Task.Run(async () => await _PrincipalFlowsToAsyncTask()).Wait(5000));
         }
 #endif

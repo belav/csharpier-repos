@@ -12,7 +12,8 @@ public class NoContentFormatterTests
     {
         get
         {
-            // object value, bool useDeclaredTypeAsString, bool expectedCanWriteResult, bool useNonNullContentType
+            // object value, bool useDeclaredTypeAsString, bool expectedCanWriteResult, bool
+            // useNonNullContentType
             yield return new object[] { "valid value", true, false, true };
             yield return new object[] { "valid value", false, false, true };
             yield return new object[] { "", false, false, true };

@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             foreach (var declaration in declarations)
             {
-                // Passing in forAnalyzer: true means we'll only get a result if the declaration doesn't match the preferences
+                // Passing in forAnalyzer: true means we'll only get a result if the declaration doesn't match the
+                // preferences
                 if (
                     ConvertNamespaceAnalysis.CanOfferUseBlockScoped(
                         option,

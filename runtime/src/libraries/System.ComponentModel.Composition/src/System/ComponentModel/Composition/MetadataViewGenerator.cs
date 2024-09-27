@@ -167,7 +167,8 @@ namespace System.ComponentModel.Composition
         {
             ArgumentNullException.ThrowIfNull(metadataViewFactory);
 
-            // we are simulating the Activator.CreateInstance behavior by wrapping everything in a TargetInvocationException
+            // we are simulating the Activator.CreateInstance behavior by wrapping everything in a
+            // TargetInvocationException
             try
             {
                 return (TMetadataView)metadataViewFactory.Invoke(metadata);
@@ -269,7 +270,8 @@ namespace System.ComponentModel.Composition
                 Type[]? optionalModifiers = null;
                 Type[]? requiredModifiers = null;
 
-                // PropertyInfo does not support GetOptionalCustomModifiers and GetRequiredCustomModifiers on Silverlight
+                // PropertyInfo does not support GetOptionalCustomModifiers and GetRequiredCustomModifiers on
+                // Silverlight
                 optionalModifiers = propertyInfo.GetOptionalCustomModifiers();
                 requiredModifiers = propertyInfo.GetRequiredCustomModifiers();
                 Array.Reverse(optionalModifiers);

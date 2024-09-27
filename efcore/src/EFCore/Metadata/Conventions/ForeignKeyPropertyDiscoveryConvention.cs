@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that finds foreign key properties for relationships based on their names, ignoring case:
+///     A convention that finds foreign key properties for relationships based on their names,
+// ignoring case:
 ///     * [navigation property name][principal key property name]
 ///     * [navigation property name]Id
 ///     * [principal entity name][principal key property name]
@@ -15,21 +16,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     <para>
 ///         If no matching properties were found, the relationship doesn't represent an ownership,
-///         the dependent side is not ambiguous and not derived then if the relationship is one-to-one,
-///         the primary key properties are used, otherwise the convention tries to match properties with
-///         the exact name as principal key properties if they are a proper subset of the dependent PK.
+///         the dependent side is not ambiguous and not derived then if the relationship is
+// one-to-one,
+///         the primary key properties are used, otherwise the convention tries to match properties
+// with
+///         the exact name as principal key properties if they are a proper subset of the dependent
+// PK.
 ///     </para>
 ///     <para>
 ///     </para>
 ///     <para>
-///         If a match was found, but the property types are not compatible with the principal key types no further matches are searched for.
+///         If a match was found, but the property types are not compatible with the principal key
+// types no further matches are searched for.
 ///     </para>
 ///     <para>
-///         If the relationship uses shadow properties created by convention they are recreated to remove suffixes
+///         If the relationship uses shadow properties created by convention they are recreated to
+// remove suffixes
 ///         used to make the names unique.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 public class ForeignKeyPropertyDiscoveryConvention
@@ -348,7 +355,8 @@ public class ForeignKeyPropertyDiscoveryConvention
                 }
                 else
                 {
-                    // Try match properties with the exact name as principal key if they are a proper subset of the dependent PK
+                    // Try match properties with the exact name as principal key if they are a proper subset of the
+                    // dependent PK
                     var dependentPk = foreignKey.DeclaringEntityType.FindPrimaryKey();
                     if (
                         dependentPk != null
@@ -1160,10 +1168,12 @@ public class ForeignKeyPropertyDiscoveryConvention
     }
 
     /// <summary>
-    ///     Gets the string that should be used as part of the shadow properties created for the given foreign key.
+    ///     Gets the string that should be used as part of the shadow properties created for the given
+    // foreign key.
     /// </summary>
     /// <param name="foreignKey">The foreign key.</param>
-    /// <returns>The string that should be used as part of the shadow properties created for the given foreign key.</returns>
+    /// <returns>The string that should be used as part of the shadow properties created for the given
+    // foreign key.</returns>
     public static string GetPropertyBaseName(IReadOnlyForeignKey foreignKey) =>
         foreignKey.DependentToPrincipal?.Name
         ?? foreignKey.GetReferencingSkipNavigations().FirstOrDefault()?.Inverse?.Name

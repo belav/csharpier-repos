@@ -8,7 +8,8 @@ using System.Text;
 namespace Microsoft.Runtime.Hosting
 {
     /// <summary>
-    /// The methods here are designed to aid in transition from the v2 StrongName APIs on mscoree.dll to the
+    /// The methods here are designed to aid in transition from the v2 StrongName APIs on mscoree.dll to
+    // the
     /// v4 metahost APIs (which are in-proc SxS aware).
     /// </summary>
     internal static class StrongNameHelpers

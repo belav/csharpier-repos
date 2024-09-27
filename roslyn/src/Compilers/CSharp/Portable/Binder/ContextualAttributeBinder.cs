@@ -9,11 +9,13 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Each application of an attribute is effectively a constructor call.  Since the attribute constructor
+    /// Each application of an attribute is effectively a constructor call.  Since the attribute
+    // constructor
     /// might have a CallerMemberName parameter, we need to keep track of which method/property/event
     /// the attribute is on/in (e.g. on a parameter) so that we can use the name of that member as the
     /// CallerMemberName argument.
-    /// This binder is also needed when a <see cref="NameofBinder"/> introduces type parameters to a scope within an attribute.
+    /// This binder is also needed when a <see cref="NameofBinder"/> introduces type parameters to a
+    // scope within an attribute.
     /// </summary>
     internal sealed class ContextualAttributeBinder : Binder
     {
@@ -35,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// Method, property, event, or null.
-        /// A virtual property on Binder (i.e. our usual pattern) would be more robust, but the applicability
+        /// A virtual property on Binder (i.e. our usual pattern) would be more robust, but the
+        // applicability
         /// of this property is so narrow that it doesn't seem worthwhile.
         /// </remarks>
         internal Symbol AttributedMember

@@ -201,7 +201,8 @@ namespace System.Web.UI
                 {
                     try
                     {
-                        // disassociating allows other pending work to take place, and associating will block until that work is complete
+                        // disassociating allows other pending work to take place, and associating will block until that
+                        // work is complete
                         _app.Context.SyncContext.DisassociateFromCurrentThread();
                         _app.Context.SyncContext.AssociateWithCurrentThread();
                     }

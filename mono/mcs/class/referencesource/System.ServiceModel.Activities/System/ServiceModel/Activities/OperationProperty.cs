@@ -26,7 +26,8 @@ namespace System.ServiceModel.Activities
             {
                 if (this.implementingReceives == null)
                 {
-                    // HashSet item type, Receive, is sealed, so we know we don't need explicit object reference EqualityComparer here
+                    // HashSet item type, Receive, is sealed, so we know we don't need explicit object reference
+                    // EqualityComparer here
                     this.implementingReceives = new HashSet<Receive>();
                 }
                 return this.implementingReceives;

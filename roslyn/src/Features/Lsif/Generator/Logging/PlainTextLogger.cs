@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Logging
             Func<TState, Exception?, string> formatter
         )
         {
-            // Not all formatters will actually include the exception even if we pass it through, so include it here.
+            // Not all formatters will actually include the exception even if we pass it through, so include it
+            // here.
             var message = formatter(state, exception);
             var exceptionString = exception?.ToString();
 

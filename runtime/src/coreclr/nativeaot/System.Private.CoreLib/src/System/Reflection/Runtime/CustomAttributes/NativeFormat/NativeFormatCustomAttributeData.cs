@@ -86,7 +86,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                         .Constructor.ToMemberReferenceHandle(reader)
                         .GetMemberReference(reader);
 
-                    // There is no chance a custom attribute type will be an open type specification so we can safely pass in the empty context here.
+                    // There is no chance a custom attribute type will be an open type specification so we can safely
+                    // pass in the empty context here.
                     TypeContext typeContext = new TypeContext(
                         Array.Empty<RuntimeTypeInfo>(),
                         Array.Empty<RuntimeTypeInfo>()
@@ -121,7 +122,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
         }
 
         //
-        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata exception.
+        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata
+        // exception.
         //
         internal sealed override IList<CustomAttributeTypedArgument> GetConstructorArguments(
             bool throwIfMissingMetadata
@@ -198,7 +200,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
         }
 
         //
-        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata exception.
+        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata
+        // exception.
         //
         internal sealed override IList<CustomAttributeNamedArgument> GetNamedArguments(
             bool throwIfMissingMetadata
@@ -285,7 +288,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
             return new CustomAttributeNamedArgument(memberInfo, typedValue);
         }
 
-        // Equals/GetHashCode no need to override (they just implement reference equality but desktop never unified these things.)
+        // Equals/GetHashCode no need to override (they just implement reference equality but desktop never
+        // unified these things.)
 
         private readonly MetadataReader _reader;
         private readonly CustomAttribute _customAttribute;

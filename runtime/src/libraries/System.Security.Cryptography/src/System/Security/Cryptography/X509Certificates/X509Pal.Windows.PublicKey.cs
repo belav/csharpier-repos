@@ -13,7 +13,8 @@ using SafeBCryptKeyHandle = Microsoft.Win32.SafeHandles.SafeBCryptKeyHandle;
 namespace System.Security.Cryptography.X509Certificates
 {
     /// <summary>
-    /// A singleton class that encapsulates the native implementation of various X509 services. (Implementing this as a singleton makes it
+    /// A singleton class that encapsulates the native implementation of various X509 services.
+    // (Implementing this as a singleton makes it
     /// easier to split the class into abstract and implementation classes if desired.)
     /// </summary>
     internal sealed partial class X509Pal : IX509Pal

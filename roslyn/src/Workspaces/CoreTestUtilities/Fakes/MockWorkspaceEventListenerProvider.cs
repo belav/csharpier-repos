@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    // mock default workspace event listener so that we don't try to enable solution crawler and etc implicitly
+    // mock default workspace event listener so that we don't try to enable solution crawler and etc
+    // implicitly
     [
         ExportWorkspaceServiceFactory(typeof(IWorkspaceEventListenerService), ServiceLayer.Test),
         Shared,

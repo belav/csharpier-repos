@@ -13,7 +13,8 @@ namespace System.Text.Json.Serialization.Metadata
     {
         public JsonConverter EffectiveConverter => MatchingProperty.EffectiveConverter;
 
-        // The default value of the parameter. This is `DefaultValue` of the `ParameterInfo`, if specified, or the `default` for the `ParameterType`.
+        // The default value of the parameter. This is `DefaultValue` of the `ParameterInfo`, if specified,
+        // or the `default` for the `ParameterType`.
         public object? DefaultValue { get; private protected init; }
 
         public bool IgnoreNullTokensOnRead { get; }

@@ -651,14 +651,15 @@ namespace System.Xml.Serialization
                         + "));"
                 );
 
-                /*				WriteLineInd ("if (Writer.LookupPrefix (XmlSchema.Namespace) == null)");
-                                WriteLine ("WriteAttribute (\"xmlns\",\"xsd\",XmlSchema.Namespace,XmlSchema.Namespace);");
-                                Unindent ();
-                    
-                                WriteLineInd ("if (Writer.LookupPrefix (XmlSchema.InstanceNamespace) == null)");
-                                WriteLine ("WriteAttribute (\"xmlns\",\"xsi\",XmlSchema.InstanceNamespace,XmlSchema.InstanceNamespace);");
-                                Unindent ();
-                */
+/*				WriteLineInd ("if (Writer.LookupPrefix (XmlSchema.Namespace) == null)");
+WriteLine ("WriteAttribute (\"xmlns\",\"xsd\",XmlSchema.Namespace,XmlSchema.Namespace);");
+Unindent ();
+
+WriteLineInd ("if (Writer.LookupPrefix (XmlSchema.InstanceNamespace) == null)");
+WriteLine ("WriteAttribute
+(\"xmlns\",\"xsi\",XmlSchema.InstanceNamespace,XmlSchema.InstanceNamespace);");
+Unindent ();
+*/
             }
 
             GenerateWriteObjectElement(membersMap, "pars", true);

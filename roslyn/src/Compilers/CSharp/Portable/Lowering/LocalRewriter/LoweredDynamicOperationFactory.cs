@@ -34,10 +34,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         public int MethodOrdinal => _methodOrdinal;
 
         // We could read the values of the following enums from metadata instead of hardcoding them here but
-        // - they can never change since existing programs have the values inlined and would be broken if the values changed their meaning,
-        // - if any new flags are added to the runtime binder the compiler will change as well to produce them.
+        // - they can never change since existing programs have the values inlined and would be broken if
+        // the values changed their meaning,
+        // - if any new flags are added to the runtime binder the compiler will change as well to produce
+        // them.
 
-        // The only scenario that is not supported by hardcoding the values is when a completely new Framework is created
+        // The only scenario that is not supported by hardcoding the values is when a completely new
+        // Framework is created
         // that redefines these constants and is not supposed to run existing programs.
 
         /// <summary>
@@ -875,7 +878,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 // CS1969: One or more types required to compile a dynamic expression cannot be found.
-                // Dev11 reports it with source location for each dynamic operation, which results in many error messages.
+                // Dev11 reports it with source location for each dynamic operation, which results in many error
+                // messages.
                 // The diagnostic that names the specific missing type or member has already been reported.
                 _factory.Diagnostics.Add(
                     ErrorCode.ERR_DynamicRequiredTypesMissing,
@@ -1175,7 +1179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 "unexpected refKind in dynamic"
             );
 
-            // by-ref type doesn't trigger dynamic dispatch and it can't be a null literal => set UseCompileTimeType
+            // by-ref type doesn't trigger dynamic dispatch and it can't be a null literal => set
+            // UseCompileTimeType
             if (refKind == RefKind.Out)
             {
                 flags |= CSharpArgumentInfoFlags.IsOut | CSharpArgumentInfoFlags.UseCompileTimeType;

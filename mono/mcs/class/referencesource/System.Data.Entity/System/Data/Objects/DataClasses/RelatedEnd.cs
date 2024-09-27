@@ -67,12 +67,14 @@ namespace System.Data.Objects.DataClasses
         // a breaking change.  This includes changing the field type or field name of existing
         // serialized fields. If you need to make this kind of change, it may be possible, but it
         // will require some custom serialization/deserialization code.
-        // These fields should not be changed once they have been initialized with non-null values, but they can't be read-only because there
+        // These fields should not be changed once they have been initialized with non-null values, but they
+        // can't be read-only because there
         // are serialization scenarios where they have to be set after construction
 
         /// <summary>
         /// Note that this field should no longer be used directly.  Instead, use the _wrappedOwner
-        /// field.  This field is retained only for compatibility with the serialization format introduced in v1.
+        /// field.  This field is retained only for compatibility with the serialization format introduced
+        // in v1.
         /// </summary>
         [Obsolete()]
         private IEntityWithRelationships _owner;
@@ -473,7 +475,8 @@ namespace System.Data.Objects.DataClasses
 
                         // For each principal key property there is a corresponding query parameter that supplies the value
                         // from this owner's entity key, so KeyParam1 corresponds to the first key member, etc.
-                        // We remember the order of the corresponding principal key values in the _sourceQueryParamProperties
+                        // We remember the order of the corresponding principal key values in the
+                        // _sourceQueryParamProperties
                         // field.
                         AliasGenerator keyParamNameGen = new AliasGenerator(_entityKeyParamName); // Aliases are cached in AliasGenerator
                         _sourceQueryParamProperties = principalProps;
@@ -581,7 +584,8 @@ namespace System.Data.Objects.DataClasses
                 _sourceQuery = sourceBuilder.ToString();
             }
 
-            // Create a new ObjectQuery based on the source query text, the object context, and the specified merge option.
+            // Create a new ObjectQuery based on the source query text, the object context, and the specified
+            // merge option.
             ObjectQuery<TEntity> query = new ObjectQuery<TEntity>(
                 _sourceQuery,
                 _context,
@@ -598,7 +602,8 @@ namespace System.Data.Objects.DataClasses
             foreach (EdmMember parameterMember in parameterMembers)
             {
                 // Create a new ObjectParameter with the next parameter name and the next entity value.
-                // When _sourceQueryParamProperties are defined, it means we are handling a foreign key association. For an FK association,
+                // When _sourceQueryParamProperties are defined, it means we are handling a foreign key association.
+                // For an FK association,
                 // the current entity values are considered truth. Otherwise, we use EntityKey values for backwards
                 // compatibility with independent association behaviors in .NET 3.5.
                 object value;
@@ -741,7 +746,8 @@ namespace System.Data.Objects.DataClasses
         /// Validates that a call to Load has the correct conditions
         /// This helps to reduce the complexity of the Load call (SQLBU 524128)
         /// </summary>
-        /// <returns>See RelatedEnd.CreateSourceQuery method. This is returned here so we can create it and validate the state before returning it to the caller</returns>
+        /// <returns>See RelatedEnd.CreateSourceQuery method. This is returned here so we can create it and
+        // validate the state before returning it to the caller</returns>
         internal ObjectQuery<TEntity> ValidateLoad<TEntity>(
             MergeOption mergeOption,
             string relatedEndName,
@@ -766,8 +772,10 @@ namespace System.Data.Objects.DataClasses
                 throw EntityUtil.InvalidEntityStateLoad(relatedEndName);
             }
 
-            // MergeOption for Load must be NoTracking if and only if the source entity was NoTracking. If the source entity was
-            // retrieved with any other MergeOption, the Load MergeOption can be anything but NoTracking. I.e. The entity could
+            // MergeOption for Load must be NoTracking if and only if the source entity was NoTracking. If the
+            // source entity was
+            // retrieved with any other MergeOption, the Load MergeOption can be anything but NoTracking. I.e.
+            // The entity could
             // have been loaded with OverwriteChanges and the Load option can be AppendOnly.
             if (UsingNoTracking != (mergeOption == MergeOption.NoTracking))
             {
@@ -866,7 +874,8 @@ namespace System.Data.Objects.DataClasses
         /// </summary>
         /// <param name="collection">Entities to relate to the owner of this EntityCollection</param>
         /// <param name="mergeOption">MergeOption to use when updating existing relationships</param>
-        /// <param name="setIsLoaded">Indicates whether IsLoaded should be set to true after the Load is complete.
+        /// <param name="setIsLoaded">Indicates whether IsLoaded should be set to true after the Load is
+        // complete.
         /// Should be false in cases where we cannot guarantee that the set of entities is complete
         /// and matches the server, such as Attach.</param>
         internal void Merge<TEntity>(
@@ -888,7 +897,8 @@ namespace System.Data.Objects.DataClasses
                         entity,
                         ObjectContext
                     );
-                    // When the MergeOption is NoTraking, we need to make sure the wrapper reflects the current context and
+                    // When the MergeOption is NoTraking, we need to make sure the wrapper reflects the current context
+                    // and
                     // has an EntityKey
                     if (mergeOption == MergeOption.NoTracking)
                     {
@@ -935,12 +945,15 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// Attaches an entity to the related end.  This method works in exactly the same way as Attach(object).
+        /// Attaches an entity to the related end.  This method works in exactly the same way as
+        // Attach(object).
         /// It is maintained for backward compatibility with previous versions of IRelatedEnd.
         /// </summary>
         /// <param name="entity">The entity to attach to the related end</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the current relationship end.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is
+        // null.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the
+        // current relationship end.</exception>
         void IRelatedEnd.Attach(IEntityWithRelationships entity)
         {
             ((IRelatedEnd)this).Attach((object)entity);
@@ -956,8 +969,10 @@ namespace System.Data.Objects.DataClasses
         /// instance.
         /// </summary>
         /// <param name="entity">The entity to attach to the related end</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the current relationship end.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is
+        // null.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the
+        // current relationship end.</exception>
         void IRelatedEnd.Attach(object entity)
         {
             CheckOwnerNull();
@@ -1101,7 +1116,8 @@ namespace System.Data.Objects.DataClasses
                 }
             }
 
-            // Having this verification here results in having the same exception no matter how the further code path is changed.
+            // Having this verification here results in having the same exception no matter how the further code
+            // path is changed.
             this.VerifyType(wrappedEntity);
 
             // verify the entity exists in the current context
@@ -1132,7 +1148,8 @@ namespace System.Data.Objects.DataClasses
                 "State cannot be detached if the entry was retrieved from the context"
             );
 
-            // verify the state of the entity (may not be in added state, since we only support attaching relationships
+            // verify the state of the entity (may not be in added state, since we only support attaching
+            // relationships
             // to existing entities)
             if (
                 stateEntry.State != EntityState.Unchanged
@@ -1200,13 +1217,15 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// Removes an entity from the related end.  This method works in exactly the same way as Remove(object).
+        /// Removes an entity from the related end.  This method works in exactly the same way as
+        // Remove(object).
         /// It is maintained for backward compatibility with previous versions of IRelatedEnd.
         /// </summary>
         /// <param name="entity">
         ///   Entity instance to remove from the related end
         /// </param>
-        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part of the RelatedEnd.</returns>
+        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part
+        // of the RelatedEnd.</returns>
         bool IRelatedEnd.Remove(IEntityWithRelationships entity)
         {
             return ((IRelatedEnd)this).Remove((object)entity);
@@ -1220,7 +1239,8 @@ namespace System.Data.Objects.DataClasses
         /// <param name="entity">
         ///   Entity instance to remove from the related end
         /// </param>
-        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part of the RelatedEnd.</returns>
+        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part
+        // of the RelatedEnd.</returns>
         bool IRelatedEnd.Remove(object entity)
         {
             EntityUtil.CheckArgumentNull(entity, "entity");
@@ -1274,7 +1294,8 @@ namespace System.Data.Objects.DataClasses
             // NOTE: Current cleaning code (which uses cleanupOwnerEntity and cleanupPassedInEntity)
             // works only if one of the entity is not attached to the context.
             // PERFORMANCE: following can be performed faster if ObjectStateManager provide method to
-            // lookup only in dictionary with Deleted entities (because here we are interested only in Deleted entities)
+            // lookup only in dictionary with Deleted entities (because here we are interested only in Deleted
+            // entities)
             if (_context != null && !UsingNoTracking)
             {
                 ValidateStateForAdd(_wrappedOwner);
@@ -1402,7 +1423,8 @@ namespace System.Data.Objects.DataClasses
 
             // Do actual add
 
-            // Perform multiplicity constraints verification for the target related end before current related end is modified.
+            // Perform multiplicity constraints verification for the target related end before current related
+            // end is modified.
             // The "allowModifyingOtherEndOfRelationship" is used by ObjectStateManager.ChangeRelationshipState.
             targetRelatedEnd.VerifyMultiplicityConstraintsForAdd(
                 !allowModifyingOtherEndOfRelationship
@@ -1418,7 +1440,8 @@ namespace System.Data.Objects.DataClasses
                 this.AddToCache(wrappedTarget, applyConstraints);
             }
 
-            // Fix up the target end of the relationship by adding the source entity to the target entity's collection or reference
+            // Fix up the target end of the relationship by adding the source entity to the target entity's
+            // collection or reference
             // devnote: applyConstraints should be always false to enable scenarios like this:
             //             orderLine.Order = order1;
             //             order2.OrderLines.Add(orderLine); // orderLine.Order is changed to order2
@@ -1426,7 +1449,8 @@ namespace System.Data.Objects.DataClasses
             {
                 // Example: IPOCO order, POCO customer with a bidirectional relationship
                 //  customer.Orders.Add(order);
-                //  order.Customer = customer <-- the Orders collection already contains "order" on fixup and this would add a duplicate
+                //  order.Customer = customer <-- the Orders collection already contains "order" on fixup and this
+                // would add a duplicate
                 targetRelatedEnd.AddToLocalCache(
                     _wrappedOwner, /*applyConstraints*/
                     false
@@ -1439,11 +1463,13 @@ namespace System.Data.Objects.DataClasses
                     false
                 );
             }
-            // delay event firing for targetRelatedEnd. once we fire the event, we should be at operation completed state
+            // delay event firing for targetRelatedEnd. once we fire the event, we should be at operation
+            // completed state
 
             // Ensure that both entities end up in the same context:
             // (1) If neither entity is attached to a context, we don't need to do anything else.
-            // (2) If they are both in the same one, we need to make sure neither one was created with MergeOption.NoTracking,
+            // (2) If they are both in the same one, we need to make sure neither one was created with
+            // MergeOption.NoTracking,
             //     and if not, add a relationship entry if it doesn't already exist.
             // (3) If both entities are already in different contexts, fail.
             // (4) Otherwise, only one entity is attached, and that is the context we will use.
@@ -1459,11 +1485,14 @@ namespace System.Data.Objects.DataClasses
             {
                 // Both entities are associated with the same non-null context
 
-                // Make sure that a relationship entry exists between these two entities. It is possible that the entities could
-                // have been added to the context independently of each other, so the relationship may not exist yet.
+                // Make sure that a relationship entry exists between these two entities. It is possible that the
+                // entities could
+                // have been added to the context independently of each other, so the relationship may not exist
+                // yet.
                 if (!this.IsForeignKey && !relationshipAlreadyExists && !UsingNoTracking)
                 {
-                    // If this Add is triggered by setting the principle end of an unchanged/modified dependent end, then the relationship should be Unchanged
+                    // If this Add is triggered by setting the principle end of an unchanged/modified dependent end,
+                    // then the relationship should be Unchanged
                     if (
                         !this.ObjectContext.ObjectStateManager.TransactionManager.IsLocalPublicAPI
                         && this.WrappedOwner.EntityKey != null
@@ -1482,7 +1511,8 @@ namespace System.Data.Objects.DataClasses
                 }
 
                 // The condition (IsAddTracking || IsAttachTracking || IsDetectChanges) excludes the case
-                // when the method is called from materialization when we don't want to verify the navigation property.
+                // when the method is called from materialization when we don't want to verify the navigation
+                // property.
                 if (
                     wrappedTarget.RequiresRelationshipChangeTracking
                     && (
@@ -1498,7 +1528,8 @@ namespace System.Data.Objects.DataClasses
             }
             else if (this.ObjectContext != null || targetRelatedEnd.ObjectContext != null)
             {
-                // Only one entity has a context, so figure out which one it is, and determine which entity we will be adding to it
+                // Only one entity has a context, so figure out which one it is, and determine which entity we will
+                // be adding to it
                 if (this.ObjectContext == null)
                 {
                     attachedRelatedEnd = targetRelatedEnd;
@@ -1749,11 +1780,13 @@ namespace System.Data.Objects.DataClasses
                 return;
             }
 
-            // There can be a case when symmetrical Remove() shall be performed because of Referential Constraints
+            // There can be a case when symmetrical Remove() shall be performed because of Referential
+            // Constraints
             // Example:
             //   Relationship Client -> Order with Referential Constraint on in.
             //   When user calls (pseudo code) Order.Remove(Client), we perform Client.Remove(Order),
-            //   because removing relationship between Client and Order should cause cascade delete on the Order side.
+            //   because removing relationship between Client and Order should cause cascade delete on the Order
+            // side.
             if (
                 null != _context
                 && doFixup
@@ -1792,7 +1825,8 @@ namespace System.Data.Objects.DataClasses
             {
                 FixupOtherEndOfRelationshipForRemove(wrappedEntity, preserveForeignKey);
 
-                // For the "LocalPublicAPI" just remove the entity from the related end, don't trigger cascade delete
+                // For the "LocalPublicAPI" just remove the entity from the related end, don't trigger cascade
+                // delete
                 if (
                     _context == null
                     || !_context.ObjectStateManager.TransactionManager.IsLocalPublicAPI
@@ -1800,8 +1834,10 @@ namespace System.Data.Objects.DataClasses
                 {
                     //The related end "entity" cannot live without this side "owner". It should be deleted. Cascade this
                     // effect to related entities of the "related" entity
-                    // We skip this delete/detach if the entity is being reparented (TransactionManager.EntityBeingReparented)
-                    // or if the reference is being nulled as part of fixup in a POCO proxy while setting the FK (InFKSetter).
+                    // We skip this delete/detach if the entity is being reparented
+                    // (TransactionManager.EntityBeingReparented)
+                    // or if the reference is being nulled as part of fixup in a POCO proxy while setting the FK
+                    // (InFKSetter).
                     if (
                         null != _context
                         && (
@@ -1846,7 +1882,8 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// Returns true if this Related end represents the dependent of a Referential Constraint
         /// </summary>
-        /// <param name="checkIdentifying">If true then the method will only return true if the Referential Constraint is identifying</param>
+        /// <param name="checkIdentifying">If true then the method will only return true if the Referential
+        // Constraint is identifying</param>
         internal bool IsDependentEndOfReferentialConstraint(bool checkIdentifying)
         {
             if (null != _relationMetadata)
@@ -1888,7 +1925,8 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// Check if current RelatedEnd is a Principal end of some Referential Constraint and if some of the "from" properties is not-nullable
+        /// Check if current RelatedEnd is a Principal end of some Referential Constraint and if some of the
+        // "from" properties is not-nullable
         /// </summary>
         internal bool IsPrincipalEndOfReferentialConstraint()
         {
@@ -1950,7 +1988,8 @@ namespace System.Data.Objects.DataClasses
 
         //Add given entity and its relationship to ObjectStateManager. Walk graph to recursively
         // add all entities in the graph.
-        // If doAttach==TRUE, the entities are attached directly as Unchanged without calling AcceptChanges()
+        // If doAttach==TRUE, the entities are attached directly as Unchanged without calling
+        // AcceptChanges()
         internal void IncludeEntity(
             IEntityWrapper wrappedEntity,
             bool addRelationshipAsUnchanged,
@@ -1964,7 +2003,8 @@ namespace System.Data.Objects.DataClasses
             );
 
             //check to see if entity is already added to the cache
-            //search by object reference so that we will not find any entries with the same key but a different object instance
+            //search by object reference so that we will not find any entries with the same key but a different
+            // object instance
             // NOTE: if (cacheEntry.Entity == entity) then this part of the graph is skipped
             EntityEntry cacheEntry = _context.ObjectStateManager.FindEntityEntry(
                 wrappedEntity.Entity
@@ -2054,14 +2094,16 @@ namespace System.Data.Objects.DataClasses
             // node B was visited through some relationship other than A-B.
             else if (null == FindRelationshipEntryInObjectStateManager(wrappedEntity))
             {
-                // If we have a reference with a detached key, make sure the key matches the relationship we are about to add
+                // If we have a reference with a detached key, make sure the key matches the relationship we are
+                // about to add
                 EntityReference entityRef = this as EntityReference;
                 if (entityRef != null && entityRef.DetachedEntityKey != null)
                 {
                     EntityKey targetKey = wrappedEntity.EntityKey;
                     if (entityRef.DetachedEntityKey != targetKey)
                     {
-                        // Check for the case where a NoTracking (with detached entity key) is being Added and throw the same
+                        // Check for the case where a NoTracking (with detached entity key) is being Added and throw the
+                        // same
                         // exception we do elsewhere for this case.
                         // We might consider changing this behavior in the future to just put the entity in the Added state,
                         // but for consistency for now we throw the same exception as elsewhere.
@@ -2084,7 +2126,8 @@ namespace System.Data.Objects.DataClasses
                         if (cacheEntry.State == EntityState.Added)
                         {
                             // In POCO, when the graph is partially attached and user is calling Attach on the detached entity
-                            // and the entity in the context is in the Added state, the relationship has to created also in Added state.
+                            // and the entity in the context is in the Added state, the relationship has to created also in
+                            // Added state.
                             AddRelationshipToObjectStateManager(
                                 wrappedEntity,
                                 addRelationshipAsUnchanged,
@@ -2284,7 +2327,8 @@ namespace System.Data.Objects.DataClasses
         // (entities with temporary keys are skipped)
         internal bool CheckReferentialConstraintProperties(EntityEntry ownerEntry)
         {
-            // if the related end contains a real entity or is a reference with a detached entitykey, we need to check for RI constraints
+            // if the related end contains a real entity or is a reference with a detached entitykey, we need to
+            // check for RI constraints
             if (
                 !this.IsEmpty()
                 || (
@@ -2310,8 +2354,10 @@ namespace System.Data.Objects.DataClasses
                         if (IsEmpty())
                         {
                             // Generally for foreign keys we want to use the EntityKey to do RI constraint validation
-                            // However, if we are doing an Add/Attach, we should use the DetachedEntityKey because this is the value
-                            // set by the user while the entity was detached, and should be used until the entity is fully added/attached
+                            // However, if we are doing an Add/Attach, we should use the DetachedEntityKey because this is the
+                            // value
+                            // set by the user while the entity was detached, and should be used until the entity is fully
+                            // added/attached
                             if (
                                 this.IsForeignKey
                                 && !(
@@ -2380,7 +2426,8 @@ namespace System.Data.Objects.DataClasses
                                 );
                             }
 #endif
-                            // don't need to validate the principal/detached key here because that has already been done during AttachContext
+                            // don't need to validate the principal/detached key here because that has already been done during
+                            // AttachContext
                             if (
                                 !VerifyRIConstraintsWithRelatedEntry(
                                     constraint,
@@ -2427,7 +2474,8 @@ namespace System.Data.Objects.DataClasses
         private EntityKey ExtractPrincipalKey(IEntityWrapper wrappedRelatedEntity)
         {
             EntitySet principalEntitySet = GetTargetEntitySetFromRelationshipSet();
-            // get or create a key to use to compare the values -- the target entity might not have been attached
+            // get or create a key to use to compare the values -- the target entity might not have been
+            // attached
             // yet so it may not have a key, but we can create one here to use for checking the values
             EntityKey principalKey = wrappedRelatedEntity.EntityKey;
             if (null != (object)principalKey && !principalKey.IsTemporary)
@@ -2485,7 +2533,8 @@ namespace System.Data.Objects.DataClasses
 
         public IEnumerator GetEnumerator()
         {
-            // Due to the way the CLR handles IEnumerator return types, the check for a null owner for EntityReferences
+            // Due to the way the CLR handles IEnumerator return types, the check for a null owner for
+            // EntityReferences
             // must be made here because GetInternalEnumerator is delay-executed and so will not throw until the
             // enumerator is advanced
             if (this is EntityReference)
@@ -2723,7 +2772,8 @@ namespace System.Data.Objects.DataClasses
                 _context.AttachSingleObject(wrappedEntity, es, "entity");
             }
 
-            // Now that we know we have a valid EntityKey for the target entity, verify that it matches the detached EntityKey, if there is one
+            // Now that we know we have a valid EntityKey for the target entity, verify that it matches the
+            // detached EntityKey, if there is one
             EntityReference entityRef = this as EntityReference;
             if (entityRef != null && entityRef.DetachedEntityKey != null)
             {
@@ -3015,7 +3065,8 @@ namespace System.Data.Objects.DataClasses
             EntityUtil.CheckArgumentNull(entitySet, "entitySet");
 
             _wrappedOwner.RelationshipManager.NodeVisited = false;
-            // If the context is the same as what we already have, and the mergeOption is consistent with our UsingNoTracking setting, nothing more to do
+            // If the context is the same as what we already have, and the mergeOption is consistent with our
+            // UsingNoTracking setting, nothing more to do
             if (
                 _context == context
                 && (_usingNoTracking == (mergeOption == MergeOption.NoTracking))
@@ -3108,7 +3159,8 @@ namespace System.Data.Objects.DataClasses
                 // If this is a stub EntityReference and the DetachedEntityKey is set, make sure it is valid
                 if (this.IsEmpty())
                 {
-                    // if there are no contained entities but this is a reference with a detached entity key, validate the key
+                    // if there are no contained entities but this is a reference with a detached entity key, validate
+                    // the key
                     EntityReference entityRef = this as EntityReference;
                     if (entityRef != null && entityRef.DetachedEntityKey != null)
                     {
@@ -3138,7 +3190,8 @@ namespace System.Data.Objects.DataClasses
             {
                 if (doCleanup)
                 {
-                    // Uninitialize fields, so the cleanup code (for example in RelationshipWrapper.RemoveRelatedEntitiesFromObjectStateManager)
+                    // Uninitialize fields, so the cleanup code (for example in
+                    // RelationshipWrapper.RemoveRelatedEntitiesFromObjectStateManager)
                     // knows that this RelatedEnd was not properly Attached.
                     this.DetachContext();
                 }
@@ -3239,10 +3292,13 @@ namespace System.Data.Objects.DataClasses
 
         // We have to allow a default constructor for serialization, so we need to make sure that the only
         // thing you can do with a null owner is get/set the EntityReference.EntityKey property. All other
-        // operations are invalid. This needs to be used on all public methods in this class and EntityReference
+        // operations are invalid. This needs to be used on all public methods in this class and
+        // EntityReference
         // but not in EntityCollection because EntityCollection does not have a default constructor.
-        // It is not possible to get an EntityReference with a null Owner into the RelationshipManager, and there
-        // is no way to access EntityReference without creating one using the default constructor or going through
+        // It is not possible to get an EntityReference with a null Owner into the RelationshipManager, and
+        // there
+        // is no way to access EntityReference without creating one using the default constructor or going
+        // through
         // the RelationshipManager, so we don't need to check this in internal or private methods.
         internal void CheckOwnerNull()
         {
@@ -3252,9 +3308,12 @@ namespace System.Data.Objects.DataClasses
             }
         }
 
-        // This method is intended to be used to support the public API InitializeRelatedReference, where we have to take an existing EntityReference
-        // and set up the appropriate fields as shown below, instead of creating a new EntityReference and setting these fields in the constructor.
-        // This is also used by the constructor -- if we add something that needs to be set at construction time, it probably needs to be set for InitializeRelatedReference as well.
+        // This method is intended to be used to support the public API InitializeRelatedReference, where we
+        // have to take an existing EntityReference
+        // and set up the appropriate fields as shown below, instead of creating a new EntityReference and
+        // setting these fields in the constructor.
+        // This is also used by the constructor -- if we add something that needs to be set at construction
+        // time, it probably needs to be set for InitializeRelatedReference as well.
         internal void InitializeRelatedEnd(
             IEntityWrapper wrappedOwner,
             RelationshipNavigation navigation,
@@ -3358,7 +3417,8 @@ namespace System.Data.Objects.DataClasses
             }
         }
 
-        // If the RelationshipNavigation has not been fully initialized, it means this RelatedEnd was created without metadata
+        // If the RelationshipNavigation has not been fully initialized, it means this RelatedEnd was
+        // created without metadata
         // This can occur in serialization scenarios
         // Try to look up the metadata in all metadata repositories that are available and populate it
         // This must be called before accessing any of the Accessor properties on the RelationshipNavigation

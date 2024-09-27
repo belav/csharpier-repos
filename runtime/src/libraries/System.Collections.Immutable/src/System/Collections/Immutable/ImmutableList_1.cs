@@ -119,7 +119,8 @@ namespace System.Collections.Immutable
         /// <paramref name="index"/> is less than 0.-or-<paramref name="count"/> is less than 0.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="index"/> and <paramref name="count"/> do not denote a valid range in the <see cref="ImmutableList{T}"/>.
+        /// <paramref name="index"/> and <paramref name="count"/> do not denote a valid range in the <see
+        // cref="ImmutableList{T}"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
         /// <paramref name="comparer"/> is null, and the default comparer <see cref="Comparer{T}.Default"/>
@@ -175,7 +176,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="index">The 0-based index of the element in the set to return.</param>
         /// <returns>The element at the given position.</returns>
-        /// <exception cref="IndexOutOfRangeException">Thrown from getter when <paramref name="index"/> is negative or not less than <see cref="Count"/>.</exception>
+        /// <exception cref="IndexOutOfRangeException">Thrown from getter when <paramref name="index"/> is
+        // negative or not less than <see cref="Count"/>.</exception>
         public T this[int index] => _root.ItemRef(index);
 
         /// <summary>
@@ -183,7 +185,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="index">The 0-based index of the element in the set to return.</param>
         /// <returns>A read-only reference to the element at the given position.</returns>
-        /// <exception cref="IndexOutOfRangeException">Thrown when <paramref name="index"/> is negative or not less than <see cref="Count"/>.</exception>
+        /// <exception cref="IndexOutOfRangeException">Thrown when <paramref name="index"/> is negative or
+        // not less than <see cref="Count"/>.</exception>
         public ref readonly T ItemRef(int index) => ref _root.ItemRef(index);
 
         #endregion
@@ -510,7 +513,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Performs the specified action on each element of the list.
         /// </summary>
-        /// <param name="action">The System.Action&lt;T&gt; delegate to perform on each element of the list.</param>
+        /// <param name="action">The System.Action&lt;T&gt; delegate to perform on each element of the
+        // list.</param>
         public void ForEach(Action<T> action)
         {
             Requires.NotNull(action, nameof(action));
@@ -673,7 +677,8 @@ namespace System.Collections.Immutable
         /// from the specified index to the last element.
         /// </summary>
         /// <param name="startIndex">The zero-based starting index of the search.</param>
-        /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the element to search for.</param>
+        /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the
+        // element to search for.</param>
         /// <returns>
         /// The zero-based index of the first occurrence of an element that matches the
         /// conditions defined by <paramref name="match"/>, if found; otherwise, -1.
@@ -689,7 +694,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="startIndex">The zero-based starting index of the search.</param>
         /// <param name="count">The number of elements in the section to search.</param>
-        /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the element to search for.</param>
+        /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the
+        // element to search for.</param>
         /// <returns>
         /// The zero-based index of the first occurrence of an element that matches the
         /// conditions defined by <paramref name="match"/>, if found; otherwise, -1.
@@ -733,7 +739,8 @@ namespace System.Collections.Immutable
         /// from the first element to the specified index.
         /// </summary>
         /// <param name="startIndex">The zero-based starting index of the backward search.</param>
-        /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the element
+        /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the
+        // element
         /// to search for.</param>
         /// <returns>
         /// The zero-based index of the last occurrence of an element that matches the
@@ -804,7 +811,8 @@ namespace System.Collections.Immutable
         /// The equality comparer to use in the search.
         /// </param>
         /// <returns>
-        /// The zero-based index of the last occurrence of <paramref name="item"/> within the range of elements
+        /// The zero-based index of the last occurrence of <paramref name="item"/> within the range of
+        // elements
         /// in the <see cref="ImmutableList{T}"/> that contains <paramref name="count"/> number of elements
         /// and ends at <paramref name="index"/>, if found; otherwise, -1.
         /// </returns>
@@ -926,7 +934,8 @@ namespace System.Collections.Immutable
         /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
         /// </param>
         /// <returns>The new list.</returns>
-        /// <exception cref="ArgumentException">Thrown when the old value does not exist in the list.</exception>
+        /// <exception cref="ArgumentException">Thrown when the old value does not exist in the
+        // list.</exception>
         IImmutableList<T> IImmutableList<T>.Replace(
             T oldValue,
             T newValue,
@@ -983,7 +992,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Gets or sets the value at the specified index.
         /// </summary>
-        /// <exception cref="IndexOutOfRangeException">Thrown from getter when <paramref name="index"/> is negative or not less than <see cref="Count"/>.</exception>
+        /// <exception cref="IndexOutOfRangeException">Thrown from getter when <paramref name="index"/> is
+        // negative or not less than <see cref="Count"/>.</exception>
         /// <exception cref="NotSupportedException">Always thrown from the setter.</exception>
         T IList<T>.this[int index]
         {
@@ -1082,7 +1092,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Inserts an item to the <see cref="IList"/> at the specified index.
         /// </summary>
-        /// <param name="index">The zero-based index at which <paramref name="value"/> should be inserted.</param>
+        /// <param name="index">The zero-based index at which <paramref name="value"/> should be
+        // inserted.</param>
         /// <param name="value">The object to insert into the <see cref="IList"/>.</param>
         /// <exception cref="NotSupportedException">Always thrown.</exception>
         void IList.Insert(int index, object? value) => throw new NotSupportedException();
@@ -1115,7 +1126,8 @@ namespace System.Collections.Immutable
         /// </value>
         /// <param name="index">The index.</param>
         /// <returns>The value at the specified index.</returns>
-        /// <exception cref="IndexOutOfRangeException">Thrown from getter when <paramref name="index"/> is negative or not less than <see cref="Count"/>.</exception>
+        /// <exception cref="IndexOutOfRangeException">Thrown from getter when <paramref name="index"/> is
+        // negative or not less than <see cref="Count"/>.</exception>
         /// <exception cref="NotSupportedException">Always thrown from the setter.</exception>
         object? IList.this[int index]
         {
@@ -1132,10 +1144,14 @@ namespace System.Collections.Immutable
         /// A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.
         /// </returns>
         /// <remarks>
-        /// CAUTION: when this enumerator is actually used as a valuetype (not boxed) do NOT copy it by assigning to a second variable
-        /// or by passing it to another method.  When this enumerator is disposed of it returns a mutable reference type stack to a resource pool,
-        /// and if the value type enumerator is copied (which can easily happen unintentionally if you pass the value around) there is a risk
-        /// that a stack that has already been returned to the resource pool may still be in use by one of the enumerator copies, leading to data
+        /// CAUTION: when this enumerator is actually used as a valuetype (not boxed) do NOT copy it by
+        // assigning to a second variable
+        /// or by passing it to another method.  When this enumerator is disposed of it returns a mutable
+        // reference type stack to a resource pool,
+        /// and if the value type enumerator is copied (which can easily happen unintentionally if you pass
+        // the value around) there is a risk
+        /// that a stack that has already been returned to the resource pool may still be in use by one of
+        // the enumerator copies, leading to data
         /// corruption and/or exceptions.
         /// </remarks>
         public Enumerator GetEnumerator() => new Enumerator(_root);
@@ -1160,7 +1176,8 @@ namespace System.Collections.Immutable
         /// if one exists.
         /// </summary>
         /// <param name="sequence">The sequence that may have come from an immutable list.</param>
-        /// <param name="other">Receives the concrete <see cref="ImmutableList{T}"/> typed value if one can be found.</param>
+        /// <param name="other">Receives the concrete <see cref="ImmutableList{T}"/> typed value if one can
+        // be found.</param>
         /// <returns><c>true</c> if the cast was successful; <c>false</c> otherwise.</returns>
         private static bool TryCastToImmutableList(
             IEnumerable<T> sequence,

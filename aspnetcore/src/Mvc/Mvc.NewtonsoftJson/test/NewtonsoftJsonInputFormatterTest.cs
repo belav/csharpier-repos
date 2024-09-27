@@ -113,7 +113,8 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
         var formatterContext = CreateInputFormatterContext(typeof(User), httpContext);
 
         // Act
-        // Mutate options after passing into the constructor to make sure that the value type is not store in the constructor
+        // Mutate options after passing into the constructor to make sure that the value type is not store
+        // in the constructor
         mvcOptions.SuppressInputFormatterBuffering = true;
         var result = await formatter.ReadAsync(formatterContext);
 

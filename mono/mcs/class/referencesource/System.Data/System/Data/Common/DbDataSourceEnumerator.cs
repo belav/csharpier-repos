@@ -23,47 +23,50 @@ namespace System.Data.Common
 
         public abstract DataTable GetDataSources(); // V1.2.3300
 
-        /*
-        virtual public IAsyncResult BeginGetDataSources(AsyncCallback callback, object asyncStateObject) { // V1.2.3300
-            DbEnumSynchronousAsyncResult asyncResult = new DbEnumSynchronousAsyncResult(callback, asyncStateObject);
-            try {
-                asyncResult._dataTable = GetElements();
-                asyncResult.SetCompletedSynchronously();
-            }
-            catch(DataAdapterException e) {
-                ADP.TraceExceptionForCapture(e);
-                asyncResult.ExceptionObject = e;
-            }
-            if (null == asyncResult._dataTable) {
-                throw ADP.DataAdapter("no datatable");
-            }
-            if (null != callback) {
-                callback(asyncResult);
-            }
-            return asyncResult;
-        }
+/*
+virtual public IAsyncResult BeginGetDataSources(AsyncCallback callback, object asyncStateObject) {
+// V1.2.3300
+DbEnumSynchronousAsyncResult asyncResult = new DbEnumSynchronousAsyncResult(callback,
+asyncStateObject);
+try {
+asyncResult._dataTable = GetElements();
+asyncResult.SetCompletedSynchronously();
+}
+catch(DataAdapterException e) {
+ADP.TraceExceptionForCapture(e);
+asyncResult.ExceptionObject = e;
+}
+if (null == asyncResult._dataTable) {
+throw ADP.DataAdapter("no datatable");
+}
+if (null != callback) {
+callback(asyncResult);
+}
+return asyncResult;
+}
 
-        virtual public DataTable EndGetDataSources(IAsyncResult asyncResult) { // V1.2.3300
-            ADP.CheckArgumentNull(asyncResult, "asyncResult");
-            DbEnumSynchronousAsyncResult ar = (asyncResult as DbEnumSynchronousAsyncResult);
-            if (ar._endXxxCalled) {
-                throw ADP.InvalidOperation("EndGetElements called twice");
-            }
-            ar._endXxxCalled = true;
+virtual public DataTable EndGetDataSources(IAsyncResult asyncResult) { // V1.2.3300
+ADP.CheckArgumentNull(asyncResult, "asyncResult");
+DbEnumSynchronousAsyncResult ar = (asyncResult as DbEnumSynchronousAsyncResult);
+if (ar._endXxxCalled) {
+throw ADP.InvalidOperation("EndGetElements called twice");
+}
+ar._endXxxCalled = true;
 
-            if (null != ar.ExceptionObject) {
-                throw ar.ExceptionObject;
-            }
-            return ar._dataTable;
-        }
+if (null != ar.ExceptionObject) {
+throw ar.ExceptionObject;
+}
+return ar._dataTable;
+}
 
-        sealed private class DbEnumSynchronousAsyncResult : DbAsyncResult {
-            internal bool      _endXxxCalled;
-            internal DataTable _dataTable;
+sealed private class DbEnumSynchronousAsyncResult : DbAsyncResult {
+internal bool      _endXxxCalled;
+internal DataTable _dataTable;
 
-            internal DbEnumSynchronousAsyncResult(AsyncCallback callback, Object asyncStateObject) : base(null, callback, asyncStateObject) {
-            }
-        }
-        */
+internal DbEnumSynchronousAsyncResult(AsyncCallback callback, Object asyncStateObject) : base(null,
+callback, asyncStateObject) {
+}
+}
+*/
     }
 }

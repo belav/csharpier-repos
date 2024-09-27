@@ -207,7 +207,7 @@ namespace System.Windows.Forms
             Draw(pevent, clip);
         }
 
-        /* Mouse events from the form */
+/* Mouse events from the form */
         internal void OnMouseDown(object window, MouseEventArgs args)
         {
             tracker.OnMouseDown(args);

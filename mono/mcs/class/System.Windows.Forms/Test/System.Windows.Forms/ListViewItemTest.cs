@@ -662,8 +662,8 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(item1.ToolTipText, item2.ToolTipText, "#8");
             // Focused is not copied
             // These tests shoule be re-enabled when #333693
-            /*Assert.IsTrue (item1.Focused, "#9");
-            Assert.IsFalse (item2.Focused, "#10");*/
+/*Assert.IsTrue (item1.Focused, "#9");
+Assert.IsFalse (item2.Focused, "#10");*/
 
             f.Dispose();
         }

@@ -63,7 +63,8 @@ namespace System.Threading
         {
             // NOTE: We do not check the frequency of the Stopwatch.
             //       The frequency often does not match the actual timer refresh rate anyways.
-            //       If the resolution, precision or access time to the timer are inadequate for our measures here,
+            //       If the resolution, precision or access time to the timer are inadequate for our measures
+            // here,
             //       the test will fail anyways.
 
             double minID = double.MaxValue;
@@ -121,27 +122,38 @@ namespace System.Threading
             // 1) To improve locality - avoid running on one core and using data in other core's cache.
             // 2) To reduce sharing - avoid multiple threads using the same piece of data.
             //
-            // Scenarios with large footprint, like striped caches, are sensitive to both parts. It is desirable to access
+            // Scenarios with large footprint, like striped caches, are sensitive to both parts. It is desirable
+            // to access
             // large data from the "right" core.
             // In scenarios where the state is small, like a striped counter, it is mostly about sharing.
-            // Otherwise the state is small and occasionally moving counter to a different core via cache miss is not a big deal.
+            // Otherwise the state is small and occasionally moving counter to a different core via cache miss
+            // is not a big deal.
             //
-            // In scenarios that care more about sharing precise results of GetCurrentProcessorNumber may not justify
+            // In scenarios that care more about sharing precise results of GetCurrentProcessorNumber may not
+            // justify
             // the cost unless the underlying implementation is very cheap.
-            // In such cases it is desirable to amortize the cost over multiple accesses by caching in a ThreadStatic.
+            // In such cases it is desirable to amortize the cost over multiple accesses by caching in a
+            // ThreadStatic.
             //
-            // In addition to the data structure, the benefits also depend on use pattern and on concurrency level.
-            // I.E. if an array pool user only rents array "just in case" but does not actually use it, and concurrency level is low,
+            // In addition to the data structure, the benefits also depend on use pattern and on concurrency
+            // level.
+            // I.E. if an array pool user only rents array "just in case" but does not actually use it, and
+            // concurrency level is low,
             // a longer refresh would be beneficial since that could lower the API cost.
-            // If array is actually used, then there is benefit from higher precision of the API and shorter refresh is more attractive.
+            // If array is actually used, then there is benefit from higher precision of the API and shorter
+            // refresh is more attractive.
             //
-            // Overall we do not know the ideal refresh rate and using some kind of dynamic feedback is unlikely to be feasible.
-            // Experiments have shown, however, that 5x amortization rate is a good enough balance between precision and cost of the API.
+            // Overall we do not know the ideal refresh rate and using some kind of dynamic feedback is unlikely
+            // to be feasible.
+            // Experiments have shown, however, that 5x amortization rate is a good enough balance between
+            // precision and cost of the API.
             s_processorIdRefreshRate = Math.Min((int)(minID * 5 / minTLS), MaxIdRefreshRate);
 
-            // In a case if GetCurrentProcessorNumber is particularly fast, like it happens on platforms supporting RDPID instruction,
+            // In a case if GetCurrentProcessorNumber is particularly fast, like it happens on platforms
+            // supporting RDPID instruction,
             // caching is not an improvement, thus it is desirable to bypass the cache entirely.
-            // Such systems consistently derive the refresh rate at or below 2-3, while the next tier, RDTSCP based implementations result in ~10,
+            // Such systems consistently derive the refresh rate at or below 2-3, while the next tier, RDTSCP
+            // based implementations result in ~10,
             // so we use "5" as a criteria to separate "fast" machines from the rest.
             return s_processorIdRefreshRate <= 5;
         }

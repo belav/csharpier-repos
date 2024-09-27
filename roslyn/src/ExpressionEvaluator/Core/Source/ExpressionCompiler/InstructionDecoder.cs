@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         }
 
         /// <summary>
-        /// Constructs a method and any of its generic containing types using the specified <paramref name="typeArguments"/>.
+        /// Constructs a method and any of its generic containing types using the specified <paramref
+        // name="typeArguments"/>.
         /// </summary>
         internal abstract TMethodSymbol ConstructMethod(
             TMethodSymbol method,

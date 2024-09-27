@@ -174,8 +174,10 @@ namespace DbLinq.SqlServer
                 dateA
             );
 
-            //this trick is needed in sqlserver since DATEDIFF(MILLISECONDS,{0},{1}) usually crhases in the database engine due an overflow:
-            //System.Data.SqlClient.SqlException : Difference of two datetime columns caused overflow at runtime.
+            //this trick is needed in sqlserver since DATEDIFF(MILLISECONDS,{0},{1}) usually crhases in the
+            // database engine due an overflow:
+            //System.Data.SqlClient.SqlException : Difference of two datetime columns caused overflow at
+            // runtime.
         }
 
         protected override SqlStatement GetLiteralDateTimePart(
@@ -306,7 +308,8 @@ namespace DbLinq.SqlServer
             { typeof(short), "tinyint" },
             { typeof(ushort), "tinyint" },
             { typeof(bool), "bit" },
-            // trunk? They could be: varchar, char,nchar, ntext,text... it should be the most flexible string type. TODO: check wich of them is better.
+            // trunk? They could be: varchar, char,nchar, ntext,text... it should be the most flexible string
+            // type. TODO: check wich of them is better.
             { typeof(string), "varchar" },
             { typeof(char[]), "varchar" },
             { typeof(char), "char" },

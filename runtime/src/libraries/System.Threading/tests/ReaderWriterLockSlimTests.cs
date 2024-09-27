@@ -443,7 +443,8 @@ namespace System.Threading.Tests
                     {
                         // Typical order of execution: 1
 
-                        // Add a writer to the wait list for enough time to allow successive readers to enter the wait list while this
+                        // Add a writer to the wait list for enough time to allow successive readers to enter the wait list
+                        // while this
                         // writer is waiting
                         beforeTryEnterWriteLock.Set();
                         if (rwls.TryEnterWriteLock(1000))
@@ -462,7 +463,8 @@ namespace System.Threading.Tests
                 }
                 Thread.Sleep(500); // wait for TryEnterWriteLock to enter the wait list
 
-                // A writer should now be waiting, add readers to the wait list. Since a read lock is still acquired, the writer
+                // A writer should now be waiting, add readers to the wait list. Since a read lock is still
+                // acquired, the writer
                 // should time out waiting, then these readers should enter and exit the lock.
                 ThreadStart EnterAndExitReadLock = () =>
                 {
@@ -541,7 +543,8 @@ namespace System.Threading.Tests
 
                 // Typical order of execution: 1
                 rwls.ExitWriteLock();
-                // At this point there is still one reader and one waiting writer, so the reader-writer lock should not try to
+                // At this point there is still one reader and one waiting writer, so the reader-writer lock should
+                // not try to
                 // release any of the threads waiting for a lock
 
                 // Typical order of execution: 2

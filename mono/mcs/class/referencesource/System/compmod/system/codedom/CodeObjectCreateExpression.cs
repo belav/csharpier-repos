@@ -34,7 +34,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new <see cref='System.CodeDom.CodeObjectCreateExpression'/> using the specified type and
+        ///       Initializes a new <see cref='System.CodeDom.CodeObjectCreateExpression'/> using the
+        // specified type and
         ///       parameters.
         ///    </para>
         /// </devdoc>

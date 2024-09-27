@@ -170,10 +170,12 @@ namespace System.IdentityModel.Selectors
 
                 // The following code could be written as:
                 // DateTime now = DateTime.UtcNow;
-                // if (now > certificate.NotAfter.ToUniversalTime() || now < certificate.NotBefore.ToUniversalTime())
+                // if (now > certificate.NotAfter.ToUniversalTime() || now <
+                // certificate.NotBefore.ToUniversalTime())
                 //
                 // this is because X509Certificate2.xxx doesn't return UT.  However this would be a SMALL perf hit.
-                // I put a DebugAssert so that this will ensure that the we are compatible with the CLR we shipped with
+                // I put a DebugAssert so that this will ensure that the we are compatible with the CLR we shipped
+                // with
 
                 DateTime now = DateTime.Now;
                 DiagnosticUtility.DebugAssert(

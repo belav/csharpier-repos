@@ -30,11 +30,13 @@ public class BindingMetadata
     public string? BinderModelName { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Type"/> of the <see cref="IModelBinder"/> implementation used to bind the
+    /// Gets or sets the <see cref="Type"/> of the <see cref="IModelBinder"/> implementation used to
+    // bind the
     /// model. See <see cref="ModelMetadata.BinderType"/>.
     /// </summary>
     /// <remarks>
-    /// Also set <see cref="BindingSource"/> if the specified <see cref="IModelBinder"/> implementation does not
+    /// Also set <see cref="BindingSource"/> if the specified <see cref="IModelBinder"/> implementation
+    // does not
     /// use values from form data, route values or the query string.
     /// </remarks>
     public Type? BinderType
@@ -75,7 +77,8 @@ public class BindingMetadata
     /// Gets or sets a value indicating whether or not the model is read-only. Will be ignored
     /// if the model metadata being created is not a property. If <c>null</c> then
     /// <see cref="ModelMetadata.IsReadOnly"/> will be  computed based on the accessibility
-    /// of the property accessor and model <see cref="Type"/>. See <see cref="ModelMetadata.IsReadOnly"/>.
+    /// of the property accessor and model <see cref="Type"/>. See <see
+    // cref="ModelMetadata.IsReadOnly"/>.
     /// </summary>
     public bool? IsReadOnly { get; set; }
 

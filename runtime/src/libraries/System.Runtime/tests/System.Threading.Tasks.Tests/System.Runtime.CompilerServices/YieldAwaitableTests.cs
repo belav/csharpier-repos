@@ -134,7 +134,8 @@ namespace System.Threading.Tasks.Tests
             }
 
             {
-                // Yield when there's a current TaskScheduler and SynchronizationContext.Current is the base SynchronizationContext
+                // Yield when there's a current TaskScheduler and SynchronizationContext.Current is the base
+                // SynchronizationContext
                 Task.Factory.StartNew(
                         () =>
                         {
@@ -306,7 +307,8 @@ namespace System.Threading.Tasks.Tests
             }
         }
 
-        /// <summary>A scheduler that queues to the TP and tracks the number of times QueueTask and TryExecuteTaskInline are invoked.</summary>
+        /// <summary>A scheduler that queues to the TP and tracks the number of times QueueTask and
+        // TryExecuteTaskInline are invoked.</summary>
         private class QUWITaskScheduler : TaskScheduler
         {
             private int _queueTaskCount;

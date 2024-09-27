@@ -59,7 +59,8 @@ namespace System.ServiceModel.Dispatcher
             string faultCodeNamespace,
                 action;
 
-            // 'Transactions' action should be used only when we expect to have a TransactionChannel in the channel stack
+            // 'Transactions' action should be used only when we expect to have a TransactionChannel in the
+            // channel stack
             // otherwise one should use the NetDispatch action.
             if (isNetDispatcherFault)
             {
@@ -185,7 +186,8 @@ namespace System.ServiceModel.Dispatcher
             }
 
             Transaction contextTransaction = null;
-            //If we are inside a TransactedReceiveScope in workflow, then we need to look into the PPD and not the InstanceContext
+            //If we are inside a TransactedReceiveScope in workflow, then we need to look into the PPD and not
+            // the InstanceContext
             //to get the contextTransaction
             if (rpc.Operation.IsInsideTransactedReceiveScope)
             {
@@ -454,7 +456,8 @@ namespace System.ServiceModel.Dispatcher
                     {
                         //It is because we want to synchronize the dispatcher processing of messages with the commit
                         //processing that is started by the completion of a TransactedReceiveScope. We need to make sure
-                        //that all the dispatcher processing is done and we can do that by creating a blocking dependent clone and only
+                        //that all the dispatcher processing is done and we can do that by creating a blocking dependent
+                        // clone and only
                         //completing it after all of the message processing is done for a given TransactionRpcFacet
                         rpc.Transaction.CreateDependentClone();
                     }
@@ -526,9 +529,11 @@ namespace System.ServiceModel.Dispatcher
         }
 
         // Calling Complete will Commit or Abort the transaction based on,
-        // error - If any user error is propagated to the service we abort the transaction unless SetTransactionComplete was successful.
+        // error - If any user error is propagated to the service we abort the transaction unless
+        // SetTransactionComplete was successful.
         // transactionDoomed - If internal error occurred and this error may or may not be propagated
-        //                                 by the user to the service. Abort the Tx if transactionDoomed is set true.
+        //                                 by the user to the service. Abort the Tx if transactionDoomed is
+        // set true.
         //
         // If the user violates the following rules, the transaction is doomed.
         // User cannot call TransactionSetComplete() when TransactionAutoComplete is true.
@@ -585,7 +590,8 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (this.rpc.Operation.IsInsideTransactedReceiveScope)
                 {
-                    //We are done with the message processing associated with this TransactionRpcFacet so a commit that may have
+                    //We are done with the message processing associated with this TransactionRpcFacet so a commit that
+                    // may have
                     //been started by a TransactedReceiveScope can move forward.
                     this.CompleteDependentClone();
                 }
@@ -747,6 +753,7 @@ namespace System.ServiceModel.Dispatcher
             this.mutex = instanceContext.ThisLock;
         }
 
+        //
         // ........................................................................................................
         // no need to lock the following property because it's used only if Concurrency = false
         internal bool ShouldReleaseInstance
@@ -755,6 +762,7 @@ namespace System.ServiceModel.Dispatcher
             set { this.shouldReleaseInstance = value; }
         }
 
+        //
         // ........................................................................................................
         [MethodImpl(MethodImplOptions.NoInlining)]
         internal void CheckIfTxCompletedAndUpdateAttached(ref MessageRpc rpc, bool isConcurrent)
@@ -893,6 +901,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
+        //
         // ........................................................................................................
         internal void CompletePendingTransaction(Transaction transaction, Exception error)
         {
@@ -905,6 +914,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
+        //
         // ........................................................................................................
         internal static void Complete(Transaction transaction, Exception error)
         {
@@ -944,6 +954,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
+        //
         // ........................................................................................................
         internal TransactionScope CreateTransactionScope(Transaction transaction)
         {
@@ -973,6 +984,7 @@ namespace System.ServiceModel.Dispatcher
             );
         }
 
+        //
         // ........................................................................................................
 
         internal void SetCurrent(ref MessageRpc rpc)
@@ -1005,6 +1017,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
+        //
         // ........................................................................................................
 
         internal void AddReference(ref MessageRpc rpc, Transaction tx, bool updateCallCount)
@@ -1093,6 +1106,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
+        //
         // ........................................................................................................
 
 

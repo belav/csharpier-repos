@@ -53,7 +53,8 @@ namespace ILCompiler.DependencyAnalysis
                     new ISymbolDefinitionNode[] { this }
                 );
 
-            // Ensure the native layout data has been saved, in order to get valid Vertex offsets for the signature Vertices
+            // Ensure the native layout data has been saved, in order to get valid Vertex offsets for the
+            // signature Vertices
             factory.MetadataManager.NativeLayoutInfo.SaveNativeLayoutInfoWriter(factory);
 
             NativeWriter nativeWriter = new NativeWriter();
@@ -96,7 +97,8 @@ namespace ILCompiler.DependencyAnalysis
                 }
 
                 // Get the name and sig of the method.
-                // Note: the method name and signature are stored in the NativeLayoutInfo blob, not in the hashtable we build here.
+                // Note: the method name and signature are stored in the NativeLayoutInfo blob, not in the hashtable
+                // we build here.
 
                 NativeLayoutMethodNameAndSignatureVertexNode nameAndSig =
                     factory.NativeLayout.MethodNameAndSignatureVertex(

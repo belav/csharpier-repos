@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
     /// Represents a namespace of a RetargetingModuleSymbol. Essentially this is a wrapper around
-    /// another NamespaceSymbol that is responsible for retargeting symbols from one assembly to another.
+    /// another NamespaceSymbol that is responsible for retargeting symbols from one assembly to
+    // another.
     /// It can retarget symbols for multiple assemblies at the same time.
     /// </summary>
     internal sealed class RetargetingNamespaceSymbol : NamespaceSymbol

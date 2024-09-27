@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Collection of Http cookies for request and response intrinsics
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Collection of Http cookies for request and response intrinsics
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -54,13 +54,16 @@ namespace System.Web
         public HttpCookieCollection()
             : base(StringComparer.OrdinalIgnoreCase) { }
 
-        // This copy constructor is used by the granular request validation feature. The collections are mutable once
-        // created, but nobody should ever be mutating them, so it's ok for these to be out of sync. Additionally,
+        // This copy constructor is used by the granular request validation feature. The collections are
+        // mutable once
+        // created, but nobody should ever be mutating them, so it's ok for these to be out of sync.
+        // Additionally,
         // we don't copy _response since this should only ever be called for the request cookies.
         internal HttpCookieCollection(HttpCookieCollection col)
             : base(StringComparer.OrdinalIgnoreCase)
         {
-            // We explicitly don't copy validation-related fields, as we want the copy to "reset" validation state.
+            // We explicitly don't copy validation-related fields, as we want the copy to "reset" validation
+            // state.
 
             // Copy the file references from the original collection into this instance
             for (int i = 0; i < col.Count; i++)
@@ -360,9 +363,9 @@ namespace System.Web
         // Access to keys and values as arrays
         //
 
-        /*
-         * All keys
-         */
+/*
+* All keys
+*/
 
         /// <devdoc>
         ///    <para>

@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/System.Collections/tests/Generic/List/List.Generic.Tests.IndexOf.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -87,9 +89,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
 
         /// <summary>
-        /// MemberData for a Theory to test the IndexOf methods for List. To avoid high code reuse of tests for the 6 IndexOf
-        /// methods in List, delegates are used to cover the basic behavioral cases shared by all IndexOf methods. A bool
-        /// is used to specify the ordering (front-to-back or back-to-front (e.g. LastIndexOf)) that the IndexOf method
+        /// MemberData for a Theory to test the IndexOf methods for List. To avoid high code reuse of tests
+        // for the 6 IndexOf
+        /// methods in List, delegates are used to cover the basic behavioral cases shared by all IndexOf
+        // methods. A bool
+        /// is used to specify the ordering (front-to-back or back-to-front (e.g. LastIndexOf)) that the
+        // IndexOf method
         /// searches in.
         /// </summary>
         public static IEnumerable<object[]> IndexOfTestData()

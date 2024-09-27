@@ -25,8 +25,10 @@ namespace System.Workflow.ComponentModel.Design
     using System.Workflow.Interop;
 
     /// What did I change in this file
-    /// 1. Eliminated the layout manager and introduced classes for WorkflowLayout and PrintPreviewLayout
-    /// 2. Eliminated the event syncing of PageSetupData change. We call performlayout on the current designer service whenever the pagesetupdata changes
+    /// 1. Eliminated the layout manager and introduced classes for WorkflowLayout and
+    // PrintPreviewLayout
+    /// 2. Eliminated the event syncing of PageSetupData change. We call performlayout on the current
+    // designer service whenever the pagesetupdata changes
 
     /// Designer Features:
     /// Selection on click and thru drag rectangle
@@ -45,16 +47,20 @@ namespace System.Workflow.ComponentModel.Design
     /// Magnifier
     /// AutoScroll
     /// AutoExpand
-    /// USE THIS FOR PERFORMANCE TEST: Debug.WriteLine("******Root drawing: " + Convert.ToString((DateTime.Now.Ticks - ticks) / 10000) + "ms");
+    /// USE THIS FOR PERFORMANCE TEST: Debug.WriteLine("******Root drawing: " +
+    // Convert.ToString((DateTime.Now.Ticks - ticks) / 10000) + "ms");
     ///
     /// Here are some details about the coordinate system,
     ///
     /// Screen CoOrdinate System: Starts at 0,0 of the screen
     /// Client CoOrdinate System: Starts at 0,0 of the control
     /// Logical CoOrdinate System: The workflowview supports zooming and scroll, we want to hide this
-    /// complexity from the activity writter and hence whenever we get a coordinate we translate it based
-    /// scroll position, zoom level and layout. This helps us to sheild the activity designers from complexity
-    /// of zooming, scaling and layouting. The designer writters deal with one coordinate system which is unscaled and
+    /// complexity from the activity writter and hence whenever we get a coordinate we translate it
+    // based
+    /// scroll position, zoom level and layout. This helps us to sheild the activity designers from
+    // complexity
+    /// of zooming, scaling and layouting. The designer writters deal with one coordinate system which
+    // is unscaled and
     /// starts at 0,0
     ///
     ///
@@ -207,7 +213,8 @@ namespace System.Workflow.ComponentModel.Design
             //Create the core message filters
             PopulateMessageFilters(true);
 
-            //Set the root designer, note that the dynamic action is dependent on the DynamicActionMessageFilter pushed
+            //Set the root designer, note that the dynamic action is dependent on the DynamicActionMessageFilter
+            // pushed
             //when the root is set.
             RootDesigner = ActivityDesigner.GetSafeRootDesigner(this);
             this.fitAllAction = CreateDynamicAction();
@@ -1075,7 +1082,8 @@ namespace System.Workflow.ComponentModel.Design
                 );
             }
 
-            //Create viewport information and take the workflow snapshot before passing on the information to the active layout
+            //Create viewport information and take the workflow snapshot before passing on the information to
+            // the active layout
             ViewPortData viewPortData = new ViewPortData();
             viewPortData.LogicalViewPort = ClientRectangleToLogical(
                 new Rectangle(Point.Empty, ViewPortSize)
@@ -1669,10 +1677,12 @@ namespace System.Workflow.ComponentModel.Design
             //Make sure that the ensure visible also works when the component is selected
             //from property browser dropdown
             //Make sure that when there is a selection change using the property browser
-            //drop down we make sure that the designer associated with component selected by the user in the dropdown
+            //drop down we make sure that the designer associated with component selected by the user in the
+            // dropdown
             //is made visible.
             //To enable this functionality please note that selection change is not a good event as it will get
-            //fired in multiple cases, instead we should add a event in extended ui service which will do this and move
+            //fired in multiple cases, instead we should add a event in extended ui service which will do this
+            // and move
             //the following code in the event handler of that event
             //Ref Bug#3925
 
@@ -1789,7 +1799,8 @@ namespace System.Workflow.ComponentModel.Design
                 };
                 transformationMatrix.TransformPoints(logicalViewPortOrigin);
 
-                //For performance improvement and to eliminate one extra DrawImage...we draw the designers on the viewport
+                //For performance improvement and to eliminate one extra DrawImage...we draw the designers on the
+                // viewport
                 //bitmap with visual depth consideration
                 transformationMatrix.Translate(
                     -logicalViewPortOrigin[0].X + viewPortData.ShadowDepth.Width,
@@ -1896,14 +1907,16 @@ namespace System.Workflow.ComponentModel.Design
 
                 //Now that we have a bitmap which is bit offseted based visual depth we need to take copy of it
                 //This is done so as to avoid expensive DrawImage call, what I am assuming here is that time it
-                //will take to create a new bitmap from an existing one is less expensive in terms of speed than space
+                //will take to create a new bitmap from an existing one is less expensive in terms of speed than
+                // space
                 //As you just need to copy bitmap bits in memory than to perform expesive Image Drawing operation
                 if (!viewPortData.ShadowDepth.IsEmpty)
                 {
                     Bitmap temporaryBitmap = new Bitmap(memoryBitmap);
 
                     //THEMETODO: WE JUST NEED TO GRAYSCALE THIS, RATHER THAN DRAWING A SHADOW
-                    //Now that we have taken a copy we will draw over the existing bitmap so that we can make it as shadow bitmap
+                    //Now that we have taken a copy we will draw over the existing bitmap so that we can make it as
+                    // shadow bitmap
                     using (
                         Brush shadowDepthBrush = new SolidBrush(Color.FromArgb(220, Color.White))
                     )
@@ -2444,11 +2457,13 @@ namespace System.Workflow.ComponentModel.Design
             return this.activeLayout.IsCoOrdInLayout(logicalPoint);
         }
 
-        /*
-        * Client scale is when we transform the coordinate based on zoom and translate it based on scrolling position and layout
-        * Logical scale is when we transform the coordinate and map it to a flat coordinate system which goes from 0,0 to m,n
-        * We also consider the ActiveLayout to transform the coordinates.
-        */
+/*
+* Client scale is when we transform the coordinate based on zoom and translate it based on scrolling
+position and layout
+* Logical scale is when we transform the coordinate and map it to a flat coordinate system which
+goes from 0,0 to m,n
+* We also consider the ActiveLayout to transform the coordinates.
+*/
         private Point LogicalPointToClient(Point point, bool mapToLayout)
         {
             if (mapToLayout)

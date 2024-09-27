@@ -7,7 +7,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -333,7 +334,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -403,7 +405,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -511,7 +514,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -557,7 +561,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             decimal[] x12 = new decimal[] { 1.1m, 22.2m, 33.3m };
             Color[] x13 = new Color[] { Color.Red, Color.Green };
             Cars[] x14 = new Cars[] { Cars.Toyota, Cars.BMW };
-            // From sybte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal to enum-type
+            // From sybte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal to
+            // enum-type
             foreach (Color y in (dynamic)x1)
                 i++;
             foreach (Color y in (dynamic)x2)
@@ -582,7 +587,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
                 i++;
             foreach (Color y in (dynamic)x12)
                 i++;
-            // From enum type to sybte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal
+            // From enum type to sybte, byte, short, ushort, int, uint, long, ulong, char, float, double,
+            // decimal
             foreach (sbyte y in (dynamic)x13)
                 i++;
             foreach (byte y in (dynamic)x13)
@@ -620,7 +626,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -667,7 +674,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -704,7 +712,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -712,7 +721,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 
     public class Test
     {
-        // Implicit and Explicit Nullable Numeric Conversions. Test will throw a runtime exception if it fails.
+        // Implicit and Explicit Nullable Numeric Conversions. Test will throw a runtime exception if it
+        // fails.
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1030,7 +1040,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -1114,7 +1125,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -1198,7 +1210,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -1291,7 +1304,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
 {
     // <Title> Dynamic in Foreach </Title>
     // <Description>
-    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach loop
+    //  Conversions between elements in foreach expressions to the type of the identifier in the foreach
+    // loop
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>

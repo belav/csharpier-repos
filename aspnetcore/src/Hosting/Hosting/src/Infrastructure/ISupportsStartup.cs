@@ -8,8 +8,11 @@ using Microsoft.AspNetCore.Hosting.Internal;
 namespace Microsoft.AspNetCore.Hosting.Infrastructure;
 
 /// <summary>
-/// An interface implemented by IWebHostBuilders that handle <see cref="WebHostBuilderExtensions.Configure(IWebHostBuilder, Action{IApplicationBuilder})"/>,
-/// <see cref="WebHostBuilderExtensions.UseStartup(IWebHostBuilder, Type)"/> and <see cref="WebHostBuilderExtensions.UseStartup{TStartup}(IWebHostBuilder, Func{WebHostBuilderContext, TStartup})"/>
+/// An interface implemented by IWebHostBuilders that handle <see
+// cref="WebHostBuilderExtensions.Configure(IWebHostBuilder, Action{IApplicationBuilder})"/>,
+/// <see cref="WebHostBuilderExtensions.UseStartup(IWebHostBuilder, Type)"/> and <see
+// cref="WebHostBuilderExtensions.UseStartup{TStartup}(IWebHostBuilder, Func{WebHostBuilderContext,
+// TStartup})"/>
 /// directly.
 /// </summary>
 public interface ISupportsStartup
@@ -17,14 +20,16 @@ public interface ISupportsStartup
     /// <summary>
     /// Specify the startup method to be used to configure the web application.
     /// </summary>
-    /// <param name="configure">The delegate that configures the <see cref="IApplicationBuilder"/>.</param>
+    /// <param name="configure">The delegate that configures the <see
+    // cref="IApplicationBuilder"/>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     IWebHostBuilder Configure(Action<IApplicationBuilder> configure);
 
     /// <summary>
     /// Specify the startup method to be used to configure the web application.
     /// </summary>
-    /// <param name="configure">The delegate that configures the <see cref="IApplicationBuilder"/>.</param>
+    /// <param name="configure">The delegate that configures the <see
+    // cref="IApplicationBuilder"/>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     IWebHostBuilder Configure(Action<WebHostBuilderContext, IApplicationBuilder> configure);
 
@@ -42,7 +47,8 @@ public interface ISupportsStartup
     /// </summary>
     /// <param name="startupFactory">A delegate that specifies a factory for the startup class.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    /// <remarks>When in a trimmed app, all public methods of <typeparamref name="TStartup"/> are preserved. This should match the Startup type directly (and not a base type).</remarks>
+    /// <remarks>When in a trimmed app, all public methods of <typeparamref name="TStartup"/> are
+    // preserved. This should match the Startup type directly (and not a base type).</remarks>
     IWebHostBuilder UseStartup<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup
     >(Func<WebHostBuilderContext, TStartup> startupFactory);

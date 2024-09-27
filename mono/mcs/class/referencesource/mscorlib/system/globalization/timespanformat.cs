@@ -255,7 +255,8 @@ namespace System.Globalization
                         break;
                     case 'F':
                         //
-                        // Displays the most significant digit of the seconds fraction. Nothing is displayed if the digit is zero.
+                        // Displays the most significant digit of the seconds fraction. Nothing is displayed if the digit is
+                        // zero.
                         //
                         tokenLen = DateTimeFormat.ParseRepeatPattern(format, i, ch);
                         if (tokenLen > DateTimeFormat.MaxSecondsFractionDigits)
@@ -401,7 +402,7 @@ namespace System.Globalization
 
             private String[] literals;
 
-            /* factory method for static invariant FormatLiterals */
+/* factory method for static invariant FormatLiterals */
             internal static FormatLiterals InitInvariant(bool isNegative)
             {
                 FormatLiterals x = new FormatLiterals();
@@ -449,7 +450,7 @@ namespace System.Globalization
                         case '\"':
                             if (inQuote && (quote == format[i]))
                             {
-                                /* we were in a quote and found a matching exit quote, so we are outside a quote now */
+/* we were in a quote and found a matching exit quote, so we are outside a quote now */
                                 Contract.Assert(
                                     field >= 0 && field <= 5,
                                     "field >= 0 && field <= 5"
@@ -467,13 +468,13 @@ namespace System.Globalization
                             }
                             else if (!inQuote)
                             {
-                                /* we are at the start of a new quote block */
+/* we are at the start of a new quote block */
                                 quote = format[i];
                                 inQuote = true;
                             }
                             else
                             {
-                                /* we were in a quote and saw the other type of quote character, so we are still in a quote */
+/* we were in a quote and saw the other type of quote character, so we are still in a quote */
                             }
                             break;
                         case '%':

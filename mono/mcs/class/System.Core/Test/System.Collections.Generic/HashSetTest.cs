@@ -587,7 +587,8 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void TestNullsWithComparerThrowingException()
         {
-            // NOTE: We should get the same errors when using StringComparer.Ordinal on Mono 2.6.1, but the look-alike gives us more control over this test case
+            // NOTE: We should get the same errors when using StringComparer.Ordinal on Mono 2.6.1, but the
+            // look-alike gives us more control over this test case
             var set = new HashSet<string>(new StringComparerOrdinalLookAlike());
             Assert.IsTrue(set.Add(string.Empty), "#1a");
             Assert.IsFalse(set.Contains(null), "#2a");

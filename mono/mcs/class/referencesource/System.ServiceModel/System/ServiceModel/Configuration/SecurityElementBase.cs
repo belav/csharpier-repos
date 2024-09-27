@@ -1078,14 +1078,16 @@ namespace System.ServiceModel.Configuration
             }
             SecurityBindingElement sbe = (SecurityBindingElement)bindingElement;
 
-            // Can't apply default value optimization to properties like DefaultAlgorithmSuite because the defaults are computed at runtime and don't match config defaults
+            // Can't apply default value optimization to properties like DefaultAlgorithmSuite because the
+            // defaults are computed at runtime and don't match config defaults
             this.DefaultAlgorithmSuite = sbe.DefaultAlgorithmSuite;
             this.IncludeTimestamp = sbe.IncludeTimestamp;
             if (sbe.MessageSecurityVersion != MessageSecurityVersion.Default)
             {
                 this.MessageSecurityVersion = sbe.MessageSecurityVersion;
             }
-            // Still safe to apply the optimization here because the runtime defaults are the same as config defaults in all cases
+            // Still safe to apply the optimization here because the runtime defaults are the same as config
+            // defaults in all cases
             SetPropertyValueIfNotDefaultValue(
                 ConfigurationStrings.KeyEntropyMode,
                 sbe.KeyEntropyMode
@@ -1379,7 +1381,8 @@ namespace System.ServiceModel.Configuration
             bool nontrivial = base.SerializeElement(writer, serializeCollectionKey);
 
             // A SecurityElement can copy properties from a "bootstrap" SecurityBaseElement.
-            // In this case, a trivial bootstrap (no properties set) is equivalent to not having one at all so we can omit it.
+            // In this case, a trivial bootstrap (no properties set) is equivalent to not having one at all so
+            // we can omit it.
             Func<PropertyInformation, bool> nontrivialProperty = property =>
                 property.ValueOrigin == PropertyValueOrigin.SetHere;
             if (

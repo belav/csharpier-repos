@@ -14,10 +14,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * ChtmlTextBoxAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * ChtmlTextBoxAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\ChtmlTextBoxAdapter.uex' path='docs/doc[@for="ChtmlTextBoxAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -34,7 +34,8 @@ namespace System.Web.UI.MobileControls.Adapters
     {
         private static Random _random = new Random();
 
-        /// <include file='doc\ChtmlTextBoxAdapter.uex' path='docs/doc[@for="ChtmlTextBoxAdapter.AddAttributes"]/*' />
+        /// <include file='doc\ChtmlTextBoxAdapter.uex'
+        // path='docs/doc[@for="ChtmlTextBoxAdapter.AddAttributes"]/*' />
         protected override void AddAttributes(HtmlMobileTextWriter writer)
         {
             if (Control.Numeric)
@@ -58,7 +59,8 @@ namespace System.Web.UI.MobileControls.Adapters
             AddJPhoneMultiMediaAttributes(writer);
         }
 
-        /// <include file='doc\ChtmlTextBoxAdapter.uex' path='docs/doc[@for="ChtmlTextBoxAdapter.RequiresFormTag"]/*' />
+        /// <include file='doc\ChtmlTextBoxAdapter.uex'
+        // path='docs/doc[@for="ChtmlTextBoxAdapter.RequiresFormTag"]/*' />
         public override bool RequiresFormTag
         {
             get { return true; }

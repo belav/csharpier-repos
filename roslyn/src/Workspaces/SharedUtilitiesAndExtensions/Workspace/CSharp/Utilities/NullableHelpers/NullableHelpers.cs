@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Given an operation, goes through all decendent operations and returns true if the symbol passed in
+        /// Given an operation, goes through all decendent operations and returns true if the symbol passed
+        // in
         /// is ever assigned a possibly null value as determined by nullable flow state. Returns
         /// null if no references are found, letting the caller determine what to do with that information
         /// </summary>
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis
                 hasReference = true;
 
                 // foreach statements are handled special because the iterator is not assignable, so the elementtype
-                // annotation is accurate for determining if the loop declaration has a reference that allows the symbol
+                // annotation is accurate for determining if the loop declaration has a reference that allows the
+                // symbol
                 // to be null
                 if (reference is IForEachLoopOperation forEachLoop)
                 {
@@ -112,7 +114,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Determines if an operations references a specific symbol. Note that this will recurse in some
-        /// cases to work for operations like IAssignmentOperation, which logically references a symbol even if it
+        /// cases to work for operations like IAssignmentOperation, which logically references a symbol even
+        // if it
         /// is the Target operation that actually does.
         /// </summary>
         private static bool IsSymbolReferencedByOperation(IOperation operation, ISymbol symbol) =>
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis
                     LoopControlVariable: IVariableDeclaratorOperation variableDeclarator
                 } => variableDeclarator.Symbol.Equals(symbol),
 
-                // A variable initializer is required for this to be a meaningful operation for determining possible null assignment
+                // A variable initializer is required for this to be a meaningful operation for determining possible
+                // null assignment
                 IVariableDeclaratorOperation variableDeclarator =>
                     variableDeclarator.GetVariableInitializer() != null
                         && variableDeclarator.Symbol.Equals(symbol),

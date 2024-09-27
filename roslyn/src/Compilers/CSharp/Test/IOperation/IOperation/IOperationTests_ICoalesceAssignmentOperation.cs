@@ -100,7 +100,8 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,19): error CS0019: Operator '??=' cannot be applied to operands of type 'C' and 'string'
+                // file.cs(6,19): error CS0019: Operator '??=' cannot be applied to operands of type 'C' and
+                // 'string'
                 //         /*<bind>*/c1 ??= s1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "c1 ??= s1")
                     .WithArguments("??=", "C", "string")
@@ -137,7 +138,8 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,19): error CS0019: Operator '??=' cannot be applied to operands of type 'int' and 'string'
+                // file.cs(6,19): error CS0019: Operator '??=' cannot be applied to operands of type 'int' and
+                // 'string'
                 //         /*<bind>*/i1 ??= s1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= s1")
                     .WithArguments("??=", "int", "string")
@@ -805,7 +807,8 @@ Block[B10] - Exit
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                // file.cs(6,10): error CS0131: The left-hand side of an assignment must be a variable, property or
+                // indexer
                 //         (o1 ?? o2) ??= (s1 ?? s2);
                 Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o1 ?? o2").WithLocation(6, 10),
             };

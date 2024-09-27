@@ -11,7 +11,8 @@ namespace System.Numerics
     /// Represents a comparison operation that compares floating-point numbers
     /// with IEEE 754 totalOrder semantic.
     /// </summary>
-    /// <typeparam name="T">The type of the numbers to be compared, must be an IEEE 754 floating-point type.</typeparam>
+    /// <typeparam name="T">The type of the numbers to be compared, must be an IEEE 754 floating-point
+    // type.</typeparam>
     public readonly struct TotalOrderIeee754Comparer<T>
         : IComparer<T>,
             IEqualityComparer<T>,
@@ -48,7 +49,8 @@ namespace System.Numerics
         /// </returns>
         /// <remarks>
         /// IEEE 754 specification defines totalOrder as &lt;= semantic.
-        /// totalOrder(x,y) is <see langword="true"/> when the result of this method is less than or equal to 0.
+        /// totalOrder(x,y) is <see langword="true"/> when the result of this method is less than or equal
+        // to 0.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int Compare(T? x, T? y)
@@ -82,9 +84,12 @@ namespace System.Numerics
             static int CompareIntegerSemantic<TInteger>(TInteger x, TInteger y)
                 where TInteger : struct, IBinaryInteger<TInteger>, ISignedNumber<TInteger>
             {
-                // In IEEE 754 binary floating-point representation, a number is represented as Sign|Exponent|Significand
-                // Normal numbers has an implicit 1. in front of the significand, so value with larger exponent will have larger absolute value
-                // Inf and NaN are defined as Exponent=All 1s, while Inf has Significand=0, sNaN has Significand=0xxx and qNaN has Significand=1xxx
+                // In IEEE 754 binary floating-point representation, a number is represented as
+                // Sign|Exponent|Significand
+                // Normal numbers has an implicit 1. in front of the significand, so value with larger exponent will
+                // have larger absolute value
+                // Inf and NaN are defined as Exponent=All 1s, while Inf has Significand=0, sNaN has
+                // Significand=0xxx and qNaN has Significand=1xxx
                 // This also satisfies totalOrder definition which is +x < +Inf < +sNaN < +qNaN
 
                 // The order of NaNs of same category and same sign is implementation defined,
@@ -228,7 +233,8 @@ namespace System.Numerics
         /// </summary>
         /// <param name="x">The first number of type <typeparamref name="T"/> to compare.</param>
         /// <param name="y">The second number of type <typeparamref name="T"/> to compare.</param>
-        /// <returns><see langword="true"/> if the specified numbers are equal; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the specified numbers are equal; otherwise, <see
+        // langword="false"/>.</returns>
         /// <remarks>
         /// There is no corresponding equals semantic with totalOrder defined by IEEE 754 specification.
         /// This method returns <see langword="true"/> when <see cref="Compare(T?, T?)"/> returns 0.

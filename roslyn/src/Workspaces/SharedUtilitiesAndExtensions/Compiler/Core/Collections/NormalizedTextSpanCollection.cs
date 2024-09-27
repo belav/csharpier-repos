@@ -21,18 +21,21 @@ namespace Microsoft.CodeAnalysis.Shared
             : base(new List<TextSpan>(0)) { }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified span.
+        /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the
+        // specified span.
         /// </summary>
         /// <param name="span">TextSpan contained by the span set.</param>
         public NormalizedTextSpanCollection(TextSpan span)
             : base(ListFromSpan(span)) { }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified list of spans.
+        /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the
+        // specified list of spans.
         /// </summary>
         /// <param name="spans">The spans to be added.</param>
         /// <remarks>
-        /// <para>The list of spans will be sorted and normalized (overlapping and adjoining spans will be combined).</para>
+        /// <para>The list of spans will be sorted and normalized (overlapping and adjoining spans will be
+        // combined).</para>
         /// <para>This constructor runs in O(N log N) time, where N = spans.Count.</para></remarks>
         /// <exception cref="ArgumentNullException"><paramref name="spans"/> is null.</exception>
         public NormalizedTextSpanCollection(IEnumerable<TextSpan> spans)
@@ -51,10 +54,12 @@ namespace Microsoft.CodeAnalysis.Shared
         /// The second span set.
         /// </param>
         /// <returns>
-        /// The new span set that corresponds to the union of <paramref name="left"/> and <paramref name="right"/>.
+        /// The new span set that corresponds to the union of <paramref name="left"/> and <paramref
+        // name="right"/>.
         /// </returns>
         /// <remarks>This operator runs in O(N+M) time where N = left.Count, M = right.Count.</remarks>
-        /// <exception cref="ArgumentNullException">Either <paramref name="left"/> or <paramref name="right"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">Either <paramref name="left"/> or <paramref
+        // name="right"/> is null.</exception>
         public static NormalizedTextSpanCollection Union(
             NormalizedTextSpanCollection left,
             NormalizedTextSpanCollection right
@@ -139,9 +144,11 @@ namespace Microsoft.CodeAnalysis.Shared
         /// </summary>
         /// <param name="left">The first span set.</param>
         /// <param name="right">The second span set.</param>
-        /// <returns>The new span set that corresponds to the overlap of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        /// <returns>The new span set that corresponds to the overlap of <paramref name="left"/> and
+        // <paramref name="right"/>.</returns>
         /// <remarks>This operator runs in O(N+M) time where N = left.Count, M = right.Count.</remarks>
-        /// <exception cref="ArgumentNullException"><paramref name="left"/> or <paramref name="right"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="left"/> or <paramref name="right"/> is
+        // null.</exception>
         public static NormalizedTextSpanCollection Overlap(
             NormalizedTextSpanCollection left,
             NormalizedTextSpanCollection right
@@ -201,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Shared
         /// </summary>
         /// <param name="left">The first span set.</param>
         /// <param name="right">The second span set.</param>
-        /// <returns>The new span set that corresponds to the intersection of <paramref name="left"/> and <paramref name="right"/>.</returns>
+        /// <returns>The new span set that corresponds to the intersection of <paramref name="left"/> and
+        // <paramref name="right"/>.</returns>
         /// <remarks>This operator runs in O(N+M) time where N = left.Count, M = right.Count.</remarks>
         /// <exception cref="ArgumentNullException"><paramref name="left"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="right"/> is null.</exception>
@@ -255,13 +263,16 @@ namespace Microsoft.CodeAnalysis.Shared
         }
 
         /// <summary>
-        /// Finds the difference between two sets. The difference is defined as everything in the first span set that is not in the second span set.
+        /// Finds the difference between two sets. The difference is defined as everything in the first span
+        // set that is not in the second span set.
         /// </summary>
         /// <param name="left">The first span set.</param>
         /// <param name="right">The second span set.</param>
-        /// <returns>The new span set that corresponds to the difference between <paramref name="left"/> and <paramref name="right"/>.</returns>
+        /// <returns>The new span set that corresponds to the difference between <paramref name="left"/> and
+        // <paramref name="right"/>.</returns>
         /// <remarks>
-        /// Empty spans in the second set do not affect the first set at all. This method returns empty spans in the first set that are not contained by any set in
+        /// Empty spans in the second set do not affect the first set at all. This method returns empty
+        // spans in the first set that are not contained by any set in
         /// the second set.
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="left"/> is null.</exception>
@@ -447,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Shared
         /// Determines whether this span set overlaps with another span.
         /// </summary>
         /// <param name="span">The span to test.</param>
-        /// <returns><c>true</c> if this span set overlaps with the given span, otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if this span set overlaps with the given span, otherwise
+        // <c>false</c>.</returns>
         public bool OverlapsWith(TextSpan span)
         {
             // TODO: binary search
@@ -501,7 +513,8 @@ namespace Microsoft.CodeAnalysis.Shared
         /// <summary>
         /// Determines whether this span set intersects with another span.
         /// </summary>
-        /// <returns><c>true</c> if this span set intersects with the given span, otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if this span set intersects with the given span, otherwise
+        // <c>false</c>.</returns>
         public bool IntersectsWith(TextSpan span)
         {
             // TODO: binary search

@@ -168,7 +168,8 @@ namespace System.ComponentModel.Design.Serialization
                     }
                 }
 
-                // if there is metadata modification in the instance then create the specified serializer instead of the one
+                // if there is metadata modification in the instance then create the specified serializer instead of
+                // the one
                 // in the Type.
                 if (
                     attrType != null
@@ -1306,7 +1307,8 @@ namespace System.ComponentModel.Design.Serialization
             CodeFieldReferenceExpression fieldRef = leftExpr as CodeFieldReferenceExpression;
             if (fieldRef != null && fieldRef.FieldName != null)
             {
-                // Note that if the Right expression is a CodeCreationExpression the component will be created in this call
+                // Note that if the Right expression is a CodeCreationExpression the component will be created in
+                // this call
                 //
                 object fieldHolder = DeserializeExpression(manager, null, fieldRef.TargetObject);
                 object value = null;
@@ -1326,7 +1328,8 @@ namespace System.ComponentModel.Design.Serialization
                         // Do not deserialize the fields of the root component, because the root component type
                         // is actually an instance of the its parent type, e.g: CustomControl : _UserControl_
                         // and thus it doesn't contain the fields. The trick is that once DeserializeExpression
-                        // is called on a CodeObjectCreateExpression the component is created and is added to the name-instance
+                        // is called on a CodeObjectCreateExpression the component is created and is added to the
+                        // name-instance
                         // table.
                         //
                     }

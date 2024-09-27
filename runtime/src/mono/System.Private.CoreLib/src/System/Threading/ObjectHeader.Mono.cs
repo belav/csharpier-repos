@@ -168,7 +168,7 @@ internal static class ObjectHeader
             {
                 if (IsFree)
                     return 0;
-                /* Inword nest count starts from 0 */
+/* Inword nest count starts from 0 */
                 return 1 + (int)((_lock_word & NestMask) >>> NestShift);
             }
         }

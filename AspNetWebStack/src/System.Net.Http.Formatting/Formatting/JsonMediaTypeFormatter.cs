@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
@@ -49,7 +50,8 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonMediaTypeFormatter"/> class.
         /// </summary>
-        /// <param name="formatter">The <see cref="JsonMediaTypeFormatter"/> instance to copy settings from.</param>
+        /// <param name="formatter">The <see cref="JsonMediaTypeFormatter"/> instance to copy settings
+        // from.</param>
         protected JsonMediaTypeFormatter(JsonMediaTypeFormatter formatter)
             : base(formatter)
         {
@@ -77,10 +79,12 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to use <see cref="DataContractJsonSerializer"/> by default.
+        /// Gets or sets a value indicating whether to use <see cref="DataContractJsonSerializer"/> by
+        // default.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if use <see cref="DataContractJsonSerializer"/> by default; otherwise, <c>false</c>. The default is <c>false</c>.
+        ///     <c>true</c> if use <see cref="DataContractJsonSerializer"/> by default; otherwise,
+        // <c>false</c>. The default is <c>false</c>.
         /// </value>
         public bool UseDataContractJsonSerializer { get; set; }
 
@@ -422,7 +426,8 @@ namespace System.Net.Http.Formatting
 
             try
             {
-                // Verify that type is a valid data contract by forcing the serializer to try to create a data contract
+                // Verify that type is a valid data contract by forcing the serializer to try to create a data
+                // contract
                 FormattingUtilities.XsdDataContractExporter.GetRootElementName(type);
 
                 serializer = CreateDataContractSerializer(type);
@@ -462,7 +467,8 @@ namespace System.Net.Http.Formatting
         /// </summary>
         /// <remarks>
         /// Public for delegating wrappers of this class.  Expected to be called only from
-        /// <see cref="BaseJsonMediaTypeFormatter.ReadFromStreamAsync"/> and <see cref="WriteToStreamAsync"/>.
+        /// <see cref="BaseJsonMediaTypeFormatter.ReadFromStreamAsync"/> and <see
+        // cref="WriteToStreamAsync"/>.
         /// </remarks>
         /// <param name="type">The type of object that will be serialized or deserialized.</param>
         /// <returns>The <see cref="DataContractJsonSerializer"/> used to serialize the object.</returns>

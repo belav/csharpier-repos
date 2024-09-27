@@ -101,7 +101,8 @@ namespace System.IdentityModel.Selectors
                     || certificate.Extensions[CAPI.szOID_AUTHORITY_INFO_ACCESS] != null
                 )
                 {
-                    // If there is a CDP or AIA extension, we demand unrestricted network access and store add permission
+                    // If there is a CDP or AIA extension, we demand unrestricted network access and store add
+                    // permission
                     // since CAPI can download certificates into the CA store from the network.
                     PermissionSet ps = new PermissionSet(PermissionState.None);
                     ps.AddPermission(new WebPermission(PermissionState.Unrestricted));
@@ -273,7 +274,8 @@ namespace System.IdentityModel.Selectors
                 return SafeCertStoreHandle.InvalidHandle;
             }
 
-            // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in this operation.
+            // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in
+            // this operation.
             // By default, Archived certificates will not be included.
             SafeCertStoreHandle certStoreHandle = CAPI.CertOpenStore(
                 new IntPtr(CAPI.CERT_STORE_PROV_MEMORY),
@@ -292,7 +294,8 @@ namespace System.IdentityModel.Selectors
             }
 
             //
-            // We use CertAddCertificateLinkToStore to keep a link to the original store, so any property changes get
+            // We use CertAddCertificateLinkToStore to keep a link to the original store, so any property
+            // changes get
             // applied to the original store. This has a limit of 99 links per cert context however.
             //
 
@@ -322,7 +325,8 @@ namespace System.IdentityModel.Selectors
             // The hCertStore needs to be acquired from an X509Certificate2 object
             // constructed using a fresh cert context handle. If we simply refer to the hCertStore
             // property of the certContext local variable directly, there is a risk that we are accessing
-            // a closed store. This is because if the X509Certificate2(rawdata) constructor closes the store handle (hCertStore).
+            // a closed store. This is because if the X509Certificate2(rawdata) constructor closes the store
+            // handle (hCertStore).
             // There is no way to know which constructor was used at this point.
             //
             using (

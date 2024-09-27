@@ -237,7 +237,8 @@ namespace Castle.DynamicProxy.Contributors
 
             if (baseType.IsDelegateType())
             {
-                //working around bug in CLR which returns true for "does this type implement ISerializable" for delegates
+                //working around bug in CLR which returns true for "does this type implement ISerializable" for
+                // delegates
                 return false;
             }
 

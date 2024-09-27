@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 using System;
@@ -181,7 +182,8 @@ internal class MemoryAlloc
     // med is just created with non pinned.
     public void AllocTest()
     {
-        //        Console.WriteLine(index + ": Allocating memory - old: " + num_old_data + "[~" + mean_old_alloc_size + "]; med: "
+        //        Console.WriteLine(index + ": Allocating memory - old: " + num_old_data + "[~" +
+        // mean_old_alloc_size + "]; med: "
         //            + num_med_data + "[~" + mean_med_alloc_size + "]");
 
         Stopwatch stopwatch = new Stopwatch();
@@ -232,14 +234,16 @@ internal class MemoryAlloc
                 }
             }
 
-            //Console.WriteLine("item {0}: {1}, pin size: {2}, non pin size: {3}", j, (fIsPinned ? "pinned" : "not pinned"), mean_old_alloc_size, iPinnedMidSize);
+            //Console.WriteLine("item {0}: {1}, pin size: {2}, non pin size: {3}", j, (fIsPinned ? "pinned" :
+            // "not pinned"), mean_old_alloc_size, iPinnedMidSize);
 
             byte[] temp = new byte[_mean_med_alloc_size * 3];
             _old[j] = new MyRequest(_mean_old_alloc_size, iPinnedMidSize, fIsPinned);
 
             //if ((j % (old.Length / 10)) == 0)
             //{
-            //    Console.WriteLine("{0}: allocated {1} on old array, {2}ms elapsed, Heap size {3}, gen0: {4}, gen1: {5}, gen2: {6})",
+            //    Console.WriteLine("{0}: allocated {1} on old array, {2}ms elapsed, Heap size {3}, gen0: {4},
+            // gen1: {5}, gen2: {6})",
             //        index,
             //        j,
             //        (int)stopwatch.Elapsed.TotalMilliseconds,
@@ -253,7 +257,8 @@ internal class MemoryAlloc
         //Console.WriteLine("pinned {0} objects out of {1}", iPinnedObject, old.Length);
 
         {
-            //            Console.WriteLine("{0}: allocated {1} on old array, {2}ms elapsed, Heap size {3}, gen0: {4}, gen1: {5}, gen2: {6})",
+            //            Console.WriteLine("{0}: allocated {1} on old array, {2}ms elapsed, Heap size {3},
+            // gen0: {4}, gen1: {5}, gen2: {6})",
             //                index,
             //                old.Length,
             //                (int)stopwatch.Elapsed.TotalMilliseconds,
@@ -423,7 +428,8 @@ internal class MemoryAlloc
                         }
                     }
 
-                    //Console.WriteLine("perm {0}, mid {1}, {2}", mean_old_alloc_size, iPinnedMidSize, (fIsPinned ? "pinned" : "not pinned"));
+                    //Console.WriteLine("perm {0}, mid {1}, {2}", mean_old_alloc_size, iPinnedMidSize, (fIsPinned ?
+                    // "pinned" : "not pinned"));
                     _old[iItemIndex] = new MyRequest(
                         _mean_old_alloc_size,
                         iPinnedMidSize,
@@ -459,7 +465,8 @@ internal class MemoryAlloc
             //                countWithGen[1],
             //                countWithGen[2]);
             //
-            //            Console.WriteLine("{0} objects out of {1} are in gen1", countObjectsGen1, (iCheckedEnd - lastChecked));
+            //            Console.WriteLine("{0} objects out of {1} are in gen1", countObjectsGen1, (iCheckedEnd
+            // - lastChecked));
 
             if (iCheckedEnd == _old.Length)
             {
@@ -516,7 +523,8 @@ internal class FreeListTest
         int iCurrentGen0Count = GC.CollectionCount(0);
         if ((iCurrentGen0Count - s_iLastGen0Count) > 50)
         {
-            //Console.WriteLine("we've done {0} gen0 GCs, inducing a gen2", (iCurrentGen0Count - iLastGen0Count));
+            //Console.WriteLine("we've done {0} gen0 GCs, inducing a gen2", (iCurrentGen0Count -
+            // iLastGen0Count));
             s_iLastGen0Count = iCurrentGen0Count;
             GC.Collect(2, GCCollectionMode.Forced, false);
             //GC.Collect(2);
@@ -525,7 +533,8 @@ internal class FreeListTest
         int iCurrentGen1Count = GC.CollectionCount(1);
         if ((iCurrentGen1Count - s_iLastGen1Count) > 10)
         {
-            //Console.WriteLine("we've done {0} gen1 GCs, inducing a gen2", (iCurrentGen1Count - iLastGen1Count));
+            //Console.WriteLine("we've done {0} gen1 GCs, inducing a gen2", (iCurrentGen1Count -
+            // iLastGen1Count));
             s_iLastGen1Count = iCurrentGen1Count;
             GC.Collect(2, GCCollectionMode.Forced, false);
         }
@@ -619,8 +628,8 @@ internal class FreeListTest
 
 internal sealed class Rand
 {
-    /* Generate Random numbers
-     */
+/* Generate Random numbers
+*/
     private int _x = 0;
 
     public int getRand()

@@ -7,7 +7,7 @@ namespace System.ServiceModel
 {
     public class FaultImportOptions
     {
-        /* use the current message formatter for faults.*/
+/* use the current message formatter for faults.*/
         bool useMessageFormat = false;
 
         public bool UseMessageFormat

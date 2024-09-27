@@ -34,7 +34,8 @@ namespace R2RTest
 
         public CompileSerpCommand(BuildOptions options)
         {
-            // This command does not work in the context of an app, just a loose set of rsp files so don't execute anything we compile
+            // This command does not work in the context of an app, just a loose set of rsp files so don't
+            // execute anything we compile
             options.NoJit = true;
             options.NoEtw = true;
             options.Release = true;
@@ -112,7 +113,8 @@ namespace R2RTest
             _coreCompileAssemblies = new List<string>();
             _coreReferenceAssemblies = new List<string>();
             {
-                // Add an allow-list of assemblies from bin. This unified list includes binaries from /bin and /App_data so filter just the /bin assemblies
+                // Add an allow-list of assemblies from bin. This unified list includes binaries from /bin and
+                // /App_data so filter just the /bin assemblies
                 foreach (string item in GetCrossgenAllowedBinDlls())
                 {
                     string binAssembly = Path.Combine(BinDir, item);
@@ -521,7 +523,8 @@ namespace R2RTest
 
             if (_options.Composite)
             {
-                // For combined composite, move the component assemblies we added the R2R header from the composite out folder
+                // For combined composite, move the component assemblies we added the R2R header from the composite
+                // out folder
                 // to the correct compile tree destination folder so they get copied into the right place
                 string compositeOutputRootDir = GetCompileFile(serpRoot, BinDir);
                 string frameworkCompositeDll = Path.Combine(
@@ -635,7 +638,8 @@ namespace R2RTest
         }
 
         /// <summary>
-        /// Backs up the assemblies to a separate folder tree and replaces each file with the original reference
+        /// Backs up the assemblies to a separate folder tree and replaces each file with the original
+        // reference
         /// in the output list. This keeps the Serp folder clean of junk.
         /// </summary>
         private static List<string> BackupAndUseOriginalAssemblies(

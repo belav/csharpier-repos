@@ -96,7 +96,8 @@ namespace System.Speech.Recognition
 
         /// <summary>
         /// For IDisposable.
-        /// RecognizerInfo can be constructed through creating a new object token (usage of _recognizerInfo in RecognizerBase),
+        /// RecognizerInfo can be constructed through creating a new object token (usage of _recognizerInfo
+        // in RecognizerBase),
         /// so dispose needs to be called.
         /// </summary>
         public void Dispose()

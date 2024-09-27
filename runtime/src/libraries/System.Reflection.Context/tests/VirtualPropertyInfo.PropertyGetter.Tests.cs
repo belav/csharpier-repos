@@ -11,7 +11,8 @@ namespace System.Reflection.Context.Tests
 {
     public class VirtualPropertyInfo_PropertyGetter_Tests
     {
-        // Points to a PropertyInfo instance created by reflection. This doesn't work in a reflection-only context.
+        // Points to a PropertyInfo instance created by reflection. This doesn't work in a reflection-only
+        // context.
         private readonly MethodInfo _virtualPropertyGetter;
         private readonly TestObject _testObject = new TestObject("Age");
 

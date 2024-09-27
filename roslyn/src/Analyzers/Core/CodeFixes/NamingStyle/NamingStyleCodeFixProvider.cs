@@ -72,11 +72,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
 
             if (document.GetRequiredLanguageService<ISyntaxFactsService>().IsIdentifierName(node))
             {
-                // The location we get from the analyzer only contains the identifier token and when we get its containing node,
+                // The location we get from the analyzer only contains the identifier token and when we get its
+                // containing node,
                 // it is usually the right one (such as a variable declarator, designation or a foreach statement)
-                // because there is no other node in between. But there is one case in a VB catch clause where the token
-                // is wrapped in an identifier name. So if what we found is an identifier, take the parent node instead.
-                // Note that this is the correct thing to do because GetDeclaredSymbol never works on identifier names.
+                // because there is no other node in between. But there is one case in a VB catch clause where the
+                // token
+                // is wrapped in an identifier name. So if what we found is an identifier, take the parent node
+                // instead.
+                // Note that this is the correct thing to do because GetDeclaredSymbol never works on identifier
+                // names.
                 node = node.Parent;
             }
 
@@ -148,8 +152,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
             private readonly string _equivalenceKey;
 
             /// <summary>
-            /// This code action does produce non-text-edit operations (like notifying 3rd parties about a rename).  But
-            /// it doesn't require this.  As such, we can allow it to run in hosts that only allow document edits. Those
+            /// This code action does produce non-text-edit operations (like notifying 3rd parties about a
+            // rename).  But
+            /// it doesn't require this.  As such, we can allow it to run in hosts that only allow document
+            // edits. Those
             /// hosts will simply ignore the operations they don't understand.
             /// </summary>
             public override ImmutableArray<string> Tags => ImmutableArray<string>.Empty;

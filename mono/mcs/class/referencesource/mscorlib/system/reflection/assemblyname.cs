@@ -189,10 +189,10 @@ namespace System.Reflection
         }
 
         /*
-         * Get the AssemblyName for a given file. This will only work
-         * if the file contains an assembly manifest. This method causes
-         * the file to be opened and closed.
-         */
+        * Get the AssemblyName for a given file. This will only work
+        * if the file contains an assembly manifest. This method causes
+        * the file to be opened and closed.
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]

@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System
 {
     /// <summary>
-    /// The exception that is thrown when there is an invalid attempt to access a private or protected field inside a class.
+    /// The exception that is thrown when there is an invalid attempt to access a private or protected
+    // field inside a class.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Design;
 ///     Represents a call to a method.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class MethodCallCodeFragment : IMethodCallCodeFragment
@@ -20,7 +21,8 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     ///     Initializes a new instance of the <see cref="MethodCallCodeFragment" /> class.
     /// </summary>
     /// <param name="methodInfo">The method's <see cref="MethodInfo" />.</param>
-    /// <param name="arguments">The method call's arguments. Can be <see cref="NestedClosureCodeFragment" />.</param>
+    /// <param name="arguments">The method call's arguments. Can be <see
+    // cref="NestedClosureCodeFragment" />.</param>
     public MethodCallCodeFragment(MethodInfo methodInfo, params object?[] arguments)
     {
         var parameters = methodInfo.GetParameters();
@@ -57,7 +59,8 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
     /// </summary>
     /// <param name="method">The method's name.</param>
     /// <param name="arguments">
-    ///     The method call's arguments. Can be a fragment like <see cref="NestedClosureCodeFragment" /> or
+    ///     The method call's arguments. Can be a fragment like <see cref="NestedClosureCodeFragment" />
+    // or
     ///     <see cref="PropertyAccessorCodeFragment" />.
     /// </param>
     public MethodCallCodeFragment(string method, params object?[] arguments)

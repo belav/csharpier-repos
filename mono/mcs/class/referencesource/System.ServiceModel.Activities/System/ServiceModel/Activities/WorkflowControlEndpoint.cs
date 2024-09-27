@@ -116,7 +116,8 @@ namespace System.ServiceModel.Activities
             {
                 if (defaultBaseUri == null)
                 {
-                    // If we are running in full trust, use the ProcessId and AppDomainId. If partial trust, use a new guid to make the URI unique and avoid
+                    // If we are running in full trust, use the ProcessId and AppDomainId. If partial trust, use a new
+                    // guid to make the URI unique and avoid
                     // the usage of ProcessId and AppDomainId. We are doing this for back compat.
                     if (PartialTrustHelpers.AppDomainFullyTrusted)
                     {

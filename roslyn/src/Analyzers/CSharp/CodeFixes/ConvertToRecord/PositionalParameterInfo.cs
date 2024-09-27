@@ -162,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 return ConvertStatus.DoNotConvert;
             }
 
-            // more restrictive than internal (protected, private, private protected, or unspecified (private by default)).
+            // more restrictive than internal (protected, private, private protected, or unspecified (private by
+            // default)).
             // We allow internal props to be converted to public auto-generated ones
             // because it's still as accessible as a constructor would be from outside the class.
             if (propertySymbol.DeclaredAccessibility < Accessibility.Internal)
@@ -176,19 +177,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 return ConvertStatus.DoNotConvert;
             }
 
-            // When we convert to primary constructor parameters, the auto-generated properties have default behavior
+            // When we convert to primary constructor parameters, the auto-generated properties have default
+            // behavior
             // Here are the cases where we wouldn't substantially change default behavior
             // - No accessors can have any explicit implementation or modifiers
-            //   - This is because it would indicate complex functionality or explicit hiding which is not default
+            //   - This is because it would indicate complex functionality or explicit hiding which is not
+            // default
             // - class records and readonly struct records must have:
             //   - public get accessor
             //   - optionally a public init accessor
-            //     - note: if this is not provided the user can still initialize the property in the constructor,
+            //     - note: if this is not provided the user can still initialize the property in the
+            // constructor,
             //             so it's like init but without the user ability to initialize outside the constructor
             // - for non-readonly structs, we must have:
             //   - public get accessor
             //   - public set accessor
-            // If the user has a private/protected set method, it could still make sense to be a primary constructor
+            // If the user has a private/protected set method, it could still make sense to be a primary
+            // constructor
             // but we should provide the override in case the user sets the property from within the class
             var getAccessor = propertySymbol.GetMethod;
             var setAccessor = propertySymbol.SetMethod;

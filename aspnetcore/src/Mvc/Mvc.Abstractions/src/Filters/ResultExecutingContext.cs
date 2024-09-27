@@ -34,7 +34,8 @@ public class ResultExecutingContext : FilterContext
     public virtual object Controller { get; }
 
     /// <summary>
-    /// Gets or sets the <see cref="IActionResult"/> to execute. Setting <see cref="Result"/> to a non-<c>null</c>
+    /// Gets or sets the <see cref="IActionResult"/> to execute. Setting <see cref="Result"/> to a
+    // non-<c>null</c>
     /// value inside a result filter will short-circuit the result and any remaining result filters.
     /// </summary>
     public virtual IActionResult Result { get; set; }

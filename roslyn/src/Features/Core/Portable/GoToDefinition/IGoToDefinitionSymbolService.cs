@@ -18,7 +18,8 @@ internal interface IGoToDefinitionSymbolService : ILanguageService
     );
 
     /// <summary>
-    /// If the position is on a control flow keyword (continue, break, yield, return , etc), returns the relevant position in the corresponding control flow statement.
+    /// If the position is on a control flow keyword (continue, break, yield, return , etc), returns the
+    // relevant position in the corresponding control flow statement.
     /// Otherwise, returns null.
     /// </summary>
     Task<(int? targetPosition, TextSpan tokenSpan)> GetTargetIfControlFlowAsync(

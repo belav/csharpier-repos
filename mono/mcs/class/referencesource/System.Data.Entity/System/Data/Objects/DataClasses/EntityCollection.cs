@@ -38,7 +38,8 @@ namespace System.Data.Objects.DataClasses
         // serialized fields. If you need to make this kind of change, it may be possible, but it
         // will require some custom serialization/deserialization code.
         // Note that this field should no longer be used directly.  Instead, use the _wrappedRelatedEntities
-        // field.  This field is retained only for compatibility with the serialization format introduced in v1.
+        // field.  This field is retained only for compatibility with the serialization format introduced in
+        // v1.
         private HashSet<TEntity> _relatedEntities;
 
         [NonSerialized]
@@ -74,10 +75,12 @@ namespace System.Data.Objects.DataClasses
         // Dev notes -2
         // following statement is valid on current existing CLR:
         // lets say Customer is an Entity, Array[Customer] is not Array[Entity]; it is not supported
-        // to do the work around we have to use a non-Generic interface/class so we can pass the EntityCollection<T>
+        // to do the work around we have to use a non-Generic interface/class so we can pass the
+        // EntityCollection<T>
         // around safely (as RelatedEnd) without losing it.
         // Dev notes -3
-        // this event is only used for internal purposes, to make sure views are updated before we fire public AssociationChanged event
+        // this event is only used for internal purposes, to make sure views are updated before we fire
+        // public AssociationChanged event
         internal override event CollectionChangeEventHandler AssociationChangedForObjectView
         {
             add { _onAssociationChangedforObjectView += value; }
@@ -206,7 +209,8 @@ namespace System.Data.Objects.DataClasses
                         ).ElementType;
                     EntityType entitySetType = singleEntitySet.ElementType;
 
-                    // the type is constrained to be either the entitySet.ElementType or the end member type, whichever is most derived
+                    // the type is constrained to be either the entitySet.ElementType or the end member type, whichever
+                    // is most derived
                     if (associationEndType.IsAssignableFrom(entitySetType))
                     {
                         // entity set exposes a subtype of the association
@@ -234,7 +238,8 @@ namespace System.Data.Objects.DataClasses
             //Pass in null to indicate the CreateSourceQuery method should be used.
             Load((List<IEntityWrapper>)null, mergeOption);
             // do not fire the AssociationChanged event here,
-            // once it is fired in one level deeper, (at Internal void Load(IEnumerable<T>)), you don't need to add the event at other
+            // once it is fired in one level deeper, (at Internal void Load(IEnumerable<T>)), you don't need to
+            // add the event at other
             // API that call (Internal void Load(IEnumerable<T>))
         }
 
@@ -248,7 +253,8 @@ namespace System.Data.Objects.DataClasses
         /// instance.
         /// </summary>
         /// <param name="entities">Result of query returning related entities</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entities"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entities"/> is
+        // null.</exception>
         /// <exception cref="InvalidOperationException">Thrown when an entity in the given
         /// collection cannot be related via the current relationship end.</exception>
         public void Attach(IEnumerable<TEntity> entities)
@@ -276,8 +282,10 @@ namespace System.Data.Objects.DataClasses
         /// instance.
         /// </summary>
         /// <param name="entity">The entity to attach to the EntityCollection</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the current relationship end.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is
+        // null.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the
+        // current relationship end.</exception>
         public void Attach(TEntity entity)
         {
             EntityUtil.CheckArgumentNull(entity, "entity");
@@ -307,7 +315,8 @@ namespace System.Data.Objects.DataClasses
                 out hasResults
             );
 
-            // we do not want any Add or Remove event to be fired during Merge, we will fire a Refresh event at the end if everything is successful
+            // we do not want any Add or Remove event to be fired during Merge, we will fire a Refresh event at
+            // the end if everything is successful
             _suppressEvents = true;
             try
             {
@@ -406,7 +415,8 @@ namespace System.Data.Objects.DataClasses
         /// <param name="entity">
         ///   Entity instance to remove from the EntityCollection
         /// </param>
-        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part of the RelatedEnd.</returns>
+        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part
+        // of the RelatedEnd.</returns>
         public bool Remove(TEntity entity)
         {
             EntityUtil.CheckArgumentNull(entity, "entity");
@@ -431,7 +441,8 @@ namespace System.Data.Objects.DataClasses
                 );
                 foreach (IEntityWrapper wrappedEntity in wrappedRelatedEntities)
                 {
-                    // Sometimes with mixed POCO and IPOCO, you can get different instances of IEntityWrappers stored in the IPOCO related ends
+                    // Sometimes with mixed POCO and IPOCO, you can get different instances of IEntityWrappers stored in
+                    // the IPOCO related ends
                     // These should be replaced by the IEntityWrapper that is stored in the context
                     IEntityWrapper identityWrapper = EntityWrapperFactory.WrapEntityUsingContext(
                         wrappedEntity.Entity,
@@ -479,7 +490,8 @@ namespace System.Data.Objects.DataClasses
                         bool doRelatedEndRemove = tm.AlignedEntityReferences.Contains(otherEnd);
                         if (doFullRemove || doRelatedEndRemove)
                         {
-                            // Remove the related ends and mark the relationship as deleted, but don't propagate the changes to the target entity itself
+                            // Remove the related ends and mark the relationship as deleted, but don't propagate the changes to
+                            // the target entity itself
                             otherEnd.Remove(
                                 otherEnd.CachedValue,
                                 doFixup: doFullRemove,
@@ -673,7 +685,8 @@ namespace System.Data.Objects.DataClasses
         }
 
         // Update IsLoaded flag if necessary
-        // This method is called when Clear() was called on the other end of relationship (if the other end is EntityCollection)
+        // This method is called when Clear() was called on the other end of relationship (if the other end
+        // is EntityCollection)
         // or when Value property of the other end was set to null (if the other end is EntityReference).
         // This method is used only when NoTracking option was used.
         internal override void OnRelatedEndClear()
@@ -831,7 +844,8 @@ namespace System.Data.Objects.DataClasses
         {
             Debug.Assert(this.RelationshipNavigation != null, "null RelationshipNavigation");
 
-            // If the navigation property doesn't exist (e.g. unidirectional prop), then it can't contain the entity.
+            // If the navigation property doesn't exist (e.g. unidirectional prop), then it can't contain the
+            // entity.
             if (!TargetAccessor.HasProperty)
             {
                 return false;
@@ -916,7 +930,8 @@ namespace System.Data.Objects.DataClasses
             }
         }
 
-        // Identical code is in EntityReference, but this can't be moved to the base class because it relies on the
+        // Identical code is in EntityReference, but this can't be moved to the base class because it relies
+        // on the
         // knowledge of the generic type, and the base class isn't generic
         public ObjectQuery<TEntity> CreateSourceQuery()
         {

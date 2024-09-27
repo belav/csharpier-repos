@@ -49,7 +49,8 @@ namespace System
         }
 
         //
-        // We are exposing TryGetTarget instead of a simple getter to avoid a common problem where people write incorrect code like:
+        // We are exposing TryGetTarget instead of a simple getter to avoid a common problem where people
+        // write incorrect code like:
         //
         //      WeakReference ref = ...;
         //      if (ref.Target != null)
@@ -168,7 +169,8 @@ namespace System
         }
 
         // Note: While WeakReference<T> is formally a finalizable type, the finalizer does not actually run.
-        //       Instead the instances are treated specially in GC when scanning for no longer strongly-reachable
+        //       Instead the instances are treated specially in GC when scanning for no longer
+        // strongly-reachable
         //       finalizable objects.
 #pragma warning disable CA1821 // Remove empty Finalizers
         ~WeakReference()

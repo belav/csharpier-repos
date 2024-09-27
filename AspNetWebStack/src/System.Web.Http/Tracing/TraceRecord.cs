@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -100,7 +101,8 @@ namespace System.Web.Http.Tracing
         public Guid RequestId { get; private set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="HttpStatusCode"/> associated with the <see cref="HttpResponseMessage"/>.
+        /// Gets or sets the <see cref="HttpStatusCode"/> associated with the <see
+        // cref="HttpResponseMessage"/>.
         /// </summary>
         public HttpStatusCode Status { get; set; }
 

@@ -21,7 +21,8 @@
 // For additional rules see also:
 //  RFC 3490 - Internationalizing Domain Names in Applications (IDNA)
 //  RFC 3491 - Nameprep: A Stringprep Profile for Internationalized Domain Names (IDN)
-//  RFC 3492 - Punycode: A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)
+//  RFC 3492 - Punycode: A Bootstring encoding of Unicode for Internationalized Domain Names in
+// Applications (IDNA)
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -132,8 +133,10 @@ namespace System.Globalization
                     SR.ArgumentOutOfRange_IndexCountBuffer
                 );
 
-            // This is a case (i.e. explicitly null-terminated input) where behavior in .NET and Win32 intentionally differ.
-            // The .NET APIs should (and did in v4.0 and earlier) throw an ArgumentException on input that includes a terminating null.
+            // This is a case (i.e. explicitly null-terminated input) where behavior in .NET and Win32
+            // intentionally differ.
+            // The .NET APIs should (and did in v4.0 and earlier) throw an ArgumentException on input that
+            // includes a terminating null.
             // The Win32 APIs fail on an embedded null, but not on a terminating null.
             if (count > 0 && ascii[index + count - 1] == (char)0)
                 throw new ArgumentException(SR.Argument_IdnBadPunycode, nameof(ascii));
@@ -251,7 +254,8 @@ namespace System.Globalization
             // Loop the whole string
             for (int i = 0; i < unicode.Length; i++)
             {
-                // Aren't allowing control chars (or 7f, but idn tables catch that, they don't catch \0 at end though)
+                // Aren't allowing control chars (or 7f, but idn tables catch that, they don't catch \0 at end
+                // though)
                 if (unicode[i] <= 0x1f)
                 {
                     throw new ArgumentException(
@@ -312,31 +316,31 @@ namespace System.Globalization
             return true;
         }
 
-        /* PunycodeEncode() converts Unicode to Punycode.  The input     */
-        /* is represented as an array of Unicode code points (not code    */
-        /* units; surrogate pairs are not allowed), and the output        */
-        /* will be represented as an array of ASCII code points.  The     */
-        /* output string is *not* null-terminated; it will contain        */
-        /* zeros if and only if the input contains zeros.  (Of course     */
-        /* the caller can leave room for a terminator and add one if      */
-        /* needed.)  The input_length is the number of code points in     */
-        /* the input.  The output_length is an in/out argument: the       */
-        /* caller passes in the maximum number of code points that it     */
+/* PunycodeEncode() converts Unicode to Punycode.  The input     */
+/* is represented as an array of Unicode code points (not code    */
+/* units; surrogate pairs are not allowed), and the output        */
+/* will be represented as an array of ASCII code points.  The     */
+/* output string is *not* null-terminated; it will contain        */
+/* zeros if and only if the input contains zeros.  (Of course     */
+/* the caller can leave room for a terminator and add one if      */
+/* needed.)  The input_length is the number of code points in     */
+/* the input.  The output_length is an in/out argument: the       */
+/* caller passes in the maximum number of code points that it     */
 
-        /* can receive, and on successful return it will contain the      */
-        /* number of code points actually output.  The case_flags array   */
-        /* holds input_length boolean values, where nonzero suggests that */
-        /* the corresponding Unicode character be forced to uppercase     */
-        /* after being decoded (if possible), and zero suggests that      */
-        /* it be forced to lowercase (if possible).  ASCII code points    */
-        /* are encoded literally, except that ASCII letters are forced    */
-        /* to uppercase or lowercase according to the corresponding       */
-        /* uppercase flags.  If case_flags is a null pointer then ASCII   */
-        /* letters are left as they are, and other code points are        */
-        /* treated as if their uppercase flags were zero.  The return     */
-        /* value can be any of the punycode_status values defined above   */
-        /* except punycode_bad_input; if not punycode_success, then       */
-        /* output_size and output might contain garbage.                  */
+/* can receive, and on successful return it will contain the      */
+/* number of code points actually output.  The case_flags array   */
+/* holds input_length boolean values, where nonzero suggests that */
+/* the corresponding Unicode character be forced to uppercase     */
+/* after being decoded (if possible), and zero suggests that      */
+/* it be forced to lowercase (if possible).  ASCII code points    */
+/* are encoded literally, except that ASCII letters are forced    */
+/* to uppercase or lowercase according to the corresponding       */
+/* uppercase flags.  If case_flags is a null pointer then ASCII   */
+/* letters are left as they are, and other code points are        */
+/* treated as if their uppercase flags were zero.  The return     */
+/* value can be any of the punycode_status values defined above   */
+/* except punycode_bad_input; if not punycode_success, then       */
+/* output_size and output might contain garbage.                  */
         private static string PunycodeEncode(string unicode)
         {
             // 0 length strings aren't allowed
@@ -473,8 +477,8 @@ namespace System.Globalization
                     // Main loop
                     while (numProcessed < (iNextDot - iAfterLastDot))
                     {
-                        /* All non-basic code points < n have been     */
-                        /* handled already.  Find the next larger one: */
+/* All non-basic code points < n have been     */
+/* handled already.  Find the next larger one: */
                         int j;
                         int m;
                         int test;
@@ -489,8 +493,8 @@ namespace System.Globalization
                                 m = test;
                         }
 
-                        /* Increase delta enough to advance the decoder's    */
-                        /* <n,i> state to <m,0>, but guard against overflow: */
+/* Increase delta enough to advance the decoder's    */
+/* <n,i> state to <m,0>, but guard against overflow: */
                         delta += (int)((m - n) * ((numProcessed - numSurrogatePairs) + 1));
                         Debug.Assert(
                             delta > 0,
@@ -632,26 +636,26 @@ namespace System.Globalization
             return strUnicode;
         }
 
-        /* PunycodeDecode() converts Punycode to Unicode.  The input is  */
-        /* represented as an array of ASCII code points, and the output   */
-        /* will be represented as an array of Unicode code points.  The   */
-        /* input_length is the number of code points in the input.  The   */
-        /* output_length is an in/out argument: the caller passes in      */
-        /* the maximum number of code points that it can receive, and     */
-        /* on successful return it will contain the actual number of      */
-        /* code points output.  The case_flags array needs room for at    */
-        /* least output_length values, or it can be a null pointer if the */
-        /* case information is not needed.  A nonzero flag suggests that  */
-        /* the corresponding Unicode character be forced to uppercase     */
-        /* by the caller (if possible), while zero suggests that it be    */
-        /* forced to lowercase (if possible).  ASCII code points are      */
-        /* output already in the proper case, but their flags will be set */
-        /* appropriately so that applying the flags would be harmless.    */
-        /* The return value can be any of the punycode_status values      */
-        /* defined above; if not punycode_success, then output_length,    */
-        /* output, and case_flags might contain garbage.  On success, the */
-        /* decoder will never need to write an output_length greater than */
-        /* input_length, because of how the encoding is defined.          */
+/* PunycodeDecode() converts Punycode to Unicode.  The input is  */
+/* represented as an array of ASCII code points, and the output   */
+/* will be represented as an array of Unicode code points.  The   */
+/* input_length is the number of code points in the input.  The   */
+/* output_length is an in/out argument: the caller passes in      */
+/* the maximum number of code points that it can receive, and     */
+/* on successful return it will contain the actual number of      */
+/* code points output.  The case_flags array needs room for at    */
+/* least output_length values, or it can be a null pointer if the */
+/* case information is not needed.  A nonzero flag suggests that  */
+/* the corresponding Unicode character be forced to uppercase     */
+/* by the caller (if possible), while zero suggests that it be    */
+/* forced to lowercase (if possible).  ASCII code points are      */
+/* output already in the proper case, but their flags will be set */
+/* appropriately so that applying the flags would be harmless.    */
+/* The return value can be any of the punycode_status values      */
+/* defined above; if not punycode_success, then output_length,    */
+/* output, and case_flags might contain garbage.  On success, the */
+/* decoder will never need to write an output_length greater than */
+/* input_length, because of how the encoding is defined.          */
 
         private static string PunycodeDecode(string ascii)
         {
@@ -781,10 +785,10 @@ namespace System.Globalization
                     // Main loop, read rest of ascii
                     while (asciiIndex < iNextDot)
                     {
-                        /* Decode a generalized variable-length integer into delta,  */
-                        /* which gets added to i.  The overflow checking is easier   */
-                        /* if we increase i as we go, then subtract off its starting */
-                        /* value at the end to obtain delta.                         */
+/* Decode a generalized variable-length integer into delta,  */
+/* which gets added to i.  The overflow checking is easier   */
+/* if we increase i as we go, then subtract off its starting */
+/* value at the end to obtain delta.                         */
                         int oldi = i;
 
                         for (w = 1, k = c_punycodeBase; ; k += c_punycodeBase)
@@ -831,8 +835,8 @@ namespace System.Globalization
                             oldi == 0
                         );
 
-                        /* i was supposed to wrap around from output.Length to 0,   */
-                        /* incrementing n each time, so we'll fix that now: */
+/* i was supposed to wrap around from output.Length to 0,   */
+/* incrementing n each time, so we'll fix that now: */
                         Debug.Assert(
                             (output.Length - iOutputAfterLastDot - numSurrogatePairs) + 1 > 0,
                             "[IdnMapping.punycode_decode]Expected to have added > 0 characters this segment"
@@ -994,11 +998,11 @@ namespace System.Globalization
             return (int)(k + (c_punycodeBase - c_tmin + 1) * delta / (delta + c_skew));
         }
 
-        /* EncodeBasic(bcp,flag) forces a basic code point to lowercase */
-        /* if flag is false, uppercase if flag is true, and returns    */
-        /* the resulting code point.  The code point is unchanged if it  */
-        /* is caseless.  The behavior is undefined if bcp is not a basic */
-        /* code point.                                                   */
+/* EncodeBasic(bcp,flag) forces a basic code point to lowercase */
+/* if flag is false, uppercase if flag is true, and returns    */
+/* the resulting code point.  The code point is unchanged if it  */
+/* is caseless.  The behavior is undefined if bcp is not a basic */
+/* code point.                                                   */
 
         private static char EncodeBasic(char bcp)
         {
@@ -1008,10 +1012,10 @@ namespace System.Globalization
             return bcp;
         }
 
-        /* EncodeDigit(d,flag) returns the basic code point whose value      */
-        /* (when used for representing integers) is d, which needs to be in   */
-        /* the range 0 to punycodeBase-1.  The lowercase form is used unless flag is  */
-        /* true, in which case the uppercase form is used. */
+/* EncodeDigit(d,flag) returns the basic code point whose value      */
+/* (when used for representing integers) is d, which needs to be in   */
+/* the range 0 to punycodeBase-1.  The lowercase form is used unless flag is  */
+/* true, in which case the uppercase form is used. */
 
         private static char EncodeDigit(int d)
         {

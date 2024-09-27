@@ -19,10 +19,12 @@ namespace System.IO.Ports.Tests
         // The amount of time to wait when expecting an long timeout
         private const int DEFAULT_WAIT_LONG_TIMEOUT = 250;
 
-        // The maximum acceptable time allowed when a read method should timeout immediately when it is called for the first time
+        // The maximum acceptable time allowed when a read method should timeout immediately when it is
+        // called for the first time
         private const int MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT = 1000;
 
-        // The maximum acceptable percentage difference allowed when a read method is called for the first time
+        // The maximum acceptable percentage difference allowed when a read method is called for the first
+        // time
         private const double MAX_ACCEPTABLE_WARMUP_PERCENTAGE_DIFFERENCE = .5;
 
         // The maximum acceptable percentage difference allowed
@@ -385,7 +387,8 @@ namespace System.IO.Ports.Tests
                 var xmitBuffer = new byte[1];
                 int sleepPeriod = SUCCESSIVE_READTIMEOUT_SOMEDATA / 2;
 
-                // Sleep some random period with of a maximum duration of half the largest possible timeout value for a read method on COM1
+                // Sleep some random period with of a maximum duration of half the largest possible timeout value
+                // for a read method on COM1
                 Thread.Sleep(sleepPeriod);
 
                 com2.Open();
@@ -500,7 +503,8 @@ namespace System.IO.Ports.Tests
             int actualTime;
             double percentageDifference;
 
-            // Warmup the read method. When called for the first time the read method seems to take much longer then subsequent calls
+            // Warmup the read method. When called for the first time the read method seems to take much longer
+            // then subsequent calls
             timer.Start();
             try
             {
@@ -511,7 +515,8 @@ namespace System.IO.Ports.Tests
             actualTime = (int)timer.ElapsedMilliseconds;
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
 
-            // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
+            // Verify that the percentage difference between the expected and actual timeout is less then
+            // maxPercentageDifference
             Assert.True(
                 percentageDifference <= MAX_ACCEPTABLE_WARMUP_PERCENTAGE_DIFFERENCE,
                 string.Format(
@@ -525,7 +530,8 @@ namespace System.IO.Ports.Tests
             actualTime = 0;
             timer.Reset();
 
-            // Perform the actual test verifying that the read method times out in approximately ReadTime milliseconds
+            // Perform the actual test verifying that the read method times out in approximately ReadTime
+            // milliseconds
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
             for (var i = 0; i < NUM_TRYS; i++)
@@ -546,7 +552,8 @@ namespace System.IO.Ports.Tests
             actualTime /= NUM_TRYS;
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
 
-            // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
+            // Verify that the percentage difference between the expected and actual timeout is less then
+            // maxPercentageDifference
             Assert.True(
                 percentageDifference <= MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE,
                 string.Format(
@@ -588,7 +595,8 @@ namespace System.IO.Ports.Tests
             var timer = new Stopwatch();
             int actualTime;
 
-            // Warmup the read method. When called for the first time the read method seems to take much longer then subsequent calls
+            // Warmup the read method. When called for the first time the read method seems to take much longer
+            // then subsequent calls
             timer.Start();
             try
             {
@@ -611,7 +619,8 @@ namespace System.IO.Ports.Tests
             actualTime = 0;
             timer.Reset();
 
-            // Perform the actual test verifying that the read method times out in approximately ReadTime milliseconds
+            // Perform the actual test verifying that the read method times out in approximately ReadTime
+            // milliseconds
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
             for (var i = 0; i < NUM_TRYS; i++)

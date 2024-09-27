@@ -6,7 +6,8 @@ using System.Text;
 
 namespace HttpStress
 {
-    // Adapted from https://github.com/dotnet/corefx/blob/41cd99d051102be4ed83f4f9105ae9e73aa48b7c/src/Common/tests/System/IO/Compression/CRC.cs
+    // Adapted from
+    // https://github.com/dotnet/corefx/blob/41cd99d051102be4ed83f4f9105ae9e73aa48b7c/src/Common/tests/System/IO/Compression/CRC.cs
     public static class CRC
     {
         // Table of CRCs of all 8-bit messages.

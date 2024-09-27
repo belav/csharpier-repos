@@ -1379,9 +1379,12 @@ namespace System.Runtime.Serialization
             return dataNode;
         }
 
-        // Pattern-recognition logic: the method reads XML elements into DOM. To recognize as an array, it requires that
-        // all items have the same name and namespace. To recognize as an ISerializable type, it requires that all
-        // items be unqualified. If the XML only contains elements (no attributes or other nodes) is recognized as a
+        // Pattern-recognition logic: the method reads XML elements into DOM. To recognize as an array, it
+        // requires that
+        // all items have the same name and namespace. To recognize as an ISerializable type, it requires
+        // that all
+        // items be unqualified. If the XML only contains elements (no attributes or other nodes) is
+        // recognized as a
         // class/class hierarchy. Otherwise it is deserialized as XML.
         IDataNode ReadAndResolveUnknownXmlData(
             XmlReaderDelegator xmlReader,

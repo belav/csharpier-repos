@@ -85,8 +85,10 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(@"""~/path""", JsonSerializer.Serialize(uri));
             }
 
-            // The next two scenarios validate that we're NOT using Uri.ToString() for serializing Uri. The serializer
-            // will escape backslashes and ampersands, but otherwise should be the same as the output of Uri.OriginalString.
+            // The next two scenarios validate that we're NOT using Uri.ToString() for serializing Uri. The
+            // serializer
+            // will escape backslashes and ampersands, but otherwise should be the same as the output of
+            // Uri.OriginalString.
 
             {
                 // ToString would collapse the relative segment

@@ -80,8 +80,10 @@ namespace System.IO
 
         internal static bool IsPartiallyQualified(ReadOnlySpan<char> path)
         {
-            // This is much simpler than Windows where paths can be rooted, but not fully qualified (such as Drive Relative)
-            // As long as the path is rooted in Unix it doesn't use the current directory and therefore is fully qualified.
+            // This is much simpler than Windows where paths can be rooted, but not fully qualified (such as
+            // Drive Relative)
+            // As long as the path is rooted in Unix it doesn't use the current directory and therefore is fully
+            // qualified.
             return !Path.IsPathRooted(path);
         }
 

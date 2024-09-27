@@ -9,10 +9,14 @@ using ExpressionExtensions = Microsoft.EntityFrameworkCore.Query.ExpressionExten
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class SqlServerMathTranslator : IMethodCallTranslator
 {
@@ -190,10 +194,14 @@ public class SqlServerMathTranslator : IMethodCallTranslator
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public SqlServerMathTranslator(ISqlExpressionFactory sqlExpressionFactory)
     {
@@ -201,10 +209,14 @@ public class SqlServerMathTranslator : IMethodCallTranslator
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual SqlExpression? Translate(
         SqlExpression? instance,
@@ -241,8 +253,10 @@ public class SqlServerMathTranslator : IMethodCallTranslator
         if (TruncateMethodInfos.Contains(method))
         {
             var argument = arguments[0];
-            // C# has Round over decimal/double/float only so our argument will be one of those types (compiler puts convert node)
-            // In database result will be same type except for float which returns double which we need to cast back to float.
+            // C# has Round over decimal/double/float only so our argument will be one of those types (compiler
+            // puts convert node)
+            // In database result will be same type except for float which returns double which we need to cast
+            // back to float.
             var resultType = argument.Type;
             if (resultType == typeof(float))
             {
@@ -275,8 +289,10 @@ public class SqlServerMathTranslator : IMethodCallTranslator
         {
             var argument = arguments[0];
             var digits = arguments.Count == 2 ? arguments[1] : _sqlExpressionFactory.Constant(0);
-            // C# has Round over decimal/double/float only so our argument will be one of those types (compiler puts convert node)
-            // In database result will be same type except for float which returns double which we need to cast back to float.
+            // C# has Round over decimal/double/float only so our argument will be one of those types (compiler
+            // puts convert node)
+            // In database result will be same type except for float which returns double which we need to cast
+            // back to float.
             var resultType = argument.Type;
             if (resultType == typeof(float))
             {

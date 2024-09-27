@@ -501,7 +501,8 @@ namespace System.Diagnostics
                 if (foundAttribute)
                 {
                     // If this is an iterator (sync or async), mark the iterator as changed, so it gets the + annotation
-                    // of the original method. Non-iterator async state machines resolve directly to their builder methods
+                    // of the original method. Non-iterator async state machines resolve directly to their builder
+                    // methods
                     // so aren't marked as changed.
                     method = candidateMethod;
                     declaringType = candidateMethod.DeclaringType!;

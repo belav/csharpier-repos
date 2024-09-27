@@ -39,7 +39,8 @@ namespace ILCompiler
                 return layoutFromMetadata;
             }
 
-            // 64-bit Unix systems follow the System V ABI and have a 16-byte packing requirement for Int128/UInt128
+            // 64-bit Unix systems follow the System V ABI and have a 16-byte packing requirement for
+            // Int128/UInt128
 
             return new ComputedInstanceFieldLayout
             {

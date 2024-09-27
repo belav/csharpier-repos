@@ -121,8 +121,10 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Returns a model (C-Space) typeusage for the given typeusage. if the type is already in c-space, it returns
-        /// the given typeusage. The typeUsage returned is created by invoking the provider service to map from provider
+        /// Returns a model (C-Space) typeusage for the given typeusage. if the type is already in c-space,
+        // it returns
+        /// the given typeusage. The typeUsage returned is created by invoking the provider service to map
+        // from provider
         /// specific type to model type.
         /// </summary>
         /// <param name="typeUsage">typeusage</param>
@@ -133,8 +135,10 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Returns a model (C-Space) typeusage for the given member typeusage. if the type is already in c-space, it returns
-        /// the given typeusage. The typeUsage returned is created by invoking the provider service to map from provider
+        /// Returns a model (C-Space) typeusage for the given member typeusage. if the type is already in
+        // c-space, it returns
+        /// the given typeusage. The typeUsage returned is created by invoking the provider service to map
+        // from provider
         /// specific type to model type.
         /// </summary>
         /// <param name="member">EdmMember</param>
@@ -145,15 +149,20 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Checks if the edm type in the cspace type usage maps to some sspace type (called it S1). If S1 is equivalent or
-        /// promotable to the store type in sspace type usage, then it creates a new type usage with S1 and copies all facets
+        /// Checks if the edm type in the cspace type usage maps to some sspace type (called it S1). If S1
+        // is equivalent or
+        /// promotable to the store type in sspace type usage, then it creates a new type usage with S1 and
+        // copies all facets
         /// if necessary
         /// </summary>
         /// <param name="edmProperty">Edm property containing the cspace member type information</param>
         /// <param name="columnProperty">edm property containing the sspace member type information</param>
-        /// <param name="fileName">name of the mapping file from which this information was loaded from</param>
-        /// <param name="lineInfo">lineInfo containing the line information about the cspace and sspace property mapping</param>
-        /// <param name="parsingErrors">List of parsing errors - we need to add any new error to this list</param>
+        /// <param name="fileName">name of the mapping file from which this information was loaded
+        // from</param>
+        /// <param name="lineInfo">lineInfo containing the line information about the cspace and sspace
+        // property mapping</param>
+        /// <param name="parsingErrors">List of parsing errors - we need to add any new error to this
+        // list</param>
         /// <param name="storeItemCollection">store item collection</param>
         /// <returns></returns>
         internal static TypeUsage ValidateAndConvertTypeUsage(
@@ -263,8 +272,10 @@ namespace System.Data.Metadata.Edm
             if (Helper.IsEnumType(cspaceType.EdmType))
             {
                 // For enum cspace type check whether its underlying type is a subtype of the store type. Note that
-                // TypeSemantics.IsSubTypeOf uses only TypeUsage.EdmType for primitive types so there is no need to copy facets
-                // from the enum type property to the underlying type TypeUsage created here since they wouldn't be used anyways.
+                // TypeSemantics.IsSubTypeOf uses only TypeUsage.EdmType for primitive types so there is no need to
+                // copy facets
+                // from the enum type property to the underlying type TypeUsage created here since they wouldn't be
+                // used anyways.
                 return TypeSemantics.IsSubTypeOf(
                     TypeUsage.Create(Helper.GetUnderlyingEdmTypeForEnumType(cspaceType.EdmType)),
                     storeType

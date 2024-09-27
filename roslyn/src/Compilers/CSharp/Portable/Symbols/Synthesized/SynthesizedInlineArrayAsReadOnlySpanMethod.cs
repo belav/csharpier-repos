@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             try
             {
-                // return MemoryMarshal.CreateReadOnlySpan<TElement>(ref Unsafe.As<TBuffer, TElement>(ref Unsafe.AsRef<TBuffer>(in buffer)), length)
+                // return MemoryMarshal.CreateReadOnlySpan<TElement>(ref Unsafe.As<TBuffer, TElement>(ref
+                // Unsafe.AsRef<TBuffer>(in buffer)), length)
 
                 var body = f.Return(
                     f.Call(

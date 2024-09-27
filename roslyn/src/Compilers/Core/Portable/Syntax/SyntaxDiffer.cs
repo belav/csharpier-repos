@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        // return which spans of text in the new document are possibly different than text in the old document
+        // return which spans of text in the new document are possibly different than text in the old
+        // document
         internal static IList<TextSpan> GetPossiblyDifferentTextSpans(
             SyntaxNode oldNode,
             SyntaxNode newNode
@@ -268,7 +269,8 @@ namespace Microsoft.CodeAnalysis
                     // either there is no match for the first new-node in the old-list or the
                     // the similarity of the first old-node in the new-list is much greater
 
-                    // if we find a match for the old node in the new list, that probably means nodes were inserted before it.
+                    // if we find a match for the old node in the new list, that probably means nodes were inserted
+                    // before it.
                     if (indexOfOldInNew > 0)
                     {
                         // look ahead to see if the old node also appears again later in its own list

@@ -22,7 +22,8 @@ namespace System.Web.UI.WebControls
         private OrderedDictionary _oldValues;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.FormViewUpdateEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.FormViewUpdateEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public FormViewUpdateEventArgs(object commandArgument)
@@ -32,7 +33,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the argument to the command posted to the <see cref='System.Web.UI.WebControls.FormView'/>. This property is read-only.</para>
+        /// <para>Gets the argument to the command posted to the <see
+        // cref='System.Web.UI.WebControls.FormView'/>. This property is read-only.</para>
         /// </devdoc>
         public object CommandArgument
         {
@@ -55,7 +57,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary NewValues
         {
@@ -70,7 +73,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with pre-edit row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with pre-edit row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary OldValues
         {

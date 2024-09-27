@@ -29,10 +29,10 @@ using System;
 
 namespace Mono.Simd
 {
-    /*
-    This enum MUST be kept in sync with its runtime mirror in mini.h.
-    The SIMD_VERSION_ values are bit indexes, while the ones here are masks.
-    */
+/*
+This enum MUST be kept in sync with its runtime mirror in mini.h.
+The SIMD_VERSION_ values are bit indexes, while the ones here are masks.
+*/
     [Flags]
     public enum AccelMode
     {

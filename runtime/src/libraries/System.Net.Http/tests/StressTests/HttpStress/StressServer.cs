@@ -52,11 +52,14 @@ namespace HttpStress
             if (configuration.UseHttpSys && OperatingSystem.IsWindows())
             {
                 // Use http.sys.  This requires additional manual configuration ahead of time;
-                // see https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/httpsys?view=aspnetcore-2.2#configure-windows-server.
+                // see
+                // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/httpsys?view=aspnetcore-2.2#configure-windows-server.
                 // In particular, you need to:
-                // 1. Create a self-signed cert and install it into your local personal store, e.g. New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\LocalMachine\My"
+                // 1. Create a self-signed cert and install it into your local personal store, e.g.
+                // New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\LocalMachine\My"
                 // 2. Pre-register the URL prefix, e.g. netsh http add urlacl url=https://localhost:5001/ user=Users
-                // 3. Register the cert, e.g. netsh http add sslcert ipport=[::1]:5001 certhash=THUMBPRINTFROMABOVE appid="{some-guid}"
+                // 3. Register the cert, e.g. netsh http add sslcert ipport=[::1]:5001 certhash=THUMBPRINTFROMABOVE
+                // appid="{some-guid}"
                 host = host.UseHttpSys(hso =>
                 {
                     hso.UrlPrefixes.Add(ServerUri);
@@ -76,7 +79,8 @@ namespace HttpStress
                 // Use Kestrel, and configure it for HTTPS with a self-signed test certificate.
                 host = host.UseKestrel(ko =>
                 {
-                    // conservative estimation based on https://github.com/dotnet/aspnetcore/blob/caa910ceeba5f2b2c02c47a23ead0ca31caea6f0/src/Servers/Kestrel/Core/src/Internal/Http2/Http2Stream.cs#L204
+                    // conservative estimation based on
+                    // https://github.com/dotnet/aspnetcore/blob/caa910ceeba5f2b2c02c47a23ead0ca31caea6f0/src/Servers/Kestrel/Core/src/Internal/Http2/Http2Stream.cs#L204
                     ko.Limits.MaxRequestLineSize = Math.Max(
                         ko.Limits.MaxRequestLineSize,
                         configuration.MaxRequestUriSize + 100
@@ -331,7 +335,8 @@ namespace HttpStress
                 "/",
                 async context =>
                 {
-                    // Post echos back the requested content, first buffering it all server-side, then sending it all back.
+                    // Post echos back the requested content, first buffering it all server-side, then sending it all
+                    // back.
                     var s = new MemoryStream();
                     await context.Request.Body.CopyToAsync(s);
 
@@ -418,7 +423,8 @@ namespace HttpStress
 
         private static void WorkaroundAssemblyResolutionIssues()
         {
-            // For some reason, System.Security.Cryptography.Encoding.dll fails to resolve when being loaded on-demand by AspNetCore.
+            // For some reason, System.Security.Cryptography.Encoding.dll fails to resolve when being loaded
+            // on-demand by AspNetCore.
             // Enforce early-loading to workaround this issue.
             _ = new Oid();
         }

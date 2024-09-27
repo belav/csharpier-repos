@@ -123,8 +123,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     continue;
                 }
 
-                // C# and VB the display text is different for generics, i.e. <T> and (Of T). For simplicity, we only cache for one language.
-                // But when we trigger in a project with different language than when the cache entry was created for, we will need to
+                // C# and VB the display text is different for generics, i.e. <T> and (Of T). For simplicity, we
+                // only cache for one language.
+                // But when we trigger in a project with different language than when the cache entry was created
+                // for, we will need to
                 // change the generic suffix accordingly.
                 if (!isSameLanguage && info.IsGeneric)
                 {
@@ -198,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             public void AddItem(INamedTypeSymbol symbol, string containingNamespace, bool isPublic)
             {
-                // We want to cache items with EditorBrowsableState == Advanced regardless of current "hide adv members" option value
+                // We want to cache items with EditorBrowsableState == Advanced regardless of current "hide adv
+                // members" option value
                 var (isBrowsable, isEditorBrowsableStateAdvanced) =
                     symbol.IsEditorBrowsableWithState(
                         hideAdvancedMembers: false,
@@ -219,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 // on to symbols. However, the cost of calling `IsAttribute` on every top-level type symbols
                 // is prohibitively high, so we opt for the heuristic that would do the simple textual "Attribute"
                 // suffix check first, then the more expensive symbolic check. As a result, all unimported
-                // attribute types that don't have "Attribute" suffix would be filtered out when in attribute context.
+                // attribute types that don't have "Attribute" suffix would be filtered out when in attribute
+                // context.
                 var isAttribute =
                     symbol.Name.HasAttributeSuffix(isCaseSensitive: false) && symbol.IsAttribute();
 

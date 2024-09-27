@@ -49,8 +49,10 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
         _poolPolicy = new NamedPipeServerStreamPoolPolicy(endpoint, options);
         _namedPipeServerStreamPool = objectPoolProvider.Create(_poolPolicy);
 
-        // The OS maintains a backlog of clients that are waiting to connect, so the app queue only stores a single connection.
-        // We want to have a queue plus a background task that populates the queue, rather than creating NamedPipeServerStream
+        // The OS maintains a backlog of clients that are waiting to connect, so the app queue only stores a
+        // single connection.
+        // We want to have a queue plus a background task that populates the queue, rather than creating
+        // NamedPipeServerStream
         // when AcceptAsync is called, so that the server is always the owner of the pipe name.
         _acceptedQueue = Channel.CreateBounded<ConnectionContext>(
             new BoundedChannelOptions(capacity: 1)
@@ -209,7 +211,8 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
             await _completeListeningTask;
         }
 
-        // Dispose pool after listening tasks are complete so there is no chance a stream is fetched from the pool after the pool is disposed.
+        // Dispose pool after listening tasks are complete so there is no chance a stream is fetched from
+        // the pool after the pool is disposed.
         // Important to dispose because this empties and disposes streams in the pool.
         (_namedPipeServerStreamPool as IDisposable)?.Dispose();
     }
@@ -237,8 +240,10 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
             if (!_hasFirstPipeStarted)
             {
                 // The first server stream created should validate that no one else is listening with a given name.
-                // Only the first server stream should make this test. The listener will almost always create multiple streams
-                // to listen on multiple threads and to handle parallel requests. The pool policy must be updated that the
+                // Only the first server stream should make this test. The listener will almost always create
+                // multiple streams
+                // to listen on multiple threads and to handle parallel requests. The pool policy must be updated
+                // that the
                 // setting isn't needed after the first stream.
                 pipeOptions |= NamedPipeOptions.FirstPipeInstance;
             }

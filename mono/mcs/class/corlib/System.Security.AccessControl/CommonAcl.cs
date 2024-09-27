@@ -34,9 +34,9 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-    /* NB: Note the Remarks section in the CommonAcl class docs
-     * concerning ACE management
-     */
+/* NB: Note the Remarks section in the CommonAcl class docs
+* concerning ACE management
+*/
     public abstract class CommonAcl : GenericAcl
     {
         const int default_capacity = 10; // FIXME: not verified

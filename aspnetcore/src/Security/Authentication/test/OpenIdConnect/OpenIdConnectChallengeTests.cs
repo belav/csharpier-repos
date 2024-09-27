@@ -126,25 +126,30 @@ public class OpenIdConnectChallengeTests
         );
     }
 
-    /*
-    Example of a form post
-    <body>
-        <form name=\ "form\" method=\ "post\" action=\ "https://login.microsoftonline.com/common/oauth2/authorize\">
-            <input type=\ "hidden\" name=\ "client_id\" value=\ "51e38103-238f-410f-a5d5-61991b203e50\" />
-            <input type=\ "hidden\" name=\ "redirect_uri\" value=\ "https://example.com/signin-oidc\" />
-            <input type=\ "hidden\" name=\ "response_type\" value=\ "id_token\" />
-            <input type=\ "hidden\" name=\ "scope\" value=\ "openid profile\" />
-            <input type=\ "hidden\" name=\ "response_mode\" value=\ "form_post\" />
-            <input type=\ "hidden\" name=\ "nonce\" value=\ "636072461997914230.NTAwOGE1MjQtM2VhYS00ZDU0LWFkYzYtNmZiYWE2MDRkODg3OTlkMDFmOWUtOTMzNC00ZmI2LTg1Y2YtOWM4OTlhNjY0Yjli\" />
-            <input type=\ "hidden\" name=\ "state\" value=\
-                "CfDJ8Jh1NKaF0T5AnK4qsqzzIs89srKe4iEaBWd29MNph4Ki887QKgkD24wjhZ0ciH-ar6A_jUmRI2O5haXN2-YXbC0ZRuRAvNsx5LqbPTdh4MJBIwXWkG_rM0T0tI3h5Y2pDttWSaku6a_nzFLUYBrKfsE7sDLVoTDrzzOcHrRQhdztqOOeNUuu2wQXaKwlOtNI21ShtN9EVxvSGFOxUUOwVih4nFdF40fBcbsuPpcpCPkLARQaFRJSYsNKiP7pcFMnRwzZhnISHlyGKkzwJ1DIx7nsmdiQFBGljimw5GnYAs-5ru9L3w8NnPjkl96OyQ8MJOcayMDmOY26avs2sYP_Zw0\" />
-            <noscript>Click here to finish the process: <input type=\"submit\" /></noscript>
-        </form>
-        <script>
-            document.form.submit();
-        </script>
-    </body>
-    */
+/*
+Example of a form post
+<body>
+<form name=\ "form\" method=\ "post\" action=\
+"https://login.microsoftonline.com/common/oauth2/authorize\">
+<input type=\ "hidden\" name=\ "client_id\" value=\ "51e38103-238f-410f-a5d5-61991b203e50\" />
+<input type=\ "hidden\" name=\ "redirect_uri\" value=\ "https://example.com/signin-oidc\" />
+<input type=\ "hidden\" name=\ "response_type\" value=\ "id_token\" />
+<input type=\ "hidden\" name=\ "scope\" value=\ "openid profile\" />
+<input type=\ "hidden\" name=\ "response_mode\" value=\ "form_post\" />
+<input type=\ "hidden\" name=\ "nonce\" value=\
+"636072461997914230.NTAwOGE1MjQtM2VhYS00ZDU0LWFkYzYtNmZiYWE2MDRkODg3OTlkMDFmOWUtOTMzNC00ZmI2LTg1Y2YtOWM4OTlhNjY0Yjli\"
+/>
+<input type=\ "hidden\" name=\ "state\" value=\
+
+"CfDJ8Jh1NKaF0T5AnK4qsqzzIs89srKe4iEaBWd29MNph4Ki887QKgkD24wjhZ0ciH-ar6A_jUmRI2O5haXN2-YXbC0ZRuRAvNsx5LqbPTdh4MJBIwXWkG_rM0T0tI3h5Y2pDttWSaku6a_nzFLUYBrKfsE7sDLVoTDrzzOcHrRQhdztqOOeNUuu2wQXaKwlOtNI21ShtN9EVxvSGFOxUUOwVih4nFdF40fBcbsuPpcpCPkLARQaFRJSYsNKiP7pcFMnRwzZhnISHlyGKkzwJ1DIx7nsmdiQFBGljimw5GnYAs-5ru9L3w8NnPjkl96OyQ8MJOcayMDmOY26avs2sYP_Zw0\"
+/>
+<noscript>Click here to finish the process: <input type=\"submit\" /></noscript>
+</form>
+<script>
+document.form.submit();
+</script>
+</body>
+*/
     [Fact]
     public async Task ChallengeFormPostIssuedCorrectly()
     {

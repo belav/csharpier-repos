@@ -153,7 +153,9 @@ namespace System.ComponentModel.Design.Serialization
 
         // For behaviour description:
         //
+        //
         // http://msdn2.microsoft.com/en-us/library/system.componentmodel.design.serialization.designerserializationmanager.validaterecycledtypes.aspx
+        //
         // http://msdn2.microsoft.com/en-us/library/system.componentmodel.design.serialization.designerserializationmanager.preservenames.aspx
         //
         protected virtual object CreateInstance(

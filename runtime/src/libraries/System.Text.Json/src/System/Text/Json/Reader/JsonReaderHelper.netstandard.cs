@@ -15,6 +15,7 @@ namespace System.Text.Json
         public static unsafe int IndexOfQuoteOrAnyControlOrBackSlash(this ReadOnlySpan<byte> span)
         {
             // Borrowed and modified from SpanHelpers.Byte:
+            //
             // https://github.com/dotnet/corefx/blob/fc169cddedb6820aaabbdb8b7bece2a3df0fd1a5/src/Common/src/CoreLib/System/SpanHelpers.Byte.cs#L473-L604
 
             ref byte searchSpace = ref MemoryMarshal.GetReference(span);

@@ -353,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             var allClassifications = new List<ClassifiedSpan>(semanticClassifications);
             classificationsSpans.AddRange(allClassifications.Select(t => t.TextSpan));
 
-            // Add the syntactic classifications.  But only if they don't conflict with a semantic classification.
+            // Add the syntactic classifications.  But only if they don't conflict with a semantic
+            // classification.
             allClassifications.AddRange(
                 from t in syntacticClassifications
                 where !classificationsSpans.Contains(t.TextSpan)

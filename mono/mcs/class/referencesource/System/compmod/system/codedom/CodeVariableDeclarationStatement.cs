@@ -28,14 +28,16 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeVariableDeclarationStatement'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.CodeVariableDeclarationStatement'/>.
         ///    </para>
         /// </devdoc>
         public CodeVariableDeclarationStatement() { }
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeVariableDeclarationStatement'/> using the specified type and name.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.CodeVariableDeclarationStatement'/> using the specified type and name.
         ///    </para>
         /// </devdoc>
         public CodeVariableDeclarationStatement(CodeTypeReference type, string name)
@@ -64,7 +66,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeVariableDeclarationStatement'/> using the specified type, name and
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.CodeVariableDeclarationStatement'/> using the specified type, name and
         ///       initialization expression.
         ///    </para>
         /// </devdoc>

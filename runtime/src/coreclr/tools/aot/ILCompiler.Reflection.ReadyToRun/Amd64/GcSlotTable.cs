@@ -108,7 +108,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         public GcSlotTable() { }
 
         /// <summary>
-        /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/gcinfodecoder.cpp">GcSlotDecoder::DecodeSlotTable</a>
+        /// based on <a
+        // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/gcinfodecoder.cpp">GcSlotDecoder::DecodeSlotTable</a>
         /// </summary>
         public GcSlotTable(
             byte[] image,

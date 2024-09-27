@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.Remote.Host
     }
 
     /// <summary>
-    /// Hacky way to expose a <see cref="IServiceBroker"/> to workspace services that expect there to be a global
-    /// singleton (like in visual studio).  Effectively the first service that gets called into will record its
+    /// Hacky way to expose a <see cref="IServiceBroker"/> to workspace services that expect there to be
+    // a global
+    /// singleton (like in visual studio).  Effectively the first service that gets called into will
+    // record its
     /// broker here for these services to use.
     /// </summary>
     // Note: this Export is only so MEF picks up the exported member internally.

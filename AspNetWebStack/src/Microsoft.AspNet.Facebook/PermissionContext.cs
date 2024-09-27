@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -13,7 +14,8 @@ namespace Microsoft.AspNet.Facebook
     public class PermissionContext
     {
         /// <summary>
-        /// Permissions that were previously requested for but not granted for the lifetime of this application. This can happen
+        /// Permissions that were previously requested for but not granted for the lifetime of this
+        // application. This can happen
         /// by a user revoking, skipping or choosing not to allow permissions in the Facebook login dialog.
         /// </summary>
         /// <remarks>
@@ -38,7 +40,8 @@ namespace Microsoft.AspNet.Facebook
         public AuthorizationContext FilterContext { get; set; }
 
         /// <summary>
-        /// The entire list of missing permissions for the current page, including <see cref="DeclinedPermissions"/> and
+        /// The entire list of missing permissions for the current page, including <see
+        // cref="DeclinedPermissions"/> and
         /// <see cref="SkippedPermissions"/>.
         /// </summary>
         /// <remarks>
@@ -47,7 +50,8 @@ namespace Microsoft.AspNet.Facebook
         public IEnumerable<string> MissingPermissions { get; set; }
 
         /// <summary>
-        /// The entire list of requested permissions for the current page. Includes permissions that were already prompted for.
+        /// The entire list of requested permissions for the current page. Includes permissions that were
+        // already prompted for.
         /// </summary>
         /// <remarks>
         /// This should only ever be "set" or modified within tests.
@@ -60,16 +64,19 @@ namespace Microsoft.AspNet.Facebook
         public HashSet<string> RequiredPermissions { get; set; }
 
         /// <summary>
-        /// The <see cref="ActionResult" /> that should be used to control the login flow.  If value is null then we will continue
+        /// The <see cref="ActionResult" /> that should be used to control the login flow.  If value is null
+        // then we will continue
         /// onto the action that is intended to be invoked.  Non-null values short-circuit the action.
         /// </summary>
         public ActionResult Result { get; set; }
 
         /// <summary>
-        /// Permissions that were previously requested for but skipped for the current page. This can happen from a user hitting
+        /// Permissions that were previously requested for but skipped for the current page. This can happen
+        // from a user hitting
         /// the "skip" button when requesting permissions.
         /// </summary>
-        /// <remarks>Skips are tracked via cookies. If cookies are cleared skips will not be detected.</remarks>
+        /// <remarks>Skips are tracked via cookies. If cookies are cleared skips will not be
+        // detected.</remarks>
         /// <remarks>
         /// This should only ever be "set" or modified within tests.
         /// </remarks>

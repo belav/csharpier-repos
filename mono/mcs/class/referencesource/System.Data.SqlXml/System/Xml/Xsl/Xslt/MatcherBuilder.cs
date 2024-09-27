@@ -15,78 +15,78 @@ namespace System.Xml.Xsl.Xslt
     using T = XmlQueryTypeFactory;
 
     #region Comments
-    /*  The MatcherBuilder class implements xsl:apply-templates/imports logic, grouping patterns
-     *  first by node type, then by node name of their last StepPattern. For example, suppose that
-     *  we are given the following patterns, listed in order of decreasing generalized priority
-     *  (3-tuple (import precedence, priority, order number in the stylesheet)):
-     *
-     *                          Generalized
-     *      Pattern             Priority
-     *      -------------------------------
-     *      pattern7/foo        7
-     *      pattern6/bar        6
-     *      pattern5/*          5
-     *      pattern4/node()     4
-     *      pattern3/foo        3
-     *      pattern2/bar        2
-     *      pattern1/*          1
-     *      pattern0/node()     0
-     *      -------------------------------
-     *
-     *  The following code will be generated to find a first match amongst them ($it denotes a test
-     *  node, and =~ denotes the match operation):
-     *
-     *  (: First check patterns which match only one fixed node type. :)
-     *  (: Switch on the node type of the test node.                  :)
-     *  let $pt :=
-     *      typeswitch($it)
-     *      case element() return
-     *          (: First check patterns which match only one fixed node name. :)
-     *          (: Switch on the node name of the test node.                  :)
-     *          let $pe :=
-     *              typeswitch($it)
-     *              (: One case for every unique element name occurred in patterns :)
-     *              case element(foo) return
-     *                  if ($it =~ pattern7/foo) then 7 else
-     *                  if ($it =~ pattern3/foo) then 3 else
-     *                  -1                 (: -1 is used as "no match found" value :)
-     *              case element(bar) return
-     *                  if ($it =~ pattern6/bar) then 6 else
-     *                  if ($it =~ pattern2/bar) then 2 else
-     *                  -1
-     *              default return
-     *                  -1
-     *
-     *          (: Now check patterns which may match multiple node names, taking :)
-     *          (: into account the priority of the previously found match        :)
-     *          return
-     *              if ($pe > 5)           then $pe else
-     *              if ($it =~ pattern5/*) then   5 else
-     *              if ($pe > 1)           then $pe else
-     *              if ($it =~ pattern1/*) then   1 else
-     *              if ($pe > -1)          then $pe else
-     *              -1
-     *
-     *      (: In the general case check all other node types ocurred in patterns :)
-     *      (: case attribute()...              :)
-     *      (: case text()...                   :)
-     *      (: case document-node()...          :)
-     *      (: case comment()...                :)
-     *      (: case processing-instruction()... :)
-     *
-     *      default return
-     *          -1
-     *
-     *  (: Now check patterns which may match multiple node types, taking :)
-     *  (: into account the priority of the previously found match        :)
-     *  return
-     *      if ($pt > 4)         then $pt else
-     *      if (pattern4/node()) then   4 else
-     *      if ($pt > 0)         then $pt else
-     *      if (pattern0/node()) then   0 else
-     *      if ($pt > -1)        then $pt else
-     *      -1
-     */
+/*  The MatcherBuilder class implements xsl:apply-templates/imports logic, grouping patterns
+*  first by node type, then by node name of their last StepPattern. For example, suppose that
+*  we are given the following patterns, listed in order of decreasing generalized priority
+*  (3-tuple (import precedence, priority, order number in the stylesheet)):
+*
+*                          Generalized
+*      Pattern             Priority
+*      -------------------------------
+*      pattern7/foo        7
+*      pattern6/bar        6
+*      pattern5/*          5
+*      pattern4/node()     4
+*      pattern3/foo        3
+*      pattern2/bar        2
+*      pattern1/*          1
+*      pattern0/node()     0
+*      -------------------------------
+*
+*  The following code will be generated to find a first match amongst them ($it denotes a test
+*  node, and =~ denotes the match operation):
+*
+*  (: First check patterns which match only one fixed node type. :)
+*  (: Switch on the node type of the test node.                  :)
+*  let $pt :=
+*      typeswitch($it)
+*      case element() return
+*          (: First check patterns which match only one fixed node name. :)
+*          (: Switch on the node name of the test node.                  :)
+*          let $pe :=
+*              typeswitch($it)
+*              (: One case for every unique element name occurred in patterns :)
+*              case element(foo) return
+*                  if ($it =~ pattern7/foo) then 7 else
+*                  if ($it =~ pattern3/foo) then 3 else
+*                  -1                 (: -1 is used as "no match found" value :)
+*              case element(bar) return
+*                  if ($it =~ pattern6/bar) then 6 else
+*                  if ($it =~ pattern2/bar) then 2 else
+*                  -1
+*              default return
+*                  -1
+*
+*          (: Now check patterns which may match multiple node names, taking :)
+*          (: into account the priority of the previously found match        :)
+*          return
+*              if ($pe > 5)           then $pe else
+*              if ($it =~ pattern5/*) then   5 else
+*              if ($pe > 1)           then $pe else
+*              if ($it =~ pattern1/*) then   1 else
+*              if ($pe > -1)          then $pe else
+*              -1
+*
+*      (: In the general case check all other node types ocurred in patterns :)
+*      (: case attribute()...              :)
+*      (: case text()...                   :)
+*      (: case document-node()...          :)
+*      (: case comment()...                :)
+*      (: case processing-instruction()... :)
+*
+*      default return
+*          -1
+*
+*  (: Now check patterns which may match multiple node types, taking :)
+*  (: into account the priority of the previously found match        :)
+*  return
+*      if ($pt > 4)         then $pt else
+*      if (pattern4/node()) then   4 else
+*      if ($pt > 0)         then $pt else
+*      if (pattern0/node()) then   0 else
+*      if ($pt > -1)        then $pt else
+*      -1
+*/
     #endregion
 
     internal class TemplateMatch
@@ -146,20 +146,20 @@ namespace System.Xml.Xsl.Xslt
             );
         }
 
-        /*  NOTE: This code depends on the form of Qil expressions generated by XPathPatternBuilder.
-         *  More specifically, it recognizes the following two patterns:
-         *
-         *  A) /, *, @*, text(), comment(), processing-instruction():
-         *      (And* $x:(IsType RefTo LiteralType))
-         *
-         *  B) foo, @ns:foo, processing-instruction('foo'):
-         *      (And* $x:(And (IsType RefTo LiteralType) (Eq (NameOf RefTo) LiteralQName)))
-         *
-         *  where all RefTo refer to 'it', and LiteralType has exactly one NodeKind bit set.
-         *
-         *  If one of patterns recognized, we nip $x off of the nested And sequence:
-         *      (And* (And2 (And1 $x:* $y:*) $z:*))  =>  (And* (And2 $y:* $z:*))
-         */
+/*  NOTE: This code depends on the form of Qil expressions generated by XPathPatternBuilder.
+*  More specifically, it recognizes the following two patterns:
+*
+*  A) /, *, @*, text(), comment(), processing-instruction():
+*      (And* $x:(IsType RefTo LiteralType))
+*
+*  B) foo, @ns:foo, processing-instruction('foo'):
+*      (And* $x:(And (IsType RefTo LiteralType) (Eq (NameOf RefTo) LiteralQName)))
+*
+*  where all RefTo refer to 'it', and LiteralType has exactly one NodeKind bit set.
+*
+*  If one of patterns recognized, we nip $x off of the nested And sequence:
+*      (And* (And2 (And1 $x:* $y:*) $z:*))  =>  (And* (And2 $y:* $z:*))
+*/
         private void NipOffTypeNameCheck()
         {
             QilBinary[] leftPath = new QilBinary[4]; // Circular buffer for last 4 And nodes
@@ -384,7 +384,8 @@ namespace System.Xml.Xsl.Xslt
 
         private void CollectPatternsInternal(Stylesheet sheet, QilName mode)
         {
-            // Process imported stylesheets in the straight order, since their order will be reverted in the result tree
+            // Process imported stylesheets in the straight order, since their order will be reverted in the
+            // result tree
             foreach (Stylesheet import in sheet.Imports)
             {
                 CollectPatternsInternal(import, mode);

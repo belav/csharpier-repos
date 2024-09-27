@@ -26,7 +26,8 @@ namespace System.Reflection.Runtime.TypeInfos
     //     return the "common" error result for narrowly applicable properties (such as those
     //     that apply only to generic parameters.)
     //
-    //   - Inverts the DeclaredMembers/DeclaredX relationship (DeclaredMembers is auto-implemented, others
+    //   - Inverts the DeclaredMembers/DeclaredX relationship (DeclaredMembers is auto-implemented,
+    // others
     //     are overridden as abstract. This ordering makes more sense when reading from metadata.)
     //
     //   - Overrides many "NotImplemented" members in TypeInfo with abstracts so failure to implement
@@ -75,7 +76,8 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                // If this has a RuntimeTypeHandle, let the underlying runtime engine have the first crack. If it refuses, fall back to metadata.
+                // If this has a RuntimeTypeHandle, let the underlying runtime engine have the first crack. If it
+                // refuses, fall back to metadata.
                 RuntimeTypeHandle typeHandle = InternalTypeHandleIfAvailable;
                 if (!typeHandle.IsNull())
                 {
@@ -87,7 +89,8 @@ namespace System.Reflection.Runtime.TypeInfos
                 Type baseType = BaseTypeWithoutTheGenericParameterQuirk;
                 if (baseType != null && baseType.IsGenericParameter)
                 {
-                    // Desktop quirk: a generic parameter whose constraint is another generic parameter reports its BaseType as System.Object
+                    // Desktop quirk: a generic parameter whose constraint is another generic parameter reports its
+                    // BaseType as System.Object
                     // unless that other generic parameter has a "class" constraint.
                     GenericParameterAttributes genericParameterAttributes =
                         baseType.GenericParameterAttributes;
@@ -123,11 +126,14 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // Equals()/GetHashCode()
         //
-        // RuntimeTypeInfo objects are interned to preserve the app-compat rule that Type objects (which are the same as TypeInfo objects)
+        // RuntimeTypeInfo objects are interned to preserve the app-compat rule that Type objects (which are
+        // the same as TypeInfo objects)
         // can be compared using reference equality.
         //
-        // We use weak pointers to intern the objects. This means we can use instance equality to implement Equals() but we cannot use
-        // the instance hashcode to implement GetHashCode() (otherwise, the hash code will not be stable if the TypeInfo is released and recreated.)
+        // We use weak pointers to intern the objects. This means we can use instance equality to implement
+        // Equals() but we cannot use
+        // the instance hashcode to implement GetHashCode() (otherwise, the hash code will not be stable if
+        // the TypeInfo is released and recreated.)
         // Thus, we override and seal Equals() here but defer to a flavor-specific hash code implementation.
         //
         public override bool Equals(object obj)
@@ -196,7 +202,8 @@ namespace System.Reflection.Runtime.TypeInfos
             // - only interface.GetMethods() reflection visible interface methods are returned
             // - all visible members of the interface must be reflection invokeable
             // - this type and ifaceType must not be an open generic type
-            // - if this type and the method implementing the interface method are abstract, an exception is thrown
+            // - if this type and the method implementing the interface method are abstract, an exception is
+            // thrown
 
             if (IsGenericParameter)
                 throw new InvalidOperationException(SR.Arg_GenericParameter);
@@ -240,7 +247,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Implements the correct GUID behavior for all "constructed" types (i.e. returning an all-zero GUID.) Left unsealed
+        // Implements the correct GUID behavior for all "constructed" types (i.e. returning an all-zero
+        // GUID.) Left unsealed
         // so that RuntimeNamedTypeInfo can override.
         //
         public virtual Guid GUID
@@ -275,7 +283,8 @@ namespace System.Reflection.Runtime.TypeInfos
         )]
         public Type[] GetInterfaces()
         {
-            // If this has a RuntimeTypeHandle, let the underlying runtime engine have the first crack. If it refuses, fall back to metadata.
+            // If this has a RuntimeTypeHandle, let the underlying runtime engine have the first crack. If it
+            // refuses, fall back to metadata.
             RuntimeTypeHandle typeHandle = InternalTypeHandleIfAvailable;
             if (!typeHandle.IsNull() && !IsGenericTypeDefinition)
                 return ToType().GetInterfaces();
@@ -335,7 +344,8 @@ namespace System.Reflection.Runtime.TypeInfos
                 if (RuntimeAugments.IsAssignableFrom(toTypeHandle, fromTypeHandle))
                     return true;
 
-                // Runtime IsAssignableFrom does not handle casts from generic type definitions: always returns false. For those, we fall through to the
+                // Runtime IsAssignableFrom does not handle casts from generic type definitions: always returns
+                // false. For those, we fall through to the
                 // managed implementation. For everyone else, return "false".
                 //
                 // Runtime IsAssignableFrom does not handle pointer -> UIntPtr cast.
@@ -343,7 +353,8 @@ namespace System.Reflection.Runtime.TypeInfos
                     return false;
             }
 
-            // If we got here, the types are open, or reduced away, or otherwise lacking in type handles. Perform the IsAssignability check in managed code.
+            // If we got here, the types are open, or reduced away, or otherwise lacking in type handles.
+            // Perform the IsAssignability check in managed code.
             return Assignability.IsAssignableFrom(this.ToType(), typeInfo);
         }
 
@@ -365,7 +376,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Left unsealed as there are so many subclasses. Need to be overridden by EcmaFormatRuntimeNamedTypeInfo and RuntimeConstructedGenericTypeInfo
+        // Left unsealed as there are so many subclasses. Need to be overridden by
+        // EcmaFormatRuntimeNamedTypeInfo and RuntimeConstructedGenericTypeInfo
         //
         public abstract int MetadataToken { get; }
 
@@ -415,8 +427,10 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public Type MakeArrayType()
         {
-            // Do not implement this as a call to MakeArrayType(1) - they are not interchangeable. MakeArrayType() returns a
-            // vector type ("SZArray") while MakeArrayType(1) returns a multidim array of rank 1. These are distinct types
+            // Do not implement this as a call to MakeArrayType(1) - they are not interchangeable.
+            // MakeArrayType() returns a
+            // vector type ("SZArray") while MakeArrayType(1) returns a multidim array of rank 1. These are
+            // distinct types
             // in the ECMA model and in CLR Reflection.
             return this.GetArrayTypeWithTypeHandle().ToType();
         }
@@ -447,9 +461,12 @@ namespace System.Reflection.Runtime.TypeInfos
                     SR.Format(SR.Arg_NotGenericTypeDefinition, this)
                 );
 
-            // We intentionally don't validate the number of arguments or their suitability to the generic type's constraints.
-            // In a pay-for-play world, this can cause needless missing metadata exceptions. There is no harm in creating
-            // the Type object for an inconsistent generic type - no MethodTable will ever match it so any attempt to "invoke" it
+            // We intentionally don't validate the number of arguments or their suitability to the generic
+            // type's constraints.
+            // In a pay-for-play world, this can cause needless missing metadata exceptions. There is no harm in
+            // creating
+            // the Type object for an inconsistent generic type - no MethodTable will ever match it so any
+            // attempt to "invoke" it
             // will throw an exception.
             bool foundSignatureType = false;
             RuntimeTypeInfo?[] runtimeTypeArguments = new RuntimeTypeInfo[typeArguments.Length];
@@ -488,7 +505,8 @@ namespace System.Reflection.Runtime.TypeInfos
             {
                 RuntimeTypeInfo runtimeTypeArgument = runtimeTypeArguments[i]!;
 
-                // Desktop compatibility: Treat generic type definitions as a constructed generic type using the generic parameters as type arguments.
+                // Desktop compatibility: Treat generic type definitions as a constructed generic type using the
+                // generic parameters as type arguments.
                 if (runtimeTypeArgument.IsGenericTypeDefinition)
                     runtimeTypeArgument = runtimeTypeArguments[i] =
                         runtimeTypeArgument.GetConstructedGenericTypeNoConstraintCheck(
@@ -529,9 +547,12 @@ namespace System.Reflection.Runtime.TypeInfos
                         SR.PlatformNotSupported_NoTypeHandleForOpenTypes
                     );
 
-                // If got here, this is a "plain old type" that has metadata but no type handle. We can get here if the only
-                // representation of the type is in the native metadata and there's no MethodTable at the runtime side.
-                // If you squint hard, this is a missing metadata situation - the metadata is missing on the runtime side - and
+                // If got here, this is a "plain old type" that has metadata but no type handle. We can get here if
+                // the only
+                // representation of the type is in the native metadata and there's no MethodTable at the runtime
+                // side.
+                // If you squint hard, this is a missing metadata situation - the metadata is missing on the runtime
+                // side - and
                 // the action for the user to take is the same: go mess with RD.XML.
                 throw ReflectionCoreExecution.ExecutionEnvironment.CreateMissingMetadataException(
                     this.ToType()
@@ -556,17 +577,23 @@ namespace System.Reflection.Runtime.TypeInfos
         public bool IsActualEnum => IsEnum && !IsGenericParameter;
 
         //
-        // Returns the anchoring typedef that declares the members that this type wants returned by the Declared*** properties.
-        // The Declared*** properties will project the anchoring typedef's members by overriding their DeclaringType property with "this"
+        // Returns the anchoring typedef that declares the members that this type wants returned by the
+        // Declared*** properties.
+        // The Declared*** properties will project the anchoring typedef's members by overriding their
+        // DeclaringType property with "this"
         // and substituting the value of this.TypeContext into any generic parameters.
         //
         // Default implementation returns null which causes the Declared*** properties to return no members.
         //
-        // Note that this does not apply to DeclaredNestedTypes. Nested types and their containers have completely separate generic instantiation environments
-        // (despite what C# might lead you to think.) Constructed generic types return the exact same same nested types that its generic type definition does
-        // - i.e. their DeclaringTypes refer back to the generic type definition, not the constructed generic type.)
+        // Note that this does not apply to DeclaredNestedTypes. Nested types and their containers have
+        // completely separate generic instantiation environments
+        // (despite what C# might lead you to think.) Constructed generic types return the exact same same
+        // nested types that its generic type definition does
+        // - i.e. their DeclaringTypes refer back to the generic type definition, not the constructed
+        // generic type.)
         //
-        // Note also that we cannot use this anchoring concept for base types because of generic parameters. Generic parameters return
+        // Note also that we cannot use this anchoring concept for base types because of generic parameters.
+        // Generic parameters return
         // a base class and interface list based on its constraints.
         //
         internal virtual RuntimeNamedTypeInfo AnchoringTypeDefinitionForDeclaredMembers
@@ -577,7 +604,8 @@ namespace System.Reflection.Runtime.TypeInfos
         internal abstract RuntimeTypeInfo InternalDeclaringType { get; }
 
         //
-        // Return the full name of the "defining assembly" for the purpose of computing TypeInfo.AssemblyQualifiedName;
+        // Return the full name of the "defining assembly" for the purpose of computing
+        // TypeInfo.AssemblyQualifiedName;
         //
         internal abstract string InternalFullNameOfAssembly { get; }
 
@@ -662,9 +690,11 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null, which causes BaseType to return null.
+        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null,
+        // which causes BaseType to return null.
         //
-        // If you override this method, there is no need to override BaseTypeWithoutTheGenericParameterQuirk.
+        // If you override this method, there is no need to override
+        // BaseTypeWithoutTheGenericParameterQuirk.
         //
         internal virtual QTypeDefRefOrSpec TypeRefDefOrSpecForBaseType
         {
@@ -672,7 +702,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces will take care of the transitive closure and
+        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces
+        // will take care of the transitive closure and
         // insertion of the TypeContext.
         //
         internal virtual QTypeDefRefOrSpec[] TypeRefDefOrSpecsForDirectlyImplementedInterfaces
@@ -681,7 +712,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the generic parameter substitutions to use when enumerating declared members, base class and implemented interfaces.
+        // Returns the generic parameter substitutions to use when enumerating declared members, base class
+        // and implemented interfaces.
         //
         internal virtual TypeContext TypeContext
         {
@@ -689,7 +721,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Note: This can be (and is) called multiple times. We do not do this work in the constructor as calling ToString()
+        // Note: This can be (and is) called multiple times. We do not do this work in the constructor as
+        // calling ToString()
         // in the constructor causes some serious recursion issues.
         //
         internal RuntimeTypeInfo EstablishDebugName()
@@ -714,11 +747,14 @@ namespace System.Reflection.Runtime.TypeInfos
         // The desktop reports "X"'s base type as "System.Object" rather than "Y", even though it does
         // report any interfaces that are in MyReferenceClass's interface list.
         //
-        // This seriously messes up the implementation of RuntimeTypeInfo.ImplementedInterfaces which assumes
-        // that it can recover the transitive interface closure by combining the directly mentioned interfaces and
+        // This seriously messes up the implementation of RuntimeTypeInfo.ImplementedInterfaces which
+        // assumes
+        // that it can recover the transitive interface closure by combining the directly mentioned
+        // interfaces and
         // the BaseType's own interface closure.
         //
-        // To implement this with the least amount of code smell, we'll implement the idealized version of BaseType here
+        // To implement this with the least amount of code smell, we'll implement the idealized version of
+        // BaseType here
         // and make the special-case adjustment in the public version of BaseType.
         //
         internal Type BaseTypeWithoutTheGenericParameterQuirk

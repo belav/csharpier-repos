@@ -5,15 +5,15 @@
 //------------------------------------------------------------------------------
 
 /*
- * Support for ASP compatible execution mode of ASP.NET pages
- *
- *  ASP compatible executions involves:
- *      1) Running on COM+1.0 STA thread pool
- *      2) Attachment of unmanaged intrinsics to unmanaged COM+1.0 context
- *      3) Support for OnStartPage/OnEndPage
- *
- * Copyright (c) 2000, Microsoft Corporation
- */
+* Support for ASP compatible execution mode of ASP.NET pages
+*
+*  ASP compatible executions involves:
+*      1) Running on COM+1.0 STA thread pool
+*      2) Attachment of unmanaged intrinsics to unmanaged COM+1.0 context
+*      3) Support for OnStartPage/OnEndPage
+*
+* Copyright (c) 2000, Microsoft Corporation
+*/
 namespace System.Web.Util
 {
     using System.Collections;

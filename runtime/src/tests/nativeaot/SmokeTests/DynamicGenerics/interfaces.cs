@@ -106,11 +106,15 @@ public class InterfacesTests
     public static void TestGenericCollapsingInInterfaceMap()
     {
 #if !USC
-        // BUG 634667: Replace <CommonType3,object> instantiation with <object,object> to repro the issue on PN.
-        // In PureNative compilations, the template is canonical and we already get the generic collapsing. The bug is fixed for PureNative only,
-        // but PN is still broken because the interface map of the <object,object> instantiation will NOT work for a dynamically created type with
+        // BUG 634667: Replace <CommonType3,object> instantiation with <object,object> to repro the issue on
+        // PN.
+        // In PureNative compilations, the template is canonical and we already get the generic collapsing.
+        // The bug is fixed for PureNative only,
+        // but PN is still broken because the interface map of the <object,object> instantiation will NOT
+        // work for a dynamically created type with
         // different type args in its instantiation.
-        // The DynamicGenerics_USC test is also impacted by this bug, since it uses the <UniversalCanon,UniversalCanon> template, which has the same
+        // The DynamicGenerics_USC test is also impacted by this bug, since it uses the
+        // <UniversalCanon,UniversalCanon> template, which has the same
         // behavior like the <object, object> template
         TestGenericCollapsingInInterfaceMapHelper<CommonType3, object>();
 

@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
-///     <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more
+// information and examples.
 /// </remarks>
 public class TableValuedDbFunctionConvention : IModelFinalizingConvention
 {
@@ -16,7 +17,8 @@ public class TableValuedDbFunctionConvention : IModelFinalizingConvention
     ///     Creates a new instance of <see cref="TableValuedDbFunctionConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public TableValuedDbFunctionConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
@@ -51,7 +53,8 @@ public class TableValuedDbFunctionConvention : IModelFinalizingConvention
     /// <summary>
     ///     Called when an <see cref="IConventionDbFunction" /> is added to the model.
     /// </summary>
-    /// <param name="dbFunctionBuilder">The builder for the <see cref="IConventionDbFunction" />.</param>
+    /// <param name="dbFunctionBuilder">The builder for the <see cref="IConventionDbFunction"
+    // />.</param>
     private static void ProcessDbFunctionAdded(IConventionDbFunctionBuilder dbFunctionBuilder)
     {
         var function = dbFunctionBuilder.Metadata;

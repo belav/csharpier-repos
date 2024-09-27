@@ -15,7 +15,8 @@ namespace System.ComponentModel
         Unknown = 0,
 
         ////////// Success (positive values, excluded).  /////////
-        /// WARNING: Do NOT modify the order of the success enum values, they are ordered the way TestString give precedence
+        /// WARNING: Do NOT modify the order of the success enum values, they are ordered the way TestString
+        // give precedence
         /// to the result hint when multiple chars tested giving different success hints.
 
         // The operation Succeeded because a literal, prompt or space char was escaped.
@@ -24,7 +25,8 @@ namespace System.ComponentModel
         // The primary operation was not performed because it was not needed and no side effect generated.
         NoEffect = 2,
 
-        // The primary operation was not performed but had a side effect (e.g. Delete at an unassigned edit pos produces left-shifting of chars).
+        // The primary operation was not performed but had a side effect (e.g. Delete at an unassigned edit
+        // pos produces left-shifting of chars).
         SideEffect = 3,
 
         // The primary operation succeeded.

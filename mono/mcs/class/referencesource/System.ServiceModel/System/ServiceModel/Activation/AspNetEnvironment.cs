@@ -43,7 +43,8 @@ namespace System.ServiceModel.Activation
                 }
                 return current;
             }
-            // AspNetEnvironment.Current is set by System.ServiceModel.Activation when it is brought into memory through
+            // AspNetEnvironment.Current is set by System.ServiceModel.Activation when it is brought into memory
+            // through
             // the ASP.Net hosting environment. It is the only "real" implementer of this class.
             protected set
             {
@@ -116,7 +117,8 @@ namespace System.ServiceModel.Activation
             get { return null; }
         }
 
-        // Indicates if the WebSocket module is loaded. When IIS hosted, it throws an exception when called before we determined if the module is loaded or not.
+        // Indicates if the WebSocket module is loaded. When IIS hosted, it throws an exception when called
+        // before we determined if the module is loaded or not.
         public bool IsWebSocketModuleLoaded
         {
             get { return this.WebSocketVersion != null; }
@@ -142,7 +144,8 @@ namespace System.ServiceModel.Activation
             return null;
         }
 
-        // check if ((System.Web.Configuration.WebContext)configHostingContext).ApplicationLevel == WebApplicationLevel.AboveApplication
+        // check if ((System.Web.Configuration.WebContext)configHostingContext).ApplicationLevel ==
+        // WebApplicationLevel.AboveApplication
         public virtual bool IsWebConfigAboveApplication(object configHostingContext)
         {
             // there are currently only two known implementations of HostingContext, so we are
@@ -166,7 +169,8 @@ namespace System.ServiceModel.Activation
 
         public virtual string GetAnnotationFromHost(ServiceHostBase host)
         {
-            // subclass will return "Website name\Application Virtual Path|\relative service virtual path|serviceName"
+            // subclass will return "Website name\Application Virtual Path|\relative service virtual
+            // path|serviceName"
             return string.Empty;
         }
 
@@ -272,14 +276,16 @@ namespace System.ServiceModel.Activation
         public virtual bool TraceIncrementBusyCountIsEnabled()
         {
             // subclass will return true if tracing for IncrementBusyCount is enabled.
-            //kept as a separate check from TraceIncrementBusyCount to avoid creating source string if Tracing is not enabled.
+            //kept as a separate check from TraceIncrementBusyCount to avoid creating source string if Tracing
+            // is not enabled.
             return false;
         }
 
         public virtual bool TraceDecrementBusyCountIsEnabled()
         {
             // subclass will return true if tracing for DecrementBusyCount is enabled.
-            //kept as a separate check from TraceDecrementBusyCount to avoid creating source string if Tracing is not enabled.
+            //kept as a separate check from TraceDecrementBusyCount to avoid creating source string if Tracing
+            // is not enabled.
             return false;
         }
 

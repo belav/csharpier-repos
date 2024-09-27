@@ -41,12 +41,17 @@ namespace System.IO.MemoryMappedFiles
             _leaveOpen = leaveOpen;
         }
 
-        // Factory Method Group #1: Opens an existing named memory mapped file. The native OpenFileMapping call
+        // Factory Method Group #1: Opens an existing named memory mapped file. The native OpenFileMapping
+        // call
         // will check the desiredAccessRights against the ACL on the memory mapped file.  Note that a memory
-        // mapped file created without an ACL will use a default ACL taken from the primary or impersonation token
-        // of the creator.  On my machine, I always get ReadWrite access to it so I never have to use anything but
-        // the first override of this method.  Note: having ReadWrite access to the object does not mean that we
-        // have ReadWrite access to the pages mapping the file.  The OS will check against the access on the pages
+        // mapped file created without an ACL will use a default ACL taken from the primary or impersonation
+        // token
+        // of the creator.  On my machine, I always get ReadWrite access to it so I never have to use
+        // anything but
+        // the first override of this method.  Note: having ReadWrite access to the object does not mean
+        // that we
+        // have ReadWrite access to the pages mapping the file.  The OS will check against the access on the
+        // pages
         // when a view is created.
         [SupportedOSPlatform("windows")]
         public static MemoryMappedFile OpenExisting(string mapName)
@@ -108,12 +113,18 @@ namespace System.IO.MemoryMappedFiles
             return new MemoryMappedFile(handle);
         }
 
-        // Factory Method Group #2: Creates a new memory mapped file where the content is taken from an existing
-        // file on disk.  This file must be opened by a FileStream before given to us.  Specifying DefaultSize to
-        // the capacity will make the capacity of the memory mapped file match the size of the file.  Specifying
-        // a value larger than the size of the file will enlarge the new file to this size.  Note that in such a
-        // case, the capacity (and there for the size of the file) will be rounded up to a multiple of the system
-        // page size.  One can use FileStream.SetLength to bring the length back to a desirable size. By default,
+        // Factory Method Group #2: Creates a new memory mapped file where the content is taken from an
+        // existing
+        // file on disk.  This file must be opened by a FileStream before given to us.  Specifying
+        // DefaultSize to
+        // the capacity will make the capacity of the memory mapped file match the size of the file.
+        // Specifying
+        // a value larger than the size of the file will enlarge the new file to this size.  Note that in
+        // such a
+        // case, the capacity (and there for the size of the file) will be rounded up to a multiple of the
+        // system
+        // page size.  One can use FileStream.SetLength to bring the length back to a desirable size. By
+        // default,
         // the MemoryMappedFile will close the FileStream object when it is disposed.  This behavior can be
         // changed by the leaveOpen boolean argument.
         public static MemoryMappedFile CreateFromFile(string path)
@@ -240,9 +251,11 @@ namespace System.IO.MemoryMappedFiles
         /// and the specified access mode, name, inheritability, and capacity.
         /// </summary>
         /// <param name="fileHandle">The <see cref="SafeFileHandle"/> to the existing file. Caller is
-        /// responsible for disposing <paramref name="fileHandle"/> when <paramref name="leaveOpen"/> is <see langword="true" /> (otherwise,
+        /// responsible for disposing <paramref name="fileHandle"/> when <paramref name="leaveOpen"/> is
+        // <see langword="true" /> (otherwise,
         /// automatically disposed by the <see cref="MemoryMappedFile"/>). </param>
-        /// <param name="mapName">A name to assign to the memory-mapped file, or <see langword="null" /> for a
+        /// <param name="mapName">A name to assign to the memory-mapped file, or <see langword="null" /> for
+        // a
         /// <see cref="MemoryMappedFile"/> that you do not intend to share across processes.</param>
         /// <param name="capacity">The maximum size, in bytes, to allocate to the memory-mapped file.
         /// Specify 0 to set the capacity to the size of the file.</param>
@@ -250,7 +263,8 @@ namespace System.IO.MemoryMappedFiles
         /// to the memory-mapped file.
         /// <para>This parameter can't be set to <see cref="MemoryMappedFileAccess.Write"/></para></param>
         /// <param name="inheritability">One of the enumeration values that specifies whether a handle
-        /// to the memory-mapped file can be inherited by a child process. The default is <see cref="HandleInheritability.None"/>.</param>
+        /// to the memory-mapped file can be inherited by a child process. The default is <see
+        // cref="HandleInheritability.None"/>.</param>
         /// <param name="leaveOpen">A value that indicates whether to close the source file handle when
         /// the <see cref="MemoryMappedFile"/> is disposed.</param>
         /// <returns>A memory-mapped file that has the specified characteristics.</returns>
@@ -259,19 +273,24 @@ namespace System.IO.MemoryMappedFiles
         /// <para>-or-</para>
         /// <para><paramref name="capacity"/> and the length of the file are zero.</para>
         /// <para>-or-</para>
-        /// <para><paramref name="access"/> is set to <see cref="MemoryMappedFileAccess.Write"/>, which is not allowed.</para>
+        /// <para><paramref name="access"/> is set to <see cref="MemoryMappedFileAccess.Write"/>, which is
+        // not allowed.</para>
         /// <para>-or-</para>
-        /// <para><paramref name="access"/> is set to <see cref="MemoryMappedFileAccess.Read"/> and <paramref name="capacity"/> is larger than the length of the file.</para>
+        /// <para><paramref name="access"/> is set to <see cref="MemoryMappedFileAccess.Read"/> and
+        // <paramref name="capacity"/> is larger than the length of the file.</para>
         /// </exception>
-        /// <exception cref="ArgumentNullException"><paramref name="fileHandle"/> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fileHandle"/> is <see langword="null"
+        // />.</exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <para><paramref name="capacity"/> is less than zero.</para>
         /// <para>-or-</para>
         /// <para><paramref name="capacity"/> is less than the file size.</para>
         /// <para>-or-</para>
-        /// <para><paramref name="access"/> is not a valid <see cref="MemoryMappedFileAccess"/> enumeration value.</para>
+        /// <para><paramref name="access"/> is not a valid <see cref="MemoryMappedFileAccess"/> enumeration
+        // value.</para>
         /// <para>-or-</para>
-        /// <para><paramref name="inheritability"/> is not a valid <see cref="HandleInheritability"/> enumeration value.</para>
+        /// <para><paramref name="inheritability"/> is not a valid <see cref="HandleInheritability"/>
+        // enumeration value.</para>
         /// </exception>
         public static MemoryMappedFile CreateFromFile(
             SafeFileHandle fileHandle,
@@ -365,7 +384,8 @@ namespace System.IO.MemoryMappedFiles
             return new MemoryMappedFile(handle, fileHandle, leaveOpen);
         }
 
-        // Factory Method Group #3: Creates a new empty memory mapped file.  Such memory mapped files are ideal
+        // Factory Method Group #3: Creates a new empty memory mapped file.  Such memory mapped files are
+        // ideal
         // for IPC, when mapName != null.
         public static MemoryMappedFile CreateNew(string? mapName, long capacity)
         {
@@ -668,7 +688,8 @@ namespace System.IO.MemoryMappedFiles
         }
 
         // This converts a MemoryMappedFileAccess to a FileAccess. MemoryMappedViewStream and
-        // MemoryMappedViewAccessor subclass UnmanagedMemoryStream and UnmanagedMemoryAccessor, which both use
+        // MemoryMappedViewAccessor subclass UnmanagedMemoryStream and UnmanagedMemoryAccessor, which both
+        // use
         // FileAccess to determine whether they are writable and/or readable.
         internal static FileAccess GetFileAccess(MemoryMappedFileAccess access)
         {

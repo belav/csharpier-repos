@@ -113,7 +113,8 @@ namespace System.Security.Cryptography
             }
         }
 
-        // ported from https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/sha256managed.cs
+        // ported from
+        // https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/sha256managed.cs
         private sealed class SHA256ManagedImplementation : SHAManagedImplementationBase
         {
             private byte[] _buffer;
@@ -153,20 +154,20 @@ namespace System.Security.Cryptography
                 _stateSHA256[7] = 0x5be0cd19;
             }
 
-            /* SHA256 block update operation. Continues an SHA message-digest
-            operation, processing another message block, and updating the
-            context.
-            */
+/* SHA256 block update operation. Continues an SHA message-digest
+operation, processing another message block, and updating the
+context.
+*/
             public override unsafe void HashCore(byte[] partIn, int ibStart, int cbSize)
             {
                 int bufferLen;
                 int partInLen = cbSize;
                 int partInBase = ibStart;
 
-                /* Compute length of buffer */
+/* Compute length of buffer */
                 bufferLen = (int)(_count & 0x3f);
 
-                /* Update number of bytes */
+/* Update number of bytes */
                 _count += partInLen;
 
                 fixed (uint* stateSHA256 = _stateSHA256)
@@ -190,7 +191,7 @@ namespace System.Security.Cryptography
                                 bufferLen = 0;
                             }
 
-                            /* Copy input to temporary buffer and hash */
+/* Copy input to temporary buffer and hash */
                             while (partInLen >= 64)
                             {
                                 Buffer.BlockCopy(partIn, partInBase, _buffer, 0, 64);
@@ -208,9 +209,9 @@ namespace System.Security.Cryptography
                 }
             }
 
-            /* SHA256 finalization. Ends an SHA256 message-digest operation, writing
-            the message digest.
-            */
+/* SHA256 finalization. Ends an SHA256 message-digest operation, writing
+the message digest.
+*/
             public override byte[] HashFinal()
             {
                 byte[] pad;
@@ -218,8 +219,8 @@ namespace System.Security.Cryptography
                 long bitCount;
                 byte[] hash = new byte[32]; // HashSizeValue = 256
 
-                /* Compute padding: 80 00 00 ... 00 00 <bit count>
-                */
+/* Compute padding: 80 00 00 ... 00 00 <bit count>
+*/
 
                 padLen = 64 - (int)(_count & 0x3f);
                 if (padLen <= 8)
@@ -240,10 +241,10 @@ namespace System.Security.Cryptography
                 pad[padLen - 2] = (byte)((bitCount >> 8) & 0xff);
                 pad[padLen - 1] = (byte)((bitCount >> 0) & 0xff);
 
-                /* Digest padding */
+/* Digest padding */
                 HashCore(pad, 0, pad.Length);
 
-                /* Store digest */
+/* Store digest */
                 SHAUtils.DWORDToBigEndian(hash, _stateSHA256, 8);
 
                 return hash;
@@ -350,7 +351,7 @@ namespace System.Security.Cryptography
                 SHAUtils.DWORDFromBigEndian(expandedBuffer, 16, block);
                 SHA256Expand(expandedBuffer);
 
-                /* Apply the SHA256 compression function */
+/* Apply the SHA256 compression function */
                 // We are trying to be smart here and avoid as many copies as we can
                 // The perf gain with this method over the straightforward modify and shift
                 // forward is >= 20%, so it's worth the pain
@@ -437,9 +438,9 @@ namespace System.Security.Cryptography
                 return (RotateRight(x, 6) ^ RotateRight(x, 11) ^ RotateRight(x, 25));
             }
 
-            /* This function creates W_16,...,W_63 according to the formula
-            W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
-            */
+/* This function creates W_16,...,W_63 according to the formula
+W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
+*/
             private static unsafe void SHA256Expand(uint* x)
             {
                 for (int i = 16; i < 64; i++)
@@ -449,7 +450,8 @@ namespace System.Security.Cryptography
             }
         }
 
-        // ported from https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/sha384managed.cs
+        // ported from
+        // https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/sha384managed.cs
         private sealed class SHA384ManagedImplementation : SHAManagedImplementationBase
         {
             private byte[] _buffer;
@@ -489,20 +491,20 @@ namespace System.Security.Cryptography
                 _stateSHA384[7] = 0x47b5481dbefa4fa4;
             }
 
-            /* SHA384 block update operation. Continues an SHA message-digest
-            operation, processing another message block, and updating the
-            context.
-            */
+/* SHA384 block update operation. Continues an SHA message-digest
+operation, processing another message block, and updating the
+context.
+*/
             public override unsafe void HashCore(byte[] partIn, int ibStart, int cbSize)
             {
                 int bufferLen;
                 int partInLen = cbSize;
                 int partInBase = ibStart;
 
-                /* Compute length of buffer */
+/* Compute length of buffer */
                 bufferLen = (int)(_count & 0x7f);
 
-                /* Update number of bytes */
+/* Update number of bytes */
                 _count += (ulong)partInLen;
 
                 fixed (ulong* stateSHA384 = _stateSHA384)
@@ -526,7 +528,7 @@ namespace System.Security.Cryptography
                                 bufferLen = 0;
                             }
 
-                            /* Copy input to temporary buffer and hash */
+/* Copy input to temporary buffer and hash */
                             while (partInLen >= 128)
                             {
                                 Buffer.BlockCopy(partIn, partInBase, _buffer, 0, 128);
@@ -544,9 +546,9 @@ namespace System.Security.Cryptography
                 }
             }
 
-            /* SHA384 finalization. Ends an SHA384 message-digest operation, writing
-            the message digest.
-            */
+/* SHA384 finalization. Ends an SHA384 message-digest operation, writing
+the message digest.
+*/
             public override byte[] HashFinal()
             {
                 byte[] pad;
@@ -554,8 +556,8 @@ namespace System.Security.Cryptography
                 ulong bitCount;
                 byte[] hash = new byte[48]; // HashSizeValue = 384
 
-                /* Compute padding: 80 00 00 ... 00 00 <bit count>
-                */
+/* Compute padding: 80 00 00 ... 00 00 <bit count>
+*/
 
                 padLen = 128 - (int)(_count & 0x7f);
                 if (padLen <= 16)
@@ -567,7 +569,8 @@ namespace System.Security.Cryptography
                 //  Convert count to bit count
                 bitCount = _count * 8;
 
-                // bitCount is at most 8 * 128 = 1024. Its representation as a 128-bit number has all bits set to zero
+                // bitCount is at most 8 * 128 = 1024. Its representation as a 128-bit number has all bits set to
+                // zero
                 // except eventually the 11 lower bits
 
                 //pad[padLen-16] = (byte) ((bitCount >> 120) & 0xff);
@@ -587,10 +590,10 @@ namespace System.Security.Cryptography
                 pad[padLen - 2] = (byte)((bitCount >> 8) & 0xff);
                 pad[padLen - 1] = (byte)((bitCount >> 0) & 0xff);
 
-                /* Digest padding */
+/* Digest padding */
                 HashCore(pad, 0, pad.Length);
 
-                /* Store digest */
+/* Store digest */
                 SHAUtils.QuadWordToBigEndian(hash, _stateSHA384, 6);
 
                 return hash;
@@ -717,7 +720,7 @@ namespace System.Security.Cryptography
                 SHAUtils.QuadWordFromBigEndian(expandedBuffer, 16, block);
                 SHA384Expand(expandedBuffer);
 
-                /* Apply the SHA384 compression function */
+/* Apply the SHA384 compression function */
                 // We are trying to be smart here and avoid as many copies as we can
                 // The perf gain with this method over the straightforward modify and shift
                 // forward is >= 20%, so it's worth the pain
@@ -809,9 +812,9 @@ namespace System.Security.Cryptography
                 return (RotateRight(x, 19) ^ RotateRight(x, 61) ^ (x >> 6));
             }
 
-            /* This function creates W_16,...,W_79 according to the formula
-            W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
-            */
+/* This function creates W_16,...,W_79 according to the formula
+W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
+*/
             private static unsafe void SHA384Expand(ulong* x)
             {
                 for (int i = 16; i < 80; i++)
@@ -821,7 +824,8 @@ namespace System.Security.Cryptography
             }
         }
 
-        // ported from https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/sha512managed.cs
+        // ported from
+        // https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/sha512managed.cs
         private sealed class SHA512ManagedImplementation : SHAManagedImplementationBase
         {
             private byte[] _buffer;
@@ -861,20 +865,20 @@ namespace System.Security.Cryptography
                 _stateSHA512[7] = 0x5be0cd19137e2179;
             }
 
-            /* SHA512 block update operation. Continues an SHA message-digest
-            operation, processing another message block, and updating the
-            context.
-            */
+/* SHA512 block update operation. Continues an SHA message-digest
+operation, processing another message block, and updating the
+context.
+*/
             public override unsafe void HashCore(byte[] partIn, int ibStart, int cbSize)
             {
                 int bufferLen;
                 int partInLen = cbSize;
                 int partInBase = ibStart;
 
-                /* Compute length of buffer */
+/* Compute length of buffer */
                 bufferLen = (int)(_count & 0x7f);
 
-                /* Update number of bytes */
+/* Update number of bytes */
                 _count += (ulong)partInLen;
 
                 fixed (ulong* stateSHA512 = _stateSHA512)
@@ -898,7 +902,7 @@ namespace System.Security.Cryptography
                                 bufferLen = 0;
                             }
 
-                            /* Copy input to temporary buffer and hash */
+/* Copy input to temporary buffer and hash */
                             while (partInLen >= 128)
                             {
                                 Buffer.BlockCopy(partIn, partInBase, _buffer, 0, 128);
@@ -916,9 +920,9 @@ namespace System.Security.Cryptography
                 }
             }
 
-            /* SHA512 finalization. Ends an SHA512 message-digest operation, writing
-            the message digest.
-            */
+/* SHA512 finalization. Ends an SHA512 message-digest operation, writing
+the message digest.
+*/
             public override byte[] HashFinal()
             {
                 byte[] pad;
@@ -926,8 +930,8 @@ namespace System.Security.Cryptography
                 ulong bitCount;
                 byte[] hash = new byte[64]; // HashSizeValue = 512
 
-                /* Compute padding: 80 00 00 ... 00 00 <bit count>
-                */
+/* Compute padding: 80 00 00 ... 00 00 <bit count>
+*/
 
                 padLen = 128 - (int)(_count & 0x7f);
                 if (padLen <= 16)
@@ -960,10 +964,10 @@ namespace System.Security.Cryptography
                 pad[padLen - 2] = (byte)((bitCount >> 8) & 0xff);
                 pad[padLen - 1] = (byte)((bitCount >> 0) & 0xff);
 
-                /* Digest padding */
+/* Digest padding */
                 HashCore(pad, 0, pad.Length);
 
-                /* Store digest */
+/* Store digest */
                 SHAUtils.QuadWordToBigEndian(hash, _stateSHA512, 8);
 
                 return hash;
@@ -1090,7 +1094,7 @@ namespace System.Security.Cryptography
                 SHAUtils.QuadWordFromBigEndian(expandedBuffer, 16, block);
                 SHA512Expand(expandedBuffer);
 
-                /* Apply the SHA512 compression function */
+/* Apply the SHA512 compression function */
                 // We are trying to be smart here and avoid as many copies as we can
                 // The perf gain with this method over the straightforward modify and shift
                 // forward is >= 20%, so it's worth the pain
@@ -1177,9 +1181,9 @@ namespace System.Security.Cryptography
                 return (RotateRight(x, 19) ^ RotateRight(x, 61) ^ (x >> 6));
             }
 
-            /* This function creates W_16,...,W_79 according to the formula
-            W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
-            */
+/* This function creates W_16,...,W_79 according to the formula
+W_j <- sigma_1(W_{j-2}) + W_{j-7} + sigma_0(W_{j-15}) + W_{j-16};
+*/
             private static unsafe void SHA512Expand(ulong* x)
             {
                 for (int i = 16; i < 80; i++)
@@ -1189,7 +1193,8 @@ namespace System.Security.Cryptography
             }
         }
 
-        // ported from https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/utils.cs
+        // ported from
+        // https://github.com/microsoft/referencesource/blob/a48449cb48a9a693903668a71449ac719b76867c/mscorlib/system/security/cryptography/utils.cs
         private static class SHAUtils
         {
             // digits == number of DWORDs

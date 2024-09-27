@@ -24,7 +24,8 @@ namespace Microsoft.Cci
     internal enum CallingConvention
     {
         /// <summary>
-        /// C/C++ style calling convention for unmanaged methods. The call stack is cleaned up by the caller,
+        /// C/C++ style calling convention for unmanaged methods. The call stack is cleaned up by the
+        // caller,
         /// which makes this convention suitable for calling methods that accept extra arguments.
         /// </summary>
         CDecl = SignatureCallingConvention.CDecl,
@@ -45,17 +46,20 @@ namespace Microsoft.Cci
         FastCall = SignatureCallingConvention.FastCall,
 
         /// <summary>
-        /// Win32 API calling convention for calling unmanaged methods via PlatformInvoke. The call stack is cleaned up by the callee.
+        /// Win32 API calling convention for calling unmanaged methods via PlatformInvoke. The call stack is
+        // cleaned up by the callee.
         /// </summary>
         Standard = SignatureCallingConvention.StdCall,
 
         /// <summary>
-        /// C++ member unmanaged method (non-vararg) calling convention. The callee cleans the stack and the this pointer is pushed on the stack last.
+        /// C++ member unmanaged method (non-vararg) calling convention. The callee cleans the stack and the
+        // this pointer is pushed on the stack last.
         /// </summary>
         ThisCall = SignatureCallingConvention.ThisCall,
 
         /// <summary>
-        /// Extensible calling convention protocol. This represents either the union of calling convention modopts after the paramcount specifier
+        /// Extensible calling convention protocol. This represents either the union of calling convention
+        // modopts after the paramcount specifier
         /// in IL, or platform default if none are present
         /// </summary>
         Unmanaged = SignatureCallingConvention.Unmanaged,
@@ -66,12 +70,14 @@ namespace Microsoft.Cci
         Generic = SignatureAttributes.Generic,
 
         /// <summary>
-        /// The convention for calling an instance method with an implicit this parameter (the method does not have an explicit parameter definition for this).
+        /// The convention for calling an instance method with an implicit this parameter (the method does
+        // not have an explicit parameter definition for this).
         /// </summary>
         HasThis = SignatureAttributes.Instance,
 
         /// <summary>
-        /// The convention for calling an instance method that explicitly declares its first parameter to correspond to the this instance.
+        /// The convention for calling an instance method that explicitly declares its first parameter to
+        // correspond to the this instance.
         /// </summary>
         ExplicitThis = SignatureAttributes.ExplicitThis,
     }
@@ -137,7 +143,8 @@ namespace Microsoft.Cci
     }
 
     /// <summary>
-    /// An event is a member that enables an object or class to provide notifications. Clients can attach executable code for events by supplying event handlers.
+    /// An event is a member that enables an object or class to provide notifications. Clients can
+    // attach executable code for events by supplying event handlers.
     /// This interface models the metadata representation of an event.
     /// </summary>
     internal interface IEventDefinition : ITypeDefinitionMember
@@ -185,7 +192,8 @@ namespace Microsoft.Cci
     internal interface IFieldDefinition : ITypeDefinitionMember, IFieldReference
     {
         /// <summary>
-        /// The compile time value of the field. This value should be used directly in IL, rather than a reference to the field.
+        /// The compile time value of the field. This value should be used directly in IL, rather than a
+        // reference to the field.
         /// If the field does not have a valid compile time value, Dummy.Constant is returned.
         /// </summary>
         MetadataConstant? GetCompileTimeValue(EmitContext context);
@@ -196,7 +204,8 @@ namespace Microsoft.Cci
         ImmutableArray<byte> MappedData { get; }
 
         /// <summary>
-        /// This field is a compile-time constant. The field has no runtime location and cannot be directly addressed from IL.
+        /// This field is a compile-time constant. The field has no runtime location and cannot be directly
+        // addressed from IL.
         /// </summary>
         bool IsCompileTimeConstant { get; }
 
@@ -303,13 +312,15 @@ namespace Microsoft.Cci
 
         /// <summary>
         /// TODO: use <see cref="Constraints"/> instead.
-        /// True if the value referenced by the local must not be moved by the actions of the garbage collector.
+        /// True if the value referenced by the local must not be moved by the actions of the garbage
+        // collector.
         /// </summary>
         bool IsPinned { get; }
 
         /// <summary>
         /// TODO: use <see cref="Constraints"/> instead.
-        /// True if the local contains a managed pointer (for example a reference to a local variable or a reference to a field of an object).
+        /// True if the local contains a managed pointer (for example a reference to a local variable or a
+        // reference to a field of an object).
         /// </summary>
         bool IsReference { get; }
 
@@ -322,8 +333,10 @@ namespace Microsoft.Cci
         /// for all other locals.
         /// </summary>
         /// <remarks>
-        /// A value of <see cref="LocalVariableAttributes.DebuggerHidden"/> is a sufficient, but not a necessary, condition for hiding the
-        /// local in the debugger.  Locals with value <see cref="LocalVariableAttributes.None"/> may also be hidden.
+        /// A value of <see cref="LocalVariableAttributes.DebuggerHidden"/> is a sufficient, but not a
+        // necessary, condition for hiding the
+        /// local in the debugger.  Locals with value <see cref="LocalVariableAttributes.None"/> may also be
+        // hidden.
         ///
         /// Hidden locals must still be emitted because they participate in evaluation.
         /// </remarks>
@@ -363,7 +376,8 @@ namespace Microsoft.Cci
         byte[]? Signature { get; }
 
         /// <summary>
-        /// Local id, or <see cref="LocalDebugId.None"/> if this is a local constant, short-lived temp variable,
+        /// Local id, or <see cref="LocalDebugId.None"/> if this is a local constant, short-lived temp
+        // variable,
         /// or we are not emitting local variable ids (release builds).
         /// </summary>
         LocalSlotDebugInfo SlotInfo { get; }
@@ -378,7 +392,8 @@ namespace Microsoft.Cci
         /// A list exception data within the method body IL.
         /// </summary>
         ImmutableArray<ExceptionHandlerRegion> ExceptionRegions { get;
-            // ^ requires !this.MethodDefinition.IsAbstract && !this.MethodDefinition.IsExternal && this.MethodDefinition.IsCil;
+            // ^ requires !this.MethodDefinition.IsAbstract && !this.MethodDefinition.IsExternal &&
+            // this.MethodDefinition.IsCil;
         }
 
         /// <summary>
@@ -398,7 +413,8 @@ namespace Microsoft.Cci
 
         /// <summary>
         /// The definition of the method whose body this is.
-        /// If this is the body of an event or property accessor, this will hold the corresponding adder/remover/setter or getter method.
+        /// If this is the body of an event or property accessor, this will hold the corresponding
+        // adder/remover/setter or getter method.
         /// </summary>
         IMethodDefinition MethodDefinition { get; }
 
@@ -421,7 +437,8 @@ namespace Microsoft.Cci
         bool HasDynamicLocalVariables { get; }
 
         /// <summary>
-        /// Returns zero or more local (block) scopes into which the CLR IL operations in the given method body is organized.
+        /// Returns zero or more local (block) scopes into which the CLR IL operations in the given method
+        // body is organized.
         /// </summary>
         ImmutableArray<LocalScope> LocalScopes { get; }
 
@@ -430,10 +447,14 @@ namespace Microsoft.Cci
         /// (e.g. the method doesn't contain user code).
         /// </summary>
         /// <remarks>
-        /// The chain is a spine of a tree in a forest of import scopes. A tree of import scopes is created by the language for each source file
-        /// based on namespace declarations. In VB each tree is trivial single-node tree that declares the imports of a file.
-        /// In C# the tree copies the nesting of namespace declarations in the file. There is a separate scope for each dotted component in
-        /// the namespace type name. For instance namespace type x.y.z will have two namespace scopes, the first is for the x and the second
+        /// The chain is a spine of a tree in a forest of import scopes. A tree of import scopes is created
+        // by the language for each source file
+        /// based on namespace declarations. In VB each tree is trivial single-node tree that declares the
+        // imports of a file.
+        /// In C# the tree copies the nesting of namespace declarations in the file. There is a separate
+        // scope for each dotted component in
+        /// the namespace type name. For instance namespace type x.y.z will have two namespace scopes, the
+        // first is for the x and the second
         /// is for the y.
         /// </remarks>
         IImportScope ImportScope { get; }
@@ -445,13 +466,18 @@ namespace Microsoft.Cci
         /// or null if this method isn't MoveNext method of a state machine.
         /// </summary>
         /// <remarks>
-        /// Returns zero or more local (block) scopes, each defining an IL range in which an iterator local is defined.
+        /// Returns zero or more local (block) scopes, each defining an IL range in which an iterator local
+        // is defined.
         /// The scopes are returned for the MoveNext method of the object returned by the iterator method.
-        /// The index of the scope corresponds to the index of the local.  Specifically local scope i corresponds
-        /// to the local stored in a field named &lt;localName&gt;5__i of the class used to store the local values in
-        /// between calls to MoveNext, where localName is the original name of the local variable.  For example, if
+        /// The index of the scope corresponds to the index of the local.  Specifically local scope i
+        // corresponds
+        /// to the local stored in a field named &lt;localName&gt;5__i of the class used to store the local
+        // values in
+        /// between calls to MoveNext, where localName is the original name of the local variable.  For
+        // example, if
         /// the first local to be moved into the class is named "xyzzy", it will be stored in a field named
-        /// "&lt;xyzzy&gt;5__1", and the ILocalScope returned from this method at index 1 (i.e. the second one) will
+        /// "&lt;xyzzy&gt;5__1", and the ILocalScope returned from this method at index 1 (i.e. the second
+        // one) will
         /// have the scope information for where that variable is in scope.
         /// </remarks>
         ImmutableArray<StateMachineHoistedLocalScope> StateMachineHoistedLocalScopes { get; }
@@ -507,7 +533,8 @@ namespace Microsoft.Cci
         /// A container for a list of IL instructions providing the implementation (if any) of this method.
         /// </summary>
         /// <remarks>
-        /// When emitting metadata-only assemblies this returns null even if <see cref="HasBody"/> returns true.
+        /// When emitting metadata-only assemblies this returns null even if <see cref="HasBody"/> returns
+        // true.
         /// </remarks>
         IMethodBody? GetBody(EmitContext context);
 
@@ -517,7 +544,8 @@ namespace Microsoft.Cci
         IEnumerable<IGenericMethodParameter> GenericParameters { get; }
 
         /// <summary>
-        /// True if this method has a non empty collection of SecurityAttributes or the System.Security.SuppressUnmanagedCodeSecurityAttribute.
+        /// True if this method has a non empty collection of SecurityAttributes or the
+        // System.Security.SuppressUnmanagedCodeSecurityAttribute.
         /// </summary>
         bool HasDeclarativeSecurity { get; }
 
@@ -545,14 +573,17 @@ namespace Microsoft.Cci
         bool IsExternal { get; }
 
         /// <summary>
-        /// True if this method is hidden if a derived type declares a method with the same name and signature.
-        /// If false, any method with the same name hides this method. This flag is ignored by the runtime and is only used by compilers.
+        /// True if this method is hidden if a derived type declares a method with the same name and
+        // signature.
+        /// If false, any method with the same name hides this method. This flag is ignored by the runtime
+        // and is only used by compilers.
         /// </summary>
         bool IsHiddenBySignature { get; }
 
         /// <summary>
         /// The method always gets a new slot in the virtual method table.
-        /// This means the method will hide (not override) a base type method with the same name and signature.
+        /// This means the method will hide (not override) a base type method with the same name and
+        // signature.
         /// </summary>
         bool IsNewSlot { get; }
 
@@ -562,7 +593,8 @@ namespace Microsoft.Cci
         bool IsPlatformInvoke { get; }
 
         /// <summary>
-        /// True if the method gets special treatment from the runtime. For example, it might be a constructor.
+        /// True if the method gets special treatment from the runtime. For example, it might be a
+        // constructor.
         /// </summary>
         bool IsRuntimeSpecial { get; }
 
@@ -572,7 +604,8 @@ namespace Microsoft.Cci
         bool IsSealed { get; }
 
         /// <summary>
-        /// True if the method is special in some way for tools. For example, it might be a property getter or setter.
+        /// True if the method is special in some way for tools. For example, it might be a property getter
+        // or setter.
         /// </summary>
         bool IsSpecialName { get; }
 
@@ -599,15 +632,18 @@ namespace Microsoft.Cci
         ImmutableArray<IParameterDefinition> Parameters { get; }
 
         /// <summary>
-        /// Detailed information about the PInvoke stub. Identifies which method to call, which module has the method and the calling convention among other things.
+        /// Detailed information about the PInvoke stub. Identifies which method to call, which module has
+        // the method and the calling convention among other things.
         /// </summary>
         IPlatformInvokeInformation PlatformInvokeData { get;
             // ^ requires this.IsPlatformInvoke;
         }
 
         /// <summary>
-        /// True if the method calls another method containing security code. If this flag is set, the method
-        /// should have System.Security.DynamicSecurityMethodAttribute present in its list of custom attributes.
+        /// True if the method calls another method containing security code. If this flag is set, the
+        // method
+        /// should have System.Security.DynamicSecurityMethodAttribute present in its list of custom
+        // attributes.
         /// </summary>
         bool RequiresSecurityObject { get; }
 
@@ -629,7 +665,8 @@ namespace Microsoft.Cci
         }
 
         /// <summary>
-        /// Checked if ReturnValueIsMarshalledExplicitly == true and ReturnValueMarshallingInformation is null
+        /// Checked if ReturnValueIsMarshalledExplicitly == true and ReturnValueMarshallingInformation is
+        // null
         /// </summary>
         ImmutableArray<byte> ReturnValueMarshallingDescriptor { get;
             // ^ requires this.ReturnValueIsMarshalledExplicitly;
@@ -642,7 +679,8 @@ namespace Microsoft.Cci
 
         /// <summary>
         /// Namespace containing this method.
-        /// TODO: Ideally we would expose INamespace on INamespaceTypeDefinition. Right now we can only get the qualified namespace name.
+        /// TODO: Ideally we would expose INamespace on INamespaceTypeDefinition. Right now we can only get
+        // the qualified namespace name.
         /// </summary>
         INamespace ContainingNamespace { get; }
     }
@@ -653,18 +691,21 @@ namespace Microsoft.Cci
     internal interface IParameterDefinition : IDefinition, INamedEntity, IParameterTypeInformation
     {
         /// <summary>
-        /// A compile time constant value that should be supplied as the corresponding argument value by callers that do not explicitly specify an argument value for this parameter.
+        /// A compile time constant value that should be supplied as the corresponding argument value by
+        // callers that do not explicitly specify an argument value for this parameter.
         /// Null if the parameter doesn't have default value.
         /// </summary>
         MetadataConstant? GetDefaultValue(EmitContext context);
 
         /// <summary>
-        /// True if the parameter has a default value that should be supplied as the argument value by a caller for which the argument value has not been explicitly specified.
+        /// True if the parameter has a default value that should be supplied as the argument value by a
+        // caller for which the argument value has not been explicitly specified.
         /// </summary>
         bool HasDefaultValue { get; }
 
         /// <summary>
-        /// True if the argument value must be included in the marshalled arguments passed to a remote callee.
+        /// True if the argument value must be included in the marshalled arguments passed to a remote
+        // callee.
         /// </summary>
         bool IsIn { get; }
 
@@ -674,14 +715,16 @@ namespace Microsoft.Cci
         bool IsMarshalledExplicitly { get; }
 
         /// <summary>
-        /// True if the argument value must be included in the marshalled arguments passed to a remote callee only if it is different from the default value (if there is one).
+        /// True if the argument value must be included in the marshalled arguments passed to a remote
+        // callee only if it is different from the default value (if there is one).
         /// </summary>
         bool IsOptional { get;
             // ^ result ==> this.HasDefaultValue;
         }
 
         /// <summary>
-        /// True if the final value assigned to the parameter will be marshalled with the return values passed back from a remote callee.
+        /// True if the final value assigned to the parameter will be marshalled with the return values
+        // passed back from a remote callee.
         /// </summary>
         bool IsOut { get; }
 
@@ -712,7 +755,8 @@ namespace Microsoft.Cci
         IEnumerable<IMethodReference> GetAccessors(EmitContext context);
 
         /// <summary>
-        /// A compile time constant value that provides the default value for the property. (Who uses this and why?)
+        /// A compile time constant value that provides the default value for the property. (Who uses this
+        // and why?)
         /// </summary>
         MetadataConstant? DefaultValue { get;
             // ^ requires this.HasDefaultValue;
@@ -724,7 +768,8 @@ namespace Microsoft.Cci
         IMethodReference? Getter { get; }
 
         /// <summary>
-        /// True if this property has a compile time constant associated with that serves as a default value for the property. (Who uses this and why?)
+        /// True if this property has a compile time constant associated with that serves as a default value
+        // for the property. (Who uses this and why?)
         /// </summary>
         bool HasDefaultValue { get; }
 
@@ -803,7 +848,8 @@ namespace Microsoft.Cci
         ITypeDefinition ContainingTypeDefinition { get; }
 
         /// <summary>
-        /// Indicates if the member is public or confined to its containing type, derived types and/or declaring assembly.
+        /// Indicates if the member is public or confined to its containing type, derived types and/or
+        // declaring assembly.
         /// </summary>
         TypeMemberVisibility Visibility { get; }
     }
@@ -826,8 +872,10 @@ namespace Microsoft.Cci
     internal interface ISpecializedEventDefinition : IEventDefinition
     {
         /// <summary>
-        /// The event that has been specialized to obtain this event. When the containing type is an instance of type which is itself a specialized member (i.e. it is a nested
-        /// type of a generic type instance), then the unspecialized member refers to a member from the unspecialized containing type. (I.e. the unspecialized member always
+        /// The event that has been specialized to obtain this event. When the containing type is an
+        // instance of type which is itself a specialized member (i.e. it is a nested
+        /// type of a generic type instance), then the unspecialized member refers to a member from the
+        // unspecialized containing type. (I.e. the unspecialized member always
         /// corresponds to a definition that is not obtained via specialization.)
         /// </summary>
         [NotNull]
@@ -840,10 +888,14 @@ namespace Microsoft.Cci
     internal interface ISpecializedFieldReference : IFieldReference
     {
         /// <summary>
-        /// A reference to the field definition that has been specialized to obtain the field definition referred to by this field reference.
-        /// When the containing type of the referenced specialized field definition is itself a specialized nested type of a generic type instance,
-        /// then the unspecialized field reference refers to the corresponding field definition from the unspecialized containing type definition.
-        /// (I.e. the unspecialized field reference always refers to a field definition that is not obtained via specialization.)
+        /// A reference to the field definition that has been specialized to obtain the field definition
+        // referred to by this field reference.
+        /// When the containing type of the referenced specialized field definition is itself a specialized
+        // nested type of a generic type instance,
+        /// then the unspecialized field reference refers to the corresponding field definition from the
+        // unspecialized containing type definition.
+        /// (I.e. the unspecialized field reference always refers to a field definition that is not obtained
+        // via specialization.)
         /// </summary>
         IFieldReference UnspecializedVersion { get; }
     }
@@ -854,10 +906,14 @@ namespace Microsoft.Cci
     internal interface ISpecializedMethodReference : IMethodReference
     {
         /// <summary>
-        /// A reference to the method definition that has been specialized to obtain the method definition referred to by this method reference.
-        /// When the containing type of the referenced specialized method definition is itself a specialized nested type of a generic type instance,
-        /// then the unspecialized method reference refers to the corresponding method definition from the unspecialized containing type definition.
-        /// (I.e. the unspecialized method reference always refers to a method definition that is not obtained via specialization.)
+        /// A reference to the method definition that has been specialized to obtain the method definition
+        // referred to by this method reference.
+        /// When the containing type of the referenced specialized method definition is itself a specialized
+        // nested type of a generic type instance,
+        /// then the unspecialized method reference refers to the corresponding method definition from the
+        // unspecialized containing type definition.
+        /// (I.e. the unspecialized method reference always refers to a method definition that is not
+        // obtained via specialization.)
         /// </summary>
         IMethodReference UnspecializedVersion { get; }
     }
@@ -868,8 +924,10 @@ namespace Microsoft.Cci
     internal interface ISpecializedPropertyDefinition : IPropertyDefinition
     {
         /// <summary>
-        /// The property that has been specialized to obtain this property. When the containing type is an instance of type which is itself a specialized member (i.e. it is a nested
-        /// type of a generic type instance), then the unspecialized member refers to a member from the unspecialized containing type. (I.e. the unspecialized member always
+        /// The property that has been specialized to obtain this property. When the containing type is an
+        // instance of type which is itself a specialized member (i.e. it is a nested
+        /// type of a generic type instance), then the unspecialized member refers to a member from the
+        // unspecialized containing type. (I.e. the unspecialized member always
         /// corresponds to a definition that is not obtained via specialization.)
         /// </summary>
         [NotNull]
@@ -899,7 +957,8 @@ namespace Microsoft.Cci
         // ^ ensures this is IMethodDefinition ==> result == this;
 
         /// <summary>
-        /// Information about this types of the extra arguments supplied at the call sites that references the method with this object.
+        /// Information about this types of the extra arguments supplied at the call sites that references
+        // the method with this object.
         /// </summary>
         ImmutableArray<IParameterTypeInformation> ExtraParameters { get; }
 
@@ -913,7 +972,8 @@ namespace Microsoft.Cci
     internal interface IGenericMethodInstanceReference : IMethodReference
     {
         /// <summary>
-        /// The type arguments that were used to instantiate this.GenericMethod in order to create this method.
+        /// The type arguments that were used to instantiate this.GenericMethod in order to create this
+        // method.
         /// </summary>
         IEnumerable<ITypeReference> GetGenericArguments(EmitContext context);
 

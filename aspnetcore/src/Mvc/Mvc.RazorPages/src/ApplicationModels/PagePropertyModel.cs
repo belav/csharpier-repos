@@ -25,7 +25,8 @@ public class PagePropertyModel : ParameterModelBase, ICommonModel
     }
 
     /// <summary>
-    /// Creates a new instance of <see cref="PagePropertyModel"/> from a given <see cref="PagePropertyModel"/>.
+    /// Creates a new instance of <see cref="PagePropertyModel"/> from a given <see
+    // cref="PagePropertyModel"/>.
     /// </summary>
     /// <param name="other">The <see cref="PagePropertyModel"/> which needs to be copied.</param>
     public PagePropertyModel(PagePropertyModel other)
@@ -39,7 +40,8 @@ public class PagePropertyModel : ParameterModelBase, ICommonModel
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="PageApplicationModel"/> this <see cref="PagePropertyModel"/> is associated with.
+    /// Gets or sets the <see cref="PageApplicationModel"/> this <see cref="PagePropertyModel"/> is
+    // associated with.
     /// </summary>
     public PageApplicationModel Page { get; set; } = default!;
 

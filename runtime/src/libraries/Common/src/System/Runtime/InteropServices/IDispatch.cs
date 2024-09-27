@@ -36,9 +36,9 @@ namespace System.Runtime.InteropServices
             int lcid,
             InvokeFlags wFlags,
             ref ComTypes.DISPPARAMS pDispParams,
-            /* out/optional */IntPtr pVarResult,
-            /* out/optional */IntPtr pExcepInfo,
-            /* out/optional */IntPtr puArgErr
+/* out/optional */IntPtr pVarResult,
+/* out/optional */IntPtr pExcepInfo,
+/* out/optional */IntPtr puArgErr
         );
     }
 

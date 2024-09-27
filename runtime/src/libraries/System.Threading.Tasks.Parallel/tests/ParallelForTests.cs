@@ -116,7 +116,8 @@ namespace System.Threading.Tasks.Tests
                 () => Parallel.For(0, 10, () => "", (a, b, c) => "", null)
             );
 
-            // Test P.For<TLocal>(from, to, options, Func<TLocal>, Func<int, PLS, TLocal, TLocal>, Action<TLocal>)
+            // Test P.For<TLocal>(from, to, options, Func<TLocal>, Func<int, PLS, TLocal, TLocal>,
+            // Action<TLocal>)
             AssertExtensions.Throws<ArgumentNullException>(
                 "parallelOptions",
                 () => Parallel.For(0, 10, null, () => "", (a, b, c) => "", _ => { })
@@ -184,7 +185,8 @@ namespace System.Threading.Tasks.Tests
                 () => Parallel.For(0L, 10L, () => "", (a, b, c) => "", null)
             );
 
-            // Test P.For<TLocal>(from, to, options, Func<TLocal>, Func<long, PLS, TLocal, TLocal>, Action<TLocal>)
+            // Test P.For<TLocal>(from, to, options, Func<TLocal>, Func<long, PLS, TLocal, TLocal>,
+            // Action<TLocal>)
             AssertExtensions.Throws<ArgumentNullException>(
                 "parallelOptions",
                 () => Parallel.For(0L, 10L, null, () => "", (a, b, c) => "", _ => { })
@@ -1852,10 +1854,12 @@ namespace System.Threading.Tasks.Tests
             Action a2 = delegate
             {
                 // Return value isn't guaranteed to be locked... so store it off to prevent other thread
-                // from incrementing it while we check the value.  Otherwise it's entirely possible to skip this entirely
+                // from incrementing it while we check the value.  Otherwise it's entirely possible to skip this
+                // entirely
                 // since with 2 DOP it's entirely possible for the returned value to be 1 or 2.
                 // the expected value leaving should always be 2 with 2 DOP though.
-                // May make more sense just to lock(counter) for this whole delegate but I'm trying to maintain the spirit of the test
+                // May make more sense just to lock(counter) for this whole delegate but I'm trying to maintain the
+                // spirit of the test
                 // in case there is some intrinsic value in using Interlocked.Increment() here.
                 int incrementedValue = Interlocked.Increment(ref counter);
                 if (incrementedValue >= 1)

@@ -851,7 +851,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                 }
                 """;
 
-            // Note that <COMImport> is required by compiler.  Bug 17013 tracks enabling indexed property for non-COM types.
+            // Note that <COMImport> is required by compiler.  Bug 17013 tracks enabling indexed property for
+            // non-COM types.
             var referencedCode = """
                 Imports System.Runtime.InteropServices
 

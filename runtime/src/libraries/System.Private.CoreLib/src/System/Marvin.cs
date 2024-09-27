@@ -123,7 +123,8 @@ namespace System
             // need to consume, and ## are bytes which we want to throw away since we've already
             // consumed them as part of a previous read.
             //
-            //                                                    (partialResult contains)   (we want it to contain)
+            //                                                    (partialResult contains)   (we want it to
+            // contain)
             // count mod 4 = 0 -> [ ## ## ## ## |             ] -> 0x####_####             -> 0x0000_0080
             // count mod 4 = 1 -> [ ## ## ## ## | AA          ] -> 0xAA##_####             -> 0x0000_80AA
             // count mod 4 = 2 -> [ ## ## ## ## | AA BB       ] -> 0xBBAA_####             -> 0x0080_BBAA

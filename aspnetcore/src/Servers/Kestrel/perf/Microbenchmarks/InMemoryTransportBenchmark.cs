@@ -241,7 +241,8 @@ public class InMemoryTransportBenchmark
             }
         }
 
-        // Returns response so it can be validated, but is slower and allocates more than ReadResponseAsync()
+        // Returns response so it can be validated, but is slower and allocates more than
+        // ReadResponseAsync()
         public async Task<byte[]> GetResponseAsync(int length)
         {
             while (true)
@@ -269,7 +270,8 @@ public class InMemoryTransportBenchmark
         }
     }
 
-    // Copied from https://github.com/aspnet/benchmarks/blob/dev/src/Benchmarks/Middleware/PlaintextMiddleware.cs
+    // Copied from
+    // https://github.com/aspnet/benchmarks/blob/dev/src/Benchmarks/Middleware/PlaintextMiddleware.cs
     public class PlaintextMiddleware
     {
         private static readonly PathString _path = new PathString("/plaintext");

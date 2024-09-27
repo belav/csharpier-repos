@@ -69,7 +69,7 @@ namespace MonoSamples.System.Drawing
             gr.DrawLine(redPen, width / 4F, 0F, width / 4F, height);
             gr.DrawLine(redPen, 3F * width / 4F, 0F, 3F * width / 4F, height);
 
-            /* save image in all the formats */
+/* save image in all the formats */
             bmp.Save("hering.png", ImageFormat.Png);
             Console.WriteLine("output file hering.png");
             bmp.Save("hering.jpg", ImageFormat.Jpeg);

@@ -1598,7 +1598,8 @@ namespace Tests.Collections
         }
 
         /// <summary>
-        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the collection under test.
+        ///     When overridden in a derived class, Gets a list of values that are not valid elements in the
+        // collection under test.
         /// </summary>
         /// <returns>An <see cref="IEnumerable" /> containing the invalid values.</returns>
         protected abstract IEnumerable GetInvalidValues();
@@ -1667,14 +1668,16 @@ namespace Tests.Collections
         protected abstract T CreateItem();
 
         /// <summary>
-        ///     When overridden in a derived class, Gets an instance of the list under test containing the given items.
+        ///     When overridden in a derived class, Gets an instance of the list under test containing the
+        // given items.
         /// </summary>
         /// <param name="items">The items to initialize the list with.</param>
         /// <returns>An instance of the list under test containing the given items.</returns>
         protected abstract TList CreateList(IEnumerable<T> items);
 
         /// <summary>
-        ///     When overridden in a derived class, Gets an instance of the enumerable under test containing the given items.
+        ///     When overridden in a derived class, Gets an instance of the enumerable under test containing
+        // the given items.
         /// </summary>
         /// <param name="items">The items to initialize the enumerable with.</param>
         /// <returns>An instance of the enumerable under test containing the given items.</returns>

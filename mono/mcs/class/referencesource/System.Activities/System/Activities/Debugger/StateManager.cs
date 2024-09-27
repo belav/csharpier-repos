@@ -261,7 +261,8 @@ namespace System.Activities.Debugger
         }
 
         // Release any unmanaged resources.
-        // This may not necessarily unload islands or dynamic modules that were created until the calling appdomain has exited.
+        // This may not necessarily unload islands or dynamic modules that were created until the calling
+        // appdomain has exited.
         public void Dispose()
         {
             ExitThreads();
@@ -280,7 +281,8 @@ namespace System.Activities.Debugger
         }
 
         // Release any unmanaged resources.
-        // This may not necessarily unload islands or dynamic modules that were created until the calling appdomain has exited.
+        // This may not necessarily unload islands or dynamic modules that were created until the calling
+        // appdomain has exited.
         public void Exit(int threadIndex)
         {
             Fx.Assert(threadIndex >= 0, "Invalid thread index");
@@ -575,9 +577,12 @@ namespace System.Activities.Debugger
                                 );
 
                                 // Always generate method with priming, for the following scenario:
-                                //  1. Start debugging a workflow inside VS, workflow debug session 1 starts (debugStartedAtRoot = true, instrumentation is done)
+                                //  1. Start debugging a workflow inside VS, workflow debug session 1 starts (debugStartedAtRoot =
+                                // true, instrumentation is done)
                                 //  2. Workflow persisted, workflow debug session 1 ends
-                                //  3. Workflow continued, workflow debug session 2 starts (debugStartedAtRoot = false, instrumentation is skipped because the static dynamicModuleManager is being reused and the instrumentation is done)
+                                //  3. Workflow continued, workflow debug session 2 starts (debugStartedAtRoot = false,
+                                // instrumentation is skipped because the static dynamicModuleManager is being reused and the
+                                // instrumentation is done)
                                 //  4. PrimeCallStack is called to rebuild the call stack
                                 //  5. NullReferenceException will be thrown if MethodInfo with prime is not available
                                 MethodBuilder methodBuilderWithPriming = this.CreateIsland(

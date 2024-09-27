@@ -19,7 +19,8 @@ namespace System.Web.DynamicData.ModelProviders
             EFColumnProvider columnProvider;
             EntityType otherEntityType = navigationProperty.ToEndMember.GetEntityType();
 
-            // If we can get to the entityType of the ToMember side of the relaionship then build a relationship key and try to lookup the column provider.
+            // If we can get to the entityType of the ToMember side of the relaionship then build a relationship
+            // key and try to lookup the column provider.
             if (otherEntityType != null)
             {
                 long key = BuildRelationshipKey(otherEntityType, navigationProperty.ToEndMember);
@@ -176,7 +177,8 @@ namespace System.Web.DynamicData.ModelProviders
                     // Get constraint when this association is on the "parent" (aka "from") side. This means
                     // that the navProperty represents a Children association in a 1-1 relationship. For example,
                     // this could be a Item-ItemDetail scenario where the ItemDetail table has a PK that is also an FK
-                    // into the Item table (thus ensuring the 1-1 cardinality). We need to special case this situation because normally we would try
+                    // into the Item table (thus ensuring the 1-1 cardinality). We need to special case this situation
+                    // because normally we would try
                     // to build a foreign key name of the form "Item.ItemID", but we want just "ItemID".
                     AssociationType relationshipType = (AssociationType)
                         navigationProperty.RelationshipType;
@@ -189,7 +191,8 @@ namespace System.Web.DynamicData.ModelProviders
                         return constraint.FromProperties.Select(p => p.Name);
                     }
 
-                    // Fall back on the primary keys if no constraints were found but only if we are on the parent side. i.e the 1 side Item side in an Item-ItemDetail
+                    // Fall back on the primary keys if no constraints were found but only if we are on the parent side.
+                    // i.e the 1 side Item side in an Item-ItemDetail
                     // Get the primary keys on the "from" side of the relationship. i.e Product.Category -> ProductID
                     return navigationProperty
                         .FromEndMember.GetEntityType()

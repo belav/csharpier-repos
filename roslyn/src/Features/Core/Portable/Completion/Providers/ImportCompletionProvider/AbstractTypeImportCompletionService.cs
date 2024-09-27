@@ -230,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         /// <summary>
         /// Get appropriate completion items for all the visible top level types from given project.
-        /// This method is intended to be used for getting types from source only, so the project must support compilation.
+        /// This method is intended to be used for getting types from source only, so the project must
+        // support compilation.
         /// For getting types from PE, use <see cref="TryGetUpToDateCacheForPEReference"/>.
         /// </summary>
         private async Task<TypeImportCompletionCacheEntry> GetUpToDateCacheForProjectAsync(
@@ -238,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            // Since we only need top level types from source, therefore we only care if source symbol checksum changes.
+            // Since we only need top level types from source, therefore we only care if source symbol checksum
+            // changes.
             var checksum = await SymbolTreeInfo
                 .GetSourceSymbolsChecksumAsync(project, cancellationToken)
                 .ConfigureAwait(false);

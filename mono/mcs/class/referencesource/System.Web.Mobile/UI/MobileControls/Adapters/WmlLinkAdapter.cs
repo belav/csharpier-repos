@@ -19,10 +19,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlLinkAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * WmlLinkAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\WmlLinkAdapter.uex' path='docs/doc[@for="WmlLinkAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

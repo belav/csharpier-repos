@@ -14,7 +14,8 @@ namespace System.Collections.Generic
     internal static class Empty<T>
     {
         //
-        // Returns a reusable empty IEnumerable<T> (that does not secretly implement more advanced collection interfaces.)
+        // Returns a reusable empty IEnumerable<T> (that does not secretly implement more advanced
+        // collection interfaces.)
         //
         public static IEnumerable<T> Enumerable
         {

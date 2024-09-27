@@ -63,12 +63,14 @@ internal static class RoutePatternFactory
     /// <param name="pattern">The route pattern string to parse.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -99,12 +101,14 @@ internal static class RoutePatternFactory
     /// <param name="pattern">The route pattern string to parse.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -134,17 +138,20 @@ internal static class RoutePatternFactory
     /// <param name="pattern">The route pattern string to parse.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
     /// <param name="requiredValues">
-    /// Route values that can be substituted for parameters in the route pattern. See remarks on <see cref="RoutePattern.RequiredValues"/>.
+    /// Route values that can be substituted for parameters in the route pattern. See remarks on <see
+    // cref="RoutePattern.RequiredValues"/>.
     /// </param>
     /// <returns>The <see cref="RoutePattern"/>.</returns>
     [RequiresUnreferencedCode(RouteValueDictionaryTrimmerWarning.Warning)]
@@ -174,17 +181,20 @@ internal static class RoutePatternFactory
     /// <param name="pattern">The route pattern string to parse.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the parsed route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
     /// <param name="requiredValues">
-    /// Route values that can be substituted for parameters in the route pattern. See remarks on <see cref="RoutePattern.RequiredValues"/>.
+    /// Route values that can be substituted for parameters in the route pattern. See remarks on <see
+    // cref="RoutePattern.RequiredValues"/>.
     /// </param>
     /// <returns>The <see cref="RoutePattern"/>.</returns>
     public static RoutePattern Parse(
@@ -242,12 +252,14 @@ internal static class RoutePatternFactory
     /// </summary>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -277,12 +289,14 @@ internal static class RoutePatternFactory
     /// </summary>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -312,12 +326,14 @@ internal static class RoutePatternFactory
     /// <param name="rawText">The raw text to associate with the route pattern. May be null.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -349,12 +365,14 @@ internal static class RoutePatternFactory
     /// <param name="rawText">The raw text to associate with the route pattern. May be null.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -409,12 +427,14 @@ internal static class RoutePatternFactory
     /// </summary>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -444,12 +464,14 @@ internal static class RoutePatternFactory
     /// </summary>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -479,12 +501,14 @@ internal static class RoutePatternFactory
     /// <param name="rawText">The raw text to associate with the route pattern.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -516,12 +540,14 @@ internal static class RoutePatternFactory
     /// <param name="rawText">The raw text to associate with the route pattern.</param>
     /// <param name="defaults">
     /// Additional default values to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// </param>
     /// <param name="parameterPolicies">
     /// Additional parameter policies to associated with the route pattern. May be null.
-    /// The provided object will be converted to key-value pairs using <see cref="RouteValueDictionary"/>
+    /// The provided object will be converted to key-value pairs using <see
+    // cref="RouteValueDictionary"/>
     /// and then merged into the route pattern.
     /// Multiple policies can be specified for a key by providing a collection as the value.
     /// </param>
@@ -794,8 +820,10 @@ internal static class RoutePatternFactory
 
 #if !COMPONENTS
     /// <summary>
-    /// String policy references are infered to be regex constraints. Creating them is moved here to its own method so apps can
-    /// trim away the regex dependency when RoutePatternFactory.Parse(string) is used. This is the method typically used by the various Map methods.
+    /// String policy references are infered to be regex constraints. Creating them is moved here to its
+    // own method so apps can
+    /// trim away the regex dependency when RoutePatternFactory.Parse(string) is used. This is the
+    // method typically used by the various Map methods.
     /// </summary>
     private static Dictionary<
         string,
@@ -1287,11 +1315,16 @@ internal static class RoutePatternFactory
                     && !Equals(combinedDictionary[key], value)
                 )
                 {
-                    // Technically, the ParameterPolicies could probably be merged because it's a list, but it makes little sense to add policy
-                    // for the same parameter in both the left and right part of the combined pattern. Defaults and Required values cannot be
-                    // merged because the `TValue` is `object?`, but over-setting a Default or RequiredValue (which may not be in the parameter list)
-                    // seems okay as long as the values are the same for a given key in both the left and right pattern. There's already similar logic
-                    // in PatternCore for when defaults come from both the `defaults` and `segments` param. `requiredValues` cannot be defined in
+                    // Technically, the ParameterPolicies could probably be merged because it's a list, but it makes
+                    // little sense to add policy
+                    // for the same parameter in both the left and right part of the combined pattern. Defaults and
+                    // Required values cannot be
+                    // merged because the `TValue` is `object?`, but over-setting a Default or RequiredValue (which may
+                    // not be in the parameter list)
+                    // seems okay as long as the values are the same for a given key in both the left and right pattern.
+                    // There's already similar logic
+                    // in PatternCore for when defaults come from both the `defaults` and `segments` param.
+                    // `requiredValues` cannot be defined in
                     // `segments` so there's no equivalent to merging these until now.
                     throw new InvalidOperationException(
                         Resources.FormatMapGroup_RepeatedDictionaryEntry(

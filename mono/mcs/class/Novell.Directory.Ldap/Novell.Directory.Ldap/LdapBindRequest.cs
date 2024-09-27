@@ -40,12 +40,12 @@ namespace Novell.Directory.Ldap
     /// </summary>
     /// <seealso cref="LdapConnection.SendRequest">
     /// </seealso>
-    /*
-     *       BindRequest ::= [APPLICATION 0] SEQUENCE {
-     *               version                 INTEGER (1 .. 127),
-     *               name                    LdapDN,
-     *               authentication          AuthenticationChoice }
-     */
+/*
+*       BindRequest ::= [APPLICATION 0] SEQUENCE {
+*               version                 INTEGER (1 .. 127),
+*               name                    LdapDN,
+*               authentication          AuthenticationChoice }
+*/
     public class LdapBindRequest : LdapMessage
     {
         /// <summary> Retrieves the Authentication DN for a bind request.

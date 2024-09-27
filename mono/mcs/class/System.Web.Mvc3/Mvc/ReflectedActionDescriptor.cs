@@ -124,7 +124,8 @@
         {
             if (useCache && GetType() == typeof(ReflectedActionDescriptor))
             {
-                // Do not look at cache in types derived from this type because they might incorrectly implement GetCustomAttributes
+                // Do not look at cache in types derived from this type because they might incorrectly implement
+                // GetCustomAttributes
                 return ReflectedAttributeCache.GetMethodFilterAttributes(MethodInfo);
             }
             return base.GetFilterAttributes(useCache);

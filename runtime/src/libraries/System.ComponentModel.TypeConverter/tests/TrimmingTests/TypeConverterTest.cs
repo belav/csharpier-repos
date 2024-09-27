@@ -7,7 +7,8 @@ using System.ComponentModel;
 using System.Globalization;
 
 /// <summary>
-/// Tests that the relevant constructors of intrinsic TypeConverter types are preserved when needed in a trimmed application.
+/// Tests that the relevant constructors of intrinsic TypeConverter types are preserved when needed
+// in a trimmed application.
 /// </summary>
 class Program
 {

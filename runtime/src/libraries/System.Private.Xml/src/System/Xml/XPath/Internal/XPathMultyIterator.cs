@@ -18,7 +18,8 @@ namespace MS.Internal.Xml.XPath
 
         public XPathMultyIterator(ArrayList inputArray)
         {
-            // NOTE: We do not clone the passed inputArray supposing that it is not changed outside of this class
+            // NOTE: We do not clone the passed inputArray supposing that it is not changed outside of this
+            // class
             this.arr = new ResettableIterator[inputArray.Count];
             for (int i = 0; i < this.arr.Length; i++)
             {
@@ -62,7 +63,8 @@ namespace MS.Internal.Xml.XPath
         }
 
         // Invariant: a[i] < a[i+1] for i > item
-        // returns flase is head of the list was moved & as a result consistancy of list depends on head consistancy.
+        // returns flase is head of the list was moved & as a result consistancy of list depends on head
+        // consistancy.
         private bool SiftItem(int item)
         {
             Debug.Assert(firstNotEmpty <= item && item < arr.Length);
@@ -136,7 +138,8 @@ namespace MS.Internal.Xml.XPath
 
         public override bool MoveNext()
         {
-            // NOTE: MoveNext() may be called even if the previous call to MoveNext() returned false, SQLBUDT 330810
+            // NOTE: MoveNext() may be called even if the previous call to MoveNext() returned false, SQLBUDT
+            // 330810
             if (firstNotEmpty >= arr.Length)
             {
                 return false;

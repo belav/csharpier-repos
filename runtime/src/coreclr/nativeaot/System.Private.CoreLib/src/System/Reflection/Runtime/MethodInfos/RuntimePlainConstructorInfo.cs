@@ -14,7 +14,8 @@ using Internal.Reflection.Core.Execution;
 namespace System.Reflection.Runtime.MethodInfos
 {
     //
-    // The runtime's implementation of ConstructorInfo's represented in the metadata (this is the 99% case.)
+    // The runtime's implementation of ConstructorInfo's represented in the metadata (this is the 99%
+    // case.)
     //
     internal sealed partial class RuntimePlainConstructorInfo<TRuntimeMethodCommon>
         : RuntimeConstructorInfo
@@ -23,9 +24,12 @@ namespace System.Reflection.Runtime.MethodInfos
     {
         //
         // methodHandle    - the "tkMethodDef" that identifies the method.
-        // definingType   - the "tkTypeDef" that defined the method (this is where you get the metadata reader that created methodHandle.)
-        // contextType    - the type that supplies the type context (i.e. substitutions for generic parameters.) Though you
-        //                  get your raw information from "definingType", you report "contextType" as your DeclaringType property.
+        // definingType   - the "tkTypeDef" that defined the method (this is where you get the metadata
+        // reader that created methodHandle.)
+        // contextType    - the type that supplies the type context (i.e. substitutions for generic
+        // parameters.) Though you
+        //                  get your raw information from "definingType", you report "contextType" as your
+        // DeclaringType property.
         //
         //  For example:
         //

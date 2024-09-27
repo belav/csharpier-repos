@@ -225,7 +225,8 @@ internal sealed class ResponseCompressionBody
         if (_provider.ShouldCompressResponse(_context))
         {
             var headers = _context.Response.Headers;
-            // If the MIME type indicates that the response could be compressed, caches will need to vary by the Accept-Encoding header
+            // If the MIME type indicates that the response could be compressed, caches will need to vary by the
+            // Accept-Encoding header
             var varyValues = headers.GetCommaSeparatedValues(HeaderNames.Vary);
             var varyByAcceptEncoding = false;
 
@@ -247,7 +248,8 @@ internal sealed class ResponseCompressionBody
             if (!varyByAcceptEncoding)
             {
                 // Can't use += as StringValues does not override operator+
-                // and the implict conversions will cause an incorrect string concat https://github.com/dotnet/runtime/issues/52507
+                // and the implict conversions will cause an incorrect string concat
+                // https://github.com/dotnet/runtime/issues/52507
                 headers.Vary = StringValues.Concat(headers.Vary, HeaderNames.AcceptEncoding);
             }
 
@@ -255,7 +257,8 @@ internal sealed class ResponseCompressionBody
             if (compressionProvider != null)
             {
                 // Can't use += as StringValues does not override operator+
-                // and the implict conversions will cause an incorrect string concat https://github.com/dotnet/runtime/issues/52507
+                // and the implict conversions will cause an incorrect string concat
+                // https://github.com/dotnet/runtime/issues/52507
                 headers.ContentEncoding = StringValues.Concat(
                     headers.ContentEncoding,
                     compressionProvider.EncodingName

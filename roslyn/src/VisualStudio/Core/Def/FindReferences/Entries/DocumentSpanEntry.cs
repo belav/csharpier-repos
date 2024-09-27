@@ -208,9 +208,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             {
                 if (base.TryCreateColumnContent(columnName, out content))
                 {
-                    // this lazy tooltip causes whole solution to be kept in memory until find all reference result gets cleared.
-                    // solution is never supposed to be kept alive for long time, meaning there is bunch of conditional weaktable or weak reference
-                    // keyed by solution/project/document or corresponding states. this will cause all those to be kept alive in memory as well.
+                    // this lazy tooltip causes whole solution to be kept in memory until find all reference result gets
+                    // cleared.
+                    // solution is never supposed to be kept alive for long time, meaning there is bunch of conditional
+                    // weaktable or weak reference
+                    // keyed by solution/project/document or corresponding states. this will cause all those to be kept
+                    // alive in memory as well.
                     // probably we need to dig in to see how expensvie it is to support this
                     var controlService =
                         _excerptResult.Document.Project.Solution.Services.GetRequiredService<IContentControlService>();

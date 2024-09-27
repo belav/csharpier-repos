@@ -70,7 +70,8 @@ namespace MonoTests.System.Security.Cryptography
         public void FIPSCompliance_Test2()
         {
             SHA384 sha = (SHA384)hash;
-            // Second test, we hash the string "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"
+            // Second test, we hash the string
+            // "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"
             FIPS186_Test2(sha);
         }
 

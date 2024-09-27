@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             );
 
         /// <summary>
-        /// Tells if an async method returns a task-like type, awaiting for which produces <see langword="void"/> result
+        /// Tells if an async method returns a task-like type, awaiting for which produces <see
+        // langword="void"/> result
         /// </summary>
         public static bool IsAsyncReturningVoidTask(
             this IMethodSymbol method,

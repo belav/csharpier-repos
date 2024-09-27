@@ -19,7 +19,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore;
 
 /// <summary>
-/// Provides convenience methods for creating instances of <see cref="IWebHost"/> and <see cref="IWebHostBuilder"/> with pre-configured defaults.
+/// Provides convenience methods for creating instances of <see cref="IWebHost"/> and <see
+// cref="IWebHostBuilder"/> with pre-configured defaults.
 /// </summary>
 public static class WebHost
 {
@@ -56,7 +57,8 @@ public static class WebHost
     /// Initializes and starts a new <see cref="IWebHost"/> with pre-configured defaults.
     /// See <see cref="CreateDefaultBuilder()"/> for details.
     /// </summary>
-    /// <param name="routeBuilder">A delegate that configures the router for handling requests to the application.</param>
+    /// <param name="routeBuilder">A delegate that configures the router for handling requests to the
+    // application.</param>
     /// <returns>A started <see cref="IWebHost"/> that hosts the application.</returns>
     public static IWebHost Start(Action<IRouteBuilder> routeBuilder) =>
         Start(url: null!, routeBuilder: routeBuilder);
@@ -66,7 +68,8 @@ public static class WebHost
     /// See <see cref="CreateDefaultBuilder()"/> for details.
     /// </summary>
     /// <param name="url">The URL the hosted application will listen on.</param>
-    /// <param name="routeBuilder">A delegate that configures the router for handling requests to the application.</param>
+    /// <param name="routeBuilder">A delegate that configures the router for handling requests to the
+    // application.</param>
     /// <returns>A started <see cref="IWebHost"/> that hosts the application.</returns>
     public static IWebHost Start(
         [StringSyntax(StringSyntaxAttribute.Uri)] string url,
@@ -140,14 +143,19 @@ public static class WebHost
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="WebHostBuilder"/> class with pre-configured defaults.
+    /// Initializes a new instance of the <see cref="WebHostBuilder"/> class with pre-configured
+    // defaults.
     /// </summary>
     /// <remarks>
     ///   The following defaults are applied to the returned <see cref="WebHostBuilder"/>:
-    ///     use Kestrel as the web server and configure it using the application's configuration providers,
-    ///     set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see cref="Directory.GetCurrentDirectory()"/>,
-    ///     load <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see cref="IHostEnvironment.EnvironmentName"/>].json',
-    ///     load <see cref="IConfiguration"/> from User Secrets when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
+    ///     use Kestrel as the web server and configure it using the application's configuration
+    // providers,
+    ///     set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see
+    // cref="Directory.GetCurrentDirectory()"/>,
+    ///     load <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see
+    // cref="IHostEnvironment.EnvironmentName"/>].json',
+    ///     load <see cref="IConfiguration"/> from User Secrets when <see
+    // cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
     ///     load <see cref="IConfiguration"/> from environment variables,
     ///     configure the <see cref="ILoggerFactory"/> to log to the console and debug output,
     ///     adds the HostFiltering middleware,
@@ -158,18 +166,24 @@ public static class WebHost
     public static IWebHostBuilder CreateDefaultBuilder() => CreateDefaultBuilder(args: null!);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="WebHostBuilder"/> class with pre-configured defaults.
+    /// Initializes a new instance of the <see cref="WebHostBuilder"/> class with pre-configured
+    // defaults.
     /// </summary>
     /// <remarks>
     ///   The following defaults are applied to the returned <see cref="WebHostBuilder"/>:
-    ///     use Kestrel as the web server and configure it using the application's configuration providers,
-    ///     set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see cref="Directory.GetCurrentDirectory()"/>,
-    ///     load <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see cref="IHostEnvironment.EnvironmentName"/>].json',
-    ///     load <see cref="IConfiguration"/> from User Secrets when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
+    ///     use Kestrel as the web server and configure it using the application's configuration
+    // providers,
+    ///     set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see
+    // cref="Directory.GetCurrentDirectory()"/>,
+    ///     load <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see
+    // cref="IHostEnvironment.EnvironmentName"/>].json',
+    ///     load <see cref="IConfiguration"/> from User Secrets when <see
+    // cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
     ///     load <see cref="IConfiguration"/> from environment variables,
     ///     load <see cref="IConfiguration"/> from supplied command line args,
     ///     configure the <see cref="ILoggerFactory"/> to log to the console and debug output,
-    ///     configure the <see cref="IWebHostEnvironment.WebRootFileProvider"/> to map static web assets when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
+    ///     configure the <see cref="IWebHostEnvironment.WebRootFileProvider"/> to map static web assets
+    // when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
     ///     adds the HostFiltering middleware,
     ///     adds the ForwardedHeaders middleware if ASPNETCORE_FORWARDEDHEADERS_ENABLED=true,
     ///     and enable IIS integration.
@@ -330,7 +344,8 @@ public static class WebHost
                     ForwardedHeadersOptionsSetup
                 >();
 
-                // Provide a way for the default host builder to configure routing. This probably means calling AddRouting.
+                // Provide a way for the default host builder to configure routing. This probably means calling
+                // AddRouting.
                 // A lambda is used here because we don't want to reference AddRouting directly because of trimming.
                 // This avoids the overhead of calling AddRoutingCore multiple times on app startup.
                 if (configureRouting == null)
@@ -346,20 +361,26 @@ public static class WebHost
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="WebHostBuilder"/> class with pre-configured defaults using typed Startup.
+    /// Initializes a new instance of the <see cref="WebHostBuilder"/> class with pre-configured
+    // defaults using typed Startup.
     /// </summary>
     /// <remarks>
     ///   The following defaults are applied to the returned <see cref="WebHostBuilder"/>:
-    ///     use Kestrel as the web server and configure it using the application's configuration providers,
-    ///     set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see cref="Directory.GetCurrentDirectory()"/>,
-    ///     load <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see cref="IHostEnvironment.EnvironmentName"/>].json',
-    ///     load <see cref="IConfiguration"/> from User Secrets when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
+    ///     use Kestrel as the web server and configure it using the application's configuration
+    // providers,
+    ///     set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see
+    // cref="Directory.GetCurrentDirectory()"/>,
+    ///     load <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see
+    // cref="IHostEnvironment.EnvironmentName"/>].json',
+    ///     load <see cref="IConfiguration"/> from User Secrets when <see
+    // cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly,
     ///     load <see cref="IConfiguration"/> from environment variables,
     ///     load <see cref="IConfiguration"/> from supplied command line args,
     ///     configure the <see cref="ILoggerFactory"/> to log to the console and debug output,
     ///     enable IIS integration.
     /// </remarks>
-    /// <typeparam name ="TStartup">The type containing the startup methods for the application.</typeparam>
+    /// <typeparam name ="TStartup">The type containing the startup methods for the
+    // application.</typeparam>
     /// <param name="args">The command line args.</param>
     /// <returns>The initialized <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder CreateDefaultBuilder<

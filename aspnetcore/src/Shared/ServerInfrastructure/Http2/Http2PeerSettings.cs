@@ -87,13 +87,15 @@ internal sealed class Http2PeerSettings
                 default:
                     // http://httpwg.org/specs/rfc7540.html#rfc.section.6.5.2
                     //
-                    // An endpoint that receives a SETTINGS frame with any unknown or unsupported identifier MUST ignore that setting.
+                    // An endpoint that receives a SETTINGS frame with any unknown or unsupported identifier MUST ignore
+                    // that setting.
                     break;
             }
         }
     }
 
-    // Gets the settings that are different from the protocol defaults (as opposed to the server defaults).
+    // Gets the settings that are different from the protocol defaults (as opposed to the server
+    // defaults).
     internal List<Http2PeerSetting> GetNonProtocolDefaults()
     {
         // By default, there are only two settings that are sent from server to client.

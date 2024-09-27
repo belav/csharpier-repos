@@ -178,6 +178,7 @@ namespace System.ServiceModel.Description
             return this.faultDescriptionBindings[faultBinding];
         }
 
+        //
         // --------------------------------------------------------------------------------------------------
 
         internal void AddOperationBinding(

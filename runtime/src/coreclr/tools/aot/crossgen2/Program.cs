@@ -179,7 +179,8 @@ namespace ILCompiler
             using (PerfEventSource.StartStopEvents.LoadingEvents())
             {
                 //
-                // TODO: To support our pre-compiled test tree, allow input files that aren't managed assemblies since
+                // TODO: To support our pre-compiled test tree, allow input files that aren't managed assemblies
+                // since
                 // some tests contain a mixture of both managed and native binaries.
                 //
                 // See: https://github.com/dotnet/corert/issues/2785
@@ -363,7 +364,8 @@ namespace ILCompiler
                     );
                 }
 
-                // In case of inputbubble ni.dll are created as ni.dll.tmp in order to not interfere with crossgen2, move them all to ni.dll
+                // In case of inputbubble ni.dll are created as ni.dll.tmp in order to not interfere with crossgen2,
+                // move them all to ni.dll
                 // See https://github.com/dotnet/runtime/issues/55663#issuecomment-898161751 for more details
                 if (_inputBubble)
                 {
@@ -728,8 +730,10 @@ namespace ILCompiler
                             }
                         }
                     }
-                    // In single-file compilation mode, use the assembly's DebuggableAttribute to determine whether to optimize
-                    // or produce debuggable code if an explicit optimization level was not specified on the command line
+                    // In single-file compilation mode, use the assembly's DebuggableAttribute to determine whether to
+                    // optimize
+                    // or produce debuggable code if an explicit optimization level was not specified on the command
+                    // line
                     OptimizationMode optimizationMode = _command.OptimizationMode;
                     if (
                         optimizationMode == OptimizationMode.None
@@ -1117,7 +1121,8 @@ namespace ILCompiler
             // publicKeySize bytes of public key data
             var publicKey = blobReader.ReadByte();
 
-            // The number of public key bytes must be the same as the size of the header plus the size of the public key data.
+            // The number of public key bytes must be the same as the size of the header plus the size of the
+            // public key data.
             if (blob.Length != s_publicKeyHeaderSize + publicKeySize)
             {
                 return false;

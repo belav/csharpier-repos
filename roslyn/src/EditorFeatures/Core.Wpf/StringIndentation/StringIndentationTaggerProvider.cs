@@ -27,7 +27,8 @@ using Microsoft.VisualStudio.Text.Tagging;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation;
 
 /// <summary>
-/// This factory is called to create taggers that provide information about how strings are indented.
+/// This factory is called to create taggers that provide information about how strings are
+// indented.
 /// </summary>
 [Export(typeof(IViewTaggerProvider))]
 [TagType(typeof(StringIndentationTag))]
@@ -72,7 +73,8 @@ internal sealed partial class StringIndentationTaggerProvider
     ///        ^ // here
     /// </code>
     ///
-    /// then the span of the tag will grow to the right and the line will immediately redraw in the correct position
+    /// then the span of the tag will grow to the right and the line will immediately redraw in the
+    // correct position
     /// while we're in the process of recomputing the up to date tags.
     /// </summary>
     protected override SpanTrackingMode SpanTrackingMode => SpanTrackingMode.EdgeInclusive;

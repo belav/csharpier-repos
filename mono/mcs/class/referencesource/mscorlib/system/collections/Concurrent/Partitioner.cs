@@ -29,19 +29,24 @@ namespace System.Collections.Concurrent
     /// Inheritors of <see cref="Partitioner{TSource}"/> must adhere to the following rules:
     /// <ol>
     /// <li><see cref="GetPartitions"/> should throw a
-    /// <see cref="T:System.ArgumentOutOfRangeException"/> if the requested partition count is less than or
+    /// <see cref="T:System.ArgumentOutOfRangeException"/> if the requested partition count is less than
+    // or
     /// equal to zero.</li>
-    /// <li><see cref="GetPartitions"/> should always return a number of enumerables equal to the requested
+    /// <li><see cref="GetPartitions"/> should always return a number of enumerables equal to the
+    // requested
     /// partition count. If the partitioner runs out of data and cannot create as many partitions as
-    /// requested, an empty enumerator should be returned for each of the remaining partitions. If this rule
+    /// requested, an empty enumerator should be returned for each of the remaining partitions. If this
+    // rule
     /// is not followed, consumers of the implementation may throw a <see
     /// cref="T:System.InvalidOperationException"/>.</li>
     /// <li><see cref="GetPartitions"/> and <see cref="GetDynamicPartitions"/>
     /// should never return null. If null is returned, a consumer of the implementation may throw a
     /// <see cref="T:System.InvalidOperationException"/>.</li>
     /// <li><see cref="GetPartitions"/> and <see cref="GetDynamicPartitions"/> should always return
-    /// partitions that can fully and uniquely enumerate the input data source. All of the data and only the
-    /// data contained in the input source should be enumerated, with no duplication that was not already in
+    /// partitions that can fully and uniquely enumerate the input data source. All of the data and only
+    // the
+    /// data contained in the input source should be enumerated, with no duplication that was not
+    // already in
     /// the input, unless specifically required by the particular partitioner's design. If this is not
     /// followed, the output ordering may be scrambled.</li>
     /// </ol>

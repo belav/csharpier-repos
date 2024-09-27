@@ -128,7 +128,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <seealso cref="EndCap"/>
         /// </summary>
         /// <value>
-        /// A <see cref="LineAnchorCapStyle"/> value used for a cap style used at the start of an annotation line.
+        /// A <see cref="LineAnchorCapStyle"/> value used for a cap style used at the start of an annotation
+        // line.
         /// </value>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -150,7 +151,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <seealso cref="StartCap"/>
         /// </summary>
         /// <value>
-        /// A <see cref="LineAnchorCapStyle"/> value used for a cap style used at the end of an annotation line.
+        /// A <see cref="LineAnchorCapStyle"/> value used for a cap style used at the end of an annotation
+        // line.
         /// </value>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -363,7 +365,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a flag that determines whether an annotation should be placed using the free-draw mode.
+        /// Gets or sets a flag that determines whether an annotation should be placed using the free-draw
+        // mode.
         /// </summary>
         /// <value>
         /// <b>True</b> if an annotation should be placed using free-draw mode,
@@ -1125,7 +1128,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -1253,7 +1257,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ChartHatchStyle"/> value used for the background of an annotation.
         /// </value>
         /// <remarks>
-        /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
+        /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see
+        // cref="BackSecondaryColor"/>.
         /// </remarks>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -1279,7 +1284,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="GradientStyle"/> value used for the background of an annotation.
         /// </value>
         /// <remarks>
-        /// Two colors are used to draw the gradient, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
+        /// Two colors are used to draw the gradient, <see cref="BackColor"/> and <see
+        // cref="BackSecondaryColor"/>.
         /// </remarks>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -1472,7 +1478,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -1492,7 +1499,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
     /// <summary>
     /// The <b>AnnotationPathPoint</b> class represents a path point of a polyline or polygon,
-    /// and is stored in their <b>GraphicsPathPoints</b> property, which is only available at design-time.
+    /// and is stored in their <b>GraphicsPathPoints</b> property, which is only available at
+    // design-time.
     /// </summary>
     /// <remarks>
     /// At run-time, use <b>Path</b> property to set the path of a polyline or polygon.

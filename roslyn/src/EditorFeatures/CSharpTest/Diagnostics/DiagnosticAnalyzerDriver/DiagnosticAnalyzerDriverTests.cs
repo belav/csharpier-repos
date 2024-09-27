@@ -670,7 +670,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             // Both NuGet and VSIX analyzer, verify the following:
             //   1) No duplicate diagnostics
             //   2) Both NuGet and Vsix analyzers execute
-            //   3) Appropriate diagnostic filtering is done - NuGet analyzer reported diagnostic IDs are filtered from Vsix analyzer execution.
+            //   3) Appropriate diagnostic filtering is done - NuGet analyzer reported diagnostic IDs are
+            // filtered from Vsix analyzer execution.
             await TestNuGetAndVsixAnalyzerCoreAsync(
                 nugetAnalyzer,
                 expectedNugetAnalyzerExecuted: true,
@@ -808,7 +809,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             // Subset of NuGet analyzers and Vsix analyzer, verify the following:
             //   1) No duplicate diagnostics
             //   2) Both NuGet and Vsix analyzers execute
-            //   3) Appropriate diagnostic filtering is done - NuGet analyzer reported diagnostic IDs are filtered from Vsix analyzer execution.
+            //   3) Appropriate diagnostic filtering is done - NuGet analyzer reported diagnostic IDs are
+            // filtered from Vsix analyzer execution.
             await TestNuGetAndVsixAnalyzerCoreAsync(
                 nugetAnalyzers: ImmutableArray.Create(firstNugetAnalyzer),
                 expectedNugetAnalyzersExecuted: true,
@@ -891,7 +893,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 }
             );
 
-            // All without overlap, the VSIX analyzer and suppressor still work when nuget analyzers are present:
+            // All without overlap, the VSIX analyzer and suppressor still work when nuget analyzers are
+            // present:
             //   1) No duplicate diagnostics
             //   2) All analyzers execute
             //   3) VSIX diagnostics are suppressed.

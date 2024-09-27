@@ -462,7 +462,8 @@ ILocalFunctionOperation (Symbol: void F(out System.Int32 y)) (OperationKind.Loca
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
                     .WithLocation(6, 40),
-                // file.cs(6,24): error CS0177: The out parameter 'y' must be assigned to before control leaves the current method
+                // file.cs(6,24): error CS0177: The out parameter 'y' must be assigned to before control leaves the
+                // current method
                 //         /*<bind>*/void F(out int y) => ;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ParamUnassigned, "F")
                     .WithArguments("y")
@@ -548,7 +549,8 @@ ILocalFunctionOperation (Symbol: X F()) (OperationKind.LocalFunction, Type: null
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "F")
                     .WithArguments("F()")
                     .WithLocation(6, 21),
-                // CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
+                // CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or
+                // an assembly reference?)
                 //         /*<bind>*/X F() { }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X")
                     .WithArguments("X")
@@ -594,7 +596,8 @@ ILocalFunctionOperation (Symbol: System.Object F()) (OperationKind.LocalFunction
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,49): error CS0127: Since 'C.M(int)' returns void, a return keyword must not be followed by an object expression
+                // file.cs(6,49): error CS0127: Since 'C.M(int)' returns void, a return keyword must not be followed
+                // by an object expression
                 //         /*<bind>*/object F() => new object(); { return new object(); }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_RetNoObjectRequired, "return")
                     .WithArguments("C.M(int)")
@@ -1054,7 +1057,8 @@ Block[B2] - Exit
                 // file.cs(7,44): error CS1002: ; expected
                 //         void local(bool result, bool input)
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(7, 44),
-                // file.cs(7,14): error CS8112: 'local(bool, bool)' is a local function and must therefore always have a body.
+                // file.cs(7,14): error CS8112: 'local(bool, bool)' is a local function and must therefore always
+                // have a body.
                 //         void local(bool result, bool input)
                 Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "local")
                     .WithArguments("local(bool, bool)")

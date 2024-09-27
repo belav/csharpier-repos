@@ -129,7 +129,8 @@ namespace System.Data.SqlClient
         {
             if (!CanRead)
             {
-                // This is checked in ReadAsync - but its a better for the user if it throw here instead of having to wait for EndRead
+                // This is checked in ReadAsync - but its a better for the user if it throw here instead of having
+                // to wait for EndRead
                 throw ADP.ObjectDisposed(this);
             }
 
@@ -304,7 +305,8 @@ namespace System.Data.SqlClient
                 }
                 catch (Exception ex)
                 {
-                    // In case of any errors, ensure that the completion is completed and the task is set back to null if we switched it
+                    // In case of any errors, ensure that the completion is completed and the task is set back to null
+                    // if we switched it
                     completion.TrySetException(ex);
                     Interlocked.CompareExchange(ref _currentTask, null, completion.Task);
                     throw;
@@ -386,7 +388,8 @@ namespace System.Data.SqlClient
             }
             catch (OverflowException)
             {
-                // If we've overflowed when adding offset and count, then they never would have fit into buffer anyway
+                // If we've overflowed when adding offset and count, then they never would have fit into buffer
+                // anyway
                 throw ExceptionBuilder.InvalidOffsetLength();
             }
         }

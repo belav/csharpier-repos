@@ -7,16 +7,21 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 /// <summary>
-///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" />
+// API
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
 public class SplitTableBuilder : IInfrastructure<EntityTypeBuilder>
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public SplitTableBuilder(
@@ -48,10 +53,14 @@ public class SplitTableBuilder : IInfrastructure<EntityTypeBuilder>
     public virtual string? Schema => MappingFragment.StoreObject.Schema;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual EntityTypeMappingFragment InternalMappingFragment { get; }
@@ -72,9 +81,11 @@ public class SplitTableBuilder : IInfrastructure<EntityTypeBuilder>
     ///     Configures the table to be ignored by migrations.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
-    /// <param name="excluded">A value indicating whether the table should be managed by migrations.</param>
+    /// <param name="excluded">A value indicating whether the table should be managed by
+    // migrations.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public virtual SplitTableBuilder ExcludeFromMigrations(bool excluded = true)
     {
@@ -89,7 +100,8 @@ public class SplitTableBuilder : IInfrastructure<EntityTypeBuilder>
     /// <param name="modelName">The name of the trigger.</param>
     /// <returns>A builder that can be used to configure the database trigger.</returns>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-triggers">Database triggers</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-triggers">Database triggers</see> for more
+    // information and examples.
     /// </remarks>
     public virtual TableTriggerBuilder HasTrigger(string modelName)
     {
@@ -120,12 +132,14 @@ public class SplitTableBuilder : IInfrastructure<EntityTypeBuilder>
         new(MappingFragment.StoreObject, EntityTypeBuilder.Property<TProperty>(propertyName));
 
     /// <summary>
-    ///     Adds or updates an annotation on the table. If an annotation with the key specified in <paramref name="annotation" />
+    ///     Adds or updates an annotation on the table. If an annotation with the key specified in
+    // <paramref name="annotation" />
     ///     already exists, its value will be updated.
     /// </summary>
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual SplitTableBuilder HasAnnotation(string annotation, object? value)
     {
         Check.NotEmpty(annotation, nameof(annotation));
@@ -154,7 +168,8 @@ public class SplitTableBuilder : IInfrastructure<EntityTypeBuilder>
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public override bool Equals(object? obj) => base.Equals(obj);
 

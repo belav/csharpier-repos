@@ -23,39 +23,40 @@ using System.Text.RegularExpressions;
 namespace System.Data.Common
 {
     /*
-        internal sealed class NamedConnectionStringConverter : StringConverter {
+    internal sealed class NamedConnectionStringConverter : StringConverter {
     
-            public NamedConnectionStringConverter() {
-            }
+    public NamedConnectionStringConverter() {
+    }
     
-            public override bool GetStandardValuesSupported(ITypeDescriptorContext context) {
-                return true;
-            }
+    public override bool GetStandardValuesSupported(ITypeDescriptorContext context) {
+    return true;
+    }
     
-            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) {
-                // Although theoretically this could be true, some people may want to just type in a name
-                return false;
-            }
+    public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) {
+    // Although theoretically this could be true, some people may want to just type in a name
+    return false;
+    }
     
-            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) {
-                StandardValuesCollection standardValues = null;
-                if (null != context) {
-                    DbConnectionStringBuilder instance = (context.Instance as DbConnectionStringBuilder);
-                    if (null != instance) {
-                        string myProviderName = instance.GetType().Namespace;
+    public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) {
+    StandardValuesCollection standardValues = null;
+    if (null != context) {
+    DbConnectionStringBuilder instance = (context.Instance as DbConnectionStringBuilder);
+    if (null != instance) {
+    string myProviderName = instance.GetType().Namespace;
     
-                        List<string> myConnectionNames = new List<string>();
-                        foreach(System.Configuration.ConnectionStringSetting setting in System.Configuration.ConfigurationManager.ConnectionStrings) {
-                            if (myProviderName.EndsWith(setting.ProviderName)) {
-                                myConnectionNames.Add(setting.ConnectionName);
-                            }
-                        }
-                        standardValues = new StandardValuesCollection(myConnectionNames);
-                    }
-                }
-                return standardValues;
-            }
-        }
+    List<string> myConnectionNames = new List<string>();
+    foreach(System.Configuration.ConnectionStringSetting setting in
+    System.Configuration.ConfigurationManager.ConnectionStrings) {
+    if (myProviderName.EndsWith(setting.ProviderName)) {
+    myConnectionNames.Add(setting.ConnectionName);
+    }
+    }
+    standardValues = new StandardValuesCollection(myConnectionNames);
+    }
+    }
+    return standardValues;
+    }
+    }
     */
 
     internal class DbConnectionStringBuilderDescriptor : PropertyDescriptor
@@ -74,7 +75,8 @@ namespace System.Data.Common
         )
             : base(propertyName, attributes)
         {
-            //Bid.Trace("<comm.DbConnectionStringBuilderDescriptor|INFO> propertyName='%ls', propertyType='%ls'\n", propertyName, propertyType.Name);
+            //Bid.Trace("<comm.DbConnectionStringBuilderDescriptor|INFO> propertyName='%ls',
+            // propertyType='%ls'\n", propertyName, propertyType.Name);
             _componentType = componentType;
             _propertyType = propertyType;
             _isReadOnly = isReadOnly;
@@ -456,12 +458,16 @@ namespace System.Data.Common
 
         /// <summary>
         /// This method attempts to convert the given value to a PoolBlockingPeriod enum. The algorithm is:
-        /// * if the value is from type string, it will be matched against PoolBlockingPeriod enum names only, using ordinal, case-insensitive comparer
+        /// * if the value is from type string, it will be matched against PoolBlockingPeriod enum names
+        // only, using ordinal, case-insensitive comparer
         /// * if the value is from type PoolBlockingPeriod, it will be used as is
-        /// * if the value is from integral type (SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, or UInt64), it will be converted to enum
-        /// * if the value is another enum or any other type, it will be blocked with an appropriate ArgumentException
+        /// * if the value is from integral type (SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, or
+        // UInt64), it will be converted to enum
+        /// * if the value is another enum or any other type, it will be blocked with an appropriate
+        // ArgumentException
         ///
-        /// in any case above, if the conerted value is out of valid range, the method raises ArgumentOutOfRangeException.
+        /// in any case above, if the conerted value is out of valid range, the method raises
+        // ArgumentOutOfRangeException.
         /// </summary>
         /// <returns>PoolBlockingPeriod value in the valid range</returns>
         internal static PoolBlockingPeriod ConvertToPoolBlockingPeriod(string keyword, object value)
@@ -511,7 +517,8 @@ namespace System.Data.Common
                 {
                     try
                     {
-                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing ArgumentException for the rest
+                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing
+                        // ArgumentException for the rest
                         eValue = (PoolBlockingPeriod)
                             Enum.ToObject(typeof(PoolBlockingPeriod), value);
                     }
@@ -593,12 +600,16 @@ namespace System.Data.Common
 
         /// <summary>
         /// This method attempts to convert the given value tp ApplicationIntent enum. The algorithm is:
-        /// * if the value is from type string, it will be matched against ApplicationIntent enum names only, using ordinal, case-insensitive comparer
+        /// * if the value is from type string, it will be matched against ApplicationIntent enum names
+        // only, using ordinal, case-insensitive comparer
         /// * if the value is from type ApplicationIntent, it will be used as is
-        /// * if the value is from integral type (SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, or UInt64), it will be converted to enum
-        /// * if the value is another enum or any other type, it will be blocked with an appropriate ArgumentException
+        /// * if the value is from integral type (SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, or
+        // UInt64), it will be converted to enum
+        /// * if the value is another enum or any other type, it will be blocked with an appropriate
+        // ArgumentException
         ///
-        /// in any case above, if the conerted value is out of valid range, the method raises ArgumentOutOfRangeException.
+        /// in any case above, if the conerted value is out of valid range, the method raises
+        // ArgumentOutOfRangeException.
         /// </summary>
         /// <returns>applicaiton intent value in the valid range</returns>
         internal static ApplicationIntent ConvertToApplicationIntent(string keyword, object value)
@@ -648,7 +659,8 @@ namespace System.Data.Common
                 {
                     try
                     {
-                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing ArgumentException for the rest
+                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing
+                        // ArgumentException for the rest
                         eValue = (ApplicationIntent)Enum.ToObject(typeof(ApplicationIntent), value);
                     }
                     catch (ArgumentException e)
@@ -888,7 +900,8 @@ namespace System.Data.Common
                 {
                     try
                     {
-                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing ArgumentException for the rest
+                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing
+                        // ArgumentException for the rest
                         eValue = (SqlAuthenticationMethod)
                             Enum.ToObject(typeof(SqlAuthenticationMethod), value);
                     }
@@ -976,7 +989,8 @@ namespace System.Data.Common
                 {
                     try
                     {
-                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing ArgumentException for the rest
+                        // Enum.ToObject allows only integral and enum values (enums are blocked above), rasing
+                        // ArgumentException for the rest
                         eValue = (SqlConnectionColumnEncryptionSetting)
                             Enum.ToObject(typeof(SqlConnectionColumnEncryptionSetting), value);
                     }

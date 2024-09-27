@@ -25,8 +25,10 @@ namespace System.Net.Http.Tests
         {
             CheckValidParsedValue("X product ", 1, new ProductInfoHeaderValue("product", null), 10);
 
-            // Note that the following is considered valid, since we have a valid product and after the ',' delimiter
-            // we have non-whitespace characters. It's the callers responsibility to consider the whole string invalid.
+            // Note that the following is considered valid, since we have a valid product and after the ','
+            // delimiter
+            // we have non-whitespace characters. It's the callers responsibility to consider the whole string
+            // invalid.
             CheckValidParsedValue("p/1.0 =", 0, new ProductInfoHeaderValue("p", "1.0"), 6);
 
             CheckValidParsedValue(" (comment)   p", 0, new ProductInfoHeaderValue("(comment)"), 13);
@@ -69,7 +71,8 @@ namespace System.Net.Http.Tests
                 12
             );
 
-            // "User-Agent" and "Server" don't allow empty values (unlike most other headers supporting lists of values)
+            // "User-Agent" and "Server" don't allow empty values (unlike most other headers supporting lists of
+            // values)
             CheckInvalidParsedValue(null, 0);
             CheckInvalidParsedValue(string.Empty, 0);
             CheckInvalidParsedValue("  ", 0);

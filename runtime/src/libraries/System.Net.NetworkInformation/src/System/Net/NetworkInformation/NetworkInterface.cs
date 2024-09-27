@@ -123,7 +123,8 @@ namespace System.Net.NetworkInformation
         }
 
         /// <summary>
-        /// Gets a bool value that indicates whether the network interface is set to only receive data packets.
+        /// Gets a bool value that indicates whether the network interface is set to only receive data
+        // packets.
         /// </summary>
         public virtual bool IsReceiveOnly
         {
@@ -134,7 +135,8 @@ namespace System.Net.NetworkInformation
         }
 
         /// <summary>
-        /// Gets a bool value that indicates whether this network interface is enabled to receive multicast packets.
+        /// Gets a bool value that indicates whether this network interface is enabled to receive multicast
+        // packets.
         /// </summary>
         public virtual bool SupportsMulticast
         {

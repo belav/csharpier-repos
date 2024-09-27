@@ -224,7 +224,8 @@ namespace Microsoft.CodeAnalysis
         /// <typeparam name="TResult">Type of the transformed array items</typeparam>
         /// <param name="array">The array to transform</param>
         /// <param name="predicate">The condition to use for filtering the array content.</param>
-        /// <param name="selector">A transform function to apply to each element that is not filtered out by <paramref name="predicate"/>.</param>
+        /// <param name="selector">A transform function to apply to each element that is not filtered out by
+        // <paramref name="predicate"/>.</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
         public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(
             this ImmutableArray<TItem> array,
@@ -257,8 +258,10 @@ namespace Microsoft.CodeAnalysis
         /// <typeparam name="TArg">Type of the extra argument</typeparam>
         /// <param name="array">The array to transform</param>
         /// <param name="predicate">The condition to use for filtering the array content.</param>
-        /// <param name="selector">A transform function to apply to each element that is not filtered out by <paramref name="predicate"/>.</param>
-        /// <param name="arg">The extra input used by <paramref name="predicate"/> and <paramref name="selector"/>.</param>
+        /// <param name="selector">A transform function to apply to each element that is not filtered out by
+        // <paramref name="predicate"/>.</param>
+        /// <param name="arg">The extra input used by <paramref name="predicate"/> and <paramref
+        // name="selector"/>.</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
         public static ImmutableArray<TResult> SelectAsArray<TItem, TArg, TResult>(
             this ImmutableArray<TItem> array,
@@ -314,7 +317,8 @@ namespace Microsoft.CodeAnalysis
         /// <typeparam name="TResult">Type of the transformed array items</typeparam>
         /// <param name="array">The array to transform</param>
         /// <param name="predicate">The condition to use for filtering the array content.</param>
-        /// <param name="selector">A transform function to apply to each element that is not filtered out by <paramref name="predicate"/>.</param>
+        /// <param name="selector">A transform function to apply to each element that is not filtered out by
+        // <paramref name="predicate"/>.</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
         public static ImmutableArray<TResult> SelectManyAsArray<TItem, TResult>(
             this ImmutableArray<TItem> array,
@@ -340,7 +344,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Maps an immutable array through a function that returns ValueTasks, returning the new ImmutableArray.
+        /// Maps an immutable array through a function that returns ValueTasks, returning the new
+        // ImmutableArray.
         /// </summary>
         public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TResult>(
             this ImmutableArray<TItem> array,
@@ -359,7 +364,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Maps an immutable array through a function that returns ValueTasks, returning the new ImmutableArray.
+        /// Maps an immutable array through a function that returns ValueTasks, returning the new
+        // ImmutableArray.
         /// </summary>
         public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<
             TItem,
@@ -421,7 +427,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Zips two immutable arrays together through a mapping function, producing another immutable array.
+        /// Zips two immutable arrays together through a mapping function, producing another immutable
+        // array.
         /// </summary>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
         public static ImmutableArray<TResult> ZipAsArray<T1, T2, TResult>(
@@ -490,20 +497,24 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new immutable array based on filtered elements by the predicate. The array must not be null.
+        /// Creates a new immutable array based on filtered elements by the predicate. The array must not be
+        // null.
         /// </summary>
         /// <param name="array">The array to process</param>
-        /// <param name="predicate">The delegate that defines the conditions of the element to search for.</param>
+        /// <param name="predicate">The delegate that defines the conditions of the element to search
+        // for.</param>
         public static ImmutableArray<T> WhereAsArray<T>(
             this ImmutableArray<T> array,
             Func<T, bool> predicate
         ) => WhereAsArrayImpl<T, object?>(array, predicate, predicateWithArg: null, arg: null);
 
         /// <summary>
-        /// Creates a new immutable array based on filtered elements by the predicate. The array must not be null.
+        /// Creates a new immutable array based on filtered elements by the predicate. The array must not be
+        // null.
         /// </summary>
         /// <param name="array">The array to process</param>
-        /// <param name="predicate">The delegate that defines the conditions of the element to search for.</param>
+        /// <param name="predicate">The delegate that defines the conditions of the element to search
+        // for.</param>
         public static ImmutableArray<T> WhereAsArray<T, TArg>(
             this ImmutableArray<T> array,
             Func<T, TArg, bool> predicate,
@@ -761,7 +772,8 @@ namespace Microsoft.CodeAnalysis
             var set1 = new HashSet<T>(array1, comparer);
             var set2 = new HashSet<T>(array2, comparer);
 
-            // internally recognizes that set2 is a HashSet with the same comparer (http://msdn.microsoft.com/en-us/library/bb346516.aspx)
+            // internally recognizes that set2 is a HashSet with the same comparer
+            // (http://msdn.microsoft.com/en-us/library/bb346516.aspx)
             return set1.SetEquals(set2);
         }
 
@@ -774,7 +786,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns an empty array if the input nullable value type is null or the underlying array is null (default)
+        /// Returns an empty array if the input nullable value type is null or the underlying array is null
+        // (default)
         /// </summary>
         public static ImmutableArray<T> NullToEmpty<T>(this ImmutableArray<T>? array) =>
             array switch
@@ -785,7 +798,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Returns an array of distinct elements, preserving the order in the original array.
-        /// If the array has no duplicates, the original array is returned. The original array must not be null.
+        /// If the array has no duplicates, the original array is returned. The original array must not be
+        // null.
         /// </summary>
         public static ImmutableArray<T> Distinct<T>(
             this ImmutableArray<T> array,
@@ -1150,8 +1164,10 @@ namespace Microsoft.CodeAnalysis
             {
                 Debug.Assert(members.Length > 0);
 
-                // See if creator 'map' put a downcasted ImmutableArray<TNamedTypeSymbol> in it.  If so, we can just directly
-                // downcast to that and trivially reuse it.  If not, that means the array must have contained at least one
+                // See if creator 'map' put a downcasted ImmutableArray<TNamedTypeSymbol> in it.  If so, we can just
+                // directly
+                // downcast to that and trivially reuse it.  If not, that means the array must have contained at
+                // least one
                 // TNamespaceSymbol and we'll need to filter that out.
                 var membersAsNamedTypes = members.As<TNamedTypeSymbol>();
 
@@ -1161,7 +1177,8 @@ namespace Microsoft.CodeAnalysis
                 // Preallocate the right amount so we can avoid garbage reallocs.
                 var count = members.Count(static s => s is TNamedTypeSymbol);
 
-                // Must have less items than in the original array.  Otherwise, the .As<TNamedTypeSymbol>() cast would
+                // Must have less items than in the original array.  Otherwise, the .As<TNamedTypeSymbol>() cast
+                // would
                 // have succeeded.
                 Debug.Assert(count < members.Length);
 
@@ -1239,7 +1256,8 @@ namespace Microsoft.CodeAnalysis
             return true;
         }
 
-        // same as Array.BinarySearch but the ability to pass arbitrary value to the comparer without allocation
+        // same as Array.BinarySearch but the ability to pass arbitrary value to the comparer without
+        // allocation
         internal static int BinarySearch<TElement, TValue>(
             this ImmutableArray<TElement> array,
             TValue value,

@@ -96,26 +96,35 @@ namespace System.ServiceModel.Channels
             XmlByteStreamReader reader;
 
             /// <summary>
-            /// If set to true, OnGetReaderAtBodyContents() calls MoveToContent() on the reader before returning it.
-            /// If set to false, the reader is positioned on None, just before the root element of the body message.
+            /// If set to true, OnGetReaderAtBodyContents() calls MoveToContent() on the reader before returning
+            // it.
+            /// If set to false, the reader is positioned on None, just before the root element of the body
+            // message.
             /// </summary>
             /// <remarks>
-            /// We use this flag to preserve compatibility between .net 4.0 (or previous) and .net 4.5 (or later).
+            /// We use this flag to preserve compatibility between .net 4.0 (or previous) and .net 4.5 (or
+            // later).
             ///
             /// In .net 4.0:
             /// - WebMessageEncodingBindingElement uses a raw encoder, different than ByteStreamMessageEncoder.
             /// - ByteStreamMessageEncodingBindingElement uses the ByteStreamMessageEncoder.
-            /// - When the WebMessageEncodingBindingElement is used, the Message.GetReaderAtBodyContents() method returns
-            ///   an XmlDictionaryReader positioned initially on content (the root element of the xml); that's because MoveToContent() is called
+            /// - When the WebMessageEncodingBindingElement is used, the Message.GetReaderAtBodyContents()
+            // method returns
+            ///   an XmlDictionaryReader positioned initially on content (the root element of the xml); that's
+            // because MoveToContent() is called
             ///   on the reader before it's returned.
-            /// - When the ByteStreamMessageEncodingBindingElement is used, the Message.GetReaderAtBodyContents() method returns an
+            /// - When the ByteStreamMessageEncodingBindingElement is used, the
+            // Message.GetReaderAtBodyContents() method returns an
             ///   XmlDictionaryReader positioned initially on None (just before the root element).
             ///
             /// In .net 4.5:
-            /// - Both WebMessageEncodingBindingElement and ByteStreamMessageEncodingBindingElement use the ByteStreamMessageEncoder.
-            /// - So we need the ByteStreamMessageEncoder to call MoveToContent() when used by WebMessageEncodingBindingElement, and not do so
+            /// - Both WebMessageEncodingBindingElement and ByteStreamMessageEncodingBindingElement use the
+            // ByteStreamMessageEncoder.
+            /// - So we need the ByteStreamMessageEncoder to call MoveToContent() when used by
+            // WebMessageEncodingBindingElement, and not do so
             ///   when used by the ByteStreamMessageEncodingBindingElement.
-            /// - Preserving the compatibility with 4.0 is important especially because 4.5 is an in-place upgrade of 4.0.
+            /// - Preserving the compatibility with 4.0 is important especially because 4.5 is an in-place
+            // upgrade of 4.0.
             ///
             /// See 252277 @ CSDMain for other info.
             /// </remarks>
@@ -558,7 +567,8 @@ namespace System.ServiceModel.Channels
                     return new HttpResponseMessageStreamedBodyWriter(httpResponseMessage);
                 }
 
-                // OnCreateBufferedCopy / OnWriteBodyContents can only be called once - protected by state on Message (either copied or written once)
+                // OnCreateBufferedCopy / OnWriteBodyContents can only be called once - protected by state on
+                // Message (either copied or written once)
                 protected override BodyWriter OnCreateBufferedCopy(int maxBufferSize)
                 {
                     using (
@@ -588,7 +598,8 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                // OnCreateBufferedCopy / OnWriteBodyContents can only be called once - protected by state on Message (either copied or written once)
+                // OnCreateBufferedCopy / OnWriteBodyContents can only be called once - protected by state on
+                // Message (either copied or written once)
                 protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
                 {
                     writer.WriteStartElement(
@@ -663,7 +674,8 @@ namespace System.ServiceModel.Channels
                             .AsAsyncResult(PrepareAsyncCompletion(HandleWriteBodyContents), this);
                         bool completeSelf = SyncContinue(result);
 
-                        // Note:  The current task implementation hard codes the "IAsyncResult.CompletedSynchronously" property to false, so this fast path will never
+                        // Note:  The current task implementation hard codes the "IAsyncResult.CompletedSynchronously"
+                        // property to false, so this fast path will never
                         // be hit, and we will always hop threads.  CSDMain #210220
                         if (completeSelf)
                         {
@@ -673,7 +685,8 @@ namespace System.ServiceModel.Channels
 
                     static bool HandleWriteBodyContents(IAsyncResult result)
                     {
-                        // If result is a task, we need to get the result so that exceptions are bubbled up in case the task is faulted.
+                        // If result is a task, we need to get the result so that exceptions are bubbled up in case the task
+                        // is faulted.
                         Task t = result as Task;
                         if (t != null)
                         {

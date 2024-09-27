@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             // values.
             try
             {
-                // Pass in `throwOnSqlException: false` so we get the exception bubbled back to us as a result value.
+                // Pass in `throwOnSqlException: false` so we get the exception bubbled back to us as a result
+                // value.
                 var (result, exception) = connection.RunInTransaction(
                     static t =>
                         t.self.InsertStringIntoDatabase_MustRunInTransaction(t.connection, t.value),

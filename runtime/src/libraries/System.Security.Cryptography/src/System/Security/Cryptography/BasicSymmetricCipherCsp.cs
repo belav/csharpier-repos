@@ -137,7 +137,8 @@ namespace System.Security.Cryptography
                 keyBlob,
                 out safeKeyHandle
             );
-            // Note if plain text import fails, .NET Framework falls back to "ExponentOfOneImport" which is not handled here
+            // Note if plain text import fails, .NET Framework falls back to "ExponentOfOneImport" which is not
+            // handled here
             return safeKeyHandle;
         }
 

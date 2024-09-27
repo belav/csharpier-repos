@@ -592,18 +592,18 @@ namespace System.Web
         // Do not use directly. Use memcpy.
         static unsafe void memcpy4(byte* dest, byte* src, int size)
         {
-            /*while (size >= 32) {
-                // using long is better than int and slower than double
-                // FIXME: enable this only on correct alignment or on platforms
-                // that can tolerate unaligned reads/writes of doubles
-                ((double*)dest) [0] = ((double*)src) [0];
-                ((double*)dest) [1] = ((double*)src) [1];
-                ((double*)dest) [2] = ((double*)src) [2];
-                ((double*)dest) [3] = ((double*)src) [3];
-                dest += 32;
-                src += 32;
-                size -= 32;
-            }*/
+/*while (size >= 32) {
+// using long is better than int and slower than double
+// FIXME: enable this only on correct alignment or on platforms
+// that can tolerate unaligned reads/writes of doubles
+((double*)dest) [0] = ((double*)src) [0];
+((double*)dest) [1] = ((double*)src) [1];
+((double*)dest) [2] = ((double*)src) [2];
+((double*)dest) [3] = ((double*)src) [3];
+dest += 32;
+src += 32;
+size -= 32;
+}*/
             while (size >= 16)
             {
                 ((int*)dest)[0] = ((int*)src)[0];

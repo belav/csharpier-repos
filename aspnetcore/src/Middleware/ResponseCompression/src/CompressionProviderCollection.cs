@@ -7,7 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.AspNetCore.ResponseCompression;
 
 /// <summary>
-/// A Collection of ICompressionProvider's that also allows them to be instantiated from an <see cref="IServiceProvider" />.
+/// A Collection of ICompressionProvider's that also allows them to be instantiated from an <see
+// cref="IServiceProvider" />.
 /// </summary>
 public class CompressionProviderCollection : Collection<ICompressionProvider>
 {

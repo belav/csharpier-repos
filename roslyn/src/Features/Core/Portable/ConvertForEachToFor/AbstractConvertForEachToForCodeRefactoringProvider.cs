@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         /// <summary>
         /// Perform language specific checks if the conversion is supported.
         /// C#: Currently nothing blocking a conversion
-        /// VB: Nested foreach loops sharing a single Next statement, Next statements with multiple variables and next statements
+        /// VB: Nested foreach loops sharing a single Next statement, Next statements with multiple
+        // variables and next statements
         /// not using the loop variable are not supported.
         /// </summary>
         protected abstract bool IsSupported(
@@ -164,7 +165,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 return;
             }
 
-            // TODO: refactor introduce variable refactoring to real service and use that service here to introduce local variable
+            // TODO: refactor introduce variable refactoring to real service and use that service here to
+            // introduce local variable
             var generator = editor.Generator;
 
             // attach rename annotation to control variable

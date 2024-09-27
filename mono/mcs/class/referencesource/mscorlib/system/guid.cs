@@ -192,7 +192,8 @@ namespace System
             FormatWithInnerException = 5,
         }
 
-        // This will store the result of the parsing.  And it will eventually be used to construct a Guid instance.
+        // This will store the result of the parsing.  And it will eventually be used to construct a Guid
+        // instance.
         private struct GuidResult
         {
             internal Guid parsedGuid;
@@ -1056,7 +1057,8 @@ namespace System
         }
 
         //
-        // StringToShort, StringToInt, and StringToLong are wrappers around COMUtilNative integer parsing routines;
+        // StringToShort, StringToInt, and StringToLong are wrappers around COMUtilNative integer parsing
+        // routines;
         //<
 
         [System.Security.SecuritySafeCritical]

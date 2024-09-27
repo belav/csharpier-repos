@@ -30,7 +30,8 @@ namespace System.Xml.Schema
         //compiled information
         XmlSchemaContentType contentType;
 
-        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdSimpleType"]/*' />
+        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdSimpleType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -43,7 +44,8 @@ namespace System.Xml.Schema
             return DatatypeImplementation.GetSimpleTypeFromXsdType(qualifiedName);
         }
 
-        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdSimpleType"]/*' />
+        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdSimpleType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -52,7 +54,8 @@ namespace System.Xml.Schema
             return DatatypeImplementation.GetSimpleTypeFromTypeCode(typeCode);
         }
 
-        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdComplexType"]/*' />
+        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdComplexType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -65,7 +68,8 @@ namespace System.Xml.Schema
             return null;
         }
 
-        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdComplexType"]/*' />
+        /// <include file='doc\XmlSchemaType.uex' path='docs/doc[@for="XmlSchemaType.GetXsdComplexType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

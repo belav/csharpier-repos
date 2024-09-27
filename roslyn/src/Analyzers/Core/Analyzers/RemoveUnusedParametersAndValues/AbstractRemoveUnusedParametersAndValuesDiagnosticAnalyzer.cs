@@ -16,7 +16,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 {
-    // Map from different combinations of diagnostic properties to a properties map that gets added to each diagnostic instance.
+    // Map from different combinations of diagnostic properties to a properties map that gets added to
+    // each diagnostic instance.
     using PropertiesMap = ImmutableDictionary<
         (
             UnusedValuePreference preference,
@@ -33,9 +34,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
     ///        These should either be removed (redundant computation) or should be replaced
     ///        with explicit assignment to discard variable OR an unused local variable,
     ///        i.e. "_ = Computation();" or "var unused = Computation();"
-    ///        This diagnostic configuration is controlled by language specific code style option "UnusedValueExpressionStatement".
+    ///        This diagnostic configuration is controlled by language specific code style option
+    // "UnusedValueExpressionStatement".
     ///     2. Value assignments to locals/parameters that are never used on any control flow path,
-    ///        For example, value assigned to 'x' in first statement below is unused and will be flagged:
+    ///        For example, value assigned to 'x' in first statement below is unused and will be
+    // flagged:
     ///             x = Computation();
     ///             if (...)
     ///                 x = Computation2();
@@ -43,21 +46,31 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
     ///                 Computation3(out x);
     ///             ... = x;
     ///        Just as for case 1., these should either be removed (redundant computation) or
-    ///        should be replaced with explicit assignment to discard variable OR an unused local variable,
+    ///        should be replaced with explicit assignment to discard variable OR an unused local
+    // variable,
     ///        i.e. "_ = Computation();" or "var unused = Computation();"
-    ///        This diagnostic configuration is controlled by language specific code style option "UnusedValueAssignment".
+    ///        This diagnostic configuration is controlled by language specific code style option
+    // "UnusedValueAssignment".
     ///     3. Redundant parameters that fall into one of the following two categories:
     ///         a. Have no references in the executable code block(s) for its containing method symbol.
-    ///         b. Have one or more references but its initial value at start of code block is never used.
-    ///            For example, if 'x' in the example for case 2. above was a parameter symbol with RefKind.None
-    ///            and "x = Computation();" is the first statement in the method body, then its initial value
-    ///            is never used. Such a parameter should be removed and 'x' should be converted into a local.
-    ///        We provide additional information in the diagnostic message to clarify the above two categories
-    ///        and also detect and mention about potential breaking change if the containing method is a public API.
-    ///        Currently, we do not provide any code fix for removing unused parameters as it needs fixing the
+    ///         b. Have one or more references but its initial value at start of code block is never
+    // used.
+    ///            For example, if 'x' in the example for case 2. above was a parameter symbol with
+    // RefKind.None
+    ///            and "x = Computation();" is the first statement in the method body, then its initial
+    // value
+    ///            is never used. Such a parameter should be removed and 'x' should be converted into a
+    // local.
+    ///        We provide additional information in the diagnostic message to clarify the above two
+    // categories
+    ///        and also detect and mention about potential breaking change if the containing method is a
+    // public API.
+    ///        Currently, we do not provide any code fix for removing unused parameters as it needs
+    // fixing the
     ///        call sites and any automated fix can lead to subtle overload resolution differences,
     ///        though this may change in future.
-    ///        This diagnostic configuration is controlled by <see cref="CodeStyleOptions2.UnusedParameters"/> option.
+    ///        This diagnostic configuration is controlled by <see
+    // cref="CodeStyleOptions2.UnusedParameters"/> option.
     /// </summary>
     internal abstract partial class AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer
         : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
@@ -68,8 +81,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         private const string IsUnusedLocalAssignmentKey = nameof(IsUnusedLocalAssignmentKey);
         private const string IsRemovableAssignmentKey = nameof(IsRemovableAssignmentKey);
 
-        // Diagnostic reported for expression statements that drop computed value, for example, "Computation();".
-        // This is **not** an unnecessary (fading) diagnostic as the expression being flagged is not unnecessary, but the dropped value is.
+        // Diagnostic reported for expression statements that drop computed value, for example,
+        // "Computation();".
+        // This is **not** an unnecessary (fading) diagnostic as the expression being flagged is not
+        // unnecessary, but the dropped value is.
         private static readonly DiagnosticDescriptor s_expressionValueIsUnusedRule =
             CreateDescriptorWithId(
                 IDEDiagnosticIds.ExpressionValueIsUnusedDiagnosticId,
@@ -88,7 +103,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 isUnnecessary: false
             );
 
-        // Diagnostic reported for value assignments to locals/parameters that are never used on any control flow path.
+        // Diagnostic reported for value assignments to locals/parameters that are never used on any control
+        // flow path.
         private static readonly DiagnosticDescriptor s_valueAssignedIsUnusedRule =
             CreateDescriptorWithId(
                 IDEDiagnosticIds.ValueAssignedIsUnusedDiagnosticId,
@@ -177,7 +193,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         ) => false;
 
         /// <summary>
-        /// Indicates if the given expression statement operation has an explicit "Call" statement syntax indicating explicit discard.
+        /// Indicates if the given expression statement operation has an explicit "Call" statement syntax
+        // indicating explicit discard.
         /// For example, VB "Call" statement.
         /// </summary>
         /// <returns></returns>
@@ -191,15 +208,21 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         );
 
         /// <summary>
-        /// Method to compute well-known diagnostic property maps for different combinations of diagnostic properties.
-        /// The property map is added to each instance of the reported diagnostic and is used by the code fixer to
+        /// Method to compute well-known diagnostic property maps for different combinations of diagnostic
+        // properties.
+        /// The property map is added to each instance of the reported diagnostic and is used by the code
+        // fixer to
         /// compute the correct code fix.
         /// It currently maps to three different properties of the diagnostic:
         ///     1. The underlying <see cref="UnusedValuePreference"/> for the reported diagnostic
-        ///     2. "isUnusedLocalAssignment": Flag indicating if the flagged local variable has no reads/uses.
-        ///     3. "isRemovableAssignment": Flag indicating if the assigned value is from an expression that has no side effects
-        ///             and hence can be removed completely. For example, if the assigned value is a constant or a reference
-        ///             to a local/parameter, then it has no side effects, but if it is method invocation, it may have side effects.
+        ///     2. "isUnusedLocalAssignment": Flag indicating if the flagged local variable has no
+        // reads/uses.
+        ///     3. "isRemovableAssignment": Flag indicating if the assigned value is from an expression that
+        // has no side effects
+        ///             and hence can be removed completely. For example, if the assigned value is a
+        // constant or a reference
+        ///             to a local/parameter, then it has no side effects, but if it is method invocation,
+        // it may have side effects.
         /// </summary>
         /// <returns></returns>
         private static PropertiesMap CreatePropertiesMap()
@@ -254,7 +277,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             }
         }
 
-        // Our analysis is limited to unused expressions in a code block, hence is unaffected by changes outside the code block.
+        // Our analysis is limited to unused expressions in a code block, hence is unaffected by changes
+        // outside the code block.
         // Hence, we can support incremental span based method body analysis.
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
@@ -329,7 +353,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     return (default(UnusedValuePreference), NotificationOption2.None);
                 }
 
-                // If language or language version does not support discard, fall back to prefer unused local variable.
+                // If language or language version does not support discard, fall back to prefer unused local
+                // variable.
                 if (
                     preferenceOpt.Value == UnusedValuePreference.DiscardVariable
                     && !SupportsDiscard(syntaxTree)

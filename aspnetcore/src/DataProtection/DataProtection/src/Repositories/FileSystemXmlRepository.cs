@@ -50,7 +50,8 @@ public class FileSystemXmlRepository : IXmlRepository
 
     /// <summary>
     /// The default key storage directory.
-    /// On Windows, this currently corresponds to "Environment.SpecialFolder.LocalApplication/ASP.NET/DataProtection-Keys".
+    /// On Windows, this currently corresponds to
+    // "Environment.SpecialFolder.LocalApplication/ASP.NET/DataProtection-Keys".
     /// On Linux and macOS, this currently corresponds to "$HOME/.aspnet/DataProtection-Keys".
     /// </summary>
     /// <remarks>
@@ -144,7 +145,8 @@ public class FileSystemXmlRepository : IXmlRepository
         var tempFilename = Path.Combine(Directory.FullName, Guid.NewGuid().ToString() + ".tmp");
         var finalFilename = Path.Combine(Directory.FullName, filename + ".xml");
 
-        // Create a temp file with the correct Unix file mode before moving it to the expected finalFilename.
+        // Create a temp file with the correct Unix file mode before moving it to the expected
+        // finalFilename.
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             var tempTempFilename = Path.GetTempFileName();

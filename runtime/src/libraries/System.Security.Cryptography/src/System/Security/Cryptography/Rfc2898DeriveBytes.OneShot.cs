@@ -162,7 +162,8 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         /// The <paramref name="password" /> will be converted to bytes using the UTF-8 encoding. For
-        /// other encodings, convert the password string to bytes using the appropriate <see cref="System.Text.Encoding" />
+        /// other encodings, convert the password string to bytes using the appropriate <see
+        // cref="System.Text.Encoding" />
         /// and use <see cref="Pbkdf2(byte[], byte[], int, HashAlgorithmName, int)" />.
         /// </remarks>
         public static byte[] Pbkdf2(
@@ -212,8 +213,10 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         /// The <paramref name="password" /> will be converted to bytes using the UTF-8 encoding. For
-        /// other encodings, convert the password string to bytes using the appropriate <see cref="System.Text.Encoding" />
-        /// and use <see cref="Pbkdf2(ReadOnlySpan{byte}, ReadOnlySpan{byte}, int, HashAlgorithmName, int)" />.
+        /// other encodings, convert the password string to bytes using the appropriate <see
+        // cref="System.Text.Encoding" />
+        /// and use <see cref="Pbkdf2(ReadOnlySpan{byte}, ReadOnlySpan{byte}, int, HashAlgorithmName, int)"
+        // />.
         /// </remarks>
         public static byte[] Pbkdf2(
             ReadOnlySpan<char> password,
@@ -258,8 +261,10 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         /// The <paramref name="password" /> will be converted to bytes using the UTF-8 encoding. For
-        /// other encodings, convert the password string to bytes using the appropriate <see cref="System.Text.Encoding" />
-        /// and use <see cref="Pbkdf2(ReadOnlySpan{byte}, ReadOnlySpan{byte}, Span{byte}, int, HashAlgorithmName)" />.
+        /// other encodings, convert the password string to bytes using the appropriate <see
+        // cref="System.Text.Encoding" />
+        /// and use <see cref="Pbkdf2(ReadOnlySpan{byte}, ReadOnlySpan{byte}, Span{byte}, int,
+        // HashAlgorithmName)" />.
         /// </remarks>
         public static void Pbkdf2(
             ReadOnlySpan<char> password,

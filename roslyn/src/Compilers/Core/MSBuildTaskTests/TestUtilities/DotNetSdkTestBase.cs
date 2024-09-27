@@ -105,7 +105,8 @@ public class TestClass
             ArtifactUploadUtil? uploadUtil
         )
         {
-            // Common.props automatically import {project-name}.*.props files from MSBuildProjectExtensionsPath directory,
+            // Common.props automatically import {project-name}.*.props files from MSBuildProjectExtensionsPath
+            // directory,
             // which is by default set to the IntermediateOutputPath:
             var filePath = Path.Combine(objDirectory, projectFileName + ".TestHelpers.g.props");
             File.WriteAllText(
@@ -126,7 +127,8 @@ public class TestClass
             ArtifactUploadUtil? uploadUtil
         )
         {
-            // Common.targets automatically import {project-name}.*.targets files from MSBuildProjectExtensionsPath directory,
+            // Common.targets automatically import {project-name}.*.targets files from
+            // MSBuildProjectExtensionsPath directory,
             // which is by defautl set to the IntermediateOutputPath:
             var filePath = Path.Combine(objDirectory, projectFileName + ".TestHelpers.g.targets");
             File.WriteAllText(
@@ -279,8 +281,10 @@ public class TestClass
             var testBinDirectory = Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location);
 
             // RoslynTargetsPath is a path to the built-in Roslyn compilers in the .NET SDK.
-            // For testing we are using compilers from custom location (this emulates usage of Microsoft.Net.Compilers package.
-            // The core targets should be imported from CSharpCoreTargetsPath and VisualBasicCoreTargetsPath and the compiler tasks from the same location.
+            // For testing we are using compilers from custom location (this emulates usage of
+            // Microsoft.Net.Compilers package.
+            // The core targets should be imported from CSharpCoreTargetsPath and VisualBasicCoreTargetsPath and
+            // the compiler tasks from the same location.
             RunMSBuild(
                 Project.Path,
                 arguments: $@"/t:{targetsArg} /p:RoslynTargetsPath=""<nonexistent directory>"" /p:Configuration={Configuration}",

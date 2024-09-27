@@ -304,8 +304,10 @@ namespace System.Net
                 SetAutoProxyUrl(autoConfigUrlString);
             }
 
-            // The final straw against attempting to use the WinInet LKG script location was, it's invalid when IPs have changed even if the
-            // connectoid hadn't.  Doing that validation didn't seem worth it (error-prone, expensive, unsupported).
+            // The final straw against attempting to use the WinInet LKG script location was, it's invalid when
+            // IPs have changed even if the
+            // connectoid hadn't.  Doing that validation didn't seem worth it (error-prone, expensive,
+            // unsupported).
 #if USE_WINIET_AUTODETECT_CACHE
             proxyIE5Settings.ReadInt32(); // autodetect flags (ignored)
 
@@ -353,21 +355,21 @@ namespace System.Net
                 //
             }
 #endif
-            /*
-            // This is some of the rest of the proxy reg key blob parsing.
-            //
-            // Read Inte---- IPs
-            int iftCount = proxyIE5Settings.ReadInt32();
-            for (int ift = 0; ift < iftCount; ++ift) {
-                proxyIE5Settings.ReadInt32();
-            }
+/*
+// This is some of the rest of the proxy reg key blob parsing.
+//
+// Read Inte---- IPs
+int iftCount = proxyIE5Settings.ReadInt32();
+for (int ift = 0; ift < iftCount; ++ift) {
+proxyIE5Settings.ReadInt32();
+}
 
-            // Read lpszAutoconfigSecondaryUrl
-            string autoconfigSecondaryUrl = proxyIE5Settings.ReadString();
+// Read lpszAutoconfigSecondaryUrl
+string autoconfigSecondaryUrl = proxyIE5Settings.ReadString();
 
-            // Read dwAutoconfigReloadDelayMins
-            int autoconfigReloadDelayMins = proxyIE5Settings.ReadInt32();
-            */
+// Read dwAutoconfigReloadDelayMins
+int autoconfigReloadDelayMins = proxyIE5Settings.ReadInt32();
+*/
 #endif
             GlobalLog.Leave(
                 "RegBlobWebProxyDataBuilder#"

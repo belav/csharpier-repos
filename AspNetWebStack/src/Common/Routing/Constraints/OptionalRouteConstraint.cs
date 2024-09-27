@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 #if ASPNETWEBAPI
@@ -15,7 +16,8 @@ namespace System.Web.Mvc.Routing.Constraints
 #endif
 {
     /// <summary>
-    /// Constrains a route by an inner constraint that doesn't fail when an optional parameter is set to its default value.
+    /// Constrains a route by an inner constraint that doesn't fail when an optional parameter is set to
+    // its default value.
     /// </summary>
 #if ASPNETWEBAPI
     public class OptionalRouteConstraint : IHttpRouteConstraint
@@ -26,7 +28,8 @@ namespace System.Web.Mvc.Routing.Constraints
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionalRouteConstraint" /> class.
         /// </summary>
-        /// <param name="innerConstraint">The inner constraint to match if the parameter is not an optional parameter without a value</param>
+        /// <param name="innerConstraint">The inner constraint to match if the parameter is not an optional
+        // parameter without a value</param>
 #if ASPNETWEBAPI
         public OptionalRouteConstraint(IHttpRouteConstraint innerConstraint)
 #else
@@ -42,7 +45,8 @@ namespace System.Web.Mvc.Routing.Constraints
         }
 
         /// <summary>
-        /// Gets the inner constraint to match if the parameter is not an optional parameter without a value.
+        /// Gets the inner constraint to match if the parameter is not an optional parameter without a
+        // value.
         /// </summary>
 #if ASPNETWEBAPI
         public IHttpRouteConstraint InnerConstraint { get; private set; }

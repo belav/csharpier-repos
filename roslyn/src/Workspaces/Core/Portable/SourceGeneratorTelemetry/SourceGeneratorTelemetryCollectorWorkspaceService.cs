@@ -41,8 +41,10 @@ internal sealed class SourceGeneratorTelemetryCollectorWorkspaceService
     }
 
     /// <summary>
-    /// Cache of the <see cref="GeneratorTelemetryKey"/> for a generator to avoid repeatedly reading version information from disk;
-    /// this is a ConditionalWeakTable so having telemetry for older runs doesn't keep the generator itself alive.
+    /// Cache of the <see cref="GeneratorTelemetryKey"/> for a generator to avoid repeatedly reading
+    // version information from disk;
+    /// this is a ConditionalWeakTable so having telemetry for older runs doesn't keep the generator
+    // itself alive.
     /// </summary>
     private readonly ConditionalWeakTable<
         ISourceGenerator,

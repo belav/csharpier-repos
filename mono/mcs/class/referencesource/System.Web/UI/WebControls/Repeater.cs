@@ -15,7 +15,8 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
 
     /// <devdoc>
-    /// <para>Defines the properties, methods, and events of a <see cref='System.Web.UI.WebControls.Repeater'/> class.</para>
+    /// <para>Defines the properties, methods, and events of a <see
+    // cref='System.Web.UI.WebControls.Repeater'/> class.</para>
     /// </devdoc>
     [
         DefaultEvent("ItemCommand"),
@@ -60,7 +61,8 @@ namespace System.Web.UI.WebControls
         private bool _asyncSelectPending;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Repeater'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Repeater'/>
+        // class.</para>
         /// </devdoc>
         public Repeater() { }
 
@@ -118,7 +120,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// The name of the model type used in the SelectMethod, InsertMethod, UpdateMethod, and DeleteMethod.
+        /// The name of the model type used in the SelectMethod, InsertMethod, UpdateMethod, and
+        // DeleteMethod.
         /// </summary>
         [
             DefaultValue(""),
@@ -163,7 +166,8 @@ namespace System.Web.UI.WebControls
 
         /// <summary>
         /// Occurs before model methods are invoked for data operations.
-        /// Handle this event if the model methods are defined on a custom type other than the code behind file.
+        /// Handle this event if the model methods are defined on a custom type other than the code behind
+        // file.
         /// </summary>
         [WebCategory("Data"), WebSysDescription(SR.DataBoundControl_CallingDataMethods)]
         public event CallingDataMethodsEventHandler CallingDataMethods
@@ -180,7 +184,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how alternating (even-indexed) items
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how
+        // alternating (even-indexed) items
         ///    are rendered. </para>
         /// </devdoc>
         [
@@ -294,7 +299,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the control footer is
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the
+        // control footer is
         ///    rendered. </para>
         /// </devdoc>
         [
@@ -311,7 +317,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the control header is rendered. </para>
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the
+        // control header is rendered. </para>
         /// </devdoc>
         [
             Browsable(false),
@@ -366,7 +373,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how items are rendered. </para>
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how
+        // items are rendered. </para>
         /// </devdoc>
         [
             Browsable(false),
@@ -400,7 +408,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how separators
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how
+        // separators
         ///    in between items are rendered.</para>
         /// </devdoc>
         [
@@ -417,7 +426,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a button is clicked within the <see cref='System.Web.UI.WebControls.Repeater'/> control tree.</para>
+        /// <para>Occurs when a button is clicked within the <see
+        // cref='System.Web.UI.WebControls.Repeater'/> control tree.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.Repeater_OnItemCommand)]
         public event RepeaterCommandEventHandler ItemCommand
@@ -427,7 +437,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para> Occurs when an item is created within the <see cref='System.Web.UI.WebControls.Repeater'/> control tree.</para>
+        /// <para> Occurs when an item is created within the <see
+        // cref='System.Web.UI.WebControls.Repeater'/> control tree.</para>
         /// </devdoc>
         [WebCategory("Behavior"), WebSysDescription(SR.DataControls_OnItemCreated)]
         public event RepeaterItemEventHandler ItemCreated
@@ -437,7 +448,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when an item is databound within a <see cref='System.Web.UI.WebControls.Repeater'/> control tree.</para>
+        /// <para>Occurs when an item is databound within a <see cref='System.Web.UI.WebControls.Repeater'/>
+        // control tree.</para>
         /// </devdoc>
         [WebCategory("Behavior"), WebSysDescription(SR.DataControls_OnItemDataBound)]
         public event RepeaterItemEventHandler ItemDataBound
@@ -723,7 +735,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>A protected method. Creates a <see cref='System.Web.UI.WebControls.RepeaterItem'/> with the specified item type and
+        /// <para>A protected method. Creates a <see cref='System.Web.UI.WebControls.RepeaterItem'/> with
+        // the specified item type and
         ///    location within the <see cref='System.Web.UI.WebControls.Repeater'/>.</para>
         /// </devdoc>
         protected virtual RepeaterItem CreateItem(int itemIndex, ListItemType itemType)
@@ -802,7 +815,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>A protected method. Populates iteratively the specified <see cref='System.Web.UI.WebControls.RepeaterItem'/> with a
+        /// <para>A protected method. Populates iteratively the specified <see
+        // cref='System.Web.UI.WebControls.RepeaterItem'/> with a
         ///    sub-hierarchy of child controls.</para>
         /// </devdoc>
         protected virtual void InitializeItem(RepeaterItem item)
@@ -957,7 +971,8 @@ namespace System.Web.UI.WebControls
             if (Page != null && !_pagePreLoadFired && ViewState[ItemCountViewStateKey] == null)
             {
                 // If the control was added after PagePreLoad, we still need to databind it because it missed its
-                // first change in PagePreLoad.  If this control was created by a call to a parent control's DataBind
+                // first change in PagePreLoad.  If this control was created by a call to a parent control's
+                // DataBind
                 // in Page_Load (with is relatively common), this control will already have been databound even
                 // though pagePreLoad never fired and the page isn't a postback.
                 if (!Page.IsPostBack)
@@ -966,7 +981,8 @@ namespace System.Web.UI.WebControls
                 }
                 // If the control was added to the page after page.PreLoad, we'll never get the event and we'll
                 // never databind the control.  So if we're catching up and Load happens but PreLoad never happened,
-                // call DataBind.  This may make the control get databound twice if the user called DataBind on the control
+                // call DataBind.  This may make the control get databound twice if the user called DataBind on the
+                // control
                 // directly in Page.OnLoad, but better to bind twice than never to bind at all.
                 else if (IsViewStateEnabled)
                 {

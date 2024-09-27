@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             if (!highlights.IsDefaultOrEmpty)
             {
-                // LSP requests are only for a single document. So just get the highlights for the requested document.
+                // LSP requests are only for a single document. So just get the highlights for the requested
+                // document.
                 var highlightsForDocument = highlights.FirstOrDefault(h =>
                     h.Document.Id == document.Id
                 );

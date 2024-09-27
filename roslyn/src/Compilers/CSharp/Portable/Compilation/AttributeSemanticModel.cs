@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a speculative AttributeSemanticModel that allows asking semantic questions about an attribute node that did not appear in the original source code.
+        /// Creates a speculative AttributeSemanticModel that allows asking semantic questions about an
+        // attribute node that did not appear in the original source code.
         /// </summary>
         public static SpeculativeSemanticModelWithMemberModel CreateSpeculative(
             SyntaxTreeSemanticModel parentSemanticModel,

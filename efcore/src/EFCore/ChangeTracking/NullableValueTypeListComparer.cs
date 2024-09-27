@@ -4,16 +4,19 @@
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
 /// <summary>
-///     A <see cref="ValueComparer{T}" /> for lists of primitive items. The list can be typed as <see cref="IEnumerable{T}" />,
+///     A <see cref="ValueComparer{T}" /> for lists of primitive items. The list can be typed as
+// <see cref="IEnumerable{T}" />,
 ///     but can only be used with instances that implement <see cref="IList{T}" />.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This comparer should be used for nullable value types. Use <see cref="NullableValueTypeListComparer{TElement}" /> for reference
+///         This comparer should be used for nullable value types. Use <see
+// cref="NullableValueTypeListComparer{TElement}" /> for reference
 ///         types and non-nullable value types.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 /// <typeparam name="TElement">The element type.</typeparam>

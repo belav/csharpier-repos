@@ -85,7 +85,8 @@ public partial class NewtonsoftJsonInputFormatter
     }
 
     /// <summary>
-    /// Gets the <see cref="JsonSerializerSettings"/> used to configure the <see cref="JsonSerializer"/>.
+    /// Gets the <see cref="JsonSerializerSettings"/> used to configure the <see
+    // cref="JsonSerializer"/>.
     /// </summary>
     /// <remarks>
     /// Any modifications to the <see cref="JsonSerializerSettings"/> object after this
@@ -222,8 +223,10 @@ public partial class NewtonsoftJsonInputFormatter
 
             successful = false;
 
-            // The following addMember logic is intended to append the names of missing required properties to the
-            // ModelStateDictionary key. Normally, just the ModelName and ErrorContext.Path is used for this key,
+            // The following addMember logic is intended to append the names of missing required properties to
+            // the
+            // ModelStateDictionary key. Normally, just the ModelName and ErrorContext.Path is used for this
+            // key,
             // but ErrorContext.Path does not include the missing required property name like we want it to.
             // For example, given the following class and input missing the required "Name" property:
             //
@@ -235,11 +238,13 @@ public partial class NewtonsoftJsonInputFormatter
             //
             // We will see the following ErrorContext:
             //
-            // Error   {"Required property 'Name' not found in JSON. Path 'Person'..."} System.Exception {Newtonsoft.Json.JsonSerializationException}
+            // Error   {"Required property 'Name' not found in JSON. Path 'Person'..."} System.Exception
+            // {Newtonsoft.Json.JsonSerializationException}
             // Member  "Name"   object {string}
             // Path    "Person" string
             //
-            // So we update the path used for the ModelStateDictionary key to be "Person.Name" instead of just "Person".
+            // So we update the path used for the ModelStateDictionary key to be "Person.Name" instead of just
+            // "Person".
             // See https://github.com/aspnet/Mvc/issues/8509
             var path = eventArgs.ErrorContext.Path;
             var member = eventArgs.ErrorContext.Member as string;
@@ -262,15 +267,20 @@ public partial class NewtonsoftJsonInputFormatter
             //
             // We will see the following ErrorContext:
             //
-            // Error   {"Unexpected character encountered while parsing value: b. Path 'b.c.d'..."} System.Exception {Newtonsoft.Json.JsonReaderException}
+            // Error   {"Unexpected character encountered while parsing value: b. Path 'b.c.d'..."}
+            // System.Exception {Newtonsoft.Json.JsonReaderException}
             // Member  "c"     object {string}
             // Path    "b.c.d" string
             //
-            // Notice that Member "c" is in the middle of the Path "b.c.d". The error handler gets invoked for each level of nesting.
-            // null, "b", "c" and "d" are each a Member in different ErrorContexts all reporting the same parsing error.
+            // Notice that Member "c" is in the middle of the Path "b.c.d". The error handler gets invoked for
+            // each level of nesting.
+            // null, "b", "c" and "d" are each a Member in different ErrorContexts all reporting the same
+            // parsing error.
             //
-            // The parsing error is reported as a JsonReaderException instead of as a JsonSerializationException like
-            // for missing required properties. We use the exception type to filter out these errors and keep the path used
+            // The parsing error is reported as a JsonReaderException instead of as a JsonSerializationException
+            // like
+            // for missing required properties. We use the exception type to filter out these errors and keep
+            // the path used
             // for the ModelStateDictionary key as "b.c.d" instead of "b.c.d.c"
             // See https://github.com/dotnet/aspnetcore/issues/33451
             var addMember =
@@ -351,7 +361,8 @@ public partial class NewtonsoftJsonInputFormatter
     /// Called during deserialization to get the <see cref="JsonSerializer"/>. The formatter context
     /// that is passed gives an ability to create serializer specific to the context.
     /// </summary>
-    /// <param name="context">A context object used by an input formatter for deserializing the request body into an object.</param>
+    /// <param name="context">A context object used by an input formatter for deserializing the request
+    // body into an object.</param>
     /// <returns>The <see cref="JsonSerializer"/> used during deserialization.</returns>
     /// <remarks>
     /// This method works in tandem with <see cref="ReleaseJsonSerializer(JsonSerializer)"/> to

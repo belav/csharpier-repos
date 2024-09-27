@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         ImmutableArray<int> SyntaxTokenKinds { get; }
 
         /// <summary>
-        /// This method will be called for all nodes that match the types specified by the <see cref="SyntaxNodeTypes"/> property.
+        /// This method will be called for all nodes that match the types specified by the <see
+        // cref="SyntaxNodeTypes"/> property.
         /// </summary>
         void AddClassifications(
             SyntaxNode node,
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         );
 
         /// <summary>
-        /// This method will be called for all tokens that match the kinds specified by the <see cref="SyntaxTokenKinds"/> property.
+        /// This method will be called for all tokens that match the kinds specified by the <see
+        // cref="SyntaxTokenKinds"/> property.
         /// </summary>
         void AddClassifications(
             SyntaxToken token,

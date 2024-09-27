@@ -30,10 +30,12 @@ namespace System.Web.Script.Services
         )]
         internal static string GetClientTypeFromServerType(WebServiceData webServiceData, Type type)
         {
-            // For intellisense purposes, returns a best estimate of what the appropriate client-side type is for a given server type.
+            // For intellisense purposes, returns a best estimate of what the appropriate client-side type is
+            // for a given server type.
             // Takes generated client proxies and enum proxies into consideration.
             // The rest is a best guess.
-            // If all else fails we use "", to indicate "any" client side type. "Object" is not the same as any type on the client since
+            // If all else fails we use "", to indicate "any" client side type. "Object" is not the same as any
+            // type on the client since
             // string, for example, is not considered an object. "Object" is equiv to a .net dictionary.
 
 
@@ -51,7 +53,8 @@ namespace System.Web.Script.Services
                 return GetClientTypeName(type.FullName);
             }
 
-            // there is no client proxy for it, so it either maps to a built-in js type or it could be "anything"
+            // there is no client proxy for it, so it either maps to a built-in js type or it could be
+            // "anything"
 
             // take care of the most common types
             if (type == typeof(string) || type == typeof(char))
@@ -60,7 +63,8 @@ namespace System.Web.Script.Services
             }
             else if (type.IsPrimitive)
             {
-                // The primitive types are Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32, Int64 (long), UInt64, IntPtr, Char, Double, and Single (float).
+                // The primitive types are Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32, Int64 (long), UInt64,
+                // IntPtr, Char, Double, and Single (float).
                 if (type == typeof(bool))
                 {
                     // bool is the only primitive we shouldnt treat as a number

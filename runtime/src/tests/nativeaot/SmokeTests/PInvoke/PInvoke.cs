@@ -1058,7 +1058,8 @@ namespace PInvokeTests
             public String f4;
         }
 
-        // A second struct with the same name but nested. Regression test against native types being mangled into
+        // A second struct with the same name but nested. Regression test against native types being mangled
+        // into
         // the compiler-generated type and losing fully qualified type name information.
         class NesterOfSequentialStruct
         {
@@ -1321,7 +1322,8 @@ namespace PInvokeTests
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static void Workaround()
         {
-            // Ensure there's a standalone method body for these two - this method is marked NoOptimization+NoInlining.
+            // Ensure there's a standalone method body for these two - this method is marked
+            // NoOptimization+NoInlining.
             Marshal.SizeOf<SequentialClass>();
             Marshal.SizeOf<SequentialStruct>();
         }
@@ -1435,7 +1437,8 @@ namespace PInvokeTests
                 Marshal.StructureToPtr<NonBlittableStruct>(ts, memory, false);
                 // Marshal.PtrToStructure uses reflection
                 // NonBlittableStruct ts2 = Marshal.PtrToStructure<NonBlittableStruct>(memory);
-                // ThrowIfNotEquals(true, ts2.f1 == 100 && ts2.f2 == true && ts2.f3 == false && ts2.f4 == true, "NonBlittableStruct marshalling Marshal API failed");
+                // ThrowIfNotEquals(true, ts2.f1 == 100 && ts2.f2 == true && ts2.f3 == false && ts2.f4 == true,
+                // "NonBlittableStruct marshalling Marshal API failed");
 
                 IntPtr offset = Marshal.OffsetOf<NonBlittableStruct>("f2");
                 ThrowIfNotEquals(new IntPtr(4), offset, "Struct marshalling OffsetOf failed.");
@@ -1591,7 +1594,8 @@ namespace PInvokeTests
                 void>)stdcallMethod;
             if (string.Empty.Length > 0)
             {
-                // Do not actually call this because the calling convention is wrong. We just check the compiler didn't crash.
+                // Do not actually call this because the calling convention is wrong. We just check the compiler
+                // didn't crash.
                 refStdcallSuppressTransition(ref storage, 56);
             }
         }

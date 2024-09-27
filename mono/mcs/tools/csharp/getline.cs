@@ -115,7 +115,8 @@ namespace Mono.Terminal
         // If we have a popup completion, this is not null and holds the state.
         CompletionState current_completion;
 
-        // If this is set, it contains an escape sequence to reset the Unix colors to the ones that were used on startup
+        // If this is set, it contains an escape sequence to reset the Unix colors to the ones that were
+        // used on startup
         static byte[] unix_reset_colors;
 
         // This contains a raw stream pointing to stdout, used to bypass the TermInfoDriver
@@ -405,7 +406,8 @@ namespace Mono.Terminal
                 row = Console.BufferHeight - 1;
             Console.SetCursorPosition(col, row);
 
-            //log.WriteLine ("Going to cursor={0} row={1} col={2} actual={3} prompt={4} ttr={5} old={6}", newpos, row, col, actual_pos, prompt.Length, TextToRenderPos (cursor), cursor);
+            //log.WriteLine ("Going to cursor={0} row={1} col={2} actual={3} prompt={4} ttr={5} old={6}",
+            // newpos, row, col, actual_pos, prompt.Length, TextToRenderPos (cursor), cursor);
             //log.Flush ();
         }
 

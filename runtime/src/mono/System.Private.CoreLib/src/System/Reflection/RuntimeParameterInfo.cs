@@ -103,7 +103,7 @@ namespace System.Reflection
             return new RuntimeParameterInfo(pb, type, member, position);
         }
 
-        /*FIXME this constructor looks very broken in the position parameter*/
+/*FIXME this constructor looks very broken in the position parameter*/
         internal RuntimeParameterInfo(
             ParameterInfo? pinfo,
             Type? type,
@@ -137,7 +137,7 @@ namespace System.Reflection
             this.DefaultValueImpl = GetDefaultValueImpl(pinfo);
         }
 
-        /* to build a ParameterInfo for the return type of a method */
+/* to build a ParameterInfo for the return type of a method */
         internal RuntimeParameterInfo(Type type, MemberInfo member, MarshalAsAttribute marshalAs)
         {
             this.ClassImpl = type;
@@ -254,10 +254,12 @@ namespace System.Reflection
                 // If default value is not specified in metadata, look for it in custom attributes
                 // The resolution of default value is done by following these rules:
                 // 1. For RawDefaultValue, we pick the first custom attribute holding the constant value
-                //  in the following order: DecimalConstantAttribute, DateTimeConstantAttribute, CustomConstantAttribute
+                //  in the following order: DecimalConstantAttribute, DateTimeConstantAttribute,
+                // CustomConstantAttribute
                 // 2. For DefaultValue, we first look for CustomConstantAttribute and pick the first occurrence.
                 //  If none is found, then we repeat the same process searching for DecimalConstantAttribute.
-                // IMPORTANT: Please note that there is a subtle difference in order custom attributes are inspected for
+                // IMPORTANT: Please note that there is a subtle difference in order custom attributes are inspected
+                // for
                 //  RawDefaultValue and DefaultValue.
                 defaultValue = raw
                     ? GetDefaultValueFromCustomAttributeData()

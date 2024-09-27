@@ -1339,7 +1339,8 @@ namespace System.Security.AccessControl
             inheritedObjectType = Guid.Empty;
 
             //
-            // We should retain the object type if the access mask for this split contains any bits that refer to object type
+            // We should retain the object type if the access mask for this split contains any bits that refer
+            // to object type
             //
             if ((accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
             {
@@ -1349,7 +1350,8 @@ namespace System.Security.AccessControl
             }
 
             //
-            // We should retain the inherited object type if the aceflags for this contains inheritance (ContainerInherit)
+            // We should retain the inherited object type if the aceflags for this contains inheritance
+            // (ContainerInherit)
             //
             if ((aceFlags & AceFlags.ContainerInherit) != 0)
             {
@@ -1415,7 +1417,8 @@ namespace System.Security.AccessControl
             //
             // The ace flags can be considered for merge in any of the following conditions
             // 1. Inherited object types match
-            // 2. (Inherited object types do not match) The existing ace does not have an inherited object type and
+            // 2. (Inherited object types do not match) The existing ace does not have an inherited object type
+            // and
             //     already contains all the bits of the new ace
             //
 
@@ -1432,7 +1435,8 @@ namespace System.Security.AccessControl
                 // case 2
 
                 //
-                // This method is called only when the access masks of the two aces are already confirmed to be exact matches
+                // This method is called only when the access masks of the two aces are already confirmed to be
+                // exact matches
                 // therefore the second condition of case 2 is already verified
                 //
                 Contract.Assert(
@@ -1716,7 +1720,8 @@ namespace System.Security.AccessControl
             {
                 if ((ace is ObjectAce) || (newAce is ObjectAce))
                 {
-                    // for object aces we need to match the inherited object types (for inheritance flags equality) and object type (for access mask equality) as well
+                    // for object aces we need to match the inherited object types (for inheritance flags equality) and
+                    // object type (for access mask equality) as well
                     if (InheritedObjectTypesMatch(ace, newAce) && (ObjectTypesMatch(ace, newAce)))
                     {
                         ace.AceFlags |= (newAce.AceFlags & AceFlags.AuditFlags);
@@ -1748,7 +1753,8 @@ namespace System.Security.AccessControl
 
                 if ((ace is ObjectAce) || (newAce is ObjectAce))
                 {
-                    // object types need to match (for access mask equality) and inheritance flags need additional DS specific logic
+                    // object types need to match (for access mask equality) and inheritance flags need additional DS
+                    // specific logic
                     // to check whether they can be merged
                     if ((ObjectTypesMatch(ace, newAce)) && (AceFlagsAreMergeable(ace, newAce)))
                     {
@@ -2497,7 +2503,8 @@ namespace System.Security.AccessControl
                         // then we need to perform some checks on the
                         // inherited object types in the two aces. Since inheritance is further qualified
                         // by the inherited object type the inheritance flags cannot be determined to be common without
-                        // inspecting the inherited object type. It is possible that both aces may be further inherited but if
+                        // inspecting the inherited object type. It is possible that both aces may be further inherited but
+                        // if
                         // the inherited object types are different the inheritance may not be common.
                         //
                         flags = originalFlags;
@@ -2521,7 +2528,8 @@ namespace System.Security.AccessControl
                             )
                         )
                         {
-                            // if one ace applies only to self and the other only to children/descendents we have nothing in common
+                            // if one ace applies only to self and the other only to children/descendents we have nothing in
+                            // common
                             continue;
                         }
 
@@ -2542,7 +2550,8 @@ namespace System.Security.AccessControl
                         {
                             //
                             // if we reached this stage, then we've found something common between the two aces.
-                            // But since there is a conflict between the object types (or inherited object types), the remove is not possible
+                            // But since there is a conflict between the object types (or inherited object types), the remove is
+                            // not possible
                             //
                             removePossible = false;
                             break;
@@ -2591,7 +2600,8 @@ namespace System.Security.AccessControl
                     // PermissionSplit: CI(Guid) CC(Guid) // Remove GR
                     //        MergeSplit: CI(Guid) LC // Ready for merge
                     //           Remove: CI IO LC // Removal is possible since we are trying to remove inheritance for
-                    //                                            all child types when it exists for one specific child type
+                    //                                            all child types when it exists for one specific child
+                    // type
                     //
                     //              Result: CI(Guid) CC(Guid) // PermissionSplit
                     //                         LC // Result of perm removal
@@ -2605,7 +2615,8 @@ namespace System.Security.AccessControl
                     // PermissionSplit: CI CC(Guid) // Remove GR
                     //        MergeSplit: CI LC // Ready for merge
                     //           Remove: CI(Guid) IO CC // Removal is not possible since we are trying to remove
-                    //                                                     inheritance for a specific child type when it exists for all child types
+                    //                                                     inheritance for a specific child type when it
+                    // exists for all child types
                     //
 
                     // Permission split settings
@@ -3922,7 +3933,8 @@ namespace System.Security.AccessControl
         }
 
         //
-        // As soon as you tried successfully to modified the ACL, the internally created allow every one full access ACL is materialized
+        // As soon as you tried successfully to modified the ACL, the internally created allow every one
+        // full access ACL is materialized
         // because in native world, a NULL dacl can't be operated on.
         //
         internal override void OnAclModificationTried()

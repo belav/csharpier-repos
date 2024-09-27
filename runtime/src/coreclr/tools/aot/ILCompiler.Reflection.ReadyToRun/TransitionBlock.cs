@@ -56,12 +56,14 @@ namespace ILCompiler.Reflection.ReadyToRun
         public abstract int OffsetOfArgumentRegisters { get; }
 
         /// <summary>
-        /// The offset of the first slot in a GC ref map. Overridden on ARM64 to return the offset of the X8 register.
+        /// The offset of the first slot in a GC ref map. Overridden on ARM64 to return the offset of the X8
+        // register.
         /// </summary>
         public virtual int OffsetOfFirstGCRefMapSlot => OffsetOfArgumentRegisters;
 
         /// <summary>
-        /// Recalculate pos in GC ref map to actual offset. This is the default implementation for all architectures
+        /// Recalculate pos in GC ref map to actual offset. This is the default implementation for all
+        // architectures
         /// except for X86 where it's overridden to supply a more complex algorithm.
         /// </summary>
         public virtual int OffsetFromGCRefMapPos(int pos)
@@ -70,7 +72,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         }
 
         /// <summary>
-        /// The transition block should define everything pushed by callee. The code assumes in number of places that
+        /// The transition block should define everything pushed by callee. The code assumes in number of
+        // places that
         /// end of the transition block is caller's stack pointer.
         /// </summary>
         public int OffsetOfArgs => SizeOfTransitionBlock;

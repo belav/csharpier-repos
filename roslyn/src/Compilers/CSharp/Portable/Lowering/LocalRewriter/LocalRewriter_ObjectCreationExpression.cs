@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundDynamicObjectCreationExpression node
         )
         {
-            // There are no target types for dynamic object creation scenarios, so there should be no implicit handler conversions
+            // There are no target types for dynamic object creation scenarios, so there should be no implicit
+            // handler conversions
             AssertNoImplicitInterpolatedStringHandlerConversions(node.Arguments);
             var loweredArguments = VisitList(node.Arguments);
             var constructorInvocation = _dynamicFactory
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(receiverDiscard is null);
 
-            // We have already lowered each argument, but we may need some additional rewriting for the arguments,
+            // We have already lowered each argument, but we may need some additional rewriting for the
+            // arguments,
             // such as re-ordering arguments based on argsToParamsOpt map, etc.
             rewrittenArguments = MakeArguments(
                 rewrittenArguments,
@@ -203,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             //     new Type(e1, e2, receiver.P3);
             //
-            // otherwise the receiver is a record class and we want to lower it to a call to its `Clone` method, then
+            // otherwise the receiver is a record class and we want to lower it to a call to its `Clone` method,
+            // then
             // set the given record properties. i.e.
             //
             //      var tmp = (ReceiverType)receiver.Clone();
@@ -313,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        // The values that are implicitly copied over will get evaluated afterwards, in the order they are needed
+                        // The values that are implicitly copied over will get evaluated afterwards, in the order they are
+                        // needed
                         builder.Add(_factory.Property(oldValue, property));
                     }
                 }
@@ -330,7 +334,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (initializerExpressionOpt != null && !initializerExpressionOpt.HasErrors)
             {
-                // We may need to MakeArguments for collection initializer add method call if the method has a param array parameter.
+                // We may need to MakeArguments for collection initializer add method call if the method has a param
+                // array parameter.
                 var rewrittenInitializers = MakeObjectOrCollectionInitializersForExpressionTree(
                     initializerExpressionOpt
                 );
@@ -480,7 +485,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // For the NoPIA feature, we need to gather the GUID from the coclass, and
             // generate the following:
             //
-            // (IPiaType)System.Activator.CreateInstance(System.Runtime.InteropServices.Marshal.GetTypeFromCLSID(new Guid(GUID)))
+            //
+            // (IPiaType)System.Activator.CreateInstance(System.Runtime.InteropServices.Marshal.GetTypeFromCLSID(new
+            // Guid(GUID)))
             //
             // If System.Runtime.InteropServices.Marshal.GetTypeFromCLSID is not available (older framework),
             // System.Type.GetTypeFromCLSID() is used to get the type for the CLSID:

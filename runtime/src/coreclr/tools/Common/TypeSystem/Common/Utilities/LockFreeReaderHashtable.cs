@@ -289,7 +289,8 @@ namespace Internal.TypeSystem
                     return;
                 }
 
-                // The checked statement here protects against both the hashTable size and _reserve overflowing. That does mean
+                // The checked statement here protects against both the hashTable size and _reserve overflowing.
+                // That does mean
                 // the maximum size of _hashTable is 0x70000000
                 int newSize = checked(oldHashtable.Length * 2);
 
@@ -298,7 +299,8 @@ namespace Internal.TypeSystem
                 if (newSize < minimumUsefulSize)
                     newSize = minimumUsefulSize;
 
-                // Work in a local variable to avoid lots of unnecessary volatile reads of _newHashTable since only this method can
+                // Work in a local variable to avoid lots of unnecessary volatile reads of _newHashTable since only
+                // this method can
                 // change it and we're under a lock
                 TValue[] newHashTable = new TValue[newSize];
                 // This is a rare "read-after-write" case where even x64/x86 needs fences.
@@ -380,7 +382,8 @@ namespace Internal.TypeSystem
         /// but must only take locks around internal operations and GetValueHashCode.
         /// </summary>
         /// <param name="value">Value to attempt to add to the hashtable, must not be null</param>
-        /// <returns>Newly added value, or a value which was already present in the hashtable which is equal to it.</returns>
+        /// <returns>Newly added value, or a value which was already present in the hashtable which is equal
+        // to it.</returns>
         public TValue AddOrGetExisting(TValue value)
         {
             return AddOrGetExistingInner(value, out _);
@@ -435,15 +438,18 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Attempts to add a value to the hashtable, or find a value which is already present in the hashtable.
+        /// Attempts to add a value to the hashtable, or find a value which is already present in the
+        // hashtable.
         /// In some cases, this will fail due to contention with other additions and must be retried.
         /// Note that the key is not specified as it is implicit in the value. This function is thread-safe,
         /// but must only take locks around internal operations and GetValueHashCode.
         /// </summary>
         /// <param name="value">Value to attempt to add to the hashtable, must not be null</param>
-        /// <param name="addedValue">Set to true if <paramref name="value"/> was added to the table. False if the value
+        /// <param name="addedValue">Set to true if <paramref name="value"/> was added to the table. False
+        // if the value
         /// was already present. Not defined if adding was attempted but failed.</param>
-        /// <returns>Newly added value if adding succeds, a value which was already present in the hashtable which is equal to it,
+        /// <returns>Newly added value if adding succeds, a value which was already present in the hashtable
+        // which is equal to it,
         /// or null if adding fails and must be retried.</returns>
         private TValue TryAddOrGetExisting(TValue value, out bool addedValue)
         {
@@ -569,7 +575,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Attempts to abort write a value into the table. Should never fail as the sentinel should be the only
+        /// Attempts to abort write a value into the table. Should never fail as the sentinel should be the
+        // only
         /// entry that can be in the table at this point
         /// </summary>
         private static void WriteAbortNullToLocation(TValue[] hashTableLocal, int tableIndex)
@@ -601,9 +608,12 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Get the value associated with a key. If value is not present in dictionary, use the creator delegate passed in
-        /// at object construction time to create the value, and attempt to add it to the table. (Create the value while not
-        /// under the lock, but add it to the table while under the lock. This may result in a throw away object being constructed)
+        /// Get the value associated with a key. If value is not present in dictionary, use the creator
+        // delegate passed in
+        /// at object construction time to create the value, and attempt to add it to the table. (Create the
+        // value while not
+        /// under the lock, but add it to the table while under the lock. This may result in a throw away
+        // object being constructed)
         /// This function is thread-safe, but will take a lock to perform its operations.
         /// </summary>
         /// <param name="key"></param>
@@ -619,7 +629,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Determine if this collection contains a value associated with a key. This function is thread-safe, and wait-free.
+        /// Determine if this collection contains a value associated with a key. This function is
+        // thread-safe, and wait-free.
         /// </summary>
         public bool Contains(TKey key)
         {
@@ -627,7 +638,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Determine if this collection contains a given value, and returns the value in the hashtable if found. This function is thread-safe, and wait-free.
+        /// Determine if this collection contains a given value, and returns the value in the hashtable if
+        // found. This function is thread-safe, and wait-free.
         /// </summary>
         /// <param name="value">Value to search for in the hashtable, must not be null</param>
         /// <returns>Value from the hashtable if found, otherwise null.</returns>

@@ -122,7 +122,8 @@ namespace System.Net.Security.Tests
                     }
                     catch (SkipTestException)
                     {
-                        // Don't throw inside RemoteExecutor if SslStream_StreamToStream_Authentication_Success chose to skip the test
+                        // Don't throw inside RemoteExecutor if SslStream_StreamToStream_Authentication_Success chose to
+                        // skip the test
                     }
                 })
                 .Dispose();

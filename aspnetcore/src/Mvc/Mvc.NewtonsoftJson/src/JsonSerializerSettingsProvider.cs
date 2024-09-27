@@ -39,7 +39,8 @@ public static class JsonSerializerSettingsProvider
             MaxDepth = DefaultMaxDepth,
 
             // Do not change this setting
-            // Setting this to None prevents Json.NET from loading malicious, unsafe, or security-sensitive types
+            // Setting this to None prevents Json.NET from loading malicious, unsafe, or security-sensitive
+            // types
             TypeNameHandling = TypeNameHandling.None,
 
             Converters = { ValidationProblemDetailsConverter, ProblemDetailsConverter },

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -354,7 +355,8 @@ namespace Microsoft.Web.WebPages.OAuth
         }
 
         /// <summary>
-        /// Requests the specified provider to start the authentication by directing users to an external website
+        /// Requests the specified provider to start the authentication by directing users to an external
+        // website
         /// </summary>
         /// <param name="provider">The provider.</param>
         public static void RequestAuthentication(string provider)
@@ -363,7 +365,8 @@ namespace Microsoft.Web.WebPages.OAuth
         }
 
         /// <summary>
-        /// Requests the specified provider to start the authentication by directing users to an external website
+        /// Requests the specified provider to start the authentication by directing users to an external
+        // website
         /// </summary>
         /// <param name="provider">The provider.</param>
         /// <param name="returnUrl">The return url after user is authenticated.</param>
@@ -416,7 +419,8 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <summary>
         /// Checks if user is successfully authenticated when user is redirected back to this user.
         /// </summary>
-        /// <param name="returnUrl">The return URL which must match the one passed to RequestAuthentication earlier.</param>
+        /// <param name="returnUrl">The return URL which must match the one passed to RequestAuthentication
+        // earlier.</param>
         [CLSCompliant(false)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Design",
@@ -473,7 +477,8 @@ namespace Microsoft.Web.WebPages.OAuth
         /// </summary>
         /// <param name="providerName">Name of the provider.</param>
         /// <param name="providerUserId">The provider user id.</param>
-        /// <param name="createPersistentCookie">if set to <c>true</c> create persistent cookie as part of the login.</param>
+        /// <param name="createPersistentCookie">if set to <c>true</c> create persistent cookie as part of
+        // the login.</param>
         /// <returns>
         ///   <c>true</c> if the login is successful.
         /// </returns>
@@ -520,7 +525,8 @@ namespace Microsoft.Web.WebPages.OAuth
         }
 
         /// <summary>
-        /// Creates or update the account with the specified provider, provider user id and associate it with the specified user name.
+        /// Creates or update the account with the specified provider, provider user id and associate it
+        // with the specified user name.
         /// </summary>
         /// <param name="providerName">Name of the provider.</param>
         /// <param name="providerUserId">The provider user id.</param>
@@ -572,7 +578,8 @@ namespace Microsoft.Web.WebPages.OAuth
         }
 
         /// <summary>
-        /// Determines whether there exists a local account (as opposed to OAuth account) with the specified userId.
+        /// Determines whether there exists a local account (as opposed to OAuth account) with the specified
+        // userId.
         /// </summary>
         /// <param name="userId">The user id to check for local account.</param>
         /// <returns>
@@ -625,7 +632,8 @@ namespace Microsoft.Web.WebPages.OAuth
         /// </summary>
         /// <param name="providerName">Name of the provider.</param>
         /// <param name="clientData">The client data of the specified provider name.</param>
-        /// <returns><c>true</c> if the client data is found for the specified provider name. Otherwise, <c>false</c></returns>
+        /// <returns><c>true</c> if the client data is found for the specified provider name. Otherwise,
+        // <c>false</c></returns>
         public static bool TryGetOAuthClientData(
             string providerName,
             out AuthenticationClientData clientData
@@ -686,8 +694,10 @@ namespace Microsoft.Web.WebPages.OAuth
         /// </summary>
         /// <param name="providerName">The provider name.</param>
         /// <param name="providerUserId">The provider-specific user id.</param>
-        /// <returns>A cryptographically protected serialization of the inputs which is suitable for round-tripping.</returns>
-        /// <remarks>Do not persist the return value to permanent storage. This implementation is subject to change.</remarks>
+        /// <returns>A cryptographically protected serialization of the inputs which is suitable for
+        // round-tripping.</returns>
+        /// <remarks>Do not persist the return value to permanent storage. This implementation is subject to
+        // change.</remarks>
         public static string SerializeProviderUserId(string providerName, string providerUserId)
         {
             if (providerName == null)
@@ -703,7 +713,8 @@ namespace Microsoft.Web.WebPages.OAuth
         }
 
         /// <summary>
-        /// Deserializes a string obtained from <see cref="SerializeProviderUserId(string, string)"/> back into a
+        /// Deserializes a string obtained from <see cref="SerializeProviderUserId(string, string)"/> back
+        // into a
         /// providerName/providerUserId pair.
         /// </summary>
         /// <param name="data">The input data.</param>

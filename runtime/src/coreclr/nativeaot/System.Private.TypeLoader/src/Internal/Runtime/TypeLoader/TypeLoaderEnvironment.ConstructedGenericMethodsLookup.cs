@@ -38,7 +38,8 @@ namespace Internal.Runtime.TypeLoader
 
             public override bool Equals(object obj)
             {
-                // There are no scenarios where we call .Equals to check the componentized equality (we explicitly use IsEqualToEntryByComponentsComparison for that),
+                // There are no scenarios where we call .Equals to check the componentized equality (we explicitly
+                // use IsEqualToEntryByComponentsComparison for that),
                 // so making sure we revert to the reference equality in case someone calls here.
                 return base.Equals(obj);
             }
@@ -177,8 +178,10 @@ namespace Internal.Runtime.TypeLoader
             {
                 //
                 // Entries read from the hashtable are loaded as GenericMethodDescs, and compared to the input.
-                // This lookup is slower than the lookups using RuntimeTypeHandles, but can handle cases where we don't have
-                // RuntimeTypeHandle values for all of the components of the input GenericMethodDesc, but still need to look it up in case the
+                // This lookup is slower than the lookups using RuntimeTypeHandles, but can handle cases where we
+                // don't have
+                // RuntimeTypeHandle values for all of the components of the input GenericMethodDesc, but still need
+                // to look it up in case the
                 // method dictionary statically really exists
                 //
                 TypeSystemContext context = _methodToLookup.Context;
@@ -384,7 +387,8 @@ namespace Internal.Runtime.TypeLoader
         {
             if (!method.CanShareNormalGenericCode())
             {
-                // First see if we can find an exact method implementation for the GVM (avoid using USG implementations if we can,
+                // First see if we can find an exact method implementation for the GVM (avoid using USG
+                // implementations if we can,
                 // because USG code is much slower).
                 if (TryLookupExactMethodPointer(method, out methodPointer))
                 {
@@ -394,7 +398,8 @@ namespace Internal.Runtime.TypeLoader
                 }
             }
 
-            // If we cannot find an exact method entry point, look for an equivalent template and compute the generic dictionary
+            // If we cannot find an exact method entry point, look for an equivalent template and compute the
+            // generic dictionary
             InstantiatedMethod templateMethod = TemplateLocator.TryGetGenericMethodTemplate(
                 method,
                 out _,

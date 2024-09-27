@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Gets the specified source code kind, which is the value that was specified in
-        /// the call to the constructor, or modified using the <see cref="WithKind(SourceCodeKind)"/> method.
+        /// the call to the constructor, or modified using the <see cref="WithKind(SourceCodeKind)"/>
+        // method.
         /// </summary>
         public SourceCodeKind SpecifiedKind { get; protected set; }
 

@@ -15,7 +15,8 @@ public class OAuthEvents : RemoteAuthenticationEvents
         context => Task.CompletedTask;
 
     /// <summary>
-    /// Gets or sets the delegate that is invoked when the RedirectToAuthorizationEndpoint method is invoked.
+    /// Gets or sets the delegate that is invoked when the RedirectToAuthorizationEndpoint method is
+    // invoked.
     /// </summary>
     public Func<
         RedirectContext<OAuthOptions>,
@@ -30,7 +31,8 @@ public class OAuthEvents : RemoteAuthenticationEvents
     /// <summary>
     /// Invoked after the provider successfully authenticates a user.
     /// </summary>
-    /// <param name="context">Contains information about the login session as well as the user <see cref="System.Security.Claims.ClaimsIdentity"/>.</param>
+    /// <param name="context">Contains information about the login session as well as the user <see
+    // cref="System.Security.Claims.ClaimsIdentity"/>.</param>
     /// <returns>A <see cref="Task"/> representing the completed operation.</returns>
     public virtual Task CreatingTicket(OAuthCreatingTicketContext context) =>
         OnCreatingTicket(context);
@@ -38,7 +40,8 @@ public class OAuthEvents : RemoteAuthenticationEvents
     /// <summary>
     /// Called when a Challenge causes a redirect to authorize endpoint in the OAuth handler.
     /// </summary>
-    /// <param name="context">Contains redirect URI and <see cref="AuthenticationProperties"/> of the challenge.</param>
+    /// <param name="context">Contains redirect URI and <see cref="AuthenticationProperties"/> of the
+    // challenge.</param>
     public virtual Task RedirectToAuthorizationEndpoint(RedirectContext<OAuthOptions> context) =>
         OnRedirectToAuthorizationEndpoint(context);
 }

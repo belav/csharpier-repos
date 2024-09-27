@@ -20,7 +20,8 @@ namespace System.Data.SqlClient
     using System.Threading;
 
     // This is a singleton instance per AppDomain that acts as the notification dispatcher for
-    // that AppDomain.  It receives calls from the SqlDependencyProcessDispatcher with an ID or a server name
+    // that AppDomain.  It receives calls from the SqlDependencyProcessDispatcher with an ID or a server
+    // name
     // to invalidate matching dependencies in the given AppDomain.
 
     internal class SqlDependencyPerAppDomainDispatcher : MarshalByRefObject
@@ -37,8 +38,10 @@ namespace System.Data.SqlClient
         // 2) Used to enumerate dependencies to invalidate based on server.
         private Dictionary<string, SqlDependency> _dependencyIdToDependencyHash;
 
-        // holds dependencies list per notification and the command hash from which this notification was generated
-        // command hash is needed to remove its entry from _commandHashToNotificationId when the notification is removed
+        // holds dependencies list per notification and the command hash from which this notification was
+        // generated
+        // command hash is needed to remove its entry from _commandHashToNotificationId when the
+        // notification is removed
         sealed class DependencyList : List<SqlDependency>
         {
             public readonly string CommandHash;
@@ -49,15 +52,21 @@ namespace System.Data.SqlClient
             }
         }
 
-        // notificationId -> Dependencies hashtable:  1 -> N mapping.  notificationId == appDomainKey + commandHash.
-        // More than one dependency can be using the same command hash values resulting in a hash to the same value.
-        // We use this to cache mapping between command to dependencies such that we may reduce the notification
-        // resource effect on SQL Server.  The Guid identifier is sent to the server during notification enlistment,
-        // and returned during the notification event.  Dependencies look up existing Guids, if one exists, to ensure
+        // notificationId -> Dependencies hashtable:  1 -> N mapping.  notificationId == appDomainKey +
+        // commandHash.
+        // More than one dependency can be using the same command hash values resulting in a hash to the
+        // same value.
+        // We use this to cache mapping between command to dependencies such that we may reduce the
+        // notification
+        // resource effect on SQL Server.  The Guid identifier is sent to the server during notification
+        // enlistment,
+        // and returned during the notification event.  Dependencies look up existing Guids, if one exists,
+        // to ensure
         // they are re-using notification ids.
         private Dictionary<string, DependencyList> _notificationIdToDependenciesHash;
 
-        // CommandHash value -> notificationId associated with it:  1->1 mapping. This map is used to quickly find if we need to create
+        // CommandHash value -> notificationId associated with it:  1->1 mapping. This map is used to
+        // quickly find if we need to create
         // new notification or hookup into existing one.
         // CommandHash is built from connection string, command text and parameters
         private Dictionary<string, string> _commandHashToNotificationId;
@@ -130,7 +139,8 @@ namespace System.Data.SqlClient
         }
 
         // SQL Hotfix 236
-        //  When remoted across appdomains, MarshalByRefObject links by default time out if there is no activity
+        //  When remoted across appdomains, MarshalByRefObject links by default time out if there is no
+        // activity
         //  within a few minutes.  Add this override to prevent marshaled links from timing out.
         public override object InitializeLifetimeService()
         {
@@ -237,7 +247,8 @@ namespace System.Data.SqlClient
                                 )
                             )
                             {
-                                // this should not happen since _commandHashToNotificationId and _notificationIdToDependenciesHash are always
+                                // this should not happen since _commandHashToNotificationId and _notificationIdToDependenciesHash
+                                // are always
                                 // updated together
                                 Debug.Assert(
                                     false,
@@ -267,8 +278,10 @@ namespace System.Data.SqlClient
                         {
                             // we did not find notification ID with the same app domain and command hash, create a new one
                             // use unique guid to avoid duplicate IDs
-                            // prepend app domain ID to the key - SqlConnectionContainer::ProcessNotificationResults (SqlDependencyListener.cs)
-                            // uses this app domain ID to route the message back to the app domain in which this SqlDependency was created
+                            // prepend app domain ID to the key - SqlConnectionContainer::ProcessNotificationResults
+                            // (SqlDependencyListener.cs)
+                            // uses this app domain ID to route the message back to the app domain in which this SqlDependency
+                            // was created
                             notificationId = string.Format(
                                 System.Globalization.CultureInfo.InvariantCulture,
                                 "{0};{1}",
@@ -393,7 +406,8 @@ namespace System.Data.SqlClient
             }
         }
 
-        // This method is called when a connection goes down or other unknown error occurs in the ProcessDispatcher.
+        // This method is called when a connection goes down or other unknown error occurs in the
+        // ProcessDispatcher.
         internal void InvalidateServer(string server, SqlNotification sqlNotification)
         {
             IntPtr hscp;
@@ -566,7 +580,8 @@ namespace System.Data.SqlClient
                             "<sc.SqlDependencyPerAppDomainDispatcher.LookupDependencyEntriesWithRemove|DEP> Entries found in hashtable - removing.\n"
                         );
 
-                        // update the tables - do it inside finally block to avoid ThreadAbort exception interrupt this operation
+                        // update the tables - do it inside finally block to avoid ThreadAbort exception interrupt this
+                        // operation
                         try { }
                         finally
                         {
@@ -638,7 +653,8 @@ namespace System.Data.SqlClient
                             }
                         }
 
-                        // same SqlDependency can be associated with more than one command, so we have to continue till the end...
+                        // same SqlDependency can be associated with more than one command, so we have to continue till the
+                        // end...
                     }
 
                     Debug.Assert(

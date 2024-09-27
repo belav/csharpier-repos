@@ -23,7 +23,8 @@ namespace System.Net.NetworkInformation
             get { return _address; }
         }
 
-        /// Gets a bool value that indicates whether the Internet Protocol (IP) address is legal to appear in a Domain Name System (DNS) server database.
+        /// Gets a bool value that indicates whether the Internet Protocol (IP) address is legal to appear
+        // in a Domain Name System (DNS) server database.
         [UnsupportedOSPlatform("linux")]
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
@@ -87,7 +88,8 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        /// Specifies the amount of time remaining on the Dynamic Host Configuration Protocol (DHCP) lease for this IP address.
+        /// Specifies the amount of time remaining on the Dynamic Host Configuration Protocol (DHCP) lease
+        // for this IP address.
         [UnsupportedOSPlatform("linux")]
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]

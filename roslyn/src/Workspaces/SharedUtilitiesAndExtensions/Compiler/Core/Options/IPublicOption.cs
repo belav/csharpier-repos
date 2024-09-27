@@ -8,6 +8,7 @@ namespace Microsoft.CodeAnalysis.Options;
 
 /// <summary>
 /// Interface implemented by public options (Option and PerLanguageOption)
-/// to distinguish them from internal ones (<see cref="Option2{T}"/> and <see cref="PerLanguageOption2{T}"/>).
+/// to distinguish them from internal ones (<see cref="Option2{T}"/> and <see
+// cref="PerLanguageOption2{T}"/>).
 /// </summary>
 internal interface IPublicOption : IOption2 { }

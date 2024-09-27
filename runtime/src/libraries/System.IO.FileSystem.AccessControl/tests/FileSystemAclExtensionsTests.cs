@@ -309,7 +309,8 @@ namespace System.IO
         }
 
         [Theory]
-        // Must have at least one ReadData, otherwise the TempAclDirectory will fail to delete that item on dispose
+        // Must have at least one ReadData, otherwise the TempAclDirectory will fail to delete that item on
+        // dispose
         [MemberData(nameof(RightsToAllow))]
         public void DirectoryInfo_Create_AllowSpecific_AccessRules(FileSystemRights rights)
         {

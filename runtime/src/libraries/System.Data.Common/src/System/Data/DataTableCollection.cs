@@ -301,8 +301,10 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Does verification on the table and it's name, and points the table at the dataSet that owns this collection.
-        /// An ArgumentNullException is thrown if this table is null.  An ArgumentException is thrown if this table
+        /// Does verification on the table and it's name, and points the table at the dataSet that owns this
+        // collection.
+        /// An ArgumentNullException is thrown if this table is null.  An ArgumentException is thrown if
+        // this table
         /// already belongs to this collection, belongs to another collection.
         /// A DuplicateNameException is thrown if this collection already has a table with the same
         /// name (case insensitive).
@@ -810,7 +812,8 @@ namespace System.Data
         /// <summary>
         /// Registers this name as being used in the collection.  Will throw an ArgumentException
         /// if the name is already being used.  Called by Add, All property, and Table.TableName property.
-        /// if the name is equivalent to the next default name to hand out, we increment our defaultNameIndex.
+        /// if the name is equivalent to the next default name to hand out, we increment our
+        // defaultNameIndex.
         /// </summary>
         internal void RegisterName(string name, string tbNamespace)
         {
@@ -936,8 +939,10 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Unregisters this name as no longer being used in the collection.  Called by Remove, All property, and
-        /// Table.TableName property.  If the name is equivalent to the last proposed default name, we walk backwards
+        /// Unregisters this name as no longer being used in the collection.  Called by Remove, All
+        // property, and
+        /// Table.TableName property.  If the name is equivalent to the last proposed default name, we walk
+        // backwards
         /// to find the next proper default name to  use.
         /// </summary>
         internal void UnregisterName(string name)

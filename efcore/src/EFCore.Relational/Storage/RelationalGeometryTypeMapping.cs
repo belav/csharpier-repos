@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///     Base class for relation type mappings to NTS Geometry and derived types.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 /// <typeparam name="TGeometry">The geometry type.</typeparam>
@@ -19,11 +20,13 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : RelationalTypeMapping
 {
     /// <summary>
-    ///     Creates a new instance of the <see cref="RelationalGeometryTypeMapping{TGeometry,TProvider}" /> class.
+    ///     Creates a new instance of the <see cref="RelationalGeometryTypeMapping{TGeometry,TProvider}"
+    // /> class.
     /// </summary>
     /// <param name="converter">The converter to use when converting to and from database types.</param>
     /// <param name="storeType">The store type name.</param>
-    /// <param name="jsonValueReaderWriter">Handles reading and writing JSON values for instances of the mapped type.</param>
+    /// <param name="jsonValueReaderWriter">Handles reading and writing JSON values for instances of the
+    // mapped type.</param>
     protected RelationalGeometryTypeMapping(
         ValueConverter<TGeometry, TProvider>? converter,
         string storeType,

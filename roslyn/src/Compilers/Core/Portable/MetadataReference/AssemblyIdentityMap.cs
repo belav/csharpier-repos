@@ -11,8 +11,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Implements a map from an assembly identity to a value. The map allows to look up the value by an identity
-    /// that either exactly matches the original identity key, or corresponds to a key with the lowest version among identities
+    /// Implements a map from an assembly identity to a value. The map allows to look up the value by an
+    // identity
+    /// that either exactly matches the original identity key, or corresponds to a key with the lowest
+    // version among identities
     /// with higher version than the requested identity key.
     /// </summary>
     internal sealed class AssemblyIdentityMap<TValue>

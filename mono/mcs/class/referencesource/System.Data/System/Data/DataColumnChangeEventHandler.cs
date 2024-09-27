@@ -11,6 +11,7 @@ namespace System.Data
 {
     using System;
 
-    // Represents the method that will handle the the <see cref='System.Data.DataTable.ColumnChanging'/> event.</para>
+    // Represents the method that will handle the the <see cref='System.Data.DataTable.ColumnChanging'/>
+    // event.</para>
     public delegate void DataColumnChangeEventHandler(object sender, DataColumnChangeEventArgs e);
 }

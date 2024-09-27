@@ -51,7 +51,8 @@ namespace MS.Internal.Xml.XPath
             Debug.Assert(_variable != null);
             object? retVal = ProcessResult(_variable.Evaluate(xsltContext));
 
-            // ProcessResult may return null when the input value is XmlNode and here doesn't seem to be the case.
+            // ProcessResult may return null when the input value is XmlNode and here doesn't seem to be the
+            // case.
             Debug.Assert(retVal != null);
             return retVal;
         }
@@ -68,7 +69,8 @@ namespace MS.Internal.Xml.XPath
                     _variable != null ? _variable.VariableType : XPathResultType.Any;
                 if (result == XPathResultType.Error)
                 {
-                    // In v.1 we confused Error & Any so now for backward compatibility we should allow users to return any of them.
+                    // In v.1 we confused Error & Any so now for backward compatibility we should allow users to return
+                    // any of them.
                     result = XPathResultType.Any;
                 }
                 return result;

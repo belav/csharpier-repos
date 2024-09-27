@@ -7,7 +7,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides a frozen dictionary optimized for value type keys using the default comparer.</summary>
+    /// <summary>Provides a frozen dictionary optimized for value type keys using the default
+    // comparer.</summary>
     /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
     internal sealed class ValueTypeDefaultComparerFrozenDictionary<TKey, TValue>

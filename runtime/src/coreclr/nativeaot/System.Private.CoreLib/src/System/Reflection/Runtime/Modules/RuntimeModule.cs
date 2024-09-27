@@ -13,7 +13,8 @@ namespace System.Reflection.Runtime.Modules
     //
     // The runtime's implementation of a Module.
     //
-    // Modules are quite meaningless in .NET Core but we have to keep up the appearances since they still exist in surface area.
+    // Modules are quite meaningless in .NET Core but we have to keep up the appearances since they
+    // still exist in surface area.
     // Each Assembly has one (manifest) module.
     //
     internal abstract partial class RuntimeModule : Module

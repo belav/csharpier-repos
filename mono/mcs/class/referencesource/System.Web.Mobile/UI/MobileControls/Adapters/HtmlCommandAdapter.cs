@@ -22,10 +22,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlCommandAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * HtmlCommandAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -40,13 +40,15 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class HtmlCommandAdapter : HtmlControlAdapter
     {
-        /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.Control"]/*' />
+        /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.Control"]/*'
+        // />
         protected new Command Control
         {
             get { return (Command)base.Control; }
         }
 
-        /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.Render"]/*' />
+        /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.Render"]/*'
+        // />
         public override void Render(HtmlMobileTextWriter writer)
         {
             bool renderLink = false;
@@ -111,7 +113,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.LoadPostData"]/*' />
+        /// <include file='doc\HtmlCommandAdapter.uex'
+        // path='docs/doc[@for="HtmlCommandAdapter.LoadPostData"]/*' />
         public override bool LoadPostData(
             String key,
             NameValueCollection data,

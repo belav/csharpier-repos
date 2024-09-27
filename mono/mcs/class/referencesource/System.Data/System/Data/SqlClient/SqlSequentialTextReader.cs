@@ -320,7 +320,8 @@ namespace System.Data.SqlClient
                 }
                 catch (Exception ex)
                 {
-                    // In case of any errors, ensure that the completion is completed and the task is set back to null if we switched it
+                    // In case of any errors, ensure that the completion is completed and the task is set back to null
+                    // if we switched it
                     completion.TrySetException(ex);
                     Interlocked.CompareExchange(ref _currentTask, null, completion.Task);
                     throw;
@@ -361,7 +362,8 @@ namespace System.Data.SqlClient
 
         /// <summary>
         /// Performs the actual reading and converting
-        /// NOTE: This assumes that buffer, index and count are all valid, we're not closed (!IsClosed) and that there is data left (IsDataLeft())
+        /// NOTE: This assumes that buffer, index and count are all valid, we're not closed (!IsClosed) and
+        // that there is data left (IsDataLeft())
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="index"></param>
@@ -405,7 +407,8 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Creates a byte array large enough to store all bytes for the characters in the current encoding, then fills it with any leftover bytes
+        /// Creates a byte array large enough to store all bytes for the characters in the current encoding,
+        // then fills it with any leftover bytes
         /// </summary>
         /// <param name="numberOfChars">Number of characters that are to be read</param>
         /// <param name="byteBufferUsed">Number of bytes pre-filled by the leftover bytes</param>
@@ -427,7 +430,8 @@ namespace System.Data.SqlClient
 
                 if (_leftOverBytes != null)
                 {
-                    // If we have more leftover bytes than we need for this conversion, then just re-use the leftover buffer
+                    // If we have more leftover bytes than we need for this conversion, then just re-use the leftover
+                    // buffer
                     if (_leftOverBytes.Length > byteBufferSize)
                     {
                         byteBuffer = _leftOverBytes;
@@ -585,7 +589,8 @@ namespace System.Data.SqlClient
             }
             catch (OverflowException)
             {
-                // If we've overflowed when adding index and count, then they never would have fit into buffer anyway
+                // If we've overflowed when adding index and count, then they never would have fit into buffer
+                // anyway
                 throw ExceptionBuilder.InvalidOffsetLength();
             }
         }

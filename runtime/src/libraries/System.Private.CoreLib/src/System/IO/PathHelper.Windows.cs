@@ -19,7 +19,8 @@ namespace System.IO
         /// Normalizes via Win32 GetFullPathName().
         /// </remarks>
         /// <param name="path">Path to normalize</param>
-        /// <exception cref="PathTooLongException">Thrown if we have a string that is too large to fit into a UNICODE_STRING.</exception>
+        /// <exception cref="PathTooLongException">Thrown if we have a string that is too large to fit into
+        // a UNICODE_STRING.</exception>
         /// <exception cref="IOException">Thrown if the path is empty.</exception>
         /// <returns>Normalized path</returns>
         internal static string Normalize(string path)
@@ -72,8 +73,10 @@ namespace System.IO
         /// <param name="builder">Builder that will store the result.</param>
         private static void GetFullPathName(ReadOnlySpan<char> path, ref ValueStringBuilder builder)
         {
-            // If the string starts with an extended prefix we would need to remove it from the path before we call GetFullPathName as
-            // it doesn't root extended paths correctly. We don't currently resolve extended paths, so we'll just assert here.
+            // If the string starts with an extended prefix we would need to remove it from the path before we
+            // call GetFullPathName as
+            // it doesn't root extended paths correctly. We don't currently resolve extended paths, so we'll
+            // just assert here.
             Debug.Assert(PathInternal.IsPartiallyQualified(path) || !PathInternal.IsExtended(path));
 
             uint result;
@@ -144,8 +147,10 @@ namespace System.IO
             string? originalPath
         )
         {
-            // We guarantee we'll expand short names for paths that only partially exist. As such, we need to find the part of the path that actually does exist. To
-            // avoid allocating a lot we'll create only one input array and modify the contents with embedded nulls.
+            // We guarantee we'll expand short names for paths that only partially exist. As such, we need to
+            // find the part of the path that actually does exist. To
+            // avoid allocating a lot we'll create only one input array and modify the contents with embedded
+            // nulls.
 
             Debug.Assert(
                 !PathInternal.IsPartiallyQualified(outputBuilder.AsSpan()),
@@ -158,14 +163,17 @@ namespace System.IO
             //  2. Dos UNC (\\Server\Share)
             //  3. Dos device path (\\.\C:\, \\?\C:\)
             //
-            // We want to put the extended syntax on the front if it doesn't already have it (for long path support and speed), which may mean switching from \\.\.
+            // We want to put the extended syntax on the front if it doesn't already have it (for long path
+            // support and speed), which may mean switching from \\.\.
             //
-            // Note that we will never get \??\ here as GetFullPathName() does not recognize \??\ and will return it as C:\??\ (or whatever the current drive is).
+            // Note that we will never get \??\ here as GetFullPathName() does not recognize \??\ and will
+            // return it as C:\??\ (or whatever the current drive is).
 
             int rootLength = PathInternal.GetRootLength(outputBuilder.AsSpan());
             bool isDevice = PathInternal.IsDevice(outputBuilder.AsSpan());
 
-            // As this is a corner case we're not going to add a stackalloc here to keep the stack pressure down.
+            // As this is a corner case we're not going to add a stackalloc here to keep the stack pressure
+            // down.
             ValueStringBuilder inputBuilder = default;
 
             bool isDosUnc = false;

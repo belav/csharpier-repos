@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Fragment caching attribute
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Fragment caching attribute
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -19,10 +19,10 @@ namespace System.Web.UI
     using System.Security.Permissions;
     using System.Web.Caching;
 
-    /*
-     * This class defines the PartialCachingAttribute attribute that can be placed on
-     * user controls classes to enable the fragmant caching feature.
-     */
+/*
+* This class defines the PartialCachingAttribute attribute that can be placed on
+* user controls classes to enable the fragmant caching feature.
+*/
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

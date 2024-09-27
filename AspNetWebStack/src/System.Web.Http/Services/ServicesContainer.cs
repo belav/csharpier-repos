@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -13,10 +14,13 @@ namespace System.Web.Http.Controllers
     // It facilitates sharing all the mutation operations between them.
     public abstract class ServicesContainer : IDisposable
     {
-        // Wrapped/composite versions of the exception service interfaces designed for consumption in catch blocks.
+        // Wrapped/composite versions of the exception service interfaces designed for consumption in catch
+        // blocks.
         // See ExceptionServices.GetLogger/Handler for how these internal services are used.
-        // These instances must be stored separately and not provided via GetService because existing stores for
-        // GetService do not provide concurrency control and these two wrappers are potentially initialized late.
+        // These instances must be stored separately and not provided via GetService because existing stores
+        // for
+        // GetService do not provide concurrency control and these two wrappers are potentially initialized
+        // late.
         internal readonly Lazy<IExceptionLogger> ExceptionServicesLogger;
         internal readonly Lazy<IExceptionHandler> ExceptionServicesHandler;
 
@@ -205,7 +209,8 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Removes the first occurrence of the given service from the service list for the given service type.
+        /// Removes the first occurrence of the given service from the service list for the given service
+        // type.
         /// </summary>
         /// <param name="serviceType">The service type.</param>
         /// <param name="service">The service instance to remove.</param>

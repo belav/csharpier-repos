@@ -506,7 +506,8 @@ namespace System.Net.Http.Tests
                         // GetProxy should now return the proxy closest to being turned back on, which should be firstProxy.
                         Assert.Equal(firstProxy, p.GetProxy(requestUri));
 
-                        // Enumerating a new MultiProxy should again return the proxy closed to being turned back on, and no others.
+                        // Enumerating a new MultiProxy should again return the proxy closed to being turned back on, and no
+                        // others.
                         MultiProxy multiC = wp.GetMultiProxy(requestUri);
                         Assert.True(multiC.ReadNext(out Uri proxyC, out _));
                         Assert.Equal(firstProxy, proxyC);

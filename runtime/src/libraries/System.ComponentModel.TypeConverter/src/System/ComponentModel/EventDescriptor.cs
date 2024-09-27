@@ -12,14 +12,16 @@ namespace System.ComponentModel
             "The built-in EventDescriptor implementation uses Reflection which requires unreferenced code.";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the
+        /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with
+        // the
         /// specified name and attribute array.
         /// </summary>
         protected EventDescriptor(string name, Attribute[]? attrs)
             : base(name, attrs) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the name and attributes in
+        /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with
+        // the name and attributes in
         /// the specified <see cref='System.ComponentModel.MemberDescriptor'/>.
         /// </summary>
         protected EventDescriptor(MemberDescriptor descr)
@@ -28,7 +30,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with
         /// the name in the specified <see cref='System.ComponentModel.MemberDescriptor'/> and the
-        /// attributes in both the <see cref='System.ComponentModel.MemberDescriptor'/> and the <see cref='System.Attribute'/> array.
+        /// attributes in both the <see cref='System.ComponentModel.MemberDescriptor'/> and the <see
+        // cref='System.Attribute'/> array.
         /// </summary>
         protected EventDescriptor(MemberDescriptor descr, Attribute[]? attrs)
             : base(descr, attrs) { }

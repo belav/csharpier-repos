@@ -35,8 +35,10 @@ namespace Microsoft.CodeAnalysis.Emit
         private readonly List<ITypeDefinition> _changedTypeDefs;
 
         /// <summary>
-        /// Cache of type definitions used in signatures of deleted members. Used so that if a method 'C M(C c)' is deleted
-        /// we use the same <see cref="DeletedSourceTypeDefinition"/> instance for the method return type, and the parameter type.
+        /// Cache of type definitions used in signatures of deleted members. Used so that if a method 'C M(C
+        // c)' is deleted
+        /// we use the same <see cref="DeletedSourceTypeDefinition"/> instance for the method return type,
+        // and the parameter type.
         /// </summary>
         private readonly Dictionary<
             ITypeDefinition,
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private readonly EventOrPropertyMapIndex _propertyMap;
         private readonly MethodImplIndex _methodImpls;
 
-        // Keep track of which CustomAttributes rows are added in this and previous deltas, over what is in the
+        // Keep track of which CustomAttributes rows are added in this and previous deltas, over what is in
+        // the
         // original metadata
         private readonly Dictionary<EntityHandle, ImmutableArray<int>> _customAttributesAdded;
 
@@ -273,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 tableSizes[i] = previousTableSizes[i] + deltaTableSizes[i];
             }
 
-            // If the previous generation is 0 (metadata) get the synthesized members from the current compilation's builder,
+            // If the previous generation is 0 (metadata) get the synthesized members from the current
+            // compilation's builder,
             // otherwise members from the current compilation have already been merged into the baseline.
             var synthesizedMembers =
                 (_previousGeneration.Ordinal == 0)
@@ -356,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 // UserString stream is concatenated aligned.
                 userStringStreamLengthAdded: metadataSizes.GetAlignedHeapSize(HeapIndex.UserString)
                     + _previousGeneration.UserStringStreamLengthAdded,
-                // Guid stream accumulates on the GUID heap unlike other heaps, so the previous generations are already included.
+                // Guid stream accumulates on the GUID heap unlike other heaps, so the previous generations are
+                // already included.
                 guidStreamLengthAdded: metadataSizes.HeapSizes[(int)HeapIndex.Guid],
                 synthesizedTypes: ((IPEDeltaAssemblyBuilder)module).GetSynthesizedTypes(),
                 synthesizedMembers: synthesizedMembers,
@@ -690,8 +695,10 @@ namespace Microsoft.CodeAnalysis.Emit
 
                 case SymbolChange.ContainsChanges:
                     // Members changed.
-                    // We keep this list separately because we don't want to output duplicate typedef entries in the EnC log,
-                    // which uses _typeDefs, but it's simpler to let the members output those rows for the updated typedefs
+                    // We keep this list separately because we don't want to output duplicate typedef entries in the EnC
+                    // log,
+                    // which uses _typeDefs, but it's simpler to let the members output those rows for the updated
+                    // typedefs
                     // with the right update type.
                     _changedTypeDefs.Add(typeDef);
                     break;
@@ -923,7 +930,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 // If we're re-emitting parameters for an existing method we need to find their original row numbers
                 // and reuse them so the EnCLog, EnCMap and CustomAttributes tables refer to the right rows
 
-                // Unfortunately we have to check the original metadata and deltas separately as nothing tracks the aggregate data
+                // Unfortunately we have to check the original metadata and deltas separately as nothing tracks the
+                // aggregate data
                 // in a way that we can use
                 var handle = GetMethodDefinitionHandle(methodDef);
                 if (
@@ -1130,8 +1138,10 @@ namespace Microsoft.CodeAnalysis.Emit
         )
         {
             // Defer adding custom attributes to the metadata table, so that we can order them by parent handle.
-            // We can't sort the Custom Attribute table after the fact, like we do with other metadata tables, since
-            // deleted attributes have their parent handle set to nil and thus ordering by parent wouldn't be possible.
+            // We can't sort the Custom Attribute table after the fact, like we do with other metadata tables,
+            // since
+            // deleted attributes have their parent handle set to nil and thus ordering by parent wouldn't be
+            // possible.
 
             _deferredCustomAttributes.Add((parentHandle, attributes.GetEnumerator()));
         }
@@ -1145,9 +1155,12 @@ namespace Microsoft.CodeAnalysis.Emit
                 return;
             }
 
-            // When serializing EnC delta the entries added to Custom Attribute are not sorted, they will stay in the order in which they are added to the table.
-            // Therefore, the final (aggregate) row ids of newly added custom attribute entries will follow the max row id of custom attribute entries
-            // added since the initial generation or the number of attributes in the initial generation if no attribute has been added since.
+            // When serializing EnC delta the entries added to Custom Attribute are not sorted, they will stay
+            // in the order in which they are added to the table.
+            // Therefore, the final (aggregate) row ids of newly added custom attribute entries will follow the
+            // max row id of custom attribute entries
+            // added since the initial generation or the number of attributes in the initial generation if no
+            // attribute has been added since.
             int lastCustomAttributeRowId =
                 _previousGeneration.CustomAttributesAdded.Count > 0
                     ? _previousGeneration.CustomAttributesAdded.Max(static entry => entry.Value[^1])
@@ -1156,12 +1169,15 @@ namespace Microsoft.CodeAnalysis.Emit
                     );
 
             // We emit all attributes that each parent entity has defined in the current generation.
-            // These will replace any attributes emitted in the original metadata as well as any previous generation.
-            // If the number of attributes the entity has in the current generation is less then the total number of attributes
+            // These will replace any attributes emitted in the original metadata as well as any previous
+            // generation.
+            // If the number of attributes the entity has in the current generation is less then the total
+            // number of attributes
             // emitted previously the remaining custom attribute entries are zeroed out.
             //
             // We generate updates to Custom Attribute table in 3 steps in order to ensure the correct ordering.
-            // Each step emits Custom Attribute table rows and the corresponding EnC Map rows for all updated entities.
+            // Each step emits Custom Attribute table rows and the corresponding EnC Map rows for all updated
+            // entities.
 
             _deferredCustomAttributes.Sort(
                 (x, y) =>
@@ -1557,7 +1573,8 @@ namespace Microsoft.CodeAnalysis.Emit
             var previousSizes = _previousGeneration.TableSizes;
             var deltaSizes = GetDeltaTableSizes(rowCounts);
 
-            // Add tokens in order based on TableIndex. Rows for each table are assumed to have been already ordered.
+            // Add tokens in order based on TableIndex. Rows for each table are assumed to have been already
+            // ordered.
             for (
                 var tableIndex = (TableIndex)0;
                 tableIndex <= TableIndex.GenericParamConstraint;

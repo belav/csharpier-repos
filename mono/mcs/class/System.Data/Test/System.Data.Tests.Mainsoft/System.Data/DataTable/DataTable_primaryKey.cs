@@ -429,7 +429,8 @@ namespace tests.system_data_dll.System_Data
             ds.Tables.Add(dtChild);
             dtParent.PrimaryKey = null;
             //this test was addedd to check java exception:
-            //System.ArgumentException: Cannot remove UniqueConstraint because the ForeignKeyConstraint myRelation exists.
+            //System.ArgumentException: Cannot remove UniqueConstraint because the ForeignKeyConstraint
+            // myRelation exists.
             try
             {
                 base.BeginCase("check add primary key with relation ");

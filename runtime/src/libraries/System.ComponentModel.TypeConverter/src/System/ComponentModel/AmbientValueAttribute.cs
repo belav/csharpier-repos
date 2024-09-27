@@ -13,7 +13,8 @@ namespace System.ComponentModel
     public sealed class AmbientValueAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class, converting the
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class, converting the
         /// specified value to the specified type, and using the U.S. English culture as the
         /// translation context.
         /// </summary>
@@ -33,7 +34,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a Unicode
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a Unicode
         /// character.
         /// </summary>
         public AmbientValueAttribute(char value)
@@ -42,7 +44,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using an 8-bit unsigned
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using an 8-bit unsigned
         /// integer.
         /// </summary>
         public AmbientValueAttribute(byte value)
@@ -51,7 +54,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a 16-bit signed
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a 16-bit signed
         /// integer.
         /// </summary>
         public AmbientValueAttribute(short value)
@@ -60,7 +64,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a 32-bit signed
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a 32-bit signed
         /// integer.
         /// </summary>
         public AmbientValueAttribute(int value)
@@ -69,7 +74,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a 64-bit signed
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a 64-bit signed
         /// integer.
         /// </summary>
         public AmbientValueAttribute(long value)
@@ -78,7 +84,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a
         /// single-precision floating point number.
         /// </summary>
         public AmbientValueAttribute(float value)
@@ -87,7 +94,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a
         /// double-precision floating point number.
         /// </summary>
         public AmbientValueAttribute(double value)
@@ -96,7 +104,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a <see cref='bool'/>
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a <see cref='bool'/>
         /// value.
         /// </summary>
         public AmbientValueAttribute(bool value)
@@ -105,7 +114,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/> class using a <see cref='string'/>.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.AmbientValueAttribute'/>
+        // class using a <see cref='string'/>.
         /// </summary>
         public AmbientValueAttribute(string? value)
         {

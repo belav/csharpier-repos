@@ -138,7 +138,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 Init(isError, errorCode, message, sourceCells, debugMessage);
             }
 
-            //There are cases when we want to create a ViewGen error that is not specific to any mapping fragment
+            //There are cases when we want to create a ViewGen error that is not specific to any mapping
+            // fragment
             //In this case, it is better to just create the EdmSchemaError directly and hold on to it.
             internal Record(EdmSchemaError error)
             {

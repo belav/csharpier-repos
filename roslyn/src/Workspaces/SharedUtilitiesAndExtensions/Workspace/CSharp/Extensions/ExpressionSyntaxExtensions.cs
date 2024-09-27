@@ -194,8 +194,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         ///     i.          // -- here
         ///     List ml = new List();
         /// </code>
-        /// The problem is that "i.List" gets parsed as a type.  In this case we need to try binding again as if "i" is
-        /// an expression and not a type.  In order to do that, we need to speculate as to what 'i' meant if it wasn't
+        /// The problem is that "i.List" gets parsed as a type.  In this case we need to try binding again
+        // as if "i" is
+        /// an expression and not a type.  In order to do that, we need to speculate as to what 'i' meant if
+        // it wasn't
         /// part of a local declaration's type.
         /// <para/>
         /// Another interesting case is something like:

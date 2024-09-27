@@ -4,8 +4,10 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-// The following are untriaged violations, do not add to this list unless you hit a bug in Code Analysis. Any explicitly
-// suppressed violations should either be applied against the member or type itself, or if raised against a namespace,
+// The following are untriaged violations, do not add to this list unless you hit a bug in Code
+// Analysis. Any explicitly
+// suppressed violations should either be applied against the member or type itself, or if raised
+// against a namespace,
 // resource or assembly, placed in SuppressMessages.cs.
 
 // Code Analysis Bug: ValidateArgumentsOfPublicMethods should not fire on protected members

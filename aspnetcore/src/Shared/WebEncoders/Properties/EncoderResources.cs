@@ -5,7 +5,8 @@ using System.Globalization;
 
 namespace Microsoft.Extensions.WebEncoders.Sources;
 
-// TODO using a resx file. project.json, unfortunately, fails to embed resx files when there are also compile items
+// TODO using a resx file. project.json, unfortunately, fails to embed resx files when there are
+// also compile items
 // in the contentFiles section. Revisit once we convert repos to MSBuild
 internal static class EncoderResources
 {

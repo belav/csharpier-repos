@@ -20,7 +20,8 @@ namespace MS.Internal.Xml.XPath
     // -- Add firts node of its parent for each input node.
     // -- Sort these pares by first nodes.
     // - Advance algorithm will look like:
-    // -- For each row in InputArays we will output first node + all its following nodes which are < sentinel
+    // -- For each row in InputArays we will output first node + all its following nodes which are <
+    // sentinel
     // -- Before outputing each node in row #I we will check that it is < first node in row #I+1
     // --- if true we actualy output it
     // --- if false, we hold with row #I and apply this algorith starting for row #I+1

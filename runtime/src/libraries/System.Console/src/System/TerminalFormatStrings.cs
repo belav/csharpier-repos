@@ -6,7 +6,8 @@ using System.Diagnostics;
 
 namespace System;
 
-/// <summary>Provides format strings and related information for use with the current terminal.</summary>
+/// <summary>Provides format strings and related information for use with the current
+// terminal.</summary>
 internal sealed class TerminalFormatStrings
 {
     /// <summary>The format string to use to change the foreground color.</summary>
@@ -40,7 +41,8 @@ internal sealed class TerminalFormatStrings
     public readonly string? Bell;
 
     /// <summary>The format string to use to clear the terminal.</summary>
-    /// <remarks>If supported, this includes the format string for first clearing the terminal scrollback buffer.</remarks>
+    /// <remarks>If supported, this includes the format string for first clearing the terminal
+    // scrollback buffer.</remarks>
     public readonly string? Clear;
 
     /// <summary>The format string to use to set the position of the cursor.</summary>

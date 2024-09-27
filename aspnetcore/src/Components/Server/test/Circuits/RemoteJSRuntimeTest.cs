@@ -71,7 +71,8 @@ public class RemoteJSRuntimeTest
         jsRuntime.TestReceiveByteArray(id: 0, Array.Empty<byte>());
         for (var i = 1; i < 5; i++)
         {
-            // Each array takes is counted as being atleast 4 bytes. 5*4 = 20 => after this loop we've received max bytes
+            // Each array takes is counted as being atleast 4 bytes. 5*4 = 20 => after this loop we've received
+            // max bytes
             jsRuntime.TestReceiveByteArray(i, Array.Empty<byte>());
         }
 

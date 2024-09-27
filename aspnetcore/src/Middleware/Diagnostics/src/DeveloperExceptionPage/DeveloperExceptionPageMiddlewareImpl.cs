@@ -26,7 +26,8 @@ using Microsoft.Net.Http.Headers;
 namespace Microsoft.AspNetCore.Diagnostics;
 
 /// <summary>
-/// Captures synchronous and asynchronous exceptions from the pipeline and generates error responses.
+/// Captures synchronous and asynchronous exceptions from the pipeline and generates error
+// responses.
 /// </summary>
 internal class DeveloperExceptionPageMiddlewareImpl
 {
@@ -86,7 +87,8 @@ internal class DeveloperExceptionPageMiddlewareImpl
         JsonOptions? jsonOptions
     )
     {
-        // Create context from configured options to get settings such as PropertyNamePolicy and DictionaryKeyPolicy.
+        // Create context from configured options to get settings such as PropertyNamePolicy and
+        // DictionaryKeyPolicy.
         jsonOptions ??= new JsonOptions();
         return new ExtensionsExceptionJsonContext(
             new JsonSerializerOptions(jsonOptions.SerializerOptions)
@@ -153,7 +155,8 @@ internal class DeveloperExceptionPageMiddlewareImpl
             {
                 context.Response.Clear();
 
-                // Preserve the status code that would have been written by the server automatically when a BadHttpRequestException is thrown.
+                // Preserve the status code that would have been written by the server automatically when a
+                // BadHttpRequestException is thrown.
                 if (ex is BadHttpRequestException badHttpRequestException)
                 {
                     context.Response.StatusCode = badHttpRequestException.StatusCode;
@@ -199,7 +202,8 @@ internal class DeveloperExceptionPageMiddlewareImpl
             diagnosticSource.Write(name, value);
     }
 
-    // Assumes the response headers have not been sent.  If they have, still attempt to write to the body.
+    // Assumes the response headers have not been sent.  If they have, still attempt to write to the
+    // body.
     private Task DisplayException(ErrorContext errorContext)
     {
         var httpContext = errorContext.HttpContext;
@@ -266,8 +270,10 @@ internal class DeveloperExceptionPageMiddlewareImpl
             Status = httpContext.Response.StatusCode,
         };
 
-        // Problem details source gen serialization doesn't know about IHeaderDictionary or RouteValueDictionary.
-        // Serialize payload to a JsonElement here. Problem details serialization can write JsonElement in extensions dictionary.
+        // Problem details source gen serialization doesn't know about IHeaderDictionary or
+        // RouteValueDictionary.
+        // Serialize payload to a JsonElement here. Problem details serialization can write JsonElement in
+        // extensions dictionary.
         problemDetails.Extensions["exception"] = JsonSerializer.SerializeToElement(
             new ExceptionExtensionData(
                 details: errorContext.Exception.ToString(),

@@ -101,7 +101,8 @@ namespace System.DirectoryServices.Protocols
                 // Try to get the results available for this asynchronous operation  .
                 GetResultsHelper(asyncResult);
 
-                // If we are done with the asynchronous search, we need to fire callback and signal the waitable object.
+                // If we are done with the asynchronous search, we need to fire callback and signal the waitable
+                // object.
                 if (asyncResult._resultStatus == ResultsStatus.Done)
                 {
                     asyncResult._manualResetEvent.Set();

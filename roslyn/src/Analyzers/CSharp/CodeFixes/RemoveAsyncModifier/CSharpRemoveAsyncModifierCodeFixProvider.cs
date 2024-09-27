@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
                 _ => methodLikeNode,
             };
 
-        // Block bodied lambdas and anonymous methods need to be formatted after changing their modifiers, or their indentation is broken
+        // Block bodied lambdas and anonymous methods need to be formatted after changing their modifiers,
+        // or their indentation is broken
         private static SyntaxNode AnnotateBlock(SyntaxGenerator generator, SyntaxNode node) =>
             generator.GetExpression(node) == null
                 ? node.WithAdditionalAnnotations(Formatter.Annotation)

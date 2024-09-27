@@ -725,7 +725,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            //Debug.WriteLine(" - Future = {2}Future.CW(func, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Future = {2}Future.CW(func, ct({0}), tco({1}), TS.Default)", preCanceled ?
+                                            // "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
                                             continuation = ((Task<int>)antecedent).ContinueWith(
                                                 _ => 5,
                                                 ct,
@@ -735,7 +736,8 @@ namespace System.Threading.Tasks.Tests
                                         }
                                         else
                                         {
-                                            //Debug.WriteLine(" - Future = {2}Task.CW(func, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Future = {2}Task.CW(func, ct({0}), tco({1}), TS.Default)", preCanceled ?
+                                            // "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
                                             continuation = antecedent.ContinueWith(
                                                 _ => 5,
                                                 ct,
@@ -748,7 +750,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            //Debug.WriteLine(" - Task = {2}Future.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Task = {2}Future.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ?
+                                            // "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
                                             continuation = ((Task<int>)antecedent).ContinueWith(
                                                 _ => { },
                                                 ct,
@@ -758,7 +761,8 @@ namespace System.Threading.Tasks.Tests
                                         }
                                         else
                                         {
-                                            //Debug.WriteLine(" - Task = {2}Task.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ? "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Task = {2}Task.CW(action, ct({0}), tco({1}), TS.Default)", preCanceled ?
+                                            // "signaled" : "unsignaled", tco, preCompletedTask ? "C" : "U");
                                             continuation = antecedent.ContinueWith(
                                                 _ => { },
                                                 ct,
@@ -840,7 +844,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            //Debug.WriteLine(" - Future = {1}Future.CW(func, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Future = {1}Future.CW(func, ct({0}))", preCanceled ? "signaled" :
+                                            // "unsignaled", preCompletedTask ? "C" : "U");
                                             continuation = ((Task<int>)antecedent).ContinueWith(
                                                 _ => 5,
                                                 ct
@@ -848,7 +853,8 @@ namespace System.Threading.Tasks.Tests
                                         }
                                         else
                                         {
-                                            //Debug.WriteLine(" - Future = {1}Task.CW(func, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Future = {1}Task.CW(func, ct({0}))", preCanceled ? "signaled" : "unsignaled",
+                                            // preCompletedTask ? "C" : "U");
                                             continuation = antecedent.ContinueWith(_ => 5, ct);
                                         }
                                     }
@@ -856,7 +862,8 @@ namespace System.Threading.Tasks.Tests
                                     {
                                         if (antecedentIsFuture)
                                         {
-                                            //Debug.WriteLine(" - Task = {1}Future.CW(action, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Task = {1}Future.CW(action, ct({0}))", preCanceled ? "signaled" :
+                                            // "unsignaled", preCompletedTask ? "C" : "U");
                                             continuation = ((Task<int>)antecedent).ContinueWith(
                                                 _ => { },
                                                 ct
@@ -864,7 +871,8 @@ namespace System.Threading.Tasks.Tests
                                         }
                                         else
                                         {
-                                            //Debug.WriteLine(" - Task = {1}Task.CW(action, ct({0}))", preCanceled ? "signaled" : "unsignaled", preCompletedTask ? "C" : "U");
+                                            //Debug.WriteLine(" - Task = {1}Task.CW(action, ct({0}))", preCanceled ? "signaled" : "unsignaled",
+                                            // preCompletedTask ? "C" : "U");
                                             continuation = antecedent.ContinueWith(_ => { }, ct);
                                         }
                                     }
@@ -999,7 +1007,8 @@ namespace System.Threading.Tasks.Tests
                                 }
 
                                 //
-                                // The ContinueWith overloads that take a TaskScheduler are already being tested in RunContinueWithTMTests().
+                                // The ContinueWith overloads that take a TaskScheduler are already being tested in
+                                // RunContinueWithTMTests().
                                 // So I won't add a block of such tests here.
                                 //
                             }
@@ -1185,7 +1194,8 @@ namespace System.Threading.Tasks.Tests
             v3.Start();
             v7.Start();
 
-            //Debug.WriteLine(" Testing that Unwrap() products do not complete before proxy source completes...");
+            //Debug.WriteLine(" Testing that Unwrap() products do not complete before proxy source
+            // completes...");
             checkCompletionState(c1, false, "Task ==> Task<T>, source task incomplete");
             checkCompletionState(c2, false, "Task<T> ==> Task<T>, source task incomplete");
             checkCompletionState(c3, false, "StartNew ==> Task<T>, source task incomplete");
@@ -2254,7 +2264,8 @@ namespace System.Threading.Tasks.Tests
             int cancelAfter
         )
         {
-            //Debug.WriteLine("    - ContinueWithTortureTest(numCanceled={0}, numLeftover={1}, completeAfter={2}, cancelAfter={3})",
+            //Debug.WriteLine("    - ContinueWithTortureTest(numCanceled={0}, numLeftover={1},
+            // completeAfter={2}, cancelAfter={3})",
             //    numCanceled, numLeftover, completeAfter, cancelAfter);
 
             // The TCS mechanism gives us an easy way to start (and complete) antecedent
@@ -2265,7 +2276,8 @@ namespace System.Threading.Tasks.Tests
             int canceledCount = 0; // incremented by "cancel" continuations
             CancellationTokenSource cts = new CancellationTokenSource(); // CTS to cancel
 
-            // These TCS/continuation combos will serve to initiate antecedent completion or CTS signaling asynchronously
+            // These TCS/continuation combos will serve to initiate antecedent completion or CTS signaling
+            // asynchronously
             TaskCompletionSource completionTcs = new TaskCompletionSource();
             completionTcs.Task.ContinueWith(
                 _ =>
@@ -2314,7 +2326,8 @@ namespace System.Threading.Tasks.Tests
                             ? TaskContinuationOptions.None
                             : TaskContinuationOptions.ExecuteSynchronously;
 
-                    // The cancelAction should run exactly once per "to be canceled" continuation -- either in the first continuation or,
+                    // The cancelAction should run exactly once per "to be canceled" continuation -- either in the first
+                    // continuation or,
                     // if the first continuation is canceled, in the second continuation.
                     cancelContinuations[i] = antecedent
                         .ContinueWith(cancelAction, cts.Token, tco, TaskScheduler.Default)
@@ -2423,7 +2436,8 @@ namespace System.Threading.Tasks.Tests
         private static Task<int> Choose(CancellationToken cancellationToken)
         {
             // Set up completion structures
-            //var boxedCompleted = new StrongBox<Task>(); // Acts as both completion marker and sync obj for targets
+            //var boxedCompleted = new StrongBox<Task>(); // Acts as both completion marker and sync obj for
+            // targets
             var result = new TaskCompletionSource<int>();
 
             // Set up teardown cancellation.  We will request cancellation when a) the supplied options token

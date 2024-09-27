@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.WebUtilities;
 public static class Base64UrlTextEncoder
 {
     /// <summary>
-    /// Encodes supplied data into Base64 and replaces any URL encodable characters into non-URL encodable
+    /// Encodes supplied data into Base64 and replaces any URL encodable characters into non-URL
+    // encodable
     /// characters.
     /// </summary>
     /// <param name="data">Data to be encoded.</param>
@@ -20,7 +21,8 @@ public static class Base64UrlTextEncoder
     }
 
     /// <summary>
-    /// Decodes supplied string by replacing the non-URL encodable characters with URL encodable characters and
+    /// Decodes supplied string by replacing the non-URL encodable characters with URL encodable
+    // characters and
     /// then decodes the Base64 string.
     /// </summary>
     /// <param name="text">The string to be decoded.</param>

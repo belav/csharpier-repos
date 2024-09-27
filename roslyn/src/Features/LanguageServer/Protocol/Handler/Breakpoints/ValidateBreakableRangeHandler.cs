@@ -96,15 +96,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var breakpointRange = ProtocolConversions.TextSpanToRange(breakpointSpan, text);
 
-            // if the breakpoint we get is smaller than what was requested, then we might be in a situation where
+            // if the breakpoint we get is smaller than what was requested, then we might be in a situation
+            // where
             // the breakpoint was expanded due to the user typing some code above the placement. For example:
             //
             //     $$
             // BP: Console.WriteLine(1);
             //
-            // If the user types "int a =" we'll expand the breakpoint, as syntactically its an assigment expression, but then
-            // when they continue to type "1;" we'll get a request for a breakpoint that spans two lines, and then the above
-            // resolve call will shrink it to one. In that case, we prefer to stick to the end of the requested range.
+            // If the user types "int a =" we'll expand the breakpoint, as syntactically its an assigment
+            // expression, but then
+            // when they continue to type "1;" we'll get a request for a breakpoint that spans two lines, and
+            // then the above
+            // resolve call will shrink it to one. In that case, we prefer to stick to the end of the requested
+            // range.
             //
             // Similar exists for a single line, for example give:
             //

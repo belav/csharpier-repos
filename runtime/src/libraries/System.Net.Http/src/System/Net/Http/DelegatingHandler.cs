@@ -89,7 +89,8 @@ namespace System.Net.Http
             {
                 throw new InvalidOperationException(SR.net_http_handler_not_assigned);
             }
-            // This method flags the handler instances as "active". I.e. we executed at least one request (or are
+            // This method flags the handler instances as "active". I.e. we executed at least one request (or
+            // are
             // in the process of doing so). This information is used to lock-down all property setters. Once a
             // Send/SendAsync operation started, no property can be changed.
             if (!_operationStarted)

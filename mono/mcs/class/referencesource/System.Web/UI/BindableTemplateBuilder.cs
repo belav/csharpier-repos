@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Classes related to templated control support
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Classes related to templated control support
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -29,19 +29,19 @@ namespace System.Web.UI
     {
         private ExtractTemplateValuesMethod _extractTemplateValuesMethod;
 
-        /*
-         * No-compile delegate handler for ExtractValues.
-         */
+/*
+* No-compile delegate handler for ExtractValues.
+*/
         private IOrderedDictionary ExtractTemplateValuesMethod(Control container)
         {
-            /*System.Web.UI.OrderedDictionary @__table;
-            System.Web.UI.WebControls.DropDownList ddl2;
-            @__table = new System.Web.UI.OrderedDictionary();
-            ddl2 = ((System.Web.UI.WebControls.DropDownList)(@__container.FindControl("ddl2")));
-            if ((ddl2 != null)) {
-                @__table["FavVegetable"] = ddl2.SelectedValue;
-            }
-            return @__table;*/
+/*System.Web.UI.OrderedDictionary @__table;
+System.Web.UI.WebControls.DropDownList ddl2;
+@__table = new System.Web.UI.OrderedDictionary();
+ddl2 = ((System.Web.UI.WebControls.DropDownList)(@__container.FindControl("ddl2")));
+if ((ddl2 != null)) {
+@__table["FavVegetable"] = ddl2.SelectedValue;
+}
+return @__table;*/
 
             BindableTemplateBuilder bindableTemplateBuilder = this as BindableTemplateBuilder;
 
@@ -177,10 +177,10 @@ namespace System.Web.UI
             }
         }
 
-        /*
-         * IBindableTemplate implementation
-         * This implementation of ITemplate is used in the designer and no-compile.
-         */
+/*
+* IBindableTemplate implementation
+* This implementation of ITemplate is used in the designer and no-compile.
+*/
         public IOrderedDictionary ExtractValues(Control container)
         {
             if (_extractTemplateValuesMethod != null && !InDesigner)
@@ -210,11 +210,11 @@ namespace System.Web.UI
     /// </devdoc>
     public delegate IOrderedDictionary ExtractTemplateValuesMethod(Control control);
 
-    /*
-     * This class is the ITemplate implementation that is called from the
-     * generated page class code.  It just passes the Initialize call on to a
-     * delegate.
-     */
+/*
+* This class is the ITemplate implementation that is called from the
+* generated page class code.  It just passes the Initialize call on to a
+* delegate.
+*/
 
     /// <internalonly/>
     /// <devdoc>
@@ -240,7 +240,8 @@ namespace System.Web.UI
         // IBindableTemplate::ExtractValues
 
         /// <devdoc>
-        /// <para>Calls the ExtractTemplateValuesMethod delegate, which will return a dictionary of values.</para>
+        /// <para>Calls the ExtractTemplateValuesMethod delegate, which will return a dictionary of
+        // values.</para>
         /// </devdoc>
         public IOrderedDictionary ExtractValues(Control container)
         {

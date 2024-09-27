@@ -117,9 +117,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override bool Equals(object? obj) => obj is LazyMemberInfo other && Equals(other);
 
-        /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
+        /// <summary>Indicates whether the current instance is equal to another instance of the same
+        // type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>
-        /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
+        /// <returns>true if the current instance is equal to the other instance; otherwise,
+        // false.</returns>
         public bool Equals(LazyMemberInfo other)
         {
             // Different member types mean different members
@@ -128,7 +130,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 return false;
             }
 
-            // if any of the lazy members create accessors in a delay-loaded fashion, we simply compare the creators
+            // if any of the lazy members create accessors in a delay-loaded fashion, we simply compare the
+            // creators
             if ((_accessorsCreator != null) || (other._accessorsCreator != null))
             {
                 return object.Equals(_accessorsCreator, other._accessorsCreator);

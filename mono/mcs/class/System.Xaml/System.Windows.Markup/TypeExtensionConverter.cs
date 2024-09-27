@@ -34,7 +34,8 @@ namespace System.Windows.Markup
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            // unlike implied at http://msdn.microsoft.com/en-us/library/ee621338.aspx , it does not support IXamlTypeResolver.
+            // unlike implied at http://msdn.microsoft.com/en-us/library/ee621338.aspx , it does not support
+            // IXamlTypeResolver.
             //if (sourceType == typeof (string) && context != null) {
             //	var xtr = context.GetService (typeof (IXamlTypeResolver)) as IXamlTypeResolver;
             //	return xtr != null;

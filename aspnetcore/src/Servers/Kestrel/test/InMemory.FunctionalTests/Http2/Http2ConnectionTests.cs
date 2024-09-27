@@ -863,7 +863,8 @@ public class Http2ConnectionTests : Http2TestBase
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
             withStreamId: 1
         );
-        // The client's settings is still defaulted to Http2PeerSettings.MinAllowedMaxFrameSize so the echo response will come back in two separate frames
+        // The client's settings is still defaulted to Http2PeerSettings.MinAllowedMaxFrameSize so the echo
+        // response will come back in two separate frames
         await ExpectAsync(
             Http2FrameType.DATA,
             withLength: Http2PeerSettings.MinAllowedMaxFrameSize,
@@ -1007,7 +1008,8 @@ public class Http2ConnectionTests : Http2TestBase
             dataFrames.Add(dataFrame1);
         }
 
-        // Writing over half the initial window size induces both a connection-level and stream-level window update.
+        // Writing over half the initial window size induces both a connection-level and stream-level window
+        // update.
         await SendDataAsync(1, _maxData, endStream: false);
 
         var streamWindowUpdateFrame1 = await ExpectAsync(
@@ -1110,7 +1112,8 @@ public class Http2ConnectionTests : Http2TestBase
         var remainder = initialStreamWindowSize % (int)Http2PeerSettings.DefaultMaxFrameSize;
 
         // Write just to the limit.
-        // This should not produce a async task from the request body pipe. See the Debug.Assert in Http2Stream.OnDataAsync
+        // This should not produce a async task from the request body pipe. See the Debug.Assert in
+        // Http2Stream.OnDataAsync
         await SendDataAsync(1, new Memory<byte>(_maxData, 0, remainder), endStream: false);
 
         // End
@@ -1340,7 +1343,8 @@ public class Http2ConnectionTests : Http2TestBase
             dataFrames.Add(dataFrame3);
         }
 
-        // Uploading data to a new stream induces a second connection-level but not stream-level window update.
+        // Uploading data to a new stream induces a second connection-level but not stream-level window
+        // update.
         await StartStreamAsync(3, _browserRequestHeaders, endStream: false);
         await SendDataAsync(3, _maxData, endStream: true);
 
@@ -1562,7 +1566,8 @@ public class Http2ConnectionTests : Http2TestBase
             withStreamId: 1
         );
 
-        // The frames come back in various sizes depending on the pipe buffers, and without the padding we sent.
+        // The frames come back in various sizes depending on the pipe buffers, and without the padding we
+        // sent.
         while (dataSent > 0)
         {
             var frame = await ReceiveFrameAsync();
@@ -1666,7 +1671,8 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task DATA_BufferRequestBodyLargerThanStreamSizeSmallerThanConnectionPipe_Works()
     {
-        // This test was not written to allow for arbitrary initial stream sizes. It was tuned to the old defaults.
+        // This test was not written to allow for arbitrary initial stream sizes. It was tuned to the old
+        // defaults.
         _serviceContext.ServerOptions.Limits.Http2.InitialConnectionWindowSize = 128 * 1024;
         _serviceContext.ServerOptions.Limits.Http2.InitialStreamWindowSize = 96 * 1024;
 
@@ -1743,7 +1749,8 @@ public class Http2ConnectionTests : Http2TestBase
             withStreamId: 1
         );
 
-        // Writing over half the initial window size induces both a connection-level and stream-level window update.
+        // Writing over half the initial window size induces both a connection-level and stream-level window
+        // update.
 
         await SendDataAsync(1, _maxData, endStream: true);
 
@@ -1911,7 +1918,8 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task DATA_Received_StreamHalfClosedRemote_ConnectionError()
     {
-        // Use _waitForAbortApplication so we know the stream will still be active when we send the illegal DATA frame
+        // Use _waitForAbortApplication so we know the stream will still be active when we send the illegal
+        // DATA frame
         await InitializeConnectionAsync(_waitForAbortApplication);
 
         await StartStreamAsync(1, _postRequestHeaders, endStream: true);
@@ -1947,7 +1955,8 @@ public class Http2ConnectionTests : Http2TestBase
 
         await SendDataAsync(1, _helloWorldBytes, endStream: false);
 
-        // There's a race where either of these messages could be logged, depending on if the stream cleanup has finished yet.
+        // There's a race where either of these messages could be logged, depending on if the stream cleanup
+        // has finished yet.
         await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
             ignoreNonGoAwayFrames: false,
             expectedLastStreamId: 1,
@@ -2249,7 +2258,8 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task DATA_Sent_DespiteConnectionOutputFlowControl_IfEmptyAndEndsStream()
     {
-        // Zero-length data frames are allowed to be sent even if there is no space available in the flow control window.
+        // Zero-length data frames are allowed to be sent even if there is no space available in the flow
+        // control window.
         // https://httpwg.org/specs/rfc7540.html#rfc.section.6.9.1
 
         var expectedFullFrameCountBeforeBackpressure =
@@ -2429,7 +2439,8 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task DATA_Sent_DespiteStreamOutputFlowControl_IfEmptyAndEndsStream()
     {
-        // Zero-length data frames are allowed to be sent even if there is no space available in the flow control window.
+        // Zero-length data frames are allowed to be sent even if there is no space available in the flow
+        // control window.
         // https://httpwg.org/specs/rfc7540.html#rfc.section.6.9.1
 
         // This only affects the stream windows. The connection-level window is always initialized at 64KiB.
@@ -3067,7 +3078,8 @@ public class Http2ConnectionTests : Http2TestBase
         // Try to re-use the stream ID (http://httpwg.org/specs/rfc7540.html#rfc.section.5.1.1)
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
-        // There's a race where either of these messages could be logged, depending on if the stream cleanup has finished yet.
+        // There's a race where either of these messages could be logged, depending on if the stream cleanup
+        // has finished yet.
         await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
             ignoreNonGoAwayFrames: false,
             expectedLastStreamId: 1,
@@ -3086,7 +3098,8 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task HEADERS_Received_StreamHalfClosedRemote_ConnectionError()
     {
-        // Use _waitForAbortApplication so we know the stream will still be active when we send the illegal DATA frame
+        // Use _waitForAbortApplication so we know the stream will still be active when we send the illegal
+        // DATA frame
         await InitializeConnectionAsync(_waitForAbortApplication);
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
@@ -3120,7 +3133,8 @@ public class Http2ConnectionTests : Http2TestBase
             withStreamId: 3
         );
 
-        // Stream 1 was implicitly closed by opening stream 3 before (http://httpwg.org/specs/rfc7540.html#rfc.section.5.1.1)
+        // Stream 1 was implicitly closed by opening stream 3 before
+        // (http://httpwg.org/specs/rfc7540.html#rfc.section.5.1.1)
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
         await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
@@ -4595,7 +4609,8 @@ public class Http2ConnectionTests : Http2TestBase
         // First byte is always 0
         // Second byte is the length of header name which is 1
         // Third byte is the header name which is A/B
-        // Next three bytes are the 7-bit integer encoding representation of the header length which is 16*1024
+        // Next three bytes are the 7-bit integer encoding representation of the header length which is
+        // 16*1024
         var encodedHeaderLength = 1 + 1 + 1 + 3 + headerValueLength;
         // Adding 10 additional bytes for encoding overhead
         var payloadLength = defaultResponseHeaderLength + encodedHeaderLength;
@@ -5460,7 +5475,8 @@ public class Http2ConnectionTests : Http2TestBase
 
         await backpressureReleasedTcs.Task.DefaultTimeout();
 
-        // This is the remaining data that could have come in the last frame if not for the flow control window,
+        // This is the remaining data that could have come in the last frame if not for the flow control
+        // window,
         // so there's no need to release the semaphore again.
         await ExpectAsync(
             Http2FrameType.DATA,
@@ -6656,7 +6672,8 @@ public class Http2ConnectionTests : Http2TestBase
                 // An extra one to break it
                 await SendDataAsync(1, new byte[100], endStream: true);
 
-                // There's a race where either of these messages could be logged, depending on if the stream cleanup has finished yet.
+                // There's a race where either of these messages could be logged, depending on if the stream cleanup
+                // has finished yet.
                 await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
                     ignoreNonGoAwayFrames: false,
                     expectedLastStreamId: 1,
@@ -6685,7 +6702,8 @@ public class Http2ConnectionTests : Http2TestBase
                     _requestTrailers
                 );
 
-                // There's a race where either of these messages could be logged, depending on if the stream cleanup has finished yet.
+                // There's a race where either of these messages could be logged, depending on if the stream cleanup
+                // has finished yet.
                 await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
                     ignoreNonGoAwayFrames: false,
                     expectedLastStreamId: 1,
@@ -6711,10 +6729,12 @@ public class Http2ConnectionTests : Http2TestBase
                     Http2ContinuationFrameFlags.END_HEADERS,
                     _requestTrailers
                 );
-                // An extra one to break it. It's not a Continuation because that would fail with an error that no headers were in progress.
+                // An extra one to break it. It's not a Continuation because that would fail with an error that no
+                // headers were in progress.
                 await SendHeadersAsync(1, Http2HeadersFrameFlags.END_STREAM, _requestTrailers);
 
-                // There's a race where either of these messages could be logged, depending on if the stream cleanup has finished yet.
+                // There's a race where either of these messages could be logged, depending on if the stream cleanup
+                // has finished yet.
                 await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
                     ignoreNonGoAwayFrames: false,
                     expectedLastStreamId: 1,
@@ -6783,7 +6803,8 @@ public class Http2ConnectionTests : Http2TestBase
                 throw new NotImplementedException(finalFrameType.ToString());
         }
 
-        // There's a race where either of these messages could be logged, depending on if the stream cleanup has finished yet.
+        // There's a race where either of these messages could be logged, depending on if the stream cleanup
+        // has finished yet.
         await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(
             ignoreNonGoAwayFrames: false,
             expectedLastStreamId: 1,

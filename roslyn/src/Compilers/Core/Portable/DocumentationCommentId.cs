@@ -651,7 +651,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    // get count of all type parameter preceding the declaration of the type parameters containing symbol.
+                    // get count of all type parameter preceding the declaration of the type parameters containing
+                    // symbol.
                     var container = symbol.ContainingSymbol?.ContainingSymbol;
                     var b = GetTotalTypeParameterCount(container as INamedTypeSymbol);
                     _builder.Append("`");
@@ -1354,7 +1355,8 @@ namespace Microsoft.CodeAnalysis
                                         )
                                     )
                                     {
-                                        // if the parameters cannot be identified (some error), then the symbol cannot match, try next method symbol
+                                        // if the parameters cannot be identified (some error), then the symbol cannot match, try next
+                                        // method symbol
                                         continue;
                                     }
                                 }

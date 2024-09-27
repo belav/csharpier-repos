@@ -28,12 +28,16 @@ namespace Microsoft.CodeAnalysis.Differencing
         /// Underlying storage for <see cref="VArray"/>s allocated on <see cref="VStack"/>.
         /// </summary>
         /// <remarks>
-        /// The LCS algorithm allocates <see cref="VArray"/>s of sizes (3, 2*1 + 1, ..., 2*D + 1), always in this order,
+        /// The LCS algorithm allocates <see cref="VArray"/>s of sizes (3, 2*1 + 1, ..., 2*D + 1), always in
+        // this order,
         /// where D is at most the sum of lengths of the compared sequences.
-        /// The arrays get pushed on a stack as they are built up, then all consumed in the reverse order (stack pop).
+        /// The arrays get pushed on a stack as they are built up, then all consumed in the reverse order
+        // (stack pop).
         ///
-        /// Since the exact length of each array in the above sequence is known we avoid allocating each individual array.
-        /// Instead we allocate a large buffer serving as a a backing storage of a contiguous sequence of arrays
+        /// Since the exact length of each array in the above sequence is known we avoid allocating each
+        // individual array.
+        /// Instead we allocate a large buffer serving as a a backing storage of a contiguous sequence of
+        // arrays
         /// corresponding to stack depths <see cref="MinDepth"/> to <see cref="MaxDepth"/>.
         /// If more storage is needed we chain next large buffer to the previous one in a linked list.
         ///
@@ -45,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             /// The max stack depth backed by the fist buffer.
             /// Size of the buffer for 100 is ~10K.
             /// For 150 it'd be 91KB, which would be allocated on LOH.
-            /// The buffers grow by factor of <see cref="GrowFactor"/>, so the next buffer will be allocated on LOH.
+            /// The buffers grow by factor of <see cref="GrowFactor"/>, so the next buffer will be allocated on
+            // LOH.
             /// </summary>
             public const int FirstSegmentMaxDepth = 100;
 
@@ -70,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Differencing
 
             /// <summary>
             /// Do not expand pooled buffers to more than ~12 MB total size (sum of all linked segment sizes).
-            /// This threshold is achieved when <see cref="MaxDepth"/> is greater than <see cref="PooledSegmentMaxDepthThreshold"/> = sqrt(size_limit / sizeof(int)).
+            /// This threshold is achieved when <see cref="MaxDepth"/> is greater than <see
+            // cref="PooledSegmentMaxDepthThreshold"/> = sqrt(size_limit / sizeof(int)).
             /// </summary>
             internal const int PooledSegmentMaxDepthThreshold = 1800;
 
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Differencing
                 var depth = _depth++;
                 if (depth > _currentBuffer.MaxDepth)
                 {
-                    // If the buffer is not big enough add another segment to the linked list (the constructor takes care of the linking).
+                    // If the buffer is not big enough add another segment to the linked list (the constructor takes
+                    // care of the linking).
                     // Note that the segments are not pooled on their own. The whole linked list of buffers is pooled.
                     _currentBuffer = _currentBuffer.Next ?? new VBuffer(_currentBuffer);
                 }
@@ -215,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Differencing
                     copyLength = _length;
                 }
 
-                // since we might be reusing previously used arrays, we need to clear slots that are not copied over from the other array:
+                // since we might be reusing previously used arrays, we need to clear slots that are not copied over
+                // from the other array:
                 Array.Clear(_buffer, _start, dstCopyStart);
                 Array.Copy(
                     other._buffer,
@@ -257,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             int newIndex
         );
 
-        // TODO: Consolidate return types between GetMatchingPairs and GetEdit to avoid duplicated code (https://github.com/dotnet/roslyn/issues/16864)
+        // TODO: Consolidate return types between GetMatchingPairs and GetEdit to avoid duplicated code
+        // (https://github.com/dotnet/roslyn/issues/16864)
         protected IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(
             TSequence oldSequence,
             int oldLength,
@@ -362,7 +371,8 @@ namespace Microsoft.CodeAnalysis.Differencing
                     yield return new SequenceEdit(xEnd, yEnd);
                 }
 
-                // return the insert/delete between (xStart, yStart) and (xMid, yMid) = the vertical/horizontal part of the snake
+                // return the insert/delete between (xStart, yStart) and (xMid, yMid) = the vertical/horizontal part
+                // of the snake
                 if (xMid > 0 || yMid > 0)
                 {
                     if (xStart == xMid)
@@ -434,28 +444,39 @@ namespace Microsoft.CodeAnalysis.Differencing
         /// https://www.codeproject.com/articles/42279/investigating-myers-diff-algorithm-part-of
         /// The author has approved the use of his code from the article under the Apache 2.0 license.
         ///
-        /// The algorithm works on an imaginary edit graph for A and B which has a vertex at each point in the grid(i, j), i in [0, lengthA] and j in [0, lengthB].
-        /// The vertices of the edit graph are connected by horizontal, vertical, and diagonal directed edges to form a directed acyclic graph.
+        /// The algorithm works on an imaginary edit graph for A and B which has a vertex at each point in
+        // the grid(i, j), i in [0, lengthA] and j in [0, lengthB].
+        /// The vertices of the edit graph are connected by horizontal, vertical, and diagonal directed
+        // edges to form a directed acyclic graph.
         /// Horizontal edges connect each vertex to its right neighbor.
         /// Vertical edges connect each vertex to the neighbor below it.
-        /// Diagonal edges connect vertex (i,j) to vertex (i-1,j-1) if <see cref="ItemsEqual"/>(sequenceA[i-1],sequenceB[j-1]) is true.
+        /// Diagonal edges connect vertex (i,j) to vertex (i-1,j-1) if <see
+        // cref="ItemsEqual"/>(sequenceA[i-1],sequenceB[j-1]) is true.
         ///
         /// Move right along horizontal edge (i-1,j)-(i,j) represents a delete of sequenceA[i-1].
         /// Move down along vertical edge (i,j-1)-(i,j) represents an insert of sequenceB[j-1].
-        /// Move along diagonal edge (i-1,j-1)-(i,j) represents an match of sequenceA[i-1] to sequenceB[j-1].
-        /// The number of diagonal edges on the path from (0,0) to (lengthA, lengthB) is the length of the longest common sub.
+        /// Move along diagonal edge (i-1,j-1)-(i,j) represents an match of sequenceA[i-1] to
+        // sequenceB[j-1].
+        /// The number of diagonal edges on the path from (0,0) to (lengthA, lengthB) is the length of the
+        // longest common sub.
         ///
-        /// The function does not actually allocate this graph. Instead it uses Eugene W. Myers' O(ND) Difference Algoritm to calculate a list of "V arrays" and returns it in a Stack.
+        /// The function does not actually allocate this graph. Instead it uses Eugene W. Myers' O(ND)
+        // Difference Algoritm to calculate a list of "V arrays" and returns it in a Stack.
         /// A "V array" is a list of end points of so called "snakes".
-        /// A "snake" is a path with a single horizontal (delete) or vertical (insert) move followed by 0 or more diagonals (matching pairs).
+        /// A "snake" is a path with a single horizontal (delete) or vertical (insert) move followed by 0 or
+        // more diagonals (matching pairs).
         ///
-        /// Unlike the algorithm in the article this implementation stores 'y' indexes and prefers 'right' moves instead of 'down' moves in ambiguous situations
+        /// Unlike the algorithm in the article this implementation stores 'y' indexes and prefers 'right'
+        // moves instead of 'down' moves in ambiguous situations
         /// to preserve the behavior of the original diff algorithm (deletes first, inserts after).
         ///
-        /// The number of items in the list is the length of the shortest edit script = the number of inserts/edits between the two sequences = D.
-        /// The list can be used to determine the matching pairs in the sequences (GetMatchingPairs method) or the full editing script (GetEdits method).
+        /// The number of items in the list is the length of the shortest edit script = the number of
+        // inserts/edits between the two sequences = D.
+        /// The list can be used to determine the matching pairs in the sequences (GetMatchingPairs method)
+        // or the full editing script (GetEdits method).
         ///
-        /// The algorithm uses O(ND) time and memory where D is the number of delete/inserts and N is the sum of lengths of the two sequences.
+        /// The algorithm uses O(ND) time and memory where D is the number of delete/inserts and N is the
+        // sum of lengths of the two sequences.
         ///
         /// VArrays store just the y index because x can be calculated: x = y + k.
         /// </remarks>

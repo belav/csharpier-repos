@@ -58,7 +58,8 @@ namespace Roslyn.Test.Utilities.Desktop
 
                 Manager.Dispose();
 
-                // A workaround for known bug DevDiv 369979 - don't unload the AppDomain if we may have loaded a module
+                // A workaround for known bug DevDiv 369979 - don't unload the AppDomain if we may have loaded a
+                // module
                 var safeToUnload = !(
                     Manager.ContainsNetModules() && (PeverifyRequested || ExecuteRequested)
                 );
@@ -266,8 +267,10 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 DumpAssemblyData(dependencies, out var dumpDir);
 
-                // This method MUST throw if compilation did not succeed.  If compilation succeeded and there were errors, that is bad.
-                // Please see KevinH if you intend to change this behavior as many tests expect the Exception to indicate failure.
+                // This method MUST throw if compilation did not succeed.  If compilation succeeded and there were
+                // errors, that is bad.
+                // Please see KevinH if you intend to change this behavior as many tests expect the Exception to
+                // indicate failure.
                 throw new EmitException(_emitData.Diagnostics, dumpDir);
             }
         }

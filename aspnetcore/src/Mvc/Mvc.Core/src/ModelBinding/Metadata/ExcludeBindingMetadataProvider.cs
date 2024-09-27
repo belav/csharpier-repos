@@ -6,7 +6,8 @@
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 /// <summary>
-/// An <see cref="IBindingMetadataProvider"/> which configures <see cref="ModelMetadata.IsBindingAllowed"/> to
+/// An <see cref="IBindingMetadataProvider"/> which configures <see
+// cref="ModelMetadata.IsBindingAllowed"/> to
 /// <c>false</c> for matching types.
 /// </summary>
 public class ExcludeBindingMetadataProvider : IBindingMetadataProvider
@@ -14,7 +15,8 @@ public class ExcludeBindingMetadataProvider : IBindingMetadataProvider
     private readonly Type _type;
 
     /// <summary>
-    /// Creates a new <see cref="ExcludeBindingMetadataProvider"/> for the given <paramref name="type"/>.
+    /// Creates a new <see cref="ExcludeBindingMetadataProvider"/> for the given <paramref
+    // name="type"/>.
     /// </summary>
     /// <param name="type">
     /// The <see cref="Type"/>. All properties with this <see cref="Type"/> will have

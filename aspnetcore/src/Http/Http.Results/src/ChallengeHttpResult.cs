@@ -32,7 +32,8 @@ public sealed partial class ChallengeHttpResult : IResult
     /// specified authentication scheme and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationScheme">The authentication schemes to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     internal ChallengeHttpResult(string authenticationScheme, AuthenticationProperties? properties)
         : this(new[] { authenticationScheme }, properties) { }
@@ -42,7 +43,8 @@ public sealed partial class ChallengeHttpResult : IResult
     /// specified authentication schemes and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationSchemes">The authentication scheme to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     internal ChallengeHttpResult(
         IList<string> authenticationSchemes,

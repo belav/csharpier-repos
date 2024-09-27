@@ -54,8 +54,10 @@ public class NegotiateHandler
         : base(options, logger, encoder) { }
 
     /// <summary>
-    /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
-    /// If it is not provided a default instance is supplied which does nothing when the methods are called.
+    /// The handler calls methods on the events which give the application control at certain points
+    // where processing is occurring.
+    /// If it is not provided a default instance is supplied which does nothing when the methods are
+    // called.
     /// </summary>
     protected new NegotiateEvents Events
     {
@@ -76,7 +78,8 @@ public class NegotiateHandler
     /// <summary>
     /// Intercepts incomplete Negotiate authentication handshakes and continues or completes them.
     /// </summary>
-    /// <returns><see langword="true" /> if a response was generated, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true" /> if a response was generated, otherwise <see
+    // langword="false"/>.</returns>
     public async Task<bool> HandleRequestAsync()
     {
         AuthPersistence? persistence = null;
@@ -86,7 +89,8 @@ public class NegotiateHandler
             if (_requestProcessed || Options.DeferToServer)
             {
                 // This request was already processed but something is re-executing it like an exception handler.
-                // Don't re-run because we could corrupt the connection state, e.g. if this was a stage2 NTLM request
+                // Don't re-run because we could corrupt the connection state, e.g. if this was a stage2 NTLM
+                // request
                 // that we've already completed the handshake for.
                 // Or we're in deferral mode where we let the server handle the authentication.
                 return false;
@@ -96,7 +100,8 @@ public class NegotiateHandler
 
             if (!IsSupportedProtocol)
             {
-                // HTTP/1.0 and HTTP/1.1 are supported. Do not throw because this may be running on a server that supports
+                // HTTP/1.0 and HTTP/1.1 are supported. Do not throw because this may be running on a server that
+                // supports
                 // additional protocols.
                 return false;
             }
@@ -135,7 +140,8 @@ public class NegotiateHandler
                 return false;
             }
 
-            // WinHttpHandler re-authenticates an existing connection if it gets another challenge on subsequent requests.
+            // WinHttpHandler re-authenticates an existing connection if it gets another challenge on subsequent
+            // requests.
             if (_negotiateState?.IsCompleted == true)
             {
                 Logger.Reauthenticating();
@@ -205,12 +211,14 @@ public class NegotiateHandler
 
             Logger.NegotiateComplete();
 
-            // There can be a final blob of data we need to send to the client, but let the request execute as normal.
+            // There can be a final blob of data we need to send to the client, but let the request execute as
+            // normal.
             if (!string.IsNullOrEmpty(outgoing))
             {
                 Response.OnStarting(() =>
                 {
-                    // Only include it if the response ultimately succeeds. This avoids adding it twice if Challenge is called again.
+                    // Only include it if the response ultimately succeeds. This avoids adding it twice if Challenge is
+                    // called again.
                     if (Response.StatusCode < StatusCodes.Status400BadRequest)
                     {
                         Response.Headers.Append(
@@ -226,7 +234,8 @@ public class NegotiateHandler
 
             if (_negotiateState.Protocol == "NTLM" && !Options.PersistNtlmCredentials)
             {
-                // NTLM was already put in the persitence cache on the prior request so we could complete the handshake.
+                // NTLM was already put in the persitence cache on the prior request so we could complete the
+                // handshake.
                 // Take it out if we don't want it to persist.
                 Debug.Assert(
                     object.ReferenceEquals(persistence?.State, _negotiateState),
@@ -256,7 +265,8 @@ public class NegotiateHandler
                 }
             }
 
-            // Note we run the Authenticated event in HandleAuthenticateAsync so it is per-request rather than per connection.
+            // Note we run the Authenticated event in HandleAuthenticateAsync so it is per-request rather than
+            // per connection.
         }
         catch (Exception ex)
         {
@@ -424,8 +434,10 @@ public class NegotiateHandler
     /// <returns></returns>
     protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
     {
-        // We allow issuing a challenge from an HTTP/2 request. Browser clients will gracefully downgrade to HTTP/1.1.
-        // SocketHttpHandler will not downgrade (https://github.com/dotnet/corefx/issues/35195), but WinHttpHandler will.
+        // We allow issuing a challenge from an HTTP/2 request. Browser clients will gracefully downgrade to
+        // HTTP/1.1.
+        // SocketHttpHandler will not downgrade (https://github.com/dotnet/corefx/issues/35195), but
+        // WinHttpHandler will.
         var eventContext = new ChallengeContext(Context, Scheme, Options, properties);
         await Events.Challenge(eventContext);
         if (eventContext.Handled)
@@ -474,7 +486,8 @@ public class NegotiateHandler
         return Task.CompletedTask;
     }
 
-    // This allows us to have one disposal registration per connection and limits churn on the Items collection.
+    // This allows us to have one disposal registration per connection and limits churn on the Items
+    // collection.
     private sealed class AuthPersistence : IDisposable
     {
         internal INegotiateState? State { get; set; }

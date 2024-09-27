@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis
     {
         /// <summary>
         /// Returns the constructed form of the ReducedFrom property,
-        /// including the type arguments that were either inferred during reduction or supplied at the call site.
+        /// including the type arguments that were either inferred during reduction or supplied at the call
+        // site.
         /// </summary>
         public static IMethodSymbol? GetConstructedReducedFrom(this IMethodSymbol method)
         {

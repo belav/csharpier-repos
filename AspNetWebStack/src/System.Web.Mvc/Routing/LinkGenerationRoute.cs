@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Web.Routing;
 
@@ -11,7 +12,8 @@ namespace System.Web.Mvc.Routing
     /// routing, don't go into the main collection and so can't be matched by name.
     /// </summary>
     /// <remarks>
-    /// Parallel to the Web API implementation of attribute routing in System.Web.Http.Routing.LinkGenerationRoute.
+    /// Parallel to the Web API implementation of attribute routing in
+    // System.Web.Http.Routing.LinkGenerationRoute.
     /// </remarks>
     internal class LinkGenerationRoute : Route
     {

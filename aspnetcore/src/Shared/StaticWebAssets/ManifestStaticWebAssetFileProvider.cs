@@ -81,7 +81,8 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
         }
         else
         {
-            // We do this to make sure we account for the patterns on the last segment which are not covered by the loop above
+            // We do this to make sure we account for the patterns on the last segment which are not covered by
+            // the loop above
             files = GetFilesForCandidatePatterns(segments, candidate, files);
             if (candidate != null && candidate.HasChildren())
             {
@@ -122,9 +123,12 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
                             files ??= new(_nameComparer);
                             if (!files.Contains(result))
                             {
-                                // Multiple patterns might match the same file (even at different locations on disk) at runtime. We don't
-                                // try to disambiguate anything here, since there is already a build step for it. We just pick the first
-                                // file that matches the pattern. The manifest entries are ordered, so while this choice is random, it is
+                                // Multiple patterns might match the same file (even at different locations on disk) at runtime. We
+                                // don't
+                                // try to disambiguate anything here, since there is already a build step for it. We just pick the
+                                // first
+                                // file that matches the pattern. The manifest entries are ordered, so while this choice is random,
+                                // it is
                                 // nonetheless deterministic.
                                 files.Add(result);
                             }
@@ -223,8 +227,10 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
             }
         }
 
-        // The list of patterns is ordered by pattern depth, so we compute the string to check for patterns only
-        // once per level. We don't aim to solve conflicts here where multiple files could match a given path,
+        // The list of patterns is ordered by pattern depth, so we compute the string to check for patterns
+        // only
+        // once per level. We don't aim to solve conflicts here where multiple files could match a given
+        // path,
         // we have a build check that takes care of that.
         var currentDepth = -1;
         var candidatePath = subpath;

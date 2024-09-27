@@ -39,7 +39,8 @@ namespace System.Buffers.Text.Tests
         public sealed override string ToString()
         {
             //
-            // Take good care of this method: it affects Xunit output and makes a lot of difference in how annoying test investigations are.
+            // Take good care of this method: it affects Xunit output and makes a lot of difference in how
+            // annoying test investigations are.
             //
 
             string formatString =

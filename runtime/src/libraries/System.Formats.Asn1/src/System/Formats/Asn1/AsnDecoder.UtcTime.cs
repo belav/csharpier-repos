@@ -23,7 +23,8 @@ namespace System.Formats.Asn1
         ///   The default value, 2049, represents the 1950-2049 range for X.509 certificates.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 24).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 24).
         /// </param>
         /// <returns>
         ///   The decoded value.
@@ -250,7 +251,8 @@ namespace System.Formats.Asn1
         ///   the constructor (with a default of 2049).
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 23).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 23).
         /// </param>
         /// <returns>
         ///   The decoded value.
@@ -294,7 +296,8 @@ namespace System.Formats.Asn1
         ///   The largest year to represent with this value.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 23).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 23).
         /// </param>
         /// <returns>
         ///   The decoded value.

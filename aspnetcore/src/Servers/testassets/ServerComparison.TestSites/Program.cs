@@ -28,7 +28,8 @@ public static class Program
         builder.UseIISIntegration();
         builder.UseIIS();
 
-        // Switch between Kestrel, IIS, and HttpSys for different tests. Default to Kestrel for normal app execution.
+        // Switch between Kestrel, IIS, and HttpSys for different tests. Default to Kestrel for normal app
+        // execution.
         if (
             string.Equals(
                 builder.GetSetting("server"),

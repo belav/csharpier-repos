@@ -53,7 +53,8 @@ namespace Microsoft.Win32.SafeHandles
             get { return (CERT_CONTEXT*)handle; }
         }
 
-        // Extract the raw CERT_CONTEXT* pointer and reset the SafeHandle to the invalid state so it no longer auto-destroys the CERT_CONTEXT.
+        // Extract the raw CERT_CONTEXT* pointer and reset the SafeHandle to the invalid state so it no
+        // longer auto-destroys the CERT_CONTEXT.
         public unsafe CERT_CONTEXT* Disconnect()
         {
             CERT_CONTEXT* pCertContext = (CERT_CONTEXT*)handle;

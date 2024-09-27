@@ -51,7 +51,8 @@ namespace System.Buffers.Text
             }
             else
             {
-                // Length is greater than Parsers.ByteOverflowLengthHex; overflow is only possible after Parsers.ByteOverflowLengthHex
+                // Length is greater than Parsers.ByteOverflowLengthHex; overflow is only possible after
+                // Parsers.ByteOverflowLengthHex
                 // digits. There may be no overflow after Parsers.ByteOverflowLengthHex if there are leading zeroes.
                 for (int index = 1; index < ParserHelpers.ByteOverflowLengthHex; index++)
                 {
@@ -141,8 +142,10 @@ namespace System.Buffers.Text
             }
             else
             {
-                // Length is greater than Parsers.Int16OverflowLengthHex; overflow is only possible after Parsers.Int16OverflowLengthHex
-                // digits. There may be no overflow after Parsers.Int16OverflowLengthHex if there are leading zeroes.
+                // Length is greater than Parsers.Int16OverflowLengthHex; overflow is only possible after
+                // Parsers.Int16OverflowLengthHex
+                // digits. There may be no overflow after Parsers.Int16OverflowLengthHex if there are leading
+                // zeroes.
                 for (int index = 1; index < ParserHelpers.Int16OverflowLengthHex; index++)
                 {
                     nextCharacter = source[index];
@@ -169,7 +172,8 @@ namespace System.Buffers.Text
                         value = (ushort)(parsedValue);
                         return true;
                     }
-                    // If we try to append a digit to anything larger than ushort.MaxValue / 0x10, there will be overflow
+                    // If we try to append a digit to anything larger than ushort.MaxValue / 0x10, there will be
+                    // overflow
                     if (parsedValue > ushort.MaxValue / 0x10)
                     {
                         bytesConsumed = 0;
@@ -231,8 +235,10 @@ namespace System.Buffers.Text
             }
             else
             {
-                // Length is greater than Parsers.Int32OverflowLengthHex; overflow is only possible after Parsers.Int32OverflowLengthHex
-                // digits. There may be no overflow after Parsers.Int32OverflowLengthHex if there are leading zeroes.
+                // Length is greater than Parsers.Int32OverflowLengthHex; overflow is only possible after
+                // Parsers.Int32OverflowLengthHex
+                // digits. There may be no overflow after Parsers.Int32OverflowLengthHex if there are leading
+                // zeroes.
                 for (int index = 1; index < ParserHelpers.Int32OverflowLengthHex; index++)
                 {
                     nextCharacter = source[index];
@@ -321,8 +327,10 @@ namespace System.Buffers.Text
             }
             else
             {
-                // Length is greater than Parsers.Int64OverflowLengthHex; overflow is only possible after Parsers.Int64OverflowLengthHex
-                // digits. There may be no overflow after Parsers.Int64OverflowLengthHex if there are leading zeroes.
+                // Length is greater than Parsers.Int64OverflowLengthHex; overflow is only possible after
+                // Parsers.Int64OverflowLengthHex
+                // digits. There may be no overflow after Parsers.Int64OverflowLengthHex if there are leading
+                // zeroes.
                 for (int index = 1; index < ParserHelpers.Int64OverflowLengthHex; index++)
                 {
                     nextCharacter = source[index];

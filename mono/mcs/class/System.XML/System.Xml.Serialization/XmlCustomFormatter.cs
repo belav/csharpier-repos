@@ -189,16 +189,16 @@ namespace System.Xml.Serialization
         internal static long ToEnum(string value, Hashtable values, string typeName, bool validate)
         {
             // Assuming that h contains map from value to Enumerated Name
-            /*
-                        You can try :
-                            return ToEnum ("One Two", h, "SomeType");
-                        where:
-                            (1) no keys and values for h.
-                            (2) string keys and long values.
-                        
-                        according to MSDN docs (for .NET 2.0) the hashtable "consists of the
-                        identifiers as keys and the constants as integral numbers"
-            */
+/*
+You can try :
+return ToEnum ("One Two", h, "SomeType");
+where:
+(1) no keys and values for h.
+(2) string keys and long values.
+
+according to MSDN docs (for .NET 2.0) the hashtable "consists of the
+identifiers as keys and the constants as integral numbers"
+*/
             long enumValue = 0;
             string[] names = value.Split(' ');
 

@@ -51,7 +51,8 @@ namespace System.SpanTests
         public static unsafe void GetPinnableReferenceArrayPastEnd()
         {
             // The only real difference between GetPinnableReference() and "ref span[0]" is that
-            // GetPinnableReference() of a zero-length won't throw an IndexOutOfRange but instead return a null ref.
+            // GetPinnableReference() of a zero-length won't throw an IndexOutOfRange but instead return a null
+            // ref.
 
             int[] a = { 91, 92, 93, 94, 95 };
             ReadOnlySpan<int> span = new ReadOnlySpan<int>(a, a.Length, 0);

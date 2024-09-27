@@ -67,8 +67,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// Creates a ProjectInfo to represent the fake project created for metadata as source documents.
         /// </summary>
         /// <param name="services">Solution services.</param>
-        /// <param name="loadFileFromDisk">Whether the source file already exists on disk and should be included. If
-        /// this is a false, a document is still created, but it's not backed by the file system and thus we won't
+        /// <param name="loadFileFromDisk">Whether the source file already exists on disk and should be
+        // included. If
+        /// this is a false, a document is still created, but it's not backed by the file system and thus we
+        // won't
         /// try to load it.</param>
         public (ProjectInfo, DocumentId) GetProjectInfoAndDocumentId(
             SolutionServices services,

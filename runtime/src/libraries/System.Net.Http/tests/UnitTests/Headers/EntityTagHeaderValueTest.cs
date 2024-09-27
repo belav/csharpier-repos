@@ -36,7 +36,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ETagInvalidFormat_ThrowFormatException()
         {
-            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are allowed.
+            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are
+            // allowed.
             AssertFormatException("tag");
             AssertFormatException("*");
             AssertFormatException(" tag ");
@@ -147,9 +148,12 @@ namespace System.Net.Http.Tests
             Assert.Equal("\"tag\"", result.Tag);
             Assert.True(result.IsWeak);
 
-            // Note that even if after a valid tag & whitespace there are invalid characters, GetEntityTagLength()
-            // will return the length of the valid tag and ignore the invalid characters at the end. It is the callers
-            // responsibility to consider the whole string invalid if after a valid ETag there are invalid chars.
+            // Note that even if after a valid tag & whitespace there are invalid characters,
+            // GetEntityTagLength()
+            // will return the length of the valid tag and ignore the invalid characters at the end. It is the
+            // callers
+            // responsibility to consider the whole string invalid if after a valid ETag there are invalid
+            // chars.
             Assert.Equal(
                 9,
                 EntityTagHeaderValue.GetEntityTagLength("\"tag\"    !!", 0, out result)

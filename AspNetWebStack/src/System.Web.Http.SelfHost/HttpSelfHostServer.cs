@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -48,8 +49,10 @@ namespace System.Web.Http.SelfHost
             RetrieveClientCertificate
         );
 
-        // Window size gets increased if the ratio of outstanding requests to the window size is greater than IncreaseWindowSizeRatio
-        // Window size gets decreased if the ratio of outstanding requests to the window size is less than DecreaseWindowsSizeRatio
+        // Window size gets increased if the ratio of outstanding requests to the window size is greater
+        // than IncreaseWindowSizeRatio
+        // Window size gets decreased if the ratio of outstanding requests to the window size is less than
+        // DecreaseWindowsSizeRatio
         private const double IncreaseWindowSizeRatio = .8;
         private const double DecreaseWindowSizeRatio = .2;
         private const int InitialWindowSizeMultiplier = 8;
@@ -132,7 +135,8 @@ namespace System.Web.Http.SelfHost
         /// <summary>
         /// Opens the current <see cref="HttpServer"/> instance.
         /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous <see cref="HttpServer"/> open operation. Once this task completes successfully the server is running.</returns>
+        /// <returns>A <see cref="Task"/> representing the asynchronous <see cref="HttpServer"/> open
+        // operation. Once this task completes successfully the server is running.</returns>
         public Task OpenAsync()
         {
             if (Interlocked.CompareExchange(ref _state, 1, 0) == 1)
@@ -151,7 +155,8 @@ namespace System.Web.Http.SelfHost
         /// <summary>
         /// Closes the current <see cref="HttpServer"/> instance.
         /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous <see cref="HttpServer"/> close operation.</returns>
+        /// <returns>A <see cref="Task"/> representing the asynchronous <see cref="HttpServer"/> close
+        // operation.</returns>
         public Task CloseAsync()
         {
             if (Interlocked.CompareExchange(ref _state, 2, 1) != 1)
@@ -171,7 +176,8 @@ namespace System.Web.Http.SelfHost
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged SRResources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged SRResources.</param>
         protected override void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -187,7 +193,8 @@ namespace System.Web.Http.SelfHost
             base.Dispose(disposing);
         }
 
-        // async void is OK here. This is a fire and forget method and any exceptions that occur will be turned into
+        // async void is OK here. This is a fire and forget method and any exceptions that occur will be
+        // turned into
         // HTTP responses that get sent back to clients.
         private async void ProcessRequestContext(
             ChannelContext channelContext,
@@ -264,7 +271,8 @@ namespace System.Web.Http.SelfHost
             );
             request.SetRequestContext(httpRequestContext);
 
-            // The following two properties are set for backwards compatibility only. The request context controls the
+            // The following two properties are set for backwards compatibility only. The request context
+            // controls the
             // behavior for all cases except when accessing the property directly by key.
 
             // Add the retrieve client certificate delegate to the property bag to enable lookup later on
@@ -916,7 +924,8 @@ namespace System.Web.Http.SelfHost
                 {
                     try
                     {
-                        // Recheck that we should increase the window size to guard for changes between the time we take the lock and the time we increase the window size
+                        // Recheck that we should increase the window size to guard for changes between the time we take the
+                        // lock and the time we increase the window size
                         if (ShouldIncreaseWindowSize())
                         {
                             // Increase Window Size
@@ -944,7 +953,8 @@ namespace System.Web.Http.SelfHost
                 {
                     try
                     {
-                        // Recheck that we should decrease the window size to guard for changes between the time we take the lock and the time we increase the window size
+                        // Recheck that we should decrease the window size to guard for changes between the time we take the
+                        // lock and the time we increase the window size
                         if (ShouldDecreaseWindowSize())
                         {
                             _windowSize--;
@@ -1110,7 +1120,8 @@ namespace System.Web.Http.SelfHost
         }
 
         /// <summary>
-        /// Provides context for receiving an <see cref="System.ServiceModel.Channels.RequestContext"/> instance asynchronously.
+        /// Provides context for receiving an <see cref="System.ServiceModel.Channels.RequestContext"/>
+        // instance asynchronously.
         /// </summary>
         private class ChannelContext
         {
@@ -1145,7 +1156,8 @@ namespace System.Web.Http.SelfHost
         }
 
         /// <summary>
-        /// Provides context for sending a <see cref="System.ServiceModel.Channels.Message"/> instance asynchronously in response
+        /// Provides context for sending a <see cref="System.ServiceModel.Channels.Message"/> instance
+        // asynchronously in response
         /// to a request.
         /// </summary>
         private class ReplyContext : IDisposable
@@ -1198,7 +1210,8 @@ namespace System.Web.Http.SelfHost
             public Message Reply { get; private set; }
 
             /// <summary>
-            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged SRResources.
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+            // SRResources.
             /// </summary>
             public void Dispose()
             {
@@ -1209,7 +1222,8 @@ namespace System.Web.Http.SelfHost
             /// <summary>
             /// Releases unmanaged and - optionally - managed resources
             /// </summary>
-            /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged SRResources.</param>
+            /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+            // <c>false</c> to release only unmanaged SRResources.</param>
             [SuppressMessage(
                 "Microsoft.Design",
                 "CA1031:DoNotCatchGeneralExceptionTypes",
@@ -1221,7 +1235,8 @@ namespace System.Web.Http.SelfHost
                 {
                     if (disposing)
                     {
-                        // RequestContext.Close can throw if the client disconnects before it finishes receiving the response
+                        // RequestContext.Close can throw if the client disconnects before it finishes receiving the
+                        // response
                         // Catch here to avoid throwing in a Dispose method
                         try
                         {

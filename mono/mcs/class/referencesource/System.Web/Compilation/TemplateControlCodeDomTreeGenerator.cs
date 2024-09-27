@@ -37,9 +37,9 @@ namespace System.Web.Compilation
             _tcParser = tcParser;
         }
 
-        /*
-         * Build the default constructor
-         */
+/*
+* Build the default constructor
+*/
         protected override void BuildInitStatements(
             CodeStatementCollection trueStatements,
             CodeStatementCollection topLevelStatements
@@ -104,9 +104,9 @@ namespace System.Web.Compilation
             topLevelStatements.Add(setProp);
         }
 
-        /*
-         * Build various properties, fields, methods
-         */
+/*
+* Build various properties, fields, methods
+*/
         protected override void BuildMiscClassMembers()
         {
             base.BuildMiscClassMembers();
@@ -136,9 +136,9 @@ namespace System.Web.Compilation
                 BuildFrameworkInitializeMethod();
         }
 
-        /*
-         * Build the strongly typed new property
-         */
+/*
+* Build the strongly typed new property
+*/
         // e.g. public new {propertyType} Master { get { return ({propertyType})base.Master; } }
         internal void BuildStronglyTypedProperty(string propertyName, Type propertyType)
         {
@@ -202,9 +202,9 @@ namespace System.Web.Compilation
             _sourceDataClass.Members.Add(bindMethod);
         }
 
-        /*
-         * Build the data tree for the FrameworkInitialize method
-         */
+/*
+* Build the data tree for the FrameworkInitialize method
+*/
         private void BuildFrameworkInitializeMethod()
         {
             // Skip if we're only generating the intermediate class
@@ -233,9 +233,9 @@ namespace System.Web.Compilation
             _sourceDataClass.Members.Add(method);
         }
 
-        /*
-         * Build the contents of the FrameworkInitialize method
-         */
+/*
+* Build the contents of the FrameworkInitialize method
+*/
         protected virtual void BuildFrameworkInitializeMethodContents(CodeMemberMethod method)
         {
             // Call the base FrameworkInitialize
@@ -268,9 +268,9 @@ namespace System.Web.Compilation
             method.Statements.Add(new CodeExpressionStatement(call));
         }
 
-        /*
-         * Build the automatic event hookup code
-         */
+/*
+* Build the automatic event hookup code
+*/
         private void BuildAutomaticEventHookup()
         {
             // Skip if we're only generating the intermediate class
@@ -297,9 +297,9 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Build the ApplicationInstance property
-         */
+/*
+* Build the ApplicationInstance property
+*/
         private void BuildApplicationInstanceProperty()
         {
             CodeMemberProperty prop;

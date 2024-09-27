@@ -16,31 +16,42 @@ namespace System.Numerics.Tensors
         /// <remarks>
         ///     A non-temporal store is one that allows the CPU to bypass the cache when writing to memory.
         ///
-        ///     This can be beneficial when working with large amounts of memory where the writes would otherwise
-        ///     cause large amounts of repeated updates and evictions. The hardware optimization manuals recommend
-        ///     the threshold to be roughly half the size of the last level of on-die cache -- that is, if you have approximately
-        ///     4MB of L3 cache per core, you'd want this to be approx. 1-2MB, depending on if hyperthreading was enabled.
+        ///     This can be beneficial when working with large amounts of memory where the writes would
+        // otherwise
+        ///     cause large amounts of repeated updates and evictions. The hardware optimization manuals
+        // recommend
+        ///     the threshold to be roughly half the size of the last level of on-die cache -- that is, if
+        // you have approximately
+        ///     4MB of L3 cache per core, you'd want this to be approx. 1-2MB, depending on if
+        // hyperthreading was enabled.
         ///
-        ///     However, actually computing the amount of L3 cache per core can be tricky or error prone. Native memcpy
-        ///     algorithms use a constant threshold that is typically around 256KB and we match that here for simplicity. This
-        ///     threshold accounts for most processors in the last 10-15 years that had approx. 1MB L3 per core and support
+        ///     However, actually computing the amount of L3 cache per core can be tricky or error prone.
+        // Native memcpy
+        ///     algorithms use a constant threshold that is typically around 256KB and we match that here
+        // for simplicity. This
+        ///     threshold accounts for most processors in the last 10-15 years that had approx. 1MB L3 per
+        // core and support
         ///     hyperthreading, giving a per core last level cache of approx. 512KB.
         /// </remarks>
         private const nuint NonTemporalByteThreshold = 256 * 1024;
 
         /// <summary>
-        /// Copies <paramref name="source"/> to <paramref name="destination"/>, converting each <see cref="float" />
+        /// Copies <paramref name="source"/> to <paramref name="destination"/>, converting each <see
+        // cref="float" />
         /// value to its nearest representable half-precision floating-point value.
         /// </summary>
         /// <param name="source">The source span from which to copy values.</param>
-        /// <param name="destination">The destination span into which the converted values should be written.</param>
+        /// <param name="destination">The destination span into which the converted values should be
+        // written.</param>
         /// <exception cref="ArgumentException">Destination is too short.</exception>
         /// <remarks>
         /// <para>
-        /// This method effectively computes <c><paramref name="destination" />[i] = (Half)<paramref name="source" />[i]</c>.
+        /// This method effectively computes <c><paramref name="destination" />[i] = (Half)<paramref
+        // name="source" />[i]</c>.
         /// </para>
         /// <para>
-        /// <paramref name="source"/> and <paramref name="destination"/> must not overlap. If they do, behavior is undefined.
+        /// <paramref name="source"/> and <paramref name="destination"/> must not overlap. If they do,
+        // behavior is undefined.
         /// </para>
         /// </remarks>
         public static void ConvertToHalf(ReadOnlySpan<float> source, Span<Half> destination)
@@ -179,13 +190,19 @@ namespace System.Numerics.Tensors
 
             // This implements a vectorized version of the `explicit operator Half(float value) operator`.
             // See detailed description of the algorithm used here:
-            //     https://github.com/dotnet/runtime/blob/ca8d6f0420096831766ec11c7d400e4f7ccc7a34/src/libraries/System.Private.CoreLib/src/System/Half.cs#L606-L714
-            // The cast operator converts a float to a Half represented as a UInt32, then narrows to a UInt16, and reinterpret casts to Half.
+            //
+            // https://github.com/dotnet/runtime/blob/ca8d6f0420096831766ec11c7d400e4f7ccc7a34/src/libraries/System.Private.CoreLib/src/System/Half.cs#L606-L714
+            // The cast operator converts a float to a Half represented as a UInt32, then narrows to a UInt16,
+            // and reinterpret casts to Half.
             // This does the same, with an input VectorXx<float> and an output VectorXx<uint>.
-            // Loop handling two input vectors at a time; each input float is double the size of each output Half,
-            // so we need two vectors of floats to produce one vector of Halfs. Half isn't supported in VectorXx<T>,
-            // so we convert the VectorXx<float> to a VectorXx<uint>, and the caller then uses this twice, narrows the combination
-            // into a VectorXx<ushort>, and then saves that out to the destination `ref Half` reinterpreted as `ref ushort`.
+            // Loop handling two input vectors at a time; each input float is double the size of each output
+            // Half,
+            // so we need two vectors of floats to produce one vector of Halfs. Half isn't supported in
+            // VectorXx<T>,
+            // so we convert the VectorXx<float> to a VectorXx<uint>, and the caller then uses this twice,
+            // narrows the combination
+            // into a VectorXx<ushort>, and then saves that out to the destination `ref Half` reinterpreted as
+            // `ref ushort`.
 
 #pragma warning disable IDE0059 // https://github.com/dotnet/roslyn/issues/44948
             const uint MinExp = 0x3880_0000u; // Minimum exponent for rounding
@@ -227,7 +244,8 @@ namespace System.Numerics.Tensors
                 // Add exponent by 13
                 exponentOffset0 += Vector128.Create(Exponent13);
 
-                // Round Single into Half's precision (NaN also gets modified here, just setting the MSB of fraction)
+                // Round Single into Half's precision (NaN also gets modified here, just setting the MSB of
+                // fraction)
                 value += exponentOffset0.AsSingle();
                 bitValue = value.AsUInt32();
 
@@ -244,7 +262,8 @@ namespace System.Numerics.Tensors
                 // Clear the fraction parts if the value was NaN.
                 bitValue &= realMask;
 
-                // Merge the exponent part with fraction part, and add the exponent part and fraction part's overflow.
+                // Merge the exponent part with fraction part, and add the exponent part and fraction part's
+                // overflow.
                 bitValue += newExponent;
 
                 // Clear exponents if value is NaN
@@ -290,7 +309,8 @@ namespace System.Numerics.Tensors
                 // Add exponent by 13
                 exponentOffset0 += Vector256.Create(Exponent13);
 
-                // Round Single into Half's precision (NaN also gets modified here, just setting the MSB of fraction)
+                // Round Single into Half's precision (NaN also gets modified here, just setting the MSB of
+                // fraction)
                 value += exponentOffset0.AsSingle();
                 bitValue = value.AsUInt32();
 
@@ -307,7 +327,8 @@ namespace System.Numerics.Tensors
                 // Clear the fraction parts if the value was NaN.
                 bitValue &= realMask;
 
-                // Merge the exponent part with fraction part, and add the exponent part and fraction part's overflow.
+                // Merge the exponent part with fraction part, and add the exponent part and fraction part's
+                // overflow.
                 bitValue += newExponent;
 
                 // Clear exponents if value is NaN
@@ -353,7 +374,8 @@ namespace System.Numerics.Tensors
                 // Add exponent by 13
                 exponentOffset0 += Vector512.Create(Exponent13);
 
-                // Round Single into Half's precision (NaN also gets modified here, just setting the MSB of fraction)
+                // Round Single into Half's precision (NaN also gets modified here, just setting the MSB of
+                // fraction)
                 value += exponentOffset0.AsSingle();
                 bitValue = value.AsUInt32();
 
@@ -370,7 +392,8 @@ namespace System.Numerics.Tensors
                 // Clear the fraction parts if the value was NaN.
                 bitValue &= realMask;
 
-                // Merge the exponent part with fraction part, and add the exponent part and fraction part's overflow.
+                // Merge the exponent part with fraction part, and add the exponent part and fraction part's
+                // overflow.
                 bitValue += newExponent;
 
                 // Clear exponents if value is NaN
@@ -388,18 +411,22 @@ namespace System.Numerics.Tensors
         }
 
         /// <summary>
-        /// Copies <paramref name="source"/> to <paramref name="destination"/>, converting each half-precision
+        /// Copies <paramref name="source"/> to <paramref name="destination"/>, converting each
+        // half-precision
         /// floating-point value to its nearest representable <see cref="float"/> value.
         /// </summary>
         /// <param name="source">The source span from which to copy values.</param>
-        /// <param name="destination">The destination span into which the converted values should be written.</param>
+        /// <param name="destination">The destination span into which the converted values should be
+        // written.</param>
         /// <exception cref="ArgumentException">Destination is too short.</exception>
         /// <remarks>
         /// <para>
-        /// This method effectively computes <c><paramref name="destination" />[i] = (float)<paramref name="source" />[i]</c>.
+        /// This method effectively computes <c><paramref name="destination" />[i] = (float)<paramref
+        // name="source" />[i]</c>.
         /// </para>
         /// <para>
-        /// <paramref name="source"/> and <paramref name="destination"/> must not overlap. If they do, behavior is undefined.
+        /// <paramref name="source"/> and <paramref name="destination"/> must not overlap. If they do,
+        // behavior is undefined.
         /// </para>
         /// </remarks>
         public static void ConvertToSingle(ReadOnlySpan<Half> source, Span<float> destination)
@@ -536,9 +563,12 @@ namespace System.Numerics.Tensors
 
             // This implements a vectorized version of the `explicit operator float(Half value) operator`.
             // See detailed description of the algorithm used here:
-            //     https://github.com/dotnet/runtime/blob/3bf40a378f00cb5bf18ff62796bc7097719b974c/src/libraries/System.Private.CoreLib/src/System/Half.cs#L1010-L1040
-            // The cast operator converts a Half represented as uint to a float. This does the same, with an input VectorXx<uint> and an output VectorXx<float>.
-            // The VectorXx<uint> is created by reading a vector of Halfs as a VectorXx<short> then widened to two VectorXx<int>s and cast to VectorXx<uint>s.
+            //
+            // https://github.com/dotnet/runtime/blob/3bf40a378f00cb5bf18ff62796bc7097719b974c/src/libraries/System.Private.CoreLib/src/System/Half.cs#L1010-L1040
+            // The cast operator converts a Half represented as uint to a float. This does the same, with an
+            // input VectorXx<uint> and an output VectorXx<float>.
+            // The VectorXx<uint> is created by reading a vector of Halfs as a VectorXx<short> then widened to
+            // two VectorXx<int>s and cast to VectorXx<uint>s.
             // We loop handling one input vector at a time, producing two output float vectors.
 
 #pragma warning disable IDE0059 // https://github.com/dotnet/roslyn/issues/44948
@@ -581,7 +611,8 @@ namespace System.Numerics.Tensors
                 Vector128<uint> offsetMaskedExponentLowerBound =
                     Vector128.Create(ExponentOffset) | maskedExponentLowerBound;
 
-                // Match the position of the boundary of exponent bits and fraction bits with IEEE 754 Binary32(Single)
+                // Match the position of the boundary of exponent bits and fraction bits with IEEE 754
+                // Binary32(Single)
                 bitValueInProcess = Vector128.ShiftLeft(bitValueInProcess, 13);
 
                 // Double the offsetMaskedExponentLowerBound if value is either Infinity or NaN
@@ -638,7 +669,8 @@ namespace System.Numerics.Tensors
                 Vector256<uint> offsetMaskedExponentLowerBound =
                     Vector256.Create(ExponentOffset) | maskedExponentLowerBound;
 
-                // Match the position of the boundary of exponent bits and fraction bits with IEEE 754 Binary32(Single)
+                // Match the position of the boundary of exponent bits and fraction bits with IEEE 754
+                // Binary32(Single)
                 bitValueInProcess = Vector256.ShiftLeft(bitValueInProcess, 13);
 
                 // Double the offsetMaskedExponentLowerBound if value is either Infinity or NaN
@@ -695,7 +727,8 @@ namespace System.Numerics.Tensors
                 Vector512<uint> offsetMaskedExponentLowerBound =
                     Vector512.Create(ExponentOffset) | maskedExponentLowerBound;
 
-                // Match the position of the boundary of exponent bits and fraction bits with IEEE 754 Binary32(Single)
+                // Match the position of the boundary of exponent bits and fraction bits with IEEE 754
+                // Binary32(Single)
                 bitValueInProcess = Vector512.ShiftLeft(bitValueInProcess, 13);
 
                 // Double the offsetMaskedExponentLowerBound if value is either Infinity or NaN
@@ -721,8 +754,10 @@ namespace System.Numerics.Tensors
             }
         }
 
-        /// <summary>Computes the cosine similarity between the two specified non-empty, equal-length tensors of single-precision floating-point numbers.</summary>
-        /// <remarks>Assumes arguments have already been validated to be non-empty and equal length.</remarks>
+        /// <summary>Computes the cosine similarity between the two specified non-empty, equal-length
+        // tensors of single-precision floating-point numbers.</summary>
+        /// <remarks>Assumes arguments have already been validated to be non-empty and equal
+        // length.</remarks>
         private static float CosineSimilarityCore(ReadOnlySpan<float> x, ReadOnlySpan<float> y)
         {
             if (x.IsEmpty)
@@ -736,7 +771,8 @@ namespace System.Numerics.Tensors
             }
 
             // Compute the same as:
-            // TensorPrimitives.Dot(x, y) / (Math.Sqrt(TensorPrimitives.SumOfSquares(x)) * Math.Sqrt(TensorPrimitives.SumOfSquares(y)))
+            // TensorPrimitives.Dot(x, y) / (Math.Sqrt(TensorPrimitives.SumOfSquares(x)) *
+            // Math.Sqrt(TensorPrimitives.SumOfSquares(y)))
             // but only looping over each span once.
 
             if (Vector512.IsHardwareAccelerated && x.Length >= Vector512<float>.Count)
@@ -748,7 +784,8 @@ namespace System.Numerics.Tensors
                 Vector512<float> xSumOfSquaresVector = Vector512<float>.Zero;
                 Vector512<float> ySumOfSquaresVector = Vector512<float>.Zero;
 
-                // Process vectors, summing their dot products and squares, as long as there's a vector's worth remaining.
+                // Process vectors, summing their dot products and squares, as long as there's a vector's worth
+                // remaining.
                 int oneVectorFromEnd = x.Length - Vector512<float>.Count;
                 int i = 0;
                 do
@@ -803,7 +840,8 @@ namespace System.Numerics.Tensors
                 Vector256<float> xSumOfSquaresVector = Vector256<float>.Zero;
                 Vector256<float> ySumOfSquaresVector = Vector256<float>.Zero;
 
-                // Process vectors, summing their dot products and squares, as long as there's a vector's worth remaining.
+                // Process vectors, summing their dot products and squares, as long as there's a vector's worth
+                // remaining.
                 int oneVectorFromEnd = x.Length - Vector256<float>.Count;
                 int i = 0;
                 do
@@ -858,7 +896,8 @@ namespace System.Numerics.Tensors
                 Vector128<float> xSumOfSquaresVector = Vector128<float>.Zero;
                 Vector128<float> ySumOfSquaresVector = Vector128<float>.Zero;
 
-                // Process vectors, summing their dot products and squares, as long as there's a vector's worth remaining.
+                // Process vectors, summing their dot products and squares, as long as there's a vector's worth
+                // remaining.
                 int oneVectorFromEnd = x.Length - Vector128<float>.Count;
                 int i = 0;
                 do
@@ -920,10 +959,13 @@ namespace System.Numerics.Tensors
             return dotProduct / (MathF.Sqrt(xSumOfSquares) * MathF.Sqrt(ySumOfSquares));
         }
 
-        /// <summary>Performs an aggregation over all elements in <paramref name="x"/> to produce a single-precision floating-point value.</summary>
-        /// <typeparam name="TTransformOperator">Specifies the transform operation that should be applied to each element loaded from <paramref name="x"/>.</typeparam>
+        /// <summary>Performs an aggregation over all elements in <paramref name="x"/> to produce a
+        // single-precision floating-point value.</summary>
+        /// <typeparam name="TTransformOperator">Specifies the transform operation that should be applied to
+        // each element loaded from <paramref name="x"/>.</typeparam>
         /// <typeparam name="TAggregationOperator">
-        /// Specifies the aggregation binary operation that should be applied to multiple values to aggregate them into a single value.
+        /// Specifies the aggregation binary operation that should be applied to multiple values to
+        // aggregate them into a single value.
         /// The aggregation is applied after the transform is applied to each element.
         /// </typeparam>
         private static float Aggregate<TTransformOperator, TAggregationOperator>(
@@ -2017,10 +2059,13 @@ namespace System.Numerics.Tensors
             }
         }
 
-        /// <summary>Performs an aggregation over all pair-wise elements in <paramref name="x"/> and <paramref name="y"/> to produce a single-precision floating-point value.</summary>
-        /// <typeparam name="TBinaryOperator">Specifies the binary operation that should be applied to the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>.</typeparam>
+        /// <summary>Performs an aggregation over all pair-wise elements in <paramref name="x"/> and
+        // <paramref name="y"/> to produce a single-precision floating-point value.</summary>
+        /// <typeparam name="TBinaryOperator">Specifies the binary operation that should be applied to the
+        // pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>.</typeparam>
         /// <typeparam name="TAggregationOperator">
-        /// Specifies the aggregation binary operation that should be applied to multiple values to aggregate them into a single value.
+        /// Specifies the aggregation binary operation that should be applied to multiple values to
+        // aggregate them into a single value.
         /// The aggregation is applied to the results of the binary operations on the pair-wise values.
         /// </typeparam>
         private static float Aggregate<TBinaryOperator, TAggregationOperator>(
@@ -3275,7 +3320,8 @@ namespace System.Numerics.Tensors
         }
 
         /// <remarks>
-        /// This is the same as <see cref="Aggregate{TTransformOperator, TAggregationOperator}(ReadOnlySpan{float})"/>
+        /// This is the same as <see cref="Aggregate{TTransformOperator,
+        // TAggregationOperator}(ReadOnlySpan{float})"/>
         /// with an identity transform, except it early exits on NaN.
         /// </remarks>
         private static float MinMaxCore<TMinMaxOperator>(ReadOnlySpan<float> x)
@@ -3309,7 +3355,8 @@ namespace System.Numerics.Tensors
                 int oneVectorFromEnd = x.Length - Vector512<float>.Count;
                 int i = Vector512<float>.Count;
 
-                // Aggregate additional vectors into the result as long as there's at least one full vector left to process.
+                // Aggregate additional vectors into the result as long as there's at least one full vector left to
+                // process.
                 while (i <= oneVectorFromEnd)
                 {
                     // Load the next vector, and early exit on NaN.
@@ -3364,7 +3411,8 @@ namespace System.Numerics.Tensors
                 int oneVectorFromEnd = x.Length - Vector256<float>.Count;
                 int i = Vector256<float>.Count;
 
-                // Aggregate additional vectors into the result as long as there's at least one full vector left to process.
+                // Aggregate additional vectors into the result as long as there's at least one full vector left to
+                // process.
                 while (i <= oneVectorFromEnd)
                 {
                     // Load the next vector, and early exit on NaN.
@@ -3419,7 +3467,8 @@ namespace System.Numerics.Tensors
                 int oneVectorFromEnd = x.Length - Vector128<float>.Count;
                 int i = Vector128<float>.Count;
 
-                // Aggregate additional vectors into the result as long as there's at least one full vector left to process.
+                // Aggregate additional vectors into the result as long as there's at least one full vector left to
+                // process.
                 while (i <= oneVectorFromEnd)
                 {
                     // Load the next vector, and early exit on NaN.
@@ -3456,7 +3505,8 @@ namespace System.Numerics.Tensors
                 return TMinMaxOperator.Invoke(result);
             }
 
-            // Scalar path used when either vectorization is not supported or the input is too small to vectorize.
+            // Scalar path used when either vectorization is not supported or the input is too small to
+            // vectorize.
             float curResult = x[0];
             if (float.IsNaN(curResult))
             {
@@ -3528,7 +3578,8 @@ namespace System.Numerics.Tensors
                 int oneVectorFromEnd = x.Length - Vector512<float>.Count;
                 int i = Vector512<float>.Count;
 
-                // Aggregate additional vectors into the result as long as there's at least one full vector left to process.
+                // Aggregate additional vectors into the result as long as there's at least one full vector left to
+                // process.
                 while (i <= oneVectorFromEnd)
                 {
                     // Load the next vector, and early exit on NaN.
@@ -3589,7 +3640,8 @@ namespace System.Numerics.Tensors
                 int oneVectorFromEnd = x.Length - Vector256<float>.Count;
                 int i = Vector256<float>.Count;
 
-                // Aggregate additional vectors into the result as long as there's at least one full vector left to process.
+                // Aggregate additional vectors into the result as long as there's at least one full vector left to
+                // process.
                 while (i <= oneVectorFromEnd)
                 {
                     // Load the next vector, and early exit on NaN.
@@ -3650,7 +3702,8 @@ namespace System.Numerics.Tensors
                 int oneVectorFromEnd = x.Length - Vector128<float>.Count;
                 int i = Vector128<float>.Count;
 
-                // Aggregate additional vectors into the result as long as there's at least one full vector left to process.
+                // Aggregate additional vectors into the result as long as there's at least one full vector left to
+                // process.
                 while (i <= oneVectorFromEnd)
                 {
                     // Load the next vector, and early exit on NaN.
@@ -3691,7 +3744,8 @@ namespace System.Numerics.Tensors
                 return TIndexOfMinMax.Invoke(result, resultIndex);
             }
 
-            // Scalar path used when either vectorization is not supported or the input is too small to vectorize.
+            // Scalar path used when either vectorization is not supported or the input is too small to
+            // vectorize.
             float curResult = x[0];
             int curIn = 0;
             if (float.IsNaN(curResult))
@@ -3728,8 +3782,10 @@ namespace System.Numerics.Tensors
             return BitOperations.TrailingZeroCount(mask.ExtractMostSignificantBits());
         }
 
-        /// <summary>Performs an element-wise operation on <paramref name="x"/> and writes the results to <paramref name="destination"/>.</summary>
-        /// <typeparam name="TUnaryOperator">Specifies the operation to perform on each element loaded from <paramref name="x"/>.</typeparam>
+        /// <summary>Performs an element-wise operation on <paramref name="x"/> and writes the results to
+        // <paramref name="destination"/>.</summary>
+        /// <typeparam name="TUnaryOperator">Specifies the operation to perform on each element loaded from
+        // <paramref name="x"/>.</typeparam>
         private static void InvokeSpanIntoSpan<TUnaryOperator>(
             ReadOnlySpan<float> x,
             Span<float> destination
@@ -4992,7 +5048,8 @@ namespace System.Numerics.Tensors
         /// and writes the results to <paramref name="destination"/>.
         /// </summary>
         /// <typeparam name="TBinaryOperator">
-        /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>.
+        /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/>
+        // and <paramref name="y"/>.
         /// </typeparam>
         private static void InvokeSpanSpanIntoSpan<TBinaryOperator>(
             ReadOnlySpan<float> x,
@@ -6500,7 +6557,8 @@ namespace System.Numerics.Tensors
         /// and writes the results to <paramref name="destination"/>.
         /// </summary>
         /// <typeparam name="TBinaryOperator">
-        /// Specifies the operation to perform on each element loaded from <paramref name="x"/> with <paramref name="y"/>.
+        /// Specifies the operation to perform on each element loaded from <paramref name="x"/> with
+        // <paramref name="y"/>.
         /// </typeparam>
         private static void InvokeSpanScalarIntoSpan<TBinaryOperator>(
             ReadOnlySpan<float> x,
@@ -6519,7 +6577,8 @@ namespace System.Numerics.Tensors
         /// It is not used with <paramref name="y"/>.
         /// </typeparam>
         /// <typeparam name="TBinaryOperator">
-        /// Specifies the operation to perform on the transformed value from <paramref name="x"/> with <paramref name="y"/>.
+        /// Specifies the operation to perform on the transformed value from <paramref name="x"/> with
+        // <paramref name="y"/>.
         /// </typeparam>
         private static void InvokeSpanScalarIntoSpan<TTransformOperator, TBinaryOperator>(
             ReadOnlySpan<float> x,
@@ -8054,11 +8113,13 @@ namespace System.Numerics.Tensors
         }
 
         /// <summary>
-        /// Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref name="z"/>,
+        /// Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref
+        // name="z"/>,
         /// and writes the results to <paramref name="destination"/>.
         /// </summary>
         /// <typeparam name="TTernaryOperator">
-        /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/>, <paramref name="y"/>,
+        /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/>,
+        // <paramref name="y"/>,
         /// and <paramref name="z"/>.
         /// </typeparam>
         private static void InvokeSpanSpanSpanIntoSpan<TTernaryOperator>(
@@ -9754,11 +9815,13 @@ namespace System.Numerics.Tensors
         }
 
         /// <summary>
-        /// Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref name="z"/>,
+        /// Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref
+        // name="z"/>,
         /// and writes the results to <paramref name="destination"/>.
         /// </summary>
         /// <typeparam name="TTernaryOperator">
-        /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>
+        /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/>
+        // and <paramref name="y"/>
         /// with <paramref name="z"/>.
         /// </typeparam>
         private static void InvokeSpanSpanScalarIntoSpan<TTernaryOperator>(
@@ -11374,11 +11437,13 @@ namespace System.Numerics.Tensors
         }
 
         /// <summary>
-        /// Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref name="z"/>,
+        /// Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref
+        // name="z"/>,
         /// and writes the results to <paramref name="destination"/>.
         /// </summary>
         /// <typeparam name="TTernaryOperator">
-        /// Specifies the operation to perform on the pair-wise element loaded from <paramref name="x"/>, with <paramref name="y"/>,
+        /// Specifies the operation to perform on the pair-wise element loaded from <paramref name="x"/>,
+        // with <paramref name="y"/>,
         /// and the element loaded from <paramref name="z"/>.
         /// </typeparam>
         private static void InvokeSpanScalarSpanIntoSpan<TTernaryOperator>(
@@ -12993,7 +13058,8 @@ namespace System.Numerics.Tensors
             }
         }
 
-        /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation is accelerated on the current hardware.</summary>
+        /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation
+        // is accelerated on the current hardware.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector128<float> FusedMultiplyAdd(
             Vector128<float> x,
@@ -13014,7 +13080,8 @@ namespace System.Numerics.Tensors
             return (x * y) + addend;
         }
 
-        /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation is accelerated on the current hardware.</summary>
+        /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation
+        // is accelerated on the current hardware.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector256<float> FusedMultiplyAdd(
             Vector256<float> x,
@@ -13030,7 +13097,8 @@ namespace System.Numerics.Tensors
             return (x * y) + addend;
         }
 
-        /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation is accelerated on the current hardware.</summary>
+        /// <summary>Performs (x * y) + z. It will be rounded as one ternary operation if such an operation
+        // is accelerated on the current hardware.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector512<float> FusedMultiplyAdd(
             Vector512<float> x,
@@ -13046,8 +13114,10 @@ namespace System.Numerics.Tensors
             return (x * y) + addend;
         }
 
-        /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single value.</summary>
-        /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of values.</typeparam>
+        /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single
+        // value.</summary>
+        /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of
+        // values.</typeparam>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float HorizontalAggregate<TAggregate>(Vector128<float> x)
             where TAggregate : struct, IBinaryOperator
@@ -13060,15 +13130,19 @@ namespace System.Numerics.Tensors
             return x.ToScalar();
         }
 
-        /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single value.</summary>
-        /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of values.</typeparam>
+        /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single
+        // value.</summary>
+        /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of
+        // values.</typeparam>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float HorizontalAggregate<TAggregate>(Vector256<float> x)
             where TAggregate : struct, IBinaryOperator =>
             HorizontalAggregate<TAggregate>(TAggregate.Invoke(x.GetLower(), x.GetUpper()));
 
-        /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single value.</summary>
-        /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of values.</typeparam>
+        /// <summary>Aggregates all of the elements in the <paramref name="x"/> into a single
+        // value.</summary>
+        /// <typeparam name="TAggregate">Specifies the operation to be performed on each pair of
+        // values.</typeparam>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float HorizontalAggregate<TAggregate>(Vector512<float> x)
             where TAggregate : struct, IBinaryOperator =>
@@ -14018,7 +14092,8 @@ namespace System.Numerics.Tensors
                 );
         }
 
-        /// <summary>Operator to get x or y based on which has the larger MathF.Abs (but NaNs may not be propagated)</summary>
+        /// <summary>Operator to get x or y based on which has the larger MathF.Abs (but NaNs may not be
+        // propagated)</summary>
         private readonly struct MaxMagnitudeOperator : IAggregationOperator
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -14249,7 +14324,8 @@ namespace System.Numerics.Tensors
                 );
         }
 
-        /// <summary>Operator to get x or y based on which has the smaller MathF.Abs (but NaNs may not be propagated)</summary>
+        /// <summary>Operator to get x or y based on which has the smaller MathF.Abs (but NaNs may not be
+        // propagated)</summary>
         private readonly struct MinMagnitudeOperator : IAggregationOperator
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -15683,7 +15759,8 @@ namespace System.Numerics.Tensors
             static abstract Vector512<float> Invoke(Vector512<float> x, Vector512<float> y);
         }
 
-        /// <summary><see cref="IBinaryOperator"/> that specializes horizontal aggregation of all elements in a vector.</summary>
+        /// <summary><see cref="IBinaryOperator"/> that specializes horizontal aggregation of all elements
+        // in a vector.</summary>
         private interface IAggregationOperator : IBinaryOperator
         {
             static abstract float Invoke(Vector128<float> x);

@@ -87,25 +87,32 @@ namespace System.ComponentModel.DataAnnotations
         public bool MaximumIsExclusive { get; set; }
 
         /// <summary>
-        ///     Gets the type of the <see cref="Minimum" /> and <see cref="Maximum" /> values (e.g. Int32, Double, or some custom
+        ///     Gets the type of the <see cref="Minimum" /> and <see cref="Maximum" /> values (e.g. Int32,
+        // Double, or some custom
         ///     type)
         /// </summary>
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         public Type OperandType { get; }
 
         /// <summary>
-        /// Determines whether string values for <see cref="Minimum"/> and <see cref="Maximum"/> are parsed in the invariant
+        /// Determines whether string values for <see cref="Minimum"/> and <see cref="Maximum"/> are parsed
+        // in the invariant
         /// culture rather than the current culture in effect at the time of the validation.
         /// </summary>
         public bool ParseLimitsInInvariantCulture { get; set; }
 
         /// <summary>
-        /// Determines whether any conversions necessary from the value being validated to <see cref="OperandType"/> as set
-        /// by the <c>type</c> parameter of the <see cref="RangeAttribute(Type, string, string)"/> constructor are carried
-        /// out in the invariant culture rather than the current culture in effect at the time of the validation.
+        /// Determines whether any conversions necessary from the value being validated to <see
+        // cref="OperandType"/> as set
+        /// by the <c>type</c> parameter of the <see cref="RangeAttribute(Type, string, string)"/>
+        // constructor are carried
+        /// out in the invariant culture rather than the current culture in effect at the time of the
+        // validation.
         /// </summary>
-        /// <remarks>This property has no effects with the constructors with <see cref="int"/> or <see cref="double"/>
-        /// parameters, for which the invariant culture is always used for any conversions of the validated value.</remarks>
+        /// <remarks>This property has no effects with the constructors with <see cref="int"/> or <see
+        // cref="double"/>
+        /// parameters, for which the invariant culture is always used for any conversions of the validated
+        // value.</remarks>
         public bool ConvertValueInInvariantCulture { get; set; }
 
         private Func<object, object?>? Conversion { get; set; }
@@ -140,13 +147,15 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="value">The value to test for validity.</param>
         /// <returns><c>true</c> means the <paramref name="value" /> is valid</returns>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
         public override bool IsValid(object? value)
         {
             // Validate our properties and create the conversion function
             SetupConversion();
 
-            // Automatically pass if value is null or empty. RequiredAttribute should be used to assert a value is not empty.
+            // Automatically pass if value is null or empty. RequiredAttribute should be used to assert a value
+            // is not empty.
             if (value is null or string { Length: 0 })
             {
                 return true;
@@ -188,10 +197,12 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         ///     Override of <see cref="ValidationAttribute.FormatErrorMessage" />
         /// </summary>
-        /// <remarks>This override exists to provide a formatted message describing the minimum and maximum values</remarks>
+        /// <remarks>This override exists to provide a formatted message describing the minimum and maximum
+        // values</remarks>
         /// <param name="name">The user-visible name to include in the formatted message.</param>
         /// <returns>A localized string describing the minimum and maximum values</returns>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
         public override string FormatErrorMessage(string name)
         {
             SetupConversion();

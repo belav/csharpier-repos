@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
     ///     Safe handle representing a mscorwks!CRYPT_PROV_CTX
     /// </summary>
     /// <remarks>
-    ///     Since we need sometimes to delete the key container created in the context of the CSP, the handle
+    ///     Since we need sometimes to delete the key container created in the context of the CSP, the
+    // handle
     ///     used in this class is actually a pointer to a CRYPT_PROV_CTX unmanaged structure defined in
     ///     COMCryptography.h
     /// </remarks>
@@ -65,9 +66,12 @@ namespace System.Security.Cryptography
     ///     Safe handle representing a mscorkws!CRYPT_KEY_CTX
     /// </summary>
     /// <summary>
-    ///     Since we need to delete the key handle before the provider is released we need to actually hold a
-    ///     pointer to a CRYPT_KEY_CTX unmanaged structure whose destructor decrements a refCount. Only when
-    ///     the provider refCount is 0 it is deleted. This way, we loose a ---- in the critical finalization
+    ///     Since we need to delete the key handle before the provider is released we need to actually
+    // hold a
+    ///     pointer to a CRYPT_KEY_CTX unmanaged structure whose destructor decrements a refCount. Only
+    // when
+    ///     the provider refCount is 0 it is deleted. This way, we loose a ---- in the critical
+    // finalization
     ///     of the key handle and provider handle. This also applies to hash handles, which point to a
     ///     CRYPT_HASH_CTX. Those strucutres are defined in COMCryptography.h
     /// </summary>
@@ -109,7 +113,8 @@ namespace System.Security.Cryptography
     ///     SafeHandle representing a mscorwks!CRYPT_HASH_CTX
     /// </summary>
     /// <remarks>
-    ///     See code:System.Security.Cryptography.SafeKeyHandle for information about the release process
+    ///     See code:System.Security.Cryptography.SafeKeyHandle for information about the release
+    // process
     ///     for a CRYPT_HASH_CTX.
     /// </remarks>
     [System.Security.SecurityCritical] // auto-generated

@@ -11,8 +11,10 @@ namespace System.StubHelpers
 {
     internal static class AnsiCharMarshaler
     {
-        // The length of the returned array is an approximation based on the length of the input string and the system
-        // character set. It is only guaranteed to be larger or equal to cbLength, don't depend on the exact value.
+        // The length of the returned array is an approximation based on the length of the input string and
+        // the system
+        // character set. It is only guaranteed to be larger or equal to cbLength, don't depend on the exact
+        // value.
         internal static unsafe byte[] DoAnsiConversion(
             string str,
             bool fBestFit,
@@ -84,8 +86,10 @@ namespace System.StubHelpers
 
             if (pbNativeBuffer != null || Marshal.SystemMaxDBCSCharSize == 1)
             {
-                // If we are marshaling into a stack buffer or we can accurately estimate the size of the required heap
-                // space, we will use a "1-pass" mode where we convert the string directly into the unmanaged buffer.
+                // If we are marshaling into a stack buffer or we can accurately estimate the size of the required
+                // heap
+                // space, we will use a "1-pass" mode where we convert the string directly into the unmanaged
+                // buffer.
 
                 // + 1 for the null character from the user.  + 1 for the null character we put in.
                 nb = checked((strManaged.Length + 1) * Marshal.SystemMaxDBCSCharSize + 1);
@@ -125,9 +129,12 @@ namespace System.StubHelpers
                 }
                 else
                 {
-                    // Otherwise we use a slower "2-pass" mode where we first marshal the string into an intermediate buffer
-                    // (managed byte array) and then allocate exactly the right amount of unmanaged memory. This is to avoid
-                    // wasting memory on systems with multibyte character sets where the buffer we end up with is often much
+                    // Otherwise we use a slower "2-pass" mode where we first marshal the string into an intermediate
+                    // buffer
+                    // (managed byte array) and then allocate exactly the right amount of unmanaged memory. This is to
+                    // avoid
+                    // wasting memory on systems with multibyte character sets where the buffer we end up with is often
+                    // much
                     // smaller than the upper bound for the given managed string.
 
                     byte[] bytes = AnsiCharMarshaler.DoAnsiConversion(
@@ -1088,9 +1095,12 @@ namespace System.StubHelpers
         {
             IntPtr pNativeHome;
 
-            // P/Invoke can be used to call Win32 apis that don't strictly follow CLR in/out semantics and thus may
-            // leave garbage in the buffer in circumstances that we can't detect. To prevent us from crashing when
-            // converting the contents back to managed, put a hidden NULL terminator past the end of the official buffer.
+            // P/Invoke can be used to call Win32 apis that don't strictly follow CLR in/out semantics and thus
+            // may
+            // leave garbage in the buffer in circumstances that we can't detect. To prevent us from crashing
+            // when
+            // converting the contents back to managed, put a hidden NULL terminator past the end of the
+            // official buffer.
 
             // Unmanaged layout:
             // +====================================+

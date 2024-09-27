@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
-// Since System.Web.Mobile.dll is itself essentially deprecated, the codebase is no longer being actively
+// Since System.Web.Mobile.dll is itself essentially deprecated, the codebase is no longer being
+// actively
 // maintained. All remaining FxCop violations (as of Dev11 MQ) are baselined below.
 
 [module: SuppressMessage(
@@ -1101,7 +1102,8 @@ using System.Diagnostics.CodeAnalysis;
 )]
 
 #region CA2116 False Positives
-// CA2116 is firing false positives due to DevDiv #342582 (http://vstfdevdiv:8080/DevDiv2/web/wi.aspx?id=342582).
+// CA2116 is firing false positives due to DevDiv #342582
+// (http://vstfdevdiv:8080/DevDiv2/web/wi.aspx?id=342582).
 // We should remove these suppressions when that bug is fixed.
 [module: SuppressMessage(
     "Microsoft.Security",

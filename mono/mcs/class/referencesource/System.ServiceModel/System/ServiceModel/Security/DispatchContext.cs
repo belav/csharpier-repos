@@ -10,7 +10,8 @@ namespace System.ServiceModel.Security
     using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
 
     /// <summary>
-    /// Defines the inputs and outputs to the <see cref="WSTrustServiceContract.DispatchRequest"/> method.
+    /// Defines the inputs and outputs to the <see cref="WSTrustServiceContract.DispatchRequest"/>
+    // method.
     /// </summary>
     public class DispatchContext
     {

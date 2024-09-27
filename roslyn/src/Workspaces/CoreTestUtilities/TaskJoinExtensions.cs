@@ -12,7 +12,8 @@ namespace Roslyn.Test.Utilities
     public static class TaskJoinExtensions
     {
         /// <summary>
-        /// Joins a <see cref="Task"/> to the current thread with a <see cref="Dispatcher"/> message pump in place
+        /// Joins a <see cref="Task"/> to the current thread with a <see cref="Dispatcher"/> message pump in
+        // place
         /// during the join operation.
         /// </summary>
         public static void JoinUsingDispatcher(this Task task, CancellationToken cancellationToken)
@@ -24,7 +25,8 @@ namespace Roslyn.Test.Utilities
         }
 
         /// <summary>
-        /// Joins a <see cref="Task{TResult}"/> to the current thread with a <see cref="Dispatcher"/> message pump in
+        /// Joins a <see cref="Task{TResult}"/> to the current thread with a <see cref="Dispatcher"/>
+        // message pump in
         /// place during the join operation.
         /// </summary>
         public static TResult JoinUsingDispatcher<TResult>(

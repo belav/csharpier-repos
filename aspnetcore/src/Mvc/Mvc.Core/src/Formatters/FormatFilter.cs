@@ -11,7 +11,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
 /// <summary>
-/// A filter that will use the format value in the route data or query string to set the content type on an
+/// A filter that will use the format value in the route data or query string to set the content
+// type on an
 /// <see cref="ObjectResult"/> returned from an action.
 /// </summary>
 public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilter
@@ -53,7 +54,8 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
     }
 
     /// <summary>
-    /// As a <see cref="IResourceFilter"/>, this filter looks at the request and rejects it before going ahead if
+    /// As a <see cref="IResourceFilter"/>, this filter looks at the request and rejects it before going
+    // ahead if
     /// 1. The format in the request does not match any format in the map.
     /// 2. If there is a conflicting producesFilter.
     /// </summary>
@@ -94,9 +96,11 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
             return;
         }
 
-        // We need to check if the action can generate the content type the user asked for. That is, treat the
+        // We need to check if the action can generate the content type the user asked for. That is, treat
+        // the
         // request's format and IApiResponseMetadataProvider-provided content types similarly to an Accept
-        // header and an output formatter's SupportedMediaTypes: Confirm action supports a more specific media
+        // header and an output formatter's SupportedMediaTypes: Confirm action supports a more specific
+        // media
         // type than requested e.g. OK if "text/*" requested and action supports "text/plain".
         if (!IsSuperSetOfAnySupportedMediaType(contentType, supportedMediaTypes))
         {

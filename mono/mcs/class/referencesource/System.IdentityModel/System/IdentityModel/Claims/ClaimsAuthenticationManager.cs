@@ -17,7 +17,8 @@ namespace System.Security.Claims
         /// The method echoes back the incoming ClaimsIdentities.
         /// </summary>
         /// <param name="resourceName">The address to which the request was sent.</param>
-        /// <param name="incomingPrincipal"><see cref="ClaimsPrincipal"/> presented by the client (in the form of a
+        /// <param name="incomingPrincipal"><see cref="ClaimsPrincipal"/> presented by the client (in the
+        // form of a
         /// SecurityToken) to access the resource.</param>
         /// <returns>The ClaimsPrincipal given to the method.</returns>
         public virtual ClaimsPrincipal Authenticate(

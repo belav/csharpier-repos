@@ -203,7 +203,8 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             UrlEncoder encoder = UrlEncoder.Create(UnicodeRanges.All); // allow all codepoints
 
-            // "a<unpaired leading>b<unpaired trailing>c<trailing before leading>d<unpaired trailing><valid>e<high at end of string>"
+            // "a<unpaired leading>b<unpaired trailing>c<trailing before leading>d<unpaired
+            // trailing><valid>e<high at end of string>"
             const string input = "a\uD800b\uDFFFc\uDFFF\uD800d\uDFFF\uD800\uDFFFe\uD800";
             const string expected =
                 "a%EF%BF%BDb%EF%BF%BDc%EF%BF%BD%EF%BF%BDd%EF%BF%BD%F0%90%8F%BFe%EF%BF%BD"; // 'D800' 'DFFF' was preserved since it's valid

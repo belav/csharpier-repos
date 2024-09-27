@@ -93,7 +93,7 @@ namespace MonoTests.System.Runtime.Serialization
 
         public void SomeMethod()
         {
-            /* Does nothing */
+/* Does nothing */
         }
 
         public override int GetHashCode()

@@ -50,7 +50,8 @@ namespace System.Data.Mapping
         /// the s-space Entity container metadata objects.
         /// </summary>
         /// <param name="entityContainer">Entity Continer type that is being mapped on the C-side</param>
-        /// <param name="storageEntityContainer">Entity Continer type that is being mapped on the S-side</param>
+        /// <param name="storageEntityContainer">Entity Continer type that is being mapped on the
+        // S-side</param>
         internal StorageEntityContainerMapping(
             EntityContainer entityContainer,
             EntityContainer storageEntityContainer,
@@ -288,7 +289,8 @@ namespace System.Data.Mapping
         }
 
         /// <summary>
-        /// Get a RelationShipSet mapping that has the passed in EntitySet as one of the ends and is mapped to the
+        /// Get a RelationShipSet mapping that has the passed in EntitySet as one of the ends and is mapped
+        // to the
         /// table.
         /// </summary>
         internal IEnumerable<StorageAssociationSetMapping> GetRelationshipSetMappingsFor(
@@ -473,7 +475,8 @@ namespace System.Data.Mapping
 
             if (result.Cells.Count <= 0)
             {
-                //When type-specific QVs are asked for but not defined in the MSL we should return without generating
+                //When type-specific QVs are asked for but not defined in the MSL we should return without
+                // generating
                 // Query pipeline will handle this appropriately by asking for UNION ALL view.
                 result.Success = false;
                 return result;
@@ -490,7 +493,8 @@ namespace System.Data.Mapping
             );
             List<CellGroup> cellGroups = partitioner.GroupRelatedCells();
 
-            //Clone cell groups- i.e, List<Set<Cell>> - upto cell before storing it in the cache because viewgen modified the Cell structure
+            //Clone cell groups- i.e, List<Set<Cell>> - upto cell before storing it in the cache because viewgen
+            // modified the Cell structure
             result.CellGroups = cellGroups
                 .Select(setOfcells => new CellGroup(setOfcells.Select(cell => new Cell(cell))))
                 .ToList();
@@ -519,8 +523,10 @@ namespace System.Data.Mapping
 
         public bool Equals(InputForComputingCellGroups other)
         {
-            // Isn't this funny? We are not using Memoizer for function memoization. Args Entity and Config don't matter!
-            // If I were to compare Entity this would not use the cache for cases when I supply different entity set. However,
+            // Isn't this funny? We are not using Memoizer for function memoization. Args Entity and Config
+            // don't matter!
+            // If I were to compare Entity this would not use the cache for cases when I supply different entity
+            // set. However,
             // the cell groups belong to ALL entity sets.
             return (
                 this.ContainerMapping.Equals(other.ContainerMapping)

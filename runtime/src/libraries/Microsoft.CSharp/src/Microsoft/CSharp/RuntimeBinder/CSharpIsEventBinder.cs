@@ -45,7 +45,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Initializes a new instance of the <see cref="CSharpIsEventBinder"/> class.
         /// </summary>
         /// <param name="name">The name of the member to test.</param>
-        /// <param name="callingContext">The <see cref="System.Type"/> that indicates where this operation is defined.</param>
+        /// <param name="callingContext">The <see cref="System.Type"/> that indicates where this operation
+        // is defined.</param>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public CSharpIsEventBinder(string name, Type callingContext)
         {

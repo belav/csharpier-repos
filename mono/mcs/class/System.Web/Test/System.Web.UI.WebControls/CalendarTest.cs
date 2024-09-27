@@ -758,19 +758,19 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.IsTrue(s.IndexOf("id=\"hola\"") != -1, "#01");
         }
 
-        /*
-        * Not meant to be run. Just to get a stack trace.
-        [Test]
-        public void NoCreateStyleCollection ()
-        {
-            PokerCalendar p = new PokerCalendar ();
-            p.ID = "hola";
-            p.TodaysDate = new DateTime (2005, 8, 4);
-            p.SelectedDate = p.TodaysDate;
-            string s = p.Render();
-            Assert.IsTrue (p.CS_Called == false, "#01");
-        }
-        */
+/*
+* Not meant to be run. Just to get a stack trace.
+[Test]
+public void NoCreateStyleCollection ()
+{
+PokerCalendar p = new PokerCalendar ();
+p.ID = "hola";
+p.TodaysDate = new DateTime (2005, 8, 4);
+p.SelectedDate = p.TodaysDate;
+string s = p.Render();
+Assert.IsTrue (p.CS_Called == false, "#01");
+}
+*/
 
         [Test]
         [Category("NotWorking")]

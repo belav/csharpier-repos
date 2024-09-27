@@ -691,7 +691,8 @@ WHERE json_array_length("p"."Strings") > 0 AND "p"."Strings" ->> 1 = "p"."Nullab
 
     public override async Task Inline_collection_index_Column(bool async)
     {
-        // SQLite doesn't support correlated subqueries where the outer column is used as the LIMIT/OFFSET (see OFFSET "p"."Int" below)
+        // SQLite doesn't support correlated subqueries where the outer column is used as the LIMIT/OFFSET
+        // (see OFFSET "p"."Int" below)
         await Assert.ThrowsAsync<SqliteException>(() => base.Inline_collection_index_Column(async));
 
         AssertSql(

@@ -46,7 +46,8 @@ namespace System.Data.Entity.Design
         internal static readonly string _edmxFileExtension = ".edmx";
 
         /// <summary>
-        /// Extract the Conceptual, Mapping and Storage nodes from an EDMX input streams, and extract the value of the metadataArtifactProcessing property.
+        /// Extract the Conceptual, Mapping and Storage nodes from an EDMX input streams, and extract the
+        // value of the metadataArtifactProcessing property.
         /// </summary>
         /// <param name="edmxInputStream"></param>
         /// <param name="conceptualSchemaNode"></param>
@@ -118,7 +119,8 @@ namespace System.Data.Entity.Design
                 {
                     foreach (XmlAttribute a in propertyNode.Attributes)
                     {
-                        // treat attribute names case-sensitive (since it is xml), but attribute value case-insensitive to be accommodating .
+                        // treat attribute names case-sensitive (since it is xml), but attribute value case-insensitive to
+                        // be accommodating .
                         if (
                             a.Name.Equals("Name", StringComparison.Ordinal)
                             && a.Value.Equals(

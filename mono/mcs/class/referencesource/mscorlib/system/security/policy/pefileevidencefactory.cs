@@ -25,7 +25,8 @@ using Microsoft.Win32.SafeHandles;
 namespace System.Security.Policy
 {
     /// <summary>
-    ///     Arguments to the ETW evidence generation event.  This enumeration should be kept in sync with
+    ///     Arguments to the ETW evidence generation event.  This enumeration should be kept in sync
+    // with
     ///     the VM enumeration EvidenceType in SecurityPolicy.h.
     /// </summary>
     internal enum EvidenceTypeGenerated

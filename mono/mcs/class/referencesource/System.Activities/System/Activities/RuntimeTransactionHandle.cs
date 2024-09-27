@@ -162,7 +162,8 @@ namespace System.Activities
             context.ThrowIfDisposed();
 
             //If the transaction is a runtime transaction (i.e. an Invoke with ambient transaction case), then
-            //we do not require that it be registered since the handle created for the root transaction is never registered.
+            //we do not require that it be registered since the handle created for the root transaction is never
+            // registered.
             if (this.rootTransaction == null)
             {
                 this.ThrowIfNotRegistered(

@@ -6,7 +6,8 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.Tracing
 {
-    // This is part of the NativeRuntimeEventsource, which is the managed version of the Microsoft-Windows-DotNETRuntime provider.
+    // This is part of the NativeRuntimeEventsource, which is the managed version of the
+    // Microsoft-Windows-DotNETRuntime provider.
     // It contains the runtime specific interop to native event sinks.
     internal sealed partial class NativeRuntimeEventSource : EventSource
     {

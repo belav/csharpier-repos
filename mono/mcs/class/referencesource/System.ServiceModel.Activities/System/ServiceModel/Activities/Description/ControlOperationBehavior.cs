@@ -15,7 +15,8 @@ namespace System.ServiceModel.Activities.Description
 
         //There are two modes of operation.
         // 1) IWorkflowControlServiceOperations :: Implemented completley by the ControlOperationInvoker.
-        // 2) Infrastructure endpoints(Delay/Compensation/OCS) where we wrap their invoker over ControlOperationInvoker.
+        // 2) Infrastructure endpoints(Delay/Compensation/OCS) where we wrap their invoker over
+        // ControlOperationInvoker.
         public ControlOperationBehavior(bool isWrappedMode)
         {
             this.isWrappedMode = isWrappedMode;

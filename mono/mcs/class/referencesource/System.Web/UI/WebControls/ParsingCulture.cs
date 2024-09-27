@@ -6,7 +6,8 @@ using System.Text;
 namespace System.Web.UI.WebControls
 {
     /// <summary>
-    /// Indicates which <see cref='System.Globalization.CultureInfo'/> to use when converting string values to types.
+    /// Indicates which <see cref='System.Globalization.CultureInfo'/> to use when converting string
+    // values to types.
     /// </summary>
     public enum ParsingCulture
     {

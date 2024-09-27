@@ -36,10 +36,12 @@ namespace Moq
         /// <param name="mocked">The instance of the mocked object.</param>
         /// <typeparam name="T">
         ///   Type of the mock to retrieve.
-        ///   Can be omitted as it's inferred from the object instance passed in as the <paramref name="mocked"/> instance.
+        ///   Can be omitted as it's inferred from the object instance passed in as the <paramref
+        // name="mocked"/> instance.
         /// </typeparam>
         /// <returns>The mock associated with the mocked object.</returns>
-        /// <exception cref="ArgumentException">The received <paramref name="mocked"/> instance was not created by Moq.</exception>
+        /// <exception cref="ArgumentException">The received <paramref name="mocked"/> instance was not
+        // created by Moq.</exception>
         /// <example group="advanced">
         ///   The following example shows how to add a new setup to an object instance
         ///   which is not the original <see cref="Mock{T}"/> but rather the object associated with it:
@@ -142,7 +144,8 @@ namespace Moq
         /// Gets the interfaces additionally implemented by the mock object.
         /// </summary>
         /// <remarks>
-        /// This list may be modified by calls to <see cref="As{TInterface}"/> up until the first call to <see cref="Object"/>.
+        /// This list may be modified by calls to <see cref="As{TInterface}"/> up until the first call to
+        // <see cref="Object"/>.
         /// </remarks>
         internal abstract List<Type> AdditionalInterfaces { get; }
 
@@ -152,7 +155,8 @@ namespace Moq
         public abstract MockBehavior Behavior { get; }
 
         /// <summary>
-        ///   Whether the base member virtual implementation will be called for mocked classes if no setup is matched.
+        ///   Whether the base member virtual implementation will be called for mocked classes if no setup
+        // is matched.
         ///   Defaults to <see langword="false"/>.
         /// </summary>
         public abstract bool CallBase { get; set; }
@@ -160,7 +164,8 @@ namespace Moq
         internal abstract object[] ConstructorArguments { get; }
 
         /// <summary>
-        ///   Specifies the behavior to use when returning default values for unexpected invocations on loose mocks.
+        ///   Specifies the behavior to use when returning default values for unexpected invocations on
+        // loose mocks.
         /// </summary>
         public DefaultValue DefaultValue
         {
@@ -421,26 +426,26 @@ namespace Moq
         {
             Mock.VerifyNoOtherCalls(mock, verifiedMocks: new HashSet<Mock>());
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
-            After:
-                    static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
+After:
+static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
-            After:
-                    static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
+After:
+static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
-            After:
-                    static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
+After:
+static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
+*/
         }
 
         static void VerifyNoOtherCalls(Mock mock, HashSet<Mock> verifiedMocks)
@@ -495,26 +500,26 @@ namespace Moq
             {
                 VerifyNoOtherCalls(innerMock, verifiedMocks);
 
-                /* Unmerged change from project 'Moq(netstandard2.0)'
-                Before:
-                        private static int GetMatchingInvocationCount(
-                After:
-                        static int GetMatchingInvocationCount(
-                */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static int GetMatchingInvocationCount(
+After:
+static int GetMatchingInvocationCount(
+*/
 
-                /* Unmerged change from project 'Moq(netstandard2.1)'
-                Before:
-                        private static int GetMatchingInvocationCount(
-                After:
-                        static int GetMatchingInvocationCount(
-                */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static int GetMatchingInvocationCount(
+After:
+static int GetMatchingInvocationCount(
+*/
 
-                /* Unmerged change from project 'Moq(net6.0)'
-                Before:
-                        private static int GetMatchingInvocationCount(
-                After:
-                        static int GetMatchingInvocationCount(
-                */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static int GetMatchingInvocationCount(
+After:
+static int GetMatchingInvocationCount(
+*/
             }
         }
 
@@ -535,26 +540,26 @@ namespace Moq
                 invocationsToBeMarkedAsVerified
             );
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static int GetMatchingInvocationCount(
-            After:
-                    static int GetMatchingInvocationCount(
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static int GetMatchingInvocationCount(
+After:
+static int GetMatchingInvocationCount(
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static int GetMatchingInvocationCount(
-            After:
-                    static int GetMatchingInvocationCount(
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static int GetMatchingInvocationCount(
+After:
+static int GetMatchingInvocationCount(
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static int GetMatchingInvocationCount(
-            After:
-                    static int GetMatchingInvocationCount(
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static int GetMatchingInvocationCount(
+After:
+static int GetMatchingInvocationCount(
+*/
         }
 
         static int GetMatchingInvocationCount(
@@ -685,7 +690,8 @@ namespace Moq
         );
 
         // This specialized setup method is used to set up a single `Mock.Of` predicate.
-        // Unlike other setup methods, LINQ to Mocks can set non-interceptable properties, which is handy when initializing DTOs.
+        // Unlike other setup methods, LINQ to Mocks can set non-interceptable properties, which is handy
+        // when initializing DTOs.
         internal static bool SetupReturns(Mock mock, LambdaExpression expression, object value)
         {
             Guard.NotNull(expression, nameof(expression));
@@ -697,7 +703,8 @@ namespace Moq
                 {
                     var originalExpression = (LambdaExpression)oe;
 
-                    // There are two special cases involving settable properties where we do something other than creating a new setup:
+                    // There are two special cases involving settable properties where we do something other than
+                    // creating a new setup:
 
                     if (originalExpression.IsProperty())
                     {
@@ -839,26 +846,32 @@ namespace Moq
                 }
             );
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
-            After:
-                    static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock,
+Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+After:
+static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression,
+MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
-            After:
-                    static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock,
+Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+After:
+static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression,
+MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
-            After:
-                    static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock,
+Expression, MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+After:
+static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression expression, Func<Mock, Expression,
+MethodExpectation, TSetup> setupLast, bool allowNonOverridableLastProperty = false)
+*/
         }
 
         static TSetup SetupRecursive<TSetup>(
@@ -876,26 +889,32 @@ namespace Moq
             var parts = expression.Split(allowNonOverridableLastProperty);
             return Mock.SetupRecursive(mock, originalExpression: expression, parts, setupLast);
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
-            After:
-                    static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression,
+Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
+After:
+static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression,
+Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
-            After:
-                    static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression,
+Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
+After:
+static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression,
+Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
-            After:
-                    static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression, Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression,
+Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
+After:
+static TSetup SetupRecursive<TSetup>(Mock mock, LambdaExpression originalExpression,
+Stack<MethodExpectation> parts, Func<Mock, Expression, MethodExpectation, TSetup> setupLast)
+*/
         }
 
         static TSetup SetupRecursive<TSetup>(
@@ -1094,14 +1113,16 @@ namespace Moq
         /// </summary>
         /// <remarks>
         ///   This method can only be called before the first use of the mock <see cref="Object"/> property,
-        ///   at which point the runtime type has already been generated and no more interfaces can be added to it.
+        ///   at which point the runtime type has already been generated and no more interfaces can be added
+        // to it.
         ///   <para>
         ///     Also, <typeparamref name="TInterface"/> must be an interface and not a class,
         ///     which must be specified when creating the mock instead.
         ///   </para>
         /// </remarks>
         /// <typeparam name="TInterface">Type of interface to cast the mock to.</typeparam>
-        /// <exception cref="ArgumentException">The <typeparamref name="TInterface"/> specified is not an interface.</exception>
+        /// <exception cref="ArgumentException">The <typeparamref name="TInterface"/> specified is not an
+        // interface.</exception>
         /// <exception cref="InvalidOperationException">
         ///   The mock type has already been generated by accessing the <see cref="Object"/> property.
         /// </exception>
@@ -1121,7 +1142,8 @@ namespace Moq
         internal abstract Dictionary<Type, object> ConfiguredDefaultValues { get; }
 
         /// <summary>
-        /// Defines the default return value for all mocked methods or properties with return type <typeparamref name= "TReturn" />.
+        /// Defines the default return value for all mocked methods or properties with return type
+        // <typeparamref name= "TReturn" />.
         /// </summary>
         /// <typeparam name="TReturn">The return type for which to define a default value.</typeparam>
         /// <param name="value">The default return value.</param>

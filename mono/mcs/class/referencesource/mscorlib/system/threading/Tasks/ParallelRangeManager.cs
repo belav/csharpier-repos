@@ -32,7 +32,8 @@ namespace System.Threading.Tasks
         internal long m_nFromInclusive;
         internal long m_nToExclusive;
 
-        // The shared index, stored as the offset from nFromInclusive. Using an offset rather than the actual
+        // The shared index, stored as the offset from nFromInclusive. Using an offset rather than the
+        // actual
         // value saves us from overflows that can happen due to multiple workers racing to increment this.
         // All updates to this field need to be interlocked.  To avoid split interlockeds across cache-lines
         // in 32-bit processes, in 32-bit processes when the range fits in a 32-bit value, we prefer to use
@@ -41,7 +42,8 @@ namespace System.Threading.Tasks
         // that range, minimizing the chances it'll be near the objects from other threads.
         internal volatile Shared<long> m_nSharedCurrentIndexOffset;
 
-        // to be set to 1 by the worker that finishes this range. It's OK to do a non-interlocked write here.
+        // to be set to 1 by the worker that finishes this range. It's OK to do a non-interlocked write
+        // here.
         internal int m_bRangeFinished;
     }
 
@@ -126,7 +128,8 @@ namespace System.Threading.Tasks
                     long nMyOffset;
                     if (IntPtr.Size == 4 && _use32BitCurrentIndex)
                     {
-                        // In 32-bit processes, we prefer to use 32-bit interlocked operations, to avoid the possibility of doing
+                        // In 32-bit processes, we prefer to use 32-bit interlocked operations, to avoid the possibility of
+                        // doing
                         // a 64-bit interlocked when the target value crosses a cache line, as that can be super expensive.
                         // We use the first 32 bits of the Int64 index in such cases.
                         unsafe
@@ -247,7 +250,8 @@ namespace System.Threading.Tasks
         internal long m_nStep;
 
         /// <summary>
-        /// Initializes a RangeManager with the given loop parameters, and the desired number of outer ranges
+        /// Initializes a RangeManager with the given loop parameters, and the desired number of outer
+        // ranges
         /// </summary>
         internal RangeManager(
             long nFromInclusive,
@@ -291,7 +295,8 @@ namespace System.Threading.Tasks
             }
 
             // Convert to signed so the rest of the logic works.
-            // Should be fine so long as uRangeSize < Int64.MaxValue, which we guaranteed by setting #workers >= 2.
+            // Should be fine so long as uRangeSize < Int64.MaxValue, which we guaranteed by setting #workers >=
+            // 2.
             long nRangeSize = (long)uRangeSize;
             _use32BitCurrentIndex = IntPtr.Size == 4 && nRangeSize <= int.MaxValue;
 

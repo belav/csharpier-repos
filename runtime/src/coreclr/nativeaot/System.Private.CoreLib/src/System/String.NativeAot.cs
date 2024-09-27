@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     // This class is marked EagerStaticClassConstruction because it's nice to have this
-    // eagerly constructed to avoid the cost of defered ctors. I can't imagine any app that doesn't use string
+    // eagerly constructed to avoid the cost of defered ctors. I can't imagine any app that doesn't use
+    // string
     //
     [EagerStaticClassConstruction]
     public partial class String

@@ -10,7 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.Extensions.Hosting.Systemd
 {
     /// <summary>
-    /// Provides notification messages for application started and stopping, and configures console logging to the systemd format.
+    /// Provides notification messages for application started and stopping, and configures console
+    // logging to the systemd format.
     /// </summary>
     [UnsupportedOSPlatform("android")]
     [UnsupportedOSPlatform("browser")]
@@ -26,9 +27,12 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// Initializes a new <see cref="SystemdLifetime"/> instance.
         /// </summary>
         /// <param name="environment">Information about the host.</param>
-        /// <param name="applicationLifetime">The <see cref="IHostApplicationLifetime"/> that tracks the service lifetime.</param>
-        /// <param name="systemdNotifier">The <see cref="ISystemdNotifier"/> to notify Systemd about service status.</param>
-        /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used to instantiate the lifetime logger.</param>
+        /// <param name="applicationLifetime">The <see cref="IHostApplicationLifetime"/> that tracks the
+        // service lifetime.</param>
+        /// <param name="systemdNotifier">The <see cref="ISystemdNotifier"/> to notify Systemd about service
+        // status.</param>
+        /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used to instantiate the lifetime
+        // logger.</param>
         public SystemdLifetime(
             IHostEnvironment environment,
             IHostApplicationLifetime applicationLifetime,
@@ -53,7 +57,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
         private ISystemdNotifier SystemdNotifier { get; }
 
         /// <summary>
-        /// Asynchronously stops and shuts down the host. This method is called from <see cref="IHost.StopAsync(CancellationToken)" />.
+        /// Asynchronously stops and shuts down the host. This method is called from <see
+        // cref="IHost.StopAsync(CancellationToken)" />.
         /// </summary>
         /// <param name="cancellationToken">
         /// A cancellation token that indicates when stop should no longer be graceful.
@@ -67,7 +72,9 @@ namespace Microsoft.Extensions.Hosting.Systemd
         }
 
         /// <summary>
-        /// Asynchronously waits until the start operation is complete before continuing. This method is called at the beginning of <see cref="IHost.StartAsync(CancellationToken)" />. This can be used to delay startup until signaled by an external event.
+        /// Asynchronously waits until the start operation is complete before continuing. This method is
+        // called at the beginning of <see cref="IHost.StartAsync(CancellationToken)" />. This can be used to
+        // delay startup until signaled by an external event.
         /// </summary>
         /// <param name="cancellationToken">
         /// A cancellation token that indicates when stop should no longer be graceful.
@@ -118,7 +125,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {

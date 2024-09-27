@@ -35,7 +35,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeArrayCreateExpression'/> with the specified
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeArrayCreateExpression'/> with
+        // the specified
         ///       array type and initializers.
         ///    </para>
         /// </devdoc>
@@ -68,7 +69,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeArrayCreateExpression'/>. with the specified array
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeArrayCreateExpression'/>. with
+        // the specified array
         ///       type and size.
         ///    </para>
         /// </devdoc>
@@ -98,7 +100,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeArrayCreateExpression'/>. with the specified array
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeArrayCreateExpression'/>. with
+        // the specified array
         ///       type and size.
         ///    </para>
         /// </devdoc>

@@ -137,8 +137,8 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int isSupported(
-            /*DOMString*/HandleRef feature,
-            /*DOMString*/HandleRef version,
+/*DOMString*/HandleRef feature,
+/*DOMString*/HandleRef version,
             out bool ret
         );
 
@@ -182,27 +182,27 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getAttribute(
-            /*DOMString*/HandleRef name, /*DOMString*/
+/*DOMString*/HandleRef name, /*DOMString*/
             HandleRef ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setAttribute(
-            /*DOMString*/HandleRef name,
-            /*DOMString*/HandleRef value
+/*DOMString*/HandleRef name,
+/*DOMString*/HandleRef value
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int removeAttribute(
-            /*DOMString*/HandleRef name
+/*DOMString*/HandleRef name
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getAttributeNode(
-            /*DOMString*/HandleRef name,
+/*DOMString*/HandleRef name,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMAttr ret
         );
 
@@ -223,38 +223,38 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getElementsByTagName(
-            /*DOMString*/HandleRef name,
+/*DOMString*/HandleRef name,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMNodeList ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getAttributeNS(
-            /*DOMString*/HandleRef namespaceURI,
-            /*DOMString*/HandleRef localName, /*DOMString*/
+/*DOMString*/HandleRef namespaceURI,
+/*DOMString*/HandleRef localName, /*DOMString*/
             HandleRef ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setAttributeNS(
-            /*DOMString*/HandleRef namespaceURI,
-            /*DOMString*/HandleRef qualifiedName,
-            /*DOMString*/HandleRef value
+/*DOMString*/HandleRef namespaceURI,
+/*DOMString*/HandleRef qualifiedName,
+/*DOMString*/HandleRef value
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int removeAttributeNS(
-            /*DOMString*/HandleRef namespaceURI,
-            /*DOMString*/HandleRef localName
+/*DOMString*/HandleRef namespaceURI,
+/*DOMString*/HandleRef localName
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getAttributeNodeNS(
-            /*DOMString*/HandleRef namespaceURI,
-            /*DOMString*/HandleRef localName,
+/*DOMString*/HandleRef namespaceURI,
+/*DOMString*/HandleRef localName,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMAttr ret
         );
 
@@ -268,23 +268,23 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getElementsByTagNameNS(
-            /*DOMString*/HandleRef namespaceURI,
-            /*DOMString*/HandleRef localName,
+/*DOMString*/HandleRef namespaceURI,
+/*DOMString*/HandleRef localName,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMNodeList ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttribute(
-            /*DOMString*/HandleRef name,
+/*DOMString*/HandleRef name,
             out bool ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttributeNS(
-            /*DOMString*/HandleRef namespaceURI,
-            /*DOMString*/HandleRef localName,
+/*DOMString*/HandleRef namespaceURI,
+/*DOMString*/HandleRef localName,
             out bool ret
         );
 

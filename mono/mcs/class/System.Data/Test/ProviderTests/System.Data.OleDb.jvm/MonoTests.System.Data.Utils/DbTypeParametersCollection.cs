@@ -67,7 +67,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// <summary>
         /// Gets or sets the DbTypeParameter at the specified index.
         /// </summary>
-        /// <exception cref="ArgumentException">The column name specified by value.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
+        /// <exception cref="ArgumentException">The column name specified by value.DBColumnName already
+        // exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
         public DbTypeParameter this[int a_iIndex]
         {
             get { return ((DbTypeParameter)List[a_iIndex]); }
@@ -92,7 +93,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// <summary>
         /// Gets or sets the DbTypeParameter with the specified DBColumnName.
         /// </summary>
-        /// <exception cref="ArgumentException">The column name specified by value.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
+        /// <exception cref="ArgumentException">The column name specified by value.DBColumnName already
+        // exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
         public DbTypeParameter this[string a_sDBColumnName]
         {
             get { return this[IndexOf(a_sDBColumnName)]; }
@@ -100,7 +102,8 @@ namespace MonoTests.System.Data.Utils.Data
         }
 
         /// <summary>
-        /// A textual string that conatins the OleDb place holder for parameter ('?') for each of the parameters.
+        /// A textual string that conatins the OleDb place holder for parameter ('?') for each of the
+        // parameters.
         /// </summary>
         public string OleDbParameterPlaceHolderList
         {
@@ -108,7 +111,8 @@ namespace MonoTests.System.Data.Utils.Data
         }
 
         /// <summary>
-        /// A textual string that conatins the MSSQL place holder for parameter ('@parame_name') for each of the parameters.
+        /// A textual string that conatins the MSSQL place holder for parameter ('@parame_name') for each of
+        // the parameters.
         /// </summary>
         public string SqlParameterPlaceHolderList
         {
@@ -116,7 +120,8 @@ namespace MonoTests.System.Data.Utils.Data
         }
 
         /// <summary>
-        /// A string that contains a comma delimited list of all default column names for the parameters held by this collection.
+        /// A string that contains a comma delimited list of all default column names for the parameters
+        // held by this collection.
         /// </summary>
         public string ColumnsList
         {
@@ -138,7 +143,8 @@ namespace MonoTests.System.Data.Utils.Data
         }
 
         /// <summary>
-        /// A string that contains a comma delimited list of all values of the parameters held by this collection.
+        /// A string that contains a comma delimited list of all values of the parameters held by this
+        // collection.
         /// </summary>
         public string ValuesList
         {
@@ -181,7 +187,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// </summary>
         /// <param name="a_oToAdd">The DbTypeParameter to add to the collection. </param>
         /// <returns>The index of the new DbTypeParameter object.</returns>
-        /// <exception cref="ArgumentException">The column name specified by a_oToAdd.DBColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
+        /// <exception cref="ArgumentException">The column name specified by a_oToAdd.DBColumnName already
+        // exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
         public virtual int Add(DbTypeParameter a_oToAdd)
         {
             if (this.Contains(a_oToAdd.DbColumnName))
@@ -198,10 +205,12 @@ namespace MonoTests.System.Data.Utils.Data
         /// Adds a DbTypeParameter with the specified data to the DbTypeParametersCollection.
         /// </summary>
         /// <param name="a_sColumnName">Specifies the initial column name for the DbTypeParameter.</param>
-        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the DbTypeParameter.</param>
+        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the
+        // DbTypeParameter.</param>
         /// <param name="a_oValue">Specifies the initial value for the DbTypeParameter.</param>
         /// <returns>The index of the new DbTypeParameter object.</returns>
-        /// <exception cref="ArgumentException">The column name specified by a_sColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
+        /// <exception cref="ArgumentException">The column name specified by a_sColumnName already exist in
+        // other DbTypeParameter in the DbTypeParametersCollection.</exception>
         public virtual int Add(string a_sTypeName, object a_oValue)
         {
             DbTypeParameter l_oToAdd = new DbTypeParameter(a_sTypeName, a_oValue);
@@ -212,11 +221,13 @@ namespace MonoTests.System.Data.Utils.Data
         /// Adds a DbTypeParameter with the specified data to the DbTypeParametersCollection.
         /// </summary>
         /// <param name="a_sColumnName">Specifies the initial column name for the DbTypeParameter.</param>
-        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the DbTypeParameter.</param>
+        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the
+        // DbTypeParameter.</param>
         /// <param name="a_oValue">Specifies the initial value for the DbTypeParameter.</param>
         /// <param name="a_iSize">Specifies the initial size for the DbTypeParameter</param>
         /// <returns>The index of the new DbTypeParameter object.</returns>
-        /// <exception cref="ArgumentException">The column name specified by a_sColumnName already exist in other DbTypeParameter in the DbTypeParametersCollection.</exception>
+        /// <exception cref="ArgumentException">The column name specified by a_sColumnName already exist in
+        // other DbTypeParameter in the DbTypeParametersCollection.</exception>
         public virtual int Add(string a_sTypeName, object a_oValue, int a_iSize)
         {
             DbTypeParameter l_oToAdd = new DbTypeParameter(a_sTypeName, a_oValue, a_iSize);
@@ -227,7 +238,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// Gets the location of the DbTypeParameter object in the collection.
         /// </summary>
         /// <param name="a_oToFind">The DbTypeParameter object to locate. </param>
-        /// <returns>The zero-based location of the DbTypeParameter in the collection, if found; otherwise, -1.</returns>
+        /// <returns>The zero-based location of the DbTypeParameter in the collection, if found; otherwise,
+        // -1.</returns>
         public virtual int IndexOf(DbTypeParameter a_oToFind)
         {
             return (List.IndexOf(a_oToFind));
@@ -237,7 +249,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// Gets the location of the DbTypeParameter object in the collection.
         /// </summary>
         /// <param name="a_oToFind">The DbTypeParameter object to locate. </param>
-        /// <returns>The zero-based location of the DbTypeParameter in the collection, if found; otherwise, -1.</returns>
+        /// <returns>The zero-based location of the DbTypeParameter in the collection, if found; otherwise,
+        // -1.</returns>
         public virtual int IndexOf(string a_sColumnName)
         {
             for (int i = 0; i < List.Count; i++)
@@ -256,7 +269,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// Determines whether the DbTypeParametersCollection contains a specific DbTypeParameter.
         /// </summary>
         /// <param name="a_oToFind">The DbTypeParameter to locate in the DbTypeParametersCollection</param>
-        /// <returns>true if the DbTypeParametersCollection contains the specified DbTypeParameter; otherwise, false.</returns>
+        /// <returns>true if the DbTypeParametersCollection contains the specified DbTypeParameter;
+        // otherwise, false.</returns>
         public virtual bool Contains(DbTypeParameter a_oToFind)
         {
             // If a_oToFind is not of type DbTypeParameter, this will return false.
@@ -264,10 +278,12 @@ namespace MonoTests.System.Data.Utils.Data
         }
 
         /// <summary>
-        /// Determines whether the DbTypeParametersCollection contains a DbTypeParameter with specific column name (DBColumnName).
+        /// Determines whether the DbTypeParametersCollection contains a DbTypeParameter with specific
+        // column name (DBColumnName).
         /// </summary>
         /// <param name="a_sToFind">The column name to locate in the DbTypeParametersCollection</param>
-        /// <returns>true if the DbTypeParametersCollection contains a DbTypeParameter with specific column name; otherwise, false.</returns>
+        /// <returns>true if the DbTypeParametersCollection contains a DbTypeParameter with specific column
+        // name; otherwise, false.</returns>
         public virtual bool Contains(string a_sToFind)
         {
             return (this.IndexOf(a_sToFind) > -1);
@@ -320,7 +336,8 @@ namespace MonoTests.System.Data.Utils.Data
         #endregion
         #region Execute methods
         /// <summary>
-        /// Builds and execute an INSERT command according to the DbTypeParameters in this collection, and the TableName property.
+        /// Builds and execute an INSERT command according to the DbTypeParameters in this collection, and
+        // the TableName property.
         /// </summary>
         /// <param name="a_sUniqueId">A unique identifier for the inserted row.</param>
         /// <returns>The number of inserted rows (usually 1).</returns>
@@ -350,7 +367,8 @@ namespace MonoTests.System.Data.Utils.Data
         }
 
         /// <summary>
-        /// Builds and executes an DELETE command according to the UniqueId parameter, and the TableName property.
+        /// Builds and executes an DELETE command according to the UniqueId parameter, and the TableName
+        // property.
         /// </summary>
         /// <param name="a_sUniqueId">The criteria for deleting.</param>
         /// <returns>The number of deleted rows.</returns>
@@ -399,12 +417,16 @@ namespace MonoTests.System.Data.Utils.Data
         /// </summary>
         /// <param name="a_sUniqueId">The unique id to use as rows filter.</param>
         /// <param name="a_oReader">Reader that holds the results of the select command.</param>
-        /// <param name="a_oConnection">A connection object that serves the reader a_oReader for retrivieng data.</param>
+        /// <param name="a_oConnection">A connection object that serves the reader a_oReader for retrivieng
+        // data.</param>
         /// <remarks>
-        /// While the OleDbDataReader is in use, the associated OleDbConnection is open and busy serving the OleDbDataReader.
-        /// While in this state, no other operations can be performed on the OleDbConnection other than closing it.
+        /// While the OleDbDataReader is in use, the associated OleDbConnection is open and busy serving the
+        // OleDbDataReader.
+        /// While in this state, no other operations can be performed on the OleDbConnection other than
+        // closing it.
         /// This is the case until the Close method of the OleDbDataReader is called.
-        /// It is the users responsibility to close the OleDbConnection explicitly when it is no longer needed.
+        /// It is the users responsibility to close the OleDbConnection explicitly when it is no longer
+        // needed.
         /// </remarks>
         public virtual void ExecuteSelectReader(
             string a_sUniqueId,
@@ -425,7 +447,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// The select command is executed using ExecuteScalar.
         /// </summary>
         /// <param name="a_sUniqueId">The unique id to use as rows filter.</param>
-        /// <returns>The first column of the first row in the result set, or a null reference if the result set is empty.</returns>
+        /// <returns>The first column of the first row in the result set, or a null reference if the result
+        // set is empty.</returns>
         public virtual object ExecuteSelectScalar(string a_sUniqueId)
         {
             object l_oReturnValue = null;
@@ -509,7 +532,8 @@ namespace MonoTests.System.Data.Utils.Data
         }
 
         /// <summary>
-        /// Builds an OleDbParametersCollection for an INSERT command, according to the DbTypeParameters in this collection.
+        /// Builds an OleDbParametersCollection for an INSERT command, according to the DbTypeParameters in
+        // this collection.
         /// </summary>
         /// <param name="a_oParams">The OleDbParameterCollection to be filled.</param>
         private void AddInsertCommandParameters(OleDbParameterCollection a_oParams)
@@ -526,7 +550,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// and uses the columns specified in this parameters collection.
         /// </summary>
         /// <remarks>The ID column is not included in the selected columns of this command.</remarks>
-        /// <returns>An OleDbCommand for selecting the columns specified in this collection, from the table specified in the TableName property. </returns>
+        /// <returns>An OleDbCommand for selecting the columns specified in this collection, from the table
+        // specified in the TableName property. </returns>
         private OleDbCommand BuildSelectCommand(string a_sUniqueId)
         {
             string l_sColumnsList = ColumnsList;
@@ -554,7 +579,8 @@ namespace MonoTests.System.Data.Utils.Data
         /// <summary>
         /// Create a string that conatins a place holder for each of the parameters.
         /// </summary>
-        /// <param name="a_sSormatting">The format for each parameter in the list (defined in String.Format())</param>
+        /// <param name="a_sSormatting">The format for each parameter in the list (defined in
+        // String.Format())</param>
         /// <returns>A string that conatins a place holder for each of the parameters.</returns>
         private string GetParameterPlaceHolderList(string a_sSormatting)
         {

@@ -15,7 +15,8 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-// @TODO medium-to-longer term, we should try to get rid of the special-unicorn-single-file runner in favor of making the real runner work for single file.
+// @TODO medium-to-longer term, we should try to get rid of the special-unicorn-single-file runner
+// in favor of making the real runner work for single file.
 // https://github.com/dotnet/runtime/issues/70432
 public class SingleFileTestRunner : XunitTestFramework
 {

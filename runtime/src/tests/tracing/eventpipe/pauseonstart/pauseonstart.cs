@@ -441,7 +441,8 @@ namespace Tracing.Tests.PauseOnStartValidation
         {
             if (args.Length >= 1)
             {
-                // Native AOT test uses this event source as a signal that the runtime has resumed and gone on to run the application
+                // Native AOT test uses this event source as a signal that the runtime has resumed and gone on to
+                // run the application
                 if (TestLibrary.Utilities.IsNativeAot)
                     SentinelEventSource.Log.SentinelEvent();
 

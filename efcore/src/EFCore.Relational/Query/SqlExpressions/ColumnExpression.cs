@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents a column in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -19,7 +20,8 @@ public abstract class ColumnExpression : SqlExpression
     ///     Creates a new instance of the <see cref="ColumnExpression" /> class.
     /// </summary>
     /// <param name="type">The <see cref="System.Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     protected ColumnExpression(Type type, RelationalTypeMapping? typeMapping)
         : base(type, typeMapping) { }
 

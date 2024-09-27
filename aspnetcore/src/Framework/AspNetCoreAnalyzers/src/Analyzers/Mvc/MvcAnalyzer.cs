@@ -111,8 +111,10 @@ public partial class MvcAnalyzer : DiagnosticAnalyzer
                 && MvcDetector.IsAction(methodSymbol, wellKnownTypes)
             )
             {
-                // [Route("xxx")] attributes don't have a HTTP method and instead use the HTTP methods of other attributes.
-                // For example, [HttpGet] + [HttpPost] + [Route("xxx")] means the route "xxx" is combined with the HTTP methods.
+                // [Route("xxx")] attributes don't have a HTTP method and instead use the HTTP methods of other
+                // attributes.
+                // For example, [HttpGet] + [HttpPost] + [Route("xxx")] means the route "xxx" is combined with the
+                // HTTP methods.
                 var unroutedHttpMethods = GetUnroutedMethodHttpMethods(
                     wellKnownTypes,
                     methodSymbol

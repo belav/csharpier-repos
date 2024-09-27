@@ -191,7 +191,8 @@ M();
             );
 
             compilation.VerifyDiagnostics(
-                // (9,8): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (9,8): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [A(P = new { a = 1 })]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new { a = 1 }")
             );
@@ -692,17 +693,21 @@ public abstract class C
                 options: TestOptions.DebugExe
             );
             compilation.VerifyEmitDiagnostics(
-                // error CS1061: 'Task<object>' does not contain a definition for 'GetAwaiter' and no accessible extension method 'GetAwaiter' accepting a first argument of type 'Task<object>' could be found (are you missing a using directive or an assembly reference?)
+                // error CS1061: 'Task<object>' does not contain a definition for 'GetAwaiter' and no accessible
+                // extension method 'GetAwaiter' accepting a first argument of type 'Task<object>' could be found (are
+                // you missing a using directive or an assembly reference?)
                 //
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "")
                     .WithArguments("System.Threading.Tasks.Task<object>", "GetAwaiter")
                     .WithLocation(1, 1),
-                // (1,1): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1' is not defined or imported
+                // (1,1): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1'
+                // is not defined or imported
                 // System.Console.WriteLine(1);
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "System.Console.WriteLine(1);")
                     .WithArguments("System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1")
                     .WithLocation(1, 1),
-                // (1,1): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Create'
+                // (1,1): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Create'
                 // System.Console.WriteLine(1);
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "System.Console.WriteLine(1);")
                     .WithArguments(
@@ -710,7 +715,8 @@ public abstract class C
                         "Create"
                     )
                     .WithLocation(1, 1),
-                // (1,1): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Task'
+                // (1,1): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Task'
                 // System.Console.WriteLine(1);
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "System.Console.WriteLine(1);")
                     .WithArguments(
@@ -718,12 +724,14 @@ public abstract class C
                         "Task"
                     )
                     .WithLocation(1, 1),
-                // (1,1): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
+                // (1,1): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
                 // System.Console.WriteLine(1);
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "System.Console.WriteLine(1);")
                     .WithArguments("System.Runtime.CompilerServices.IAsyncStateMachine", "MoveNext")
                     .WithLocation(1, 1),
-                // (1,1): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
+                // (1,1): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
                 // System.Console.WriteLine(1);
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "System.Console.WriteLine(1);")
                     .WithArguments(
@@ -764,7 +772,8 @@ void I1.M() {}
             var s = CreateSubmission(test);
 
             s.VerifyDiagnostics(
-                // (7,9): error CS0541: 'M()': explicit interface declaration can only be declared in a class, record, struct or interface
+                // (7,9): error CS0541: 'M()': explicit interface declaration can only be declared in a class,
+                // record, struct or interface
                 // void I1.M() {}
                 Diagnostic(ErrorCode.ERR_ExplicitInterfaceImplementationInNonClassOrStruct, "M")
                     .WithArguments("M()")

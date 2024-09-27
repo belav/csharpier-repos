@@ -172,12 +172,17 @@ namespace System
         private const String DateDataField = "dateData";
 
         // The data is stored as an unsigned 64-bit integeter
-        //   Bits 01-62: The value of 100-nanosecond ticks where 0 represents 1/1/0001 12:00am, up until the value
+        //   Bits 01-62: The value of 100-nanosecond ticks where 0 represents 1/1/0001 12:00am, up until the
+        // value
         //               12/31/9999 23:59:59.9999999
-        //   Bits 63-64: A four-state value that describes the DateTimeKind value of the date time, with a 2nd
-        //               value for the rare case where the date time is local, but is in an overlapped daylight
-        //               savings time hour and it is in daylight savings time. This allows distinction of these
-        //               otherwise ambiguous local times and prevents data loss when round tripping from Local to
+        //   Bits 63-64: A four-state value that describes the DateTimeKind value of the date time, with a
+        // 2nd
+        //               value for the rare case where the date time is local, but is in an overlapped
+        // daylight
+        //               savings time hour and it is in daylight savings time. This allows distinction of
+        // these
+        //               otherwise ambiguous local times and prevents data loss when round tripping from
+        // Local to
         //               UTC time.
         private UInt64 dateData;
 
@@ -804,10 +809,13 @@ namespace System
             if (!(value < OADateMaxAsDouble) || !(value > OADateMinAsDouble))
                 throw new ArgumentException(Environment.GetResourceString("Arg_OleAutDateInvalid"));
 
-            // Conversion to long will not cause an overflow here, as at this point the "value" is in between OADateMinAsDouble and OADateMaxAsDouble
+            // Conversion to long will not cause an overflow here, as at this point the "value" is in between
+            // OADateMinAsDouble and OADateMaxAsDouble
             long millis = (long)(value * MillisPerDay + (value >= 0 ? 0.5 : -0.5));
-            // The interesting thing here is when you have a value like 12.5 it all positive 12 days and 12 hours from 01/01/1899
-            // However if you a value of -12.25 it is minus 12 days but still positive 6 hours, almost as though you meant -11.75 all negative
+            // The interesting thing here is when you have a value like 12.5 it all positive 12 days and 12
+            // hours from 01/01/1899
+            // However if you a value of -12.25 it is minus 12 days but still positive 6 hours, almost as though
+            // you meant -11.75 all negative
             // This line below fixes up the millis in the negative case
             if (millis < 0)
             {
@@ -874,7 +882,8 @@ namespace System
                 // changes to store the ticks of the UTC time, but with flags that look like a
                 // local date.
                 Int64 ticks = dateData & (unchecked((Int64)TicksMask));
-                // Negative ticks are stored in the top part of the range and should be converted back into a negative number
+                // Negative ticks are stored in the top part of the range and should be converted back into a
+                // negative number
                 if (ticks > TicksCeiling - TicksPerDay)
                 {
                     ticks = ticks - TicksCeiling;
@@ -938,7 +947,8 @@ namespace System
             }
         }
 
-        // A version of ToBinary that uses the real representation and does not adjust local times. This is needed for
+        // A version of ToBinary that uses the real representation and does not adjust local times. This is
+        // needed for
         // scenarios where the serialized data must maintain compatability
         internal static DateTime FromBinaryRaw(Int64 dateData)
         {
@@ -1049,7 +1059,8 @@ namespace System
             }
         }
 
-        // Return the underlying data, without adjust local times to the right time zone. Needed if performance
+        // Return the underlying data, without adjust local times to the right time zone. Needed if
+        // performance
         // or compatability are important.
         internal Int64 ToBinaryRaw()
         {
@@ -1749,7 +1760,8 @@ namespace System
         }
 
         // Returns a string array containing all of the known date and time options for the
-        // using the information provided by IFormatProvider.  The strings returned are properly formatted date and
+        // using the information provided by IFormatProvider.  The strings returned are properly formatted
+        // date and
         // time strings for the current instance of DateTime.
         public String[] GetDateTimeFormats(IFormatProvider provider)
         {

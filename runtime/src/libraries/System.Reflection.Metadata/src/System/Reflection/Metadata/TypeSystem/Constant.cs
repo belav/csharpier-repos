@@ -49,7 +49,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// The parent handle (<see cref="ParameterHandle"/>, <see cref="FieldDefinitionHandle"/>, or <see cref="PropertyDefinitionHandle"/>).
+        /// The parent handle (<see cref="ParameterHandle"/>, <see cref="FieldDefinitionHandle"/>, or <see
+        // cref="PropertyDefinitionHandle"/>).
         /// </summary>
         /// <remarks>
         /// Corresponds to Parent field of Constant table in ECMA-335 Standard.

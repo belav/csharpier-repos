@@ -440,7 +440,7 @@ public class Huffman : HuffStruct
 #if DEBUG
                 if (hufftree[i].c != plaintext[textoffset])
                 {
-                    /* Show error */
+/* Show error */
                     string error = String.Format("Huffman: error at textoffset {0}", textoffset);
                     throw new Exception(error);
                 }

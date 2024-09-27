@@ -24,7 +24,8 @@ namespace System.Collections.Concurrent
     //
     //    - The Factory method will never be called inside the unifier lock. If two threads race to
     //      enter a value for the same key, the Factory() may get invoked twice for the same key - one
-    //      of them will "win" the race and its result entered into the dictionary - other gets thrown away.
+    //      of them will "win" the race and its result entered into the dictionary - other gets thrown
+    // away.
     //
     // Notes:
     //    - This class is used to look up types when GetType() or typeof() is invoked.
@@ -70,10 +71,14 @@ namespace System.Collections.Concurrent
         }
 
         //
-        // Retrieve the *unique* value for a given key. If the key was previously not entered into the dictionary,
-        // this method invokes the overridable Factory() method to create the new value. The Factory() method is
-        // invoked outside of any locks. If two threads race to enter a value for the same key, the Factory()
-        // may get invoked twice for the same key - one of them will "win" the race and its result entered into the
+        // Retrieve the *unique* value for a given key. If the key was previously not entered into the
+        // dictionary,
+        // this method invokes the overridable Factory() method to create the new value. The Factory()
+        // method is
+        // invoked outside of any locks. If two threads race to enter a value for the same key, the
+        // Factory()
+        // may get invoked twice for the same key - one of them will "win" the race and its result entered
+        // into the
         // dictionary - other gets thrown away.
         //
         public V GetOrAdd(K key)
@@ -91,7 +96,8 @@ namespace System.Collections.Concurrent
             {
                 V checkedValue;
                 bool checkedFound;
-                // In debug builds, always exercise a locked TryGet (this is a good way to detect deadlock/reentrancy through Equals/GetHashCode()).
+                // In debug builds, always exercise a locked TryGet (this is a good way to detect
+                // deadlock/reentrancy through Equals/GetHashCode()).
                 using (_lock.EnterScope())
                 {
                     _container.VerifyUnifierConsistency();
@@ -134,8 +140,10 @@ namespace System.Collections.Concurrent
         {
             public Container(ConcurrentUnifier<K, V> owner)
             {
-                // Note: This could be done by calling Resize()'s logic but we cannot safely do that as this code path is reached
-                // during class construction time and Resize() pulls in enough stuff that we get cyclic cctor warnings from the build.
+                // Note: This could be done by calling Resize()'s logic but we cannot safely do that as this code
+                // path is reached
+                // during class construction time and Resize() pulls in enough stuff that we get cyclic cctor
+                // warnings from the build.
                 _buckets = new int[_initialCapacity];
                 for (int i = 0; i < _initialCapacity; i++)
                     _buckets[i] = -1;
@@ -191,7 +199,8 @@ namespace System.Collections.Concurrent
 
                 _nextFreeEntry++;
 
-                // The line that atomically adds the new key/value pair. If the thread is killed before this line executes but after
+                // The line that atomically adds the new key/value pair. If the thread is killed before this line
+                // executes but after
                 // we've incremented _nextFreeEntry, this entry is harmlessly leaked until the next resize.
                 Volatile.Write(ref _buckets[bucket], newEntryIdx);
 
@@ -223,8 +232,10 @@ namespace System.Collections.Concurrent
                 for (int i = 0; i < newSize; i++)
                     newBuckets[i] = -1;
 
-                // Note that we walk the bucket chains rather than iterating over _entries. This is because we allow for the possibility
-                // of abandoned entries (with undefined contents) if a thread is killed between allocating an entry and linking it onto the
+                // Note that we walk the bucket chains rather than iterating over _entries. This is because we allow
+                // for the possibility
+                // of abandoned entries (with undefined contents) if a thread is killed between allocating an entry
+                // and linking it onto the
                 // bucket chain.
                 int newNextFreeEntry = 0;
                 for (int bucket = 0; bucket < _buckets.Length; bucket++)
@@ -244,8 +255,10 @@ namespace System.Collections.Concurrent
                     }
                 }
 
-                // The assertion is "<=" rather than "==" because we allow an entry to "leak" until the next resize if
-                // a thread died between the time between we allocated the entry and the time we link it into the bucket stack.
+                // The assertion is "<=" rather than "==" because we allow an entry to "leak" until the next resize
+                // if
+                // a thread died between the time between we allocated the entry and the time we link it into the
+                // bucket stack.
                 Debug.Assert(newNextFreeEntry <= _nextFreeEntry);
 
                 // The line that atomically installs the resize. If this thread is killed before this point,
@@ -297,8 +310,10 @@ namespace System.Collections.Concurrent
                             Debug.Fail("Bucket " + bucket + " has a cycle in its linked list.");
                     }
                 }
-                // The assertion is "<=" rather than "==" because we allow an entry to "leak" until the next resize if
-                // a thread died between the time between we allocated the entry and the time we link it into the bucket stack.
+                // The assertion is "<=" rather than "==" because we allow an entry to "leak" until the next resize
+                // if
+                // a thread died between the time between we allocated the entry and the time we link it into the
+                // bucket stack.
                 Debug.Assert(numEntriesEncountered <= _nextFreeEntry);
             }
 

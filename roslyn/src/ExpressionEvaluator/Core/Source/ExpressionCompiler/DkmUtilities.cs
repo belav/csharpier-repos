@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<MetadataBlock> previousMetadataBlocks
         )
         {
-            // Add a dummy data item to the appdomain to add it to the disposal queue when the debugged process is shutting down.
+            // Add a dummy data item to the appdomain to add it to the disposal queue when the debugged process
+            // is shutting down.
             // This should prevent from attempts to use the Metadata pointer for dead debugged processes.
             if (appDomain.GetDataItem<AppDomainLifetimeDataItem>() == null)
             {

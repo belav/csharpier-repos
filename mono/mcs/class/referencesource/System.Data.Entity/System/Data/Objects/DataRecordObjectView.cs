@@ -115,7 +115,8 @@ namespace System.Data.Objects
         /// </summary>
         /// <param name="type"></param>
         /// <returns>
-        /// If <paramref name="type"/> represents a list type that doesn't also implement ITypedList or IListSource,
+        /// If <paramref name="type"/> represents a list type that doesn't also implement ITypedList or
+        // IListSource,
         /// return the element type for items in that list.
         /// Otherwise, return the type supplied by <paramref name="type"/>.
         /// </returns>
@@ -166,7 +167,8 @@ namespace System.Data.Objects
             }
             else
             {
-                // Use the last PropertyDescriptor in the array to build the collection of returned property descriptors.
+                // Use the last PropertyDescriptor in the array to build the collection of returned property
+                // descriptors.
                 PropertyDescriptor propertyDescriptor = listAccessors[listAccessors.Length - 1];
                 FieldDescriptor fieldDescriptor = propertyDescriptor as FieldDescriptor;
 

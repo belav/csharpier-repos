@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// Provides and caches information about diagnostic analyzers such as <see cref="AnalyzerReference"/>,
+    /// Provides and caches information about diagnostic analyzers such as <see
+    // cref="AnalyzerReference"/>,
     /// <see cref="DiagnosticAnalyzer"/> instance, <see cref="DiagnosticDescriptor"/>s.
     /// Thread-safe.
     /// </summary>
@@ -30,10 +31,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Supported descriptors of each <see cref="DiagnosticAnalyzer"/>.
         /// </summary>
         /// <remarks>
-        /// Holds on <see cref="DiagnosticAnalyzer"/> instances weakly so that we don't keep analyzers coming from package references alive.
+        /// Holds on <see cref="DiagnosticAnalyzer"/> instances weakly so that we don't keep analyzers
+        // coming from package references alive.
         /// They need to be released when the project stops referencing the analyzer.
         ///
-        /// The purpose of this map is to avoid multiple calls to <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> that might return different values
+        /// The purpose of this map is to avoid multiple calls to <see
+        // cref="DiagnosticAnalyzer.SupportedDiagnostics"/> that might return different values
         /// (they should not but we need a guarantee to function correctly).
         /// </remarks>
         private readonly ConditionalWeakTable<
@@ -45,10 +48,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Supported suppressions of each <see cref="DiagnosticSuppressor"/>.
         /// </summary>
         /// <remarks>
-        /// Holds on <see cref="DiagnosticSuppressor"/> instances weakly so that we don't keep suppressors coming from package references alive.
+        /// Holds on <see cref="DiagnosticSuppressor"/> instances weakly so that we don't keep suppressors
+        // coming from package references alive.
         /// They need to be released when the project stops referencing the suppressor.
         ///
-        /// The purpose of this map is to avoid multiple calls to <see cref="DiagnosticSuppressor.SupportedSuppressions"/> that might return different values
+        /// The purpose of this map is to avoid multiple calls to <see
+        // cref="DiagnosticSuppressor.SupportedSuppressions"/> that might return different values
         /// (they should not but we need a guarantee to function correctly).
         /// </remarks>
         private readonly ConditionalWeakTable<
@@ -58,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Lazily populated map from diagnostic IDs to diagnostic descriptor.
-        /// If same diagnostic ID is reported by multiple descriptors, a null value is stored in the map for that ID.
+        /// If same diagnostic ID is reported by multiple descriptors, a null value is stored in the map for
+        // that ID.
         /// </summary>
         private readonly ConcurrentDictionary<string, DiagnosticDescriptor?> _idToDescriptorsMap;
 
@@ -103,21 +109,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref name="analyzer"/>.
+        /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref
+        // name="analyzer"/>.
         /// </summary>
         public ImmutableArray<DiagnosticDescriptor> GetDiagnosticDescriptors(
             DiagnosticAnalyzer analyzer
         ) => GetOrCreateDescriptorsInfo(analyzer).SupportedDescriptors;
 
         /// <summary>
-        /// Returns <see cref="DiagnosticSuppressor.SupportedSuppressions"/> of given <paramref name="suppressor"/>.
+        /// Returns <see cref="DiagnosticSuppressor.SupportedSuppressions"/> of given <paramref
+        // name="suppressor"/>.
         /// </summary>
         public ImmutableArray<SuppressionDescriptor> GetDiagnosticSuppressions(
             DiagnosticSuppressor suppressor
         ) => GetOrCreateSuppressionsInfo(suppressor).SupportedSuppressions;
 
         /// <summary>
-        /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref name="analyzer"/>
+        /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref
+        // name="analyzer"/>
         /// that are not compilation end descriptors.
         /// </summary>
         public ImmutableArray<DiagnosticDescriptor> GetNonCompilationEndDiagnosticDescriptors(
@@ -131,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref name="analyzer"/>
+        /// Returns <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref
+        // name="analyzer"/>
         /// that are compilation end descriptors.
         /// </summary>
         public ImmutableArray<DiagnosticDescriptor> GetCompilationEndDiagnosticDescriptors(
@@ -231,8 +241,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 else if (existingDescriptor != null && !descriptor.Equals(existingDescriptor))
                 {
                     // Multiple descriptors with same diagnostic ID, store null in the map.
-                    // Exception case: Many CAxxxx analyzers use multiple descriptors with same ID which differ only in MessageFormat.
-                    //                 This allows analyzer to report slightly differing diagnostic messages with same ID.
+                    // Exception case: Many CAxxxx analyzers use multiple descriptors with same ID which differ only in
+                    // MessageFormat.
+                    //                 This allows analyzer to report slightly differing diagnostic messages with same
+                    // ID.
                     //                 We handle this case here by allowing existing descriptor to be used.
                     if (
                         descriptor

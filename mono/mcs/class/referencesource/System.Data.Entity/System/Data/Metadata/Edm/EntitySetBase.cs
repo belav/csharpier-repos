@@ -21,7 +21,8 @@ namespace System.Data.Metadata.Edm
     public abstract class EntitySetBase : MetadataItem
     {
         //----------------------------------------------------------------------------------------------
-        // Possible Future Enhancement: revisit factoring of EntitySetBase and delta between C constructs and S constructs
+        // Possible Future Enhancement: revisit factoring of EntitySetBase and delta between C constructs
+        // and S constructs
         //
         // Currently, we need to have a way to map an entityset or a relationship set in S space
         // to the appropriate structures in the store. In order to address this we said we would
@@ -41,9 +42,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="name">The name of the EntitySet</param>
         /// <param name="schema">The db schema</param>
         /// <param name="table">The db table</param>
-        /// <param name="definingQuery">The provider specific query that should be used to retrieve the EntitySet</param>
-        /// <param name="entityType">The entity type of the entities that this entity set type contains</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if the name or entityType argument is null</exception>
+        /// <param name="definingQuery">The provider specific query that should be used to retrieve the
+        // EntitySet</param>
+        /// <param name="entityType">The entity type of the entities that this entity set type
+        // contains</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if the name or entityType argument is
+        // null</exception>
         internal EntitySetBase(
             string name,
             string schema,
@@ -128,8 +132,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Gets/Sets the name of this entity set
         /// </summary>
-        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is null</exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when EntitySetBase instance is in ReadOnly state</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is
+        // null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when
+        // EntitySetBase instance is in ReadOnly state</exception>
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         public String Name
         {
@@ -139,8 +145,11 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the entity container of the entity set
         /// </summary>
-        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is null</exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the EntitySetBase instance or the EntityContainer passed into the setter is in ReadOnly state</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is
+        // null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the
+        // EntitySetBase instance or the EntityContainer passed into the setter is in ReadOnly
+        // state</exception>
         public EntityContainer EntityContainer
         {
             get { return _entityContainer; }
@@ -150,7 +159,8 @@ namespace System.Data.Metadata.Edm
         /// Gets/Sets the entity type of this entity set
         /// </summary>
         /// <exception cref="System.ArgumentNullException">if value passed into setter is null</exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when EntitySetBase instance is in ReadOnly state</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when
+        // EntitySetBase instance is in ReadOnly state</exception>
         [MetadataProperty(BuiltInTypeKind.EntityTypeBase, false)]
         public EntityTypeBase ElementType
         {

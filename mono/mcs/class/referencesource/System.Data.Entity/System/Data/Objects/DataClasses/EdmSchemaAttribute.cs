@@ -36,7 +36,8 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// Setting this parameter to a unique value for each model file in a Visual Basic
         /// assembly will prevent the following error:
-        /// "'System.Data.Objects.DataClasses.EdmSchemaAttribute' cannot be specified more than once in this project, even with identical parameter values."
+        /// "'System.Data.Objects.DataClasses.EdmSchemaAttribute' cannot be specified more than once in this
+        // project, even with identical parameter values."
         /// </summary>
         public EdmSchemaAttribute(string assemblyGuid)
         {

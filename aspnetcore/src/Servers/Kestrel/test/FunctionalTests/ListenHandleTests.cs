@@ -25,9 +25,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 )]
 public class ListenHandleTests : LoggedTest
 {
-    // The Socket.Handle will be passed into libuv, which calls close() on the file descriptor when TestServer is disposed.  If
-    // the managed Socket is also disposed or finalized, it will try to call close() again on the file descriptor, which may lead to
-    // race condition bugs (test hangs) if the file descriptor has been re-used for another resource.  In .NET Core, objects
+    // The Socket.Handle will be passed into libuv, which calls close() on the file descriptor when
+    // TestServer is disposed.  If
+    // the managed Socket is also disposed or finalized, it will try to call close() again on the file
+    // descriptor, which may lead to
+    // race condition bugs (test hangs) if the file descriptor has been re-used for another resource.
+    // In .NET Core, objects
     // assigned to static fields should never be disposed or finalized (even at process shutdown).
     // https://github.com/aspnet/KestrelHttpServer/issues/2597
     private static readonly Socket _canListenToOpenTcpSocketHandleSocket = new Socket(

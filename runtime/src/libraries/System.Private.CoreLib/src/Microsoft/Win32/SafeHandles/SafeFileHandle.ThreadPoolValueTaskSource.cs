@@ -17,7 +17,8 @@ namespace Microsoft.Win32.SafeHandles
     {
         private ThreadPoolValueTaskSource? _reusableThreadPoolValueTaskSource; // reusable ThreadPoolValueTaskSource that is currently NOT being used
 
-        // Rent the reusable ThreadPoolValueTaskSource, or create a new one to use if we couldn't get one (which
+        // Rent the reusable ThreadPoolValueTaskSource, or create a new one to use if we couldn't get one
+        // (which
         // should only happen on first use or if the SafeFileHandle is being used concurrently).
         internal ThreadPoolValueTaskSource GetThreadPoolValueTaskSource() =>
             Interlocked.Exchange(ref _reusableThreadPoolValueTaskSource, null)

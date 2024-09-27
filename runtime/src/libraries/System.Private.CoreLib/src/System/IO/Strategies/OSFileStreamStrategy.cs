@@ -94,7 +94,8 @@ namespace System.IO.Strategies
 
         public sealed override unsafe long Length => _fileHandle.GetFileLength();
 
-        // in case of concurrent incomplete reads, there can be multiple threads trying to update the position
+        // in case of concurrent incomplete reads, there can be multiple threads trying to update the
+        // position
         // at the same time. That is why we are using Interlocked here.
         internal void OnIncompleteOperation(
             int expectedBytesTransferred,
@@ -352,9 +353,11 @@ namespace System.IO.Strategies
                 return ValueTask.FromResult(0);
             }
 
-            // This implementation updates the file position before the operation starts and updates it after incomplete read.
+            // This implementation updates the file position before the operation starts and updates it after
+            // incomplete read.
             // This is done to keep backward compatibility for concurrent reads.
-            // It uses Interlocked as there can be multiple concurrent incomplete reads updating position at the same time.
+            // It uses Interlocked as there can be multiple concurrent incomplete reads updating position at the
+            // same time.
             long readOffset =
                 Interlocked.Add(ref _filePosition, destination.Length) - destination.Length;
             return RandomAccess.ReadAtOffsetAsync(

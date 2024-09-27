@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             CancellationToken cancellationToken
         )
         {
-            // TODO: Consider unifying code to extract text from an Xml Documentation Comment (https://github.com/dotnet/roslyn/issues/2290)
+            // TODO: Consider unifying code to extract text from an Xml Documentation Comment
+            // (https://github.com/dotnet/roslyn/issues/2290)
             var summaryElement = documentationComment
                 .ChildNodes()
                 .OfType<TXmlElementSyntax>()

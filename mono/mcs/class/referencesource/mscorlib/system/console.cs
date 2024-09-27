@@ -112,7 +112,8 @@ namespace System
 #endif  // !FEATURE_CORECLR
 
         // Private object for locking instead of locking on a public type for SQL reliability work.
-        // Use this for internal synchronization during initialization, wiring up events, or for short, non-blocking OS calls.
+        // Use this for internal synchronization during initialization, wiring up events, or for short,
+        // non-blocking OS calls.
         private static volatile Object s_InternalSyncObject;
         private static Object InternalSyncObject
         {
@@ -130,7 +131,8 @@ namespace System
             }
         }
 
-        // Use this for blocking in Console.ReadKey, which needs to protect itself in case multiple threads call it simultaneously.
+        // Use this for blocking in Console.ReadKey, which needs to protect itself in case multiple threads
+        // call it simultaneously.
         // Use a ReadKey-specific lock though, to allow other fields to be initialized on this type.
         private static volatile Object s_ReadKeySyncObject;
         private static Object ReadKeySyncObject
@@ -537,7 +539,8 @@ namespace System
             // Check whether we can read or write to this handle.
             if (stdHandleName != Win32Native.STD_INPUT_HANDLE && !ConsoleHandleIsWritable(sh))
             {
-                //BCLDebug.ConsoleError("Console::ConsoleHandleIsValid for std handle "+stdHandleName+" failed, setting it to a null stream");
+                //BCLDebug.ConsoleError("Console::ConsoleHandleIsValid for std handle "+stdHandleName+" failed,
+                // setting it to a null stream");
                 return Stream.Null;
             }
 
@@ -547,7 +550,8 @@ namespace System
             const bool useFileAPIs = true;
 #endif  // !FEATURE_CORECLR
 
-            //BCLDebug.ConsoleError("Console::GetStandardFile for std handle "+stdHandleName+" succeeded, returning handle number "+handle.ToString());
+            //BCLDebug.ConsoleError("Console::GetStandardFile for std handle "+stdHandleName+" succeeded,
+            // returning handle number "+handle.ToString());
             Stream console = new __ConsoleStream(sh, access, useFileAPIs);
             // Do not buffer console streams, or we can get into situations where
             // we end up blocking waiting for you to hit enter twice.  It was
@@ -1824,9 +1828,12 @@ namespace System
 
                         short keyCode = ir.keyEvent.virtualKeyCode;
 
-                        // First check for non-keyboard events & discard them. Generally we tap into only KeyDown events and ignore the KeyUp events
-                        // but it is possible that we are dealing with a Alt+NumPad unicode key sequence, the final unicode char is revealed only when
-                        // the Alt key is released (i.e when the sequence is complete). To avoid noise, when the Alt key is down, we should eat up
+                        // First check for non-keyboard events & discard them. Generally we tap into only KeyDown events and
+                        // ignore the KeyUp events
+                        // but it is possible that we are dealing with a Alt+NumPad unicode key sequence, the final unicode
+                        // char is revealed only when
+                        // the Alt key is released (i.e when the sequence is complete). To avoid noise, when the Alt key is
+                        // down, we should eat up
                         // any intermediate key strokes (from NumPad) that collectively forms the Unicode character.
 
                         if (!IsKeyDownEvent(ir))
@@ -1838,9 +1845,12 @@ namespace System
 
                         char ch = (char)ir.keyEvent.uChar;
 
-                        // In a Alt+NumPad unicode sequence, when the alt key is released uChar will represent the final unicode character, we need to
-                        // surface this. VirtualKeyCode for this event will be Alt from the Alt-Up key event. This is probably not the right code,
-                        // especially when we don't expose ConsoleKey.Alt, so this will end up being the hex value (0x12). VK_PACKET comes very
+                        // In a Alt+NumPad unicode sequence, when the alt key is released uChar will represent the final
+                        // unicode character, we need to
+                        // surface this. VirtualKeyCode for this event will be Alt from the Alt-Up key event. This is
+                        // probably not the right code,
+                        // especially when we don't expose ConsoleKey.Alt, so this will end up being the hex value (0x12).
+                        // VK_PACKET comes very
                         // close to being useful and something that we could look into using for this purpose...
 
                         if (ch == 0)
@@ -2167,7 +2177,8 @@ namespace System
             return false;
         }
 
-        // This is the worker delegate that is called on the Threadpool thread to fire the actual events. It must guarantee that it
+        // This is the worker delegate that is called on the Threadpool thread to fire the actual events. It
+        // must guarantee that it
         // signals the caller on the ControlC thread so that it does not block indefinitely.
         private static void ControlCDelegate(object data)
         {
@@ -2384,10 +2395,12 @@ namespace System
         }
 
         //
-        // Give a hint to the code generator to not inline the common console methods. The console methods are
+        // Give a hint to the code generator to not inline the common console methods. The console methods
+        // are
         // not performance critical. It is unnecessary code bloat to have them inlined.
         //
-        // Moreover, simple repros for codegen bugs are often console-based. It is tedious to manually filter out
+        // Moreover, simple repros for codegen bugs are often console-based. It is tedious to manually
+        // filter out
         // the inlined console writelines from them.
         //
         [HostProtection(UI = true)]

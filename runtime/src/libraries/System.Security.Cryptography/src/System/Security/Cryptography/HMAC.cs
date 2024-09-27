@@ -42,9 +42,12 @@ namespace System.Security.Cryptography
             {
                 ArgumentNullException.ThrowIfNull(value, nameof(HashName));
 
-                // On the desktop, setting the HashName selects (or switches over to) a new hashing algorithm via CryptoConfig.
-                // Our intended refactoring turns HMAC back into an abstract class with no algorithm-specific implementation.
-                // Changing the HashName would not have the intended effect so throw a proper exception so the developer knows what's up.
+                // On the desktop, setting the HashName selects (or switches over to) a new hashing algorithm via
+                // CryptoConfig.
+                // Our intended refactoring turns HMAC back into an abstract class with no algorithm-specific
+                // implementation.
+                // Changing the HashName would not have the intended effect so throw a proper exception so the
+                // developer knows what's up.
                 //
                 // We still have to allow setting it the first time as the contract provides no other way to do so.
                 // Since the set is public, ensure that hmac.HashName = hmac.HashName works without throwing.

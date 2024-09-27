@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Session;
 // (b) we don't care about endianness since hashes are used only in hash tables
 //     and aren't returned to user code.
 //
-// Derived from the implementation in SignalR and modified to address byte[] instead of string. This derived version is not for cryptographic use, just hash codes.
+// Derived from the implementation in SignalR and modified to address byte[] instead of string. This
+// derived version is not for cryptographic use, just hash codes.
+//
 // https://github.com/aspnet/SignalR-Server/blob/75f74169c81a51780f195d06b798302b2d76dbde/src/Microsoft.AspNetCore.SignalR.Server/Infrastructure/SipHashBasedStringEqualityComparer.cs
 // Derivative work of https://github.com/tanglebones/ch-siphash.
 internal static class SipHash

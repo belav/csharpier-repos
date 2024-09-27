@@ -115,7 +115,8 @@ namespace System.Runtime.InteropServices
 
                 if (Thunk == IntPtr.Zero)
                 {
-                    // We've either run out of memory, or failed to allocate a new thunk due to some other bug. Now we should fail fast
+                    // We've either run out of memory, or failed to allocate a new thunk due to some other bug. Now we
+                    // should fail fast
                     Environment.FailFast("Insufficient number of thunks.");
                 }
                 else
@@ -177,7 +178,8 @@ namespace System.Runtime.InteropServices
             var delegateThunk = new PInvokeDelegateThunk(del);
 
             //
-            //  For open static delegates set target to ReverseOpenStaticDelegateStub which calls the static function pointer directly
+            //  For open static delegates set target to ReverseOpenStaticDelegateStub which calls the static
+            // function pointer directly
             //
             bool openStaticDelegate =
                 del.GetRawFunctionPointerForOpenStaticDelegate() != IntPtr.Zero;
@@ -416,7 +418,8 @@ namespace System.Runtime.InteropServices
         /// Convert ANSI string to unicode string, with option to free native memory.
         /// </summary>
         /// <remarks>Input assumed to be zero terminated. Generates String.Empty for zero length string.
-        /// This version is more efficient than ConvertToUnicode in src\Interop\System\Runtime\InteropServices\Marshal.cs in that it can skip calling
+        /// This version is more efficient than ConvertToUnicode in
+        // src\Interop\System\Runtime\InteropServices\Marshal.cs in that it can skip calling
         /// MultiByteToWideChar for ASCII string, and it does not need another char[] buffer</remarks>
         public static unsafe string? AnsiStringToString(byte* pchBuffer)
         {
@@ -447,8 +450,10 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Convert UNICODE string to ANSI string.
         /// </summary>
-        /// <remarks>This version is more efficient than StringToHGlobalAnsi in Interop\System\Runtime\InteropServices\Marshal.cs in that
-        /// it could allocate single byte per character, instead of SystemMaxDBCSCharSize per char, and it can skip calling WideCharToMultiByte for ASCII string</remarks>
+        /// <remarks>This version is more efficient than StringToHGlobalAnsi in
+        // Interop\System\Runtime\InteropServices\Marshal.cs in that
+        /// it could allocate single byte per character, instead of SystemMaxDBCSCharSize per char, and it
+        // can skip calling WideCharToMultiByte for ASCII string</remarks>
         public static unsafe byte* StringToAnsiString(
             string str,
             bool bestFit,
@@ -508,7 +513,8 @@ namespace System.Runtime.InteropServices
         /// Convert ANSI ByVal byte array to UNICODE wide char array, best fit
         /// </summary>
         /// <remarks>
-        /// * This version works with array instead to string, it means that the len must be provided and there will be NO NULL to
+        /// * This version works with array instead to string, it means that the len must be provided and
+        // there will be NO NULL to
         /// terminate the array.
         /// * The buffer to the UNICODE wide char array must be allocated by the caller.
         /// </remarks>
@@ -537,7 +543,8 @@ namespace System.Runtime.InteropServices
         /// </summary>
         /// <param name="managedValue">single UNICODE wide char value</param>
         /// <param name="bestFit">Enable best-fit mapping behavior</param>
-        /// <param name="throwOnUnmappableChar">Throw an exception on an unmappable Unicode character</param>
+        /// <param name="throwOnUnmappableChar">Throw an exception on an unmappable Unicode
+        // character</param>
         public static unsafe byte WideCharToAnsiChar(
             char managedValue,
             bool bestFit,

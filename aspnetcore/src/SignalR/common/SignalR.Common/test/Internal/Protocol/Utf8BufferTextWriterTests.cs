@@ -266,7 +266,8 @@ public class Utf8BufferTextWriterTests
         // g => 67
         // h => 68
         // i => 69
-        // \uD800\uDC00 => F0-90-80-80 (this is a surrogate pair that is represented as a single 4-byte UTF-8 encoding)
+        // \uD800\uDC00 => F0-90-80-80 (this is a surrogate pair that is represented as a single 4-byte
+        // UTF-8 encoding)
         const string testString = "aいbろcdはにeほfへどghi\uD800\uDC00";
 
         // By mixing single byte and multi-byte characters, we know that there will
@@ -368,7 +369,8 @@ public class Utf8BufferTextWriterTests
 
         public Memory<byte> GetMemory(int sizeHint = 0)
         {
-            // Need special handling for sizeHint == 0, because for that we want to enter the if even if there are "sizeHint" (i.e. 0) bytes left :).
+            // Need special handling for sizeHint == 0, because for that we want to enter the if even if there
+            // are "sizeHint" (i.e. 0) bytes left :).
             if (
                 (sizeHint == 0 && CurrentSegment.Length == Position)
                 || (CurrentSegment.Length - Position < sizeHint)

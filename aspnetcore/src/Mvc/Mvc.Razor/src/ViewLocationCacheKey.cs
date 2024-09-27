@@ -12,7 +12,8 @@ internal readonly struct ViewLocationCacheKey : IEquatable<ViewLocationCacheKey>
     /// Initializes a new instance of <see cref="ViewLocationCacheKey"/>.
     /// </summary>
     /// <param name="viewName">The view name or path.</param>
-    /// <param name="isMainPage">Determines if the page being found is the main page for an action.</param>
+    /// <param name="isMainPage">Determines if the page being found is the main page for an
+    // action.</param>
     public ViewLocationCacheKey(string viewName, bool isMainPage)
         : this(
             viewName,
@@ -30,7 +31,8 @@ internal readonly struct ViewLocationCacheKey : IEquatable<ViewLocationCacheKey>
     /// <param name="controllerName">The controller name.</param>
     /// <param name="areaName">The area name.</param>
     /// <param name="pageName">The page name.</param>
-    /// <param name="isMainPage">Determines if the page being found is the main page for an action.</param>
+    /// <param name="isMainPage">Determines if the page being found is the main page for an
+    // action.</param>
     /// <param name="values">Values from <see cref="IViewLocationExpander"/> instances.</param>
     public ViewLocationCacheKey(
         string viewName,

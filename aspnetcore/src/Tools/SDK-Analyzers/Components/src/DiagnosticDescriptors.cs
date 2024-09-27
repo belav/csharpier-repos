@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers;
 )]
 internal static class DiagnosticDescriptors
 {
-    // Note: The Razor Compiler (including Components features) use the RZ prefix for diagnostics, so there's currently
+    // Note: The Razor Compiler (including Components features) use the RZ prefix for diagnostics, so
+    // there's currently
     // no change of clashing between that and the BL prefix used here.
     //
     // Tracking https://github.com/dotnet/aspnetcore/issues/10382 to rationalize this

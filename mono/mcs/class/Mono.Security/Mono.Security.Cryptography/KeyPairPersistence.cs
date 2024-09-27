@@ -40,55 +40,55 @@ using Mono.Xml;
 namespace Mono.Security.Cryptography
 {
     /* File name
-     * [type][unique name][key number].xml
-     *
-     * where
-     *	type		CspParameters.ProviderType
-     *	unique name	A unique name for the keypair, which is
-     *			a. default (for a provider default keypair)
-     *			b. a GUID derived from
-     *				i. random if no container name was
-     *				specified at generation time
-     *				ii. the MD5 hash of the container
-     *				name (CspParameters.KeyContainerName)
-     *	key number	CspParameters.KeyNumber
-     *
-     * File format
-     * <KeyPair>
-     *	<Properties>
-     *		<Provider Name="" Type=""/>
-     *		<Container Name=""/>
-     *	</Properties>
-     *	<KeyValue Id="">
-     *		RSAKeyValue, DSAKeyValue ...
-     *	</KeyValue>
-     * </KeyPair>
-     */
+    * [type][unique name][key number].xml
+    *
+    * where
+    *	type		CspParameters.ProviderType
+    *	unique name	A unique name for the keypair, which is
+    *			a. default (for a provider default keypair)
+    *			b. a GUID derived from
+    *				i. random if no container name was
+    *				specified at generation time
+    *				ii. the MD5 hash of the container
+    *				name (CspParameters.KeyContainerName)
+    *	key number	CspParameters.KeyNumber
+    *
+    * File format
+    * <KeyPair>
+    *	<Properties>
+    *		<Provider Name="" Type=""/>
+    *		<Container Name=""/>
+    *	</Properties>
+    *	<KeyValue Id="">
+    *		RSAKeyValue, DSAKeyValue ...
+    *	</KeyValue>
+    * </KeyPair>
+    */
 
     /* NOTES
-     *
-     * - There's NO confidentiality / integrity built in this
-     * persistance mechanism. The container directories (both user and
-     * machine) are created with restrited ACL. The ACL is also checked
-     * when a key is accessed (so totally public keys won't be used).
-     * see /mono/mono/metadata/security.c for implementation
-     *
-     * - As we do not use CSP we limit ourselves to provider types (not
-     * names). This means that for a same type and container type, but
-     * two different provider names) will return the same keypair. This
-     * should work as CspParameters always requires a csp type in its
-     * constructors.
-     *
-     * - Assert (CAS) are used so only the OS permission will limit access
-     * to the keypair files. I.e. this will work even in high-security
-     * scenarios where users do not have access to file system (e.g. web
-     * application). We can allow this because the filename used is
-     * TOTALLY under our control (no direct user input is used).
-     *
-     * - You CAN'T changes properties of the keypair once it's been
-     * created (saved). You must remove the container than save it
-     * back. This is the same behaviour as CSP under Windows.
-     */
+    *
+    * - There's NO confidentiality / integrity built in this
+    * persistance mechanism. The container directories (both user and
+    * machine) are created with restrited ACL. The ACL is also checked
+    * when a key is accessed (so totally public keys won't be used).
+    * see /mono/mono/metadata/security.c for implementation
+    *
+    * - As we do not use CSP we limit ourselves to provider types (not
+    * names). This means that for a same type and container type, but
+    * two different provider names) will return the same keypair. This
+    * should work as CspParameters always requires a csp type in its
+    * constructors.
+    *
+    * - Assert (CAS) are used so only the OS permission will limit access
+    * to the keypair files. I.e. this will work even in high-security
+    * scenarios where users do not have access to file system (e.g. web
+    * application). We can allow this because the filename used is
+    * TOTALLY under our control (no direct user input is used).
+    *
+    * - You CAN'T changes properties of the keypair once it's been
+    * created (saved). You must remove the container than save it
+    * back. This is the same behaviour as CSP under Windows.
+    */
 
 #if INSIDE_CORLIB
     internal

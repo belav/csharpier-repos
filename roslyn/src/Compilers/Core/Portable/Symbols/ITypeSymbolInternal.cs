@@ -21,14 +21,16 @@ namespace Microsoft.CodeAnalysis.Symbols
 
         /// <summary>
         /// True if this type is known to be a reference type. It is never the case that
-        /// <see cref="IsReferenceType"/> and <see cref="IsValueType"/> both return true. However, for an unconstrained type
+        /// <see cref="IsReferenceType"/> and <see cref="IsValueType"/> both return true. However, for an
+        // unconstrained type
         /// parameter, <see cref="IsReferenceType"/> and <see cref="IsValueType"/> will both return false.
         /// </summary>
         bool IsReferenceType { get; }
 
         /// <summary>
         /// True if this type is known to be a value type. It is never the case that
-        /// <see cref="IsReferenceType"/> and <see cref="IsValueType"/> both return true. However, for an unconstrained type
+        /// <see cref="IsReferenceType"/> and <see cref="IsValueType"/> both return true. However, for an
+        // unconstrained type
         /// parameter, <see cref="IsReferenceType"/> and <see cref="IsValueType"/> will both return false.
         /// </summary>
         bool IsValueType { get; }

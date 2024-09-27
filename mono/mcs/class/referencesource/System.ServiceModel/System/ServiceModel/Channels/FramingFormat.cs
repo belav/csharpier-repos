@@ -3,77 +3,83 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    /*
-        Message Framing BNF:
+/*
+Message Framing BNF:
 
-        protocol-stream-a = (singleton-unsized-stream-a | duplex-stream-a | simplex-stream-a | singleton-sized-stream-a)+
-        protocol-stream-b = (singleton-unsized-stream-b | duplex-stream-b)+
+protocol-stream-a = (singleton-unsized-stream-a | duplex-stream-a | simplex-stream-a |
+singleton-sized-stream-a)+
+protocol-stream-b = (singleton-unsized-stream-b | duplex-stream-b)+
 
-        singleton-unsized-stream-a = version-record mode-record-type singleton-unsized-mode via-record encoding-record upgrade-request* preamble-end-record-type singleton-message end-record-type
-        duplex-stream-a = version-record mode-record-type duplex-mode via-record encoding-record upgrade-request* preamble-end-record-type duplex-message* end-record-type
-        simplex-stream-a = version-record mode-record-type simplex-mode via-record encoding-record simplex-message* end-record-type
-        singleton-sized-stream-a = version-record mode-record-type singleton-sized-mode via-record encoding-record octets
+singleton-unsized-stream-a = version-record mode-record-type singleton-unsized-mode via-record
+encoding-record upgrade-request* preamble-end-record-type singleton-message end-record-type
+duplex-stream-a = version-record mode-record-type duplex-mode via-record encoding-record
+upgrade-request* preamble-end-record-type duplex-message* end-record-type
+simplex-stream-a = version-record mode-record-type simplex-mode via-record encoding-record
+simplex-message* end-record-type
+singleton-sized-stream-a = version-record mode-record-type singleton-sized-mode via-record
+encoding-record octets
 
-        singleton-unsized-stream-b = upgrade-response* preamble-response singleton-message? end-record-type
-        duplex-stream-b = upgrade-response* preamble-response duplex-message* (fault-message | end-record-type)
+singleton-unsized-stream-b = upgrade-response* preamble-response singleton-message? end-record-type
+duplex-stream-b = upgrade-response* preamble-response duplex-message* (fault-message |
+end-record-type)
 
-        singleton-message = unsized-message
-        duplex-message = sized-message
-        simplex-message = sized-message
-        fault-message = fault-record-type mbint utf8-octets
-        sized-message = sized-envelope-record-type mbint octets
-        unsized-message = unsized-envelope-record-type (mbint octets)* octet(0x0)
+singleton-message = unsized-message
+duplex-message = sized-message
+simplex-message = sized-message
+fault-message = fault-record-type mbint utf8-octets
+sized-message = sized-envelope-record-type mbint octets
+unsized-message = unsized-envelope-record-type (mbint octets)* octet(0x0)
 
-        preamble-response = preamble-ack-record-type | fault-message
-     
-        upgrade-request = upgrade-request-record-type mbint utf8-octets octets
-        upgrade-response = upgrade-response-record-type octets
+preamble-response = preamble-ack-record-type | fault-message
 
-        version-record = version-record-type major-version-number minor-version-number
-        major-version-number = octet(0x1)
-        minor-version-number = octet(0x0)
+upgrade-request = upgrade-request-record-type mbint utf8-octets octets
+upgrade-response = upgrade-response-record-type octets
 
-        encoding-record = known-encoding-record | extensible-encoding-record
-        known-encoding-record = known-encoding-record-type known-encoding-type
-        extensible-encoding-record = extensible-encoding-record-type mbint utf8-octets
+version-record = version-record-type major-version-number minor-version-number
+major-version-number = octet(0x1)
+minor-version-number = octet(0x0)
 
-        via-record = via-record-type mbint utf8-octets
+encoding-record = known-encoding-record | extensible-encoding-record
+known-encoding-record = known-encoding-record-type known-encoding-type
+extensible-encoding-record = extensible-encoding-record-type mbint utf8-octets
 
-        singleton-unsized-mode = octet(0x1)
-        duplex-mode = octet(0x2)
-        simplex-mode = octet(0x3)
-        singleton-sized-mode = octet(0x4)
+via-record = via-record-type mbint utf8-octets
 
-        known-encoding-type = text-encoding | binary-encoding | mtom-encoding
-        binary-encoding = binary-sessionless-encoding | binary-session-encoding
-        text-encoding = soap11-text-encoding | soap12-text-encoding
-        soap11-text-encoding = soap11-utf8-encoding | soap11-utf16-encoding | soap11-unicodeFFFE-encoding
-        soap12-text-encoding = soap12-utf8-encoding | soap12-utf16-encoding | soap12-unicodeFFFE-encoding
+singleton-unsized-mode = octet(0x1)
+duplex-mode = octet(0x2)
+simplex-mode = octet(0x3)
+singleton-sized-mode = octet(0x4)
 
-        soap11-utf8-encoding = octet(0x0)
-        soap11-utf16-encoding = octet(0x1)
-        soap11-unicodeFFFE-encoding = octet(0x2)
-        soap12-utf8-encoding = octet(0x3)
-        soap12-utf16-encoding = octet(0x4)
-        soap12-unicodeFFFE-encoding = octet(0x5)
-        mtom-encoding = octet(0x6)
-        binary-sessionless-encoding = octet(0x7)
-        binary-session-encoding = octet(0x8)
+known-encoding-type = text-encoding | binary-encoding | mtom-encoding
+binary-encoding = binary-sessionless-encoding | binary-session-encoding
+text-encoding = soap11-text-encoding | soap12-text-encoding
+soap11-text-encoding = soap11-utf8-encoding | soap11-utf16-encoding | soap11-unicodeFFFE-encoding
+soap12-text-encoding = soap12-utf8-encoding | soap12-utf16-encoding | soap12-unicodeFFFE-encoding
 
-        version-record-type = octet(0x0)
-        mode-record-type = octet(0x1)
-        via-record-type = octet(0x2)
-        known-encoding-record-type = octet(0x3)
-        extensible-encoding-record-type = octet(0x4)
-        unsized-envelope-record-type = octet(0x5)
-        sized-envelope-record-type = octet(0x6)
-        end-record-type = octet(0x7)
-        fault-record-type = octet(0x8)
-        upgrade-request-record-type = octet(0x9)
-        upgrade-response-record-type = octet(0xA)
-        preamble-ack-record-type = octet (0xB)
-        preamble-end-record-type = octet (0xC)
-    */
+soap11-utf8-encoding = octet(0x0)
+soap11-utf16-encoding = octet(0x1)
+soap11-unicodeFFFE-encoding = octet(0x2)
+soap12-utf8-encoding = octet(0x3)
+soap12-utf16-encoding = octet(0x4)
+soap12-unicodeFFFE-encoding = octet(0x5)
+mtom-encoding = octet(0x6)
+binary-sessionless-encoding = octet(0x7)
+binary-session-encoding = octet(0x8)
+
+version-record-type = octet(0x0)
+mode-record-type = octet(0x1)
+via-record-type = octet(0x2)
+known-encoding-record-type = octet(0x3)
+extensible-encoding-record-type = octet(0x4)
+unsized-envelope-record-type = octet(0x5)
+sized-envelope-record-type = octet(0x6)
+end-record-type = octet(0x7)
+fault-record-type = octet(0x8)
+upgrade-request-record-type = octet(0x9)
+upgrade-response-record-type = octet(0xA)
+preamble-ack-record-type = octet (0xB)
+preamble-end-record-type = octet (0xC)
+*/
 
     enum FramingRecordType
     {

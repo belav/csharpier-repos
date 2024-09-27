@@ -14,7 +14,7 @@ public class LastClass
     public const object ConstField2 = null;
     public const string ConstField3 = "hello world";
 
-    /* LAMESPEC You can't define a default value using MSIL*/
+/* LAMESPEC You can't define a default value using MSIL*/
     public int ConstProp { get; set; }
 
     public static void Main() { }

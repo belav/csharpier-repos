@@ -23,14 +23,16 @@ namespace System.Web.UI.HtmlControls
     public class HtmlSource : HtmlControl
     {
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlSource'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlSource'/>
+        // class.</para>
         /// </devdoc>
         public HtmlSource()
             : base("source") { }
 
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets the name of and path to the video file to be displayed. This can be an absolute or relative path.
+        ///       Gets or sets the name of and path to the video file to be displayed. This can be an
+        // absolute or relative path.
         ///    </para>
         /// </devdoc>
         [
@@ -49,9 +51,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["src"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Override to process src attribute
-         */
+/*
+* Override to process src attribute
+*/
         protected override void RenderAttributes(HtmlTextWriter writer)
         {
             PreProcessRelativeReferenceAttribute(writer, "src");

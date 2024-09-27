@@ -27,7 +27,8 @@ namespace System.Web.UI.WebControls.Adapters
         {
             WmlTextWriter writer = (WmlTextWriter)markupWriter;
             // Review: In our literalControl transformation, we suppress p's at beginning of a form or a panel.
-            // This saves real estate, and in practice it tends to look much better.  If the developer really wants a
+            // This saves real estate, and in practice it tends to look much better.  If the developer really
+            // wants a
             // break at the beginning of a panel, they can use <br/> to accomplish this.
             writer.BeginFormOrPanel();
             writer.PushPanelStyle(Control.ControlStyle); // to be written after next opening p tag.

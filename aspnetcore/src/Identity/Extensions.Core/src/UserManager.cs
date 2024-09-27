@@ -59,12 +59,18 @@ public class UserManager<TUser> : IDisposable
     /// Constructs a new instance of <see cref="UserManager{TUser}"/>.
     /// </summary>
     /// <param name="store">The persistence store the manager will operate over.</param>
-    /// <param name="optionsAccessor">The accessor used to access the <see cref="IdentityOptions"/>.</param>
-    /// <param name="passwordHasher">The password hashing implementation to use when saving passwords.</param>
-    /// <param name="userValidators">A collection of <see cref="IUserValidator{TUser}"/> to validate users against.</param>
-    /// <param name="passwordValidators">A collection of <see cref="IPasswordValidator{TUser}"/> to validate passwords against.</param>
-    /// <param name="keyNormalizer">The <see cref="ILookupNormalizer"/> to use when generating index keys for users.</param>
-    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error messages.</param>
+    /// <param name="optionsAccessor">The accessor used to access the <see
+    // cref="IdentityOptions"/>.</param>
+    /// <param name="passwordHasher">The password hashing implementation to use when saving
+    // passwords.</param>
+    /// <param name="userValidators">A collection of <see cref="IUserValidator{TUser}"/> to validate
+    // users against.</param>
+    /// <param name="passwordValidators">A collection of <see cref="IPasswordValidator{TUser}"/> to
+    // validate passwords against.</param>
+    /// <param name="keyNormalizer">The <see cref="ILookupNormalizer"/> to use when generating index
+    // keys for users.</param>
+    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error
+    // messages.</param>
     /// <param name="services">The <see cref="IServiceProvider"/> used to resolve services.</param>
     /// <param name="logger">The logger used to log messages, warnings and errors.</param>
     public UserManager(
@@ -413,7 +419,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="principal">The <see cref="ClaimsPrincipal"/> instance.</param>
     /// <returns>The Name claim value, or null if the claim is not present.</returns>
-    /// <remarks>The Name claim is identified by <see cref="ClaimsIdentity.DefaultNameClaimType"/>.</remarks>
+    /// <remarks>The Name claim is identified by <see
+    // cref="ClaimsIdentity.DefaultNameClaimType"/>.</remarks>
     public virtual string? GetUserName(ClaimsPrincipal principal)
     {
         ArgumentNullThrowHelper.ThrowIfNull(principal);
@@ -465,7 +472,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user to create.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> CreateAsync(TUser user)
@@ -494,7 +502,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user to update.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual Task<IdentityResult> UpdateAsync(TUser user)
@@ -510,7 +519,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user to delete.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual Task<IdentityResult> DeleteAsync(TUser user)
@@ -526,7 +536,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="userId">The user ID to search for.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="userId"/> if it exists.
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching
+    // the specified <paramref name="userId"/> if it exists.
     /// </returns>
     public virtual Task<TUser?> FindByIdAsync(string userId)
     {
@@ -539,7 +550,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="userName">The user name to search for.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="userName"/> if it exists.
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching
+    // the specified <paramref name="userName"/> if it exists.
     /// </returns>
     public virtual async Task<TUser?> FindByNameAsync(string userName)
     {
@@ -579,7 +591,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to create.</param>
     /// <param name="password">The password for the user to hash and store.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> CreateAsync(TUser user, string password)
@@ -644,7 +657,8 @@ public class UserManager<TUser> : IDisposable
     /// Gets the user name for the specified <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user whose name should be retrieved.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the name for the specified <paramref name="user"/>.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the name
+    // for the specified <paramref name="user"/>.</returns>
     public virtual async Task<string?> GetUserNameAsync(TUser user)
     {
         ThrowIfDisposed();
@@ -672,7 +686,8 @@ public class UserManager<TUser> : IDisposable
     /// Gets the user identifier for the specified <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user whose identifier should be retrieved.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the identifier for the specified <paramref name="user"/>.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the
+    // identifier for the specified <paramref name="user"/>.</returns>
     public virtual async Task<string> GetUserIdAsync(TUser user)
     {
         ThrowIfDisposed();
@@ -686,7 +701,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user whose password should be validated.</param>
     /// <param name="password">The password to validate</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing true if
-    /// the specified <paramref name="password" /> matches the one store for the <paramref name="user"/>,
+    /// the specified <paramref name="password" /> matches the one store for the <paramref
+    // name="user"/>,
     /// otherwise false.</returns>
     public virtual async Task<bool> CheckPasswordAsync(TUser user, string password)
     {
@@ -716,9 +732,11 @@ public class UserManager<TUser> : IDisposable
     /// <summary>
     /// Gets a flag indicating whether the specified <paramref name="user"/> has a password.
     /// </summary>
-    /// <param name="user">The user to return a flag for, indicating whether they have a password or not.</param>
+    /// <param name="user">The user to return a flag for, indicating whether they have a password or
+    // not.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the specified <paramref name="user"/> has a password
+    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the
+    // specified <paramref name="user"/> has a password
     /// otherwise false.
     /// </returns>
     public virtual Task<bool> HasPasswordAsync(TUser user)
@@ -737,7 +755,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user whose password should be set.</param>
     /// <param name="password">The password to set.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> AddPasswordAsync(TUser user, string password)
@@ -763,14 +782,17 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Changes a user's password after confirming the specified <paramref name="currentPassword"/> is correct,
+    /// Changes a user's password after confirming the specified <paramref name="currentPassword"/> is
+    // correct,
     /// as an asynchronous operation.
     /// </summary>
     /// <param name="user">The user whose password should be set.</param>
     /// <param name="currentPassword">The current password to validate before changing.</param>
-    /// <param name="newPassword">The new password to set for the specified <paramref name="user"/>.</param>
+    /// <param name="newPassword">The new password to set for the specified <paramref
+    // name="user"/>.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> ChangePasswordAsync(
@@ -805,7 +827,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user whose password should be removed.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> RemovePasswordAsync(TUser user)
@@ -820,13 +843,15 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Returns a <see cref="PasswordVerificationResult"/> indicating the result of a password hash comparison.
+    /// Returns a <see cref="PasswordVerificationResult"/> indicating the result of a password hash
+    // comparison.
     /// </summary>
     /// <param name="store">The store containing a user's password.</param>
     /// <param name="user">The user whose password should be verified.</param>
     /// <param name="password">The password to verify.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="PasswordVerificationResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="PasswordVerificationResult"/>
     /// of the operation.
     /// </returns>
     protected virtual async Task<PasswordVerificationResult> VerifyPasswordAsync(
@@ -847,7 +872,8 @@ public class UserManager<TUser> : IDisposable
     /// Get the security stamp for the specified <paramref name="user" />.
     /// </summary>
     /// <param name="user">The user whose security stamp should be set.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the security stamp for the specified <paramref name="user"/>.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the
+    // security stamp for the specified <paramref name="user"/>.</returns>
     public virtual async Task<string> GetSecurityStampAsync(TUser user)
     {
         ThrowIfDisposed();
@@ -872,7 +898,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user whose security stamp should be regenerated.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     /// <remarks>
@@ -906,14 +933,16 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Resets the <paramref name="user"/>'s password to the specified <paramref name="newPassword"/> after
+    /// Resets the <paramref name="user"/>'s password to the specified <paramref name="newPassword"/>
+    // after
     /// validating the given password reset <paramref name="token"/>.
     /// </summary>
     /// <param name="user">The user whose password should be reset.</param>
     /// <param name="token">The password reset token to verify.</param>
     /// <param name="newPassword">The new password to set if reset token verification succeeds.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> ResetPasswordAsync(
@@ -950,10 +979,13 @@ public class UserManager<TUser> : IDisposable
     /// <summary>
     /// Retrieves the user associated with the specified external login provider and login provider key.
     /// </summary>
-    /// <param name="loginProvider">The login provider who provided the <paramref name="providerKey"/>.</param>
-    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
+    /// <param name="loginProvider">The login provider who provided the <paramref
+    // name="providerKey"/>.</param>
+    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a
+    // user.</param>
     /// <returns>
-    /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched the specified login provider and key.
+    /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched
+    // the specified login provider and key.
     /// </returns>
     public virtual Task<TUser?> FindByLoginAsync(string loginProvider, string providerKey)
     {
@@ -965,14 +997,17 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Attempts to remove the provided external login information from the specified <paramref name="user"/>.
+    /// Attempts to remove the provided external login information from the specified <paramref
+    // name="user"/>.
     /// and returns a flag indicating whether the removal succeed or not.
     /// </summary>
     /// <param name="user">The user to remove the login information from.</param>
     /// <param name="loginProvider">The login provide whose information should be removed.</param>
-    /// <param name="providerKey">The key given by the external login provider for the specified user.</param>
+    /// <param name="providerKey">The key given by the external login provider for the specified
+    // user.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> RemoveLoginAsync(
@@ -998,9 +1033,11 @@ public class UserManager<TUser> : IDisposable
     /// Adds an external <see cref="UserLoginInfo"/> to the specified <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user to add the login to.</param>
-    /// <param name="login">The external <see cref="UserLoginInfo"/> to add to the specified <paramref name="user"/>.</param>
+    /// <param name="login">The external <see cref="UserLoginInfo"/> to add to the specified <paramref
+    // name="user"/>.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> AddLoginAsync(TUser user, UserLoginInfo login)
@@ -1029,7 +1066,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user whose associated logins to retrieve.</param>
     /// <returns>
-    /// The <see cref="Task"/> for the asynchronous operation, containing a list of <see cref="UserLoginInfo"/> for the specified <paramref name="user"/>, if any.
+    /// The <see cref="Task"/> for the asynchronous operation, containing a list of <see
+    // cref="UserLoginInfo"/> for the specified <paramref name="user"/>, if any.
     /// </returns>
     public virtual async Task<IList<UserLoginInfo>> GetLoginsAsync(TUser user)
     {
@@ -1045,7 +1083,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to add the claim to.</param>
     /// <param name="claim">The claim to add.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual Task<IdentityResult> AddClaimAsync(TUser user, Claim claim)
@@ -1063,7 +1102,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to add the claim to.</param>
     /// <param name="claims">The claims to add.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> AddClaimsAsync(TUser user, IEnumerable<Claim> claims)
@@ -1078,13 +1118,16 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Replaces the given <paramref name="claim"/> on the specified <paramref name="user"/> with the <paramref name="newClaim"/>
+    /// Replaces the given <paramref name="claim"/> on the specified <paramref name="user"/> with the
+    // <paramref name="newClaim"/>
     /// </summary>
     /// <param name="user">The user to replace the claim on.</param>
     /// <param name="claim">The claim to replace.</param>
-    /// <param name="newClaim">The new claim to replace the existing <paramref name="claim"/> with.</param>
+    /// <param name="newClaim">The new claim to replace the existing <paramref name="claim"/>
+    // with.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> ReplaceClaimAsync(
@@ -1111,7 +1154,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to remove the specified <paramref name="claim"/> from.</param>
     /// <param name="claim">The <see cref="Claim"/> to remove.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual Task<IdentityResult> RemoveClaimAsync(TUser user, Claim claim)
@@ -1129,7 +1173,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to remove the specified <paramref name="claims"/> from.</param>
     /// <param name="claims">A collection of <see cref="Claim"/>s to remove.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> RemoveClaimsAsync(
@@ -1147,11 +1192,13 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Gets a list of <see cref="Claim"/>s to be belonging to the specified <paramref name="user"/> as an asynchronous operation.
+    /// Gets a list of <see cref="Claim"/>s to be belonging to the specified <paramref name="user"/> as
+    // an asynchronous operation.
     /// </summary>
     /// <param name="user">The user whose claims to retrieve.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of <see cref="Claim"/>s.
+    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of
+    // <see cref="Claim"/>s.
     /// </returns>
     public virtual async Task<IList<Claim>> GetClaimsAsync(TUser user)
     {
@@ -1167,7 +1214,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to add to the named role.</param>
     /// <param name="role">The name of the role to add the user to.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> AddToRoleAsync(TUser user, string role)
@@ -1197,7 +1245,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to add to the named roles.</param>
     /// <param name="roles">The name of the roles to add the user to.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> AddToRolesAsync(TUser user, IEnumerable<string> roles)
@@ -1231,7 +1280,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to remove from the named role.</param>
     /// <param name="role">The name of the role to remove the user from.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> RemoveFromRoleAsync(TUser user, string role)
@@ -1283,7 +1333,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to remove from the named roles.</param>
     /// <param name="roles">The name of the roles to remove the user from.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> RemoveFromRolesAsync(
@@ -1318,7 +1369,8 @@ public class UserManager<TUser> : IDisposable
     /// Gets a list of role names the specified <paramref name="user"/> belongs to.
     /// </summary>
     /// <param name="user">The user whose role names to retrieve.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing a list of role names.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing a list of
+    // role names.</returns>
     public virtual async Task<IList<string>> GetRolesAsync(TUser user)
     {
         ThrowIfDisposed();
@@ -1328,12 +1380,14 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Returns a flag indicating whether the specified <paramref name="user"/> is a member of the given named role.
+    /// Returns a flag indicating whether the specified <paramref name="user"/> is a member of the given
+    // named role.
     /// </summary>
     /// <param name="user">The user whose role membership should be checked.</param>
     /// <param name="role">The name of the role to be checked.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing a flag indicating whether the specified <paramref name="user"/> is
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing a flag indicating
+    // whether the specified <paramref name="user"/> is
     /// a member of the named role.
     /// </returns>
     public virtual async Task<bool> IsInRoleAsync(TUser user, string role)
@@ -1350,7 +1404,8 @@ public class UserManager<TUser> : IDisposable
     /// Gets the email address for the specified <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user whose email should be returned.</param>
-    /// <returns>The task object containing the results of the asynchronous operation, the email address for the specified <paramref name="user"/>.</returns>
+    /// <returns>The task object containing the results of the asynchronous operation, the email address
+    // for the specified <paramref name="user"/>.</returns>
     public virtual async Task<string?> GetEmailAsync(TUser user)
     {
         ThrowIfDisposed();
@@ -1365,7 +1420,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user whose email should be set.</param>
     /// <param name="email">The email to set.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> SetEmailAsync(TUser user, string? email)
@@ -1382,12 +1438,14 @@ public class UserManager<TUser> : IDisposable
 
     /// <summary>
     /// Gets the user, if any, associated with the normalized value of the specified email address.
-    /// Note: Its recommended that identityOptions.User.RequireUniqueEmail be set to true when using this method, otherwise
+    /// Note: Its recommended that identityOptions.User.RequireUniqueEmail be set to true when using
+    // this method, otherwise
     /// the store may throw if there are users with duplicate emails.
     /// </summary>
     /// <param name="email">The email address to return the user for.</param>
     /// <returns>
-    /// The task object containing the results of the asynchronous lookup operation, the user, if any, associated with a normalized value of the specified email address.
+    /// The task object containing the results of the asynchronous lookup operation, the user, if any,
+    // associated with a normalized value of the specified email address.
     /// </returns>
     public virtual async Task<TUser?> FindByEmailAsync(string email)
     {
@@ -1465,7 +1523,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to validate the token against.</param>
     /// <param name="token">The email confirmation token to validate.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> ConfirmEmailAsync(TUser user, string token)
@@ -1491,12 +1550,14 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Gets a flag indicating whether the email address for the specified <paramref name="user"/> has been verified, true if the email address is verified otherwise
+    /// Gets a flag indicating whether the email address for the specified <paramref name="user"/> has
+    // been verified, true if the email address is verified otherwise
     /// false.
     /// </summary>
     /// <param name="user">The user whose email confirmation status should be returned.</param>
     /// <returns>
-    /// The task object containing the results of the asynchronous operation, a flag indicating whether the email address for the specified <paramref name="user"/>
+    /// The task object containing the results of the asynchronous operation, a flag indicating whether
+    // the email address for the specified <paramref name="user"/>
     /// has been confirmed or not.
     /// </returns>
     public virtual async Task<bool> IsEmailConfirmedAsync(TUser user)
@@ -1526,13 +1587,15 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Updates a users emails if the specified email change <paramref name="token"/> is valid for the user.
+    /// Updates a users emails if the specified email change <paramref name="token"/> is valid for the
+    // user.
     /// </summary>
     /// <param name="user">The user whose email should be updated.</param>
     /// <param name="newEmail">The new email address.</param>
     /// <param name="token">The change email token to be verified.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> ChangeEmailAsync(
@@ -1568,7 +1631,8 @@ public class UserManager<TUser> : IDisposable
     /// Gets the telephone number, if any, for the specified <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user whose telephone number should be retrieved.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the user's telephone number, if any.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the
+    // user's telephone number, if any.</returns>
     public virtual async Task<string?> GetPhoneNumberAsync(TUser user)
     {
         ThrowIfDisposed();
@@ -1583,7 +1647,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user whose phone number to set.</param>
     /// <param name="phoneNumber">The phone number to set.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> SetPhoneNumberAsync(TUser user, string? phoneNumber)
@@ -1608,7 +1673,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="phoneNumber">The phone number to set.</param>
     /// <param name="token">The phone number confirmation token to validate.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/>
     /// of the operation.
     /// </returns>
     public virtual async Task<IdentityResult> ChangePhoneNumberAsync(
@@ -1640,11 +1706,14 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Gets a flag indicating whether the specified <paramref name="user"/>'s telephone number has been confirmed.
+    /// Gets a flag indicating whether the specified <paramref name="user"/>'s telephone number has been
+    // confirmed.
     /// </summary>
-    /// <param name="user">The user to return a flag for, indicating whether their telephone number is confirmed.</param>
+    /// <param name="user">The user to return a flag for, indicating whether their telephone number is
+    // confirmed.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the specified <paramref name="user"/> has a confirmed
+    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the
+    // specified <paramref name="user"/> has a confirmed
     /// telephone number otherwise false.
     /// </returns>
     public virtual Task<bool> IsPhoneNumberConfirmedAsync(TUser user)
@@ -1661,7 +1730,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user to generate a telephone number token for.</param>
     /// <param name="phoneNumber">The new phone number the validation token should be sent to.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the telephone change number token.
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the telephone
+    // change number token.
     /// </returns>
     public virtual Task<string> GenerateChangePhoneNumberTokenAsync(TUser user, string phoneNumber)
     {
@@ -1674,14 +1744,16 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Returns a flag indicating whether the specified <paramref name="user"/>'s phone number change verification
+    /// Returns a flag indicating whether the specified <paramref name="user"/>'s phone number change
+    // verification
     /// token is valid for the given <paramref name="phoneNumber"/>.
     /// </summary>
     /// <param name="user">The user to validate the token against.</param>
     /// <param name="token">The telephone number change token to validate.</param>
     /// <param name="phoneNumber">The telephone number the token was generated for.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the <paramref name="token"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the
+    // <paramref name="token"/>
     /// is valid, otherwise false.
     /// </returns>
     public virtual Task<bool> VerifyChangePhoneNumberTokenAsync(
@@ -1711,7 +1783,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="purpose">The purpose the token should be generated for.</param>
     /// <param name="token">The token to validate</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the <paramref name="token"/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, returning true if the
+    // <paramref name="token"/>
     /// is valid, otherwise false.
     /// </returns>
     public virtual async Task<bool> VerifyUserTokenAsync(
@@ -1794,7 +1867,8 @@ public class UserManager<TUser> : IDisposable
     /// Gets a list of valid two factor token providers for the specified <paramref name="user"/>,
     /// as an asynchronous operation.
     /// </summary>
-    /// <param name="user">The user the whose two factor authentication providers will be returned.</param>
+    /// <param name="user">The user the whose two factor authentication providers will be
+    // returned.</param>
     /// <returns>
     /// The <see cref="Task"/> that represents result of the asynchronous operation, a list of two
     /// factor authentication providers for the specified user.
@@ -1815,13 +1889,15 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Verifies the specified two factor authentication <paramref name="token" /> against the <paramref name="user"/>.
+    /// Verifies the specified two factor authentication <paramref name="token" /> against the <paramref
+    // name="user"/>.
     /// </summary>
     /// <param name="user">The user the token is supposed to be for.</param>
     /// <param name="tokenProvider">The provider which will verify the token.</param>
     /// <param name="token">The token to verify.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents result of the asynchronous operation, true if the token is valid,
+    /// The <see cref="Task"/> that represents result of the asynchronous operation, true if the token
+    // is valid,
     /// otherwise false.
     /// </returns>
     public virtual async Task<bool> VerifyTwoFactorTokenAsync(
@@ -1859,7 +1935,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user the token is for.</param>
     /// <param name="tokenProvider">The provider which will generate the token.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents result of the asynchronous operation, a two factor authentication token
+    /// The <see cref="Task"/> that represents result of the asynchronous operation, a two factor
+    // authentication token
     /// for the user.
     /// </returns>
     public virtual Task<string> GenerateTwoFactorTokenAsync(TUser user, string tokenProvider)
@@ -1877,12 +1954,15 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Returns a flag indicating whether the specified <paramref name="user"/> has two factor authentication enabled or not,
+    /// Returns a flag indicating whether the specified <paramref name="user"/> has two factor
+    // authentication enabled or not,
     /// as an asynchronous operation.
     /// </summary>
-    /// <param name="user">The user whose two factor authentication enabled status should be retrieved.</param>
+    /// <param name="user">The user whose two factor authentication enabled status should be
+    // retrieved.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, true if the specified <paramref name="user "/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, true if the specified
+    // <paramref name="user "/>
     /// has two factor authentication enabled, otherwise false.
     /// </returns>
     public virtual async Task<bool> GetTwoFactorEnabledAsync(TUser user)
@@ -1894,13 +1974,17 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Sets a flag indicating whether the specified <paramref name="user"/> has two factor authentication enabled or not,
+    /// Sets a flag indicating whether the specified <paramref name="user"/> has two factor
+    // authentication enabled or not,
     /// as an asynchronous operation.
     /// </summary>
-    /// <param name="user">The user whose two factor authentication enabled status should be set.</param>
-    /// <param name="enabled">A flag indicating whether the specified <paramref name="user"/> has two factor authentication enabled.</param>
+    /// <param name="user">The user whose two factor authentication enabled status should be
+    // set.</param>
+    /// <param name="enabled">A flag indicating whether the specified <paramref name="user"/> has two
+    // factor authentication enabled.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, the <see cref="IdentityResult"/> of the operation
+    /// The <see cref="Task"/> that represents the asynchronous operation, the <see
+    // cref="IdentityResult"/> of the operation
     /// </returns>
     public virtual async Task<IdentityResult> SetTwoFactorEnabledAsync(TUser user, bool enabled)
     {
@@ -1921,7 +2005,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user whose locked out status should be retrieved.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, true if the specified <paramref name="user "/>
+    /// The <see cref="Task"/> that represents the asynchronous operation, true if the specified
+    // <paramref name="user "/>
     /// is locked out, otherwise false.
     /// </returns>
     public virtual async Task<bool> IsLockedOutAsync(TUser user)
@@ -1946,7 +2031,8 @@ public class UserManager<TUser> : IDisposable
     /// <param name="user">The user whose locked out status should be set.</param>
     /// <param name="enabled">Flag indicating whether the user is locked out or not.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, the <see cref="IdentityResult"/> of the operation
+    /// The <see cref="Task"/> that represents the asynchronous operation, the <see
+    // cref="IdentityResult"/> of the operation
     /// </returns>
     public virtual async Task<IdentityResult> SetLockoutEnabledAsync(TUser user, bool enabled)
     {
@@ -1963,7 +2049,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user whose ability to be locked out should be returned.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, true if a user can be locked out, otherwise false.
+    /// The <see cref="Task"/> that represents the asynchronous operation, true if a user can be locked
+    // out, otherwise false.
     /// </returns>
     public virtual async Task<bool> GetLockoutEnabledAsync(TUser user)
     {
@@ -1979,7 +2066,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user whose lockout date should be retrieved.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the lookup, a <see cref="DateTimeOffset"/> containing the last time a user's lockout expired, if any.
+    /// A <see cref="Task{TResult}"/> that represents the lookup, a <see cref="DateTimeOffset"/>
+    // containing the last time a user's lockout expired, if any.
     /// </returns>
     public virtual async Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user)
     {
@@ -1990,11 +2078,14 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Locks out a user until the specified end date has passed. Setting a end date in the past immediately unlocks a user.
+    /// Locks out a user until the specified end date has passed. Setting a end date in the past
+    // immediately unlocks a user.
     /// </summary>
     /// <param name="user">The user whose lockout date should be set.</param>
-    /// <param name="lockoutEnd">The <see cref="DateTimeOffset"/> after which the <paramref name="user"/>'s lockout should end.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the operation.</returns>
+    /// <param name="lockoutEnd">The <see cref="DateTimeOffset"/> after which the <paramref
+    // name="user"/>'s lockout should end.</param>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the operation.</returns>
     public virtual async Task<IdentityResult> SetLockoutEndDateAsync(
         TUser user,
         DateTimeOffset? lockoutEnd
@@ -2020,18 +2111,21 @@ public class UserManager<TUser> : IDisposable
 
     /// <summary>
     /// Increments the access failed count for the user as an asynchronous operation.
-    /// If the failed access account is greater than or equal to the configured maximum number of attempts,
+    /// If the failed access account is greater than or equal to the configured maximum number of
+    // attempts,
     /// the user will be locked out for the configured lockout time span.
     /// </summary>
     /// <param name="user">The user whose failed access count to increment.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the operation.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the operation.</returns>
     public virtual async Task<IdentityResult> AccessFailedAsync(TUser user)
     {
         ThrowIfDisposed();
         var store = GetUserLockoutStore();
         ArgumentNullThrowHelper.ThrowIfNull(user);
 
-        // If this puts the user over the threshold for lockout, lock them out and reset the access failed count
+        // If this puts the user over the threshold for lockout, lock them out and reset the access failed
+        // count
         var count = await store
             .IncrementAccessFailedCountAsync(user, CancellationToken)
             .ConfigureAwait(false);
@@ -2055,7 +2149,8 @@ public class UserManager<TUser> : IDisposable
     /// Resets the access failed count for the specified <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user whose failed access count should be reset.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the operation.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the operation.</returns>
     public virtual async Task<IdentityResult> ResetAccessFailedCountAsync(TUser user)
     {
         ThrowIfDisposed();
@@ -2074,7 +2169,8 @@ public class UserManager<TUser> : IDisposable
     /// Retrieves the current number of failed accesses for the given <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user whose access failed count should be retrieved for.</param>
-    /// <returns>The <see cref="Task"/> that contains the result the asynchronous operation, the current failed access count
+    /// <returns>The <see cref="Task"/> that contains the result the asynchronous operation, the current
+    // failed access count
     /// for the user.</returns>
     public virtual async Task<int> GetAccessFailedCountAsync(TUser user)
     {
@@ -2089,7 +2185,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="claim">The claim to look for.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of <typeparamref name="TUser"/>s who
+    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of
+    // <typeparamref name="TUser"/>s who
     /// have the specified claim.
     /// </returns>
     public virtual Task<IList<TUser>> GetUsersForClaimAsync(Claim claim)
@@ -2101,11 +2198,13 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Returns a list of users from the user store who are members of the specified <paramref name="roleName"/>.
+    /// Returns a list of users from the user store who are members of the specified <paramref
+    // name="roleName"/>.
     /// </summary>
     /// <param name="roleName">The name of the role whose users should be returned.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of <typeparamref name="TUser"/>s who
+    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of
+    // <typeparamref name="TUser"/>s who
     /// are members of the specified role.
     /// </returns>
     public virtual Task<IList<TUser>> GetUsersInRoleAsync(string roleName)
@@ -2121,7 +2220,8 @@ public class UserManager<TUser> : IDisposable
     /// Returns an authentication token for a user.
     /// </summary>
     /// <param name="user"></param>
-    /// <param name="loginProvider">The authentication scheme for the provider the token is associated with.</param>
+    /// <param name="loginProvider">The authentication scheme for the provider the token is associated
+    // with.</param>
     /// <param name="tokenName">The name of the token.</param>
     /// <returns>The authentication token for a user</returns>
     public virtual Task<string?> GetAuthenticationTokenAsync(
@@ -2143,7 +2243,8 @@ public class UserManager<TUser> : IDisposable
     /// Sets an authentication token for a user.
     /// </summary>
     /// <param name="user"></param>
-    /// <param name="loginProvider">The authentication scheme for the provider the token is associated with.</param>
+    /// <param name="loginProvider">The authentication scheme for the provider the token is associated
+    // with.</param>
     /// <param name="tokenName">The name of the token.</param>
     /// <param name="tokenValue">The value of the token.</param>
     /// <returns>Whether the user was successfully updated.</returns>
@@ -2171,7 +2272,8 @@ public class UserManager<TUser> : IDisposable
     /// Remove an authentication token for a user.
     /// </summary>
     /// <param name="user"></param>
-    /// <param name="loginProvider">The authentication scheme for the provider the token is associated with.</param>
+    /// <param name="loginProvider">The authentication scheme for the provider the token is associated
+    // with.</param>
     /// <param name="tokenName">The name of the token.</param>
     /// <returns>Whether a token was removed.</returns>
     public virtual async Task<IdentityResult> RemoveAuthenticationTokenAsync(
@@ -2229,11 +2331,13 @@ public class UserManager<TUser> : IDisposable
     public virtual string GenerateNewAuthenticatorKey() => NewSecurityStamp();
 
     /// <summary>
-    /// Generates recovery codes for the user, this invalidates any previous recovery codes for the user.
+    /// Generates recovery codes for the user, this invalidates any previous recovery codes for the
+    // user.
     /// </summary>
     /// <param name="user">The user to generate recovery codes for.</param>
     /// <param name="number">The number of codes to generate.</param>
-    /// <returns>The new recovery codes for the user.  Note: there may be less than number returned, as duplicates will be removed.</returns>
+    /// <returns>The new recovery codes for the user.  Note: there may be less than number returned, as
+    // duplicates will be removed.</returns>
     public virtual async Task<IEnumerable<string>?> GenerateNewTwoFactorRecoveryCodesAsync(
         TUser user,
         int number
@@ -2381,9 +2485,11 @@ public class UserManager<TUser> : IDisposable
     }
 
     /// <summary>
-    /// Releases the unmanaged resources used by the role manager and optionally releases the managed resources.
+    /// Releases the unmanaged resources used by the role manager and optionally releases the managed
+    // resources.
     /// </summary>
-    /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    /// <param name="disposing">true to release both managed and unmanaged resources; false to release
+    // only unmanaged resources.</param>
     protected virtual void Dispose(bool disposing)
     {
         if (disposing && !_disposed)
@@ -2558,7 +2664,8 @@ public class UserManager<TUser> : IDisposable
     /// called before saving the user via Create or Update.
     /// </summary>
     /// <param name="user">The user</param>
-    /// <returns>A <see cref="IdentityResult"/> representing whether validation was successful.</returns>
+    /// <returns>A <see cref="IdentityResult"/> representing whether validation was
+    // successful.</returns>
     protected async Task<IdentityResult> ValidateUserAsync(TUser user)
     {
         if (SupportsUserSecurityStamp)
@@ -2600,7 +2707,8 @@ public class UserManager<TUser> : IDisposable
     /// </summary>
     /// <param name="user">The user.</param>
     /// <param name="password">The password.</param>
-    /// <returns>A <see cref="IdentityResult"/> representing whether validation was successful.</returns>
+    /// <returns>A <see cref="IdentityResult"/> representing whether validation was
+    // successful.</returns>
     protected async Task<IdentityResult> ValidatePasswordAsync(TUser user, string? password)
     {
         List<IdentityError>? errors = null;

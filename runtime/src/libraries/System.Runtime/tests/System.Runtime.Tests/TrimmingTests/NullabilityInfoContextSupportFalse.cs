@@ -7,7 +7,8 @@ using System;
 using System.Reflection;
 
 /// <summary>
-/// Ensures setting NullabilityInfoContextSupport = false causes NullabilityInfoContext.Create to throw
+/// Ensures setting NullabilityInfoContextSupport = false causes NullabilityInfoContext.Create to
+// throw
 /// </summary>
 class Program
 {

@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis
         public abstract LineVisibility GetLineVisibility(SourceText sourceText, int position);
 
         /// <summary>
-        /// Combines TranslateSpan and IsHiddenPosition to not search the entries twice when emitting sequence points
+        /// Combines TranslateSpan and IsHiddenPosition to not search the entries twice when emitting
+        // sequence points
         /// </summary>
         internal abstract FileLinePositionSpan TranslateSpanAndVisibility(
             SourceText sourceText,
@@ -245,7 +246,8 @@ namespace Microsoft.CodeAnalysis
                     // ...........\n|]
                     // #line Next "file2"
                     //
-                    // VB: Span starts at the beginning of the line following the #ExternalSource directive and ends at the start of the line preceding #End ExternalSource.
+                    // VB: Span starts at the beginning of the line following the #ExternalSource directive and ends at
+                    // the start of the line preceding #End ExternalSource.
                     // #ExternalSource("file", 1)
                     // [|....\n
                     // ...........\n|]

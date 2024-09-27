@@ -221,11 +221,11 @@ namespace MonoTests.System.Web
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        /* stack trace is:
-           at System.Web.VirtualPath.Create(String virtualPath, VirtualPathOptions options)
-           at System.Web.VirtualPathUtility.Combine(String basePath, String relativePath)
-           at MonoTests.System.Web.VirtualPathUtilityTest.Combine()
-        */
+/* stack trace is:
+at System.Web.VirtualPath.Create(String virtualPath, VirtualPathOptions options)
+at System.Web.VirtualPathUtility.Combine(String basePath, String relativePath)
+at MonoTests.System.Web.VirtualPathUtilityTest.Combine()
+*/
         public void Combine_ArgException4()
         {
             Assert.AreEqual("/you", VPU.Combine("", "you"), "A1");
@@ -233,11 +233,11 @@ namespace MonoTests.System.Web
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        /* stack trace is:
-           at System.Web.VirtualPath.Create(String virtualPath, VirtualPathOptions options)
-           at System.Web.VirtualPathUtility.Combine(String basePath, String relativePath)
-           at MonoTests.System.Web.VirtualPathUtilityTest.Combine()
-        */
+/* stack trace is:
+at System.Web.VirtualPath.Create(String virtualPath, VirtualPathOptions options)
+at System.Web.VirtualPathUtility.Combine(String basePath, String relativePath)
+at MonoTests.System.Web.VirtualPathUtilityTest.Combine()
+*/
         public void Combine_ArgException5()
         {
             Assert.AreEqual("/hi", VPU.Combine("/hi", ""), "A1");

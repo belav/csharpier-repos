@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Displays the extension method as a static method.
-        /// For example, Enumerable.ElementAt&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, int index).
+        /// For example, Enumerable.ElementAt&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, int
+        // index).
         /// </summary>
         StaticMethod = 2,
     }

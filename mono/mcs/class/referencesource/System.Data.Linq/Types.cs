@@ -298,7 +298,8 @@ namespace System.Data.Linq
             if (collection == null)
                 throw Error.ArgumentNull("collection");
             CheckModify();
-            // convert to List in case adding elements here removes them from the 'collection' (ie entityset to entityset assignment)
+            // convert to List in case adding elements here removes them from the 'collection' (ie entityset to
+            // entityset assignment)
             collection = collection.ToList();
             foreach (TEntity e in collection)
             {
@@ -563,7 +564,8 @@ namespace System.Data.Linq
             {
                 OnModified();
                 // If index == -1 here, that means that the entity was not in the list before Remove was called,
-                // so we shouldn't fire the event since the list itself will not be changed, even though the Remove will still be tracked
+                // so we shouldn't fire the event since the list itself will not be changed, even though the Remove
+                // will still be tracked
                 // on the removedEntities list in case a subsequent Load brings in this entity.
                 if (index != -1)
                 {

@@ -33,7 +33,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeMethodReturnStatement'/> using the specified expression.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeMethodReturnStatement'/> using
+        // the specified expression.
         ///    </para>
         /// </devdoc>
         public CodeMethodReturnStatement(CodeExpression expression)

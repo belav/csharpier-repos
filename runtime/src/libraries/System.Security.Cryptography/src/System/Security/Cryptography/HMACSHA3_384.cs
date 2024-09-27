@@ -28,13 +28,17 @@ namespace System.Security.Cryptography
         public const int HashSizeInBytes = HashSizeInBits / 8;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HMACSHA3_384" /> class with a randomly generated key.
+        /// Initializes a new instance of the <see cref="HMACSHA3_384" /> class with a randomly generated
+        // key.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// <see cref="HMACSHA3_384" /> is a type of keyed hash algorithm that is constructed from the SHA3-384 hash
-        /// function and used as a Hash-based Message Authentication Code (HMAC). The HMAC process mixes a secret key
-        /// with the message data, hashes the result with the hash function, mixes that hash value with the secret key
+        /// <see cref="HMACSHA3_384" /> is a type of keyed hash algorithm that is constructed from the
+        // SHA3-384 hash
+        /// function and used as a Hash-based Message Authentication Code (HMAC). The HMAC process mixes a
+        // secret key
+        /// with the message data, hashes the result with the hash function, mixes that hash value with the
+        // secret key
         /// again, and then applies the hash function a second time. The output hash is 384 bits in length.
         /// </para>
         /// <para>

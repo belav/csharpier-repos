@@ -224,8 +224,10 @@ namespace System
         //
         // Decimal <==> Currency conversion.
         //
-        // A Currency represents a positive or negative decimal value with 4 digits past the decimal point. The actual Int64 representation used by these methods
-        // is the currency value multiplied by 10,000. For example, a currency value of $12.99 would be represented by the Int64 value 129,900.
+        // A Currency represents a positive or negative decimal value with 4 digits past the decimal point.
+        // The actual Int64 representation used by these methods
+        // is the currency value multiplied by 10,000. For example, a currency value of $12.99 would be
+        // represented by the Int64 value 129,900.
         //
         public static decimal FromOACurrency(long cy)
         {
@@ -241,9 +243,12 @@ namespace System
                 absoluteCy = (ulong)cy;
             }
 
-            // In most cases, FromOACurrency() produces a Decimal with Scale set to 4. Unless, that is, some of the trailing digits past the decimal point are zero,
-            // in which case, for compatibility with .Net, we reduce the Scale by the number of zeros. While the result is still numerically equivalent, the scale does
-            // affect the ToString() value. In particular, it prevents a converted currency value of $12.95 from printing uglily as "12.9500".
+            // In most cases, FromOACurrency() produces a Decimal with Scale set to 4. Unless, that is, some of
+            // the trailing digits past the decimal point are zero,
+            // in which case, for compatibility with .Net, we reduce the Scale by the number of zeros. While the
+            // result is still numerically equivalent, the scale does
+            // affect the ToString() value. In particular, it prevents a converted currency value of $12.95 from
+            // printing uglily as "12.9500".
             int scale = 4;
             if (absoluteCy != 0) // For compatibility, a currency of 0 emits the Decimal "0.0000" (scale set to 4).
             {
@@ -1301,8 +1306,10 @@ namespace System
 
         internal int Scale => (byte)(flags >> ScaleShift);
 
-        // Mono note: Mono doesn't use the BIGENDIAN define, as both endians consume the same bootstrap tarball.
-        // As such, runtime checks should be used. Both Mono and CoreCLR will inline endianness checks as an intrinsic.
+        // Mono note: Mono doesn't use the BIGENDIAN define, as both endians consume the same bootstrap
+        // tarball.
+        // As such, runtime checks should be used. Both Mono and CoreCLR will inline endianness checks as an
+        // intrinsic.
         private ulong Low64 =>
             BitConverter.IsLittleEndian ? (ulong)ulomidLE : ((ulong)Mid << 32) | Low;
 
@@ -1319,12 +1326,14 @@ namespace System
         #endregion
 
         /// <summary>
-        /// Class that contains all the mathematical calculations for decimal. Most of which have been ported from oleaut32.
+        /// Class that contains all the mathematical calculations for decimal. Most of which have been
+        // ported from oleaut32.
         /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         private struct DecCalc
         {
-            // NOTE: Do not change the offsets of these fields. This structure must have the same layout as Decimal.
+            // NOTE: Do not change the offsets of these fields. This structure must have the same layout as
+            // Decimal.
             [FieldOffset(0)]
             private uint uflags;
 
@@ -1617,7 +1626,8 @@ namespace System
                     return true;
                 }
 #else
-                // 32-bit RyuJIT doesn't convert 64-bit division by constant into multiplication by reciprocal. Do half-width divisions instead.
+                // 32-bit RyuJIT doesn't convert 64-bit division by constant into multiplication by reciprocal. Do
+                // half-width divisions instead.
                 Debug.Assert(pow <= ushort.MaxValue);
                 uint num,
                     mid32,
@@ -1960,7 +1970,8 @@ namespace System
                         sticky |= remainder; // record remainder as sticky bit
 
                         uint power;
-                        // Scaling loop specialized for each power of 10 because division by constant is an order of magnitude faster (especially for 64-bit division that's actually done by 128bit DIV on x64)
+                        // Scaling loop specialized for each power of 10 because division by constant is an order of
+                        // magnitude faster (especially for 64-bit division that's actually done by 128bit DIV on x64)
                         switch (newScale)
                         {
                             case 1:
@@ -2122,7 +2133,8 @@ namespace System
                     ulong num = result[i] + ((ulong)remainder << 32);
                     remainder = (uint)num - (result[i] = (uint)(num / power)) * power;
 #else
-                    // 32-bit RyuJIT doesn't convert 64-bit division by constant into multiplication by reciprocal. Do half-width divisions instead.
+                    // 32-bit RyuJIT doesn't convert 64-bit division by constant into multiplication by reciprocal. Do
+                    // half-width divisions instead.
                     Debug.Assert(power <= ushort.MaxValue);
                     int low16 = BitConverter.IsLittleEndian ? 0 : 2,
                         high16 = BitConverter.IsLittleEndian ? 2 : 0;
@@ -2190,7 +2202,8 @@ namespace System
                 div = (uint)(tmp / 10);
                 bufQuo.U0 = div;
                 uint remainder = (uint)(tmp - div * 10);
-                // The remainder is the last digit that does not fit, so we can use it to work out if we need to round up
+                // The remainder is the last digit that does not fit, so we can use it to work out if we need to
+                // round up
                 if (remainder > 5 || remainder == 5 && (sticky || (bufQuo.U0 & 1) != 0))
                     Add32To96(ref bufQuo, 1);
                 return scale;
@@ -2720,7 +2733,8 @@ namespace System
                 {
                     scale >>= ScaleShift;
 
-                    // Scale factors are not equal. Assume that a larger scale factor (more decimal places) is likely to mean that number is smaller.
+                    // Scale factors are not equal. Assume that a larger scale factor (more decimal places) is likely to
+                    // mean that number is smaller.
                     // Start by guessing that the right operand has the larger scale factor.
                     if (scale < 0)
                     {
@@ -3325,7 +3339,8 @@ namespace System
             /// </summary>
             internal static double VarR8FromDec(in decimal value)
             {
-                // Value taken via reverse engineering the double that corresponds to 2^64. (oleaut32 has ds2to64 = DEFDS(0, 0, DBLBIAS + 65, 0))
+                // Value taken via reverse engineering the double that corresponds to 2^64. (oleaut32 has ds2to64 =
+                // DEFDS(0, 0, DBLBIAS + 65, 0))
                 const double ds2to64 = 1.8446744073709552e+019;
 
                 double dbl =
@@ -3687,7 +3702,8 @@ namespace System
                 if ((cmp ^ (int)(d1.uflags & SignMask)) < 0)
                     return;
 
-                // The divisor is smaller than the dividend and both are non-zero. Calculate the integer remainder using the larger scaling factor.
+                // The divisor is smaller than the dividend and both are non-zero. Calculate the integer remainder
+                // using the larger scaling factor.
 
                 int scale = (sbyte)(d1.uflags - d2.uflags >> ScaleShift);
                 if (scale > 0)
@@ -3953,7 +3969,8 @@ namespace System
                     goto done;
                 else if (mode == RoundingMode.ToEven)
                 {
-                    // To do IEEE rounding, we add LSB of result to sticky bits so either causes round up if remainder * 2 == last divisor.
+                    // To do IEEE rounding, we add LSB of result to sticky bits so either causes round up if remainder *
+                    // 2 == last divisor.
                     remainder <<= 1;
                     if ((sticky | d.ulo & 1) != 0)
                         remainder++;

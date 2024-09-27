@@ -3,8 +3,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 /*
- * Tests for the SIMD intrinsics in the System.Numerics.Vectors assembly.
- */
+* Tests for the SIMD intrinsics in the System.Numerics.Vectors assembly.
+*/
 public class VectorTests
 {
 #if !MOBILE
@@ -1118,18 +1118,18 @@ public class VectorTests
         return 0;
     }
 
-    /*
-    public static int test_0_vector_t_u4_equal () {
-        var elems1 = new uint [] { 1, 1, 1, 1 };
-        var v1 = new Vector<uint> (elems1);
-        var elems2 = new uint [] { 1, 2, 1, 2 };
-        var v2 = new Vector<uint> (elems2);
-        Vector<uint> v = Vector.Equals (v1, v2);
-        if (v [0] != 0xffffffff || v [1] != 0 || v [2] != 0xffffffff || v[3] != 0)
-            return 1;
-        return 0;
-    }
-    */
+/*
+public static int test_0_vector_t_u4_equal () {
+var elems1 = new uint [] { 1, 1, 1, 1 };
+var v1 = new Vector<uint> (elems1);
+var elems2 = new uint [] { 1, 2, 1, 2 };
+var v2 = new Vector<uint> (elems2);
+Vector<uint> v = Vector.Equals (v1, v2);
+if (v [0] != 0xffffffff || v [1] != 0 || v [2] != 0xffffffff || v[3] != 0)
+return 1;
+return 0;
+}
+*/
 
     public static int test_0_vector_t_i2_equal()
     {
@@ -1199,7 +1199,7 @@ public class VectorTests
         return 0;
     }
 
-    /* op_Explicit () -> Vector<int32> */
+/* op_Explicit () -> Vector<int32> */
 
     public static int test_0_vector_t_cast_vector_int32()
     {
@@ -1222,7 +1222,7 @@ public class VectorTests
         return 0;
     }
 
-    /* Vector.GreaterThanOrEqual */
+/* Vector.GreaterThanOrEqual */
 
     public static int test_0_vector_t_i1_ge()
     {
@@ -1282,7 +1282,7 @@ public class VectorTests
         return 0;
     }
 
-    /* Vector.LessThan */
+/* Vector.LessThan */
 
     public static int test_0_vector_t_i1_lt()
     {
@@ -1301,7 +1301,7 @@ public class VectorTests
         return 0;
     }
 
-    /* Vector.GreaterThan */
+/* Vector.GreaterThan */
 
     public static int test_0_vector_t_i1_gt()
     {
@@ -1320,7 +1320,7 @@ public class VectorTests
         return 0;
     }
 
-    /* Vector.LessThanOrEqual */
+/* Vector.LessThanOrEqual */
     public static int test_0_vector_t_i1_le()
     {
         var elems1 = new sbyte[] { 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2 };
@@ -1338,7 +1338,7 @@ public class VectorTests
         return 0;
     }
 
-    /* Vector.Abs */
+/* Vector.Abs */
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static Vector<T> vector_t_abs<T>(Vector<T> v1)

@@ -103,8 +103,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
             if (syntaxFacts.IsExpressionOfAwaitExpression(node))
                 return false;
 
-            // if we're on an actual type symbol itself (like literally `Task`) we don't want to offer to add await.
-            // we only want to add for actual expressions whose type is awaitable, not on the awaitable type itself.
+            // if we're on an actual type symbol itself (like literally `Task`) we don't want to offer to add
+            // await.
+            // we only want to add for actual expressions whose type is awaitable, not on the awaitable type
+            // itself.
             var symbol = model.GetSymbolInfo(node, cancellationToken).GetAnySymbol();
             if (symbol is ITypeSymbol)
                 return false;

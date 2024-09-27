@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 namespace System.Diagnostics
 {
     /// <summary>
-    /// ActivityCreationOptions is encapsulating all needed information which will be sent to the ActivityListener to decide about creating the Activity object and with what state.
+    /// ActivityCreationOptions is encapsulating all needed information which will be sent to the
+    // ActivityListener to decide about creating the Activity object and with what state.
     /// The possible generic type parameters is <see cref="ActivityContext"/> or <see cref="string"/>
     /// </summary>
     public readonly struct ActivityCreationOptions<T>
@@ -18,11 +19,15 @@ namespace System.Diagnostics
         /// <summary>
         /// Construct a new <see cref="ActivityCreationOptions{T}"/> object.
         /// </summary>
-        /// <param name="source">The trace Activity source<see cref="ActivitySource"/> used to request creating the Activity object.</param>
+        /// <param name="source">The trace Activity source<see cref="ActivitySource"/> used to request
+        // creating the Activity object.</param>
         /// <param name="name">The operation name of the Activity.</param>
-        /// <param name="parent">The requested parent to create the Activity object with. The parent either be a parent Id represented as string or it can be a parent context <see cref="ActivityContext"/>.</param>
+        /// <param name="parent">The requested parent to create the Activity object with. The parent either
+        // be a parent Id represented as string or it can be a parent context <see
+        // cref="ActivityContext"/>.</param>
         /// <param name="kind"><see cref="ActivityKind"/> to create the Activity object with.</param>
-        /// <param name="tags">Key-value pairs list for the tags to create the Activity object with.<see cref="ActivityContext"/></param>
+        /// <param name="tags">Key-value pairs list for the tags to create the Activity object with.<see
+        // cref="ActivityContext"/></param>
         /// <param name="links"><see cref="ActivityLink"/> list to create the Activity object with.</param>
         /// <param name="idFormat">The default Id format to use.</param>
         internal ActivityCreationOptions(
@@ -109,7 +114,8 @@ namespace System.Diagnostics
         public ActivityKind Kind { get; }
 
         /// <summary>
-        /// Retrieve the parent which requested to create the Activity object with. Parent will be either in form of string or <see cref="ActivityContext"/>.
+        /// Retrieve the parent which requested to create the Activity object with. Parent will be either in
+        // form of string or <see cref="ActivityContext"/>.
         /// </summary>
         public T Parent { get; }
 
@@ -119,7 +125,8 @@ namespace System.Diagnostics
         public IEnumerable<KeyValuePair<string, object?>>? Tags { get; }
 
         /// <summary>
-        /// Retrieve the list of <see cref="ActivityLink"/> which requested to create the Activity object with.
+        /// Retrieve the list of <see cref="ActivityLink"/> which requested to create the Activity object
+        // with.
         /// </summary>
         public IEnumerable<ActivityLink>? Links { get; }
 
@@ -129,7 +136,8 @@ namespace System.Diagnostics
             {
                 if (_samplerTags == null)
                 {
-                    // Because the struct is readonly, we cannot directly assign _samplerTags. We have to workaround it by calling Unsafe.AsRef
+                    // Because the struct is readonly, we cannot directly assign _samplerTags. We have to workaround it
+                    // by calling Unsafe.AsRef
                     Unsafe.AsRef(in _samplerTags) = new ActivityTagsCollection();
                 }
 
@@ -153,7 +161,8 @@ namespace System.Diagnostics
                             ? ActivityTraceId.CreateRandom()
                             : traceIdGenerator();
 
-                    // Because the struct is readonly, we cannot directly assign _context. We have to workaround it by calling Unsafe.AsRef
+                    // Because the struct is readonly, we cannot directly assign _context. We have to workaround it by
+                    // calling Unsafe.AsRef
                     Unsafe.AsRef(in _context) = new ActivityContext(
                         id,
                         default,

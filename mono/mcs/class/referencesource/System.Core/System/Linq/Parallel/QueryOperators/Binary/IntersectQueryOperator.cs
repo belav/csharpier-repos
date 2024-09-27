@@ -50,7 +50,8 @@ namespace System.Linq.Parallel
             bool preferStriping
         )
         {
-            // We just open our child operators, left and then right.  Do not propagate the preferStriping value, but
+            // We just open our child operators, left and then right.  Do not propagate the preferStriping
+            // value, but
             // instead explicitly set it to false. Regardless of whether the parent prefers striping or range
             // partitioning, the output will be hash-partititioned.
             QueryResults<TInputOutput> leftChildResults = LeftChild.Open(settings, false);
@@ -399,7 +400,8 @@ namespace System.Linq.Parallel
                             leftElement.First
                         );
 
-                        // If this is the first occurence of this element, or the order key is lower than all keys we saw previously,
+                        // If this is the first occurence of this element, or the order key is lower than all keys we saw
+                        // previously,
                         // update the order key for this element.
                         if (
                             !m_hashLookup.TryGetValue(wrappedLeftElem, out oldEntry)

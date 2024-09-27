@@ -221,8 +221,10 @@ namespace System.ServiceModel.Channels
         {
             if (!this.IsMulticast)
             {
-                //When using Multicast, we can't assume that receiving one message means that we are done receiving messages.
-                //For example, Discovery will send one message out and receive n responses that match.  Because of this, we
+                //When using Multicast, we can't assume that receiving one message means that we are done receiving
+                // messages.
+                //For example, Discovery will send one message out and receive n responses that match.  Because of
+                // this, we
                 //can only short circuit retransmission when using unicast.
                 this.UdpOutputChannel.CancelRetransmission(message.Headers.RelatesTo);
             }

@@ -8,41 +8,45 @@ using System.Linq.Expressions;
 namespace Moq
 {
     /// <summary>
-    ///   An <see cref="ExpressionCompiler"/> compiles LINQ expression trees (<see cref="Expression"/>) to delegates.
-    ///   Whenever Moq needs to compile an expression tree, it uses the instance set up by <see cref="ExpressionCompiler.Instance"/>.
+    ///   An <see cref="ExpressionCompiler"/> compiles LINQ expression trees (<see cref="Expression"/>)
+    // to delegates.
+    ///   Whenever Moq needs to compile an expression tree, it uses the instance set up by <see
+    // cref="ExpressionCompiler.Instance"/>.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public abstract class ExpressionCompiler
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-            private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
-    After:
-            static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
+After:
+static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-            private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
-    After:
-            static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
+After:
+static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-            private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
-    After:
-            static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
+After:
+static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
+*/
     {
         static ExpressionCompiler instance = DefaultExpressionCompiler.Instance;
 
         /// <summary>
-        ///   The default <see cref="ExpressionCompiler"/> instance, which simply delegates to the framework's <see cref="LambdaExpression.Compile"/>.
+        ///   The default <see cref="ExpressionCompiler"/> instance, which simply delegates to the
+        // framework's <see cref="LambdaExpression.Compile"/>.
         /// </summary>
         public static ExpressionCompiler Default => DefaultExpressionCompiler.Instance;
 
         /// <summary>
-        ///   Gets or sets the <see cref="ExpressionCompiler"/> instance that Moq uses to compile <see cref="Expression"/> (LINQ expression trees).
+        ///   Gets or sets the <see cref="ExpressionCompiler"/> instance that Moq uses to compile <see
+        // cref="Expression"/> (LINQ expression trees).
         ///   Defaults to <see cref="Default"/>.
         /// </summary>
         public static ExpressionCompiler Instance
@@ -65,7 +69,8 @@ namespace Moq
         /// <summary>
         ///   Compiles the specified LINQ expression tree.
         /// </summary>
-        /// <typeparam name="TDelegate">The type of delegate to which the expression will be compiled.</typeparam>
+        /// <typeparam name="TDelegate">The type of delegate to which the expression will be
+        // compiled.</typeparam>
         /// <param name="expression">The LINQ expression tree that should be compiled.</param>
         public abstract TDelegate Compile<TDelegate>(Expression<TDelegate> expression)
             where TDelegate : Delegate;

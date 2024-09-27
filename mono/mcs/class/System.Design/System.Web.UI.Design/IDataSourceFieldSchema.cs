@@ -34,7 +34,8 @@ using System;
 namespace System.Web.UI.Design
 {
     /// <summary>
-    /// Provides the features required to support both complex and simple scenarios when binding to a data source.
+    /// Provides the features required to support both complex and simple scenarios when binding to a
+    // data source.
     /// </summary>
     public interface IDataSourceFieldSchema
     {

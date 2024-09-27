@@ -35,7 +35,8 @@ namespace System.Collections.Immutable
                 ICollection
         {
             /// <summary>
-            /// The root of the binary tree that stores the collection.  Contents are typically not entirely frozen.
+            /// The root of the binary tree that stores the collection.  Contents are typically not entirely
+            // frozen.
             /// </summary>
             private ImmutableSortedSet<T>.Node _root = ImmutableSortedSet<T>.Node.EmptyNode;
 
@@ -136,11 +137,13 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            ///  Gets or sets the <see cref="IComparer{T}"/> object that is used to determine equality for the values in the <see cref="ImmutableSortedSet{T}"/>.
+            ///  Gets or sets the <see cref="IComparer{T}"/> object that is used to determine equality for the
+            // values in the <see cref="ImmutableSortedSet{T}"/>.
             /// </summary>
             /// <value>The comparer that is used to determine equality for the values in the set.</value>
             /// <remarks>
-            /// When changing the comparer in such a way as would introduce collisions, the conflicting elements are dropped,
+            /// When changing the comparer in such a way as would introduce collisions, the conflicting elements
+            // are dropped,
             /// leaving only one of each matching pair in the collection.
             /// </remarks>
             public IComparer<T> KeyComparer
@@ -204,7 +207,8 @@ namespace System.Collections.Immutable
             /// element was successfully added.
             /// </summary>
             /// <param name="item">The element to add to the set.</param>
-            /// <returns>true if the element is added to the set; false if the element is already in the set.</returns>
+            /// <returns>true if the element is added to the set; false if the element is already in the
+            // set.</returns>
             public bool Add(T item)
             {
                 bool mutated;
@@ -227,7 +231,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Modifies the current set so that it contains only elements that are also in a specified collection.
+            /// Modifies the current set so that it contains only elements that are also in a specified
+            // collection.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
             public void IntersectWith(IEnumerable<T> other)
@@ -291,7 +296,8 @@ namespace System.Collections.Immutable
             /// Determines whether the current set overlaps with the specified collection.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
-            /// <returns>true if the current set and other share at least one common element; otherwise, false.</returns>
+            /// <returns>true if the current set and other share at least one common element; otherwise,
+            // false.</returns>
             public bool Overlaps(IEnumerable<T> other)
             {
                 return this.ToImmutable().Overlaps(other);
@@ -308,7 +314,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Modifies the current set so that it contains only elements that are present either in the current set or in the specified collection, but not both.
+            /// Modifies the current set so that it contains only elements that are present either in the
+            // current set or in the specified collection, but not both.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
             public void SymmetricExceptWith(IEnumerable<T> other)
@@ -317,7 +324,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Modifies the current set so that it contains all elements that are present in both the current set and in the specified collection.
+            /// Modifies the current set so that it contains all elements that are present in both the current
+            // set and in the specified collection.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
             public void UnionWith(IEnumerable<T> other)
@@ -370,7 +378,8 @@ namespace System.Collections.Immutable
             ///  Removes the first occurrence of a specific object from the set.
             /// </summary>
             /// <param name="item">The object to remove from the set.</param>
-            /// <returns><c>true</c> if the item was removed from the set; <c>false</c> if the item was not found in the set.</returns>
+            /// <returns><c>true</c> if the item was removed from the set; <c>false</c> if the item was not
+            // found in the set.</returns>
             public bool Remove(T item)
             {
                 bool mutated;
@@ -459,7 +468,8 @@ namespace System.Collections.Immutable
             /// Searches the set for a given value and returns the equal value it finds, if any.
             /// </summary>
             /// <param name="equalValue">The value for which to search.</param>
-            /// <param name="actualValue">The value from the set that the search found, or the original value if the search yielded no match.</param>
+            /// <param name="actualValue">The value from the set that the search found, or the original value if
+            // the search yielded no match.</param>
             /// <returns>A value indicating whether the search was successful.</returns>
             public bool TryGetValue(T equalValue, out T actualValue)
             {
@@ -477,19 +487,25 @@ namespace System.Collections.Immutable
             #region ICollection members
 
             /// <summary>
-            /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+            /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a
+            // particular <see cref="Array"/> index.
             /// </summary>
-            /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based indexing.</param>
-            /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the
+            // elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based
+            // indexing.</param>
+            /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying
+            // begins.</param>
             void ICollection.CopyTo(Array array, int arrayIndex)
             {
                 this.Root.CopyTo(array, arrayIndex);
             }
 
             /// <summary>
-            /// Gets a value indicating whether access to the <see cref="ICollection"/> is synchronized (thread safe).
+            /// Gets a value indicating whether access to the <see cref="ICollection"/> is synchronized (thread
+            // safe).
             /// </summary>
-            /// <returns>true if access to the <see cref="ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
+            /// <returns>true if access to the <see cref="ICollection"/> is synchronized (thread safe);
+            // otherwise, false.</returns>
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             bool ICollection.IsSynchronized
             {
@@ -499,7 +515,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Gets an object that can be used to synchronize access to the <see cref="ICollection"/>.
             /// </summary>
-            /// <returns>An object that can be used to synchronize access to the <see cref="ICollection"/>.</returns>
+            /// <returns>An object that can be used to synchronize access to the <see
+            // cref="ICollection"/>.</returns>
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             object ICollection.SyncRoot
             {

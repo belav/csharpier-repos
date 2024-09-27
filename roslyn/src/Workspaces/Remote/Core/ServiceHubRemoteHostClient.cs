@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Remote
             IRemoteServiceCallbackDispatcherProvider callbackDispatcherProvider
         )
         {
-            // use the hub client logger for unexpected exceptions from devenv as well, so we have complete information in the log:
+            // use the hub client logger for unexpected exceptions from devenv as well, so we have complete
+            // information in the log:
             services
                 .GetService<IWorkspaceTelemetryService>()
                 ?.RegisterUnexpectedExceptionLogger(hubClient.Logger);

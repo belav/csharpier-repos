@@ -36,7 +36,8 @@ public class ValidatorItem
     public IModelValidator? Validator { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether or not <see cref="Validator"/> can be reused across requests.
+    /// Gets or sets a value indicating whether or not <see cref="Validator"/> can be reused across
+    // requests.
     /// </summary>
     public bool IsReusable { get; set; }
 }

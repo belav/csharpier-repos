@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Microsoft Public License. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Microsoft Public License, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Microsoft Public License.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Microsoft Public License. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Microsoft Public License, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Microsoft Public License.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 using System;
 using Microsoft;
 #if !SILVERLIGHT // ComObject
@@ -29,16 +29,22 @@ namespace Microsoft.Scripting
 {
 #endif
     /// <summary>
-    /// If a managed user type (as opposed to a primitive type or a COM object) is passed as an argument to a COM call, we need
+    /// If a managed user type (as opposed to a primitive type or a COM object) is passed as an argument
+    // to a COM call, we need
     /// to determine the VarEnum type we will marshal it as. We have the following options:
-    /// 1.	Raise an exception. Languages with their own version of primitive types would not be able to call
-    ///     COM methods using the language's types (for eg. strings in IronRuby are not System.String). An explicit
+    /// 1.	Raise an exception. Languages with their own version of primitive types would not be able to
+    // call
+    ///     COM methods using the language's types (for eg. strings in IronRuby are not System.String).
+    // An explicit
     ///     cast would be needed.
-    /// 2.	We could marshal it as VT_DISPATCH. Then COM code will be able to access all the APIs in a late-bound manner,
+    /// 2.	We could marshal it as VT_DISPATCH. Then COM code will be able to access all the APIs in a
+    // late-bound manner,
     ///     but old COM components will probably malfunction if they expect a primitive type.
-    /// 3.	We could guess which primitive type is the closest match. This will make COM components be as easily
+    /// 3.	We could guess which primitive type is the closest match. This will make COM components be as
+    // easily
     ///     accessible as .NET methods.
-    /// 4.	We could use the type library to check what the expected type is. However, the type library may not be available.
+    /// 4.	We could use the type library to check what the expected type is. However, the type library
+    // may not be available.
     ///
     /// VarEnumSelector implements option # 3
     /// </summary>
@@ -173,7 +179,8 @@ namespace Microsoft.Scripting
         }
 
         /// <summary>
-        /// Get the (one representative type for each) primitive type families that the argument can be converted to
+        /// Get the (one representative type for each) primitive type families that the argument can be
+        // converted to
         /// </summary>
         private static List<VarEnum> GetConversionsToComPrimitiveTypeFamilies(Type argumentType)
         {

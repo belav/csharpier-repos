@@ -145,7 +145,8 @@ public class WebSocketsTransportTests : FunctionalTestBase
 
             await webSocketsTransport.Output.WriteAsync(Encoding.UTF8.GetBytes("User-Agent"));
 
-            // The HTTP header endpoint closes the connection immediately after sending response which should stop the transport
+            // The HTTP header endpoint closes the connection immediately after sending response which should
+            // stop the transport
             await webSocketsTransport.Running.DefaultTimeout();
 
             Assert.True(webSocketsTransport.Input.TryRead(out var result));
@@ -186,7 +187,8 @@ public class WebSocketsTransportTests : FunctionalTestBase
                 Encoding.UTF8.GetBytes(HeaderNames.XRequestedWith)
             );
 
-            // The HTTP header endpoint closes the connection immediately after sending response which should stop the transport
+            // The HTTP header endpoint closes the connection immediately after sending response which should
+            // stop the transport
             await webSocketsTransport.Running.DefaultTimeout();
 
             Assert.True(webSocketsTransport.Input.TryRead(out var result));
@@ -241,7 +243,8 @@ public class WebSocketsTransportTests : FunctionalTestBase
 
             await webSocketsTransport.Output.WriteAsync(new byte[] { 0x42 });
 
-            // The echoAndClose endpoint closes the connection immediately after sending response which should stop the transport
+            // The echoAndClose endpoint closes the connection immediately after sending response which should
+            // stop the transport
             await webSocketsTransport.Running.DefaultTimeout();
 
             Assert.True(webSocketsTransport.Input.TryRead(out var result));

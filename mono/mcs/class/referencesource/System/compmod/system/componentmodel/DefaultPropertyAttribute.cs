@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -47,7 +47,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Specifies the default value for the <see cref='System.ComponentModel.DefaultPropertyAttribute'/>, which is <see langword='null'/>. This
+        ///       Specifies the default value for the <see
+        // cref='System.ComponentModel.DefaultPropertyAttribute'/>, which is <see langword='null'/>. This
         ///    <see langword='static '/>field is read-only.
         ///    </para>
         /// </devdoc>

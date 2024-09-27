@@ -85,7 +85,7 @@ namespace MonoTests.System.IO
         {
             StringReader reader = new StringReader("Test String");
 
-            /* Read from start of string */
+/* Read from start of string */
             char[] test = new char[5];
 
             int charsRead = reader.Read(test, 0, 5);
@@ -93,7 +93,7 @@ namespace MonoTests.System.IO
             Assert.AreEqual(5, charsRead);
             Assert.AreEqual("Test ", new String(test));
 
-            /* Read to end of string */
+/* Read to end of string */
             //reader = new StringReader( "Test String" );
 
             test = new char[6];
@@ -101,7 +101,7 @@ namespace MonoTests.System.IO
             Assert.AreEqual(6, charsRead);
             Assert.AreEqual("String", new String(test));
 
-            /* Read past end of string */
+/* Read past end of string */
 
             test = new char[6];
             reader = new StringReader("Foo");
@@ -109,7 +109,7 @@ namespace MonoTests.System.IO
             Assert.AreEqual(3, charsRead);
             Assert.AreEqual("Foo\0\0\0", new String(test));
 
-            /* Check that a new invocation on the empty reader will return 0 */
+/* Check that a new invocation on the empty reader will return 0 */
             charsRead = reader.Read(test, 0, 6);
             Assert.AreEqual(0, charsRead);
         }

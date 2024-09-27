@@ -237,18 +237,18 @@ namespace System.ServiceModel.Channels
             endPoint.ListenUriMode =
                 (this.config.Port > 0) ? ListenUriMode.Explicit : ListenUriMode.Unique;
 
-            /*
-                Uncomment this to allow the retrieval of metadata
-                using the command:
-                    \binaries.x86chk\svcutil http://localhost /t:metadata
+/*
+Uncomment this to allow the retrieval of metadata
+using the command:
+\binaries.x86chk\svcutil http://localhost /t:metadata
 
-                        ServiceMetadataBehavior mex = new ServiceMetadataBehavior();
-                        mex.HttpGetEnabled = true;
-                        mex.HttpGetUrl = new Uri("http://localhost");
-                        mex.HttpsGetEnabled = true;
-                        mex.HttpsGetUrl = new Uri("https://localhost");
-                        this.serviceHost.Description.Behaviors.Add(mex);
-            */
+ServiceMetadataBehavior mex = new ServiceMetadataBehavior();
+mex.HttpGetEnabled = true;
+mex.HttpGetUrl = new Uri("http://localhost");
+mex.HttpsGetEnabled = true;
+mex.HttpsGetUrl = new Uri("https://localhost");
+this.serviceHost.Description.Behaviors.Add(mex);
+*/
             this.config.SecurityManager.ApplyServiceSecurity(this.serviceHost.Description);
             this.serviceHost.Open(timeout);
 

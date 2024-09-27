@@ -14,8 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///         and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
+///         and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries
+// work</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public interface IAsyncQueryProvider : IQueryProvider

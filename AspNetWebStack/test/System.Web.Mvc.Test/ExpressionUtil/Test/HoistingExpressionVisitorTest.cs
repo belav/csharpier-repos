@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -21,8 +22,12 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             );
 
             // Assert
-            // new expression should be (s, capturedConstants) => (int)(capturedConstants[0]) * s.Length + (int)(capturedConstants[1])
-            // with fingerprint [ LAMBDA:Hoisted<string, int>, OP_ADD:int, OP_MULTIPLY:int, OP_CAST:int, INDEX(List<object>.get_Item):object, PARAM(0):List<object>, CONST:int, MEMBER(String.Length):int, PARAM(1):string, OP_CAST:int, INDEX(List<object>.get_Item):object, PARAM(0):List<object>, CONST:int, PARAM(1):string, PARAM(0):List<object> ]
+            // new expression should be (s, capturedConstants) => (int)(capturedConstants[0]) * s.Length +
+            // (int)(capturedConstants[1])
+            // with fingerprint [ LAMBDA:Hoisted<string, int>, OP_ADD:int, OP_MULTIPLY:int, OP_CAST:int,
+            // INDEX(List<object>.get_Item):object, PARAM(0):List<object>, CONST:int, MEMBER(String.Length):int,
+            // PARAM(1):string, OP_CAST:int, INDEX(List<object>.get_Item):object, PARAM(0):List<object>, CONST:int,
+            // PARAM(1):string, PARAM(0):List<object> ]
 
             List<object> capturedConstants;
             ExpressionFingerprintChain fingerprint =

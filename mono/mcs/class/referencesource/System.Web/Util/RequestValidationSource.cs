@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Describes the collection passed into a request validator
- *
- * Copyright (c) 2009 Microsoft Corporation
- */
+* Describes the collection passed into a request validator
+*
+* Copyright (c) 2009 Microsoft Corporation
+*/
 
 namespace System.Web.Util
 {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Diagnostics;
 using Microsoft.CodeAnalysis;
@@ -7,7 +8,8 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace ILLink.RoslynAnalyzer
 {
-    // Copied from https://github.com/dotnet/roslyn/blob/9c6d864baca08d7572871701ab583cec18279426/src/Compilers/Core/Portable/Operations/OperationExtensions.cs
+    // Copied from
+    // https://github.com/dotnet/roslyn/blob/9c6d864baca08d7572871701ab583cec18279426/src/Compilers/Core/Portable/Operations/OperationExtensions.cs
     internal static partial class IOperationExtensions
     {
         /// <summary>
@@ -19,25 +21,25 @@ namespace ILLink.RoslynAnalyzer
             ISymbol containingSymbol
         )
         {
-            /*
-            |    code                  | Read | Write | ReadableRef | WritableRef | NonReadWriteRef |
-            | x.Prop = 1               |      |  ✔️   |             |             |                 |
-            | x.Prop += 1              |  ✔️  |  ✔️   |             |             |                 |
-            | x.Prop++                 |  ✔️  |  ✔️   |             |             |                 |
-            | Foo(x.Prop)              |  ✔️  |       |             |             |                 |
-            | Foo(x.Prop),             |      |       |     ✔️      |             |                 |
-               where void Foo(in T v)
-            | Foo(out x.Prop)          |      |       |             |     ✔️      |                 |
-            | Foo(ref x.Prop)          |      |       |     ✔️      |     ✔️      |                 |
-            | nameof(x)                |      |       |             |             |       ✔️        | ️
-            | sizeof(x)                |      |       |             |             |       ✔️        | ️
-            | typeof(x)                |      |       |             |             |       ✔️        | ️
-            | out var x                |      |  ✔️   |             |             |                 | ️
-            | case X x:                |      |  ✔️   |             |             |                 | ️
-            | obj is X x               |      |  ✔️   |             |             |                 |
-            | ref var x =              |      |       |     ✔️      |     ✔️      |                 |
-            | ref readonly var x =     |      |       |     ✔️      |             |                 |
-            */
+/*
+|    code                  | Read | Write | ReadableRef | WritableRef | NonReadWriteRef |
+| x.Prop = 1               |      |  ✔️   |             |             |                 |
+| x.Prop += 1              |  ✔️  |  ✔️   |             |             |                 |
+| x.Prop++                 |  ✔️  |  ✔️   |             |             |                 |
+| Foo(x.Prop)              |  ✔️  |       |             |             |                 |
+| Foo(x.Prop),             |      |       |     ✔️      |             |                 |
+where void Foo(in T v)
+| Foo(out x.Prop)          |      |       |             |     ✔️      |                 |
+| Foo(ref x.Prop)          |      |       |     ✔️      |     ✔️      |                 |
+| nameof(x)                |      |       |             |             |       ✔️        | ️
+| sizeof(x)                |      |       |             |             |       ✔️        | ️
+| typeof(x)                |      |       |             |             |       ✔️        | ️
+| out var x                |      |  ✔️   |             |             |                 | ️
+| case X x:                |      |  ✔️   |             |             |                 | ️
+| obj is X x               |      |  ✔️   |             |             |                 |
+| ref var x =              |      |       |     ✔️      |     ✔️      |                 |
+| ref readonly var x =     |      |       |     ✔️      |             |                 |
+*/
             if (
                 operation is ILocalReferenceOperation localReference
                 && localReference.IsDeclaration
@@ -130,7 +132,8 @@ namespace ILLink.RoslynAnalyzer
             }
             else if (operation.Parent is IParenthesizedOperation parenthesizedOperation)
             {
-                // Note: IParenthesizedOperation is specific to VB, where the parens cause a copy, so this cannot be classified as a write.
+                // Note: IParenthesizedOperation is specific to VB, where the parens cause a copy, so this cannot be
+                // classified as a write.
                 Debug.Assert(parenthesizedOperation.Language == LanguageNames.VisualBasic);
 
                 return parenthesizedOperation.GetValueUsageInfo(containingSymbol)
@@ -305,7 +308,8 @@ namespace ILLink.RoslynAnalyzer
         }
 
         /// <summary>
-        /// Finds the symbol of the caller to the current operation, helps to find out the symbol in cases where the operation passes
+        /// Finds the symbol of the caller to the current operation, helps to find out the symbol in cases
+        // where the operation passes
         /// through a lambda or a local function.
         /// </summary>
         /// <param name="operation">The operation to find the symbol for.</param>

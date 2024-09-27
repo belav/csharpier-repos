@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Transactions support for ASP.NET pages
- *
- * Copyright (c) 2000, Microsoft Corporation
- */
+* Transactions support for ASP.NET pages
+*
+* Copyright (c) 2000, Microsoft Corporation
+*/
 namespace System.Web.Util
 {
     using System.Collections;
@@ -142,17 +142,17 @@ namespace System.Web.Util
 
             /*
             internal static String TransactionId {
-                get {
-                    String id = null;
-    
-                    try {
-                        id = ContextUtil.TransactionId.ToString();
-                    }
-                    catch {
-                    }
-    
-                    return id;
-                }
+            get {
+            String id = null;
+            
+            try {
+            id = ContextUtil.TransactionId.ToString();
+            }
+            catch {
+            }
+            
+            return id;
+            }
             }
             */
 

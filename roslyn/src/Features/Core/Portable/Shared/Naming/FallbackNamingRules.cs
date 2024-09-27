@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
                 new NamingStyle(Guid.NewGuid(), capitalizationScheme: Capitalization.CamelCase),
                 enforcementLevel: ReportDiagnostic.Hidden
             ),
-            // Include an entry for _ prefixed fields (.Net style).  That way features that are looking to see if
+            // Include an entry for _ prefixed fields (.Net style).  That way features that are looking to see
+            // if
             // there's a potential matching field for a particular name will find these as well.
             new NamingRule(
                 new SymbolSpecification(
@@ -57,15 +58,18 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
         );
 
         /// <summary>
-        /// Standard name rules for name suggestion/completion utilities. These are fallback rules that run if a user
+        /// Standard name rules for name suggestion/completion utilities. These are fallback rules that run
+        // if a user
         /// hasn't provided any other naming rule matching the scenario.
         /// </summary>
         internal static readonly ImmutableArray<NamingRule> CompletionFallbackRules =
             ImmutableArray.Create(CreateCamelCaseFieldsAndParametersRule());
 
         /// <summary>
-        /// Standard name rules for name suggestion/completion utilities. These are supplementary rules that run in
-        /// addition to any other rules defined by the user in order to provide additional valid suggestions.
+        /// Standard name rules for name suggestion/completion utilities. These are supplementary rules that
+        // run in
+        /// addition to any other rules defined by the user in order to provide additional valid
+        // suggestions.
         /// </summary>
         internal static readonly ImmutableArray<NamingRule> CompletionSupplementaryRules =
             ImmutableArray.Create(

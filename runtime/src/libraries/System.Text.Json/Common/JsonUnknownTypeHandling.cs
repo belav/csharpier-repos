@@ -4,7 +4,8 @@
 namespace System.Text.Json.Serialization
 {
     /// <summary>
-    /// Defines how deserializing a type declared as an <see cref="object"/> is handled during deserialization.
+    /// Defines how deserializing a type declared as an <see cref="object"/> is handled during
+    // deserialization.
     /// </summary>
     public enum JsonUnknownTypeHandling
     {

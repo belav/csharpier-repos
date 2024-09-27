@@ -10,10 +10,13 @@ public class WebViewManagerE2ETests
 {
     // Skips:
     // - Ubuntu is skipped due to this error:
-    //       "Unable to load shared library 'Photino.Native' or one of its dependencies. In order to help diagnose
+    //       "Unable to load shared library 'Photino.Native' or one of its dependencies. In order to
+    // help diagnose
     //       loading problems, consider using a tool like strace."
-    //   There's probably some way to make it work, but it's not currently a supported Blazor Hybrid scenario anyway
-    // - macOS is skipped due to the test not being able to detect when the WebView is ready. There's probably an issue
+    //   There's probably some way to make it work, but it's not currently a supported Blazor Hybrid
+    // scenario anyway
+    // - macOS is skipped due to the test not being able to detect when the WebView is ready. There's
+    // probably an issue
     //   with the JS code sending a WebMessage to C# and not being sent properly or detected properly.
     [ConditionalFact]
     [OSSkipCondition(
@@ -47,7 +50,8 @@ public class WebViewManagerE2ETests
 
         await photinoProcess.WaitForExitAsync().TimeoutAfter(TimeSpan.FromSeconds(30));
 
-        // The test app reports its own results by calling Console.WriteLine(), so here we only need to verify that
+        // The test app reports its own results by calling Console.WriteLine(), so here we only need to
+        // verify that
         // the test internally believes it passed (and we trust it!).
         Assert.Contains($"Test passed? {true}", testProgramOutput);
     }

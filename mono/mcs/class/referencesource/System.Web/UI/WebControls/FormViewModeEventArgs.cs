@@ -18,7 +18,8 @@ namespace System.Web.UI.WebControls
         private bool _cancelingEdit;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of <see cref='System.Web.UI.WebControls.FormViewModeEventArgs'/> class.</para>
+        /// <para>Initializes a new instance of <see
+        // cref='System.Web.UI.WebControls.FormViewModeEventArgs'/> class.</para>
         /// </devdoc>
         public FormViewModeEventArgs(FormViewMode mode, bool cancelingEdit)
             : base(false)
@@ -28,7 +29,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a bool in the <see cref='System.Web.UI.WebControls.FormView'/> indicating whether the mode change is the result of a cancel command.
+        /// <para>Gets a bool in the <see cref='System.Web.UI.WebControls.FormView'/> indicating whether the
+        // mode change is the result of a cancel command.
         ///  This property is read-only.</para>
         /// </devdoc>
         public bool CancelingEdit
@@ -37,7 +39,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a FormViewMode in the <see cref='System.Web.UI.WebControls.FormView'/>. This property is read-only.</para>
+        /// <para>Gets a FormViewMode in the <see cref='System.Web.UI.WebControls.FormView'/>. This property
+        // is read-only.</para>
         /// </devdoc>
         public FormViewMode NewMode
         {

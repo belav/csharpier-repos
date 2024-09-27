@@ -64,7 +64,8 @@ internal sealed class ApiBehaviorApplicationModelProvider : IApplicationModelPro
     }
 
     /// <remarks>
-    /// Order is set to execute after the <see cref="DefaultApplicationModelProvider"/> and allow any other user
+    /// Order is set to execute after the <see cref="DefaultApplicationModelProvider"/> and allow any
+    // other user
     /// <see cref="IApplicationModelProvider"/> that configure routing to execute.
     /// </remarks>
     public int Order => -1000 + 100;

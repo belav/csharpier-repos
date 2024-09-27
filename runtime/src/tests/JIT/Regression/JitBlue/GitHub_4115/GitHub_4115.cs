@@ -1,8 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// This test could fail in GCStress=0xC case, if the object movement happens at the right place and time.
-// If the GC guarantees object movement at every collection, the case will fail in that GC stress mode always.
+// This test could fail in GCStress=0xC case, if the object movement happens at the right place and
+// time.
+// If the GC guarantees object movement at every collection, the case will fail in that GC stress
+// mode always.
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;

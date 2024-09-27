@@ -6,7 +6,8 @@ using Microsoft.Extensions.Localization;
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
 /// <summary>
-/// An <see cref="IHtmlLocalizerFactory"/> that creates instances of <see cref="HtmlLocalizer"/> using the
+/// An <see cref="IHtmlLocalizerFactory"/> that creates instances of <see cref="HtmlLocalizer"/>
+// using the
 /// registered <see cref="IStringLocalizerFactory"/>.
 /// </summary>
 public class HtmlLocalizerFactory : IHtmlLocalizerFactory

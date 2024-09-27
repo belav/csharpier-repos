@@ -549,7 +549,8 @@ namespace System.Collections.Tests
             Assert.Equal("", dictBase[f]);
         }
 
-        // DictionaryBase is provided to be used as the base class for strongly typed collections. Lets use one of our own here
+        // DictionaryBase is provided to be used as the base class for strongly typed collections. Lets use
+        // one of our own here
         private class MyDictionary : DictionaryBase
         {
             public void Add(FooKey key, FooValue value) => Dictionary.Add(key, value);
@@ -655,7 +656,8 @@ namespace System.Collections.Tests
             }
         }
 
-        // DictionaryBase is provided to be used as the base class for strongly typed collections. Lets use one of our own here
+        // DictionaryBase is provided to be used as the base class for strongly typed collections. Lets use
+        // one of our own here
         private class OnMethodCalledDictionary : DictionaryBase
         {
             public bool OnValidateCalled;

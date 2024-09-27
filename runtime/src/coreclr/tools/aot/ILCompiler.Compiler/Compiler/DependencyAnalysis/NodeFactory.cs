@@ -89,7 +89,8 @@ namespace ILCompiler.DependencyAnalysis
         /// <summary>
         /// Return true if the type is not permitted by the rules of the runtime to have an MethodTable.
         /// The implementation here is not intended to be complete, but represents many conditions
-        /// which make a type ineligible to be an MethodTable. (This function is intended for use in assertions only)
+        /// which make a type ineligible to be an MethodTable. (This function is intended for use in
+        // assertions only)
         /// </summary>
         private static bool TypeCannotHaveEEType(TypeDesc type)
         {

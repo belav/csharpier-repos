@@ -16,7 +16,8 @@ public class CustomEncoderTagHelper : TagHelper
         var encoder = new CustomEncoder();
         var customContent = await output.GetChildContentAsync(encoder);
 
-        // Note this is very unsafe. Should always post-process content that may not be fully HTML encoded before
+        // Note this is very unsafe. Should always post-process content that may not be fully HTML encoded
+        // before
         // writing it into a response. Here for example, could pass SetContent() a string and that would be
         // HTML encoded later.
         output

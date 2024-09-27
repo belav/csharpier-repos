@@ -8,9 +8,11 @@ using global::System.Reflection;
 
 namespace Internal.Reflection.Execution
 {
-    //=========================================================================================================================
+    
+    // //=========================================================================================================================
     // The setup information for the reflection domain used for "classic reflection".
-    //=========================================================================================================================
+    
+    // //=========================================================================================================================
     internal sealed class ReflectionDomainSetupImplementation : ReflectionDomainSetup
     {
         public ReflectionDomainSetupImplementation() { }

@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>
-/// Builds conventions that will be used for customization of ComponentHub <see cref="EndpointBuilder"/> instances.
+/// Builds conventions that will be used for customization of ComponentHub <see
+// cref="EndpointBuilder"/> instances.
 /// </summary>
 public sealed class ComponentEndpointConventionBuilder : IHubEndpointConventionBuilder
 {
@@ -27,7 +28,8 @@ public sealed class ComponentEndpointConventionBuilder : IHubEndpointConventionB
     }
 
     /// <summary>
-    /// Adds the specified convention to the builder. Conventions are used to customize <see cref="EndpointBuilder"/> instances.
+    /// Adds the specified convention to the builder. Conventions are used to customize <see
+    // cref="EndpointBuilder"/> instances.
     /// </summary>
     /// <param name="convention">The convention to add to the builder.</param>
     public void Add(Action<EndpointBuilder> convention)

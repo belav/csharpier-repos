@@ -51,7 +51,11 @@ namespace Microsoft.Interop
     }
 
     /// <summary>
-    /// Provides an implementation of <see cref="IMarshallingGenerator.SupportsByValueMarshalKind(ByValueContentsMarshalKind, TypePositionInfo, StubCodeContext, out GeneratorDiagnostic?)"/> through <see cref="GetSupport(ByValueContentsMarshalKind, TypePositionInfo, StubCodeContext, out GeneratorDiagnostic?)"/>
+    /// Provides an implementation of <see
+    // cref="IMarshallingGenerator.SupportsByValueMarshalKind(ByValueContentsMarshalKind, TypePositionInfo,
+    // StubCodeContext, out GeneratorDiagnostic?)"/> through <see
+    // cref="GetSupport(ByValueContentsMarshalKind, TypePositionInfo, StubCodeContext, out
+    // GeneratorDiagnostic?)"/>
     /// </summary>
     public record ByValueMarshalKindSupportDescriptor(
         ByValueMarshalKindSupportInfo DefaultSupport,
@@ -61,7 +65,8 @@ namespace Microsoft.Interop
     )
     {
         /// <summary>
-        /// A default <see cref="ByValueMarshalKindSupportDescriptor"/> for by value parameters. [In] is allowed, but unnecessary. Out is not allowed.
+        /// A default <see cref="ByValueMarshalKindSupportDescriptor"/> for by value parameters. [In] is
+        // allowed, but unnecessary. Out is not allowed.
         /// </summary>
         public static readonly ByValueMarshalKindSupportDescriptor Default =
             new ByValueMarshalKindSupportDescriptor(
@@ -81,7 +86,8 @@ namespace Microsoft.Interop
             );
 
         /// <summary>
-        /// A default <see cref="ByValueMarshalKindSupportDescriptor"/> for by value array parameters. Default is allowed, but Not Recommended. [In], [Out], and [In, Out] are allowed
+        /// A default <see cref="ByValueMarshalKindSupportDescriptor"/> for by value array parameters.
+        // Default is allowed, but Not Recommended. [In], [Out], and [In, Out] are allowed
         /// </summary>
         public static readonly ByValueMarshalKindSupportDescriptor ArrayParameter =
             new ByValueMarshalKindSupportDescriptor(
@@ -95,7 +101,8 @@ namespace Microsoft.Interop
             );
 
         /// <summary>
-        /// Returns the support for the ByValueContentsMarshalKind, and if it is not <see cref="ByValueMarshalKindSupport.Supported"/>, diagnostic is not null
+        /// Returns the support for the ByValueContentsMarshalKind, and if it is not <see
+        // cref="ByValueMarshalKindSupport.Supported"/>, diagnostic is not null
         /// </summary>
         public ByValueMarshalKindSupport GetSupport(
             ByValueContentsMarshalKind marshalKind,

@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(_objectType, _base2Class.BaseType());
             Assert.False(_base2Class.ContainsDynamic());
 
-            // public class Derived<T> : Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic> where T : Derived<T> { ... }
+            // public class Derived<T> : Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[],
+            // dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic> where T : Derived<T> { ... }
             Assert.False(_derivedClass.ContainsDynamic());
             Assert.True(_derivedClass.BaseType().ContainsDynamic());
 
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var memberComplicatedInner = outerClassOfDynamic
                 .GetTypeMember("Inner")
                 .Construct(arrayOfInnerInnerOfInt, s_dynamicType);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>
             var memberInnerInnerOfDynamic = memberComplicatedInner
                 .GetTypeMember("InnerInner")
                 .Construct(s_dynamicType);
@@ -249,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 .Construct(derivedTypeParam);
             Assert.Equal(complicatedInnerInner, field11.Type);
 
-            //public Outer<T>.Inner<T, T>.InnerInner<Outer<dynamic>.Inner<T, dynamic>.InnerInner<int>> field12 = null;
+            //public Outer<T>.Inner<T, T>.InnerInner<Outer<dynamic>.Inner<T, dynamic>.InnerInner<int>> field12 =
+            // null;
             var field12 = _derivedClass.GetMember<FieldSymbol>("field12");
             // Outer<T>.Inner<T, T>
             var innerOfTTWithOuterOfT = outerOfT
@@ -303,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             );
             Assert.Equal(complicatedInnerInnerArray, field15.Type);
 
-            //public Outer<dynamic>.Inner<Outer<dynamic>.Inner<T, dynamic.InnerInner<int>, dynamic[]>.InnerInner<dynamic>[][] field16 = null;
+            //public Outer<dynamic>.Inner<Outer<dynamic>.Inner<T, dynamic.InnerInner<int>,
+            // dynamic[]>.InnerInner<dynamic>[][] field16 = null;
             var field16 = _derivedClass.GetMember<FieldSymbol>("field16");
             // Outer<dynamic>.Inner<T, dynamic>.InnerInner<int>
             complicatedInnerInner = innerOfTDynamicWithOuterOfDynamic
@@ -313,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             complicatedInner = outerClassOfDynamic
                 .GetTypeMember("Inner")
                 .Construct(complicatedInnerInner, arrayOfDynamic);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T, dynamic>.InnerInner<int>, dynamic[]>.InnerInner<dynamic>
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T, dynamic>.InnerInner<int>,
+            // dynamic[]>.InnerInner<dynamic>
             complicatedInnerInner = complicatedInner
                 .GetTypeMember("InnerInner")
                 .Construct(s_dynamicType);
@@ -329,7 +334,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             );
             Assert.Equal(complicatedInnerInnerArrayOfArray, field16.Type);
 
-            //public static Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>[][] field17 = null;
+            //public static Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>[][] field17 = null;
             var field17 = _derivedClass.GetMember<FieldSymbol>("field17");
             // T[]
             var arrayOfDerivedTypeParam = ArrayTypeSymbol.CreateCSharpArray(
@@ -355,11 +361,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             complicatedInner = outerClassOfDynamic
                 .GetTypeMember("Inner")
                 .Construct(complicatedInnerInnerArray, s_dynamicType);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>
             complicatedInnerInner = complicatedInner
                 .GetTypeMember("InnerInner")
                 .Construct(s_dynamicType);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>[][]
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>[][]
             complicatedInnerInnerArray = ArrayTypeSymbol.CreateCSharpArray(
                 _assembly,
                 TypeWithAnnotations.Create(complicatedInnerInner),
@@ -428,11 +436,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             complicatedInner = outerClassOfDynamic
                 .GetTypeMember("Inner")
                 .Construct(complicatedInnerInnerArray, s_dynamicType);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>
             complicatedInnerInner = complicatedInner
                 .GetTypeMember("InnerInner")
                 .Construct(s_dynamicType);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>[][]
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>[][]
             complicatedInnerInnerArray = ArrayTypeSymbol.CreateCSharpArray(
                 _assembly,
                 TypeWithAnnotations.Create(complicatedInnerInner)
@@ -442,7 +452,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 TypeWithAnnotations.Create(complicatedInnerInnerArray)
             );
 
-            //public static Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>[][] F4(Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>[][] x) { return x; }
+            //public static Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>[][] F4(Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[],
+            // dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>[][] x) { return x; }
             var f4 = _derivedClass.GetMember<MethodSymbol>("F4");
             Assert.Equal(complicatedInnerInnerArrayOfArray, f4.ReturnType);
             Assert.Equal(complicatedInnerInnerArrayOfArray, f4.GetParameterType(0));
@@ -453,7 +465,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(s_dynamicType, prop1.Type);
             Assert.Equal(s_dynamicType, prop1.GetMethod.ReturnType);
 
-            //public static Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[], dynamic>.InnerInner<dynamic>[][] Prop2 { get { return field17; } set { field17 = value; } }
+            //public static Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+            // dynamic>.InnerInner<dynamic>[][] Prop2 { get { return field17; } set { field17 = value; } }
             var prop2 = _derivedClass.GetMember<PropertySymbol>("Prop2");
             Assert.Equal(complicatedInnerInnerArrayOfArray, prop2.Type);
             Assert.Equal(complicatedInnerInnerArrayOfArray, prop2.GetMethod.ReturnType);
@@ -466,7 +479,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         {
             CommonTestInitialization();
 
-            // public unsafe class UnsafeClass<T> : Base2<int*[], Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[], dynamic>.InnerInner<dynamic>[][]> { }
+            // public unsafe class UnsafeClass<T> : Base2<int*[], Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[],
+            // dynamic>.InnerInner<int*[][]>[], dynamic>.InnerInner<dynamic>[][]> { }
             var unsafeClass = _assembly
                 .Modules[0]
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("UnsafeClass");
@@ -513,11 +527,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             complicatedInner = outerClassOfDynamic
                 .GetTypeMember("Inner")
                 .Construct(complicatedInnerInnerArray, s_dynamicType);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[], dynamic>.InnerInner<dynamic>
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[],
+            // dynamic>.InnerInner<dynamic>
             complicatedInnerInner = complicatedInner
                 .GetTypeMember("InnerInner")
                 .Construct(s_dynamicType);
-            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[], dynamic>.InnerInner<dynamic>[][]
+            // Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[],
+            // dynamic>.InnerInner<dynamic>[][]
             complicatedInnerInnerArray = ArrayTypeSymbol.CreateCSharpArray(
                 _assembly,
                 TypeWithAnnotations.Create(complicatedInnerInner),
@@ -528,7 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 TypeWithAnnotations.Create(complicatedInnerInnerArray),
                 1
             );
-            // Base2<int*[], Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[], dynamic>.InnerInner<dynamic>[][]>
+            // Base2<int*[], Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[],
+            // dynamic>.InnerInner<dynamic>[][]>
             var baseType = _base2Class.Construct(
                 arrayOfPointerToInt,
                 complicatedInnerInnerArrayOfArray
@@ -592,7 +609,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var f0 = classB.GetMember<FieldSymbol>("F0");
             Assert.True(f0.Type.ContainsDynamic());
 
-            // .field public static class A`1<object> modopt([mscorlib]System.Runtime.CompilerServices.IsConst) F0
+            // .field public static class A`1<object> modopt([mscorlib]System.Runtime.CompilerServices.IsConst)
+            // F0
             var constructedA = classA.Construct(s_dynamicType);
             Assert.Equal(constructedA, f0.Type);
 

@@ -111,7 +111,8 @@ namespace System.Net.Test.Common
                 Debug.Assert(header.Name != null);
                 Debug.Assert(header.Value != null);
 
-                // Two varints for length, and double the name/value lengths to account for expanding Huffman coding.
+                // Two varints for length, and double the name/value lengths to account for expanding Huffman
+                // coding.
                 bufferLength +=
                     QPackTestEncoder.MaxVarIntLength * 2
                     + header.Name.Length * 2

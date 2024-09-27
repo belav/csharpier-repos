@@ -251,10 +251,10 @@ namespace Novell.Directory.Ldap.Events.Edir
         EVT_DB_SYNC_DETAIL = 209,
         EVT_DB_CONN_TRACE = 210,
 
-        /*
-        EVT_CHANGE_CONFIG_PARM = 211,
-        EVT_COMPUTE_CONN_SEV_INLINE = 212,
-        */
+/*
+EVT_CHANGE_CONFIG_PARM = 211,
+EVT_COMPUTE_CONN_SEV_INLINE = 212,
+*/
         EVT_BEGIN_NAMEBASE_TRANSACTION = 213,
         EVT_DB_DIRXML = 214,
         EVT_VR_DRIVER_STATE_CHANGE = 215,
@@ -317,7 +317,7 @@ namespace Novell.Directory.Ldap.Events.Edir
 
     public class EventOids
     {
-        /* Oid for requests */
+/* Oid for requests */
         public const string NLDAP_MONITOR_EVENTS_REQUEST = "2.16.840.1.113719.1.27.100.79";
 
         public const string NLDAP_MONITOR_EVENTS_RESPONSE = "2.16.840.1.113719.1.27.100.80";

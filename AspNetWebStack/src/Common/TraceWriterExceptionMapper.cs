@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -106,7 +107,8 @@ namespace System.Web.Http.Tracing
         /// a <see cref="HttpResponseException"/>; otherwise <see langword="null"/>.
         /// </summary>
         /// <param name="exception">The exception.</param>
-        /// <returns>The corresponding trace level if the exception represents an <see cref="HttpResponseException"/>.</returns>
+        /// <returns>The corresponding trace level if the exception represents an <see
+        // cref="HttpResponseException"/>.</returns>
         [SuppressMessage(
             "Microsoft.Performance",
             "CA1811:AvoidUncalledPrivateCode",
@@ -126,7 +128,8 @@ namespace System.Web.Http.Tracing
         /// <summary>
         /// Gets the <see cref="TraceLevel"/> per the <see cref="HttpStatusCode"/>.
         /// </summary>
-        /// <param name="httpResponseException">The exception for which the trace level has to be found.</param>
+        /// <param name="httpResponseException">The exception for which the trace level has to be
+        // found.</param>
         /// <returns>The mapped trace level.</returns>
         public static TraceLevel? GetMappedTraceLevel(HttpResponseException httpResponseException)
         {
@@ -188,7 +191,8 @@ namespace System.Web.Http.Tracing
         /// This helper also iterates over all inner exceptions and unpacks them too.
         /// </remarks>
         /// <param name="httpError">The <see cref="HttpError"/> to unpack.</param>
-        /// <param name="messages">A collection of messages to which the new information should be added.</param>
+        /// <param name="messages">A collection of messages to which the new information should be
+        // added.</param>
         private static void AddExceptions(HttpError httpError, List<string> messages)
         {
             Contract.Assert(httpError != null);

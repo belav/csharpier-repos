@@ -44,8 +44,10 @@ public class DefaultFilesMiddleware
     }
 
     /// <summary>
-    /// This examines the request to see if it matches a configured directory, and if there are any files with the
-    /// configured default names in that directory.  If so this will append the corresponding file name to the request
+    /// This examines the request to see if it matches a configured directory, and if there are any
+    // files with the
+    /// configured default names in that directory.  If so this will append the corresponding file name
+    // to the request
     /// path for a later middleware to handle.
     /// </summary>
     /// <param name="context"></param>

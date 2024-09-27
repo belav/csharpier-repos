@@ -130,7 +130,8 @@ namespace DebuggerTests
                 {
                     nextNotifications.Enqueue((what, args));
                     return;
-                    //throw new Exception($"Invalid internal state. Notifying for {what} again, but the previous one hasn't been read.");
+                    //throw new Exception($"Invalid internal state. Notifying for {what} again, but the previous one
+                    // hasn't been read.");
                 }
                 Client.CurrentSessionId = new SessionId(args["sessionId"]?.Value<string>());
                 notifications[what].SetResult(args);

@@ -150,7 +150,8 @@ namespace System.Web.Services.Protocols
             bool isDevelopmentServer = Context != null && !Context.IsCustomErrorEnabled;
             if (isDevelopmentServer && !htmlEscapeMessage)
             {
-                //If the user has specified it's a development server (versus a production server) in ASP.NET config,
+                //If the user has specified it's a development server (versus a production server) in ASP.NET
+                // config,
                 //then we should just return e.ToString instead of extracting the list of messages.
                 return e.ToString();
             }
@@ -314,7 +315,8 @@ namespace System.Web.Services.Protocols
             this.AddToCache(protocolType, serverType, value, false);
         }
 
-        // See comment on the ServerProtocol.IsCacheUnderPressure method for explanation of the excludeSchemeHostPort logic.
+        // See comment on the ServerProtocol.IsCacheUnderPressure method for explanation of the
+        // excludeSchemeHostPort logic.
         internal void AddToCache(
             Type protocolType,
             Type serverType,
@@ -347,23 +349,36 @@ namespace System.Web.Services.Protocols
             );
         }
 
-        // IsCacheUnderPressure is part of a DOS mitigation mechanism addressing CSDMain#195148. Original problem: when a large number of
-        // HTTP requests for WSDL or the ASMX documentation page is made, each request with a unique value of the HOST header, a unique response
-        // is generated and cached for each of the requests (responses contain the scheme/host/port of the request).
+        // IsCacheUnderPressure is part of a DOS mitigation mechanism addressing CSDMain#195148. Original
+        // problem: when a large number of
+        // HTTP requests for WSDL or the ASMX documentation page is made, each request with a unique value
+        // of the HOST header, a unique response
+        // is generated and cached for each of the requests (responses contain the scheme/host/port of the
+        // request).
         // This leads to ever growing memory consumption and eventual crash of the process.
         // The mitigation for this DOS attack uses the following mechanism:
-        // 1. The behavior of the system remains unchanged for the first 10 requests for WSDL of a given ASMX service that have differing
-        //    scheme/host/port combination of the request URI. This is to avoid breaking behavioral changes in the 99.99% case,
-        //    since the DOS attack cannot be generically fixed without breaking behavioral changes. The value of 10 is baked in,
-        //    and we consider it a reasonable default based on the assumption that ASMX services in most circumstances cannot be
+        // 1. The behavior of the system remains unchanged for the first 10 requests for WSDL of a given
+        // ASMX service that have differing
+        //    scheme/host/port combination of the request URI. This is to avoid breaking behavioral changes
+        // in the 99.99% case,
+        //    since the DOS attack cannot be generically fixed without breaking behavioral changes. The
+        // value of 10 is baked in,
+        //    and we consider it a reasonable default based on the assumption that ASMX services in most
+        // circumstances cannot be
         //    reached using more than 10 different values of the scheme/host/port.
-        // 2. For any requests for WSDL going beyond the 10 limit of scheme/host/port combination, we go into a �DOS mitigation mode�.
-        //    The mode prevents the eventual process crash while introducing marginal breaking behavioral changes:
-        //    a. We create a single service description and cache it using the AbsolutePath of the request URI alone
+        // 2. For any requests for WSDL going beyond the 10 limit of scheme/host/port combination, we go
+        // into a �DOS mitigation mode�.
+        //    The mode prevents the eventual process crash while introducing marginal breaking behavioral
+        // changes:
+        //    a. We create a single service description and cache it using the AbsolutePath of the request
+        // URI alone
         //       (as opposed to scheme/host/port + AbsolutePath).
-        //    b. For every request for WSDL/disco/documentation document, we fix up the URLs in the returned document to match the
-        //       scheme/host/port of the actual request for WSDL/disco. This fixup only applies to the WSDL extensions we have shipped in .NET
-        //       and does not apply to custom extensions implemented externally, hence the breaking behavioral change.
+        //    b. For every request for WSDL/disco/documentation document, we fix up the URLs in the returned
+        // document to match the
+        //       scheme/host/port of the actual request for WSDL/disco. This fixup only applies to the WSDL
+        // extensions we have shipped in .NET
+        //       and does not apply to custom extensions implemented externally, hence the breaking
+        // behavioral change.
         // This mechamism affects the DiscoveryServerProtocol and DocumentationServerProtocol.
         internal bool IsCacheUnderPressure(Type protocolType, Type serverType)
         {
@@ -374,7 +389,8 @@ namespace System.Web.Services.Protocols
             ServerProtocolCachePressure item = (ServerProtocolCachePressure)
                 HttpRuntime.Cache.Get(key);
 
-            // There is a potential race condition in creating a new entry or increasing the value of an existing entry,
+            // There is a potential race condition in creating a new entry or increasing the value of an
+            // existing entry,
             // but it is acceptable since DOS threshold enforcement need not be exact.
 
             if (item != null)

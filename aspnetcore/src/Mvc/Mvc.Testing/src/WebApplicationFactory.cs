@@ -34,24 +34,34 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
 
     /// <summary>
     /// <para>
-    /// Creates an instance of <see cref="WebApplicationFactory{TEntryPoint}"/>. This factory can be used to
-    /// create a <see cref="TestServer"/> instance using the MVC application defined by <typeparamref name="TEntryPoint"/>
-    /// and one or more <see cref="HttpClient"/> instances used to send <see cref="HttpRequestMessage"/> to the <see cref="TestServer"/>.
-    /// The <see cref="WebApplicationFactory{TEntryPoint}"/> will find the entry point class of <typeparamref name="TEntryPoint"/>
-    /// assembly and initialize the application by calling <c>IWebHostBuilder CreateWebHostBuilder(string [] args)</c>
+    /// Creates an instance of <see cref="WebApplicationFactory{TEntryPoint}"/>. This factory can be
+    // used to
+    /// create a <see cref="TestServer"/> instance using the MVC application defined by <typeparamref
+    // name="TEntryPoint"/>
+    /// and one or more <see cref="HttpClient"/> instances used to send <see cref="HttpRequestMessage"/>
+    // to the <see cref="TestServer"/>.
+    /// The <see cref="WebApplicationFactory{TEntryPoint}"/> will find the entry point class of
+    // <typeparamref name="TEntryPoint"/>
+    /// assembly and initialize the application by calling <c>IWebHostBuilder
+    // CreateWebHostBuilder(string [] args)</c>
     /// on <typeparamref name="TEntryPoint"/>.
     /// </para>
     /// <para>
     /// This constructor will infer the application content root path by searching for a
-    /// <see cref="WebApplicationFactoryContentRootAttribute"/> on the assembly containing the functional tests with
+    /// <see cref="WebApplicationFactoryContentRootAttribute"/> on the assembly containing the
+    // functional tests with
     /// a key equal to the <typeparamref name="TEntryPoint"/> assembly <see cref="Assembly.FullName"/>.
-    /// In case an attribute with the right key can't be found, <see cref="WebApplicationFactory{TEntryPoint}"/>
-    /// will fall back to searching for a solution file (*.sln) and then appending <typeparamref name="TEntryPoint"/> assembly name
-    /// to the solution directory. The application root directory will be used to discover views and content files.
+    /// In case an attribute with the right key can't be found, <see
+    // cref="WebApplicationFactory{TEntryPoint}"/>
+    /// will fall back to searching for a solution file (*.sln) and then appending <typeparamref
+    // name="TEntryPoint"/> assembly name
+    /// to the solution directory. The application root directory will be used to discover views and
+    // content files.
     /// </para>
     /// <para>
     /// The application assemblies will be loaded from the dependency context of the assembly containing
-    /// <typeparamref name="TEntryPoint" />. This means that project dependencies of the assembly containing
+    /// <typeparamref name="TEntryPoint" />. This means that project dependencies of the assembly
+    // containing
     /// <typeparamref name="TEntryPoint" /> will be loaded as application assemblies.
     /// </para>
     /// </summary>
@@ -69,7 +79,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
-    /// Gets the <see cref="TestServer"/> created by this <see cref="WebApplicationFactory{TEntryPoint}"/>.
+    /// Gets the <see cref="TestServer"/> created by this <see
+    // cref="WebApplicationFactory{TEntryPoint}"/>.
     /// </summary>
     public TestServer Server
     {
@@ -81,7 +92,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
-    /// Gets the <see cref="IServiceProvider"/> created by the server associated with this <see cref="WebApplicationFactory{TEntryPoint}"/>.
+    /// Gets the <see cref="IServiceProvider"/> created by the server associated with this <see
+    // cref="WebApplicationFactory{TEntryPoint}"/>.
     /// </summary>
     public virtual IServiceProvider Services
     {
@@ -93,7 +105,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
-    /// Gets the <see cref="IReadOnlyList{WebApplicationFactory}"/> of factories created from this factory
+    /// Gets the <see cref="IReadOnlyList{WebApplicationFactory}"/> of factories created from this
+    // factory
     /// by further customizing the <see cref="IWebHostBuilder"/> when calling
     /// <see cref="WebApplicationFactory{TEntryPoint}.WithWebHostBuilder(Action{IWebHostBuilder})"/>.
     /// </summary>
@@ -107,7 +120,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
         new WebApplicationFactoryClientOptions();
 
     /// <summary>
-    /// Creates a new <see cref="WebApplicationFactory{TEntryPoint}"/> with a <see cref="IWebHostBuilder"/>
+    /// Creates a new <see cref="WebApplicationFactory{TEntryPoint}"/> with a <see
+    // cref="IWebHostBuilder"/>
     /// that is further customized by <paramref name="configuration"/>.
     /// </summary>
     /// <param name="configuration">
@@ -179,7 +193,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
                     }
                 );
             });
-            // This helper call does the hard work to determine if we can fallback to diagnostic source events to get the host instance
+            // This helper call does the hard work to determine if we can fallback to diagnostic source events
+            // to get the host instance
             var factory = HostFactoryResolver.ResolveHostFactory(
                 typeof(TEntryPoint).Assembly,
                 stopApplication: false,
@@ -189,8 +204,10 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
 
             if (factory is not null)
             {
-                // If we have a valid factory it means the specified entry point's assembly can potentially resolve the IHost
-                // so we set the factory on the DeferredHostBuilder so we can invoke it on the call to IHostBuilder.Build.
+                // If we have a valid factory it means the specified entry point's assembly can potentially resolve
+                // the IHost
+                // so we set the factory on the DeferredHostBuilder so we can invoke it on the call to
+                // IHostBuilder.Build.
                 deferredHostBuilder.SetHostFactory(factory);
 
                 ConfigureHostBuilder(deferredHostBuilder);
@@ -419,8 +436,10 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     /// Creates a <see cref="IHostBuilder"/> used to set up <see cref="TestServer"/>.
     /// </summary>
     /// <remarks>
-    /// The default implementation of this method looks for a <c>public static IHostBuilder CreateHostBuilder(string[] args)</c>
-    /// method defined on the entry point of the assembly of <typeparamref name="TEntryPoint" /> and invokes it passing an empty string
+    /// The default implementation of this method looks for a <c>public static IHostBuilder
+    // CreateHostBuilder(string[] args)</c>
+    /// method defined on the entry point of the assembly of <typeparamref name="TEntryPoint" /> and
+    // invokes it passing an empty string
     /// array as arguments.
     /// </remarks>
     /// <returns>A <see cref="IHostBuilder"/> instance.</returns>
@@ -438,8 +457,10 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     /// Creates a <see cref="IWebHostBuilder"/> used to set up <see cref="TestServer"/>.
     /// </summary>
     /// <remarks>
-    /// The default implementation of this method looks for a <c>public static IWebHostBuilder CreateWebHostBuilder(string[] args)</c>
-    /// method defined on the entry point of the assembly of <typeparamref name="TEntryPoint" /> and invokes it passing an empty string
+    /// The default implementation of this method looks for a <c>public static IWebHostBuilder
+    // CreateWebHostBuilder(string[] args)</c>
+    /// method defined on the entry point of the assembly of <typeparamref name="TEntryPoint" /> and
+    // invokes it passing an empty string
     /// array as arguments.
     /// </remarks>
     /// <returns>A <see cref="IWebHostBuilder"/> instance.</returns>
@@ -458,7 +479,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
-    /// Creates the <see cref="TestServer"/> with the bootstrapped application in <paramref name="builder"/>.
+    /// Creates the <see cref="TestServer"/> with the bootstrapped application in <paramref
+    // name="builder"/>.
     /// This is only called for applications using <see cref="IWebHostBuilder"/>. Applications based on
     /// <see cref="IHostBuilder"/> will use <see cref="CreateHost"/> instead.
     /// </summary>
@@ -504,7 +526,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
 
     /// <summary>
     /// Creates a new instance of an <see cref="HttpClient"/> that can be used to
-    /// send <see cref="HttpRequestMessage"/> to the server. The base address of the <see cref="HttpClient"/>
+    /// send <see cref="HttpRequestMessage"/> to the server. The base address of the <see
+    // cref="HttpClient"/>
     /// instance will be set to <c>http://localhost</c>.
     /// </summary>
     /// <param name="handlers">A list of <see cref="DelegatingHandler"/> instances to set up on the
@@ -540,7 +563,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
-    /// Configures <see cref="HttpClient"/> instances created by this <see cref="WebApplicationFactory{TEntryPoint}"/>.
+    /// Configures <see cref="HttpClient"/> instances created by this <see
+    // cref="WebApplicationFactory{TEntryPoint}"/>.
     /// </summary>
     /// <param name="client">The <see cref="HttpClient"/> instance getting configured.</param>
     protected virtual void ConfigureClient(HttpClient client)
@@ -574,7 +598,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+    // resources.
     /// </summary>
     /// <param name="disposing">
     /// <see langword="true" /> to release both managed and unmanaged resources;

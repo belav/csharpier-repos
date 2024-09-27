@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * AltSerialization.cs
- *
- * Copyright (c) 1998-2000, Microsoft Corporation
- *
- */
+* AltSerialization.cs
+*
+* Copyright (c) 1998-2000, Microsoft Corporation
+*
+*/
 
 namespace System.Web.Util
 {

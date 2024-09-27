@@ -60,7 +60,8 @@ namespace System.ServiceModel.Syndication
         public Rss20ItemFormatter(SyndicationItem itemToWrite, bool serializeExtensionsAsAtom)
             : base(itemToWrite)
         {
-            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base class
+            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base
+            // class
             this.feedSerializer = new Rss20FeedFormatter();
             this.feedSerializer.PreserveAttributeExtensions = this.preserveAttributeExtensions =
                 true;

@@ -1,8 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Provides an abstraction over platform specific calling conventions (specifically, the calling convention
-// utilized by the JIT on that platform). The caller enumerates each argument of a signature in turn, and is
+// Provides an abstraction over platform specific calling conventions (specifically, the calling
+// convention
+// utilized by the JIT on that platform). The caller enumerates each argument of a signature in
+// turn, and is
 // provided with information mapping that argument into registers and/or stack locations.
 
 using System;
@@ -52,7 +54,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public const int MaxArgSize = 0xFFFFFF;
 
-        // Unix AMD64 ABI: Special offset value to represent  struct passed in registers. Such a struct can span both
+        // Unix AMD64 ABI: Special offset value to represent  struct passed in registers. Such a struct can
+        // span both
         // general purpose and floating point registers, so it can have two different offsets.
         public const int StructInRegsOffset = -2;
 
@@ -96,7 +99,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public abstract int OffsetOfArgumentRegisters { get; }
 
         /// <summary>
-        /// The offset of the first slot in a GC ref map. Overridden on ARM64 to return the offset of the X8 register.
+        /// The offset of the first slot in a GC ref map. Overridden on ARM64 to return the offset of the X8
+        // register.
         /// </summary>
         public virtual int OffsetOfFirstGCRefMapSlot => OffsetOfArgumentRegisters;
 
@@ -116,7 +120,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public virtual bool IsRetBuffPassedAsFirstArg => true;
 
         /// <summary>
-        /// Default implementation of ThisOffset; X86TransitionBlock provides a slightly different implementation.
+        /// Default implementation of ThisOffset; X86TransitionBlock provides a slightly different
+        // implementation.
         /// </summary>
         public virtual int ThisOffset
         {
@@ -124,7 +129,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
 
         /// <summary>
-        /// Recalculate pos in GC ref map to actual offset. This is the default implementation for all architectures
+        /// Recalculate pos in GC ref map to actual offset. This is the default implementation for all
+        // architectures
         /// except for X86 where it's overridden to supply a more complex algorithm.
         /// </summary>
         public virtual int OffsetFromGCRefMapPos(int pos)
@@ -133,7 +139,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
 
         /// <summary>
-        /// The transition block should define everything pushed by callee. The code assumes in number of places that
+        /// The transition block should define everything pushed by callee. The code assumes in number of
+        // places that
         /// end of the transition block is caller's stack pointer.
         /// </summary>
         public int OffsetOfArgs => SizeOfTransitionBlock;
@@ -285,7 +292,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             Debug.Assert(IsX64);
             //        LIMITED_METHOD_CONTRACT;
 
-            // If the size is bigger than ENREGISTERED_PARAM_TYPE_MAXSIZE, or if the size is NOT a power of 2, then
+            // If the size is bigger than ENREGISTERED_PARAM_TYPE_MAXSIZE, or if the size is NOT a power of 2,
+            // then
             // the argument is passed by reference.
             return (size > EnregisteredParamTypeMaxSize) || ((size & (size - 1)) != 0);
         }

@@ -26,7 +26,8 @@ namespace System.Reflection
 
         // end layout mask
 
-        // Use this mask to distinguish whether a type declaration is an interface.  (Class vs. ValueType done based on whether it subclasses S.ValueType)
+        // Use this mask to distinguish whether a type declaration is an interface.  (Class vs. ValueType
+        // done based on whether it subclasses S.ValueType)
         ClassSemanticsMask = 0x00000020,
         Class = 0x00000000, // Type is a class (or a value type).
         Interface = 0x00000020, // Type is an interface.

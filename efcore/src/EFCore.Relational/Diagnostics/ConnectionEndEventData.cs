@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     <see cref="RelationalEventId" /> connection ending events.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public class ConnectionEndEventData : ConnectionEventData
 {
@@ -18,8 +19,10 @@ public class ConnectionEndEventData : ConnectionEventData
     /// <param name="eventDefinition">The event definition.</param>
     /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
     /// <param name="connection">The <see cref="DbConnection" />.</param>
-    /// <param name="context">The <see cref="DbContext" /> currently being used, to null if not known.</param>
-    /// <param name="connectionId">A correlation ID that identifies the <see cref="DbConnection" /> instance being used.</param>
+    /// <param name="context">The <see cref="DbContext" /> currently being used, to null if not
+    // known.</param>
+    /// <param name="connectionId">A correlation ID that identifies the <see cref="DbConnection" />
+    // instance being used.</param>
     /// <param name="async">Indicates whether or not the operation is happening asynchronously.</param>
     /// <param name="startTime">The start time of this event.</param>
     /// <param name="duration">The duration this event.</param>

@@ -13,7 +13,8 @@ namespace Microsoft.Win32.RegistryTests
         public void Test01()
         {
             // [] Passing in null should throw ArgumentNullException
-            //UPDATE: This sets the default value. We should move this test to a newly defined reg key so as not to screw up the system
+            //UPDATE: This sets the default value. We should move this test to a newly defined reg key so as not
+            // to screw up the system
             const string expected = "This is a test";
             TestRegistryKey.SetValue(null, expected);
             Assert.Equal(expected, TestRegistryKey.GetValue(null));

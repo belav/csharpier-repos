@@ -493,7 +493,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             WorkingChain workingChain = BuildWorkingChain();
 
-            // If the chain built and the only error was something we ignore (probably X509_V_ERR_CRL_NOT_YET_VALID)
+            // If the chain built and the only error was something we ignore (probably
+            // X509_V_ERR_CRL_NOT_YET_VALID)
             // then there's nothing to do.
             if (workingChain.LastError < 0)
             {
@@ -970,7 +971,8 @@ namespace System.Security.Cryptography.X509Certificates
                             ref overallHasNotSignatureValid
                         );
 
-                        // Clear NotSignatureValid for the last element when overall chain is not PartialChain or UntrustedRoot.
+                        // Clear NotSignatureValid for the last element when overall chain is not PartialChain or
+                        // UntrustedRoot.
                         bool isLastElement = i == chainSize - 1;
                         if (isLastElement && !hadSignatureNotValid && overallHasNotSignatureValid)
                         {

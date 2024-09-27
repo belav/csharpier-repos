@@ -58,7 +58,8 @@ public class WsFederationPostConfigureOptions : IPostConfigureOptions<WsFederati
             && Uri.TryCreate(options.Wreply, UriKind.Absolute, out var wreply)
         )
         {
-            // Wreply must be a very specific, case sensitive value, so we can't generate it. Instead we generate CallbackPath from it.
+            // Wreply must be a very specific, case sensitive value, so we can't generate it. Instead we
+            // generate CallbackPath from it.
             options.CallbackPath = PathString.FromUriComponent(wreply);
         }
 

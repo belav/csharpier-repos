@@ -56,7 +56,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.Null.null002
             //    if (ret)
             //        return 0;
             //}
-            // change from Microsoft.CSharp.RuntimeBinder.RuntimeBinderException to System.NullReferenceException
+            // change from Microsoft.CSharp.RuntimeBinder.RuntimeBinderException to
+            // System.NullReferenceException
             catch (System.NullReferenceException)
             {
                 return 0;

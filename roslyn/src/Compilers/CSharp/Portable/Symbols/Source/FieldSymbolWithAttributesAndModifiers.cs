@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// NOTE: This method should always be kept as a sealed override.
-        /// If you want to override attribute binding logic for a sub-class, then override <see cref="GetAttributesBag"/> method.
+        /// If you want to override attribute binding logic for a sub-class, then override <see
+        // cref="GetAttributesBag"/> method.
         /// </remarks>
         public sealed override ImmutableArray<CSharpAttributeData> GetAttributes() =>
             this.GetAttributesBag().Attributes;
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no
+        // applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -157,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal sealed override ObsoleteAttributeData ObsoleteAttributeData
         {
@@ -416,7 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     Debug.Assert(boundAttributes.Any());
 
-                    // error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
+                    // error CS0636: The FieldOffset attribute can only be placed on members of types marked with the
+                    // StructLayout(LayoutKind.Explicit)
                     int i = boundAttributes.IndexOfAttribute(
                         AttributeDescription.FieldOffsetAttribute
                     );
@@ -430,7 +434,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (this.ContainingType.Layout.Kind == LayoutKind.Explicit)
                 {
-                    // error CS0625: '<field>': instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute
+                    // error CS0625: '<field>': instance field types marked with StructLayout(LayoutKind.Explicit) must
+                    // have a FieldOffset attribute
                     diagnostics.Add(
                         ErrorCode.ERR_MissingStructOffset,
                         this.ErrorLocation,

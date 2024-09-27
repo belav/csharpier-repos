@@ -126,7 +126,8 @@ namespace System.Threading.Tests
             mres.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => mre.WaitOne(0));
-            // Failure Case: The underlying event object has been disposed, should throw ObjectDisposedException.
+            // Failure Case: The underlying event object has been disposed, should throw
+            // ObjectDisposedException.
         }
 
         [Fact]
@@ -147,7 +148,8 @@ namespace System.Threading.Tests
             // Failure Case: Wait(TimeSpan) didn't throw AORE when the totalmilliseconds < -1
 
             Assert.Throws<ArgumentOutOfRangeException>(() => mres.Wait(TimeSpan.MaxValue));
-            // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
+            // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds >
+            // int.max
 
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => mres.Wait(TimeSpan.FromDays(-1), new CancellationToken())
@@ -157,7 +159,8 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => mres.Wait(TimeSpan.MaxValue, new CancellationToken())
             );
-            // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds > int.max
+            // Failure Case: Wait(TimeSpan, CancellationToken) didn't throw AORE when the totalmilliseconds >
+            // int.max
         }
     }
 }

@@ -89,7 +89,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the export definitions that match the constraint defined by the specified definition.
+        ///     Returns the export definitions that match the constraint defined by the specified
+        // definition.
         /// </summary>
         /// <param name="definition">
         ///     The <see cref="ImportDefinition"/> that defines the conditions of the
@@ -154,7 +155,8 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (disposing)
                 {
-                    // NOTE : According to http://msdn.microsoft.com/en-us/library/4bw5ewxy.aspx, the warning is bogus when used with Interlocked API.
+                    // NOTE : According to http://msdn.microsoft.com/en-us/library/4bw5ewxy.aspx, the warning is bogus
+                    // when used with Interlocked API.
 #pragma warning disable 420
                     if (Interlocked.CompareExchange(ref this._isDisposed, 1, 0) == 0)
 #pragma warning restore 420

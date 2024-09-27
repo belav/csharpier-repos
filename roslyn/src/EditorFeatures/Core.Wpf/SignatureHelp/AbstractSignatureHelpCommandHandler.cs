@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         {
             AssertIsForeground();
 
-            // If args is `InvokeSignatureHelpCommandArgs` then sig help was explicitly invoked by the user and should
+            // If args is `InvokeSignatureHelpCommandArgs` then sig help was explicitly invoked by the user and
+            // should
             // be shown whether or not the option is set.
             var languageName = args.SubjectBuffer.GetLanguageName();
             if (

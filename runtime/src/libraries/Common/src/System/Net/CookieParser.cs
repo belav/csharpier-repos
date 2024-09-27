@@ -501,9 +501,11 @@ namespace System.Net
                 if (s_internalSetNameMethod == null)
                 {
                     // TODO https://github.com/dotnet/runtime/issues/19348:
-                    // We need to use Cookie.InternalSetName instead of the Cookie.set_Name wrapped in a try catch block, as
+                    // We need to use Cookie.InternalSetName instead of the Cookie.set_Name wrapped in a try catch
+                    // block, as
                     // Cookie.set_Name keeps the original name if the string is empty or null.
-                    // Unfortunately this API is internal so we use reflection to access it. The method is cached for performance reasons.
+                    // Unfortunately this API is internal so we use reflection to access it. The method is cached for
+                    // performance reasons.
                     MethodInfo? method = typeof(Cookie).GetMethod(
                         "InternalSetName",
                         BindingFlags.Instance | BindingFlags.NonPublic

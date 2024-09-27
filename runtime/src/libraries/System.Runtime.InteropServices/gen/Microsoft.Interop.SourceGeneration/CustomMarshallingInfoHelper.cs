@@ -53,9 +53,12 @@ namespace Microsoft.Interop
                 if (type is IArrayTypeSymbol arrayManagedType)
                 {
                     // Generally, we require linear collection marshallers to have "arity of managed type + 1" arity.
-                    // However, arrays aren't "generic" over their element type as they're generics, but we want to treat the element type
-                    // as a generic type parameter. As a result, we require an arity of 2 for array marshallers, 1 for the array element type,
-                    // and 1 for the native element type (the required additional type parameter for linear collection marshallers).
+                    // However, arrays aren't "generic" over their element type as they're generics, but we want to
+                    // treat the element type
+                    // as a generic type parameter. As a result, we require an arity of 2 for array marshallers, 1 for
+                    // the array element type,
+                    // and 1 for the native element type (the required additional type parameter for linear collection
+                    // marshallers).
                     if (entryPointType.Arity != 2)
                     {
                         diagnostics.ReportInvalidMarshallingAttributeInfo(
@@ -178,24 +181,35 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Creates a <see cref="MarshallingInfo"/> for the given managed type and marshaller type in the given compilation.
+        /// Creates a <see cref="MarshallingInfo"/> for the given managed type and marshaller type in the
+        // given compilation.
         /// This marshalling info is independent of any specific marshalling context or signature element.
         /// </summary>
-        /// <param name="type">The managed type of the element for which to generate marshalling info.</param>
+        /// <param name="type">The managed type of the element for which to generate marshalling
+        // info.</param>
         /// <param name="entryPointType">The type of the marshaller entry point.</param>
-        /// <param name="attrData">The attribute data for attribute that provided the marshalling info (used for reporting diagnostics).</param>
-        /// <param name="compilation">The compilation in which the marshalling info is being generated.</param>
+        /// <param name="attrData">The attribute data for attribute that provided the marshalling info (used
+        // for reporting diagnostics).</param>
+        /// <param name="compilation">The compilation in which the marshalling info is being
+        // generated.</param>
         /// <param name="diagnostics">The diagnostics sink to report diagnostics to.</param>
-        /// <returns>The marshalling info for the given managed type and marshaller entrypoint type, or <see cref="NoMarshallingInfo.Instance" /> if the marshaller requires use-site information.</returns>
+        /// <returns>The marshalling info for the given managed type and marshaller entrypoint type, or <see
+        // cref="NoMarshallingInfo.Instance" /> if the marshaller requires use-site information.</returns>
         /// <remarks>
-        /// This method cannot generate marshalling info for any marshallers that require use-site information like count information or marshalling
+        /// This method cannot generate marshalling info for any marshallers that require use-site
+        // information like count information or marshalling
         /// information for an element-indirection-level greater than 0.
         /// </remarks>
         /// <example>
-        /// This method can be used to generate marshalling info for exceptions. Exception marshalling does not have any use-site information and
-        /// is not in the signature. As a result, this method can be used to generate the marshalling info for an exception marshaller.
+        /// This method can be used to generate marshalling info for exceptions. Exception marshalling does
+        // not have any use-site information and
+        /// is not in the signature. As a result, this method can be used to generate the marshalling info
+        // for an exception marshaller.
         /// <code>
-        /// var exceptionMarshallingInfo = CustomMarshallingInfoForNonSignatureElement.Create(compilation.GetTypeByMetadataName(TypeNames.System_Exception), compilation.GetTypeByMetadataName(TypeNames.DefaultExceptionMarshaller), triggeringAttribute, compilation, diagnostics);
+        /// var exceptionMarshallingInfo =
+        // CustomMarshallingInfoForNonSignatureElement.Create(compilation.GetTypeByMetadataName(TypeNames.System_Exception),
+        // compilation.GetTypeByMetadataName(TypeNames.DefaultExceptionMarshaller), triggeringAttribute,
+        // compilation, diagnostics);
         /// </code>
         /// </example>
         public static MarshallingInfo CreateNativeMarshallingInfoForNonSignatureElement(

@@ -13,7 +13,8 @@ namespace System.IdentityModel
 
     /// <summary>
     /// This class wraps the four WCF validator types (Peer, Chain, PeerOrChain, and None).
-    /// This class also resets the validation time each time a certificate is validated, to fix a .NET issue
+    /// This class also resets the validation time each time a certificate is validated, to fix a .NET
+    // issue
     /// where certificates created after the validator is created will not chain.
     /// </summary>
     internal class X509CertificateValidatorEx : X509CertificateValidator

@@ -95,8 +95,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
         // myport => myport
         // namedpipe:myport => myport
         // \\.\pipe\myport => myport (dropping \\.\pipe\ is inline with implemented namedpipe client/server)
-        // namedpipe://./pipe/myport => myport (dropping authority and /pipe/ is inline with implemented namedpipe client/server)
-        // namedpipe:/pipe/myport  => myport (dropping /pipe/ is inline with implemented namedpipe client/server)
+        // namedpipe://./pipe/myport => myport (dropping authority and /pipe/ is inline with implemented
+        // namedpipe client/server)
+        // namedpipe:/pipe/myport  => myport (dropping /pipe/ is inline with implemented namedpipe
+        // client/server)
         // namedpipe://authority/myport => myport
         // namedpipe:///myport => myport
         //

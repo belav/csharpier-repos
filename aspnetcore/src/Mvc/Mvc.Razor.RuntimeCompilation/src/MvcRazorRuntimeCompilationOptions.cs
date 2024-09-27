@@ -17,7 +17,8 @@ public class MvcRazorRuntimeCompilationOptions
     /// </summary>
     /// <remarks>
     /// At startup, this collection is initialized to include an instance of
-    /// <see cref="IHostingEnvironment.ContentRootFileProvider"/> that is rooted at the application root.
+    /// <see cref="IHostingEnvironment.ContentRootFileProvider"/> that is rooted at the application
+    // root.
     /// </remarks>
     public IList<IFileProvider> FileProviders { get; } = new List<IFileProvider>();
 
@@ -25,7 +26,8 @@ public class MvcRazorRuntimeCompilationOptions
     /// Gets paths to additional references used during runtime compilation of Razor files.
     /// </summary>
     /// <remarks>
-    /// By default, the runtime compiler <see cref="ICompilationReferencesProvider"/> to gather references
+    /// By default, the runtime compiler <see cref="ICompilationReferencesProvider"/> to gather
+    // references
     /// uses to compile a Razor file. This API allows providing additional references to the compiler.
     /// </remarks>
     public IList<string> AdditionalReferencePaths { get; } = new List<string>();

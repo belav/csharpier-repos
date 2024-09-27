@@ -541,14 +541,14 @@ namespace System
             return ToString(value, startIndex, value.Length - startIndex);
         }
 
-        /*==================================ToBoolean===================================
-        **Action:  Convert an array of bytes to a boolean value.  We treat this array
-        **         as if the first 4 bytes were an Int4 an operate on this value.
-        **Returns: True if the Int4 value of the first 4 bytes is non-zero.
-        **Arguments: value -- The byte array
-        **           startIndex -- The position within the array.
-        **Exceptions: See ToInt4.
-        ==============================================================================*/
+/*==================================ToBoolean===================================
+**Action:  Convert an array of bytes to a boolean value.  We treat this array
+**         as if the first 4 bytes were an Int4 an operate on this value.
+**Returns: True if the Int4 value of the first 4 bytes is non-zero.
+**Arguments: value -- The byte array
+**           startIndex -- The position within the array.
+**Exceptions: See ToInt4.
+==============================================================================*/
         // Converts an array of bytes into a boolean.
         public static bool ToBoolean(byte[] value, int startIndex)
         {
@@ -575,7 +575,8 @@ namespace System
             // If we're on a big endian machine, what should this method do?  You could argue for
             // either big endian or little endian, depending on whether you are writing to a file that
             // should be used by other programs on that processor, or for compatibility across multiple
-            // formats.  Because this is ambiguous, we're excluding this from the Portable Library & Win8 Profile.
+            // formats.  Because this is ambiguous, we're excluding this from the Portable Library & Win8
+            // Profile.
             // If we ever run on big endian machines, produce two versions where endianness is specified.
             Contract.Assert(
                 IsLittleEndian,
@@ -590,7 +591,8 @@ namespace System
             // If we're on a big endian machine, what should this method do?  You could argue for
             // either big endian or little endian, depending on whether you are writing to a file that
             // should be used by other programs on that processor, or for compatibility across multiple
-            // formats.  Because this is ambiguous, we're excluding this from the Portable Library & Win8 Profile.
+            // formats.  Because this is ambiguous, we're excluding this from the Portable Library & Win8
+            // Profile.
             // If we ever run on big endian machines, produce two versions where endianness is specified.
             Contract.Assert(
                 IsLittleEndian,

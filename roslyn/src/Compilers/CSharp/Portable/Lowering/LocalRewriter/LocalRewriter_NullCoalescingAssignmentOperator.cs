@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var stores = ArrayBuilder<BoundExpression>.GetInstance();
             Debug.Assert(node.LeftOperand.Type is { });
 
-            // Rewrite LHS with temporaries to prevent double-evaluation of side effects, as we'll need to use it multiple times.
+            // Rewrite LHS with temporaries to prevent double-evaluation of side effects, as we'll need to use
+            // it multiple times.
             BoundExpression transformedLHS = TransformCompoundAssignmentLHS(
                 node.LeftOperand,
                 isRegularCompoundAssignment: false,
@@ -43,8 +44,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // lhsRead ?? (transformedLHS = loweredRight)
 
                 // transformedLHS = loweredRight
-                // isCompoundAssignment is only used for dynamic scenarios, and we want those scenarios to treat this like a standard assignment.
-                // See CodeGenNullCoalescingAssignmentTests.CoalescingAssignment_DynamicRuntimeCastFailure, which will fail if
+                // isCompoundAssignment is only used for dynamic scenarios, and we want those scenarios to treat
+                // this like a standard assignment.
+                // See CodeGenNullCoalescingAssignmentTests.CoalescingAssignment_DynamicRuntimeCastFailure, which
+                // will fail if
                 // isCompoundAssignment is set to true. It will fail to throw a runtime binder cast exception.
                 BoundExpression assignment = MakeAssignmentOperator(
                     syntax,
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // MakeRValue will never return a BoundPropertyAccess except in expression trees.
                 Debug.Assert(!_inExpressionLambda && lhsRead.Kind != BoundKind.PropertyAccess);
 
-                // If lhsRead is a call, such as to a property accessor, save the result off to a temp. This doesn't affect
+                // If lhsRead is a call, such as to a property accessor, save the result off to a temp. This doesn't
+                // affect
                 // the standard ??= case because it only uses lhsRead once.
                 if (lhsRead.Kind == BoundKind.Call)
                 {

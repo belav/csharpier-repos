@@ -5,13 +5,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 
 /// <summary>
 ///     <para>
-///         A service on the EF internal service provider that creates the <see cref="ConventionSet" />
-///         for the current database provider. This is combined with <see cref="IConventionSetPlugin" />
-///         instances to produce the full convention set exposed by the <see cref="IConventionSetBuilder" />
+///         A service on the EF internal service provider that creates the <see cref="ConventionSet"
+// />
+///         for the current database provider. This is combined with <see
+// cref="IConventionSetPlugin" />
+///         instances to produce the full convention set exposed by the <see
+// cref="IConventionSetBuilder" />
 ///         service.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -28,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 public interface IProviderConventionSetBuilder

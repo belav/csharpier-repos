@@ -34,7 +34,8 @@ namespace System.Collections.Concurrent
     /// </summary>
     /// <typeparam name="T">Specifies the type of elements in the queue.</typeparam>
     /// <remarks>
-    /// All public  and protected members of <see cref="ConcurrentQueue{T}"/> are thread-safe and may be used
+    /// All public  and protected members of <see cref="ConcurrentQueue{T}"/> are thread-safe and may be
+    // used
     /// concurrently from multiple threads.
     /// </remarks>
     [ComVisible(false)]
@@ -192,7 +193,8 @@ namespace System.Collections.Concurrent
         /// Gets an object that can be used to synchronize access to the <see
         /// cref="T:System.Collections.ICollection"/>. This property is not supported.
         /// </summary>
-        /// <exception cref="T:System.NotSupportedException">The SyncRoot property is not supported.</exception>
+        /// <exception cref="T:System.NotSupportedException">The SyncRoot property is not
+        // supported.</exception>
         object ICollection.SyncRoot
         {
             get
@@ -206,7 +208,8 @@ namespace System.Collections.Concurrent
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
-        /// <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through
+        // the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<T>)this).GetEnumerator();
@@ -253,9 +256,11 @@ namespace System.Collections.Concurrent
         /// <value>true if the <see cref="ConcurrentQueue{T}"/> is empty; otherwise, false.</value>
         /// <remarks>
         /// For determining whether the collection contains any items, use of this property is recommended
-        /// rather than retrieving the number of items from the <see cref="Count"/> property and comparing it
+        /// rather than retrieving the number of items from the <see cref="Count"/> property and comparing
+        // it
         /// to 0.  However, as this collection is intended to be accessed concurrently, it may be the case
-        /// that another thread will modify the collection after <see cref="IsEmpty"/> returns, thus invalidating
+        /// that another thread will modify the collection after <see cref="IsEmpty"/> returns, thus
+        // invalidating
         /// the result.
         /// </remarks>
         public bool IsEmpty
@@ -309,8 +314,10 @@ namespace System.Collections.Concurrent
         /// elements copied from the <see cref="ConcurrentQueue{T}"/>.</returns>
         private List<T> ToList()
         {
-            // Increments the number of active snapshot takers. This increment must happen before the snapshot is
-            // taken. At the same time, Decrement must happen after list copying is over. Only in this way, can it
+            // Increments the number of active snapshot takers. This increment must happen before the snapshot
+            // is
+            // taken. At the same time, Decrement must happen after list copying is over. Only in this way, can
+            // it
             // eliminate race condition when Segment.TryRemove() checks whether m_numSnapshotTakers == 0.
             Interlocked.Increment(ref m_numSnapshotTakers);
 
@@ -435,7 +442,8 @@ namespace System.Collections.Concurrent
         /// </summary>
         /// <param name="array">The one-dimensional <see cref="T:System.Array">Array</see> that is the
         /// destination of the elements copied from the
-        /// <see cref="ConcurrentQueue{T}"/>. The <see cref="T:System.Array">Array</see> must have zero-based
+        /// <see cref="ConcurrentQueue{T}"/>. The <see cref="T:System.Array">Array</see> must have
+        // zero-based
         /// indexing.</param>
         /// <param name="index">The zero-based index in <paramref name="array"/> at which copying
         /// begins.</param>
@@ -477,14 +485,18 @@ namespace System.Collections.Concurrent
         /// </remarks>
         public IEnumerator<T> GetEnumerator()
         {
-            // Increments the number of active snapshot takers. This increment must happen before the snapshot is
-            // taken. At the same time, Decrement must happen after the enumeration is over. Only in this way, can it
+            // Increments the number of active snapshot takers. This increment must happen before the snapshot
+            // is
+            // taken. At the same time, Decrement must happen after the enumeration is over. Only in this way,
+            // can it
             // eliminate race condition when Segment.TryRemove() checks whether m_numSnapshotTakers == 0.
             Interlocked.Increment(ref m_numSnapshotTakers);
 
             // Takes a snapshot of the queue.
-            // A design flaw here: if a Thread.Abort() happens, we cannot decrement m_numSnapshotTakers. But we cannot
-            // wrap the following with a try/finally block, otherwise the decrement will happen before the yield return
+            // A design flaw here: if a Thread.Abort() happens, we cannot decrement m_numSnapshotTakers. But we
+            // cannot
+            // wrap the following with a try/finally block, otherwise the decrement will happen before the yield
+            // return
             // statements in the GetEnumerator (head, tail, headLow, tailHigh) method.
             Segment head,
                 tail;
@@ -502,7 +514,8 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>
-        /// Helper method of GetEnumerator to seperate out yield return statement, and prevent lazy evaluation.
+        /// Helper method of GetEnumerator to seperate out yield return statement, and prevent lazy
+        // evaluation.
         /// </summary>
         private IEnumerator<T> GetEnumerator(Segment head, Segment tail, int headLow, int tailHigh)
         {
@@ -601,7 +614,8 @@ namespace System.Collections.Concurrent
         /// cref="ConcurrentQueue{T}"/>.
         /// </summary>
         /// <param name="result">
-        /// When this method returns, if the operation was successful, <paramref name="result"/> contains the
+        /// When this method returns, if the operation was successful, <paramref name="result"/> contains
+        // the
         /// object removed. If no object was available to be removed, the value is unspecified.
         /// </param>
         /// <returns>true if an element was removed and returned from the beggining of the <see
@@ -658,12 +672,15 @@ namespace System.Collections.Concurrent
             //we define two volatile arrays: m_array and m_state. Note that the accesses to the array items
             //do not get volatile treatment. But we don't need to worry about loading adjacent elements or
             //store/load on adjacent elements would suffer reordering.
-            // - Two stores:  these are at risk, but CLRv2 memory model guarantees store-release hence we are safe.
-            // - Two loads: because one item from two volatile arrays are accessed, the loads of the array references
+            // - Two stores:  these are at risk, but CLRv2 memory model guarantees store-release hence we are
+            // safe.
+            // - Two loads: because one item from two volatile arrays are accessed, the loads of the array
+            // references
             //          are sufficient to prevent reordering of the loads of the elements.
             internal volatile T[] m_array;
 
-            // For each entry in m_array, the corresponding entry in m_state indicates whether this position contains
+            // For each entry in m_array, the corresponding entry in m_state indicates whether this position
+            // contains
             // a valid value. m_state is initially all false.
             internal volatile VolatileBool[] m_state;
 
@@ -784,9 +801,11 @@ namespace System.Collections.Concurrent
                 }
 
                 //Now we will use a CAS to increment m_high, and store the result in newhigh.
-                //Depending on how many free spots left in this segment and how many threads are doing this Increment
+                //Depending on how many free spots left in this segment and how many threads are doing this
+                // Increment
                 //at this time, the returning "newhigh" can be
-                // 1) < SEGMENT_SIZE - 1 : we took a spot in this segment, and not the last one, just insert the value
+                // 1) < SEGMENT_SIZE - 1 : we took a spot in this segment, and not the last one, just insert the
+                // value
                 // 2) == SEGMENT_SIZE - 1 : we took the last spot, insert the value AND grow the segment
                 // 3) > SEGMENT_SIZE - 1 : we failed to reserve a spot in this segment, we return false to
                 //    Queue.Enqueue method, telling it to try again in the next segment.
@@ -844,8 +863,10 @@ namespace System.Collections.Concurrent
                         }
                         result = m_array[lowLocal];
 
-                        // If there is no other thread taking snapshot (GetEnumerator(), ToList(), etc), reset the deleted entry to null.
-                        // It is ok if after this conditional check m_numSnapshotTakers becomes > 0, because new snapshots won't include
+                        // If there is no other thread taking snapshot (GetEnumerator(), ToList(), etc), reset the deleted
+                        // entry to null.
+                        // It is ok if after this conditional check m_numSnapshotTakers becomes > 0, because new snapshots
+                        // won't include
                         // the deleted entry at m_array[lowLocal].
                         if (m_source.m_numSnapshotTakers <= 0)
                         {
@@ -927,7 +948,8 @@ namespace System.Collections.Concurrent
 
             /// <summary>
             /// return the position of the head of the current segment
-            /// Value range [0, SEGMENT_SIZE], if it's SEGMENT_SIZE, it means this segment is exhausted and thus empty
+            /// Value range [0, SEGMENT_SIZE], if it's SEGMENT_SIZE, it means this segment is exhausted and thus
+            // empty
             /// </summary>
             internal int Low
             {
@@ -936,7 +958,8 @@ namespace System.Collections.Concurrent
 
             /// <summary>
             /// return the logical position of the tail of the current segment
-            /// Value range [-1, SEGMENT_SIZE-1]. When it's -1, it means this is a new segment and has no elemnet yet
+            /// Value range [-1, SEGMENT_SIZE-1]. When it's -1, it means this is a new segment and has no
+            // elemnet yet
             /// </summary>
             internal int High
             {
@@ -951,8 +974,10 @@ namespace System.Collections.Concurrent
     } //end of class Segment
 
     /// <summary>
-    /// A wrapper struct for volatile bool, please note the copy of the struct it self will not be volatile
-    /// for example this statement will not include in volatilness operation volatileBool1 = volatileBool2 the jit will copy the struct and will ignore the volatile
+    /// A wrapper struct for volatile bool, please note the copy of the struct it self will not be
+    // volatile
+    /// for example this statement will not include in volatilness operation volatileBool1 =
+    // volatileBool2 the jit will copy the struct and will ignore the volatile
     /// </summary>
     struct VolatileBool
     {

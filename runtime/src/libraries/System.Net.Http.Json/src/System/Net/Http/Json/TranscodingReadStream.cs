@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Taken from https://github.com/dotnet/aspnetcore/blob/master/src/Mvc/Mvc.Core/src/Formatters/TranscodingReadStream.cs
+// Taken from
+// https://github.com/dotnet/aspnetcore/blob/master/src/Mvc/Mvc.Core/src/Formatters/TranscodingReadStream.cs
 
 using System.Buffers;
 using System.Diagnostics;
@@ -43,7 +44,8 @@ namespace System.Net.Http.Json
 
             // Attempt to allocate a char buffer than can tolerate the worst-case scenario for this
             // encoding. This would allow the byte -> char conversion to complete in a single call.
-            // The conversion process is tolerant of char buffer that is not large enough to convert all the bytes at once.
+            // The conversion process is tolerant of char buffer that is not large enough to convert all the
+            // bytes at once.
             int maxCharBufferSize = sourceEncoding.GetMaxCharCount(MaxByteBufferSize);
             _charBuffer = new ArraySegment<char>(
                 ArrayPool<char>.Shared.Rent(maxCharBufferSize),
@@ -144,7 +146,8 @@ namespace System.Net.Http.Json
             int charsRead = default;
             int bytesWritten = default;
             // Since Convert() could fail if the destination buffer cannot fit at least one encoded char.
-            // If the destination buffer is smaller than GetMaxByteCount(1), we avoid encoding to the destination and we use the overflow buffer instead.
+            // If the destination buffer is smaller than GetMaxByteCount(1), we avoid encoding to the
+            // destination and we use the overflow buffer instead.
             if (readBuffer.Count > OverflowBufferSize || _charBuffer.Count == 0)
             {
                 _encoder.Convert(
@@ -209,7 +212,8 @@ namespace System.Net.Http.Json
 
         private async Task<int> ReadInputChars(CancellationToken cancellationToken)
         {
-            // If we had left-over bytes from a previous read, move it to the start of the buffer and read content into
+            // If we had left-over bytes from a previous read, move it to the start of the buffer and read
+            // content into
             // the segment that follows.
             Debug.Assert(_byteBuffer.Array != null);
             Buffer.BlockCopy(

@@ -85,7 +85,8 @@ namespace MonoTests.System.ServiceModel.Description
             host.Open();
             try
             {
-                // it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which does overwriting.
+                // it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which
+                // does overwriting.
                 Assert.AreEqual(
                     MessageVersion.Soap12WSAddressing10,
                     ((ChannelDispatcher)host.ChannelDispatchers[0]).MessageVersion,
@@ -140,7 +141,8 @@ namespace MonoTests.System.ServiceModel.Description
             host.Open();
             try
             {
-                // it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which does overwriting.
+                // it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which
+                // does overwriting.
                 Assert.AreEqual(
                     MessageVersion.Soap12WSAddressing10,
                     ((ChannelDispatcher)host.ChannelDispatchers[0]).MessageVersion,

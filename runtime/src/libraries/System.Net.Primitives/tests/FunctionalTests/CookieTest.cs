@@ -358,8 +358,10 @@ namespace System.Net.Primitives.Functional.Tests
             c.Version = 0;
             Assert.Equal("name=value; $Path=path; $Domain=domain; $Port=\"80\"", c.ToString());
 
-            // If a cookie string specifies either an empty string or no value for the port, then the port should be considered implicit.
-            // Otherwise such cookies will have no valid ports and also be incapable of assuming a usable port which in turn means they cannot be matched to ANY Uris and will effectively become nonfunctional.
+            // If a cookie string specifies either an empty string or no value for the port, then the port
+            // should be considered implicit.
+            // Otherwise such cookies will have no valid ports and also be incapable of assuming a usable port
+            // which in turn means they cannot be matched to ANY Uris and will effectively become nonfunctional.
             c.Port = "";
             Assert.Equal("name=value; $Path=path; $Domain=domain", c.ToString());
 

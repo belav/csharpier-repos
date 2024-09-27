@@ -20,7 +20,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddViewLocalization(this IMvcCoreBuilder builder)
@@ -38,7 +39,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddViewLocalization(
@@ -67,7 +69,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddViewLocalization(
@@ -89,7 +92,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddViewLocalization(
@@ -114,7 +118,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(this IMvcCoreBuilder builder)
@@ -133,11 +138,13 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// Adds MVC view and data annotations localization services to the application.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
-    /// <param name="localizationOptionsSetupAction">An action to configure the <see cref="LocalizationOptions"/>.</param>
+    /// <param name="localizationOptionsSetupAction">An action to configure the <see
+    // cref="LocalizationOptions"/>.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(
@@ -163,7 +170,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(
@@ -191,7 +199,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(
@@ -219,7 +228,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(
@@ -248,7 +258,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(
@@ -277,7 +288,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(
@@ -308,7 +320,8 @@ public static class MvcLocalizationMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     /// <remarks>
     /// Adding localization also adds support for views via
-    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor view engine
+    /// <see cref="MvcViewFeaturesMvcCoreBuilderExtensions.AddViews(IMvcCoreBuilder)"/> and the Razor
+    // view engine
     /// via <see cref="MvcRazorMvcCoreBuilderExtensions.AddRazorViewEngine(IMvcCoreBuilder)"/>.
     /// </remarks>
     public static IMvcCoreBuilder AddMvcLocalization(

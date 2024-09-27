@@ -30,24 +30,24 @@ namespace Testing
             get { return null; }
         }
 
-        /**
-        <summary>
-        Javadoc comment for public property
-        </summary>
-        */
+/**
+<summary>
+Javadoc comment for public property
+</summary>
+*/
         public string PublicProperty3
         {
-            /**
-            <summary>
-            On public getter - no effect
-            </summary>
-            */
+/**
+<summary>
+On public getter - no effect
+</summary>
+*/
             get { return null; }
-            /**
-            <summary>
-            On public setter - no effect
-            </summary>
-            */
+/**
+<summary>
+On public setter - no effect
+</summary>
+*/
             set { }
         }
     }

@@ -73,7 +73,8 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JValue"/> class from another <see cref="JValue"/> object.
+        /// Initializes a new instance of the <see cref="JValue"/> class from another <see cref="JValue"/>
+        // object.
         /// </summary>
         /// <param name="other">A <see cref="JValue"/> object to copy from.</param>
         public JValue(JValue other)
@@ -749,7 +750,8 @@ namespace Newtonsoft.Json.Linq
         /// Writes this token to a <see cref="JsonWriter"/>.
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
-        /// <param name="converters">A collection of <see cref="JsonConverter"/>s which will be used when writing the token.</param>
+        /// <param name="converters">A collection of <see cref="JsonConverter"/>s which will be used when
+        // writing the token.</param>
         public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
         {
             if (converters != null && converters.Length > 0 && _value != null)
@@ -883,7 +885,8 @@ namespace Newtonsoft.Json.Linq
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <returns>
-        /// <c>true</c> if the current object is equal to the <paramref name="other"/> parameter; otherwise, <c>false</c>.
+        /// <c>true</c> if the current object is equal to the <paramref name="other"/> parameter; otherwise,
+        // <c>false</c>.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
         public bool Equals(JValue? other)
@@ -897,11 +900,14 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current <see cref="Object"/>.
+        /// Determines whether the specified <see cref="Object"/> is equal to the current <see
+        // cref="Object"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current <see cref="Object"/>.</param>
+        /// <param name="obj">The <see cref="Object"/> to compare with the current <see
+        // cref="Object"/>.</param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="Object"/> is equal to the current <see cref="Object"/>; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="Object"/> is equal to the current <see cref="Object"/>;
+        // otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object? obj)
         {
@@ -933,8 +939,10 @@ namespace Newtonsoft.Json.Linq
         /// Returns a <see cref="String"/> that represents this instance.
         /// </summary>
         /// <remarks>
-        /// <c>ToString()</c> returns a non-JSON string value for tokens with a type of <see cref="JTokenType.String"/>.
-        /// If you want the JSON for all token types then you should use <see cref="WriteTo(JsonWriter, JsonConverter[])"/>.
+        /// <c>ToString()</c> returns a non-JSON string value for tokens with a type of <see
+        // cref="JTokenType.String"/>.
+        /// If you want the JSON for all token types then you should use <see cref="WriteTo(JsonWriter,
+        // JsonConverter[])"/>.
         /// </remarks>
         /// <returns>
         /// A <see cref="String"/> that represents this instance.
@@ -1000,7 +1008,8 @@ namespace Newtonsoft.Json.Linq
 
 #if HAVE_DYNAMIC
         /// <summary>
-        /// Returns the <see cref="DynamicMetaObject"/> responsible for binding operations performed on this object.
+        /// Returns the <see cref="DynamicMetaObject"/> responsible for binding operations performed on this
+        // object.
         /// </summary>
         /// <param name="parameter">The expression tree representation of the runtime value.</param>
         /// <returns>
@@ -1115,11 +1124,15 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+        /// Compares the current instance with another object of the same type and returns an integer that
+        // indicates whether the current instance precedes, follows, or occurs in the same position in the
+        // sort
+        // order as the other object.
         /// </summary>
         /// <param name="obj">An object to compare with this instance.</param>
         /// <returns>
-        /// A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings:
+        /// A 32-bit signed integer that indicates the relative order of the objects being compared. The
+        // return value has these meanings:
         /// Value
         /// Meaning
         /// Less than zero

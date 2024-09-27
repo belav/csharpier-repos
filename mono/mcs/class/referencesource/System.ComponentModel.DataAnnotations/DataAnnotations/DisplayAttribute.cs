@@ -5,8 +5,10 @@ using System.Globalization;
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
-    /// DisplayAttribute is a general-purpose attribute to specify user-visible globalizable strings for types and members.
-    /// The string properties of this class can be used either as literals or as resource identifiers into a specified
+    /// DisplayAttribute is a general-purpose attribute to specify user-visible globalizable strings for
+    // types and members.
+    /// The string properties of this class can be used either as literals or as resource identifiers
+    // into a specified
     /// <see cref="ResourceType"/>
     /// </summary>
     [AttributeUsage(
@@ -35,7 +37,8 @@ namespace System.ComponentModel.DataAnnotations
         #region All Constructors
 
         /// <summary>
-        /// Default constructor for DisplayAttribute.  All associated string properties and methods will return <c>null</c>.
+        /// Default constructor for DisplayAttribute.  All associated string properties and methods will
+        // return <c>null</c>.
         /// </summary>
         public DisplayAttribute() { }
 
@@ -60,7 +63,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </remarks>
         /// <value>
         /// The short name is generally used as the grid column label for a UI element bound to the member
-        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
+        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for
+        // that.
         /// </value>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -96,7 +100,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </remarks>
         /// <value>
         /// The name is generally used as the field label for a UI element bound to the member
-        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
+        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for
+        // that.
         /// </value>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -132,7 +137,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </remarks>
         /// <value>
         /// Description is generally used as a tool tip or description a UI element bound to the member
-        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
+        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for
+        // that.
         /// </value>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -168,7 +174,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </remarks>
         /// <value>
         /// A prompt is generally used as a prompt or watermark for a UI element bound to the member
-        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
+        /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for
+        // that.
         /// </value>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -224,10 +231,14 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="System.Type"/> that contains the resources for <see cref="ShortName"/>,
-        /// <see cref="Name"/>, <see cref="Description"/>, <see cref="Prompt"/>, and <see cref="GroupName"/>.
-        /// Using <see cref="ResourceType"/> along with these Key properties, allows the <see cref="GetShortName"/>,
-        /// <see cref="GetName"/>, <see cref="GetDescription"/>, <see cref="GetPrompt"/>, and <see cref="GetGroupName"/>
+        /// Gets or sets the <see cref="System.Type"/> that contains the resources for <see
+        // cref="ShortName"/>,
+        /// <see cref="Name"/>, <see cref="Description"/>, <see cref="Prompt"/>, and <see
+        // cref="GroupName"/>.
+        /// Using <see cref="ResourceType"/> along with these Key properties, allows the <see
+        // cref="GetShortName"/>,
+        /// <see cref="GetName"/>, <see cref="GetDescription"/>, <see cref="GetPrompt"/>, and <see
+        // cref="GetGroupName"/>
         /// methods to return localized values.
         /// </summary>
         public Type ResourceType
@@ -249,16 +260,20 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Gets or sets whether UI should be generated automatically to display this field. If this property is not
-        /// set then the presentation layer will automatically determine whether UI should be generated. Setting this
+        /// Gets or sets whether UI should be generated automatically to display this field. If this
+        // property is not
+        /// set then the presentation layer will automatically determine whether UI should be generated.
+        // Setting this
         /// property allows an override of the default behavior of the presentation layer.
         /// <para>
-        /// Consumers must use the <see cref="GetAutoGenerateField"/> method to retrieve the value, as this property getter will throw
+        /// Consumers must use the <see cref="GetAutoGenerateField"/> method to retrieve the value, as this
+        // property getter will throw
         /// an exception if the value has not been set.
         /// </para>
         /// </summary>
         /// <exception cref="System.InvalidOperationException">
-        /// If the getter of this property is invoked when the value has not been explicitly set using the setter.
+        /// If the getter of this property is invoked when the value has not been explicitly set using the
+        // setter.
         /// </exception>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -287,16 +302,20 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Gets or sets whether UI should be generated automatically to display filtering for this field. If this property is not
-        /// set then the presentation layer will automatically determine whether filtering UI should be generated. Setting this
+        /// Gets or sets whether UI should be generated automatically to display filtering for this field.
+        // If this property is not
+        /// set then the presentation layer will automatically determine whether filtering UI should be
+        // generated. Setting this
         /// property allows an override of the default behavior of the presentation layer.
         /// <para>
-        /// Consumers must use the <see cref="GetAutoGenerateFilter"/> method to retrieve the value, as this property getter will throw
+        /// Consumers must use the <see cref="GetAutoGenerateFilter"/> method to retrieve the value, as this
+        // property getter will throw
         /// an exception if the value has not been set.
         /// </para>
         /// </summary>
         /// <exception cref="System.InvalidOperationException">
-        /// If the getter of this property is invoked when the value has not been explicitly set using the setter.
+        /// If the getter of this property is invoked when the value has not been explicitly set using the
+        // setter.
         /// </exception>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -325,16 +344,19 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Gets or sets the order in which this field should be displayed.  If this property is not set then
+        /// Gets or sets the order in which this field should be displayed.  If this property is not set
+        // then
         /// the presentation layer will automatically determine the order.  Setting this property explicitly
         /// allows an override of the default behavior of the presentation layer.
         /// <para>
-        /// Consumers must use the <see cref="GetOrder"/> method to retrieve the value, as this property getter will throw
+        /// Consumers must use the <see cref="GetOrder"/> method to retrieve the value, as this property
+        // getter will throw
         /// an exception if the value has not been set.
         /// </para>
         /// </summary>
         /// <exception cref="System.InvalidOperationException">
-        /// If the getter of this property is invoked when the value has not been explicitly set using the setter.
+        /// If the getter of this property is invoked when the value has not been explicitly set using the
+        // setter.
         /// </exception>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -370,7 +392,8 @@ namespace System.ComponentModel.DataAnnotations
         /// Gets the UI display string for ShortName.
         /// <para>
         /// This can be either a literal, non-localized string provided to <see cref="ShortName"/> or the
-        /// localized string found when <see cref="ResourceType"/> has been specified and <see cref="ShortName"/>
+        /// localized string found when <see cref="ResourceType"/> has been specified and <see
+        // cref="ShortName"/>
         /// represents a resource key within that resource type.
         /// </para>
         /// </summary>
@@ -382,12 +405,15 @@ namespace System.ComponentModel.DataAnnotations
         /// represents a resource key within that resource type, then the localized value will be returned.
         /// </para>
         /// <para>
-        /// If <see cref="ShortName"/> is <c>null</c>, the value from <see cref="GetName"/> will be returned.
+        /// If <see cref="ShortName"/> is <c>null</c>, the value from <see cref="GetName"/> will be
+        // returned.
         /// </para>
         /// </returns>
         /// <exception cref="System.InvalidOperationException">
-        /// After setting both the <see cref="ResourceType"/> property and the <see cref="ShortName"/> property,
-        /// but a public static property with a name matching the <see cref="ShortName"/> value couldn't be found
+        /// After setting both the <see cref="ResourceType"/> property and the <see cref="ShortName"/>
+        // property,
+        /// but a public static property with a name matching the <see cref="ShortName"/> value couldn't be
+        // found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
         [SuppressMessage(
@@ -439,7 +465,8 @@ namespace System.ComponentModel.DataAnnotations
         /// Gets the UI display string for Description.
         /// <para>
         /// This can be either a literal, non-localized string provided to <see cref="Description"/> or the
-        /// localized string found when <see cref="ResourceType"/> has been specified and <see cref="Description"/>
+        /// localized string found when <see cref="ResourceType"/> has been specified and <see
+        // cref="Description"/>
         /// represents a resource key within that resource type.
         /// </para>
         /// </summary>
@@ -452,8 +479,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </para>
         /// </returns>
         /// <exception cref="System.InvalidOperationException">
-        /// After setting both the <see cref="ResourceType"/> property and the <see cref="Description"/> property,
-        /// but a public static property with a name matching the <see cref="Description"/> value couldn't be found
+        /// After setting both the <see cref="ResourceType"/> property and the <see cref="Description"/>
+        // property,
+        /// but a public static property with a name matching the <see cref="Description"/> value couldn't
+        // be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
         [SuppressMessage(
@@ -470,7 +499,8 @@ namespace System.ComponentModel.DataAnnotations
         /// Gets the UI display string for Prompt.
         /// <para>
         /// This can be either a literal, non-localized string provided to <see cref="Prompt"/> or the
-        /// localized string found when <see cref="ResourceType"/> has been specified and <see cref="Prompt"/>
+        /// localized string found when <see cref="ResourceType"/> has been specified and <see
+        // cref="Prompt"/>
         /// represents a resource key within that resource type.
         /// </para>
         /// </summary>
@@ -483,8 +513,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </para>
         /// </returns>
         /// <exception cref="System.InvalidOperationException">
-        /// After setting both the <see cref="ResourceType"/> property and the <see cref="Prompt"/> property,
-        /// but a public static property with a name matching the <see cref="Prompt"/> value couldn't be found
+        /// After setting both the <see cref="ResourceType"/> property and the <see cref="Prompt"/>
+        // property,
+        /// but a public static property with a name matching the <see cref="Prompt"/> value couldn't be
+        // found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
         [SuppressMessage(
@@ -501,7 +533,8 @@ namespace System.ComponentModel.DataAnnotations
         /// Gets the UI display string for GroupName.
         /// <para>
         /// This can be either a literal, non-localized string provided to <see cref="GroupName"/> or the
-        /// localized string found when <see cref="ResourceType"/> has been specified and <see cref="GroupName"/>
+        /// localized string found when <see cref="ResourceType"/> has been specified and <see
+        // cref="GroupName"/>
         /// represents a resource key within that resource type.
         /// </para>
         /// </summary>
@@ -514,8 +547,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </para>
         /// </returns>
         /// <exception cref="System.InvalidOperationException">
-        /// After setting both the <see cref="ResourceType"/> property and the <see cref="GroupName"/> property,
-        /// but a public static property with a name matching the <see cref="GroupName"/> value couldn't be found
+        /// After setting both the <see cref="ResourceType"/> property and the <see cref="GroupName"/>
+        // property,
+        /// but a public static property with a name matching the <see cref="GroupName"/> value couldn't be
+        // found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
         [SuppressMessage(

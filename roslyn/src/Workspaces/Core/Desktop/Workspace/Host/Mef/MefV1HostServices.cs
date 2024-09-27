@@ -16,14 +16,16 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Host.Mef
 {
     /// <summary>
-    /// A class that provides host services via classes instances exported via a MEF version 1 composition.
+    /// A class that provides host services via classes instances exported via a MEF version 1
+    // composition.
     /// </summary>
     public class MefV1HostServices : HostServices, IMefHostExportProvider
     {
         internal delegate MefV1HostServices CreationHook(IEnumerable<Assembly> assemblies);
 
         /// <summary>
-        /// This delegate allows test code to override the behavior of <see cref="Create(IEnumerable{Assembly})"/>.
+        /// This delegate allows test code to override the behavior of <see
+        // cref="Create(IEnumerable{Assembly})"/>.
         /// </summary>
         /// <seealso cref="TestAccessor.HookServiceCreation"/>
         private static CreationHook s_CreationHook;

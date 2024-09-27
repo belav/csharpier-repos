@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using Microsoft.AspNet.SignalR;
@@ -19,7 +20,8 @@ namespace System.Web.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="HubController" /> class.
         /// </summary>
-        /// <param name="hubName">Name of the hub as specified by the <see cref="HubNameAttribute"/>.</param>
+        /// <param name="hubName">Name of the hub as specified by the <see
+        // cref="HubNameAttribute"/>.</param>
         protected HubController(string hubName)
         {
             if (hubName == null)

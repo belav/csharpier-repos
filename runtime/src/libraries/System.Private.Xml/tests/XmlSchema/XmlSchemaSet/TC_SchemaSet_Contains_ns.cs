@@ -57,7 +57,8 @@ namespace System.Xml.XmlSchemaTests
 
         //-----------------------------------------------------------------------------------
         [Fact]
-        //[Variation(Desc = "v4 - Contains for 2 existing schemas, Remove one, Contains again", Priority = 0)]
+        //[Variation(Desc = "v4 - Contains for 2 existing schemas, Remove one, Contains again", Priority =
+        // 0)]
         public void v4()
         {
             XmlSchemaSet sc = new XmlSchemaSet();

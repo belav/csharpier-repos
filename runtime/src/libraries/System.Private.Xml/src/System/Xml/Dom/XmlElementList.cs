@@ -118,8 +118,10 @@ namespace System.Xml
             XmlNode? retNode = curNode.FirstChild;
             if (retNode == null)
             {
-                //if no child, the next node forward will the be the NextSibling of the first ancestor which has NextSibling
-                //so, first while-loop find out such an ancestor (until no more ancestor or the ancestor is the rootNode
+                //if no child, the next node forward will the be the NextSibling of the first ancestor which has
+                // NextSibling
+                //so, first while-loop find out such an ancestor (until no more ancestor or the ancestor is the
+                // rootNode
                 retNode = curNode;
                 while (retNode != null && retNode != _rootNode && retNode.NextSibling == null)
                 {
@@ -130,7 +132,8 @@ namespace System.Xml
                     retNode = retNode.NextSibling;
             }
             if (retNode == _rootNode)
-                //if reach the rootNode, consider having walked through the whole tree and no more element after the curNode
+                //if reach the rootNode, consider having walked through the whole tree and no more element after the
+                // curNode
                 retNode = null;
             return retNode;
         }
@@ -140,7 +143,8 @@ namespace System.Xml
         {
             Debug.Assert(curNode != null);
 
-            //For preorder walking, the previous node will be the right-most node in the tree of PreviousSibling of the curNode
+            //For preorder walking, the previous node will be the right-most node in the tree of PreviousSibling
+            // of the curNode
             XmlNode? retNode = curNode.PreviousSibling;
 
             // so if the PreviousSibling is not null, going through the tree down to find the right-most node
@@ -154,7 +158,8 @@ namespace System.Xml
             // if no PreviousSibling, the previous node will be the curNode's parentNode
             retNode ??= curNode.ParentNode;
 
-            // if the final retNode is rootNode, consider having walked through the tree and no more previous node
+            // if the final retNode is rootNode, consider having walked through the tree and no more previous
+            // node
             if (retNode == _rootNode)
                 retNode = null;
             return retNode;

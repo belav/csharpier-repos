@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -209,7 +209,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     This constructor takes an existing ReflectPropertyDescriptor and modifies it by merging in the
+        ///     This constructor takes an existing ReflectPropertyDescriptor and modifies it by merging in
+        // the
         ///     passed-in attributes.
         /// </devdoc>
         public ReflectPropertyDescriptor(
@@ -350,7 +351,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     The EventDescriptor for the "{propertyname}Changed" event on the component, or null if there isn't one for this property.
+        ///     The EventDescriptor for the "{propertyname}Changed" event on the component, or null if there
+        // isn't one for this property.
         /// </devdoc>
         private EventDescriptor ChangedEventValue
         {
@@ -367,19 +369,20 @@ namespace System.ComponentModel
                 return realChangedEvent;
             }
 
-            /*
-            The following code has been removed to fix FXCOP violations.  The code
-            is left here incase it needs to be resurrected in the future.
+/*
+The following code has been removed to fix FXCOP violations.  The code
+is left here incase it needs to be resurrected in the future.
 
-            set {
-                realChangedEvent = value;
-                state[BitChangedQueried] = true;
-            }
-            */
+set {
+realChangedEvent = value;
+state[BitChangedQueried] = true;
+}
+*/
         }
 
         /// <devdoc>
-        ///     The EventDescriptor for the INotifyPropertyChanged.PropertyChanged event on the component, or null if there isn't one for this property.
+        ///     The EventDescriptor for the INotifyPropertyChanged.PropertyChanged event on the component,
+        // or null if there isn't one for this property.
         /// </devdoc>
         private EventDescriptor IPropChangedEventValue
         {
@@ -509,15 +512,15 @@ namespace System.ComponentModel
                 return getMethod;
             }
 
-            /*
-            The following code has been removed to fix FXCOP violations.  The code
-            is left here incase it needs to be resurrected in the future.
+/*
+The following code has been removed to fix FXCOP violations.  The code
+is left here incase it needs to be resurrected in the future.
 
-            set {
-                state[BitGetQueried] = true;
-                getMethod = value;
-            }
-            */
+set {
+state[BitGetQueried] = true;
+getMethod = value;
+}
+*/
         }
 
         /// <devdoc>
@@ -592,15 +595,15 @@ namespace System.ComponentModel
                 return resetMethod;
             }
 
-            /*
-            The following code has been removed to fix FXCOP violations.  The code
-            is left here incase it needs to be resurrected in the future.
+/*
+The following code has been removed to fix FXCOP violations.  The code
+is left here incase it needs to be resurrected in the future.
 
-            set {
-                state[BitResetQueried] = true;
-                resetMethod = value;
-            }
-            */
+set {
+state[BitResetQueried] = true;
+resetMethod = value;
+}
+*/
         }
 
         /// <devdoc>
@@ -689,15 +692,15 @@ namespace System.ComponentModel
                 return setMethod;
             }
 
-            /*
-            The following code has been removed to fix FXCOP violations.  The code
-            is left here incase it needs to be resurrected in the future.
+/*
+The following code has been removed to fix FXCOP violations.  The code
+is left here incase it needs to be resurrected in the future.
 
-            set {
-                state[BitSetQueried] = true;
-                setMethod = value;
-            }
-            */
+set {
+state[BitSetQueried] = true;
+setMethod = value;
+}
+*/
         }
 
         /// <devdoc>
@@ -745,15 +748,15 @@ namespace System.ComponentModel
                 return shouldSerializeMethod;
             }
 
-            /*
-            The following code has been removed to fix FXCOP violations.  The code
-            is left here incase it needs to be resurrected in the future.
+/*
+The following code has been removed to fix FXCOP violations.  The code
+is left here incase it needs to be resurrected in the future.
 
-            set {
-                state[BitShouldSerializeQueried] = true;
-                shouldSerializeMethod = value;
-            }
-            */
+set {
+state[BitShouldSerializeQueried] = true;
+shouldSerializeMethod = value;
+}
+*/
         }
 
         /// <devdoc>
@@ -766,7 +769,8 @@ namespace System.ComponentModel
             if (handler == null)
                 throw new ArgumentNullException("handler");
 
-            // If there's an event called <propertyname>Changed, hook the caller's handler directly up to that on the component
+            // If there's an event called <propertyname>Changed, hook the caller's handler directly up to that
+            // on the component
             EventDescriptor changedEvent = ChangedEventValue;
             if (changedEvent != null && changedEvent.EventType.IsInstanceOfType(handler))
             {
@@ -775,8 +779,10 @@ namespace System.ComponentModel
             // Otherwise let the base class add the handler to its ValueChanged event for this component
             else
             {
-                // Special case: If this will be the FIRST handler added for this component, and the component implements
-                // INotifyPropertyChanged, the property descriptor must START listening to the generic PropertyChanged event
+                // Special case: If this will be the FIRST handler added for this component, and the component
+                // implements
+                // INotifyPropertyChanged, the property descriptor must START listening to the generic
+                // PropertyChanged event
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
@@ -1361,8 +1367,10 @@ namespace System.ComponentModel
             {
                 base.RemoveValueChanged(component, handler);
 
-                // Special case: If that was the LAST handler removed for this component, and the component implements
-                // INotifyPropertyChanged, the property descriptor must STOP listening to the generic PropertyChanged event
+                // Special case: If that was the LAST handler removed for this component, and the component
+                // implements
+                // INotifyPropertyChanged, the property descriptor must STOP listening to the generic
+                // PropertyChanged event
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
@@ -1618,25 +1626,30 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     Indicates whether value change notifications for this property may originate from outside the property
-        ///     descriptor, such as from the component itself (value=true), or whether notifications will only originate
-        ///     from direct calls made to PropertyDescriptor.SetValue (value=false). For example, the component may
-        ///     implement the INotifyPropertyChanged interface, or may have an explicit '{name}Changed' event for this property.
+        ///     Indicates whether value change notifications for this property may originate from outside
+        // the property
+        ///     descriptor, such as from the component itself (value=true), or whether notifications will
+        // only originate
+        ///     from direct calls made to PropertyDescriptor.SetValue (value=false). For example, the
+        // component may
+        ///     implement the INotifyPropertyChanged interface, or may have an explicit '{name}Changed'
+        // event for this property.
         /// </devdoc>
         public override bool SupportsChangeEvents
         {
             get { return IPropChangedEventValue != null || ChangedEventValue != null; }
         }
 
-        /*
-        The following code has been removed to fix FXCOP violations.  The code
-        is left here incase it needs to be resurrected in the future.
+/*
+The following code has been removed to fix FXCOP violations.  The code
+is left here incase it needs to be resurrected in the future.
 
-        /// <devdoc>
-        ///     A constructor for ReflectPropertyDescriptors that have no attributes.
-        /// </devdoc>
-        public ReflectPropertyDescriptor(Type componentClass, string name, Type type) : this(componentClass, name, type, (Attribute[])null) {
-        }
-        */
+/// <devdoc>
+///     A constructor for ReflectPropertyDescriptors that have no attributes.
+/// </devdoc>
+public ReflectPropertyDescriptor(Type componentClass, string name, Type type) : this(componentClass,
+name, type, (Attribute[])null) {
+}
+*/
     }
 }

@@ -11,13 +11,18 @@ namespace System.Diagnostics
     // Overview
     // --------
     // We have a few constraints we're working under here:
-    // - waitid is used on Unix to get the exit status (including exit code) of a child process, but once a child
+    // - waitid is used on Unix to get the exit status (including exit code) of a child process, but
+    // once a child
     //   process is reaped, it is no longer possible to get the status.
-    // - The Process design allows for multiple independent Process objects to be handed out, and each of those
-    //   objects may be used concurrently with each other, even if they refer to the same underlying process.
-    //   Same with ProcessWaitHandle objects.  This is based on the Windows design where anyone with a handle to the
+    // - The Process design allows for multiple independent Process objects to be handed out, and each
+    // of those
+    //   objects may be used concurrently with each other, even if they refer to the same underlying
+    // process.
+    //   Same with ProcessWaitHandle objects.  This is based on the Windows design where anyone with a
+    // handle to the
     //   process can retrieve completion information about that process.
-    // - There is no good Unix equivalent to asynchronously be notified of a non-child process' exit, which means such
+    // - There is no good Unix equivalent to asynchronously be notified of a non-child process' exit,
+    // which means such
     //   support needs to be layered on top of kill.
     //
     // As a result, we have the following scheme:
@@ -26,18 +31,24 @@ namespace System.Diagnostics
     //   times we need to access the table, primarily just the first time a Process object needs
     //   access to process exit/wait information and subsequently when that Process object gets GC'd.
     // - Each process holds a ProcessWaitState.Holder object; when that object is constructed,
-    //   it ensures there's an appropriate entry in the mapping table and increments that entry's ref count.
+    //   it ensures there's an appropriate entry in the mapping table and increments that entry's ref
+    // count.
     // - When a Process object is dropped and its ProcessWaitState.Holder is finalized, it'll
     //   decrement the ref count, and when no more process objects exist for a particular process ID,
     //   that entry in the table will be cleaned up.
-    // - This approach effectively allows for multiple independent Process objects for the same process ID to all
+    // - This approach effectively allows for multiple independent Process objects for the same process
+    // ID to all
     //   share the same ProcessWaitState.  And since they are sharing the same wait state object,
     //   the wait state object uses its own lock to protect the per-process state.  This includes
-    //   caching exit / exit code / exit time information so that a Process object for a process that's already
+    //   caching exit / exit code / exit time information so that a Process object for a process that's
+    // already
     //   had waitpid called for it can get at its exit information.
-    // - When we detect a recycled pid, we remove that ProcessWaitState from the table and replace it with a new one
-    //   that represents the new process. For child processes we know a pid is recycled when we see the pid of a new
-    //   child is already in the table. For non-child processes, we assume that a pid may be recycled as soon as
+    // - When we detect a recycled pid, we remove that ProcessWaitState from the table and replace it
+    // with a new one
+    //   that represents the new process. For child processes we know a pid is recycled when we see the
+    // pid of a new
+    //   child is already in the table. For non-child processes, we assume that a pid may be recycled as
+    // soon as
     //   we've observed it has exited.
 
     /// <summary>Exit information and waiting capabilities for a process.</summary>
@@ -81,13 +92,15 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Global table that maps process IDs of non-child Processes to the associated shared wait state information.
+        /// Global table that maps process IDs of non-child Processes to the associated shared wait state
+        // information.
         /// </summary>
         private static readonly Dictionary<int, ProcessWaitState> s_processWaitStates =
             new Dictionary<int, ProcessWaitState>();
 
         /// <summary>
-        /// Global table that maps process IDs of child Processes to the associated shared wait state information.
+        /// Global table that maps process IDs of child Processes to the associated shared wait state
+        // information.
         /// </summary>
         private static readonly Dictionary<int, ProcessWaitState> s_childProcessWaitStates =
             new Dictionary<int, ProcessWaitState>();
@@ -97,8 +110,10 @@ namespace System.Diagnostics
         /// increments its ref count, and returns it.
         /// </summary>
         /// <param name="processId">The process ID for which we need wait state.</param>
-        /// <param name="isNewChild">Whether the wait state will represent a newly created child process.</param>
-        /// <param name="usesTerminal">Whether the wait state will represent a process that is expected to use the terminal.</param>
+        /// <param name="isNewChild">Whether the wait state will represent a newly created child
+        // process.</param>
+        /// <param name="usesTerminal">Whether the wait state will represent a process that is expected to
+        // use the terminal.</param>
         /// <returns>The wait state object.</returns>
         internal static ProcessWaitState AddRef(int processId, bool isNewChild, bool usesTerminal)
         {
@@ -220,11 +235,13 @@ namespace System.Diagnostics
         /// <summary>Whether the associated process exited.</summary>
         private bool _exited;
 
-        /// <summary>If the process exited, it's exit code, or null if we were unable to determine one.</summary>
+        /// <summary>If the process exited, it's exit code, or null if we were unable to determine
+        // one.</summary>
         private int? _exitCode;
 
         /// <summary>
-        /// The approximate time the process exited.  We do not have the ability to know exact time a process
+        /// The approximate time the process exited.  We do not have the ability to know exact time a
+        // process
         /// exited, so we approximate it by storing the time that we discovered it exited.
         /// </summary>
         private DateTime _exitTime;
@@ -406,7 +423,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>Waits for the associated process to exit.</summary>
-        /// <param name="millisecondsTimeout">The amount of time to wait, or -1 to wait indefinitely.</param>
+        /// <param name="millisecondsTimeout">The amount of time to wait, or -1 to wait
+        // indefinitely.</param>
         /// <returns>true if the process exited; false if the timeout occurred.</returns>
         internal bool WaitForExit(int millisecondsTimeout)
         {
@@ -529,8 +547,10 @@ namespace System.Diagnostics
             Debug.Assert(Monitor.IsEntered(_gate));
             Debug.Assert(!_isChild);
 
-            // Wait for the previous waiting task to complete. We need to ensure that this call completes asynchronously,
-            // in order to escape the caller's lock and avoid blocking the caller by any work in the below loop, so
+            // Wait for the previous waiting task to complete. We need to ensure that this call completes
+            // asynchronously,
+            // in order to escape the caller's lock and avoid blocking the caller by any work in the below loop,
+            // so
             // we use ForceYielding.
             await _waitInProgress.ConfigureAwait(
                 ConfigureAwaitOptions.ForceYielding | ConfigureAwaitOptions.SuppressThrowing
@@ -664,7 +684,8 @@ namespace System.Diagnostics
 
                 if (checkAll && !reapAll)
                 {
-                    // We track things to unref so we don't invalidate our iterator by changing s_childProcessWaitStates.
+                    // We track things to unref so we don't invalidate our iterator by changing
+                    // s_childProcessWaitStates.
                     ProcessWaitState? firstToRemove = null;
                     List<ProcessWaitState>? additionalToRemove = null;
                     foreach (KeyValuePair<int, ProcessWaitState> kv in s_childProcessWaitStates)

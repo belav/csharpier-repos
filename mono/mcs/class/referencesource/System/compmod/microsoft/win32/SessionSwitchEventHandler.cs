@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace Microsoft.Win32
 {
     using System;
@@ -13,7 +13,8 @@ namespace Microsoft.Win32
     using System.Security.Permissions;
 
     /// <devdoc>
-    /// <para>Represents the method that will handle the <see cref='Microsoft.Win32.SystemEvents.SessionSwitch'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='Microsoft.Win32.SystemEvents.SessionSwitch'/> event.</para>
     /// </devdoc>
     [HostProtectionAttribute(MayLeakOnAbort = true)]
     public delegate void SessionSwitchEventHandler(object sender, SessionSwitchEventArgs e);

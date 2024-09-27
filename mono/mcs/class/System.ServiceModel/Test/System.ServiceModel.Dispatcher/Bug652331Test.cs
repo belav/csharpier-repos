@@ -267,29 +267,32 @@ namespace WebServiceMoonlightTest.ServiceReference1
         )
             : base(binding, remoteAddress) { }
 
-        /*
-                public System.Net.CookieContainer CookieContainer {
-                    get {
-                        System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager = this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
-                        if ((httpCookieContainerManager != null)) {
-                            return httpCookieContainerManager.CookieContainer;
-                        }
-                        else {
-                            return null;
-                        }
-                    }
-                    set {
-                        System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager = this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
-                        if ((httpCookieContainerManager != null)) {
-                            httpCookieContainerManager.CookieContainer = value;
-                        }
-                        else {
-                            throw new System.InvalidOperationException("Unable to set the CookieContainer. Please make sure the binding contains an HttpC" +
-                                    "ookieContainerBindingElement.");
-                        }
-                    }
-                }
-        */
+/*
+public System.Net.CookieContainer CookieContainer {
+get {
+System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
+this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+if ((httpCookieContainerManager != null)) {
+return httpCookieContainerManager.CookieContainer;
+}
+else {
+return null;
+}
+}
+set {
+System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
+this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+if ((httpCookieContainerManager != null)) {
+httpCookieContainerManager.CookieContainer = value;
+}
+else {
+throw new System.InvalidOperationException("Unable to set the CookieContainer. Please make sure the
+binding contains an HttpC" +
+"ookieContainerBindingElement.");
+}
+}
+}
+*/
 
         public event System.EventHandler<GetDataCompletedEventArgs> GetDataCompleted;
 
@@ -508,30 +511,34 @@ namespace WebServiceMoonlightTest.ServiceReference1
             );
         }
 
-        /*
-                protected override WebServiceMoonlightTest.ServiceReference1.IService1 CreateChannel() {
-                    return new Service1ClientChannel(this);
-                }
-                
-                private class Service1ClientChannel : ChannelBase<WebServiceMoonlightTest.ServiceReference1.IService1>, WebServiceMoonlightTest.ServiceReference1.IService1 {
-                    
-                    public Service1ClientChannel(System.ServiceModel.ClientBase<WebServiceMoonlightTest.ServiceReference1.IService1> client) :
-                            base(client) {
-                    }
-                    
-                    public System.IAsyncResult BeginGetData(System.AsyncCallback callback, object asyncState) {
-                        object[] _args = new object[0];
-                        System.IAsyncResult _result = base.BeginInvoke("GetData", _args, callback, asyncState);
-                        return _result;
-                    }
-                    
-                    public object EndGetData(System.IAsyncResult result) {
-                        object[] _args = new object[0];
-                        object _result = ((object)(base.EndInvoke("GetData", _args, result)));
-                        return _result;
-                    }
-                }
-        */
+/*
+protected override WebServiceMoonlightTest.ServiceReference1.IService1 CreateChannel() {
+return new Service1ClientChannel(this);
+}
+
+private class Service1ClientChannel :
+ChannelBase<WebServiceMoonlightTest.ServiceReference1.IService1>,
+WebServiceMoonlightTest.ServiceReference1.IService1 {
+
+public
+Service1ClientChannel(System.ServiceModel.ClientBase<WebServiceMoonlightTest.ServiceReference1.IService1>
+client) :
+base(client) {
+}
+
+public System.IAsyncResult BeginGetData(System.AsyncCallback callback, object asyncState) {
+object[] _args = new object[0];
+System.IAsyncResult _result = base.BeginInvoke("GetData", _args, callback, asyncState);
+return _result;
+}
+
+public object EndGetData(System.IAsyncResult result) {
+object[] _args = new object[0];
+object _result = ((object)(base.EndInvoke("GetData", _args, result)));
+return _result;
+}
+}
+*/
     }
 }
 #endif

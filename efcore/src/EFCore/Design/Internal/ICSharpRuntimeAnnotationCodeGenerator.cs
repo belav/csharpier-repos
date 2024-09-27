@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal;
 ///     Implemented by database providers to generate the code for annotations.
 /// </summary>
 /// <remarks>
-///     The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
+///     The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
 ///     is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
 ///     This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
 /// </remarks>
@@ -121,7 +122,8 @@ public interface ICSharpRuntimeAnnotationCodeGenerator
     /// <summary>
     ///     Generates code to create the given annotations.
     /// </summary>
-    /// <param name="typeConfiguration">The scalar type configuration to which the annotations are applied.</param>
+    /// <param name="typeConfiguration">The scalar type configuration to which the annotations are
+    // applied.</param>
     /// <param name="parameters">Additional parameters used during code generation.</param>
     void Generate(
         ITypeMappingConfiguration typeConfiguration,
@@ -152,9 +154,12 @@ public interface ICSharpRuntimeAnnotationCodeGenerator
     /// </summary>
     /// <param name="typeMapping">The type mapping to create.</param>
     /// <param name="parameters">Additional parameters used during code generation.</param>
-    /// <param name="valueComparer">The value comparer that should be used instead of the one in the type mapping.</param>
-    /// <param name="keyValueComparer">The key value comparer that should be used instead of the one in the type mapping.</param>
-    /// <param name="providerValueComparer">The provider value comparer that should be used instead of the one in the type mapping.</param>
+    /// <param name="valueComparer">The value comparer that should be used instead of the one in the
+    // type mapping.</param>
+    /// <param name="keyValueComparer">The key value comparer that should be used instead of the one in
+    // the type mapping.</param>
+    /// <param name="providerValueComparer">The provider value comparer that should be used instead of
+    // the one in the type mapping.</param>
     bool Create(
         CoreTypeMapping typeMapping,
         CSharpRuntimeAnnotationCodeGeneratorParameters parameters,

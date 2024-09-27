@@ -421,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.LabeledStatement:
                 case SyntaxKind.LocalFunctionStatement:
-                    // Labeled statements and local function statements are not legal in contexts where we need embedded statements.
+                    // Labeled statements and local function statements are not legal in contexts where we need embedded
+                    // statements.
                     diagnostics.Add(ErrorCode.ERR_BadEmbeddedStmt, node.GetLocation());
 
                     binder = this.GetBinder(node);
@@ -532,7 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                // In C# 8 and later we follow the ECMA specification, which neatly handles null and expressions of exception type.
+                // In C# 8 and later we follow the ECMA specification, which neatly handles null and expressions of
+                // exception type.
                 boundExpr = GenerateConversionForAssignment(
                     GetWellKnownType(WellKnownType.System_Exception, diagnostics, exprSyntax),
                     boundExpr,
@@ -589,7 +591,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            // TODO: verify that goto label lookup was valid (e.g. error checking of symbol resolution for labels)
+            // TODO: verify that goto label lookup was valid (e.g. error checking of symbol resolution for
+            // labels)
             bool hasError = false;
 
             var result = LookupResult.GetInstance();
@@ -604,7 +607,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 options: LookupOptions.LabelsOnly
             );
 
-            // result.Symbols can be empty in some malformed code, e.g. when a labeled statement is used an embedded statement in an if or foreach statement
+            // result.Symbols can be empty in some malformed code, e.g. when a labeled statement is used an
+            // embedded statement in an if or foreach statement
             // In this case we create new label symbol on the fly, and an error is reported by parser
             var symbol =
                 result.Symbols.Count > 0 && result.IsMultiViable
@@ -681,8 +685,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.GotoCaseStatement:
                 case SyntaxKind.GotoDefaultStatement:
 
-                    // SPEC:    If the goto case statement is not enclosed by a switch statement, a compile-time error occurs.
-                    // SPEC:    If the goto default statement is not enclosed by a switch statement, a compile-time error occurs.
+                    // SPEC:    If the goto case statement is not enclosed by a switch statement, a compile-time error
+                    // occurs.
+                    // SPEC:    If the goto default statement is not enclosed by a switch statement, a compile-time
+                    // error occurs.
 
                     SwitchBinder binder = GetSwitchBinder(this);
                     if (binder == null)
@@ -815,10 +821,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (block != null)
                 {
                     // Have to do ControlFlowPass here because in MethodCompiler, we don't call this for synthed methods
-                    // rather we go directly to LowerBodyOrInitializer, which skips over flow analysis (which is in CompileMethod)
+                    // rather we go directly to LowerBodyOrInitializer, which skips over flow analysis (which is in
+                    // CompileMethod)
                     // (the same thing - calling ControlFlowPass.Analyze in the lowering - is done for lambdas)
                     // It's a bit of code duplication, but refactoring would make things worse.
-                    // However, we don't need to report diagnostics here. They will be reported when analyzing the parent method.
+                    // However, we don't need to report diagnostics here. They will be reported when analyzing the
+                    // parent method.
                     var ignored = DiagnosticBag.GetInstance();
                     var endIsReachable = ControlFlowPass.Analyze(
                         localSymbol.DeclaringCompilation,
@@ -906,7 +914,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Report an error if this is an awaitable async method invocation that is not being awaited.
         /// </summary>
         /// <remarks>
-        /// The checks here are equivalent to StatementBinder::CheckForUnobservedAwaitable() in the native compiler.
+        /// The checks here are equivalent to StatementBinder::CheckForUnobservedAwaitable() in the native
+        // compiler.
         /// </remarks>
         private void CheckForUnobservedAwaitable(
             BoundExpression expression,
@@ -971,8 +980,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 typeSyntax = scopedType.Type;
             }
 
-            // Slightly odd, but we unwrap ref here (and report a lang-version diagnostic when appropriate).  Ideally,
-            // this would be in the constructor of SourceLocalSymbol, but it lacks a diagnostics bag passed to it to add
+            // Slightly odd, but we unwrap ref here (and report a lang-version diagnostic when appropriate).
+            // Ideally,
+            // this would be in the constructor of SourceLocalSymbol, but it lacks a diagnostics bag passed to
+            // it to add
             // this diagnostic.
             typeSyntax = typeSyntax.SkipRefInLocalOrReturn(diagnostics, out _);
 
@@ -1034,12 +1045,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Checks for a Dispose method on <paramref name="expr"/> and returns its <see cref="MethodSymbol"/> if found.
+        /// Checks for a Dispose method on <paramref name="expr"/> and returns its <see
+        // cref="MethodSymbol"/> if found.
         /// </summary>
         /// <param name="expr">Expression on which to perform lookup</param>
         /// <param name="syntaxNode">The syntax node to perform lookup on</param>
         /// <param name="diagnostics">Populated with invocation errors, and warnings of near misses</param>
-        /// <returns>The <see cref="MethodSymbol"/> of the Dispose method if one is found, otherwise null.</returns>
+        /// <returns>The <see cref="MethodSymbol"/> of the Dispose method if one is found, otherwise
+        // null.</returns>
         internal MethodSymbol TryFindDisposePatternMethod(
             BoundExpression expr,
             SyntaxNode syntaxNode,
@@ -1786,7 +1799,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 
                     // check for String
-                    // NOTE: We will allow the pattern method to take precedence, but only if it is an instance member of System.String
+                    // NOTE: We will allow the pattern method to take precedence, but only if it is an instance member
+                    // of System.String
                     if (
                         initializerType.SpecialType == SpecialType.System_String
                         && (
@@ -1806,7 +1820,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
                     }
 
-                    // if the feature was enabled, but something went wrong with the method, report that, otherwise don't.
+                    // if the feature was enabled, but something went wrong with the method, report that, otherwise
+                    // don't.
                     // If feature is not enabled, additional errors would be just noise.
                     bool extensibleFixedEnabled =
                         ((CSharpParseOptions)initializerOpt.SyntaxTree.Options)?.IsFeatureEnabled(
@@ -1907,7 +1922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Wrap the initializer in a BoundFixedLocalCollectionInitializer so that the rewriter will have the
+        /// Wrap the initializer in a BoundFixedLocalCollectionInitializer so that the rewriter will have
+        // the
         /// information it needs (e.g. conversions, helper methods).
         /// </summary>
         private BoundExpression GetFixedLocalCollectionInitializer(
@@ -2164,6 +2180,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool hasErrors = false;
                 if (isRef)
                 {
+                    //
                     // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-11.0/low-level-struct-improvements.md#rules-ref-reassignment
                     // For a ref reassignment in the form `e1 = ref e2` both of the following must be true:
                     // 1. `e2` must have *ref-safe-to-escape* at least as large as the *ref-safe-to-escape* of `e1`
@@ -2858,7 +2875,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // The parameter list exists and had the right number of parameters. Were any of its types
             // mismatched with the delegate parameter types?
 
-            // The simplest possible case is (x, y, z)=>whatever where the target type has a ref or out parameter.
+            // The simplest possible case is (x, y, z)=>whatever where the target type has a ref or out
+            // parameter.
 
             var delegateParameters = delegateType.DelegateParameters();
             if (reason == LambdaConversionResult.RefInImplicitlyTypedLambda)
@@ -2904,7 +2922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (reason == LambdaConversionResult.MismatchedParameterType)
             {
-                // Cannot convert {0} to type '{1}' because the parameter types do not match the delegate parameter types
+                // Cannot convert {0} to type '{1}' because the parameter types do not match the delegate parameter
+                // types
                 conversionError(diagnostics, ErrorCode.ERR_CantConvAnonMethParams, id, targetType);
                 Debug.Assert(anonymousFunction.ParameterCount == delegateParameters.Length);
                 for (int i = 0; i < anonymousFunction.ParameterCount; ++i)
@@ -3047,7 +3066,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                     )
                     {
-                        // CLEVERNESS: By passing ConstantValue.Bad, we tell HasImplicitConstantExpressionConversion to ignore the constant
+                        // CLEVERNESS: By passing ConstantValue.Bad, we tell HasImplicitConstantExpressionConversion to
+                        // ignore the constant
                         // value and only consider the types.
 
                         // If there would be an implicit constant conversion for a different constant of the same type
@@ -3458,10 +3478,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             var argLength = tupleArguments.Length;
 
             // report all leaf elements of the tuple literal that failed to convert
-            // NOTE: we are not responsible for reporting use site errors here, just the failed leaf conversions.
-            // By the time we get here we have done analysis and know we have failed the cast in general, and diagnostics collected in the process is already in the bag.
+            // NOTE: we are not responsible for reporting use site errors here, just the failed leaf
+            // conversions.
+            // By the time we get here we have done analysis and know we have failed the cast in general, and
+            // diagnostics collected in the process is already in the bag.
             // The only thing left is to form a diagnostics about the actually failing conversion(s).
-            // This whole method does not itself collect any usesite diagnostics. Its only purpose is to produce an error better than "conversion failed here"
+            // This whole method does not itself collect any usesite diagnostics. Its only purpose is to produce
+            // an error better than "conversion failed here"
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
             for (int i = 0; i < targetElementTypes.Length; i++)
@@ -3935,7 +3958,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Like BindForEachParts, but only bind the deconstruction part of the foreach, for purpose of inferring the types of the declared locals.
+        /// Like BindForEachParts, but only bind the deconstruction part of the foreach, for purpose of
+        // inferring the types of the declared locals.
         /// </summary>
         internal virtual BoundStatement BindForEachDeconstruction(
             BindingDiagnosticBag diagnostics,
@@ -4172,7 +4196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                             // COMPATIBILITY: The native compiler also produced an error
                             // COMPATIBILITY: "Cannot convert lambda expression to delegate type 'Action' because some of the
-                            // COMPATIBILITY: return types in the block are not implicitly convertible to the delegate return type"
+                            // COMPATIBILITY: return types in the block are not implicitly convertible to the delegate return
+                            // type"
                             // COMPATIBILITY: This error doesn't make sense in the "void" case because the whole idea of
                             // COMPATIBILITY: "conversion to void" is a bit unusual, and we've already given a good error.
                         }
@@ -4462,15 +4487,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (!hasError)
             {
-                // TODO: Loop is O(n), caller is O(n^2).  Perhaps we could iterate in reverse order (since it's easier to find
+                // TODO: Loop is O(n), caller is O(n^2).  Perhaps we could iterate in reverse order (since it's
+                // easier to find
                 // base types than to find derived types).
                 Debug.Assert(((object)type == null) || !type.IsErrorType());
                 foreach (var previousBlock in previousBlocks)
                 {
                     var previousType = previousBlock.ExceptionTypeOpt;
 
-                    // If the previous type is a generic parameter we don't know what exception types it's gonna catch exactly.
-                    // If it is a class-type we know it's gonna catch all exception types of its type and types that are derived from it.
+                    // If the previous type is a generic parameter we don't know what exception types it's gonna catch
+                    // exactly.
+                    // If it is a class-type we know it's gonna catch all exception types of its type and types that are
+                    // derived from it.
                     // So if the current type is a class-type (or an effective base type of a generic parameter)
                     // that derives from the previous type the current catch is unreachable.
 
@@ -4516,7 +4544,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             && Compilation.SourceAssembly.RuntimeCompatibilityWrapNonExceptionThrows
                         )
                         {
-                            // If the RuntimeCompatibility(WrapNonExceptionThrows = false) is applied on the source assembly or any referenced netmodule.
+                            // If the RuntimeCompatibility(WrapNonExceptionThrows = false) is applied on the source assembly or
+                            // any referenced netmodule.
                             // an empty catch may catch exceptions that don't derive from System.Exception.
 
                             // "A previous catch clause already catches all exceptions..."
@@ -4588,7 +4617,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             if (boundFilter.ConstantValueOpt != ConstantValue.NotAvailable)
             {
-                // Depending on whether the filter constant is true or false, and whether there are other catch clauses,
+                // Depending on whether the filter constant is true or false, and whether there are other catch
+                // clauses,
                 // we suggest different actions
                 var errorCode =
                     boundFilter.ConstantValueOpt.BooleanValue ? ErrorCode.WRN_FilterIsConstantTrue
@@ -4623,7 +4653,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Location location = GetLocationForDiagnostics(syntax);
                 if (IsInAsyncMethod())
                 {
-                    // Cannot convert async {0} to intended delegate type. An async {0} may return void, Task or Task<T>, none of which are convertible to '{1}'.
+                    // Cannot convert async {0} to intended delegate type. An async {0} may return void, Task or
+                    // Task<T>, none of which are convertible to '{1}'.
                     Error(
                         diagnostics,
                         ErrorCode.ERR_CantConvAsyncAnonFuncReturns,
@@ -4634,7 +4665,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    // Cannot convert {0} to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                    // Cannot convert {0} to intended delegate type because some of the return types in the block are
+                    // not implicitly convertible to the delegate return type
                     Error(
                         diagnostics,
                         ErrorCode.ERR_CantConvAnonMethReturns,
@@ -4846,7 +4878,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                // When binding for purpose of inferring the return type of a lambda, we do not require returned expressions (such as `default` or switch expressions) to have a natural type
+                // When binding for purpose of inferring the return type of a lambda, we do not require returned
+                // expressions (such as `default` or switch expressions) to have a natural type
                 var inferringLambda =
                     this.ContainingMemberOrLambda is MethodSymbol method
                     && (object)method.ReturnType == LambdaSymbol.ReturnTypeIsBeingInferred;
@@ -4913,7 +4946,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return bindExpressionBodyAsBlockInternal(expressionBody, bodyBinder, diagnostics);
 
-            // Use static local function to prevent accidentally calling instance methods on `this` instead of `bodyBinder`
+            // Use static local function to prevent accidentally calling instance methods on `this` instead of
+            // `bodyBinder`
             static BoundBlock bindExpressionBodyAsBlockInternal(
                 ArrowExpressionClauseSyntax expressionBody,
                 Binder bodyBinder,
@@ -5204,7 +5238,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // Using BindStatement to bind block to make sure we are reusing results of partial binding in SemanticModel
+            // Using BindStatement to bind block to make sure we are reusing results of partial binding in
+            // SemanticModel
             return new BoundConstructorMethodBody(
                 constructor,
                 bodyBinder.GetDeclaredLocalsForScope(constructor),
@@ -5248,7 +5283,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (MethodSymbol)this.ContainingMember(),
                     diagnostics
                 );
-            //  Base WasCompilerGenerated state off of whether constructor is implicitly declared, this will ensure proper instrumentation.
+            //  Base WasCompilerGenerated state off of whether constructor is implicitly declared, this will
+            // ensure proper instrumentation.
             Debug.Assert(!this.ContainingMember().IsImplicitlyDeclared);
             var constructorInitializer = new BoundExpressionStatement(
                 initializer,
@@ -5280,7 +5316,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            //  Base WasCompilerGenerated state off of whether constructor is implicitly declared, this will ensure proper instrumentation.
+            //  Base WasCompilerGenerated state off of whether constructor is implicitly declared, this will
+            // ensure proper instrumentation.
             var constructorInitializer = new BoundExpressionStatement(
                 ctorSyntax,
                 initializerInvocation
@@ -5300,7 +5337,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Bind the implicit constructor initializer of a constructor symbol.
         /// </summary>
         /// <param name="constructor">Constructor method.</param>
-        /// <param name="diagnostics">Accumulates errors (e.g. access "this" in constructor initializer).</param>
+        /// <param name="diagnostics">Accumulates errors (e.g. access "this" in constructor
+        // initializer).</param>
         /// <param name="compilation">Used to retrieve binder.</param>
         /// <returns>A bound expression for the constructor initializer call.</returns>
         internal static BoundExpression? BindImplicitConstructorInitializer(
@@ -5327,8 +5365,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // The common case is that the type inherits directly from object.
             // Also, we might be trying to generate a constructor for an entirely compiler-generated class such
-            // as a closure class; in that case it is vexing to try to find a suitable binder for the non-existing
-            // constructor syntax so that we can do unnecessary overload resolution on the non-existing initializer!
+            // as a closure class; in that case it is vexing to try to find a suitable binder for the
+            // non-existing
+            // constructor syntax so that we can do unnecessary overload resolution on the non-existing
+            // initializer!
             // Simply take the early out: bind directly to the parameterless object ctor rather than attempting
             // overload resolution.
             if ((object)baseType != null)
@@ -5406,8 +5446,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (sourceConstructor.SyntaxNode)
                 {
                     case ConstructorDeclarationSyntax ctorDecl:
-                        // We have a ctor in source but no explicit constructor initializer.  We can't just use the binder for the
-                        // type containing the ctor because the ctor might be marked unsafe.  Use the binder for the parameter list
+                        // We have a ctor in source but no explicit constructor initializer.  We can't just use the binder
+                        // for the
+                        // type containing the ctor because the ctor might be marked unsafe.  Use the binder for the
+                        // parameter list
                         // as an approximation - the extra symbols won't matter because there are no identifiers to bind.
 
                         outerBinder = binderFactory.GetBinder(ctorDecl.ParameterList);
@@ -5608,7 +5650,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            // Using BindStatement to bind block to make sure we are reusing results of partial binding in SemanticModel
+            // Using BindStatement to bind block to make sure we are reusing results of partial binding in
+            // SemanticModel
             return new BoundNonConstructorMethodBody(
                 declaration,
                 blockBody == null ? null : (BoundBlock)BindStatement(blockBody, diagnostics),
@@ -5637,7 +5680,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If this binder owns the scope that can declare extern aliases, a set of declared aliases should be returned (even if empty).
+        /// If this binder owns the scope that can declare extern aliases, a set of declared aliases should
+        // be returned (even if empty).
         /// Otherwise, a default instance should be returned.
         /// </summary>
         internal virtual ImmutableArray<AliasAndExternAliasDirective> ExternAliases
@@ -5646,9 +5690,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If this binder owns the scope that can declare using aliases, a set of declared aliases should be returned (even if empty).
+        /// If this binder owns the scope that can declare using aliases, a set of declared aliases should
+        // be returned (even if empty).
         /// Otherwise, a default instance should be returned.
-        /// Note, only aliases syntactically declared within the enclosing declaration are included. For example, global aliases
+        /// Note, only aliases syntactically declared within the enclosing declaration are included. For
+        // example, global aliases
         /// declared in a different compilation units are not included.
         /// </summary>
         internal virtual ImmutableArray<AliasAndUsingDirective> UsingAliases

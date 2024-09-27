@@ -123,7 +123,8 @@ namespace System.Activities.Tracking
                             participant
                         );
 
-                        // HasPendingRecords can be true for the sole purpose of populating our initial profiles, so check again here
+                        // HasPendingRecords can be true for the sole purpose of populating our initial profiles, so check
+                        // again here
                         if (this.pendingTrackingRecords != null)
                         {
                             for (int j = 0; j < this.pendingTrackingRecords.Count; j++)

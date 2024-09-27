@@ -19,7 +19,8 @@ namespace ILVerification.Tests
 {
     /// <summary>
     /// Parses the methods in the test assemblies.
-    /// It loads all assemblies from the test folder defined in <code>TestDataLoader.TestAssemblyPath</code>
+    /// It loads all assemblies from the test folder defined in
+    // <code>TestDataLoader.TestAssemblyPath</code>
     /// This class feeds the xunit Theories
     /// </summary>
     class TestDataLoader
@@ -56,7 +57,8 @@ namespace ILVerification.Tests
 
         /// <summary>
         ///  Returns all class doesn't correctly implement based on following naming convention
-        ///  [FriendlyName]_InvalidType_[ExpectedVerifierError1]@[ExpectedVerifierError2]....[ExpectedVerifierErrorN]
+        ///
+        // [FriendlyName]_InvalidType_[ExpectedVerifierError1]@[ExpectedVerifierError2]....[ExpectedVerifierErrorN]
         /// </summary>
         /// <returns></returns>
         public static TheoryData<TestCase> GetTypesWithInvalidType()
@@ -120,7 +122,8 @@ namespace ILVerification.Tests
         /// <summary>
         /// Returns all methods that contain valid IL code based on the following naming convention:
         /// [FriendlyName]_Valid
-        /// The method must contain 1 '_'. The part before the '_' is a friendly name describing what the method does.
+        /// The method must contain 1 '_'. The part before the '_' is a friendly name describing what the
+        // method does.
         /// The word after the '_' has to be 'Valid' (Case sensitive)
         /// E.g.: 'SimpleAdd_Valid'
         /// </summary>
@@ -144,7 +147,8 @@ namespace ILVerification.Tests
 
         /// <summary>
         /// Returns all methods that contain valid IL code based on the following naming convention:
-        /// [FriendlyName]_Invalid_[ExpectedVerifierError1].[ExpectedVerifierError2]....[ExpectedVerifierErrorN]
+        ///
+        // [FriendlyName]_Invalid_[ExpectedVerifierError1].[ExpectedVerifierError2]....[ExpectedVerifierErrorN]
         /// The method name must contain 2 '_' characters.
         /// 1. part: a friendly name
         /// 2. part: must be the word 'Invalid' (Case sensitive)
@@ -220,8 +224,10 @@ namespace ILVerification.Tests
                     //   * `get_Property` -> [ 'get_Property' ]
                     //   * `CheckSomething_Valid` -> [ 'CheckSomething', 'Valid' ]
                     //   * 'WrongMethod_Invalid_BranchOutOfTry' -> [ 'WrongMethod', 'Invalid', 'BranchOutOfTry' ]
-                    //   * 'MoreWrongMethod_Invalid_TypeAccess.InitOnly' -> [ 'MoreWrongMethod', 'Invalid', 'TypeAccess', 'InitOnly' ]
-                    //   * 'special.set_MyProperty.set_MyProperty_Invalid_InitOnly' -> [ 'special.set_MyProperty.set_MyProperty', 'Invalid', 'InitOnly' ]
+                    //   * 'MoreWrongMethod_Invalid_TypeAccess.InitOnly' -> [ 'MoreWrongMethod', 'Invalid',
+                    // 'TypeAccess', 'InitOnly' ]
+                    //   * 'special.set_MyProperty.set_MyProperty_Invalid_InitOnly' -> [
+                    // 'special.set_MyProperty.set_MyProperty', 'Invalid', 'InitOnly' ]
 
                     var specialMethodHandle = HandleSpecialTests(mparams, method);
                     var newItem = methodSelector(mparams, specialMethodHandle);

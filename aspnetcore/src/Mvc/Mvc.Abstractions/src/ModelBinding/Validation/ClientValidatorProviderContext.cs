@@ -11,7 +11,8 @@ public class ClientValidatorProviderContext
     /// <summary>
     /// Creates a new <see cref="ClientValidatorProviderContext"/>.
     /// </summary>
-    /// <param name="modelMetadata">The <see cref="ModelBinding.ModelMetadata"/> for the model being validated.
+    /// <param name="modelMetadata">The <see cref="ModelBinding.ModelMetadata"/> for the model being
+    // validated.
     /// </param>
     /// <param name="items">The list of <see cref="ClientValidatorItem"/>s.</param>
     public ClientValidatorProviderContext(
@@ -37,7 +38,8 @@ public class ClientValidatorProviderContext
     public IReadOnlyList<object> ValidatorMetadata => ModelMetadata.ValidatorMetadata;
 
     /// <summary>
-    /// Gets the list of <see cref="ClientValidatorItem"/> instances. <see cref="IClientModelValidatorProvider"/>
+    /// Gets the list of <see cref="ClientValidatorItem"/> instances. <see
+    // cref="IClientModelValidatorProvider"/>
     /// instances should add the appropriate <see cref="ClientValidatorItem.Validator"/> properties when
     /// <see cref="IClientModelValidatorProvider.CreateValidators(ClientValidatorProviderContext)"/>
     /// is called.

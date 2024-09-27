@@ -710,8 +710,10 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
         Assert.Equal("List", result.Action);
     }
 
-    // We are intentionally skipping GET because we have another method with [HttpGet] on the same controller
-    // and a test that verifies that if you define another action with a specific verb we'll route to that
+    // We are intentionally skipping GET because we have another method with [HttpGet] on the same
+    // controller
+    // and a test that verifies that if you define another action with a specific verb we'll route to
+    // that
     // more specific action.
     [Theory]
     [InlineData("PUT")]

@@ -234,9 +234,11 @@ namespace System.Xml
 
         // how they get reset?
         //
-        //          EE(localName)  EE(ns, pre, localName) EENC(ns, pre, localName) EA(localName)  EA(ns, pre, localName)
+        //          EE(localName)  EE(ns, pre, localName) EENC(ns, pre, localName) EA(localName)  EA(ns,
+        // pre, localName)
         //  fENs                      false(action)
-        //  fANs                                                                                        false(action)
+        //  fANs
+        // false(action)
 
         // How they change the TextOutput?
         //
@@ -795,14 +797,19 @@ namespace System.Xml
     // Indentation HtmlWriter only indent <BLOCK><BLOCK> situations
     //
     // Here are all the cases:
-    //       ELEMENT1     actions          ELEMENT2          actions                                 SC              EE
-    // 1).    SE SC   store SE blockPro       SE           a). check ELEMENT1 blockPro                  <A>           </A>
-    //        EE     if SE, EE are blocks                  b). true: check ELEMENT2 blockPro                <B>            <B>
+    //       ELEMENT1     actions          ELEMENT2          actions                                 SC
+    // EE
+    // 1).    SE SC   store SE blockPro       SE           a). check ELEMENT1 blockPro
+    // <A>           </A>
+    //        EE     if SE, EE are blocks                  b). true: check ELEMENT2 blockPro
+    // <B>            <B>
     //                                                     c). detect ELEMENT is SE, SC
     //                                                     d). increase the indexlevel
     //
-    // 2).    SE SC,  Store EE blockPro       EE            a). check stored blockPro                    <A></A>            </A>
-    //         EE    if SE, EE are blocks                  b). true:  indexLevel same                                  </B>
+    // 2).    SE SC,  Store EE blockPro       EE            a). check stored blockPro
+    // <A></A>            </A>
+    //         EE    if SE, EE are blocks                  b). true:  indexLevel same
+    // </B>
     //
 
 
@@ -812,21 +819,29 @@ namespace System.Xml
     // Indentation HtmlWriter only indent <BLOCK><BLOCK> situations
     //
     // Here are all the cases:
-    //       ELEMENT1     actions           ELEMENT2          actions                                 Samples
-    // 1).    SE SC   store SE blockPro       SE            a). check ELEMENT1 blockPro                  <A>(blockPos)
-    //                                                     b). true: check ELEMENT2 blockPro                <B>
+    //       ELEMENT1     actions           ELEMENT2          actions
+    // Samples
+    // 1).    SE SC   store SE blockPro       SE            a). check ELEMENT1 blockPro
+    // <A>(blockPos)
+    //                                                     b). true: check ELEMENT2 blockPro
+    // <B>
     //                                                     c). detect ELEMENT is SE, SC
     //                                                     d). increase the indentLevel
     //
-    // 2).     EE     Store EE blockPro       SE            a). check stored blockPro                    </A>
-    //                                                     b). true:  indentLevel same                   <B>
+    // 2).     EE     Store EE blockPro       SE            a). check stored blockPro
+    // </A>
+    //                                                     b). true:  indentLevel same
+    // <B>
     //                                                     c). output block2
     //
-    // 3).     EE      same as above          EE            a). check stored blockPro                          </A>
-    //                                                     b). true:  --indentLevel                        </B>
+    // 3).     EE      same as above          EE            a). check stored blockPro
+    // </A>
+    //                                                     b). true:  --indentLevel
+    // </B>
     //                                                     c). output block2
     //
-    // 4).    SE SC    same as above          EE            a). check stored blockPro                      <A></A>
+    // 4).    SE SC    same as above          EE            a). check stored blockPro
+    // <A></A>
     //                                                     b). true:  indentLevel no change
     internal sealed class HtmlEncodedRawTextWriterIndent : HtmlEncodedRawTextWriter
     {

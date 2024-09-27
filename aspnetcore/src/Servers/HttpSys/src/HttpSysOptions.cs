@@ -59,15 +59,18 @@ public class HttpSysOptions
     }
 
     /// <summary>
-    /// This indicates whether the server is responsible for creating and configuring the request queue, or if it should attach to an existing queue.
+    /// This indicates whether the server is responsible for creating and configuring the request queue,
+    // or if it should attach to an existing queue.
     /// Most existing configuration options do not apply when attaching to an existing queue.
     /// The default is `RequestQueueMode.Create`.
     /// </summary>
     public RequestQueueMode RequestQueueMode { get; set; }
 
     /// <summary>
-    /// Indicates how client certificates should be populated. The default is to allow a certificate without renegotiation.
-    /// This does not change the netsh 'clientcertnegotiation' binding option which will need to be enabled for
+    /// Indicates how client certificates should be populated. The default is to allow a certificate
+    // without renegotiation.
+    /// This does not change the netsh 'clientcertnegotiation' binding option which will need to be
+    // enabled for
     /// ClientCertificateMethod.AllowCertificate to resolve a certificate.
     /// </summary>
     public ClientCertificateMethod ClientCertificateMethod { get; set; } =
@@ -75,14 +78,16 @@ public class HttpSysOptions
 
     /// <summary>
     /// The maximum number of concurrent accepts.
-    /// The default is 5 times the number of processors as returned by <see cref="Environment.ProcessorCount" />.
+    /// The default is 5 times the number of processors as returned by <see
+    // cref="Environment.ProcessorCount" />.
     /// </summary>
     public int MaxAccepts { get; set; } = DefaultMaxAccepts;
 
     /// <summary>
     /// Attempt kernel-mode caching for responses with eligible headers.
     /// The response may not include Set-Cookie, Vary, or Pragma headers.
-    /// It must include a Cache-Control header that's public and either a shared-max-age or max-age value, or an Expires header.
+    /// It must include a Cache-Control header that's public and either a shared-max-age or max-age
+    // value, or an Expires header.
     /// The default is `true`.
     /// </summary>
     public bool EnableResponseCaching { get; set; } = true;
@@ -108,7 +113,8 @@ public class HttpSysOptions
     public TimeoutManager Timeouts { get; } = new TimeoutManager();
 
     /// <summary>
-    /// Gets or Sets if response body writes that fail due to client disconnects should throw exceptions or
+    /// Gets or Sets if response body writes that fail due to client disconnects should throw exceptions
+    // or
     /// complete normally.
     /// The default is `false` (complete normally).
     /// </summary>
@@ -116,9 +122,12 @@ public class HttpSysOptions
 
     /// <summary>
     /// Enable buffering of response data in the Kernel. The default value is <code>false</code>.
-    /// It should be used by an application doing synchronous I/O or by an application doing asynchronous I/O with
-    /// no more than one outstanding write at a time, and can significantly improve throughput over high-latency connections.
-    /// Applications that use asynchronous I/O and that may have more than one send outstanding at a time should not use this flag.
+    /// It should be used by an application doing synchronous I/O or by an application doing
+    // asynchronous I/O with
+    /// no more than one outstanding write at a time, and can significantly improve throughput over
+    // high-latency connections.
+    /// Applications that use asynchronous I/O and that may have more than one send outstanding at a
+    // time should not use this flag.
     /// Enabling this can results in higher CPU and memory usage by Http.Sys.
     /// </summary>
     public bool EnableKernelResponseBuffering { get; set; }
@@ -201,15 +210,19 @@ public class HttpSysOptions
     }
 
     /// <summary>
-    /// Control whether synchronous input/output is allowed for the HttpContext.Request.Body and HttpContext.Response.Body.
+    /// Control whether synchronous input/output is allowed for the HttpContext.Request.Body and
+    // HttpContext.Response.Body.
     /// The default is `false`.
     /// </summary>
     public bool AllowSynchronousIO { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that controls how http.sys reacts when rejecting requests due to throttling conditions - like when the request
-    /// queue limit is reached. The default in http.sys is "Basic" which means http.sys is just resetting the TCP connection. IIS uses Limited
-    /// as its default behavior which will result in sending back a 503 - Service Unavailable back to the client.
+    /// Gets or sets a value that controls how http.sys reacts when rejecting requests due to throttling
+    // conditions - like when the request
+    /// queue limit is reached. The default in http.sys is "Basic" which means http.sys is just
+    // resetting the TCP connection. IIS uses Limited
+    /// as its default behavior which will result in sending back a 503 - Service Unavailable back to
+    // the client.
     /// This settings does not apply when attaching to an existing queue.
     /// </summary>
     public Http503VerbosityLevel Http503Verbosity
@@ -238,8 +251,10 @@ public class HttpSysOptions
     /// Inline request processing instead of dispatching to the threadpool.
     /// </summary>
     /// <remarks>
-    /// Enabling this setting will run application code on the IO thread to reduce request processing latency.
-    /// However, this will limit parallel request processing to <see cref="MaxAccepts"/>. This setting can make
+    /// Enabling this setting will run application code on the IO thread to reduce request processing
+    // latency.
+    /// However, this will limit parallel request processing to <see cref="MaxAccepts"/>. This setting
+    // can make
     /// overall throughput worse if requests take long to process.
     /// </remarks>
     public bool UnsafePreferInlineScheduling { get; set; }

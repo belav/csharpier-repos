@@ -7,12 +7,15 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
 /// <summary>
-/// A special subclass of <see cref="ArrayBuilder{T}"/> that contains methods optimized for appending <see cref="RenderTreeFrame"/> entries.
+/// A special subclass of <see cref="ArrayBuilder{T}"/> that contains methods optimized for
+// appending <see cref="RenderTreeFrame"/> entries.
 /// </summary>
 internal sealed class RenderTreeFrameArrayBuilder : ArrayBuilder<RenderTreeFrame>
 {
-    // You may notice a repeated block at the top of each of these methods. This is intentionally inlined into each
-    // method because doing so improves intensive rendering scenarios by around 1% (based on the FastGrid benchmark).
+    // You may notice a repeated block at the top of each of these methods. This is intentionally
+    // inlined into each
+    // method because doing so improves intensive rendering scenarios by around 1% (based on the
+    // FastGrid benchmark).
 
     public void AppendElement(int sequence, string elementName)
     {

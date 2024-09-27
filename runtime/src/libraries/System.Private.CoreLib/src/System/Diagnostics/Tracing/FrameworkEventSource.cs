@@ -17,10 +17,14 @@ namespace System.Diagnostics.Tracing
             "Parameters to this method are primitive and are trimmer safe";
         public static readonly FrameworkEventSource Log = new FrameworkEventSource();
 
-        // Keyword definitions.  These represent logical groups of events that can be turned on and off independently
-        // Often each task has a keyword, but where tasks are determined by subsystem, keywords are determined by
-        // usefulness to end users to filter.  Generally users don't mind extra events if they are not high volume
-        // so grouping low volume events together in a single keywords is OK (users can post-filter by task if desired)
+        // Keyword definitions.  These represent logical groups of events that can be turned on and off
+        // independently
+        // Often each task has a keyword, but where tasks are determined by subsystem, keywords are
+        // determined by
+        // usefulness to end users to filter.  Generally users don't mind extra events if they are not high
+        // volume
+        // so grouping low volume events together in a single keywords is OK (users can post-filter by task
+        // if desired)
         public static class Keywords
         {
             public const EventKeywords ThreadPool = (EventKeywords)0x0002;
@@ -34,7 +38,8 @@ namespace System.Diagnostics.Tracing
             public const EventTask ThreadTransfer = (EventTask)3;
         }
 
-        // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating the default constructor
+        // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating
+        // the default constructor
         // as you can't make a constructor partial.
         private FrameworkEventSource(int _) { }
 
@@ -123,9 +128,12 @@ namespace System.Diagnostics.Tracing
             WriteEvent(30, workID);
         }
 
-        // The object's current location in memory was being used before. Since objects can be moved, it may be difficult to
-        // associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW listeners would have to
-        // know specifics about the events and track GC movements to associate events. The hash code is a stable value and
+        // The object's current location in memory was being used before. Since objects can be moved, it may
+        // be difficult to
+        // associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW
+        // listeners would have to
+        // know specifics about the events and track GC movements to associate events. The hash code is a
+        // stable value and
         // easier to use for association, though there may be collisions.
         [NonEvent]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -142,9 +150,12 @@ namespace System.Diagnostics.Tracing
             WriteEvent(31, workID);
         }
 
-        // The object's current location in memory was being used before. Since objects can be moved, it may be difficult to
-        // associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW listeners would have to
-        // know specifics about the events and track GC movements to associate events. The hash code is a stable value and
+        // The object's current location in memory was being used before. Since objects can be moved, it may
+        // be difficult to
+        // associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW
+        // listeners would have to
+        // know specifics about the events and track GC movements to associate events. The hash code is a
+        // stable value and
         // easier to use for association, though there may be collisions.
         [NonEvent]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -153,7 +164,8 @@ namespace System.Diagnostics.Tracing
 
         // id -   represents a correlation ID that allows correlation of two activities, one stamped by
         //        ThreadTransferSend, the other by ThreadTransferReceive
-        // kind - identifies the transfer: values below 64 are reserved for the runtime. Currently used values:
+        // kind - identifies the transfer: values below 64 are reserved for the runtime. Currently used
+        // values:
         //        1 - managed Timers ("roaming" ID)
         //        2 - managed async IO operations (FileStream, PipeStream, a.o.)
         //        3 - WinRT dispatch operations
@@ -191,11 +203,15 @@ namespace System.Diagnostics.Tracing
 
         // id -   represents a correlation ID that allows correlation of two activities, one stamped by
         //        ThreadTransferSend, the other by ThreadTransferReceive
-        //    -   The object's current location in memory was being used before. Since objects can be moved, it may be difficult to
-        //        associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW listeners would have to
-        //        know specifics about the events and track GC movements to associate events. The hash code is a stable value and
+        //    -   The object's current location in memory was being used before. Since objects can be moved,
+        // it may be difficult to
+        //        associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW
+        // listeners would have to
+        //        know specifics about the events and track GC movements to associate events. The hash code
+        // is a stable value and
         //        easier to use for association, though there may be collisions.
-        // kind - identifies the transfer: values below 64 are reserved for the runtime. Currently used values:
+        // kind - identifies the transfer: values below 64 are reserved for the runtime. Currently used
+        // values:
         //        1 - managed Timers ("roaming" ID)
         //        2 - managed async IO operations (FileStream, PipeStream, a.o.)
         //        3 - WinRT dispatch operations
@@ -213,9 +229,12 @@ namespace System.Diagnostics.Tracing
         }
 
         // id - is a managed object. it gets translated to the object's address.
-        //    - The object's current location in memory was being used before. Since objects can be moved, it may be difficult to
-        //      associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW listeners would have to
-        //      know specifics about the events and track GC movements to associate events. The hash code is a stable value and
+        //    - The object's current location in memory was being used before. Since objects can be moved,
+        // it may be difficult to
+        //      associate Enqueue/Dequeue events with the object's at-the-time location in memory, the ETW
+        // listeners would have to
+        //      know specifics about the events and track GC movements to associate events. The hash code is
+        // a stable value and
         //      easier to use for association, though there may be collisions.
         [NonEvent]
         public void ThreadTransferReceiveObj(object id, int kind, string? info) =>

@@ -23,12 +23,13 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlValidationSummaryAdapter provides the wml device functionality for
-     * ValidationSummary control.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
-    /// <include file='doc\WmlValidationSummaryAdapter.uex' path='docs/doc[@for="WmlValidationSummaryAdapter"]/*' />
+    * WmlValidationSummaryAdapter provides the wml device functionality for
+    * ValidationSummary control.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
+    /// <include file='doc\WmlValidationSummaryAdapter.uex'
+    // path='docs/doc[@for="WmlValidationSummaryAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -45,13 +46,15 @@ namespace System.Web.UI.MobileControls.Adapters
         private List _list; // to paginate error messages
         private Link _link; // to go back to the form validated by this control
 
-        /// <include file='doc\WmlValidationSummaryAdapter.uex' path='docs/doc[@for="WmlValidationSummaryAdapter.Control"]/*' />
+        /// <include file='doc\WmlValidationSummaryAdapter.uex'
+        // path='docs/doc[@for="WmlValidationSummaryAdapter.Control"]/*' />
         protected new ValidationSummary Control
         {
             get { return (ValidationSummary)base.Control; }
         }
 
-        /// <include file='doc\WmlValidationSummaryAdapter.uex' path='docs/doc[@for="WmlValidationSummaryAdapter.OnInit"]/*' />
+        /// <include file='doc\WmlValidationSummaryAdapter.uex'
+        // path='docs/doc[@for="WmlValidationSummaryAdapter.OnInit"]/*' />
         public override void OnInit(EventArgs e)
         {
             // Create child controls to help on rendering
@@ -61,7 +64,8 @@ namespace System.Web.UI.MobileControls.Adapters
             Control.Controls.Add(_link);
         }
 
-        /// <include file='doc\WmlValidationSummaryAdapter.uex' path='docs/doc[@for="WmlValidationSummaryAdapter.Render"]/*' />
+        /// <include file='doc\WmlValidationSummaryAdapter.uex'
+        // path='docs/doc[@for="WmlValidationSummaryAdapter.Render"]/*' />
         public override void Render(WmlMobileTextWriter writer)
         {
             String[] errorMessages = null;

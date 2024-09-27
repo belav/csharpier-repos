@@ -1519,13 +1519,16 @@ class C<T>
 ";
             CreateCompilationWithMscorlib40AndSystemCore(source)
                 .VerifyDiagnostics(
-                    // (10,19): error CS0034: Operator '&' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                    // (10,19): error CS0034: Operator '&' is ambiguous on operands of type 'C<dynamic>.E' and
+                    // 'C<object>.E'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A & C<object>.E.A")
                         .WithArguments("&", "C<dynamic>.E", "C<object>.E"),
-                    // (11,18): error CS0034: Operator '|' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                    // (11,18): error CS0034: Operator '|' is ambiguous on operands of type 'C<dynamic>.E' and
+                    // 'C<object>.E'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A | C<object>.E.A")
                         .WithArguments("|", "C<dynamic>.E", "C<object>.E"),
-                    // (12,19): error CS0034: Operator '^' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                    // (12,19): error CS0034: Operator '^' is ambiguous on operands of type 'C<dynamic>.E' and
+                    // 'C<object>.E'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A ^ C<object>.E.A")
                         .WithArguments("^", "C<dynamic>.E", "C<object>.E")
                 );
@@ -1566,7 +1569,8 @@ class C<T>
     }      
 }
 ";
-            // Dev11 reports error CS0034: Operator '...' is ambiguous on operands ... and ... for all combinations
+            // Dev11 reports error CS0034: Operator '...' is ambiguous on operands ... and ... for all
+            // combinations
             CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics();
         }
 
@@ -1605,7 +1609,8 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperatorMethod: System.Int32 D<System
         ILocalReferenceOperation: y (OperationKind.LocalReference, Type: D<dynamic>.C) (Syntax: 'y')
 ";
             // Dev11 reports error CS0121: The call is ambiguous between the following methods or properties:
-            // 'D<object>.C.operator+(D<object>.C, D<object>.C)' and 'D<dynamic>.C.operator +(D<dynamic>.C, D<dynamic>.C)'
+            // 'D<object>.C.operator+(D<object>.C, D<object>.C)' and 'D<dynamic>.C.operator +(D<dynamic>.C,
+            // D<dynamic>.C)'
             var expectedDiagnostics = DiagnosticDescription.None;
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
@@ -1700,56 +1705,64 @@ class C<T>
 ";
             CreateCompilationWithMscorlib40AndSystemCore(source)
                 .VerifyDiagnostics(
-                    // (17,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
+                    // (17,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object,
+                    // object>' and 'C<object>.A<object, object>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d2")
                         .WithArguments(
                             "+",
                             "C<dynamic>.A<object, object>",
                             "C<object>.A<object, object>"
                         ),
-                    // (18,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    // (18,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object,
+                    // object>' and 'C<dynamic>.A<object, dynamic>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d3")
                         .WithArguments(
                             "+",
                             "C<dynamic>.A<object, object>",
                             "C<dynamic>.A<object, dynamic>"
                         ),
-                    // (19,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
+                    // (19,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object,
+                    // object>' and 'C<object>.A<dynamic, object>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d4")
                         .WithArguments(
                             "+",
                             "C<dynamic>.A<object, object>",
                             "C<object>.A<dynamic, object>"
                         ),
-                    // (20,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    // (20,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<object>.A<object,
+                    // object>' and 'C<dynamic>.A<object, dynamic>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 + d3")
                         .WithArguments(
                             "+",
                             "C<object>.A<object, object>",
                             "C<dynamic>.A<object, dynamic>"
                         ),
-                    // (22,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
+                    // (22,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object,
+                    // object>' and 'C<object>.A<object, object>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d2")
                         .WithArguments(
                             "-",
                             "C<dynamic>.A<object, object>",
                             "C<object>.A<object, object>"
                         ),
-                    // (23,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    // (23,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object,
+                    // object>' and 'C<dynamic>.A<object, dynamic>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d3")
                         .WithArguments(
                             "-",
                             "C<dynamic>.A<object, object>",
                             "C<dynamic>.A<object, dynamic>"
                         ),
-                    // (24,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
+                    // (24,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object,
+                    // object>' and 'C<object>.A<dynamic, object>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d4")
                         .WithArguments(
                             "-",
                             "C<dynamic>.A<object, object>",
                             "C<object>.A<dynamic, object>"
                         ),
-                    // (25,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    // (25,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<object>.A<object,
+                    // object>' and 'C<dynamic>.A<object, dynamic>'
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 - d3")
                         .WithArguments(
                             "-",
@@ -1782,11 +1795,14 @@ class Program
     static void Goo(Func<Action<dynamic>, IConvertible> x) { }
 }
 ";
-            // Dev11 considers Action<object> == Action<dynamic> ambiguous and thus chooses Goo(Func<Action<object>, IComparable>) overload.
+            // Dev11 considers Action<object> == Action<dynamic> ambiguous and thus chooses
+            // Goo(Func<Action<object>, IComparable>) overload.
 
             CreateCompilationWithMscorlib40AndSystemCore(source)
                 .VerifyDiagnostics(
-                    // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Goo(System.Func<System.Action<object>, System.IComparable>)' and 'Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)'
+                    // (9,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.Goo(System.Func<System.Action<object>, System.IComparable>)' and
+                    // 'Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)'
                     Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
                         .WithArguments(
                             "Program.Goo(System.Func<System.Action<object>, System.IComparable>)",
@@ -2112,7 +2128,9 @@ IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null) (Synt
                 Diagnostic(ErrorCode.WRN_AlwaysNull, "new Q<int>?() + new int?()")
                     .WithArguments("int?")
                     .WithLocation(37, 18),
-                // CS1061: 'S' does not contain a definition for 'str' and no extension method 'str' accepting a first argument of type 'S' could be found (are you missing a using directive or an assembly reference?)
+                // CS1061: 'S' does not contain a definition for 'str' and no extension method 'str' accepting a
+                // first argument of type 'S' could be found (are you missing a using directive or an assembly
+                // reference?)
                 //     public override string ToString() { return this.str; }
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "str")
                     .WithArguments("S", "str")
@@ -2623,7 +2641,8 @@ ICompoundAssignmentOperation (BinaryOperatorKind.Add, IsLifted) (OperationKind.C
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'int?' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'int?' to 'int'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         /*<bind>*/a += b/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a += b")
                     .WithArguments("int?", "int")
@@ -3171,7 +3190,8 @@ IBlockOperation (14 statements) (OperationKind.Block, Type: null) (Syntax: '{ ..
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0448: The return type for ++ or -- operator must match the parameter type or be derived from the parameter type
+                // CS0448: The return type for ++ or -- operator must match the parameter type or be derived from
+                // the parameter type
                 //     public static S operator --(S? s) { return (S)s; }
                 Diagnostic(ErrorCode.ERR_BadIncDecRetType, "--").WithLocation(10, 30),
             };
@@ -3294,7 +3314,8 @@ class C
                     //         bool b1 = i64 == ui64;  // CS0034
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 == ui64")
                         .WithArguments("==", "long", "ulong"),
-                    // (13,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'System.Exception'
+                    // (13,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and
+                    // 'System.Exception'
                     //         bool b2 = s1 == ex1;    // CS0019
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == ex1")
                         .WithArguments("==", "string", "System.Exception")
@@ -3355,17 +3376,20 @@ class C
                     Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.ReadOnly")
                         .WithArguments("C.ReadOnly")
                         .WithLocation(17, 9),
-                    // (18,9): error CS0154: The property or indexer 'C.WriteOnly' cannot be used in this context because it lacks the get accessor
+                    // (18,9): error CS0154: The property or indexer 'C.WriteOnly' cannot be used in this context
+                    // because it lacks the get accessor
                     //         c.WriteOnly += 1;
                     Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.WriteOnly")
                         .WithArguments("C.WriteOnly")
                         .WithLocation(18, 9),
-                    // (34,9): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
+                    // (34,9): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         i32 += i64;
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i32 += i64")
                         .WithArguments("long", "int")
                         .WithLocation(34, 9),
-                    // (39,9): error CS0266: Cannot implicitly convert type 'C' to 'C.D'. An explicit conversion exists (are you missing a cast?)
+                    // (39,9): error CS0266: Cannot implicitly convert type 'C' to 'C.D'. An explicit conversion exists
+                    // (are you missing a cast?)
                     //         d += c;
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "d += c")
                         .WithArguments("C", "C.D")
@@ -4963,8 +4987,8 @@ o1 OPERATOR s2, //-ObjectKIND
 o1 OPERATOR o2  //-ObjectKIND"
             + Postfix;
 
-        /*
-        private const string PostfixIncrementTemplate = Prefix + @"
+/*
+private const string PostfixIncrementTemplate = Prefix + @"
 e   OPERATOR, //-EnumKIND
 chr OPERATOR, //-CharKIND
 i08 OPERATOR, //-SByteKIND
@@ -4992,7 +5016,7 @@ nr32 OPERATOR, //-LiftedFloatKIND
 nr64 OPERATOR, //-LiftedDoubleKIND
 ndec OPERATOR  //-LiftedDecimalKIND
 " + Postfix;
-        */
+*/
 
         private const string PrefixIncrementTemplate =
             Prefix
@@ -5503,7 +5527,8 @@ class A
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and
+                    // 'A.implicit operator A(B)' when converting from 'B' to 'A'
                     //         var c = a ?? b;
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
                         .WithArguments(
@@ -5549,7 +5574,8 @@ struct A
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and
+                    // 'A.implicit operator A(B)' when converting from 'B' to 'A'
                     //         var c = a ?? b;
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
                         .WithArguments(
@@ -5592,7 +5618,8 @@ struct A
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (8,18): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    // (8,18): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and
+                    // 'A.implicit operator A(B)' when converting from 'B' to 'A'
                     //         var c2 = b2 ?? a2;
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "b2 ?? a2")
                         .WithArguments(
@@ -5726,7 +5753,8 @@ public class X
 }";
             comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics(
-                // (4,21): error CS1750: A value of type 'dynamic' cannot be used as a default parameter because there are no standard conversions to type 'object'
+                // (4,21): error CS1750: A value of type 'dynamic' cannot be used as a default parameter because
+                // there are no standard conversions to type 'object'
                 //     public X(object param = default(dynamic)) {}
                 Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "param")
                     .WithArguments("dynamic", "object")
@@ -5905,7 +5933,8 @@ class Program
                 // (14,13): error CS0029: Cannot implicitly convert type 'Program.C?' to 'bool'
                 //         if (c)
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c").WithArguments("Program.C?", "bool"),
-                // (6,20): warning CS0649: Field 'Program.C.x' is never assigned to, and will always have its default value 0
+                // (6,20): warning CS0649: Field 'Program.C.x' is never assigned to, and will always have its
+                // default value 0
                 //         public int x;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
                     .WithArguments("Program.C.x", "0")
@@ -5916,16 +5945,21 @@ class Program
         [Fact()]
         public void TestAsOperatorWithTypeParameter()
         {
-            // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time error occurs:
-            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7),
-            // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5) conversion exists
+            // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time
+            // error occurs:
+            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing
+            // (�6.1.7),
+            // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5)
+            // conversion exists
             // SPEC:        from E to T.
             // SPEC:    - The type of E or T is an open type.
             // SPEC:    - E is the null literal.
 
             // SPEC VIOLATION:  The specification unintentionally allows the case where requirement 2 above:
-            // SPEC VIOLATION:  "The type of E or T is an open type" is true, but type of E is void type, i.e. T is an open type.
-            // SPEC VIOLATION:  Dev10 compiler correctly generates an error for this case and we will maintain compatibility.
+            // SPEC VIOLATION:  "The type of E or T is an open type" is true, but type of E is void type, i.e. T
+            // is an open type.
+            // SPEC VIOLATION:  Dev10 compiler correctly generates an error for this case and we will maintain
+            // compatibility.
 
             var source =
                 @"
@@ -5946,7 +5980,8 @@ class Program
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (13,20): error CS0039: Cannot convert type 'void' to 'T' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                // (13,20): error CS0039: Cannot convert type 'void' to 'T' via a reference conversion, boxing
+                // conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object o = Main() as T;
                 Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "Main() as T")
                     .WithArguments("void", "T")
@@ -6324,9 +6359,12 @@ class Outer<T>
         [Fact()]
         public void TestAsOperator_SpecErrorCase()
         {
-            // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time error occurs:
-            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7),
-            // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5) conversion exists
+            // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time
+            // error occurs:
+            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing
+            // (�6.1.7),
+            // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5)
+            // conversion exists
             // SPEC:        from E to T.
             // SPEC:    - The type of E or T is an open type.
             // SPEC:    - E is the null literal.
@@ -6451,15 +6489,18 @@ class Test
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (37,21): error CS0039: Cannot convert type 'Bar' to 'Goo' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                // (37,21): error CS0039: Cannot convert type 'Bar' to 'Goo' via a reference conversion, boxing
+                // conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object a1 = numeral as Goo;
                 Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo")
                     .WithArguments("Bar", "Goo"),
-                // (38,21): error CS0077: The as operator must be used with a reference type or nullable type ('Bar' is a non-nullable value type)
+                // (38,21): error CS0077: The as operator must be used with a reference type or nullable type ('Bar'
+                // is a non-nullable value type)
                 //         object a2 = 1 as Bar;
                 Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "1 as Bar")
                     .WithArguments("Bar"),
-                // (39,21): error CS0039: Cannot convert type 'Bar' to 'Goo2' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                // (39,21): error CS0039: Cannot convert type 'Bar' to 'Goo2' via a reference conversion, boxing
+                // conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object a3 = numeral as Goo2;
                 Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo2")
                     .WithArguments("Bar", "Goo2"),
@@ -6536,7 +6577,8 @@ public class Base
                     //         Console.WriteLine(e is IntPtr);
                     Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e is IntPtr")
                         .WithArguments("System.IntPtr"),
-                    // (13,27): error CS0077: The as operator must be used with a reference type or nullable type ('System.IntPtr' is a non-nullable value type)
+                    // (13,27): error CS0077: The as operator must be used with a reference type or nullable type
+                    // ('System.IntPtr' is a non-nullable value type)
                     //         Console.WriteLine(e as IntPtr);
                     Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "e as IntPtr")
                         .WithArguments("System.IntPtr")
@@ -6562,7 +6604,8 @@ public class Base
 }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (3,39): error CS1670: params is not valid in this context public static bool operator >(X a, params int[] b)
+                    // (3,39): error CS1670: params is not valid in this context public static bool operator >(X a,
+                    // params int[] b)
                     Diagnostic(ErrorCode.ERR_IllegalParams, "params"),
                     // (8,40): error CS1670: params is not valid in this context
                     //     public static bool operator <(X a, params int[] b)
@@ -6817,7 +6860,8 @@ namespace System
                 .GetDiagnostics()
                 .Where(d => d.Severity == DiagnosticSeverity.Error)
                 .Verify(
-                    // (6,41): error CS0553: '(T1, T2).explicit operator ValueType((T1, T2))': user-defined conversions to or from a base type are not allowed
+                    // (6,41): error CS0553: '(T1, T2).explicit operator ValueType((T1, T2))': user-defined conversions
+                    // to or from a base type are not allowed
                     //         public static explicit operator ValueType(ValueTuple<T1, T2> s)
                     Diagnostic(ErrorCode.ERR_ConversionWithBase, "ValueType")
                         .WithArguments("(T1, T2).explicit operator System.ValueType((T1, T2))")
@@ -6916,11 +6960,13 @@ class D
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (21,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'D'
+                    // (21,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and
+                    // 'D'
                     //         Console.WriteLine((Func<int>)(C)null == (D)null);
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (D)null")
                         .WithArguments("==", "System.Func<int>", "D"),
-                    // (22,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'System.Action'
+                    // (22,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and
+                    // 'System.Action'
                     //         Console.WriteLine((Func<int>)(C)null == (Action)(D)null);
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (Action)(D)null")
                         .WithArguments("==", "System.Func<int>", "System.Action")
@@ -7181,7 +7227,8 @@ class Derived4 : Base4
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,25): warning CS0108: 'Derived4.op_Addition(Base4, Derived4)' hides inherited member 'Base4.op_Addition(Base4, Derived4)'. Use the new keyword if hiding was intended.
+                    // (9,25): warning CS0108: 'Derived4.op_Addition(Base4, Derived4)' hides inherited member
+                    // 'Base4.op_Addition(Base4, Derived4)'. Use the new keyword if hiding was intended.
                     //     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_Addition")
                         .WithArguments(
@@ -7267,7 +7314,8 @@ class Derived4 : Base4
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,26): warning CS0108: 'Derived4.op_Explicit(Base4)' hides inherited member 'Base4.op_Explicit(Base4)'. Use the new keyword if hiding was intended.
+                    // (9,26): warning CS0108: 'Derived4.op_Explicit(Base4)' hides inherited member
+                    // 'Base4.op_Explicit(Base4)'. Use the new keyword if hiding was intended.
                     //     public static string op_Explicit(Base4 b) { return null; }
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
                         .WithArguments("Derived4.op_Explicit(Base4)", "Base4.op_Explicit(Base4)")
@@ -7358,11 +7406,13 @@ class op_UnsignedRightShift
                     // 	public static int operator + (op_UnaryPlus c) { return 0; }
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+")
                         .WithArguments("op_UnaryPlus"),
-                    // (16,39): error CS0542: 'op_UnaryNegation': member names cannot be the same as their enclosing type
+                    // (16,39): error CS0542: 'op_UnaryNegation': member names cannot be the same as their enclosing
+                    // type
                     // 	public static int operator - (op_UnaryNegation c) { return 0; }
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-")
                         .WithArguments("op_UnaryNegation"),
-                    // (20,29): error CS0542: 'op_OnesComplement': member names cannot be the same as their enclosing type
+                    // (20,29): error CS0542: 'op_OnesComplement': member names cannot be the same as their enclosing
+                    // type
                     // 	public static int operator ~ (op_OnesComplement c) { return 0; }
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "~")
                         .WithArguments("op_OnesComplement"),
@@ -7406,7 +7456,8 @@ class op_UnsignedRightShift
                     // 	public static long operator >>  (op_RightShift c, int i) { return 0; }
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>")
                         .WithArguments("op_RightShift"),
-                    // (64,30): error CS0542: 'op_UnsignedRightShift': member names cannot be the same as their enclosing type
+                    // (64,30): error CS0542: 'op_UnsignedRightShift': member names cannot be the same as their
+                    // enclosing type
                     // 	public static long operator >>>  (op_UnsignedRightShift c, int i) { return 0; }
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>>")
                         .WithArguments("op_UnsignedRightShift")
@@ -7673,7 +7724,8 @@ class Program
     }
 }
 ";
-            // SPEC VIOLATION: According to the spec, this is ambiguous.  However, we will match the dev11 behavior.
+            // SPEC VIOLATION: According to the spec, this is ambiguous.  However, we will match the dev11
+            // behavior.
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
 
@@ -7725,7 +7777,8 @@ class Program
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (21,18): error CS0034: Operator '|' is ambiguous on operands of type 'InputParameter' and 'InputParameter'
+                    // (21,18): error CS0034: Operator '|' is ambiguous on operands of type 'InputParameter' and
+                    // 'InputParameter'
                     //         bool b = i1 | i2;
                     Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i1 | i2")
                         .WithArguments("|", "InputParameter", "InputParameter")
@@ -7893,7 +7946,8 @@ class Program
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (16,18): error CS0019: Operator '||' cannot be applied to operands of type 'InputParameter' and 'InputParameter'
+                    // (16,18): error CS0019: Operator '||' cannot be applied to operands of type 'InputParameter' and
+                    // 'InputParameter'
                     //         bool b = i1 || i2;
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 || i2")
                         .WithArguments("||", "InputParameter", "InputParameter")
@@ -9841,11 +9895,13 @@ struct TestStr
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
 
             compilation.VerifyDiagnostics(
-                // (17,20): error CS0019: Operator '==' cannot be applied to operands of type 'TestStr?' and 'TestStr?'
+                // (17,20): error CS0019: Operator '==' cannot be applied to operands of type 'TestStr?' and
+                // 'TestStr?'
                 //         var z11 = (x == x1);
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x == x1")
                     .WithArguments("==", "TestStr?", "TestStr?"),
-                // (18,20): error CS0019: Operator '!=' cannot be applied to operands of type 'TestStr?' and 'TestStr?'
+                // (18,20): error CS0019: Operator '!=' cannot be applied to operands of type 'TestStr?' and
+                // 'TestStr?'
                 //         var z12 = (x != x1);
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x != x1")
                     .WithArguments("!=", "TestStr?", "TestStr?")
@@ -10097,12 +10153,15 @@ class P
 }";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (18,13): error CS0218: In order for 'B.operator &(B, B)' to be applicable as a short circuit operator, its declaring type 'B' must define operator true and operator false
+                // (18,13): error CS0218: In order for 'B.operator &(B, B)' to be applicable as a short circuit
+                // operator, its declaring type 'B' must define operator true and operator false
                 //         if (x && y)
                 Diagnostic(ErrorCode.ERR_MustHaveOpTF, "x && y")
                     .WithArguments("B.operator &(B, B)", "B")
                     .WithLocation(18, 13),
-                // (21,13): error CS0218: In order for 'A<object>.operator |(A<object>, A<object>)' to be applicable as a short circuit operator, its declaring type 'A<object>' must define operator true and operator false
+                // (21,13): error CS0218: In order for 'A<object>.operator |(A<object>, A<object>)' to be applicable
+                // as a short circuit operator, its declaring type 'A<object>' must define operator true and operator
+                // false
                 //         if (x || y)
                 Diagnostic(ErrorCode.ERR_MustHaveOpTF, "x || y")
                     .WithArguments("A<object>.operator |(A<object>, A<object>)", "A<object>")
@@ -12714,7 +12773,8 @@ public class C {
             Assert.True(type.IsErrorType());
         }
 
-        // Attempting to call `ConstantValue` on every constituent string component realizes every string, effectively
+        // Attempting to call `ConstantValue` on every constituent string component realizes every string,
+        // effectively
         // replicating the original O(n^2) bug that this test is demonstrating is fixed.
         [ConditionalFact(typeof(NoIOperationValidation))]
         [
@@ -12727,15 +12787,18 @@ public class C {
             // History of this bug:  When constant folding a long sequence of string concatentations, there is
             // an intermediate constant value for every left-hand operand.  So the total memory consumed to
             // compute the whole concatenation was O(n^2).  The compiler would simply perform this work and
-            // eventually run out of memory, simply crashing with no useful diagnostic.  Later, the concatenation
+            // eventually run out of memory, simply crashing with no useful diagnostic.  Later, the
+            // concatenation
             // implementation was instrumented so it would detect when it was likely to run out of memory soon,
             // and would instead report a diagnostic at the last step.  This test was added to demonstrate that
             // we produced a diagnostic.  However, the compiler still consumed O(n^2) memory for the
-            // concatenation and this test used to consume so much memory that it would cause other tests running
+            // concatenation and this test used to consume so much memory that it would cause other tests
+            // running
             // in parallel to fail because they might not have enough memory to succeed.  So the test was
             // disabled and eventually removed.  The compiler would still crash with programs containing large
             // string concatenations, so the underlying problem had not been addressed.  Now we have revised the
-            // implementation of constant folding so that it requires O(n) memory. As a consequence this test now
+            // implementation of constant folding so that it requires O(n) memory. As a consequence this test
+            // now
             // runs very quickly and does not consume gobs of memory.
             string source =
                 $@"
@@ -12780,13 +12843,17 @@ class M
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (28,68): error CS8095: Length of String constant resulting from concatenation exceeds System.Int32.MaxValue.  Try splitting the string into multiple constants.
-                //                       C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 +
+                // (28,68): error CS8095: Length of String constant resulting from concatenation exceeds
+                // System.Int32.MaxValue.  Try splitting the string into multiple constants.
+                //                       C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 +
+                // C1 + C1 + C1 + C1 + C1 +
                 Diagnostic(ErrorCode.ERR_ConstantStringTooLong, "C1").WithLocation(28, 68)
             );
 
-            // If we realize every string constant value when each IOperation is created, then attempting to enumerate all
-            // IOperations will consume O(n^2) memory. This demonstrates that these values are not eagerly created, and the
+            // If we realize every string constant value when each IOperation is created, then attempting to
+            // enumerate all
+            // IOperations will consume O(n^2) memory. This demonstrates that these values are not eagerly
+            // created, and the
             // test runs quickly and without issue
 
             var tree = comp.SyntaxTrees[0];

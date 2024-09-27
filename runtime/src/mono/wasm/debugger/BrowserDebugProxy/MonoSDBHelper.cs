@@ -174,10 +174,10 @@ namespace Microsoft.WebAssembly.Diagnostics
         GetState = 3,
         GetInfo = 4,
 
-        /* FIXME: Merge into GetInfo when the major protocol version is increased */
+/* FIXME: Merge into GetInfo when the major protocol version is increased */
         GetId = 5,
 
-        /* Ditto */
+/* Ditto */
         GetTid = 6,
         SetIp = 7,
         GetElapsedTime = 8,
@@ -266,10 +266,10 @@ namespace Microsoft.WebAssembly.Diagnostics
         GetFieldCattrs = 11,
         GetPropertyCattrs = 12,
 
-        /* FIXME: Merge into GetSourceFiles when the major protocol version is increased */
+/* FIXME: Merge into GetSourceFiles when the major protocol version is increased */
         GetSourceFiles2 = 13,
 
-        /* FIXME: Merge into GetValues when the major protocol version is increased */
+/* FIXME: Merge into GetValues when the major protocol version is increased */
         GetValues2 = 14,
         GetMethodsByNameFlags = 15,
         GetInterfaces = 16,
@@ -1602,13 +1602,13 @@ namespace Microsoft.WebAssembly.Diagnostics
             string result = retDebuggerCmdReader.ReadString();
             if (result.EndsWith(".webcil"))
             {
-                /* don't leak .webcil names to the debugger - work in terms of the original .dlls */
+/* don't leak .webcil names to the debugger - work in terms of the original .dlls */
                 string baseName = result.Substring(0, result.Length - 7);
                 result = baseName + ".dll";
             }
             if (result.EndsWith(WebcilInWasmExtension))
             {
-                /* don't leak webcil .wasm names to the debugger - work in terms of the original .dlls */
+/* don't leak webcil .wasm names to the debugger - work in terms of the original .dlls */
                 string baseName = result.Substring(0, result.Length - WebcilInWasmExtension.Length);
                 result = baseName + ".dll";
             }

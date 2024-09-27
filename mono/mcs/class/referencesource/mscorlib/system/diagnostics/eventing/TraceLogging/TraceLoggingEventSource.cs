@@ -41,7 +41,8 @@ namespace System.Diagnostics.Tracing
         private byte[] providerMetadata;
 
         /// <summary>
-        /// Construct an EventSource with a given name for non-contract based events (e.g. those using the Write() API).
+        /// Construct an EventSource with a given name for non-contract based events (e.g. those using the
+        // Write() API).
         /// </summary>
         /// <param name="eventSourceName">
         /// The name of the event source. Must not be null.
@@ -50,7 +51,8 @@ namespace System.Diagnostics.Tracing
             : this(eventSourceName, EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         /// <summary>
-        /// Construct an EventSource with a given name for non-contract based events (e.g. those using the Write() API).
+        /// Construct an EventSource with a given name for non-contract based events (e.g. those using the
+        // Write() API).
         /// </summary>
         /// <param name="eventSourceName">
         /// The name of the event source. Must not be null.
@@ -62,10 +64,12 @@ namespace System.Diagnostics.Tracing
             : this(eventSourceName, config, null) { }
 
         /// <summary>
-        /// Construct an EventSource with a given name for non-contract based events (e.g. those using the Write() API).
+        /// Construct an EventSource with a given name for non-contract based events (e.g. those using the
+        // Write() API).
         ///
         /// Also specify a list of key-value pairs called traits (you must pass an even number of strings).
-        /// The first string is the key and the second is the value.   These are not interpreted by EventSource
+        /// The first string is the key and the second is the value.   These are not interpreted by
+        // EventSource
         /// itself but may be interprated the listeners.  Can be fetched with GetTrait(string).
         /// </summary>
         /// <param name="eventSourceName">

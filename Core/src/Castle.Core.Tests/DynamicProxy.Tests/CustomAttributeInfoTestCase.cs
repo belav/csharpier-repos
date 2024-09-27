@@ -335,12 +335,16 @@ namespace Castle.DynamicProxy.Tests
             return new object[] { new Opaque<Expression<Func<Attribute>>>(expr), expected };
         }
 
-        // NOTE: The following type is needed as a workaround for an issue with either NUnit 3's test adapter,
-        // or Visual Studio's test executor: One of them appears to be unable to parse formatted LINQ expression
-        // trees. Therefore, we need to wrap those in a dummy type to prevent formatting. This will change how
+        // NOTE: The following type is needed as a workaround for an issue with either NUnit 3's test
+        // adapter,
+        // or Visual Studio's test executor: One of them appears to be unable to parse formatted LINQ
+        // expression
+        // trees. Therefore, we need to wrap those in a dummy type to prevent formatting. This will change
+        // how
         // the individual test cases are displayed/identified in Test Explorer.
         //
-        // See https://developercommunity.visualstudio.com/content/problem/663145/test-explorer-in-vs-1620-can-no-longer-run-certain.html.
+        // See
+        // https://developercommunity.visualstudio.com/content/problem/663145/test-explorer-in-vs-1620-can-no-longer-run-certain.html.
 
         public struct Opaque<T>
         {

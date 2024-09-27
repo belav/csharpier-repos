@@ -312,7 +312,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -326,7 +327,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -338,7 +340,8 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -691,7 +694,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="path">Graphics path which presents hot region</param>
         /// <param name="relativePath">Graphics path uses relative or absolute coordinates</param>
-        /// <param name="coord">Coordinates which defines polygon (Graphics Path). Used for image maps</param>
+        /// <param name="coord">Coordinates which defines polygon (Graphics Path). Used for image
+        // maps</param>
         /// <param name="point">Selected data point</param>
         /// <param name="seriesName">Data Series</param>
         /// <param name="pointIndex">Index of an Data Point in the series</param>
@@ -1247,7 +1251,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -1263,7 +1268,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -1403,7 +1409,8 @@ namespace System.Web.UI.DataVisualization.Charting
         public ReadOnlyCollection<PointF> Markers { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the outline path. The result could be null for complex objects and objects with two points or fewer.
+        /// Gets or sets the outline path. The result could be null for complex objects and objects with two
+        // points or fewer.
         /// </summary>
         /// <value>The outline path.</value>
         public GraphicsPath OutlinePath { get; internal set; }
@@ -1413,7 +1420,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -1428,7 +1436,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
         public void Dispose()
@@ -1508,7 +1517,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         private void Dispose(bool disposing)
         {
             if (disposing)
@@ -1522,7 +1532,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -3035,7 +3046,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Determines whether specified chart area is circular or not have axes. These chart areas contain pie, doughnut, polar, radar
+        /// Determines whether specified chart area is circular or not have axes. These chart areas contain
+        // pie, doughnut, polar, radar
         /// </summary>
         /// <param name="area">The area.</param>
         /// <returns>

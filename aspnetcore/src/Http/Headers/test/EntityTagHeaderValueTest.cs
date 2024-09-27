@@ -16,7 +16,8 @@ public class EntityTagHeaderValueTest
     [Fact]
     public void Ctor_ETagInvalidFormat_ThrowFormatException()
     {
-        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are allowed.
+        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are
+        // allowed.
         AssertFormatException("tag");
         AssertFormatException(" tag ");
         AssertFormatException("\"tag\" invalid");

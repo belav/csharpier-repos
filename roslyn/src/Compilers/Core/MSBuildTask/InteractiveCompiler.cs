@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         #endregion
 
         /// <summary>
-        /// Fills the provided CommandLineBuilderExtension with those switches and other information that can go into a response file.
+        /// Fills the provided CommandLineBuilderExtension with those switches and other information that
+        // can go into a response file.
         /// </summary>
         protected override void AddResponseFileCommands(CommandLineBuilderExtension commandLine)
         {

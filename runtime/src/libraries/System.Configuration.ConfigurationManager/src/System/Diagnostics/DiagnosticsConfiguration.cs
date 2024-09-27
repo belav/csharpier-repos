@@ -132,9 +132,12 @@ namespace System.Diagnostics
 
         internal static void Initialize()
         {
-            // Ported from https://referencesource.microsoft.com/#System/compmod/system/diagnostics/DiagnosticsConfiguration.cs,188
-            // This port removed the lock on TraceInternal.critSec since that is now in a separate assembly and TraceInternal
-            // is internal and because GetConfigSection() is not locked elsewhere such as for connection strings.
+            // Ported from
+            // https://referencesource.microsoft.com/#System/compmod/system/diagnostics/DiagnosticsConfiguration.cs,188
+            // This port removed the lock on TraceInternal.critSec since that is now in a separate assembly and
+            // TraceInternal
+            // is internal and because GetConfigSection() is not locked elsewhere such as for connection
+            // strings.
 
             // Because some of the code used to load config also uses diagnostics
             // we can't block them while we initialize from config. Therefore we just

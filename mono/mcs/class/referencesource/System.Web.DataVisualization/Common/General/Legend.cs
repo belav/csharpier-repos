@@ -1841,7 +1841,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="graph">Chart graphics.</param>
         /// <param name="legendItemsAreaSize">Area that legend items must fit.</param>
         /// <param name="numberOfItemsToCheck">Number of items that should be fitted.</param>
-        /// <param name="fontSizeReducedBy">Number of points the standard legend font is reduced by auto-fitting algorithm.</param>
+        /// <param name="fontSizeReducedBy">Number of points the standard legend font is reduced by
+        // auto-fitting algorithm.</param>
         /// <param name="numberOfColumns">Legend column number.</param>
         /// <param name="numberOfRowsPerColumn">Array of number of rows per column.</param>
         /// <param name="subColumnSizes">Returns array of sub-column size.</param>
@@ -2591,7 +2592,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Paints legend using chart graphics object.
         /// </summary>
-        /// <param name="chartGraph">The graph provides drawing object to the display device. A Graphics object is associated with a specific device context.</param>
+        /// <param name="chartGraph">The graph provides drawing object to the display device. A Graphics
+        // object is associated with a specific device context.</param>
         internal void Paint(ChartGraphics chartGraph)
         {
             // Reset some values
@@ -3172,11 +3174,14 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets the maximum size (in percentage) of the legend used in the automatic layout algorithm.
+        /// Gets or sets the maximum size (in percentage) of the legend used in the automatic layout
+        // algorithm.
         /// </summary>
         /// <remarks>
-        /// If the legend is docked to the left or right, this property determines the maximum width of the legend, measured as a percentage.
-        /// If the legend is docked to the top or bottom, this property determines the maximum height of the legend, measured as a percentage.
+        /// If the legend is docked to the left or right, this property determines the maximum width of the
+        // legend, measured as a percentage.
+        /// If the legend is docked to the top or bottom, this property determines the maximum height of the
+        // legend, measured as a percentage.
         /// </remarks>
         [
             SRCategory("CategoryAttributeDocking"),
@@ -3518,7 +3523,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a color which will be replaced with a transparent color while drawing the background image.
+        /// Gets or sets a color which will be replaced with a transparent color while drawing the
+        // background image.
         /// </summary>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -3635,7 +3641,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ChartHatchStyle"/> value used for the background.
         /// </value>
         /// <remarks>
-        /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
+        /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see
+        // cref="BackSecondaryColor"/>.
         /// </remarks>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -3877,7 +3884,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a property that defines the preferred number of characters in a line of the legend text.
+        /// Gets or sets a property that defines the preferred number of characters in a line of the legend
+        // text.
         /// </summary>
         /// <remarks>
         /// When legend text exceeds the value defined in the <b>TextWrapThreshold</b> property, it will be
@@ -3907,11 +3915,13 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a property that specifies the order that legend items are shown. This property only affects
+        /// Gets or sets a property that specifies the order that legend items are shown. This property only
+        // affects
         /// legend items automatically added for the chart series and has no effect on custom legend items.
         /// </summary>
         /// <remarks>
-        /// When the <b>LegendItemOrder</b> property is set to <b>Auto</b>, the legend will automatically be reversed
+        /// When the <b>LegendItemOrder</b> property is set to <b>Auto</b>, the legend will automatically be
+        // reversed
         /// if StackedColumn, StackedColumn100, StackedArea or StackedArea100 chart types are used.
         /// </remarks>
         [
@@ -3955,7 +3965,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets the legend interlaced row's background color. Only applicable if interlaced rows are used.
+        /// Gets or sets the legend interlaced row's background color. Only applicable if interlaced rows
+        // are used.
         /// </summary>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -5012,7 +5023,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Invalidate chart legend when one of the properties is changed
         /// </summary>
-        /// <param name="invalidateLegendOnly">Indicates that only legend area should be invalidated.</param>
+        /// <param name="invalidateLegendOnly">Indicates that only legend area should be
+        // invalidated.</param>
         [SuppressMessage(
             "Microsoft.Usage",
             "CA1801:ReviewUnusedParameters",
@@ -5070,7 +5082,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -5357,7 +5370,8 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Event handlers
         internal void ChartAreaNameReferenceChanged(object sender, NameReferenceChangedEventArgs e)
         {
-            //If all the chart areas are removed and then the first one is added we don't want to dock the legends
+            //If all the chart areas are removed and then the first one is added we don't want to dock the
+            // legends
             if (e.OldElement == null)
                 return;
 
@@ -5644,7 +5658,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a string value that represents a URL to an image file, which will be used for the legend item's symbol.
+        /// Gets or sets a string value that represents a URL to an image file, which will be used for the
+        // legend item's symbol.
         /// </summary>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -5738,7 +5753,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a color which will be replaced with a transparent color while drawing the background image.
+        /// Gets or sets a color which will be replaced with a transparent color while drawing the
+        // background image.
         /// </summary>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -6049,7 +6065,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a color which will be replaced with a transparent color while drawing the marker image.
+        /// Gets or sets a color which will be replaced with a transparent color while drawing the marker
+        // image.
         /// </summary>
         [
             SRCategory("CategoryAttributeMarker"),
@@ -6488,7 +6505,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -139,7 +139,8 @@ namespace System.ServiceModel.Discovery
             }
             if (this.State != CommunicationState.Opening)
             {
-                // Fixes the ---- when OnAbort is called after OnBeginOpen but before this.announceOnlineAsyncResult is created
+                // Fixes the ---- when OnAbort is called after OnBeginOpen but before this.announceOnlineAsyncResult
+                // is created
                 this.announceOnlineAsyncResult.Cancel();
             }
             else if (startAnnouncements)
@@ -169,7 +170,8 @@ namespace System.ServiceModel.Discovery
             );
             if (this.State != CommunicationState.Opening)
             {
-                // Fixes the ---- when OnAbort is called after OnOpen but before this.announceOnlineAsyncResult is created
+                // Fixes the ---- when OnAbort is called after OnOpen but before this.announceOnlineAsyncResult is
+                // created
                 this.announceOnlineAsyncResult.Cancel();
             }
             else

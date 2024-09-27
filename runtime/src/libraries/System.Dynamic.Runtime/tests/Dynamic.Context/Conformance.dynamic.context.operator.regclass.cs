@@ -721,7 +721,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             int p2 = 1;
             Test t = new Test();
             MyDec md = new MyDec(t.TestMethod);
-            // public static MyStruct?[] operator <=(MyClass p1, int p2) { return new MyStruct?[] { null, new MyStruct() { Number = int.MinValue } }; }
+            // public static MyStruct?[] operator <=(MyClass p1, int p2) { return new MyStruct?[] { null, new
+            // MyStruct() { Number = int.MinValue } }; }
             return md(mc <= p2);
         }
 
@@ -770,7 +771,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             dynamic dy = mc;
             Test t = new Test();
             MyDec md = new MyDec(t.TestMethod);
-            // public static MyStruct?[] operator <=(MyClass p1, int p2) { return new MyStruct?[] { null, new MyStruct() { Number = int.MinValue } }; }
+            // public static MyStruct?[] operator <=(MyClass p1, int p2) { return new MyStruct?[] { null, new
+            // MyStruct() { Number = int.MinValue } }; }
             return md(mc <= 1);
         }
 
@@ -1472,7 +1474,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //using System;
     //[TestClass]public class Test
     //{
-    //[Test][Priority(Priority.Priority2)]public void DynamicCSharpRunTest(){Assert.AreEqual(0, MainMethod());} public static unsafe int MainMethod()
+    //[Test][Priority(Priority.Priority2)]public void DynamicCSharpRunTest(){Assert.AreEqual(0,
+    // MainMethod());} public static unsafe int MainMethod()
     //{
     //char value = 'a';
     //char* valuePtr = &value;
@@ -1890,7 +1893,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass039.regclass039
 {
-    // <Title> Tests regular class operator used in object initializer inside a collection initializer.</Title>
+    // <Title> Tests regular class operator used in object initializer inside a collection
+    // initializer.</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>

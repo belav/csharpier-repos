@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Mono.Debugger.Soft
 {
-    /*
-     * Represents a valuetype value in the debuggee
-     */
+/*
+* Represents a valuetype value in the debuggee
+*/
     public class StructMirror : Value, IInvokable
     {
         TypeMirror type;

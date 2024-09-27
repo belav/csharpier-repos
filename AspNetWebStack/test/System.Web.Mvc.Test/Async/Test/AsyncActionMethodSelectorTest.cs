@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -106,7 +107,8 @@ namespace System.Web.Mvc.Async.Test
         [Fact]
         public void FindAction_ReturnsMethodWithActionSelectionAttributeIfMultipleMethodsMatchRequest()
         {
-            // DevDiv Bugs 212062: If multiple action methods match a request, we should match only the methods with an
+            // DevDiv Bugs 212062: If multiple action methods match a request, we should match only the methods
+            // with an
             // [ActionMethod] attribute since we assume those methods are more specific.
 
             // Arrange

@@ -61,7 +61,8 @@ namespace System.Globalization
             return NlsGetLocaleInfo(_sRealName, type);
         }
 
-        // For LOCALE_SPARENT we need the option of using the "real" name (forcing neutral names) instead of the
+        // For LOCALE_SPARENT we need the option of using the "real" name (forcing neutral names) instead of
+        // the
         // "windows" name, which can be specific for downlevel (< windows 7) os's.
         private string NlsGetLocaleInfo(string localeName, LocaleStringData type)
         {
@@ -201,7 +202,8 @@ namespace System.Globalization
             Debug.Assert(GlobalizationMode.UseNls);
 
             // If the current UI culture matching the OS UI language, we'll get the display name from the OS.
-            // otherwise, we use the native name as we don't carry resources for the region display names anyway.
+            // otherwise, we use the native name as we don't carry resources for the region display names
+            // anyway.
             if (CultureInfo.CurrentUICulture.Name.Equals(CultureInfo.UserDefaultUICulture.Name))
             {
                 return NlsGetLocaleInfo(LocaleStringData.LocalizedCountryName);

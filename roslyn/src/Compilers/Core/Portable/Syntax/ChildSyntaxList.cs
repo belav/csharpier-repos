@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>Gets the child at the specified index.</summary>
         /// <param name="index">The zero-based index of the child to get.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">
-        ///   <paramref name="index"/> is less than 0.-or-<paramref name="index" /> is equal to or greater than <see cref="ChildSyntaxList.Count"/>. </exception>
+        ///   <paramref name="index"/> is less than 0.-or-<paramref name="index" /> is equal to or greater
+        // than <see cref="ChildSyntaxList.Count"/>. </exception>
         public SyntaxNodeOrToken this[int index]
         {
             get
@@ -160,7 +161,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Locate the node or token that is a child of the given <see cref="SyntaxNode"/> and contains the given position.
+        /// Locate the node or token that is a child of the given <see cref="SyntaxNode"/> and contains the
+        // given position.
         /// </summary>
         /// <param name="node">The <see cref="SyntaxNode"/> to search.</param>
         /// <param name="targetPosition">The position.</param>
@@ -342,14 +344,16 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns a list which contains all children of <see cref="ChildSyntaxList"/> in reversed order.
         /// </summary>
-        /// <returns><see cref="Reversed"/> which contains all children of <see cref="ChildSyntaxList"/> in reversed order</returns>
+        /// <returns><see cref="Reversed"/> which contains all children of <see cref="ChildSyntaxList"/> in
+        // reversed order</returns>
         public Reversed Reverse()
         {
             Debug.Assert(_node is object);
             return new Reversed(_node, _count);
         }
 
-        /// <summary>Returns an enumerator that iterates through the <see cref="ChildSyntaxList"/>.</summary>
+        /// <summary>Returns an enumerator that iterates through the <see
+        // cref="ChildSyntaxList"/>.</summary>
         /// <returns>A <see cref="Enumerator"/> for the <see cref="ChildSyntaxList"/>.</returns>
         public Enumerator GetEnumerator()
         {
@@ -382,16 +386,20 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>Determines whether the specified object is equal to the current instance.</summary>
-        /// <returns>true if the specified object is a <see cref="ChildSyntaxList" /> structure and is equal to the current instance; otherwise, false.</returns>
+        /// <returns>true if the specified object is a <see cref="ChildSyntaxList" /> structure and is equal
+        // to the current instance; otherwise, false.</returns>
         /// <param name="obj">The object to be compared with the current instance.</param>
         public override bool Equals(object? obj)
         {
             return obj is ChildSyntaxList list && Equals(list);
         }
 
-        /// <summary>Determines whether the specified <see cref="ChildSyntaxList" /> structure is equal to the current instance.</summary>
-        /// <returns>true if the specified <see cref="ChildSyntaxList" /> structure is equal to the current instance; otherwise, false.</returns>
-        /// <param name="other">The <see cref="ChildSyntaxList" /> structure to be compared with the current instance.</param>
+        /// <summary>Determines whether the specified <see cref="ChildSyntaxList" /> structure is equal to
+        // the current instance.</summary>
+        /// <returns>true if the specified <see cref="ChildSyntaxList" /> structure is equal to the current
+        // instance; otherwise, false.</returns>
+        /// <param name="other">The <see cref="ChildSyntaxList" /> structure to be compared with the current
+        // instance.</param>
         public bool Equals(ChildSyntaxList other)
         {
             return _node == other._node;
@@ -405,18 +413,24 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>Indicates whether two <see cref="ChildSyntaxList" /> structures are equal.</summary>
-        /// <returns>true if <paramref name="list1" /> is equal to <paramref name="list2" />; otherwise, false.</returns>
-        /// <param name="list1">The <see cref="ChildSyntaxList" /> structure on the left side of the equality operator.</param>
-        /// <param name="list2">The <see cref="ChildSyntaxList" /> structure on the right side of the equality operator.</param>
+        /// <returns>true if <paramref name="list1" /> is equal to <paramref name="list2" />; otherwise,
+        // false.</returns>
+        /// <param name="list1">The <see cref="ChildSyntaxList" /> structure on the left side of the
+        // equality operator.</param>
+        /// <param name="list2">The <see cref="ChildSyntaxList" /> structure on the right side of the
+        // equality operator.</param>
         public static bool operator ==(ChildSyntaxList list1, ChildSyntaxList list2)
         {
             return list1.Equals(list2);
         }
 
         /// <summary>Indicates whether two <see cref="ChildSyntaxList" /> structures are unequal.</summary>
-        /// <returns>true if <paramref name="list1" /> is equal to <paramref name="list2" />; otherwise, false.</returns>
-        /// <param name="list1">The <see cref="ChildSyntaxList" /> structure on the left side of the inequality operator.</param>
-        /// <param name="list2">The <see cref="ChildSyntaxList" /> structure on the right side of the inequality operator.</param>
+        /// <returns>true if <paramref name="list1" /> is equal to <paramref name="list2" />; otherwise,
+        // false.</returns>
+        /// <param name="list1">The <see cref="ChildSyntaxList" /> structure on the left side of the
+        // inequality operator.</param>
+        /// <param name="list2">The <see cref="ChildSyntaxList" /> structure on the right side of the
+        // inequality operator.</param>
         public static bool operator !=(ChildSyntaxList list1, ChildSyntaxList list2)
         {
             return !list1.Equals(list2);

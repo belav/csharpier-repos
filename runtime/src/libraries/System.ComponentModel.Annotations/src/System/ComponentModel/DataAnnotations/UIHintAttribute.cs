@@ -18,7 +18,8 @@ namespace System.ComponentModel.DataAnnotations
         private readonly UIHintImplementation _implementation;
 
         /// <summary>
-        ///     Constructor that accepts the name of the control, without specifying which presentation layer to use
+        ///     Constructor that accepts the name of the control, without specifying which presentation
+        // layer to use
         /// </summary>
         /// <param name="uiHint">The name of the UI control.</param>
         public UIHintAttribute(string uiHint)
@@ -28,12 +29,14 @@ namespace System.ComponentModel.DataAnnotations
         ///     Constructor that accepts both the name of the control as well as the presentation layer
         /// </summary>
         /// <param name="uiHint">The name of the control to use</param>
-        /// <param name="presentationLayer">The name of the presentation layer that supports this control</param>
+        /// <param name="presentationLayer">The name of the presentation layer that supports this
+        // control</param>
         public UIHintAttribute(string uiHint, string? presentationLayer)
             : this(uiHint, presentationLayer, Array.Empty<object>()) { }
 
         /// <summary>
-        ///     Full constructor that accepts the name of the control, presentation layer, and optional parameters
+        ///     Full constructor that accepts the name of the control, presentation layer, and optional
+        // parameters
         ///     to use when constructing the control
         /// </summary>
         /// <param name="uiHint">The name of the control</param>
@@ -58,14 +61,16 @@ namespace System.ComponentModel.DataAnnotations
         public string UIHint => _implementation.UIHint;
 
         /// <summary>
-        ///     Gets the name of the presentation layer that supports the control type in <see cref="UIHint" />
+        ///     Gets the name of the presentation layer that supports the control type in <see cref="UIHint"
+        // />
         /// </summary>
         public string? PresentationLayer => _implementation.PresentationLayer;
 
         /// <summary>
         ///     Gets the name-value pairs used as parameters to the control's constructor
         /// </summary>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
         public IDictionary<string, object?> ControlParameters => _implementation.ControlParameters;
 
         public override int GetHashCode() => _implementation.GetHashCode();
@@ -104,7 +109,8 @@ namespace System.ComponentModel.DataAnnotations
             public string UIHint { get; }
 
             /// <summary>
-            ///     Gets the name of the presentation layer that supports the control type in <see cref="UIHint" />
+            ///     Gets the name of the presentation layer that supports the control type in <see cref="UIHint"
+            // />
             /// </summary>
             public string? PresentationLayer { get; }
 
@@ -131,7 +137,8 @@ namespace System.ComponentModel.DataAnnotations
             ///     which must also be a UIHintAttribute object, have the same value.
             /// </summary>
             /// <param name="obj">An System.Object.</param>
-            /// <returns>true if obj is a UIHintAttribute and its value is the same as this instance; otherwise, false.</returns>
+            /// <returns>true if obj is a UIHintAttribute and its value is the same as this instance; otherwise,
+            // false.</returns>
             public override bool Equals([NotNullWhen(true)] object? obj)
             {
                 var otherImplementation = obj as UIHintImplementation;
@@ -170,7 +177,8 @@ namespace System.ComponentModel.DataAnnotations
             }
 
             /// <summary>
-            ///     Validates the input control parameters and throws InvalidOperationException if they are not correct.
+            ///     Validates the input control parameters and throws InvalidOperationException if they are not
+            // correct.
             /// </summary>
             /// <returns>
             ///     Dictionary of control parameters.

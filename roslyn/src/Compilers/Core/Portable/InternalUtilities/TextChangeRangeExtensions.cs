@@ -25,8 +25,10 @@ namespace Roslyn.Utilities
             }
 
             // get encompassing text change and accumulate it once.
-            // we could apply each one individually like we do in SyntaxDiff::ComputeSpansInNew by calculating delta
-            // between each change in changesInNextVersion which is already sorted in its textual position ascending order.
+            // we could apply each one individually like we do in SyntaxDiff::ComputeSpansInNew by calculating
+            // delta
+            // between each change in changesInNextVersion which is already sorted in its textual position
+            // ascending order.
             // but end result will be same as just applying it once with encompassed text change range.
             var newChange = TextChangeRange.Collapse(changesInNextVersion);
 
@@ -92,7 +94,8 @@ namespace Roslyn.Utilities
             else
             {
                 // We have chosen to use the incoming end because it occurs past
-                // the stored edit.  So, we need newChange.Span.End and (newChange.Span.Start + newChange.NewLength).
+                // the stored edit.  So, we need newChange.Span.End and (newChange.Span.Start +
+                // newChange.NewLength).
                 // Since (newChange.Span.Start + newChange.NewLength) is already relative to buffer n, it is copied
                 // unmodified.  Since newChange.Span.End is relative to buffer n-1 (and
                 // we need 0), apply to it the delta between the stored end
@@ -113,8 +116,10 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// Merges the new change ranges into the old change ranges, adjusting the new ranges to be with respect to the original text
-        /// (with neither old or new changes applied) instead of with respect to the original text after "old changes" are applied.
+        /// Merges the new change ranges into the old change ranges, adjusting the new ranges to be with
+        // respect to the original text
+        /// (with neither old or new changes applied) instead of with respect to the original text after
+        // "old changes" are applied.
         ///
         /// This may require splitting, concatenation, etc. of individual change ranges.
         /// </summary>
@@ -150,8 +155,10 @@ namespace Roslyn.Utilities
             var oldDelta = 0;
 
             // In this loop we "zip" together potentially overlapping old and new changes.
-            // It's important that when overlapping changes are found, we don't consume past the end of the overlapping section until the next iteration.
-            // so that we don't miss scenarios where the section after the overlap we found itself overlaps with another change
+            // It's important that when overlapping changes are found, we don't consume past the end of the
+            // overlapping section until the next iteration.
+            // so that we don't miss scenarios where the section after the overlap we found itself overlaps with
+            // another change
             // e.g.:
             // [-------oldChange1------]
             // [--newChange1--]   [--newChange2--]
@@ -197,8 +204,10 @@ namespace Roslyn.Utilities
                 }
                 else if (newChange.SpanStart < oldChange.Span.Start + oldDelta)
                 {
-                    // new change starts before old change, but the new change deletion overlaps with the old change insertion
-                    // note: 'd' represents a deleted character, 'a' represents a character inserted by an old change, and 'b' represents a character inserted by a new change.
+                    // new change starts before old change, but the new change deletion overlaps with the old change
+                    // insertion
+                    // note: 'd' represents a deleted character, 'a' represents a character inserted by an old change,
+                    // and 'b' represents a character inserted by a new change.
                     //
                     //    old|dddddd|
                     //       |aaaaaa|
@@ -206,7 +215,8 @@ namespace Roslyn.Utilities
                     // new|dddddd|
                     //    |bbbbbb|
 
-                    // align the new change and old change start by consuming the part of the new deletion before the old change
+                    // align the new change and old change start by consuming the part of the new deletion before the
+                    // old change
                     // (this only deletes characters of the original text)
                     //
                     // old|dddddd|
@@ -242,7 +252,8 @@ namespace Roslyn.Utilities
                     //    new|dddddd|
                     //       |bbbbbb|
 
-                    // align the old change to the new change by consuming the part of the old change which is before the new change.
+                    // align the old change to the new change by consuming the part of the old change which is before
+                    // the new change.
                     //
                     //    old|ddd|
                     //       |aaa|
@@ -297,8 +308,10 @@ namespace Roslyn.Utilities
                         // new||
                         //    |bbbbbb|
                         //
-                        // - move the new change insertion forward by the same amount as its consumed deletion to remain aligned with the old change.
-                        // (because the old change and new change have the same adjusted start position, the new change insertion appears directly before the old change insertion in the final text)
+                        // - move the new change insertion forward by the same amount as its consumed deletion to remain
+                        // aligned with the old change.
+                        // (because the old change and new change have the same adjusted start position, the new change
+                        // insertion appears directly before the old change insertion in the final text)
                         //
                         //    old|dddddd|
                         //       |aaa|
@@ -311,7 +324,8 @@ namespace Roslyn.Utilities
                             oldChange.NewLength - newChange.SpanLength
                         );
 
-                        // the new change deletion is equal to the subset of the old change insertion that we are consuming this iteration
+                        // the new change deletion is equal to the subset of the old change insertion that we are consuming
+                        // this iteration
                         oldDelta = oldDelta + newChange.SpanLength;
 
                         // since the new change insertion occurs before the old change, consume it now
@@ -337,7 +351,8 @@ namespace Roslyn.Utilities
                         //    |bbb|
 
                         // merge the old change into the new change:
-                        // - new change deletion deletes all of the old change insertion. reduce the new change deletion accordingly
+                        // - new change deletion deletes all of the old change insertion. reduce the new change deletion
+                        // accordingly
                         //
                         //   old|d|
                         //      ||
@@ -448,7 +463,8 @@ namespace Roslyn.Utilities
                 UnadjustedNewChange newChange
             )
             {
-                // unadjusted new change is relative to the original text with old changes applied. Subtract oldDelta to make it relative to the original text.
+                // unadjusted new change is relative to the original text with old changes applied. Subtract
+                // oldDelta to make it relative to the original text.
                 add(
                     builder,
                     new TextChangeRange(
@@ -483,13 +499,17 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// Represents a new change being processed by <see cref="Merge(ImmutableArray&lt;TextChangeRange&gt;, ImmutableArray&lt;TextChangeRange&gt;)"/>.
+        /// Represents a new change being processed by <see
+        // cref="Merge(ImmutableArray&lt;TextChangeRange&gt;, ImmutableArray&lt;TextChangeRange&gt;)"/>.
         /// Such a new change must be adjusted before being added to the result list.
         /// </summary>
         /// <remarks>
-        /// A value of this type may represent the intermediate state of merging of an old change into an unadjusted new change,
-        /// resulting in a temporary unadjusted new change whose <see cref="SpanStart"/> is negative (not valid) until it is adjusted.
-        /// This tends to happen when we need to merge an old change deletion into a new change near the beginning of the text. (see TextChangeTests.Fuzz_4)
+        /// A value of this type may represent the intermediate state of merging of an old change into an
+        // unadjusted new change,
+        /// resulting in a temporary unadjusted new change whose <see cref="SpanStart"/> is negative (not
+        // valid) until it is adjusted.
+        /// This tends to happen when we need to merge an old change deletion into a new change near the
+        // beginning of the text. (see TextChangeTests.Fuzz_4)
         /// </remarks>
         private readonly struct UnadjustedNewChange
         {

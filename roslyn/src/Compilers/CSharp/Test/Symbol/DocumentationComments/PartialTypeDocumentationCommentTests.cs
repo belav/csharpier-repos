@@ -84,8 +84,10 @@ partial class Goo
         [Fact]
         public void TestImplementedMethodWithNoSummaryOnImpl()
         {
-            // This is an interesting behavior; as long as there is any XML at all on the implementation, it overrides
-            // any XML on the latent declaration. Since we don't have a summary on this implementation, this should be
+            // This is an interesting behavior; as long as there is any XML at all on the implementation, it
+            // overrides
+            // any XML on the latent declaration. Since we don't have a summary on this implementation, this
+            // should be
             // null!
             var method = _gooClass.GetMembers("ImplementedMethodWithNoSummaryOnImpl").Single();
             Assert.Equal(

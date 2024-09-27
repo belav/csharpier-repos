@@ -11,16 +11,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Provides a simple API for configuring a <see cref="IStoredProcedure" /> parameter.
 /// </summary>
 /// <remarks>
-///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" />
+// API
 ///     and it is not designed to be directly constructed in your application code.
 /// </remarks>
 public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public StoredProcedureParameterBuilder(
@@ -38,10 +43,14 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     public virtual IMutableStoredProcedureParameter Metadata => Builder.Metadata;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalStoredProcedureParameterBuilder Builder { get; }
@@ -52,8 +61,10 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     ///     Sets the name of the stored procedure parameter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
-    ///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> and
+    ///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="name">The store type of the function parameter in the database.</param>
     /// <returns>The same builder instance so that further configuration calls can be chained.</returns>
@@ -70,8 +81,10 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     ///     Configures the stored procedure parameter as both an input and output parameter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
-    ///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> and
+    ///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more
+    // information and examples.
     /// </remarks>
     /// <returns>The same builder instance so that further configuration calls can be chained.</returns>
     public virtual StoredProcedureParameterBuilder IsInputOutput()
@@ -85,8 +98,10 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     ///     Configures the stored procedure parameter as an output parameter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
-    ///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> and
+    ///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more
+    // information and examples.
     /// </remarks>
     /// <returns>The same builder instance so that further configuration calls can be chained.</returns>
     public virtual StoredProcedureParameterBuilder IsOutput()
@@ -103,7 +118,8 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     /// </summary>
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual StoredProcedureParameterBuilder HasAnnotation(string annotation, object? value)
     {
         Check.NotEmpty(annotation, nameof(annotation));
@@ -128,7 +144,8 @@ public class StoredProcedureParameterBuilder : IInfrastructure<PropertyBuilder?>
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
     public override bool Equals(object? obj) => base.Equals(obj);

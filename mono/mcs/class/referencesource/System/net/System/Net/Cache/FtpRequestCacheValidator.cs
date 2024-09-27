@@ -3,14 +3,14 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    FtpRequestCacheValidator.cs
+FtpRequestCacheValidator.cs
 
 Abstract:
-    The class implements FTP Caching validators
+The class implements FTP Caching validators
 
 Author:
 
-    Alexei Vopilov    3-Aug-2004
+Alexei Vopilov    3-Aug-2004
 
 Revision History:
 
@@ -60,7 +60,8 @@ namespace System.Net.Cache
 
         //
         // This validation method is called first and before any Cache access is done.
-        // Given the request instance the code has to decide whether the request is ever suitable for caching.
+        // Given the request instance the code has to decide whether the request is ever suitable for
+        // caching.
         //
         // Returns:
         // Continue           = Proceed to the next protocol stage.
@@ -144,7 +145,8 @@ namespace System.Net.Cache
         }
 
         //
-        // This validation method is called after caching protocol has retrieved the metadata of a cached entry.
+        // This validation method is called after caching protocol has retrieved the metadata of a cached
+        // entry.
         // Given the cached entry context, the request instance and the effective caching policy,
         // the handler has to decide whether a cached item can be considered as fresh.
         protected internal override CacheFreshnessStatus ValidateFreshness()
@@ -457,7 +459,8 @@ namespace System.Net.Cache
         // This is useful in case of possible failure or inconsistent results received from
         // the remote cache.
         //
-        /// Invalid response from this method means the request was internally modified and should be retried </remarks>
+        /// Invalid response from this method means the request was internally modified and should be
+        // retried </remarks>
         protected internal override CacheValidationStatus ValidateResponse()
         {
             if (HttpProxyMode)
@@ -502,7 +505,8 @@ namespace System.Net.Cache
                     )
                 );
 
-            // If there was a retry already, it should go with cache disabled so by default we won't retry it again
+            // If there was a retry already, it should go with cache disabled so by default we won't retry it
+            // again
             if (ResponseCount > 1)
             {
                 if (Logging.On)

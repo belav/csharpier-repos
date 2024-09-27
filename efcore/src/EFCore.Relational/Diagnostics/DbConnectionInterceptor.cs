@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     Abstract base class for <see cref="IDbConnectionInterceptor" /> for use when implementing a subset
+///     Abstract base class for <see cref="IDbConnectionInterceptor" /> for use when implementing a
+// subset
 ///     of the interface methods.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for more
+// information and examples.
 /// </remarks>
 public abstract class DbConnectionInterceptor : IDbConnectionInterceptor
 {

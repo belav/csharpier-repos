@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc;
 public sealed class ViewDataAttribute : Attribute
 {
     /// <summary>
-    /// Gets or sets the key used to get or add the property from value from <see cref="ViewDataDictionary"/>.
+    /// Gets or sets the key used to get or add the property from value from <see
+    // cref="ViewDataDictionary"/>.
     /// When unspecified, the key is the property name.
     /// </summary>
     public string? Key { get; set; }

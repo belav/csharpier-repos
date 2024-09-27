@@ -45,7 +45,8 @@ internal sealed class IdentityDefaultUIConfigureOptions<TUser>
 
     public void Configure(CookieAuthenticationOptions options)
     {
-        // Nothing to do here as Configure(string name, CookieAuthenticationOptions options) is the one setting things up.
+        // Nothing to do here as Configure(string name, CookieAuthenticationOptions options) is the one
+        // setting things up.
     }
 
     public void Configure(string? name, CookieAuthenticationOptions options)

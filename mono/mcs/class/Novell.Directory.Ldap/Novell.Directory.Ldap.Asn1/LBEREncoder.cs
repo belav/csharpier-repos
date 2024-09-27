@@ -68,8 +68,8 @@ namespace Novell.Directory.Ldap.Asn1
     /// </summary>
     public class LBEREncoder : Asn1Encoder
     {
-        /* Encoders for ASN.1 simple type Contents
-        */
+/* Encoders for ASN.1 simple type Contents
+*/
         public void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
@@ -78,13 +78,13 @@ namespace Novell.Directory.Ldap.Asn1
         /// <summary> BER Encode an Asn1Boolean directly into the specified output stream.</summary>
         public virtual void encode(Asn1Boolean b, System.IO.Stream out_Renamed)
         {
-            /* Encode the id */
+/* Encode the id */
             encode(b.getIdentifier(), out_Renamed);
 
-            /* Encode the length */
+/* Encode the length */
             out_Renamed.WriteByte((System.Byte)0x01);
 
-            /* Encode the boolean content*/
+/* Encode the boolean content*/
             out_Renamed.WriteByte(
                 (byte)(b.booleanValue() ? (sbyte)SupportClass.Identity(0xff) : (sbyte)0x00)
             );
@@ -125,14 +125,14 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1Real directly to a stream.
-        public void encode(Asn1Real r, OutputStream out)
-        throws IOException
-        {
-        throw new IOException("LBEREncoder: Encode to a stream not implemented");
-        }
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1Real directly to a stream.
+public void encode(Asn1Real r, OutputStream out)
+throws IOException
+{
+throw new IOException("LBEREncoder: Encode to a stream not implemented");
+}
+*/
 
         /// <summary> Encode an Asn1Null directly into the specified outputstream.</summary>
         public void encode(Asn1Null n, System.IO.Stream out_Renamed)
@@ -142,14 +142,14 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1BitString directly to a stream.
-        public void encode(Asn1BitString bs, OutputStream out)
-        throws IOException
-        {
-        throw new IOException("LBEREncoder: Encode to a stream not implemented");
-        }
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1BitString directly to a stream.
+public void encode(Asn1BitString bs, OutputStream out)
+throws IOException
+{
+throw new IOException("LBEREncoder: Encode to a stream not implemented");
+}
+*/
 
         /// <summary> Encode an Asn1OctetString directly into the specified outputstream.</summary>
         public void encode(Asn1OctetString os, System.IO.Stream out_Renamed)
@@ -164,26 +164,26 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1ObjectIdentifier directly to a stream.
-        * public void encode(Asn1ObjectIdentifier oi, OutputStream out)
-        * throws IOException
-        * {
-        * throw new IOException("LBEREncoder: Encode to a stream not implemented");
-        * }
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1ObjectIdentifier directly to a stream.
+* public void encode(Asn1ObjectIdentifier oi, OutputStream out)
+* throws IOException
+* {
+* throw new IOException("LBEREncoder: Encode to a stream not implemented");
+* }
+*/
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1CharacterString directly to a stream.
-        * public void encode(Asn1CharacterString cs, OutputStream out)
-        * throws IOException
-        * {
-        * throw new IOException("LBEREncoder: Encode to a stream not implemented");
-        * }
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1CharacterString directly to a stream.
+* public void encode(Asn1CharacterString cs, OutputStream out)
+* throws IOException
+* {
+* throw new IOException("LBEREncoder: Encode to a stream not implemented");
+* }
+*/
 
-        /* Encoders for ASN.1 structured types
-        */
+/* Encoders for ASN.1 structured types
+*/
 
         /// <summary> Encode an Asn1Structured into the specified outputstream.  This method
         /// can be used to encode SET, SET_OF, SEQUENCE, SEQUENCE_OF
@@ -196,16 +196,16 @@ namespace Novell.Directory.Ldap.Asn1
 
             System.IO.MemoryStream output = new System.IO.MemoryStream();
 
-            /* Cycle through each element encoding each element */
+/* Cycle through each element encoding each element */
             for (int i = 0; i < value_Renamed.Length; i++)
             {
                 (value_Renamed[i]).encode(this, output);
             }
 
-            /* Encode the length */
+/* Encode the length */
             encodeLength((int)output.Length, out_Renamed);
 
-            /* Add each encoded element into the output stream */
+/* Add each encoded element into the output stream */
             sbyte[] temp_sbyteArray;
             temp_sbyteArray = SupportClass.ToSByteArray(output.ToArray());
             out_Renamed.Write(SupportClass.ToByteArray(temp_sbyteArray), 0, temp_sbyteArray.Length);
@@ -221,7 +221,7 @@ namespace Novell.Directory.Ldap.Asn1
             {
                 encode(t.getIdentifier(), out_Renamed);
 
-                /* determine the encoded length of the base type. */
+/* determine the encoded length of the base type. */
                 System.IO.MemoryStream encodedContent = new System.IO.MemoryStream();
                 t.taggedValue().encode(this, encodedContent);
 
@@ -244,10 +244,10 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Encoders for ASN.1 useful types
-        */
-        /* Encoder for ASN.1 Identifier
-        */
+/* Encoders for ASN.1 useful types
+*/
+/* Encoder for ASN.1 Identifier
+*/
 
         /// <summary> Encode an Asn1Identifier directly into the specified outputstream.</summary>
         public void encode(Asn1Identifier id, System.IO.Stream out_Renamed)
@@ -258,24 +258,24 @@ namespace Novell.Directory.Ldap.Asn1
 
             if (t < 30)
             {
-                /* single octet */
+/* single octet */
                 out_Renamed.WriteByte((System.Byte)(ccf | t));
             }
             else
             {
-                /* multiple octet */
+/* multiple octet */
                 out_Renamed.WriteByte((System.Byte)(ccf | 0x1F));
                 encodeTagInteger(t, out_Renamed);
             }
             return;
         }
 
-        /* Private helper methods
-        */
+/* Private helper methods
+*/
 
-        /*
-        *  Encodes the specified length into the the outputstream
-        */
+/*
+*  Encodes the specified length into the the outputstream
+*/
         private void encodeLength(int length, System.IO.Stream out_Renamed)
         {
             if (length < 0x80)

@@ -8,12 +8,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 ///     </para>
 /// </remarks>
 public interface IMigrationsIdGenerator
@@ -36,6 +40,7 @@ public interface IMigrationsIdGenerator
     ///     Checks whether or not the given string is a valid migration identifier.
     /// </summary>
     /// <param name="value">The candidate string.</param>
-    /// <returns><see langword="true" /> if the string is a valid migration identifier; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if the string is a valid migration identifier; <see
+    // langword="false" /> otherwise.</returns>
     bool IsValidId(string value);
 }

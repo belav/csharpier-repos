@@ -13,13 +13,16 @@ internal interface IOptimizedAuthenticatedEncryptor : IAuthenticatedEncryptor
     /// <summary>
     /// Encrypts and tamper-proofs a piece of data.
     /// </summary>
-    /// <param name="plaintext">The plaintext to encrypt. This input may be zero bytes in length.</param>
+    /// <param name="plaintext">The plaintext to encrypt. This input may be zero bytes in
+    // length.</param>
     /// <param name="additionalAuthenticatedData">A piece of data which will not be included in
     /// the returned ciphertext but which will still be covered by the authentication tag.
     /// This input may be zero bytes in length. The same AAD must be specified in the corresponding
     /// call to Decrypt.</param>
-    /// <param name="preBufferSize">The number of bytes to pad before the ciphertext in the output.</param>
-    /// <param name="postBufferSize">The number of bytes to pad after the ciphertext in the output.</param>
+    /// <param name="preBufferSize">The number of bytes to pad before the ciphertext in the
+    // output.</param>
+    /// <param name="postBufferSize">The number of bytes to pad after the ciphertext in the
+    // output.</param>
     /// <returns>
     /// The ciphertext blob, including authentication tag. The ciphertext blob will be surrounded by
     /// the number of padding bytes requested. For instance, if the given (plaintext, AAD) input results

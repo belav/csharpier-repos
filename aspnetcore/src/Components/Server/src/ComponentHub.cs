@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.Server;
 
 // Some notes about our expectations for error handling:
 //
-// In general, we need to prevent any client from interacting with a circuit that's in an unpredictable
+// In general, we need to prevent any client from interacting with a circuit that's in an
+// unpredictable
 // state. This means that when a circuit throws an unhandled exception our top priority is to
 // unregister and dispose the circuit. This will prevent any new dispatches from the client
 // from making it into application code.
@@ -165,7 +166,8 @@ internal sealed partial class ComponentHub : Hub
 
             // Returning the secret here so the client can reconnect.
             //
-            // Logging the secret and circuit ID here so we can associate them with just logs (if TRACE level is on).
+            // Logging the secret and circuit ID here so we can associate them with just logs (if TRACE level is
+            // on).
             Log.CreatedCircuit(
                 _logger,
                 circuitHost.CircuitId,
@@ -318,10 +320,14 @@ internal sealed partial class ComponentHub : Hub
         }
 
         // Note: this await will block the circuit. This is intentional.
-        // The call into the circuitHost.ReceiveJSDataChunk will block regardless as we call into Renderer.Dispatcher.InvokeAsync
-        // which ensures we're running on the main circuit thread so that the server/client remain in the same
-        // synchronization context. Additionally, we're utilizing the return value as a heartbeat for the transfer
-        // process, and without it would likely need to setup a separate endpoint to handle that functionality.
+        // The call into the circuitHost.ReceiveJSDataChunk will block regardless as we call into
+        // Renderer.Dispatcher.InvokeAsync
+        // which ensures we're running on the main circuit thread so that the server/client remain in the
+        // same
+        // synchronization context. Additionally, we're utilizing the return value as a heartbeat for the
+        // transfer
+        // process, and without it would likely need to setup a separate endpoint to handle that
+        // functionality.
         return await circuitHost.ReceiveJSDataChunk(streamId, chunkId, chunk, error);
     }
 
@@ -409,7 +415,8 @@ internal sealed partial class ComponentHub : Hub
 
     // We store the CircuitHost through a *handle* here because Context.Items is tied to the lifetime
     // of the connection. It's possible that a misbehaving client could cause disposal of a CircuitHost
-    // but keep a connection open indefinitely, preventing GC of the Circuit and related application state.
+    // but keep a connection open indefinitely, preventing GC of the Circuit and related application
+    // state.
     // Using a handle allows the CircuitHost to clear this reference in the background.
     //
     // See comment on error handling on the class definition.

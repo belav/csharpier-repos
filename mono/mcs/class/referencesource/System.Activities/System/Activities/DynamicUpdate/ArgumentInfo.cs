@@ -139,9 +139,12 @@ namespace System.Activities.DynamicUpdate
             }
 
             //
-            // Try to determine if the two argument types are in fact the same due to one being a TypeForwardedTo type to the other.
-            // When forwarded types are used, it is expected that all the assemblies involved in type forwarding to be always available,
-            //  whether during map calcuation, during implementation map rollup, or  during merging of multiple maps.
+            // Try to determine if the two argument types are in fact the same due to one being a
+            // TypeForwardedTo type to the other.
+            // When forwarded types are used, it is expected that all the assemblies involved in type forwarding
+            // to be always available,
+            //  whether during map calcuation, during implementation map rollup, or  during merging of multiple
+            // maps.
             //
             if (left.Type != null && right.Type != null && left.Type == right.Type)
             {

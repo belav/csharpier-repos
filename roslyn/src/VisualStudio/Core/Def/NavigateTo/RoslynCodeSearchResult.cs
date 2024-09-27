@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis.NavigateTo;
 internal sealed partial class RoslynSearchItemsSourceProvider
 {
     /// <summary>
-    /// Trivial subclass of <see cref="CodeSearchResult"/>.  Exists just so we can hold onto the original <see
-    /// cref="INavigateToSearchResult"/> object we got back from the search so we can present the UI with the data
+    /// Trivial subclass of <see cref="CodeSearchResult"/>.  Exists just so we can hold onto the
+    // original <see
+    /// cref="INavigateToSearchResult"/> object we got back from the search so we can present the UI
+    // with the data
     /// from it.
     /// </summary>
     private sealed class RoslynCodeSearchResult : CodeSearchResult

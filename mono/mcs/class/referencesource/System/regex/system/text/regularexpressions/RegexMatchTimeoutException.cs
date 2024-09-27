@@ -41,9 +41,12 @@ namespace System.Text.RegularExpressions
         /// This is the preferred constructor to use.
         /// The other constructors are provided for compliance to Fx design guidelines.
         /// </summary>
-        /// <param name="regexInput">Matching timeout occured during mathing within the specified input.</param>
-        /// <param name="regexPattern">Matching timeout occured during mathing to the specified pattern.</param>
-        /// <param name="matchTimeout">Matching timeout occured becasue matching took longer than the specified timeout.</param>
+        /// <param name="regexInput">Matching timeout occured during mathing within the specified
+        // input.</param>
+        /// <param name="regexPattern">Matching timeout occured during mathing to the specified
+        // pattern.</param>
+        /// <param name="matchTimeout">Matching timeout occured becasue matching took longer than the
+        // specified timeout.</param>
         public RegexMatchTimeoutException(
             string regexInput,
             string regexPattern,
@@ -57,7 +60,8 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// This constructor is provided in compliance with common NetFx design patterns;
         /// developers should prefer using the constructor
-        /// <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan matchTimeout)</code>.
+        /// <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan
+        // matchTimeout)</code>.
         /// </summary>
         public RegexMatchTimeoutException()
             : base()
@@ -68,7 +72,8 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// This constructor is provided in compliance with common NetFx design patterns;
         /// developers should prefer using the constructor
-        /// <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan matchTimeout)</code>.
+        /// <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan
+        // matchTimeout)</code>.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public RegexMatchTimeoutException(string message)
@@ -80,10 +85,12 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// This constructor is provided in compliance with common NetFx design patterns;
         /// developers should prefer using the constructor
-        /// <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan matchTimeout)</code>.
+        /// <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan
+        // matchTimeout)</code>.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        /// <param name="inner">The exception that is the cause of the current exception, or a <code>null</code>.</param>
+        /// <param name="inner">The exception that is the cause of the current exception, or a
+        // <code>null</code>.</param>
         public RegexMatchTimeoutException(string message, Exception inner)
             : base(message, inner)
         {
@@ -94,8 +101,10 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Initializes a new RegexMatchTimeoutException with serialized data.
         /// </summary>
-        /// <param name="info">The SerializationInfo  that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The StreamingContext  that contains contextual information about the source or destination.</param>
+        /// <param name="info">The SerializationInfo  that holds the serialized object data about the
+        // exception being thrown.</param>
+        /// <param name="context">The StreamingContext  that contains contextual information about the
+        // source or destination.</param>
         [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
         protected RegexMatchTimeoutException(SerializationInfo info, StreamingContext context)
             : base(info, context)

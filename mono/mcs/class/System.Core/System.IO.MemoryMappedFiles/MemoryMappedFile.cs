@@ -677,7 +677,8 @@ namespace System.IO.MemoryMappedFiles
         }
 
         // This converts a MemoryMappedFileAccess to a FileAccess. MemoryMappedViewStream and
-        // MemoryMappedViewAccessor subclass UnmanagedMemoryStream and UnmanagedMemoryAccessor, which both use
+        // MemoryMappedViewAccessor subclass UnmanagedMemoryStream and UnmanagedMemoryAccessor, which both
+        // use
         // FileAccess to determine whether they are writable and/or readable.
         internal static FileAccess GetFileAccess(MemoryMappedFileAccess access)
         {

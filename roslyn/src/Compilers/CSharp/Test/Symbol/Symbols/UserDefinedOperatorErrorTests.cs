@@ -99,7 +99,8 @@ class H
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (6,21): error CS0111: Type 'C' already defines a member called 'op_Addition' with the same parameter types
+                // (6,21): error CS0111: Type 'C' already defines a member called 'op_Addition' with the same
+                // parameter types
                 //     public static C op_Addition(C c1, C c2) { return c1; }
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Addition")
                     .WithArguments("op_Addition", "C"),
@@ -115,18 +116,21 @@ class H
                 //     public static C operator * (C c1, C c2) { return c1; }
                 Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "*")
                     .WithArguments("C", "op_Multiply"),
-                // (30,32): error CS0111: Type 'C' already defines a member called 'op_Modulus' with the same parameter types
+                // (30,32): error CS0111: Type 'C' already defines a member called 'op_Modulus' with the same
+                // parameter types
                 //     public static int operator % (C c1, C c2) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "%")
                     .WithArguments("op_Modulus", "C"),
                 // (35,37): error CS0557: Duplicate user-defined conversion in type 'C'
                 //     public static explicit operator string(C c) { return null; }
                 Diagnostic(ErrorCode.ERR_DuplicateConversionInClass, "string").WithArguments("C"),
-                // (50,23): error CS0111: Type 'E' already defines a member called 'op_Implicit' with the same parameter types
+                // (50,23): error CS0111: Type 'E' already defines a member called 'op_Implicit' with the same
+                // parameter types
                 //     public static int op_Implicit(E e) { return 0; }
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Implicit")
                     .WithArguments("op_Implicit", "E"),
-                // (60,37): error CS0111: Type 'F' already defines a member called 'op_Implicit' with the same parameter types
+                // (60,37): error CS0111: Type 'F' already defines a member called 'op_Implicit' with the same
+                // parameter types
                 //     public static implicit operator string(F f) { return null; }
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "string")
                     .WithArguments("op_Implicit", "F"),
@@ -138,11 +142,13 @@ class H
                 //     public static implicit operator string(H h) { return null; }
                 Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "string")
                     .WithArguments("H", "op_Implicit"),
-                // (13,16): warning CS0649: Field 'C.op_Subtraction' is never assigned to, and will always have its default value 0
+                // (13,16): warning CS0649: Field 'C.op_Subtraction' is never assigned to, and will always have its
+                // default value 0
                 //     public int op_Subtraction;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "op_Subtraction")
                     .WithArguments("C.op_Subtraction", "0"),
-                // (16,16): warning CS0649: Field 'C.op_Division' is never assigned to, and will always have its default value 0
+                // (16,16): warning CS0649: Field 'C.op_Division' is never assigned to, and will always have its
+                // default value 0
                 //     public int op_Division;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "op_Division")
                     .WithArguments("C.op_Division", "0")
@@ -206,10 +212,12 @@ partial class C
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (4,5): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // (4,5): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record',
+                // 'struct', 'interface', or a method return type.
                 //     partial public static int operator + (C c1, C c2) { return 0; }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(4, 5),
-                // (4,5): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // (4,5): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record',
+                // 'struct', 'interface', or a method return type.
                 //     partial public static int operator + (C c1, C c2) { return 0; }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(4, 5),
                 // (5,34): error CS0106: The modifier 'abstract' is not valid for this item
@@ -217,7 +225,8 @@ partial class C
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "-")
                     .WithArguments("abstract")
                     .WithLocation(5, 34),
-                // (5,34): error CS0558: User-defined operator 'C.operator -(C, C)' must be declared static and public
+                // (5,34): error CS0558: User-defined operator 'C.operator -(C, C)' must be declared static and
+                // public
                 //     abstract public int operator - (C c1, C c2) { return 0; }
                 Diagnostic(ErrorCode.ERR_OperatorsMustBeStatic, "-")
                     .WithArguments("C.operator -(C, C)")
@@ -227,7 +236,8 @@ partial class C
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "<<")
                     .WithArguments("sealed")
                     .WithLocation(6, 32),
-                // (6,32): error CS0558: User-defined operator 'C.operator <<(C, int)' must be declared static and public
+                // (6,32): error CS0558: User-defined operator 'C.operator <<(C, int)' must be declared static and
+                // public
                 //     sealed public int operator << (C c1, int c2) { return 0; }
                 Diagnostic(ErrorCode.ERR_OperatorsMustBeStatic, "<<")
                     .WithArguments("C.operator <<(C, int)")
@@ -277,7 +287,8 @@ partial class C
                 Diagnostic(ErrorCode.ERR_ExternHasBody, "^")
                     .WithArguments("C.operator ^(C, C)")
                     .WithLocation(13, 39),
-                // (14,32): error CS0501: 'C.operator +(C)' must declare a body because it is not marked abstract, extern, or partial
+                // (14,32): error CS0501: 'C.operator +(C)' must declare a body because it is not marked abstract,
+                // extern, or partial
                 //     static public int operator + (C c1);
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "+")
                     .WithArguments("C.operator +(C)")
@@ -310,15 +321,18 @@ public class C
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (6,30): error CS0056: Inconsistent accessibility: return type 'C.D' is less accessible than operator 'C.operator +(C, C)'
+                // (6,30): error CS0056: Inconsistent accessibility: return type 'C.D' is less accessible than
+                // operator 'C.operator +(C, C)'
                 //     public static D operator + (C c1, C c2) { return null; }
                 Diagnostic(ErrorCode.ERR_BadVisOpReturn, "+")
                     .WithArguments("C.operator +(C, C)", "C.D"),
-                // (7,32): error CS0057: Inconsistent accessibility: parameter type 'C.D' is less accessible than operator 'C.operator -(C, C.D)'
+                // (7,32): error CS0057: Inconsistent accessibility: parameter type 'C.D' is less accessible than
+                // operator 'C.operator -(C, C.D)'
                 //     public static int operator - (C c, D d) { return 0; }
                 Diagnostic(ErrorCode.ERR_BadVisOpParam, "-")
                     .WithArguments("C.operator -(C, C.D)", "C.D"),
-                // (8,37): error CS0057: Inconsistent accessibility: parameter type 'C.D' is less accessible than operator 'C.explicit operator C(C.D)'
+                // (8,37): error CS0057: Inconsistent accessibility: parameter type 'C.D' is less accessible than
+                // operator 'C.explicit operator C(C.D)'
                 //     public static explicit operator C(D d) { return null; }
                 Diagnostic(ErrorCode.ERR_BadVisOpParam, "C")
                     .WithArguments("C.explicit operator C(C.D)", "C.D")
@@ -345,15 +359,18 @@ public class C
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (5,35): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'C.D<T>'
+                // (5,35): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                // in the generic type or method 'C.D<T>'
                 //     public static D<int> operator + (C c1, C c2) { return null; }
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "+")
                     .WithArguments("C.D<T>", "T", "int"),
-                // (6,50): error CS0452: The type 'double' must be a reference type in order to use it as parameter 'T' in the generic type or method 'C.D<T>'
+                // (6,50): error CS0452: The type 'double' must be a reference type in order to use it as parameter
+                // 'T' in the generic type or method 'C.D<T>'
                 //     public static int operator - (C c, D<double> d) { return 0; }
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "d")
                     .WithArguments("C.D<T>", "T", "double"),
-                // (7,50): error CS0452: The type 'decimal' must be a reference type in order to use it as parameter 'T' in the generic type or method 'C.D<T>'
+                // (7,50): error CS0452: The type 'decimal' must be a reference type in order to use it as parameter
+                // 'T' in the generic type or method 'C.D<T>'
                 //     public static explicit operator C(D<decimal> d) { return null; }
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "d")
                     .WithArguments("C.D<T>", "T", "decimal")

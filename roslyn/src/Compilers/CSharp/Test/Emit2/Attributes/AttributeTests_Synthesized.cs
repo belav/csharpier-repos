@@ -24,8 +24,10 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     /// <summary>
-    /// NYI: PEVerify currently fails for netmodules with error: "The module X was expected to contain an assembly manifest".
-    /// Verification was disabled for net modules for now. Add it back once module support has been added.
+    /// NYI: PEVerify currently fails for netmodules with error: "The module X was expected to contain
+    // an assembly manifest".
+    /// Verification was disabled for net modules for now. Add it back once module support has been
+    // added.
     /// See tests having verify: !outputKind.IsNetModule()
     /// https://github.com/dotnet/roslyn/issues/23475
     /// </summary>
@@ -1949,19 +1951,22 @@ public class Test
             else
             {
                 compilation.VerifyDiagnostics(
-                    // error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.CompilationRelaxationsAttribute..ctor'
+                    // error CS0656: Missing compiler required member
+                    // 'System.Runtime.CompilerServices.CompilationRelaxationsAttribute..ctor'
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                         .WithArguments(
                             "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
                             ".ctor"
                         ),
-                    // error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeCompatibilityAttribute..ctor'
+                    // error CS0656: Missing compiler required member
+                    // 'System.Runtime.CompilerServices.RuntimeCompatibilityAttribute..ctor'
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                         .WithArguments(
                             "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
                             ".ctor"
                         ),
-                    // error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeCompatibilityAttribute.WrapNonExceptionThrows'
+                    // error CS0656: Missing compiler required member
+                    // 'System.Runtime.CompilerServices.RuntimeCompatibilityAttribute.WrapNonExceptionThrows'
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                         .WithArguments(
                             "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
@@ -2117,7 +2122,8 @@ unsafe class C
                 )
             );
 
-            //Skipped because PeVerify fails to run with "The module  was expected to contain an assembly manifest."
+            //Skipped because PeVerify fails to run with "The module  was expected to contain an assembly
+            // manifest."
             CompileAndVerify(
                 compilation,
                 verify: Verification.Skipped,
@@ -2612,7 +2618,8 @@ namespace System.Runtime.CompilerServices
             );
             Assert.Null(attribute);
 
-            // Attribute cannot be synthesized because type in named argument has use-site error (String type missing)
+            // Attribute cannot be synthesized because type in named argument has use-site error (String type
+            // missing)
             var attribute2 = comp.TrySynthesizeAttribute(
                 WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor,
                 namedArguments: ImmutableArray.Create(

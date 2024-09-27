@@ -13,7 +13,8 @@ namespace Mono.HotReload;
 internal sealed class InstanceFieldTable
 {
     // Q: Does CoreCLR EnC allow adding fields to a valuetype?
-    // A: No, see EEClass::AddField - if the type has layout or is a valuetype, you can't add fields to it.
+    // A: No, see EEClass::AddField - if the type has layout or is a valuetype, you can't add fields to
+    // it.
 
     // See EnCAddedField::Allocate for a description of the CoreCLR version of this.
     //
@@ -30,7 +31,8 @@ internal sealed class InstanceFieldTable
     // with locking on the inner dictionary.
     //
 
-    // This should behave somewhat like EditAndContinueModule::ResolveOrAddField (and EnCAddedField::Allocate)
+    // This should behave somewhat like EditAndContinueModule::ResolveOrAddField (and
+    // EnCAddedField::Allocate)
     //   we want to create some storage space that has the same lifetime as the instance object.
 
     internal static FieldStore GetInstanceFieldFieldStore(
@@ -117,7 +119,7 @@ internal sealed class FieldStore
             loc = null;
         else
             throw new ArgumentException(SR.Arg_EnC_ExpectedPrimitive);
-        /* FIXME: do we want FieldStore to be pinned? */
+/* FIXME: do we want FieldStore to be pinned? */
         return new FieldStore(loc);
     }
 }

@@ -53,7 +53,8 @@ public class TagHelperOutputTest
         var getChildContent = await output.GetChildContentAsync();
         var content = getChildContent.GetContent();
 
-        // We're expecting the initial child content here because normally the TagHelper infrastructure would
+        // We're expecting the initial child content here because normally the TagHelper infrastructure
+        // would
         // swap out the inner workings of GetChildContentAsync to work with its reinitialized state.
         Assert.Equal(expectedGetChildContentContent, content);
         Assert.False(output.PreContent.IsModified);

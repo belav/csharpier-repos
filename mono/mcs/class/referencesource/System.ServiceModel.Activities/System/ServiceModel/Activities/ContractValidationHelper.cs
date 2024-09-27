@@ -419,7 +419,8 @@ namespace System.ServiceModel.Activities
             bool isResponse
         )
         {
-            // MessageContract is allowed only if the WCF contract interface specifies the same message contract type.
+            // MessageContract is allowed only if the WCF contract interface specifies the same message contract
+            // type.
             if (MessageBuilder.IsMessageContract(declaredMessageType))
             {
                 // if it is a typed message contract, we just validate the type of the message matches
@@ -558,7 +559,8 @@ namespace System.ServiceModel.Activities
                 return;
             }
 
-            // In case the WCF contract is a typed message, and the Receive activity also uses ReceiveMessageContent to infer a typed message, the contract needs to be matched
+            // In case the WCF contract is a typed message, and the Receive activity also uses
+            // ReceiveMessageContent to infer a typed message, the contract needs to be matched
             Fx.Assert(targetMessage.Body != null, "MessageDescription.Body is never null!");
 
             // MessageDescription: Headers, Properties, ProtectionLevel
@@ -830,7 +832,8 @@ namespace System.ServiceModel.Activities
             bool isResponse
         )
         {
-            // The following properties can only be set via message contract. Therefore, we do not need to validate them here.
+            // The following properties can only be set via message contract. Therefore, we do not need to
+            // validate them here.
             // MessageDescription: Headers, Properties, ProtectionLevel
             // MessagePartDescription: Namespace, ProtectionLevel, Multiple, Index
             MessageBodyDescription targetMessageBody = targetMessage.Body;
@@ -865,7 +868,8 @@ namespace System.ServiceModel.Activities
             int benchmarkIndex = 0;
             int hitCount = 0;
 
-            // Return value needs to be treated specially since ReceiveParametersContent does not have return value on the OM.
+            // Return value needs to be treated specially since ReceiveParametersContent does not have return
+            // value on the OM.
             bool targetHasReturnValue =
                 isResponse
                 && targetMessageBody.ReturnValue != null
@@ -1013,7 +1017,8 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        // This method trying to validate if the receive message from the operation description should be Parameter content or Message Content
+        // This method trying to validate if the receive message from the operation description should be
+        // Parameter content or Message Content
         public static bool IsReceiveParameterContent(OperationDescription operation)
         {
             Fx.Assert(operation != null, "OperationDescription should not be null");

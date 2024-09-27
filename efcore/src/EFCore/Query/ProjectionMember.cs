@@ -5,23 +5,28 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         A class representing a chain of CLR members to bind. Usually generated from successive Select calls in the query.
+///         A class representing a chain of CLR members to bind. Usually generated from successive
+// Select calls in the query.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public sealed class ProjectionMember
 {
     private readonly IList<MemberInfo> _memberChain;
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="ProjectionMember" /> class with empty MemberInfo chain.
+    ///     Creates a new instance of the <see cref="ProjectionMember" /> class with empty MemberInfo
+    // chain.
     /// </summary>
     public ProjectionMember()
     {

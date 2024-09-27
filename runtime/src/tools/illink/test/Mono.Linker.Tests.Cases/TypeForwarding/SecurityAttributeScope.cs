@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Cases.Expectations.Metadata;
@@ -7,10 +8,12 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.TypeForwarding
 {
     /// <summary>
-    /// This test depends on a functioning peverify / il verify in order to fail if the scope of type references on security attributes
+    /// This test depends on a functioning peverify / il verify in order to fail if the scope of type
+    // references on security attributes
     /// were not correctly updated.
     ///
-    /// In order words, until https://github.com/dotnet/linker/issues/1703 is addressed this test will pass with or without the fix to update the scope on security attributes
+    /// In order words, until https://github.com/dotnet/linker/issues/1703 is addressed this test will
+    // pass with or without the fix to update the scope on security attributes
     /// </summary>
     [SetupLinkerArgument("--skip-unresolved", "true")]
     [SetupLinkerArgument("--strip-security", "false")]

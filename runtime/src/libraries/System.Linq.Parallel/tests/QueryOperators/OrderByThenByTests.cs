@@ -52,7 +52,8 @@ namespace System.Linq.Parallel.Tests
             return data;
         }
 
-        // Get a set of ranges, from 0 to each count, and an additional parameter denoting degree of parallelism.
+        // Get a set of ranges, from 0 to each count, and an additional parameter denoting degree of
+        // parallelism.
         public static IEnumerable<object[]> OrderByThreadedData(int[] counts, int[] degrees)
         {
             foreach (object[] results in UnorderedSources.Ranges(counts, x => degrees.Cast<int>()))
@@ -624,7 +625,8 @@ namespace System.Linq.Parallel.Tests
             new[] { 0, 1, 2, 16 },
             MemberType = typeof(UnorderedSources)
         )]
-        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 - comparer returning max/min value.
+        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 -
+        // comparer returning max/min value.
         public static void OrderBy_ExtremeComparer(Labeled<ParallelQuery<int>> labeled, int count)
         {
             int prev = 0;
@@ -643,7 +645,8 @@ namespace System.Linq.Parallel.Tests
             new[] { 0, 1, 2, 16 },
             MemberType = typeof(UnorderedSources)
         )]
-        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 - comparer returning max/min value.
+        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 -
+        // comparer returning max/min value.
         public static void OrderByDescending_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
@@ -899,7 +902,8 @@ namespace System.Linq.Parallel.Tests
         }
 
         // Heavily exercises OrderBy in the face of user-delegate exceptions.
-        // On CTP-M1, this would deadlock for DOP=7,9,11,... on 4-core, but works for DOP=1..6 and 8,10,12, ...
+        // On CTP-M1, this would deadlock for DOP=7,9,11,... on 4-core, but works for DOP=1..6 and 8,10,12,
+        // ...
         //
         // In this test, every call to the key-selector delegate throws.
         [ConditionalTheory(
@@ -932,7 +936,8 @@ namespace System.Linq.Parallel.Tests
             Assert.All(ae.InnerExceptions, e => Assert.IsType<DeliberateTestException>(e));
         }
 
-        // Heavily exercises OrderBy, but only throws one user delegate exception to simulate an occasional failure.
+        // Heavily exercises OrderBy, but only throws one user delegate exception to simulate an occasional
+        // failure.
         [ConditionalTheory(
             typeof(PlatformDetection),
             nameof(PlatformDetection.IsThreadingSupported)
@@ -1675,7 +1680,8 @@ namespace System.Linq.Parallel.Tests
             new[] { 0, 1, 2, 16 },
             MemberType = typeof(UnorderedSources)
         )]
-        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 - comparer returning max/min value.
+        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 -
+        // comparer returning max/min value.
         public static void ThenBy_ExtremeComparer(Labeled<ParallelQuery<int>> labeled, int count)
         {
             int prev = 0;
@@ -1696,7 +1702,8 @@ namespace System.Linq.Parallel.Tests
             new[] { 0, 1, 2, 16 },
             MemberType = typeof(UnorderedSources)
         )]
-        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 - comparer returning max/min value.
+        // Regression test for the PLINQ version of https://github.com/dotnet/runtime/issues/14793 -
+        // comparer returning max/min value.
         public static void ThenByDescending_ExtremeComparer(
             Labeled<ParallelQuery<int>> labeled,
             int count
@@ -1765,7 +1772,8 @@ namespace System.Linq.Parallel.Tests
         }
 
         // Recursive sort with nested ThenBy...s
-        // Due to the use of randomized input, cycles will not start with a known input (and may skip values, etc).
+        // Due to the use of randomized input, cycles will not start with a known input (and may skip
+        // values, etc).
 
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]
@@ -2213,7 +2221,8 @@ namespace System.Linq.Parallel.Tests
 
         //
         // Stable Sort
-        // Ensures that indices issued during a query are stable, **not** that OrderBy returns a stable result on its own (it does not).
+        // Ensures that indices issued during a query are stable, **not** that OrderBy returns a stable
+        // result on its own (it does not).
         //
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]

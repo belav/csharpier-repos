@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -13,7 +13,8 @@ namespace System.ComponentModel
     using System.Security.Permissions;
 
     /// <devdoc>
-    ///    <para>Specifies the display name for a property or event.  The default is the name of the property or event.</para>
+    ///    <para>Specifies the display name for a property or event.  The default is the name of the
+    // property or event.</para>
     /// </devdoc>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Performance",
@@ -28,7 +29,8 @@ namespace System.ComponentModel
     public class DisplayNameAttribute : Attribute
     {
         /// <devdoc>
-        /// <para>Specifies the default value for the <see cref='System.ComponentModel.DisplayNameAttribute'/> , which is an
+        /// <para>Specifies the default value for the <see
+        // cref='System.ComponentModel.DisplayNameAttribute'/> , which is an
         ///    empty string (""). This <see langword='static'/> field is read-only.</para>
         /// </devdoc>
         public static readonly DisplayNameAttribute Default = new DisplayNameAttribute();
@@ -41,7 +43,8 @@ namespace System.ComponentModel
             : this(string.Empty) { }
 
         /// <devdoc>
-        ///    <para>Initializes a new instance of the <see cref='System.ComponentModel.DisplayNameAttribute'/> class.</para>
+        ///    <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.DisplayNameAttribute'/> class.</para>
         /// </devdoc>
         public DisplayNameAttribute(string displayName)
         {

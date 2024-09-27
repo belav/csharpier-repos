@@ -22,7 +22,8 @@ using Debug = System.Diagnostics.Debug;
 //
 // For the canonical code to know what the actual T is, we need to provide the instantiation
 // context somehow. We can't easily get it from `this` like we do for reference types
-// since the type might implement multiple instantiations of IFoo (`class Abc : IFoo<object>, IFoo<string> { }`)
+// since the type might implement multiple instantiations of IFoo (`class Abc : IFoo<object>,
+// IFoo<string> { }`)
 // and we wouldn't know which one we are executing for within the method body.
 //
 // So we end up passing the context same as for shared valuetype code (that also cannot
@@ -48,7 +49,8 @@ using Debug = System.Diagnostics.Debug;
 //
 // Notice the thunk now has the expected signature, and some code to compute the context.
 //
-// The GetOrdinalInterface method retrieves the specified interface MethodTable off the MethodTable's interface list.
+// The GetOrdinalInterface method retrieves the specified interface MethodTable off the
+// MethodTable's interface list.
 // The thunks are per-type (since the position in the interface list is different).
 //
 // We hardcode the position in the interface list instead of just hardcoding the interface type
@@ -308,7 +310,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Represents an instance method on a generic interface with an explicit instantiation parameter in the
+        /// Represents an instance method on a generic interface with an explicit instantiation parameter in
+        // the
         /// signature. This is so that we can refer to the parameter from IL. References to this method will
         /// be replaced by the actual instance method after codegen is done.
         /// </summary>

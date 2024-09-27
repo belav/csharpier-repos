@@ -25,10 +25,10 @@ namespace System.Web.Hosting
         private ApplicationHost() { }
 
         /*
-         * Creates new app domain for hosting of ASP.NET apps with a
-         * user defined 'host' object in it.  The host is needed to make
-         * cross-domain calls to process requests in the host's app domain
-         */
+        * Creates new app domain for hosting of ASP.NET apps with a
+        * user defined 'host' object in it.  The host is needed to make
+        * cross-domain calls to process requests in the host's app domain
+        */
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

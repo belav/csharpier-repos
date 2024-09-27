@@ -29,8 +29,8 @@ namespace System.Globalization
     public class GregorianCalendar : Calendar
     {
         /*
-            A.D. = anno Domini
-         */
+        A.D. = anno Domini
+        */
 
         public const int ADEra = 1;
 
@@ -134,7 +134,8 @@ namespace System.Globalization
         }
 
         /*=================================GetDefaultInstance==========================
-        **Action: Internal method to provide a default intance of GregorianCalendar.  Used by NLS+ implementation
+        **Action: Internal method to provide a default intance of GregorianCalendar.  Used by NLS+
+        implementation
         **       and other calendars.
         **Returns:
         **Arguments:
@@ -280,7 +281,8 @@ namespace System.Globalization
         **Exceptions:
         **      ArgumentOutOfRangException  if year, month, day value is valid.
         **Note:
-        **      This is an internal method used by DateToTicks() and the calculations of Hijri and Hebrew calendars.
+        **      This is an internal method used by DateToTicks() and the calculations of Hijri and Hebrew
+        calendars.
         **      Number of Days in Prior Years (both common and leap years) +
         **      Number of Days in Prior Months of Current Year +
         **      Number of Days in Current Month
@@ -687,7 +689,8 @@ namespace System.Globalization
             );
         }
 
-        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is invalid.
+        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is
+        // invalid.
         //
 
         public override DateTime ToDateTime(

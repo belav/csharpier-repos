@@ -286,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public void EnsureMetadataVirtual()
             {
                 // ACASEY: This assert is here to check that we're not mutating the value of IsMetadataVirtual after
-                // someone has consumed it.  The best practice is to not access IsMetadataVirtual before ForceComplete
+                // someone has consumed it.  The best practice is to not access IsMetadataVirtual before
+                // ForceComplete
                 // has been called on all SourceNamedTypeSymbols.  If it is necessary to do so, then you can pass
                 // ignoreInterfaceImplementationChanges: true, but you must be conscious that seeing "false" may not
                 // reflect the final, emitted modifier.
@@ -605,7 +606,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (IsExplicitInterfaceImplementation && _containingType.IsInterface)
             {
-                // All implementations of methods from base interfaces should omit the newslot bit to ensure no new vtable slot is allocated.
+                // All implementations of methods from base interfaces should omit the newslot bit to ensure no new
+                // vtable slot is allocated.
                 return false;
             }
 
@@ -1087,7 +1089,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (this.RequiresExplicitOverride(out _))
             {
-                // On platforms where it is present, add PreserveBaseOverridesAttribute when a methodimpl is used to override a class method.
+                // On platforms where it is present, add PreserveBaseOverridesAttribute when a methodimpl is used to
+                // override a class method.
                 AddSynthesizedAttribute(
                     ref attributes,
                     moduleBuilder.SynthesizePreserveBaseOverridesAttribute()
@@ -1102,7 +1105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            // The async state machine type is not synthesized until the async method body is rewritten. If we are
+            // The async state machine type is not synthesized until the async method body is rewritten. If we
+            // are
             // only emitting metadata the method body will not have been rewritten, and the async state machine
             // type will not have been created. In this case, omit the attribute.
             if (

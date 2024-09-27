@@ -102,7 +102,8 @@ public class SqlServerModificationCommandBatchTest
         }
 
         // We now have 20 pending commands with a total of 2000 parameters.
-        // Add another command - either compatible with the pending ones or not - and which also gets us past the 2098 parameter limit.
+        // Add another command - either compatible with the pending ones or not - and which also gets us
+        // past the 2098 parameter limit.
         var command = CreateModificationCommand(lastCommandPending ? "T1" : "T2", null, false);
         command.EntityState = EntityState.Added;
         for (var i = 0; i < 100; i++)

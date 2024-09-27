@@ -47,7 +47,7 @@ namespace Novell.Directory.Ldap
         /// <summary> Returns the LdapMessage request associated with this response</summary>
         virtual internal LdapMessage RequestingMessage
         {
-            /* package */
+/* package */
 
             get { return message.RequestingMessage; }
         }
@@ -57,25 +57,25 @@ namespace Novell.Directory.Ldap
         {
             get
             {
-                /*				LdapControl[] controls = null;
-                                RfcControls asn1Ctrls = message.Controls;
-                                
-                                if (asn1Ctrls != null)
-                                {
-                                    controls = new LdapControl[asn1Ctrls.size()];
-                                    for (int i = 0; i < asn1Ctrls.size(); i++)
-                                    {
-                                        RfcControl rfcCtl = (RfcControl) asn1Ctrls.get_Renamed(i);
-                                        System.String oid = rfcCtl.ControlType.stringValue();
-                                        sbyte[] value_Renamed = rfcCtl.ControlValue.byteValue();
-                                        bool critical = rfcCtl.Criticality.booleanValue();
-                                        
-                                        controls[i] = controlFactory(oid, critical, value_Renamed);
-                                    }
-                                }
-                
-                                return controls;
-                */
+/*				LdapControl[] controls = null;
+RfcControls asn1Ctrls = message.Controls;
+
+if (asn1Ctrls != null)
+{
+controls = new LdapControl[asn1Ctrls.size()];
+for (int i = 0; i < asn1Ctrls.size(); i++)
+{
+RfcControl rfcCtl = (RfcControl) asn1Ctrls.get_Renamed(i);
+System.String oid = rfcCtl.ControlType.stringValue();
+sbyte[] value_Renamed = rfcCtl.ControlValue.byteValue();
+bool critical = rfcCtl.Criticality.booleanValue();
+
+controls[i] = controlFactory(oid, critical, value_Renamed);
+}
+}
+
+return controls;
+*/
                 LdapControl[] controls = null;
                 RfcControls asn1Ctrls = message.Controls;
 
@@ -85,28 +85,28 @@ namespace Novell.Directory.Ldap
                     controls = new LdapControl[asn1Ctrls.size()];
                     for (int i = 0; i < asn1Ctrls.size(); i++)
                     {
-                        /*
-                        * At this point we have an RfcControl which needs to be
-                        * converted to the appropriate Response Control.  This requires
-                        * calling the constructor of a class that extends LDAPControl.
-                        * The controlFactory method searches the list of registered
-                        * controls and if a match is found calls the constructor
-                        * for that child LDAPControl. Otherwise, it returns a regular
-                        * LDAPControl object.
-                        *
-                        * Question: Why did we not call the controlFactory method when
-                        * we were parsing the control. Answer: By the time the
-                        * code realizes that we have a control it is already too late.
-                        */
+/*
+* At this point we have an RfcControl which needs to be
+* converted to the appropriate Response Control.  This requires
+* calling the constructor of a class that extends LDAPControl.
+* The controlFactory method searches the list of registered
+* controls and if a match is found calls the constructor
+* for that child LDAPControl. Otherwise, it returns a regular
+* LDAPControl object.
+*
+* Question: Why did we not call the controlFactory method when
+* we were parsing the control. Answer: By the time the
+* code realizes that we have a control it is already too late.
+*/
                         RfcControl rfcCtl = (RfcControl)asn1Ctrls.get_Renamed(i);
                         System.String oid = rfcCtl.ControlType.stringValue();
                         sbyte[] value_Renamed = rfcCtl.ControlValue.byteValue();
                         bool critical = rfcCtl.Criticality.booleanValue();
 
-                        /* Return from this call should return either an LDAPControl
-                        * or a class extending LDAPControl that implements the
-                        * appropriate registered response control
-                        */
+/* Return from this call should return either an LDAPControl
+* or a class extending LDAPControl that implements the
+* appropriate registered response control
+*/
                         controls[i] = controlFactory(oid, critical, value_Renamed);
                     }
                 }
@@ -185,7 +185,7 @@ namespace Novell.Directory.Ldap
         /// <summary> Returns the RFC 2251 LdapMessage composed in this object.</summary>
         virtual internal RfcLdapMessage Asn1Object
         {
-            /* package */
+/* package */
 
             get { return message; }
         }
@@ -480,25 +480,25 @@ namespace Novell.Directory.Ldap
         protected internal RfcLdapMessage message;
 
         /// <summary> Lock object to protect counter for message numbers</summary>
-        /*
-        private static Object msgLock = new Object();
-        */
+/*
+private static Object msgLock = new Object();
+*/
 
         /// <summary> Counters used to construct request message #'s, unique for each request
         /// Will be enabled after ASN.1 conversion
         /// </summary>
-        /*
-        private static int msgNum = 0; // Ldap Request counter
-        */
+/*
+private static int msgNum = 0; // Ldap Request counter
+*/
         private int imsgNum = -1; // This instance LdapMessage number
 
         private int messageType = -1;
 
-        /* application defined tag to identify this message */
+/* application defined tag to identify this message */
         private System.String stringTag = null;
 
         /// <summary> Dummy constuctor</summary>
-        /* package */
+/* package */
         internal LdapMessage()
         {
             return;
@@ -516,7 +516,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <seealso cref="Type">
         /// </seealso>
-        /*package*/
+/*package*/
         internal LdapMessage(int type, RfcRequest op, LdapControl[] controls)
         {
             // Get a unique number for this request message
@@ -566,7 +566,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <returns> the object representing the new message
         /// </returns>
-        /* package */
+/* package */
         internal LdapMessage Clone(System.String dn, System.String filter, bool reference)
         {
             return new LdapMessage((RfcLdapMessage)message.dupMessage(dn, filter, reference));
@@ -584,17 +584,17 @@ namespace Novell.Directory.Ldap
             RespControlVector regControls = LdapControl.RegisteredControls;
             try
             {
-                /*
-                * search through the registered extension list to find the
-                * response control class
-                */
+/*
+* search through the registered extension list to find the
+* response control class
+*/
                 System.Type respCtlClass = regControls.findResponseControl(oid);
 
                 // Did not find a match so return default LDAPControl
                 if (respCtlClass == null)
                     return new LdapControl(oid, critical, value_Renamed);
 
-                /* If found, get LDAPControl constructor */
+/* If found, get LDAPControl constructor */
                 System.Type[] argsClass = new System.Type[]
                 {
                     typeof(System.String),
@@ -611,7 +611,7 @@ namespace Novell.Directory.Ldap
 
                     try
                     {
-                        /* Call the control constructor for a registered Class*/
+/* Call the control constructor for a registered Class*/
                         System.Object ctl = null;
                         //						ctl = ctlConstructor.newInstance(args);
                         ctl = ctlConstructor.Invoke(args);

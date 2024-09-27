@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Web.Razor.Text;
 
@@ -35,7 +36,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
         /// </summary>
         /// <param name="node">The node to compare this node with</param>
         /// <returns>
-        /// true if the provided node has all the same content and metadata, though the specific quantity and type of symbols may be different.
+        /// true if the provided node has all the same content and metadata, though the specific quantity
+        // and type of symbols may be different.
         /// </returns>
         public abstract bool EquivalentTo(SyntaxTreeNode node);
     }

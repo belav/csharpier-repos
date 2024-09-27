@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * DoubleLink
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* DoubleLink
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 
 namespace System.Web.Util
 {

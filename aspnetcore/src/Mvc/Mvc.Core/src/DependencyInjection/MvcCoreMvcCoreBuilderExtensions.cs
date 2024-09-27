@@ -41,7 +41,8 @@ public static class MvcCoreMvcCoreBuilderExtensions
     /// Configures <see cref="JsonOptions"/> for the specified <paramref name="builder"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
-    /// <param name="configure">An <see cref="Action"/> to configure the <see cref="JsonOptions"/>.</param>
+    /// <param name="configure">An <see cref="Action"/> to configure the <see
+    // cref="JsonOptions"/>.</param>
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcCoreBuilder AddJsonOptions(
         this IMvcCoreBuilder builder,
@@ -70,7 +71,8 @@ public static class MvcCoreMvcCoreBuilderExtensions
     /// Configures <see cref="FormatterMappings"/> for the specified <paramref name="setupAction"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
-    /// <param name="setupAction">An <see cref="Action"/> to configure the <see cref="FormatterMappings"/>.</param>
+    /// <param name="setupAction">An <see cref="Action"/> to configure the <see
+    // cref="FormatterMappings"/>.</param>
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcCoreBuilder AddFormatterMappings(
         this IMvcCoreBuilder builder,
@@ -110,7 +112,8 @@ public static class MvcCoreMvcCoreBuilderExtensions
     /// Configures authentication and authorization services for <paramref name="builder"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
-    /// <param name="setupAction">An <see cref="Action"/> to configure the <see cref="AuthorizationOptions"/>.</param>
+    /// <param name="setupAction">An <see cref="Action"/> to configure the <see
+    // cref="AuthorizationOptions"/>.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddAuthorization(
         this IMvcCoreBuilder builder,
@@ -164,7 +167,8 @@ public static class MvcCoreMvcCoreBuilderExtensions
     }
 
     /// <summary>
-    /// Adds an <see cref="ApplicationPart"/> to the list of <see cref="ApplicationPartManager.ApplicationParts"/> on the
+    /// Adds an <see cref="ApplicationPart"/> to the list of <see
+    // cref="ApplicationPartManager.ApplicationParts"/> on the
     /// <see cref="IMvcCoreBuilder.PartManager"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
@@ -191,7 +195,8 @@ public static class MvcCoreMvcCoreBuilderExtensions
     }
 
     /// <summary>
-    /// Configures the <see cref="ApplicationPartManager"/> of the <see cref="IMvcCoreBuilder.PartManager"/> using
+    /// Configures the <see cref="ApplicationPartManager"/> of the <see
+    // cref="IMvcCoreBuilder.PartManager"/> using
     /// the given <see cref="Action{ApplicationPartManager}"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>

@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see>, and
-///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time services</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time
+// services</see> for more information and examples.
 /// </remarks>
 public class MigrationsScaffolder : IMigrationsScaffolder
 {
@@ -233,7 +234,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     /// </summary>
     /// <param name="projectDir">The project's root directory.</param>
     /// <param name="rootNamespace">The project's root namespace.</param>
-    /// <param name="force">Don't check to see if the migration has been applied to the database.</param>
+    /// <param name="force">Don't check to see if the migration has been applied to the
+    // database.</param>
     /// <returns>The removed migration files.</returns>
     public virtual MigrationFiles RemoveMigration(
         string projectDir,
@@ -246,7 +248,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     /// </summary>
     /// <param name="projectDir">The project's root directory.</param>
     /// <param name="rootNamespace">The project's root namespace.</param>
-    /// <param name="force">Don't check to see if the migration has been applied to the database.</param>
+    /// <param name="force">Don't check to see if the migration has been applied to the
+    // database.</param>
     /// <param name="language">The project's language.</param>
     /// <returns>The removed migration files.</returns>
     // TODO: DRY (file names)
@@ -430,7 +433,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     /// </summary>
     /// <param name="projectDir">The project's root directory.</param>
     /// <param name="migration">The scaffolded migration.</param>
-    /// <param name="outputDir">The directory to put files in. Paths are relative to the project directory.</param>
+    /// <param name="outputDir">The directory to put files in. Paths are relative to the project
+    // directory.</param>
     /// <returns>The saved migrations files.</returns>
     public virtual MigrationFiles Save(
         string projectDir,
@@ -502,7 +506,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     }
 
     /// <summary>
-    ///     Gets the directory of a sibling file. If none, the directory corresponding to the sub-namespace is used.
+    ///     Gets the directory of a sibling file. If none, the directory corresponding to the
+    // sub-namespace is used.
     /// </summary>
     /// <param name="projectDir">The project's root directory.</param>
     /// <param name="siblingFileName">The sibling file's name.</param>

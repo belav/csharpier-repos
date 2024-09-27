@@ -218,7 +218,8 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                // Ensure (de)serialization still works when using a Person-derived type. This does not call the custom converter.
+                // Ensure (de)serialization still works when using a Person-derived type. This does not call the
+                // custom converter.
                 string json = JsonSerializer.Serialize(customer, options);
                 Assert.Contains(@"""CreditLimit"":100", json);
                 Assert.Contains(@"""Name"":""C""", json);

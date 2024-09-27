@@ -376,7 +376,7 @@ namespace System.Drawing
             defvisual = GDIPlus.XDefaultVisual(GDIPlus.Display, 0);
             XVisualInfo visual = new XVisualInfo();
 
-            /* Get XVisualInfo for this visual */
+/* Get XVisualInfo for this visual */
             visual.visualid = GDIPlus.XVisualIDFromVisual(defvisual);
             vPtr = GDIPlus.XGetVisualInfo(
                 GDIPlus.Display,

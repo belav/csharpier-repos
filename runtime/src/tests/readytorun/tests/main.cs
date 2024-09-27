@@ -357,7 +357,8 @@ public class Program
 
     class MyLoadContext : AssemblyLoadContext
     {
-        // If running in a collectible context, make the MyLoadContext collectible too so that it doesn't prevent
+        // If running in a collectible context, make the MyLoadContext collectible too so that it doesn't
+        // prevent
         // unloading.
         public MyLoadContext()
             : base(
@@ -387,7 +388,8 @@ public class Program
 
     static void TestFieldLayoutNGenMixAndMatch()
     {
-        // This test is verifying consistent field layout when ReadyToRun images are combined with NGen images
+        // This test is verifying consistent field layout when ReadyToRun images are combined with NGen
+        // images
         // "ngen install /nodependencies main.exe" to exercise the interesting case
         var o = new ByteChildClass(67);
         Assert.AreEqual(o.ChildByte, (byte)67);
@@ -526,7 +528,8 @@ public class Program
             CallDefaultVsExactStaticVirtual<DefaultVsExactStaticVirtualClass>.CallMethodOnGenericType(),
             "DefaultVsExactStaticVirtualMethod"
         );
-        // Naively one would expect that the following should do, however Roslyn fails to compile it claiming that the type DVESVC doesn't contain 'Method':
+        // Naively one would expect that the following should do, however Roslyn fails to compile it
+        // claiming that the type DVESVC doesn't contain 'Method':
         // Assert.AreEqual(DefaultVsExactStaticVirtualClass.Method(), "DefaultVsExactStaticVirtualMethod");
     }
 

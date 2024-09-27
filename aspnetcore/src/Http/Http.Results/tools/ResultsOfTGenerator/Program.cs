@@ -433,7 +433,8 @@ public class Program
         //[InlineData(1, 1)]
         //[InlineData(2, 2)]
         //[InlineData(-1, null)]
-        //public async Task ResultsOfTResult1TResult2_ExecuteResult_ExecutesAssignedResult(int input, object expected)
+        //public async Task ResultsOfTResult1TResult2_ExecuteResult_ExecutesAssignedResult(int input, object
+        // expected)
         //{
         //    // Arrange
         //    Results<ChecksumResult1, ChecksumResult2, NoContent> MyApi(int checksum)
@@ -465,7 +466,8 @@ public class Program
         }
 
         // Method
-        // public void ResultsOfTResult1TResult2_ExecuteResult_ExecutesAssignedResult(int input, object expected)
+        // public void ResultsOfTResult1TResult2_ExecuteResult_ExecutesAssignedResult(int input, object
+        // expected)
         writer.WriteIndent(1, "public async Task ResultsOf");
         for (int j = 1; j <= typeArgNumber; j++)
         {
@@ -660,7 +662,8 @@ public class Program
         //[Theory]
         //[InlineData(1, typeof(ChecksumResult1))]
         //[InlineData(2, typeof(ChecksumResult2))]
-        //public async Task ResultsOfTResult1TResult2_AcceptsIResult_AsFirstTypeArg(int input, Type expectedResultType)
+        //public async Task ResultsOfTResult1TResult2_AcceptsIResult_AsFirstTypeArg(int input, Type
+        // expectedResultType)
         //{
         //    // Arrange
         //    Results<IResult, ChecksumResult2> MyApi(int id)
@@ -781,7 +784,8 @@ public class Program
         //[InlineData(1, typeof(Results<ChecksumResult1, ChecksumResult2>))]
         //[InlineData(2, typeof(Results<ChecksumResult1, ChecksumResult2>))]
         //[InlineData(3, typeof(ChecksumResult3))]
-        //public async Task ResultsOfTResult1TResult2_AcceptsNestedResultsOfT_AsFirstTypeArg(int input, Type expectedResultType)
+        //public async Task ResultsOfTResult1TResult2_AcceptsNestedResultsOfT_AsFirstTypeArg(int input, Type
+        // expectedResultType)
         //{
         //    // Arrange
         //    Results<Results<ChecksumResult1, ChecksumResult2>, ChecksumResult3> MyApi(int id)
@@ -894,18 +898,24 @@ public class Program
     )
     {
         //[Fact]
-        //public void ResultsOfTResult1TResult2_PopulateMetadata_PopulatesMetadataFromTypeArgsThatImplementIEndpointMetadataProvider()
+        //public void
+        // ResultsOfTResult1TResult2_PopulateMetadata_PopulatesMetadataFromTypeArgsThatImplementIEndpointMetadataProvider()
         //{
         //    // Arrange
-        //    Results<ProvidesMetadataResult1, ProvidesMetadataResult2> MyApi() { throw new NotImplementedException(); }
-        //    var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse(""/""), order: 0);
+        //    Results<ProvidesMetadataResult1, ProvidesMetadataResult2> MyApi() { throw new
+        // NotImplementedException(); }
+        //    var builder = new RouteEndpointBuilder(requestDelegate: null,
+        // RoutePatternFactory.Parse(""/""), order: 0);
 
         //    // Act
-        //    PopulateMetadata<Results<ProvidesMetadataResult1, ProvidesMetadataResult2>>(((Delegate)MyApi).GetMethodInfo(), builder);
+        //    PopulateMetadata<Results<ProvidesMetadataResult1,
+        // ProvidesMetadataResult2>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         //    // Assert
-        //    Assert.Contains(builder.Metadata, m => m is ResultTypeProvidedMetadata { SourceTypeName: nameof(ProvidesMetadataResult1) });
-        //    Assert.Contains(builder.Metadata, m => m is ResultTypeProvidedMetadata { SourceTypeName: nameof(ProvidesMetadataResult2) });
+        //    Assert.Contains(builder.Metadata, m => m is ResultTypeProvidedMetadata { SourceTypeName:
+        // nameof(ProvidesMetadataResult1) });
+        //    Assert.Contains(builder.Metadata, m => m is ResultTypeProvidedMetadata { SourceTypeName:
+        // nameof(ProvidesMetadataResult2) });
         //}
 
         // Attributes
@@ -977,11 +987,16 @@ public class Program
     )
     {
         //[Fact]
-        //public void ResultsOfTResult1TResult2_PopulateMetadata_Throws_ArgumentNullException_WhenMethodOrBuilderAreNull()
+        //public void
+        // ResultsOfTResult1TResult2_PopulateMetadata_Throws_ArgumentNullException_WhenMethodOrBuilderAreNull()
         //{
         //    // Act & Assert
-        //    Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<Results<ProvidesMetadataResult1, ProvidesMetadataResult2>>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        //    Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<Results<ProvidesMetadataResult1, ProvidesMetadataResult2>>(((Delegate)MyApi).GetMethodInfo(), null));
+        //    Assert.Throws<ArgumentNullException>("method", () =>
+        // PopulateMetadata<Results<ProvidesMetadataResult1, ProvidesMetadataResult2>>(null, new
+        // RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
+        //    Assert.Throws<ArgumentNullException>("builder", () =>
+        // PopulateMetadata<Results<ProvidesMetadataResult1,
+        // ProvidesMetadataResult2>>(((Delegate)MyApi).GetMethodInfo(), null));
         //}
 
         // Attributes
@@ -1085,7 +1100,8 @@ public class Program
 
         //    public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
         //    {
-        //        builder.Metadata.Add(new ResultTypeProvidedMetadata { SourceTypeName = nameof(ProvidesMetadataResult1) });
+        //        builder.Metadata.Add(new ResultTypeProvidedMetadata { SourceTypeName =
+        // nameof(ProvidesMetadataResult1) });
         //    }
         //}
         writer.WriteIndentedLine(

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (searchSymbol == null || symbolToMatch == null)
                 return false;
 
-            // Avoid the expensive checks if we can fast path when the compiler just says these are equal. Also, for the
+            // Avoid the expensive checks if we can fast path when the compiler just says these are equal. Also,
+            // for the
             // purposes of symbol finding nullability of symbols doesn't affect things, so just use the default
             // comparison.
             if (searchSymbol.Equals(symbolToMatch))
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 && symbolToMatch.Kind == SymbolKind.Namespace
             )
             {
-                // if one of them is a merged namespace symbol and other one is its constituent namespace symbol, they are equivalent.
+                // if one of them is a merged namespace symbol and other one is its constituent namespace symbol,
+                // they are equivalent.
                 var namespace1 = (INamespaceSymbol)searchSymbol;
                 var namespace2 = (INamespaceSymbol)symbolToMatch;
                 var namespace1Count = namespace1.ConstituentNamespaces.Length;
@@ -127,28 +129,36 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             searchSymbol = searchSymbol.GetOriginalUnreducedDefinition();
             symbolToMatch = symbolToMatch.GetOriginalUnreducedDefinition();
 
-            // Avoid the expensive checks if we can fast path when the compiler just says these are equal. Also, for the
+            // Avoid the expensive checks if we can fast path when the compiler just says these are equal. Also,
+            // for the
             // purposes of symbol finding nullability of symbols doesn't affect things, so just use the default
             // comparison.
             if (searchSymbol.Equals(symbolToMatch, SymbolEqualityComparer.Default))
                 return true;
 
-            // We compare the given searchSymbol and symbolToMatch for equivalence using SymbolEquivalenceComparer
+            // We compare the given searchSymbol and symbolToMatch for equivalence using
+            // SymbolEquivalenceComparer
             // as follows:
             //  1)  We compare the given symbols using the SymbolEquivalenceComparer.IgnoreAssembliesInstance,
             //      which ignores the containing assemblies for named types equivalence checks. This is required
             //      to handle equivalent named types which are forwarded to completely different assemblies.
             //  2)  If the symbols are NOT equivalent ignoring assemblies, then they cannot be equivalent.
-            //  3)  Otherwise, if the symbols ARE equivalent ignoring assemblies, they may or may not be equivalent
-            //      if containing assemblies are NOT ignored. We need to perform additional checks to ensure they
+            //  3)  Otherwise, if the symbols ARE equivalent ignoring assemblies, they may or may not be
+            // equivalent
+            //      if containing assemblies are NOT ignored. We need to perform additional checks to ensure
+            // they
             //      are indeed equivalent:
             //
-            //      (a) If IgnoreAssembliesInstance.Equals equivalence visitor encountered any pair of non-nested
+            //      (a) If IgnoreAssembliesInstance.Equals equivalence visitor encountered any pair of
+            // non-nested
             //          named types which were equivalent in all aspects, except that they resided in different
-            //          assemblies, we need to ensure that all such pairs are indeed equivalent types. Such a pair
+            //          assemblies, we need to ensure that all such pairs are indeed equivalent types. Such a
+            // pair
             //          of named types is equivalent if and only if one of them is a type defined in either
-            //          searchSymbolCompilation(C1) or symbolToMatchCompilation(C2), say defined in reference assembly
-            //          A (version v1) in compilation C1, and the other type is a forwarded type, such that it is
+            //          searchSymbolCompilation(C1) or symbolToMatchCompilation(C2), say defined in reference
+            // assembly
+            //          A (version v1) in compilation C1, and the other type is a forwarded type, such that it
+            // is
             //          forwarded from reference assembly A (version v2) to assembly B in compilation C2.
             //      (b) Otherwise, if no such named type pairs were encountered, symbols ARE equivalent.
 
@@ -156,7 +166,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 out var equivalentTypesWithDifferingAssemblies
             );
 
-            // 1) Compare searchSymbol and symbolToMatch using SymbolEquivalenceComparer.IgnoreAssembliesInstance
+            // 1) Compare searchSymbol and symbolToMatch using
+            // SymbolEquivalenceComparer.IgnoreAssembliesInstance
             if (
                 !SymbolEquivalenceComparer.IgnoreAssembliesInstance.Equals(
                     searchSymbol,
@@ -169,10 +180,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return false;
             }
 
-            // 3) If the symbols ARE equivalent ignoring assemblies, they may or may not be equivalent if containing assemblies are NOT ignored.
+            // 3) If the symbols ARE equivalent ignoring assemblies, they may or may not be equivalent if
+            // containing assemblies are NOT ignored.
             if (equivalentTypesWithDifferingAssemblies.Count > 0)
             {
-                // Step 3a) Ensure that all pairs of named types in equivalentTypesWithDifferingAssemblies are indeed equivalent types.
+                // Step 3a) Ensure that all pairs of named types in equivalentTypesWithDifferingAssemblies are
+                // indeed equivalent types.
                 return await VerifyForwardedTypesAsync(
                         solution,
                         equivalentTypesWithDifferingAssemblies,
@@ -196,7 +209,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         /// <summary>
-        /// Verifies that all pairs of named types in equivalentTypesWithDifferingAssemblies are equivalent forwarded types.
+        /// Verifies that all pairs of named types in equivalentTypesWithDifferingAssemblies are equivalent
+        // forwarded types.
         /// </summary>
         private static async Task<bool> VerifyForwardedTypesAsync(
             Solution solution,
@@ -230,8 +244,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             foreach (var (type1, type2) in equivalentTypesWithDifferingAssemblies)
             {
-                // Check if type1 was forwarded to type2 in type2's compilation, or if type2 was forwarded to type1 in
-                // type1's compilation.  We check both direction as this API is called from higher level comparison APIs
+                // Check if type1 was forwarded to type2 in type2's compilation, or if type2 was forwarded to type1
+                // in
+                // type1's compilation.  We check both direction as this API is called from higher level comparison
+                // APIs
                 // that are unordered.
                 if (
                     !await VerifyForwardedTypeAsync(
@@ -260,7 +276,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="candidate"/> was forwarded to <paramref name="forwardedTo"/> in
+        /// Returns <see langword="true"/> if <paramref name="candidate"/> was forwarded to <paramref
+        // name="forwardedTo"/> in
         /// <paramref name="forwardedTo"/>'s <see cref="Compilation"/>.
         /// </summary>
         private static async Task<bool> VerifyForwardedTypeAsync(
@@ -286,7 +303,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (forwardedToCompilation == null)
                 return false;
 
-            // Cache the compilation so that if we need it while checking another set of forwarded types, we don't
+            // Cache the compilation so that if we need it while checking another set of forwarded types, we
+            // don't
             // expensively throw it away and recreate it.
             compilationSet.Add(forwardedToCompilation);
 
@@ -295,7 +313,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     ? candidate.MetadataName
                     : $"{candidate.ContainingNamespace.ToDisplayString(SymbolDisplayFormats.SignatureFormat)}.{candidate.MetadataName}";
 
-            // Now, find the corresponding reference to type1's assembly in type2's compilation and see if that assembly
+            // Now, find the corresponding reference to type1's assembly in type2's compilation and see if that
+            // assembly
             // contains a forward that matches type2.  If so, type1 was forwarded to type2.
             var candidateAssemblyName = candidate.ContainingAssembly.Name;
             foreach (var assembly in forwardedToCompilation.GetReferencedAssemblySymbols())

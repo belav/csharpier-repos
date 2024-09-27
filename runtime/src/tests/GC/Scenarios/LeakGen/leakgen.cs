@@ -57,7 +57,7 @@ namespace LGen
         {
             for (int i = 0; i < iRep; i++)
             {
-                /*allocate about 10MB memory include MakeLeak() */
+/*allocate about 10MB memory include MakeLeak() */
                 MakeLeak(iObj);
             }
 

@@ -60,10 +60,14 @@ namespace System.Data.SqlClient
         // Two buffers exist in tdsparser, an in buffer and an out buffer.  For the out buffer, only
         // one bookkeeping variable is needed, the number of bytes used in the buffer.  For the in buffer,
         // three variables are actually needed.  First, we need to record from the netlib how many bytes it
-        // read from the netlib, this variable is _inBytesRead.  Then, we need to also keep track of how many
-        // bytes we have used as we consume the bytes from the buffer, that variable is _inBytesUsed.  Third,
-        // we need to keep track of how many bytes are left in the packet, so that we know when we have reached
-        // the end of the packet and so we need to consume the next header.  That variable is _inBytesPacket.
+        // read from the netlib, this variable is _inBytesRead.  Then, we need to also keep track of how
+        // many
+        // bytes we have used as we consume the bytes from the buffer, that variable is _inBytesUsed.
+        // Third,
+        // we need to keep track of how many bytes are left in the packet, so that we know when we have
+        // reached
+        // the end of the packet and so we need to consume the next header.  That variable is
+        // _inBytesPacket.
 
         // Header length constants
         internal readonly int _inputHeaderLen = TdsEnums.HEADER_LEN;
@@ -97,7 +101,8 @@ namespace System.Data.SqlClient
         internal bool _bulkCopyOpperationInProgress = false; // Set to true during bulk copy and used to turn toggle write timeouts.
         internal bool _bulkCopyWriteTimeout = false; // Set to trun when _bulkCopyOpeperationInProgress is trun and write timeout happens
 
-        // SNI variables                                                     // multiple resultsets in one batch.
+        // SNI variables                                                     // multiple resultsets in one
+        // batch.
         private SNIPacket _sniPacket = null; // Will have to re-vamp this for MARS
         internal SNIPacket _sniAsyncAttnPacket = null; // Packet to use to send Attn
         private WritePacketCache _writePacketCache = new WritePacketCache(); // Store write packets that are ready to be re-used
@@ -119,7 +124,8 @@ namespace System.Data.SqlClient
         private readonly LastIOTimer _lastSuccessfulIOTimer;
 
         // secure password information to be stored
-        //  At maximum number of secure string that need to be stored is two; one for login password and the other for new change password
+        //  At maximum number of secure string that need to be stored is two; one for login password and the
+        // other for new change password
         private SecureString[] _securePasswords = new SecureString[2] { null, null };
         private int[] _securePasswordOffsetsInBuffer = new int[2];
 
@@ -204,10 +210,12 @@ namespace System.Data.SqlClient
         internal bool _asyncReadWithoutSnapshot = false;
 #if DEBUG
         // Used to override the assert than ensures that the stacktraces on subsequent replays are the same
-        // This is useful is you are purposefully running the replay from a different thread (e.g. during SqlDataReader.Close)
+        // This is useful is you are purposefully running the replay from a different thread (e.g. during
+        // SqlDataReader.Close)
         internal bool _permitReplayStackTraceToDiffer = false;
 
-        // Used to indicate that the higher level object believes that this stateObj has enough data to complete an operation
+        // Used to indicate that the higher level object believes that this stateObj has enough data to
+        // complete an operation
         // If this stateObj has to read, then it will raise an assert
         internal bool _shouldHaveEnoughData = false;
 #endif
@@ -240,8 +248,10 @@ namespace System.Data.SqlClient
         //
         // Sample code to enable:
         //
-        //    Type type = typeof(SqlDataReader).Assembly.GetType("System.Data.SqlClient.TdsParserStateObject");
-        //    System.Reflection.FieldInfo field = type.GetField("_forceAllPends", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        //    Type type =
+        // typeof(SqlDataReader).Assembly.GetType("System.Data.SqlClient.TdsParserStateObject");
+        //    System.Reflection.FieldInfo field = type.GetField("_forceAllPends",
+        // System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
         //    if (field != null) {
         //        field.SetValue(null, true);
         //    }
@@ -262,7 +272,8 @@ namespace System.Data.SqlClient
         internal static bool _skipSendAttention = false;
 
         // Prevents any pending read from completing until the user signals it using
-        // CompletePendingReadWithSuccess() or CompletePendingReadWithFailure(int errorCode) in SqlCommand\SqlDataReader
+        // CompletePendingReadWithSuccess() or CompletePendingReadWithFailure(int errorCode) in
+        // SqlCommand\SqlDataReader
         internal static bool _forcePendingReadsToWaitForUser;
         internal TaskCompletionSource<object> _realNetworkPacketTaskSource = null;
 
@@ -516,7 +527,8 @@ namespace System.Data.SqlClient
 
         internal bool IsRowTokenReady()
         {
-            // Removing one byte since TryReadByteArray\TryReadByte will aggressively read the next packet if there is no data left - so we need to ensure there is a spare byte
+            // Removing one byte since TryReadByteArray\TryReadByte will aggressively read the next packet if
+            // there is no data left - so we need to ensure there is a spare byte
             int bytesRemaining = Math.Min(_inBytesPacket, _inBytesRead - _inBytesUsed) - 1;
 
             if (bytesRemaining > 0)
@@ -606,8 +618,10 @@ namespace System.Data.SqlClient
 
             /// <summary>
             /// If this method returns true, the value is guaranteed to be null. This is not true vice versa:
-            /// if the bitmat value is false (if this method returns false), the value can be either null or non-null - no guarantee in this case.
-            /// To determine whether it is null or not, read it from the TDS (per NBCROW design spec, for IMAGE/TEXT/NTEXT columns server might send
+            /// if the bitmat value is false (if this method returns false), the value can be either null or
+            // non-null - no guarantee in this case.
+            /// To determine whether it is null or not, read it from the TDS (per NBCROW design spec, for
+            // IMAGE/TEXT/NTEXT columns server might send
             /// bitmap = 0, when the actual value is null).
             /// </summary>
             internal bool IsGuaranteedNull(int columnOrdinal)
@@ -633,7 +647,8 @@ namespace System.Data.SqlClient
         // General methods //
         /////////////////////
 
-        // If this object is part of a TdsParserSessionPool, then this *must* be called inside the pool's lock
+        // If this object is part of a TdsParserSessionPool, then this *must* be called inside the pool's
+        // lock
         internal void Activate(object owner)
         {
             Debug.Assert(_parser.MARSOn, "Can not activate a non-MARS connection");
@@ -649,7 +664,8 @@ namespace System.Data.SqlClient
             bool hasLock = false;
             try
             {
-                // Keep looping until we either grabbed the lock (and therefore sent attention) or the connection closes\breaks
+                // Keep looping until we either grabbed the lock (and therefore sent attention) or the connection
+                // closes\breaks
                 while (
                     (!hasLock)
                     && (_parser.State != TdsParserState.Closed)
@@ -671,7 +687,8 @@ namespace System.Data.SqlClient
                             if (_pendingData && !_attentionSent)
                             {
                                 bool hasParserLock = false;
-                                // Keep looping until we have the parser lock (and so are allowed to write), or the conneciton closes\breaks
+                                // Keep looping until we have the parser lock (and so are allowed to write), or the conneciton
+                                // closes\breaks
                                 while (
                                     (!hasParserLock)
                                     && (_parser.State != TdsParserState.Closed)
@@ -942,7 +959,8 @@ namespace System.Data.SqlClient
             return goodForReuse;
         }
 
-        // If this object is part of a TdsParserSessionPool, then this *must* be called inside the pool's lock
+        // If this object is part of a TdsParserSessionPool, then this *must* be called inside the pool's
+        // lock
         internal void RemoveOwner()
         {
             if (_parser.MARSOn)
@@ -996,8 +1014,10 @@ namespace System.Data.SqlClient
                 _gcHandle.Free();
             }
 
-            // NOTE: TdsParserSessionPool may call DecrementPendingCallbacks on a TdsParserStateObject which is already disposed
-            // This is not dangerous (since the stateObj is no longer in use), but we need to add a workaround in the assert for it
+            // NOTE: TdsParserSessionPool may call DecrementPendingCallbacks on a TdsParserStateObject which is
+            // already disposed
+            // This is not dangerous (since the stateObj is no longer in use), but we need to add a workaround
+            // in the assert for it
             Debug.Assert(
                 (remaining == -1 && _sessionHandle == null) || (0 <= remaining && remaining < 3),
                 string.Format(
@@ -1074,7 +1094,8 @@ namespace System.Data.SqlClient
                     finally
                     {
                         _writePacketCache.Dispose();
-                        // Do not set _writePacketCache to null, just in case a WriteAsyncCallback completes after this point
+                        // Do not set _writePacketCache to null, just in case a WriteAsyncCallback completes after this
+                        // point
                     }
                 }
             }
@@ -1203,7 +1224,8 @@ namespace System.Data.SqlClient
             // if the header splits buffer reads - special case!
             if ((_partialHeaderBytesRead > 0) || (_inBytesUsed + _inputHeaderLen > _inBytesRead))
             {
-                // VSTS 219884: when some kind of MITM (man-in-the-middle) tool splits the network packets, the message header can be split over
+                // VSTS 219884: when some kind of MITM (man-in-the-middle) tool splits the network packets, the
+                // message header can be split over
                 // several network packets.
                 // Note: cannot use ReadByteArray here since it uses _inBytesPacket which is not set yet.
                 do
@@ -1293,7 +1315,8 @@ namespace System.Data.SqlClient
             if (_inBytesPacket < 0)
             {
                 // either TDS stream is corrupted or there is multithreaded misuse of connection
-                // NOTE: usually we do not proactively apply checks to TDS data, but this situation happened several times
+                // NOTE: usually we do not proactively apply checks to TDS data, but this situation happened several
+                // times
                 // and caused infinite loop in CleanWire (VSTFDEVDIV\DEVDIV2:149937)
                 throw SQL.ParsingError(ParsingErrorState.CorruptedTdsStream);
             }
@@ -1301,7 +1324,8 @@ namespace System.Data.SqlClient
             return true;
         }
 
-        // This ensure that there is data available to be read in the buffer and that the header has been processed
+        // This ensure that there is data available to be read in the buffer and that the header has been
+        // processed
         // NOTE: This method (and all it calls) should be retryable without replaying a snapshot
         internal bool TryPrepareBuffer()
         {
@@ -1325,8 +1349,10 @@ namespace System.Data.SqlClient
             // If we're out of data, need to read more
             if (_inBytesUsed == _inBytesRead)
             {
-                // If the _inBytesPacket is not zero, then we have data left in the packet, but the data in the packet
-                // spans the buffer, so we can read any amount of data possible, and we do not need to call ProcessHeader
+                // If the _inBytesPacket is not zero, then we have data left in the packet, but the data in the
+                // packet
+                // spans the buffer, so we can read any amount of data possible, and we do not need to call
+                // ProcessHeader
                 // because there isn't a header at the beginning of the data that we are reading.
                 if (_inBytesPacket > 0)
                 {
@@ -1355,7 +1381,8 @@ namespace System.Data.SqlClient
                     if (_inBytesUsed == _inBytesRead)
                     {
                         // we read a header but didn't get anything else except it
-                        // VSTS 219884: it can happen that the TDS packet header and its data are split across two network packets.
+                        // VSTS 219884: it can happen that the TDS packet header and its data are split across two network
+                        // packets.
                         // Read at least one more byte to get/cache the first data portion of this TDS packet
                         if (!TryReadNetworkPacket())
                         {
@@ -1419,7 +1446,8 @@ namespace System.Data.SqlClient
                     // If new size is other than existing...
                     if (_inBytesRead > _inBytesUsed)
                     {
-                        // if we still have data left in the buffer we must keep that array reference and then copy into new one
+                        // if we still have data left in the buffer we must keep that array reference and then copy into new
+                        // one
                         byte[] temp = _inBuff;
 
                         _inBuff = new byte[size];
@@ -1474,7 +1502,8 @@ namespace System.Data.SqlClient
         // Buffer read methods - data values //
         ///////////////////////////////////////
 
-        // look at the next byte without pulling it off the wire, don't just returun _inBytesUsed since we may
+        // look at the next byte without pulling it off the wire, don't just returun _inBytesUsed since we
+        // may
         // have to go to the network to get the next byte.
         internal bool TryPeekByte(out byte value)
         {
@@ -1618,7 +1647,8 @@ namespace System.Data.SqlClient
 
             Debug.Assert(_inBytesPacket >= 0, "ERROR - TDSParser: _inBytesPacket < 0");
 
-            // return the byte from the buffer and increment the counter for number of bytes used in the in buffer
+            // return the byte from the buffer and increment the counter for number of bytes used in the in
+            // buffer
             value = (_inBuff[_inBytesUsed++]);
 
             AssertValidState();
@@ -2021,9 +2051,11 @@ namespace System.Data.SqlClient
 
             if (null == encoding)
             {
-                // Bug 462435:CR: TdsParser.DrainData(stateObj) hitting timeout exception after Connection Resiliency change
+                // Bug 462435:CR: TdsParser.DrainData(stateObj) hitting timeout exception after Connection
+                // Resiliency change
                 // http://vstfdevdiv:8080/web/wi.aspx?pcguid=22f9acc9-569a-41ff-b6ac-fac1b6370209&id=462435
-                // Need to skip the current column before throwing the error - this ensures that the state shared between this and the data reader is consistent when calling DrainData
+                // Need to skip the current column before throwing the error - this ensures that the state shared
+                // between this and the data reader is consistent when calling DrainData
                 if (isPlp)
                 {
                     ulong ignored;
@@ -2191,7 +2223,8 @@ namespace System.Data.SqlClient
         //  should be preceeded by a call to ReadPlpLength or ReadDataLength.
         // Returns the actual bytes read.
         // NOTE: This method must be retriable WITHOUT replaying a snapshot
-        // Every time you call this method increment the offst and decrease len by the value of totalBytesRead
+        // Every time you call this method increment the offst and decrease len by the value of
+        // totalBytesRead
         internal bool TryReadPlpBytes(ref byte[] buff, int offst, int len, out int totalBytesRead)
         {
             int bytesRead = 0;
@@ -2220,7 +2253,8 @@ namespace System.Data.SqlClient
             );
             bytesLeft = len;
 
-            // If total length is known up front, allocate the whole buffer in one shot instead of realloc'ing and copying over each time
+            // If total length is known up front, allocate the whole buffer in one shot instead of realloc'ing
+            // and copying over each time
             if (buff == null && _longlen != TdsEnums.SQL_PLP_UNKNOWNLEN)
             {
                 buff = new byte[(int)Math.Min((int)_longlen, len)];
@@ -2295,7 +2329,8 @@ namespace System.Data.SqlClient
 
         // Reads bytes from the buffer but doesn't return them, in effect simply deleting them.
         // Does not handle plp fields, need to use SkipPlpBytesValue for those.
-        // Does not handle null values or NBC bitmask, ensure the value is not null before calling this method
+        // Does not handle null values or NBC bitmask, ensure the value is not null before calling this
+        // method
         internal bool TrySkipLongBytes(long num)
         {
             Debug.Assert(
@@ -2567,13 +2602,16 @@ namespace System.Data.SqlClient
                             )
                         );
 
-                        // Grab a reference to the _networkPacketTaskSource in case it becomes null while we are trying to use it
+                        // Grab a reference to the _networkPacketTaskSource in case it becomes null while we are trying to
+                        // use it
                         TaskCompletionSource<object> source = _networkPacketTaskSource;
 
                         if (_parser.Connection.IsInPool)
                         {
-                            // Dev11 Bug 390048 : Timing issue between OnTimeout and ReadAsyncCallback results in SqlClient's packet parsing going out of sync
-                            // We should never timeout if the connection is currently in the pool: the safest thing to do here is to doom the connection to avoid corruption
+                            // Dev11 Bug 390048 : Timing issue between OnTimeout and ReadAsyncCallback results in SqlClient's
+                            // packet parsing going out of sync
+                            // We should never timeout if the connection is currently in the pool: the safest thing to do here
+                            // is to doom the connection to avoid corruption
                             Debug.Assert(
                                 _parser.Connection.IsConnectionDoomed,
                                 "Timeout occurred while the connection is in the pool"
@@ -2622,7 +2660,8 @@ namespace System.Data.SqlClient
                                         try
                                         {
                                             // If pendingCallback is at 3, then ReadAsyncCallback hasn't been called yet
-                                            // So it is safe for us to break the connection and cancel the Task (since we are not sure that ReadAsyncCallback will ever be called)
+                                            // So it is safe for us to break the connection and cancel the Task (since we are not sure that
+                                            // ReadAsyncCallback will ever be called)
                                             if (
                                                 (pendingCallback == 3) && (!source.Task.IsCompleted)
                                             )
@@ -2647,11 +2686,13 @@ namespace System.Data.SqlClient
                                                 }
 
                                                 // Ensure that the connection is no longer usable
-                                                // This is needed since the timeout error added above is non-fatal (and so throwing it won't break the connection)
+                                                // This is needed since the timeout error added above is non-fatal (and so throwing it won't break
+                                                // the connection)
                                                 _parser.State = TdsParserState.Broken;
                                                 _parser.Connection.BreakConnection();
 
-                                                // If we didn't get an exception (something else observed it?) then ensure that the task is cancelled
+                                                // If we didn't get an exception (something else observed it?) then ensure that the task is
+                                                // cancelled
                                                 if (!exceptionStored)
                                                 {
                                                     source.TrySetCanceled();
@@ -2714,7 +2755,8 @@ namespace System.Data.SqlClient
                 }
 
                 // -1 == Infinite
-                //  0 == Already timed out (NOTE: To simulate the same behavior as sync we will only timeout on 0 if we receive an IO Pending from SNI)
+                //  0 == Already timed out (NOTE: To simulate the same behavior as sync we will only timeout on 0 if
+                // we receive an IO Pending from SNI)
                 // >0 == Actual timeout remaining
                 int msecsRemaining = GetTimeoutRemaining();
                 if (msecsRemaining > 0)
@@ -2790,7 +2832,8 @@ namespace System.Data.SqlClient
                     ChangeNetworkPacketTimeout(0, Timeout.Infinite);
                 }
                 // DO NOT HANDLE PENDING READ HERE - which is TdsEnums.SNI_SUCCESS_IO_PENDING state.
-                // That is handled by user who initiated async read, or by ReadNetworkPacket which is sync over async.
+                // That is handled by user who initiated async read, or by ReadNetworkPacket which is sync over
+                // async.
             }
             finally
             {
@@ -2809,7 +2852,8 @@ namespace System.Data.SqlClient
         /// NOTE: This is not safe to do on a connection that is currently in use
         /// NOTE: This will mark the connection as broken if it is found to be dead
         /// </summary>
-        /// <param name="throwOnException">If true then an exception will be thrown if the connection is found to be dead, otherwise no exception will be thrown</param>
+        /// <param name="throwOnException">If true then an exception will be thrown if the connection is
+        // found to be dead, otherwise no exception will be thrown</param>
         /// <returns>True if the connection is still alive, otherwise false</returns>
         internal bool IsConnectionAlive(bool throwOnException)
         {
@@ -2892,7 +2936,8 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Checks to see if the underlying connection is still valid (used by idle connection resiliency - for active connections)
+        /// Checks to see if the underlying connection is still valid (used by idle connection resiliency -
+        // for active connections)
         /// NOTE: This is not safe to do on a connection that is currently in use
         /// NOTE: This will mark the connection as broken if it is found to be dead
         /// </summary>
@@ -3029,7 +3074,8 @@ namespace System.Data.SqlClient
                         {
                             if (_parser._loginWithFailover)
                             {
-                                // For DB Mirroring Failover during login, never break the connection, just close the TdsParser (Devdiv 846298)
+                                // For DB Mirroring Failover during login, never break the connection, just close the TdsParser
+                                // (Devdiv 846298)
                                 _parser.Disconnect();
                             }
                             else if (
@@ -3208,7 +3254,8 @@ namespace System.Data.SqlClient
             }
             finally
             {
-                // pendingCallbacks may be 2 after decrementing, this indicates that a fatal timeout is occuring, and therefore we shouldn't complete the task
+                // pendingCallbacks may be 2 after decrementing, this indicates that a fatal timeout is occuring,
+                // and therefore we shouldn't complete the task
                 int pendingCallbacks = DecrementPendingCallbacks(false); // may dispose of GC handle.
                 if ((processFinallyBlock) && (source != null) && (pendingCallbacks < 2))
                 {
@@ -3263,7 +3310,8 @@ namespace System.Data.SqlClient
                     || (_parser.State == TdsParserState.Broken)
                 )
                 {
-                    // Connection was closed by another thread before we parsed the packet, so no error was added to the collection
+                    // Connection was closed by another thread before we parsed the packet, so no error was added to the
+                    // collection
                     throw ADP.ClosedConnectionError();
                 }
             }
@@ -3279,7 +3327,8 @@ namespace System.Data.SqlClient
             if (!captureSuccess)
             {
                 // Either there was no exception, or the task was already completed
-                // This is unusual, but possible if a fatal timeout occured on another thread (which should mean that the connection is now broken)
+                // This is unusual, but possible if a fatal timeout occured on another thread (which should mean
+                // that the connection is now broken)
                 Debug.Assert(
                     _parser.State == TdsParserState.Broken
                         || _parser.State == TdsParserState.Closed
@@ -3402,10 +3451,13 @@ namespace System.Data.SqlClient
 
 
         //
-        // Takes a secure string and offsets and saves them for a write latter when the information is written out to SNI Packet
+        // Takes a secure string and offsets and saves them for a write latter when the information is
+        // written out to SNI Packet
         //  This method is provided to better handle the life cycle of the clear text of the secure string
-        //  This method also ensures that the clear text is not held in the unpined managed buffer so that it avoids getting moved around by CLR garbage collector
-        //  TdsParserStaticMethods.EncryptPassword operation is also done in the unmanaged buffer for the clear text later
+        //  This method also ensures that the clear text is not held in the unpined managed buffer so that
+        // it avoids getting moved around by CLR garbage collector
+        //  TdsParserStaticMethods.EncryptPassword operation is also done in the unmanaged buffer for the
+        // clear text later
         //
         internal void WriteSecureString(SecureString secureString)
         {
@@ -3425,8 +3477,10 @@ namespace System.Data.SqlClient
             int lengthInBytes = secureString.Length * 2;
 
             // It is guaranteed both secure password and secure change password should fit into the first packet
-            // Given current TDS format and implementation it is not possible that one of secure string is the last item and exactly fill up the output buffer
-            //  if this ever happens and it is correct situation, the packet needs to be written out after _outBytesUsed is update
+            // Given current TDS format and implementation it is not possible that one of secure string is the
+            // last item and exactly fill up the output buffer
+            //  if this ever happens and it is correct situation, the packet needs to be written out after
+            // _outBytesUsed is update
             Debug.Assert(
                 (_outBytesUsed + lengthInBytes) < _outBuff.Length,
                 "Passwords cannot be splited into two different packet or the last item which fully fill up _outBuff!!!"
@@ -3435,7 +3489,8 @@ namespace System.Data.SqlClient
             _outBytesUsed += lengthInBytes;
         }
 
-        // ResetSecurePasswordsInformation: clears information regarding secure passwords when login is done; called from TdsParser.TdsLogin
+        // ResetSecurePasswordsInformation: clears information regarding secure passwords when login is
+        // done; called from TdsParser.TdsLogin
         internal void ResetSecurePasswordsInfomation()
         {
             for (int i = 0; i < _securePasswords.Length; ++i)
@@ -3507,7 +3562,8 @@ namespace System.Data.SqlClient
                 "ERROR - TDSParser: _outBytesUsed > _outBuff.Length"
             );
 
-            // check to make sure we haven't used the full amount of space available in the buffer, if so, flush it
+            // check to make sure we haven't used the full amount of space available in the buffer, if so, flush
+            // it
             if (_outBytesUsed == _outBuff.Length)
             {
                 WritePacket(TdsEnums.SOFTFLUSH, canAccumulate: true);
@@ -3781,7 +3837,8 @@ namespace System.Data.SqlClient
             }
             if (!sync)
             {
-                // Add packet to the pending list (since the callback can happen any time after we call SNIWritePacket)
+                // Add packet to the pending list (since the callback can happen any time after we call
+                // SNIWritePacket)
                 packetPointer = AddPacketToPendingList(packet);
             }
             // Async operation completion may be delayed (success pending).
@@ -3802,7 +3859,8 @@ namespace System.Data.SqlClient
                     _writeCompletionSource = new TaskCompletionSource<object>();
                     task = _writeCompletionSource.Task;
 
-                    // Ensure that setting _writeCompletionSource completes before checking _delayedWriteAsyncCallbackException
+                    // Ensure that setting _writeCompletionSource completes before checking
+                    // _delayedWriteAsyncCallbackException
                     Thread.MemoryBarrier();
 
                     // Check for a stored exception
@@ -4032,7 +4090,8 @@ namespace System.Data.SqlClient
                 callerHasConnectionLock: true
             );
 
-            // Check to see if the timeout has occured.  This time out code is special case code to allow BCP writes to timeout to fix bug 350558, eventually we should make all writes timeout.
+            // Check to see if the timeout has occured.  This time out code is special case code to allow BCP
+            // writes to timeout to fix bug 350558, eventually we should make all writes timeout.
             if (_bulkCopyOpperationInProgress && 0 == GetTimeoutRemaining())
             {
                 _parser.Connection.ThreadHasParserLockForClose = true;
@@ -4413,7 +4472,8 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Gets the full list of errors and warnings (including the pre-attention ones), then wipes all error and warning lists
+        /// Gets the full list of errors and warnings (including the pre-attention ones), then wipes all
+        // error and warning lists
         /// </summary>
         /// <param name="broken">If true, the connection should be broken</param>
         /// <returns>An array containing all of the errors and warnings</returns>
@@ -4432,7 +4492,10 @@ namespace System.Data.SqlClient
                 _errors = null;
                 _warnings = null;
 
-                // We also process the pre-attention error lists here since, if we are here and they are populated, then an error occured while sending attention so we should show the errors now (otherwise they'd be lost)
+                // We also process the pre-attention error lists here since, if we are here and they are populated,
+                // then an error occured while sending attention so we should show the errors now (otherwise they'd
+                // be
+                // lost)
                 AddErrorsToCollection(_preAttentionErrors, ref allErrors, ref broken);
                 AddErrorsToCollection(_preAttentionWarnings, ref allErrors, ref broken);
                 _preAttentionErrors = null;
@@ -4517,7 +4580,8 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Debug Only: Ensures that the TdsParserStateObject has no lingering state and can safely be re-used
+        /// Debug Only: Ensures that the TdsParserStateObject has no lingering state and can safely be
+        // re-used
         /// </summary>
         [Conditional("DEBUG")]
         internal void AssertStateIsClean()
@@ -4878,39 +4942,39 @@ namespace System.Data.SqlClient
         /*
         
         // leave this in. comes handy if you have to do Console.WriteLine style debugging ;)
-                private void DumpBuffer() {
-                    Console.WriteLine("dumping buffer");
-                    Console.WriteLine("_inBytesRead = {0}", _inBytesRead);
-                    Console.WriteLine("_inBytesUsed = {0}", _inBytesUsed);
-                    int cc = 0; // character counter
-                    int i;
-                    Console.WriteLine("used buffer:");
-                    for (i=0; i< _inBytesUsed; i++) {
-                        if (cc==16) {
-                            Console.WriteLine();
-                            cc = 0;
-                        }
-                        Console.Write("{0,-2:X2} ", _inBuff[i]);
-                        cc++;
-                    }
-                    if (cc>0) {
-                        Console.WriteLine();
-                    }
+        private void DumpBuffer() {
+        Console.WriteLine("dumping buffer");
+        Console.WriteLine("_inBytesRead = {0}", _inBytesRead);
+        Console.WriteLine("_inBytesUsed = {0}", _inBytesUsed);
+        int cc = 0; // character counter
+        int i;
+        Console.WriteLine("used buffer:");
+        for (i=0; i< _inBytesUsed; i++) {
+        if (cc==16) {
+        Console.WriteLine();
+        cc = 0;
+        }
+        Console.Write("{0,-2:X2} ", _inBuff[i]);
+        cc++;
+        }
+        if (cc>0) {
+        Console.WriteLine();
+        }
         
-                    cc = 0;
-                    Console.WriteLine("unused buffer:");
-                    for (i=_inBytesUsed; i<_inBytesRead; i++) {
-                        if (cc==16) {
-                            Console.WriteLine();
-                            cc = 0;
-                        }
-                        Console.Write("{0,-2:X2} ", _inBuff[i]);
-                        cc++;
-                    }
-                    if (cc>0) {
-                        Console.WriteLine();
-                    }
-                }
+        cc = 0;
+        Console.WriteLine("unused buffer:");
+        for (i=_inBytesUsed; i<_inBytesRead; i++) {
+        if (cc==16) {
+        Console.WriteLine();
+        cc = 0;
+        }
+        Console.Write("{0,-2:X2} ", _inBuff[i]);
+        cc++;
+        }
+        if (cc>0) {
+        Console.WriteLine();
+        }
+        }
         */
     }
 }

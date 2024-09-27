@@ -50,7 +50,8 @@ namespace DbLinq.Vendor
 
         /// <summary>
         /// Used to determine if the column is a primary key.
-        /// May be null, because some vendors don't show this as a column property (Oracle for example) but as table constraints
+        /// May be null, because some vendors don't show this as a column property (Oracle for example) but
+        // as table constraints
         /// </summary>
         bool? PrimaryKey { get; set; }
 

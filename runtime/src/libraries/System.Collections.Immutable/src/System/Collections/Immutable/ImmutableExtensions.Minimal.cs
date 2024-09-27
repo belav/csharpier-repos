@@ -16,7 +16,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="sequence">The enumerable source.</param>
-        /// <param name="count">Receives the number of elements in the enumeration, if it could be determined.</param>
+        /// <param name="count">Receives the number of elements in the enumeration, if it could be
+        // determined.</param>
         /// <returns><c>true</c> if the count could be determined; <c>false</c> otherwise.</returns>
         internal static bool TryGetCount<T>(this IEnumerable<T> sequence, out int count)
         {
@@ -28,7 +29,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="sequence">The enumerable source.</param>
-        /// <param name="count">Receives the number of elements in the enumeration, if it could be determined.</param>
+        /// <param name="count">Receives the number of elements in the enumeration, if it could be
+        // determined.</param>
         /// <returns><c>true</c> if the count could be determined; <c>false</c> otherwise.</returns>
         internal static bool TryGetCount<T>(this IEnumerable sequence, out int count)
         {
@@ -91,8 +93,10 @@ namespace System.Collections.Immutable
         /// <remarks>
         /// <para>
         /// The reason we don't copy anything other than for well-known types is that a malicious interface
-        /// implementation of <see cref="ICollection{T}"/> could hold on to the array when its <see cref="ICollection{T}.CopyTo"/>
-        /// method is called. If the array it holds onto underlies an <see cref="ImmutableArray{T}"/>, it could violate
+        /// implementation of <see cref="ICollection{T}"/> could hold on to the array when its <see
+        // cref="ICollection{T}.CopyTo"/>
+        /// method is called. If the array it holds onto underlies an <see cref="ImmutableArray{T}"/>, it
+        // could violate
         /// immutability by modifying the array.
         /// </para>
         /// </remarks>
@@ -139,7 +143,8 @@ namespace System.Collections.Immutable
         /// <param name="count">The number of elements in the sequence.</param>
         /// <returns>The array.</returns>
         /// <remarks>
-        /// This is more efficient than the <see cref="System.Linq.Enumerable.ToArray{TSource}(IEnumerable{TSource})"/> extension method
+        /// This is more efficient than the <see
+        // cref="System.Linq.Enumerable.ToArray{TSource}(IEnumerable{TSource})"/> extension method
         /// because that only tries to cast the sequence to <see cref="ICollection{T}"/> to determine
         /// the count before it falls back to reallocating arrays as it enumerates.
         /// </remarks>

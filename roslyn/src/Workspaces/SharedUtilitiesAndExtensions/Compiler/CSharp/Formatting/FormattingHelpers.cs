@@ -601,7 +601,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             currentToken.Parent.IsKind(SyntaxKind.Interpolation);
 
         /// <summary>
-        /// Checks whether currentToken is the opening paren of a deconstruction-declaration in var form, such as <c>var (x, y) = ...</c>
+        /// Checks whether currentToken is the opening paren of a deconstruction-declaration in var form,
+        // such as <c>var (x, y) = ...</c>
         /// </summary>
         public static bool IsOpenParenInVarDeconstructionDeclaration(this SyntaxToken currentToken)
         {
@@ -611,7 +612,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         }
 
         /// <summary>
-        /// Check whether the currentToken is a comma and is a delimiter between arguments inside a tuple expression.
+        /// Check whether the currentToken is a comma and is a delimiter between arguments inside a tuple
+        // expression.
         /// </summary>
         public static bool IsCommaInTupleExpression(this SyntaxToken currentToken)
         {

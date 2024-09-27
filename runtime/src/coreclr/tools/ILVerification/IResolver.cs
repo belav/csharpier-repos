@@ -10,12 +10,14 @@ namespace ILVerify
     public interface IResolver
     {
         /// <summary>
-        /// Resolve assembly to PEReader. This method should return the same instance when queried multiple times.
+        /// Resolve assembly to PEReader. This method should return the same instance when queried multiple
+        // times.
         /// </summary>
         PEReader ResolveAssembly(AssemblyName assemblyName);
 
         /// <summary>
-        /// Resolve module to PEReader. This method should return the same instance when queried multiple times.
+        /// Resolve module to PEReader. This method should return the same instance when queried multiple
+        // times.
         /// </summary>
         PEReader ResolveModule(AssemblyName referencingAssembly, string fileName);
     }

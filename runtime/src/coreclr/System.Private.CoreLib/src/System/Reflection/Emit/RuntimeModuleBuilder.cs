@@ -486,7 +486,8 @@ namespace System.Reflection.Emit
             }
             else
             {
-                // Use methodDef as parent because the method lives in this assembly and its declaringType has no generic arguments
+                // Use methodDef as parent because the method lives in this assembly and its declaringType has no
+                // generic arguments
                 if (masmi != null)
                     tkParent = GetMethodMetadataToken(masmi);
                 else
@@ -1179,7 +1180,8 @@ namespace System.Reflection.Emit
 
         #region GetToken
 
-        // For a generic type definition, we should return the token for the generic type definition itself in two cases:
+        // For a generic type definition, we should return the token for the generic type definition itself
+        // in two cases:
         //   1. GetTypeToken
         //   2. ldtoken (see ILGenerator)
         // For all other occasions we should return the generic type instantiated on its formal parameters.
@@ -1259,10 +1261,12 @@ namespace System.Reflection.Emit
             }
         }
 
-        // For a method on a generic type, we should return the methoddef token on the generic type definition in two cases
+        // For a method on a generic type, we should return the methoddef token on the generic type
+        // definition in two cases
         //   1. GetMethodToken
         //   2. ldtoken (see ILGenerator)
-        // For all other occasions we should return the method on the generic type instantiated on the formal parameters.
+        // For all other occasions we should return the method on the generic type instantiated on the
+        // formal parameters.
         private int GetMethodTokenNoLock(MethodInfo method, bool getGenericTypeDefinition)
         {
             ArgumentNullException.ThrowIfNull(method);
@@ -1434,7 +1438,8 @@ namespace System.Reflection.Emit
                     tk = GetMethodMetadataToken(methodInfoUnbound);
                 }
 
-                // For Ldtoken, Ldftn, and Ldvirtftn, we should emit the method def/ref token for a generic method definition.
+                // For Ldtoken, Ldftn, and Ldvirtftn, we should emit the method def/ref token for a generic method
+                // definition.
                 if (isGenericMethodDef && useMethodDef)
                 {
                     return tk;
@@ -1544,9 +1549,12 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes
         )
         {
-            // GetArrayMethod is useful when you have an array of a type whose definition has not been completed and
-            // you want to access methods defined on Array. For example, you might define a type and want to define a
-            // method that takes an array of the type as a parameter. In order to access the elements of the array,
+            // GetArrayMethod is useful when you have an array of a type whose definition has not been completed
+            // and
+            // you want to access methods defined on Array. For example, you might define a type and want to
+            // define a
+            // method that takes an array of the type as a parameter. In order to access the elements of the
+            // array,
             // you will need to call methods of the Array class.
 
             int token = GetArrayMethodToken(

@@ -120,7 +120,8 @@ namespace Microsoft.Extensions.Caching.Memory
         }
 
         /// <summary>
-        /// Gets or sets how long a cache entry can be inactive (e.g. not accessed) before it will be removed.
+        /// Gets or sets how long a cache entry can be inactive (e.g. not accessed) before it will be
+        // removed.
         /// This will not extend the entry lifetime beyond the absolute expiration (if set).
         /// </summary>
         public TimeSpan? SlidingExpiration
@@ -324,7 +325,8 @@ namespace Microsoft.Extensions.Caching.Memory
             }
 
             // Copy expiration tokens and AbsoluteExpiration to the cache entries hierarchy.
-            // We do this regardless of it gets cached because the tokens are associated with the value we'll return.
+            // We do this regardless of it gets cached because the tokens are associated with the value we'll
+            // return.
             if ((ulong)_absoluteExpirationTicks < (ulong)parent._absoluteExpirationTicks)
             {
                 parent._absoluteExpirationTicks = _absoluteExpirationTicks;

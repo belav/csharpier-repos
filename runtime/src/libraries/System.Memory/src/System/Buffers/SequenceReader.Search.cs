@@ -14,7 +14,8 @@ namespace System.Buffers
         /// </summary>
         /// <param name="span">The read data, if any.</param>
         /// <param name="delimiter">The delimiter to look for.</param>
-        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
+        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if
+        // found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
         public bool TryReadTo(
             out ReadOnlySpan<T> span,
@@ -55,13 +56,16 @@ namespace System.Buffers
         }
 
         /// <summary>
-        /// Try to read everything up to the given <paramref name="delimiter"/>, ignoring delimiters that are
+        /// Try to read everything up to the given <paramref name="delimiter"/>, ignoring delimiters that
+        // are
         /// preceded by <paramref name="delimiterEscape"/>.
         /// </summary>
         /// <param name="span">The read data, if any.</param>
         /// <param name="delimiter">The delimiter to look for.</param>
-        /// <param name="delimiterEscape">If found prior to <paramref name="delimiter"/> it will skip that occurrence.</param>
-        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
+        /// <param name="delimiterEscape">If found prior to <paramref name="delimiter"/> it will skip that
+        // occurrence.</param>
+        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if
+        // found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
         public bool TryReadTo(
             out ReadOnlySpan<T> span,
@@ -223,7 +227,8 @@ namespace System.Buffers
         /// </summary>
         /// <param name="sequence">The read data, if any.</param>
         /// <param name="delimiter">The delimiter to look for.</param>
-        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
+        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if
+        // found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
         public bool TryReadTo(
             out ReadOnlySequence<T> sequence,
@@ -277,13 +282,16 @@ namespace System.Buffers
         }
 
         /// <summary>
-        /// Try to read everything up to the given <paramref name="delimiter"/>, ignoring delimiters that are
+        /// Try to read everything up to the given <paramref name="delimiter"/>, ignoring delimiters that
+        // are
         /// preceded by <paramref name="delimiterEscape"/>.
         /// </summary>
         /// <param name="sequence">The read data, if any.</param>
         /// <param name="delimiter">The delimiter to look for.</param>
-        /// <param name="delimiterEscape">If found prior to <paramref name="delimiter"/> it will skip that occurrence.</param>
-        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
+        /// <param name="delimiterEscape">If found prior to <paramref name="delimiter"/> it will skip that
+        // occurrence.</param>
+        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if
+        // found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
         public bool TryReadTo(
             out ReadOnlySequence<T> sequence,
@@ -384,7 +392,8 @@ namespace System.Buffers
         /// </summary>
         /// <param name="span">The read data, if any.</param>
         /// <param name="delimiters">The delimiters to look for.</param>
-        /// <param name="advancePastDelimiter">True to move past the first found instance of any of the given <paramref name="delimiters"/>.</param>
+        /// <param name="advancePastDelimiter">True to move past the first found instance of any of the
+        // given <paramref name="delimiters"/>.</param>
         /// <returns>True if any of the <paramref name="delimiters"/> were found.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryReadToAny(
@@ -437,7 +446,8 @@ namespace System.Buffers
         /// </summary>
         /// <param name="sequence">The read data, if any.</param>
         /// <param name="delimiters">The delimiters to look for.</param>
-        /// <param name="advancePastDelimiter">True to move past the first found instance of any of the given <paramref name="delimiters"/>.</param>
+        /// <param name="advancePastDelimiter">True to move past the first found instance of any of the
+        // given <paramref name="delimiters"/>.</param>
         /// <returns>True if any of the <paramref name="delimiters"/> were found.</returns>
         public bool TryReadToAny(
             out ReadOnlySequence<T> sequence,
@@ -498,7 +508,8 @@ namespace System.Buffers
         /// </summary>
         /// <param name="span">The read data, if any.</param>
         /// <param name="delimiter">The delimiter to look for.</param>
-        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
+        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if
+        // found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
         public bool TryReadTo(
             out ReadOnlySpan<T> span,
@@ -542,7 +553,8 @@ namespace System.Buffers
         /// </summary>
         /// <param name="sequence">The read data, if any.</param>
         /// <param name="delimiter">The multi (T) delimiter.</param>
-        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
+        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if
+        // found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
         public bool TryReadTo(
             out ReadOnlySequence<T> sequence,
@@ -578,7 +590,8 @@ namespace System.Buffers
 
                 if (IsNext(delimiter))
                 {
-                    // Probably a faster way to do this, potentially by avoiding the Advance in the previous TryReadTo call
+                    // Probably a faster way to do this, potentially by avoiding the Advance in the previous TryReadTo
+                    // call
                     if (advanced)
                     {
                         sequence = copy.Sequence.Slice(copy.Consumed, Consumed - copy.Consumed);
@@ -606,8 +619,10 @@ namespace System.Buffers
         /// Try to read data with given <paramref name="count"/>.
         /// </summary>
         /// <param name="count">Read count.</param>
-        /// <param name="sequence">The read data, if successfully read requested <paramref name="count"/> data.</param>
-        /// <returns><c>true</c> if remaining items in current <see cref="SequenceReader{T}" /> is enough for <paramref name="count"/>.</returns>
+        /// <param name="sequence">The read data, if successfully read requested <paramref name="count"/>
+        // data.</param>
+        /// <returns><c>true</c> if remaining items in current <see cref="SequenceReader{T}" /> is enough
+        // for <paramref name="count"/>.</returns>
         public bool TryReadExact(int count, out ReadOnlySequence<T> sequence)
         {
             if (count < 0)
@@ -632,7 +647,8 @@ namespace System.Buffers
         /// Advance until the given <paramref name="delimiter"/>, if found.
         /// </summary>
         /// <param name="delimiter">The delimiter to search for.</param>
-        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
+        /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if
+        // found.</param>
         /// <returns>True if the given <paramref name="delimiter"/> was found.</returns>
         public bool TryAdvanceTo(T delimiter, bool advancePastDelimiter = true)
         {
@@ -651,7 +667,8 @@ namespace System.Buffers
         /// Advance until any of the given <paramref name="delimiters"/>, if found.
         /// </summary>
         /// <param name="delimiters">The delimiters to search for.</param>
-        /// <param name="advancePastDelimiter">True to move past the first found instance of any of the given <paramref name="delimiters"/>.</param>
+        /// <param name="advancePastDelimiter">True to move past the first found instance of any of the
+        // given <paramref name="delimiters"/>.</param>
         /// <returns>True if any of the given <paramref name="delimiters"/> were found.</returns>
         public bool TryAdvanceToAny(
             scoped ReadOnlySpan<T> delimiters,

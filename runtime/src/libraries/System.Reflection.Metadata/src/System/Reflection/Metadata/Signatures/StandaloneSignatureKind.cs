@@ -4,7 +4,8 @@
 namespace System.Reflection.Metadata
 {
     /// <summary>
-    /// Indicates whether a <see cref="StandaloneSignature"/> represents a standalone method or local variable signature.
+    /// Indicates whether a <see cref="StandaloneSignature"/> represents a standalone method or local
+    // variable signature.
     /// </summary>
     public enum StandaloneSignatureKind
     {

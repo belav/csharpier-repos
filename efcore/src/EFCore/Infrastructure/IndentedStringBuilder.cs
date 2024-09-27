@@ -7,15 +7,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
 ///     <para>
-///         A thin wrapper over <see cref="StringBuilder" /> that adds indentation to each line built.
+///         A thin wrapper over <see cref="StringBuilder" /> that adds indentation to each line
+// built.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class IndentedStringBuilder
@@ -128,7 +131,8 @@ public class IndentedStringBuilder
     ///     Appends the current indent, the given string, and a new line to the string being built.
     /// </summary>
     /// <remarks>
-    ///     If the given string itself contains a new line, the part of the string after that new line will not be indented.
+    ///     If the given string itself contains a new line, the part of the string after that new line
+    // will not be indented.
     /// </remarks>
     /// <param name="value">The string to append.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
@@ -167,7 +171,8 @@ public class IndentedStringBuilder
     ///     by the current indent and followed by a new line, to the string being built.
     /// </summary>
     /// <param name="value">The string to append.</param>
-    /// <param name="skipFinalNewline">If <see langword="true" />, then the terminating new line is not added after the last line.</param>
+    /// <param name="skipFinalNewline">If <see langword="true" />, then the terminating new line is not
+    // added after the last line.</param>
     /// <returns>This builder so that additional calls can be chained.</returns>
     public virtual IndentedStringBuilder AppendLines(string value, bool skipFinalNewline = false)
     {
@@ -202,7 +207,8 @@ public class IndentedStringBuilder
     }
 
     /// <summary>
-    ///     Concatenates the members of the given collection, using the specified separator between each member,
+    ///     Concatenates the members of the given collection, using the specified separator between each
+    // member,
     ///     and then appends the resulting string,
     /// </summary>
     /// <param name="values">The values to concatenate.</param>
@@ -221,7 +227,8 @@ public class IndentedStringBuilder
     }
 
     /// <summary>
-    ///     Concatenates the members of the given collection, using the specified separator between each member,
+    ///     Concatenates the members of the given collection, using the specified separator between each
+    // member,
     ///     and then appends the resulting string,
     /// </summary>
     /// <param name="values">The values to concatenate.</param>
@@ -280,7 +287,8 @@ public class IndentedStringBuilder
     public virtual IDisposable Indent() => new Indenter(this);
 
     /// <summary>
-    ///     Temporarily disables all indentation. Restores the original indentation when the returned object is disposed.
+    ///     Temporarily disables all indentation. Restores the original indentation when the returned
+    // object is disposed.
     /// </summary>
     /// <returns>An object that restores the original indentation when disposed.</returns>
     public virtual IDisposable SuspendIndent() => new IndentSuspender(this);

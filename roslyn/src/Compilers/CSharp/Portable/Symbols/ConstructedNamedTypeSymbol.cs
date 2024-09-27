@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     }
 
     /// <summary>
-    /// A generic named type symbol that has been constructed with type arguments distinct from its own type parameters.
+    /// A generic named type symbol that has been constructed with type arguments distinct from its own
+    // type parameters.
     /// </summary>
     internal sealed class ConstructedNamedTypeSymbol : SubstitutedNamedTypeSymbol
     {

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertProgram
 $$
 ";
 
-            // default preference is to prefer top level namespaces.  As such, we should not have the refactoring here
+            // default preference is to prefer top level namespaces.  As such, we should not have the
+            // refactoring here
             // since the analyzer will take over.
             await new VerifyCS.Test
             {
@@ -54,7 +55,8 @@ class Program
     }
 }";
 
-            // default preference is to prefer top level namespaces.  As such, we should not have the refactoring here
+            // default preference is to prefer top level namespaces.  As such, we should not have the
+            // refactoring here
             // since the analyzer will take over.
             await new VerifyCS.Test
             {
@@ -68,7 +70,8 @@ class Program
         [Fact]
         public async Task TestConvertToTopLevelStatementsWithProgramMainPreferenceSuggestion()
         {
-            // user actually prefers Program.Main.  As such, we only offer to convert to the alternative as a refactoring.
+            // user actually prefers Program.Main.  As such, we only offer to convert to the alternative as a
+            // refactoring.
             await new VerifyCS.Test
             {
                 TestCode =
@@ -178,7 +181,8 @@ class Program
 }
 ";
 
-            // user actually prefers Program.Main.  As such, we only offer to convert to the alternative as a refactoring.
+            // user actually prefers Program.Main.  As such, we only offer to convert to the alternative as a
+            // refactoring.
             await new VerifyCS.Test
             {
                 TestCode = code,

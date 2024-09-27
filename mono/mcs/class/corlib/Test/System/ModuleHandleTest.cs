@@ -106,7 +106,7 @@ namespace MonoTests.System
         [ExpectedException(typeof(Exception))]
         public void ResolveFieldTokenInvalidTokenType2()
         {
-            /* A typedef */
+/* A typedef */
             module.ResolveFieldHandle(0x2000002);
         }
 
@@ -114,7 +114,7 @@ namespace MonoTests.System
         [ExpectedException(typeof(Exception))]
         public void ResolveFieldTokenInvalidTokenType3()
         {
-            /* A memberref which points to a method */
+/* A memberref which points to a method */
             module.ResolveFieldHandle(typeof(Console).GetMethod("ReadLine").MetadataToken);
         }
 
@@ -122,7 +122,7 @@ namespace MonoTests.System
         [ExpectedException(typeof(Exception))]
         public void ResolveFieldTokenInvalidToken()
         {
-            /* An out-of-range field def */
+/* An out-of-range field def */
             module.ResolveFieldHandle(0x40f0001);
         }
 
@@ -157,7 +157,7 @@ namespace MonoTests.System
         [ExpectedException(typeof(Exception))]
         public void ResolveMethodTokenInvalidTokenType2()
         {
-            /* A typedef */
+/* A typedef */
             module.ResolveMethodHandle(0x2000002);
         }
 
@@ -165,7 +165,7 @@ namespace MonoTests.System
         [ExpectedException(typeof(Exception))]
         public void ResolveMethodTokenInvalidTokenType3()
         {
-            /* A memberref which points to a field */
+/* A memberref which points to a field */
             module.ResolveMethodHandle(typeof(Type).GetField("Delimiter").MetadataToken);
         }
 
@@ -173,29 +173,29 @@ namespace MonoTests.System
         [ExpectedException(typeof(Exception))]
         public void ResolveMethodTokenInvalidToken()
         {
-            /* An out-of-range method def */
+/* An out-of-range method def */
             module.ResolveMethodHandle(0x60f0001);
         }
 
-        /* it is not public in 2.0 RTM.
-            [Test]
-            public void GetPEKind () {
-                PortableExecutableKinds pe_kind;
-                ImageFileMachine machine;
-        
-                module.GetPEKind (out pe_kind, out machine);
-        
-                Assert.AreEqual (PortableExecutableKinds.ILOnly, pe_kind);
-            }
-        
-            [Test]
-            [ExpectedException (typeof (ArgumentNullException))]
-            public void GetPEKindInvalidHandle () {
-                PortableExecutableKinds pe_kind;
-                ImageFileMachine machine;
-        
-                ModuleHandle.EmptyHandle.GetPEKind (out pe_kind, out machine);
-            }
-        */
+/* it is not public in 2.0 RTM.
+[Test]
+public void GetPEKind () {
+PortableExecutableKinds pe_kind;
+ImageFileMachine machine;
+
+module.GetPEKind (out pe_kind, out machine);
+
+Assert.AreEqual (PortableExecutableKinds.ILOnly, pe_kind);
+}
+
+[Test]
+[ExpectedException (typeof (ArgumentNullException))]
+public void GetPEKindInvalidHandle () {
+PortableExecutableKinds pe_kind;
+ImageFileMachine machine;
+
+ModuleHandle.EmptyHandle.GetPEKind (out pe_kind, out machine);
+}
+*/
     }
 }

@@ -15,11 +15,13 @@ namespace Microsoft.CodeAnalysis.CommentSelection
     {
         public TextSpan TrackingTextSpan { get; }
 
-        // In some cases, the tracking span needs to be adjusted by a specific amount after the changes have been applied.
+        // In some cases, the tracking span needs to be adjusted by a specific amount after the changes have
+        // been applied.
         // These fields store the amount to adjust the span by after edits have been applied.
         // e.g. The selection begins in a comment -
         //    /*Com[|ment*/ int i = 1;|] -> /*Com*//*ment*/ int i = 1;*/
-        // There are two new comment markers added inside the original comment, only the second should be selected.
+        // There are two new comment markers added inside the original comment, only the second should be
+        // selected.
         public int AmountToAddToTrackingSpanStart { get; }
         public int AmountToAddToTrackingSpanEnd { get; }
 

@@ -220,7 +220,8 @@ namespace System.Reflection
             {
                 if (DefaultValue != null && DefaultValue.GetType().IsEnum)
                     return ((Enum)DefaultValue).GetValue();
-                /*FIXME right now DefaultValue doesn't throw for reflection-only assemblies. Change this once the former is fixed.*/
+                /*FIXME right now DefaultValue doesn't throw for reflection-only assemblies. Change this once the
+                former is fixed.*/
                 return DefaultValue;
             }
         }

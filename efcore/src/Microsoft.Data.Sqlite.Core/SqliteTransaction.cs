@@ -13,7 +13,8 @@ namespace Microsoft.Data.Sqlite
     /// <summary>
     ///     Represents a transaction made against a SQLite database.
     /// </summary>
-    /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/transactions">Transactions</seealso>
+    /// <seealso
+    // href="https://docs.microsoft.com/dotnet/standard/data/sqlite/transactions">Transactions</seealso>
     public class SqliteTransaction : DbTransaction
     {
         private SqliteConnection? _connection;
@@ -114,8 +115,10 @@ namespace Microsoft.Data.Sqlite
 #endif
 
         /// <summary>
-        /// Creates a savepoint in the transaction. This allows all commands that are executed after the savepoint was
-        /// established to be rolled back, restoring the transaction state to what it was at the time of the savepoint.
+        /// Creates a savepoint in the transaction. This allows all commands that are executed after the
+        // savepoint was
+        /// established to be rolled back, restoring the transaction state to what it was at the time of the
+        // savepoint.
         /// </summary>
         /// <param name="savepointName">The name of the savepoint to be created.</param>
 #if NET5_0_OR_GREATER

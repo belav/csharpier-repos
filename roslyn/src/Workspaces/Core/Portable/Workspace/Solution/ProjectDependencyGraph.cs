@@ -20,13 +20,16 @@ namespace Microsoft.CodeAnalysis
         private readonly ImmutableHashSet<ProjectId> _projectIds;
 
         /// <summary>
-        /// The map of projects to dependencies. This field is always fully initialized. Projects which do not reference
-        /// any other projects do not have a key in this map (i.e. they are omitted, as opposed to including them with
+        /// The map of projects to dependencies. This field is always fully initialized. Projects which do
+        // not reference
+        /// any other projects do not have a key in this map (i.e. they are omitted, as opposed to including
+        // them with
         /// an empty value).
         ///
         /// <list type="bullet">
         /// <item><description>This field is always fully initialized</description></item>
-        /// <item><description>Projects which do not reference any other projects do not have a key in this map (i.e.
+        /// <item><description>Projects which do not reference any other projects do not have a key in this
+        // map (i.e.
         /// they are omitted, as opposed to including them with an empty value)</description></item>
         /// <item><description>The keys and values in this map are always contained in
         /// <see cref="_projectIds"/></description></item>
@@ -38,8 +41,10 @@ namespace Microsoft.CodeAnalysis
         private readonly NonReentrantLock _dataLock = new();
 
         /// <summary>
-        /// The lazily-initialized map of projects to projects which reference them. This field is either null, or
-        /// fully-computed. Projects which are not referenced by any other project do not have a key in this map (i.e.
+        /// The lazily-initialized map of projects to projects which reference them. This field is either
+        // null, or
+        /// fully-computed. Projects which are not referenced by any other project do not have a key in this
+        // map (i.e.
         /// they are omitted, as opposed to including them with an empty value).
         /// </summary>
         private ImmutableDictionary<
@@ -47,7 +52,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableHashSet<ProjectId>
         >? _lazyReverseReferencesMap;
 
-        // These are computed fully on demand. ImmutableArray.IsDefault indicates the item needs to be realized
+        // These are computed fully on demand. ImmutableArray.IsDefault indicates the item needs to be
+        // realized
         private ImmutableArray<ProjectId> _lazyTopologicallySortedProjects;
 
         // This is not typed ImmutableArray<ImmutableArray<...>> because GetDependencySets() wants to return
@@ -55,7 +61,8 @@ namespace Microsoft.CodeAnalysis
         // to an IEnumerable<IEnumerable<...>> without a bunch of boxing.
         private ImmutableArray<IEnumerable<ProjectId>> _lazyDependencySets;
 
-        // These accumulate results on demand. They are never null, but a missing key/value pair indicates it needs to be computed.
+        // These accumulate results on demand. They are never null, but a missing key/value pair indicates
+        // it needs to be computed.
         private ImmutableDictionary<
             ProjectId,
             ImmutableHashSet<ProjectId>
@@ -66,9 +73,12 @@ namespace Microsoft.CodeAnalysis
         > _reverseTransitiveReferencesMap;
 
         /// <remarks>
-        ///   Intentionally created with a null reverseReferencesMap. Doing so indicates _lazyReverseReferencesMap
-        ///    shouldn't be calculated until reverse reference information is requested. Once this information
-        ///    has been calculated, forks of this PDG will calculate their new reverse references in a non-lazy fashion.
+        ///   Intentionally created with a null reverseReferencesMap. Doing so indicates
+        // _lazyReverseReferencesMap
+        ///    shouldn't be calculated until reverse reference information is requested. Once this
+        // information
+        ///    has been calculated, forks of this PDG will calculate their new reverse references in a
+        // non-lazy fashion.
         /// </remarks>
         internal static readonly ProjectDependencyGraph Empty =
             new(
@@ -101,7 +111,8 @@ namespace Microsoft.CodeAnalysis
                 default
             ) { }
 
-        // This constructor is private to prevent other Roslyn code from producing this type with inconsistent inputs.
+        // This constructor is private to prevent other Roslyn code from producing this type with
+        // inconsistent inputs.
         private ProjectDependencyGraph(
             ImmutableHashSet<ProjectId> projectIds,
             ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>> referencesMap,
@@ -163,7 +174,8 @@ namespace Microsoft.CodeAnalysis
 
             if (!_referencesMap.ContainsKey(projectId))
             {
-                // This project doesn't have any references currently, so we delegate to WithAdditionalProjectReferences
+                // This project doesn't have any references currently, so we delegate to
+                // WithAdditionalProjectReferences
                 return WithAdditionalProjectReferences(projectId, projectReferences);
             }
             else if (projectReferences.Count == 0)
@@ -172,8 +184,10 @@ namespace Microsoft.CodeAnalysis
                 return WithAllProjectReferencesRemoved(projectId);
             }
 
-            // This method we can't optimize very well: changing project references arbitrarily could invalidate pretty much anything.
-            // The only thing we can reuse is our actual map of project references for all the other projects, so we'll do that.
+            // This method we can't optimize very well: changing project references arbitrarily could invalidate
+            // pretty much anything.
+            // The only thing we can reuse is our actual map of project references for all the other projects,
+            // so we'll do that.
 
             // only include projects contained in the solution:
             var referencedProjectIds = projectReferences.IsEmpty()
@@ -269,7 +283,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the list of projects that directly or transitively this project depends on, if it has already been
+        /// Gets the list of projects that directly or transitively this project depends on, if it has
+        // already been
         /// cached.
         /// </summary>
         internal ImmutableHashSet<ProjectId>? TryGetProjectsThatThisProjectTransitivelyDependsOn(
@@ -417,7 +432,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Returns all the projects for the solution in a topologically sorted order with respect
-        /// to their dependencies. Projects that depend on other projects will always show up later in this sequence
+        /// to their dependencies. Projects that depend on other projects will always show up later in this
+        // sequence
         /// than the projects they depend on.
         /// </summary>
         public IEnumerable<ProjectId> GetTopologicallySortedProjects(
@@ -641,7 +657,8 @@ namespace Microsoft.CodeAnalysis
         internal readonly struct TestAccessor(ProjectDependencyGraph instance)
         {
             /// <summary>
-            /// Gets the list of projects that directly or transitively depend on this project, if it has already been
+            /// Gets the list of projects that directly or transitively depend on this project, if it has
+            // already been
             /// cached.
             /// </summary>
             public ImmutableHashSet<ProjectId>? TryGetProjectsThatTransitivelyDependOnThisProject(
@@ -666,7 +683,8 @@ namespace Microsoft.CodeAnalysis
             ProjectId potentialDependency
         )
         {
-            // Check the dependency graph to see if project 'id' directly or transitively depends on 'projectId'.
+            // Check the dependency graph to see if project 'id' directly or transitively depends on
+            // 'projectId'.
             // If the information is not available, do not compute it.
             var forwardDependencies = TryGetProjectsThatThisProjectTransitivelyDependsOn(id);
             if (forwardDependencies is object && forwardDependencies.Contains(potentialDependency))
@@ -674,7 +692,8 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            // Compute the set of all projects that depend on 'potentialDependency'. This information answers the same
+            // Compute the set of all projects that depend on 'potentialDependency'. This information answers
+            // the same
             // question as the previous check, but involves at most one transitive computation within the
             // dependency graph when you are checking multiple projects against the same potentialDependency.
             return GetProjectsThatTransitivelyDependOnThisProject(potentialDependency).Contains(id);

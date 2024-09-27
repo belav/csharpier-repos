@@ -19,7 +19,8 @@
     //   </assembly>
     // </typeCache>
     //
-    // This is used to store caches of files between AppDomain resets, leading to improved cold boot time
+    // This is used to store caches of files between AppDomain resets, leading to improved cold boot
+    // time
     // and more efficient use of memory.
 
     internal sealed class TypeCacheSerializer

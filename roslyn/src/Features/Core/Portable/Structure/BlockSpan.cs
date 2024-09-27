@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Structure
         public TextSpan HintSpan { get; } = hintSpan;
 
         /// <summary>
-        /// Gets the optional span of the primary header of the code block represented by this tag. For example, in the
+        /// Gets the optional span of the primary header of the code block represented by this tag. For
+        // example, in the
         /// following snippet of code:
         /// <code>
         ///     if (condition1)
@@ -47,8 +48,10 @@ namespace Microsoft.CodeAnalysis.Structure
         ///         // something else;
         ///     }
         /// </code>
-        /// The primary span representing "else" statement block would be the same as the <see cref="TextSpan"/> of
-        /// block span for the  "if" block. This allows structure visualizing features to provide more useful context
+        /// The primary span representing "else" statement block would be the same as the <see
+        // cref="TextSpan"/> of
+        /// block span for the  "if" block. This allows structure visualizing features to provide more
+        // useful context
         /// when visualizing "else" structure blocks.
         /// </summary>
         public (TextSpan textSpan, TextSpan hintSpan)? PrimarySpans { get; } = primarySpans;
@@ -59,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Structure
         public string BannerText { get; } = bannerText;
 
         /// <summary>
-        /// Whether or not this region should be automatically collapsed when the 'Collapse to Definitions' command is invoked.
+        /// Whether or not this region should be automatically collapsed when the 'Collapse to Definitions'
+        // command is invoked.
         /// </summary>
         public bool AutoCollapse { get; } = autoCollapse;
 

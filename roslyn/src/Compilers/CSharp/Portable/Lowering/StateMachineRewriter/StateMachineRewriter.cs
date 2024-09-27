@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 #nullable disable
         /// <summary>
-        /// True if the initial values of locals in the rewritten method and the initial thread ID need to be preserved. (e.g. enumerable iterator methods and async-enumerable iterator methods)
+        /// True if the initial values of locals in the rewritten method and the initial thread ID need to
+        // be preserved. (e.g. enumerable iterator methods and async-enumerable iterator methods)
         /// </summary>
         protected abstract bool PreserveInitialParameterValuesAndThreadId { get; }
 
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (PreserveInitialParameterValuesAndThreadId && CanGetThreadId())
             {
-                // if it is an enumerable or async-enumerable, and either Environment.CurrentManagedThreadId or Thread.ManagedThreadId are available
+                // if it is an enumerable or async-enumerable, and either Environment.CurrentManagedThreadId or
+                // Thread.ManagedThreadId are available
                 // add a field: int initialThreadId
                 initialThreadIdField = F.StateMachineField(
                     F.SpecialType(SpecialType.System_Int32),
@@ -236,8 +238,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // Calculate local debug id.
                             //
-                            // EnC: When emitting the baseline (gen 0) the id is stored in a custom debug information attached to the kickoff method.
-                            //      When emitting a delta the id is only used to map to the existing field in the previous generation.
+                            // EnC: When emitting the baseline (gen 0) the id is stored in a custom debug information attached
+                            // to the kickoff method.
+                            //      When emitting a delta the id is only used to map to the existing field in the previous
+                            // generation.
                             SyntaxNode declaratorSyntax = local.GetDeclaratorSyntax();
                             int syntaxOffset = method.CalculateLocalSyntaxOffset(
                                 LambdaUtilities.GetDeclaratorPosition(declaratorSyntax),
@@ -522,7 +526,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(CanGetThreadId());
 
             // .NET Core has removed the Thread class. We can get the managed thread id by making a call to
-            // Environment.CurrentManagedThreadId. If that method is not present (pre 4.5) fall back to the old behavior.
+            // Environment.CurrentManagedThreadId. If that method is not present (pre 4.5) fall back to the old
+            // behavior.
 
             var currentManagedThreadIdProperty = (PropertySymbol)
                 F.WellKnownMember(
@@ -567,7 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             //        result = new {StateMachineType}({initialState});
             //    }
             //
-            //    result.parameter = this.parameterProxy; // OR more complex initialization for async-iterator parameter marked with [EnumeratorCancellation]
+            //    result.parameter = this.parameterProxy; // OR more complex initialization for async-iterator
+            // parameter marked with [EnumeratorCancellation]
 
             // The implementation doesn't depend on the method body of the iterator method.
             // Only on its parameters and staticness.
@@ -707,7 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if either Thread.ManagedThreadId or Environment.CurrentManagedThreadId are available
+        /// Returns true if either Thread.ManagedThreadId or Environment.CurrentManagedThreadId are
+        // available
         /// </summary>
         protected bool CanGetThreadId()
         {

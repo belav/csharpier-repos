@@ -185,7 +185,8 @@ class Program
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (10,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (10,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0.
+                // Please use language version 10.0 or greater.
                 //     public S2()
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S2")
                     .WithArguments("parameterless struct constructors", "10.0")
@@ -797,22 +798,26 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (32,11): error CS0221: Constant value '128' cannot be converted to a 'S8' (use 'unchecked' syntax to override)
+                    // (32,11): error CS0221: Constant value '128' cannot be converted to a 'S8' (use 'unchecked' syntax
+                    // to override)
                     //         F(S8.Max + 1); // 128 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S8.Max + 1")
                         .WithArguments("128", "S8")
                         .WithLocation(32, 11),
-                    // (33,11): error CS0221: Constant value '256' cannot be converted to a 'U8' (use 'unchecked' syntax to override)
+                    // (33,11): error CS0221: Constant value '256' cannot be converted to a 'U8' (use 'unchecked' syntax
+                    // to override)
                     //         F(U8.Max + 1); // 256 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U8.Max + 1")
                         .WithArguments("256", "U8")
                         .WithLocation(33, 11),
-                    // (34,11): error CS0221: Constant value '32768' cannot be converted to a 'S16' (use 'unchecked' syntax to override)
+                    // (34,11): error CS0221: Constant value '32768' cannot be converted to a 'S16' (use 'unchecked'
+                    // syntax to override)
                     //         F(S16.Max + 1); // 32768 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S16.Max + 1")
                         .WithArguments("32768", "S16")
                         .WithLocation(34, 11),
-                    // (35,11): error CS0221: Constant value '65536' cannot be converted to a 'U16' (use 'unchecked' syntax to override)
+                    // (35,11): error CS0221: Constant value '65536' cannot be converted to a 'U16' (use 'unchecked'
+                    // syntax to override)
                     //         F(U16.Max + 1); // 65536 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U16.Max + 1")
                         .WithArguments("65536", "U16")
@@ -829,22 +834,26 @@ class C
                     // (39,11): error CS0220: The operation overflows at compile time in checked mode
                     //         F(U64.Max + 1); // overflows at compile time in checked mode
                     Diagnostic(ErrorCode.ERR_CheckedOverflow, "U64.Max + 1").WithLocation(39, 11),
-                    // (42,11): error CS0221: Constant value '129' cannot be converted to a 'S8' (use 'unchecked' syntax to override)
+                    // (42,11): error CS0221: Constant value '129' cannot be converted to a 'S8' (use 'unchecked' syntax
+                    // to override)
                     //         F(2 + S8.Max); // 129 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "2 + S8.Max")
                         .WithArguments("129", "S8")
                         .WithLocation(42, 11),
-                    // (43,11): error CS0221: Constant value '257' cannot be converted to a 'U8' (use 'unchecked' syntax to override)
+                    // (43,11): error CS0221: Constant value '257' cannot be converted to a 'U8' (use 'unchecked' syntax
+                    // to override)
                     //         F(2 + U8.Max); // 257 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "2 + U8.Max")
                         .WithArguments("257", "U8")
                         .WithLocation(43, 11),
-                    // (44,11): error CS0221: Constant value '32769' cannot be converted to a 'S16' (use 'unchecked' syntax to override)
+                    // (44,11): error CS0221: Constant value '32769' cannot be converted to a 'S16' (use 'unchecked'
+                    // syntax to override)
                     //         F(2 + S16.Max); // 32769 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "2 + S16.Max")
                         .WithArguments("32769", "S16")
                         .WithLocation(44, 11),
-                    // (45,11): error CS0221: Constant value '65537' cannot be converted to a 'U16' (use 'unchecked' syntax to override)
+                    // (45,11): error CS0221: Constant value '65537' cannot be converted to a 'U16' (use 'unchecked'
+                    // syntax to override)
                     //         F(2 + U16.Max); // 65537 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "2 + U16.Max")
                         .WithArguments("65537", "U16")
@@ -861,12 +870,14 @@ class C
                     // (49,11): error CS0220: The operation overflows at compile time in checked mode
                     //         F(2 + U64.Max); // overflows at compile time in checked mode
                     Diagnostic(ErrorCode.ERR_CheckedOverflow, "2 + U64.Max").WithLocation(49, 11),
-                    // (53,11): error CS0221: Constant value '-1' cannot be converted to a 'byte' (use 'unchecked' syntax to override)
+                    // (53,11): error CS0221: Constant value '-1' cannot be converted to a 'byte' (use 'unchecked'
+                    // syntax to override)
                     //         F(U8.Min - U8.MinPlusOne); // -1 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U8.Min - U8.MinPlusOne")
                         .WithArguments("-1", "byte")
                         .WithLocation(53, 11),
-                    // (55,11): error CS0221: Constant value '-1' cannot be converted to a 'ushort' (use 'unchecked' syntax to override)
+                    // (55,11): error CS0221: Constant value '-1' cannot be converted to a 'ushort' (use 'unchecked'
+                    // syntax to override)
                     //         F(U16.Min - U16.MinPlusOne); // -1 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U16.Min - U16.MinPlusOne")
                         .WithArguments("-1", "ushort")
@@ -879,22 +890,26 @@ class C
                     //         F(U64.Min - U64.MinPlusOne); // overflows at compile time in checked mode
                     Diagnostic(ErrorCode.ERR_CheckedOverflow, "U64.Min - U64.MinPlusOne")
                         .WithLocation(59, 11),
-                    // (62,11): error CS0221: Constant value '-255' cannot be converted to a 'sbyte' (use 'unchecked' syntax to override)
+                    // (62,11): error CS0221: Constant value '-255' cannot be converted to a 'sbyte' (use 'unchecked'
+                    // syntax to override)
                     //         F(S8.Min - S8.Max); // -255 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S8.Min - S8.Max")
                         .WithArguments("-255", "sbyte")
                         .WithLocation(62, 11),
-                    // (63,11): error CS0221: Constant value '-255' cannot be converted to a 'byte' (use 'unchecked' syntax to override)
+                    // (63,11): error CS0221: Constant value '-255' cannot be converted to a 'byte' (use 'unchecked'
+                    // syntax to override)
                     //         F(U8.Min - U8.Max); // -255 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U8.Min - U8.Max")
                         .WithArguments("-255", "byte")
                         .WithLocation(63, 11),
-                    // (64,11): error CS0221: Constant value '-65535' cannot be converted to a 'short' (use 'unchecked' syntax to override)
+                    // (64,11): error CS0221: Constant value '-65535' cannot be converted to a 'short' (use 'unchecked'
+                    // syntax to override)
                     //         F(S16.Min - S16.Max); // -65535 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S16.Min - S16.Max")
                         .WithArguments("-65535", "short")
                         .WithLocation(64, 11),
-                    // (65,11): error CS0221: Constant value '-65535' cannot be converted to a 'ushort' (use 'unchecked' syntax to override)
+                    // (65,11): error CS0221: Constant value '-65535' cannot be converted to a 'ushort' (use 'unchecked'
+                    // syntax to override)
                     //         F(U16.Min - U16.Max); // -65535 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U16.Min - U16.Max")
                         .WithArguments("-65535", "ushort")
@@ -915,12 +930,14 @@ class C
                     //         F(U64.Min - U64.Max); // overflows at compile time in checked mode
                     Diagnostic(ErrorCode.ERR_CheckedOverflow, "U64.Min - U64.Max")
                         .WithLocation(69, 11),
-                    // (72,11): error CS0221: Constant value '255' cannot be converted to a 'sbyte' (use 'unchecked' syntax to override)
+                    // (72,11): error CS0221: Constant value '255' cannot be converted to a 'sbyte' (use 'unchecked'
+                    // syntax to override)
                     //         F(S8.Max - S8.Min); // 255 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S8.Max - S8.Min")
                         .WithArguments("255", "sbyte")
                         .WithLocation(72, 11),
-                    // (74,11): error CS0221: Constant value '65535' cannot be converted to a 'short' (use 'unchecked' syntax to override)
+                    // (74,11): error CS0221: Constant value '65535' cannot be converted to a 'short' (use 'unchecked'
+                    // syntax to override)
                     //         F(S16.Max - S16.Min); // 65535 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S16.Max - S16.Min")
                         .WithArguments("65535", "short")
@@ -933,22 +950,26 @@ class C
                     //         F(S64.Max - S64.Min); // overflows at compile time in checked mode
                     Diagnostic(ErrorCode.ERR_CheckedOverflow, "S64.Max - S64.Min")
                         .WithLocation(78, 11),
-                    // (82,11): error CS0221: Constant value '-130' cannot be converted to a 'S8' (use 'unchecked' syntax to override)
+                    // (82,11): error CS0221: Constant value '-130' cannot be converted to a 'S8' (use 'unchecked'
+                    // syntax to override)
                     //         F(S8.Min - 2); // -130 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S8.Min - 2")
                         .WithArguments("-130", "S8")
                         .WithLocation(82, 11),
-                    // (83,11): error CS0221: Constant value '-2' cannot be converted to a 'U8' (use 'unchecked' syntax to override)
+                    // (83,11): error CS0221: Constant value '-2' cannot be converted to a 'U8' (use 'unchecked' syntax
+                    // to override)
                     //         F(U8.Min - 2); // -2 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U8.Min - 2")
                         .WithArguments("-2", "U8")
                         .WithLocation(83, 11),
-                    // (84,11): error CS0221: Constant value '-32770' cannot be converted to a 'S16' (use 'unchecked' syntax to override)
+                    // (84,11): error CS0221: Constant value '-32770' cannot be converted to a 'S16' (use 'unchecked'
+                    // syntax to override)
                     //         F(S16.Min - 2); // -32770 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "S16.Min - 2")
                         .WithArguments("-32770", "S16")
                         .WithLocation(84, 11),
-                    // (85,11): error CS0221: Constant value '-2' cannot be converted to a 'U16' (use 'unchecked' syntax to override)
+                    // (85,11): error CS0221: Constant value '-2' cannot be converted to a 'U16' (use 'unchecked' syntax
+                    // to override)
                     //         F(U16.Min - 2); // -2 cannot be converted to ...
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "U16.Min - 2")
                         .WithArguments("-2", "U16")
@@ -1820,7 +1841,8 @@ class C
                     Diagnostic(ErrorCode.ERR_NotConstantExpression, "s1")
                         .WithArguments("s2")
                         .WithLocation(12, 27),
-                    // (14,27): error CS0134: 'o1' is of type 'object'. A const field of a reference type other than string can only be initialized with null.
+                    // (14,27): error CS0134: 'o1' is of type 'object'. A const field of a reference type other than
+                    // string can only be initialized with null.
                     //         const object o1 = "hello"; // Constants of ref type other than string must be null.
                     Diagnostic(ErrorCode.ERR_NotNullConstRefField, @"""hello""")
                         .WithArguments("o1", "object")
@@ -1841,27 +1863,32 @@ class C
                     //         int y = (1 / 0) + (1L/0L) + (1UL/0UL) + (1M/0M) + (-79228162514264337593543950335m - 1m);
                     Diagnostic(ErrorCode.ERR_DecConstError, "-79228162514264337593543950335m - 1m")
                         .WithLocation(16, 60),
-                    // (18,28): error CS0110: The evaluation of the constant value for 'z' involves a circular definition
+                    // (18,28): error CS0110: The evaluation of the constant value for 'z' involves a circular
+                    // definition
                     //         const int z = 1 + (z + 1);
                     Diagnostic(ErrorCode.ERR_CircConstValue, "z")
                         .WithArguments("z")
                         .WithLocation(18, 28),
-                    // (20,29): error CS0221: Constant value '9838263505978427528' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (20,29): error CS0221: Constant value '9838263505978427528' cannot be converted to a 'int' (use
+                    // 'unchecked' syntax to override)
                     //         int intConversion = (int)0x8888888888888888;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)0x8888888888888888")
                         .WithArguments("9838263505978427528", "int")
                         .WithLocation(20, 29),
-                    // (21,31): error CS0221: Constant value '9838263505978427528' cannot be converted to a 'uint' (use 'unchecked' syntax to override)
+                    // (21,31): error CS0221: Constant value '9838263505978427528' cannot be converted to a 'uint' (use
+                    // 'unchecked' syntax to override)
                     //         uint uintConversion = (uint)0x8888888888888888;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(uint)0x8888888888888888")
                         .WithArguments("9838263505978427528", "uint")
                         .WithLocation(21, 31),
-                    // (22,31): error CS0221: Constant value '9838263505978427528' cannot be converted to a 'long' (use 'unchecked' syntax to override)
+                    // (22,31): error CS0221: Constant value '9838263505978427528' cannot be converted to a 'long' (use
+                    // 'unchecked' syntax to override)
                     //         long longConversion = (long)0x8888888888888888;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(long)0x8888888888888888")
                         .WithArguments("9838263505978427528", "long")
                         .WithLocation(22, 31),
-                    // (23,33): error CS0221: Constant value '1E+50' cannot be converted to a 'ulong' (use 'unchecked' syntax to override)
+                    // (23,33): error CS0221: Constant value '1E+50' cannot be converted to a 'ulong' (use 'unchecked'
+                    // syntax to override)
                     //         ulong ulongConversion = (ulong)1E50;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(ulong)1E50")
                         .WithArguments("1E+50", "ulong")
@@ -2940,7 +2967,8 @@ float.PositiveInfinity --> Infinity
             compilation
                 .GetDeclarationDiagnostics()
                 .Verify(
-                    // (3,18): error CS0110: The evaluation of the constant value for 'C.F' involves a circular definition
+                    // (3,18): error CS0110: The evaluation of the constant value for 'C.F' involves a circular
+                    // definition
                     Diagnostic(CSharp.ErrorCode.ERR_CircConstValue, "F")
                         .WithArguments("C.F")
                         .WithLocation(3, 18)
@@ -2965,12 +2993,14 @@ float.PositiveInfinity --> Infinity
 
             var expected = new[]
             {
-                // (4,5): error CS0110: The evaluation of the constant value for 'C.B' involves a circular definition
+                // (4,5): error CS0110: The evaluation of the constant value for 'C.B' involves a circular
+                // definition
                 //     B = A + C + D + E,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "B")
                     .WithArguments("C.B")
                     .WithLocation(4, 5),
-                // (8,5): error CS0110: The evaluation of the constant value for 'C.F' involves a circular definition
+                // (8,5): error CS0110: The evaluation of the constant value for 'C.F' involves a circular
+                // definition
                 //     F = G,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "F")
                     .WithArguments("C.F")
@@ -3066,14 +3096,16 @@ public class F
             compilation4.VerifyDiagnostics();
             compilation3.VerifyDiagnostics();
             compilation2.VerifyDiagnostics(
-                // (3,25): error CS0110: The evaluation of the constant value for 'D.D1' involves a circular definition
+                // (3,25): error CS0110: The evaluation of the constant value for 'D.D1' involves a circular
+                // definition
                 //     public const string D1 = D1;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "D1")
                     .WithArguments("D.D1")
                     .WithLocation(3, 25)
             );
             compilation1.VerifyDiagnostics(
-                // (3,25): error CS0110: The evaluation of the constant value for 'A.A1' involves a circular definition
+                // (3,25): error CS0110: The evaluation of the constant value for 'A.A1' involves a circular
+                // definition
                 //     public const string A1 = B.B1;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A1")
                     .WithArguments("A.A1")
@@ -3130,7 +3162,8 @@ class c1
                 // (4,21): error CS0031: Constant value '300' cannot be converted to a 'byte'
                 //     const byte Z1 = 300;
                 Diagnostic(ErrorCode.ERR_ConstOutOfRange, "300").WithArguments("300", "byte"),
-                // (5,21): error CS0221: Constant value '300' cannot be converted to a 'byte' (use 'unchecked' syntax to override)
+                // (5,21): error CS0221: Constant value '300' cannot be converted to a 'byte' (use 'unchecked'
+                // syntax to override)
                 //     const byte Z2 = (byte)300;
                 Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(byte)300")
                     .WithArguments("300", "byte")
@@ -3210,7 +3243,8 @@ class C{0}
             Parallel.ForEach(types, t => t.ForceComplete(null, default(CancellationToken)));
 
             compilation.VerifyDiagnostics(
-                // (4,22): error CS0110: The evaluation of the constant value for 'C0.X' involves a circular definition
+                // (4,22): error CS0110: The evaluation of the constant value for 'C0.X' involves a circular
+                // definition
                 //     public const int X = C1.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C0.X")
             );
@@ -3249,31 +3283,40 @@ class C{0}
 
             // All but C9.X, which is not (lexically) first in any cycle.
             compilation.VerifyDiagnostics(
-                // (4,22): error CS0110: The evaluation of the constant value for 'C0.X' involves a circular definition
+                // (4,22): error CS0110: The evaluation of the constant value for 'C0.X' involves a circular
+                // definition
                 //     public const int X = C1.X + C1.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C0.X"),
-                // (9,22): error CS0110: The evaluation of the constant value for 'C1.X' involves a circular definition
+                // (9,22): error CS0110: The evaluation of the constant value for 'C1.X' involves a circular
+                // definition
                 //     public const int X = C0.X + C2.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C1.X"),
-                // (14,22): error CS0110: The evaluation of the constant value for 'C2.X' involves a circular definition
+                // (14,22): error CS0110: The evaluation of the constant value for 'C2.X' involves a circular
+                // definition
                 //     public const int X = C1.X + C3.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C2.X"),
-                // (19,22): error CS0110: The evaluation of the constant value for 'C3.X' involves a circular definition
+                // (19,22): error CS0110: The evaluation of the constant value for 'C3.X' involves a circular
+                // definition
                 //     public const int X = C2.X + C4.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C3.X"),
-                // (24,22): error CS0110: The evaluation of the constant value for 'C4.X' involves a circular definition
+                // (24,22): error CS0110: The evaluation of the constant value for 'C4.X' involves a circular
+                // definition
                 //     public const int X = C3.X + C5.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C4.X"),
-                // (29,22): error CS0110: The evaluation of the constant value for 'C5.X' involves a circular definition
+                // (29,22): error CS0110: The evaluation of the constant value for 'C5.X' involves a circular
+                // definition
                 //     public const int X = C4.X + C6.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C5.X"),
-                // (34,22): error CS0110: The evaluation of the constant value for 'C6.X' involves a circular definition
+                // (34,22): error CS0110: The evaluation of the constant value for 'C6.X' involves a circular
+                // definition
                 //     public const int X = C5.X + C7.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C6.X"),
-                // (39,22): error CS0110: The evaluation of the constant value for 'C7.X' involves a circular definition
+                // (39,22): error CS0110: The evaluation of the constant value for 'C7.X' involves a circular
+                // definition
                 //     public const int X = C6.X + C8.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C7.X"),
-                // (44,22): error CS0110: The evaluation of the constant value for 'C8.X' involves a circular definition
+                // (44,22): error CS0110: The evaluation of the constant value for 'C8.X' involves a circular
+                // definition
                 //     public const int X = C7.X + C9.X;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("C8.X")
             );
@@ -3307,7 +3350,8 @@ enum E{0}
             Parallel.ForEach(types, t => t.ForceComplete(null, default(CancellationToken)));
 
             compilation.VerifyDiagnostics(
-                // (4,5): error CS0110: The evaluation of the constant value for 'E0.X' involves a circular definition
+                // (4,5): error CS0110: The evaluation of the constant value for 'E0.X' involves a circular
+                // definition
                 //     X = E1.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X").WithArguments("E0.X")
             );
@@ -3346,47 +3390,56 @@ enum E{0}
 
             // All but E9.X, which is not (lexically) first in any cycle.
             compilation.VerifyDiagnostics(
-                // (4,5): error CS0110: The evaluation of the constant value for 'E0.X' involves a circular definition
+                // (4,5): error CS0110: The evaluation of the constant value for 'E0.X' involves a circular
+                // definition
                 //     X = E1.X | E1.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E0.X")
                     .WithLocation(4, 5),
-                // (9,5): error CS0110: The evaluation of the constant value for 'E1.X' involves a circular definition
+                // (9,5): error CS0110: The evaluation of the constant value for 'E1.X' involves a circular
+                // definition
                 //     X = E0.X | E2.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E1.X")
                     .WithLocation(9, 5),
-                // (14,5): error CS0110: The evaluation of the constant value for 'E2.X' involves a circular definition
+                // (14,5): error CS0110: The evaluation of the constant value for 'E2.X' involves a circular
+                // definition
                 //     X = E1.X | E3.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E2.X")
                     .WithLocation(14, 5),
-                // (19,5): error CS0110: The evaluation of the constant value for 'E3.X' involves a circular definition
+                // (19,5): error CS0110: The evaluation of the constant value for 'E3.X' involves a circular
+                // definition
                 //     X = E2.X | E4.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E3.X")
                     .WithLocation(19, 5),
-                // (24,5): error CS0110: The evaluation of the constant value for 'E4.X' involves a circular definition
+                // (24,5): error CS0110: The evaluation of the constant value for 'E4.X' involves a circular
+                // definition
                 //     X = E3.X | E5.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E4.X")
                     .WithLocation(24, 5),
-                // (29,5): error CS0110: The evaluation of the constant value for 'E5.X' involves a circular definition
+                // (29,5): error CS0110: The evaluation of the constant value for 'E5.X' involves a circular
+                // definition
                 //     X = E4.X | E6.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E5.X")
                     .WithLocation(29, 5),
-                // (34,5): error CS0110: The evaluation of the constant value for 'E6.X' involves a circular definition
+                // (34,5): error CS0110: The evaluation of the constant value for 'E6.X' involves a circular
+                // definition
                 //     X = E5.X | E7.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E6.X")
                     .WithLocation(34, 5),
-                // (39,5): error CS0110: The evaluation of the constant value for 'E7.X' involves a circular definition
+                // (39,5): error CS0110: The evaluation of the constant value for 'E7.X' involves a circular
+                // definition
                 //     X = E6.X | E8.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E7.X")
                     .WithLocation(39, 5),
-                // (44,5): error CS0110: The evaluation of the constant value for 'E8.X' involves a circular definition
+                // (44,5): error CS0110: The evaluation of the constant value for 'E8.X' involves a circular
+                // definition
                 //     X = E7.X | E9.X
                 Diagnostic(ErrorCode.ERR_CircConstValue, "X")
                     .WithArguments("E8.X")
@@ -3425,7 +3478,8 @@ enum E{0}
             Parallel.ForEach(types, t => t.ForceComplete(null, default(CancellationToken)));
 
             compilation.VerifyDiagnostics(
-                // (4,5): error CS0110: The evaluation of the constant value for 'E0.A' involves a circular definition
+                // (4,5): error CS0110: The evaluation of the constant value for 'E0.A' involves a circular
+                // definition
                 //     A = E1.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E0.A")
             );
@@ -3467,31 +3521,40 @@ enum E{0}
 
             // All but E9.X, which is not (lexically) first in any cycle.
             compilation.VerifyDiagnostics(
-                // (4,5): error CS0110: The evaluation of the constant value for 'E0.A' involves a circular definition
+                // (4,5): error CS0110: The evaluation of the constant value for 'E0.A' involves a circular
+                // definition
                 //     A = E1.D | E1.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E0.A"),
-                // (12,5): error CS0110: The evaluation of the constant value for 'E1.A' involves a circular definition
+                // (12,5): error CS0110: The evaluation of the constant value for 'E1.A' involves a circular
+                // definition
                 //     A = E0.D | E2.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E1.A"),
-                // (20,5): error CS0110: The evaluation of the constant value for 'E2.A' involves a circular definition
+                // (20,5): error CS0110: The evaluation of the constant value for 'E2.A' involves a circular
+                // definition
                 //     A = E1.D | E3.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E2.A"),
-                // (28,5): error CS0110: The evaluation of the constant value for 'E3.A' involves a circular definition
+                // (28,5): error CS0110: The evaluation of the constant value for 'E3.A' involves a circular
+                // definition
                 //     A = E2.D | E4.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E3.A"),
-                // (36,5): error CS0110: The evaluation of the constant value for 'E4.A' involves a circular definition
+                // (36,5): error CS0110: The evaluation of the constant value for 'E4.A' involves a circular
+                // definition
                 //     A = E3.D | E5.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E4.A"),
-                // (44,5): error CS0110: The evaluation of the constant value for 'E5.A' involves a circular definition
+                // (44,5): error CS0110: The evaluation of the constant value for 'E5.A' involves a circular
+                // definition
                 //     A = E4.D | E6.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E5.A"),
-                // (52,5): error CS0110: The evaluation of the constant value for 'E6.A' involves a circular definition
+                // (52,5): error CS0110: The evaluation of the constant value for 'E6.A' involves a circular
+                // definition
                 //     A = E5.D | E7.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E6.A"),
-                // (60,5): error CS0110: The evaluation of the constant value for 'E7.A' involves a circular definition
+                // (60,5): error CS0110: The evaluation of the constant value for 'E7.A' involves a circular
+                // definition
                 //     A = E6.D | E8.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E7.A"),
-                // (68,5): error CS0110: The evaluation of the constant value for 'E8.A' involves a circular definition
+                // (68,5): error CS0110: The evaluation of the constant value for 'E8.A' involves a circular
+                // definition
                 //     A = E7.D | E9.D,
                 Diagnostic(ErrorCode.ERR_CircConstValue, "A").WithArguments("E8.A")
             );
@@ -3533,7 +3596,8 @@ class Program
                     parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
                 )
                 .VerifyDiagnostics(
-                    // (6,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (6,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         void f() { if () const int i = 0; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "f")
                         .WithArguments("local functions", "7.0")
@@ -3679,17 +3743,20 @@ void f() { if () const int i = 0; }
                     Diagnostic(ErrorCode.ERR_NotConstantExpression, @"(string)(object)""y""")
                         .WithArguments("y1")
                         .WithLocation(7, 27),
-                    // (9,27): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit conversion exists (are you missing a cast?)
+                    // (9,27): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         const string x2 = (object)null;
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(object)null")
                         .WithArguments("object", "string")
                         .WithLocation(9, 27),
-                    // (10,27): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit conversion exists (are you missing a cast?)
+                    // (10,27): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit
+                    // conversion exists (are you missing a cast?)
                     //         const string y2 = (object)"y";
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, @"(object)""y""")
                         .WithArguments("object", "string")
                         .WithLocation(10, 27),
-                    // (13,27): error CS0134: 'y3' is of type 'object'. A const field of a reference type other than string can only be initialized with null.
+                    // (13,27): error CS0134: 'y3' is of type 'object'. A const field of a reference type other than
+                    // string can only be initialized with null.
                     //         const object y3 = "y";
                     Diagnostic(ErrorCode.ERR_NotNullConstRefField, @"""y""")
                         .WithArguments("y3", "object")
@@ -3699,12 +3766,14 @@ void f() { if () const int i = 0; }
                     Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, @"(string)(object)""b""")
                         .WithArguments("string")
                         .WithLocation(19, 18),
-                    // (21,18): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit conversion exists (are you missing a cast?)
+                    // (21,18): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit
+                    // conversion exists (are you missing a cast?)
                     //             case (object)null:
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(object)null")
                         .WithArguments("object", "string")
                         .WithLocation(21, 18),
-                    // (23,18): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit conversion exists (are you missing a cast?)
+                    // (23,18): error CS0266: Cannot implicitly convert type 'object' to 'string'. An explicit
+                    // conversion exists (are you missing a cast?)
                     //             case (object)"b":
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, @"(object)""b""")
                         .WithArguments("object", "string")
@@ -3743,7 +3812,8 @@ class C
                 references: new[] { LinqAssemblyRef }
             );
             comp.VerifyDiagnostics(
-                // (9,9): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.IEnumerable<<anonymous type: int E>>' to 'int'
+                // (9,9): error CS0029: Cannot implicitly convert type
+                // 'System.Collections.Generic.IEnumerable<<anonymous type: int E>>' to 'int'
                 //         c.Select(o => new { E = F });
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c.Select(o => new { E = F })")
                     .WithArguments(
@@ -3782,7 +3852,8 @@ class C
             );
         }
 
-        // Attempting to call `ConstantValue` on every constituent string component times out the IOperation runner.
+        // Attempting to call `ConstantValue` on every constituent string component times out the IOperation
+        // runner.
         // Instead, we manually validate just the top level
         [
             ConditionalFact(typeof(NoIOperationValidation)),
@@ -3791,7 +3862,8 @@ class C
         public void TestLargeStringConcatenation()
         {
             // When the compiler folds string concatenations using an O(n^2) algorithm, this program cannot be
-            // compiled within ordinary memory bounds.  However, when the compiler uses an O(n) algorithm, it can.
+            // compiled within ordinary memory bounds.  However, when the compiler uses an O(n) algorithm, it
+            // can.
             string source0 =
                 @"
 class C
@@ -4282,22 +4354,26 @@ class C
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (12,4): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (12,4): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // [A($"ITEM")]
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""ITEM""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(12, 4),
-                // (15,23): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (15,23): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //     const string S0 = $"Post";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Post""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(15, 23),
-                // (25,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (25,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string S1 = $"Testing";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Testing""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(25, 27),
-                // (26,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (26,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string S2 = $"{"Level 5"} {"Number 3"}";
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
@@ -4305,7 +4381,8 @@ class C
                     )
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(26, 27),
-                // (27,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (27,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string S3 = $"{$"{"Spinning Top"}"}";
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
@@ -4313,27 +4390,32 @@ class C
                     )
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(27, 27),
-                // (28,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (28,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string S4 = $"Hybrid" + "Testing" + "123";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Hybrid""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(28, 27),
-                // (29,50): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (29,50): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string S5 = "Hybrid" + "Testing" + $"321";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""321""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(29, 50),
-                // (30,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (30,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string F1 = $"{S1}";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""{S1}""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(30, 27),
-                // (31,32): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (31,32): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string F2 = F1 + $" the {S2}";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$"" the {S2}""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(31, 32),
-                // (34,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (34,27): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         const string S6 = $"Failed to {VS}";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Failed to {VS}""")
                     .WithArguments("constant interpolated strings", "10.0")
@@ -4343,17 +4425,20 @@ class C
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, @"$""Failed to {VS}""")
                     .WithArguments("S6")
                     .WithLocation(34, 27),
-                // (37,25): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (37,25): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //     void M2(string S1 = $"Testing", object O = null, Namae N = null)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Testing""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(37, 25),
-                // (40,18): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (40,18): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //             case $"Level 5":
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Level 5""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(40, 18),
-                // (44,30): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (44,30): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //         if (N is Namae { X : $"ConstantInterpolatedString"}){
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
@@ -4361,17 +4446,20 @@ class C
                     )
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(44, 30),
-                // (46,22): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (46,22): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //                 case $"Number 3":
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Number 3""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(46, 22),
-                // (48,22): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (48,22): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //                 case $"Radio Noise":
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Radio Noise""")
                     .WithArguments("constant interpolated strings", "10.0")
                     .WithLocation(48, 22),
-                // (49,31): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (49,31): error CS8773: Feature 'constant interpolated strings' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //                     goto case $"Number 3";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, @"$""Number 3""")
                     .WithArguments("constant interpolated strings", "10.0")

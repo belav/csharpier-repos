@@ -241,7 +241,8 @@ namespace GHTTests
         }
 
         /// <summary>
-        /// checks if a given type is derived from ListControl, and thus should be bound to data in order to display content.
+        /// checks if a given type is derived from ListControl, and thus should be bound to data in order to
+        // display content.
         /// </summary>
         /// <param name="ctrlType">The type to test.</param>
         /// <returns>True if the ctrlType is derived from ListControl, otherwise false.</returns>
@@ -251,7 +252,8 @@ namespace GHTTests
         }
 
         /// <summary>
-        /// Creates a control of the specified type, if it is a ListControl derived, then bounds it to data source.
+        /// Creates a control of the specified type, if it is a ListControl derived, then bounds it to data
+        // source.
         /// </summary>
         /// <param name="ctrlType">Type of control to create.</param>
         private Control GetListControlDerived(Type ctrlType, bool a_AddToPage)
@@ -280,7 +282,8 @@ namespace GHTTests
         }
 
         /// <summary>
-        /// checks if a given type is an item of an iterative control, and thus should be checked in tis controls context.
+        /// checks if a given type is an item of an iterative control, and thus should be checked in tis
+        // controls context.
         /// </summary>
         /// <param name="ctrlType">The type to test.</param>
         /// <returns>True if the ctrlType is an iteative control item, otherwise false.</returns>
@@ -590,7 +593,8 @@ namespace GHTTests
         }
 
         /// <summary>
-        /// Compare validator must have either ValueToCompare or ControlToCompare set, before the page is loaded.
+        /// Compare validator must have either ValueToCompare or ControlToCompare set, before the page is
+        // loaded.
         /// </summary>
         private void HandleCompareValidator(Control l_cToTest)
         {
@@ -603,7 +607,8 @@ namespace GHTTests
         }
 
         /// <summary>
-        /// Compare validator must have either ValueToCompare or ControlToCompare set, before the page is loaded.
+        /// Compare validator must have either ValueToCompare or ControlToCompare set, before the page is
+        // loaded.
         /// </summary>
         private void HandleCompareValidator()
         {
@@ -715,7 +720,8 @@ namespace GHTTests
         }
 
         /// <summary>
-        /// Sets a unique unified id to the tested control based on the count of controls produced by this base.
+        /// Sets a unique unified id to the tested control based on the count of controls produced by this
+        // base.
         /// </summary>
         private void SetId()
         {

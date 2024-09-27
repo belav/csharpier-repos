@@ -36,9 +36,9 @@ namespace MonoTests.System.Windows.Forms
     [TestFixture]
     public class ListViewCollectionsTest : TestHelper
     {
-        /*
-            ColumnHeaderCollection
-        */
+/*
+ColumnHeaderCollection
+*/
         [Test]
         public void ColumnHeaderCollectionTest_PropertiesTest()
         {
@@ -177,9 +177,9 @@ namespace MonoTests.System.Windows.Forms
             Assert.IsNull(colC.ListView, "#C4");
         }
 
-        /*
-            CheckedIndexCollection
-        */
+/*
+CheckedIndexCollection
+*/
         [Test]
         public void CheckedIndexCollectionTest_PropertiesTest()
         {
@@ -235,9 +235,9 @@ namespace MonoTests.System.Windows.Forms
             ((IList)listview.CheckedIndices).RemoveAt(5);
         }
 
-        /*
-            CheckedItemCollection
-        */
+/*
+CheckedItemCollection
+*/
         [Test]
         public void CheckedItemCollectionTest_PropertiesTest()
         {
@@ -422,9 +422,9 @@ namespace MonoTests.System.Windows.Forms
             ((IList)listview.CheckedItems).RemoveAt(5);
         }
 
-        /*
-            SelectedIndexCollection
-        */
+/*
+SelectedIndexCollection
+*/
         [Test]
         public void SelectedIndexCollectionTest_PropertiesTest()
         {
@@ -1073,9 +1073,9 @@ namespace MonoTests.System.Windows.Forms
             catch (ArgumentOutOfRangeException) { }
         }
 
-        /*
-            SelectedItemCollection
-        */
+/*
+SelectedItemCollection
+*/
         [Test]
         public void SelectedItemCollectionTest_PropertiesTest()
         {
@@ -1440,9 +1440,9 @@ namespace MonoTests.System.Windows.Forms
             form.Dispose();
         }
 
-        /*
-            ListViewItemCollection
-        */
+/*
+ListViewItemCollection
+*/
 
         [Test]
         public void ListViewItemCollectionTest_Add()
@@ -1671,7 +1671,8 @@ namespace MonoTests.System.Windows.Forms
         [ExpectedException(typeof(ArgumentException))] // An item cannot be added to more than one ListView. To add an item again, you need to clone it
         public void ListViewItemCollectionTest_AddRange_OwnedItem()
         {
-            //MSDN told us, we can use this method to reuse items from a different ListView control. That is not true.
+            //MSDN told us, we can use this method to reuse items from a different ListView control. That is not
+            // true.
             ListView lv1 = new ListView();
             ListView lv2 = new ListView();
             ListViewItem a = lv1.Items.Add("Item1");

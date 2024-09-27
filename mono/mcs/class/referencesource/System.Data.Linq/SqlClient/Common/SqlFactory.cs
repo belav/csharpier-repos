@@ -236,7 +236,8 @@ namespace System.Data.Linq.SqlClient
         }
 
         /// <summary>
-        /// This represents the SQL DATALENGTH function, which is the raw number of bytes in the argument.  In the
+        /// This represents the SQL DATALENGTH function, which is the raw number of bytes in the argument.
+        // In the
         /// case of string types it will count trailing spaces, but doesn't understand unicode.
         /// </summary>
         internal SqlExpression DATALENGTH(SqlExpression expr)
@@ -250,7 +251,8 @@ namespace System.Data.Linq.SqlClient
         }
 
         /// <summary>
-        /// A unary function that uses DATALENGTH, dividing by two if the string is unicode.  This is the internal
+        /// A unary function that uses DATALENGTH, dividing by two if the string is unicode.  This is the
+        // internal
         /// form of String.Length that should always be used.
         /// </summary>
         internal SqlExpression CLRLENGTH(SqlExpression expr)
@@ -1031,7 +1033,8 @@ namespace System.Data.Linq.SqlClient
             Expression source
         )
         {
-            // if the new item is on the right side of some outer join then fixup the projection to reflect that it can possibly be null
+            // if the new item is on the right side of some outer join then fixup the projection to reflect that
+            // it can possibly be null
             if (joinType == SqlJoinType.LeftOuter)
             {
                 SqlSelect sel = alias.Node as SqlSelect;

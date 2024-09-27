@@ -3,7 +3,7 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    NegoEnumProperties.cs
+NegoEnumProperties.cs
 
 --*/
 

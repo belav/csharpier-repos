@@ -100,8 +100,10 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2ProxyRestriction"/> that specified limitations that the asserting party imposes on relying parties
-        /// that wish to subsequently act as asserting parties themselves and issue assertions of their own on the basis of the information contained in
+        /// Gets or sets the <see cref="Saml2ProxyRestriction"/> that specified limitations that the
+        // asserting party imposes on relying parties
+        /// that wish to subsequently act as asserting parties themselves and issue assertions of their own
+        // on the basis of the information contained in
         /// the original assertion. [Saml2Core, 2.5.1]
         /// </summary>
         public Saml2ProxyRestriction ProxyRestriction

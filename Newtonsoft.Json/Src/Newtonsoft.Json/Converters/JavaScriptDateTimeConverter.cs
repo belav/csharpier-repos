@@ -30,7 +30,8 @@ using Newtonsoft.Json.Utilities;
 namespace Newtonsoft.Json.Converters
 {
     /// <summary>
-    /// Converts a <see cref="DateTime"/> to and from a JavaScript <c>Date</c> constructor (e.g. <c>new Date(52231943)</c>).
+    /// Converts a <see cref="DateTime"/> to and from a JavaScript <c>Date</c> constructor (e.g. <c>new
+    // Date(52231943)</c>).
     /// </summary>
     public class JavaScriptDateTimeConverter : DateTimeConverterBase
     {
@@ -73,7 +74,8 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <param name="reader">The <see cref="JsonReader"/> to read from.</param>
         /// <param name="objectType">Type of the object.</param>
-        /// <param name="existingValue">The existing property value of the JSON that is being converted.</param>
+        /// <param name="existingValue">The existing property value of the JSON that is being
+        // converted.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
         public override object? ReadJson(

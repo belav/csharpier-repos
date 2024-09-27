@@ -20,7 +20,8 @@ namespace System.Threading
         /// </summary>
         private static readonly AutoResetEvent s_timerEvent = new AutoResetEvent(false);
 
-        // this means that it's in the s_scheduledTimers collection, not that it's the one which would run on the next TimeoutCallback
+        // this means that it's in the s_scheduledTimers collection, not that it's the one which would run
+        // on the next TimeoutCallback
         private bool _isScheduled;
         private long _scheduledDueTimeMs;
 
@@ -40,7 +41,8 @@ namespace System.Threading
             };
             timerThread.UnsafeStart();
 
-            // Do this after creating the thread in case thread creation fails so that it will try again next time
+            // Do this after creating the thread in case thread creation fails so that it will try again next
+            // time
             s_scheduledTimers = timers;
             return timers;
         }

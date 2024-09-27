@@ -132,9 +132,14 @@ public static class IdentityBuilderExtensions
     }
 
     /// <summary>
-    /// Adds configuration and services needed to support <see cref="IdentityApiEndpointRouteBuilderExtensions.MapIdentityApi{TUser}(IEndpointRouteBuilder)"/>
-    /// but does not configure authentication. Call <see cref="BearerTokenExtensions.AddBearerToken(AuthenticationBuilder, Action{BearerTokenOptions}?)"/> and/or
-    /// <see cref="IdentityCookieAuthenticationBuilderExtensions.AddIdentityCookies(AuthenticationBuilder)"/> to configure authentication separately.
+    /// Adds configuration and services needed to support <see
+    // cref="IdentityApiEndpointRouteBuilderExtensions.MapIdentityApi{TUser}(IEndpointRouteBuilder)"/>
+    /// but does not configure authentication. Call <see
+    // cref="BearerTokenExtensions.AddBearerToken(AuthenticationBuilder, Action{BearerTokenOptions}?)"/>
+    // and/or
+    /// <see
+    // cref="IdentityCookieAuthenticationBuilderExtensions.AddIdentityCookies(AuthenticationBuilder)"/> to
+    // configure authentication separately.
     /// </summary>
     /// <param name="builder">The <see cref="IdentityBuilder"/>.</param>
     /// <returns>The <see cref="IdentityBuilder"/>.</returns>

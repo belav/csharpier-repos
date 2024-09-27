@@ -775,7 +775,8 @@ public class EmitterTests
         Assert.Empty(diagnostics);
     }
 
-    // Testing on all existing & eligible annotations extending ValidationAttribute that aren't used above
+    // Testing on all existing & eligible annotations extending ValidationAttribute that aren't used
+    // above
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public async Task ShouldNotProduceAnyMessagesWhenExistingValidationsArePlaced()
     {
@@ -1259,7 +1260,8 @@ public class EmitterTests
                         diag.Id
                     );
 
-                    // validate the location is inside the MyOptions class and not outside the compilation which is in the referenced assembly
+                    // validate the location is inside the MyOptions class and not outside the compilation which is in
+                    // the referenced assembly
                     Assert.StartsWith("src-0.cs: (12,", diag.Location.GetLineSpan().ToString());
                 },
                 assemblyPath,
@@ -1751,7 +1753,8 @@ public class EmitterTests
         );
         var diags = syntaxTree.GetDiagnostics().ToArray();
         Assert.Equal(1, diags.Length);
-        // error CS8107: Feature 'nullable reference types' is not available in C# 7.0. Please use language version 8.0 or greater.
+        // error CS8107: Feature 'nullable reference types' is not available in C# 7.0. Please use language
+        // version 8.0 or greater.
         Assert.Equal("CS8107", diags[0].Id);
 
         // Compile the generated code with C# 8.0 and verify that it succeeds.

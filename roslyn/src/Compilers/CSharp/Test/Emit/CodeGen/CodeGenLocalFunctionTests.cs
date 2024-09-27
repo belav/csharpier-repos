@@ -2655,7 +2655,8 @@ static class Program
     }
 }
 ";
-            // warning level 0 because extension method generates CS1685 (predefined type multiple definition) for ExtensionAttribute in System.Core and mscorlib
+            // warning level 0 because extension method generates CS1685 (predefined type multiple definition)
+            // for ExtensionAttribute in System.Core and mscorlib
             VerifyOutput(source, "2", TestOptions.ReleaseExe.WithWarningLevel(0));
         }
 
@@ -2805,7 +2806,8 @@ Console.Write(str + ' ' + x);
             VerifyOutputInMain(source, "2 2", "System");
         }
 
-        // StaticNoClosure*() are generic because the reference to the locfunc is constructed, and actual local function is not
+        // StaticNoClosure*() are generic because the reference to the locfunc is constructed, and actual
+        // local function is not
         // (i.e. testing to make sure we use MethodSymbol.OriginalDefinition in LambdaRewriter.Analysis)
         [Fact]
         public void StaticNoClosure()
@@ -3655,7 +3657,8 @@ class Program
         [Fact]
         public void RecursionFrameCaptureTest()
         {
-            // ensures that referring to a local function in an otherwise noncapturing Inner captures the frame of Outer.
+            // ensures that referring to a local function in an otherwise noncapturing Inner captures the frame
+            // of Outer.
             var source =
                 @"
 int x = 0;
@@ -4509,7 +4512,8 @@ void Local()
 }
 Local();
 ";
-            // Should be a static method on "Program" itself, not a display class like "Program+<>c__DisplayClass0_0"
+            // Should be a static method on "Program" itself, not a display class like
+            // "Program+<>c__DisplayClass0_0"
             var verify = VerifyOutputInMain(source, "2", "System");
             var goo = verify.FindLocalFunction("Local");
             Assert.True(goo.IsStatic);
@@ -5828,7 +5832,8 @@ class C
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (9,10): error CS8764: Local function 'local1()' must be 'static' in order to use the Conditional attribute
+                // (9,10): error CS8764: Local function 'local1()' must be 'static' in order to use the Conditional
+                // attribute
                 //         [Conditional("DEBUG")] // 1
                 Diagnostic(ErrorCode.ERR_ConditionalOnLocalFunction, @"Conditional(""DEBUG"")")
                     .WithArguments("local1()")
@@ -5872,7 +5877,8 @@ class C
                 Diagnostic(ErrorCode.ERR_BadArgumentToAttribute, @"""hello world""")
                     .WithArguments("Conditional")
                     .WithLocation(9, 22),
-                // (12,10): error CS0578: The Conditional attribute is not valid on 'local2()' because its return type is not void
+                // (12,10): error CS0578: The Conditional attribute is not valid on 'local2()' because its return
+                // type is not void
                 //         [Conditional("DEBUG")] // 2
                 Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""DEBUG"")")
                     .WithArguments("local2()")
@@ -6668,7 +6674,8 @@ static class Program
             Assert.True(param.IsMetadataIn);
             Assert.False(param.IsMetadataOut);
 
-            // Test a scenario where the baseParameterAttributes has a different RefKind than the synthesized parameter.
+            // Test a scenario where the baseParameterAttributes has a different RefKind than the synthesized
+            // parameter.
             // We expect the RefKind of the base parameter to be ignored here.
             var synthesizedParam = SynthesizedParameterSymbol.Create(
                 localFunction,

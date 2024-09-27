@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// Represents an interactive code entry point that is inserted into the compilation if there is not an existing one.
+    /// Represents an interactive code entry point that is inserted into the compilation if there is not
+    // an existing one.
     /// </summary>
     internal abstract class SynthesizedEntryPointSymbol : MethodSymbol
     {

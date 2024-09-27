@@ -214,7 +214,8 @@ namespace System.ServiceModel.Channels
             if (protocol.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase))
             {
                 // For http, binding format is: "<ipAddress>:<port>:<hostName>"
-                // as specified in http://www.microsoft.com/resources/documentation/WindowsServ/2003/standard/proddocs/en-us/Default.asp?url=/resources/documentation/WindowsServ/2003/standard/proddocs/en-us/ref_mb_serverbindings.asp
+                // as specified in
+                // http://www.microsoft.com/resources/documentation/WindowsServ/2003/standard/proddocs/en-us/Default.asp?url=/resources/documentation/WindowsServ/2003/standard/proddocs/en-us/ref_mb_serverbindings.asp
                 return new BaseUriWithWildcard(
                     Uri.UriSchemeHttp,
                     HttpUriDefaultPort,

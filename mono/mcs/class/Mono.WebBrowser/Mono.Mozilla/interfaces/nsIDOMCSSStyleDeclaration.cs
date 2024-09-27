@@ -53,37 +53,37 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getPropertyValue(
-            /*DOMString*/HandleRef propertyName, /*DOMString*/
+/*DOMString*/HandleRef propertyName, /*DOMString*/
             HandleRef ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getPropertyCSSValue(
-            /*DOMString*/HandleRef propertyName,
+/*DOMString*/HandleRef propertyName,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMCSSValue ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int removeProperty(
-            /*DOMString*/HandleRef propertyName, /*DOMString*/
+/*DOMString*/HandleRef propertyName, /*DOMString*/
             HandleRef ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getPropertyPriority(
-            /*DOMString*/HandleRef propertyName, /*DOMString*/
+/*DOMString*/HandleRef propertyName, /*DOMString*/
             HandleRef ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setProperty(
-            /*DOMString*/HandleRef propertyName,
-            /*DOMString*/HandleRef value,
-            /*DOMString*/HandleRef priority
+/*DOMString*/HandleRef propertyName,
+/*DOMString*/HandleRef value,
+/*DOMString*/HandleRef priority
         );
 
         [PreserveSigAttribute]

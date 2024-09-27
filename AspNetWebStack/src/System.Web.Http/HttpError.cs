@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -37,7 +38,8 @@ namespace System.Web.Http
             : base(StringComparer.OrdinalIgnoreCase) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpError"/> class containing error message <paramref name="message"/>.
+        /// Initializes a new instance of the <see cref="HttpError"/> class containing error message
+        // <paramref name="message"/>.
         /// </summary>
         /// <param name="message">The error message to associate with this instance.</param>
         public HttpError(string message)
@@ -52,10 +54,12 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpError"/> class for <paramref name="exception"/>.
+        /// Initializes a new instance of the <see cref="HttpError"/> class for <paramref
+        // name="exception"/>.
         /// </summary>
         /// <param name="exception">The exception to use for error information.</param>
-        /// <param name="includeErrorDetail"><c>true</c> to include the exception information in the error; <c>false</c> otherwise</param>
+        /// <param name="includeErrorDetail"><c>true</c> to include the exception information in the error;
+        // <c>false</c> otherwise</param>
         public HttpError(Exception exception, bool includeErrorDetail)
             : this()
         {
@@ -82,10 +86,12 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpError"/> class for <paramref name="modelState"/>.
+        /// Initializes a new instance of the <see cref="HttpError"/> class for <paramref
+        // name="modelState"/>.
         /// </summary>
         /// <param name="modelState">The invalid model state to use for error information.</param>
-        /// <param name="includeErrorDetail"><c>true</c> to include exception messages in the error; <c>false</c> otherwise</param>
+        /// <param name="includeErrorDetail"><c>true</c> to include exception messages in the error;
+        // <c>false</c> otherwise</param>
         public HttpError(ModelStateDictionary modelState, bool includeErrorDetail)
             : this()
         {
@@ -131,7 +137,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpError"/> class containing error message <paramref name="message"/>
+        /// Initializes a new instance of the <see cref="HttpError"/> class containing error message
+        // <paramref name="message"/>
         /// and error message detail <paramref name="messageDetail"/>.
         /// </summary>
         /// <param name="message">The error message to associate with this instance.</param>
@@ -148,9 +155,12 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// The high-level, user-visible message explaining the cause of the error. Information carried in this field
-        /// should be considered public in that it will go over the wire regardless of the <see cref="IncludeErrorDetailPolicy"/>.
-        /// As a result care should be taken not to disclose sensitive information about the server or the application.
+        /// The high-level, user-visible message explaining the cause of the error. Information carried in
+        // this field
+        /// should be considered public in that it will go over the wire regardless of the <see
+        // cref="IncludeErrorDetailPolicy"/>.
+        /// As a result care should be taken not to disclose sensitive information about the server or the
+        // application.
         /// </summary>
         public string Message
         {
@@ -159,12 +169,16 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// The <see cref="ModelState"/> containing information about the errors that occurred during model binding.
+        /// The <see cref="ModelState"/> containing information about the errors that occurred during model
+        // binding.
         /// </summary>
         /// <remarks>
-        /// The inclusion of <see cref="System.Exception"/> information carried in the <see cref="ModelState"/> is
-        /// controlled by the <see cref="IncludeErrorDetailPolicy"/>. All other information in the <see cref="ModelState"/>
-        /// should be considered public in that it will go over the wire. As a result care should be taken not to
+        /// The inclusion of <see cref="System.Exception"/> information carried in the <see
+        // cref="ModelState"/> is
+        /// controlled by the <see cref="IncludeErrorDetailPolicy"/>. All other information in the <see
+        // cref="ModelState"/>
+        /// should be considered public in that it will go over the wire. As a result care should be taken
+        // not to
         /// disclose sensitive information about the server or the application.
         /// </remarks>
         public HttpError ModelState
@@ -173,7 +187,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// A detailed description of the error intended for the developer to understand exactly what failed.
+        /// A detailed description of the error intended for the developer to understand exactly what
+        // failed.
         /// </summary>
         /// <remarks>
         /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The

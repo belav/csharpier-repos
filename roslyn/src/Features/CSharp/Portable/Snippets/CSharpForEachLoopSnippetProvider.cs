@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
             // Allow `foreach` snippet after `await` as expression statement
             // So `await $$` is a valid position, but `var result = await $$` is not
-            // The second check if for case when completions are invoked after `await` in non-async context. In such cases parser treats `await` as identifier
+            // The second check if for case when completions are invoked after `await` in non-async context. In
+            // such cases parser treats `await` as identifier
             if (
                 targetToken
                     is {

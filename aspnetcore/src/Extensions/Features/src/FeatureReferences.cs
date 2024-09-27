@@ -61,7 +61,8 @@ public struct FeatureReferences<TCache>
     // if it was a Property then that getter would return a copy of the memory
     // preventing the use of "ref"
     /// <summary>
-    /// This API is part of ASP.NET Core's infrastructure and should not be referenced by application code.
+    /// This API is part of ASP.NET Core's infrastructure and should not be referenced by application
+    // code.
     /// </summary>
     public TCache? Cache;
 
@@ -75,7 +76,8 @@ public struct FeatureReferences<TCache>
     //
     // HttpResponse.Headers -> Response.HttpResponseFeature -> Fetch -> Fetch      -> Revision
     //                                                               -> Collection -> Collection
-    //                                                                             -> Collection.Revision
+    //                                                                             ->
+    // Collection.Revision
     // Has 6 calls eliminated and becomes just:                                    -> UpdateCached
     //
     // HttpResponse.Headers -> Collection.Revision
@@ -87,7 +89,8 @@ public struct FeatureReferences<TCache>
     // Generally Fetch is called at a ratio > x4 of UpdateCached so this is a large gain
 
     /// <summary>
-    /// This API is part of ASP.NET Core's infrastructure and should not be referenced by application code.
+    /// This API is part of ASP.NET Core's infrastructure and should not be referenced by application
+    // code.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public TFeature? Fetch<TFeature, TState>(
@@ -147,7 +150,8 @@ public struct FeatureReferences<TCache>
     }
 
     /// <summary>
-    /// This API is part of ASP.NET Core's infrastructure and should not be referenced by application code.
+    /// This API is part of ASP.NET Core's infrastructure and should not be referenced by application
+    // code.
     /// </summary>
     public TFeature? Fetch<TFeature>(
         ref TFeature? cached,

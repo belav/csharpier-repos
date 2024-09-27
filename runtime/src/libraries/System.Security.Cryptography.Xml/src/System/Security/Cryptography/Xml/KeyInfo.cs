@@ -81,7 +81,8 @@ namespace System.Security.Cryptography.Xml
                 XmlElement? elem = child as XmlElement;
                 if (elem != null)
                 {
-                    // Create the right type of KeyInfoClause; we use a combination of the namespace and tag name (local name)
+                    // Create the right type of KeyInfoClause; we use a combination of the namespace and tag name (local
+                    // name)
                     string kicString = elem.NamespaceURI + " " + elem.LocalName;
                     // Special-case handling for KeyValue -- we have to go one level deeper
                     if (kicString == "http://www.w3.org/2000/09/xmldsig# KeyValue")

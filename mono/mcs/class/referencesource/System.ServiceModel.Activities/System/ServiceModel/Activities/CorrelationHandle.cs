@@ -26,13 +26,16 @@ namespace System.ServiceModel.Activities
         static readonly Type callbackCorrelationInitializerType =
             typeof(CallbackCorrelationInitializer);
 
-        // This is for passing the Context information that we get in the reply message from the Server in the initial handshake
+        // This is for passing the Context information that we get in the reply message from the Server in
+        // the initial handshake
         // to the next Sendmessage activity from the client to the server
         static readonly Type contextCorrelationInitializerType =
             typeof(ContextCorrelationInitializer);
 
-        //// To get to the same instance on the server side( between SendReply and following Receive) and on the client side( between Send and following send)
-        //static readonly Type followingContextCorrelationInitializerType = typeof(FollowingContextCorrelationInitializer);
+        //// To get to the same instance on the server side( between SendReply and following Receive) and on
+        // the client side( between Send and following send)
+        //static readonly Type followingContextCorrelationInitializerType =
+        // typeof(FollowingContextCorrelationInitializer);
 
         CorrelationCallbackContext callbackContext;
         CorrelationContext context;

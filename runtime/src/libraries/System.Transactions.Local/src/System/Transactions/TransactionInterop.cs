@@ -34,11 +34,13 @@ namespace System.Transactions
         /// <summary>
         /// This is the PromoterType value that indicates that the transaction is promoting to MSDTC.
         ///
-        /// If using the variation of Transaction.EnlistPromotableSinglePhase that takes a PromoterType and the
+        /// If using the variation of Transaction.EnlistPromotableSinglePhase that takes a PromoterType and
+        // the
         /// ITransactionPromoter being used promotes to MSDTC, then this is the value that should be
         /// specified for the PromoterType parameter to EnlistPromotableSinglePhase.
         ///
-        /// If using the variation of Transaction.EnlistPromotableSinglePhase that assumes promotion to MSDTC and
+        /// If using the variation of Transaction.EnlistPromotableSinglePhase that assumes promotion to
+        // MSDTC and
         /// it that returns false, the caller can compare this value with Transaction.PromoterType to
         /// verify that the transaction promoted, or will promote, to MSDTC. If the Transaction.PromoterType
         /// matches this value, then the caller can continue with its enlistment with MSDTC. But if it
@@ -287,7 +289,8 @@ namespace System.Transactions
             // In a propagation token, the transaction guid is preceded by two version DWORDs.
             var txId = new Guid(propagationToken.AsSpan(8, 16));
 
-            // First check to see if there is a promoted LTM transaction with the same ID.  If there is, just return that.
+            // First check to see if there is a promoted LTM transaction with the same ID.  If there is, just
+            // return that.
             Transaction? tx = TransactionManager.FindPromotedTransaction(txId);
             if (null != tx)
             {
@@ -421,8 +424,10 @@ namespace System.Transactions
             }
             catch (COMException ex) when (ex.ErrorCode == OletxHelper.XACT_E_NOTRANSACTION)
             {
-                // If we get here, the transaction has appraently already been committed or aborted.  Allow creation of the
-                // OletxTransaction, but it will be marked with a status of InDoubt and attempts to get its Identifier
+                // If we get here, the transaction has appraently already been committed or aborted.  Allow creation
+                // of the
+                // OletxTransaction, but it will be marked with a status of InDoubt and attempts to get its
+                // Identifier
                 // property will result in a TransactionException.
                 tooLate = true;
                 xactInfo.Uow = Guid.Empty;

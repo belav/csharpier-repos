@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures relationships between entity types based on the navigation properties
+///     A convention that configures relationships between entity types based on the navigation
+// properties
 ///     as long as there is no ambiguity as to which is the corresponding inverse navigation.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class RelationshipDiscoveryConvention
     : ITypeIgnoredConvention,
@@ -29,7 +31,8 @@ public class RelationshipDiscoveryConvention
     ///     Creates a new instance of <see cref="RelationshipDiscoveryConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="useAttributes">Whether the convention will use attributes found on the members.</param>
+    /// <param name="useAttributes">Whether the convention will use attributes found on the
+    // members.</param>
     public RelationshipDiscoveryConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         bool useAttributes = true
@@ -54,7 +57,8 @@ public class RelationshipDiscoveryConvention
     /// </summary>
     /// <param name="entityTypeBuilder">The entity type builder.</param>
     /// <param name="context">Additional information associated with convention execution.</param>
-    /// <param name="discoverUnmatchedInverses">Whether to discover unmatched inverse navigations.</param>
+    /// <param name="discoverUnmatchedInverses">Whether to discover unmatched inverse
+    // navigations.</param>
     protected virtual void DiscoverRelationships(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionContext context,
@@ -456,8 +460,10 @@ public class RelationshipDiscoveryConvention
     /// <param name="targetClrType">The CLR type of the target entity type.</param>
     /// <param name="navigationMemberInfo">The navigation member.</param>
     /// <param name="shouldBeOwned">Whether the target entity type should be owned.</param>
-    /// <param name="shouldCreate">Whether an entity type should be created if one doesn't currently exist.</param>
-    /// <returns>The builder for the target entity type or <see langword="null" /> if it can't be created.</returns>
+    /// <param name="shouldCreate">Whether an entity type should be created if one doesn't currently
+    // exist.</param>
+    /// <returns>The builder for the target entity type or <see langword="null" /> if it can't be
+    // created.</returns>
     protected virtual IConventionEntityTypeBuilder? TryGetTargetEntityTypeBuilder(
         IConventionEntityTypeBuilder entityTypeBuilder,
         Type targetClrType,
@@ -1178,7 +1184,8 @@ public class RelationshipDiscoveryConvention
     }
 
     /// <summary>
-    ///     Returns a value indicating whether the given entity type should be added as owned if it isn't currently in the model.
+    ///     Returns a value indicating whether the given entity type should be added as owned if it
+    // isn't currently in the model.
     /// </summary>
     /// <param name="targetType">Target entity type.</param>
     /// <param name="model">The model.</param>

@@ -1,8 +1,8 @@
 /*
- * The string portion of this test crashes on Boehm (and there might
- * not be much we can do about that - I haven't looked into it), and
- * the array portions are unbearably slow, so it's only run on SGen.
- */
+* The string portion of this test crashes on Boehm (and there might
+* not be much we can do about that - I haven't looked into it), and
+* the array portions are unbearably slow, so it's only run on SGen.
+*/
 
 using System;
 
@@ -22,13 +22,13 @@ class X
             {
                 caught = true;
             }
-            /*
-            if (!caught)
-            {
-                Console.WriteLine ("WTF?");
-                //Environment.Exit (1);
-            }
-            */
+/*
+if (!caught)
+{
+Console.WriteLine ("WTF?");
+//Environment.Exit (1);
+}
+*/
         }
     }
 
@@ -70,11 +70,11 @@ class X
         Test(i => ProbeArray(new int[int.MaxValue - i * 100]));
 
         // FIXME: This commit 4gb of memory
-        /*
-        Console.WriteLine ("strings");
-        Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i)));
-        Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i * 100)));
-        */
+/*
+Console.WriteLine ("strings");
+Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i)));
+Test (i => ProbeString ("abcd".PadRight(int.MaxValue - i * 100)));
+*/
 
         //Console.WriteLine ("no objects allocated - all good");
         return 0;

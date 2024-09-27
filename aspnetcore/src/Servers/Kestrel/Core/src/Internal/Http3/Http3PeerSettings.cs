@@ -17,7 +17,8 @@ internal sealed class Http3PeerSettings
     public uint EnableWebTransport { get; internal set; } = DefaultEnableWebTransport;
     public uint H3Datagram { get; internal set; } = DefaultH3Datagram;
 
-    // Gets the settings that are different from the protocol defaults (as opposed to the server defaults).
+    // Gets the settings that are different from the protocol defaults (as opposed to the server
+    // defaults).
     internal List<Http3PeerSetting> GetNonProtocolDefaults()
     {
         // By default, there is only one setting that is sent from server to client.

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -8,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace System.Web.Http
 {
-    /// <summary>Represents a stream that replaces another stream to prevent actually closing that stream.</summary>
+    /// <summary>Represents a stream that replaces another stream to prevent actually closing that
+    // stream.</summary>
     /// <remarks>
-    /// This class uses the Decorator [GoF] pattern; it forwards all calls except those related to Dispose and Close.
+    /// This class uses the Decorator [GoF] pattern; it forwards all calls except those related to
+    // Dispose and Close.
     /// </remarks>
     internal class NonOwnedStream : Stream
     {
@@ -113,7 +116,8 @@ namespace System.Web.Http
             get
             {
                 // Documentation does not state the behavior when the stream is closed. The NetworkStream
-                // implementation suggests the contract should be to throw ObjectDisposedException when the stream is
+                // implementation suggests the contract should be to throw ObjectDisposedException when the stream
+                // is
                 // closed.
                 ThrowIfDisposed();
                 return InnerStream.ReadTimeout;
@@ -121,7 +125,8 @@ namespace System.Web.Http
             set
             {
                 // Documentation does not state the behavior when the stream is closed. The NetworkStream
-                // implementation suggests the contract should be to throw ObjectDisposedException when the stream is
+                // implementation suggests the contract should be to throw ObjectDisposedException when the stream
+                // is
                 // closed.
                 ThrowIfDisposed();
                 InnerStream.ReadTimeout = value;
@@ -133,7 +138,8 @@ namespace System.Web.Http
             get
             {
                 // Documentation does not state the behavior when the stream is closed. The NetworkStream
-                // implementation suggests the contract should be to throw ObjectDisposedException when the stream is
+                // implementation suggests the contract should be to throw ObjectDisposedException when the stream
+                // is
                 // closed.
                 ThrowIfDisposed();
                 return InnerStream.WriteTimeout;
@@ -141,7 +147,8 @@ namespace System.Web.Http
             set
             {
                 // Documentation does not state the behavior when the stream is closed. The NetworkStream
-                // implementation suggests the contract should be to throw ObjectDisposedException when the stream is
+                // implementation suggests the contract should be to throw ObjectDisposedException when the stream
+                // is
                 // closed.
                 ThrowIfDisposed();
                 InnerStream.WriteTimeout = value;
@@ -175,7 +182,8 @@ namespace System.Web.Http
         public override void Close()
         {
             // base.Close() calls Dispose(true) and GC.SuppressFinalize(this), which is exactly what we want.
-            // Note that we do NOT call _innerStream.Close here, as that would actually close the original source
+            // Note that we do NOT call _innerStream.Close here, as that would actually close the original
+            // source
             // stream, which is the one thing this class is designed to prevent.
             base.Close();
         }
@@ -201,7 +209,8 @@ namespace System.Web.Http
         )]
         protected override void Dispose(bool disposing)
         {
-            // Note that we do NOT call _innerStream.Dispose or Close here, as that would actually close the original
+            // Note that we do NOT call _innerStream.Dispose or Close here, as that would actually close the
+            // original
             // source stream, which is the one thing this class is designed to prevent.
 
             if (!IsDisposed)

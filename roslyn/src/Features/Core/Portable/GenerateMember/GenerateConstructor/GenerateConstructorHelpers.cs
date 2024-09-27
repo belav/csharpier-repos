@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             // 1. Accessible.  We obviously need our constructor to be able to call that other constructor.
             // 2. Won't cause a cycle.  i.e. if we're generating a new constructor from an existing constructor,
             //    then we don't want it calling back into us.
-            // 3. Are compatible with the parameters we're generating for this constructor.  Compatible means there
+            // 3. Are compatible with the parameters we're generating for this constructor.  Compatible means
+            // there
             //    exists an implicit conversion from the new constructor's parameter types to the existing
             //    constructor's parameter types.
             var semanticFacts =
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
         {
             Debug.Assert(constructor.Parameters.Length == expressions.Length);
 
-            // Resolve the constructor into our semantic model's compilation; if the constructor we're looking at is from
+            // Resolve the constructor into our semantic model's compilation; if the constructor we're looking
+            // at is from
             // another project with a different language.
             var constructorInCompilation = (IMethodSymbol?)
                 SymbolKey.Create(constructor).Resolve(semanticModel.Compilation).Symbol;

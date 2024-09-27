@@ -9,12 +9,14 @@ using System.Runtime.InteropServices;
 namespace System.Text.Json
 {
     /// <summary>
-    /// Provides a high-performance API for forward-only, read-only access to the UTF-8 encoded JSON text.
+    /// Provides a high-performance API for forward-only, read-only access to the UTF-8 encoded JSON
+    // text.
     /// It processes the text sequentially with no caching and adheres strictly to the JSON RFC
     /// by default (https://tools.ietf.org/html/rfc8259). When it encounters invalid JSON, it throws
     /// a JsonException with basic error information like line number and byte position on the line.
     /// Since this type is a ref struct, it does not directly support async. However, it does provide
-    /// support for reentrancy to read incomplete data, and continue reading once more data is presented.
+    /// support for reentrancy to read incomplete data, and continue reading once more data is
+    // presented.
     /// To be able to set max depth while reading OR allow skipping comments, create an instance of
     /// <see cref="JsonReaderState"/> and pass that in to the reader.
     /// </summary>
@@ -64,15 +66,18 @@ namespace System.Text.Json
         /// Otherwise, the <see cref="ValueSequence"/> will contain the token value.
         /// </summary>
         /// <remarks>
-        /// If <see cref="HasValueSequence"/> is true, <see cref="ValueSpan"/> contains useless data, likely for
-        /// a previous single-segment token. Therefore, only access <see cref="ValueSpan"/> if <see cref="HasValueSequence"/> is false.
+        /// If <see cref="HasValueSequence"/> is true, <see cref="ValueSpan"/> contains useless data, likely
+        // for
+        /// a previous single-segment token. Therefore, only access <see cref="ValueSpan"/> if <see
+        // cref="HasValueSequence"/> is false.
         /// Otherwise, the token value must be accessed from <see cref="ValueSequence"/>.
         /// </remarks>
         public ReadOnlySpan<byte> ValueSpan { get; private set; }
 
         /// <summary>
         /// Returns the total amount of bytes consumed by the <see cref="Utf8JsonReader"/> so far
-        /// for the current instance of the <see cref="Utf8JsonReader"/> with the given UTF-8 encoded input text.
+        /// for the current instance of the <see cref="Utf8JsonReader"/> with the given UTF-8 encoded input
+        // text.
         /// </summary>
         public readonly long BytesConsumed
         {
@@ -133,15 +138,18 @@ namespace System.Text.Json
         public bool HasValueSequence { get; private set; }
 
         /// <summary>
-        /// Lets the caller know whether the current <see cref="ValueSpan" /> or <see cref="ValueSequence"/> properties
-        /// contain escape sequences per RFC 8259 section 7, and therefore require unescaping before being consumed.
+        /// Lets the caller know whether the current <see cref="ValueSpan" /> or <see cref="ValueSequence"/>
+        // properties
+        /// contain escape sequences per RFC 8259 section 7, and therefore require unescaping before being
+        // consumed.
         /// </summary>
         public bool ValueIsEscaped { get; private set; }
 
         /// <summary>
         /// Returns the mode of this instance of the <see cref="Utf8JsonReader"/>.
         /// True when the reader was constructed with the input span containing the entire data to process.
-        /// False when the reader was constructed knowing that the input span may contain partial data with more data to follow.
+        /// False when the reader was constructed knowing that the input span may contain partial data with
+        // more data to follow.
         /// </summary>
         public readonly bool IsFinalBlock => _isFinalBlock;
 
@@ -153,8 +161,10 @@ namespace System.Text.Json
         /// Otherwise, the <see cref="ValueSequence"/> will contain the token value.
         /// </summary>
         /// <remarks>
-        /// If <see cref="HasValueSequence"/> is false, <see cref="ValueSequence"/> contains useless data, likely for
-        /// a previous multi-segment token. Therefore, only access <see cref="ValueSequence"/> if <see cref="HasValueSequence"/> is true.
+        /// If <see cref="HasValueSequence"/> is false, <see cref="ValueSequence"/> contains useless data,
+        // likely for
+        /// a previous multi-segment token. Therefore, only access <see cref="ValueSequence"/> if <see
+        // cref="HasValueSequence"/> is true.
         /// Otherwise, the token value must be accessed from <see cref="ValueSpan"/>.
         /// </remarks>
         public ReadOnlySequence<byte> ValueSequence { get; private set; }
@@ -162,7 +172,8 @@ namespace System.Text.Json
         /// <summary>
         /// Returns the current <see cref="SequencePosition"/> within the provided UTF-8 encoded
         /// input ReadOnlySequence&lt;byte&gt;. If the <see cref="Utf8JsonReader"/> was constructed
-        /// with a ReadOnlySpan&lt;byte&gt; instead, this will always return a default <see cref="SequencePosition"/>.
+        /// with a ReadOnlySpan&lt;byte&gt; instead, this will always return a default <see
+        // cref="SequencePosition"/>.
         /// </summary>
         public readonly SequencePosition Position
         {
@@ -179,10 +190,12 @@ namespace System.Text.Json
 
         /// <summary>
         /// Returns the current snapshot of the <see cref="Utf8JsonReader"/> state which must
-        /// be captured by the caller and passed back in to the <see cref="Utf8JsonReader"/> ctor with more data.
+        /// be captured by the caller and passed back in to the <see cref="Utf8JsonReader"/> ctor with more
+        // data.
         /// Unlike the <see cref="Utf8JsonReader"/>, which is a ref struct, the state can survive
         /// across async/await boundaries and hence this type is required to provide support for reading
-        /// in more data asynchronously before continuing with a new instance of the <see cref="Utf8JsonReader"/>.
+        /// in more data asynchronously before continuing with a new instance of the <see
+        // cref="Utf8JsonReader"/>.
         /// </summary>
         public readonly JsonReaderState CurrentState =>
             new JsonReaderState
@@ -202,13 +215,17 @@ namespace System.Text.Json
         /// <summary>
         /// Constructs a new <see cref="Utf8JsonReader"/> instance.
         /// </summary>
-        /// <param name="jsonData">The ReadOnlySpan&lt;byte&gt; containing the UTF-8 encoded JSON text to process.</param>
+        /// <param name="jsonData">The ReadOnlySpan&lt;byte&gt; containing the UTF-8 encoded JSON text to
+        // process.</param>
         /// <param name="isFinalBlock">True when the input span contains the entire data to process.
-        /// Set to false only if it is known that the input span contains partial data with more data to follow.</param>
+        /// Set to false only if it is known that the input span contains partial data with more data to
+        // follow.</param>
         /// <param name="state">If this is the first call to the ctor, pass in a default state. Otherwise,
-        /// capture the state from the previous instance of the <see cref="Utf8JsonReader"/> and pass that back.</param>
+        /// capture the state from the previous instance of the <see cref="Utf8JsonReader"/> and pass that
+        // back.</param>
         /// <remarks>
-        /// Since this type is a ref struct, it is a stack-only type and all the limitations of ref structs apply to it.
+        /// Since this type is a ref struct, it is a stack-only type and all the limitations of ref structs
+        // apply to it.
         /// This is the reason why the ctor accepts a <see cref="JsonReaderState"/>.
         /// </remarks>
         public Utf8JsonReader(ReadOnlySpan<byte> jsonData, bool isFinalBlock, JsonReaderState state)
@@ -251,16 +268,21 @@ namespace System.Text.Json
         /// <summary>
         /// Constructs a new <see cref="Utf8JsonReader"/> instance.
         /// </summary>
-        /// <param name="jsonData">The ReadOnlySpan&lt;byte&gt; containing the UTF-8 encoded JSON text to process.</param>
+        /// <param name="jsonData">The ReadOnlySpan&lt;byte&gt; containing the UTF-8 encoded JSON text to
+        // process.</param>
         /// <param name="options">Defines the customized behavior of the <see cref="Utf8JsonReader"/>
-        /// that is different from the JSON RFC (for example how to handle comments or maximum depth allowed when reading).
-        /// By default, the <see cref="Utf8JsonReader"/> follows the JSON RFC strictly (i.e. comments within the JSON are invalid) and reads up to a maximum depth of 64.</param>
+        /// that is different from the JSON RFC (for example how to handle comments or maximum depth allowed
+        // when reading).
+        /// By default, the <see cref="Utf8JsonReader"/> follows the JSON RFC strictly (i.e. comments within
+        // the JSON are invalid) and reads up to a maximum depth of 64.</param>
         /// <remarks>
         ///   <para>
-        ///     Since this type is a ref struct, it is a stack-only type and all the limitations of ref structs apply to it.
+        ///     Since this type is a ref struct, it is a stack-only type and all the limitations of ref
+        // structs apply to it.
         ///   </para>
         ///   <para>
-        ///     This assumes that the entire JSON payload is passed in (equivalent to <see cref="IsFinalBlock"/> = true)
+        ///     This assumes that the entire JSON payload is passed in (equivalent to <see
+        // cref="IsFinalBlock"/> = true)
         ///   </para>
         /// </remarks>
         public Utf8JsonReader(ReadOnlySpan<byte> jsonData, JsonReaderOptions options = default)
@@ -295,20 +317,25 @@ namespace System.Text.Json
         /// Skips the children of the current JSON token.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown when the reader was given partial data with more data to follow (i.e. <see cref="IsFinalBlock"/> is false).
+        /// Thrown when the reader was given partial data with more data to follow (i.e. <see
+        // cref="IsFinalBlock"/> is false).
         /// </exception>
         /// <exception cref="JsonException">
         /// Thrown when an invalid JSON token is encountered while skipping, according to the JSON RFC,
         /// or if the current depth exceeds the recursive limit set by the max depth.
         /// </exception>
         /// <remarks>
-        /// When <see cref="TokenType"/> is <see cref="JsonTokenType.PropertyName" />, the reader first moves to the property value.
-        /// When <see cref="TokenType"/> (originally, or after advancing) is <see cref="JsonTokenType.StartObject" /> or
+        /// When <see cref="TokenType"/> is <see cref="JsonTokenType.PropertyName" />, the reader first
+        // moves to the property value.
+        /// When <see cref="TokenType"/> (originally, or after advancing) is <see
+        // cref="JsonTokenType.StartObject" /> or
         /// <see cref="JsonTokenType.StartArray" />, the reader advances to the matching
         /// <see cref="JsonTokenType.EndObject" /> or <see cref="JsonTokenType.EndArray" />.
         ///
-        /// For all other token types, the reader does not move. After the next call to <see cref="Read"/>, the reader will be at
-        /// the next value (when in an array), the next property name (when in an object), or the end array/object token.
+        /// For all other token types, the reader does not move. After the next call to <see cref="Read"/>,
+        // the reader will be at
+        /// the next value (when in an array), the next property name (when in an object), or the end
+        // array/object token.
         /// </remarks>
         public void Skip()
         {
@@ -349,7 +376,8 @@ namespace System.Text.Json
         /// <summary>
         /// Tries to skip the children of the current JSON token.
         /// </summary>
-        /// <returns>True if there was enough data for the children to be skipped successfully, else false.</returns>
+        /// <returns>True if there was enough data for the children to be skipped successfully, else
+        // false.</returns>
         /// <exception cref="JsonException">
         /// Thrown when an invalid JSON token is encountered while skipping, according to the JSON RFC,
         /// or if the current depth exceeds the recursive limit set by the max depth.
@@ -360,13 +388,17 @@ namespace System.Text.Json
         ///     it will be reset to the state it was in before the method was called.
         ///   </para>
         ///   <para>
-        ///     When <see cref="TokenType"/> is <see cref="JsonTokenType.PropertyName" />, the reader first moves to the property value.
-        ///     When <see cref="TokenType"/> (originally, or after advancing) is <see cref="JsonTokenType.StartObject" /> or
+        ///     When <see cref="TokenType"/> is <see cref="JsonTokenType.PropertyName" />, the reader first
+        // moves to the property value.
+        ///     When <see cref="TokenType"/> (originally, or after advancing) is <see
+        // cref="JsonTokenType.StartObject" /> or
         ///     <see cref="JsonTokenType.StartArray" />, the reader advances to the matching
         ///     <see cref="JsonTokenType.EndObject" /> or <see cref="JsonTokenType.EndArray" />.
         ///
-        ///     For all other token types, the reader does not move. After the next call to <see cref="Read"/>, the reader will be at
-        ///     the next value (when in an array), the next property name (when in an object), or the end array/object token.
+        ///     For all other token types, the reader does not move. After the next call to <see
+        // cref="Read"/>, the reader will be at
+        ///     the next value (when in an array), the next property name (when in an object), or the end
+        // array/object token.
         ///   </para>
         /// </remarks>
         public bool TrySkip()
@@ -414,22 +446,27 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Compares the UTF-8 encoded text to the unescaped JSON token value in the source and returns true if they match.
+        /// Compares the UTF-8 encoded text to the unescaped JSON token value in the source and returns true
+        // if they match.
         /// </summary>
         /// <param name="utf8Text">The UTF-8 encoded text to compare against.</param>
-        /// <returns>True if the JSON token value in the source matches the UTF-8 encoded look up text.</returns>
+        /// <returns>True if the JSON token value in the source matches the UTF-8 encoded look up
+        // text.</returns>
         /// <exception cref="InvalidOperationException">
         /// Thrown if trying to find a text match on a JSON token that is not a string
-        /// (i.e. other than <see cref="JsonTokenType.String"/> or <see cref="JsonTokenType.PropertyName"/>).
+        /// (i.e. other than <see cref="JsonTokenType.String"/> or <see
+        // cref="JsonTokenType.PropertyName"/>).
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <remarks>
         ///   <para>
-        ///     If the look up text is invalid UTF-8 text, the method will return false since you cannot have
+        ///     If the look up text is invalid UTF-8 text, the method will return false since you cannot
+        // have
         ///     invalid UTF-8 within the JSON payload.
         ///   </para>
         ///   <para>
-        ///     The comparison of the JSON token value in the source and the look up text is done by first unescaping the JSON value in source,
+        ///     The comparison of the JSON token value in the source and the look up text is done by first
+        // unescaping the JSON value in source,
         ///     if required. The look up text is matched as is, without any modifications to it.
         ///   </para>
         /// </remarks>
@@ -444,22 +481,26 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Compares the string text to the unescaped JSON token value in the source and returns true if they match.
+        /// Compares the string text to the unescaped JSON token value in the source and returns true if
+        // they match.
         /// </summary>
         /// <param name="text">The text to compare against.</param>
         /// <returns>True if the JSON token value in the source matches the look up text.</returns>
         /// <exception cref="InvalidOperationException">
         /// Thrown if trying to find a text match on a JSON token that is not a string
-        /// (i.e. other than <see cref="JsonTokenType.String"/> or <see cref="JsonTokenType.PropertyName"/>).
+        /// (i.e. other than <see cref="JsonTokenType.String"/> or <see
+        // cref="JsonTokenType.PropertyName"/>).
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <remarks>
         ///   <para>
-        ///     If the look up text is invalid UTF-8 text, the method will return false since you cannot have
+        ///     If the look up text is invalid UTF-8 text, the method will return false since you cannot
+        // have
         ///     invalid UTF-8 within the JSON payload.
         ///   </para>
         ///   <para>
-        ///     The comparison of the JSON token value in the source and the look up text is done by first unescaping the JSON value in source,
+        ///     The comparison of the JSON token value in the source and the look up text is done by first
+        // unescaping the JSON value in source,
         ///     if required. The look up text is matched as is, without any modifications to it.
         ///   </para>
         /// </remarks>
@@ -485,22 +526,26 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Compares the text to the unescaped JSON token value in the source and returns true if they match.
+        /// Compares the text to the unescaped JSON token value in the source and returns true if they
+        // match.
         /// </summary>
         /// <param name="text">The text to compare against.</param>
         /// <returns>True if the JSON token value in the source matches the look up text.</returns>
         /// <exception cref="InvalidOperationException">
         /// Thrown if trying to find a text match on a JSON token that is not a string
-        /// (i.e. other than <see cref="JsonTokenType.String"/> or <see cref="JsonTokenType.PropertyName"/>).
+        /// (i.e. other than <see cref="JsonTokenType.String"/> or <see
+        // cref="JsonTokenType.PropertyName"/>).
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <remarks>
         ///   <para>
-        ///     If the look up text is invalid or incomplete UTF-16 text (i.e. unpaired surrogates), the method will return false
+        ///     If the look up text is invalid or incomplete UTF-16 text (i.e. unpaired surrogates), the
+        // method will return false
         ///     since you cannot have invalid UTF-16 within the JSON payload.
         ///   </para>
         ///   <para>
-        ///     The comparison of the JSON token value in the source and the look up text is done by first unescaping the JSON value in source,
+        ///     The comparison of the JSON token value in the source and the look up text is done by first
+        // unescaping the JSON value in source,
         ///     if required. The look up text is matched as is, without any modifications to it.
         ///   </para>
         /// </remarks>
@@ -623,7 +668,8 @@ namespace System.Text.Json
             long sequenceLength = localSequence.Length;
 
             // The JSON token value will at most shrink by 6 when unescaping.
-            // If it is still larger than the lookup string, there is no value in unescaping and doing the comparison.
+            // If it is still larger than the lookup string, there is no value in unescaping and doing the
+            // comparison.
             if (
                 sequenceLength < other.Length
                 || sequenceLength / JsonConstants.MaxExpansionFactorWhileEscaping > other.Length
@@ -698,14 +744,19 @@ namespace System.Text.Json
             // Unescaping the token value will at most shrink its length by 6x.
             // There is no point incurring the transcoding/unescaping/comparing cost if:
             // - The token value is smaller than charTextLength
-            // - The token value needs to be transcoded AND unescaped and it is more than 6x larger than charTextLength
+            // - The token value needs to be transcoded AND unescaped and it is more than 6x larger than
+            // charTextLength
             //      - For an ASCII UTF-16 characters, transcoding = 1x, escaping = 6x => 6x factor
-            //      - For non-ASCII UTF-16 characters within the BMP, transcoding = 2-3x, but they are represented as a single escaped hex value, \uXXXX => 6x factor
-            //      - For non-ASCII UTF-16 characters outside of the BMP, transcoding = 4x, but the surrogate pair (2 characters) are represented by 16 bytes \uXXXX\uXXXX => 6x factor
-            // - The token value needs to be transcoded, but NOT escaped and it is more than 3x larger than charTextLength
+            //      - For non-ASCII UTF-16 characters within the BMP, transcoding = 2-3x, but they are
+            // represented as a single escaped hex value, \uXXXX => 6x factor
+            //      - For non-ASCII UTF-16 characters outside of the BMP, transcoding = 4x, but the surrogate
+            // pair (2 characters) are represented by 16 bytes \uXXXX\uXXXX => 6x factor
+            // - The token value needs to be transcoded, but NOT escaped and it is more than 3x larger than
+            // charTextLength
             //      - For an ASCII UTF-16 characters, transcoding = 1x,
             //      - For non-ASCII UTF-16 characters within the BMP, transcoding = 2-3x,
-            //      - For non-ASCII UTF-16 characters outside of the BMP, transcoding = 2x, (surrogate pairs - 2 characters transcode to 4 UTF-8 bytes)
+            //      - For non-ASCII UTF-16 characters outside of the BMP, transcoding = 2x, (surrogate pairs - 2
+            // characters transcode to 4 UTF-8 bytes)
 
             if (
                 sourceLength < charTextLength
@@ -984,8 +1035,10 @@ namespace System.Text.Json
             return true;
         }
 
-        // Unlike the parameter-less overload of HasMoreData, if there is no more data when this method is called, we know the JSON input is invalid.
-        // This is because, this method is only called after a ',' (i.e. we expect a value/property name) or after
+        // Unlike the parameter-less overload of HasMoreData, if there is no more data when this method is
+        // called, we know the JSON input is invalid.
+        // This is because, this method is only called after a ',' (i.e. we expect a value/property name) or
+        // after
         // a property name, which means it must be followed by a value.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool HasMoreData(ExceptionResource resource)
@@ -1063,7 +1116,8 @@ namespace System.Text.Json
             {
                 byte val = localBuffer[_consumed];
 
-                // JSON RFC 8259 section 2 says only these 4 characters count, not all of the Unicode definitions of whitespace.
+                // JSON RFC 8259 section 2 says only these 4 characters count, not all of the Unicode definitions of
+                // whitespace.
                 if (
                     val != JsonConstants.Space
                     && val != JsonConstants.CarriageReturn
@@ -1303,8 +1357,10 @@ namespace System.Text.Json
                 }
             }
 
-            // If there is more data and the JSON is not a single value, assert that there is an end of number delimiter.
-            // Else, if either the JSON is a single value XOR if there is no more data, don't assert anything since there won't always be an end of number delimiter.
+            // If there is more data and the JSON is not a single value, assert that there is an end of number
+            // delimiter.
+            // Else, if either the JSON is a single value XOR if there is no more data, don't assert anything
+            // since there won't always be an end of number delimiter.
             Debug.Assert(
                 (
                     (_consumed < _buffer.Length)
@@ -1869,7 +1925,8 @@ namespace System.Text.Json
 
         /// <summary>
         /// This method consumes the next token regardless of whether we are inside an object or an array.
-        /// For an object, it reads the next property name token. For an array, it just reads the next value.
+        /// For an object, it reads the next property name token. For an array, it just reads the next
+        // value.
         /// </summary>
         private ConsumeTokenResult ConsumeNextToken(byte marker)
         {
@@ -2724,7 +2781,8 @@ namespace System.Text.Json
             }
 
             // Consume the /* and */ characters that are part of the multi-line comment.
-            // idx points right before the final '*' (which is right before the last '/'). Hence increment _consumed
+            // idx points right before the final '*' (which is right before the last '/'). Hence increment
+            // _consumed
             // by 4 to exclude the start/end-of-comment delimiters.
             _consumed += 4 + idx;
 

@@ -149,7 +149,8 @@ namespace System.Web.UI.WebControls.WebParts
             IDictionary initialProperties = null;
             PersonalizationDictionary customInitialProperties = null;
 
-            // WebPart.SetPersonalizationDirty() should only mark a control as dirty in the following circumstances:
+            // WebPart.SetPersonalizationDirty() should only mark a control as dirty in the following
+            // circumstances:
             // 1. During its IPersonalizable.Load() method
             // 2. During its IVersioningPersonalizable.Load() method
             // 3. During or after its ITrackingPersonalizable.EndLoad() method
@@ -476,7 +477,7 @@ namespace System.Web.UI.WebControls.WebParts
                 personalizationID, /* isWebPartManager */
                 false,
                 extractScope,
-                /* genericWebPart */null
+/* genericWebPart */null
             );
 
             GenericWebPart genericWebPart = webPart as GenericWebPart;
@@ -1059,7 +1060,7 @@ namespace System.Web.UI.WebControls.WebParts
                 false,
                 extractScope,
                 isStatic,
-                /* genericWebPart */null
+/* genericWebPart */null
             );
 
             GenericWebPart genericWebPart = webPart as GenericWebPart;
@@ -1581,7 +1582,8 @@ namespace System.Web.UI.WebControls.WebParts
                     PropertyInfo pi = property.PropertyInfo;
                     Debug.Assert(pi != null);
 
-                    // If SetProperty() throws an exception, the property will be added to the unusedProperties collection
+                    // If SetProperty() throws an exception, the property will be added to the unusedProperties
+                    // collection
                     try
                     {
                         FastPropertyAccessor.SetProperty(control, name, value, control.DesignMode);
@@ -1644,7 +1646,7 @@ namespace System.Web.UI.WebControls.WebParts
                 WebPartManager,
                 WebPartManagerPersonalizationID, /* isWebPartManager */
                 true,
-                /* forceSetDirty */false
+/* forceSetDirty */false
             );
         }
 

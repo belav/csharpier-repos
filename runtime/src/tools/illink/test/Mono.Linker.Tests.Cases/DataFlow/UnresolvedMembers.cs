@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -13,8 +14,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         IgnoredBy = Tool.NativeAot
     )]
     [KeptAttributeAttribute(typeof(IgnoreTestCaseAttribute), By = Tool.Trimmer)]
-    // NativeAOT will not compile a method with unresolved types in it - it will instead replace it with a throwing method body
-    // So it doesn't produce any of these warnings - which is also correct, because the code at runtime would never get there
+    // NativeAOT will not compile a method with unresolved types in it - it will instead replace it with
+    // a throwing method body
+    // So it doesn't produce any of these warnings - which is also correct, because the code at runtime
+    // would never get there
     // it would fail to JIT/run anyway.
 
     [SkipILVerify]

@@ -81,7 +81,8 @@ namespace System.Xml.Xsl.Xslt
             _records[_lastRecord].nsUri = uri;
         }
 
-        // There are some cases where we can't predict namespace content. To garantee correct results we should output all
+        // There are some cases where we can't predict namespace content. To garantee correct results we
+        // should output all
         // literal namespaces once again.
         // <xsl:element name="{}" namespace="{}"> all prefixes should be invalidated
         // <xsl:element name="{}" namespace="FOO"> all prefixes should be invalidated
@@ -90,20 +91,24 @@ namespace System.Xml.Xsl.Xslt
         // <xsl:element name="foo:A" namespace="FOO"> no invalidations reqired
         // <xsl:attribute name="{}" namespace="FOO"> all prefixes should be invalidated but not default ""
         // <xsl:attribute name="foo:A" namespace="{}"> all prefixes should be invalidated but not default ""
-        // <xsl:element name="foo:A" namespace="FOO"> We can try to invalidate only foo prefix, but there to many thinks to consider here.
-        //                                            So for now if attribute has non-null namespace it invalidates all prefixes in the
+        // <xsl:element name="foo:A" namespace="FOO"> We can try to invalidate only foo prefix, but there to
+        // many thinks to consider here.
+        //                                            So for now if attribute has non-null namespace it
+        // invalidates all prefixes in the
         //                                            scope of its element.
         //
         // <xsl:copy-of select="@*|namespace::*"> all prefixes are invalidated for the current element scope
         // <xsl:copy-of select="/|*|text()|etc."> no invalidations needed
-        // <xsl:copy> if the node is either attribute or namespace, all prefixes are invalidated for the current element scope
+        // <xsl:copy> if the node is either attribute or namespace, all prefixes are invalidated for the
+        // current element scope
         //            if the node is element, new scope is created, and all prefixes are invalidated
         //            otherwise, no invalidations needed
 
         //// We need following methods:
         //public void InvalidatePrefix(string prefix) {
         //    Debug.Assert(prefix != null);
-        //    if (LookupNamespace(prefix) == null) { // This is optimisation. May be better just add this record?
+        //    if (LookupNamespace(prefix) == null) { // This is optimisation. May be better just add this
+        // record?
         //        return;
         //    }
         //    AddRecord(prefix, null);

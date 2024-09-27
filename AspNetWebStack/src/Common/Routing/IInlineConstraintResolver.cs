@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 #if ASPNETWEBAPI
 using TConstraint = System.Web.Http.Routing.IHttpRouteConstraint;
@@ -14,7 +15,8 @@ namespace System.Web.Mvc.Routing
 #endif
 {
     /// <summary>
-    /// Defines an abstraction for resolving inline constraints as instances of <see cref="TConstraint"/>.
+    /// Defines an abstraction for resolving inline constraints as instances of <see
+    // cref="TConstraint"/>.
     /// </summary>
     public interface IInlineConstraintResolver
     {

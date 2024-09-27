@@ -16,13 +16,15 @@ using System.Security;
 namespace System.Threading
 {
     //
-    // Methods for accessing memory with volatile semantics.  These are preferred over Thread.VolatileRead
+    // Methods for accessing memory with volatile semantics.  These are preferred over
+    // Thread.VolatileRead
     // and Thread.VolatileWrite, as these are implemented more efficiently.
     //
     // (We cannot change the implementations of Thread.VolatileRead/VolatileWrite without breaking code
     // that relies on their overly-strong ordering guarantees.)
     //
-    // The actual implementations of these methods are typically supplied by the VM at JIT-time, because C# does
+    // The actual implementations of these methods are typically supplied by the VM at JIT-time, because
+    // C# does
     // not allow us to express a volatile read/write from/to a byref arg.
     // See getILIntrinsicImplementationForVolatile() in jitinterface.cpp.
     //

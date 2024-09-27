@@ -1996,14 +1996,14 @@ namespace MonoTests.System.Resources
                     + "		<value>Random Thoughts</value>"
                     + "	</data>"
                     +
-                    /*s*/"	<data name=\"Foo\" type=\"System.Windows.Forms.Application, {1}\">"
+/*s*/"	<data name=\"Foo\" type=\"System.Windows.Forms.Application, {1}\">"
                     + "		<value>A B C</value>"
                     + "	</data>"
                     + "	<data name=\"Image\" type=\"{2}\">"
                     + "		<value>Summer.jpg</value>"
                     + "	</data>"
                     +
-                    /*e*/"	<data name=\"Text\">"
+/*e*/"	<data name=\"Text\">"
                     + "		<value>OK</value>"
                     + "	</data>"
                     + "	<data name=\"Unknown\" mimetype=\"application/xxx\">"
@@ -2013,11 +2013,11 @@ namespace MonoTests.System.Resources
                     + "		<value>SuperUnknown</value>"
                     + "	</data>"
                     +
-                    /*s*/"	<data name=\"Xtra\" type=\"System.Windows.Forms.AnchorStyles, {1}\" mimetype=\"application/x-microsoft.net.object.bytearray.base64\">"
+/*s*/"	<data name=\"Xtra\" type=\"System.Windows.Forms.AnchorStyles, {1}\" mimetype=\"application/x-microsoft.net.object.bytearray.base64\">"
                     + "		<value>LeftRight</value>"
                     + "	</data>"
                     +
-                    /*e*/"</root>",
+/*e*/"</root>",
                 ResXResourceWriter.ResMimeType,
                 Consts.AssemblySystem_Windows_Forms,
                 typeof(Bitmap).AssemblyQualifiedName,

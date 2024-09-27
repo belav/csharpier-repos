@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     /// <summary>
     /// Represents a state machine MoveNext method.
-    /// Handles special behavior around inheriting some attributes from the original async/iterator method.
+    /// Handles special behavior around inheriting some attributes from the original async/iterator
+    // method.
     /// </summary>
     internal sealed class SynthesizedStateMachineMoveNextMethod : SynthesizedStateMachineMethod
     {

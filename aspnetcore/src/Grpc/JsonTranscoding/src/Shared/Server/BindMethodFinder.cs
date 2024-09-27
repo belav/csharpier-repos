@@ -89,7 +89,8 @@ internal static class BindMethodFinder
 
     private static Type? GetServiceBaseType(Type serviceImplementation)
     {
-        // TService is an implementation of the gRPC service. It ultimately derives from Foo.TServiceBase base class.
+        // TService is an implementation of the gRPC service. It ultimately derives from Foo.TServiceBase
+        // base class.
         // We need to access the static BindService method on Foo which implicitly derives from Object.
         var baseType = serviceImplementation.BaseType;
 

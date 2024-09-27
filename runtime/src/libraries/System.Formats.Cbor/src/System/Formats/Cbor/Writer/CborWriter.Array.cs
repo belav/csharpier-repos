@@ -10,9 +10,12 @@ namespace System.Formats.Cbor
         // Implements major type 4 encoding per https://tools.ietf.org/html/rfc7049#section-2.1
 
         /// <summary>Writes the start of a definite or indefinite-length array (major type 4).</summary>
-        /// <param name="definiteLength">The length of the definite-length array, or <see langword="null" /> for an indefinite-length array.</param>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="definiteLength" /> parameter cannot be negative.</exception>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <param name="definiteLength">The length of the definite-length array, or <see langword="null" />
+        // for an indefinite-length array.</param>
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="definiteLength" /> parameter
+        // cannot be negative.</exception>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -34,7 +37,8 @@ namespace System.Formats.Cbor
         }
 
         /// <summary>Writes the end of an array (major type 4).</summary>
-        /// <exception cref="InvalidOperationException"><para>The written data is not accepted under the current conformance mode.</para>
+        /// <exception cref="InvalidOperationException"><para>The written data is not accepted under the
+        // current conformance mode.</para>
         /// <para>-or-</para>
         /// <para>The definite-length array anticipates more data items.</para></exception>
         public void WriteEndArray()
@@ -76,7 +80,8 @@ namespace System.Formats.Cbor
             PushDataItem(CborMajorType.Array, definiteLength: null);
         }
 
-        // perform an in-place conversion of an indefinite-length encoding into an equivalent definite-length
+        // perform an in-place conversion of an indefinite-length encoding into an equivalent
+        // definite-length
         private void PatchIndefiniteLengthCollection(CborMajorType majorType, int count)
         {
             Debug.Assert(majorType == CborMajorType.Array || majorType == CborMajorType.Map);

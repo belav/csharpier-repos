@@ -12,16 +12,16 @@ namespace System.Net
     using System.Runtime.Serialization;
     using System.Security.Permissions;
 
-    /*++
+/*++
 
-    Abstract:
+Abstract:
 
-        Contains the defintion for the WebException object. This is a subclass of
-        Exception that contains a WebExceptionStatus and possible a reference to a
-        WebResponse.
+Contains the defintion for the WebException object. This is a subclass of
+Exception that contains a WebExceptionStatus and possible a reference to a
+WebResponse.
 
 
-    --*/
+--*/
 
 
 
@@ -57,7 +57,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the specified error
+        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the
+        // specified error
         ///       message.
         ///    </para>
         /// </devdoc>
@@ -66,7 +67,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the specified error
+        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the
+        // specified error
         ///       message and nested exception.
         ///
         ///           Message         - Message string for exception.
@@ -82,7 +84,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the specified error
+        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the
+        // specified error
         ///       message and status.
         ///
         ///           Message         - Message string for exception.
@@ -99,7 +102,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the specified error
+        ///       Creates a new instance of the <see cref='System.Net.WebException'/> class with the
+        // specified error
         ///       message, nested exception, status and response.
         ///
         ///           Message         - Message string for exception.

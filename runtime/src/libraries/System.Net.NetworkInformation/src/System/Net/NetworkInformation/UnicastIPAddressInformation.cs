@@ -25,7 +25,8 @@ namespace System.Net.NetworkInformation
         public abstract long AddressValidLifetime { get; }
 
         /// <summary>
-        /// Specifies the amount of time remaining on the Dynamic Host Configuration Protocol (DHCP) lease for this IP address.
+        /// Specifies the amount of time remaining on the Dynamic Host Configuration Protocol (DHCP) lease
+        // for this IP address.
         /// </summary>
         [SupportedOSPlatform("windows")]
         public abstract long DhcpLeaseLifetime { get; }

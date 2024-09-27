@@ -116,9 +116,9 @@ internal sealed class TimeLimitedDataProtector : ITimeLimitedDataProtector
         }
     }
 
-    /*
-     * EXPLICIT INTERFACE IMPLEMENTATIONS
-     */
+/*
+* EXPLICIT INTERFACE IMPLEMENTATIONS
+*/
 
     IDataProtector IDataProtectionProvider.CreateProtector(string purpose)
     {

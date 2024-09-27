@@ -13,17 +13,21 @@ using static Microsoft.Interop.SyntaxFactoryExtensions;
 namespace Microsoft.Interop
 {
     /// <summary>
-    /// Base code generator for generating the body of a source-generated P/Invoke and providing customization for how to invoke/define the native method.
+    /// Base code generator for generating the body of a source-generated P/Invoke and providing
+    // customization for how to invoke/define the native method.
     /// </summary>
     /// <remarks>
     /// This type enables multiple code generators for P/Invoke-style marshalling
-    /// to reuse the same basic method body, but with different designs of how to emit the target native method.
+    /// to reuse the same basic method body, but with different designs of how to emit the target native
+    // method.
     /// This enables users to write code generators that work with slightly different semantics.
     /// For example, the source generator for [LibraryImport] emits the target P/Invoke as
     /// a local function inside the generated stub body.
     /// However, other managed-to-native code generators using a P/Invoke style might want to define
-    /// the target DllImport outside of the stub as a static non-local function or as a function pointer field.
-    /// This refactoring allows the code generator to have control over where the target method is declared
+    /// the target DllImport outside of the stub as a static non-local function or as a function pointer
+    // field.
+    /// This refactoring allows the code generator to have control over where the target method is
+    // declared
     /// and how it is declared.
     /// </remarks>
     internal sealed class PInvokeStubCodeGenerator
@@ -37,7 +41,8 @@ namespace Microsoft.Interop
         private const string LastErrorIdentifier = "__lastError";
         private const string InvokeSucceededIdentifier = "__invokeSucceeded";
 
-        // Error code representing success. This maps to S_OK for Windows HRESULT semantics and 0 for POSIX errno semantics.
+        // Error code representing success. This maps to S_OK for Windows HRESULT semantics and 0 for POSIX
+        // errno semantics.
         private const int SuccessErrorCode = 0;
 
         private readonly bool _setLastError;
@@ -73,7 +78,8 @@ namespace Microsoft.Interop
                 )
             )
             {
-                // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
+                // If we need a different native return identifier, then recreate the context with the correct
+                // identifier before we generate any code.
                 _context = new ManagedToNativeStubCodeContext(
                     ReturnIdentifier,
                     $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}"

@@ -29,7 +29,8 @@ namespace System.ServiceModel
         [TypeConverter(typeof(ServiceXNameTypeConverter))]
         public XName ServiceContractName { get; set; }
 
-        // concrete AddressHeader descendants aren't currently XAMLable, they are not initialized until runtime
+        // concrete AddressHeader descendants aren't currently XAMLable, they are not initialized until
+        // runtime
         // If user adds an address header, this object will fail to xamlize.
         [Fx.Tag.KnownXamlExternal]
         public Collection<AddressHeader> Headers

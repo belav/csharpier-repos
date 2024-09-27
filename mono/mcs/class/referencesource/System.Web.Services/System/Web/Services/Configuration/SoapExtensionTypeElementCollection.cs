@@ -129,8 +129,10 @@ namespace System.Web.Services.Configuration
                 {
                     throw new ArgumentNullException("key");
                 }
-                // NOTE [ivelin : integration fix] The change bellow have the issue that it wont use the collection comparer
-                // if one is specified. We ( System.Configuration ) usually avoid having set_item[ key ] when the element contains
+                // NOTE [ivelin : integration fix] The change bellow have the issue that it wont use the collection
+                // comparer
+                // if one is specified. We ( System.Configuration ) usually avoid having set_item[ key ] when the
+                // element contains
                 // the key and instead provide an Add( element ) method only.
                 if (this.GetElementKey(value).Equals(key))
                 {

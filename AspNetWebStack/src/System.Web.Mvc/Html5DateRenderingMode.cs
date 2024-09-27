@@ -1,10 +1,12 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 namespace System.Web.Mvc
 {
     /// <summary>
-    /// Controls the value-rendering method For HTML5 input elements of types such as date, time, datetime and datetime-local.
+    /// Controls the value-rendering method For HTML5 input elements of types such as date, time,
+    // datetime and datetime-local.
     /// </summary>
     public enum Html5DateRenderingMode
     {
@@ -14,7 +16,8 @@ namespace System.Web.Mvc
         CurrentCulture = 0,
 
         /// <summary>
-        /// Render date and time values as Rfc3339 compliant strings to support HTML5 date and time types of input elements.
+        /// Render date and time values as Rfc3339 compliant strings to support HTML5 date and time types of
+        // input elements.
         /// </summary>
         Rfc3339,
     }

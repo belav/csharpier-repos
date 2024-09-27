@@ -352,7 +352,8 @@ namespace System.Net.Sockets.Tests
             }
 
             // We try this a couple of times to deal with a timing race: if the Dispose happens
-            // before the operation is started, the peer won't see a ConnectionReset SocketException and we won't
+            // before the operation is started, the peer won't see a ConnectionReset SocketException and we
+            // won't
             // see a SocketException either.
             await RetryHelper.ExecuteAsync(
                 async () =>
@@ -647,7 +648,8 @@ namespace System.Net.Sockets.Tests
         }
     }
 
-    // Running all cases of GreaterThan2GBFile_SendsAllBytes in parallel may attempt to allocate Min(ProcessorCount, Subclass_Count) * 2GB of disk space
+    // Running all cases of GreaterThan2GBFile_SendsAllBytes in parallel may attempt to allocate
+    // Min(ProcessorCount, Subclass_Count) * 2GB of disk space
     // in extreme cases. Some CI machines may run out of disk space if this happens.
     [Collection(nameof(DisableParallelization))]
     public abstract class SendFile_NonParallel<T> : SocketTestHelperBase<T>

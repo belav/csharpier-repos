@@ -3,26 +3,26 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 /*
- * Regression tests for the mono JIT.
- *
- * Each test needs to be of the form:
- *
- * public static int test_<result>_<name> ();
- *
- * where <result> is an integer (the value that needs to be returned by
- * the method to make it pass.
- * <name> is a user-displayed name used to identify the test.
- *
- * The tests can be driven in two ways:
- * *) running the program directly: Main() uses reflection to find and invoke
- * 	the test methods (this is useful mostly to check that the tests are correct)
- * *) with the --regression switch of the jit (this is the preferred way since
- * 	all the tests will be run with optimizations on and off)
- *
- * The reflection logic could be moved to a .dll since we need at least another
- * regression test file written in IL code to have better control on how
- * the IL code looks.
- */
+* Regression tests for the mono JIT.
+*
+* Each test needs to be of the form:
+*
+* public static int test_<result>_<name> ();
+*
+* where <result> is an integer (the value that needs to be returned by
+* the method to make it pass.
+* <name> is a user-displayed name used to identify the test.
+*
+* The tests can be driven in two ways:
+* *) running the program directly: Main() uses reflection to find and invoke
+* 	the test methods (this is useful mostly to check that the tests are correct)
+* *) with the --regression switch of the jit (this is the preferred way since
+* 	all the tests will be run with optimizations on and off)
+*
+* The reflection logic could be moved to a .dll since we need at least another
+* regression test file written in IL code to have better control on how
+* the IL code looks.
+*/
 
 #if __MOBILE__
 class ExceptionTests
@@ -1623,60 +1623,60 @@ class Tests
     public static int test_0_long_cast()
     {
         /*
-         * These tests depend on properties of x86 fp arithmetic so they won't work
-         * on other platforms.
-         */
+        * These tests depend on properties of x86 fp arithmetic so they won't work
+        * on other platforms.
+        */
         /*
         long a;
         bool failed;
-
-        try {
-            double d = System.Int64.MaxValue - 512.0;
-            failed = true;
-            checked {
-                a = (long)d;
-            }
-        } catch (OverflowException) {
-            failed = false;
-        }
-        if (failed)
-            return 1;
-
-        try {
-            double d = System.Int64.MaxValue - 513.0;
-            failed = false;
-            checked {
-                a = (long)d;
-            }
-        } catch (OverflowException) {
-            failed = true;
-        }
-        if (failed)
-            return 2;
         
         try {
-            double d = System.Int64.MinValue - 1024.0;
-            failed = false;
-            checked {
-                a = (long)d;
-            }
+        double d = System.Int64.MaxValue - 512.0;
+        failed = true;
+        checked {
+        a = (long)d;
+        }
         } catch (OverflowException) {
-            failed = true;
+        failed = false;
         }
         if (failed)
-            return 3;
-
+        return 1;
+        
         try {
-            double d = System.Int64.MinValue - 1025.0;
-            failed = true;
-            checked {
-                a = (long)d;
-            }
+        double d = System.Int64.MaxValue - 513.0;
+        failed = false;
+        checked {
+        a = (long)d;
+        }
         } catch (OverflowException) {
-            failed = false;
+        failed = true;
         }
         if (failed)
-            return 4;
+        return 2;
+        
+        try {
+        double d = System.Int64.MinValue - 1024.0;
+        failed = false;
+        checked {
+        a = (long)d;
+        }
+        } catch (OverflowException) {
+        failed = true;
+        }
+        if (failed)
+        return 3;
+        
+        try {
+        double d = System.Int64.MinValue - 1025.0;
+        failed = true;
+        checked {
+        a = (long)d;
+        }
+        } catch (OverflowException) {
+        failed = false;
+        }
+        if (failed)
+        return 4;
         */
 
         {
@@ -1750,34 +1750,34 @@ class Tests
         bool failed;
 
         /*
-         * These tests depend on properties of x86 fp arithmetic so they won't work
-         * on other platforms.
-         */
+        * These tests depend on properties of x86 fp arithmetic so they won't work
+        * on other platforms.
+        */
 
         /*
         try {
-            double d = System.UInt64.MaxValue - 1024.0;
-            failed = true;
-            checked {
-                a = (ulong)d;
-            }
+        double d = System.UInt64.MaxValue - 1024.0;
+        failed = true;
+        checked {
+        a = (ulong)d;
+        }
         } catch (OverflowException) {
-            failed = false;
+        failed = false;
         }
         if (failed)
-            return 1;
-
+        return 1;
+        
         try {
-            double d = System.UInt64.MaxValue - 1025.0;
-            failed = false;
-            checked {
-                a = (ulong)d;
-            }
+        double d = System.UInt64.MaxValue - 1025.0;
+        failed = false;
+        checked {
+        a = (ulong)d;
+        }
         } catch (OverflowException) {
-            failed = true;
+        failed = true;
         }
         if (failed)
-            return 2;
+        return 2;
         */
 
         try
@@ -1864,20 +1864,20 @@ class Tests
             return 1;
 
         /*
-         * These tests depend on properties of x86 fp arithmetic so they won't work
-         * on other platforms.
-         */
+        * These tests depend on properties of x86 fp arithmetic so they won't work
+        * on other platforms.
+        */
         /*
         d = 0xffffffffffffffff;
-
+        
         if ((ulong)d != 0)
-            return 2;
-
+        return 2;
+        
         if ((ushort)d != 0)
-            return 3;
-            
+        return 3;
+        
         if ((byte)d != 0)
-            return 4;
+        return 4;
         */
 
         d = 0xffff;
@@ -2282,9 +2282,9 @@ class Tests
     }
 
     /* bug# 42190, at least mcs generates a leave for the return that
-     * jumps out of multiple exception clauses: we used to execute just
-     * one enclosing finally block.
-     */
+    * jumps out of multiple exception clauses: we used to execute just
+    * one enclosing finally block.
+    */
     public static int finally_level;
 
     static void do_something()
@@ -3227,16 +3227,16 @@ class Tests
     /* FIXME: Fails on x86 when llvm is enabled (#5432) */
     /*
     public static int test_0_stack_unwind () {
-        addr = new IntPtr [1000];
-        S s = new S ();
-        for (int j = 0; j < 1000; j++) {
-            try {
-                throw_func (j, s);
-            }
-            catch (Exception) {
-            }
-        }
-        return (addr [0].ToInt64 () - addr [100].ToInt64 () < 100) ? 0 : 1;
+    addr = new IntPtr [1000];
+    S s = new S ();
+    for (int j = 0; j < 1000; j++) {
+    try {
+    throw_func (j, s);
+    }
+    catch (Exception) {
+    }
+    }
+    return (addr [0].ToInt64 () - addr [100].ToInt64 () < 100) ? 0 : 1;
     }
     */
 

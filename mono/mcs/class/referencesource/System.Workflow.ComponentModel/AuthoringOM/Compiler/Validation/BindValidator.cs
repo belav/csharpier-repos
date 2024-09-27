@@ -90,7 +90,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                     //else
                     //{
-                    //    error = new ValidationError(SR.GetString(SR.Error_BindBaseTypeNotSpecified, validationContext.PropertyName), ErrorNumbers.Error_BindBaseTypeNotSpecified);
+                    //    error = new ValidationError(SR.GetString(SR.Error_BindBaseTypeNotSpecified,
+                    // validationContext.PropertyName), ErrorNumbers.Error_BindBaseTypeNotSpecified);
                     //    error.PropertyName = GetFullPropertyName(manager) + ".Name";
                     //}
                 }
@@ -174,7 +175,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                     //else if (dataSourceActivity != activityContext && !fieldInfo.IsAssembly && !fieldInfo.IsPublic)
                     //{
-                    //    error = new ValidationError(SR.GetString(SR.Error_FieldNotAccessible, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_FieldNotAccessible);
+                    //    error = new ValidationError(SR.GetString(SR.Error_FieldNotAccessible,
+                    // GetFullPropertyName(manager), dsName), ErrorNumbers.Error_FieldNotAccessible);
                     //    error.PropertyName = GetFullPropertyName(manager);
                     //}
                     else if (fieldInfo.FieldType == null)
@@ -757,7 +759,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                     //else
                     //{
-                    //    error = new ValidationError(SR.GetString(SR.Error_BindBaseTypeNotSpecified, validationContext.PropertyName), ErrorNumbers.Error_BindBaseTypeNotSpecified);
+                    //    error = new ValidationError(SR.GetString(SR.Error_BindBaseTypeNotSpecified,
+                    // validationContext.PropertyName), ErrorNumbers.Error_BindBaseTypeNotSpecified);
                     //    error.PropertyName = GetFullPropertyName(manager) + ".Name";
                     //}
                 }
@@ -1040,7 +1043,8 @@ namespace System.Workflow.ComponentModel.Compiler
 
                     Type baseType = BindHelpers.GetBaseType(manager, validationContext);
 
-                    //We need to bifurcate to field, method, property or ActivityBind, we need to distinguish based on first
+                    //We need to bifurcate to field, method, property or ActivityBind, we need to distinguish based on
+                    // first
                     //part of the path
                     MemberInfo memberInfo = null;
                     Type declaringType = null;
@@ -1224,7 +1228,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 //else
                 //{
-                //    error = new ValidationError(SR.GetString(SR.Error_BindBaseTypeNotSpecified, validationContext.PropertyName), ErrorNumbers.Error_BindBaseTypeNotSpecified);
+                //    error = new ValidationError(SR.GetString(SR.Error_BindBaseTypeNotSpecified,
+                // validationContext.PropertyName), ErrorNumbers.Error_BindBaseTypeNotSpecified);
                 //    error.PropertyName = GetFullPropertyName(manager) + ".Name";
                 //}
             }

@@ -432,7 +432,8 @@ namespace System.Collections.Generic
         /// <summary>
         /// Ensures that the capacity of this list is at least the specified <paramref name="capacity"/>.
         /// If the current capacity of the list is less than specified <paramref name="capacity"/>,
-        /// the capacity is increased by continuously twice current capacity until it is at least the specified <paramref name="capacity"/>.
+        /// the capacity is increased by continuously twice current capacity until it is at least the
+        // specified <paramref name="capacity"/>.
         /// </summary>
         /// <param name="capacity">The minimum capacity to ensure.</param>
         /// <returns>The new capacity of this list.</returns>
@@ -713,7 +714,8 @@ namespace System.Collections.Generic
         /// <summary>
         /// Creates a shallow copy of a range of elements in the source <see cref="List{T}" />.
         /// </summary>
-        /// <param name="start">The zero-based <see cref="List{T}" /> index at which the range starts.</param>
+        /// <param name="start">The zero-based <see cref="List{T}" /> index at which the range
+        // starts.</param>
         /// <param name="length">The length of the range.</param>
         /// <returns>A shallow copy of a range of elements in the source <see cref="List{T}" />.</returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -721,7 +723,8 @@ namespace System.Collections.Generic
         /// -or-
         /// <paramref name="length" /> is less than 0.
         /// </exception>
-        /// <exception cref="ArgumentException"><paramref name="start" /> and <paramref name="length" /> do not denote a valid range of elements in the <see cref="List{T}" />.</exception>
+        /// <exception cref="ArgumentException"><paramref name="start" /> and <paramref name="length" /> do
+        // not denote a valid range of elements in the <see cref="List{T}" />.</exception>
         public List<T> Slice(int start, int length) => GetRange(start, length);
 
         // Returns the index of the first occurrence of a given value in a range of

@@ -76,9 +76,9 @@ namespace Novell.Directory.Ldap.Utilclass
             }
         }
 
-        /* Adds a control to the current list of registered response controls.
-        *
-        */
+/* Adds a control to the current list of registered response controls.
+*
+*/
         public void registerResponseControl(System.String oid, System.Type controlClass)
         {
             lock (this)
@@ -87,33 +87,33 @@ namespace Novell.Directory.Ldap.Utilclass
             }
         }
 
-        /* Searches the list of registered controls for a mathcing control.  We
-        * search using the OID string.  If a match is found we return the
-        * Class name that was provided to us on registration.
-        */
+/* Searches the list of registered controls for a mathcing control.  We
+* search using the OID string.  If a match is found we return the
+* Class name that was provided to us on registration.
+*/
         public System.Type findResponseControl(System.String searchOID)
         {
             lock (this)
             {
                 RegisteredControl ctl = null;
 
-                /* loop through the contents of the vector */
+/* loop through the contents of the vector */
                 for (int i = 0; i < Count; i++)
                 {
-                    /* Get next registered control */
+/* Get next registered control */
                     if ((ctl = (RegisteredControl)this[i]) == null)
                     {
                         throw new System.FieldAccessException();
                     }
 
-                    /* Does the stored OID match with whate we are looking for */
+/* Does the stored OID match with whate we are looking for */
                     if (ctl.myOID.CompareTo(searchOID) == 0)
                     {
-                        /* Return the class name if we have match */
+/* Return the class name if we have match */
                         return ctl.myClass;
                     }
                 }
-                /* The requested control does not have a registered response class */
+/* The requested control does not have a registered response class */
                 return null;
             }
         }

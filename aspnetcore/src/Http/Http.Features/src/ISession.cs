@@ -6,13 +6,16 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
-/// Stores user data while the user browses a web application. Session state uses a store maintained by the application
-/// to persist data across requests from a client. The session data is backed by a cache and considered ephemeral data.
+/// Stores user data while the user browses a web application. Session state uses a store maintained
+// by the application
+/// to persist data across requests from a client. The session data is backed by a cache and
+// considered ephemeral data.
 /// </summary>
 public interface ISession
 {
     /// <summary>
-    /// Indicates whether the current session loaded successfully. Accessing this property before the session is loaded will cause it to be loaded inline.
+    /// Indicates whether the current session loaded successfully. Accessing this property before the
+    // session is loaded will cause it to be loaded inline.
     /// </summary>
     bool IsAvailable { get; }
 

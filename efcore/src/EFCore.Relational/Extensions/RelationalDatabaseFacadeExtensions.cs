@@ -10,7 +10,8 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 namespace Microsoft.EntityFrameworkCore;
 
 /// <summary>
-///     Extension methods for the <see cref="DatabaseFacade" /> returned from <see cref="DbContext.Database" />
+///     Extension methods for the <see cref="DatabaseFacade" /> returned from <see
+// cref="DbContext.Database" />
 ///     that can be used only with relational database providers.
 /// </summary>
 public static class RelationalDatabaseFacadeExtensions
@@ -19,7 +20,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Gets all the migrations that are defined in the configured migrations assembly.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <returns>The list of migrations.</returns>
@@ -34,7 +36,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Gets all migrations that have been applied to the target database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <returns>The list of migrations.</returns>
@@ -52,12 +55,15 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Asynchronously gets all migrations that have been applied to the target database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     [RequiresDynamicCode(
         "Migrations operations are not supported with NativeAOT"
             + " Use a migration bundle or an alternate way of executing migration operations."
@@ -74,10 +80,12 @@ public static class RelationalDatabaseFacadeExtensions
         ).Select(hr => hr.MigrationId);
 
     /// <summary>
-    ///     Gets all migrations that are defined in the assembly but haven't been applied to the target database.
+    ///     Gets all migrations that are defined in the assembly but haven't been applied to the target
+    // database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <returns>The list of migrations.</returns>
@@ -89,15 +97,19 @@ public static class RelationalDatabaseFacadeExtensions
         GetMigrations(databaseFacade).Except(GetAppliedMigrations(databaseFacade));
 
     /// <summary>
-    ///     Asynchronously gets all migrations that are defined in the assembly but haven't been applied to the target database.
+    ///     Asynchronously gets all migrations that are defined in the assembly but haven't been applied
+    // to the target database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     [RequiresDynamicCode(
         "Migrations operations are not supported with NativeAOT"
             + " Use a migration bundle or an alternate way of executing migration operations."
@@ -118,11 +130,14 @@ public static class RelationalDatabaseFacadeExtensions
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Note that this API is mutually exclusive with <see cref="DatabaseFacade.EnsureCreated" />. EnsureCreated does not use migrations
-    ///         to create the database and therefore the database that is created cannot be later updated using migrations.
+    ///         Note that this API is mutually exclusive with <see cref="DatabaseFacade.EnsureCreated"
+    // />. EnsureCreated does not use migrations
+    ///         to create the database and therefore the database that is created cannot be later
+    // updated using migrations.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
@@ -134,23 +149,29 @@ public static class RelationalDatabaseFacadeExtensions
         databaseFacade.GetRelationalService<IMigrator>().Migrate();
 
     /// <summary>
-    ///     Asynchronously applies any pending migrations for the context to the database. Will create the database
+    ///     Asynchronously applies any pending migrations for the context to the database. Will create
+    // the database
     ///     if it does not already exist.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Note that this API is mutually exclusive with <see cref="DatabaseFacade.EnsureCreated" />.
-    ///         <see cref="DatabaseFacade.EnsureCreated" /> does not use migrations to create the database and therefore the database
+    ///         Note that this API is mutually exclusive with <see cref="DatabaseFacade.EnsureCreated"
+    // />.
+    ///         <see cref="DatabaseFacade.EnsureCreated" /> does not use migrations to create the
+    // database and therefore the database
     ///         that is created cannot be later updated using migrations.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous migration operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     [RequiresDynamicCode(
         "Migrations operations are not supported with NativeAOT"
             + " Use a migration bundle or an alternate way of executing migration operations."
@@ -169,26 +190,34 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with non-validated user-provided values
-    ///         into this method. Doing so may expose your application to SQL injection attacks. To use the interpolated string syntax,
+    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with
+    // non-validated user-provided values
+    ///         into this method. Doing so may expose your application to SQL injection attacks. To use
+    // the interpolated string syntax,
     ///         consider using <see cref="ExecuteSql" /> to create parameters.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
@@ -208,21 +237,27 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
@@ -240,21 +275,27 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
@@ -270,26 +311,34 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with non-validated user-provided values
-    ///         into this method. Doing so may expose your application to SQL injection attacks. To use the interpolated string syntax,
+    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with
+    // non-validated user-provided values
+    ///         into this method. Doing so may expose your application to SQL injection attacks. To use
+    // the interpolated string syntax,
     ///         consider using <see cref="ExecuteSql" /> to create parameters.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
@@ -336,34 +385,47 @@ public static class RelationalDatabaseFacadeExtensions
     }
 
     /// <summary>
-    ///     Creates a LINQ query based on a raw SQL query, which returns a result set of a scalar type natively supported by the database
+    ///     Creates a LINQ query based on a raw SQL query, which returns a result set of a scalar type
+    // natively supported by the database
     ///     provider.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         To use this method with a return type that isn't natively supported by the database provider, use the
-    ///         <see cref="ModelConfigurationBuilder.DefaultTypeMapping{TScalar}(Action{TypeMappingConfigurationBuilder{TScalar}})" />
+    ///         To use this method with a return type that isn't natively supported by the database
+    // provider, use the
+    ///         <see
+    // cref="ModelConfigurationBuilder.DefaultTypeMapping{TScalar}(Action{TypeMappingConfigurationBuilder{TScalar}})"
+    // />
     ///         method.
     ///     </para>
     ///     <para>
-    ///         The returned <see cref="IQueryable{TResult}" /> can be composed over using LINQ to build more complex queries.
+    ///         The returned <see cref="IQueryable{TResult}" /> can be composed over using LINQ to build
+    // more complex queries.
     ///     </para>
     ///     <para>
-    ///         Note that this method does not start a transaction. To use this method with a transaction, first call
+    ///         Note that this method does not start a transaction. To use this method with a
+    // transaction, first call
     ///         <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with non-validated user-provided values
-    ///         into this method. Doing so may expose your application to SQL injection attacks. To use the interpolated string syntax,
-    ///         consider using <see cref="SqlQuery{TResult}(DatabaseFacade, FormattableString)" /> to create parameters.
+    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with
+    // non-validated user-provided values
+    ///         into this method. Doing so may expose your application to SQL injection attacks. To use
+    // the interpolated string syntax,
+    ///         consider using <see cref="SqlQuery{TResult}(DatabaseFacade, FormattableString)" /> to
+    // create parameters.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
@@ -403,35 +465,46 @@ public static class RelationalDatabaseFacadeExtensions
     }
 
     /// <summary>
-    ///     Creates a LINQ query based on a raw SQL query, which returns a result set of a scalar type natively supported by the database
+    ///     Creates a LINQ query based on a raw SQL query, which returns a result set of a scalar type
+    // natively supported by the database
     ///     provider.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         To use this method with a return type that isn't natively supported by the database provider, use the
-    ///         <see cref="ModelConfigurationBuilder.DefaultTypeMapping{TScalar}(Action{TypeMappingConfigurationBuilder{TScalar}})" />
+    ///         To use this method with a return type that isn't natively supported by the database
+    // provider, use the
+    ///         <see
+    // cref="ModelConfigurationBuilder.DefaultTypeMapping{TScalar}(Action{TypeMappingConfigurationBuilder{TScalar}})"
+    // />
     ///         method.
     ///     </para>
     ///     <para>
-    ///         The returned <see cref="IQueryable{TResult}" /> can be composed over using LINQ to build more complex queries.
+    ///         The returned <see cref="IQueryable{TResult}" /> can be composed over using LINQ to build
+    // more complex queries.
     ///     </para>
     ///     <para>
-    ///         Note that this method does not start a transaction. To use this method with a transaction, first call
+    ///         Note that this method does not start a transaction. To use this method with a
+    // transaction, first call
     ///         <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="sql">The interpolated string representing a SQL query with parameters.</param>
-    /// <returns>An <see cref="IQueryable{T}" /> representing the interpolated string SQL query.</returns>
+    /// <returns>An <see cref="IQueryable{T}" /> representing the interpolated string SQL
+    // query.</returns>
     public static IQueryable<TResult> SqlQuery<TResult>(
         this DatabaseFacade databaseFacade,
         [NotParameterized] FormattableString sql
@@ -443,31 +516,40 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="sql">The interpolated string representing a SQL query with parameters.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is the number of rows affected.
+    ///     A task that represents the asynchronous operation. The task result is the number of rows
+    // affected.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static Task<int> ExecuteSqlInterpolatedAsync(
         this DatabaseFacade databaseFacade,
         FormattableString sql,
@@ -480,31 +562,40 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="sql">The interpolated string representing a SQL query with parameters.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is the number of rows affected.
+    ///     A task that represents the asynchronous operation. The task result is the number of rows
+    // affected.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static Task<int> ExecuteSqlAsync(
         this DatabaseFacade databaseFacade,
         FormattableString sql,
@@ -517,29 +608,37 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
-    ///         can be used explicitly, making sure to also use a transaction if the SQL is not idempotent.
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
+    ///         can be used explicitly, making sure to also use a transaction if the SQL is not
+    // idempotent.
     ///     </para>
     ///     <para>
-    ///         <b>Never</b> pass a concatenated or interpolated string (<c>$""</c>) with non-validated user-provided values
+    ///         <b>Never</b> pass a concatenated or interpolated string (<c>$""</c>) with non-validated
+    // user-provided values
     ///         into this method. Doing so may expose your application to SQL injection attacks.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="sql">The SQL to execute.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is the number of rows affected.
+    ///     A task that represents the asynchronous operation. The task result is the number of rows
+    // affected.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static Task<int> ExecuteSqlRawAsync(
         this DatabaseFacade databaseFacade,
         string sql,
@@ -552,26 +651,34 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An <see cref="ExecutionStrategy" />
+    ///         since the SQL may not be idempotent and does not run in a transaction. An <see
+    // cref="ExecutionStrategy" />
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with non-validated user-provided values
-    ///         into this method. Doing so may expose your application to SQL injection attacks. To use the interpolated string syntax,
+    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with
+    // non-validated user-provided values
+    ///         into this method. Doing so may expose your application to SQL injection attacks. To use
+    // the interpolated string syntax,
     ///         consider using <see cref="ExecuteSqlAsync" /> to create parameters.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
@@ -579,7 +686,8 @@ public static class RelationalDatabaseFacadeExtensions
     /// <param name="sql">The SQL to execute.</param>
     /// <param name="parameters">Parameters to use with the SQL.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is the number of rows affected.
+    ///     A task that represents the asynchronous operation. The task result is the number of rows
+    // affected.
     /// </returns>
     public static Task<int> ExecuteSqlRawAsync(
         this DatabaseFacade databaseFacade,
@@ -593,37 +701,48 @@ public static class RelationalDatabaseFacadeExtensions
     /// <remarks>
     ///     <para>
     ///         Note that this method does not start a transaction. To use this method with
-    ///         a transaction, first call <see cref="BeginTransaction" /> or <see cref="O:UseTransaction" />.
+    ///         a transaction, first call <see cref="BeginTransaction" /> or <see
+    // cref="O:UseTransaction" />.
     ///     </para>
     ///     <para>
     ///         Note that the current <see cref="ExecutionStrategy" /> is not used by this method
-    ///         since the SQL may not be idempotent and does not run in a transaction. An ExecutionStrategy
+    ///         since the SQL may not be idempotent and does not run in a transaction. An
+    // ExecutionStrategy
     ///         can be used explicitly, making sure to also use a transaction if the SQL is not
     ///         idempotent.
     ///     </para>
     ///     <para>
-    ///         As with any API that accepts SQL it is important to parameterize any user input to protect against a SQL injection
-    ///         attack. You can include parameter place holders in the SQL query string and then supply parameter values as additional
-    ///         arguments. Any parameter values you supply will automatically be converted to a DbParameter.
+    ///         As with any API that accepts SQL it is important to parameterize any user input to
+    // protect against a SQL injection
+    ///         attack. You can include parameter place holders in the SQL query string and then supply
+    // parameter values as additional
+    ///         arguments. Any parameter values you supply will automatically be converted to a
+    // DbParameter.
     ///     </para>
     ///     <para>
-    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with non-validated user-provided values
-    ///         into this method. Doing so may expose your application to SQL injection attacks. To use the interpolated string syntax,
+    ///         However, <b>never</b> pass a concatenated or interpolated string (<c>$""</c>) with
+    // non-validated user-provided values
+    ///         into this method. Doing so may expose your application to SQL injection attacks. To use
+    // the interpolated string syntax,
     ///         consider using <see cref="ExecuteSqlAsync" /> to create parameters.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+    ///         See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+    // Core</see>
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="sql">The SQL to execute.</param>
     /// <param name="parameters">Parameters to use with the SQL.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is the number of rows affected.
+    ///     A task that represents the asynchronous operation. The task result is the number of rows
+    // affected.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static async Task<int> ExecuteSqlRawAsync(
         this DatabaseFacade databaseFacade,
         string sql,
@@ -671,13 +790,17 @@ public static class RelationalDatabaseFacadeExtensions
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         This connection should not be disposed if it was created by Entity Framework. Connections are created by
-    ///         Entity Framework when a connection string rather than a DbConnection object is passed to the 'UseMyProvider'
-    ///         method for the database provider in use. Conversely, the application is responsible for disposing a DbConnection
+    ///         This connection should not be disposed if it was created by Entity Framework.
+    // Connections are created by
+    ///         Entity Framework when a connection string rather than a DbConnection object is passed to
+    // the 'UseMyProvider'
+    ///         method for the database provider in use. Conversely, the application is responsible for
+    // disposing a DbConnection
     ///         passed to Entity Framework in 'UseMyProvider'.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
@@ -693,15 +816,18 @@ public static class RelationalDatabaseFacadeExtensions
     ///         The connection can only be set when the existing connection, if any, is not open.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="connection">The connection.</param>
     /// <param name="contextOwnsConnection">
     ///     If <see langword="true" />, then EF will take ownership of the connection and will
-    ///     dispose it in the same way it would dispose a connection created by EF. If <see langword="false" />, then the caller still
-    ///     owns the connection and is responsible for its disposal. The default value is <see langword="false" />.
+    ///     dispose it in the same way it would dispose a connection created by EF. If <see
+    // langword="false" />, then the caller still
+    ///     owns the connection and is responsible for its disposal. The default value is <see
+    // langword="false" />.
     /// </param>
     public static void SetDbConnection(
         this DatabaseFacade databaseFacade,
@@ -715,7 +841,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Gets the underlying connection string configured for this <see cref="DbContext" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <returns>The connection string.</returns>
@@ -727,10 +854,12 @@ public static class RelationalDatabaseFacadeExtensions
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         It may not be possible to change the connection string if existing connection, if any, is open.
+    ///         It may not be possible to change the connection string if existing connection, if any,
+    // is open.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
@@ -746,7 +875,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Opens the underlying <see cref="DbConnection" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     public static void OpenConnection(this DatabaseFacade databaseFacade) =>
@@ -762,12 +892,15 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Opens the underlying <see cref="DbConnection" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static Task OpenConnectionAsync(
         this DatabaseFacade databaseFacade,
         CancellationToken cancellationToken = default
@@ -785,7 +918,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Closes the underlying <see cref="DbConnection" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     public static void CloseConnection(this DatabaseFacade databaseFacade) =>
@@ -795,7 +929,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Closes the underlying <see cref="DbConnection" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
@@ -806,11 +941,13 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Starts a new transaction with a given <see cref="IsolationLevel" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="isolationLevel">The <see cref="IsolationLevel" /> to use.</param>
-    /// <returns>A <see cref="IDbContextTransaction" /> that represents the started transaction.</returns>
+    /// <returns>A <see cref="IDbContextTransaction" /> that represents the started
+    // transaction.</returns>
     public static IDbContextTransaction BeginTransaction(
         this DatabaseFacade databaseFacade,
         IsolationLevel isolationLevel
@@ -835,16 +972,20 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Asynchronously starts a new transaction with a given <see cref="IsolationLevel" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="isolationLevel">The <see cref="IsolationLevel" /> to use.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
-    ///     A task that represents the asynchronous transaction initialization. The task result contains a <see cref="IDbContextTransaction" />
+    ///     A task that represents the asynchronous transaction initialization. The task result contains
+    // a <see cref="IDbContextTransaction" />
     ///     that represents the started transaction.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static Task<IDbContextTransaction> BeginTransactionAsync(
         this DatabaseFacade databaseFacade,
         IsolationLevel isolationLevel,
@@ -868,29 +1009,35 @@ public static class RelationalDatabaseFacadeExtensions
         );
 
     /// <summary>
-    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see cref="DbContext" />.
+    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see
+    // cref="DbContext" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="transaction">The <see cref="DbTransaction" /> to use.</param>
-    /// <returns>A <see cref="IDbContextTransaction" /> that encapsulates the given transaction.</returns>
+    /// <returns>A <see cref="IDbContextTransaction" /> that encapsulates the given
+    // transaction.</returns>
     public static IDbContextTransaction? UseTransaction(
         this DatabaseFacade databaseFacade,
         DbTransaction? transaction
     ) => databaseFacade.UseTransaction(transaction, Guid.NewGuid());
 
     /// <summary>
-    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see cref="DbContext" />.
+    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see
+    // cref="DbContext" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="transaction">The <see cref="DbTransaction" /> to use.</param>
     /// <param name="transactionId">The unique identifier for the transaction.</param>
-    /// <returns>A <see cref="IDbContextTransaction" /> that encapsulates the given transaction.</returns>
+    /// <returns>A <see cref="IDbContextTransaction" /> that encapsulates the given
+    // transaction.</returns>
     public static IDbContextTransaction? UseTransaction(
         this DatabaseFacade databaseFacade,
         DbTransaction? transaction,
@@ -902,16 +1049,21 @@ public static class RelationalDatabaseFacadeExtensions
             : throw new InvalidOperationException(RelationalStrings.RelationalNotInUse);
 
     /// <summary>
-    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see cref="DbContext" />.
+    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see
+    // cref="DbContext" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="transaction">The <see cref="DbTransaction" /> to use.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-    /// <returns>A <see cref="Task" /> containing the <see cref="IDbContextTransaction" /> for the given transaction.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
+    /// <returns>A <see cref="Task" /> containing the <see cref="IDbContextTransaction" /> for the given
+    // transaction.</returns>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static Task<IDbContextTransaction?> UseTransactionAsync(
         this DatabaseFacade databaseFacade,
         DbTransaction? transaction,
@@ -919,17 +1071,22 @@ public static class RelationalDatabaseFacadeExtensions
     ) => databaseFacade.UseTransactionAsync(transaction, Guid.NewGuid(), cancellationToken);
 
     /// <summary>
-    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see cref="DbContext" />.
+    ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see
+    // cref="DbContext" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <param name="transaction">The <see cref="DbTransaction" /> to use.</param>
     /// <param name="transactionId">The unique identifier for the transaction.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-    /// <returns>A <see cref="Task" /> containing the <see cref="IDbContextTransaction" /> for the given transaction.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
+    /// <returns>A <see cref="Task" /> containing the <see cref="IDbContextTransaction" /> for the given
+    // transaction.</returns>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public static Task<IDbContextTransaction?> UseTransactionAsync(
         this DatabaseFacade databaseFacade,
         DbTransaction? transaction,
@@ -946,26 +1103,34 @@ public static class RelationalDatabaseFacadeExtensions
             : throw new InvalidOperationException(RelationalStrings.RelationalNotInUse);
 
     /// <summary>
-    ///     Sets the timeout (in seconds) to use for commands executed with this <see cref="DbContext" />.
+    ///     Sets the timeout (in seconds) to use for commands executed with this <see cref="DbContext"
+    // />.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         If this value is set, then it is used to set <see cref="DbCommand.CommandTimeout" /> whenever Entity Framework creates a
+    ///         If this value is set, then it is used to set <see cref="DbCommand.CommandTimeout" />
+    // whenever Entity Framework creates a
     ///         <see cref="DbCommand" /> to execute a query.
     ///     </para>
     ///     <para>
-    ///         If this value is not set, then the default value used is defined by the underlying ADO.NET data provider.
-    ///         Consult the documentation for the implementation of <see cref="DbCommand" /> in the ADO.NET data provider for details of
+    ///         If this value is not set, then the default value used is defined by the underlying
+    // ADO.NET data provider.
+    ///         Consult the documentation for the implementation of <see cref="DbCommand" /> in the
+    // ADO.NET data provider for details of
     ///         default values, etc.
     ///     </para>
     ///     <para>
-    ///         Note that the command timeout is distinct from the connection timeout. Connection timeouts are usually
-    ///         configured in the connection string. More recently, some ADO.NET data providers are adding the capability
-    ///         to also set a command timeout in the connection string. A value set with this API for the command timeout
+    ///         Note that the command timeout is distinct from the connection timeout. Connection
+    // timeouts are usually
+    ///         configured in the connection string. More recently, some ADO.NET data providers are
+    // adding the capability
+    ///         to also set a command timeout in the connection string. A value set with this API for
+    // the command timeout
     ///         will override any value set in the connection string.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
@@ -978,11 +1143,13 @@ public static class RelationalDatabaseFacadeExtensions
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         This is a sugar method allowing a <see cref="TimeSpan" /> to be used to set the value. It delegates to
+    ///         This is a sugar method allowing a <see cref="TimeSpan" /> to be used to set the value.
+    // It delegates to
     ///         <see cref="SetCommandTimeout(DatabaseFacade,int?)" />.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
@@ -1009,7 +1176,8 @@ public static class RelationalDatabaseFacadeExtensions
     }
 
     /// <summary>
-    ///     Returns the timeout (in seconds) set for commands executed with this <see cref="DbContext" />.
+    ///     Returns the timeout (in seconds) set for commands executed with this <see cref="DbContext"
+    // />.
     /// </summary>
     /// <remarks>
     ///     <para>
@@ -1017,7 +1185,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///         set on the database connection string.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection strings</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-connections">Connections and connection
+    // strings</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
@@ -1029,7 +1198,8 @@ public static class RelationalDatabaseFacadeExtensions
     ///     Generates a script to create all tables for the current model.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <returns>
     ///     A SQL script.
@@ -1042,7 +1212,8 @@ public static class RelationalDatabaseFacadeExtensions
         databaseFacade.GetRelationalService<IRelationalDatabaseCreator>().GenerateCreateScript();
 
     /// <summary>
-    ///     Returns <see langword="true" /> if the database provider currently in use is a relational database.
+    ///     Returns <see langword="true" /> if the database provider currently in use is a relational
+    // database.
     /// </summary>
     /// <param name="databaseFacade">The facade from <see cref="DbContext.Database" />.</param>
     /// <returns>

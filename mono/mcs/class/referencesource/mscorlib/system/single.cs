@@ -507,7 +507,8 @@ namespace System
         ///        }
         ///
         ///        /// <internalonly/>
-        ///        Single IArithmetic<Single>.DivideRemainder(Single divisor, out Single remainder, out bool overflowed) {
+        ///        Single IArithmetic<Single>.DivideRemainder(Single divisor, out Single remainder, out bool
+        // overflowed) {
         ///            remainder = m_value % divisor;
         ///            Single s = m_value / divisor;
         ///            overflowed = IsInfinity(s) || IsInfinity(remainder) || IsNaN(s) || IsNaN(remainder);
@@ -528,8 +529,10 @@ namespace System
         ///                                                             | ArithmeticCapabilities.Zero
         ///                                                             | ArithmeticCapabilities.MaxValue
         ///                                                             | ArithmeticCapabilities.MinValue
-        ///                                                             | ArithmeticCapabilities.PositiveInfinity
-        ///                                                             | ArithmeticCapabilities.NegativeInfinity);
+        ///                                                             |
+        // ArithmeticCapabilities.PositiveInfinity
+        ///                                                             |
+        // ArithmeticCapabilities.NegativeInfinity);
         ///            }
         ///            return s_descriptor;
         ///        }
@@ -537,7 +540,8 @@ namespace System
         ///        private static SingleArithmeticDescriptor s_descriptor;
         ///
         ///        class SingleArithmeticDescriptor : ArithmeticDescriptor<Single> {
-        ///            public SingleArithmeticDescriptor(ArithmeticCapabilities capabilities) : base(capabilities) {}
+        ///            public SingleArithmeticDescriptor(ArithmeticCapabilities capabilities) :
+        // base(capabilities) {}
         ///            public override Single One {
         ///                get {
         ///                    return (Single) 1;

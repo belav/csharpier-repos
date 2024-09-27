@@ -127,7 +127,8 @@ namespace System.Net
             }
         }
 
-        // RFC 2109, 2965 + the netscape specification at http://wp.netscape.com/newsref/std/cookie_spec.html
+        // RFC 2109, 2965 + the netscape specification at
+        // http://wp.netscape.com/newsref/std/cookie_spec.html
         public CookieCollection Cookies
         {
             get
@@ -144,12 +145,12 @@ namespace System.Net
             get { return headers; }
             set
             {
-                /**
-                 *	"If you attempt to set a Content-Length, Keep-Alive, Transfer-Encoding, or
-                 *	WWW-Authenticate header using the Headers property, an exception will be
-                 *	thrown. Use the KeepAlive or ContentLength64 properties to set these headers.
-                 *	You cannot set the Transfer-Encoding or WWW-Authenticate headers manually."
-                */
+/**
+*	"If you attempt to set a Content-Length, Keep-Alive, Transfer-Encoding, or
+*	WWW-Authenticate header using the Headers property, an exception will be
+*	thrown. Use the KeepAlive or ContentLength64 properties to set these headers.
+*	You cannot set the Transfer-Encoding or WWW-Authenticate headers manually."
+*/
                 // TODO: check if this is marked readonly after headers are sent.
                 headers = value;
             }
@@ -426,15 +427,15 @@ namespace System.Net
             if (!cl_set && !chunked && v >= HttpVersion.Version11)
                 chunked = true;
 
-            /* Apache forces closing the connection for these status codes:
-             *	HttpStatusCode.BadRequest 		400
-             *	HttpStatusCode.RequestTimeout 		408
-             *	HttpStatusCode.LengthRequired 		411
-             *	HttpStatusCode.RequestEntityTooLarge 	413
-             *	HttpStatusCode.RequestUriTooLong 	414
-             *	HttpStatusCode.InternalServerError 	500
-             *	HttpStatusCode.ServiceUnavailable 	503
-             */
+/* Apache forces closing the connection for these status codes:
+*	HttpStatusCode.BadRequest 		400
+*	HttpStatusCode.RequestTimeout 		408
+*	HttpStatusCode.LengthRequired 		411
+*	HttpStatusCode.RequestEntityTooLarge 	413
+*	HttpStatusCode.RequestUriTooLong 	414
+*	HttpStatusCode.InternalServerError 	500
+*	HttpStatusCode.ServiceUnavailable 	503
+*/
             bool conn_close = (
                 status_code == 400
                 || status_code == 408
@@ -497,7 +498,7 @@ namespace System.Net
             if (output_stream == null)
                 output_stream = context.Connection.GetResponseStream();
 
-            /* Assumes that the ms was at position 0 */
+/* Assumes that the ms was at position 0 */
             ms.Position = preamble;
             HeadersSent = true;
         }

@@ -74,7 +74,8 @@ namespace System
         public override int GetHashCode()
         {
             // For all normal cases we can fit all bits losslessly into the hash code:
-            // _keyChar could be any 16-bit value (though is most commonly ASCII). Use all 16 bits without conflict.
+            // _keyChar could be any 16-bit value (though is most commonly ASCII). Use all 16 bits without
+            // conflict.
             // _key is 32-bit, but the ctor throws for anything over 255. Use those 8 bits without conflict.
             // _mods only has enum defined values for 1,2,4: 3 bits. Use the remaining 8 bits.
             return _keyChar | ((int)_key << 16) | ((int)_mods << 24);

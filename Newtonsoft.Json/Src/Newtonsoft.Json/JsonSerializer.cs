@@ -84,7 +84,8 @@ namespace Newtonsoft.Json
         public virtual event EventHandler<ErrorEventArgs>? Error;
 
         /// <summary>
-        /// Gets or sets the <see cref="IReferenceResolver"/> used by the serializer when resolving references.
+        /// Gets or sets the <see cref="IReferenceResolver"/> used by the serializer when resolving
+        // references.
         /// </summary>
         public virtual IReferenceResolver? ReferenceResolver
         {
@@ -104,7 +105,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SerializationBinder"/> used by the serializer when resolving type names.
+        /// Gets or sets the <see cref="SerializationBinder"/> used by the serializer when resolving type
+        // names.
         /// </summary>
         [Obsolete("Binder is obsolete. Use SerializationBinder instead.")]
         public virtual SerializationBinder Binder
@@ -141,7 +143,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ISerializationBinder"/> used by the serializer when resolving type names.
+        /// Gets or sets the <see cref="ISerializationBinder"/> used by the serializer when resolving type
+        // names.
         /// </summary>
         public virtual ISerializationBinder SerializationBinder
         {
@@ -185,8 +188,10 @@ namespace Newtonsoft.Json
         /// The default value is <see cref="Json.TypeNameHandling.None" />.
         /// </summary>
         /// <remarks>
-        /// <see cref="JsonSerializer.TypeNameHandling"/> should be used with caution when your application deserializes JSON from an external source.
-        /// Incoming types should be validated with a custom <see cref="JsonSerializer.SerializationBinder"/>
+        /// <see cref="JsonSerializer.TypeNameHandling"/> should be used with caution when your application
+        // deserializes JSON from an external source.
+        /// Incoming types should be validated with a custom <see
+        // cref="JsonSerializer.SerializationBinder"/>
         /// when deserializing with a value other than <see cref="TypeNameHandling.None"/>.
         /// </remarks>
         public virtual TypeNameHandling TypeNameHandling
@@ -287,7 +292,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets how missing members (e.g. JSON contains a property that isn't a member on the object) are handled during deserialization.
+        /// Gets or sets how missing members (e.g. JSON contains a property that isn't a member on the
+        // object) are handled during deserialization.
         /// The default value is <see cref="Json.MissingMemberHandling.Ignore" />.
         /// </summary>
         public virtual MissingMemberHandling MissingMemberHandling
@@ -434,7 +440,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="StreamingContext"/> used by the serializer when invoking serialization callback methods.
+        /// Gets or sets the <see cref="StreamingContext"/> used by the serializer when invoking
+        // serialization callback methods.
         /// </summary>
         /// <value>The context.</value>
         public virtual StreamingContext Context
@@ -464,7 +471,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets how <see cref="DateTime"/> time zones are handled during serialization and deserialization.
+        /// Gets or sets how <see cref="DateTime"/> time zones are handled during serialization and
+        // deserialization.
         /// The default value is <see cref="Json.DateTimeZoneHandling.RoundtripKind" />.
         /// </summary>
         public virtual DateTimeZoneHandling DateTimeZoneHandling
@@ -474,7 +482,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets how date formatted strings, e.g. <c>"\/Date(1198908717056)\/"</c> and <c>"2012-03-21T05:40Z"</c>, are parsed when reading JSON.
+        /// Gets or sets how date formatted strings, e.g. <c>"\/Date(1198908717056)\/"</c> and
+        // <c>"2012-03-21T05:40Z"</c>, are parsed when reading JSON.
         /// The default value is <see cref="Json.DateParseHandling.DateTime" />.
         /// </summary>
         public virtual DateParseHandling DateParseHandling
@@ -516,7 +525,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets how <see cref="DateTime"/> and <see cref="DateTimeOffset"/> values are formatted when writing JSON text,
+        /// Gets or sets how <see cref="DateTime"/> and <see cref="DateTimeOffset"/> values are formatted
+        // when writing JSON text,
         /// and the expected date format when reading JSON text.
         /// The default value is <c>"yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK"</c>.
         /// </summary>
@@ -541,7 +551,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets the maximum depth allowed when reading JSON. Reading past this depth will throw a <see cref="JsonReaderException"/>.
+        /// Gets or sets the maximum depth allowed when reading JSON. Reading past this depth will throw a
+        // <see cref="JsonReaderException"/>.
         /// A null value means there is no maximum.
         /// The default value is <c>64</c>.
         /// </summary>
@@ -561,11 +572,13 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets a value indicating whether there will be a check for additional JSON content after deserializing an object.
+        /// Gets a value indicating whether there will be a check for additional JSON content after
+        // deserializing an object.
         /// The default value is <c>false</c>.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if there will be a check for additional JSON content after deserializing an object; otherwise, <c>false</c>.
+        /// 	<c>true</c> if there will be a check for additional JSON content after deserializing an object;
+        // otherwise, <c>false</c>.
         /// </value>
         public virtual bool CheckAdditionalContent
         {
@@ -615,13 +628,15 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Creates a new <see cref="JsonSerializer"/> instance using the specified <see cref="JsonSerializerSettings"/>.
+        /// Creates a new <see cref="JsonSerializer"/> instance using the specified <see
+        // cref="JsonSerializerSettings"/>.
         /// The <see cref="JsonSerializer"/> will not use default settings
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </summary>
         /// <param name="settings">The settings to be applied to the <see cref="JsonSerializer"/>.</param>
         /// <returns>
-        /// A new <see cref="JsonSerializer"/> instance using the specified <see cref="JsonSerializerSettings"/>.
+        /// A new <see cref="JsonSerializer"/> instance using the specified <see
+        // cref="JsonSerializerSettings"/>.
         /// The <see cref="JsonSerializer"/> will not use default settings
         /// from <see cref="JsonConvert.DefaultSettings"/>.
         /// </returns>
@@ -656,15 +671,19 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Creates a new <see cref="JsonSerializer"/> instance using the specified <see cref="JsonSerializerSettings"/>.
+        /// Creates a new <see cref="JsonSerializer"/> instance using the specified <see
+        // cref="JsonSerializerSettings"/>.
         /// The <see cref="JsonSerializer"/> will use default settings
-        /// from <see cref="JsonConvert.DefaultSettings"/> as well as the specified <see cref="JsonSerializerSettings"/>.
+        /// from <see cref="JsonConvert.DefaultSettings"/> as well as the specified <see
+        // cref="JsonSerializerSettings"/>.
         /// </summary>
         /// <param name="settings">The settings to be applied to the <see cref="JsonSerializer"/>.</param>
         /// <returns>
-        /// A new <see cref="JsonSerializer"/> instance using the specified <see cref="JsonSerializerSettings"/>.
+        /// A new <see cref="JsonSerializer"/> instance using the specified <see
+        // cref="JsonSerializerSettings"/>.
         /// The <see cref="JsonSerializer"/> will use default settings
-        /// from <see cref="JsonConvert.DefaultSettings"/> as well as the specified <see cref="JsonSerializerSettings"/>.
+        /// from <see cref="JsonConvert.DefaultSettings"/> as well as the specified <see
+        // cref="JsonSerializerSettings"/>.
         /// </returns>
         public static JsonSerializer CreateDefault(JsonSerializerSettings? settings)
         {
@@ -817,7 +836,8 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Populates the JSON values onto the target object.
         /// </summary>
-        /// <param name="reader">The <see cref="TextReader"/> that contains the JSON structure to read values from.</param>
+        /// <param name="reader">The <see cref="TextReader"/> that contains the JSON structure to read
+        // values from.</param>
         /// <param name="target">The target object to populate values onto.</param>
         [DebuggerStepThrough]
         public void Populate(TextReader reader, object target)
@@ -828,7 +848,8 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Populates the JSON values onto the target object.
         /// </summary>
-        /// <param name="reader">The <see cref="JsonReader"/> that contains the JSON structure to read values from.</param>
+        /// <param name="reader">The <see cref="JsonReader"/> that contains the JSON structure to read
+        // values from.</param>
         /// <param name="target">The target object to populate values onto.</param>
         [DebuggerStepThrough]
         public void Populate(JsonReader reader, object target)
@@ -882,7 +903,8 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Deserializes the JSON structure contained by the specified <see cref="JsonReader"/>.
         /// </summary>
-        /// <param name="reader">The <see cref="JsonReader"/> that contains the JSON structure to deserialize.</param>
+        /// <param name="reader">The <see cref="JsonReader"/> that contains the JSON structure to
+        // deserialize.</param>
         /// <returns>The <see cref="Object"/> being deserialized.</returns>
         [DebuggerStepThrough]
         public object? Deserialize(JsonReader reader)
@@ -1128,7 +1150,9 @@ namespace Newtonsoft.Json
         /// <param name="value">The <see cref="Object"/> to serialize.</param>
         /// <param name="objectType">
         /// The type of the value being serialized.
-        /// This parameter is used when <see cref="JsonSerializer.TypeNameHandling"/> is <see cref="Json.TypeNameHandling.Auto"/> to write out the type name if the type of the value does not match.
+        /// This parameter is used when <see cref="JsonSerializer.TypeNameHandling"/> is <see
+        // cref="Json.TypeNameHandling.Auto"/> to write out the type name if the type of the value does not
+        // match.
         /// Specifying the type is optional.
         /// </param>
         public void Serialize(JsonWriter jsonWriter, object? value, Type? objectType)
@@ -1144,7 +1168,8 @@ namespace Newtonsoft.Json
         /// <param name="value">The <see cref="Object"/> to serialize.</param>
         /// <param name="objectType">
         /// The type of the value being serialized.
-        /// This parameter is used when <see cref="TypeNameHandling"/> is Auto to write out the type name if the type of the value does not match.
+        /// This parameter is used when <see cref="TypeNameHandling"/> is Auto to write out the type name if
+        // the type of the value does not match.
         /// Specifying the type is optional.
         /// </param>
         public void Serialize(TextWriter textWriter, object? value, Type objectType)

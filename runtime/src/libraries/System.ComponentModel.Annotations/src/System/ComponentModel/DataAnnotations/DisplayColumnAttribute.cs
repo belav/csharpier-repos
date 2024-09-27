@@ -4,7 +4,8 @@
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
-    ///     Sets the display column, the sort column, and the sort order for when a table is used as a parent table in FK
+    ///     Sets the display column, the sort column, and the sort order for when a table is used as a
+    // parent table in FK
     ///     relationships.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]

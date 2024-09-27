@@ -70,14 +70,16 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     void MapFrom<TResult>(Func<TSource, TDestination, TResult> mappingFunction);
 
     /// <summary>
-    /// Map destination member using a custom function. Access the source, destination object, and destination member.
+    /// Map destination member using a custom function. Access the source, destination object, and
+    // destination member.
     /// </summary>
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
     /// <param name="mappingFunction">Function to map to destination member</param>
     void MapFrom<TResult>(Func<TSource, TDestination, TMember, TResult> mappingFunction);
 
     /// <summary>
-    /// Map destination member using a custom function. Access the source, destination object, destination member, and context.
+    /// Map destination member using a custom function. Access the source, destination object,
+    // destination member, and context.
     /// </summary>
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
     /// <param name="mappingFunction">Function to map to destination member</param>
@@ -88,7 +90,8 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     /// <summary>
     /// Specify the source member(s) to map from.
     /// </summary>
-    /// <param name="sourceMembersPath">Property name referencing the source member to map against. Or a dot separated member path.</param>
+    /// <param name="sourceMembersPath">Property name referencing the source member to map against. Or a
+    // dot separated member path.</param>
     void MapFrom(string sourceMembersPath);
 
     /// <summary>
@@ -154,13 +157,15 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     /// <summary>
     /// Conditionally map this member, evaluated before accessing the source value
     /// </summary>
-    /// <param name="condition">Condition to evaluate using the source object and the current resolution context</param>
+    /// <param name="condition">Condition to evaluate using the source object and the current resolution
+    // context</param>
     void PreCondition(Func<TSource, ResolutionContext, bool> condition);
 
     /// <summary>
     /// Conditionally map this member, evaluated before accessing the source value
     /// </summary>
-    /// <param name="condition">Condition to evaluate using the source object, the destination object, and the current resolution context</param>
+    /// <param name="condition">Condition to evaluate using the source object, the destination object,
+    // and the current resolution context</param>
     void PreCondition(Func<TSource, TDestination, ResolutionContext, bool> condition);
 
     /// <summary>
@@ -172,8 +177,10 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     /// Specify a value converter to convert from the matching source member to the destination member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <typeparam name="TValueConverter">Value converter type</typeparam>
     /// <typeparam name="TSourceMember">Source member type</typeparam>
@@ -184,8 +191,10 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     /// Specify a value converter to convert from the specified source member to the destination member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <typeparam name="TValueConverter">Value converter type</typeparam>
     /// <typeparam name="TSourceMember">Source member type</typeparam>
@@ -196,11 +205,14 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
         where TValueConverter : IValueConverter<TSourceMember, TMember>;
 
     /// <summary>
-    /// Specify a value converter to convert from the specified source member name to the destination member
+    /// Specify a value converter to convert from the specified source member name to the destination
+    // member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <typeparam name="TValueConverter">Value converter type</typeparam>
     /// <typeparam name="TSourceMember">Source member type</typeparam>
@@ -209,11 +221,14 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
         where TValueConverter : IValueConverter<TSourceMember, TMember>;
 
     /// <summary>
-    /// Specify a value converter instance to convert from the matching source member to the destination member
+    /// Specify a value converter instance to convert from the matching source member to the destination
+    // member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <typeparam name="TSourceMember">Source member type</typeparam>
     /// <param name="valueConverter">Value converter instance</param>
@@ -223,8 +238,10 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     /// Specify a value converter instance from the specified source member to the destination member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <typeparam name="TSourceMember">Source member type</typeparam>
     /// <param name="valueConverter">Value converter instance</param>
@@ -235,11 +252,14 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     );
 
     /// <summary>
-    /// Specify a value converter instance to convert from the specified source member name to the destination member
+    /// Specify a value converter instance to convert from the specified source member name to the
+    // destination member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <typeparam name="TSourceMember">Source member type</typeparam>
     /// <param name="valueConverter">Value converter instance</param>
@@ -257,14 +277,16 @@ public interface IMemberConfigurationExpression
     : IMemberConfigurationExpression<object, object, object>
 {
     /// <summary>
-    /// Map destination member using a custom value resolver. Used when the value resolver is not known at compile-time
+    /// Map destination member using a custom value resolver. Used when the value resolver is not known
+    // at compile-time
     /// </summary>
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
     /// <param name="valueResolverType">Value resolver type</param>
     void MapFrom(Type valueResolverType);
 
     /// <summary>
-    /// Map destination member using a custom value resolver. Used when the value resolver is not known at compile-time
+    /// Map destination member using a custom value resolver. Used when the value resolver is not known
+    // at compile-time
     /// </summary>
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
     /// <param name="valueResolverType">Value resolver type</param>
@@ -283,32 +305,41 @@ public interface IMemberConfigurationExpression
     );
 
     /// <summary>
-    /// Specify a value converter type to convert from the matching source member to the destination member
+    /// Specify a value converter type to convert from the matching source member to the destination
+    // member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <param name="valueConverterType">Value converter type</param>
     void ConvertUsing(Type valueConverterType);
 
     /// <summary>
-    /// Specify a value converter type to convert from the specified source member name to the destination member
+    /// Specify a value converter type to convert from the specified source member name to the
+    // destination member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <param name="valueConverterType">Value converter type</param>
     /// <param name="sourceMemberName">Source member name to supply to the value converter</param>
     void ConvertUsing(Type valueConverterType, string sourceMemberName);
 
     /// <summary>
-    /// Specify a value converter instance to convert from the specified source member name to the destination member
+    /// Specify a value converter instance to convert from the specified source member name to the
+    // destination member
     /// </summary>
     /// <remarks>
-    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers receive the enclosed source/destination objects as parameters.
-    /// Value converters do not. This makes it possible to reuse value converters across multiple members and multiple maps.
+    /// Value converters are similar to type converters, but scoped to a single member. Value resolvers
+    // receive the enclosed source/destination objects as parameters.
+    /// Value converters do not. This makes it possible to reuse value converters across multiple
+    // members and multiple maps.
     /// </remarks>
     /// <typeparam name="TSourceMember">Source member type</typeparam>
     /// <typeparam name="TDestinationMember">Destination member type</typeparam>

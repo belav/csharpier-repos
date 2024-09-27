@@ -1098,8 +1098,10 @@ namespace System.Resources
                 Debug.Assert(_typeTable[typeIndex] != null, "Should have found a type!");
                 return _typeTable[typeIndex]!;
             }
-            // If-defing this coud out from Resources Extensions since they will by definition always support deserialization
-            // So we shouldn't attempt to wrap the original exception with a NotSupportedException since that can be misleading.
+            // If-defing this coud out from Resources Extensions since they will by definition always support
+            // deserialization
+            // So we shouldn't attempt to wrap the original exception with a NotSupportedException since that
+            // can be misleading.
             // For that reason, the bellow code is only relevant when building CoreLib's ResourceReader.
 #if !RESOURCES_EXTENSIONS
             // If serialization isn't supported, we convert FileNotFoundException to
@@ -1227,7 +1229,8 @@ namespace System.Resources
                     ); // AllocateStringForNameIndex could lock on _reader
 
                     object? value = null;
-                    // Lock the cache first, then the reader (in this case, we don't actually need to lock the reader and cache at the same time).
+                    // Lock the cache first, then the reader (in this case, we don't actually need to lock the reader
+                    // and cache at the same time).
                     // Lock order MUST match RuntimeResourceSet.GetObject to avoid deadlock.
                     Debug.Assert(!Monitor.IsEntered(_reader));
                     lock (_reader._resCache)

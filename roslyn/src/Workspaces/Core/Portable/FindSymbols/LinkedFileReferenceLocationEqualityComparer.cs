@@ -9,7 +9,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.FindSymbols;
 
 /// <summary>
-/// Helper comparer to enable consumers of <see cref="SymbolFinder.FindReferencesAsync(ISymbol, Solution,
+/// Helper comparer to enable consumers of <see cref="SymbolFinder.FindReferencesAsync(ISymbol,
+// Solution,
 /// CancellationToken)"/> to process references found in linked files only a single time.
 /// </summary>
 internal sealed class LinkedFileReferenceLocationEqualityComparer

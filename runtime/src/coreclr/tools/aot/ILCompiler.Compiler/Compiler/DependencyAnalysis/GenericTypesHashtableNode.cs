@@ -63,7 +63,8 @@ namespace ILCompiler.DependencyAnalysis
             // the dynamic type loader get upgraded to constructed EETypes at AOT compile time.
             foreach (var type in factory.MetadataManager.GetTypesWithConstructedEETypes())
             {
-                // If this is an instantiated non-canonical generic type, add it to the generic instantiations hashtable
+                // If this is an instantiated non-canonical generic type, add it to the generic instantiations
+                // hashtable
                 if (
                     !type.HasInstantiation
                     || type.IsGenericDefinition

@@ -320,7 +320,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Gets a value indicating whether this is an unmanaged function pointer type (<see cref="FunctionPointerType"/>).
+        /// Gets a value indicating whether this is an unmanaged function pointer type (<see
+        // cref="FunctionPointerType"/>).
         /// </summary>
         public bool IsFunctionPointer
         {
@@ -328,7 +329,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Gets a value indicating whether this is a <see cref="SignatureTypeVariable"/> or <see cref="SignatureMethodVariable"/>.
+        /// Gets a value indicating whether this is a <see cref="SignatureTypeVariable"/> or <see
+        // cref="SignatureMethodVariable"/>.
         /// </summary>
         public bool IsSignatureVariable
         {
@@ -336,7 +338,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Gets a value indicating whether this is a generic parameter (<see cref="GenericParameterDesc"/>).
+        /// Gets a value indicating whether this is a generic parameter (<see
+        // cref="GenericParameterDesc"/>).
         /// </summary>
         public bool IsGenericParameter
         {

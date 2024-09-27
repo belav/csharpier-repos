@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -87,8 +88,10 @@ namespace Mono.Linker
 
             var interfaceImplementations = new HashSet<(InterfaceImplementation, TypeDefinition)>();
 
-            // If a type could be on the stack in the body and an interface it implements could be on the stack on the body
-            // then we need to mark that interface implementation.  When this occurs it is not safe to remove the interface implementation from the type
+            // If a type could be on the stack in the body and an interface it implements could be on the stack
+            // on the body
+            // then we need to mark that interface implementation.  When this occurs it is not safe to remove
+            // the interface implementation from the type
             // even if the type is never instantiated
             foreach (var type in possibleStackTypes)
             {

@@ -161,10 +161,12 @@ class C
 
             CompileAndVerify(text)
                 .VerifyDiagnostics(
-                    // (11,71): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename" "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
+                    // (11,71): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename"
+                    // "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
                     // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A799}" "ab007f1d23d"
                     Diagnostic(ErrorCode.WRN_IllegalPPChecksum, @"""ab007f1d23d"""),
-                    // (14,30): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename" "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
+                    // (14,30): warning CS1695: Invalid #pragma checksum syntax; should be #pragma checksum "filename"
+                    // "{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}" "XXXX..."
                     // #pragma checksum "bogus1.cs" "{406EA660-64CF-4C82-B6F0-42D48172A79}" "ab007f1d23d9"
                     Diagnostic(
                         ErrorCode.WRN_IllegalPPChecksum,
@@ -480,7 +482,8 @@ class C
             var comp = CreateCompilationWithChecksums(source, "file.cs", @"b:\base");
             comp.VerifyDiagnostics();
 
-            // Verify the fact that all pragmas are referenced, even though the paths differ before normalization.
+            // Verify the fact that all pragmas are referenced, even though the paths differ before
+            // normalization.
             comp.VerifyPdb(
                 "C.M",
                 @"

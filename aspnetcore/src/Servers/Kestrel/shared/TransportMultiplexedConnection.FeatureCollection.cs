@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Connections;
 
 internal partial class TransportMultiplexedConnection
 {
-    // NOTE: When feature interfaces are added to or removed from this TransportConnection class implementation,
+    // NOTE: When feature interfaces are added to or removed from this TransportConnection class
+    // implementation,
     // then the list of `features` in the generated code project MUST also be updated first
     // and the code generator re-reun, which will change the interface list.
     // See also: tools/CodeGenerator/TransportConnectionFeatureCollection.cs

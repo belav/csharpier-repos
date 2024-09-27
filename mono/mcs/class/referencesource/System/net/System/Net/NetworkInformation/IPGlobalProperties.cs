@@ -44,7 +44,8 @@ namespace System.Net.NetworkInformation
 
         public abstract string HostName { get; }
 
-        /// Gets a bool value that specifies whether the local computer is acting as a Windows Internet Name Service (WINS) proxy.
+        /// Gets a bool value that specifies whether the local computer is acting as a Windows Internet Name
+        // Service (WINS) proxy.
         public abstract bool IsWinsProxy { get; }
 
         /// Gets the Network Basic Input/Output System (NetBIOS) node type of the local computer.
@@ -54,17 +55,20 @@ namespace System.Net.NetworkInformation
 
         public abstract TcpStatistics GetTcpIPv6Statistics();
 
-        /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local computer.
+        /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local
+        // computer.
         /// Provides User Datagram Protocol (UDP) statistical data for the local computer.
 
         public abstract UdpStatistics GetUdpIPv4Statistics();
         public abstract UdpStatistics GetUdpIPv6Statistics();
 
-        /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local computer.
+        /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local
+        // computer.
 
         public abstract IcmpV4Statistics GetIcmpV4Statistics();
 
-        /// Provides Internet Control Message Protocol (ICMP) version 6 statistical data for the local computer.
+        /// Provides Internet Control Message Protocol (ICMP) version 6 statistical data for the local
+        // computer.
 
         public abstract IcmpV6Statistics GetIcmpV6Statistics();
 

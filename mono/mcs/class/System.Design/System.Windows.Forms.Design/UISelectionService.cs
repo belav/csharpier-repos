@@ -242,7 +242,8 @@ namespace System.Windows.Forms.Design
                 if (host != null && host.RootComponent != null)
                     ((Control)host.RootComponent).Refresh();
                 // Send mouse up message to the primary selection
-                // Else for parentcontroldesigner there is no mouseup event and it doesn't set allow drop back to false
+                // Else for parentcontroldesigner there is no mouseup event and it doesn't set allow drop back to
+                // false
                 //
                 Native.SendMessage(
                     ((Control)this.SelectionService.PrimarySelection).Handle,

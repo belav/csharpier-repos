@@ -6,11 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that finds base and derived entity types that are already part of the model based on the associated
+///     A convention that finds base and derived entity types that are already part of the model
+// based on the associated
 ///     CLR type hierarchy.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class BaseTypeDiscoveryConvention : IEntityTypeAddedConvention, IForeignKeyRemovedConvention
 {

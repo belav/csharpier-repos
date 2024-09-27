@@ -254,14 +254,20 @@ namespace System.Runtime.InteropServices
             /// <remarks>
             /// This is useful in scenarios when the caller has no need to rely on an IUnknown instance
             /// that is used when running managed code is not possible (i.e. during a GC). In traditional
-            /// COM scenarios this is common, but scenarios involving <see href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget">Reference Tracker hosting</see>
+            /// COM scenarios this is common, but scenarios involving <see
+            //
+            // href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget">Reference
+            // Tracker hosting</see>
             /// calling of the IUnknown API during a GC is possible.
             /// </remarks>
             CallerDefinedIUnknown = 1,
 
             /// <summary>
-            /// Flag used to indicate the COM interface should implement <see href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget">IReferenceTrackerTarget</see>.
-            /// When this flag is passed, the resulting COM interface will have an internal implementation of IUnknown
+            /// Flag used to indicate the COM interface should implement <see
+            //
+            // href="https://docs.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget">IReferenceTrackerTarget</see>.
+            /// When this flag is passed, the resulting COM interface will have an internal implementation of
+            // IUnknown
             /// and as such none should be supplied by the caller.
             /// </summary>
             TrackerSupport = 2,
@@ -903,13 +909,15 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Create a COM representation of the supplied object that can be passed to a non-managed environment.
+        /// Create a COM representation of the supplied object that can be passed to a non-managed
+        // environment.
         /// </summary>
         /// <param name="instance">The managed object to expose outside the .NET runtime.</param>
         /// <param name="flags">Flags used to configure the generated interface.</param>
         /// <returns>The generated COM interface that can be passed outside the .NET runtime.</returns>
         /// <remarks>
-        /// If a COM representation was previously created for the specified <paramref name="instance" /> using
+        /// If a COM representation was previously created for the specified <paramref name="instance" />
+        // using
         /// this <see cref="ComWrappers" /> instance, the previously created COM interface will be returned.
         /// If not, a new one will be created.
         /// </remarks>
@@ -1019,7 +1027,8 @@ namespace System.Runtime.InteropServices
         /// <param name="flags">Flags used to describe the external object.</param>
         /// <returns>Returns a managed object associated with the supplied external COM object.</returns>
         /// <remarks>
-        /// If a managed object was previously created for the specified <paramref name="externalComObject" />
+        /// If a managed object was previously created for the specified <paramref name="externalComObject"
+        // />
         /// using this <see cref="ComWrappers" /> instance, the previously created object will be returned.
         /// If not, a new one will be created.
         /// </remarks>
@@ -1044,14 +1053,17 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Get the currently registered managed object or uses the supplied managed object and registers it.
+        /// Get the currently registered managed object or uses the supplied managed object and registers
+        // it.
         /// </summary>
         /// <param name="externalComObject">Object to import for usage into the .NET runtime.</param>
         /// <param name="flags">Flags used to describe the external object.</param>
-        /// <param name="wrapper">The <see cref="object"/> to be used as the wrapper for the external object</param>
+        /// <param name="wrapper">The <see cref="object"/> to be used as the wrapper for the external
+        // object</param>
         /// <returns>Returns a managed object associated with the supplied external COM object.</returns>
         /// <remarks>
-        /// If the <paramref name="wrapper"/> instance already has an associated external object a <see cref="System.NotSupportedException"/> will be thrown.
+        /// If the <paramref name="wrapper"/> instance already has an associated external object a <see
+        // cref="System.NotSupportedException"/> will be thrown.
         /// </remarks>
         public object GetOrRegisterObjectForComInstance(
             IntPtr externalComObject,
@@ -1068,20 +1080,26 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Get the currently registered managed object or uses the supplied managed object and registers it.
+        /// Get the currently registered managed object or uses the supplied managed object and registers
+        // it.
         /// </summary>
         /// <param name="externalComObject">Object to import for usage into the .NET runtime.</param>
         /// <param name="flags">Flags used to describe the external object.</param>
-        /// <param name="wrapper">The <see cref="object"/> to be used as the wrapper for the external object</param>
+        /// <param name="wrapper">The <see cref="object"/> to be used as the wrapper for the external
+        // object</param>
         /// <param name="inner">Inner for COM aggregation scenarios</param>
         /// <returns>Returns a managed object associated with the supplied external COM object.</returns>
         /// <remarks>
-        /// This method override is for registering an aggregated COM instance with its associated inner. The inner
-        /// will be released when the associated wrapper is eventually freed. Note that it will be released on a thread
-        /// in an unknown apartment state. If the supplied inner is not known to be a free-threaded instance then
+        /// This method override is for registering an aggregated COM instance with its associated inner.
+        // The inner
+        /// will be released when the associated wrapper is eventually freed. Note that it will be released
+        // on a thread
+        /// in an unknown apartment state. If the supplied inner is not known to be a free-threaded instance
+        // then
         /// it is advised to not supply the inner.
         ///
-        /// If the <paramref name="wrapper"/> instance already has an associated external object a <see cref="System.NotSupportedException"/> will be thrown.
+        /// If the <paramref name="wrapper"/> instance already has an associated external object a <see
+        // cref="System.NotSupportedException"/> will be thrown.
         /// </remarks>
         public object GetOrRegisterObjectForComInstance(
             IntPtr externalComObject,
@@ -1213,9 +1231,12 @@ namespace System.Runtime.InteropServices
         /// <param name="externalComObject">Object to import for usage into the .NET runtime.</param>
         /// <param name="innerMaybe">The inner instance if aggregation is involved</param>
         /// <param name="flags">Flags used to describe the external object.</param>
-        /// <param name="wrapperMaybe">The <see cref="object"/> to be used as the wrapper for the external object.</param>
-        /// <param name="retValue">The managed object associated with the supplied external COM object or <c>null</c> if it could not be created.</param>
-        /// <returns>Returns <c>true</c> if a managed object could be retrieved/created, <c>false</c> otherwise</returns>
+        /// <param name="wrapperMaybe">The <see cref="object"/> to be used as the wrapper for the external
+        // object.</param>
+        /// <param name="retValue">The managed object associated with the supplied external COM object or
+        // <c>null</c> if it could not be created.</param>
+        /// <returns>Returns <c>true</c> if a managed object could be retrieved/created, <c>false</c>
+        // otherwise</returns>
         private unsafe bool TryGetOrCreateObjectForComInstanceInternal(
             IntPtr externalComObject,
             IntPtr innerMaybe,
@@ -1428,7 +1449,8 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Register a <see cref="ComWrappers" /> instance to be used as the global instance for reference tracker support.
+        /// Register a <see cref="ComWrappers" /> instance to be used as the global instance for reference
+        // tracker support.
         /// </summary>
         /// <param name="instance">Instance to register</param>
         /// <remarks>
@@ -1436,7 +1458,8 @@ namespace System.Runtime.InteropServices
         /// in a <see cref="System.InvalidOperationException"/> being thrown.
         ///
         /// Scenarios where this global instance may be used are:
-        ///  * Object tracking via the <see cref="CreateComInterfaceFlags.TrackerSupport" /> and <see cref="CreateObjectFlags.TrackerObject" /> flags.
+        ///  * Object tracking via the <see cref="CreateComInterfaceFlags.TrackerSupport" /> and <see
+        // cref="CreateObjectFlags.TrackerObject" /> flags.
         /// </remarks>
         public static void RegisterForTrackerSupport(ComWrappers instance)
         {
@@ -1458,7 +1481,8 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Register a <see cref="ComWrappers" /> instance to be used as the global instance for marshalling in the runtime.
+        /// Register a <see cref="ComWrappers" /> instance to be used as the global instance for marshalling
+        // in the runtime.
         /// </summary>
         /// <param name="instance">Instance to register</param>
         /// <remarks>
@@ -1547,7 +1571,8 @@ namespace System.Runtime.InteropServices
                 );
             }
 
-            // TrackerObject support and unwrapping matches the built-in semantics that the global marshalling scenario mimics.
+            // TrackerObject support and unwrapping matches the built-in semantics that the global marshalling
+            // scenario mimics.
             return s_globalInstanceForMarshalling.GetOrCreateObjectForComInstance(
                 externalComObject,
                 CreateObjectFlags.TrackerObject | CreateObjectFlags.Unwrap
@@ -1780,7 +1805,8 @@ namespace System.Runtime.InteropServices
         }
 
         // This IID represents an internal interface we define to tag any ManagedObjectWrappers we create.
-        // This interface type and GUID do not correspond to any public interface; it is an internal implementation detail.
+        // This interface type and GUID do not correspond to any public interface; it is an internal
+        // implementation detail.
         private static unsafe IntPtr CreateTaggedImplVftbl()
         {
             IntPtr* vftbl = (IntPtr*)
@@ -1903,7 +1929,8 @@ namespace System.Runtime.InteropServices
         //                    1. We can either create a new NoCW or get back an old one from the cache.
         //                    2. This obj could be a regular tracker runtime object for data binding.
         //  ppNewReference  - The IReferenceTrackerTarget* for the proxy created
-        //                    The tracker runtime will call IReferenceTrackerTarget to establish a reference.
+        //                    The tracker runtime will call IReferenceTrackerTarget to establish a
+        // reference.
         //
         [UnmanagedCallersOnly]
         internal static unsafe int IReferenceTrackerHost_GetTrackerTarget(
@@ -2077,8 +2104,10 @@ namespace System.Runtime.InteropServices
                 return null;
             }
 
-            // Using the IWeakReference*, get ahold of the target native COM object's IInspectable*.  If this resolve fails or
-            // returns null, then we assume that the underlying native COM object is no longer alive, and thus we cannot create a
+            // Using the IWeakReference*, get ahold of the target native COM object's IInspectable*.  If this
+            // resolve fails or
+            // returns null, then we assume that the underlying native COM object is no longer alive, and thus
+            // we cannot create a
             // new RCW for it.
             if (
                 IWeakReference.Resolve(pComWeakRef, IID_IInspectable, out IntPtr targetPtr)
@@ -2106,7 +2135,8 @@ namespace System.Runtime.InteropServices
         private static unsafe bool PossiblyComObject(object target)
         {
             // If the RCW is an aggregated RCW, then the managed object cannot be recreated from the IUnknown
-            // as the outer IUnknown wraps the managed object. In this case, don't create a weak reference backed
+            // as the outer IUnknown wraps the managed object. In this case, don't create a weak reference
+            // backed
             // by a COM weak reference.
             return s_rcwTable.TryGetValue(target, out NativeObjectWrapper? wrapper)
                 && !wrapper._aggregatedManagedObjectWrapper;

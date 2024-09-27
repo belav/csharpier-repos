@@ -14,7 +14,8 @@ namespace System.Web.UI.Design.MobileControls
 
     /// <summary>
     ///    <para>
-    ///       Provides a component editor for a Mobile List <see cref='System.Web.UI.MobileControls.List'/>
+    ///       Provides a component editor for a Mobile List <see
+    // cref='System.Web.UI.MobileControls.List'/>
     ///       control.
     ///    </para>
     /// </summary>
@@ -41,7 +42,8 @@ namespace System.Web.UI.Design.MobileControls
 
         /// <summary>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.Web.UI.Design.MobileControls.ListComponentEditor'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.Web.UI.Design.MobileControls.ListComponentEditor'/>.
         ///    </para>
         /// </summary>
         public ListComponentEditor()
@@ -49,7 +51,8 @@ namespace System.Web.UI.Design.MobileControls
 
         /// <summary>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.Web.UI.Design.MobileControls.ListComponentEditor'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.Web.UI.Design.MobileControls.ListComponentEditor'/>.
         ///    </para>
         /// </summary>
         /// <param name='initialPage'>

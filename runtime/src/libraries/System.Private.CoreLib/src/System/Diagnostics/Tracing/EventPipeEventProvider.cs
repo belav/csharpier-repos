@@ -51,10 +51,14 @@ namespace System.Diagnostics.Tracing
                 args = ParseFilterData(filterDataBytes);
             }
 
-            // Since we are sharing logic across ETW and EventPipe in OnControllerCommand we have to set up data to
-            // mimic ETW to get the right commands sent to EventSources. perEventSourceSessionId has special meaning,
-            // if it is -1 the this command will be translated to a Disable command in EventSource.OnEventCommand. If
-            // it is 0-3 it indicates an ETW session with activities, and SessionMask.MAX (4) means legacy ETW session.
+            // Since we are sharing logic across ETW and EventPipe in OnControllerCommand we have to set up data
+            // to
+            // mimic ETW to get the right commands sent to EventSources. perEventSourceSessionId has special
+            // meaning,
+            // if it is -1 the this command will be translated to a Disable command in
+            // EventSource.OnEventCommand. If
+            // it is 0-3 it indicates an ETW session with activities, and SessionMask.MAX (4) means legacy ETW
+            // session.
             // We send SessionMask.MAX just to conform.
             target.OnControllerCommand(command, args, bEnabling ? (int)SessionMask.MAX : -1);
         }
@@ -144,7 +148,8 @@ namespace System.Diagnostics.Tracing
                 }
 
                 // If Channel == 11, this is a TraceLogging event.
-                // The first 3 descriptors contain event metadata that is emitted for ETW and should be discarded on EventPipe.
+                // The first 3 descriptors contain event metadata that is emitted for ETW and should be discarded on
+                // EventPipe.
                 // EventPipe metadata is provided via the EventPipeEventProvider.DefineEventHandle.
                 if (eventDescriptor.Channel == 11)
                 {

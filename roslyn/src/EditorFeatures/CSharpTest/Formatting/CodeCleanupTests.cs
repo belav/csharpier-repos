@@ -895,7 +895,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                 .Project;
             workspace.TryApplyChanges(project.Solution);
 
-            // register this workspace to solution crawler so that analyzer service associate itself with given workspace
+            // register this workspace to solution crawler so that analyzer service associate itself with given
+            // workspace
             var incrementalAnalyzerProvider =
                 workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
                 as IIncrementalAnalyzerProvider;
@@ -961,10 +962,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         /// </summary>
         /// <param name="expected">The actual processed code to verify against.</param>
         /// <param name="code">The input code to be processed and tested.</param>
-        /// <param name="systemUsingsFirst">Indicates whether <c><see cref="System"/>.*</c> '<c>using</c>' directives should preceed others. Default is <c>true</c>.</param>
-        /// <param name="separateUsingGroups">Indicates whether '<c>using</c>' directives should be organized into separated groups. Default is <c>true</c>.</param>
-        /// <param name="enabledFixIdsFilter">Optional filter to determine if a specific fix ID is explicitly enabled for cleanup.</param>
-        /// <param name="diagnosticIdsWithSeverity">Optional list of diagnostic IDs with effective severities to be configured in editorconfig.</param>
+        /// <param name="systemUsingsFirst">Indicates whether <c><see cref="System"/>.*</c> '<c>using</c>'
+        // directives should preceed others. Default is <c>true</c>.</param>
+        /// <param name="separateUsingGroups">Indicates whether '<c>using</c>' directives should be
+        // organized into separated groups. Default is <c>true</c>.</param>
+        /// <param name="enabledFixIdsFilter">Optional filter to determine if a specific fix ID is
+        // explicitly enabled for cleanup.</param>
+        /// <param name="diagnosticIdsWithSeverity">Optional list of diagnostic IDs with effective
+        // severities to be configured in editorconfig.</param>
         /// <returns>The <see cref="Task"/> to test code cleanup.</returns>
         private protected static Task AssertCodeCleanupResult(
             string expected,
@@ -989,11 +994,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         /// </summary>
         /// <param name="expected">The actual processed code to verify against.</param>
         /// <param name="code">The input code to be processed and tested.</param>
-        /// <param name="preferredImportPlacement">Indicates the code style option for the preferred 'using' directives placement.</param>
-        /// <param name="systemUsingsFirst">Indicates whether <c><see cref="System"/>.*</c> '<c>using</c>' directives should preceed others. Default is <c>true</c>.</param>
-        /// <param name="separateUsingGroups">Indicates whether '<c>using</c>' directives should be organized into separated groups. Default is <c>true</c>.</param>
-        /// <param name="enabledFixIdsFilter">Optional filter to determine if a specific fix ID is explicitly enabled for cleanup.</param>
-        /// <param name="diagnosticIdsWithSeverity">Optional list of diagnostic IDs with effective severities to be configured in editorconfig.</param>
+        /// <param name="preferredImportPlacement">Indicates the code style option for the preferred 'using'
+        // directives placement.</param>
+        /// <param name="systemUsingsFirst">Indicates whether <c><see cref="System"/>.*</c> '<c>using</c>'
+        // directives should preceed others. Default is <c>true</c>.</param>
+        /// <param name="separateUsingGroups">Indicates whether '<c>using</c>' directives should be
+        // organized into separated groups. Default is <c>true</c>.</param>
+        /// <param name="enabledFixIdsFilter">Optional filter to determine if a specific fix ID is
+        // explicitly enabled for cleanup.</param>
+        /// <param name="diagnosticIdsWithSeverity">Optional list of diagnostic IDs with effective
+        // severities to be configured in editorconfig.</param>
         /// <returns>The <see cref="Task"/> to test code cleanup.</returns>
         private protected static async Task AssertCodeCleanupResult(
             string expected,
@@ -1063,7 +1073,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 
             workspace.TryApplyChanges(solution);
 
-            // register this workspace to solution crawler so that analyzer service associate itself with given workspace
+            // register this workspace to solution crawler so that analyzer service associate itself with given
+            // workspace
             var incrementalAnalyzerProvider =
                 workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
                 as IIncrementalAnalyzerProvider;

@@ -71,9 +71,11 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// When overridden in a derived class, resets the value for this property of the component to the default value.
+        /// When overridden in a derived class, resets the value for this property of the component to the
+        // default value.
         /// </summary>
-        /// <param name="component">The component with the property value that is to be reset to the default value.</param>
+        /// <param name="component">The component with the property value that is to be reset to the default
+        // value.</param>
         public override void ResetValue(object component) { }
 
         /// <summary>
@@ -92,7 +94,8 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// When overridden in a derived class, determines a value indicating whether the value of this property needs to be persisted.
+        /// When overridden in a derived class, determines a value indicating whether the value of this
+        // property needs to be persisted.
         /// </summary>
         /// <returns>
         /// <c>true</c> if the property should be persisted; otherwise, <c>false</c>.

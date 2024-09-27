@@ -24,7 +24,8 @@ namespace System.Composition.Convention
 
         /// <summary>
         /// </summary>
-        /// <param name="reflectedType">The reflectedType the type used to retrieve the parameterInfo.</param>
+        /// <param name="reflectedType">The reflectedType the type used to retrieve the
+        // parameterInfo.</param>
         /// <param name="parameter">The member to supply attributes for.</param>
         /// <returns>The list of applied attributes.</returns>
         public abstract IEnumerable<Attribute> GetCustomAttributes(

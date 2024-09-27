@@ -146,7 +146,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "method but they are empty check"
             );
 
-            /* check to see whether multiple calls give us different refs */
+/* check to see whether multiple calls give us different refs */
             args = p.DoCreateDataSourceSelectArguments();
 
             Assert.AreEqual(args, args2, "multiple calls, same ref");

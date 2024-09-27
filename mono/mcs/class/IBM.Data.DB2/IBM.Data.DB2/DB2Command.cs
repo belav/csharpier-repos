@@ -375,7 +375,8 @@ namespace IBM.Data.DB2
 
             int numRows;
 
-            //How many rows affected.  numRows will be -1 if we aren't dealing with an Insert, Delete or Update, or if the statement did not execute successfully
+            //How many rows affected.  numRows will be -1 if we aren't dealing with an Insert, Delete or Update,
+            // or if the statement did not execute successfully
             short sqlRet = DB2CLIWrapper.SQLRowCount(hwndStmt, out numRows);
             DB2ClientUtils.DB2CheckReturn(
                 sqlRet,

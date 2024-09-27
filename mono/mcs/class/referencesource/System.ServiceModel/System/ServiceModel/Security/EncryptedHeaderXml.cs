@@ -34,7 +34,8 @@ namespace System.ServiceModel.Security
             this.version = version;
             encryptedData = new EncryptedData();
 
-            // This is for the case when the service send an EncryptedHeader to the client where the KeyInfo clause contains referenceXml clause.
+            // This is for the case when the service send an EncryptedHeader to the client where the KeyInfo
+            // clause contains referenceXml clause.
             encryptedData.ShouldReadXmlReferenceKeyInfoClause = shouldReadXmlReferenceKeyInfoClause;
         }
 

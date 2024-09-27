@@ -11,13 +11,16 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.Extensions.Diagnostics.Metrics
 {
     /// <summary>
-    /// Extensions for <see cref="IMetricsBuilder"/> for enabling metrics based on <see cref="IConfiguration"/>.
+    /// Extensions for <see cref="IMetricsBuilder"/> for enabling metrics based on <see
+    // cref="IConfiguration"/>.
     /// </summary>
     public static class MetricsBuilderConfigurationExtensions
     {
         /// <summary>
-        /// Reads metrics configuration from the provided <see cref="IConfiguration"/> section and configures
-        /// which <see cref="Meter"/>'s, <see cref="Instrument"/>'s, and <see cref="IMetricsListener"/>'s are enabled.
+        /// Reads metrics configuration from the provided <see cref="IConfiguration"/> section and
+        // configures
+        /// which <see cref="Meter"/>'s, <see cref="Instrument"/>'s, and <see cref="IMetricsListener"/>'s
+        // are enabled.
         /// </summary>
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/> section to load.</param>

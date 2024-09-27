@@ -160,7 +160,8 @@ namespace System.Runtime.Serialization
             get { return IsXmlDataNode ? _xmlNodeReader.IsDefault : base.IsDefault; }
         }
 
-        //public override char QuoteChar { get { return IsXmlDataNode ? xmlNodeReader.QuoteChar : base.QuoteChar; } }
+        //public override char QuoteChar { get { return IsXmlDataNode ? xmlNodeReader.QuoteChar :
+        // base.QuoteChar; } }
         public override XmlSpace XmlSpace
         {
             get { return IsXmlDataNode ? _xmlNodeReader.XmlSpace : base.XmlSpace; }

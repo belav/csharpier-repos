@@ -577,7 +577,8 @@ internal sealed class FirefoxMonoProxy : MonoProxy
             }
             case "enumProperties":
             {
-                //{"iterator":{"type":"propertyIterator","actor":"server1.conn19.child63/propertyIterator73","count":3},"from":"server1.conn19.child63/obj71"}
+                
+                // //{"iterator":{"type":"propertyIterator","actor":"server1.conn19.child63/propertyIterator73","count":3},"from":"server1.conn19.child63/obj71"}
                 if (!DotnetObjectId.TryParse(args?["to"], out DotnetObjectId objectId))
                     return false;
                 var res = await RuntimeGetObjectMembers(sessionId, objectId, args, token);

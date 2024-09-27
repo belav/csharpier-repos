@@ -86,7 +86,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <remarks>
             /// If the value is decreased, the array contents are truncated.
-            /// If the value is increased, the added elements are initialized to the default value of type <typeparamref name="T"/>.
+            /// If the value is increased, the added elements are initialized to the default value of type
+            // <typeparamref name="T"/>.
             /// </remarks>
             public int Count
             {
@@ -195,7 +196,8 @@ namespace System.Collections.Immutable
             /// Extracts the internal array as an <see cref="ImmutableArray{T}"/> and replaces it
             /// with a zero length array.
             /// </summary>
-            /// <exception cref="InvalidOperationException">When <see cref="ImmutableArray{T}.Builder.Count"/> doesn't
+            /// <exception cref="InvalidOperationException">When <see cref="ImmutableArray{T}.Builder.Count"/>
+            // doesn't
             /// equal <see cref="ImmutableArray{T}.Builder.Capacity"/>.</exception>
             public ImmutableArray<T> MoveToImmutable()
             {
@@ -211,7 +213,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Returns the current contents as an <see cref="ImmutableArray{T}"/> and sets the collection to a zero length array.
+            /// Returns the current contents as an <see cref="ImmutableArray{T}"/> and sets the collection to a
+            // zero length array.
             /// </summary>
             /// <remarks>
             /// If <see cref="Capacity"/> equals <see cref="Count"/>, the internal array will be extracted
@@ -245,7 +248,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Inserts an item to the <see cref="IList{T}"/> at the specified index.
             /// </summary>
-            /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+            /// <param name="index">The zero-based index at which <paramref name="item"/> should be
+            // inserted.</param>
             /// <param name="item">The object to insert into the <see cref="IList{T}"/>.</param>
             public void Insert(int index, T item)
             {
@@ -371,7 +375,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Adds the specified items to the end of the array.
             /// </summary>
-            /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
+            /// <typeparam name="TDerived">The type that derives from the type of item already in the
+            // array.</typeparam>
             /// <param name="items">The items.</param>
             public void AddRange<TDerived>(TDerived[] items)
                 where TDerived : T
@@ -439,7 +444,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Adds the specified items to the end of the array.
             /// </summary>
-            /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
+            /// <typeparam name="TDerived">The type that derives from the type of item already in the
+            // array.</typeparam>
             /// <param name="items">The items to add at the end of the array.</param>
             public void AddRange<TDerived>(ReadOnlySpan<TDerived> items)
                 where TDerived : T
@@ -457,7 +463,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Adds the specified items to the end of the array.
             /// </summary>
-            /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
+            /// <typeparam name="TDerived">The type that derives from the type of item already in the
+            // array.</typeparam>
             /// <param name="items">The items to add at the end of the array.</param>
             public void AddRange<TDerived>(ImmutableArray<TDerived> items)
                 where TDerived : T
@@ -481,7 +488,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Adds the specified items to the end of the array.
             /// </summary>
-            /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
+            /// <typeparam name="TDerived">The type that derives from the type of item already in the
+            // array.</typeparam>
             /// <param name="items">The items to add at the end of the array.</param>
             public void AddRange<TDerived>(ImmutableArray<TDerived>.Builder items)
                 where TDerived : T
@@ -495,7 +503,8 @@ namespace System.Collections.Immutable
             /// If no match is found, the builder remains unchanged.
             /// </summary>
             /// <param name="element">The element.</param>
-            /// <returns>A value indicating whether the specified element was found and removed from the collection.</returns>
+            /// <returns>A value indicating whether the specified element was found and removed from the
+            // collection.</returns>
             public bool Remove(T element)
             {
                 int index = this.IndexOf(element);
@@ -517,7 +526,8 @@ namespace System.Collections.Immutable
             /// The equality comparer to use in the search.
             /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
             /// </param>
-            /// <returns>A value indicating whether the specified element was found and removed from the collection.</returns>
+            /// <returns>A value indicating whether the specified element was found and removed from the
+            // collection.</returns>
             public bool Remove(T element, IEqualityComparer<T>? equalityComparer)
             {
                 int index = this.IndexOf(element, 0, _count, equalityComparer);
@@ -576,7 +586,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Removes the specified values from this list.
             /// </summary>
-            /// <param name="index">The 0-based index into the array for the element to omit from the returned array.</param>
+            /// <param name="index">The 0-based index into the array for the element to omit from the returned
+            // array.</param>
             /// <param name="length">The number of elements to remove.</param>
             public void RemoveRange(int index, int length)
             {
@@ -724,7 +735,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="sourceIndex">The index into this collection of the first element to copy.</param>
             /// <param name="destination">The array to copy to.</param>
-            /// <param name="destinationIndex">The index into the destination array to which the first copied element is written.</param>
+            /// <param name="destinationIndex">The index into the destination array to which the first copied
+            // element is written.</param>
             /// <param name="length">The number of elements to copy.</param>
             public void CopyTo(int sourceIndex, T[] destination, int destinationIndex, int length)
             {
@@ -771,7 +783,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="item">The item to search for.</param>
             /// <param name="startIndex">The index at which to begin the search.</param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int IndexOf(T item, int startIndex)
             {
                 return this.IndexOf(
@@ -788,7 +801,8 @@ namespace System.Collections.Immutable
             /// <param name="item">The item to search for.</param>
             /// <param name="startIndex">The index at which to begin the search.</param>
             /// <param name="count">The number of elements to search.</param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int IndexOf(T item, int startIndex, int count)
             {
                 return this.IndexOf(item, startIndex, count, EqualityComparer<T>.Default);
@@ -804,7 +818,8 @@ namespace System.Collections.Immutable
             /// The equality comparer to use in the search.
             /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
             /// </param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int IndexOf(
                 T item,
                 int startIndex,
@@ -848,7 +863,8 @@ namespace System.Collections.Immutable
             /// The equality comparer to use in the search.
             /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
             /// </param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int IndexOf(T item, int startIndex, IEqualityComparer<T>? equalityComparer)
             {
                 return this.IndexOf(item, startIndex, this.Count - startIndex, equalityComparer);
@@ -858,7 +874,8 @@ namespace System.Collections.Immutable
             /// Searches the array for the specified item in reverse.
             /// </summary>
             /// <param name="item">The item to search for.</param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int LastIndexOf(T item)
             {
                 if (this.Count == 0)
@@ -879,7 +896,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="item">The item to search for.</param>
             /// <param name="startIndex">The index at which to begin the search.</param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int LastIndexOf(T item, int startIndex)
             {
                 if (this.Count == 0 && startIndex == 0)
@@ -903,7 +921,8 @@ namespace System.Collections.Immutable
             /// <param name="item">The item to search for.</param>
             /// <param name="startIndex">The index at which to begin the search.</param>
             /// <param name="count">The number of elements to search.</param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int LastIndexOf(T item, int startIndex, int count)
             {
                 return this.LastIndexOf(item, startIndex, count, EqualityComparer<T>.Default);
@@ -916,7 +935,8 @@ namespace System.Collections.Immutable
             /// <param name="startIndex">The index at which to begin the search.</param>
             /// <param name="count">The number of elements to search.</param>
             /// <param name="equalityComparer">The equality comparer to use in the search.</param>
-            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
+            /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be
+            // found.</returns>
             public int LastIndexOf(
                 T item,
                 int startIndex,
@@ -1017,7 +1037,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Sorts the array.
             /// </summary>
-            /// <param name="comparer">The comparer to use in sorting. If <c>null</c>, the default comparer is used.</param>
+            /// <param name="comparer">The comparer to use in sorting. If <c>null</c>, the default comparer is
+            // used.</param>
             public void Sort(IComparer<T>? comparer)
             {
                 if (Count > 1)
@@ -1031,7 +1052,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="index">The index of the first element to consider in the sort.</param>
             /// <param name="count">The number of elements to include in the sort.</param>
-            /// <param name="comparer">The comparer to use in sorting. If <c>null</c>, the default comparer is used.</param>
+            /// <param name="comparer">The comparer to use in sorting. If <c>null</c>, the default comparer is
+            // used.</param>
             public void Sort(int index, int count, IComparer<T>? comparer)
             {
                 // Don't rely on Array.Sort's argument validation since our internal array may exceed

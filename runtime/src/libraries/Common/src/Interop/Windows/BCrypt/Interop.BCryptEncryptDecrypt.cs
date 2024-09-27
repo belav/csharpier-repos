@@ -11,7 +11,8 @@ internal static partial class Interop
 {
     internal static partial class BCrypt
     {
-        // Note: input and output are allowed to be the same buffer. BCryptEncrypt will correctly do the encryption in place according to CNG documentation.
+        // Note: input and output are allowed to be the same buffer. BCryptEncrypt will correctly do the
+        // encryption in place according to CNG documentation.
         internal static int BCryptEncrypt(
             SafeKeyHandle hKey,
             ReadOnlySpan<byte> input,
@@ -48,7 +49,8 @@ internal static partial class Interop
             }
         }
 
-        // Note: input and output are allowed to be the same buffer. BCryptDecrypt will correctly do the decryption in place according to CNG documentation.
+        // Note: input and output are allowed to be the same buffer. BCryptDecrypt will correctly do the
+        // decryption in place according to CNG documentation.
         internal static int BCryptDecrypt(
             SafeKeyHandle hKey,
             ReadOnlySpan<byte> input,

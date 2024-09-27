@@ -44,7 +44,9 @@ public static class SpaProxyingExtensions
     /// development. Do not enable this middleware in production applications.
     /// </summary>
     /// <param name="spaBuilder">The <see cref="ISpaBuilder"/>.</param>
-    /// <param name="baseUriTaskFactory">A callback that will be invoked on each request to supply a <see cref="Task"/> that resolves with the target base URI to which requests should be proxied.</param>
+    /// <param name="baseUriTaskFactory">A callback that will be invoked on each request to supply a
+    // <see cref="Task"/> that resolves with the target base URI to which requests should be
+    // proxied.</param>
     public static void UseProxyToSpaDevelopmentServer(
         this ISpaBuilder spaBuilder,
         Func<Task<Uri>> baseUriTaskFactory

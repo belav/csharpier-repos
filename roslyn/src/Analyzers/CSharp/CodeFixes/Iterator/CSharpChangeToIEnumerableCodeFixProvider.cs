@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
     internal class CSharpChangeToIEnumerableCodeFixProvider : AbstractIteratorCodeFixProvider
     {
         /// <summary>
-        /// CS1624: The body of 'x' cannot be an iterator block because 'y' is not an iterator interface type
+        /// CS1624: The body of 'x' cannot be an iterator block because 'y' is not an iterator interface
+        // type
         /// </summary>
         private const string CS1624 = nameof(CS1624);
 

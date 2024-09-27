@@ -9,13 +9,14 @@ namespace System.Web.Security.Cryptography
     using System;
     using System.Security.Cryptography;
 
-    /******************************************************************
-     * !! WARNING !!                                                  *
-     * This class contains cryptographic code. If you make changes to *
-     * this class, please have it reviewed by the appropriate people. *
-     ******************************************************************/
+/******************************************************************
+* !! WARNING !!                                                  *
+* This class contains cryptographic code. If you make changes to *
+* this class, please have it reviewed by the appropriate people. *
+******************************************************************/
 
-    // Implements the NIST SP800-108 key derivation routine in counter mode with an HMAC PRF (HMACSHA512).
+    // Implements the NIST SP800-108 key derivation routine in counter mode with an HMAC PRF
+    // (HMACSHA512).
     // See: http://csrc.nist.gov/publications/nistpubs/800-108/sp800-108.pdf
     //
     // The algorithm is defined as follows:
@@ -71,7 +72,8 @@ namespace System.Web.Security.Cryptography
 
         // NOTE: This method also exists in Win8 (as BCryptKeyDerivation) and QTD (as DeriveKeySP800_108).
         // However, the QTD implementation is currently incorrect, so we can't depend on it here. The below
-        // is a correct implementation. When we take a Win8 dependency, we can call into BCryptKeyDerivation.
+        // is a correct implementation. When we take a Win8 dependency, we can call into
+        // BCryptKeyDerivation.
         private static byte[] DeriveKeyImpl(
             HMAC hmac,
             byte[] label,

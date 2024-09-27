@@ -32,7 +32,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="securityToken">The SecurityToken whose name is requested.</param>
         /// <param name="requestedIssuerName">Input to determine the issuer name</param>
-        /// <remarks>The default implementation ignores the requestedIsserName parameter and simply calls the
+        /// <remarks>The default implementation ignores the requestedIsserName parameter and simply calls
+        // the
         /// GetIssuerName( SecurityToken securityToken ) method</remarks>
         /// <returns>Issuer name as a string.</returns>
         public virtual string GetIssuerName(SecurityToken securityToken, string requestedIssuerName)

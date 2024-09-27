@@ -4,14 +4,16 @@
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 /// <summary>
-/// An abstraction used when grouping enum values for <see cref="ModelMetadata.EnumGroupedDisplayNamesAndValues"/>.
+/// An abstraction used when grouping enum values for <see
+// cref="ModelMetadata.EnumGroupedDisplayNamesAndValues"/>.
 /// </summary>
 public readonly struct EnumGroupAndName
 {
     private readonly Func<string> _name;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EnumGroupAndName"/> structure. This constructor should
+    /// Initializes a new instance of the <see cref="EnumGroupAndName"/> structure. This constructor
+    // should
     /// not be used in any site where localization is important.
     /// </summary>
     /// <param name="group">The group name.</param>

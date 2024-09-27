@@ -118,9 +118,10 @@ namespace System.Reflection
 #pragma warning restore 169
 
         /*
-         * The idea behing this optimization is to use a pair of delegates to simulate the same effect of doing a reflection call.
-         * The first delegate performs casting and boxing, the second dispatch to the add_... method.
-         */
+        * The idea behing this optimization is to use a pair of delegates to simulate the same effect of
+        doing a reflection call.
+        * The first delegate performs casting and boxing, the second dispatch to the add_... method.
+        */
         static AddEventAdapter CreateAddEventDelegate(MethodInfo method)
         {
             Type[] typeVector;
@@ -149,8 +150,10 @@ namespace System.Reflection
 
             addHandlerType = addHandlerDelegateType.MakeGenericType(typeVector);
 #if MOBILE
-            // with Silverlight a coreclr failure (e.g. Transparent caller creating a delegate on a Critical method)
-            // would normally throw an ArgumentException, so we set throwOnBindFailure to false and check for a null
+            // with Silverlight a coreclr failure (e.g. Transparent caller creating a delegate on a Critical
+            // method)
+            // would normally throw an ArgumentException, so we set throwOnBindFailure to false and check for a
+            // null
             // delegate that we can transform into a MethodAccessException
             addHandlerDelegate = Delegate.CreateDelegate(addHandlerType, method, false);
             if (addHandlerDelegate == null)

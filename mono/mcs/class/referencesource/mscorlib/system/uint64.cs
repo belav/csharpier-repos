@@ -340,7 +340,8 @@ namespace System
         ///            //
         ///            //   true arithmetic range check         =>     re-written for unsigned int
         ///            // -------------------------------            -------------------------------
-        ///            // ((m_value * multiplier) > MaxValue)   =>   (multiplier != 0) && (m_value > (MaxValue / multiplier))
+        ///            // ((m_value * multiplier) > MaxValue)   =>   (multiplier != 0) && (m_value >
+        // (MaxValue / multiplier))
         ///            //
         ///
         ///            overflowed = (multiplier != 0) && (m_value > (MaxValue / multiplier));
@@ -355,7 +356,8 @@ namespace System
         ///        }
         ///
         ///        /// <internalonly/>
-        ///        UInt64 IArithmetic<UInt64>.DivideRemainder(UInt64 divisor, out UInt64 remainder, out bool overflowed) {
+        ///        UInt64 IArithmetic<UInt64>.DivideRemainder(UInt64 divisor, out UInt64 remainder, out bool
+        // overflowed) {
         ///            overflowed = false;
         ///            remainder = (m_value % divisor);
         ///            return checked(m_value / divisor);  // can throw DivideByZeroException
@@ -382,7 +384,8 @@ namespace System
         ///        private static UInt64ArithmeticDescriptor s_descriptor;
         ///
         ///        class UInt64ArithmeticDescriptor : ArithmeticDescriptor<UInt64> {
-        ///            public UInt64ArithmeticDescriptor(ArithmeticCapabilities capabilities) : base(capabilities) {}
+        ///            public UInt64ArithmeticDescriptor(ArithmeticCapabilities capabilities) :
+        // base(capabilities) {}
         ///
         ///            public override UInt64 One {
         ///                get {

@@ -11,31 +11,39 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editing
 {
     /// <summary>
-    /// An editor for making changes to a syntax tree. The editor works by giving a list of changes to perform to a
-    /// particular tree <em>in order</em>.  Changes are given a <see cref="SyntaxNode"/> they will apply to in the
+    /// An editor for making changes to a syntax tree. The editor works by giving a list of changes to
+    // perform to a
+    /// particular tree <em>in order</em>.  Changes are given a <see cref="SyntaxNode"/> they will apply
+    // to in the
     /// original tree the editor is created for.  The semantics of application are as follows:
     ///
     /// <list type="number">
     /// <item>
-    /// The original root provided is used as the 'current' root for all operations.  This 'current' root will
+    /// The original root provided is used as the 'current' root for all operations.  This 'current'
+    // root will
     /// continually be updated, becoming the new 'current' root.  The original root is never changed.
     /// </item>
     /// <item>
-    /// Each change has its given <see cref="SyntaxNode"/> tracked, using a <see cref="SyntaxAnnotation"/>, producing a
-    /// 'current' root that tracks all of them.  This allows that same node to be found after prior changes are applied
+    /// Each change has its given <see cref="SyntaxNode"/> tracked, using a <see
+    // cref="SyntaxAnnotation"/>, producing a
+    /// 'current' root that tracks all of them.  This allows that same node to be found after prior
+    // changes are applied
     /// which mutate the tree.
     /// </item>
     /// <item>
     /// Each change is then applied in order it was added to the editor.
     /// </item>
     /// <item>
-    /// A change first attempts to find its <see cref="SyntaxNode"/> in the 'current' root.  If that node cannot be
+    /// A change first attempts to find its <see cref="SyntaxNode"/> in the 'current' root.  If that
+    // node cannot be
     /// found, the operation will fail with an <see cref="ArgumentException"/>.
     /// </item>
     /// <item>
-    /// The particular change will run on that node, removing, replacing, or inserting around it according to the
+    /// The particular change will run on that node, removing, replacing, or inserting around it
+    // according to the
     /// change.  If the change is passed a delegate as its 'compute' argument, it will be given the <see
-    /// cref="SyntaxNode"/> found in the current root.  The 'current' root will then be updated by replacing the current
+    /// cref="SyntaxNode"/> found in the current root.  The 'current' root will then be updated by
+    // replacing the current
     /// node with the new computed node.
     /// </item>
     /// <item>
@@ -44,13 +52,19 @@ namespace Microsoft.CodeAnalysis.Editing
     /// </list>
     /// </summary>
     /// <remarks>
-    /// The above editing strategy makes it an error for a client of the editor to add a change that updates a parent
-    /// node and then adds a change that updates a child node (unless the parent change is certain to contain the
-    /// child), and attempting this will throw at runtime.  If a client ever needs to update both a child and a parent,
-    /// it <em>should</em> add the child change first, and then the parent change.  And the parent change should pass an
+    /// The above editing strategy makes it an error for a client of the editor to add a change that
+    // updates a parent
+    /// node and then adds a change that updates a child node (unless the parent change is certain to
+    // contain the
+    /// child), and attempting this will throw at runtime.  If a client ever needs to update both a
+    // child and a parent,
+    /// it <em>should</em> add the child change first, and then the parent change.  And the parent
+    // change should pass an
     /// appropriate 'compute' callback so it will see the results of the child change.
-    /// <para/> If a client wants to make a replacement, then find the <em>value</em> <see cref="SyntaxNode"/> put into
-    /// the tree, that can be done by adding a dedicated annotation to that node and then looking it back up in the
+    /// <para/> If a client wants to make a replacement, then find the <em>value</em> <see
+    // cref="SyntaxNode"/> put into
+    /// the tree, that can be done by adding a dedicated annotation to that node and then looking it
+    // back up in the
     /// 'current' node passed to a 'compute' callback.
     /// </remarks>
     public class SyntaxEditor
@@ -98,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editing
         }
 
         /// <summary>
-        /// The <see cref="SyntaxNode"/> that was specified when the <see cref="SyntaxEditor"/> was constructed.
+        /// The <see cref="SyntaxNode"/> that was specified when the <see cref="SyntaxEditor"/> was
+        // constructed.
         /// </summary>
         public SyntaxNode OriginalRoot { get; }
 
@@ -157,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         /// <param name="node">The node to replace that already exists in the tree.</param>
         /// <param name="computeReplacement">A function that computes a replacement node.
-        /// The node passed into the compute function includes changes from prior edits. It will not appear as a descendant of the original root.</param>
+        /// The node passed into the compute function includes changes from prior edits. It will not appear
+        // as a descendant of the original root.</param>
         public void ReplaceNode(
             SyntaxNode node,
             Func<SyntaxNode, SyntaxGenerator, SyntaxNode> computeReplacement
@@ -199,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Replace the specified node with a different node.
         /// </summary>
         /// <param name="node">The node to replace that already exists in the tree.</param>
-        /// <param name="newNode">The new node that will be placed into the tree in the existing node's location.</param>
+        /// <param name="newNode">The new node that will be placed into the tree in the existing node's
+        // location.</param>
         public void ReplaceNode(SyntaxNode node, SyntaxNode newNode)
         {
             CheckNodeInOriginalTree(node);
@@ -212,8 +229,10 @@ namespace Microsoft.CodeAnalysis.Editing
         /// <summary>
         /// Insert the new nodes before the specified node already existing in the tree.
         /// </summary>
-        /// <param name="node">The node already existing in the tree that the new nodes will be placed before. This must be a node this is contained within a syntax list.</param>
-        /// <param name="newNodes">The nodes to place before the existing node. These nodes must be of a compatible type to be placed in the same list containing the existing node.</param>
+        /// <param name="node">The node already existing in the tree that the new nodes will be placed
+        // before. This must be a node this is contained within a syntax list.</param>
+        /// <param name="newNodes">The nodes to place before the existing node. These nodes must be of a
+        // compatible type to be placed in the same list containing the existing node.</param>
         public void InsertBefore(SyntaxNode node, IEnumerable<SyntaxNode> newNodes)
         {
             CheckNodeInOriginalTree(node);
@@ -226,16 +245,20 @@ namespace Microsoft.CodeAnalysis.Editing
         /// <summary>
         /// Insert the new node before the specified node already existing in the tree.
         /// </summary>
-        /// <param name="node">The node already existing in the tree that the new nodes will be placed before. This must be a node this is contained within a syntax list.</param>
-        /// <param name="newNode">The node to place before the existing node. This node must be of a compatible type to be placed in the same list containing the existing node.</param>
+        /// <param name="node">The node already existing in the tree that the new nodes will be placed
+        // before. This must be a node this is contained within a syntax list.</param>
+        /// <param name="newNode">The node to place before the existing node. This node must be of a
+        // compatible type to be placed in the same list containing the existing node.</param>
         public void InsertBefore(SyntaxNode node, SyntaxNode newNode) =>
             InsertBefore(node, new[] { newNode });
 
         /// <summary>
         /// Insert the new nodes after the specified node already existing in the tree.
         /// </summary>
-        /// <param name="node">The node already existing in the tree that the new nodes will be placed after. This must be a node this is contained within a syntax list.</param>
-        /// <param name="newNodes">The nodes to place after the existing node. These nodes must be of a compatible type to be placed in the same list containing the existing node.</param>
+        /// <param name="node">The node already existing in the tree that the new nodes will be placed
+        // after. This must be a node this is contained within a syntax list.</param>
+        /// <param name="newNodes">The nodes to place after the existing node. These nodes must be of a
+        // compatible type to be placed in the same list containing the existing node.</param>
         public void InsertAfter(SyntaxNode node, IEnumerable<SyntaxNode> newNodes)
         {
             CheckNodeInOriginalTree(node);
@@ -248,8 +271,10 @@ namespace Microsoft.CodeAnalysis.Editing
         /// <summary>
         /// Insert the new node after the specified node already existing in the tree.
         /// </summary>
-        /// <param name="node">The node already existing in the tree that the new nodes will be placed after. This must be a node this is contained within a syntax list.</param>
-        /// <param name="newNode">The node to place after the existing node. This node must be of a compatible type to be placed in the same list containing the existing node.</param>
+        /// <param name="node">The node already existing in the tree that the new nodes will be placed
+        // after. This must be a node this is contained within a syntax list.</param>
+        /// <param name="newNode">The node to place after the existing node. This node must be of a
+        // compatible type to be placed in the same list containing the existing node.</param>
         public void InsertAfter(SyntaxNode node, SyntaxNode newNode) =>
             this.InsertAfter(node, new[] { newNode });
 

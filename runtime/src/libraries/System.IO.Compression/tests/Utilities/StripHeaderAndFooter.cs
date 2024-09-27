@@ -81,13 +81,17 @@ class StripHeaderAndFooter
         inputStream.Dispose();
 
         //Footer
-        //The correct way to find a footer would be to read the compressed blocks but we try a different approach
-        //All we know about it is that it is the last 8 bytes and we will read the last 8 bytes as the footer
-        //We can confirm this by comparing the size of the decompressed file with the size specified in the footer
+        //The correct way to find a footer would be to read the compressed blocks but we try a different
+        // approach
+        //All we know about it is that it is the last 8 bytes and we will read the last 8 bytes as the
+        // footer
+        //We can confirm this by comparing the size of the decompressed file with the size specified in the
+        // footer
         //To do this, we need to decompress the file
         //@TODO!! - is it worth it??
         //            outputStream = new MemoryStream(outputFileName, FileMode.Create, FileAccess.Write);
-        //            inputStream = new MemoryStream(inputFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+        //            inputStream = new MemoryStream(inputFileName, FileMode.Open, FileAccess.Read,
+        // FileShare.Read);
 
         //            outputStream.Flush();
         byte[] bits = new byte[bitlist.Count - 8];

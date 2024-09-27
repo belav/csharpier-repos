@@ -515,7 +515,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             // Adding a dependency to an assembly that has internal definitions of public types
             // should not result in a collision and break generation.
-            // Verify usage of the extension GetBestTypeByMetadataName(this Compilation) instead of Compilation.GetTypeByMetadataName().
+            // Verify usage of the extension GetBestTypeByMetadataName(this Compilation) instead of
+            // Compilation.GetTypeByMetadataName().
             var referencedSource = """
                 namespace System.Text.Json.Serialization
                 {

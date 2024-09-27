@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Http;
 public sealed class EndpointFilterFactoryContext
 {
     /// <summary>
-    /// The <see cref="MethodInfo"/> associated with the current route handler, <see cref="RequestDelegate"/> or MVC action.
+    /// The <see cref="MethodInfo"/> associated with the current route handler, <see
+    // cref="RequestDelegate"/> or MVC action.
     /// </summary>
     /// <remarks>
     /// In the future this could support more endpoint types.

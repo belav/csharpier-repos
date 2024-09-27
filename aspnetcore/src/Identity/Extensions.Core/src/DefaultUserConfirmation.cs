@@ -15,9 +15,11 @@ public class DefaultUserConfirmation<TUser> : IUserConfirmation<TUser>
     /// <summary>
     /// Determines whether the specified <paramref name="user"/> is confirmed.
     /// </summary>
-    /// <param name="manager">The <see cref="UserManager{TUser}"/> that can be used to retrieve user properties.</param>
+    /// <param name="manager">The <see cref="UserManager{TUser}"/> that can be used to retrieve user
+    // properties.</param>
     /// <param name="user">The user.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the confirmation operation.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the confirmation operation.</returns>
     public virtual async Task<bool> IsConfirmedAsync(UserManager<TUser> manager, TUser user)
     {
         return await manager.IsEmailConfirmedAsync(user).ConfigureAwait(false);

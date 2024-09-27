@@ -226,7 +226,8 @@ namespace System.Globalization
         //      * SpacingCombiningMark (e.g. U+ 0903 DEVANGARI SIGN VISARGA)
         //      * EnclosingMark (e.g. U+20DD COMBINING ENCLOSING CIRCLE)
         //
-        // In the context of GetNextTextElement() and ParseCombiningCharacters(), a text element is defined as:
+        // In the context of GetNextTextElement() and ParseCombiningCharacters(), a text element is defined
+        // as:
         //
         //  1. If a character/surrogate is in the following category, it is a text element.
         //     It can NOT further combine with characters in the combinging class to form a text element.
@@ -234,7 +235,8 @@ namespace System.Globalization
         //      * UnicodeCategory.Format
         //      * UnicodeCateogry.Control
         //      * UnicodeCategory.OtherNotAssigned
-        //  2. Otherwise, the character/surrogate can be combined with characters in the combinging class to form a text element.
+        //  2. Otherwise, the character/surrogate can be combined with characters in the combinging class to
+        // form a text element.
         //
         //  Return:
         //      The length of the current text element
@@ -243,8 +245,10 @@ namespace System.Globalization
         //      String str
         //      index   The starting index
         //      len     The total length of str (to define the upper boundary)
-        //      ucCurrent   The Unicode category pointed by Index.  It will be updated to the uc of next character if this is not the last text element.
-        //      currentCharCount    The char count of an abstract char pointed by Index.  It will be updated to the char count of next abstract character if this is not the last text element.
+        //      ucCurrent   The Unicode category pointed by Index.  It will be updated to the uc of next
+        // character if this is not the last text element.
+        //      currentCharCount    The char count of an abstract char pointed by Index.  It will be updated
+        // to the char count of next abstract character if this is not the last text element.
         //
         ////////////////////////////////////////////////////////////////////////
 
@@ -270,7 +274,8 @@ namespace System.Globalization
                 return (currentCharCount);
             }
 
-            // Call an internal GetUnicodeCategory, which will tell us both the unicode category, and also tell us if it is a surrogate pair or not.
+            // Call an internal GetUnicodeCategory, which will tell us both the unicode category, and also tell
+            // us if it is a surrogate pair or not.
             int nextCharCount;
             UnicodeCategory ucNext = CharUnicodeInfo.InternalGetUnicodeCategory(
                 str,
@@ -280,7 +285,8 @@ namespace System.Globalization
             if (CharUnicodeInfo.IsCombiningCategory(ucNext))
             {
                 // The next element is a combining class.
-                // Check if the current text element to see if it is a valid base category (i.e. it should not be a combining category,
+                // Check if the current text element to see if it is a valid base category (i.e. it should not be a
+                // combining category,
                 // not a format character, and not a control character).
 
                 if (
@@ -396,17 +402,17 @@ namespace System.Globalization
             return (new TextElementEnumerator(str, index, len));
         }
 
-        /*
-         * Returns the indices of each base character or properly formed surrogate pair
-         * within the str.  It recognizes a base character plus one or more combining
-         * characters or a properly formed surrogate pair as a text element and returns
-         * the index of the base character or high surrogate.  Each index is the
-         * beginning of a text element within a str.  The length of each element is
-         * easily computed as the difference between successive indices.  The length of
-         * the array will always be less than or equal to the length of the str.  For
-         * example, given the str \u4f00\u302a\ud800\udc00\u4f01, this method would
-         * return the indices: 0, 2, 4.
-         */
+/*
+* Returns the indices of each base character or properly formed surrogate pair
+* within the str.  It recognizes a base character plus one or more combining
+* characters or a properly formed surrogate pair as a text element and returns
+* the index of the base character or high surrogate.  Each index is the
+* beginning of a text element within a str.  The length of each element is
+* easily computed as the difference between successive indices.  The length of
+* the array will always be less than or equal to the length of the str.  For
+* example, given the str \u4f00\u302a\ud800\udc00\u4f01, this method would
+* return the indices: 0, 2, 4.
+*/
 
         public static int[] ParseCombiningCharacters(String str)
         {

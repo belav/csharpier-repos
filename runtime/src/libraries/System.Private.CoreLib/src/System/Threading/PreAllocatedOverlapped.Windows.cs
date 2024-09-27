@@ -23,22 +23,28 @@ namespace System.Threading
         ///     invoked when each asynchronous I/O operation completes.
         /// </param>
         /// <param name="state">
-        ///     A user-provided object that distinguishes <see cref="NativeOverlapped"/> instance produced from this
+        ///     A user-provided object that distinguishes <see cref="NativeOverlapped"/> instance produced
+        // from this
         ///     object from other <see cref="NativeOverlapped"/> instances. Can be <see langword="null"/>.
         /// </param>
         /// <param name="pinData">
-        ///     An object or array of objects representing the input or output buffer for the operations. Each
+        ///     An object or array of objects representing the input or output buffer for the operations.
+        // Each
         ///     object represents a buffer, for example an array of bytes.  Can be <see langword="null"/>.
         /// </param>
         /// <remarks>
         ///     The new <see cref="PreAllocatedOverlapped"/> instance can be passed to
-        ///     <see cref="ThreadPoolBoundHandle.AllocateNativeOverlapped(PreAllocatedOverlapped)"/>, to produce
-        ///     a <see cref="NativeOverlapped"/> instance that can be passed to the operating system in overlapped
+        ///     <see cref="ThreadPoolBoundHandle.AllocateNativeOverlapped(PreAllocatedOverlapped)"/>, to
+        // produce
+        ///     a <see cref="NativeOverlapped"/> instance that can be passed to the operating system in
+        // overlapped
         ///     I/O operations.  A single <see cref="PreAllocatedOverlapped"/> instance can only be used for
-        ///     a single native I/O operation at a time.  However, the state stored in the <see cref="PreAllocatedOverlapped"/>
+        ///     a single native I/O operation at a time.  However, the state stored in the <see
+        // cref="PreAllocatedOverlapped"/>
         ///     instance can be reused for subsequent native operations.
         ///     <note>
-        ///         The buffers specified in <paramref name="pinData"/> are pinned until <see cref="Dispose"/> is called.
+        ///         The buffers specified in <paramref name="pinData"/> are pinned until <see
+        // cref="Dispose"/> is called.
         ///     </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException">
@@ -61,23 +67,30 @@ namespace System.Threading
         ///     invoked when each asynchronous I/O operation completes.
         /// </param>
         /// <param name="state">
-        ///     A user-provided object that distinguishes <see cref="NativeOverlapped"/> instance produced from this
+        ///     A user-provided object that distinguishes <see cref="NativeOverlapped"/> instance produced
+        // from this
         ///     object from other <see cref="NativeOverlapped"/> instances. Can be <see langword="null"/>.
         /// </param>
         /// <param name="pinData">
-        ///     An object or array of objects representing the input or output buffer for the operations. Each
+        ///     An object or array of objects representing the input or output buffer for the operations.
+        // Each
         ///     object represents a buffer, for example an array of bytes.  Can be <see langword="null"/>.
         /// </param>
         /// <remarks>
         ///     The new <see cref="PreAllocatedOverlapped"/> instance can be passed to
-        ///     <see cref="ThreadPoolBoundHandle.AllocateNativeOverlapped(PreAllocatedOverlapped)"/>, to produce
-        ///     a <see cref="NativeOverlapped"/> instance that can be passed to the operating system in overlapped
+        ///     <see cref="ThreadPoolBoundHandle.AllocateNativeOverlapped(PreAllocatedOverlapped)"/>, to
+        // produce
+        ///     a <see cref="NativeOverlapped"/> instance that can be passed to the operating system in
+        // overlapped
         ///     I/O operations.  A single <see cref="PreAllocatedOverlapped"/> instance can only be used for
-        ///     a single native I/O operation at a time.  However, the state stored in the <see cref="PreAllocatedOverlapped"/>
-        ///     instance can be reused for subsequent native operations. ExecutionContext is not flowed to the invocation
+        ///     a single native I/O operation at a time.  However, the state stored in the <see
+        // cref="PreAllocatedOverlapped"/>
+        ///     instance can be reused for subsequent native operations. ExecutionContext is not flowed to
+        // the invocation
         ///     of the callback.
         ///     <note>
-        ///         The buffers specified in <paramref name="pinData"/> are pinned until <see cref="Dispose"/> is called.
+        ///         The buffers specified in <paramref name="pinData"/> are pinned until <see
+        // cref="Dispose"/> is called.
         ///     </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException">

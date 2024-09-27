@@ -11,7 +11,8 @@ namespace System.Security.Cryptography
     //       surface.
 
     /// <summary>
-    /// Specifies the padding mode  and parameters to use with RSA signature creation or verification operations.
+    /// Specifies the padding mode  and parameters to use with RSA signature creation or verification
+    // operations.
     /// </summary>
     public sealed class RSASignaturePadding : IEquatable<RSASignaturePadding>
     {
@@ -38,7 +39,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// <see cref="RSASignaturePaddingMode.Pss"/> mode with the number of salt bytes equal to the size of the hash.
+        /// <see cref="RSASignaturePaddingMode.Pss"/> mode with the number of salt bytes equal to the size
+        // of the hash.
         /// </summary>
         public static RSASignaturePadding Pss
         {

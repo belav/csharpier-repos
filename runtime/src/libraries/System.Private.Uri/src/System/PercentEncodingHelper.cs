@@ -17,10 +17,13 @@ namespace System
             bool iriParsing
         )
         {
-            // The following assertions rely on the input not mutating mid-operation, as is the case currently since callers are working with strings
-            // If we start accepting input such as spans, this method must be audited to ensure no buffer overruns/infinite loops could occur
+            // The following assertions rely on the input not mutating mid-operation, as is the case currently
+            // since callers are working with strings
+            // If we start accepting input such as spans, this method must be audited to ensure no buffer
+            // overruns/infinite loops could occur
 
-            // As an optimization, this method should only be called after the first character is known to be a part of a non-ascii UTF8 sequence
+            // As an optimization, this method should only be called after the first character is known to be a
+            // part of a non-ascii UTF8 sequence
             Debug.Assert(length >= 3);
             Debug.Assert(input[0] == '%');
             Debug.Assert(UriHelper.DecodeHexChars(input[1], input[2]) != Uri.c_DummyChar);
@@ -163,12 +166,14 @@ namespace System
                 // bytesLeftInBuffer == 3 => (32 - (3 << 3)) => 32 - 24 => 8 bits
                 // bytesLeftInBuffer == 2 => (32 - (2 << 3)) => 32 - 16 => 16 bits
 
-                // For invalid input we tried to decode in DecodeRune, we may return here if we have more than 1 byte left
+                // For invalid input we tried to decode in DecodeRune, we may return here if we have more than 1
+                // byte left
                 // If bytesConsumed is 1, shift by 1 byte
                 // If bytesConsumed is 2:
                 // a) We had 4 bytes in the buffer and now only have 2 => Shift by 2 bytes
                 // b) We read 1 more byte, leaving us with 3 bytes in the buffer => Shift by 1 byte
-                // The case for bytesConsumed == 2 is handled by the else block as the offsets are the same as for valid input described above
+                // The case for bytesConsumed == 2 is handled by the else block as the offsets are the same as for
+                // valid input described above
 
                 if (bytesConsumed == 1)
                 {

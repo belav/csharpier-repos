@@ -16,22 +16,26 @@ namespace Microsoft.Extensions.Hosting.Internal
 #pragma warning restore CS0618 // Type or member is obsolete
     {
         /// <summary>
-        /// This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+        /// This API supports infrastructure and is not intended to be used directly from your code. This
+        // API may change or be removed in future releases.
         /// </summary>
         public string EnvironmentName { get; set; } = string.Empty;
 
         /// <summary>
-        /// This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+        /// This API supports infrastructure and is not intended to be used directly from your code. This
+        // API may change or be removed in future releases.
         /// </summary>
         public string ApplicationName { get; set; } = string.Empty;
 
         /// <summary>
-        /// This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+        /// This API supports infrastructure and is not intended to be used directly from your code. This
+        // API may change or be removed in future releases.
         /// </summary>
         public string ContentRootPath { get; set; } = string.Empty;
 
         /// <summary>
-        /// This API supports infrastructure and is not intended to be used directly from your code. This API may change or be removed in future releases.
+        /// This API supports infrastructure and is not intended to be used directly from your code. This
+        // API may change or be removed in future releases.
         /// </summary>
         public IFileProvider ContentRootFileProvider { get; set; } = null!;
     }

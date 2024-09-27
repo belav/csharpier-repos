@@ -277,7 +277,8 @@ namespace System.Net.Security
                 }
 
                 // sometimes during renegotiation processing message does not yield new output.
-                // That seems to be flaw in OpenSSL state machine and we have workaround to peek it and try it again.
+                // That seems to be flaw in OpenSSL state machine and we have workaround to peek it and try it
+                // again.
                 if (outputSize == 0 && Interop.Ssl.IsSslRenegotiatePending((SafeSslHandle)context))
                 {
                     errorCode = Interop.OpenSsl.DoSslHandshake(
@@ -288,7 +289,8 @@ namespace System.Net.Security
                     );
                 }
 
-                // When the handshake is done, and the context is server, check if the alpnHandle target was set to null during ALPN.
+                // When the handshake is done, and the context is server, check if the alpnHandle target was set to
+                // null during ALPN.
                 // If it was, then that indicates ALPN failed, send failure.
                 // We have this workaround, as openssl supports terminating handshake only from version 1.1.0,
                 // whereas ALPN is supported from version 1.0.2.
@@ -368,7 +370,8 @@ namespace System.Net.Security
             }
             else if (code == Interop.Ssl.SslErrorCode.SSL_ERROR_SSL)
             {
-                // OpenSSL failure occurred.  The error queue contains more details, when building the exception the queue will be cleared.
+                // OpenSSL failure occurred.  The error queue contains more details, when building the exception the
+                // queue will be cleared.
                 return new SecurityStatusPal(
                     SecurityStatusPalErrorCode.InternalError,
                     Interop.Crypto.CreateOpenSslCryptographicException()

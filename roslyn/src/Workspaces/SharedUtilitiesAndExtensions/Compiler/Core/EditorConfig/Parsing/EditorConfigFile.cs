@@ -13,8 +13,10 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
     /// <summary>
     /// Base representation of an editorconfig file that has been parsed
     /// </summary>
-    /// <typeparam name="T">The kind of options that we expect to encounter in the editorconfig file.</typeparam>
-    /// <param name="FilePath">The full path to the editorconfig file on disk. Optional if not doing pathwise comparisons</param>
+    /// <typeparam name="T">The kind of options that we expect to encounter in the editorconfig
+    // file.</typeparam>
+    /// <param name="FilePath">The full path to the editorconfig file on disk. Optional if not doing
+    // pathwise comparisons</param>
     /// <param name="Options">The set of options that were discovered in the file.</param>
     internal record class EditorConfigFile<T>(string? FilePath, ImmutableArray<T> Options)
         where T : EditorConfigOption
@@ -25,7 +27,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         public ImmutableArray<Section> Sections => _sections.Value;
 
         /// <summary>
-        /// Attempts to find a section of the editorconfig file that is an exact match for the given language.
+        /// Attempts to find a section of the editorconfig file that is an exact match for the given
+        // language.
         /// </summary>
         public bool TryGetSectionForLanguage(
             Language language,
@@ -33,7 +36,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         ) => TryGetSectionForLanguage(language, SectionMatch.ExactLanguageMatch, out sectionResult);
 
         /// <summary>
-        /// Attempts to find a section of the editorconfig file that applies to the given language for the given criteria.
+        /// Attempts to find a section of the editorconfig file that applies to the given language for the
+        // given criteria.
         /// </summary>
         public bool TryGetSectionForLanguage(
             Language language,
@@ -72,7 +76,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         }
 
         /// <summary>
-        /// Attempts to find a section of the editorconfig file that applies to the given file for the given criteria.
+        /// Attempts to find a section of the editorconfig file that applies to the given file for the given
+        // criteria.
         /// </summary>
         public bool TryGetSectionForFilePath(
             string filePath,

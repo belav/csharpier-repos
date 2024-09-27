@@ -13,7 +13,8 @@ namespace System.Net.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpIOException"/> class.
         /// </summary>
-        /// <param name="httpRequestError">The <see cref="Http.HttpRequestError"/> that caused the exception.</param>
+        /// <param name="httpRequestError">The <see cref="Http.HttpRequestError"/> that caused the
+        // exception.</param>
         /// <param name="message">The message string describing the error.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public HttpIOException(

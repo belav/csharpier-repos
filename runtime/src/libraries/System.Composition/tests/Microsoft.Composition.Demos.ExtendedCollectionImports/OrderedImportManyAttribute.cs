@@ -22,7 +22,8 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports
         /// <summary>
         /// Construct a <see cref="OrderByMetadataAttribute"/> for the specified metadata name.
         /// </summary>
-        /// <param name="orderMetadataName">The name of the metadata item to use to order the collection.</param>
+        /// <param name="orderMetadataName">The name of the metadata item to use to order the
+        // collection.</param>
         public OrderedImportManyAttribute(string orderMetadataName)
         {
             _metadataKey = orderMetadataName;

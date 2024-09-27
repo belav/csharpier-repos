@@ -12,7 +12,8 @@ namespace Microsoft.VisualStudio.Shell
 {
     internal static class RoslynServiceExtensions
     {
-        /// <inheritdoc cref="RoslynServiceExtensions.GetService{TService, TInterface}(IServiceProvider, JoinableTaskFactory, bool)"/>
+        /// <inheritdoc cref="RoslynServiceExtensions.GetService{TService, TInterface}(IServiceProvider,
+        // JoinableTaskFactory, bool)"/>
         public static TInterface GetServiceOnMainThread<TService, TInterface>(
             this IServiceProvider serviceProvider
         )
@@ -67,10 +68,12 @@ namespace Microsoft.VisualStudio.Shell
         /// <typeparam name="TInterface">The interface type</typeparam>
         /// <param name="serviceProvider">The service provider</param>
         /// <param name="throwOnFailure">
-        /// Determines how a failure to get the requested service interface is handled. If <see langword="true"/>, an
+        /// Determines how a failure to get the requested service interface is handled. If <see
+        // langword="true"/>, an
         /// exception is thrown; if <see langword="false"/>, <see langword="null"/> is returned.
         /// </param>
-        /// <returns>The requested service interface, if it could be obtained; otherwise <see langword="null"/> if
+        /// <returns>The requested service interface, if it could be obtained; otherwise <see
+        // langword="null"/> if
         /// <paramref name="throwOnFailure"/> is <see langword="false"/>.</returns>
         /// <exception cref="ServiceUnavailableException">
         /// Either the service could not be acquired, or the service does not support
@@ -146,10 +149,12 @@ namespace Microsoft.VisualStudio.Shell
         /// <typeparam name="TInterface">The interface type</typeparam>
         /// <param name="asyncServiceProvider">The async service provider</param>
         /// <param name="throwOnFailure">
-        /// Determines how a failure to get the requested service interface is handled. If <see langword="true"/>, an
+        /// Determines how a failure to get the requested service interface is handled. If <see
+        // langword="true"/>, an
         /// exception is thrown; if <see langword="false"/>, <see langword="null"/> is returned.
         /// </param>
-        /// <returns>The requested service interface, if it could be obtained; otherwise <see langword="null"/> if
+        /// <returns>The requested service interface, if it could be obtained; otherwise <see
+        // langword="null"/> if
         /// <paramref name="throwOnFailure"/> is <see langword="false"/>.</returns>
         /// <exception cref="ServiceUnavailableException">
         /// Either the service could not be acquired, or the service does not support
@@ -165,7 +170,8 @@ namespace Microsoft.VisualStudio.Shell
             Requires.NotNull(asyncServiceProvider, nameof(asyncServiceProvider));
             object? service;
 
-            // Prefer IAsyncServiceProvider2 so that any original exceptions can be captured and included as an inner
+            // Prefer IAsyncServiceProvider2 so that any original exceptions can be captured and included as an
+            // inner
             // exception to the one that we throw.
             if (
                 throwOnFailure

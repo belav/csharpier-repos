@@ -33,8 +33,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             index >= 0 && index < text.Length ? text[index] : '\0';
 
         /// <summary>
-        /// True if the string literal contains an error diagnostic that indicates a parsing problem with it. For
-        /// interpolated strings, this only includes the text sections, and not any interpolation holes in the literal.
+        /// True if the string literal contains an error diagnostic that indicates a parsing problem with
+        // it. For
+        /// interpolated strings, this only includes the text sections, and not any interpolation holes in
+        // the literal.
         /// </summary>
         public static bool ContainsError(ExpressionSyntax stringExpression)
         {
@@ -104,8 +106,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         }
 
         /// <summary>
-        /// Given a TextLine, returns the index (in the SourceText) of the first character of it that is not a
-        /// Whitespace character.  The LineBreak parts of the line are not considered here.  If the line is empty/blank
+        /// Given a TextLine, returns the index (in the SourceText) of the first character of it that is not
+        // a
+        /// Whitespace character.  The LineBreak parts of the line are not considered here.  If the line is
+        // empty/blank
         /// (again, not counting LineBreak characters) then -1 is returned.
         /// </summary>
         public static int GetFirstNonWhitespaceIndex(SourceText text, TextLine line)
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         }
 
         /// <summary>
-        /// Removes all characters matching <see cref="SyntaxFacts.IsWhitespace(char)"/> from the start of <paramref
+        /// Removes all characters matching <see cref="SyntaxFacts.IsWhitespace(char)"/> from the start of
+        // <paramref
         /// name="value"/>.
         /// </summary>
         public static (string whitespace, string contents) ExtractWhitespace(string value)
@@ -202,8 +207,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         }
 
         /// <summary>
-        /// Given a section of a document, finds the longest sequence of quote (<c>"</c>) characters in it.  Used to
-        /// determine if a raw string literal needs to grow its delimiters to ensure that the quote sequence will no
+        /// Given a section of a document, finds the longest sequence of quote (<c>"</c>) characters in it.
+        // Used to
+        /// determine if a raw string literal needs to grow its delimiters to ensure that the quote sequence
+        // will no
         /// longer be a problem.
         /// </summary>
         public static int GetLongestQuoteSequence(SourceText text, TextSpan span) =>
@@ -216,8 +223,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             GetLongestCharacterSequence(text, span, '}');
 
         /// <summary>
-        /// Given a section of a document, finds the longest sequence of of a given <paramref name="character"/> in it.
-        /// Used to determine if a raw string literal needs to grow its delimiters to ensure that the sequence
+        /// Given a section of a document, finds the longest sequence of of a given <paramref
+        // name="character"/> in it.
+        /// Used to determine if a raw string literal needs to grow its delimiters to ensure that the
+        // sequence
         /// will no longer be a problem.
         /// </summary>
         private static int GetLongestCharacterSequence(
@@ -248,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         }
 
         /// <summary>
-        /// Given a set of selections, finds the innermost string-literal/interpolation that they are all contained in.
+        /// Given a set of selections, finds the innermost string-literal/interpolation that they are all
+        // contained in.
         /// If no such literal/interpolation exists, this returns null.
         /// </summary>
         public static ExpressionSyntax? FindCommonContainingStringExpression(
@@ -298,8 +308,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
         public static bool IsSupportedStringExpression(ExpressionSyntax expression)
         {
-            // When new string forms are added, support for them can be introduced here.  However, by checking the exact
-            // types of strings supported, downstream code can know exactly what forms they should be looking for and
+            // When new string forms are added, support for them can be introduced here.  However, by checking
+            // the exact
+            // types of strings supported, downstream code can know exactly what forms they should be looking
+            // for and
             // that nothing else may flow down to them.
 
             if (
@@ -384,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                 {
                     builder.Append(ch);
 
-                    // if we see a special character then skip the following one if the following one already escapes it.
+                    // if we see a special character then skip the following one if the following one already escapes
+                    // it.
                     // Otherwise, if it's not already escaped, then escape it.
                     if (isInterpolated && ch is '{' or '}')
                     {
@@ -472,13 +485,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             using var _ = PooledStringBuilder.GetInstance(out var builder);
 
             // First, go through and see if we're escaping *anything* in the original.  If so, then we'll escape
-            // everything.  In other words, say we're pasting `[SuppressMessage("", "CA2013")]`.  We technically don't
-            // need to escape the `""` (since that is legal in a verbatim string).  However, we will be escaping the
-            // quotes in teh `"CA2013"` to become `""CA2013""`.  Once we decide we're escaping some quotes, we should
+            // everything.  In other words, say we're pasting `[SuppressMessage("", "CA2013")]`.  We technically
+            // don't
+            // need to escape the `""` (since that is legal in a verbatim string).  However, we will be escaping
+            // the
+            // quotes in teh `"CA2013"` to become `""CA2013""`.  Once we decide we're escaping some quotes, we
+            // should
             // then realize that we *should* escape the `""` to `""""` to be consistent.
 
             // So if we determine that we will be escaping all code, then just recurse, this time setting
-            // trySkipExistingEscapes to false.  That will prevent calling back into this check and it means whatever we
+            // trySkipExistingEscapes to false.  That will prevent calling back into this check and it means
+            // whatever we
             // run into we will escape.
             if (trySkipExistingEscapes && WillEscapeAnyCharacters(isInterpolated, value))
                 return EscapeForNonRawVerbatimStringLiteral(
@@ -494,7 +511,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
                 builder.Append(ch);
 
-                // if we see a special character then skip the following one if the following one already escapes it.
+                // if we see a special character then skip the following one if the following one already escapes
+                // it.
                 // Otherwise, if it's not already escaped, then escape it.
                 if (ch == '"')
                 {
@@ -550,10 +568,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         }
 
         /// <summary>
-        /// Given a set of source text lines, determines what common whitespace prefix each line has.  Note that this
-        /// does *not* include the first line as it's super common for someone to copy a set of lines while only
-        /// starting the selection at the start of the content on the first line.  This also does not include empty
-        /// lines as they're also very common, but are clearly not a way of indicating indentation indent for the normal
+        /// Given a set of source text lines, determines what common whitespace prefix each line has.  Note
+        // that this
+        /// does *not* include the first line as it's super common for someone to copy a set of lines while
+        // only
+        /// starting the selection at the start of the content on the first line.  This also does not
+        // include empty
+        /// lines as they're also very common, but are clearly not a way of indicating indentation indent
+        // for the normal
         /// lines.
         /// </summary>
         public static string? GetCommonIndentationPrefix(
@@ -597,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             if (commonIndentPrefix == null)
                 return text.ToString(lineWhitespaceSpan);
 
-            // we have indentation whitespace from a previous line.  Figure out the max commonality between it and the
+            // we have indentation whitespace from a previous line.  Figure out the max commonality between it
+            // and the
             // line we're currently looking at.
             var commonPrefixLength = 0;
             for (

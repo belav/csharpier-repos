@@ -52,21 +52,26 @@ namespace System.Globalization
         //
         // In Whidbey we had several names:
         //      m_win32LangID is the name of the culture, but only used for (de)serialization.
-        //      customCultureName is the name of the creating custom culture (if custom)  In combination with m_win32LangID
+        //      customCultureName is the name of the creating custom culture (if custom)  In combination
+        // with m_win32LangID
         //              this is authoratative, ie when deserializing.
-        //      m_cultureTableRecord was the data record of the creating culture.  (could have different name if custom)
+        //      m_cultureTableRecord was the data record of the creating culture.  (could have different
+        // name if custom)
         //      m_textInfoID is the LCID of the textinfo itself (no longer used)
         //      m_name is the culture name (from cultureinfo.name)
         //
         // In Silverlight/Arrowhead this is slightly different:
-        //      m_cultureName is the name of the creating culture.  Note that we consider this authoratative,
+        //      m_cultureName is the name of the creating culture.  Note that we consider this
+        // authoratative,
         //              if the culture's textinfo changes when deserializing, then behavior may change.
         //              (ala Whidbey behavior).  This is the only string Arrowhead needs to serialize.
         //      m_cultureData is the data that backs this class.
         //      m_textInfoName  is the actual name of the textInfo (from cultureData.STEXTINFO)
         //              m_textInfoName can be the same as m_cultureName on Silverlight since the OS knows
-        //              how to do the sorting. However in the desktop, when we call the sorting dll, it doesn't
-        //              know how to resolve custom locle names to sort ids so we have to have alredy resolved this.
+        //              how to do the sorting. However in the desktop, when we call the sorting dll, it
+        // doesn't
+        //              know how to resolve custom locle names to sort ids so we have to have alredy
+        // resolved this.
         //
 
         [OptionalField(VersionAdded = 3)]
@@ -176,7 +181,8 @@ namespace System.Globalization
                     {
                         if (m_win32LangID == 0)
                         {
-                            // m_cultureName and m_win32LangID are nulls which means we got uninitialized textinfo serialization stream.
+                            // m_cultureName and m_win32LangID are nulls which means we got uninitialized textinfo serialization
+                            // stream.
                             // To be compatible with v2/3/3.5 we need to return ar-SA TextInfo in this case.
                             m_cultureName = "ar-SA";
                         }
@@ -224,7 +230,8 @@ namespace System.Globalization
             this.customCultureName = this.m_cultureName;
 
 #if FEATURE_USE_LCID
-            // Ignore the m_win32LangId because whidbey'll just get it by name if we make it the LOCALE_CUSTOM_UNSPECIFIED.
+            // Ignore the m_win32LangId because whidbey'll just get it by name if we make it the
+            // LOCALE_CUSTOM_UNSPECIFIED.
             this.m_win32LangID = (CultureInfo.GetCultureInfo(m_cultureName)).LCID;
 #endif
         }
@@ -880,13 +887,17 @@ namespace System.Globalization
         // -----------
         // Titlecasing refers to a casing practice wherein the first letter of a word is an uppercase letter
         // and the rest of the letters are lowercase.  The choice of which words to titlecase in headings
-        // and titles is dependent on language and local conventions.  For example, "The Merry Wives of Windor"
+        // and titles is dependent on language and local conventions.  For example, "The Merry Wives of
+        // Windor"
         // is the appropriate titlecasing of that play's name in English, with the word "of" not titlecased.
         // In German, however, the title is "Die lustigen Weiber von Windsor," and both "lustigen" and "von"
-        // are not titlecased.  In French even fewer words are titlecased: "Les joyeuses commeres de Windsor."
+        // are not titlecased.  In French even fewer words are titlecased: "Les joyeuses commeres de
+        // Windsor."
         //
-        // Moreover, the determination of what actually constitutes a word is language dependent, and this can
-        // influence which letter or letters of a "word" are uppercased when titlecasing strings.  For example
+        // Moreover, the determination of what actually constitutes a word is language dependent, and this
+        // can
+        // influence which letter or letters of a "word" are uppercased when titlecasing strings.  For
+        // example
         // "l'arbre" is considered two words in French, whereas "can't" is considered one word in English.
         //
         //
@@ -1178,7 +1189,8 @@ namespace System.Globalization
 
         // IsRightToLeft
         //
-        // Returns true if the dominant direction of text and UI such as the relative position of buttons and scroll bars
+        // Returns true if the dominant direction of text and UI such as the relative position of buttons
+        // and scroll bars
         //
         [System.Runtime.InteropServices.ComVisible(false)]
         public bool IsRightToLeft
@@ -1312,8 +1324,10 @@ namespace System.Globalization
             int length2
         );
 
-        // ComNlsInfo::InternalTryFindStringOrdinalIgnoreCase attempts a faster IndexOf/LastIndexOf OrdinalIgnoreCase using a kernel function.
-        // Returns true if FindStringOrdinal was handled, with foundIndex set to the target's index into the source
+        // ComNlsInfo::InternalTryFindStringOrdinalIgnoreCase attempts a faster IndexOf/LastIndexOf
+        // OrdinalIgnoreCase using a kernel function.
+        // Returns true if FindStringOrdinal was handled, with foundIndex set to the target's index into the
+        // source
         // Returns false when FindStringOrdinal wasn't handled
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]

@@ -241,7 +241,8 @@ namespace System.Activities.Statements
                 case BookmarkResumptionResult.NotReady:
                     // The workflow maybe in one of these states: Completed, Aborted, Abandoned, unloading, Suspended
                     // In the first 3 cases, we will let TimerExtension.CancelTimer take care of the cleanup.
-                    // In the 4th case, we want the timer to retry when it is loaded back, in all 4 cases we don't need to delete the timer
+                    // In the 4th case, we want the timer to retry when it is loaded back, in all 4 cases we don't need
+                    // to delete the timer
                     // In the 5th case, we want the timer to retry until it succeeds.
                     // Retry:
                     lock (this.ThisLock)

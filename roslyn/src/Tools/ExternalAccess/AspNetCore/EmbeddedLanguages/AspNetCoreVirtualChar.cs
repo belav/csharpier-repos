@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         /// </summary>
         public int RuneValue
         {
-            // Rune is an internal shim with netstandard2.0 and accessing it throws an internal access exception.
+            // Rune is an internal shim with netstandard2.0 and accessing it throws an internal access
+            // exception.
             // Expose integer value. Can be converted back to Rune by caller.
             get => VirtualChar.Rune.Value;
         }

@@ -13,11 +13,13 @@ namespace Microsoft.AspNetCore.HttpOverrides;
 public class IPNetwork
 {
     /// <summary>
-    /// Create a new <see cref="IPNetwork"/> with the specified <see cref="IPAddress"/> and prefix length.
+    /// Create a new <see cref="IPNetwork"/> with the specified <see cref="IPAddress"/> and prefix
+    // length.
     /// </summary>
     /// <param name="prefix">The <see cref="IPAddress"/>.</param>
     /// <param name="prefixLength">The prefix length.</param>
-    /// <exception cref="ArgumentOutOfRangeException"><paramref name="prefixLength"/> is out of range.</exception>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="prefixLength"/> is out of
+    // range.</exception>
     public IPNetwork(IPAddress prefix, int prefixLength)
         : this(prefix, prefixLength, true) { }
 
@@ -55,7 +57,8 @@ public class IPNetwork
     /// Determine whether a given The <see cref="IPAddress"/> is part of the IP network.
     /// </summary>
     /// <param name="address">The <see cref="IPAddress"/>.</param>
-    /// <returns><see langword="true"/> if the <see cref="IPAddress"/> is part of the IP network. Otherwise, <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="IPAddress"/> is part of the IP network.
+    // Otherwise, <see langword="false"/>.</returns>
     public bool Contains(IPAddress address)
     {
         if (Prefix.AddressFamily != address.AddressFamily)
@@ -113,12 +116,16 @@ public class IPNetwork
     /// Converts the specified <see cref="ReadOnlySpan{T}"/> of <see langword="char"/> representation of
     /// an IP address and a prefix length to its <see cref="IPNetwork"/> equivalent.
     /// </summary>
-    /// <param name="networkSpan">The <see cref="ReadOnlySpan{T}"/> of <see langword="char"/> to convert, in CIDR notation.</param>
+    /// <param name="networkSpan">The <see cref="ReadOnlySpan{T}"/> of <see langword="char"/> to
+    // convert, in CIDR notation.</param>
     /// <returns>
-    ///The <see cref="IPNetwork"/> equivalent to the IP address and prefix length contained in <paramref name="networkSpan"/>.
+    ///The <see cref="IPNetwork"/> equivalent to the IP address and prefix length contained in <paramref
+    // name="networkSpan"/>.
     /// </returns>
-    /// <exception cref="FormatException"><paramref name="networkSpan"/> is not in the correct format.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The prefix length contained in <paramref name="networkSpan"/> is out of range.</exception>
+    /// <exception cref="FormatException"><paramref name="networkSpan"/> is not in the correct
+    // format.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The prefix length contained in <paramref
+    // name="networkSpan"/> is out of range.</exception>
     /// <inheritdoc cref="TryParseComponents(ReadOnlySpan{char}, out IPAddress?, out int)"/>
     public static IPNetwork Parse(ReadOnlySpan<char> networkSpan)
     {
@@ -143,7 +150,8 @@ public class IPNetwork
     /// an IP address and a prefix length to its <see cref="IPNetwork"/> equivalent, and returns a value
     /// that indicates whether the conversion succeeded.
     /// </summary>
-    /// <param name="networkSpan">The <see cref="ReadOnlySpan{T}"/> of <see langword="char"/> to validate.</param>
+    /// <param name="networkSpan">The <see cref="ReadOnlySpan{T}"/> of <see langword="char"/> to
+    // validate.</param>
     /// <param name="network">
     /// When this method returns, contains the <see cref="IPNetwork"/> equivalent to the IP Address
     /// and prefix length contained in <paramref name="networkSpan"/>, if the conversion succeeded,
@@ -177,8 +185,10 @@ public class IPNetwork
 
     /// <remarks>
     /// <para>
-    /// The specified representation must be expressed using CIDR (Classless Inter-Domain Routing) notation, or 'slash notation',
-    /// which contains an IPv4 or IPv6 address and the subnet mask prefix length, separated by a forward slash.
+    /// The specified representation must be expressed using CIDR (Classless Inter-Domain Routing)
+    // notation, or 'slash notation',
+    /// which contains an IPv4 or IPv6 address and the subnet mask prefix length, separated by a forward
+    // slash.
     /// </para>
     /// <example>
     /// e.g. <c>"192.168.0.1/31"</c> for IPv4, <c>"2001:db8:3c4d::1/127"</c> for IPv6

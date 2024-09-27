@@ -51,7 +51,8 @@ namespace System.Net.Sockets
             InitializeClientSocket();
         }
 
-        // Initializes a new instance of the System.Net.Sockets.TcpClient class with the specified end point.
+        // Initializes a new instance of the System.Net.Sockets.TcpClient class with the specified end
+        // point.
         public TcpClient(IPEndPoint localEP)
         {
             ArgumentNullException.ThrowIfNull(localEP);
@@ -63,7 +64,8 @@ namespace System.Net.Sockets
             _clientSocket.Bind(localEP);
         }
 
-        // Initializes a new instance of the System.Net.Sockets.TcpClient class and connects to the specified port on
+        // Initializes a new instance of the System.Net.Sockets.TcpClient class and connects to the
+        // specified port on
         // the specified host.
         public TcpClient(string hostname, int port)
             : this(AddressFamily.Unknown)
@@ -193,7 +195,8 @@ namespace System.Net.Sockets
             CompleteConnectAsync(Client.ConnectAsync(addresses, port));
 
         /// <summary>
-        /// Connects the client to a remote TCP host using the specified endpoint as an asynchronous operation.
+        /// Connects the client to a remote TCP host using the specified endpoint as an asynchronous
+        // operation.
         /// </summary>
         /// <param name="remoteEP">The <see cref="IPEndPoint"/> to which you intend to connect.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
@@ -222,10 +225,12 @@ namespace System.Net.Sockets
         ) => CompleteConnectAsync(Client.ConnectAsync(addresses, port, cancellationToken));
 
         /// <summary>
-        /// Connects the client to a remote TCP host using the specified endpoint as an asynchronous operation.
+        /// Connects the client to a remote TCP host using the specified endpoint as an asynchronous
+        // operation.
         /// </summary>
         /// <param name="remoteEP">The <see cref="IPEndPoint"/> to which you intend to connect.</param>
-        /// <param name="cancellationToken">A cancellation token used to propagate notification that this operation should be canceled.</param>
+        /// <param name="cancellationToken">A cancellation token used to propagate notification that this
+        // operation should be canceled.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         public ValueTask ConnectAsync(IPEndPoint remoteEP, CancellationToken cancellationToken) =>
             CompleteConnectAsync(Client.ConnectAsync(remoteEP, cancellationToken));

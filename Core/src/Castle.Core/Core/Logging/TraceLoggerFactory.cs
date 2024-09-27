@@ -15,7 +15,8 @@
 namespace Castle.Core.Logging
 {
     /// <summary>
-    ///   Used to create the TraceLogger implementation of ILogger interface. See <see cref = "TraceLogger" />.
+    ///   Used to create the TraceLogger implementation of ILogger interface. See <see cref =
+    // "TraceLogger" />.
     /// </summary>
     public class TraceLoggerFactory : AbstractLoggerFactory
     {

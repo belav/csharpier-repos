@@ -21,9 +21,11 @@ namespace Microsoft.Extensions.Caching.Memory
         public long CurrentEntryCount { get; init; }
 
         /// <summary>
-        /// Gets an estimated sum of all the <see cref="ICacheEntry.Size" /> values currently in the memory cache.
+        /// Gets an estimated sum of all the <see cref="ICacheEntry.Size" /> values currently in the memory
+        // cache.
         /// </summary>
-        /// <returns>Returns <see langword="null"/> if size isn't being tracked. The common MemoryCache implementation tracks size whenever a SizeLimit is set on the cache.</returns>
+        /// <returns>Returns <see langword="null"/> if size isn't being tracked. The common MemoryCache
+        // implementation tracks size whenever a SizeLimit is set on the cache.</returns>
         public long? CurrentEstimatedSize { get; init; }
 
         /// <summary>

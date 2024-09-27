@@ -135,7 +135,8 @@ namespace System.Web
         // Overload used only for deducing ETW parameters; use the public entry point instead.
         //
         // !! WARNING !!
-        // The logic in RequestEnteredAspNetPipelineImpl must be kept in sync with these parameters, otherwise
+        // The logic in RequestEnteredAspNetPipelineImpl must be kept in sync with these parameters,
+        // otherwise
         // type safety violations could occur.
         [SuppressMessage(
             "Microsoft.Performance",
@@ -199,9 +200,11 @@ namespace System.Web
         // Event signals that ASP.NET has started processing a request.
         // Overload used only for deducing ETW parameters; use the public entry point instead.
         //
-        // Visual Studio Online #222067 - This event is hardcoded to opt-out of EventSource activityID tracking.
+        // Visual Studio Online #222067 - This event is hardcoded to opt-out of EventSource activityID
+        // tracking.
         // This would normally be done by setting ActivityOptions = EventActivityOptions.Disable in the
-        // Event attribute, but this causes a dependency between System.Web and mscorlib that breaks servicing.
+        // Event attribute, but this causes a dependency between System.Web and mscorlib that breaks
+        // servicing.
         //
         // !! WARNING !!
         // The logic in RequestStartedImpl must be kept in sync with these parameters, otherwise
@@ -229,9 +232,11 @@ namespace System.Web
 
         // Event signals that ASP.NET has completed processing a request.
         //
-        // Visual Studio Online #222067 - This event is hardcoded to opt-out of EventSource activityID tracking.
+        // Visual Studio Online #222067 - This event is hardcoded to opt-out of EventSource activityID
+        // tracking.
         // This would normally be done by setting ActivityOptions = EventActivityOptions.Disable in the
-        // Event attribute, but this causes a dependency between System.Web and mscorlib that breaks servicing.
+        // Event attribute, but this causes a dependency between System.Web and mscorlib that breaks
+        // servicing.
         [Event(
             (int)Events.RequestCompleted,
             Level = EventLevel.Informational,
@@ -251,8 +256,8 @@ namespace System.Web
         }
 
         /*
-         * Helpers to populate the EventData structure
-         */
+        * Helpers to populate the EventData structure
+        */
 
         // prerequisite: str must be pinned and provided as pStr; may be null.
         // we'll convert null strings to empty strings if necessary.

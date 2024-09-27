@@ -179,8 +179,10 @@ namespace System.Net.Http.Functional.Tests
             else
             {
 #if NETCOREAPP
-                // Note that the sync call must be done on a different thread because it blocks until the server replies.
-                // However, the server-side of the request handling is in many cases invoked after the client, thus deadlocking the test.
+                // Note that the sync call must be done on a different thread because it blocks until the server
+                // replies.
+                // However, the server-side of the request handling is in many cases invoked after the client, thus
+                // deadlocking the test.
                 return Task.Run(() => client.Send(request, completionOption, cancellationToken));
 #else
                 // Framework won't ever have the sync API.
@@ -207,8 +209,10 @@ namespace System.Net.Http.Functional.Tests
             else
             {
 #if NETCOREAPP
-                // Note that the sync call must be done on a different thread because it blocks until the server replies.
-                // However, the server-side of the request handling is in many cases invoked after the client, thus deadlocking the test.
+                // Note that the sync call must be done on a different thread because it blocks until the server
+                // replies.
+                // However, the server-side of the request handling is in many cases invoked after the client, thus
+                // deadlocking the test.
                 return Task.Run(() => invoker.Send(request, cancellationToken));
 #else
                 // Framework won't ever have the sync API.

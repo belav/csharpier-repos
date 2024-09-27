@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 MethodDeclarationSyntax method => method.ReturnType.SpanStart,
                 LocalFunctionStatementSyntax local => local.ReturnType.SpanStart,
                 AnonymousMethodExpressionSyntax anonymous => anonymous.DelegateKeyword.SpanStart,
-                // If we have an explicit lambda return type, async should go just before it. Otherwise, it should go before parameter list.
+                // If we have an explicit lambda return type, async should go just before it. Otherwise, it should
+                // go before parameter list.
                 // static [|async|] (a) => ....
                 // static [|async|] ExplicitReturnType (a) => ....
                 ParenthesizedLambdaExpressionSyntax parenthesizedLambda => (
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var dotToken = GetDotTokenLeftOfPosition(syntaxTree, position, cancellationToken);
             return dotToken?.Parent switch
             {
-                // Don't support conditional access someTask?.$$ or c?.TaskReturning().$$ because there is no good completion until
+                // Don't support conditional access someTask?.$$ or c?.TaskReturning().$$ because there is no good
+                // completion until
                 // await? is supported by the language https://github.com/dotnet/csharplang/issues/35
                 MemberAccessExpressionSyntax memberAccess =>
                     memberAccess.GetParentConditionalAccessExpression() is null

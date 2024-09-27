@@ -53,7 +53,8 @@ namespace System.Runtime.CompilerServices
         /// <returns>Returns "true" if key was found, "false" otherwise.</returns>
         /// <remarks>
         /// The key may get garbage collected during the TryGetValue operation. If so, TryGetValue
-        /// may at its discretion, return "false" and set "value" to the default (as if the key was not present.)
+        /// may at its discretion, return "false" and set "value" to the default (as if the key was not
+        // present.)
         /// </remarks>
         public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
         {
@@ -96,7 +97,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>Adds a key to the table if it doesn't already exist.</summary>
         /// <param name="key">The key to add.</param>
         /// <param name="value">The key's property value.</param>
-        /// <returns>true if the key/value pair was added; false if the table already contained the key.</returns>
+        /// <returns>true if the key/value pair was added; false if the table already contained the
+        // key.</returns>
         public bool TryAdd(TKey key, TValue value)
         {
             if (key is null)
@@ -117,7 +119,8 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        /// <summary>Adds the key and value if the key doesn't exist, or updates the existing key's value if it does exist.</summary>
+        /// <summary>Adds the key and value if the key doesn't exist, or updates the existing key's value if
+        // it does exist.</summary>
         /// <param name="key">key to add or update. May not be null.</param>
         /// <param name="value">value to associate with key.</param>
         public void AddOrUpdate(TKey key, TValue value)
@@ -145,7 +148,8 @@ namespace System.Runtime.CompilerServices
 
         /// <summary>Removes a key and its value from the table.</summary>
         /// <param name="key">key to remove. May not be null.</param>
-        /// <returns>true if the key is found and removed. Returns false if the key was not in the dictionary.</returns>
+        /// <returns>true if the key is found and removed. Returns false if the key was not in the
+        // dictionary.</returns>
         /// <remarks>
         /// The key may get garbage collected during the Remove() operation. If so,
         /// Remove() will not fail or throw, however, the return value can be either true or false
@@ -202,7 +206,8 @@ namespace System.Runtime.CompilerServices
         /// <remarks>
         /// If multiple threads try to initialize the same key, the table may invoke createValueCallback
         /// multiple times with the same key. Exactly one of these calls will succeed and the returned
-        /// value of that call will be the one added to the table and returned by all the racing GetValue() calls.
+        /// value of that call will be the one added to the table and returned by all the racing GetValue()
+        // calls.
         /// This rule permits the table to invoke createValueCallback outside the internal table lock
         /// to prevent deadlocks.
         /// </remarks>
@@ -239,8 +244,10 @@ namespace System.Runtime.CompilerServices
         }
 
         /// <summary>
-        /// Helper method to call GetValue without passing a creation delegate.  Uses Activator.CreateInstance
-        /// to create new instances as needed.  If TValue does not have a default constructor, this will throw.
+        /// Helper method to call GetValue without passing a creation delegate.  Uses
+        // Activator.CreateInstance
+        /// to create new instances as needed.  If TValue does not have a default constructor, this will
+        // throw.
         /// </summary>
         /// <param name="key">key of the value to find. Cannot be null.</param>
         public TValue GetOrCreateValue(TKey key) =>
@@ -279,16 +286,20 @@ namespace System.Runtime.CompilerServices
             // The enumerator would ideally hold a reference to the Container and the end index within that
             // container.  However, the safety of the CWT depends on the only reference to the Container being
             // from the CWT itself; the Container then employs a two-phase finalization scheme, where the first
-            // phase nulls out that parent CWT's reference, guaranteeing that the second time it's finalized there
+            // phase nulls out that parent CWT's reference, guaranteeing that the second time it's finalized
+            // there
             // can be no other existing references to it in use that would allow for concurrent usage of the
             // native handles with finalization.  We would break that if we allowed this Enumerator to hold a
             // reference to the Container.  Instead, the Enumerator holds a reference to the CWT rather than to
             // the Container, and it maintains the CWT._activeEnumeratorRefCount field to track whether there
             // are outstanding enumerators that have yet to be disposed/finalized.  If there aren't any, the CWT
-            // behaves as it normally does.  If there are, certain operations are affected, in particular resizes.
-            // Normally when the CWT is resized, it enumerates the contents of the table looking for indices that
+            // behaves as it normally does.  If there are, certain operations are affected, in particular
+            // resizes.
+            // Normally when the CWT is resized, it enumerates the contents of the table looking for indices
+            // that
             // contain entries which have been collected or removed, and it frees those up, effectively moving
-            // down all subsequent entries in the container (not in the existing container, but in a replacement).
+            // down all subsequent entries in the container (not in the existing container, but in a
+            // replacement).
             // This, however, would cause the enumerator's understanding of indices to break.  So, as long as
             // there is any outstanding enumerator, no compaction is performed.
 
@@ -407,7 +418,8 @@ namespace System.Runtime.CompilerServices
             public void Reset() { }
         }
 
-        /// <summary>Worker for adding a new key/value pair. Will resize the container if it is full.</summary>
+        /// <summary>Worker for adding a new key/value pair. Will resize the container if it is
+        // full.</summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
         private void CreateEntry(TKey key, TValue value)
@@ -431,12 +443,14 @@ namespace System.Runtime.CompilerServices
         //         hashCode == <dontcare>
         //         next == <dontcare>)
         //
-        //    - Used with live key (linked into a bucket list where _buckets[hashCode & (_buckets.Length - 1)] points to first entry)
+        //    - Used with live key (linked into a bucket list where _buckets[hashCode & (_buckets.Length -
+        // 1)] points to first entry)
         //         depHnd.IsAllocated == true, depHnd.GetPrimary() != null
         //         hashCode == RuntimeHelpers.GetHashCode(depHnd.GetPrimary()) & int.MaxValue
         //         next links to next Entry in bucket.
         //
-        //    - Used with dead key (linked into a bucket list where _buckets[hashCode & (_buckets.Length - 1)] points to first entry)
+        //    - Used with dead key (linked into a bucket list where _buckets[hashCode & (_buckets.Length -
+        // 1)] points to first entry)
         //         depHnd.IsAllocated == true, depHnd.GetPrimary() is null
         //         hashCode == <notcare>
         //         next links to next Entry in bucket.
@@ -447,7 +461,8 @@ namespace System.Runtime.CompilerServices
         //         next links to next Entry in bucket.
         //
         // The only difference between "used with live key" and "used with dead key" is that
-        // depHnd.GetPrimary() returns null. The transition from "used with live key" to "used with dead key"
+        // depHnd.GetPrimary() returns null. The transition from "used with live key" to "used with dead
+        // key"
         // happens asynchronously as a result of normal garbage collection. The dictionary itself
         // receives no notification when this happens.
         //
@@ -464,8 +479,10 @@ namespace System.Runtime.CompilerServices
         }
 
         /// <summary>
-        /// Container holds the actual data for the table.  A given instance of Container always has the same capacity.  When we need
-        /// more capacity, we create a new Container, copy the old one into the new one, and discard the old one.  This helps enable lock-free
+        /// Container holds the actual data for the table.  A given instance of Container always has the
+        // same capacity.  When we need
+        /// more capacity, we create a new Container, copy the old one into the new one, and discard the old
+        // one.  This helps enable lock-free
         /// reads from the table, as readers never need to deal with motion of entries due to rehashing.
         /// </summary>
         private sealed class Container
@@ -559,7 +576,8 @@ namespace System.Runtime.CompilerServices
             /// Returns -1 if not found (if key expires during FindEntry, this can be treated as "not found.").
             /// Must hold _lock, or be prepared to retry the search while holding _lock.
             /// </summary>
-            /// <remarks>This method requires <paramref name="value"/> to be on the stack to be properly tracked.</remarks>
+            /// <remarks>This method requires <paramref name="value"/> to be on the stack to be properly
+            // tracked.</remarks>
             internal int FindEntry(TKey key, out object? value)
             {
                 Debug.Assert(key != null); // Key already validated as non-null.
@@ -679,7 +697,8 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>Resize, and scrub expired keys off bucket lists. Must hold _lock.</summary>
             /// <remarks>
-            /// _firstEntry is less than _entries.Length on exit, that is, the table has at least one free entry.
+            /// _firstEntry is less than _entries.Length on exit, that is, the table has at least one free
+            // entry.
             /// </remarks>
             internal Container Resize()
             {
@@ -728,7 +747,8 @@ namespace System.Runtime.CompilerServices
                 Debug.Assert(BitOperations.IsPow2(newSize));
 
                 // Reallocate both buckets and entries and rebuild the bucket and entries from scratch.
-                // This serves both to scrub entries with expired keys and to put the new entries in the proper bucket.
+                // This serves both to scrub entries with expired keys and to put the new entries in the proper
+                // bucket.
                 int[] newBuckets = new int[newSize];
                 for (int bucketIndex = 0; bucketIndex < newBuckets.Length; bucketIndex++)
                 {
@@ -793,7 +813,8 @@ namespace System.Runtime.CompilerServices
 
                 // Create the new container.  We want to transfer the responsibility of freeing the handles from
                 // the old container to the new container, and also ensure that the new container isn't finalized
-                // while the old container may still be in use.  As such, we store a reference from the old container
+                // while the old container may still be in use.  As such, we store a reference from the old
+                // container
                 // to the new one, which will keep the new container alive as long as the old one is.
                 var newContainer = new Container(_parent!, newBuckets, newEntries, newEntriesIndex);
                 if (activeEnumerators)

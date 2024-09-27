@@ -42,7 +42,8 @@ public class BrowserFixture : IAsyncLifetime
 
     public static bool IsHostAutomationSupported()
     {
-        // We emit an assemblymetadata attribute that reflects the value of SeleniumE2ETestsSupported at build
+        // We emit an assemblymetadata attribute that reflects the value of SeleniumE2ETestsSupported at
+        // build
         // time and we use that to conditionally skip Selenium tests parts.
         var attribute = typeof(BrowserFixture)
             .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
@@ -51,7 +52,8 @@ public class BrowserFixture : IAsyncLifetime
             );
         var attributeValue = attribute != null ? bool.Parse(attribute.Value) : false;
 
-        // The environment variable below can be set up before running the tests so as to override the default
+        // The environment variable below can be set up before running the tests so as to override the
+        // default
         // value provided in the attribute.
         var environmentOverride = Environment.GetEnvironmentVariable(
             "MICROSOFT_ASPNETCORE_TESTING_SELENIUM_SUPPORTED"
@@ -144,7 +146,8 @@ public class BrowserFixture : IAsyncLifetime
 
         if (context?.StartsWith(StreamingContext, StringComparison.Ordinal) == true)
         {
-            // Tells Selenium not to wait until the page navigation has completed before continuing with the tests
+            // Tells Selenium not to wait until the page navigation has completed before continuing with the
+            // tests
             opts.PageLoadStrategy = PageLoadStrategy.None;
         }
 

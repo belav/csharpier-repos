@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -150,7 +151,8 @@ namespace System.Web.Mvc.Routing
         /// Gets a value indicating whether the route is configured at the action or controller level.
         /// </summary>
         /// <remarks>
-        /// <see langword="true"/> when the route is configured at the action level; otherwise <see langword="false"/>
+        /// <see langword="true"/> when the route is configured at the action level; otherwise <see
+        // langword="false"/>
         /// (if the route is configured at the controller level).
         /// </remarks>
         public bool TargetIsAction

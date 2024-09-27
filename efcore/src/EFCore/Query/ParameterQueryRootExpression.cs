@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         An expression that represents a parameter query root within the query.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -24,7 +25,8 @@ public class ParameterQueryRootExpression : QueryRootExpression
     /// </summary>
     /// <param name="asyncQueryProvider">The query provider associated with this query root.</param>
     /// <param name="elementType">The values that this query root represents.</param>
-    /// <param name="parameterExpression">The parameter expression representing the values for this query root.</param>
+    /// <param name="parameterExpression">The parameter expression representing the values for this
+    // query root.</param>
     public ParameterQueryRootExpression(
         IAsyncQueryProvider asyncQueryProvider,
         Type elementType,
@@ -39,7 +41,8 @@ public class ParameterQueryRootExpression : QueryRootExpression
     ///     Creates a new instance of the <see cref="ParameterQueryRootExpression" /> class.
     /// </summary>
     /// <param name="elementType">The values that this query root represents.</param>
-    /// <param name="parameterExpression">The parameter expression representing the values for this query root.</param>
+    /// <param name="parameterExpression">The parameter expression representing the values for this
+    // query root.</param>
     public ParameterQueryRootExpression(Type elementType, ParameterExpression parameterExpression)
         : base(elementType)
     {

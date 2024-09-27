@@ -165,7 +165,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
                 mutatingLspWorkspace
             );
 
-            // Cancel all requests if the request queue is blocked for 1 minute. This will result in a failed test run.
+            // Cancel all requests if the request queue is blocked for 1 minute. This will result in a failed
+            // test run.
             using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
             var waitables = StartTestRun(testLspServer, requests, cts.Token);
 
@@ -264,13 +265,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             if (mutatingLspWorkspace)
             {
                 // In the case where this is a mutating workspace, we would expect the solutions to be the same as
-                // everything pushes through between the manager and the workspace, and there have been no text changes
+                // everything pushes through between the manager and the workspace, and there have been no text
+                // changes
                 // in one to cause us to fork.
                 Assert.Equal(expectedSolution, solution);
             }
             else
             {
-                // in the case where this is a non-mutating solution, the solutions should be different because there
+                // in the case where this is a non-mutating solution, the solutions should be different because
+                // there
                 // has been a workspace change.
                 Assert.NotEqual(expectedSolution, solution);
             }

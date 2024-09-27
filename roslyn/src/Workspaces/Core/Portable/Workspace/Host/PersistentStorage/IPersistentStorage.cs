@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 namespace Microsoft.CodeAnalysis.Host
 {
     /// <remarks>
-    /// Instances of <see cref="IPersistentStorage"/> support both synchronous and asynchronous disposal.  Asynchronous
-    /// disposal should always be preferred as the implementation of synchronous disposal may end up blocking the caller
+    /// Instances of <see cref="IPersistentStorage"/> support both synchronous and asynchronous
+    // disposal.  Asynchronous
+    /// disposal should always be preferred as the implementation of synchronous disposal may end up
+    // blocking the caller
     /// on async work.
     /// </remarks>
     public interface IPersistentStorage : IDisposable, IAsyncDisposable
@@ -29,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </summary>
         Task<bool> WriteStreamAsync(
@@ -39,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </summary>
         Task<bool> WriteStreamAsync(
@@ -50,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </summary>
         Task<bool> WriteStreamAsync(

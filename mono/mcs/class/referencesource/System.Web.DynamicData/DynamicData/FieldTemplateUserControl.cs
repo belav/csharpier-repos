@@ -153,7 +153,8 @@ namespace System.Web.DynamicData
         {
             get
             {
-                // The DataItem is normally null in insert mode, we're going to surface the DictionaryCustomTypeDescriptor if there is a
+                // The DataItem is normally null in insert mode, we're going to surface the
+                // DictionaryCustomTypeDescriptor if there is a
                 //  a default value was specified for this column.
                 if (
                     Mode == DataBoundControlMode.Insert
@@ -379,11 +380,13 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Only applies to FK columns. This is used when saving the value of a foreign key, typically selected
+        /// Only applies to FK columns. This is used when saving the value of a foreign key, typically
+        // selected
         /// from a drop down.
         /// </summary>
         /// <param name="dictionary">The dictionary that contains all the new values</param>
-        /// <param name="selectedValue">The value to be saved. Typically, this comes from DropDownList.SelectedValue</param>
+        /// <param name="selectedValue">The value to be saved. Typically, this comes from
+        // DropDownList.SelectedValue</param>
         protected virtual void ExtractForeignKey(IDictionary dictionary, string selectedValue)
         {
             ForeignKeyColumn.ExtractForeignKey(dictionary, selectedValue);

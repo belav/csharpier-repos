@@ -78,7 +78,8 @@ namespace System.DirectoryServices.AccountManagement
             return f;
         }
 
-        // Resets the enumerator to before the first result in the set.  This potentially can be an expensive
+        // Resets the enumerator to before the first result in the set.  This potentially can be an
+        // expensive
         // operation, e.g., if doing a paged search, may need to re-retrieve the first page of results.
         // As a special case, if the ResultSet is already at the very beginning, this is guaranteed to be
         // a no-op.

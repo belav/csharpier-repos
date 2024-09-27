@@ -29,7 +29,8 @@ internal partial class EndpointHtmlRenderer
 
         IPersistentComponentStateStore? store = null;
 
-        // There is configured render modes metadata, use this to determine where to persist state if possible
+        // There is configured render modes metadata, use this to determine where to persist state if
+        // possible
         if (renderModesMetadata != null)
         {
             // No render modes are configured, do not persist state

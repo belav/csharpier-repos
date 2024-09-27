@@ -6,7 +6,9 @@ using System.Collections;
 namespace System.DirectoryServices
 {
     /// <devdoc>
-    /// Contains a list of schema names used for the <see cref='System.DirectoryServices.DirectoryEntries.SchemaFilter'/> property of a <see cref='System.DirectoryServices.DirectoryEntries'/>.
+    /// Contains a list of schema names used for the <see
+    // cref='System.DirectoryServices.DirectoryEntries.SchemaFilter'/> property of a <see
+    // cref='System.DirectoryServices.DirectoryEntries'/>.
     /// </devdoc>
     public class SchemaNameCollection : IList
     {

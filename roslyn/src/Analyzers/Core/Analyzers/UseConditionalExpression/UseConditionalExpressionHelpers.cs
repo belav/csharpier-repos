@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             IThrowOperation? falseThrow
         )
         {
-            // Can't convert to `x ? throw ... : throw ...` as there's no best common type between the two (even when
+            // Can't convert to `x ? throw ... : throw ...` as there's no best common type between the two (even
+            // when
             // throwing the same exception type).
             if (trueThrow != null && falseThrow != null)
                 return true;

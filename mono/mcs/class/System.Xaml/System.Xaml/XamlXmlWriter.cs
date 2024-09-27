@@ -23,7 +23,11 @@
 
 // To use this under .NET, compile sources as:
 //
-//	dmcs -d:DOTNET -r:System.Xaml -debug System.Xaml/XamlXmlWriter.cs System.Xaml/XamlWriterInternalBase.cs System.Xaml/TypeExtensionMethods.cs System.Xaml/XamlWriterStateManager.cs System.Xaml/XamlNameResolver.cs System.Xaml/PrefixLookup.cs System.Xaml/ValueSerializerContext.cs ../../build/common/MonoTODOAttribute.cs Test/System.Xaml/TestedTypes.cs
+//	dmcs -d:DOTNET -r:System.Xaml -debug System.Xaml/XamlXmlWriter.cs
+// System.Xaml/XamlWriterInternalBase.cs System.Xaml/TypeExtensionMethods.cs
+// System.Xaml/XamlWriterStateManager.cs System.Xaml/XamlNameResolver.cs System.Xaml/PrefixLookup.cs
+// System.Xaml/ValueSerializerContext.cs ../../build/common/MonoTODOAttribute.cs
+// Test/System.Xaml/TestedTypes.cs
 
 using System;
 using System.Collections.Generic;
@@ -42,14 +46,17 @@ using System.Xml;
 // XamlWriter expects write operations in premised orders.
 // The most basic one is:
 //
-//	[NamespaceDeclaration]* -> StartObject -> [ StartMember -> Value | StartObject ... EndObject -> EndMember ]* -> EndObject
+//	[NamespaceDeclaration]* -> StartObject -> [ StartMember -> Value | StartObject ... EndObject ->
+// EndMember ]* -> EndObject
 //
 // For collections:
-//	[NamespaceDeclaration]* -> StartObject -> (members)* -> StartMember XamlLanguage.Items -> [ StartObject ... EndObject ]* -> EndMember -> EndObject
+//	[NamespaceDeclaration]* -> StartObject -> (members)* -> StartMember XamlLanguage.Items -> [
+// StartObject ... EndObject ]* -> EndMember -> EndObject
 //
 // For MarkupExtension with PositionalParameters:
 //
-//	[NamespaceDeclaration]* -> StartObject -> StartMember XamlLanguage.PositionalParameters -> [Value]* -> EndMember -> ... -> EndObject
+//	[NamespaceDeclaration]* -> StartObject -> StartMember XamlLanguage.PositionalParameters ->
+// [Value]* -> EndMember -> ... -> EndObject
 //
 
 #if DOTNET
@@ -196,9 +203,13 @@ namespace System.Xaml
         // - local_nss holds namespace declarations that are written *before* current element.
         // - local_nss2 holds namespace declarations that are wrtten *after* current element.
         //   (current element == StartObject or StartMember)
-        // - When the next element or content is being written, local_nss items are written *within* current element, BUT after all attribute members are written. Hence I had to preserve all those nsdecls at such late.
+        // - When the next element or content is being written, local_nss items are written *within* current
+        // element, BUT after all attribute members are written. Hence I had to preserve all those nsdecls
+        // at
+        // such late.
         // - When current *start* element is closed, then copy local_nss2 items into local_nss.
-        // - When there was no children i.e. end element immediately occurs, local_nss should be written at this stage too, and local_nss2 are *ignored*.
+        // - When there was no children i.e. end element immediately occurs, local_nss should be written at
+        // this stage too, and local_nss2 are *ignored*.
         List<NamespaceDeclaration> local_nss = new List<NamespaceDeclaration>();
         List<NamespaceDeclaration> local_nss2 = new List<NamespaceDeclaration>();
         bool inside_toplevel_positional_parameter;
@@ -591,7 +602,8 @@ namespace System.Xaml
             return stn != null ? stn.Name : type.Name;
         }
 
-        // FIXME: I'm not sure if these "special names" should be resolved like this. I couldn't find any rule so far.
+        // FIXME: I'm not sure if these "special names" should be resolved like this. I couldn't find any
+        // rule so far.
         internal static readonly SpecialTypeNameList SpecialNames;
 
         internal class SpecialTypeNameList : List<SpecialTypeName>

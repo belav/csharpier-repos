@@ -2231,7 +2231,7 @@ namespace System.Web.UI
                 return;
 
             string defaultButtonId = Form.DefaultButton;
-            /* figure out if we have some control we're going to focus */
+/* figure out if we have some control we're going to focus */
             if (String.IsNullOrEmpty(_focusedControlID))
             {
                 _focusedControlID = Form.DefaultFocus;

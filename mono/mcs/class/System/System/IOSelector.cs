@@ -35,7 +35,7 @@ namespace System
 {
     internal enum IOOperation : int
     {
-        /* Keep in sync with MonoIOOperation in mono/metadata/threadpool-ms-io.c */
+/* Keep in sync with MonoIOOperation in mono/metadata/threadpool-ms-io.c */
 
         Read = 1 << 0,
         Write = 1 << 1,
@@ -122,7 +122,7 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     internal class IOSelectorJob : IThreadPoolWorkItem
     {
-        /* Keep in sync with MonoIOSelectorJob in mono/metadata/threadpool-ms-io.c */
+/* Keep in sync with MonoIOSelectorJob in mono/metadata/threadpool-ms-io.c */
         IOOperation operation;
         IOAsyncCallback callback;
         IOAsyncResult state;

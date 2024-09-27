@@ -65,9 +65,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         // | where EventName == "vs/ide/vbcs/debugging/encsession/editsession"
         // | project EventId, EventName, Properties, Measures, MacAddressHash
         // | where Measures["vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerroridcount"] == 0
-        // | extend HasValidChanges = Properties["vs.ide.vbcs.debugging.encsession.editsession.hadvalidchanges"] == "True"
+        // | extend HasValidChanges =
+        // Properties["vs.ide.vbcs.debugging.encsession.editsession.hadvalidchanges"] == "True"
         // | where HasValidChanges
-        // | extend IsHotReload = Properties["vs.ide.vbcs.debugging.encsession.editsession.inbreakstate"] == "False"
+        // | extend IsHotReload = Properties["vs.ide.vbcs.debugging.encsession.editsession.inbreakstate"] ==
+        // "False"
         // | extend IsEnC = not(IsHotReload)
         // | summarize HotReloadUsers = dcountif(MacAddressHash, IsHotReload),
         //             EncUsers = dcountif(MacAddressHash, IsEnC)
@@ -111,7 +113,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         map["HadCompilationErrors"] = editSessionData.HadCompilationErrors;
                         map["HadRudeEdits"] = editSessionData.HadRudeEdits;
 
-                        // Changes made to source code during the edit session were valid - they were significant and no rude edits were reported.
+                        // Changes made to source code during the edit session were valid - they were significant and no
+                        // rude edits were reported.
                         // The changes still might fail to emit (see EmitDeltaErrorIdCount).
                         map["HadValidChanges"] = editSessionData.HadValidChanges;
                         map["HadValidInsignificantChanges"] =
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         // Number of emit errors.
                         map["EmitDeltaErrorIdCount"] = editSessionData.EmitErrorIds.Length;
 
-                        // False for Hot Reload session, true or missing for EnC session (missing in older data that did not have this property).
+                        // False for Hot Reload session, true or missing for EnC session (missing in older data that did not
+                        // have this property).
                         map["InBreakState"] = editSessionData.InBreakState;
 
                         map["Capabilities"] = (int)editSessionData.Capabilities;

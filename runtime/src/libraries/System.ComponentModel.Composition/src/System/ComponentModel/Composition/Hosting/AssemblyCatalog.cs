@@ -88,7 +88,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </param>
         /// <param name="reflectionContext">
         ///     The <see cref="ReflectionContext"/> a context used by the catalog when
-        ///     interpreting the types to inject attributes into the type definition<see cref="AssemblyCatalog"/>.
+        ///     interpreting the types to inject attributes into the type definition<see
+        // cref="AssemblyCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="codeBase"/> is <see langword="null"/>.
@@ -145,7 +146,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     attributed <see cref="Type"/> objects to add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="definitionOrigin">
-        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the source for parts.
+        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the
+        // source for parts.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="codeBase"/> is <see langword="null"/>.
@@ -202,10 +204,12 @@ namespace System.ComponentModel.Composition.Hosting
         /// </param>
         /// <param name="reflectionContext">
         ///     The <see cref="ReflectionContext"/> a context used by the catalog when
-        ///     interpreting the types to inject attributes into the type definition<see cref="AssemblyCatalog"/>.
+        ///     interpreting the types to inject attributes into the type definition<see
+        // cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="definitionOrigin">
-        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the source for parts.
+        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the
+        // source for parts.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="codeBase"/> is <see langword="null"/>.
@@ -308,7 +312,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     interpreting the types to inject attributes into the type definition.
         /// </param>
         /// <param name="definitionOrigin">
-        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the source for parts.
+        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the
+        // source for parts.
         /// </param>
         /// <exception cref="ArgumentException">
         ///     <paramref name="assembly"/> is <see langword="null"/>.
@@ -372,7 +377,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     add to the <see cref="AssemblyCatalog"/>.
         /// </param>
         /// <param name="definitionOrigin">
-        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the source for parts.
+        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the
+        // source for parts.
         /// </param>
         /// <exception cref="ArgumentException">
         ///     <paramref name="assembly"/> is <see langword="null"/>.
@@ -408,7 +414,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the export definitions that match the constraint defined by the specified definition.
+        ///     Returns the export definitions that match the constraint defined by the specified
+        // definition.
         /// </summary>
         /// <param name="definition">
         ///     The <see cref="ImportDefinition"/> that defines the conditions of the
@@ -499,7 +506,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the display name of the assembly catalog.
         /// </summary>
         /// <value>
-        ///     A <see cref="string"/> containing a human-readable display name of the <see cref="AssemblyCatalog"/>.
+        ///     A <see cref="string"/> containing a human-readable display name of the <see
+        // cref="AssemblyCatalog"/>.
         /// </value>
         string ICompositionElement.DisplayName
         {
@@ -521,7 +529,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns a string representation of the assembly catalog.
         /// </summary>
         /// <returns>
-        ///     A <see cref="string"/> containing the string representation of the <see cref="AssemblyCatalog"/>.
+        ///     A <see cref="string"/> containing the string representation of the <see
+        // cref="AssemblyCatalog"/>.
         /// </returns>
         public override string ToString()
         {

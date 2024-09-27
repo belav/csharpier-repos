@@ -328,7 +328,8 @@ namespace System.Xml
 
         // Text streaming methods
 
-        // XmlTextReader does do support streaming of Value (there are backwards compatibility issues when enabled)
+        // XmlTextReader does do support streaming of Value (there are backwards compatibility issues when
+        // enabled)
         public override bool CanReadValueChunk
         {
             get { return false; }
@@ -381,7 +382,8 @@ namespace System.Xml
         }
 
         // FXCOP: ExplicitMethodImplementationsInUnsealedClassesHaveVisibleAlternates
-        // public versions of IXmlNamespaceResolver methods, so that XmlTextReader subclasses can access them
+        // public versions of IXmlNamespaceResolver methods, so that XmlTextReader subclasses can access
+        // them
         public IDictionary<string, string> GetNamespacesInScope(XmlNamespaceScope scope)
         {
             return _impl.GetNamespacesInScope(scope);

@@ -134,16 +134,19 @@ internal static partial class Interop
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509GetExtCount")]
         internal static partial int X509GetExtCount(SafeX509Handle x);
 
-        // Returns a pointer already being tracked by the SafeX509Handle, shouldn't be SafeHandle tracked/freed.
+        // Returns a pointer already being tracked by the SafeX509Handle, shouldn't be SafeHandle
+        // tracked/freed.
         // Bounds checking is in place for "loc", IntPtr.Zero is returned on violations.
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509GetExt")]
         internal static partial IntPtr X509GetExt(SafeX509Handle x, int loc);
 
-        // Returns a pointer already being tracked by a SafeX509Handle, shouldn't be SafeHandle tracked/freed.
+        // Returns a pointer already being tracked by a SafeX509Handle, shouldn't be SafeHandle
+        // tracked/freed.
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509ExtensionGetOid")]
         internal static partial IntPtr X509ExtensionGetOid(IntPtr ex);
 
-        // Returns a pointer already being tracked by a SafeX509Handle, shouldn't be SafeHandle tracked/freed.
+        // Returns a pointer already being tracked by a SafeX509Handle, shouldn't be SafeHandle
+        // tracked/freed.
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509ExtensionGetData")]
         internal static partial IntPtr X509ExtensionGetData(IntPtr ex);
 

@@ -11,8 +11,10 @@ namespace Microsoft.EntityFrameworkCore.Design;
 public static class DbContextActivator
 {
     /// <summary>
-    ///     Creates an instance of the specified <see cref="DbContext" /> type using the standard design-time
-    ///     mechanisms. When available, this will use any <see cref="IDesignTimeDbContextFactory{TContext}" />
+    ///     Creates an instance of the specified <see cref="DbContext" /> type using the standard
+    // design-time
+    ///     mechanisms. When available, this will use any <see
+    // cref="IDesignTimeDbContextFactory{TContext}" />
     ///     implementations or the application's service provider.
     /// </summary>
     /// <param name="contextType">The <see cref="DbContext" /> type to instantiate.</param>
@@ -26,8 +28,10 @@ public static class DbContextActivator
     ) => CreateInstance(contextType, startupAssembly, reportHandler, null);
 
     /// <summary>
-    ///     Creates an instance of the specified <see cref="DbContext" /> type using the standard design-time
-    ///     mechanisms. When available, this will use any <see cref="IDesignTimeDbContextFactory{TContext}" />
+    ///     Creates an instance of the specified <see cref="DbContext" /> type using the standard
+    // design-time
+    ///     mechanisms. When available, this will use any <see
+    // cref="IDesignTimeDbContextFactory{TContext}" />
     ///     implementations or the application's service provider.
     /// </summary>
     /// <param name="contextType">The <see cref="DbContext" /> type to instantiate.</param>

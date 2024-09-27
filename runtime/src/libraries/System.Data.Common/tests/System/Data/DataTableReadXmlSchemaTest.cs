@@ -697,11 +697,13 @@ namespace System.Data.Tests
                 )
             )
             {
-                // Before serializing, update the culture to use a weird negative number format. This test is ensuring that this is ignored.
+                // Before serializing, update the culture to use a weird negative number format. This test is
+                // ensuring that this is ignored.
                 serializer.Serialize(buffer, table);
             }
 
-            // The raw serialized data now contains an embedded XML schema. We need to verify that this embedded schema used "-1" for the numeric value
+            // The raw serialized data now contains an embedded XML schema. We need to verify that this embedded
+            // schema used "-1" for the numeric value
             // negative 1, instead of "()1" as indicated by the current culture.
 
             string rawSerializedData = System.Text.Encoding.ASCII.GetString(buffer.ToArray());
@@ -736,47 +738,53 @@ namespace System.Data.Tests
         {
             var serializer = new BinaryFormatter();
 
-            /*
+/*
 
-            Test data generator:
+Test data generator:
 
-                var table = new DataTable();
-                table.Columns.Add(new DataColumn("RowID", typeof(int))
-                    {
-                        AutoIncrement = true,
-                        AutoIncrementSeed = -1, // These lines produce attributes within the schema portion of the underlying XML representation of the DataTable with the value "-1".
-                        AutoIncrementStep = -2,
-                    });
-                table.Columns.Add("Value", typeof(string));
-                table.Rows.Add(1, "Test");
-                table.Rows.Add(2, "Data");
+var table = new DataTable();
+table.Columns.Add(new DataColumn("RowID", typeof(int))
+{
+AutoIncrement = true,
+AutoIncrementSeed = -1, // These lines produce attributes within the schema portion of the
+underlying XML representation of the DataTable with the value "-1".
+AutoIncrementStep = -2,
+});
+table.Columns.Add("Value", typeof(string));
+table.Rows.Add(1, "Test");
+table.Rows.Add(2, "Data");
 
-                var buffer = new MemoryStream();
-                serializer.Serialize(buffer, table);
+var buffer = new MemoryStream();
+serializer.Serialize(buffer, table);
 
-            This test data (binary serializer output) embeds the following XML schema:
+This test data (binary serializer output) embeds the following XML schema:
 
-                <?xml version="1.0" encoding="utf-16"?>
-                <xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-                    <xs:element name="Table1">
-                    <xs:complexType>
-                        <xs:sequence>
-                        <xs:element name="RowID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-2" type="xs:int" msdata:targetNamespace="" minOccurs="0" />
-                        <xs:element name="Value" type="xs:string" msdata:targetNamespace="" minOccurs="0" />
-                        </xs:sequence>
-                    </xs:complexType>
-                    </xs:element>
-                    <xs:element name="tmpDataSet" msdata:IsDataSet="true" msdata:MainDataTable="Table1" msdata:UseCurrentLocale="true">
-                    <xs:complexType>
-                        <xs:choice minOccurs="0" maxOccurs="unbounded" />
-                    </xs:complexType>
-                    </xs:element>
-                </xs:schema>
+<?xml version="1.0" encoding="utf-16"?>
+<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+<xs:element name="Table1">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="RowID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1"
+msdata:AutoIncrementStep="-2" type="xs:int" msdata:targetNamespace="" minOccurs="0" />
+<xs:element name="Value" type="xs:string" msdata:targetNamespace="" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="tmpDataSet" msdata:IsDataSet="true" msdata:MainDataTable="Table1"
+msdata:UseCurrentLocale="true">
+<xs:complexType>
+<xs:choice minOccurs="0" maxOccurs="unbounded" />
+</xs:complexType>
+</xs:element>
+</xs:schema>
 
-            The bug being tested here is that the negative integer values in AutoInecrementSeed and AutoIncrementStep fail to parse because the deserialization code
-            incorrectly uses the current culture instead of the invariant culture when parsing strings like "-1" and "-2".
+The bug being tested here is that the negative integer values in AutoInecrementSeed and
+AutoIncrementStep fail to parse because the deserialization code
+incorrectly uses the current culture instead of the invariant culture when parsing strings like "-1"
+and "-2".
 
-            */
+*/
 
             var buffer = new MemoryStream(
                 new byte[]
@@ -2389,8 +2397,10 @@ namespace System.Data.Tests
                 )
             )
             {
-                // Before deserializing, update the culture to use a weird negative number format. This test is ensuring that this is ignored.
-                // The bug this test is testing would cause "-1" to no longer be treated as a valid representation of the value -1, instead
+                // Before deserializing, update the culture to use a weird negative number format. This test is
+                // ensuring that this is ignored.
+                // The bug this test is testing would cause "-1" to no longer be treated as a valid representation
+                // of the value -1, instead
                 // only accepting the string "()1".
                 table = (DataTable)serializer.Deserialize(buffer); // BUG: System.Exception: "-1 is not a valid value for Int64."        }
             }

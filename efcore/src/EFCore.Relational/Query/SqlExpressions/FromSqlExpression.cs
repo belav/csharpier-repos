@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents a subquery table source with user-provided custom SQL.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -88,16 +89,19 @@ public class FromSqlExpression
     public virtual Expression Arguments { get; }
 
     /// <summary>
-    ///     The <see cref="ITableBase" /> associated with given table source if any, <see langword="null" /> otherwise.
+    ///     The <see cref="ITableBase" /> associated with given table source if any, <see
+    // langword="null" /> otherwise.
     /// </summary>
     public virtual ITableBase? Table { get; }
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual FromSqlExpression Update(Expression arguments) =>
         arguments != Arguments
             ? new FromSqlExpression(Alias, Table, Sql, arguments, GetAnnotations())

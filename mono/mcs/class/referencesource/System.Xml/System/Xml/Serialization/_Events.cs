@@ -45,7 +45,8 @@ namespace System.Xml.Serialization
             this.linePosition = linePosition;
         }
 
-        /// <include file='doc\_Events.uex' path='docs/doc[@for="XmlAttributeEventArgs.ObjectBeingDeserialized"]/*' />
+        /// <include file='doc\_Events.uex'
+        // path='docs/doc[@for="XmlAttributeEventArgs.ObjectBeingDeserialized"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -124,7 +125,8 @@ namespace System.Xml.Serialization
             this.linePosition = linePosition;
         }
 
-        /// <include file='doc\_Events.uex' path='docs/doc[@for="XmlElementEventArgs.ObjectBeingDeserialized"]/*' />
+        /// <include file='doc\_Events.uex'
+        // path='docs/doc[@for="XmlElementEventArgs.ObjectBeingDeserialized"]/*' />
         public object ObjectBeingDeserialized
         {
             get { return o; }
@@ -148,7 +150,8 @@ namespace System.Xml.Serialization
             get { return linePosition; }
         }
 
-        /// <include file='doc\_Events.uex' path='docs/doc[@for="XmlAttributeEventArgs.ExpectedElements"]/*' />
+        /// <include file='doc\_Events.uex' path='docs/doc[@for="XmlAttributeEventArgs.ExpectedElements"]/*'
+        // />
         /// <devdoc>
         ///    <para>
         ///       List of qnames of elements expected in the current context.
@@ -185,7 +188,8 @@ namespace System.Xml.Serialization
             this.linePosition = linePosition;
         }
 
-        /// <include file='doc\_Events.uex' path='docs/doc[@for="XmlNodeEventArgs.ObjectBeingDeserialized"]/*' />
+        /// <include file='doc\_Events.uex'
+        // path='docs/doc[@for="XmlNodeEventArgs.ObjectBeingDeserialized"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -274,20 +278,23 @@ namespace System.Xml.Serialization
         object o;
         string id;
 
-        /// <include file='doc\_Events.uex' path='docs/doc[@for="UnreferencedObjectEventArgs.UnreferencedObjectEventArgs"]/*' />
+        /// <include file='doc\_Events.uex'
+        // path='docs/doc[@for="UnreferencedObjectEventArgs.UnreferencedObjectEventArgs"]/*' />
         public UnreferencedObjectEventArgs(object o, string id)
         {
             this.o = o;
             this.id = id;
         }
 
-        /// <include file='doc\_Events.uex' path='docs/doc[@for="UnreferencedObjectEventArgs.UnreferencedObject"]/*' />
+        /// <include file='doc\_Events.uex'
+        // path='docs/doc[@for="UnreferencedObjectEventArgs.UnreferencedObject"]/*' />
         public object UnreferencedObject
         {
             get { return o; }
         }
 
-        /// <include file='doc\_Events.uex' path='docs/doc[@for="UnreferencedObjectEventArgs.UnreferencedId"]/*' />
+        /// <include file='doc\_Events.uex'
+        // path='docs/doc[@for="UnreferencedObjectEventArgs.UnreferencedId"]/*' />
         public string UnreferencedId
         {
             get { return id; }

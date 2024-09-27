@@ -13,7 +13,8 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Input;
     using System.Windows.Media;
 
-    //This class is visual representation of ResizeGrip like control, which is used in a Grid to allow resizing.
+    //This class is visual representation of ResizeGrip like control, which is used in a Grid to allow
+    // resizing.
     class FlowchartResizeGrip : Control
     {
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(

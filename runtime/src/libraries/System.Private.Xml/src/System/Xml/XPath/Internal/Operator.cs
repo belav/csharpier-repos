@@ -12,42 +12,42 @@ namespace MS.Internal.Xml.XPath
         { // order is aligned with XPathOperator
             INVALID,
 
-            /*Logical   */
+/*Logical   */
             OR,
             AND,
 
-            /*Equality  */
+/*Equality  */
             EQ,
             NE,
 
-            /*Relational*/
+/*Relational*/
             LT,
             LE,
             GT,
             GE,
 
-            /*Arithmetic*/
+/*Arithmetic*/
             PLUS,
             MINUS,
             MUL,
             DIV,
             MOD,
 
-            /*Union     */
+/*Union     */
             UNION,
         };
 
         private static readonly Op[] s_invertOp =
         {
-            /*INVALID*/Op.INVALID,
-            /*OR     */Op.INVALID,
-            /*END    */Op.INVALID,
-            /*EQ     */Op.EQ,
-            /*NE     */Op.NE,
-            /*LT     */Op.GT,
-            /*LE     */Op.GE,
-            /*GT     */Op.LT,
-            /*GE     */Op.LE,
+/*INVALID*/Op.INVALID,
+/*OR     */Op.INVALID,
+/*END    */Op.INVALID,
+/*EQ     */Op.EQ,
+/*NE     */Op.NE,
+/*LT     */Op.GT,
+/*LE     */Op.GE,
+/*GT     */Op.LT,
+/*GE     */Op.LE,
         };
 
         public static Operator.Op InvertOperator(Operator.Op op)

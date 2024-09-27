@@ -257,7 +257,8 @@ namespace Internal.JitInterface
                     if (devirtualizedMethodOwner != null)
                     {
                         // We might be in a situation where we use the passed in type (devirtualization scenario)
-                        // Check to see if devirtualizedMethodOwner actually is a type derived from the type definition in some way.
+                        // Check to see if devirtualizedMethodOwner actually is a type derived from the type definition in
+                        // some way.
                         bool derivesFromTypeDefinition = false;
                         TypeDesc currentType = devirtualizedMethodOwner;
                         do
@@ -473,7 +474,8 @@ namespace Internal.JitInterface
             if (result != 0)
                 return result;
 
-            // The OwningType/OwningTypeNotDerivedFromToken should be equivalent if the above conditions are equal.
+            // The OwningType/OwningTypeNotDerivedFromToken should be equivalent if the above conditions are
+            // equal.
             Debug.Assert(OwningTypeNotDerivedFromToken == other.OwningTypeNotDerivedFromToken);
             Debug.Assert(OwningTypeNotDerivedFromToken || (OwningType == other.OwningType));
 
@@ -719,7 +721,8 @@ namespace Internal.JitInterface
 
             if (compExactlyDependsOnList != null && compExactlyDependsOnList.Count > 0)
             {
-                // Default to true, and set to false if at least one of the types is actually supported in the current environment, and none of the
+                // Default to true, and set to false if at least one of the types is actually supported in the
+                // current environment, and none of the
                 // intrinsic types are in an opportunistic state.
                 bool doBypass = true;
 
@@ -746,7 +749,8 @@ namespace Internal.JitInterface
                     }
                     else
                     {
-                        // If we reach here this is an instruction set generally supported on this platform, but we don't know what the behavior will be at runtime
+                        // If we reach here this is an instruction set generally supported on this platform, but we don't
+                        // know what the behavior will be at runtime
                         return true;
                     }
                 }
@@ -845,8 +849,10 @@ namespace Internal.JitInterface
             }
         }
 
-        // At the moment, cross module code embedding does not support embedding cross module references within the EH clauses of a method
-        // Obviously this could be fixed, but it is not necessary to demonstrate significant value from the feature as written now.
+        // At the moment, cross module code embedding does not support embedding cross module references
+        // within the EH clauses of a method
+        // Obviously this could be fixed, but it is not necessary to demonstrate significant value from the
+        // feature as written now.
         private static bool FunctionHasNonReferenceableTypedILCatchClause(
             MethodIL methodIL,
             CompilationModuleGroup compilationGroup
@@ -869,7 +875,8 @@ namespace Internal.JitInterface
 
         public static bool IsMethodCompilable(Compilation compilation, MethodDesc method)
         {
-            // This logic must mirror the logic in CompileMethod used to get to the point of calling CompileMethodInternal
+            // This logic must mirror the logic in CompileMethod used to get to the point of calling
+            // CompileMethodInternal
             if (
                 ShouldSkipCompilation(compilation.InstructionSetSupport, method)
                 || MethodSignatureIsUnstable(method.Signature, out var _)
@@ -987,10 +994,13 @@ namespace Internal.JitInterface
                     }
                     else
                     {
-                        // Cross module optimization scenario. If we aren't able to come up with a token for the method being compiled, then force it to be
+                        // Cross module optimization scenario. If we aren't able to come up with a token for the method
+                        // being compiled, then force it to be
                         // computed.
-                        // NOTE: Technically, we could arrange to require only the set of tokens necessary to describe the type that owns this method
-                        // as well as the parameters and return value to the method. The token for the actual method is not required.
+                        // NOTE: Technically, we could arrange to require only the set of tokens necessary to describe the
+                        // type that owns this method
+                        // as well as the parameters and return value to the method. The token for the actual method is not
+                        // required.
                         EntityHandle? handle =
                             _compilation.NodeFactory.ManifestMetadataTable._mutableModule.TryGetExistingEntityHandle(
                                 ecmaMethod
@@ -1670,7 +1680,8 @@ namespace Internal.JitInterface
                     mdToken token = (mdToken)MetadataTokens.GetToken(ecmaMethod.Handle);
 
                     // This is used for de-virtualization of non-generic virtual methods, and should be treated
-                    // as a the methodDesc parameter defining the exact OwningType, not doing resolution through the token.
+                    // as a the methodDesc parameter defining the exact OwningType, not doing resolution through the
+                    // token.
                     context = null;
                     constrainedType = null;
 
@@ -1951,7 +1962,8 @@ namespace Internal.JitInterface
 
             pHasSideEffects = type.HasFinalizer;
 
-            // If the type isn't within the version bubble, it could gain a finalizer. Always treat it as if it has a finalizer
+            // If the type isn't within the version bubble, it could gain a finalizer. Always treat it as if it
+            // has a finalizer
             if (
                 !pHasSideEffects
                 && !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithType(type)
@@ -2320,8 +2332,11 @@ namespace Internal.JitInterface
                 );
             }
 
-            // This formula roughly corresponds to CoreCLR CEEInfo::resolveToken when calling GetMethodDescFromMethodSpec
+            // This formula roughly corresponds to CoreCLR CEEInfo::resolveToken when calling
+            // GetMethodDescFromMethodSpec
             // (that always winds up by calling FindOrCreateAssociatedMethodDesc) at
+            //
+            //
             // https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/jitinterface.cpp#L1054
             // Its basic meaning is that shared generic methods always need instantiating
             // stubs as the shared generic code needs the method dictionary parameter that cannot
@@ -2364,7 +2379,8 @@ namespace Internal.JitInterface
             )
             {
                 // We must abort inline attempts calling from outside of the version bubble being compiled
-                // because we have no way to remap the token relative to the external module to the current version bubble.
+                // because we have no way to remap the token relative to the external module to the current version
+                // bubble.
                 //
                 // Unless this is a call made while compiling a CrossModuleInlineable method
                 throw new RequiresRuntimeJitException(
@@ -2455,6 +2471,8 @@ namespace Internal.JitInterface
 
                     // This check for introducing an instantiation stub comes from the logic in
                     // MethodTable::TryResolveConstraintMethodApprox at
+                    //
+                    //
                     // https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/methodtable.cpp#L8628
                     // Its meaning is that, for direct method calls on value types, instantiating
                     // stubs are always needed in the presence of generic arguments as the generic
@@ -2573,7 +2591,8 @@ namespace Internal.JitInterface
                 // These rules are related to the "inlining rules" as far as the
                 // boundaries of a version bubble are concerned.
                 // This check is different between CG1 and CG2. CG1 considers two types in the same version bubble
-                // if their assemblies are in the same bubble, or if the NonVersionableTypeAttribute is present on the type.
+                // if their assemblies are in the same bubble, or if the NonVersionableTypeAttribute is present on
+                // the type.
                 // CG2 checks a method cache that it builds with a bunch of new code.
                 else if (
                     !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(
@@ -2589,8 +2608,10 @@ namespace Internal.JitInterface
                     // For version resiliency we won't de-virtualize all final/sealed method calls.  Because during a
                     // servicing event it is legal to unseal a method or type.
                     //
-                    // Note that it is safe to devirtualize in the following cases, since a servicing event cannot later modify it
-                    //  1) Callvirt on a virtual final method of a value type - since value types are sealed types as per ECMA spec
+                    // Note that it is safe to devirtualize in the following cases, since a servicing event cannot later
+                    // modify it
+                    //  1) Callvirt on a virtual final method of a value type - since value types are sealed types as
+                    // per ECMA spec
                     //  2) Delegate.Invoke() - since a Delegate is a sealed class as per ECMA spec
                     //  3) JIT intrinsics - since they have pre-defined behavior
                     devirt =
@@ -2656,13 +2677,19 @@ namespace Internal.JitInterface
                 // An alternative design would be to add a new generic dictionary entry kind to hold the MethodDesc
                 // of the constrained target instead, and use that in some circumstances; however, implementation of
                 // that design requires refactoring variuos parts of the JIT interface as well as
-                // TryResolveConstraintMethodApprox. In particular we would need to be abled to embed a constrained lookup
-                // via EmbedGenericHandle, as well as decide in TryResolveConstraintMethodApprox if the call can be made
-                // via a single use of CORINFO_CALL_CODE_POINTER, or would be better done with a CORINFO_CALL + embedded
-                // constrained generic handle, or if there is a case where we would want to use both a CORINFO_CALL and
-                // embedded constrained generic handle. Given the current expected high performance use case of this feature
+                // TryResolveConstraintMethodApprox. In particular we would need to be abled to embed a constrained
+                // lookup
+                // via EmbedGenericHandle, as well as decide in TryResolveConstraintMethodApprox if the call can be
+                // made
+                // via a single use of CORINFO_CALL_CODE_POINTER, or would be better done with a CORINFO_CALL +
+                // embedded
+                // constrained generic handle, or if there is a case where we would want to use both a CORINFO_CALL
+                // and
+                // embedded constrained generic handle. Given the current expected high performance use case of this
+                // feature
                 // which is generic numerics which will always resolve to exact valuetypes, it is not expected that
-                // the complexity involved would be worth the risk. Other scenarios are not expected to be as performance
+                // the complexity involved would be worth the risk. Other scenarios are not expected to be as
+                // performance
                 // sensitive.
                 if (isStaticVirtual && pResult->exactContextNeedsRuntimeLookup)
                 {
@@ -2780,7 +2807,8 @@ namespace Internal.JitInterface
                         throw new RequiresRuntimeJitException(
                             "EmbedGenericHandle currently doesn't support propagation of RUNTIME_LOOKUP or pConstrainedResolvedToken from ComputeRuntimeLookupForSharedGenericToken"
                         );
-                        // ComputeRuntimeLookupForSharedGenericToken(DictionaryEntryKind.DispatchStubAddrSlot, ref pResolvedToken, pConstrainedResolvedToken, originalMethod, ref pResult->codePointerOrStubLookup);
+                        // ComputeRuntimeLookupForSharedGenericToken(DictionaryEntryKind.DispatchStubAddrSlot, ref
+                        // pResolvedToken, pConstrainedResolvedToken, originalMethod, ref pResult->codePointerOrStubLookup);
                         // useInstantiatingStub = false;
                     }
                     else
@@ -2788,8 +2816,10 @@ namespace Internal.JitInterface
                         throw new RequiresRuntimeJitException(
                             "CanInline currently doesn't support propagation of constrained type so that we cannot reliably tell whether a SVM call can be inlined"
                         );
-                        // Even if we decided to support SVMs unresolved at compile time, we'd still need to force the use of instantiating stub
-                        // as we can't tell in advance whether the method will be runtime-resolved to a canonical representation.
+                        // Even if we decided to support SVMs unresolved at compile time, we'd still need to force the use
+                        // of instantiating stub
+                        // as we can't tell in advance whether the method will be runtime-resolved to a canonical
+                        // representation.
                         // useInstantiatingStub = true;
                     }
                 }
@@ -2808,8 +2838,10 @@ namespace Internal.JitInterface
                 pResult->kind = CORINFO_CALL_KIND.CORINFO_VIRTUALCALL_STUB;
                 pResult->nullInstanceCheck = true;
 
-                // We'll special virtual calls to target methods in the corelib assembly when compiling in R2R mode, and generate fragile-NI-like callsites for improved performance. We
-                // can do that because today we'll always service the corelib assembly and the runtime in one bundle. Any caller in the corelib version bubble can benefit from this
+                // We'll special virtual calls to target methods in the corelib assembly when compiling in R2R mode,
+                // and generate fragile-NI-like callsites for improved performance. We
+                // can do that because today we'll always service the corelib assembly and the runtime in one
+                // bundle. Any caller in the corelib version bubble can benefit from this
                 // performance optimization.
                 /* TODO-PERF, GitHub issue# 7168: uncommenting the conditional statement below enables
                 ** VTABLE-based calls for Corelib (and maybe a larger framework version bubble in the
@@ -2817,7 +2849,7 @@ namespace Internal.JitInterface
                 ** matching the CoreCLR algorithm (MethodTableBuilder).
                 if (MethodInSystemVersionBubble(callerMethod) && MethodInSystemVersionBubble(targetMethod))
                 {
-                    pResult->kind = CORINFO_CALL_KIND.CORINFO_VIRTUALCALL_VTABLE;
+                pResult->kind = CORINFO_CALL_KIND.CORINFO_VIRTUALCALL_VTABLE;
                 }
                 */
             }
@@ -2861,7 +2893,8 @@ namespace Internal.JitInterface
             // TODO: access checks
             pResult->accessAllowed = CorInfoIsAccessAllowedResult.CORINFO_ACCESS_ALLOWED;
 
-            // We're pretty much done at this point.  Let's grab the rest of the information that the jit is going to
+            // We're pretty much done at this point.  Let's grab the rest of the information that the jit is
+            // going to
             // need.
             pResult->classFlags = getClassAttribsInternal(type);
 
@@ -2992,17 +3025,22 @@ namespace Internal.JitInterface
             if (pResult->thisTransform == CORINFO_THIS_TRANSFORM.CORINFO_BOX_THIS)
             {
                 // READYTORUN: FUTURE: Optionally create boxing stub at runtime
-                // We couldn't resolve the constrained call into a valuetype instance method and we're asking the JIT
-                // to box and do a virtual dispatch. If we were to allow the boxing to happen now, it could break future code
-                // when the user adds a method to the valuetype that makes it possible to avoid boxing (if there is state
+                // We couldn't resolve the constrained call into a valuetype instance method and we're asking the
+                // JIT
+                // to box and do a virtual dispatch. If we were to allow the boxing to happen now, it could break
+                // future code
+                // when the user adds a method to the valuetype that makes it possible to avoid boxing (if there is
+                // state
                 // mutation in the method).
 
                 // We allow this at least for primitives and enums because we control them
                 // and we know there's no state mutation.
                 //
-                // We allow this for constrained calls to non-virtual methods, as its extremely unlikely they will become virtual (verified by fixup)
+                // We allow this for constrained calls to non-virtual methods, as its extremely unlikely they will
+                // become virtual (verified by fixup)
                 //
-                // TODO in the future we should consider allowing this for regular virtuals as well with a fixup that verifies the method wasn't implemented
+                // TODO in the future we should consider allowing this for regular virtuals as well with a fixup
+                // that verifies the method wasn't implemented
                 if (
                     getTypeForPrimitiveValueClass(pConstrainedResolvedToken->hClass)
                     != CorInfoType.CORINFO_TYPE_UNDEF
@@ -3016,7 +3054,8 @@ namespace Internal.JitInterface
                         == originalMethod.OwningType
                 )
                 {
-                    // alllowed, non-virtual method's on Object will never become virtual, and will also always trigger a BOX_THIS pattern
+                    // alllowed, non-virtual method's on Object will never become virtual, and will also always trigger
+                    // a BOX_THIS pattern
                 }
                 else
                 {
@@ -3025,7 +3064,8 @@ namespace Internal.JitInterface
             }
 
             // We validate the safety of the signature here, as it could have been adjusted
-            // by virtual resolution during getCallInfo (virtual resolution could find a result using type equivalence)
+            // by virtual resolution during getCallInfo (virtual resolution could find a result using type
+            // equivalence)
             ValidateSafetyOfUsingTypeEquivalenceInSignature(
                 targetMethod.GetTypicalMethodDefinition().Signature
             );
@@ -3053,7 +3093,8 @@ namespace Internal.JitInterface
                             )
                         );
 
-                        // If the abi of the method isn't stable, this will cause a usage of the RequiresRuntimeJitSymbol, which will trigger a RequiresRuntimeJitException
+                        // If the abi of the method isn't stable, this will cause a usage of the RequiresRuntimeJitSymbol,
+                        // which will trigger a RequiresRuntimeJitException
                         UpdateConstLookupWithRequiresRuntimeJitSymbolIfNeeded(
                             ref pResult->codePointerOrStubLookup.constLookup,
                             targetMethod
@@ -3116,7 +3157,8 @@ namespace Internal.JitInterface
                                 );
                         }
 
-                        // If the abi of the method isn't stable, this will cause a usage of the RequiresRuntimeJitSymbol, which will trigger a RequiresRuntimeJitException
+                        // If the abi of the method isn't stable, this will cause a usage of the RequiresRuntimeJitSymbol,
+                        // which will trigger a RequiresRuntimeJitException
                         UpdateConstLookupWithRequiresRuntimeJitSymbolIfNeeded(
                             ref pResult->codePointerOrStubLookup.constLookup,
                             targetMethod
@@ -3125,7 +3167,8 @@ namespace Internal.JitInterface
                     break;
 
                 case CORINFO_CALL_KIND.CORINFO_VIRTUALCALL_VTABLE:
-                    // Only calls within the CoreLib version bubble support fragile NI codegen with vtable based calls, for better performance (because
+                    // Only calls within the CoreLib version bubble support fragile NI codegen with vtable based calls,
+                    // for better performance (because
                     // CoreLib and the runtime will always be updated together anyways - this is a special case)
 
                     // Eagerly check abi stability here as no symbol usage can be used to delay the check
@@ -3228,7 +3271,8 @@ namespace Internal.JitInterface
             MethodDesc contextMethod = methodFromContext(pResolvedToken.tokenContext);
             TypeDesc contextType = typeFromContext(pResolvedToken.tokenContext);
 
-            // There is a pathological case where invalid IL refereces __Canon type directly, but there is no dictionary availabled to store the lookup.
+            // There is a pathological case where invalid IL refereces __Canon type directly, but there is no
+            // dictionary availabled to store the lookup.
             if (!contextMethod.IsSharedByGenericInstantiations)
             {
                 ThrowHelper.ThrowInvalidProgramException();
@@ -3298,8 +3342,10 @@ namespace Internal.JitInterface
                     throw new NotImplementedException(entryKind.ToString());
             }
 
-            // For R2R compilations, we don't generate the dictionary lookup signatures (dictionary lookups are done in a
-            // different way that is more version resilient... plus we can't have pointers to existing MTs/MDs in the sigs)
+            // For R2R compilations, we don't generate the dictionary lookup signatures (dictionary lookups are
+            // done in a
+            // different way that is more version resilient... plus we can't have pointers to existing MTs/MDs
+            // in the sigs)
         }
 
         private void ceeInfoEmbedGenericHandle(
@@ -3334,7 +3380,8 @@ namespace Internal.JitInterface
                 pResult.compileTimeHandle = (CORINFO_GENERIC_STRUCT_*)ObjectToHandle(md);
                 templateMethod = md;
 
-                // Runtime lookup is only required for stubs. Regular entrypoints are always the same shared MethodDescs.
+                // Runtime lookup is only required for stubs. Regular entrypoints are always the same shared
+                // MethodDescs.
                 runtimeLookup = md.IsSharedByGenericInstantiations;
             }
             else if (!fEmbedParent && pResolvedToken.hField != null)
@@ -3454,7 +3501,9 @@ namespace Internal.JitInterface
                 {
                     // There is no easy way to detect method referenced via generic lookups in generated code.
                     // Report this method reference unconditionally.
-                    // TODO: m_pImage->m_pPreloader->MethodReferencedByCompiledCode((CORINFO_METHOD_HANDLE)pResult->compileTimeHandle);
+                    // TODO:
+                    //
+                    // m_pImage->m_pPreloader->MethodReferencedByCompiledCode((CORINFO_METHOD_HANDLE)pResult->compileTimeHandle);
                 }
             }
             else
@@ -3697,7 +3746,8 @@ namespace Internal.JitInterface
             if (type == null)
                 return true;
 
-            // Types which are encoded with sequential or explicit layout do not support an aligned base offset, and so we just encode with the exact offset
+            // Types which are encoded with sequential or explicit layout do not support an aligned base offset,
+            // and so we just encode with the exact offset
             // of the field, and if that offset is incorrect, the method cannot be used.
             if (type.IsSequentialLayout || type.IsExplicitLayout)
                 return true;
@@ -3746,7 +3796,8 @@ namespace Internal.JitInterface
 
         private void* getMethodSync(CORINFO_METHOD_STRUCT_* ftn, ref void* ppIndirection)
         {
-            // Used with CORINFO_HELP_MON_ENTER_STATIC/CORINFO_HELP_MON_EXIT_STATIC - we don't have this fixup in R2R.
+            // Used with CORINFO_HELP_MON_ENTER_STATIC/CORINFO_HELP_MON_EXIT_STATIC - we don't have this fixup
+            // in R2R.
             throw new RequiresRuntimeJitException(
                 $"{MethodBeingCompiled} -> {nameof(getMethodSync)}"
             );
@@ -3892,7 +3943,8 @@ namespace Internal.JitInterface
                     return false;
                 }
 
-                // If this method is in another versioning unit, then the compilation cannot inline the pinvoke (as we aren't currently
+                // If this method is in another versioning unit, then the compilation cannot inline the pinvoke (as
+                // we aren't currently
                 // able to construct a token correctly to refer to the pinvoke method.
                 if (!_compilation.CompilationModuleGroup.VersionsWithMethodBody(method))
                 {
@@ -3905,7 +3957,8 @@ namespace Internal.JitInterface
                     stubIL = _compilation.GetMethodIL(method);
                     if (stubIL == null)
                     {
-                        // This is the case of a PInvoke method that requires marshallers, which we can't use in this compilation
+                        // This is the case of a PInvoke method that requires marshallers, which we can't use in this
+                        // compilation
                         Debug.Assert(
                             !_compilation.NodeFactory.CompilationModuleGroup.GeneratesPInvoke(
                                 method
@@ -3914,16 +3967,20 @@ namespace Internal.JitInterface
                         return true;
                     }
 
-                    // Marshalling behavior isn't modeled as protected by R2R rules, so disable pinvoke inlining for code outside
+                    // Marshalling behavior isn't modeled as protected by R2R rules, so disable pinvoke inlining for
+                    // code outside
                     // of the version bubble
                     if (!_compilation.CompilationModuleGroup.VersionsWithMethodBody(method))
                         return true;
                 }
                 catch (RequiresRuntimeJitException)
                 {
-                    // The PInvoke IL emitter will throw for known unsupported scenario. We cannot propagate the exception here since
-                    // this interface call might be used to check if a certain pinvoke can be inlined in the caller. Throwing means that the
-                    // caller will not get compiled. Instead, we'll return true to let the JIT know that it cannot inline the pinvoke, and
+                    // The PInvoke IL emitter will throw for known unsupported scenario. We cannot propagate the
+                    // exception here since
+                    // this interface call might be used to check if a certain pinvoke can be inlined in the caller.
+                    // Throwing means that the
+                    // caller will not get compiled. Instead, we'll return true to let the JIT know that it cannot
+                    // inline the pinvoke, and
                     // the actual pinvoke call will be handled by a stub that we create and compile in the runtime.
                     return true;
                 }
@@ -3953,7 +4010,8 @@ namespace Internal.JitInterface
 
         private bool canGetCookieForPInvokeCalliSig(CORINFO_SIG_INFO* szMetaSig)
         {
-            // If we answer "true" here, RyuJIT is going to ask for the cookie and for the CORINFO_HELP_PINVOKE_CALLI
+            // If we answer "true" here, RyuJIT is going to ask for the cookie and for the
+            // CORINFO_HELP_PINVOKE_CALLI
             // helper. The helper doesn't exist in ReadyToRun, so let's just throw right here.
             throw new RequiresRuntimeJitException(
                 $"{MethodBeingCompiled} -> {nameof(canGetCookieForPInvokeCalliSig)}"
@@ -4051,7 +4109,8 @@ namespace Internal.JitInterface
                 // We deliberately ignore inlinerHnd because we have no interest to track intermediate links now.
                 MethodDesc inlinee = HandleToObject(inlineeHnd);
 
-                // If during inlining we found Precode fixups, then only if the inline was successful, add them to the set of
+                // If during inlining we found Precode fixups, then only if the inline was successful, add them to
+                // the set of
                 // fixups that will be used for the entire method
                 List<ISymbolNode> previouslyStashedFixups = _stashedPrecodeFixups.Pop();
 
@@ -4062,7 +4121,8 @@ namespace Internal.JitInterface
                 }
                 _precodeFixups = previouslyStashedFixups;
 
-                // If during inlining we found new inlinees, then if the inline was successful, add them to the set of fixups
+                // If during inlining we found new inlinees, then if the inline was successful, add them to the set
+                // of fixups
                 // for the entire method.
                 HashSet<MethodDesc> previouslyStashedInlinees = _stashedInlinedMethods.Pop();
                 if (_inlinedMethods != null)
@@ -4105,10 +4165,14 @@ namespace Internal.JitInterface
                     }
 
                     // For cross module inlines, we will compile in a potentially 2 step process
-                    // 1. Compile the method using the set of il bodies available at the start of a multi-threaded compilation run
-                    // 2. If at any time, the set of methods that are inlined includes a method which has an IL body without
-                    //    tokens that are useable in compilation, record that information, and once the multi-threaded portion
-                    //    of the build finishes, it will then compute the IL bodies for those methods, then run the compilation again.
+                    // 1. Compile the method using the set of il bodies available at the start of a multi-threaded
+                    // compilation run
+                    // 2. If at any time, the set of methods that are inlined includes a method which has an IL body
+                    // without
+                    //    tokens that are useable in compilation, record that information, and once the multi-threaded
+                    // portion
+                    //    of the build finishes, it will then compute the IL bodies for those methods, then run the
+                    // compilation again.
                     MethodIL methodIL = _compilation.GetMethodIL(typicalMethod);
                     if (
                         needsTokenTranslation
@@ -4116,7 +4180,8 @@ namespace Internal.JitInterface
                         && methodIL is EcmaMethodIL
                     )
                     {
-                        // We may have already acquired the right type of MethodIL here, or be working with a method that is an IL Intrinsic
+                        // We may have already acquired the right type of MethodIL here, or be working with a method that is
+                        // an IL Intrinsic
                         _ilBodiesNeeded = _ilBodiesNeeded ?? new List<EcmaMethod>();
                         _ilBodiesNeeded.Add(ecmaMethod);
                     }
@@ -4241,8 +4306,10 @@ namespace Internal.JitInterface
 
         private void ValidateSafetyOfUsingTypeEquivalenceInSignature(MethodSignature signature)
         {
-            // Type equivalent valuetypes not in the current version bubble are problematic, and cannot be referred to in our current token
-            // scheme except through type references. So we need to detect them, and if they aren't referred to by type reference from a module
+            // Type equivalent valuetypes not in the current version bubble are problematic, and cannot be
+            // referred to in our current token
+            // scheme except through type references. So we need to detect them, and if they aren't referred to
+            // by type reference from a module
             // in the current build, then we need to fallback to runtime jit.
             ValidateSafetyOfUsingTypeEquivalenceOfType(signature.ReturnType);
             foreach (var type in signature)
@@ -4259,7 +4326,8 @@ namespace Internal.JitInterface
                 && !_compilation.CompilationModuleGroup.VersionsWithTypeReference(type)
             )
             {
-                // Technically this is a bit pickier than needed, as cross module inlineable cases will be hit by this, but type equivalence is a
+                // Technically this is a bit pickier than needed, as cross module inlineable cases will be hit by
+                // this, but type equivalence is a
                 // rarely used feature, and we can fix that if we need to.
                 throw new RequiresRuntimeJitException(
                     $"Type equivalent valuetype '{type}' not directly referenced from member reference"

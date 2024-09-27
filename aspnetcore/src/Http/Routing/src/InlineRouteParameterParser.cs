@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Routing;
 public static class InlineRouteParameterParser
 {
     /// <summary>
-    /// Parses a string representing the provided <paramref name="routeParameter"/> into a <see cref="TemplatePart"/>.
+    /// Parses a string representing the provided <paramref name="routeParameter"/> into a <see
+    // cref="TemplatePart"/>.
     /// </summary>
     /// <param name="routeParameter">A string representation of the route parameter.</param>
     /// <returns>A <see cref="TemplatePart"/> instance.</returns>
@@ -59,7 +60,8 @@ public static class InlineRouteParameterParser
 
             if ((currentChar == ':' || currentChar == '=') && startIndex != currentIndex)
             {
-                // Parameter names are allowed to start with delimiters used to denote constraints or default values.
+                // Parameter names are allowed to start with delimiters used to denote constraints or default
+                // values.
                 // i.e. "=foo" or ":bar" would be treated as parameter names rather than default value or constraint
                 // specifications.
                 parameterName = routeParameter.Substring(startIndex, currentIndex - startIndex);

@@ -11,9 +11,11 @@ namespace System.Security.Cryptography
     //
     // A cross-platform ICryptoTransform implementation for encryption.
     //
-    //  - Implements the various padding algorithms (as we support padding algorithms that the underlying native apis don't.)
+    //  - Implements the various padding algorithms (as we support padding algorithms that the
+    // underlying native apis don't.)
     //
-    //  - Parameterized by a BasicSymmetricCipher which encapsulates the algorithm, key, IV, chaining mode, direction of encryption
+    //  - Parameterized by a BasicSymmetricCipher which encapsulates the algorithm, key, IV, chaining
+    // mode, direction of encryption
     //    and the underlying native apis implementing the encryption.
     //
     internal sealed class UniversalCryptoEncryptor : UniversalCryptoTransform

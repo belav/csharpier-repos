@@ -21,7 +21,8 @@ namespace System.ServiceModel
             QueuedDeliveryRequirementsMode.Allowed;
         bool requireOrderedDelivery = false;
 
-        // Used to implement IContractBehaviorAttribute; if null, DeliveryRequirementsAttribute applies to any contract
+        // Used to implement IContractBehaviorAttribute; if null, DeliveryRequirementsAttribute applies to
+        // any contract
         public Type TargetContract
         {
             get { return contractType; }

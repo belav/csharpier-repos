@@ -620,7 +620,8 @@ namespace System
 
         /// <summary>
         ///     Initialize the compatibility flags to non-NULL values.
-        ///     This method is also called from the VM when the default domain dosen't have a domain manager.
+        ///     This method is also called from the VM when the default domain dosen't have a domain
+        // manager.
         /// </summary>
         private void InitializeCompatibilityFlags()
         {
@@ -635,8 +636,10 @@ namespace System
                 );
             }
 
-            // for perf, we don't intialize the _compatFlags dictionary when we don't need to.  However, we do need to make a
-            // note that we've run this method, because IsCompatibilityFlagsSet needs to return different values for the
+            // for perf, we don't intialize the _compatFlags dictionary when we don't need to.  However, we do
+            // need to make a
+            // note that we've run this method, because IsCompatibilityFlagsSet needs to return different values
+            // for the
             // case where the compat flags have been setup.
             Contract.Assert(!_compatFlagsInitialized);
             _compatFlagsInitialized = true;
@@ -690,7 +693,8 @@ namespace System
         }
 
         /// <summary>
-        ///     Returns the setting of the corresponding compatibility config switch (see CreateAppDomainManager for the impact).
+        ///     Returns the setting of the corresponding compatibility config switch (see
+        // CreateAppDomainManager for the impact).
         /// </summary>
         [SecuritySafeCritical]
         internal bool DisableFusionUpdatesFromADManager()
@@ -810,7 +814,8 @@ namespace System
         [Pure]
         internal static void CheckDefinePInvokeSupported()
         {
-            // We don't want users to use DefinePInvokeMethod in RefEmit to bypass app store validation on allowed native libraries.
+            // We don't want users to use DefinePInvokeMethod in RefEmit to bypass app store validation on
+            // allowed native libraries.
 #if FEATURE_APPX
             if (IsAppXModel())
                 throw new NotSupportedException(
@@ -962,7 +967,8 @@ namespace System
 #endif // FEATURE_CLICKONCE
 
         /// <summary>
-        ///     Called for every AppDomain (including the default domain) to initialize the security of the AppDomain)
+        ///     Called for every AppDomain (including the default domain) to initialize the security of the
+        // AppDomain)
         /// </summary>
         [SecurityCritical]
         private void InitializeDomainSecurity(
@@ -1256,7 +1262,8 @@ namespace System
             SetSecurityHomogeneousFlag(GetNativeHandle(), runtimeSuppliedHomogenousGrantSet);
         }
 
-        // This method is called from CorHost2::ExecuteApplication to activate a ClickOnce application in the default AppDomain.
+        // This method is called from CorHost2::ExecuteApplication to activate a ClickOnce application in
+        // the default AppDomain.
 #if FEATURE_CLICKONCE
         [System.Security.SecuritySafeCritical] // auto-generated
         private int ActivateApplication()
@@ -2620,7 +2627,8 @@ namespace System
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern bool IsUnloadingForcedFinalize();
 
-        // this is true when we've just started going through the finalizers and are forcing objects to finalize
+        // this is true when we've just started going through the finalizers and are forcing objects to
+        // finalize
         // so must be aware that certain infrastructure may have gone away
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
@@ -5149,7 +5157,8 @@ namespace System
             get { return GetIsLegacyCasPolicyEnabled(GetNativeHandle()); }
         }
 
-        // Determine what this homogenous domain thinks the grant set should be for a specific set of evidence
+        // Determine what this homogenous domain thinks the grant set should be for a specific set of
+        // evidence
         [SecuritySafeCritical]
         internal PermissionSet GetHomogenousGrantSet(Evidence evidence)
         {
@@ -5647,7 +5656,8 @@ namespace System
 #endif
 
     /// <summary>
-    ///     Handle used to marshal an AppDomain to the VM (eg QCall). When marshaled via a QCall, the target
+    ///     Handle used to marshal an AppDomain to the VM (eg QCall). When marshaled via a QCall, the
+    // target
     ///     method in the VM will recieve a QCall::AppDomainHandle parameter.
     /// </summary>
     internal struct AppDomainHandle

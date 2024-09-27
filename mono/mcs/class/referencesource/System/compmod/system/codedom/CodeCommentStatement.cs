@@ -39,7 +39,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeCommentStatement'/> with the specified text as
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeCommentStatement'/> with the
+        // specified text as
         ///       contents.
         ///    </para>
         /// </devdoc>

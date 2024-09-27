@@ -20,10 +20,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlLabelAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * HtmlLabelAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\HtmlLabelAdapter.uex' path='docs/doc[@for="HtmlLabelAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -44,7 +44,8 @@ namespace System.Web.UI.MobileControls.Adapters
             get { return (TextControl)base.Control; }
         }
 
-        /// <include file='doc\HtmlLabelAdapter.uex' path='docs/doc[@for="HtmlLabelAdapter.WhiteSpace"]/*' />
+        /// <include file='doc\HtmlLabelAdapter.uex' path='docs/doc[@for="HtmlLabelAdapter.WhiteSpace"]/*'
+        // />
         protected internal bool WhiteSpace(String s)
         {
             if (s == null)

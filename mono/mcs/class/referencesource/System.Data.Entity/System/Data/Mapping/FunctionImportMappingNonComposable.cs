@@ -92,8 +92,10 @@ namespace System.Data.Mapping
         internal readonly OM.ReadOnlyCollection<FunctionImportStructuralTypeMappingKB> ResultMappings;
 
         /// <summary>
-        /// If no return mappings were specified in the MSL return an empty return type mapping knowledge base.
-        /// Otherwise return the resultSetIndexth return type mapping knowledge base, or throw if resultSetIndex is out of range
+        /// If no return mappings were specified in the MSL return an empty return type mapping knowledge
+        // base.
+        /// Otherwise return the resultSetIndexth return type mapping knowledge base, or throw if
+        // resultSetIndex is out of range
         /// </summary>
         internal FunctionImportStructuralTypeMappingKB GetResultMapping(int resultSetIndex)
         {
@@ -114,7 +116,8 @@ namespace System.Data.Mapping
         }
 
         /// <summary>
-        /// Gets the disctriminator columns resultSetIndexth result set, or an empty array if the index is not in range
+        /// Gets the disctriminator columns resultSetIndexth result set, or an empty array if the index is
+        // not in range
         /// </summary>
         internal IList<string> GetDiscriminatorColumns(int resultSetIndex)
         {
@@ -205,7 +208,8 @@ namespace System.Data.Mapping
         /// different from the typical handling of row types in the EF.
         /// </summary>
         /// <remarks>
-        /// Requires that the given function import mapping refers to a Collection(Entity) or Collection(ComplexType) CSDL
+        /// Requires that the given function import mapping refers to a Collection(Entity) or
+        // Collection(ComplexType) CSDL
         /// function.
         /// </remarks>
         /// <returns>Row type.</returns>
@@ -225,7 +229,8 @@ namespace System.Data.Mapping
             IEnumerable<StructuralType> structuralTypes;
             if (0 == resultMapping.NormalizedEntityTypeMappings.Count)
             {
-                // No explicit type mappings; just use the type specified in the ReturnType attribute on the function.
+                // No explicit type mappings; just use the type specified in the ReturnType attribute on the
+                // function.
                 StructuralType structuralType;
                 MetadataHelper.TryGetFunctionImportReturnType<StructuralType>(
                     this.FunctionImport,

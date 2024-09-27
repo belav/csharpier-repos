@@ -13,9 +13,12 @@ namespace System.Diagnostics.Tests
     //Complex types are not supported on EventSource for .NET 4.5
     public class DiagnosticSourceEventSourceBridgeTests
     {
-        // To avoid interactions between tests when they are run in parallel, we run all these tests in their
-        // own sub-process using RemoteExecutor.Invoke()  However this makes it very inconvenient to debug the test.
-        // By setting this #if to true you stub out RemoteInvoke and the code will run in-proc which is useful
+        // To avoid interactions between tests when they are run in parallel, we run all these tests in
+        // their
+        // own sub-process using RemoteExecutor.Invoke()  However this makes it very inconvenient to debug
+        // the test.
+        // By setting this #if to true you stub out RemoteInvoke and the code will run in-proc which is
+        // useful
         // in debugging.
 #if false
         class NullDispose : IDisposable
@@ -592,7 +595,7 @@ namespace System.Diagnostics.Tests
                                 + "  TestSpecificEventsSource/TestEvent2:cls_Url=cls.Url\r\n"
                         );
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the first pattern.
                         MyClass val = new MyClass()
                         {
@@ -627,7 +630,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("5", eventSourceListener.LastEvent.Arguments["cls_Point_Y"]);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the second pattern.
                         if (diagnosticSourceListener.IsEnabled("TestEvent2"))
                             diagnosticSourceListener.Write(
@@ -661,7 +664,7 @@ namespace System.Diagnostics.Tests
                             diagnosticSourceListener.Write("TestEvent3", new { propStr = "prop3" });
                         Assert.Equal(0, eventSourceListener.EventCount); // No Event should be fired.
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event from another diagnostic source with the same event name.
                         // It will be filtered out.
                         using (
@@ -726,7 +729,7 @@ namespace System.Diagnostics.Tests
                             "  TestBaseClassProperties/TestEvent1:Point_X=Point.X;Point_Y=Point.Y;Url_2=Url2\r\n"
                         );
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the first pattern.
                         MyClass val = new MyDerivedClass()
                         {
@@ -782,7 +785,7 @@ namespace System.Diagnostics.Tests
                             "  TestBaseClassProperties/TestEvent1:Point_X=Point.X;Point_Y=Point.Y;Url=Url\r\n"
                         );
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the first pattern.
                         MyClass val = new MyOtherDerivedClass()
                         {
@@ -833,7 +836,7 @@ namespace System.Diagnostics.Tests
                                 + "  LinuxNewLineConventionsSource/TestEvent2:-cls_Url=cls.Url\n"
                         );
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the first pattern.
                         MyClass val = new MyClass()
                         {
@@ -861,7 +864,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("3", eventSourceListener.LastEvent.Arguments["cls_Point_X"]);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the second pattern.
                         if (diagnosticSourceListener.IsEnabled("TestEvent2"))
                             diagnosticSourceListener.Write(
@@ -1035,7 +1038,7 @@ namespace System.Diagnostics.Tests
                         // Turn on events with both implicit and explicit types
                         eventSourceListener.Enable("TestWildCardEventNameSource");
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event, check that all implicit properties are generated
                         MyClass val = new MyClass()
                         {
@@ -1068,7 +1071,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("4", eventSourceListener.LastEvent.Arguments["propInt"]);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit the same event, with a different set of implicit properties
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -1090,7 +1093,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("hi2", eventSourceListener.LastEvent.Arguments["propStr2"]);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event with the same schema as the first event.   (uses first-event cache)
                         val = new MyClass() { };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
@@ -1119,7 +1122,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("5", eventSourceListener.LastEvent.Arguments["propInt"]);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event with the same schema as the second event.  (uses dictionary cache)
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -1141,7 +1144,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("hi3", eventSourceListener.LastEvent.Arguments["propStr2"]);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event from another diagnostic source with the same event name.
                         // It will be filtered out.
                         using (
@@ -1224,7 +1227,7 @@ namespace System.Diagnostics.Tests
                             "TestNullsTestSource/TestEvent1:cls.Url;cls_Point_X=cls.Point.X"
                         );
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit a null arguments object.
 
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
@@ -1239,7 +1242,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal(0, eventSourceListener.LastEvent.Arguments.Count);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an arguments object with nulls in it.
 
                         MyClass val = null;
@@ -1270,7 +1273,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("", eventSourceListener.LastEvent.Arguments["propStrNull"]); // null strings get turned into empty strings
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an arguments object that points at null things
 
                         MyClass val1 = new MyClass() { Url = "myUrlVal", Point = null };
@@ -1298,7 +1301,7 @@ namespace System.Diagnostics.Tests
                         Assert.Equal("myUrlVal", eventSourceListener.LastEvent.Arguments["Url"]);
                         eventSourceListener.ResetEventCountAndLastEvent();
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an arguments object that points at null things (variation 2)
 
                         MyClass val2 = new MyClass()
@@ -1358,7 +1361,7 @@ namespace System.Diagnostics.Tests
                             "TestNoImplicitTransformsSource/TestEvent1:-propStr;cls.Url"
                         );
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the first pattern.
                         MyClass val = new MyClass()
                         {
@@ -1413,7 +1416,7 @@ namespace System.Diagnostics.Tests
                         // This has a syntax error in the Url case, so it should be ignored.
                         eventSourceListener.Enable("TestBadPropertiesSource/TestEvent1:cls.Ur-+l");
 
-                        /***************************************************************************************/
+/***************************************************************************************/
                         // Emit an event that matches the first pattern.
                         MyClass val = new MyClass()
                         {
@@ -1623,8 +1626,10 @@ namespace System.Diagnostics.Tests
                         )
                     )
                     {
-                        // Sadly we have a problem where if something else has turned on Microsoft-Diagnostics-DiagnosticSource then
-                        // its keywords are ORed with our and because the shortcuts require that IgnoreShortCutKeywords is OFF
+                        // Sadly we have a problem where if something else has turned on
+                        // Microsoft-Diagnostics-DiagnosticSource then
+                        // its keywords are ORed with our and because the shortcuts require that IgnoreShortCutKeywords is
+                        // OFF
                         // Something outside this test (the debugger seems to do this), will cause the test to fail.
                         // Currently we simply give up in that case (but it really is a deeper problem.
                         var IgnoreShortCutKeywords = (EventKeywords)0x0800;
@@ -2000,7 +2005,8 @@ namespace System.Diagnostics.Tests
         )]
         public void NoExceptionThrownWhenProcessingStaticActivityProperties()
         {
-            // Ensures that no exception is thrown when static properties on the Activity type are passed to EventListener.
+            // Ensures that no exception is thrown when static properties on the Activity type are passed to
+            // EventListener.
 
             using (var eventListener = new TestDiagnosticSourceEventListener())
             using (var diagnosticListener = new DiagnosticListener("MySource"))
@@ -2039,7 +2045,7 @@ namespace System.Diagnostics.Tests
         }
     }
 
-    /****************************************************************************/
+/****************************************************************************/
     // classes to make up data for the tests.
 
     /// <summary>
@@ -2090,10 +2096,11 @@ namespace System.Diagnostics.Tests
             };
     }
 
-    /****************************************************************************/
+/****************************************************************************/
     // Harness infrastructure
     /// <summary>
-    /// TestDiagnosticSourceEventListener installs a EventWritten callback that updates EventCount and LastEvent.
+    /// TestDiagnosticSourceEventListener installs a EventWritten callback that updates EventCount and
+    // LastEvent.
     /// </summary>
     internal sealed class TestDiagnosticSourceEventListener : DiagnosticSourceEventListener
     {

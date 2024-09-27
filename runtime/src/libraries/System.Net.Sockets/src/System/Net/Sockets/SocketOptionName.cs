@@ -47,7 +47,8 @@ namespace System.Net.Sockets
         // Send low water mark.
         ReceiveBuffer = 0x1002,
 
-        // Specifies the total per-socket buffer space reserved for receives. This is unrelated to the maximum message size or the size of a TCP window.
+        // Specifies the total per-socket buffer space reserved for receives. This is unrelated to the
+        // maximum message size or the size of a TCP window.
         SendLowWater = 0x1003,
 
         // Receive low water mark.

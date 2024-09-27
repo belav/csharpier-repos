@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
@@ -30,10 +31,13 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
     [SetupLinkerAction("link", "library")]
     /// <summary>
     ///	Regression test for issue: https://github.com/dotnet/runtime/issues/86242
-    ///	OverridesStaticInterfaceMethods.Method() (and Property.set/get) has an entry in .overrides pointing to IStaticAbstractMethods.Method.
+    ///	OverridesStaticInterfaceMethods.Method() (and Property.set/get) has an entry in .overrides
+    // pointing to IStaticAbstractMethods.Method.
     ///	IStaticAbstractMethods.Method() isn't referenced anywhere else and isn't otherwise needed.
-    ///	Usually the interface method could be removed, and the pointer to it in the .overrides metadata would be removed
-    ///	However, since OverridesStaticInterfaceMethods is in a 'save' assembly, the .overrides metadata isn't swept. If we remove the method from the interface,
+    ///	Usually the interface method could be removed, and the pointer to it in the .overrides metadata
+    // would be removed
+    ///	However, since OverridesStaticInterfaceMethods is in a 'save' assembly, the .overrides metadata
+    // isn't swept. If we remove the method from the interface,
     ///	we have a "dangling reference" which makes the metadata invalid.
     /// </summary>
     static class OverrideInSaveAssembly

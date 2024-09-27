@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// Displays a value in the C# style.
     /// </summary>
     /// <remarks>
-    /// Separate from <see cref="T:Microsoft.CodeAnalysis.CSharp.SymbolDisplay"/> because we want to link this functionality into
+    /// Separate from <see cref="T:Microsoft.CodeAnalysis.CSharp.SymbolDisplay"/> because we want to
+    // link this functionality into
     /// the Formatter project and we don't want it to be public there.
     /// </remarks>
     /// <seealso cref="T:Microsoft.CodeAnalysis.VisualBasic.ObjectDisplay.ObjectDisplay"/>
@@ -31,11 +32,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="obj">A value to display as a string.</param>
         /// <param name="options">Options used to customize formatting of an object value.</param>
-        /// <returns>A string representation of an object of primitive type (or null if the type is not supported).</returns>
+        /// <returns>A string representation of an object of primitive type (or null if the type is not
+        // supported).</returns>
         /// <remarks>
         /// Handles <see cref="bool"/>, <see cref="string"/>, <see cref="char"/>, <see cref="sbyte"/>
-        /// <see cref="byte"/>, <see cref="short"/>, <see cref="ushort"/>, <see cref="int"/>, <see cref="uint"/>,
-        /// <see cref="long"/>, <see cref="ulong"/>, <see cref="double"/>, <see cref="float"/>, <see cref="decimal"/>,
+        /// <see cref="byte"/>, <see cref="short"/>, <see cref="ushort"/>, <see cref="int"/>, <see
+        // cref="uint"/>,
+        /// <see cref="long"/>, <see cref="ulong"/>, <see cref="double"/>, <see cref="float"/>, <see
+        // cref="decimal"/>,
         /// and <c>null</c>.
         /// </remarks>
         public static string FormatPrimitive(object obj, ObjectDisplayOptions options)

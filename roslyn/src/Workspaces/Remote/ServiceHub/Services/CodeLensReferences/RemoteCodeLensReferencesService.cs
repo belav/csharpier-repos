@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 .GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            // Pass getInnermostNodeForTie so top-level statements that are contained within a GlobalStatementSyntax picks the actual
+            // Pass getInnermostNodeForTie so top-level statements that are contained within a
+            // GlobalStatementSyntax picks the actual
             // definition and not just the GlobalStatementSyntax.
             return syntaxRoot.FindNode(textSpan, getInnermostNodeForTie: true);
         }

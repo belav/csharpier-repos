@@ -2,8 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
-// This class needs to function even if it was built retail.  That is, a debug caller calling against a retail
-// build of this assembly should still have asserts fire.  To achieve that, we need to define DEBUG here.
+// This class needs to function even if it was built retail.  That is, a debug caller calling
+// against a retail
+// build of this assembly should still have asserts fire.  To achieve that, we need to define DEBUG
+// here.
 // We do not do the registry override in retail because that would require shipping a test hook.  We
 // do not generally ship test hooks today.
 #if DEBUG

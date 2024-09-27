@@ -14,23 +14,28 @@ using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Core.Execution;
 
 //
-// It is common practice for app code to compare Type objects using reference equality with the expectation that reference equality
-// is equivalent to semantic equality. To support this, all RuntimeTypeObject objects are interned using weak references.
+// It is common practice for app code to compare Type objects using reference equality with the
+// expectation that reference equality
+// is equivalent to semantic equality. To support this, all RuntimeTypeObject objects are interned
+// using weak references.
 //
 // This assumption is baked into the codebase in these places:
 //
 //   - RuntimeTypeInfo.Equals(object) implements itself as Object.ReferenceEquals(this, obj)
 //
-//   - RuntimeTypeInfo.GetHashCode() is implemented in a flavor-specific manner (We can't use Object.GetHashCode()
+//   - RuntimeTypeInfo.GetHashCode() is implemented in a flavor-specific manner (We can't use
+// Object.GetHashCode()
 //     because we don't want the hash value to change if a type is collected and resurrected later.)
 //
 // This assumption is actualized as follows:
 //
 //   - RuntimeTypeInfo classes hide their constructor. The only way to instantiate a RuntimeTypeInfo
-//     is through its public static factory method which ensures the interning and are collected in this one
+//     is through its public static factory method which ensures the interning and are collected in
+// this one
 //     file for easy auditing and to help ensure that they all operate in a consistent manner.
 //
-//   - The TypeUnifier extension class provides a more friendly interface to the rest of the codebase.
+//   - The TypeUnifier extension class provides a more friendly interface to the rest of the
+// codebase.
 //
 
 #pragma warning disable CA1067 // override Equals because it implements IEquatable<T>
@@ -48,11 +53,14 @@ namespace System.Reflection.Runtime.General
             return typeDefinitionHandle.GetNamedType(reader, default(RuntimeTypeHandle));
         }
 
-        //======================================================================================================
-        // This next group services the Type.GetTypeFromHandle() path. Since we already have a RuntimeTypeHandle
+        
+        // //======================================================================================================
+        // This next group services the Type.GetTypeFromHandle() path. Since we already have a
+        // RuntimeTypeHandle
         // in that case, we pass it in as an extra argument as an optimization (otherwise, the unifier will
         // waste cycles looking up the handle again from the mapping tables.)
-        //======================================================================================================
+        
+        // //======================================================================================================
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RuntimeTypeDefinitionTypeInfo GetNamedType(
             this TypeDefinitionHandle typeDefinitionHandle,
@@ -71,9 +79,11 @@ namespace System.Reflection.Runtime.General
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for type definitions (i.e. "Foo" and "Foo<>" but not "Foo<int>")
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class NativeFormatRuntimeNamedTypeInfo : RuntimeNamedTypeInfo
     {
         internal static NativeFormatRuntimeNamedTypeInfo GetRuntimeNamedTypeInfo(
@@ -116,14 +126,17 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for generic parameters on types.
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes
         : NativeFormatRuntimeGenericParameterTypeInfo
     {
         //
-        // For app-compat reasons, we need to make sure that only TypeInfo instance exists for a given semantic type. If you change this, you must change the way
+        // For app-compat reasons, we need to make sure that only TypeInfo instance exists for a given
+        // semantic type. If you change this, you must change the way
         // RuntimeTypeInfo.Equals() is implemented.
         //
         internal static NativeFormatRuntimeGenericParameterTypeInfoForTypes GetRuntimeGenericParameterTypeInfoForTypes(
@@ -167,15 +180,18 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // TypeInfos for generic parameters on methods.
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForMethods
         : NativeFormatRuntimeGenericParameterTypeInfo,
             IKeyedItem<NativeFormatRuntimeGenericParameterTypeInfoForMethods.UnificationKey>
     {
         //
-        // For app-compat reasons, we need to make sure that only TypeInfo instance exists for a given semantic type. If you change this, you must change the way
+        // For app-compat reasons, we need to make sure that only TypeInfo instance exists for a given
+        // semantic type. If you change this, you must change the way
         // RuntimeTypeInfo.Equals() is implemented.
         //
         internal static NativeFormatRuntimeGenericParameterTypeInfoForMethods GetRuntimeGenericParameterTypeInfoForMethods(

@@ -664,7 +664,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
         );
 
-        // Between the first and the second payload so we'll end up slicing with some remaining in the slice for
+        // Between the first and the second payload so we'll end up slicing with some remaining in the slice
+        // for
         // the next message
         var maximumMessageSize = payload1.Length + 1;
         using (StartVerifiableLog())
@@ -3819,7 +3820,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 // Wait for server to start reading again
                 await customDuplex.WrappedPipeReader.WaitForReadStart().DefaultTimeout();
-                // Send another invocation to server, since we use Inline scheduling we know that once this call completes the server will have read and processed
+                // Send another invocation to server, since we use Inline scheduling we know that once this call
+                // completes the server will have read and processed
                 // the message, it should be stuck waiting for the in-progress invoke now
                 _ = await client
                     .SendInvocationAsync(nameof(LongRunningHub.LongRunningMethod))
@@ -4195,7 +4197,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 HubConnectionHandler<LongRunningHub>
             >();
 
-            // Because we use PipeScheduler.Inline the hub invocations will run inline until they wait, which happens inside the LongRunningMethod call
+            // Because we use PipeScheduler.Inline the hub invocations will run inline until they wait, which
+            // happens inside the LongRunningMethod call
             using (var client = new TestClient())
             {
                 var connectionHandlerTask = await client
@@ -4264,7 +4267,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 HubConnectionHandler<LongRunningHub>
             >();
 
-            // Because we use PipeScheduler.Inline the hub invocations will run inline until they wait, which happens inside the LongRunningMethod call
+            // Because we use PipeScheduler.Inline the hub invocations will run inline until they wait, which
+            // happens inside the LongRunningMethod call
             using (var client = new TestClient())
             {
                 var connectionHandlerTask = await client
@@ -4337,7 +4341,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 HubConnectionHandler<LongRunningHub>
             >();
 
-            // Because we use PipeScheduler.Inline the hub invocations will run inline until they wait, which happens inside the LongRunningMethod call
+            // Because we use PipeScheduler.Inline the hub invocations will run inline until they wait, which
+            // happens inside the LongRunningMethod call
             using (var client = new TestClient())
             {
                 var connectionHandlerTask = await client
@@ -4434,14 +4439,16 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     .ConnectAsync(connectionHandler)
                     .DefaultTimeout();
 
-                // Long running stream invocation to test that other invocations can still run before it is completed
+                // Long running stream invocation to test that other invocations can still run before it is
+                // completed
                 var streamInvocationId = await client
                     .SendStreamInvocationAsync(nameof(LongRunningHub.LongRunningStream), null)
                     .DefaultTimeout();
                 // Wait for the long running method to start
                 await tcsService.StartedMethod.Task.DefaultTimeout();
 
-                // Invoke another hub method which will be able to run even though a streaming method is still running
+                // Invoke another hub method which will be able to run even though a streaming method is still
+                // running
                 var completion = await client
                     .InvokeAsync(nameof(LongRunningHub.SimpleMethod))
                     .DefaultTimeout();
@@ -4711,10 +4718,12 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
     }
 
     [Fact]
-    // Test to check if StreamItems can be processed before the Stream from the invocation is properly registered internally
+    // Test to check if StreamItems can be processed before the Stream from the invocation is properly
+    // registered internally
     public async Task UploadStreamStreamItemsSentAsSoonAsPossible()
     {
-        // Use Auth as the delay injection point because it is one of the first things to run after the invocation message has been parsed
+        // Use Auth as the delay injection point because it is one of the first things to run after the
+        // invocation message has been parsed
         var tcsService = new TcsService();
         var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
         {
@@ -5313,7 +5322,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 var simpleCompletion = Assert.IsType<CompletionMessage>(result);
                 Assert.Null(simpleCompletion.Result);
 
-                // This will log a warning on the server as the hub method has completed and will complete all associated streams
+                // This will log a warning on the server as the hub method has completed and will complete all
+                // associated streams
                 await client
                     .SendHubMessageAsync(new StreamItemMessage("id", "error!"))
                     .DefaultTimeout();
@@ -5368,7 +5378,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 var simpleCompletion = Assert.IsType<CompletionMessage>(result);
                 Assert.Null(simpleCompletion.Result);
 
-                // This will log a warning on the server as the hub method has completed and will complete all associated streams
+                // This will log a warning on the server as the hub method has completed and will complete all
+                // associated streams
                 await client
                     .SendHubMessageAsync(new StreamItemMessage("id", "error!"))
                     .DefaultTimeout();
@@ -5486,7 +5497,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 // Listening on incoming messages
                 var listeningMessages = client.ListenAsync(invocationId);
 
-                // Wait for the number of messages expected to be received. This point the sender just waits forever or until cancellation.
+                // Wait for the number of messages expected to be received. This point the sender just waits forever
+                // or until cancellation.
                 await listeningMessages.ReadAsync(count).DefaultTimeout();
 
                 // Send cancellation.
@@ -5729,7 +5741,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
     }
 
     /// <summary>
-    /// Hub methods might be written by users in a way that accepts an interface or base class as a parameter
+    /// Hub methods might be written by users in a way that accepts an interface or base class as a
+    // parameter
     /// and deserialization could supply a derived class.
     /// This test ensures implementation and subclass arguments are correctly bound for dispatch.
     /// </summary>
@@ -5748,8 +5761,10 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 PayloadSerializerSettings = new JsonSerializerSettings()
                 {
                     // The usage of TypeNameHandling.All is a security risk.
-                    // If you're implementing this in your own application instead use your own 'type' field and a custom JsonConverter
-                    // or ensure you're restricting to only known types with a custom SerializationBinder like we are here.
+                    // If you're implementing this in your own application instead use your own 'type' field and a
+                    // custom JsonConverter
+                    // or ensure you're restricting to only known types with a custom SerializationBinder like we are
+                    // here.
                     // See https://github.com/dotnet/aspnetcore/issues/11495#issuecomment-505047422
                     TypeNameHandling = TypeNameHandling.All,
                     SerializationBinder = StreamingHub.DerivedParameterKnownTypesBinder.Instance,
@@ -5921,7 +5936,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 })
                 .AddHubOptions<MethodHub>(o =>
                 {
-                    // null is treated as both no-limit and not set, this test verifies that we track if the user explicitly sets the value
+                    // null is treated as both no-limit and not set, this test verifies that we track if the user
+                    // explicitly sets the value
                     o.MaximumReceiveMessageSize = null;
                 });
         });
@@ -6638,7 +6654,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             await client.SendHubMessageAsync(new SequenceMessage(10)).DefaultTimeout();
             await client.SendHubMessageAsync(new AckMessage(234)).DefaultTimeout();
 
-            // Server ignores the above messages, otherwise it would have closed the connection because the values in SequenceMessage and AckMessage aren't valid in this state
+            // Server ignores the above messages, otherwise it would have closed the connection because the
+            // values in SequenceMessage and AckMessage aren't valid in this state
             var completionMessage = await client.InvokeAsync(
                 nameof(MethodHub.Echo),
                 new object[] { "test" }
@@ -6674,7 +6691,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 .InvokeAsync(nameof(MethodHub.Echo), new object[] { new string('x', 500) })
                 .DefaultTimeout();
 
-            // Previous message filled buffer, this message will not send to client until buffer is reduced via Ack
+            // Previous message filled buffer, this message will not send to client until buffer is reduced via
+            // Ack
             await client
                 .SendInvocationAsync(nameof(MethodHub.Echo), new object[] { "t" })
                 .DefaultTimeout();
@@ -6769,7 +6787,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
         connection.Transport = connection.Transport;
 
-        // Close previous pipe with specific error that application code can catch to know a restart is occurring
+        // Close previous pipe with specific error that application code can catch to know a restart is
+        // occurring
         prevPipe.Complete(new ConnectionResetException(""));
     }
 

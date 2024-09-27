@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -20,7 +21,8 @@ namespace System.Web.Http.ModelBinding
     /// </summary>
     public class FormatterParameterBinding : HttpParameterBinding
     {
-        // Magic key to pass cancellation token through the request property bag to maintain backward compat.
+        // Magic key to pass cancellation token through the request property bag to maintain backward
+        // compat.
         private const string CancellationTokenKey =
             "MS_FormatterParameterBinding_CancellationToken";
 
@@ -180,7 +182,8 @@ namespace System.Web.Http.ModelBinding
             CancellationToken cancellationToken
         )
         {
-            // pass the cancellation token through the request as we cannot call the ReadContentAsync overload that takes
+            // pass the cancellation token through the request as we cannot call the ReadContentAsync overload
+            // that takes
             // CancellationToken for backword compatibility reasons.
             request.Properties[CancellationTokenKey] = cancellationToken;
             object model = await ReadContentAsync(request, type, _formatters, formatterLogger);

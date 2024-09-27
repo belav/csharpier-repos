@@ -33,7 +33,8 @@ namespace System.Threading
                     WaitHandle.ThrowInvalidHandleException();
                 }
 
-                // We don't know if any other handles are invalid, and this may crash or otherwise do bad things, that is by
+                // We don't know if any other handles are invalid, and this may crash or otherwise do bad things,
+                // that is by
                 // design, IntPtr is unsafe by nature.
                 return (WaitableObject)GCHandle.FromIntPtr(handle).Target!;
             }
@@ -48,7 +49,8 @@ namespace System.Threading
                     return;
                 }
 
-                // We don't know if any other handles are invalid, and this may crash or otherwise do bad things, that is by
+                // We don't know if any other handles are invalid, and this may crash or otherwise do bad things,
+                // that is by
                 // design, IntPtr is unsafe by nature.
                 FromHandle(handle).OnDeleteHandle();
                 GCHandle.FromIntPtr(handle).Free();

@@ -648,7 +648,8 @@ namespace System.ServiceModel
         public ChannelFactory(string endpointConfigurationName)
             : this(endpointConfigurationName, null) { }
 
-        // TChannel provides ContractDescription, attr/config [TChannel,name] provides Binding, provide Address explicitly
+        // TChannel provides ContractDescription, attr/config [TChannel,name] provides Binding, provide
+        // Address explicitly
         public ChannelFactory(string endpointConfigurationName, EndpointAddress remoteAddress)
             : this(typeof(TChannel))
         {

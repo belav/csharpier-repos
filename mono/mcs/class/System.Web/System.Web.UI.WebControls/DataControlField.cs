@@ -463,7 +463,8 @@ namespace System.Web.UI.WebControls
         }
 
         [DefaultValueAttribute("")]
-        //		[TypeConverterAttribute ("System.Web.UI.Design.DataSourceViewSchemaConverter, " + Consts.AssemblySystem_Design)]
+        //		[TypeConverterAttribute ("System.Web.UI.Design.DataSourceViewSchemaConverter, " +
+        // Consts.AssemblySystem_Design)]
         [WebCategoryAttribute("Behavior")]
         public virtual string SortExpression
         {

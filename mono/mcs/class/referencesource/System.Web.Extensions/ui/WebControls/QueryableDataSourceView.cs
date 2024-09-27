@@ -49,7 +49,8 @@
         protected static readonly object EventSelecting = new object();
         private static readonly object EventQueryCreated = new object();
 
-        // using Hashtable for original values so that ObjectStateFormatter will serialize it properly in ViewState.
+        // using Hashtable for original values so that ObjectStateFormatter will serialize it properly in
+        // ViewState.
         private Hashtable _originalValues;
 
         protected QueryableDataSourceView(
@@ -698,7 +699,8 @@
 
         protected virtual IDictionary GetOriginalValues(IDictionary keys)
         {
-            // Table data is stored in a hashtable with column names for keys and an ArrayList of row data for values.
+            // Table data is stored in a hashtable with column names for keys and an ArrayList of row data for
+            // values.
             // i.e, Hashtable { ID = ArrayList { 0, 1, 2 }, Name = ArrayList { "A", "B", "C" } }
             if (_originalValues != null)
             {

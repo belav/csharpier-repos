@@ -1657,7 +1657,8 @@ class C
 {
     async partial event
 ",
-                // (4,19): error CS1519: Invalid token 'event' in class, record, struct, or interface member declaration
+                // (4,19): error CS1519: Invalid token 'event' in class, record, struct, or interface member
+                // declaration
                 //     async partial event
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "event")
                     .WithArguments("event")
@@ -2035,7 +2036,8 @@ class C
 {
     async partial int operator
 ",
-                // (4,19): error CS1519: Invalid token 'int' in class, record, struct, or interface member declaration
+                // (4,19): error CS1519: Invalid token 'int' in class, record, struct, or interface member
+                // declaration
                 //     async partial int operator
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "int")
                     .WithArguments("int")
@@ -2278,7 +2280,8 @@ class C
                 @"class C {
     async T
     int",
-                // (3,5): error CS1519: Invalid token 'int' in class, record, struct, or interface member declaration
+                // (3,5): error CS1519: Invalid token 'int' in class, record, struct, or interface member
+                // declaration
                 //     int
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "int")
                     .WithArguments("int")
@@ -2377,7 +2380,8 @@ class C
                 @"class C {
     async T
 class",
-                // (3,1): error CS1519: Invalid token 'class' in class, record, struct, or interface member declaration
+                // (3,1): error CS1519: Invalid token 'class' in class, record, struct, or interface member
+                // declaration
                 // class
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "class")
                     .WithArguments("class")
@@ -2435,7 +2439,8 @@ namespace",
                 // (2,12): error CS1513: } expected
                 //     async T
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(2, 12),
-                // (3,1): error CS1519: Invalid token 'namespace' in class, record, struct, or interface member declaration
+                // (3,1): error CS1519: Invalid token 'namespace' in class, record, struct, or interface member
+                // declaration
                 // namespace
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "namespace")
                     .WithArguments("namespace")
@@ -2547,7 +2552,8 @@ namespace",
 
             CreateCompilation(test, parseOptions: TestOptions.Regular5)
                 .VerifyDiagnostics(
-                    // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such
+                    // names may become reserved for the language.
                     // class async { async async => null; }
                     Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async")
                         .WithArguments("async")
@@ -2557,7 +2563,8 @@ namespace",
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "async")
                         .WithArguments("async")
                         .WithLocation(1, 21),
-                    // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                    // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use
+                    // language version 6 or greater.
                     // class async { async async => null; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>")
                         .WithArguments("expression-bodied property", "6")
@@ -2642,17 +2649,20 @@ namespace",
 
             CreateCompilation(text, parseOptions: TestOptions.Regular5)
                 .VerifyDiagnostics(
-                    // (1,11): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // (1,11): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such
+                    // names may become reserved for the language.
                     // interface async { async this[async i] => null; }
                     Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async")
                         .WithArguments("async")
                         .WithLocation(1, 11),
-                    // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use language version 6 or greater.
+                    // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use
+                    // language version 6 or greater.
                     // interface async { async this[async i] => null; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>")
                         .WithArguments("expression-bodied indexer", "6")
                         .WithLocation(1, 39),
-                    // (1,42): error CS8026: Feature 'default interface implementation' is not available in C# 5. Please use language version 8.0 or greater.
+                    // (1,42): error CS8026: Feature 'default interface implementation' is not available in C# 5. Please
+                    // use language version 8.0 or greater.
                     // interface async { async this[async i] => null; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "null")
                         .WithArguments("default interface implementation", "8.0")
@@ -2775,7 +2785,8 @@ namespace",
                     Diagnostic(ErrorCode.ERR_CircularBase, "async")
                         .WithArguments("async", "async")
                         .WithLocation(1, 7),
-                    // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // (1,7): warning CS8981: The type name 'async' only contains lower-cased ascii characters. Such
+                    // names may become reserved for the language.
                     // class async : async { async async.async => null; }
                     Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "async")
                         .WithArguments("async")
@@ -2785,7 +2796,8 @@ namespace",
                     Diagnostic(ErrorCode.ERR_ExplicitInterfaceImplementationNotInterface, "async")
                         .WithArguments("async")
                         .WithLocation(1, 29),
-                    // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                    // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use
+                    // language version 6 or greater.
                     // class async : async { async async.async => null; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=>")
                         .WithArguments("expression-bodied property", "6")

@@ -77,7 +77,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// This property is required to be implemented for inheriting from MetadataItem. As there can be atmost one
+        /// This property is required to be implemented for inheriting from MetadataItem. As there can be
+        // atmost one
         /// instance of a nested-Documentation, return the constant "Documentation" as it's identity.
         /// </summary>
         internal override string Identity

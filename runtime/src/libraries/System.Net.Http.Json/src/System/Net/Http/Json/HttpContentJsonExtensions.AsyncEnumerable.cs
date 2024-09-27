@@ -21,7 +21,8 @@ namespace System.Net.Http.Json
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="content"/> is <see langword="null"/>.
         /// </exception>
@@ -46,7 +47,8 @@ namespace System.Net.Http.Json
         /// <param name="options">Options to control the behavior during deserialization.
         /// The default options are those specified by <see cref="JsonSerializerDefaults.Web"/>.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="content"/> is <see langword="null"/>.
         /// </exception>
@@ -72,9 +74,11 @@ namespace System.Net.Http.Json
         /// </summary>
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="content">The content to read from.</param>
-        /// <param name="jsonTypeInfo">The JsonTypeInfo used to control the deserialization behavior.</param>
+        /// <param name="jsonTypeInfo">The JsonTypeInfo used to control the deserialization
+        // behavior.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="content"/> is <see langword="null"/>.
         /// </exception>

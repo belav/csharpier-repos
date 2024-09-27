@@ -27,7 +27,8 @@ namespace System.Collections.Frozen.Tests
             from comparer in new[] { StringComparer.Ordinal, StringComparer.OrdinalIgnoreCase }
             from keys in new string[][]
             {
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/Common/src/Interop/Unix/System.Native/Interop.MountPoints.FormatInfo.cs#L84-L327
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/Common/src/Interop/Unix/System.Native/Interop.MountPoints.FormatInfo.cs#L84-L327
                 new[]
                 {
                     "cddafs",
@@ -257,7 +258,8 @@ namespace System.Collections.Frozen.Tests
                     "usbdevice",
                     "vfat",
                 },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Formats.Asn1/src/System/Formats/Asn1/WellKnownOids.cs#L317-L419
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Formats.Asn1/src/System/Formats/Asn1/WellKnownOids.cs#L317-L419
                 new[]
                 {
                     "1.2.840.10040.4.1",
@@ -360,9 +362,11 @@ namespace System.Collections.Frozen.Tests
                     "2.23.140.1.2.1",
                     "2.23.140.1.2.2",
                 },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/Common/src/Interop/Linux/procfs/Interop.ProcFsStat.TryReadStatusFile.cs#L66-L102
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/Common/src/Interop/Linux/procfs/Interop.ProcFsStat.TryReadStatusFile.cs#L66-L102
                 new[] { "Pid", "VmHWM", "VmRSS", "VmData", "VmSwap", "VmSize", "VmPeak", "VmStk" },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Private.Xml/src/System/Xml/Xsl/XsltOld/XsltCompileContext.cs#L451-L485
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Private.Xml/src/System/Xml/Xsl/XsltOld/XsltCompileContext.cs#L451-L485
                 new[]
                 {
                     "last",
@@ -393,7 +397,8 @@ namespace System.Collections.Frozen.Tests
                     "ceiling",
                     "round",
                 },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.ServiceModel.Syndication/src/System/ServiceModel/Syndication/DateTimeHelper.cs#L146-L212
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.ServiceModel.Syndication/src/System/ServiceModel/Syndication/DateTimeHelper.cs#L146-L212
                 new[]
                 {
                     "UT",
@@ -432,7 +437,8 @@ namespace System.Collections.Frozen.Tests
                     "X",
                     "Y",
                 },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCompiler.cs#L5810-L5879
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCompiler.cs#L5810-L5879
                 new[]
                 {
                     "\0\0\0\u03ff\ufffe\u07ff\ufffe\u07ff",
@@ -444,7 +450,8 @@ namespace System.Collections.Frozen.Tests
                     "\0\0\0\u03FF\0\0\u007E\0",
                     "\0\0\0\u03FF\u007E\0\0\0",
                 },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/mono/wasm/debugger/BrowserDebugProxy/MonoProxy.cs#L274-L572
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/mono/wasm/debugger/BrowserDebugProxy/MonoProxy.cs#L274-L572
                 new[]
                 {
                     "Target.attachToTarget",
@@ -472,7 +479,8 @@ namespace System.Collections.Frozen.Tests
                     "DotnetDebugger.getMethodLocation",
                     "Runtime.callFunctionOn",
                 },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/tools/illink/src/linker/Linker.Steps/DiscoverCustomOperatorsHandler.cs#L156-L221
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/tools/illink/src/linker/Linker.Steps/DiscoverCustomOperatorsHandler.cs#L156-L221
                 new[]
                 {
                     "UnaryPlus",
@@ -502,7 +510,8 @@ namespace System.Collections.Frozen.Tests
                     "Implicit",
                     "Explicit",
                 },
-                // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/coreclr/tools/Common/TypeSystem/IL/Stubs/UnsafeIntrinsics.cs#L21-L94
+                // from
+                // https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/coreclr/tools/Common/TypeSystem/IL/Stubs/UnsafeIntrinsics.cs#L21-L94
                 new[]
                 {
                     "AsPointer",
@@ -530,7 +539,8 @@ namespace System.Collections.Frozen.Tests
                     "SubtractByteOffset",
                     "Unbox",
                 },
-                // from https://raw.githubusercontent.com/dotnet/roslyn/0456b4adc6939e366e7c509318b3ac6a85cda496/src/Compilers/CSharp/Test/Emit2/CodeGen/CodeGenLengthBasedSwitchTests.cs
+                // from
+                // https://raw.githubusercontent.com/dotnet/roslyn/0456b4adc6939e366e7c509318b3ac6a85cda496/src/Compilers/CSharp/Test/Emit2/CodeGen/CodeGenLengthBasedSwitchTests.cs
                 new[]
                 {
                     "",
@@ -586,7 +596,8 @@ namespace System.Collections.Frozen.Tests
                     "00000100",
                     "00000101",
                 },
-                // from https://github.com/dotnet/runtime/blob/2b8514b02f6d0e87f4645aca0be38f16864004a7/src/libraries/System.Net.Http/src/System/Net/Http/Headers/KnownHeaders.cs#L14-L108
+                // from
+                // https://github.com/dotnet/runtime/blob/2b8514b02f6d0e87f4645aca0be38f16864004a7/src/libraries/System.Net.Http/src/System/Net/Http/Headers/KnownHeaders.cs#L14-L108
                 new[]
                 {
                     ":status",

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.CommandLine.Completions;
@@ -87,9 +88,11 @@ namespace System.CommandLine
         public IReadOnlyList<CliToken> Tokens { get; }
 
         /// <summary>
-        /// Holds the value of a complete command line input prior to splitting and tokenization, when provided.
+        /// Holds the value of a complete command line input prior to splitting and tokenization, when
+        // provided.
         /// </summary>
-        /// <remarks>This will not be set when the parser is called from <c>Program.Main</c>. It is primarily used when calculating suggestions via the <c>dotnet-suggest</c> tool.</remarks>
+        /// <remarks>This will not be set when the parser is called from <c>Program.Main</c>. It is
+        // primarily used when calculating suggestions via the <c>dotnet-suggest</c> tool.</remarks>
         internal string? CommandLineText { get; }
 
         /// <summary>
@@ -123,13 +126,17 @@ namespace System.CommandLine
         public T? GetValue<T>(CliOption<T> option) => RootCommandResult.GetValue(option);
 
         /// <summary>
-        /// Gets the parsed or default value for the specified symbol name, in the context of parsed command (not entire symbol tree).
+        /// Gets the parsed or default value for the specified symbol name, in the context of parsed command
+        // (not entire symbol tree).
         /// </summary>
         /// <param name="name">The name of the Symbol for which to get a value.</param>
         /// <returns>The parsed value or a configured default.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when parsing resulted in parse error(s).</exception>
-        /// <exception cref="ArgumentException">Thrown when there was no symbol defined for given name for the parsed command.</exception>
-        /// <exception cref="InvalidCastException">Thrown when parsed result can not be cast to <typeparamref name="T"/>.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when parsing resulted in parse
+        // error(s).</exception>
+        /// <exception cref="ArgumentException">Thrown when there was no symbol defined for given name for
+        // the parsed command.</exception>
+        /// <exception cref="InvalidCastException">Thrown when parsed result can not be cast to
+        // <typeparamref name="T"/>.</exception>
         public T? GetValue<T>(string name) => RootCommandResult.GetValue<T>(name);
 
         /// <inheritdoc />
@@ -139,7 +146,8 @@ namespace System.CommandLine
         /// Gets the result, if any, for the specified argument.
         /// </summary>
         /// <param name="argument">The argument for which to find a result.</param>
-        /// <returns>A result for the specified argument, or <see langword="null"/> if it was not provided and no default was configured.</returns>
+        /// <returns>A result for the specified argument, or <see langword="null"/> if it was not provided
+        // and no default was configured.</returns>
         public ArgumentResult? GetResult(CliArgument argument) =>
             _rootCommandResult.GetResult(argument);
 
@@ -147,7 +155,8 @@ namespace System.CommandLine
         /// Gets the result, if any, for the specified command.
         /// </summary>
         /// <param name="command">The command for which to find a result.</param>
-        /// <returns>A result for the specified command, or <see langword="null"/> if it was not provided.</returns>
+        /// <returns>A result for the specified command, or <see langword="null"/> if it was not
+        // provided.</returns>
         public CommandResult? GetResult(CliCommand command) =>
             _rootCommandResult.GetResult(command);
 
@@ -155,14 +164,16 @@ namespace System.CommandLine
         /// Gets the result, if any, for the specified option.
         /// </summary>
         /// <param name="option">The option for which to find a result.</param>
-        /// <returns>A result for the specified option, or <see langword="null"/> if it was not provided and no default was configured.</returns>
+        /// <returns>A result for the specified option, or <see langword="null"/> if it was not provided and
+        // no default was configured.</returns>
         public OptionResult? GetResult(CliOption option) => _rootCommandResult.GetResult(option);
 
         /// <summary>
         /// Gets the result, if any, for the specified directive.
         /// </summary>
         /// <param name="directive">The directive for which to find a result.</param>
-        /// <returns>A result for the specified directive, or <see langword="null"/> if it was not provided.</returns>
+        /// <returns>A result for the specified directive, or <see langword="null"/> if it was not
+        // provided.</returns>
         public DirectiveResult? GetResult(CliDirective directive) =>
             _rootCommandResult.GetResult(directive);
 
@@ -170,7 +181,8 @@ namespace System.CommandLine
         /// Gets the result, if any, for the specified symbol.
         /// </summary>
         /// <param name="symbol">The symbol for which to find a result.</param>
-        /// <returns>A result for the specified symbol, or <see langword="null"/> if it was not provided and no default was configured.</returns>
+        /// <returns>A result for the specified symbol, or <see langword="null"/> if it was not provided and
+        // no default was configured.</returns>
         public SymbolResult? GetResult(CliSymbol symbol) =>
             _rootCommandResult.SymbolResultTree.TryGetValue(symbol, out SymbolResult? result)
                 ? result

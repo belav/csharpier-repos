@@ -100,7 +100,7 @@ public class ClassMain
         Assert(mi.GetCustomAttributes(true), false, 5);
         Assert(mi.ReturnTypeCustomAttributes.GetCustomAttributes(true), true, 6);
 
-        /* Under net 2.0, SerializableAttribute is returned */
+/* Under net 2.0, SerializableAttribute is returned */
         if (typeof(test_delegate).GetCustomAttributes(false).Length != 1)
             Assert(typeof(test_delegate).GetCustomAttributes(false), false, 7);
 

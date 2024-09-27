@@ -15,7 +15,8 @@ internal sealed class DocumentDiagnosticSource(DiagnosticKind diagnosticKind, Do
     public DiagnosticKind DiagnosticKind { get; } = diagnosticKind;
 
     /// <summary>
-    /// This is a normal document source that represents live/fresh diagnostics that should supersede everything else.
+    /// This is a normal document source that represents live/fresh diagnostics that should supersede
+    // everything else.
     /// </summary>
     public override bool IsLiveSource() => true;
 
@@ -25,10 +26,12 @@ internal sealed class DocumentDiagnosticSource(DiagnosticKind diagnosticKind, Do
         CancellationToken cancellationToken
     )
     {
-        // We call GetDiagnosticsForSpanAsync here instead of GetDiagnosticsForIdsAsync as it has faster perf
+        // We call GetDiagnosticsForSpanAsync here instead of GetDiagnosticsForIdsAsync as it has faster
+        // perf
         // characteristics. GetDiagnosticsForIdsAsync runs analyzers against the entire compilation whereas
         // GetDiagnosticsForSpanAsync will only run analyzers against the request document.
-        // Also ensure we pass in "includeSuppressedDiagnostics = true" for unnecessary suppressions to be reported.
+        // Also ensure we pass in "includeSuppressedDiagnostics = true" for unnecessary suppressions to be
+        // reported.
         var allSpanDiagnostics = await diagnosticAnalyzerService
             .GetDiagnosticsForSpanAsync(
                 Document,

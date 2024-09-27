@@ -9,8 +9,10 @@ using System;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
     /// <summary>
-    /// Uniquely identifies a top-level syntax declaration within a SyntaxTree. This is achieved by combining the
-    /// qualified name of the declaration and an ordinal value. The ordinal value is used to distinguish nodes which
+    /// Uniquely identifies a top-level syntax declaration within a SyntaxTree. This is achieved by
+    // combining the
+    /// qualified name of the declaration and an ordinal value. The ordinal value is used to distinguish
+    // nodes which
     /// have the same qualified name -- for example, across partial classes within the same tree.
     /// </summary>
     internal readonly record struct SyntaxNodeKey

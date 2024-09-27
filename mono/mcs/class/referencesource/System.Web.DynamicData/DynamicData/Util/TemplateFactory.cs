@@ -187,7 +187,8 @@ namespace System.Web.DynamicData
             }
             else
             {
-                // Use GetObjectFactory instead of GetCompiledType because it will not throw, which improves the debugging experience
+                // Use GetObjectFactory instead of GetCompiledType because it will not throw, which improves the
+                // debugging experience
                 return BuildManager.GetObjectFactory(
                         virtualPath, /* throwIfNotFound */
                         false

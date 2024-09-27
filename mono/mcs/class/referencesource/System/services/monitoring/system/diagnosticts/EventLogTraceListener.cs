@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.Diagnostics
 {
     using System;
@@ -18,7 +18,8 @@ namespace System.Diagnostics
 
     /// <devdoc>
     ///    <para>Provides a simple listener for directing tracing or
-    ///       debugging output to a <see cref='T:System.IO.TextWriter'/> or to a <see cref='T:System.IO.Stream'/>, such as <see cref='F:System.Console.Out'/> or
+    ///       debugging output to a <see cref='T:System.IO.TextWriter'/> or to a <see
+    // cref='T:System.IO.Stream'/>, such as <see cref='F:System.Console.Out'/> or
     ///    <see cref='T:System.IO.FileStream'/>.</para>
     /// </devdoc>
     [HostProtection(SecurityAction.LinkDemand, Synchronization = true)]
@@ -28,13 +29,15 @@ namespace System.Diagnostics
         private bool nameSet;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.EventLogTraceListener'/> class without a trace
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.EventLogTraceListener'/>
+        // class without a trace
         ///    listener.</para>
         /// </devdoc>
         public EventLogTraceListener() { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.EventLogTraceListener'/> class using the
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.EventLogTraceListener'/>
+        // class using the
         ///    specified event log.</para>
         /// </devdoc>
         public EventLogTraceListener(EventLog eventLog)
@@ -44,7 +47,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.EventLogTraceListener'/> class using the
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.EventLogTraceListener'/>
+        // class using the
         ///    specified source.</para>
         /// </devdoc>
         public EventLogTraceListener(string source)

@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// A region analysis walker that computes whether or not the region completes normally.  It does this by determining
+    /// A region analysis walker that computes whether or not the region completes normally.  It does
+    // this by determining
     /// if the point at which the region ends is reachable.
     /// </summary>
     internal class RegionReachableWalker : AbstractRegionControlFlowPass

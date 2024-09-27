@@ -38,11 +38,11 @@ namespace System.Web.Services.Protocols
             this.url = url;
         }
 
-        /*
-        internal override bool IsInitialized {
-            get { return true; }
-        }
-        */
+/*
+internal override bool IsInitialized {
+get { return true; }
+}
+*/
 
         /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.OneWay"]/*' />
         /// <devdoc>
@@ -62,7 +62,8 @@ namespace System.Web.Services.Protocols
             get { return protocol; }
         }
 
-        /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.MethodInfo"]/*' />
+        /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.MethodInfo"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -71,15 +72,15 @@ namespace System.Web.Services.Protocols
             get { return method.methodInfo; }
         }
 
-        /*
-        internal override SoapReflectedExtension[] Extensions {
-            get { return method.extensions; }
-        }
+/*
+internal override SoapReflectedExtension[] Extensions {
+get { return method.extensions; }
+}
 
-        internal override object[] ExtensionInitializers {
-            get { return method.extensionInitializers; }
-        }
-        */
+internal override object[] ExtensionInitializers {
+get { return method.extensionInitializers; }
+}
+*/
 
         /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.Url"]/*' />
         /// <devdoc>
@@ -99,7 +100,8 @@ namespace System.Web.Services.Protocols
             get { return method.action; }
         }
 
-        /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.SoapVersion"]/*' />
+        /// <include file='doc\SoapClientMessage.uex'
+        // path='docs/doc[@for="SoapClientMessage.SoapVersion"]/*' />
         [ComVisible(false)]
         public override SoapProtocolVersion SoapVersion
         {
@@ -116,7 +118,8 @@ namespace System.Web.Services.Protocols
             get { return method; }
         }
 
-        /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.EnsureOutStage"]/*' />
+        /// <include file='doc\SoapClientMessage.uex'
+        // path='docs/doc[@for="SoapClientMessage.EnsureOutStage"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -125,7 +128,8 @@ namespace System.Web.Services.Protocols
             EnsureStage(SoapMessageStage.AfterDeserialize);
         }
 
-        /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.EnsureInStage"]/*' />
+        /// <include file='doc\SoapClientMessage.uex'
+        // path='docs/doc[@for="SoapClientMessage.EnsureInStage"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

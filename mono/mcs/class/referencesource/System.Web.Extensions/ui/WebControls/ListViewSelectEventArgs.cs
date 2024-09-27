@@ -21,7 +21,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the index of the selected row to be displayed in the <see cref='System.Web.UI.WebControls.ListView'/>.
+        /// <para>Gets the index of the selected row to be displayed in the <see
+        // cref='System.Web.UI.WebControls.ListView'/>.
         ///    This property is read-only.</para>
         /// </devdoc>
         public int NewSelectedIndex

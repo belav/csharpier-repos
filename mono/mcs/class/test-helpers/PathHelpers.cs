@@ -6,7 +6,8 @@ using System.Reflection;
 namespace MonoTests.Helpers
 {
     /// <summary>
-    /// Represents a temporary directory.  Creating an instance creates a directory at the specified path,
+    /// Represents a temporary directory.  Creating an instance creates a directory at the specified
+    // path,
     /// and disposing the instance deletes the directory.
     /// </summary>
     public sealed class TempDirectory : IDisposable

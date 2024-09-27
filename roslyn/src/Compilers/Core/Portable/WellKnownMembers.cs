@@ -952,6 +952,7 @@ namespace Microsoft.CodeAnalysis
                     WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
                 (byte)SignatureTypeCode.GenericTypeParameter,
                 0,
+                //
                 // System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__GetOrCreateEventRegistrationTokenTable
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
                 (byte)
@@ -2296,6 +2297,7 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Object,
                 (byte)SignatureTypeCode.TypeHandle,
                 (byte)SpecialType.System_Boolean,
+                //
                 // Microsoft_VisualBasic_CompilerServices_Operators__ConditionalCompareObjectEqualObjectObjectBoolean
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
                 (byte)WellKnownType.Microsoft_VisualBasic_CompilerServices_Operators, // DeclaringTypeId
@@ -2309,6 +2311,7 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Object,
                 (byte)SignatureTypeCode.TypeHandle,
                 (byte)SpecialType.System_Boolean,
+                //
                 // Microsoft_VisualBasic_CompilerServices_Operators__ConditionalCompareObjectNotEqualObjectObjectBoolean
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
                 (byte)WellKnownType.Microsoft_VisualBasic_CompilerServices_Operators, // DeclaringTypeId
@@ -2335,6 +2338,7 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Object,
                 (byte)SignatureTypeCode.TypeHandle,
                 (byte)SpecialType.System_Boolean,
+                //
                 // Microsoft_VisualBasic_CompilerServices_Operators__ConditionalCompareObjectLessEqualObjectObjectBoolean
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
                 (byte)WellKnownType.Microsoft_VisualBasic_CompilerServices_Operators, // DeclaringTypeId
@@ -2348,6 +2352,7 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Object,
                 (byte)SignatureTypeCode.TypeHandle,
                 (byte)SpecialType.System_Boolean,
+                //
                 // Microsoft_VisualBasic_CompilerServices_Operators__ConditionalCompareObjectGreaterEqualObjectObjectBoolean
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
                 (byte)WellKnownType.Microsoft_VisualBasic_CompilerServices_Operators, // DeclaringTypeId
@@ -2361,6 +2366,7 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Object,
                 (byte)SignatureTypeCode.TypeHandle,
                 (byte)SpecialType.System_Boolean,
+                //
                 // Microsoft_VisualBasic_CompilerServices_Operators__ConditionalCompareObjectGreaterObjectObjectBoolean
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
                 (byte)WellKnownType.Microsoft_VisualBasic_CompilerServices_Operators, // DeclaringTypeId

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Web.Http.Tracing;
@@ -19,8 +20,10 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="configuration">The <see cref="HttpConfiguration"/> for which
         /// to register the created trace writer.</param>
-        /// <remarks>The returned SystemDiagnosticsTraceWriter may be further configured to change it's default settings.</remarks>
-        /// <returns>The <see cref="SystemDiagnosticsTraceWriter"/> which was created and registered.</returns>
+        /// <remarks>The returned SystemDiagnosticsTraceWriter may be further configured to change it's
+        // default settings.</remarks>
+        /// <returns>The <see cref="SystemDiagnosticsTraceWriter"/> which was created and
+        // registered.</returns>
         public static SystemDiagnosticsTraceWriter EnableSystemDiagnosticsTracing(
             this HttpConfiguration configuration
         )

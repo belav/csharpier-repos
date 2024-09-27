@@ -144,7 +144,8 @@ public class EndpointsServerReconnectionTest
         var reconnectModal = Browser.Exists(By.Id("components-reconnect-modal"));
         RemoveReconnectModal(javascript, reconnectModal);
 
-        // Update the existing counter's increment amount via enhanced update while reconnection is in progress
+        // Update the existing counter's increment amount via enhanced update while reconnection is in
+        // progress
         Browser.Click(By.Id("update-counter-link-0"));
 
         // Assert that we go from a disconnected to reconnected state

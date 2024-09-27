@@ -12,15 +12,21 @@ namespace System.Net.Mail
     using System.Text;
 
     // RFC 2822 Section 3.2.2 - Quoted Characters
-    // As in C# strings, characters that would otherwise have special meaning should be ignored when quoted/escaped
-    // by a backslash "\". Quoted characters (quoted-pair) are only allowed in the following contexts: Comments,
+    // As in C# strings, characters that would otherwise have special meaning should be ignored when
+    // quoted/escaped
+    // by a backslash "\". Quoted characters (quoted-pair) are only allowed in the following contexts:
+    // Comments,
     // quoted-string, domain-literal, and message-id.
     //
-    // Example: A quoted-string ("hello there") cannot contain a double quote, as it must be surrounded by them.
-    //  However, the double quote can be included as a quoted-pair: ("hello\"there") means (hello"there).
+    // Example: A quoted-string ("hello there") cannot contain a double quote, as it must be surrounded
+    // by them.
+    //  However, the double quote can be included as a quoted-pair: ("hello\"there") means
+    // (hello"there).
     //
-    // Because backslashes themselves can be quoted-pairs (\\), this class's primary function is to verify what
-    // character is being quoted. In "hi\\\\a", 'a' is not quoted because all of the backslashes are paired together.
+    // Because backslashes themselves can be quoted-pairs (\\), this class's primary function is to
+    // verify what
+    // character is being quoted. In "hi\\\\a", 'a' is not quoted because all of the backslashes are
+    // paired together.
     // In "hi\\\a", 'a' is quoted.
     internal static class QuotedPairReader
     {

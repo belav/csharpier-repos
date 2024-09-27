@@ -18,10 +18,13 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// method that must be hoisted to the state machine.
     /// </summary>
     /// <remarks>
-    /// Data flow analysis is used to calculate the locals. At yield/await we mark all variables as "unassigned".
+    /// Data flow analysis is used to calculate the locals. At yield/await we mark all variables as
+    // "unassigned".
     /// When a read from an unassigned variables is reported we add the variable to the captured set.
-    /// "this" parameter is captured if a reference to "this", "base" or an instance field is encountered.
-    /// Variables used in finally also need to be captured if there is a yield in the corresponding try block.
+    /// "this" parameter is captured if a reference to "this", "base" or an instance field is
+    // encountered.
+    /// Variables used in finally also need to be captured if there is a yield in the corresponding try
+    // block.
     /// </remarks>
     internal sealed class IteratorAndAsyncCaptureWalker : DefiniteAssignmentPass
     {
@@ -29,13 +32,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         // This set will contain such variables after the bound tree is visited.
         private readonly OrderedSet<Symbol> _variablesToHoist = new OrderedSet<Symbol>();
 
-        // Contains variables that are captured but can't be hoisted since their type can't be allocated on heap.
+        // Contains variables that are captured but can't be hoisted since their type can't be allocated on
+        // heap.
         // The value is a list of all uses of each such variable.
         private MultiDictionary<Symbol, SyntaxNode> _lazyDisallowedCaptures;
 
         private bool _seenYieldInCurrentTry;
 
-        // The initializing expressions for compiler-generated ref local temps.  If the temp needs to be hoisted, then any
+        // The initializing expressions for compiler-generated ref local temps.  If the temp needs to be
+        // hoisted, then any
         // variables in its initializing expression will need to be hoisted too.
         private readonly Dictionary<LocalSymbol, BoundExpression> _boundRefLocalInitializers =
             new Dictionary<LocalSymbol, BoundExpression>();
@@ -119,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         foreach (CSharpSyntaxNode syntax in kvp.Value)
                         {
-                            // CS4013: Instance of type '{0}' cannot be used inside an anonymous function, query expression, iterator block or async method
+                            // CS4013: Instance of type '{0}' cannot be used inside an anonymous function, query expression,
+                            // iterator block or async method
                             diagnostics.Add(
                                 ErrorCode.ERR_SpecialByRefInLambda,
                                 syntax.Location,

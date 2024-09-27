@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (!syntaxContext.IsPreProcessorExpressionContext)
                 return;
 
-            // Walk all the projects this document is linked in so that we get the full set of preprocessor symbols
+            // Walk all the projects this document is linked in so that we get the full set of preprocessor
+            // symbols
             // defined across all of them.
             var syntaxFacts = originatingDocument.GetRequiredLanguageService<ISyntaxFactsService>();
             var preprocessorNames = new HashSet<string>(syntaxFacts.StringComparer);
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 preprocessorNames.AddRange(currentSyntaxTree.Options.PreprocessorSymbolNames);
             }
 
-            // Keep all the preprocessor symbol names together.  We don't want to intermingle them with any keywords we
+            // Keep all the preprocessor symbol names together.  We don't want to intermingle them with any
+            // keywords we
             // include (like `true/false`)
             foreach (var name in preprocessorNames.OrderBy(a => a))
             {

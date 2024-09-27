@@ -15,8 +15,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions;
 ///         The implementations do not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///         <see href="https://aka.ms/efcore-docs-in-memory">The EF Core in-memory database provider</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>,
+// and
+///         <see href="https://aka.ms/efcore-docs-in-memory">The EF Core in-memory database
+// provider</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
@@ -39,7 +41,8 @@ public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
     }
 
     /// <summary>
-    ///     Call this method to build a <see cref="ConventionSet" /> for the in-memory provider when using
+    ///     Call this method to build a <see cref="ConventionSet" /> for the in-memory provider when
+    // using
     ///     the <see cref="ModelBuilder" /> outside of <see cref="DbContext.OnModelCreating" />.
     /// </summary>
     /// <remarks>
@@ -55,10 +58,12 @@ public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
     }
 
     /// <summary>
-    ///     Call this method to build a <see cref="ModelBuilder" /> for SQLite outside of <see cref="DbContext.OnModelCreating" />.
+    ///     Call this method to build a <see cref="ModelBuilder" /> for SQLite outside of <see
+    // cref="DbContext.OnModelCreating" />.
     /// </summary>
     /// <remarks>
-    ///     Note that it is unusual to use this method. Consider using <see cref="DbContext" /> in the normal way instead.
+    ///     Note that it is unusual to use this method. Consider using <see cref="DbContext" /> in the
+    // normal way instead.
     /// </remarks>
     /// <returns>The convention set.</returns>
     public static ModelBuilder CreateModelBuilder()

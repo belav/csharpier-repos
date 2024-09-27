@@ -23,7 +23,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        ///  Setter for RuntimeTypeHandle. Separate from normal property as all uses should be done with great care.
+        ///  Setter for RuntimeTypeHandle. Separate from normal property as all uses should be done with
+        // great care.
         ///  Must not be set with partially constructed type handles
         /// </summary>
         public void SetRuntimeTypeHandleUnsafe(RuntimeTypeHandle runtimeTypeHandle)
@@ -99,7 +100,8 @@ namespace Internal.TypeSystem
                     }
                     else
                     {
-                        // Nongeneric, or generic type def types are just the type handle of the type definition as found above
+                        // Nongeneric, or generic type def types are just the type handle of the type definition as found
+                        // above
                         type.SetRuntimeTypeHandleUnsafe(typeDefHandle);
                         return true;
                     }
@@ -187,7 +189,8 @@ namespace Internal.TypeSystem
                 Debug.Assert(false);
             }
 
-            // Make a note on the type build state that we have attempted to retrieve RuntimeTypeHandle but there is not one
+            // Make a note on the type build state that we have attempted to retrieve RuntimeTypeHandle but
+            // there is not one
             GetOrCreateTypeBuilderState().AttemptedAndFailedToRetrieveTypeHandle = true;
 
             return false;
@@ -199,7 +202,8 @@ namespace Internal.TypeSystem
         }
 
         //
-        // Get existing type builder state. This method should be only called during final phase of type building.
+        // Get existing type builder state. This method should be only called during final phase of type
+        // building.
         //
         internal TypeBuilderState GetTypeBuilderState()
         {
@@ -209,7 +213,8 @@ namespace Internal.TypeSystem
         }
 
         //
-        // Get or create existing type builder state. This method should not be called during final phase of type building.
+        // Get or create existing type builder state. This method should not be called during final phase of
+        // type building.
         //
         internal TypeBuilderState GetOrCreateTypeBuilderState()
         {
@@ -224,7 +229,8 @@ namespace Internal.TypeSystem
         }
 
         /// Parse the native layout to ensure that the type has proper base type setup.
-        /// This is used to generalize out some behavior of NoMetadataTypes which actually use this information
+        /// This is used to generalize out some behavior of NoMetadataTypes which actually use this
+        // information
         internal virtual void ParseBaseType(
             NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext,
             NativeParser baseTypeParser

@@ -19,6 +19,7 @@ public static class Program
         catch (CultureNotFoundException)
         {
             culture = CultureInfo.InvariantCulture;
+            //
             // https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md#cultures-and-culture-data
             result =
                 culture.LCID == 127

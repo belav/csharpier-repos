@@ -1,9 +1,9 @@
 ﻿/********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -36,12 +36,14 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Minimal amount of parameter processing.  Primarily sets the DbType for the parameter equal to the provider type in the schema
+        /// Minimal amount of parameter processing.  Primarily sets the DbType for the parameter equal to
+        // the provider type in the schema
         /// </summary>
         /// <param name="parameter">The parameter to use in applying custom behaviors to a row</param>
         /// <param name="row">The row to apply the parameter to</param>
         /// <param name="statementType">The type of statement</param>
-        /// <param name="whereClause">Whether the application of the parameter is part of a WHERE clause</param>
+        /// <param name="whereClause">Whether the application of the parameter is part of a WHERE
+        // clause</param>
         protected override void ApplyParameterInfo(
             DbParameter parameter,
             DataRow row,
@@ -84,7 +86,8 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Sets the handler for receiving row updating events.  Used by the DbCommandBuilder to autogenerate SQL
+        /// Sets the handler for receiving row updating events.  Used by the DbCommandBuilder to
+        // autogenerate SQL
         /// statements that may not have previously been generated.
         /// </summary>
         /// <param name="adapter">A data adapter to receive events on.</param>
@@ -290,7 +293,8 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Override helper, which can help the base command builder choose the right keys for the given query
+        /// Override helper, which can help the base command builder choose the right keys for the given
+        // query
         /// </summary>
         /// <param name="sourceCommand"></param>
         /// <returns></returns>

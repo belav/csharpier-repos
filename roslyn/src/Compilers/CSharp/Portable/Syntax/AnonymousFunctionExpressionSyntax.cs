@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         /// </summary>
         private protected SyntaxTokenList UpdateAsyncKeyword(SyntaxToken asyncKeyword)
         {
-            // Remove *all* async keywords if any, i.e, after this call, AsyncKeyword property should return 'default'.
+            // Remove *all* async keywords if any, i.e, after this call, AsyncKeyword property should return
+            // 'default'.
             if (asyncKeyword == default)
             {
                 if (Modifiers.Any(SyntaxKind.AsyncKeyword))

@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         /// <summary>
         /// Returns a value indicating which embedded attributes should be generated during emit phase.
-        /// The value is set during binding the symbols that need those attributes, and is frozen on first trial to get it.
+        /// The value is set during binding the symbols that need those attributes, and is frozen on first
+        // trial to get it.
         /// Freezing is needed to make sure that nothing tries to modify the value after the value is read.
         /// </summary>
         internal EmbeddableAttributes GetNeedsGeneratedAttributes()
@@ -358,9 +359,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                                 basePath: null
                             );
 
-                            // If we have a debug document that is already referenced by method debug info in this type, or a nested type,
-                            // then we don't need to include it. Since its impossible to declare a nested type without also including
-                            // a declaration for its containing type, we don't need to consider nested types in this method itself.
+                            // If we have a debug document that is already referenced by method debug info in this type, or a
+                            // nested type,
+                            // then we don't need to include it. Since its impossible to declare a nested type without also
+                            // including
+                            // a declaration for its containing type, we don't need to consider nested types in this method
+                            // itself.
                             if (
                                 debugDocument is not null
                                 && !methodDocumentList.Contains(debugDocument)
@@ -390,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         }
 
         /// <summary>
-        /// Gets a list of documents from the method definitions in the types in <paramref name="typesToProcess"/> or any
+        /// Gets a list of documents from the method definitions in the types in <paramref
+        // name="typesToProcess"/> or any
         /// nested types of those types.
         /// </summary>
         private static void GetDocumentsForMethodsAndNestedTypes(
@@ -949,7 +954,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 // (type, index of the parent exported type in builder, or -1 if the type is a top-level type)
                 var stack = ArrayBuilder<(NamedTypeSymbol type, int parentIndex)>.GetInstance();
 
-                // Hashset enumeration is not guaranteed to be deterministic. Emitting in the order of fully qualified names.
+                // Hashset enumeration is not guaranteed to be deterministic. Emitting in the order of fully
+                // qualified names.
                 IEnumerable<NamedTypeSymbol> orderedForwardedTypes =
                     wellKnownAttributeData.ForwardedTypes;
 
@@ -1789,8 +1795,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         internal Cci.ITypeReference Translate(SyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
         {
-            // Translate the dynamic type to System.Object special type to avoid duplicate entries in TypeRef table.
-            // We don't need to recursively replace the dynamic type with Object since the DynamicTypeSymbol adapter
+            // Translate the dynamic type to System.Object special type to avoid duplicate entries in TypeRef
+            // table.
+            // We don't need to recursively replace the dynamic type with Object since the DynamicTypeSymbol
+            // adapter
             // masquerades the TypeRef as System.Object when used to encode signatures.
             return GetSpecialType(SpecialType.System_Object, syntaxNodeOpt, diagnostics);
         }
@@ -1856,7 +1864,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             if ((object)Compilation.SourceModule != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -1869,7 +1878,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             if ((object)Compilation.SourceModule != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -1880,7 +1890,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             if ((object)Compilation.SourceModule != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -1891,7 +1902,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             if ((object)Compilation.SourceModule != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -1911,7 +1923,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             if ((object)Compilation.SourceModule != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -1997,7 +2010,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             var module = Compilation.SourceModule;
             if ((object)module != symbol && (object)module != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -2044,7 +2058,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             if ((object)Compilation.SourceModule != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -2113,7 +2128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             if ((object)Compilation.SourceModule != symbol.ContainingModule)
             {
-                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this attribute.
+                // For symbols that are not defined in the same compilation (like NoPia), don't synthesize this
+                // attribute.
                 return null;
             }
 
@@ -2304,7 +2320,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             MethodSymbol methodSymbol = createMethodSymbol(privateImplClass, arg);
             Debug.Assert(methodSymbol.Name == methodName);
 
-            // use add-then-get pattern to ensure the symbol exists, and then ensure we use the single "canonical" instance added by whichever thread won the race.
+            // use add-then-get pattern to ensure the symbol exists, and then ensure we use the single
+            // "canonical" instance added by whichever thread won the race.
             privateImplClass.PrivateImplementationDetails.TryAddSynthesizedMethod(
                 methodSymbol.GetCciAdapter()
             );

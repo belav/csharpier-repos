@@ -22,7 +22,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 6).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 6).
         /// </param>
         /// <returns>
         ///   The decoded object identifier, in dotted-decimal notation.
@@ -304,7 +305,8 @@ namespace System.Formats.Asn1
         ///   the value in a dotted decimal format string.
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 6).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 6).
         /// </param>
         /// <exception cref="AsnContentException">
         ///   the next value does not have the correct tag.

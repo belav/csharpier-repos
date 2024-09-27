@@ -7,18 +7,23 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-//using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
+//using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this
+// class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
 // to prevent from simple mistakes during development (e.g. method argument validation
-// in cases where it was you who created the variables or the variables had already been validated or
+// in cases where it was you who created the variables or the variables had already been validated
+// or
 // in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts
+// are
 // (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
 // the shipped product.
 // PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
-// about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
+// about how the tree was built etc. - in these cases we probably want to throw an exception (this
+// is
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not
+// correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
@@ -56,7 +61,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Represents a variable scope introduced by a CQT DbExpressionBinding, and therefore contains a single variable.
+        /// Represents a variable scope introduced by a CQT DbExpressionBinding, and therefore contains a
+        // single variable.
         /// </summary>
         private class ExpressionBindingScope : CqtVariableScope
         {
@@ -234,7 +240,8 @@ namespace System.Data.Query.PlanCompiler
         private readonly Stack<EdmFunction> _functionExpansions = new Stack<EdmFunction>();
 
         /// <summary>
-        /// Maintained for lambda and model-defined function applications (DbLambdaExpression and DbFunctionExpression).
+        /// Maintained for lambda and model-defined function applications (DbLambdaExpression and
+        // DbFunctionExpression).
         /// </summary>
         private readonly Dictionary<DbExpression, bool> _functionsIsPredicateFlag =
             new Dictionary<DbExpression, bool>();
@@ -249,7 +256,8 @@ namespace System.Data.Query.PlanCompiler
         private readonly DbProjectExpression _discriminatedViewTopProject;
 
         /// <summary>
-        /// Initialize the DbExpressionKind --> OpType mappings for DbComparisonExpression and DbArithmeticExpression
+        /// Initialize the DbExpressionKind --> OpType mappings for DbComparisonExpression and
+        // DbArithmeticExpression
         /// </summary>
         private static Dictionary<DbExpressionKind, OpType> InitializeExpressionKindToOpTypeMap()
         {
@@ -291,7 +299,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Generate an IQT given a query command tree and discriminator metadata (available for certain query mapping views)
+        /// Generate an IQT given a query command tree and discriminator metadata (available for certain
+        // query mapping views)
         /// </summary>
         internal static Command Generate(
             DbQueryCommandTree ctree,
@@ -308,12 +317,14 @@ namespace System.Data.Query.PlanCompiler
         )
         {
             //
-            // Create a new IQT Command instance that uses the same metadata workspace as the incoming command tree
+            // Create a new IQT Command instance that uses the same metadata workspace as the incoming command
+            // tree
             //
             _iqtCommand = new Command(ctree.MetadataWorkspace);
 
             //
-            // When translating a query mapping view matching the TPH discrimination pattern, remember the top level discriminator map
+            // When translating a query mapping view matching the TPH discrimination pattern, remember the top
+            // level discriminator map
             // (leveraged to produced a DiscriminatedNewInstanceOp for the top-level projection in the view)
             //
             if (null != discriminatorMap)
@@ -328,7 +339,8 @@ namespace System.Data.Query.PlanCompiler
             }
 
             //
-            // For each Parameter declared by the command tree, add a ParameterVar to the set of parameter vars maintained by the conversion visitor.
+            // For each Parameter declared by the command tree, add a ParameterVar to the set of parameter vars
+            // maintained by the conversion visitor.
             // Each ParameterVar has the same name and type as the corresponding parameter on the command tree.
             //
             foreach (KeyValuePair<string, TypeUsage> paramInfo in ctree.Parameters)
@@ -560,7 +572,8 @@ namespace System.Data.Query.PlanCompiler
             }
             //
             // If the current expression is a boolean, and it is really a predicate, then
-            // scalarize the predicate (ie) convert it into a "case when <predicate> then 'true' else 'false' end" expression
+            // scalarize the predicate (ie) convert it into a "case when <predicate> then 'true' else 'false'
+            // end" expression
             // SQLBUDT #431406: handle 3-valued logic for all predicates except IsNull
             // Convert boolean predicate p into
             //    case when p then true when not(p) then false else null end
@@ -597,7 +610,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Scalarize the predicate (x = y) by converting it into a "case when x = y then 'true' else 'false' end" expression.
+        /// Scalarize the predicate (x = y) by converting it into a "case when x = y then 'true' else
+        // 'false' end" expression.
         /// </summary>
         private Node ConvertPredicateToScalarOpTree(Node node, DbExpression expr)
         {
@@ -720,10 +734,14 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Ensures that an input op is a RelOp. If the specified Node's Op is not a RelOp then it is wrapped in an Unnest to create a synthetic RelOp. This is only possible if the input Op produces a collection.
+        /// Ensures that an input op is a RelOp. If the specified Node's Op is not a RelOp then it is
+        // wrapped in an Unnest to create a synthetic RelOp. This is only possible if the input Op produces
+        // a
+        // collection.
         /// </summary>
         /// <param name="inputNode">The input Node/Op pair</param>
-        /// <returns>A Node with an Op that is guaranteed to be a RelOp (this may be the original Node or a new Node created to perform the Unnest)</returns>
+        /// <returns>A Node with an Op that is guaranteed to be a RelOp (this may be the original Node or a
+        // new Node created to perform the Unnest)</returns>
         private Node EnsureRelOp(Node inputNode)
         {
             //
@@ -740,7 +758,8 @@ namespace System.Data.Query.PlanCompiler
             }
 
             //
-            // Assert that the input is a ScalarOp (CQT expressions should only ever produce RelOps or ScalarOps)
+            // Assert that the input is a ScalarOp (CQT expressions should only ever produce RelOps or
+            // ScalarOps)
             //
             ScalarOp scalar = inputOp as ScalarOp;
             PlanCompiler.Assert(
@@ -749,8 +768,10 @@ namespace System.Data.Query.PlanCompiler
             );
 
             //
-            // Assert that the ScalarOp has a collection result type. EnsureRelOp is called to ensure that arguments to
-            // RelOps are either also RelOps or are ScalarOps that produce a collection, which can be wrapped in an
+            // Assert that the ScalarOp has a collection result type. EnsureRelOp is called to ensure that
+            // arguments to
+            // RelOps are either also RelOps or are ScalarOps that produce a collection, which can be wrapped in
+            // an
             // unnest to produce a RelOp.
             //
             PlanCompiler.Assert(
@@ -793,7 +814,8 @@ namespace System.Data.Query.PlanCompiler
             Node varDefNode = _iqtCommand.CreateVarDefNode(inputNode, out inputCollectionVar);
 
             //
-            // Create an UnnestOp that references the computed var created above. The VarDefOp that defines the var
+            // Create an UnnestOp that references the computed var created above. The VarDefOp that defines the
+            // var
             // using the original input Node/Op pair becomes a child of the UnnestOp.
             //
             UnnestOp unnest = _iqtCommand.CreateUnnestOp(inputCollectionVar);
@@ -804,7 +826,8 @@ namespace System.Data.Query.PlanCompiler
 
             //
             // Create the unnest node, N3
-            // The UnnestOp produces a new Var, the single ColumnVar produced by the table that results from the Unnest.
+            // The UnnestOp produces a new Var, the single ColumnVar produced by the table that results from the
+            // Unnest.
             //
             Node unnestNode = _iqtCommand.CreateNode(unnest, varDefNode);
             _varMap[unnestNode] = unnest.Table.Columns[0];
@@ -875,7 +898,10 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Creates a new variable scope that is based on a CQT DbExpressionBinding and pushes it onto the variable scope stack. The scope defines a single variable based on the DbExpressionBinding's VarName and DbExpression.
+        /// Creates a new variable scope that is based on a CQT DbExpressionBinding and pushes it onto the
+        // variable scope stack. The scope defines a single variable based on the DbExpressionBinding's
+        // VarName
+        // and DbExpression.
         /// </summary>
         /// <param name="binding">The DbExpressionBinding that defines the scope</param>
         /// <returns>The Node produced by converting the binding's DbExpression</returns>
@@ -885,8 +911,11 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Creates a new variable scope that is based on a CQT DbGroupExpressionBinding and pushes it onto the variable scope stack. The scope defines a single variable based on the DbExpressionBinding's VarName and DbExpression.
-        /// This method does not bring the GroupVarName into scope. Note that ExitExpressionBinding and NOT ExitGroupExpressionBinding should be used to remove this scope from the stack.
+        /// Creates a new variable scope that is based on a CQT DbGroupExpressionBinding and pushes it onto
+        // the variable scope stack. The scope defines a single variable based on the DbExpressionBinding's
+        // VarName and DbExpression.
+        /// This method does not bring the GroupVarName into scope. Note that ExitExpressionBinding and NOT
+        // ExitGroupExpressionBinding should be used to remove this scope from the stack.
         /// </summary>
         /// <param name="binding">The DbGroupExpressionBinding that defines the scope</param>
         /// <returns>The Node produced by converting the binding's DbExpression</returns>
@@ -896,7 +925,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Common implementation method called by both EnterExpressionBinding and EnterGroupExpressionBinding
+        /// Common implementation method called by both EnterExpressionBinding and
+        // EnterGroupExpressionBinding
         /// </summary>
         /// <param name="boundExpression">The DbExpression that defines the binding</param>
         /// <param name="bindingName">The name of the binding variable</param>
@@ -916,7 +946,8 @@ namespace System.Data.Query.PlanCompiler
         /// Common implementation method called by both VisitBoundExpressionPushBindingScope and VisitJoin
         /// </summary>
         /// <param name="boundExpression">The DbExpression that defines the binding</param>
-        /// <param name="boundVar">Var representing the RelOp produced for the <paramref name="boundExpression"/></param>
+        /// <param name="boundVar">Var representing the RelOp produced for the <paramref
+        // name="boundExpression"/></param>
         /// <returns></returns>
         private Node VisitBoundExpression(DbExpression boundExpression, out Var boundVar)
         {
@@ -946,7 +977,8 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Common implementation method called by both VisitBoundExpressionPushBindingScope and VisitJoin
         /// </summary>
-        /// <param name="boundVar">The Var produced by the RelOp from DbExpression that defines the binding</param>
+        /// <param name="boundVar">The Var produced by the RelOp from DbExpression that defines the
+        // binding</param>
         /// <param name="bindingName">The name of the binding variable</param>
         /// <returns></returns>
         private void PushBindingScope(Var boundVar, string bindingName)
@@ -959,13 +991,15 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Removes a variable scope created based on a DbExpressionBinding from the top of the variable scope stack, verifying that it is in fact an ExpressionBindingScope.
+        /// Removes a variable scope created based on a DbExpressionBinding from the top of the variable
+        // scope stack, verifying that it is in fact an ExpressionBindingScope.
         /// </summary>
         /// <returns>The removed ExpressionBindingScope</returns>
         private ExpressionBindingScope ExitExpressionBinding()
         {
             //
-            // Pop the scope from the variable scope stack, assert that it is a DbExpressionBinding scope, and return it.
+            // Pop the scope from the variable scope stack, assert that it is a DbExpressionBinding scope, and
+            // return it.
             //
             ExpressionBindingScope retScope = _varScopes.Pop() as ExpressionBindingScope;
             PlanCompiler.Assert(
@@ -976,8 +1010,10 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Removes a variable scope created based on a DbGroupExpressionBinding from the top of the variable scope stack, verifying that it is in fact an ExpressionBindingScope.
-        /// Should only be called after visiting the Aggregates of a DbGroupByExpression in Visit(DbGroupByExpression).
+        /// Removes a variable scope created based on a DbGroupExpressionBinding from the top of the
+        // variable scope stack, verifying that it is in fact an ExpressionBindingScope.
+        /// Should only be called after visiting the Aggregates of a DbGroupByExpression in
+        // Visit(DbGroupByExpression).
         /// The sequence (in Visit(GroupExpression e) is:
         /// 1. EnterGroupExpressionBinding
         /// 2.     Visit e.Keys
@@ -996,11 +1032,14 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Creates a new variable scope that is based on a CQT DbLambda and pushes it onto the variable scope stack.
+        /// Creates a new variable scope that is based on a CQT DbLambda and pushes it onto the variable
+        // scope stack.
         /// </summary>
         /// <param name="function">The DbLambda that defines the scope</param>
-        /// <param name="argumentValues">A list of Nodes and IsPredicate bits produced by converting the CQT Expressions that provide the arguments to the Lambda function</param>
-        /// <param name="expandingEdmFunction">an edm function for which the current lambda represents the generated body, otherwise null</param>
+        /// <param name="argumentValues">A list of Nodes and IsPredicate bits produced by converting the CQT
+        // Expressions that provide the arguments to the Lambda function</param>
+        /// <param name="expandingEdmFunction">an edm function for which the current lambda represents the
+        // generated body, otherwise null</param>
         private void EnterLambdaFunction(
             DbLambda lambda,
             List<Tuple<Node, bool>> argumentValues,
@@ -1018,7 +1057,8 @@ namespace System.Data.Query.PlanCompiler
             }
 
             //
-            // If lambda represents an edm function body then check for a possible recursion in the function definition.
+            // If lambda represents an edm function body then check for a possible recursion in the function
+            // definition.
             //
             if (expandingEdmFunction != null)
             {
@@ -1044,9 +1084,11 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Removes a variable scope created based on a Lambda function from the top of the variable scope stack, verifying that it is in fact a LambdaScope.
+        /// Removes a variable scope created based on a Lambda function from the top of the variable scope
+        // stack, verifying that it is in fact a LambdaScope.
         /// </summary>
-        /// <param name="expandingEdmFunction">an edm function for which the current lambda represents the generated body, otherwise null</param>
+        /// <param name="expandingEdmFunction">an edm function for which the current lambda represents the
+        // generated body, otherwise null</param>
         private LambdaScope ExitLambdaFunction(EdmFunction expandingEdmFunction)
         {
             //
@@ -1059,7 +1101,8 @@ namespace System.Data.Query.PlanCompiler
             );
 
             //
-            // If lambda represents an edm function body then pop the function from the expansion stack and make sure it is the expected one.
+            // If lambda represents an edm function body then pop the function from the expansion stack and make
+            // sure it is the expected one.
             //
             if (expandingEdmFunction != null)
             {
@@ -1074,12 +1117,15 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Constructs a NewRecordOp on top of a multi-Var-producing Op, resulting in a RelOp that produces a single Var.
+        /// Constructs a NewRecordOp on top of a multi-Var-producing Op, resulting in a RelOp that produces
+        // a single Var.
         /// </summary>
-        /// <param name="inputNode">The Node that references the multi-Var-producing Op. This Node will become the first child node of the new ProjectOp's Node</param>
+        /// <param name="inputNode">The Node that references the multi-Var-producing Op. This Node will
+        // become the first child node of the new ProjectOp's Node</param>
         /// <param name="recType">Type metadata that describes the output record type</param>
         /// <param name="colVars">A list of Vars that provide the output columns of the projection</param>
-        /// <returns>A new ProjectOp that projects a new record of the specified type from the specified Vars over the original input Op/Node</returns>
+        /// <returns>A new ProjectOp that projects a new record of the specified type from the specified
+        // Vars over the original input Op/Node</returns>
         private Node ProjectNewRecord(Node inputNode, RowType recType, IEnumerable<Var> colVars)
         {
             //
@@ -1213,7 +1259,8 @@ namespace System.Data.Query.PlanCompiler
                 }
 
                 // Visit the lambda call expression.
-                // Argument types should be validated by now, hence the visitor should not throw under normal conditions.
+                // Argument types should be validated by now, hence the visitor should not throw under normal
+                // conditions.
                 retNode = VisitLambdaExpression(lambda, e.Arguments, e, e.Function);
             }
             else // a provider-manifest-defined or store function call - no expansion needed
@@ -1377,10 +1424,14 @@ namespace System.Data.Query.PlanCompiler
         /// For instance, product.Category.CategoryID becomes Ref(product.Category).CategoryID,
         /// which gives us a chance of optimizing the query (using foreign keys rather than joins)
         /// </summary>
-        /// <param name="propertyExpression">The original property expression that specifies the member and instance</param>
-        /// <param name="rewritten">'Simplified' instance. If the member is a key and the instance is a navigation
-        /// the rewritten expression's instance is a reference navigation rather than the full entity.</param>
-        /// <returns><c>true</c> if the property expression was rewritten, in which case <paramref name="rewritten"/> will be non-null,
+        /// <param name="propertyExpression">The original property expression that specifies the member and
+        // instance</param>
+        /// <param name="rewritten">'Simplified' instance. If the member is a key and the instance is a
+        // navigation
+        /// the rewritten expression's instance is a reference navigation rather than the full
+        // entity.</param>
+        /// <returns><c>true</c> if the property expression was rewritten, in which case <paramref
+        // name="rewritten"/> will be non-null,
         /// otherwise <c>false</c>, in which case <paramref name="rewritten"/> will be null.</returns>
         private bool TryRewriteKeyPropertyAccess(
             DbPropertyExpression propertyExpression,
@@ -1706,7 +1757,8 @@ namespace System.Data.Query.PlanCompiler
 
             Op op = _iqtCommand.CreateConditionalOp(OpType.IsNull);
 
-            //If we have recognized that the result is always false, return IsNull(true), to still have predicate as output.
+            //If we have recognized that the result is always false, return IsNull(true), to still have
+            // predicate as output.
             //This gets further simplified by transformation rules.
             if (isAlwaysFalse)
             {
@@ -1812,8 +1864,10 @@ namespace System.Data.Query.PlanCompiler
         /// Encapsulates the logic required to convert a SetOp (Except, Intersect, UnionAll) expression
         /// into an IQT Node/Op pair.
         /// </summary>
-        /// <param name="expression">The DbExceptExpression, DbIntersectExpression or DbUnionAllExpression to convert, as an instance of DbBinaryExpression</param>
-        /// <returns>A new IQT Node that references the ExceptOp, IntersectOp or UnionAllOp created based on the expression</returns>
+        /// <param name="expression">The DbExceptExpression, DbIntersectExpression or DbUnionAllExpression
+        // to convert, as an instance of DbBinaryExpression</param>
+        /// <returns>A new IQT Node that references the ExceptOp, IntersectOp or UnionAllOp created based on
+        // the expression</returns>
         private Node VisitSetOpExpression(DbBinaryExpression expression)
         {
             PlanCompiler.Assert(
@@ -1839,12 +1893,14 @@ namespace System.Data.Query.PlanCompiler
             leftNode = BuildSoftCast(leftNode, expression.ResultType);
             rightNode = BuildSoftCast(rightNode, expression.ResultType);
 
-            // The SetOp produces a single Var of the same type as the element type of the expression's collection result type
+            // The SetOp produces a single Var of the same type as the element type of the expression's
+            // collection result type
             Var outputVar = _iqtCommand.CreateSetOpVar(
                 TypeHelpers.GetEdmType<CollectionType>(expression.ResultType).TypeUsage
             );
 
-            // Create VarMaps for the left and right arguments that map the output Var to the Var produced by the corresponding argument
+            // Create VarMaps for the left and right arguments that map the output Var to the Var produced by
+            // the corresponding argument
             VarMap leftMap = new VarMap();
             leftMap.Add(outputVar, _varMap[leftNode]);
 
@@ -1943,7 +1999,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Represents one or more type filters that should be AND'd together to produce an aggregate IsOf filter expression
+        /// Represents one or more type filters that should be AND'd together to produce an aggregate IsOf
+        // filter expression
         /// </summary>
         private class IsOfFilter
         {
@@ -1953,7 +2010,8 @@ namespace System.Data.Query.PlanCompiler
             private readonly TypeUsage requiredType;
 
             /// <summary>
-            /// Indicates whether elements of the filtered input set may be of a subtype (IsOf) of the required type
+            /// Indicates whether elements of the filtered input set may be of a subtype (IsOf) of the required
+            // type
             /// and still satisfy the IsOfFilter, or must be exactly of the required type (IsOfOnly) to do so.
             /// </summary>
             private readonly bool isExact;
@@ -2001,10 +2059,12 @@ namespace System.Data.Query.PlanCompiler
                     result = new IsOfFilter(otherRequiredType, otherIsExact);
                     result.next = this;
                 }
-                // Two IsOf filters can potentially be adjusted - the more specific type filter should be kept, if present
+                // Two IsOf filters can potentially be adjusted - the more specific type filter should be kept, if
+                // present
                 else if (!this.isExact && !otherIsExact)
                 {
-                    // At this point the types cannot be equal. If one filter specifies a type that is a subtype of the other,
+                    // At this point the types cannot be equal. If one filter specifies a type that is a subtype of the
+                    // other,
                     // then the subtype filter is the one that should remain
                     if (otherRequiredType.IsSubtypeOf(this.requiredType))
                     {
@@ -2042,7 +2102,8 @@ namespace System.Data.Query.PlanCompiler
                         TypeUsage isOfType = (this.isExact ? otherRequiredType : this.requiredType);
 
                         // IsOf(Super) && IsOfOnly(Sub) => IsOfOnly(Sub)
-                        // In all other cases, both filters remain - even though the IsOfOnly(Super) and IsOf(Sub) is obviously a contradiction.
+                        // In all other cases, both filters remain - even though the IsOfOnly(Super) and IsOf(Sub) is
+                        // obviously a contradiction.
                         // SC_
                         if (isOfOnlyType.IsSubtypeOf(isOfType))
                         {
@@ -2198,7 +2259,8 @@ namespace System.Data.Query.PlanCompiler
                 case DbExpressionKind.OfType:
                 case DbExpressionKind.OfTypeOnly:
                     {
-                        // Examine the interaction of this nested OfType filter with the OfType filter we are trying to apply
+                        // Examine the interaction of this nested OfType filter with the OfType filter we are trying to
+                        // apply
                         // and construct an aggregated type filter (where possible)
                         DbOfTypeExpression ofTypeExp = (DbOfTypeExpression)current;
                         typeFilter = typeFilter.Merge(ofTypeExp);
@@ -2237,7 +2299,8 @@ namespace System.Data.Query.PlanCompiler
 
                 case DbExpressionKind.Sort:
                     {
-                        // The IsOf filter is applied to the Sort input, then the sort keys are reapplied to create a new Sort expression.
+                        // The IsOf filter is applied to the Sort input, then the sort keys are reapplied to create a new
+                        // Sort expression.
                         DbSortExpression sort = (DbSortExpression)current;
                         DbExpression sortInput = ApplyIsOfFilter(sort.Input.Expression, typeFilter);
                         result = sortInput.BindAs(sort.Input.VariableName).Sort(sort.SortOrder);
@@ -2255,14 +2318,19 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Build the equivalent of an OfTypeExpression over the input (ie) produce the set of values from the
-        /// input that are of the desired type (exactly of the desired type, if the "includeSubtypes" parameter is false).
+        /// Build the equivalent of an OfTypeExpression over the input (ie) produce the set of values from
+        // the
+        /// input that are of the desired type (exactly of the desired type, if the "includeSubtypes"
+        // parameter is false).
         ///
         /// Further more, "update" the result element type to be the desired type.
         ///
-        /// We accomplish this by first building a FilterOp with an IsOf (or an IsOfOnly) predicate for the desired
-        /// type. We then build out a ProjectOp over the FilterOp, where we introduce a "Fake" TreatOp over the input
-        /// element to cast it to the right type. The "Fake" TreatOp is only there for "compile-time" typing reasons,
+        /// We accomplish this by first building a FilterOp with an IsOf (or an IsOfOnly) predicate for the
+        // desired
+        /// type. We then build out a ProjectOp over the FilterOp, where we introduce a "Fake" TreatOp over
+        // the input
+        /// element to cast it to the right type. The "Fake" TreatOp is only there for "compile-time" typing
+        // reasons,
         /// and will be ignored in the rest of the plan compiler
         /// </summary>
         // <param name="inputNode">the input collection</param>
@@ -2284,7 +2352,8 @@ namespace System.Data.Query.PlanCompiler
             DbExpression rewrittenIsOfFilter = ApplyIsOfFilter(e.Argument, new IsOfFilter(e));
 
             //
-            // Visit the collection argument and ensure that it is a RelOp suitable for subsequent use in the Filter/Project used to convert OfType.
+            // Visit the collection argument and ensure that it is a RelOp suitable for subsequent use in the
+            // Filter/Project used to convert OfType.
             //
             Node inputNode = EnsureRelOp(VisitExpr(rewrittenIsOfFilter));
 
@@ -2682,7 +2751,8 @@ namespace System.Data.Query.PlanCompiler
             }
 
             //
-            // Assert that a JoinOp was produced. This check is again in case a new JoinType is introduced to CQT and this method is not updated.
+            // Assert that a JoinOp was produced. This check is again in case a new JoinType is introduced to
+            // CQT and this method is not updated.
             //
             PlanCompiler.Assert(
                 joinOp != null,
@@ -2690,7 +2760,8 @@ namespace System.Data.Query.PlanCompiler
             );
 
             //
-            // If the Join condition was present then add its converted form to the list of child nodes for the new Join node.
+            // If the Join condition was present then add its converted form to the list of child nodes for the
+            // new Join node.
             //
             if (e.ExpressionKind != DbExpressionKind.CrossJoin)
             {
@@ -2702,7 +2773,8 @@ namespace System.Data.Query.PlanCompiler
             }
 
             //
-            // Create and return a new projection that unifies the multiple vars produced by the Join columns into a single record constructor.
+            // Create and return a new projection that unifies the multiple vars produced by the Join columns
+            // into a single record constructor.
             //
             return ProjectNewRecord(
                 _iqtCommand.CreateNode(joinOp, inputNodes),
@@ -2752,7 +2824,8 @@ namespace System.Data.Query.PlanCompiler
             );
 
             //
-            // Create a new Node with the correct ApplyOp as its Op and the input and apply nodes as its child nodes.
+            // Create a new Node with the correct ApplyOp as its Op and the input and apply nodes as its child
+            // nodes.
             //
             ApplyBaseOp applyOp = null;
             if (DbExpressionKind.CrossApply == e.ExpressionKind)
@@ -2767,7 +2840,8 @@ namespace System.Data.Query.PlanCompiler
             Node retNode = _iqtCommand.CreateNode(applyOp, inputNode, applyNode);
 
             //
-            // Create and return a new projection that unifies the vars produced by the input and apply columns into a single record constructor.
+            // Create and return a new projection that unifies the vars produced by the input and apply columns
+            // into a single record constructor.
             //
             return ProjectNewRecord(
                 retNode,
@@ -2838,9 +2912,12 @@ namespace System.Data.Query.PlanCompiler
             _varScopes.Push(scope);
 
             //
-            // Process the Aggregates: For each DbAggregate, produce the corresponding IQT conversion depending on whether the DbAggregate is a DbFunctionAggregate or DbGroupAggregate.
-            // The converted Node is then used as the child node of a VarDefOp Node that is added to a list of Aggregate VarDefs or Group Aggregate VarDefs correspondingly.
-            // The Var defined by the converted DbAggregate is added only to the overall list of Vars produced by the GroupBy (not the list of Keys).
+            // Process the Aggregates: For each DbAggregate, produce the corresponding IQT conversion depending
+            // on whether the DbAggregate is a DbFunctionAggregate or DbGroupAggregate.
+            // The converted Node is then used as the child node of a VarDefOp Node that is added to a list of
+            // Aggregate VarDefs or Group Aggregate VarDefs correspondingly.
+            // The Var defined by the converted DbAggregate is added only to the overall list of Vars produced
+            // by the GroupBy (not the list of Keys).
             //
             List<Node> aggVarDefNodes = new List<Node>();
             Node groupAggDefNode = null;
@@ -2894,8 +2971,10 @@ namespace System.Data.Query.PlanCompiler
             // Construct the GroupBy. This consists of a GroupByOp (or GroupByIntoOp) with 3 (or 4) children:
             // 1. The Node produced from the Input set
             // 2. A VarDefListOp Node that uses the Key VarDefs to define the Key Vars (created above)
-            // 3. A VarDefListOp Node that uses the Aggregate VarDefs to define the Aggregate Vars (created above)
-            // 4. For a GroupByIntoOp a verDefLIstOp Node with a single var def node that defines the group aggregate
+            // 3. A VarDefListOp Node that uses the Aggregate VarDefs to define the Aggregate Vars (created
+            // above)
+            // 4. For a GroupByIntoOp a verDefLIstOp Node with a single var def node that defines the group
+            // aggregate
             //
             List<Node> groupByChildren = new List<Node>();
             groupByChildren.Add(inputNode); // The Node produced from the Input set
@@ -2926,7 +3005,8 @@ namespace System.Data.Query.PlanCompiler
             Node groupByNode = _iqtCommand.CreateNode(op, groupByChildren);
 
             //
-            // Create and return a projection that unifies the multiple output vars of the GroupBy into a single record constructor.
+            // Create and return a projection that unifies the multiple output vars of the GroupBy into a single
+            // record constructor.
             //
             return ProjectNewRecord(
                 groupByNode,
@@ -2950,7 +3030,8 @@ namespace System.Data.Query.PlanCompiler
             // Process the Keys: For each Key, produce the corresponding IQT conversion.
             // The converted Node is then used as the child node of a VarDefOp Node that is
             // added to a list of Key VarDefs. The Var defined by the converted Key expression
-            // is added to both the overall list of Vars produced by the GroupBy and the list of Key vars produced by the GroupBy.
+            // is added to both the overall list of Vars produced by the GroupBy and the list of Key vars
+            // produced by the GroupBy.
             //
             keyVarDefNodes = new List<Node>();
             for (int idx = 0; idx < e.Keys.Count; idx++)
@@ -2967,11 +3048,13 @@ namespace System.Data.Query.PlanCompiler
                 PlanCompiler.Assert(keyOp != null, "GroupBy Key is not a ScalarOp");
 
                 //
-                // Create a ComputedVar with the same type as the Key and add it to both the set of output Vars produced by the GroupBy and the set of Key vars.
+                // Create a ComputedVar with the same type as the Key and add it to both the set of output Vars
+                // produced by the GroupBy and the set of Key vars.
                 //
                 Var keyVar;
                 //
-                // Create a VarDefOp that uses the converted form of the Key to define the ComputedVar and add it to the list of Key VarDefs.
+                // Create a VarDefOp that uses the converted form of the Key to define the ComputedVar and add it to
+                // the list of Key VarDefs.
                 //
                 keyVarDefNodes.Add(_iqtCommand.CreateVarDefNode(keyNode, out keyVar));
                 outputVarSet.Set(keyVar);
@@ -2979,10 +3062,12 @@ namespace System.Data.Query.PlanCompiler
             }
 
             //
-            // Before the Aggregates are processed, the Input variable must be taken out of scope and the 'group' variable introduced into scope in its place
+            // Before the Aggregates are processed, the Input variable must be taken out of scope and the
+            // 'group' variable introduced into scope in its place
             // This is done as follows:
             // 1. Pop the current ExpressionBindingScope from the stack
-            // 2. Create a new ExpressionBindingScope using the same Var but the name of the 'group' variable from the DbGroupByExpression's DbGroupExpressionBinding
+            // 2. Create a new ExpressionBindingScope using the same Var but the name of the 'group' variable
+            // from the DbGroupByExpression's DbGroupExpressionBinding
             // 3. Push this new scope onto the variable scope stack.
             //
             scope = ExitExpressionBinding();
@@ -3020,7 +3105,8 @@ namespace System.Data.Query.PlanCompiler
         ///    1. If there are no keys:  copyOfInput;
         ///    2. If there are keys:
         ///
-        ///  Filter (keyDef1 = copyOfKeyDef1 or keyDef1 is null and copyOfKeyDef1 is null) and ... and (keyDefn = copyOfKeyDefn or keyDefn is null and copyOfKeyDefn is null)
+        ///  Filter (keyDef1 = copyOfKeyDef1 or keyDef1 is null and copyOfKeyDef1 is null) and ... and
+        // (keyDefn = copyOfKeyDefn or keyDefn is null and copyOfKeyDefn is null)
         ///    |
         ///  Project (copyOfInput, copyOfKeyDef1, copyOfKeyDef1, ... copyOfKeyDefn)
         ///    |
@@ -3073,7 +3159,8 @@ namespace System.Data.Query.PlanCompiler
                     Var copyOfKeyVar = ((VarDefOp)copyOfKeyVarDef.Op).Var;
 
                     //
-                    // The keys of type row need to be flattened, because grouping by a row means grouping by its individual
+                    // The keys of type row need to be flattened, because grouping by a row means grouping by its
+                    // individual
                     // members and thus we have to check the individual members whether they are null.
                     // IsNull(x) where x is a row type does not mean whether the individual properties of x are null,
                     // but rather whether the entire row is null.
@@ -3190,10 +3277,14 @@ namespace System.Data.Query.PlanCompiler
         /// Common processing for the identical input and sort order arguments to the unrelated
         /// DbSkipExpression and DbSortExpression types.
         /// </summary>
-        /// <param name="input">The input DbExpressionBinding from the DbSkipExpression or DbSortExpression</param>
-        /// <param name="sortOrder">The list of SortClauses from the DbSkipExpression or DbSortExpression</param>
-        /// <param name="sortKeys">A list to contain the converted SortKeys produced from the SortClauses</param>
-        /// <param name="inputVar">The Var produced by the input to the DbSkipExpression or DbSortExpression</param>
+        /// <param name="input">The input DbExpressionBinding from the DbSkipExpression or
+        // DbSortExpression</param>
+        /// <param name="sortOrder">The list of SortClauses from the DbSkipExpression or
+        // DbSortExpression</param>
+        /// <param name="sortKeys">A list to contain the converted SortKeys produced from the
+        // SortClauses</param>
+        /// <param name="inputVar">The Var produced by the input to the DbSkipExpression or
+        // DbSortExpression</param>
         /// <returns>
         ///     The converted form of the input to the DbSkipExpression or DbSortExpression, capped by a
         ///     ProjectOp that defines and Vars referenced by the SortKeys.
@@ -3352,7 +3443,8 @@ namespace System.Data.Query.PlanCompiler
             SortOp newSortOp = _iqtCommand.CreateSortOp(sortKeys);
 
             //
-            // Create a new SortOp Node that has the new SortOp as its Op the Key-defining ProjectOp Node as its only child.
+            // Create a new SortOp Node that has the new SortOp as its Op the Key-defining ProjectOp Node as its
+            // only child.
             //
             Node newSortNode = _iqtCommand.CreateNode(newSortOp, inputNode);
 
@@ -3390,8 +3482,10 @@ namespace System.Data.Query.PlanCompiler
             //
             // If the quantifier is All then the predicate must become 'Not(Predicate) Or IsNull(Predicate)',
             // since the converted form of the predicate should exclude a member of the input set if and only if
-            // the predicate evaluates to False - filtering only with the negated predicate would also exclude members
-            // for which that negated predicate evaluates to null, possibly resulting in an erroneous empty result set
+            // the predicate evaluates to False - filtering only with the negated predicate would also exclude
+            // members
+            // for which that negated predicate evaluates to null, possibly resulting in an erroneous empty
+            // result set
             // and causing the quantifier to produce a false positive result.
             //
             if (DbExpressionKind.All == e.ExpressionKind)
@@ -3426,7 +3520,8 @@ namespace System.Data.Query.PlanCompiler
             ExitExpressionBinding();
 
             //
-            // Create a FilterOp around the original input set and map the FilterOp to the Var produced by the original input set.
+            // Create a FilterOp around the original input set and map the FilterOp to the Var produced by the
+            // original input set.
             //
             Var inputVar = _varMap[inputNode];
             inputNode = _iqtCommand.CreateNode(

@@ -460,8 +460,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return the ID of the control that this builder creates
-         */
+        * Return the ID of the control that this builder creates
+        */
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -506,7 +506,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        ///    <para> InPageTheme property indicates if the control builder is used to generate page themes.</para>
+        ///    <para> InPageTheme property indicates if the control builder is used to generate page
+        // themes.</para>
         /// </devdoc>
         protected bool InPageTheme
         {
@@ -725,7 +726,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// The template control that hosts the current control. For example, it is the usercontrol for controls defined in a usercontrol file.
+        /// The template control that hosts the current control. For example, it is the usercontrol for
+        // controls defined in a usercontrol file.
         /// This property is available only in non-compiled cases.
         /// </devdoc>
         internal TemplateControl TemplateControl
@@ -1048,11 +1050,12 @@ namespace System.Web.UI
         /// </devdoc>
         private void AddComplexProperty(string filter, string name, ControlBuilder builder)
         {
-            // VSWhidbey 281887 Do not ignore complex properties, since templates could be defined inside collections
+            // VSWhidbey 281887 Do not ignore complex properties, since templates could be defined inside
+            // collections
             // , databinding or code can be placed inside templates.
             /*
             if (IgnoreControlProperty) {
-                return;
+            return;
             }
             */
 
@@ -1143,10 +1146,12 @@ namespace System.Web.UI
         {
             Debug.Assert(!String.IsNullOrEmpty(name));
 
-            //Second check is a hack to make the intellisense work with strongly typed controls. Existence of ModelType property
+            //Second check is a hack to make the intellisense work with strongly typed controls. Existence of
+            // ModelType property
             //should force creation of code to make the intellisense to work, so far this is the only property
             //that is required to be identified at design time.
-            //If there's atleast one more property, this hack should be removed and another way should be figured out.
+            //If there's atleast one more property, this hack should be removed and another way should be
+            // figured out.
             if (
                 IgnoreControlProperty
                 && !name.Equals(ItemTypeProperty, StringComparison.OrdinalIgnoreCase)
@@ -1406,9 +1411,9 @@ namespace System.Web.UI
         private void AddTemplateProperty(string filter, string name, TemplateBuilder builder)
         {
             /* Do not ignore template properties since we do want to generate IDs for controls defined
-               inside SingleInstanceTemplates. VSWhidbey 243341
+            inside SingleInstanceTemplates. VSWhidbey 243341
             if (IgnoreControlProperty) {
-                return;
+            return;
             }
             */
 
@@ -1649,7 +1654,8 @@ namespace System.Web.UI
 
                     if (!String.IsNullOrEmpty(text))
                     {
-                        // Make sure we haven't set this property in the attributes already (special case for TextBox and similar things)
+                        // Make sure we haven't set this property in the attributes already (special case for TextBox and
+                        // similar things)
                         AddComplexProperty(subBuilder.Filter, propName, subBuilder);
                     }
                 }
@@ -1896,7 +1902,8 @@ namespace System.Web.UI
         internal object BuildObjectInternal()
         {
             // Can't assert these anymore since we've discarded this information by the time we call this method
-            // Debug.Assert(InDesigner || CompilationMode == CompilationMode.Never, "Expected to be in designer mode.");
+            // Debug.Assert(InDesigner || CompilationMode == CompilationMode.Never, "Expected to be in designer
+            // mode.");
             // Since getting the ConstructorNeedsTagAttribute is very expensive, cache
             // the result in a flag
             if (!flags[needsTagAttributeComputed])
@@ -2314,7 +2321,8 @@ namespace System.Web.UI
                     ) && !defaultProperty
                 )
                 {
-                    // If the property is supposed to be declared as an attribute on a control tag, throw if it was declared as an inner property
+                    // If the property is supposed to be declared as an attribute on a control tag, throw if it was
+                    // declared as an inner property
                     // We don't throw if we are simply building the DefaultPropertyBuilder.
                     throw new HttpException(
                         SR.GetString(
@@ -2709,7 +2717,8 @@ namespace System.Web.UI
         internal virtual void InitObject(object obj)
         {
             // Can't assert these anymore since we've discarded this information by the time we call this method
-            // Debug.Assert(InDesigner || CompilationMode == CompilationMode.Never, "Expected to be in designer mode.");
+            // Debug.Assert(InDesigner || CompilationMode == CompilationMode.Never, "Expected to be in designer
+            // mode.");
             // Make sure we initialize the property entries in the right order
             EnsureEntriesSorted();
 
@@ -3117,9 +3126,11 @@ namespace System.Web.UI
             /*System.Web.UI.WebControls.DropDownList dataBindingExpressionBuilderTarget;
             dataBindingExpressionBuilderTarget = ((System.Web.UI.WebControls.DropDownList)(sender));
             System.Web.UI.IDataItemContainer Container;
-            Container = ((System.Web.UI.IDataItemContainer)(dataBindingExpressionBuilderTarget.BindingContainer));
+            Container =
+            ((System.Web.UI.IDataItemContainer)(dataBindingExpressionBuilderTarget.BindingContainer));
             if ((this.Page.GetDataItem() != null)) {
-                dataBindingExpressionBuilderTarget.SelectedValue = System.Convert.ToString(this.Eval("FavVegetable"));
+            dataBindingExpressionBuilderTarget.SelectedValue =
+            System.Convert.ToString(this.Eval("FavVegetable"));
             }*/
 
             bool isBindableTemplateBuilder = this is BindableTemplateBuilder;
@@ -3579,7 +3590,8 @@ namespace System.Web.UI
                         }
                     }
 
-                    // Pass the code expression to AddBoundProperty since the Eval expression needs to be compiled in skin files.
+                    // Pass the code expression to AddBoundProperty since the Eval expression needs to be compiled in
+                    // skin files.
                     // The bind expression needs to call without code
                     if (InPageTheme && !isTwoWayBindingStatement)
                     {
@@ -3769,7 +3781,8 @@ namespace System.Web.UI
             string localize = (string)((IDictionary)attribs)["meta:localize"];
             if (localize != null)
             {
-                // Depending on the control type, don't allow meta:localize (e.g. ITemplate case) (VSWhidbey 276398, 454894)
+                // Depending on the control type, don't allow meta:localize (e.g. ITemplate case) (VSWhidbey 276398,
+                // 454894)
                 if (!IsValidForImplicitLocalization())
                 {
                     throw new InvalidOperationException(
@@ -3800,7 +3813,8 @@ namespace System.Web.UI
             if (keyPrefix == null)
                 return;
 
-            // Depending on the control type, don't allow meta:reskey (e.g. ITemplate case) (VSWhidbey 276398, 454894)
+            // Depending on the control type, don't allow meta:reskey (e.g. ITemplate case) (VSWhidbey 276398,
+            // 454894)
             if (!IsValidForImplicitLocalization())
             {
                 throw new InvalidOperationException(
@@ -3914,7 +3928,8 @@ namespace System.Web.UI
         {
             ProcessImplicitResources(attribs);
 
-            //Since the attribute column values are only used for generating line pragmas at design time for intellisense to work,
+            //Since the attribute column values are only used for generating line pragmas at design time for
+            // intellisense to work,
             //we populate that only at design time so that runtime memory usage is not affected.
             bool isDesignerMode = BuildManagerHost.InClientBuildManager;
             IDictionary<String, Pair> attributeValuePositions = null;
@@ -4097,7 +4112,8 @@ namespace System.Web.UI
         ) { }
 
         /// <devdoc>
-        /// Make sure the given property with the specified context (using SetAttribute to set the value or a directive property) is persistable
+        /// Make sure the given property with the specified context (using SetAttribute to set the value or
+        // a directive property) is persistable
         /// throwing otherwise
         /// </devdoc>
         private void ValidatePersistable(
@@ -4136,7 +4152,8 @@ namespace System.Web.UI
                     // We don't do it for sub-properties (e.g. Font-Name="Arial") since it would
                     // break backwards compatibility with v1.1 (where we did not do these checks).
 
-                    // If it's an HtmlControl, check the HtmlControlPersistableAttribute to see if the property is persistable
+                    // If it's an HtmlControl, check the HtmlControlPersistableAttribute to see if the property is
+                    // persistable
                     if (IsHtmlControl)
                     {
                         if (propDesc.Attributes.Contains(HtmlControlPersistableAttribute.No))

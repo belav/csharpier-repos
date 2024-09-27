@@ -139,7 +139,7 @@ namespace MonoTests.System.CodeDom.Compiler
 
         private class SampleCodeGenerator : CodeGenerator
         {
-            /* test overrides */
+/* test overrides */
             protected override void GenerateAttributeDeclarationsStart(
                 CodeAttributeDeclarationCollection attributes
             )
@@ -156,7 +156,7 @@ namespace MonoTests.System.CodeDom.Compiler
                 Output.Write("IMPORT");
             }
 
-            /* must overrides */
+/* must overrides */
             protected override string NullToken
             {
                 get { return string.Empty; }

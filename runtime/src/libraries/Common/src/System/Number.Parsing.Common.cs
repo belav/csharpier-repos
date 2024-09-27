@@ -48,8 +48,10 @@ namespace System
             {
                 currSymbol = info.CurrencySymbol;
 
-                // The idea here is to match the currency separators and on failure match the number separators to keep the perf of VB's IsNumeric fast.
-                // The values of decSep are setup to use the correct relevant separator (currency in the if part and decimal in the else part).
+                // The idea here is to match the currency separators and on failure match the number separators to
+                // keep the perf of VB's IsNumeric fast.
+                // The values of decSep are setup to use the correct relevant separator (currency in the if part and
+                // decimal in the else part).
                 decSep = info.CurrencyDecimalSeparator;
                 groupSep = info.CurrencyGroupSeparator;
                 parsingCurrency = true;
@@ -163,7 +165,8 @@ namespace System
 
                         if (digCount < maxDigCount)
                         {
-                            // Handle a case like "53.0". We need to ignore trailing zeros in the fractional part for floating point numbers, so we keep a count of the number of trailing zeros and update digCount later
+                            // Handle a case like "53.0". We need to ignore trailing zeros in the fractional part for floating
+                            // point numbers, so we keep a count of the number of trailing zeros and update digCount later
                             if (ch == '0')
                             {
                                 numberOfTrailingZeros++;
@@ -240,7 +243,8 @@ namespace System
                             // Check if we are about to overflow past our limit of 9 digits
                             if (exp >= 100_000_000)
                             {
-                                // Set exp to Int.MaxValue to signify the requested exponent is too large. This will lead to an OverflowException later.
+                                // Set exp to Int.MaxValue to signify the requested exponent is too large. This will lead to an
+                                // OverflowException later.
                                 exp = int.MaxValue;
                                 number.Scale = 0;
 

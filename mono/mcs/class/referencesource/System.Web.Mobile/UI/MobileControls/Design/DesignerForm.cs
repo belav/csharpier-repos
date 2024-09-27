@@ -18,8 +18,8 @@ namespace System.Web.UI.Design.MobileControls
     using System.Windows.Forms.Design;
     using Form = System.Windows.Forms.Form;
 
-    /*
-      
+/*
+
 
 
 
@@ -103,7 +103,8 @@ namespace System.Web.UI.Design.MobileControls
         }
 
         /// <devdoc>
-        /// Gets a service of the desired type. Returns null if the service does not exist or there is no service provider.
+        /// Gets a service of the desired type. Returns null if the service does not exist or there is no
+        // service provider.
         /// </devdoc>
         protected override object GetService(Type serviceType)
         {

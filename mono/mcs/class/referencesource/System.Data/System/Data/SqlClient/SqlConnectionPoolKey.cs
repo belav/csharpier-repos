@@ -13,7 +13,8 @@ namespace System.Data.SqlClient
     using System.Data.Common;
     using System.Diagnostics;
 
-    // SqlConnectionPoolKey: Implementation of a key to connection pool groups for specifically to be used for SqlConnection
+    // SqlConnectionPoolKey: Implementation of a key to connection pool groups for specifically to be
+    // used for SqlConnection
     //  Connection string and SqlCredential are used as a key
     internal class SqlConnectionPoolKey : DbConnectionPoolKey, ICloneable
     {

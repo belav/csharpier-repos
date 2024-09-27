@@ -7,8 +7,9 @@
 using System.Diagnostics.CodeAnalysis;
 
 /*
- This class has the HostProtectionAttribute. The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.
- Suppress FxCop message - BUT REVISIT IF ADDING NEW SECURITY ATTRIBUTES.
+This class has the HostProtectionAttribute. The purpose of this attribute is to enforce
+host-specific programming model guidelines, not security behavior.
+Suppress FxCop message - BUT REVISIT IF ADDING NEW SECURITY ATTRIBUTES.
 */
 [assembly: SuppressMessage(
     "Microsoft.Security",
@@ -166,7 +167,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptorCollection'/> class.
+        ///       Initializes a new instance of the <see
+        // cref='System.ComponentModel.EventDescriptorCollection'/> class.
         ///    </para>
         /// </devdoc>
         public EventDescriptorCollection(EventDescriptor[] events)
@@ -455,7 +457,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this EventDescriptorCollection, using the default sort for this collection,
+        ///       Sorts the members of this EventDescriptorCollection, using the default sort for this
+        // collection,
         ///       which is usually alphabetical.
         ///    </para>
         /// </devdoc>
@@ -471,7 +474,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this EventDescriptorCollection.  Any specified NamedSort arguments will
+        ///       Sorts the members of this EventDescriptorCollection.  Any specified NamedSort arguments
+        // will
         ///       be applied first, followed by sort using the specified IComparer.
         ///    </para>
         /// </devdoc>
@@ -487,7 +491,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this EventDescriptorCollection.  Any specified NamedSort arguments will
+        ///       Sorts the members of this EventDescriptorCollection.  Any specified NamedSort arguments
+        // will
         ///       be applied first, followed by sort using the specified IComparer.
         ///    </para>
         /// </devdoc>
@@ -498,7 +503,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this EventDescriptorCollection, using the specified IComparer to compare,
+        ///       Sorts the members of this EventDescriptorCollection, using the specified IComparer to
+        // compare,
         ///       the EventDescriptors contained in the collection.
         ///    </para>
         /// </devdoc>
@@ -514,7 +520,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this EventDescriptorCollection.  Any specified NamedSort arguments will
+        ///       Sorts the members of this EventDescriptorCollection.  Any specified NamedSort arguments
+        // will
         ///       be applied first, followed by sort using the specified IComparer.
         ///    </para>
         /// </devdoc>

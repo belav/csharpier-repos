@@ -180,10 +180,13 @@ namespace System.ServiceModel.Transactions
             }
         }
 
-        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next version.
-        /*
-        [PermissionSet(SecurityAction.Demand, Unrestricted = true)] // because we use ProtocolInformationReader, which is defined in a non-APTCA assembly; WSATs are not supported in partial trust, so customers should not be broken by this demand
-        */
+        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next
+        // version.
+/*
+[PermissionSet(SecurityAction.Demand, Unrestricted = true)] // because we use
+ProtocolInformationReader, which is defined in a non-APTCA assembly; WSATs are not supported in
+partial trust, so customers should not be broken by this demand
+*/
         void ReadExtendedProtocol(MemoryStream mem, uint cbTmProtocolData)
         {
             // Read the WSAT1.0 protoocol identifier

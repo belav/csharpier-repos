@@ -6,7 +6,8 @@ using Microsoft.Extensions.Localization;
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
 /// <summary>
-/// An <see cref="IHtmlLocalizer"/> that uses the provided <see cref="IStringLocalizer"/> to do HTML-aware
+/// An <see cref="IHtmlLocalizer"/> that uses the provided <see cref="IStringLocalizer"/> to do
+// HTML-aware
 /// localization of content.
 /// </summary>
 public class HtmlLocalizer : IHtmlLocalizer
@@ -77,7 +78,8 @@ public class HtmlLocalizer : IHtmlLocalizer
     /// Creates a new <see cref="LocalizedHtmlString"/> for a <see cref="LocalizedString"/>.
     /// </summary>
     /// <param name="result">The <see cref="LocalizedString"/>.</param>
-    /// <param name="arguments">The value arguments which will be used in construting the message.</param>
+    /// <param name="arguments">The value arguments which will be used in construting the
+    // message.</param>
     protected virtual LocalizedHtmlString ToHtmlString(
         LocalizedString result,
         object[] arguments

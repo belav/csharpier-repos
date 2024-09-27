@@ -6,7 +6,8 @@ using System.Diagnostics;
 using System.Reflection.TypeLoading;
 
 //
-// This file shims just enough stuff so that source code copied from Reflection.Core builds with as few source changes
+// This file shims just enough stuff so that source code copied from Reflection.Core builds with as
+// few source changes
 // as possible.
 //
 
@@ -39,7 +40,8 @@ namespace Internal.Reflection.Core.Execution
 namespace System.Collections.Concurrent
 {
     //
-    // Reflection.Core couldn't use ConcurrentDictionary because of layering so it had its own implementation.
+    // Reflection.Core couldn't use ConcurrentDictionary because of layering so it had its own
+    // implementation.
     // This emulates the old interface.
     //
     internal abstract class ConcurrentUnifier<K, V>

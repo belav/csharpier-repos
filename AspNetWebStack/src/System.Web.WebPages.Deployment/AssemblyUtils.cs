@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -93,7 +94,8 @@ namespace System.Web.WebPages.Deployment
         }
 
         /// <summary>
-        /// Returns the version of a System.Web.WebPages.Deployment.dll if it is present in the bin and matches the name and
+        /// Returns the version of a System.Web.WebPages.Deployment.dll if it is present in the bin and
+        // matches the name and
         /// public key token of the current assembly.
         /// </summary>
         /// <returns>Version from bin if present, null otherwise.</returns>
@@ -104,7 +106,8 @@ namespace System.Web.WebPages.Deployment
         )
         {
             // If a version of the assembly is present both in the bin and the GAC, the GAC would win.
-            // To work around this, we'll look for a physical file on disk with the same name as the current assembly and load it to determine the version.
+            // To work around this, we'll look for a physical file on disk with the same name as the current
+            // assembly and load it to determine the version.
             // Determine if the Deployment assembly is present in the bin
             var assemblyInBin = Path.Combine(binDirectory, _binFileName);
             if (fileSystem.FileExists(assemblyInBin))

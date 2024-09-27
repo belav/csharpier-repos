@@ -64,24 +64,24 @@ namespace DbLinq.Ingres
 
             public string ConstraintName;
 
-            /*
-            public string[] column_name_primaries
-            {
-                get
-                {
-                    string[] tmp = TextSegment
-                        .Replace("PRIMARY KEY(", "")
-                        .Replace(")", "")
-                        .Split(',');
-                    for (int i = 0; i < tmp.Length; i++)
-                    {
-                        tmp[i] = tmp[i].Trim();
-                        tmp[i] = tmp[i].Replace("\"", "");
-                    }
-                    return tmp;
-                }
-            }
-             */
+/*
+public string[] column_name_primaries
+{
+get
+{
+string[] tmp = TextSegment
+.Replace("PRIMARY KEY(", "")
+.Replace(")", "")
+.Split(',');
+for (int i = 0; i < tmp.Length; i++)
+{
+tmp[i] = tmp[i].Trim();
+tmp[i] = tmp[i].Replace("\"", "");
+}
+return tmp;
+}
+}
+*/
 
             //public string[] column_name_primaries = new string[] { "", "" };
 

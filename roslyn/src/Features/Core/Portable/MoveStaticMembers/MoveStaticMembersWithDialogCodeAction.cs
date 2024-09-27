@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                         memberNodes,
                         sourceDoc.Project.Solution,
                         moveOptions.Destination!,
-                        // TODO: Find a way to merge/change generic type args for classes, or change PullMembersUp to handle instead
+                        // TODO: Find a way to merge/change generic type args for classes, or change PullMembersUp to handle
+                        // instead
                         typeArgIndices: ImmutableArray<int>.Empty,
                         sourceDoc.Id,
                         destinationDocId,
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 _selectedType,
                 moveOptions.SelectedMembers
             );
-            // which indices of the old type params should we keep for a new class reference, used for refactoring usages
+            // which indices of the old type params should we keep for a new class reference, used for
+            // refactoring usages
             var typeArgIndices = Enumerable
                 .Range(0, _selectedType.TypeParameters.Length)
                 .Where(i => typeParameters.Contains(_selectedType.TypeParameters[i]))
@@ -206,10 +208,12 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
         /// Used when the destination type/file already exists.
         /// </summary>
         /// <param name="selectedMembers">selected member symbols</param>
-        /// <param name="oldMemberNodes">nodes corresponding to those symbols in the old solution, should have been annotated</param>
+        /// <param name="oldMemberNodes">nodes corresponding to those symbols in the old solution, should
+        // have been annotated</param>
         /// <param name="oldSolution">solution without any members moved/refactored</param>
         /// <param name="newType">the type to move to, should be inserted into a document already</param>
-        /// <param name="typeArgIndices">generic type arg indices to keep when refactoring generic class access to the new type. Empty if not relevant</param>
+        /// <param name="typeArgIndices">generic type arg indices to keep when refactoring generic class
+        // access to the new type. Empty if not relevant</param>
         /// <param name="sourceDocId">Id of the document where the mebers are being moved from</param>
         /// <returns>The solution with references refactored and members moved to the newType</returns>
         private async Task<Solution> RefactorAndMoveAsync(
@@ -454,7 +458,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 else if (syntaxFacts.IsIdentifierName(refNode))
                 {
                     // We now are in an identifier name that isn't a member access expression
-                    // This could either be because of a static using, module usage in VB, or because we are in the original source type
+                    // This could either be because of a static using, module usage in VB, or because we are in the
+                    // original source type
                     // either way, we want to change it to a member access expression for the type that is imported
                     docEditor.ReplaceNode(
                         refNode,

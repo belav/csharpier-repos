@@ -850,7 +850,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // TestParseDisplayName("goo, PublicKey=0000000040000000",
             //    expectedParts: 0,
             //    expectedFusion: null, // Fusion rejects the ECMA key.
-            //    expected: new AssemblyIdentity("goo", hasPublicKey: true, publicKeyOrToken: new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0 }.AsImmutable()));
+            //    expected: new AssemblyIdentity("goo", hasPublicKey: true, publicKeyOrToken: new byte[] { 0, 0,
+            // 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0 }.AsImmutable()));
 
             // if public key token calculated from public key matches, then it's ok to specify both
             TestParseDisplayName(

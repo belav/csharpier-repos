@@ -239,7 +239,8 @@ namespace System.DirectoryServices.AccountManagement
         // CRUD
         //
 
-        // Used to perform the specified operation on the Principal.  They also make any needed security subsystem
+        // Used to perform the specified operation on the Principal.  They also make any needed security
+        // subsystem
         // calls to obtain digitial signatures.
         //
         // Insert() and Update() must check to make sure no properties not supported by this StoreCtx
@@ -819,7 +820,8 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             // If it's a fake principal, we don't need to do any of the lookup to find a local representation.
-            // We'll skip straight to GetGroupsMemberOf(Principal), which will lookup the groups to which it belongs via its SID.
+            // We'll skip straight to GetGroupsMemberOf(Principal), which will lookup the groups to which it
+            // belongs via its SID.
             if (foreignPrincipal.fakePrincipal)
             {
                 GlobalDebug.WriteLineIf(
@@ -994,13 +996,18 @@ namespace System.DirectoryServices.AccountManagement
         // Cross-store support
         //
 
-        // Given a native store object that represents a "foreign" principal (e.g., a FPO object in this store that
-        // represents a pointer to another store), maps that representation to the other store's StoreCtx and returns
-        // a Principal from that other StoreCtx.  The implementation of this method is highly dependent on the
-        // details of the particular store, and must have knowledge not only of this StoreCtx, but also of how to
+        // Given a native store object that represents a "foreign" principal (e.g., a FPO object in this
+        // store that
+        // represents a pointer to another store), maps that representation to the other store's StoreCtx
+        // and returns
+        // a Principal from that other StoreCtx.  The implementation of this method is highly dependent on
+        // the
+        // details of the particular store, and must have knowledge not only of this StoreCtx, but also of
+        // how to
         // interact with other StoreCtxs to fulfill the request.
         //
-        // This method is typically used by ResultSet implementations, when they're iterating over a collection
+        // This method is typically used by ResultSet implementations, when they're iterating over a
+        // collection
         // (e.g., of group membership) and encounter an entry that represents a foreign principal.
         internal override Principal ResolveCrossStoreRefToPrincipal(object o)
         {

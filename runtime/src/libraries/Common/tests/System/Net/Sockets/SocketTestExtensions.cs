@@ -45,7 +45,8 @@ namespace System.Net.Sockets.Tests
         {
             IPAddress serverAddress = ipv6 ? IPAddress.IPv6Loopback : IPAddress.Loopback;
 
-            // PortBlocker creates a temporary socket of the opposite AddressFamily in the background, so parallel tests won't attempt
+            // PortBlocker creates a temporary socket of the opposite AddressFamily in the background, so
+            // parallel tests won't attempt
             // to create their listener sockets on the same port, regardless of address family.
             // This should prevent 'listener' from accepting DualMode connections of unrelated tests.
             using PortBlocker portBlocker = new PortBlocker(() =>
@@ -174,8 +175,10 @@ namespace System.Net.Sockets.Tests
             _shadowSocket.Dispose();
         }
 
-        // Socket.Bind() auto-enables SO_REUSEADDR on Unix to allow Bind() during TIME_WAIT to emulate Windows behavior, see SystemNative_Bind() in 'pal_networking.c'.
-        // To prevent other sockets from succesfully binding to the same port port, we need to avoid this logic when binding the shadow socket.
+        // Socket.Bind() auto-enables SO_REUSEADDR on Unix to allow Bind() during TIME_WAIT to emulate
+        // Windows behavior, see SystemNative_Bind() in 'pal_networking.c'.
+        // To prevent other sockets from succesfully binding to the same port port, we need to avoid this
+        // logic when binding the shadow socket.
         // This method is doing a custom P/Invoke to bind() on Unix to achieve that.
         private static unsafe bool TryBindWithoutReuseAddress(
             Socket socket,

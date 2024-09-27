@@ -488,7 +488,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 );
             }
 
-            // For now patterns are being blanket disabled for extract method.  This issue covers designing extractions for them
+            // For now patterns are being blanket disabled for extract method.  This issue covers designing
+            // extractions for them
             // and re-enabling this.
             // https://github.com/dotnet/roslyn/issues/9244
             if (commonNode.Kind() == SyntaxKind.IsPatternExpression)
@@ -687,7 +688,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return false;
             }
 
-            // make sure that next token of the last token in the selection is the close braces of containing block
+            // make sure that next token of the last token in the selection is the close braces of containing
+            // block
             if (body.CloseBraceToken != lastToken.GetNextToken(includeZeroWidth: true))
             {
                 return false;

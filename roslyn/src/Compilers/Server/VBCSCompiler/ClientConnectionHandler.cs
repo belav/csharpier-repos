@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         }
 
         /// <summary>
-        /// Handles a client connection. The returned task here will never fail. Instead all exceptions will be wrapped
+        /// Handles a client connection. The returned task here will never fail. Instead all exceptions will
+        // be wrapped
         /// in a <see cref="CompletionReason.RequestError"/>
         /// </summary>
         internal async Task<CompletionData> ProcessAsync(

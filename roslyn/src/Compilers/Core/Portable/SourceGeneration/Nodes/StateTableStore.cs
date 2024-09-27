@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis
 
             public StateTableStore ToImmutable()
             {
-                // we can cache the tables at this point, as we'll no longer be using them to determine current state
+                // we can cache the tables at this point, as we'll no longer be using them to determine current
+                // state
                 var keys = _tableBuilder.Keys.ToArray();
                 foreach (var key in keys)
                 {

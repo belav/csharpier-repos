@@ -70,13 +70,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
         private IVsPackage? _nugetPackageManager;
 
         /// <summary>
-        /// Used to keep track of what types of changes we've seen so we can then determine what to refresh on the UI
-        /// thread.  If we hear about project changes, we only refresh that project.  If we hear about a solution level
+        /// Used to keep track of what types of changes we've seen so we can then determine what to refresh
+        // on the UI
+        /// thread.  If we hear about project changes, we only refresh that project.  If we hear about a
+        // solution level
         /// change, we'll refresh all projects.
         /// </summary>
         /// <remarks>
-        /// <c>solutionChanged == true iff changedProject == null</c> and <c>solutionChanged == false iff changedProject
-        /// != null</c>. So technically having both values is redundant.  However, i like the clarity of having both.
+        /// <c>solutionChanged == true iff changedProject == null</c> and <c>solutionChanged == false iff
+        // changedProject
+        /// != null</c>. So technically having both values is redundant.  However, i like the clarity of
+        // having both.
         /// </remarks>
         private readonly AsyncBatchingWorkQueue<(
             bool solutionChanged,
@@ -94,7 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
         private readonly object _gate = new();
 
         /// <summary>
-        /// Task uses to compute the set of package sources on demand when asked the first time.  The value will be
+        /// Task uses to compute the set of package sources on demand when asked the first time.  The value
+        // will be
         /// computed and cached in the task.  When this value changes, the task will simply be cleared out.
         /// </summary>
         private Task<ImmutableArray<PackageSource>>? _packageSourcesTask;
@@ -140,9 +145,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             _packageSourceProvider = packageSourceProvider;
             _listener = listenerProvider.GetListener(FeatureAttribute.PackageInstaller);
 
-            // Setup the work queue to allow us to hear about flurries of changes and then respond to them in batches
-            // every second.  Note: we pass in EqualityComparer<...>.Default since we don't care about ordering, and
-            // since once we hear about changes to a project (or the whole solution), we don't need to keep track if we
+            // Setup the work queue to allow us to hear about flurries of changes and then respond to them in
+            // batches
+            // every second.  Note: we pass in EqualityComparer<...>.Default since we don't care about ordering,
+            // and
+            // since once we hear about changes to a project (or the whole solution), we don't need to keep
+            // track if we
             // hear about the same thing in that batch window interval.
             _workQueue = new AsyncBatchingWorkQueue<(
                 bool solutionChanged,
@@ -274,7 +282,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             {
                 // If the existing _packageSourcesTask is null, that means no one has asked us about package sources
                 // yet.  So no need for us to do anything if that's true.  We'll just continue waiting until first
-                // asked.  However, if it's not null, that means we have already been asked.  In that case, proactively
+                // asked.  However, if it's not null, that means we have already been asked.  In that case,
+                // proactively
                 // get the new set of sources so they're ready for the next time we're asked.
                 if (_packageSourcesTask != null)
                     _packageSourcesTask = Task.Run(
@@ -668,8 +677,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             CancellationToken cancellationToken
         )
         {
-            // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses ConfigureAwait(true).
-            // GetServiceAsync/GetProxyAsync and the cast below are all explicitly documented as being BG thread safe.
+            // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses
+            // ConfigureAwait(true).
+            // GetServiceAsync/GetProxyAsync and the cast below are all explicitly documented as being BG thread
+            // safe.
             await TaskScheduler.Default;
 
             var serviceContainer = await _brokeredServiceContainer
@@ -750,8 +761,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                 }
             }
 
-            // If we weren't able to get the nuget state for the project (i.e. it's not a c#/vb project, or we got a
-            // crash attempting to get nuget information).  Mark this project as something that nuget-add-import is not
+            // If we weren't able to get the nuget state for the project (i.e. it's not a c#/vb project, or we
+            // got a
+            // crash attempting to get nuget information).  Mark this project as something that nuget-add-import
+            // is not
             // supported for.
             _projectToInstalledPackageAndVersion[projectId] = newState ?? ProjectState.Disabled;
         }

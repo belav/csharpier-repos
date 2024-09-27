@@ -106,8 +106,10 @@ namespace System.IO.Enumeration
                 if (_lastEntryFound)
                     return false;
 
-                // If HAVE_READDIR_R is defined for the platform FindNextEntry depends on _entryBuffer being fixed since
-                // _entry will point to a string in the middle of the array. If the array is not fixed GC can move it after
+                // If HAVE_READDIR_R is defined for the platform FindNextEntry depends on _entryBuffer being fixed
+                // since
+                // _entry will point to a string in the middle of the array. If the array is not fixed GC can move
+                // it after
                 // the native call and _entry will point to a bogus file name.
                 fixed (byte* entryBufferPtr = _entryBuffer)
                 {

@@ -353,15 +353,19 @@ namespace System.Data.Objects.ELinq
                 interfaceType
             );
 
-            // Find the index of the interface's get_<Property> method in the interface methods of the interface map
+            // Find the index of the interface's get_<Property> method in the interface methods of the interface
+            // map
             int propIndex = Array.IndexOf(interfaceMap.InterfaceMethods, getInterfaceProp);
 
-            // Find the method on the property's declaring type that is the target of the interface's get_<Property> method.
-            // This method will be at the same index in the interface mapping's target methods as the get_<Property> interface method index.
+            // Find the method on the property's declaring type that is the target of the interface's
+            // get_<Property> method.
+            // This method will be at the same index in the interface mapping's target methods as the
+            // get_<Property> interface method index.
             MethodInfo[] targetMethods = interfaceMap.TargetMethods;
             if (propIndex > -1 && propIndex < targetMethods.Length)
             {
-                // If the get method of the referenced property is the target of the get_<Property> method in this interface mapping,
+                // If the get method of the referenced property is the target of the get_<Property> method in this
+                // interface mapping,
                 // then the property is the implementation of the interface's corresponding property.
                 MethodInfo getPropertyMethod = propertyInfo.GetGetMethod();
                 if (getPropertyMethod != null)

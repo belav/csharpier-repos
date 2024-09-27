@@ -18,7 +18,8 @@ namespace System.Runtime.InteropServices.Marshalling
         static abstract Guid Iid { get; }
 
         /// <summary>
-        /// A pointer to the virtual method table to enable unmanaged callers to call a managed implementation of the interface.
+        /// A pointer to the virtual method table to enable unmanaged callers to call a managed
+        // implementation of the interface.
         /// </summary>
         static abstract void** ManagedVirtualMethodTable { get; }
     }

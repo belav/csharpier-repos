@@ -643,13 +643,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         internal abstract Type GetCompletionProviderType();
 
         /// <summary>
-        /// Override this to change parameters or return without verifying anything, e.g. for script sources. Or to test in other code contexts.
+        /// Override this to change parameters or return without verifying anything, e.g. for script
+        // sources. Or to test in other code contexts.
         /// </summary>
         /// <param name="code">The source code (not markup).</param>
-        /// <param name="expectedItemOrNull">The expected item. If this is null, verifies that *any* item shows up for this CompletionProvider (or no items show up if checkForAbsence is true).</param>
-        /// <param name="expectedDescriptionOrNull">If this is null, the Description for the item is ignored.</param>
-        /// <param name="usePreviousCharAsTrigger">Whether or not the previous character in markup should be used to trigger IntelliSense for this provider. If false, invokes it through the invoke IntelliSense command.</param>
-        /// <param name="checkForAbsence">If true, checks for absence of a specific item (or that no items are returned from this CompletionProvider)</param>
+        /// <param name="expectedItemOrNull">The expected item. If this is null, verifies that *any* item
+        // shows up for this CompletionProvider (or no items show up if checkForAbsence is true).</param>
+        /// <param name="expectedDescriptionOrNull">If this is null, the Description for the item is
+        // ignored.</param>
+        /// <param name="usePreviousCharAsTrigger">Whether or not the previous character in markup should be
+        // used to trigger IntelliSense for this provider. If false, invokes it through the invoke IntelliSense
+        // command.</param>
+        /// <param name="checkForAbsence">If true, checks for absence of a specific item (or that no items
+        // are returned from this CompletionProvider)</param>
         private protected virtual async Task VerifyWorkerAsync(
             string code,
             int position,
@@ -724,7 +730,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         }
 
         /// <summary>
-        /// Override this to change parameters or return without verifying anything, e.g. for script sources. Or to test in other code contexts.
+        /// Override this to change parameters or return without verifying anything, e.g. for script
+        // sources. Or to test in other code contexts.
         /// </summary>
         /// <param name="codeBeforeCommit">The source code (not markup).</param>
         /// <param name="position">Position where intellisense is invoked.</param>
@@ -936,7 +943,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         }
 
         /// <summary>
-        /// Override this to change parameters or return without verifying anything, e.g. for script sources. Or to test in other code contexts.
+        /// Override this to change parameters or return without verifying anything, e.g. for script
+        // sources. Or to test in other code contexts.
         /// </summary>
         /// <param name="codeBeforeCommit">The source code (not markup).</param>
         /// <param name="position">Position where intellisense is invoked.</param>

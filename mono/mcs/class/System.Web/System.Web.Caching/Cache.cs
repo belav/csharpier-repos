@@ -109,6 +109,7 @@ namespace System.Web.Caching
 
                     if (privateBytesLimit == 0)
                     {
+                        //
                         // http://blogs.msdn.com/tmarq/archive/2007/06/25/some-history-on-the-asp-net-cache-memory-limits.aspx
                         // TODO: calculate
                         privateBytesLimit = 734003200;
@@ -135,6 +136,7 @@ namespace System.Web.Caching
 
                     if (percentagePhysicalMemoryLimit == 0)
                     {
+                        //
                         // http://blogs.msdn.com/tmarq/archive/2007/06/25/some-history-on-the-asp-net-cache-memory-limits.aspx
                         // TODO: calculate
                         percentagePhysicalMemoryLimit = 97;

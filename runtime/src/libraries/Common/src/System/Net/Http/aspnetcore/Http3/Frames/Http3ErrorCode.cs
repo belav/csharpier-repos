@@ -7,7 +7,8 @@ namespace System.Net.Http
     {
         /// <summary>
         /// H3_NO_ERROR (0x100):
-        /// No error. This is used when the connection or stream needs to be closed, but there is no error to signal.
+        /// No error. This is used when the connection or stream needs to be closed, but there is no error
+        // to signal.
         /// </summary>
         NoError = 0x100,
 
@@ -50,13 +51,15 @@ namespace System.Net.Http
 
         /// <summary>
         /// H3_EXCESSIVE_LOAD (0x107):
-        /// The endpoint detected that its peer is exhibiting a behavior that might be generating excessive load.
+        /// The endpoint detected that its peer is exhibiting a behavior that might be generating excessive
+        // load.
         /// </summary>
         ExcessiveLoad = 0x107,
 
         /// <summary>
         /// H3_ID_ERROR (0x109):
-        /// A Stream ID, Push ID, or Placeholder ID was used incorrectly, such as exceeding a limit, reducing a limit, or being reused.
+        /// A Stream ID, Push ID, or Placeholder ID was used incorrectly, such as exceeding a limit,
+        // reducing a limit, or being reused.
         /// </summary>
         IdError = 0x108,
 

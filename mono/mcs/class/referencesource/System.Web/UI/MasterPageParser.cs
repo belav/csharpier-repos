@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements the ASP.NET master page parser
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Implements the ASP.NET master page parser
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -22,9 +22,9 @@ namespace System.Web.UI
     using System.Web.Compilation;
     using System.Web.Util;
 
-    /*
-     * Parser for MasterPage
-     */
+/*
+* Parser for MasterPage
+*/
     internal sealed class MasterPageParser : UserControlParser
     {
         internal override Type DefaultBaseType

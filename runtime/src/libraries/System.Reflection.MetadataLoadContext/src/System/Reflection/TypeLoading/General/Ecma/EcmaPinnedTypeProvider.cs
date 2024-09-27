@@ -3,7 +3,8 @@
 
 namespace System.Reflection.TypeLoading.Ecma
 {
-    // This type provider is used to parse local variable signatures (which can have the PINNED constraint.)
+    // This type provider is used to parse local variable signatures (which can have the PINNED
+    // constraint.)
     internal sealed class EcmaPinnedTypeProvider : EcmaWrappedTypeProvider
     {
         internal EcmaPinnedTypeProvider(EcmaModule module)

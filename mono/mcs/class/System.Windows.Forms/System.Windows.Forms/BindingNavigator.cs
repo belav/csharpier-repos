@@ -465,42 +465,42 @@ namespace System.Windows.Forms
             OnRefreshItems();
         }
 
-        /*private void OnPositionTextChanged(object sender, EventArgs e)
-        {
-            if (changingText)
-                return;
+/*private void OnPositionTextChanged(object sender, EventArgs e)
+{
+if (changingText)
+return;
 
-            try
-            {
-                changingText = true;
+try
+{
+changingText = true;
 
-                int position;
-                ToolStripTextBox txt = sender as ToolStripTextBox;
+int position;
+ToolStripTextBox txt = sender as ToolStripTextBox;
 
-                if (txt == null)
-                    return;
+if (txt == null)
+return;
 
-                if (!int.TryParse(txt.Text, out position))
-                {
-                    txt.Text = (bindingSource == null ? 0 : bindingSource.Position).ToString();
-                }
-                else
-                {
-                    if (position < 0)
-                        position = 1;
+if (!int.TryParse(txt.Text, out position))
+{
+txt.Text = (bindingSource == null ? 0 : bindingSource.Position).ToString();
+}
+else
+{
+if (position < 0)
+position = 1;
 
-                    if (position > bindingSource.Count)
-                        position = bindingSource.Count;
+if (position > bindingSource.Count)
+position = bindingSource.Count;
 
-                    bindingSource.Position = position;
-                }
-            }
-            finally
-            {
-                changingText = false;
-                OnRefreshItems();
-            }
-        }*/
+bindingSource.Position = position;
+}
+}
+finally
+{
+changingText = false;
+OnRefreshItems();
+}
+}*/
 
         #endregion
     }

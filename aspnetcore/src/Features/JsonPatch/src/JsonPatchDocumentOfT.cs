@@ -17,9 +17,12 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-// Implementation details: the purpose of this type of patch document is to ensure we can do type-checking
-// when producing a JsonPatchDocument.  However, we cannot send this "typed" over the wire, as that would require
-// including type data in the JsonPatchDocument serialized as JSON (to allow for correct deserialization) - that's
+// Implementation details: the purpose of this type of patch document is to ensure we can do
+// type-checking
+// when producing a JsonPatchDocument.  However, we cannot send this "typed" over the wire, as that
+// would require
+// including type data in the JsonPatchDocument serialized as JSON (to allow for correct
+// deserialization) - that's
 // not according to RFC 6902, and would thus break cross-platform compatibility.
 [JsonConverter(typeof(TypedJsonPatchDocumentConverter))]
 public class JsonPatchDocument<TModel> : IJsonPatchDocument
@@ -299,7 +302,8 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument
     }
 
     /// <summary>
-    /// Removes value at specified location and add it to the target location.  Will result in, for example:
+    /// Removes value at specified location and add it to the target location.  Will result in, for
+    // example:
     /// { "op": "move", "from": "/a/b/c", "path": "/a/b/d" }
     /// </summary>
     /// <param name="from">source location</param>
@@ -657,7 +661,8 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument
                 var errorReporter = logErrorAction ?? ErrorReporter.Default;
                 errorReporter(new JsonPatchError(objectToApplyTo, op, jsonPatchException.Message));
 
-                // As per JSON Patch spec if an operation results in error, further operations should not be executed.
+                // As per JSON Patch spec if an operation results in error, further operations should not be
+                // executed.
                 break;
             }
         }
@@ -778,7 +783,8 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument
 
     // Evaluates the value of the key or index which may be an int or a string,
     // or some other expression type.
-    // The expression is converted to a delegate and the result of executing the delegate is returned as a string.
+    // The expression is converted to a delegate and the result of executing the delegate is returned as
+    // a string.
     private static string EvaluateExpression(Expression expression)
     {
         var converted = Expression.Convert(expression, typeof(object));

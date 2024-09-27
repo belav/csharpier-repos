@@ -210,12 +210,14 @@ namespace System.Reflection.TypeLoading
 
             queryResult = Query<M>(optionalName, bindingAttr, optionalPredicate);
 
-            // .NET Framework compat: If exactly one type of member was requested, the returned array has to be of that specific type (M[], not MemberInfo[]). Create it now and return it
+            // .NET Framework compat: If exactly one type of member was requested, the returned array has to be
+            // of that specific type (M[], not MemberInfo[]). Create it now and return it
             // to cause GetMember() to short-cut the search.
             if ((memberType & ~targetMemberType) == 0)
                 return queryResult.ToArray();
 
-            // .NET Framework compat: If we got here, than one MemberType was requested. Return null to signal GetMember() to keep querying the other member types and concatenate the results.
+            // .NET Framework compat: If we got here, than one MemberType was requested. Return null to signal
+            // GetMember() to keep querying the other member types and concatenate the results.
             return null;
         }
     }

@@ -6,12 +6,12 @@
 
 namespace System.Web.Mobile
 {
-    /*
-     * CookielessData
-     * encapsulates access to data to be persisted in local links
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* CookielessData
+* encapsulates access to data to be persisted in local links
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     using System.Collections.Specialized;
     using System.Security.Permissions;
@@ -31,7 +31,8 @@ namespace System.Web.Mobile
     )]
     public class CookielessData : HybridDictionary
     {
-        /// <include file='doc\CookielessData.uex' path='docs/doc[@for="CookielessData.CookielessData"]/*' />
+        /// <include file='doc\CookielessData.uex' path='docs/doc[@for="CookielessData.CookielessData"]/*'
+        // />
         public CookielessData()
         {
             String name = FormsAuthentication.FormsCookieName;

@@ -26,7 +26,8 @@ internal sealed class LoadedProject : IDisposable
     private readonly ProjectTargetFrameworkManager _targetFrameworkManager;
 
     /// <summary>
-    /// The most recent version of the project design time build information; held onto so the next reload we can diff against this.
+    /// The most recent version of the project design time build information; held onto so the next
+    // reload we can diff against this.
     /// </summary>
     private ProjectFileInfo? _mostRecentFileInfo;
     private IWatchedFile? _mostRecentProjectAssetsFileWatcher;
@@ -97,7 +98,8 @@ internal sealed class LoadedProject : IDisposable
     {
         if (_mostRecentFileInfo != null)
         {
-            // We should never be changing the fundamental identity of this project; if this happens we really should have done a full unload/reload.
+            // We should never be changing the fundamental identity of this project; if this happens we really
+            // should have done a full unload/reload.
             Contract.ThrowIfFalse(newProjectInfo.FilePath == _mostRecentFileInfo.FilePath);
             Contract.ThrowIfFalse(
                 newProjectInfo.TargetFramework == _mostRecentFileInfo.TargetFramework
@@ -148,9 +150,12 @@ internal sealed class LoadedProject : IDisposable
         var metadataReferences = commandLineArguments
             .MetadataReferences.Select(cr =>
             {
-                // The relative path resolver calls File.Exists() to see if the path doesn't exist; it guarantees that generally the path returned
-                // is to an actual file on disk. And it needs to call File.Exists() in some cases if there are reference paths to have to search. But as a fallback
-                // we'll accept the resolved path since in the common case it's a file that just might not exist on disk yet.
+                // The relative path resolver calls File.Exists() to see if the path doesn't exist; it guarantees
+                // that generally the path returned
+                // is to an actual file on disk. And it needs to call File.Exists() in some cases if there are
+                // reference paths to have to search. But as a fallback
+                // we'll accept the resolved path since in the common case it's a file that just might not exist on
+                // disk yet.
                 var absolutePath =
                     relativePathResolver.ResolvePath(cr.Reference, baseFilePath: null)
                     ?? FileUtilities.ResolveRelativePath(
@@ -182,13 +187,15 @@ internal sealed class LoadedProject : IDisposable
             "Project {0} now has {1} reference(s)."
         );
 
-        // Now that we've updated it hold onto the old list of references so we can remove them if there's a later update
+        // Now that we've updated it hold onto the old list of references so we can remove them if there's a
+        // later update
         _mostRecentMetadataReferences = metadataReferences;
 
         var analyzerReferences = commandLineArguments
             .AnalyzerReferences.Select(cr =>
             {
-                // Note that unlike regular references, we do not resolve these with the relative path resolver that searches reference paths
+                // Note that unlike regular references, we do not resolve these with the relative path resolver that
+                // searches reference paths
                 var absolutePath = FileUtilities.ResolveRelativePath(
                     cr.FilePath,
                     commandLineArguments.BaseDirectory
@@ -253,7 +260,8 @@ internal sealed class LoadedProject : IDisposable
         var outputKind = _projectSystemProject.CompilationOptions.OutputKind;
         return (metadataReferences, outputKind);
 
-        // logMessage should be a string with two placeholders; the first is the project name, the second is the number of items.
+        // logMessage should be a string with two placeholders; the first is the project name, the second is
+        // the number of items.
         void UpdateProjectSystemProjectCollection<T>(
             IEnumerable<T> loadedCollection,
             IEnumerable<T>? oldLoadedCollection,
@@ -275,7 +283,8 @@ internal sealed class LoadedProject : IDisposable
 
             foreach (var newItem in newItems)
             {
-                // If oldItems already has this, we don't need to add it again. We'll remove it, and what is left in oldItems is stuff to remove
+                // If oldItems already has this, we don't need to add it again. We'll remove it, and what is left in
+                // oldItems is stuff to remove
                 if (!oldItems.Remove(newItem))
                     addItem(newItem);
             }

@@ -154,7 +154,8 @@ namespace Microsoft.Extensions.Logging.Console
             _formatters = cd;
         }
 
-        // warning:  ReloadLoggerOptions can be called before the ctor completed,... before registering all of the state used in this method need to be initialized
+        // warning:  ReloadLoggerOptions can be called before the ctor completed,... before registering all
+        // of the state used in this method need to be initialized
         private void ReloadLoggerOptions(ConsoleLoggerOptions options)
         {
             if (

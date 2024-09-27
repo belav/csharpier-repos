@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     /// If a document added here is subsequently found in a registered workspace,
     /// the document is removed from this workspace.
     ///
-    /// Future work for this workspace includes supporting basic metadata references (mscorlib, System dlls, etc),
-    /// but that is dependent on having a x-plat mechanism for retrieving those references from the framework / sdk.
+    /// Future work for this workspace includes supporting basic metadata references (mscorlib, System
+    // dlls, etc),
+    /// but that is dependent on having a x-plat mechanism for retrieving those references from the
+    // framework / sdk.
     /// </summary>
     internal sealed class LspMiscellaneousFilesWorkspace : Workspace, ILspService, ILspWorkspace
     {
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         /// <summary>
         /// Removes a document with the matching file path from this workspace.
         ///
-        /// Calls to this method and <see cref="AddMiscellaneousDocument(Uri, SourceText, string, ILspLogger)"/> are made
+        /// Calls to this method and <see cref="AddMiscellaneousDocument(Uri, SourceText, string,
+        // ILspLogger)"/> are made
         /// from LSP text sync request handling which do not run concurrently.
         /// </summary>
         public void TryRemoveMiscellaneousDocument(Uri uri)
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 return languageInformation;
             }
 
-            // It is totally possible to not find language based on the file path (e.g. a newly created file that hasn't been saved to disk).
+            // It is totally possible to not find language based on the file path (e.g. a newly created file
+            // that hasn't been saved to disk).
             // In that case, we use the languageId that the client gave us.
             return languageId switch
             {

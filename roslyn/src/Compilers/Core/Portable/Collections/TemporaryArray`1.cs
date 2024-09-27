@@ -16,12 +16,15 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Shared.Collections
 {
     /// <summary>
-    /// Provides temporary storage for a collection of elements. This type is optimized for handling of small
-    /// collections, particularly for cases where the collection will eventually be discarded or used to produce an
+    /// Provides temporary storage for a collection of elements. This type is optimized for handling of
+    // small
+    /// collections, particularly for cases where the collection will eventually be discarded or used to
+    // produce an
     /// <see cref="ImmutableArray{T}"/>.
     /// </summary>
     /// <remarks>
-    /// This type stores small collections on the stack, with the ability to transition to dynamic storage if/when
+    /// This type stores small collections on the stack, with the ability to transition to dynamic
+    // storage if/when
     /// larger number of elements are added.
     /// </remarks>
     /// <typeparam name="T">The type of elements stored in the collection.</typeparam>
@@ -30,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
     internal struct TemporaryArray<T> : IDisposable
     {
         /// <summary>
-        /// The number of elements the temporary can store inline. Storing more than this many elements requires the
+        /// The number of elements the temporary can store inline. Storing more than this many elements
+        // requires the
         /// array transition to dynamic storage.
         /// </summary>
         private const int InlineCapacity = 4;
@@ -39,8 +43,10 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         /// The first inline element.
         /// </summary>
         /// <remarks>
-        /// This field is only used when <see cref="_builder"/> is <see langword="null"/>. In other words, this type
-        /// stores elements inline <em>or</em> stores them in <see cref="_builder"/>, but does not use both approaches
+        /// This field is only used when <see cref="_builder"/> is <see langword="null"/>. In other words,
+        // this type
+        /// stores elements inline <em>or</em> stores them in <see cref="_builder"/>, but does not use both
+        // approaches
         /// at the same time.
         /// </remarks>
         private T _item0;
@@ -64,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         private T _item3;
 
         /// <summary>
-        /// The number of inline elements held in the array. This value is only used when <see cref="_builder"/> is
+        /// The number of inline elements held in the array. This value is only used when <see
+        // cref="_builder"/> is
         /// <see langword="null"/>.
         /// </summary>
         private int _count;
@@ -73,8 +80,10 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         /// A builder used for dynamic storage of collections that may exceed the limit for inline elements.
         /// </summary>
         /// <remarks>
-        /// This field is initialized to non-<see langword="null"/> the first time the <see cref="TemporaryArray{T}"/>
-        /// needs to store more than four elements. From that point, <see cref="_builder"/> is used instead of inline
+        /// This field is initialized to non-<see langword="null"/> the first time the <see
+        // cref="TemporaryArray{T}"/>
+        /// needs to store more than four elements. From that point, <see cref="_builder"/> is used instead
+        // of inline
         /// elements, even if items are removed to make the result smaller than four elements.
         /// </remarks>
         private ArrayBuilder<T>? _builder;
@@ -89,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
 
         public static TemporaryArray<T> GetInstance(int capacity)
         {
-            // Capacity <= 4 is already supported by the Empty array value. so can just return that without allocating anything.
+            // Capacity <= 4 is already supported by the Empty array value. so can just return that without
+            // allocating anything.
             if (capacity <= InlineCapacity)
                 return Empty;
 
@@ -143,8 +153,10 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
 
         public void Dispose()
         {
-            // Return _builder to the pool if necessary. There is no need to release inline storage since the majority
-            // case for this type is stack-allocated storage and the GC is already able to reclaim objects from the
+            // Return _builder to the pool if necessary. There is no need to release inline storage since the
+            // majority
+            // case for this type is stack-allocated storage and the GC is already able to reclaim objects from
+            // the
             // stack after the last use of a reference to them.
             Interlocked.Exchange(ref _builder, null)?.Free();
         }
@@ -262,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         }
 
         /// <summary>
-        /// Create an <see cref="ImmutableArray{T}"/> with the elements currently held in the temporary array, and clear
+        /// Create an <see cref="ImmutableArray{T}"/> with the elements currently held in the temporary
+        // array, and clear
         /// the array.
         /// </summary>
         /// <returns></returns>
@@ -293,9 +306,12 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         }
 
         /// <summary>
-        /// Transitions the current <see cref="TemporaryArray{T}"/> from inline storage to dynamic storage storage. An
-        /// <see cref="ArrayBuilder{T}"/> instance is taken from the shared pool, and all elements currently in inline
-        /// storage are added to it. After this point, dynamic storage will be used instead of inline storage.
+        /// Transitions the current <see cref="TemporaryArray{T}"/> from inline storage to dynamic storage
+        // storage. An
+        /// <see cref="ArrayBuilder{T}"/> instance is taken from the shared pool, and all elements currently
+        // in inline
+        /// storage are added to it. After this point, dynamic storage will be used instead of inline
+        // storage.
         /// </summary>
         [MemberNotNull(nameof(_builder))]
         private void MoveInlineToBuilder()

@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Taken from https://github.com/dotnet/aspnetcore/blob/master/src/Mvc/Mvc.Core/test/Formatters/TranscodingWriteStreamTest.cs
+// Taken from
+// https://github.com/dotnet/aspnetcore/blob/master/src/Mvc/Mvc.Core/test/Formatters/TranscodingWriteStreamTest.cs
 
 using System.Diagnostics;
 using System.IO;
@@ -71,7 +72,8 @@ namespace System.Net.Http.Json.Functional.Tests
 
             using var transcodingStream = new TranscodingWriteStream(stream, targetEncoding);
             await JsonSerializer.SerializeAsync(transcodingStream, model, model.GetType());
-            // The transcoding streams use Encoders and Decoders that have internal buffers. We need to flush these
+            // The transcoding streams use Encoders and Decoders that have internal buffers. We need to flush
+            // these
             // when there is no more data to be written. Stream.FlushAsync isn't suitable since it's
             // acceptable to Flush a Stream (multiple times) prior to completion.
             await transcodingStream.FinalWriteAsync(default);

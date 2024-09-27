@@ -489,9 +489,11 @@ namespace System.Data.SqlTypes
         public override bool Equals([NotNullWhen(true)] object? value) =>
             value is SqlInt16 other && Equals(other);
 
-        /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
+        /// <summary>Indicates whether the current instance is equal to another instance of the same
+        // type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>
-        /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
+        /// <returns>true if the current instance is equal to the other instance; otherwise,
+        // false.</returns>
         public bool Equals(SqlInt16 other) =>
             other.IsNull || IsNull ? other.IsNull && IsNull : (this == other).Value;
 

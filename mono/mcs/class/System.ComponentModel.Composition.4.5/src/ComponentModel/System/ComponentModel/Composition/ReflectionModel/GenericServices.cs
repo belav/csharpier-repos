@@ -137,7 +137,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             if (type.IsGenericParameter)
             {
-                // the only case when MakeGenericType won't work is when the 'type' represents a "naked" generic type
+                // the only case when MakeGenericType won't work is when the 'type' represents a "naked" generic
+                // type
                 // in this case we simply grab the type with the proper index from the specializtion
                 return specializationTypes[type.GenericParameterPosition];
             }
@@ -231,7 +232,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 }
             }
 
-            // all other fals indicate variance and don't place any actual restrictions on the generic parameters
+            // all other fals indicate variance and don't place any actual restrictions on the generic
+            // parameters
             // but rather how they should be used by the compiler
             return true;
         }

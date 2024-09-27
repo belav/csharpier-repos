@@ -13,7 +13,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Summarizes whether a conversion is allowed, and if so, which kind of conversion (and in some cases, the
+    /// Summarizes whether a conversion is allowed, and if so, which kind of conversion (and in some
+    // cases, the
     /// associated symbol).
     /// </summary>
     public readonly struct Conversion : IEquatable<Conversion>, IConvertibleConversion
@@ -213,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // we use this method to patch up the conversion method only in two cases -
             // 1) when rewriting MethodGroup conversions and the method gets substituted.
-            // 2) when lowering IntPtr conversion (a compat-related conversion which becomes a kind of a user-defined conversion)
+            // 2) when lowering IntPtr conversion (a compat-related conversion which becomes a kind of a
+            // user-defined conversion)
             // 3) when rewriting user-defined conversions and the method gets substituted
             // in those cases it is ok to ignore existing _uncommonData.
             Debug.Assert(
@@ -772,7 +774,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Returns true if the conversion is an implicit numeric conversion or explicit numeric conversion.
         /// </summary>
         /// <remarks>
-        /// Implicit and explicit numeric conversions are described in sections 6.1.2 and 6.2.1 of the C# language specification.
+        /// Implicit and explicit numeric conversions are described in sections 6.1.2 and 6.2.1 of the C#
+        // language specification.
         /// </remarks>
         public bool IsNumeric
         {
@@ -784,10 +787,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit enumeration conversion or explicit enumeration conversion.
+        /// Returns true if the conversion is an implicit enumeration conversion or explicit enumeration
+        // conversion.
         /// </summary>
         /// <remarks>
-        /// Implicit and explicit enumeration conversions are described in sections 6.1.3 and 6.2.2 of the C# language specification.
+        /// Implicit and explicit enumeration conversions are described in sections 6.1.3 and 6.2.2 of the
+        // C# language specification.
         /// </remarks>
         public bool IsEnumeration
         {
@@ -864,10 +869,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit nullable conversion or explicit nullable conversion.
+        /// Returns true if the conversion is an implicit nullable conversion or explicit nullable
+        // conversion.
         /// </summary>
         /// <remarks>
-        /// Implicit and explicit nullable conversions are described in sections 6.1.4 and 6.2.3 of the C# language specification.
+        /// Implicit and explicit nullable conversions are described in sections 6.1.4 and 6.2.3 of the C#
+        // language specification.
         /// </remarks>
         public bool IsNullable
         {
@@ -879,7 +886,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit tuple literal conversion or explicit tuple literal conversion.
+        /// Returns true if the conversion is an implicit tuple literal conversion or explicit tuple literal
+        // conversion.
         /// </summary>
         public bool IsTupleLiteralConversion
         {
@@ -902,10 +910,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit reference conversion or explicit reference conversion.
+        /// Returns true if the conversion is an implicit reference conversion or explicit reference
+        // conversion.
         /// </summary>
         /// <remarks>
-        /// Implicit and explicit reference conversions are described in sections 6.1.6 and 6.2.4 of the C# language specification.
+        /// Implicit and explicit reference conversions are described in sections 6.1.6 and 6.2.4 of the C#
+        // language specification.
         /// </remarks>
         public bool IsReference
         {
@@ -917,10 +927,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit user-defined conversion or explicit user-defined conversion.
+        /// Returns true if the conversion is an implicit user-defined conversion or explicit user-defined
+        // conversion.
         /// </summary>
         /// <remarks>
-        /// Implicit and explicit user-defined conversions are described in section 6.4 of the C# language specification.
+        /// Implicit and explicit user-defined conversions are described in section 6.4 of the C# language
+        // specification.
         /// </remarks>
         public bool IsUserDefined
         {
@@ -983,7 +995,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Returns true if the conversion is an implicit constant expression conversion.
         /// </summary>
         /// <remarks>
-        /// Implicit constant expression conversions are described in section 6.1.9 of the C# language specification.
+        /// Implicit constant expression conversions are described in section 6.1.9 of the C# language
+        // specification.
         /// </remarks>
         public bool IsConstantExpression
         {
@@ -994,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Returns true if the conversion is an implicit anonymous function conversion.
         /// </summary>
         /// <remarks>
-        /// Implicit anonymous function conversions are described in section 6.5 of the C# language specification.
+        /// Implicit anonymous function conversions are described in section 6.5 of the C# language
+        // specification.
         /// </remarks>
         public bool IsAnonymousFunction
         {
@@ -1053,8 +1067,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns the method used to create the delegate for a method group conversion if <see cref="IsMethodGroup"/> is true
-        /// or the method used to perform the conversion for a user-defined conversion if <see cref="IsUserDefined"/> is true.
+        /// Returns the method used to create the delegate for a method group conversion if <see
+        // cref="IsMethodGroup"/> is true
+        /// or the method used to perform the conversion for a user-defined conversion if <see
+        // cref="IsUserDefined"/> is true.
         /// Otherwise, returns null.
         /// </summary>
         /// <remarks>
@@ -1067,7 +1083,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="MethodSymbol" />, if any.
+        /// Type parameter which runtime type will be used to resolve virtual invocation of the <see
+        // cref="MethodSymbol" />, if any.
         /// Null if <see cref="MethodSymbol" /> is resolved statically, or is null.
         /// </summary>
         public ITypeSymbol? ConstrainedToType
@@ -1235,20 +1252,26 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Conversion"/> object is equal to the current <see cref="Conversion"/> object.
+        /// Determines whether the specified <see cref="Conversion"/> object is equal to the current <see
+        // cref="Conversion"/> object.
         /// </summary>
-        /// <param name="obj">The <see cref="Conversion"/> object to compare with the current <see cref="Conversion"/> object.</param>
-        /// <returns>true if the specified <see cref="Conversion"/> object is equal to the current <see cref="Conversion"/> object; otherwise, false.</returns>
+        /// <param name="obj">The <see cref="Conversion"/> object to compare with the current <see
+        // cref="Conversion"/> object.</param>
+        /// <returns>true if the specified <see cref="Conversion"/> object is equal to the current <see
+        // cref="Conversion"/> object; otherwise, false.</returns>
         public override bool Equals(object? obj)
         {
             return obj is Conversion && this.Equals((Conversion)obj);
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Conversion"/> object is equal to the current <see cref="Conversion"/> object.
+        /// Determines whether the specified <see cref="Conversion"/> object is equal to the current <see
+        // cref="Conversion"/> object.
         /// </summary>
-        /// <param name="other">The <see cref="Conversion"/> object to compare with the current <see cref="Conversion"/> object.</param>
-        /// <returns>true if the specified <see cref="Conversion"/> object is equal to the current <see cref="Conversion"/> object; otherwise, false.</returns>
+        /// <param name="other">The <see cref="Conversion"/> object to compare with the current <see
+        // cref="Conversion"/> object.</param>
+        /// <returns>true if the specified <see cref="Conversion"/> object is equal to the current <see
+        // cref="Conversion"/> object; otherwise, false.</returns>
         public bool Equals(Conversion other)
         {
             return this.Kind == other.Kind && this.Method == other.Method;

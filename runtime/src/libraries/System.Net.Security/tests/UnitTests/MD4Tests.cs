@@ -150,7 +150,8 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") =	043f8582f241db351ce627e153e7f0e4
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+        // =	043f8582f241db351ce627e153e7f0e4
         [Fact]
         public void TryEncrypt_AlphabetInUpperLowerCasesAndNumbers()
         {
@@ -183,7 +184,8 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("12345678901234567890123456789012345678901234567890123456789012345678901234567890") = e33b4ddc9c38f2199c3e7b164fcc0536
+        // MD4("12345678901234567890123456789012345678901234567890123456789012345678901234567890") =
+        // e33b4ddc9c38f2199c3e7b164fcc0536
         [Fact]
         public void TryEncrypt_RepeatedSequenceOfNumbers()
         {
@@ -244,7 +246,8 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123") = db837dbb6098a50a2d3974bc1cc76133
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123") =
+        // db837dbb6098a50a2d3974bc1cc76133
         // 56 bytes (padLen == 120 - 56 => 64)
         [Fact]
         public void TryEncrypt_56bytes_HitsEdgeCaseForPaddingLength()
@@ -276,7 +279,8 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890") = ce64c40ecfbe896462f3c1a925884624
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890") =
+        // ce64c40ecfbe896462f3c1a925884624
         [Fact]
         public void TryEncrypt_63bytes_HitsEdgeCase()
         {
@@ -307,7 +311,8 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901") = 4b0e77758d2ede1eb21d267d492ae70b
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901") =
+        // 4b0e77758d2ede1eb21d267d492ae70b
         [Fact]
         public void TryEncrypt_64bytes_HitsEdgeCase()
         {
@@ -338,7 +343,8 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789012") = 3b46ad159b3fd800d254e3c4cc71fe36
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789012") =
+        // 3b46ad159b3fd800d254e3c4cc71fe36
         [Fact]
         public void TryEncrypt_65bytes_HitsEdgeCase()
         {
@@ -369,7 +375,9 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890") = a3e23048e4ade47a0f00fa8aed2a0248
+        //
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890")
+        // = a3e23048e4ade47a0f00fa8aed2a0248
         [Fact]
         public void TryEncrypt_127bytes_HitsEdgeCase()
         {
@@ -400,7 +408,9 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901") = de49da96c105be37b242f2bee86c4759
+        //
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901")
+        // = de49da96c105be37b242f2bee86c4759
         [Fact]
         public void TryEncrypt_128bytes_HitsEdgeCase()
         {
@@ -431,7 +441,9 @@ namespace System.Net.Security.Tests
             Verify(input, expected);
         }
 
-        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789012") = a6c10c320f8827d08248a2d8b124b040
+        //
+        // MD4("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789012")
+        // = a6c10c320f8827d08248a2d8b124b040
         [Fact]
         public void TryEncrypt_129bytes_HitsEdgeCase()
         {

@@ -52,10 +52,13 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             ArgumentNullException.ThrowIfNull(other);
 
-            // Unlike most other MemberInfo objects, generic parameter types never get cloned due to containing generic types being instantiated.
-            // That is, their DeclaringType is always the generic type definition. As a Type, the ReflectedType property is always equal to the DeclaringType.
+            // Unlike most other MemberInfo objects, generic parameter types never get cloned due to containing
+            // generic types being instantiated.
+            // That is, their DeclaringType is always the generic type definition. As a Type, the ReflectedType
+            // property is always equal to the DeclaringType.
             //
-            // Because of these conditions, we can safely implement both the method token equivalence and the "is this type from the same implementor"
+            // Because of these conditions, we can safely implement both the method token equivalence and the
+            // "is this type from the same implementor"
             // check as our regular Equals() method.
             return ToType().Equals(other);
         }
@@ -99,12 +102,14 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the generic parameter substitutions to use when enumerating declared members, base class and implemented interfaces.
+        // Returns the generic parameter substitutions to use when enumerating declared members, base class
+        // and implemented interfaces.
         //
         internal abstract override TypeContext TypeContext { get; }
 
         //
-        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null, which causes BaseType to return null.
+        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null,
+        // which causes BaseType to return null.
         //
         internal sealed override QTypeDefRefOrSpec TypeRefDefOrSpecForBaseType
         {
@@ -128,7 +133,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces will take care of the transitive closure and
+        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces
+        // will take care of the transitive closure and
         // insertion of the TypeContext.
         //
         internal sealed override QTypeDefRefOrSpec[] TypeRefDefOrSpecsForDirectlyImplementedInterfaces

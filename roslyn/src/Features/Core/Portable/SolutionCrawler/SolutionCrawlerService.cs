@@ -17,9 +17,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             new("dotnet_enable_solution_crawler", defaultValue: true);
 
         /// <summary>
-        /// nested class of <see cref="SolutionCrawlerRegistrationService"/> since it is tightly coupled with it.
+        /// nested class of <see cref="SolutionCrawlerRegistrationService"/> since it is tightly coupled
+        // with it.
         ///
-        /// <see cref="ISolutionCrawlerService"/> is implemented by this class since WorkspaceService doesn't allow a class to implement
+        /// <see cref="ISolutionCrawlerService"/> is implemented by this class since WorkspaceService
+        // doesn't allow a class to implement
         /// more than one <see cref="IWorkspaceService"/>.
         /// </summary>
         [ExportWorkspaceService(typeof(ISolutionCrawlerService), ServiceLayer.Default), Shared]

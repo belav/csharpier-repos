@@ -11,7 +11,8 @@ namespace System
     // Provides Windows-based support for System.Console.
     internal static class ConsolePal
     {
-        /// <summary>Hardcoded Encoding.Unicode.CodePage to avoid accessing Encoding.Unicode and forcing it into existence unnecessarily.</summary>
+        /// <summary>Hardcoded Encoding.Unicode.CodePage to avoid accessing Encoding.Unicode and forcing it
+        // into existence unnecessarily.</summary>
         private const int UnicodeCodePage = 1200;
 
 #if DEBUG
@@ -191,7 +192,8 @@ namespace System
             );
         }
 
-        // Use this for blocking in Console.ReadKey, which needs to protect itself in case multiple threads call it simultaneously.
+        // Use this for blocking in Console.ReadKey, which needs to protect itself in case multiple threads
+        // call it simultaneously.
         // Use a ReadKey-specific lock though, to allow other fields to be initialized on this type.
         private static readonly object s_readKeySyncObject = new object();
 
@@ -386,9 +388,12 @@ namespace System
 
                         ushort keyCode = ir.keyEvent.wVirtualKeyCode;
 
-                        // First check for non-keyboard events & discard them. Generally we tap into only KeyDown events and ignore the KeyUp events
-                        // but it is possible that we are dealing with a Alt+NumPad unicode key sequence, the final unicode char is revealed only when
-                        // the Alt key is released (i.e when the sequence is complete). To avoid noise, when the Alt key is down, we should eat up
+                        // First check for non-keyboard events & discard them. Generally we tap into only KeyDown events and
+                        // ignore the KeyUp events
+                        // but it is possible that we are dealing with a Alt+NumPad unicode key sequence, the final unicode
+                        // char is revealed only when
+                        // the Alt key is released (i.e when the sequence is complete). To avoid noise, when the Alt key is
+                        // down, we should eat up
                         // any intermediate key strokes (from NumPad) that collectively forms the Unicode character.
 
                         if (!IsKeyDownEvent(ir))
@@ -400,9 +405,12 @@ namespace System
 
                         char ch = ir.keyEvent.uChar;
 
-                        // In a Alt+NumPad unicode sequence, when the alt key is released uChar will represent the final unicode character, we need to
-                        // surface this. VirtualKeyCode for this event will be Alt from the Alt-Up key event. This is probably not the right code,
-                        // especially when we don't expose ConsoleKey.Alt, so this will end up being the hex value (0x12). VK_PACKET comes very
+                        // In a Alt+NumPad unicode sequence, when the alt key is released uChar will represent the final
+                        // unicode character, we need to
+                        // surface this. VirtualKeyCode for this event will be Alt from the Alt-Up key event. This is
+                        // probably not the right code,
+                        // especially when we don't expose ConsoleKey.Alt, so this will end up being the hex value (0x12).
+                        // VK_PACKET comes very
                         // close to being useful and something that we could look into using for this purpose...
 
                         if (ch == 0)
@@ -1409,8 +1417,10 @@ namespace System
                     return Interop.Errors.ERROR_SUCCESS;
 
                 // For pipes that are closing or broken, just stop.
-                // (E.g. ERROR_NO_DATA ("pipe is being closed") is returned when we write to a console that is closing;
-                // ERROR_BROKEN_PIPE ("pipe was closed") is returned when stdin was closed, which is not an error, but EOF.)
+                // (E.g. ERROR_NO_DATA ("pipe is being closed") is returned when we write to a console that is
+                // closing;
+                // ERROR_BROKEN_PIPE ("pipe was closed") is returned when stdin was closed, which is not an error,
+                // but EOF.)
                 int errorCode = Marshal.GetLastPInvokeError();
                 if (
                     errorCode == Interop.Errors.ERROR_NO_DATA
@@ -1470,8 +1480,10 @@ namespace System
                     return Interop.Errors.ERROR_SUCCESS;
 
                 // For pipes that are closing or broken, just stop.
-                // (E.g. ERROR_NO_DATA ("pipe is being closed") is returned when we write to a console that is closing;
-                // ERROR_BROKEN_PIPE ("pipe was closed") is returned when stdin was closed, which is not an error, but EOF.)
+                // (E.g. ERROR_NO_DATA ("pipe is being closed") is returned when we write to a console that is
+                // closing;
+                // ERROR_BROKEN_PIPE ("pipe was closed") is returned when stdin was closed, which is not an error,
+                // but EOF.)
                 int errorCode = Marshal.GetLastPInvokeError();
                 if (
                     errorCode == Interop.Errors.ERROR_NO_DATA

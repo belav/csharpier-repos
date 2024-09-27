@@ -18,7 +18,8 @@ namespace System.Data.SqlClient
     using System.Text;
 
     /// <summary>
-    /// <para> Implements a cache of Symmetric Keys (once they are decrypted).Useful for rapidly decrypting multiple data values.</para>
+    /// <para> Implements a cache of Symmetric Keys (once they are decrypted).Useful for rapidly
+    // decrypting multiple data values.</para>
     /// </summary>
     sealed internal class SqlSymmetricKeyCache
     {
@@ -91,12 +92,14 @@ namespace System.Data.SqlClient
                     )
                 )
                 {
-                    // If the list is null or is empty or if the keyPath doesn't exist in the trusted key paths, then throw an exception.
+                    // If the list is null or is empty or if the keyPath doesn't exist in the trusted key paths, then
+                    // throw an exception.
                     if (
                         (trustedKeyPaths == null)
                         || (trustedKeyPaths.Count() == 0)
                         ||
-                        // (trustedKeyPaths.Where(s => s.Equals(keyInfo.keyPath, StringComparison.InvariantCultureIgnoreCase)).Count() == 0)) {
+                        // (trustedKeyPaths.Where(s => s.Equals(keyInfo.keyPath,
+                        // StringComparison.InvariantCultureIgnoreCase)).Count() == 0)) {
                         (
                             trustedKeyPaths.Any(s =>
                                 s.Equals(

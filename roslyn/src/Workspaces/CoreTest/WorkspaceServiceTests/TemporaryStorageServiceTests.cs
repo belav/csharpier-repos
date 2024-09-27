@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             storage.WriteStreamAsync(stream).Wait();
 
             // Writing multiple times is not allowed
-            // These should also throw before ever getting to the point where they would look at the null stream arg.
+            // These should also throw before ever getting to the point where they would look at the null stream
+            // arg.
             Assert.Throws<InvalidOperationException>(() => storage.WriteStream(null!));
             Assert.Throws<AggregateException>(() => storage.WriteStreamAsync(null!).Wait());
         }

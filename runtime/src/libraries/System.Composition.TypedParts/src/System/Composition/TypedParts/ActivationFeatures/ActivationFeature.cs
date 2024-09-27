@@ -24,7 +24,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
         /// <param name="partType">The part type being activated.</param>
         /// <param name="activator">The activator body so far.</param>
         /// <param name="partMetadata">Metadata associated with the part being activated.</param>
-        /// <param name="dependencies">Dependencies returned by a previous call to <see cref="GetDependencies"/>.</param>
+        /// <param name="dependencies">Dependencies returned by a previous call to <see
+        // cref="GetDependencies"/>.</param>
         /// <returns>A new activator body, or the one already provided.</returns>
         public abstract CompositeActivator RewriteActivator(
             TypeInfo partType,

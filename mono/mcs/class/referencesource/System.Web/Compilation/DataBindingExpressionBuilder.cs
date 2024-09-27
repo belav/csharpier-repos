@@ -181,7 +181,8 @@ namespace System.Web.Compilation
                 linePragma,
                 variableName
             );
-            //Generate code for other variable as well at design time in addition to runtime variable for intellisense to work.
+            //Generate code for other variable as well at design time in addition to runtime variable for
+            // intellisense to work.
             if (designerMode)
             {
                 GenerateItemTypeExpressions(

@@ -1299,7 +1299,8 @@ namespace System.Runtime.Serialization
                                     continue;
                             }
 
-                            //skip ExtensionData member of type ExtensionDataObject if IExtensibleDataObject is implemented in non-attributed type
+                            //skip ExtensionData member of type ExtensionDataObject if IExtensibleDataObject is implemented in
+                            // non-attributed type
                             if (
                                 this.hasExtensionData
                                 && memberContract.MemberType == Globals.TypeOfExtensionDataObject
@@ -1360,7 +1361,8 @@ namespace System.Runtime.Serialization
 
             bool SetIfGetOnlyCollection(DataMember memberContract, bool skipIfReadOnlyContract)
             {
-                //OK to call IsCollection here since the use of surrogated collection types is not supported in get-only scenarios
+                //OK to call IsCollection here since the use of surrogated collection types is not supported in
+                // get-only scenarios
                 if (
                     CollectionDataContract.IsCollection(
                         memberContract.MemberType,

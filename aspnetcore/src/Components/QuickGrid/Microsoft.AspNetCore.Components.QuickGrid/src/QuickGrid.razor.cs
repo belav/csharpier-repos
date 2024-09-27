@@ -20,7 +20,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     /// A queryable source of data for the grid.
     ///
     /// This could be in-memory data converted to queryable using the
-    /// <see cref="System.Linq.Queryable.AsQueryable(System.Collections.IEnumerable)"/> extension method,
+    /// <see cref="System.Linq.Queryable.AsQueryable(System.Collections.IEnumerable)"/> extension
+    // method,
     /// or an EntityFramework DataSet or an <see cref="IQueryable"/> derived from it.
     ///
     /// You should supply either <see cref="Items"/> or <see cref="ItemsProvider"/>, but not both.
@@ -37,7 +38,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     public GridItemsProvider<TGridItem>? ItemsProvider { get; set; }
 
     /// <summary>
-    /// An optional CSS class name. If given, this will be included in the class attribute of the rendered table.
+    /// An optional CSS class name. If given, this will be included in the class attribute of the
+    // rendered table.
     /// </summary>
     [Parameter]
     public string? Class { get; set; }
@@ -56,32 +58,40 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
-    /// If true, the grid will be rendered with virtualization. This is normally used in conjunction with
-    /// scrolling and causes the grid to fetch and render only the data around the current scroll viewport.
+    /// If true, the grid will be rendered with virtualization. This is normally used in conjunction
+    // with
+    /// scrolling and causes the grid to fetch and render only the data around the current scroll
+    // viewport.
     /// This can greatly improve the performance when scrolling through large data sets.
     ///
-    /// If you use <see cref="Virtualize"/>, you should supply a value for <see cref="ItemSize"/> and must
+    /// If you use <see cref="Virtualize"/>, you should supply a value for <see cref="ItemSize"/> and
+    // must
     /// ensure that every row renders with the same constant height.
     ///
-    /// Generally it's preferable not to use <see cref="Virtualize"/> if the amount of data being rendered
+    /// Generally it's preferable not to use <see cref="Virtualize"/> if the amount of data being
+    // rendered
     /// is small or if you are using pagination.
     /// </summary>
     [Parameter]
     public bool Virtualize { get; set; }
 
     /// <summary>
-    /// This is applicable only when using <see cref="Virtualize"/>. It defines an expected height in pixels for
-    /// each row, allowing the virtualization mechanism to fetch the correct number of items to match the display
+    /// This is applicable only when using <see cref="Virtualize"/>. It defines an expected height in
+    // pixels for
+    /// each row, allowing the virtualization mechanism to fetch the correct number of items to match
+    // the display
     /// size and to ensure accurate scrolling.
     /// </summary>
     [Parameter]
     public float ItemSize { get; set; } = 50;
 
     /// <summary>
-    /// Optionally defines a value for @key on each rendered row. Typically this should be used to specify a
+    /// Optionally defines a value for @key on each rendered row. Typically this should be used to
+    // specify a
     /// unique identifier, such as a primary key value, for each data item.
     ///
-    /// This allows the grid to preserve the association between row elements and data items based on their
+    /// This allows the grid to preserve the association between row elements and data items based on
+    // their
     /// unique identifiers, even when the TGridItem instances are replaced by new copies (for
     /// example, after a new query against the underlying data store).
     ///
@@ -91,10 +101,12 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     public Func<TGridItem, object> ItemKey { get; set; } = x => x!;
 
     /// <summary>
-    /// Optionally links this <see cref="QuickGrid{TGridItem}"/> instance with a <see cref="PaginationState"/> model,
+    /// Optionally links this <see cref="QuickGrid{TGridItem}"/> instance with a <see
+    // cref="PaginationState"/> model,
     /// causing the grid to fetch and render only the current page of data.
     ///
-    /// This is normally used in conjunction with a <see cref="Paginator"/> component or some other UI logic
+    /// This is normally used in conjunction with a <see cref="Paginator"/> component or some other UI
+    // logic
     /// that displays and updates the supplied <see cref="PaginationState"/> instance.
     /// </summary>
     [Parameter]
@@ -117,11 +129,14 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     private int _ariaBodyRowCount;
     private ICollection<TGridItem> _currentNonVirtualizedViewItems = Array.Empty<TGridItem>();
 
-    // IQueryable only exposes synchronous query APIs. IAsyncQueryExecutor is an adapter that lets us invoke any
-    // async query APIs that might be available. We have built-in support for using EF Core's async query APIs.
+    // IQueryable only exposes synchronous query APIs. IAsyncQueryExecutor is an adapter that lets us
+    // invoke any
+    // async query APIs that might be available. We have built-in support for using EF Core's async
+    // query APIs.
     private IAsyncQueryExecutor? _asyncQueryExecutor;
 
-    // We cascade the InternalGridContext to descendants, which in turn call it to add themselves to _columns
+    // We cascade the InternalGridContext to descendants, which in turn call it to add themselves to
+    // _columns
     // This happens on every render so that the column list can be updated dynamically
     private readonly InternalGridContext<TGridItem> _internalGridContext;
     private readonly List<ColumnBase<TGridItem>> _columns;
@@ -141,8 +156,10 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     private readonly RenderFragment _renderColumnHeaders;
     private readonly RenderFragment _renderNonVirtualizedRows;
 
-    // We try to minimize the number of times we query the items provider, since queries may be expensive
-    // We only re-query when the developer calls RefreshDataAsync, or if we know something's changed, such
+    // We try to minimize the number of times we query the items provider, since queries may be
+    // expensive
+    // We only re-query when the developer calls RefreshDataAsync, or if we know something's changed,
+    // such
     // as sort order, the pagination state, or the data source itself. These fields help us detect when
     // things have changed, and to discard earlier load attempts that were superseded.
     private int? _lastRefreshedPaginationStateHash;
@@ -165,9 +182,11 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         _renderColumnHeaders = RenderColumnHeaders;
         _renderNonVirtualizedRows = RenderNonVirtualizedRows;
 
-        // As a special case, we don't issue the first data load request until we've collected the initial set of columns
+        // As a special case, we don't issue the first data load request until we've collected the initial
+        // set of columns
         // This is so we can apply default sort order (or any future per-column options) before loading data
-        // We use EventCallbackSubscriber to safely hook this async operation into the synchronous rendering flow
+        // We use EventCallbackSubscriber to safely hook this async operation into the synchronous rendering
+        // flow
         var columnsFirstCollectedSubscriber = new EventCallbackSubscriber<object?>(
             EventCallback.Factory.Create<object?>(this, RefreshDataCoreAsync)
         );
@@ -201,7 +220,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
             || (Pagination?.GetHashCode() != _lastRefreshedPaginationStateHash);
 
         // We don't want to trigger the first data load until we've collected the initial set of columns,
-        // because they might perform some action like setting the default sort order, so it would be wasteful
+        // because they might perform some action like setting the default sort order, so it would be
+        // wasteful
         // to have to re-query immediately
         return (_columns.Count > 0 && mustRefreshData)
             ? RefreshDataCoreAsync()
@@ -264,7 +284,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     /// Sets the grid's current sort column to the specified <paramref name="column"/>.
     /// </summary>
     /// <param name="column">The column that defines the new sort order.</param>
-    /// <param name="direction">The direction of sorting. If the value is <see cref="SortDirection.Auto"/>, then it will toggle the direction on each call.</param>
+    /// <param name="direction">The direction of sorting. If the value is <see
+    // cref="SortDirection.Auto"/>, then it will toggle the direction on each call.</param>
     /// <returns>A <see cref="Task"/> representing the completion of the operation.</returns>
     public Task SortByColumnAsync(
         ColumnBase<TGridItem> column,
@@ -286,7 +307,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
     }
 
     /// <summary>
-    /// Displays the <see cref="ColumnBase{TGridItem}.ColumnOptions"/> UI for the specified column, closing any other column
+    /// Displays the <see cref="ColumnBase{TGridItem}.ColumnOptions"/> UI for the specified column,
+    // closing any other column
     /// options UI that was previously displayed.
     /// </summary>
     /// <param name="column">The column whose options are to be displayed, if any are available.</param>
@@ -309,7 +331,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         StateHasChanged();
     }
 
-    // Same as RefreshDataAsync, except without forcing a re-render. We use this from OnParametersSetAsync
+    // Same as RefreshDataAsync, except without forcing a re-render. We use this from
+    // OnParametersSetAsync
     // because in that case there's going to be a re-render anyway.
     private async Task RefreshDataCoreAsync()
     {
@@ -350,15 +373,18 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         }
     }
 
-    // Gets called both by RefreshDataCoreAsync and directly by the Virtualize child component during scrolling
+    // Gets called both by RefreshDataCoreAsync and directly by the Virtualize child component during
+    // scrolling
     private async ValueTask<ItemsProviderResult<(int, TGridItem)>> ProvideVirtualizedItems(
         ItemsProviderRequest request
     )
     {
         _lastRefreshedPaginationStateHash = Pagination?.GetHashCode();
 
-        // Debounce the requests. This eliminates a lot of redundant queries at the cost of slight lag after interactions.
-        // TODO: Consider making this configurable, or smarter (e.g., doesn't delay on first call in a batch, then the amount
+        // Debounce the requests. This eliminates a lot of redundant queries at the cost of slight lag after
+        // interactions.
+        // TODO: Consider making this configurable, or smarter (e.g., doesn't delay on first call in a
+        // batch, then the amount
         // of delay increases if you rapidly issue repeated requests, such as when scrolling a long way)
         await Task.Delay(100);
         if (request.CancellationToken.IsCancellationRequested)
@@ -386,10 +412,14 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
 
         if (!request.CancellationToken.IsCancellationRequested)
         {
-            // ARIA's rowcount is part of the UI, so it should reflect what the human user regards as the number of rows in the table,
-            // not the number of physical <tr> elements. For virtualization this means what's in the entire scrollable range, not just
-            // the current viewport. In the case where you're also paginating then it means what's conceptually on the current page.
-            // TODO: This currently assumes we always want to expand the last page to have ItemsPerPage rows, but the experience might
+            // ARIA's rowcount is part of the UI, so it should reflect what the human user regards as the number
+            // of rows in the table,
+            // not the number of physical <tr> elements. For virtualization this means what's in the entire
+            // scrollable range, not just
+            // the current viewport. In the case where you're also paginating then it means what's conceptually
+            // on the current page.
+            // TODO: This currently assumes we always want to expand the last page to have ItemsPerPage rows,
+            // but the experience might
             //       be better if we let the last page only be as big as its number of actual rows.
             _ariaBodyRowCount = Pagination is null
                 ? providerResult.TotalItemCount
@@ -397,8 +427,10 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
 
             Pagination?.SetTotalItemCountAsync(providerResult.TotalItemCount);
 
-            // We're supplying the row index along with each row's data because we need it for aria-rowindex, and we have to account for
-            // the virtualized start index. It might be more performant just to have some _latestQueryRowStartIndex field, but we'd have
+            // We're supplying the row index along with each row's data because we need it for aria-rowindex,
+            // and we have to account for
+            // the virtualized start index. It might be more performant just to have some
+            // _latestQueryRowStartIndex field, but we'd have
             // to make sure it doesn't get out of sync with the rows being rendered.
             return new ItemsProviderResult<(int, TGridItem)>(
                 items: providerResult.Items.Select(
@@ -411,7 +443,8 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
         return default;
     }
 
-    // Normalizes all the different ways of configuring a data source so they have common GridItemsProvider-shaped API
+    // Normalizes all the different ways of configuring a data source so they have common
+    // GridItemsProvider-shaped API
     private async ValueTask<GridItemsProviderResult<TGridItem>> ResolveItemsRequestAsync(
         GridItemsProviderRequest<TGridItem> request
     )

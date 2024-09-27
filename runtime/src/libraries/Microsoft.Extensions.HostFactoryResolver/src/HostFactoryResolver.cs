@@ -388,9 +388,12 @@ namespace Microsoft.Extensions.Hosting
                 }
             }
 
-            // HostFactoryResolver is used by tools that explicitly don't want to reference Microsoft.Extensions.Hosting assemblies.
-            // So don't depend on the public HostAbortedException directly. Instead, load the exception type dynamically if it can
-            // be found. If it can't (possibly because the app is using an older version), throw a private exception with the same name.
+            // HostFactoryResolver is used by tools that explicitly don't want to reference
+            // Microsoft.Extensions.Hosting assemblies.
+            // So don't depend on the public HostAbortedException directly. Instead, load the exception type
+            // dynamically if it can
+            // be found. If it can't (possibly because the app is using an older version), throw a private
+            // exception with the same name.
             private void ThrowHostAborted()
             {
                 Type? publicHostAbortedExceptionType = Type.GetType(

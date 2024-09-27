@@ -12,7 +12,8 @@ using AstUtils = System.Linq.Expressions.Utils;
 namespace System.Dynamic
 {
     /// <summary>
-    /// Represents a set of binding restrictions on the <see cref="DynamicMetaObject"/> under which the dynamic binding is valid.
+    /// Represents a set of binding restrictions on the <see cref="DynamicMetaObject"/> under which the
+    // dynamic binding is valid.
     /// </summary>
     [DebuggerTypeProxy(typeof(BindingRestrictionsProxy)), DebuggerDisplay("{DebugView}")]
     public abstract class BindingRestrictions
@@ -38,7 +39,8 @@ namespace System.Dynamic
         /// <summary>
         /// Merges the set of binding restrictions with the current binding restrictions.
         /// </summary>
-        /// <param name="restrictions">The set of restrictions with which to merge the current binding restrictions.</param>
+        /// <param name="restrictions">The set of restrictions with which to merge the current binding
+        // restrictions.</param>
         /// <returns>The new set of binding restrictions.</returns>
         public BindingRestrictions Merge(BindingRestrictions restrictions)
         {
@@ -71,7 +73,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// The method takes a DynamicMetaObject, and returns an instance restriction for testing null if the object
+        /// The method takes a DynamicMetaObject, and returns an instance restriction for testing null if
+        // the object
         /// holds a null value, otherwise returns a type restriction.
         /// </summary>
         internal static BindingRestrictions GetTypeRestriction(DynamicMetaObject obj)
@@ -120,9 +123,11 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// Combines binding restrictions from the list of <see cref="DynamicMetaObject"/> instances into one set of restrictions.
+        /// Combines binding restrictions from the list of <see cref="DynamicMetaObject"/> instances into
+        // one set of restrictions.
         /// </summary>
-        /// <param name="contributingObjects">The list of <see cref="DynamicMetaObject"/> instances from which to combine restrictions.</param>
+        /// <param name="contributingObjects">The list of <see cref="DynamicMetaObject"/> instances from
+        // which to combine restrictions.</param>
         /// <returns>The new set of binding restrictions.</returns>
         public static BindingRestrictions Combine(IList<DynamicMetaObject>? contributingObjects)
         {

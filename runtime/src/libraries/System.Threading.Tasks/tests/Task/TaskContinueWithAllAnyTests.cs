@@ -12,7 +12,8 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
 
     /// <summary>
     /// Tests for ContinueWhenAny, and ContinueWhenAll
-    //  The strategy is simple: create one or more antecedent tasks to pass into ContinueWhen/ContinueWhenAny.
+    //  The strategy is simple: create one or more antecedent tasks to pass into
+    // ContinueWhen/ContinueWhenAny.
     ///  Then, call ContinueWhen/ContinueWhenAny. Then check whether the continuation ran or not.
     /// </summary>
     public sealed class TaskContinueWithAllAnyTest
@@ -869,7 +870,8 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             //Function point comparison cant be done by rounding off to nearest decimal points since
             //1.64 could be represented as 1.63999999 or as 1.6499999999. To perform floating point comparisons,
-            //a range has to be defined and check to ensure that the result obtained is within the specified range
+            //a range has to be defined and check to ensure that the result obtained is within the specified
+            // range
             double minLimit = 1.63;
             double maxLimit = 1.65;
 
@@ -1014,8 +1016,10 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         }
 
         /// <summary>
-        /// Cancel self workload. The CancellationToken has been wired such that the source passed to this method
-        /// is a source that can actually causes the Task CancellationToken to be canceled. The source could be the
+        /// Cancel self workload. The CancellationToken has been wired such that the source passed to this
+        // method
+        /// is a source that can actually causes the Task CancellationToken to be canceled. The source could
+        // be the
         /// Token's original source, or one of the sources in case of Linked Tokens
         /// </summary>
         /// <param name="cts"></param>
@@ -1056,8 +1060,10 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
     }
 
     /// <summary>
-    /// TaskType argument tells us what the type of all the antecedent tasks is, and what the type of the continuation task is.
-    /// The TaskTypeOption that ends with "NEW" additionally specifies that the ContinueWhen overload to be used is one that
+    /// TaskType argument tells us what the type of all the antecedent tasks is, and what the type of
+    // the continuation task is.
+    /// The TaskTypeOption that ends with "NEW" additionally specifies that the ContinueWhen overload to
+    // be used is one that
     /// has two type arguments (TAntecedentResult, TResult).
     /// </summary>
     public enum TaskType

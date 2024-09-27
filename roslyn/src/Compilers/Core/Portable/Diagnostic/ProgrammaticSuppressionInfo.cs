@@ -8,7 +8,8 @@ using System.Collections.Immutable;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// Contains information about the source of a programmatic diagnostic suppression produced by an <see cref="DiagnosticSuppressor"/>.
+    /// Contains information about the source of a programmatic diagnostic suppression produced by an
+    // <see cref="DiagnosticSuppressor"/>.
     /// </summary>
     internal sealed class ProgrammaticSuppressionInfo : IEquatable<ProgrammaticSuppressionInfo?>
     {

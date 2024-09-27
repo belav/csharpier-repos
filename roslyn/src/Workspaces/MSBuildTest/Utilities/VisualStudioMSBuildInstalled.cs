@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     )
                     .Result;
 
-                // HACK: for .NET Framework build hosts, we don't actually need the project path to determine whether there's a usable VS -- so we can pass any file name here.
+                // HACK: for .NET Framework build hosts, we don't actually need the project path to determine
+                // whether there's a usable VS -- so we can pass any file name here.
                 return buildHost
                     .HasUsableMSBuildAsync("NonExistent.sln", CancellationToken.None)
                     .Result;

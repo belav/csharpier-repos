@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         public static bool IsBuiltInType(ITypeSymbol type) => type?.IsSpecialType() == true;
 
         /// <summary>
-        /// Analyzes if type information is obvious to the reader by simply looking at the assignment expression.
+        /// Analyzes if type information is obvious to the reader by simply looking at the assignment
+        // expression.
         /// </summary>
         /// <remarks>
         /// <paramref name="typeInDeclaration"/> accepts null, to be able to cater to codegen features
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                 .GetTypeInfo(containingTypeName, cancellationToken)
                 .Type;
 
-            // The containing type was determined from an expression of the form ContainingType.MemberName, and the
+            // The containing type was determined from an expression of the form ContainingType.MemberName, and
+            // the
             // caller verifies that MemberName resolves to a method symbol.
             Contract.ThrowIfNull(containingType);
 
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         }
 
         /// <remarks>
-        /// If there are type arguments on either side of assignment, we match type names instead of type equality
+        /// If there are type arguments on either side of assignment, we match type names instead of type
+        // equality
         /// to account for inferred generic type arguments.
         /// e.g: Tuple.Create(0, true) returns Tuple&lt;X,y&gt; which isn't the same as type Tuple.
         /// otherwise, we match for type equivalence

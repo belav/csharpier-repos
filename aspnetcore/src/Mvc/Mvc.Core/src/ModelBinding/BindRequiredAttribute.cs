@@ -6,8 +6,10 @@
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 /// <summary>
-/// Indicates that a property is required for model binding. When applied to a property, the model binding system
-/// requires a value for that property. When applied to a type, the model binding system requires values for all
+/// Indicates that a property is required for model binding. When applied to a property, the model
+// binding system
+/// requires a value for that property. When applied to a type, the model binding system requires
+// values for all
 /// properties that type defines.
 /// </summary>
 [AttributeUsage(

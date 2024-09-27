@@ -14,11 +14,16 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CodeFixes;
 
 /// <summary>
-/// Helper type for <see cref="CodeFixProvider"/>s that need to provide 'fix all' support in a document, by operate by
-/// applying one fix at a time, then recomputing the work to do after that fix is applied.  While this is not generally
-/// desirable from a performance perspective (due to the costs of forking a document after each fix), it is sometimes
-/// necessary as individual fixes can impact the code so substantially that successive fixes may no longer apply, or may
-/// have dramatically different data to work with before the fix.  For example, if one fix removes statements entirely
+/// Helper type for <see cref="CodeFixProvider"/>s that need to provide 'fix all' support in a
+// document, by operate by
+/// applying one fix at a time, then recomputing the work to do after that fix is applied.  While
+// this is not generally
+/// desirable from a performance perspective (due to the costs of forking a document after each
+// fix), it is sometimes
+/// necessary as individual fixes can impact the code so substantially that successive fixes may no
+// longer apply, or may
+/// have dramatically different data to work with before the fix.  For example, if one fix removes
+// statements entirely
 /// that another fix was contained in.
 /// </summary>
 internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
@@ -35,11 +40,16 @@ internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
     }
 
     /// <summary>
-    /// Subclasses must override this to actually provide the fix for a particular diagnostic.  The implementation will
-    /// be passed the <em>current</em> <paramref name="document"/> (containing the changes from all prior fixes), the
-    /// the <paramref name="diagnosticNode"/> in that document, for the current diagnostic being fixed.  And the <see
-    /// cref="Diagnostic.Properties"/> for that diagnostic.  The diagnostic itself is not passed along as it was
-    /// computed with respect to the original user document, and as such its <see cref="Diagnostic.Location"/> and <see
+    /// Subclasses must override this to actually provide the fix for a particular diagnostic.  The
+    // implementation will
+    /// be passed the <em>current</em> <paramref name="document"/> (containing the changes from all
+    // prior fixes), the
+    /// the <paramref name="diagnosticNode"/> in that document, for the current diagnostic being fixed.
+    // And the <see
+    /// cref="Diagnostic.Properties"/> for that diagnostic.  The diagnostic itself is not passed along
+    // as it was
+    /// computed with respect to the original user document, and as such its <see
+    // cref="Diagnostic.Location"/> and <see
     /// cref="Diagnostic.AdditionalLocations"/> will not be correct.
     /// </summary>
     protected abstract Task FixAsync(
@@ -85,7 +95,8 @@ internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
 
         var solutionServices = document.Project.Solution.Services;
 
-        // We're going to be continually editing this tree.  Track all the nodes we care about so we can find them
+        // We're going to be continually editing this tree.  Track all the nodes we care about so we can
+        // find them
         // across each edit.
         var semanticDocument = await SemanticDocument
             .CreateAsync(

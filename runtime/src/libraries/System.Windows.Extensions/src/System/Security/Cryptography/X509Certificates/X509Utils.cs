@@ -28,7 +28,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             SafeCertStoreHandle safeCertStoreHandle;
 
-            // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in this operation.
+            // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in
+            // this operation.
             // By default, Archived certificates will not be included.
             safeCertStoreHandle = Interop.Crypt32.CertOpenStore(
                 new IntPtr(Interop.Crypt32.CERT_STORE_PROV_MEMORY),
@@ -45,7 +46,8 @@ namespace System.Security.Cryptography.X509Certificates
                 throw e;
             }
 
-            // We use CertAddCertificateLinkToStore to keep a link to the original store, so any property changes get
+            // We use CertAddCertificateLinkToStore to keep a link to the original store, so any property
+            // changes get
             // applied to the original store. This has a limit of 99 links per cert context however.
             foreach (X509Certificate2 x509 in collection)
             {

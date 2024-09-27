@@ -32,7 +32,8 @@ public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeat
         _sender = new SocketSender(_socket, PipeScheduler.ThreadPool);
         _receiver = new SocketReceiver(_socket, PipeScheduler.ThreadPool);
 
-        // Add IConnectionInherentKeepAliveFeature to the tcp connection impl since Kestrel doesn't implement
+        // Add IConnectionInherentKeepAliveFeature to the tcp connection impl since Kestrel doesn't
+        // implement
         // the IConnectionHeartbeatFeature
         Features.Set<IConnectionInherentKeepAliveFeature>(this);
     }
@@ -43,7 +44,8 @@ public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeat
     public override string ConnectionId { get; set; } = Guid.NewGuid().ToString();
     public override IDictionary<object, object> Items { get; set; } = new ConnectionItems();
 
-    // We claim to have inherent keep-alive so the client doesn't kill the connection when it hasn't seen ping frames.
+    // We claim to have inherent keep-alive so the client doesn't kill the connection when it hasn't
+    // seen ping frames.
     public bool HasInherentKeepAlive { get; } = true;
 
     public override ValueTask DisposeAsync()

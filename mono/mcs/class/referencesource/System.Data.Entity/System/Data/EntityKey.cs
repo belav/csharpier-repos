@@ -105,7 +105,8 @@ namespace System.Data
         /// <summary>
         /// Constructs an EntityKey with the given key values.
         /// </summary>
-        /// <param name="qualifiedEntitySetName">The EntitySet name, qualified by the EntityContainer name, of the entity</param>
+        /// <param name="qualifiedEntitySetName">The EntitySet name, qualified by the EntityContainer name,
+        // of the entity</param>
         /// <param name="entityKeyValues">The key-value pairs that identify the entity</param>
         public EntityKey(
             string qualifiedEntitySetName,
@@ -126,7 +127,8 @@ namespace System.Data
         /// <summary>
         /// Constructs an EntityKey with the given key values.
         /// </summary>
-        /// <param name="qualifiedEntitySetName">The EntitySet name, qualified by the EntityContainer name, of the entity</param>
+        /// <param name="qualifiedEntitySetName">The EntitySet name, qualified by the EntityContainer name,
+        // of the entity</param>
         /// <param name="entityKeyValues">The key-value pairs that identify the entity</param>
         public EntityKey(
             string qualifiedEntitySetName,
@@ -148,7 +150,8 @@ namespace System.Data
         /// <summary>
         /// Constructs an EntityKey with the given single key name and value.
         /// </summary>
-        /// <param name="qualifiedEntitySetName">The EntitySet name, qualified by the EntityContainer name, of the entity</param>
+        /// <param name="qualifiedEntitySetName">The EntitySet name, qualified by the EntityContainer name,
+        // of the entity</param>
         /// <param name="keyName">The key name that identifies the entity</param>
         /// <param name="keyValue">The key value that identifies the entity</param>
         public EntityKey(string qualifiedEntitySetName, string keyName, object keyValue)
@@ -237,7 +240,8 @@ namespace System.Data
         /// SQLBUDT 523554: Performance optimization: Does no validate type of key members.
         /// </summary>
         /// <param name="entitySet">EntitySet of the entity</param>
-        /// <param name="singletonKeyValue">The single value that composes the entity's key, assumed to contain the correct type.</param>
+        /// <param name="singletonKeyValue">The single value that composes the entity's key, assumed to
+        // contain the correct type.</param>
         internal EntityKey(EntitySetBase entitySet, object singletonKeyValue)
         {
             Debug.Assert(entitySet != null, "EntitySet cannot be null.");
@@ -260,7 +264,8 @@ namespace System.Data
         /// SQLBUDT 523554: Performance optimization: Does no validate type of key members.
         /// </summary>
         /// <param name="entitySet">EntitySet of the entity</param>
-        /// <param name="compositeKeyValues">A list of the values (at least 2) that compose the entity's key, assumed to contain correct types.</param>
+        /// <param name="compositeKeyValues">A list of the values (at least 2) that compose the entity's
+        // key, assumed to contain correct types.</param>
         internal EntityKey(EntitySetBase entitySet, object[] compositeKeyValues)
         {
             Debug.Assert(entitySet != null, "EntitySet cannot be null.");
@@ -370,7 +375,8 @@ namespace System.Data
                         )
                     )
                     {
-                        // If we did not retrieve values from the setter (i.e. encoded settings), we need to keep track of the
+                        // If we did not retrieve values from the setter (i.e. encoded settings), we need to keep track of
+                        // the
                         // array instance because the array members will be set next.
                         _deserializedMembers = value;
                     }
@@ -416,7 +422,8 @@ namespace System.Data
         /// </summary>
         /// <param name="metadataWorkspace">workspace in which to look up the entity set</param>
         /// <returns>the entity set from the given workspace for this entity key</returns>
-        /// <exception cref="ArgumentException">the entity set could not be located in the workspace</exception>
+        /// <exception cref="ArgumentException">the entity set could not be located in the
+        // workspace</exception>
         public EntitySet GetEntitySet(MetadataWorkspace metadataWorkspace)
         {
             EntityUtil.CheckArgumentNull(metadataWorkspace, "metadataWorkspace");
@@ -630,7 +637,8 @@ namespace System.Data
                         return false;
                     }
 
-                    // they are both byte[] because they have the same _containsByteArray value of true, and only a single value
+                    // they are both byte[] because they have the same _containsByteArray value of true, and only a
+                    // single value
                     if (
                         !ByValueEqualityComparer.CompareBinaryValues(
                             (byte[])key1._singletonKeyValue,
@@ -784,13 +792,16 @@ namespace System.Data
 
 
         /// <summary>
-        /// Returns an array of string/<see cref="DbExpression"/> pairs, one for each key value in this EntityKey,
+        /// Returns an array of string/<see cref="DbExpression"/> pairs, one for each key value in this
+        // EntityKey,
         /// where the string is the key member name and the DbExpression is the value in this EntityKey
         /// for that key member, represented as a <see cref="DbConstantExpression"/> with the same result
         /// type as the key member.
         /// </summary>
-        /// <param name="entitySet">The entity set to which this EntityKey refers; used to verify that this key has the required key members</param>
-        /// <returns>The name -> expression mappings for the key member values represented by this EntityKey</returns>
+        /// <param name="entitySet">The entity set to which this EntityKey refers; used to verify that this
+        // key has the required key members</param>
+        /// <returns>The name -> expression mappings for the key member values represented by this
+        // EntityKey</returns>
         internal KeyValuePair<string, DbExpression>[] GetKeyValueExpressions(EntitySet entitySet)
         {
             Debug.Assert(
@@ -1132,12 +1143,15 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Verify that the types of the objects passed in to be used as keys actually match the types from the model.
-        /// This error is also caught when the entity is materialized and when the key value is set, at which time it
+        /// Verify that the types of the objects passed in to be used as keys actually match the types from
+        // the model.
+        /// This error is also caught when the entity is materialized and when the key value is set, at
+        // which time it
         /// also throws ThrowSetInvalidValue().
         /// SQLBUDT 513838. This error is possible and should be caught at run time, not in an assertion.
         /// </summary>
-        /// <param name="workspace">MetadataWorkspace used to resolve and validate types of enum keys.</param>
+        /// <param name="workspace">MetadataWorkspace used to resolve and validate types of enum
+        // keys.</param>
         /// <param name="entitySet">The EntitySet to validate against</param>
         internal void ValidateEntityKey(MetadataWorkspace workspace, EntitySet entitySet)
         {
@@ -1145,14 +1159,18 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Verify that the types of the objects passed in to be used as keys actually match the types from the model.
-        /// This error is also caught when the entity is materialized and when the key value is set, at which time it
+        /// Verify that the types of the objects passed in to be used as keys actually match the types from
+        // the model.
+        /// This error is also caught when the entity is materialized and when the key value is set, at
+        // which time it
         /// also throws ThrowSetInvalidValue().
         /// SQLBUDT 513838. This error is possible and should be caught at run time, not in an assertion.
         /// </summary>
-        /// <param name="workspace">MetadataWorkspace used to resolve and validate types of enum keys.</param>
+        /// <param name="workspace">MetadataWorkspace used to resolve and validate types of enum
+        // keys.</param>
         /// <param name="entitySet">The EntitySet to validate against</param>
-        /// <param name="isArgumentException">Wether to throw ArgumentException or InvalidOperationException.</param>
+        /// <param name="isArgumentException">Wether to throw ArgumentException or
+        // InvalidOperationException.</param>
         /// <param name="argumentName">Name of the argument in case of ArgumentException.</param>
         internal void ValidateEntityKey(
             MetadataWorkspace workspace,
@@ -1291,10 +1309,12 @@ namespace System.Data
         /// <summary>
         /// Validates whether type of the key matches the type of the key value.
         /// </summary>
-        /// <param name="workspace">MetadataWorkspace used to resolve and validate types of enum keys.</param>
+        /// <param name="workspace">MetadataWorkspace used to resolve and validate types of enum
+        // keys.</param>
         /// <param name="keyMember">Edm key member.</param>
         /// <param name="keyValue">The value of the key.</param>
-        /// <param name="isArgumentException">Whether to throw ArgumentException or InvalidOperation exception if validation fails.</param>
+        /// <param name="isArgumentException">Whether to throw ArgumentException or InvalidOperation
+        // exception if validation fails.</param>
         /// <param name="argumentName">Name of the argument to be used for ArgumentExceptions.</param>
         private static void ValidateTypeOfKeyValue(
             MetadataWorkspace workspace,

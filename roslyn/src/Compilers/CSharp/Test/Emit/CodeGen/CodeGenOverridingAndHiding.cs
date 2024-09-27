@@ -300,7 +300,8 @@ DerivedClass.Equals(5, 6)",
             );
 
             comp.VerifyDiagnostics(
-                // (12,7): warning CS0659: 'DerivedClass' overrides Object.Equals(object o) but does not override Object.GetHashCode()
+                // (12,7): warning CS0659: 'DerivedClass' overrides Object.Equals(object o) but does not override
+                // Object.GetHashCode()
                 // class DerivedClass : BaseClass<int, long>
                 Diagnostic(ErrorCode.WRN_EqualsWithoutGetHashCode, "DerivedClass")
                     .WithArguments("DerivedClass")
@@ -460,7 +461,8 @@ Class5.Member2",
         public void TestOverridingChangeGenericParameterNames()
         {
             // Tests:
-            // Change names of method-level type parameters in overridden method – test that we emit the type parameters correctly
+            // Change names of method-level type parameters in overridden method – test that we emit the type
+            // parameters correctly
 
             var source =
                 @"
@@ -660,7 +662,8 @@ Derived.Method3([6], [7])",
         public void TestOverridingVirtualWithAbstract()
         {
             // Tests:
-            // Override virtual member with abstract member – override this abstract member in further derived class
+            // Override virtual member with abstract member – override this abstract member in further derived
+            // class
 
             var source =
                 @"
@@ -1271,7 +1274,8 @@ Derived2.Finalize()
         public void TestOverrideResolution2()
         {
             // Tests:
-            // Override overloaded base virtual / abstract member – overloads differ by generic type parameter count
+            // Override overloaded base virtual / abstract member – overloads differ by generic type parameter
+            // count
             // Override overloaded base virtual / abstract member – overloads spread across multiple base types
 
             var source =
@@ -1325,7 +1329,8 @@ Derived.Method<,>)"
         public void TestOverrideResolution1()
         {
             // Tests:
-            // Override overloaded base virtual / abstract member – overloads differ by parameter types and count
+            // Override overloaded base virtual / abstract member – overloads differ by parameter types and
+            // count
             // Override overloaded base virtual / abstract member – overloads spread across multiple base types
 
             var source =
@@ -1522,8 +1527,11 @@ Derived.Method(BASEREF List<int> a)
                         {
                             case 0:
                                 compilation.VerifyDiagnostics(
-                                    // (5,25): warning CS1957: Member 'Derived.Method(ref List<int>, out List<int>)' overrides 'Base<int, int>.Method(ref List<int>, out List<int>)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                                    //     public virtual void Method(ref List<T> x, out List<U> y) { y = null; Console.WriteLine("Base<T, U>.Method(ref List<T> x, out List<U> y)"); }
+                                    // (5,25): warning CS1957: Member 'Derived.Method(ref List<int>, out List<int>)' overrides
+                                    // 'Base<int, int>.Method(ref List<int>, out List<int>)'. There are multiple override candidates at
+                                    // run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                                    //     public virtual void Method(ref List<T> x, out List<U> y) { y = null;
+                                    // Console.WriteLine("Base<T, U>.Method(ref List<T> x, out List<U> y)"); }
                                     Diagnostic(
                                             ErrorCode.WRN_MultipleRuntimeOverrideMatches,
                                             "Method"
@@ -1537,8 +1545,11 @@ Derived.Method(BASEREF List<int> a)
                                 break;
                             default:
                                 compilation.VerifyDiagnostics(
-                                    // (6,25): warning CS1957: Member 'Derived.Method(ref List<int>, out List<int>)' overrides 'Base<int, int>.Method(ref List<int>, out List<int>)'. There are multiple override candidates at run-time. It is implementation dependent which method will be called. Please use a newer runtime.
-                                    //     public virtual void Method(ref List<T> x, out List<U> y) { y = null; Console.WriteLine("Base<T, U>.Method(ref List<T> x, out List<U> y)"); }
+                                    // (6,25): warning CS1957: Member 'Derived.Method(ref List<int>, out List<int>)' overrides
+                                    // 'Base<int, int>.Method(ref List<int>, out List<int>)'. There are multiple override candidates at
+                                    // run-time. It is implementation dependent which method will be called. Please use a newer runtime.
+                                    //     public virtual void Method(ref List<T> x, out List<U> y) { y = null;
+                                    // Console.WriteLine("Base<T, U>.Method(ref List<T> x, out List<U> y)"); }
                                     Diagnostic(
                                             ErrorCode.WRN_MultipleRuntimeOverrideMatches,
                                             "Method"
@@ -2207,32 +2218,38 @@ Derived2.Field3"
             );
 
             comp.VerifyDiagnostics(
-                // (12,21): warning CS0108: 'Base.Derived.Method()' hides inherited member 'Base.Method()'. Use the new keyword if hiding was intended.
+                // (12,21): warning CS0108: 'Base.Derived.Method()' hides inherited member 'Base.Method()'. Use the
+                // new keyword if hiding was intended.
                 //         static void Method() { Console.WriteLine("Derived.Method()"); }
                 Diagnostic(ErrorCode.WRN_NewRequired, "Method")
                     .WithArguments("Base.Derived.Method()", "Base.Method()")
                     .WithLocation(12, 21),
-                // (62,13): warning CS0108: 'Base2.Derived2.Field' hides inherited member 'Base2.Field'. Use the new keyword if hiding was intended.
+                // (62,13): warning CS0108: 'Base2.Derived2.Field' hides inherited member 'Base2.Field'. Use the new
+                // keyword if hiding was intended.
                 //         int Field = 2;
                 Diagnostic(ErrorCode.WRN_NewRequired, "Field")
                     .WithArguments("Base2.Derived2.Field", "Base2.Field")
                     .WithLocation(62, 13),
-                // (63,20): warning CS0108: 'Base2.Derived2.Field2' hides inherited member 'Base2.Field2'. Use the new keyword if hiding was intended.
+                // (63,20): warning CS0108: 'Base2.Derived2.Field2' hides inherited member 'Base2.Field2'. Use the
+                // new keyword if hiding was intended.
                 //         public int Field2 = 3;
                 Diagnostic(ErrorCode.WRN_NewRequired, "Field2")
                     .WithArguments("Base2.Derived2.Field2", "Base2.Field2")
                     .WithLocation(63, 20),
-                // (74,22): warning CS0108: 'Base2.Derived2.Type2<T>' hides inherited member 'Base2.Type2<T>'. Use the new keyword if hiding was intended.
+                // (74,22): warning CS0108: 'Base2.Derived2.Type2<T>' hides inherited member 'Base2.Type2<T>'. Use
+                // the new keyword if hiding was intended.
                 //         public class Type2<T>
                 Diagnostic(ErrorCode.WRN_NewRequired, "Type2")
                     .WithArguments("Base2.Derived2.Type2<T>", "Base2.Type2<T>")
                     .WithLocation(74, 22),
-                // (99,13): warning CS0109: The member 'Derived3.Field' does not hide an accessible member. The new keyword is not required.
+                // (99,13): warning CS0109: The member 'Derived3.Field' does not hide an accessible member. The new
+                // keyword is not required.
                 //     new int Field = 2;
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "Field")
                     .WithArguments("Derived3.Field")
                     .WithLocation(99, 13),
-                // (101,26): warning CS0108: 'Derived3.Field2' hides inherited member 'Base3.Field2'. Use the new keyword if hiding was intended.
+                // (101,26): warning CS0108: 'Derived3.Field2' hides inherited member 'Base3.Field2'. Use the new
+                // keyword if hiding was intended.
                 //     protected static int Field2 = 1;
                 Diagnostic(ErrorCode.WRN_NewRequired, "Field2")
                     .WithArguments("Derived3.Field2", "Base3.Field2")
@@ -2409,36 +2426,54 @@ Base<T>.Method3()"
             );
 
             comp.VerifyDiagnostics(
-                // (43,21): warning CS0109: The member 'Derived<U>.Method(U, U)' does not hide an accessible member. The new keyword is not required.
+                // (43,21): warning CS0109: The member 'Derived<U>.Method(U, U)' does not hide an accessible member.
+                // The new keyword is not required.
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "Method")
                     .WithArguments("Derived<U>.Method(U, U)"),
-                // (47,17): warning CS0114: 'Derived<U>.Method(U, U, System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)' hides inherited member 'Base<U>.Method(U, U, System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (47,17): warning CS0114: 'Derived<U>.Method(U, U, System.Collections.Generic.List<U>,
+                // System.Collections.Generic.Dictionary<U, U>)' hides inherited member 'Base<U>.Method(U, U,
+                // System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)'. To make the
+                // current member override that implementation, add the override keyword. Otherwise add the new
+                // keyword.
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "Method")
                     .WithArguments(
                         "Derived<U>.Method(U, U, System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)",
                         "Base<U>.Method(U, U, System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)"
                     ),
-                // (51,17): warning CS0114: 'Derived<U>.Method<V>(V, U, System.Collections.Generic.List<V>, System.Collections.Generic.Dictionary<U, V>)' hides inherited member 'Base<U>.Method<U>(U, U, System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (51,17): warning CS0114: 'Derived<U>.Method<V>(V, U, System.Collections.Generic.List<V>,
+                // System.Collections.Generic.Dictionary<U, V>)' hides inherited member 'Base<U>.Method<U>(U, U,
+                // System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)'. To make the
+                // current member override that implementation, add the override keyword. Otherwise add the new
+                // keyword.
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "Method")
                     .WithArguments(
                         "Derived<U>.Method<V>(V, U, System.Collections.Generic.List<V>, System.Collections.Generic.Dictionary<U, V>)",
                         "Base<U>.Method<U>(U, U, System.Collections.Generic.List<U>, System.Collections.Generic.Dictionary<U, U>)"
                     ),
-                // (55,21): warning CS0109: The member 'Derived<U>.Method<V>(V, U, System.Collections.Generic.List<V>, System.Collections.Generic.Dictionary<V, U>)' does not hide an accessible member. The new keyword is not required.
+                // (55,21): warning CS0109: The member 'Derived<U>.Method<V>(V, U,
+                // System.Collections.Generic.List<V>, System.Collections.Generic.Dictionary<V, U>)' does not hide an
+                // accessible member. The new keyword is not required.
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "Method")
                     .WithArguments(
                         "Derived<U>.Method<V>(V, U, System.Collections.Generic.List<V>, System.Collections.Generic.Dictionary<V, U>)"
                     ),
-                // (64,24): warning CS0114: 'Derived<U>.Method(U)' hides inherited member 'Base<U>.Method(U)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (64,24): warning CS0114: 'Derived<U>.Method(U)' hides inherited member 'Base<U>.Method(U)'. To
+                // make the current member override that implementation, add the override keyword. Otherwise add the
+                // new keyword.
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "Method")
                     .WithArguments("Derived<U>.Method(U)", "Base<U>.Method(U)"),
-                // (59,24): warning CS0114: 'Derived<U>.Property1' hides inherited member 'Base<U>.Property1'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (59,24): warning CS0114: 'Derived<U>.Property1' hides inherited member 'Base<U>.Property1'. To
+                // make the current member override that implementation, add the override keyword. Otherwise add the
+                // new keyword.
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "Property1")
                     .WithArguments("Derived<U>.Property1", "Base<U>.Property1"),
-                // (63,23): warning CS0114: 'Derived<U>.Property2' hides inherited member 'Base<U>.Property2'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (63,23): warning CS0114: 'Derived<U>.Property2' hides inherited member 'Base<U>.Property2'. To
+                // make the current member override that implementation, add the override keyword. Otherwise add the
+                // new keyword.
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "Property2")
                     .WithArguments("Derived<U>.Property2", "Base<U>.Property2"),
-                // (68,16): warning CS0108: 'Derived<U>.Method2' hides inherited member 'Base<U>.Method2()'. Use the new keyword if hiding was intended.
+                // (68,16): warning CS0108: 'Derived<U>.Method2' hides inherited member 'Base<U>.Method2()'. Use the
+                // new keyword if hiding was intended.
                 Diagnostic(ErrorCode.WRN_NewRequired, "Method2")
                     .WithArguments("Derived<U>.Method2", "Base<U>.Method2()")
             );
@@ -3561,7 +3596,8 @@ public class Test
         {
             // Tests:
             // Hide public base member with inaccessible (internal) derived member
-            // In further derived class override / invoke public base member – try hiding with static and instance members
+            // In further derived class override / invoke public base member – try hiding with static and
+            // instance members
 
             var source =
                 @"
@@ -4303,7 +4339,8 @@ partial class Test
         public void TestOverridingGenericNestedClasses()
         {
             // Tests:
-            // Sanity check – use open (T) and closed (C<String>) generic types in the signature of overriding methods
+            // Sanity check – use open (T) and closed (C<String>) generic types in the signature of overriding
+            // methods
             // Override members of generic base class nested inside other generic classes
 
             var source =
@@ -4648,9 +4685,12 @@ namespace Metadata
                     // The ILDASM output is following, and Roslyn handles it correctly.
                     // Verifier tool gives different output due to the limitation of Reflection
                     // @".method public hidebysig virtual instance System.Void Method<X>(" +
-                    // @"System.String modopt([mscorlib]System.Runtime.CompilerServices.IsConst)[] modopt([mscorlib]System.Runtime.CompilerServices.IsConst) x," +
-                    // @"UInt64 modopt([mscorlib]System.Runtime.CompilerServices.IsConst)[] modopt([mscorlib]System.Runtime.CompilerServices.IsConst) y," +
-                    // @"!!X modopt([mscorlib]System.Runtime.CompilerServices.IsConst)[] modopt([mscorlib]System.Runtime.CompilerServices.IsConst) z) cil managed")
+                    // @"System.String modopt([mscorlib]System.Runtime.CompilerServices.IsConst)[]
+                    // modopt([mscorlib]System.Runtime.CompilerServices.IsConst) x," +
+                    // @"UInt64 modopt([mscorlib]System.Runtime.CompilerServices.IsConst)[]
+                    // modopt([mscorlib]System.Runtime.CompilerServices.IsConst) y," +
+                    // @"!!X modopt([mscorlib]System.Runtime.CompilerServices.IsConst)[]
+                    // modopt([mscorlib]System.Runtime.CompilerServices.IsConst) z) cil managed")
                     Signature(
                         "Metadata.GD",
                         "Method",
@@ -4805,19 +4845,24 @@ Derived1.Method`2",
             );
 
             comp.VerifyDiagnostics(
-                // (11,43): warning CS0693: Type parameter 'V' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Base<V, W>'
+                // (11,43): warning CS0693: Type parameter 'V' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Base<V, W>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "V")
                     .WithArguments("V", "Outer<T>.Inner<U>.Base<V, W>"),
-                // (11,46): warning CS0693: Type parameter 'W' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Base<V, W>'
+                // (11,46): warning CS0693: Type parameter 'W' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Base<V, W>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "W")
                     .WithArguments("W", "Outer<T>.Inner<U>.Base<V, W>"),
-                // (15,41): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Derived1<X, Y>'
+                // (15,41): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Derived1<X, Y>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "X")
                     .WithArguments("X", "Outer<T>.Inner<U>.Derived1<X, Y>"),
-                // (19,43): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Derived1<X, Y>'
+                // (19,43): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Derived1<X, Y>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "X")
                     .WithArguments("X", "Outer<T>.Inner<U>.Derived1<X, Y>"),
-                // (19,46): warning CS0693: Type parameter 'Y' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Derived1<X, Y>'
+                // (19,46): warning CS0693: Type parameter 'Y' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Derived1<X, Y>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "Y")
                     .WithArguments("Y", "Outer<T>.Inner<U>.Derived1<X, Y>")
             );
@@ -5637,7 +5682,8 @@ Derived.M(y:2)"
                     referencedCompilations: new[] { B, C }
                 )
                 .VerifyDiagnostics(
-                    // (1,21): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (1,21): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                    // a reference to assembly 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     // public class D : C, B { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "B")
                         .WithArguments(
@@ -5678,7 +5724,8 @@ Derived.M(y:2)"
             B.VerifyDiagnostics();
             C.VerifyDiagnostics();
             D.VerifyDiagnostics(
-                // (1,14): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (1,14): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // public class D : C, B { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments("A", "A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
@@ -5761,7 +5808,8 @@ public class C6 : C2
             );
 
             cs2Compilation.VerifyDiagnostics(
-                // (10,26): error CS0507: 'C5.foo()': cannot change access modifiers when overriding 'internal' inherited member 'C2.foo()'
+                // (10,26): error CS0507: 'C5.foo()': cannot change access modifiers when overriding 'internal'
+                // inherited member 'C2.foo()'
                 //     public override void foo()
                 Diagnostic(ErrorCode.ERR_CantChangeAccessOnOverride, "foo")
                     .WithArguments("C5.foo()", "internal", "C2.foo()"),

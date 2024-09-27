@@ -11,8 +11,10 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Property extension methods for SQL Server-specific metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see>, and
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public static class SqlServerPropertyExtensions
@@ -63,7 +65,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="name">The sequence name to use.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetHiLoSequenceName(
         this IConventionProperty property,
@@ -137,7 +140,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="schema">The schema to use.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetHiLoSequenceSchema(
         this IConventionProperty property,
@@ -169,7 +173,8 @@ public static class SqlServerPropertyExtensions
     ///     Finds the <see cref="ISequence" /> in the model to use for the hi-lo pattern.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static IReadOnlySequence? FindHiLoSequence(this IReadOnlyProperty property)
     {
         var model = property.DeclaringType.Model;
@@ -186,7 +191,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static IReadOnlySequence? FindHiLoSequence(
         this IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject
@@ -206,7 +212,8 @@ public static class SqlServerPropertyExtensions
     ///     Finds the <see cref="ISequence" /> in the model to use for the hi-lo pattern.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static ISequence? FindHiLoSequence(this IProperty property) =>
         (ISequence?)((IReadOnlyProperty)property).FindHiLoSequence();
 
@@ -215,7 +222,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static ISequence? FindHiLoSequence(
         this IProperty property,
         in StoreObjectIdentifier storeObject
@@ -267,7 +275,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="name">The sequence name to use.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetSequenceName(
         this IConventionProperty property,
@@ -287,7 +296,8 @@ public static class SqlServerPropertyExtensions
     ///     Returns the <see cref="ConfigurationSource" /> for the key value generation sequence name.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the key value generation sequence name.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the key value generation sequence
+    // name.</returns>
     public static ConfigurationSource? GetSequenceNameConfigurationSource(
         this IConventionProperty property
     ) => property.FindAnnotation(SqlServerAnnotationNames.SequenceName)?.GetConfigurationSource();
@@ -338,7 +348,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="schema">The schema to use.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetSequenceSchema(
         this IConventionProperty property,
@@ -358,7 +369,8 @@ public static class SqlServerPropertyExtensions
     ///     Returns the <see cref="ConfigurationSource" /> for the key value generation sequence schema.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the key value generation sequence schema.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the key value generation sequence
+    // schema.</returns>
     public static ConfigurationSource? GetSequenceSchemaConfigurationSource(
         this IConventionProperty property
     ) => property.FindAnnotation(SqlServerAnnotationNames.SequenceSchema)?.GetConfigurationSource();
@@ -367,7 +379,8 @@ public static class SqlServerPropertyExtensions
     ///     Finds the <see cref="ISequence" /> in the model to use for the key value generation pattern.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static IReadOnlySequence? FindSequence(this IReadOnlyProperty property)
     {
         var model = property.DeclaringType.Model;
@@ -384,7 +397,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static IReadOnlySequence? FindSequence(
         this IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject
@@ -403,7 +417,8 @@ public static class SqlServerPropertyExtensions
     ///     Finds the <see cref="ISequence" /> in the model to use for the key value generation pattern.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static ISequence? FindSequence(this IProperty property) =>
         (ISequence?)((IReadOnlyProperty)property).FindSequence();
 
@@ -412,7 +427,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
-    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
+    /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the
+    // model.</returns>
     public static ISequence? FindSequence(
         this IProperty property,
         in StoreObjectIdentifier storeObject
@@ -497,7 +513,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="seed">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static long? SetIdentitySeed(
         this IConventionProperty property,
@@ -531,7 +548,8 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="seed">The value to set.</param>
     /// <param name="storeObject">The identifier of the table containing the column.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static long? SetIdentitySeed(
         this IConventionProperty property,
@@ -558,7 +576,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <param name="seed">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static long? SetIdentitySeed(
         this IConventionRelationalPropertyOverrides overrides,
@@ -673,7 +692,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="increment">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static int? SetIdentityIncrement(
         this IConventionProperty property,
@@ -707,7 +727,8 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="increment">The value to set.</param>
     /// <param name="storeObject">The identifier of the table containing the column.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static int? SetIdentityIncrement(
         this IConventionProperty property,
@@ -734,7 +755,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <param name="increment">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static int? SetIdentityIncrement(
         this IConventionRelationalPropertyOverrides overrides,
@@ -763,7 +785,8 @@ public static class SqlServerPropertyExtensions
             ?.GetConfigurationSource();
 
     /// <summary>
-    ///     Returns the <see cref="ConfigurationSource" /> for the identity increment for a particular table.
+    ///     Returns the <see cref="ConfigurationSource" /> for the identity increment for a particular
+    // table.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the table containing the column.</param>
@@ -774,7 +797,8 @@ public static class SqlServerPropertyExtensions
     ) => property.FindOverrides(storeObject)?.GetIdentityIncrementConfigurationSource();
 
     /// <summary>
-    ///     Returns the <see cref="ConfigurationSource" /> for the identity increment for a particular table.
+    ///     Returns the <see cref="ConfigurationSource" /> for the identity increment for a particular
+    // table.
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the identity increment.</returns>
@@ -789,10 +813,12 @@ public static class SqlServerPropertyExtensions
     ///     Returns the <see cref="SqlServerValueGenerationStrategy" /> to use for the property.
     /// </summary>
     /// <remarks>
-    ///     If no strategy is set for the property, then the strategy to use will be taken from the <see cref="IModel" />.
+    ///     If no strategy is set for the property, then the strategy to use will be taken from the <see
+    // cref="IModel" />.
     /// </remarks>
     /// <param name="property">The property.</param>
-    /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was set.</returns>
+    /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was
+    // set.</returns>
     public static SqlServerValueGenerationStrategy GetValueGenerationStrategy(
         this IReadOnlyProperty property
     )
@@ -827,11 +853,13 @@ public static class SqlServerPropertyExtensions
     ///     Returns the <see cref="SqlServerValueGenerationStrategy" /> to use for the property.
     /// </summary>
     /// <remarks>
-    ///     If no strategy is set for the property, then the strategy to use will be taken from the <see cref="IModel" />.
+    ///     If no strategy is set for the property, then the strategy to use will be taken from the <see
+    // cref="IModel" />.
     /// </remarks>
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
-    /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was set.</returns>
+    /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was
+    // set.</returns>
     public static SqlServerValueGenerationStrategy GetValueGenerationStrategy(
         this IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject
@@ -929,10 +957,12 @@ public static class SqlServerPropertyExtensions
     ///     Returns the <see cref="SqlServerValueGenerationStrategy" /> to use for the property.
     /// </summary>
     /// <remarks>
-    ///     If no strategy is set for the property, then the strategy to use will be taken from the <see cref="IModel" />.
+    ///     If no strategy is set for the property, then the strategy to use will be taken from the <see
+    // cref="IModel" />.
     /// </remarks>
     /// <param name="overrides">The property overrides.</param>
-    /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was set.</returns>
+    /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was
+    // set.</returns>
     public static SqlServerValueGenerationStrategy? GetValueGenerationStrategy(
         this IReadOnlyRelationalPropertyOverrides overrides
     ) =>
@@ -1009,7 +1039,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="value">The strategy to use.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static SqlServerValueGenerationStrategy? SetValueGenerationStrategy(
         this IConventionProperty property,
@@ -1026,7 +1057,8 @@ public static class SqlServerPropertyExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a particular table.
+    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a
+    // particular table.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="value">The strategy to use.</param>
@@ -1038,12 +1070,14 @@ public static class SqlServerPropertyExtensions
     ) => property.GetOrCreateOverrides(storeObject).SetValueGenerationStrategy(value);
 
     /// <summary>
-    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a particular table.
+    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a
+    // particular table.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="value">The strategy to use.</param>
     /// <param name="storeObject">The identifier of the table containing the column.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static SqlServerValueGenerationStrategy? SetValueGenerationStrategy(
         this IConventionProperty property,
@@ -1056,7 +1090,8 @@ public static class SqlServerPropertyExtensions
             .SetValueGenerationStrategy(value, fromDataAnnotation);
 
     /// <summary>
-    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a particular table.
+    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a
+    // particular table.
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <param name="value">The strategy to use.</param>
@@ -1070,11 +1105,13 @@ public static class SqlServerPropertyExtensions
         );
 
     /// <summary>
-    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a particular table.
+    ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a
+    // particular table.
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <param name="value">The strategy to use.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static SqlServerValueGenerationStrategy? SetValueGenerationStrategy(
         this IConventionRelationalPropertyOverrides overrides,
@@ -1136,10 +1173,12 @@ public static class SqlServerPropertyExtensions
     }
 
     /// <summary>
-    ///     Returns the <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" />.
+    ///     Returns the <see cref="ConfigurationSource" /> for the <see
+    // cref="SqlServerValueGenerationStrategy" />.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" />.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the <see
+    // cref="SqlServerValueGenerationStrategy" />.</returns>
     public static ConfigurationSource? GetValueGenerationStrategyConfigurationSource(
         this IConventionProperty property
     ) =>
@@ -1148,21 +1187,25 @@ public static class SqlServerPropertyExtensions
             ?.GetConfigurationSource();
 
     /// <summary>
-    ///     Returns the <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" /> for a particular table.
+    ///     Returns the <see cref="ConfigurationSource" /> for the <see
+    // cref="SqlServerValueGenerationStrategy" /> for a particular table.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the table containing the column.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" />.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the <see
+    // cref="SqlServerValueGenerationStrategy" />.</returns>
     public static ConfigurationSource? GetValueGenerationStrategyConfigurationSource(
         this IConventionProperty property,
         in StoreObjectIdentifier storeObject
     ) => property.FindOverrides(storeObject)?.GetValueGenerationStrategyConfigurationSource();
 
     /// <summary>
-    ///     Returns the <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" /> for a particular table.
+    ///     Returns the <see cref="ConfigurationSource" /> for the <see
+    // cref="SqlServerValueGenerationStrategy" /> for a particular table.
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" />.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the <see
+    // cref="SqlServerValueGenerationStrategy" />.</returns>
     public static ConfigurationSource? GetValueGenerationStrategyConfigurationSource(
         this IConventionRelationalPropertyOverrides overrides
     ) =>
@@ -1171,7 +1214,8 @@ public static class SqlServerPropertyExtensions
             ?.GetConfigurationSource();
 
     /// <summary>
-    ///     Returns a value indicating whether the property is compatible with any <see cref="SqlServerValueGenerationStrategy" />.
+    ///     Returns a value indicating whether the property is compatible with any <see
+    // cref="SqlServerValueGenerationStrategy" />.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns><see langword="true" /> if compatible.</returns>
@@ -1255,7 +1299,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="sparse">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? SetIsSparse(
         this IConventionProperty property,
@@ -1272,7 +1317,8 @@ public static class SqlServerPropertyExtensions
     ///     Returns the <see cref="ConfigurationSource" /> for whether the property's column is sparse.
     /// </summary>
     /// <param name="property">The property.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for whether the property's column is sparse.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for whether the property's column is
+    // sparse.</returns>
     public static ConfigurationSource? GetIsSparseConfigurationSource(
         this IConventionProperty property
     ) => property.FindAnnotation(SqlServerAnnotationNames.Sparse)?.GetConfigurationSource();

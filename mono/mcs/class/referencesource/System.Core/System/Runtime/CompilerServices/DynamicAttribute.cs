@@ -9,7 +9,8 @@ using System.Collections.Generic;
 namespace System.Runtime.CompilerServices
 {
     /// <summary>
-    /// Indicates that the use of <see cref="System.Object"/> on a member is meant to be treated as a dynamically dispatched type.
+    /// Indicates that the use of <see cref="System.Object"/> on a member is meant to be treated as a
+    // dynamically dispatched type.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Field
@@ -47,7 +48,8 @@ namespace System.Runtime.CompilerServices
         /// This constructor is meant to be used on types that are built on an underlying
         /// occurrence of <see cref="System.Object"/> that is meant to be treated dynamically.
         /// For instance, if <c>C</c> is a generic type with two type parameters, then a
-        /// use of the constructed type<c>C&lt;<see cref="System.Object"/>, <see cref="System.Object"/>&gt;</c>
+        /// use of the constructed type<c>C&lt;<see cref="System.Object"/>, <see
+        // cref="System.Object"/>&gt;</c>
         /// might be intended to treat the first type argument dynamically and the second
         /// normally, in which case the appropriate attribute specification should
         /// use a <c>transformFlags</c> value of <c>{ false, true, false }</c>.

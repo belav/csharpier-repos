@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -541,7 +542,8 @@ namespace System.Web.Http.WebHost.Routing
             }
         }
 
-        // This scenario emulates what would happen if the request is canceled while trying to handle an http response exception
+        // This scenario emulates what would happen if the request is canceled while trying to handle an
+        // http response exception
         // thrown by routing.
         [Fact]
         public async Task ProcessRequestAsync_WritingResponseCanceled_CancelsRequest()

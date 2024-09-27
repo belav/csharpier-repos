@@ -419,7 +419,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Description>
     // Compound operators (d += 10) is Expanding to (d = d + 10), it turns out this does match
     // the semantics of the equivalent static production.
-    // In the static context, (t += 10) will result of type Test, but in dynamic, the result is type int.
+    // In the static context, (t += 10) will result of type Test, but in dynamic, the result is type
+    // int.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>

@@ -4,20 +4,25 @@
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     Describes the binding from many EF model properties, dependency injection services, or metadata types to
-///     a new array of objects suitable for passing to a general purpose factory method such as is often used for
+///     Describes the binding from many EF model properties, dependency injection services, or
+// metadata types to
+///     a new array of objects suitable for passing to a general purpose factory method such as is
+// often used for
 ///     creating proxies.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with
+// constructors</see> for more information and examples.
 /// </remarks>
 public class ObjectArrayParameterBinding : ParameterBinding
 {
     private readonly IReadOnlyList<ParameterBinding> _bindings;
 
     /// <summary>
-    ///     Creates a new <see cref="ObjectArrayParameterBinding" /> taking all the given <see cref="ParameterBinding" />
-    ///     instances and combining them into one binding that will initialize an array of <see cref="object" />.
+    ///     Creates a new <see cref="ObjectArrayParameterBinding" /> taking all the given <see
+    // cref="ParameterBinding" />
+    ///     instances and combining them into one binding that will initialize an array of <see
+    // cref="object" />.
     /// </summary>
     /// <param name="bindings">The binding to combine.</param>
     public ObjectArrayParameterBinding(IReadOnlyList<ParameterBinding> bindings)

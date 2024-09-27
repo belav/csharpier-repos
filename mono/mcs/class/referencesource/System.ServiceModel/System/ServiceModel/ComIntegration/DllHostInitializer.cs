@@ -49,9 +49,12 @@ namespace System.ServiceModel.ComIntegration
             catch (ThreadAbortException) { }
         }
 
-        // We call ContextUtil.ApplicationId, from a non-APTCA assembly. There is no identified security vulnerability with that property, so we can't justify
-        // adding a demand for full trust here, causing a breaking change to the public DllHostInitializer.Startup(..) method that calls this one.
-        // ContextUtil.ApplicationId calls a native function (GetObjectContext from mtxex.dll), but it doesn't pass user input to it, and it doesn't
+        // We call ContextUtil.ApplicationId, from a non-APTCA assembly. There is no identified security
+        // vulnerability with that property, so we can't justify
+        // adding a demand for full trust here, causing a breaking change to the public
+        // DllHostInitializer.Startup(..) method that calls this one.
+        // ContextUtil.ApplicationId calls a native function (GetObjectContext from mtxex.dll), but it
+        // doesn't pass user input to it, and it doesn't
         // cache its result (so there is no leak as a side-effect).
         [SuppressMessage(
             FxCop.Category.Security,

@@ -9,11 +9,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
-    /* This class is used by for reading from the stdin when it is a terminal.
-     * It is designed to read stdin in raw mode for interpreting
-     * key press events and maintain its own buffer for the same.
-     * which is then used for all the Read operations
-     */
+/* This class is used by for reading from the stdin when it is a terminal.
+* It is designed to read stdin in raw mode for interpreting
+* key press events and maintain its own buffer for the same.
+* which is then used for all the Read operations
+*/
     internal sealed class StdInReader : TextReader
     {
         private static string? s_moveLeftString; // string written to move the cursor to the left
@@ -219,7 +219,8 @@ namespace System.IO
                         if (removed && freshKeys)
                         {
                             // The ReadLine input may wrap across terminal rows and we need to handle that.
-                            // note: ConsolePal will cache the cursor position to avoid making many slow cursor position fetch operations.
+                            // note: ConsolePal will cache the cursor position to avoid making many slow cursor position fetch
+                            // operations.
                             if (
                                 ConsolePal.TryGetCursorPosition(
                                     out int left,

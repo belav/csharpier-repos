@@ -184,7 +184,8 @@ namespace MonoTests.System.Data.OleDb
         /// <summary>
         /// This is a workaround for the extra white spaces added in oracle to NCHAR & NVARCHAR values.
         /// The problem is a documented GH limitation, see bug #3417.
-        /// The workaround is to trim the lemgth of the returned string to the specified length of the parameter/column.
+        /// The workaround is to trim the lemgth of the returned string to the specified length of the
+        // parameter/column.
         /// </summary>
         /// <param name="testedServer">The database server we are currently running on.</param>
         /// <param name="val">The value returned from the database.</param>

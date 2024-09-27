@@ -55,7 +55,8 @@ namespace System.Security.Claims
         /// <param name="principal">The principal to check authorization for</param>
         /// <param name="resource">The resource for checking authorization to</param>
         /// <param name="action">The action to be performed on the resource</param>
-        /// <exception cref="ArgumentNullException">When <paramref name="principal"/> or <paramref name="resource"/> or <paramref name="action"/> is null</exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="principal"/> or <paramref
+        // name="resource"/> or <paramref name="action"/> is null</exception>
         public AuthorizationContext(
             ClaimsPrincipal principal,
             Collection<System.Security.Claims.Claim> resource,

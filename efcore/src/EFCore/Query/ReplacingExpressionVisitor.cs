@@ -7,16 +7,20 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         An expression visitor that replaces one expression with another in given expression tree.
+///         An expression visitor that replaces one expression with another in given expression
+// tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public class ReplacingExpressionVisitor : ExpressionVisitor
 {
@@ -65,8 +69,10 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
             return expression;
         }
 
-        // We use two arrays rather than a dictionary because hash calculation here can be prohibitively expensive
-        // for deep trees. Locality of reference makes arrays better for the small number of replacements anyway.
+        // We use two arrays rather than a dictionary because hash calculation here can be prohibitively
+        // expensive
+        // for deep trees. Locality of reference makes arrays better for the small number of replacements
+        // anyway.
         for (var i = 0; i < _originals.Count; i++)
         {
             if (expression.Equals(_originals[i]))

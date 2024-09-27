@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         public int Priority => 1;
 
         // Unit testing incremental analyzer only supports full solution analysis scope.
-        // In future, we should add a separate option to allow users to configure background analysis scope for unit testing.
+        // In future, we should add a separate option to allow users to configure background analysis scope
+        // for unit testing.
         public static BackgroundAnalysisScope GetBackgroundAnalysisScope(OptionSet _) =>
             BackgroundAnalysisScope.FullSolution;
 

@@ -19,7 +19,8 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 {
-    // The C# and VB ILanguageClient should not activate on the host. When LiveShare mirrors the C# ILC to the guest,
+    // The C# and VB ILanguageClient should not activate on the host. When LiveShare mirrors the C# ILC
+    // to the guest,
     // they will not copy the DisableUserExperience attribute, so guests will still use the C# ILC.
     [DisableUserExperience(true)]
     [ContentType(ContentTypeNames.CSharpContentType)]
@@ -55,8 +56,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 LspOptionsStorage.LspEditorFeatureFlag
             );
 
-            // If the preview feature flag to turn on the LSP editor in local scenarios is on, advertise no capabilities for this Live Share
-            // LSP server as LSP requests will be serviced by the AlwaysActiveInProcLanguageClient in both local and remote scenarios.
+            // If the preview feature flag to turn on the LSP editor in local scenarios is on, advertise no
+            // capabilities for this Live Share
+            // LSP server as LSP requests will be serviced by the AlwaysActiveInProcLanguageClient in both local
+            // and remote scenarios.
             if (isLspEditorEnabled)
             {
                 return new VSServerCapabilities
@@ -73,8 +76,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 clientCapabilities
             );
 
-            // If the LSP semantic tokens feature flag is enabled, advertise no semantic tokens capabilities for this Live Share
-            // LSP server as LSP semantic tokens requests will be serviced by the AlwaysActiveInProcLanguageClient in both local and
+            // If the LSP semantic tokens feature flag is enabled, advertise no semantic tokens capabilities for
+            // this Live Share
+            // LSP server as LSP semantic tokens requests will be serviced by the
+            // AlwaysActiveInProcLanguageClient in both local and
             // remote scenarios.
             var isLspSemanticTokenEnabled = GlobalOptions.GetOption(
                 LspOptionsStorage.LspSemanticTokensFeatureFlag
@@ -84,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 defaultCapabilities.SemanticTokensOptions = null;
             }
 
-            // When the lsp pull diagnostics feature flag is enabled we do not advertise pull diagnostics capabilities from here
+            // When the lsp pull diagnostics feature flag is enabled we do not advertise pull diagnostics
+            // capabilities from here
             // as the AlwaysActivateInProcLanguageClient will provide pull diagnostics both locally and remote.
             var isPullDiagnosticsEnabled = GlobalOptions.IsLspPullDiagnostics();
             if (!isPullDiagnosticsEnabled)
@@ -98,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         }
 
         /// <summary>
-        /// Failures are catastrophic as liveshare guests will not have language features without this server.
+        /// Failures are catastrophic as liveshare guests will not have language features without this
+        // server.
         /// </summary>
         public override bool ShowNotificationOnInitializeFailed => true;
 

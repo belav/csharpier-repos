@@ -36,12 +36,12 @@ using Mono.Security.X509;
 namespace Mono.Security.X509.Extensions
 {
     /*
-     * id-ce-extKeyUsage OBJECT IDENTIFIER ::= { id-ce 37 }
-     *
-     * ExtKeyUsageSyntax ::= SEQUENCE SIZE (1..MAX) OF KeyPurposeId
-     *
-     * KeyPurposeId ::= OBJECT IDENTIFIER
-     */
+    * id-ce-extKeyUsage OBJECT IDENTIFIER ::= { id-ce 37 }
+    *
+    * ExtKeyUsageSyntax ::= SEQUENCE SIZE (1..MAX) OF KeyPurposeId
+    *
+    * KeyPurposeId ::= OBJECT IDENTIFIER
+    */
 
 #if INSIDE_SYSTEM
     internal

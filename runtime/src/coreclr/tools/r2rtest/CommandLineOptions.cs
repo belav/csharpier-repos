@@ -196,7 +196,8 @@ namespace R2RTest
             );
         }
 
-        // Todo: Input / Output directories should be required arguments to the command when they're made available to handlers
+        // Todo: Input / Output directories should be required arguments to the command when they're made
+        // available to handlers
         // https://github.com/dotnet/command-line-api/issues/297
         public CliOption<DirectoryInfo> InputDirectory { get; } =
             new CliOption<DirectoryInfo>("--input-directory", "-in")

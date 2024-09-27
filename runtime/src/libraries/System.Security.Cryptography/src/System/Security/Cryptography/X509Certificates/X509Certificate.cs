@@ -65,7 +65,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             if (!data.IsEmpty)
             {
-                // For compat reasons, this constructor treats passing a null or empty data set as the same as calling the nullary constructor.
+                // For compat reasons, this constructor treats passing a null or empty data set as the same as
+                // calling the nullary constructor.
                 using (
                     var safePasswordHandle = new SafePasswordHandle(
                         (string?)null,
@@ -838,13 +839,18 @@ namespace System.Security.Cryptography.X509Certificates
                         );
                         pkcs12 = pkcs12.Slice(0, bytesConsumed);
 
-                        // Check both conditions: we want a KDF-exceeded failure anywhere in the system to produce a failure here.
-                        // There are some places within the GetIterationCount method where we optimistically try processing the
+                        // Check both conditions: we want a KDF-exceeded failure anywhere in the system to produce a failure
+                        // here.
+                        // There are some places within the GetIterationCount method where we optimistically try processing
+                        // the
                         // PFX in one manner, and if we see failures we'll swallow any exceptions and try a different manner
-                        // instead. The problem with this is that when we swallow failures, we don't have the ability to add the
+                        // instead. The problem with this is that when we swallow failures, we don't have the ability to add
+                        // the
                         // so-far-observed iteration count back to the running total returned by GetIterationCount. This
-                        // potentially allows a clever adversary a window through which to squeeze in work beyond our configured
-                        // limits. To mitigate this risk, we'll fail now if we observed *any* KDF-exceeded failure while processing
+                        // potentially allows a clever adversary a window through which to squeeze in work beyond our
+                        // configured
+                        // limits. To mitigate this risk, we'll fail now if we observed *any* KDF-exceeded failure while
+                        // processing
                         // this PFX.
                         if (
                             observedIterationCount > (ulong)pkcs12UnspecifiedPasswordIterationLimit

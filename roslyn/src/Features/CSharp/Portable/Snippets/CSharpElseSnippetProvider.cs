@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
             var token = syntaxContext.TargetToken;
 
-            // We have to consider all ancestor if statements of the last token until we find a match for this 'else':
+            // We have to consider all ancestor if statements of the last token until we find a match for this
+            // 'else':
             // while (true)
             //     if (true)
             //         while (true)
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
             foreach (var ifStatement in token.GetAncestors<IfStatementSyntax>())
             {
-                // If there's a missing token at the end of the statement, it's incomplete and we do not offer 'else'.
+                // If there's a missing token at the end of the statement, it's incomplete and we do not offer
+                // 'else'.
                 // context.TargetToken does not include zero width so in that case these will never be equal.
                 if (ifStatement.Statement.GetLastToken(includeZeroWidth: true) == token)
                 {

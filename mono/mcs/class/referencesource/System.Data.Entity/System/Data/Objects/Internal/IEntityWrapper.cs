@@ -27,7 +27,8 @@ namespace System.Data.Objects.Internal
         RelationshipManager RelationshipManager { get; }
 
         /// <summary>
-        /// Information about whether or not the entity instance actually owns and uses its RelationshipManager
+        /// Information about whether or not the entity instance actually owns and uses its
+        // RelationshipManager
         /// This is used to determine how to do relationship fixup in some cases
         /// </summary>
         bool OwnsRelationshipManager { get; }
@@ -38,7 +39,8 @@ namespace System.Data.Objects.Internal
         object Entity { get; }
 
         /// <summary>
-        /// If this IEntityWrapper is tracked, accesses the ObjectStateEntry that is used in the state manager
+        /// If this IEntityWrapper is tracked, accesses the ObjectStateEntry that is used in the state
+        // manager
         /// </summary>
         EntityEntry ObjectStateEntry { get; set; }
 
@@ -171,7 +173,8 @@ namespace System.Data.Objects.Internal
         /// <param name="entry">The state entry of the entity to for which a value should be set</param>
         /// <param name="member">State member information indicating the member to set</param>
         /// <param name="ordinal">The ordinal of the member to set</param>
-        /// <param name="target">The object onto which the value should be set; may be the entity, or a contained complex value</param>
+        /// <param name="target">The object onto which the value should be set; may be the entity, or a
+        // contained complex value</param>
         /// <param name="value">The value to set</param>
         void SetCurrentValue(
             EntityEntry entry,
@@ -182,15 +185,19 @@ namespace System.Data.Objects.Internal
         );
 
         /// <summary>
-        /// Set to true while the process of initalizing RelatedEnd objects for an IPOCO proxy is in process.
+        /// Set to true while the process of initalizing RelatedEnd objects for an IPOCO proxy is in
+        // process.
         /// This flag prevents the context from being set onto the related ends, which in turn means that
-        /// the related ends don't need to have keys, which in turn means they don't need to be part of an EntitySet.
+        /// the related ends don't need to have keys, which in turn means they don't need to be part of an
+        // EntitySet.
         /// </summary>
         bool InitializingProxyRelatedEnds { get; set; }
 
         /// <summary>
-        /// Updates the current value records using Shaper.UpdateRecord but with additional change tracking logic
-        /// added as required by POCO and proxy entities.  For the simple case of no proxy and an entity with
+        /// Updates the current value records using Shaper.UpdateRecord but with additional change tracking
+        // logic
+        /// added as required by POCO and proxy entities.  For the simple case of no proxy and an entity
+        // with
         /// a change tracker, this translates into a simple call to ShaperUpdateRecord.
         /// </summary>
         /// <param name="value">The value</param>

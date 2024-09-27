@@ -389,15 +389,19 @@ namespace System.Buffers
         }
 
         /// <summary>
-        /// Copies data from the current <see cref="Position"/> to the given <paramref name="destination"/> span if there
+        /// Copies data from the current <see cref="Position"/> to the given <paramref name="destination"/>
+        // span if there
         /// is enough data to fill it.
         /// </summary>
         /// <remarks>
-        /// This API is used to copy a fixed amount of data out of the sequence if possible. It does not advance
-        /// the reader. To look ahead for a specific stream of data <see cref="IsNext(ReadOnlySpan{T}, bool)"/> can be used.
+        /// This API is used to copy a fixed amount of data out of the sequence if possible. It does not
+        // advance
+        /// the reader. To look ahead for a specific stream of data <see cref="IsNext(ReadOnlySpan{T},
+        // bool)"/> can be used.
         /// </remarks>
         /// <param name="destination">Destination span to copy to.</param>
-        /// <returns>True if there is enough data to completely fill the <paramref name="destination"/> span.</returns>
+        /// <returns>True if there is enough data to completely fill the <paramref name="destination"/>
+        // span.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if __MonoCS__
         public bool TryCopyTo(Span<T> destination)
@@ -406,7 +410,8 @@ namespace System.Buffers
 #endif
         {
             // This API doesn't advance to facilitate conditional advancement based on the data returned.
-            // We don't provide an advance option to allow easier utilizing of stack allocated destination spans.
+            // We don't provide an advance option to allow easier utilizing of stack allocated destination
+            // spans.
             // (Because we can make this method readonly we can guarantee that we won't capture the span.)
 
             ReadOnlySpan<T> firstSpan = UnreadSpan;

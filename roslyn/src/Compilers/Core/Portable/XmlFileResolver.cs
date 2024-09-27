@@ -47,14 +47,18 @@ namespace Microsoft.CodeAnalysis
         /// Value of the "file" attribute of an &lt;include&gt; documentation comment element.
         /// </param>
         /// <param name="baseFilePath">
-        /// Path of the source file (<see cref="SyntaxTree.FilePath"/>) or XML document that contains the <paramref name="path"/>.
-        /// If not null used as a base path of <paramref name="path"/>, if <paramref name="path"/> is relative.
-        /// If <paramref name="baseFilePath"/> is relative <see cref="BaseDirectory"/> is used as the base path of <paramref name="baseFilePath"/>.
+        /// Path of the source file (<see cref="SyntaxTree.FilePath"/>) or XML document that contains the
+        // <paramref name="path"/>.
+        /// If not null used as a base path of <paramref name="path"/>, if <paramref name="path"/> is
+        // relative.
+        /// If <paramref name="baseFilePath"/> is relative <see cref="BaseDirectory"/> is used as the base
+        // path of <paramref name="baseFilePath"/>.
         /// </param>
         /// <returns>Normalized XML document file path or null if not found.</returns>
         public override string? ResolveReference(string path, string? baseFilePath)
         {
-            // Dev11: first look relative to the directory containing the file with the <include> element (baseFilepath)
+            // Dev11: first look relative to the directory containing the file with the <include> element
+            // (baseFilepath)
             // and then look in the base directory (i.e. current working directory of the compiler).
 
             string? resolvedPath;

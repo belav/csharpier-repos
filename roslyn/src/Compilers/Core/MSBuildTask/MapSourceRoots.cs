@@ -12,13 +12,15 @@ using Microsoft.Build.Utilities;
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
     /// <summary>
-    /// Given a list of SourceRoot items produces a list of the same items with added <c>MappedPath</c> metadata that
+    /// Given a list of SourceRoot items produces a list of the same items with added <c>MappedPath</c>
+    // metadata that
     /// contains calculated deterministic source path for each SourceRoot.
     /// </summary>
     /// <remarks>
     /// Does not perform any path validation.
     ///
-    /// The <c>MappedPath</c> is either the path (ItemSpec) itself, when <see cref="Deterministic"/> is false,
+    /// The <c>MappedPath</c> is either the path (ItemSpec) itself, when <see cref="Deterministic"/> is
+    // false,
     /// or a calculated deterministic source path (starting with prefix '/_/', '/_1/', etc.), otherwise.
     /// </remarks>
     public sealed class MapSourceRoots : Task
@@ -27,7 +29,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         {
             TaskResources = ErrorString.ResourceManager;
 
-            // These required properties will all be assigned by MSBuild. Suppress warnings about leaving them with
+            // These required properties will all be assigned by MSBuild. Suppress warnings about leaving them
+            // with
             // their default values.
             SourceRoots = null!;
         }
@@ -35,9 +38,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// SourceRoot items with the following optional well-known metadata:
         /// <list type="bullet">
-        ///   <term>SourceControl</term><description>Indicates name of the source control system the source root is tracked by (e.g. Git, TFVC, etc.), if any.</description>
-        ///   <term>NestedRoot</term><description>If a value is specified the source root is nested (e.g. git submodule). The value is a path to this root relative to the containing root.</description>
-        ///   <term>ContainingRoot</term><description>Identifies another source root item that this source root is nested under.</description>
+        ///   <term>SourceControl</term><description>Indicates name of the source control system the source
+        // root is tracked by (e.g. Git, TFVC, etc.), if any.</description>
+        ///   <term>NestedRoot</term><description>If a value is specified the source root is nested (e.g.
+        // git submodule). The value is a path to this root relative to the containing root.</description>
+        ///   <term>ContainingRoot</term><description>Identifies another source root item that this source
+        // root is nested under.</description>
         /// </list>
         /// </summary>
         [Required]
@@ -50,7 +56,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         /// <summary>
         /// SourceRoot items with <term>MappedPath</term> metadata set.
-        /// Items listed in <see cref="SourceRoots"/> that have the same ItemSpec will be merged into a single item in this list.
+        /// Items listed in <see cref="SourceRoots"/> that have the same ItemSpec will be merged into a
+        // single item in this list.
         /// </summary>
         [Output]
         public ITaskItem[]? MappedSourceRoots { get; private set; }
@@ -102,7 +109,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 // The SourceRoot is required to have a trailing directory separator.
                 // We do not append one implicitly as we do not know which separator to append on Windows.
-                // The usage of SourceRoot might be sensitive to what kind of separator is used (e.g. in SourceLink where it needs
+                // The usage of SourceRoot might be sensitive to what kind of separator is used (e.g. in SourceLink
+                // where it needs
                 // to match the corresponding separators used in paths given to the compiler).
                 if (!EndsWithDirectorySeparator(sourceRoot.ItemSpec))
                 {
@@ -193,8 +201,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     {
                         string containingRoot = root.GetMetadata(Names.ContainingRoot);
 
-                        // The value of ContainingRoot metadata is a file path that is compared with ItemSpec values of SourceRoot items.
-                        // Since the paths in ItemSpec have backslashes replaced with slashes on non-Windows platforms we need to do the same for ContainingRoot.
+                        // The value of ContainingRoot metadata is a file path that is compared with ItemSpec values of
+                        // SourceRoot items.
+                        // Since the paths in ItemSpec have backslashes replaced with slashes on non-Windows platforms we
+                        // need to do the same for ContainingRoot.
                         if (
                             containingRoot != null
                             && topLevelMappedPaths.TryGetValue(
@@ -241,7 +251,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Checks that when merging metadata of two SourceRoot items we don't have any conflicting well-known metadata values.
+        /// Checks that when merging metadata of two SourceRoot items we don't have any conflicting
+        // well-known metadata values.
         /// </summary>
         private void ReportConflictingWellKnownMetadata(ITaskItem left, ITaskItem right)
         {

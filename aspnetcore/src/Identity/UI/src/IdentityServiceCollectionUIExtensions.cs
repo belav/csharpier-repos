@@ -11,12 +11,15 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class IdentityServiceCollectionUIExtensions
 {
     /// <summary>
-    /// Adds a set of common identity services to the application, including a default UI, token providers,
+    /// Adds a set of common identity services to the application, including a default UI, token
+    // providers,
     /// and configures authentication to use identity cookies.
     /// </summary>
     /// <remarks>
-    /// In order to use the default UI, the application must be using <see cref="Microsoft.AspNetCore.Mvc"/>,
-    /// <see cref="Microsoft.AspNetCore.StaticFiles"/> and contain a <c>_LoginPartial</c> partial view that
+    /// In order to use the default UI, the application must be using <see
+    // cref="Microsoft.AspNetCore.Mvc"/>,
+    /// <see cref="Microsoft.AspNetCore.StaticFiles"/> and contain a <c>_LoginPartial</c> partial view
+    // that
     /// can be found by the application.
     /// </remarks>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
@@ -25,12 +28,15 @@ public static class IdentityServiceCollectionUIExtensions
         where TUser : class => services.AddDefaultIdentity<TUser>(_ => { });
 
     /// <summary>
-    /// Adds a set of common identity services to the application, including a default UI, token providers,
+    /// Adds a set of common identity services to the application, including a default UI, token
+    // providers,
     /// and configures authentication to use identity cookies.
     /// </summary>
     /// <remarks>
-    /// In order to use the default UI, the application must be using <see cref="Microsoft.AspNetCore.Mvc"/>,
-    /// <see cref="Microsoft.AspNetCore.StaticFiles"/> and contain a <c>_LoginPartial</c> partial view that
+    /// In order to use the default UI, the application must be using <see
+    // cref="Microsoft.AspNetCore.Mvc"/>,
+    /// <see cref="Microsoft.AspNetCore.StaticFiles"/> and contain a <c>_LoginPartial</c> partial view
+    // that
     /// can be found by the application.
     /// </remarks>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>

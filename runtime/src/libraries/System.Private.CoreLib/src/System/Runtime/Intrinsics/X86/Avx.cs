@@ -1415,7 +1415,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_CUR_DIRECTION)
         ///   VROUNDPS ymm1, ymm2/m256, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<float> RoundCurrentDirection(Vector256<float> value) =>
             RoundCurrentDirection(value);
@@ -1423,7 +1424,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256d _mm256_round_ps (__m256d a, _MM_FROUND_CUR_DIRECTION)
         ///   VROUNDPD ymm1, ymm2/m256, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<double> RoundCurrentDirection(Vector256<double> value) =>
             RoundCurrentDirection(value);
@@ -1431,7 +1433,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_NEAREST_INT)
         ///   VROUNDPS ymm1, ymm2/m256, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<float> RoundToNearestInteger(Vector256<float> value) =>
             RoundToNearestInteger(value);
@@ -1439,7 +1442,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_NEAREST_INT)
         ///   VROUNDPD ymm1, ymm2/m256, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<double> RoundToNearestInteger(Vector256<double> value) =>
             RoundToNearestInteger(value);
@@ -1447,7 +1451,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPS ymm1, ymm2/m256, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<float> RoundToNegativeInfinity(Vector256<float> value) =>
             RoundToNegativeInfinity(value);
@@ -1455,7 +1460,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPD ymm1, ymm2/m256, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<double> RoundToNegativeInfinity(Vector256<double> value) =>
             RoundToNegativeInfinity(value);
@@ -1463,7 +1469,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPS ymm1, ymm2/m256, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<float> RoundToPositiveInfinity(Vector256<float> value) =>
             RoundToPositiveInfinity(value);
@@ -1471,7 +1478,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPD ymm1, ymm2/m256, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<double> RoundToPositiveInfinity(Vector256<double> value) =>
             RoundToPositiveInfinity(value);
@@ -1479,14 +1487,16 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///   VROUNDPS ymm1, ymm2/m256, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<float> RoundToZero(Vector256<float> value) => RoundToZero(value);
 
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///   VROUNDPD ymm1, ymm2/m256, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector256<double> RoundToZero(Vector256<double> value) => RoundToZero(value);
 

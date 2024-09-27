@@ -107,7 +107,8 @@ namespace Internal.TypeSystem
             StackOverflowProtect visited
         )
         {
-            // Structs can be cast to the interfaces they implement, but they are not compatible according to ECMA I.8.7.1
+            // Structs can be cast to the interfaces they implement, but they are not compatible according to
+            // ECMA I.8.7.1
             bool isCastFromValueTypeToReferenceType =
                 otherType.IsValueType && !thisType.IsValueType;
             if (isCastFromValueTypeToReferenceType)
@@ -115,7 +116,8 @@ namespace Internal.TypeSystem
                 return false;
             }
 
-            // Managed pointers are compatible only if they are pointer-element-compatible-with as described in ECMA I.8.7.2
+            // Managed pointers are compatible only if they are pointer-element-compatible-with as described in
+            // ECMA I.8.7.2
             if (thisType.IsByRef && otherType.IsByRef)
             {
                 return AreVerificationTypesEqual(
@@ -133,7 +135,8 @@ namespace Internal.TypeSystem
                 );
             }
 
-            // Function pointers are compatible only if they are method-signature-compatible-with as described in ECMA I.8.7.1
+            // Function pointers are compatible only if they are method-signature-compatible-with as described
+            // in ECMA I.8.7.1
             if (thisType.IsFunctionPointer && otherType.IsFunctionPointer)
             {
                 return IsMethodSignatureCompatibleWith(thisType, otherType);

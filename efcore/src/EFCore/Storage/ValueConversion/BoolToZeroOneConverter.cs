@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 ///     Converts <see cref="bool" /> values to and from <c>0</c> and <c>1</c>.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+// for more information and examples.
 /// </remarks>
 public class BoolToZeroOneConverter<TProvider> : BoolToTwoValuesConverter<TProvider>
 {
@@ -15,7 +16,8 @@ public class BoolToZeroOneConverter<TProvider> : BoolToTwoValuesConverter<TProvi
     ///     Creates a new instance of this converter. This converter preserves order.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public BoolToZeroOneConverter()
         : this(null) { }
@@ -24,10 +26,12 @@ public class BoolToZeroOneConverter<TProvider> : BoolToTwoValuesConverter<TProvi
     ///     Creates a new instance of this converter. This converter preserves order.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="mappingHints">
-    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
+    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with
+    // appropriate
     ///     facets for the converted data.
     /// </param>
     public BoolToZeroOneConverter(ConverterMappingHints? mappingHints)

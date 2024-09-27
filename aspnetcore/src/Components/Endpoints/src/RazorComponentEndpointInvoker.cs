@@ -57,7 +57,8 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
 
         Log.BeginRenderRootComponent(_logger, rootComponent.Name, pageComponent.Name);
 
-        // Metadata controls whether we require antiforgery protection for this endpoint or we should skip it.
+        // Metadata controls whether we require antiforgery protection for this endpoint or we should skip
+        // it.
         // The default for razor component endpoints is to require the metadata, but it can be overriden by
         // the developer.
         var antiforgeryMetadata = endpoint.Metadata.GetMetadata<IAntiforgeryMetadata>();
@@ -101,8 +102,10 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
         );
         using var bufferWriter = new BufferedTextWriter(writer);
 
-        // Note that we always use Static rendering mode for the top-level output from a RazorComponentResult,
-        // because you never want to serialize the invocation of RazorComponentResultHost. Instead, that host
+        // Note that we always use Static rendering mode for the top-level output from a
+        // RazorComponentResult,
+        // because you never want to serialize the invocation of RazorComponentResultHost. Instead, that
+        // host
         // component takes care of switching into your desired render mode when it produces its own output.
         var htmlContent = await _renderer.RenderEndpointComponent(
             context,
@@ -139,9 +142,12 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
             }
         }
 
-        // Importantly, we must not yield this thread (which holds exclusive access to the renderer sync context)
-        // in between the first call to htmlContent.WriteTo and the point where we start listening for subsequent
-        // streaming SSR batches (inside SendStreamingUpdatesAsync). Otherwise some other code might dispatch to the
+        // Importantly, we must not yield this thread (which holds exclusive access to the renderer sync
+        // context)
+        // in between the first call to htmlContent.WriteTo and the point where we start listening for
+        // subsequent
+        // streaming SSR batches (inside SendStreamingUpdatesAsync). Otherwise some other code might
+        // dispatch to the
         // renderer sync context and cause a batch that would get missed.
         htmlContent.WriteTo(bufferWriter, HtmlEncoder.Default); // Don't use WriteToAsync, as per the comment above
 
@@ -162,7 +168,8 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
         }
 
         // Invoke FlushAsync to ensure any buffered content is asynchronously written to the underlying
-        // response asynchronously. In the absence of this line, the buffer gets synchronously written to the
+        // response asynchronously. In the absence of this line, the buffer gets synchronously written to
+        // the
         // response as part of the Dispose which has a perf impact.
         await bufferWriter.FlushAsync();
     }

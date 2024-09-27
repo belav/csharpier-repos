@@ -1147,7 +1147,8 @@ namespace System.Data.Common
                 Debug.Assert((null != dataRows) && (0 < dataRows.Length), "Update: bad dataRows");
                 Debug.Assert(null != tableMapping, "Update: bad DataTableMapping");
 
-                // If records were affected, increment row count by one - that is number of rows affected in dataset.
+                // If records were affected, increment row count by one - that is number of rows affected in
+                // dataset.
                 int cumulativeDataRowsAffected = 0;
 
                 IDbConnection?[] connections = new IDbConnection[5]; // one for each statementtype
@@ -1654,7 +1655,8 @@ namespace System.Data.Common
             Debug.Assert(rowUpdatedEvent.Rows != null);
             try
             {
-                // the batch execution may succeed, partially succeed and throw an exception (or not), or totally fail
+                // the batch execution may succeed, partially succeed and throw an exception (or not), or totally
+                // fail
                 int recordsAffected = ExecuteBatch();
                 rowUpdatedEvent.AdapterInit(recordsAffected);
             }

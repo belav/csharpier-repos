@@ -25,8 +25,10 @@ namespace System.IO.Tests
             AssertExtensions.Throws<ArgumentNullException>("path", () => File.Decrypt(null));
         }
 
-        // On Windows Nano Server and Home Edition, file encryption with File.Encrypt(string path) throws an IOException
-        // because EFS (Encrypted File System), its underlying technology, is not available on these operating systems.
+        // On Windows Nano Server and Home Edition, file encryption with File.Encrypt(string path) throws an
+        // IOException
+        // because EFS (Encrypted File System), its underlying technology, is not available on these
+        // operating systems.
         [ConditionalFact(
             typeof(PlatformDetection),
             nameof(PlatformDetection.IsNotWindowsNanoServer),
@@ -73,7 +75,8 @@ namespace System.IO.Tests
                 );
 
                 // Sometimes Decrypt will fail with, eg.,
-                // System.IO.IOException : The process cannot access the file '...' because it is being used by another process.
+                // System.IO.IOException : The process cannot access the file '...' because it is being used by
+                // another process.
                 // Assumption is that it just needs a little more time
                 RetryHelper.Execute(
                     () =>

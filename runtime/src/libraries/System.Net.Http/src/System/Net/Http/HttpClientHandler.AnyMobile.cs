@@ -40,7 +40,8 @@ namespace System.Net.Http
                 {
                     if (_nativeMetricsHandler is null)
                     {
-                        // We only setup these handlers for the native handler. SocketsHttpHandler already does this internally.
+                        // We only setup these handlers for the native handler. SocketsHttpHandler already does this
+                        // internally.
                         HttpMessageHandler handler = _nativeHandler!;
 
                         if (DiagnosticsHandler.IsGloballyEnabled())
@@ -362,8 +363,10 @@ namespace System.Net.Http
         {
             // This property is not supported. In the .NET Framework it was only used when the handler needed to
             // automatically buffer the request content. That only happened if neither 'Content-Length' nor
-            // 'Transfer-Encoding: chunked' request headers were specified. So, the handler thus needed to buffer
-            // in the request content to determine its length and then would choose 'Content-Length' semantics when
+            // 'Transfer-Encoding: chunked' request headers were specified. So, the handler thus needed to
+            // buffer
+            // in the request content to determine its length and then would choose 'Content-Length' semantics
+            // when
             // POST'ing. In .NET Core, the handler will resolve the ambiguity by always choosing
             // 'Transfer-Encoding: chunked'. The handler will never automatically buffer in the request content.
             get

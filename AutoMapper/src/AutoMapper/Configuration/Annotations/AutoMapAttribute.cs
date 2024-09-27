@@ -2,7 +2,8 @@
 
 /// <summary>
 /// Auto map to this destination type from the specified source type.
-/// Discovered during scanning assembly scanning for configuration when calling <see cref="O:AutoMapper.IMapperConfigurationExpression.AddMaps"/>
+/// Discovered during scanning assembly scanning for configuration when calling <see
+// cref="O:AutoMapper.IMapperConfigurationExpression.AddMaps"/>
 /// </summary>
 [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
@@ -41,7 +42,8 @@ public sealed class AutoMapAttribute : Attribute
     public bool IncludeAllDerived { get; set; }
 
     /// <summary>
-    /// Skip normal member mapping and convert using a <see cref="ITypeConverter{TSource,TDestination}"/> instantiated during mapping.
+    /// Skip normal member mapping and convert using a <see
+    // cref="ITypeConverter{TSource,TDestination}"/> instantiated during mapping.
     /// </summary>
     public Type TypeConverter { get; set; }
 

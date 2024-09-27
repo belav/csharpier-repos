@@ -203,7 +203,7 @@ namespace System.Xml.Xsl.XsltOld
             _Manager = new InputScopeManager(_Navigator, rootScope);
             _PositionInfo = PositionInfo.GetPositionInfo(_Navigator);
 
-            /*BeginReading:*/
+/*BeginReading:*/
             AssertInput();
             if (NodeType == XPathNodeType.Root)
             {

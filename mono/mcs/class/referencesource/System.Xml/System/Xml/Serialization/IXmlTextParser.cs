@@ -20,7 +20,8 @@ namespace System.Xml.Serialization
         /// <internalonly/>
         bool Normalized { get; set; }
 
-        /// <include file='doc\IXmlTextParser.uex' path='docs/doc[@for="IXmlTextParser.WhitespaceHandling"]/*' />
+        /// <include file='doc\IXmlTextParser.uex'
+        // path='docs/doc[@for="IXmlTextParser.WhitespaceHandling"]/*' />
         /// <internalonly/>
         WhitespaceHandling WhitespaceHandling { get; set; }
     }

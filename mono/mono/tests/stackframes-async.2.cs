@@ -16,13 +16,13 @@ class MainClass
                 break;
             System.Threading.Thread.Sleep(100);
         }
-        /*
-         * seems to be broken
-        while (!res.IsCompleted) {
-            System.Threading.Thread.Sleep(20);
-        };
-        IPHostEntry ip = Dns.EndGetHostEntry (res);
-        Console.WriteLine (ip);*/
+/*
+* seems to be broken
+while (!res.IsCompleted) {
+System.Threading.Thread.Sleep(20);
+};
+IPHostEntry ip = Dns.EndGetHostEntry (res);
+Console.WriteLine (ip);*/
         if (frame_count < 1)
             return 1;
 

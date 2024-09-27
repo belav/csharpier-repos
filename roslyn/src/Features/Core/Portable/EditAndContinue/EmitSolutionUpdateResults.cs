@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             using var _ = ArrayBuilder<ManagedHotReloadDiagnostic>.GetInstance(out var builder);
 
             // Add the first compiler emit error. Do not report warnings - they do not block applying the edit.
-            // It's unnecessary to report more then one error since all the diagnostics are already reported in the Error List
+            // It's unnecessary to report more then one error since all the diagnostics are already reported in
+            // the Error List
             // and this is just messaging to the agent.
 
             foreach (var data in diagnosticData)

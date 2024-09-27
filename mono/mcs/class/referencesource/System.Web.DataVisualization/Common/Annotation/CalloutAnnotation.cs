@@ -92,7 +92,8 @@ namespace System.Web.UI.DataVisualization.Charting
         Ellipse,
 
         /// <summary>
-        /// Perspective rectangle is drawn around the callout text, which is connected with the anchor point.
+        /// Perspective rectangle is drawn around the callout text, which is connected with the anchor
+        // point.
         /// </summary>
         Perspective,
     }
@@ -313,7 +314,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ChartHatchStyle"/> value used for the background of an annotation.
         /// </value>
         /// <remarks>
-        /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
+        /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see
+        // cref="BackSecondaryColor"/>.
         /// </remarks>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -339,7 +341,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="GradientStyle"/> value used for the background of an annotation.
         /// </value>
         /// <remarks>
-        /// Two colors are used to draw the gradient, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
+        /// Two colors are used to draw the gradient, <see cref="BackColor"/> and <see
+        // cref="BackSecondaryColor"/>.
         /// </remarks>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -389,18 +392,21 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Anchor
 
         /// <summary>
-        /// Gets or sets the x-coordinate offset between the positions of an annotation and its anchor point.
+        /// Gets or sets the x-coordinate offset between the positions of an annotation and its anchor
+        // point.
         /// <seealso cref="AnchorOffsetY"/>
         /// <seealso cref="Annotation.AnchorDataPoint"/>
         /// <seealso cref="Annotation.AnchorX"/>
         /// <seealso cref="AnchorAlignment"/>
         /// </summary>
         /// <value>
-        /// A double value that represents the x-coordinate offset between the positions of an annotation and its anchor point.
+        /// A double value that represents the x-coordinate offset between the positions of an annotation
+        // and its anchor point.
         /// </value>
         /// <remarks>
         /// The annotation must be anchored using the <see cref="Annotation.AnchorDataPoint"/> or
-        /// <see cref="Annotation.AnchorX"/> properties, and its <see cref="Annotation.X"/> property must be set
+        /// <see cref="Annotation.AnchorX"/> properties, and its <see cref="Annotation.X"/> property must be
+        // set
         /// to <b>Double.NaN</b>.
         /// </remarks>
         [
@@ -416,18 +422,21 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets the y-coordinate offset between the positions of an annotation and its anchor point.
+        /// Gets or sets the y-coordinate offset between the positions of an annotation and its anchor
+        // point.
         /// <seealso cref="Annotation.AnchorOffsetX"/>
         /// <seealso cref="Annotation.AnchorDataPoint"/>
         /// <seealso cref="Annotation.AnchorY"/>
         /// <seealso cref="Annotation.AnchorAlignment"/>
         /// </summary>
         /// <value>
-        /// A double value that represents the y-coordinate offset between the positions of an annotation and its anchor point.
+        /// A double value that represents the y-coordinate offset between the positions of an annotation
+        // and its anchor point.
         /// </value>
         /// <remarks>
         /// Annotation must be anchored using <see cref="Annotation.AnchorDataPoint"/> or
-        /// <see cref="Annotation.AnchorY"/> properties and its <see cref="Annotation.Y"/> property must be set
+        /// <see cref="Annotation.AnchorY"/> properties and its <see cref="Annotation.Y"/> property must be
+        // set
         /// to <b>Double.NaN</b>.
         /// </remarks>
         [
@@ -455,8 +464,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// the anchor point.
         /// </value>
         /// <remarks>
-        /// The annotation must be anchored using either <see cref="Annotation.AnchorDataPoint"/>, or the <see cref="Annotation.AnchorX"/>
-        /// and <see cref="Annotation.AnchorY"/> properties. Its <see cref="Annotation.X"/> and <see cref="Annotation.Y"/>
+        /// The annotation must be anchored using either <see cref="Annotation.AnchorDataPoint"/>, or the
+        // <see cref="Annotation.AnchorX"/>
+        /// and <see cref="Annotation.AnchorY"/> properties. Its <see cref="Annotation.X"/> and <see
+        // cref="Annotation.Y"/>
         /// properties must be set to <b>Double.NaN</b>.
         /// </remarks>
         [
@@ -534,7 +545,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets text spacing on four different sides in relative coordinates.
         /// </summary>
-        /// <param name="annotationRelative">Indicates that spacing is in annotation relative coordinates.</param>
+        /// <param name="annotationRelative">Indicates that spacing is in annotation relative
+        // coordinates.</param>
         /// <returns>Rectangle with text spacing values.</returns>
         internal override RectangleF GetTextSpacing(out bool annotationRelative)
         {
@@ -759,7 +771,8 @@ namespace System.Web.UI.DataVisualization.Charting
             RectangleF rectanglePositionAbs = graphics.GetAbsoluteRectangle(rectanglePosition);
 
             // NOTE: Fix for issue #6692.
-            // Do not draw the callout if size is not set. This may happen if callou text is set to empty string.
+            // Do not draw the callout if size is not set. This may happen if callou text is set to empty
+            // string.
             if (rectanglePositionAbs.Width <= 0 || rectanglePositionAbs.Height <= 0)
             {
                 return null;

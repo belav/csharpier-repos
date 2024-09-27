@@ -103,7 +103,8 @@ namespace ICSharpCode.SharpZipLib.BZip2
         }
 
         /// <summary>
-        /// Set the streams position.  This operation is not supported and will throw a NotSupportedException
+        /// Set the streams position.  This operation is not supported and will throw a
+        // NotSupportedException
         /// </summary>
         /// <exception cref="NotSupportedException">Any access</exception>
         public override long Seek(long offset, SeekOrigin origin)
@@ -190,21 +191,21 @@ namespace ICSharpCode.SharpZipLib.BZip2
             }
         }
 
-        /*--
-        index of the last char in the block, so
-        the block size == last + 1.
-        --*/
+/*--
+index of the last char in the block, so
+the block size == last + 1.
+--*/
         int last;
 
-        /*--
-        index in zptr[] of original string after sorting.
-        --*/
+/*--
+index in zptr[] of original string after sorting.
+--*/
         int origPtr;
 
-        /*--
-        always: in the range 0 .. 9.
-        The current block size is 100000 * this number.
-        --*/
+/*--
+always: in the range 0 .. 9.
+The current block size is 100000 * this number.
+--*/
         int blockSize100k;
 
         bool blockRandomised;
@@ -225,10 +226,10 @@ namespace ICSharpCode.SharpZipLib.BZip2
         int[] tt;
         byte[] ll8;
 
-        /*--
-        freq table collected to save a pass over the data
-        during decompression.
-        --*/
+/*--
+freq table collected to save a pass over the data
+during decompression.
+--*/
         int[] unzftab = new int[256];
 
         int[][] limit = new int[BZip2Constants.N_GROUPS][];
@@ -392,7 +393,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
         {
             computedBlockCRC = (int)mCrc.Value;
 
-            /*-- A bad CRC is considered a fatal error. --*/
+/*-- A bad CRC is considered a fatal error. --*/
             if (storedBlockCRC != computedBlockCRC)
             {
                 CrcError();
@@ -570,7 +571,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
 
             bool[] inUse16 = new bool[16];
 
-            /*--- Receive the mapping table ---*/
+/*--- Receive the mapping table ---*/
             for (int i = 0; i < 16; i++)
             {
                 inUse16[i] = (BsR(1) == 1);
@@ -597,7 +598,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
             MakeMaps();
             int alphaSize = nInUse + 2;
 
-            /*--- Now the selectors ---*/
+/*--- Now the selectors ---*/
             int nGroups = BsR(3);
             int nSelectors = BsR(15);
 
@@ -611,7 +612,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
                 selectorMtf[i] = (byte)j;
             }
 
-            /*--- Undo the MTF values for the selectors. ---*/
+/*--- Undo the MTF values for the selectors. ---*/
             byte[] pos = new byte[BZip2Constants.N_GROUPS];
             for (int v = 0; v < nGroups; v++)
             {
@@ -631,7 +632,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
                 selector[i] = tmp;
             }
 
-            /*--- Now the coding tables ---*/
+/*--- Now the coding tables ---*/
             for (int t = 0; t < nGroups; t++)
             {
                 int curr = BsR(5);
@@ -652,7 +653,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
                 }
             }
 
-            /*--- Create the Huffman decoding tables ---*/
+/*--- Create the Huffman decoding tables ---*/
             for (int t = 0; t < nGroups; t++)
             {
                 int minLen = 32;
@@ -688,12 +689,12 @@ namespace ICSharpCode.SharpZipLib.BZip2
             int groupNo = -1;
             int groupPos = 0;
 
-            /*--
-            Setting up the unzftab entries here is not strictly
-            necessary, but it does save having to do it later
-            in a separate pass, and so saves a block's worth of
-            cache misses.
-            --*/
+/*--
+Setting up the unzftab entries here is not strictly
+necessary, but it does save having to do it later
+in a separate pass, and so saves a block's worth of
+cache misses.
+--*/
             for (int i = 0; i <= 255; i++)
             {
                 unzftab[i] = 0;
@@ -1066,42 +1067,42 @@ namespace ICSharpCode.SharpZipLib.BZip2
     }
 }
 /* This file was derived from a file containing under this license:
- *
- * This file is a part of bzip2 and/or libbzip2, a program and
- * library for lossless, block-sorting data compression.
- *
- * Copyright (C) 1996-1998 Julian R Seward.  All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer.
- *
- * 2. The origin of this software must not be misrepresented; you must
- * not claim that you wrote the original software.  If you use this
- * software in a product, an acknowledgment in the product
- * documentation would be appreciated but is not required.
- *
- * 3. Altered source versions must be plainly marked as such, and must
- * not be misrepresented as being the original software.
- *
- * 4. The name of the author may not be used to endorse or promote
- * products derived from this software without specific prior written
- * permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
- * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
- * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * Java version ported by Keiron Liddle, Aftex Software <keiron@aftexsw.com> 1999-2001
- */
+*
+* This file is a part of bzip2 and/or libbzip2, a program and
+* library for lossless, block-sorting data compression.
+*
+* Copyright (C) 1996-1998 Julian R Seward.  All rights reserved.
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions
+* are met:
+*
+* 1. Redistributions of source code must retain the above copyright
+* notice, this list of conditions and the following disclaimer.
+*
+* 2. The origin of this software must not be misrepresented; you must
+* not claim that you wrote the original software.  If you use this
+* software in a product, an acknowledgment in the product
+* documentation would be appreciated but is not required.
+*
+* 3. Altered source versions must be plainly marked as such, and must
+* not be misrepresented as being the original software.
+*
+* 4. The name of the author may not be used to endorse or promote
+* products derived from this software without specific prior written
+* permission.
+*
+* THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+* OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+* ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+* GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+* INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+* WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*
+* Java version ported by Keiron Liddle, Aftex Software <keiron@aftexsw.com> 1999-2001
+*/

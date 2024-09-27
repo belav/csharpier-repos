@@ -27,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _fixupKind = fixupKind;
             _fieldWithToken = fieldWithToken;
 
-            // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
+            // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting
+            // the signature
             ((CompilerTypeSystemContext)fieldWithToken.Field.Context).EnsureLoadableType(
                 fieldWithToken.Field.OwningType
             );

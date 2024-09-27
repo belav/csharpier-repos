@@ -107,7 +107,8 @@ internal sealed class AttributeRoute : IRouter
             }
         }
 
-        // We're creating one AttributeRouteMatchingEntry per group, so we need to identify the distinct set of
+        // We're creating one AttributeRouteMatchingEntry per group, so we need to identify the distinct set
+        // of
         // groups. It's guaranteed that all members of the group have the same template and precedence,
         // so we only need to hang on to a single instance of the RouteInfo for each group.
         var groups = GetInboundRouteGroups(routeInfos);

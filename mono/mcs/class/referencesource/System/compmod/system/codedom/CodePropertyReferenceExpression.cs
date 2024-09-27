@@ -30,14 +30,16 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodePropertyReferenceExpression'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.CodePropertyReferenceExpression'/>.
         ///    </para>
         /// </devdoc>
         public CodePropertyReferenceExpression() { }
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodePropertyReferenceExpression'/> using the specified target object and property
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodePropertyReferenceExpression'/>
+        // using the specified target object and property
         ///       name.
         ///    </para>
         /// </devdoc>
@@ -49,7 +51,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       The target object containing the property this <see cref='System.CodeDom.CodePropertyReferenceExpression'/> references.
+        ///       The target object containing the property this <see
+        // cref='System.CodeDom.CodePropertyReferenceExpression'/> references.
         ///    </para>
         /// </devdoc>
         public CodeExpression TargetObject

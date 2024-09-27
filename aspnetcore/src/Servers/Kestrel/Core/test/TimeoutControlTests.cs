@@ -173,7 +173,8 @@ public class TimeoutControlTests
         _timeProvider.Advance(TimeSpan.FromSeconds(0.5));
         _timeoutControl.StopTimingRead();
 
-        // Tick at 4s, expected counted time is 4s (first tick after pause goes through), expected data rate is 150 bytes/second
+        // Tick at 4s, expected counted time is 4s (first tick after pause goes through), expected data rate
+        // is 150 bytes/second
         _timeProvider.Advance(TimeSpan.FromSeconds(0.5));
         _timeoutControl.Tick(_timeProvider.GetTimestamp());
 
@@ -421,7 +422,8 @@ public class TimeoutControlTests
         _timeoutControl.BytesWrittenToBuffer(minRate, 500);
         _timeoutControl.StartTimingWrite();
 
-        // Start a concurrent write after 3 seconds, which should complete within 3 seconds (adjusted by Heartbeat.Interval)
+        // Start a concurrent write after 3 seconds, which should complete within 3 seconds (adjusted by
+        // Heartbeat.Interval)
         _timeoutControl.BytesWrittenToBuffer(minRate, 300);
         _timeoutControl.StartTimingWrite();
 
@@ -461,7 +463,8 @@ public class TimeoutControlTests
         _timeoutControl.StartTimingWrite();
 
         // Move the clock forward Heartbeat.Interval + MinDataRate.GracePeriod + 4 seconds.
-        // The grace period should only be added for the first write. The subsequent 4 100 byte writes should add 1 second each to the timeout given the 100 byte/s min rate.
+        // The grace period should only be added for the first write. The subsequent 4 100 byte writes
+        // should add 1 second each to the timeout given the 100 byte/s min rate.
         AdvanceClock(
             Heartbeat.Interval
                 + minRate.GracePeriod

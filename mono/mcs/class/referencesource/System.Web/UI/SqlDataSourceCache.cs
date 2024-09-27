@@ -14,7 +14,8 @@ namespace System.Web.UI
         internal const string Sql9CacheDependencyDirective = "CommandNotification";
 
         /// <devdoc>
-        /// A semi-colon delimited string indicating which databases to use for the dependency in the format "database1:table1;database2:table2".
+        /// A semi-colon delimited string indicating which databases to use for the dependency in the format
+        // "database1:table1;database2:table2".
         /// </devdoc>
         public string SqlCacheDependency
         {

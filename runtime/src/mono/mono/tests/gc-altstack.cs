@@ -65,7 +65,7 @@ public class Tests
 
     public static void Main(String[] args)
     {
-        /* Test for running a GC while executing a SIGSEGV handler on an altstack */
+/* Test for running a GC while executing a SIGSEGV handler on an altstack */
         int niter;
 
         if (args.Length > 0)

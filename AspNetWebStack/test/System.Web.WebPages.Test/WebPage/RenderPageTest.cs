@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -160,7 +161,8 @@ namespace System.Web.WebPages.Test
             // Test for passing a dictionary instance as an argument to RenderPage
             //
             // ~/index.cshtml does the following:
-            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"} })
+            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"}
+            // })
             //
             // ~/subpage.cshtml does the following:
             // @PageData["foo"] @PageData["bar"] @PageData[0]
@@ -198,7 +200,8 @@ namespace System.Web.WebPages.Test
             // Test for passing a dictionary instance as an argument to RenderPage
             //
             // ~/index.cshtml does the following:
-            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"} })
+            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"}
+            // })
             //
             // ~/subpage.cshtml does the following:
             // @Page.foo @Page.bar @Page[0]
@@ -439,7 +442,8 @@ namespace System.Web.WebPages.Test
             // Test that using PageData with a missing key returns null
             //
             // ~/index.cshtml does the following:
-            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"} })
+            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"}
+            // })
             // @RenderPage("subpage.cshtml", "x", "y", "z")
             //
             // ~/subpage.cshtml does the following:
@@ -476,7 +480,8 @@ namespace System.Web.WebPages.Test
             // Test that using PageData with a missing key returns null
             //
             // ~/index.cshtml does the following:
-            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"} })
+            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"}
+            // })
             // @RenderPage("subpage.cshtml", "x", "y", "z")
             //
             // ~/subpage.cshtml does the following:
@@ -729,14 +734,16 @@ namespace System.Web.WebPages.Test
             //
             // ~/index.cshtml does the following:
             // @(PageData["foo"] ?? "null")
-            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"} })
+            // @RenderPage("subpage.cshtml", new Dictionary<string, object>(){ { "foo", 1 }, { "bar", "hello"}
+            // })
             //
             // ~/subpage1.cshtml does the following:
             // @(PageData["foo"] ?? "sub1nullfoo")
             // @(PageData["bar"] ?? "sub1nullbar")
             // @(PageData["x"] ?? "sub1nullx")
             // @(PageData["y"] ?? "sub1nully")
-            // @RenderPage("subpage2.cshtml", new Dictionary<string, object>(){ { { "bar", "world"}, {"x", "good"}, {"y", "bye"} })
+            // @RenderPage("subpage2.cshtml", new Dictionary<string, object>(){ { { "bar", "world"}, {"x",
+            // "good"}, {"y", "bye"} })
             //
             // ~/subpage2.cshtml does the following:
             // @(PageData["foo"] ?? "sub2nullfoo")

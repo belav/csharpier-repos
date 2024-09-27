@@ -43,9 +43,9 @@ namespace System.Text.RegularExpressions
         internal const int ECMABoundary = 0x0080;
 
         /*
-         * This is the one of the only two functions that should be called from outside.
-         * It takes a RegexTree and computes the set of chars that can start it.
-         */
+        * This is the one of the only two functions that should be called from outside.
+        * It takes a RegexTree and computes the set of chars that can start it.
+        */
         internal static RegexPrefix FirstChars(RegexTree t)
         {
             RegexFCD s = new RegexFCD();
@@ -62,9 +62,9 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * This is a related computation: it takes a RegexTree and computes the
-         * leading substring if it see one. It's quite trivial and gives up easily.
-         */
+        * This is a related computation: it takes a RegexTree and computes the
+        * leading substring if it see one. It's quite trivial and gives up easily.
+        */
         internal static RegexPrefix Prefix(RegexTree tree)
         {
             RegexNode curNode;
@@ -141,9 +141,9 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * Yet another related computation: it takes a RegexTree and computes the
-         * leading anchors that it encounters.
-         */
+        * Yet another related computation: it takes a RegexTree and computes the
+        * leading anchors that it encounters.
+        */
         internal static int Anchors(RegexTree tree)
         {
             RegexNode curNode;
@@ -198,8 +198,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * Convert anchor type to anchor bit.
-         */
+        * Convert anchor type to anchor bit.
+        */
         private static int AnchorFromType(int type)
         {
             switch (type)
@@ -255,8 +255,8 @@ namespace System.Text.RegularExpressions
 #endif
 
         /*
-         * private constructor; can't be created outside
-         */
+        * private constructor; can't be created outside
+        */
         private RegexFCD()
         {
             _fcStack = new RegexFC[32];
@@ -264,9 +264,9 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * To avoid recursion, we use a simple integer stack.
-         * This is the push.
-         */
+        * To avoid recursion, we use a simple integer stack.
+        * This is the push.
+        */
         private void PushInt(int I)
         {
             if (_intDepth >= _intStack.Length)
@@ -282,25 +282,25 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * True if the stack is empty.
-         */
+        * True if the stack is empty.
+        */
         private bool IntIsEmpty()
         {
             return _intDepth == 0;
         }
 
         /*
-         * This is the pop.
-         */
+        * This is the pop.
+        */
         private int PopInt()
         {
             return _intStack[--_intDepth];
         }
 
         /*
-          * We also use a stack of RegexFC objects.
-          * This is the push.
-          */
+        * We also use a stack of RegexFC objects.
+        * This is the push.
+        */
         private void PushFC(RegexFC fc)
         {
             if (_fcDepth >= _fcStack.Length)
@@ -315,34 +315,34 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * True if the stack is empty.
-         */
+        * True if the stack is empty.
+        */
         private bool FCIsEmpty()
         {
             return _fcDepth == 0;
         }
 
         /*
-         * This is the pop.
-         */
+        * This is the pop.
+        */
         private RegexFC PopFC()
         {
             return _fcStack[--_fcDepth];
         }
 
         /*
-         * This is the top.
-         */
+        * This is the top.
+        */
         private RegexFC TopFC()
         {
             return _fcStack[_fcDepth - 1];
         }
 
         /*
-         * The main FC computation. It does a shortcutted depth-first walk
-         * through the tree and calls CalculateFC to emits code before
-         * and after each child of an interior node, and at each leaf.
-         */
+        * The main FC computation. It does a shortcutted depth-first walk
+        * through the tree and calls CalculateFC to emits code before
+        * and after each child of an interior node, and at each leaf.
+        */
         private RegexFC RegexFCFromRegexTree(RegexTree tree)
         {
             RegexNode curNode;
@@ -402,16 +402,16 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * Called in Beforechild to prevent further processing of the current child
-         */
+        * Called in Beforechild to prevent further processing of the current child
+        */
         private void SkipChild()
         {
             _skipchild = true;
         }
 
         /*
-         * FC computation and shortcut cases for each node type
-         */
+        * FC computation and shortcut cases for each node type
+        */
         private void CalculateFC(int NodeType, RegexNode node, int CurIndex)
         {
             bool ci = false;

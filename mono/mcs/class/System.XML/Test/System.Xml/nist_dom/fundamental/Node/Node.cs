@@ -24,39 +24,39 @@ namespace nist_dom.fundamental
     {
         public static int i = 2;
 
-        /*
-                public testResults[] RunTests()
-                {
-                    testResults[] tests = new testResults[] {core0001NO(), core0002NO(), core0003NO(),core0004NO(),
-                                                                core0005NO(), core0006NO(), core0007NO(), core0008NO(),
-                                                                core0009NO(), core0010NO(), core0011NO(), core0012NO(),
-                                                                core0013NO(), core0014NO(), core0015NO(), core0016NO(),
-                                                                core0017NO(), core0018NO(), core0019NO(), core0020NO(),
-                                                                core0021NO(), core0022NO(), core0023NO(), core0024NO(),
-                                                                core0025NO(), core0026NO(), core0027NO(), core0028NO(),
-                                                                core0029NO(), core0030NO(), core0031NO(), core0032NO(),
-                                                                core0033NO(), core0034NO(), core0035NO(), core0036NO(),
-                                                                core0038NO(), core0039NO(), core0040NO(),
-                                                                core0041NO(), core0042NO(), core0043NO(), core0044NO(),
-                                                                core0045NO(), core0046NO(), core0047NO(), core0048NO(),
-                                                                core0049NO(), core0050NO(), core0051NO(), core0052NO(),
-                                                                core0053NO(), core0054NO(), core0055NO(), core0056NO(),
-                                                                core0057NO(), core0058NO(), core0059NO(), core0060NO(),
-                                                                core0061NO(), core0062NO(), core0063NO(), core0064NO(),
-                                                                core0065NO(), core0066NO(), core0067NO(), core0068NO(),
-                                                                core0069NO(), core0070NO(), core0071NO(), core0072NO(),
-                                                                core0073NO(), core0074NO(), core0075NO(), core0076NO(),
-                                                                core0077NO(), core0078NO(), core0079NO(), core0080NO(),
-                                                                core0081NO(), core0082NO(), core0083NO(), core0084NO(),
-                                                                core0085NO(), core0087NO(), core0088NO(),
-                                                                core0089NO(), core0090NO(), core0091NO(), core0092NO(),
-                                                                core0093NO(), core0094NO(), core0095NO(), core0096NO(),
-                                                                core0097NO(), core0098NO(), core0099NO(), core0100NO(),
-                                                                core0101NO(), core0102NO(), core0103NO()};
-          
-                    return tests;
-                }
-        */
+/*
+public testResults[] RunTests()
+{
+testResults[] tests = new testResults[] {core0001NO(), core0002NO(), core0003NO(),core0004NO(),
+core0005NO(), core0006NO(), core0007NO(), core0008NO(),
+core0009NO(), core0010NO(), core0011NO(), core0012NO(),
+core0013NO(), core0014NO(), core0015NO(), core0016NO(),
+core0017NO(), core0018NO(), core0019NO(), core0020NO(),
+core0021NO(), core0022NO(), core0023NO(), core0024NO(),
+core0025NO(), core0026NO(), core0027NO(), core0028NO(),
+core0029NO(), core0030NO(), core0031NO(), core0032NO(),
+core0033NO(), core0034NO(), core0035NO(), core0036NO(),
+core0038NO(), core0039NO(), core0040NO(),
+core0041NO(), core0042NO(), core0043NO(), core0044NO(),
+core0045NO(), core0046NO(), core0047NO(), core0048NO(),
+core0049NO(), core0050NO(), core0051NO(), core0052NO(),
+core0053NO(), core0054NO(), core0055NO(), core0056NO(),
+core0057NO(), core0058NO(), core0059NO(), core0060NO(),
+core0061NO(), core0062NO(), core0063NO(), core0064NO(),
+core0065NO(), core0066NO(), core0067NO(), core0068NO(),
+core0069NO(), core0070NO(), core0071NO(), core0072NO(),
+core0073NO(), core0074NO(), core0075NO(), core0076NO(),
+core0077NO(), core0078NO(), core0079NO(), core0080NO(),
+core0081NO(), core0082NO(), core0083NO(), core0084NO(),
+core0085NO(), core0087NO(), core0088NO(),
+core0089NO(), core0090NO(), core0091NO(), core0092NO(),
+core0093NO(), core0094NO(), core0095NO(), core0096NO(),
+core0097NO(), core0098NO(), core0099NO(), core0100NO(),
+core0101NO(), core0102NO(), core0103NO()};
+
+return tests;
+}
+*/
 
         //------------------------ test case core-0001NO------------------------
         //

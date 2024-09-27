@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Host
         {
             public Service() { }
 
-            //public bool CanResolveType(ProjectId projectId, string assemblyName, string fullyQualifiedTypeName)
+            //public bool CanResolveType(ProjectId projectId, string assemblyName, string
+            // fullyQualifiedTypeName)
             //{
             //    return false;
             //}

@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System
 {
     /// <summary>
-    /// The exception that is thrown when the operating system denies access because of an I/O error or a specific type of security error.
+    /// The exception that is thrown when the operating system denies access because of an I/O error or
+    // a specific type of security error.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

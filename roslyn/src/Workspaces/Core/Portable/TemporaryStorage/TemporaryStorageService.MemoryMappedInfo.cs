@@ -18,20 +18,28 @@ namespace Microsoft.CodeAnalysis.Host
         /// Our own abstraction on top of memory map file so that we can have shared views over mmf files.
         /// Otherwise, each view has minimum size of 64K due to requirement forced by windows.
         ///
-        /// most of our view will have short lifetime, but there are cases where view might live a bit longer such as
+        /// most of our view will have short lifetime, but there are cases where view might live a bit
+        // longer such as
         /// metadata dll shadow copy. shared view will help those cases.
         /// </summary>
         /// <remarks>
-        /// <para>Instances of this class should be disposed when they are no longer needed. After disposing this
-        /// instance, it should no longer be used. However, streams obtained through <see cref="CreateReadableStream"/>
-        /// or <see cref="CreateWritableStream"/> will not be invalidated until they are disposed independently (which
+        /// <para>Instances of this class should be disposed when they are no longer needed. After disposing
+        // this
+        /// instance, it should no longer be used. However, streams obtained through <see
+        // cref="CreateReadableStream"/>
+        /// or <see cref="CreateWritableStream"/> will not be invalidated until they are disposed
+        // independently (which
         /// may occur before or after the <see cref="MemoryMappedInfo"/> is disposed.</para>
         ///
-        /// <para>This class and its nested types have familiar APIs and predictable behavior when used in other code,
-        /// but are non-trivial to work on. The implementations of <see cref="IDisposable"/> adhere to the best
+        /// <para>This class and its nested types have familiar APIs and predictable behavior when used in
+        // other code,
+        /// but are non-trivial to work on. The implementations of <see cref="IDisposable"/> adhere to the
+        // best
         /// practices described in
-        /// <see href="http://joeduffyblog.com/2005/04/08/dg-update-dispose-finalization-and-resource-management/">DG
-        /// Update: Dispose, Finalization, and Resource Management</see>. Additional notes regarding operating system
+        /// <see
+        // href="http://joeduffyblog.com/2005/04/08/dg-update-dispose-finalization-and-resource-management/">DG
+        /// Update: Dispose, Finalization, and Resource Management</see>. Additional notes regarding
+        // operating system
         /// behavior leveraged for efficiency are given in comments.</para>
         /// </remarks>
         internal sealed class MemoryMappedInfo(
@@ -45,8 +53,10 @@ namespace Microsoft.CodeAnalysis.Host
             /// The memory mapped file.
             /// </summary>
             /// <remarks>
-            /// <para>It is possible for the file to be disposed prior to the view and/or the streams which use it.
-            /// However, the operating system does not actually close the views which are in use until the file handles
+            /// <para>It is possible for the file to be disposed prior to the view and/or the streams which use
+            // it.
+            /// However, the operating system does not actually close the views which are in use until the file
+            // handles
             /// are closed as well, even if the file is disposed first.</para>
             /// </remarks>
             private readonly ReferenceCountedDisposable<MemoryMappedFile> _memoryMappedFile =
@@ -56,11 +66,14 @@ namespace Microsoft.CodeAnalysis.Host
             /// A weak reference to a read-only view for the memory mapped file.
             /// </summary>
             /// <remarks>
-            /// <para>This holds a weak counted reference to current <see cref="MemoryMappedViewAccessor"/>, which
+            /// <para>This holds a weak counted reference to current <see cref="MemoryMappedViewAccessor"/>,
+            // which
             /// allows additional accessors for the same address space to be obtained up until the point when no
             /// external code is using it. When the memory is no longer being used by any <see
-            /// cref="MemoryMappedViewUnmanagedMemoryStream"/> objects, the view of the memory mapped file is unmapped,
-            /// making the process address space it previously claimed available for other purposes. If/when it is
+            /// cref="MemoryMappedViewUnmanagedMemoryStream"/> objects, the view of the memory mapped file is
+            // unmapped,
+            /// making the process address space it previously claimed available for other purposes. If/when it
+            // is
             /// needed again, a new view is created.</para>
             ///
             /// <para>This view is read-only, so it is only used by <see cref="CreateReadableStream"/>.</para>
@@ -160,15 +173,20 @@ namespace Microsoft.CodeAnalysis.Host
             }
 
             /// <summary>
-            /// Run a function which may fail with an <see cref="IOException"/> if not enough memory is available to
-            /// satisfy the request. In this case, a full compacting GC pass is forced and the function is attempted
+            /// Run a function which may fail with an <see cref="IOException"/> if not enough memory is
+            // available to
+            /// satisfy the request. In this case, a full compacting GC pass is forced and the function is
+            // attempted
             /// again.
             /// </summary>
             /// <remarks>
             /// <para><see cref="MemoryMappedFile.CreateViewAccessor(long, long, MemoryMappedFileAccess)"/> and
-            /// <see cref="MemoryMappedFile.CreateViewStream(long, long, MemoryMappedFileAccess)"/> will use a native
-            /// memory map, which can't trigger a GC. In this case, we'd otherwise crash with OOM, so we don't care
-            /// about creating a UI delay with a full forced compacting GC. If it crashes the second try, it means we're
+            /// <see cref="MemoryMappedFile.CreateViewStream(long, long, MemoryMappedFileAccess)"/> will use a
+            // native
+            /// memory map, which can't trigger a GC. In this case, we'd otherwise crash with OOM, so we don't
+            // care
+            /// about creating a UI delay with a full forced compacting GC. If it crashes the second try, it
+            // means we're
             /// legitimately out of resources.</para>
             /// </remarks>
             /// <typeparam name="TArg">The type of argument to pass to the callback.</typeparam>
@@ -194,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Host
 
             private static void ForceCompactingGC()
             {
-                // repeated GC.Collect / WaitForPendingFinalizers till memory freed delta is super small, ignore the return value
+                // repeated GC.Collect / WaitForPendingFinalizers till memory freed delta is super small, ignore the
+                // return value
                 GC.GetTotalMemory(forceFullCollection: true);
 
                 // compact the LOH

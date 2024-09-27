@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         /// <summary>
         /// Instrumentation update to be applied to a method.
-        /// If not empty, <see cref="OldSymbol"/> and <see cref="NewSymbol"/> must be non-null <see cref="IMethodSymbol"/>s, and
+        /// If not empty, <see cref="OldSymbol"/> and <see cref="NewSymbol"/> must be non-null <see
+        // cref="IMethodSymbol"/>s, and
         /// <see cref="Kind"/> must be <see cref="SemanticEditKind.Update"/>.
         /// </summary>
         public MethodInstrumentation Instrumentation { get; }
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// Instrumentation update to be applied to a method.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="oldSymbol"/> or <paramref name="newSymbol"/> is null and the edit isn't a <see cref="SemanticEditKind.Insert"/> or <see cref="SemanticEditKind.Delete"/>, respectively.
+        /// <paramref name="oldSymbol"/> or <paramref name="newSymbol"/> is null and the edit isn't a <see
+        // cref="SemanticEditKind.Insert"/> or <see cref="SemanticEditKind.Delete"/>, respectively.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="kind"/> is not a valid kind.

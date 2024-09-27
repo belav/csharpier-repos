@@ -302,7 +302,8 @@ namespace Internal.StackTraceMetadata
                     EmitFunctionPointerTypeName();
                     break;
 
-                // This is not an actual type, but we don't always bother representing generic arguments on generic methods as types
+                // This is not an actual type, but we don't always bother representing generic arguments on generic
+                // methods as types
                 case HandleType.ConstantStringValue:
                     EmitString(typeHandle.ToConstantStringValueHandle(_metadataReader));
                     break;
@@ -523,7 +524,8 @@ namespace Internal.StackTraceMetadata
         /// <summary>
         /// Emit a string (represented by a serialized ConstantStringValue) to the output string builder.
         /// </summary>
-        /// <param name="stringHandle">Constant string value token (offset within stack trace native metadata)</param>
+        /// <param name="stringHandle">Constant string value token (offset within stack trace native
+        // metadata)</param>
         private void EmitString(ConstantStringValueHandle stringHandle)
         {
             _outputBuilder.Append(_metadataReader.GetConstantStringValue(stringHandle).Value);

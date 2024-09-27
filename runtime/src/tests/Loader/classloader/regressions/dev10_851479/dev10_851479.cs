@@ -5,7 +5,8 @@ using System;
 using Xunit;
 
 /// <summary>
-/// Regression test case for Dev10 851479 bug: Stackoverflow in .NET when using self referencing generics along with type constraints to another type parameter.
+/// Regression test case for Dev10 851479 bug: Stackoverflow in .NET when using self referencing
+// generics along with type constraints to another type parameter.
 /// </summary>
 public class Program
 {

@@ -189,10 +189,10 @@ namespace MonoTests.System.XmlSerialization
             t.RoList.Add(t.parts[0]);
             t.RoList.Add(t.parts[1]);
 
-            /*			t.struc = new OneStruct();
-                        t.struc.aa = 776655;
-                        t.struc.cc = "this is a struct";
-            */
+/*			t.struc = new OneStruct();
+t.struc.aa = 776655;
+t.struc.cc = "this is a struct";
+*/
             t.multiList = new ArrayList[2];
             t.multiList[0] = new ArrayList();
             t.multiList[0].Add(22);
@@ -341,7 +341,8 @@ namespace MonoTests.System.XmlSerialization
             Assert.IsNull(t.multiList, "t.multiList");
             //			Assert.AreEqual (exp.multiList.Length, t.multiList.Length, "t.multiList.Count");
             //			for (int n=0; n<exp.multiList.Length; n++)
-            //				AssertionHelper.AssertEqualsArray ("t.multiList " + n, exp.multiList[n].ToArray(), t.multiList[n].ToArray());
+            //				AssertionHelper.AssertEqualsArray ("t.multiList " + n, exp.multiList[n].ToArray(),
+            // t.multiList[n].ToArray());
 
             Assert.AreEqual(exp.defElem, t.defElem, "t.defElem");
             Assert.AreEqual(exp.defAttr, t.defAttr, "t.defAttr");
@@ -356,7 +357,8 @@ namespace MonoTests.System.XmlSerialization
             //			Assert.IsNotNull (tdbca, "t.dbscontainer.at");
 
             //			Assert.IsNotNull (tdbca, "t.dbscontainer.dbca");
-            //			AssertionHelper.AssertEqualsArray ("t.dbscontainer.at.doublestring", expdbca.doublestring, tdbca.doublestring);
+            //			AssertionHelper.AssertEqualsArray ("t.dbscontainer.at.doublestring", expdbca.doublestring,
+            // tdbca.doublestring);
 
             //			AnotherTestPart tat = tdbca.at as AnotherTestPart;
             //			AnotherTestPart expat = expdbca.at as AnotherTestPart;

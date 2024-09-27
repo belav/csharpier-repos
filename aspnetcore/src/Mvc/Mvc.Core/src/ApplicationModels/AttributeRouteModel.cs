@@ -23,7 +23,8 @@ public class AttributeRouteModel
     public AttributeRouteModel() { }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="AttributeRoute"/> using the specified <paramref name="templateProvider"/>.
+    /// Initializes a new instance of <see cref="AttributeRoute"/> using the specified <paramref
+    // name="templateProvider"/>.
     /// </summary>
     /// <param name="templateProvider">The <see cref="IRouteTemplateProvider"/>.</param>
     public AttributeRouteModel(IRouteTemplateProvider templateProvider)
@@ -79,12 +80,14 @@ public class AttributeRouteModel
     public bool SuppressLinkGeneration { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that determines if this model participates in path matching (inbound routing).
+    /// Gets or sets a value that determines if this model participates in path matching (inbound
+    // routing).
     /// </summary>
     public bool SuppressPathMatching { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that determines if this route template for this model overrides the route template at the parent scope.
+    /// Gets or sets a value that determines if this route template for this model overrides the route
+    // template at the parent scope.
     /// </summary>
     public bool IsAbsoluteTemplate => Template != null && IsOverridePattern(Template);
 

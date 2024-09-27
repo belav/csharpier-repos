@@ -6639,7 +6639,10 @@ namespace MonoTests.System.ComponentModel
                     MaskedTextResultHint_out,
                     "#B1318"
                 );
-                //MaskedTextProviderTest.AssertProperties (mtp, "InsertAt_char_int_int_MaskedTextResultHintTestB", 1, true, false, 3, 6, CultureInfo.GetCultureInfo ("es-ES"), 9, true, false, false, 7, 15, @"09#L?&CAa.,:/$<>|\\", false, false, '\x0', '\x5F', true, true, true, @"12     3 ,.:/€\", @"12     3 ,.:/€\", @"12     3 ,.:/€\", @"12_____3_,.:/€\", @"12_____3_", @"12     3 ,.:/€\", @"12     3");
+                //MaskedTextProviderTest.AssertProperties (mtp, "InsertAt_char_int_int_MaskedTextResultHintTestB",
+                // 1, true, false, 3, 6, CultureInfo.GetCultureInfo ("es-ES"), 9, true, false, false, 7, 15,
+                // @"09#L?&CAa.,:/$<>|\\", false, false, '\x0', '\x5F', true, true, true, @"12     3 ,.:/€\", @"12
+                // 3 ,.:/€\", @"12     3 ,.:/€\", @"12_____3_,.:/€\", @"12_____3_", @"12     3 ,.:/€\", @"12     3");
             }
             {
                 // Minimal
@@ -6659,7 +6662,10 @@ namespace MonoTests.System.ComponentModel
                     MaskedTextResultHint_out,
                     "#C1318"
                 );
-                //MaskedTextProviderTest.AssertProperties (mtp, "InsertAt_char_int_int_MaskedTextResultHintTestC", 2, true, false, 1, 8, CultureInfo.GetCultureInfo ("es-ES"), 9, true, false, false, 0, 15, @"09#L?&CAa.,:/$<>|\\", false, false, '\x0', '\x5F', true, true, true, @"1        ,.:/€\", @"1        ,.:/€\", @"1        ,.:/€\", @"1________,.:/€\", @"1________", @"1        ,.:/€\", @"1");
+                //MaskedTextProviderTest.AssertProperties (mtp, "InsertAt_char_int_int_MaskedTextResultHintTestC",
+                // 2, true, false, 1, 8, CultureInfo.GetCultureInfo ("es-ES"), 9, true, false, false, 0, 15,
+                // @"09#L?&CAa.,:/$<>|\\", false, false, '\x0', '\x5F', true, true, true, @"1        ,.:/€\", @"1
+                // ,.:/€\", @"1        ,.:/€\", @"1________,.:/€\", @"1________", @"1        ,.:/€\", @"1");
             }
             {
                 // No what are the actual difference between this and the minimal?
@@ -6679,7 +6685,10 @@ namespace MonoTests.System.ComponentModel
                     MaskedTextResultHint_out,
                     "#A1318"
                 );
-                //MaskedTextProviderTest.AssertProperties (mtp, "InsertAt_char_int_int_MaskedTextResultHintTestA", 3, true, false, 3, 6, CultureInfo.GetCultureInfo ("es-ES"), 9, true, false, false, 7, 15, @"09#L?&CAa.,:/$<>|\\", false, false, '\x0', '\x5F', true, true, true, @"12     3 ,.:/€\", @"12     3 ,.:/€\", @"12     3 ,.:/€\", @"12_____3_,.:/€\", @"12_____3_", @"12     3 ,.:/€\", @"12     3");
+                //MaskedTextProviderTest.AssertProperties (mtp, "InsertAt_char_int_int_MaskedTextResultHintTestA",
+                // 3, true, false, 3, 6, CultureInfo.GetCultureInfo ("es-ES"), 9, true, false, false, 7, 15,
+                // @"09#L?&CAa.,:/$<>|\\", false, false, '\x0', '\x5F', true, true, true, @"12     3 ,.:/€\", @"12
+                // 3 ,.:/€\", @"12     3 ,.:/€\", @"12_____3_,.:/€\", @"12_____3_", @"12     3 ,.:/€\", @"12     3");
             }
         }
 
@@ -11336,7 +11345,7 @@ namespace MonoTests.System.ComponentModel
             return str.ToString();
         }
 
-        /* START */
+/* START */
         public static void AssertProperties(
             MaskedTextProvider mtp,
             string test_name,
@@ -11439,7 +11448,8 @@ namespace MonoTests.System.ComponentModel
             }
             try
             {
-                //Assert.AreEqual (culture, mtp.Culture, string.Format ("{0}-#{1} (Culture)", test_name + counter.ToString (), (i++).ToString ()));
+                //Assert.AreEqual (culture, mtp.Culture, string.Format ("{0}-#{1} (Culture)", test_name +
+                // counter.ToString (), (i++).ToString ()));
             }
             catch (AssertionException ex)
             {
@@ -11463,7 +11473,8 @@ namespace MonoTests.System.ComponentModel
             }
             try
             {
-                //Assert.AreEqual ({0}, mtp.EditPositions,string.Format( "{0}-#{1} (EditPositions)", test_name + counter.ToString (), (i++).ToString ()));
+                //Assert.AreEqual ({0}, mtp.EditPositions,string.Format( "{0}-#{1} (EditPositions)", test_name +
+                // counter.ToString (), (i++).ToString ()));
             }
             catch (AssertionException ex)
             {
@@ -11800,7 +11811,7 @@ namespace MonoTests.System.ComponentModel
                 throw new AssertionException(msg);
             }
         }
-        /* END */
+/* END */
     }
 }
 #endif

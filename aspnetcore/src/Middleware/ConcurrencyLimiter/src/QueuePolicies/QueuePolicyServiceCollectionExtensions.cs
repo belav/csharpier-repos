@@ -15,7 +15,8 @@ public static class QueuePolicyServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
     /// <param name="configure">Set the options used by the queue.
-    /// Mandatory, since <see cref="QueuePolicyOptions.MaxConcurrentRequests"></see> must be provided.</param>
+    /// Mandatory, since <see cref="QueuePolicyOptions.MaxConcurrentRequests"></see> must be
+    // provided.</param>
     /// <returns></returns>
     public static IServiceCollection AddQueuePolicy(
         this IServiceCollection services,
@@ -32,7 +33,8 @@ public static class QueuePolicyServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
     /// <param name="configure">Set the options used by the queue.
-    /// Mandatory, since <see cref="QueuePolicyOptions.MaxConcurrentRequests"></see> must be provided.</param>
+    /// Mandatory, since <see cref="QueuePolicyOptions.MaxConcurrentRequests"></see> must be
+    // provided.</param>
     /// <returns></returns>
     public static IServiceCollection AddStackPolicy(
         this IServiceCollection services,

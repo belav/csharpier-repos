@@ -232,7 +232,8 @@ namespace Microsoft.CodeAnalysis
             catch
             {
                 // REVIEW: is the below message right?
-                // NOTE: We could report "unable to load analyzer" exception here but it should have been already reported by DiagnosticService.
+                // NOTE: We could report "unable to load analyzer" exception here but it should have been already
+                // reported by DiagnosticService.
             }
 
             return builder.ToImmutable();

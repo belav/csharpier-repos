@@ -115,8 +115,10 @@ namespace System.IO
             (Char)31,
         };
 
-        // Trim trailing white spaces, tabs etc but don't be aggressive in removing everything that has UnicodeCategory of trailing space.
-        // String.WhitespaceChars will trim aggressively than what the underlying FS does (for ex, NTFS, FAT).
+        // Trim trailing white spaces, tabs etc but don't be aggressive in removing everything that has
+        // UnicodeCategory of trailing space.
+        // String.WhitespaceChars will trim aggressively than what the underlying FS does (for ex, NTFS,
+        // FAT).
         internal static readonly char[] TrimEndChars = LongPathHelper.s_trimEndChars;
 
         private static readonly char[] RealInvalidPathChars = PathInternal.InvalidPathChars;
@@ -296,13 +298,17 @@ namespace System.IO
                 {
 #endif
 
-                // Expanding short paths is dangerous in this case as the results will change with the current directory.
+                // Expanding short paths is dangerous in this case as the results will change with the current
+                // directory.
                 //
-                // Suppose you have a path called "PICTUR~1\Foo". Now suppose you have two folders on disk "C:\Mine\Pictures Of Me"
-                // and "C:\Yours\Pictures of You". If the current directory is neither you'll get back "PICTUR~1". If it is "C:\Mine"
+                // Suppose you have a path called "PICTUR~1\Foo". Now suppose you have two folders on disk
+                // "C:\Mine\Pictures Of Me"
+                // and "C:\Yours\Pictures of You". If the current directory is neither you'll get back "PICTUR~1".
+                // If it is "C:\Mine"
                 // get back "Pictures Of Me". "C:\Yours" would give back "Pictures of You".
                 //
-                // Because of this and as it isn't documented that short paths are expanded we will not expand short names unless
+                // Because of this and as it isn't documented that short paths are expanded we will not expand short
+                // names unless
                 // we're in legacy mode.
                 string normalizedPath = NormalizePath(
                     path,
@@ -341,7 +347,8 @@ namespace System.IO
                     }
                     catch (SecurityException)
                     {
-                        // If the user did not have permissions to the path, make sure that we don't leak expanded short paths
+                        // If the user did not have permissions to the path, make sure that we don't leak expanded short
+                        // paths
                         // Only re-normalize if the original path had a ~ in it.
                         if (path.IndexOf("~", StringComparison.Ordinal) != -1)
                         {
@@ -462,7 +469,8 @@ namespace System.IO
         }
 
         // Returns the extension of the given path. The returned value includes the
-        // period (".") character of the extension except when you have a terminal period when you get String.Empty, such as ".exe" or
+        // period (".") character of the extension except when you have a terminal period when you get
+        // String.Empty, such as ".exe" or
         // ".cpp". The returned value is null if the given path is
         // null or if the given path does not include an extension.
         //
@@ -627,7 +635,8 @@ namespace System.IO
                 if (fullCheck == false)
                 {
                     // Disabled fullCheck is only called by GetDirectoryName and GetPathRoot.
-                    // Avoid adding addtional callers and try going direct to lighter weight NormalizeDirectorySeparators.
+                    // Avoid adding addtional callers and try going direct to lighter weight
+                    // NormalizeDirectorySeparators.
                     normalizedPath = NewNormalizePathLimitedChecks(
                         path,
                         maxPathLength,
@@ -660,7 +669,8 @@ namespace System.IO
             )
                 throw new PathTooLongException();
 
-            // Under old logic certain subsets of paths containing colons were rejected. Some portion of that comes
+            // Under old logic certain subsets of paths containing colons were rejected. Some portion of that
+            // comes
             // indirectly from FileIOPermissions, the rest comes from the section in LegacyNormalizePath below:
             //
             //   // To reject strings like "C:...\foo" and "C  :\foo"
@@ -668,14 +678,18 @@ namespace System.IO
             //
             // The superset of this now is PathInternal.HasInvalidVolumeSeparator().
             //
-            // Unfortunately a side effect of the old split logic is that some "bad" colon paths slip through when
-            // fullChecks=false. Notably this means that GetDirectoryName and GetPathRoot would allow URIs (although
-            // it would mangle them). A user could pass a "file://..." uri to GetDirectoryName(), get "file:\..." back,
+            // Unfortunately a side effect of the old split logic is that some "bad" colon paths slip through
+            // when
+            // fullChecks=false. Notably this means that GetDirectoryName and GetPathRoot would allow URIs
+            // (although
+            // it would mangle them). A user could pass a "file://..." uri to GetDirectoryName(), get
+            // "file:\..." back,
             // then pass it to Uri which fixes up the bad URI. One particular user code path for this is calling
             // Assembly.CodePath and trying to get the directory before passing to the Uri class.
             //
             // To ease transitioning code forward we'll allow all "bad" colon paths through when we are doing
-            // limited checks. If we want to add this back (under a quirk perhaps), we would need to conditionalize
+            // limited checks. If we want to add this back (under a quirk perhaps), we would need to
+            // conditionalize
             // for Device paths as follows:
             //
             //   if (!PathInternal.IsDevice(normalized) && PathInternal.HasInvalidVolumeSeparator(path))
@@ -1197,9 +1211,9 @@ namespace System.IO
             if (result != 0)
             {
                 /* Throw an ArgumentException for paths like \\, \\server, \\server\
-                   This check can only be properly done after normalizing, so
-                   \\foo\.. will be properly rejected.  Also, reject \\?\GLOBALROOT\
-                   (an internal kernel path) because it provides aliases for drives. */
+                This check can only be properly done after normalizing, so
+                \\foo\.. will be properly rejected.  Also, reject \\?\GLOBALROOT\
+                (an internal kernel path) because it provides aliases for drives. */
                 if (newBuffer.Length > 1 && newBuffer[0] == '\\' && newBuffer[1] == '\\')
                 {
                     int startIndex = 2;
@@ -1311,7 +1325,8 @@ namespace System.IO
                 if (!PathInternal.StartsWithOrdinal(pathSB, LongPathPrefix))
                     return pathSB;
 
-                // Given \\?\UNC\server\share we return \\server\share => @'\\' + path.SubString(UNCLongPathPrefix.Length) => The actual command simply reduces the operation cost.
+                // Given \\?\UNC\server\share we return \\server\share => @'\\' +
+                // path.SubString(UNCLongPathPrefix.Length) => The actual command simply reduces the operation cost.
                 if (PathInternal.StartsWithOrdinal(pathSB, UNCLongPathPrefix, ignoreCase: true))
                     return pathSB.Remove(2, 6);
 

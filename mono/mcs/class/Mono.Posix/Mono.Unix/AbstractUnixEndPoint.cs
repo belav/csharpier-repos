@@ -64,16 +64,16 @@ namespace Mono.Unix
 
         public override EndPoint Create(SocketAddress socketAddress)
         {
-            /*
-             * Should also check this
-             *
-            int addr = (int) AddressFamily.Unix;
-            if (socketAddress [0] != (addr & 0xFF))
-                throw new ArgumentException ("socketAddress is not a unix socket address.");
+/*
+* Should also check this
+*
+int addr = (int) AddressFamily.Unix;
+if (socketAddress [0] != (addr & 0xFF))
+throw new ArgumentException ("socketAddress is not a unix socket address.");
 
-            if (socketAddress [1] != ((addr & 0xFF00) >> 8))
-                throw new ArgumentException ("socketAddress is not a unix socket address.");
-             */
+if (socketAddress [1] != ((addr & 0xFF00) >> 8))
+throw new ArgumentException ("socketAddress is not a unix socket address.");
+*/
 
             byte[] bytes = new byte[socketAddress.Size - 2 - 1];
             for (int i = 0; i < bytes.Length; i++)

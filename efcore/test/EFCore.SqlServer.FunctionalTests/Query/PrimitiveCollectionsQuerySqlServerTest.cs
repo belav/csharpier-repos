@@ -1502,7 +1502,8 @@ END IN (
         {
             base.OnModelCreating(modelBuilder, context);
 
-            // Map DateTime to non-default datetime instead of the default datetime2 to exercise type mapping inference
+            // Map DateTime to non-default datetime instead of the default datetime2 to exercise type mapping
+            // inference
             modelBuilder
                 .Entity<PrimitiveCollectionsEntity>()
                 .Property(p => p.DateTime)

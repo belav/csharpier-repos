@@ -189,12 +189,14 @@ namespace Internal.TypeSystem.NoMetadata
         {
             if (!baseTypeParser.IsNull)
             {
-                // If the base type is available from the native layout info use it if the type we have is a NoMetadataType
+                // If the base type is available from the native layout info use it if the type we have is a
+                // NoMetadataType
                 SetBaseType((DefType)nativeLayoutInfoLoadContext.GetType(ref baseTypeParser));
             }
             else
             {
-                // Set the base type for no metadata types, if we reach this point, and there isn't a parser, then we simply use the value from the template
+                // Set the base type for no metadata types, if we reach this point, and there isn't a parser, then
+                // we simply use the value from the template
                 SetBaseType(ComputeTemplate().BaseType);
             }
         }

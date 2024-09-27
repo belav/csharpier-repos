@@ -80,7 +80,8 @@ internal sealed partial class DefaultTransportFactory : ITransportFactory
             ) == HttpTransportType.ServerSentEvents
         )
         {
-            // We don't need to give the transport the accessTokenProvider because the HttpClient has a message handler that does the work for us.
+            // We don't need to give the transport the accessTokenProvider because the HttpClient has a message
+            // handler that does the work for us.
             return new ServerSentEventsTransport(
                 _httpClient!,
                 _httpConnectionOptions,
@@ -93,7 +94,8 @@ internal sealed partial class DefaultTransportFactory : ITransportFactory
             == HttpTransportType.LongPolling
         )
         {
-            // We don't need to give the transport the accessTokenProvider because the HttpClient has a message handler that does the work for us.
+            // We don't need to give the transport the accessTokenProvider because the HttpClient has a message
+            // handler that does the work for us.
             return new LongPollingTransport(_httpClient!, _httpConnectionOptions, _loggerFactory);
         }
 

@@ -103,8 +103,8 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /* keep these two methods in sync with the
-         * IAttributeAccessor iface methods below */
+/* keep these two methods in sync with the
+* IAttributeAccessor iface methods below */
         protected virtual string GetAttribute(string name)
         {
             return Attributes[name];

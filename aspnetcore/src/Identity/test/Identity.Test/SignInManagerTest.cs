@@ -932,7 +932,8 @@ public class SignInManagerTest
         {
             CallBase = true,
         };
-        //signInManager.Setup(s => s.SignInAsync(user, It.Is<AuthenticationProperties>(p => p.IsPersistent == isPersistent),
+        //signInManager.Setup(s => s.SignInAsync(user, It.Is<AuthenticationProperties>(p => p.IsPersistent
+        // == isPersistent),
         //externalLogin? loginProvider : null)).Returns(Task.FromResult(0)).Verifiable();
         signInManager
             .Setup(s =>
@@ -1062,7 +1063,8 @@ public class SignInManagerTest
                 )
                 .Returns(Task.FromResult(0))
                 .Verifiable();
-            //It.Is<AuthenticationProperties>(v => v.IsPersistent == true))).Returns(Task.FromResult(0)).Verifiable();
+            //It.Is<AuthenticationProperties>(v => v.IsPersistent ==
+            // true))).Returns(Task.FromResult(0)).Verifiable();
         }
         auth.Setup(a => a.AuthenticateAsync(context, IdentityConstants.TwoFactorUserIdScheme))
             .ReturnsAsync(
@@ -1811,7 +1813,8 @@ public class SignInManagerTest
         var user = new PocoUser { UserName = "Foo" };
         var manager = SetupUserManager(user);
         manager.Setup(m => m.SupportsUserLockout).Returns(true).Verifiable();
-        // Return false initially to allow the password to be checked Only return true the second time after the bogus password is checked.
+        // Return false initially to allow the password to be checked Only return true the second time after
+        // the bogus password is checked.
         manager
             .Setup(m => m.IsLockedOutAsync(user))
             .ReturnsAsync(() => isLockedOutCallCount++ > 0)
@@ -1823,7 +1826,8 @@ public class SignInManagerTest
         manager.Setup(m => m.AccessFailedAsync(user)).ReturnsAsync(accessFailedResult).Verifiable();
 
         var context = new DefaultHttpContext();
-        // Since the PasswordSignInAsync calls the UserManager directly rather than a virtual SignInManager method like ResetLockout, we don't need to test derived SignInManagers.
+        // Since the PasswordSignInAsync calls the UserManager directly rather than a virtual SignInManager
+        // method like ResetLockout, we don't need to test derived SignInManagers.
         var helper = SetupSignInManager(manager.Object, context);
 
         // Act
@@ -1852,7 +1856,8 @@ public class SignInManagerTest
         var provider = "twofactorprovider";
         var code = "123456";
         manager.Setup(m => m.SupportsUserLockout).Returns(true).Verifiable();
-        // Return false initially to allow the 2fa code to be checked. Only return true if ever in the future it is called again after failure.
+        // Return false initially to allow the 2fa code to be checked. Only return true if ever in the
+        // future it is called again after failure.
         manager
             .Setup(m => m.IsLockedOutAsync(user))
             .ReturnsAsync(() => isLockedOutCallCount++ > 0)

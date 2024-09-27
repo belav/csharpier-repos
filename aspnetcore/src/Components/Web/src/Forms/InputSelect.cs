@@ -91,7 +91,8 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// <inheritdoc />
     protected override string? FormatValueAsString(TValue? value)
     {
-        // We special-case bool values because BindConverter reserves bool conversion for conditional attributes.
+        // We special-case bool values because BindConverter reserves bool conversion for conditional
+        // attributes.
         if (typeof(TValue) == typeof(bool))
         {
             return (bool)(object)value! ? "true" : "false";

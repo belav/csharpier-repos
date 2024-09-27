@@ -34,39 +34,41 @@ namespace MonoTests.System
         {
             Uri uri = null;
 
-            /*
-            uri = new Uri ("http://www.ximian.com/foo" + ((char) 0xa9) + "/bar/index.cgi?a=1&b=" + ((char) 0xa9) + "left#fragm?ent2");
-            Print (uri);
+/*
+uri = new Uri ("http://www.ximian.com/foo" + ((char) 0xa9) + "/bar/index.cgi?a=1&b=" + ((char) 0xa9)
++ "left#fragm?ent2");
+Print (uri);
 
-            uri = new Uri ("http://www.ximian.com/foo/xxx\"()-._;<=>@{|}~-,.`_^]\\[xx/" + ((char) 0xa9) + "/bar/index.cgi#fra+\">=@[gg]~gment2");
-            Print (uri);
+uri = new Uri ("http://www.ximian.com/foo/xxx\"()-._;<=>@{|}~-,.`_^]\\[xx/" + ((char) 0xa9) +
+"/bar/index.cgi#fra+\">=@[gg]~gment2");
+Print (uri);
 
-            uri = new Uri("http://11.22.33.588:9090");
-            Print (uri);
+uri = new Uri("http://11.22.33.588:9090");
+Print (uri);
 
-            uri = new Uri("http://[11:22:33::88]:9090");
-            Print (uri);
+uri = new Uri("http://[11:22:33::88]:9090");
+Print (uri);
 
-            uri = new Uri("http://[::127.11.22.33]:8080");
-            Print (uri);
+uri = new Uri("http://[::127.11.22.33]:8080");
+Print (uri);
 
-            uri = new Uri("http://[abcde::127.11.22.33]:8080");
-            Print (uri);
-            */
+uri = new Uri("http://[abcde::127.11.22.33]:8080");
+Print (uri);
+*/
 
-            /*
-            uri = new Uri ("http://www.contoso.com:1234/foo/bar/");
-            Print (uri);
+/*
+uri = new Uri ("http://www.contoso.com:1234/foo/bar/");
+Print (uri);
 
-            uri = new Uri ("http://www.contoso.com:1234/foo/bar");
-            Print (uri);
+uri = new Uri ("http://www.contoso.com:1234/foo/bar");
+Print (uri);
 
-            uri = new Uri ("http://www.contoso.com:1234/");
-            Print (uri);
+uri = new Uri ("http://www.contoso.com:1234/");
+Print (uri);
 
-            uri = new Uri ("http://www.contoso.com:1234");
-            Print (uri);
-            */
+uri = new Uri ("http://www.contoso.com:1234");
+Print (uri);
+*/
 
             uri = new Uri("  \r  \n http://test.com\r\n \r\r  ");
             Assert.AreEqual("http://test.com/", uri.ToString(), "#k0");
@@ -1918,7 +1920,8 @@ namespace MonoTests.System
             );
             Assert.AreEqual(path, fileUri.AbsolutePath, "LocalPath_FileNameWithAtSign AbsPath");
             //this test is marked as NotWorking below:
-            //Assert.AreEqual ("\\\\localhost" + path.Replace ("/", "\\"), fileUri.LocalPath, "LocalPath_FileNameWithAtSign LocalPath");
+            //Assert.AreEqual ("\\\\localhost" + path.Replace ("/", "\\"), fileUri.LocalPath,
+            // "LocalPath_FileNameWithAtSign LocalPath");
         }
 
         [Test]

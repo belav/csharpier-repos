@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Linq;
 using Mono.Cecil;
@@ -49,7 +50,8 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// We have to remove some security attributes, otherwise pe verify will complain that a type has HasSecurity = false
+        /// We have to remove some security attributes, otherwise pe verify will complain that a type has
+        // HasSecurity = false
         /// </summary>
         /// <param name="provider"></param>
         static void RemoveCustomAttributesThatAreForSecurity(ICustomAttributeProvider provider)

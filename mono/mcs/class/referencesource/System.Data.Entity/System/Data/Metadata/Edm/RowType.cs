@@ -30,7 +30,8 @@ namespace System.Data.Metadata.Edm
         /// Initializes a new instance of RowType class with the given list of members
         /// </summary>
         /// <param name="properties">properties for this row type</param>
-        /// <exception cref="System.ArgumentException">Thrown if any individual property in the passed in properties argument is null</exception>
+        /// <exception cref="System.ArgumentException">Thrown if any individual property in the passed in
+        // properties argument is null</exception>
         internal RowType(IEnumerable<EdmProperty> properties)
             : this(properties, null) { }
 
@@ -196,12 +197,12 @@ namespace System.Data.Metadata.Edm
                     i++;
                 }
 
-                /*
-                if (i < 1)
-                {
-                    throw EntityUtil.ArgumentOutOfRange("properties");
-                }
-                 */
+/*
+if (i < 1)
+{
+throw EntityUtil.ArgumentOutOfRange("properties");
+}
+*/
             }
             return properties;
         }

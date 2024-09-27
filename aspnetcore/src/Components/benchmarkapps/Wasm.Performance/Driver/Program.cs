@@ -118,7 +118,9 @@ public class Program
         bool isStressRun
     )
     {
-        // Sample of the the format: https://github.com/aspnet/Benchmarks/blob/e55f9e0312a7dd019d1268c1a547d1863f0c7237/src/Benchmarks/Program.cs#L51-L67
+        // Sample of the the format:
+        //
+        // https://github.com/aspnet/Benchmarks/blob/e55f9e0312a7dd019d1268c1a547d1863f0c7237/src/Benchmarks/Program.cs#L51-L67
         var output = new BenchmarkOutput();
 
         if (benchmarkResult.DownloadSize != null)

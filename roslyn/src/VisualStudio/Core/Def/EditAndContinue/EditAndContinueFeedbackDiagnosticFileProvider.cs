@@ -36,7 +36,8 @@ internal sealed class EditAndContinueFeedbackDiagnosticFileProvider
     private const string VSFeedbackSemaphoreFileName = "feedback.recording.json";
 
     /// <summary>
-    /// VS Feedback creates a JSON file at the start of feedback session and deletes it when the session is over.
+    /// VS Feedback creates a JSON file at the start of feedback session and deletes it when the session
+    // is over.
     /// Watching the file is currently the only way to detect the feedback session.
     /// </summary>
     private readonly string _vsFeedbackSemaphoreFullPath;
@@ -91,10 +92,13 @@ internal sealed class EditAndContinueFeedbackDiagnosticFileProvider
 
     /// <summary>
     /// Reuse the same directory for multiple feedback sessions originating from the same VS instance.
-    /// Log files for different debugging sessions will be in separate subdirectories so they will not collide,
+    /// Log files for different debugging sessions will be in separate subdirectories so they will not
+    // collide,
     /// but the later feedback sessions will include all files logged for the previous sessions as well.
-    /// Also if the compression and/or uploading of the zip file is not finished by the time the new recording starts
-    /// we might not be able to write the new zip file to disk and the previous content might be uploaded instead.
+    /// Also if the compression and/or uploading of the zip file is not finished by the time the new
+    // recording starts
+    /// we might not be able to write the new zip file to disk and the previous content might be
+    // uploaded instead.
     /// See https://dev.azure.com/devdiv/DevDiv/_workitems/edit/1716980
     /// </summary>
     private string GetLogDirectory() =>

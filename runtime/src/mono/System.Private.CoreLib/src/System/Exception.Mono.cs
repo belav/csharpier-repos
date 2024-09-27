@@ -121,9 +121,11 @@ namespace System
             _stackTraceString = null;
         }
 
-        // Returns true if setting the _remoteStackTraceString field is legal, false if not (immutable exception).
+        // Returns true if setting the _remoteStackTraceString field is legal, false if not (immutable
+        // exception).
         // A false return value means the caller should early-exit the operation.
-        // Can also throw InvalidOperationException if a stack trace is already set or if object has been thrown.
+        // Can also throw InvalidOperationException if a stack trace is already set or if object has been
+        // thrown.
         private bool CanSetRemoteStackTrace()
         {
             if (_traceIPs != null || _stackTraceString != null || _remoteStackTraceString != null)

@@ -129,13 +129,17 @@ namespace System.ServiceModel.Channels
 
         public bool ReceiveContextPoisonHandling(MsmqMessageProperty messageProperty)
         {
-            // The basic idea is to use the message move count to get the number of retry attempts the message has been through
-            // The computation of the retry count and retry cycle count is slightly involved due to fact that the message being processed
-            // could have been recycled message. (Recycled message is the message that moves from lock queue to retry queue to main queue
+            // The basic idea is to use the message move count to get the number of retry attempts the message
+            // has been through
+            // The computation of the retry count and retry cycle count is slightly involved due to fact that
+            // the message being processed
+            // could have been recycled message. (Recycled message is the message that moves from lock queue to
+            // retry queue to main queue
             // and back to lock queue
             //
 
-            // Count to tally message recycling (lock queue to retry queue to main queue adds move count of 2 to the message)
+            // Count to tally message recycling (lock queue to retry queue to main queue adds move count of 2 to
+            // the message)
             const int retryMoveCount = 2;
 
             // Actual number of times message is received before recycling to retry queue
@@ -167,7 +171,8 @@ namespace System.ServiceModel.Channels
                     );
 
                 // Check if the message has already completed its max recycle count (MaxRetryCycles)
-                // and the disposed the message first. Such a message was previously disposed using the ReceiveErrorHandling method
+                // and the disposed the message first. Such a message was previously disposed using the
+                // ReceiveErrorHandling method
                 // and the channel/listener would immediately fault
                 //
                 if (messageCyclesCompleted > maxRetryCycles)

@@ -61,23 +61,28 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <param name="userStringHeapStartOffset">
         /// Start offset of the User String heap.
-        /// The cumulative size of User String heaps of all previous EnC generations. Should be 0 unless the metadata is EnC delta metadata.
+        /// The cumulative size of User String heaps of all previous EnC generations. Should be 0 unless the
+        // metadata is EnC delta metadata.
         /// </param>
         /// <param name="stringHeapStartOffset">
         /// Start offset of the String heap.
-        /// The cumulative size of String heaps of all previous EnC generations. Should be 0 unless the metadata is EnC delta metadata.
+        /// The cumulative size of String heaps of all previous EnC generations. Should be 0 unless the
+        // metadata is EnC delta metadata.
         /// </param>
         /// <param name="blobHeapStartOffset">
         /// Start offset of the Blob heap.
-        /// The cumulative size of Blob heaps of all previous EnC generations. Should be 0 unless the metadata is EnC delta metadata.
+        /// The cumulative size of Blob heaps of all previous EnC generations. Should be 0 unless the
+        // metadata is EnC delta metadata.
         /// </param>
         /// <param name="guidHeapStartOffset">
         /// Start offset of the Guid heap.
-        /// The cumulative size of Guid heaps of all previous EnC generations. Should be 0 unless the metadata is EnC delta metadata.
+        /// The cumulative size of Guid heaps of all previous EnC generations. Should be 0 unless the
+        // metadata is EnC delta metadata.
         /// </param>
         /// <exception cref="ImageFormatLimitationException">Offset is too big.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Offset is negative.</exception>
-        /// <exception cref="ArgumentException"><paramref name="guidHeapStartOffset"/> is not a multiple of size of GUID.</exception>
+        /// <exception cref="ArgumentException"><paramref name="guidHeapStartOffset"/> is not a multiple of
+        // size of GUID.</exception>
         public MetadataBuilder(
             int userStringHeapStartOffset = 0,
             int stringHeapStartOffset = 0,
@@ -145,8 +150,10 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <param name="heap">Heap index.</param>
         /// <param name="byteCount">Number of bytes.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="heap"/> is not a valid heap index.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="heap"/> is not a valid heap
+        // index.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
         /// <remarks>
         /// Use to reduce allocations if the approximate number of bytes is known ahead of time.
         /// </remarks>
@@ -282,7 +289,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Encodes a string using UTF-16 encoding to a blob and adds it to the Blob heap, if it's not there already.
+        /// Encodes a string using UTF-16 encoding to a blob and adds it to the Blob heap, if it's not there
+        // already.
         /// </summary>
         /// <param name="value">String.</param>
         /// <returns>Handle to the added or existing blob.</returns>
@@ -307,7 +315,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Encodes a string using UTF-8 encoding to a blob and adds it to the Blob heap, if it's not there already.
+        /// Encodes a string using UTF-8 encoding to a blob and adds it to the Blob heap, if it's not there
+        // already.
         /// </summary>
         /// <param name="value">Constant value.</param>
         /// <param name="allowUnpairedSurrogates">
@@ -330,7 +339,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="value">Document name.</param>
         /// <returns>
         /// Handle to the added or existing document name blob
-        /// (see https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#DocumentNameBlob).
+        /// (see
+        // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#DocumentNameBlob).
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public BlobHandle GetOrAddDocumentName(string value)
@@ -434,9 +444,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// Reserves space on the Guid heap for a GUID.
         /// </summary>
         /// <returns>
-        /// Handle to the reserved Guid and a <see cref="Blob"/> representing the GUID blob as stored on the heap.
+        /// Handle to the reserved Guid and a <see cref="Blob"/> representing the GUID blob as stored on the
+        // heap.
         /// </returns>
-        /// <exception cref="ImageFormatLimitationException">The remaining space on the heap is too small to fit the string.</exception>
+        /// <exception cref="ImageFormatLimitationException">The remaining space on the heap is too small to
+        // fit the string.</exception>
         public ReservedBlob<GuidHandle> ReserveGuid()
         {
             var handle = GetNewGuidHandle();
@@ -489,12 +501,14 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <param name="length">The number of characters to reserve.</param>
         /// <returns>
-        /// Handle to the reserved User String and a <see cref="Blob"/> representing the entire User String blob (including its length and terminal character).
+        /// Handle to the reserved User String and a <see cref="Blob"/> representing the entire User String
+        // blob (including its length and terminal character).
         ///
         /// Handle may be used in <see cref="InstructionEncoder.LoadString(UserStringHandle)"/>.
         /// Use <see cref="BlobWriter.WriteUserString(string)"/> to fill in the blob content.
         /// </returns>
-        /// <exception cref="ImageFormatLimitationException">The remaining space on the heap is too small to fit the string.</exception>
+        /// <exception cref="ImageFormatLimitationException">The remaining space on the heap is too small to
+        // fit the string.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="length"/> is negative.</exception>
         public ReservedBlob<UserStringHandle> ReserveUserString(int length)
         {
@@ -519,7 +533,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Handle to the added or existing string.
         /// May be used in <see cref="InstructionEncoder.LoadString(UserStringHandle)"/>.
         /// </returns>
-        /// <exception cref="ImageFormatLimitationException">The remaining space on the heap is too small to fit the string.</exception>
+        /// <exception cref="ImageFormatLimitationException">The remaining space on the heap is too small to
+        // fit the string.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public UserStringHandle GetOrAddUserString(string value)
         {

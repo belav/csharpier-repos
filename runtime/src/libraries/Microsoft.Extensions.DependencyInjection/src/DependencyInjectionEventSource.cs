@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
             public const EventKeywords ServiceProviderInitialized = (EventKeywords)0x1;
         }
 
-        // Event source doesn't support large payloads so we chunk large payloads like formatted call site tree and descriptors
+        // Event source doesn't support large payloads so we chunk large payloads like formatted call site
+        // tree and descriptors
         private const int MaxChunkSize = 10 * 1024;
 
         private readonly List<WeakReference<ServiceProvider>> _providers = new();
@@ -32,12 +33,15 @@ namespace Microsoft.Extensions.DependencyInjection
             : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         // NOTE
-        // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in EventSource. They
+        // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in
+        // EventSource. They
         //   enable creating 'activities'.
         //   For more information, take a look at the following blog post:
-        //   https://blogs.msdn.microsoft.com/vancem/2015/09/14/exploring-eventsource-activity-correlation-and-causation-features/
+        //
+        // https://blogs.msdn.microsoft.com/vancem/2015/09/14/exploring-eventsource-activity-correlation-and-causation-features/
         // - A stop event's event id must be next one after its start event.
-        // - Avoid renaming methods or parameters marked with EventAttribute. EventSource uses these to form the event object.
+        // - Avoid renaming methods or parameters marked with EventAttribute. EventSource uses these to form
+        // the event object.
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -375,8 +379,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
     internal static class DependencyInjectionEventSourceExtensions
     {
-        // This is an extension method because this assembly is trimmed at a "type granular" level in Blazor,
-        // and the whole DependencyInjectionEventSource type can't be trimmed. So extracting this to a separate
+        // This is an extension method because this assembly is trimmed at a "type granular" level in
+        // Blazor,
+        // and the whole DependencyInjectionEventSource type can't be trimmed. So extracting this to a
+        // separate
         // type allows for the System.Linq.Expressions usage to be trimmed by the ILLinker.
         public static void ExpressionTreeGenerated(
             this DependencyInjectionEventSource source,

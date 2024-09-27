@@ -18,7 +18,8 @@ public class ActionSelectorBenchmark
 
     // About 35 or so plausible sounding conventional routing actions.
     //
-    // We include some duplicates here, because that's what happens when you have one method that handles
+    // We include some duplicates here, because that's what happens when you have one method that
+    // handles
     // GET and one that handles POST.
     private static readonly ActionDescriptor[] _actions = new ActionDescriptor[]
     {

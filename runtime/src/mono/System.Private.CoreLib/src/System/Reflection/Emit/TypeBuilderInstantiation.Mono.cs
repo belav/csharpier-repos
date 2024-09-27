@@ -42,7 +42,8 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal partial class TypeBuilderInstantiation
     {
-        //  Sequence of _genericType and _typeArguments fields should kept in sync with MonoReflectionGenericClass in object-internals.h
+        //  Sequence of _genericType and _typeArguments fields should kept in sync with
+        // MonoReflectionGenericClass in object-internals.h
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

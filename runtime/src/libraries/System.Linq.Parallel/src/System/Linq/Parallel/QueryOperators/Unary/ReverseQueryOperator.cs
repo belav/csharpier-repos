@@ -18,7 +18,8 @@ namespace System.Linq.Parallel
     /// Reverse imposes ordinal order preservation. There are normally two phases to this
     /// operator's execution.  Each partition first builds a buffer containing all of its
     /// elements, and then proceeds to yielding the elements in reverse.  There is a
-    /// 'barrier' (but not a blocking barrier) in between these two steps, at which point the largest index becomes
+    /// 'barrier' (but not a blocking barrier) in between these two steps, at which point the largest
+    // index becomes
     /// known.  This is necessary so that when elements from the buffer are yielded, the
     /// CurrentIndex can be reported as the largest index minus the original index (thereby
     /// reversing the indices as well as the elements themselves).  If the largest index is

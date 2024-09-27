@@ -517,7 +517,8 @@ public class Http2TestBase
     protected void CreateConnection()
     {
         // Always dispatch test code back to the ThreadPool. This prevents deadlocks caused by continuing
-        // Http2Connection.ProcessRequestsAsync() loop with writer locks acquired. Run product code inline to make
+        // Http2Connection.ProcessRequestsAsync() loop with writer locks acquired. Run product code inline
+        // to make
         // it easier to verify request frames are processed correctly immediately after sending the them.
         var inputPipeOptions = GetInputPipeOptions(
             _serviceContext,
@@ -720,15 +721,15 @@ public class Http2TestBase
         return FlushAsync(writableBuffer);
     }
 
-    /* https://tools.ietf.org/html/rfc7540#section-6.2
-        +---------------+
-        |Pad Length? (8)|
-        +-+-------------+-----------------------------------------------+
-        |                   Header Block Fragment (*)                 ...
-        +---------------------------------------------------------------+
-        |                           Padding (*)                       ...
-        +---------------------------------------------------------------+
-    */
+/* https://tools.ietf.org/html/rfc7540#section-6.2
++---------------+
+|Pad Length? (8)|
++-+-------------+-----------------------------------------------+
+|                   Header Block Fragment (*)                 ...
++---------------------------------------------------------------+
+|                           Padding (*)                       ...
++---------------------------------------------------------------+
+*/
     protected Task SendHeadersWithPaddingAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -778,15 +779,15 @@ public class Http2TestBase
         return FlushAsync(writableBuffer);
     }
 
-    /* https://tools.ietf.org/html/rfc7540#section-6.2
-        +-+-------------+-----------------------------------------------+
-        |E|                 Stream Dependency? (31)                     |
-        +-+-------------+-----------------------------------------------+
-        |  Weight? (8)  |
-        +-+-------------+-----------------------------------------------+
-        |                   Header Block Fragment (*)                 ...
-        +---------------------------------------------------------------+
-    */
+/* https://tools.ietf.org/html/rfc7540#section-6.2
++-+-------------+-----------------------------------------------+
+|E|                 Stream Dependency? (31)                     |
++-+-------------+-----------------------------------------------+
+|  Weight? (8)  |
++-+-------------+-----------------------------------------------+
+|                   Header Block Fragment (*)                 ...
++---------------------------------------------------------------+
+*/
     protected Task SendHeadersWithPriorityAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -833,19 +834,19 @@ public class Http2TestBase
         return FlushAsync(writableBuffer);
     }
 
-    /* https://tools.ietf.org/html/rfc7540#section-6.2
-        +---------------+
-        |Pad Length? (8)|
-        +-+-------------+-----------------------------------------------+
-        |E|                 Stream Dependency? (31)                     |
-        +-+-------------+-----------------------------------------------+
-        |  Weight? (8)  |
-        +-+-------------+-----------------------------------------------+
-        |                   Header Block Fragment (*)                 ...
-        +---------------------------------------------------------------+
-        |                           Padding (*)                       ...
-        +---------------------------------------------------------------+
-    */
+/* https://tools.ietf.org/html/rfc7540#section-6.2
++---------------+
+|Pad Length? (8)|
++-+-------------+-----------------------------------------------+
+|E|                 Stream Dependency? (31)                     |
++-+-------------+-----------------------------------------------+
+|  Weight? (8)  |
++-+-------------+-----------------------------------------------+
+|                   Header Block Fragment (*)                 ...
++---------------------------------------------------------------+
+|                           Padding (*)                       ...
++---------------------------------------------------------------+
+*/
     protected Task SendHeadersWithPaddingAndPriorityAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -1302,13 +1303,13 @@ public class Http2TestBase
         return SendAsync(new byte[pingFrame.PayloadLength]);
     }
 
-    /* https://tools.ietf.org/html/rfc7540#section-6.3
-        +-+-------------------------------------------------------------+
-        |E|                  Stream Dependency (31)                     |
-        +-+-------------+-----------------------------------------------+
-        |   Weight (8)  |
-        +-+-------------+
-    */
+/* https://tools.ietf.org/html/rfc7540#section-6.3
++-+-------------------------------------------------------------+
+|E|                  Stream Dependency (31)                     |
++-+-------------+-----------------------------------------------+
+|   Weight (8)  |
++-+-------------+
+*/
     protected Task SendPriorityAsync(int streamId, int streamDependency = 0)
     {
         var outputWriter = _pair.Application.Output;
@@ -1339,11 +1340,11 @@ public class Http2TestBase
         return SendAsync(new byte[length]);
     }
 
-    /* https://tools.ietf.org/html/rfc7540#section-6.4
-        +---------------------------------------------------------------+
-        |                        Error Code (32)                        |
-        +---------------------------------------------------------------+
-    */
+/* https://tools.ietf.org/html/rfc7540#section-6.4
++---------------------------------------------------------------+
+|                        Error Code (32)                        |
++---------------------------------------------------------------+
+*/
     protected Task SendRstStreamAsync(int streamId)
     {
         var outputWriter = _pair.Application.Output;

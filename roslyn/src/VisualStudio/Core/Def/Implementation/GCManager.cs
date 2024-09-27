@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     /// </summary>
     internal static class GCManager
     {
-        // The default delay can be overridden by setting <VS Registry>\Performance : SustainedLowLatencyDuration
+        // The default delay can be overridden by setting <VS Registry>\Performance :
+        // SustainedLowLatencyDuration
         private static int s_delayMilliseconds = 0;
         private const int DefaultDelayMilliseconds = 5000;
 
@@ -60,8 +61,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// <summary>
         /// Turn off low latency GC mode.
         ///
-        /// if there is a pending low latency mode request, Latency mode will go back to its original status as
-        /// pending request timeout. once it goes back to its original status, it will not go back to low latency mode again.
+        /// if there is a pending low latency mode request, Latency mode will go back to its original status
+        // as
+        /// pending request timeout. once it goes back to its original status, it will not go back to low
+        // latency mode again.
         /// </summary>
         internal static void TurnOffLowLatencyMode()
         {

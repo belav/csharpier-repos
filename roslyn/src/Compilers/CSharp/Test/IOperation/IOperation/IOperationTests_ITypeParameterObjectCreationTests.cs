@@ -140,7 +140,8 @@ class C1
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
+                // CS0304: Cannot create an instance of the variable type 'T' because it does not have the new()
+                // constraint
                 //         t1 = /*<bind>*/new T() { 1, b ? 2 : 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, b ? 2 : 3 }")
                     .WithArguments("T")
@@ -533,7 +534,8 @@ class C1
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
+                // CS0304: Cannot create an instance of the variable type 'T' because it does not have the new()
+                // constraint
                 //         t1 = /*<bind>*/new T() { 1, b ? 2 : 3 };
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, 2 }")
                     .WithArguments("T")

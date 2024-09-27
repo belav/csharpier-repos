@@ -73,7 +73,8 @@ namespace System.Text
         }
 
         // Set the above values
-        // This can't be part of the constructor because DecoderFallbacks would have to know how to implement these.
+        // This can't be part of the constructor because DecoderFallbacks would have to know how to
+        // implement these.
         internal unsafe void InternalInitialize(byte* byteStart, char* charEnd)
         {
             this.byteStart = byteStart;

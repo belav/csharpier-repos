@@ -50,14 +50,14 @@ namespace Novell.Directory.Ldap.Asn1
             get { return encodedLength; }
         }
 
-        /* Private variables
-        */
+/* Private variables
+*/
 
         private int length;
         private int encodedLength;
 
-        /* Constructors for Asn1Length
-        */
+/* Constructors for Asn1Length
+*/
 
         /// <summary> Constructs an empty Asn1Length.  Values are added by calling reset</summary>
         public Asn1Length() { }

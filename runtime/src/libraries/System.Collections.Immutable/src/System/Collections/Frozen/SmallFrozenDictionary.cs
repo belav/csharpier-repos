@@ -9,7 +9,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides a <see cref="FrozenDictionary{TKey, TValue}"/> implementation to use with small item counts.</summary>
+    /// <summary>Provides a <see cref="FrozenDictionary{TKey, TValue}"/> implementation to use with
+    // small item counts.</summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     /// <remarks>

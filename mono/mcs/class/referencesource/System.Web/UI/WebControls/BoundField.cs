@@ -14,7 +14,8 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
 
     /// <devdoc>
-    /// <para>Creates a field bounded to a data field in a <see cref='System.Web.UI.WebControls.DataBoundControl'/>.</para>
+    /// <para>Creates a field bounded to a data field in a <see
+    // cref='System.Web.UI.WebControls.DataBoundControl'/>.</para>
     /// </devdoc>
     public class BoundField : DataControlField
     {
@@ -35,7 +36,8 @@ namespace System.Web.UI.WebControls
         private bool _htmlEncodeFormatStringSet;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of a <see cref='System.Web.UI.WebControls.BoundField'/> class.</para>
+        /// <para>Initializes a new instance of a <see cref='System.Web.UI.WebControls.BoundField'/>
+        // class.</para>
         /// </devdoc>
         public BoundField() { }
 
@@ -185,7 +187,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets a property indicating whether data should be HtmlEncoded when it is displayed to the user.</para>
+        /// <para>Gets or sets a property indicating whether data should be HtmlEncoded when it is displayed
+        // to the user.</para>
         /// </devdoc>
         [WebCategory("Behavior"), DefaultValue(true), WebSysDescription(SR.BoundField_HtmlEncode)]
         public virtual bool HtmlEncode
@@ -337,7 +340,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Extracts the value(s) from the given cell and puts the value(s) into a dictionary.  Indicate includeReadOnly
+        /// Extracts the value(s) from the given cell and puts the value(s) into a dictionary.  Indicate
+        // includeReadOnly
         /// to have readonly fields' values inserted into the dictionary.
         /// </devdoc>
         public override void ExtractValuesFromCell(
@@ -470,7 +474,8 @@ namespace System.Web.UI.WebControls
                 {
                     // New default behavior (Orcas) when HtmlEncodeFormatString=true
 
-                    // If the result is still empty and ConvertEmptyStringToNull=true, replace the value with the NullDisplayText
+                    // If the result is still empty and ConvertEmptyStringToNull=true, replace the value with the
+                    // NullDisplayText
                     if (dataValueStringLength == 0 && ConvertEmptyStringToNull)
                     {
                         dataValueString = NullDisplayText;
@@ -622,7 +627,8 @@ namespace System.Web.UI.WebControls
             string unencodedHeaderText = null;
             bool changedHeaderText = false;
             bool encode = false;
-            // if this is a header cell and we're htmlEncoding, htmlEncode the HeaderText before the base class tries to render it
+            // if this is a header cell and we're htmlEncoding, htmlEncode the HeaderText before the base class
+            // tries to render it
             if (cellType == DataControlCellType.Header && SupportsHtmlEncode && HtmlEncode)
             {
                 unencodedHeaderText = HeaderText;
@@ -754,7 +760,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// <para>Override with an empty body if the field's controls all support callback.
-        ///  Otherwise, override and throw a useful error message about why the field can't support callbacks.</para>
+        ///  Otherwise, override and throw a useful error message about why the field can't support
+        // callbacks.</para>
         /// </devdoc>
         public override void ValidateSupportsCallback() { }
     }

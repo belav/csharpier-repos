@@ -49,9 +49,12 @@ namespace System.Threading.Tasks.Dataflow
         public BufferBlock()
             : this(DataflowBlockOptions.Default) { }
 
-        /// <summary>Initializes the <see cref="BufferBlock{T}"/> with the specified <see cref="DataflowBlockOptions"/>.</summary>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="BufferBlock{T}"/>.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
+        /// <summary>Initializes the <see cref="BufferBlock{T}"/> with the specified <see
+        // cref="DataflowBlockOptions"/>.</summary>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="BufferBlock{T}"/>.</param>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is
+        // null (Nothing in Visual Basic).</exception>
         public BufferBlock(DataflowBlockOptions dataflowBlockOptions)
         {
             if (dataflowBlockOptions is null)
@@ -83,7 +86,8 @@ namespace System.Threading.Tasks.Dataflow
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
-            // reservations. This should not create an infinite loop, because all our implementations are designed
+            // reservations. This should not create an infinite loop, because all our implementations are
+            // designed
             // to handle multiple completion requests and to carry over only one.
             _source.Completion.ContinueWith(
                 static (completed, state) =>
@@ -115,7 +119,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
         DataflowMessageStatus ITargetBlock<T>.OfferMessage(
             DataflowMessageHeader messageHeader,
             T messageValue,
@@ -146,9 +151,12 @@ namespace System.Threading.Tasks.Dataflow
 
                 // We can directly accept the message if:
                 //      1) we are not bounding, OR
-                //      2) we are bounding AND there is room available AND there are no postponed messages AND we are not currently processing.
-                // (If there were any postponed messages, we would need to postpone so that ordering would be maintained.)
-                // (We should also postpone if we are currently processing, because there may be a race between consuming postponed messages and
+                //      2) we are bounding AND there is room available AND there are no postponed messages AND we
+                // are not currently processing.
+                // (If there were any postponed messages, we would need to postpone so that ordering would be
+                // maintained.)
+                // (We should also postpone if we are currently processing, because there may be a race between
+                // consuming postponed messages and
                 // accepting new ones directly into the queue.)
                 if (
                     _boundingState == null
@@ -196,13 +204,15 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
         public void Complete()
         {
             CompleteCore(exception: null, storeExceptionEvenIfAlreadyCompleting: false);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
         {
             if (exception is null)
@@ -252,19 +262,22 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
         public IDisposable LinkTo(ITargetBlock<T> target, DataflowLinkOptions linkOptions)
         {
             return _source.LinkTo(target, linkOptions);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
         public bool TryReceive(Predicate<T>? filter, [MaybeNullWhen(false)] out T item)
         {
             return _source.TryReceive(filter, out item);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
         public bool TryReceiveAll([NotNullWhen(true)] out IList<T>? items)
         {
             return _source.TryReceiveAll(out items);
@@ -276,13 +289,15 @@ namespace System.Threading.Tasks.Dataflow
             get { return _source.OutputCount; }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
         public Task Completion
         {
             get { return _source.Completion; }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
         T? ISourceBlock<T>.ConsumeMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target,
@@ -292,7 +307,8 @@ namespace System.Threading.Tasks.Dataflow
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
         bool ISourceBlock<T>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
@@ -301,7 +317,8 @@ namespace System.Threading.Tasks.Dataflow
             return _source.ReserveMessage(messageHeader, target);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
         void ISourceBlock<T>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<T> target
@@ -338,7 +355,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <summary>Called when postponed messages may need to be consumed.</summary>
-        /// <param name="isReplacementReplica">Whether this call is the continuation of a previous message loop.</param>
+        /// <param name="isReplacementReplica">Whether this call is the continuation of a previous message
+        // loop.</param>
         internal void ConsumeAsyncIfNecessary(bool isReplacementReplica = false)
         {
             Common.ContractAssertMonitorStatus(IncomingLock, held: true);
@@ -505,7 +523,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Completes the target, notifying the source, once all completion conditions are met.</summary>
+        /// <summary>Completes the target, notifying the source, once all completion conditions are
+        // met.</summary>
         private void CompleteTargetIfPossible()
         {
             Common.ContractAssertMonitorStatus(IncomingLock, held: true);
@@ -561,13 +580,15 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Gets the number of messages in the buffer.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
+        /// <summary>Gets the number of messages in the buffer.  This must only be used from the debugger as
+        // it avoids taking necessary locks.</summary>
         private int CountForDebugger
         {
             get { return _source.GetDebuggingInformation().OutputCount; }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
         public override string ToString()
         {
             return Common.GetNameForDebugger(this, _source.DataflowBlockOptions);

@@ -401,7 +401,8 @@ namespace System.Runtime.Serialization
                             ? NetDataContractSerializer.GetTypeInformation(clrType).AssemblyString
                             : typeInformation.AssemblyString;
 
-                    // Throw in the [TypeForwardedFrom] case to prevent a partially trusted assembly from forwarding itself to an assembly with higher privileges
+                    // Throw in the [TypeForwardedFrom] case to prevent a partially trusted assembly from forwarding
+                    // itself to an assembly with higher privileges
                     if (
                         !UnsafeTypeForwardingEnabled
                         && !clrType.Assembly.IsFullyTrusted

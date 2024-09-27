@@ -7,7 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Drawing
 {
     /// <summary>
-    /// Represents an ordered pair of x and y coordinates that define a point in a two-dimensional plane.
+    /// Represents an ordered pair of x and y coordinates that define a point in a two-dimensional
+    // plane.
     /// </summary>
     [Serializable]
     [System.Runtime.CompilerServices.TypeForwardedFrom(
@@ -19,7 +20,8 @@ namespace System.Drawing
     public struct Point : IEquatable<Point>
     {
         /// <summary>
-        /// Creates a new instance of the <see cref='System.Drawing.Point'/> class with member data left uninitialized.
+        /// Creates a new instance of the <see cref='System.Drawing.Point'/> class with member data left
+        // uninitialized.
         /// </summary>
         public static readonly Point Empty;
 
@@ -27,7 +29,8 @@ namespace System.Drawing
         private int y; // Do not rename (binary serialization)
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Drawing.Point'/> class with the specified coordinates.
+        /// Initializes a new instance of the <see cref='System.Drawing.Point'/> class with the specified
+        // coordinates.
         /// </summary>
         public Point(int x, int y)
         {
@@ -36,7 +39,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Drawing.Point'/> class from a <see cref='System.Drawing.Size'/> .
+        /// Initializes a new instance of the <see cref='System.Drawing.Point'/> class from a <see
+        // cref='System.Drawing.Size'/> .
         /// </summary>
         public Point(Size sz)
         {
@@ -78,12 +82,14 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Creates a <see cref='System.Drawing.PointF'/> with the coordinates of the specified <see cref='System.Drawing.Point'/>
+        /// Creates a <see cref='System.Drawing.PointF'/> with the coordinates of the specified <see
+        // cref='System.Drawing.Point'/>
         /// </summary>
         public static implicit operator PointF(Point p) => new PointF(p.X, p.Y);
 
         /// <summary>
-        /// Creates a <see cref='System.Drawing.Size'/> with the coordinates of the specified <see cref='System.Drawing.Point'/> .
+        /// Creates a <see cref='System.Drawing.Size'/> with the coordinates of the specified <see
+        // cref='System.Drawing.Point'/> .
         /// </summary>
         public static explicit operator Size(Point p) => new Size(p.X, p.Y);
 
@@ -93,21 +99,26 @@ namespace System.Drawing
         public static Point operator +(Point pt, Size sz) => Add(pt, sz);
 
         /// <summary>
-        /// Translates a <see cref='System.Drawing.Point'/> by the negative of a given <see cref='System.Drawing.Size'/> .
+        /// Translates a <see cref='System.Drawing.Point'/> by the negative of a given <see
+        // cref='System.Drawing.Size'/> .
         /// </summary>
         public static Point operator -(Point pt, Size sz) => Subtract(pt, sz);
 
         /// <summary>
-        /// Compares two <see cref='System.Drawing.Point'/> objects. The result specifies whether the values of the
-        /// <see cref='System.Drawing.Point.X'/> and <see cref='System.Drawing.Point.Y'/> properties of the two
+        /// Compares two <see cref='System.Drawing.Point'/> objects. The result specifies whether the values
+        // of the
+        /// <see cref='System.Drawing.Point.X'/> and <see cref='System.Drawing.Point.Y'/> properties of the
+        // two
         /// <see cref='System.Drawing.Point'/> objects are equal.
         /// </summary>
         public static bool operator ==(Point left, Point right) =>
             left.X == right.X && left.Y == right.Y;
 
         /// <summary>
-        /// Compares two <see cref='System.Drawing.Point'/> objects. The result specifies whether the values of the
-        /// <see cref='System.Drawing.Point.X'/> or <see cref='System.Drawing.Point.Y'/> properties of the two
+        /// Compares two <see cref='System.Drawing.Point'/> objects. The result specifies whether the values
+        // of the
+        /// <see cref='System.Drawing.Point.X'/> or <see cref='System.Drawing.Point.Y'/> properties of the
+        // two
         /// <see cref='System.Drawing.Point'/>  objects are unequal.
         /// </summary>
         public static bool operator !=(Point left, Point right) => !(left == right);
@@ -119,7 +130,8 @@ namespace System.Drawing
             new Point(unchecked(pt.X + sz.Width), unchecked(pt.Y + sz.Height));
 
         /// <summary>
-        /// Translates a <see cref='System.Drawing.Point'/> by the negative of a given <see cref='System.Drawing.Size'/> .
+        /// Translates a <see cref='System.Drawing.Point'/> by the negative of a given <see
+        // cref='System.Drawing.Size'/> .
         /// </summary>
         public static Point Subtract(Point pt, Size sz) =>
             new Point(unchecked(pt.X - sz.Width), unchecked(pt.Y - sz.Height));
@@ -143,7 +155,8 @@ namespace System.Drawing
             new Point(unchecked((int)Math.Round(value.X)), unchecked((int)Math.Round(value.Y)));
 
         /// <summary>
-        /// Specifies whether this <see cref='System.Drawing.Point'/> contains the same coordinates as the specified
+        /// Specifies whether this <see cref='System.Drawing.Point'/> contains the same coordinates as the
+        // specified
         /// <see cref='object'/>.
         /// </summary>
         public override readonly bool Equals([NotNullWhen(true)] object? obj) =>

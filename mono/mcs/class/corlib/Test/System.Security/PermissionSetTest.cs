@@ -354,7 +354,8 @@ namespace MonoTests.System.Security
 
             byte[] result2 = PermissionSet.ConvertPermissionSet("BINARY", result, "BINARY");
             // there's only a little difference - but it doesn't throw an exception
-            //Assert.IsTrue (BitConverter.ToString (result) != BitConverter.ToString (result2), "BINARY!=BINARY");
+            //Assert.IsTrue (BitConverter.ToString (result) != BitConverter.ToString (result2),
+            // "BINARY!=BINARY");
         }
 
         [Test]
@@ -1196,7 +1197,8 @@ namespace MonoTests.System.Security
             // it's simply ignored
         }
 #if !MOBILE
-        // note: this only ensure that the ECMA key support unification (more test required, outside corlib, for other keys, like MS final).
+        // note: this only ensure that the ECMA key support unification (more test required, outside corlib,
+        // for other keys, like MS final).
         private const string PermissionPattern =
             "<PermissionSet class=\"System.Security.PermissionSet\" version=\"1\"><IPermission class=\"System.Security.Permissions.FileDialogPermission, mscorlib, Version={0}, Culture=neutral, PublicKeyToken=b77a5c561934e089\" version=\"1\" Access=\"Open\"/></PermissionSet>";
         private const string fx10version = "1.0.3300.0";

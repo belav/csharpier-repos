@@ -6,11 +6,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that creates an optimized copy of the mutable model. This convention is typically
-///     implemented by database providers to update provider annotations when creating a read-only model.
+///     A convention that creates an optimized copy of the mutable model. This convention is
+// typically
+///     implemented by database providers to update provider annotations when creating a read-only
+// model.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class RelationalRuntimeModelConvention : RuntimeModelConvention
 {
@@ -18,7 +21,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     ///     Creates a new instance of <see cref="RelationalRuntimeModelConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public RelationalRuntimeModelConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
@@ -134,7 +138,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="entityType">The source entity type.</param>
-    /// <param name="runtimeEntityType">The target entity type that will contain the annotations.</param>
+    /// <param name="runtimeEntityType">The target entity type that will contain the
+    // annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected override void ProcessEntityTypeAnnotations(
         Dictionary<string, object?> annotations,
@@ -294,7 +299,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="complexType">The source complex type.</param>
-    /// <param name="runtimeComplexType">The target complex type that will contain the annotations.</param>
+    /// <param name="runtimeComplexType">The target complex type that will contain the
+    // annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected override void ProcessComplexTypeAnnotations(
         Dictionary<string, object?> annotations,
@@ -329,11 +335,13 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         );
 
     /// <summary>
-    ///     Updates the relational property overrides annotations that will be set on the read-only object.
+    ///     Updates the relational property overrides annotations that will be set on the read-only
+    // object.
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="entityTypeMappingFragment">The source relational property overrides.</param>
-    /// <param name="runtimeEntityTypeMappingFragment">The target relational property overrides that will contain the annotations.</param>
+    /// <param name="runtimeEntityTypeMappingFragment">The target relational property overrides that
+    // will contain the annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected virtual void ProcessEntityTypeMappingFragmentAnnotations(
         Dictionary<string, object?> annotations,
@@ -413,7 +421,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="parameter">The source function parameter.</param>
-    /// <param name="runtimeParameter">The target function parameter that will contain the annotations.</param>
+    /// <param name="runtimeParameter">The target function parameter that will contain the
+    // annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected virtual void ProcessFunctionParameterAnnotations(
         Dictionary<string, object?> annotations,
@@ -532,11 +541,13 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         );
 
     /// <summary>
-    ///     Updates the relational property overrides annotations that will be set on the read-only object.
+    ///     Updates the relational property overrides annotations that will be set on the read-only
+    // object.
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="propertyOverrides">The source relational property overrides.</param>
-    /// <param name="runtimePropertyOverrides">The target relational property overrides that will contain the annotations.</param>
+    /// <param name="runtimePropertyOverrides">The target relational property overrides that will
+    // contain the annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected virtual void ProcessPropertyOverridesAnnotations(
         Dictionary<string, object?> annotations,
@@ -594,7 +605,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="foreignKey">The source foreign key.</param>
-    /// <param name="runtimeForeignKey">The target foreign key that will contain the annotations.</param>
+    /// <param name="runtimeForeignKey">The target foreign key that will contain the
+    // annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected override void ProcessForeignKeyAnnotations(
         Dictionary<string, object?> annotations,
@@ -685,7 +697,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="storedProcedure">The source stored procedure.</param>
-    /// <param name="runtimeStoredProcedure">The target stored procedure that will contain the annotations.</param>
+    /// <param name="runtimeStoredProcedure">The target stored procedure that will contain the
+    // annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected virtual void ProcessStoredProcedureAnnotations(
         Dictionary<string, object?> annotations,
@@ -699,7 +712,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="parameter">The source stored procedure parameter.</param>
-    /// <param name="runtimeParameter">The target stored procedure parameter that will contain the annotations.</param>
+    /// <param name="runtimeParameter">The target stored procedure parameter that will contain the
+    // annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected virtual void ProcessStoredProcedureParameterAnnotations(
         Dictionary<string, object?> annotations,
@@ -709,11 +723,13 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     ) { }
 
     /// <summary>
-    ///     Updates the stored procedure result column annotations that will be set on the read-only object.
+    ///     Updates the stored procedure result column annotations that will be set on the read-only
+    // object.
     /// </summary>
     /// <param name="annotations">The annotations to be processed.</param>
     /// <param name="resultColumn">The source fstored procedure result column.</param>
-    /// <param name="runtimeResultColumn">The target stored procedure result column that will contain the annotations.</param>
+    /// <param name="runtimeResultColumn">The target stored procedure result column that will contain
+    // the annotations.</param>
     /// <param name="runtime">Indicates whether the given annotations are runtime annotations.</param>
     protected virtual void ProcessStoredProcedureResultColumnAnnotations(
         Dictionary<string, object?> annotations,

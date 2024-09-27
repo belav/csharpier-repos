@@ -8,7 +8,8 @@ using Microsoft.VisualStudio.Shell;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     /// <summary>
-    /// Implemented by an language that wants a <see cref="UIContext"/> to be activated when there is a project of a given language in the workspace.
+    /// Implemented by an language that wants a <see cref="UIContext"/> to be activated when there is a
+    // project of a given language in the workspace.
     /// </summary>
     internal interface IProjectExistsUIContextProviderLanguageService : ILanguageService
     {

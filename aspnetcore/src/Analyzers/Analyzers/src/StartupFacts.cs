@@ -20,8 +20,10 @@ internal static class StartupFacts
             throw new ArgumentNullException(nameof(type));
         }
 
-        // It's not good enough to just look for a method called ConfigureServices or Configure as a hueristic.
-        // ConfigureServices might not appear in trivial cases, and Configure might be named ConfigureDevelopment
+        // It's not good enough to just look for a method called ConfigureServices or Configure as a
+        // hueristic.
+        // ConfigureServices might not appear in trivial cases, and Configure might be named
+        // ConfigureDevelopment
         // or something similar.
         //
         // Additionally, a startup class could be called anything and wired up explicitly.
@@ -45,7 +47,8 @@ internal static class StartupFacts
     // Based on StartupLoader. The philosophy is that we want to do analysis only on things
     // that would be recognized as a ConfigureServices method to avoid false positives.
     //
-    // The ConfigureServices method follows the naming pattern `Configure{Environment?}Services` (ignoring case).
+    // The ConfigureServices method follows the naming pattern `Configure{Environment?}Services`
+    // (ignoring case).
     // The ConfigureServices method must be public.
     // The ConfigureServices method can be instance or static.
     // The ConfigureServices method cannot have other parameters besides IServiceCollection.
@@ -157,7 +160,8 @@ internal static class StartupFacts
             throw new ArgumentNullException(nameof(symbol));
         }
 
-        // UseSignalR has been removed in 5.0, but we should probably still check for it in this analyzer in case the user
+        // UseSignalR has been removed in 5.0, but we should probably still check for it in this analyzer in
+        // case the user
         // installs it into a pre-5.0 app.
         if (
             string.Equals(

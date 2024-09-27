@@ -356,7 +356,8 @@ namespace System.DirectoryServices.AccountManagement
         // Getting changes to persist (or to build a query from a QBE filter)
         //
 
-        // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
+        // Given a property name, returns true if that property has changed since it was loaded, false
+        // otherwise.
         internal override bool GetChangeStatusForProperty(string propertyName)
         {
             GlobalDebug.WriteLineIf(
@@ -442,8 +443,10 @@ namespace System.DirectoryServices.AccountManagement
 
         /// <summary>
         ///  Finds if the group is "small", meaning that it has less than MaxValRange values (usually 1500)
-        ///  The property list for the searcher of a group has "member" attribute. if there are more results than MaxValRange, there will also be a "member;range=..." attribute
-        ///  we can cache the result and don't fear from changes through Add/Remove/Save because the completed/pending lists are looked up before the actual values are
+        ///  The property list for the searcher of a group has "member" attribute. if there are more results
+        // than MaxValRange, there will also be a "member;range=..." attribute
+        ///  we can cache the result and don't fear from changes through Add/Remove/Save because the
+        // completed/pending lists are looked up before the actual values are
         /// </summary>
         internal bool IsSmallGroup()
         {
@@ -485,7 +488,8 @@ namespace System.DirectoryServices.AccountManagement
                             }
                         }
 
-                        // we only consider the group "small" if there is a "member" property but no "member;range..." property
+                        // we only consider the group "small" if there is a "member" property but no "member;range..."
+                        // property
                         if (!rangePropertyFound)
                         {
                             _isSmallGroup = true;

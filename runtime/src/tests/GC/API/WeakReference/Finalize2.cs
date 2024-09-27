@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * TEST NAME: Finalize2
- * DESCRIPTION: operates on Weakhandles whose targets are being finalized
- */
+* TEST NAME: Finalize2
+* DESCRIPTION: operates on Weakhandles whose targets are being finalized
+*/
 
 using System;
 using System.Runtime.CompilerServices;

@@ -9,10 +9,14 @@ using ExpressionExtensions = Microsoft.EntityFrameworkCore.Query.ExpressionExten
 namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExpressionVisitor
 {
@@ -108,10 +112,14 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
     };
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public SqliteSqlTranslatingExpressionVisitor(
         RelationalSqlTranslatingExpressionVisitorDependencies dependencies,
@@ -125,10 +133,14 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitUnary(UnaryExpression unaryExpression)
     {
@@ -180,10 +192,14 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitBinary(BinaryExpression binaryExpression)
     {
@@ -351,7 +367,8 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             {
                 case SqlConstantExpression patternConstant:
                 {
-                    // The pattern is constant. Aside from null and empty string, we escape all special characters (%, _, \) and send a
+                    // The pattern is constant. Aside from null and empty string, we escape all special characters (%,
+                    // _, \) and send a
                     // simple LIKE
                     translation = patternConstant.Value switch
                     {
@@ -360,9 +377,11 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                             _sqlExpressionFactory.Constant(null, stringTypeMapping)
                         ),
 
-                        // In .NET, all strings start with/end with/contain the empty string, but SQL LIKE return false for empty patterns.
+                        // In .NET, all strings start with/end with/contain the empty string, but SQL LIKE return false for
+                        // empty patterns.
                         // Return % which always matches instead.
-                        // Note that we don't just return a true constant, since null strings shouldn't match even an empty string
+                        // Note that we don't just return a true constant, since null strings shouldn't match even an empty
+                        // string
                         // (but SqlNullabilityProcess will convert this to a true constant if the instance is non-nullable)
                         "" => _sqlExpressionFactory.Like(
                             translatedInstance,
@@ -396,7 +415,8 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                         StringComparison.Ordinal
                     ):
                 {
-                    // The pattern is a parameter, register a runtime parameter that will contain the rewritten LIKE pattern, where
+                    // The pattern is a parameter, register a runtime parameter that will contain the rewritten LIKE
+                    // pattern, where
                     // all special characters have been escaped.
                     var lambda = Expression.Lambda(
                         Expression.Call(
@@ -427,14 +447,18 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                 }
 
                 default:
-                    // The pattern is a column or a complex expression; the possible special characters in the pattern cannot be escaped,
+                    // The pattern is a column or a complex expression; the possible special characters in the pattern
+                    // cannot be escaped,
                     // preventing us from translating to LIKE.
                     if (startsWith)
                     {
-                        // Generate: WHERE instance IS NOT NULL AND pattern IS NOT NULL AND (substr(instance, 1, length(pattern)) = pattern OR pattern = '')
-                        // Note that the empty string pattern needs special handling, since in .NET it returns true for all non-null
+                        // Generate: WHERE instance IS NOT NULL AND pattern IS NOT NULL AND (substr(instance, 1,
+                        // length(pattern)) = pattern OR pattern = '')
+                        // Note that the empty string pattern needs special handling, since in .NET it returns true for all
+                        // non-null
                         // instances, but substr(instance, 0) returns the entire string in SQLite.
-                        // Note that we compensate for the case where both the instance and the pattern are null (null.StartsWith(null)); a
+                        // Note that we compensate for the case where both the instance and the pattern are null
+                        // (null.StartsWith(null)); a
                         // simple equality would yield true in that case, but we want false. We technically
                         translation = _sqlExpressionFactory.AndAlso(
                             _sqlExpressionFactory.IsNotNull(translatedInstance),
@@ -478,10 +502,13 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                     }
                     else
                     {
-                        // Generate: WHERE instance IS NOT NULL AND pattern IS NOT NULL AND (substr(instance, -length(pattern)) = pattern OR pattern = '')
-                        // Note that the empty string pattern needs special handling, since in .NET it returns true for all non-null
+                        // Generate: WHERE instance IS NOT NULL AND pattern IS NOT NULL AND (substr(instance,
+                        // -length(pattern)) = pattern OR pattern = '')
+                        // Note that the empty string pattern needs special handling, since in .NET it returns true for all
+                        // non-null
                         // instances, but substr(instance, 0) returns the entire string in SQLite.
-                        // Note that we compensate for the case where both the instance and the pattern are null (null.StartsWith(null)); a
+                        // Note that we compensate for the case where both the instance and the pattern are null
+                        // (null.StartsWith(null)); a
                         // simple equality would yield true in that case, but we want false. We technically
                         translation = _sqlExpressionFactory.AndAlso(
                             _sqlExpressionFactory.IsNotNull(translatedInstance),
@@ -537,7 +564,8 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
         {
             null => null,
 
-            // In .NET, all strings start/end with the empty string, but SQL LIKE return false for empty patterns.
+            // In .NET, all strings start/end with the empty string, but SQL LIKE return false for empty
+            // patterns.
             // Return % which always matches instead.
             "" => "%",
 

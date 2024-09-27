@@ -32,7 +32,8 @@ public class Runtime_83140
     [Fact]
     public static int TestEntryPoint()
     {
-        // We were optimizing GE(relop, 0) by reversing the relop, but the optimization is only valid for EQ/NE(relop, 0).
+        // We were optimizing GE(relop, 0) by reversing the relop, but the optimization is only valid for
+        // EQ/NE(relop, 0).
         if (0 > (int)(s_10.F0 / 2699312582U))
         {
             var vr5 = s_64.F1.F1;

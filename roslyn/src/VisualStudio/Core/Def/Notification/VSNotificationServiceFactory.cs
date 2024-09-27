@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
             private readonly IVsUIShell _uiShellService;
 
             /// <summary>
-            /// For testing purposes only.  If non-null, this callback will be invoked instead of showing a dialog.
+            /// For testing purposes only.  If non-null, this callback will be invoked instead of showing a
+            // dialog.
             /// </summary>
             public Action<string, string, NotificationSeverity> NotificationCallback { get; set; }
 

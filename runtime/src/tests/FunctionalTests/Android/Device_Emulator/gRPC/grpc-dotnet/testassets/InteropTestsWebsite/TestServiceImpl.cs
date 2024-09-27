@@ -22,7 +22,8 @@ using Grpc.Shared.TestAssets;
 
 namespace Grpc.Testing
 {
-    // Implementation copied from https://github.com/grpc/grpc/blob/master/src/csharp/Grpc.IntegrationTesting/TestServiceImpl.cs
+    // Implementation copied from
+    // https://github.com/grpc/grpc/blob/master/src/csharp/Grpc.IntegrationTesting/TestServiceImpl.cs
     public class TestServiceImpl : TestService.TestServiceBase
     {
         public override Task<Empty> EmptyCall(Empty request, ServerCallContext context)

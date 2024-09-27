@@ -59,7 +59,8 @@ namespace CoreXml.Test.XLinq
                     return output;
                 }
 
-                //[Variation(Desc = "NewLineHandling Default value - NewLineHandling.Replace", Id = 1, Priority = 0)]
+                //[Variation(Desc = "NewLineHandling Default value - NewLineHandling.Replace", Id = 1, Priority =
+                // 0)]
                 public void EOF_Handling_01()
                 {
                     XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -78,9 +79,12 @@ namespace CoreXml.Test.XLinq
                     );
                 }
 
-                //[Variation(Desc = "XmlWriter creation with NewLineHandling.Entitize", Param = NewLineHandling.Entitize, Id = 2, Priority = 0)]
-                //[Variation(Desc = "XmlWriter creation with NewLineHandling.Replace", Param = NewLineHandling.Replace, Id = 3, Priority = 0)]
-                //[Variation(Desc = "XmlWriter creation with NewLineHandling.None", Param = NewLineHandling.None, Id = 4, Priority = 0)]
+                //[Variation(Desc = "XmlWriter creation with NewLineHandling.Entitize", Param =
+                // NewLineHandling.Entitize, Id = 2, Priority = 0)]
+                //[Variation(Desc = "XmlWriter creation with NewLineHandling.Replace", Param =
+                // NewLineHandling.Replace, Id = 3, Priority = 0)]
+                //[Variation(Desc = "XmlWriter creation with NewLineHandling.None", Param = NewLineHandling.None, Id
+                // = 4, Priority = 0)]
                 public void EOF_Handling_02()
                 {
                     XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -95,9 +99,12 @@ namespace CoreXml.Test.XLinq
                     w.Dispose();
                 }
 
-                //[Variation(Desc = "Check for tab character in element with 'Entitize'", Param = NewLineHandling.Entitize, Id = 14, Priority = 0)]
-                //[Variation(Desc = "Check for tab character in element with 'Replace'", Param = NewLineHandling.Replace, Id = 15, Priority = 0)]
-                //[Variation(Desc = "Check for tab character in element with 'None'", Param = NewLineHandling.None, Id = 16, Priority = 0)]
+                //[Variation(Desc = "Check for tab character in element with 'Entitize'", Param =
+                // NewLineHandling.Entitize, Id = 14, Priority = 0)]
+                //[Variation(Desc = "Check for tab character in element with 'Replace'", Param =
+                // NewLineHandling.Replace, Id = 15, Priority = 0)]
+                //[Variation(Desc = "Check for tab character in element with 'None'", Param = NewLineHandling.None,
+                // Id = 16, Priority = 0)]
                 public void EOF_Handling_06()
                 {
                     string Tabs = "foo\tbar&#x9;foo\n\tbar\t\n\t";
@@ -122,9 +129,12 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                //[Variation(Desc = "Check for combinations of NewLine characters in attribute with 'Entitize'", Param = NewLineHandling.Entitize, Id = 17, Priority = 0)]
-                //[Variation(Desc = "Check for combinations of NewLine characters in attribute with 'Replace'", Param = NewLineHandling.Replace, Id = 18, Priority = 0)]
-                //[Variation(Desc = "Check for combinations of NewLine characters in attribute with 'None'", Param = NewLineHandling.None, Id = 19, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of NewLine characters in attribute with 'Entitize'",
+                // Param = NewLineHandling.Entitize, Id = 17, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of NewLine characters in attribute with 'Replace'",
+                // Param = NewLineHandling.Replace, Id = 18, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of NewLine characters in attribute with 'None'", Param =
+                // NewLineHandling.None, Id = 19, Priority = 0)]
                 public void EOF_Handling_07()
                 {
                     string NewLineCombinations = "\r \n \r\n \n\r \r\r \n\n \r\n\r \n\r\n";
@@ -150,9 +160,12 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                //[Variation(Desc = "Check for combinations of entities in attribute with 'Entitize'", Param = NewLineHandling.Entitize, Id = 20, Priority = 0)]
-                //[Variation(Desc = "Check for combinations of entities in attribute with 'Replace'", Param = NewLineHandling.Replace, Id = 21, Priority = 0)]
-                //[Variation(Desc = "Check for combinations of entities in attribute with 'None'", Param = NewLineHandling.None, Id = 22, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of entities in attribute with 'Entitize'", Param =
+                // NewLineHandling.Entitize, Id = 20, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of entities in attribute with 'Replace'", Param =
+                // NewLineHandling.Replace, Id = 21, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of entities in attribute with 'None'", Param =
+                // NewLineHandling.None, Id = 22, Priority = 0)]
                 public void EOF_Handling_08()
                 {
                     string NewLineCombinations = "\r \n \r\n \n\r \r\r \n\n \r\n\r \n\r\n";
@@ -190,9 +203,12 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                //[Variation(Desc = "Check for combinations of NewLine characters and entities in element with 'Entitize'", Param = NewLineHandling.Entitize, Id = 23, Priority = 0)]
-                //[Variation(Desc = "Check for combinations of NewLine characters and entities in element with 'Replace'", Param = NewLineHandling.Replace, Id = 24, Priority = 0)]
-                //[Variation(Desc = "Check for combinations of NewLine characters and entities in element with 'None'", Param = NewLineHandling.None, Id = 25, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of NewLine characters and entities in element with
+                // 'Entitize'", Param = NewLineHandling.Entitize, Id = 23, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of NewLine characters and entities in element with
+                // 'Replace'", Param = NewLineHandling.Replace, Id = 24, Priority = 0)]
+                //[Variation(Desc = "Check for combinations of NewLine characters and entities in element with
+                // 'None'", Param = NewLineHandling.None, Id = 25, Priority = 0)]
                 public void EOF_Handling_09()
                 {
                     string NewLines = "\r&#xA; &#xD;\n &#xD;\r &#xA;\n \n&#xD; &#xA;\r";
@@ -242,9 +258,12 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                //[Variation(Desc = "Check for tab character in attribute with 'Entitize'", Param = NewLineHandling.Entitize, Id = 26, Priority = 0)]
-                //[Variation(Desc = "Check for tab character in attribute with 'Replace'", Param = NewLineHandling.Replace, Id = 27, Priority = 0)]
-                //[Variation(Desc = "Check for tab character in attribute with 'None'", Param = NewLineHandling.None, Id = 28, Priority = 0)]
+                //[Variation(Desc = "Check for tab character in attribute with 'Entitize'", Param =
+                // NewLineHandling.Entitize, Id = 26, Priority = 0)]
+                //[Variation(Desc = "Check for tab character in attribute with 'Replace'", Param =
+                // NewLineHandling.Replace, Id = 27, Priority = 0)]
+                //[Variation(Desc = "Check for tab character in attribute with 'None'", Param =
+                // NewLineHandling.None, Id = 28, Priority = 0)]
                 public void EOF_Handling_10()
                 {
                     string Tabs = "foo\tbar&#x9;foo\n\tbar\t\n\t";
@@ -271,11 +290,14 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                /*================== NewLineChars, IndentChars ==================*/
+/*================== NewLineChars, IndentChars ==================*/
 
-                //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation, Entitize", Param = NewLineHandling.Entitize, Id = 29, Priority = 1)]
-                //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation, Replace", Param = NewLineHandling.Replace, Id = 30, Priority = 1)]
-                //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation, None", Param = NewLineHandling.None, Id = 31, Priority = 1)]
+                //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation,
+                // Entitize", Param = NewLineHandling.Entitize, Id = 29, Priority = 1)]
+                //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation,
+                // Replace", Param = NewLineHandling.Replace, Id = 30, Priority = 1)]
+                //[Variation(Desc = "NewLineChars and IndentChars Default values and test for proper indentation,
+                // None", Param = NewLineHandling.None, Id = 31, Priority = 1)]
                 public void EOF_Handling_11()
                 {
                     XDocument d = new XDocument();
@@ -303,15 +325,33 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Entitize, '\\r', '  '", Params = new object[] { NewLineHandling.Entitize, "\r", "  " }, Id = 32, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Replace, '\\r', '  '", Params = new object[] { NewLineHandling.Replace, "\r", "  " }, Id = 33, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; None, '\\r', '  '", Params = new object[] { NewLineHandling.None, "\r", "  " }, Id = 34, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Entitize, '&#xA;', '  '", Params = new object[] { NewLineHandling.Entitize, "&#xA;", "  " }, Id = 35, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Replace, '&#xA;', '  '", Params = new object[] { NewLineHandling.Replace, "&#xA;", "  " }, Id = 36, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; None, '&#xA;', '  '", Params = new object[] { NewLineHandling.None, "&#xA;", "  " }, Id = 37, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Entitize, '\\r', '\\n'", Params = new object[] { NewLineHandling.Entitize, "\r", "\n" }, Id = 38, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Replace, '\\r', '\\n'", Params = new object[] { NewLineHandling.Replace, "\r", "\n" }, Id = 39, Priority = 2)]
-                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; None, '\\r', '\\n'", Params = new object[] { NewLineHandling.None, "\r", "\n" }, Id = 40, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; Entitize, '\\r', '  '", Params = new object[] {
+                // NewLineHandling.Entitize, "\r", "  " }, Id = 32, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; Replace, '\\r', '  '", Params = new object[] {
+                // NewLineHandling.Replace, "\r", "  " }, Id = 33, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; None, '\\r', '  '", Params = new object[] { NewLineHandling.None,
+                // "\r", "  " }, Id = 34, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; Entitize, '&#xA;', '  '", Params = new object[] {
+                // NewLineHandling.Entitize, "&#xA;", "  " }, Id = 35, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; Replace, '&#xA;', '  '", Params = new object[] {
+                // NewLineHandling.Replace, "&#xA;", "  " }, Id = 36, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; None, '&#xA;', '  '", Params = new object[] { NewLineHandling.None,
+                // "&#xA;", "  " }, Id = 37, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; Entitize, '\\r', '\\n'", Params = new object[] {
+                // NewLineHandling.Entitize, "\r", "\n" }, Id = 38, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; Replace, '\\r', '\\n'", Params = new object[] {
+                // NewLineHandling.Replace, "\r", "\n" }, Id = 39, Priority = 2)]
+                //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom
+                // NewLineChars and IndentChars; None, '\\r', '\\n'", Params = new object[] { NewLineHandling.None,
+                // "\r", "\n" }, Id = 40, Priority = 2)]
                 public void EOF_Handling_13()
                 {
                     string PrototypeOutput =
@@ -336,15 +376,24 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Entitize, '\\r\\n'", Params = new object[] { NewLineHandling.Entitize, "\r\n" }, Id = 50, Priority = 1)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Replace, '\\r\\n'", Params = new object[] { NewLineHandling.Replace, "\r\n" }, Id = 51, Priority = 1)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; None, '\\r\\n'", Params = new object[] { NewLineHandling.None, "\r\n" }, Id = 52, Priority = 1)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Entitize, '\\r'", Params = new object[] { NewLineHandling.Entitize, "\r" }, Id = 53, Priority = 2)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Replace, '\\r'", Params = new object[] { NewLineHandling.Replace, "\r" }, Id = 54, Priority = 2)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; None, '\\r'", Params = new object[] { NewLineHandling.None, "\r" }, Id = 54, Priority = 2)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Entitize, '---'", Params = new object[] { NewLineHandling.Entitize, "---" }, Id = 54, Priority = 2)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Replace, '---'", Params = new object[] { NewLineHandling.Replace, "---" }, Id = 55, Priority = 2)]
-                //[Variation(Desc = "NewLine handling in attribute when Indent=true; None, '---'", Params = new object[] { NewLineHandling.None, "---" })]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Entitize, '\\r\\n'", Params =
+                // new object[] { NewLineHandling.Entitize, "\r\n" }, Id = 50, Priority = 1)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Replace, '\\r\\n'", Params =
+                // new object[] { NewLineHandling.Replace, "\r\n" }, Id = 51, Priority = 1)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; None, '\\r\\n'", Params = new
+                // object[] { NewLineHandling.None, "\r\n" }, Id = 52, Priority = 1)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Entitize, '\\r'", Params = new
+                // object[] { NewLineHandling.Entitize, "\r" }, Id = 53, Priority = 2)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Replace, '\\r'", Params = new
+                // object[] { NewLineHandling.Replace, "\r" }, Id = 54, Priority = 2)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; None, '\\r'", Params = new
+                // object[] { NewLineHandling.None, "\r" }, Id = 54, Priority = 2)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Entitize, '---'", Params = new
+                // object[] { NewLineHandling.Entitize, "---" }, Id = 54, Priority = 2)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; Replace, '---'", Params = new
+                // object[] { NewLineHandling.Replace, "---" }, Id = 55, Priority = 2)]
+                //[Variation(Desc = "NewLine handling in attribute when Indent=true; None, '---'", Params = new
+                // object[] { NewLineHandling.None, "---" })]
                 public void EOF_Handling_15()
                 {
                     XDocument d = new XDocument();
@@ -368,15 +417,24 @@ namespace CoreXml.Test.XLinq
                         throw new TestException(TestResult.Failed, "");
                 }
 
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Entitize, '\\r\\n'", Params = new object[] { NewLineHandling.Entitize, "\r\n" }, Id = 56, Priority = 1)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Replace, '\\r\\n'", Params = new object[] { NewLineHandling.Replace, "\r\n" }, Id = 57, Priority = 1)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; None, '\\r\\n'", Params = new object[] { NewLineHandling.None, "\r\n" }, Id = 58, Priority = 1)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Entitize, '\\r'", Params = new object[] { NewLineHandling.Entitize, "\r" }, Id = 59, Priority = 2)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Replace, '\\r'", Params = new object[] { NewLineHandling.Replace, "\r" }, Id = 60, Priority = 2)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; None, '\\r'", Params = new object[] { NewLineHandling.None, "\r" }, Id = 61, Priority = 2)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Entitize, '---'", Params = new object[] { NewLineHandling.Entitize, "---" }, Id = 62, Priority = 2)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Replace, '---'", Params = new object[] { NewLineHandling.Replace, "---" }, Id = 63, Priority = 2)]
-                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; None, '---'", Params = new object[] { NewLineHandling.None, "---" }, Id = 64, Priority = 2)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Entitize,
+                // '\\r\\n'", Params = new object[] { NewLineHandling.Entitize, "\r\n" }, Id = 56, Priority = 1)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Replace,
+                // '\\r\\n'", Params = new object[] { NewLineHandling.Replace, "\r\n" }, Id = 57, Priority = 1)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; None,
+                // '\\r\\n'", Params = new object[] { NewLineHandling.None, "\r\n" }, Id = 58, Priority = 1)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Entitize,
+                // '\\r'", Params = new object[] { NewLineHandling.Entitize, "\r" }, Id = 59, Priority = 2)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Replace,
+                // '\\r'", Params = new object[] { NewLineHandling.Replace, "\r" }, Id = 60, Priority = 2)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; None,
+                // '\\r'", Params = new object[] { NewLineHandling.None, "\r" }, Id = 61, Priority = 2)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Entitize,
+                // '---'", Params = new object[] { NewLineHandling.Entitize, "---" }, Id = 62, Priority = 2)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; Replace,
+                // '---'", Params = new object[] { NewLineHandling.Replace, "---" }, Id = 63, Priority = 2)]
+                //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; None,
+                // '---'", Params = new object[] { NewLineHandling.None, "---" }, Id = 64, Priority = 2)]
                 public void EOF_Handling_16()
                 {
                     string PrototypeOutput =

@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     special handling.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class FallbackEventDefinition : EventDefinitionBase
@@ -20,7 +21,8 @@ public class FallbackEventDefinition : EventDefinitionBase
     /// <param name="eventId">The <see cref="EventId" />.</param>
     /// <param name="level">The <see cref="LogLevel" /> at which the event will be logged.</param>
     /// <param name="eventIdCode">
-    ///     A string representing the code that should be passed to <see cref="DbContextOptionsBuilder.ConfigureWarnings" />.
+    ///     A string representing the code that should be passed to <see
+    // cref="DbContextOptionsBuilder.ConfigureWarnings" />.
     /// </param>
     /// <param name="messageFormat">The parameterized message definition.</param>
     public FallbackEventDefinition(
@@ -39,7 +41,8 @@ public class FallbackEventDefinition : EventDefinitionBase
     ///     Generates the message that would be logged without logging it.
     ///     Typically used for throwing an exception in warning-as-error cases.
     /// </summary>
-    /// <param name="logAction">A delegate that will log the message to an <see cref="ILogger" />.</param>
+    /// <param name="logAction">A delegate that will log the message to an <see cref="ILogger"
+    // />.</param>
     /// <returns>The message string.</returns>
     public virtual string GenerateMessage(Action<ILogger> logAction)
     {
@@ -53,7 +56,8 @@ public class FallbackEventDefinition : EventDefinitionBase
     /// </summary>
     /// <typeparam name="TLoggerCategory">The <see cref="DbLoggerCategory" />.</typeparam>
     /// <param name="logger">The logger to which the event should be logged.</param>
-    /// <param name="logAction">A delegate that will log the message to an <see cref="ILogger" />.</param>
+    /// <param name="logAction">A delegate that will log the message to an <see cref="ILogger"
+    // />.</param>
     public virtual void Log<TLoggerCategory>(
         IDiagnosticsLogger<TLoggerCategory> logger,
         Action<ILogger> logAction

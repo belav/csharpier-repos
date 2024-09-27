@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override MemberSemanticModel GetMemberModel(SyntaxNode node)
         {
-            // We do have to override this method, but should never call it because it might not do the right thing.
+            // We do have to override this method, but should never call it because it might not do the right
+            // thing.
             Debug.Assert(false);
             return IsInTree(node) ? this : null;
         }
@@ -667,7 +668,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(node == GetBindableSyntaxNode(node));
             }
 
-            // The bound nodes are stored in the map from highest to lowest, so the first bound node is the highest.
+            // The bound nodes are stored in the map from highest to lowest, so the first bound node is the
+            // highest.
             var boundNodes = GetBoundNodes(node);
 
             if (boundNodes.Count == 0)
@@ -681,14 +683,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Get the lowest bound node in the tree associated with a particular syntax node. Lowest is defined as last
+        /// Get the lowest bound node in the tree associated with a particular syntax node. Lowest is
+        // defined as last
         /// in a pre-order traversal of the bound tree.
         /// </summary>
         internal BoundNode GetLowerBoundNode(CSharpSyntaxNode node)
         {
             Debug.Assert(node == GetBindableSyntaxNode(node));
 
-            // The bound nodes are stored in the map from highest to lowest, so the last bound node is the lowest.
+            // The bound nodes are stored in the map from highest to lowest, so the last bound node is the
+            // lowest.
             var boundNodes = GetBoundNodes(node);
 
             if (boundNodes.Count == 0)
@@ -1538,8 +1542,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 highestBoundNode = innerStatement;
             }
 
-            // The CSharp operation factory assumes that UnboundLambda will be bound for error recovery and never be passed to the factory
-            // as the start of a tree to get operations for. This is guaranteed by the builder that populates the node map, as it will call
+            // The CSharp operation factory assumes that UnboundLambda will be bound for error recovery and
+            // never be passed to the factory
+            // as the start of a tree to get operations for. This is guaranteed by the builder that populates
+            // the node map, as it will call
             // UnboundLambda.BindForErrorRecovery() when it encounters an UnboundLambda node.
             Debug.Assert(highestBoundNode.Kind != BoundKind.UnboundLambda);
             IOperation operation = _operationFactory.Value.Create(highestBoundNode);
@@ -2048,8 +2054,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.PrimaryConstructorBaseType:
                         return current;
                     case SyntaxKind.ArrowExpressionClause:
-                        // If this is an arrow expression on a local function statement, then our bindable root is actually our parent syntax as it's
-                        // a statement in a function. If this is returned directly in IOperation, we'll end up with a separate tree.
+                        // If this is an arrow expression on a local function statement, then our bindable root is actually
+                        // our parent syntax as it's
+                        // a statement in a function. If this is returned directly in IOperation, we'll end up with a
+                        // separate tree.
                         if (
                             current.Parent == null
                             || current.Parent.Kind() != SyntaxKind.LocalFunctionStatement
@@ -2221,7 +2229,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BindingDiagnosticBag.Discarded
                 );
 
-                // https://github.com/dotnet/roslyn/issues/35038: Rewrite the above node and add a test that hits this path with nullable
+                // https://github.com/dotnet/roslyn/issues/35038: Rewrite the above node and add a test that hits
+                // this path with nullable
                 // enabled
 
                 nodes = GuardedAddBoundTreeAndGetBoundNodeFromMap(
@@ -2268,7 +2277,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BindingDiagnosticBag.Discarded
                 );
 
-                // https://github.com/dotnet/roslyn/issues/35038: We need to do a rewrite here, and create a test that can hit this.
+                // https://github.com/dotnet/roslyn/issues/35038: We need to do a rewrite here, and create a test
+                // that can hit this.
                 if (!IsNullableAnalysisEnabled() && Compilation.IsNullableAnalysisEnabledAlways)
                 {
                     AnalyzeBoundNodeNullability(
@@ -2329,7 +2339,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <remarks>
-        /// Returned binder doesn't need to have <see cref="BinderFlags.SemanticModel"/> set - the caller will add it.
+        /// Returned binder doesn't need to have <see cref="BinderFlags.SemanticModel"/> set - the caller
+        // will add it.
         /// </remarks>
         private static Binder GetQueryEnclosingBinder(
             int position,
@@ -2485,7 +2496,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <remarks>
         /// CONSIDER: can this share code with MemberSemanticModel.GetEnclosingBinder?
         ///
-        /// Returned binder doesn't need to have <see cref="BinderFlags.SemanticModel"/> set - the caller will add it.
+        /// Returned binder doesn't need to have <see cref="BinderFlags.SemanticModel"/> set - the caller
+        // will add it.
         /// </remarks>
         private static Binder GetLambdaEnclosingBinder(
             int position,
@@ -2635,14 +2647,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder;
             if (nodeToBind is CompilationUnitSyntax)
             {
-                // Top level statements are unique among our nodes: if there are no syntax nodes before local functions,
-                // then that means the start of the span of the top-level statement is the same as the start of the local
-                // function. Therefore, GetEnclosingBinder can't tell the difference, and it will get the binder for the
-                // local function, not for the CompilationUnitSyntax. This is desirable in almost all cases but this one:
-                // There are no locals or invocations before this, meaning there's nothing to call GetDeclaredSymbol,
-                // GetTypeInfo, or GetSymbolInfo on. GetDeclaredSymbol(CompilationUnitSyntax) goes down another path that
-                // does not need to do any binding whatsoever, so it also doesn't care about this behavior. The only place
-                // that actually needs to get the enclosing binding for a CompilationUnitSyntax in such a scenario is this
+                // Top level statements are unique among our nodes: if there are no syntax nodes before local
+                // functions,
+                // then that means the start of the span of the top-level statement is the same as the start of the
+                // local
+                // function. Therefore, GetEnclosingBinder can't tell the difference, and it will get the binder for
+                // the
+                // local function, not for the CompilationUnitSyntax. This is desirable in almost all cases but this
+                // one:
+                // There are no locals or invocations before this, meaning there's nothing to call
+                // GetDeclaredSymbol,
+                // GetTypeInfo, or GetSymbolInfo on. GetDeclaredSymbol(CompilationUnitSyntax) goes down another path
+                // that
+                // does not need to do any binding whatsoever, so it also doesn't care about this behavior. The only
+                // place
+                // that actually needs to get the enclosing binding for a CompilationUnitSyntax in such a scenario
+                // is this
                 // method. So, if our root is the CompilationUnitSyntax, directly get the binder for it.
                 binder = RootBinder.GetBinder(nodeToBind);
                 Debug.Assert(binder is SimpleProgramBinder);
@@ -2657,7 +2677,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 #nullable enable
         /// <summary>
-        /// Rewrites the given bound node with nullability information, and returns snapshots for later speculative analysis at positions inside this member.
+        /// Rewrites the given bound node with nullability information, and returns snapshots for later
+        // speculative analysis at positions inside this member.
         /// </summary>
         protected abstract BoundNode RewriteNullableBoundNodesWithSnapshots(
             BoundNode boundRoot,
@@ -2699,7 +2720,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             Debug.Assert(node == GetBindableSyntaxNode(node));
 
-            // Note: This nullability analysis can be distracting when debugging. This can be disabled with a feature flag in parse options:
+            // Note: This nullability analysis can be distracting when debugging. This can be disabled with a
+            // feature flag in parse options:
             //       `.WithFeature("run-nullable-analysis", "never")`
             EnsureNullabilityAnalysisPerformedIfNecessary();
 
@@ -2753,7 +2775,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // For example, types are usually not represented by bound nodes, and some error conditions and
             // not yet implemented features do not create bound nodes for everything underneath them.
             //
-            // In this case, however, we only add the single bound node we found to the map, not any child bound nodes,
+            // In this case, however, we only add the single bound node we found to the map, not any child bound
+            // nodes,
             // to avoid duplicates in the map if a parent of this node comes through this code path also.
 
             var binder = GetBinderToBindNode(node);
@@ -2766,7 +2789,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (results.IsEmpty)
             {
-                // https://github.com/dotnet/roslyn/issues/35038: We have to run analysis on this node in some manner
+                // https://github.com/dotnet/roslyn/issues/35038: We have to run analysis on this node in some
+                // manner
                 using (_nodeMapLock.DisposableWrite())
                 {
                     var boundNode = this.Bind(
@@ -2791,7 +2815,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return OneOrMany<BoundNode>.Empty;
         }
 
-        // some nodes don't have direct semantic meaning by themselves and so we need to bind a different node that does
+        // some nodes don't have direct semantic meaning by themselves and so we need to bind a different
+        // node that does
         protected internal virtual CSharpSyntaxNode GetBindableSyntaxNode(CSharpSyntaxNode node)
         {
             switch (node.Kind())
@@ -2825,7 +2850,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         node = n.Expression;
                         continue;
 
-                    // Simple mitigation to give a result for suppressions. Public API tracked by https://github.com/dotnet/roslyn/issues/26198
+                    // Simple mitigation to give a result for suppressions. Public API tracked by
+                    // https://github.com/dotnet/roslyn/issues/26198
                     case PostfixUnaryExpressionSyntax
                     {
                         RawKind: (int)SyntaxKind.SuppressNullableWarningExpression
@@ -2923,7 +2949,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode? parent = node.Parent;
             if (parent == null)
             {
-                // For speculative model, expression might be the root of the syntax tree, in which case it can have a null parent.
+                // For speculative model, expression might be the root of the syntax tree, in which case it can have
+                // a null parent.
                 if (this.IsSpeculativeSemanticModel && this.Root == node)
                 {
                     return null;
@@ -2976,8 +3003,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
                 case { RawKind: (int)SyntaxKind.ComplexElementInitializerExpression }:
                     // The { "a", "b" } node in a collection initializer is marked as compiler-generated, and will never
-                    // end up in the bound node map. We don't need the parent node for any calculations here, so just return
-                    // null to avoid rebinding the initializer (which can cause exponential binding problems, see EndToEndTests.LongInitializerList).
+                    // end up in the bound node map. We don't need the parent node for any calculations here, so just
+                    // return
+                    // null to avoid rebinding the initializer (which can cause exponential binding problems, see
+                    // EndToEndTests.LongInitializerList).
                     bindableParent = null;
                     break;
             }

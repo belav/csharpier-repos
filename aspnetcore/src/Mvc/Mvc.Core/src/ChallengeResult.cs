@@ -9,7 +9,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// An <see cref="ActionResult"/> that on execution invokes <see cref="M:HttpContext.ChallengeAsync"/>.
+/// An <see cref="ActionResult"/> that on execution invokes <see
+// cref="M:HttpContext.ChallengeAsync"/>.
 /// </summary>
 public partial class ChallengeResult : ActionResult
 {
@@ -39,7 +40,8 @@ public partial class ChallengeResult : ActionResult
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
     /// specified <paramref name="properties"/>.
     /// </summary>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     public ChallengeResult(AuthenticationProperties? properties)
         : this(Array.Empty<string>(), properties) { }
@@ -49,7 +51,8 @@ public partial class ChallengeResult : ActionResult
     /// specified authentication scheme and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     public ChallengeResult(string authenticationScheme, AuthenticationProperties? properties)
         : this(new[] { authenticationScheme }, properties) { }
@@ -59,7 +62,8 @@ public partial class ChallengeResult : ActionResult
     /// specified authentication schemes and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     public ChallengeResult(
         IList<string> authenticationSchemes,
@@ -76,7 +80,8 @@ public partial class ChallengeResult : ActionResult
     public IList<string> AuthenticationSchemes { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="AuthenticationProperties"/> used to perform the authentication challenge.
+    /// Gets or sets the <see cref="AuthenticationProperties"/> used to perform the authentication
+    // challenge.
     /// </summary>
     public AuthenticationProperties? Properties { get; set; }
 

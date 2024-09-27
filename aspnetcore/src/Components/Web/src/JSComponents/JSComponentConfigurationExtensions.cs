@@ -12,8 +12,10 @@ namespace Microsoft.AspNetCore.Components.Web;
 /// </summary>
 public static class JSComponentConfigurationExtensions
 {
-    // Having independent overloads for the cases with javaScriptInitializer and without it is needed for linkability,
-    // since calling the underlying .Add method with javaScriptInitializer is what causes the linker to retain code for
+    // Having independent overloads for the cases with javaScriptInitializer and without it is needed
+    // for linkability,
+    // since calling the underlying .Add method with javaScriptInitializer is what causes the linker to
+    // retain code for
     // the initializer feature.
 
     /// <summary>
@@ -21,7 +23,8 @@ public static class JSComponentConfigurationExtensions
     /// </summary>
     /// <typeparam name="TComponent">The component type.</typeparam>
     /// <param name="configuration">The <see cref="IJSComponentConfiguration"/>.</param>
-    /// <param name="identifier">A unique identifier for the component type that will be used by JavaScript code.</param>
+    /// <param name="identifier">A unique identifier for the component type that will be used by
+    // JavaScript code.</param>
     public static void RegisterForJavaScript<[DynamicallyAccessedMembers(Component)] TComponent>(
         this IJSComponentConfiguration configuration,
         string identifier
@@ -34,8 +37,10 @@ public static class JSComponentConfigurationExtensions
     /// </summary>
     /// <typeparam name="TComponent">The component type.</typeparam>
     /// <param name="configuration">The <see cref="IJSComponentConfiguration"/>.</param>
-    /// <param name="identifier">A unique identifier for the component type that will be used by JavaScript code.</param>
-    /// <param name="javaScriptInitializer">Specifies an optional identifier for a JavaScript function that will be called to register the custom element.</param>
+    /// <param name="identifier">A unique identifier for the component type that will be used by
+    // JavaScript code.</param>
+    /// <param name="javaScriptInitializer">Specifies an optional identifier for a JavaScript function
+    // that will be called to register the custom element.</param>
     public static void RegisterForJavaScript<[DynamicallyAccessedMembers(Component)] TComponent>(
         this IJSComponentConfiguration configuration,
         string identifier,
@@ -49,7 +54,8 @@ public static class JSComponentConfigurationExtensions
     /// </summary>
     /// <param name="configuration">The <see cref="IJSComponentConfiguration"/>.</param>
     /// <param name="componentType">The component type.</param>
-    /// <param name="identifier">A unique identifier for the component type that will be used by JavaScript code.</param>
+    /// <param name="identifier">A unique identifier for the component type that will be used by
+    // JavaScript code.</param>
     [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(JSComponentInterop))]
     public static void RegisterForJavaScript(
         this IJSComponentConfiguration configuration,
@@ -62,8 +68,10 @@ public static class JSComponentConfigurationExtensions
     /// </summary>
     /// <param name="configuration">The <see cref="IJSComponentConfiguration"/>.</param>
     /// <param name="componentType">The component type.</param>
-    /// <param name="identifier">A unique identifier for the component type that will be used by JavaScript code.</param>
-    /// <param name="javaScriptInitializer">Specifies an optional identifier for a JavaScript function that will be called to register the custom element.</param>
+    /// <param name="identifier">A unique identifier for the component type that will be used by
+    // JavaScript code.</param>
+    /// <param name="javaScriptInitializer">Specifies an optional identifier for a JavaScript function
+    // that will be called to register the custom element.</param>
     [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(JSComponentInterop))]
     public static void RegisterForJavaScript(
         this IJSComponentConfiguration configuration,

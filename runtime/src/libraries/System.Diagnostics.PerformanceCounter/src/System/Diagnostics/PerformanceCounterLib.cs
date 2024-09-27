@@ -741,10 +741,12 @@ namespace System.Diagnostics
                             }
                             catch (SecurityException)
                             {
-                                // we may not have permission to read the registry key on the remote machine.  The security exception
+                                // we may not have permission to read the registry key on the remote machine.  The security
+                                // exception
                                 // is thrown when RegOpenKeyEx returns ERROR_ACCESS_DENIED or ERROR_BAD_IMPERSONATION_LEVEL
                                 //
-                                // In this case we return an 'Unknown' category type and 'false' to indicate the category is *not* custom.
+                                // In this case we return an 'Unknown' category type and 'false' to indicate the category is *not*
+                                // custom.
                                 //
                                 categoryType = PerformanceCounterCategoryType.Unknown;
                                 lock (table)
@@ -1055,7 +1057,8 @@ namespace System.Diagnostics
             CultureInfo culture
         )
         {
-            // EnglishCulture.LCID == 9 will be false only if running with Globalization Invariant Mode. Use "009" at that time as default English language identifier.
+            // EnglishCulture.LCID == 9 will be false only if running with Globalization Invariant Mode. Use
+            // "009" at that time as default English language identifier.
             string lcidString =
                 EnglishCulture.LCID == 9
                     ? culture.LCID.ToString("X3", CultureInfo.InvariantCulture)

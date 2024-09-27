@@ -15,7 +15,8 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">The type of elements in the set.</typeparam>
     /// <devremarks>
     /// We implement <see cref="IReadOnlyList{T}"/> because it adds an ordinal indexer.
-    /// We implement <see cref="IList{T}"/> because it gives us <see cref="IList{T}.IndexOf"/>, which is important for some folks.
+    /// We implement <see cref="IList{T}"/> because it gives us <see cref="IList{T}.IndexOf"/>, which is
+    // important for some folks.
     /// </devremarks>
     [CollectionBuilder(typeof(ImmutableSortedSet), nameof(ImmutableSortedSet.Create))]
     [DebuggerDisplay("Count = {Count}")]
@@ -42,8 +43,10 @@ namespace System.Collections.Immutable
 #endif
     {
         /// <summary>
-        /// This is the factor between the small collection's size and the large collection's size in a bulk operation,
-        /// under which recreating the entire collection using a fast method rather than some incremental update
+        /// This is the factor between the small collection's size and the large collection's size in a bulk
+        // operation,
+        /// under which recreating the entire collection using a fast method rather than some incremental
+        // update
         /// (that requires tree rebalancing) is preferable.
         /// </summary>
         private const float RefillOverIncrementalThreshold = 0.15f;
@@ -217,7 +220,8 @@ namespace System.Collections.Immutable
         /// Searches the set for a given value and returns the equal value it finds, if any.
         /// </summary>
         /// <param name="equalValue">The value to search for.</param>
-        /// <param name="actualValue">The value from the set that the search found, or the original value if the search yielded no match.</param>
+        /// <param name="actualValue">The value from the set that the search found, or the original value if
+        // the search yielded no match.</param>
         /// <returns>A value indicating whether the search was successful.</returns>
         /// <remarks>
         /// This can be useful when you want to reuse a previously stored reference instead of
@@ -567,7 +571,8 @@ namespace System.Collections.Immutable
         /// Determines whether the current set overlaps with the specified collection.
         /// </summary>
         /// <param name="other">The collection to compare to the current set.</param>
-        /// <returns>true if the current set and other share at least one common element; otherwise, false.</returns>
+        /// <returns>true if the current set and other share at least one common element; otherwise,
+        // false.</returns>
         public bool Overlaps(IEnumerable<T> other)
         {
             Requires.NotNull(other, nameof(other));
@@ -865,7 +870,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="value">The object to add to the <see cref="IList"/>.</param>
         /// <returns>
-        /// The position into which the new element was inserted, or -1 to indicate that the item was not inserted into the collection,
+        /// The position into which the new element was inserted, or -1 to indicate that the item was not
+        // inserted into the collection,
         /// </returns>
         /// <exception cref="System.NotSupportedException"></exception>
         int IList.Add(object? value)
@@ -924,7 +930,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Inserts an item to the <see cref="IList"/> at the specified index.
         /// </summary>
-        /// <param name="index">The zero-based index at which <paramref name="value"/> should be inserted.</param>
+        /// <param name="index">The zero-based index at which <paramref name="value"/> should be
+        // inserted.</param>
         /// <param name="value">The object to insert into the <see cref="IList"/>.</param>
         /// <exception cref="System.NotSupportedException"></exception>
         void IList.Insert(int index, object? value)
@@ -971,10 +978,14 @@ namespace System.Collections.Immutable
         #region ICollection Methods
 
         /// <summary>
-        /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+        /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a
+        // particular <see cref="Array"/> index.
         /// </summary>
-        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based indexing.</param>
-        /// <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the
+        // elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based
+        // indexing.</param>
+        /// <param name="index">The zero-based index in <paramref name="array"/> at which copying
+        // begins.</param>
         void ICollection.CopyTo(Array array, int index)
         {
             _root.CopyTo(array, index);
@@ -1019,10 +1030,14 @@ namespace System.Collections.Immutable
         /// A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.
         /// </returns>
         /// <remarks>
-        /// CAUTION: when this enumerator is actually used as a valuetype (not boxed) do NOT copy it by assigning to a second variable
-        /// or by passing it to another method.  When this enumerator is disposed of it returns a mutable reference type stack to a resource pool,
-        /// and if the value type enumerator is copied (which can easily happen unintentionally if you pass the value around) there is a risk
-        /// that a stack that has already been returned to the resource pool may still be in use by one of the enumerator copies, leading to data
+        /// CAUTION: when this enumerator is actually used as a valuetype (not boxed) do NOT copy it by
+        // assigning to a second variable
+        /// or by passing it to another method.  When this enumerator is disposed of it returns a mutable
+        // reference type stack to a resource pool,
+        /// and if the value type enumerator is copied (which can easily happen unintentionally if you pass
+        // the value around) there is a risk
+        /// that a stack that has already been returned to the resource pool may still be in use by one of
+        // the enumerator copies, leading to data
         /// corruption and/or exceptions.
         /// </remarks>
         public Enumerator GetEnumerator()
@@ -1134,7 +1149,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Creates an immutable sorted set with the contents from this collection and a sequence of elements.
+        /// Creates an immutable sorted set with the contents from this collection and a sequence of
+        // elements.
         /// </summary>
         /// <param name="addedItems">The sequence of elements to add to this set.</param>
         /// <returns>The immutable sorted set.</returns>
@@ -1199,7 +1215,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Creates an immutable sorted set with the contents from this collection and a sequence of elements.
+        /// Creates an immutable sorted set with the contents from this collection and a sequence of
+        // elements.
         /// </summary>
         /// <param name="addedItems">The sequence of elements to add to this set.</param>
         /// <returns>The immutable sorted set.</returns>

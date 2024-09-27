@@ -30,7 +30,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Use this constructor if we want to send the key material encrypted.
         /// </summary>
         /// <param name="secret">The key material that needs to be protected.</param>
-        /// <param name="wrappingCredentials">The encrypting credentials used to encrypt the key material.</param>
+        /// <param name="wrappingCredentials">The encrypting credentials used to encrypt the key
+        // material.</param>
         public ProtectedKey(byte[] secret, EncryptingCredentials wrappingCredentials)
         {
             _secret = secret;

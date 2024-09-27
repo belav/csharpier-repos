@@ -13,7 +13,8 @@ using System.Xml.Xsl;
 namespace System.Xml.Xsl.Runtime
 {
     /// <summary>
-    /// This is a simple convenience wrapper internal class that contains static helper methods that get a value
+    /// This is a simple convenience wrapper internal class that contains static helper methods that get
+    // a value
     /// converter from XmlQueryRuntime and use it convert among several physical Clr representations for
     /// the same logical Xml type.  For example, an external function might have an argument typed as
     /// xs:integer, with Clr type Decimal.  Since ILGen stores xs:integer as Clr type Int64 instead of

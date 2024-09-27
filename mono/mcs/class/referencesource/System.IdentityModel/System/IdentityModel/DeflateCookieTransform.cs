@@ -38,7 +38,8 @@ namespace System.IdentityModel
         /// <returns>Decoded data.</returns>
         /// <exception cref="ArgumentNullException">The argument 'value' is null.</exception>
         /// <exception cref="ArgumentException">The argument 'value' contains zero bytes.</exception>
-        /// <exception cref="SecurityTokenException">The decompressed length is larger than MaxDecompressedSize.</exception>
+        /// <exception cref="SecurityTokenException">The decompressed length is larger than
+        // MaxDecompressedSize.</exception>
         public override byte[] Decode(byte[] encoded)
         {
             if (null == encoded)

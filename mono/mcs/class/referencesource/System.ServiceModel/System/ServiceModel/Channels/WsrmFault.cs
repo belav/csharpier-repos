@@ -62,7 +62,8 @@ namespace System.ServiceModel.Channels
             {
                 // The SOAP 1.1 requires body processing error information to be placed in a detail element
                 // and header processing error information to be placed in a soap fault header.
-                // Since wsrm header faults relate to header processing, the information in the detail is placed in a
+                // Since wsrm header faults relate to header processing, the information in the detail is placed in
+                // a
                 // soap fault header in the SOAP 1.1 case.  SOAP 1.2 is not so restrictive. Thus, this flag is set
                 // in CreateMessage if the SOAP version is 1.2.
                 return this.hasDetail;

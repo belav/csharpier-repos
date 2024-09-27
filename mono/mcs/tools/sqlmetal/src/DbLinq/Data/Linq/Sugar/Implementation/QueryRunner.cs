@@ -395,7 +395,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
                 using (var dataReader = dbCommand.Command.ExecuteReader())
                 {
-                    // Did you know? "return EnumerateResult(tableType, dataReader, dataContext);" disposes resources first
+                    // Did you know? "return EnumerateResult(tableType, dataReader, dataContext);" disposes resources
+                    // first
                     // before the enumerator is used
                     foreach (
                         var result in EnumerateResult(

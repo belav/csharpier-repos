@@ -108,13 +108,16 @@ class C
                 // (2,6): error CS1002: ; expected
                 // asas]
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 6),
-                // (3,1): error CS0439: An extern alias declaration must precede all other elements defined in the namespace
+                // (3,1): error CS0439: An extern alias declaration must precede all other elements defined in the
+                // namespace
                 // extern alias A;
                 Diagnostic(ErrorCode.ERR_ExternAfterElements, "extern").WithLocation(3, 1),
-                // (4,1): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                // (4,1): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                // statements
                 // asas
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "asas").WithLocation(4, 1),
-                // (5,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
+                // (5,1): error CS1529: A using clause must precede all other elements defined in the namespace
+                // except extern alias declarations
                 // using System;
                 Diagnostic(ErrorCode.ERR_UsingAfterElements, "using System;").WithLocation(5, 1),
                 // (6,10): error CS1001: Identifier expected
@@ -126,7 +129,8 @@ class C
                 // (6,11): error CS1002: ; expected
                 // sadasdasd]
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 11),
-                // (8,2): error CS1730: Assembly and module attributes must precede all other elements defined in a file except using clauses and extern alias declarations
+                // (8,2): error CS1730: Assembly and module attributes must precede all other elements defined in a
+                // file except using clauses and extern alias declarations
                 // [assembly: goo]
                 Diagnostic(ErrorCode.ERR_GlobalAttributesNotFirst, "assembly").WithLocation(8, 2),
                 // (15,1): error CS8803: Top-level statements must precede namespace and type declarations.
@@ -676,7 +680,8 @@ class Test : Itest
 ";
             UsingTree(
                 test,
-                // (4,17): error CS0071: An explicit interface implementation of an event must use event accessor syntax
+                // (4,17): error CS0071: An explicit interface implementation of an event must use event accessor
+                // syntax
                 //    event D ITest.E()   // CS0071
                 Diagnostic(ErrorCode.ERR_ExplicitEventFieldImpl, ".").WithLocation(4, 17),
                 // (4,20): error CS8124: Tuple must contain at least two elements.
@@ -1012,7 +1017,8 @@ partial delegate E { }
 ";
             CreateCompilation(test)
                 .VerifyDiagnostics(
-                    // (2,18): error CS0246: The type or namespace name 'E' could not be found (are you missing a using directive or an assembly reference?)
+                    // (2,18): error CS0246: The type or namespace name 'E' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     // partial delegate E { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "E")
                         .WithArguments("E")
@@ -1035,7 +1041,8 @@ partial delegate E { }
                     // partial delegate E { }
                     Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "{ }")
                         .WithLocation(2, 20),
-                    // (2,20): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // (2,20): error CS0267: The 'partial' modifier can only appear immediately before 'class',
+                    // 'record', 'struct', 'interface', or a method return type.
                     // partial delegate E { }
                     Diagnostic(ErrorCode.ERR_PartialMisplaced, "").WithLocation(2, 20)
                 );
@@ -1384,7 +1391,8 @@ public class A
 
             UsingTree(
                 test,
-                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character on a line
+                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character
+                // on a line
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_BadDirectivePlacement, "#").WithLocation(1, 21),
                 // (1,61): error CS1026: ) expected
@@ -1740,7 +1748,8 @@ using VT2 = (int, int);
 
             UsingTree(
                 test,
-                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character on a line
+                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character
+                // on a line
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_BadDirectivePlacement, "#").WithLocation(1, 21),
                 // (1,61): error CS1026: ) expected
@@ -2994,7 +3003,8 @@ Console.WriteLine();
 
             UsingTree(
                 test,
-                // (1,8): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                // (1,8): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                // statements
                 // extern alias
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "alias").WithLocation(1, 8)
             );
@@ -3116,7 +3126,8 @@ using aliasY = X.Y;
 
             UsingTree(
                 test,
-                // (2,15): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                // (2,15): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                // statements
                 // System.String[]
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "]").WithLocation(2, 15)
             );
@@ -3304,12 +3315,14 @@ record class Point(int x, int y);
 
             CreateCompilation(test, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (2,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (2,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // record class Point(int x, int y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record ")
                         .WithArguments("top-level statements", "9.0")
                         .WithLocation(2, 1),
-                    // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                    // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // record class Point(int x, int y);
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                         .WithArguments("record")
@@ -3320,7 +3333,8 @@ record class Point(int x, int y);
                     // (2,8): error CS1002: ; expected
                     // record class Point(int x, int y);
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "class").WithLocation(2, 8),
-                    // (2,19): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use language version 12.0 or greater.
+                    // (2,19): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use
+                    // language version 12.0 or greater.
                     // record class Point(int x, int y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y)")
                         .WithArguments("primary constructors", "12.0")
@@ -3413,7 +3427,8 @@ global using Bar;
 
             UsingTree(
                 test,
-                // (3,1): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                // (3,1): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                // statements
                 // p
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "p").WithLocation(3, 1)
             );
@@ -3457,7 +3472,8 @@ using Bar;
 
             UsingTree(
                 test,
-                // (3,1): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                // (3,1): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                // statements
                 // p
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "p").WithLocation(3, 1)
             );

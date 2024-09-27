@@ -24,11 +24,14 @@ namespace Microsoft.Interop
         /// <summary>
         /// Construct a new <see cref="UseSiteAttributeProvider"/> for a given usage site.
         /// </summary>
-        /// <param name="useSiteAttributeParsers">The parsers for the attributes at the given usage site.</param>
+        /// <param name="useSiteAttributeParsers">The parsers for the attributes at the given usage
+        // site.</param>
         /// <param name="useSiteAttributes">The attributes at the usage site.</param>
-        /// <param name="elementInfoProvider">The provider for additional element information, used by the attribute parsers.</param>
+        /// <param name="elementInfoProvider">The provider for additional element information, used by the
+        // attribute parsers.</param>
         /// <param name="diagnostics">Diagnostics sink for any invalid configurations.</param>
-        /// <param name="getMarshallingInfoCallback">A callback to get marshalling information for other elements. Used by <paramref name="elementInfoProvider"/>.</param>
+        /// <param name="getMarshallingInfoCallback">A callback to get marshalling information for other
+        // elements. Used by <paramref name="elementInfoProvider"/>.</param>
         internal UseSiteAttributeProvider(
             ImmutableArray<IUseSiteAttributeParser> useSiteAttributeParsers,
             IEnumerable<AttributeData> useSiteAttributes,
@@ -99,7 +102,8 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Get the <see cref="UseSiteAttributeData"/> provided for a given <paramref name="indirectionDepth"/>, if it exists.
+        /// Get the <see cref="UseSiteAttributeData"/> provided for a given <paramref
+        // name="indirectionDepth"/>, if it exists.
         /// </summary>
         /// <param name="indirectionDepth">The indirection depth to retrieve info for.</param>
         /// <param name="useSiteInfo">The use site information, if it exists.</param>

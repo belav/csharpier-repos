@@ -232,12 +232,13 @@ namespace System.Runtime.Remoting.Contexts
         public virtual void SetProperty(IContextProperty prop)
         {
             // We do not let people add properties to the default context.
-            /* We allow appdomain level properties to be added to the default context
-            if ((_ctxFlags & CTX_DEFAULT_CONTEXT) != 0)
-            {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_AddContextFrozen"));
-            }
-            */
+/* We allow appdomain level properties to be added to the default context
+if ((_ctxFlags & CTX_DEFAULT_CONTEXT) != 0)
+{
+throw new
+InvalidOperationException(Environment.GetResourceString("InvalidOperation_AddContextFrozen"));
+}
+*/
 
             if (prop == null || prop.Name == null)
             {
@@ -645,8 +646,8 @@ namespace System.Runtime.Remoting.Contexts
         [System.Security.SecurityCritical] // auto-generated_required
         public void DoCallBack(CrossContextDelegate deleg)
         {
-            /*DBG Console.WriteLine("public DoCallBack: targetCtx: "
-            + Int32.Format(this.InternalContextID,"x")); DBG*/
+/*DBG Console.WriteLine("public DoCallBack: targetCtx: "
++ Int32.Format(this.InternalContextID,"x")); DBG*/
 
             if (deleg == null)
             {
@@ -691,9 +692,9 @@ namespace System.Runtime.Remoting.Contexts
         {
             Contract.Assert(targetCtxID != IntPtr.Zero, "Bad transition context");
 
-            /*DBG Console.WriteLine("private DoCallBackFromEE: targetCtx: "
-            + Int32.Format(targetCtxID,"x")
-            + " PvtData: " + Int32.Format(privateData,"x"));DBG*/
+/*DBG Console.WriteLine("private DoCallBackFromEE: targetCtx: "
++ Int32.Format(targetCtxID,"x")
++ " PvtData: " + Int32.Format(privateData,"x"));DBG*/
 
             if (targetDomainID == 0)
             {
@@ -976,10 +977,10 @@ namespace System.Runtime.Remoting.Contexts
             return fUnregister;
         }
 
-        /*
-         *  Support for dynamic sinks at context level
-         *
-         */
+/*
+*  Support for dynamic sinks at context level
+*
+*/
         [System.Security.SecurityCritical] // auto-generated
         internal static bool AddDynamicProperty(Context ctx, IDynamicProperty prop)
         {
@@ -1055,11 +1056,11 @@ namespace System.Runtime.Remoting.Contexts
             return _dphGlobal.RemoveDynamicProperty(name);
         }
 
-        /*
-         *  Returns an array of context specific dynamic properties
-         *  registered for this context. The number of such properties
-         *  is designated by length of the returned array.
-         */
+/*
+*  Returns an array of context specific dynamic properties
+*  registered for this context. The number of such properties
+*  is designated by length of the returned array.
+*/
         internal virtual IDynamicProperty[] PerContextDynamicProperties
         {
             get
@@ -1075,11 +1076,11 @@ namespace System.Runtime.Remoting.Contexts
             }
         }
 
-        /*
-         *  Returns an array of global dynamic properties
-         *  registered (for all contexts). The number of such properties
-         *  is designated by length of the returned array.
-         */
+/*
+*  Returns an array of global dynamic properties
+*  registered (for all contexts). The number of such properties
+*  is designated by length of the returned array.
+*/
         internal static ArrayWithSize GlobalDynamicSinks
         {
             [System.Security.SecurityCritical] // auto-generated
@@ -1199,9 +1200,9 @@ namespace System.Runtime.Remoting.Contexts
         [System.Security.SecurityCritical] // auto-generated
         internal void Func()
         {
-            /*DBG Console.WriteLine("DelegHelper::Func CTX:"
-            + Int32.Format(Thread.CurrentContext.InternalContextID,"x")
-            +Environment.NewLine + "DMN: " + Int32.Format(Thread.GetDomainID(),"x")); DBG*/
+/*DBG Console.WriteLine("DelegHelper::Func CTX:"
++ Int32.Format(Thread.CurrentContext.InternalContextID,"x")
++Environment.NewLine + "DMN: " + Int32.Format(Thread.GetDomainID(),"x")); DBG*/
             if (IsEERequested)
             {
                 //DBG Console.WriteLine("Executing EE callback ");

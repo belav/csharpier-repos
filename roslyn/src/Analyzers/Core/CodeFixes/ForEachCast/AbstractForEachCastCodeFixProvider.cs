@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.ForEachCast
                 conversion
             );
 
-            // Add an annotation for System.Linq.Enumerable so that we add a `using System.Linq;` if not present.
+            // Add an annotation for System.Linq.Enumerable so that we add a `using System.Linq;` if not
+            // present.
             rewritten = rewritten.WithAdditionalAnnotations(
                 Simplifier.Annotation,
                 Simplifier.AddImportsAnnotation,
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.ForEachCast
             }
             else
             {
-                // otherwise we need to ensure a language specific conversion by emitting the conversion into the code
+                // otherwise we need to ensure a language specific conversion by emitting the conversion into the
+                // code
                 // like so: `.Select(v => (DestType)v)`
                 return generator.InvocationExpression(
                     generator.MemberAccessExpression(

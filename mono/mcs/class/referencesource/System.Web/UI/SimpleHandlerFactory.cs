@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Handler Factory implementation for ASP.NET files
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* Handler Factory implementation for ASP.NET files
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -16,9 +16,9 @@ namespace System.Web.UI
     using System.Web.Compilation;
     using Debug = System.Web.Util.Debug;
 
-    /*
-     * Handler Factory implementation for ASP.NET files
-     */
+/*
+* Handler Factory implementation for ASP.NET files
+*/
     internal class SimpleHandlerFactory : IHttpHandlerFactory2
     {
         internal SimpleHandlerFactory() { }

@@ -6,7 +6,8 @@ using System.Diagnostics;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides a frozen set implementation where strings are grouped by their lengths.</summary>
+    /// <summary>Provides a frozen set implementation where strings are grouped by their
+    // lengths.</summary>
     internal sealed class LengthBucketsFrozenSet
         : FrozenSetInternalBase<string, LengthBucketsFrozenSet.GSW>
     {

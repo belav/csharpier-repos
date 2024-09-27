@@ -60,7 +60,8 @@ namespace System.Data.EntityModel.Emitters
         /// <summary>
         /// Main method for Emitting property code.
         /// </summary>
-        /// <param name="typeDecl">The CodeDom representation of the type that the property is being added to.</param>
+        /// <param name="typeDecl">The CodeDom representation of the type that the property is being added
+        // to.</param>
         protected override void EmitProperty(CodeTypeDeclaration typeDecl)
         {
             CodeTypeReference typeRef = PropertyType;
@@ -618,7 +619,8 @@ namespace System.Data.EntityModel.Emitters
         /// <summary>
         /// Emit the property set statments to properly set a ComplexType.
         /// </summary>
-        /// <param name="statements">The collection of statements that the set statements should be added to.</param>
+        /// <param name="statements">The collection of statements that the set statements should be added
+        // to.</param>
         private void EmitComplexTypePropertySetStatements(
             CodeStatementCollection statements,
             CollectionKind collectionKind

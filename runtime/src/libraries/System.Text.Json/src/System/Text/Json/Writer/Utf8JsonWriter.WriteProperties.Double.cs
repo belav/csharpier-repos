@@ -10,7 +10,8 @@ namespace System.Text.Json
     public sealed partial class Utf8JsonWriter
     {
         /// <summary>
-        /// Writes the pre-encoded property name and <see cref="double"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the pre-encoded property name and <see cref="double"/> value (as a JSON number) as part
+        // of a name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The JSON-encoded name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -34,7 +35,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="double"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="double"/> value (as a JSON number) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -61,7 +63,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="double"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="double"/> value (as a JSON number) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -87,7 +90,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="double"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="double"/> value (as a JSON number) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="utf8PropertyName">The UTF-8 encoded name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -260,7 +264,8 @@ namespace System.Text.Json
                         - 4
             );
 
-            // All ASCII, 2 quotes for property name, and 1 colon => escapedPropertyName.Length + JsonConstants.MaximumFormatDoubleLength + 3
+            // All ASCII, 2 quotes for property name, and 1 colon => escapedPropertyName.Length +
+            // JsonConstants.MaximumFormatDoubleLength + 3
             // Optionally, 1 list separator, and up to 3x growth when transcoding
             int maxRequired =
                 (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
@@ -339,7 +344,8 @@ namespace System.Text.Json
                         - s_newLineLength
             );
 
-            // All ASCII, 2 quotes for property name, 1 colon, and 1 space => escapedPropertyName.Length + JsonConstants.MaximumFormatDoubleLength + 4
+            // All ASCII, 2 quotes for property name, 1 colon, and 1 space => escapedPropertyName.Length +
+            // JsonConstants.MaximumFormatDoubleLength + 4
             // Optionally, 1 list separator, 1-2 bytes for new line, and up to 3x growth when transcoding
             int maxRequired =
                 indent

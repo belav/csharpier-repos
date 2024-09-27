@@ -52,8 +52,10 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     }
 
     /// <summary>
-    /// Gets or sets a value that determines if routing should use endpoints internally, or if legacy routing
-    /// logic should be used. Endpoint routing is used to match HTTP requests to MVC actions, and to generate
+    /// Gets or sets a value that determines if routing should use endpoints internally, or if legacy
+    // routing
+    /// logic should be used. Endpoint routing is used to match HTTP requests to MVC actions, and to
+    // generate
     /// URLs with <see cref="IUrlHelper"/>.
     /// </summary>
     /// <value>
@@ -74,7 +76,8 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     public bool AllowEmptyInputInBodyModelBinding { get; set; }
 
     /// <summary>
-    /// Gets a Dictionary of CacheProfile Names, <see cref="CacheProfile"/> which are pre-defined settings for
+    /// Gets a Dictionary of CacheProfile Names, <see cref="CacheProfile"/> which are pre-defined
+    // settings for
     /// response caching.
     /// </summary>
     public IDictionary<string, CacheProfile> CacheProfiles { get; }
@@ -118,7 +121,8 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     /// <c>[Required]</c> has been applied, resulting in validation errors when no value was bound.
     /// </para>
     /// <para>
-    /// MVC does not support non-nullable reference type annotations on type arguments and type parameter
+    /// MVC does not support non-nullable reference type annotations on type arguments and type
+    // parameter
     /// constraints. The framework will not infer any validation attributes for generic-typed properties
     /// or collection elements.
     /// </para>
@@ -138,15 +142,19 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     public bool SuppressOutputFormatterBuffering { get; set; }
 
     /// <summary>
-    /// Gets or sets the flag that determines if MVC should use action invoker extensibility. This will allow
-    /// custom <see cref="IActionInvokerFactory"/> and <see cref="IActionInvokerProvider"/> execute during the request pipeline.
+    /// Gets or sets the flag that determines if MVC should use action invoker extensibility. This will
+    // allow
+    /// custom <see cref="IActionInvokerFactory"/> and <see cref="IActionInvokerProvider"/> execute
+    // during the request pipeline.
     /// </summary>
     /// <remarks>This only applies when <see cref="EnableEndpointRouting"/> is true.</remarks>
-    /// <value>Defaults to <see langword="false" /> indicating that action invokers are unused by default.</value>
+    /// <value>Defaults to <see langword="false" /> indicating that action invokers are unused by
+    // default.</value>
     public bool EnableActionInvokers { get; set; }
 
     /// <summary>
-    /// Gets or sets the maximum number of validation errors that are allowed by this application before further
+    /// Gets or sets the maximum number of validation errors that are allowed by this application before
+    // further
     /// errors are ignored.
     /// </summary>
     public int MaxModelValidationErrors
@@ -166,8 +174,10 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     public IList<IModelBinderProvider> ModelBinderProviders { get; }
 
     /// <summary>
-    /// Gets the default <see cref="ModelBinding.Metadata.ModelBindingMessageProvider"/>. Changes here are copied to the
-    /// <see cref="ModelMetadata.ModelBindingMessageProvider"/> property of all <see cref="ModelMetadata"/>
+    /// Gets the default <see cref="ModelBinding.Metadata.ModelBindingMessageProvider"/>. Changes here
+    // are copied to the
+    /// <see cref="ModelMetadata.ModelBindingMessageProvider"/> property of all <see
+    // cref="ModelMetadata"/>
     /// instances unless overridden in a custom <see cref="IBindingMetadataProvider"/>.
     /// </summary>
     public DefaultModelBindingMessageProvider ModelBindingMessageProvider { get; }
@@ -216,21 +226,25 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     public IList<IValueProviderFactory> ValueProviderFactories { get; }
 
     /// <summary>
-    /// Gets or sets the SSL port that is used by this application when <see cref="RequireHttpsAttribute"/>
+    /// Gets or sets the SSL port that is used by this application when <see
+    // cref="RequireHttpsAttribute"/>
     /// is used. If not set the port won't be specified in the secured URL e.g. https://localhost/path.
     /// </summary>
     public int? SslPort { get; set; }
 
     /// <summary>
-    /// Gets or sets the default value for the Permanent property of <see cref="RequireHttpsAttribute"/>.
+    /// Gets or sets the default value for the Permanent property of <see
+    // cref="RequireHttpsAttribute"/>.
     /// </summary>
     public bool RequireHttpsPermanent { get; set; }
 
     /// <summary>
-    /// Gets or sets the maximum depth to constrain the validation visitor when validating. Set to <see langword="null" />
+    /// Gets or sets the maximum depth to constrain the validation visitor when validating. Set to <see
+    // langword="null" />
     /// to disable this feature.
     /// <para>
-    /// <see cref="ValidationVisitor"/> traverses the object graph of the model being validated. For models
+    /// <see cref="ValidationVisitor"/> traverses the object graph of the model being validated. For
+    // models
     /// that are very deep or are infinitely recursive, validation may result in stack overflow.
     /// </para>
     /// <para>
@@ -256,7 +270,8 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     }
 
     /// <summary>
-    /// Gets or sets a value that determines whether the validation visitor will perform validation of a complex type
+    /// Gets or sets a value that determines whether the validation visitor will perform validation of a
+    // complex type
     /// if validation fails for any of its children.
     /// <seealso cref="ValidationVisitor.ValidateComplexTypesIfChildValidationFails"/>
     /// </summary>
@@ -269,12 +284,14 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     /// Gets or sets a value that determines if MVC will remove the suffix "Async" applied to
     /// controller action names.
     /// <para>
-    /// <see cref="ControllerActionDescriptor.ActionName"/> is used to construct the route to the action as
+    /// <see cref="ControllerActionDescriptor.ActionName"/> is used to construct the route to the action
+    // as
     /// well as in view lookup. When <see langword="true"/>, MVC will trim the suffix "Async" applied
     /// to action method names.
     /// For example, the action name for <c>ProductsController.ListProductsAsync</c> will be
     /// canonicalized as <c>ListProducts.</c>. Consequently, it will be routeable at
-    /// <c>/Products/ListProducts</c> with views looked up at <c>/Views/Products/ListProducts.cshtml</c>.
+    /// <c>/Products/ListProducts</c> with views looked up at
+    // <c>/Views/Products/ListProducts.cshtml</c>.
     /// </para>
     /// <para>
     /// This option does not affect values specified using <see cref="ActionNameAttribute"/>.
@@ -286,30 +303,38 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     public bool SuppressAsyncSuffixInActionNames { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets the maximum size of a complex collection to model bind. When this limit is reached, the model
+    /// Gets or sets the maximum size of a complex collection to model bind. When this limit is reached,
+    // the model
     /// binding system will throw an <see cref="InvalidOperationException"/>.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// When binding a collection, some element binders may succeed unconditionally and model binding may run out
-    /// of memory. This limit constrains such unbounded collection growth; it is a safeguard against incorrect
+    /// When binding a collection, some element binders may succeed unconditionally and model binding
+    // may run out
+    /// of memory. This limit constrains such unbounded collection growth; it is a safeguard against
+    // incorrect
     /// model binders and models.
     /// </para>
     /// <para>
-    /// This limit does not <em>correct</em> the bound model. The <see cref="InvalidOperationException"/> instead
-    /// informs the developer of an issue in their model or model binder. The developer must correct that issue.
+    /// This limit does not <em>correct</em> the bound model. The <see
+    // cref="InvalidOperationException"/> instead
+    /// informs the developer of an issue in their model or model binder. The developer must correct
+    // that issue.
     /// </para>
     /// <para>
     /// This limit does not apply to collections of simple types. When
-    /// <see cref="CollectionModelBinder{TElement}"/> relies entirely on <see cref="IValueProvider"/>s, it cannot
+    /// <see cref="CollectionModelBinder{TElement}"/> relies entirely on <see cref="IValueProvider"/>s,
+    // it cannot
     /// create collections larger than the available data.
     /// </para>
     /// <para>
-    /// A very high value for this option (<c>int.MaxValue</c> for example) effectively removes the limit and is
+    /// A very high value for this option (<c>int.MaxValue</c> for example) effectively removes the
+    // limit and is
     /// not recommended.
     /// </para>
     /// </remarks>
-    /// <value>The default value is <c>1024</c>, matching <see cref="FormReader.DefaultValueCountLimit"/>.</value>
+    /// <value>The default value is <c>1024</c>, matching <see
+    // cref="FormReader.DefaultValueCountLimit"/>.</value>
     public int MaxModelBindingCollectionSize
     {
         get => _maxModelBindingCollectionSize;
@@ -324,34 +349,42 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
 
     /// <summary>
     /// Gets or sets the maximum recursion depth of the model binding system. The
-    /// <see cref="DefaultModelBindingContext"/> will throw an <see cref="InvalidOperationException"/> if more than
-    /// this number of <see cref="IModelBinder"/>s are on the stack. That is, an attempt to recurse beyond this
+    /// <see cref="DefaultModelBindingContext"/> will throw an <see cref="InvalidOperationException"/>
+    // if more than
+    /// this number of <see cref="IModelBinder"/>s are on the stack. That is, an attempt to recurse
+    // beyond this
     /// level will fail.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// For some self-referential models, some binders may succeed unconditionally and model binding may result in
-    /// stack overflow. This limit constrains such unbounded recursion; it is a safeguard against incorrect model
+    /// For some self-referential models, some binders may succeed unconditionally and model binding may
+    // result in
+    /// stack overflow. This limit constrains such unbounded recursion; it is a safeguard against
+    // incorrect model
     /// binders and models. This limit also protects against very deep model type hierarchies lacking
     /// self-references.
     /// </para>
     /// <para>
-    /// This limit does not <em>correct</em> the bound model. The <see cref="InvalidOperationException"/> instead
+    /// This limit does not <em>correct</em> the bound model. The <see
+    // cref="InvalidOperationException"/> instead
     /// informs the developer of an issue in their model. The developer must correct that issue.
     /// </para>
     /// <para>
-    /// A very high value for this option (<c>int.MaxValue</c> for example) effectively removes the limit and is
+    /// A very high value for this option (<c>int.MaxValue</c> for example) effectively removes the
+    // limit and is
     /// not recommended.
     /// </para>
     /// </remarks>
-    /// <value>The default value is <c>32</c>, matching the default <see cref="MaxValidationDepth"/> value.</value>
+    /// <value>The default value is <c>32</c>, matching the default <see cref="MaxValidationDepth"/>
+    // value.</value>
     public int MaxModelBindingRecursionDepth
     {
         get => _maxModelBindingRecursionDepth;
         set
         {
             // Disallowing one model binder (if supported) would cause the model binding system to throw
-            // unconditionally. DefaultModelBindingContext always allows a top-level binder i.e. its own creation.
+            // unconditionally. DefaultModelBindingContext always allows a top-level binder i.e. its own
+            // creation.
             ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, 1);
 
             _maxModelBindingRecursionDepth = value;
@@ -363,7 +396,8 @@ public class MvcOptions : IEnumerable<ICompatibilitySwitch>
     /// that <see cref="ObjectResultExecutor"/> will buffer.
     /// <para>
     /// When <see cref="ObjectResult.Value" /> is an instance of <see cref="IAsyncEnumerable{T}"/>,
-    /// <see cref="ObjectResultExecutor"/> will eagerly read the enumeration and add to a synchronous collection
+    /// <see cref="ObjectResultExecutor"/> will eagerly read the enumeration and add to a synchronous
+    // collection
     /// prior to invoking the selected formatter.
     /// This property determines the most number of entries that the executor is allowed to buffer.
     /// </para>

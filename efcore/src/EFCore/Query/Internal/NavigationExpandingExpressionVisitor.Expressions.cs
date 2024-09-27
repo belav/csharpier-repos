@@ -227,8 +227,10 @@ public partial class NavigationExpandingExpressionVisitor
     }
 
     /// <summary>
-    ///     Stores information about the current queryable, its source, structure of projection, parameter type etc.
-    ///     This is needed because once navigations are expanded we still remember these to avoid expanding again.
+    ///     Stores information about the current queryable, its source, structure of projection,
+    // parameter type etc.
+    ///     This is needed because once navigations are expanded we still remember these to avoid
+    // expanding again.
     /// </summary>
     private sealed class NavigationExpansionExpression : Expression, IPrintableExpression
     {
@@ -435,8 +437,10 @@ public partial class NavigationExpandingExpressionVisitor
     }
 
     /// <summary>
-    ///     A node in navigation binary tree. A navigation tree is a structure of the current parameter, which
-    ///     would be transparent identifier (hence it's a binary structure). This allows us to easily condense to
+    ///     A node in navigation binary tree. A navigation tree is a structure of the current parameter,
+    // which
+    ///     would be transparent identifier (hence it's a binary structure). This allows us to easily
+    // condense to
     ///     inner/outer member access.
     /// </summary>
     private class NavigationTreeNode : Expression
@@ -466,7 +470,8 @@ public partial class NavigationExpandingExpressionVisitor
         public override ExpressionType NodeType => ExpressionType.Extension;
 
         public override Type Type
-            // Left/Right could be null for NavigationTreeExpression (derived type) but it overrides this property.
+            // Left/Right could be null for NavigationTreeExpression (derived type) but it overrides this
+            // property.
             =>
             TransparentIdentifierFactory.Create(Left!.Type, Right!.Type);
 

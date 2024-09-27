@@ -6,8 +6,10 @@ using System.Numerics;
 
 namespace System
 {
-    // This is a port of the `Dragon4` implementation here: https://www.ryanjuckett.com/printing-floating-point-numbers-part-2-dragon4/
-    // The backing algorithm and the proofs behind it are described in more detail here:  https://www.cs.indiana.edu/~dyb/pubs/FP-Printing-PLDI96.pdf
+    // This is a port of the `Dragon4` implementation here:
+    // https://www.ryanjuckett.com/printing-floating-point-numbers-part-2-dragon4/
+    // The backing algorithm and the proofs behind it are described in more detail here:
+    // https://www.cs.indiana.edu/~dyb/pubs/FP-Printing-PLDI96.pdf
     internal static partial class Number
     {
         public static void Dragon4Double(
@@ -148,8 +150,10 @@ namespace System
             number.DigitsCount = length;
         }
 
-        // This is an implementation of the Dragon4 algorithm to convert a binary number in floating-point format to a decimal number in string format.
-        // The function returns the number of digits written to the output buffer and the output is not NUL terminated.
+        // This is an implementation of the Dragon4 algorithm to convert a binary number in floating-point
+        // format to a decimal number in string format.
+        // The function returns the number of digits written to the output buffer and the output is not NUL
+        // terminated.
         //
         // The floating point input value is (mantissa * 2^exponent).
         //
@@ -190,8 +194,10 @@ namespace System
             BigInteger scaledValue; // scale * mantissa
             BigInteger scaledMarginLow; // scale * 0.5 * (distance between this floating-point number and its immediate lower value)
 
-            // For normalized IEEE floating-point values, each time the exponent is incremented the margin also doubles.
-            // That creates a subset of transition numbers where the high margin is twice the size of the low margin.
+            // For normalized IEEE floating-point values, each time the exponent is incremented the margin also
+            // doubles.
+            // That creates a subset of transition numbers where the high margin is twice the size of the low
+            // margin.
             BigInteger* pScaledMarginHigh;
             BigInteger optionalMarginHigh;
 
@@ -201,7 +207,8 @@ namespace System
                 {
                     // 1) Expand the input value by multiplying out the mantissa and exponent.
                     //    This represents the input value in its whole number representation.
-                    // 2) Apply an additional scale of 2 such that later comparisons against the margin values are simplified.
+                    // 2) Apply an additional scale of 2 such that later comparisons against the margin values are
+                    // simplified.
                     // 3) Set the margin value to the loweset mantissa bit's scale.
 
                     // scaledValue      = 2 * 2 * mantissa * 2^exponent
@@ -243,7 +250,8 @@ namespace System
                 {
                     // 1) Expand the input value by multiplying out the mantissa and exponent.
                     //    This represents the input value in its whole number representation.
-                    // 2) Apply an additional scale of 2 such that later comparisons against the margin values are simplified.
+                    // 2) Apply an additional scale of 2 such that later comparisons against the margin values are
+                    // simplified.
                     // 3) Set the margin value to the lowest mantissa bit's scale.
 
                     // scaledValue     = 2 * mantissa*2^exponent
@@ -276,10 +284,14 @@ namespace System
 
             // Compute an estimate for digitExponent that will be correct or undershoot by one.
             //
-            // This optimization is based on the paper "Printing Floating-Point Numbers Quickly and Accurately" by Burger and Dybvig http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.72.4656&rep=rep1&type=pdf
+            // This optimization is based on the paper "Printing Floating-Point Numbers Quickly and Accurately"
+            // by Burger and Dybvig
+            // http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.72.4656&rep=rep1&type=pdf
             //
-            // We perform an additional subtraction of 0.69 to increase the frequency of a failed estimate because that lets us take a faster branch in the code.
-            // 0.69 is chosen because 0.69 + log10(2) is less than one by a reasonable epsilon that will account for any floating point error.
+            // We perform an additional subtraction of 0.69 to increase the frequency of a failed estimate
+            // because that lets us take a faster branch in the code.
+            // 0.69 is chosen because 0.69 + log10(2) is less than one by a reasonable epsilon that will account
+            // for any floating point error.
             //
             // We want to set digitExponent to floor(log10(v)) + 1
             //      v = mantissa * 2^exponent
@@ -302,7 +314,8 @@ namespace System
             }
             else if (digitExponent < 0)
             {
-                // The exponent is negative creating a multiplication so we multiply up the scaledValue, scaledMarginLow and scaledMarginHigh.
+                // The exponent is negative creating a multiplication so we multiply up the scaledValue,
+                // scaledMarginLow and scaledMarginHigh.
 
                 BigInteger.Pow10((uint)(-digitExponent), out BigInteger pow10);
 
@@ -388,17 +401,23 @@ namespace System
             // Output the exponent of the first digit we will print
             decimalExponent = --digitExponent;
 
-            // In preparation for calling BigInteger.HeuristicDivie(), we need to scale up our values such that the highest block of the denominator is greater than or equal to 8.
-            // We also need to guarantee that the numerator can never have a length greater than the denominator after each loop iteration.
-            // This requires the highest block of the denominator to be less than or equal to 429496729 which is the highest number that can be multiplied by 10 without overflowing to a new block.
+            // In preparation for calling BigInteger.HeuristicDivie(), we need to scale up our values such that
+            // the highest block of the denominator is greater than or equal to 8.
+            // We also need to guarantee that the numerator can never have a length greater than the denominator
+            // after each loop iteration.
+            // This requires the highest block of the denominator to be less than or equal to 429496729 which is
+            // the highest number that can be multiplied by 10 without overflowing to a new block.
 
             Debug.Assert(scale.GetLength() > 0);
             uint hiBlock = scale.GetBlock((uint)(scale.GetLength() - 1));
 
             if ((hiBlock < 8) || (hiBlock > 429496729))
             {
-                // Perform a bit shift on all values to get the highest block of the denominator into the range [8,429496729].
-                // We are more likely to make accurate quotient estimations in BigInteger.HeuristicDivide() with higher denominator values so we shift the denominator to place the highest bit at index 27 of the highest block.
+                // Perform a bit shift on all values to get the highest block of the denominator into the range
+                // [8,429496729].
+                // We are more likely to make accurate quotient estimations in BigInteger.HeuristicDivide() with
+                // higher denominator values so we shift the denominator to place the highest bit at index 27 of the
+                // highest block.
                 // This is safe because (2^28 - 1) = 268435455 which is less than 429496729.
                 // This means that all values with a highest bit at index 27 are within range.
                 Debug.Assert(hiBlock != 0);
@@ -416,7 +435,8 @@ namespace System
                 }
             }
 
-            // These values are used to inspect why the print loop terminated so we can properly round the final digit.
+            // These values are used to inspect why the print loop terminated so we can properly round the final
+            // digit.
             bool low; // did the value get within marginLow distance from zero
             bool high; // did the value get within marginHigh distance from one
             uint outputDigit; // current digit being output
@@ -426,7 +446,8 @@ namespace System
                 Debug.Assert(isSignificantDigits);
                 Debug.Assert(digitExponent >= cutoffExponent);
 
-                // For the unique cutoff mode, we will try to print until we have reached a level of precision that uniquely distinguishes this value from its neighbors.
+                // For the unique cutoff mode, we will try to print until we have reached a level of precision that
+                // uniquely distinguishes this value from its neighbors.
                 // If we run out of space in the output buffer, we terminate early.
 
                 while (true)
@@ -442,7 +463,8 @@ namespace System
                         out BigInteger scaledValueHigh
                     );
 
-                    // stop looping if we are far enough away from our neighboring values or if we have reached the cutoff digit
+                    // stop looping if we are far enough away from our neighboring values or if we have reached the
+                    // cutoff digit
                     int cmpLow = BigInteger.Compare(ref scaledValue, ref scaledMarginLow);
                     int cmpHigh = BigInteger.Compare(ref scaledValueHigh, ref scale);
 
@@ -482,7 +504,8 @@ namespace System
             {
                 Debug.Assert((cutoffNumber > 0) || ((cutoffNumber == 0) && !isSignificantDigits));
 
-                // For length based cutoff modes, we will try to print until we have exhausted all precision (i.e. all remaining digits are zeros) or until we reach the desired cutoff digit.
+                // For length based cutoff modes, we will try to print until we have exhausted all precision (i.e.
+                // all remaining digits are zeros) or until we reach the desired cutoff digit.
                 low = false;
                 high = false;
 

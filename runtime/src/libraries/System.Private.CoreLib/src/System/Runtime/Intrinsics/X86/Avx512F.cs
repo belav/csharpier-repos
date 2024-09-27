@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.Intrinsics.X86
 {
-    /// <summary>This class provides access to X86 AVX512F hardware instructions via intrinsics</summary>
+    /// <summary>This class provides access to X86 AVX512F hardware instructions via
+    // intrinsics</summary>
     [Intrinsic]
     [CLSCompliant(false)]
     public abstract class Avx512F : Avx2
@@ -1824,7 +1825,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m128i _mm_ternarylogic_si128 (__m128i a, __m128i b, __m128i c, byte imm)
             ///   VPTERNLOGD xmm1 {k1}{z}, xmm2, xmm3/m128, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector128<sbyte> TernaryLogic(
                 Vector128<sbyte> a,
@@ -1836,7 +1838,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m128i _mm_ternarylogic_si128 (__m128i a, __m128i b, __m128i c, byte imm)
             ///   VPTERNLOGD xmm1 {k1}{z}, xmm2, xmm3/m128, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector128<byte> TernaryLogic(
                 Vector128<byte> a,
@@ -1848,7 +1851,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m128i _mm_ternarylogic_si128 (__m128i a, __m128i b, __m128i c, short imm)
             ///   VPTERNLOGD xmm1 {k1}{z}, xmm2, xmm3/m128, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector128<short> TernaryLogic(
                 Vector128<short> a,
@@ -1860,7 +1864,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m128i _mm_ternarylogic_si128 (__m128i a, __m128i b, __m128i c, short imm)
             ///   VPTERNLOGD xmm1 {k1}{z}, xmm2, xmm3/m128, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector128<ushort> TernaryLogic(
                 Vector128<ushort> a,
@@ -1916,7 +1921,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m128 _mm_ternarylogic_ps (__m128 a, __m128 b, __m128 c, int imm)
             ///   VPTERNLOGD xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector128<float> TernaryLogic(
                 Vector128<float> a,
@@ -1928,7 +1934,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m128d _mm_ternarylogic_pd (__m128d a, __m128d b, __m128d c, int imm)
             ///   VPTERNLOGQ xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector128<double> TernaryLogic(
                 Vector128<double> a,
@@ -1940,7 +1947,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m256i _mm256_ternarylogic_si256 (__m256i a, __m256i b, __m256i c, byte imm)
             ///   VPTERNLOGD ymm1 {k1}{z}, ymm2, ymm3/m256, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector256<sbyte> TernaryLogic(
                 Vector256<sbyte> a,
@@ -1952,7 +1960,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m256i _mm256_ternarylogic_si256 (__m256i a, __m256i b, __m256i c, byte imm)
             ///   VPTERNLOGD ymm1 {k1}{z}, ymm2, ymm3/m256, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector256<byte> TernaryLogic(
                 Vector256<byte> a,
@@ -1964,7 +1973,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m256i _mm256_ternarylogic_si256 (__m256i a, __m256i b, __m256i c, short imm)
             ///   VPTERNLOGD ymm1 {k1}{z}, ymm2, ymm3/m256, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector256<short> TernaryLogic(
                 Vector256<short> a,
@@ -1976,7 +1986,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m256i _mm256_ternarylogic_si256 (__m256i a, __m256i b, __m256i c, short imm)
             ///   VPTERNLOGD ymm1 {k1}{z}, ymm2, ymm3/m256, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector256<ushort> TernaryLogic(
                 Vector256<ushort> a,
@@ -2032,7 +2043,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m256 _mm256_ternarylogic_ps (__m256 a, __m256 b, __m256 c, int imm)
             ///   VPTERNLOGD ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector256<float> TernaryLogic(
                 Vector256<float> a,
@@ -2044,7 +2056,8 @@ namespace System.Runtime.Intrinsics.X86
             /// <summary>
             /// __m256d _mm256_ternarylogic_pd (__m256d a, __m256d b, __m256d c, int imm)
             ///   VPTERNLOGQ ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst, imm8
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other bitwise APIs.
             /// </summary>
             public static Vector256<double> TernaryLogic(
                 Vector256<double> a,
@@ -3846,7 +3859,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128 _mm_getexp_ss (__m128 a, __m128 b)
         ///   VGETEXPSS xmm1 {k1}{z}, xmm2, xmm3/m32{sae}
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> GetExponentScalar(
             Vector128<float> upper,
@@ -3856,7 +3870,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128d _mm_getexp_sd (__m128d a, __m128d b)
         ///   VGETEXPSD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> GetExponentScalar(
             Vector128<double> upper,
@@ -3902,7 +3917,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128 _mm_getmant_ss (__m128 a, __m128 b)
         ///   VGETMANTSS xmm1 {k1}{z}, xmm2, xmm3/m32{sae}
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> GetMantissaScalar(
             Vector128<float> upper,
@@ -3913,7 +3929,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128d _mm_getmant_sd (__m128d a, __m128d b)
         ///   VGETMANTSD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> GetMantissaScalar(
             Vector128<double> upper,
@@ -4706,7 +4723,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128 _mm_rcp14_ss (__m128 a, __m128 b)
         ///   VRCP14SS xmm1 {k1}{z}, xmm2, xmm3/m32
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> Reciprocal14Scalar(
             Vector128<float> upper,
@@ -4716,7 +4734,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128d _mm_rcp14_sd (__m128d a, __m128d b)
         ///   VRCP14SD xmm1 {k1}{z}, xmm2, xmm3/m64
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> Reciprocal14Scalar(
             Vector128<double> upper,
@@ -4754,7 +4773,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128 _mm_rsqrt14_ss (__m128 a, __m128 b)
         ///   VRSQRT14SS xmm1 {k1}{z}, xmm2, xmm3/m32
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> ReciprocalSqrt14Scalar(
             Vector128<float> upper,
@@ -4764,7 +4784,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128d _mm_rsqrt14_sd (__m128d a, __m128d b)
         ///   VRSQRT14SD xmm1 {k1}{z}, xmm2, xmm3/m64
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> ReciprocalSqrt14Scalar(
             Vector128<double> upper,
@@ -4954,7 +4975,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128 _mm_roundscale_ss (__m128 a, __m128 b, int imm)
         ///   VRNDSCALESS xmm1 {k1}{z}, xmm2, xmm3/m32{sae}, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> RoundScaleScalar(
             Vector128<float> upper,
@@ -4965,7 +4987,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128d _mm_roundscale_sd (__m128d a, __m128d b, int imm)
         ///   VRNDSCALESD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> RoundScaleScalar(
             Vector128<double> upper,
@@ -5648,7 +5671,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m512i _mm512_ternarylogic_si512 (__m512i a, __m512i b, __m512i c, int imm)
         ///   VPTERNLOGD zmm1 {k1}{z}, zmm2, zmm3/m512, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other bitwise APIs.
         /// </summary>
         public static Vector512<sbyte> TernaryLogic(
             Vector512<sbyte> a,
@@ -5660,7 +5684,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m512i _mm512_ternarylogic_si512 (__m512i a, __m512i b, __m512i c, byte imm)
         ///   VPTERNLOGD zmm1 {k1}{z}, zmm2, zmm3/m512, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other bitwise APIs.
         /// </summary>
         public static Vector512<byte> TernaryLogic(
             Vector512<byte> a,
@@ -5672,7 +5697,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m512i _mm512_ternarylogic_si512 (__m512i a, __m512i b, __m512i c, short imm)
         ///   VPTERNLOGD zmm1 {k1}{z}, zmm2, zmm3/m512, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other bitwise APIs.
         /// </summary>
         public static Vector512<short> TernaryLogic(
             Vector512<short> a,
@@ -5684,7 +5710,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m512i _mm512_ternarylogic_si512 (__m512i a, __m512i b, __m512i c, short imm)
         ///   VPTERNLOGD zmm1 {k1}{z}, zmm2, zmm3/m512, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other bitwise APIs.
         /// </summary>
         public static Vector512<ushort> TernaryLogic(
             Vector512<ushort> a,
@@ -5740,7 +5767,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m512 _mm512_ternarylogic_ps (__m512 a, __m512 b, __m512 c, int imm)
         ///   VPTERNLOGD zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other bitwise APIs.
         /// </summary>
         public static Vector512<float> TernaryLogic(
             Vector512<float> a,
@@ -5752,7 +5780,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m512d _mm512_ternarylogic_pd (__m512d a, __m512d b, __m512d c, int imm)
         ///   VPTERNLOGQ zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other bitwise APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other bitwise APIs.
         /// </summary>
         public static Vector512<double> TernaryLogic(
             Vector512<double> a,

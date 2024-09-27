@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * Trace Handler
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* Trace Handler
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 namespace System.Web.Handlers
 {
     using System;

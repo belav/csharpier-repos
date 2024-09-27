@@ -635,7 +635,8 @@ namespace System.Security.Cryptography
         // Consistent key usage bits: DIGITAL_SIGNATURE
         internal const string szOID_PKIX_KP_CODE_SIGNING = "1.3.6.1.5.5.7.3.3";
 
-        // Consistent key usage bits: DIGITAL_SIGNATURE, NON_REPUDIATION and/or (KEY_ENCIPHERMENT or KEY_AGREEMENT)
+        // Consistent key usage bits: DIGITAL_SIGNATURE, NON_REPUDIATION and/or (KEY_ENCIPHERMENT or
+        // KEY_AGREEMENT)
         internal const string szOID_PKIX_KP_EMAIL_PROTECTION = "1.3.6.1.5.5.7.3.4";
 
         internal const string SPC_INDIVIDUAL_SP_KEY_PURPOSE_OBJID = "1.3.6.1.4.1.311.2.1.21";
@@ -4053,8 +4054,10 @@ namespace System.Security.Cryptography
             if (persistKeyContainers)
             {
                 //
-                // Right now, we always demand KeyContainerPermission regardless of whether the PFX contains a private key or not.
-                // We could avoid that by looping through the certs in the store and find out whether there are actually private keys.
+                // Right now, we always demand KeyContainerPermission regardless of whether the PFX contains a
+                // private key or not.
+                // We could avoid that by looping through the certs in the store and find out whether there are
+                // actually private keys.
                 //
                 if (!CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
                 {
@@ -4329,8 +4332,10 @@ namespace System.Security.Cryptography
                     "hCertStore"
                 );
 
-            // Note we do not demand EnumerateCertificates flag of StorePermission since we only call this method
-            // for a memory store and we don't want to incur the cost of a demand. Ideally, we should be doing that.
+            // Note we do not demand EnumerateCertificates flag of StorePermission since we only call this
+            // method
+            // for a memory store and we don't want to incur the cost of a demand. Ideally, we should be doing
+            // that.
 
             return CAPIMethods.CertFindCertificateInStore(
                 hCertStore,
@@ -4362,8 +4367,10 @@ namespace System.Security.Cryptography
 
 #if !FEATURE_CORESYSTEM
             //
-            // Right now, we always demand KeyContainerPermission regardless of whether the PFX contains a private key or not.
-            // We could avoid that by looping through the certs in the store and find out whether there are actually private keys.
+            // Right now, we always demand KeyContainerPermission regardless of whether the PFX contains a
+            // private key or not.
+            // We could avoid that by looping through the certs in the store and find out whether there are
+            // actually private keys.
             //
             if (!CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {

@@ -1274,7 +1274,8 @@ class C3
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (17,16): error CS1674: 'S1': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (17,16): error CS1674: 'S1': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //         using (S1 s = new S1())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "S1 s = new S1()")
                     .WithArguments("S1")
@@ -1364,7 +1365,8 @@ class C3
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (15,15): error CS1674: 'S1': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (15,15): error CS1674: 'S1': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //        using (S1 s = new S1())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "S1 s = new S1()")
                     .WithArguments("S1")
@@ -1397,7 +1399,8 @@ class C3
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (15,15): error CS1674: 'S1': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (15,15): error CS1674: 'S1': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //        using (S1 s = new S1())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "S1 s = new S1()")
                     .WithArguments("S1")
@@ -1576,10 +1579,12 @@ class Gen<T> where T : new()
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (13,16): error CS1674: 'T': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (13,16): error CS1674: 'T': type used in a using statement must be implicitly convertible to
+                    // 'System.IDisposable'.
                     //         using (val)
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "val").WithArguments("T"),
-                    // (24,16): error CS1674: 'T': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (24,16): error CS1674: 'T': type used in a using statement must be implicitly convertible to
+                    // 'System.IDisposable'.
                     //         using (T disp = new T()) // Invalid
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "T disp = new T()").WithArguments("T")
                 );
@@ -1641,7 +1646,8 @@ class Program
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (7,16): error CS1674: 'Program.MyManagedClass': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (7,16): error CS1674: 'Program.MyManagedClass': type used in a using statement must be implicitly
+                    // convertible to 'System.IDisposable'.
                     //         using (res) // Invalid
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "res")
                         .WithArguments("Program.MyManagedClass")
@@ -1672,7 +1678,8 @@ class Program
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (7,16): error CS1674: 'Program.MyManagedClass': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (7,16): error CS1674: 'Program.MyManagedClass': type used in a using statement must be implicitly
+                    // convertible to 'System.IDisposable'.
                     //         using (res) // Invalid
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "res")
                         .WithArguments("Program.MyManagedClass")
@@ -2767,7 +2774,8 @@ struct  MyManagedClass : IDisposable
                 );
         }
 
-        // Multiple objects can be used in with a using statement, but they must be declared inside the using statement
+        // Multiple objects can be used in with a using statement, but they must be declared inside the
+        // using statement
         [Fact]
         public void MultipleResourceInUsing()
         {
@@ -2807,7 +2815,8 @@ struct  MyManagedClass : IDisposable
                 );
         }
 
-        // Multiple objects can be used in with a using statement, but they must be declared inside the using statement
+        // Multiple objects can be used in with a using statement, but they must be declared inside the
+        // using statement
         [Fact, WorkItem(542982, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542982")]
         public void MultipleResourceInUsing_2()
         {
@@ -3008,15 +3017,18 @@ class Program
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,16): error CS1674: 'lambda expression': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (6,16): error CS1674: 'lambda expression': type used in a using statement must be implicitly
+                    // convertible to 'System.IDisposable'.
                     //         using (x => x)     // err
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "x => x")
                         .WithArguments("lambda expression"),
-                    // (9,16): error CS1674: 'lambda expression': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (9,16): error CS1674: 'lambda expression': type used in a using statement must be implicitly
+                    // convertible to 'System.IDisposable'.
                     //         using (() => { })     // err
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "() => { }")
                         .WithArguments("lambda expression"),
-                    // (12,16): error CS1674: 'lambda expression': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (12,16): error CS1674: 'lambda expression': type used in a using statement must be implicitly
+                    // convertible to 'System.IDisposable'.
                     //         using ((int @int) => { return @int; })     // err
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "(int @int) => { return @int; }")
                         .WithArguments("lambda expression")
@@ -3054,23 +3066,28 @@ class Program
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,16): error CS1674: '<empty anonymous type>': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (6,16): error CS1674: '<empty anonymous type>': type used in a using statement must be implicitly
+                    // convertible to 'System.IDisposable'.
                     //         using (var a = new { })
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var a = new { }")
                         .WithArguments("<empty anonymous type>"),
-                    // (9,16): error CS1674: '<anonymous type: int p1>': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (9,16): error CS1674: '<anonymous type: int p1>': type used in a using statement must be
+                    // implicitly convertible to 'System.IDisposable'.
                     //         using (var b = new { p1 = 10 })
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var b = new { p1 = 10 }")
                         .WithArguments("<anonymous type: int p1>"),
-                    // (12,16): error CS1674: '<anonymous type: double p1, char p2>': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (12,16): error CS1674: '<anonymous type: double p1, char p2>': type used in a using statement
+                    // must be implicitly convertible to 'System.IDisposable'.
                     //         using (var c = new { p1 = 10.0, p2 = 'a' })
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var c = new { p1 = 10.0, p2 = 'a' }")
                         .WithArguments("<anonymous type: double p1, char p2>"),
-                    // (15,16): error CS1674: '<empty anonymous type>': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (15,16): error CS1674: '<empty anonymous type>': type used in a using statement must be
+                    // implicitly convertible to 'System.IDisposable'.
                     //         using (new { })
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, "new { }")
                         .WithArguments("<empty anonymous type>"),
-                    // (19,16): error CS1674: '<anonymous type: string f1, char f2>': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (19,16): error CS1674: '<anonymous type: string f1, char f2>': type used in a using statement
+                    // must be implicitly convertible to 'System.IDisposable'.
                     //         using (new { f1 = "12345", f2 = 'S' })
                     Diagnostic(ErrorCode.ERR_NoConvToIDisp, @"new { f1 = ""12345"", f2 = 'S' }")
                         .WithArguments("<anonymous type: string f1, char f2>")

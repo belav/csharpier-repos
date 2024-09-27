@@ -9,7 +9,8 @@ using Newtonsoft.Json.Serialization;
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 /// <summary>
-/// An implementation of <see cref="IDisplayMetadataProvider"/> and <see cref="IValidationMetadataProvider"/> for
+/// An implementation of <see cref="IDisplayMetadataProvider"/> and <see
+// cref="IValidationMetadataProvider"/> for
 /// the Newtonsoft.Json attribute classes.
 /// </summary>
 public sealed class NewtonsoftJsonValidationMetadataProvider
@@ -19,15 +20,18 @@ public sealed class NewtonsoftJsonValidationMetadataProvider
     private readonly NamingStrategy _jsonNamingPolicy;
 
     /// <summary>
-    /// Creates a new <see cref="NewtonsoftJsonValidationMetadataProvider"/> with the default <see cref="CamelCaseNamingStrategy"/>
+    /// Creates a new <see cref="NewtonsoftJsonValidationMetadataProvider"/> with the default <see
+    // cref="CamelCaseNamingStrategy"/>
     /// </summary>
     public NewtonsoftJsonValidationMetadataProvider()
         : this(new CamelCaseNamingStrategy()) { }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="NewtonsoftJsonValidationMetadataProvider"/> with an optional <see cref="NamingStrategy"/>
+    /// Initializes a new instance of <see cref="NewtonsoftJsonValidationMetadataProvider"/> with an
+    // optional <see cref="NamingStrategy"/>
     /// </summary>
-    /// <param name="namingStrategy">The <see cref="NamingStrategy"/> to be used to configure the metadata provider.</param>
+    /// <param name="namingStrategy">The <see cref="NamingStrategy"/> to be used to configure the
+    // metadata provider.</param>
     public NewtonsoftJsonValidationMetadataProvider(NamingStrategy namingStrategy)
     {
         ArgumentNullException.ThrowIfNull(namingStrategy);

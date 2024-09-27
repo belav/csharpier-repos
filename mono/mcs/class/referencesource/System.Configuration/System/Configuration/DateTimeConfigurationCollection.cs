@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * ImmutableCollections
- *
- * Copyright (c) 2004 Microsoft Corporation
- */
+* ImmutableCollections
+*
+* Copyright (c) 2004 Microsoft Corporation
+*/
 
 using System;
 using System.Collections;

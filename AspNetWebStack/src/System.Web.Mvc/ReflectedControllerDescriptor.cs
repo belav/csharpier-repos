@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -80,7 +81,8 @@ namespace System.Web.Mvc
         {
             if (useCache && GetType() == typeof(ReflectedControllerDescriptor))
             {
-                // Do not look at cache in types derived from this type because they might incorrectly implement GetCustomAttributes
+                // Do not look at cache in types derived from this type because they might incorrectly implement
+                // GetCustomAttributes
                 return ReflectedAttributeCache.GetTypeFilterAttributes(ControllerType);
             }
             return base.GetFilterAttributes(useCache);

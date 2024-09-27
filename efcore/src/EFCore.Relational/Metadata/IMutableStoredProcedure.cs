@@ -32,7 +32,8 @@ public interface IMutableStoredProcedure : IReadOnlyStoredProcedure, IMutableAnn
     new IMutableEntityType EntityType { get; }
 
     /// <summary>
-    ///     Gets or sets a value indicating whether this stored procedure returns the number of rows affected.
+    ///     Gets or sets a value indicating whether this stored procedure returns the number of rows
+    // affected.
     /// </summary>
     new bool IsRowsAffectedReturned { get; set; }
 
@@ -45,7 +46,8 @@ public interface IMutableStoredProcedure : IReadOnlyStoredProcedure, IMutableAnn
     ///     Returns the parameter corresponding to the given property.
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
-    /// <returns>The parameter corresponding to the given property if found; <see langword="null" /> otherwise.</returns>
+    /// <returns>The parameter corresponding to the given property if found; <see langword="null" />
+    // otherwise.</returns>
     new IMutableStoredProcedureParameter? FindParameter(string propertyName);
 
     /// <summary>
@@ -60,7 +62,8 @@ public interface IMutableStoredProcedure : IReadOnlyStoredProcedure, IMutableAnn
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
     /// <returns>
-    ///     The original value parameter corresponding to the given property if found; <see langword="null" /> otherwise.
+    ///     The original value parameter corresponding to the given property if found; <see
+    // langword="null" /> otherwise.
     /// </returns>
     new IMutableStoredProcedureParameter? FindOriginalValueParameter(string propertyName);
 
@@ -94,11 +97,13 @@ public interface IMutableStoredProcedure : IReadOnlyStoredProcedure, IMutableAnn
     ///     Returns the result column corresponding to the given property.
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
-    /// <returns>The result column corresponding to the given property if found; <see langword="null" /> otherwise.</returns>
+    /// <returns>The result column corresponding to the given property if found; <see langword="null" />
+    // otherwise.</returns>
     new IMutableStoredProcedureResultColumn? FindResultColumn(string propertyName);
 
     /// <summary>
-    ///     Adds a new column of the result for this stored procedure mapped to the property with the given name
+    ///     Adds a new column of the result for this stored procedure mapped to the property with the
+    // given name
     /// </summary>
     /// <param name="propertyName">The name of the corresponding property.</param>
     /// <returns>The added column.</returns>

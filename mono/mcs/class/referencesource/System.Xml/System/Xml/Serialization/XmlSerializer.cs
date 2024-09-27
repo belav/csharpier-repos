@@ -35,28 +35,32 @@ namespace System.Xml.Serialization
         UnreferencedObjectEventHandler onUnreferencedObject;
         internal object sender;
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlDeserializationEvents.OnUnknownNode"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlDeserializationEvents.OnUnknownNode"]/*' />
         public XmlNodeEventHandler OnUnknownNode
         {
             get { return onUnknownNode; }
             set { onUnknownNode = value; }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlDeserializationEvents.OnUnknownAttribute"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlDeserializationEvents.OnUnknownAttribute"]/*' />
         public XmlAttributeEventHandler OnUnknownAttribute
         {
             get { return onUnknownAttribute; }
             set { onUnknownAttribute = value; }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlDeserializationEvents.OnUnknownElement"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlDeserializationEvents.OnUnknownElement"]/*' />
         public XmlElementEventHandler OnUnknownElement
         {
             get { return onUnknownElement; }
             set { onUnknownElement = value; }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlDeserializationEvents.OnUnreferencedObject"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlDeserializationEvents.OnUnreferencedObject"]/*' />
         public UnreferencedObjectEventHandler OnUnreferencedObject
         {
             get { return onUnreferencedObject; }
@@ -71,43 +75,50 @@ namespace System.Xml.Serialization
     /// </devdoc>
     public abstract class XmlSerializerImplementation
     {
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializerImplementation.Reader"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializerImplementation.Reader"]/*' />
         public virtual XmlSerializationReader Reader
         {
             get { throw new NotSupportedException(); }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializerImplementation.Writer"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializerImplementation.Writer"]/*' />
         public virtual XmlSerializationWriter Writer
         {
             get { throw new NotSupportedException(); }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializerImplementation.ReadMethods"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializerImplementation.ReadMethods"]/*' />
         public virtual Hashtable ReadMethods
         {
             get { throw new NotSupportedException(); }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializerImplementation.WriteMethods"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializerImplementation.WriteMethods"]/*' />
         public virtual Hashtable WriteMethods
         {
             get { throw new NotSupportedException(); }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializerImplementation.TypedSerializers"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializerImplementation.TypedSerializers"]/*' />
         public virtual Hashtable TypedSerializers
         {
             get { throw new NotSupportedException(); }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializerImplementation.CanSerialize"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializerImplementation.CanSerialize"]/*' />
         public virtual bool CanSerialize(Type type)
         {
             throw new NotSupportedException();
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializerImplementation.GetSerializer"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializerImplementation.GetSerializer"]/*' />
         public virtual XmlSerializer GetSerializer(Type type)
         {
             throw new NotSupportedException();
@@ -808,7 +819,8 @@ namespace System.Xml.Serialization
             return serializers;
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.GenerateSerializer"]/*' />
+        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.GenerateSerializer"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -822,7 +834,8 @@ namespace System.Xml.Serialization
             return GenerateSerializer(types, mappings, parameters);
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.GenerateSerializer1"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializer.GenerateSerializer1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -899,7 +912,8 @@ namespace System.Xml.Serialization
             return FromMappings(mappings);
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.GetXmlSerializerAssemblyName"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializer.GetXmlSerializerAssemblyName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -909,7 +923,8 @@ namespace System.Xml.Serialization
             return GetXmlSerializerAssemblyName(type, null);
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.GetXmlSerializerAssemblyName"]/*' />
+        /// <include file='doc\XmlSerializer.uex'
+        // path='docs/doc[@for="XmlSerializer.GetXmlSerializerAssemblyName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -933,7 +948,8 @@ namespace System.Xml.Serialization
             remove { events.OnUnknownNode -= value; }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.UnknownAttribute"]/*' />
+        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.UnknownAttribute"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -950,7 +966,8 @@ namespace System.Xml.Serialization
             remove { events.OnUnknownElement -= value; }
         }
 
-        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.UnreferencedObject"]/*' />
+        /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlSerializer.UnreferencedObject"]/*'
+        // />
         public event UnreferencedObjectEventHandler UnreferencedObject
         {
             add { events.OnUnreferencedObject += value; }

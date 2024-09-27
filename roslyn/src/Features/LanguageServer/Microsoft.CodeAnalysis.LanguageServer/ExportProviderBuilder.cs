@@ -31,7 +31,8 @@ internal sealed class ExportProviderBuilder
             Directory.EnumerateFiles(baseDirectory, "Microsoft.ServiceHub*.dll")
         );
 
-        // Temporarily explicitly load the dlls we want to add to the MEF composition.  This is due to a runtime bug
+        // Temporarily explicitly load the dlls we want to add to the MEF composition.  This is due to a
+        // runtime bug
         // in the 7.0.4 runtime where the APIs MEF uses to load assemblies break with R2R assemblies.
         // See https://github.com/dotnet/runtime/issues/83526
         //
@@ -83,7 +84,8 @@ internal sealed class ExportProviderBuilder
         // You can create as many of these as you want, but typically an app needs just one.
         var exportProvider = exportProviderFactory.CreateExportProvider();
 
-        // Immediately set the logger factory, so that way it'll be available for the rest of the composition
+        // Immediately set the logger factory, so that way it'll be available for the rest of the
+        // composition
         exportProvider.GetExportedValue<ServerLoggerFactory>().SetFactory(loggerFactory);
 
         return exportProvider;
@@ -94,12 +96,17 @@ internal sealed class ExportProviderBuilder
         ILogger logger
     )
     {
-        // Verify that we have exactly the MEF errors that we expect.  If we have less or more this needs to be updated to assert the expected behavior.
+        // Verify that we have exactly the MEF errors that we expect.  If we have less or more this needs to
+        // be updated to assert the expected behavior.
         // Currently we are expecting the following:
         //     "----- CompositionError level 1 ------
-        //     Microsoft.CodeAnalysis.ExternalAccess.Pythia.PythiaSignatureHelpProvider.ctor(implementation): expected exactly 1 export matching constraints:
-        //         Contract name: Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api.IPythiaSignatureHelpProviderImplementation
-        //         TypeIdentityName: Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api.IPythiaSignatureHelpProviderImplementation
+        //
+        // Microsoft.CodeAnalysis.ExternalAccess.Pythia.PythiaSignatureHelpProvider.ctor(implementation):
+        // expected exactly 1 export matching constraints:
+        //         Contract name:
+        // Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api.IPythiaSignatureHelpProviderImplementation
+        //         TypeIdentityName:
+        // Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api.IPythiaSignatureHelpProviderImplementation
         //     but found 0.
         //         part definition Microsoft.CodeAnalysis.ExternalAccess.Pythia.PythiaSignatureHelpProvider
         var erroredParts =
@@ -119,7 +126,8 @@ internal sealed class ExportProviderBuilder
             }
             catch (CompositionFailedException ex)
             {
-                // The ToString for the composition failed exception doesn't output a nice set of errors by default, so log it separately here.
+                // The ToString for the composition failed exception doesn't output a nice set of errors by default,
+                // so log it separately here.
                 logger.LogError(
                     $"Encountered errors in the MEF composition:{Environment.NewLine}{ex.ErrorsAsString}"
                 );

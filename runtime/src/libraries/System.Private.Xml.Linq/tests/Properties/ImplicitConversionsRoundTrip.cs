@@ -160,14 +160,22 @@ namespace CoreXml.Test.XLinq
                 SetValue,
             }
 
-            //[TestCase(Name = "XElement - value conversion round trip   (constructor)", Params = new object[] { typeof(XElement), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
-            //[TestCase(Name = "XAttribute - value conversion round trip (constructor)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
-            //[TestCase(Name = "XElement - XmlConvert conformance        (constructor)", Params = new object[] { typeof(XElement), ExplicitCastTestType.XmlConvert, NodeCreateType.Constructor })]
-            //[TestCase(Name = "XAttribute - XmlConvert conformance      (constructor)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.XmlConvert, NodeCreateType.Constructor })]
-            //[TestCase(Name = "XElement - value conversion round trip   (SetValue)", Params = new object[] { typeof(XElement), ExplicitCastTestType.RoundTrip, NodeCreateType.SetValue })]
-            //[TestCase(Name = "XAttribute - value conversion round trip (SetValue)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.RoundTrip, NodeCreateType.SetValue })]
-            //[TestCase(Name = "XElement - XmlConvert conformance        (SetValue)", Params = new object[] { typeof(XElement), ExplicitCastTestType.XmlConvert, NodeCreateType.SetValue })]
-            //[TestCase(Name = "XAttribute - XmlConvert conformance      (SetValue)", Params = new object[] { typeof(XAttribute), ExplicitCastTestType.XmlConvert, NodeCreateType.SetValue })]
+            //[TestCase(Name = "XElement - value conversion round trip   (constructor)", Params = new object[] {
+            // typeof(XElement), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
+            //[TestCase(Name = "XAttribute - value conversion round trip (constructor)", Params = new object[] {
+            // typeof(XAttribute), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
+            //[TestCase(Name = "XElement - XmlConvert conformance        (constructor)", Params = new object[] {
+            // typeof(XElement), ExplicitCastTestType.XmlConvert, NodeCreateType.Constructor })]
+            //[TestCase(Name = "XAttribute - XmlConvert conformance      (constructor)", Params = new object[] {
+            // typeof(XAttribute), ExplicitCastTestType.XmlConvert, NodeCreateType.Constructor })]
+            //[TestCase(Name = "XElement - value conversion round trip   (SetValue)", Params = new object[] {
+            // typeof(XElement), ExplicitCastTestType.RoundTrip, NodeCreateType.SetValue })]
+            //[TestCase(Name = "XAttribute - value conversion round trip (SetValue)", Params = new object[] {
+            // typeof(XAttribute), ExplicitCastTestType.RoundTrip, NodeCreateType.SetValue })]
+            //[TestCase(Name = "XElement - XmlConvert conformance        (SetValue)", Params = new object[] {
+            // typeof(XElement), ExplicitCastTestType.XmlConvert, NodeCreateType.SetValue })]
+            //[TestCase(Name = "XAttribute - XmlConvert conformance      (SetValue)", Params = new object[] {
+            // typeof(XAttribute), ExplicitCastTestType.XmlConvert, NodeCreateType.SetValue })]
             public partial class XElement_Op_Eplicit : XLinqTestCase
             {
                 private object[] _data = new object[]
@@ -358,8 +366,10 @@ namespace CoreXml.Test.XLinq
                     catch (ArgumentNullException) { }
                 }
 
-                //[Variation(Desc = "Conversion to bool overloads (1,True,true)", Params = new object[] { true, new string[] { "1", "True", "true","TRUE", " TRue " } })]
-                //[Variation(Desc = "Conversion to bool overloads (0,False,false)", Params = new object[] {  false, new string[] { "0", "False", "false", "FALSE", " FalsE " } })]
+                //[Variation(Desc = "Conversion to bool overloads (1,True,true)", Params = new object[] { true, new
+                // string[] { "1", "True", "true","TRUE", " TRue " } })]
+                //[Variation(Desc = "Conversion to bool overloads (0,False,false)", Params = new object[] {  false,
+                // new string[] { "0", "False", "false", "FALSE", " FalsE " } })]
                 public void ConversionoBool()
                 {
                     Type type = Params[0] as Type;

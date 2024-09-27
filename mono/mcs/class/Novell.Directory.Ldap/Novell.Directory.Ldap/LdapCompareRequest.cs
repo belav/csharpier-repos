@@ -39,11 +39,11 @@ namespace Novell.Directory.Ldap
     /// </summary>
     /// <seealso cref="LdapConnection.SendRequest">
     /// </seealso>
-    /*
-     *       CompareRequest ::= [APPLICATION 14] SEQUENCE {
-     *               entry           LdapDN,
-     *               ava             AttributeValueAssertion }
-     */
+/*
+*       CompareRequest ::= [APPLICATION 14] SEQUENCE {
+*               entry           LdapDN,
+*               ava             AttributeValueAssertion }
+*/
     public class LdapCompareRequest : LdapMessage
     {
         /// <summary> Returns the LdapAttribute associated with this request.

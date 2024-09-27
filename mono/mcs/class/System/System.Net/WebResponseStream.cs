@@ -101,8 +101,8 @@ namespace System.Net
             while (!cancellationToken.IsCancellationRequested)
             {
                 /*
-                 * 'currentRead' is set by ReadAllAsync().
-                 */
+                * 'currentRead' is set by ReadAllAsync().
+                */
                 var oldCompletion = Interlocked.CompareExchange(ref pendingRead, completion, null);
                 WebConnection.Debug($"{ME} READ ASYNC #1: {oldCompletion != null}");
                 if (oldCompletion == null)
@@ -271,21 +271,21 @@ namespace System.Net
                 if (!ChunkedRead && contentLength == Int64.MaxValue)
                 {
                     /*
-                     * This is a violation of the HTTP Spec - the server neither send a
-                     * "Content-Length:" nor a "Transfer-Encoding: chunked" header.
-                     * The only way to recover from this is to keep reading until the
-                     * remote closes the connection, so we can't reuse it.
-                     */
+                    * This is a violation of the HTTP Spec - the server neither send a
+                    * "Content-Length:" nor a "Transfer-Encoding: chunked" header.
+                    * The only way to recover from this is to keep reading until the
+                    * remote closes the connection, so we can't reuse it.
+                    */
                     KeepAlive = false;
                 }
             }
 
             /*
-             * Inner layer:
-             * We may have read a few extra bytes while parsing the headers, these will be
-             * passed to us in the @buffer parameter and we need to read these before
-             * reading from the `InnerStream`.
-             */
+            * Inner layer:
+            * We may have read a few extra bytes while parsing the headers, these will be
+            * passed to us in the @buffer parameter and we need to read these before
+            * reading from the `InnerStream`.
+            */
             Stream networkStream;
             if (!ExpectContent || (!ChunkedRead && buffer.Size >= contentLength))
             {
@@ -307,11 +307,11 @@ namespace System.Net
             }
 
             /*
-             * Intermediate layer:
-             * - Wrap with MonoChunkStream when using chunked encoding.
-             * - Otherwise, we should have a Content-Length, wrap with
-             *   FixedSizeReadStream to read exactly that many bytes.
-             */
+            * Intermediate layer:
+            * - Wrap with MonoChunkStream when using chunked encoding.
+            * - Otherwise, we should have a Content-Length, wrap with
+            *   FixedSizeReadStream to read exactly that many bytes.
+            */
             if (ChunkedRead)
             {
                 innerStream = new MonoChunkStream(Operation, networkStream, Headers);
@@ -331,9 +331,9 @@ namespace System.Net
             }
 
             /*
-             * Outer layer:
-             * - Decode gzip/deflate if requested.
-             */
+            * Outer layer:
+            * - Decode gzip/deflate if requested.
+            */
             string content_encoding = Headers["Content-Encoding"];
             if (
                 content_encoding == "gzip"
@@ -414,8 +414,8 @@ namespace System.Net
                 while (true)
                 {
                     /*
-                     * 'currentRead' is set by ReadAsync().
-                     */
+                    * 'currentRead' is set by ReadAsync().
+                    */
                     cancellationToken.ThrowIfCancellationRequested();
                     var oldCompletion = Interlocked.CompareExchange(
                         ref pendingRead,
@@ -449,15 +449,15 @@ namespace System.Net
                 cancellationToken.ThrowIfCancellationRequested();
 
                 /*
-                 * We may have awaited on the 'readTcs', so check
-                 * for eof again as ReadAsync() may have set it.
-                 */
+                * We may have awaited on the 'readTcs', so check
+                * for eof again as ReadAsync() may have set it.
+                */
                 if (read_eof || bufferedEntireContent)
                     return;
                 /*
-                 * Simplify: if we're resending on a new connection,
-                 * then we can simply close the connection here.
-                 */
+                * Simplify: if we're resending on a new connection,
+                * then we can simply close the connection here.
+                */
                 if (resending && !KeepAlive)
                 {
                     Close();

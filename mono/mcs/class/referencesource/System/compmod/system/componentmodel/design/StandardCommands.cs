@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel.Design
 {
     using System;
@@ -50,7 +50,8 @@ namespace System.ComponentModel.Design
         private static readonly Guid standardCommandSet = ShellGuids.VSStandardCommandSet97;
 
         /// <devdoc>
-        ///     This guid corresponds to the Microsoft .NET Framework command set.  This is used for Verbs.  While these are not
+        ///     This guid corresponds to the Microsoft .NET Framework command set.  This is used for Verbs.
+        // While these are not
         ///     "standard" to VS and Office, they are to the Microsoft .NET Framework.
         /// </devdoc>
         private static readonly Guid ndpCommandSet = new Guid(

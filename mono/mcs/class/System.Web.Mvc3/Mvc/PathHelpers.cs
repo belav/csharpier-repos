@@ -16,7 +16,8 @@
                 return contentPath;
             }
 
-            // many of the methods we call internally can't handle query strings properly, so just strip it out for
+            // many of the methods we call internally can't handle query strings properly, so just strip it out
+            // for
             // the time being
             string query;
             contentPath = StripQuery(contentPath, out query);
@@ -48,14 +49,16 @@
                 return GenerateClientUrlInternal(httpContext, modifiedAbsoluteContentPath);
             }
 
-            // we only want to manipulate the path if URL rewriting is active for this request, else we risk breaking the generated URL
+            // we only want to manipulate the path if URL rewriting is active for this request, else we risk
+            // breaking the generated URL
             bool wasRequestRewritten = _urlRewriterHelper.WasRequestRewritten(httpContext);
             if (!wasRequestRewritten)
             {
                 return contentPath;
             }
 
-            // Since the rawUrl represents what the user sees in his browser, it is what we want to use as the base
+            // Since the rawUrl represents what the user sees in his browser, it is what we want to use as the
+            // base
             // of our absolute paths. For example, consider mysite.example.com/foo, which is internally
             // rewritten to content.example.com/mysite/foo. When we want to generate a link to ~/bar, we want to
             // base it from / instead of /foo, otherwise the user ends up seeing mysite.example.com/foo/bar,
@@ -81,7 +84,8 @@
             string relativeUrl = VirtualPathUtility.MakeRelative(fromPath, toPath);
             if (String.IsNullOrEmpty(relativeUrl) || relativeUrl[0] == '?')
             {
-                // Sometimes VirtualPathUtility.MakeRelative() will return an empty string when it meant to return '.',
+                // Sometimes VirtualPathUtility.MakeRelative() will return an empty string when it meant to return
+                // '.',
                 // but links to {empty string} are browser dependent. We replace it with an explicit path to force
                 // consistency across browsers.
                 relativeUrl = "./" + relativeUrl;

@@ -19,7 +19,8 @@ namespace System.Web.UI
     // Caches Assembly APIs to improve performance
     internal static class AssemblyCache
     {
-        // PERF: Cache reference to System.Web.Extensions assembly. Use ScriptManager since it's guaranteed to be in S.W.E
+        // PERF: Cache reference to System.Web.Extensions assembly. Use ScriptManager since it's guaranteed
+        // to be in S.W.E
         public static readonly Assembly SystemWebExtensions = typeof(ScriptManager).Assembly;
         public static readonly Assembly SystemWeb = typeof(Page).Assembly;
 
@@ -33,7 +34,8 @@ namespace System.Web.UI
         // internal so it can be manipulated by the unit test suite
         internal static readonly Hashtable _versionCache = Hashtable.Synchronized(new Hashtable());
 
-        // Maps an assembly to its ajax framework assembly attribute. If it doesn't have one, it maps it to a null value
+        // Maps an assembly to its ajax framework assembly attribute. If it doesn't have one, it maps it to
+        // a null value
         private static readonly ConcurrentDictionary<
             Assembly,
             AjaxFrameworkAssemblyAttribute

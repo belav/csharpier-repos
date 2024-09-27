@@ -72,7 +72,8 @@ namespace System
             return (int)_value->HashCode;
         }
 
-        // Caution: You cannot safely compare RawValue's as RH does NOT unify EETypes. Use the == or Equals() methods exposed by EETypePtr itself.
+        // Caution: You cannot safely compare RawValue's as RH does NOT unify EETypes. Use the == or
+        // Equals() methods exposed by EETypePtr itself.
         internal IntPtr RawValue
         {
             get { return (IntPtr)_value; }
@@ -129,7 +130,8 @@ namespace System
             get { return _value->IsEnum; }
         }
 
-        // Gets a value indicating whether this is a generic type definition (an uninstantiated generic type).
+        // Gets a value indicating whether this is a generic type definition (an uninstantiated generic
+        // type).
         internal bool IsGenericTypeDefinition
         {
             get { return _value->IsGenericTypeDefinition; }

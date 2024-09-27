@@ -7,7 +7,8 @@ using System.Diagnostics;
 namespace Microsoft.AspNetCore.OutputCaching;
 
 // this is effectively a cut-down re-implementation of ArrayBufferWriter
-// from https://github.com/dotnet/runtime/blob/6cd9bf1937c3b4d2f7304a6c534aacde58a202b6/src/libraries/Common/src/System/Buffers/ArrayBufferWriter.cs
+// from
+// https://github.com/dotnet/runtime/blob/6cd9bf1937c3b4d2f7304a6c534aacde58a202b6/src/libraries/Common/src/System/Buffers/ArrayBufferWriter.cs
 // except it uses the array pool for allocations
 internal sealed class RecyclableArrayBufferWriter<T> : IBufferWriter<T>, IDisposable
 {

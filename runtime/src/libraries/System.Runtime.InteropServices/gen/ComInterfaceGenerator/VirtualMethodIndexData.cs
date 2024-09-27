@@ -6,8 +6,10 @@ using Microsoft.CodeAnalysis;
 namespace Microsoft.Interop
 {
     /// <summary>
-    /// Contains the data related to a VirtualMethodIndexAttribute, without references to Roslyn symbols.
-    /// See <seealso cref="VirtualMethodIndexCompilationData"/> for a type with a reference to the StringMarshallingCustomType
+    /// Contains the data related to a VirtualMethodIndexAttribute, without references to Roslyn
+    // symbols.
+    /// See <seealso cref="VirtualMethodIndexCompilationData"/> for a type with a reference to the
+    // StringMarshallingCustomType
     /// </summary>
     internal sealed record VirtualMethodIndexData(
         int Index,
@@ -36,7 +38,8 @@ namespace Microsoft.Interop
 
     /// <summary>
     /// Contains the data related to a VirtualMethodIndexAttribute, with references to Roslyn symbols.
-    /// Use <seealso cref="VirtualMethodIndexData"/> instead when using for incremental compilation state to avoid keeping a compilation alive
+    /// Use <seealso cref="VirtualMethodIndexData"/> instead when using for incremental compilation
+    // state to avoid keeping a compilation alive
     /// </summary>
     internal sealed record VirtualMethodIndexCompilationData(int Index)
         : InteropAttributeCompilationData

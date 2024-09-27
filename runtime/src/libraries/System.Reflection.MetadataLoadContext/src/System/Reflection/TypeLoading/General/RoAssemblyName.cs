@@ -12,10 +12,12 @@ namespace System.Reflection.TypeLoading
     //  - Immutable, unlike the public AssemblyName
     //  - Has a useful Equals() override, unlike the public AssemblyName.
     //  - Implements IEquatable<> so dictionaries avoid the casting Equals()
-    //  - Restricts itself to being an assembly name. Not an assembly name plus all kind of random info that someone
+    //  - Restricts itself to being an assembly name. Not an assembly name plus all kind of random info
+    // that someone
     //    found convenient to thumbtack onto it.
     //
-    // We use this as our internal interchange type and only convert to and from the public AssemblyName class at api boundaries.
+    // We use this as our internal interchange type and only convert to and from the public AssemblyName
+    // class at api boundaries.
     //
 
     internal sealed class RoAssemblyName : IEquatable<RoAssemblyName>
@@ -52,8 +54,10 @@ namespace System.Reflection.TypeLoading
 
         public string FullName => ToAssemblyName().FullName;
 
-        // Equality - this compares every bit of data in the RuntimeAssemblyName which is acceptable for use as keys in a cache
-        // where semantic duplication is permissible. This method is *not* meant to define ref->def binding rules or
+        // Equality - this compares every bit of data in the RuntimeAssemblyName which is acceptable for use
+        // as keys in a cache
+        // where semantic duplication is permissible. This method is *not* meant to define ref->def binding
+        // rules or
         // assembly binding unification rules.
         public bool Equals(RoAssemblyName? other)
         {
@@ -89,7 +93,8 @@ namespace System.Reflection.TypeLoading
                 Flags = Flags,
             };
 
-            // We must not hand out our own copy of the PKT to AssemblyName as AssemblyName is amazingly trusting and gives untrusted callers
+            // We must not hand out our own copy of the PKT to AssemblyName as AssemblyName is amazingly
+            // trusting and gives untrusted callers
             // full freedom to scribble on its PKT array. (As do we but we only have trusted callers!)
             an.SetPublicKeyToken(PublicKeyToken.CloneArray());
             return an;

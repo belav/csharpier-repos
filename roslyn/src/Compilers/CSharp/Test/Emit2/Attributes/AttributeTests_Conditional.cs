@@ -198,15 +198,18 @@ public class Test
 
             foreach (var attributes in attributesArrayBuilder)
             {
-                // PreservedAppliedAttribute and OmittedAppliedAttribute have applied conditional attributes, such that
+                // PreservedAppliedAttribute and OmittedAppliedAttribute have applied conditional attributes, such
+                // that
                 // (a) PreservedAppliedAttribute is conditionally applied to symbols
                 // (b) OmittedAppliedAttribute is conditionally NOT applied to symbols
 
-                // PreservedInheritedAttribute and OmittedInheritedAttribute have inherited conditional attributes, such that
+                // PreservedInheritedAttribute and OmittedInheritedAttribute have inherited conditional attributes,
+                // such that
                 // (a) PreservedInheritedAttribute is conditionally applied to symbols
                 // (b) OmittedInheritedAttribute is conditionally NOT applied to symbols
 
-                // PreservedMultipleAttribute and OmittedMultipleAttribute have multiple applied/inherited conditional attributes, such that
+                // PreservedMultipleAttribute and OmittedMultipleAttribute have multiple applied/inherited
+                // conditional attributes, such that
                 // (a) PreservedMultipleAttribute is conditionally applied to symbols
                 // (b) OmittedMultipleAttribute is conditionally NOT applied to symbols
 
@@ -232,7 +235,8 @@ public class Test
                 }
                 else
                 {
-                    // Only PreservedAppliedAttribute, PreservedInheritedAttribute, PreservedMultipleAttribute should be emitted in metadata
+                    // Only PreservedAppliedAttribute, PreservedInheritedAttribute, PreservedMultipleAttribute should be
+                    // emitted in metadata
                     AssertEx.SetEqual(
                         new[]
                         {
@@ -260,7 +264,8 @@ public class Test
                 expectedOutput: ""
             );
 
-            // Scenario to test Conditional directive stack creation during SyntaxTree.Create, see Devdiv Bug #13846 for details.
+            // Scenario to test Conditional directive stack creation during SyntaxTree.Create, see Devdiv Bug
+            // #13846 for details.
             CompilationUnitSyntax root = SyntaxFactory.ParseCompilationUnit(testSource);
             var syntaxTree = SyntaxFactory.SyntaxTree(root);
             var compilation = CreateCompilation(syntaxTree, options: TestOptions.ReleaseExe);
@@ -511,7 +516,8 @@ Z.PreservedCalls_MultipleConditional_Method";
                 expectedOutput: s_commonExpectedOutput_ConditionalMethodsTest
             );
 
-            // Scenario to test Conditional directive stack creation during SyntaxTree.Create, see Devdiv Bug #13846 for details.
+            // Scenario to test Conditional directive stack creation during SyntaxTree.Create, see Devdiv Bug
+            // #13846 for details.
             CompilationUnitSyntax root = SyntaxFactory.ParseCompilationUnit(testSource);
             var syntaxTree = SyntaxFactory.SyntaxTree(root);
             var compilation = CreateCompilation(syntaxTree, options: TestOptions.ReleaseExe);
@@ -664,7 +670,8 @@ class T5
 "
             );
             compilation.VerifyDiagnostics(
-                //  (27,24): error CS1618: Cannot create delegate with 'T1.Conditional()' because it has a Conditional attribute
+                //  (27,24): error CS1618: Cannot create delegate with 'T1.Conditional()' because it has a
+                // Conditional attribute
                 //         t1.Conditional
                 Diagnostic(ErrorCode.ERR_DelegateOnConditional, "t1.Conditional")
                     .WithArguments("T1.Conditional()")
@@ -759,7 +766,8 @@ class Bar
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (12,33): error CS0428: Cannot convert method group 'M' to non-delegate type 'string'. Did you intend to invoke the method?
+                    // (12,33): error CS0428: Cannot convert method group 'M' to non-delegate type 'string'. Did you
+                    // intend to invoke the method?
                     //     public const string M = Bar.M;
                     Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "M").WithArguments("M", "string"),
                     // (7,18): error CS1955: Non-invocable member 'Goo.M' cannot be used like a method.
@@ -770,10 +778,12 @@ class Bar
                     // [Conditional(Bar.M)]
                     Diagnostic(ErrorCode.ERR_BadArgType, "Bar.M")
                         .WithArguments("1", "method group", "string"),
-                    // (9,14): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (9,14): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     // [Conditional(Bar.M())]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Bar.M()"),
-                    // (6,14): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (6,14): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     // [Conditional(Goo.M)]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Goo.M")
                 );

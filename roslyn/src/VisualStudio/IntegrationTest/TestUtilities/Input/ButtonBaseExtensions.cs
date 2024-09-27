@@ -28,7 +28,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
                 null
             );
             s_executeCoreMethod = methodInfo;
-            //s_executeCore = (Action<RoutedCommand, object, IInputElement, bool>)Delegate.CreateDelegate(typeof(Action<RoutedCommand, object, IInputElement, bool>), firstArgument: null, methodInfo);
+            //s_executeCore = (Action<RoutedCommand, object, IInputElement,
+            // bool>)Delegate.CreateDelegate(typeof(Action<RoutedCommand, object, IInputElement, bool>),
+            // firstArgument: null, methodInfo);
         }
 
         public static async Task<bool> SimulateClickAsync(

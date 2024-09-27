@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             );
 
             /// <summary>
-            /// among variables that will be used as parameters at the extracted method, check whether one of the parameter can be used as return
+            /// among variables that will be used as parameters at the extracted method, check whether one of
+            // the parameter can be used as return
             /// </summary>
             private int GetIndexOfVariableInfoToUseAsReturnValue(IList<VariableInfo> variableInfo)
             {
@@ -146,7 +147,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             );
 
             /// <summary>
-            /// check whether the selection is at the placed where read-only field is allowed to be extracted out
+            /// check whether the selection is at the placed where read-only field is allowed to be extracted
+            // out
             /// </summary>
             /// <returns></returns>
             protected abstract bool ReadOnlyFieldAllowed();
@@ -200,10 +202,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     )
                 );
 
-                // Checks to see if selection includes a local function call + if the given local function declaration is not included in the selection.
+                // Checks to see if selection includes a local function call + if the given local function
+                // declaration is not included in the selection.
                 var containsAnyLocalFunctionCallNotWithinSpan =
                     localFunctionCallsNotWithinSpan.Any();
-                // Checks to see if selection includes a non-static local function call + if the given local function declaration is not included in the selection.
+                // Checks to see if selection includes a non-static local function call + if the given local
+                // function declaration is not included in the selection.
                 var containsNonStaticLocalFunctionCallNotWithinSpan =
                     containsAnyLocalFunctionCallNotWithinSpan
                     && localFunctionCallsNotWithinSpan.Where(s => !s.IsStatic).Any();
@@ -672,23 +676,28 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     }
 
                     // make sure readoutside is true when dataflowout is true (bug #3790)
-                    // when a variable is only used inside of loop, a situation where dataflowout == true and readOutside == false
-                    // can happen. but for extract method's point of view, this is not an information that would affect output.
+                    // when a variable is only used inside of loop, a situation where dataflowout == true and
+                    // readOutside == false
+                    // can happen. but for extract method's point of view, this is not an information that would affect
+                    // output.
                     // so, here we adjust flags to follow predefined assumption.
                     readOutside = readOutside || dataFlowOut;
 
-                    // make sure data flow out is true when declared inside/written inside/read outside/not written outside are true (bug #6277)
+                    // make sure data flow out is true when declared inside/written inside/read outside/not written
+                    // outside are true (bug #6277)
                     dataFlowOut =
                         dataFlowOut
                         || (variableDeclared && writtenInside && readOutside && !writtenOutside);
 
-                    // variable that is declared inside but never referenced outside. just ignore it and move to next one.
+                    // variable that is declared inside but never referenced outside. just ignore it and move to next
+                    // one.
                     if (variableDeclared && !dataFlowOut && !readOutside && !writtenOutside)
                     {
                         continue;
                     }
 
-                    // parameter defined inside of the selection (such as lambda parameter) will be ignored (bug # 10964)
+                    // parameter defined inside of the selection (such as lambda parameter) will be ignored (bug #
+                    // 10964)
                     if (symbol is IParameterSymbol && variableDeclared)
                     {
                         continue;
@@ -855,7 +864,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 // something is written to or not. but not semantic.
                 // we probably need to move the API to syntaxFact service not semanticFact.
                 //
-                // if one wants to get result that also considers semantic, he should use data control flow analysis API.
+                // if one wants to get result that also considers semantic, he should use data control flow analysis
+                // API.
                 var semanticFacts =
                     _semanticDocument.Document.Project.Services.GetRequiredService<ISemanticFactsService>();
                 return tokens.Any(t =>

@@ -58,16 +58,16 @@ namespace MonoTests.System.ServiceModel.Syndication
             new Rss20FeedFormatter((Type)null);
         }
 
-        /*
-        [Test]
-        public void FeedType ()
-        {
-            Rss20FeedFormatter f = new Rss20FeedFormatter ();
-            Assert.IsNull (f.FeedType, "#1");
-            f = new Rss20FeedFormatter (new SyndicationFeed ());
-            Assert.IsNull (f.FeedType, "#2");
-        }
-        */
+/*
+[Test]
+public void FeedType ()
+{
+Rss20FeedFormatter f = new Rss20FeedFormatter ();
+Assert.IsNull (f.FeedType, "#1");
+f = new Rss20FeedFormatter (new SyndicationFeed ());
+Assert.IsNull (f.FeedType, "#2");
+}
+*/
 
         [Test]
         public void Version()

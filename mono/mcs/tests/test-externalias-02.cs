@@ -1,4 +1,5 @@
-// Compiler options: -r:MyAssembly01=test-externalias-00-lib.dll -r:MyAssembly02=test-externalias-01-lib.dll
+// Compiler options: -r:MyAssembly01=test-externalias-00-lib.dll
+// -r:MyAssembly02=test-externalias-01-lib.dll
 
 extern alias MyAssembly01;
 extern alias MyAssembly02;

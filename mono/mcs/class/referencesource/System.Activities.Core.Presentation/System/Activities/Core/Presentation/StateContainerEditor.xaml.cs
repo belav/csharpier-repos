@@ -48,13 +48,15 @@ namespace System.Activities.Core.Presentation
         // shapeLocations is useful to avoid pasting on existing shapes.
         HashSet<Point> shapeLocations = null;
 
-        // To keep track of transition collections that the outmost editor listens to the CollectionChanged events.
+        // To keep track of transition collections that the outmost editor listens to the CollectionChanged
+        // events.
         HashSet<ModelItem> listenedTransitionCollections;
 
         // Flag whether the view state change has already been committed in the UI.
         bool internalViewStateChange = false;
 
-        // activeSrcConnectionPoint is required for connector creation gesture to store the source of the link.
+        // activeSrcConnectionPoint is required for connector creation gesture to store the source of the
+        // link.
         ConnectionPoint activeSrcConnectionPoint;
 
         ConnectionPoint activeDestConnectionPointForAutoSplit;
@@ -73,7 +75,8 @@ namespace System.Activities.Core.Presentation
         // Used for connector creation
         UIElement lastConnectionPointMouseUpElement = null;
 
-        // Only used by the outmost editor to keep track of transitions added/removed when editing scope completes
+        // Only used by the outmost editor to keep track of transitions added/removed when editing scope
+        // completes
         List<ModelItem> transitionModelItemsAdded;
         List<ModelItem> transitionModelItemsRemoved;
 
@@ -376,7 +379,8 @@ namespace System.Activities.Core.Presentation
 
         void Populate()
         {
-            // Keep track of the outmost editor, which may not be accessible by traversing the visual tree when the designer is deleted.
+            // Keep track of the outmost editor, which may not be accessible by traversing the visual tree when
+            // the designer is deleted.
             this.stateMachineContainerEditor = this.GetStateMachineContainerEditor();
 
             this.panel.LocationChanged += new LocationChangedEventHandler(
@@ -624,12 +628,14 @@ namespace System.Activities.Core.Presentation
 
                 if (srcLocation.X > destLocation.X + destSize.Width)
                 {
-                    // if the state is located at the west of the start node, should connect to the right side of initial state.
+                    // if the state is located at the west of the start node, should connect to the right side of
+                    // initial state.
                     destConnectorEdge = EdgeLocation.Right;
                 }
                 else if (srcLocation.X + srcSize.Width < destLocation.X)
                 {
-                    // if the state is located at the east of the start node, should connect to the left side of initial state.
+                    // if the state is located at the east of the start node, should connect to the left side of initial
+                    // state.
                     destConnectorEdge = EdgeLocation.Left;
                 }
 
@@ -798,9 +804,11 @@ namespace System.Activities.Core.Presentation
                 connectorsToDelete.UnionWith(GetAttachedConnectors(designer));
             }
 
-            // Remove any connector visuals attached to this shape. This is required for the scenarios as follows:
+            // Remove any connector visuals attached to this shape. This is required for the scenarios as
+            // follows:
             // Copy and paste two connected States into StateMachine and undo the paste.
-            // The Transition is not removed as a model change. Hence the connector visual will remain dangling on the designer.
+            // The Transition is not removed as a model change. Hence the connector visual will remain dangling
+            // on the designer.
             foreach (Connector connector in connectorsToDelete)
             {
                 this.Remove(connector);
@@ -959,7 +967,8 @@ namespace System.Activities.Core.Presentation
         private void PopulateVirtualizingContainer(ModelItem item)
         {
             // For a VirtualizedContainer ModelItem, if it is newly created, its View is null.
-            // Otherwise its View is still the old view which does not belong to the current stateContainerEditor.
+            // Otherwise its View is still the old view which does not belong to the current
+            // stateContainerEditor.
             if (
                 item != null
                 && (
@@ -1253,7 +1262,8 @@ namespace System.Activities.Core.Presentation
             return points;
         }
 
-        // Create a connector by view state of the connector model item, and if failed, just create a connector using the connection points
+        // Create a connector by view state of the connector model item, and if failed, just create a
+        // connector using the connection points
         // of the source and destination designers. Then add the connector created to the free form panel.
         void AddConnector(
             UIElement sourceDesigner,
@@ -1264,7 +1274,8 @@ namespace System.Activities.Core.Presentation
         )
         {
             // Check whether connector already exists.
-            // If users programmatically add state with transition to the stateMachine, AddConnector will be called twice for one connectorModelItem.
+            // If users programmatically add state with transition to the stateMachine, AddConnector will be
+            // called twice for one connectorModelItem.
             if (GetConnectorInStateMachine(connectorModelItem) != null)
             {
                 return;
@@ -1761,7 +1772,8 @@ namespace System.Activities.Core.Presentation
 
             if (view != null)
             {
-                // Such size changed events are a result of changes already committed in the UI. Hence we do not want to react to such view state changes.
+                // Such size changed events are a result of changes already committed in the UI. Hence we do not
+                // want to react to such view state changes.
                 // Using internalViewStateChange flag for that purpose.
                 this.internalViewStateChange = true;
                 ModelItem storageModelItem = view.ModelItem;
@@ -1997,7 +2009,8 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                //This will cause the FreeFormPanel to handle the event and is useful while moving a connector end point.
+                //This will cause the FreeFormPanel to handle the event and is useful while moving a connector end
+                // point.
                 this.lastConnectionPointMouseUpElement = dest;
                 dest.RaiseEvent(e);
             }
@@ -2017,7 +2030,8 @@ namespace System.Activities.Core.Presentation
             Connector movedConnector = sender as Connector;
             if (movedConnector != null)
             {
-                //ViewState is undoable only when a user gesture moves a connector. If the FreeFormPanel routes a connector,
+                //ViewState is undoable only when a user gesture moves a connector. If the FreeFormPanel routes a
+                // connector,
                 //the change is not undoable.
                 bool isUndoableViewState = false;
                 ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
@@ -2214,7 +2228,8 @@ namespace System.Activities.Core.Presentation
         }
 
         // This is to keep this.selectedConnector up to date.
-        // Cases included: 1. create a connector, select it and undo, 2. move a connector from one shape to another.
+        // Cases included: 1. create a connector, select it and undo, 2. move a connector from one shape to
+        // another.
         void OnFreeFormPanelLayoutUpdated(object sender, EventArgs e)
         {
             if (
@@ -2506,7 +2521,8 @@ namespace System.Activities.Core.Presentation
             );
         }
 
-        // Returns the last dropped item - used for auto-connect and auto-split where only one item is allowed
+        // Returns the last dropped item - used for auto-connect and auto-split where only one item is
+        // allowed
         ModelItem DoStateContainerGridDrop(
             DragEventArgs e,
             AutoConnectDirections autoConnectDirection,
@@ -2516,7 +2532,8 @@ namespace System.Activities.Core.Presentation
             ModelItem droppedModelItem = null;
             e.Effects = DragDropEffects.None;
             IEnumerable<object> droppedObjects = DragDropHelper.GetDroppedObjects(this, e, Context);
-            // Marking the event as being handled. In whichever case we want to route the event, it will be unmarked explicitly.
+            // Marking the event as being handled. In whichever case we want to route the event, it will be
+            // unmarked explicitly.
             e.Handled = true;
             List<ModelItem> modelItemsToSelect = new List<ModelItem>();
 
@@ -2791,7 +2808,8 @@ namespace System.Activities.Core.Presentation
                         && StateContainerEditor.AreInSameStateMachine(modelItem, this.ModelItem)
                     )
                     {
-                        // When FinalState has been dropped into a StateMachine, it becomes a State instead. So ignore FinalState type.
+                        // When FinalState has been dropped into a StateMachine, it becomes a State instead. So ignore
+                        // FinalState type.
                         // State within the same StateMachine allow to drop.
                     }
                     else
@@ -3177,7 +3195,8 @@ namespace System.Activities.Core.Presentation
                     ModelItem sourceModelItem = TryGetModelItemFromView(sourceElement);
                     Fx.Assert(sourceModelItem != null, "sourceModelItem");
 
-                    // add a custom change inside a new editing scope since current editing scope an immediate editing scope
+                    // add a custom change inside a new editing scope since current editing scope an immediate editing
+                    // scope
                     using (
                         EditingScope es = (EditingScope)
                             this.ModelItem.BeginEdit(SR.AutoConnect, false)
@@ -3580,10 +3599,13 @@ namespace System.Activities.Core.Presentation
                 }
                 if (autoSplit)
                 {
-                    // Auto-split generates 4 changes: 1) drop state, 2) remove the old transition, 3) create a transition from the source state
+                    // Auto-split generates 4 changes: 1) drop state, 2) remove the old transition, 3) create a
+                    // transition from the source state
                     // to the dropped state, and 4) create a transition from the dropped state to the destination state.
-                    // Step 1 may result in creating the visual of all outgoing transition from the dropped state. Step 4) also creates the visual
-                    // of the new transition from the dropped state. So the visual of the transition will be created twice. To solve that problem,
+                    // Step 1 may result in creating the visual of all outgoing transition from the dropped state. Step
+                    // 4) also creates the visual
+                    // of the new transition from the dropped state. So the visual of the transition will be created
+                    // twice. To solve that problem,
                     // we need to suppress adding connector when adding state visual (in the UI reaction for step 1).
                     // And to support redo, we must place the suppression in the undo stack.
                     this.Context.Services.GetService<ModelTreeManager>()

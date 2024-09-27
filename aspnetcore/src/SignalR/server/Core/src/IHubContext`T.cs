@@ -11,12 +11,14 @@ public interface IHubContext<THub, T>
     where T : class
 {
     /// <summary>
-    /// Gets a <see cref="IHubClients{T}"/> that can be used to invoke methods on clients connected to the hub.
+    /// Gets a <see cref="IHubClients{T}"/> that can be used to invoke methods on clients connected to
+    // the hub.
     /// </summary>
     IHubClients<T> Clients { get; }
 
     /// <summary>
-    /// Gets a <see cref="IGroupManager"/> that can be used to add and remove connections to named groups.
+    /// Gets a <see cref="IGroupManager"/> that can be used to add and remove connections to named
+    // groups.
     /// </summary>
     IGroupManager Groups { get; }
 }

@@ -16,29 +16,30 @@ using TypeNameFormatter;
 
 namespace Moq
 {
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-        internal sealed class ActionObserver : ExpressionReconstructor
-    After:
-        sealed class ActionObserver : ExpressionReconstructor
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+internal sealed class ActionObserver : ExpressionReconstructor
+After:
+sealed class ActionObserver : ExpressionReconstructor
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-        internal sealed class ActionObserver : ExpressionReconstructor
-    After:
-        sealed class ActionObserver : ExpressionReconstructor
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+internal sealed class ActionObserver : ExpressionReconstructor
+After:
+sealed class ActionObserver : ExpressionReconstructor
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-        internal sealed class ActionObserver : ExpressionReconstructor
-    After:
-        sealed class ActionObserver : ExpressionReconstructor
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+internal sealed class ActionObserver : ExpressionReconstructor
+After:
+sealed class ActionObserver : ExpressionReconstructor
+*/
     /// <summary>
     ///   <see cref="ActionObserver"/> is a kind of <see cref="ExpressionReconstructor"/> that works by
-    ///   applying a <see cref="Action{T}"/> delegate to a light-weight proxy that records the invocation
+    ///   applying a <see cref="Action{T}"/> delegate to a light-weight proxy that records the
+    // invocation
     ///   happening to it, and auto-generates the same kind of recording proxy for its return value.
     ///   That way, a chain of invocation records is generated from which a LINQ expression tree can be
     ///   reconstructed.
@@ -275,7 +276,8 @@ namespace Moq
                     {
                         expressions[i] = Expression.Convert(argument, parameterType);
                     }
-                    // boxing of value types (i.e. where a value-typed value is assigned to a reference-typed parameter):
+                    // boxing of value types (i.e. where a value-typed value is assigned to a reference-typed
+                    // parameter):
                     else if (argument.Type.IsValueType && !parameterType.IsValueType)
                     {
                         expressions[i] = Expression.Convert(argument, parameterType);
@@ -292,30 +294,37 @@ namespace Moq
 
                 return expressions;
 
-                /* Unmerged change from project 'Moq(netstandard2.0)'
-                Before:
-                        private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
-                After:
-                        static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
-                */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out
+Recorder recorder)
+After:
+static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out
+Recorder recorder)
+*/
 
-                /* Unmerged change from project 'Moq(netstandard2.1)'
-                Before:
-                        private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
-                After:
-                        static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
-                */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out
+Recorder recorder)
+After:
+static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out
+Recorder recorder)
+*/
 
-                /* Unmerged change from project 'Moq(net6.0)'
-                Before:
-                        private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
-                After:
-                        static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
-                */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out
+Recorder recorder)
+After:
+static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out
+Recorder recorder)
+*/
             }
         }
 
-        // Creates a proxy (way more light-weight than a `Mock<T>`!) with an invocation `Recorder` attached to it.
+        // Creates a proxy (way more light-weight than a `Mock<T>`!) with an invocation `Recorder` attached
+        // to it.
         static IProxy CreateProxy(
             Type type,
             object[] ctorArgs,
@@ -332,75 +341,75 @@ namespace Moq
                     ctorArgs ?? new object[0]
                 );
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private sealed class Recorder : IInterceptor
-            After:
-                    sealed class Recorder : IInterceptor
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private sealed class Recorder : IInterceptor
+After:
+sealed class Recorder : IInterceptor
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private sealed class Recorder : IInterceptor
-            After:
-                    sealed class Recorder : IInterceptor
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private sealed class Recorder : IInterceptor
+After:
+sealed class Recorder : IInterceptor
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private sealed class Recorder : IInterceptor
-            After:
-                    sealed class Recorder : IInterceptor
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private sealed class Recorder : IInterceptor
+After:
+sealed class Recorder : IInterceptor
+*/
         }
 
         // Records an invocation, mocks return values, and builds a chain to the return value's recorder.
         // This record represents the basis for reconstructing an expression tree.
         sealed class Recorder : IInterceptor
-        /* Unmerged change from project 'Moq(netstandard2.0)'
-        Before:
-                    private readonly MatcherObserver matcherObserver;
-                    private int creationTimestamp;
-                    private Invocation invocation;
-                    private int invocationTimestamp;
-                    private object returnValue;
-        After:
-                    readonly MatcherObserver matcherObserver;
-                    int creationTimestamp;
-                    Invocation invocation;
-                    int invocationTimestamp;
-                    object returnValue;
-        */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private readonly MatcherObserver matcherObserver;
+private int creationTimestamp;
+private Invocation invocation;
+private int invocationTimestamp;
+private object returnValue;
+After:
+readonly MatcherObserver matcherObserver;
+int creationTimestamp;
+Invocation invocation;
+int invocationTimestamp;
+object returnValue;
+*/
 
-        /* Unmerged change from project 'Moq(netstandard2.1)'
-        Before:
-                    private readonly MatcherObserver matcherObserver;
-                    private int creationTimestamp;
-                    private Invocation invocation;
-                    private int invocationTimestamp;
-                    private object returnValue;
-        After:
-                    readonly MatcherObserver matcherObserver;
-                    int creationTimestamp;
-                    Invocation invocation;
-                    int invocationTimestamp;
-                    object returnValue;
-        */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private readonly MatcherObserver matcherObserver;
+private int creationTimestamp;
+private Invocation invocation;
+private int invocationTimestamp;
+private object returnValue;
+After:
+readonly MatcherObserver matcherObserver;
+int creationTimestamp;
+Invocation invocation;
+int invocationTimestamp;
+object returnValue;
+*/
 
-        /* Unmerged change from project 'Moq(net6.0)'
-        Before:
-                    private readonly MatcherObserver matcherObserver;
-                    private int creationTimestamp;
-                    private Invocation invocation;
-                    private int invocationTimestamp;
-                    private object returnValue;
-        After:
-                    readonly MatcherObserver matcherObserver;
-                    int creationTimestamp;
-                    Invocation invocation;
-                    int invocationTimestamp;
-                    object returnValue;
-        */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private readonly MatcherObserver matcherObserver;
+private int creationTimestamp;
+private Invocation invocation;
+private int invocationTimestamp;
+private object returnValue;
+After:
+readonly MatcherObserver matcherObserver;
+int creationTimestamp;
+Invocation invocation;
+int invocationTimestamp;
+object returnValue;
+*/
         {
             readonly MatcherObserver matcherObserver;
             int creationTimestamp;

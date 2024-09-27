@@ -42,8 +42,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 async solution =>
                 {
                     // Explicitly disabling frozen partial on the OOP size.  This flag was passed in, but had no actual
-                    // effect (since OOP didn't support frozen partial semantics initially).  When OOP gained real support
-                    // for frozen-partial, this started breaking inheritance margin.  So, until that is figured out, we just
+                    // effect (since OOP didn't support frozen partial semantics initially).  When OOP gained real
+                    // support
+                    // for frozen-partial, this started breaking inheritance margin.  So, until that is figured out, we
+                    // just
                     // disable this to keep the pre-existing behavior.
                     //
                     // Tracked by https://github.com/dotnet/roslyn/issues/67065.

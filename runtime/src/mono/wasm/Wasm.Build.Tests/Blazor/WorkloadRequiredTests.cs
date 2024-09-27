@@ -15,10 +15,10 @@ namespace Wasm.Build.Tests.Blazor;
 
 public class WorkloadRequiredTests : BlazorWasmTestBase
 {
-    /* Keep in sync with settings in wasm.proj, and WasmApp.Native.targets .
-     * The `triggerValue` here is opposite of the default used when building the runtime pack
-     * (see wasm.proj), and thus requiring a native build
-     */
+/* Keep in sync with settings in wasm.proj, and WasmApp.Native.targets .
+* The `triggerValue` here is opposite of the default used when building the runtime pack
+* (see wasm.proj), and thus requiring a native build
+*/
     public static (string propertyName, bool triggerValue)[] PropertiesWithTriggerValues = new[]
     {
         ("RunAOTCompilation", true),
@@ -174,7 +174,8 @@ public class WorkloadRequiredTests : BlazorWasmTestBase
         {
             Assert.Contains("Could not create es-ES culture", output);
             // For invariant, we get:
-            //    Could not create es-ES culture: Argument_CultureNotSupportedInInvariantMode Arg_ParamName_Name, name
+            //    Could not create es-ES culture: Argument_CultureNotSupportedInInvariantMode
+            // Arg_ParamName_Name, name
             //    Argument_CultureInvalidIdentifier, es-ES
             //  .. which is expected.
             //

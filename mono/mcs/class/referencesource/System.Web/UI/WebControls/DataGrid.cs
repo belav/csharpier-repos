@@ -273,7 +273,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.DataGridColumn'/> controls in the <see cref='System.Web.UI.WebControls.DataGrid'/>. This property is read-only.</para>
+        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.DataGridColumn'/> controls in
+        // the <see cref='System.Web.UI.WebControls.DataGrid'/>. This property is read-only.</para>
         /// </devdoc>
         [
             DefaultValue(null),
@@ -400,7 +401,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.DataGridItem'/> objects representing the individual
+        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.DataGridItem'/> objects
+        // representing the individual
         ///    items within the control.
         ///    This property is read-only.</para>
         /// </devdoc>
@@ -575,7 +577,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the selected item in the <see cref='System.Web.UI.WebControls.DataGrid'/>. This property is read-only.</para>
+        /// <para>Gets the selected item in the <see cref='System.Web.UI.WebControls.DataGrid'/>. This
+        // property is read-only.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -598,7 +601,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets the style properties of the currently selected item. This property is read-only.</para>
+        ///    <para>Gets the style properties of the currently selected item. This property is
+        // read-only.</para>
         /// </devdoc>
         [
             WebCategory("Styles"),
@@ -696,7 +700,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataGrid'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataGrid'/> with a
         /// <see langword='Command'/> property of
         /// <see langword='cancel'/>.</para>
         /// </devdoc>
@@ -708,7 +713,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataGrid'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataGrid'/> with a
         /// <see langword='Command'/> property of <see langword='delete'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.DataGrid_OnDeleteCommand)]
@@ -719,7 +725,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataGrid'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataGrid'/> with a
         /// <see langword='Command'/> property of
         /// <see langword='edit'/>.</para>
         /// </devdoc>
@@ -731,7 +738,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataGrid'/> not covered by
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataGrid'/> not covered by
         /// <see langword='edit'/>, <see langword='cancel'/>, <see langword='delete'/> or
         /// <see langword='update'/>.</para>
         /// </devdoc>
@@ -783,7 +791,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataGrid'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataGrid'/> with a
         /// <see langword='Command'/> property of <see langword='update'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.DataGrid_OnUpdateCommand)]

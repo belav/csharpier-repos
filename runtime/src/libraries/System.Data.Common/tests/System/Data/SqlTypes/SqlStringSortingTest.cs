@@ -157,7 +157,8 @@ namespace System.Data.SqlTypes.Tests
             );
         }
 
-        // Special characters matching test for default option (SqlCompareOptions.IgnoreCase | SqlCompareOptions.IgnoreKanaType | SqlCompareOptions.IgnoreWidth)
+        // Special characters matching test for default option (SqlCompareOptions.IgnoreCase |
+        // SqlCompareOptions.IgnoreKanaType | SqlCompareOptions.IgnoreWidth)
         private static void SqlStringDefaultCompareOptionTest(int localeID)
         {
             SqlString str1;
@@ -165,7 +166,8 @@ namespace System.Data.SqlTypes.Tests
 
             int count = s_specialMatchingString.GetLength(0);
 
-            // Some of Windows versions have a regression, so ignore last entry in the s_specialMatchingString if this is the case.
+            // Some of Windows versions have a regression, so ignore last entry in the s_specialMatchingString
+            // if this is the case.
             if (
                 PlatformDetection.IsWindows10Version1903OrGreater
                 && CultureInfo.InvariantCulture.CompareInfo.Compare(
@@ -186,7 +188,8 @@ namespace System.Data.SqlTypes.Tests
                 str1 = new SqlString(s_specialMatchingString[i, 0], localeID);
                 str2 = new SqlString(s_specialMatchingString[i, 1], localeID);
 
-                // Per default option, each set contains two string which should be matched as equal per default option
+                // Per default option, each set contains two string which should be matched as equal per default
+                // option
                 Assert.True(
                     (bool)(str1 == str2),
                     string.Format(
@@ -342,7 +345,8 @@ namespace System.Data.SqlTypes.Tests
         //      1  : wstr1 > wstr2
         //
         //  Does a memory comparison.
-        //  NOTE: This comparison algorithm is different from BinraySory2. The algorithm is copied fro SqlString implementation
+        //  NOTE: This comparison algorithm is different from BinraySory2. The algorithm is copied fro
+        // SqlString implementation
         private static int CompareBinary(string x, string y)
         {
             byte[] rgDataX = s_unicodeEncoding.GetBytes(x);

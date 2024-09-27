@@ -2,7 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //
-// This is used internally to create best fit behavior as per the original windows best fit behavior.
+// This is used internally to create best fit behavior as per the original windows best fit
+// behavior.
 //
 
 using System;
@@ -175,7 +176,8 @@ namespace System.Text
         // private helper methods
         private char TryBestFit(char cUnknown)
         {
-            // Need to figure out our best fit character, low is beginning of array, high is 1 AFTER end of array
+            // Need to figure out our best fit character, low is beginning of array, high is 1 AFTER end of
+            // array
             int lowBound = 0;
             int highBound = _oFallback.arrayBestFit!.Length;
             int index;

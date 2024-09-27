@@ -410,7 +410,8 @@ namespace System.Web.UI.WebControls
                 : base(owner) { }
 
             /// <devdoc>
-            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
+            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new
+            // control is added
             ///    to the end of the array.</para>
             /// </devdoc>
             public override void Add(Control child)
@@ -428,7 +429,8 @@ namespace System.Web.UI.WebControls
             }
 
             /// <devdoc>
-            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
+            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new
+            // control is added
             ///    to the array at the specified index location.</para>
             /// </devdoc>
             public override void AddAt(int index, Control child)

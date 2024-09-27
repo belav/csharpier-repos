@@ -101,7 +101,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     public async Task DefautCredentials_Success(Version version)
     {
         using var host = await CreateHostAsync();
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         using var client = CreateWinHttpClient(host);
         client.DefaultRequestVersion = version;
 
@@ -163,7 +164,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     public async Task RequestAfterAuth_ReUses1WithPersistence(Version first, Version second)
     {
         using var host = await CreateHostAsync(options => options.PersistNtlmCredentials = true);
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         using var client = CreateWinHttpClient(host);
         client.DefaultRequestVersion = first;
 
@@ -187,7 +189,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     )
     {
         using var host = await CreateHostAsync(options => options.PersistNtlmCredentials = false);
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         using var client = CreateWinHttpClient(host);
         client.DefaultRequestVersion = first;
 
@@ -211,7 +214,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
         using var host = await CreateHostAsync(options =>
             options.PersistNtlmCredentials = persistNtlm
         );
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         using var client = CreateWinHttpClient(host);
         client.DefaultRequestVersion = Http2Version;
 
@@ -239,7 +243,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
         using var host = await CreateHostAsync(options =>
             options.PersistNtlmCredentials = persistNtlm
         );
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         using var client = CreateWinHttpClient(host);
         client.DefaultRequestVersion = Http2Version;
 
@@ -259,7 +264,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     public async Task Unauthorized_401Negotiate(Version version)
     {
         using var host = await CreateHostAsync();
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler
+        // does.
         using var client = CreateWinHttpClient(host);
         client.DefaultRequestVersion = version;
 
@@ -274,7 +280,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     public async Task UnauthorizedAfterAuthenticated_Success(Version version)
     {
         using var host = await CreateHostAsync();
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler
+        // does.
         using var client = CreateWinHttpClient(host);
         client.DefaultRequestVersion = version;
 
@@ -414,7 +421,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
         );
     }
 
-    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.
+    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler
+    // does.
     private static HttpClient CreateWinHttpClient(IHost host)
     {
         var address = host
@@ -435,7 +443,8 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
         };
     }
 
-    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.
+    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler
+    // does.
     private static HttpClient CreateSocketHttpClient(IHost host, bool useDefaultCredentials = false)
     {
         var address = host

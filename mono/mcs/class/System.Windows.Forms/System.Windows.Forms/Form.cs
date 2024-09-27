@@ -230,8 +230,8 @@ namespace System.Windows.Forms
             if (shown_raised)
             {
                 /* we need to call .SetWindowStyle here instead of just .Text
-                   because the presence/absence of Text (== "" or not) can cause
-                   other window style things to appear/disappear */
+                because the presence/absence of Text (== "" or not) can cause
+                other window style things to appear/disappear */
                 XplatUI.SetWindowStyle(window.Handle, CreateParams);
             }
 
@@ -643,9 +643,9 @@ namespace System.Windows.Forms
             get
             {
                 /* we don't let parents override our
-                 default background color for forms.
-                 this fixes the default color for mdi
-                 children. */
+                default background color for forms.
+                this fixes the default color for mdi
+                children. */
                 if (background_color.IsEmpty)
                     return DefaultBackColor;
                 else

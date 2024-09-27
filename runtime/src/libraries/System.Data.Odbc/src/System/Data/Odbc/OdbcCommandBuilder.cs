@@ -363,7 +363,8 @@ namespace System.Data.Odbc
                 quoteSuffix = quotePrefix;
             }
 
-            // ignoring the return value because it is acceptable for the quotedString to not be quoted in this context.
+            // ignoring the return value because it is acceptable for the quotedString to not be quoted in this
+            // context.
             string? unquotedIdentifier;
             ADP.RemoveStringQuotes(
                 quotePrefix,

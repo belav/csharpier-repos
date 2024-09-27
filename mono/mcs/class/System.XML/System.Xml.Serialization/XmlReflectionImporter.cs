@@ -84,12 +84,12 @@ namespace System.Xml.Serialization
                 this.attributeOverrides = attributeOverrides;
         }
 
-        /*		void Reset ()
-                {
-                    helper = new ReflectionHelper();
-                    arrayChoiceCount = 1;
-                }
-        */
+/*		void Reset ()
+{
+helper = new ReflectionHelper();
+arrayChoiceCount = 1;
+}
+*/
 
         internal bool AllowPrivateTypes
         {

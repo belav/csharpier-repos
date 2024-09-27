@@ -33,7 +33,8 @@ namespace System.Data.EntityClient
         public EntityParameter() { }
 
         /// <summary>
-        /// Constructs the EntityParameter object with the given parameter name and the type of the parameter
+        /// Constructs the EntityParameter object with the given parameter name and the type of the
+        // parameter
         /// </summary>
         /// <param name="parameterName">The name of the parameter</param>
         /// <param name="dbType">The type of the parameter</param>
@@ -44,7 +45,8 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Constructs the EntityParameter object with the given parameter name, the type of the parameter, and the size of the
+        /// Constructs the EntityParameter object with the given parameter name, the type of the parameter,
+        // and the size of the
         /// parameter
         /// </summary>
         /// <param name="parameterName">The name of the parameter</param>
@@ -58,13 +60,15 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Constructs the EntityParameter object with the given parameter name, the type of the parameter, the size of the
+        /// Constructs the EntityParameter object with the given parameter name, the type of the parameter,
+        // the size of the
         /// parameter, and the name of the source column
         /// </summary>
         /// <param name="parameterName">The name of the parameter</param>
         /// <param name="dbType">The type of the parameter</param>
         /// <param name="size">The size of the parameter</param>
-        /// <param name="sourceColumn">The name of the source column mapped to the data set, used for loading the parameter value</param>
+        /// <param name="sourceColumn">The name of the source column mapped to the data set, used for
+        // loading the parameter value</param>
         public EntityParameter(string parameterName, DbType dbType, int size, string sourceColumn)
         {
             SetParameterNameWithValidation(parameterName, "parameterName");
@@ -74,17 +78,22 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Constructs the EntityParameter object with the given parameter name, the type of the parameter, the size of the
+        /// Constructs the EntityParameter object with the given parameter name, the type of the parameter,
+        // the size of the
         /// parameter, and the name of the source column
         /// </summary>
         /// <param name="parameterName">The name of the parameter</param>
         /// <param name="dbType">The type of the parameter</param>
         /// <param name="size">The size of the parameter</param>
-        /// <param name="direction">The direction of the parameter, whether it's input/output/both/return value</param>
+        /// <param name="direction">The direction of the parameter, whether it's input/output/both/return
+        // value</param>
         /// <param name="isNullable">If the parameter is nullable</param>
-        /// <param name="precision">The floating point precision of the parameter, valid only if the parameter type is a floating point type</param>
-        /// <param name="scale">The scale of the parameter, valid only if the parameter type is a floating point type</param>
-        /// <param name="sourceColumn">The name of the source column mapped to the data set, used for loading the parameter value</param>
+        /// <param name="precision">The floating point precision of the parameter, valid only if the
+        // parameter type is a floating point type</param>
+        /// <param name="scale">The scale of the parameter, valid only if the parameter type is a floating
+        // point type</param>
+        /// <param name="sourceColumn">The name of the source column mapped to the data set, used for
+        // loading the parameter value</param>
         /// <param name="sourceVersion">The data row version to use when loading the parameter value</param>
         /// <param name="value">The value of the parameter</param>
         public EntityParameter(
@@ -152,7 +161,8 @@ namespace System.Data.EntityClient
         {
             get
             {
-                // if the user has not set the dbType but has set the dbType, use the edmType to try to deduce a dbType
+                // if the user has not set the dbType but has set the dbType, use the edmType to try to deduce a
+                // dbType
                 if (!this._dbType.HasValue)
                 {
                     if (this._edmType != null)
@@ -164,7 +174,8 @@ namespace System.Data.EntityClient
                     // member field as that's used to keep track of what the user set explicitly
                     else
                     {
-                        // If we can't deduce the type because there are no values, we still have to return something, just assume it's string type
+                        // If we can't deduce the type because there are no values, we still have to return something, just
+                        // assume it's string type
                         if (_value == null)
                             return DbType.String;
 
@@ -262,9 +273,11 @@ namespace System.Data.EntityClient
             get { return this._value; }
             set
             {
-                // If the user hasn't set the DbType, then we have to figure out if the DbType will change as a result
+                // If the user hasn't set the DbType, then we have to figure out if the DbType will change as a
+                // result
                 // of the change in the value.  What we want to achieve is that changes to the value will not cause
-                // it to be dirty, but changes to the value that causes the apparent DbType to change, then should be
+                // it to be dirty, but changes to the value that causes the apparent DbType to change, then should
+                // be
                 // dirty.
                 if (!this._dbType.HasValue && this._edmType == null)
                 {
@@ -408,7 +421,8 @@ namespace System.Data.EntityClient
         /// Get the type usage for this parameter in model terms.
         /// </summary>
         /// <returns>The type usage for this parameter</returns>
-        //NOTE: Because GetTypeUsage throws CommandValidationExceptions, it should only be called from EntityCommand during command execution
+        //NOTE: Because GetTypeUsage throws CommandValidationExceptions, it should only be called from
+        // EntityCommand during command execution
         internal TypeUsage GetTypeUsage()
         {
             TypeUsage typeUsage;

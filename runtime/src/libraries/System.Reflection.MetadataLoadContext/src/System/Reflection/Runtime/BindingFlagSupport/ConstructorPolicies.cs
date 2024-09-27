@@ -67,7 +67,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
         public sealed override bool OkToIgnoreAmbiguity(ConstructorInfo m1, ConstructorInfo m2)
         {
-            // Constructors are only resolvable using an array of parameter types so this should never be called.
+            // Constructors are only resolvable using an array of parameter types so this should never be
+            // called.
             Debug.Fail("This code path should be unreachable.");
             throw new NotSupportedException();
         }

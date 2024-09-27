@@ -35,11 +35,14 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
         /// <summary>
         /// indicate whether asynchronous listener is enabled or not.
-        /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment variable
+        /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment
+        // variable
         /// and then cache it.
-        /// we read value from environment variable (RoslynWaiterEnabled) because we want team, that doesn't have
+        /// we read value from environment variable (RoslynWaiterEnabled) because we want team, that doesn't
+        // have
         /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well.
-        /// those team can enable this without using <see cref="AsynchronousOperationListenerProvider.Enable(bool)" /> API
+        /// those team can enable this without using <see
+        // cref="AsynchronousOperationListenerProvider.Enable(bool)" /> API
         /// </summary>
         public static bool? s_enabled = null;
 
@@ -51,11 +54,14 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
         /// <summary>
         /// indicate whether <see cref="AsynchronousOperationListener.TrackActiveTokens"/> is enabled or not
-        /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment variable
+        /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment
+        // variable
         /// and then cache it.
-        /// we read value from environment variable (RoslynWaiterDiagnosticTokenEnabled) because we want team, that doesn't have
+        /// we read value from environment variable (RoslynWaiterDiagnosticTokenEnabled) because we want
+        // team, that doesn't have
         /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well.
-        /// those team can enable this without using <see cref="AsynchronousOperationListenerProvider.EnableDiagnosticTokens(bool)" /> API
+        /// those team can enable this without using <see
+        // cref="AsynchronousOperationListenerProvider.EnableDiagnosticTokens(bool)" /> API
         /// </summary>
         private bool? _enableDiagnosticTokens;
 
@@ -269,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                     }
                     else
                     {
-                        // if _enableDiagnosticTokens has never been set, check environment variable to see whether it should be enabled.
+                        // if _enableDiagnosticTokens has never been set, check environment variable to see whether it
+                        // should be enabled.
                         var enabled = Environment.GetEnvironmentVariable(
                             "RoslynWaiterDiagnosticTokenEnabled"
                         );

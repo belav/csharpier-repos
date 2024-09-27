@@ -13,14 +13,17 @@ namespace Internal.Runtime.CompilerServices
 {
     // This structure is used to resolve a instance method given an object instance. To use this type
     // 1) New up an instance using one of the constructors below.
-    // 2) Use the ToIntPtr() method to get the interned instance of this type. This will permanently allocate
-    //    a block of memory that can be used to represent a virtual method resolution. This memory is interned
+    // 2) Use the ToIntPtr() method to get the interned instance of this type. This will permanently
+    // allocate
+    //    a block of memory that can be used to represent a virtual method resolution. This memory is
+    // interned
     //    so that repeated allocation of the same resolver will not leak.
     // 3) Use the ResolveMethod function to do the virtual lookup. This function takes advantage of
     //    a lockless cache so the resolution is very fast for repeated lookups.
     public struct OpenMethodResolver : IEquatable<OpenMethodResolver>
     {
-        // Lazy initialized to point to the type loader method when the first `GVMResolve` resolver is created
+        // Lazy initialized to point to the type loader method when the first `GVMResolve` resolver is
+        // created
         private static unsafe delegate* <object, RuntimeMethodHandle, nint> s_lazyGvmLookupForSlot;
 
         public const short DispatchResolve = 0;

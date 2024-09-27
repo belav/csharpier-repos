@@ -34,8 +34,8 @@ namespace System.Threading
     public sealed class ReaderWriterLock : CriticalFinalizerObject
     {
         /*
-         * Constructor
-         */
+        * Constructor
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         public ReaderWriterLock()
         {
@@ -43,8 +43,8 @@ namespace System.Threading
         }
 
         /*
-         * Destructor
-         */
+        * Destructor
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         ~ReaderWriterLock()
         {
@@ -52,9 +52,9 @@ namespace System.Threading
         }
 
         /*
-         * Property that returns TRUE if the reader lock is held
-         * by the current thread
-         */
+        * Property that returns TRUE if the reader lock is held
+        * by the current thread
+        */
         public bool IsReaderLockHeld
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -63,9 +63,9 @@ namespace System.Threading
         }
 
         /*
-         * Property that returns TRUE if the writer lock is held
-         * by the current thread
-         */
+        * Property that returns TRUE if the writer lock is held
+        * by the current thread
+        */
         public bool IsWriterLockHeld
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -74,10 +74,10 @@ namespace System.Threading
         }
 
         /*
-         * Property that returns the current writer sequence number.
-         * The caller should be a reader or writer for getting
-         * meaningful results
-         */
+        * Property that returns the current writer sequence number.
+        * The caller should be a reader or writer for getting
+        * meaningful results
+        */
         public int WriterSeqNum
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -85,9 +85,9 @@ namespace System.Threading
         }
 
         /*
-         * Acquires reader lock. The thread will block if a different
-         * thread has writer lock.
-         */
+        * Acquires reader lock. The thread will block if a different
+        * thread has writer lock.
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -112,11 +112,11 @@ namespace System.Threading
         }
 
         /*
-         * Acquires writer lock. The thread will block if a different
-         * thread has reader lock. It will dead lock if this thread
-         * has reader lock. Use UpgardeToWriterLock when you are not
-         * sure if the thread has reader lock
-         */
+        * Acquires writer lock. The thread will block if a different
+        * thread has reader lock. It will dead lock if this thread
+        * has reader lock. Use UpgardeToWriterLock when you are not
+        * sure if the thread has reader lock
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -141,8 +141,8 @@ namespace System.Threading
         }
 
         /*
-         * Releases reader lock.
-         */
+        * Releases reader lock.
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -157,8 +157,8 @@ namespace System.Threading
         }
 
         /*
-         * Releases writer lock.
-         */
+        * Releases writer lock.
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -173,10 +173,10 @@ namespace System.Threading
         }
 
         /*
-         * Upgardes the thread to a writer. If the thread has is a
-         * reader, it is possible that the reader lock was
-         * released before writer lock was acquired.
-         */
+        * Upgardes the thread to a writer. If the thread has is a
+        * reader, it is possible that the reader lock was
+        * released before writer lock was acquired.
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         public LockCookie UpgradeToWriterLock(int millisecondsTimeout)
         {
@@ -205,9 +205,9 @@ namespace System.Threading
         }
 
         /*
-         * Restores the lock status of the thread to the one it was
-         * in when it called UpgradeToWriterLock.
-         */
+        * Restores the lock status of the thread to the one it was
+        * in when it called UpgradeToWriterLock.
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -220,9 +220,9 @@ namespace System.Threading
         }
 
         /*
-         * Releases the lock irrespective of the number of times the thread
-         * acquired the lock
-         */
+        * Releases the lock irrespective of the number of times the thread
+        * acquired the lock
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         public LockCookie ReleaseLock()
         {
@@ -237,9 +237,9 @@ namespace System.Threading
         private extern void FCallReleaseLock(ref LockCookie result);
 
         /*
-         * Restores the lock status of the thread to the one it was
-         * in when it called ReleaseLock.
-         */
+        * Restores the lock status of the thread to the one it was
+        * in when it called ReleaseLock.
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -252,9 +252,9 @@ namespace System.Threading
         }
 
         /*
-         * Internal helper that returns TRUE if the reader lock is held
-         * by the current thread
-         */
+        * Internal helper that returns TRUE if the reader lock is held
+        * by the current thread
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -262,9 +262,9 @@ namespace System.Threading
         private extern bool PrivateGetIsReaderLockHeld();
 
         /*
-         * Internal helper that returns TRUE if the writer lock is held
-         * by the current thread
-         */
+        * Internal helper that returns TRUE if the writer lock is held
+        * by the current thread
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -272,20 +272,20 @@ namespace System.Threading
         private extern bool PrivateGetIsWriterLockHeld();
 
         /*
-         * Internal helper that returns the current writer sequence
-         * number. The caller should be a reader or writer for getting
-         * meaningful results
-         */
+        * Internal helper that returns the current writer sequence
+        * number. The caller should be a reader or writer for getting
+        * meaningful results
+        */
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern int PrivateGetWriterSeqNum();
 
         /*
-         * Returns true if there were intermediate writes since the
-         * sequence number was obtained. The caller should be
-         * a reader or writer for getting meaningful results
-         */
+        * Returns true if there were intermediate writes since the
+        * sequence number was obtained. The caller should be
+        * a reader or writer for getting meaningful results
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

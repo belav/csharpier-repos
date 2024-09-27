@@ -281,7 +281,8 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #if HAVE_FAST_REVERSE
-        // faster reverse in .NET Framework with value types - https://github.com/JamesNK/Newtonsoft.Json/issues/1430
+        // faster reverse in .NET Framework with value types -
+        // https://github.com/JamesNK/Newtonsoft.Json/issues/1430
         public static void FastReverse<T>(this List<T> list)
         {
             int i = 0;

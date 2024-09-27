@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Cache class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Cache class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Caching
 {
@@ -60,7 +60,8 @@ namespace System.Web.Caching
     );
 
     /// <devdoc>
-    /// <para> Specifies the relative priority of items stored in the System.Web.Caching.Cache. When the Web
+    /// <para> Specifies the relative priority of items stored in the System.Web.Caching.Cache. When the
+    // Web
     ///    server runs low on memory, the Cache selectively purges items to free system
     ///    memory. Items with higher priorities are less likely to be removed from the
     ///    cache when the server is under load. Web
@@ -86,7 +87,8 @@ namespace System.Web.Caching
 
         /// <devdoc>
         ///    <para> The cache items with this priority level are in
-        ///       the third group to be removed when the server frees system memory by deleting items from the cache. This is the default. </para>
+        ///       the third group to be removed when the server frees system memory by deleting items from
+        // the cache. This is the default. </para>
         /// </devdoc>
         Normal,
 
@@ -121,7 +123,8 @@ namespace System.Web.Caching
     public enum CacheItemRemovedReason
     {
         /// <devdoc>
-        /// <para>The item was removed from the cache by the 'System.Web.Caching.Cache.Remove' method, or by an System.Web.Caching.Cache.Insert method call specifying the same key.</para>
+        /// <para>The item was removed from the cache by the 'System.Web.Caching.Cache.Remove' method, or by
+        // an System.Web.Caching.Cache.Insert method call specifying the same key.</para>
         /// </devdoc>
         Removed = 1,
 
@@ -169,7 +172,8 @@ namespace System.Web.Caching
     ///    <para>Implements the cache for a Web application. There is only one instance of
     ///       this class per application domain, and it remains valid only as long as the
     ///       application domain remains active. Information about an instance of this class
-    ///       is available through the <see langword='Cache'/> property of the System.Web.HttpContext.</para>
+    ///       is available through the <see langword='Cache'/> property of the
+    // System.Web.HttpContext.</para>
     /// </devdoc>
 
     //
@@ -180,7 +184,8 @@ namespace System.Web.Caching
     {
         /// <devdoc>
         ///    <para>Sets the absolute expiration policy to, in essence,
-        ///       never. When set, this field is equal to the the System.DateTime.MaxValue , which is a constant
+        ///       never. When set, this field is equal to the the System.DateTime.MaxValue , which is a
+        // constant
         ///       representing the largest possible <see langword='DateTime'/> value. The maximum date and
         ///       time value is equivilant to "12/31/9999 11:59:59 PM". This field is read-only.</para>
         /// </devdoc>
@@ -188,7 +193,8 @@ namespace System.Web.Caching
 
         /// <devdoc>
         ///    <para>Sets the amount of time for sliding cache expirations to
-        ///       zero. When set, this field is equal to the System.TimeSpan.Zero field, which is a constant value of
+        ///       zero. When set, this field is equal to the System.TimeSpan.Zero field, which is a constant
+        // value of
         ///       zero. This field is read-only.</para>
         /// </devdoc>
         public static readonly TimeSpan NoSlidingExpiration = TimeSpan.Zero;
@@ -201,7 +207,8 @@ namespace System.Web.Caching
 
         /// <internalonly/>
         /// <devdoc>
-        ///    <para>This constructor is for internal use only, and was accidentally made public - do not use.</para>
+        ///    <para>This constructor is for internal use only, and was accidentally made public - do not
+        // use.</para>
         /// </devdoc>
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         public Cache() { }
@@ -439,7 +446,8 @@ namespace System.Web.Caching
                         out slidingExpiration
                     );
                     // Dev10 861163 - Only update the "expensive" object if the user returns a new object and the
-                    // cache dependency hasn't changed.  (Inserting with a cache dependency that has already changed will cause recursion.)
+                    // cache dependency hasn't changed.  (Inserting with a cache dependency that has already changed
+                    // will cause recursion.)
                     if (
                         expensiveObject != null
                         && (cacheDependency == null || !cacheDependency.HasChanged)

@@ -96,7 +96,8 @@ namespace System.ServiceModel.Discovery
 
             // and call AnnouncementOnline().
             var dx = host.Extensions.Find<DiscoveryServiceExtension>();
-            // Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each ServiceEndpoint in the primary (non-announcement) service.
+            // Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each
+            // ServiceEndpoint in the primary (non-announcement) service.
             if (dx != null)
             {
                 foreach (var edm in dx.PublishedEndpoints)
@@ -129,7 +130,8 @@ namespace System.ServiceModel.Discovery
             DateTime start = DateTime.UtcNow;
             // and call AnnouncementOnline().
             var dx = host.Extensions.Find<DiscoveryServiceExtension>();
-            // Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each ServiceEndpoint in the primary (non-announcement) service.
+            // Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each
+            // ServiceEndpoint in the primary (non-announcement) service.
             if (dx != null)
             {
                 foreach (var edm in dx.PublishedEndpoints)

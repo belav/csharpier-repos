@@ -15,7 +15,8 @@ using Microsoft.Internal.Collections;
 namespace System.ComponentModel.Composition.Primitives
 {
     /// <summary>
-    ///     Defines the <see langword="abstract"/> base class for composable part catalogs, which produce
+    ///     Defines the <see langword="abstract"/> base class for composable part catalogs, which
+    // produce
     ///     and return <see cref="ComposablePartDefinition"/> objects.
     /// </summary>
     /// <remarks>
@@ -63,7 +64,8 @@ namespace System.ComponentModel.Composition.Primitives
                 {
                     // Guarantee one time only set _queryableParts
                     var p = this.AsQueryable();
-                    // NOTE : According to http://msdn.microsoft.com/en-us/library/4bw5ewxy.aspx, the warning is bogus when used with Interlocked API.
+                    // NOTE : According to http://msdn.microsoft.com/en-us/library/4bw5ewxy.aspx, the warning is bogus
+                    // when used with Interlocked API.
 #pragma warning disable 420
                     Interlocked.CompareExchange(ref this._queryableParts, p, null);
 #pragma warning restore 420
@@ -74,7 +76,8 @@ namespace System.ComponentModel.Composition.Primitives
         }
 
         /// <summary>
-        ///     Returns the export definitions that match the constraint defined by the specified definition.
+        ///     Returns the export definitions that match the constraint defined by the specified
+        // definition.
         /// </summary>
         /// <param name="definition">
         ///     The <see cref="ImportDefinition"/> that defines the conditions of the
@@ -172,11 +175,15 @@ namespace System.ComponentModel.Composition.Primitives
 
         //
         // If neither Parts nor GetEnumerator() is overriden then return an empty list
-        // If GetEnumerator is overridden this code should not be invoked:  ReferenceAssemblies mark it as Abstract or Not present
-        // We verify whether Parts is overriden by seeing if the object returns matched the one cached for this instance
+        // If GetEnumerator is overridden this code should not be invoked:  ReferenceAssemblies mark it as
+        // Abstract or Not present
+        // We verify whether Parts is overriden by seeing if the object returns matched the one cached for
+        // this instance
         // Note: a query object is only cached if Parts is invoked on a catalog which did not implement it
-        //      Because reference assemblies do not expose Parts and we no longer use it, it should not get invoked by 3rd parties
-        //      Because the reference assemblies mark GetEnumerator as Abstract 3rd party code should not lack an implementation
+        //      Because reference assemblies do not expose Parts and we no longer use it, it should not get
+        // invoked by 3rd parties
+        //      Because the reference assemblies mark GetEnumerator as Abstract 3rd party code should not
+        // lack an implementation
         //      That implementation should not try to call this implementation
         // Our code doies delegate to Parts in the DebuggerProxies of course.
         //

@@ -98,7 +98,8 @@ public class AuthTestController : ControllerBase
     )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         var client = CreateWinHttpClient(server, useDefaultCredentials: true);
         client.DefaultRequestVersion = GetProtocolVersion(protocol);
 
@@ -132,7 +133,8 @@ public class AuthTestController : ControllerBase
     )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         var client = CreateWinHttpClient(server, useDefaultCredentials: true);
         client.DefaultRequestVersion = GetProtocolVersion(protocol1);
 
@@ -183,7 +185,8 @@ public class AuthTestController : ControllerBase
     )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         var client = CreateWinHttpClient(server, useDefaultCredentials: true);
         client.DefaultRequestVersion = GetProtocolVersion(protocol1);
 
@@ -234,7 +237,8 @@ public class AuthTestController : ControllerBase
     )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
-        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+        // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+        // WinHttpHandler does.
         var client = CreateWinHttpClient(server, useDefaultCredentials: true);
         client.DefaultRequestVersion = GetProtocolVersion(protocol1);
 
@@ -436,7 +440,8 @@ public class AuthTestController : ControllerBase
 
     // Normally you'd want to re-use clients, but we want to ensure we have fresh state for each test.
 
-    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+    // WinHttpHandler does.
     private HttpClient CreateSocketHttpClient(string remote, bool useDefaultCredentials = false)
     {
         return new HttpClient(
@@ -452,7 +457,8 @@ public class AuthTestController : ControllerBase
         };
     }
 
-    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
+    // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2.
+    // WinHttpHandler does.
     private HttpClient CreateWinHttpClient(string remote, bool useDefaultCredentials = false)
     {
         // WinHttpHandler always uses default credentials on localhost

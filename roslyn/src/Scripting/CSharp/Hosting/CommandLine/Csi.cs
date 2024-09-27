@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             string[] args,
             IAnalyzerAssemblyLoader analyzerLoader
         )
-            // Unlike C# compiler we do not use LIB environment variable. It's only supported for historical reasons.
+            // Unlike C# compiler we do not use LIB environment variable. It's only supported for historical
+            // reasons.
             : base(
                 CSharpCommandLineParser.Script,
                 responseFile,

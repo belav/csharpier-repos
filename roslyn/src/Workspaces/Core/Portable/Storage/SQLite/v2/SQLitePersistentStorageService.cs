@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             {
                 StorageDatabaseLogger.LogException(e);
 
-                // In debug also insta fail here.  That way if there is an issue with sqlite (for example with authoring,
+                // In debug also insta fail here.  That way if there is an issue with sqlite (for example with
+                // authoring,
                 // or with some particular configuration) that get CI coverage that reveals this.
                 Debug.Fail("Sqlite failed to load: " + e);
                 return false;

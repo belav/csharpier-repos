@@ -55,7 +55,8 @@ namespace System.Net.NetworkInformation
             return DoSendPingCore(address, buffer, timeout, options, isAsync: true);
         }
 
-        // Any exceptions that escape synchronously will be caught by the caller and wrapped in a PingException.
+        // Any exceptions that escape synchronously will be caught by the caller and wrapped in a
+        // PingException.
         // We do not need to or want to capture such exceptions into the returned task.
         private Task<PingReply> DoSendPingCore(
             IPAddress address,

@@ -73,8 +73,8 @@ namespace Novell.Directory.Ldap.Asn1
         private bool explicit_Renamed;
         private Asn1Object content;
 
-        /* Constructors for Asn1Tagged
-        */
+/* Constructors for Asn1Tagged
+*/
 
         /// <summary> Constructs an Asn1Tagged object using the provided
         /// AN1Identifier and the Asn1Object.
@@ -135,8 +135,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1Object implementation
-        */
+/* Asn1Object implementation
+*/
 
         /// <summary> Call this method to encode the current instance into the
         /// specified output stream using the specified encoder object.
@@ -154,8 +154,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1Tagged specific methods
-        */
+/* Asn1Tagged specific methods
+*/
 
         /// <summary> Returns the Asn1Object stored in this Asn1Tagged object</summary>
         public Asn1Object taggedValue()

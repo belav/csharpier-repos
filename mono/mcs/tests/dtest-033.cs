@@ -42,18 +42,18 @@ public class Test
         a[4] ^= b;
 
         dynamic d = 1;
-        /*
-                b = byte.MaxValue;
-                try {
-                    checked {
-                        b += d;
-                        return 3;
-                    }
-                } catch (OverflowException) {
-                }
-                    
-                b += d;
-        */
+/*
+b = byte.MaxValue;
+try {
+checked {
+b += d;
+return 3;
+}
+} catch (OverflowException) {
+}
+
+b += d;
+*/
         try
         {
             checked

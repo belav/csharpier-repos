@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <typeparam name="THostedService">An <see cref="IHostedService"/> to register.</typeparam>
         /// <param name="services">The <see cref="IServiceCollection"/> to register with.</param>
-        /// <param name="implementationFactory">A factory to create new instances of the service implementation.</param>
+        /// <param name="implementationFactory">A factory to create new instances of the service
+        // implementation.</param>
         /// <returns>The original <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddHostedService<THostedService>(
             this IServiceCollection services,

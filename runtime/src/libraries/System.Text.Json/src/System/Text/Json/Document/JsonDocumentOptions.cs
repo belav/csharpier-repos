@@ -6,7 +6,8 @@ using System.Diagnostics;
 namespace System.Text.Json
 {
     /// <summary>
-    /// Provides the ability for the user to define custom behavior when parsing JSON to create a <see cref="JsonDocument"/>.
+    /// Provides the ability for the user to define custom behavior when parsing JSON to create a <see
+    // cref="JsonDocument"/>.
     /// </summary>
     public struct JsonDocumentOptions
     {
@@ -16,10 +17,12 @@ namespace System.Text.Json
         private JsonCommentHandling _commentHandling;
 
         /// <summary>
-        /// Defines how the <see cref="Utf8JsonReader"/> should handle comments when reading through the JSON.
+        /// Defines how the <see cref="Utf8JsonReader"/> should handle comments when reading through the
+        // JSON.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when the comment handling enum is set to a value that is not supported (or not within the <see cref="JsonCommentHandling"/> enum range).
+        /// Thrown when the comment handling enum is set to a value that is not supported (or not within the
+        // <see cref="JsonCommentHandling"/> enum range).
         /// </exception>
         /// <remarks>
         /// By default <exception cref="JsonException"/> is thrown if a comment is encountered.
@@ -41,7 +44,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Gets or sets the maximum depth allowed when reading JSON, with the default (i.e. 0) indicating a max depth of 64.
+        /// Gets or sets the maximum depth allowed when reading JSON, with the default (i.e. 0) indicating a
+        // max depth of 64.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown when the max depth is set to a negative value.
@@ -70,7 +74,8 @@ namespace System.Text.Json
         /// is allowed (and ignored) within the JSON payload being read.
         /// </summary>
         /// <remarks>
-        /// By default, it's set to false, and <exception cref="JsonException"/> is thrown if a trailing comma is encountered.
+        /// By default, it's set to false, and <exception cref="JsonException"/> is thrown if a trailing
+        // comma is encountered.
         /// </remarks>
         public bool AllowTrailingCommas { get; set; }
 

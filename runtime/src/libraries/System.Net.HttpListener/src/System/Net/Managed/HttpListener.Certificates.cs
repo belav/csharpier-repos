@@ -23,7 +23,8 @@ namespace System.Net
 #pragma warning disable IDE0060
         internal static X509Certificate? LoadCertificateAndKey(IPAddress addr, int port)
         {
-            // TODO https://github.com/dotnet/runtime/issues/19752: Implement functionality to read SSL certificate.
+            // TODO https://github.com/dotnet/runtime/issues/19752: Implement functionality to read SSL
+            // certificate.
             return null;
         }
 #pragma warning restore IDE0060

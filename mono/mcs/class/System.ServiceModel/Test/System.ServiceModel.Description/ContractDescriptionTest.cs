@@ -742,7 +742,12 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual(0, md.Properties.Count, "properties");
         }
 
-        // .NET complains: The operation Nanoda2 either has a parameter or a return type that is attributed with MessageContractAttribute.  In order to represent the request message using a Message Contract, the operation must have a single parameter attributed with MessageContractAttribute.  In order to represent the response message using a Message Contract, the operation's return value must be a type that is attributed with MessageContractAttribute and the operation may not have any out or ref parameters.
+        // .NET complains: The operation Nanoda2 either has a parameter or a return type that is attributed
+        // with MessageContractAttribute.  In order to represent the request message using a Message Contract,
+        // the operation must have a single parameter attributed with MessageContractAttribute.  In order to
+        // represent the response message using a Message Contract, the operation's return value must be a type
+        // that is attributed with MessageContractAttribute and the operation may not have any out or ref
+        // parameters.
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
         public void MessageContractAttributes2()

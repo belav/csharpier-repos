@@ -454,11 +454,11 @@ namespace System.Xml.Xsl.Runtime
         #region Comparisons
         internal enum ComparisonOperator
         {
-            /* Equality */
+/* Equality */
             Eq,
             Ne,
 
-            /* Relational */
+/* Relational */
             Lt,
             Le,
             Gt,

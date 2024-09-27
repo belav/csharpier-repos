@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Based on the implementation in https://raw.githubusercontent.com/dotnet/sdk/aad0424c0bfaa60c8bd136a92fd131e53d14561a/src/BuiltInTools/DotNetDeltaApplier/HotReloadAgent.cs
+// Based on the implementation in
+// https://raw.githubusercontent.com/dotnet/sdk/aad0424c0bfaa60c8bd136a92fd131e53d14561a/src/BuiltInTools/DotNetDeltaApplier/HotReloadAgent.cs
 
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
@@ -46,7 +47,8 @@ internal sealed class HotReloadAgent : IDisposable
             && _appliedAssemblies.TryAdd(loadedAssembly, loadedAssembly)
         )
         {
-            // A delta for this specific Module exists and we haven't called ApplyUpdate on this instance of Assembly as yet.
+            // A delta for this specific Module exists and we haven't called ApplyUpdate on this instance of
+            // Assembly as yet.
             ApplyDeltas(loadedAssembly, updateDeltas);
         }
     }
@@ -64,8 +66,10 @@ internal sealed class HotReloadAgent : IDisposable
     )]
     private UpdateHandlerActions GetMetadataUpdateHandlerActions()
     {
-        // We need to execute MetadataUpdateHandlers in a well-defined order. For v1, the strategy that is used is to topologically
-        // sort assemblies so that handlers in a dependency are executed before the dependent (e.g. the reflection cache action
+        // We need to execute MetadataUpdateHandlers in a well-defined order. For v1, the strategy that is
+        // used is to topologically
+        // sort assemblies so that handlers in a dependency are executed before the dependent (e.g. the
+        // reflection cache action
         // in System.Private.CoreLib is executed before System.Text.Json clears it's own cache.)
         // This would ensure that caches and updates more lower in the application stack are up to date
         // before ones higher in the stack are recomputed.
@@ -75,7 +79,8 @@ internal sealed class HotReloadAgent : IDisposable
         {
             foreach (var attr in assembly.GetCustomAttributesData())
             {
-                // Look up the attribute by name rather than by type. This would allow netstandard targeting libraries to
+                // Look up the attribute by name rather than by type. This would allow netstandard targeting
+                // libraries to
                 // define their own copy without having to cross-compile.
                 if (
                     attr.AttributeType.FullName

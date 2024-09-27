@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 // The MIT License(MIT)
 // =====================
@@ -839,7 +840,8 @@ namespace Mono.Linker.Tests.Extensions
                     "You can only call IsChildOf with two relative paths, or with two absolute paths"
                 );
 
-            // If the other path is the root directory, then anything is a child of it as long as it's not a Windows path
+            // If the other path is the root directory, then anything is a child of it as long as it's not a
+            // Windows path
             if (potentialBasePath.IsRoot)
             {
                 if (_driveLetter != potentialBasePath._driveLetter)

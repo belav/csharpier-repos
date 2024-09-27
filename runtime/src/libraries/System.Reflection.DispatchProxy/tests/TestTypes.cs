@@ -38,7 +38,8 @@ public interface TestType_IHelloAndGoodbyeService
     : TestType_IHelloService,
         TestType_IGoodbyeService { }
 
-// Deliberately contains method with same signature of TestType_IHelloService (see TestType_IHelloService1And2).
+// Deliberately contains method with same signature of TestType_IHelloService (see
+// TestType_IHelloService1And2).
 public interface TestType_IHelloService2
 {
     string Hello(string message);

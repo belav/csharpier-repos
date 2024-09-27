@@ -62,10 +62,10 @@ namespace Novell.Directory.Ldap.Extensions
     {
         static GetEffectivePrivilegesRequest()
         {
-            /*
-                * Register the extendedresponse class which is returned by the
-                * server in response to a ListReplicasRequest
-                */
+/*
+* Register the extendedresponse class which is returned by the
+* server in response to a ListReplicasRequest
+*/
             try
             {
                 LdapExtendedResponse.register(

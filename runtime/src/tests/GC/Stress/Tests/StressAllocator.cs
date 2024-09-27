@@ -7,13 +7,18 @@ using System.Runtime.InteropServices;
 using System.Threading;
 
 // Purpose of program: exercise the GC, with various object sizes and lifetimes.
-// Allocate objects that have an expiration time specified. When the object's lifetime expires, it is made garbage and then other new objects are created.
+// Allocate objects that have an expiration time specified. When the object's lifetime expires, it
+// is made garbage and then other new objects are created.
 //
-// Each object has a lifetime attached to it (in ObjectWrapper). New objects are added to a collection. When the lifetime is expired, the object is removed from the collection and subject to GC.
-// There are several threads which access  the collection in random positions and if there is no object in that position they will create a new one.
+// Each object has a lifetime attached to it (in ObjectWrapper). New objects are added to a
+// collection. When the lifetime is expired, the object is removed from the collection and subject to
+// GC.
+// There are several threads which access  the collection in random positions and if there is no
+// object in that position they will create a new one.
 //One thread is responsible to updating the objects'age and removing expired objects.
 //The lifetime and the objects'size can be set by command line arguments.
-//The objects'size is organized in buckets (size ranges), the user can specify the percentage for each bucket.
+//The objects'size is organized in buckets (size ranges), the user can specify the percentage for
+// each bucket.
 //Collection type can be array or binary tree.
 
 
@@ -193,40 +198,40 @@ namespace StressAllocator
             ObjectWrapper myNewObject;
             myNewObject = new ObjectWrapper(lifeSpan, size, pin, references);
             current_TotalObjCount++;
-            /*
-            lock (objLock)
-            {
-                Console.WriteLine("Created object with: ");
-                Console.WriteLine("datasize= " + size);
-                Console.WriteLine("lifetime= " + lifeSpan);
-                Console.WriteLine("pinned= " + pin);
-            }
-             */
+/*
+lock (objLock)
+{
+Console.WriteLine("Created object with: ");
+Console.WriteLine("datasize= " + size);
+Console.WriteLine("lifetime= " + lifeSpan);
+Console.WriteLine("pinned= " + pin);
+}
+*/
 
             WR_All.Add(myNewObject);
 
             return myNewObject;
         }
 
-        /*
-        static void AddReference(ObjectWrapper parent, ObjectWrapper child)
-        {
-            //find an empty position to add a reference in the parent
-            //else use a random position
-            int position = GetRandomNumber(maxRef);
-            for (int i = 0; i < maxRef; i++)
-            {
-                if (parent.objRef[i] == null)
-                {
-                    position = i;
-                    break;
-                }
-            }
+/*
+static void AddReference(ObjectWrapper parent, ObjectWrapper child)
+{
+//find an empty position to add a reference in the parent
+//else use a random position
+int position = GetRandomNumber(maxRef);
+for (int i = 0; i < maxRef; i++)
+{
+if (parent.objRef[i] == null)
+{
+position = i;
+break;
+}
+}
 
-            parent.objRef[position] = child;
+parent.objRef[position] = child;
 
-        }
-         * */
+}
+* */
 
         public static int Main(string[] args)
         {
@@ -301,7 +306,8 @@ namespace StressAllocator
             }
             //lock (objLock)
             //{
-            //    Console.WriteLine("thread {1}:Number of objects in collection: {0}; objCount={2}", objectCollection.Count, threadIndex, current_TotalObjCount);
+            //    Console.WriteLine("thread {1}:Number of objects in collection: {0}; objCount={2}",
+            // objectCollection.Count, threadIndex, current_TotalObjCount);
             //}
             //Console.WriteLine("thread {1}:Number of objects in WR: {0}", WR_All.Count, threadIndex);
             Console.WriteLine("starting steady state");
@@ -717,8 +723,10 @@ namespace StressAllocator
                     + "bytes), default is "
                     + DEFAULT_BUCKET4
             );
-            //     Console.WriteLine("-collectiontype  <List|Tree|Graph> : specify whether to use a list, tree or graph, default is " + CollectionTypeToString(objectCollectionType));
-            //     Console.WriteLine("-maxref <number of references> : maximum number of references an object can have(only for tree and graph collection type), default is " + maxRef);
+            //     Console.WriteLine("-collectiontype  <List|Tree|Graph> : specify whether to use a list, tree
+            // or graph, default is " + CollectionTypeToString(objectCollectionType));
+            //     Console.WriteLine("-maxref <number of references> : maximum number of references an object
+            // can have(only for tree and graph collection type), default is " + maxRef);
             Console.WriteLine("-out <iterations> : after how many iterations to output data");
             Console.WriteLine("-randomseed <seed> : random seed(for repro)");
         }
@@ -816,31 +824,31 @@ namespace StressAllocator
             }
         }
 
-        /*
-                /////////////////////////// Collection definition
-                public interface ObjCollection
-                {
-                    void Init(int numberOfObjects);
-                    ObjectWrapper GetObjectAt(int index);
-                    void SetObjectAt(ObjectWrapper o, int index);
+/*
+/////////////////////////// Collection definition
+public interface ObjCollection
+{
+void Init(int numberOfObjects);
+ObjectWrapper GetObjectAt(int index);
+void SetObjectAt(ObjectWrapper o, int index);
 
-                    bool AccessObjectAt(int index);
+bool AccessObjectAt(int index);
 
-                    int Count
-                    {
-                        get;
-                    }
-                    int Size
-                    {
-                        get;
-                    }
-                    //One pass through the collection, updates objects'age and removes expired ones
-                    void UpdateObjectsAge(long elapsedMsec);
-                    void RemoveExpiredObjects();
+int Count
+{
+get;
+}
+int Size
+{
+get;
+}
+//One pass through the collection, updates objects'age and removes expired ones
+void UpdateObjectsAge(long elapsedMsec);
+void RemoveExpiredObjects();
 
-                }
+}
 
-         * */
+* */
         public class ObjArray
         {
             private ObjectWrapper[] _array;
@@ -883,7 +891,8 @@ namespace StressAllocator
 
                 if ((timeNow - _array[index].m_creationTime) > _array[index].m_lifeTime)
                 {
-                    //    Console.WriteLine("Object age" + (timeNow - m_Array[index].m_creationTime) + "; lifetime=" + m_Array[index].m_lifeTime);
+                    //    Console.WriteLine("Object age" + (timeNow - m_Array[index].m_creationTime) + "; lifetime=" +
+                    // m_Array[index].m_lifeTime);
                     //object is expired; put a new one in its place
                     _array[index] = CreateObject();
                     return true;
@@ -1050,7 +1059,8 @@ namespace StressAllocator
             ////Try setting  a reference from an object in the list to the new object
             //public bool SetRefFromOldToNew(Object myNewObject)
             //{
-            //    //Pick a random list position and determine if it is possible to set a ref from this list position to the new object
+            //    //Pick a random list position and determine if it is possible to set a ref from this list
+            // position to the new object
             //    lock (WRLock)
             //    {
             //        int pos = Rand.Next(0, WR.Count);

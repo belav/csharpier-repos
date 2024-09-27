@@ -16,7 +16,8 @@ namespace System.IdentityModel.Selectors
 
     //
     // Summary:
-    //  This class wraps and manages the lifetime of an array of PolicyElements that are to be Marshaled to
+    //  This class wraps and manages the lifetime of an array of PolicyElements that are to be Marshaled
+    // to
     //  native memory.
     //
     internal class PolicyChain : IDisposable

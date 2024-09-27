@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * CacheEntry
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* CacheEntry
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 
 namespace System.Web.Caching
 {
@@ -93,10 +93,10 @@ namespace System.Web.Caching
 #endif
     }
 
-    /*
-     * An entry in the cache.
-     * Overhead is 68 bytes + object header.
-     */
+/*
+* An entry in the cache.
+* Overhead is 68 bytes + object header.
+*/
     internal sealed class CacheEntry : CacheKey
     {
         const CacheItemPriority CacheItemPriorityMin = CacheItemPriority.Low;
@@ -137,9 +137,9 @@ namespace System.Web.Caching
         CacheDependency _dependency; /* dependencies this item has */
         object _onRemovedTargets; /* targets of OnRemove notification */
 
-        /*
- * ctor.
- */
+/*
+* ctor.
+*/
 
         internal CacheEntry(
             String key,
@@ -311,9 +311,9 @@ namespace System.Web.Caching
             }
         }
 
-        /*
-         * The entry has changed, so remove ourselves from the cache.
-         */
+/*
+* The entry has changed, so remove ourselves from the cache.
+*/
         void DependencyChanged(Object sender, EventArgs e)
         {
             if (State == EntryState.AddedToCache)
@@ -322,9 +322,9 @@ namespace System.Web.Caching
             }
         }
 
-        /*
-         * Helper to call the on-remove callback
-         */
+/*
+* Helper to call the on-remove callback
+*/
 
         private void CallCacheItemRemovedCallback(
             CacheItemRemovedCallback callback,
@@ -374,11 +374,11 @@ namespace System.Web.Caching
             }
         }
 
-        /*
-         * Close the item to complete its removal from cache.
-         *
-         * @param reason The reason the item is removed.
-         */
+/*
+* Close the item to complete its removal from cache.
+*
+* @param reason The reason the item is removed.
+*/
         internal void Close(CacheItemRemovedReason reason)
         {
             Debug.Assert(

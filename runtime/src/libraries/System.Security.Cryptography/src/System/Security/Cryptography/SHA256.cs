@@ -11,8 +11,10 @@ using Internal.Cryptography;
 namespace System.Security.Cryptography
 {
     //
-    // If you change anything in this class, you must make the same change in the other *Provider classes. This is a pain but given that the
-    // preexisting contract from the .NET Framework locks all of these into deriving directly from the abstract HashAlgorithm class,
+    // If you change anything in this class, you must make the same change in the other *Provider
+    // classes. This is a pain but given that the
+    // preexisting contract from the .NET Framework locks all of these into deriving directly from the
+    // abstract HashAlgorithm class,
     // it can't be helped.
     //
 

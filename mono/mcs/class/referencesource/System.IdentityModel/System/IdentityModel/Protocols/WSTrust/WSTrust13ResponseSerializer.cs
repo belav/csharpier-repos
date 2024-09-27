@@ -19,7 +19,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="reader">Reader over the RSTR.</param>
         /// <param name="context">Current Serialization context.</param>
         /// <returns>RequestSecurityTokenResponse object if deserialization was successful.</returns>
-        /// <exception cref="ArgumentNullException">The given reader or context parameter is null</exception>
+        /// <exception cref="ArgumentNullException">The given reader or context parameter is
+        // null</exception>
         public override RequestSecurityTokenResponse ReadXml(
             XmlReader reader,
             WSTrustSerializationContext context
@@ -70,10 +71,13 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Override of the base class that Reads a specific child element inside the RSTR.
         /// </summary>
         /// <param name="reader">Reader pointing at an element to read inside the RSTR.</param>
-        /// <param name="rstr">The RequestSecurityTokenResponse element that is being populated from the reader.</param>
+        /// <param name="rstr">The RequestSecurityTokenResponse element that is being populated from the
+        // reader.</param>
         /// <param name="context">Current Serialization context.</param>
-        /// <exception cref="ArgumentNullException">Either reader or rstr or context parameter is null.</exception>
-        /// <exception cref="WSTrustSerializationException">Unable to deserialize the current parameter.</exception>
+        /// <exception cref="ArgumentNullException">Either reader or rstr or context parameter is
+        // null.</exception>
+        /// <exception cref="WSTrustSerializationException">Unable to deserialize the current
+        // parameter.</exception>
         public override void ReadXmlElement(
             XmlReader reader,
             RequestSecurityTokenResponse rstr,
@@ -120,7 +124,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="rstr">The response instance</param>
         /// <param name="writer">The writer to write to</param>
         /// <param name="context">Current Serialization context.</param>
-        /// <exception cref="ArgumentNullException">Either rstr or writer or context parameter is null.</exception>
+        /// <exception cref="ArgumentNullException">Either rstr or writer or context parameter is
+        // null.</exception>
         public override void WriteKnownResponseElement(
             RequestSecurityTokenResponse rstr,
             XmlWriter writer,
@@ -168,10 +173,12 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Serializes a RequestSecurityTokenResponse object to the given XmlWriter
         /// stream.
         /// </summary>
-        /// <param name="response">RequestSecurityTokenResponse object that needs to be serialized to the writer.</param>
+        /// <param name="response">RequestSecurityTokenResponse object that needs to be serialized to the
+        // writer.</param>
         /// <param name="writer">XmlWriter into which the object will be serialized</param>
         /// <param name="context">Current Serialization context.</param>
-        /// <exception cref="ArgumentNullException">The given response or writer or context parameter is null</exception>
+        /// <exception cref="ArgumentNullException">The given response or writer or context parameter is
+        // null</exception>
         public override void WriteXml(
             RequestSecurityTokenResponse response,
             XmlWriter writer,
@@ -281,11 +288,13 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         /// <summary>
         /// Checks if the given reader is positioned at a RequestSecurityTokenResponse or
-        /// RequestSecurityTokenResponseCollection element with namespace 'http://docs.oasis-open.org/ws-sx/ws-trust/200512'
+        /// RequestSecurityTokenResponseCollection element with namespace
+        // 'http://docs.oasis-open.org/ws-sx/ws-trust/200512'
         /// </summary>
         /// <param name="reader">The reader to read from</param>
         /// <returns>
-        /// 'True' if the reader is positioned at a RequestSecurityTokenResponse or RequestSecurityTokenResponseCollection
+        /// 'True' if the reader is positioned at a RequestSecurityTokenResponse or
+        // RequestSecurityTokenResponseCollection
         /// element with namespace 'http://docs.oasis-open.org/ws-sx/ws-trust/200512'.
         /// </returns>
         /// <exception cref="ArgumentNullException">The input argument is null.</exception>

@@ -14,7 +14,8 @@ namespace Mono.Linker.Tests.Cases.LinkXml
         new[] { "Dependencies/CanPreserveAnExportedType_Forwarder.cs" },
         references: new[] { "Library.dll" }
     )]
-    // NativeAOT doesn't have a concept of type forwarders in the compiled app, everything is fully resolved
+    // NativeAOT doesn't have a concept of type forwarders in the compiled app, everything is fully
+    // resolved
     [KeptMemberInAssembly(
         "Library.dll",
         typeof(CanPreserveAnExportedType_Library),

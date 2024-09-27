@@ -105,8 +105,10 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
 
         if (mutatingLspWorkspace)
         {
-            // In the mutating case, adding/opening the second document will cause the workspace solution to actually
-            // change.  So it will point to a different document instance for firstDocument.   The underlying state will
+            // In the mutating case, adding/opening the second document will cause the workspace solution to
+            // actually
+            // change.  So it will point to a different document instance for firstDocument.   The underlying
+            // state will
             // be the same though.
             Assert.NotSame(
                 testLspServer.TestWorkspace.CurrentSolution.GetDocument(firstDocument.Id),
@@ -240,7 +242,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
 
         if (mutatingLspWorkspace)
         {
-            // In the mutating case, opening the second doc pushes its changes through to the underlying workspace.  So
+            // In the mutating case, opening the second doc pushes its changes through to the underlying
+            // workspace.  So
             // the documents will be the same.
             Assert.Equal(
                 testLspServer.TestWorkspace.CurrentSolution.GetDocument(secondDocument.Id),
@@ -311,7 +314,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
             .Documents.Single(d => d.FilePath!.Contains("test1"))
             .GetURI();
 
-        // Open the document via LSP with different text from the workspace and verify the initial project name.
+        // Open the document via LSP with different text from the workspace and verify the initial project
+        // name.
         var openedDocument = await OpenDocumentAndVerifyLspTextAsync(documentUri, testLspServer);
         Assert.Equal("Test", openedDocument?.Project.AssemblyName);
 
@@ -394,7 +398,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         var newDocumentUri = newSolution.GetRequiredDocument(newDocumentId).GetURI();
         await testLspServer.TestWorkspace.ChangeSolutionAsync(newSolution);
 
-        // Verify that the lsp server sees the workspace change and picks up the document in the correct workspace.
+        // Verify that the lsp server sees the workspace change and picks up the document in the correct
+        // workspace.
         await testLspServer.OpenDocumentAsync(newDocumentUri);
         var (_, lspDocument) = await GetLspWorkspaceAndDocumentAsync(newDocumentUri, testLspServer)
             .ConfigureAwait(false);
@@ -407,7 +412,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
     {
         var markup = "One";
 
-        // Create a server that includes the LSP misc files workspace so we can test transfers to and from it.
+        // Create a server that includes the LSP misc files workspace so we can test transfers to and from
+        // it.
         await using var testLspServer = await CreateTestLspServerAsync(
             markup,
             mutatingLspWorkspace,
@@ -509,7 +515,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         // Wait for workspace creation operations for the second workspace to complete.
         await WaitForWorkspaceOperationsAsync(testWorkspaceTwo);
 
-        // Manually register the workspace since the workspace listener does not listen for this workspace kind.
+        // Manually register the workspace since the workspace listener does not listen for this workspace
+        // kind.
         var workspaceRegistrationService =
             testLspServer.TestWorkspace.GetService<LspWorkspaceRegistrationService>();
         workspaceRegistrationService.Register(testWorkspaceTwo);
@@ -727,7 +734,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         Assert.Equal("NewCSProj1", secondDocumentChangedProject.Project.AssemblyName);
         Assert.NotEqual(secondDocument, secondDocumentChangedProject);
 
-        // The first document should be the same document as the last one since that workspace was not changed.
+        // The first document should be the same document as the last one since that workspace was not
+        // changed.
         var (_, lspDocument) = await GetLspWorkspaceAndDocumentAsync(
                 firstWorkspaceDocumentUri,
                 testLspServer
@@ -791,7 +799,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
 
         if (mutatingLspWorkspace)
         {
-            // If the underlying workspace is getting mutated, then given that the second lsp-server hasn't heard
+            // If the underlying workspace is getting mutated, then given that the second lsp-server hasn't
+            // heard
             // anything about doc-1 yet, it will see the change pushed through by the first lsp-server.
             Assert.Equal(
                 "Server one text",
@@ -860,8 +869,10 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
     [Fact]
     public async Task TestLspDocumentPreferredOverProjectSystemDocumentAddInMutatingWorkspace()
     {
-        // This verifies that we will still see the lsp view of the document, even though it found out about a document
-        // prior to a project system even telling it about a file, and even if the project system removes the file.
+        // This verifies that we will still see the lsp view of the document, even though it found out about
+        // a document
+        // prior to a project system even telling it about a file, and even if the project system removes
+        // the file.
 
         // Start with an empty workspace.
         await using var testLspServer = await CreateTestLspServerAsync(
@@ -897,7 +908,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
                 .Project.Solution
         );
 
-        // if we were to directly query the workspace right now, the contents won't match what lsp thinks it is:
+        // if we were to directly query the workspace right now, the contents won't match what lsp thinks it
+        // is:
         Assert.NotEqual(
             (await document1.GetTextAsync(CancellationToken.None)).ToString(),
             (
@@ -908,7 +920,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
             ).ToString()
         );
 
-        // However, if we retrieve from lsp now, we'll see the document moved into the real workspace and we'll see the
+        // However, if we retrieve from lsp now, we'll see the document moved into the real workspace and
+        // we'll see the
         // real workspace contents changed.
         (workspace1, document1) = await GetLspWorkspaceAndDocumentAsync(documentUri, testLspServer)
             .ConfigureAwait(false);
@@ -936,7 +949,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
                 .CurrentSolution.Projects
         );
 
-        // Now, if the project system removes the file, we will still see the lsp version of, but back to the misc workspace.
+        // Now, if the project system removes the file, we will still see the lsp version of, but back to
+        // the misc workspace.
         await testLspServer.TestWorkspace.ChangeSolutionAsync(
             testLspServer
                 .TestWorkspace.CurrentSolution.Projects.Single()
@@ -955,7 +969,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
     [Fact]
     public async Task TestLspDocumentPreferredOverProjectSystemDocumentChangeInMutatingWorkspace()
     {
-        // This verifies that we will still see the lsp view of the document, even if the project system feeds in
+        // This verifies that we will still see the lsp view of the document, even if the project system
+        // feeds in
         // external information about the contents of the file.
 
         // Start with an empty workspace.
@@ -1011,7 +1026,8 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
     [Fact]
     public async Task TestLspDocumentChangedInMutatingWorkspaceIncrementallyParses()
     {
-        // This verifies that we will still see the lsp view of the document, even if the project system feeds in
+        // This verifies that we will still see the lsp view of the document, even if the project system
+        // feeds in
         // external information about the contents of the file.
 
         // Start with an empty workspace.
@@ -1070,9 +1086,12 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
             newSourceText.ToString()
         );
 
-        // Demonstrate that incremental parsing is working by showing that the first class is reused across edits, while
-        // the last class is not.  We don't test the second as that one may or may not be reused depending on how good
-        // incremental parsing may be.  For example, sometimes it will conservatively not reuse a node because that node
+        // Demonstrate that incremental parsing is working by showing that the first class is reused across
+        // edits, while
+        // the last class is not.  We don't test the second as that one may or may not be reused depending
+        // on how good
+        // incremental parsing may be.  For example, sometimes it will conservatively not reuse a node
+        // because that node
         // touches a node that is getting recreated.
         var syntaxFacts = originalDocument.GetRequiredLanguageService<ISyntaxFactsService>();
         var oldClassDeclarations = originalRoot

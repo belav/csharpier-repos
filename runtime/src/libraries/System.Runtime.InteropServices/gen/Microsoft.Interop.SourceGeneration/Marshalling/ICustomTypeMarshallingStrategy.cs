@@ -7,7 +7,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Microsoft.Interop
 {
     /// <summary>
-    /// The base interface for implementing various aspects of the custom native type and collection marshalling specs.
+    /// The base interface for implementing various aspects of the custom native type and collection
+    // marshalling specs.
     /// </summary>
     internal interface ICustomTypeMarshallingStrategy
     {

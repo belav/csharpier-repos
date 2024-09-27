@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 using System;
@@ -702,7 +702,8 @@ namespace C5
         /// <summary>
         /// Search for an item in the wrapped collection
         /// </summary>
-        /// <param name="item">On entry the item to look for, on exit the equivalent item found (if any)</param>
+        /// <param name="item">On entry the item to look for, on exit the equivalent item found (if
+        // any)</param>
         /// <returns></returns>
         public virtual bool Find(ref T item)
         {
@@ -1526,7 +1527,8 @@ namespace C5
         }
 
         /// <summary> </summary>
-        /// <value>A directed collection of the items in the indicated interval of the wrapped collection</value>
+        /// <value>A directed collection of the items in the indicated interval of the wrapped
+        // collection</value>
         public IDirectedCollectionValue<T> this[int start, int end]
         {
             get { return new GuardedDirectedCollectionValue<T>(indexedsorted[start, end]); }
@@ -1890,7 +1892,8 @@ namespace C5
 
         /// <summary>
         /// </summary>
-        /// <exception cref="ReadOnlyCollectionException"> if this is a wrapped view and not a view that was made on a wrapper</exception>
+        /// <exception cref="ReadOnlyCollectionException"> if this is a wrapped view and not a view that was
+        // made on a wrapper</exception>
         /// <param name="offset"></param>
         public IList<T> Slide(int offset)
         {
@@ -2046,7 +2049,8 @@ namespace C5
         #region IIndexed<T> Members
 
         /// <summary> </summary>
-        /// <value>A directed collection of the items in the indicated interval of the wrapped collection</value>
+        /// <value>A directed collection of the items in the indicated interval of the wrapped
+        // collection</value>
         public IDirectedCollectionValue<T> this[int start, int end]
         {
             get { return new GuardedDirectedCollectionValue<T>(innerlist[start, end]); }

@@ -1,5 +1,6 @@
 //
-// RngCryptoServiceProvider.cryptor.cs: based on Mono's System.Security.Cryptography.RNGCryptoServiceProvider
+// RngCryptoServiceProvider.cryptor.cs: based on Mono's
+// System.Security.Cryptography.RNGCryptoServiceProvider
 //
 // Authors:
 //	Mark Crichton (crichton@gimp.org)
@@ -31,8 +32,11 @@
 
 using Crimson.CommonCrypto;
 
+//
+//
 // http://developer.apple.com/library/ios/#DOCUMENTATION/Security/Reference/RandomizationReference/Reference/reference.html
-// we need to use the CommonCrypto implementation instead of the runtime-supported RNGCryptoServiceProvider
+// we need to use the CommonCrypto implementation instead of the runtime-supported
+// RNGCryptoServiceProvider
 // since we have no guarantee (on iOS) about /dev/[u]random availability or quality
 #if MONOTOUCH || XAMMAC
 namespace System.Security.Cryptography

@@ -8,7 +8,8 @@ namespace System.Xml.Xsl.Qil
 {
     /// <summary>An internal class that validates QilExpression graphs.</summary>
     /// <remarks>
-    /// QilValidationVisitor traverses the QilExpression graph once to enforce the following constraints:
+    /// QilValidationVisitor traverses the QilExpression graph once to enforce the following
+    // constraints:
     /// <list type="bullet">
     ///     <item>No circular references</item>
     ///     <item>No duplicate nodes (except for references)</item>
@@ -20,7 +21,8 @@ namespace System.Xml.Xsl.Qil
     /// </list>
     /// <p>When an error occurs, it marks the offending node with an annotation and continues checking,
     /// allowing the detection of multiple errors at once and printing the structure after validation.
-    /// (In the case of circular references, it breaks the loop at the circular reference to allow the graph
+    /// (In the case of circular references, it breaks the loop at the circular reference to allow the
+    // graph
     /// to print correctly.)</p>
     /// </remarks>
     ///
@@ -94,7 +96,8 @@ namespace System.Xml.Xsl.Qil
                             SetError(parent[i], "DebugName must not be null");
                     }
 
-                    // If child is a reference, then call VisitReference instead of Visit in order to avoid circular visits.
+                    // If child is a reference, then call VisitReference instead of Visit in order to avoid circular
+                    // visits.
                     if (IsReference(parent, i))
                         VisitReference(parent[i]);
                     else

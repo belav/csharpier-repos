@@ -15,7 +15,8 @@ using Microsoft.CodeAnalysis.UnitTests.TestFiles;
 namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 {
     /// <summary>
-    /// Flexible and extensible API to generate MSBuild projects and solutions without external files or resources.
+    /// Flexible and extensible API to generate MSBuild projects and solutions without external files or
+    // resources.
     /// </summary>
     public static class SolutionGeneration
     {

@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///
     /// There are two enumerations because:
     ///   1) CandidateReason in language-independent, while this enum is language specific.
-    ///   2) The name "CandidateReason" didn't make much sense in the way LookupResultKind is used internally.
+    ///   2) The name "CandidateReason" didn't make much sense in the way LookupResultKind is used
+    // internally.
     ///   3) Viable isn't used in CandidateReason, but we need it in LookupResultKind, and there isn't a
     ///      a way to have internal enumeration values.
     /// </remarks>
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // Note: within LookupResult, LookupResultKind.Ambiguous is currently not used (in C#). Instead
         // ambiguous results are determined later by examining multiple viable results to determine if
-        // they are ambiguous or overloaded. Thus, LookupResultKind.Ambiguous does not occur in a LookupResult,
+        // they are ambiguous or overloaded. Thus, LookupResultKind.Ambiguous does not occur in a
+        // LookupResult,
         // but can occur within a BoundBadExpression.
         Ambiguous,
 

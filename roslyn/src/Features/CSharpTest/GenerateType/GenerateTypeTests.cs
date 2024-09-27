@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateTyp
             ImmutableArray<CodeAction> codeActions
         ) => FlattenActions(codeActions);
 
-        // TODO: Requires WPF due to IInlineRenameService dependency (https://github.com/dotnet/roslyn/issues/46153)
+        // TODO: Requires WPF due to IInlineRenameService dependency
+        // (https://github.com/dotnet/roslyn/issues/46153)
         protected override TestComposition GetComposition() =>
             EditorTestCompositions
                 .EditorFeaturesWpf.AddExcludedPartTypes(

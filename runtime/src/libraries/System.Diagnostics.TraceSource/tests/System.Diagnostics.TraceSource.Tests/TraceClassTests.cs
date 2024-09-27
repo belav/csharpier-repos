@@ -102,7 +102,8 @@ namespace System.Diagnostics.TraceSourceTests
         public void Assert1Test()
         {
             var listener = new TestTraceListener();
-            // We have to clear the listeners list on Trace since there is a trace listener by default with AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
+            // We have to clear the listeners list on Trace since there is a trace listener by default with
+            // AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
             Trace.Listeners.Clear();
             Trace.Listeners.Add(listener);
             Trace.Assert(true);
@@ -118,7 +119,8 @@ namespace System.Diagnostics.TraceSourceTests
         {
             var listener = new TestTraceListener();
             var text = new TestTextTraceListener();
-            // We have to clear the listeners list on Trace since there is a trace listener by default with AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
+            // We have to clear the listeners list on Trace since there is a trace listener by default with
+            // AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
             Trace.Listeners.Clear();
             Trace.Listeners.Add(listener);
             Trace.Listeners.Add(text);
@@ -139,7 +141,8 @@ namespace System.Diagnostics.TraceSourceTests
         {
             var listener = new TestTraceListener();
             var text = new TestTextTraceListener();
-            // We have to clear the listeners list on Trace since there is a trace listener by default with AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
+            // We have to clear the listeners list on Trace since there is a trace listener by default with
+            // AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
             Trace.Listeners.Clear();
             Trace.Listeners.Add(listener);
             Trace.Listeners.Add(text);
@@ -308,7 +311,8 @@ namespace System.Diagnostics.TraceSourceTests
         public void FailTest()
         {
             var listener = new TestTraceListener();
-            // We have to clear the listeners list on Trace since there is a trace listener by default with AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
+            // We have to clear the listeners list on Trace since there is a trace listener by default with
+            // AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
             Trace.Listeners.Clear();
             Trace.Listeners.Add(listener);
             Trace.Fail("Text");
@@ -377,7 +381,8 @@ namespace System.Diagnostics.TraceSourceTests
             var fail = textTL.Output.TrimEnd(newLine.ToCharArray());
 
             textTL = new TestTextTraceListener();
-            // We have to clear the listeners list on Trace since there is a trace listener by default with AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
+            // We have to clear the listeners list on Trace since there is a trace listener by default with
+            // AssertUiEnabled = true in Desktop and that will pop up an assert window with Trace.Fail
             Trace.Listeners.Clear();
             Trace.Listeners.Add(textTL);
             Trace.IndentLevel = 0;

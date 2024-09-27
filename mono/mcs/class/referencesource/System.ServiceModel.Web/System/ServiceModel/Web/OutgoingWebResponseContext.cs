@@ -161,9 +161,12 @@ namespace System.ServiceModel.Web
             }
         }
 
-        // This is an internal property because we need to carry the content-type that was selected by the FormatSelectingMessageInspector
-        // forward so that the formatter has access to it. However, we dond't want to use the ContentType property on this, because then
-        // developers would have to clear the ContentType property manually when overriding the format set by the
+        // This is an internal property because we need to carry the content-type that was selected by the
+        // FormatSelectingMessageInspector
+        // forward so that the formatter has access to it. However, we dond't want to use the ContentType
+        // property on this, because then
+        // developers would have to clear the ContentType property manually when overriding the format set
+        // by the
         // FormatSelectingMessageInspector
         internal string AutomatedFormatSelectionContentType
         {

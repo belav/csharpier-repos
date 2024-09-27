@@ -22,7 +22,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// This portion of the binder converts an <see cref="ExpressionSyntax"/> into a <see cref="BoundExpression"/>.
+    /// This portion of the binder converts an <see cref="ExpressionSyntax"/> into a <see
+    // cref="BoundExpression"/>.
     /// </summary>
     internal partial class Binder
     {
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Determines whether "this" reference is available within the current context.
         /// </summary>
         /// <param name="isExplicit">The reference was explicitly specified in syntax.</param>
-        /// <param name="inStaticContext">True if "this" is not available due to the current method/property/field initializer being static.</param>
+        /// <param name="inStaticContext">True if "this" is not available due to the current
+        // method/property/field initializer being static.</param>
         /// <returns>True if a reference to "this" is available.</returns>
         internal bool HasThis(bool isExplicit, out bool inStaticContext)
         {
@@ -126,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Generates a new <see cref="BoundBadExpression"/> with no known type, and the given bound children.
+        /// Generates a new <see cref="BoundBadExpression"/> with no known type, and the given bound
+        // children.
         /// </summary>
         private BoundBadExpression BadExpression(
             SyntaxNode syntax,
@@ -153,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookup resultKind and the given bound child.
+        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookup resultKind and
+        // the given bound child.
         /// </summary>
         protected BoundBadExpression BadExpression(
             SyntaxNode syntax,
@@ -165,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookupResultKind and given symbols for GetSemanticInfo API.
+        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookupResultKind and
+        // given symbols for GetSemanticInfo API.
         /// </summary>
         private BoundBadExpression BadExpression(
             SyntaxNode syntax,
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookupResultKind and given symbols for GetSemanticInfo API,
+        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookupResultKind and
+        // given symbols for GetSemanticInfo API,
         /// and the given bound child.
         /// </summary>
         private BoundBadExpression BadExpression(
@@ -203,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookupResultKind and given symbols for GetSemanticInfo API,
+        /// Generates a new <see cref="BoundBadExpression"/> with no known type, given lookupResultKind and
+        // given symbols for GetSemanticInfo API,
         /// and the given bound children.
         /// </summary>
         private BoundBadExpression BadExpression(
@@ -228,15 +235,21 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Helper method to generate a bound expression with HasErrors set to true.
-        /// Returned bound expression is guaranteed to have a non-null type, except when <paramref name="expr"/> is an unbound lambda.
-        /// If <paramref name="expr"/> already has errors and meets the above type requirements, then it is returned unchanged.
-        /// Otherwise, if <paramref name="expr"/> is a BoundBadExpression, then it is updated with the <paramref name="resultKind"/> and non-null type.
+        /// Returned bound expression is guaranteed to have a non-null type, except when <paramref
+        // name="expr"/> is an unbound lambda.
+        /// If <paramref name="expr"/> already has errors and meets the above type requirements, then it is
+        // returned unchanged.
+        /// Otherwise, if <paramref name="expr"/> is a BoundBadExpression, then it is updated with the
+        // <paramref name="resultKind"/> and non-null type.
         /// Otherwise, a new <see cref="BoundBadExpression"/> wrapping <paramref name="expr"/> is returned.
-        /// The returned expression has not been converted if needed, so callers need to make sure that the expression is converted before being put into the
-        /// bound tree. Make sure to test with unconverted constructs such as switch expressions, target-typed new, or interpolated strings.
+        /// The returned expression has not been converted if needed, so callers need to make sure that the
+        // expression is converted before being put into the
+        /// bound tree. Make sure to test with unconverted constructs such as switch expressions,
+        // target-typed new, or interpolated strings.
         /// </summary>
         /// <remarks>
-        /// Returned expression need not be a <see cref="BoundBadExpression"/>, but is guaranteed to have HasErrors set to true.
+        /// Returned expression need not be a <see cref="BoundBadExpression"/>, but is guaranteed to have
+        // HasErrors set to true.
         /// </remarks>
         private BoundExpression ToBadExpression(
             BoundExpression expr,
@@ -331,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// When binding a switch case's expression, it is possible that it resolves to a type (technically, a type pattern).
+        /// When binding a switch case's expression, it is possible that it resolves to a type (technically,
+        // a type pattern).
         /// This implementation permits either an rvalue or a BoundTypeExpression.
         /// </summary>
         internal BoundExpression BindTypeOrRValue(
@@ -375,9 +389,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Bind an rvalue expression to its natural type.  For example, a switch expression that has not been
-        /// converted to another type has to be converted to its own natural type by applying a conversion to
-        /// that type to each of the arms of the switch expression.  This method is a bottleneck for ensuring
+        /// Bind an rvalue expression to its natural type.  For example, a switch expression that has not
+        // been
+        /// converted to another type has to be converted to its own natural type by applying a conversion
+        // to
+        /// that type to each of the arms of the switch expression.  This method is a bottleneck for
+        // ensuring
         /// that such a conversion occurs when needed.  It also handles tuple expressions which need to be
         /// converted to their own natural type because they may contain switch expressions.
         /// </summary>
@@ -433,7 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 && falseArg is Symbol falseSymbol
                             )
                             {
-                                // ERR_InvalidQM is an error that there is no conversion between the two types. They might be the same
+                                // ERR_InvalidQM is an error that there is no conversion between the two types. They might be the
+                                // same
                                 // type name from different assemblies, so we disambiguate the display.
                                 SymbolDistinguisher distinguisher = new SymbolDistinguisher(
                                     this.Compilation,
@@ -805,7 +823,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return expr;
         }
 
-        // PERF: allowArgList is not a parameter because it is fairly uncommon case where arglists are allowed
+        // PERF: allowArgList is not a parameter because it is fairly uncommon case where arglists are
+        // allowed
         //       so we do not want to pass that argument to every BindExpression which is often recursive
         //       and extra arguments contribute to the stack size.
         protected BoundExpression BindExpressionAllowArgList(
@@ -1395,7 +1414,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Bind a declaration variable where it isn't permitted. The caller is expected to produce a diagnostic.
+        /// Bind a declaration variable where it isn't permitted. The caller is expected to produce a
+        // diagnostic.
         /// </summary>
         private BoundExpression BindDeclarationVariablesForErrorRecovery(
             TypeWithAnnotations declTypeWithAnnotations,
@@ -1603,7 +1623,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // Always track the inferred positions in the bound node, so that conversions don't produce a warning
+            // Always track the inferred positions in the bound node, so that conversions don't produce a
+            // warning
             // for "dropped names" on tuple literal when the name was inferred.
             return new BoundTupleLiteral(
                 node,
@@ -1723,7 +1744,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Removes duplicate entries in <paramref name="inferredElementNames"/> and frees it if only nulls remain.
+        /// Removes duplicate entries in <paramref name="inferredElementNames"/> and frees it if only nulls
+        // remain.
         /// </summary>
         private static void RemoveDuplicateInferredTupleNamesAndFreeIfEmptied(
             ref ArrayBuilder<string> inferredElementNames,
@@ -1964,7 +1986,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // would be hoisted into a closure for an anonymous function, iterator or async method.
                     // We do that during the actual rewrites.
 
-                    // CS4013: Instance of type '{0}' cannot be used inside an anonymous function, query expression, iterator block or async method
+                    // CS4013: Instance of type '{0}' cannot be used inside an anonymous function, query expression,
+                    // iterator block or async method
                     Error(
                         diagnostics,
                         ErrorCode.ERR_SpecialByRefInLambda,
@@ -2065,7 +2088,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
         }
 
-        /// <summary>Called when an "attribute-dependent" type such as 'dynamic', 'string?', etc. is not permitted.</summary>
+        /// <summary>Called when an "attribute-dependent" type such as 'dynamic', 'string?', etc. is not
+        // permitted.</summary>
         private void CheckDisallowedAttributeDependentType(
             TypeWithAnnotations typeArgument,
             NameSyntax attributeName,
@@ -2538,7 +2562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return;
                     }
 
-                    // Get above the InContainerBinder for the enclosing type to see if we would find a primary constructor parameter in that scope instead
+                    // Get above the InContainerBinder for the enclosing type to see if we would find a primary
+                    // constructor parameter in that scope instead
                     Binder binder = this;
 
                     while (
@@ -2808,7 +2833,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isError
         )
         {
-            // Events are handled later as we don't know yet if we are binding to the event or it's backing field.
+            // Events are handled later as we don't know yet if we are binding to the event or it's backing
+            // field.
             if (symbol.Kind is not (SymbolKind.Event or SymbolKind.Property))
             {
                 ReportDiagnosticsIfObsolete(diagnostics, symbol, node, hasBaseReceiver: false);
@@ -2926,7 +2952,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && localSymbol.ForbiddenZone?.Contains(node) == true
                     )
                     {
-                        // A var (type-inferred) local variable has been used in its own initialization (the "forbidden zone").
+                        // A var (type-inferred) local variable has been used in its own initialization (the "forbidden
+                        // zone").
                         // There are many cases where this occurs, including:
                         //
                         // 1. var x = M(out x);
@@ -3770,7 +3797,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             CheckFeatureAvailability(node, MessageID.IDS_FeatureIndexOperator, diagnostics);
 
-            // Used in lowering as the second argument to the constructor. Example: new Index(value, fromEnd: true)
+            // Used in lowering as the second argument to the constructor. Example: new Index(value, fromEnd:
+            // true)
             GetSpecialType(SpecialType.System_Boolean, diagnostics, node);
 
             BoundExpression boundOperand = BindValue(
@@ -4267,10 +4295,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // report all leaf elements of the tuple literal that failed to convert
-            // NOTE: we are not responsible for reporting use site errors here, just the failed leaf conversions.
-            // By the time we get here we have done analysis and know we have failed the cast in general, and diagnostics collected in the process is already in the bag.
+            // NOTE: we are not responsible for reporting use site errors here, just the failed leaf
+            // conversions.
+            // By the time we get here we have done analysis and know we have failed the cast in general, and
+            // diagnostics collected in the process is already in the bag.
             // The only thing left is to form a diagnostics about the actually failing conversion(s).
-            // This whole method does not itself collect any usesite diagnostics. Its only purpose is to produce an error better than "conversion failed here"
+            // This whole method does not itself collect any usesite diagnostics. Its only purpose is to produce
+            // an error better than "conversion failed here"
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
             for (int i = 0; i < targetElementTypesWithAnnotations.Length; i++)
@@ -4300,10 +4331,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// This implements the casting behavior described in section 6.2.3 of the spec:
         ///
-        /// - If the nullable conversion is from S to T?, the conversion is evaluated as the underlying conversion
+        /// - If the nullable conversion is from S to T?, the conversion is evaluated as the underlying
+        // conversion
         ///   from S to T followed by a wrapping from T to T?.
         ///
-        /// This particular check is done in the binder because it involves conversion processing rules (like overflow
+        /// This particular check is done in the binder because it involves conversion processing rules
+        // (like overflow
         /// checking and constant folding) which are not handled by Conversions.
         /// </summary>
         private BoundExpression BindExplicitNullableCastFromNonNullable(
@@ -4505,7 +4538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             switch (argumentSyntax.Expression.Kind())
             {
-                // The next 3 cases should never be allowed as they cannot be ref/out. Assuming a bug in legacy compiler.
+                // The next 3 cases should never be allowed as they cannot be ref/out. Assuming a bug in legacy
+                // compiler.
                 case SyntaxKind.ParenthesizedLambdaExpression:
                 case SyntaxKind.SimpleLambdaExpression:
                 case SyntaxKind.AnonymousMethodExpression:
@@ -4514,7 +4548,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.ImplicitObjectCreationExpression:
                 case SyntaxKind.ParenthesizedExpression: // this is never allowed in legacy compiler
                 case SyntaxKind.DeclarationExpression:
-                    // A property/indexer is also invalid as it cannot be ref/out, but cannot be checked here. Assuming a bug in legacy compiler.
+                    // A property/indexer is also invalid as it cannot be ref/out, but cannot be checked here. Assuming
+                    // a bug in legacy compiler.
                     return true;
                 default:
                     // The only ones that concern us here for compat is: locals, params, fields
@@ -4951,7 +4986,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool hasNames = result.Names.Any();
             if (nameColonSyntax != null)
             {
-                // The common case is no named arguments. So we defer all work until the first named argument is seen.
+                // The common case is no named arguments. So we defer all work until the first named argument is
+                // seen.
                 if (!hasNames)
                 {
                     hasNames = true;
@@ -5076,7 +5112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             )
                             {
                                 Debug.Assert(argNumber > 0);
-                                // The 'ref' modifier for argument {0} corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
+                                // The 'ref' modifier for argument {0} corresponding to 'in' parameter is equivalent to 'in'.
+                                // Consider using 'in' instead.
                                 diagnostics.Add(
                                     ErrorCode.WRN_BadArgRef,
                                     argument.Syntax,
@@ -5170,7 +5207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         diagnostics
                     );
                 }
-                // https://github.com/dotnet/roslyn/issues/37119 : should we create an (Identity) conversion when the kind is Identity but the types differ?
+                // https://github.com/dotnet/roslyn/issues/37119 : should we create an (Identity) conversion when
+                // the kind is Identity but the types differ?
                 else if (!kind.IsIdentity)
                 {
                     TypeWithAnnotations parameterTypeWithAnnotations =
@@ -5231,7 +5269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 parameters,
                                 arg
                             );
-                        // CreateConversion reports tuple literal name mismatches, and constructs the expected pattern of bound nodes.
+                        // CreateConversion reports tuple literal name mismatches, and constructs the expected pattern of
+                        // bound nodes.
                         arguments[arg] = CreateConversion(
                             argument.Syntax,
                             argument,
@@ -5610,7 +5649,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// This method walks through the array's InitializerExpressionSyntax and binds all the initializer expressions recursively.
+        /// This method walks through the array's InitializerExpressionSyntax and binds all the initializer
+        // expressions recursively.
         /// NOTE: It doesn't convert the bound initializer expressions to array's element type.
         /// NOTE: This is done separately in ConvertAndBindArrayInitialization method below.
         /// </summary>
@@ -5696,7 +5736,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Given an array of bound initializer expressions, this method converts these bound expressions
-        /// to array's element type and generates a BoundArrayInitialization with the converted initializers.
+        /// to array's element type and generates a BoundArrayInitialization with the converted
+        // initializers.
         /// </summary>
         /// <param name="diagnostics">Diagnostics.</param>
         /// <param name="node">Initializer Syntax.</param>
@@ -6147,7 +6188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             bool inLegalPosition = true;
 
-            // If we are using a language version that does not restrict the position of a stackalloc expression, skip that test.
+            // If we are using a language version that does not restrict the position of a stackalloc
+            // expression, skip that test.
             LanguageVersion requiredVersion =
                 MessageID.IDS_FeatureNestedStackalloc.RequiredVersion();
             if (requiredVersion > Compilation.LanguageVersion)
@@ -6208,8 +6250,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // We treat the stackalloc as target-typed, so we give it a null type for now.
             return null;
 
-            // Is this a context in which a stackalloc expression could be converted to the corresponding pointer
-            // type? The only context that permits it is the initialization of a local variable declaration (when
+            // Is this a context in which a stackalloc expression could be converted to the corresponding
+            // pointer
+            // type? The only context that permits it is the initialization of a local variable declaration
+            // (when
             // the declaration appears as a statement or as the first part of a for loop).
             static bool isStackallocTargetTyped(SyntaxNode node)
             {
@@ -6388,10 +6432,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <see cref="ConstructorInitializerSyntax.ArgumentList"/>, or
         /// <see cref="PrimaryConstructorBaseTypeSyntax.ArgumentList"/> for explicit.</param>
         /// <param name="constructor">Constructor containing the initializer.</param>
-        /// <param name="diagnostics">Accumulates errors (e.g. unable to find constructor to invoke).</param>
+        /// <param name="diagnostics">Accumulates errors (e.g. unable to find constructor to
+        // invoke).</param>
         /// <returns>A bound expression for the constructor initializer call.</returns>
         /// <remarks>
-        /// This method should be kept consistent with Compiler.BindConstructorInitializer (e.g. same error codes).
+        /// This method should be kept consistent with Compiler.BindConstructorInitializer (e.g. same error
+        // codes).
         /// </remarks>
         internal BoundExpression BindConstructorInitializer(
             ArgumentListSyntax initializerArgumentListOpt,
@@ -6502,7 +6548,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     initializerType = initializerType.BaseTypeNoUseSiteDiagnostics;
 
-                    // Soft assert: we think this is the case, and we're asserting to catch scenarios that violate our expectations
+                    // Soft assert: we think this is the case, and we're asserting to catch scenarios that violate our
+                    // expectations
                     Debug.Assert(
                         (object)initializerType != null
                             || containingType.SpecialType == SpecialType.System_Object
@@ -6582,7 +6629,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
 
                     default:
-                        // Note: use syntax node of constructor with initializer, not constructor invoked by initializer (i.e. methodResolutionResult).
+                        // Note: use syntax node of constructor with initializer, not constructor invoked by initializer
+                        // (i.e. methodResolutionResult).
                         nonNullSyntax = constructor.GetNonNullSyntaxNode();
                         errorLocation = constructor.GetFirstLocation();
                         enableCallerInfo = false;
@@ -6756,7 +6804,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (resultMember.HasSetsRequiredMembers && !constructor.HasSetsRequiredMembers)
                     {
                         hasErrors = true;
-                        // This constructor must add 'SetsRequiredMembers' because it chains to a constructor that has that attribute.
+                        // This constructor must add 'SetsRequiredMembers' because it chains to a constructor that has that
+                        // attribute.
                         diagnostics.Add(
                             ErrorCode.ERR_ChainingToSetsRequiredMembersRequiresSetsRequiredMembers,
                             errorLocation
@@ -6922,7 +6971,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             BoundExpression result = bindObjectCreationExpression(node, diagnostics);
 
-            // Assert that the shape of the BoundBadExpression is sound and is not going to confuse NullableWalker for target-typed 'new'.
+            // Assert that the shape of the BoundBadExpression is sound and is not going to confuse
+            // NullableWalker for target-typed 'new'.
             Debug.Assert(
                 result is not BoundBadExpression { ChildBoundNodes: var children }
                     || !children.Any((child, node) => child.Syntax == node, node)
@@ -7000,7 +7050,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         goto case TypeKind.Class;
 
                     case TypeKind.Dynamic:
-                    // we didn't find any type called "dynamic" so we are using the builtin dynamic type, which has no constructors:
+                    // we didn't find any type called "dynamic" so we are using the builtin dynamic type, which has no
+                    // constructors:
                     case TypeKind.Array:
                         // ex: new ref[]
                         type = new ExtendedErrorTypeSymbol(
@@ -7255,7 +7306,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // skip the rest of this binding
             }
             // There are four cases for a delegate creation expression (7.6.10.5):
-            // 1. An anonymous function is treated as a conversion from the anonymous function to the delegate type.
+            // 1. An anonymous function is treated as a conversion from the anonymous function to the delegate
+            // type.
             else if (argument is UnboundLambda unboundLambda)
             {
                 // analyzedArguments.HasErrors could be true,
@@ -7640,7 +7692,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
         }
 
-        /// <param name="typeSyntax">Shouldn't be null if <paramref name="initializerOpt"/> is not null.</param>
+        /// <param name="typeSyntax">Shouldn't be null if <paramref name="initializerOpt"/> is not
+        // null.</param>
         private BoundExpression MakeBadExpressionForObjectCreation(
             SyntaxNode node,
             TypeSymbol type,
@@ -7775,8 +7828,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // SPEC:    7.6.10.2 Object initializers
             //
-            // SPEC:    An object initializer consists of a sequence of member initializers, enclosed by { and } tokens and separated by commas.
-            // SPEC:    Each member initializer must name an accessible field or property of the object being initialized, followed by an equals sign and
+            // SPEC:    An object initializer consists of a sequence of member initializers, enclosed by { and }
+            // tokens and separated by commas.
+            // SPEC:    Each member initializer must name an accessible field or property of the object being
+            // initialized, followed by an equals sign and
             // SPEC:    an expression or an object initializer or collection initializer.
 
             Debug.Assert(
@@ -7791,11 +7846,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     initializerSyntax.OpenBraceToken
                 );
 
-            // We use a location specific binder for binding object initializer field/property access to generate object initializer specific diagnostics:
+            // We use a location specific binder for binding object initializer field/property access to
+            // generate object initializer specific diagnostics:
             //  1) CS1914 (ERR_StaticMemberInObjectInitializer)
             //  2) CS1917 (ERR_ReadonlyValueTypeInObjectInitializer)
             //  3) CS1918 (ERR_ValueTypePropertyInObjectInitializer)
-            // Note that this is only used for the LHS of the assignment - these diagnostics do not apply on the RHS.
+            // Note that this is only used for the LHS of the assignment - these diagnostics do not apply on the
+            // RHS.
             // For this reason, we will actually need two binders: this and this.WithAdditionalFlags.
             var objectInitializerMemberBinder = useObjectInitDiagnostics
                 ? this.WithAdditionalFlags(BinderFlags.ObjectInitializerMember)
@@ -7840,13 +7897,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundObjectOrCollectionValuePlaceholder implicitReceiver
         )
         {
-            // SPEC:    A member initializer that specifies an expression after the equals sign is processed in the same way as an assignment (spec 7.17.1) to the field or property.
+            // SPEC:    A member initializer that specifies an expression after the equals sign is processed in
+            // the same way as an assignment (spec 7.17.1) to the field or property.
 
             if (memberInitializer.Kind() == SyntaxKind.SimpleAssignmentExpression)
             {
                 var initializer = (AssignmentExpressionSyntax)memberInitializer;
 
-                // We use a location specific binder for binding object initializer field/property access to generate object initializer specific diagnostics:
+                // We use a location specific binder for binding object initializer field/property access to
+                // generate object initializer specific diagnostics:
                 //  1) CS1914 (ERR_StaticMemberInObjectInitializer)
                 //  2) CS1917 (ERR_ReadonlyValueTypeInObjectInitializer)
                 //  3) CS1918 (ERR_ValueTypePropertyInObjectInitializer)
@@ -7940,11 +7999,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    // SPEC:    Each member initializer must name an accessible field or property of the object being initialized, followed by an equals sign and
+                    // SPEC:    Each member initializer must name an accessible field or property of the object being
+                    // initialized, followed by an equals sign and
                     // SPEC:    an expression or an object initializer or collection initializer.
-                    // SPEC:    A member initializer that specifies an expression after the equals sign is processed in the same way as an assignment (7.17.1) to the field or property.
+                    // SPEC:    A member initializer that specifies an expression after the equals sign is processed in
+                    // the same way as an assignment (7.17.1) to the field or property.
 
-                    // SPEC VIOLATION:  Native compiler also allows initialization of field-like events in object initializers, so we allow it as well.
+                    // SPEC VIOLATION:  Native compiler also allows initialization of field-like events in object
+                    // initializers, so we allow it as well.
 
                     boundMember = BindInstanceMemberAccess(
                         node: memberName,
@@ -8002,18 +8064,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            // SPEC:    A member initializer that specifies an object initializer after the equals sign is a nested object initializer,
-            // SPEC:    i.e. an initialization of an embedded object. Instead of assigning a new value to the field or property,
-            // SPEC:    the assignments in the nested object initializer are treated as assignments to members of the field or property.
-            // SPEC:    Nested object initializers cannot be applied to properties with a value type, or to read-only fields with a value type.
+            // SPEC:    A member initializer that specifies an object initializer after the equals sign is a
+            // nested object initializer,
+            // SPEC:    i.e. an initialization of an embedded object. Instead of assigning a new value to the
+            // field or property,
+            // SPEC:    the assignments in the nested object initializer are treated as assignments to members
+            // of the field or property.
+            // SPEC:    Nested object initializers cannot be applied to properties with a value type, or to
+            // read-only fields with a value type.
 
-            // NOTE:    The dev11 behavior does not match the spec that was current at the time (quoted above).  However, in the roslyn
-            // NOTE:    timeframe, the spec will be updated to apply the same restriction to nested collection initializers.  Therefore,
+            // NOTE:    The dev11 behavior does not match the spec that was current at the time (quoted above).
+            // However, in the roslyn
+            // NOTE:    timeframe, the spec will be updated to apply the same restriction to nested collection
+            // initializers.  Therefore,
             // NOTE:    roslyn will implement the dev11 behavior and it will be spec-compliant.
 
-            // NOTE:    In the roslyn timeframe, an additional restriction will (likely) be added to the spec - it is not sufficient for the
-            // NOTE:    type of the member to not be a value type - it must actually be a reference type (i.e. unconstrained type parameters
-            // NOTE:    should be prohibited).  To avoid breaking existing code, roslyn will not implement this new spec clause.
+            // NOTE:    In the roslyn timeframe, an additional restriction will (likely) be added to the spec -
+            // it is not sufficient for the
+            // NOTE:    type of the member to not be a value type - it must actually be a reference type (i.e.
+            // unconstrained type parameters
+            // NOTE:    should be prohibited).  To avoid breaking existing code, roslyn will not implement this
+            // new spec clause.
             // TODO:    If/when we have a way to version warnings, we should add a warning for this.
 
             BoundKind boundMemberKind = boundMember.Kind;
@@ -8093,10 +8164,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     defaultArguments = indexer.DefaultArguments;
                     expanded = indexer.Expanded;
 
-                    // If any of the arguments is an interpolated string handler that takes the receiver as an argument for creation,
-                    // we disallow this. During lowering, indexer arguments are evaluated before the receiver for this scenario, and
-                    // we therefore can't get the receiver at the point it will be needed for the constructor. We could technically
-                    // support it for top-level member indexer initializers (ie, initializers directly on the `new Type` instance),
+                    // If any of the arguments is an interpolated string handler that takes the receiver as an argument
+                    // for creation,
+                    // we disallow this. During lowering, indexer arguments are evaluated before the receiver for this
+                    // scenario, and
+                    // we therefore can't get the receiver at the point it will be needed for the constructor. We could
+                    // technically
+                    // support it for top-level member indexer initializers (ie, initializers directly on the `new Type`
+                    // instance),
                     // but for user and language simplicity we blanket forbid this.
                     foreach (var argument in arguments)
                     {
@@ -8160,7 +8235,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (!hasErrors)
             {
-                // CheckValueKind to generate possible diagnostics for invalid initializers non-viable member lookup result:
+                // CheckValueKind to generate possible diagnostics for invalid initializers non-viable member lookup
+                // result:
                 //      1) CS0154 (ERR_PropertyLacksGet)
                 //      2) CS0200 (ERR_AssgReadonlyProp)
                 if (
@@ -8293,11 +8369,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(memberNameMap != null);
 
-            // SPEC:    It is an error for an object initializer to include more than one member initializer for the same field or property.
+            // SPEC:    It is an error for an object initializer to include more than one member initializer for
+            // the same field or property.
 
             if (!boundMemberInitializer.HasAnyErrors)
             {
-                // SPEC:    A member initializer that specifies an expression after the equals sign is processed in the same way as an assignment (7.17.1) to the field or property.
+                // SPEC:    A member initializer that specifies an expression after the equals sign is processed in
+                // the same way as an assignment (7.17.1) to the field or property.
 
                 var memberInitializerSyntax = boundMemberInitializer.Syntax;
 
@@ -8339,7 +8417,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (constructor.ContainingType.HasRequiredMembersError)
             {
-                // An error will be reported on the constructor if from source, or a use-site diagnostic will be reported on the use if from metadata.
+                // An error will be reported on the constructor if from source, or a use-site diagnostic will be
+                // reported on the use if from metadata.
                 return;
             }
 
@@ -8398,7 +8477,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     is BoundObjectInitializerExpressionBase initializerExpression
                 )
                 {
-                    // Required member '{0}' must be assigned a value, it cannot use a nested member or collection initializer.
+                    // Required member '{0}' must be assigned a value, it cannot use a nested member or collection
+                    // initializer.
                     diagnostics.Add(
                         ErrorCode.ERR_RequiredMembersMustBeAssignedValue,
                         initializerExpression.Syntax.Location,
@@ -8445,13 +8525,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // SPEC:    7.6.10.3 Collection initializers
             //
-            // SPEC:    A collection initializer consists of a sequence of element initializers, enclosed by { and } tokens and separated by commas.
-            // SPEC:    The following is an example of an object creation expression that includes a collection initializer:
+            // SPEC:    A collection initializer consists of a sequence of element initializers, enclosed by {
+            // and } tokens and separated by commas.
+            // SPEC:    The following is an example of an object creation expression that includes a collection
+            // initializer:
             // SPEC:        List<int> digits = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            // SPEC:    The collection object to which a collection initializer is applied must be of a type that implements System.Collections.IEnumerable or
-            // SPEC:    a compile-time error occurs. For each specified element in order, the collection initializer invokes an Add method on the target object
-            // SPEC:    with the expression list of the element initializer as argument list, applying normal overload resolution for each invocation.
-            // SPEC:    Thus, the collection object must contain an applicable Add method for each element initializer.
+            // SPEC:    The collection object to which a collection initializer is applied must be of a type
+            // that implements System.Collections.IEnumerable or
+            // SPEC:    a compile-time error occurs. For each specified element in order, the collection
+            // initializer invokes an Add method on the target object
+            // SPEC:    with the expression list of the element initializer as argument list, applying normal
+            // overload resolution for each invocation.
+            // SPEC:    Thus, the collection object must contain an applicable Add method for each element
+            // initializer.
 
             Debug.Assert(initializerSyntax.Kind() == SyntaxKind.CollectionInitializerExpression);
             Debug.Assert(initializerSyntax.Expressions.Any());
@@ -8464,7 +8550,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var initializerBuilder = ArrayBuilder<BoundExpression>.GetInstance();
 
-            // SPEC:    The collection object to which a collection initializer is applied must be of a type that implements System.Collections.IEnumerable or
+            // SPEC:    The collection object to which a collection initializer is applied must be of a type
+            // that implements System.Collections.IEnumerable or
             // SPEC:    a compile-time error occurs.
 
             bool hasEnumerableInitializerType = CollectionInitializerTypeImplementsIEnumerable(
@@ -8486,7 +8573,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // We use a location specific binder for binding collection initializer Add method to generate specific overload resolution diagnostics:
+            // We use a location specific binder for binding collection initializer Add method to generate
+            // specific overload resolution diagnostics:
             //  1) CS1921 (ERR_InitializerAddHasWrongSignature)
             //  2) CS1950 (ERR_BadArgTypesForCollectionAdd)
             //  3) CS1954 (ERR_InitializerAddHasParamModifiers)
@@ -8496,11 +8584,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var elementInitializer in initializerSyntax.Expressions)
             {
-                // NOTE:    collectionInitializerAddMethodBinder is used only for binding the Add method invocation expression, but not the entire initializer.
+                // NOTE:    collectionInitializerAddMethodBinder is used only for binding the Add method invocation
+                // expression, but not the entire initializer.
                 // NOTE:    Hence it is being passed as a parameter to BindCollectionInitializerElement().
-                // NOTE:    Ideally we would want to avoid this and bind the entire initializer with the collectionInitializerAddMethodBinder.
-                // NOTE:    However, this approach has few issues. These issues also occur when binding object initializer member assignment.
-                // NOTE:    See comments for objectInitializerMemberBinder in BindObjectInitializerExpression method for details about the pitfalls of alternate approaches.
+                // NOTE:    Ideally we would want to avoid this and bind the entire initializer with the
+                // collectionInitializerAddMethodBinder.
+                // NOTE:    However, this approach has few issues. These issues also occur when binding object
+                // initializer member assignment.
+                // NOTE:    See comments for objectInitializerMemberBinder in BindObjectInitializerExpression method
+                // for details about the pitfalls of alternate approaches.
 
                 BoundExpression boundElementInitializer = BindCollectionInitializerElement(
                     elementInitializer,
@@ -8528,12 +8620,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            // SPEC:    The collection object to which a collection initializer is applied must be of a type that implements System.Collections.IEnumerable or
+            // SPEC:    The collection object to which a collection initializer is applied must be of a type
+            // that implements System.Collections.IEnumerable or
             // SPEC:    a compile-time error occurs.
 
             if (initializerType.IsDynamic())
             {
-                // We cannot determine at compile time if initializerType implements System.Collections.IEnumerable, we must assume that it does.
+                // We cannot determine at compile time if initializerType implements System.Collections.IEnumerable,
+                // we must assume that it does.
                 return true;
             }
             else if (!initializerType.IsErrorType())
@@ -8544,8 +8638,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node
                 );
 
-                // NOTE:    Ideally, to check if the initializer type implements System.Collections.IEnumerable we can walk through
-                // NOTE:    its implemented interfaces. However the native compiler checks to see if there is conversion from initializer
+                // NOTE:    Ideally, to check if the initializer type implements System.Collections.IEnumerable we
+                // can walk through
+                // NOTE:    its implemented interfaces. However the native compiler checks to see if there is
+                // conversion from initializer
                 // NOTE:    type to the predefined System.Collections.IEnumerable type, so we do the same.
 
                 CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
@@ -8576,10 +8672,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundObjectOrCollectionValuePlaceholder implicitReceiver
         )
         {
-            // SPEC:    Each element initializer specifies an element to be added to the collection object being initialized, and consists of
+            // SPEC:    Each element initializer specifies an element to be added to the collection object being
+            // initialized, and consists of
             // SPEC:    a list of expressions enclosed by { and } tokens and separated by commas.
-            // SPEC:    A single-expression element initializer can be written without braces, but cannot then be an assignment expression,
-            // SPEC:    to avoid ambiguity with member initializers. The non-assignment-expression production is defined in 7.18.
+            // SPEC:    A single-expression element initializer can be written without braces, but cannot then
+            // be an assignment expression,
+            // SPEC:    to avoid ambiguity with member initializers. The non-assignment-expression production is
+            // defined in 7.18.
 
             if (elementInitializer.Kind() == SyntaxKind.ComplexElementInitializerExpression)
             {
@@ -8684,11 +8783,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundObjectOrCollectionValuePlaceholder implicitReceiver
         )
         {
-            // SPEC:    For each specified element in order, the collection initializer invokes an Add method on the target object
-            // SPEC:    with the expression list of the element initializer as argument list, applying normal overload resolution for each invocation.
-            // SPEC:    Thus, the collection object must contain an applicable Add method for each element initializer.
+            // SPEC:    For each specified element in order, the collection initializer invokes an Add method on
+            // the target object
+            // SPEC:    with the expression list of the element initializer as argument list, applying normal
+            // overload resolution for each invocation.
+            // SPEC:    Thus, the collection object must contain an applicable Add method for each element
+            // initializer.
 
-            // We use a location specific binder for binding collection initializer Add method to generate specific overload resolution diagnostics.
+            // We use a location specific binder for binding collection initializer Add method to generate
+            // specific overload resolution diagnostics.
             //  1) CS1921 (ERR_InitializerAddHasWrongSignature)
             //  2) CS1950 (ERR_BadArgTypesForCollectionAdd)
             //  3) CS1954 (ERR_InitializerAddHasParamModifiers)
@@ -8811,7 +8914,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var diagnostic in bag.AsEnumerableWithoutResolution())
                     {
-                        // Filter diagnostics that cannot be fixed since one cannot use ref modifiers in collection initializers.
+                        // Filter diagnostics that cannot be fixed since one cannot use ref modifiers in collection
+                        // initializers.
                         if (
                             !(
                                 (ErrorCode)diagnostic.Code
@@ -9190,7 +9294,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<Symbol> symbols = ArrayBuilder<Symbol>.GetInstance();
             symbols.AddRange(candidateConstructors);
 
-            // NOTE: The use site diagnostics of the candidate constructors have already been reported (in PerformConstructorOverloadResolution).
+            // NOTE: The use site diagnostics of the candidate constructors have already been reported (in
+            // PerformConstructorOverloadResolution).
 
             var childNodes = ArrayBuilder<BoundExpression>.GetInstance();
             childNodes.AddRange(
@@ -9262,10 +9367,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             // CoClassAttribute contains the type information of the original CoClass for the interface.
             // We replace the interface creation with CoClass object creation for this case.
 
-            // NOTE: We don't attempt binding interface creation to CoClass creation if we are within an attribute argument or default parameter value.
-            // NOTE: This is done to prevent a cycle in an error scenario where we have a "new InterfaceType" expression in an attribute argument/default parameter value.
-            // NOTE: Accessing IsComImport/ComImportCoClass properties on given type symbol would attempt ForceCompeteAttributes, which would again try binding all attributes on the symbol.
-            // NOTE: causing infinite recursion. We avoid this cycle by checking if we are within in context of an Attribute argument.
+            // NOTE: We don't attempt binding interface creation to CoClass creation if we are within an
+            // attribute argument or default parameter value.
+            // NOTE: This is done to prevent a cycle in an error scenario where we have a "new InterfaceType"
+            // expression in an attribute argument/default parameter value.
+            // NOTE: Accessing IsComImport/ComImportCoClass properties on given type symbol would attempt
+            // ForceCompeteAttributes, which would again try binding all attributes on the symbol.
+            // NOTE: causing infinite recursion. We avoid this cycle by checking if we are within in context of
+            // an Attribute argument.
             if (!this.InAttributeArgument && !this.InParameterDefaultValue && type.IsComImport)
             {
                 NamedTypeSymbol coClassType = type.ComImportCoClass;
@@ -9327,7 +9436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (coClassType.IsUnboundGenericType)
             {
-                // BREAKING CHANGE:     Dev10 allows the following code to compile, even though the output assembly is not verifiable and generates a runtime exception:
+                // BREAKING CHANGE:     Dev10 allows the following code to compile, even though the output assembly
+                // is not verifiable and generates a runtime exception:
                 //
                 //          [ComImport, Guid("00020810-0000-0000-C000-000000000046")]
                 //          [CoClass(typeof(GenericClass<>))]
@@ -9339,7 +9449,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //              public static void Main() { var i = new InterfaceType(); }
                 //          }
                 //
-                //  We disallow CoClass creation if coClassType is an unbound generic type and report a compile time error.
+                //  We disallow CoClass creation if coClassType is an unbound generic type and report a compile time
+                // error.
 
                 Error(diagnostics, ErrorCode.ERR_BadCoClassSig, node, coClassType, interfaceType);
             }
@@ -9576,23 +9687,32 @@ namespace Microsoft.CodeAnalysis.CSharp
 #nullable disable
 
         /// <summary>
-        /// Given the type containing constructors, gets the list of candidate instance constructors and uses overload resolution to determine which one should be called.
+        /// Given the type containing constructors, gets the list of candidate instance constructors and
+        // uses overload resolution to determine which one should be called.
         /// </summary>
         /// <param name="typeContainingConstructors">The containing type of the constructors.</param>
         /// <param name="analyzedArguments">The already bound arguments to the constructor.</param>
         /// <param name="errorName">The name to use in diagnostics if overload resolution fails.</param>
-        /// <param name="errorLocation">The location at which to report overload resolution result diagnostics.</param>
-        /// <param name="suppressResultDiagnostics">True to suppress overload resolution result diagnostics (but not argument diagnostics).</param>
+        /// <param name="errorLocation">The location at which to report overload resolution result
+        // diagnostics.</param>
+        /// <param name="suppressResultDiagnostics">True to suppress overload resolution result diagnostics
+        // (but not argument diagnostics).</param>
         /// <param name="diagnostics">Where diagnostics will be reported.</param>
-        /// <param name="memberResolutionResult">If this method returns true, then it will contain a valid MethodResolutionResult.
-        /// Otherwise, it may contain a MethodResolutionResult for an inaccessible constructor (in which case, it will incorrectly indicate success) or nothing at all.</param>
-        /// <param name="candidateConstructors">Candidate instance constructors of type <paramref name="typeContainingConstructors"/> used for overload resolution.</param>
-        /// <param name="allowProtectedConstructorsOfBaseType">It is always legal to access a protected base class constructor
+        /// <param name="memberResolutionResult">If this method returns true, then it will contain a valid
+        // MethodResolutionResult.
+        /// Otherwise, it may contain a MethodResolutionResult for an inaccessible constructor (in which
+        // case, it will incorrectly indicate success) or nothing at all.</param>
+        /// <param name="candidateConstructors">Candidate instance constructors of type <paramref
+        // name="typeContainingConstructors"/> used for overload resolution.</param>
+        /// <param name="allowProtectedConstructorsOfBaseType">It is always legal to access a protected base
+        // class constructor
         /// via a constructor initializer, but not from an object creation expression.</param>
         /// <returns>True if overload resolution successfully chose an accessible constructor.</returns>
         /// <remarks>
-        /// The two-pass algorithm (accessible constructors, then all constructors) is the reason for the unusual signature
-        /// of this method (i.e. not populating a pre-existing <see cref="OverloadResolutionResult{MethodSymbol}"/>).
+        /// The two-pass algorithm (accessible constructors, then all constructors) is the reason for the
+        // unusual signature
+        /// of this method (i.e. not populating a pre-existing <see
+        // cref="OverloadResolutionResult{MethodSymbol}"/>).
         /// Presently, rationalizing this behavior is not worthwhile.
         /// </remarks>
         internal bool TryPerformConstructorOverloadResolution(
@@ -9626,12 +9746,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Indicates whether overload resolution successfully chose an accessible constructor.
             bool succeededConsideringAccessibility = false;
 
-            // Indicates whether overload resolution resulted in a single best match, even though it might be inaccessible.
+            // Indicates whether overload resolution resulted in a single best match, even though it might be
+            // inaccessible.
             bool succeededIgnoringAccessibility = false;
 
             if (candidateConstructors.Any())
             {
-                // We have at least one accessible candidate constructor, perform overload resolution with accessible candidateConstructors.
+                // We have at least one accessible candidate constructor, perform overload resolution with
+                // accessible candidateConstructors.
                 this.OverloadResolution.ObjectCreationOverloadResolution(
                     candidateConstructors,
                     analyzedArguments,
@@ -9651,9 +9773,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && allInstanceConstructors.Length > candidateConstructors.Length
             )
             {
-                // Overload resolution failed on the accessible candidateConstructors, but we have at least one inaccessible constructor.
+                // Overload resolution failed on the accessible candidateConstructors, but we have at least one
+                // inaccessible constructor.
                 // We might have a best match constructor which is inaccessible.
-                // Try overload resolution with all instance constructors to generate correct diagnostics and semantic info for this case.
+                // Try overload resolution with all instance constructors to generate correct diagnostics and
+                // semantic info for this case.
                 OverloadResolutionResult<MethodSymbol> inaccessibleResult =
                     OverloadResolutionResult<MethodSymbol>.GetInstance();
                 this.OverloadResolution.ObjectCreationOverloadResolution(
@@ -9773,8 +9897,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics.AddDependencies(useSiteInfo);
                 foreach (var diagnostic in useSiteInfo.Diagnostics)
                 {
-                    // We don't want to report this error here because we'll report ERR_RequiredMembersBaseTypeInvalid. That error is suppressable by the
-                    // user using the `SetsRequiredMembers` attribute on the constructor, so reporting this error would prevent that from working.
+                    // We don't want to report this error here because we'll report ERR_RequiredMembersBaseTypeInvalid.
+                    // That error is suppressable by the
+                    // user using the `SetsRequiredMembers` attribute on the constructor, so reporting this error would
+                    // prevent that from working.
                     if ((ErrorCode)diagnostic.Code == ErrorCode.ERR_RequiredMembersInvalid)
                     {
                         continue;
@@ -10006,8 +10132,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(node.Kind() == SyntaxKind.PointerMemberAccessExpression);
                 boundLeft = BindRValueWithoutTargetType(exprSyntax, diagnostics); // Not Color Color issues with ->
 
-                // CONSIDER: another approach would be to construct a BoundPointerMemberAccess (assuming such a type existed),
-                // but that would be much more cumbersome because we'd be unable to build upon the BindMemberAccess infrastructure,
+                // CONSIDER: another approach would be to construct a BoundPointerMemberAccess (assuming such a type
+                // existed),
+                // but that would be much more cumbersome because we'd be unable to build upon the BindMemberAccess
+                // infrastructure,
                 // which expects a receiver.
 
                 // Dereference before binding member;
@@ -10021,7 +10149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out hasErrors
                 );
 
-                // If there is no pointed-at type, fall back on the actual type (i.e. assume the user meant "." instead of "->").
+                // If there is no pointed-at type, fall back on the actual type (i.e. assume the user meant "."
+                // instead of "->").
                 if (ReferenceEquals(pointedAtType, null))
                 {
                     boundLeft = ToBadExpression(boundLeft);
@@ -10053,8 +10182,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Attempt to bind the LHS of a member access expression.  If this is a Color Color case (spec 7.6.4.1),
-        /// then return a BoundExpression if we can easily disambiguate or a BoundTypeOrValueExpression if we
+        /// Attempt to bind the LHS of a member access expression.  If this is a Color Color case (spec
+        // 7.6.4.1),
+        /// then return a BoundExpression if we can easily disambiguate or a BoundTypeOrValueExpression if
+        // we
         /// cannot.  If this is not a Color Color case, then return null.
         /// </summary>
         private BoundExpression BindLeftOfPotentialColorColorMemberAccess(
@@ -10101,11 +10232,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // SPEC: 7.6.4.1 Identical simple names and type names
             // SPEC: In a member access of the form E.I, if E is a single identifier, and if the meaning of E as
-            // SPEC: a simple-name (spec 7.6.2) is a constant, field, property, local variable, or parameter with the
-            // SPEC: same type as the meaning of E as a type-name (spec 3.8), then both possible meanings of E are
-            // SPEC: permitted. The two possible meanings of E.I are never ambiguous, since I must necessarily be
+            // SPEC: a simple-name (spec 7.6.2) is a constant, field, property, local variable, or parameter
+            // with the
+            // SPEC: same type as the meaning of E as a type-name (spec 3.8), then both possible meanings of E
+            // are
+            // SPEC: permitted. The two possible meanings of E.I are never ambiguous, since I must necessarily
+            // be
             // SPEC: a member of the type E in both cases. In other words, the rule simply permits access to the
-            // SPEC: static members and nested types of E where a compile-time error would otherwise have occurred.
+            // SPEC: static members and nested types of E where a compile-time error would otherwise have
+            // occurred.
 
             var valueDiagnostics = BindingDiagnosticBag.GetInstance(diagnostics);
             var boundValue = BindIdentifier(
@@ -10290,7 +10425,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// If new checks are added to this method, they will also need to be added to
-        /// <see cref="MakeQueryInvocation(CSharpSyntaxNode, BoundExpression, string, TypeSyntax, TypeWithAnnotations, BindingDiagnosticBag, string)"/>.
+        /// <see cref="MakeQueryInvocation(CSharpSyntaxNode, BoundExpression, string, TypeSyntax,
+        // TypeWithAnnotations, BindingDiagnosticBag, string)"/>.
         /// </remarks>
 #else
         /// <summary>
@@ -10299,7 +10435,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// If new checks are added to this method, they will also need to be added to
-        /// <see cref="MakeQueryInvocation(CSharpSyntaxNode, BoundExpression, string, TypeSyntax, TypeWithAnnotations, BindingDiagnosticBag)"/>.
+        /// <see cref="MakeQueryInvocation(CSharpSyntaxNode, BoundExpression, string, TypeSyntax,
+        // TypeWithAnnotations, BindingDiagnosticBag)"/>.
         /// </remarks>
 #endif
         private BoundExpression BindMemberAccessWithBoundLeft(
@@ -11159,7 +11296,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // we have a special case to make the diagnostic for await expressions more clear for Windows:
             // if the receiver type is a windows RT async interface and the method name is GetAwaiter,
             // then we would suggest a using directive for "System".
-            // TODO: we should check if such a using directive would actually help, or if there is already one in scope.
+            // TODO: we should check if such a using directive would actually help, or if there is already one
+            // in scope.
             return methodName == WellKnownMemberNames.GetAwaiter
                 && ImplementsWinRTAsyncInterface(receiver);
         }
@@ -11410,7 +11548,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics
                 );
 
-                // Events are handled later as we don't know yet if we are binding to the event or it's backing field.
+                // Events are handled later as we don't know yet if we are binding to the event or it's backing
+                // field.
                 // Properties are handled in BindPropertyAccess
                 if (symbol.Kind is not (SymbolKind.Event or SymbolKind.Property))
                 {
@@ -11548,7 +11687,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics
                 );
 
-                // analyzedArguments will be null if the caller is resolving for error recovery to the first method group
+                // analyzedArguments will be null if the caller is resolving for error recovery to the first method
+                // group
                 // that can accept that receiver, regardless of arguments, when the signature cannot be inferred.
                 // (In the error case of nameof(o.M) or the error case of o.M = null; for instance.)
                 if (analyzedArguments == null)
@@ -11592,7 +11732,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var overloadResolutionResult = OverloadResolutionResult<MethodSymbol>.GetInstance();
-                // If we're in a parameter default value or attribute argument, this is an error scenario, so avoid checking
+                // If we're in a parameter default value or attribute argument, this is an error scenario, so avoid
+                // checking
                 // for COM imported types to avoid a binding cycle.
                 bool allowRefOmittedArguments =
                     !InParameterDefaultValue
@@ -11627,7 +11768,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     sealedDiagnostics
                 );
 
-                // If the search in the current scope resulted in any applicable method (regardless of whether a best
+                // If the search in the current scope resulted in any applicable method (regardless of whether a
+                // best
                 // applicable method could be determined) then our search is complete. Otherwise, store aside the
                 // first non-applicable result and continue searching for an applicable result.
                 if (result.HasAnyApplicableMethod)
@@ -11777,7 +11919,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // that struct type identifies a fixed size member, then E.I is evaluated and classified as follows:
                 // * If the expression E.I does not occur in an unsafe context, a compile-time error occurs.
                 // * If E is classified as a value, a compile-time error occurs.
-                // * Otherwise, if E is a moveable variable and the expression E.I is not a fixed_pointer_initializer,
+                // * Otherwise, if E is a moveable variable and the expression E.I is not a
+                // fixed_pointer_initializer,
                 //   a compile-time error occurs.
                 // * Otherwise, E references a fixed variable and the result of the expression is a pointer to the
                 //   first element of the fixed size buffer member I in E. The result is of type S*, where S is
@@ -12251,7 +12394,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if ((kind == SymbolKind.Method) || (kind == SymbolKind.Property))
                 {
-                    // SPEC VIOLATION: The spec states "Members that include an override modifier are excluded from the set"
+                    // SPEC VIOLATION: The spec states "Members that include an override modifier are excluded from the
+                    // set"
                     // SPEC VIOLATION: However, we are not going to do that here; we will keep the overriding member
                     // SPEC VIOLATION: in the method group. The reason is because for features like "go to definition"
                     // SPEC VIOLATION: we wish to go to the overriding member, not to the member of the base class.
@@ -13615,9 +13759,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var typeOrValue = (BoundTypeOrValueExpression)receiver;
 
-                // Unfortunately, the runtime binder doesn't have APIs that would allow us to pass both "type or value".
-                // Ideally the runtime binder would choose between type and value based on the result of the overload resolution.
-                // We need to pick one or the other here. Dev11 compiler passes the type only if the value can't be accessed.
+                // Unfortunately, the runtime binder doesn't have APIs that would allow us to pass both "type or
+                // value".
+                // Ideally the runtime binder would choose between type and value based on the result of the
+                // overload resolution.
+                // We need to pick one or the other here. Dev11 compiler passes the type only if the value can't be
+                // accessed.
                 bool inStaticContext;
                 bool useType =
                     IsInstance(typeOrValue.Data.ValueSymbol)
@@ -13660,7 +13807,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(receiver is not null);
             OverloadResolutionResult<PropertySymbol> overloadResolutionResult =
                 OverloadResolutionResult<PropertySymbol>.GetInstance();
-            // We don't consider when we're in default parameter values or attribute arguments so that we avoid cycles. This is an error scenario,
+            // We don't consider when we're in default parameter values or attribute arguments so that we avoid
+            // cycles. This is an error scenario,
             // so we don't care if we accidentally miss a parameter being applicable.
             bool allowRefOmittedArguments =
                 !InParameterDefaultValue
@@ -13685,10 +13833,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && overloadResolutionResult.HasAnyApplicableMember
             )
             {
-                // Note that the runtime binder may consider candidates that haven't passed compile-time final validation
-                // and an ambiguity error may be reported. Also additional checks are performed in runtime final validation
+                // Note that the runtime binder may consider candidates that haven't passed compile-time final
+                // validation
+                // and an ambiguity error may be reported. Also additional checks are performed in runtime final
+                // validation
                 // that are not performed at compile-time.
-                // Only if the set of final applicable candidates is empty we know for sure the call will fail at runtime.
+                // Only if the set of final applicable candidates is empty we know for sure the call will fail at
+                // runtime.
                 var finalApplicableCandidates = GetCandidatesPassingFinalValidation(
                     syntax,
                     overloadResolutionResult,
@@ -13756,7 +13907,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     candidates
                 );
 
-                // A bad BoundIndexerAccess containing an ErrorPropertySymbol will produce better flow analysis results than
+                // A bad BoundIndexerAccess containing an ErrorPropertySymbol will produce better flow analysis
+                // results than
                 // a BoundBadExpression containing the candidate indexers.
                 PropertySymbol property =
                     (candidates.Length == 1)
@@ -14374,11 +14526,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// or the first set of extension methods.
         /// </summary>
         /// <param name="node">The node associated with the method group</param>
-        /// <param name="analyzedArguments">The arguments of the invocation (or the delegate type, if a method group conversion)</param>
+        /// <param name="analyzedArguments">The arguments of the invocation (or the delegate type, if a
+        // method group conversion)</param>
         /// <param name="isMethodGroupConversion">True if it is a method group conversion</param>
         /// <param name="useSiteInfo"></param>
         /// <param name="inferWithDynamic"></param>
-        /// <param name="returnRefKind">If a method group conversion, the desired ref kind of the delegate</param>
+        /// <param name="returnRefKind">If a method group conversion, the desired ref kind of the
+        // delegate</param>
         /// <param name="returnType">If a method group conversion, the desired return type of the delegate.
         /// May be null during inference if the return type of the delegate needs to be computed.</param>
         internal MethodGroupResolution ResolveMethodGroup(
@@ -14512,7 +14666,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 callingConvention
             );
 
-            // If the method group's receiver is dynamic then there is no point in looking for extension methods;
+            // If the method group's receiver is dynamic then there is no point in looking for extension
+            // methods;
             // it's going to be a dynamic invocation.
             if (
                 !methodGroup.SearchExtensionMethods
@@ -14550,7 +14705,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                // At this point, both method group resolutions are non-empty but neither contains any applicable method.
+                // At this point, both method group resolutions are non-empty but neither contains any applicable
+                // method.
                 // Choose the MethodGroupResolution with the better (i.e. less worse) result kind.
 
                 Debug.Assert(!methodResolution.HasAnyApplicableMethod);
@@ -14650,8 +14806,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 var result = OverloadResolutionResult<MethodSymbol>.GetInstance();
-                // We check for being in a default parameter value or attribute to avoid a cycle. If we're binding these,
-                // this entire expression is bad, so we don't care whether this is a COM import type and we can safely
+                // We check for being in a default parameter value or attribute to avoid a cycle. If we're binding
+                // these,
+                // this entire expression is bad, so we don't care whether this is a COM import type and we can
+                // safely
                 // just pass false here.
                 bool allowRefOmittedArguments =
                     !InParameterDefaultValue
@@ -14675,7 +14833,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     callingConvention
                 );
 
-                // Note: the MethodGroupResolution instance is responsible for freeing its copy of analyzed arguments
+                // Note: the MethodGroupResolution instance is responsible for freeing its copy of analyzed
+                // arguments
                 return new MethodGroupResolution(
                     methodGroup,
                     null,
@@ -14794,9 +14953,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// For C# 13 onwards, returns one of the methods from the method group if all instance methods, or extension methods
+        /// For C# 13 onwards, returns one of the methods from the method group if all instance methods, or
+        // extension methods
         /// in the nearest scope, have the same signature ignoring parameter names and custom modifiers.
-        /// The particular method returned is not important since the caller is interested in the signature only.
+        /// The particular method returned is not important since the caller is interested in the signature
+        // only.
         /// </summary>
         private MethodSymbol? GetUniqueSignatureFromMethodGroup(BoundMethodGroup node)
         {
@@ -15242,7 +15403,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // The resulting type must be either a reference type T or Nullable<T>
-            // Therefore we must reject cases resulting in types that are not reference types and cannot be lifted into nullable.
+            // Therefore we must reject cases resulting in types that are not reference types and cannot be
+            // lifted into nullable.
             // - access cannot have unconstrained generic type
             // - access cannot be a pointer
             // - access cannot be a restricted type
@@ -15318,7 +15480,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // if access has value type, the type of the conditional access is nullable of that
-            // https://github.com/dotnet/roslyn/issues/35075: The test `accessType.IsValueType && !accessType.IsNullableType()`
+            // https://github.com/dotnet/roslyn/issues/35075: The test `accessType.IsValueType &&
+            // !accessType.IsNullableType()`
             // should probably be `accessType.IsNonNullableValueType()`
             if (accessType.IsValueType && !accessType.IsNullableType() && !accessType.IsVoidType())
             {

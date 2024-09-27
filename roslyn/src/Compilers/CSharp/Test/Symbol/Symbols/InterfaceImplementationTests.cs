@@ -615,7 +615,8 @@ class Class2 : BaseClass //does not declare interface
         }
 
         /// <summary>
-        /// Class implements interface method via implicit implementation in base class (which does not implement the interface).
+        /// Class implements interface method via implicit implementation in base class (which does not
+        // implement the interface).
         /// </summary>
         [Fact]
         public void TestImplicitMethodImplementationViaBase()
@@ -669,7 +670,8 @@ class Class2 : BaseClass //does not declare interface
         }
 
         /// <summary>
-        /// Class implements interface indexer via implicit implementation in base class (which does not implement the interface).
+        /// Class implements interface indexer via implicit implementation in base class (which does not
+        // implement the interface).
         /// </summary>
         [Fact]
         public void TestImplicitIndexerImplementationViaBase()
@@ -1180,7 +1182,8 @@ public class Derived : Base, Interface
                 ((Cci.IMethodDefinition)baseClassPropertySetter.GetCciAdapter()).IsVirtual
             );
 
-            // GetSynthesizedExplicitImplementations doesn't guarantee order, so sort to make the asserts easier to write.
+            // GetSynthesizedExplicitImplementations doesn't guarantee order, so sort to make the asserts easier
+            // to write.
 
             var synthesizedExplicitImpls = (
                 from m in derivedClass
@@ -1267,7 +1270,8 @@ class Class : CustomModifierOverridingD, Interface
             var classMethod2Impl = @class.FindImplementationForInterfaceMember(interfaceMethod2);
             Assert.Same(classDMethod2, classMethod2Impl);
 
-            // GetSynthesizedExplicitImplementations doesn't guarantee order, so sort to make the asserts easier to write.
+            // GetSynthesizedExplicitImplementations doesn't guarantee order, so sort to make the asserts easier
+            // to write.
 
             var synthesizedExplicitImpls = (
                 from m in @class
@@ -1311,7 +1315,8 @@ class Class : ContainsStatic
             var comp = CreateCompilation(text, new[] { ilAssemblyReference });
 
             comp.VerifyDiagnostics(
-                // (5,25): error CS0539: 'Class.StaticMethod()' in explicit interface declaration is not a member of interface
+                // (5,25): error CS0539: 'Class.StaticMethod()' in explicit interface declaration is not a member of
+                // interface
                 Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "StaticMethod")
                     .WithArguments("Class.StaticMethod()")
             );
@@ -1863,7 +1868,8 @@ static class Program
         }
 
         /// <summary>
-        /// In this case, C# thinks B.M implements I.M for C, but the CLR thinks A.M does.  To make sure that we get the
+        /// In this case, C# thinks B.M implements I.M for C, but the CLR thinks A.M does.  To make sure
+        // that we get the
         /// desired behavior, we have to insert an explicit bridge method.
         /// (See SourceNamedTypeSymbol.IsOverrideOfPossibleImplementationUnderRuntimeRules.)
         /// </summary>
@@ -1936,7 +1942,8 @@ class C : B, I { }
 
         /// <summary>
         /// In this case, C# thinks B.M implements I.M for C, but the CLR thinks A.M does.  However,
-        /// B.M overrides A.M, so there's no problem (distinguish from TestCSharpClrDisagreement_NonOverride).
+        /// B.M overrides A.M, so there's no problem (distinguish from
+        // TestCSharpClrDisagreement_NonOverride).
         /// (See SourceNamedTypeSymbol.IsOverrideOfPossibleImplementationUnderRuntimeRules.)
         /// </summary>
         [Fact]
@@ -2869,7 +2876,9 @@ class OneToOneUnicodeComparer : StringComparer
                 // (7,15): warning CS8597: Thrown value may be null.
                 //         throw null;
                 Diagnostic(ErrorCode.WRN_ThrowPossibleNull, "null").WithLocation(7, 15),
-                // (10,16): warning CS8767: Nullability of reference types in type of parameter 'obj' of 'int StringComparer.GetHashCode(string obj)' doesn't match implicitly implemented member 'int IEqualityComparer<string?>.GetHashCode(string? obj)' (possibly because of nullability attributes).
+                // (10,16): warning CS8767: Nullability of reference types in type of parameter 'obj' of 'int
+                // StringComparer.GetHashCode(string obj)' doesn't match implicitly implemented member 'int
+                // IEqualityComparer<string?>.GetHashCode(string? obj)' (possibly because of nullability attributes).
                 //     public int GetHashCode(string obj)
                 Diagnostic(
                         ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnImplicitImplementation,

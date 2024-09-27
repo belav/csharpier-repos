@@ -78,7 +78,8 @@ namespace Castle.Core.Logging
         void Trace(string message);
 
         /// <summary>
-        ///   Logs a trace message with lazily constructed message. The message will be constructed only if the <see cref = "IsTraceEnabled" /> is true.
+        ///   Logs a trace message with lazily constructed message. The message will be constructed only if
+        // the <see cref = "IsTraceEnabled" /> is true.
         /// </summary>
         void Trace(Func<string> messageFactory);
 
@@ -133,7 +134,8 @@ namespace Castle.Core.Logging
         void Debug(string message);
 
         /// <summary>
-        ///   Logs a debug message with lazily constructed message. The message will be constructed only if the <see cref = "IsDebugEnabled" /> is true.
+        ///   Logs a debug message with lazily constructed message. The message will be constructed only if
+        // the <see cref = "IsDebugEnabled" /> is true.
         /// </summary>
         void Debug(Func<string> messageFactory);
 
@@ -188,7 +190,8 @@ namespace Castle.Core.Logging
         void Error(string message);
 
         /// <summary>
-        ///   Logs an error message with lazily constructed message. The message will be constructed only if the <see cref = "IsErrorEnabled" /> is true.
+        ///   Logs an error message with lazily constructed message. The message will be constructed only if
+        // the <see cref = "IsErrorEnabled" /> is true.
         /// </summary>
         void Error(Func<string> messageFactory);
 
@@ -243,7 +246,8 @@ namespace Castle.Core.Logging
         void Fatal(string message);
 
         /// <summary>
-        ///   Logs a fatal message with lazily constructed message. The message will be constructed only if the <see cref = "IsFatalEnabled" /> is true.
+        ///   Logs a fatal message with lazily constructed message. The message will be constructed only if
+        // the <see cref = "IsFatalEnabled" /> is true.
         /// </summary>
         void Fatal(Func<string> messageFactory);
 
@@ -298,7 +302,8 @@ namespace Castle.Core.Logging
         void Info(string message);
 
         /// <summary>
-        ///   Logs a info message with lazily constructed message. The message will be constructed only if the <see cref = "IsInfoEnabled" /> is true.
+        ///   Logs a info message with lazily constructed message. The message will be constructed only if
+        // the <see cref = "IsInfoEnabled" /> is true.
         /// </summary>
         void Info(Func<string> messageFactory);
 
@@ -353,7 +358,8 @@ namespace Castle.Core.Logging
         void Warn(string message);
 
         /// <summary>
-        ///   Logs a warn message with lazily constructed message. The message will be constructed only if the <see cref = "IsWarnEnabled" /> is true.
+        ///   Logs a warn message with lazily constructed message. The message will be constructed only if
+        // the <see cref = "IsWarnEnabled" /> is true.
         /// </summary>
         void Warn(Func<string> messageFactory);
 

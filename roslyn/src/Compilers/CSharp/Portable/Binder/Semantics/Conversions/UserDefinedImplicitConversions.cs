@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal abstract partial class ConversionsBase
     {
         /// <remarks>
-        /// NOTE: Keep this method in sync with <see cref="AnalyzeImplicitUserDefinedConversionForV6SwitchGoverningType"/>.
+        /// NOTE: Keep this method in sync with <see
+        // cref="AnalyzeImplicitUserDefinedConversionForV6SwitchGoverningType"/>.
         /// </remarks>
         private UserDefinedConversionResult AnalyzeImplicitUserDefinedConversions(
             BoundExpression sourceExpression,
@@ -166,14 +167,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// This method find the set of applicable user-defined and lifted conversion operators, u.
         /// The set consists of the user-defined and lifted implicit conversion operators declared by
-        /// the classes and structs in d that convert from a type encompassing source to a type encompassed by target.
-        /// However if allowAnyTarget is true, then it considers all operators that convert from a type encompassing source
-        /// to any target. This flag must be set only if we are computing user defined conversions from a given source
+        /// the classes and structs in d that convert from a type encompassing source to a type encompassed
+        // by target.
+        /// However if allowAnyTarget is true, then it considers all operators that convert from a type
+        // encompassing source
+        /// to any target. This flag must be set only if we are computing user defined conversions from a
+        // given source
         /// type to any target type.
         /// </summary>
         /// <remarks>
-        /// Currently allowAnyTarget flag is only set to true by <see cref="AnalyzeImplicitUserDefinedConversionForV6SwitchGoverningType"/>,
-        /// where we must consider user defined implicit conversions from the type of the switch expression to
+        /// Currently allowAnyTarget flag is only set to true by <see
+        // cref="AnalyzeImplicitUserDefinedConversionForV6SwitchGoverningType"/>,
+        /// where we must consider user defined implicit conversions from the type of the switch expression
+        // to
         /// any of the possible switch governing types.
         /// </remarks>
         private void ComputeApplicableUserDefinedImplicitConversionSet(
@@ -579,7 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Find the most specific among a set of conversion operators, with the given constraint on the conversion.
+        /// Find the most specific among a set of conversion operators, with the given constraint on the
+        // conversion.
         /// </summary>
         private static int? MostSpecificConversionOperator(
             Func<UserDefinedConversionAnalysis, bool> constraint,
@@ -790,7 +797,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case ConversionKind.NoConversion:
 
                 // These are conversions from expression and do not apply.
-                // Specifically disallowed because there would be subtle consequences for the overload betterness rules.
+                // Specifically disallowed because there would be subtle consequences for the overload betterness
+                // rules.
                 case ConversionKind.ImplicitDynamic:
                 case ConversionKind.MethodGroup:
                 case ConversionKind.AnonymousFunction:
@@ -1081,28 +1089,40 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC:    The governing type of a switch statement is established by the switch expression.
             // SPEC:    1) If the type of the switch expression is sbyte, byte, short, ushort, int, uint,
             // SPEC:       long, ulong, bool, char, string, or an enum-type, or if it is the nullable type
-            // SPEC:       corresponding to one of these types, then that is the governing type of the switch statement.
+            // SPEC:       corresponding to one of these types, then that is the governing type of the switch
+            // statement.
             // SPEC:    2) Otherwise, exactly one user-defined implicit conversion (§6.4) must exist from the
             // SPEC:       type of the switch expression to one of the following possible governing types:
             // SPEC:       sbyte, byte, short, ushort, int, uint, long, ulong, char, string, or, a nullable type
             // SPEC:       corresponding to one of those types
 
-            // NOTE:    This method implements part (2) above, it should be called only if (1) is false for source type.
+            // NOTE:    This method implements part (2) above, it should be called only if (1) is false for
+            // source type.
             Debug.Assert((object)source != null);
             Debug.Assert(!source.IsValidV6SwitchGoverningType());
 
-            // NOTE: For (2) we use an approach similar to native compiler's approach, but call into the common code for analyzing user defined implicit conversions.
-            // NOTE:    (a) Compute the set of types D from which user-defined conversion operators should be considered by considering only the source type.
-            // NOTE:    (b) Instead of computing applicable user defined implicit conversions U from the source type to a specific target type,
+            // NOTE: For (2) we use an approach similar to native compiler's approach, but call into the common
+            // code for analyzing user defined implicit conversions.
+            // NOTE:    (a) Compute the set of types D from which user-defined conversion operators should be
+            // considered by considering only the source type.
+            // NOTE:    (b) Instead of computing applicable user defined implicit conversions U from the source
+            // type to a specific target type,
             // NOTE:        we compute these from the source type to ANY target type.
-            // NOTE:    (c) From the conversions in U, select the most specific of them that targets a valid switch governing type
+            // NOTE:    (c) From the conversions in U, select the most specific of them that targets a valid
+            // switch governing type
 
-            // SPEC VIOLATION: Because we use the same strategy for computing the most specific conversion, as the Dev10 compiler did (in fact
-            // SPEC VIOLATION: we share the code), we inherit any spec deviances in that analysis. Specifically, the analysis only considers
-            // SPEC VIOLATION: which conversion has the least amount of lifting, where a conversion may be considered to be in unlifted form,
-            // SPEC VIOLATION: half-lifted form (only the argument type or return type is lifted) or fully lifted form. The most specific computation
-            // SPEC VIOLATION: looks for a unique conversion that is least lifted. The spec, on the other hand, requires that the conversion
-            // SPEC VIOLATION: be *unique*, not merely most use the least amount of lifting among the applicable conversions.
+            // SPEC VIOLATION: Because we use the same strategy for computing the most specific conversion, as
+            // the Dev10 compiler did (in fact
+            // SPEC VIOLATION: we share the code), we inherit any spec deviances in that analysis. Specifically,
+            // the analysis only considers
+            // SPEC VIOLATION: which conversion has the least amount of lifting, where a conversion may be
+            // considered to be in unlifted form,
+            // SPEC VIOLATION: half-lifted form (only the argument type or return type is lifted) or fully
+            // lifted form. The most specific computation
+            // SPEC VIOLATION: looks for a unique conversion that is least lifted. The spec, on the other hand,
+            // requires that the conversion
+            // SPEC VIOLATION: be *unique*, not merely most use the least amount of lifting among the applicable
+            // conversions.
 
             // SPEC VIOLATION: This introduces a SPEC VIOLATION for the following tests in the native compiler:
 
@@ -1119,8 +1139,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // SPEC VIOLATION: Native compiler allows the above code to compile
             // SPEC VIOLATION: even though there are two user-defined implicit conversions:
-            // SPEC VIOLATION: 1) To int type (applicable in normal form): public static implicit operator int (Conv? C2)
-            // SPEC VIOLATION: 2) To int? type (applicable in lifted form): public static implicit operator int (Conv C)
+            // SPEC VIOLATION: 1) To int type (applicable in normal form): public static implicit operator int
+            // (Conv? C2)
+            // SPEC VIOLATION: 2) To int? type (applicable in lifted form): public static implicit operator int
+            // (Conv C)
 
             // NOTE:    // See also test SwitchTests.TODO
             // NOTE:    struct Conv
@@ -1135,14 +1157,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // SPEC VIOLATION: Native compiler allows the above code to compile too
             // SPEC VIOLATION: even though there are two user-defined implicit conversions:
-            // SPEC VIOLATION: 1) To string type (applicable in normal form): public static implicit operator string (Conv? C2)
-            // SPEC VIOLATION: 2) To int? type (applicable in half-lifted form): public static implicit operator int? (Conv C)
+            // SPEC VIOLATION: 1) To string type (applicable in normal form): public static implicit operator
+            // string (Conv? C2)
+            // SPEC VIOLATION: 2) To int? type (applicable in half-lifted form): public static implicit operator
+            // int? (Conv C)
 
-            // SPEC VIOLATION: This occurs because the native compiler compares the applicable conversions to find one with the least amount
+            // SPEC VIOLATION: This occurs because the native compiler compares the applicable conversions to
+            // find one with the least amount
             // SPEC VIOLATION: of lifting, ignoring whether the return types are the same or not.
             // SPEC VIOLATION: We do the same to maintain compatibility with the native compiler.
 
-            // (a) Compute the set of types D from which user-defined conversion operators should be considered by considering only the source type.
+            // (a) Compute the set of types D from which user-defined conversion operators should be considered
+            // by considering only the source type.
             var d = ArrayBuilder<(
                 NamedTypeSymbol ParticipatingType,
                 TypeParameterSymbol ConstrainedToTypeOpt
@@ -1154,8 +1180,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 useSiteInfo: ref useSiteInfo
             );
 
-            // (b) Instead of computing applicable user defined implicit conversions U from the source type to a specific target type,
-            //     we compute these from the source type to ANY target type. We will filter out those that are valid switch governing
+            // (b) Instead of computing applicable user defined implicit conversions U from the source type to a
+            // specific target type,
+            //     we compute these from the source type to ANY target type. We will filter out those that are
+            // valid switch governing
             //     types later.
             var ubuild = ArrayBuilder<UserDefinedConversionAnalysis>.GetInstance();
             ComputeApplicableUserDefinedImplicitConversionSet(

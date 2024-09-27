@@ -40,10 +40,12 @@ namespace System.Security.Principal
     {
         private WindowsIdentity _identity;
 
+        //
         // http://groups.google.ca/groups?q=WindowsPrincipal+m_roles&hl=en&lr=&ie=UTF-8&oe=UTF-8&selm=OghXf4OgCHA.4228%40tkmsftngp08&rnum=4
         private string[] m_roles;
 
         // case sensitivity versus number of groups
+        //
         // http://groups.google.ca/groups?q=WindowsPrincipal+m_roles&hl=en&lr=&ie=UTF-8&oe=UTF-8&selm=%23JEMHsMQCHA.1916%40tkmsftngp13&rnum=5
 
         public WindowsPrincipal(WindowsIdentity ntIdentity)

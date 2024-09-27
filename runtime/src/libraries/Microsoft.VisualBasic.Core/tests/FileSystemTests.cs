@@ -307,9 +307,12 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         // Not tested:
-        //   public static void FileGet(int FileNumber, ref System.Array Value, long RecordNumber = -1, bool ArrayIsDynamic = false, bool StringIsFixedLength = false) { }
-        //   public static void FileGet(int FileNumber, ref System.ValueType Value, long RecordNumber = -1) { }
-        //   public static void FilePut(int FileNumber, System.Array Value, long RecordNumber = -1, bool ArrayIsDynamic = false, bool StringIsFixedLength = false) { }
+        //   public static void FileGet(int FileNumber, ref System.Array Value, long RecordNumber = -1, bool
+        // ArrayIsDynamic = false, bool StringIsFixedLength = false) { }
+        //   public static void FileGet(int FileNumber, ref System.ValueType Value, long RecordNumber = -1)
+        // { }
+        //   public static void FilePut(int FileNumber, System.Array Value, long RecordNumber = -1, bool
+        // ArrayIsDynamic = false, bool StringIsFixedLength = false) { }
         //   public static void FilePut(int FileNumber, System.ValueType Value, long RecordNumber = -1) { }
         //   public static void FilePut(object FileNumber, object Value, object RecordNumber/* = -1*/) { }
 

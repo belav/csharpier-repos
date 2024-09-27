@@ -352,13 +352,13 @@ namespace Mono.Security.Cryptography
         {
             int i;
 
-            /* Update number of bytes mod 16 */
+/* Update number of bytes mod 16 */
             int index = count;
             count = (int)(index + cbSize) & 0xf;
 
             int partLen = 16 - index;
 
-            /* Transform as many times as possible. */
+/* Transform as many times as possible. */
             if (cbSize >= partLen)
             {
                 // MD2_memcpy((POINTER)&context->buffer[index], (POINTER)input, partLen);
@@ -377,7 +377,7 @@ namespace Mono.Security.Cryptography
             else
                 i = 0;
 
-            /* Buffer remaining input */
+/* Buffer remaining input */
             // MD2_memcpy((POINTER)&context->buffer[index], (POINTER)&input[i], inputLen-i);
             Buffer.BlockCopy(array, ibStart + i, buffer, index, (cbSize - i));
         }
@@ -412,7 +412,7 @@ namespace Mono.Security.Cryptography
         /// </summary>
         private void MD2Transform(byte[] state, byte[] checksum, byte[] block, int index)
         {
-            /* Form encryption block from state, block, state ^ block. */
+/* Form encryption block from state, block, state ^ block. */
             // MD2_memcpy ((POINTER)x, (POINTER)state, 16);
             Buffer.BlockCopy(state, 0, x, 0, 16);
             // MD2_memcpy ((POINTER)x+16, (POINTER)block, 16);
@@ -422,7 +422,7 @@ namespace Mono.Security.Cryptography
             for (int i = 0; i < 16; i++)
                 x[i + 32] = (byte)((byte)state[i] ^ (byte)block[index + i]);
 
-            /* Encrypt block (18 rounds). */
+/* Encrypt block (18 rounds). */
             int t = 0;
             for (int i = 0; i < 18; i++)
             {
@@ -431,11 +431,11 @@ namespace Mono.Security.Cryptography
                 t = (t + i) & 0xff;
             }
 
-            /* Save new state */
+/* Save new state */
             // MD2_memcpy ((POINTER)state, (POINTER)x, 16);
             Buffer.BlockCopy(x, 0, state, 0, 16);
 
-            /* Update checksum. */
+/* Update checksum. */
             t = checksum[15];
             for (int i = 0; i < 16; i++)
                 t = checksum[i] ^= PI_SUBST[block[index + i] ^ t];

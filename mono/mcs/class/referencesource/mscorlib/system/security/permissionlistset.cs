@@ -353,7 +353,8 @@ namespace System.Security
             CompressedStack innerCS
         )
         {
-            // function that completes the construction of the compressed stack if not done so already (bottom half for demand evaluation)
+            // function that completes the construction of the compressed stack if not done so already (bottom
+            // half for demand evaluation)
 
             bool bHaltConstruction = false;
             if (cs.CompressedStackHandle == null)

@@ -21,8 +21,10 @@ namespace System.Text.Json.Reflection
             type.IsGenericType && type.GetGenericTypeDefinition() == s_nullableType;
 
         /// <summary>
-        /// Returns <see langword="true" /> when the given type is assignable from <paramref name="from"/> including support
-        /// when <paramref name="from"/> is <see cref="Nullable{T}"/> by using the {T} generic parameter for <paramref name="from"/>.
+        /// Returns <see langword="true" /> when the given type is assignable from <paramref name="from"/>
+        // including support
+        /// when <paramref name="from"/> is <see cref="Nullable{T}"/> by using the {T} generic parameter for
+        // <paramref name="from"/>.
         /// </summary>
         public static bool IsAssignableFromInternal(this Type type, Type from)
         {
@@ -45,8 +47,10 @@ namespace System.Text.Json.Reflection
 
         public static bool HasRequiredMemberAttribute(this MemberInfo memberInfo)
         {
-            // For compiler related attributes we should only look at full type name rather than trying to do something different for version when attribute was introduced.
-            // I.e. library is targeting netstandard2.0 with polyfilled attributes and is being consumed by an app targeting net7.0 or greater.
+            // For compiler related attributes we should only look at full type name rather than trying to do
+            // something different for version when attribute was introduced.
+            // I.e. library is targeting netstandard2.0 with polyfilled attributes and is being consumed by an
+            // app targeting net7.0 or greater.
             return memberInfo.HasCustomAttributeWithName(
                 "System.Runtime.CompilerServices.RequiredMemberAttribute",
                 inherit: false

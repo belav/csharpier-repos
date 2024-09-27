@@ -19,28 +19,28 @@ namespace System.Web.Configuration
     using System.Xml;
 
     /*             <outputCacheSettings>
-                <!--
-                outputCacheProfiles Attributes:
-                  name="string" - Name of the output cache profile
-                  enabled="[true|false]" - Enable or disables caching of the content
-                  duration="int" - Seconds to store the data
-                  location="[]" - Location where the data is permitted
-                  shared="[true|false]" -
-                  sqlDependency="string" - Sql dependency string
-                  varyByControl="string" - semi-colon separated list of controls to vary by
-                  varyByCustom="string" - list of custom strings to vary by
-                  varyByContentEncoding="string" - semi-colon separated list of codings to vary by
-                  varyByHeader="string" - semi-colon separated list of headers to vary by
-                  varyByParam="string" - semi-colon separated list of parameters to vary by
-                  noStore="[true|false]" - Set the No-Store header on the response
-                -->
-                <outputCacheProfiles>
-                </outputCacheProfiles>
-                <fragmentCacheProfiles>
-                </fragmentCacheProfiles>
-            </outputCacheSettings>
-
- */
+    <!--
+    outputCacheProfiles Attributes:
+    name="string" - Name of the output cache profile
+    enabled="[true|false]" - Enable or disables caching of the content
+    duration="int" - Seconds to store the data
+    location="[]" - Location where the data is permitted
+    shared="[true|false]" -
+    sqlDependency="string" - Sql dependency string
+    varyByControl="string" - semi-colon separated list of controls to vary by
+    varyByCustom="string" - list of custom strings to vary by
+    varyByContentEncoding="string" - semi-colon separated list of codings to vary by
+    varyByHeader="string" - semi-colon separated list of headers to vary by
+    varyByParam="string" - semi-colon separated list of parameters to vary by
+    noStore="[true|false]" - Set the No-Store header on the response
+    -->
+    <outputCacheProfiles>
+    </outputCacheProfiles>
+    <fragmentCacheProfiles>
+    </fragmentCacheProfiles>
+    </outputCacheSettings>
+    
+    */
     public sealed class OutputCacheSettingsSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

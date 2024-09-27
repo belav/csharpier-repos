@@ -348,7 +348,8 @@ namespace System.Net
         ReadStateInfo readState;
         Base64WriteStateInfo writeState;
 
-        //the number of bytes needed to encode three bytes (see algorithm description in Encode method below)
+        //the number of bytes needed to encode three bytes (see algorithm description in Encode method
+        // below)
         const int sizeOfBase64EncodedChar = 4;
 
         //bytes with this value in the decode map are invalid
@@ -616,9 +617,12 @@ namespace System.Net
                 }
 
                 //how we actually encode: get three bytes in the
-                //buffer to be encoded.  Then, extract six bits at a time and encode each six bit chunk as a base-64 character.
-                //this means that three bytes of data will be encoded as four base64 characters.  It also means that to encode
-                //a character, we must have three bytes to encode so if the number of bytes is not divisible by three, we
+                //buffer to be encoded.  Then, extract six bits at a time and encode each six bit chunk as a base-64
+                // character.
+                //this means that three bytes of data will be encoded as four base64 characters.  It also means that
+                // to encode
+                //a character, we must have three bytes to encode so if the number of bytes is not divisible by
+                // three, we
                 //must pad the buffer (this happens below)
                 WriteState.Append(base64EncodeMap[(buffer[cur] & 0xfc) >> 2]);
                 WriteState.Append(
@@ -647,7 +651,8 @@ namespace System.Net
                 WriteState.AppendCRLF(shouldAppendSpaceToCRLF);
             }
 
-            //now pad this thing if we need to.  Since it must be a number of bytes that is evenly divisble by 3,
+            //now pad this thing if we need to.  Since it must be a number of bytes that is evenly divisble by
+            // 3,
             //if there are extra bytes, pad with '=' until we have a number of bytes divisible by 3
             switch (count % 3)
             {

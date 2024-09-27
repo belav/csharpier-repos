@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Collection of server variables with callback to HttpRequest for 'dynamic' ones
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* Collection of server variables with callback to HttpRequest for 'dynamic' ones
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -450,9 +450,9 @@ namespace System.Web
         }
     }
 
-    /*
-     *  Entry in a server vars colleciton
-     */
+/*
+*  Entry in a server vars colleciton
+*/
     internal class HttpServerVarsCollectionEntry
     {
         internal readonly String Name;

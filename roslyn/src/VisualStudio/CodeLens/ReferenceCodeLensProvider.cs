@@ -94,8 +94,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             return Task.FromResult<IAsyncCodeLensDataPoint>(dataPoint);
         }
 
-        // The current CodeLens OOP design does not allow us to register an event handler for WorkspaceChanged events
-        // which occur in devenv.exe. We instead poll for changes to the projects, and invalidate data points when
+        // The current CodeLens OOP design does not allow us to register an event handler for
+        // WorkspaceChanged events
+        // which occur in devenv.exe. We instead poll for changes to the projects, and invalidate data
+        // points when
         // changes are detected.
         //
         // This behavior is expected to change when CodeLens is rewritten using LSP.
@@ -261,7 +263,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             {
                 var codeElementKind = GetCodeElementKindsString(Descriptor.Kind);
 
-                // we always get data through VS rather than Roslyn OOP directly since we want final data rather than
+                // we always get data through VS rather than Roslyn OOP directly since we want final data rather
+                // than
                 // raw data from Roslyn OOP such as razor find all reference results
                 var referenceCountOpt = await _callbackService
                     .InvokeAsync<ReferenceCount?>(
@@ -310,7 +313,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 CancellationToken cancellationToken
             )
             {
-                // we always get data through VS rather than Roslyn OOP directly since we want final data rather than
+                // we always get data through VS rather than Roslyn OOP directly since we want final data rather
+                // than
                 // raw data from Roslyn OOP such as razor find all reference results
                 var referenceLocationDescriptors = await _callbackService
                     .InvokeAsync<(

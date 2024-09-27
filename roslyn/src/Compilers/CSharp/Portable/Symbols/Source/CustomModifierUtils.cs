@@ -82,10 +82,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <param name="sourceType">Type that already has custom modifiers.</param>
-        /// <param name="destinationType">Same as <paramref name="sourceType"/>, but without custom modifiers.
-        /// May differ in object/dynamic, tuple element names, or other differences ignored by the runtime.</param>
-        /// <param name="containingAssembly">The assembly containing the signature referring to the destination type.</param>
-        /// <returns><paramref name="destinationType"/> with custom modifiers copied from <paramref name="sourceType"/>.</returns>
+        /// <param name="destinationType">Same as <paramref name="sourceType"/>, but without custom
+        // modifiers.
+        /// May differ in object/dynamic, tuple element names, or other differences ignored by the
+        // runtime.</param>
+        /// <param name="containingAssembly">The assembly containing the signature referring to the
+        // destination type.</param>
+        /// <returns><paramref name="destinationType"/> with custom modifiers copied from <paramref
+        // name="sourceType"/>.</returns>
         internal static TypeSymbol CopyTypeCustomModifiers(
             TypeSymbol sourceType,
             TypeSymbol destinationType,
@@ -139,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // Preserve nullable modifiers as well.
-            // https://github.com/dotnet/roslyn/issues/30077: Is it reasonable to copy annotations from the source?
+            // https://github.com/dotnet/roslyn/issues/30077: Is it reasonable to copy annotations from the
+            // source?
             // If the destination had some of those annotations but not all, then clearly the destination
             // was incorrect. Or if the destination is C#7, then the destination will advertise annotations
             // that the author did not write and did not validate.

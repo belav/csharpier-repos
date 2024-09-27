@@ -198,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
         )
         {
             // If these signatures match on default values, then remove the defaults when converting to explicit
-            // (they're not legal in C#). If they don't match on defaults, then keep them in so that the user gets a
+            // (they're not legal in C#). If they don't match on defaults, then keep them in so that the user
+            // gets a
             // warning (from us and the compiler) and considers what to do about this.
             var removeDefaults = AllDefaultValuesMatch(implMember, interfaceMember);
             return generator.WithExplicitInterfaceImplementations(

@@ -413,7 +413,8 @@ namespace System.Runtime.Serialization
         public const string AddMethodName = "Add";
         public const string GetCurrentMethodName = "get_Current";
 
-        // NOTE: These values are used in schema below. If you modify any value, please make the same change in the schema.
+        // NOTE: These values are used in schema below. If you modify any value, please make the same change
+        // in the schema.
         public const string SerializationNamespace =
             "http://schemas.microsoft.com/2003/10/Serialization/";
         public const string ClrTypeLocalName = "Type";

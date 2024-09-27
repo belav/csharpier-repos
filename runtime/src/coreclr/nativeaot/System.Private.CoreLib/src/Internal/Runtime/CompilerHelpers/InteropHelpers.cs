@@ -213,7 +213,8 @@ namespace Internal.Runtime.CompilerHelpers
         /// Convert ANSI ByVal byte array to UNICODE wide char array, best fit
         /// </summary>
         /// <remarks>
-        /// * This version works with array instead to string, it means that the len must be provided and there will be NO NULL to
+        /// * This version works with array instead to string, it means that the len must be provided and
+        // there will be NO NULL to
         /// terminate the array.
         /// * The buffer to the UNICODE wide char array must be allocated by the caller.
         /// </remarks>
@@ -229,7 +230,8 @@ namespace Internal.Runtime.CompilerHelpers
         /// </summary>
         /// <param name="managedValue">single UNICODE wide char value</param>
         /// <param name="bestFit">Enable best-fit mapping behavior</param>
-        /// <param name="throwOnUnmappableChar">Throw an exception on an unmappable Unicode character</param>
+        /// <param name="throwOnUnmappableChar">Throw an exception on an unmappable Unicode
+        // character</param>
         public static unsafe byte WideCharToAnsiChar(
             char managedValue,
             bool bestFit,

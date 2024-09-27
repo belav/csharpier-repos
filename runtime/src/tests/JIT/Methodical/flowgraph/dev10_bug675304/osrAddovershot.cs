@@ -14,11 +14,15 @@
 // This is only legal under certain conditions
 //     - multiply by a positive constant
 //     - add/subtract when the initial IV is known to be >= 0
-//     - add a value smaller than pointer size (to avoid a value off the end of an array) <-- This last check was missing and hence the bug!!!!!
+//     - add a value smaller than pointer size (to avoid a value off the end of an array) <-- This
+// last check was missing and hence the bug!!!!!
 //
-// Problem: The JIT seems to be rewriting the IV and the loop test in terms of the struct member, which is not safe because the member is more than pointer size past the end of the array.
+// Problem: The JIT seems to be rewriting the IV and the loop test in terms of the struct member,
+// which is not safe because the member is more than pointer size past the end of the array.
 //
-// Fix: Stop OSR from rewriting IV's when the ADD is greater than pointer size. Need to further beat down OSR to have it stop rewriting IVs when they would be offset more than pointer-sized past the end of an array or object.
+// Fix: Stop OSR from rewriting IV's when the ADD is greater than pointer size. Need to further beat
+// down OSR to have it stop rewriting IVs when they would be offset more than pointer-sized past the
+// end of an array or object.
 //
 // PLEASE NOTE: You have to set DOTNET_GCSTRESS=4 to see the AV.
 

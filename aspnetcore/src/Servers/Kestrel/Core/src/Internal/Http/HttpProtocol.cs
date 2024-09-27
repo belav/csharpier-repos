@@ -57,7 +57,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     protected volatile bool _keepAlive = true;
 
     // _canWriteResponseBody is set in CreateResponseHeaders.
-    // If we are writing with GetMemory/Advance before calling StartAsync, assume we can write and throw away contents if we can't.
+    // If we are writing with GetMemory/Advance before calling StartAsync, assume we can write and throw
+    // away contents if we can't.
     private bool _canWriteResponseBody = true;
     private bool _hasAdvanced;
     private bool _isLeasedMemoryInvalid = true;
@@ -67,14 +68,16 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
     protected HttpVersion _httpVersion;
 
-    // This should only be used by the application, not the server. This is settable on HttpRequest but we don't want that to affect
+    // This should only be used by the application, not the server. This is settable on HttpRequest but
+    // we don't want that to affect
     // how Kestrel processes requests/responses.
     private string? _httpProtocol;
 
     private string? _requestId;
     private int _requestHeadersParsed;
 
-    // See MaxRequestHeaderCount, enforced during parsing and may be more relaxed to avoid connection faults.
+    // See MaxRequestHeaderCount, enforced during parsing and may be more relaxed to avoid connection
+    // faults.
     protected int _eagerRequestHeadersParsedLimit;
 
     private long _responseBytesWritten;
@@ -112,7 +115,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     protected KestrelTrace Log => ServiceContext.Log;
     private DateHeaderValueManager DateHeaderValueManager => ServiceContext.DateHeaderValueManager;
 
-    // Hold direct reference to ServerOptions since this is used very often in the request processing path
+    // Hold direct reference to ServerOptions since this is used very often in the request processing
+    // path
     protected KestrelServerOptions ServerOptions { get; set; } = default!;
     protected string ConnectionId => _context.ConnectionId;
 
@@ -607,7 +611,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         }
         catch (ConnectionResetException ex)
         {
-            // Don't log ECONNRESET errors made between requests. Browsers like IE will reset connections regularly.
+            // Don't log ECONNRESET errors made between requests. Browsers like IE will reset connections
+            // regularly.
             if (_requestProcessingStatus != RequestProcessingStatus.RequestPending)
             {
                 Log.RequestProcessingError(ConnectionId, ex);
@@ -745,7 +750,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             }
             catch (Exception ex)
             {
-                // BodyControl.StopAsync() can throw if the PipeWriter was completed prior to the application writing
+                // BodyControl.StopAsync() can throw if the PipeWriter was completed prior to the application
+                // writing
                 // enough bytes to satisfy the specified Content-Length. This risks double-logging the exception,
                 // but this scenario generally indicates an app bug, so I don't want to risk not logging it.
                 ReportApplicationError(ex);
@@ -1178,17 +1184,23 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         var hasConnection = responseHeaders.HasConnection;
         var hasTransferEncoding = responseHeaders.HasTransferEncoding;
 
-        // We opt to remove the following headers from an HTTP/2+ response since their presence would be considered a protocol violation.
-        // This is done quietly because these headers are valid in other contexts and this saves the app from being broken by
+        // We opt to remove the following headers from an HTTP/2+ response since their presence would be
+        // considered a protocol violation.
+        // This is done quietly because these headers are valid in other contexts and this saves the app
+        // from being broken by
         // low level protocol details. Http.Sys also removes these headers silently.
         //
         // https://tools.ietf.org/html/rfc7540#section-8.1.2.2
-        // "This means that an intermediary transforming an HTTP/1.x message to HTTP/2 will need to remove any header fields
+        // "This means that an intermediary transforming an HTTP/1.x message to HTTP/2 will need to remove
+        // any header fields
         // nominated by the Connection header field, along with the Connection header field itself.
-        // Such intermediaries SHOULD also remove other connection-specific header fields, such as Keep-Alive,
-        // Proxy-Connection, Transfer-Encoding, and Upgrade, even if they are not nominated by the Connection header field."
+        // Such intermediaries SHOULD also remove other connection-specific header fields, such as
+        // Keep-Alive,
+        // Proxy-Connection, Transfer-Encoding, and Upgrade, even if they are not nominated by the
+        // Connection header field."
         //
-        // Http/3 has a similar requirement: https://quicwg.org/base-drafts/draft-ietf-quic-http.html#name-field-formatting-and-compre
+        // Http/3 has a similar requirement:
+        // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#name-field-formatting-and-compre
         if (_httpVersion > Http.HttpVersion.Http11 && responseHeaders.HasInvalidH2H3Headers)
         {
             responseHeaders.ClearInvalidH2H3Headers();
@@ -1265,7 +1277,8 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             {
                 if (CanAutoSetContentLengthZeroResponseHeader())
                 {
-                    // Since the app has completed writing or cannot write to the response, we can safely set the Content-Length to 0.
+                    // Since the app has completed writing or cannot write to the response, we can safely set the
+                    // Content-Length to 0.
                     responseHeaders.ContentLength = 0;
                 }
             }
@@ -1487,8 +1500,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
                 : string.Empty
         );
 
-    // This is called during certain bad requests so the automatic Connection: close header gets sent with custom responses.
-    // If no response is written, SetBadRequestState(BadHttpRequestException) will later also modify the status code.
+    // This is called during certain bad requests so the automatic Connection: close header gets sent
+    // with custom responses.
+    // If no response is written, SetBadRequestState(BadHttpRequestException) will later also modify the
+    // status code.
     public void DisableHttp1KeepAlive()
     {
         if (_httpVersion == Http.HttpVersion.Http10 || _httpVersion == Http.HttpVersion.Http11)

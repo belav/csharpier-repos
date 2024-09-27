@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc;
 /// API conventions to be applied to a controller action.
 /// <para>
 /// API conventions are used to influence the output of ApiExplorer.
-/// <see cref="ApiConventionMethodAttribute"/> can be used to specify an exact convention method that applies
+/// <see cref="ApiConventionMethodAttribute"/> can be used to specify an exact convention method
+// that applies
 /// to an action. <see cref="ApiConventionTypeAttribute"/> for details about applying conventions at
 /// the assembly or controller level.
 /// </para>
@@ -21,15 +22,18 @@ namespace Microsoft.AspNetCore.Mvc;
 public sealed class ApiConventionMethodAttribute : Attribute
 {
     /// <summary>
-    /// Initializes an <see cref="ApiConventionMethodAttribute"/> instance using <paramref name="conventionType"/> and
+    /// Initializes an <see cref="ApiConventionMethodAttribute"/> instance using <paramref
+    // name="conventionType"/> and
     /// the specified <paramref name="methodName"/>.
     /// </summary>
     /// <param name="conventionType">
     /// The <see cref="Type"/> of the convention.
     /// <para>
     /// Conventions must be static types. Methods in a convention are
-    /// matched to an action method using rules specified by <see cref="ApiConventionNameMatchAttribute" />
-    /// that may be applied to a method name or its parameters and <see cref="ApiConventionTypeMatchAttribute"/>
+    /// matched to an action method using rules specified by <see cref="ApiConventionNameMatchAttribute"
+    // />
+    /// that may be applied to a method name or its parameters and <see
+    // cref="ApiConventionTypeMatchAttribute"/>
     /// that are applied to parameters.
     /// </para>
     /// </param>

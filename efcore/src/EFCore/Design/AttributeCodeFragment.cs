@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Design;
 ///     Represents usage of an attribute.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class AttributeCodeFragment

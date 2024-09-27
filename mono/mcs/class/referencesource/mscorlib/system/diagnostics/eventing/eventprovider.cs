@@ -32,7 +32,8 @@ namespace System.Diagnostics.Tracing
     // New in CLR4.0
     internal enum ControllerCommand
     {
-        // Strictly Positive numbers are for provider-specific commands, negative number are for 'shared' commands. 256
+        // Strictly Positive numbers are for provider-specific commands, negative number are for 'shared'
+        // commands. 256
         // The first 256 negative numbers are reserved for the framework.
         Update = 0, // Not used by EventPrividerBase.
         SendManifest = -1,
@@ -41,7 +42,8 @@ namespace System.Diagnostics.Tracing
     };
 
     /// <summary>
-    /// Only here because System.Diagnostics.EventProvider needs one more extensibility hook (when it gets a
+    /// Only here because System.Diagnostics.EventProvider needs one more extensibility hook (when it
+    // gets a
     /// controller callback)
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
@@ -145,9 +147,15 @@ namespace System.Diagnostics.Tracing
         /// reason the ETW Register call failed a NotSupported exception will be thrown.
         /// </summary>
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventRegister(System.Guid&,Microsoft.Win32.UnsafeNativeMethods.ManifestEtw+EtwEnableCallback,System.Void*,System.Int64&):System.UInt32" />
+        // <CallsSuppressUnmanagedCode
+        //
+        //
+        //
+        // Name="UnsafeNativeMethods.ManifestEtw.EventRegister(System.Guid&,Microsoft.Win32.UnsafeNativeMethods.ManifestEtw+EtwEnableCallback,System.Void*,System.Int64&):System.UInt32"
+        // />
         // <SatisfiesLinkDemand Name="Win32Exception..ctor(System.Int32)" />
-        // <ReferencesCritical Name="Method: EtwEnableCallBack(Guid&, Int32, Byte, Int64, Int64, Void*, Void*):Void" Ring="1" />
+        // <ReferencesCritical Name="Method: EtwEnableCallBack(Guid&, Int32, Byte, Int64, Int64, Void*,
+        // Void*):Void" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         internal unsafe void Register(Guid providerGuid)
@@ -258,7 +266,8 @@ namespace System.Diagnostics.Tracing
         /// This method un-registers from ETW.
         /// </summary>
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventUnregister(System.Int64):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeNativeMethods.ManifestEtw.EventUnregister(System.Int64):System.Int32" />
         // </SecurityKernel>
         //
         [
@@ -613,7 +622,8 @@ namespace System.Diagnostics.Tracing
         /// Gets any data to be passed from the controller to the provider.  It starts with what is passed
         /// into the callback, but unfortunately this data is only present for when the provider is active
         /// at the time the controller issues the command.  To allow for providers to activate after the
-        /// controller issued a command, we also check the registry and use that to get the data.  The function
+        /// controller issued a command, we also check the registry and use that to get the data.  The
+        // function
         /// returns an array of bytes representing the data, the index into that byte array where the data
         /// starts, and the command being issued associated with that data.
         /// </summary>
@@ -777,25 +787,25 @@ namespace System.Diagnostics.Tracing
             ref uint totalEventSize
         )
         /*++
-
+        
         Routine Description:
-
-           This routine is used by WriteEvent to unbox the object type and
-           to fill the passed in ETW data descriptor.
-
+        
+        This routine is used by WriteEvent to unbox the object type and
+        to fill the passed in ETW data descriptor.
+        
         Arguments:
-
-           data - argument to be decoded
-
-           dataDescriptor - pointer to the descriptor to be filled (updated to point to the next empty entry)
-
-           dataBuffer - storage buffer for storing user data, needed because cant get the address of the object
-                        (updated to point to the next empty entry)
-
+        
+        data - argument to be decoded
+        
+        dataDescriptor - pointer to the descriptor to be filled (updated to point to the next empty entry)
+        
+        dataBuffer - storage buffer for storing user data, needed because cant get the address of the object
+        (updated to point to the next empty entry)
+        
         Return Value:
-
-           null if the object is a basic type other than string or byte[]. String otherwise
-
+        
+        null if the object is a basic type other than string or byte[]. String otherwise
+        
         --*/
         {
             Again:
@@ -1002,7 +1012,12 @@ namespace System.Diagnostics.Tracing
         /// Payload for the ETW event.
         /// </param>
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventWrite(System.Int64,EventDescriptor&,System.UInt32,System.Void*):System.UInt32" />
+        // <CallsSuppressUnmanagedCode
+        //
+        //
+        //
+        // Name="UnsafeNativeMethods.ManifestEtw.EventWrite(System.Int64,EventDescriptor&,System.UInt32,System.Void*):System.UInt32"
+        // />
         // <UsesUnsafeCode Name="Local dataBuffer of type: Byte*" />
         // <UsesUnsafeCode Name="Local pdata of type: Char*" />
         // <UsesUnsafeCode Name="Local userData of type: EventData*" />
@@ -1244,7 +1259,8 @@ namespace System.Diagnostics.Tracing
         /// Event Descriptor for this event.
         /// </param>
         /// <param name="childActivityID">
-        /// If this event is generating a child activity (WriteEventTransfer related activity) this is child activity
+        /// If this event is generating a child activity (WriteEventTransfer related activity) this is child
+        // activity
         /// This can be null for events that do not generate a child activity.
         /// </param>
         /// <param name="dataCount">
@@ -1254,7 +1270,12 @@ namespace System.Diagnostics.Tracing
         /// pointer  do the event data
         /// </param>
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeNativeMethods.ManifestEtw.EventWrite(System.Int64,EventDescriptor&,System.UInt32,System.Void*):System.UInt32" />
+        // <CallsSuppressUnmanagedCode
+        //
+        //
+        //
+        // Name="UnsafeNativeMethods.ManifestEtw.EventWrite(System.Int64,EventDescriptor&,System.UInt32,System.Void*):System.UInt32"
+        // />
         // </SecurityKernel>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Design",

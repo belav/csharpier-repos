@@ -26,19 +26,22 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
     /// <summary>
     /// A class that denotes the boolean expression: "varType in values".
-    /// See the comments in <see cref="MemberRestriction"/> for complete and incomplete restriction objects.
+    /// See the comments in <see cref="MemberRestriction"/> for complete and incomplete restriction
+    // objects.
     /// </summary>
     internal class TypeRestriction : MemberRestriction
     {
         #region Constructors
         /// <summary>
-        /// Creates an incomplete type restriction of the form "<paramref name="member"/> in <paramref name="values"/>".
+        /// Creates an incomplete type restriction of the form "<paramref name="member"/> in <paramref
+        // name="values"/>".
         /// </summary>
         internal TypeRestriction(MemberPath member, IEnumerable<EdmType> values)
             : base(new MemberProjectedSlot(member), CreateTypeConstants(values)) { }
 
         /// <summary>
-        /// Creates an incomplete type restriction of the form "<paramref name="member"/> = <paramref name="value"/>".
+        /// Creates an incomplete type restriction of the form "<paramref name="member"/> = <paramref
+        // name="value"/>".
         /// </summary>
         internal TypeRestriction(MemberPath member, Constant value)
             : base(new MemberProjectedSlot(member), value)
@@ -47,7 +50,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Creates a complete type restriction of the form "<paramref name="slot"/> in <paramref name="domain"/>".
+        /// Creates a complete type restriction of the form "<paramref name="slot"/> in <paramref
+        // name="domain"/>".
         /// </summary>
         internal TypeRestriction(MemberProjectedSlot slot, Domain domain)
             : base(slot, domain) { }
@@ -247,7 +251,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Given a list of <paramref name="types"/> (which can contain nulls), returns a corresponding list of <see cref="TypeConstant"/>s for those types.
+        /// Given a list of <paramref name="types"/> (which can contain nulls), returns a corresponding list
+        // of <see cref="TypeConstant"/>s for those types.
         /// </summary>
         private static IEnumerable<Constant> CreateTypeConstants(IEnumerable<EdmType> types)
         {

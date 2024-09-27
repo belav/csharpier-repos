@@ -36,28 +36,32 @@ using System.Xml.Serialization;
 
 // To use this under .NET, compile sources as:
 //
-//	dmcs -d:DOTNET -r:System.Xaml -debug System.Xaml/XamlObjectWriter.cs System.Xaml/XamlWriterInternalBase.cs System.Xaml/TypeExtensionMethods.cs System.Xaml/XamlWriterStateManager.cs System.Xaml/XamlNameResolver.cs System.Xaml/PrefixLookup.cs System.Xaml/ValueSerializerContext.cs ../../build/common/MonoTODOAttribute.cs Test/System.Xaml/TestedTypes.cs
+//	dmcs -d:DOTNET -r:System.Xaml -debug System.Xaml/XamlObjectWriter.cs
+// System.Xaml/XamlWriterInternalBase.cs System.Xaml/TypeExtensionMethods.cs
+// System.Xaml/XamlWriterStateManager.cs System.Xaml/XamlNameResolver.cs System.Xaml/PrefixLookup.cs
+// System.Xaml/ValueSerializerContext.cs ../../build/common/MonoTODOAttribute.cs
+// Test/System.Xaml/TestedTypes.cs
 
 /*
 
 State transition:
 
 * StartObject or GetObject
-    These start a new object instance, either by creating new or getting
-    from parent.
+These start a new object instance, either by creating new or getting
+from parent.
 * Value
-    This either becomes an entire property value, or an item of current
-    collection, or a key or a value item of current dictionary, or an
-    entire object if it is either Initialization.
+This either becomes an entire property value, or an item of current
+collection, or a key or a value item of current dictionary, or an
+entire object if it is either Initialization.
 * EndObject
-    Almost the same as Value. Though the it is likely already instantiated.
+Almost the same as Value. Though the it is likely already instantiated.
 * StartMember
-    Indicates a new property as current.
+Indicates a new property as current.
 * EndMember
-    It accompanies a property value (might be lacking), or ends a
-    collection (including those for PositionalParameters), or ends a key
-    property of a dictionary element (if it is Key), or ends an entire
-    value of current object if it is Initialization.
+It accompanies a property value (might be lacking), or ends a
+collection (including those for PositionalParameters), or ends a key
+property of a dictionary element (if it is Key), or ends an entire
+value of current object if it is Initialization.
 
 
 */
@@ -332,7 +336,8 @@ namespace System.Xaml
                 }
             }
 
-            // call this (possibly) before the object is added to parent collection. (bug #3003 also expects this)
+            // call this (possibly) before the object is added to parent collection. (bug #3003 also expects
+            // this)
             if (state.IsXamlWriterCreated)
                 source.OnAfterProperties(obj);
 
@@ -372,7 +377,9 @@ namespace System.Xaml
                 escaped_objects.Push(state.Value);
                 state.Value = new List<object>();
             }
-            // FIXME: this condition needs to be examined. What is known to be prevented are: PositionalParameters, Initialization and Base (the last one sort of indicates there's a lot more).
+            // FIXME: this condition needs to be examined. What is known to be prevented are:
+            // PositionalParameters, Initialization and Base (the last one sort of indicates there's a lot
+            // more).
             else if (!(property is XamlDirective))
                 InitializeObjectIfRequired(false);
         }
@@ -727,7 +734,9 @@ namespace System.Xaml
             )
                 return;
 
-            // FIXME: "The default techniques in absence of a factory method are to attempt to find a default constructor, then attempt to find an identified type converter on type, member, or destination type."
+            // FIXME: "The default techniques in absence of a factory method are to attempt to find a default
+            // constructor, then attempt to find an identified type converter on type, member, or destination
+            // type."
             // http://msdn.microsoft.com/en-us/library/system.xaml.xamllanguage.factorymethod%28VS.100%29.aspx
             object obj;
             if (state.FactoryMethod != null) // FIXME: it must be implemented and verified with tests.
@@ -762,7 +771,8 @@ namespace System.Xaml
                 foreach (var name in fixup.Names)
                 {
                     bool isFullyInitialized;
-                    // FIXME: sort out relationship between name_scope and name_resolver. (unify to name_resolver, probably)
+                    // FIXME: sort out relationship between name_scope and name_resolver. (unify to name_resolver,
+                    // probably)
                     var obj =
                         name_scope.FindName(name)
                         ?? name_resolver.Resolve(name, out isFullyInitialized);

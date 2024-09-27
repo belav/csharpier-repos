@@ -242,7 +242,8 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    // If the user specified implemented contract, then we need to add the errors into the error collection
+                    // If the user specified implemented contract, then we need to add the errors into the error
+                    // collection
                     foreach (ValidationError validationError in results.Errors)
                     {
                         errors.Add(validationError);
@@ -292,7 +293,8 @@ namespace System.ServiceModel.Activities
                 SkipValidatingRootConfiguration = source.SkipValidatingRootConfiguration,
                 PrepareForRuntime = source.PrepareForRuntime,
                 Environment = source.Environment,
-                // Retain the same cancellation token. Otherwise we can't cancel the validation of WorkflowService objects
+                // Retain the same cancellation token. Otherwise we can't cancel the validation of WorkflowService
+                // objects
                 // which can make the designer unreponsive if the validation takes a long time.
                 CancellationToken = source.CancellationToken,
             };
@@ -543,7 +545,8 @@ namespace System.ServiceModel.Activities
                         );
                     }
 
-                    // Find all known Receive-Reply pair in the activity tree. Remove them from this.receiveAndReplyPairs
+                    // Find all known Receive-Reply pair in the activity tree. Remove them from
+                    // this.receiveAndReplyPairs
                     // Also collect CorrelationQuery from following replies
                     if (receive.HasReply)
                     {
@@ -1280,7 +1283,8 @@ namespace System.ServiceModel.Activities
                         }
                         else
                         {
-                            // It is OK to add a new contract, but we do not allow adding a new operation to a specified contract.
+                            // It is OK to add a new contract, but we do not allow adding a new operation to a specified
+                            // contract.
                             foreach (OperationIdentifier id in operationProperties.Keys)
                             {
                                 if (
@@ -1451,9 +1455,11 @@ namespace System.ServiceModel.Activities
                 if (targetOperation.KnownTypes.Count > 0)
                 {
                     // We require that each Receive contains all the known types specified on the contract.
-                    // Known type collections from multiple Receive activities with same contract name and operation name will NOT be merged.
+                    // Known type collections from multiple Receive activities with same contract name and operation
+                    // name will NOT be merged.
 
-                    // We expect the number of known types to be small, therefore we choose to use simple iterative search.
+                    // We expect the number of known types to be small, therefore we choose to use simple iterative
+                    // search.
                     foreach (Type targetType in targetOperation.KnownTypes)
                     {
                         if (

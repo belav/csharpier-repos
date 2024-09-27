@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis
         /// VB uses these mappings for case-insensitive comparison.
         /// </summary>
         /// <param name="c"></param>
-        /// <returns>If <paramref name="c"/> is upper case, then this returns its Unicode lower case equivalent. Otherwise, <paramref name="c"/> is returned unmodified.</returns>
+        /// <returns>If <paramref name="c"/> is upper case, then this returns its Unicode lower case
+        // equivalent. Otherwise, <paramref name="c"/> is returned unmodified.</returns>
         public static char ToLower(char c)
         {
             // PERF: This is a very hot code path in VB, optimize for ASCII
@@ -326,7 +327,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="left">First identifier to compare</param>
         /// <param name="right">Second identifier to compare</param>
-        /// <returns>-1 if <paramref name="left"/> &lt; <paramref name="right"/>, 1 if <paramref name="left"/> &gt; <paramref name="right"/>, 0 if they are equal.</returns>
+        /// <returns>-1 if <paramref name="left"/> &lt; <paramref name="right"/>, 1 if <paramref
+        // name="left"/> &gt; <paramref name="right"/>, 0 if they are equal.</returns>
         /// <remarks>
         /// These are also the rules used for VB identifier comparison.
         /// </remarks>
@@ -338,7 +340,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="left">First identifier to compare</param>
         /// <param name="right">Second identifier to compare</param>
-        /// <returns>-1 if <paramref name="left"/> &lt; <paramref name="right"/>, 1 if <paramref name="left"/> &gt; <paramref name="right"/>, 0 if they are equal.</returns>
+        /// <returns>-1 if <paramref name="left"/> &lt; <paramref name="right"/>, 1 if <paramref
+        // name="left"/> &gt; <paramref name="right"/>, 0 if they are equal.</returns>
         /// <remarks>
         /// These are also the rules used for VB identifier comparison.
         /// </remarks>

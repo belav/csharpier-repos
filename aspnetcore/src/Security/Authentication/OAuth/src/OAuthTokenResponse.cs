@@ -76,7 +76,8 @@ public class OAuthTokenResponse : IDisposable
     public string? TokenType { get; set; }
 
     /// <summary>
-    /// Gets or sets a refresh token that applications can use to obtain another access token if tokens can expire.
+    /// Gets or sets a refresh token that applications can use to obtain another access token if tokens
+    // can expire.
     /// </summary>
     public string? RefreshToken { get; set; }
 

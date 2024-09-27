@@ -349,8 +349,10 @@ namespace System.Net.Http.Functional.Tests
                 rm.Version = new Version(1, 0);
                 rm.Content = new StringContent("content");
 
-                // Note that there is no Content-Length header: The reason is that the value for Content-Length header
-                // doesn't get set by StringContent..ctor, but only if someone actually accesses the ContentLength property.
+                // Note that there is no Content-Length header: The reason is that the value for Content-Length
+                // header
+                // doesn't get set by StringContent..ctor, but only if someone actually accesses the ContentLength
+                // property.
                 Assert.Equal(
                     "StatusCode: 400, ReasonPhrase: 'Bad Request', Version: 1.0, Content: "
                         + typeof(StringContent).ToString()

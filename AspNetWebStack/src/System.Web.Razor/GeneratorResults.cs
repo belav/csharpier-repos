@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.CodeDom;
 using System.Collections.Generic;
@@ -9,10 +10,12 @@ using System.Web.Razor.Parser.SyntaxTree;
 namespace System.Web.Razor
 {
     /// <summary>
-    /// Represents results from code generation (and parsing, since that is a pre-requisite of code generation)
+    /// Represents results from code generation (and parsing, since that is a pre-requisite of code
+    // generation)
     /// </summary>
     /// <remarks>
-    /// Since this inherits from ParserResults, it has all the data from ParserResults, and simply adds code generation data
+    /// Since this inherits from ParserResults, it has all the data from ParserResults, and simply adds
+    // code generation data
     /// </remarks>
     public class GeneratorResults : ParserResults
     {

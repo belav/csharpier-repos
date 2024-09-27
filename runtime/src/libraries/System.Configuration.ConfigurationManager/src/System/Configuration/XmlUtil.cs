@@ -254,7 +254,8 @@ namespace System.Configuration
         }
 
         /// <summary>
-        /// Add an error if there are attributes that have not been examined, and are therefore unrecognized.
+        /// Add an error if there are attributes that have not been examined, and are therefore
+        // unrecognized.
         /// </summary>
         internal void VerifyNoUnrecognizedAttributes(ExceptionAction action)
         {
@@ -383,7 +384,8 @@ namespace System.Configuration
             return CopyReaderToNextElement(utilWriter, limitDepth);
         }
 
-        // Copy an XML element but skip all its child elements, then continue copying until we've hit the next element.
+        // Copy an XML element but skip all its child elements, then continue copying until we've hit the
+        // next element.
         internal bool SkipChildElementsAndCopyOuterXmlToNextElement(XmlUtilWriter utilWriter)
         {
             bool isEmptyElement = Reader.IsEmptyElement;

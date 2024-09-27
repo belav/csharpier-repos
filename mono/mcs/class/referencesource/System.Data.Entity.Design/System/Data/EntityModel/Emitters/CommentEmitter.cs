@@ -39,10 +39,12 @@ namespace System.Data.EntityModel.Emitters
         #region Public Methods
         /// <summary>
         /// emit all the documentation comments for an element's documentation child
-        /// (if the element does not have a documentation child emit some standard "missing comments" comment
+        /// (if the element does not have a documentation child emit some standard "missing comments"
+        // comment
         /// </summary>
         /// <param name="element">the element whose documentation is to be displayed</param>
-        /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
+        /// <param name="commentCollection">the comment collection of the CodeDom object to be
+        // commented</param>
         public static void EmitSummaryComments(
             MetadataItem item,
             CodeCommentStatementCollection commentCollection
@@ -120,7 +122,8 @@ namespace System.Data.EntityModel.Emitters
         /// Emit summary comments from a string
         /// </summary>
         /// <param name="summaryComments">the summary comments to be emitted</param>
-        /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
+        /// <param name="commentCollection">the comment collection of the CodeDom object to be
+        // commented</param>
         public static void EmitSummaryComments(
             string summaryComments,
             CodeCommentStatementCollection commentCollection
@@ -141,7 +144,8 @@ namespace System.Data.EntityModel.Emitters
         /// Emit some lines of comments
         /// </summary>
         /// <param name="commentLines">the lines of comments to emit</param>
-        /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
+        /// <param name="commentCollection">the comment collection of the CodeDom object to be
+        // commented</param>
         /// <param name="docComment">true if the comments are 'documentation' comments</param>
         public static void EmitComments(
             string[] commentLines,
@@ -163,7 +167,8 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="parameter">the parameter being commented</param>
         /// <param name="comment">the comment text</param>
-        /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
+        /// <param name="commentCollection">the comment collection of the CodeDom object to be
+        // commented</param>
         public static void EmitParamComments(
             CodeParameterDeclarationExpression parameter,
             string comment,
@@ -183,9 +188,11 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 'Format' a string of text into lines: separates in to lines on '\n', removes '\r', and removes common leading blanks.
+        /// 'Format' a string of text into lines: separates in to lines on '\n', removes '\r', and removes
+        // common leading blanks.
         /// </summary>
-        /// <param name="escapeForXml">if true characters troublesome for xml are converted to entities</param>
+        /// <param name="escapeForXml">if true characters troublesome for xml are converted to
+        // entities</param>
         /// <param name="text">the text to be formatted</param>
         /// <returns>the formatted lines</returns>
         public static string[] GetFormattedLines(string text, bool escapeForXml)
@@ -200,7 +207,8 @@ namespace System.Data.EntityModel.Emitters
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(text))
                 return new string[] { "" };
 
-            // normalize CRLF and LFCRs to LFs (we just remove all the crs, assuming there are no extraneous ones) and remove trailing spaces
+            // normalize CRLF and LFCRs to LFs (we just remove all the crs, assuming there are no extraneous
+            // ones) and remove trailing spaces
             text = text.Replace("\r", "");
 
             // remove leading and.or trailing line ends to get single line for:
@@ -320,7 +328,8 @@ namespace System.Data.EntityModel.Emitters
         /// Emit the other (than Summary) documentation comments from a Documentation element
         /// </summary>
         /// <param name="documentation">the schema Docuementation element</param>
-        /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
+        /// <param name="commentCollection">the comment collection of the CodeDom object to be
+        // commented</param>
         private static void EmitOtherDocumentationComments(
             Documentation documentation,
             CodeCommentStatementCollection commentCollection
@@ -342,7 +351,8 @@ namespace System.Data.EntityModel.Emitters
         /// Emit the summary comments
         /// </summary>
         /// <param name="summaryComments"></param>
-        /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
+        /// <param name="commentCollection">the comment collection of the CodeDom object to be
+        // commented</param>
         private static void EmitSummaryComments(
             string[] summaryComments,
             CodeCommentStatementCollection commentCollection
@@ -359,7 +369,8 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="tag">the xml tag name</param>
         /// <param name="summaryComments">the lines of comments to emit</param>
-        /// <param name="commentCollection">the comment collection of the CodeDom object to be commented</param>
+        /// <param name="commentCollection">the comment collection of the CodeDom object to be
+        // commented</param>
         private static void EmitXmlComments(
             string tag,
             string[] summaryComments,

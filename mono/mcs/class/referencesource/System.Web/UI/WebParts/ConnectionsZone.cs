@@ -105,7 +105,8 @@ namespace System.Web.UI.WebControls.WebParts
         //   configuration wizard), this will contain the ID of the consumer web part ID.
         private string _pendingConsumerID;
 
-        //   Saving the pending transformer configuration control's type, just in case it changes between postbacks
+        //   Saving the pending transformer configuration control's type, just in case it changes between
+        // postbacks
         private string _pendingTransformerConfigurationControlTypeName;
 
         //   Saving the pending connection when editing an existing connection.
@@ -987,7 +988,8 @@ namespace System.Web.UI.WebControls.WebParts
                             _pendingTransformer = (WebPartTransformer)
                                 WebPartUtil.CreateObjectFromType(providerInfo.TransformerType);
                         }
-                        // Otherwise, we're updating an existing connection and _pendingTransformer has been set by EnsurePendingData.
+                        // Otherwise, we're updating an existing connection and _pendingTransformer has been set by
+                        // EnsurePendingData.
 
 
                         _pendingTransformerConfigurationControl = GetConfigurationControl(

@@ -12,7 +12,8 @@ namespace Internal.TypeSystem.Ecma
 
         protected internal override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer)
         {
-            // Sort by module in preference to by token. This will place types from the same module near each other
+            // Sort by module in preference to by token. This will place types from the same module near each
+            // other
             // even when working with several modules.
             var otherType = (EcmaType)other;
             int result = _module.CompareTo(otherType._module);

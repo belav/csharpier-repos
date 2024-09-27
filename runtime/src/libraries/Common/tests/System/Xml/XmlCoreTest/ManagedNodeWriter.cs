@@ -258,7 +258,8 @@ namespace XmlCoreTest.Common
         }
 
         /// Writing text.
-        /// Note : This is basically equivalent to WriteRaw and the string may contain any number of embedded tags.
+        /// Note : This is basically equivalent to WriteRaw and the string may contain any number of
+        // embedded tags.
         ///        No checking is performed on them either.
         public void PutText(string myStr)
         {
@@ -323,8 +324,10 @@ namespace XmlCoreTest.Common
         }
 
         /// <summary>
-        /// This method is a convenience method and a shortcut to create an XML string. Each character in the pattern
-        /// maps to a particular Put/Open function and calls it for you. For e.g. XEAA/ will call PutDecl, OpenElement,
+        /// This method is a convenience method and a shortcut to create an XML string. Each character in
+        // the pattern
+        /// maps to a particular Put/Open function and calls it for you. For e.g. XEAA/ will call PutDecl,
+        // OpenElement,
         /// PutAttribute, PutAttribute and CloseElement for you.
         /// The following is the list of all allowed characters and their function mappings :
         ///

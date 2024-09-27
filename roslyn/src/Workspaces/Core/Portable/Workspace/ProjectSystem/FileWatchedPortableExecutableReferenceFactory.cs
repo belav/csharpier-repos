@@ -21,14 +21,17 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         private readonly SolutionServices _solutionServices;
 
         /// <summary>
-        /// A file change context used to watch metadata references. This is lazy to avoid creating this immediately during our LSP process startup, when we
+        /// A file change context used to watch metadata references. This is lazy to avoid creating this
+        // immediately during our LSP process startup, when we
         /// don't yet know the LSP client's capabilities.
         /// </summary>
         private readonly Lazy<IFileChangeContext> _fileReferenceChangeContext;
 
         /// <summary>
-        /// File watching tokens from <see cref="_fileReferenceChangeContext"/> that are watching metadata references. These are only created once we are actually applying a batch because
-        /// we don't determine until the batch is applied if the file reference will actually be a file reference or it'll be a converted project reference.
+        /// File watching tokens from <see cref="_fileReferenceChangeContext"/> that are watching metadata
+        // references. These are only created once we are actually applying a batch because
+        /// we don't determine until the batch is applied if the file reference will actually be a file
+        // reference or it'll be a converted project reference.
         /// </summary>
         private readonly Dictionary<
             PortableExecutableReference,
@@ -36,8 +39,10 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         > _metadataReferenceFileWatchingTokens = new();
 
         /// <summary>
-        /// <see cref="CancellationTokenSource"/>s for in-flight refreshing of metadata references. When we see a file change, we wait a bit before trying to actually
-        /// update the workspace. We need cancellation tokens for those so we can cancel them either when a flurry of events come in (so we only do the delay after the last
+        /// <see cref="CancellationTokenSource"/>s for in-flight refreshing of metadata references. When we
+        // see a file change, we wait a bit before trying to actually
+        /// update the workspace. We need cancellation tokens for those so we can cancel them either when a
+        // flurry of events come in (so we only do the delay after the last
         /// modification), or when we know the project is going away entirely.
         /// </summary>
         private readonly Dictionary<
@@ -56,10 +61,14 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
             {
                 var referenceDirectories = new HashSet<string>();
 
-                // On each platform, there is a place that reference assemblies for the framework are installed. These are rarely going to be changed
-                // but are the most common places that we're going to create file watches. Rather than either creating a huge number of file watchers
-                // for every single file, or eventually realizing we should just watch these directories, we just create the single directory watchers now.
-                // We'll collect this from two places: constructing it from known environment variables, and also for the defaults where those environment
+                // On each platform, there is a place that reference assemblies for the framework are installed.
+                // These are rarely going to be changed
+                // but are the most common places that we're going to create file watches. Rather than either
+                // creating a huge number of file watchers
+                // for every single file, or eventually realizing we should just watch these directories, we just
+                // create the single directory watchers now.
+                // We'll collect this from two places: constructing it from known environment variables, and also
+                // for the defaults where those environment
                 // variables would usually point, as a fallback.
 
                 if (
@@ -98,7 +107,8 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
                     referenceDirectories.Add("/usr/local/share/dotnet/packs");
                 }
 
-                // Also watch the NuGet restore path; we don't do this (yet) on Windows due to potential concerns about whether
+                // Also watch the NuGet restore path; we don't do this (yet) on Windows due to potential concerns
+                // about whether
                 // this creates additional overhead responding to changes during a restore.
                 // TODO: remove this condition
                 if (!PlatformInformation.IsWindows)
@@ -207,7 +217,8 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
 
                             lock (_gate)
                             {
-                                // We need to re-check the cancellation token source under the lock, since it might have been cancelled and restarted
+                                // We need to re-check the cancellation token source under the lock, since it might have been
+                                // cancelled and restarted
                                 // due to another event
                                 cancellationTokenSource.Token.ThrowIfCancellationRequested();
                                 needsNotification = true;

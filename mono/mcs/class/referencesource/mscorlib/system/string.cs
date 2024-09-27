@@ -278,9 +278,11 @@ namespace System
             //Add enough room for the separator.
             jointLength += (count - 1) * separator.Length;
 
-            // Note that we may not catch all overflows with this check (since we could have wrapped around the 4gb range any number of times
+            // Note that we may not catch all overflows with this check (since we could have wrapped around the
+            // 4gb range any number of times
             // and landed back in the positive range.) The input array might be modifed from other threads,
-            // so we have to do an overflow check before each append below anyway. Those overflows will get caught down there.
+            // so we have to do an overflow check before each append below anyway. Those overflows will get
+            // caught down there.
             if ((jointLength < 0) || ((jointLength + 1) < 0))
             {
                 throw new OutOfMemoryException();
@@ -386,9 +388,12 @@ namespace System
 #endif
 
         //
-        // This is a helper method for the security team.  They need to uppercase some strings (guaranteed to be less
-        // than 0x80) before security is fully initialized.  Without security initialized, we can't grab resources (the nlp's)
-        // from the assembly.  This provides a workaround for that problem and should NOT be used anywhere else.
+        // This is a helper method for the security team.  They need to uppercase some strings (guaranteed
+        // to be less
+        // than 0x80) before security is fully initialized.  Without security initialized, we can't grab
+        // resources (the nlp's)
+        // from the assembly.  This provides a workaround for that problem and should NOT be used anywhere
+        // else.
         //
         [System.Security.SecuritySafeCritical] // auto-generated
         internal static unsafe string SmallCharToUpper(string strIn)
@@ -1083,7 +1088,8 @@ namespace System
             }
         }
 
-        // Use this if and only if you need the hashcode to not change across app domains (e.g. you have an app domain agile
+        // Use this if and only if you need the hashcode to not change across app domains (e.g. you have an
+        // app domain agile
         // hash table).
         [System.Security.SecuritySafeCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
@@ -2403,7 +2409,8 @@ namespace System
 
         // Determines whether two string regions match.  The substring of strA beginning
         // at indexA of length count is compared with the substring of strB
-        // beginning at indexB of the same length.  Case sensitivity is determined by the ignoreCase boolean.
+        // beginning at indexB of the same length.  Case sensitivity is determined by the ignoreCase
+        // boolean.
         //
         [Pure]
         public static int Compare(
@@ -2459,7 +2466,8 @@ namespace System
 
         // Determines whether two string regions match.  The substring of strA beginning
         // at indexA of length length is compared with the substring of strB
-        // beginning at indexB of the same length.  Case sensitivity is determined by the ignoreCase boolean,
+        // beginning at indexB of the same length.  Case sensitivity is determined by the ignoreCase
+        // boolean,
         // and the culture is set by culture.
         //
         [Pure]
@@ -3790,7 +3798,8 @@ namespace System
             Contract.EndContractBlock();
             int oldLength = Length;
             int insertLength = value.Length;
-            // In case this computation overflows, newLength will be negative and FastAllocateString throws OutOfMemoryException
+            // In case this computation overflows, newLength will be negative and FastAllocateString throws
+            // OutOfMemoryException
             int newLength = oldLength + insertLength;
             if (newLength == 0)
                 return String.Empty;
@@ -4358,7 +4367,8 @@ namespace System
             if (values == null)
                 throw new ArgumentNullException("values");
             Contract.Ensures(Contract.Result<String>() != null);
-            // Spec#: Consider a postcondition saying the length of this string == the sum of each string in array
+            // Spec#: Consider a postcondition saying the length of this string == the sum of each string in
+            // array
             Contract.EndContractBlock();
             int totalLength = 0;
 

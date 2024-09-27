@@ -17,7 +17,8 @@ namespace Moq.Protected
         /// <summary>
         /// Enable protected setups for the mock.
         /// </summary>
-        /// <typeparam name="T">Mocked object type. Typically omitted as it can be inferred from the mock instance.</typeparam>
+        /// <typeparam name="T">Mocked object type. Typically omitted as it can be inferred from the mock
+        // instance.</typeparam>
         /// <param name="mock">The mock to set the protected setups on.</param>
         public static IProtectedMock<T> Protected<T>(this Mock<T> mock)
             where T : class

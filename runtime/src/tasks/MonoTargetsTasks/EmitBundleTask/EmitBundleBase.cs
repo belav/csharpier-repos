@@ -31,7 +31,8 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
 
     /// Must have DestinationFile metadata, which is the output filename
     /// Could have RegisteredName, otherwise it would be the filename.
-    /// RegisteredName should be prefixed with namespace in form of unix like path. For example: "/usr/share/zoneinfo/"
+    /// RegisteredName should be prefixed with namespace in form of unix like path. For example:
+    // "/usr/share/zoneinfo/"
     [Required]
     public ITaskItem[] FilesToBundle { get; set; } = Array.Empty<ITaskItem>();
 
@@ -184,8 +185,10 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
             bundledResources.Add(bundledResource);
         }
 
-        // The DestinationFile (output filename) already includes a content hash. Grouping by this filename therefore
-        // produces one group per file-content. We only want to emit one copy of each file-content, and one symbol for it.
+        // The DestinationFile (output filename) already includes a content hash. Grouping by this filename
+        // therefore
+        // produces one group per file-content. We only want to emit one copy of each file-content, and one
+        // symbol for it.
         var remainingDestinationFilesToBundle = bundledResources
             .GroupBy(file => file.GetMetadata("DestinationFile"))
             .ToArray();
@@ -284,7 +287,8 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
                     var resourceType = bundledResource.GetMetadata("ResourceType");
                     var registeredName = bundledResource.GetMetadata(RegisteredName);
                     var resourceName = ToSafeSymbolName(registeredName, false);
-                    // Different timezone resources may have the same contents, use registered name to differentiate preallocated resources
+                    // Different timezone resources may have the same contents, use registered name to differentiate
+                    // preallocated resources
                     var resourceDataSymbol = _resourceDataSymbolDictionary[registeredName];
 
                     string culture = bundledResource.GetMetadata("Culture");

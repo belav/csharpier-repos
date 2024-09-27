@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 /// <summary>
-/// <see cref="ITagHelper"/> implementation targeting &lt;input&gt; elements with an <c>asp-for</c> attribute.
+/// <see cref="ITagHelper"/> implementation targeting &lt;input&gt; elements with an <c>asp-for</c>
+// attribute.
 /// </summary>
 [HtmlTargetElement(
     "input",
@@ -22,7 +23,8 @@ public class InputTagHelper : TagHelper
     private const string ForAttributeName = "asp-for";
     private const string FormatAttributeName = "asp-format";
 
-    // Mapping from datatype names and data annotation hints to values for the <input/> element's "type" attribute.
+    // Mapping from datatype names and data annotation hints to values for the <input/> element's "type"
+    // attribute.
     private static readonly Dictionary<string, string> _defaultInputTypes =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -79,7 +81,8 @@ public class InputTagHelper : TagHelper
     public override int Order => -1000;
 
     /// <summary>
-    /// Gets the <see cref="IHtmlGenerator"/> used to generate the <see cref="InputTagHelper"/>'s output.
+    /// Gets the <see cref="IHtmlGenerator"/> used to generate the <see cref="InputTagHelper"/>'s
+    // output.
     /// </summary>
     protected IHtmlGenerator Generator { get; }
 
@@ -97,12 +100,15 @@ public class InputTagHelper : TagHelper
     public ModelExpression For { get; set; }
 
     /// <summary>
-    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>)
+    // used to format the
     /// <see cref="For"/> result. Sets the generated "value" attribute to that formatted string.
     /// </summary>
     /// <remarks>
-    /// Not used if the provided (see <see cref="InputTypeName"/>) or calculated "type" attribute value is
-    /// <c>checkbox</c>, <c>password</c>, or <c>radio</c>. That is, <see cref="Format"/> is used when calling
+    /// Not used if the provided (see <see cref="InputTypeName"/>) or calculated "type" attribute value
+    // is
+    /// <c>checkbox</c>, <c>password</c>, or <c>radio</c>. That is, <see cref="Format"/> is used when
+    // calling
     /// <see cref="IHtmlGenerator.GenerateTextBox"/>.
     /// </remarks>
     [HtmlAttributeName(FormatAttributeName)]
@@ -112,9 +118,12 @@ public class InputTagHelper : TagHelper
     /// The type of the &lt;input&gt; element.
     /// </summary>
     /// <remarks>
-    /// Passed through to the generated HTML in all cases. Also used to determine the <see cref="IHtmlGenerator"/>
-    /// helper to call and the default <see cref="Format"/> value. A default <see cref="Format"/> is not calculated
-    /// if the provided (see <see cref="InputTypeName"/>) or calculated "type" attribute value is <c>checkbox</c>,
+    /// Passed through to the generated HTML in all cases. Also used to determine the <see
+    // cref="IHtmlGenerator"/>
+    /// helper to call and the default <see cref="Format"/> value. A default <see cref="Format"/> is not
+    // calculated
+    /// if the provided (see <see cref="InputTypeName"/>) or calculated "type" attribute value is
+    // <c>checkbox</c>,
     /// <c>hidden</c>, <c>password</c>, or <c>radio</c>.
     /// </remarks>
     [HtmlAttributeName("type")]
@@ -124,7 +133,8 @@ public class InputTagHelper : TagHelper
     /// The name of the associated form
     /// </summary>
     /// <remarks>
-    /// Used to associate a hidden checkbox tag to the respecting form when <see cref="CheckBoxHiddenInputRenderMode"/> is not <see cref="CheckBoxHiddenInputRenderMode.None"/>.
+    /// Used to associate a hidden checkbox tag to the respecting form when <see
+    // cref="CheckBoxHiddenInputRenderMode"/> is not <see cref="CheckBoxHiddenInputRenderMode.None"/>.
     /// </remarks>
     [HtmlAttributeName("form")]
     public string FormName { get; set; }
@@ -133,7 +143,8 @@ public class InputTagHelper : TagHelper
     /// The name of the &lt;input&gt; element.
     /// </summary>
     /// <remarks>
-    /// Passed through to the generated HTML in all cases. Also used to determine whether <see cref="For"/> is
+    /// Passed through to the generated HTML in all cases. Also used to determine whether <see
+    // cref="For"/> is
     /// valid with an empty <see cref="ModelExpression.Name"/>.
     /// </remarks>
     public string Name { get; set; }
@@ -142,7 +153,8 @@ public class InputTagHelper : TagHelper
     /// The value of the &lt;input&gt; element.
     /// </summary>
     /// <remarks>
-    /// Passed through to the generated HTML in all cases. Also used to determine the generated "checked" attribute
+    /// Passed through to the generated HTML in all cases. Also used to determine the generated
+    // "checked" attribute
     /// if <see cref="InputTypeName"/> is "radio". Must not be <c>null</c> in that case.
     /// </remarks>
     public string Value { get; set; }
@@ -157,7 +169,8 @@ public class InputTagHelper : TagHelper
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(output);
 
-        // Pass through attributes that are also well-known HTML attributes. Must be done prior to any copying
+        // Pass through attributes that are also well-known HTML attributes. Must be done prior to any
+        // copying
         // from a TagBuilder.
         if (InputTypeName != null)
         {
@@ -289,12 +302,14 @@ public class InputTagHelper : TagHelper
     }
 
     /// <summary>
-    /// Gets an &lt;input&gt; element's "type" attribute value based on the given <paramref name="modelExplorer"/>
+    /// Gets an &lt;input&gt; element's "type" attribute value based on the given <paramref
+    // name="modelExplorer"/>
     /// or <see cref="InputType"/>.
     /// </summary>
     /// <param name="modelExplorer">The <see cref="ModelExplorer"/> to use.</param>
     /// <param name="inputTypeHint">When this method returns, contains the string, often the name of a
-    /// <see cref="ModelMetadata.ModelType"/> base class, used to determine this method's return value.</param>
+    /// <see cref="ModelMetadata.ModelType"/> base class, used to determine this method's return
+    // value.</param>
     /// <returns>An &lt;input&gt; element's "type" attribute value.</returns>
     protected string GetInputType(ModelExplorer modelExplorer, out string inputTypeHint)
     {
@@ -501,7 +516,8 @@ public class InputTagHelper : TagHelper
             .Append(propertyName)
             .AppendHtml("\" />");
 
-    // Imitate Generator.GenerateHidden() using Generator.GenerateTextBox(). This adds support for asp-format that
+    // Imitate Generator.GenerateHidden() using Generator.GenerateTextBox(). This adds support for
+    // asp-format that
     // is not available in Generator.GenerateHidden().
     private TagBuilder GenerateHidden(
         ModelExplorer modelExplorer,
@@ -521,7 +537,8 @@ public class InputTagHelper : TagHelper
 
         // In DefaultHtmlGenerator(), GenerateTextBox() calls GenerateInput() _almost_ identically to how
         // GenerateHidden() does and the main switch inside GenerateInput() handles InputType.Text and
-        // InputType.Hidden identically. No behavior differences at all when a type HTML attribute already exists.
+        // InputType.Hidden identically. No behavior differences at all when a type HTML attribute already
+        // exists.
         htmlAttributes["type"] = "hidden";
 
         return Generator.GenerateTextBox(
@@ -611,8 +628,10 @@ public class InputTagHelper : TagHelper
             yield return modelExplorer.Metadata.DataTypeName;
         }
 
-        // In most cases, we don't want to search for Nullable<T>. We want to search for T, which should handle
-        // both T and Nullable<T>. However we special-case bool? to avoid turning an <input/> into a <select/>.
+        // In most cases, we don't want to search for Nullable<T>. We want to search for T, which should
+        // handle
+        // both T and Nullable<T>. However we special-case bool? to avoid turning an <input/> into a
+        // <select/>.
         var fieldType = modelExplorer.ModelType;
         if (typeof(bool?) != fieldType)
         {

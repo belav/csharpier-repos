@@ -15,7 +15,8 @@ namespace System.Text.Tests
         {
             Assert.Equal(charCount + 1, new ASCIIEncoding().GetMaxByteCount(charCount));
 
-            // Now test the input for an Encoding which has a zero or negative-length EncoderFallback.MaxCharCount.
+            // Now test the input for an Encoding which has a zero or negative-length
+            // EncoderFallback.MaxCharCount.
 
             Assert.Equal(
                 charCount + 1,

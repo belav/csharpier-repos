@@ -477,7 +477,8 @@ namespace System.Web.Configuration
             }
         }
 
-        // Now that we support adding custom browser hierarchies, root nodes other than Default are permitted.
+        // Now that we support adding custom browser hierarchies, root nodes other than Default are
+        // permitted.
         private bool IsRootNode(string nodeName)
         {
             if (String.Compare(nodeName, "Default", StringComparison.OrdinalIgnoreCase) == 0)
@@ -517,8 +518,10 @@ namespace System.Web.Configuration
             string operaFile = null;
 
             // DevDivBugs 180962
-            // IE, Mozilla and Opera are first-class browsers. Their User-Agent profiles need to be compared to the UA profile
-            // of the HTTP request before other browsers. We put them to the head of the list so that the generated browser capabilities
+            // IE, Mozilla and Opera are first-class browsers. Their User-Agent profiles need to be compared to
+            // the UA profile
+            // of the HTTP request before other browsers. We put them to the head of the list so that the
+            // generated browser capabilities
             // code will try to match them before other browsers.
             foreach (String filePath in _browserFileList)
             {
@@ -1025,7 +1028,8 @@ namespace System.Web.Configuration
             );
             cnamespace.Types.Add(factoryType);
 
-            //GEN: protected override object ConfigureBrowserCapabilities(NameValueCollection headers, HttpBrowserCapabilities browserCaps)
+            //GEN: protected override object ConfigureBrowserCapabilities(NameValueCollection headers,
+            // HttpBrowserCapabilities browserCaps)
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Override | MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(void));
@@ -1430,7 +1434,8 @@ namespace System.Web.Configuration
 
             if ((GenerateOverrides) && (prefix.Length == 0))
             {
-                //Gen: protected virtual void XxxProcessGateways(NameValueCollection headers, HttpBrowserCapabilities browserCaps) ;
+                //Gen: protected virtual void XxxProcessGateways(NameValueCollection headers,
+                // HttpBrowserCapabilities browserCaps) ;
                 string methodName = prefix + bd.Name + "ProcessGateways";
                 GenerateChildProcessMethod(methodName, ctd, false);
 
@@ -1492,7 +1497,8 @@ namespace System.Web.Configuration
 
             if (GenerateOverrides)
             {
-                //Gen: protected virtual void XxxProcessBrowsers(bool ignoreApplicationBrowsers, NameValueCollection headers, HttpBrowserCapabilities browserCaps) ;
+                //Gen: protected virtual void XxxProcessBrowsers(bool ignoreApplicationBrowsers, NameValueCollection
+                // headers, HttpBrowserCapabilities browserCaps) ;
                 string methodName = prefix + bd.Name + "ProcessBrowsers";
                 GenerateChildProcessMethod(methodName, ctd, true);
 
@@ -1539,7 +1545,8 @@ namespace System.Web.Configuration
             bool generateTracker
         )
         {
-            //Gen: protected virtual void XxxProcessBrowsers(bool ignoreApplicationBrowsers, NameValueCollection headers, HttpBrowserCapabilities browserCaps) ;
+            //Gen: protected virtual void XxxProcessBrowsers(bool ignoreApplicationBrowsers, NameValueCollection
+            // headers, HttpBrowserCapabilities browserCaps) ;
             CodeMemberMethod cmm = new CodeMemberMethod();
             cmm.Name = methodName;
             cmm.ReturnType = new CodeTypeReference(typeof(void));

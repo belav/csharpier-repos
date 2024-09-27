@@ -21,11 +21,13 @@ namespace System.Data.Metadata.Edm
     /// <remarks>
     /// For detailed functional specification, see "The EDP Type System.docx" and "edm.spec.doc".
     /// Notes:
-    /// 1) The notion of 'type' for the sake of type operation semantics is based on TypeUsage, i.e., EdmType *plus* facets.
+    /// 1) The notion of 'type' for the sake of type operation semantics is based on TypeUsage, i.e.,
+    // EdmType *plus* facets.
     ///
     /// 2) EDM built-in primitive types are defined by the EDM Provider Manifest.
     ///
-    /// 3) SubType and Promotable are similar notions however subtyping is stricter than promotability. Subtyping is used for mapping
+    /// 3) SubType and Promotable are similar notions however subtyping is stricter than promotability.
+    // Subtyping is used for mapping
     ///    validation while Promotability is used in query, update expression static type validation.
     /// </remarks>
     internal static class TypeSemantics
@@ -64,8 +66,10 @@ namespace System.Data.Metadata.Edm
         /// <param name="fromType"></param>
         /// <param name="toType"></param>
         /// <remarks>
-        /// Equivalence for nomimal types is based on lexical identity and structural equivalence for structural types.
-        /// Structural equivalence for row types is based only on equivalence of property types, property names are ignored.
+        /// Equivalence for nomimal types is based on lexical identity and structural equivalence for
+        // structural types.
+        /// Structural equivalence for row types is based only on equivalence of property types, property
+        // names are ignored.
         /// </remarks>
         /// <returns>true if equivalent, false otherwise</returns>
         internal static bool IsStructurallyEqual(TypeUsage fromType, TypeUsage toType)
@@ -221,7 +225,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="fromType">Type to cast from.</param>
         /// <param name="toType">Type to cast to.</param>
-        /// <returns><c>true</c> if <paramref name="fromType"/> can be casted to <paramref name="toType" />; <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if <paramref name="fromType"/> can be casted to <paramref name="toType" />;
+        // <c>false</c> otherwise.</returns>
         /// <remarks>
         /// Cast rules:
         /// - primitive types can be casted to other primitive types
@@ -254,7 +259,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="type2"></param>
         /// <param name="commonType"></param>
         /// <returns>
-        /// true if a common super type between type1 and type2 exists and out commonType represents the common super type.
+        /// true if a common super type between type1 and type2 exists and out commonType represents the
+        // common super type.
         /// false otherwise along with commonType as null
         /// </returns>
         internal static bool TryGetCommonType(
@@ -352,10 +358,12 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Determines if the <param ref="type" /> is a structural nominal type, i.e., EntityType or ComplexType
+        /// Determines if the <param ref="type" /> is a structural nominal type, i.e., EntityType or
+        // ComplexType
         /// </summary>
         /// <param name="type">Type to be checked.</param>
-        /// <returns><c>true</c> if the <param ref="type" /> is a nominal type. <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if the <param ref="type" /> is a nominal type. <c>false</c>
+        // otherwise.</returns>
         static internal bool IsNominalType(TypeUsage type)
         {
             Debug.Assert(
@@ -422,7 +430,8 @@ namespace System.Data.Metadata.Edm
         /// determines if <paramref name="type"/> is primitive or enumeration type
         /// </summary>
         /// <param name="type">Type to verify.</param>
-        /// <returns><c>true</c> if <paramref name="type"/> is primitive or enumeration type. <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if <paramref name="type"/> is primitive or enumeration type. <c>false</c>
+        // otherwise.</returns>
         internal static bool IsScalarType(TypeUsage type)
         {
             return IsScalarType(type.EdmType);
@@ -432,7 +441,8 @@ namespace System.Data.Metadata.Edm
         /// determines if <paramref name="type"/> is primitive or enumeration type
         /// </summary>
         /// <param name="type">Type to verify.</param>
-        /// <returns><c>true</c> if <paramref name="type"/> is primitive or enumeration type. <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if <paramref name="type"/> is primitive or enumeration type. <c>false</c>
+        // otherwise.</returns>
         internal static bool IsScalarType(EdmType type)
         {
             Debug.Assert(type != null, "type != null");
@@ -613,7 +623,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// determines if type is a strong spatial type (i.e., a spatial type, but not one of the two spatial union types)
+        /// determines if type is a strong spatial type (i.e., a spatial type, but not one of the two
+        // spatial union types)
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>

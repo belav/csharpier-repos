@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     Characteristics of a given EF service.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public readonly struct ServiceCharacteristics
@@ -17,7 +18,8 @@ public readonly struct ServiceCharacteristics
     /// </summary>
     /// <param name="lifetime">The service lifetime.</param>
     /// <param name="multipleRegistrations">
-    ///     <see langword="true" /> if multiple registrations of the service is allowed; <see langword="false" />
+    ///     <see langword="true" /> if multiple registrations of the service is allowed; <see
+    // langword="false" />
     ///     otherwise.
     /// </param>
     public ServiceCharacteristics(ServiceLifetime lifetime, bool multipleRegistrations = false)
@@ -32,7 +34,8 @@ public readonly struct ServiceCharacteristics
     public ServiceLifetime Lifetime { get; }
 
     /// <summary>
-    ///     <see langword="true" /> if multiple registrations of the service is allowed; <see langword="false" /> otherwise.
+    ///     <see langword="true" /> if multiple registrations of the service is allowed; <see
+    // langword="false" /> otherwise.
     /// </summary>
     public bool MultipleRegistrations { get; }
 }

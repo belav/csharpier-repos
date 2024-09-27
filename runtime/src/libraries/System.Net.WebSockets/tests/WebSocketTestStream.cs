@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace System.Net.WebSockets.Tests
 {
     /// <summary>
-    /// A helper stream class that can be used simulate sending / receiving (duplex) data in a websocket.
+    /// A helper stream class that can be used simulate sending / receiving (duplex) data in a
+    // websocket.
     /// </summary>
     public class WebSocketTestStream : Stream
     {

@@ -6,20 +6,20 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    /**
-      * Single-tag dictionary config factory
-      *
-      * Use for tags of the form: &lt;MySingleTag key1="value1" ... keyN="valueN"/&gt;
-      */
+/**
+* Single-tag dictionary config factory
+*
+* Use for tags of the form: &lt;MySingleTag key1="value1" ... keyN="valueN"/&gt;
+*/
     public class SingleTagSectionHandler : IConfigurationSectionHandler
     {
-        /**
-         * Create
-         *
-         * Given a partially composed config object (possibly null)
-         * and some input from the config system, return a
-         * further partially composed config object
-         */
+/**
+* Create
+*
+* Given a partially composed config object (possibly null)
+* and some input from the config system, return a
+* further partially composed config object
+*/
         public virtual object Create(object parent, object context, XmlNode section)
         {
             Hashtable result;

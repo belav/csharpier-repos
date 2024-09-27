@@ -19,19 +19,23 @@ using Microsoft.Net.Http.Headers;
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
-/// A typed factory for <see cref="IResult"/> types in <see cref="Microsoft.AspNetCore.Http.HttpResults"/>.
+/// A typed factory for <see cref="IResult"/> types in <see
+// cref="Microsoft.AspNetCore.Http.HttpResults"/>.
 /// </summary>
 public static class TypedResults
 {
     /// <summary>
-    /// Creates a <see cref="ChallengeHttpResult"/> that on execution invokes <see cref="AuthenticationHttpContextExtensions.ChallengeAsync(HttpContext, string?, AuthenticationProperties?)" />.
+    /// Creates a <see cref="ChallengeHttpResult"/> that on execution invokes <see
+    // cref="AuthenticationHttpContextExtensions.ChallengeAsync(HttpContext, string?,
+    // AuthenticationProperties?)" />.
     /// <para>
     /// The behavior of this method depends on the <see cref="IAuthenticationService"/> in use.
     /// <see cref="StatusCodes.Status401Unauthorized"/> and <see cref="StatusCodes.Status403Forbidden"/>
     /// are among likely status results.
     /// </para>
     /// </summary>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     /// <returns>The created <see cref="ChallengeHttpResult"/> for the response.</returns>
@@ -41,17 +45,22 @@ public static class TypedResults
     ) => new(authenticationSchemes: authenticationSchemes ?? Array.Empty<string>(), properties);
 
     /// <summary>
-    /// Creates a <see cref="ForbidHttpResult"/> that on execution invokes <see cref="AuthenticationHttpContextExtensions.ForbidAsync(HttpContext, string?, AuthenticationProperties?)"/>.
+    /// Creates a <see cref="ForbidHttpResult"/> that on execution invokes <see
+    // cref="AuthenticationHttpContextExtensions.ForbidAsync(HttpContext, string?,
+    // AuthenticationProperties?)"/>.
     /// <para>
-    /// By default, executing this result returns a <see cref="StatusCodes.Status403Forbidden"/>. Some authentication schemes, such as cookies,
+    /// By default, executing this result returns a <see cref="StatusCodes.Status403Forbidden"/>. Some
+    // authentication schemes, such as cookies,
     /// will convert <see cref="StatusCodes.Status403Forbidden"/> to a redirect to show a login page.
     /// </para>
     /// </summary>
     /// <remarks>
-    /// Some authentication schemes, such as cookies, will convert <see cref="StatusCodes.Status403Forbidden"/> to
+    /// Some authentication schemes, such as cookies, will convert <see
+    // cref="StatusCodes.Status403Forbidden"/> to
     /// a redirect to show a login page.
     /// </remarks>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     /// <returns>The created <see cref="ForbidHttpResult"/> for the response.</returns>
@@ -61,11 +70,15 @@ public static class TypedResults
     ) => new(authenticationSchemes: authenticationSchemes ?? Array.Empty<string>(), properties);
 
     /// <summary>
-    /// Creates a <see cref="SignInHttpResult"/> that on execution invokes <see cref="AuthenticationHttpContextExtensions.SignInAsync(HttpContext, string?, ClaimsPrincipal, AuthenticationProperties?)" />.
+    /// Creates a <see cref="SignInHttpResult"/> that on execution invokes <see
+    // cref="AuthenticationHttpContextExtensions.SignInAsync(HttpContext, string?, ClaimsPrincipal,
+    // AuthenticationProperties?)" />.
     /// </summary>
     /// <param name="principal">The <see cref="ClaimsPrincipal"/> containing the user claims.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
-    /// <param name="authenticationScheme">The authentication scheme to use for the sign-in operation.</param>
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in
+    // operation.</param>
+    /// <param name="authenticationScheme">The authentication scheme to use for the sign-in
+    // operation.</param>
     /// <returns>The created <see cref="SignInHttpResult"/> for the response.</returns>
     public static SignInHttpResult SignIn(
         ClaimsPrincipal principal,
@@ -79,10 +92,14 @@ public static class TypedResults
     }
 
     /// <summary>
-    /// Creates a <see cref="SignOutHttpResult"/> that on execution invokes <see cref="AuthenticationHttpContextExtensions.SignOutAsync(HttpContext, string?, AuthenticationProperties?)" />.
+    /// Creates a <see cref="SignOutHttpResult"/> that on execution invokes <see
+    // cref="AuthenticationHttpContextExtensions.SignOutAsync(HttpContext, string?,
+    // AuthenticationProperties?)" />.
     /// </summary>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
-    /// <param name="authenticationSchemes">The authentication scheme to use for the sign-out operation.</param>
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out
+    // operation.</param>
+    /// <param name="authenticationSchemes">The authentication scheme to use for the sign-out
+    // operation.</param>
     /// <returns>The created <see cref="SignOutHttpResult"/> for the response.</returns>
     public static SignOutHttpResult SignOut(
         AuthenticationProperties? properties = null,
@@ -96,7 +113,8 @@ public static class TypedResults
     /// </para>
     /// </summary>
     /// <remarks>
-    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/> parameters, then
+    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/>
+    // parameters, then
     /// the <paramref name="contentEncoding"/> parameter is chosen as the final encoding.
     /// </remarks>
     /// <param name="content">The content to write to the response.</param>
@@ -116,7 +134,8 @@ public static class TypedResults
     /// </para>
     /// </summary>
     /// <remarks>
-    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/> parameters, then
+    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/>
+    // parameters, then
     /// the <paramref name="contentEncoding"/> parameter is chosen as the final encoding.
     /// </remarks>
     /// <param name="content">The content to write to the response.</param>
@@ -138,7 +157,8 @@ public static class TypedResults
     /// </para>
     /// </summary>
     /// <remarks>
-    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/> parameters, then
+    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/>
+    // parameters, then
     /// the <paramref name="contentEncoding"/> parameter is chosen as the final encoding.
     /// </remarks>
     /// <param name="content">The content to write to the response.</param>
@@ -171,7 +191,8 @@ public static class TypedResults
     /// </para>
     /// </summary>
     /// <remarks>
-    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/> parameters, then
+    /// If encoding is provided by both the 'charset' and the <paramref name="contentEncoding"/>
+    // parameters, then
     /// the <paramref name="contentEncoding"/> parameter is chosen as the final encoding.
     /// </remarks>
     /// <param name="content">The content to write to the response.</param>
@@ -206,16 +227,19 @@ public static class TypedResults
         new(content, contentType.ToString());
 
     /// <summary>
-    /// Creates a <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/> object to JSON.
+    /// Creates a <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref
+    // name="data"/> object to JSON.
     /// </summary>
     /// <remarks>Callers should cache an instance of serializer settings to avoid
     /// recreating cached data with each call.</remarks>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="data">The object to write as JSON.</param>
     /// <param name="options">The serializer options to use when serializing the value.</param>
     /// <param name="contentType">The content-type to set on the response.</param>
     /// <param name="statusCode">The status code to set on the response.</param>
-    /// <returns>The created <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/>
+    /// <returns>The created <see cref="JsonHttpResult{TValue}"/> that serializes the specified
+    // <paramref name="data"/>
     /// as JSON format for the response.</returns>
     [RequiresUnreferencedCode(JsonHttpResultTrimmerWarning.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(JsonHttpResultTrimmerWarning.SerializationRequiresDynamicCodeMessage)]
@@ -227,14 +251,17 @@ public static class TypedResults
     ) => new(data, options, statusCode, contentType);
 
     /// <summary>
-    /// Creates a <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/> object to JSON.
+    /// Creates a <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref
+    // name="data"/> object to JSON.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="data">The object to write as JSON.</param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
     /// <param name="contentType">The content-type to set on the response.</param>
     /// <param name="statusCode">The status code to set on the response.</param>
-    /// <returns>The created <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/>
+    /// <returns>The created <see cref="JsonHttpResult{TValue}"/> that serializes the specified
+    // <paramref name="data"/>
     /// as JSON format for the response.</returns>
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
     public static JsonHttpResult<TValue> Json<TValue>(
@@ -250,14 +277,17 @@ public static class TypedResults
     }
 
     /// <summary>
-    /// Creates a <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/> object to JSON.
+    /// Creates a <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref
+    // name="data"/> object to JSON.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="data">The object to write as JSON.</param>
     /// <param name="context">A metadata provider for serializable types.</param>
     /// <param name="contentType">The content-type to set on the response.</param>
     /// <param name="statusCode">The status code to set on the response.</param>
-    /// <returns>The created <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/>
+    /// <returns>The created <see cref="JsonHttpResult{TValue}"/> that serializes the specified
+    // <paramref name="data"/>
     /// as JSON format for the response.</returns>
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
     public static JsonHttpResult<TValue> Json<TValue>(
@@ -282,13 +312,16 @@ public static class TypedResults
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
     /// </para>
     /// <para>
-    /// This API is an alias for <see cref="Bytes(byte[], string, string?, bool, DateTimeOffset?, EntityTagHeaderValue?)"/>.</para>
+    /// This API is an alias for <see cref="Bytes(byte[], string, string?, bool, DateTimeOffset?,
+    // EntityTagHeaderValue?)"/>.</para>
     /// </summary>
     /// <param name="fileContents">The file contents.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
-    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
+    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last
+    // modified.</param>
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="FileContentHttpResult"/> for the response.</returns>
     public static FileContentHttpResult File(
@@ -318,13 +351,16 @@ public static class TypedResults
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
     /// </para>
     /// <para>
-    /// This API is an alias for <see cref="File(byte[], string, string?, bool, DateTimeOffset?, EntityTagHeaderValue?)"/>.</para>
+    /// This API is an alias for <see cref="File(byte[], string, string?, bool, DateTimeOffset?,
+    // EntityTagHeaderValue?)"/>.</para>
     /// </summary>
     /// <param name="contents">The file contents.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
-    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
+    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last
+    // modified.</param>
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="FileContentHttpResult"/> for the response.</returns>
     public static FileContentHttpResult Bytes(
@@ -357,8 +393,10 @@ public static class TypedResults
     /// <param name="contents">The file contents.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
-    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
+    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last
+    // modified.</param>
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="FileContentHttpResult"/> for the response.</returns>
     public static FileContentHttpResult Bytes(
@@ -384,20 +422,26 @@ public static class TypedResults
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
     /// </para>
     /// <para>
-    /// This API is an alias for <see cref="Stream(Stream, string, string?, DateTimeOffset?, EntityTagHeaderValue?, bool)"/>.
+    /// This API is an alias for <see cref="Stream(Stream, string, string?, DateTimeOffset?,
+    // EntityTagHeaderValue?, bool)"/>.
     /// </para>
     /// </summary>
     /// <remarks>
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
-    /// <param name="fileStream">The <see cref="System.IO.Stream"/> with the contents of the file.</param>
+    /// <param name="fileStream">The <see cref="System.IO.Stream"/> with the contents of the
+    // file.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
-    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c> header.</param>
+    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c>
+    // header.</param>
     /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.
-    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range requests.</param>
-    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c> response header
+    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range
+    // requests.</param>
+    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c>
+    // response header
     /// and perform conditional requests.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
     /// <returns>The created <see cref="FileStreamHttpResult"/> for the response.</returns>
     public static FileStreamHttpResult File(
         Stream fileStream,
@@ -426,20 +470,26 @@ public static class TypedResults
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
     /// </para>
     /// <para>
-    /// This API is an alias for <see cref="File(Stream, string, string?, DateTimeOffset?, EntityTagHeaderValue?, bool)"/>.
+    /// This API is an alias for <see cref="File(Stream, string, string?, DateTimeOffset?,
+    // EntityTagHeaderValue?, bool)"/>.
     /// </para>
     /// </summary>
     /// <remarks>
     /// The <paramref name="stream" /> parameter is disposed after the response is sent.
     /// </remarks>
     /// <param name="stream">The <see cref="System.IO.Stream"/> to write to the response.</param>
-    /// <param name="contentType">The <c>Content-Type</c> of the response. Defaults to <c>application/octet-stream</c>.</param>
-    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c> header.</param>
+    /// <param name="contentType">The <c>Content-Type</c> of the response. Defaults to
+    // <c>application/octet-stream</c>.</param>
+    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c>
+    // header.</param>
     /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.
-    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range requests.</param>
-    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c> response header
+    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range
+    // requests.</param>
+    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c>
+    // response header
     /// and perform conditional requests.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
     /// <returns>The created <see cref="FileStreamHttpResult"/> for the response.</returns>
     public static FileStreamHttpResult Stream(
         Stream stream,
@@ -462,7 +512,8 @@ public static class TypedResults
     }
 
     /// <summary>
-    /// Writes the contents of the specified <see cref="System.IO.Pipelines.PipeReader"/> to the response.
+    /// Writes the contents of the specified <see cref="System.IO.Pipelines.PipeReader"/> to the
+    // response.
     /// <para>
     /// This supports range requests (<see cref="StatusCodes.Status206PartialContent"/> or
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
@@ -471,14 +522,20 @@ public static class TypedResults
     /// <remarks>
     /// The <paramref name="pipeReader" /> parameter is completed after the response is sent.
     /// </remarks>
-    /// <param name="pipeReader">The <see cref="System.IO.Pipelines.PipeReader"/> to write to the response.</param>
-    /// <param name="contentType">The <c>Content-Type</c> of the response. Defaults to <c>application/octet-stream</c>.</param>
-    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c> header.</param>
+    /// <param name="pipeReader">The <see cref="System.IO.Pipelines.PipeReader"/> to write to the
+    // response.</param>
+    /// <param name="contentType">The <c>Content-Type</c> of the response. Defaults to
+    // <c>application/octet-stream</c>.</param>
+    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c>
+    // header.</param>
     /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.
-    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range requests.</param>
-    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c> response header
+    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range
+    // requests.</param>
+    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c>
+    // response header
     /// and perform conditional requests.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
     /// <returns>The created <see cref="FileStreamHttpResult"/> for the response.</returns>
     public static FileStreamHttpResult Stream(
         PipeReader pipeReader,
@@ -507,12 +564,17 @@ public static class TypedResults
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
     /// </para>
     /// </summary>
-    /// <param name="streamWriterCallback">The callback that allows users to write directly to the response body.</param>
-    /// <param name="contentType">The <c>Content-Type</c> of the response. Defaults to <c>application/octet-stream</c>.</param>
-    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c> header.</param>
+    /// <param name="streamWriterCallback">The callback that allows users to write directly to the
+    // response body.</param>
+    /// <param name="contentType">The <c>Content-Type</c> of the response. Defaults to
+    // <c>application/octet-stream</c>.</param>
+    /// <param name="fileDownloadName">The the file name to be used in the <c>Content-Disposition</c>
+    // header.</param>
     /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.
-    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range requests.</param>
-    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c> response header
+    /// Used to configure the <c>Last-Modified</c> response header and perform conditional range
+    // requests.</param>
+    /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> to be configure the <c>ETag</c>
+    // response header
     /// and perform conditional requests.</param>
     /// <returns>The created <see cref="PushStreamHttpResult"/> for the response.</returns>
     public static PushStreamHttpResult Stream(
@@ -540,12 +602,15 @@ public static class TypedResults
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
     /// </para>
     /// </summary>
-    /// <param name="path">The path to the file. When not rooted, resolves the path relative to <see cref="IWebHostEnvironment.WebRootFileProvider"/>.</param>
+    /// <param name="path">The path to the file. When not rooted, resolves the path relative to <see
+    // cref="IWebHostEnvironment.WebRootFileProvider"/>.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.</param>
+    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last
+    // modified.</param>
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
     /// <returns>The created <see cref="PhysicalFileHttpResult"/> for the response.</returns>
     public static PhysicalFileHttpResult PhysicalFile(
         string path,
@@ -577,12 +642,15 @@ public static class TypedResults
     /// <see cref="StatusCodes.Status416RangeNotSatisfiable"/> if the range is not satisfiable).
     /// </para>
     /// </summary>
-    /// <param name="path">The path to the file. When not rooted, resolves the path relative to <see cref="IWebHostEnvironment.WebRootFileProvider"/>.</param>
+    /// <param name="path">The path to the file. When not rooted, resolves the path relative to <see
+    // cref="IWebHostEnvironment.WebRootFileProvider"/>.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.</param>
+    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last
+    // modified.</param>
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
     /// <returns>The created <see cref="VirtualFileHttpResult"/> for the response.</returns>
     public static VirtualFileHttpResult VirtualFile(
         string path,
@@ -610,15 +678,20 @@ public static class TypedResults
     /// <summary>
     /// Redirects to the specified <paramref name="url"/>.
     /// <list type="bullet">
-    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="permanent"/> is set, sets the <see cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
+    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are
+    // set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see
+    // cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="permanent"/> is set, sets the <see
+    // cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
     /// <item>Otherwise, configures <see cref="StatusCodes.Status302Found"/>.</item>
     /// </list>
     /// </summary>
     /// <param name="url">The URL to redirect to.</param>
-    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary
+    // (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent
+    // redirect (308) preserve the initial request method.</param>
     /// <returns>The created <see cref="RedirectHttpResult"/> for the response.</returns>
     public static RedirectHttpResult Redirect(
         [StringSyntax(StringSyntaxAttribute.Uri)] string url,
@@ -637,15 +710,20 @@ public static class TypedResults
     /// <summary>
     /// Redirects to the specified <paramref name="localUrl"/>.
     /// <list type="bullet">
-    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="permanent"/> is set, sets the <see cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
+    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are
+    // set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see
+    // cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="permanent"/> is set, sets the <see
+    // cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
     /// <item>Otherwise, configures <see cref="StatusCodes.Status302Found"/>.</item>
     /// </list>
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
-    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary
+    // (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent
+    // redirect (308) preserve the initial request method.</param>
     /// <returns>The created <see cref="RedirectHttpResult"/> for the response.</returns>
     public static RedirectHttpResult LocalRedirect(
         [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl,
@@ -664,16 +742,22 @@ public static class TypedResults
     /// <summary>
     /// Redirects to the specified route.
     /// <list type="bullet">
-    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="permanent"/> is set, sets the <see cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
-    /// <item><description>Otherwise, configures <see cref="StatusCodes.Status302Found"/>.</description></item>
+    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are
+    // set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see
+    // cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="permanent"/> is set, sets the <see
+    // cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
+    /// <item><description>Otherwise, configures <see
+    // cref="StatusCodes.Status302Found"/>.</description></item>
     /// </list>
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for a route.</param>
-    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary
+    // (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent
+    // redirect (308) preserve the initial request method.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The created <see cref="RedirectToRouteHttpResult"/> for the response.</returns>
     [RequiresUnreferencedCode(RouteValueDictionaryTrimmerWarning.Warning)]
@@ -695,16 +779,22 @@ public static class TypedResults
     /// <summary>
     /// Redirects to the specified route.
     /// <list type="bullet">
-    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
-    /// <item><description>When <paramref name="permanent"/> is set, sets the <see cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
-    /// <item><description>Otherwise, configures <see cref="StatusCodes.Status302Found"/>.</description></item>
+    /// <item><description>When <paramref name="permanent"/> and <paramref name="preserveMethod"/> are
+    // set, sets the <see cref="StatusCodes.Status308PermanentRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="preserveMethod"/> is set, sets the <see
+    // cref="StatusCodes.Status307TemporaryRedirect"/> status code.</description></item>
+    /// <item><description>When <paramref name="permanent"/> is set, sets the <see
+    // cref="StatusCodes.Status301MovedPermanently"/> status code.</description></item>
+    /// <item><description>Otherwise, configures <see
+    // cref="StatusCodes.Status302Found"/>.</description></item>
     /// </list>
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for a route.</param>
-    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary
+    // (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent
+    // redirect (308) preserve the initial request method.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The created <see cref="RedirectToRouteHttpResult"/> for the response.</returns>
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
@@ -726,7 +816,8 @@ public static class TypedResults
         );
 
     /// <summary>
-    /// Creates a <see cref="StatusCodeHttpResult"/> object by specifying a <paramref name="statusCode"/>.
+    /// Creates a <see cref="StatusCodeHttpResult"/> object by specifying a <paramref
+    // name="statusCode"/>.
     /// </summary>
     /// <param name="statusCode">The status code to set on the response.</param>
     /// <returns>The created <see cref="StatusCodeHttpResult"/> object for the response.</returns>
@@ -742,7 +833,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status404NotFound"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.NotFound{TValue}"/> for the response.</returns>
     public static NotFound<TValue> NotFound<TValue>(TValue? value) => new(value);
@@ -762,7 +854,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status400BadRequest"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of error object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of error object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="error">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.BadRequest{TValue}"/> for the response.</returns>
     public static BadRequest<TValue> BadRequest<TValue>(TValue? error) => new(error);
@@ -776,7 +869,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status409Conflict"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="error">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.Conflict{TValue}"/> for the response.</returns>
     public static Conflict<TValue> Conflict<TValue>(TValue? error) => new(error);
@@ -796,7 +890,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status200OK"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.Ok{TValue}"/> for the response.</returns>
     public static Ok<TValue> Ok<TValue>(TValue? value) => new(value);
@@ -810,9 +905,11 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status422UnprocessableEntity"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="error">The value to be included in the HTTP response body.</param>
-    /// <returns>The created <see cref="HttpResults.UnprocessableEntity{TValue}"/> for the response.</returns>
+    /// <returns>The created <see cref="HttpResults.UnprocessableEntity{TValue}"/> for the
+    // response.</returns>
     public static UnprocessableEntity<TValue> UnprocessableEntity<TValue>(TValue? error) =>
         new(error);
 
@@ -866,7 +963,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="ProblemDetails"/> response.
     /// </summary>
-    /// <param name="problemDetails">The <see cref="ProblemDetails"/>  object to produce a response from.</param>
+    /// <param name="problemDetails">The <see cref="ProblemDetails"/>  object to produce a response
+    // from.</param>
     /// <returns>The created <see cref="ProblemHttpResult"/> for the response.</returns>
     public static ProblemHttpResult Problem(ProblemDetails problemDetails)
     {
@@ -876,12 +974,14 @@ public static class TypedResults
     }
 
     /// <summary>
-    /// Produces a <see cref="StatusCodes.Status400BadRequest"/> response with an <see cref="HttpValidationProblemDetails"/> value.
+    /// Produces a <see cref="StatusCodes.Status400BadRequest"/> response with an <see
+    // cref="HttpValidationProblemDetails"/> value.
     /// </summary>
     /// <param name="errors">One or more validation errors.</param>
     /// <param name="detail">The value for <see cref="ProblemDetails.Detail" />.</param>
     /// <param name="instance">The value for <see cref="ProblemDetails.Instance" />.</param>
-    /// <param name="title">The value for <see cref="ProblemDetails.Title" />. Defaults to "One or more validation errors occurred."</param>
+    /// <param name="title">The value for <see cref="ProblemDetails.Title" />. Defaults to "One or more
+    // validation errors occurred."</param>
     /// <param name="type">The value for <see cref="ProblemDetails.Type" />.</param>
     /// <param name="extensions">The value for <see cref="ProblemDetails.Extensions" />.</param>
     /// <returns>The created <see cref="HttpResults.ValidationProblem"/> for the response.</returns>
@@ -932,7 +1032,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status201Created"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="uri">The URI at which the content has been created.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.Created{TValue}"/> for the response.</returns>
@@ -954,7 +1055,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status201Created"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="uri">The URI at which the content has been created.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.Created{TValue}"/> for the response.</returns>
@@ -992,11 +1094,13 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status201Created"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
-    /// <returns>The created <see cref="HttpResults.CreatedAtRoute{TValue}"/> for the response.</returns>
+    /// <returns>The created <see cref="HttpResults.CreatedAtRoute{TValue}"/> for the
+    // response.</returns>
     [RequiresUnreferencedCode(RouteValueDictionaryTrimmerWarning.Warning)]
 #pragma warning disable RS0027 // Public API with optional parameter(s) should have the most parameters amongst its public overloads
     public static CreatedAtRoute<TValue> CreatedAtRoute<TValue>(
@@ -1010,11 +1114,13 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status201Created"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
-    /// <returns>The created <see cref="HttpResults.CreatedAtRoute{TValue}"/> for the response.</returns>
+    /// <returns>The created <see cref="HttpResults.CreatedAtRoute{TValue}"/> for the
+    // response.</returns>
     public static CreatedAtRoute<TValue> CreatedAtRoute<TValue>(
         TValue? value,
         string? routeName,
@@ -1024,15 +1130,18 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
-    /// <param name="uri">The URI with the location at which the status of requested content can be monitored.</param>
+    /// <param name="uri">The URI with the location at which the status of requested content can be
+    // monitored.</param>
     /// <returns>The created <see cref="HttpResults.Accepted"/> for the response.</returns>
     public static Accepted Accepted(string? uri) => new(uri);
 
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
-    /// <param name="uri">The URI with the location at which the status of requested content can be monitored.</param>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
+    /// <param name="uri">The URI with the location at which the status of requested content can be
+    // monitored.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.Accepted{TValue}"/> for the response.</returns>
     public static Accepted<TValue> Accepted<TValue>(string? uri, TValue? value) => new(uri, value);
@@ -1040,7 +1149,8 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
-    /// <param name="uri">The URI with the location at which the status of requested content can be monitored.</param>
+    /// <param name="uri">The URI with the location at which the status of requested content can be
+    // monitored.</param>
     /// <returns>The created <see cref="HttpResults.Accepted"/> for the response.</returns>
     public static Accepted Accepted(Uri uri)
     {
@@ -1052,8 +1162,10 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
-    /// <param name="uri">The URI with the location at which the status of requested content can be monitored.</param>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
+    /// <param name="uri">The URI with the location at which the status of requested content can be
+    // monitored.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.Accepted{TValue}"/> for the response.</returns>
     public static Accepted<TValue> Accepted<TValue>(Uri uri, TValue? value)
@@ -1092,11 +1204,13 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
-    /// <returns>The created <see cref="HttpResults.AcceptedAtRoute{TValue}"/> for the response.</returns>
+    /// <returns>The created <see cref="HttpResults.AcceptedAtRoute{TValue}"/> for the
+    // response.</returns>
     [RequiresUnreferencedCode(RouteValueDictionaryTrimmerWarning.Warning)]
 #pragma warning disable RS0027 // Public API with optional parameter(s) should have the most parameters amongst its public overloads
     public static AcceptedAtRoute<TValue> AcceptedAtRoute<TValue>(
@@ -1110,11 +1224,13 @@ public static class TypedResults
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
-    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
+    /// <typeparam name="TValue">The type of object that will be JSON serialized to the response
+    // body.</typeparam>
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
-    /// <returns>The created <see cref="HttpResults.AcceptedAtRoute{TValue}"/> for the response.</returns>
+    /// <returns>The created <see cref="HttpResults.AcceptedAtRoute{TValue}"/> for the
+    // response.</returns>
     public static AcceptedAtRoute<TValue> AcceptedAtRoute<TValue>(
         TValue? value,
         string? routeName,

@@ -570,7 +570,8 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => concurrencyLimiter);
             });
 
-            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
+            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling
+            // acquire
             var concurrencyLease = concurrencyLimiter.AttemptAcquire();
 
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
@@ -606,7 +607,8 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => concurrencyLimiter);
             });
 
-            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
+            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling
+            // acquire
             var concurrencyLease = await concurrencyLimiter.AcquireAsync();
 
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
@@ -649,7 +651,8 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => concurrencyLimiter2);
             });
 
-            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
+            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling
+            // acquire
             var concurrencyLease = concurrencyLimiter2.AttemptAcquire();
 
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
@@ -690,7 +693,8 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => concurrencyLimiter2);
             });
 
-            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
+            // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling
+            // acquire
             var concurrencyLease = await concurrencyLimiter2.AcquireAsync();
 
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(

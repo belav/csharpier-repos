@@ -564,7 +564,9 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets the properties to pass into the <see cref='System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)'/> method for the <see cref='System.Diagnostics.Process'/>.
+        ///       Gets or sets the properties to pass into the <see
+        // cref='System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)'/> method for the <see
+        // cref='System.Diagnostics.Process'/>.
         ///    </para>
         /// </devdoc>
         public ProcessStartInfo StartInfo
@@ -846,11 +848,14 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Causes the <see cref="Process"/> component to wait the specified <paramref name="timeout"/> for the associated process to enter an idle state.
+        /// Causes the <see cref="Process"/> component to wait the specified <paramref name="timeout"/> for
+        // the associated process to enter an idle state.
         /// This overload applies only to processes with a user interface and, therefore, a message loop.
         /// </summary>
-        /// <param name="timeout">The amount of time, in milliseconds, to wait for the associated process to become idle.</param>
-        /// <returns><see langword="true"/> if the associated process has reached an idle state; otherwise, <see langword="false"/>.</returns>
+        /// <param name="timeout">The amount of time, in milliseconds, to wait for the associated process to
+        // become idle.</param>
+        /// <returns><see langword="true"/> if the associated process has reached an idle state; otherwise,
+        // <see langword="false"/>.</returns>
         /// <exception cref="InvalidOperationException">
         /// The process does not have a graphical interface.
         ///
@@ -1060,7 +1065,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>
-        ///       Returns a new <see cref='System.Diagnostics.Process'/> component given a process identifier and
+        ///       Returns a new <see cref='System.Diagnostics.Process'/> component given a process
+        // identifier and
         ///       the name of a computer in the network.
         ///    </para>
         /// </devdoc>
@@ -1205,7 +1211,8 @@ namespace System.Diagnostics
         /// <devdoc>
         ///    <para>
         ///       Discards any information about the associated process
-        ///       that has been cached inside the process component. After <see cref='System.Diagnostics.Process.Refresh'/> is called, the
+        ///       that has been cached inside the process component. After <see
+        // cref='System.Diagnostics.Process.Refresh'/> is called, the
         ///       first request for information for each property causes the process component
         ///       to obtain a new value from the associated process.
         ///    </para>
@@ -1234,7 +1241,8 @@ namespace System.Diagnostics
         {
             if (!_haveProcessHandle)
             {
-                //Cannot open a new process handle if the object has been disposed, since finalization has been suppressed.
+                //Cannot open a new process handle if the object has been disposed, since finalization has been
+                // suppressed.
                 CheckDisposed();
 
                 SetProcessHandle(GetProcessHandle());
@@ -1272,10 +1280,12 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>
-        ///       Starts a process specified by the <see cref='System.Diagnostics.Process.StartInfo'/> property of this <see cref='System.Diagnostics.Process'/>
+        ///       Starts a process specified by the <see cref='System.Diagnostics.Process.StartInfo'/>
+        // property of this <see cref='System.Diagnostics.Process'/>
         ///       component and associates it with the
         ///    <see cref='System.Diagnostics.Process'/> . If a process resource is reused
-        ///       rather than started, the reused process is associated with this <see cref='System.Diagnostics.Process'/>
+        ///       rather than started, the reused process is associated with this <see
+        // cref='System.Diagnostics.Process'/>
         ///       component.
         ///    </para>
         /// </devdoc>
@@ -1319,7 +1329,8 @@ namespace System.Diagnostics
                 }
             }
 
-            //Cannot start a new process and store its handle if the object has been disposed, since finalization has been suppressed.
+            //Cannot start a new process and store its handle if the object has been disposed, since
+            // finalization has been suppressed.
             CheckDisposed();
 
             SerializationGuard.ThrowIfDeserializationInProgress(
@@ -1333,7 +1344,8 @@ namespace System.Diagnostics
         /// <devdoc>
         ///    <para>
         ///       Starts a process resource by specifying the name of a
-        ///       document or application file. Associates the process resource with a new <see cref='System.Diagnostics.Process'/>
+        ///       document or application file. Associates the process resource with a new <see
+        // cref='System.Diagnostics.Process'/>
         ///       component.
         ///    </para>
         /// </devdoc>
@@ -1368,7 +1380,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Starts a process resource by specifying the name of an application and a set of command line arguments
+        /// Starts a process resource by specifying the name of an application and a set of command line
+        // arguments
         /// </summary>
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
@@ -1534,7 +1547,8 @@ namespace System.Diagnostics
             // CASE 2: PROCESS EXITS BEFORE ENABLING EVENTS
             // The process may exit before we attempt to enable events. In that case EnableRaisingEvents
             // will throw an exception like this:
-            //     System.InvalidOperationException : Cannot process request because the process (42) has exited.
+            //     System.InvalidOperationException : Cannot process request because the process (42) has
+            // exited.
             // In this case we catch the InvalidOperationException. If the process has exited, our work
             // is done and we return. If for any reason (now or in the future) enabling events fails
             // and the process has not exited, bubble the exception up to the user.
@@ -1634,8 +1648,10 @@ namespace System.Diagnostics
         /// <para>
         /// Instructs the <see cref='System.Diagnostics.Process'/> component to start
         /// reading the StandardOutput stream asynchronously. The user can register a callback
-        /// that will be called when a line of data terminated by \n,\r or \r\n is reached, or the end of stream is reached
-        /// then the remaining information is returned. The user can add an event handler to OutputDataReceived.
+        /// that will be called when a line of data terminated by \n,\r or \r\n is reached, or the end of
+        // stream is reached
+        /// then the remaining information is returned. The user can add an event handler to
+        // OutputDataReceived.
         /// </para>
         /// </devdoc>
         public void BeginOutputReadLine()
@@ -1675,8 +1691,10 @@ namespace System.Diagnostics
         /// <para>
         /// Instructs the <see cref='System.Diagnostics.Process'/> component to start
         /// reading the StandardError stream asynchronously. The user can register a callback
-        /// that will be called when a line of data terminated by \n,\r or \r\n is reached, or the end of stream is reached
-        /// then the remaining information is returned. The user can add an event handler to ErrorDataReceived.
+        /// that will be called when a line of data terminated by \n,\r or \r\n is reached, or the end of
+        // stream is reached
+        /// then the remaining information is returned. The user can add an event handler to
+        // ErrorDataReceived.
         /// </para>
         /// </devdoc>
         public void BeginErrorReadLine()
@@ -1716,7 +1734,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         /// <para>
-        /// Instructs the <see cref='System.Diagnostics.Process'/> component to cancel the asynchronous operation
+        /// Instructs the <see cref='System.Diagnostics.Process'/> component to cancel the asynchronous
+        // operation
         /// specified by BeginOutputReadLine().
         /// </para>
         /// </devdoc>
@@ -1737,7 +1756,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         /// <para>
-        /// Instructs the <see cref='System.Diagnostics.Process'/> component to cancel the asynchronous operation
+        /// Instructs the <see cref='System.Diagnostics.Process'/> component to cancel the asynchronous
+        // operation
         /// specified by BeginErrorReadLine().
         /// </para>
         /// </devdoc>
@@ -1794,7 +1814,8 @@ namespace System.Diagnostics
             }
         }
 
-        /// <summary>Throws a <see cref="System.ObjectDisposedException"/> if the Process was disposed</summary>
+        /// <summary>Throws a <see cref="System.ObjectDisposedException"/> if the Process was
+        // disposed</summary>
         /// <exception cref="System.ObjectDisposedException">If the Process has been disposed.</exception>
         private void CheckDisposed()
         {

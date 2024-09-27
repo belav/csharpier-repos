@@ -30,7 +30,8 @@ public sealed class CngGcmAuthenticatedEncryptorConfiguration
     public string EncryptionAlgorithm { get; set; } = Constants.BCRYPT_AES_ALGORITHM;
 
     /// <summary>
-    /// The name of the provider which contains the implementation of the symmetric encryption algorithm.
+    /// The name of the provider which contains the implementation of the symmetric encryption
+    // algorithm.
     /// This property corresponds to the 'pszImplementation' parameter of BCryptOpenAlgorithmProvider.
     /// This property is optional.
     /// </summary>
@@ -66,14 +67,16 @@ public sealed class CngGcmAuthenticatedEncryptorConfiguration
     }
 
     /// <summary>
-    /// Validates that this <see cref="CngGcmAuthenticatedEncryptorConfiguration"/> is well-formed, i.e.,
+    /// Validates that this <see cref="CngGcmAuthenticatedEncryptorConfiguration"/> is well-formed,
+    // i.e.,
     /// that the specified algorithm actually exists and can be instantiated properly.
     /// An exception will be thrown if validation fails.
     /// </summary>
     void IInternalAlgorithmConfiguration.Validate()
     {
         var factory = new CngGcmAuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
-        // Run a sample payload through an encrypt -> decrypt operation to make sure data round-trips properly.
+        // Run a sample payload through an encrypt -> decrypt operation to make sure data round-trips
+        // properly.
         using var secret = Secret.Random(512 / 8);
         using var encryptor = factory.CreateAuthenticatedEncryptorInstance(secret, this);
         encryptor.PerformSelfTest();

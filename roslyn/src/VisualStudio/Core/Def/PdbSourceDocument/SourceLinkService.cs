@@ -89,7 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
             }
             else if (_logger is not null)
             {
-                // We log specific info from the debugger if there is a failure, but the caller will log general failure
+                // We log specific info from the debugger if there is a failure, but the caller will log general
+                // failure
                 // information otherwise
                 _logger.Log(result.Status);
                 _logger.Log(result.Log);
@@ -119,7 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
             }
             else if (_logger is not null && result.Log is not null)
             {
-                // We log specific info from the debugger if there is a failure, but the caller will log general failure
+                // We log specific info from the debugger if there is a failure, but the caller will log general
+                // failure
                 // information otherwise.
                 _logger.Log(result.Log);
             }

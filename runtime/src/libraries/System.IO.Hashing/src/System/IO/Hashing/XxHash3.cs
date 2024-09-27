@@ -11,7 +11,8 @@ using static System.IO.Hashing.XxHashShared;
 
 namespace System.IO.Hashing
 {
-    /// <summary>Provides an implementation of the XXH3 hash algorithm for generating a 64-bit hash.</summary>
+    /// <summary>Provides an implementation of the XXH3 hash algorithm for generating a 64-bit
+    // hash.</summary>
     /// <remarks>
     /// For methods that persist the computed numerical hash value as bytes,
     /// the value is written in the Big Endian byte order.
@@ -26,11 +27,13 @@ namespace System.IO.Hashing
 
         private State _state;
 
-        /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the default seed value 0.</summary>
+        /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the default seed
+        // value 0.</summary>
         public XxHash3()
             : this(0) { }
 
-        /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the specified seed.</summary>
+        /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the specified
+        // seed.</summary>
         public XxHash3(long seed)
             : base(HashLengthInBytes)
         {
@@ -62,7 +65,8 @@ namespace System.IO.Hashing
             return Hash(new ReadOnlySpan<byte>(source), seed);
         }
 
-        /// <summary>Computes the XXH3 hash of the provided <paramref name="source"/> data using the optionally provided <paramref name="seed"/>.</summary>
+        /// <summary>Computes the XXH3 hash of the provided <paramref name="source"/> data using the
+        // optionally provided <paramref name="seed"/>.</summary>
         /// <param name="source">The data to hash.</param>
         /// <param name="seed">The seed value for this hash computation. The default is zero.</param>
         /// <returns>The XXH3 64-bit hash code of the provided data.</returns>
@@ -74,12 +78,14 @@ namespace System.IO.Hashing
             return result;
         }
 
-        /// <summary>Computes the XXH3 hash of the provided <paramref name="source"/> data into the provided <paramref name="destination"/> using the optionally provided <paramref name="seed"/>.</summary>
+        /// <summary>Computes the XXH3 hash of the provided <paramref name="source"/> data into the provided
+        // <paramref name="destination"/> using the optionally provided <paramref name="seed"/>.</summary>
         /// <param name="source">The data to hash.</param>
         /// <param name="destination">The buffer that receives the computed 64-bit hash code.</param>
         /// <param name="seed">The seed value for this hash computation. The default is zero.</param>
         /// <returns>The number of bytes written to <paramref name="destination"/>.</returns>
-        /// <exception cref="ArgumentException"><paramref name="destination"/> is shorter than <see cref="HashLengthInBytes"/> (8 bytes).</exception>
+        /// <exception cref="ArgumentException"><paramref name="destination"/> is shorter than <see
+        // cref="HashLengthInBytes"/> (8 bytes).</exception>
         public static int Hash(ReadOnlySpan<byte> source, Span<byte> destination, long seed = 0)
         {
             if (!TryHash(source, destination, out int bytesWritten, seed))
@@ -90,12 +96,16 @@ namespace System.IO.Hashing
             return bytesWritten;
         }
 
-        /// <summary>Attempts to compute the XXH3 hash of the provided <paramref name="source"/> data into the provided <paramref name="destination"/> using the optionally provided <paramref name="seed"/>.</summary>
+        /// <summary>Attempts to compute the XXH3 hash of the provided <paramref name="source"/> data into
+        // the provided <paramref name="destination"/> using the optionally provided <paramref
+        // name="seed"/>.</summary>
         /// <param name="source">The data to hash.</param>
         /// <param name="destination">The buffer that receives the computed 64-bit hash code.</param>
-        /// <param name="bytesWritten">When this method returns, contains the number of bytes written to <paramref name="destination"/>.</param>
+        /// <param name="bytesWritten">When this method returns, contains the number of bytes written to
+        // <paramref name="destination"/>.</param>
         /// <param name="seed">The seed value for this hash computation. The default is zero.</param>
-        /// <returns><see langword="true"/> if <paramref name="destination"/> is long enough to receive the computed hash value (8 bytes); otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if <paramref name="destination"/> is long enough to receive the
+        // computed hash value (8 bytes); otherwise, <see langword="false"/>.</returns>
         public static bool TryHash(
             ReadOnlySpan<byte> source,
             Span<byte> destination,
@@ -156,14 +166,16 @@ namespace System.IO.Hashing
             XxHashShared.Reset(ref _state);
         }
 
-        /// <summary>Appends the contents of <paramref name="source"/> to the data already processed for the current hash computation.</summary>
+        /// <summary>Appends the contents of <paramref name="source"/> to the data already processed for the
+        // current hash computation.</summary>
         /// <param name="source">The data to process.</param>
         public override void Append(ReadOnlySpan<byte> source)
         {
             XxHashShared.Append(ref _state, source);
         }
 
-        /// <summary>Writes the computed 64-bit hash value to <paramref name="destination"/> without modifying accumulated state.</summary>
+        /// <summary>Writes the computed 64-bit hash value to <paramref name="destination"/> without
+        // modifying accumulated state.</summary>
         /// <param name="destination">The buffer that receives the computed hash value.</param>
         protected override void GetCurrentHashCore(Span<byte> destination)
         {

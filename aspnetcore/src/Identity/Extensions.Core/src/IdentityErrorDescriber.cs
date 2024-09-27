@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Service to enable localization for application facing identity errors.
 /// </summary>
 /// <remarks>
-/// These errors are returned to controllers and are generally used as display messages to end users.
+/// These errors are returned to controllers and are generally used as display messages to end
+// users.
 /// </remarks>
 public class IdentityErrorDescriber
 {
@@ -79,9 +80,11 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating an external login is already associated with an account.
+    /// Returns an <see cref="IdentityError"/> indicating an external login is already associated with
+    // an account.
     /// </summary>
-    /// <returns>An <see cref="IdentityError"/> indicating an external login is already associated with an account.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating an external login is already associated with
+    // an account.</returns>
     public virtual IdentityError LoginAlreadyAssociated()
     {
         return new IdentityError
@@ -92,10 +95,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating the specified user <paramref name="userName"/> is invalid.
+    /// Returns an <see cref="IdentityError"/> indicating the specified user <paramref name="userName"/>
+    // is invalid.
     /// </summary>
     /// <param name="userName">The user name that is invalid.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating the specified user <paramref name="userName"/> is invalid.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating the specified user <paramref
+    // name="userName"/> is invalid.</returns>
     public virtual IdentityError InvalidUserName(string? userName)
     {
         return new IdentityError
@@ -106,10 +111,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is invalid.
+    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is
+    // invalid.
     /// </summary>
     /// <param name="email">The email that is invalid.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is invalid.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is
+    // invalid.</returns>
     public virtual IdentityError InvalidEmail(string? email)
     {
         return new IdentityError
@@ -120,10 +127,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="userName"/> already exists.
+    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="userName"/>
+    // already exists.
     /// </summary>
     /// <param name="userName">The user name that already exists.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="userName"/> already exists.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="userName"/>
+    // already exists.</returns>
     public virtual IdentityError DuplicateUserName(string userName)
     {
         return new IdentityError
@@ -134,10 +143,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is already associated with an account.
+    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is
+    // already associated with an account.
     /// </summary>
     /// <param name="email">The email that is already associated with an account.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is already associated with an account.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating the specified <paramref name="email"/> is
+    // already associated with an account.</returns>
     public virtual IdentityError DuplicateEmail(string email)
     {
         return new IdentityError
@@ -148,10 +159,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/> name is invalid.
+    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/> name is
+    // invalid.
     /// </summary>
     /// <param name="role">The invalid role.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/> name is invalid.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/>
+    // name is invalid.</returns>
     public virtual IdentityError InvalidRoleName(string? role)
     {
         return new IdentityError
@@ -162,10 +175,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/> name already exists.
+    /// Returns an <see cref="IdentityError"/> indicating the specified <paramref name="role"/> name
+    // already exists.
     /// </summary>
     /// <param name="role">The duplicate role.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/> name already exists.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating the specific role <paramref name="role"/>
+    // name already exists.</returns>
     public virtual IdentityError DuplicateRoleName(string role)
     {
         return new IdentityError
@@ -202,10 +217,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a user is already in the specified <paramref name="role"/>.
+    /// Returns an <see cref="IdentityError"/> indicating a user is already in the specified <paramref
+    // name="role"/>.
     /// </summary>
     /// <param name="role">The duplicate role.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating a user is already in the specified <paramref name="role"/>.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a user is already in the specified <paramref
+    // name="role"/>.</returns>
     public virtual IdentityError UserAlreadyInRole(string role)
     {
         return new IdentityError
@@ -216,10 +233,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a user is not in the specified <paramref name="role"/>.
+    /// Returns an <see cref="IdentityError"/> indicating a user is not in the specified <paramref
+    // name="role"/>.
     /// </summary>
     /// <param name="role">The duplicate role.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating a user is not in the specified <paramref name="role"/>.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a user is not in the specified <paramref
+    // name="role"/>.</returns>
     public virtual IdentityError UserNotInRole(string role)
     {
         return new IdentityError
@@ -230,10 +249,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a password of the specified <paramref name="length"/> does not meet the minimum length requirements.
+    /// Returns an <see cref="IdentityError"/> indicating a password of the specified <paramref
+    // name="length"/> does not meet the minimum length requirements.
     /// </summary>
     /// <param name="length">The length that is not long enough.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating a password of the specified <paramref name="length"/> does not meet the minimum length requirements.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a password of the specified <paramref
+    // name="length"/> does not meet the minimum length requirements.</returns>
     public virtual IdentityError PasswordTooShort(int length)
     {
         return new IdentityError
@@ -244,10 +265,12 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a password does not meet the minimum number <paramref name="uniqueChars"/> of unique chars.
+    /// Returns an <see cref="IdentityError"/> indicating a password does not meet the minimum number
+    // <paramref name="uniqueChars"/> of unique chars.
     /// </summary>
     /// <param name="uniqueChars">The number of different chars that must be used.</param>
-    /// <returns>An <see cref="IdentityError"/> indicating a password does not meet the minimum number <paramref name="uniqueChars"/> of unique chars.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a password does not meet the minimum number
+    // <paramref name="uniqueChars"/> of unique chars.</returns>
     public virtual IdentityError PasswordRequiresUniqueChars(int uniqueChars)
     {
         return new IdentityError
@@ -258,9 +281,11 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a non-alphanumeric character, which is required by the password policy.
+    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a
+    // non-alphanumeric character, which is required by the password policy.
     /// </summary>
-    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a non-alphanumeric character.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a
+    // non-alphanumeric character.</returns>
     public virtual IdentityError PasswordRequiresNonAlphanumeric()
     {
         return new IdentityError
@@ -271,9 +296,11 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a numeric character, which is required by the password policy.
+    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a numeric
+    // character, which is required by the password policy.
     /// </summary>
-    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a numeric character.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a numeric
+    // character.</returns>
     public virtual IdentityError PasswordRequiresDigit()
     {
         return new IdentityError
@@ -284,9 +311,11 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a lower case letter, which is required by the password policy.
+    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain a lower
+    // case letter, which is required by the password policy.
     /// </summary>
-    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a lower case letter.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain a lower
+    // case letter.</returns>
     public virtual IdentityError PasswordRequiresLower()
     {
         return new IdentityError
@@ -297,9 +326,11 @@ public class IdentityErrorDescriber
     }
 
     /// <summary>
-    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain an upper case letter, which is required by the password policy.
+    /// Returns an <see cref="IdentityError"/> indicating a password entered does not contain an upper
+    // case letter, which is required by the password policy.
     /// </summary>
-    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain an upper case letter.</returns>
+    /// <returns>An <see cref="IdentityError"/> indicating a password entered does not contain an upper
+    // case letter.</returns>
     public virtual IdentityError PasswordRequiresUpper()
     {
         return new IdentityError

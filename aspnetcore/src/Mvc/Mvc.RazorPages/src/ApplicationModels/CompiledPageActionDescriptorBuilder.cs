@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 /// <summary>
-/// Constructs a <see cref="CompiledPageActionDescriptor"/> from an <see cref="PageApplicationModel"/>.
+/// Constructs a <see cref="CompiledPageActionDescriptor"/> from an <see
+// cref="PageApplicationModel"/>.
 /// </summary>
 internal static class CompiledPageActionDescriptorBuilder
 {
     /// <summary>
-    /// Creates a <see cref="CompiledPageActionDescriptor"/> from the specified <paramref name="applicationModel"/>.
+    /// Creates a <see cref="CompiledPageActionDescriptor"/> from the specified <paramref
+    // name="applicationModel"/>.
     /// </summary>
     /// <param name="applicationModel">The <see cref="PageApplicationModel"/>.</param>
     /// <param name="globalFilters">Global filters to apply to the page.</param>
@@ -71,9 +73,11 @@ internal static class CompiledPageActionDescriptorBuilder
         var handlerMetatdata = applicationModel.HandlerTypeAttributes;
         var endpointMetadata = applicationModel.EndpointMetadata;
 
-        // It is criticial to get the order in which metadata appears in endpoint metadata correct. More significant metadata
+        // It is criticial to get the order in which metadata appears in endpoint metadata correct. More
+        // significant metadata
         // must appear later in the sequence.
-        // In this case, handlerMetadata is attributes on the Page \ PageModel, and endPointMetadata is configured via conventions. and
+        // In this case, handlerMetadata is attributes on the Page \ PageModel, and endPointMetadata is
+        // configured via conventions. and
         // We consider the latter to be more significant.
         return Enumerable.Concat(handlerMetatdata, endpointMetadata).ToList();
     }

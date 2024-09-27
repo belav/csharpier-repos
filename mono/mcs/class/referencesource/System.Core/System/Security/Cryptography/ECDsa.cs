@@ -52,7 +52,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Creates a new instance of the default implementation of the Elliptic Curve Digital Signature Algorithm
+        /// Creates a new instance of the default implementation of the Elliptic Curve Digital Signature
+        // Algorithm
         /// (ECDSA) with a newly generated key over the specified curve.
         /// </summary>
         /// <param name="curve">The curve to use for key generation.</param>
@@ -78,7 +79,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Creates a new instance of the default implementation of the Elliptic Curve Digital Signature Algorithm
+        /// Creates a new instance of the default implementation of the Elliptic Curve Digital Signature
+        // Algorithm
         /// (ECDSA) using the specified ECParameters as the key.
         /// </summary>
         /// <param name="parameters">The parameters representing the key to use.</param>
@@ -107,7 +109,8 @@ namespace System.Security.Cryptography
         // Signature operations
         //
 
-        // ECDsa does not encode the algorithm identifier into the signature blob, therefore SignHash and VerifyHash
+        // ECDsa does not encode the algorithm identifier into the signature blob, therefore SignHash and
+        // VerifyHash
         // do not need the HashAlgorithmName value, only SignData and VerifyData do.
         public abstract byte[] SignHash(byte[] hash);
         public abstract bool VerifyHash(byte[] hash, byte[] signature);
@@ -245,7 +248,8 @@ namespace System.Security.Cryptography
         /// If the curve has a name, the Curve property will contain named curve parameters, otherwise it
         /// will contain explicit parameters.
         /// </summary>
-        /// <param name="includePrivateParameters">true to include private parameters, otherwise, false.</param>
+        /// <param name="includePrivateParameters">true to include private parameters, otherwise,
+        // false.</param>
         /// <returns>The ECParameters representing the point on the curve for this key.</returns>
         public virtual ECParameters ExportParameters(bool includePrivateParameters)
         {
@@ -255,8 +259,10 @@ namespace System.Security.Cryptography
         /// <summary>
         /// When overridden in a derived class, exports the explicit ECParameters for an ECCurve.
         /// </summary>
-        /// <param name="includePrivateParameters">true to include private parameters, otherwise, false.</param>
-        /// <returns>The ECParameters representing the point on the curve for this key, using the explicit curve format.</returns>
+        /// <param name="includePrivateParameters">true to include private parameters, otherwise,
+        // false.</param>
+        /// <returns>The ECParameters representing the point on the curve for this key, using the explicit
+        // curve format.</returns>
         public virtual ECParameters ExportExplicitParameters(bool includePrivateParameters)
         {
             throw new NotSupportedException(SR.GetString(SR.NotSupported_SubclassOverride));
@@ -272,7 +278,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// When overridden in a derived class, generates a new public/private keypair for the specified curve.
+        /// When overridden in a derived class, generates a new public/private keypair for the specified
+        // curve.
         /// </summary>
         /// <param name="curve">The curve to use.</param>
         public virtual void GenerateKey(ECCurve curve)

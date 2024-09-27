@@ -110,7 +110,8 @@ internal static partial class HttpApi
     internal static HTTP_PROPERTY_FLAGS HTTP_PROPERTY_FLAGS_PRESENT { get; } =
         new() { _bitfield = 0x00000001 };
 
-    // This property is used by HttpListener to pass the version structure to the native layer in API calls.
+    // This property is used by HttpListener to pass the version structure to the native layer in API
+    // calls.
     internal static HTTPAPI_VERSION Version { get; } = new() { HttpApiMajorVersion = 2 };
     internal static SafeLibraryHandle? HttpApiModule { get; }
     internal static HttpGetRequestPropertyInvoker? HttpGetRequestProperty { get; }

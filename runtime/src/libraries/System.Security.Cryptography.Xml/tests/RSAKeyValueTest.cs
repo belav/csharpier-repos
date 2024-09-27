@@ -117,7 +117,8 @@ namespace System.Security.Cryptography.Xml.Tests
             rsa1.LoadXml(doc.DocumentElement);
 
             string s = rsa1.GetXml().OuterXml;
-            //Comparing with rsaKeyWithoutPrefix because RSAKeyValue.GetXml().OuterXml returns the markup without the namespace prefixes
+            //Comparing with rsaKeyWithoutPrefix because RSAKeyValue.GetXml().OuterXml returns the markup
+            // without the namespace prefixes
             Assert.Equal(rsaKeyWithoutPrefix, s);
         }
 

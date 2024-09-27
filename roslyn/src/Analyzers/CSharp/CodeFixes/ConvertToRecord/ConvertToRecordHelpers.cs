@@ -196,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 return false;
             }
 
-            // now we know we have an == comparison, but we want to make sure these actually reference parameters
+            // now we know we have an == comparison, but we want to make sure these actually reference
+            // parameters
             var left = GetParamFromArgument(leftOperand);
             var right = GetParamFromArgument(rightOperand);
             // make sure we're not referencing the same parameter twice
@@ -204,11 +205,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         }
 
         /// <summary>
-        /// Matches constructors where each statement simply assigns one of the provided parameters to one of the provided properties
+        /// Matches constructors where each statement simply assigns one of the provided parameters to one
+        // of the provided properties
         /// with no duplicate assignment or any other type of statement
         /// </summary>
         /// <param name="operation">Constructor body</param>
-        /// <param name="properties">Properties expected to be assigned (would be replaced with positional constructor).
+        /// <param name="properties">Properties expected to be assigned (would be replaced with positional
+        // constructor).
         /// Will re-order this list to match parameter order if successful.</param>
         /// <param name="parameters">Constructor parameters</param>
         /// <returns>Whether the constructor body matches the pattern described</returns>
@@ -412,7 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         /// <param name="operation">Object creation expression operation</param>
         /// <param name="positionalParams">primary constructor parameters</param>
         /// <returns>
-        /// values that were assigned to primary constructor parameters, in order of the passed in primary constructor
+        /// values that were assigned to primary constructor parameters, in order of the passed in primary
+        // constructor
         /// </returns>
         /// <remarks>
         ///  Example (assume we decided on positional parameters int Foo, bool Bar, int Baz):
@@ -434,7 +438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         {
             // we want to be very careful about when we refactor because if the user has a constructor
             // and initializer it could be what they intend. Since we gave initializers to all non-primary
-            // constructors they already have, any calls to an explicit constructor with additional block initialization
+            // constructors they already have, any calls to an explicit constructor with additional block
+            // initialization
             // still work absolutely fine. Further, we can't necessarily associate their constructor args to
             // primary constructor args or any other constructor args. Therefore,
             // the only time we want to actually make a change is if they use the default no-param constructor,
@@ -617,8 +622,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // var otherc = other as C; *null and additional equality checks*
                 // if (other is C otherc) { *additional equality checks* } (optional else) return false;
                 // if (other is not C otherc) { return false; } (optional else) { *additional equality checks* }
-                // if (other is C) { otherc = (C) other;  *additional equality checks* } (optional else) return false;
-                // if (other is not C) { return false; } (optional else) { otherc = (C) other;  *additional equality checks* }
+                // if (other is C) { otherc = (C) other;  *additional equality checks* } (optional else) return
+                // false;
+                // if (other is not C) { return false; } (optional else) { otherc = (C) other;  *additional equality
+                // checks* }
                 // return other is C otherC && ...
                 // return !(other is not C otherC || ...
 
@@ -729,7 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         }
 
         /// <summary>
-        /// Get the referenced parameter (and unwraps implicit cast if necessary) or null if a parameter wasn't referenced
+        /// Get the referenced parameter (and unwraps implicit cast if necessary) or null if a parameter
+        // wasn't referenced
         /// </summary>
         /// <param name="operation">The operation for which to get the parameter</param>
         /// <returns>the referenced parameter or null if unable to find</returns>
@@ -853,10 +861,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         /// To determine which members were accessed and compared
         /// </summary>
         /// <param name="condition">Condition to look at, should be a boolean expression</param>
-        /// <param name="successRequirement">Whether to look for operators that would indicate equality success
+        /// <param name="successRequirement">Whether to look for operators that would indicate equality
+        // success
         /// (==, .Equals, &amp;&amp;) or inequality operators (!=, ||)</param>
         /// <param name="currentObject">Symbol that would be referenced with this</param>
-        /// <param name="otherObject">symbol representing other object, either from a param or cast as a local</param>
+        /// <param name="otherObject">symbol representing other object, either from a param or cast as a
+        // local</param>
         /// <param name="builder">Builder to add members to</param>
         /// <returns>true if addition was successful, false if we see something odd
         /// (equality checking in the wrong order, side effects, etc)</returns>
@@ -941,7 +951,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     otherObject,
                     builder
                 ),
-                // we are comparing two potential members, but in a context where if the expression is true, we return false
+                // we are comparing two potential members, but in a context where if the expression is true, we
+                // return false
                 // e.g: return !(A != other.A);
                 (
                     false,
@@ -969,7 +980,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     }
                 ) => TryAddFieldFromComparison(invokedOn, arg, currentObject, otherObject, builder),
                 // some other operation, or an incorrect operation (!= when we expect == based on context, etc).
-                // If one of the conditions is just a null check on the "otherObject", then it's valid but doesn't check any members
+                // If one of the conditions is just a null check on the "otherObject", then it's valid but doesn't
+                // check any members
                 // Otherwise we fail as it has unknown behavior
                 _ => IsNullCheck(condition, successRequirement, otherObject),
             };
@@ -1332,10 +1344,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         /// </summary>
         /// <param name="whenTrue">"then" branch</param>
         /// <param name="whenFalse">"else" branch (if any)</param>
-        /// <param name="successRequirement">whether the condition being true would cause the method to return false
+        /// <param name="successRequirement">whether the condition being true would cause the method to
+        // return false
         /// or the condition being false would cause the method to return false</param>
-        /// <param name="remainingStatements">Potential remaining statements of the branch that does not return false</param>
-        /// <returns>whether the pattern was matched (one of the branches must have a simple "return false")</returns>
+        /// <param name="remainingStatements">Potential remaining statements of the branch that does not
+        // return false</param>
+        /// <returns>whether the pattern was matched (one of the branches must have a simple "return
+        // false")</returns>
         private static bool TryGetSuccessCondition(
             IOperation whenTrue,
             IOperation? whenFalse,

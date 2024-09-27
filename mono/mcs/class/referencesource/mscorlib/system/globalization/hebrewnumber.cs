@@ -341,8 +341,9 @@ namespace System.Globalization
         //
         readonly static HS[][] NumberPasingState =
         {
-            // 400            300/200         100             90~10           8~1      6,       7,       9,          '           "
-            /* 0 */new HS[]
+            // 400            300/200         100             90~10           8~1      6,       7,       9,
+            // '           "
+/* 0 */new HS[]
             {
                 HS.S400,
                 HS.X00,
@@ -355,7 +356,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
             },
-            /* 1: S400 */new HS[]
+/* 1: S400 */new HS[]
             {
                 HS.S400_400,
                 HS.S400_X00,
@@ -368,7 +369,7 @@ namespace System.Globalization
                 HS.END,
                 HS.S400_DQ,
             },
-            /* 2: S400_400 */new HS[]
+/* 2: S400_400 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -381,7 +382,7 @@ namespace System.Globalization
                 HS._err,
                 HS.S400_400_DQ,
             },
-            /* 3: S400_X00 */new HS[]
+/* 3: S400_X00 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -394,7 +395,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X00_DQ,
             },
-            /* 4: S400_X0 */new HS[]
+/* 4: S400_X0 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -407,7 +408,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X0_DQ,
             },
-            /* 5: X00_DQ */new HS[]
+/* 5: X00_DQ */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -420,7 +421,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
             },
-            /* 6: S400_X00_X0 */new HS[]
+/* 6: S400_X00_X0 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -433,7 +434,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X0_DQ,
             },
-            /* 7: X0_DQ */new HS[]
+/* 7: X0_DQ */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -446,7 +447,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
             },
-            /* 8: X */new HS[]
+/* 8: X */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -459,7 +460,7 @@ namespace System.Globalization
                 HS.END,
                 HS._err,
             },
-            /* 9: X0 */new HS[]
+/* 9: X0 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -472,7 +473,7 @@ namespace System.Globalization
                 HS.END,
                 HS.X0_DQ,
             },
-            /* 10: X00 */new HS[]
+/* 10: X00 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -485,7 +486,7 @@ namespace System.Globalization
                 HS.END,
                 HS.X00_DQ,
             },
-            /* 11: S400_DQ */new HS[]
+/* 11: S400_DQ */new HS[]
             {
                 HS.END,
                 HS.END,
@@ -498,7 +499,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
             },
-            /* 12: S400_400_DQ*/new HS[]
+/* 12: S400_400_DQ*/new HS[]
             {
                 HS._err,
                 HS._err,
@@ -511,7 +512,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
             },
-            /* 13: S400_400_100*/new HS[]
+/* 13: S400_400_100*/new HS[]
             {
                 HS._err,
                 HS._err,
@@ -524,7 +525,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X00_DQ,
             },
-            /* 14: S9 */new HS[]
+/* 14: S9 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -537,7 +538,7 @@ namespace System.Globalization
                 HS.END,
                 HS.S9_DQ,
             },
-            /* 15: X00_S9 */new HS[]
+/* 15: X00_S9 */new HS[]
             {
                 HS._err,
                 HS._err,
@@ -550,7 +551,7 @@ namespace System.Globalization
                 HS._err,
                 HS.S9_DQ,
             },
-            /* 16: S9_DQ */new HS[]
+/* 16: S9_DQ */new HS[]
             {
                 HS._err,
                 HS._err,

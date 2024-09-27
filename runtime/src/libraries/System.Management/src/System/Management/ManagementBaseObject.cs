@@ -9,7 +9,8 @@ using System.Security.Permissions;
 namespace System.Management
 {
     /// <summary>
-    /// <para>Describes the possible text formats that can be used with <see cref='System.Management.ManagementBaseObject.GetText'/>.</para>
+    /// <para>Describes the possible text formats that can be used with <see
+    // cref='System.Management.ManagementBaseObject.GetText'/>.</para>
     /// </summary>
     public enum TextFormat
     {
@@ -31,7 +32,8 @@ namespace System.Management
     };
 
     /// <summary>
-    ///    <para>Describes the possible CIM types for properties, qualifiers, or method parameters.</para>
+    ///    <para>Describes the possible CIM types for properties, qualifiers, or method
+    // parameters.</para>
     /// </summary>
     public enum CimType
     {
@@ -132,7 +134,8 @@ namespace System.Management
     };
 
     /// <summary>
-    /// <para>Describes the object comparison modes that can be used with <see cref='System.Management.ManagementBaseObject.CompareTo'/>.
+    /// <para>Describes the object comparison modes that can be used with <see
+    // cref='System.Management.ManagementBaseObject.CompareTo'/>.
     ///    Note that these values may be combined.</para>
     /// </summary>
     [Flags]
@@ -211,9 +214,12 @@ namespace System.Management
 #pragma warning restore CA1823
 
         //
-        // The wbemObject is changed from a field to a property. This is to avoid major code churn and simplify the solution to
-        // the problem where the Initialize call actually binds to the object. This occurred even in cases like Get() whereby we
-        // ended up getting the object twice. Any direct usage of this property will cause a call to Initialize ( true ) to be made
+        // The wbemObject is changed from a field to a property. This is to avoid major code churn and
+        // simplify the solution to
+        // the problem where the Initialize call actually binds to the object. This occurred even in cases
+        // like Get() whereby we
+        // ended up getting the object twice. Any direct usage of this property will cause a call to
+        // Initialize ( true ) to be made
         // (if not already done) indicating that we wish to bind to the underlying WMI object.
         //
         // See changes to Initialize
@@ -238,10 +244,13 @@ namespace System.Management
         private QualifierDataCollection qualifiers;
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementBaseObject'/> class that is serializable.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementBaseObject'/>
+        // class that is serializable.</para>
         /// </summary>
-        /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate with data.</param>
-        /// <param name='context'>The destination (see <see cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
+        /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate
+        // with data.</param>
+        /// <param name='context'>The destination (see <see
+        // cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
 #if NET8_0_OR_GREATER
         [Obsolete(
             Obsoletions.LegacyFormatterImplMessage,
@@ -270,7 +279,8 @@ namespace System.Management
         ///    <para>Provides the internal WMI object represented by a ManagementObject.</para>
         ///    <para>See remarks with regard to usage.</para>
         /// </summary>
-        /// <param name='managementObject'>The <see cref='System.Management.ManagementBaseObject'/> that references the requested WMI object. </param>
+        /// <param name='managementObject'>The <see cref='System.Management.ManagementBaseObject'/> that
+        // references the requested WMI object. </param>
         /// <returns>
         /// <para>An <see cref='System.IntPtr'/> representing the internal WMI object.</para>
         /// </returns>
@@ -356,7 +366,8 @@ namespace System.Management
         //
 
         /// <summary>
-        /// <para>Gets or sets a collection of <see cref='System.Management.PropertyData'/> objects describing the properties of the
+        /// <para>Gets or sets a collection of <see cref='System.Management.PropertyData'/> objects
+        // describing the properties of the
         ///    management object.</para>
         /// </summary>
         /// <value>
@@ -375,12 +386,14 @@ namespace System.Management
         }
 
         /// <summary>
-        ///    <para>Gets or sets the collection of WMI system properties of the management object (for example, the
+        ///    <para>Gets or sets the collection of WMI system properties of the management object (for
+        // example, the
         ///       class name, server, and namespace). WMI system property names begin with
         ///       "__".</para>
         /// </summary>
         /// <value>
-        /// <para>A <see cref='System.Management.PropertyDataCollection'/> that represents the system properties of the management object.</para>
+        /// <para>A <see cref='System.Management.PropertyDataCollection'/> that represents the system
+        // properties of the management object.</para>
         /// </value>
         /// <seealso cref='System.Management.PropertyData'/>
         public virtual PropertyDataCollection SystemProperties
@@ -394,7 +407,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Gets or sets the collection of <see cref='System.Management.QualifierData'/> objects defined on the management object.
+        /// <para>Gets or sets the collection of <see cref='System.Management.QualifierData'/> objects
+        // defined on the management object.
         ///    Each element in the collection holds information such as the qualifier name,
         ///    value, and flavor.</para>
         /// </summary>
@@ -417,7 +431,8 @@ namespace System.Management
         ///    <para>Gets or sets the path to the management object's class.</para>
         /// </summary>
         /// <value>
-        /// <para>A <see cref='System.Management.ManagementPath'/> that represents the path to the management object's class.</para>
+        /// <para>A <see cref='System.Management.ManagementPath'/> that represents the path to the
+        // management object's class.</para>
         /// </value>
         /// <example>
         ///    <para>For example, for the \\MyBox\root\cimv2:Win32_LogicalDisk=
@@ -566,7 +581,8 @@ namespace System.Management
         /// <summary>
         ///    <para>Sets the value of the named qualifier.</para>
         /// </summary>
-        /// <param name='qualifierName'>The name of the qualifier to set. This parameter cannot be null.</param>
+        /// <param name='qualifierName'>The name of the qualifier to set. This parameter cannot be
+        // null.</param>
         /// <param name='qualifierValue'>The value to set.</param>
         public void SetQualifierValue(string qualifierName, object qualifierValue)
         {
@@ -690,7 +706,8 @@ namespace System.Management
         /// <param name='obj'>An object to compare with this instance.</param>
         /// <returns>
         /// <see langword='true'/> if
-        /// <paramref name="obj"/> is an instance of <see cref='System.Management.ManagementBaseObject'/> and represents
+        /// <paramref name="obj"/> is an instance of <see cref='System.Management.ManagementBaseObject'/>
+        // and represents
         ///    the same object as this instance; otherwise, <see langword='false'/>.
         /// </returns>
         public override bool Equals(object obj)
@@ -737,8 +754,13 @@ namespace System.Management
         }
 
         /// <summary>
-        ///     <para>Serves as a hash function for a particular type, suitable for use in hashing algorithms and data structures like a hash table.</para>
-        ///        <para>The hash code for ManagementBaseObjects is based on the MOF for the WbemObject that this instance is based on.  Two different ManagementBaseObject instances pointing to the same WbemObject in WMI will have the same mof and thus the same hash code.  Changing a property value of an object will change the hash code. </para>
+        ///     <para>Serves as a hash function for a particular type, suitable for use in hashing
+        // algorithms and data structures like a hash table.</para>
+        ///        <para>The hash code for ManagementBaseObjects is based on the MOF for the WbemObject that
+        // this instance is based on.  Two different ManagementBaseObject instances pointing to the same
+        // WbemObject in WMI will have the same mof and thus the same hash code.  Changing a property value
+        // of
+        // an object will change the hash code. </para>
         /// </summary>
         /// <returns>
         ///     <para>A hash code for the current object. </para>
@@ -747,7 +769,8 @@ namespace System.Management
         {
             //This implementation has to match the Equals() implementation. In Equals(), we use
             //the WMI CompareTo() which compares values of properties, qualifiers etc.
-            //Probably the closest we can get is to take the MOF representation of the object and get it's hash code.
+            //Probably the closest we can get is to take the MOF representation of the object and get it's hash
+            // code.
             int localHash = 0;
             try
             {

@@ -243,7 +243,8 @@ namespace System.Tests
         [Fact]
         public void CreateInstance_DesignatedOptionalParameters_ThrowsMissingMemberException()
         {
-            // C# designated optional parameters are not optional as far as Activator.CreateInstance() is concerned.
+            // C# designated optional parameters are not optional as far as Activator.CreateInstance() is
+            // concerned.
             Assert.ThrowsAny<MissingMemberException>(
                 () => Activator.CreateInstance(typeof(Choice1), new object[] { 5.1 })
             );
@@ -269,9 +270,12 @@ namespace System.Tests
         {
             // Primitive widening not supported for "params" arguments.
             //
-            // (This is probably an accidental behavior on the .NET Framework as the default binder specifically checks to see if the params arguments are widenable to the
-            // params array element type and gives it the go-ahead if it is. Unfortunately, the binder then bollixes itself by using Array.Copy() to copy
-            // the params arguments. Since Array.Copy() doesn't tolerate this sort of type mismatch, it throws an InvalidCastException which bubbles out
+            // (This is probably an accidental behavior on the .NET Framework as the default binder specifically
+            // checks to see if the params arguments are widenable to the
+            // params array element type and gives it the go-ahead if it is. Unfortunately, the binder then
+            // bollixes itself by using Array.Copy() to copy
+            // the params arguments. Since Array.Copy() doesn't tolerate this sort of type mismatch, it throws
+            // an InvalidCastException which bubbles out
             // out of Activator.CreateInstance. Accidental or not, we'll inherit that behavior on .NET Native.)
             Assert.Throws<InvalidCastException>(
                 () =>
@@ -374,7 +378,8 @@ namespace System.Tests
         [Fact]
         public static void TestActivatorOnNonActivatableFinalizableTypes()
         {
-            // On runtimes where the generic Activator is implemented with special codegen intrinsics, we might allocate
+            // On runtimes where the generic Activator is implemented with special codegen intrinsics, we might
+            // allocate
             // an uninitialized instance of the object before we realize there's no default constructor to run.
             // Make sure this has no observable side effects.
             Assert.ThrowsAny<MissingMemberException>(() =>
@@ -1330,7 +1335,8 @@ namespace System.Tests
 
         public static IEnumerable<object[]> TestingCreateInstanceFromObjectHandleFullSignatureData()
         {
-            // string assemblyFile, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes, returnedFullNameType
+            // string assemblyFile, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder,
+            // object[] args, CultureInfo culture, object[] activationAttributes, returnedFullNameType
             yield return new object[]
             {
                 "TestLoadAssembly.dll",
@@ -1476,7 +1482,8 @@ namespace System.Tests
 
         public static IEnumerable<object[]> TestingCreateInstanceObjectHandleFullSignatureData()
         {
-            // string assemblyName, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes, returnedFullNameType
+            // string assemblyName, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder,
+            // object[] args, CultureInfo culture, object[] activationAttributes, returnedFullNameType
             yield return new object[]
             {
                 "TestLoadAssembly",

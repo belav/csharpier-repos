@@ -655,9 +655,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             };
 
         /// <summary>
-        /// If the <paramref name="symbol"/> is a method symbol, returns <see langword="true"/> if the method's return type is "awaitable", but not if it's <see langword="dynamic"/>.
-        /// If the <paramref name="symbol"/> is a type symbol, returns <see langword="true"/> if that type is "awaitable".
-        /// An "awaitable" is any type that exposes a GetAwaiter method which returns a valid "awaiter". This GetAwaiter method may be an instance method or an extension method.
+        /// If the <paramref name="symbol"/> is a method symbol, returns <see langword="true"/> if the
+        // method's return type is "awaitable", but not if it's <see langword="dynamic"/>.
+        /// If the <paramref name="symbol"/> is a type symbol, returns <see langword="true"/> if that type
+        // is "awaitable".
+        /// An "awaitable" is any type that exposes a GetAwaiter method which returns a valid "awaiter".
+        // This GetAwaiter method may be an instance method or an extension method.
         /// </summary>
         public static bool IsAwaitableNonDynamic(
             [NotNullWhen(true)] this ISymbol? symbol,
@@ -725,8 +728,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var methods = returnType.GetMembers().OfType<IMethodSymbol>();
 
-            // NOTE: (vladres) The current version of C# Spec, §7.7.7.3 'Runtime evaluation of await expressions', requires that
-            // NOTE: the interface method INotifyCompletion.OnCompleted or ICriticalNotifyCompletion.UnsafeOnCompleted is invoked
+            // NOTE: (vladres) The current version of C# Spec, §7.7.7.3 'Runtime evaluation of await
+            // expressions', requires that
+            // NOTE: the interface method INotifyCompletion.OnCompleted or
+            // ICriticalNotifyCompletion.UnsafeOnCompleted is invoked
             // NOTE: (rather than any OnCompleted method conforming to a certain pattern).
             // NOTE: Should this code be updated to match the spec?
 
@@ -863,7 +868,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         /// <summary>
         /// Returns true for symbols whose name starts with an underscore and
-        /// are optionally followed by an integer or other underscores, such as '_', '_1', '_2', '__', '___', etc.
+        /// are optionally followed by an integer or other underscores, such as '_', '_1', '_2', '__',
+        // '___', etc.
         /// These are treated as special discard symbol names.
         /// </summary>
         public static bool IsSymbolWithSpecialDiscardName(this ISymbol symbol) =>
@@ -875,10 +881,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             );
 
         /// <summary>
-        /// Returns <see langword="true"/>, if the symbol is marked with the <see cref="System.ObsoleteAttribute"/>.
+        /// Returns <see langword="true"/>, if the symbol is marked with the <see
+        // cref="System.ObsoleteAttribute"/>.
         /// </summary>
         /// <param name="symbol"></param>
-        /// <returns><see langword="true"/> if the symbol is marked with the <see cref="System.ObsoleteAttribute"/>.</returns>
+        /// <returns><see langword="true"/> if the symbol is marked with the <see
+        // cref="System.ObsoleteAttribute"/>.</returns>
         public static bool IsObsolete(this ISymbol symbol) =>
             symbol
                 .GetAttributes()

@@ -15,7 +15,8 @@ namespace System
     public static partial class Activator
     {
         //
-        // Note: CreateInstance returns null for Nullable<T>, e.g. CreateInstance(typeof(int?)) returns null.
+        // Note: CreateInstance returns null for Nullable<T>, e.g. CreateInstance(typeof(int?)) returns
+        // null.
         //
 
         public static object? CreateInstance(

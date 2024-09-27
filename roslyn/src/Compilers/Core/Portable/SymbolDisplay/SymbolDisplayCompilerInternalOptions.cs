@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis
         /// the member (return) type and parameters.
         /// </summary>
         /// <remarks>
-        /// CONSIDER: custom modifiers are part of the public API, so we might want to move this to SymbolDisplayMemberOptions.
+        /// CONSIDER: custom modifiers are part of the public API, so we might want to move this to
+        // SymbolDisplayMemberOptions.
         /// </remarks>
         IncludeCustomModifiers = 1 << 4,
 

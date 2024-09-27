@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         /// <summary>
         /// A symbol to be used as a placeholder for an instance being constructed by
-        /// <see cref="BoundObjectCreationExpression"/>, or the input expression of a pattern-matching operation.
+        /// <see cref="BoundObjectCreationExpression"/>, or the input expression of a pattern-matching
+        // operation.
         /// It is used to track the state of an expression, such as members being initialized.
         /// </summary>
         private sealed class PlaceholderLocal : LocalSymbol

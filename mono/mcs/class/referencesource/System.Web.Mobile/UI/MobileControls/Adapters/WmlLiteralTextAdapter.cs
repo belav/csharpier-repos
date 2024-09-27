@@ -20,10 +20,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlLiteralTextAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * WmlLiteralTextAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\WmlLiteralTextAdapter.uex' path='docs/doc[@for="WmlLiteralTextAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -38,7 +38,8 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class WmlLiteralTextAdapter : WmlControlAdapter
     {
-        /// <include file='doc\WmlLiteralTextAdapter.uex' path='docs/doc[@for="WmlLiteralTextAdapter.Control"]/*' />
+        /// <include file='doc\WmlLiteralTextAdapter.uex'
+        // path='docs/doc[@for="WmlLiteralTextAdapter.Control"]/*' />
         protected new LiteralText Control
         {
             get { return (LiteralText)base.Control; }
@@ -46,7 +47,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
         String _pagedText;
 
-        /// <include file='doc\WmlLiteralTextAdapter.uex' path='docs/doc[@for="WmlLiteralTextAdapter.Render"]/*' />
+        /// <include file='doc\WmlLiteralTextAdapter.uex'
+        // path='docs/doc[@for="WmlLiteralTextAdapter.Render"]/*' />
         public override void Render(WmlMobileTextWriter writer)
         {
             // Cache value, because Render is called twice.

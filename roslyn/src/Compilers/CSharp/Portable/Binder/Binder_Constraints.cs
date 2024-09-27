@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Bind and return a single type parameter constraint clause along with syntax nodes corresponding to type constraints.
+        /// Bind and return a single type parameter constraint clause along with syntax nodes corresponding
+        // to type constraints.
         /// </summary>
         private (
             TypeParameterConstraintClause,
@@ -618,7 +619,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (constraintType.Type.HasFileLocalTypes())
             {
-                // if the containing symbol of the constraint is a member, we need to ensure the nearest containing type is a file-local type.
+                // if the containing symbol of the constraint is a member, we need to ensure the nearest containing
+                // type is a file-local type.
                 var possibleFileType = containingSymbol switch
                 {
                     TypeSymbol typeSymbol => typeSymbol,
@@ -826,14 +828,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case TypeKind.Delegate:
                     case TypeKind.Enum:
                     case TypeKind.Struct:
-                        // "'{0}' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter."
+                        // "'{0}' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed
+                        // class or a type parameter."
                         Error(diagnostics, ErrorCode.ERR_BadBoundType, syntax, type);
                         return false;
 
                     case TypeKind.Array:
                     case TypeKind.Pointer:
                     case TypeKind.FunctionPointer:
-                        // "Invalid constraint type. A type used as a constraint must be an interface, a non-sealed class or a type parameter."
+                        // "Invalid constraint type. A type used as a constraint must be an interface, a non-sealed class or
+                        // a type parameter."
                         Error(diagnostics, ErrorCode.ERR_BadConstraintType, syntax.GetLocation());
                         return false;
 

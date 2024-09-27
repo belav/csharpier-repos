@@ -7,10 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         A struct representing a component of JSON path used in <see cref="JsonQueryExpression" /> or <see cref="JsonScalarExpression" />.
+///         A struct representing a component of JSON path used in <see cref="JsonQueryExpression"
+// /> or <see cref="JsonScalarExpression" />.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -29,7 +31,8 @@ public readonly struct PathSegment
     /// <summary>
     ///     Creates a new <see cref="PathSegment" /> struct representing JSON array element access.
     /// </summary>
-    /// <param name="arrayIndex"><see langword="abstract" />An index of an element which is being accessed in the JSON array.</param>
+    /// <param name="arrayIndex"><see langword="abstract" />An index of an element which is being
+    // accessed in the JSON array.</param>
     public PathSegment(SqlExpression arrayIndex)
     {
         ArrayIndex = arrayIndex;

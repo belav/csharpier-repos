@@ -155,8 +155,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 type = typeArg;
             }
 
-            // When true, this completion provider shows both the type (e.g. DayOfWeek) and its qualified members (e.g.
-            // DayOfWeek.Friday). We set this to false for enum-like cases (static members of structs and classes) so we
+            // When true, this completion provider shows both the type (e.g. DayOfWeek) and its qualified
+            // members (e.g.
+            // DayOfWeek.Friday). We set this to false for enum-like cases (static members of structs and
+            // classes) so we
             // only show the qualified members in these cases.
             var isEnumOrCompletionListType = true;
             var position = context.Position;
@@ -236,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // And now all the accessible members of the enum.
             if (type.TypeKind == TypeKind.Enum)
             {
-                // We'll want to build a list of the actual enum members and all accessible instances of that enum, too
+                // We'll want to build a list of the actual enum members and all accessible instances of that enum,
+                // too
                 var index = 0;
 
                 var fields = type.GetMembers()
@@ -301,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         continue;
                     }
 
-                    // We only show static properties/fields of compatible type if containing type is NOT marked with completionlist tag.
+                    // We only show static properties/fields of compatible type if containing type is NOT marked with
+                    // completionlist tag.
                     if (
                         !isEnumOrCompletionListType
                         && !SymbolEqualityComparer.Default.Equals(type, symbolType)

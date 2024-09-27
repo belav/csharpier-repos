@@ -78,9 +78,12 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         // PermittedLogonTimes
-        //  We have to handle the change-tracking for this differently than for the other properties, because
-        //  a byte[] is mutable.  After calling the get accessor, the app can change the permittedLogonTimes,
-        //  without needing to ever call the set accessor.  Therefore, rather than a simple "changed" flag set
+        //  We have to handle the change-tracking for this differently than for the other properties,
+        // because
+        //  a byte[] is mutable.  After calling the get accessor, the app can change the
+        // permittedLogonTimes,
+        //  without needing to ever call the set accessor.  Therefore, rather than a simple "changed" flag
+        // set
         //  by the set accessor, we need to track the original value of the property, and flag it as changed
         //  if current value != original value.
         private byte[] _permittedLogonTimes;
@@ -99,7 +102,8 @@ namespace System.DirectoryServices.AccountManagement
             }
             set
             {
-                // We don't use HandleSet<T> here because of the slightly non-standard implementation of the change-tracking
+                // We don't use HandleSet<T> here because of the slightly non-standard implementation of the
+                // change-tracking
                 // for this property.
 
                 // Check that we actually support this property in our store
@@ -115,11 +119,14 @@ namespace System.DirectoryServices.AccountManagement
                 )
                     throw new InvalidOperationException(SR.InvalidPropertyForStore);
 
-                // If we get to this point we know that the value of the property has changed and we should not load it from the store.
+                // If we get to this point we know that the value of the property has changed and we should not load
+                // it from the store.
                 // If value is retrieved the state is set to loaded.  Even if user modifies the reference we will
                 // not overwrite it because we mark it as loaded.
-                // If the user sets it before reading it we mark it as changed.  When the users accesses it we just return the current
-                // value.  All change tracking to the store is done off of an actual object comparison because users can change the value
+                // If the user sets it before reading it we mark it as changed.  When the users accesses it we just
+                // return the current
+                // value.  All change tracking to the store is done off of an actual object comparison because users
+                // can change the value
                 // either through property set or modifying the reference returned.
                 _permittedLogonTimesLoaded = LoadState.Changed;
 
@@ -404,7 +411,8 @@ namespace System.DirectoryServices.AccountManagement
 
         internal void LoadValueIntoProperty(string propertyName, object value)
         {
-            //            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AccountInfo", "LoadValueIntoProperty: name=" + propertyName + " value=" + value.ToString());
+            //            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AccountInfo", "LoadValueIntoProperty:
+            // name=" + propertyName + " value=" + value.ToString());
 
             switch (propertyName)
             {
@@ -476,7 +484,8 @@ namespace System.DirectoryServices.AccountManagement
         // Getting changes to persist (or to build a query from a QBE filter)
         //
 
-        // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
+        // Given a property name, returns true if that property has changed since it was loaded, false
+        // otherwise.
         internal bool GetChangeStatusForProperty(string propertyName)
         {
             GlobalDebug.WriteLineIf(

@@ -7,8 +7,10 @@ using System.Diagnostics.Metrics;
 namespace Microsoft.Extensions.Diagnostics.Metrics
 {
     /// <summary>
-    /// This is used by <see cref="InstrumentRule"/> to distinguish between meters created via <see cref="Meter"/> constructors (<see cref="Global"/>)
-    /// and those created via Dependency Injection with <see cref="IMeterFactory.Create(MeterOptions)"/> (<see cref="Local"/>)."/>.
+    /// This is used by <see cref="InstrumentRule"/> to distinguish between meters created via <see
+    // cref="Meter"/> constructors (<see cref="Global"/>)
+    /// and those created via Dependency Injection with <see cref="IMeterFactory.Create(MeterOptions)"/>
+    // (<see cref="Local"/>)."/>.
     /// </summary>
     [Flags]
     public enum MeterScope
@@ -24,7 +26,8 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         Global,
 
         /// <summary>
-        /// Indicates <see cref="Meter"/> instances created via Dependency Injection with <see cref="IMeterFactory.Create(MeterOptions)"/>.
+        /// Indicates <see cref="Meter"/> instances created via Dependency Injection with <see
+        // cref="IMeterFactory.Create(MeterOptions)"/>.
         /// </summary>
         Local,
     }

@@ -602,14 +602,14 @@ namespace System.Security.AccessControl
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool IsValidSecurityDescriptor(IntPtr descriptor);
 
-        /*
-        struct SecurityDescriptor
-        {
-            public byte Revision, Size;
-            public ushort ControlFlags;
-            public IntPtr Owner, Group, Sacl, Dacl;
-        }
-        */
+/*
+struct SecurityDescriptor
+{
+public byte Revision, Size;
+public ushort ControlFlags;
+public IntPtr Owner, Group, Sacl, Dacl;
+}
+*/
         #endregion
 #endif
     }

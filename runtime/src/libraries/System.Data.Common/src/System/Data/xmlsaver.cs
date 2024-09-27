@@ -197,7 +197,8 @@ namespace System.Data
                 return;
             }
             // SDUB: perf: Why not have this as a table?
-            // there are several xdo properties that equal to some xml attributes, we should not explicitly output them.
+            // there are several xdo properties that equal to some xml attributes, we should not explicitly
+            // output them.
             if (
                 string.Equals(pd.Name, "Namespace", StringComparison.Ordinal)
                 || string.Equals(pd.Name, "PrimaryKey", StringComparison.Ordinal)
@@ -326,7 +327,8 @@ namespace System.Data
 
             return string.Empty;
             // by default, if we dont map anything, we will map to String
-            // but I can not make Sql Types that will map to string be unmapped, because in schema , I will miss the second part and won't
+            // but I can not make Sql Types that will map to string be unmapped, because in schema , I will miss
+            // the second part and won't
             // be able to differenciate between string snd SqlString and others that map to String
         }
 
@@ -428,10 +430,10 @@ namespace System.Data
         internal void WriteSchemaRoot(XmlElement rootSchema, string targetNamespace)
         {
             /*
-                        if (_ds != null)
-                            rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName(_ds.DataSetName));
-                        else
-                            rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName("NewDataSet"));
+            if (_ds != null)
+            rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName(_ds.DataSetName));
+            else
+            rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName("NewDataSet"));
             */
 
 
@@ -593,8 +595,10 @@ namespace System.Data
             return temp;
         }
 
-        // SxS: this method can generate XSD files if the input xmlWriter is XmlTextWriter or DataTextWriter and its underlying stream is FileStream
-        // These XSDs are located in the same folder as the underlying stream's file path (see SetPath method).
+        // SxS: this method can generate XSD files if the input xmlWriter is XmlTextWriter or DataTextWriter
+        // and its underlying stream is FileStream
+        // These XSDs are located in the same folder as the underlying stream's file path (see SetPath
+        // method).
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal void SchemaTree(
             XmlDocument xd,
@@ -750,7 +754,8 @@ namespace System.Data
             }
 
             //            if (schFormat != SchemaFormat.WebService && namespaces.Count > 1 && !genSecondary) {
-            //               rootSchema.SetAttribute(Keywords.MSD_FRAGMENTCOUNT, Keywords.MSDNS, namespaces.Count.ToString());
+            //               rootSchema.SetAttribute(Keywords.MSD_FRAGMENTCOUNT, Keywords.MSDNS,
+            // namespaces.Count.ToString());
             //            }
 
             // Fill out dataset element
@@ -1533,7 +1538,8 @@ namespace System.Data
                                         : col.Table.Namespace
                                 );
 
-                        // for remoting we need to use columns NS, for other cases it is wrong to get Columns NS, we need to take type's namespace
+                        // for remoting we need to use columns NS, for other cases it is wrong to get Columns NS, we need to
+                        // take type's namespace
                         XmlElement schNode = GetSchema(nSpace);
 
                         //SchNode To Ensure BaseSimpleType Prefix is Generated
@@ -1572,7 +1578,8 @@ namespace System.Data
                         {
 #if DEBUG
                             // enzol: TO DO: replace the constructor with IsEqual(XmlElement)
-                            //                        Debug.Assert(col.SimpleType.IsEqual(new SimpleType(elmSimpeType)), $"simpleTypes with the same name have to be the same: {name}");
+                            //                        Debug.Assert(col.SimpleType.IsEqual(new SimpleType(elmSimpeType)),
+                            // $"simpleTypes with the same name have to be the same: {name}");
 #endif
                         }
                     }
@@ -2802,7 +2809,8 @@ namespace System.Data
         /// </summary>
         /// <param name="root"></param>
         /// <param name="type">non-special type to resolve</param>
-        /// <exception cref="DataException">if multipleTargetConverter throws or returns an empty result</exception>
+        /// <exception cref="DataException">if multipleTargetConverter throws or returns an empty
+        // result</exception>
         private void SetMSDataAttribute(XmlElement root, Type type)
         {
             string result = DataStorage.GetQualifiedName(type);
@@ -3218,7 +3226,8 @@ namespace System.Data
                 case MappingType.Element:
                     bool startElementSkipped = true;
                     object columnValue = row[col, version];
-                    // if the object is built in type or if it implements IXMLSerializable, write the start Element, otherwise
+                    // if the object is built in type or if it implements IXMLSerializable, write the start Element,
+                    // otherwise
                     //(if CDT and does not implement IXmlSerializable) skip it
                     if (
                         !col.IsCustomType
@@ -3276,14 +3285,16 @@ namespace System.Data
                                 }
                                 else
                                 {
-                                    // this column's type does not implement IXmlSerializable, so we need to handle serialization via XmlSerializer
+                                    // this column's type does not implement IXmlSerializable, so we need to handle serialization via
+                                    // XmlSerializer
                                     if (columnValue.GetType() != col.DataType)
                                     { // throw if polymorphism; not supported
                                         throw ExceptionBuilder.PolymorphismNotSupported(
                                             valuesType.AssemblyQualifiedName!
                                         );
                                     }
-                                    // therefore we are skipping the start element, but by passing XmlRootAttribute with the same name as
+                                    // therefore we are skipping the start element, but by passing XmlRootAttribute with the same name
+                                    // as
                                     // we open the start element (column's name), XmlSerializer will open and close it for us
                                     XmlRootAttribute xmlAttrib = new XmlRootAttribute(
                                         col.EncodedColumnName
@@ -3517,7 +3528,8 @@ namespace System.Data
                     _ds.Namespace
                 );
 
-            // new XmlTreeGen(true).Save(_ds,_xmlw, false /* we don't care since we specified it's serialized */);
+            // new XmlTreeGen(true).Save(_ds,_xmlw, false /* we don't care since we specified it's serialized
+            // */);
 
             for (int i = 0; i < _dTables.Count; i++)
             {
@@ -3853,7 +3865,8 @@ namespace System.Data
                                             valuesType.AssemblyQualifiedName!
                                         );
                                     }
-                                    // therefore we are skipping the start element, but by passing XmlRootAttribute with the same name as
+                                    // therefore we are skipping the start element, but by passing XmlRootAttribute with the same name
+                                    // as
                                     // we open the start element (column's name), XmlSerializer will open and close it for us
                                     XmlRootAttribute xmlAttrib = new XmlRootAttribute(
                                         col.EncodedColumnName

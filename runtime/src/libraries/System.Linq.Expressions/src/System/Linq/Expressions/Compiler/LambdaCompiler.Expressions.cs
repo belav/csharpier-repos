@@ -1103,7 +1103,8 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
-        // This method assumes that the instance is on the stack and is expected, based on "keepOnStack" flag
+        // This method assumes that the instance is on the stack and is expected, based on "keepOnStack"
+        // flag
         // to either leave the instance on the stack, or pop it.
         private void EmitMemberInit(
             ReadOnlyCollection<MemberBinding> bindings,
@@ -1151,7 +1152,8 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
-        // This method assumes that the list instance is on the stack and is expected, based on "keepOnStack" flag
+        // This method assumes that the list instance is on the stack and is expected, based on
+        // "keepOnStack" flag
         // to either leave the list instance on the stack, or pop it.
         private void EmitListInit(
             ReadOnlyCollection<ElementInit> initializers,

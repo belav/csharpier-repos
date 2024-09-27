@@ -19,7 +19,8 @@ public static class HtmlHelperPartialExtensions
     /// The name or path of the partial view used to create the HTML markup. Must not be <c>null</c>.
     /// </param>
     /// <returns>
-    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance containing
+    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance
+    // containing
     /// the created HTML.
     /// </returns>
     public static Task<IHtmlContent> PartialAsync(
@@ -42,7 +43,8 @@ public static class HtmlHelperPartialExtensions
     /// </param>
     /// <param name="viewData">A <see cref="ViewDataDictionary"/> to pass into the partial view.</param>
     /// <returns>
-    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance containing
+    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance
+    // containing
     /// the created HTML.
     /// </returns>
     public static Task<IHtmlContent> PartialAsync(
@@ -66,7 +68,8 @@ public static class HtmlHelperPartialExtensions
     /// </param>
     /// <param name="model">A model to pass into the partial view.</param>
     /// <returns>
-    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance containing
+    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance
+    // containing
     /// the created HTML.
     /// </returns>
     public static Task<IHtmlContent> PartialAsync(
@@ -186,7 +189,8 @@ public static class HtmlHelperPartialExtensions
     /// The name or path of the partial view used to create the HTML markup. Must not be <c>null</c>.
     /// </param>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     public static void RenderPartial(this IHtmlHelper htmlHelper, string partialViewName)
     {
@@ -202,7 +206,8 @@ public static class HtmlHelperPartialExtensions
     /// </param>
     /// <param name="viewData">A <see cref="ViewDataDictionary"/> to pass into the partial view.</param>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     public static void RenderPartial(
         this IHtmlHelper htmlHelper,
@@ -222,7 +227,8 @@ public static class HtmlHelperPartialExtensions
     /// </param>
     /// <param name="model">A model to pass into the partial view.</param>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     public static void RenderPartial(
         this IHtmlHelper htmlHelper,
@@ -243,7 +249,8 @@ public static class HtmlHelperPartialExtensions
     /// <param name="model">A model to pass into the partial view.</param>
     /// <param name="viewData">A <see cref="ViewDataDictionary"/> to pass into the partial view.</param>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     public static void RenderPartial(
         this IHtmlHelper htmlHelper,
@@ -268,7 +275,8 @@ public static class HtmlHelperPartialExtensions
     /// </param>
     /// <returns>A <see cref="Task"/> that renders the created HTML when it executes.</returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     public static Task RenderPartialAsync(this IHtmlHelper htmlHelper, string partialViewName)
     {
@@ -292,7 +300,8 @@ public static class HtmlHelperPartialExtensions
     /// <param name="viewData">A <see cref="ViewDataDictionary"/> to pass into the partial view.</param>
     /// <returns>A <see cref="Task"/> that renders the created HTML when it executes.</returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     public static Task RenderPartialAsync(
         this IHtmlHelper htmlHelper,
@@ -316,7 +325,8 @@ public static class HtmlHelperPartialExtensions
     /// <param name="model">A model to pass into the partial view.</param>
     /// <returns>A <see cref="Task"/> that renders the created HTML when it executes.</returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     public static Task RenderPartialAsync(
         this IHtmlHelper htmlHelper,

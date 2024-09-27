@@ -16,7 +16,8 @@ namespace System.Diagnostics.Tests
             var expectedIdLength = testActivity.Id.Length;
             testActivity.Stop();
 
-            // check that if parentId '|aaa...a' 1024 bytes long is set with single node (no dots or underscores in the Id)
+            // check that if parentId '|aaa...a' 1024 bytes long is set with single node (no dots or underscores
+            // in the Id)
             // it causes overflow during Id generation, and new root Id is generated for the new Activity
             var parentId = '|' + new string('a', 1022) + '.';
 
@@ -40,11 +41,13 @@ namespace System.Diagnostics.Tests
             Task.Run(() => child1.Start()).Wait();
             Task.Run(() => child2.Start()).Wait();
 
-            // In Debug builds of System.Diagnostics.DiagnosticSource, the child operation Id will be constructed as follows
+            // In Debug builds of System.Diagnostics.DiagnosticSource, the child operation Id will be
+            // constructed as follows
             // "|parent.RootId.<child.OperationName.Replace(., -)>-childCount.".
             // This is for debugging purposes to know which operation the child Id is coming from.
             //
-            // In Release builds of System.Diagnostics.DiagnosticSource, it will not contain the operation name to keep it simple and it will be as
+            // In Release builds of System.Diagnostics.DiagnosticSource, it will not contain the operation name
+            // to keep it simple and it will be as
             // "|parent.RootId.childCount.".
 
             string child1DebugString = $"|{parent.RootId}.{child1.OperationName}-1.";

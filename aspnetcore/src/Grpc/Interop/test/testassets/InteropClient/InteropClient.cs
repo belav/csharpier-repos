@@ -66,7 +66,8 @@ public class InteropClient : IDisposable
         [Option("use_tls", Default = false)]
         public bool? UseTls { get; set; }
 
-        // Deliberately using nullable bool type to allow --use_test_ca=true syntax (as opposed to --use_test_ca)
+        // Deliberately using nullable bool type to allow --use_test_ca=true syntax (as opposed to
+        // --use_test_ca)
         [Option("use_test_ca", Default = false)]
         public bool? UseTestCa { get; set; }
 

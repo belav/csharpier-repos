@@ -698,7 +698,8 @@ namespace System.Reflection.Emit
 
         private void InternalAddTypeToken(int clsToken, CorElementType CorType)
         {
-            // Add a type token into signature. CorType will be either CorElementType.ELEMENT_TYPE_CLASS or CorElementType.ELEMENT_TYPE_VALUETYPE
+            // Add a type token into signature. CorType will be either CorElementType.ELEMENT_TYPE_CLASS or
+            // CorElementType.ELEMENT_TYPE_VALUETYPE
             AddElementType(CorType);
             AddToken(clsToken);
         }
@@ -754,14 +755,19 @@ namespace System.Reflection.Emit
 
         private void SetNumberOfSignatureElements(bool forceCopy)
         {
-            // For most signatures, this will set the number of elements in a byte which we have reserved for it.
+            // For most signatures, this will set the number of elements in a byte which we have reserved for
+            // it.
             // However, if we have a field signature, we don't set the length and return.
             // If we have a signature with more than 128 arguments, we can't just set the number of elements,
-            // we actually have to allocate more space (e.g. shift everything in the array one or more spaces to the
-            // right.  We do this by making a copy of the array and leaving the correct number of blanks.  This new
-            // array is now set to be m_signature and we use the AddData method to set the number of elements properly.
+            // we actually have to allocate more space (e.g. shift everything in the array one or more spaces to
+            // the
+            // right.  We do this by making a copy of the array and leaving the correct number of blanks.  This
+            // new
+            // array is now set to be m_signature and we use the AddData method to set the number of elements
+            // properly.
             // The forceCopy argument can be used to force SetNumberOfSignatureElements to make a copy of
-            // the array.  This is useful for GetSignature which promises to trim the array to be the correct size anyway.
+            // the array.  This is useful for GetSignature which promises to trim the array to be the correct
+            // size anyway.
 
             byte[] temp;
             int newSigSize;

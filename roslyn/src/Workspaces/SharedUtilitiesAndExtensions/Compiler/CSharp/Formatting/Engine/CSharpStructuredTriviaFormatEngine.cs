@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         protected override NodeOperations CreateNodeOperations(CancellationToken cancellationToken)
         {
-            // ignore all node operations for structured trivia since it is not possible for this to have any impact currently.
+            // ignore all node operations for structured trivia since it is not possible for this to have any
+            // impact currently.
             return NodeOperations.Empty;
         }
 

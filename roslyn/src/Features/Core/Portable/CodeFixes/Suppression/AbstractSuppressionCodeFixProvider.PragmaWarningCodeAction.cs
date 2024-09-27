@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             )
             {
                 // We need to normalize the leading trivia on start token to account for
-                // the trailing trivia on its previous token (and similarly normalize trailing trivia for end token).
+                // the trailing trivia on its previous token (and similarly normalize trailing trivia for end
+                // token).
                 PragmaHelpers.NormalizeTriviaOnTokens(
                     fixer,
                     ref document,

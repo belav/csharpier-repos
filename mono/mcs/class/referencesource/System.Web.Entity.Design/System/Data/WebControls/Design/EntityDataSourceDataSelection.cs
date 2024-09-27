@@ -47,7 +47,8 @@ namespace System.Web.UI.Design.WebControls
         //     (1) Simple Select View: CheckedListBox with a list of available entity type properties
         //     (2) Advanced Select View: TextBox that allows any statement to be entered (no validation)
         //
-        // When either view is visible to the user, the fields shown below for that view should be non-null, and the fields
+        // When either view is visible to the user, the fields shown below for that view should be non-null,
+        // and the fields
         // for the other view should be null.
 
         // Simple Select View
@@ -83,7 +84,8 @@ namespace System.Web.UI.Design.WebControls
         #endregion
 
         #region Events
-        // Event handler to process notifications when a DefaultContainerName is selected on the ObjectContext configuration panel
+        // Event handler to process notifications when a DefaultContainerName is selected on the
+        // ObjectContext configuration panel
         internal void ContainerNameChangedHandler(
             object sender,
             EntityDataSourceContainerNameItem newContainerName
@@ -130,9 +132,12 @@ namespace System.Web.UI.Design.WebControls
                 EntityDataSourceEntitySetNameItem entitySetToSelect = null;
                 foreach (EntityDataSourceEntitySetNameItem entitySetNameItem in _entitySetNames)
                 {
-                    // Ignore case here when searching the list for a matching item, but set the temporary state property to the
-                    // correctly-cased version from metadata so that if the user clicks Finish, the correct one will be saved. This
-                    // allows some flexibility the designer without preserving an incorrectly-cased value that could cause errors at runtime.
+                    // Ignore case here when searching the list for a matching item, but set the temporary state
+                    // property to the
+                    // correctly-cased version from metadata so that if the user clicks Finish, the correct one will be
+                    // saved. This
+                    // allows some flexibility the designer without preserving an incorrectly-cased value that could
+                    // cause errors at runtime.
                     if (
                         String.Equals(
                             entitySetNameItem.EntitySetName,
@@ -145,7 +150,8 @@ namespace System.Web.UI.Design.WebControls
                     }
                 }
 
-                // didn't find a matching entityset, so just create a placeholder for one using the specified name and add it to the list
+                // didn't find a matching entityset, so just create a placeholder for one using the specified name
+                // and add it to the list
                 if (entitySetToSelect == null)
                 {
                     entitySetToSelect = new EntityDataSourceEntitySetNameItem(entitySetName);
@@ -162,17 +168,23 @@ namespace System.Web.UI.Design.WebControls
             return null;
         }
 
-        // Populates the EntitySetName combobox with all of the discoverable EntitySets for the specified container.
-        // If the specified entitySetName is not empty, it is added to the list and selected as the initial value
-        // containerNameItem may not be backed by a real EntityContainer, in which case there is no way to look up the EntitySet in metadata
-        // devnote: This method should not automatically reset EntityTypeFilter and Select because it can be used to load the initial state
-        //          for the form, in which case we need to preserve any values that are already set on the data source control.
+        // Populates the EntitySetName combobox with all of the discoverable EntitySets for the specified
+        // container.
+        // If the specified entitySetName is not empty, it is added to the list and selected as the initial
+        // value
+        // containerNameItem may not be backed by a real EntityContainer, in which case there is no way to
+        // look up the EntitySet in metadata
+        // devnote: This method should not automatically reset EntityTypeFilter and Select because it can be
+        // used to load the initial state
+        //          for the form, in which case we need to preserve any values that are already set on the
+        // data source control.
         private void LoadEntitySetNames(
             EntityDataSourceContainerNameItem containerNameItem,
             string entitySetName
         )
         {
-            // If this is a container that we found in the project's metadata, get a list of EntitySets for that container
+            // If this is a container that we found in the project's metadata, get a list of EntitySets for that
+            // container
             if (containerNameItem != null && containerNameItem.EntityContainer != null)
             {
                 _entitySetNames = _helper.GetEntitySets(
@@ -213,7 +225,8 @@ namespace System.Web.UI.Design.WebControls
             _selectedEntitySetName = selectedEntitySet;
             // Load the types for the selected EntitySet, don't select one initially
             LoadEntityTypeFilters(selectedEntitySet, null);
-            // Reinitialize the Select control with a list of properties, don't preserve any existing Select value
+            // Reinitialize the Select control with a list of properties, don't preserve any existing Select
+            // value
             LoadSelect(String.Empty);
         }
 
@@ -231,9 +244,12 @@ namespace System.Web.UI.Design.WebControls
         #endregion
 
         #region EntityTypeFilter
-        // Populate a list with the base type for the EntitySet plus all derived types, and a special entry to indicate no filter
-        // devnote: This method should not automatically reset Select because it can be used to load the initial state
-        //          for the form, in which case we need to preserve any values that are already set on the data source control.
+        // Populate a list with the base type for the EntitySet plus all derived types, and a special entry
+        // to indicate no filter
+        // devnote: This method should not automatically reset Select because it can be used to load the
+        // initial state
+        //          for the form, in which case we need to preserve any values that are already set on the
+        // data source control.
         private void LoadEntityTypeFilters(
             EntityDataSourceEntitySetNameItem entitySetItem,
             string entityTypeFilter
@@ -290,9 +306,12 @@ namespace System.Web.UI.Design.WebControls
                     EntityDataSourceEntityTypeFilterItem entityTypeFilterItem in _entityTypeFilters
                 )
                 {
-                    // Ignore case here when searching the list for a matching item, but set the temporary state property to the
-                    // correctly-cased version from metadata so that if the user clicks Finish, the correct one will be saved. This
-                    // allows some flexibility the designer without preserving an incorrectly-cased value that could cause errors at runtime.
+                    // Ignore case here when searching the list for a matching item, but set the temporary state
+                    // property to the
+                    // correctly-cased version from metadata so that if the user clicks Finish, the correct one will be
+                    // saved. This
+                    // allows some flexibility the designer without preserving an incorrectly-cased value that could
+                    // cause errors at runtime.
                     if (
                         String.Equals(
                             entityTypeFilterItem.EntityTypeName,
@@ -328,7 +347,8 @@ namespace System.Web.UI.Design.WebControls
         )
         {
             _selectedEntityTypeFilter = selectedEntityTypeFilter;
-            // Reinitialize the Select control with a list of properties, don't preserve any existing Select value
+            // Reinitialize the Select control with a list of properties, don't preserve any existing Select
+            // value
             LoadSelect(String.Empty);
         }
 
@@ -368,7 +388,8 @@ namespace System.Web.UI.Design.WebControls
                     Strings.Wizard_DataSelectionPanel_SelectAllProperties
                 );
 
-                // parse the current value for the Select property to see if it can be displayed in the simple CheckedListBox view
+                // parse the current value for the Select property to see if it can be displayed in the simple
+                // CheckedListBox view
                 if (TryParseSelect(select))
                 {
                     _select = null;
@@ -381,10 +402,12 @@ namespace System.Web.UI.Design.WebControls
                     UpdateInsertUpdateDeleteState();
                     return;
                 }
-                // else we failed to parse the select into entity type properties on the specified type, so just use the advanced select view
+                // else we failed to parse the select into entity type properties on the specified type, so just use
+                // the advanced select view
             } // else can't get a list of properties unless we have a known EntityType
 
-            // if we don't have a valid entity type or couldn't parse the incoming Select value, just display the advanced TextBox view
+            // if we don't have a valid entity type or couldn't parse the incoming Select value, just display
+            // the advanced TextBox view
             _entityTypeProperties = null;
             _selectedEntityTypeProperties = null;
             _select = select;
@@ -449,12 +472,14 @@ namespace System.Web.UI.Design.WebControls
             }
             else
             {
-                // else the property is not escaped at all or is not properly escaped. We can't parse it so just return.
+                // else the property is not escaped at all or is not properly escaped. We can't parse it so just
+                // return.
                 return name;
             }
         }
 
-        // Parses the current Select property on the data source to see if it matches a specific format that we can use to display the properties
+        // Parses the current Select property on the data source to see if it matches a specific format that
+        // we can use to display the properties
         // in the CheckedListBox in the simple select wizard view
         private bool TryParseSelect(string currentSelect)
         {
@@ -478,7 +503,8 @@ namespace System.Web.UI.Design.WebControls
                     // Does the current property token start with "it."?
                     if (ReadItKeyword(propertyName))
                     {
-                        // Does the rest of the property token match a known property name for the selected EntityTypeFilter?
+                        // Does the rest of the property token match a known property name for the selected
+                        // EntityTypeFilter?
                         int propertyIndex = ReadPropertyName(
                             propertyName.Substring(s_itKeyword.Length)
                         );
@@ -503,7 +529,8 @@ namespace System.Web.UI.Design.WebControls
                 }
                 if (!foundUnknownProperty)
                 {
-                    // if we never found anything unknown, the current list of properties is what we'll use to fill in the CheckedListBox
+                    // if we never found anything unknown, the current list of properties is what we'll use to fill in
+                    // the CheckedListBox
                     _selectedEntityTypeProperties = selectedProperties;
                     parseSuccess = true;
                 }
@@ -526,20 +553,26 @@ namespace System.Web.UI.Design.WebControls
         // Determines if the specified propertyName starts with "it." (case-insensitive)
         private bool ReadItKeyword(string propertyName)
         {
-            // will accept any casing of "it." here, although when the value is saved back to the property, it will be correctly lower-cased
+            // will accept any casing of "it." here, although when the value is saved back to the property, it
+            // will be correctly lower-cased
             return propertyName.StartsWith(s_itKeyword, StringComparison.OrdinalIgnoreCase);
         }
 
-        // Determines if the specified propertyName matches one of the known properties for the selected type
+        // Determines if the specified propertyName matches one of the known properties for the selected
+        // type
         private int ReadPropertyName(string propertyName)
         {
             for (int propIndex = 0; propIndex < _entityTypeProperties.Count; propIndex++)
             {
-                // Ignore case here when searching the list for a matching item, but set the temporary state property to the
-                // correctly-cased version from metadata so that if the user clicks Finish, the correct one will be saved. This
-                // allows some flexibility the designer without preserving an incorrectly-cased value that could cause errors at runtime.
+                // Ignore case here when searching the list for a matching item, but set the temporary state
+                // property to the
+                // correctly-cased version from metadata so that if the user clicks Finish, the correct one will be
+                // saved. This
+                // allows some flexibility the designer without preserving an incorrectly-cased value that could
+                // cause errors at runtime.
 
-                // Does the specified property name exactly match any of the properties for the selected EntityTypeFilter?
+                // Does the specified property name exactly match any of the properties for the selected
+                // EntityTypeFilter?
                 if (
                     String.Equals(
                         UnescapePropertyName(propertyName),
@@ -555,7 +588,8 @@ namespace System.Web.UI.Design.WebControls
             return -1;
         }
 
-        // Add the specified property to the list of selected entity properties used to build up the Select property
+        // Add the specified property to the list of selected entity properties used to build up the Select
+        // property
         internal void SelectEntityProperty(int propertyIndex)
         {
             _selectedEntityTypeProperties.Add(propertyIndex);
@@ -664,7 +698,8 @@ namespace System.Web.UI.Design.WebControls
         {
             EntityType entityType = null;
 
-            // determine which EntityType to load properties for, based on the value selected for EntityTypeFilter
+            // determine which EntityType to load properties for, based on the value selected for
+            // EntityTypeFilter
             if (Object.ReferenceEquals(_selectedEntityTypeFilter, s_entityTypeFilterNoneItem))
             {
                 // If (None) is selected, use the base type for the EntitySet if available

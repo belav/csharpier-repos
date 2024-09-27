@@ -8,7 +8,8 @@ namespace System.Threading.RateLimiting
 {
     /// <summary>
     /// Abstraction for leases returned by <see cref="RateLimiter"/> implementations.
-    /// A lease represents the success or failure to acquire a resource and contains potential metadata that is relevant to the acquisition operation.
+    /// A lease represents the success or failure to acquire a resource and contains potential metadata
+    // that is relevant to the acquisition operation.
     /// </summary>
     public abstract class RateLimitLease : IDisposable
     {
@@ -20,7 +21,8 @@ namespace System.Threading.RateLimiting
         /// <summary>
         /// Attempt to extract metadata for the lease.
         /// </summary>
-        /// <param name="metadataName">The name of the metadata. Some common ones can be found in <see cref="MetadataName"/>.</param>
+        /// <param name="metadataName">The name of the metadata. Some common ones can be found in <see
+        // cref="MetadataName"/>.</param>
         /// <param name="metadata">The metadata object if it exists.</param>
         /// <returns>True if the metadata exists, otherwise false.</returns>
         public abstract bool TryGetMetadata(string metadataName, out object? metadata);
@@ -29,7 +31,8 @@ namespace System.Threading.RateLimiting
         /// Attempt to extract a strongly-typed metadata for the lease.
         /// </summary>
         /// <typeparam name="T">Type of the expected metadata.</typeparam>
-        /// <param name="metadataName">The name of the strongly-typed metadata. Some common ones can be found in <see cref="MetadataName"/>.</param>
+        /// <param name="metadataName">The name of the strongly-typed metadata. Some common ones can be
+        // found in <see cref="MetadataName"/>.</param>
         /// <param name="metadata">The strongly-typed metadata object if it exists.</param>
         /// <returns>True if the metadata exists, otherwise false.</returns>
         public bool TryGetMetadata<T>(MetadataName<T> metadataName, [MaybeNull] out T metadata)

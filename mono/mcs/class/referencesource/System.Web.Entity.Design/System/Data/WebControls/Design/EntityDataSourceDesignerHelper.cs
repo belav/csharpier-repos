@@ -77,7 +77,8 @@ namespace System.Web.UI.Design.WebControls
         private EntityConnection _entityConnection;
         private readonly IWebApplication _webApplication;
 
-        // determines if any errors or warnings are displayed and if the EntityConnection and metadata are automatically loaded when accessed
+        // determines if any errors or warnings are displayed and if the EntityConnection and metadata are
+        // automatically loaded when accessed
         private bool _interactiveMode;
         private HashSet<Assembly> _assemblies;
         private EntityDesignerDataSourceView _view;
@@ -349,13 +350,15 @@ namespace System.Web.UI.Design.WebControls
             get
             {
                 // In interactive mode, we will explicitly load metadata when needed, so never load it here
-                // When not in interactive mode, we only need to load metadata once, which is determined by the presence of an EntityConnection
+                // When not in interactive mode, we only need to load metadata once, which is determined by the
+                // presence of an EntityConnection
                 if (!_interactiveMode && _entityConnection == null)
                 {
                     LoadMetadata();
                 }
 
-                // _entityConnection may still be null if the load failed or if we are in interactive mode and the metadata has not been explicitly loaded
+                // _entityConnection may still be null if the load failed or if we are in interactive mode and the
+                // metadata has not been explicitly loaded
                 if (_entityConnection != null)
                 {
                     ItemCollection itemCollection = null;
@@ -368,8 +371,10 @@ namespace System.Web.UI.Design.WebControls
                     }
                     catch (Exception)
                     {
-                        // Never expecting a failure because we have already initialized the workspace when the metadata was loaded,
-                        // and any errors would have been trapped then. Just ignore any errors that might occur here to prevent a crash.
+                        // Never expecting a failure because we have already initialized the workspace when the metadata was
+                        // loaded,
+                        // and any errors would have been trapped then. Just ignore any errors that might occur here to
+                        // prevent a crash.
                     }
 
                     return itemCollection as EdmItemCollection; // not guaranteed not to be null, caller must check anyway before using
@@ -415,7 +420,8 @@ namespace System.Web.UI.Design.WebControls
             {
                 return LoadMetadata(connStrBuilder);
             }
-            // else the connection string could not be verified, and any errors are already displayed during the failed verification, so nothing more to do
+            // else the connection string could not be verified, and any errors are already displayed during the
+            // failed verification, so nothing more to do
 
             return false;
         }
@@ -424,12 +430,16 @@ namespace System.Web.UI.Design.WebControls
         {
             Debug.Assert(connStrBuilder != null, "expected non-null connStrBuilder");
 
-            // if these services are not available for some reason, we will not be able to do anything useful, so don't try to load metadata
+            // if these services are not available for some reason, we will not be able to do anything useful,
+            // so don't try to load metadata
             if (_webApplication != null)
             {
-                // _assemblies could already be loaded if this call is coming from the wizard, because metadata could be loaded
-                // multiple times if the connection string is changed, so don't load it again if we already have it. It can't have
-                // changed since the last load, because the wizard dialog is modal and there is no way to have changed the project between loads.
+                // _assemblies could already be loaded if this call is coming from the wizard, because metadata
+                // could be loaded
+                // multiple times if the connection string is changed, so don't load it again if we already have it.
+                // It can't have
+                // changed since the last load, because the wizard dialog is modal and there is no way to have
+                // changed the project between loads.
                 if (_assemblies == null)
                 {
                     LoadAssemblies();
@@ -447,18 +457,23 @@ namespace System.Web.UI.Design.WebControls
         {
             Debug.Assert(connStrBuilder != null, "expected non-null connStrBuilder");
 
-            // We will be replacing the metadata with a new collection, and if something fails to load we want to make sure to clear out any existing data
+            // We will be replacing the metadata with a new collection, and if something fails to load we want
+            // to make sure to clear out any existing data
             ClearMetadata();
 
             if (String.IsNullOrEmpty(connStrBuilder.ConnectionString))
             {
-                // Although we can't load metadata here, this is not an error because the user should not expect an empty connection string
-                // to produce any metadata, so it will not be confusing when no values are available in the dropdowns. This is different from
-                // an invalid connection string because in that case they have entered a value and are expecting to get metadata from it.
+                // Although we can't load metadata here, this is not an error because the user should not expect an
+                // empty connection string
+                // to produce any metadata, so it will not be confusing when no values are available in the
+                // dropdowns. This is different from
+                // an invalid connection string because in that case they have entered a value and are expecting to
+                // get metadata from it.
                 return false;
             }
 
-            // If this is a named connection, load the contents of the named connection from the web.config and verify itet
+            // If this is a named connection, load the contents of the named connection from the web.config and
+            // verify itet
             if (!String.IsNullOrEmpty(connStrBuilder.Name))
             {
                 connStrBuilder = GetBuilderForNamedConnection(connStrBuilder);
@@ -479,8 +494,10 @@ namespace System.Web.UI.Design.WebControls
             List<string> metadataWarnings = new List<string>(); // keeps track of all warnings that happen during the parsing of the connection string
             List<string> metadataPaths = new List<string>(); // collection of resolved paths
 
-            // We need to use the | separator to split the metadata value into individual paths, so first remove and process any paths
-            // containing the macro |DataDirectory|. These will get combined again with the rest of the paths once they have been processed.
+            // We need to use the | separator to split the metadata value into individual paths, so first remove
+            // and process any paths
+            // containing the macro |DataDirectory|. These will get combined again with the rest of the paths
+            // once they have been processed.
             List<string> dataDirectoryPaths = new List<string>();
             string metadataWithoutDataDirectory = ResolveDataDirectory(
                 originalMetadata,
@@ -528,7 +545,8 @@ namespace System.Web.UI.Design.WebControls
                     else
                     {
                         // We are not trying to resolve any other types of paths, so just pass it along directly.
-                        // If the format of the path is unrecognized, or if the path is not valid, metadata will throw an exception that will
+                        // If the format of the path is unrecognized, or if the path is not valid, metadata will throw an
+                        // exception that will
                         // be displayed to the user at that time.
                         metadataPaths.Add(trimmedPath);
                     }
@@ -559,8 +577,10 @@ namespace System.Web.UI.Design.WebControls
             EntityConnectionStringBuilder connStrBuilder
         )
         {
-            // It's possible the metadata was specified in the original connection string, but we filtered out everything due to not being able to resolve it to anything.
-            // In that case, warnings have already been displayed to indicate which paths were removed, so no need to display another message.
+            // It's possible the metadata was specified in the original connection string, but we filtered out
+            // everything due to not being able to resolve it to anything.
+            // In that case, warnings have already been displayed to indicate which paths were removed, so no
+            // need to display another message.
             if (metadataPaths.Count > 0)
             {
                 try
@@ -573,8 +593,10 @@ namespace System.Web.UI.Design.WebControls
                         _assemblies
                     );
 
-                    // Ensure that we have all of the item collections registered. If some of them are missing this will cause problems eventually if we need to
-                    // execute a query to get detailed schema information, but that will be handled later. For now just register everything to prevent errors in the
+                    // Ensure that we have all of the item collections registered. If some of them are missing this will
+                    // cause problems eventually if we need to
+                    // execute a query to get detailed schema information, but that will be handled later. For now just
+                    // register everything to prevent errors in the
                     // stack that would not be understood by the user in the designer at this point.
                     ItemCollection edmItemCollection;
                     ItemCollection storeItemCollection;
@@ -663,7 +685,8 @@ namespace System.Web.UI.Design.WebControls
 
         /// <summary>
         /// Finds and caches all non system assemblies that are found using the TypeDiscoveryService
-        /// This searches places like the ~/bin folder, app_code, and the 'assemblies' section of web.config, among others
+        /// This searches places like the ~/bin folder, app_code, and the 'assemblies' section of
+        // web.config, among others
         /// </summary>
         private void LoadAssemblies()
         {
@@ -705,8 +728,10 @@ namespace System.Web.UI.Design.WebControls
             }
         }
 
-        // Explicitly rebuild the known assembly cache. This is done when launching the wizard and allows the wizard to pick up the latest
-        // assemblies in the project, without having to reload them everytime the connection string changes while the wizard is running
+        // Explicitly rebuild the known assembly cache. This is done when launching the wizard and allows
+        // the wizard to pick up the latest
+        // assemblies in the project, without having to reload them everytime the connection string changes
+        // while the wizard is running
         internal void ReloadResources()
         {
             Debug.Assert(
@@ -717,7 +742,8 @@ namespace System.Web.UI.Design.WebControls
         }
 
         // Is the assembly and its referenced assemblies not expected to have any metadata
-        // This does not detect all possible system assemblies, but just those we can detect as system for sure
+        // This does not detect all possible system assemblies, but just those we can detect as system for
+        // sure
         private static bool IsSystemAssembly(string fullName)
         {
             return (
@@ -745,8 +771,10 @@ namespace System.Web.UI.Design.WebControls
             return warningMessage.ToString();
         }
 
-        // Get a connection string builder for the specified connection string, and do some basic verification
-        // namedConnStrBuilder should be based on a named connection and should already have been verified to be structurally valid
+        // Get a connection string builder for the specified connection string, and do some basic
+        // verification
+        // namedConnStrBuilder should be based on a named connection and should already have been verified
+        // to be structurally valid
         private EntityConnectionStringBuilder GetBuilderForNamedConnection(
             EntityConnectionStringBuilder namedConnStrBuilder
         )
@@ -779,7 +807,8 @@ namespace System.Web.UI.Design.WebControls
                         )
                         {
                             // Verify the contents of the named connection and create a new builder from it
-                            // It can't reference another named connection, and must have both the provider and metadata keywords
+                            // It can't reference another named connection, and must have both the provider and metadata
+                            // keywords
                             connStrBuilder = VerifyConnectionString(
                                 connStrSettings.ConnectionString,
                                 false /*allowNamedConnections*/
@@ -809,27 +838,33 @@ namespace System.Web.UI.Design.WebControls
             return connStrBuilder;
         }
 
-        // Make sure we have at least some basic keywords.This method does not attempt to do as much verification as EntityClient would do.
+        // Make sure we have at least some basic keywords.This method does not attempt to do as much
+        // verification as EntityClient would do.
         // We are just looking for a named connection, or both the provider and metadata keywords.
         /// <summary>
-        /// Make sure we have at least some basic keywords.This method does not attempt to do as much verification as EntityClient would do.
-        /// We are just looking for a named connection, or both the provider and metadata keywords.        ///
+        /// Make sure we have at least some basic keywords.This method does not attempt to do as much
+        // verification as EntityClient would do.
+        /// We are just looking for a named connection, or both the provider and metadata keywords.
+        // ///
         /// </summary>
         /// <param name="connectionString">Connection string to be verified. Can be empty or null.</param>
         /// <param name="allowNamedConnections">
         /// Indicates if the specified string can be a named connection in the form "name=ConnectionName".
-        /// If this method is being called with a connection string that came from a named connection entry in the web.config, this should be false
+        /// If this method is being called with a connection string that came from a named connection entry
+        // in the web.config, this should be false
         /// because we do not support nested named connections.
         /// </param>
         /// <returns>
-        /// A new EntityConnectionStringBuilder if the basic verification succeeded, otherwise null. Can return a builder for an empty string.
+        /// A new EntityConnectionStringBuilder if the basic verification succeeded, otherwise null. Can
+        // return a builder for an empty string.
         /// </returns>
         private EntityConnectionStringBuilder VerifyConnectionString(
             string connectionString,
             bool allowNamedConnections
         )
         {
-            // Verify if we have a structurally valid connection string with both "provider" and "metadata" keywords
+            // Verify if we have a structurally valid connection string with both "provider" and "metadata"
+            // keywords
             EntityConnectionStringBuilder connStrBuilder = null;
 
             try
@@ -839,7 +874,8 @@ namespace System.Web.UI.Design.WebControls
             }
             catch (ArgumentException ex)
             {
-                // The message thrown from the connection string builder is not always useful to the user in this context, so add our own error text as well
+                // The message thrown from the connection string builder is not always useful to the user in this
+                // context, so add our own error text as well
                 ShowError(Strings.Error_CreatingConnectionStringBuilder(ex.Message));
                 return null;
             }
@@ -850,8 +886,10 @@ namespace System.Web.UI.Design.WebControls
             //     (b) Then it's not a named connection, then verify the keywords
             //     (c) Otherwise the connection string is a named connection, no further validation is needed
 
-            // devnote: Using the ConnectionString property on the builder in the check for empty, because the original connection string
-            //          could have been something like "name=", which produces an empty ConnectionString in the builder, although the original was not empty
+            // devnote: Using the ConnectionString property on the builder in the check for empty, because the
+            // original connection string
+            //          could have been something like "name=", which produces an empty ConnectionString in the
+            // builder, although the original was not empty
             if (!String.IsNullOrEmpty(connStrBuilder.ConnectionString))
             {
                 // If named connection is not allowed, make sure it is not specified
@@ -882,7 +920,8 @@ namespace System.Web.UI.Design.WebControls
             {
                 UIHelper.ShowError(EntityDataSource.Site, message);
             }
-            // else we are in a mode where we just want to ignore errors (typically this happens when called from the property grid)
+            // else we are in a mode where we just want to ignore errors (typically this happens when called
+            // from the property grid)
         }
 
         internal void ShowWarning(string message)
@@ -891,10 +930,12 @@ namespace System.Web.UI.Design.WebControls
             {
                 UIHelper.ShowWarning(EntityDataSource.Site, message);
             }
-            // else we are in a mode where we just want to ignore warnings (typically this happens when called from the property grid)
+            // else we are in a mode where we just want to ignore warnings (typically this happens when called
+            // from the property grid)
         }
 
-        // Removes any paths containing |DataDirectory| from a string of metadata locations, adds them to a separate list and expands
+        // Removes any paths containing |DataDirectory| from a string of metadata locations, adds them to a
+        // separate list and expands
         // the macro to the full path to ~/ for any paths that start with the macro
         private string ResolveDataDirectory(
             string metadataPaths,
@@ -981,7 +1022,8 @@ namespace System.Web.UI.Design.WebControls
             return metadataPaths;
         }
 
-        // If the specified string starts with |DataDirectory|, replace that macro with the full path for ~/app_data in the application
+        // If the specified string starts with |DataDirectory|, replace that macro with the full path for
+        // ~/app_data in the application
         private string ExpandDataDirectory(string pathWithMacro, List<string> warnings)
         {
             string trimmedPath = pathWithMacro.Trim();
@@ -1001,7 +1043,8 @@ namespace System.Web.UI.Design.WebControls
                     return null;
                 }
             }
-            // else the macro is somewhere in the middle of the string which is not valid anyway, so just pass it along and let the metadata failure occur
+            // else the macro is somewhere in the middle of the string which is not valid anyway, so just pass
+            // it along and let the metadata failure occur
 
             return trimmedPath;
         }
@@ -1009,7 +1052,8 @@ namespace System.Web.UI.Design.WebControls
         /// <summary>
         /// Resolves the |DataDirecotry| macro from the current web application
         /// </summary>
-        /// <returns>The physical path for the macro expansion, or null if the data directory could not be found</returns>
+        /// <returns>The physical path for the macro expansion, or null if the data directory could not be
+        // found</returns>
         private string GetDataDirectory()
         {
             IProjectItem dataDirectoryPath = _webApplication.GetProjectItemFromUrl(
@@ -1093,7 +1137,8 @@ namespace System.Web.UI.Design.WebControls
             {
                 try
                 {
-                    // Create the underlying provider specific connection and give it the specified provider connection string
+                    // Create the underlying provider specific connection and give it the specified provider connection
+                    // string
                     DbConnection storeConnection = factory.CreateConnection();
                     if (storeConnection != null)
                     {
@@ -1169,7 +1214,8 @@ namespace System.Web.UI.Design.WebControls
                     }
                     else if (wasForceUsed)
                     {
-                        // if the schemas were equivalent but the schema retrieval was forced, still raise the data source changed event
+                        // if the schemas were equivalent but the schema retrieval was forced, still raise the data source
+                        // changed event
                         _owner.FireOnDataSourceChanged(EventArgs.Empty);
                     }
                 }
@@ -1246,12 +1292,18 @@ namespace System.Web.UI.Design.WebControls
                 // the right metadata from the design-time environment
                 EntityDataSource entityDataSource = new EntityDataSource(_entityConnection);
 
-                // This is workaround for a bug in the SQL CE provider services. SQL CE uses two providers - one is supposed to be used at design time
-                // while the other one is supposed to be used at runtime. When the Entiy Designer is used in a way that requires to talk to the database
-                // SQL CE starts returning design time provider. However they don't reset an internal flag and continue to return design time provider even if
-                // the Entity Designer is not used anymore. Calling GetProviderManifestToken() method will reset the flag according to the provider in the
-                // connection. This fixes the problem for SQL CE provider without having to special case SQL CE because it will be a no-op for other providers.
-                // For more details see bug 35675 in DevDiv database http://vstfdevdiv:8080/web/wi.aspx?pcguid=22f9acc9-569a-41ff-b6ac-fac1b6370209&id=35675
+                // This is workaround for a bug in the SQL CE provider services. SQL CE uses two providers - one is
+                // supposed to be used at design time
+                // while the other one is supposed to be used at runtime. When the Entiy Designer is used in a way
+                // that requires to talk to the database
+                // SQL CE starts returning design time provider. However they don't reset an internal flag and
+                // continue to return design time provider even if
+                // the Entity Designer is not used anymore. Calling GetProviderManifestToken() method will reset the
+                // flag according to the provider in the
+                // connection. This fixes the problem for SQL CE provider without having to special case SQL CE
+                // because it will be a no-op for other providers.
+                // For more details see bug 35675 in DevDiv database
+                // http://vstfdevdiv:8080/web/wi.aspx?pcguid=22f9acc9-569a-41ff-b6ac-fac1b6370209&id=35675
                 DbProviderServices
                     .GetProviderServices(_entityConnection.StoreConnection)
                     .GetProviderManifestToken(_entityConnection.StoreConnection);
@@ -1375,7 +1427,8 @@ namespace System.Web.UI.Design.WebControls
                 }
             }
 
-            // Either we are forcing schema retrieval, or we're not forcing but we're consistent, so get the schema
+            // Either we are forcing schema retrieval, or we're not forcing but we're consistent, so get the
+            // schema
             DataTable schema =
                 _owner.LoadFromDesignerState(DesignerStateDataSourceSchemaKey) as DataTable;
             return schema;
@@ -1427,7 +1480,8 @@ namespace System.Web.UI.Design.WebControls
             return new string[] { DefaultViewName };
         }
 
-        // Caller can specify that the results should not be sorted if they may add something to the list and sort themselves
+        // Caller can specify that the results should not be sorted if they may add something to the list
+        // and sort themselves
         internal List<EntityDataSourceContainerNameItem> GetContainerNames(bool sortResults)
         {
             List<EntityDataSourceContainerNameItem> entityContainerItems =
@@ -1498,7 +1552,8 @@ namespace System.Web.UI.Design.WebControls
             );
         }
 
-        // Caller can specify that the results should not be sorted if they may add something to the list and sort themselves
+        // Caller can specify that the results should not be sorted if they may add something to the list
+        // and sort themselves
         internal List<EntityDataSourceEntitySetNameItem> GetEntitySets(
             EntityContainer entityContainer,
             bool sortResults
@@ -1527,7 +1582,8 @@ namespace System.Web.UI.Design.WebControls
             return entitySetNameItems;
         }
 
-        // Caller can specify that the results should not be sorted if they may add something to the list and sort themselves
+        // Caller can specify that the results should not be sorted if they may add something to the list
+        // and sort themselves
         internal List<EntityConnectionStringBuilderItem> GetNamedEntityClientConnections(
             bool sortResults
         )
@@ -1611,7 +1667,8 @@ namespace System.Web.UI.Design.WebControls
 
             Debug.Assert(properties.Count > 0, "expected entity to have at least one property");
 
-            // don't sort the properties here because it will cause them to be displayed to the user in a non-intuitive order
+            // don't sort the properties here because it will cause them to be displayed to the user in a
+            // non-intuitive order
 
             return properties;
         }

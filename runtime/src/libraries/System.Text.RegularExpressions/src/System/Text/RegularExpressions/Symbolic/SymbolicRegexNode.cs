@@ -29,9 +29,12 @@ namespace System.Text.RegularExpressions.Symbolic
         /// </summary>
         /// <remarks>
         /// A regex R subsumes another regex S if all strings matching S are also matched by R.
-        /// The subsumption check may do unproductive linear walks when subsumption doesn't hold. This depth limit helps
-        /// curb the cost of these walks at the cost of sometimes not detecting subsumption. This limit should be set
-        /// high enough that subsumption is detected in all typical cases. This limit of 50 still gives good performance
+        /// The subsumption check may do unproductive linear walks when subsumption doesn't hold. This depth
+        // limit helps
+        /// curb the cost of these walks at the cost of sometimes not detecting subsumption. This limit
+        // should be set
+        /// high enough that subsumption is detected in all typical cases. This limit of 50 still gives good
+        // performance
         /// in the stress tests.
         /// </remarks>
         internal const int SubsumptionCheckDepthLimit = 50;
@@ -143,7 +146,8 @@ namespace System.Text.RegularExpressions.Symbolic
         internal bool IsHighPriorityNullableFor(uint context) =>
             _info.CanBeNullable && IsHighPriorityNullableFor(this, context);
 
-        /// <summary>Nullability test that determines if the node is high-priority-nullable for the given context</summary>
+        /// <summary>Nullability test that determines if the node is high-priority-nullable for the given
+        // context</summary>
         private static bool IsHighPriorityNullableFor(SymbolicRegexNode<TSet> node, uint context)
         {
             if (!StackHelper.TryEnsureSufficientExecutionStack())
@@ -195,7 +199,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         continue;
 
                     default:
-                        // any remaining case must be an anchor or else next._info.IsHighPriorityNullable would have been true
+                        // any remaining case must be an anchor or else next._info.IsHighPriorityNullable would have been
+                        // true
                         Debug.Assert(
                             node._kind
                                 is SymbolicRegexNodeKind.BeginningAnchor
@@ -215,7 +220,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>True if this node accepts the empty string unconditionally.</summary>
         internal bool IsNullable => _info.IsNullable;
 
-        /// <summary>True if this node can potentially accept the empty string depending on anchors and immediate context.</summary>
+        /// <summary>True if this node can potentially accept the empty string depending on anchors and
+        // immediate context.</summary>
         internal bool CanBeNullable
         {
             get
@@ -229,7 +235,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Converts a list of a given kind, e.g. Concat or Alternate, into an array,
         /// returns anything else in a singleton array.
         /// </summary>
-        /// <param name="list">a list to insert the elements into, or null to return results in a new list</param>
+        /// <param name="list">a list to insert the elements into, or null to return results in a new
+        // list</param>
         /// <param name="listKind">kind of node to consider as the list builder</param>
         public List<SymbolicRegexNode<TSet>> ToList(
             List<SymbolicRegexNode<TSet>>? list = null,
@@ -383,7 +390,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                     default:
                         // SymbolicRegexNodeKind.EndAnchorZReverse:
-                        // EndAnchorZRev (rev(\Z)) anchor is nullable when the prev character is either the first Newline or Start
+                        // EndAnchorZRev (rev(\Z)) anchor is nullable when the prev character is either the first Newline or
+                        // Start
                         // note: CharKind.NewLineS == CharKind.Newline|CharKind.StartStop
                         Debug.Assert(_kind == SymbolicRegexNodeKind.EndAnchorZReverse);
                         is_nullable = (CharKind.Prev(context) & CharKind.BeginningEnd) != 0;
@@ -542,7 +550,8 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             Debug.Assert(lower >= 0 && lower <= upper);
             // Avoid wrapping X? inside (X?)?, or X?? inside (X??)??
-            // This simplification in particular avoids creating unnecessary loops from the rule for concatenation in TryFoldAlternation
+            // This simplification in particular avoids creating unnecessary loops from the rule for
+            // concatenation in TryFoldAlternation
             if (
                 lower == 0
                 && upper == 1
@@ -683,20 +692,25 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Make an alternation of given regexes, eliminate nothing regexes and treat .* as consuming element.
+        /// Make an alternation of given regexes, eliminate nothing regexes and treat .* as consuming
+        // element.
         /// Keep the alternation flat, assuming both right and left are flat.
-        /// Apply subsumption/combining optimizations, such that e.g. a?b|b will be simplified to a?b and b|a?b will be combined to a??b
+        /// Apply subsumption/combining optimizations, such that e.g. a?b|b will be simplified to a?b and
+        // b|a?b will be combined to a??b
         /// </summary>
         /// <remarks>
-        /// The <paramref name="deduplicated"/> argument allows skipping deduplication when it is known to be not necessary. This is
-        /// commonly the case when some transformation f is applied to an existing alternation A|B|C|... such that
+        /// The <paramref name="deduplicated"/> argument allows skipping deduplication when it is known to
+        // be not necessary. This is
+        /// commonly the case when some transformation f is applied to an existing alternation A|B|C|...
+        // such that
         /// for all regexes R,S it is the case that f(R)==f(S) iff R==S.
         /// </remarks>
         /// <param name="builder">the builder for the nodes</param>
         /// <param name="left">the left hand side, higher priority alternative</param>
         /// <param name="right">the right hand side, lower priority alternative</param>
         /// <param name="deduplicated">whether to skip deduplication</param>
-        /// <param name="hintRightLikelySubsumes">if true then simplification rules succeeding when the right hand side subsumes the left hand side are tried first</param>
+        /// <param name="hintRightLikelySubsumes">if true then simplification rules succeeding when the
+        // right hand side subsumes the left hand side are tried first</param>
         /// <returns></returns>
         internal static SymbolicRegexNode<TSet> CreateAlternate(
             SymbolicRegexBuilder<TSet> builder,
@@ -716,18 +730,21 @@ namespace System.Text.RegularExpressions.Symbolic
             if (left == builder._nothing)
                 return right;
 
-            // Handle cases where right is an alternation or not uniformly. If right is R|S then the head is R and the
+            // Handle cases where right is an alternation or not uniformly. If right is R|S then the head is R
+            // and the
             // tail is S. If right is not an alternation then the head is right and the tail is nothing.
             SymbolicRegexNode<TSet> head =
                 right._kind == SymbolicRegexNodeKind.Alternate ? right._left! : right;
             SymbolicRegexNode<TSet> tail =
                 right._kind == SymbolicRegexNodeKind.Alternate ? right._right! : builder._nothing;
 
-            // Simplify away right side if left side subsumes it. For example X?Y|Y|Z would simplify to just X?Y|Z.
+            // Simplify away right side if left side subsumes it. For example X?Y|Y|Z would simplify to just
+            // X?Y|Z.
             if (!hintRightLikelySubsumes && left.Subsumes(builder, head))
                 return CreateAlternate(builder, left, tail);
 
-            // Simplify by folding right side into left side if right side subsumes the left side. For example Y|X?Y|Z
+            // Simplify by folding right side into left side if right side subsumes the left side. For example
+            // Y|X?Y|Z
             // would simplify to X??Y|Z.
             if (
                 head.Subsumes(builder, left)
@@ -735,7 +752,8 @@ namespace System.Text.RegularExpressions.Symbolic
             )
                 return CreateAlternate(builder, result, tail);
 
-            // This is a repeat of a rule above, but for the case when the hint tells us to try reverse subsumption first.
+            // This is a repeat of a rule above, but for the case when the hint tells us to try reverse
+            // subsumption first.
             if (hintRightLikelySubsumes && left.Subsumes(builder, head))
                 return CreateAlternate(builder, left, tail);
 
@@ -827,21 +845,31 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Tries to detect whether or not the language of another node is fully contained within the language of this
-        /// node. It does this by applying a set of rules, such as "RS subsumes T if R is nullable and S subsumes T",
-        /// which peels off one nullable element from a concatenation and recurses into another susumption check.
-        /// Note that differences in Effect nodes are not considered for subsumption, which is an important feature since
+        /// Tries to detect whether or not the language of another node is fully contained within the
+        // language of this
+        /// node. It does this by applying a set of rules, such as "RS subsumes T if R is nullable and S
+        // subsumes T",
+        /// which peels off one nullable element from a concatenation and recurses into another susumption
+        // check.
+        /// Note that differences in Effect nodes are not considered for subsumption, which is an important
+        // feature since
         /// this allows simplifications relying on subsumption to apply in the presence of effects.
         /// </summary>
         /// <remarks>
-        /// Subsumption checks for regular expressions are in general difficult (equivalence and thus subsumption are
-        /// known to be PSPACE-complete). Thus this fast rule based check will never be complete. Adding rules into this
+        /// Subsumption checks for regular expressions are in general difficult (equivalence and thus
+        // subsumption are
+        /// known to be PSPACE-complete). Thus this fast rule based check will never be complete. Adding
+        // rules into this
         /// function should be directed by concrete use cases.
-        /// Some rules may be unproductive (e.g. the rule for R?S subsuming T when T is not a suffix of S), which would
-        /// result in deep recursions. Rule application depth is limited by <see cref="SubsumptionCheckDepthLimit"/> to
+        /// Some rules may be unproductive (e.g. the rule for R?S subsuming T when T is not a suffix of S),
+        // which would
+        /// result in deep recursions. Rule application depth is limited by <see
+        // cref="SubsumptionCheckDepthLimit"/> to
         /// avoid these cases.
-        /// The function uses a caching approach where the boolean returned is only cached if it is the result of a
-        /// recursive subsumption check. The rationale is that if the answer could be produced locally then recomputing
+        /// The function uses a caching approach where the boolean returned is only cached if it is the
+        // result of a
+        /// recursive subsumption check. The rationale is that if the answer could be produced locally then
+        // recomputing
         /// it is better than caching.
         /// </remarks>
         /// <param name="builder">the builder that owns this node</param>
@@ -1030,16 +1058,20 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Tries to combine the lower priority right hand side with the higher priority left hand side in an alternation
+        /// Tries to combine the lower priority right hand side with the higher priority left hand side in
+        // an alternation
         /// when the right hand side is known to subsume the left hand side.
-        /// For example in abc|(xyz){0,3}abc the right hand side subsumes the left hand side. This function can be used to
-        /// eliminate the alternation by simplifying to (xyz){0,3}?abc. Note that the transformation preserves the priority
+        /// For example in abc|(xyz){0,3}abc the right hand side subsumes the left hand side. This function
+        // can be used to
+        /// eliminate the alternation by simplifying to (xyz){0,3}?abc. Note that the transformation
+        // preserves the priority
         /// of the shorter "abc" match by making the prefix lazy.
         /// </summary>
         /// <param name="builder">the builder that owns this node</param>
         /// <param name="left">the lower priority alternative</param>
         /// <param name="right">the higher priority alternative</param>
-        /// <param name="result">the folded regex that eliminates alternation, or null if the operation fails</param>
+        /// <param name="result">the folded regex that eliminates alternation, or null if the operation
+        // fails</param>
         /// <param name="rightEffects">accumulated effects from the right side</param>
         /// <returns>whether folding was successful</returns>
         private static bool TryFoldAlternation(
@@ -1128,7 +1160,8 @@ namespace System.Text.RegularExpressions.Symbolic
             result = null;
             return false;
 
-            // This rule tries to find a prefix P that the right side has such that right is PR and left is equivalent to R
+            // This rule tries to find a prefix P that the right side has such that right is PR and left is
+            // equivalent to R
             static bool TrySplitConcatSubsumption(
                 SymbolicRegexBuilder<TSet> builder,
                 SymbolicRegexNode<TSet> left,
@@ -1176,7 +1209,8 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Returns the fixed matching length of the regex or -1 if the regex does not have a fixed matching length.
+        /// Returns the fixed matching length of the regex or -1 if the regex does not have a fixed matching
+        // length.
         /// </summary>
         public int GetFixedLength()
         {
@@ -1266,11 +1300,13 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Insert <see cref="SymbolicRegexNodeKind.FixedLengthMarker"/> nodes to mark paths in the regex that correspond
+        /// Insert <see cref="SymbolicRegexNodeKind.FixedLengthMarker"/> nodes to mark paths in the regex
+        // that correspond
         /// to matches of fixed length. For example, for abar|bar two markers would be added abar(4)|bar(3).
         /// </summary>
         /// <remarks>
-        /// This function will rebuild concatenations because it pushes the FixedLengthMarker into the rightmost element.
+        /// This function will rebuild concatenations because it pushes the FixedLengthMarker into the
+        // rightmost element.
         /// Due to this function should not be called on every character.
         /// </remarks>
         /// <param name="builder">the builder that owns this node</param>
@@ -1327,7 +1363,8 @@ namespace System.Text.RegularExpressions.Symbolic
                     return this;
             }
 
-            // For all other nodes defer to GetFixedLength to figure out if there is a fixed length and add the marker
+            // For all other nodes defer to GetFixedLength to figure out if there is a fixed length and add the
+            // marker
             // if there is one.
             int thisLength = GetFixedLength();
             return thisLength < 0
@@ -1340,15 +1377,19 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Create a derivative (<see cref="CreateDerivative(SymbolicRegexBuilder{TSet}, TSet, uint)"/> and <see cref="CreateDerivativeWrapper"/>) and then strip
+        /// Create a derivative (<see cref="CreateDerivative(SymbolicRegexBuilder{TSet}, TSet, uint)"/> and
+        // <see cref="CreateDerivativeWrapper"/>) and then strip
         /// effects with <see cref="StripEffects"/>.
         /// This derivative simulates backtracking, i.e. it only considers paths that backtracking would
-        /// take before accepting the empty string for this pattern and returns the pattern ordered in the order backtracking
-        /// would explore paths. For example the derivative of a*ab places a*ab before b, while for a*?ab the order is reversed.
+        /// take before accepting the empty string for this pattern and returns the pattern ordered in the
+        // order backtracking
+        /// would explore paths. For example the derivative of a*ab places a*ab before b, while for a*?ab
+        // the order is reversed.
         /// </summary>
         /// <param name="builder">the builder that owns this node</param>
         /// <param name="elem">given element wrt which the derivative is taken</param>
-        /// <param name="context">immediately surrounding character context that affects nullability of anchors</param>
+        /// <param name="context">immediately surrounding character context that affects nullability of
+        // anchors</param>
         /// <returns>the derivative</returns>
         internal SymbolicRegexNode<TSet> CreateDerivativeWithoutEffects(
             SymbolicRegexBuilder<TSet> builder,
@@ -1357,21 +1398,28 @@ namespace System.Text.RegularExpressions.Symbolic
         ) => CreateDerivativeWrapper(builder, elem, context).StripEffects(builder);
 
         /// <summary>
-        /// Create a derivative (<see cref="CreateDerivative(SymbolicRegexBuilder{TSet}, TSet, uint)"/> and <see cref="CreateDerivativeWrapper"/>) and then strip
+        /// Create a derivative (<see cref="CreateDerivative(SymbolicRegexBuilder{TSet}, TSet, uint)"/> and
+        // <see cref="CreateDerivativeWrapper"/>) and then strip
         /// and map effects for use in NFA simulation with <see cref="StripAndMapEffects"/>.
         /// This derivative simulates backtracking, i.e. it only considers paths that backtracking would
-        /// take before accepting the empty string for this pattern and returns the pattern ordered in the order backtracking
-        /// would explore paths. For example the derivative of a*ab places a*ab before b, while for a*?ab the order is reversed.
+        /// take before accepting the empty string for this pattern and returns the pattern ordered in the
+        // order backtracking
+        /// would explore paths. For example the derivative of a*ab places a*ab before b, while for a*?ab
+        // the order is reversed.
         /// </summary>
         /// <remarks>
-        /// The differences of this to <see cref="CreateDerivativeWithoutEffects(SymbolicRegexBuilder{TSet}, TSet, uint)"/> are that (1) effects (e.g. capture starts and ends)
-        /// are considered and (2) the different elements that would form a top level union are instead returned as separate
-        /// nodes (paired with their associated effects). This function is meant to be used for NFA simulation, where top level
+        /// The differences of this to <see cref="CreateDerivativeWithoutEffects(SymbolicRegexBuilder{TSet},
+        // TSet, uint)"/> are that (1) effects (e.g. capture starts and ends)
+        /// are considered and (2) the different elements that would form a top level union are instead
+        // returned as separate
+        /// nodes (paired with their associated effects). This function is meant to be used for NFA
+        // simulation, where top level
         /// unions would be broken up into separate states.
         /// </remarks>
         /// <param name="builder">the builder that owns this node</param>
         /// <param name="elem">given element wrt which the derivative is taken</param>
-        /// <param name="context">immediately surrounding character context that affects nullability of anchors</param>
+        /// <param name="context">immediately surrounding character context that affects nullability of
+        // anchors</param>
         /// <returns>the derivative</returns>
         internal List<(SymbolicRegexNode<TSet>, DerivativeEffect[])> CreateNfaDerivativeWithEffects(
             SymbolicRegexBuilder<TSet> builder,
@@ -1396,7 +1444,8 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             if (this._kind == SymbolicRegexNodeKind.DisableBacktrackingSimulation)
             {
-                // This node kind can only occur at the top level and indicates that backtracking simulation is turned off
+                // This node kind can only occur at the top level and indicates that backtracking simulation is
+                // turned off
                 Debug.Assert(_left is not null);
                 SymbolicRegexNode<TSet> derivative = _left.CreateDerivative(builder, elem, context);
                 // Reinsert the marker that maintains the non-backtracking semantics
@@ -1404,13 +1453,15 @@ namespace System.Text.RegularExpressions.Symbolic
             }
             else
             {
-                // To maintain backtracking semantics, prune any branches that are less preferred than just the empty match
+                // To maintain backtracking semantics, prune any branches that are less preferred than just the
+                // empty match
                 SymbolicRegexNode<TSet> node = PruneLowerPriorityThanNullability(builder, context);
                 return node.CreateDerivative(builder, elem, context);
             }
         }
 
-        /// <summary>Prune this node wrt the given context in order to maintain backtracking semantics. Mimics how backtracking chooses a path.</summary>
+        /// <summary>Prune this node wrt the given context in order to maintain backtracking semantics.
+        // Mimics how backtracking chooses a path.</summary>
         private SymbolicRegexNode<TSet> PruneLowerPriorityThanNullability(
             SymbolicRegexBuilder<TSet> builder,
             uint context
@@ -1535,13 +1586,16 @@ namespace System.Text.RegularExpressions.Symbolic
                     // priorities of checking that lower bound.
                     if (loop.IsLazy)
                     {
-                        // In a lazy loop nullability from the zero lower bound has highest priority, so the loop is skipped completely
+                        // In a lazy loop nullability from the zero lower bound has highest priority, so the loop is skipped
+                        // completely
                         return tail.PruneLowerPriorityThanNullability(builder, context);
                     }
                     else if (!loop._left.IsNullableFor(context))
                     {
-                        // For an eager loop with a non-nullable body, the nullability from the zero lower bound has lowest priority.
-                        // Handle by case splitting into (1) doing at least one iteration in the loop and (2) skipping the loop and
+                        // For an eager loop with a non-nullable body, the nullability from the zero lower bound has lowest
+                        // priority.
+                        // Handle by case splitting into (1) doing at least one iteration in the loop and (2) skipping the
+                        // loop and
                         // continuing directly into the tail, which then must be pruned in the current context.
                         return CreateAlternate(
                             builder,
@@ -1555,13 +1609,20 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
                     else if (loop._upper == int.MaxValue)
                     {
-                        // The special case of a R*S loop with a nullable body is handled separately, as the general case handler could cause
-                        // infinite recursion. The paths that backtracking would explore before stopping here are (1) consuming a character in the
-                        // first iteration of the loop and (2) skipping the loop and continuing with anything higher priority than nullability in S.
-                        // For example, a pattern (a|b??)*c? would prune into essentially a?(a|b??)*c?|c?. Note that pruning only one peeled-out
-                        // iteration of the loop is necessary, since anchors could change the priority of nullability in other locations in the input.
-                        // Additionally, a high-priority nullable body will always be skipped, in which case only option (2) is included. Finally, in
-                        // all cases the loop body must not be dropped, as doing so could affect whether some capture groups match zero characters or
+                        // The special case of a R*S loop with a nullable body is handled separately, as the general case
+                        // handler could cause
+                        // infinite recursion. The paths that backtracking would explore before stopping here are (1)
+                        // consuming a character in the
+                        // first iteration of the loop and (2) skipping the loop and continuing with anything higher
+                        // priority than nullability in S.
+                        // For example, a pattern (a|b??)*c? would prune into essentially a?(a|b??)*c?|c?. Note that pruning
+                        // only one peeled-out
+                        // iteration of the loop is necessary, since anchors could change the priority of nullability in
+                        // other locations in the input.
+                        // Additionally, a high-priority nullable body will always be skipped, in which case only option (2)
+                        // is included. Finally, in
+                        // all cases the loop body must not be dropped, as doing so could affect whether some capture groups
+                        // match zero characters or
                         // don't match at all.
                         SymbolicRegexNode<TSet> skipLoopCase = CreateConcat(
                             builder,
@@ -1584,7 +1645,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
 
                 Debug.Assert(loop._left.IsNullableFor(context));
-                // The general case handler peels one iteration out of the loop and prunes the resulting concatenation
+                // The general case handler peels one iteration out of the loop and prunes the resulting
+                // concatenation
                 return CreateConcat(
                         builder,
                         loop._left,
@@ -1595,7 +1657,8 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Creates the remainder of a loop when one iteration is peeled out of it. In other words, for a loop R with
+        /// Creates the remainder of a loop when one iteration is peeled out of it. In other words, for a
+        // loop R with
         /// a body B returns a new regex S such that R is equivalent to BS.
         /// </summary>
         /// <param name="builder">the builder that owns this node</param>
@@ -1604,7 +1667,8 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             Debug.Assert(_kind == SymbolicRegexNodeKind.Loop && _left is not null);
 
-            // Note that the upper bound is guaranteed to be greater than zero, since otherwise the loop would have
+            // Note that the upper bound is guaranteed to be greater than zero, since otherwise the loop would
+            // have
             // been simplified to nothing, and int.MaxValue is treated as infinity.
             int newupper = _upper == int.MaxValue ? int.MaxValue : _upper - 1;
             // Do not decrement the lower bound if it equals int.MaxValue
@@ -1622,21 +1686,31 @@ namespace System.Text.RegularExpressions.Symbolic
         /// </summary>
         /// <remarks>
         /// This derivative differs from ones familiar from literature in several ways:
-        /// -Ordered alternations are properly handled and any choices represented as alternations are ordered in a way
+        /// -Ordered alternations are properly handled and any choices represented as alternations are
+        // ordered in a way
         ///  that matches the backtracking engines.
-        /// -Some nodes, namely <see cref="SymbolicRegexNodeKind.CaptureStart"/> and <see cref="SymbolicRegexNodeKind.CaptureEnd"/>,
-        ///  will produce <see cref="SymbolicRegexNodeKind.Effect"/> nodes, which indicate effects to be applied on
-        ///  transitions using this derivative. The derivative must be further post-processed with a function that strips
-        ///  and possibly interprets these effects into a conveniently executable form. See <see cref="StripAndMapEffects"/>
+        /// -Some nodes, namely <see cref="SymbolicRegexNodeKind.CaptureStart"/> and <see
+        // cref="SymbolicRegexNodeKind.CaptureEnd"/>,
+        ///  will produce <see cref="SymbolicRegexNodeKind.Effect"/> nodes, which indicate effects to be
+        // applied on
+        ///  transitions using this derivative. The derivative must be further post-processed with a
+        // function that strips
+        ///  and possibly interprets these effects into a conveniently executable form. See <see
+        // cref="StripAndMapEffects"/>
         ///  for an example of this interpretation.
-        ///  Ultimately, effects are translated into <see cref="DerivativeEffect"/> instances which may be applied at a
-        ///  specific input position to <see cref="SymbolicRegexMatcher{TSet}.Registers"/> instances, which track concrete
-        ///  positions for capture starts and ends. For example, given a DerivativeEffect for CaptureStart of capture number 0
-        ///  and an input position 5, applying it to a Registers instance is simply assigning the relevant value to 5.
+        ///  Ultimately, effects are translated into <see cref="DerivativeEffect"/> instances which may be
+        // applied at a
+        ///  specific input position to <see cref="SymbolicRegexMatcher{TSet}.Registers"/> instances, which
+        // track concrete
+        ///  positions for capture starts and ends. For example, given a DerivativeEffect for CaptureStart
+        // of capture number 0
+        ///  and an input position 5, applying it to a Registers instance is simply assigning the relevant
+        // value to 5.
         /// </remarks>
         /// <param name="builder">the builder that owns this node</param>
         /// <param name="elem">given element wrt which the derivative is taken</param>
-        /// <param name="context">immediately surrounding character context that affects nullability of anchors</param>
+        /// <param name="context">immediately surrounding character context that affects nullability of
+        // anchors</param>
         /// <returns>the derivative</returns>
         private SymbolicRegexNode<TSet> CreateDerivative(
             SymbolicRegexBuilder<TSet> builder,
@@ -1662,7 +1736,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 {
                     Debug.Assert(_set is not null);
                     // The following check assumes that either (1) the element and set are minterms, in which case
-                    // the element is exactly the set if the intersection is non-empty (satisfiable), or (2) the element is a singleton
+                    // the element is exactly the set if the intersection is non-empty (satisfiable), or (2) the element
+                    // is a singleton
                     // set in which case it is fully contained in the set if the intersection is non-empty.
                     if (!builder._solver.IsEmpty(builder._solver.And(elem, _set)))
                     {
@@ -1729,7 +1804,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                     if (_lower == 0 || _left.IsNullable || !_left.IsNullableFor(context))
                     {
-                        // In these special cases the derivative concatenates the body's derivative with the decremented loop, so
+                        // In these special cases the derivative concatenates the body's derivative with the decremented
+                        // loop, so
                         // d(R{m,n}) = d(R)R{max(0,m-1),n-1}.
                         derivative = builder.CreateConcat(
                             _left.CreateDerivative(builder, elem, context),
@@ -1738,8 +1814,10 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
                     else
                     {
-                        // In the general case the concatenation must be created first and the derivative taken on that. For example,
-                        // the first derivative for (a|\b){2} with an input "ac" is (a|\b)|epsilon, but the rule above would produce
+                        // In the general case the concatenation must be created first and the derivative taken on that. For
+                        // example,
+                        // the first derivative for (a|\b){2} with an input "ac" is (a|\b)|epsilon, but the rule above would
+                        // produce
                         // just (a|\b).
                         derivative = builder
                             .CreateConcat(_left, CreateLoopContinuation(builder))
@@ -1760,7 +1838,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
 
                 case SymbolicRegexNodeKind.Effect:
-                    //Effect nodes do not have derivatives (effects have been stripped): It is an error to reach an Effect node here
+                    //Effect nodes do not have derivatives (effects have been stripped): It is an error to reach an
+                    // Effect node here
                     Debug.Fail($"{nameof(CreateDerivative)}:{_kind}");
                     break;
 
@@ -1806,7 +1885,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 case SymbolicRegexNodeKind.Alternate:
                     Debug.Assert(_left is not null && _right is not null);
-                    // This iterative handling of nested alternations is important to avoid quadratic work in deduplicating
+                    // This iterative handling of nested alternations is important to avoid quadratic work in
+                    // deduplicating
                     // the elements. We don't want to omit deduplication here, since he stripping may make nodes equal.
                     List<SymbolicRegexNode<TSet>> elems = ToList(
                         listKind: SymbolicRegexNodeKind.Alternate
@@ -1830,11 +1910,16 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// This function maps <see cref="SymbolicRegexNodeKind.Effect"/> nodes present in the tree and maps them into
-        /// arrays of <see cref="DerivativeEffect"/>. The node is split into a list of pairs (node, effects), where the
-        /// nodes represent elements of a top level alternation and the effects are what should be applied for all
-        /// matches using that node. In effect, this function interprets effects produced during derivation into a form
-        /// suitable for use in NFA simulation. This function is similar to <see cref="StripEffects"/> in that it removes
+        /// This function maps <see cref="SymbolicRegexNodeKind.Effect"/> nodes present in the tree and maps
+        // them into
+        /// arrays of <see cref="DerivativeEffect"/>. The node is split into a list of pairs (node,
+        // effects), where the
+        /// nodes represent elements of a top level alternation and the effects are what should be applied
+        // for all
+        /// matches using that node. In effect, this function interprets effects produced during derivation
+        // into a form
+        /// suitable for use in NFA simulation. This function is similar to <see cref="StripEffects"/> in
+        // that it removes
         /// Effect nodes as it maps them.
         /// For example, Effect(Effect(R,CaptureStart_1)|S,CaptureStart_0) would be turned into two pairs:
         /// (R,[CaptureStart_0,CaptureStart_1]) and (S,[CaptureStart_0]).
@@ -1842,9 +1927,12 @@ namespace System.Text.RegularExpressions.Symbolic
         /// while only R includes the CaptureStart_1 effect.
         /// </summary>
         /// <param name="builder">the builder that owns this node</param>
-        /// <param name="context">immediately surrounding character context that affects nullability of anchors</param>
-        /// <param name="alternativesAndEffects">the list to insert the pairs of nodes and their effects into in priority order</param>
-        /// <param name="currentEffects">a helper list this function uses to accumulate effects in recursive calls</param>
+        /// <param name="context">immediately surrounding character context that affects nullability of
+        // anchors</param>
+        /// <param name="alternativesAndEffects">the list to insert the pairs of nodes and their effects
+        // into in priority order</param>
+        /// <param name="currentEffects">a helper list this function uses to accumulate effects in recursive
+        // calls</param>
         internal void StripAndMapEffects(
             SymbolicRegexBuilder<TSet> builder,
             uint context,
@@ -1866,7 +1954,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
             currentEffects ??= new List<DerivativeEffect>();
 
-            // If we've reached a node with no effects, then output that with the effects that have been accumulated
+            // If we've reached a node with no effects, then output that with the effects that have been
+            // accumulated
             if (!_info.ContainsEffect)
             {
                 alternativesAndEffects.Add(
@@ -2004,7 +2093,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Find all effects under this node and supply them to the callback.
         /// </summary>
         /// <remarks>
-        /// The construction follows the paths that the backtracking matcher would take. For example in ()|() only the
+        /// The construction follows the paths that the backtracking matcher would take. For example in
+        // ()|() only the
         /// effects for the first alternative will be included.
         /// </remarks>
         /// <param name="apply">action called for each effect</param>
@@ -2301,7 +2391,8 @@ namespace System.Text.RegularExpressions.Symbolic
 #endif
 
         /// <summary>
-        /// Returns all sets that occur in the regex or the full set if there are no sets in the regex (e.g. the regex is "^").
+        /// Returns all sets that occur in the regex or the full set if there are no sets in the regex (e.g.
+        // the regex is "^").
         /// </summary>
         public HashSet<TSet> GetSets(SymbolicRegexBuilder<TSet> builder)
         {
@@ -2558,12 +2649,16 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Replace anchors that are infeasible by [] wrt the given previous character kind and what continuation is possible.
+        /// Replace anchors that are infeasible by [] wrt the given previous character kind and what
+        // continuation is possible.
         /// </summary>
         /// <remarks>
-        /// This helps the matcher detect deadend states that have no viable matches in situations where the pattern's
-        /// language is empty due to interactions between anchors and the rest of the pattern. For example, a*\ba would
-        /// be simplified to [] when prevKind is a word letter. This allows the matcher to avoid spurious work and return
+        /// This helps the matcher detect deadend states that have no viable matches in situations where the
+        // pattern's
+        /// language is empty due to interactions between anchors and the rest of the pattern. For example,
+        // a*\ba would
+        /// be simplified to [] when prevKind is a word letter. This allows the matcher to avoid spurious
+        // work and return
         /// early.
         /// </remarks>
         /// <param name="builder">the builder that owns this node</param>
@@ -2715,8 +2810,10 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Resolve the preferred fixed length when accepting a match for this node. For example, a pattern .*?(dada$(4)|ada(3))
-        /// after "dada" would be in a state $(4)|(3)|... and this function would return 4 if the match is at the end of input
+        /// Resolve the preferred fixed length when accepting a match for this node. For example, a pattern
+        // .*?(dada$(4)|ada(3))
+        /// after "dada" would be in a state $(4)|(3)|... and this function would return 4 if the match is
+        // at the end of input
         /// 3 otherwise.
         /// </summary>
         /// <param name="context">the context for deciding nullability</param>
@@ -2759,11 +2856,14 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Break up a top level alternation into its elements. This is used when transitioning from DFA mode to NFA mode.
-        /// A <see cref="SymbolicRegexNodeKind.DisableBacktrackingSimulation"/> node on the top level will be unwrapped
+        /// Break up a top level alternation into its elements. This is used when transitioning from DFA
+        // mode to NFA mode.
+        /// A <see cref="SymbolicRegexNodeKind.DisableBacktrackingSimulation"/> node on the top level will
+        // be unwrapped
         /// and the resulting elements re-wrapped to maintain the metadata.
         /// </summary>
-        /// <returns>an enumeration of the elements of the alternation, or just the node itself if there is no alternation</returns>
+        /// <returns>an enumeration of the elements of the alternation, or just the node itself if there is
+        // no alternation</returns>
         internal IEnumerable<SymbolicRegexNode<TSet>> EnumerateAlternationBranches(
             SymbolicRegexBuilder<TSet> builder
         )

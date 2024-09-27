@@ -2638,7 +2638,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area>Use of Named parameters</Area>
     // <Title>Use of Named Parameters</Title>
-    // <Description>Parameters names are based off the most derived type - New disambiguation reasoning</Description>
+    // <Description>Parameters names are based off the most derived type - New disambiguation
+    // reasoning</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -2682,7 +2683,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area>Use of Named parameters</Area>
     // <Title>Use of Named Parameters</Title>
-    // <Description>Parameters names are based off the most derived type - New disambiguation reasoning</Description>
+    // <Description>Parameters names are based off the most derived type - New disambiguation
+    // reasoning</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -2728,7 +2730,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area>Use of Named parameters</Area>
     // <Title>Use of Named Parameters</Title>
-    // <Description>Parameters names are based off the most derived type - New disambiguation reasoning</Description>
+    // <Description>Parameters names are based off the most derived type - New disambiguation
+    // reasoning</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -2772,7 +2775,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area>Use of Named parameters</Area>
     // <Title>Use of Named Parameters</Title>
-    // <Description>Parameters names are based off the most derived type - New disambiguation reasoning</Description>
+    // <Description>Parameters names are based off the most derived type - New disambiguation
+    // reasoning</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -3962,7 +3966,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     //<Area>N&O</Area>
     //<Title></Title>
-    //<Description>The implement in class do not have default value while the declare in interface has default value</Description>
+    //<Description>The implement in class do not have default value while the declare in interface has
+    // default value</Description>
     //<Related Bugs></Related Bugs>
     //<Expects Status=success></Expects>
     //<Code>

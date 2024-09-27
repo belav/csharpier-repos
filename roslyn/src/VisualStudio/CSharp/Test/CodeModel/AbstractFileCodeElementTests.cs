@@ -16,7 +16,8 @@ using SyntaxNodeKey = Microsoft.VisualStudio.LanguageServices.Implementation.Cod
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
 {
     /// <summary>
-    /// Base class of a all test-containing classes. Automatically creates a FileCodeModel for testing with the given
+    /// Base class of a all test-containing classes. Automatically creates a FileCodeModel for testing
+    // with the given
     /// file.
     /// </summary>
     [UseExportProvider]

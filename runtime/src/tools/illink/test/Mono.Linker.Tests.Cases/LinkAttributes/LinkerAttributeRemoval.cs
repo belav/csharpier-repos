@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.ComponentModel;
@@ -41,10 +42,14 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes
         "LinkerAttributeRemovalEmbeddedAndLazyLoad.dll",
         new[] { "Dependencies/LinkerAttributeRemovalEmbeddedAndLazyLoad.cs" }
     )]
-    // The test here is that the TypeOnCopyAssemblyWithAttributeUsage has an attribute TestAttributeUsedFromCopyAssemblyAttribute
-    // which is marked for removal by the LinkerAttributeRemoval.xml. Normally that would mean that the attribute usage
-    // as well as the type (and assembly since it's the only type in it) would be removed as there are no other usages of the attribute type.
-    // But because the copyassembly is linked with "copy" action, the attribute usage should not be removed and thus the attribute
+    // The test here is that the TypeOnCopyAssemblyWithAttributeUsage has an attribute
+    // TestAttributeUsedFromCopyAssemblyAttribute
+    // which is marked for removal by the LinkerAttributeRemoval.xml. Normally that would mean that the
+    // attribute usage
+    // as well as the type (and assembly since it's the only type in it) would be removed as there are
+    // no other usages of the attribute type.
+    // But because the copyassembly is linked with "copy" action, the attribute usage should not be
+    // removed and thus the attribute
     // should be kept.
     [KeptAssembly("copyassembly.dll")]
     [KeptAssembly("attribute.dll")]
@@ -76,9 +81,11 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes
         "LinkerAttributeRemovalEmbeddedAndLazyLoad.dll",
         typeof(TypeWithEmbeddedAttributeToBeRemoved)
     )]
-    // This needs to fixed with lazy loading assembly refactoring - currently the assembly="*" only applies to assemblies in initial closure
+    // This needs to fixed with lazy loading assembly refactoring - currently the assembly="*" only
+    // applies to assemblies in initial closure
     // The attribute should be removed and not kept as it is now
-    // [RemovedAttributeInAssembly ("LinkerAttributeRemovalEmbeddedAndLazyLoad.dll", typeof (EmbeddedAttributeToBeRemoved), typeof (TypeWithEmbeddedAttributeToBeRemoved))]
+    // [RemovedAttributeInAssembly ("LinkerAttributeRemovalEmbeddedAndLazyLoad.dll", typeof
+    // (EmbeddedAttributeToBeRemoved), typeof (TypeWithEmbeddedAttributeToBeRemoved))]
     [KeptAttributeInAssembly(
         "LinkerAttributeRemovalEmbeddedAndLazyLoad",
         typeof(EmbeddedAttributeToBeRemoved),

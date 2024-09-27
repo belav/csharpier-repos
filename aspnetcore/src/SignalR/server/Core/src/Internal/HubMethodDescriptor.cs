@@ -77,7 +77,8 @@ internal sealed class HubMethodDescriptor
             }
         }
 
-        // Take out synthetic arguments that will be provided by the server, this list will be given to the protocol parsers
+        // Take out synthetic arguments that will be provided by the server, this list will be given to the
+        // protocol parsers
         ParameterTypes = methodExecutor
             .MethodParameters.Where(
                 (p, index) =>
@@ -161,7 +162,8 @@ internal sealed class HubMethodDescriptor
 
                         if (markedParameter)
                         {
-                            // If the parameter is marked because of being a service, we don't want to consider it for method parameters during deserialization
+                            // If the parameter is marked because of being a service, we don't want to consider it for method
+                            // parameters during deserialization
                             return false;
                         }
                     }
@@ -251,7 +253,8 @@ internal sealed class HubMethodDescriptor
         CancellationToken cancellationToken
     )
     {
-        // there is the potential for compile to be called times but this has no harmful effect other than perf
+        // there is the potential for compile to be called times but this has no harmful effect other than
+        // perf
         if (_makeCancelableEnumerator == null)
         {
             _makeCancelableEnumerator = CompileConvertToEnumerator(
@@ -269,9 +272,11 @@ internal sealed class HubMethodDescriptor
         IAsyncEnumerator<object>
     > CompileConvertToEnumerator(MethodInfo adapterMethodInfo, Type streamReturnType)
     {
-        // This will call one of two adapter methods to wrap the passed in streamable value into an IAsyncEnumerable<object>:
+        // This will call one of two adapter methods to wrap the passed in streamable value into an
+        // IAsyncEnumerable<object>:
         // - AsyncEnumerableAdapters.MakeCancelableAsyncEnumerator<T>(asyncEnumerable, cancellationToken);
-        // - AsyncEnumerableAdapters.MakeCancelableAsyncEnumeratorFromChannel<T>(channelReader, cancellationToken);
+        // - AsyncEnumerableAdapters.MakeCancelableAsyncEnumeratorFromChannel<T>(channelReader,
+        // cancellationToken);
 
         var parameters = new[]
         {

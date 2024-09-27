@@ -187,7 +187,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             // Creates a RecipientInfoCollection with three items.
             //
-            // Because RecipientInfoCollection can only be created by the framework, we have to do this the hard way...
+            // Because RecipientInfoCollection can only be created by the framework, we have to do this the hard
+            // way...
             //
             byte[] encodedMessage = (
                 "3082029f06092a864886f70d010703a08202903082028c020100318202583081c5020100302e301a31183016060355040313"

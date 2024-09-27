@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/System.Collections.Immutable/tests/ImmutableDictionaryTestBase.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -284,7 +286,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
 
         /// <summary>
-        /// Verifies that adding a key-value pair where the key already is in the map but with a different value throws.
+        /// Verifies that adding a key-value pair where the key already is in the map but with a different
+        // value throws.
         /// </summary>
         /// <typeparam name="TKey">The type of key in the map.</typeparam>
         /// <typeparam name="TValue">The type of value in the map.</typeparam>
@@ -293,8 +296,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// <param name="value1">The first value to add.</param>
         /// <param name="value2">The second value to add.</param>
         /// <remarks>
-        /// Adding a key-value pair to a map where that key already exists, but with a different value, cannot fit the
-        /// semantic of "adding", either by just returning or mutating the value on the existing key.  Throwing is the only reasonable response.
+        /// Adding a key-value pair to a map where that key already exists, but with a different value,
+        // cannot fit the
+        /// semantic of "adding", either by just returning or mutating the value on the existing key.
+        // Throwing is the only reasonable response.
         /// </remarks>
         protected void AddExistingKeyDifferentValueTestHelper<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> map,

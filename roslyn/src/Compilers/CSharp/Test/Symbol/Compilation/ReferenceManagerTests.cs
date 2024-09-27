@@ -105,8 +105,10 @@ public class C
 
             testRefV1.VerifyDiagnostics(
                 // warning CS1701:
-                // Assuming assembly reference 'C, Version=1.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9'
-                // used by 'refV1' matches identity 'C, Version=2.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9' of 'C', you may need to supply runtime policy
+                // Assuming assembly reference 'C, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=374d0c2befcd8cc9'
+                // used by 'refV1' matches identity 'C, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=374d0c2befcd8cc9' of 'C', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "C, Version=1.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9",
@@ -120,8 +122,10 @@ public class C
             // TODO (tomat): we should display paths rather than names "refV2" and "C"
 
             testRefV2.VerifyDiagnostics(
-                // error CS1705: Assembly 'refV2' with identity 'refV2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
-                // uses 'C, Version=2.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9' which has a higher version than referenced assembly
+                // error CS1705: Assembly 'refV2' with identity 'refV2, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'
+                // uses 'C, Version=2.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9' which has a higher
+                // version than referenced assembly
                 // 'C' with identity 'C, Version=1.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9'
                 Diagnostic(ErrorCode.ERR_AssemblyMatchBadVersion)
                     .WithArguments(
@@ -231,7 +235,9 @@ public class M
             // TODO (tomat): we should display paths rather than names "RefLibV2" and "Lib"
 
             main13.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV2' matches identity 'Lib, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV2' matches identity 'Lib, Version=3.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -255,7 +261,9 @@ public class M
             // TODO (tomat): we should display paths rather than names "RefLibV2" and "Lib"
 
             main31.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV2' matches identity 'Lib, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV2' matches identity 'Lib, Version=3.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -410,7 +418,9 @@ public class OKImpl : I
             // TODO (tomat): we should display paths rather than names "RefLibV1" and "Lib"
 
             main.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -419,7 +429,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -428,7 +440,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -437,7 +451,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -446,7 +462,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -455,7 +473,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -464,7 +484,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -473,7 +495,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -482,7 +506,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -491,7 +517,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -500,7 +528,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -509,7 +539,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -518,7 +550,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -527,7 +561,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -536,7 +572,9 @@ public class OKImpl : I
                         "Lib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'X' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'X' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -565,7 +603,8 @@ public class OKImpl : I
                         reader.DumpAssemblyReferences()
                     );
                 },
-                // PE verification fails on some platforms. Would need .config file with Lib v1 -> Lib v2 binding redirect
+                // PE verification fails on some platforms. Would need .config file with Lib v1 -> Lib v2 binding
+                // redirect
                 verify: Verification.Skipped
             );
         }
@@ -658,8 +697,10 @@ public class M
             // TODO (tomat): this should include 2 warnings:
 
             main.VerifyDiagnostics(
-                // error CS1705: Assembly 'RefA1B2' with identity 'RefA1B2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' uses
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version than referenced assembly 'B'
+                // error CS1705: Assembly 'RefA1B2' with identity 'RefA1B2, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' uses
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version
+                // than referenced assembly 'B'
                 // with identity 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'
                 Diagnostic(ErrorCode.ERR_AssemblyMatchBadVersion)
                     .WithArguments(
@@ -670,8 +711,10 @@ public class M
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2"
                     )
                     .WithLocation(1, 1),
-                // error CS1705: Assembly 'RefA1B2' with identity 'RefA1B2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' uses
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version than referenced assembly 'B'
+                // error CS1705: Assembly 'RefA1B2' with identity 'RefA1B2, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' uses
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version
+                // than referenced assembly 'B'
                 // with identity 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'
                 Diagnostic(ErrorCode.ERR_AssemblyMatchBadVersion)
                     .WithArguments(
@@ -846,8 +889,10 @@ public class M
             // TODO (tomat): we should display paths rather than names "RefLibV1" and "Lib"
 
             main.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'
-                // used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2'
+                // used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -929,7 +974,9 @@ public class Test
             // TODO (tomat): we should display paths rather than names "RefLibV1" and "Lib"
 
             main.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -937,7 +984,9 @@ public class Test
                         "Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
                         "Lib"
                     ),
-                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'Lib, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'RefLibV1' matches identity 'Lib, Version=2.0.0.0,
+                // Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'Lib', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "Lib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -945,7 +994,8 @@ public class Test
                         "Lib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
                         "Lib"
                     ),
-                // (7,9): error CS1748: Cannot find the interop type that matches the embedded interop type 'IB'. Are you missing an assembly reference?
+                // (7,9): error CS1748: Cannot find the interop type that matches the embedded interop type 'IB'.
+                // Are you missing an assembly reference?
                 //         b.M(null);
                 Diagnostic(ErrorCode.ERR_NoCanonicalView, "b.M").WithArguments("IB")
             );
@@ -1037,7 +1087,8 @@ class D : C { }
             AssertEx.SetEqual(new[] { "goo", "bar" }, c.ExternAliases);
 
             c.VerifyDiagnostics(
-                // (2,11): error CS0246: The type or namespace name 'C' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,11): error CS0246: The type or namespace name 'C' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C").WithArguments("C")
             );
 
@@ -1052,15 +1103,21 @@ class D : C { }
             Assert.NotNull(c.GetReferencedAssemblySymbol(rEmbed));
 
             c.VerifyDiagnostics(
-                // error CS1760: Assemblies 'R1' and 'R2' refer to the same metadata but only one is a linked reference (specified using /link option); consider removing one of the references.
+                // error CS1760: Assemblies 'R1' and 'R2' refer to the same metadata but only one is a linked
+                // reference (specified using /link option); consider removing one of the references.
                 Diagnostic(ErrorCode.ERR_AssemblySpecifiedForLinkAndRef).WithArguments("R1", "R2"),
-                // error CS1747: Cannot embed interop types from assembly 'C, Version=1.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9' because it is missing the 'System.Runtime.InteropServices.GuidAttribute' attribute.
+                // error CS1747: Cannot embed interop types from assembly 'C, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=374d0c2befcd8cc9' because it is missing the
+                // 'System.Runtime.InteropServices.GuidAttribute' attribute.
                 Diagnostic(ErrorCode.ERR_NoPIAAssemblyMissingAttribute)
                     .WithArguments(
                         "C, Version=1.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9",
                         "System.Runtime.InteropServices.GuidAttribute"
                     ),
-                // error CS1759: Cannot embed interop types from assembly 'C, Version=1.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9' because it is missing either the 'System.Runtime.InteropServices.ImportedFromTypeLibAttribute' attribute or the 'System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute' attribute.
+                // error CS1759: Cannot embed interop types from assembly 'C, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=374d0c2befcd8cc9' because it is missing either the
+                // 'System.Runtime.InteropServices.ImportedFromTypeLibAttribute' attribute or the
+                // 'System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute' attribute.
                 Diagnostic(ErrorCode.ERR_NoPIAAssemblyMissingAttributes)
                     .WithArguments(
                         "C, Version=1.0.0.0, Culture=neutral, PublicKeyToken=374d0c2befcd8cc9",
@@ -1147,7 +1204,8 @@ public class E : bar::C { }
                 )
             );
 
-            // no diagnostics expected, all duplicate references should be ignored as they all refer to the same file:
+            // no diagnostics expected, all duplicate references should be ignored as they all refer to the same
+            // file:
             compilation.VerifyDiagnostics();
 
             var refs = compilation.ExternalReferences;
@@ -1217,18 +1275,23 @@ public class E : bar::C { }
             );
 
             // We don't deduplicate references based on file path on the compilation level.
-            // The host (command line compiler and msbuild workspace) is responsible for such de-duplication, if needed.
+            // The host (command line compiler and msbuild workspace) is responsible for such de-duplication, if
+            // needed.
 
             compilation.VerifyDiagnostics(
-                // error CS8015: Module 'netModule1.netmodule' is already defined in this assembly. Each module must have a unique filename.
+                // error CS8015: Module 'netModule1.netmodule' is already defined in this assembly. Each module must
+                // have a unique filename.
                 Diagnostic(ErrorCode.ERR_NetModuleNameMustBeUnique)
                     .WithArguments("netModule1.netmodule"),
-                // netModule1.netmodule: error CS0101: The namespace '<global namespace>' already contains a definition for 'Class1'
+                // netModule1.netmodule: error CS0101: The namespace '<global namespace>' already contains a
+                // definition for 'Class1'
                 Diagnostic(ErrorCode.ERR_DuplicateNameInNS)
                     .WithArguments("Class1", "<global namespace>"),
-                // netModule1.netmodule: error CS0101: The namespace 'NS1' already contains a definition for 'Class4'
+                // netModule1.netmodule: error CS0101: The namespace 'NS1' already contains a definition for
+                // 'Class4'
                 Diagnostic(ErrorCode.ERR_DuplicateNameInNS).WithArguments("Class4", "NS1"),
-                // netModule1.netmodule: error CS0101: The namespace 'NS1' already contains a definition for 'Class8'
+                // netModule1.netmodule: error CS0101: The namespace 'NS1' already contains a definition for
+                // 'Class8'
                 Diagnostic(ErrorCode.ERR_DuplicateNameInNS).WithArguments("Class8", "NS1")
             );
 
@@ -1240,7 +1303,8 @@ public class E : bar::C { }
         }
 
         /// <summary>
-        /// Two metadata files with the same strong identity referenced twice, with embedInteropTypes=true and embedInteropTypes=false.
+        /// Two metadata files with the same strong identity referenced twice, with embedInteropTypes=true
+        // and embedInteropTypes=false.
         /// </summary>
         [Fact]
         public void DuplicateAssemblyReferences_EquivalentStrongNames_Metadata()
@@ -1257,14 +1321,17 @@ public class E : bar::C { }
                 TargetFrameworkUtil.StandardReferences.AddRange(new[] { ref1, ref2 })
             );
             c.VerifyDiagnostics(
-                // error CS1760: Assemblies 'R:\B\MTTestLib1.dll' and 'R:\A\MTTestLib1.dll' refer to the same metadata but only one is a linked reference (specified using /link option); consider removing one of the references.
+                // error CS1760: Assemblies 'R:\B\MTTestLib1.dll' and 'R:\A\MTTestLib1.dll' refer to the same
+                // metadata but only one is a linked reference (specified using /link option); consider removing one of
+                // the references.
                 Diagnostic(ErrorCode.ERR_AssemblySpecifiedForLinkAndRef)
                     .WithArguments(@"R:\B\MTTestLib1.dll", @"R:\A\MTTestLib1.dll")
             );
         }
 
         /// <summary>
-        /// Two compilations with the same strong identity referenced twice, with embedInteropTypes=true and embedInteropTypes=false.
+        /// Two compilations with the same strong identity referenced twice, with embedInteropTypes=true and
+        // embedInteropTypes=false.
         /// </summary>
         [Fact]
         public void DuplicateAssemblyReferences_EquivalentStrongNames_Compilations()
@@ -1285,7 +1352,8 @@ public interface I {}";
                 TargetFrameworkUtil.StandardReferences.AddRange(new[] { ref1, ref2 })
             );
             c.VerifyDiagnostics(
-                // error CS1760: Assemblies 'Lib' and 'Lib' refer to the same metadata but only one is a linked reference (specified using /link option); consider removing one of the references.
+                // error CS1760: Assemblies 'Lib' and 'Lib' refer to the same metadata but only one is a linked
+                // reference (specified using /link option); consider removing one of the references.
                 Diagnostic(ErrorCode.ERR_AssemblySpecifiedForLinkAndRef)
                     .WithArguments("Lib", "Lib")
             );
@@ -1337,7 +1405,8 @@ public interface I {}";
             );
 
             comp.VerifyDiagnostics(
-                // error CS1703: Multiple assemblies with equivalent identity have been imported: '...\v4.0.30319\System.dll' and '...\v2.0.50727\System.dll'. Remove one of the duplicate references.
+                // error CS1703: Multiple assemblies with equivalent identity have been imported:
+                // '...\v4.0.30319\System.dll' and '...\v2.0.50727\System.dll'. Remove one of the duplicate references.
                 Diagnostic(ErrorCode.ERR_DuplicateImport).WithArguments(p1, p2)
             );
         }
@@ -1445,9 +1514,11 @@ public class Q
             );
 
             main.VerifyDiagnostics(
-                // error CS1704: An assembly with the same simple name 'Lib' has already been imported. Try removing one of the references (e.g. 'Lib') or sign them to enable side-by-side.
+                // error CS1704: An assembly with the same simple name 'Lib' has already been imported. Try removing
+                // one of the references (e.g. 'Lib') or sign them to enable side-by-side.
                 Diagnostic(ErrorCode.ERR_DuplicateImportSimple).WithArguments("Lib", "Lib"),
-                // (5,12): error CS0246: The type or namespace name 'C1' could not be found (are you missing a using directive or an assembly reference?)
+                // (5,12): error CS0246: The type or namespace name 'C1' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C1").WithArguments("C1")
             );
         }
@@ -1489,7 +1560,8 @@ public class Q
                 // We consider the second reference a duplicate and ignore it.
 
                 main.VerifyDiagnostics(
-                    // (4,12): error CS0246: The type or namespace name 'C1' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,12): error CS0246: The type or namespace name 'C1' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C1").WithArguments("C1")
                 );
             }
@@ -1563,10 +1635,12 @@ public class Q
                 );
 
                 main.VerifyDiagnostics(
-                    // error CS1704: An assembly with the same simple name 'WB' has already been imported. Try removing one of the references (e.g. 'C:\WB.dll') or sign them to enable side-by-side.
+                    // error CS1704: An assembly with the same simple name 'WB' has already been imported. Try removing
+                    // one of the references (e.g. 'C:\WB.dll') or sign them to enable side-by-side.
                     Diagnostic(ErrorCode.ERR_DuplicateImportSimple)
                         .WithArguments("WB", @"C:\WB.dll"),
-                    // (4,12): error CS0246: The type or namespace name 'CB' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,12): error CS0246: The type or namespace name 'CB' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "CB").WithArguments("CB")
                 );
             }
@@ -1826,7 +1900,8 @@ public class A
 
             GC.KeepAlive(symbolA2);
 
-            // Recompile "B" and remove int Goo. The assembly manager should not reuse symbols for A since they are referring to old version of B.
+            // Recompile "B" and remove int Goo. The assembly manager should not reuse symbols for A since they
+            // are referring to old version of B.
             var b2 = CreateCompilation(
                 @"
 public class B : A 
@@ -1845,7 +1920,8 @@ public class B : A
             // b2.cs(5,28): error CS0570: 'A.x' is not supported by the language
 
             b2.VerifyDiagnostics(
-                // (6,28): error CS7068: Reference to type 'Goo' claims it is defined in this assembly, but it is not defined in source or any added modules
+                // (6,28): error CS7068: Reference to type 'Goo' claims it is defined in this assembly, but it is
+                // not defined in source or any added modules
                 //         object objX = this.x;
                 Diagnostic(ErrorCode.ERR_MissingTypeInSource, "x").WithArguments("Goo")
             );
@@ -2294,7 +2370,8 @@ namespace A
 }
 ";
 
-            // Note: we just need *a* module reference for the repro - we're not depending on its contents, name, etc.
+            // Note: we just need *a* module reference for the repro - we're not depending on its contents,
+            // name, etc.
             var moduleRef = CreateCompilation(
                     "public class C { }",
                     options: TestOptions.ReleaseModule,
@@ -2442,7 +2519,9 @@ internal class C
                 options: TestOptions.ReleaseDll
             );
             main.VerifyDiagnostics(
-                // (1,18): error CS0012: The type 'System.Object' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+                // (1,18): error CS0012: The type 'System.Object' is defined in an assembly that is not referenced.
+                // You must add a reference to assembly 'System.Runtime, Version=4.0.0.0, Culture=neutral,
+                // PublicKeyToken=b03f5f7f11d50a3a'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments(
                         "System.Object",
@@ -2517,7 +2596,9 @@ public class Source
                 }
             );
             comp.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -2588,7 +2669,9 @@ public class Source
                 }
             );
             comp.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -2659,7 +2742,9 @@ public class Source
                 }
             );
             comp.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -2771,7 +2856,9 @@ public class Source
                 }
             );
             comp.VerifyEmitDiagnostics(
-                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -2780,7 +2867,9 @@ public class Source
                         "B"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -2789,7 +2878,9 @@ public class Source
                         "B"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'B, Version=1.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -2810,7 +2901,8 @@ public class Source
                 new[] { new TestImageReference(TestResources.Basic.NativeApp, "NativeApp.exe") }
             );
             c.VerifyDiagnostics(
-                // error CS0009: Metadata file 'NativeApp.exe' could not be opened -- PE image doesn't contain managed metadata.
+                // error CS0009: Metadata file 'NativeApp.exe' could not be opened -- PE image doesn't contain
+                // managed metadata.
                 Diagnostic(ErrorCode.FTL_MetadataCantOpenFile)
                     .WithArguments(
                         @"NativeApp.exe",
@@ -3128,7 +3220,8 @@ public class Source
             );
 
             c.VerifyDiagnostics(
-                // (1,5): error CS0246: The type or namespace name 'C' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,5): error CS0246: The type or namespace name 'C' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C").WithArguments("C")
             );
 
@@ -3236,7 +3329,8 @@ new B()
             );
 
             c.VerifyDiagnostics(
-                // (3,5): error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,5): error CS0246: The type or namespace name 'B' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 // new B()
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "B").WithArguments("B")
             );
@@ -3597,8 +3691,10 @@ public class C : A
 
             c.VerifyEmitDiagnostics(
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -3835,7 +3931,8 @@ public class C : A
             );
 
             c.VerifyDiagnostics(
-                // (1,18): error CS0012: The type 'D' is defined in an assembly that is not referenced. You must add a reference to assembly 'D, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (1,18): error CS0012: The type 'D' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'D, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments("D", "D, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
             );
@@ -3879,7 +3976,8 @@ public class C : A
             );
 
             c.VerifyDiagnostics(
-                // (1,18): error CS0012: The type 'D' is defined in an assembly that is not referenced. You must add a reference to assembly 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (1,18): error CS0012: The type 'D' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments("D", "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
             );
@@ -3983,7 +4081,8 @@ public class C : A
             Assert.Equal("B", ((AssemblySymbol)c.GetAssemblyOrModuleSymbol(bRef)).Name);
             Assert.Equal("D", ((AssemblySymbol)c.GetAssemblyOrModuleSymbol(dRef)).Name);
 
-            // We don't resolve one assembly reference identity twice, even if the requesting definition is different.
+            // We don't resolve one assembly reference identity twice, even if the requesting definition is
+            // different.
             resolver.VerifyResolutionAttempts(
                 "A -> D, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "M.netmodule -> B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -4042,8 +4141,10 @@ public class C : A
 
             c.VerifyEmitDiagnostics(
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4138,7 +4239,8 @@ public class C : A
             c.VerifyEmitDiagnostics(
                 // error CS1705: Assembly
                 // 'A' with identity 'A, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' uses
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version than referenced assembly
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version
+                // than referenced assembly
                 // 'B' with identity 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'
                 Diagnostic(ErrorCode.ERR_AssemblyMatchBadVersion)
                     .WithArguments(
@@ -4151,7 +4253,8 @@ public class C : A
                     .WithLocation(1, 1),
                 // error CS1705: Assembly
                 // 'D' with identity 'D, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' uses
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version than referenced assembly
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' which has a higher version
+                // than referenced assembly
                 // 'B' with identity 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'
                 Diagnostic(ErrorCode.ERR_AssemblyMatchBadVersion)
                     .WithArguments(
@@ -4252,7 +4355,8 @@ public class C : A
             c.VerifyEmitDiagnostics(
                 // warning CS1701: Assuming assembly reference
                 // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by
-                // 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'A' matches identity 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of
+                // 'B', you may need to supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4262,8 +4366,10 @@ public class C : A
                     )
                     .WithLocation(1, 1),
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'E' matches identity
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'E' matches
+                // identity
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4453,8 +4559,10 @@ public class C : A
 
             c.VerifyEmitDiagnostics(
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4464,8 +4572,10 @@ public class C : A
                     )
                     .WithLocation(1, 1),
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'D' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'D' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4475,8 +4585,10 @@ public class C : A
                     )
                     .WithLocation(1, 1),
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'E' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'E' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4585,8 +4697,10 @@ public class C : A
 
             c.VerifyEmitDiagnostics(
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'A' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4596,8 +4710,10 @@ public class C : A
                     )
                     .WithLocation(1, 1),
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'D' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'D' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",
@@ -4607,8 +4723,10 @@ public class C : A
                     )
                     .WithLocation(1, 1),
                 // warning CS1701: Assuming assembly reference
-                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'E' matches identity
-                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to supply runtime policy
+                // 'B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' used by 'E' matches
+                // identity
+                // 'B, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2' of 'B', you may need to
+                // supply runtime policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "B, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2",

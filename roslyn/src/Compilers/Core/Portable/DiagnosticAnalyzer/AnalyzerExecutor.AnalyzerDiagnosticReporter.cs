@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// An optional filter span, which if non-null, indicates that diagnostics reported within this span
             /// are considered local diagnostics, and those reported outside this span are considered non-local.
             ///
-            /// NOTE: <see cref="AnalyzerDiagnosticReporter"/> is a pooled type that is always used from a single
+            /// NOTE: <see cref="AnalyzerDiagnosticReporter"/> is a pooled type that is always used from a
+            // single
             /// thread, hence it is safe to expose a public mutable field.
             /// </summary>
             public TextSpan? FilterSpanForLocalDiagnostics;

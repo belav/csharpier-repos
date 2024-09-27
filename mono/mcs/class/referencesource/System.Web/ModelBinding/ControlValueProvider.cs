@@ -33,10 +33,12 @@ namespace System.Web.ModelBinding
 
             Control dataControl = ModelBindingExecutionContext.GetService<Control>();
 
-            //Following code taken from ControlParameter - code duplicated because ControlPrameter throws exceptions whereas we do not.
+            //Following code taken from ControlParameter - code duplicated because ControlPrameter throws
+            // exceptions whereas we do not.
             string propertyName = PropertyName;
 
-            //Bug Fix # 280051 : First try to find it on dataControl as DataBoundControlHelper.FindControl only walks up starting from dataControl's NamingContainer.
+            //Bug Fix # 280051 : First try to find it on dataControl as DataBoundControlHelper.FindControl only
+            // walks up starting from dataControl's NamingContainer.
             Control foundControl =
                 dataControl.FindControl(controlId)
                 ?? DataBoundControlHelper.FindControl(dataControl, controlId);
@@ -49,7 +51,8 @@ namespace System.Web.ModelBinding
             ControlValuePropertyAttribute controlValueProp = (ControlValuePropertyAttribute)
                 TypeDescriptor.GetAttributes(foundControl)[typeof(ControlValuePropertyAttribute)];
 
-            // If no property name is specified, use the ControlValuePropertyAttribute to determine which property to use.
+            // If no property name is specified, use the ControlValuePropertyAttribute to determine which
+            // property to use.
             if (String.IsNullOrEmpty(propertyName))
             {
                 if ((controlValueProp != null) && (!String.IsNullOrEmpty(controlValueProp.Name)))
@@ -65,7 +68,8 @@ namespace System.Web.ModelBinding
             // Get the value of the property
             object value = DataBinder.Eval(foundControl, propertyName);
 
-            // Convert the value to null if this is the default property and the value is the property's default value
+            // Convert the value to null if this is the default property and the value is the property's default
+            // value
             if (
                 controlValueProp != null
                 && controlValueProp.DefaultValue != null

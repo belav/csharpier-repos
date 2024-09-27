@@ -10,7 +10,8 @@ using Internal.TypeSystem;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// Represents a hashtable with information about all statics regions for all compiled generic types.
+    /// Represents a hashtable with information about all statics regions for all compiled generic
+    // types.
     /// </summary>
     internal sealed class StaticsInfoHashtableNode
         : ObjectNode,
@@ -49,8 +50,10 @@ namespace ILCompiler.DependencyAnalysis
             this.GetMangledName(factory.NameMangler);
 
         /// <summary>
-        /// Helper method to compute the dependencies that would be needed by a hashtable entry for statics info lookup.
-        /// This helper is used by EETypeNode, which is used by the dependency analysis to compute the statics hashtable
+        /// Helper method to compute the dependencies that would be needed by a hashtable entry for statics
+        // info lookup.
+        /// This helper is used by EETypeNode, which is used by the dependency analysis to compute the
+        // statics hashtable
         /// entries for the compiled types.
         /// </summary>
         public static void AddStaticsInfoDependencies(
@@ -82,7 +85,8 @@ namespace ILCompiler.DependencyAnalysis
                 )
             )
             {
-                // The entry in the StaticsInfoHashtable points at the beginning of the static fields data, rather than the cctor
+                // The entry in the StaticsInfoHashtable points at the beginning of the static fields data, rather
+                // than the cctor
                 // context offset.
                 dependencies.Add(
                     factory.TypeNonGCStaticsSymbol(metadataType),

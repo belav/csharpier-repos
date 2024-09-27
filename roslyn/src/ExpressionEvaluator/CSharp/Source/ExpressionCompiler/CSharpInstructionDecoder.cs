@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private const string AnonymousMethodName = "AnonymousMethod";
 
         /// <summary>
-        /// Singleton instance of <see cref="CSharpInstructionDecoder"/> (created using default constructor).
+        /// Singleton instance of <see cref="CSharpInstructionDecoder"/> (created using default
+        // constructor).
         /// </summary>
         internal static readonly CSharpInstructionDecoder Instance = new CSharpInstructionDecoder();
 

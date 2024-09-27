@@ -36,10 +36,12 @@ public sealed class GridSort<TGridItem>
     }
 
     /// <summary>
-    /// Produces a <see cref="GridSort{T}"/> instance that sorts according to the specified <paramref name="expression"/>, ascending.
+    /// Produces a <see cref="GridSort{T}"/> instance that sorts according to the specified <paramref
+    // name="expression"/>, ascending.
     /// </summary>
     /// <typeparam name="U">The type of the expression's value.</typeparam>
-    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/> instances are to be sorted.</param>
+    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/>
+    // instances are to be sorted.</param>
     /// <returns>A <see cref="GridSort{T}"/> instance representing the specified sorting rule.</returns>
     public static GridSort<TGridItem> ByAscending<U>(Expression<Func<TGridItem, U>> expression) =>
         new(
@@ -49,10 +51,12 @@ public sealed class GridSort<TGridItem>
         );
 
     /// <summary>
-    /// Produces a <see cref="GridSort{T}"/> instance that sorts according to the specified <paramref name="expression"/>, descending.
+    /// Produces a <see cref="GridSort{T}"/> instance that sorts according to the specified <paramref
+    // name="expression"/>, descending.
     /// </summary>
     /// <typeparam name="U">The type of the expression's value.</typeparam>
-    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/> instances are to be sorted.</param>
+    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/>
+    // instances are to be sorted.</param>
     /// <returns>A <see cref="GridSort{T}"/> instance representing the specified sorting rule.</returns>
     public static GridSort<TGridItem> ByDescending<U>(Expression<Func<TGridItem, U>> expression) =>
         new(
@@ -65,7 +69,8 @@ public sealed class GridSort<TGridItem>
     /// Updates a <see cref="GridSort{T}"/> instance by appending a further sorting rule.
     /// </summary>
     /// <typeparam name="U">The type of the expression's value.</typeparam>
-    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/> instances are to be sorted.</param>
+    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/>
+    // instances are to be sorted.</param>
     /// <returns>A <see cref="GridSort{T}"/> instance representing the specified sorting rule.</returns>
     public GridSort<TGridItem> ThenAscending<U>(Expression<Func<TGridItem, U>> expression)
     {
@@ -85,7 +90,8 @@ public sealed class GridSort<TGridItem>
     /// Updates a <see cref="GridSort{T}"/> instance by appending a further sorting rule.
     /// </summary>
     /// <typeparam name="U">The type of the expression's value.</typeparam>
-    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/> instances are to be sorted.</param>
+    /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/>
+    // instances are to be sorted.</param>
     /// <returns>A <see cref="GridSort{T}"/> instance representing the specified sorting rule.</returns>
     public GridSort<TGridItem> ThenDescending<U>(Expression<Func<TGridItem, U>> expression)
     {
@@ -164,7 +170,8 @@ public sealed class GridSort<TGridItem>
         return result;
     }
 
-    // Not sure we really want this level of complexity, but it converts expressions like @(c => c.Medals.Gold) to "Medals.Gold"
+    // Not sure we really want this level of complexity, but it converts expressions like @(c =>
+    // c.Medals.Gold) to "Medals.Gold"
     private static string ToPropertyName(LambdaExpression expression)
     {
         if (expression.Body is not MemberExpression body)

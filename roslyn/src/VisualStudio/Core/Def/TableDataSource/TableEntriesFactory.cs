@@ -209,7 +209,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     );
                 }
 
-                // we can be called back from error list while all sources are removed but before error list know about it yet
+                // we can be called back from error list while all sources are removed but before error list know
+                // about it yet
                 // since notification is pending in the queue.
                 var source = _sources.GetSources().FirstOrDefault();
                 if (source == null)

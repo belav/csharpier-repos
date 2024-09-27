@@ -182,10 +182,14 @@ namespace System.Web.UI
             bool pageAlwaysActive
         )
         {
-            // Determines if a registered resource, like a client script block, should be included in the partial
-            // update response. It should be included if the owning control is a child of an updating update panel
-            // or if the owning control is the Page and this is a type of resource where Page is allowed as an owner.
-            // When page is the owner, it means always include the resource regardless of which update panels are
+            // Determines if a registered resource, like a client script block, should be included in the
+            // partial
+            // update response. It should be included if the owning control is a child of an updating update
+            // panel
+            // or if the owning control is the Page and this is a type of resource where Page is allowed as an
+            // owner.
+            // When page is the owner, it means always include the resource regardless of which update panels
+            // are
             // updating. Expandos and dispose scripts do not support Page as the owner.
 
             // is this a resource that allows Page as the owner, and is the owner the Page?
@@ -462,7 +466,8 @@ namespace System.Web.UI
                     // as Render(), at which point it would be too late to build up a list
                     // for processing later.
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
-                    // 256 seems like a nice number so that we don't have to resize the StringBuilder except in very rare cases
+                    // 256 seems like a nice number so that we don't have to resize the StringBuilder except in very
+                    // rare cases
                     StringBuilder sb = new StringBuilder(256);
                     sb.Append(
                         "Sys.WebForms.PageRequestManager.getInstance()._registerDisposeScript("
@@ -845,7 +850,8 @@ namespace System.Web.UI
                     )
                 )
                 {
-                    // Only encode the fallback path and not the expression. On the client, we would use the success flag on load / readystatechanged to
+                    // Only encode the fallback path and not the expression. On the client, we would use the success
+                    // flag on load / readystatechanged to
                     // determine if the script was successfully fetched.
                     PageRequestManager.EncodeString(
                         writer,

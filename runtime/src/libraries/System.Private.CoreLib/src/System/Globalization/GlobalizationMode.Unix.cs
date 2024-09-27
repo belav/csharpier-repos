@@ -35,7 +35,8 @@ namespace System.Globalization
 
             private static string GetIcuLoadFailureMessage()
             {
-                // These strings can't go into resources, because a resource lookup requires globalization, which requires ICU
+                // These strings can't go into resources, because a resource lookup requires globalization, which
+                // requires ICU
                 if (
                     OperatingSystem.IsBrowser()
                     || OperatingSystem.IsAndroid()
@@ -73,7 +74,8 @@ namespace System.Globalization
             ReadOnlySpan<char> suffixAndSeparator = string.Concat(suffix, ".");
 
 #if !TARGET_OSX
-            // In Linux we need to load libicudata first because libicuuc and libicui18n depend on it. In order for the loader to find
+            // In Linux we need to load libicudata first because libicuuc and libicui18n depend on it. In order
+            // for the loader to find
             // it on the same path, we load it before loading the other two libraries.
             LoadLibrary(
                 CreateLibraryName(

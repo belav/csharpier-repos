@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions
 {
-    /// <summary>Contains the code, written by <see cref="RegexWriter"/>, for <see cref="RegexInterpreter"/> to evaluate a regular expression.</summary>
+    /// <summary>Contains the code, written by <see cref="RegexWriter"/>, for <see
+    // cref="RegexInterpreter"/> to evaluate a regular expression.</summary>
     internal sealed class RegexInterpreterCode
     {
         /// <summary>Find logic to use to find the next possible location for a match.</summary>
@@ -18,7 +19,8 @@ namespace System.Text.RegularExpressions
         /// <summary>RegexOpcodes and arguments written by <see cref="RegexWriter"/>.</summary>
         public readonly int[] Codes;
 
-        /// <summary>The string / set table. <see cref="Codes"/> includes offsets into this table, for string and set arguments.</summary>
+        /// <summary>The string / set table. <see cref="Codes"/> includes offsets into this table, for
+        // string and set arguments.</summary>
         public readonly string[] Strings;
 
         /// <summary>ASCII lookup table optimization for sets in <see cref="Strings"/>.</summary>
@@ -78,8 +80,10 @@ namespace System.Text.RegularExpressions
         }
 
 #if DEBUG
-        /// <summary>Gets the number of integers required to store an operation represented by the specified opcode (including the opcode).</summary>
-        /// <returns>Values range from 1 (just the opcode) to 3 (the opcode plus up to two operands).</returns>
+        /// <summary>Gets the number of integers required to store an operation represented by the specified
+        // opcode (including the opcode).</summary>
+        /// <returns>Values range from 1 (just the opcode) to 3 (the opcode plus up to two
+        // operands).</returns>
         [ExcludeFromCodeCoverage(Justification = "Used only for debugging assistance")]
         public static int OpcodeSize(RegexOpcode opcode)
         {

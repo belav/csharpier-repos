@@ -45,7 +45,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Indicates whether access to the StringDictionary is synchronized (thread-safe). This property is
+        /// <para>Indicates whether access to the StringDictionary is synchronized (thread-safe). This
+        // property is
         ///    read-only.</para>
         /// </devdoc>
         public virtual bool IsSynchronized
@@ -133,7 +134,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Copies the string dictionary values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the string dictionary values to a one-dimensional <see cref='System.Array'/>
+        // instance at the
         ///    specified index.</para>
         /// </devdoc>
         public virtual void CopyTo(Array array, int index)

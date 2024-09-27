@@ -28,7 +28,8 @@ namespace System.Threading.Channels
         private readonly SingleProducerSingleConsumerQueue<T> _items =
             new SingleProducerSingleConsumerQueue<T>();
 
-        /// <summary>Whether to force continuations to be executed asynchronously from producer writes.</summary>
+        /// <summary>Whether to force continuations to be executed asynchronously from producer
+        // writes.</summary>
         private readonly bool _runContinuationsAsynchronously;
 
         /// <summary>non-null if the channel has been marked as complete for writing.</summary>
@@ -41,7 +42,8 @@ namespace System.Threading.Channels
         private AsyncOperation<bool>? _waitingReader;
 
         /// <summary>Initialize the channel.</summary>
-        /// <param name="runContinuationsAsynchronously">Whether to force continuations to be executed asynchronously.</param>
+        /// <param name="runContinuationsAsynchronously">Whether to force continuations to be executed
+        // asynchronously.</param>
         internal SingleConsumerUnboundedChannel(bool runContinuationsAsynchronously)
         {
             _runContinuationsAsynchronously = runContinuationsAsynchronously;
@@ -215,7 +217,8 @@ namespace System.Threading.Channels
                 return newWaitingReader.ValueTaskOfT;
             }
 
-            /// <summary>Gets the number of items in the channel.  This should only be used by the debugger.</summary>
+            /// <summary>Gets the number of items in the channel.  This should only be used by the
+            // debugger.</summary>
             private int ItemsCountForDebugger => _parent._items.Count;
 
             /// <summary>Gets an enumerator the debugger can use to show the contents of the channel.</summary>
@@ -380,7 +383,8 @@ namespace System.Threading.Channels
             }
 
             public override ValueTask WriteAsync(T item, CancellationToken cancellationToken) =>
-                // Writing always succeeds (unless we've already completed writing or cancellation has been requested),
+                // Writing always succeeds (unless we've already completed writing or cancellation has been
+                // requested),
                 // so just TryWrite and return a completed task.
                 cancellationToken.IsCancellationRequested
                     ? new ValueTask(Task.FromCanceled(cancellationToken))
@@ -391,7 +395,8 @@ namespace System.Threading.Channels
                     )
                 );
 
-            /// <summary>Gets the number of items in the channel. This should only be used by the debugger.</summary>
+            /// <summary>Gets the number of items in the channel. This should only be used by the
+            // debugger.</summary>
             private int ItemsCountForDebugger => _parent._items.Count;
 
             /// <summary>Gets an enumerator the debugger can use to show the contents of the channel.</summary>
@@ -400,10 +405,12 @@ namespace System.Threading.Channels
 
         private object SyncObj => _items;
 
-        /// <summary>Gets the number of items in the channel.  This should only be used by the debugger.</summary>
+        /// <summary>Gets the number of items in the channel.  This should only be used by the
+        // debugger.</summary>
         private int ItemsCountForDebugger => _items.Count;
 
-        /// <summary>Report if the channel is closed or not. This should only be used by the debugger.</summary>
+        /// <summary>Report if the channel is closed or not. This should only be used by the
+        // debugger.</summary>
         private bool ChannelIsClosedForDebugger => _doneWriting != null;
 
         /// <summary>Gets an enumerator the debugger can use to show the contents of the channel.</summary>

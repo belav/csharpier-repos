@@ -6,7 +6,8 @@ using System.Globalization;
 namespace System.Collections
 {
     /// <summary>
-    /// Designed to support hashtables which require case-insensitive behavior while still maintaining case,
+    /// Designed to support hashtables which require case-insensitive behavior while still maintaining
+    // case,
     /// this provides an efficient mechanism for getting the hashcode of the string ignoring case.
     /// </summary>
     [Obsolete("CaseInsensitiveHashCodeProvider has been deprecated. Use StringComparer instead.")]

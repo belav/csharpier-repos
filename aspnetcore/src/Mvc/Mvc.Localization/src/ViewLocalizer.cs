@@ -11,7 +11,8 @@ using Microsoft.Extensions.Localization;
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
 /// <summary>
-/// An <see cref="IViewLocalizer"/> implementation that derives the resource location from the executing view's
+/// An <see cref="IViewLocalizer"/> implementation that derives the resource location from the
+// executing view's
 /// file path.
 /// </summary>
 public class ViewLocalizer : IViewLocalizer, IViewContextAware
@@ -85,7 +86,8 @@ public class ViewLocalizer : IViewLocalizer, IViewContextAware
     {
         ArgumentNullException.ThrowIfNull(viewContext);
 
-        // Given a view path "/Views/Home/Index.cshtml" we want a baseName like "MyApplication.Views.Home.Index"
+        // Given a view path "/Views/Home/Index.cshtml" we want a baseName like
+        // "MyApplication.Views.Home.Index"
         var path = viewContext.ExecutingFilePath;
 
         if (string.IsNullOrEmpty(path))

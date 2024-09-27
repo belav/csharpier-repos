@@ -25,7 +25,8 @@ public class BoxPatternMatchAndSideEffects
 
         try
         {
-            // Make sure the "box(x) != null" optimization does not drop the side-effect of indexing into the array.
+            // Make sure the "box(x) != null" optimization does not drop the side-effect of indexing into the
+            // array.
             if ((object)a[int.MaxValue] != null)
             {
                 result = false;

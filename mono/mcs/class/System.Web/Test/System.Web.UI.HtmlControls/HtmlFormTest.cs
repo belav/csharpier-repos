@@ -81,13 +81,13 @@ namespace MonoTests.System.Web.UI.HtmlControls
             LoadViewState(state);
         }
 
-        /* Not called at all when running the current tests (2005/09/29)
-        protected override void OnInit (EventArgs e)
-        {
-            Console.WriteLine (Environment.StackTrace);
-            base.OnInit (e);
-        }
-        */
+/* Not called at all when running the current tests (2005/09/29)
+protected override void OnInit (EventArgs e)
+{
+Console.WriteLine (Environment.StackTrace);
+base.OnInit (e);
+}
+*/
         public string RenderChildren()
         {
             StringWriter sw = new StringWriter();
@@ -163,11 +163,11 @@ namespace MonoTests.System.Web.UI.HtmlControls
             HtmlForm form = new HtmlForm();
             IAttributeAccessor a = (IAttributeAccessor)form;
 
-            /* not stored in Attributes */
+/* not stored in Attributes */
             form.DefaultButton = "defaultbutton";
             Assert.IsNull(a.GetAttribute("defaultbutton"), "A1");
 
-            /* not stored in Attributes */
+/* not stored in Attributes */
             form.DefaultFocus = "defaultfocus";
             Assert.IsNull(a.GetAttribute("defaultfocus"), "A2");
             form.Enctype = "enctype";
@@ -176,7 +176,7 @@ namespace MonoTests.System.Web.UI.HtmlControls
             form.Method = "method";
             Assert.AreEqual("method", a.GetAttribute("method"), "A4");
 
-            /* not stored in Attributes */
+/* not stored in Attributes */
             form.Name = "name";
             Assert.AreEqual(form.UniqueID, form.Name, "A5");
             Assert.IsNull(form.Name, "A6");

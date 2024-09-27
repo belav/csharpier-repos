@@ -25,7 +25,8 @@ namespace System.Threading.Tasks.Tests
     {
         public TrackingTaskScheduler(int maxConLevel)
         {
-            //We need to set the value to 1 so that each time a scheduler is created, its tasks will start with one.
+            //We need to set the value to 1 so that each time a scheduler is created, its tasks will start with
+            // one.
             _counter = 1;
             if (
                 maxConLevel < 1
@@ -101,7 +102,8 @@ namespace System.Threading.Tasks.Tests
         #region Test cases
 
         /// <summary>
-        /// Test to ensure that ConcurrentExclusiveSchedulerPair can be created using user defined parameters
+        /// Test to ensure that ConcurrentExclusiveSchedulerPair can be created using user defined
+        // parameters
         /// and those parameters are respected when tasks are executed
         /// </summary>
         /// <remarks>maxItemsPerTask and which scheduler is used are verified in other testcases</remarks>
@@ -151,7 +153,8 @@ namespace System.Threading.Tasks.Tests
                     );
             }
 
-            //Create the factories that use the exclusive scheduler and the concurrent scheduler. We test to ensure
+            //Create the factories that use the exclusive scheduler and the concurrent scheduler. We test to
+            // ensure
             //that the ConcurrentExclusiveSchedulerPair created are valid by scheduling work on them.
             TaskFactory writers = new TaskFactory(schedPair.ExclusiveScheduler);
             TaskFactory readers = new TaskFactory(schedPair.ConcurrentScheduler);
@@ -161,8 +164,10 @@ namespace System.Threading.Tasks.Tests
             // Schedule some dummy work that should be run with as much parallelism as possible
             for (int i = 0; i < 50; i++)
             {
-                //In the current design, when there are no more tasks to execute, the Task used by concurrentexclusive scheduler dies
-                //by sleeping we simulate some non trivial work that takes time and causes the concurrentexclusive scheduler Task
+                //In the current design, when there are no more tasks to execute, the Task used by
+                // concurrentexclusive scheduler dies
+                //by sleeping we simulate some non trivial work that takes time and causes the concurrentexclusive
+                // scheduler Task
                 //to stay around for addition work.
                 taskList.Add(
                     readers.StartNew(() =>
@@ -184,7 +189,8 @@ namespace System.Threading.Tasks.Tests
                     })
                 );
 
-            //Wait on the tasks to finish to ensure that the ConcurrentExclusiveSchedulerPair created can schedule and execute tasks without issues
+            //Wait on the tasks to finish to ensure that the ConcurrentExclusiveSchedulerPair created can
+            // schedule and execute tasks without issues
             foreach (var item in taskList)
             {
                 item.Wait();
@@ -242,12 +248,17 @@ namespace System.Threading.Tasks.Tests
         }
 
         /// <summary>
-        /// Test to verify that only up to maxItemsPerTask are executed by a single ConcurrentExclusiveScheduler Task
+        /// Test to verify that only up to maxItemsPerTask are executed by a single
+        // ConcurrentExclusiveScheduler Task
         /// </summary>
-        /// <remarks>In ConcurrentExclusiveSchedulerPair, each tasks scheduled are run under an internal Task. The basic idea for the test
-        /// is that each time ConcurrentExclusiveScheduler is called QueueTasK a counter (which acts as scheduler's Task id) is incremented.
-        /// When a task executes, it observes the parent Task Id and if it matches the one its local cache, it increments its local counter (which tracks
-        /// the items executed by a ConcurrentExclusiveScheduler Task). At any given time the Task's local counter cant exceed maxItemsPerTask</remarks>
+        /// <remarks>In ConcurrentExclusiveSchedulerPair, each tasks scheduled are run under an internal
+        // Task. The basic idea for the test
+        /// is that each time ConcurrentExclusiveScheduler is called QueueTasK a counter (which acts as
+        // scheduler's Task id) is incremented.
+        /// When a task executes, it observes the parent Task Id and if it matches the one its local cache,
+        // it increments its local counter (which tracks
+        /// the items executed by a ConcurrentExclusiveScheduler Task). At any given time the Task's local
+        // counter cant exceed maxItemsPerTask</remarks>
         [ConditionalTheory(
             typeof(PlatformDetection),
             nameof(PlatformDetection.IsThreadingSupported)
@@ -262,9 +273,11 @@ namespace System.Threading.Tasks.Tests
             bool completeBeforeTaskWait
         )
         {
-            //Create a custom TaskScheduler with specified max concurrency (TrackingTaskScheduler is defined in Common\tools\CommonUtils\TPLTestSchedulers.cs)
+            //Create a custom TaskScheduler with specified max concurrency (TrackingTaskScheduler is defined in
+            // Common\tools\CommonUtils\TPLTestSchedulers.cs)
             TrackingTaskScheduler scheduler = new TrackingTaskScheduler(maxConcurrency);
-            //We need to use the custom scheduler to achieve the results. As a by-product, we test to ensure custom schedulers are supported
+            //We need to use the custom scheduler to achieve the results. As a by-product, we test to ensure
+            // custom schedulers are supported
             ConcurrentExclusiveSchedulerPair schedPair = new ConcurrentExclusiveSchedulerPair(
                 scheduler,
                 maxConcurrency,
@@ -280,14 +293,17 @@ namespace System.Threading.Tasks.Tests
             //Work done by both reader and writer tasks
             Action work = () =>
             {
-                //Get the id of the parent Task (which is the task created by the scheduler). Each task run by the scheduler task should
+                //Get the id of the parent Task (which is the task created by the scheduler). Each task run by the
+                // scheduler task should
                 //see the same SchedulerID value since they are run on the same thread
                 int id = ((TrackingTaskScheduler)scheduler).SchedulerID.Value;
                 if (id == schedulerIDInsideTask.Value)
                 { //since ids match, this is one more Task being executed by the CEScheduler Task
                     itemsExecutedCount.Value = ++itemsExecutedCount.Value;
-                    //This does not need to be thread safe since we are looking to ensure that only n number of tasks were executed and not the order
-                    //in which they were executed. Also asserting inside the thread is fine since we just want the test to be marked as failure
+                    //This does not need to be thread safe since we are looking to ensure that only n number of tasks
+                    // were executed and not the order
+                    //in which they were executed. Also asserting inside the thread is fine since we just want the test
+                    // to be marked as failure
                     Assert.True(
                         itemsExecutedCount.Value <= maxItemsPerTask,
                         string.Format(
@@ -303,9 +319,12 @@ namespace System.Threading.Tasks.Tests
                     schedulerIDInsideTask.Value = id; //cache the scheduler ID seen by the thread, so other tasks running in same thread can see this
                     itemsExecutedCount.Value = 1;
                 }
-                //Give enough time for a Task to stay around, so that other tasks will be executed by the same CEScheduler Task
-                //or else the CESchedulerTask will die and each Task might get executed by a different CEScheduler Task. This does not affect the
-                //verifications, but its increases the chance of finding a bug if the maxItemPerTask is not respected
+                //Give enough time for a Task to stay around, so that other tasks will be executed by the same
+                // CEScheduler Task
+                //or else the CESchedulerTask will die and each Task might get executed by a different CEScheduler
+                // Task. This does not affect the
+                //verifications, but its increases the chance of finding a bug if the maxItemPerTask is not
+                // respected
                 new ManualResetEvent(false).WaitOne(1);
             };
 
@@ -344,8 +363,10 @@ namespace System.Threading.Tasks.Tests
         }
 
         /// <summary>
-        /// When user specifies a concurrency level above the level allowed by the task scheduler, the concurrency level should be set
-        /// to the concurrencylevel specified in the taskscheduler. Also tests that the maxConcurrencyLevel specified was respected
+        /// When user specifies a concurrency level above the level allowed by the task scheduler, the
+        // concurrency level should be set
+        /// to the concurrencylevel specified in the taskscheduler. Also tests that the maxConcurrencyLevel
+        // specified was respected
         /// </summary>
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TestLowerConcurrencyLevel()
@@ -353,7 +374,8 @@ namespace System.Threading.Tasks.Tests
             //a custom scheduler with maxConcurrencyLevel of one
             int customSchedulerConcurrency = 1;
             TrackingTaskScheduler scheduler = new TrackingTaskScheduler(customSchedulerConcurrency);
-            // specify a maxConcurrencyLevel > TaskScheduler's maxconcurrencyLevel to ensure the pair takes the min of the two
+            // specify a maxConcurrencyLevel > TaskScheduler's maxconcurrencyLevel to ensure the pair takes the
+            // min of the two
             ConcurrentExclusiveSchedulerPair schedPair = new ConcurrentExclusiveSchedulerPair(
                 scheduler,
                 int.MaxValue
@@ -363,7 +385,8 @@ namespace System.Threading.Tasks.Tests
                 schedPair.ConcurrentScheduler.MaximumConcurrencyLevel
             );
 
-            //Now schedule a reader task that would block and verify that more reader tasks scheduled are not executed
+            //Now schedule a reader task that would block and verify that more reader tasks scheduled are not
+            // executed
             //(as long as the first task is blocked)
             TaskFactory readers = new TaskFactory(schedPair.ConcurrentScheduler);
             ManualResetEvent blockReaderTaskEvent = new ManualResetEvent(false);
@@ -397,7 +420,8 @@ namespace System.Threading.Tasks.Tests
                 );
             }
 
-            //finally unblock the blocjedTask and wait for all of the tasks, to ensure they all executed properly
+            //finally unblock the blocjedTask and wait for all of the tasks, to ensure they all executed
+            // properly
             blockReaderTaskEvent.Set();
             Task.WaitAll(taskList.ToArray());
         }
@@ -424,7 +448,8 @@ namespace System.Threading.Tasks.Tests
                 "The concurrenttask when executed successfully should have returned true"
             );
 
-            //Now scehdule an exclusive task that is blocked(thereby preventing other concurrent tasks to finish)
+            //Now scehdule an exclusive task that is blocked(thereby preventing other concurrent tasks to
+            // finish)
             Task<bool> exclusiveTask = writers.StartNew<bool>(() =>
             {
                 blockMainThreadEvent.Set();
@@ -432,7 +457,8 @@ namespace System.Threading.Tasks.Tests
                 return true;
             });
 
-            //With exclusive task in execution mode, schedule a number of concurrent tasks and ensure they are not executed
+            //With exclusive task in execution mode, schedule a number of concurrent tasks and ensure they are
+            // not executed
             blockMainThreadEvent.WaitOne();
             List<Task> taskList = new List<Task>();
             for (int i = 0; i < 20; i++)
@@ -607,7 +633,8 @@ namespace System.Threading.Tasks.Tests
                 cespChild2.ExclusiveScheduler
             );
 
-            // these are ordered such that we will complete the child schedulers before we complete their parents.  That way
+            // these are ordered such that we will complete the child schedulers before we complete their
+            // parents.  That way
             // we don't complete a parent that's still in use.
             var cesps = new[]
             {
@@ -682,7 +709,8 @@ namespace System.Threading.Tasks.Tests
         }
 
         /// <summary>
-        /// Ensure that continuations and parent/children which hop between concurrent and exclusive work correctly.
+        /// Ensure that continuations and parent/children which hop between concurrent and exclusive work
+        // correctly.
         /// EH
         /// </summary>
         [ConditionalTheory(

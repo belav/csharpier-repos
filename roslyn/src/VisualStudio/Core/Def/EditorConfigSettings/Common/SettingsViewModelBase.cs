@@ -54,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             _snapshotFactory.NotifyOfUpdate();
             var snapshot = _snapshotFactory.GetCurrentSnapshot();
 
-            // Notify the sinks. Generally, VS Table Control will request data 500ms after the last notification.
+            // Notify the sinks. Generally, VS Table Control will request data 500ms after the last
+            // notification.
             foreach (var tableSink in TableSinks)
             {
                 // Notify that an update is available

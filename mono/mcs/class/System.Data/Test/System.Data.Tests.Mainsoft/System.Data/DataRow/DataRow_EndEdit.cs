@@ -84,7 +84,8 @@ namespace tests.system_data_dll.System_Data
             DataRow myRow = myTable.Rows[0];
 
             int iProposed;
-            //After calling the DataRow object's BeginEdit method, if you change the value, the Current and Proposed values become available
+            //After calling the DataRow object's BeginEdit method, if you change the value, the Current and
+            // Proposed values become available
             myRow.BeginEdit();
             myRow[0] = 7;
             iProposed = (int)myRow[0, DataRowVersion.Proposed];

@@ -13,7 +13,8 @@ namespace System.Runtime.CompilerServices
         : ICriticalNotifyCompletion,
             IStateMachineBoxAwareAwaiter
     {
-        /// <summary>Shim used to invoke an <see cref="Action"/> passed as the state argument to a <see cref="Action{Object}"/>.</summary>
+        /// <summary>Shim used to invoke an <see cref="Action"/> passed as the state argument to a <see
+        // cref="Action{Object}"/>.</summary>
         internal static readonly Action<object?> s_invokeActionDelegate = static state =>
         {
             if (state is Action action)
@@ -241,10 +242,12 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    /// <summary>Internal interface used to enable optimizations from <see cref="AsyncTaskMethodBuilder"/>.</summary>>
+    /// <summary>Internal interface used to enable optimizations from <see
+    // cref="AsyncTaskMethodBuilder"/>.</summary>>
     internal interface IStateMachineBoxAwareAwaiter
     {
-        /// <summary>Invoked to set <see cref="ITaskCompletionAction.Invoke"/> of the <paramref name="box"/> as the awaiter's continuation.</summary>
+        /// <summary>Invoked to set <see cref="ITaskCompletionAction.Invoke"/> of the <paramref name="box"/>
+        // as the awaiter's continuation.</summary>
         /// <param name="box">The box object.</param>
         void AwaitUnsafeOnCompleted(IAsyncStateMachineBox box);
     }

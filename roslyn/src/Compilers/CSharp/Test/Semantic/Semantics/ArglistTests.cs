@@ -136,7 +136,8 @@ public struct C
 
             var comp = CreateCompilationWithMscorlib40AndSystemCore(text);
             comp.VerifyDiagnostics(
-                // (8,44): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                // (8,44): error CS8640: Expression tree cannot contain value of ref struct or restricted type
+                // 'TypedReference'.
                 //         Expression<Func<bool>> ex1 = ()=>M(__makeref(S)); // CS7053
                 Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "__makeref(S)")
                     .WithArguments("TypedReference")
@@ -154,7 +155,8 @@ public struct C
                     )
                     .WithArguments("__reftype")
                     .WithLocation(9, 42),
-                // (9,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                // (9,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type
+                // 'TypedReference'.
                 //         Expression<Func<Type>> ex2 = ()=>__reftype(default(TypedReference));
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
@@ -170,7 +172,8 @@ public struct C
                     )
                     .WithArguments("__refvalue")
                     .WithLocation(10, 41),
-                // (10,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                // (10,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type
+                // 'TypedReference'.
                 //         Expression<Func<int>> ex3 = ()=>__refvalue(default(TypedReference), int);
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
@@ -231,7 +234,8 @@ public struct C
         {
             // A makeref is logically the same as passing a variable to a method that takes a ref/out parameter,
             // so we produce the same error messages. This differs from the native compiler, which either fails
-            // to produce errors at all, or produces the error messages for a bad assignment. We should not produce
+            // to produce errors at all, or produces the error messages for a bad assignment. We should not
+            // produce
             // errors for bad assignments; first of all, making a ref does not do an assignment, and second, the
             // user might assume that it is the assignment to the local that is bad.
 
@@ -264,10 +268,12 @@ public struct C
                 // (9,40): error CS1510: A ref or out value must be an assignable variable
                 //         TypedReference tr3 = __makeref(123); // CS1510
                 Diagnostic(ErrorCode.ERR_RefLvalueExpected, "123").WithLocation(9, 40),
-                // (10,40): error CS0206: A non ref-returning property or indexer may not be used as an out or ref value
+                // (10,40): error CS0206: A non ref-returning property or indexer may not be used as an out or ref
+                // value
                 //         TypedReference tr4 = __makeref(P); // CS0206
                 Diagnostic(ErrorCode.ERR_RefProperty, "P").WithLocation(10, 40),
-                // (11,40): error CS0199: A static readonly field cannot be used as a ref or out value (except in a static constructor)
+                // (11,40): error CS0199: A static readonly field cannot be used as a ref or out value (except in a
+                // static constructor)
                 //         TypedReference tr5 = __makeref(R); // CS0199
                 Diagnostic(ErrorCode.ERR_RefReadonlyStatic, "R").WithLocation(11, 40)
             );
@@ -330,12 +336,14 @@ class C
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (13,20): error CS8157: Cannot return 'r' by reference because it was initialized to a value that cannot be returned by reference
+                // (13,20): error CS8157: Cannot return 'r' by reference because it was initialized to a value that
+                // cannot be returned by reference
                 //         return ref r;
                 Diagnostic(ErrorCode.ERR_RefReturnNonreturnableLocal, "r")
                     .WithArguments("r")
                     .WithLocation(13, 20),
-                // (23,20): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                // (23,20): error CS8156: An expression cannot be used in this context because it may not be
+                // returned by reference
                 //         return ref __refvalue(tr, int);
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "__refvalue(tr, int)")
                     .WithLocation(23, 20)
@@ -422,7 +430,8 @@ public struct C
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (6,25): error CS0037: Cannot convert null to 'System.TypedReference' because it is a non-nullable value type
+                // (6,25): error CS0037: Cannot convert null to 'System.TypedReference' because it is a non-nullable
+                // value type
                 //         System.Type t = __reftype(null);
                 Diagnostic(ErrorCode.ERR_ValueCantBeNull, "__reftype(null)")
                     .WithArguments("System.TypedReference")
@@ -517,8 +526,10 @@ public class C
 
 }";
 
-            // Note that this IL is not quite right; here we are displaying the call as "void C.M(int, __arglist)".
-            // The actual IL for this program should show the method ref as "void C.M(int, ..., int, int, bool)",
+            // Note that this IL is not quite right; here we are displaying the call as "void C.M(int,
+            // __arglist)".
+            // The actual IL for this program should show the method ref as "void C.M(int, ..., int, int,
+            // bool)",
             // because that is the information that is actually encoded in the method ref. If we want to display
             // that then we'll need to add special code to the symbol display visitor that knows how to emit
             // the desired format.
@@ -611,7 +622,8 @@ public class MyAttribute : System.Attribute
                 // (8,24): error CS1669: __arglist is not valid in this context
                 //     static void Q(this __arglist) {}
                 Diagnostic(ErrorCode.ERR_IllegalVarArgs, "__arglist").WithLocation(8, 24),
-                // (11,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'C.M(int, __arglist)'
+                // (11,9): error CS7036: There is no argument given that corresponds to the required parameter
+                // '__arglist' of 'C.M(int, __arglist)'
                 //         M(1);
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                     .WithArguments("__arglist", "C.M(int, __arglist)")
@@ -925,10 +937,12 @@ static class C
                 //         int b = __refvalue(123, int);
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "__refvalue(123, int)")
                     .WithArguments("int", "System.TypedReference"),
-                // (10,32): error CS0246: The type or namespace name 'Main' could not be found (are you missing a using directive or an assembly reference?)
+                // (10,32): error CS0246: The type or namespace name 'Main' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //         int c = __refvalue(tr, Main);
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Main").WithArguments("Main"),
-                // (11,17): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (11,17): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         int d = __refvalue(tr, double);
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "__refvalue(tr, double)")
                     .WithArguments("double", "int"),
@@ -1530,7 +1544,8 @@ class C
                 //         tr.GetType();  // not virtual
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "tr")
                     .WithArguments("System.TypedReference", "object"),
-                // (14,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'System.ValueType'
+                // (14,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to
+                // 'System.ValueType'
                 //         rah.ToString(); // virtual, overridden on ValueType
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah")
                     .WithArguments("System.RuntimeArgumentHandle", "System.ValueType"),
@@ -1538,11 +1553,13 @@ class C
                 //         ai.ToString();  // virtual, overridden on ValueType
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "ai")
                     .WithArguments("System.ArgIterator", "System.ValueType"),
-                // (16,9): error CS0029: Cannot implicitly convert type 'System.TypedReference' to 'System.ValueType'
+                // (16,9): error CS0029: Cannot implicitly convert type 'System.TypedReference' to
+                // 'System.ValueType'
                 //         tr.ToString();  // virtual, overridden on ValueType
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "tr")
                     .WithArguments("System.TypedReference", "System.ValueType"),
-                // (17,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'System.ValueType'
+                // (17,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to
+                // 'System.ValueType'
                 //         rah.GetHashCode();  // virtual, overridden on ValueType
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah")
                     .WithArguments("System.RuntimeArgumentHandle", "System.ValueType")
@@ -1606,62 +1623,74 @@ class E
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (26,13): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'A.A(object, __arglist)'
+                    // (26,13): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'A.A(object, __arglist)'
                     //         new A(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "A")
                         .WithArguments("__arglist", "A.A(object, __arglist)")
                         .WithLocation(26, 13),
-                    // (28,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'A.M(object, __arglist)'
+                    // (28,9): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'A.M(object, __arglist)'
                     //         A.M(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("__arglist", "A.M(object, __arglist)")
                         .WithLocation(28, 11),
-                    // (31,13): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'B.B(object, __arglist)'
+                    // (31,13): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'B.B(object, __arglist)'
                     //         new B(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "B")
                         .WithArguments("__arglist", "B.B(object, __arglist)")
                         .WithLocation(31, 13),
-                    // (33,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'B.M(object, __arglist)'
+                    // (33,9): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'B.M(object, __arglist)'
                     //         B.M(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("__arglist", "B.M(object, __arglist)")
                         .WithLocation(33, 11),
-                    // (36,13): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'C.C(object, object, __arglist)'
+                    // (36,13): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'C.C(object, object, __arglist)'
                     //         new C(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
                         .WithArguments("__arglist", "C.C(object, object, __arglist)")
                         .WithLocation(36, 13),
-                    // (37,13): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'C.C(object, object, __arglist)'
+                    // (37,13): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'C.C(object, object, __arglist)'
                     //         new C(null, __arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
                         .WithArguments("__arglist", "C.C(object, object, __arglist)")
                         .WithLocation(37, 13),
-                    // (39,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'C.M(object, object, __arglist)'
+                    // (39,9): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'C.M(object, object, __arglist)'
                     //         C.M(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("__arglist", "C.M(object, object, __arglist)")
                         .WithLocation(39, 11),
-                    // (40,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'C.M(object, object, __arglist)'
+                    // (40,9): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'C.M(object, object, __arglist)'
                     //         C.M(null, __arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("__arglist", "C.M(object, object, __arglist)")
                         .WithLocation(40, 11),
-                    // (43,13): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'D.D(object, object, __arglist)'
+                    // (43,13): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'D.D(object, object, __arglist)'
                     //         new D(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
                         .WithArguments("__arglist", "D.D(object, object, __arglist)")
                         .WithLocation(43, 13),
-                    // (44,13): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'D.D(object, object, __arglist)'
+                    // (44,13): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'D.D(object, object, __arglist)'
                     //         new D(null, __arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
                         .WithArguments("__arglist", "D.D(object, object, __arglist)")
                         .WithLocation(44, 13),
-                    // (46,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'D.M(object, object, __arglist)'
+                    // (46,9): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'D.M(object, object, __arglist)'
                     //         D.M(__arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("__arglist", "D.M(object, object, __arglist)")
                         .WithLocation(46, 11),
-                    // (47,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'D.M(object, object, __arglist)'
+                    // (47,9): error CS7036: There is no argument given that corresponds to the required parameter
+                    // '__arglist' of 'D.M(object, object, __arglist)'
                     //         D.M(null, __arglist());
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("__arglist", "D.M(object, object, __arglist)")
@@ -1692,7 +1721,8 @@ class E
 }";
             var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource);
             compilation.VerifyDiagnostics(
-                // (6,9): error CS7036: There is no argument given that corresponds to the required parameter '__arglist' of 'D'
+                // (6,9): error CS7036: There is no argument given that corresponds to the required parameter
+                // '__arglist' of 'D'
                 //         d(__arglist());
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "d")
                     .WithArguments("__arglist", "D")
@@ -1727,7 +1757,8 @@ namespace ConsoleApplication21
 ";
             CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (12,44): error CS7036: There is no argument given that corresponds to the required parameter 'context' of 'GooBar.AllocateNativeOverlapped(IOCompletionCallback, object, byte[])'
+                    // (12,44): error CS7036: There is no argument given that corresponds to the required parameter
+                    // 'context' of 'GooBar.AllocateNativeOverlapped(IOCompletionCallback, object, byte[])'
                     //             NativeOverlapped* overlapped = AllocateNativeOverlapped(() => { });
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "AllocateNativeOverlapped")
                         .WithArguments(
@@ -1757,12 +1788,14 @@ public class SpecialCases
 ";
             CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (8,17): error CS0111: Type 'SpecialCases' already defines a member called 'ArgListMethod' with the same parameter types
+                    // (8,17): error CS0111: Type 'SpecialCases' already defines a member called 'ArgListMethod' with
+                    // the same parameter types
                     //     public void ArgListMethod(__arglist)
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "ArgListMethod")
                         .WithArguments("ArgListMethod", "SpecialCases")
                         .WithLocation(8, 17),
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
                     //         ArgListMethod(__arglist(""));
                     Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
                         .WithArguments(
@@ -1770,7 +1803,8 @@ public class SpecialCases
                             "SpecialCases.ArgListMethod(__arglist)"
                         )
                         .WithLocation(6, 9),
-                    // (10,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
+                    // (10,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
                     //         ArgListMethod(__arglist(""));
                     Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
                         .WithArguments(

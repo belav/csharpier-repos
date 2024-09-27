@@ -176,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNegPartialAttribute()
         {
-            // although this code snippet has multiple statements on top level we report that as semantic errors, not parse errors:
+            // although this code snippet has multiple statements on top level we report that as semantic
+            // errors, not parse errors:
             ParseAndRoundTripping(Resources.PartialNewAttributeArray, 0);
         }
 

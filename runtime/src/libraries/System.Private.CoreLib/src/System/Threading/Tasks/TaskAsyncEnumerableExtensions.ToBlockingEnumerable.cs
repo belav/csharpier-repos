@@ -8,20 +8,26 @@ using System.Runtime.Versioning;
 
 namespace System.Threading.Tasks
 {
-    /// <summary>Provides a set of static methods for configuring <see cref="Task"/>-related behaviors on asynchronous enumerables and disposables.</summary>
+    /// <summary>Provides a set of static methods for configuring <see cref="Task"/>-related behaviors
+    // on asynchronous enumerables and disposables.</summary>
     public static partial class TaskAsyncEnumerableExtensions
     {
         /// <summary>
-        /// Converts an <see cref="IAsyncEnumerable{T}"/> instance into an <see cref="IEnumerable{T}"/> that enumerates elements in a blocking manner.
+        /// Converts an <see cref="IAsyncEnumerable{T}"/> instance into an <see cref="IEnumerable{T}"/> that
+        // enumerates elements in a blocking manner.
         /// </summary>
         /// <typeparam name="T">The type of the objects being iterated.</typeparam>
         /// <param name="source">The source enumerable being iterated.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to use.</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> instance that enumerates the source <see cref="IAsyncEnumerable{T}"/> in a blocking manner.</returns>
+        /// <returns>An <see cref="IEnumerable{T}"/> instance that enumerates the source <see
+        // cref="IAsyncEnumerable{T}"/> in a blocking manner.</returns>
         /// <remarks>
-        /// This method is implemented by using deferred execution. The underlying <see cref="IAsyncEnumerable{T}"/> will not be enumerated
-        /// unless the returned <see cref="IEnumerable{T}"/> is enumerated by calling its <see cref="IEnumerable{T}.GetEnumerator"/> method.
-        /// Async enumeration does not happen in the background; each MoveNext call will invoke the underlying <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> exactly once.
+        /// This method is implemented by using deferred execution. The underlying <see
+        // cref="IAsyncEnumerable{T}"/> will not be enumerated
+        /// unless the returned <see cref="IEnumerable{T}"/> is enumerated by calling its <see
+        // cref="IEnumerable{T}.GetEnumerator"/> method.
+        /// Async enumeration does not happen in the background; each MoveNext call will invoke the
+        // underlying <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> exactly once.
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
         public static IEnumerable<T> ToBlockingEnumerable<T>(

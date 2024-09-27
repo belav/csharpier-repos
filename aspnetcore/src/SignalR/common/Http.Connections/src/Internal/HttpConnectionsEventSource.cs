@@ -78,7 +78,8 @@ internal sealed class HttpConnectionsEventSource : EventSource
     {
         if (command.Command == EventCommand.Enable)
         {
-            // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first enable command).
+            // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first
+            // enable command).
             // They aren't disabled afterwards...
 
             _connectionsStartedCounter ??= new PollingCounter(

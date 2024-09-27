@@ -26,7 +26,8 @@ namespace System.Linq.Tests
                     (byte)length,
                 };
 
-                // Unit Tests does +T.One so we should generate data up to one value below sbyte.MaxValue, otherwise the type overflows
+                // Unit Tests does +T.One so we should generate data up to one value below sbyte.MaxValue, otherwise
+                // the type overflows
                 if ((length + length) < sbyte.MaxValue)
                 {
                     yield return new object[]

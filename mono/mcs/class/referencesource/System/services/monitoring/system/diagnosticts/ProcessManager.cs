@@ -63,9 +63,9 @@ namespace System.Diagnostics
             int length = NativeMethods.GetWindowTextLength(handle) * 2;
             StringBuilder builder = new StringBuilder(length);
             if (NativeMethods.GetWindowText(handle, builder, builder.Capacity) == 0)
-                return false;
+            return false;
             if (builder.ToString() == string.Empty)
-                return false;
+            return false;
             */
 
             return true;
@@ -134,7 +134,8 @@ namespace System.Diagnostics
                 tp.Luid = luid;
                 tp.Attributes = NativeMethods.SE_PRIVILEGE_ENABLED;
 
-                // AdjustTokenPrivileges can return true even if it didn't succeed (when ERROR_NOT_ALL_ASSIGNED is returned).
+                // AdjustTokenPrivileges can return true even if it didn't succeed (when ERROR_NOT_ALL_ASSIGNED is
+                // returned).
                 NativeMethods.AdjustTokenPrivileges(
                     new HandleRef(null, tokenHandle),
                     false,
@@ -293,7 +294,8 @@ namespace System.Diagnostics
                 throw new Win32Exception(5);
             }
 
-            // If the handle is invalid because the process has exited, only throw an exception if throwIfExited is true.
+            // If the handle is invalid because the process has exited, only throw an exception if throwIfExited
+            // is true.
             if (!IsProcessRunning(processId))
             {
                 if (throwIfExited)
@@ -459,7 +461,8 @@ namespace System.Diagnostics
                     if (processInfo != null)
                         processInfo.threadInfoList.Add(threadInfo);
                     //else
-                    //    throw new InvalidOperationException(SR.GetString(SR.ProcessNotFound, threadInfo.threadId.ToString(), threadInfo.processId.ToString()));
+                    //    throw new InvalidOperationException(SR.GetString(SR.ProcessNotFound,
+                    // threadInfo.threadId.ToString(), threadInfo.processId.ToString()));
                 }
             }
             finally
@@ -757,7 +760,8 @@ namespace System.Diagnostics
 
                                     if (sourceProcessIsWow64 && !targetProcessIsWow64)
                                     {
-                                        // Wow64 isn't going to allow this to happen, the best we can do is give a descriptive error to the user.
+                                        // Wow64 isn't going to allow this to happen, the best we can do is give a descriptive error to the
+                                        // user.
                                         throw new Win32Exception(
                                             NativeMethods.ERROR_PARTIAL_COPY,
                                             SR.GetString(SR.EnumProcessModuleFailedDueToWow)
@@ -972,7 +976,8 @@ namespace System.Diagnostics
                     throw e;
                 }
             }
-            // We don't want to call library.Close() here because that would cause us to unload all of the perflibs.
+            // We don't want to call library.Close() here because that would cause us to unload all of the
+            // perflibs.
             // On the next call to GetProcessInfos, we'd have to load them all up again, which is SLOW!
         }
 

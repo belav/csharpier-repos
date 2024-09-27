@@ -50,7 +50,7 @@ namespace Wasm.Build.Tests
                     data.Add(
                         config,
                         $"<{defaultPair.propertyName}>{defaultPair.defaultValueInRuntimePack}</{defaultPair.propertyName}>",
-                        /*aot*/false, /*build*/
+/*aot*/false, /*build*/
                         false, /*publish*/
                         publishValue
                     );
@@ -67,7 +67,7 @@ namespace Wasm.Build.Tests
                     data.Add(
                         config,
                         $"<{defaultPair.propertyName}>{!defaultPair.defaultValueInRuntimePack}</{defaultPair.propertyName}>",
-                        /*aot*/false, /*build*/
+/*aot*/false, /*build*/
                         true, /*publish*/
                         true
                     );
@@ -82,7 +82,7 @@ namespace Wasm.Build.Tests
             TheoryData<string, string, bool, bool, bool> data =
                 new()
                 {
-                    /* relink by default for publish+Release */
+/* relink by default for publish+Release */
                     {
                         "Release",
                         "", /*aot*/
@@ -90,7 +90,7 @@ namespace Wasm.Build.Tests
                         false, /*publish*/
                         true
                     },
-                    /* NO relink by default for publish+Release, when not trimming */
+/* NO relink by default for publish+Release, when not trimming */
                     {
                         "Release",
                         "<PublishTrimmed>false</PublishTrimmed>", /*aot*/
@@ -99,14 +99,15 @@ namespace Wasm.Build.Tests
                         false
                     },
 
-                    /* When not trimming, and no-aot, we don't relink. But WasmNativeStrip=false should still trigger it*/
+/* When not trimming, and no-aot, we don't relink. But WasmNativeStrip=false should still trigger
+it*/
                     // { "Release",   "<WasmNativeStrip>false</WasmNativeStrip><PublishTrimmed>false</PublishTrimmed>",
                     //    /*aot*/ false,   /*build*/ true,  /*publish*/      true }
                 };
 
             if (!forPublish)
             {
-                /* Debug config, when building does trigger relinking */
+/* Debug config, when building does trigger relinking */
                 data.Add(
                     "Debug",
                     "", /*aot*/
@@ -118,7 +119,7 @@ namespace Wasm.Build.Tests
 
             if (forPublish)
             {
-                /* NO relink by default for publish+Debug */
+/* NO relink by default for publish+Debug */
                 data.Add(
                     "Debug",
                     "", /*aot*/
@@ -127,7 +128,7 @@ namespace Wasm.Build.Tests
                     false
                 );
 
-                /* AOT */
+/* AOT */
                 data.Add(
                     "Release",
                     "", /*aot*/
@@ -147,7 +148,7 @@ namespace Wasm.Build.Tests
                 //     { "Release",   "<RunAOTCompilationAfterBuild>true</RunAOTCompilationAfterBuild>",
                 //  /*aot*/ true,    /*build*/ true, /*publish*/      true },
 
-                /* AOT not affected by trimming */
+/* AOT not affected by trimming */
                 data.Add(
                     "Release",
                     "<PublishTrimmed>false</PublishTrimmed>", /*aot*/
@@ -225,7 +226,8 @@ namespace Wasm.Build.Tests
             );
 
             // for build
-            // Assert.DoesNotContain($"** WasmBuildNative: '{buildValue.ToString().ToLower()}', WasmNativeStrip: 'true', WasmBuildingForNestedPublish: ''", output);
+            // Assert.DoesNotContain($"** WasmBuildNative: '{buildValue.ToString().ToLower()}', WasmNativeStrip:
+            // 'true', WasmBuildingForNestedPublish: ''", output);
             // for publish
             Assert.Contains(
                 $"** WasmBuildNative: '{expectWasmBuildNativeForPublish.ToString().ToLower()}', WasmNativeStrip: 'true', WasmBuildingForNestedPublish: 'true'",
@@ -341,7 +343,7 @@ namespace Wasm.Build.Tests
         }
 
         [Theory]
-        /* always relink */
+/* always relink */
         [InlineData(
             "Debug",
             "", /*build*/

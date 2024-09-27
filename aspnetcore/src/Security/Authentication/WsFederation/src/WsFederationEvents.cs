@@ -4,12 +4,14 @@
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
 /// <summary>
-/// Specifies events which the <see cref="WsFederationHandler"></see> invokes to enable developer control over the authentication process. />
+/// Specifies events which the <see cref="WsFederationHandler"></see> invokes to enable developer
+// control over the authentication process. />
 /// </summary>
 public class WsFederationEvents : RemoteAuthenticationEvents
 {
     /// <summary>
-    /// Invoked if exceptions are thrown during request processing. The exceptions will be re-thrown after this event unless suppressed.
+    /// Invoked if exceptions are thrown during request processing. The exceptions will be re-thrown
+    // after this event unless suppressed.
     /// </summary>
     public Func<AuthenticationFailedContext, Task> OnAuthenticationFailed { get; set; } =
         context => Task.CompletedTask;
@@ -45,7 +47,8 @@ public class WsFederationEvents : RemoteAuthenticationEvents
         context => Task.CompletedTask;
 
     /// <summary>
-    /// Invoked if exceptions are thrown during request processing. The exceptions will be re-thrown after this event unless suppressed.
+    /// Invoked if exceptions are thrown during request processing. The exceptions will be re-thrown
+    // after this event unless suppressed.
     /// </summary>
     public virtual Task AuthenticationFailed(AuthenticationFailedContext context) =>
         OnAuthenticationFailed(context);

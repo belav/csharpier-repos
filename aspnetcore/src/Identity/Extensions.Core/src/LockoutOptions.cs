@@ -28,7 +28,8 @@ public class LockoutOptions
     public int MaxFailedAccessAttempts { get; set; } = 5;
 
     /// <summary>
-    /// Gets or sets the <see cref="TimeSpan"/> a user is locked out for when a lockout occurs. Defaults to 5 minutes.
+    /// Gets or sets the <see cref="TimeSpan"/> a user is locked out for when a lockout occurs. Defaults
+    // to 5 minutes.
     /// </summary>
     /// <value>The <see cref="TimeSpan"/> a user is locked out for when a lockout occurs.</value>
     public TimeSpan DefaultLockoutTimeSpan { get; set; } = TimeSpan.FromMinutes(5);

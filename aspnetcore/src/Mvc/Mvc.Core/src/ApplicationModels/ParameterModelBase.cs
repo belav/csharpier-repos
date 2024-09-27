@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 /// <summary>
 /// A model type for reading and manipulation properties and parameters.
 /// <para>
-/// Derived instances of this type represent properties and parameters for controllers, and Razor Pages.
+/// Derived instances of this type represent properties and parameters for controllers, and Razor
+// Pages.
 /// </para>
 /// </summary>
 public abstract class ParameterModelBase : IBindingModel

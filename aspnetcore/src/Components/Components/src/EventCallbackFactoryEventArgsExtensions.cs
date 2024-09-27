@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Components;
 
 /// <summary>
-/// Provides extension methods for <see cref="EventCallbackFactory"/> and <see cref="EventArgs"/> types.
+/// Provides extension methods for <see cref="EventCallbackFactory"/> and <see cref="EventArgs"/>
+// types.
 /// </summary>
 public static class EventCallbackFactoryEventArgsExtensions
 {

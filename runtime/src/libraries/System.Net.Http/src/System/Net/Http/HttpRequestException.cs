@@ -22,7 +22,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpRequestException" /> class with a specific message that describes the current exception, an inner exception, and an HTTP status code.
+        /// Initializes a new instance of the <see cref="HttpRequestException" /> class with a specific
+        // message that describes the current exception, an inner exception, and an HTTP status code.
         /// </summary>
         /// <param name="message">A message that describes the current exception.</param>
         /// <param name="inner">The inner exception.</param>
@@ -34,9 +35,11 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpRequestException" /> class with a specific message an inner exception, and an HTTP status code and an <see cref="HttpRequestError"/>.
+        /// Initializes a new instance of the <see cref="HttpRequestException" /> class with a specific
+        // message an inner exception, and an HTTP status code and an <see cref="HttpRequestError"/>.
         /// </summary>
-        /// <param name="httpRequestError">The <see cref="HttpRequestError"/> that caused the exception.</param>
+        /// <param name="httpRequestError">The <see cref="HttpRequestError"/> that caused the
+        // exception.</param>
         /// <param name="message">A message that describes the current exception.</param>
         /// <param name="inner">The inner exception.</param>
         /// <param name="statusCode">The HTTP status code.</param>
@@ -64,7 +67,8 @@ namespace System.Net.Http
         /// </value>
         public HttpStatusCode? StatusCode { get; }
 
-        // This constructor is used internally to indicate that a request was not successfully sent due to an IOException,
+        // This constructor is used internally to indicate that a request was not successfully sent due to
+        // an IOException,
         // and the exception occurred early enough so that the request may be retried on another connection.
         internal HttpRequestException(
             HttpRequestError httpRequestError,

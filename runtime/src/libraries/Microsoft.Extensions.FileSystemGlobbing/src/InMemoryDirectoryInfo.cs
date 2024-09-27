@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// Creates a new InMemoryDirectoryInfo with the root directory and files given.
         /// </summary>
         /// <param name="rootDir">The root directory that this FileSystem will use.</param>
-        /// <param name="files">Collection of file names. If relative paths <paramref name="rootDir"/> will be prepended to the paths.</param>
+        /// <param name="files">Collection of file names. If relative paths <paramref name="rootDir"/> will
+        // be prepended to the paths.</param>
         public InMemoryDirectoryInfo(string rootDir, IEnumerable<string>? files)
             : this(rootDir, files, false) { }
 
@@ -167,7 +168,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         }
 
         /// <summary>
-        /// Returns an instance of <see cref="FileInfoBase"/> that matches the <paramref name="path"/> given.
+        /// Returns an instance of <see cref="FileInfoBase"/> that matches the <paramref name="path"/>
+        // given.
         /// </summary>
         /// <param name="path">The filename.</param>
         /// <returns>Instance of <see cref="FileInfoBase"/> if the file exists, null otherwise.</returns>

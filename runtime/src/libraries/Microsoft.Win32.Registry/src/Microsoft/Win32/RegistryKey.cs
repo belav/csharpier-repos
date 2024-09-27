@@ -14,31 +14,33 @@ using System.Text;
 using Microsoft.Win32.SafeHandles;
 
 /*
-  Note on ACL support:
-  The key thing to note about ACL's is you set them on a kernel object like a
-  registry key, then the ACL only gets checked when you construct handles to
-  them.  So if you set an ACL to deny read access to yourself, you'll still be
-  able to read with that handle, but not with new handles.
+Note on ACL support:
+The key thing to note about ACL's is you set them on a kernel object like a
+registry key, then the ACL only gets checked when you construct handles to
+them.  So if you set an ACL to deny read access to yourself, you'll still be
+able to read with that handle, but not with new handles.
 
-  Another peculiarity is a Terminal Server app compatibility hack.  The OS
-  will second guess your attempt to open a handle sometimes.  If a certain
-  combination of Terminal Server app compat registry keys are set, then the
-  OS will try to reopen your handle with lesser permissions if you couldn't
-  open it in the specified mode.  So on some machines, we will see handles that
-  may not be able to read or write to a registry key.  It's very strange.  But
-  the real test of these handles is attempting to read or set a value in an
-  affected registry key.
+Another peculiarity is a Terminal Server app compatibility hack.  The OS
+will second guess your attempt to open a handle sometimes.  If a certain
+combination of Terminal Server app compat registry keys are set, then the
+OS will try to reopen your handle with lesser permissions if you couldn't
+open it in the specified mode.  So on some machines, we will see handles that
+may not be able to read or write to a registry key.  It's very strange.  But
+the real test of these handles is attempting to read or set a value in an
+affected registry key.
 
-  For reference, at least two registry keys must be set to particular values
-  for this behavior:
-  HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\RegistryExtensionFlags, the least significant bit must be 1.
-  HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer\TSAppCompat must be 1
-  There might possibly be an interaction with yet a third registry key as well.
+For reference, at least two registry keys must be set to particular values
+for this behavior:
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\RegistryExtensionFlags, the least
+significant bit must be 1.
+HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer\TSAppCompat must be 1
+There might possibly be an interaction with yet a third registry key as well.
 */
 
 namespace Microsoft.Win32
 {
-    /// <summary>Registry encapsulation. To get an instance of a RegistryKey use the Registry class's static members then call OpenSubKey.</summary>
+    /// <summary>Registry encapsulation. To get an instance of a RegistryKey use the Registry class's
+    // static members then call OpenSubKey.</summary>
     public sealed partial class RegistryKey : MarshalByRefObject, IDisposable
     {
         private static readonly IntPtr HKEY_CLASSES_ROOT = new IntPtr(unchecked((int)0x80000000));
@@ -50,7 +52,8 @@ namespace Microsoft.Win32
         );
         private static readonly IntPtr HKEY_CURRENT_CONFIG = new IntPtr(unchecked((int)0x80000005));
 
-        /// <summary>Names of keys.  This array must be in the same order as the HKEY values listed above.</summary>
+        /// <summary>Names of keys.  This array must be in the same order as the HKEY values listed
+        // above.</summary>
         private static readonly string[] s_hkeyNames = new string[]
         {
             "HKEY_CLASSES_ROOT",
@@ -76,7 +79,8 @@ namespace Microsoft.Win32
         private readonly RegistryView _regView = RegistryView.Default;
 
         /// <summary>
-        /// Creates a RegistryKey. This key is bound to hkey, if writable is <b>false</b> then no write operations will be allowed.
+        /// Creates a RegistryKey. This key is bound to hkey, if writable is <b>false</b> then no write
+        // operations will be allowed.
         /// </summary>
         private RegistryKey(SafeRegistryHandle hkey, bool writable, RegistryView view)
             : this(hkey, writable, false, false, false, view) { }
@@ -431,7 +435,8 @@ namespace Microsoft.Win32
             int errorCode = Interop.Advapi32.RegDeleteValue(_hkey, name);
 
             //
-            // From windows 2003 server, if the name is too long we will get error code ERROR_FILENAME_EXCED_RANGE
+            // From windows 2003 server, if the name is too long we will get error code
+            // ERROR_FILENAME_EXCED_RANGE
             // This still means the name doesn't exist. We need to be consistent with previous OS.
             //
             if (
@@ -459,7 +464,8 @@ namespace Microsoft.Win32
         }
 
         /// <summary>
-        /// Retrieves a new <see cref="RegistryKey"/>  that represents the requested <see cref="RegistryHive"/> .
+        /// Retrieves a new <see cref="RegistryKey"/>  that represents the requested <see
+        // cref="RegistryHive"/> .
         /// </summary>
         /// <param name="hKey">The hive to open.</param>
         /// <param name="view">Which view over the registry to employ.</param>
@@ -485,7 +491,8 @@ namespace Microsoft.Win32
             return key;
         }
 
-        /// <summary>Retrieves a new RegistryKey that represents the requested key on a foreign machine.</summary>
+        /// <summary>Retrieves a new RegistryKey that represents the requested key on a foreign
+        // machine.</summary>
         /// <param name="hKey">hKey HKEY_* to open.</param>
         /// <param name="machineName">Name the machine to connect to.</param>
         /// <returns>The RegistryKey requested.</returns>
@@ -1086,7 +1093,8 @@ namespace Microsoft.Win32
             return names;
         }
 
-        /// <summary>Retrieves the specified value. <b>null</b> is returned if the value doesn't exist</summary>
+        /// <summary>Retrieves the specified value. <b>null</b> is returned if the value doesn't
+        // exist</summary>
         /// <remarks>
         /// Note that <var>name</var> can be null or "", at which point the
         /// unnamed or default value of this Registry key is returned, if any.
@@ -1098,7 +1106,8 @@ namespace Microsoft.Win32
             return InternalGetValue(name, null, false);
         }
 
-        /// <summary>Retrieves the specified value. <i>defaultValue</i> is returned if the value doesn't exist.</summary>
+        /// <summary>Retrieves the specified value. <i>defaultValue</i> is returned if the value doesn't
+        // exist.</summary>
         /// <remarks>
         /// Note that <var>name</var> can be null or "", at which point the
         /// unnamed or default value of this Registry key is returned, if any.
@@ -1142,17 +1151,24 @@ namespace Microsoft.Win32
         {
             EnsureNotDisposed();
 
-            // Create an initial stack buffer large enough to satisfy many reg keys.  We need to call RegQueryValueEx
-            // in order to determine the type of the value, and we can avoid further retries if all of the data can be
-            // retrieved in that single call with this buffer.  If we do need to grow, we grow into a pooled array. The
-            // caller is always handed back a copy of this data, either in an array, a string, or a boxed integer.
+            // Create an initial stack buffer large enough to satisfy many reg keys.  We need to call
+            // RegQueryValueEx
+            // in order to determine the type of the value, and we can avoid further retries if all of the data
+            // can be
+            // retrieved in that single call with this buffer.  If we do need to grow, we grow into a pooled
+            // array. The
+            // caller is always handed back a copy of this data, either in an array, a string, or a boxed
+            // integer.
             Span<byte> span = stackalloc byte[512];
             byte[]? pooledArray = null;
             if (IsPerfDataKey())
             {
-                // If this is a performance key (rare usage), we're not actually retrieving data stored in the registry:
-                // calling RegQueryValueEx causes the system to collect the data from the appropriate provider. The value
-                // is expected to be much larger than for other keys, such that our stack-allocated space is less likely
+                // If this is a performance key (rare usage), we're not actually retrieving data stored in the
+                // registry:
+                // calling RegQueryValueEx causes the system to collect the data from the appropriate provider. The
+                // value
+                // is expected to be much larger than for other keys, such that our stack-allocated space is less
+                // likely
                 // to be sufficient, so we immediately grow into the ArrayPool, using the same buffer size chosen
                 // in .NET Framework (until such time as a better estimate is selected).  Additionally, the returned
                 // length when dealing with perf data keys can't be trusted, so the buffer needs to be zero'd.
@@ -1570,8 +1586,10 @@ namespace Microsoft.Win32
 
         private static RegistryValueKind CalculateValueKind(object value)
         {
-            // This logic matches what used to be in SetValue(string name, object value) in the v1.0 and v1.1 days.
-            // Even though we could add detection for an int64 in here, we want to maintain compatibility with the
+            // This logic matches what used to be in SetValue(string name, object value) in the v1.0 and v1.1
+            // days.
+            // Even though we could add detection for an int64 in here, we want to maintain compatibility with
+            // the
             // old behavior.
             if (value is int)
             {
@@ -1796,12 +1814,16 @@ namespace Microsoft.Win32
                     // For normal RegistryKey instances we dispose the SafeRegHandle and throw IOException.
                     // However, for HKEY_PERFORMANCE_DATA (on a local or remote machine) we avoid disposing the
                     // SafeRegHandle and only throw the IOException.  This is to workaround reentrancy issues
-                    // in PerformanceCounter.NextValue() where the API could throw {NullReference, ObjectDisposed, ArgumentNull}Exception
+                    // in PerformanceCounter.NextValue() where the API could throw {NullReference, ObjectDisposed,
+                    // ArgumentNull}Exception
                     // on reentrant calls because of this error code path in RegistryKey
                     //
-                    // Normally we'd make our caller synchronize access to a shared RegistryKey instead of doing something like this,
-                    // however we shipped PerformanceCounter.NextValue() un-synchronized in v2.0RTM and customers have taken a dependency on
-                    // this behavior (being able to simultaneously query multiple remote-machine counters on multiple threads, instead of
+                    // Normally we'd make our caller synchronize access to a shared RegistryKey instead of doing
+                    // something like this,
+                    // however we shipped PerformanceCounter.NextValue() un-synchronized in v2.0RTM and customers have
+                    // taken a dependency on
+                    // this behavior (being able to simultaneously query multiple remote-machine counters on multiple
+                    // threads, instead of
                     // having serialized access).
                     if (!IsPerfDataKey())
                     {
@@ -1831,7 +1853,8 @@ namespace Microsoft.Win32
             };
 
         /// <summary>Retrieves the current state of the dirty property.</summary>
-        /// <remarks>A key is marked as dirty if any operation has occurred that modifies the contents of the key.</remarks>
+        /// <remarks>A key is marked as dirty if any operation has occurred that modifies the contents of
+        // the key.</remarks>
         /// <returns><b>true</b> if the key has been modified.</returns>
         private bool IsDirty() => (_state & StateFlags.Dirty) != 0;
 
@@ -1846,10 +1869,12 @@ namespace Microsoft.Win32
         [Flags]
         private enum StateFlags
         {
-            /// <summary>Dirty indicates that we have munged data that should be potentially written to disk.</summary>
+            /// <summary>Dirty indicates that we have munged data that should be potentially written to
+            // disk.</summary>
             Dirty = 0x0001,
 
-            /// <summary>SystemKey indicates that this is a "SYSTEMKEY" and shouldn't be "opened" or "closed".</summary>
+            /// <summary>SystemKey indicates that this is a "SYSTEMKEY" and shouldn't be "opened" or
+            // "closed".</summary>
             SystemKey = 0x0002,
 
             /// <summary>Access</summary>

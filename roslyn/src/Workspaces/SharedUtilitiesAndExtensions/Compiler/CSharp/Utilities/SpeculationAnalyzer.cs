@@ -20,11 +20,14 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Utilities
 {
     /// <summary>
-    /// Helper class to analyze the semantic effects of a speculated syntax node replacement on the parenting nodes.
+    /// Helper class to analyze the semantic effects of a speculated syntax node replacement on the
+    // parenting nodes.
     /// Given an expression node from a syntax tree and a new expression from a different syntax tree,
     /// it replaces the expression with the new expression to create a speculated syntax tree.
-    /// It uses the original tree's semantic model to create a speculative semantic model and verifies that
-    /// the syntax replacement doesn't break the semantics of any parenting nodes of the original expression.
+    /// It uses the original tree's semantic model to create a speculative semantic model and verifies
+    // that
+    /// the syntax replacement doesn't break the semantics of any parenting nodes of the original
+    // expression.
     /// </summary>
     internal class SpeculationAnalyzer
         : AbstractSpeculationAnalyzer<
@@ -43,15 +46,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         /// </summary>
         /// <param name="expression">Original expression to be replaced.</param>
         /// <param name="newExpression">New expression to replace the original expression.</param>
-        /// <param name="semanticModel">Semantic model of <paramref name="expression"/> node's syntax tree.</param>
+        /// <param name="semanticModel">Semantic model of <paramref name="expression"/> node's syntax
+        // tree.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <param name="skipVerificationForReplacedNode">
-        /// True if semantic analysis should be skipped for the replaced node and performed starting from parent of the original and replaced nodes.
+        /// True if semantic analysis should be skipped for the replaced node and performed starting from
+        // parent of the original and replaced nodes.
         /// This could be the case when custom verifications are required to be done by the caller or
         /// semantics of the replaced expression are different from the original expression.
         /// </param>
         /// <param name="failOnOverloadResolutionFailuresInOriginalCode">
-        /// True if semantic analysis should fail when any of the invocation expression ancestors of <paramref name="expression"/> in original code has overload resolution failures.
+        /// True if semantic analysis should fail when any of the invocation expression ancestors of
+        // <paramref name="expression"/> in original code has overload resolution failures.
         /// </param>
         public SpeculationAnalyzer(
             ExpressionSyntax expression,
@@ -229,9 +235,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         }
 
         /// <summary>
-        /// Determines whether performing the syntax replacement in one of the sibling nodes of the given lambda expressions will change the lambda binding semantics.
-        /// This is done by first determining the lambda parameters whose type differs in the replaced lambda node.
-        /// For each of these parameters, we find the descendant identifier name nodes in the lambda body and check if semantics of any of the parenting nodes of these
+        /// Determines whether performing the syntax replacement in one of the sibling nodes of the given
+        // lambda expressions will change the lambda binding semantics.
+        /// This is done by first determining the lambda parameters whose type differs in the replaced
+        // lambda node.
+        /// For each of these parameters, we find the descendant identifier name nodes in the lambda body
+        // and check if semantics of any of the parenting nodes of these
         /// identifier nodes have changed in the replaced lambda.
         /// </summary>
         public bool ReplacementChangesSemanticsOfUnchangedLambda(
@@ -511,12 +520,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     var originalExpressionType = originalExpressionTypeInfo.Type;
                     var newExpressionType = newExpressionTypeInfo.Type;
 
-                    // A conditional expression may have no type of it's own, but can be converted to a type if there's target-typed
+                    // A conditional expression may have no type of it's own, but can be converted to a type if there's
+                    // target-typed
                     // conditional expressions in play. For example:
                     //
                     //     int? x = conditional ? (int?)trueValue : null;
                     //
-                    // Once you remove the cast, the conditional has no type itself, but is being converted to int? by a conditional
+                    // Once you remove the cast, the conditional has no type itself, but is being converted to int? by a
+                    // conditional
                     // expression conversion.
                     if (
                         newExpressionType == null
@@ -531,7 +542,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
                     if (originalExpressionType == null || newExpressionType == null)
                     {
-                        // With the current implementation of the C# binder, this is impossible, but it's probably not wise to
+                        // With the current implementation of the C# binder, this is impossible, but it's probably not wise
+                        // to
                         // depend on an implementation detail of another layer.
                         return originalExpressionType != newExpressionType;
                     }
@@ -573,8 +585,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             {
                 var newCaseSwitchLabel = (CaseSwitchLabelSyntax)currentReplacedNode;
 
-                // If case label is changing, then need to check if the semantics will change for the switch expression.
-                // e.g. if switch expression is "switch(x)" where "object x = 1f", then "case 1:" and "case (float) 1:" are different.
+                // If case label is changing, then need to check if the semantics will change for the switch
+                // expression.
+                // e.g. if switch expression is "switch(x)" where "object x = 1f", then "case 1:" and "case (float)
+                // 1:" are different.
                 var originalCaseType = this
                     .OriginalSemanticModel.GetTypeInfo(previousOriginalNode, this.CancellationToken)
                     .Type;
@@ -607,7 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     return true;
                 }
 
-                // Same conversion cannot result in both originalCaseType and newCaseType, which means the semantics changed
+                // Same conversion cannot result in both originalCaseType and newCaseType, which means the semantics
+                // changed
                 // (since originalCaseType != newCaseType)
                 return originalConversion == newConversion;
             }
@@ -616,7 +631,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 && originalSwitchStatement.Expression == previousOriginalNode
             )
             {
-                // Switch statement's expression changed, verify that the conversions from switch case labels to new switch
+                // Switch statement's expression changed, verify that the conversions from switch case labels to new
+                // switch
                 // expression type are not broken.
 
                 var newSwitchStatement = (SwitchStatementSyntax)currentReplacedNode;
@@ -659,7 +675,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             {
                 var replacedSwitchExpression = (SwitchExpressionSyntax)currentReplacedNode;
 
-                // Switch expression's expression changed.  Ensure it's the same type as before. If not, inference of
+                // Switch expression's expression changed.  Ensure it's the same type as before. If not, inference
+                // of
                 // the meaning of the patterns within can change.
 
                 var originalExprType = this.OriginalSemanticModel.GetTypeInfo(
@@ -737,7 +754,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         /// <summary>
         /// Checks if the conversion might change the resultant boxed type.
-        /// Similar boxing checks are performed elsewhere, but in this case we need to perform the check on the entire conditional expression.
+        /// Similar boxing checks are performed elsewhere, but in this case we need to perform the check on
+        // the entire conditional expression.
         /// This will make sure the resultant cast is proper for the type of the conditional expression.
         /// </summary>
         private bool ReplacementBreaksBoxingInConditionalExpression(
@@ -747,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ExpressionSyntax previousReplacedNode
         )
         {
-            // If the resultant types are different and it is boxing to the converted type then semantics could be changing.
+            // If the resultant types are different and it is boxing to the converted type then semantics could
+            // be changing.
             if (!Equals(originalExpressionTypeInfo.Type, newExpressionTypeInfo.Type))
             {
                 var originalConvertedTypeConversion = this.OriginalSemanticModel.ClassifyConversion(
@@ -996,7 +1015,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 isExplicitInSource: true
             );
 
-            // Is and As operators do not consider any user-defined operators, just ensure that the conversion exists.
+            // Is and As operators do not consider any user-defined operators, just ensure that the conversion
+            // exists.
             return originalConversion.Exists != newConversion.Exists;
         }
 
@@ -1054,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             TypeInfo newTypeInfo
         )
         {
-            // If the base check is fine with the nullability of types before/after, then we're good and there are no
+            // If the base check is fine with the nullability of types before/after, then we're good and there
+            // are no
             // more checks we need to do.
             if (
                 !base.ReplacementIntroducesDisallowedNullType(
@@ -1066,9 +1087,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             )
                 return false;
 
-            // If, however, the base check is not ok.  That means that the old expression had an initial type, but the
-            // new expression does not.  This may or may not be ok depending on the construct.  If it's a supported
-            // construct then we want to check the new constructs converted type against the old construct's original
+            // If, however, the base check is not ok.  That means that the old expression had an initial type,
+            // but the
+            // new expression does not.  This may or may not be ok depending on the construct.  If it's a
+            // supported
+            // construct then we want to check the new constructs converted type against the old construct's
+            // original
             // type to make sure those still match.  If so, this change is fine.
             if (
                 IsSupportedConstructWithNullType()
@@ -1082,11 +1106,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
             bool IsSupportedConstructWithNullType()
             {
-                // A conditional expression may become untyped if it now involves a conditional conversion.  For example:
+                // A conditional expression may become untyped if it now involves a conditional conversion.  For
+                // example:
                 //
                 //      int? s = x ? 0 : null;
                 //
-                // In this case, the null type is allowed if we do have a conditional-expression-conversion *and* the
+                // In this case, the null type is allowed if we do have a conditional-expression-conversion *and*
+                // the
                 // converted type matches the original type.
                 if (
                     newExpression.IsKind(SyntaxKind.ConditionalExpression)
@@ -1099,8 +1125,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     return true;
                 }
 
-                // Similar to above, it's fine for a switch expression to potentially change to having a 'null' direct type
-                // (as long as a target-typed switch-expression conversion happened).  Note: unlike above, we don't have to
+                // Similar to above, it's fine for a switch expression to potentially change to having a 'null'
+                // direct type
+                // (as long as a target-typed switch-expression conversion happened).  Note: unlike above, we don't
+                // have to
                 // check a language version since switch expressions always supported target-typed conversion.
                 if (
                     newExpression.IsKind(SyntaxKind.SwitchExpression)
@@ -1111,9 +1139,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     return true;
                 }
 
-                // Similar to above, it's fine for a collection expression to have a a 'null' direct type (as long as a
-                // target-typed collection-expression conversion happened).  Note: unlike above, we don't have to check
-                // a language version since collection expressions always supported collection-expression-conversions.
+                // Similar to above, it's fine for a collection expression to have a a 'null' direct type (as long
+                // as a
+                // target-typed collection-expression conversion happened).  Note: unlike above, we don't have to
+                // check
+                // a language version since collection expressions always supported
+                // collection-expression-conversions.
                 if (
                     newExpression.IsKind(SyntaxKind.CollectionExpression)
                     && this.SpeculativeSemanticModel.GetConversion(
@@ -1153,7 +1184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     )
                         return false;
 
-                    // If the only change to the conversion here is the introduction of a conditional expression conversion,
+                    // If the only change to the conversion here is the introduction of a conditional expression
+                    // conversion,
                     // that means types didn't really change in a meaningful way.
                     if (originalConversion.IsIdentity)
                         return true;

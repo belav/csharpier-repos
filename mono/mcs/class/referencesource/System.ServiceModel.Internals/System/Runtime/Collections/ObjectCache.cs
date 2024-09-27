@@ -18,7 +18,8 @@ namespace System.Runtime.Collections
         where TValue : class
     {
         // for performance reasons we don't just blindly start a timer up to clean up
-        // idle cache items. However, if we're above a certain threshold of items, then we'll start the timer.
+        // idle cache items. However, if we're above a certain threshold of items, then we'll start the
+        // timer.
         const int timerThreshold = 1;
 
         ObjectCacheSettings settings;
@@ -50,7 +51,8 @@ namespace System.Runtime.Collections
             get { return this; }
         }
 
-        // Users like ServiceModel can hook this for ICommunicationObject or to handle other non-IDisposable objects
+        // Users like ServiceModel can hook this for ICommunicationObject or to handle other non-IDisposable
+        // objects
         public Action<TValue> DisposeItemCallback { get; set; }
 
         public int Count
@@ -81,7 +83,8 @@ namespace System.Runtime.Collections
             return Take(key, null);
         }
 
-        // this overload is used for cases where a usable object can be atomically created in a non-blocking fashion
+        // this overload is used for cases where a usable object can be atomically created in a non-blocking
+        // fashion
         public ObjectCacheItem<TValue> Take(TKey key, Func<TValue> initializerDelegate)
         {
             Fx.Assert(key != null, "caller must validate parameters");
@@ -296,7 +299,8 @@ namespace System.Runtime.Collections
                 {
                     if (item != null)
                     {
-                        // We need to Dispose every item in the cache even when it's refcount is greater than Zero, hence we call Dispose instead of LocalDispose
+                        // We need to Dispose every item in the cache even when it's refcount is greater than Zero, hence we
+                        // call Dispose instead of LocalDispose
                         item.Dispose();
                     }
                 }

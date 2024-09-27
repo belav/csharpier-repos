@@ -314,8 +314,10 @@ namespace System
         ///            //
         ///            //   true arithmetic range check       =>     re-written for signed int
         ///            // -------------------------------          -------------------------------
-        ///            // (  ((m_value + addend) > MaxValue)  =>   (  (addend > 0 && m_value > MaxValue - addend)
-        ///            //  ||((m_value + addend) < MinValue))       ||(addend < 0 && m_value < MinValue - addend) )
+        ///            // (  ((m_value + addend) > MaxValue)  =>   (  (addend > 0 && m_value > MaxValue -
+        // addend)
+        ///            //  ||((m_value + addend) < MinValue))       ||(addend < 0 && m_value < MinValue -
+        // addend) )
         ///
         ///
         ///            overflowed = ((addend > 0) && (m_value > (MaxValue - addend))) ||
@@ -328,8 +330,10 @@ namespace System
         ///            //
         ///            //   true arithmetic range check           =>    re-written for signed int
         ///            // -------------------------------             -------------------------------
-        ///            // (  ((m_value - subtrahend) > MaxValue)  =>   (  (subtrahend < 0 && m_value > MaxValue + subtrahend)
-        ///            //  ||((m_value - subtrahend) < MinValue))       ||(subtrahend > 0 && m_value < MinValue + subtrahend) )
+        ///            // (  ((m_value - subtrahend) > MaxValue)  =>   (  (subtrahend < 0 && m_value >
+        // MaxValue + subtrahend)
+        ///            //  ||((m_value - subtrahend) < MinValue))       ||(subtrahend > 0 && m_value <
+        // MinValue + subtrahend) )
         ///
         ///            overflowed = ((subtrahend < 0) && (m_value > (MaxValue + subtrahend))) ||
         ///                       ((subtrahend > 0) && (m_value < (MinValue + subtrahend)));
@@ -437,7 +441,8 @@ namespace System
         ///        }
         ///
         ///        /// <internalonly/>
-        ///        Int64 IArithmetic<Int64>.DivideRemainder(Int64 divisor, out Int64 remainder, out bool overflowed) {
+        ///        Int64 IArithmetic<Int64>.DivideRemainder(Int64 divisor, out Int64 remainder, out bool
+        // overflowed) {
         ///            overflowed = (divisor == -1 && m_value == MinValue);
         ///
         ///            if (overflowed) {
@@ -482,7 +487,8 @@ namespace System
         ///        private static Int64ArithmeticDescriptor s_descriptor;
         ///
         ///        class Int64ArithmeticDescriptor : ArithmeticDescriptor<Int64> {
-        ///            public Int64ArithmeticDescriptor(ArithmeticCapabilities capabilities) : base(capabilities) {}
+        ///            public Int64ArithmeticDescriptor(ArithmeticCapabilities capabilities) :
+        // base(capabilities) {}
         ///
         ///            public override Int64 One {
         ///                get {

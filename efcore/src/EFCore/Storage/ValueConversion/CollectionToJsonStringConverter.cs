@@ -15,7 +15,8 @@ public class CollectionToJsonStringConverter<TElement>
     ///     Creates a new instance of this converter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="collectionJsonReaderWriter">The reader/writer to use.</param>
     public CollectionToJsonStringConverter(JsonValueReaderWriter collectionJsonReaderWriter)

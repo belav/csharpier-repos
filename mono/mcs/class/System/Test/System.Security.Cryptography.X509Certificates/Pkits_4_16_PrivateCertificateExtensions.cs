@@ -34,13 +34,13 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {
-    /*
-     * Notes:
-     *
-     * [MS/XP][!RFC3280] Unknown critical extensions are ignored.
-     *
-     * See PkitsTest.cs for more details
-     */
+/*
+* Notes:
+*
+* [MS/XP][!RFC3280] Unknown critical extensions are ignored.
+*
+* See PkitsTest.cs for more details
+*/
 
     [TestFixture]
     [Category("PKITS")]

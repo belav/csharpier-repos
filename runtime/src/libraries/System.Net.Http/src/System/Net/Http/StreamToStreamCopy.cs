@@ -15,11 +15,14 @@ namespace System.Net.Http
     /// </summary>
     internal static class StreamToStreamCopy
     {
-        /// <summary>Copies the source stream from its current position to the destination stream at its current position.</summary>
+        /// <summary>Copies the source stream from its current position to the destination stream at its
+        // current position.</summary>
         /// <param name="source">The source stream from which to copy.</param>
         /// <param name="destination">The destination stream to which to copy.</param>
-        /// <param name="bufferSize">The size of the buffer to allocate if one needs to be allocated. If zero, use the default buffer size.</param>
-        /// <param name="disposeSource">Whether to dispose of the source stream after the copy has finished successfully.</param>
+        /// <param name="bufferSize">The size of the buffer to allocate if one needs to be allocated. If
+        // zero, use the default buffer size.</param>
+        /// <param name="disposeSource">Whether to dispose of the source stream after the copy has finished
+        // successfully.</param>
         public static void Copy(
             Stream source,
             Stream destination,
@@ -46,11 +49,14 @@ namespace System.Net.Http
             }
         }
 
-        /// <summary>Copies the source stream from its current position to the destination stream at its current position.</summary>
+        /// <summary>Copies the source stream from its current position to the destination stream at its
+        // current position.</summary>
         /// <param name="source">The source stream from which to copy.</param>
         /// <param name="destination">The destination stream to which to copy.</param>
-        /// <param name="bufferSize">The size of the buffer to allocate if one needs to be allocated. If zero, use the default buffer size.</param>
-        /// <param name="disposeSource">Whether to dispose of the source stream after the copy has finished successfully.</param>
+        /// <param name="bufferSize">The size of the buffer to allocate if one needs to be allocated. If
+        // zero, use the default buffer size.</param>
+        /// <param name="disposeSource">Whether to dispose of the source stream after the copy has finished
+        // successfully.</param>
         /// <param name="cancellationToken">CancellationToken used to cancel the copy operation.</param>
         public static Task CopyAsync(
             Stream source,
@@ -98,7 +104,8 @@ namespace System.Net.Http
             }
             catch (Exception e)
             {
-                // For compatibility with the previous implementation, catch everything (including arg exceptions) and
+                // For compatibility with the previous implementation, catch everything (including arg exceptions)
+                // and
                 // store errors into the task rather than letting them propagate to the synchronous caller.
                 return Task.FromException(e);
             }
@@ -113,7 +120,8 @@ namespace System.Net.Http
             }
             catch (Exception e)
             {
-                // Dispose() should never throw, but since we're on an async codepath, make sure to catch the exception.
+                // Dispose() should never throw, but since we're on an async codepath, make sure to catch the
+                // exception.
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Error(null, e);
             }

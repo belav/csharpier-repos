@@ -21,7 +21,8 @@ internal class Descriptors
     );
 
     /// <summary>
-    /// See https://devdiv.visualstudio.com/DevDiv/_git/CPS?path=/src/Microsoft.VisualStudio.ProjectSystem.Server/BrokerServices/ProjectInitializationStatusServiceDescriptor.cs
+    /// See
+    // https://devdiv.visualstudio.com/DevDiv/_git/CPS?path=/src/Microsoft.VisualStudio.ProjectSystem.Server/BrokerServices/ProjectInitializationStatusServiceDescriptor.cs
     /// </summary>
     public static readonly ServiceRpcDescriptor RemoteProjectInitializationStatusService =
         new ServiceJsonRpcDescriptor(
@@ -41,7 +42,8 @@ internal class Descriptors
     /// The set of remote services that we register to our container.
     /// </summary>
     /// <remarks>
-    /// Note that while today we only support static registration of services in the remote process it would be possible to implement dynamic registration
+    /// Note that while today we only support static registration of services in the remote process it
+    // would be possible to implement dynamic registration
     /// if we read the remote brokered service manifest.
     /// </remarks>
     public static ImmutableDictionary<

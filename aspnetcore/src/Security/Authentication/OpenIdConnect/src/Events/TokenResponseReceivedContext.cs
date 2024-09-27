@@ -8,7 +8,8 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 /// <summary>
-/// This Context can be used to be informed when an 'AuthorizationCode' is redeemed for tokens at the token endpoint.
+/// This Context can be used to be informed when an 'AuthorizationCode' is redeemed for tokens at
+// the token endpoint.
 /// </summary>
 public class TokenResponseReceivedContext : RemoteAuthenticationContext<OpenIdConnectOptions>
 {
@@ -30,7 +31,8 @@ public class TokenResponseReceivedContext : RemoteAuthenticationContext<OpenIdCo
     public OpenIdConnectMessage ProtocolMessage { get; set; } = default!;
 
     /// <summary>
-    /// Gets or sets the <see cref="OpenIdConnectMessage"/> that contains the tokens received after redeeming the code at the token endpoint.
+    /// Gets or sets the <see cref="OpenIdConnectMessage"/> that contains the tokens received after
+    // redeeming the code at the token endpoint.
     /// </summary>
     public OpenIdConnectMessage TokenEndpointResponse { get; set; } = default!;
 }

@@ -10,7 +10,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     /// <summary>
     /// Provide information to create a ITableEntriesSnapshot
     ///
-    /// This works on data that belong to logically same source of items such as one particular analyzer or todo list analyzer.
+    /// This works on data that belong to logically same source of items such as one particular analyzer
+    // or todo list analyzer.
     /// </summary>
     internal abstract class AbstractTableEntriesSource<TItem>
         where TItem : TableItem

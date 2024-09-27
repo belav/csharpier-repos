@@ -78,7 +78,8 @@ namespace System.ServiceModel.Channels
                         )
                     );
                 }
-                // cache the context state in the demuxer so that the same context state can be provided to the transport
+                // cache the context state in the demuxer so that the same context state can be provided to the
+                // transport
                 // when building auxilliary channels and listeners (for ex, for security negotiation)
                 elements.Insert(
                     elements.IndexOf(transport),

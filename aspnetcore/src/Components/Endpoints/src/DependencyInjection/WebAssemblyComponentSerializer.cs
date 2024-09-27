@@ -5,7 +5,8 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Endpoints;
 
-// See the details of the component serialization protocol in WebAssemblyComponentDeserializer.cs on the Components solution.
+// See the details of the component serialization protocol in WebAssemblyComponentDeserializer.cs on
+// the Components solution.
 internal sealed class WebAssemblyComponentSerializer
 {
     public static void SerializeInvocation(
@@ -26,8 +27,10 @@ internal sealed class WebAssemblyComponentSerializer
             );
         var (definitions, values) = ComponentParameter.FromParameterView(parameters);
 
-        // We need to serialize and Base64 encode parameters separately since they can contain arbitrary data that might
-        // cause the HTML comment to be invalid (like if you serialize a string that contains two consecutive dashes "--").
+        // We need to serialize and Base64 encode parameters separately since they can contain arbitrary
+        // data that might
+        // cause the HTML comment to be invalid (like if you serialize a string that contains two
+        // consecutive dashes "--").
         var serializedDefinitions = Convert.ToBase64String(
             JsonSerializer.SerializeToUtf8Bytes(
                 definitions,

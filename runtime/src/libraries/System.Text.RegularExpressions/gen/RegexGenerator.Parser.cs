@@ -136,10 +136,13 @@ namespace System.Text.RegularExpressions.Generator
                 ? (RegexOptions)options
                 : RegexOptions.None;
 
-            // If RegexOptions.IgnoreCase was specified or the inline ignore case option `(?i)` is present in the pattern, then we will (in priority order):
+            // If RegexOptions.IgnoreCase was specified or the inline ignore case option `(?i)` is present in
+            // the pattern, then we will (in priority order):
             // - If a culture name was passed in:
-            //   - If RegexOptions.CultureInvariant was also passed in, then we emit a diagnostic due to the explicit conflict.
-            //   - We try to initialize a culture using the passed in culture name to be used for case-sensitive comparisons. If
+            //   - If RegexOptions.CultureInvariant was also passed in, then we emit a diagnostic due to the
+            // explicit conflict.
+            //   - We try to initialize a culture using the passed in culture name to be used for case-sensitive
+            // comparisons. If
             //     the culture name is invalid, we'll emit a diagnostic.
             // - Default to use Invariant Culture if no culture name was passed in.
             CultureInfo culture = CultureInfo.InvariantCulture;
@@ -165,7 +168,8 @@ namespace System.Text.RegularExpressions.Generator
             {
                 if ((regexOptions & RegexOptions.CultureInvariant) != 0)
                 {
-                    // User passed in both a culture name and set RegexOptions.CultureInvariant which causes an explicit conflict.
+                    // User passed in both a culture name and set RegexOptions.CultureInvariant which causes an explicit
+                    // conflict.
                     return new DiagnosticData(
                         DiagnosticDescriptors.InvalidRegexArguments,
                         GetComparableLocation(methodSyntax),
@@ -310,7 +314,8 @@ namespace System.Text.RegularExpressions.Generator
             CompilationData CompilationData
         );
 
-        /// <summary>Data about a regex, including a fully parsed RegexTree and subsequent analysis.</summary>
+        /// <summary>Data about a regex, including a fully parsed RegexTree and subsequent
+        // analysis.</summary>
         internal sealed record RegexMethod(
             RegexType DeclaringType,
             Location DiagnosticLocation,

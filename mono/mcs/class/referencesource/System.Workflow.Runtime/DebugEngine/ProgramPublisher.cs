@@ -86,7 +86,8 @@ namespace System.Workflow.Runtime.DebugEngine
 
             Debug.WriteLine("WDE: ProgramPublisher.Unpublish()");
 
-            // In order to guarantee that the Program Nodes are always in the MTA, unpublish on a separate thread.
+            // In order to guarantee that the Program Nodes are always in the MTA, unpublish on a separate
+            // thread.
             try
             {
                 Thread unpublisherThread = new Thread(UnpublishThreadFunc);

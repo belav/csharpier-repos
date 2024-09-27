@@ -12,19 +12,23 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.MSBuild
 {
     /// <summary>
-    /// A map of projects that can be optionally used with <see cref="MSBuildProjectLoader.LoadProjectInfoAsync"/> when loading a
-    /// project into a custom <see cref="Workspace"/>. To use, pass <see cref="Workspace.CurrentSolution"/> to <see cref="Create(Solution)"/>.
+    /// A map of projects that can be optionally used with <see
+    // cref="MSBuildProjectLoader.LoadProjectInfoAsync"/> when loading a
+    /// project into a custom <see cref="Workspace"/>. To use, pass <see
+    // cref="Workspace.CurrentSolution"/> to <see cref="Create(Solution)"/>.
     /// </summary>
     public class ProjectMap
     {
         /// <summary>
-        /// A map of project path to <see cref="ProjectId"/>s. Note that there can be multiple <see cref="ProjectId"/>s per project path
+        /// A map of project path to <see cref="ProjectId"/>s. Note that there can be multiple <see
+        // cref="ProjectId"/>s per project path
         /// if the project is multi-targeted -- one for each target framework.
         /// </summary>
         private readonly Dictionary<string, HashSet<ProjectId>> _projectPathToProjectIdsMap;
 
         /// <summary>
-        /// A map of project path to <see cref="ProjectInfo"/>s. Note that there can be multiple <see cref="ProjectId"/>s per project path
+        /// A map of project path to <see cref="ProjectInfo"/>s. Note that there can be multiple <see
+        // cref="ProjectId"/>s per project path
         /// if the project is multi-targeted -- one for each target framework.
         /// </summary>
         private readonly Dictionary<
@@ -62,7 +66,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// <summary>
         /// Create a <see cref="ProjectMap"/> populated with the given <see cref="Solution"/>.
         /// </summary>
-        /// <param name="solution">The <see cref="Solution"/> to populate the new <see cref="ProjectMap"/> with.</param>
+        /// <param name="solution">The <see cref="Solution"/> to populate the new <see cref="ProjectMap"/>
+        // with.</param>
         /// <returns></returns>
         public static ProjectMap Create(Solution solution)
         {

@@ -18,7 +18,8 @@ public sealed class JSStreamReference : JSObjectReference, IJSStreamReference
     /// </summary>
     /// <param name="jsRuntime">The <see cref="JSRuntime"/> used for invoking JS interop calls.</param>
     /// <param name="id">The unique identifier.</param>
-    /// <param name="totalLength">The length of the data stream coming from JS represented by this data reference.</param>
+    /// <param name="totalLength">The length of the data stream coming from JS represented by this data
+    // reference.</param>
     internal JSStreamReference(JSRuntime jsRuntime, long id, long totalLength)
         : base(jsRuntime, id)
     {

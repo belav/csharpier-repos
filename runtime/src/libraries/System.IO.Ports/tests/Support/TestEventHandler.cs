@@ -15,7 +15,8 @@ namespace Legacy.Support
     /// <summary>
     /// Base class for all test event handlers
     /// </summary>
-    /// <typeparam name="T">The type of the EventType object which is passed to the event handler</typeparam>
+    /// <typeparam name="T">The type of the EventType object which is passed to the event
+    // handler</typeparam>
     public class TestEventHandler<T>
     {
         private readonly List<T> _eventTypes = new List<T>();

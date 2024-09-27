@@ -11,7 +11,8 @@ namespace System.Collections.Generic
     /// Represents a first-in, first-out collection of objects.
     /// </summary>
     /// <remarks>
-    /// Implemented as a circular buffer, so <see cref="Enqueue(T)"/> and <see cref="Dequeue"/> are typically <c>O(1)</c>.
+    /// Implemented as a circular buffer, so <see cref="Enqueue(T)"/> and <see cref="Dequeue"/> are
+    // typically <c>O(1)</c>.
     /// </remarks>
     [DebuggerTypeProxy(typeof(QueueDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
@@ -371,7 +372,8 @@ namespace System.Collections.Generic
         /// Sets the capacity of a <see cref="Queue{T}"/> object to the specified number of entries.
         /// </summary>
         /// <param name="capacity">The new capacity.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Passed capacity is lower than entries count.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Passed capacity is lower than entries
+        // count.</exception>
         public void TrimExcess(int capacity)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(capacity);

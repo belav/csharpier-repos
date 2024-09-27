@@ -10,24 +10,31 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>
 ///     <para>
-///         Represents the mapping between a .NET <see cref="byte" /> array type and a database type.
+///         Represents the mapping between a .NET <see cref="byte" /> array type and a database
+// type.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class ByteArrayTypeMapping : RelationalTypeMapping
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public static ByteArrayTypeMapping Default { get; } = new("binary");
 
@@ -36,7 +43,8 @@ public class ByteArrayTypeMapping : RelationalTypeMapping
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-    /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
+    /// <param name="size">The size of data the property is configured to store, or null if no size is
+    // configured.</param>
     public ByteArrayTypeMapping(
         string storeType,
         DbType? dbType = System.Data.DbType.Binary,

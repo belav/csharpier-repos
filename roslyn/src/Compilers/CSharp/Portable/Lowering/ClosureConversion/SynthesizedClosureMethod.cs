@@ -221,8 +221,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             DebugId lambdaId
         )
         {
-            // Lambda method name must contain the declaring method ordinal to be unique unless the method is emitted into a closure class exclusive to the declaring method.
-            // Lambdas that only close over "this" are emitted directly into the top-level method containing type.
+            // Lambda method name must contain the declaring method ordinal to be unique unless the method is
+            // emitted into a closure class exclusive to the declaring method.
+            // Lambdas that only close over "this" are emitted directly into the top-level method containing
+            // type.
             // Lambdas that don't close over anything (static) are emitted into a shared closure singleton.
             return GeneratedNames.MakeLambdaMethodName(
                 topLevelMethodName,
@@ -257,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
-            // Syntax offset of a syntax node contained in a lambda body is calculated by the containing top-level method.
+            // Syntax offset of a syntax node contained in a lambda body is calculated by the containing
+            // top-level method.
             // The offset is thus relative to the top-level method body start.
             return TopLevelMethod.CalculateLocalSyntaxOffset(localPosition, localTree);
         }

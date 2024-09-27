@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a table index.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-indexes">Indexes</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-indexes">Indexes</see> for more information and
+// examples.
 /// </remarks>
 public interface ITableIndex : IAnnotatable
 {
@@ -39,7 +40,8 @@ public interface ITableIndex : IAnnotatable
     bool IsUnique { get; }
 
     /// <summary>
-    ///     A set of values indicating whether each corresponding index column has descending sort order.
+    ///     A set of values indicating whether each corresponding index column has descending sort
+    // order.
     /// </summary>
     IReadOnlyList<bool>? IsDescending { get; }
 

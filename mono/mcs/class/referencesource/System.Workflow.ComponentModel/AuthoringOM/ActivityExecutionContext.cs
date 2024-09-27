@@ -417,7 +417,8 @@ namespace System.Workflow.ComponentModel
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
 
-            // the current activity might have closed, in that case, we would like to give the exception to parent
+            // the current activity might have closed, in that case, we would like to give the exception to
+            // parent
             if (this.currentActivity.ExecutionStatus == ActivityExecutionStatus.Closed)
             {
                 if (this.currentActivity.Parent == null)

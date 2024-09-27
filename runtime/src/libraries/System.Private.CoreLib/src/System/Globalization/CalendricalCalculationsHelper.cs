@@ -178,7 +178,8 @@ namespace System.Globalization
             return (double)(july1stOfYear - s_startOf1900Century) / DaysInUniformLengthCentury;
         }
 
-        // the following formulas defines a polynomial function which gives us the amount that the earth is slowing down for specific year ranges
+        // the following formulas defines a polynomial function which gives us the amount that the earth is
+        // slowing down for specific year ranges
         private static double DefaultEphemerisCorrection(int gregorianYear)
         {
             Debug.Assert(gregorianYear < 1620 || 2020 <= gregorianYear);
@@ -287,14 +288,16 @@ namespace System.Globalization
             const double Divisor = 2 * Math.PI;
             double equation = dividend / Divisor;
 
-            // approximation of equation of time is not valid for dates that are many millennia in the past or future
+            // approximation of equation of time is not valid for dates that are many millennia in the past or
+            // future
             // thus limited to a half day
             return Math.CopySign(Math.Min(Math.Abs(equation), TwelveHours), equation);
         }
 
         private static double AsLocalTime(double apparentMidday, double longitude)
         {
-            // slightly inaccurate since equation of time takes mean time not apparent time as its argument, but the difference is negligible
+            // slightly inaccurate since equation of time takes mean time not apparent time as its argument, but
+            // the difference is negligible
             double universalTime = apparentMidday - AsDayFraction(longitude);
             return apparentMidday - EquationOfTime(universalTime);
         }
@@ -414,7 +417,8 @@ namespace System.Globalization
         }
 
         // persian-new-year-on-or-before
-        //  number of days is the absolute date. The absolute date is the number of days from January 1st, 1 A.D.
+        //  number of days is the absolute date. The absolute date is the number of days from January 1st, 1
+        // A.D.
         //  1/1/0001 is absolute date 1.
         internal static long PersianNewYearOnOrBefore(long numberOfDays)
         {

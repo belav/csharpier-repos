@@ -17,7 +17,8 @@ namespace System.Web.UI
     {
         private Hashtable _commonAttributes = new Hashtable();
 
-        // For _elementSpecificAttributes, each hashtable value is a hashtable.  If an attribute name appears as a key
+        // For _elementSpecificAttributes, each hashtable value is a hashtable.  If an attribute name
+        // appears as a key
         // in the hashtable corresponding to an element, the attribute is passed through.
         private Hashtable _elementSpecificAttributes = new Hashtable(
             StringComparer.CurrentCultureIgnoreCase
@@ -38,7 +39,8 @@ namespace System.Web.UI
         public XhtmlTextWriter(TextWriter writer, string tabString)
             : base(writer, tabString)
         {
-            // Common attributes are defined in the xhtml modularization spec.  They are allowed by the writer unless
+            // Common attributes are defined in the xhtml modularization spec.  They are allowed by the writer
+            // unless
             // _suppressCommonAttribues["elementName"] is nonnull.
             _commonAttributes.Add("class", true);
             _commonAttributes.Add("id", true);
@@ -52,7 +54,8 @@ namespace System.Web.UI
             // See also VSWhidbey 228858.
             // _commonAttributes.Add("dir", true);
 
-            // Note: style attribute is added in SetDocType in case doctype is XHTML-MP or WML20.  In XHTML Basic, it is disallowed.
+            // Note: style attribute is added in SetDocType in case doctype is XHTML-MP or WML20.  In XHTML
+            // Basic, it is disallowed.
 
             // Initialize dictionary lookup of attributes by element.
 
@@ -294,7 +297,8 @@ namespace System.Web.UI
                 return;
             }
 
-            // (...else) This is an edge case.  The call removes a common attribute, so we need to add each common attribute and remove the
+            // (...else) This is an edge case.  The call removes a common attribute, so we need to add each
+            // common attribute and remove the
             // except the specified one.
             _suppressCommonAttributes[elementName] = true;
             foreach (string key in _commonAttributes.Keys)

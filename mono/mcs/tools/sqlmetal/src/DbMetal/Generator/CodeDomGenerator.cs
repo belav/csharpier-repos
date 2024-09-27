@@ -263,6 +263,8 @@ namespace DbMetal.Generator
             var result = new StringBuilder();
 
             // http://www.network-science.de/ascii/
+            //
+            //
             // http://www.network-science.de/ascii/ascii.php?TEXT=MetalSequel&x=14&y=14&FONT=_all+fonts+with+your+text_&RICH=no&FORM=left&STRE=no&WIDT=80
             result.Append(
                 @"
@@ -1836,7 +1838,8 @@ namespace DbMetal.Generator
                 );
                 if (targetTable == null)
                 {
-                    //Logger.Write(Level.Error, "ERROR L191 target table type not found: " + parent.Type + "  (processing " + parent.Name + ")");
+                    //Logger.Write(Level.Error, "ERROR L191 target table type not found: " + parent.Type + "
+                    // (processing " + parent.Name + ")");
                     continue;
                 }
 

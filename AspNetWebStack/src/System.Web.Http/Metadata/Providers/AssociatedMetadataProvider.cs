@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Concurrent;
@@ -111,7 +112,8 @@ namespace System.Web.Http.Metadata.Providers
 
         private TypeInformation GetTypeInformation(Type type)
         {
-            // This retrieval is implemented as a TryGetValue/TryAdd instead of a GetOrAdd to avoid the performance cost of creating instance delegates
+            // This retrieval is implemented as a TryGetValue/TryAdd instead of a GetOrAdd to avoid the
+            // performance cost of creating instance delegates
             TypeInformation typeInfo;
             if (!_typeInfoCache.TryGetValue(type, out typeInfo))
             {
@@ -164,7 +166,8 @@ namespace System.Web.Http.Metadata.Providers
             return info;
         }
 
-        // Optimization: yield provides much better performance than the LINQ .Cast<Attribute>() in this case
+        // Optimization: yield provides much better performance than the LINQ .Cast<Attribute>() in this
+        // case
         private static IEnumerable<Attribute> AsAttributes(IEnumerable attributes)
         {
             foreach (object attribute in attributes)

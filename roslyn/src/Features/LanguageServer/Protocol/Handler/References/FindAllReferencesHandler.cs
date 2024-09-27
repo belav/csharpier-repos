@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 cancellationToken
             );
 
-            // Finds the references for the symbol at the specific position in the document, reporting them via streaming to the LSP client.
+            // Finds the references for the symbol at the specific position in the document, reporting them via
+            // streaming to the LSP client.
             await findUsagesService
                 .FindReferencesAsync(findUsagesContext, document, position, cancellationToken)
                 .ConfigureAwait(false);

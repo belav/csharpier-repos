@@ -87,14 +87,15 @@ namespace DbLinq.PostgreSql
         }
 
         /*
-                public override IDbDataParameter CreateSqlParameter(IDbCommand cmd, string dbTypeName, string paramName)
-                {
-                    //System.Data.SqlDbType dbType = DbLinq.util.SqlTypeConversions.ParseType(dbTypeName);
-                    //SqlParameter param = new SqlParameter(paramName, dbType);
-                    NpgsqlTypes.NpgsqlDbType dbType = PgsqlTypeConversions.ParseType(dbTypeName);
-                    NpgsqlParameter param = new NpgsqlParameter(paramName, dbType);
-                    return param;
-                }
+        public override IDbDataParameter CreateSqlParameter(IDbCommand cmd, string dbTypeName, string
+        paramName)
+        {
+        //System.Data.SqlDbType dbType = DbLinq.util.SqlTypeConversions.ParseType(dbTypeName);
+        //SqlParameter param = new SqlParameter(paramName, dbType);
+        NpgsqlTypes.NpgsqlDbType dbType = PgsqlTypeConversions.ParseType(dbTypeName);
+        NpgsqlParameter param = new NpgsqlParameter(paramName, dbType);
+        return param;
+        }
         */
         /// <summary>
         /// call mysql stored proc or stored function,

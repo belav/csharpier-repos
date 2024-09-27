@@ -95,7 +95,8 @@ namespace System.Data.Metadata.Edm
 
             InitializeFacetDescriptions();
 
-            // Some types may not have facets, so just try to get them, if there aren't any, just return an empty list
+            // Some types may not have facets, so just try to get them, if there aren't any, just return an
+            // empty list
             System.Collections.ObjectModel.ReadOnlyCollection<FacetDescription> collection = null;
             if (_facetDescriptions.TryGetValue(type as PrimitiveType, out collection))
             {
@@ -107,7 +108,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns a primitive type from this manifest having the specified primitive type kind
         /// </summary>
-        /// <param name="primitiveTypeKind">The value specifying the kind of primitive type to return</param>
+        /// <param name="primitiveTypeKind">The value specifying the kind of primitive type to
+        // return</param>
         /// <returns>A primitive type having the given primitive type kind</returns>
         public PrimitiveType GetPrimitiveType(PrimitiveTypeKind primitiveTypeKind)
         {

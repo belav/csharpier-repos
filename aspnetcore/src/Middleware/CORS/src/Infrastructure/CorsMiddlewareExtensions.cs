@@ -39,7 +39,8 @@ public static class CorsMiddlewareExtensions
     /// Adds a CORS middleware to your web application pipeline to allow cross domain requests.
     /// </summary>
     /// <param name="app">The IApplicationBuilder passed to your Configure method.</param>
-    /// <param name="configurePolicy">A delegate which can use a policy builder to build a policy.</param>
+    /// <param name="configurePolicy">A delegate which can use a policy builder to build a
+    // policy.</param>
     /// <returns>The original app parameter</returns>
     public static IApplicationBuilder UseCors(
         this IApplicationBuilder app,

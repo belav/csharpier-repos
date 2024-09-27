@@ -73,7 +73,8 @@ public class ViewEngineResult
     /// Ensure this <see cref="ViewEngineResult"/> was successful.
     /// </summary>
     /// <param name="originalLocations">
-    /// Additional <see cref="SearchedLocations"/> to include in the thrown <see cref="InvalidOperationException"/>
+    /// Additional <see cref="SearchedLocations"/> to include in the thrown <see
+    // cref="InvalidOperationException"/>
     /// if <see cref="Success"/> is <c>false</c>.
     /// </param>
     /// <exception cref="InvalidOperationException">

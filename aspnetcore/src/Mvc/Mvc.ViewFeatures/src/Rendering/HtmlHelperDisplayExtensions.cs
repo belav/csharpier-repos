@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering;
 public static class HtmlHelperDisplayExtensions
 {
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The template is found
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The
+    // template is found
     /// using the <paramref name="expression"/>'s <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
@@ -23,15 +24,18 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/>'s value.
     /// </para>
     /// <para>
-    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current model and
+    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current
+    // model and
     /// <c>"prop"</c> which identifies the current model's "prop" property.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -48,7 +52,8 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and specified
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and
+    // specified
     /// additional view data. The template is found using the <paramref name="expression"/>'s
     /// <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
@@ -58,22 +63,26 @@ public static class HtmlHelperDisplayExtensions
     /// <see cref="object"/> that contains the properties to display.
     /// </param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String,
+    // Object}"/>
     /// that can contain additional view data that will be merged into the
     /// <see cref="ViewFeatures.ViewDataDictionary{TModel}"/> instance created for the template.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/>'s value.
     /// </para>
     /// <para>
-    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current model and
+    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current
+    // model and
     /// <c>"prop"</c> which identifies the current model's "prop" property.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -94,7 +103,8 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The template is found
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The
+    // template is found
     /// using the <paramref name="templateName"/> or the <paramref name="expression"/>'s
     /// <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
@@ -107,15 +117,18 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/>'s value.
     /// </para>
     /// <para>
-    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current model and
+    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current
+    // model and
     /// <c>"prop"</c> which identifies the current model's "prop" property.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -136,7 +149,8 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and specified
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and
+    // specified
     /// additional view data. The template is found using the <paramref name="templateName"/> or the
     /// <paramref name="expression"/>'s <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
@@ -147,22 +161,26 @@ public static class HtmlHelperDisplayExtensions
     /// </param>
     /// <param name="templateName">The name of the template used to create the HTML markup.</param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String,
+    // Object}"/>
     /// that can contain additional view data that will be merged into the
     /// <see cref="ViewFeatures.ViewDataDictionary{TModel}"/> instance created for the template.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/>'s value.
     /// </para>
     /// <para>
-    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current model and
+    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current
+    // model and
     /// <c>"prop"</c> which identifies the current model's "prop" property.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -184,7 +202,8 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and specified HTML
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and
+    // specified HTML
     /// field name. The template is found using the <paramref name="templateName"/> or the
     /// <paramref name="expression"/>'s<see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
@@ -201,15 +220,18 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/>'s value.
     /// </para>
     /// <para>
-    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current model and
+    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current
+    // model and
     /// <c>"prop"</c> which identifies the current model's "prop" property.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -231,21 +253,25 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The template is found
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The
+    // template is found
     /// using the <paramref name="expression"/>'s <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
-    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method extends.</param>
+    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method
+    // extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/> result.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -266,14 +292,17 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and specified
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and
+    // specified
     /// additional view data. The template is found using the <paramref name="expression"/>'s
     /// <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
-    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method extends.</param>
+    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method
+    // extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String,
+    // Object}"/>
     /// that can contain additional view data that will be merged into the
     /// <see cref="ViewFeatures.ViewDataDictionary{TModel}"/> instance created for the template.
     /// </param>
@@ -282,11 +311,13 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/> result.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -308,11 +339,13 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The template is found
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template. The
+    // template is found
     /// using the <paramref name="templateName"/> or the <paramref name="expression"/>'s
     /// <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
-    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method extends.</param>
+    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method
+    // extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="templateName">The name of the template used to create the HTML markup.</param>
     /// <typeparam name="TModel">The type of the model.</typeparam>
@@ -320,11 +353,13 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/> result.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -346,15 +381,18 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and specified
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and
+    // specified
     /// additional view data. The template is found using the <paramref name="templateName"/> or the
     /// <paramref name="expression"/>'s <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
-    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method extends.</param>
+    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method
+    // extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="templateName">The name of the template used to create the HTML markup.</param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String,
+    // Object}"/>
     /// that can contain additional view data that will be merged into the
     /// <see cref="ViewFeatures.ViewDataDictionary{TModel}"/> instance created for the template.
     /// </param>
@@ -363,11 +401,13 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/> result.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -390,15 +430,18 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and specified HTML
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template and
+    // specified HTML
     /// field name. The template is found using the <paramref name="templateName"/> or the
     /// <paramref name="expression"/>'s <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
-    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method extends.</param>
+    /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method
+    // extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="templateName">The name of the template used to create the HTML markup.</param>
     /// <param name="htmlFieldName">
-    /// A <see cref="string"/> used to disambiguate the names of HTML elements that are created for properties
+    /// A <see cref="string"/> used to disambiguate the names of HTML elements that are created for
+    // properties
     /// that have the same name.
     /// </param>
     /// <typeparam name="TModel">The type of the model.</typeparam>
@@ -406,11 +449,13 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/> result.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -433,18 +478,21 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the current model, using a display template. The template is found using the
+    /// Returns HTML markup for the current model, using a display template. The template is found using
+    // the
     /// model's <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// current model.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -461,23 +509,27 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the current model, using a display template and specified additional view data. The
+    /// Returns HTML markup for the current model, using a display template and specified additional
+    // view data. The
     /// template is found using the model's <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String,
+    // Object}"/>
     /// that can contain additional view data that will be merged into the
     /// <see cref="ViewFeatures.ViewDataDictionary{TModel}"/> instance created for the template.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// current model.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -497,7 +549,8 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the current model, using a display template. The template is found using the
+    /// Returns HTML markup for the current model, using a display template. The template is found using
+    // the
     /// <paramref name="templateName"/> or the model's <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
@@ -505,11 +558,13 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// current model.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -526,25 +581,29 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the current model, using a display template and specified additional view data. The
+    /// Returns HTML markup for the current model, using a display template and specified additional
+    // view data. The
     /// template is found using the <paramref name="templateName"/> or the model's
     /// <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="templateName">The name of the template used to create the HTML markup.</param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String,
+    // Object}"/>
     /// that can contain additional view data that will be merged into the
     /// <see cref="ViewFeatures.ViewDataDictionary{TModel}"/> instance created for the template.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// current model.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -565,7 +624,8 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the current model, using a display template and specified HTML field name. The
+    /// Returns HTML markup for the current model, using a display template and specified HTML field
+    // name. The
     /// template is found using the <paramref name="templateName"/> or the model's
     /// <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
@@ -578,11 +638,13 @@ public static class HtmlHelperDisplayExtensions
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// current model.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -603,8 +665,10 @@ public static class HtmlHelperDisplayExtensions
     }
 
     /// <summary>
-    /// Returns HTML markup for the current model, using a display template, specified HTML field name, and
-    /// additional view data. The template is found using the <paramref name="templateName"/> or the model's
+    /// Returns HTML markup for the current model, using a display template, specified HTML field name,
+    // and
+    /// additional view data. The template is found using the <paramref name="templateName"/> or the
+    // model's
     /// <see cref="ModelBinding.ModelMetadata"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
@@ -614,18 +678,21 @@ public static class HtmlHelperDisplayExtensions
     /// properties that have the same name.
     /// </param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    /// An anonymous <see cref="object"/> or <see cref="System.Collections.Generic.IDictionary{String,
+    // Object}"/>
     /// that can contain additional view data that will be merged into the
     /// <see cref="ViewFeatures.ViewDataDictionary{TModel}"/> instance created for the template.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// current model.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>

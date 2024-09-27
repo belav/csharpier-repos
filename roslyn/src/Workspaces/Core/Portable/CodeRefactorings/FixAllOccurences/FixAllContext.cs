@@ -15,7 +15,8 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 namespace Microsoft.CodeAnalysis.CodeRefactorings
 {
     /// <summary>
-    /// Context for "Fix all occurrences" for code refactorings provided by each <see cref="CodeRefactoringProvider"/>.
+    /// Context for "Fix all occurrences" for code refactorings provided by each <see
+    // cref="CodeRefactoringProvider"/>.
     /// </summary>
     /// <remarks>
     /// TODO: Make public, tracked with https://github.com/dotnet/roslyn/issues/60703
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         public FixAllScope Scope => State.Scope;
 
         /// <summary>
-        /// The <see cref="CodeAction.EquivalenceKey"/> value expected of a <see cref="CodeAction"/> participating in this fix all.
+        /// The <see cref="CodeAction.EquivalenceKey"/> value expected of a <see cref="CodeAction"/>
+        // participating in this fix all.
         /// </summary>
         public string? CodeActionEquivalenceKey => State.CodeActionEquivalenceKey;
 
@@ -56,8 +58,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <summary>
         /// Project to fix all occurrences.
         /// Note that this property will always be the containing project of <see cref="Document"/>
-        /// for publicly exposed FixAllContext instance. However, we might create an intermediate FixAllContext
-        /// with null <see cref="Document"/> and non-null Project, so we require this internal property for intermediate computation.
+        /// for publicly exposed FixAllContext instance. However, we might create an intermediate
+        // FixAllContext
+        /// with null <see cref="Document"/> and non-null Project, so we require this internal property for
+        // intermediate computation.
         /// </summary>
         public Project Project => State.Project;
 

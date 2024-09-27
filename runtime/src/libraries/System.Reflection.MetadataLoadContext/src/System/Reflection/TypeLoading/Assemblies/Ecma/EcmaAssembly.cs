@@ -9,7 +9,8 @@ using System.Reflection.PortableExecutable;
 namespace System.Reflection.TypeLoading.Ecma
 {
     /// <summary>
-    /// Base class for all Assembly objects created by a MetadataLoadContext and get its metadata from a PEReader.
+    /// Base class for all Assembly objects created by a MetadataLoadContext and get its metadata from a
+    // PEReader.
     /// </summary>
     internal sealed partial class EcmaAssembly : RoAssembly
     {
@@ -75,7 +76,8 @@ namespace System.Reflection.TypeLoading.Ecma
                     data.PublicKey = pk;
                     if (pk.Length != 0)
                     {
-                        // AssemblyName will automatically compute the PKT on demand but given that we're doing all this work and caching it, we might
+                        // AssemblyName will automatically compute the PKT on demand but given that we're doing all this
+                        // work and caching it, we might
                         // as well do this now.
                         data.PublicKeyToken = pk.ComputePublicKeyToken();
                     }

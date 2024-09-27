@@ -14,7 +14,8 @@ namespace System.CodeDom
 
     /// <devdoc>
     ///     <para>
-    ///       A collection that stores <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> objects.
+    ///       A collection that stores <see cref='System.CodeDom.CodeParameterDeclarationExpression'/>
+    // objects.
     ///    </para>
     /// </devdoc>
     [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
@@ -22,14 +23,17 @@ namespace System.CodeDom
     {
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/>.
         ///    </para>
         /// </devdoc>
         public CodeParameterDeclarationExpressionCollection() { }
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> based on another <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> based on another <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/>.
         ///    </para>
         /// </devdoc>
         public CodeParameterDeclarationExpressionCollection(
@@ -41,7 +45,9 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> containing any array of <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> objects.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> containing any array of <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpression'/> objects.
         ///    </para>
         /// </devdoc>
         public CodeParameterDeclarationExpressionCollection(
@@ -52,7 +58,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Represents the entry at the specified index of the <see cref='System.CodeDom.CodeParameterDeclarationExpression'/>.</para>
+        /// <para>Represents the entry at the specified index of the <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpression'/>.</para>
         /// </devdoc>
         public CodeParameterDeclarationExpression this[int index]
         {
@@ -61,7 +68,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        ///    <para>Adds a <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> with the specified value to the
+        ///    <para>Adds a <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> with the
+        // specified value to the
         ///    <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> .</para>
         /// </devdoc>
         public int Add(CodeParameterDeclarationExpression value)
@@ -70,7 +78,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the elements of an array to the end of the <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/>.</para>
+        /// <para>Copies the elements of an array to the end of the <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/>.</para>
         /// </devdoc>
         public void AddRange(CodeParameterDeclarationExpression[] value)
         {
@@ -86,7 +95,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Adds the contents of another <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> to the end of the collection.
+        ///       Adds the contents of another <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> to the end of the collection.
         ///    </para>
         /// </devdoc>
         public void AddRange(CodeParameterDeclarationExpressionCollection value)
@@ -104,7 +114,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         /// <para>Gets a value indicating whether the
-        ///    <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> contains the specified <see cref='System.CodeDom.CodeParameterDeclarationExpression'/>.</para>
+        ///    <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> contains the
+        // specified <see cref='System.CodeDom.CodeParameterDeclarationExpression'/>.</para>
         /// </devdoc>
         public bool Contains(CodeParameterDeclarationExpression value)
         {
@@ -112,7 +123,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/>
+        // values to a one-dimensional <see cref='System.Array'/> instance at the
         ///    specified index.</para>
         /// </devdoc>
         public void CopyTo(CodeParameterDeclarationExpression[] array, int index)
@@ -121,7 +133,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        ///    <para>Returns the index of a <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> in
+        ///    <para>Returns the index of a <see cref='System.CodeDom.CodeParameterDeclarationExpression'/>
+        // in
         ///       the <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> .</para>
         /// </devdoc>
         public int IndexOf(CodeParameterDeclarationExpression value)
@@ -130,7 +143,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Inserts a <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> into the <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> at the specified index.</para>
+        /// <para>Inserts a <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> into the <see
+        // cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> at the specified index.</para>
         /// </devdoc>
         public void Insert(int index, CodeParameterDeclarationExpression value)
         {
@@ -138,7 +152,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        ///    <para> Removes a specific <see cref='System.CodeDom.CodeParameterDeclarationExpression'/> from the
+        ///    <para> Removes a specific <see cref='System.CodeDom.CodeParameterDeclarationExpression'/>
+        // from the
         ///    <see cref='System.CodeDom.CodeParameterDeclarationExpressionCollection'/> .</para>
         /// </devdoc>
         public void Remove(CodeParameterDeclarationExpression value)

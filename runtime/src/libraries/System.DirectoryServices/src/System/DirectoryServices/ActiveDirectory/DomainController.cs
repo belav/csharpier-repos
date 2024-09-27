@@ -1130,7 +1130,8 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 if (e.ErrorCode == unchecked((int)0x8007203a))
                 {
-                    // server is down , so try again with force rediscovery if the flags did not already contain force rediscovery
+                    // server is down , so try again with force rediscovery if the flags did not already contain force
+                    // rediscovery
                     if ((flag & LocatorOptions.ForceRediscovery) == 0)
                     {
                         retry = true;
@@ -1252,7 +1253,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     null
                 );
             }
-            // this can only occur when flag is being explicitly passed (since the flags that we pass internally are valid)
+            // this can only occur when flag is being explicitly passed (since the flags that we pass internally
+            // are valid)
             if (errorCode == NativeMethods.ERROR_INVALID_FLAGS)
             {
                 throw new ArgumentException(SR.InvalidFlags, nameof(flag));
@@ -1352,13 +1354,13 @@ namespace System.DirectoryServices.ActiveDirectory
             GetDSHandle();
 
             // call DsGetDomainControllerInfo
-            /*DWORD DsGetDomainControllerInfo(
-                HANDLE hDs,
-                LPTSTR DomainName,
-                DWORD InfoLevel,
-                DWORD* pcOut,
-                VOID** ppInfo
-                );*/
+/*DWORD DsGetDomainControllerInfo(
+HANDLE hDs,
+LPTSTR DomainName,
+DWORD InfoLevel,
+DWORD* pcOut,
+VOID** ppInfo
+);*/
             var dsGetDomainControllerInfo = (delegate* unmanaged<
                 IntPtr,
                 char*,
@@ -1476,11 +1478,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (dcInfoPtr != IntPtr.Zero)
                     {
                         // call DsFreeDomainControllerInfo
-                        /*VOID DsFreeDomainControllerInfo(
-                            DWORD InfoLevel,
-                            DWORD cInfo,
-                            VOID* pInfo
-                            );*/
+/*VOID DsFreeDomainControllerInfo(
+DWORD InfoLevel,
+DWORD cInfo,
+VOID* pInfo
+);*/
                         var dsFreeDomainControllerInfo = (delegate* unmanaged<
                             int,
                             int,
@@ -1588,10 +1590,10 @@ namespace System.DirectoryServices.ActiveDirectory
             GetDSHandle();
             // Get the roles
             // call DsListRoles
-            /*DWORD DsListRoles(
-                HANDLE hDs,
-                PDS_NAME_RESULTW* ppRoles
-                );*/
+/*DWORD DsListRoles(
+HANDLE hDs,
+PDS_NAME_RESULTW* ppRoles
+);*/
             var dsListRoles = (delegate* unmanaged<IntPtr, IntPtr*, int>)
                 global::Interop.Kernel32.GetProcAddress(DirectoryContext.ADHandle, "DsListRolesW");
             if (dsListRoles == null)

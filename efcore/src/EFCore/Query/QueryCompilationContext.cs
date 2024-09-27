@@ -5,25 +5,31 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         The primary data structure representing the state/components used during query compilation.
+///         The primary data structure representing the state/components used during query
+// compilation.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public class QueryCompilationContext
 {
     /// <summary>
     ///     <para>
-    ///         Prefix for all the query parameters generated during parameter extraction in query pipeline.
+    ///         Prefix for all the query parameters generated during parameter extraction in query
+    // pipeline.
     ///     </para>
     ///     <para>
-    ///         This property is typically used by database providers (and other extensions). It is generally
+    ///         This property is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -31,10 +37,12 @@ public class QueryCompilationContext
 
     /// <summary>
     ///     <para>
-    ///         ParameterExpression representing <see cref="QueryContext" /> parameter in query expression.
+    ///         ParameterExpression representing <see cref="QueryContext" /> parameter in query
+    // expression.
     ///     </para>
     ///     <para>
-    ///         This property is typically used by database providers (and other extensions). It is generally
+    ///         This property is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -45,10 +53,12 @@ public class QueryCompilationContext
 
     /// <summary>
     ///     <para>
-    ///         Expression representing a not translated expression in query tree during translation phase.
+    ///         Expression representing a not translated expression in query tree during translation
+    // phase.
     ///     </para>
     ///     <para>
-    ///         This property is typically used by database providers (and other extensions). It is generally
+    ///         This property is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -156,7 +166,8 @@ public class QueryCompilationContext
     /// </summary>
     /// <typeparam name="TResult">The result type of this query.</typeparam>
     /// <param name="query">The query to generate executor for.</param>
-    /// <returns>Returns <see cref="Func{QueryContext, TResult}" /> which can be invoked to get results of this query.</returns>
+    /// <returns>Returns <see cref="Func{QueryContext, TResult}" /> which can be invoked to get results
+    // of this query.</returns>
     public virtual Func<QueryContext, TResult> CreateQueryExecutor<TResult>(Expression query)
     {
         var queryAndEventData = Logger.QueryCompilationStarting(
@@ -175,7 +186,8 @@ public class QueryCompilationContext
         // Inject tracking
         query = _shapedQueryCompilingExpressionVisitorFactory.Create(this).Visit(query);
 
-        // If any additional parameters were added during the compilation phase (e.g. entity equality ID expression),
+        // If any additional parameters were added during the compilation phase (e.g. entity equality ID
+        // expression),
         // wrap the query with code adding those parameters to the query context
         query = InsertRuntimeParameters(query);
 
@@ -199,8 +211,10 @@ public class QueryCompilationContext
     }
 
     /// <summary>
-    ///     Registers a runtime parameter that is being added at some point during the compilation phase.
-    ///     A lambda must be provided, which will extract the parameter's value from the QueryContext every time
+    ///     Registers a runtime parameter that is being added at some point during the compilation
+    // phase.
+    ///     A lambda must be provided, which will extract the parameter's value from the QueryContext
+    // every time
     ///     the query is executed.
     /// </summary>
     public virtual ParameterExpression RegisterRuntimeParameter(

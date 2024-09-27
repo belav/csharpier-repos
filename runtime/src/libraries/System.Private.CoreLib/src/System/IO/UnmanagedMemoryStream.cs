@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace System.IO
 {
-    /*
-     * This class is used to access a contiguous block of memory, likely outside
-     * the GC heap (or pinned in place in the GC heap, but a MemoryStream may
-     * make more sense in those cases).  It's great if you have a pointer and
-     * a length for a section of memory mapped in by someone else and you don't
-     * want to copy this into the GC heap.  UnmanagedMemoryStream assumes these
-     * two things:
-     *
-     * 1) All the memory in the specified block is readable or writable,
-     *    depending on the values you pass to the constructor.
-     * 2) The lifetime of the block of memory is at least as long as the lifetime
-     *    of the UnmanagedMemoryStream.
-     * 3) You clean up the memory when appropriate.  The UnmanagedMemoryStream
-     *    currently will do NOTHING to free this memory.
-     * 4) This type is not thread safe. However, the implementation should prevent buffer
-     *    overruns or returning uninitialized memory when Reads and Writes are called
-     *    concurrently in thread unsafe manner.
-     */
+/*
+* This class is used to access a contiguous block of memory, likely outside
+* the GC heap (or pinned in place in the GC heap, but a MemoryStream may
+* make more sense in those cases).  It's great if you have a pointer and
+* a length for a section of memory mapped in by someone else and you don't
+* want to copy this into the GC heap.  UnmanagedMemoryStream assumes these
+* two things:
+*
+* 1) All the memory in the specified block is readable or writable,
+*    depending on the values you pass to the constructor.
+* 2) The lifetime of the block of memory is at least as long as the lifetime
+*    of the UnmanagedMemoryStream.
+* 3) You clean up the memory when appropriate.  The UnmanagedMemoryStream
+*    currently will do NOTHING to free this memory.
+* 4) This type is not thread safe. However, the implementation should prevent buffer
+*    overruns or returning uninitialized memory when Reads and Writes are called
+*    concurrently in thread unsafe manner.
+*/
 
     /// <summary>
     /// Stream over a memory pointer or over a SafeBuffer
@@ -69,7 +69,8 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Subclasses must call this method (or the other overload) to properly initialize all instance fields.
+        /// Subclasses must call this method (or the other overload) to properly initialize all instance
+        // fields.
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
@@ -150,7 +151,8 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Subclasses must call this method (or the other overload) to properly initialize all instance fields.
+        /// Subclasses must call this method (or the other overload) to properly initialize all instance
+        // fields.
         /// </summary>
         [CLSCompliant(false)]
         protected unsafe void Initialize(
@@ -371,7 +373,8 @@ namespace System.IO
             }
             else
             {
-                // UnmanagedMemoryStream is not sealed, and a derived type may have overridden Read(byte[], int, int) prior
+                // UnmanagedMemoryStream is not sealed, and a derived type may have overridden Read(byte[], int,
+                // int) prior
                 // to this Read(Span<byte>) overload being introduced.  In that case, this Read(Span<byte>) overload
                 // should use the behavior of Read(byte[],int,int) overload.
                 return base.Read(buffer);
@@ -491,17 +494,28 @@ namespace System.IO
 
             try
             {
-                // ReadAsync(Memory<byte>,...) needs to delegate to an existing virtual to do the work, in case an existing derived type
-                // has changed or augmented the logic associated with reads.  If the Memory wraps an array, we could delegate to
-                // ReadAsync(byte[], ...), but that would defeat part of the purpose, as ReadAsync(byte[], ...) often needs to allocate
-                // a Task<int> for the return value, so we want to delegate to one of the synchronous methods.  We could always
-                // delegate to the Read(Span<byte>) method, and that's the most efficient solution when dealing with a concrete
-                // UnmanagedMemoryStream, but if we're dealing with a type derived from UnmanagedMemoryStream, Read(Span<byte>) will end up delegating
-                // to Read(byte[], ...), which requires it to get a byte[] from ArrayPool and copy the data.  So, we special-case the
-                // very common case of the Memory<byte> wrapping an array: if it does, we delegate to Read(byte[], ...) with it,
-                // as that will be efficient in both cases, and we fall back to Read(Span<byte>) if the Memory<byte> wrapped something
-                // else; if this is a concrete UnmanagedMemoryStream, that'll be efficient, and only in the case where the Memory<byte> wrapped
-                // something other than an array and this is an UnmanagedMemoryStream-derived type that doesn't override Read(Span<byte>) will
+                // ReadAsync(Memory<byte>,...) needs to delegate to an existing virtual to do the work, in case an
+                // existing derived type
+                // has changed or augmented the logic associated with reads.  If the Memory wraps an array, we could
+                // delegate to
+                // ReadAsync(byte[], ...), but that would defeat part of the purpose, as ReadAsync(byte[], ...)
+                // often needs to allocate
+                // a Task<int> for the return value, so we want to delegate to one of the synchronous methods.  We
+                // could always
+                // delegate to the Read(Span<byte>) method, and that's the most efficient solution when dealing with
+                // a concrete
+                // UnmanagedMemoryStream, but if we're dealing with a type derived from UnmanagedMemoryStream,
+                // Read(Span<byte>) will end up delegating
+                // to Read(byte[], ...), which requires it to get a byte[] from ArrayPool and copy the data.  So, we
+                // special-case the
+                // very common case of the Memory<byte> wrapping an array: if it does, we delegate to Read(byte[],
+                // ...) with it,
+                // as that will be efficient in both cases, and we fall back to Read(Span<byte>) if the Memory<byte>
+                // wrapped something
+                // else; if this is a concrete UnmanagedMemoryStream, that'll be efficient, and only in the case
+                // where the Memory<byte> wrapped
+                // something other than an array and this is an UnmanagedMemoryStream-derived type that doesn't
+                // override Read(Span<byte>) will
                 // it then fall back to doing the ArrayPool/copy behavior.
                 return new ValueTask<int>(
                     MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> destinationArray)
@@ -660,8 +674,10 @@ namespace System.IO
             }
             else
             {
-                // UnmanagedMemoryStream is not sealed, and a derived type may have overridden Write(byte[], int, int) prior
-                // to this Write(Span<byte>) overload being introduced.  In that case, this Write(Span<byte>) overload
+                // UnmanagedMemoryStream is not sealed, and a derived type may have overridden Write(byte[], int,
+                // int) prior
+                // to this Write(Span<byte>) overload being introduced.  In that case, this Write(Span<byte>)
+                // overload
                 // should use the behavior of Write(byte[],int,int) overload.
                 base.Write(buffer);
             }
@@ -789,8 +805,10 @@ namespace System.IO
 
             try
             {
-                // See corresponding comment in ReadAsync for why we don't just always use Write(ReadOnlySpan<byte>).
-                // Unlike ReadAsync, we could delegate to WriteAsync(byte[], ...) here, but we don't for consistency.
+                // See corresponding comment in ReadAsync for why we don't just always use
+                // Write(ReadOnlySpan<byte>).
+                // Unlike ReadAsync, we could delegate to WriteAsync(byte[], ...) here, but we don't for
+                // consistency.
                 if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> sourceArray))
                 {
                     Write(sourceArray.Array!, sourceArray.Offset, sourceArray.Count);

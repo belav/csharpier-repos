@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             /// Caches the value produced by <see cref="GetOrComputeIndentationDelta"/>.
             /// </summary>
             /// <value>
-            /// <see cref="UninitializedIndentationDelta"/> if the field is not yet initialized; otherwise, the value
+            /// <see cref="UninitializedIndentationDelta"/> if the field is not yet initialized; otherwise, the
+            // value
             /// returned from <see cref="_indentationDeltaGetter"/>.
             /// </value>
             private int _lazyIndentationDelta;
@@ -171,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         }
 
         /// <summary>
-        /// Represents an indentation in which a fixed offset (<see cref="Adjustment"/>) is applied to a reference
+        /// Represents an indentation in which a fixed offset (<see cref="Adjustment"/>) is applied to a
+        // reference
         /// indentation amount (<see cref="BaseIndentationData"/>).
         /// </summary>
         private sealed class AdjustedIndentationData : IndentationData

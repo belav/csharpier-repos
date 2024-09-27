@@ -72,8 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         {
             // If the event happens to belong to a class with a ComEventInterfaceAttribute, there will also be
             // a paired method living on its source interface. The ComAwareEventInfo class expects to find this
-            // method through reflection. If we embed an event, therefore, we must ensure that the associated source
-            // interface method is also included, even if it is not otherwise referenced in the embedding project.
+            // method through reflection. If we embed an event, therefore, we must ensure that the associated
+            // source
+            // interface method is also included, even if it is not otherwise referenced in the embedding
+            // project.
             NamedTypeSymbol underlyingContainingType = ContainingType
                 .UnderlyingNamedType
                 .AdaptedNamedTypeSymbol;

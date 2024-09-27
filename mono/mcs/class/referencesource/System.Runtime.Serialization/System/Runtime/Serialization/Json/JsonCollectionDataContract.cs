@@ -166,7 +166,8 @@ namespace System.Runtime.Serialization.Json
             object o = null;
             if (context.IsGetOnlyCollection)
             {
-                // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
+                // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value
+                // can now be reset.
                 context.IsGetOnlyCollection = false;
                 JsonFormatGetOnlyReaderDelegate(
                     jsonReader,
@@ -197,7 +198,8 @@ namespace System.Runtime.Serialization.Json
             RuntimeTypeHandle declaredTypeHandle
         )
         {
-            // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
+            // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value
+            // can now be reset.
             context.IsGetOnlyCollection = false;
             JsonFormatWriterDelegate(jsonWriter, obj, context, TraditionalCollectionDataContract);
         }

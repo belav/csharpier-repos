@@ -155,7 +155,8 @@ namespace System.Linq.Expressions.Compiler
 #endif
 
             // 2. emit the lambda
-            // Since additional ILs are always emitted after the lambda's body, should not emit with tail call optimization.
+            // Since additional ILs are always emitted after the lambda's body, should not emit with tail call
+            // optimization.
             impl.EmitLambdaBody(_scope, false, CompilationFlags.EmitAsNoTail);
 
             // 3. emit the delegate creation in the outer lambda

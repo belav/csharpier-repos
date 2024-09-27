@@ -33,7 +33,8 @@ public class ModelValidatorProviderContext
     public IReadOnlyList<object> ValidatorMetadata => ModelMetadata.ValidatorMetadata;
 
     /// <summary>
-    /// Gets the list of <see cref="ValidatorItem"/> instances. <see cref="IModelValidatorProvider"/> instances
+    /// Gets the list of <see cref="ValidatorItem"/> instances. <see cref="IModelValidatorProvider"/>
+    // instances
     /// should add the appropriate <see cref="ValidatorItem.Validator"/> properties when
     /// <see cref="IModelValidatorProvider.CreateValidators(ModelValidatorProviderContext)"/>
     /// is called.

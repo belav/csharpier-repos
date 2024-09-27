@@ -30,7 +30,8 @@ public class ActionExecutedContext : FilterContext
     }
 
     /// <summary>
-    /// Gets or sets an indication that an action filter short-circuited the action and the action filter pipeline.
+    /// Gets or sets an indication that an action filter short-circuited the action and the action
+    // filter pipeline.
     /// </summary>
     public virtual bool Canceled { get; set; }
 
@@ -40,7 +41,8 @@ public class ActionExecutedContext : FilterContext
     public virtual object Controller { get; }
 
     /// <summary>
-    /// Gets or sets the <see cref="System.Exception"/> caught while executing the action or action filters, if
+    /// Gets or sets the <see cref="System.Exception"/> caught while executing the action or action
+    // filters, if
     /// any.
     /// </summary>
     public virtual Exception? Exception
@@ -65,7 +67,8 @@ public class ActionExecutedContext : FilterContext
 
     /// <summary>
     /// Gets or sets the <see cref="System.Runtime.ExceptionServices.ExceptionDispatchInfo"/> for the
-    /// <see cref="Exception"/>, if an <see cref="System.Exception"/> was caught and this information captured.
+    /// <see cref="Exception"/>, if an <see cref="System.Exception"/> was caught and this information
+    // captured.
     /// </summary>
     public virtual ExceptionDispatchInfo? ExceptionDispatchInfo
     {

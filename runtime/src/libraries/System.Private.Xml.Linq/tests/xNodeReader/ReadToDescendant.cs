@@ -289,7 +289,8 @@ namespace CoreXml.Test.XLinq
                     DataReader.Dispose();
                 }
 
-                //[Variation("Positioning on a level and try to find the name which is on a level higher", Priority = 1)]
+                //[Variation("Positioning on a level and try to find the name which is on a level higher", Priority
+                // = 1)]
                 public void v5()
                 {
                     XmlReader DataReader = GetReader(new StringReader(_xmlStr));
@@ -357,7 +358,8 @@ namespace CoreXml.Test.XLinq
                     DataReader.Dispose();
                 }
 
-                //[Variation("Read to Descendant on one level and again to level below it, with namespace", Priority = 1)]
+                //[Variation("Read to Descendant on one level and again to level below it, with namespace", Priority
+                // = 1)]
                 public void v7()
                 {
                     XmlReader DataReader = GetReader(new StringReader(_xmlStr));
@@ -397,7 +399,8 @@ namespace CoreXml.Test.XLinq
                     DataReader.Dispose();
                 }
 
-                //[Variation("Read to Descendant on one level and again to level below it, with prefix", Priority = 1)]
+                //[Variation("Read to Descendant on one level and again to level below it, with prefix", Priority =
+                // 1)]
                 public void v8()
                 {
                     XmlReader DataReader = GetReader(new StringReader(_xmlStr));
@@ -652,7 +655,8 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation("427176	Assertion failed when call XmlReader.ReadToDescendant() for non-existing node", Priority = 1)]
+                //[Variation("427176	Assertion failed when call XmlReader.ReadToDescendant() for non-existing node",
+                // Priority = 1)]
                 public void v19()
                 {
                     XmlReader DataReader = GetReader(new StringReader("<a>b</a>"));

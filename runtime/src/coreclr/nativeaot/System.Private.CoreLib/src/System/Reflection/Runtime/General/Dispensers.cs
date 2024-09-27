@@ -11,19 +11,26 @@ using System.Reflection.Runtime.TypeInfos;
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 
-//=================================================================================================================
-// This file collects the various chokepoints that create the various Runtime*Info objects. This allows
+
+// //=================================================================================================================
+// This file collects the various chokepoints that create the various Runtime*Info objects. This
+// allows
 // easy reviewing of the overall caching and unification policy.
 //
-// The dispenser functions are defined as static members of the associated Info class. This permits us
-// to keep the constructors private to ensure that these really are the only ways to obtain these objects.
-//=================================================================================================================
+// The dispenser functions are defined as static members of the associated Info class. This permits
+// us
+// to keep the constructors private to ensure that these really are the only ways to obtain these
+// objects.
+
+// //=================================================================================================================
 
 namespace System.Reflection.Runtime.Assemblies
 {
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // Assemblies (maps 1-1 with a MetadataReader/ScopeDefinitionHandle.
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal partial class RuntimeAssemblyInfo
     {
         /// <summary>
@@ -171,7 +178,8 @@ namespace System.Reflection.Runtime.Assemblies
             throw new PlatformNotSupportedException();
         }
 
-        // Use C# partial method feature to avoid complex #if logic, whichever code files are included will drive behavior
+        // Use C# partial method feature to avoid complex #if logic, whichever code files are included will
+        // drive behavior
         static partial void GetNativeFormatRuntimeAssembly(
             AssemblyBindResult bindResult,
             ref RuntimeAssembly? runtimeAssembly
@@ -187,9 +195,11 @@ namespace System.Reflection.Runtime.Assemblies
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // ConstructorInfos
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimePlainConstructorInfo<TRuntimeMethodCommon>
         : RuntimeConstructorInfo
     {
@@ -201,9 +211,11 @@ namespace System.Reflection.Runtime.MethodInfos
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // Constructors for array types.
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimeSyntheticConstructorInfo : RuntimeConstructorInfo
     {
         internal static RuntimeSyntheticConstructorInfo GetRuntimeSyntheticConstructorInfo(
@@ -224,9 +236,11 @@ namespace System.Reflection.Runtime.MethodInfos
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // MethodInfos for method definitions (i.e. Foo.Moo() or Foo.Moo<>() but not Foo.Moo<int>)
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimeNamedMethodInfo<TRuntimeMethodCommon>
     {
         internal static RuntimeNamedMethodInfo<TRuntimeMethodCommon> GetRuntimeNamedMethodInfo(
@@ -241,9 +255,11 @@ namespace System.Reflection.Runtime.MethodInfos
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // MethodInfos for constructed generic methods (Foo.Moo<int> but not Foo.Moo<>)
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimeConstructedGenericMethodInfo : RuntimeMethodInfo
     {
         internal static RuntimeMethodInfo GetRuntimeConstructedGenericMethodInfo(
@@ -258,9 +274,11 @@ namespace System.Reflection.Runtime.MethodInfos
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // MethodInfos for the Get/Set methods on array types.
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimeSyntheticMethodInfo : RuntimeMethodInfo
     {
         internal static RuntimeMethodInfo GetRuntimeSyntheticMethodInfo(
@@ -288,9 +306,11 @@ namespace System.Reflection.Runtime.MethodInfos
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // ParameterInfos for MethodBase objects with no Parameter metadata.
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimeThinMethodParameterInfo : RuntimeMethodParameterInfo
     {
         internal static RuntimeThinMethodParameterInfo GetRuntimeThinMethodParameterInfo(
@@ -309,9 +329,11 @@ namespace System.Reflection.Runtime.ParameterInfos
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // ParameterInfos returned by PropertyInfo.GetIndexParameters()
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimePropertyIndexParameterInfo : RuntimeParameterInfo
     {
         internal static RuntimePropertyIndexParameterInfo GetRuntimePropertyIndexParameterInfo(
@@ -323,9 +345,11 @@ namespace System.Reflection.Runtime.ParameterInfos
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     // ParameterInfos returned by Get/Set methods on array types.
-    //-----------------------------------------------------------------------------------------------------------
+    
+    // //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class RuntimeSyntheticParameterInfo : RuntimeParameterInfo
     {
         internal static RuntimeSyntheticParameterInfo GetRuntimeSyntheticParameterInfo(

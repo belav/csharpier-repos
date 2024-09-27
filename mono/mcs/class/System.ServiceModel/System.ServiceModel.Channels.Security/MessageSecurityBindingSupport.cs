@@ -426,7 +426,8 @@ namespace System.ServiceModel.Channels.Security
             get { return listener; }
         }
 
-        // FIXME: this is invoked inconsistently between SecurityReplyChannel and SecurityDuplexSessionChannel on when to do it.
+        // FIXME: this is invoked inconsistently between SecurityReplyChannel and
+        // SecurityDuplexSessionChannel on when to do it.
         public void Prepare(ChannelListenerBase listener, Uri listenUri)
         {
             this.listener = listener;

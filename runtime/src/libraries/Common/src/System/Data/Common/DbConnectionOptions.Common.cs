@@ -145,7 +145,8 @@ namespace System.Data.Common
         public bool ConvertValueToBoolean(string keyName, bool defaultValue)
         {
             string? value;
-            // TODO: Is it possible for _parsetable to contain a null value here? If so there's a bug here, investigate.
+            // TODO: Is it possible for _parsetable to contain a null value here? If so there's a bug here,
+            // investigate.
             return _parsetable.TryGetValue(keyName, out value)
                 ? ConvertValueToBooleanInternal(keyName, value!)
                 : defaultValue;

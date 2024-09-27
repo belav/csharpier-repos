@@ -12,7 +12,8 @@ namespace System.Web.UI
     using System.Security.Permissions;
     using System.Web.Configuration;
 
-    // The compilation section can be defined below the application level, but ScriptManager only considers the
+    // The compilation section can be defined below the application level, but ScriptManager only
+    // considers the
     // application-level debug setting.
     internal sealed class AppLevelCompilationSectionCache : ICompilationSection
     {

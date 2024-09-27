@@ -12,7 +12,8 @@ namespace System.Workflow.Runtime.Tracking
 {
     #region Tracking Exceptions
     /// <summary>
-    /// The exception that is thrown when a tracking profile in xml form cannot be deserialized to a TrackingProfile object.
+    /// The exception that is thrown when a tracking profile in xml form cannot be deserialized to a
+    // TrackingProfile object.
     /// </summary>
     [Serializable]
     [Obsolete(

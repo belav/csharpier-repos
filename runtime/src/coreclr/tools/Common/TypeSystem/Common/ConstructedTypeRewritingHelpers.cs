@@ -61,7 +61,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Replace some of the types in a type's construction with a new set of types. This function does not
+        /// Replace some of the types in a type's construction with a new set of types. This function does
+        // not
         /// support any situation where there is an instantiated generic that is not represented by an
         /// InstantiatedType. Does not replace the open generics that may be instantiated over in this type.
         ///

@@ -523,8 +523,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             Assert.Equal(expectedVersion, maxLangVersion);
 
             // This will fail whenever the current language version is updated.
-            // Ensure you update the target files to select the correct CSharp version for the newest target framework
-            // and add to the theory data above to cover it, before changing this version to make the test pass again.
+            // Ensure you update the target files to select the correct CSharp version for the newest target
+            // framework
+            // and add to the theory data above to cover it, before changing this version to make the test pass
+            // again.
             Assert.Equal(
                 CSharp.LanguageVersion.CSharp12,
                 CSharp.LanguageVersionFacts.CurrentVersion

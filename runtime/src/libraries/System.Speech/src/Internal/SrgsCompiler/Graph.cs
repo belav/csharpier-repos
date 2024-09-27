@@ -117,7 +117,8 @@ namespace System.Speech.Internal.SrgsCompiler
             MergeDuplicateTransitions();
 
 #if DEBUG
-            // Remove redundant epsilon transitions again now that identical epsilon transitions have been removed.
+            // Remove redundant epsilon transitions again now that identical epsilon transitions have been
+            // removed.
             cStates = Count;
             RemoveEpsilonStates();
             //System.Diagnostics.Debug.Assert (_states.Count == cStates);
@@ -480,7 +481,8 @@ namespace System.Speech.Internal.SrgsCompiler
             // Build a list of possible arcs to Merge
             foreach (Arc arc in arcs)
             {
-                // Skip transitions whose end state has other incoming transitions or if the end state has more than one incoming transition
+                // Skip transitions whose end state has other incoming transitions or if the end state has more than
+                // one incoming transition
                 bool skipTransition = arc.Start == null || !arc.Start.OutArcs.CountIsOne;
                 // Find next set of duplicate output transitions (potentially with properties).
                 if (refArc != null && Arc.CompareContent(arc, refArc) == 0)
@@ -597,11 +599,13 @@ namespace System.Speech.Internal.SrgsCompiler
         /// Algorithm:
         ///   - MergeIdenticalTransitions(Arcs)
         ///   - Sort the output transitions from the state (by content and # input arcs from end state)
-        ///   - For each set of transitions with identical content, EndState != null, and EndState.InputArcs.Count() == 1
+        ///   - For each set of transitions with identical content, EndState != null, and
+        // EndState.InputArcs.Count() == 1
         ///     - Move semantic properties to the right, if necessary.
         ///     - Label the first property-less transition as CommonArc
         ///     - For each property-less transition (DuplicateArc) including CommonArc
-        ///       - Multiply the weights of output transitions from DuplicateArc.EndState by DuplicateArc.Weight.
+        ///       - Multiply the weights of output transitions from DuplicateArc.EndState by
+        // DuplicateArc.Weight.
         ///       - If DuplicateArc != CommonArc
         ///       - CommonArc.Weight += DuplicateArc.Weight
         ///       - Delete DuplicateArc
@@ -625,7 +629,8 @@ namespace System.Speech.Internal.SrgsCompiler
             // Build a list of possible arcs to Merge
             foreach (Arc arc in arcs)
             {
-                // Skip transitions whose end state has other incoming transitions or if the end state has more than one incoming transition
+                // Skip transitions whose end state has other incoming transitions or if the end state has more than
+                // one incoming transition
                 bool skipTransition = arc.End == null || !arc.End.InArcs.CountIsOne;
                 // Find next set of duplicate output transitions (potentially with properties).
                 if (refArc != null && Arc.CompareContent(arc, refArc) == 0)
@@ -757,10 +762,12 @@ namespace System.Speech.Internal.SrgsCompiler
             //       This changes the range of words spanned by the tag, which is a bug for SAPI grammars.
             State startState = arc.Start;
 
-            // Can only move ownership/references if there is an unique input and output arc from the start state.
+            // Can only move ownership/references if there is an unique input and output arc from the start
+            // state.
             // Cannot concatenate semantic tags.  (SemanticInterpretation script can arguably be concatenated.)
             // Cannot move ownership across RuleRef (to maintain semantics of $$ in SemanticTag JScript).
-            // Cannot move semantic tag to special transition.  (SREngine may return multiple result arcs for the transition.)
+            // Cannot move semantic tag to special transition.  (SREngine may return multiple result arcs for
+            // the transition.)
             Arc previousArc = startState.InArcs.First;
             if (
                 (startState.InArcs.CountIsOne)
@@ -798,7 +805,8 @@ namespace System.Speech.Internal.SrgsCompiler
             // Can only move ownership/references if there is an unique input and output arc from the end state.
             // Cannot concatenate semantic tags.  (SemanticInterpretation script can arguably be concatenated.)
             // Cannot move ownership across RuleRef (to maintain semantics of $$ in SemanticTag JScript).
-            // Cannot move semantic tag to special transition.  (SREngine may return multiple result arcs for the transition.)
+            // Cannot move semantic tag to special transition.  (SREngine may return multiple result arcs for
+            // the transition.)
             Arc pNextArc = endState.OutArcs.First;
             if (
                 (endState.InArcs.CountIsOne)

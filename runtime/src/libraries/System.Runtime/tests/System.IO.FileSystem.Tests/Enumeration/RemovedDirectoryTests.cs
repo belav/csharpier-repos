@@ -50,7 +50,8 @@ namespace System.IO.Tests.Enumeration
                 };
 
                 // We shouldn't fail because a directory we found got deleted.
-                // No errors here are possible on Windows as by the time of the deletion above, the subdirectory handle is already opened.
+                // No errors here are possible on Windows as by the time of the deletion above, the subdirectory
+                // handle is already opened.
                 while (enumerator.MoveNext())
                     ;
             }
@@ -74,7 +75,8 @@ namespace System.IO.Tests.Enumeration
             )
             {
                 // We shouldn't fail because a directory we found got deleted.
-                // If we yank the directory when we have it's data, but BEFORE we create the handle we'll fail internally with not found.
+                // If we yank the directory when we have it's data, but BEFORE we create the handle we'll fail
+                // internally with not found.
                 while (enumerator.MoveNext())
                 {
                     // Using a flag file to kill the directory in the middle of processing returned data
@@ -111,7 +113,8 @@ namespace System.IO.Tests.Enumeration
             )
             {
                 // We shouldn't fail because a directory we found got deleted.
-                // If replace the directory with a file when we have it's data, but BEFORE we create the handle we'll fail internally trying to create a directory handle on it.
+                // If replace the directory with a file when we have it's data, but BEFORE we create the handle
+                // we'll fail internally trying to create a directory handle on it.
                 while (enumerator.MoveNext())
                 {
                     // Using a flag file to replace the directory in the middle of processing returned data

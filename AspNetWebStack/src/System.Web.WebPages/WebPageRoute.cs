@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.IO;
@@ -64,7 +65,8 @@ namespace System.Web.WebPages
             }
             else
             {
-                // Bug:904704 If its not a match, but to a supported extension, we want to return a 404 instead of a 403
+                // Bug:904704 If its not a match, but to a supported extension, we want to return a 404 instead of a
+                // 403
                 string extension = PathUtil.GetExtension(requestPath);
                 foreach (string supportedExt in registeredExtensions)
                 {
@@ -167,7 +169,8 @@ namespace System.Web.WebPages
             string currentLevel = String.Empty;
             string currentPathInfo = pathValue;
 
-            // We can skip the file exists check and normal lookup for empty paths, but we still need to look for default pages
+            // We can skip the file exists check and normal lookup for empty paths, but we still need to look
+            // for default pages
             if (!String.IsNullOrEmpty(pathValue))
             {
                 // If the file exists and its not a supported extension, let the request go through

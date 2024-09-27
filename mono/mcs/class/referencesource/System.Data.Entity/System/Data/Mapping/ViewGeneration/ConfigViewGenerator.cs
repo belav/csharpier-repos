@@ -174,7 +174,8 @@ namespace System.Data.Mapping.ViewGeneration
         }
 
         /// <summary>
-        /// Sets time for <paramref name="perfType"/> since the last call to <see cref="SetTimeForFinishedActivity"/>.
+        /// Sets time for <paramref name="perfType"/> since the last call to <see
+        // cref="SetTimeForFinishedActivity"/>.
         /// </summary>
         /// <param name="perfType"></param>
         internal void SetTimeForFinishedActivity(PerfType perfType)

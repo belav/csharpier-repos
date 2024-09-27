@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && ShouldUseRuntimeHelpersCreateSpan(node, elementType.Type)
                 )
                 {
-                    // Assert that binding layer agrees with lowering layer about whether this collection-expr will allocate.
+                    // Assert that binding layer agrees with lowering layer about whether this collection-expr will
+                    // allocate.
                     Debug.Assert(
                         !IsAllocatingRefStructCollectionExpression(
                             node,
@@ -224,7 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 // The array initializer has an unknown length, so we'll create an intermediate List<T> instance.
-                // https://github.com/dotnet/roslyn/issues/68785: Emit Enumerable.TryGetNonEnumeratedCount() and avoid intermediate List<T> at runtime.
+                // https://github.com/dotnet/roslyn/issues/68785: Emit Enumerable.TryGetNonEnumeratedCount() and
+                // avoid intermediate List<T> at runtime.
                 var list = CreateAndPopulateList(node, elementType);
 
                 Debug.Assert(list.Type is { });
@@ -634,10 +636,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Returns true if the collection expression has a known length and that length should be used
-        /// in the lowered code to avoid resizing the collection instance, or allocating intermediate storage,
-        /// during construction. If the collection expression includes spreads, the spreads must be countable.
-        /// The caller will need to delay adding elements and iterating spreads until the last spread has been
-        /// evaluated, to determine the overall length of the collection. Therefore, this method only returns
+        /// in the lowered code to avoid resizing the collection instance, or allocating intermediate
+        // storage,
+        /// during construction. If the collection expression includes spreads, the spreads must be
+        // countable.
+        /// The caller will need to delay adding elements and iterating spreads until the last spread has
+        // been
+        /// evaluated, to determine the overall length of the collection. Therefore, this method only
+        // returns
         /// true if the number of preceding elements is below a maximum.
         /// </summary>
         private static bool ShouldUseKnownLength(

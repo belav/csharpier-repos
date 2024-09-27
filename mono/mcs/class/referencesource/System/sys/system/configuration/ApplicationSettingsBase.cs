@@ -70,8 +70,10 @@ namespace System.Configuration
             : base() { }
 
         /// <devdoc>
-        ///     Constructor that takes an IComponent. The IComponent acts as the "owner" of this settings class. One
-        ///     of the things we do is query the component's site to see if it has a SettingsProvider service. If it
+        ///     Constructor that takes an IComponent. The IComponent acts as the "owner" of this settings
+        // class. One
+        ///     of the things we do is query the component's site to see if it has a SettingsProvider
+        // service. If it
         ///     does, we allow it to override the providers specified in the metadata.
         /// </devdoc>
         protected ApplicationSettingsBase(IComponent owner)
@@ -126,7 +128,8 @@ namespace System.Configuration
         }
 
         /// <devdoc>
-        ///     The Context to pass on to the provider. Currently, this will just contain the settings group name.
+        ///     The Context to pass on to the provider. Currently, this will just contain the settings group
+        // name.
         /// </devdoc>
         [Browsable(false)]
         public override SettingsContext Context
@@ -158,8 +161,10 @@ namespace System.Configuration
         }
 
         /// <devdoc>
-        ///     The SettingsBase class queries this to get the collection of SettingsProperty objects. We reflect over
-        ///     the properties defined on the current object's type and use the metadata on those properties to form
+        ///     The SettingsBase class queries this to get the collection of SettingsProperty objects. We
+        // reflect over
+        ///     the properties defined on the current object's type and use the metadata on those properties
+        // to form
         ///     this collection.
         /// </devdoc>
         [Browsable(false)]
@@ -283,7 +288,8 @@ namespace System.Configuration
         }
 
         /// <devdoc>
-        ///     Used in conjunction with Upgrade - retrieves the previous value of a setting from the provider.
+        ///     Used in conjunction with Upgrade - retrieves the previous value of a setting from the
+        // provider.
         ///     Provider must implement IApplicationSettingsProvider to support this.
         /// </devdoc>
         [SuppressMessage(
@@ -458,7 +464,8 @@ namespace System.Configuration
         }
 
         /// <devdoc>
-        ///     Called when the app is upgraded so that we can instruct the providers to upgrade their settings.
+        ///     Called when the app is upgraded so that we can instruct the providers to upgrade their
+        // settings.
         ///     Providers must implement IApplicationSettingsProvider to support this.
         /// </devdoc>
         [SuppressMessage(
@@ -582,7 +589,8 @@ namespace System.Configuration
         }
 
         /// <devdoc>
-        ///     Ensures this class is initialized. Initialization involves reflecting over properties and building
+        ///     Ensures this class is initialized. Initialization involves reflecting over properties and
+        // building
         ///     a list of SettingsProperty's.
         ///
         ///     Implementation note: Initialization method - be careful not to access properties here
@@ -762,10 +770,13 @@ namespace System.Configuration
         }
 
         /// <devdoc>
-        ///     Retrieves the value of a setting. We need this method so we can fire the SettingsLoaded event
+        ///     Retrieves the value of a setting. We need this method so we can fire the SettingsLoaded
+        // event
         ///     when settings are loaded from the providers.Ideally, this should be fired from SettingsBase,
-        ///     but unfortunately that will not happen in Whidbey. Instead, we check to see if the value has already
-        ///     been retrieved. If not, we fire the load event, since we expect SettingsBase to load all the settings
+        ///     but unfortunately that will not happen in Whidbey. Instead, we check to see if the value has
+        // already
+        ///     been retrieved. If not, we fire the load event, since we expect SettingsBase to load all the
+        // settings
         ///     from this setting's provider.
         /// </devdoc>
         private object GetPropertyValue(string propertyName)

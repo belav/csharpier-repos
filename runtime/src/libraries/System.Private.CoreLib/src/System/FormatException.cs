@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System
 {
     /// <summary>
-    /// The exception that is thrown when the format of an argument is invalid, or when a composite format string is not well formed.
+    /// The exception that is thrown when the format of an argument is invalid, or when a composite
+    // format string is not well formed.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

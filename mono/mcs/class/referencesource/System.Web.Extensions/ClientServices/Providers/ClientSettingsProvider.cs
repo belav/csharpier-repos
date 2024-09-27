@@ -99,7 +99,8 @@ namespace System.Web.ClientServices.Providers
                 throw new NotImplementedException();
 
                 //                 CustomBinding                    binding        = ProxyHelper.GetBinding();
-                //                 ChannelFactory<ProfileService>   channelFactory = new ChannelFactory<ProfileService>(binding, new EndpointAddress(serviceUri));
+                //                 ChannelFactory<ProfileService>   channelFactory = new
+                // ChannelFactory<ProfileService>(binding, new EndpointAddress(serviceUri));
                 //                 ProfilePropertyMetadata[]        props          = null;
                 //                 ProfileService                   clientService  = channelFactory.CreateChannel();
 
@@ -635,15 +636,19 @@ namespace System.Web.ClientServices.Providers
                 throw new NotImplementedException();
 
                 //                 CustomBinding                    binding        = ProxyHelper.GetBinding();
-                //                 ChannelFactory<ProfileService>   channelFactory = new ChannelFactory<ProfileService>(binding, new EndpointAddress(GetServiceUri()));
+                //                 ChannelFactory<ProfileService>   channelFactory = new
+                // ChannelFactory<ProfileService>(binding, new EndpointAddress(GetServiceUri()));
                 //                 ProfileService                   clientService  = channelFactory.CreateChannel();
                 //                 Dictionary<string, object>       propertyValues = null;
 
 
                 //                 using (new OperationContextScope((IContextChannel)clientService)) {
-                //                     ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), id.Name, GetConnectionString(), _ConnectionStringProvider);
-                //                     propertyValues = clientService.GetPropertiesForCurrentUser(propertyNames, id.IsAuthenticated && (id is ClientFormsIdentity));
-                //                     ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(), id.Name, GetConnectionString(), _ConnectionStringProvider);
+                //                     ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), id.Name,
+                // GetConnectionString(), _ConnectionStringProvider);
+                //                     propertyValues = clientService.GetPropertiesForCurrentUser(propertyNames,
+                // id.IsAuthenticated && (id is ClientFormsIdentity));
+                //                     ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(), id.Name,
+                // GetConnectionString(), _ConnectionStringProvider);
                 //                 }
 
                 //                 for(iter = 0; iter<propertyNames.Length; iter++) {
@@ -660,11 +665,14 @@ namespace System.Web.ClientServices.Providers
                 //                         mustAdd = true;
                 //                     }
 
-                //                     //if ((value.SerializedValue is string) && ((string)value.SerializedValue == "(null)")) {
+                //                     //if ((value.SerializedValue is string) && ((string)value.SerializedValue ==
+                // "(null)")) {
                 //                     value.PropertyValue = propertyValues[name];
                 //                     value.Deserialized = true;
-                //                     //                 } else if (setting.SerializeAs == SettingsSerializeAs.Binary)
-                //                     //                     value.SerializedValue = Convert.FromBase64String(propertyValues[iter]);
+                //                     //                 } else if (setting.SerializeAs ==
+                // SettingsSerializeAs.Binary)
+                //                     //                     value.SerializedValue =
+                // Convert.FromBase64String(propertyValues[iter]);
                 //                     //                 else
                 //                     //                     value.SerializedValue = propertyValues[iter];
                 //                     //                 value.Deserialized = false;
@@ -824,17 +832,23 @@ namespace System.Web.ClientServices.Providers
                 throw new NotImplementedException();
 
                 //                 CustomBinding                    binding           = ProxyHelper.GetBinding();
-                //                 ChannelFactory<ProfileService>   channelFactory    = new ChannelFactory<ProfileService>(binding, new EndpointAddress(GetServiceUri()));
-                //                 ProfileService                   clientService     = channelFactory.CreateChannel();
+                //                 ChannelFactory<ProfileService>   channelFactory    = new
+                // ChannelFactory<ProfileService>(binding, new EndpointAddress(GetServiceUri()));
+                //                 ProfileService                   clientService     =
+                // channelFactory.CreateChannel();
                 //                 using (new OperationContextScope((IContextChannel)clientService)) {
-                //                     ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), id.Name, GetConnectionString(), _ConnectionStringProvider);
-                //                     errorList = clientService.SetPropertiesForCurrentUser(propertyValues, id.IsAuthenticated && (id is ClientFormsIdentity));
-                //                     ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(), id.Name, GetConnectionString(), _ConnectionStringProvider);
+                //                     ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), id.Name,
+                // GetConnectionString(), _ConnectionStringProvider);
+                //                     errorList = clientService.SetPropertiesForCurrentUser(propertyValues,
+                // id.IsAuthenticated && (id is ClientFormsIdentity));
+                //                     ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(), id.Name,
+                // GetConnectionString(), _ConnectionStringProvider);
                 //                 }
             }
             else
             {
-                // Collection<string> SetPropertiesForCurrentUser(IDictionary<string, object> values, bool authenticatedUserOnly)
+                // Collection<string> SetPropertiesForCurrentUser(IDictionary<string, object> values, bool
+                // authenticatedUserOnly)
                 string[] paramNames = new string[] { "values", "authenticatedUserOnly" };
                 object[] paramValues = new object[]
                 {

@@ -44,10 +44,10 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
         static MonitorEventRequest()
         {
-            /*
-             * Register the extendedresponse class which is returned by the
-             * server in response to a MonitorEventRequest
-             */
+/*
+* Register the extendedresponse class which is returned by the
+* server in response to a MonitorEventRequest
+*/
             try
             {
                 LdapExtendedResponse.register(

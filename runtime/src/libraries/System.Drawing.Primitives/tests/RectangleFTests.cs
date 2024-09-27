@@ -144,7 +144,8 @@ namespace System.Drawing.PrimitivesTest
             Assert.False(rectangle.Equals(null));
             Assert.False(rectangle.Equals(0));
 
-            // If RectangleF implements IEquatable<RectangleF> (e.g. in .NET Core), then classes that are implicitly
+            // If RectangleF implements IEquatable<RectangleF> (e.g. in .NET Core), then classes that are
+            // implicitly
             // convertible to RectangleF can potentially be equal.
             // See https://github.com/dotnet/runtime/issues/16050.
             bool expectsImplicitCastToRectangleF = typeof(IEquatable<RectangleF>).IsAssignableFrom(

@@ -224,11 +224,11 @@ namespace System.Web
             }
         }
 
-        /*
-         * simple utility class that just overrides ToString
-         * to get the desired behavior for
-         * HttpCookie.Values
-         */
+/*
+* simple utility class that just overrides ToString
+* to get the desired behavior for
+* HttpCookie.Values
+*/
         [Serializable]
         sealed class CookieNVC : NameValueCollection
         {
@@ -271,10 +271,10 @@ namespace System.Web
                 return builder.ToString();
             }
 
-            /* MS's implementation has the interesting quirk that if you do:
-             * cookie.Values[null] = "foo"
-             * it clears out the rest of the values.
-             */
+/* MS's implementation has the interesting quirk that if you do:
+* cookie.Values[null] = "foo"
+* it clears out the rest of the values.
+*/
             public override void Set(string name, string value)
             {
                 if (this.IsReadOnly)

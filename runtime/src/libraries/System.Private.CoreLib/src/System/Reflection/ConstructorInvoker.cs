@@ -15,10 +15,14 @@ namespace System.Reflection
     /// Invokes the method reflected by the provided <see cref="ConstructorInfo"/>.
     /// </summary>
     /// <remarks>
-    /// Used for better performance than <seealso cref="ConstructorInfo.Invoke"/> when compatibility with that method
-    /// is not necessary and when the caller can cache the ConstructorInvoker instance for additional invoke calls.<br/>
-    /// Unlike <see cref="ConstructorInfo.Invoke"/>, the invoke methods do not look up default values for arguments when
-    /// <see cref="Type.Missing"/> is specified. In addition, the target constructor may be inlined for performance and not
+    /// Used for better performance than <seealso cref="ConstructorInfo.Invoke"/> when compatibility
+    // with that method
+    /// is not necessary and when the caller can cache the ConstructorInvoker instance for additional
+    // invoke calls.<br/>
+    /// Unlike <see cref="ConstructorInfo.Invoke"/>, the invoke methods do not look up default values
+    // for arguments when
+    /// <see cref="Type.Missing"/> is specified. In addition, the target constructor may be inlined for
+    // performance and not
     /// appear in stack traces.
     /// </remarks>
     /// <seealso cref="MethodInvoker"/>

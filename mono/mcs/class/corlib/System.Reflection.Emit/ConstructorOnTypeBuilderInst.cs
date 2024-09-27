@@ -35,9 +35,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    /*
-     * This class represents a ctor of an instantiation of a generic type builder.
-     */
+/*
+* This class represents a ctor of an instantiation of a generic type builder.
+*/
     [StructLayout(LayoutKind.Sequential)]
     internal class ConstructorOnTypeBuilderInst : ConstructorInfo
     {
@@ -105,7 +105,8 @@ namespace System.Reflection.Emit
 
         public override ParameterInfo[] GetParameters()
         {
-            /*FIXME, maybe the right thing to do when the type is creates is to retrieve from the inflated type*/
+/*FIXME, maybe the right thing to do when the type is creates is to retrieve from the inflated
+type*/
             if (!instantiation.IsCreated)
                 throw new NotSupportedException();
 

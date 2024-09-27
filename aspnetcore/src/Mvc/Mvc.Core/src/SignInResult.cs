@@ -25,7 +25,8 @@ public partial class SignInResult : ActionResult
     /// Initializes a new instance of <see cref="SignInResult"/> with the
     /// specified authentication scheme.
     /// </summary>
-    /// <param name="authenticationScheme">The authentication scheme to use when signing in the user.</param>
+    /// <param name="authenticationScheme">The authentication scheme to use when signing in the
+    // user.</param>
     /// <param name="principal">The claims principal containing the user claims.</param>
     public SignInResult(string? authenticationScheme, ClaimsPrincipal principal)
         : this(authenticationScheme, principal, properties: null) { }
@@ -35,7 +36,8 @@ public partial class SignInResult : ActionResult
     /// default authentication scheme and <paramref name="properties"/>.
     /// </summary>
     /// <param name="principal">The claims principal containing the user claims.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in
+    // operation.</param>
     public SignInResult(ClaimsPrincipal principal, AuthenticationProperties? properties)
         : this(authenticationScheme: null, principal, properties) { }
 
@@ -43,9 +45,11 @@ public partial class SignInResult : ActionResult
     /// Initializes a new instance of <see cref="SignInResult"/> with the
     /// specified authentication scheme and <paramref name="properties"/>.
     /// </summary>
-    /// <param name="authenticationScheme">The authentication schemes to use when signing in the user.</param>
+    /// <param name="authenticationScheme">The authentication schemes to use when signing in the
+    // user.</param>
     /// <param name="principal">The claims principal containing the user claims.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in
+    // operation.</param>
     public SignInResult(
         string? authenticationScheme,
         ClaimsPrincipal principal,

@@ -39,12 +39,16 @@ namespace System.IdentityModel.Tokens
         /// Validates a <see cref="UserNameSecurityToken"/>.
         /// </summary>
         /// <param name="token">The <see cref="UserNameSecurityToken"/> to validate.</param>
-        /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
+        /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the
+        // identities contained in the token.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'token' is null.</exception>
-        /// <exception cref="ArgumentException">The token is not assignable from<see cref="UserNameSecurityToken"/>.</exception>
-        /// <exception cref="InvalidOperationException">Configuration <see cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
+        /// <exception cref="ArgumentException">The token is not assignable from<see
+        // cref="UserNameSecurityToken"/>.</exception>
+        /// <exception cref="InvalidOperationException">Configuration <see
+        // cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
         /// <exception cref="ArgumentException">If username is not if the form 'user\domain'.</exception>
-        /// <exception cref="SecurityTokenValidationException">LogonUser using the given token failed.</exception>
+        /// <exception cref="SecurityTokenValidationException">LogonUser using the given token
+        // failed.</exception>
         public override ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
             if (token == null)

@@ -4,7 +4,8 @@
 namespace Internal.TypeSystem
 {
     /// <summary>
-    /// When implemented by a <see cref="MethodDesc"/>, instructs a name mangler to use the same mangled name
+    /// When implemented by a <see cref="MethodDesc"/>, instructs a name mangler to use the same mangled
+    // name
     /// as another entity while prepending a specific prefix to that mangled name.
     /// </summary>
     public interface IPrefixMangledSignature

@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents an entity type in a model.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IReadOnlyEntityType : IReadOnlyTypeBase
 {
@@ -24,7 +25,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     ///     Gets the data stored in the model for the given entity type.
     /// </summary>
     /// <param name="providerValues">
-    ///     If <see langword="true" /> then provider values are returned for properties with value converters.
+    ///     If <see langword="true" /> then provider values are returned for properties with value
+    // converters.
     /// </param>
     /// <returns>The data.</returns>
     IEnumerable<IDictionary<string, object?>> GetSeedData(bool providerValues = false);
@@ -52,7 +54,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     string? GetDiscriminatorPropertyName();
 
     /// <summary>
-    ///     Returns the value indicating whether the discriminator mapping is complete for this entity type.
+    ///     Returns the value indicating whether the discriminator mapping is complete for this entity
+    // type.
     /// </summary>
     bool GetIsDiscriminatorMappingComplete() =>
         (bool?)this[CoreAnnotationNames.DiscriminatorMappingComplete] ?? true;
@@ -87,7 +90,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     IEnumerable<IReadOnlyEntityType> GetAllBaseTypes() => GetAllBaseTypesAscending().Reverse();
 
     /// <summary>
-    ///     Gets all types in the model from which this entity type derives, starting with the closest one.
+    ///     Gets all types in the model from which this entity type derives, starting with the closest
+    // one.
     /// </summary>
     /// <returns>
     ///     The base types.
@@ -147,7 +151,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     ///     Gets the root base type for a given entity type.
     /// </summary>
     /// <returns>
-    ///     The root base type. If the given entity type is not a derived type, then the same entity type is returned.
+    ///     The root base type. If the given entity type is not a derived type, then the same entity
+    // type is returned.
     /// </returns>
     IReadOnlyEntityType GetRootType() => BaseType?.GetRootType() ?? this;
 
@@ -156,7 +161,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <param name="derivedType">The type to check whether it derives from this type.</param>
     /// <returns>
-    ///     <see langword="true" /> if <paramref name="derivedType" /> derives from (or is the same as) this type,
+    ///     <see langword="true" /> if <paramref name="derivedType" /> derives from (or is the same as)
+    // this type,
     ///     otherwise <see langword="false" />.
     /// </returns>
     bool IReadOnlyTypeBase.IsAssignableFrom(IReadOnlyTypeBase derivedType) =>
@@ -165,9 +171,11 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// <summary>
     ///     Determines if this entity type derives from (or is the same as) a given entity type.
     /// </summary>
-    /// <param name="derivedType">The entity type to check whether it derives from this entity type.</param>
+    /// <param name="derivedType">The entity type to check whether it derives from this entity
+    // type.</param>
     /// <returns>
-    ///     <see langword="true" /> if <paramref name="derivedType" /> derives from (or is the same as) this entity type,
+    ///     <see langword="true" /> if <paramref name="derivedType" /> derives from (or is the same as)
+    // this entity type,
     ///     otherwise <see langword="false" />.
     /// </returns>
     bool IsAssignableFrom(IReadOnlyEntityType derivedType)
@@ -199,8 +207,10 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     }
 
     /// <summary>
-    ///     Returns the closest entity type that is a parent of both given entity types. If one of the given entities is
-    ///     a parent of the other, that parent is returned. Returns <see langword="null" /> if the two entity types aren't
+    ///     Returns the closest entity type that is a parent of both given entity types. If one of the
+    // given entities is
+    ///     a parent of the other, that parent is returned. Returns <see langword="null" /> if the two
+    // entity types aren't
     ///     in the same hierarchy.
     /// </summary>
     /// <param name="otherEntityType">Another entity type.</param>
@@ -238,7 +248,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
         : null;
 
     /// <summary>
-    ///     Gets primary key for this entity type. Returns <see langword="null" /> if no primary key is defined.
+    ///     Gets primary key for this entity type. Returns <see langword="null" /> if no primary key is
+    // defined.
     /// </summary>
     /// <returns>The primary key, or <see langword="null" /> if none is defined.</returns>
     IReadOnlyKey? FindPrimaryKey();
@@ -252,7 +263,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     IReadOnlyKey? FindKey(IReadOnlyList<IReadOnlyProperty> properties);
 
     /// <summary>
-    ///     Gets the primary or alternate key that is defined on the given property. Returns <see langword="null" /> if no key is defined
+    ///     Gets the primary or alternate key that is defined on the given property. Returns <see
+    // langword="null" /> if no key is defined
     ///     for the given property.
     /// </summary>
     /// <param name="property">The property that the key is defined on.</param>
@@ -270,21 +282,25 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <remarks>
     ///     This method does not return keys declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same key more than once.
+    ///     It is useful when iterating over all entity types to avoid processing the same key more than
+    // once.
     ///     Use <see cref="GetKeys" /> to also return keys declared on base types.
     /// </remarks>
     /// <returns>Declared keys.</returns>
     IEnumerable<IReadOnlyKey> GetDeclaredKeys();
 
     /// <summary>
-    ///     Gets the foreign key for the given properties that points to a given primary or alternate key.
+    ///     Gets the foreign key for the given properties that points to a given primary or alternate
+    // key.
     ///     Returns <see langword="null" /> if no foreign key is found.
     /// </summary>
     /// <param name="properties">The properties that the foreign key is defined on.</param>
     /// <param name="principalKey">The primary or alternate key that is referenced.</param>
     /// <param name="principalEntityType">
-    ///     The entity type that the relationship targets. This may be different from the type that <paramref name="principalKey" />
-    ///     is defined on when the relationship targets a derived type in an inheritance hierarchy (since the key is defined on the
+    ///     The entity type that the relationship targets. This may be different from the type that
+    // <paramref name="principalKey" />
+    ///     is defined on when the relationship targets a derived type in an inheritance hierarchy
+    // (since the key is defined on the
     ///     base type of the hierarchy).
     /// </param>
     /// <returns>The foreign key, or <see langword="null" /> if none is defined.</returns>
@@ -295,8 +311,10 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     );
 
     /// <summary>
-    ///     Gets the foreign keys defined on the given property. Only foreign keys that are defined on exactly the specified
-    ///     property are returned. Composite foreign keys that include the specified property are not returned.
+    ///     Gets the foreign keys defined on the given property. Only foreign keys that are defined on
+    // exactly the specified
+    ///     property are returned. Composite foreign keys that include the specified property are not
+    // returned.
     /// </summary>
     /// <param name="property">The property to find the foreign keys on.</param>
     /// <returns>The foreign keys.</returns>
@@ -304,7 +322,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
         FindForeignKeys(new[] { property });
 
     /// <summary>
-    ///     Gets the foreign keys defined on the given properties. Only foreign keys that are defined on exactly the specified
+    ///     Gets the foreign keys defined on the given properties. Only foreign keys that are defined on
+    // exactly the specified
     ///     set of properties are returned.
     /// </summary>
     /// <param name="properties">The properties to find the foreign keys on.</param>
@@ -312,14 +331,17 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     IEnumerable<IReadOnlyForeignKey> FindForeignKeys(IReadOnlyList<IReadOnlyProperty> properties);
 
     /// <summary>
-    ///     Gets the foreign key for the given properties that points to a given primary or alternate key. Returns <see langword="null" />
+    ///     Gets the foreign key for the given properties that points to a given primary or alternate
+    // key. Returns <see langword="null" />
     ///     if no foreign key is found.
     /// </summary>
     /// <param name="property">The property that the foreign key is defined on.</param>
     /// <param name="principalKey">The primary or alternate key that is referenced.</param>
     /// <param name="principalEntityType">
-    ///     The entity type that the relationship targets. This may be different from the type that <paramref name="principalKey" />
-    ///     is defined on when the relationship targets a derived type in an inheritance hierarchy (since the key is defined on the
+    ///     The entity type that the relationship targets. This may be different from the type that
+    // <paramref name="principalKey" />
+    ///     is defined on when the relationship targets a derived type in an inheritance hierarchy
+    // (since the key is defined on the
     ///     base type of the hierarchy).
     /// </param>
     /// <returns>The foreign key, or <see langword="null" /> if none is defined.</returns>
@@ -343,7 +365,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <remarks>
     ///     This method does not return foreign keys declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same foreign key more than once.
+    ///     It is useful when iterating over all entity types to avoid processing the same foreign key
+    // more than once.
     ///     Use <see cref="GetForeignKeys" /> to also return foreign keys declared on base types.
     /// </remarks>
     /// <returns>Declared foreign keys.</returns>
@@ -367,23 +390,27 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     IEnumerable<IReadOnlyForeignKey> GetForeignKeys();
 
     /// <summary>
-    ///     Gets all foreign keys that target a given entity type (i.e. foreign keys where the given entity type
+    ///     Gets all foreign keys that target a given entity type (i.e. foreign keys where the given
+    // entity type
     ///     or a base type is the principal).
     /// </summary>
     /// <returns>The foreign keys that reference the given entity type or a base type.</returns>
     IEnumerable<IReadOnlyForeignKey> GetReferencingForeignKeys();
 
     /// <summary>
-    ///     Gets all foreign keys that target a given entity type (i.e. foreign keys where the given entity type
+    ///     Gets all foreign keys that target a given entity type (i.e. foreign keys where the given
+    // entity type
     ///     is the principal).
     /// </summary>
     /// <returns>The foreign keys that reference the given entity type.</returns>
     IEnumerable<IReadOnlyForeignKey> GetDeclaredReferencingForeignKeys();
 
     /// <summary>
-    ///     Returns the relationship to the owner if this is an owned type or <see langword="null" /> otherwise.
+    ///     Returns the relationship to the owner if this is an owned type or <see langword="null" />
+    // otherwise.
     /// </summary>
-    /// <returns>The relationship to the owner if this is an owned type or <see langword="null" /> otherwise.</returns>
+    /// <returns>The relationship to the owner if this is an owned type or <see langword="null" />
+    // otherwise.</returns>
     IReadOnlyForeignKey? FindOwnership()
     {
         foreach (var foreignKey in GetForeignKeys())
@@ -409,7 +436,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <param name="targetType">Entity type to search for in ownership path.</param>
     /// <returns>
-    ///     <see langword="true" /> if <paramref name="targetType" /> is in ownership path of this entity type,
+    ///     <see langword="true" /> if <paramref name="targetType" /> is in ownership path of this
+    // entity type,
     ///     otherwise <see langword="false" />.
     /// </returns>
     bool IsInOwnershipPath(IReadOnlyEntityType targetType)
@@ -432,7 +460,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     }
 
     /// <summary>
-    ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no navigation property is found.
+    ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no
+    // navigation property is found.
     /// </summary>
     /// <param name="memberInfo">The navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
@@ -440,7 +469,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
         FindNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
 
     /// <summary>
-    ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no navigation property is found.
+    ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no
+    // navigation property is found.
     /// </summary>
     /// <param name="name">The name of the navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
@@ -449,7 +479,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
         ?? BaseType?.FindNavigation(name);
 
     /// <summary>
-    ///     Gets a navigation property on the given entity type. Does not return navigation properties defined on a base type.
+    ///     Gets a navigation property on the given entity type. Does not return navigation properties
+    // defined on a base type.
     ///     Returns <see langword="null" /> if no navigation property is found.
     /// </summary>
     /// <param name="name">The name of the navigation property on the entity class.</param>
@@ -461,8 +492,10 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <remarks>
     ///     This method does not return navigation properties declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same navigation property more than once.
-    ///     Use <see cref="GetNavigations" /> to also return navigation properties declared on base types.
+    ///     It is useful when iterating over all entity types to avoid processing the same navigation
+    // property more than once.
+    ///     Use <see cref="GetNavigations" /> to also return navigation properties declared on base
+    // types.
     /// </remarks>
     /// <returns>Declared navigation properties.</returns>
     IEnumerable<IReadOnlyNavigation> GetDeclaredNavigations();
@@ -485,7 +518,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     IEnumerable<IReadOnlyNavigation> GetNavigations();
 
     /// <summary>
-    ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no navigation property is found.
+    ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no
+    // navigation property is found.
     /// </summary>
     /// <param name="memberInfo">The navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
@@ -493,7 +527,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
         FindSkipNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
 
     /// <summary>
-    ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no skip navigation property is found.
+    ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no
+    // skip navigation property is found.
     /// </summary>
     /// <param name="name">The name of the navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
@@ -519,8 +554,10 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <remarks>
     ///     This method does not return skip navigation properties declared declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same foreign key more than once.
-    ///     Use <see cref="GetSkipNavigations" /> to also return skip navigation properties declared on base types.
+    ///     It is useful when iterating over all entity types to avoid processing the same foreign key
+    // more than once.
+    ///     Use <see cref="GetSkipNavigations" /> to also return skip navigation properties declared on
+    // base types.
     /// </remarks>
     /// <returns>Declared skip navigations.</returns>
     IEnumerable<IReadOnlySkipNavigation> GetDeclaredSkipNavigations();
@@ -529,7 +566,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     ///     Gets all skip navigation properties declared on the types derived from this entity type.
     /// </summary>
     /// <remarks>
-    ///     This method does not return skip navigation properties declared on the given entity type itself.
+    ///     This method does not return skip navigation properties declared on the given entity type
+    // itself.
     ///     Use <see cref="GetSkipNavigations" /> to return skip navigation properties declared on this
     ///     and base entity typed types.
     /// </remarks>
@@ -543,7 +581,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     IEnumerable<IReadOnlySkipNavigation> GetSkipNavigations();
 
     /// <summary>
-    ///     Gets the unnamed index defined on the given properties. Returns <see langword="null" /> if no such index is defined.
+    ///     Gets the unnamed index defined on the given properties. Returns <see langword="null" /> if
+    // no such index is defined.
     /// </summary>
     /// <remarks>
     ///     Named indexes will not be returned even if the list of properties matches.
@@ -560,7 +599,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     IReadOnlyIndex? FindIndex(string name);
 
     /// <summary>
-    ///     Gets the unnamed index defined on the given property. Returns <see langword="null" /> if no such index is defined.
+    ///     Gets the unnamed index defined on the given property. Returns <see langword="null" /> if no
+    // such index is defined.
     /// </summary>
     /// <remarks>
     ///     Named indexes will not be returned even if the list of properties matches.
@@ -574,7 +614,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <remarks>
     ///     This method does not return indexes declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same index more than once.
+    ///     It is useful when iterating over all entity types to avoid processing the same index more
+    // than once.
     ///     Use <see cref="GetForeignKeys" /> to also return indexes declared on base types.
     /// </remarks>
     /// <returns>Declared indexes.</returns>
@@ -608,7 +649,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// </summary>
     /// <remarks>
     ///     This method does not return properties declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same property more than once.
+    ///     It is useful when iterating over all entity types to avoid processing the same property more
+    // than once.
     ///     Use <see cref="GetServiceProperties" /> to also return properties declared on base types.
     /// </remarks>
     /// <returns>Declared service properties.</returns>
@@ -628,14 +670,16 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     /// <summary>
     ///     Checks whether or not this entity type has any <see cref="IServiceProperty" /> defined.
     /// </summary>
-    /// <returns><see langword="true" /> if there are any service properties defined on this entity type or base types.</returns>
+    /// <returns><see langword="true" /> if there are any service properties defined on this entity type
+    // or base types.</returns>
     bool HasServiceProperties();
 
     /// <summary>
     ///     Gets all the <see cref="IReadOnlyServiceProperty" /> defined on this entity type.
     /// </summary>
     /// <remarks>
-    ///     This API only returns service properties and does not return scalar or navigation properties.
+    ///     This API only returns service properties and does not return scalar or navigation
+    // properties.
     /// </remarks>
     /// <returns>The service properties defined on this entity type.</returns>
     IEnumerable<IReadOnlyServiceProperty> GetServiceProperties();
@@ -644,7 +688,8 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     ///     Finds a trigger with the given name.
     /// </summary>
     /// <param name="name">The trigger name.</param>
-    /// <returns>The trigger or <see langword="null" /> if no trigger with the given name was found.</returns>
+    /// <returns>The trigger or <see langword="null" /> if no trigger with the given name was
+    // found.</returns>
     IReadOnlyTrigger? FindDeclaredTrigger(string name);
 
     /// <summary>
@@ -663,19 +708,27 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     PropertyAccessMode GetNavigationAccessMode();
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     Func<MaterializationContext, object> GetOrCreateMaterializer(IEntityMaterializerSource source);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     Func<MaterializationContext, object> GetOrCreateEmptyMaterializer(

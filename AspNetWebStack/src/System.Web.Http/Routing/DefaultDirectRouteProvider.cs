@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,7 +30,8 @@ namespace System.Web.Http.Routing
         /// entries that route direct to those actions.
         ///
         /// Any actions that do not have an associated <see cref="IDirectRouteFactory"/> instances will be
-        /// associated with the controller. If the controller has any associated <see cref="IDirectRouteProvider"/>
+        /// associated with the controller. If the controller has any associated <see
+        // cref="IDirectRouteProvider"/>
         /// instances, then route entries will be created for the controller and associated actions.
         /// </remarks>
         public virtual IReadOnlyList<RouteEntry> GetDirectRoutes(
@@ -94,7 +96,8 @@ namespace System.Web.Http.Routing
         /// <param name="controllerDescriptor">The controller descriptor.</param>
         /// <returns>A set of route factories.</returns>
         /// <remarks>
-        /// The implementation returns <see cref="IDirectRouteFactory"/> instances based on attributes on the controller.
+        /// The implementation returns <see cref="IDirectRouteFactory"/> instances based on attributes on
+        // the controller.
         /// </remarks>
         protected virtual IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(
             HttpControllerDescriptor controllerDescriptor
@@ -128,7 +131,8 @@ namespace System.Web.Http.Routing
         /// <param name="actionDescriptor">The action descriptor.</param>
         /// <returns>A set of route factories.</returns>
         /// <remarks>
-        /// The implementation returns <see cref="IDirectRouteFactory"/> instances based on attributes on the action. Returns
+        /// The implementation returns <see cref="IDirectRouteFactory"/> instances based on attributes on
+        // the action. Returns
         /// null if the action was defined on a base class of this controller.
         /// </remarks>
         protected virtual IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(
@@ -171,8 +175,10 @@ namespace System.Web.Http.Routing
         }
 
         /// <summary>
-        /// Creates <see cref="RouteEntry"/> instances based on the provided factories, controller and actions. The route
-        /// entries provided direct routing to the provided controller and can reach the set of provided actions.
+        /// Creates <see cref="RouteEntry"/> instances based on the provided factories, controller and
+        // actions. The route
+        /// entries provided direct routing to the provided controller and can reach the set of provided
+        // actions.
         /// </summary>
         /// <param name="controllerDescriptor">The controller descriptor.</param>
         /// <param name="actionDescriptors">The action descriptors.</param>
@@ -196,7 +202,8 @@ namespace System.Web.Http.Routing
         }
 
         /// <summary>
-        /// Creates <see cref="RouteEntry"/> instances based on the provided factories and action. The route entries
+        /// Creates <see cref="RouteEntry"/> instances based on the provided factories and action. The route
+        // entries
         /// provide direct routing to the provided action.
         /// </summary>
         /// <param name="actionDescriptor">The action descriptor.</param>

@@ -5,7 +5,8 @@
 #nullable disable
 
 #if DEBUG
-//#define CHECK_LOCALS // define CHECK_LOCALS to help debug some rewriting problems that would otherwise cause code-gen failures
+//#define CHECK_LOCALS // define CHECK_LOCALS to help debug some rewriting problems that would
+// otherwise cause code-gen failures
 
 #endif
 
@@ -35,15 +36,19 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// have captured variables.  The result of this analysis is left in <see cref="_analysis"/>.
     ///
     /// Then we make a frame, or compiler-generated class, represented by an instance of
-    /// <see cref="SynthesizedClosureEnvironment"/> for each scope with captured variables. The generated frames are kept
+    /// <see cref="SynthesizedClosureEnvironment"/> for each scope with captured variables. The
+    // generated frames are kept
     /// in <see cref="_frames"/>.  Each frame is given a single field for each captured
-    /// variable in the corresponding scope.  These are maintained in <see cref="MethodToClassRewriter.proxies"/>.
+    /// variable in the corresponding scope.  These are maintained in <see
+    // cref="MethodToClassRewriter.proxies"/>.
     ///
     /// Next, we walk and rewrite the input bound tree, keeping track of the following:
     /// (1) The current set of active frame pointers, in <see cref="_framePointers"/>
-    /// (2) The current method being processed (this changes within a lambda's body), in <see cref="_currentMethod"/>
+    /// (2) The current method being processed (this changes within a lambda's body), in <see
+    // cref="_currentMethod"/>
     /// (3) The "this" symbol for the current method in <see cref="_currentFrameThis"/>, and
-    /// (4) The symbol that is used to access the innermost frame pointer (it could be a local variable or "this" parameter)
+    /// (4) The symbol that is used to access the innermost frame pointer (it could be a local variable
+    // or "this" parameter)
     ///
     /// Lastly, we visit the top-level method and each of the lowered methods
     /// to rewrite references (e.g., calls and delegate conversions) to local
@@ -53,9 +58,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// they are being lowered.
     ///
     /// There are a few key transformations done in the rewriting.
-    /// (1) Lambda expressions are turned into delegate creation expressions, and the body of the lambda is
+    /// (1) Lambda expressions are turned into delegate creation expressions, and the body of the lambda
+    // is
     ///     moved into a new, compiler-generated method of a selected frame class.
-    /// (2) On entry to a scope with captured variables, we create a frame object and store it in a local variable.
+    /// (2) On entry to a scope with captured variables, we create a frame object and store it in a
+    // local variable.
     /// (3) References to captured variables are transformed into references to fields of a frame class.
     ///
     /// In addition, the rewriting deposits into <see cref="TypeCompilationState.SynthesizedMethods"/>
@@ -63,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///
     /// <see cref="Rewrite"/> produces its output in two forms.  First, it returns a new bound statement
     /// for the caller to use for the body of the original method.  Second, it returns a collection of
-    /// (<see cref="MethodSymbol"/>, <see cref="BoundStatement"/>) pairs for additional methods that the lambda rewriter produced.
+    /// (<see cref="MethodSymbol"/>, <see cref="BoundStatement"/>) pairs for additional methods that the
+    // lambda rewriter produced.
     /// These additional methods contain the bodies of the lambdas moved into ordinary methods of their
     /// respective frame classes, and the caller is responsible for processing them just as it does with
     /// the returned bound node.  For example, the caller will typically perform iterator method and
@@ -213,23 +221,32 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Rewrite the given node to eliminate lambda expressions.  Also returned are the method symbols and their
-        /// bound bodies for the extracted lambda bodies. These would typically be emitted by the caller such as
+        /// Rewrite the given node to eliminate lambda expressions.  Also returned are the method symbols
+        // and their
+        /// bound bodies for the extracted lambda bodies. These would typically be emitted by the caller
+        // such as
         /// MethodBodyCompiler.  See this class' documentation
         /// for a more thorough explanation of the algorithm and its use by clients.
         /// </summary>
         /// <param name="loweredBody">The bound node to be rewritten</param>
         /// <param name="thisType">The type of the top-most frame</param>
-        /// <param name="thisParameter">The "this" parameter in the top-most frame, or null if static method</param>
+        /// <param name="thisParameter">The "this" parameter in the top-most frame, or null if static
+        // method</param>
         /// <param name="method">The containing method of the node to be rewritten</param>
-        /// <param name="methodOrdinal">Index of the method symbol in its containing type member list.</param>
-        /// <param name="substitutedSourceMethod">If this is non-null, then <paramref name="method"/> will be treated as this for uses of parent symbols. For use in EE.</param>
-        /// <param name="lambdaDebugInfoBuilder">Information on lambdas defined in <paramref name="method"/> needed for debugging.</param>
-        /// <param name="closureDebugInfoBuilder">Information on closures defined in <paramref name="method"/> needed for debugging.</param>
+        /// <param name="methodOrdinal">Index of the method symbol in its containing type member
+        // list.</param>
+        /// <param name="substitutedSourceMethod">If this is non-null, then <paramref name="method"/> will
+        // be treated as this for uses of parent symbols. For use in EE.</param>
+        /// <param name="lambdaDebugInfoBuilder">Information on lambdas defined in <paramref name="method"/>
+        // needed for debugging.</param>
+        /// <param name="closureDebugInfoBuilder">Information on closures defined in <paramref
+        // name="method"/> needed for debugging.</param>
         /// <param name="slotAllocatorOpt">Slot allocator.</param>
-        /// <param name="compilationState">The caller's buffer into which we produce additional methods to be emitted by the caller</param>
+        /// <param name="compilationState">The caller's buffer into which we produce additional methods to
+        // be emitted by the caller</param>
         /// <param name="diagnostics">Diagnostic bag for diagnostics</param>
-        /// <param name="assignLocals">The set of original locals that should be assigned to proxies if lifted</param>
+        /// <param name="assignLocals">The set of original locals that should be assigned to proxies if
+        // lifted</param>
         public static BoundStatement Rewrite(
             BoundStatement loweredBody,
             NamedTypeSymbol thisType,
@@ -595,7 +612,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     DebugId closureId = default(DebugId);
-                    // using _topLevelMethod as containing member because the static frame does not have generic parameters, except for the top level method's
+                    // using _topLevelMethod as containing member because the static frame does not have generic
+                    // parameters, except for the top level method's
                     var containingMethod = isNonGeneric
                         ? null
                         : (_substitutedSourceMethod ?? _topLevelMethod);
@@ -622,7 +640,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         frame.GetCciAdapter()
                     );
 
-                    // add its ctor (note Constructor can be null if TypeKind.Struct is passed in to LambdaFrame.ctor, but Class is passed in above)
+                    // add its ctor (note Constructor can be null if TypeKind.Struct is passed in to LambdaFrame.ctor,
+                    // but Class is passed in above)
                     AddSynthesizedMethod(
                         frame.Constructor,
                         FlowAnalysisPass.AppendImplicitReturn(
@@ -762,7 +781,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="node">The node whose translation should be translated to contain a frame</param>
         /// <param name="env">The environment for the translated node</param>
-        /// <param name="F">A function that computes the translation of the node.  It receives lists of added statements and added symbols</param>
+        /// <param name="F">A function that computes the translation of the node.  It receives lists of
+        // added statements and added symbols</param>
         /// <returns>The translated statement, as returned from F</returns>
         private BoundNode IntroduceFrame(
             BoundNode node,
@@ -992,7 +1012,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitThisReference(BoundThisReference node)
         {
-            // "topLevelMethod.ThisParameter == null" can occur in a delegate creation expression because the method group
+            // "topLevelMethod.ThisParameter == null" can occur in a delegate creation expression because the
+            // method group
             // in the argument can have a "this" receiver even when "this"
             // is not captured because a static method is selected.  But we do preserve
             // the method group and its receiver in the bound tree.
@@ -1217,7 +1238,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var translatedLambdaContainer = synthesizedMethod.ContainingType;
             var containerAsFrame = translatedLambdaContainer as SynthesizedClosureEnvironment;
 
-            // All of _currentTypeParameters might not be preserved here due to recursively calling upwards in the chain of local functions/lambdas
+            // All of _currentTypeParameters might not be preserved here due to recursively calling upwards in
+            // the chain of local functions/lambdas
             Debug.Assert(
                 (typeArgumentsOpt.IsDefault && !originalMethod.IsGenericMethod)
                     || (typeArgumentsOpt.Length == originalMethod.Arity)
@@ -1497,7 +1519,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // If exception variable got lifted, IntroduceFrame will give us frame init prologue.
             // It needs to run before the exception variable is accessed.
-            // To ensure that, we will make exception variable a sequence that performs prologue as its side-effects.
+            // To ensure that, we will make exception variable a sequence that performs prologue as its
+            // side-effects.
             BoundExpression rewrittenExceptionSource = null;
             var rewrittenFilterPrologue = (BoundStatementList)
                 this.Visit(node.ExceptionFilterPrologueOpt);
@@ -1998,7 +2021,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 out constructedFrame
             );
 
-            // Rewrite the lambda expression (and the enclosing anonymous method conversion) as a delegate creation expression
+            // Rewrite the lambda expression (and the enclosing anonymous method conversion) as a delegate
+            // creation expression
 
             TypeSymbol type = this.VisitType(node.Type);
 
@@ -2032,7 +2056,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (shouldCacheForStaticMethod || shouldCacheInLoop)
             {
-                // replace the expression "new Delegate(frame.M)" with "frame.cache ?? (frame.cache = new Delegate(frame.M));
+                // replace the expression "new Delegate(frame.M)" with "frame.cache ?? (frame.cache = new
+                // Delegate(frame.M));
                 var F = new SyntheticBoundNodeFactory(
                     _currentMethod,
                     node.Syntax,
@@ -2047,9 +2072,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         || shouldCacheInLoop && (object)containerAsFrame != null
                     )
                     {
-                        // Since the cache variable will be in a container with possibly alpha-rewritten generic parameters, we need to
-                        // substitute the original type according to the type map for that container. That substituted type may be
-                        // different from the local variable `type`, which has the node's type substituted for the current container.
+                        // Since the cache variable will be in a container with possibly alpha-rewritten generic parameters,
+                        // we need to
+                        // substitute the original type according to the type map for that container. That substituted type
+                        // may be
+                        // different from the local variable `type`, which has the node's type substituted for the current
+                        // container.
                         var cacheVariableType = containerAsFrame
                             .TypeMap.SubstituteType(node.Type)
                             .Type;
@@ -2062,7 +2090,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (!hasTypeParametersFromAnyMethod)
                         {
                             var cacheVariableName = GeneratedNames.MakeLambdaCacheFieldName(
-                                // If we are generating the field into a display class created exclusively for the lambda the lambdaOrdinal itself is unique already,
+                                // If we are generating the field into a display class created exclusively for the lambda the
+                                // lambdaOrdinal itself is unique already,
                                 // no need to include the top-level method ordinal in the field name.
                                 (closureKind == ClosureKind.General)
                                     ? -1
@@ -2090,7 +2119,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        // the lambda captures at most the "this" of the enclosing method.  We cache its delegate in a local variable.
+                        // the lambda captures at most the "this" of the enclosing method.  We cache its delegate in a local
+                        // variable.
                         var cacheLocal = F.SynthesizedLocal(
                             type,
                             kind: SynthesizedLocalKind.CachedAnonymousMethodDelegate
@@ -2144,7 +2174,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         //                {
         //                    int y = i + i;
         //                    System.Console.WriteLine(y);
-        //                    arr[i].Execute(arg => arg + val);  // delegate should NOT be cached (closure created inside the loop)
+        //                    arr[i].Execute(arg => arg + val);  // delegate should NOT be cached (closure
+        // created inside the loop)
         //                }
         //            }
         //

@@ -211,7 +211,8 @@ namespace SlowPathELTTests
 
     // The following structs are to test correctness of how ProfileArgIterator works with
     // multi-reg return values when running on a System V ABI OS (e.g. Linux and macOS x64).
-    // A struct up to 16 bytes (inclusive) can be returned in (rax, rdx), (rax, xmm0), (xmm0, rax), (xmm0, xmm1).
+    // A struct up to 16 bytes (inclusive) can be returned in (rax, rdx), (rax, xmm0), (xmm0, rax),
+    // (xmm0, xmm1).
     // We already have a comprehensive set of Fp{n}x{m}Struct above that covers the last variant,
     // so there is no need to duplicate them here.
 

@@ -80,11 +80,13 @@ class C : Base
 }"
                 )
                 .VerifyDiagnostics(
-                    // (12,25): error CS8080: "Auto-implemented properties must override all accessors of the overridden property."
+                    // (12,25): error CS8080: "Auto-implemented properties must override all accessors of the overridden
+                    // property."
                     //     public override int P { get; }
                     Diagnostic(ErrorCode.ERR_AutoPropertyMustOverrideSet, "P")
                         .WithLocation(12, 25),
-                    // (13,25): error CS8080: "Auto-implemented properties must override all accessors of the overridden property."
+                    // (13,25): error CS8080: "Auto-implemented properties must override all accessors of the overridden
+                    // property."
                     //     public override int P1 { get; }
                     Diagnostic(ErrorCode.ERR_AutoPropertyMustOverrideSet, "P1")
                         .WithLocation(13, 25)
@@ -150,7 +152,8 @@ struct S
                     Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "C.Ps")
                         .WithArguments("C.Ps")
                         .WithLocation(15, 9),
-                    // (24,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (24,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0.
+                    // Please use language version 10.0 or greater.
                     //     public S()
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S")
                         .WithArguments("parameterless struct constructors", "10.0")
@@ -185,12 +188,14 @@ struct S
 }";
             CreateCompilation(text, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (4,9): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (4,9): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use
+                    // language version 10.0 or greater.
                     //     int a = 2;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "a")
                         .WithArguments("struct field initializers", "10.0")
                         .WithLocation(4, 9),
-                    // (2,8): error CS8983: A 'struct' with field initializers must include an explicitly declared constructor.
+                    // (2,8): error CS8983: A 'struct' with field initializers must include an explicitly declared
+                    // constructor.
                     // struct S
                     Diagnostic(ErrorCode.ERR_StructHasInitializersAndNoDeclaredConstructor, "S")
                         .WithLocation(2, 8),
@@ -249,16 +254,19 @@ struct S
 
             var comp = CreateCompilation(text, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (2,8): error CS8983: A 'struct' with field initializers must include an explicitly declared constructor.
+                // (2,8): error CS8983: A 'struct' with field initializers must include an explicitly declared
+                // constructor.
                 // struct S
                 Diagnostic(ErrorCode.ERR_StructHasInitializersAndNoDeclaredConstructor, "S")
                     .WithLocation(2, 8),
-                // (4,16): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (4,16): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use
+                // language version 10.0 or greater.
                 //     public int P { get; set; } = 1;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "P")
                     .WithArguments("struct field initializers", "10.0")
                     .WithLocation(4, 16),
-                // (6,20): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (6,20): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use
+                // language version 10.0 or greater.
                 //     public decimal R { get; } = 300;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "R")
                     .WithArguments("struct field initializers", "10.0")
@@ -281,12 +289,14 @@ struct S
 
             var comp = CreateCompilation(text, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (3,16): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (3,16): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use
+                // language version 10.0 or greater.
                 //     public int P { get; set; } = 1;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "P")
                     .WithArguments("struct field initializers", "10.0")
                     .WithLocation(3, 16),
-                // (5,20): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (5,20): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use
+                // language version 10.0 or greater.
                 //     public decimal R { get; } = 300;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "R")
                     .WithArguments("struct field initializers", "10.0")
@@ -599,15 +609,21 @@ class Program
             var compilation = CompileWithCustomPropertiesAssembly(source);
             var actualErrors = compilation.GetDiagnostics();
             compilation.VerifyDiagnostics(
-                // (6,11): error CS1061: 'Mismatched' does not contain a definition for 'Instance' and no extension method 'Instance' accepting a first argument of type 'Mismatched' could be found (are you missing a using directive or an assembly reference?)
+                // (6,11): error CS1061: 'Mismatched' does not contain a definition for 'Instance' and no extension
+                // method 'Instance' accepting a first argument of type 'Mismatched' could be found (are you missing a
+                // using directive or an assembly reference?)
                 //         i.Instance = 0;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Instance")
                     .WithArguments("Mismatched", "Instance"),
-                // (7,39): error CS1061: 'Mismatched' does not contain a definition for 'Instance' and no extension method 'Instance' accepting a first argument of type 'Mismatched' could be found (are you missing a using directive or an assembly reference?)
+                // (7,39): error CS1061: 'Mismatched' does not contain a definition for 'Instance' and no extension
+                // method 'Instance' accepting a first argument of type 'Mismatched' could be found (are you missing a
+                // using directive or an assembly reference?)
                 //         System.Console.Write("{0}", i.Instance);
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Instance")
                     .WithArguments("Mismatched", "Instance"),
-                // (11,11): error CS1545: Property, indexer, or event 'Signatures.StaticAndInstance' is not supported by the language; try directly calling accessor methods 'Signatures.GoodStatic.get' or 'Signatures.GoodInstance.set'
+                // (11,11): error CS1545: Property, indexer, or event 'Signatures.StaticAndInstance' is not
+                // supported by the language; try directly calling accessor methods 'Signatures.GoodStatic.get' or
+                // 'Signatures.GoodInstance.set'
                 //         i.StaticAndInstance = 0;
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "StaticAndInstance")
                     .WithArguments(
@@ -615,7 +631,9 @@ class Program
                         "Signatures.GoodStatic.get",
                         "Signatures.GoodInstance.set"
                     ),
-                // (12,11): error CS1545: Property, indexer, or event 'Signatures.GetUsedAsSet' is not supported by the language; try directly calling accessor methods 'Signatures.GoodInstance.get' or 'Signatures.GoodInstance.get'
+                // (12,11): error CS1545: Property, indexer, or event 'Signatures.GetUsedAsSet' is not supported by
+                // the language; try directly calling accessor methods 'Signatures.GoodInstance.get' or
+                // 'Signatures.GoodInstance.get'
                 //         i.GetUsedAsSet = 0;
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "GetUsedAsSet")
                     .WithArguments(
@@ -1273,7 +1291,8 @@ class B {
 ";
             CreateCompilationWithILAndMscorlib40(cSharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (5,13): error CS0176: Member 'A.Goo' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (5,13): error CS0176: Member 'A.Goo' cannot be accessed with an instance reference; qualify it
+                    // with a type name instead
                     //     int x = a.Goo;
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "a.Goo").WithArguments("A.Goo")
                 );
@@ -1300,7 +1319,8 @@ class B {
 ";
             CreateCompilationWithILAndMscorlib40(cSharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (4,18): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try directly calling accessor method 'A.get_Goo()'
+                    // (4,18): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try
+                    // directly calling accessor method 'A.get_Goo()'
                     //     object x = A.Goo;
                     Diagnostic(ErrorCode.ERR_BindToBogusProp1, "Goo")
                         .WithArguments("A.Goo", "A.get_Goo()")
@@ -1328,7 +1348,8 @@ class B {
 ";
             CreateCompilationWithILAndMscorlib40(cSharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (4,18): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try directly calling accessor method 'A.get_Goo()'
+                    // (4,18): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try
+                    // directly calling accessor method 'A.get_Goo()'
                     //     object x = A.Goo;
                     Diagnostic(ErrorCode.ERR_BindToBogusProp1, "Goo")
                         .WithArguments("A.Goo", "A.get_Goo()")
@@ -1595,7 +1616,8 @@ class B {
 ";
             CreateCompilationWithILAndMscorlib40(cSharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (4,15): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try directly calling accessor method 'A.get_Goo()'
+                    // (4,15): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try
+                    // directly calling accessor method 'A.get_Goo()'
                     //     int x = A.Goo;
                     Diagnostic(ErrorCode.ERR_BindToBogusProp1, "Goo")
                         .WithArguments("A.Goo", "A.get_Goo()")
@@ -1622,7 +1644,8 @@ class B {
 ";
             CreateCompilationWithILAndMscorlib40(cSharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (4,15): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try directly calling accessor method 'A.get_Goo()'
+                    // (4,15): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try
+                    // directly calling accessor method 'A.get_Goo()'
                     //     int x = A.Goo;
                     Diagnostic(ErrorCode.ERR_BindToBogusProp1, "Goo")
                         .WithArguments("A.Goo", "A.get_Goo()")
@@ -1650,7 +1673,8 @@ class B {
 ";
             CreateCompilationWithILAndMscorlib40(cSharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (4,18): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try directly calling accessor method 'A.get_Goo()'
+                    // (4,18): error CS1546: Property, indexer, or event 'A.Goo' is not supported by the language; try
+                    // directly calling accessor method 'A.get_Goo()'
                     //     object x = A.Goo;
                     Diagnostic(ErrorCode.ERR_BindToBogusProp1, "Goo")
                         .WithArguments("A.Goo", "A.get_Goo()")
@@ -1723,7 +1747,8 @@ class C {
 ";
             CreateCompilationWithILAndMscorlib40(cSharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (4,22): error CS1546: Property, indexer, or event 'Indexers.this[string]' is not supported by the language; try directly calling accessor method 'Indexers.get_Item(string)'
+                    // (4,22): error CS1546: Property, indexer, or event 'Indexers.this[string]' is not supported by the
+                    // language; try directly calling accessor method 'Indexers.get_Item(string)'
                     //         object goo = new Indexers()[null];
                     Diagnostic(ErrorCode.ERR_BindToBogusProp1, "new Indexers()[null]")
                         .WithArguments("Indexers.this[string]", "Indexers.get_Item(string)")
@@ -1846,7 +1871,9 @@ class B {
 ";
             CreateCompilation(cSharpSource, references: new[] { ref0 })
                 .VerifyDiagnostics(
-                    // (4,16): error CS0433: The type 'A<T>' exists in both '09f9df97-a228-4ca4-9b71-151909f205e6, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and '09f9df97-a228-4ca4-9b71-151909f205e6, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                    // (4,16): error CS0433: The type 'A<T>' exists in both '09f9df97-a228-4ca4-9b71-151909f205e6,
+                    // Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and '09f9df97-a228-4ca4-9b71-151909f205e6,
+                    // Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                     //     object x = A<int>.Goo;
                     Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "A<int>")
                         .WithArguments(
@@ -2174,8 +2201,10 @@ class Program
                     )
                 );
             };
-            // TODO: it would be nice to validate the emitted symbols, but CompileAndVerify currently has a limitation
-            // where it won't pick up the referenced assemblies from the compilation when it creates the ModuleSymbol
+            // TODO: it would be nice to validate the emitted symbols, but CompileAndVerify currently has a
+            // limitation
+            // where it won't pick up the referenced assemblies from the compilation when it creates the
+            // ModuleSymbol
             // for the emitted assembly (i.e. WithParameterizedProps will be missing).
             CompileAndVerify(
                 compilation,
@@ -2342,12 +2371,14 @@ End Class";
 }";
             var compilation3 = CreateCompilation(source3, new[] { reference1 });
             compilation3.VerifyDiagnostics(
-                // (6,13): warning CS8974: Converting method group 'P' to non-delegate type 'object'. Did you intend to invoke the method?
+                // (6,13): warning CS8974: Converting method group 'P' to non-delegate type 'object'. Did you intend
+                // to invoke the method?
                 //         o = B2.P;
                 Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "B2.P")
                     .WithArguments("P", "object")
                     .WithLocation(6, 13),
-                // (8,13): warning CS8974: Converting method group 'Q' to non-delegate type 'object'. Did you intend to invoke the method?
+                // (8,13): warning CS8974: Converting method group 'Q' to non-delegate type 'object'. Did you intend
+                // to invoke the method?
                 //         o = b.Q;
                 Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "b.Q")
                     .WithArguments("Q", "object")
@@ -2387,7 +2418,8 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (6,15): error CS1546: Property, indexer, or event 'B.P[object]' is not supported by the language; try directly calling accessor method 'B.get_P(object)'
+                // (6,15): error CS1546: Property, indexer, or event 'B.P[object]' is not supported by the language;
+                // try directly calling accessor method 'B.get_P(object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp1, "P")
                     .WithArguments("B.P[object]", "B.get_P(object)")
                     .WithLocation(6, 15)
@@ -2411,7 +2443,8 @@ static class E
                 new[] { reference1 }
             );
             compilation3.VerifyDiagnostics(
-                // (6,13): warning CS8974: Converting method group 'P' to non-delegate type 'object'. Did you intend to invoke the method?
+                // (6,13): warning CS8974: Converting method group 'P' to non-delegate type 'object'. Did you intend
+                // to invoke the method?
                 //         o = a.P;
                 Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "a.P")
                     .WithArguments("P", "object")
@@ -2540,7 +2573,9 @@ class D
                 Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "P4")
                     .WithArguments("B.P4[object]")
                     .WithLocation(9, 18),
-                // (10,18): error CS1061: 'C' does not contain a definition for 'P5' and no extension method 'P5' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
+                // (10,18): error CS1061: 'C' does not contain a definition for 'P5' and no extension method 'P5'
+                // accepting a first argument of type 'C' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P5")
                     .WithArguments("C", "P5")
                     .WithLocation(10, 18),
@@ -2552,7 +2587,9 @@ class D
                 Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "P4")
                     .WithArguments("B.P4[object]")
                     .WithLocation(25, 15),
-                // (26,15): error CS1061: 'B' does not contain a definition for 'P5' and no extension method 'P5' accepting a first argument of type 'B' could be found (are you missing a using directive or an assembly reference?)
+                // (26,15): error CS1061: 'B' does not contain a definition for 'P5' and no extension method 'P5'
+                // accepting a first argument of type 'B' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P5")
                     .WithArguments("B", "P5")
                     .WithLocation(26, 15),
@@ -2610,11 +2647,13 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (6,15): error CS1546: Property, indexer, or event 'A.P1[object]' is not supported by the language; try directly calling accessor method 'A.get_P1(object)'
+                // (6,15): error CS1546: Property, indexer, or event 'A.P1[object]' is not supported by the
+                // language; try directly calling accessor method 'A.get_P1(object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp1, "P1")
                     .WithArguments("A.P1[object]", "A.get_P1(object)")
                     .WithLocation(6, 15),
-                // (7,15): error CS1546: Property, indexer, or event 'A.P2[object]' is not supported by the language; try directly calling accessor method 'A.get_P2(object)'
+                // (7,15): error CS1546: Property, indexer, or event 'A.P2[object]' is not supported by the
+                // language; try directly calling accessor method 'A.get_P2(object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp1, "P2")
                     .WithArguments("A.P2[object]", "A.get_P2(object)")
                     .WithLocation(7, 15),
@@ -2653,7 +2692,9 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (6,15): error CS1545: Property, indexer, or event 'A<object>.P[object]' is not supported by the language; try directly calling accessor methods 'A<object>.get_P(object)' or 'A<object>.set_P(object, object)'
+                // (6,15): error CS1545: Property, indexer, or event 'A<object>.P[object]' is not supported by the
+                // language; try directly calling accessor methods 'A<object>.get_P(object)' or
+                // 'A<object>.set_P(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments(
                         "A<object>.P[object]",
@@ -2661,7 +2702,9 @@ End Class";
                         "A<object>.set_P(object, object)"
                     )
                     .WithLocation(6, 15),
-                // (7,11): error CS1545: Property, indexer, or event 'A<object>.P[object]' is not supported by the language; try directly calling accessor methods 'A<object>.get_P(object)' or 'A<object>.set_P(object, object)'
+                // (7,11): error CS1545: Property, indexer, or event 'A<object>.P[object]' is not supported by the
+                // language; try directly calling accessor methods 'A<object>.get_P(object)' or
+                // 'A<object>.set_P(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments(
                         "A<object>.P[object]",
@@ -2796,7 +2839,8 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (8,9): error CS1545: Property, indexer, or event 'A2.this[object]' is not supported by the language; try directly calling accessor methods 'A2.get_P(object)' or 'A2.set_P(ref object, object)'
+                // (8,9): error CS1545: Property, indexer, or event 'A2.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A2.get_P(object)' or 'A2.set_P(ref object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_2[y]")
                     .WithArguments(
                         "A2.this[object]",
@@ -2804,7 +2848,8 @@ End Class";
                         "A2.set_P(ref object, object)"
                     )
                     .WithLocation(8, 9),
-                // (8,17): error CS1545: Property, indexer, or event 'A2.this[object]' is not supported by the language; try directly calling accessor methods 'A2.get_P(object)' or 'A2.set_P(ref object, object)'
+                // (8,17): error CS1545: Property, indexer, or event 'A2.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A2.get_P(object)' or 'A2.set_P(ref object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_2[x]")
                     .WithArguments(
                         "A2.this[object]",
@@ -2812,7 +2857,8 @@ End Class";
                         "A2.set_P(ref object, object)"
                     )
                     .WithLocation(8, 17),
-                // (9,9): error CS1545: Property, indexer, or event 'A3.this[object]' is not supported by the language; try directly calling accessor methods 'A3.get_P(object)' or 'A3.set_P(object, ref object)'
+                // (9,9): error CS1545: Property, indexer, or event 'A3.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A3.get_P(object)' or 'A3.set_P(object, ref object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_3[y]")
                     .WithArguments(
                         "A3.this[object]",
@@ -2820,7 +2866,8 @@ End Class";
                         "A3.set_P(object, ref object)"
                     )
                     .WithLocation(9, 9),
-                // (9,17): error CS1545: Property, indexer, or event 'A3.this[object]' is not supported by the language; try directly calling accessor methods 'A3.get_P(object)' or 'A3.set_P(object, ref object)'
+                // (9,17): error CS1545: Property, indexer, or event 'A3.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A3.get_P(object)' or 'A3.set_P(object, ref object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_3[x]")
                     .WithArguments(
                         "A3.this[object]",
@@ -2828,7 +2875,8 @@ End Class";
                         "A3.set_P(object, ref object)"
                     )
                     .WithLocation(9, 17),
-                // (10,9): error CS1545: Property, indexer, or event 'A4.this[object]' is not supported by the language; try directly calling accessor methods 'A4.get_P(object)' or 'A4.set_P(object, object)'
+                // (10,9): error CS1545: Property, indexer, or event 'A4.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A4.get_P(object)' or 'A4.set_P(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_4[y]")
                     .WithArguments(
                         "A4.this[object]",
@@ -2836,7 +2884,8 @@ End Class";
                         "A4.set_P(object, object)"
                     )
                     .WithLocation(10, 9),
-                // (10,17): error CS1545: Property, indexer, or event 'A4.this[object]' is not supported by the language; try directly calling accessor methods 'A4.get_P(object)' or 'A4.set_P(object, object)'
+                // (10,17): error CS1545: Property, indexer, or event 'A4.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A4.get_P(object)' or 'A4.set_P(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_4[x]")
                     .WithArguments(
                         "A4.this[object]",
@@ -2844,7 +2893,8 @@ End Class";
                         "A4.set_P(object, object)"
                     )
                     .WithLocation(10, 17),
-                // (11,9): error CS1545: Property, indexer, or event 'A5.this[object]' is not supported by the language; try directly calling accessor methods 'A5.get_P(object)' or 'A5.set_P(ref object, object)'
+                // (11,9): error CS1545: Property, indexer, or event 'A5.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A5.get_P(object)' or 'A5.set_P(ref object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_5[y]")
                     .WithArguments(
                         "A5.this[object]",
@@ -2852,7 +2902,8 @@ End Class";
                         "A5.set_P(ref object, object)"
                     )
                     .WithLocation(11, 9),
-                // (11,17): error CS1545: Property, indexer, or event 'A5.this[object]' is not supported by the language; try directly calling accessor methods 'A5.get_P(object)' or 'A5.set_P(ref object, object)'
+                // (11,17): error CS1545: Property, indexer, or event 'A5.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A5.get_P(object)' or 'A5.set_P(ref object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_5[x]")
                     .WithArguments(
                         "A5.this[object]",
@@ -2860,7 +2911,8 @@ End Class";
                         "A5.set_P(ref object, object)"
                     )
                     .WithLocation(11, 17),
-                // (12,9): error CS1545: Property, indexer, or event 'A6.this[object]' is not supported by the language; try directly calling accessor methods 'A6.get_P(object)' or 'A6.set_P(object, ref object)'
+                // (12,9): error CS1545: Property, indexer, or event 'A6.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A6.get_P(object)' or 'A6.set_P(object, ref object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_6[y]")
                     .WithArguments(
                         "A6.this[object]",
@@ -2868,7 +2920,8 @@ End Class";
                         "A6.set_P(object, ref object)"
                     )
                     .WithLocation(12, 9),
-                // (12,17): error CS1545: Property, indexer, or event 'A6.this[object]' is not supported by the language; try directly calling accessor methods 'A6.get_P(object)' or 'A6.set_P(object, ref object)'
+                // (12,17): error CS1545: Property, indexer, or event 'A6.this[object]' is not supported by the
+                // language; try directly calling accessor methods 'A6.get_P(object)' or 'A6.set_P(object, ref object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_6[x]")
                     .WithArguments(
                         "A6.this[object]",
@@ -2876,7 +2929,8 @@ End Class";
                         "A6.set_P(object, ref object)"
                     )
                     .WithLocation(12, 17),
-                // (13,9): error CS1545: Property, indexer, or event 'A7.this[ref object]' is not supported by the language; try directly calling accessor methods 'A7.get_P(ref object)' or 'A7.set_P(object, object)'
+                // (13,9): error CS1545: Property, indexer, or event 'A7.this[ref object]' is not supported by the
+                // language; try directly calling accessor methods 'A7.get_P(ref object)' or 'A7.set_P(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_7[ref y]")
                     .WithArguments(
                         "A7.this[ref object]",
@@ -2884,7 +2938,8 @@ End Class";
                         "A7.set_P(object, object)"
                     )
                     .WithLocation(13, 9),
-                // (13,21): error CS1545: Property, indexer, or event 'A7.this[ref object]' is not supported by the language; try directly calling accessor methods 'A7.get_P(ref object)' or 'A7.set_P(object, object)'
+                // (13,21): error CS1545: Property, indexer, or event 'A7.this[ref object]' is not supported by the
+                // language; try directly calling accessor methods 'A7.get_P(ref object)' or 'A7.set_P(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_7[ref x]")
                     .WithArguments(
                         "A7.this[ref object]",
@@ -2892,7 +2947,9 @@ End Class";
                         "A7.set_P(object, object)"
                     )
                     .WithLocation(13, 21),
-                // (14,9): error CS1545: Property, indexer, or event 'A8.this[ref object]' is not supported by the language; try directly calling accessor methods 'A8.get_P(ref object)' or 'A8.set_P(ref object, object)'
+                // (14,9): error CS1545: Property, indexer, or event 'A8.this[ref object]' is not supported by the
+                // language; try directly calling accessor methods 'A8.get_P(ref object)' or 'A8.set_P(ref object,
+                // object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_8[ref y]")
                     .WithArguments(
                         "A8.this[ref object]",
@@ -2900,7 +2957,9 @@ End Class";
                         "A8.set_P(ref object, object)"
                     )
                     .WithLocation(14, 9),
-                // (14,21): error CS1545: Property, indexer, or event 'A8.this[ref object]' is not supported by the language; try directly calling accessor methods 'A8.get_P(ref object)' or 'A8.set_P(ref object, object)'
+                // (14,21): error CS1545: Property, indexer, or event 'A8.this[ref object]' is not supported by the
+                // language; try directly calling accessor methods 'A8.get_P(ref object)' or 'A8.set_P(ref object,
+                // object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_8[ref x]")
                     .WithArguments(
                         "A8.this[ref object]",
@@ -2908,7 +2967,9 @@ End Class";
                         "A8.set_P(ref object, object)"
                     )
                     .WithLocation(14, 21),
-                // (15,9): error CS1545: Property, indexer, or event 'A9.this[ref object]' is not supported by the language; try directly calling accessor methods 'A9.get_P(ref object)' or 'A9.set_P(object, ref object)'
+                // (15,9): error CS1545: Property, indexer, or event 'A9.this[ref object]' is not supported by the
+                // language; try directly calling accessor methods 'A9.get_P(ref object)' or 'A9.set_P(object, ref
+                // object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_9[ref y]")
                     .WithArguments(
                         "A9.this[ref object]",
@@ -2916,7 +2977,9 @@ End Class";
                         "A9.set_P(object, ref object)"
                     )
                     .WithLocation(15, 9),
-                // (15,21): error CS1545: Property, indexer, or event 'A9.this[ref object]' is not supported by the language; try directly calling accessor methods 'A9.get_P(ref object)' or 'A9.set_P(object, ref object)'
+                // (15,21): error CS1545: Property, indexer, or event 'A9.this[ref object]' is not supported by the
+                // language; try directly calling accessor methods 'A9.get_P(ref object)' or 'A9.set_P(object, ref
+                // object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "_9[ref x]")
                     .WithArguments(
                         "A9.this[ref object]",
@@ -2983,7 +3046,8 @@ End Class";
                 )
             );
 
-            // We're not actually asserting that the overrides are in this order - set comparison just seems like overkill for two elements
+            // We're not actually asserting that the overrides are in this order - set comparison just seems
+            // like overkill for two elements
             var getterOverride = explicitOverrides.First();
             Assert.Equal(
                 classPropertyGetter,
@@ -3058,7 +3122,8 @@ End Class";
                 )
             );
 
-            // We're not actually asserting that the overrides are in this order - set comparison just seems like overkill for two elements
+            // We're not actually asserting that the overrides are in this order - set comparison just seems
+            // like overkill for two elements
             var getterOverride = explicitOverrides.Single();
             Assert.Equal(
                 classPropertyGetter,
@@ -3354,14 +3419,16 @@ public interface IA
 }";
             var comp = CreateCompilation(libSrc, options: TestOptions.ReleaseDll);
             comp.VerifyDiagnostics(
-                // (7,18): error CS0082: Type 'Test.C' already reserves a member called 'set_A' with the same parameter types
+                // (7,18): error CS0082: Type 'Test.C' already reserves a member called 'set_A' with the same
+                // parameter types
                 //             get; set;
                 Diagnostic(ErrorCode.ERR_MemberReserved, "set").WithArguments("set_A", "Test.C")
             );
 
             comp = CreateCompilation(libSrc, options: TestOptions.ReleaseWinMD);
             comp.VerifyDiagnostics(
-                // (7,18): error CS0082: Type 'Test.C' already reserves a member called 'put_A' with the same parameter types
+                // (7,18): error CS0082: Type 'Test.C' already reserves a member called 'put_A' with the same
+                // parameter types
                 //             get; set;
                 Diagnostic(ErrorCode.ERR_MemberReserved, "set").WithArguments("put_A", "Test.C")
             );
@@ -3397,7 +3464,8 @@ class C
                     parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .VerifyDiagnostics(
-                    // (14,16): error CS8023: Feature 'automatically implemented properties' is not available in C# 2. Please use language version 3 or greater.
+                    // (14,16): error CS8023: Feature 'automatically implemented properties' is not available in C# 2.
+                    // Please use language version 3 or greater.
                     //     public int P { get; set; } // Error
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion2, "P")
                         .WithArguments("automatically implemented properties", "3")
@@ -3443,7 +3511,8 @@ unsafe class Test
 ";
             CreateCompilationWithMscorlibAndSpan(text, options: TestOptions.UnsafeDebugDll)
                 .VerifyDiagnostics(
-                    // (4,30): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not possible.
+                    // (4,30): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not
+                    // possible.
                     //     int* property { get; } = stackalloc int[256];
                     Diagnostic(ErrorCode.ERR_StackAllocConversionNotPossible, "stackalloc int[256]")
                         .WithArguments("int", "int*")
@@ -3526,7 +3595,8 @@ interface I1
             );
             comp.GetDeclarationDiagnostics()
                 .Verify(
-                    // (9,19): error CS8026: Feature 'readonly automatically implemented properties' is not available in C# 5. Please use language version 6 or greater.
+                    // (9,19): error CS8026: Feature 'readonly automatically implemented properties' is not available in
+                    // C# 5. Please use language version 6 or greater.
                     //     public string Prop1 { get; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "Prop1")
                         .WithArguments("readonly automatically implemented properties", "6")

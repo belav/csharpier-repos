@@ -75,7 +75,8 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer : Diagno
                 var trueStatement = UnwrapSingleStatementBlock(ifOperation.WhenTrue);
                 if (trueStatement.Kind != OperationKind.Return)
                 {
-                    // We need to verify that the if statement does a ModelState.IsValid check and that the block inside contains
+                    // We need to verify that the if statement does a ModelState.IsValid check and that the block inside
+                    // contains
                     // a single return statement returning a 400. We'l get to it in just a bit
                     return;
                 }

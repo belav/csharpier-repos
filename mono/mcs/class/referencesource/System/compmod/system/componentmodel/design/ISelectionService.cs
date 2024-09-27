@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel.Design
 {
     using System;
@@ -38,7 +38,8 @@ namespace System.ComponentModel.Design
 
         /// <devdoc>
         ///    <para>
-        ///       Adds a <see cref='System.ComponentModel.Design.ISelectionService.SelectionChanged'/> event handler to the selection service.
+        ///       Adds a <see cref='System.ComponentModel.Design.ISelectionService.SelectionChanged'/> event
+        // handler to the selection service.
         ///    </para>
         /// </devdoc>
         event EventHandler SelectionChanged;
@@ -72,7 +73,8 @@ namespace System.ComponentModel.Design
 
         /// <devdoc>
         ///    <para>
-        ///       Sets the currently selected set of components to those with the specified selection type within the specified array of components.
+        ///       Sets the currently selected set of components to those with the specified selection type
+        // within the specified array of components.
         ///    </para>
         /// </devdoc>
         void SetSelectedComponents(ICollection components, SelectionTypes selectionType);

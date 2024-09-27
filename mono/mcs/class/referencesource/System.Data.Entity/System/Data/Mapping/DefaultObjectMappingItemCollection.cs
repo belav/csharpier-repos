@@ -21,7 +21,8 @@ namespace System.Data.Mapping
     /// <summary>
     /// The class creates a default OCMapping between a TypeMetadata in O space
     /// and an TypeMetadata in Edm space. The loader expects that for each member in
-    /// C space type there exists a member in O space type that has the same name. The member maps will be stored in
+    /// C space type there exists a member in O space type that has the same name. The member maps will
+    // be stored in
     /// C space member order.
     /// </summary>
     internal class DefaultObjectMappingItemCollection : MappingItemCollection
@@ -63,7 +64,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <exception cref="ArgumentException"> Thrown if mapping space is not valid</exception>
         internal override Map GetMap(string identity, DataSpace typeSpace, bool ignoreCase)
@@ -82,7 +84,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="map"></param>
         /// <returns>Returns false if no match found.</returns>
@@ -175,7 +178,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <exception cref="ArgumentException"> Thrown if mapping space is not valid</exception>
         internal override Map GetMap(string identity, DataSpace typeSpace)
         {
@@ -190,7 +194,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="map"></param>
         /// <returns>Returns false if no match found.</returns>
         internal override bool TryGetMap(string identity, DataSpace typeSpace, out Map map)
@@ -685,7 +690,8 @@ namespace System.Data.Mapping
                     edmMember.TypeUsage.EdmType
                 );
 
-                //We expect the CLR prmitive type and their corresponding EDM primitive types to have the same primitive type kind( atleast for now)
+                //We expect the CLR prmitive type and their corresponding EDM primitive types to have the same
+                // primitive type kind( atleast for now)
                 if (
                     memberType.PrimitiveTypeKind
                     != ((PrimitiveType)objectMember.TypeUsage.EdmType).PrimitiveTypeKind
@@ -854,7 +860,8 @@ namespace System.Data.Mapping
                         "Unexpected Property type encountered"
                     );
 
-                    // For navigation properties, we need to make sure the relationship type on the navigation property is mapped
+                    // For navigation properties, we need to make sure the relationship type on the navigation property
+                    // is mapped
                     NavigationProperty navigationProperty = (NavigationProperty)edmMember;
                     NavigationProperty objectNavigationProperty = (NavigationProperty)objectMember;
                     LoadTypeMapping(
@@ -885,7 +892,8 @@ namespace System.Data.Mapping
             );
 
             // error if they don't have the same required members, or if
-            // some object concepts don't exist in cspace (it is ok if the ospace is missing some cspace concepts)
+            // some object concepts don't exist in cspace (it is ok if the ospace is missing some cspace
+            // concepts)
             if (cdmStructuralType.Members.Count != objectStructuralType.Members.Count)
             {
                 throw new MappingException(

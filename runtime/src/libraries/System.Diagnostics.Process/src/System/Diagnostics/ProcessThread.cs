@@ -10,7 +10,8 @@ namespace System.Diagnostics
     ///    <para>
     ///       Represents a Win32 thread. This can be used to obtain
     ///       information about the thread, such as it's performance characteristics. This is
-    ///       returned from the System.Diagnostics.Process.ProcessThread property of the System.Diagnostics.Process component.
+    ///       returned from the System.Diagnostics.Process.ProcessThread property of the
+    // System.Diagnostics.Process component.
     ///    </para>
     /// </devdoc>
     [Designer(

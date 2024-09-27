@@ -19,7 +19,8 @@ namespace System.Reflection.Emit.Tests
             );
             ILGenerator ilGenerator = method.GetILGenerator();
 
-            // We use labels in other tests in the code so no need to verify that they were placed correctly here.
+            // We use labels in other tests in the code so no need to verify that they were placed correctly
+            // here.
             for (int i = 0; i < 17; ++i)
             {
                 ilGenerator.DefineLabel();

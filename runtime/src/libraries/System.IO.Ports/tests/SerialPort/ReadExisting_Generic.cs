@@ -20,7 +20,8 @@ namespace System.IO.Ports.Tests
         //If the max is to large then the testcase will take forever to run
         private const int maxRandomTimeout = 2000;
 
-        //Since ReadExisting should return immediately this is the maximum time in ms that ReadExisting should take
+        //Since ReadExisting should return immediately this is the maximum time in ms that ReadExisting
+        // should take
         //before we consider ReadExisting to be blocking and cause the test case to fail
         private const double maxTimeout = 50;
 
@@ -175,8 +176,10 @@ namespace System.IO.Ports.Tests
                 byte[] bytesToWrite = new byte[numRndChar];
                 char[] expectedChars = new char[numRndChar];
 
-                /* 1 Additional character gets added to the input buffer when the parity error occurs on the last byte of a stream
-                 We are verifying that besides this everything gets read in correctly. See NDP Whidbey: 24216 for more info on this */
+/* 1 Additional character gets added to the input buffer when the parity error occurs on the last
+byte of a stream
+We are verifying that besides this everything gets read in correctly. See NDP Whidbey: 24216 for
+more info on this */
                 Debug.WriteLine(
                     "Verifying default ParityReplace byte with a parity errro on the last byte"
                 );
@@ -261,7 +264,8 @@ namespace System.IO.Ports.Tests
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
             actualTime /= NUM_TRYS;
 
-            //Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
+            //Verify that the percentage difference between the expected and actual timeout is less then
+            // maxPercentageDifference
             if (maxTimeout < actualTime)
             {
                 Fail("ERROR!!!: The read method timedout in {0} expected {1}", actualTime, 0);
@@ -313,7 +317,8 @@ namespace System.IO.Ports.Tests
                 }
                 else
                 {
-                    //Else parityReplace was set to a value and we should expect this value to be returned on a parity error
+                    //Else parityReplace was set to a value and we should expect this value to be returned on a parity
+                    // error
                     com1.ParityReplace = (byte)parityReplace;
                     expectedChar = parityReplace;
                 }

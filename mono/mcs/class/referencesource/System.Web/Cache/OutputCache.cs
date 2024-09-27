@@ -18,39 +18,48 @@ using System.Web.Util;
 namespace System.Web.Caching
 {
     /*
-      We currently have the following buffer types:
-
-      HttpResponseBufferElement          - managed memory
-      HttpResponseUnmanagedBufferElement - native memory
-      HttpResourceResponseElement        - pointer to resource
-      HttpFileResponseElement            - contains a file name, file can have 64-bit length
-      HttpSubstBlockResponseElement      - subst callback
-
-      Custom output cache providers do not support all features.  If we cannot use a custom output cache,
-      provider, we will use the internal cache.  We will use a custom output cache provider only if:
-
-        a) no instance validation callbacks (static callbacks are okay)
-        b) no dependencies other than files
-        c) no sliding expiration
-        d) no instance substitution callbacks (HttpSubstBlockResponseElement) (static callbacks okay)
-
-        
-      INSERT/GET:
-      ----------
-      The custom cache provider receives an OutputCacheEntry, which contains the status, headers, response elements,
-      cache policy settings, and kernel cache key.  The cache provider can coallesce response elements.  For example,
-      a disk based cache may return a single response element which is the name of a file containing the entire response.
-
-      ISSUES:
-      
-      If the custom cache provider is distributed, the cache keys must be unique for two applications with the same name
-      but different domains.  For example, a request to http://company1.com/myapp/page.aspx and a request to
-      http://company2.com/myapp/page.aspx need to use output cache entry keys that include the domain name.  Today, the
-      key is just /myapp/page.aspx.  It would need to include the Host header, but if that is "localhost", "::1", etc,
-      we'd need to use %USERDOMAIN%\%COMPUTERNAME% instead.  But it is possible for a single site to have multiple host name
-      bindings, so this would result in multiple cache entries for potentially the same cached result.  We could allow this to be
-      adjusted by adding a setting to the cache policy.
-
+    We currently have the following buffer types:
+    
+    HttpResponseBufferElement          - managed memory
+    HttpResponseUnmanagedBufferElement - native memory
+    HttpResourceResponseElement        - pointer to resource
+    HttpFileResponseElement            - contains a file name, file can have 64-bit length
+    HttpSubstBlockResponseElement      - subst callback
+    
+    Custom output cache providers do not support all features.  If we cannot use a custom output cache,
+    provider, we will use the internal cache.  We will use a custom output cache provider only if:
+    
+    a) no instance validation callbacks (static callbacks are okay)
+    b) no dependencies other than files
+    c) no sliding expiration
+    d) no instance substitution callbacks (HttpSubstBlockResponseElement) (static callbacks okay)
+    
+    
+    INSERT/GET:
+    ----------
+    The custom cache provider receives an OutputCacheEntry, which contains the status, headers, response
+    elements,
+    cache policy settings, and kernel cache key.  The cache provider can coallesce response elements.
+    For example,
+    a disk based cache may return a single response element which is the name of a file containing the
+    entire response.
+    
+    ISSUES:
+    
+    If the custom cache provider is distributed, the cache keys must be unique for two applications with
+    the same name
+    but different domains.  For example, a request to http://company1.com/myapp/page.aspx and a request
+    to
+    http://company2.com/myapp/page.aspx need to use output cache entry keys that include the domain
+    name.  Today, the
+    key is just /myapp/page.aspx.  It would need to include the Host header, but if that is "localhost",
+    "::1", etc,
+    we'd need to use %USERDOMAIN%\%COMPUTERNAME% instead.  But it is possible for a single site to have
+    multiple host name
+    bindings, so this would result in multiple cache entries for potentially the same cached result.  We
+    could allow this to be
+    adjusted by adding a setting to the cache policy.
+    
     */
 
     internal class DependencyCacheEntry
@@ -97,7 +106,8 @@ namespace System.Web.Caching
         private static OutputCacheProvider s_defaultProvider;
         private static OutputCacheProviderCollection s_providers;
 
-        // when there are no providers being used, we'll use this count to optimize performance when the value is zero.
+        // when there are no providers being used, we'll use this count to optimize performance when the
+        // value is zero.
         private static int s_cEntries;
 
         //
@@ -172,7 +182,8 @@ namespace System.Web.Caching
 
         private static OutputCacheProvider GetFragmentProvider(String providerName)
         {
-            // if providerName is null, use default provider.  If default provider is null, we'll use internal cache.
+            // if providerName is null, use default provider.  If default provider is null, we'll use internal
+            // cache.
             // if providerName is not null, get it from the provider collection.
             OutputCacheProvider provider = null;
             if (providerName == null)
@@ -334,7 +345,8 @@ namespace System.Web.Caching
                         );
                         FileResponseElement fre = (FileResponseElement)re;
 
-                        // DevDiv #21203: Need to verify permission to access the requested file since handled by native code.
+                        // DevDiv #21203: Need to verify permission to access the requested file since handled by native
+                        // code.
                         HttpRuntime.CheckFilePermission(fre.Path);
 
                         elem = new HttpFileResponseElement(
@@ -644,7 +656,8 @@ namespace System.Web.Caching
                 ) == 0
             )
             {
-                // file dependencies have not changed--cache them with callback to remove OutputCacheEntry if they change
+                // file dependencies have not changed--cache them with callback to remove OutputCacheEntry if they
+                // change
                 HttpRuntime.Cache.InternalCache.Insert(
                     depKey,
                     new DependencyCacheEntry(oceKey, kernelKey, providerName),
@@ -1150,12 +1163,12 @@ namespace System.Web.Caching
             if (cachedVary != null)
             {
                 /*
-                 * Add the CachedVary item so that a request will know
-                 * which headers are needed to issue another request.
-                 *
-                 * Use the Add method so that we guarantee we only use
-                 * a single CachedVary and don't overwrite existing ones.
-                 */
+                * Add the CachedVary item so that a request will know
+                * which headers are needed to issue another request.
+                *
+                * Use the Add method so that we guarantee we only use
+                * a single CachedVary and don't overwrite existing ones.
+                */
 
                 CachedVary cachedVaryInCache;
                 if (!useProvider)

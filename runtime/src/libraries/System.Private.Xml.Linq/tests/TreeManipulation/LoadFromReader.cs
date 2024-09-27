@@ -588,18 +588,30 @@ namespace XLinqTests
         //[Variation(Priority = 0, Desc = "Read XElement")]
 
         //XDocument
-        //[Variation(Priority = 0, Desc = "Read XDocument with empty element", Params = new object[] { "<A />" })]
-        //[Variation(Priority = 0, Desc = "Read XDocument with empty content", Params = new object[] { "<A></A>" })]
-        //[Variation(Priority = 0, Desc = "Read XDocument with string content", Params = new object[] { "<A>truck</A>" })]
-        //[Variation(Priority = 0, Desc = "Read XDocument with string content and empty node", Params = new object[] { "<X>t0<A />t00</X>" })]
-        //[Variation(Priority = 0, Desc = "Read XDocument with string content and non-empty node", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with namespace", Params = new object[] { "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with namespace", Params = new object[] { "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with namespace, CData", Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with namespace, CData, PI", Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
-        //[Variation(Priority = 0, Desc = "Read XDocument with attribute", Params = new object[] { "<A attr=\"1\" />" })]
-        //[Variation(Priority = 0, Desc = "Read XDocument with attributes", Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with namespace and attributes", Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />" })]
+        //[Variation(Priority = 0, Desc = "Read XDocument with empty element", Params = new object[] { "<A
+        // />" })]
+        //[Variation(Priority = 0, Desc = "Read XDocument with empty content", Params = new object[] {
+        // "<A></A>" })]
+        //[Variation(Priority = 0, Desc = "Read XDocument with string content", Params = new object[] {
+        // "<A>truck</A>" })]
+        //[Variation(Priority = 0, Desc = "Read XDocument with string content and empty node", Params = new
+        // object[] { "<X>t0<A />t00</X>" })]
+        //[Variation(Priority = 0, Desc = "Read XDocument with string content and non-empty node", Params =
+        // new object[] { "<X>t0<A>truck</A>t00</X>" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with namespace", Params = new object[] { "<a:A
+        // xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with namespace", Params = new object[] { "<A
+        // xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with namespace, CData", Params = new object[] {
+        // "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with namespace, CData, PI", Params = new object[]
+        // { "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
+        //[Variation(Priority = 0, Desc = "Read XDocument with attribute", Params = new object[] { "<A
+        // attr=\"1\" />" })]
+        //[Variation(Priority = 0, Desc = "Read XDocument with attributes", Params = new object[] { "<A
+        // attr=\"1\" a2=\"a2\" a3=\"a3\" />" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with namespace and attributes", Params = new
+        // object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />" })]
         public void reader_12()
         {
             var xml = Variation.Params[0] as string;
@@ -614,18 +626,30 @@ namespace XLinqTests
         }
 
         //XElement
-        //[Variation(Priority = 0, Desc = "Read XElement with empty element", Params = new object[] { "<A />" })]
-        //[Variation(Priority = 0, Desc = "Read XElement with empty content", Params = new object[] { "<A></A>" })]
-        //[Variation(Priority = 0, Desc = "Read XElement with string content", Params = new object[] { "<A>truck</A>" })]
-        //[Variation(Priority = 0, Desc = "Read XElement with string content and empty node", Params = new object[] { "<X>t0<A />t00</X>" })]
-        //[Variation(Priority = 0, Desc = "Read XElement with string content and non-empty node", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with namespace", Params = new object[] { "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with namespace", Params = new object[] { "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with namespace, CData", Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with namespace, CData, PI", Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
-        //[Variation(Priority = 0, Desc = "Read XElement with attribute", Params = new object[] { "<A attr=\"1\" />" })]
-        //[Variation(Priority = 0, Desc = "Read XElement with attributes", Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with namespace and attributes", Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />" })]
+        //[Variation(Priority = 0, Desc = "Read XElement with empty element", Params = new object[] { "<A
+        // />" })]
+        //[Variation(Priority = 0, Desc = "Read XElement with empty content", Params = new object[] {
+        // "<A></A>" })]
+        //[Variation(Priority = 0, Desc = "Read XElement with string content", Params = new object[] {
+        // "<A>truck</A>" })]
+        //[Variation(Priority = 0, Desc = "Read XElement with string content and empty node", Params = new
+        // object[] { "<X>t0<A />t00</X>" })]
+        //[Variation(Priority = 0, Desc = "Read XElement with string content and non-empty node", Params =
+        // new object[] { "<X>t0<A>truck</A>t00</X>" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with namespace", Params = new object[] { "<a:A
+        // xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with namespace", Params = new object[] { "<A
+        // xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with namespace, CData", Params = new object[] { "<A
+        // xmlns=\"ns0\"><![CDATA[tralala]]></A>" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with namespace, CData, PI", Params = new object[] {
+        // "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
+        //[Variation(Priority = 0, Desc = "Read XElement with attribute", Params = new object[] { "<A
+        // attr=\"1\" />" })]
+        //[Variation(Priority = 0, Desc = "Read XElement with attributes", Params = new object[] { "<A
+        // attr=\"1\" a2=\"a2\" a3=\"a3\" />" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with namespace and attributes", Params = new
+        // object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />" })]
         public void reader_14()
         {
             var xml = Variation.Params[0] as string;
@@ -643,10 +667,14 @@ namespace XLinqTests
         //[Variation(Priority = 2, Desc = "Read XElement with nwf empty", Params = new object[] { "" })]
         //[Variation(Priority = 2, Desc = "Read XElement with nwf tab", Params = new object[] { "\t" })]
         //[Variation(Priority = 2, Desc = "Read XElement with nwf EOL", Params = new object[] { "\n" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with nwf no closing bracket", Params = new object[] { "<A >" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with nwf no opening bracket", Params = new object[] { "A></A>" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with nwf missing element", Params = new object[] { "<q=a/>" })]
-        //[Variation(Priority = 2, Desc = "Read XElement with nwf <Atruck</A>", Params = new object[] { "<Atruck</A>" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with nwf no closing bracket", Params = new object[]
+        // { "<A >" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with nwf no opening bracket", Params = new object[]
+        // { "A></A>" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with nwf missing element", Params = new object[] {
+        // "<q=a/>" })]
+        //[Variation(Priority = 2, Desc = "Read XElement with nwf <Atruck</A>", Params = new object[] {
+        // "<Atruck</A>" })]
         public void reader_15()
         {
             var xml = Variation.Params[0] as string;
@@ -737,10 +765,14 @@ namespace XLinqTests
         //[Variation(Priority = 2, Desc = "Read XDocument with nwf empty", Params = new object[] { "" })]
         //[Variation(Priority = 2, Desc = "Read XDocument with nwf empty", Params = new object[] { "\t" })]
         //[Variation(Priority = 2, Desc = "Read XDocument with nwf empty", Params = new object[] { "\n" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with nwf no closing bracket", Params = new object[] { "<A >" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with nwf no opening bracket", Params = new object[] { "A></A>" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with nwf missing element", Params = new object[] { "<q=a/>" })]
-        //[Variation(Priority = 2, Desc = "Read XDocument with nwf <Atruck</A>", Params = new object[] { "<Atruck</A>" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with nwf no closing bracket", Params = new
+        // object[] { "<A >" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with nwf no opening bracket", Params = new
+        // object[] { "A></A>" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with nwf missing element", Params = new object[] {
+        // "<q=a/>" })]
+        //[Variation(Priority = 2, Desc = "Read XDocument with nwf <Atruck</A>", Params = new object[] {
+        // "<Atruck</A>" })]
         public void reader_16()
         {
             var xml = Variation.Params[0] as string;
@@ -1142,7 +1174,8 @@ namespace XLinqTests
             catch (ArgumentNullException) { }
         }
 
-        //[Variation(Priority = 1, Desc = "XDocument: Null parameters for Parse, ReadFrom and ReadContentFrom")]
+        //[Variation(Priority = 1, Desc = "XDocument: Null parameters for Parse, ReadFrom and
+        // ReadContentFrom")]
         public void reader_27()
         {
             var doc = new XDocument(new XElement("PurchaseOrder"));
@@ -1222,7 +1255,8 @@ namespace XLinqTests
             }
         }
 
-        //[Variation(Priority = 1, Desc = "XElement: Null parameters for Parse, ReadFrom and ReadContentFrom")]
+        //[Variation(Priority = 1, Desc = "XElement: Null parameters for Parse, ReadFrom and
+        // ReadContentFrom")]
         public void reader_28()
         {
             var doc = new XElement(new XElement("PurchaseOrder"));

@@ -9,8 +9,10 @@ namespace System.DirectoryServices.Protocols
     {
         private static int DecodeBitStringHelper(ArrayList resultList, SafeBerHandle berElement)
         {
-            // Windows doesn't really decode BitStrings correctly, and wldap32 will internally treat it as 'O' Octet string.
-            // In order to match behavior, in Linux we will interpret 'B' as 'O' when passing the call to libldap.
+            // Windows doesn't really decode BitStrings correctly, and wldap32 will internally treat it as 'O'
+            // Octet string.
+            // In order to match behavior, in Linux we will interpret 'B' as 'O' when passing the call to
+            // libldap.
 
             // return BerVal
             byte[] byteArray = DecodingByteArrayHelper(berElement, 'O', out int error);

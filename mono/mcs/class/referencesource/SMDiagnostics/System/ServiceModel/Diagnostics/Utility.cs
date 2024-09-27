@@ -24,7 +24,8 @@ namespace System.ServiceModel.Diagnostics
             this.exceptionUtility = exceptionUtility;
         }
 
-        // Call this when a p/invoke with an 'out SafeHandle' parameter returns an error.  This will safely clean up the handle.
+        // Call this when a p/invoke with an 'out SafeHandle' parameter returns an error.  This will safely
+        // clean up the handle.
         [SuppressMessage(
             FxCop.Category.Security,
             FxCop.Rule.TransparentMethodsMustNotReferenceCriticalCode

@@ -16,7 +16,8 @@ namespace Algorithms
 
         protected const double limit = 4.0;
 
-        // Render the fractal using the BCL Complex data type abstraction on a single thread with scalar doubles
+        // Render the fractal using the BCL Complex data type abstraction on a single thread with scalar
+        // doubles
         public void RenderSingleThreadedWithADT(
             float xminf,
             float xmaxf,
@@ -94,7 +95,8 @@ namespace Algorithms
             }
         }
 
-        // Render the fractal using the BCL Complex data type abstraction on multiple threads with scalar doubles
+        // Render the fractal using the BCL Complex data type abstraction on multiple threads with scalar
+        // doubles
         public void RenderMultiThreadedWithADT(
             float xminf,
             float xmaxf,

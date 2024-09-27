@@ -52,7 +52,8 @@ namespace System.Activities.Core.Presentation
             InitializeComponent();
             this.Loaded += (sender, e) =>
             {
-                //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an Unloaded event.
+                //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an
+                // Unloaded event.
                 this.ModelItem.PropertyChanged -= OnModelItemPropertyChanged;
                 this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
                 OnModelItemPropertyChanged(

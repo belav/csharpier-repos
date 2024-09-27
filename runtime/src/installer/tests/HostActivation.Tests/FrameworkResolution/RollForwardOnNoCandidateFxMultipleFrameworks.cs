@@ -63,8 +63,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             }
         }
 
-        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is higher.
+        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>,
+        // <applyPatches>)
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is higher.
         [Theory] // fxRefVersion  rollForwardOnNoCandidateFx  applyPatches  resolvedFramework
         [InlineData("5.0.0", 0, null, ResolvedFramework.FailedToReconcile)]
         [InlineData("5.1.0", 0, null, "5.1.3")]
@@ -106,8 +108,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 );
         }
 
-        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is higher.
+        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>,
+        // <applyPatches>)
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is higher.
         // In this case the direct reference from app is first, so the framework reference from app
         // is actually resolved against the disk - and the resolved framework is than compared to
         // the inner framework reference (potentially causing re-resolution).
@@ -153,8 +157,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 );
         }
 
-        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is lower.
+        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>,
+        // <applyPatches>)
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is lower.
         [Theory] // fxRefVersion  rollForwardOnNoCandidateFx  applyPatches  resolvedFramework
         [InlineData("5.4.0", null, null, "5.4.1")]
         [InlineData("6.0.0", null, null, ResolvedFramework.FailedToReconcile)]
@@ -189,8 +195,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 );
         }
 
-        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is lower.
+        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>,
+        // <applyPatches>)
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is lower.
         // In this case the direct reference from app is first, so the framework reference from app
         // is actually resolved against the disk - and the resolved framework is than compared to
         // the inner framework reference (potentially causing re-resolution).
@@ -228,8 +236,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 );
         }
 
-        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is higher.
+        // Verify that inner framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>,
+        // <applyPatches>)
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is higher.
         // 3.0 change:
         // 2.* - release would never roll forward to pre-release
         // 3.* - release rolls forward to pre-release if there is no available release match
@@ -276,7 +286,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with app's framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>).
+        // is correctly reconciled with app's framework reference (<fxRefVersion>,
+        // <rollForwardOnNoCandidateFx>, <applyPatches>).
         // App fx reference is lower.
         [Theory] // fxRefVersion  rollForwardOnNoCandidateFx  applyPatches  resolvedFramework
         [InlineData("5.0.0", 0, null, ResolvedFramework.FailedToReconcile)]
@@ -321,7 +332,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with app's framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>).
+        // is correctly reconciled with app's framework reference (<fxRefVersion>,
+        // <rollForwardOnNoCandidateFx>, <applyPatches>).
         // App fx reference is lower.
         // In this case the direct reference from app is first, so the framework reference from app
         // is actually resolved against the disk - and the resolved framework is than compared to
@@ -367,7 +379,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with app's framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>).
+        // is correctly reconciled with app's framework reference (<fxRefVersion>,
+        // <rollForwardOnNoCandidateFx>, <applyPatches>).
         // App fx reference is higher.
         [Theory] // fxRefVersion  rollForwardOnNoCandidateFx  applyPatches  resolvedFramework
         [InlineData("5.4.0", null, null, "5.4.1")]
@@ -404,7 +417,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with app's framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>).
+        // is correctly reconciled with app's framework reference (<fxRefVersion>,
+        // <rollForwardOnNoCandidateFx>, <applyPatches>).
         // App fx reference is higher.
         // In this case the direct reference from app is first, so the framework reference from app
         // is actually resolved against the disk - and the resolved framework is than compared to
@@ -444,7 +458,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with another's framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>).
+        // is correctly reconciled with another's framework reference (<fxRefVersion>,
+        // <rollForwardOnNoCandidateFx>, <applyPatches>).
         // The higher framework has fx reference with higher version.
         [Theory] // fxRefVersion  rollForwardOnNoCandidateFx  applyPatches  resolvedFramework
         [InlineData("5.0.0", 0, null, ResolvedFramework.FailedToReconcile)]
@@ -490,7 +505,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with another's framework reference (<fxRefVersion>, <rollForwardOnNoCandidateFx>, <applyPatches>).
+        // is correctly reconciled with another's framework reference (<fxRefVersion>,
+        // <rollForwardOnNoCandidateFx>, <applyPatches>).
         // The higher framework has fx reference with lower version.
         [Theory] // fxRefVersion  rollForwardOnNoCandidateFx  applyPatches  resolvedFramework
         [InlineData("5.4.0", null, null, "5.4.1")]
@@ -535,7 +551,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         //  - Loads HighWare which has 5.4.1
         //    - This forces a retry since 5.1.3 was hard resolved, so we have reload with 5.4.1 instead
         //  - Loads MiddleWare which has 5.6.0
-        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with 5.6.0 instead
+        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with
+        // 5.6.0 instead
         [Fact]
         public void FrameworkResolutionRetry_FrameworkChain()
         {
@@ -571,7 +588,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         //  - Loads MiddleWare which has 5.4.1
         //    - This forces a retry since 5.1.3 was hard resolved, so we have reload with 5.4.1 instead
         //  - Loads AnotherMiddleWare which has 5.6.0
-        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with 5.6.0 instead
+        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with
+        // 5.6.0 instead
         [Fact]
         public void FrameworkResolutionRetry_FrameworkTree()
         {

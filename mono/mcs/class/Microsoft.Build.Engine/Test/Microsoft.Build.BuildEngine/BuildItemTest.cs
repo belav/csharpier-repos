@@ -812,13 +812,13 @@ namespace MonoTests.Microsoft.Build.BuildEngine
             Assert.AreEqual("A", project.GetEvaluatedItemsByName("B")[0].FinalItemSpec, "B2");
 
             project.ItemGroups.CopyTo(groups, 0);
-            /*Broken right now:
-              CheckBuildItemGroup (groups[0], new string[] {
-                "D", "D",
-                "C", "$(C)",
-                "A", "a;b",
-                "B", "$(A)"
-            }, "H1");*/
+/*Broken right now:
+CheckBuildItemGroup (groups[0], new string[] {
+"D", "D",
+"C", "$(C)",
+"A", "a;b",
+"B", "$(A)"
+}, "H1");*/
 
             CheckBuildItemGroup(
                 project.GetEvaluatedItemsByName("C"),

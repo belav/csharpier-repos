@@ -49,7 +49,8 @@ internal class Program
             }
         }
 
-        //  make sure Class4 was trimmed since it wasn't used, even though Class1 has a conversion operator to it
+        //  make sure Class4 was trimmed since it wasn't used, even though Class1 has a conversion operator
+        // to it
         int i = 4;
         if (typeof(Program).Assembly.GetType("Class" + i) != null)
         {

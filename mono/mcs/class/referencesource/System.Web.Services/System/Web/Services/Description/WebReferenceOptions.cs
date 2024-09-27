@@ -31,7 +31,8 @@ namespace System.Web.Services.Description
         StringCollection schemaImporterExtensions;
         bool verbose;
 
-        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.CodeGenerationOptions"]/*' />
+        /// <include file='doc\WebReferenceOptions.uex'
+        // path='docs/doc[@for="WebReferenceOptions.CodeGenerationOptions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -43,7 +44,8 @@ namespace System.Web.Services.Description
             set { codeGenerationOptions = value; }
         }
 
-        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.SchemaImporterExtensions"]/*' />
+        /// <include file='doc\WebReferenceOptions.uex'
+        // path='docs/doc[@for="WebReferenceOptions.SchemaImporterExtensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -59,7 +61,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Style"]/*' />
+        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Style"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -71,7 +74,8 @@ namespace System.Web.Services.Description
             set { style = value; }
         }
 
-        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Verbose"]/*' />
+        /// <include file='doc\WebReferenceOptions.uex'
+        // path='docs/doc[@for="WebReferenceOptions.Verbose"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -82,7 +86,8 @@ namespace System.Web.Services.Description
             set { verbose = value; }
         }
 
-        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Schema"]/*' />
+        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Schema"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -98,7 +103,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Read"]/*' />
+        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Read"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -113,7 +119,8 @@ namespace System.Web.Services.Description
             return Read(readerNew, validationEventHandler);
         }
 
-        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Read1"]/*' />
+        /// <include file='doc\WebReferenceOptions.uex' path='docs/doc[@for="WebReferenceOptions.Read1"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

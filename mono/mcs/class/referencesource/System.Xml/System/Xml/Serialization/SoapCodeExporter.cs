@@ -26,14 +26,16 @@ namespace System.Xml.Serialization
     /// </devdoc>
     public class SoapCodeExporter : CodeExporter
     {
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="SoapCodeExporter.SoapCodeExporter"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="SoapCodeExporter.SoapCodeExporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SoapCodeExporter(CodeNamespace codeNamespace)
             : base(codeNamespace, null, null, CodeGenerationOptions.GenerateProperties, null) { }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="SoapCodeExporter.SoapCodeExporter1"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="SoapCodeExporter.SoapCodeExporter1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -46,7 +48,8 @@ namespace System.Xml.Serialization
                 null
             ) { }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="SoapCodeExporter.SoapCodeExporter2"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="SoapCodeExporter.SoapCodeExporter2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -63,7 +66,8 @@ namespace System.Xml.Serialization
                 null
             ) { }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="XmlCodeExporter.SoapCodeExporter3"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="XmlCodeExporter.SoapCodeExporter3"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -75,7 +79,8 @@ namespace System.Xml.Serialization
         )
             : base(codeNamespace, codeCompileUnit, null, options, mappings) { }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="XmlCodeExporter.SoapCodeExporter4"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="XmlCodeExporter.SoapCodeExporter4"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -88,7 +93,8 @@ namespace System.Xml.Serialization
         )
             : base(codeNamespace, codeCompileUnit, codeProvider, options, mappings) { }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="SoapCodeExporter.ExportTypeMapping"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="SoapCodeExporter.ExportTypeMapping"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -99,7 +105,8 @@ namespace System.Xml.Serialization
             ExportElement(xmlTypeMapping.Accessor);
         }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="SoapCodeExporter.ExportMembersMapping"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="SoapCodeExporter.ExportMembersMapping"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -257,7 +264,8 @@ namespace System.Xml.Serialization
                 ExportType(derived);
         }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="SoapCodeExporter.AddMappingMetadata"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="SoapCodeExporter.AddMappingMetadata"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -270,7 +278,8 @@ namespace System.Xml.Serialization
             AddMemberMetadata(metadata, member.Mapping, forceUseMemberName);
         }
 
-        /// <include file='doc\SoapCodeExporter.uex' path='docs/doc[@for="SoapCodeExporter.AddMappingMetadata1"]/*' />
+        /// <include file='doc\SoapCodeExporter.uex'
+        // path='docs/doc[@for="SoapCodeExporter.AddMappingMetadata1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

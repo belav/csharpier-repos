@@ -34,7 +34,8 @@ internal static partial class Interop
             internal ReadOnlySpan<char> GetName(Span<char> buffer)
             {
                 // -1 for null terminator (buffer will not include one),
-                //  and -1 because GetMaxCharCount pessimistically assumes the buffer may start with a partial surrogate
+                //  and -1 because GetMaxCharCount pessimistically assumes the buffer may start with a partial
+                // surrogate
                 Debug.Assert(
                     buffer.Length >= Encoding.UTF8.GetMaxCharCount(NameBufferSize - 1 - 1)
                 );

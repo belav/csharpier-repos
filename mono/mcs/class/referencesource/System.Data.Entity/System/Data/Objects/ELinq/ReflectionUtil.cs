@@ -1168,7 +1168,8 @@ namespace System.Data.Objects.ELinq
                 return;
             }
 
-            // always include the name (note: we omit the namespace/assembly; assuming type names do not collide)
+            // always include the name (note: we omit the namespace/assembly; assuming type names do not
+            // collide)
             description.Append(type.Name);
 
             if (type.IsGenericType)

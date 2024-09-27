@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Synchronous Http request handler interface
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Synchronous Http request handler interface
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {

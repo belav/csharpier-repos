@@ -11,8 +11,10 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 
 /// <summary>
-/// Tests that the internal parameterless XElement ctor is not trimmed when used in an application that the IL Linker is run on.
-/// The test simulates ILLink being run on the output of running sgen on an assembly that contains a simple POCO to be (de)serialized.
+/// Tests that the internal parameterless XElement ctor is not trimmed when used in an application
+// that the IL Linker is run on.
+/// The test simulates ILLink being run on the output of running sgen on an assembly that contains a
+// simple POCO to be (de)serialized.
 /// The POCO has a field of type XElement. The ctor is needed to deserialize into this type.
 /// </summary>
 public class Program
@@ -22,7 +24,8 @@ public class Program
         XmlReader xmlReader = CreateXmlReader();
         var serializer = new MyClassSerializer();
 
-        // The line that tests that XElement ctor was preserved is in XmlSerializationReaderMyClass.Read2_MyClass.
+        // The line that tests that XElement ctor was preserved is in
+        // XmlSerializationReaderMyClass.Read2_MyClass.
         var obj = (MyClass)serializer.Deserialize(xmlReader);
         return obj.Element.Name == "MyElement" ? 100 : -1;
     }

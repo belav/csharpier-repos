@@ -62,7 +62,8 @@ public class SerializedHubMessageTests
         var invocation = new InvocationMessage("Foo", new object[0]);
         var message = new SerializedHubMessage(invocation);
 
-        // "Pre-cache" the requested number of serializations (so we can test scenarios involving each of the fields and the fallback list)
+        // "Pre-cache" the requested number of serializations (so we can test scenarios involving each of
+        // the fields and the fallback list)
         for (var i = 0; i < numberOfSerializationsToPreCache; i++)
         {
             _ = message.GetSerializedMessage(new DummyHubProtocol($"p{i}"));

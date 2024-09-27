@@ -53,7 +53,8 @@ namespace System.Data.Common
                 _adjustedParameterNameMaxLength = GetAdjustedParameterNameMaxLength();
 
                 // Generate the baseparameter names and remove conflicting names
-                // No names will be generated for any name that is rejected due to invalid prefix, regex violation or
+                // No names will be generated for any name that is rejected due to invalid prefix, regex violation
+                // or
                 // name conflict after mutation.
                 // All null values will be replaced with generic parameter names
                 //
@@ -1500,7 +1501,7 @@ namespace System.Data.Common
             {
                 p = command.CreateParameter();
                 /*if (null == p) {
-                    // CONSIDER: throw exception
+                // CONSIDER: throw exception
                 }*/
             }
             Debug.Assert(null != p, "null CreateParameter");
@@ -1571,7 +1572,7 @@ namespace System.Data.Common
                 DbCommand select = GetSelectCommand();
                 command = select.Connection!.CreateCommand();
                 /*if (null == command) {
-                    // CONSIDER: throw exception
+                // CONSIDER: throw exception
                 }*/
 
                 // the following properties are only initialized when the object is created
@@ -1711,7 +1712,8 @@ namespace System.Data.Common
 
         private void RowUpdatingHandlerBuilder(RowUpdatingEventArgs rowUpdatingEvent)
         {
-            // the Update method will close the connection if command was null and returned command.Connection is same as SelectCommand.Connection
+            // the Update method will close the connection if command was null and returned command.Connection
+            // is same as SelectCommand.Connection
             DataRow datarow = rowUpdatingEvent.Row;
             BuildCache(false, false);
 

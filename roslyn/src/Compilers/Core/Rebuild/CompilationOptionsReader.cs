@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
 {
     public class CompilationOptionsReader
     {
-        // GUIDs specified in https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#document-table-0x30
+        // GUIDs specified in
+        // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#document-table-0x30
         public static readonly Guid HashAlgorithmSha1 = unchecked(
             new Guid(
                 (int)0xff1816ec,
@@ -56,21 +57,25 @@ namespace Microsoft.CodeAnalysis.Rebuild
             )
         );
 
+        //
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#compilation-metadata-references-c-and-vb-compilers
         public static readonly Guid MetadataReferenceInfoGuid = new Guid(
             "7E4D4708-096E-4C5C-AEDA-CB10BA6A740D"
         );
 
+        //
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#compilation-options-c-and-vb-compilers
         public static readonly Guid CompilationOptionsGuid = new Guid(
             "B5FEEC05-8CD0-4A83-96DA-466284BB4BD8"
         );
 
+        //
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#embedded-source-c-and-vb-compilers
         public static readonly Guid EmbeddedSourceGuid = new Guid(
             "0E8A571B-6926-466E-B4AD-8AB04611F5FE"
         );
 
+        //
         // https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md#source-link-c-and-vb-compilers
         public static readonly Guid SourceLinkGuid = new Guid(
             "CC110556-A091-4D38-9FEC-25AB9A351A6A"
@@ -207,8 +212,10 @@ namespace Microsoft.CodeAnalysis.Rebuild
             var methodDefinition = mdReader.GetMethodDefinition(header.EntryPoint);
             var methodName = mdReader.GetString(methodDefinition.Name);
 
-            // Here we only want to give the caller the main method name and containing type name if the method is named "Main" per convention.
-            // If the main method has another name, we have to assume that specifying a main type name won't work.
+            // Here we only want to give the caller the main method name and containing type name if the method
+            // is named "Main" per convention.
+            // If the main method has another name, we have to assume that specifying a main type name won't
+            // work.
             // For example, if the compilation uses top-level statements.
             if (methodName != WellKnownMemberNames.EntryPointMethodName)
             {

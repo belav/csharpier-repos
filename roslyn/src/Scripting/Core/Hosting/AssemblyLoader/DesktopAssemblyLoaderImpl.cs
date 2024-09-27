@@ -48,8 +48,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         public override AssemblyAndLocation LoadFromPath(string path)
         {
-            // An assembly is loaded into CLR's Load Context if it is in the GAC, otherwise it's loaded into No Context via Assembly.LoadFile(string).
-            // Assembly.LoadFile(string) automatically redirects to GAC if the assembly has a strong name and there is an equivalent assembly in GAC.
+            // An assembly is loaded into CLR's Load Context if it is in the GAC, otherwise it's loaded into No
+            // Context via Assembly.LoadFile(string).
+            // Assembly.LoadFile(string) automatically redirects to GAC if the assembly has a strong name and
+            // there is an equivalent assembly in GAC.
 
             var assembly = Assembly.LoadFile(path);
             var location = assembly.Location;

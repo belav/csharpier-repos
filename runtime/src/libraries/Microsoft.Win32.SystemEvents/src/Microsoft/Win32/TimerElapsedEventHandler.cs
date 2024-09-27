@@ -4,7 +4,8 @@
 namespace Microsoft.Win32
 {
     /// <devdoc>
-    /// <para>Represents the method that will handle the <see cref='Microsoft.Win32.SystemEvents.TimerElapsed'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='Microsoft.Win32.SystemEvents.TimerElapsed'/> event.</para>
     /// </devdoc>
     public delegate void TimerElapsedEventHandler(object sender, TimerElapsedEventArgs e);
 }

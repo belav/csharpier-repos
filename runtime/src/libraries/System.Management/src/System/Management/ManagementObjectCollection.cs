@@ -9,15 +9,22 @@ namespace System.Management
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC//
     /// <summary>
     ///    <para> Represents different collections of management objects
-    ///       retrieved through WMI. The objects in this collection are of <see cref='System.Management.ManagementBaseObject'/>-derived types, including <see cref='System.Management.ManagementObject'/> and <see cref='System.Management.ManagementClass'/>
+    ///       retrieved through WMI. The objects in this collection are of <see
+    // cref='System.Management.ManagementBaseObject'/>-derived types, including <see
+    // cref='System.Management.ManagementObject'/> and <see cref='System.Management.ManagementClass'/>
     ///       .</para>
     ///    <para> The collection can be the result of a WMI
-    ///       query executed through a <see cref='System.Management.ManagementObjectSearcher'/> object, or an enumeration of
-    ///       management objects of a specified type retrieved through a <see cref='System.Management.ManagementClass'/> representing that type.
+    ///       query executed through a <see cref='System.Management.ManagementObjectSearcher'/> object,
+    // or an enumeration of
+    ///       management objects of a specified type retrieved through a <see
+    // cref='System.Management.ManagementClass'/> representing that type.
     ///       In addition, this can be a collection of management objects related in a specified
     ///       way to a specific management object - in this case the collection would
-    ///       be retrieved through a method such as <see cref='System.Management.ManagementObject.GetRelated()'/>.</para>
-    /// <para>The collection can be walked using the <see cref='System.Management.ManagementObjectCollection.ManagementObjectEnumerator'/> and objects in it can be inspected or
+    ///       be retrieved through a method such as <see
+    // cref='System.Management.ManagementObject.GetRelated()'/>.</para>
+    /// <para>The collection can be walked using the <see
+    // cref='System.Management.ManagementObjectCollection.ManagementObjectEnumerator'/> and objects in it
+    // can be inspected or
     ///    manipulated for various management tasks.</para>
     /// </summary>
     /// <example>
@@ -236,7 +243,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Copies the items in the collection to a <see cref='System.Management.ManagementBaseObject'/>
+        /// <para>Copies the items in the collection to a <see
+        // cref='System.Management.ManagementBaseObject'/>
         /// array.</para>
         /// </summary>
         /// <param name='objectCollection'>The target array.</param>
@@ -254,10 +262,14 @@ namespace System.Management
         //GetEnumerator
         //****************************************
         /// <summary>
-        ///    <para>Returns the enumerator for the collection. If the collection was retrieved from an operation that
-        /// specified the EnumerationOptions.Rewindable = false only one iteration through this enumerator is allowed.
-        /// Note that this applies to using the Count property of the collection as well since an iteration over the collection
-        /// is required. Due to this, code using the Count property should never specify EnumerationOptions.Rewindable = false.
+        ///    <para>Returns the enumerator for the collection. If the collection was retrieved from an
+        // operation that
+        /// specified the EnumerationOptions.Rewindable = false only one iteration through this enumerator
+        // is allowed.
+        /// Note that this applies to using the Count property of the collection as well since an iteration
+        // over the collection
+        /// is required. Due to this, code using the Count property should never specify
+        // EnumerationOptions.Rewindable = false.
         /// </para>
         /// </summary>
         /// <returns>
@@ -462,7 +474,8 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para>Gets the current <see cref='System.Management.ManagementBaseObject'/> that this enumerator points
+            /// <para>Gets the current <see cref='System.Management.ManagementBaseObject'/> that this enumerator
+            // points
             ///    to.</para>
             /// </summary>
             /// <value>
@@ -581,12 +594,12 @@ namespace System.Management
                             atEndOfCollection = true;
                             cacheIndex--; //back to last object
 
-                            /* This call to Dispose is being removed as per discussion with URT people and the newly supported
-                             * Dispose() call in the foreach implementation itself.
-                             *
-                             *                              //Release the COM object (so that the user doesn't have to)
-                                                            Dispose();
-                            */
+/* This call to Dispose is being removed as per discussion with URT people and the newly supported
+* Dispose() call in the foreach implementation itself.
+*
+*                              //Release the COM object (so that the user doesn't have to)
+Dispose();
+*/
                             return false;
                         }
                     }

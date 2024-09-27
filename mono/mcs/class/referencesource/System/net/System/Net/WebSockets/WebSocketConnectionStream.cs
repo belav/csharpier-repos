@@ -617,7 +617,8 @@ namespace System.Net.WebSockets
 
                 m_InnerStream = connection;
                 m_InOpaqueMode = false;
-                // NetworkStream.Multiplewrite is internal. So custom NetworkStream implementations might not support it.
+                // NetworkStream.Multiplewrite is internal. So custom NetworkStream implementations might not
+                // support it.
                 m_SupportsMultipleWrites =
                     connection.NetworkStream.GetType().Assembly == s_NetworkStreamType.Assembly;
             }

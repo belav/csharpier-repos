@@ -15,7 +15,8 @@ namespace System.Management.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindowsNanoServer))]
         public void PlatformNotSupportedException_On_Nano()
         {
-            // The underlying delegate usage can cause some cases to have the PNSE as the inner exception but there is a best effort
+            // The underlying delegate usage can cause some cases to have the PNSE as the inner exception but
+            // there is a best effort
             // to throw PNSE for such case.
             Assert.Throws<PlatformNotSupportedException>(
                 () =>

@@ -61,7 +61,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets an <see cref="DbExpression"/> that specifies a projection of results to be returned based on the modified rows.
+        /// Gets an <see cref="DbExpression"/> that specifies a projection of results to be returned based
+        // on the modified rows.
         /// If null, indicates no results should be returned from this command.
         /// </summary>
         /// <remarks>
@@ -77,7 +78,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets an <see cref="DbExpression"/> that specifies the predicate used to determine which members of the target collection should be updated.
+        /// Gets an <see cref="DbExpression"/> that specifies the predicate used to determine which members
+        // of the target collection should be updated.
         /// </summary>
         /// <remarks>
         /// The predicate includes only the following elements:

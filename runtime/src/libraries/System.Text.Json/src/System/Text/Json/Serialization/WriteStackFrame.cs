@@ -33,8 +33,10 @@ namespace System.Text.Json
         /// The original JsonPropertyInfo that is not changed. It contains all properties.
         /// </summary>
         /// <remarks>
-        /// For objects, it is either the actual (real) JsonPropertyInfo or the <see cref="JsonTypeInfo.PropertyInfoForTypeInfo"/> for the class.
-        /// For collections, it is the <see cref="JsonTypeInfo.PropertyInfoForTypeInfo"/> for the class and current element.
+        /// For objects, it is either the actual (real) JsonPropertyInfo or the <see
+        // cref="JsonTypeInfo.PropertyInfoForTypeInfo"/> for the class.
+        /// For collections, it is the <see cref="JsonTypeInfo.PropertyInfoForTypeInfo"/> for the class and
+        // current element.
         /// </remarks>
         public JsonPropertyInfo? JsonPropertyInfo;
 
@@ -76,7 +78,8 @@ namespace System.Text.Json
         // Serialization state for the child value serialized by the current frame.
         public PolymorphicSerializationState PolymorphicSerializationState;
 
-        // Holds the entered polymorphic type info and acts as an LRU cache for element/field serializations.
+        // Holds the entered polymorphic type info and acts as an LRU cache for element/field
+        // serializations.
         public JsonTypeInfo? PolymorphicTypeInfo;
 
         // Whether to use custom number handling.
@@ -130,8 +133,10 @@ namespace System.Text.Json
             if (PolymorphicTypeInfo?.Type != runtimeType)
             {
                 // To determine the contract for an object value:
-                // 1. Find the JsonTypeInfo for the runtime type with fallback to the nearest ancestor, if not available.
-                // 2. If the resolved type is deriving from a polymorphic type, use the contract of the polymorphic type instead.
+                // 1. Find the JsonTypeInfo for the runtime type with fallback to the nearest ancestor, if not
+                // available.
+                // 2. If the resolved type is deriving from a polymorphic type, use the contract of the polymorphic
+                // type instead.
                 JsonTypeInfo typeInfo = options.GetTypeInfoInternal(
                     runtimeType,
                     fallBackToNearestAncestorType: true

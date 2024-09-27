@@ -9,20 +9,28 @@ using System.Threading;
 
 namespace System.Diagnostics
 {
-    // This struct is purposed to store a list of tags. It avoids allocating any memory till we have more than eight tags to store, then it will create an array at that time.
-    // To avoid the allocations, the struct define eight fields Tag1, Tag2,...,Tag8 to store up to eight tags. If need to store more than eight tags, it will create
+    // This struct is purposed to store a list of tags. It avoids allocating any memory till we have
+    // more than eight tags to store, then it will create an array at that time.
+    // To avoid the allocations, the struct define eight fields Tag1, Tag2,...,Tag8 to store up to eight
+    // tags. If need to store more than eight tags, it will create
     // a managed array at that time.
-    // The main consumer of this struct is the Metrics APIs which create a span from this struct to send it with the reported measurements.
-    // As we need to have this struct work on NetFX too, we couldn't use any .NET collection as we need to create a span from such collection.
-    // Instead, we use regular managed array and we expand it as needed. It is easy to create a span from such managed array without allocating more memory.
+    // The main consumer of this struct is the Metrics APIs which create a span from this struct to send
+    // it with the reported measurements.
+    // As we need to have this struct work on NetFX too, we couldn't use any .NET collection as we need
+    // to create a span from such collection.
+    // Instead, we use regular managed array and we expand it as needed. It is easy to create a span
+    // from such managed array without allocating more memory.
 
     /// <summary>
-    /// Represents a list of tags that can be accessed by index. Provides methods to search, sort, and manipulate lists.
+    /// Represents a list of tags that can be accessed by index. Provides methods to search, sort, and
+    // manipulate lists.
     /// </summary>
     /// <remarks>
-    /// TagList can be used in the scenarios which need to optimize for memory allocations. TagList will avoid allocating any memory when using up to eight tags.
+    /// TagList can be used in the scenarios which need to optimize for memory allocations. TagList will
+    // avoid allocating any memory when using up to eight tags.
     /// Using more than eight tags will cause allocating memory to store the tags.
-    /// Public static (Shared in Visual Basic) members of this type are thread safe. Any instance members are not guaranteed to be thread safe.
+    /// Public static (Shared in Visual Basic) members of this type are thread safe. Any instance
+    // members are not guaranteed to be thread safe.
     /// </remarks>
     [StructLayout(LayoutKind.Sequential)]
     public struct TagList
@@ -42,7 +50,8 @@ namespace System.Diagnostics
         private const int OverflowAdditionalCapacity = 8;
 
         /// <summary>
-        /// Initializes a new instance of the TagList structure using the specified <paramref name="tagList" />.
+        /// Initializes a new instance of the TagList structure using the specified <paramref name="tagList"
+        // />.
         /// </summary>
         /// <param name="tagList">A span of tags to initialize the list with.</param>
         public TagList(ReadOnlySpan<KeyValuePair<string, object?>> tagList)
@@ -102,14 +111,16 @@ namespace System.Diagnostics
         public readonly int Count => _tagsCount;
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="T:System.Diagnostics.TagList" /> is read-only. This property will always return <see langword="false" />.
+        /// Gets a value indicating whether the <see cref="T:System.Diagnostics.TagList" /> is read-only.
+        // This property will always return <see langword="false" />.
         /// </summary>
         public readonly bool IsReadOnly => false;
 
         /// <summary>
         /// Gets or sets the tags at the specified index.
         /// </summary>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index" /> is not a valid index in the <see cref="T:System.Diagnostics.TagList" />.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index" /> is not a valid
+        // index in the <see cref="T:System.Diagnostics.TagList" />.</exception>
         public KeyValuePair<string, object?> this[int index]
         {
             readonly get
@@ -259,7 +270,9 @@ namespace System.Diagnostics
         /// Inserts an element into this <see cref="T:System.Diagnostics.TagList" /> at the specified index.
         /// </summary>
         /// <param name="tags">The destination <see cref="T:System.Span`1" /> object.</param>
-        /// <exception cref="T:System.ArgumentException"> <paramref name="tags" /> The number of elements in the source <see cref="T:System.Diagnostics.TagList" /> is greater than the number of elements that the destination span.</exception>
+        /// <exception cref="T:System.ArgumentException"> <paramref name="tags" /> The number of elements in
+        // the source <see cref="T:System.Diagnostics.TagList" /> is greater than the number of elements that
+        // the destination span.</exception>
         public readonly void CopyTo(Span<KeyValuePair<string, object?>> tags)
         {
             if (tags.Length < _tagsCount)
@@ -307,12 +320,16 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Copies the entire <see cref="T:System.Diagnostics.TagList" /> to a compatible one-dimensional array, starting at the specified index of the target array.
+        /// Copies the entire <see cref="T:System.Diagnostics.TagList" /> to a compatible one-dimensional
+        // array, starting at the specified index of the target array.
         /// </summary>
-        /// <param name="array">The one-dimensional Array that is the destination of the elements copied from <see cref="T:System.Diagnostics.TagList" />. The Array must have zero-based indexing.</param>
-        /// <param name="arrayIndex">The zero-based index in <paramref name="array" /> at which copying begins.</param>
+        /// <param name="array">The one-dimensional Array that is the destination of the elements copied
+        // from <see cref="T:System.Diagnostics.TagList" />. The Array must have zero-based indexing.</param>
+        /// <param name="arrayIndex">The zero-based index in <paramref name="array" /> at which copying
+        // begins.</param>
         /// <exception cref="T:System.ArgumentNullException"> <paramref name="array" /> is null.</exception>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"> <paramref name="arrayIndex " /> is less than 0 or greater that or equal the <paramref name="array" /> length.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"> <paramref name="arrayIndex " /> is less
+        // than 0 or greater that or equal the <paramref name="array" /> length.</exception>
         public readonly void CopyTo(KeyValuePair<string, object?>[] array, int arrayIndex)
         {
             if (array is null)
@@ -333,7 +350,9 @@ namespace System.Diagnostics
         /// </summary>
         /// <param name="index">The zero-based index at which item should be inserted.</param>
         /// <param name="item">The tag to insert.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"> <paramref name="index" /> index is less than 0 or <paramref name="index" /> is greater than <see cref="M:System.Diagnostics.TagList.Count" />.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"> <paramref name="index" /> index is less
+        // than 0 or <paramref name="index" /> is greater than <see cref="M:System.Diagnostics.TagList.Count"
+        // />.</exception>
         public void Insert(int index, KeyValuePair<string, object?> item)
         {
             if ((uint)index > (uint)_tagsCount)
@@ -433,7 +452,9 @@ namespace System.Diagnostics
         /// Removes the element at the specified index of the <see cref="T:System.Diagnostics.TagList" />.
         /// </summary>
         /// <param name="index">The zero-based index of the element to remove.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"> <paramref name="index" /> index is less than 0 or <paramref name="index" /> is greater than <see cref="M:System.Diagnostics.TagList.Count" />.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"> <paramref name="index" /> index is less
+        // than 0 or <paramref name="index" /> is greater than <see cref="M:System.Diagnostics.TagList.Count"
+        // />.</exception>
         public void RemoveAt(int index)
         {
             if ((uint)index >= (uint)_tagsCount)
@@ -492,14 +513,19 @@ namespace System.Diagnostics
         /// Determines whether an tag is in the <see cref="T:System.Diagnostics.TagList" />.
         /// </summary>
         /// <param name="item">The tag to locate in the <see cref="T:System.Diagnostics.TagList" />.</param>
-        /// <returns><see langword="true" /> if item is found in the <see cref="T:System.Diagnostics.TagList" />; otherwise, <see langword="false" />.</returns>
+        /// <returns><see langword="true" /> if item is found in the <see
+        // cref="T:System.Diagnostics.TagList" />; otherwise, <see langword="false" />.</returns>
         public readonly bool Contains(KeyValuePair<string, object?> item) => IndexOf(item) >= 0;
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="T:System.Diagnostics.TagList" />.
+        /// Removes the first occurrence of a specific object from the <see
+        // cref="T:System.Diagnostics.TagList" />.
         /// </summary>
-        /// <param name="item">The tag to remove from the <see cref="T:System.Diagnostics.TagList" />.</param>
-        /// <returns><see langword="true" /> if item is successfully removed; otherwise, <see langword="false" />. This method also returns <see langword="false" /> if item was not found in the <see cref="T:System.Diagnostics.TagList" />.</returns>
+        /// <param name="item">The tag to remove from the <see cref="T:System.Diagnostics.TagList"
+        // />.</param>
+        /// <returns><see langword="true" /> if item is successfully removed; otherwise, <see
+        // langword="false" />. This method also returns <see langword="false" /> if item was not found in the
+        // <see cref="T:System.Diagnostics.TagList" />.</returns>
         public bool Remove(KeyValuePair<string, object?> item)
         {
             int index = IndexOf(item);
@@ -515,18 +541,21 @@ namespace System.Diagnostics
         /// <summary>
         /// Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.
         /// </summary>
-        /// <returns>Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.</returns>
+        /// <returns>Returns an enumerator that iterates through the <see
+        // cref="T:System.Diagnostics.TagList" />.</returns>
         public readonly IEnumerator<KeyValuePair<string, object?>> GetEnumerator() =>
             new Enumerator(in this);
 
         /// <summary>
         /// Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.
         /// </summary>
-        /// <returns>Returns an enumerator that iterates through the <see cref="T:System.Diagnostics.TagList" />.</returns>
+        /// <returns>Returns an enumerator that iterates through the <see
+        // cref="T:System.Diagnostics.TagList" />.</returns>
         readonly IEnumerator IEnumerable.GetEnumerator() => new Enumerator(in this);
 
         /// <summary>
-        /// Searches for the specified tag and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Diagnostics.TagList" />.
+        /// Searches for the specified tag and returns the zero-based index of the first occurrence within
+        // the entire <see cref="T:System.Diagnostics.TagList" />.
         /// </summary>
         /// <param name="item">The tag to locate in the <see cref="T:System.Diagnostics.TagList" />.</param>
         public readonly int IndexOf(KeyValuePair<string, object?> item)

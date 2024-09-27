@@ -211,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 out int caretPosition
             )
             {
-                // Used so test can contain `$$` (for raw interpolations) without us thinking that it is an actual caret
+                // Used so test can contain `$$` (for raw interpolations) without us thinking that it is an actual
+                // caret
                 // position
                 const string NON_TEST_CHARACTER = "\uD7FF";
 

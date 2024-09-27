@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization
     /// </summary>
     /// <remarks>
     /// <see langword="null"/> token in JSON will not trigger a validation error.
-    /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
+    /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+    // cref="JsonSerializerContext"/>,
     /// this attribute will be mapped to <see cref="JsonPropertyInfo.IsRequired"/>.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]

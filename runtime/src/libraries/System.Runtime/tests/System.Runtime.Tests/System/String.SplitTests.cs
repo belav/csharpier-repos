@@ -6,8 +6,10 @@ using Xunit;
 
 namespace System.Tests
 {
-    // These tests validate both String.Split and MemoryExtensions.Split, as they have equivalent semantics, with the
-    // former creating a new array to store the results and the latter writing the results into a supplied span.
+    // These tests validate both String.Split and MemoryExtensions.Split, as they have equivalent
+    // semantics, with the
+    // former creating a new array to store the results and the latter writing the results into a
+    // supplied span.
 
     public static class StringSplitTests
     {

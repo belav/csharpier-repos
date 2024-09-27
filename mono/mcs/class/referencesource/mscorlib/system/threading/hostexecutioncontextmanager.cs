@@ -263,7 +263,8 @@ namespace System.Threading
             hostContextSwitcher.executionContext = null; // Make sure switcher cannot be re-used.
 
             HostExecutionContext revertFromHostContext = executionContext.HostExecutionContext;
-            // if the current host context is not the same as the one in the switcher, then revert is being called out of order
+            // if the current host context is not the same as the one in the switcher, then revert is being
+            // called out of order
             if (revertFromHostContext != hostContextSwitcher.currentHostContext)
             {
                 throw new InvalidOperationException(

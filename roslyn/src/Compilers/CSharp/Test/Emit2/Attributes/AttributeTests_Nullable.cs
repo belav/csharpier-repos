@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var source = "";
             var comp = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular8);
             comp.VerifyEmitDiagnostics(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                // was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
             );
         }
@@ -349,14 +350,18 @@ public interface I0 : I1<string>
                 references: new[] { getReference(lib1_comp), getReference(valueTuple_comp) }
             ); // missing TupleElementNamesAttribute
             lib2_comp.VerifyDiagnostics(
-                // (2,18): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
+                // (2,18): error CS8137: Cannot define a class or member that utilizes tuples because the compiler
+                // required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you
+                // missing a reference?
                 // public interface I0 : I1<string>
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "I0")
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(2, 18)
             );
             lib2_comp.VerifyEmitDiagnostics(
-                // (2,18): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
+                // (2,18): error CS8137: Cannot define a class or member that utilizes tuples because the compiler
+                // required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you
+                // missing a reference?
                 // public interface I0 : I1<string>
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "I0")
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
@@ -425,17 +430,23 @@ public class C2 : Base<(object a, object b)> { }
 ";
             var comp = CreateCompilationWithMscorlib40(source);
             comp.VerifyEmitDiagnostics(
-                // (34,14): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
+                // (34,14): error CS8137: Cannot define a class or member that utilizes tuples because the compiler
+                // required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you
+                // missing a reference?
                 // public class C1 : I<(object a, object b)> { }
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "C1")
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(34, 14),
-                // (34,21): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
+                // (34,21): error CS8137: Cannot define a class or member that utilizes tuples because the compiler
+                // required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you
+                // missing a reference?
                 // public class C1 : I<(object a, object b)> { }
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "(object a, object b)")
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
                     .WithLocation(34, 21),
-                // (36,24): error CS8137: Cannot define a class or member that utilizes tuples because the compiler required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you missing a reference?
+                // (36,24): error CS8137: Cannot define a class or member that utilizes tuples because the compiler
+                // required type 'System.Runtime.CompilerServices.TupleElementNamesAttribute' cannot be found. Are you
+                // missing a reference?
                 // public class C2 : Base<(object a, object b)> { }
                 Diagnostic(ErrorCode.ERR_TupleElementNamesAttributeMissing, "(object a, object b)")
                     .WithArguments("System.Runtime.CompilerServices.TupleElementNamesAttribute")
@@ -517,17 +528,20 @@ class C
                 parseOptions: TestOptions.Regular8
             );
             comp.VerifyEmitDiagnostics(
-                // (5,34): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (5,34): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         public NullableAttribute(byte[] b) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "byte[] b")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(5, 34),
-                // (10,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     static void F(object? x, object?[] y) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object? x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(10, 19),
-                // (10,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     static void F(object? x, object?[] y) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?[] y")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
@@ -556,12 +570,14 @@ class C
                 parseOptions: TestOptions.Regular8
             );
             comp.VerifyEmitDiagnostics(
-                // (10,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     static void F(object? x, object?[] y) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object? x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(10, 19),
-                // (10,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     static void F(object? x, object?[] y) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?[] y")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
@@ -590,17 +606,20 @@ class C
                 parseOptions: TestOptions.Regular8
             );
             comp.VerifyEmitDiagnostics(
-                // (5,34): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (5,34): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         public NullableAttribute(string[] b) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "string[] b")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(5, 34),
-                // (10,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     static void F(object? x, object?[] y) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object? x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(10, 19),
-                // (10,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     static void F(object? x, object?[] y) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?[] y")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
@@ -647,19 +666,23 @@ class Program
             static void verifyDiagnostics(CSharpCompilation comp)
             {
                 comp.VerifyDiagnostics(
-                    // (5,2): error CS8623: Explicit application of 'System.Runtime.CompilerServices.NullableAttribute' is not allowed.
+                    // (5,2): error CS8623: Explicit application of 'System.Runtime.CompilerServices.NullableAttribute'
+                    // is not allowed.
                     // [Nullable(0)]
                     Diagnostic(ErrorCode.ERR_ExplicitNullableAttribute, "Nullable(0)")
                         .WithLocation(5, 2),
-                    // (8,6): error CS8623: Explicit application of 'System.Runtime.CompilerServices.NullableAttribute' is not allowed.
+                    // (8,6): error CS8623: Explicit application of 'System.Runtime.CompilerServices.NullableAttribute'
+                    // is not allowed.
                     //     [Nullable(0)]object F;
                     Diagnostic(ErrorCode.ERR_ExplicitNullableAttribute, "Nullable(0)")
                         .WithLocation(8, 6),
-                    // (10,14): error CS8623: Explicit application of 'System.Runtime.CompilerServices.NullableAttribute' is not allowed.
+                    // (10,14): error CS8623: Explicit application of
+                    // 'System.Runtime.CompilerServices.NullableAttribute' is not allowed.
                     //     [return: Nullable(0)]static object M2() => throw null;
                     Diagnostic(ErrorCode.ERR_ExplicitNullableAttribute, "Nullable(0)")
                         .WithLocation(10, 14),
-                    // (11,21): error CS8623: Explicit application of 'System.Runtime.CompilerServices.NullableAttribute' is not allowed.
+                    // (11,21): error CS8623: Explicit application of
+                    // 'System.Runtime.CompilerServices.NullableAttribute' is not allowed.
                     //     static void M3([Nullable(0)]object arg) { }
                     Diagnostic(ErrorCode.ERR_ExplicitNullableAttribute, "Nullable(0)")
                         .WithLocation(11, 21)
@@ -800,7 +823,8 @@ class B
                 parseOptions: TestOptions.Regular8
             );
             comp.VerifyEmitDiagnostics(
-                // (3,11): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (3,11): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     object? F() => null;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(3, 11),
@@ -869,7 +893,8 @@ class B
                 parseOptions: TestOptions.Regular8
             );
             comp.VerifyEmitDiagnostics(
-                // (3,11): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (3,11): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     object? F() => null;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(3, 11),
@@ -943,7 +968,8 @@ class B
                 parseOptions: TestOptions.Regular8
             );
             comp.VerifyEmitDiagnostics(
-                // (3,11): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (3,11): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     object? F() => null;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(3, 11),
@@ -1352,7 +1378,8 @@ class C
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (3,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     public object? F = new object();
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "F")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -1482,12 +1509,16 @@ public class B2 : A<object?>
                 references: new[] { comp.EmitToImageReference() }
             );
             comp2.VerifyDiagnostics(
-                // (8,14): warning CS8620: Argument of type 'B1' cannot be used as an input of type 'A<object?>' for parameter 'y' in 'void C.F(A<object> x, A<object?> y)' due to differences in the nullability of reference types.
+                // (8,14): warning CS8620: Argument of type 'B1' cannot be used as an input of type 'A<object?>' for
+                // parameter 'y' in 'void C.F(A<object> x, A<object?> y)' due to differences in the nullability of
+                // reference types.
                 //         F(x, x);
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInArgument, "x")
                     .WithArguments("B1", "A<object?>", "y", "void C.F(A<object> x, A<object?> y)")
                     .WithLocation(8, 14),
-                // (9,11): warning CS8620: Argument of type 'B2' cannot be used as an input of type 'A<object>' for parameter 'x' in 'void C.F(A<object> x, A<object?> y)' due to differences in the nullability of reference types.
+                // (9,11): warning CS8620: Argument of type 'B2' cannot be used as an input of type 'A<object>' for
+                // parameter 'x' in 'void C.F(A<object> x, A<object?> y)' due to differences in the nullability of
+                // reference types.
                 //         F(y, y);
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInArgument, "y")
                     .WithArguments("B2", "A<object>", "x", "void C.F(A<object> x, A<object?> y)")
@@ -1566,12 +1597,16 @@ public class B : I<object?>
                 references: new[] { comp.EmitToImageReference() }
             );
             comp2.VerifyDiagnostics(
-                // (9,14): warning CS8620: Argument of type 'A' cannot be used as an input of type 'I<object?>' for parameter 'y' in 'void C.F(I<object> x, I<object?> y)' due to differences in the nullability of reference types.
+                // (9,14): warning CS8620: Argument of type 'A' cannot be used as an input of type 'I<object?>' for
+                // parameter 'y' in 'void C.F(I<object> x, I<object?> y)' due to differences in the nullability of
+                // reference types.
                 //         F(x, x);
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInArgument, "x")
                     .WithArguments("A", "I<object?>", "y", "void C.F(I<object> x, I<object?> y)")
                     .WithLocation(9, 14),
-                // (10,11): warning CS8620: Argument of type 'B' cannot be used as an input of type 'I<object>' for parameter 'x' in 'void C.F(I<object> x, I<object?> y)' due to differences in the nullability of reference types.
+                // (10,11): warning CS8620: Argument of type 'B' cannot be used as an input of type 'I<object>' for
+                // parameter 'x' in 'void C.F(I<object> x, I<object?> y)' due to differences in the nullability of
+                // reference types.
                 //         F(y, y);
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInArgument, "y")
                     .WithArguments("B", "I<object>", "x", "void C.F(I<object> x, I<object?> y)")
@@ -1639,7 +1674,9 @@ public class B : I<(object X, object? Y)>
                 references: new[] { comp.EmitToImageReference() }
             );
             comp2.VerifyDiagnostics(
-                // (9,11): warning CS8620: Argument of type 'B' cannot be used as an input of type 'I<(object, object)>' for parameter 'a' in 'void C.F(I<(object, object)> a, I<(object, object?)> b)' due to differences in the nullability of reference types.
+                // (9,11): warning CS8620: Argument of type 'B' cannot be used as an input of type 'I<(object,
+                // object)>' for parameter 'a' in 'void C.F(I<(object, object)> a, I<(object, object?)> b)' due to
+                // differences in the nullability of reference types.
                 //         F(b, b);
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInArgument, "b")
                     .WithArguments(
@@ -1842,12 +1879,14 @@ class Program
                 parseOptions: TestOptions.Regular8
             );
             comp2.VerifyEmitDiagnostics(
-                // (10,15): warning CS8627: The type 'A?' cannot be used as type parameter 'T' in the generic type or method 'D<T>'. Nullability of type argument 'A?' doesn't match constraint type 'A'.
+                // (10,15): warning CS8627: The type 'A?' cannot be used as type parameter 'T' in the generic type
+                // or method 'D<T>'. Nullability of type argument 'A?' doesn't match constraint type 'A'.
                 //         new D<A?>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "A?")
                     .WithArguments("D<T>", "A", "T", "A?")
                     .WithLocation(10, 15),
-                // (12,15): warning CS8627: The type 'B?' cannot be used as type parameter 'T' in the generic type or method 'D<T>'. Nullability of type argument 'B?' doesn't match constraint type 'A'.
+                // (12,15): warning CS8627: The type 'B?' cannot be used as type parameter 'T' in the generic type
+                // or method 'D<T>'. Nullability of type argument 'B?' doesn't match constraint type 'A'.
                 //         new D<B?>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "B?")
                     .WithArguments("D<T>", "A", "T", "B?")
@@ -1861,12 +1900,14 @@ class Program
                 references: new[] { comp.EmitToImageReference() }
             );
             comp2.VerifyEmitDiagnostics(
-                // (10,15): warning CS8627: The type 'A?' cannot be used as type parameter 'T' in the generic type or method 'D<T>'. Nullability of type argument 'A?' doesn't match constraint type 'A'.
+                // (10,15): warning CS8627: The type 'A?' cannot be used as type parameter 'T' in the generic type
+                // or method 'D<T>'. Nullability of type argument 'A?' doesn't match constraint type 'A'.
                 //         new D<A?>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "A?")
                     .WithArguments("D<T>", "A", "T", "A?")
                     .WithLocation(10, 15),
-                // (12,15): warning CS8627: The type 'B?' cannot be used as type parameter 'T' in the generic type or method 'D<T>'. Nullability of type argument 'B?' doesn't match constraint type 'A'.
+                // (12,15): warning CS8627: The type 'B?' cannot be used as type parameter 'T' in the generic type
+                // or method 'D<T>'. Nullability of type argument 'B?' doesn't match constraint type 'A'.
                 //         new D<B?>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "B?")
                     .WithArguments("D<T>", "A", "T", "B?")
@@ -2017,12 +2058,16 @@ public class C<T> where T : A<object>
                 parseOptions: TestOptions.Regular8
             );
             comp2.VerifyEmitDiagnostics(
-                // (6,15): warning CS8627: The type 'A<object>' cannot be used as type parameter 'T' in the generic type or method 'B<T>'. Nullability of type argument 'A<object>' doesn't match constraint type 'A<object?>'.
+                // (6,15): warning CS8627: The type 'A<object>' cannot be used as type parameter 'T' in the generic
+                // type or method 'B<T>'. Nullability of type argument 'A<object>' doesn't match constraint type
+                // 'A<object?>'.
                 //         new B<A<object>>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "A<object>")
                     .WithArguments("B<T>", "A<object?>", "T", "A<object>")
                     .WithLocation(6, 15),
-                // (7,15): warning CS8627: The type 'A<object?>' cannot be used as type parameter 'T' in the generic type or method 'C<T>'. Nullability of type argument 'A<object?>' doesn't match constraint type 'A<object>'.
+                // (7,15): warning CS8627: The type 'A<object?>' cannot be used as type parameter 'T' in the generic
+                // type or method 'C<T>'. Nullability of type argument 'A<object?>' doesn't match constraint type
+                // 'A<object>'.
                 //         new C<A<object?>>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "A<object?>")
                     .WithArguments("C<T>", "A<object>", "T", "A<object?>")
@@ -2036,12 +2081,16 @@ public class C<T> where T : A<object>
                 references: new[] { comp.EmitToImageReference() }
             );
             comp2.VerifyDiagnostics(
-                // (6,15): warning CS8627: The type 'A<object>' cannot be used as type parameter 'T' in the generic type or method 'B<T>'. Nullability of type argument 'A<object>' doesn't match constraint type 'A<object?>'.
+                // (6,15): warning CS8627: The type 'A<object>' cannot be used as type parameter 'T' in the generic
+                // type or method 'B<T>'. Nullability of type argument 'A<object>' doesn't match constraint type
+                // 'A<object?>'.
                 //         new B<A<object>>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "A<object>")
                     .WithArguments("B<T>", "A<object?>", "T", "A<object>")
                     .WithLocation(6, 15),
-                // (7,15): warning CS8627: The type 'A<object?>' cannot be used as type parameter 'T' in the generic type or method 'C<T>'. Nullability of type argument 'A<object?>' doesn't match constraint type 'A<object>'.
+                // (7,15): warning CS8627: The type 'A<object?>' cannot be used as type parameter 'T' in the generic
+                // type or method 'C<T>'. Nullability of type argument 'A<object?>' doesn't match constraint type
+                // 'A<object>'.
                 //         new C<A<object?>>(); // warning
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterConstraint, "A<object?>")
                     .WithArguments("C<T>", "A<object>", "T", "A<object?>")
@@ -2116,7 +2165,8 @@ public class C<T> where T : A<object>
             );
             var expected = new[]
             {
-                // (5,15): warning CS8634: The type 'object?' cannot be used as type parameter 'T' in the generic type or method 'C<T, U>'. Nullability of type argument 'object?' doesn't match 'class' constraint.
+                // (5,15): warning CS8634: The type 'object?' cannot be used as type parameter 'T' in the generic
+                // type or method 'C<T, U>'. Nullability of type argument 'object?' doesn't match 'class' constraint.
                 //         new C<object?, string?>();
                 Diagnostic(
                         ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
@@ -2124,7 +2174,8 @@ public class C<T> where T : A<object>
                     )
                     .WithArguments("C<T, U>", "T", "object?")
                     .WithLocation(5, 15),
-                // (6,15): warning CS8634: The type 'object?' cannot be used as type parameter 'T' in the generic type or method 'C<T, U>'. Nullability of type argument 'object?' doesn't match 'class' constraint.
+                // (6,15): warning CS8634: The type 'object?' cannot be used as type parameter 'T' in the generic
+                // type or method 'C<T, U>'. Nullability of type argument 'object?' doesn't match 'class' constraint.
                 //         new C<object?, string>();
                 Diagnostic(
                         ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
@@ -2975,12 +3026,14 @@ class B
             var comp = CreateCompilation(source, options: TestOptions.ReleaseModule);
             // https://github.com/dotnet/roslyn/issues/36736: Not reporting missing NullableContextAttribute.
             comp.VerifyDiagnostics(
-                // (6,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (6,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         var a1 = (object x) => { };
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(6, 19),
-                // (8,31): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (8,31): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         var a2 = string?[] () => null!;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "=>")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -3007,12 +3060,14 @@ class B
             var comp = CreateCompilation(source, options: TestOptions.ReleaseModule);
             // https://github.com/dotnet/roslyn/issues/36736: Not reporting missing NullableContextAttribute.
             comp.VerifyDiagnostics(
-                // (6,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (6,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         void L1(object? x) { }
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object? x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(6, 17),
-                // (8,9): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (8,9): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         string[]? L2() => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "string[]?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -3045,12 +3100,14 @@ class B
 }";
             var comp = CreateCompilation(new[] { sourceA, sourceB });
             comp.VerifyDiagnostics(
-                // (6,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (6,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         var a1 = (object x) => { };
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(6, 19),
-                // (8,31): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (8,31): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         var a2 = string?[] () => null!;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=>")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
@@ -3083,12 +3140,14 @@ class B
 }";
             var comp = CreateCompilation(new[] { sourceA, sourceB });
             comp.VerifyDiagnostics(
-                // (6,17): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (6,17): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         void L1(object? x) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object? x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(6, 17),
-                // (8,9): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (8,9): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         string[]? L2() => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "string[]?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
@@ -3121,7 +3180,8 @@ class B
     }
 }";
             var comp = CreateCompilation(new[] { sourceA, sourceB });
-            // https://github.com/dotnet/roslyn/issues/36736: Not reporting missing NullableContextAttribute constructor.
+            // https://github.com/dotnet/roslyn/issues/36736: Not reporting missing NullableContextAttribute
+            // constructor.
             comp.VerifyEmitDiagnostics();
         }
 
@@ -3150,7 +3210,8 @@ class B
     }
 }";
             var comp = CreateCompilation(new[] { sourceA, sourceB });
-            // https://github.com/dotnet/roslyn/issues/36736: Not reporting missing NullableContextAttribute constructor.
+            // https://github.com/dotnet/roslyn/issues/36736: Not reporting missing NullableContextAttribute
+            // constructor.
             comp.VerifyEmitDiagnostics();
         }
 
@@ -4278,117 +4339,140 @@ internal class B : I<object>
                 parseOptions: parseOptions
             );
             comp.VerifyEmitDiagnostics(
-                // (6,21): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (6,21): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? F;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(6, 21),
-                // (7,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (7,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private static object? M(object arg) => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(7, 20),
-                // (7,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (7,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private static object? M(object arg) => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object arg")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(7, 30),
-                // (8,13): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (8,13): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? P => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(8, 13),
-                // (9,13): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (9,13): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? this[object x, object? y] => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(9, 13),
-                // (9,26): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (9,26): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? this[object x, object? y] => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(9, 26),
-                // (9,36): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (9,36): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? this[object x, object? y] => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object? y")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(9, 36),
-                // (10,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private event D<object?> E;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(10, 30),
-                // (10,30): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as nullable.
+                // (10,30): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as
+                // nullable.
                 //     private event D<object?> E;
                 Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "E")
                     .WithArguments("event", "E")
                     .WithLocation(10, 30),
-                // (13,9): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (13,9): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         object? f(object arg) => arg;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(13, 9),
-                // (13,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (13,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         object? f(object arg) => arg;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object arg")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(13, 19),
-                // (14,9): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (14,9): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         object? l(object arg) { return arg; }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(14, 9),
-                // (14,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (14,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         object? l(object arg) { return arg; }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object arg")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(14, 19),
-                // (15,26): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (15,26): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //         D<object> d = () => new object();
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=>")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(15, 26),
-                // (18,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (18,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 // internal delegate T D<T>();
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "T")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(18, 19),
-                // (18,23): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (18,23): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 // internal delegate T D<T>();
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "T")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(18, 23),
-                // (19,22): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (19,22): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 // internal interface I<T> { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "T")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(19, 22),
-                // (20,16): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (20,16): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 // internal class B : I<object>
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "B")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(20, 16),
-                // (22,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (22,19): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     public static object operator!(B b) => b;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(22, 19),
-                // (22,36): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (22,36): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     public static object operator!(B b) => b;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "B b")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(22, 36),
-                // (23,29): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (23,29): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     public event D<object?> E;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(23, 29),
-                // (23,29): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as nullable.
+                // (23,29): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as
+                // nullable.
                 //     public event D<object?> E;
                 Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "E")
                     .WithArguments("event", "E")
                     .WithLocation(23, 29),
-                // (24,31): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (24,31): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private (object, object?) F;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
@@ -4401,37 +4485,44 @@ internal class B : I<object>
                 parseOptions: parseOptions.WithFeature("nullablePublicOnly")
             );
             comp.VerifyEmitDiagnostics(
-                // (8,13): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (8,13): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? P => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(8, 13),
-                // (9,13): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (9,13): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? this[object x, object? y] => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(9, 13),
-                // (9,26): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (9,26): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? this[object x, object? y] => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(9, 26),
-                // (9,36): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (9,36): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? this[object x, object? y] => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object? y")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(9, 36),
-                // (10,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (10,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private event D<object?> E;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(10, 30),
-                // (10,30): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as nullable.
+                // (10,30): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as
+                // nullable.
                 //     private event D<object?> E;
                 Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "E")
                     .WithArguments("event", "E")
                     .WithLocation(10, 30),
-                // (23,29): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as nullable.
+                // (23,29): warning CS8618: Non-nullable event 'E' is uninitialized. Consider declaring the event as
+                // nullable.
                 //     public event D<object?> E;
                 Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "E")
                     .WithArguments("event", "E")
@@ -4463,21 +4554,25 @@ public class Program
                 parseOptions: parseOptions
             );
             comp.VerifyEmitDiagnostics(
-                // (4,19): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (4,19): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     private object? F = null;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(4, 19),
-                // (4,21): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (4,21): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? F = null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(4, 21),
-                // (5,13): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (5,13): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? P => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(5, 13),
-                // (5,19): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (5,19): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     private object? P => null;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(5, 19)
@@ -4489,16 +4584,19 @@ public class Program
                 parseOptions: parseOptions.WithFeature("nullablePublicOnly")
             );
             comp.VerifyEmitDiagnostics(
-                // (4,19): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (4,19): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     private object? F = null;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(4, 19),
-                // (5,13): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableAttribute..ctor'
+                // (5,13): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullableAttribute..ctor'
                 //     private object? P => null;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute", ".ctor")
                     .WithLocation(5, 13),
-                // (5,19): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (5,19): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     private object? P => null;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(5, 19)
@@ -5950,12 +6048,14 @@ class B : A<object?>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (1,9): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (1,9): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // class A<T>
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(1, 9),
-                // (4,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (4,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // class B : A<object?>
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "B")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -5979,17 +6079,20 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (1,11): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (1,11): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 // interface I<T>
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "I")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
                     .WithLocation(1, 11),
-                // (1,13): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (1,13): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // interface I<T>
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(1, 13),
-                // (4,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (4,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // class C : I<(object X, object? Y)>
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6011,12 +6114,14 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (3,5): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,5): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     object? F() => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(3, 5),
-                // (3,13): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (3,13): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 //     object? F() => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "F")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
@@ -6038,7 +6143,8 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (3,12): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,12): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     void F(object?[] c) { }
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?[] c")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6060,7 +6166,8 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (3,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     C(object?[] c) { }
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?[] c")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6082,12 +6189,14 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (1,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (1,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 // class C
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
                     .WithLocation(1, 7),
-                // (3,5): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,5): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     object? P => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6109,22 +6218,26 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (1,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (1,7): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 // class C
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
                     .WithLocation(1, 7),
-                // (3,5): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,5): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     object this[object x, object? y] => throw new System.NotImplementedException();
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(3, 5),
-                // (3,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     object this[object x, object? y] => throw new System.NotImplementedException();
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(3, 17),
-                // (3,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     object this[object x, object? y] => throw new System.NotImplementedException();
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object? y")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6146,22 +6259,26 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (3,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     public static object? operator+(C a, C b) => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(3, 19),
-                // (3,35): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (3,35): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 //     public static object? operator+(C a, C b) => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "+")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
                     .WithLocation(3, 35),
-                // (3,37): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,37): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     public static object? operator+(C a, C b) => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C a")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(3, 37),
-                // (3,42): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,42): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     public static object? operator+(C a, C b) => null;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C b")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6183,22 +6300,26 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (3,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     public static object operator+(C a, object?[] b) => a;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(3, 19),
-                // (3,34): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (3,34): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 //     public static object operator+(C a, object?[] b) => a;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "+")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
                     .WithLocation(3, 34),
-                // (3,36): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,36): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     public static object operator+(C a, object?[] b) => a;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C a")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(3, 36),
-                // (3,41): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (3,41): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     public static object operator+(C a, object?[] b) => a;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?[] b")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6216,12 +6337,14 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (1,10): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (1,10): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // delegate object? D();
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(1, 10),
-                // (1,18): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (1,18): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 // delegate object? D();
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "D")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
@@ -6239,7 +6362,8 @@ class C : I<(object X, object? Y)>
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (1,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (1,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // delegate void D(object?[] o);
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?[] o")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6298,37 +6422,44 @@ class C
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (1,15): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (1,15): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 // delegate void D<T>(T t);
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "D")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
                     .WithLocation(1, 15),
-                // (1,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (1,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // delegate void D<T>(T t);
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(1, 17),
-                // (1,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (1,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 // delegate void D<T>(T t);
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T t")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(1, 20),
-                // (4,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute' is not defined or imported
+                // (4,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableContextAttribute'
+                // is not defined or imported
                 //     static void F<T>(D<T> d)
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "F")
                     .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
                     .WithLocation(4, 17),
-                // (4,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (4,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     static void F<T>(D<T> d)
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "T")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(4, 19),
-                // (4,22): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (4,22): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //     static void F<T>(D<T> d)
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "D<T> d")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(4, 22),
-                // (9,12): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (9,12): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         F((object? o) => { });
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object? o")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6354,7 +6485,8 @@ class C
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (5,9): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (5,9): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         object?[] L() => throw new System.NotImplementedException();
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object?[]")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
@@ -6380,12 +6512,14 @@ class C
                 options: WithNullableEnable(TestOptions.ReleaseModule)
             );
             comp.VerifyEmitDiagnostics(
-                // (5,16): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (5,16): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         void L(object? x, object y) { }
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object? x")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")
                     .WithLocation(5, 16),
-                // (5,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not defined or imported
+                // (5,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.NullableAttribute' is not
+                // defined or imported
                 //         void L(object? x, object y) { }
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "object y")
                     .WithArguments("System.Runtime.CompilerServices.NullableAttribute")

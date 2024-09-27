@@ -34,7 +34,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeIndexerExpression'/> using the specified target
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeIndexerExpression'/> using the
+        // specified target
         ///       object and index.
         ///    </para>
         /// </devdoc>

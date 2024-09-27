@@ -8,7 +8,8 @@ using System.Text;
 namespace Microsoft.NET.HostModel.ComHost
 {
     /// <summary>
-    /// The type <see cref="TypeName"/> is public and ComVisible but does not have a <see cref="System.Runtime.InteropServices.GuidAttribute"/> attribute.
+    /// The type <see cref="TypeName"/> is public and ComVisible but does not have a <see
+    // cref="System.Runtime.InteropServices.GuidAttribute"/> attribute.
     /// </summary>
     public class MissingGuidException : Exception
     {

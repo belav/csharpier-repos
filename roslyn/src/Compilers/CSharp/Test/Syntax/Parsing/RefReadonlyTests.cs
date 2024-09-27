@@ -50,22 +50,26 @@ unsafe class Program
                 options: TestOptions.UnsafeDebugDll
             );
             comp.VerifyDiagnostics(
-                // (4,18): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (4,18): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //     delegate ref readonly int D1();
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "readonly")
                     .WithArguments("readonly references", "7.2")
                     .WithLocation(4, 18),
-                // (6,16): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (6,16): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //     static ref readonly T M<T>()
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "readonly")
                     .WithArguments("readonly references", "7.2")
                     .WithLocation(6, 16),
-                // (11,24): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (11,24): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //     public virtual ref readonly int* P1 => throw null;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "readonly")
                     .WithArguments("readonly references", "7.2")
                     .WithLocation(11, 24),
-                // (13,16): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (13,16): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //     public ref readonly int[][] this[int i] => throw null;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "readonly")
                     .WithArguments("readonly references", "7.2")
@@ -108,22 +112,26 @@ class Program
                 options: TestOptions.UnsafeDebugDll
             );
             comp.VerifyDiagnostics(
-                // (4,19): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (4,19): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //     static void M(in int x)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "in")
                     .WithArguments("readonly references", "7.2")
                     .WithLocation(4, 19),
-                // (8,14): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (8,14): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //     int this[in int x]
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "in")
                     .WithArguments("readonly references", "7.2")
                     .WithLocation(8, 14),
-                // (19,11): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (19,11): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //         M(in x);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "in")
                     .WithArguments("readonly references", "7.2")
                     .WithLocation(19, 11),
-                // (21,29): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
+                // (21,29): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use
+                // language version 7.2 or greater.
                 //         _ = (new Program())[in x];
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_1, "in")
                     .WithArguments("readonly references", "7.2")
@@ -164,17 +172,20 @@ class Program
             ParseAndValidate(
                 text,
                 TestOptions.Regular9,
-                // (11,41): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
+                // (11,41): error CS1519: Invalid token 'operator' in class, record, struct, or interface member
+                // declaration
                 //     public static ref readonly Program  operator  +(Program x, Program y)
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
                     .WithArguments("operator")
                     .WithLocation(11, 41),
-                // (11,41): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
+                // (11,41): error CS1519: Invalid token 'operator' in class, record, struct, or interface member
+                // declaration
                 //     public static ref readonly Program  operator  +(Program x, Program y)
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
                     .WithArguments("operator")
                     .WithLocation(11, 41),
-                // (12,5): error CS1519: Invalid token '{' ref readonly class, struct, or interface member declaration
+                // (12,5): error CS1519: Invalid token '{' ref readonly class, struct, or interface member
+                // declaration
                 //     {
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "{")
                     .WithArguments("{")
@@ -348,12 +359,14 @@ class Test
                     // (7,39): error CS1002: ; expected
                     //     ref readonly int Invalid() => ref readonly value;
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "readonly").WithLocation(7, 39),
-                    // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member declaration
+                    // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member
+                    // declaration
                     //     ref readonly int Invalid() => ref readonly value;
                     Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
                         .WithArguments(";")
                         .WithLocation(7, 53),
-                    // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member declaration
+                    // (7,53): error CS1519: Invalid token ';' ref readonly class, struct, or interface member
+                    // declaration
                     //     ref readonly int Invalid() => ref readonly value;
                     Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
                         .WithArguments(";")
@@ -549,12 +562,14 @@ public class Test
                 )
                 .GetParseDiagnostics()
                 .Verify(
-                    // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
+                    // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member
+                    // declaration
                     //     public static ref readonly bool operator!(Test obj) => throw null;
                     Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
                         .WithArguments("operator")
                         .WithLocation(4, 37),
-                    // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member declaration
+                    // (4,37): error CS1519: Invalid token 'operator' in class, record, struct, or interface member
+                    // declaration
                     //     public static ref readonly bool operator!(Test obj) => throw null;
                     Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "operator")
                         .WithArguments("operator")
@@ -562,7 +577,8 @@ public class Test
                     // (4,55): error CS8124: Tuple must contain at least two elements.
                     //     public static ref readonly bool operator!(Test obj) => throw null;
                     Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(4, 55),
-                    // (4,57): error CS1519: Invalid token '=>' in class, record, struct, or interface member declaration
+                    // (4,57): error CS1519: Invalid token '=>' in class, record, struct, or interface member
+                    // declaration
                     //     public static ref readonly bool operator!(Test obj) => throw null;
                     Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=>")
                         .WithArguments("=>")

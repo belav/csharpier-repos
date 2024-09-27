@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.ComponentModel;
@@ -61,7 +62,8 @@ namespace System.Web.WebPages.Html
                 }
                 else
                 {
-                    // case 2: destination type is array but source is single element, so wrap element in array + convert
+                    // case 2: destination type is array but source is single element, so wrap element in array +
+                    // convert
                     object element = ConvertSimpleType(value, destinationElementType, culture);
                     IList converted = Array.CreateInstance(destinationElementType, 1);
                     converted[0] = element;
@@ -70,7 +72,8 @@ namespace System.Web.WebPages.Html
             }
             else if (valueAsArray != null)
             {
-                // case 3: destination type is single element but source is array, so extract first element + convert
+                // case 3: destination type is single element but source is array, so extract first element +
+                // convert
                 if (valueAsArray.Length > 0)
                 {
                     value = valueAsArray.GetValue(0);

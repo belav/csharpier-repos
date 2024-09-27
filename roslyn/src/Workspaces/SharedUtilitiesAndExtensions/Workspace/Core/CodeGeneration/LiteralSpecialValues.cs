@@ -7,7 +7,8 @@ using System.Collections.Generic;
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     /// <summary>
-    /// When we are generating literals, we sometimes want to emit code vs. the numeric literal. This class
+    /// When we are generating literals, we sometimes want to emit code vs. the numeric literal. This
+    // class
     /// gives the constants for all ones we want to convert
     /// </summary>
     internal static class LiteralSpecialValues

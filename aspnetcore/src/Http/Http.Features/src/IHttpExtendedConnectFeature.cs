@@ -6,13 +6,15 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.AspNetCore.Http.Features;
 
 /// <summary>
-/// Used with protocols that require the Extended CONNECT handshake such as HTTP/2 WebSockets and WebTransport.
+/// Used with protocols that require the Extended CONNECT handshake such as HTTP/2 WebSockets and
+// WebTransport.
 /// https://www.rfc-editor.org/rfc/rfc8441#section-4
 /// </summary>
 public interface IHttpExtendedConnectFeature
 {
     /// <summary>
-    /// Indicates if the current request is a Extended CONNECT request that can be transitioned to an opaque connection via AcceptAsync.
+    /// Indicates if the current request is a Extended CONNECT request that can be transitioned to an
+    // opaque connection via AcceptAsync.
     /// </summary>
     [MemberNotNullWhen(true, nameof(Protocol))]
     bool IsExtendedConnect { get; }

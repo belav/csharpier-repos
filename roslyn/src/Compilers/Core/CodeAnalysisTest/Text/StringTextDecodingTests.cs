@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 readEncodingOpt: null
             );
 
-            // this is known to be "2fd4e1c6 7a2d28fc ed849ee1 bb76e739 1b93eb12", see http://en.wikipedia.org/wiki/SHA-1
+            // this is known to be "2fd4e1c6 7a2d28fc ed849ee1 bb76e739 1b93eb12", see
+            // http://en.wikipedia.org/wiki/SHA-1
             var checksum = data.GetChecksum();
             Assert.Equal(
                 "2fd4e1c6 7a2d28fc ed849ee1 bb76e739 1b93eb12",
@@ -169,7 +170,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 readEncodingOpt: null
             );
 
-            // this is known to be "da39a3ee 5e6b4b0d 3255bfef 95601890 afd80709", see http://en.wikipedia.org/wiki/SHA-1
+            // this is known to be "da39a3ee 5e6b4b0d 3255bfef 95601890 afd80709", see
+            // http://en.wikipedia.org/wiki/SHA-1
             var checksum = data.GetChecksum();
             Assert.Equal(
                 "da39a3ee 5e6b4b0d 3255bfef 95601890 afd80709",
@@ -233,7 +235,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // Unicode text with extended characters that map to interesting code points in CodePage 1252.
             var text = "abc def baz aeiouy \u20ac\u2019\u00a4\u00b6\u00c9\u00db\u00ed\u00ff";
 
-            // The same text encoded in CodePage 1252 which happens to be an illegal sequence if decoded as Utf-8.
+            // The same text encoded in CodePage 1252 which happens to be an illegal sequence if decoded as
+            // Utf-8.
             var bytes = new byte[]
             {
                 0x61,

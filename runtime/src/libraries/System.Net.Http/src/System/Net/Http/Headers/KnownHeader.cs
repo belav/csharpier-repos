@@ -60,7 +60,8 @@ namespace System.Net.Http.Headers
         public HttpHeaderType HeaderType { get; }
 
         /// <summary>
-        /// If a raw string is a known value, this instance will be returned rather than allocating a new string.
+        /// If a raw string is a known value, this instance will be returned rather than allocating a new
+        // string.
         /// </summary>
         public string[]? KnownValues { get; }
         public byte[] AsciiBytesWithColonSpace { get; }

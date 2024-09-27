@@ -8,7 +8,8 @@ namespace System.Net.Primitives.Unit.Tests
 {
     public class CookieCollectionTest
     {
-        //These cookies are designed to have some similar and different properties so that each is unique in the eyes of a CookieComparer object
+        //These cookies are designed to have some similar and different properties so that each is unique in
+        // the eyes of a CookieComparer object
         private static Cookie c1 = new Cookie("name1", "value");
         private static Cookie c2 = new Cookie("name2", "value", "path"); //Same name, has a path
         private static Cookie c3 = new Cookie("name2", "value", "different-path"); //Same name, different path

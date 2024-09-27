@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
         private readonly IAsyncServiceProvider _serviceProvider;
 
         /// <summary>
-        /// Solutions containing projects that use older compiler toolset that does not provide a checksum algorithm.
+        /// Solutions containing projects that use older compiler toolset that does not provide a checksum
+        // algorithm.
         /// Used only for EnC issue diagnostics.
         /// </summary>
         private ImmutableHashSet<string> _solutionsWithMissingChecksumAlgorithm =
@@ -149,8 +150,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             // Read all required properties from EvaluationData before we start updating anything.
 
             // Compatibility with older SDKs:
-            // If the IDE loads a project that uses an older version of compiler targets or the SDK some msbuild properties/items might not be available
-            // (those that were added in a later version). For each property/item we read here that is defined in the compiler targets or the SDK
+            // If the IDE loads a project that uses an older version of compiler targets or the SDK some msbuild
+            // properties/items might not be available
+            // (those that were added in a later version). For each property/item we read here that is defined
+            // in the compiler targets or the SDK
             // we need to handle its absence, as long as we support that version of the compilers/SDK.
 
             var projectFilePath = data.GetRequiredPropertyAbsolutePathValue(
@@ -178,9 +181,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                 // Property added in VS 17.4 compiler targets capturing values of LangVersion and DefineConstants.
                 // ChecksumAlgorithm value added to the property in 17.5.
                 //
-                // Impact on Hot Reload: incorrect ChecksumAlgorithm will prevent Hot Reload in detecting changes correctly in certain scenarios.
-                // However, given that projects that explicitly set ChecksumAlgorithm to a non-default value are rare and the project system
-                // will eventually call us to update the algorithm to the correct value, Hot Reload will likely not be impacted in practice.
+                // Impact on Hot Reload: incorrect ChecksumAlgorithm will prevent Hot Reload in detecting changes
+                // correctly in certain scenarios.
+                // However, given that projects that explicitly set ChecksumAlgorithm to a non-default value are
+                // rare and the project system
+                // will eventually call us to update the algorithm to the correct value, Hot Reload will likely not
+                // be impacted in practice.
                 commandLineArgs = data.GetPropertyValue(
                     BuildPropertyNames.CommandLineArgsForDesignTimeEvaluation
                 );
@@ -224,8 +230,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                     .GetServiceAsync<SVsShell, IVsShell7>(_threadingContext.JoinableTaskFactory)
                     .ConfigureAwait(true);
 
-                // Force the F# package to load; this is necessary because the F# package listens to WorkspaceChanged to
-                // set up some items, and the F# project system doesn't guarantee that the F# package has been loaded itself
+                // Force the F# package to load; this is necessary because the F# package listens to
+                // WorkspaceChanged to
+                // set up some items, and the F# project system doesn't guarantee that the F# package has been
+                // loaded itself
                 // so we're caught in the middle doing this.
                 var packageId = Guids.FSharpPackageId;
                 await shell.LoadPackageAsync(ref packageId);
@@ -240,8 +248,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                 id
             );
 
-            // Set the properties in a batch; if we set the property directly we'll be taking a synchronous lock here and
-            // potentially block up thread pool threads. Doing this in a batch means the global lock will be acquired asynchronously.
+            // Set the properties in a batch; if we set the property directly we'll be taking a synchronous lock
+            // here and
+            // potentially block up thread pool threads. Doing this in a batch means the global lock will be
+            // acquired asynchronously.
             project.StartBatch();
 
             if (!string.IsNullOrEmpty(commandLineArgs))
@@ -271,9 +281,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             var values = data.GetItemValues(itemName);
             if (values.Length != 1)
             {
-                // TODO: Throw once we update integration tests to the latest VS (https://github.com/dotnet/roslyn/issues/65439)
+                // TODO: Throw once we update integration tests to the latest VS
+                // (https://github.com/dotnet/roslyn/issues/65439)
                 // var joinedValues = string.Join(";", values);
-                // throw new InvalidProjectDataException(itemName, joinedValues, $"Item group '{itemName}' is required to specify a single value: '{joinedValues}'.");
+                // throw new InvalidProjectDataException(itemName, joinedValues, $"Item group '{itemName}' is
+                // required to specify a single value: '{joinedValues}'.");
                 return null;
             }
 

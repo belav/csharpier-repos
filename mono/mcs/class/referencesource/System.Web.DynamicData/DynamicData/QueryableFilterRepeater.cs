@@ -12,8 +12,10 @@ using System.Web.UI.WebControls.Expressions;
 namespace System.Web.DynamicData
 {
     /// <summary>
-    /// A templated control that automatically generates a collection of filters for a table associated with a given data source.
-    /// It is designed to work with the QueryExtender architecture and it will not render anything unless it's referenced by a
+    /// A templated control that automatically generates a collection of filters for a table associated
+    // with a given data source.
+    /// It is designed to work with the QueryExtender architecture and it will not render anything
+    // unless it's referenced by a
     /// DynamicFilterExpression inside of a QueryExtender.
     /// </summary>
     [ParseChildren(true)]
@@ -32,7 +34,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// The ID of a DynamicFilter control inside of the template that will be used configured to be a filter for a particular column.
+        /// The ID of a DynamicFilter control inside of the template that will be used configured to be a
+        // filter for a particular column.
         /// The default value is "DynamicFilter"
         /// </summary>
         [
@@ -53,7 +56,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// The template in which the layout of each filter can be specified. Just like ItemTempalte in Repeater.
+        /// The template in which the layout of each filter can be specified. Just like ItemTempalte in
+        // Repeater.
         /// </summary>
         [Browsable(false)]
         [DefaultValue(null)]

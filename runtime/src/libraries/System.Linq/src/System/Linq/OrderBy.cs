@@ -14,7 +14,8 @@ namespace System.Linq
         /// <typeparam name="T">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values to order.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
         /// This method is implemented by using deferred execution. The immediate return value is an object
         /// that stores all the information that is required to perform the action.
@@ -33,14 +34,16 @@ namespace System.Linq
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="comparer">An <see cref="IComparer{T}"/> to compare keys.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
         /// This method is implemented by using deferred execution. The immediate return value is an object
         /// that stores all the information that is required to perform the action.
         /// The query represented by this method is not executed until the object is enumerated by calling
         /// its <see cref="IEnumerable{T}.GetEnumerator"/> method.
         ///
-        /// If comparer is <see langword="null"/>, the default comparer <see cref="Comparer{T}.Default"/> is used to compare elements.
+        /// If comparer is <see langword="null"/>, the default comparer <see cref="Comparer{T}.Default"/> is
+        // used to compare elements.
         /// </remarks>
         public static IOrderedEnumerable<T> Order<T>(
             this IEnumerable<T> source,
@@ -67,7 +70,8 @@ namespace System.Linq
         /// <typeparam name="T">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values to order.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
         /// This method is implemented by using deferred execution. The immediate return value is an object
         /// that stores all the information that is required to perform the action.
@@ -86,14 +90,16 @@ namespace System.Linq
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="comparer">An <see cref="IComparer{T}"/> to compare keys.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
         /// This method is implemented by using deferred execution. The immediate return value is an object
         /// that stores all the information that is required to perform the action.
         /// The query represented by this method is not executed until the object is enumerated by calling
         /// its <see cref="IEnumerable{T}.GetEnumerator"/> method.
         ///
-        /// If comparer is <see langword="null"/>, the default comparer <see cref="Comparer{T}.Default"/> is used to compare elements.
+        /// If comparer is <see langword="null"/>, the default comparer <see cref="Comparer{T}.Default"/> is
+        // used to compare elements.
         /// </remarks>
         public static IOrderedEnumerable<T> OrderDescending<T>(
             this IEnumerable<T> source,
@@ -168,7 +174,8 @@ namespace System.Linq
             return source.CreateOrderedEnumerable(keySelector, comparer, true);
         }
 
-        /// <summary>Gets whether the results of an unstable sort will be observably the same as a stable sort.</summary>
+        /// <summary>Gets whether the results of an unstable sort will be observably the same as a stable
+        // sort.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TypeIsImplicitlyStable<T>() =>
             typeof(T) == typeof(sbyte)

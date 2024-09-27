@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Authentication;
 
 /// <summary>
-/// Provides the appropriate IAuthenticationHandler instance for the authenticationScheme and request.
+/// Provides the appropriate IAuthenticationHandler instance for the authenticationScheme and
+// request.
 /// </summary>
 public interface IAuthenticationHandlerProvider
 {

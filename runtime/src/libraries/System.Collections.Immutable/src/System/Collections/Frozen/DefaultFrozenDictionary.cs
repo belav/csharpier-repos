@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides the default <see cref="FrozenDictionary{TKey, TValue}"/> implementation to use when no other special-cases apply.</summary>
+    /// <summary>Provides the default <see cref="FrozenDictionary{TKey, TValue}"/> implementation to use
+    // when no other special-cases apply.</summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     internal sealed class DefaultFrozenDictionary<TKey, TValue>

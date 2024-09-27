@@ -16,7 +16,8 @@ namespace System.Transactions
     // operations for that state.
     internal abstract class TransactionState
     {
-        // The state machines themselves are designed to be internally consistent.  So the only externally visable
+        // The state machines themselves are designed to be internally consistent.  So the only externally
+        // visable
         // state transition is to active.  All other state transitions must happen within the state machines
         // themselves.
         private static TransactionStateActive? s_transactionStateActive;
@@ -3457,7 +3458,8 @@ namespace System.Transactions
 
             // Fire Completion for anyone listening
             tx.FireCompletion();
-            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of SignalCallback.
+            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of
+            // SignalCallback.
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -3613,7 +3615,8 @@ namespace System.Transactions
 
             // Fire Completion for anyone listening
             tx.FireCompletion();
-            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of SignalCallback.
+            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of
+            // SignalCallback.
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -3676,7 +3679,8 @@ namespace System.Transactions
 
             // Fire Completion for anyone listening
             tx.FireCompletion();
-            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of SignalCallback.
+            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of
+            // SignalCallback.
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -4080,7 +4084,8 @@ namespace System.Transactions
 
         internal override Guid get_Identifier(InternalTransaction tx)
         {
-            // In this state, we know that the we are dealing with a non-MSDTC promoter, so get the identifier from the internal transaction.
+            // In this state, we know that the we are dealing with a non-MSDTC promoter, so get the identifier
+            // from the internal transaction.
             return tx._distributedTransactionIdentifierNonMSDTC;
         }
 
@@ -4390,7 +4395,8 @@ namespace System.Transactions
             }
             else
             {
-                // No volatile phase 1 enlistments.  Transition to the state that will do SinglePhaseCommit to the PSPE.
+                // No volatile phase 1 enlistments.  Transition to the state that will do SinglePhaseCommit to the
+                // PSPE.
                 TransactionStatePromotedNonMSDTCSinglePhaseCommit.EnterState(tx);
             }
         }
@@ -4501,7 +4507,8 @@ namespace System.Transactions
                 );
             }
 
-            // We are about to tell the PSPE to do the SinglePhaseCommit. It is too late for us to timeout the transaction.
+            // We are about to tell the PSPE to do the SinglePhaseCommit. It is too late for us to timeout the
+            // transaction.
             // Remove this from the timeout list
             TransactionTable.Remove(tx);
 
@@ -4681,7 +4688,8 @@ namespace System.Transactions
 
         internal override Guid get_Identifier(InternalTransaction tx)
         {
-            // In this state, we know that the we are dealing with a non-MSDTC promoter, so get the identifier from the internal transaction.
+            // In this state, we know that the we are dealing with a non-MSDTC promoter, so get the identifier
+            // from the internal transaction.
             return tx._distributedTransactionIdentifierNonMSDTC;
         }
 
@@ -4712,7 +4720,8 @@ namespace System.Transactions
 
     // TransactionStatePromotedNonMSDTCAborted
     //
-    // This state indicates that the transaction has been promoted to a non-MSDTC promoter and the outcome
+    // This state indicates that the transaction has been promoted to a non-MSDTC promoter and the
+    // outcome
     // of the transaction is aborted.
     internal sealed class TransactionStatePromotedNonMSDTCAborted
         : TransactionStatePromotedNonMSDTCEnded
@@ -4739,7 +4748,8 @@ namespace System.Transactions
 
             // Fire Completion for anyone listening
             tx.FireCompletion();
-            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of SignalCallback.
+            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of
+            // SignalCallback.
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -4864,7 +4874,8 @@ namespace System.Transactions
 
             // Fire Completion for anyone listening
             tx.FireCompletion();
-            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of SignalCallback.
+            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of
+            // SignalCallback.
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -4911,7 +4922,8 @@ namespace System.Transactions
 
             // Fire Completion for anyone listening
             tx.FireCompletion();
-            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of SignalCallback.
+            // We don't need to do the AsyncCompletion stuff.  If it was needed, it was done out of
+            // SignalCallback.
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -5222,13 +5234,17 @@ namespace System.Transactions
                     return null;
                 }
 
-                // From this point forward, we know that the PromoterType is TransactionInterop.PromoterTypeDtc so we can
+                // From this point forward, we know that the PromoterType is TransactionInterop.PromoterTypeDtc so
+                // we can
                 // treat the propagationToken as an MSDTC propagation token. If one was returned.
                 if (propagationToken == null)
                 {
-                    // If the returned propagationToken is null AND the tx.PromotedTransaction is null, the promote failed.
-                    // But if the PSPE promoter used PSPEPromoteAndConvertToEnlistDurable, tx.PromotedTransaction will NOT be null
-                    // at this point and we just use tx.PromotedTransaction as distributedTx and we don't bother to change to the
+                    // If the returned propagationToken is null AND the tx.PromotedTransaction is null, the promote
+                    // failed.
+                    // But if the PSPE promoter used PSPEPromoteAndConvertToEnlistDurable, tx.PromotedTransaction will
+                    // NOT be null
+                    // at this point and we just use tx.PromotedTransaction as distributedTx and we don't bother to
+                    // change to the
                     // "return state" because the transaction is already in the state it needs to be in.
                     if (tx.PromotedTransaction == null)
                     {
@@ -5289,7 +5305,8 @@ namespace System.Transactions
                 // If we get here and changeToReturnState is false, the PSPE enlistment must have requested that we
                 // promote and convert the enlistment to a durable enlistment
                 // (Transaction.PSPEPromoteAndConvertToEnlistDurable). In that case, the internal transaction is
-                // already in TransactionStatePromoted, so we don't want to put it BACK into TransactionStateDelegatedBase.
+                // already in TransactionStatePromoted, so we don't want to put it BACK into
+                // TransactionStateDelegatedBase.
                 if (changeToReturnState)
                 {
                     returnState.CommonEnterState(tx);
@@ -5329,17 +5346,24 @@ namespace System.Transactions
 
             Enlistment enlistment;
 
-            // First promote the transaction. We do this by simply changing the state of the transaction to Promoted.
-            // In TransactionStateActive.EnlistPromotableSinglePhase, tx.durableEnlistment was set to point at the InternalEnlistment
-            // for that PSPE enlistment. We are going to replace that with a "true" durable enlistment here. But we need to
-            // set tx.durableEnlistment to null BEFORE we promote because if we don't the promotion will attempt to promote
-            // the tx.durableEnlistment. Because we are doing the EnlistDurable AFTER promotion, it will be a "promoted"
-            // durable enlistment and we can safely set tx.durableEnlistment to the InternalEnlistment of that Enlistment.
+            // First promote the transaction. We do this by simply changing the state of the transaction to
+            // Promoted.
+            // In TransactionStateActive.EnlistPromotableSinglePhase, tx.durableEnlistment was set to point at
+            // the InternalEnlistment
+            // for that PSPE enlistment. We are going to replace that with a "true" durable enlistment here. But
+            // we need to
+            // set tx.durableEnlistment to null BEFORE we promote because if we don't the promotion will attempt
+            // to promote
+            // the tx.durableEnlistment. Because we are doing the EnlistDurable AFTER promotion, it will be a
+            // "promoted"
+            // durable enlistment and we can safely set tx.durableEnlistment to the InternalEnlistment of that
+            // Enlistment.
             tx._durableEnlistment = null;
             tx._promoteState = TransactionState.TransactionStatePromoted;
             tx._promoteState.EnterState(tx);
 
-            // Now we need to create the durable enlistment that will replace the PSPE enlistment. Use the internalEnlistment of
+            // Now we need to create the durable enlistment that will replace the PSPE enlistment. Use the
+            // internalEnlistment of
             // this newly created durable enlistment as the tx.durableEnlistment.
             enlistment = tx.State!.EnlistDurable(
                 tx,
@@ -5353,8 +5377,10 @@ namespace System.Transactions
             return enlistment;
         }
 
-        // TransactionStatePSPEOperation is the only state where this is allowed and we further check to make sure there is
-        // an outstanding call to ITransactionPromoter.Promote and that the specified promotableNotification matches the
+        // TransactionStatePSPEOperation is the only state where this is allowed and we further check to
+        // make sure there is
+        // an outstanding call to ITransactionPromoter.Promote and that the specified promotableNotification
+        // matches the
         // transaction's promoter object.
         internal override void SetDistributedTransactionId(
             InternalTransaction tx,

@@ -45,7 +45,8 @@ namespace System.Net.Http
 
             if (metrics.OpenConnections.Enabled || metrics.ConnectionDuration.Enabled)
             {
-                // While requests may report HTTP/1.0 as the protocol, we treat all HTTP/1.X connections as HTTP/1.1.
+                // While requests may report HTTP/1.0 as the protocol, we treat all HTTP/1.X connections as
+                // HTTP/1.1.
                 string protocol =
                     this is HttpConnection ? "1.1"
                     : this is Http2Connection ? "2"
@@ -132,7 +133,8 @@ namespace System.Net.Http
             _connectionMetrics?.IdleStateChanged(idle: false);
         }
 
-        /// <summary>Uses <see cref="HeaderDescriptor.GetHeaderValue"/>, but first special-cases several known headers for which we can use caching.</summary>
+        /// <summary>Uses <see cref="HeaderDescriptor.GetHeaderValue"/>, but first special-cases several
+        // known headers for which we can use caching.</summary>
         public string GetResponseHeaderValueWithCaching(
             HeaderDescriptor descriptor,
             ReadOnlySpan<byte> value,
@@ -251,7 +253,8 @@ namespace System.Net.Http
             }
         }
 
-        /// <summary>Awaits a task, logging any resulting exceptions (which are otherwise ignored).</summary>
+        /// <summary>Awaits a task, logging any resulting exceptions (which are otherwise
+        // ignored).</summary>
         internal void LogExceptions(Task task)
         {
             if (task.IsCompleted)

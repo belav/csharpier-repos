@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         internal void EmitModuleVersionIdStringToken()
         {
-            // A magic value indicates that the token value is to refer to a string constant for the spelling of the current module's MVID.
+            // A magic value indicates that the token value is to refer to a string constant for the spelling of
+            // the current module's MVID.
             this.GetCurrentWriter().WriteUInt32(Cci.MetadataWriter.ModuleVersionIdStringToken);
         }
 
@@ -103,18 +104,30 @@ namespace Microsoft.CodeAnalysis.CodeGen
             DiagnosticBag diagnostics
         )
         {
-            // Emit the call to RuntimeHelpers.InitializeArray, creating the necessary metadata blob if there isn't
-            // already one for this data.  Note that this specifies an alignment of 1.  This is valid regardless of
-            // the kind of data stored in the array, as it's never accessed directly in the blob; rather, InitializeArray
-            // copies out the data as bytes.  The upside to keeping this as 1 is it means no special alignment is required.
-            // Although the compiler currently always aligns the metadata fields at an 8-byte boundary, the .pack field
-            // is appropriately set to the alignment value, and a rewriter (e.g. illink) may respect that.  If the alignment
-            // value were to be increased to match the actual alignment requirements of the element type, that could cause
-            // such rewritten binaries to regress in size due to the extra padding necessary for aligning.  The downside
-            // to keeping this as 1 is that this data won't unify with any blobs created for spans (RuntimeHelpers.CreateSpan).
-            // Code typically does directly read from the blobs via spans, and as such alignment there is required to be
-            // at least what the element type requires.  That means if the same data/element type is used with an array
-            // and separately with a span, the data will exist duplicated in two different blobs.  If it turns out that's
+            // Emit the call to RuntimeHelpers.InitializeArray, creating the necessary metadata blob if there
+            // isn't
+            // already one for this data.  Note that this specifies an alignment of 1.  This is valid regardless
+            // of
+            // the kind of data stored in the array, as it's never accessed directly in the blob; rather,
+            // InitializeArray
+            // copies out the data as bytes.  The upside to keeping this as 1 is it means no special alignment
+            // is required.
+            // Although the compiler currently always aligns the metadata fields at an 8-byte boundary, the
+            // .pack field
+            // is appropriately set to the alignment value, and a rewriter (e.g. illink) may respect that.  If
+            // the alignment
+            // value were to be increased to match the actual alignment requirements of the element type, that
+            // could cause
+            // such rewritten binaries to regress in size due to the extra padding necessary for aligning.  The
+            // downside
+            // to keeping this as 1 is that this data won't unify with any blobs created for spans
+            // (RuntimeHelpers.CreateSpan).
+            // Code typically does directly read from the blobs via spans, and as such alignment there is
+            // required to be
+            // at least what the element type requires.  That means if the same data/element type is used with
+            // an array
+            // and separately with a span, the data will exist duplicated in two different blobs.  If it turns
+            // out that's
             // very common, this can be revised in the future to specify the element type's alignment.
 
             // get helpers
@@ -141,13 +154,18 @@ namespace Microsoft.CodeAnalysis.CodeGen
             var block = this.GetCurrentBlock();
 
             //1.7.5 Backward branch constraints
-            //It shall be possible, with a single forward-pass through the CIL instruction stream for any method, to infer the
-            //exact state of the evaluation stack at every instruction (where by "state" we mean the number and type of each
+            //It shall be possible, with a single forward-pass through the CIL instruction stream for any
+            // method, to infer the
+            //exact state of the evaluation stack at every instruction (where by "state" we mean the number and
+            // type of each
             //item on the evaluation stack).
             //
-            //In particular, if that single-pass analysis arrives at an instruction, call it location X, that immediately follows an
-            //unconditional branch, and where X is not the target of an earlier branch instruction, then the state of the
-            //evaluation stack at X, clearly, cannot be derived from existing information. In this case, the CLI demands that
+            //In particular, if that single-pass analysis arrives at an instruction, call it location X, that
+            // immediately follows an
+            //unconditional branch, and where X is not the target of an earlier branch instruction, then the
+            // state of the
+            //evaluation stack at X, clearly, cannot be derived from existing information. In this case, the CLI
+            // demands that
             //the evaluation stack at X be empty.
 
             LabelInfo labelInfo;
@@ -179,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 // 1) it is a label of a backward branch or
                 // 2) it is a label for an unreachable forward branch and codegen did not bother to emit the branch.
                 //
-                // We cannot know here which case we have, so we cannot verify or force stack to be 0 on a backward branch.
+                // We cannot know here which case we have, so we cannot verify or force stack to be 0 on a backward
+                // branch.
                 // We will just assume that languages do not do backward branches on nonempty stack
                 // and let PEVerify catch that.
                 //
@@ -297,8 +316,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Debug.Assert(keyTypeCode != Cci.PrimitiveTypeCode.String);
 
             // CONSIDER: SwitchIntegralJumpTableEmitter will modify the caseLabels array by sorting it.
-            // CONSIDER: Currently, only purpose of creating this caseLabels array is for Emitting the jump table.
-            // CONSIDER: If this requirement changes, we may want to pass in ArrayBuilder<KeyValuePair<ConstantValue, object>> instead.
+            // CONSIDER: Currently, only purpose of creating this caseLabels array is for Emitting the jump
+            // table.
+            // CONSIDER: If this requirement changes, we may want to pass in
+            // ArrayBuilder<KeyValuePair<ConstantValue, object>> instead.
 
             var emitter = new SwitchIntegralJumpTableEmitter(
                 this,

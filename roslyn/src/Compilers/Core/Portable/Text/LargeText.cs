@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Text
                     throwIfBinaryDetected
                 );
 
-                // We must compute the checksum and embedded text blob now while we still have the original bytes in hand.
+                // We must compute the checksum and embedded text blob now while we still have the original bytes in
+                // hand.
                 // We cannot re-encode to obtain checksum and blob as the encoding is not guaranteed to round-trip.
                 var checksum = CalculateChecksum(stream, checksumAlgorithm);
                 var embeddedTextBlob = canBeEmbedded
@@ -281,10 +282,12 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Called from <see cref="SourceText.Lines"/> to initialize the <see cref="TextLineCollection"/>. Thereafter,
+        /// Called from <see cref="SourceText.Lines"/> to initialize the <see cref="TextLineCollection"/>.
+        // Thereafter,
         /// the collection is cached.
         /// </summary>
-        /// <returns>A new <see cref="TextLineCollection"/> representing the individual text lines.</returns>
+        /// <returns>A new <see cref="TextLineCollection"/> representing the individual text
+        // lines.</returns>
         protected override TextLineCollection GetLinesCore()
         {
             return new LineInfo(this, ParseLineStarts());

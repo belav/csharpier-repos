@@ -82,11 +82,14 @@ namespace System.Diagnostics.Tracing
                     // rely on ref counting to determine when to enable and disable counters. You will get an arbitrary
                     // number of Enables and one Disable per session.
                     //
-                    // Previously we would turn off counters when we received any Disable command, but that meant that any
+                    // Previously we would turn off counters when we received any Disable command, but that meant that
+                    // any
                     // session could turn off counters for all other sessions. To get to a good place we now will only
                     // turn off counters once the EventSource that provides the counters is disabled. We can then end up
-                    // keeping counters on too long in certain circumstances - if one session enables counters, then a second
-                    // session enables the EventSource but not counters we will stay on until both sessions terminate, even
+                    // keeping counters on too long in certain circumstances - if one session enables counters, then a
+                    // second
+                    // session enables the EventSource but not counters we will stay on until both sessions terminate,
+                    // even
                     // if the first session terminates first.
                     if (!_eventSource.IsEnabled())
                     {

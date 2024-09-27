@@ -144,9 +144,11 @@ namespace Castle.DynamicProxy.Tests
             //
             // which corresponds to this IL:
             //
-            //   .class interface public abstract auto ansi beforefieldinit RhinoMocksCPPInterfaces.IHaveMethodWithModOpts
+            //   .class interface public abstract auto ansi beforefieldinit
+            // RhinoMocksCPPInterfaces.IHaveMethodWithModOpts
             //   {
-            //       .method public hidebysig newslot abstract virtual instance void StartLiveOnSlot(int32 modopt([mscorlib]System.Runtime.CompilerServices.IsLong) slotNumber) cil managed
+            //       .method public hidebysig newslot abstract virtual instance void StartLiveOnSlot(int32
+            // modopt([mscorlib]System.Runtime.CompilerServices.IsLong) slotNumber) cil managed
             //       { }
             //   }
 

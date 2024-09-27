@@ -5,7 +5,8 @@
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Indicates whether a bound local is also a declaration, and if so was it a declaration with an explicit or an inferred type.
+    /// Indicates whether a bound local is also a declaration, and if so was it a declaration with an
+    // explicit or an inferred type.
     /// Ex:
     /// - In `M(x)`, `x` has `LocalDeclarationKind.None`
     /// - In `M(out int x)`, `x` has `LocalDeclarationKind.WithExplicitType`

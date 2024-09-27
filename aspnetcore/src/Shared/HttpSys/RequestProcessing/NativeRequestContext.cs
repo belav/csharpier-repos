@@ -91,17 +91,17 @@ internal unsafe class NativeRequestContext : IDisposable
     {
         get
         {
-            /*
-                Below is the definition of the timing info structure we are accessing the memory for.
-                ULONG is 32-bit and maps to int. ULONGLONG is 64-bit and maps to long.
+/*
+Below is the definition of the timing info structure we are accessing the memory for.
+ULONG is 32-bit and maps to int. ULONGLONG is 64-bit and maps to long.
 
-                typedef struct _HTTP_REQUEST_TIMING_INFO
-                {
-                    ULONG RequestTimingCount;
-                    ULONGLONG RequestTiming[HttpRequestTimingTypeMax];
+typedef struct _HTTP_REQUEST_TIMING_INFO
+{
+ULONG RequestTimingCount;
+ULONGLONG RequestTiming[HttpRequestTimingTypeMax];
 
-                } HTTP_REQUEST_TIMING_INFO, *PHTTP_REQUEST_TIMING_INFO;
-            */
+} HTTP_REQUEST_TIMING_INFO, *PHTTP_REQUEST_TIMING_INFO;
+*/
 
             if (
                 !RequestInfo.TryGetValue(
@@ -115,8 +115,10 @@ internal unsafe class NativeRequestContext : IDisposable
 
             var timingCount = MemoryMarshal.Read<int>(timingInfo.Span);
 
-            // Note that even though RequestTimingCount is an int, the compiler enforces alignment of data in the struct which causes 4 bytes
-            // of padding to be added after RequestTimingCount, so we need to skip 64-bits before we get to the start of the RequestTiming array
+            // Note that even though RequestTimingCount is an int, the compiler enforces alignment of data in
+            // the struct which causes 4 bytes
+            // of padding to be added after RequestTimingCount, so we need to skip 64-bits before we get to the
+            // start of the RequestTiming array
             return MemoryMarshal.CreateReadOnlySpan(
                 ref Unsafe.As<byte, long>(
                     ref MemoryMarshal.GetReference(timingInfo.Span[sizeof(long)..])
@@ -190,8 +192,10 @@ internal unsafe class NativeRequestContext : IDisposable
         }
     }
 
-    // ReleasePins() should be called exactly once.  It must be called before Dispose() is called, which means it must be called
-    // before an object (Request) which closes the RequestContext on demand is returned to the application.
+    // ReleasePins() should be called exactly once.  It must be called before Dispose() is called, which
+    // means it must be called
+    // before an object (Request) which closes the RequestContext on demand is returned to the
+    // application.
     internal void ReleasePins()
     {
         Debug.Assert(
@@ -424,10 +428,13 @@ internal unsafe class NativeRequestContext : IDisposable
     private static void SetSslProtocol(HTTP_SSL_PROTOCOL_INFO* protocolInfo)
     {
         var protocol = protocolInfo->Protocol;
-        // The OS considers client and server TLS as different enum values. SslProtocols choose to combine those for some reason.
+        // The OS considers client and server TLS as different enum values. SslProtocols choose to combine
+        // those for some reason.
         // We need to fill in the client bits so the enum shows the expected protocol.
+        //
         // https://learn.microsoft.com/windows/desktop/api/schannel/ns-schannel-_secpkgcontext_connectioninfo
-        // Compare to https://referencesource.microsoft.com/#System/net/System/Net/SecureProtocols/_SslState.cs,8905d1bf17729de3
+        // Compare to
+        // https://referencesource.microsoft.com/#System/net/System/Net/SecureProtocols/_SslState.cs,8905d1bf17729de3
 #pragma warning disable CS0618 // Type or member is obsolete
         if ((protocol & (uint)SslProtocols.Ssl2) != 0)
         {
@@ -509,7 +516,8 @@ internal unsafe class NativeRequestContext : IDisposable
         return false;
     }
 
-    // These methods are for accessing the request structure after it has been unpinned. They need to adjust addresses
+    // These methods are for accessing the request structure after it has been unpinned. They need to
+    // adjust addresses
     // in case GC has moved the original object.
 
     internal string? GetKnownHeader(HttpSysRequestHeader header)
@@ -693,7 +701,8 @@ internal unsafe class NativeRequestContext : IDisposable
                     {
                         headerValue = string.Empty;
                     }
-                    // Note that Http.Sys currently collapses all headers of the same name to a single coma separated string,
+                    // Note that Http.Sys currently collapses all headers of the same name to a single coma separated
+                    // string,
                     // so we can just call Set.
                     unknownHeaders[headerName] = headerValue;
                 }
@@ -952,7 +961,8 @@ internal unsafe class NativeRequestContext : IDisposable
         return new X509Certificate2(certEncoded);
     }
 
-    // Copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/src/System/Memory/PointerMemoryManager.cs
+    // Copied from
+    // https://github.com/dotnet/runtime/blob/main/src/libraries/Common/src/System/Memory/PointerMemoryManager.cs
     private sealed unsafe class PointerMemoryManager<T> : MemoryManager<T>
         where T : struct
     {

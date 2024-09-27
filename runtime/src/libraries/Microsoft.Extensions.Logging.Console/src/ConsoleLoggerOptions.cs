@@ -55,12 +55,14 @@ namespace Microsoft.Extensions.Logging.Console
         public bool IncludeScopes { get; set; }
 
         /// <summary>
-        /// Gets or sets value indicating the minimum level of messages that would get written to <c>Console.Error</c>.
+        /// Gets or sets value indicating the minimum level of messages that would get written to
+        // <c>Console.Error</c>.
         /// </summary>
         public LogLevel LogToStandardErrorThreshold { get; set; } = LogLevel.None;
 
         /// <summary>
-        /// Gets or sets format string used to format timestamp in logging messages. Defaults to <c>null</c>.
+        /// Gets or sets format string used to format timestamp in logging messages. Defaults to
+        // <c>null</c>.
         /// </summary>
         [System.ObsoleteAttribute(
             "ConsoleLoggerOptions.TimestampFormat has been deprecated. Use ConsoleFormatterOptions.TimestampFormat instead."
@@ -68,7 +70,8 @@ namespace Microsoft.Extensions.Logging.Console
         public string? TimestampFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets indication whether or not UTC timezone should be used to format timestamps in logging messages. Defaults to <c>false</c>.
+        /// Gets or sets indication whether or not UTC timezone should be used to format timestamps in
+        // logging messages. Defaults to <c>false</c>.
         /// </summary>
         [System.ObsoleteAttribute(
             "ConsoleLoggerOptions.UseUtcTimestamp has been deprecated. Use ConsoleFormatterOptions.UseUtcTimestamp instead."
@@ -78,7 +81,8 @@ namespace Microsoft.Extensions.Logging.Console
         private ConsoleLoggerQueueFullMode _queueFullMode = ConsoleLoggerQueueFullMode.Wait;
 
         /// <summary>
-        /// Gets or sets the desired console logger behavior when the queue becomes full. Defaults to <c>Wait</c>.
+        /// Gets or sets the desired console logger behavior when the queue becomes full. Defaults to
+        // <c>Wait</c>.
         /// </summary>
         public ConsoleLoggerQueueFullMode QueueFullMode
         {

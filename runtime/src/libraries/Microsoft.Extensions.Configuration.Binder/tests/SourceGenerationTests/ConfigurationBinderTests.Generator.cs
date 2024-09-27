@@ -22,13 +22,15 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 @"{""Longitude"":1,""Latitude"":2}"
             );
 
-            // Newline between the configuration instance and the binding invocation (with the dot on the first line)
+            // Newline between the configuration instance and the binding invocation (with the dot on the first
+            // line)
             GeolocationRecord record1 = (GeolocationRecord)
                 configuration.Get(typeof(GeolocationRecord), _ => { });
 
             AssertRecordIsBound(record1, 1, 2);
 
-            // Newline between the configuration instance and the binding invocation (with the dot on the second line)
+            // Newline between the configuration instance and the binding invocation (with the dot on the second
+            // line)
             GeolocationRecord record2 = (GeolocationRecord)
                 configuration.Get(typeof(GeolocationRecord), _ => { });
 
@@ -101,7 +103,8 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
 
             AssertRecordIsBound(record2, 1, 2);
 
-            // Newlines within the argument to the method returning the configuration and around the extension method argument
+            // Newlines within the argument to the method returning the configuration and around the extension
+            // method argument
             GeolocationRecord record3 = new GeolocationRecord();
             TestHelpers
                 .GetConfigurationFromJsonString(
@@ -159,12 +162,14 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 @"{""Longitude"":1,""Latitude"":2}"
             );
 
-            // Newline between the configuration instance and the binding invocation (with the dot on the first line)
+            // Newline between the configuration instance and the binding invocation (with the dot on the first
+            // line)
             int lat1 = configuration.GetValue<int>("Latitude");
 
             Assert.Equal(2, lat1);
 
-            // Newline between the configuration instance and the binding invocation (with the dot on the second line)
+            // Newline between the configuration instance and the binding invocation (with the dot on the second
+            // line)
             int lat2 = configuration.GetValue<int>("Latitude");
 
             Assert.Equal(2, lat2);

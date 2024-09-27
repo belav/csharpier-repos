@@ -20,66 +20,67 @@ namespace System.Linq.Expressions.Tests
 
     internal class SigParser
     {
-        /*
+/*
 
-        Sig ::= MethodDefSig | MethodRefSig | StandAloneMethodSig | FieldSig | PropertySig | LocalVarSig
+Sig ::= MethodDefSig | MethodRefSig | StandAloneMethodSig | FieldSig | PropertySig | LocalVarSig
 
-        MethodDefSig ::= [[HASTHIS] [EXPLICITTHIS]] (DEFAULT|VARARG|GENERIC GenParamCount) ParamCount RetType Param*
+MethodDefSig ::= [[HASTHIS] [EXPLICITTHIS]] (DEFAULT|VARARG|GENERIC GenParamCount) ParamCount
+RetType Param*
 
-        MethodRefSig ::= [[HASTHIS] [EXPLICITTHIS]] VARARG ParamCount RetType Param* [SENTINEL Param+]
+MethodRefSig ::= [[HASTHIS] [EXPLICITTHIS]] VARARG ParamCount RetType Param* [SENTINEL Param+]
 
-        StandAloneMethodSig ::=  [[HASTHIS] [EXPLICITTHIS]] (DEFAULT|VARARG|C|STDCALL|THISCALL|FASTCALL)
-                            ParamCount RetType Param* [SENTINEL Param+]
+StandAloneMethodSig ::=  [[HASTHIS] [EXPLICITTHIS]] (DEFAULT|VARARG|C|STDCALL|THISCALL|FASTCALL)
+ParamCount RetType Param* [SENTINEL Param+]
 
-        FieldSig ::= FIELD CustomMod* Type
+FieldSig ::= FIELD CustomMod* Type
 
-        PropertySig ::= PROPERTY [HASTHIS] ParamCount CustomMod* Type Param*
+PropertySig ::= PROPERTY [HASTHIS] ParamCount CustomMod* Type Param*
 
-        LocalVarSig ::= LOCAL_SIG Count (TYPEDBYREF | ([CustomMod] [Constraint])* [BYREF] Type)+
+LocalVarSig ::= LOCAL_SIG Count (TYPEDBYREF | ([CustomMod] [Constraint])* [BYREF] Type)+
 
 
-        -------------
+-------------
 
-        CustomMod ::= ( CMOD_OPT | CMOD_REQD ) ( TypeDefEncoded | TypeRefEncoded )
+CustomMod ::= ( CMOD_OPT | CMOD_REQD ) ( TypeDefEncoded | TypeRefEncoded )
 
-        Constraint ::= #define ELEMENT_TYPE_PINNED
+Constraint ::= #define ELEMENT_TYPE_PINNED
 
-        Param ::= CustomMod* ( TYPEDBYREF | [BYREF] Type )
+Param ::= CustomMod* ( TYPEDBYREF | [BYREF] Type )
 
-        RetType ::= CustomMod* ( VOID | TYPEDBYREF | [BYREF] Type )
+RetType ::= CustomMod* ( VOID | TYPEDBYREF | [BYREF] Type )
 
-        Type ::= ( BOOLEAN | CHAR | I1 | U1 | U2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U |
-                        | VALUETYPE TypeDefOrRefEncoded
-                        | CLASS TypeDefOrRefEncoded
-                        | STRING
-                        | OBJECT
-                        | PTR CustomMod* VOID
-                        | PTR CustomMod* Type
-                        | FNPTR MethodDefSig
-                        | FNPTR MethodRefSig
-                        | ARRAY Type ArrayShape
-                        | SZARRAY CustomMod* Type
-                        | GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type*
-                        | VAR Number
-                        | MVAR Number
+Type ::= ( BOOLEAN | CHAR | I1 | U1 | U2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U |
+| VALUETYPE TypeDefOrRefEncoded
+| CLASS TypeDefOrRefEncoded
+| STRING
+| OBJECT
+| PTR CustomMod* VOID
+| PTR CustomMod* Type
+| FNPTR MethodDefSig
+| FNPTR MethodRefSig
+| ARRAY Type ArrayShape
+| SZARRAY CustomMod* Type
+| GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type*
+| VAR Number
+| MVAR Number
 
-        ArrayShape ::= Rank NumSizes Size* NumLoBounds LoBound*
+ArrayShape ::= Rank NumSizes Size* NumLoBounds LoBound*
 
-        TypeDefOrRefEncoded ::= TypeDefEncoded | TypeRefEncoded
-        TypeDefEncoded ::= 32-bit-3-part-encoding-for-typedefs-and-typerefs
-        TypeRefEncoded ::= 32-bit-3-part-encoding-for-typedefs-and-typerefs
+TypeDefOrRefEncoded ::= TypeDefEncoded | TypeRefEncoded
+TypeDefEncoded ::= 32-bit-3-part-encoding-for-typedefs-and-typerefs
+TypeRefEncoded ::= 32-bit-3-part-encoding-for-typedefs-and-typerefs
 
-        ParamCount ::= 29-bit-encoded-integer
-        GenArgCount ::= 29-bit-encoded-integer
-        Count ::= 29-bit-encoded-integer
-        Rank ::= 29-bit-encoded-integer
-        NumSizes ::= 29-bit-encoded-integer
-        Size ::= 29-bit-encoded-integer
-        NumLoBounds ::= 29-bit-encoded-integer
-        LoBounds ::= 29-bit-encoded-integer
-        Number ::= 29-bit-encoded-integer
+ParamCount ::= 29-bit-encoded-integer
+GenArgCount ::= 29-bit-encoded-integer
+Count ::= 29-bit-encoded-integer
+Rank ::= 29-bit-encoded-integer
+NumSizes ::= 29-bit-encoded-integer
+Size ::= 29-bit-encoded-integer
+NumLoBounds ::= 29-bit-encoded-integer
+LoBounds ::= 29-bit-encoded-integer
+Number ::= 29-bit-encoded-integer
 
-        */
+*/
 
         protected const int ELEMENT_TYPE_END = 0x00; //Marks end of a list
         protected const int ELEMENT_TYPE_VOID = 0x01;
@@ -216,7 +217,8 @@ namespace System.Linq.Expressions.Tests
 
         protected virtual void NotifyTypedByref() { }
 
-        // the type has the 'byref' modifier on it -- this normally proceeds the type definition in the context
+        // the type has the 'byref' modifier on it -- this normally proceeds the type definition in the
+        // context
         // the type is used, so for instance a parameter might have the byref modifier on it
         // so this happens before the BeginType in that context
         protected virtual void NotifyByref() { }
@@ -235,7 +237,8 @@ namespace System.Linq.Expressions.Tests
         // the type is a simple type, the elem_type defines it fully
         protected virtual void NotifyTypeSimple(sig_elem_type elem_type) { }
 
-        // the type is specified by the given index of the given index type (normally a type index in the type metadata)
+        // the type is specified by the given index of the given index type (normally a type index in the
+        // type metadata)
         // this callback is normally qualified by other ones such as NotifyTypeClass or NotifyTypeValueType
         protected virtual void NotifyTypeDefOrRef(
             sig_index token,
@@ -264,10 +267,12 @@ namespace System.Linq.Expressions.Tests
         // the type is a function pointer, followed by the type of the function
         protected virtual void NotifyTypeFunctionPointer() { }
 
-        // the type is an array, this is followed by the array shape, see above, as well as modifiers and element type
+        // the type is an array, this is followed by the array shape, see above, as well as modifiers and
+        // element type
         protected virtual void NotifyTypeArray() { }
 
-        // the type is a simple zero-based array, this has no shape but does have custom modifiers and element type
+        // the type is a simple zero-based array, this has no shape but does have custom modifiers and
+        // element type
         protected virtual void NotifyTypeSzArray() { }
 
         // used when using a DynamicMethod with internal pointers
@@ -694,23 +699,23 @@ namespace System.Linq.Expressions.Tests
 
         bool ParseType()
         {
-            /*
-            Type ::= ( BOOLEAN | CHAR | I1 | U1 | U2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U |
-                            | VALUETYPE TypeDefOrRefEncoded
-                            | CLASS TypeDefOrRefEncoded
-                            | STRING
-                            | OBJECT
-                            | PTR CustomMod* VOID
-                            | PTR CustomMod* Type
-                            | FNPTR MethodDefSig
-                            | FNPTR MethodRefSig
-                            | ARRAY Type ArrayShape
-                            | SZARRAY CustomMod* Type
-                            | GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type *
-                            | VAR Number
-                            | MVAR Number
+/*
+Type ::= ( BOOLEAN | CHAR | I1 | U1 | U2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U |
+| VALUETYPE TypeDefOrRefEncoded
+| CLASS TypeDefOrRefEncoded
+| STRING
+| OBJECT
+| PTR CustomMod* VOID
+| PTR CustomMod* Type
+| FNPTR MethodDefSig
+| FNPTR MethodRefSig
+| ARRAY Type ArrayShape
+| SZARRAY CustomMod* Type
+| GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type *
+| VAR Number
+| MVAR Number
 
-            */
+*/
 
             NotifyBeginType();
 

@@ -23,8 +23,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     //
     // The methods on this class must be written VERY carefully to avoid introducing security holes.
     // That's because they are invoked with special "this"! The "this" object
-    // for all of these methods are not IReadOnlyDictionaryToIMapViewAdapter objects. Rather, they are of type
-    // IReadOnlyDictionary<K, V>. No actual IReadOnlyDictionaryToIMapViewAdapter object is ever instantiated. Thus, you will
+    // for all of these methods are not IReadOnlyDictionaryToIMapViewAdapter objects. Rather, they are
+    // of type
+    // IReadOnlyDictionary<K, V>. No actual IReadOnlyDictionaryToIMapViewAdapter object is ever
+    // instantiated. Thus, you will
     // see a lot of expressions that cast "this" to "IReadOnlyDictionary<K, V>".
     [DebuggerDisplay("Size = {Size}")]
     internal sealed class IReadOnlyDictionaryToIMapViewAdapter

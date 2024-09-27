@@ -26,7 +26,8 @@ namespace System.Data
         internal string[]? _columnNames;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified
+        // name and
         /// <see cref='System.Data.DataColumn'/>.
         /// </summary>
         public UniqueConstraint(string? name, DataColumn column)
@@ -37,7 +38,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified <see cref='System.Data.DataColumn'/>.
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified
+        // <see cref='System.Data.DataColumn'/>.
         /// </summary>
         public UniqueConstraint(DataColumn column)
         {
@@ -47,7 +49,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and array
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified
+        // name and array
         ///    of <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
         public UniqueConstraint(string? name, DataColumn[] columns)
@@ -56,7 +59,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the given array of <see cref='System.Data.DataColumn'/>
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the given
+        // array of <see cref='System.Data.DataColumn'/>
         /// objects.
         /// </summary>
         public UniqueConstraint(DataColumn[] columns)
@@ -74,7 +78,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified
+        // name and
         /// <see cref='System.Data.DataColumn'/>.
         /// </summary>
         public UniqueConstraint(string? name, DataColumn column, bool isPrimaryKey)
@@ -86,7 +91,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified <see cref='System.Data.DataColumn'/>.
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified
+        // <see cref='System.Data.DataColumn'/>.
         /// </summary>
         public UniqueConstraint(DataColumn column, bool isPrimaryKey)
         {
@@ -97,7 +103,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and array
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified
+        // name and array
         ///    of <see cref='System.Data.DataColumn'/> objects.
         /// </summary>
         public UniqueConstraint(string? name, DataColumn[] columns, bool isPrimaryKey)
@@ -107,7 +114,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the given array of <see cref='System.Data.DataColumn'/>
+        /// Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the given
+        // array of <see cref='System.Data.DataColumn'/>
         /// objects.
         /// </summary>
         public UniqueConstraint(DataColumn[] columns, bool isPrimaryKey)
@@ -122,7 +130,8 @@ namespace System.Data
             get { return _key.GetColumnNames(); }
         }
 
-        // Use constraint index only for search operations (and use key.GetSortIndex() when enumeration is needed and/or order is important)
+        // Use constraint index only for search operations (and use key.GetSortIndex() when enumeration is
+        // needed and/or order is important)
         internal Index ConstraintIndex
         {
             get
@@ -137,8 +146,10 @@ namespace System.Data
         {
             Debug.Assert(null != _constraintIndex, "null UniqueConstraint index");
 
-            // ideally, we would like constraintIndex and key.GetSortIndex to share the same index underneath: Debug.Assert(_constraintIndex == key.GetSortIndex)
-            // but, there is a scenario where constraint and key indexes are built from the same list of columns but in a different order
+            // ideally, we would like constraintIndex and key.GetSortIndex to share the same index underneath:
+            // Debug.Assert(_constraintIndex == key.GetSortIndex)
+            // but, there is a scenario where constraint and key indexes are built from the same list of columns
+            // but in a different order
             DataColumn[] sortIndexColumns = new DataColumn[_constraintIndex._indexFields.Length];
             for (int i = 0; i < sortIndexColumns.Length; i++)
             {

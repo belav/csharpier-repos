@@ -36,12 +36,16 @@ public partial struct SyntaxValueProvider
     >(static () => new Stack<SyntaxNode>());
 
     /// <summary>
-    /// Returns all syntax nodes of that match <paramref name="predicate"/> if that node has an attribute on it that
-    /// could possibly bind to the provided <paramref name="simpleName"/>. <paramref name="simpleName"/> should be the
-    /// simple, non-qualified, name of the attribute, including the <c>Attribute</c> suffix, and not containing any
+    /// Returns all syntax nodes of that match <paramref name="predicate"/> if that node has an
+    // attribute on it that
+    /// could possibly bind to the provided <paramref name="simpleName"/>. <paramref name="simpleName"/>
+    // should be the
+    /// simple, non-qualified, name of the attribute, including the <c>Attribute</c> suffix, and not
+    // containing any
     /// generics, containing types, or namespaces.  For example <c>CLSCompliantAttribute</c> for <see
     /// cref="System.CLSCompliantAttribute"/>.
-    /// <para/> This provider understands <see langword="using"/> (<c>Import</c> in Visual Basic) aliases and will find
+    /// <para/> This provider understands <see langword="using"/> (<c>Import</c> in Visual Basic)
+    // aliases and will find
     /// matches even when the attribute references an alias name.  For example, given:
     /// <code>
     /// using XAttribute = System.CLSCompliantAttribute;
@@ -49,11 +53,13 @@ public partial struct SyntaxValueProvider
     /// class C { }
     /// </code>
     /// Then
-    /// <c>context.SyntaxProvider.CreateSyntaxProviderForAttribute(nameof(CLSCompliantAttribute), (node, c) => node is ClassDeclarationSyntax)</c>
+    /// <c>context.SyntaxProvider.CreateSyntaxProviderForAttribute(nameof(CLSCompliantAttribute), (node,
+    // c) => node is ClassDeclarationSyntax)</c>
     /// will find the <c>C</c> class.
     /// </summary>
     /// <remarks>
-    /// Note: a 'Values'-provider of arrays are returned.  Each array provides all the matching nodes from a single <see
+    /// Note: a 'Values'-provider of arrays are returned.  Each array provides all the matching nodes
+    // from a single <see
     /// cref="SyntaxTree"/>.
     /// </remarks>
     internal IncrementalValuesProvider<(
@@ -66,10 +72,13 @@ public partial struct SyntaxValueProvider
     {
         var syntaxHelper = _context.SyntaxHelper;
 
-        // Create a provider over all the syntax trees in the compilation.  This is better than CreateSyntaxProvider as
-        // using SyntaxTrees is purely syntax and will not update the incremental node for a tree when another tree is
+        // Create a provider over all the syntax trees in the compilation.  This is better than
+        // CreateSyntaxProvider as
+        // using SyntaxTrees is purely syntax and will not update the incremental node for a tree when
+        // another tree is
         // changed. CreateSyntaxProvider will have to rerun all incremental nodes since it passes along the
-        // SemanticModel, and that model is updated whenever any tree changes (since it is tied to the compilation).
+        // SemanticModel, and that model is updated whenever any tree changes (since it is tied to the
+        // compilation).
         var syntaxTreesProvider = _context
             .CompilationProvider.SelectMany(
                 (compilation, cancellationToken) =>
@@ -77,7 +86,8 @@ public partial struct SyntaxValueProvider
             )
             .WithTrackingName("compilationUnit_ForAttribute");
 
-        // Create a provider that provides (and updates) the global aliases for any particular file when it is edited.
+        // Create a provider that provides (and updates) the global aliases for any particular file when it
+        // is edited.
         var individualFileGlobalAliasesProvider = syntaxTreesProvider
             .Where(
                 (info, _) => info.Info.HasFlag(SourceGeneratorSyntaxTreeInfo.ContainsGlobalAliases)
@@ -91,7 +101,8 @@ public partial struct SyntaxValueProvider
             )
             .WithTrackingName("individualFileGlobalAliases_ForAttribute");
 
-        // Create an aggregated view of all global aliases across all files.  This should only update when an individual
+        // Create an aggregated view of all global aliases across all files.  This should only update when
+        // an individual
         // file changes its global aliases or a file is added / removed from the compilation
         var collectedGlobalAliasesProvider = individualFileGlobalAliasesProvider
             .Collect()
@@ -102,7 +113,8 @@ public partial struct SyntaxValueProvider
             .Select(static (arrays, _) => GlobalAliases.Create(arrays))
             .WithTrackingName("allUpGlobalAliases_ForAttribute");
 
-        // Regenerate our data if the compilation options changed.  VB can supply global aliases with compilation options,
+        // Regenerate our data if the compilation options changed.  VB can supply global aliases with
+        // compilation options,
         // so we have to reanalyze everything if those changed.
         var compilationGlobalAliases = _context
             .CompilationOptionsProvider.Select(
@@ -120,7 +132,8 @@ public partial struct SyntaxValueProvider
             .Select((tuple, _) => GlobalAliases.Concat(tuple.Left, tuple.Right))
             .WithTrackingName("allUpIncludingCompilationGlobalAliases_ForAttribute");
 
-        // Combine the two providers so that we reanalyze every file if the global aliases change, or we reanalyze a
+        // Combine the two providers so that we reanalyze every file if the global aliases change, or we
+        // reanalyze a
         // particular file when it's compilation unit changes.
         var syntaxTreeAndGlobalAliasesProvider = syntaxTreesProvider
             .Where(
@@ -185,7 +198,8 @@ public partial struct SyntaxValueProvider
             SourceGeneratorSyntaxTreeInfo Info
         )>(count);
 
-        // Iterate again.  This will be free as the values from before will already be cached on the syntax tree.
+        // Iterate again.  This will be free as the values from before will already be cached on the syntax
+        // tree.
         foreach (var tree in compilation.CommonSyntaxTrees)
         {
             var info = tree.GetSourceGeneratorInfo(syntaxHelper, cancellationToken);
@@ -213,13 +227,16 @@ public partial struct SyntaxValueProvider
             ? StringComparison.Ordinal
             : StringComparison.OrdinalIgnoreCase;
 
-        // As we walk down the compilation unit and nested namespaces, we may encounter additional using aliases local
-        // to this file. Keep track of them so we can determine if they would allow an attribute in code to bind to the
+        // As we walk down the compilation unit and nested namespaces, we may encounter additional using
+        // aliases local
+        // to this file. Keep track of them so we can determine if they would allow an attribute in code to
+        // bind to the
         // attribute being searched for.
         var localAliases = Aliases.GetInstance();
         var nameHasAttributeSuffix = name.HasAttributeSuffix(isCaseSensitive);
 
-        // Used to ensure that as we recurse through alias names to see if they could bind to attributeName that we
+        // Used to ensure that as we recurse through alias names to see if they could bind to attributeName
+        // that we
         // don't get into cycles.
         var seenNames = s_stringStackPool.Allocate();
         var results = ArrayBuilder<SyntaxNode>.GetInstance();
@@ -276,7 +293,8 @@ public partial struct SyntaxValueProvider
 
             processCompilationOrNamespaceMembers(namespaceBlock);
 
-            // after recursing into this namespace, dump any local aliases we added from this namespace decl itself.
+            // after recursing into this namespace, dump any local aliases we added from this namespace decl
+            // itself.
             localAliases.Count = localAliasCount;
         }
 
@@ -331,7 +349,8 @@ public partial struct SyntaxValueProvider
                     }
                     else
                     {
-                        // For any other node, just keep recursing deeper to see if we can find an attribute. Note: we cannot
+                        // For any other node, just keep recursing deeper to see if we can find an attribute. Note: we
+                        // cannot
                         // terminate the search anywhere as attributes may be found on things like local functions, and that
                         // means having to dive deep into statements and expressions.
                         foreach (var child in node.ChildNodesAndTokens().Reverse())
@@ -384,10 +403,12 @@ public partial struct SyntaxValueProvider
                     return true;
             }
 
-            // Otherwise, keep searching through aliases.  Check that this is the first time seeing this name so we
+            // Otherwise, keep searching through aliases.  Check that this is the first time seeing this name so
+            // we
             // don't infinite recurse in error code where aliases reference each other.
             //
-            // note: as we recurse up the aliases, we do not want to add the attribute suffix anymore.  aliases must
+            // note: as we recurse up the aliases, we do not want to add the attribute suffix anymore.  aliases
+            // must
             // reference the actual real name of the symbol they are aliasing.
             if (seenNames.Contains(currentAttributeName))
                 return false;

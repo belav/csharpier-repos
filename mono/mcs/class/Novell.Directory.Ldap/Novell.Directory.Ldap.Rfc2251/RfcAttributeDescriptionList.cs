@@ -75,10 +75,10 @@ namespace Novell.Directory.Ldap.Rfc2251
             return;
         }
 
-        /*
-        * Override add() to only accept types of AttributeDescription
-        *
-        * @exception Asn1InvalidTypeException
-        */
+/*
+* Override add() to only accept types of AttributeDescription
+*
+* @exception Asn1InvalidTypeException
+*/
     }
 }

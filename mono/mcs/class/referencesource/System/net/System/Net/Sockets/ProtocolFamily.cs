@@ -8,7 +8,8 @@ namespace System.Net.Sockets
 {
     /// <devdoc>
     ///    <para>
-    ///       Specifies the type of protocol that an instance of the <see cref='System.Net.Sockets.Socket'/>
+    ///       Specifies the type of protocol that an instance of the <see
+    // cref='System.Net.Sockets.Socket'/>
     ///       class can use.
     ///    </para>
     /// </devdoc>

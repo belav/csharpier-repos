@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
         }
 
         /// <summary>
-        /// Finds all returns that are children of this node, and adds the appropriate spans to the spans list.
+        /// Finds all returns that are children of this node, and adds the appropriate spans to the spans
+        // list.
         /// </summary>
         private static void HighlightRelatedKeywords(SyntaxNode node, List<TextSpan> spans)
         {

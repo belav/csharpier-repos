@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * UrlPath class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* UrlPath class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Util
 {
@@ -20,9 +20,9 @@ namespace System.Web.Util
     using System.Text;
     using System.Web.Hosting;
 
-    /*
-     * Code to perform Url path combining
-     */
+/*
+* Code to perform Url path combining
+*/
     internal static class UrlPath
     {
         internal const char appRelativeCharacter = '~';
@@ -417,7 +417,8 @@ namespace System.Web.Util
 
             string relativePath;
 
-            // VSWhidbey 144946: If to and from points to identical path (excluding query and fragment), just use them instead
+            // VSWhidbey 144946: If to and from points to identical path (excluding query and fragment), just
+            // use them instead
             // of returning an empty string.
             if (fromUri.Equals(toUri))
             {
@@ -443,8 +444,10 @@ namespace System.Web.Util
             }
             else
             {
-                // To avoid deprecation warning.  It says we should use MakeRelativeUri instead (which returns a Uri),
-                // but we wouldn't gain anything from it.  The way we use MakeRelative is hacky anyway (fake protocol, ...),
+                // To avoid deprecation warning.  It says we should use MakeRelativeUri instead (which returns a
+                // Uri),
+                // but we wouldn't gain anything from it.  The way we use MakeRelative is hacky anyway (fake
+                // protocol, ...),
                 // and I don't want to take the chance of breaking something with this change.
 #pragma warning disable 0618
                 relativePath = fromUri.MakeRelative(toUri);
@@ -546,7 +549,8 @@ namespace System.Web.Util
 
         //
         // Remove the trailing forward slash ('/') except in the case of the root ("/").
-        // If the string is null or empty, return null, which represents a machine.config or root web.config.
+        // If the string is null or empty, return null, which represents a machine.config or root
+        // web.config.
         //
         internal static string RemoveSlashFromPathIfNeeded(string path)
         {
@@ -838,7 +842,8 @@ namespace System.Web.Util
             if (!Uri.TryCreate(absUriOrLocalPath, UriKind.Absolute, out absUri))
             {
                 // MSRC 11063
-                // A failure to construct absolute url (by System.Uri) doesn't implictly mean the url is relative (on the same server)
+                // A failure to construct absolute url (by System.Uri) doesn't implictly mean the url is relative
+                // (on the same server)
                 // Make sure the url path can't be recognized as absolute
                 return AppSettings.AllowRelaxedRelativeUrl
                     || (

@@ -14,7 +14,8 @@ public class RelationalCommandBuilder : IRelationalCommandBuilder
     ///         Constructs a new <see cref="RelationalCommand" />.
     ///     </para>
     ///     <para>
-    ///         This type is typically used by database providers (and other extensions). It is generally
+    ///         This type is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>

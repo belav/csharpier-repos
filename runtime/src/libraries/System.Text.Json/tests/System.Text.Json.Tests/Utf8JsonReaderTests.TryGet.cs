@@ -371,7 +371,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -413,7 +413,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -455,7 +455,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -497,7 +497,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -538,7 +538,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -580,7 +580,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -622,7 +622,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -663,7 +663,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -703,7 +703,7 @@ namespace System.Text.Json.Tests
                         }
                         catch (FormatException)
                         {
-                            /* Expected exception */
+/* Expected exception */
                         }
                     }
                     else
@@ -752,7 +752,7 @@ namespace System.Text.Json.Tests
                         }
                         catch (FormatException)
                         {
-                            /* Expected exception */
+/* Expected exception */
                         }
                     }
                     else
@@ -795,7 +795,7 @@ namespace System.Text.Json.Tests
                     }
                     catch (FormatException)
                     {
-                        /* Expected exception */
+/* Expected exception */
                     }
                     doubleValue = json.GetDouble();
                     Assert.Equal(expected, doubleValue);
@@ -1753,7 +1753,8 @@ namespace System.Text.Json.Tests
                 Assert.True(json.Read(), "json.Read()");
                 Assert.Equal(JsonTokenType.String, json.TokenType);
                 Assert.True(json.HasValueSequence, "json.HasValueSequence");
-                // If the string is empty, the ValueSequence is empty, because it contains all 0 bytes between the two characters
+                // If the string is empty, the ValueSequence is empty, because it contains all 0 bytes between the
+                // two characters
                 Assert.Equal(string.IsNullOrEmpty(testString), json.ValueSequence.IsEmpty);
                 Assert.False(json.TryGetGuid(out Guid actual), "json.TryGetGuid(out Guid actual)");
                 Assert.Equal(Guid.Empty, actual);

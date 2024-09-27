@@ -92,7 +92,8 @@ internal sealed class RequestTelemetryLogger : IDisposable, ILspService
         Result result
     )
     {
-        // Find the bucket corresponding to the queued duration and update the count of durations in that bucket.
+        // Find the bucket corresponding to the queued duration and update the count of durations in that
+        // bucket.
         // This is not broken down per method as time in queue is not specific to an LSP method.
         _queuedDurationLogAggregator.LogTime(QueuedDurationKey, queuedDuration);
 

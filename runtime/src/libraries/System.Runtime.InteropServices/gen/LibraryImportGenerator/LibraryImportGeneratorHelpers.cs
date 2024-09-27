@@ -61,8 +61,10 @@ namespace Microsoft.Interop
 
             if (tf.TargetFramework == TargetFramework.Net && tf.Version.Major >= 7)
             {
-                // If we have support for the attributed marshalling model, then we want to use that to provide the marshalling logic
-                // when possible. On other target frameworks, we'll fall back to using the Forwarder logic and re-emitting the MarshalAs attribute.
+                // If we have support for the attributed marshalling model, then we want to use that to provide the
+                // marshalling logic
+                // when possible. On other target frameworks, we'll fall back to using the Forwarder logic and
+                // re-emitting the MarshalAs attribute.
                 marshalAsAttributeParser = new MarshalAsWithCustomMarshallersParser(
                     env.Compilation,
                     diagnostics,
@@ -117,7 +119,8 @@ namespace Microsoft.Interop
             {
                 if (tf.TargetFramework != TargetFramework.Net || tf.Version.Major < 7)
                 {
-                    // If we're using our downstream support, fall back to the Forwarder marshaller when the TypePositionInfo is unhandled.
+                    // If we're using our downstream support, fall back to the Forwarder marshaller when the
+                    // TypePositionInfo is unhandled.
                     generatorFactory = new ForwarderMarshallingGeneratorFactory();
                 }
                 else

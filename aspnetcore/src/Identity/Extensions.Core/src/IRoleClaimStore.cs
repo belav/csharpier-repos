@@ -16,12 +16,15 @@ public interface IRoleClaimStore<TRole> : IRoleStore<TRole>
     where TRole : class
 {
     /// <summary>
-    ///  Gets a list of <see cref="Claim"/>s to be belonging to the specified <paramref name="role"/> as an asynchronous operation.
+    ///  Gets a list of <see cref="Claim"/>s to be belonging to the specified <paramref name="role"/> as
+    // an asynchronous operation.
     /// </summary>
     /// <param name="role">The role whose claims to retrieve.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of <see cref="Claim"/>s.
+    /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of
+    // <see cref="Claim"/>s.
     /// </returns>
     Task<IList<Claim>> GetClaimsAsync(
         TRole role,
@@ -33,7 +36,8 @@ public interface IRoleClaimStore<TRole> : IRoleStore<TRole>
     /// </summary>
     /// <param name="role">The role to add a claim to.</param>
     /// <param name="claim">The <see cref="Claim"/> to add.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
     Task AddClaimAsync(
         TRole role,
@@ -46,7 +50,8 @@ public interface IRoleClaimStore<TRole> : IRoleStore<TRole>
     /// </summary>
     /// <param name="role">The role to remove the claim from.</param>
     /// <param name="claim">The <see cref="Claim"/> to remove.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
     Task RemoveClaimAsync(
         TRole role,

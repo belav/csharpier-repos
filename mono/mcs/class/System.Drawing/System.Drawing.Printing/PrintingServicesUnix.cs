@@ -193,14 +193,14 @@ namespace System.Drawing.Printing
 
             return installed_printers.Contains(printer);
             /*
-                        if (!force && this.printer_name != null && String.Intern(this.printer_name).Equals(printer))
-                            return is_printer_valid;
+            if (!force && this.printer_name != null && String.Intern(this.printer_name).Equals(printer))
+            return is_printer_valid;
             
-                        IntPtr ptr = cupsGetPPD (printer);
-                        string ppd_filename = Marshal.PtrToStringAnsi (ptr);
-                        is_printer_valid = ppd_filename != null;
-                        this.printer_name = printer;
-                        return is_printer_valid;
+            IntPtr ptr = cupsGetPPD (printer);
+            string ppd_filename = Marshal.PtrToStringAnsi (ptr);
+            is_printer_valid = ppd_filename != null;
+            this.printer_name = printer;
+            return is_printer_valid;
             */
         }
 
@@ -518,7 +518,8 @@ namespace System.Drawing.Printing
         }
 
         /// <summary>
-        /// Loads a printer's paper sizes. Returns the default PaperSize, and fills a list of paper_names for use in dialogues
+        /// Loads a printer's paper sizes. Returns the default PaperSize, and fills a list of paper_names
+        // for use in dialogues
         /// </summary>
         /// <param name="ppd_handle">PPD printer file handle</param>
         /// <param name="settings">PrinterSettings object to fill</param>
@@ -561,7 +562,8 @@ namespace System.Drawing.Printing
         }
 
         /// <summary>
-        /// Loads a printer's paper sources (trays). Returns the default PaperSource, and fills a list of paper_sources for use in dialogues
+        /// Loads a printer's paper sources (trays). Returns the default PaperSource, and fills a list of
+        // paper_sources for use in dialogues
         /// </summary>
         /// <param name="settings">PrinterSettings object to fill</param>
         /// <param name="def_source">Default paper source, from the global options of the printer</param>
@@ -894,7 +896,8 @@ namespace System.Drawing.Printing
         static string tmpfile;
 
         /// <summary>
-        /// Gets a pointer to an options list parsed from the printer's current settings, to use when setting up the printing job
+        /// Gets a pointer to an options list parsed from the printer's current settings, to use when
+        // setting up the printing job
         /// </summary>
         /// <param name="printer_settings"></param>
         /// <param name="page_settings"></param>

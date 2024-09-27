@@ -8,7 +8,8 @@ using Microsoft.Extensions.Logging;
 // exclude private fields of base types.
 // If that logic ever changes, then just by having these two classes
 // will mean that compilation fails with:
-// error SYSLIB1020: Found multiple fields of type Microsoft.Extensions.Logging.ILogger in class DerivedClass_with_private_logger
+// error SYSLIB1020: Found multiple fields of type Microsoft.Extensions.Logging.ILogger in class
+// DerivedClass_with_private_logger
 public class BaseClassWithPrivateLogger
 {
     private ILogger _logger;

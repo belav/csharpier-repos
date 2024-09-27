@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -96,7 +97,8 @@ namespace System.Web.Mvc.Html
             string htmlFieldName
         )
         {
-            // We don't call ModelMetadata.GetDisplayName here because we want to fall back to the field name rather than the ModelType.
+            // We don't call ModelMetadata.GetDisplayName here because we want to fall back to the field name
+            // rather than the ModelType.
             // This is similar to how the LabelHelpers get the text of a label.
             string resolvedDisplayName =
                 metadata.DisplayName ?? metadata.PropertyName ?? htmlFieldName.Split('.').Last();

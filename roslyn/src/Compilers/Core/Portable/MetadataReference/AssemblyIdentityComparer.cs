@@ -38,13 +38,15 @@ namespace Microsoft.CodeAnalysis
             NotEquivalent = 0,
 
             /// <summary>
-            /// Strongly named reference matches strongly named definition (strong identity is identity with public key or token),
+            /// Strongly named reference matches strongly named definition (strong identity is identity with
+            // public key or token),
             /// Or weak reference matches weak definition.
             /// </summary>
             Equivalent = 1,
 
             /// <summary>
-            /// Reference matches definition except for version (reference version is lower or higher than definition version).
+            /// Reference matches definition except for version (reference version is lower or higher than
+            // definition version).
             /// </summary>
             EquivalentIgnoringVersion = 2,
         }
@@ -225,7 +227,8 @@ namespace Microsoft.CodeAnalysis
             bool hasPartialVersion =
                 (parts & AssemblyIdentityParts.Version) != AssemblyIdentityParts.Version;
 
-            // If any version parts were specified then compare the versions. The comparison fails if some version parts are missing.
+            // If any version parts were specified then compare the versions. The comparison fails if some
+            // version parts are missing.
             if (
                 definition.IsStrongName
                 && hasSomeVersionParts
@@ -237,7 +240,8 @@ namespace Microsoft.CodeAnalysis
                 // System.Numerics.Vectors, Version=4.1+ is not an FX assembly
                 //
                 // It seems like a bug in Fusion: it only determines whether the definition is an FX assembly
-                // and calculates the result based upon that, regardless of whether the reference is an FX assembly or not.
+                // and calculates the result based upon that, regardless of whether the reference is an FX assembly
+                // or not.
                 // We do replicate the behavior.
                 //
                 // As a result unification is asymmetric when comparing the above identities.

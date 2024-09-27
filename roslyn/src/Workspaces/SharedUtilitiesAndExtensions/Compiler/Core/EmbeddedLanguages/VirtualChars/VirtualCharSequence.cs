@@ -11,8 +11,10 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 {
     /// <summary>
-    /// Represents the individual characters that raw string token represents (i.e. with escapes collapsed).
-    /// The difference between this and the result from token.ValueText is that for each collapsed character
+    /// Represents the individual characters that raw string token represents (i.e. with escapes
+    // collapsed).
+    /// The difference between this and the result from token.ValueText is that for each collapsed
+    // character
     /// returned the original span of text in the original token can be found.  i.e. if you had the
     /// following in C#:
     /// <para/>
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         public VirtualChar this[int index] => _leafCharacters[_span.Start + index];
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="VirtualCharSequence"/> was declared but not initialized.
+        /// Gets a value indicating whether the <see cref="VirtualCharSequence"/> was declared but not
+        // initialized.
         /// </summary>
         public bool IsDefault => _leafCharacters == null;
         public bool IsEmpty => Length == 0;
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         public VirtualChar Last() => this[^1];
 
         /// <summary>
-        /// Finds the virtual char in this sequence that contains the position.  Will return null if this position is not
+        /// Finds the virtual char in this sequence that contains the position.  Will return null if this
+        // position is not
         /// in the span of this sequence.
         /// </summary>
         public VirtualChar? Find(int position) => _leafCharacters?.Find(position);

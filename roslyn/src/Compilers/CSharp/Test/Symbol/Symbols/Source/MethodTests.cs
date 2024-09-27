@@ -50,7 +50,8 @@ class A {
             var text = "struct A { A() {} }";
             var comp = CreateCompilation(text, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (1,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (1,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0.
+                // Please use language version 10.0 or greater.
                 // struct A { A() {} }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "A")
                     .WithArguments("parameterless struct constructors", "10.0")
@@ -106,7 +107,8 @@ class A {
             // A class with a defined instance constructor should not generate a default constructor.
             check(@"internal class A { A(int x) {} }", "A", 1, doNotCheckAccessibility);
 
-            // A class with only a static constructor defined should still generate a default instance constructor.
+            // A class with only a static constructor defined should still generate a default instance
+            // constructor.
             check(@"internal class A { static A(int x) {} }", "A", 1, doNotCheckAccessibility);
         }
 
@@ -805,7 +807,8 @@ namespace N1.N2  {
             );
             //Compilation.Create(outputName: "Test3", options: CompilationOptions.Default,
             //                        syntaxTrees: new SyntaxTree[] { SyntaxTree.ParseCompilationUnit(text2) },
-            //                        references: new MetadataReference[] { compRef1, compRef2, GetCorlibReference() });
+            //                        references: new MetadataReference[] { compRef1, compRef2,
+            // GetCorlibReference() });
 
             Assert.Equal(0, comp1.GetDiagnostics().Count());
             Assert.Equal(0, comp2.GetDiagnostics().Count());
@@ -1111,7 +1114,8 @@ namespace NS  {
             );
             //Compilation.Create(outputName: "Test3", options: CompilationOptions.Default,
             //                        syntaxTrees: new SyntaxTree[] { SyntaxTree.ParseCompilationUnit(text2) },
-            //                        references: new MetadataReference[] { compRef1, compRef2, GetCorlibReference() });
+            //                        references: new MetadataReference[] { compRef1, compRef2,
+            // GetCorlibReference() });
 
             Assert.Equal(0, comp1.GetDiagnostics().Count());
             Assert.Equal(0, comp2.GetDiagnostics().Count());
@@ -2221,7 +2225,8 @@ class B
                 // (8,30): error CS1019: Overloadable unary operator expected
                 //     public static B operator *(B x) { return null; }
                 Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "*"),
-                // (3,33): error CS0216: The operator 'A.operator true(A, A)' requires a matching operator 'false' to also be defined
+                // (3,33): error CS0216: The operator 'A.operator true(A, A)' requires a matching operator 'false'
+                // to also be defined
                 //     public static bool operator true(A x, A y) { return false; }
                 Diagnostic(ErrorCode.ERR_OperatorNeedsMatch, "true")
                     .WithArguments("A.operator true(A, A)", "false")
@@ -2302,7 +2307,9 @@ partial class C
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (15,24): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (15,24): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //     async partial void M() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M")
                 );
@@ -2474,7 +2481,9 @@ static class C
                     Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
                         .WithArguments("ref")
                         .WithLocation(4, 18),
-                    // (4,26): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (4,26): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //     static async ref int M() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 26),
                     // (4,26): error CS0161: 'C.M()': not all code paths return a value
@@ -2504,7 +2513,9 @@ static class C
                     Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
                         .WithArguments("ref")
                         .WithLocation(4, 18),
-                    // (4,35): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (4,35): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //     static async ref readonly int M() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 35),
                     // (4,35): error CS0161: 'C.M()': not all code paths return a value
@@ -2608,7 +2619,8 @@ class C
 }";
             var compilation = CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (5,6): error CS0578: The Conditional attribute is not valid on 'C.M()' because its return type is not void
+                    // (5,6): error CS0578: The Conditional attribute is not valid on 'C.M()' because its return type is
+                    // not void
                     //     [Conditional("Debug")]
                     Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""Debug"")")
                         .WithArguments("C.M()")
@@ -2715,7 +2727,8 @@ partial class C
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (4,18): error CS0759: No defining declaration found for implementing declaration of partial method 'C.M()'
+                // (4,18): error CS0759: No defining declaration found for implementing declaration of partial
+                // method 'C.M()'
                 //     partial void M() {}
                 Diagnostic(ErrorCode.ERR_PartialMethodMustHaveLatent, "M")
                     .WithArguments("C.M()")

@@ -42,7 +42,8 @@ namespace System.Text.Unicode.Tests
             int expectedSurrogatePairCount
         )
         {
-            // These test cases are for the "slow processing" code path at the end of GetIndexOfFirstInvalidUtf8Sequence,
+            // These test cases are for the "slow processing" code path at the end of
+            // GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less than 4 bytes.
 
             Assert.InRange(input.Length, 0, 6);
@@ -82,7 +83,8 @@ namespace System.Text.Unicode.Tests
             int expectedSurrogatePairCount
         )
         {
-            // These test cases are for the "slow processing" code path at the end of GetIndexOfFirstInvalidUtf8Sequence,
+            // These test cases are for the "slow processing" code path at the end of
+            // GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less than 4 bytes.
 
             Assert.InRange(input.Length, 0, 6);
@@ -129,7 +131,8 @@ namespace System.Text.Unicode.Tests
             int expectedSurrogatePairCount
         )
         {
-            // These test cases are for the "fast processing" code which is the main loop of GetIndexOfFirstInvalidUtf8Sequence,
+            // These test cases are for the "fast processing" code which is the main loop of
+            // GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less >= 4 bytes.
 
             Assert.True(input.Length >= 8);
@@ -181,7 +184,8 @@ namespace System.Text.Unicode.Tests
             int expectedSurrogatePairCount
         )
         {
-            // These test cases are for the "fast processing" code which is the main loop of GetIndexOfFirstInvalidUtf8Sequence,
+            // These test cases are for the "fast processing" code which is the main loop of
+            // GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less >= 4 bytes.
 
             Assert.True(input.Length >= 8);
@@ -431,7 +435,8 @@ namespace System.Text.Unicode.Tests
                 expectedSurrogatePairCount
             );
 
-            // Then run the test with a bunch of ASCII data at the beginning (to exercise the vectorized code paths)
+            // Then run the test with a bunch of ASCII data at the beginning (to exercise the vectorized code
+            // paths)
             inputBytes = Enumerable.Repeat((byte)'x', 128).Concat(inputBytes).ToArray();
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
                 inputBytes,
@@ -495,8 +500,10 @@ namespace System.Text.Unicode.Tests
                 actualRetVal = (ptrDiff == input.Length) ? -1 : (int)ptrDiff;
 
                 // The last two 'out' parameters are:
-                // a) The number to be added to the "bytes processed" return value to come up with the total UTF-16 code unit count, and
-                // b) The number to be added to the "total UTF-16 code unit count" value to come up with the total scalar count.
+                // a) The number to be added to the "bytes processed" return value to come up with the total UTF-16
+                // code unit count, and
+                // b) The number to be added to the "total UTF-16 code unit count" value to come up with the total
+                // scalar count.
 
                 int totalUtf16CodeUnitCount = (int)ptrDiff + utf16CodeUnitCountAdjustment;
                 actualRuneCount = totalUtf16CodeUnitCount + scalarCountAdjustment;

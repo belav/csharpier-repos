@@ -63,7 +63,8 @@ public partial class ViewResultExecutor : ViewExecutor, IActionResultExecutor<Vi
     /// <summary>
     /// Attempts to find the <see cref="IView"/> associated with <paramref name="viewResult"/>.
     /// </summary>
-    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
+    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current
+    // request.</param>
     /// <param name="viewResult">The <see cref="ViewResult"/>.</param>
     /// <returns>A <see cref="ViewEngineResult"/>.</returns>
     public virtual ViewEngineResult FindView(ActionContext actionContext, ViewResult viewResult)

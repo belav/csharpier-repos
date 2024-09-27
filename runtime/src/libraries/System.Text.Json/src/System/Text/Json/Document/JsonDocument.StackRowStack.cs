@@ -6,7 +6,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 // We need to target netstandard2.0, so keep using ref for MemoryMarshal.Write
-// CS9191: The 'ref' modifier for argument 2 corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
+// CS9191: The 'ref' modifier for argument 2 corresponding to 'in' parameter is equivalent to 'in'.
+// Consider using 'in' instead.
 #pragma warning disable CS9191
 
 namespace System.Text.Json

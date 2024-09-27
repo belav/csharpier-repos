@@ -159,8 +159,10 @@ internal abstract partial class AbstractRecommendationService<
                 // parameter.Ordinal is the ordinal within (a,b,c) => b.
                 // For candidate symbols of (a,b,c) => b., get types of all possible b.
 
-                // First try to find delegates whose parameter count matches what the user provided.  However, if that
-                // finds nothing, fall back to accepting any potential delegates.  We don't want the punish the user if
+                // First try to find delegates whose parameter count matches what the user provided.  However, if
+                // that
+                // finds nothing, fall back to accepting any potential delegates.  We don't want the punish the user
+                // if
                 // they provide the wrong number while in the middle of working with their code.
                 var lambdaParameterCount = this.GetLambdaParameterCount(lambdaSyntax);
                 parameterTypeSymbols = GetTypeSymbols(
@@ -179,7 +181,8 @@ internal abstract partial class AbstractRecommendationService<
                         lambdaParameterCount: -1
                     );
 
-                // The parameterTypeSymbols may include type parameters, and we want their substituted types if available.
+                // The parameterTypeSymbols may include type parameters, and we want their substituted types if
+                // available.
                 parameterTypeSymbols = SubstituteTypeParameters(
                     parameterTypeSymbols,
                     invocationExpression
@@ -188,7 +191,8 @@ internal abstract partial class AbstractRecommendationService<
 
             // For each type of b., return all suitable members. Also, ensure we consider the actual type of the
             // parameter the compiler inferred as it may have made a completely suitable inference for it.
-            // (Only add the actual type if it's not already in the set, otherwise the type and all of its members will be considered twice.)
+            // (Only add the actual type if it's not already in the set, otherwise the type and all of its
+            // members will be considered twice.)
             if (!parameterTypeSymbols.Contains(parameter.Type, SymbolEqualityComparer.Default))
                 parameterTypeSymbols = parameterTypeSymbols.Concat(parameter.Type);
 
@@ -257,12 +261,16 @@ internal abstract partial class AbstractRecommendationService<
         }
 
         /// <summary>
-        /// Tries to get a type of its' <paramref name="ordinalInLambda"/> lambda parameter of <paramref name="ordinalInInvocation"/> argument for each candidate symbol.
+        /// Tries to get a type of its' <paramref name="ordinalInLambda"/> lambda parameter of <paramref
+        // name="ordinalInInvocation"/> argument for each candidate symbol.
         /// </summary>
-        /// <param name="candidateSymbols">symbols corresponding to <see cref="Expression{Func}"/> or <see cref="Func{some_args, TResult}"/>
-        /// Here, some_args can be multi-variables lambdas as well, e.g. f((a,b) => a+b, (a,b,c)=>a*b*c.Length)
+        /// <param name="candidateSymbols">symbols corresponding to <see cref="Expression{Func}"/> or <see
+        // cref="Func{some_args, TResult}"/>
+        /// Here, some_args can be multi-variables lambdas as well, e.g. f((a,b) => a+b,
+        // (a,b,c)=>a*b*c.Length)
         /// </param>
-        /// <param name="ordinalInInvocation">ordinal of the arguments of function: (a,b) or (a,b,c) in the example above</param>
+        /// <param name="ordinalInInvocation">ordinal of the arguments of function: (a,b) or (a,b,c) in the
+        // example above</param>
         /// <param name="ordinalInLambda">ordinal of the lambda parameters, e.g. a, b or c.</param>
         /// <returns></returns>
         private ImmutableArray<ITypeSymbol> GetTypeSymbols(
@@ -293,8 +301,10 @@ internal abstract partial class AbstractRecommendationService<
                     )
                         continue;
 
-                    // If type is <see cref="Expression{TDelegate}"/>, ignore <see cref="Expression"/> and use TDelegate.
-                    // Ignore this check if expressionSymbol is null, e.g. semantic model is broken or incomplete or if the framework does not contain <see cref="Expression"/>.
+                    // If type is <see cref="Expression{TDelegate}"/>, ignore <see cref="Expression"/> and use
+                    // TDelegate.
+                    // Ignore this check if expressionSymbol is null, e.g. semantic model is broken or incomplete or if
+                    // the framework does not contain <see cref="Expression"/>.
                     if (
                         expressionSymbol != null
                         && type is INamedTypeSymbol expressionSymbolNamedTypeCandidate
@@ -500,7 +510,8 @@ internal abstract partial class AbstractRecommendationService<
             bool isForDereference
         )
         {
-            // For a normal parameter, we have a specialized codepath we use to ensure we properly get lambda parameter
+            // For a normal parameter, we have a specialized codepath we use to ensure we properly get lambda
+            // parameter
             // information that the compiler may fail to give.
             if (container is IParameterSymbol parameter)
                 return GetMemberSymbolsForParameter(
@@ -550,7 +561,8 @@ internal abstract partial class AbstractRecommendationService<
             if (container is not ITypeSymbol containerType)
                 return containerMembers;
 
-            // Compiler will return reduced extension methods in the case it can't determine if constraints match.
+            // Compiler will return reduced extension methods in the case it can't determine if constraints
+            // match.
             // Attempt to filter out cases we have strong confidence will never succeed.
             using var _ = ArrayBuilder<ISymbol>.GetInstance(
                 containerMembers.Length,
@@ -594,11 +606,13 @@ internal abstract partial class AbstractRecommendationService<
                 ImmutableArray<ITypeSymbol> constraintTypes
             )
             {
-                // If there are no constraint types, then this type parameter was unconstrained, so could match anything.
+                // If there are no constraint types, then this type parameter was unconstrained, so could match
+                // anything.
                 if (constraintTypes.IsEmpty)
                     return true;
 
-                // Now check that the type we're calling on matched at least one of the constraints that were specified.
+                // Now check that the type we're calling on matched at least one of the constraints that were
+                // specified.
                 foreach (var constraintType in constraintTypes)
                 {
                     if (MatchesConstraint(originalContainerType, constraintType.OriginalDefinition))
@@ -613,7 +627,8 @@ internal abstract partial class AbstractRecommendationService<
                 ITypeSymbol originalConstraintType
             )
             {
-                // If the type we're dotting off of *is* the constraint type, then this is def a match and we can proceed.
+                // If the type we're dotting off of *is* the constraint type, then this is def a match and we can
+                // proceed.
                 if (
                     SymbolEqualityComparer.Default.Equals(
                         originalContainerType,
@@ -671,13 +686,15 @@ internal abstract partial class AbstractRecommendationService<
                     return true;
                 }
 
-                // For anything else, we don't consider this a match.  This can be adjusted in the future if need be.
+                // For anything else, we don't consider this a match.  This can be adjusted in the future if need
+                // be.
                 return false;
             }
         }
 
         /// <summary>
-        /// If container is a tuple type, any of its tuple element which has a friendly name will cause the suppression
+        /// If container is a tuple type, any of its tuple element which has a friendly name will cause the
+        // suppression
         /// of the corresponding default name (ItemN). In that case, Rest is also removed.
         /// </summary>
         protected static ImmutableArray<ISymbol> SuppressDefaultTupleElements(

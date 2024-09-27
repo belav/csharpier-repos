@@ -59,8 +59,10 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// If you wish to handle the exception using your own logic, set this value to true for it to be ignored by the control.
-        /// If an exception was thrown and this value remains false, the exception will be re-thrown by the control.
+        /// If you wish to handle the exception using your own logic, set this value to true for it to be
+        // ignored by the control.
+        /// If an exception was thrown and this value remains false, the exception will be re-thrown by the
+        // control.
         /// </devdoc>
         public bool ExceptionHandled
         {

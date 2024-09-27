@@ -1,7 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// This file makes NetStandard Reflection's "subclassing" surface area look as much like NetCore as possible so the rest of the code can be written without #if's.
+// This file makes NetStandard Reflection's "subclassing" surface area look as much like NetCore as
+// possible so the rest of the code can be written without #if's.
 
 namespace System.Reflection.TypeLoading
 {

@@ -555,7 +555,8 @@ namespace System.Web.UI.DataVisualization.Charting
         private static int _isImageRendersBorder;
 
         /// <summary>
-        /// Checks and returns true if the image renders border. Before Fx 4.0 image control renders border if is not declared.
+        /// Checks and returns true if the image renders border. Before Fx 4.0 image control renders border
+        // if is not declared.
         /// After Fx 4.0 this is not by default.
         /// </summary>
         /// <returns>True if image control renders border style</returns>
@@ -604,9 +605,11 @@ namespace System.Web.UI.DataVisualization.Charting
             internal bool HasImageMap { get; set; }
 
             /// <summary>
-            /// Adds the attributes of an <see cref="T:System.Web.UI.WebControls.Image"/> to the output stream for rendering on the client.
+            /// Adds the attributes of an <see cref="T:System.Web.UI.WebControls.Image"/> to the output stream
+            // for rendering on the client.
             /// </summary>
-            /// <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter"/> that contains the output stream to render on the client browser.</param>
+            /// <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter"/> that contains the output
+            // stream to render on the client browser.</param>
             protected override void AddAttributesToRender(HtmlTextWriter writer)
             {
                 base.AddAttributesToRender(writer);
@@ -806,7 +809,8 @@ namespace System.Web.UI.DataVisualization.Charting
             int indexSEQ = imageURL.IndexOf("#SEQ", StringComparison.Ordinal);
             indexSEQ += 4;
 
-            // The "#SEQ" formatter must be followed by (MMM,TTT), where MMM - max sequence number and TTT - time to live
+            // The "#SEQ" formatter must be followed by (MMM,TTT), where MMM - max sequence number and TTT -
+            // time to live
             if (imageURL[indexSEQ] != '(')
             {
                 throw (new ArgumentException(SR.ExceptionImageUrlInvalidFormat, "imageURL"));
@@ -1102,11 +1106,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="chartElement">The chart element.</param>
         /// <param name="elementType">Type of the element.</param>
         /// <returns> A <see cref="ChartElementOutline"/> object which contains
-        /// 1) An array of points in absolute coordinates which can be used as outline markers arround this chart element.
+        /// 1) An array of points in absolute coordinates which can be used as outline markers arround this
+        // chart element.
         /// 2) A GraphicsPath for drawing aouline around this chart emenent.
         /// </returns>
         /// <remarks>
-        /// If the <paramref name="chartElement"/> is not part of the chart or <paramref name="elementType"/> cannot be combined
+        /// If the <paramref name="chartElement"/> is not part of the chart or <paramref
+        // name="elementType"/> cannot be combined
         /// with <paramref name="chartElement"/> then the result will contain empty array of marker points.
         /// The marker points are sorted clockwise.
         /// </remarks>
@@ -1419,7 +1425,8 @@ namespace System.Web.UI.DataVisualization.Charting
         private static readonly object _customizeMapAreasEvent = new object();
 
         /// <summary>
-        /// Fires just before the chart image map is rendered. Use this event to customize the map areas items.
+        /// Fires just before the chart image map is rendered. Use this event to customize the map areas
+        // items.
         /// </summary>
         [SRDescription("DescriptionAttributeChartEvent_CustomizeMapAreas")]
         public event EventHandler<CustomizeMapAreasEventArgs> CustomizeMapAreas
@@ -1574,7 +1581,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Fires when chart image map data is prepared to be rendered.
         /// </summary>
-        /// <param name="e">The <see cref="System.Web.UI.DataVisualization.Charting.CustomizeMapAreasEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see
+        // cref="System.Web.UI.DataVisualization.Charting.CustomizeMapAreasEventArgs"/> instance containing
+        // the
+        // event data.</param>
         [SRDescription("DescriptionAttributeChart_OnCustomizeMapAreas")]
         [SuppressMessage(
             "Microsoft.Security",
@@ -1659,7 +1669,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
 
         /// <summary>
-        /// Restores view-state information from a previous page request that was saved by the SaveViewState method.
+        /// Restores view-state information from a previous page request that was saved by the SaveViewState
+        // method.
         /// </summary>
         /// <param name="savedState">An Object that represents the control state to be restored.</param>
         protected override void LoadViewState(object savedState)
@@ -1707,7 +1718,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Saves any server control view-state changes that have occurred since the time the page was posted back to the server.
+        /// Saves any server control view-state changes that have occurred since the time the page was
+        // posted back to the server.
         /// </summary>
         /// <returns>Returns the server control's current view state. </returns>
         protected override object SaveViewState()
@@ -2138,32 +2150,32 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /*
-         * Disabled until we get responce from Microsoft
-         *  --- Alex
-         *
-                /// <summary>
-                /// Gif image transparent color
-                /// </summary>
-                [
-                SRCategory("CategoryAttributeImage"),
-                Bindable(true),
-                DefaultValue(typeof(Color), ""),
-                Description("Gif image transparent color."),
-                PersistenceMode(PersistenceMode.Attribute),
-                TypeConverter(typeof(ColorConverter)),
-                Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-                ]
-                public Color TransparentColor
-                {
-                    get
-                    {
-                        return chartPicture.TransparentColor;
-                    }
-                    set
-                    {
-                        chartPicture.TransparentColor = value;
-                    }
-                }
+        * Disabled until we get responce from Microsoft
+        *  --- Alex
+        *
+        /// <summary>
+        /// Gif image transparent color
+        /// </summary>
+        [
+        SRCategory("CategoryAttributeImage"),
+        Bindable(true),
+        DefaultValue(typeof(Color), ""),
+        Description("Gif image transparent color."),
+        PersistenceMode(PersistenceMode.Attribute),
+        TypeConverter(typeof(ColorConverter)),
+        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+        ]
+        public Color TransparentColor
+        {
+        get
+        {
+        return chartPicture.TransparentColor;
+        }
+        set
+        {
+        chartPicture.TransparentColor = value;
+        }
+        }
         */
         #endregion
 
@@ -2643,7 +2655,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// When overridden in a derived class, gets or sets the alternate text displayed in the Chart control when the chart image is unavailable.
+        /// When overridden in a derived class, gets or sets the alternate text displayed in the Chart
+        // control when the chart image is unavailable.
         /// </summary>
         [
             Bindable(true),
@@ -2655,7 +2668,8 @@ namespace System.Web.UI.DataVisualization.Charting
         public string AlternateText { get; set; }
 
         /// <summary>
-        /// When overridden in a derived class, gets or sets the location to a detailed description for the chart.
+        /// When overridden in a derived class, gets or sets the location to a detailed description for the
+        // chart.
         /// </summary>
         [
             Bindable(true),
@@ -2842,7 +2856,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Aligns data points using their axis labels.
         /// </summary>
-        /// <param name="series">Comma separated list of series that should be aligned by axis label.</param>
+        /// <param name="series">Comma separated list of series that should be aligned by axis
+        // label.</param>
         public void AlignDataPointsByAxisLabel(string series)
         {
             // Create list of series
@@ -2864,7 +2879,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Aligns data points using their axis labels.
         /// </summary>
-        /// <param name="series">Comma separated list of series that should be aligned by axis label.</param>
+        /// <param name="series">Comma separated list of series that should be aligned by axis
+        // label.</param>
         /// <param name="sortingOrder">Points sorting order by axis labels.</param>
         public void AlignDataPointsByAxisLabel(string series, PointSortOrder sortingOrder)
         {
@@ -2925,7 +2941,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="seriesGroupByField">Name of the field used to group data into series.</param>
         /// <param name="xField">Name of the field for X values.</param>
         /// <param name="yFields">Comma separated name(s) of the field(s) for Y value(s).</param>
-        /// <param name="otherFields">Other point properties binding rule in format: PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. For example: "Tooltip=Price{C1},Url=WebSiteName".</param>
+        /// <param name="otherFields">Other point properties binding rule in format:
+        // PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. For example:
+        // "Tooltip=Price{C1},Url=WebSiteName".</param>
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -2959,8 +2977,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="seriesGroupByField">Name of the field used to group data into series.</param>
         /// <param name="xField">Name of the field for X values.</param>
         /// <param name="yFields">Comma separated name(s) of the field(s) for Y value(s).</param>
-        /// <param name="otherFields">Other point properties binding rule in format: PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. For example: "Tooltip=Price{C1},Url=WebSiteName".</param>
-        /// <param name="sortingOrder">Series will be sorted by group field values in specified order.</param>
+        /// <param name="otherFields">Other point properties binding rule in format:
+        // PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. For example:
+        // "Tooltip=Price{C1},Url=WebSiteName".</param>
+        /// <param name="sortingOrder">Series will be sorted by group field values in specified
+        // order.</param>
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -3092,7 +3113,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -3267,7 +3289,8 @@ namespace System.Web.UI.DataVisualization.Charting
     }
 
     /// <summary>
-    /// Specifies a value indicating whether the text appears from right to left, such as when using Hebrew or Arabic fonts
+    /// Specifies a value indicating whether the text appears from right to left, such as when using
+    // Hebrew or Arabic fonts
     /// </summary>
     public enum RightToLeft
     {

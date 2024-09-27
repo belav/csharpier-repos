@@ -28,7 +28,8 @@ namespace System.Buffers.Text.Tests
                         if (formatSymbol == 'R' || formatSymbol == 'l')
                         {
                             DateTime expectedDateTime = testData.ExpectedValue.UtcDateTime;
-                            // TryParse returns Unspecified to match DateTime.ParseExact() though it seems Utc would be more apropos.
+                            // TryParse returns Unspecified to match DateTime.ParseExact() though it seems Utc would be more
+                            // apropos.
                             expectedDateTime = new DateTime(
                                 expectedDateTime.Ticks,
                                 DateTimeKind.Unspecified

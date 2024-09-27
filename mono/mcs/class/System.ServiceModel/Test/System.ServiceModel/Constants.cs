@@ -137,7 +137,8 @@ namespace System.ServiceModel
         // Peer resolvers
         public const string NetPeer = "http://schemas.microsoft.com/net/2006/05/peer";
 
-        // See [MC-NBFS] in Microsoft OSP. The strings are copied from the PDF, so the actual values might be wrong.
+        // See [MC-NBFS] in Microsoft OSP. The strings are copied from the PDF, so the actual values might
+        // be wrong.
         static readonly string[] dict_strings =
         {
             "mustUnderstand",

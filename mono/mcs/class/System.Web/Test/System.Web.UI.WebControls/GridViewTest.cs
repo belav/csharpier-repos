@@ -496,7 +496,8 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(TableCaptionAlign.NotSet, g.CaptionAlign, "CaptionAlign");
             Assert.AreEqual(-1, g.CellPadding, "CellPadding");
             Assert.AreEqual(0, g.CellSpacing, "CellSpacing");
-            // ToDo: The Columns property default value is tested by the DataControlFieldCollection and DataControlField tests
+            // ToDo: The Columns property default value is tested by the DataControlFieldCollection and
+            // DataControlField tests
             Assert.AreEqual(0, g.DataKeyNames.Length, "DataKeyNames");
             // ToDo: The DataKeys property default value is tested by the DataKeyArray and DataKey tests
             Assert.AreEqual(-1, g.EditIndex, "EditIndex");
@@ -568,7 +569,8 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(0, g.CellPadding, "CellPadding");
             g.CellSpacing = 1;
             Assert.AreEqual(1, g.CellSpacing, "CellSpacing");
-            // ToDo: The Columns property default value is tested by the DataControlFieldCollection and DataControlField tests
+            // ToDo: The Columns property default value is tested by the DataControlFieldCollection and
+            // DataControlField tests
             string[] str = new String[1];
             str[0] = "test";
             g.DataKeyNames = str;
@@ -578,7 +580,8 @@ namespace MonoTests.System.Web.UI.WebControls
             g.EditIndex = 0;
             Assert.AreEqual(0, g.EditIndex, "EditIndex");
             // The EditRowStyle property default value is tested by the TableItemStyle test (already exists)
-            // The EmptyDataRowStyle property default value is tested by the TableItemStyle test (already exists)
+            // The EmptyDataRowStyle property default value is tested by the TableItemStyle test (already
+            // exists)
 
             MyWebControl.Image myImage = new MyWebControl.Image();
             myImage.ImageUrl = "myimage.jpg";
@@ -1114,7 +1117,8 @@ namespace MonoTests.System.Web.UI.WebControls
             g.Page = new Page();
             g.DataSource = new MyEnumSource(20);
             //g.DataBind ();
-            //Assert.AreEqual (20, g.DoCreateChildControls (new MyEnumSource (20), true), "CreateChildControls#1");
+            //Assert.AreEqual (20, g.DoCreateChildControls (new MyEnumSource (20), true),
+            // "CreateChildControls#1");
             Assert.AreEqual(
                 0,
                 g.DoCreateChildControls(new MyEnumSource(0), true),

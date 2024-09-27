@@ -733,8 +733,10 @@ namespace System.Collections.Immutable.Tests
         }
 
         /// <summary>
-        /// Executes a test against both <see cref="ImmutableInterlocked.Update{T}(ref ImmutableArray{T}, Func{ImmutableArray{T}, ImmutableArray{T}})"/>
-        /// and <see cref="ImmutableInterlocked.Update{ImmutableArray{T}, TArg}(ref ImmutableArray{T}, Func{ImmutableArray{T}, TArg, ImmutableArray{T}}, TArg)"/>.
+        /// Executes a test against both <see cref="ImmutableInterlocked.Update{T}(ref ImmutableArray{T},
+        // Func{ImmutableArray{T}, ImmutableArray{T}})"/>
+        /// and <see cref="ImmutableInterlocked.Update{ImmutableArray{T}, TArg}(ref ImmutableArray{T},
+        // Func{ImmutableArray{T}, TArg, ImmutableArray{T}}, TArg)"/>.
         /// </summary>
         /// <typeparam name="T">The type of value under test.</typeparam>
         /// <param name="test">
@@ -749,7 +751,8 @@ namespace System.Collections.Immutable.Tests
         }
 
         /// <summary>
-        /// A wrapper that makes one overload look like another so the same test delegate can execute against both.
+        /// A wrapper that makes one overload look like another so the same test delegate can execute
+        // against both.
         /// </summary>
         /// <typeparam name="T">The type of value being changed.</typeparam>
         /// <param name="location">The variable or field to be changed.</param>
@@ -770,7 +773,8 @@ namespace System.Collections.Immutable.Tests
         }
 
         /// <summary>
-        /// A wrapper that makes one overload look like another so the same test delegate can execute against both.
+        /// A wrapper that makes one overload look like another so the same test delegate can execute
+        // against both.
         /// </summary>
         /// <typeparam name="T">The type of value being changed.</typeparam>
         /// <param name="location">The variable or field to be changed.</param>

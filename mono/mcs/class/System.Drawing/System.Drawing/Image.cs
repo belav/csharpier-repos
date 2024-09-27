@@ -57,7 +57,9 @@ namespace System.Drawing
 
         internal IntPtr nativeObject = IntPtr.Zero;
 
-        // when using MS GDI+ and IStream we must ensure the stream stays alive for all the life of the Image
+        // when using MS GDI+ and IStream we must ensure the stream stays alive for all the life of the
+        // Image
+        //
         // http://groups.google.com/group/microsoft.public.win32.programmer.gdi/browse_thread/thread/4967097db1469a27/4d36385b83532126?lnk=st&q=IStream+gdi&rnum=3&hl=en#4d36385b83532126
         internal Stream stream;
 
@@ -397,7 +399,7 @@ namespace System.Drawing
             status = GDIPlus.GdipGetPropertyItemSize(nativeObject, propid, out propSize);
             GDIPlus.CheckStatus(status);
 
-            /* Get PropertyItem */
+/* Get PropertyItem */
             property = Marshal.AllocHGlobal(propSize);
             try
             {
@@ -471,7 +473,7 @@ namespace System.Drawing
             if (format.Guid.Equals(ImageFormat.MemoryBmp.Guid))
                 format = ImageFormat.Png;
 
-            /* Look for the right encoder for our format*/
+/* Look for the right encoder for our format*/
             for (int i = 0; i < encoders.Length; i++)
             {
                 if (encoders[i].FormatID.Equals(format.Guid))
@@ -825,7 +827,7 @@ namespace System.Drawing
                 if (propNums == 0)
                     return items;
 
-                /* Get PropertyItem list*/
+/* Get PropertyItem list*/
                 properties = Marshal.AllocHGlobal(propsSize * propNums);
                 try
                 {
@@ -974,7 +976,8 @@ namespace System.Drawing
 
         // On win32, when cloning images that were originally created from a stream, we need to
         // clone both the image and the stream to make sure the gc doesn't kill it
-        // (when using MS GDI+ and IStream we must ensure the stream stays alive for all the life of the Image)
+        // (when using MS GDI+ and IStream we must ensure the stream stays alive for all the life of the
+        // Image)
         object CloneFromStream()
         {
             byte[] bytes = new byte[stream.Length];

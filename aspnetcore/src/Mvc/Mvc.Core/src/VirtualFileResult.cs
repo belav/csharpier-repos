@@ -10,7 +10,8 @@ using Microsoft.Net.Http.Headers;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// A <see cref="FileResult" /> that on execution writes the file specified using a virtual path to the response
+/// A <see cref="FileResult" /> that on execution writes the file specified using a virtual path to
+// the response
 /// using mechanisms provided by the host.
 /// </summary>
 public class VirtualFileResult : FileResult
@@ -18,7 +19,8 @@ public class VirtualFileResult : FileResult
     private string _fileName;
 
     /// <summary>
-    /// Creates a new <see cref="VirtualFileResult"/> instance with the provided <paramref name="fileName"/>
+    /// Creates a new <see cref="VirtualFileResult"/> instance with the provided <paramref
+    // name="fileName"/>
     /// and the provided <paramref name="contentType"/>.
     /// </summary>
     /// <param name="fileName">The path to the file. The path must be relative/virtual.</param>

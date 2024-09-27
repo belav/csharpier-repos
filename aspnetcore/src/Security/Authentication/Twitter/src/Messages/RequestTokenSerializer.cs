@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
 /// <summary>
-/// Serializes and deserializes Twitter request and access tokens so that they can be used by other application components.
+/// Serializes and deserializes Twitter request and access tokens so that they can be used by other
+// application components.
 /// </summary>
 public class RequestTokenSerializer : IDataSerializer<RequestToken>
 {
@@ -62,7 +63,8 @@ public class RequestTokenSerializer : IDataSerializer<RequestToken>
     }
 
     /// <summary>
-    /// Reads a Twitter request token from a series of bytes. Used by the <see cref="Deserialize"/> method.
+    /// Reads a Twitter request token from a series of bytes. Used by the <see cref="Deserialize"/>
+    // method.
     /// </summary>
     /// <param name="reader">The reader to use in reading the token bytes</param>
     /// <returns>The token</returns>

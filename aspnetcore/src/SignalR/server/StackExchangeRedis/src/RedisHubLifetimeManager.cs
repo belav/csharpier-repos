@@ -45,8 +45,10 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
     /// Constructs the <see cref="RedisHubLifetimeManager{THub}"/> with types from Dependency Injection.
     /// </summary>
     /// <param name="logger">The logger to write information about what the class is doing.</param>
-    /// <param name="options">The <see cref="RedisOptions"/> that influence behavior of the Redis connection.</param>
-    /// <param name="hubProtocolResolver">The <see cref="IHubProtocolResolver"/> to get an <see cref="IHubProtocol"/> instance when writing to connections.</param>
+    /// <param name="options">The <see cref="RedisOptions"/> that influence behavior of the Redis
+    // connection.</param>
+    /// <param name="hubProtocolResolver">The <see cref="IHubProtocolResolver"/> to get an <see
+    // cref="IHubProtocol"/> instance when writing to connections.</param>
     public RedisHubLifetimeManager(
         ILogger<RedisHubLifetimeManager<THub>> logger,
         IOptions<RedisOptions> options,
@@ -58,8 +60,10 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
     /// Constructs the <see cref="RedisHubLifetimeManager{THub}"/> with types from Dependency Injection.
     /// </summary>
     /// <param name="logger">The logger to write information about what the class is doing.</param>
-    /// <param name="options">The <see cref="RedisOptions"/> that influence behavior of the Redis connection.</param>
-    /// <param name="hubProtocolResolver">The <see cref="IHubProtocolResolver"/> to get an <see cref="IHubProtocol"/> instance when writing to connections.</param>
+    /// <param name="options">The <see cref="RedisOptions"/> that influence behavior of the Redis
+    // connection.</param>
+    /// <param name="hubProtocolResolver">The <see cref="IHubProtocolResolver"/> to get an <see
+    // cref="IHubProtocol"/> instance when writing to connections.</param>
     /// <param name="globalHubOptions">The global <see cref="HubOptions"/>.</param>
     /// <param name="hubOptions">The <typeparamref name="THub"/> specific options.</param>
     public RedisHubLifetimeManager(
@@ -124,7 +128,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
     {
         _connections.Remove(connection);
 
-        // If the bus is null then the Redis connection failed to be established and none of the other connection setup ran
+        // If the bus is null then the Redis connection failed to be established and none of the other
+        // connection setup ran
         if (_bus is null)
         {
             return Task.CompletedTask;
@@ -196,7 +201,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
     {
         ArgumentNullException.ThrowIfNull(connectionId);
 
-        // If the connection is local we can skip sending the message through the bus since we require sticky connections.
+        // If the connection is local we can skip sending the message through the bus since we require
+        // sticky connections.
         // This also saves serializing and deserializing the message!
         var connection = _connections[connectionId];
         if (connection != null)
@@ -478,7 +484,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
 
         var connection = _connections[connectionId];
 
-        // ID needs to be unique for each invocation and across servers, we generate a GUID every time, that should provide enough uniqueness guarantees.
+        // ID needs to be unique for each invocation and across servers, we generate a GUID every time, that
+        // should provide enough uniqueness guarantees.
         var invocationId = GenerateInvocationId();
 
         using var _ = CancellationTokenUtils.CreateLinkedToken(
@@ -526,7 +533,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
         }
         catch
         {
-            // ConnectionAborted will trigger a generic "Canceled" exception from the task, let's convert it into a more specific message.
+            // ConnectionAborted will trigger a generic "Canceled" exception from the task, let's convert it
+            // into a more specific message.
             if (connection?.ConnectionAborted.IsCancellationRequested == true)
             {
                 throw new IOException($"Connection '{connectionId}' disconnected.");
@@ -643,7 +651,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
         {
             var invocation = RedisProtocol.ReadInvocation(channelMessage.Message);
 
-            // This is a Client result we need to setup state for the completion and forward the message to the client
+            // This is a Client result we need to setup state for the completion and forward the message to the
+            // client
             if (!string.IsNullOrEmpty(invocation.InvocationId))
             {
                 CancellationTokenRegistration? tokenRegistration = null;
@@ -805,7 +814,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                     }
                 }
 
-                // Should only happen if you have different versions of servers and don't have the same protocols registered on both
+                // Should only happen if you have different versions of servers and don't have the same protocols
+                // registered on both
                 if (protocol is null)
                 {
                     RedisLog.MismatchedServers(_logger, completion.ProtocolName);
@@ -826,7 +836,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                 }
                 catch
                 {
-                    // Client returned wrong type? Or just an error from the HubProtocol, let's try with RawResult as the type and see if that works
+                    // Client returned wrong type? Or just an error from the HubProtocol, let's try with RawResult as
+                    // the type and see if that works
                     retryForError = true;
                 }
 
@@ -835,7 +846,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                     try
                     {
                         ros = completion.CompletionMessage;
-                        // if this works then we know there was an error with the type the client returned, we'll replace the CompletionMessage below and provide an error to the application code
+                        // if this works then we know there was an error with the type the client returned, we'll replace
+                        // the CompletionMessage below and provide an error to the application code
                         if (
                             !protocol.TryParseMessage(
                                 ref ros,
@@ -848,8 +860,10 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                             return;
                         }
                     }
-                    // Exceptions here would mean the HubProtocol implementation very likely has a bug, the other server has already deserialized the message (with RawResult) so it should be deserializable
-                    // We don't know the InvocationId, we should let the application developer know and potentially surface the issue to the HubProtocol implementor
+                    // Exceptions here would mean the HubProtocol implementation very likely has a bug, the other server
+                    // has already deserialized the message (with RawResult) so it should be deserializable
+                    // We don't know the InvocationId, we should let the application developer know and potentially
+                    // surface the issue to the HubProtocol implementor
                     catch (Exception ex)
                     {
                         RedisLog.ErrorParsingResult(_logger, completion.ProtocolName, ex);
@@ -912,7 +926,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                     }
                     catch (Exception ex)
                     {
-                        // If the connection hasn't been established yet we shouldn't keep logging the same error over and over
+                        // If the connection hasn't been established yet we shouldn't keep logging the same error over and
+                        // over
                         // for every new client connection.
                         if (!_redisConnectErrorLogged)
                         {
@@ -984,7 +999,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
         Span<byte> buffer = stackalloc byte[16];
         var success = Guid.NewGuid().TryWriteBytes(buffer);
         Debug.Assert(success);
-        // 16 * 4/3 = 21.333 which means base64 encoding will use 22 characters of actual data and 2 characters of padding ('=')
+        // 16 * 4/3 = 21.333 which means base64 encoding will use 22 characters of actual data and 2
+        // characters of padding ('=')
         Span<char> base64 = stackalloc char[24];
         success = Convert.TryToBase64Chars(buffer, base64, out var written);
         Debug.Assert(success);

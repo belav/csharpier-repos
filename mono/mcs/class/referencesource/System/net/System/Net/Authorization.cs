@@ -19,7 +19,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.Authorization'/> class with the specified
+        ///       Creates a new instance of the <see cref='System.Net.Authorization'/> class with the
+        // specified
         ///       authorization token.
         ///    </para>
         /// </devdoc>
@@ -31,7 +32,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.Authorization'/> class with the specified
+        ///       Creates a new instance of the <see cref='System.Net.Authorization'/> class with the
+        // specified
         ///       authorization token and completion status.
         ///    </para>
         /// </devdoc>
@@ -43,7 +45,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.Authorization'/> class with the specified
+        ///       Creates a new instance of the <see cref='System.Net.Authorization'/> class with the
+        // specified
         ///       authorization token, completion status, and connection m_ConnectionGroupId identifier.
         ///    </para>
         /// </devdoc>
@@ -98,7 +101,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the prefix for Uris that can be authenticated with the <see cref='System.Net.Authorization.Message'/> property.</para>
+        /// <para>Gets or sets the prefix for Uris that can be authenticated with the <see
+        // cref='System.Net.Authorization.Message'/> property.</para>
         /// </devdoc>
         public string[] ProtectionRealm
         {

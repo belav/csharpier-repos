@@ -62,7 +62,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests
                 }
             }
 
-            // Ideally I'd write Assert.Empty(compositionErrors), but since the string gets truncated we'll do this instead
+            // Ideally I'd write Assert.Empty(compositionErrors), but since the string gets truncated we'll do
+            // this instead
             AssertEx.EqualOrDiff("", string.Join(Environment.NewLine, compositionErrors));
         }
 

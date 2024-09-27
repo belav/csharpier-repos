@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
             )
             {
-                // Ironically, reverse order is simpler - we just have to recurse on the element type and then add a rank specifier.
+                // Ironically, reverse order is simpler - we just have to recurse on the element type and then add a
+                // rank specifier.
                 symbol.ElementType.Accept(this);
                 AddArrayRank(symbol);
                 return;
@@ -484,7 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
             )
             {
-                // Only the compiler can set the internal option and the compiler doesn't use other implementations of INamedTypeSymbol.
+                // Only the compiler can set the internal option and the compiler doesn't use other implementations
+                // of INamedTypeSymbol.
                 if (underlyingTypeSymbol?.MangleName == true)
                 {
                     Debug.Assert(symbol.Arity > 0);
@@ -533,7 +535,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AddDelegateParameters(symbol);
             }
 
-            // Only the compiler can set the internal option and the compiler doesn't use other implementations of INamedTypeSymbol.
+            // Only the compiler can set the internal option and the compiler doesn't use other implementations
+            // of INamedTypeSymbol.
             if (
                 underlyingTypeSymbol?.OriginalDefinition is MissingMetadataTypeSymbol
                 && Format.CompilerInternalOptions.IncludesOption(
@@ -617,7 +620,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if tuple type syntax can be used to refer to the tuple type without loss of information.
+        /// Returns true if tuple type syntax can be used to refer to the tuple type without loss of
+        // information.
         /// For example, it cannot be used when extension tuple is using non-default friendly names.
         /// </summary>
         /// <param name="tupleSymbol"></param>
@@ -870,7 +874,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             break;
 
                         case TypeKind.Struct when symbol.IsRecord:
-                            // In case ref record structs are allowed in future, call AddKeyword(SyntaxKind.RefKeyword) and remove assertion.
+                            // In case ref record structs are allowed in future, call AddKeyword(SyntaxKind.RefKeyword) and
+                            // remove assertion.
                             Debug.Assert(!symbol.IsRefLikeType);
 
                             if (symbol.IsReadOnly)

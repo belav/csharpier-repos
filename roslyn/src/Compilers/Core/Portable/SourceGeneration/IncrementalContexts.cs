@@ -17,7 +17,8 @@ using ReferenceEqualityComparer = Roslyn.Utilities.ReferenceEqualityComparer;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Context passed to an incremental generator when <see cref="IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext)"/> is called
+    /// Context passed to an incremental generator when <see
+    // cref="IIncrementalGenerator.Initialize(IncrementalGeneratorInitializationContext)"/> is called
     /// </summary>
     public readonly partial struct IncrementalGeneratorInitializationContext
     {
@@ -54,8 +55,10 @@ namespace Microsoft.CodeAnalysis
                 CatchAnalyzerExceptions
             );
 
-        // Use a ReferenceEqualityComparer as we want to rerun this stage whenever the CompilationOptions changes at all
-        // (e.g. we don't care if it has the same conceptual value, we're ok rerunning as long as the actual instance
+        // Use a ReferenceEqualityComparer as we want to rerun this stage whenever the CompilationOptions
+        // changes at all
+        // (e.g. we don't care if it has the same conceptual value, we're ok rerunning as long as the actual
+        // instance
         // changes).
         internal IncrementalValueProvider<CompilationOptions> CompilationOptionsProvider =>
             new(
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis
     }
 
     /// <summary>
-    /// Context passed to an incremental generator when it has registered an output via <see cref="IncrementalGeneratorInitializationContext.RegisterPostInitializationOutput(Action{IncrementalGeneratorPostInitializationContext})"/>
+    /// Context passed to an incremental generator when it has registered an output via <see
+    // cref="IncrementalGeneratorInitializationContext.RegisterPostInitializationOutput(Action{IncrementalGeneratorPostInitializationContext})"/>
     /// </summary>
     public readonly struct IncrementalGeneratorPostInitializationContext
     {
@@ -192,32 +196,40 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// A <see cref="System.Threading.CancellationToken"/> that can be checked to see if the PostInitialization should be cancelled.
+        /// A <see cref="System.Threading.CancellationToken"/> that can be checked to see if the
+        // PostInitialization should be cancelled.
         /// </summary>
         public CancellationToken CancellationToken { get; }
 
         /// <summary>
-        /// Adds source code in the form of a <see cref="string"/> to the compilation that will be available during subsequent phases
+        /// Adds source code in the form of a <see cref="string"/> to the compilation that will be available
+        // during subsequent phases
         /// </summary>
-        /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
+        /// <param name="hintName">An identifier that can be used to reference this source text, must be
+        // unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
         public void AddSource(string hintName, string source) =>
             AddSource(hintName, SourceText.From(source, Encoding.UTF8));
 
         /// <summary>
-        /// Adds a <see cref="SourceText"/> to the compilation that will be available during subsequent phases
+        /// Adds a <see cref="SourceText"/> to the compilation that will be available during subsequent
+        // phases
         /// </summary>
-        /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
+        /// <param name="hintName">An identifier that can be used to reference this source text, must be
+        // unique within this generator</param>
         /// <param name="sourceText">The <see cref="SourceText"/> to add to the compilation</param>
         /// <remarks>
-        /// Directory separators "/" and "\" are allowed in <paramref name="hintName"/>, they are normalized to "/" regardless of host platform.
+        /// Directory separators "/" and "\" are allowed in <paramref name="hintName"/>, they are normalized
+        // to "/" regardless of host platform.
         /// </remarks>
         public void AddSource(string hintName, SourceText sourceText) =>
             AdditionalSources.Add(hintName, sourceText);
     }
 
     /// <summary>
-    /// Context passed to an incremental generator when it has registered an output via <see cref="IncrementalGeneratorInitializationContext.RegisterSourceOutput{TSource}(IncrementalValueProvider{TSource}, Action{SourceProductionContext, TSource})"/>
+    /// Context passed to an incremental generator when it has registered an output via <see
+    // cref="IncrementalGeneratorInitializationContext.RegisterSourceOutput{TSource}(IncrementalValueProvider{TSource},
+    // Action{SourceProductionContext, TSource})"/>
     /// </summary>
     public readonly struct SourceProductionContext
     {
@@ -243,7 +255,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Adds source code in the form of a <see cref="string"/> to the compilation.
         /// </summary>
-        /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
+        /// <param name="hintName">An identifier that can be used to reference this source text, must be
+        // unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
         public void AddSource(string hintName, string source) =>
             AddSource(hintName, SourceText.From(source, Encoding.UTF8));
@@ -251,10 +264,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Adds a <see cref="SourceText"/> to the compilation
         /// </summary>
-        /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
+        /// <param name="hintName">An identifier that can be used to reference this source text, must be
+        // unique within this generator</param>
         /// <param name="sourceText">The <see cref="SourceText"/> to add to the compilation</param>
         /// <remarks>
-        /// Directory separators "/" and "\" are allowed in <paramref name="hintName"/>, they are normalized to "/" regardless of host platform.
+        /// Directory separators "/" and "\" are allowed in <paramref name="hintName"/>, they are normalized
+        // to "/" regardless of host platform.
         /// </remarks>
         public void AddSource(string hintName, SourceText sourceText) =>
             Sources.Add(hintName, sourceText);
@@ -264,7 +279,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="diagnostic">The diagnostic that should be added to the compilation</param>
         /// <remarks>
-        /// The severity of the diagnostic may cause the compilation to fail, depending on the <see cref="Compilation"/> settings.
+        /// The severity of the diagnostic may cause the compilation to fail, depending on the <see
+        // cref="Compilation"/> settings.
         /// </remarks>
         /// <exception cref="ArgumentException">
         /// <paramref name="diagnostic"/> is located in a syntax tree which is not part of the compilation,
@@ -282,7 +298,8 @@ namespace Microsoft.CodeAnalysis
         }
     }
 
-    // https://github.com/dotnet/roslyn/issues/53608 right now we only support generating source + diagnostics, but actively want to support generation of other things
+    // https://github.com/dotnet/roslyn/issues/53608 right now we only support generating source +
+    // diagnostics, but actively want to support generation of other things
     internal readonly struct IncrementalExecutionContext
     {
         internal readonly DiagnosticBag Diagnostics;

@@ -18,7 +18,8 @@ namespace System.Web.Services
         private static bool isInPartialTrustOutsideAspNetInitialized = false;
 
         /// <summary>
-        /// Used to guard usage of System.Web types in partial trust outside the ASP.NET context (because they are not secure),
+        /// Used to guard usage of System.Web types in partial trust outside the ASP.NET context (because
+        // they are not secure),
         /// in which case we shutdown the process.
         /// </summary>
         [SecuritySafeCritical] // Critical because it uses security critical fields. Safe because it doesn't take user input and it doesn't leak security sensitive information.
@@ -26,7 +27,8 @@ namespace System.Web.Services
         {
             if (!isInPartialTrustOutsideAspNetInitialized)
             {
-                // The HostingEnvironment.IsHosted property is safe to be called in partial trust outside the ASP.NET context.
+                // The HostingEnvironment.IsHosted property is safe to be called in partial trust outside the
+                // ASP.NET context.
                 isInPartialTrustOutsideAspNet = !(
                     AppDomain.CurrentDomain.IsFullyTrusted || HostingEnvironment.IsHosted
                 );

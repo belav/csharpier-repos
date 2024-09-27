@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
-        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined in
+        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined
+        // in
         /// source or metadata.
         /// </summary>
         public new virtual ParameterSymbol OriginalDefinition
@@ -342,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal sealed override ObsoleteAttributeData? ObsoleteAttributeData
         {
@@ -366,17 +368,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract ImmutableHashSet<string> NotNullIfParameterNotNull { get; }
 
         /// <summary>
-        /// Indexes of the parameters that will be passed to the constructor of the interpolated string handler type
-        /// when an interpolated string handler conversion occurs. These indexes are ordered in the order to be passed
+        /// Indexes of the parameters that will be passed to the constructor of the interpolated string
+        // handler type
+        /// when an interpolated string handler conversion occurs. These indexes are ordered in the order to
+        // be passed
         /// to the constructor.
         /// <para/>
-        /// Indexes greater than or equal to 0 are references to parameters defined on the containing method or indexer.
-        /// Indexes less than 0 are constants defined on <see cref="BoundInterpolatedStringArgumentPlaceholder"/>.
+        /// Indexes greater than or equal to 0 are references to parameters defined on the containing method
+        // or indexer.
+        /// Indexes less than 0 are constants defined on <see
+        // cref="BoundInterpolatedStringArgumentPlaceholder"/>.
         /// </summary>
         internal abstract ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes { get; }
 
         /// <summary>
-        /// True if the parameter is attributed with <c>InterpolatedStringHandlerArgumentAttribute</c> and the attribute
+        /// True if the parameter is attributed with <c>InterpolatedStringHandlerArgumentAttribute</c> and
+        // the attribute
         /// has some error (such as invalid names).
         /// </summary>
         internal abstract bool HasInterpolatedStringHandlerArgumentError { get; }

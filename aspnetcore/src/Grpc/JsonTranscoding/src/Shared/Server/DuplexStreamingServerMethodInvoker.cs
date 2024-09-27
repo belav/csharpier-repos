@@ -39,7 +39,8 @@ internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TRe
     private readonly DuplexStreamingServerMethod<TRequest, TResponse>? _pipelineInvoker;
 
     /// <summary>
-    /// Creates a new instance of <see cref="DuplexStreamingServerMethodInvoker{TService, TRequest, TResponse}"/>.
+    /// Creates a new instance of <see cref="DuplexStreamingServerMethodInvoker{TService, TRequest,
+    // TResponse}"/>.
     /// </summary>
     /// <param name="invoker">The duplex streaming method to invoke.</param>
     /// <param name="method">The description of the gRPC method.</param>

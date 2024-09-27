@@ -120,8 +120,10 @@ namespace System.Linq.Parallel.Tests
         /// <param name="leftCounts">The sizes of left ranges to return.</param>
         /// <param name="rightCounts">The sizes of right ranges to return.</param>
         /// <returns>Entries for test data.
-        /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left count,
-        /// the third element is the right Labeled{ParallelQuery{int}} range, and the fourth element is the right count, .</returns>
+        /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left
+        // count,
+        /// the third element is the right Labeled{ParallelQuery{int}} range, and the fourth element is the
+        // right count, .</returns>
         public static IEnumerable<object[]> BinaryRanges(int[] leftCounts, int[] rightCounts)
         {
             foreach (
@@ -149,8 +151,10 @@ namespace System.Linq.Parallel.Tests
         /// <param name="leftCounts">The sizes of left ranges to return.</param>
         /// <param name="rightCounts">The sizes of right ranges to return.</param>
         /// <returns>Entries for test data.
-        /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left count,
-        /// the third element is the right Labeled{ParallelQuery{int}} range, and the fourth element is the right count.</returns>
+        /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left
+        // count,
+        /// the third element is the right Labeled{ParallelQuery{int}} range, and the fourth element is the
+        // right count.</returns>
         public static IEnumerable<object[]> BinaryRanges(
             IEnumerable<int> leftCounts,
             IEnumerable<int> rightCounts
@@ -170,11 +174,14 @@ namespace System.Linq.Parallel.Tests
         /// Return pairs of ranges, for each respective count in `counts`.
         /// </summary>
         /// <param name="leftCounts">The sizes of left ranges to return.</param>
-        /// <param name="rightStart">A predicate to determine the start of the right range, by passing the left and right range size.</param>
+        /// <param name="rightStart">A predicate to determine the start of the right range, by passing the
+        // left and right range size.</param>
         /// <param name="rightCounts">The sizes of right ranges to return.</param>
         /// <returns>Entries for test data.
-        /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left count,
-        /// the third element is the right Labeled{ParallelQuery{int}} range, the fourth element is the right count,
+        /// The first element is the left Labeled{ParallelQuery{int}} range, the second element is the left
+        // count,
+        /// the third element is the right Labeled{ParallelQuery{int}} range, the fourth element is the
+        // right count,
         /// and the fifth is the right start.</returns>
         public static IEnumerable<object[]> BinaryRanges(
             IEnumerable<int> leftCounts,
@@ -197,7 +204,8 @@ namespace System.Linq.Parallel.Tests
         /// Get a set of ranges, starting at 0, and running for each count in `counts`.
         /// </summary>
         /// <remarks>
-        /// This is useful for things like showing an average (via the use of `x => (double)SumRange(0, x) / x`)
+        /// This is useful for things like showing an average (via the use of `x => (double)SumRange(0, x) /
+        // x`)
         /// </remarks>
         /// <param name="counts">The sizes of ranges to return.</param>
         /// <param name="modifiers">A set of modifiers to return as additional parameters.</param>
@@ -273,8 +281,10 @@ namespace System.Linq.Parallel.Tests
             yield return Labeled.Label("List", rangeList.AsParallel());
             yield return Labeled.Label("Partitioner", Partitioner.Create(rangeArray).AsParallel());
 
-            // PLINQ doesn't currently have any special code paths for readonly collections.  If it ever does, this should be uncommented.
-            // yield return Labeled.Label("ReadOnlyCollection", new ReadOnlyCollection<int>(rangeList).AsParallel());
+            // PLINQ doesn't currently have any special code paths for readonly collections.  If it ever does,
+            // this should be uncommented.
+            // yield return Labeled.Label("ReadOnlyCollection", new
+            // ReadOnlyCollection<int>(rangeList).AsParallel());
         }
     }
 }

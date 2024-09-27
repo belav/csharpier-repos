@@ -34,7 +34,7 @@ using Novell.Directory.Ldap.Utilclass;
 
 namespace Novell.Directory.Ldap
 {
-    /* package */
+/* package */
     class MessageAgent
     {
         private void InitBlock()
@@ -48,7 +48,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         virtual internal System.Object[] MessageArray
         {
-            /* package */
+/* package */
 
             get { return messages.ObjectArray; }
         }
@@ -60,7 +60,7 @@ namespace Novell.Directory.Ldap
         /// </returns>
         virtual internal int[] MessageIDs
         {
-            /* package */
+/* package */
 
             get
             {
@@ -84,7 +84,7 @@ namespace Novell.Directory.Ldap
         /// </returns>
         virtual internal System.String AgentName
         {
-            /*packge*/
+/*packge*/
 
             get { return name; }
         }
@@ -92,7 +92,7 @@ namespace Novell.Directory.Ldap
         /// <summary> Get a count of all messages queued</summary>
         virtual internal int Count
         {
-            /* package */
+/* package */
 
             get
             {
@@ -111,7 +111,7 @@ namespace Novell.Directory.Ldap
         private static int agentNum = 0; // Debug, agent number
         private System.String name; // String name for debug
 
-        /* package */
+/* package */
         internal MessageAgent()
         {
             InitBlock();
@@ -123,7 +123,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="fromAgent">the agent to be merged into this one
         /// </param>
-        /* package */
+/* package */
         internal void merge(MessageAgent fromAgent)
         {
             System.Object[] msgs = fromAgent.MessageArray;
@@ -149,7 +149,7 @@ namespace Novell.Directory.Ldap
         /// <summary> Wakes up any threads waiting for messages in the message agent
         ///
         /// </summary>
-        /* package */
+/* package */
         internal void sleepersAwake(bool all)
         {
             lock (messages.SyncRoot)
@@ -166,7 +166,7 @@ namespace Novell.Directory.Ldap
         ///
         /// return false if no responses are queued, otherwise true
         /// </summary>
-        /* package */
+/* package */
         internal bool isResponseReceived()
         {
             int size = messages.Count;
@@ -191,7 +191,7 @@ namespace Novell.Directory.Ldap
         ///
         /// return false if no responses are queued, otherwise true
         /// </summary>
-        /* package */
+/* package */
         internal bool isResponseReceived(int msgId)
         {
             try
@@ -213,7 +213,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <param name="cons">constraints associated with this request
         /// </param>
-        /* package */
+/* package */
         internal void Abandon(int msgId, LdapConstraints cons)
         //, boolean informUser)
         {
@@ -232,7 +232,7 @@ namespace Novell.Directory.Ldap
         }
 
         /// <summary> Abandon all requests on this MessageAgent</summary>
-        /* package */
+/* package */
         internal void AbandonAll()
         {
             int size = messages.Count;
@@ -253,7 +253,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> true if a specific operation is complete
         /// </returns>
-        /* package */
+/* package */
         internal bool isComplete(int msgid)
         {
             try
@@ -276,7 +276,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="msgid">the message ID.
         /// </param>
-        /* package */
+/* package */
         internal Message getMessage(int msgid)
         {
             return messages.findMessageById(msgid);
@@ -299,7 +299,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <param name="queue">the LdapMessageQueue associated with this request.
         /// </param>
-        /* package */
+/* package */
         internal void sendMessage(
             Connection conn,
             LdapMessage msg,
@@ -319,7 +319,7 @@ namespace Novell.Directory.Ldap
         /// <summary> Returns a response queued, or waits if none queued
         ///
         /// </summary>
-        /* package */
+/* package */
         //		internal System.Object getLdapMessage(System.Int32 msgId)
         internal System.Object getLdapMessage(System.Int32 msgId)
         {

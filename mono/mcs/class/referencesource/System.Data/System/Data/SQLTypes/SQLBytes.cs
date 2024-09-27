@@ -149,7 +149,8 @@ namespace System.Data.SqlTypes
             AssertValid();
         }
 
-        // Constructor required for serialization. Deserializes as a Buffer. If the bits have been tampered with
+        // Constructor required for serialization. Deserializes as a Buffer. If the bits have been tampered
+        // with
         // then this will throw a SerializationException or a InvalidCastException.
         private SqlBytes(SerializationInfo info, StreamingContext context)
         {
@@ -588,7 +589,8 @@ namespace System.Data.SqlTypes
 
             if (isNull != null && XmlConvert.ToBoolean(isNull))
             {
-                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
+                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix -
+                // Read the next value.
                 r.ReadElementString();
                 SetNull();
             }

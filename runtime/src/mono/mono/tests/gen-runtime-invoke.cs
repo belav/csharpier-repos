@@ -1,6 +1,6 @@
 /*
- * Test generator for runtime invoke tests.
- */
+* Test generator for runtime invoke tests.
+*/
 using System;
 using System.IO;
 
@@ -8,7 +8,7 @@ public class Tests
 {
     public static void Main(String[] args)
     {
-        /* There are multiple approaches, we generate c# directly */
+/* There are multiple approaches, we generate c# directly */
 
         using (var w = new StreamWriter(Console.OpenStandardOutput()))
         {
@@ -198,7 +198,7 @@ public class Tests
 
         string callee_name = "meth_" + testid_gen;
 
-        /* The caller */
+/* The caller */
         w.WriteLine("\tpublic static int test_0_" + testid_gen + " () {");
         w.Write("\t\t");
         if (retType != "void")
@@ -213,7 +213,7 @@ public class Tests
         w.WriteLine("\t\treturn 0;");
         w.WriteLine("\t}");
 
-        /* The callee */
+/* The callee */
         w.Write("\tpublic static " + retType + " meth_" + testid_gen + " (");
 
         string[] arg_decl = new string[types.Length];

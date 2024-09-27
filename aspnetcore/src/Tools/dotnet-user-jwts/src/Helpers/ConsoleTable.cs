@@ -61,7 +61,8 @@ internal sealed class ConsoleTable
             .ToList();
 
         // The table borders constructed using "|" have whitespaces before and after.
-        // This number accounts for those spaces to ensure that the table width is not longer than the console window's width.
+        // This number accounts for those spaces to ensure that the table width is not longer than the
+        // console window's width.
         var EXCESS_LENGTH_CREATED_BY_BORDERS = 4;
 
         var equalColumnLengths = Math.Max(
@@ -72,7 +73,8 @@ internal sealed class ConsoleTable
         var excessLength = 0;
         var numberOfColumnsThatNeedMoreLength = 0;
 
-        // Keep track of the excess length left behind by narrow columns and the number of columns that could use the extra length.
+        // Keep track of the excess length left behind by narrow columns and the number of columns that
+        // could use the extra length.
         for (var i = 0; i < maxColumnLengths.Count; i++)
         {
             if (maxColumnLengths[i] < equalColumnLengths)

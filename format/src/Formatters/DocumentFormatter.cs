@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt
+// in the project root for license information.
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
         }
 
         /// <summary>
-        /// Applies formatting and returns the changed <see cref="SourceText"/> for a <see cref="Document"/>.
+        /// Applies formatting and returns the changed <see cref="SourceText"/> for a <see
+        // cref="Document"/>.
         /// </summary>
         internal abstract Task<SourceText> FormatFileAsync(
             Document document,
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
         );
 
         /// <summary>
-        /// Applies formatting and returns the changed <see cref="SourceText"/> for each <see cref="Document"/>.
+        /// Applies formatting and returns the changed <see cref="SourceText"/> for each <see
+        // cref="Document"/>.
         /// </summary>
         private ImmutableArray<(
             Document,

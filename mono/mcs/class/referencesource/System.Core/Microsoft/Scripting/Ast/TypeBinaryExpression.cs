@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Diagnostics;
@@ -209,7 +209,8 @@ namespace System.Linq.Expressions
         /// return this expression.
         /// </summary>
         /// <param name="expression">The <see cref="Expression" /> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public TypeBinaryExpression Update(Expression expression)
         {
             if (expression == Expression)
@@ -229,9 +230,13 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="TypeBinaryExpression"/>.
         /// </summary>
-        /// <param name="expression">An <see cref="Expression"/> to set the <see cref="Expression"/> property equal to.</param>
-        /// <param name="type">A <see cref="Type"/> to set the <see cref="TypeBinaryExpression.TypeOperand"/> property equal to.</param>
-        /// <returns>A <see cref="TypeBinaryExpression"/> for which the <see cref="NodeType"/> property is equal to <see cref="TypeIs"/> and for which the <see cref="Expression"/> and <see cref="TypeBinaryExpression.TypeOperand"/> properties are set to the specified values.</returns>
+        /// <param name="expression">An <see cref="Expression"/> to set the <see cref="Expression"/>
+        // property equal to.</param>
+        /// <param name="type">A <see cref="Type"/> to set the <see
+        // cref="TypeBinaryExpression.TypeOperand"/> property equal to.</param>
+        /// <returns>A <see cref="TypeBinaryExpression"/> for which the <see cref="NodeType"/> property is
+        // equal to <see cref="TypeIs"/> and for which the <see cref="Expression"/> and <see
+        // cref="TypeBinaryExpression.TypeOperand"/> properties are set to the specified values.</returns>
         public static TypeBinaryExpression TypeIs(Expression expression, Type type)
         {
             RequiresCanRead(expression, "expression");
@@ -245,9 +250,13 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="TypeBinaryExpression"/> that compares run-time type identity.
         /// </summary>
-        /// <param name="expression">An <see cref="Expression"/> to set the <see cref="Expression"/> property equal to.</param>
-        /// <param name="type">A <see cref="Type"/> to set the <see cref="TypeBinaryExpression.TypeOperand"/> property equal to.</param>
-        /// <returns>A <see cref="TypeBinaryExpression"/> for which the <see cref="NodeType"/> property is equal to <see cref="TypeEqual"/> and for which the <see cref="Expression"/> and <see cref="TypeBinaryExpression.TypeOperand"/> properties are set to the specified values.</returns>
+        /// <param name="expression">An <see cref="Expression"/> to set the <see cref="Expression"/>
+        // property equal to.</param>
+        /// <param name="type">A <see cref="Type"/> to set the <see
+        // cref="TypeBinaryExpression.TypeOperand"/> property equal to.</param>
+        /// <returns>A <see cref="TypeBinaryExpression"/> for which the <see cref="NodeType"/> property is
+        // equal to <see cref="TypeEqual"/> and for which the <see cref="Expression"/> and <see
+        // cref="TypeBinaryExpression.TypeOperand"/> properties are set to the specified values.</returns>
         public static TypeBinaryExpression TypeEqual(Expression expression, Type type)
         {
             RequiresCanRead(expression, "expression");

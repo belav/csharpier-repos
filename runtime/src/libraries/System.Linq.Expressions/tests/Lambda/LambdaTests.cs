@@ -642,7 +642,8 @@ namespace System.Linq.Expressions.Tests
                 exp.Type
             );
 
-            // From this point on, the tests require Ref.Emit support as SLE needs to create delegate types on the fly.
+            // From this point on, the tests require Ref.Emit support as SLE needs to create delegate types on
+            // the fly.
             // You can't instantiate Func<> over 20 arguments or over byrefs.
             if (!RuntimeFeature.IsDynamicCodeSupported)
                 return;

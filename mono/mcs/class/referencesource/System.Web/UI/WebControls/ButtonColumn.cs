@@ -23,7 +23,8 @@ namespace System.Web.UI.WebControls
         private PropertyDescriptor textFieldDesc;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ButtonColumn'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ButtonColumn'/>
+        // class.</para>
         /// </devdoc>
         public ButtonColumn() { }
 
@@ -76,7 +77,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the command to perform when this <see cref='System.Web.UI.WebControls.Button'/>
+        /// <para>Gets or sets the command to perform when this <see
+        // cref='System.Web.UI.WebControls.Button'/>
         /// is clicked.</para>
         /// </devdoc>
         [
@@ -102,7 +104,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>Gets or sets the field name from the data model that is
-        ///       bound to the <see cref='System.Web.UI.WebControls.ButtonColumn.Text'/> property of the button in this column.</para>
+        ///       bound to the <see cref='System.Web.UI.WebControls.ButtonColumn.Text'/> property of the
+        // button in this column.</para>
         /// </devdoc>
         [
             WebCategory("Data"),
@@ -127,7 +130,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>Gets or sets the string used to format the data bound to
-        ///       the <see cref='System.Web.UI.WebControls.ButtonColumn.Text'/> property of the button.</para>
+        ///       the <see cref='System.Web.UI.WebControls.ButtonColumn.Text'/> property of the
+        // button.</para>
         /// </devdoc>
         [
             WebCategory("Data"),
@@ -151,7 +155,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the caption text displayed on the <see cref='System.Web.UI.WebControls.Button'/>
+        /// <para>Gets or sets the caption text displayed on the <see
+        // cref='System.Web.UI.WebControls.Button'/>
         /// in this column.</para>
         /// </devdoc>
         [

@@ -388,7 +388,8 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
 
     // Regression test for aspnet/Routing#435
     //
-    // In this issue we used to lowercase URLs after parameters were encoded, meaning that if a character needed
+    // In this issue we used to lowercase URLs after parameters were encoded, meaning that if a
+    // character needed
     // encoding (such as a cyrillic character, it would not be encoded).
     [Fact]
     public void TryProcessTemplate_GeneratesLowercaseUrl_SetOnRouteOptions_CanLowercaseCharactersThatNeedEncoding()
@@ -1867,7 +1868,8 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
     [Fact]
     public void TryProcessTemplate_DoesNotDiscardAmbientValues_IfAllRequiredValuesMatch_ForGenericKeys()
     {
-        // Verifying that discarding works in general usage case i.e when keys are not like controller, action etc.
+        // Verifying that discarding works in general usage case i.e when keys are not like controller,
+        // action etc.
 
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(
@@ -1904,7 +1906,8 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
     [Fact]
     public void TryProcessTemplate_DiscardsAmbientValues_ForGenericKeys()
     {
-        // Verifying that discarding works in general usage case i.e when keys are not like controller, action etc.
+        // Verifying that discarding works in general usage case i.e when keys are not like controller,
+        // action etc.
 
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(

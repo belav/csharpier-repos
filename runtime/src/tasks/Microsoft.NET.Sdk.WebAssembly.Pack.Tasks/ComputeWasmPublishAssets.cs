@@ -10,19 +10,26 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.NET.Sdk.WebAssembly;
 
-// This target computes the list of publish static web assets based on the changes that happen during publish and the list of build static
+// This target computes the list of publish static web assets based on the changes that happen
+// during publish and the list of build static
 // web assets.
 // In this target we need to do 2 things:
 // * Harmonize the list of dlls produced at build time with the list of resolved files to publish.
 //   * We iterate over the list of existing static web assets and do as follows:
-//     * If we find the assembly in the resolved files to publish and points to the original assembly (linker disabled or assembly not linked)
+//     * If we find the assembly in the resolved files to publish and points to the original
+// assembly (linker disabled or assembly not linked)
 //       we create a new "Publish" static web asset for the assembly.
-//     * If we find the assembly in the resolved files to publish and points to a new location, we assume this assembly has been updated (as part of linking)
-//       and we create a new "Publish" static web asset for the asembly pointing to the new location.
-//     * If we don't find the assembly on the resolved files to publish it has been linked out from the app, so we don't add any new static web asset and we
-//       also avoid adding any existing related static web asset (satellite assemblies and compressed versions).
+//     * If we find the assembly in the resolved files to publish and points to a new location, we
+// assume this assembly has been updated (as part of linking)
+//       and we create a new "Publish" static web asset for the asembly pointing to the new
+// location.
+//     * If we don't find the assembly on the resolved files to publish it has been linked out from
+// the app, so we don't add any new static web asset and we
+//       also avoid adding any existing related static web asset (satellite assemblies and
+// compressed versions).
 //   * We update static web assets for satellite assemblies and compressed assets accordingly.
-// * Look at the list of "native" assets and determine whether we need to create new publish assets for the current build assets or if we need to
+// * Look at the list of "native" assets and determine whether we need to create new publish assets
+// for the current build assets or if we need to
 //   update the native assets because the app was ahead of time compiled.
 public class ComputeWasmPublishAssets : Task
 {
@@ -79,13 +86,15 @@ public class ComputeWasmPublishAssets : Task
 
         try
         {
-            // We'll do a first pass over the resolved files to publish to figure out what files need to be removed
+            // We'll do a first pass over the resolved files to publish to figure out what files need to be
+            // removed
             // as well as categorize resolved files into different groups.
             var resolvedFilesToPublishToRemove = new Dictionary<string, ITaskItem>(
                 StringComparer.Ordinal
             );
 
-            // These assemblies are keyed of the assembly name "computed" based on the relative path, which must be
+            // These assemblies are keyed of the assembly name "computed" based on the relative path, which must
+            // be
             // unique.
             var resolvedAssembliesToPublish = new Dictionary<string, ITaskItem>(
                 StringComparer.Ordinal
@@ -206,7 +215,8 @@ public class ComputeWasmPublishAssets : Task
                         )
                     )
                     {
-                        // This is a native asset like timezones.blat or similar that was not filtered and that needs to be updated
+                        // This is a native asset like timezones.blat or similar that was not filtered and that needs to be
+                        // updated
                         // to a publish asset.
                         var newAsset = new TaskItem(asset);
                         ApplyPublishProperties(newAsset);
@@ -226,10 +236,12 @@ public class ComputeWasmPublishAssets : Task
                             "Removing asset '{0}'.",
                             existing.ItemSpec
                         );
-                        // This was a file that was filtered, so just remove it, we don't need to add any publish static web asset
+                        // This was a file that was filtered, so just remove it, we don't need to add any publish static web
+                        // asset
                         filesToRemove.Add(removed);
 
-                        // Remove the file from the list to avoid double processing later when we process other files we filtered.
+                        // Remove the file from the list to avoid double processing later when we process other files we
+                        // filtered.
                         resolvedPublishFilesToRemove.Remove(existing.ItemSpec);
                     }
                 }
@@ -395,7 +407,8 @@ public class ComputeWasmPublishAssets : Task
             {
                 if (!resolvedPublishFilesToRemove.TryGetValue(existing.ItemSpec, out var removed))
                 {
-                    // This is a symbol asset like classlibrary.pdb or similar that was not filtered and that needs to be updated
+                    // This is a symbol asset like classlibrary.pdb or similar that was not filtered and that needs to
+                    // be updated
                     // to a publish asset.
                     var newAsset = new TaskItem(asset);
                     ApplyPublishProperties(newAsset);
@@ -410,10 +423,12 @@ public class ComputeWasmPublishAssets : Task
                 }
                 else
                 {
-                    // This was a file that was filtered, so just remove it, we don't need to add any publish static web asset
+                    // This was a file that was filtered, so just remove it, we don't need to add any publish static web
+                    // asset
                     filesToRemove.Add(removed);
 
-                    // Remove the file from the list to avoid double processing later when we process other files we filtered.
+                    // Remove the file from the list to avoid double processing later when we process other files we
+                    // filtered.
                     resolvedPublishFilesToRemove.Remove(existing.ItemSpec);
                 }
             }
@@ -444,7 +459,8 @@ public class ComputeWasmPublishAssets : Task
     {
         // All assemblies, satellite assemblies and gzip files are initially defined as build assets.
         // We need to update them to publish assets when they haven't changed or when they have been linked.
-        // For satellite assemblies and compressed files, we won't include them in the list of assets to update
+        // For satellite assemblies and compressed files, we won't include them in the list of assets to
+        // update
         // when the original assembly they depend on has been linked out.
         var assetsToUpdate = new Dictionary<string, ITaskItem>();
         var linkedAssets = new Dictionary<string, ITaskItem>();
@@ -607,7 +623,8 @@ public class ComputeWasmPublishAssets : Task
             }
         }
 
-        // Remove all the elements we've found to avoid having to iterate over them when we process other assets.
+        // Remove all the elements we've found to avoid having to iterate over them when we process other
+        // assets.
         foreach (var element in processed)
         {
             compressedRepresentations.Remove(element);
@@ -840,7 +857,8 @@ public class ComputeWasmPublishAssets : Task
                 continue;
             }
 
-            // Capture all the native unfiltered assets since we need to process them to determine what static web assets need to get
+            // Capture all the native unfiltered assets since we need to process them to determine what static
+            // web assets need to get
             // upgraded
             if (
                 string.Equals(

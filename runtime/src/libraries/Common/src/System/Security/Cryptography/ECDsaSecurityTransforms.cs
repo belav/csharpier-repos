@@ -123,7 +123,8 @@ namespace System.Security.Cryptography
             {
                 ThrowIfDisposed();
 
-                // The signature format for .NET is r.Concat(s). Each of r and s are of length BitsToBytes(KeySize), even
+                // The signature format for .NET is r.Concat(s). Each of r and s are of length BitsToBytes(KeySize),
+                // even
                 // when they would have leading zeroes.  If it's the correct size, then we need to encode it from
                 // r.Concat(s) to SEQUENCE(INTEGER(r), INTEGER(s)), because that's the format that OpenSSL expects.
                 int expectedBytes = 2 * AsymmetricAlgorithmHelpers.BitsToBytes(KeySize);

@@ -289,7 +289,8 @@ namespace DbLinq.PostgreSql
 
         private bool SkipProc(string name)
         {
-            //string[] prefixes = System.Configuration.ConfigurationManager.AppSettings["postgresqlSkipProcPrefixes"].Split(',');
+            //string[] prefixes =
+            // System.Configuration.ConfigurationManager.AppSettings["postgresqlSkipProcPrefixes"].Split(',');
             string[] prefixes =
             {
                 "pldbg",

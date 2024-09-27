@@ -61,7 +61,8 @@ namespace Microsoft.Interop.JavaScript
                 )
             )
             {
-                // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
+                // If we need a different native return identifier, then recreate the context with the correct
+                // identifier before we generate any code.
                 innerContext = new ManagedToNativeStubCodeContext(
                     ReturnIdentifier,
                     ReturnNativeIdentifier

@@ -13,13 +13,13 @@ namespace System.Globalization
     //  Notes about JapaneseLunisolarCalendar
     //
     ////////////////////////////////////////////////////////////////////////////
-    /*
-    **  Calendar support range:
-    **      Calendar               Minimum             Maximum
-    **      ==========             ==========          ==========
-    **      Gregorian              1960/01/28          2050/01/22
-    **      JapaneseLunisolar      1960/01/01          2049/12/29
-    */
+/*
+**  Calendar support range:
+**      Calendar               Minimum             Maximum
+**      ==========             ==========          ==========
+**      Gregorian              1960/01/28          2050/01/22
+**      JapaneseLunisolar      1960/01/01          2049/12/29
+*/
 
     [Serializable]
     public class JapaneseLunisolarCalendar : EastAsianLunisolarCalendar
@@ -82,8 +82,9 @@ namespace System.Globalization
 
         static readonly int[,] yinfo =
         {
-            /*Y            LM        Lmon    Lday        DaysPerMonth    D1    D2    D3    D4    D5    D6    D7    D8    D9    D10    D11    D12    D13    #Days
-            1960    */{ 6, 1, 28, 44368 }, /*    30    29    30    29    30    30    29    30    29    30    29    30    29    384
+/*Y            LM        Lmon    Lday        DaysPerMonth    D1    D2    D3    D4    D5    D6    D7
+D8    D9    D10    D11    D12    D13    #Days
+1960    */{ 6, 1, 28, 44368 }, /*    30    29    30    29    30    30    29    30    29    30    29    30    29    384
 1961    */
             { 0, 2, 15, 43856 }, /*    30    29    30    29    30    29    30    30    29    30    29    30    0    355
 1962    */

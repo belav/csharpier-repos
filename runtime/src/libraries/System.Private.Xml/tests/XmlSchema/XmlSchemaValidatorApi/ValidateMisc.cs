@@ -1137,7 +1137,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
-                // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
+                // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml
+                // validation.
                 settings.Schemas.Add(
                     "mainschema",
                     XmlReader.Create(
@@ -1171,7 +1172,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
-                // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
+                // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml
+                // validation.
                 settings.Schemas.Add(
                     "mainschema",
                     XmlReader.Create(

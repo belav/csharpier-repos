@@ -133,7 +133,8 @@ namespace System.Workflow.Runtime.Hosting
 
         #region Internal Methods
         /// <summary>
-        /// Disallow the hosting service to have different connection string if using SharedConnectionWorkflowTransactionService
+        /// Disallow the hosting service to have different connection string if using
+        // SharedConnectionWorkflowTransactionService
         /// Should be called after all hosting services are added to the WorkflowRuntime
         /// </summary>
         /// <param name="transactionService"></param>
@@ -372,7 +373,8 @@ namespace System.Workflow.Runtime.Hosting
             DbConnectionStringBuilder dcsb = new DbConnectionStringBuilder();
             dcsb.ConnectionString = connectionString;
 
-            // Don't allow the client to specify an auto-enlist value since we decide whether to participate in a transaction
+            // Don't allow the client to specify an auto-enlist value since we decide whether to participate in
+            // a transaction
             // (enlist for writing and not for reading).
             if (dcsb.ContainsKey("enlist"))
             {
@@ -385,35 +387,40 @@ namespace System.Workflow.Runtime.Hosting
             localProvider = Provider.SqlClient;
         }
 
-        /*
-        private void SetLocalProvider(string connectionString)
-        {
-            // Assume caller already validated the connection string
-            MatchCollection providers = Regex.Matches(connectionString, @"(^|;)\s*provider\s*=[^;$]*(;|$)", RegexOptions.IgnoreCase);
+/*
+private void SetLocalProvider(string connectionString)
+{
+// Assume caller already validated the connection string
+MatchCollection providers = Regex.Matches(connectionString, @"(^|;)\s*provider\s*=[^;$]*(;|$)",
+RegexOptions.IgnoreCase);
 
-            // Cannot use DbConnectionStringBuilder because it selects the last provider, not the first one, by itself.
-            // A legal Sql connection string allows for multiple provider specification and
-            // selects the first provider
-            if (providers.Count > 0)
-            {
-                // Check if the first one matches "sqloledb" or "sqloledb.<digit>"
-                if (Regex.IsMatch(providers[0].Value, @"provider\s*=\s*sqloledb(\.\d+)?\s*(;|$)", RegexOptions.IgnoreCase))
-                {
-                    this.localProvider = Provider.OleDB;
-                }
-                else
-                {
-                    // We don't support other providers
-                    throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,ExecutionStringManager.UnsupportedSqlProvider, providers[0].Value));
-                }
-            }
-            else
-            {
-                // SqlClient provider requires no provider keyword specified in connection string
-                this.localProvider = Provider.SqlClient;
-            }
-        }
-        */
+// Cannot use DbConnectionStringBuilder because it selects the last provider, not the first one, by
+itself.
+// A legal Sql connection string allows for multiple provider specification and
+// selects the first provider
+if (providers.Count > 0)
+{
+// Check if the first one matches "sqloledb" or "sqloledb.<digit>"
+if (Regex.IsMatch(providers[0].Value, @"provider\s*=\s*sqloledb(\.\d+)?\s*(;|$)",
+RegexOptions.IgnoreCase))
+{
+this.localProvider = Provider.OleDB;
+}
+else
+{
+// We don't support other providers
+throw new
+ArgumentException(String.Format(CultureInfo.CurrentCulture,ExecutionStringManager.UnsupportedSqlProvider,
+providers[0].Value));
+}
+}
+else
+{
+// SqlClient provider requires no provider keyword specified in connection string
+this.localProvider = Provider.SqlClient;
+}
+}
+*/
 
         private static SharedConnectionInfo GetConnectionInfo(
             WorkflowCommitWorkBatchService txSvc,

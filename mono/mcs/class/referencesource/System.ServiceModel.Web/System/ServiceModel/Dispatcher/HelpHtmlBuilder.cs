@@ -285,7 +285,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (error != null)
                 {
-                    //TFS Bug 500275: it is not necessary to HtmlEncode the error.Message string here because XElement ctor will encode it.
+                    //TFS Bug 500275: it is not necessary to HtmlEncode the error.Message string here because XElement
+                    // ctor will encode it.
                     div.Add(
                         new XElement(
                             HtmlPElementName,
@@ -312,7 +313,8 @@ namespace System.ServiceModel.Dispatcher
                 string encodedHelpLink = HttpUtility.HtmlEncode(helpUri.AbsoluteUri);
                 if (error != null)
                 {
-                    //TFS Bug 500275: XElement.Parse does not HtmlEncode the string passed to it, so we need to encode it before calling Parse.
+                    //TFS Bug 500275: XElement.Parse does not HtmlEncode the string passed to it, so we need to encode
+                    // it before calling Parse.
                     string errorMessage = AppSettings.DisableHtmlErrorPageExceptionHtmlEncoding
                         ? error.Message
                         : HttpUtility.HtmlEncode(error.Message);

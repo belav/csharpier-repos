@@ -4,7 +4,8 @@
 namespace System.Buffers
 {
     /// <summary>
-    /// Owner of Memory<typeparamref name="T"/> that is responsible for disposing the underlying memory appropriately.
+    /// Owner of Memory<typeparamref name="T"/> that is responsible for disposing the underlying memory
+    // appropriately.
     /// </summary>
     public interface IMemoryOwner<T> : IDisposable
     {

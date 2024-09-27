@@ -8,7 +8,8 @@ namespace System.Data.Linq.SqlClient
 {
     /// <summary>
     /// The standard SQL text for a type conversion is CONVERT([newtype],value)
-    /// Replace it with special SQL functions where necessary (e.g. char -> int uses UNICODE(value) instead).
+    /// Replace it with special SQL functions where necessary (e.g. char -> int uses UNICODE(value)
+    // instead).
     /// </summary>
     internal class SqlTypeConverter : SqlVisitor
     {

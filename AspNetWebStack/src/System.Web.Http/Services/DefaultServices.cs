@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -29,9 +30,12 @@ namespace System.Web.Http.Services
 {
     /// <summary>
     ///     <para>
-    ///         Represents a container for service instances used by the <see cref="HttpConfiguration"/>. Note that
-    ///         this container only supports known types, and methods to get or set arbitrary service types will
-    ///         throw <see cref="ArgumentException"/> when called. For creation of arbitrary types, please use
+    ///         Represents a container for service instances used by the <see
+    // cref="HttpConfiguration"/>. Note that
+    ///         this container only supports known types, and methods to get or set arbitrary service
+    // types will
+    ///         throw <see cref="ArgumentException"/> when called. For creation of arbitrary types,
+    // please use
     ///         <see cref="IDependencyResolver"/> instead. The supported types for this container are:
     ///     </para>
     ///     <list type="bullet">
@@ -294,7 +298,8 @@ namespace System.Web.Http.Services
             return result;
         }
 
-        // Returns the List<object> for the given service type. Also validates serviceType is in the known service type list.
+        // Returns the List<object> for the given service type. Also validates serviceType is in the known
+        // service type list.
         [SuppressMessage(
             "Microsoft.Design",
             "CA1002:DoNotExposeGenericLists",

@@ -1632,7 +1632,8 @@ namespace Microsoft.Extensions.Hosting.Internal
         }
 
         /// <summary>
-        /// Tests that when a BackgroundService does not call base, the Host still starts and stops successfully.
+        /// Tests that when a BackgroundService does not call base, the Host still starts and stops
+        // successfully.
         /// </summary>
         [Fact]
         public async Task StartOnBackgroundServiceThatDoesNotCallBase()

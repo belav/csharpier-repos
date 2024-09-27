@@ -508,8 +508,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             /// <param name="x">The first type to compare</param>
             /// <param name="y">The second type to compare</param>
             /// <param name="equivalentTypesWithDifferingAssemblies">
-            /// Map of equivalent non-nested types to be populated, such that each key-value pair of named types are equivalent but reside in different assemblies.
-            /// This map is populated only if we are ignoring assemblies for symbol equivalence comparison, i.e. <see cref="_assemblyComparerOpt"/> is true.
+            /// Map of equivalent non-nested types to be populated, such that each key-value pair of named types
+            // are equivalent but reside in different assemblies.
+            /// This map is populated only if we are ignoring assemblies for symbol equivalence comparison, i.e.
+            // <see cref="_assemblyComparerOpt"/> is true.
             /// </param>
             /// <returns>True if the two types are equivalent.</returns>
             private bool HandleNamedTypesWorker(
@@ -593,8 +595,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     )
                         return false;
 
-                    // Above check makes sure that the containing assemblies are considered the same by the assembly comparer being used.
-                    // If they are in fact not the same (have different name) and the caller requested to know about such types add {x, y}
+                    // Above check makes sure that the containing assemblies are considered the same by the assembly
+                    // comparer being used.
+                    // If they are in fact not the same (have different name) and the caller requested to know about
+                    // such types add {x, y}
                     // to equivalentTypesWithDifferingAssemblies map.
                     if (
                         equivalentTypesWithDifferingAssemblies != null
@@ -655,7 +659,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     }
                 }
 
-                // If we're validating the actual unconstructed ValueTuple type itself, we're done at this point.  No
+                // If we're validating the actual unconstructed ValueTuple type itself, we're done at this point.
+                // No
                 // need to check field types.
                 //
                 // For VB we have to unwrap tuples to their underlying types to do this check.

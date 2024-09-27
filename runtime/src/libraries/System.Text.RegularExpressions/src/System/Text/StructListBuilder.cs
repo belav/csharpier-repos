@@ -11,10 +11,12 @@ namespace System.Text
     [DebuggerDisplay("Count = {_count}")]
     internal struct StructListBuilder<T>
     {
-        /// <summary>The array backing the builder, obtained from <see cref="ArrayPool{T}.Shared"/>.</summary>
+        /// <summary>The array backing the builder, obtained from <see
+        // cref="ArrayPool{T}.Shared"/>.</summary>
         private T[] _array = Array.Empty<T>();
 
-        /// <summary>The number of items in <see cref="_array"/>, and thus also the next position in the array to be filled.</summary>
+        /// <summary>The number of items in <see cref="_array"/>, and thus also the next position in the
+        // array to be filled.</summary>
         private int _count;
 
         /// <summary>Creates a new builder.</summary>

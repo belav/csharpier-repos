@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     Represents a relationship where a foreign key composed of properties on the dependent entity type
+///     Represents a relationship where a foreign key composed of properties on the dependent entity
+// type
 ///     references a corresponding primary or alternate key on the principal entity type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IForeignKey : IReadOnlyForeignKey, IAnnotatable
 {
@@ -23,26 +25,32 @@ public interface IForeignKey : IReadOnlyForeignKey, IAnnotatable
     new IKey PrincipalKey { get; }
 
     /// <summary>
-    ///     Gets the dependent entity type. This may be different from the type that <see cref="Properties" />
-    ///     are defined on when the relationship is defined a derived type in an inheritance hierarchy (since the properties
+    ///     Gets the dependent entity type. This may be different from the type that <see
+    // cref="Properties" />
+    ///     are defined on when the relationship is defined a derived type in an inheritance hierarchy
+    // (since the properties
     ///     may be defined on a base type).
     /// </summary>
     new IEntityType DeclaringEntityType { get; }
 
     /// <summary>
-    ///     Gets the principal entity type that this relationship targets. This may be different from the type that
-    ///     <see cref="PrincipalKey" /> is defined on when the relationship targets a derived type in an inheritance
+    ///     Gets the principal entity type that this relationship targets. This may be different from
+    // the type that
+    ///     <see cref="PrincipalKey" /> is defined on when the relationship targets a derived type in an
+    // inheritance
     ///     hierarchy (since the key is defined on the base type of the hierarchy).
     /// </summary>
     new IEntityType PrincipalEntityType { get; }
 
     /// <summary>
-    ///     Gets the navigation property on the dependent entity type that points to the principal entity.
+    ///     Gets the navigation property on the dependent entity type that points to the principal
+    // entity.
     /// </summary>
     new INavigation? DependentToPrincipal { get; }
 
     /// <summary>
-    ///     Gets the navigation property on the principal entity type that points to the dependent entity.
+    ///     Gets the navigation property on the principal entity type that points to the dependent
+    // entity.
     /// </summary>
     new INavigation? PrincipalToDependent { get; }
 
@@ -65,7 +73,8 @@ public interface IForeignKey : IReadOnlyForeignKey, IAnnotatable
     ///     Returns a navigation associated with this foreign key.
     /// </summary>
     /// <param name="pointsToPrincipal">
-    ///     A value indicating whether the navigation is on the dependent type pointing to the principal type.
+    ///     A value indicating whether the navigation is on the dependent type pointing to the principal
+    // type.
     /// </param>
     /// <returns>
     ///     A navigation associated with this foreign key or <see langword="null" />.
@@ -79,7 +88,8 @@ public interface IForeignKey : IReadOnlyForeignKey, IAnnotatable
     ///         from various forms of entity data.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -93,7 +103,8 @@ public interface IForeignKey : IReadOnlyForeignKey, IAnnotatable
     ///         from various forms of entity data.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>

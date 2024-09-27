@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor
             lock (s_gate)
             {
                 // we need to check all buffers reported since we will be called after actual changes have happened.
-                // for example, if content type of a buffer changed, we will be called after it is changed, rather than before it.
+                // for example, if content type of a buffer changed, we will be called after it is changed, rather
+                // than before it.
                 foreach (var buffer in subjectBuffers)
                 {
                     if (s_map.TryGetValue(buffer, out var set))

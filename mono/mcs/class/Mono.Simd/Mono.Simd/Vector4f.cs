@@ -52,37 +52,37 @@ namespace Mono.Simd
         WFromZ = 0x80,
         WFromW = 0xC0,
 
-        /*Expand a single element into all elements*/
+/*Expand a single element into all elements*/
         ExpandX = XFromX | YFromX | ZFromX | WFromX,
         ExpandY = XFromY | YFromY | ZFromY | WFromY,
         ExpandZ = XFromZ | YFromZ | ZFromZ | WFromZ,
         ExpandW = XFromW | YFromW | ZFromW | WFromW,
 
-        /*Expand a pair of elements (x,y,z,w) -> (x,x,y,y)*/
+/*Expand a pair of elements (x,y,z,w) -> (x,x,y,y)*/
         ExpandXY = XFromX | YFromX | ZFromY | WFromY,
         ExpandZW = XFromZ | YFromZ | ZFromW | WFromW,
 
-        /*Expand interleaving elements (x,y,z,w) -> (x,y,x,y)*/
+/*Expand interleaving elements (x,y,z,w) -> (x,y,x,y)*/
         ExpandInterleavedXY = XFromX | YFromY | ZFromX | WFromY,
         ExpandInterleavedZW = XFromZ | YFromW | ZFromZ | WFromW,
 
-        /*Rotate elements*/
+/*Rotate elements*/
         RotateRight = XFromY | YFromZ | ZFromW | WFromX,
         RotateLeft = XFromW | YFromX | ZFromY | WFromZ,
 
-        /*Swap order*/
+/*Swap order*/
         Swap = XFromW | YFromZ | ZFromY | WFromX,
     };
 
-    /*
-        TODO:
-            Unary - (implemented as mulps [-1,-1,-1,-1])
-            Abs (implemented as pand [7fffffff,...] )
-            Comparison functions
-            Mask extraction function
-            vector x float ops
-            Replace Shuffle with less bug prone methods
-    */
+/*
+TODO:
+Unary - (implemented as mulps [-1,-1,-1,-1])
+Abs (implemented as pand [7fffffff,...] )
+Comparison functions
+Mask extraction function
+vector x float ops
+Replace Shuffle with less bug prone methods
+*/
 
     [Obsolete("Use the types in the System.Numerics.Vectors namespace")]
     [StructLayout(LayoutKind.Explicit, Pack = 0, Size = 16)]

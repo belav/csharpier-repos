@@ -9,7 +9,8 @@ using System.Collections.Immutable;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// A dummy singleton analyzer. Its only purpose is to represent file content load failures in maps that are keyed by <see cref="DiagnosticAnalyzer"/>.
+    /// A dummy singleton analyzer. Its only purpose is to represent file content load failures in maps
+    // that are keyed by <see cref="DiagnosticAnalyzer"/>.
     /// </summary>
     internal sealed class FileContentLoadAnalyzer : DiagnosticAnalyzer
     {

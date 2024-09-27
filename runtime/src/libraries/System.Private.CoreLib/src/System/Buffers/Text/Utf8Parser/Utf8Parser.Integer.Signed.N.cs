@@ -35,8 +35,10 @@ namespace System.Buffers.Text
 
             int answer;
 
-            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case behavior with the classic parse routines
-            // (at least one digit must precede any commas, and a string without any digits prior to the decimal point must have at least
+            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case
+            // behavior with the classic parse routines
+            // (at least one digit must precede any commas, and a string without any digits prior to the decimal
+            // point must have at least
             // one digit after the decimal point.)
             if (c == Utf8Constants.Period)
                 goto FractionalPartWithoutLeadingDigits;
@@ -130,8 +132,10 @@ namespace System.Buffers.Text
 
             int answer;
 
-            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case behavior with the classic parse routines
-            // (at least one digit must precede any commas, and a string without any digits prior to the decimal point must have at least
+            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case
+            // behavior with the classic parse routines
+            // (at least one digit must precede any commas, and a string without any digits prior to the decimal
+            // point must have at least
             // one digit after the decimal point.)
             if (c == Utf8Constants.Period)
                 goto FractionalPartWithoutLeadingDigits;
@@ -225,8 +229,10 @@ namespace System.Buffers.Text
 
             int answer;
 
-            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case behavior with the classic parse routines
-            // (at least one digit must precede any commas, and a string without any digits prior to the decimal point must have at least
+            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case
+            // behavior with the classic parse routines
+            // (at least one digit must precede any commas, and a string without any digits prior to the decimal
+            // point must have at least
             // one digit after the decimal point.)
             if (c == Utf8Constants.Period)
                 goto FractionalPartWithoutLeadingDigits;
@@ -323,8 +329,10 @@ namespace System.Buffers.Text
 
             long answer;
 
-            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case behavior with the classic parse routines
-            // (at least one digit must precede any commas, and a string without any digits prior to the decimal point must have at least
+            // Handle the first digit (or period) as a special case. This ensures some compatible edge-case
+            // behavior with the classic parse routines
+            // (at least one digit must precede any commas, and a string without any digits prior to the decimal
+            // point must have at least
             // one digit after the decimal point.)
             if (c == Utf8Constants.Period)
                 goto FractionalPartWithoutLeadingDigits;

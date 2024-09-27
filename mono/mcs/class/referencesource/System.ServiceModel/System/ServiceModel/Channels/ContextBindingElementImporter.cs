@@ -55,7 +55,8 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            // Try to post-process the unrecognized RequireHttpCookie assertion to augment the AllowCookies value
+            // Try to post-process the unrecognized RequireHttpCookie assertion to augment the AllowCookies
+            // value
             // of HttpTransportBindingElement
 
             CustomBinding customBinding = context.Endpoint.Binding as CustomBinding;
@@ -100,7 +101,8 @@ namespace System.ServiceModel.Channels
                     && !NetTcpContextBinding.TryCreate(bindingElements, out binding)
                 )
                 {
-                    // Work around BasicHttpBinding.TryCreate insensitivity to HttpTransportBindingElement.AllowCookies value
+                    // Work around BasicHttpBinding.TryCreate insensitivity to HttpTransportBindingElement.AllowCookies
+                    // value
 
                     if (http == null)
                     {

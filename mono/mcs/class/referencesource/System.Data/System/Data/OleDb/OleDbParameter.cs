@@ -622,7 +622,8 @@ namespace System.Data.OleDb
                 );
             }
 
-            // Disabling the assert, see Dev11 775862 for details: http://vstfdevdiv.redmond.corp.microsoft.com:8080/WorkItemTracking/WorkItem.aspx?artifactMoniker=775862
+            // Disabling the assert, see Dev11 775862 for details:
+            // http://vstfdevdiv.redmond.corp.microsoft.com:8080/WorkItemTracking/WorkItem.aspx?artifactMoniker=775862
             // Debug.Assert(false, "OleDbParameter.Prepare didn't throw");
         }
 
@@ -660,31 +661,31 @@ namespace System.Data.OleDb
         private static int GetBindDirection(ParameterDirection direction)
         {
             return (ODB.ParameterDirectionFlag & (int)direction);
-            /*switch(Direction) {
-            default:
-            case ParameterDirection.Input:
-                return ODB.DBPARAMIO_INPUT;
-            case ParameterDirection.Output:
-            case ParameterDirection.ReturnValue:
-                return ODB.DBPARAMIO_OUTPUT;
-            case ParameterDirection.InputOutput:
-                return (ODB.DBPARAMIO_INPUT | ODB.DBPARAMIO_OUTPUT);
-            }*/
+/*switch(Direction) {
+default:
+case ParameterDirection.Input:
+return ODB.DBPARAMIO_INPUT;
+case ParameterDirection.Output:
+case ParameterDirection.ReturnValue:
+return ODB.DBPARAMIO_OUTPUT;
+case ParameterDirection.InputOutput:
+return (ODB.DBPARAMIO_INPUT | ODB.DBPARAMIO_OUTPUT);
+}*/
         }
 
         private static int GetBindFlags(ParameterDirection direction)
         {
             return (ODB.ParameterDirectionFlag & (int)direction);
-            /*switch(Direction) {
-            default:
-            case ParameterDirection.Input:
-                return ODB.DBPARAMFLAGS_ISINPUT;
-            case ParameterDirection.Output:
-            case ParameterDirection.ReturnValue:
-                return ODB.DBPARAMFLAGS_ISOUTPUT;
-            case ParameterDirection.InputOutput:
-                return (ODB.DBPARAMFLAGS_ISINPUT | ODB.DBPARAMFLAGS_ISOUTPUT);
-            }*/
+/*switch(Direction) {
+default:
+case ParameterDirection.Input:
+return ODB.DBPARAMFLAGS_ISINPUT;
+case ParameterDirection.Output:
+case ParameterDirection.ReturnValue:
+return ODB.DBPARAMFLAGS_ISOUTPUT;
+case ParameterDirection.InputOutput:
+return (ODB.DBPARAMFLAGS_ISINPUT | ODB.DBPARAMFLAGS_ISOUTPUT);
+}*/
         }
 
         // implemented as nested class to take advantage of the private/protected ShouldSerializeXXX methods

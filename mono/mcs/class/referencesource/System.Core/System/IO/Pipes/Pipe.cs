@@ -212,7 +212,8 @@ namespace System.IO.Pipes
             State = PipeState.Connected;
         }
 
-        // This method should exist until we add a first class way of passing handles between parent and child
+        // This method should exist until we add a first class way of passing handles between parent and
+        // child
         // processes. For now, people do it via command line arguments.
         [System.Security.SecurityCritical]
         [SuppressMessage(
@@ -240,7 +241,8 @@ namespace System.IO.Pipes
         // This method is an annoying one but it has to exist at least until we make passing handles between
         // processes first class.  We need this because once the child handle is inherited, the OS considers
         // the parent and child's handles to be different.  Therefore, if a child closes its handle, our
-        // Read/Write methods won't throw because the OS will think that there is still a child handle around
+        // Read/Write methods won't throw because the OS will think that there is still a child handle
+        // around
         // that can still Write/Read to/from the other end of the pipe.
         //
         // Ideally, we would want the Process class to close this handle after it has been inherited.  See
@@ -317,7 +319,8 @@ namespace System.IO.Pipes
                 __Error.WinIOError(Marshal.GetLastWin32Error(), String.Empty);
             }
 
-            // Duplicate the server handle to make it not inheritable.  Note: We need to do this so that the child
+            // Duplicate the server handle to make it not inheritable.  Note: We need to do this so that the
+            // child
             // process doesn't end up getting another copy of the server handle.  If it were to get a copy, the
             // OS wouldn't be able to inform the child that the server has closed its handle because it will see
             // that there is still one server handle that is open.
@@ -344,7 +347,8 @@ namespace System.IO.Pipes
             State = PipeState.Connected;
         }
 
-        // Anonymous pipes do not support message mode so there is no need to use the base version that P/Invokes here.
+        // Anonymous pipes do not support message mode so there is no need to use the base version that
+        // P/Invokes here.
         public override PipeTransmissionMode TransmissionMode
         {
             [System.Security.SecurityCritical]
@@ -377,7 +381,8 @@ namespace System.IO.Pipes
     }
 
     /// <summary>
-    /// Anonymous pipe client. Use this to open the client end of an anonymous pipes created with AnonymousPipeServerStream.
+    /// Anonymous pipe client. Use this to open the client end of an anonymous pipes created with
+    // AnonymousPipeServerStream.
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public sealed class AnonymousPipeClientStream : PipeStream
@@ -725,11 +730,14 @@ namespace System.IO.Pipes
         /// <param name="direction">Pipe direction: In, Out or InOut (duplex).
         /// Win32 note: this gets OR'd into dwOpenMode to CreateNamedPipe
         /// </param>
-        /// <param name="maxNumberOfServerInstances">Maximum number of server instances. Specify a fixed value between
-        /// 1 and 254, or use NamedPipeServerStream.MaxAllowedServerInstances to use the maximum amount allowed by
+        /// <param name="maxNumberOfServerInstances">Maximum number of server instances. Specify a fixed
+        // value between
+        /// 1 and 254, or use NamedPipeServerStream.MaxAllowedServerInstances to use the maximum amount
+        // allowed by
         /// system resources.</param>
         /// <param name="transmissionMode">Byte mode or message mode.
-        /// Win32 note: this gets used for dwPipeMode. CreateNamedPipe allows you to specify PIPE_TYPE_BYTE/MESSAGE
+        /// Win32 note: this gets used for dwPipeMode. CreateNamedPipe allows you to specify
+        // PIPE_TYPE_BYTE/MESSAGE
         /// and PIPE_READMODE_BYTE/MESSAGE independently, but this sets type and readmode to match.
         /// </param>
         /// <param name="options">PipeOption enum: None, Asynchronous, or Writethrough
@@ -783,8 +791,10 @@ namespace System.IO.Pipes
                     SR.GetString(SR.ArgumentOutOfRange_NeedNonNegNum)
                 );
             }
-            // win32 allows fixed values of 1-254 or 255 to mean max allowed by system. We expose 255 as -1 (unlimited)
-            // through the MaxAllowedServerInstances constant. This is consistent e.g. with -1 as infinite timeout, etc
+            // win32 allows fixed values of 1-254 or 255 to mean max allowed by system. We expose 255 as -1
+            // (unlimited)
+            // through the MaxAllowedServerInstances constant. This is consistent e.g. with -1 as infinite
+            // timeout, etc
             if (
                 (maxNumberOfServerInstances < 1 || maxNumberOfServerInstances > 254)
                 && (maxNumberOfServerInstances != MaxAllowedServerInstances)
@@ -805,7 +815,8 @@ namespace System.IO.Pipes
                     SR.GetString(SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable)
                 );
             }
-            // ChangePermissions, TakeOwnership, and AccessSystemSecurity are only legal values user may provide;
+            // ChangePermissions, TakeOwnership, and AccessSystemSecurity are only legal values user may
+            // provide;
             // internally this is set to 0 if not provided. This handles both cases.
             if (
                 (
@@ -996,10 +1007,12 @@ namespace System.IO.Pipes
             InitializeHandle(handle, false, (options & PipeOptions.Asynchronous) != 0);
         }
 
-        // This will wait until the client calls Connect().  If we return from this method, we guarantee that
+        // This will wait until the client calls Connect().  If we return from this method, we guarantee
+        // that
         // the client has returned from its Connect call.   The client may have done so before this method
         // was called (but not before this server is been created, or, if we were servicing another client,
-        // not before we called Disconnect), in which case, there may be some buffer already in the pipe waiting
+        // not before we called Disconnect), in which case, there may be some buffer already in the pipe
+        // waiting
         // for us to read.  See NamedPipeClientStream.Connect for more information.
         [System.Security.SecurityCritical]
         [SuppressMessage(
@@ -1669,8 +1682,10 @@ namespace System.IO.Pipes
             }
         }
 
-        // This constructor is for advanced users that want to specify their PipeAccessRights explcitly.  It can be used
-        // to open pipes with, for example, WritePermissions access in the case that they want to play with the pipe's
+        // This constructor is for advanced users that want to specify their PipeAccessRights explcitly.  It
+        // can be used
+        // to open pipes with, for example, WritePermissions access in the case that they want to play with
+        // the pipe's
         // ACL.
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         [SecuritySafeCritical]
@@ -1765,8 +1780,10 @@ namespace System.IO.Pipes
             m_access = (int)desiredAccessRights;
         }
 
-        // Helper method for the constructor above.  The PipeStream protected constructor takes in a PipeDirection so we need
-        // to convert the access rights to a direction.  Usually, PipeDirection.In/Out maps to GENERIC_READ/WRITE but in the
+        // Helper method for the constructor above.  The PipeStream protected constructor takes in a
+        // PipeDirection so we need
+        // to convert the access rights to a direction.  Usually, PipeDirection.In/Out maps to
+        // GENERIC_READ/WRITE but in the
         // other direction, READ/WRITE_DATA is sufficient.
         private static PipeDirection DirectionFromRights(PipeAccessRights rights)
         {
@@ -1833,9 +1850,12 @@ namespace System.IO.Pipes
             Connect(Timeout.Infinite);
         }
 
-        // Waits for a pipe instance to become available.  This method may return before WaitForConnection is called
-        // on the server end, but WaitForConnection will not return until we have returned.  Any data writen to the
-        // pipe by us after we have connected but before the server has called WaitForConnection will be available
+        // Waits for a pipe instance to become available.  This method may return before WaitForConnection
+        // is called
+        // on the server end, but WaitForConnection will not return until we have returned.  Any data writen
+        // to the
+        // pipe by us after we have connected but before the server has called WaitForConnection will be
+        // available
         // to the server after it calls WaitForConnection.
         [System.Security.SecurityCritical]
         public void Connect(int timeout)
@@ -1927,7 +1947,8 @@ namespace System.IO.Pipes
                 timeout == Timeout.Infinite
                 || (elapsed = unchecked(Environment.TickCount - startTime)) < timeout
             );
-            // BUGBUG: SerialPort does not use unchecked arithmetic when calculating elapsed times.  This is needed
+            // BUGBUG: SerialPort does not use unchecked arithmetic when calculating elapsed times.  This is
+            // needed
             //         because Environment.TickCount can overflow (though only every 49.7 days).
 
             throw new TimeoutException();
@@ -1975,9 +1996,12 @@ namespace System.IO.Pipes
             );
         }
 
-        // Waits for a pipe instance to become available. This method may return before WaitForConnection is called
-        // on the server end, but WaitForConnection will not return until we have returned.  Any data writen to the
-        // pipe by us after we have connected but before the server has called WaitForConnection will be available
+        // Waits for a pipe instance to become available. This method may return before WaitForConnection is
+        // called
+        // on the server end, but WaitForConnection will not return until we have returned.  Any data writen
+        // to the
+        // pipe by us after we have connected but before the server has called WaitForConnection will be
+        // available
         // to the server after it calls WaitForConnection.
         [System.Security.SecuritySafeCritical]
         private void ConnectInternal(
@@ -2086,7 +2110,8 @@ namespace System.IO.Pipes
                 timeout == Timeout.Infinite
                 || (elapsed = unchecked(Environment.TickCount - startTime)) < timeout
             );
-            // BUGBUG: SerialPort does not use unchecked arithmetic when calculating elapsed times.  This is needed
+            // BUGBUG: SerialPort does not use unchecked arithmetic when calculating elapsed times.  This is
+            // needed
             //         because Environment.TickCount can overflow (though only every 49.7 days).
 
             throw new TimeoutException();

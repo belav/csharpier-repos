@@ -428,9 +428,11 @@ namespace System.Net.Http
         // This causes WinHTTP to cancel any pending I/O and accelerating its callbacks on the handle.
         // This causes our related TaskCompletionSource objects to move to a terminal state.
         //
-        // We only want to dispose the handle if we are actually waiting for a pending WinHTTP I/O to complete,
+        // We only want to dispose the handle if we are actually waiting for a pending WinHTTP I/O to
+        // complete,
         // meaning that we are await'ing for a Task to complete. While we could simply call dispose without
-        // a pending operation, it would cause random failures in the other threads when we expect a valid handle.
+        // a pending operation, it would cause random failures in the other threads when we expect a valid
+        // handle.
         private void CancelPendingResponseStreamReadOperation()
         {
             lock (_state.Lock)

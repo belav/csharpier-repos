@@ -68,7 +68,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 );
 
                 //Set of Keys for this Association Set
-                //need to key on EdmMember and EdmType because A, B subtype of C, can have the same id (EdmMember) that is defined in C.
+                //need to key on EdmMember and EdmType because A, B subtype of C, can have the same id (EdmMember)
+                // that is defined in C.
                 HashSet<Pair<EdmMember, EntityType>> associationkeys =
                     new HashSet<Pair<EdmMember, EntityType>>();
 

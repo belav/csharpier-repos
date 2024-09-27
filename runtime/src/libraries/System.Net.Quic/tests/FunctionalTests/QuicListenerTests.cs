@@ -57,8 +57,10 @@ namespace System.Net.Quic.Tests
         {
             await Task.Run(async () =>
                 {
-                    // QuicListener has special behavior for IPv6Any (listening on all IP addresses, i.e. including IPv4).
-                    // Use a copy of IPAddress.IPv6Any to make sure address detection doesn't rely on reference equality comparison.
+                    // QuicListener has special behavior for IPv6Any (listening on all IP addresses, i.e. including
+                    // IPv4).
+                    // Use a copy of IPAddress.IPv6Any to make sure address detection doesn't rely on reference equality
+                    // comparison.
                     IPAddress IPv6Any = new IPAddress(
                         (ReadOnlySpan<byte>)
                             new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -333,7 +335,8 @@ namespace System.Net.Quic.Tests
             // Attempt to connect the first accept.
             ValueTask<QuicConnection> connectTask = CreateQuicConnection(listener.LocalEndPoint);
 
-            // First, wait for the connect attempt to reach the server; otherwise, the client exception might end up being HostUnreachable.
+            // First, wait for the connect attempt to reach the server; otherwise, the client exception might
+            // end up being HostUnreachable.
             // Then, dispose the listener and un-block the waiting server options callback.
             await connectAttempted.Task;
             await listener.DisposeAsync();

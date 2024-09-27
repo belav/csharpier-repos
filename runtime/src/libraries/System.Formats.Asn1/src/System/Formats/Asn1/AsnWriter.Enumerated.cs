@@ -10,7 +10,8 @@ namespace System.Formats.Asn1
         ///   tag UNIVERSAL 10.
         /// </summary>
         /// <param name="value">The boxed enumeration value to write.</param>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 10).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 10).</param>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="value"/> is <see langword="null"/>.
         /// </exception>

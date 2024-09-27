@@ -62,7 +62,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     /// <summary>
     /// Creates an <see cref="XmlKeyManager"/>.
     /// </summary>
-    /// <param name="keyManagementOptions">The <see cref="IOptions{KeyManagementOptions}"/> instance that provides the configuration.</param>
+    /// <param name="keyManagementOptions">The <see cref="IOptions{KeyManagementOptions}"/> instance
+    // that provides the configuration.</param>
     /// <param name="activator">The <see cref="IActivator"/>.</param>
 #pragma warning disable PUB0001 // Pubternal type IActivator in public API
     public XmlKeyManager(IOptions<KeyManagementOptions> keyManagementOptions, IActivator activator)
@@ -72,7 +73,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     /// <summary>
     /// Creates an <see cref="XmlKeyManager"/>.
     /// </summary>
-    /// <param name="keyManagementOptions">The <see cref="IOptions{KeyManagementOptions}"/> instance that provides the configuration.</param>
+    /// <param name="keyManagementOptions">The <see cref="IOptions{KeyManagementOptions}"/> instance
+    // that provides the configuration.</param>
     /// <param name="activator">The <see cref="IActivator"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
 #pragma warning disable PUB0001 // Pubternal type IActivator in public API
@@ -311,7 +313,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         }
     }
 
-    // returns a Guid (for specific keys) or a DateTimeOffset (for all keys created on or before a specific date)
+    // returns a Guid (for specific keys) or a DateTimeOffset (for all keys created on or before a
+    // specific date)
     private object ProcessRevocationElement(XElement revocationElement)
     {
         Debug.Assert(revocationElement.Name == RevocationElementName);
@@ -399,9 +402,12 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 
     private void WriteKeyDeserializationErrorToLog(Exception error, XElement keyElement)
     {
-        // Ideally we'd suppress the error since it might contain sensitive information, but it would be too difficult for
-        // an administrator to diagnose the issue if we hide this information. Instead we'll log the error to the error
-        // log and the raw <key> element to the debug log. This works for our out-of-box XML decryptors since they don't
+        // Ideally we'd suppress the error since it might contain sensitive information, but it would be too
+        // difficult for
+        // an administrator to diagnose the issue if we hide this information. Instead we'll log the error
+        // to the error
+        // log and the raw <key> element to the debug log. This works for our out-of-box XML decryptors
+        // since they don't
         // include sensitive information in the exception message.
 
         // write sanitized <key> element
@@ -622,7 +628,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
             _logger.UsingAzureAsKeyRepository(azureWebSitesKeysFolder.FullName);
 
             // Cloud DPAPI isn't yet available, so we don't encrypt keys at rest.
-            // This isn't all that different than what Azure Web Sites does today, and we can always add this later.
+            // This isn't all that different than what Azure Web Sites does today, and we can always add this
+            // later.
             repository = new FileSystemXmlRepository(azureWebSitesKeysFolder, _loggerFactory);
         }
         else

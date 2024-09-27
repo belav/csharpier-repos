@@ -858,8 +858,10 @@ namespace XLinqTests
             attr.Verify();
         }
 
-        //[Variation(Priority = 0, Desc = "XAttribute - copy - not namespace decl - connected", Param = true)]
-        //[Variation(Priority = 0, Desc = "XAttribute - copy - not namespace decl - not connected", Param = false)]
+        //[Variation(Priority = 0, Desc = "XAttribute - copy - not namespace decl - connected", Param =
+        // true)]
+        //[Variation(Priority = 0, Desc = "XAttribute - copy - not namespace decl - not connected", Param =
+        // false)]
         public void CreateXAttribute3()
         {
             var isConnected = (bool)Variation.Param;
@@ -885,8 +887,10 @@ namespace XLinqTests
             attr.Verify();
         }
 
-        //[Variation(Priority = 1, Desc = "XAttribute - copy - default namespace decl - connected", Params = new object[] { true, "xmlns" })]
-        //[Variation(Priority = 1, Desc = "XAttribute - copy - default namespace decl - not connected", Params = new object[] { false, "xmlns" })]
+        //[Variation(Priority = 1, Desc = "XAttribute - copy - default namespace decl - connected", Params =
+        // new object[] { true, "xmlns" })]
+        //[Variation(Priority = 1, Desc = "XAttribute - copy - default namespace decl - not connected",
+        // Params = new object[] { false, "xmlns" })]
         public void CreateXAttribute4()
         {
             var isConnected = (bool)Variation.Params[0];
@@ -910,8 +914,10 @@ namespace XLinqTests
             attr.Verify();
         }
 
-        //[Variation(Priority = 1, Desc = "XAttribute - copy - namespace decl - connected", Params = new object[] { true, "p" })]
-        //[Variation(Priority = 1, Desc = "XAttribute - copy - namespace decl - not connected", Params = new object[] { false, "p" })]
+        //[Variation(Priority = 1, Desc = "XAttribute - copy - namespace decl - connected", Params = new
+        // object[] { true, "p" })]
+        //[Variation(Priority = 1, Desc = "XAttribute - copy - namespace decl - not connected", Params = new
+        // object[] { false, "p" })]
         public void CreateXAttribute5()
         {
             var isConnected = (bool)Variation.Params[0];
@@ -936,7 +942,8 @@ namespace XLinqTests
         }
 
         // 21.    The empty string cannot be used as a namespace name (exception is default ns redef.)
-        //[Variation(Priority = 1, Desc = "XAttribute - default namespace decl & empty value", Params = new object[] { false, "xmlns" })]
+        //[Variation(Priority = 1, Desc = "XAttribute - default namespace decl & empty value", Params = new
+        // object[] { false, "xmlns" })]
         public void CreateXAttribute6()
         {
             var shouldFail = (bool)Variation.Params[0];
@@ -955,7 +962,8 @@ namespace XLinqTests
         }
 
         // 21.    The empty string cannot be used as a namespace name (exception is default ns redef.)
-        //[Variation(Priority = 1, Desc = "XAttribute - prefixed namespace decl & empty value", Params = new object[] { true, "p" })]
+        //[Variation(Priority = 1, Desc = "XAttribute - prefixed namespace decl & empty value", Params = new
+        // object[] { true, "p" })]
         public void CreateXAttribute7()
         {
             var shouldFail = (bool)Variation.Params[0];
@@ -981,10 +989,14 @@ namespace XLinqTests
         //    * http://www.w3.org/2000/xmlns/
         //    * It must not be declared
         //    * No other prefix may be bound to this namespace name.
-        //[Variation(Priority = 1, Desc = "XAttribute - xml namespace - prefix redef", Params = new object[] { "xml", "another", true })]
-        //[Variation(Priority = 1, Desc = "XAttribute - xml namespace - bound to diff. prefix", Params = new object[] { "p", "http://www.w3.org/XML/1998/namespace", true })]
-        //[Variation(Priority = 1, Desc = "XAttribute - xml namespace - redeclared (positive).", Params = new object[] { "xml", "http://www.w3.org/XML/1998/namespace", false })]
-        //[Variation(Priority = 1, Desc = "XAttribute - xmlns namespace - bound to diff. prefix", Params = new object[] { "p", "http://www.w3.org/2000/xmlns/", true })]
+        //[Variation(Priority = 1, Desc = "XAttribute - xml namespace - prefix redef", Params = new object[]
+        // { "xml", "another", true })]
+        //[Variation(Priority = 1, Desc = "XAttribute - xml namespace - bound to diff. prefix", Params = new
+        // object[] { "p", "http://www.w3.org/XML/1998/namespace", true })]
+        //[Variation(Priority = 1, Desc = "XAttribute - xml namespace - redeclared (positive).", Params =
+        // new object[] { "xml", "http://www.w3.org/XML/1998/namespace", false })]
+        //[Variation(Priority = 1, Desc = "XAttribute - xmlns namespace - bound to diff. prefix", Params =
+        // new object[] { "p", "http://www.w3.org/2000/xmlns/", true })]
         public void CreateXAttribute8()
         {
             var prefix = (string)Variation.Params[0];
@@ -1313,10 +1325,14 @@ namespace XLinqTests
             elem1.Verify();
         }
 
-        //[Variation(Priority = 0, Desc = "XElement - copy: connected, in XDocument", Params = new object[] { true, true })]
-        //[Variation(Priority = 0, Desc = "XElement - copy: connected, not in XDocument", Params = new object[] { true, false })]
-        //[Variation(Priority = 0, Desc = "XElement - copy: not connected, in XDocument", Params = new object[] { false, true })]
-        //[Variation(Priority = 0, Desc = "XElement - copy: not connected, not in XDocument", Params = new object[] { false, false })]
+        //[Variation(Priority = 0, Desc = "XElement - copy: connected, in XDocument", Params = new object[]
+        // { true, true })]
+        //[Variation(Priority = 0, Desc = "XElement - copy: connected, not in XDocument", Params = new
+        // object[] { true, false })]
+        //[Variation(Priority = 0, Desc = "XElement - copy: not connected, in XDocument", Params = new
+        // object[] { false, true })]
+        //[Variation(Priority = 0, Desc = "XElement - copy: not connected, not in XDocument", Params = new
+        // object[] { false, false })]
         public void CreateXElement8()
         {
             var isConnected = (bool)Variation.Params[0];
@@ -1495,11 +1511,14 @@ namespace XLinqTests
             }
         }
 
-        //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - initial", Param = 0)]
+        //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - initial", Param =
+        // 0)]
         //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - decl", Param = 1)]
-        //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - endElement", Param = 4)]
+        //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - endElement", Param =
+        // 4)]
         //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - PI", Param = 5)]
-        //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - Comment", Param = 6)]
+        //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - Comment", Param =
+        // 6)]
         //[Variation(Priority = 2, Desc = "XElement - from reader - not allowed nodes - text", Param = 7)]
 
         // XPI
@@ -1554,7 +1573,8 @@ namespace XLinqTests
             }
         }
 
-        //[Variation(Priority = 1, Desc = "XProcessingInstruction - invalid name (invalid char)", Param = "?>")]
+        //[Variation(Priority = 1, Desc = "XProcessingInstruction - invalid name (invalid char)", Param =
+        // "?>")]
         public void CreateXPINegative()
         {
             var name = Variation.Param as string;
@@ -1566,7 +1586,8 @@ namespace XLinqTests
             catch (XmlException) { }
         }
 
-        //[Variation(Priority = 2, Desc = "XProcessingInstruction - invalid name (empty string)", Param = "")]
+        //[Variation(Priority = 2, Desc = "XProcessingInstruction - invalid name (empty string)", Param =
+        // "")]
         //[Variation(Priority = 2, Desc = "XProcessingInstruction - invalid name (xml)", Param = "xml")]
         //[Variation(Priority = 2, Desc = "XProcessingInstruction - invalid name (xmL)", Param = "xmL")]
         //[Variation(Priority = 2, Desc = "XProcessingInstruction - invalid name (xmL)", Param = "xmL")]
@@ -1586,7 +1607,8 @@ namespace XLinqTests
             catch (ArgumentException) { }
         }
 
-        //[Variation(Priority = 1, Desc = "XProcessingInstruction - from reader - target & data", Param = 2)]
+        //[Variation(Priority = 1, Desc = "XProcessingInstruction - from reader - target & data", Param =
+        // 2)]
         //[Variation(Priority = 1, Desc = "XProcessingInstruction - from reader - target only", Param = 4)]
 
         // XText & CData
@@ -1618,8 +1640,10 @@ namespace XLinqTests
             TestLog.Compare(text.ToString(SaveOptions.DisableFormatting), "MY_TEXT", "Xml");
         }
 
-        //[Variation(Priority = 1, Desc = "XText - text", Params = new object[] { XmlNodeType.Text, @"MY_TEXT" })]
-        //[Variation(Priority = 1, Desc = "XText - CDATA", Params = new object[] { XmlNodeType.CDATA, @"<![CDATA[MY_TEXT]]>" })]
+        //[Variation(Priority = 1, Desc = "XText - text", Params = new object[] { XmlNodeType.Text,
+        // @"MY_TEXT" })]
+        //[Variation(Priority = 1, Desc = "XText - CDATA", Params = new object[] { XmlNodeType.CDATA,
+        // @"<![CDATA[MY_TEXT]]>" })]
         public void CreateXText1()
         {
             var nodeType = (XmlNodeType)Variation.Params[0];
@@ -1635,8 +1659,10 @@ namespace XLinqTests
             TestLog.Compare(cdata.ToString(SaveOptions.DisableFormatting), expectedXml, "Xml");
         }
 
-        //[Variation(Priority = 3, Desc = "XText - Text - empty", Params = new object[] { XmlNodeType.Text, "" })]
-        //[Variation(Priority = 3, Desc = "XText - CData - empty", Params = new object[] { XmlNodeType.CDATA, @"<![CDATA[]]>" })]
+        //[Variation(Priority = 3, Desc = "XText - Text - empty", Params = new object[] { XmlNodeType.Text,
+        // "" })]
+        //[Variation(Priority = 3, Desc = "XText - CData - empty", Params = new object[] {
+        // XmlNodeType.CDATA, @"<![CDATA[]]>" })]
         public void CreateXText2()
         {
             var nodeType = (XmlNodeType)Variation.Params[0];
@@ -1650,10 +1676,14 @@ namespace XLinqTests
             TestLog.Compare(cdata.ToString(SaveOptions.DisableFormatting), expectedXml, "Xml");
         }
 
-        //[Variation(Priority = 1, Desc = "XText - CDATA - from reader", Params = new object[] { 2, XmlNodeType.CDATA, "MY_TEXT", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" })]
-        //[Variation(Priority = 1, Desc = "XText - Text - from reader", Params = new object[] { 4, XmlNodeType.Text, "MY_TEXT", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" })]
-        //[Variation(Priority = 1, Desc = "XText - Text - from reader/ whitespace", Params = new object[] { 6, XmlNodeType.Text, "\t", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" })]
-        //[Variation(Priority = 1, Desc = "XText - Text - from reader/ significant whitespace", Params = new object[] { 2, XmlNodeType.Text, "\t", "<a xml:space='preserve'>\t<X/></a>" })]
+        //[Variation(Priority = 1, Desc = "XText - CDATA - from reader", Params = new object[] { 2,
+        // XmlNodeType.CDATA, "MY_TEXT", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" })]
+        //[Variation(Priority = 1, Desc = "XText - Text - from reader", Params = new object[] { 4,
+        // XmlNodeType.Text, "MY_TEXT", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" })]
+        //[Variation(Priority = 1, Desc = "XText - Text - from reader/ whitespace", Params = new object[] {
+        // 6, XmlNodeType.Text, "\t", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" })]
+        //[Variation(Priority = 1, Desc = "XText - Text - from reader/ significant whitespace", Params = new
+        // object[] { 2, XmlNodeType.Text, "\t", "<a xml:space='preserve'>\t<X/></a>" })]
         public void CreateXTextReader()
         {
             var readCount = (int)Variation.Params[0];
@@ -1686,11 +1716,16 @@ namespace XLinqTests
         }
 
         // DTD
-        //[Variation(Priority = 0, Desc = "DTD - normal", Params = new object[] { new string[] { "root", "a1", "a2", "a3", }, "<!DOCTYPE root PUBLIC \"a1\" \"a2\"[a3]>" })]
-        //[Variation(Priority = 1, Desc = "DTD - no systemId", Params = new object[] { new string[] { "root", "a1", null, "a3" }, "<!DOCTYPE root PUBLIC \"a1\" \"\"[a3]>" })]
-        //[Variation(Priority = 1, Desc = "DTD - no publicId", Params = new object[] { new string[] { "root", null, "a2", "a3" }, "<!DOCTYPE root SYSTEM \"a2\"[a3]>" })]
-        //[Variation(Priority = 1, Desc = "DTD - no publicId, no systemId", Params = new object[] { new string[] { "root", null, null, "a3" }, "<!DOCTYPE root [a3]>" })]
-        //[Variation(Priority = 1, Desc = "DTD - all nulls", Params = new object[] { new string[] { "root", null, null, null }, "<!DOCTYPE root >" })]
+        //[Variation(Priority = 0, Desc = "DTD - normal", Params = new object[] { new string[] { "root",
+        // "a1", "a2", "a3", }, "<!DOCTYPE root PUBLIC \"a1\" \"a2\"[a3]>" })]
+        //[Variation(Priority = 1, Desc = "DTD - no systemId", Params = new object[] { new string[] {
+        // "root", "a1", null, "a3" }, "<!DOCTYPE root PUBLIC \"a1\" \"\"[a3]>" })]
+        //[Variation(Priority = 1, Desc = "DTD - no publicId", Params = new object[] { new string[] {
+        // "root", null, "a2", "a3" }, "<!DOCTYPE root SYSTEM \"a2\"[a3]>" })]
+        //[Variation(Priority = 1, Desc = "DTD - no publicId, no systemId", Params = new object[] { new
+        // string[] { "root", null, null, "a3" }, "<!DOCTYPE root [a3]>" })]
+        //[Variation(Priority = 1, Desc = "DTD - all nulls", Params = new object[] { new string[] { "root",
+        // null, null, null }, "<!DOCTYPE root >" })]
         public void DTDConstruct()
         {
             var data = Variation.Params[0] as string[];

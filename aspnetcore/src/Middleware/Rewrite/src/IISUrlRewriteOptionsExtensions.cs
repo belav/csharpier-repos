@@ -19,7 +19,9 @@ public static class IISUrlRewriteOptionsExtensions
     /// <param name="options">The <see cref="RewriteOptions"/></param>
     /// <param name="fileProvider">The <see cref="IFileProvider"/> </param>
     /// <param name="filePath">The path to the file containing UrlRewrite rules.</param>
-    /// <param name="alwaysUseManagedServerVariables">Server variables are by default sourced from the server if it supports the <see cref="IServerVariablesFeature"/> feature. Use <c>true</c> to disable that behavior</param>
+    /// <param name="alwaysUseManagedServerVariables">Server variables are by default sourced from the
+    // server if it supports the <see cref="IServerVariablesFeature"/> feature. Use <c>true</c> to disable
+    // that behavior</param>
     [SuppressMessage(
         "ApiDesign",
         "RS0026:Do not add multiple public overloads with optional parameters",
@@ -52,7 +54,9 @@ public static class IISUrlRewriteOptionsExtensions
     /// </summary>
     /// <param name="options">The <see cref="RewriteOptions"/></param>
     /// <param name="reader">The text reader stream.</param>
-    /// <param name="alwaysUseManagedServerVariables">Server variables are by default sourced from the server if it supports the <see cref="IServerVariablesFeature"/> feature. Use <c>true</c> to disable that behavior</param>
+    /// <param name="alwaysUseManagedServerVariables">Server variables are by default sourced from the
+    // server if it supports the <see cref="IServerVariablesFeature"/> feature. Use <c>true</c> to disable
+    // that behavior</param>
     [SuppressMessage(
         "ApiDesign",
         "RS0026:Do not add multiple public overloads with optional parameters",

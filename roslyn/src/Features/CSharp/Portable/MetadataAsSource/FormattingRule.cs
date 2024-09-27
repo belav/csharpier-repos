@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
                 var previousToken = token1;
                 var currentToken = token2;
 
-                // We are not between members or usings if the last token wasn't the end of a statement or if the current token
+                // We are not between members or usings if the last token wasn't the end of a statement or if the
+                // current token
                 // is the end of a scope.
                 if (
                     (

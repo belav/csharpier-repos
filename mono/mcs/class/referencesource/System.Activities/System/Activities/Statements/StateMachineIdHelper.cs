@@ -21,8 +21,10 @@ namespace System.Activities.Statements
         internal const char StateIdSeparator = ':';
 
         /// <summary>
-        /// Given current stateId and descendant Id, this method returns Id of direct child state of current state.
-        /// This direct child state is either the state which descendantId represents or one of ancestor states of it.
+        /// Given current stateId and descendant Id, this method returns Id of direct child state of current
+        // state.
+        /// This direct child state is either the state which descendantId represents or one of ancestor
+        // states of it.
         /// </summary>
         /// <param name="stateId">Internal StateId of StateMachine.</param>
         /// <param name="descendantId">Internal StateId of the state.</param>

@@ -275,7 +275,8 @@ namespace System.Formats.Tar.Tests
                 Assert.Equal(fileEntryType, entry.EntryType);
                 entry.DataStream.ReadByte(); // Reading is possible as long as we don't move to the next entry
 
-                // Attempting to read the next entries should automatically move the position pointer to the beginning of the next header
+                // Attempting to read the next entries should automatically move the position pointer to the
+                // beginning of the next header
                 TarEntry entry2 = await reader.GetNextEntryAsync();
                 Assert.NotNull(entry2);
                 Assert.Equal(format, entry2.Format);

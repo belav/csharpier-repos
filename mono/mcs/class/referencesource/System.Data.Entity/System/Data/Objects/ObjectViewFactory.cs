@@ -22,15 +22,20 @@ using System.Runtime.CompilerServices;
 namespace System.Data.Objects
 {
     /// <summary>
-    /// Creates instances of ObjectView that provide a binding list for ObjectQuery results and EntityCollections.
+    /// Creates instances of ObjectView that provide a binding list for ObjectQuery results and
+    // EntityCollections.
     /// </summary>
     /// <remarks>
-    /// The factory methods construct an ObjectView whose generic type parameter (and typed of elements in the binding list)
-    /// is of the same type or a more specific derived type of the generic type of the ObjectQuery or EntityCollection.
+    /// The factory methods construct an ObjectView whose generic type parameter (and typed of elements
+    // in the binding list)
+    /// is of the same type or a more specific derived type of the generic type of the ObjectQuery or
+    // EntityCollection.
     /// The EDM type of the query results or EntityType or the EntityCollection is examined to determine
     /// the appropriate type to be used.
-    /// For example, if you have an ObjectQuery whose generic type is "object", but the EDM result type of the Query maps
-    /// to the CLR type "Customer", then the ObjectView returned will specify a generic type of "Customer", and not "object".
+    /// For example, if you have an ObjectQuery whose generic type is "object", but the EDM result type
+    // of the Query maps
+    /// to the CLR type "Customer", then the ObjectView returned will specify a generic type of
+    // "Customer", and not "object".
     /// </remarks>
     internal static class ObjectViewFactory
     {
@@ -62,12 +67,15 @@ namespace System.Data.Objects
         /// Must not be null.
         /// </param>
         /// <param name="forceReadOnly">
-        /// <b>True</b> to prevent modifications to the binding list built from the query result; otherwise <b>false</b>.
-        /// Note that other conditions may prevent the binding list from being modified, so a value of <b>false</b>
+        /// <b>True</b> to prevent modifications to the binding list built from the query result; otherwise
+        // <b>false</b>.
+        /// Note that other conditions may prevent the binding list from being modified, so a value of
+        // <b>false</b>
         /// supplied for this parameter doesn't necessarily mean that the list will be writable.
         /// </param>
         /// <param name="singleEntitySet">
-        /// If the query results are composed of entities that only exist in a single <see cref="EntitySet"/>,
+        /// If the query results are composed of entities that only exist in a single <see
+        // cref="EntitySet"/>,
         /// the value of this parameter is the single EntitySet.
         /// Otherwise the value of this parameter should be null.
         /// </param>
@@ -105,7 +113,8 @@ namespace System.Data.Objects
             IBindingList objectView;
             object eventDataSource = objectContext.ObjectStateManager;
 
-            // If the clrElementType matches the declared TElement type, optimize the construction of the ObjectView
+            // If the clrElementType matches the declared TElement type, optimize the construction of the
+            // ObjectView
             // by avoiding a reflection-based instantiation.
             if (clrElementType == typeof(TElement))
             {
@@ -142,7 +151,8 @@ namespace System.Data.Objects
                     throw EntityUtil.ValueInvalidCast(clrElementType, typeof(TElement));
                 }
 
-                // Use reflection to create an instance of the generic ObjectView and ObjectViewQueryResultData classes,
+                // Use reflection to create an instance of the generic ObjectView and ObjectViewQueryResultData
+                // classes,
                 // using clrElementType as the value of TElement generic type parameter for both classes.
 
                 Type objectViewDataType = genericObjectViewQueryResultDataType.MakeGenericType(
@@ -225,8 +235,10 @@ namespace System.Data.Objects
             {
                 clrElementType = GetClrType<TElement>(ospaceElementTypeUsage.EdmType);
 
-                // A null clrElementType is returned by GetClrType if the EDM type is a RowType with no specific CLR type mapping.
-                // This should not happen when working with EntityCollections, but if it does, fallback to TEntityRef type.
+                // A null clrElementType is returned by GetClrType if the EDM type is a RowType with no specific CLR
+                // type mapping.
+                // This should not happen when working with EntityCollections, but if it does, fallback to
+                // TEntityRef type.
                 Debug.Assert(
                     clrElementType != null,
                     "clrElementType has unexpected value of null."
@@ -240,7 +252,8 @@ namespace System.Data.Objects
 
             IBindingList objectView;
 
-            // If the clrElementType matches the declared TElement type, optimize the construction of the ObjectView
+            // If the clrElementType matches the declared TElement type, optimize the construction of the
+            // ObjectView
             // by avoiding a reflection-based instantiation.
             if (clrElementType == typeof(TElement))
             {
@@ -255,7 +268,8 @@ namespace System.Data.Objects
                     throw EntityUtil.ValueInvalidCast(clrElementType, typeof(TElement));
                 }
 
-                // Use reflection to create an instance of the generic ObjectView and ObjectViewEntityCollectionData classes,
+                // Use reflection to create an instance of the generic ObjectView and ObjectViewEntityCollectionData
+                // classes,
                 // using clrElementType as the value of TElement generic type parameter for both classes.
 
                 Type objectViewDataType = genericObjectViewEntityCollectionDataType.MakeGenericType(
@@ -293,10 +307,14 @@ namespace System.Data.Objects
         /// <summary>
         /// Create an ObjectView using reflection.
         /// </summary>
-        /// <param name="clrElementType">Type to be used for the ObjectView's generic type parameter.</param>
-        /// <param name="objectViewDataType">The type of class that implements the IObjectViewData to be used by the ObjectView.</param>
-        /// <param name="viewData">The IObjectViewData to be used by the ObjectView to access the binding list.</param>
-        /// <param name="eventDataSource">Event source used by ObjectView for entity and membership changes.</param>
+        /// <param name="clrElementType">Type to be used for the ObjectView's generic type
+        // parameter.</param>
+        /// <param name="objectViewDataType">The type of class that implements the IObjectViewData to be
+        // used by the ObjectView.</param>
+        /// <param name="viewData">The IObjectViewData to be used by the ObjectView to access the binding
+        // list.</param>
+        /// <param name="eventDataSource">Event source used by ObjectView for entity and membership
+        // changes.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static IBindingList CreateObjectView(
@@ -397,14 +415,16 @@ namespace System.Data.Objects
         /// <typeparam name="TElement">
         /// CLR element type declared by the caller.
         ///
-        /// There is no requirement that this method return the same type, or a type compatible with the declared type;
+        /// There is no requirement that this method return the same type, or a type compatible with the
+        // declared type;
         /// it is merely a suggestion as to which type might be used.
         /// </typeparam>
         /// <param name="ospaceEdmType">
         /// The EDM O-Space type of the items in a particular query result.
         /// </param>
         /// <returns>
-        /// <see cref="Type"/> instance that represents the CLR type that corresponds to the supplied EDM item type;
+        /// <see cref="Type"/> instance that represents the CLR type that corresponds to the supplied EDM
+        // item type;
         /// or null if the EDM type does not map to a CLR type.
         /// Null is returned in the case where <paramref name="ospaceEdmType"/> is a <see cref="RowType"/>,
         /// and no CLR type mapping is specified in the RowType metadata.
@@ -414,7 +434,8 @@ namespace System.Data.Objects
             Type clrType;
 
             // EDM RowTypes are generally represented by CLR MaterializedDataRecord types
-            // that need special handling to properly expose the properties available for binding (using ICustomTypeDescriptor and ITypedList implementations, for example).
+            // that need special handling to properly expose the properties available for binding (using
+            // ICustomTypeDescriptor and ITypedList implementations, for example).
             //
             // However, if the RowType has InitializerMetadata with a non-null CLR Type,
             // that CLR type should be used to determine the properties available for binding.

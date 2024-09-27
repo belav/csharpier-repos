@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.IO;
@@ -307,7 +308,8 @@ namespace System.Web.WebPages.Test
 
             VirtualPathProvider provider = mockProvider1.Object;
 
-            // Act; uses one VirtualPathProvider in constructor and the other when IsNonUpdatablePrecompiledApp() is called directly
+            // Act; uses one VirtualPathProvider in constructor and the other when
+            // IsNonUpdatablePrecompiledApp() is called directly
             BuildManagerWrapper buildManagerWrapper = new BuildManagerWrapper(
                 () => provider,
                 pathUtility

@@ -14,17 +14,20 @@ namespace System.Tests
         // is slightly too accurate when writing tests meant to run against libm implementations
         // for various platforms. 2^-21 (approx. 4.76e-07) seems to be as accurate as we can get.
         //
-        // The tests themselves will take CrossPlatformMachineEpsilon and adjust it according to the expected result
+        // The tests themselves will take CrossPlatformMachineEpsilon and adjust it according to the
+        // expected result
         // so that the delta used for comparison will compare the most significant digits and ignore
         // any digits that are outside the single precision range (6-9 digits).
 
         // For example, a test with an expect result in the format of 0.xxxxxxxxx will use
-        // CrossPlatformMachineEpsilon for the variance, while an expected result in the format of 0.0xxxxxxxxx
+        // CrossPlatformMachineEpsilon for the variance, while an expected result in the format of
+        // 0.0xxxxxxxxx
         // will use CrossPlatformMachineEpsilon / 10 and expected result in the format of x.xxxxxx will
         // use CrossPlatformMachineEpsilon * 10.
         private const float CrossPlatformMachineEpsilon = 4.76837158e-07f;
 
-        // The existing estimate functions either have an error of no more than 1.5 * 2^-12 (approx. 3.66e-04)
+        // The existing estimate functions either have an error of no more than 1.5 * 2^-12 (approx.
+        // 3.66e-04)
         // or perform one Newton-Raphson iteration which, for the currently tested values, gives an error of
         // no more than approx. 1.5 * 2^-7 (approx 1.17e-02).
         private const double CrossPlatformMachineEpsilonForEstimates = 1.171875e-02f;

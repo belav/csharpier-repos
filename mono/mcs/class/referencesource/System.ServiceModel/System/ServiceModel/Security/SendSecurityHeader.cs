@@ -366,7 +366,8 @@ namespace System.ServiceModel.Security
             // to attempt to resolve the token and the nego will start.
             //
             // We don't want that.
-            // We want to defer the nego until after the CBT is available in SecurityAppliedMessage.OnWriteMessage.
+            // We want to defer the nego until after the CBT is available in
+            // SecurityAppliedMessage.OnWriteMessage.
             if (!(token is ProviderBackedSecurityToken))
             {
                 this.shouldSignToHeader |=
@@ -780,11 +781,14 @@ namespace System.ServiceModel.Security
                     );
 
                     // Implement Protect token
-                    // NOTE: The spec says sign the primary token if it is not included in the message. But we currently are not supporting it
-                    // as we do not support STR-Transform for external references. Hence we can not sign the token which is external ie not in the message.
+                    // NOTE: The spec says sign the primary token if it is not included in the message. But we currently
+                    // are not supporting it
+                    // as we do not support STR-Transform for external references. Hence we can not sign the token which
+                    // is external ie not in the message.
                     // This only affects the messages from service to client where
                     // 1. allowSerializedSigningTokenOnReply is false.
-                    // 2. SymmetricSecurityBindingElement with IssuedTokens binding where the issued token has a symmetric key.
+                    // 2. SymmetricSecurityBindingElement with IssuedTokens binding where the issued token has a
+                    // symmetric key.
 
                     if (this.ShouldProtectTokens)
                     {

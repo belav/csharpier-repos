@@ -15,8 +15,10 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
 {
     /// <summary>
-    /// This is a FileTextLoader which no-ops if the file is not available on disk. This is the common case for
-    /// Cascade and throwing exceptions slows down GetText operations significantly enough to have visible UX impact.
+    /// This is a FileTextLoader which no-ops if the file is not available on disk. This is the common
+    // case for
+    /// Cascade and throwing exceptions slows down GetText operations significantly enough to have
+    // visible UX impact.
     /// </summary>
     internal sealed class WorkspaceFileTextLoaderNoException : WorkspaceFileTextLoader
     {

@@ -14,10 +14,13 @@ public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     where TUser : class
 {
     /// <summary>
-    /// Checks if a two-factor authentication token can be generated for the specified <paramref name="user"/>.
+    /// Checks if a two-factor authentication token can be generated for the specified <paramref
+    // name="user"/>.
     /// </summary>
-    /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref name="user"/> from.</param>
-    /// <param name="user">The <typeparamref name="TUser"/> to check for the possibility of generating a two-factor authentication token.</param>
+    /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref
+    // name="user"/> from.</param>
+    /// <param name="user">The <typeparamref name="TUser"/> to check for the possibility of generating a
+    // two-factor authentication token.</param>
     /// <returns>True if the user has an authenticator key set, otherwise false.</returns>
     public virtual async Task<bool> CanGenerateTwoFactorTokenAsync(
         UserManager<TUser> manager,
@@ -33,7 +36,8 @@ public class AuthenticatorTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUs
     /// Returns an empty string since no authenticator codes are sent.
     /// </summary>
     /// <param name="purpose">Ignored.</param>
-    /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref name="user"/> from.</param>
+    /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref
+    // name="user"/> from.</param>
     /// <param name="user">The <typeparamref name="TUser"/>.</param>
     /// <returns>string.Empty.</returns>
     public virtual Task<string> GenerateAsync(

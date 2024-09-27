@@ -39,7 +39,8 @@ internal sealed class ServerStreamingServerMethodInvoker<TService, TRequest, TRe
     private readonly ServerStreamingServerMethod<TRequest, TResponse>? _pipelineInvoker;
 
     /// <summary>
-    /// Creates a new instance of <see cref="ServerStreamingServerMethodInvoker{TService, TRequest, TResponse}"/>.
+    /// Creates a new instance of <see cref="ServerStreamingServerMethodInvoker{TService, TRequest,
+    // TResponse}"/>.
     /// </summary>
     /// <param name="invoker">The server streaming method to invoke.</param>
     /// <param name="method">The description of the gRPC method.</param>

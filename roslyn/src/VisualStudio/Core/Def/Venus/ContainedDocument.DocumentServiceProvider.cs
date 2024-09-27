@@ -66,7 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 public SpanMapper(ITextBuffer primaryBuffer) => _primaryBuffer = primaryBuffer;
 
                 /// <summary>
-                /// Legacy venus does not support us adding import directives and them mapping them to their own concepts.
+                /// Legacy venus does not support us adding import directives and them mapping them to their own
+                // concepts.
                 /// </summary>
                 public override bool SupportsMappingImportDirectives => false;
 
@@ -102,14 +103,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     CancellationToken cancellationToken
                 )
                 {
-                    // REVIEW: for now, we keep document here due to open file case, otherwise, we need to create new SpanMappingService for every char user types.
+                    // REVIEW: for now, we keep document here due to open file case, otherwise, we need to create new
+                    // SpanMappingService for every char user types.
                     var sourceText = await document
                         .GetValueTextAsync(cancellationToken)
                         .ConfigureAwait(false);
 
-                    // _primary buffer (in this case razor html files) is not in roslyn snapshot, so mapping from roslyn snapshot to razor document
-                    // always just map to current snapshot which have potential to have a race since content could have changed while we are doing this.
-                    // but for ones that uses this implementation, it always had that possiblity. so this doesn't change that aspect due to this.
+                    // _primary buffer (in this case razor html files) is not in roslyn snapshot, so mapping from roslyn
+                    // snapshot to razor document
+                    // always just map to current snapshot which have potential to have a race since content could have
+                    // changed while we are doing this.
+                    // but for ones that uses this implementation, it always had that possiblity. so this doesn't change
+                    // that aspect due to this.
                     var primarySnapshot = (IProjectionSnapshot)_primaryBuffer.CurrentSnapshot;
                     var roslynSnapshot = GetRoslynSnapshot(sourceText);
                     if (roslynSnapshot == null)
@@ -127,7 +132,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                             )
                         )
                         {
-                            // this is from http://index/?query=MapSecondaryToPrimarySpan&rightProject=Microsoft.VisualStudio.Editor.Implementation&file=VsTextBufferCoordinatorAdapter.cs&line=177
+                            // this is from
+                            // http://index/?query=MapSecondaryToPrimarySpan&rightProject=Microsoft.VisualStudio.Editor.Implementation&file=VsTextBufferCoordinatorAdapter.cs&line=177
                             // make sure we only consider one that's not split
                             if (primarySpan.Length != span.Length)
                             {
@@ -170,7 +176,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     CancellationToken cancellationToken
                 )
                 {
-                    // REVIEW: for now, we keep document here due to open file case, otherwise, we need to create new DocumentExcerpter for every char user types.
+                    // REVIEW: for now, we keep document here due to open file case, otherwise, we need to create new
+                    // DocumentExcerpter for every char user types.
                     var sourceText = await document
                         .GetValueTextAsync(cancellationToken)
                         .ConfigureAwait(false);
@@ -323,7 +330,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     // classifier expects there is no gap between classification spans. any empty space
                     // from the above classification call will be filled with "text"
                     //
-                    // the EditorClassifier call above fills all the gaps for the span it is called with, but we are combining
+                    // the EditorClassifier call above fills all the gaps for the span it is called with, but we are
+                    // combining
                     // multiple spans with html code, so we need to fill those gaps
                     using var _2 = Classifier.GetPooledList(out var builder);
                     ClassifierHelper.FillInClassifiedSpanGaps(

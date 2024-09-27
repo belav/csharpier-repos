@@ -189,7 +189,8 @@ namespace System.Globalization
                             ticks == long.MinValue /* -9223372036854775808 */
                         );
 
-                        // We computed these ahead of time; they're straight from the decimal representation of Int64.MinValue.
+                        // We computed these ahead of time; they're straight from the decimal representation of
+                        // Int64.MinValue.
                         fraction = 4775808;
                         totalSecondsRemaining = 922337203685;
                         goto AfterComputeFraction;
@@ -454,7 +455,8 @@ namespace System.Globalization
                         break;
                     case 'F':
                         //
-                        // Displays the most significant digit of the seconds fraction. Nothing is displayed if the digit is zero.
+                        // Displays the most significant digit of the seconds fraction. Nothing is displayed if the digit is
+                        // zero.
                         //
                         tokenLen = DateTimeFormat.ParseRepeatPattern(format, i, ch);
                         if (tokenLen > DateTimeFormat.MaxSecondsFractionDigits)
@@ -576,7 +578,7 @@ namespace System.Globalization
             internal string SecondFractionSep => _literals[4];
             internal string End => _literals[5];
 
-            /* factory method for static invariant FormatLiterals */
+/* factory method for static invariant FormatLiterals */
             internal static FormatLiterals InitInvariant(bool isNegative)
             {
                 FormatLiterals x = default;
@@ -622,7 +624,7 @@ namespace System.Globalization
                         case '\"':
                             if (inQuote && (quote == format[i]))
                             {
-                                /* we were in a quote and found a matching exit quote, so we are outside a quote now */
+/* we were in a quote and found a matching exit quote, so we are outside a quote now */
                                 Debug.Assert(field >= 0 && field <= 5);
                                 _literals[field] = sb.AsSpan().ToString();
                                 sb.Length = 0;
@@ -630,13 +632,13 @@ namespace System.Globalization
                             }
                             else if (!inQuote)
                             {
-                                /* we are at the start of a new quote block */
+/* we are at the start of a new quote block */
                                 quote = format[i];
                                 inQuote = true;
                             }
                             else
                             {
-                                /* we were in a quote and saw the other type of quote character, so we are still in a quote */
+/* we were in a quote and saw the other type of quote character, so we are still in a quote */
                             }
                             break;
                         case '%':

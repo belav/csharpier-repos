@@ -20,7 +20,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 /// <summary>
-/// Represents properties and methods that are needed in order to render a view that uses Razor syntax.
+/// Represents properties and methods that are needed in order to render a view that uses Razor
+// syntax.
 /// </summary>
 public abstract class RazorPageBase : IRazorPage
 {
@@ -38,7 +39,8 @@ public abstract class RazorPageBase : IRazorPage
     private IUrlHelper? _urlHelper;
 
     // These fields back properties that are hidden from debugging with DebuggerBrowsableState.Never.
-    // Using a field instead of an auto-property allows the value to be seen in the debugger by expanding the "Non-Public members" option.
+    // Using a field instead of an auto-property allows the value to be seen in the debugger by
+    // expanding the "Non-Public members" option.
     private bool _isLayoutBeingRendered;
     private IHtmlContent? _bodyContent;
     private IDictionary<string, RenderAsyncDelegate> _previousSectionWriters = default!;
@@ -111,7 +113,8 @@ public abstract class RazorPageBase : IRazorPage
     }
 
     /// <summary>
-    /// Gets or sets a <see cref="System.Diagnostics.DiagnosticSource"/> instance used to instrument the page execution.
+    /// Gets or sets a <see cref="System.Diagnostics.DiagnosticSource"/> instance used to instrument the
+    // page execution.
     /// </summary>
     [RazorInject]
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -122,7 +125,8 @@ public abstract class RazorPageBase : IRazorPage
     }
 
     /// <summary>
-    /// Gets the <see cref="System.Text.Encodings.Web.HtmlEncoder"/> to use when this <see cref="RazorPage"/>
+    /// Gets the <see cref="System.Text.Encodings.Web.HtmlEncoder"/> to use when this <see
+    // cref="RazorPage"/>
     /// handles non-<see cref="IHtmlContent"/> C# expressions.
     /// </summary>
     [RazorInject]
@@ -183,7 +187,8 @@ public abstract class RazorPageBase : IRazorPage
     /// <param name="attributeName">Name of the HTML attribute associated with the indexer.</param>
     /// <param name="tagHelperTypeName">Full name of the tag helper <see cref="Type"/>.</param>
     /// <param name="propertyName">Dictionary property in the tag helper.</param>
-    /// <returns>An error message about using an indexer when the tag helper property is <c>null</c>.</returns>
+    /// <returns>An error message about using an indexer when the tag helper property is
+    // <c>null</c>.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public string InvalidTagHelperIndexerAssignment(
         string attributeName,
@@ -216,11 +221,14 @@ public abstract class RazorPageBase : IRazorPage
     /// Starts a new writing scope and optionally overrides <see cref="HtmlEncoder"/> within that scope.
     /// </summary>
     /// <param name="encoder">
-    /// The <see cref="System.Text.Encodings.Web.HtmlEncoder"/> to use when this <see cref="RazorPage"/> handles
-    /// non-<see cref="IHtmlContent"/> C# expressions. If <c>null</c>, does not change <see cref="HtmlEncoder"/>.
+    /// The <see cref="System.Text.Encodings.Web.HtmlEncoder"/> to use when this <see cref="RazorPage"/>
+    // handles
+    /// non-<see cref="IHtmlContent"/> C# expressions. If <c>null</c>, does not change <see
+    // cref="HtmlEncoder"/>.
     /// </param>
     /// <remarks>
-    /// All writes to the <see cref="Output"/> or <see cref="ViewContext.Writer"/> after calling this method will
+    /// All writes to the <see cref="Output"/> or <see cref="ViewContext.Writer"/> after calling this
+    // method will
     /// be buffered until <see cref="EndTagHelperWritingScope"/> is called.
     /// </remarks>
     public void StartTagHelperWritingScope(HtmlEncoder encoder)
@@ -241,7 +249,8 @@ public abstract class RazorPageBase : IRazorPage
     }
 
     /// <summary>
-    /// Ends the current writing scope that was started by calling <see cref="StartTagHelperWritingScope"/>.
+    /// Ends the current writing scope that was started by calling <see
+    // cref="StartTagHelperWritingScope"/>.
     /// </summary>
     /// <returns>The buffered <see cref="TagHelperContent"/>.</returns>
     public TagHelperContent EndTagHelperWritingScope()
@@ -270,10 +279,13 @@ public abstract class RazorPageBase : IRazorPage
     /// Starts a new scope for writing <see cref="ITagHelper"/> attribute values.
     /// </summary>
     /// <remarks>
-    /// All writes to the <see cref="Output"/> or <see cref="ViewContext.Writer"/> after calling this method will
+    /// All writes to the <see cref="Output"/> or <see cref="ViewContext.Writer"/> after calling this
+    // method will
     /// be buffered until <see cref="EndWriteTagHelperAttribute"/> is called.
-    /// The content will be buffered using a shared <see cref="StringWriter"/> within this <see cref="RazorPage"/>
-    /// Nesting of <see cref="BeginWriteTagHelperAttribute"/> and <see cref="EndWriteTagHelperAttribute"/> method calls
+    /// The content will be buffered using a shared <see cref="StringWriter"/> within this <see
+    // cref="RazorPage"/>
+    /// Nesting of <see cref="BeginWriteTagHelperAttribute"/> and <see
+    // cref="EndWriteTagHelperAttribute"/> method calls
     /// is not supported.
     /// </remarks>
     public void BeginWriteTagHelperAttribute()
@@ -299,9 +311,11 @@ public abstract class RazorPageBase : IRazorPage
     }
 
     /// <summary>
-    /// Ends the current writing scope that was started by calling <see cref="BeginWriteTagHelperAttribute"/>.
+    /// Ends the current writing scope that was started by calling <see
+    // cref="BeginWriteTagHelperAttribute"/>.
     /// </summary>
-    /// <returns>The content buffered by the shared <see cref="StringWriter"/> of this <see cref="RazorPage"/>.</returns>
+    /// <returns>The content buffered by the shared <see cref="StringWriter"/> of this <see
+    // cref="RazorPage"/>.</returns>
     /// <remarks>
     /// This method assumes that there will be no nesting of <see cref="BeginWriteTagHelperAttribute"/>
     /// and <see cref="EndWriteTagHelperAttribute"/> method calls.
@@ -380,7 +394,8 @@ public abstract class RazorPageBase : IRazorPage
     /// </summary>
     /// <param name="name">The name of the section to create.</param>
     /// <param name="section">The delegate to execute when rendering the section.</param>
-    /// <remarks>This is a temporary placeholder method to support ASP.NET Core 2.0.0 editor code generation.</remarks>
+    /// <remarks>This is a temporary placeholder method to support ASP.NET Core 2.0.0 editor code
+    // generation.</remarks>
     [EditorBrowsable(EditorBrowsableState.Never)]
     protected void DefineSection(string name, Func<object?, Task> section) =>
         DefineSection(
@@ -396,7 +411,8 @@ public abstract class RazorPageBase : IRazorPage
     /// <c>RenderSection</c> or <c>RenderSectionAsync</c>
     /// </summary>
     /// <param name="name">The name of the section to create.</param>
-    /// <param name="section">The <see cref="RenderAsyncDelegate"/> to execute when rendering the section.</param>
+    /// <param name="section">The <see cref="RenderAsyncDelegate"/> to execute when rendering the
+    // section.</param>
     public virtual void DefineSection(string name, RenderAsyncDelegate section)
     {
         ArgumentNullException.ThrowIfNull(name);
@@ -522,7 +538,8 @@ public abstract class RazorPageBase : IRazorPage
             attributeValuesCount
         );
 
-        // Single valued attributes might be omitted in entirety if it the attribute value strictly evaluates to
+        // Single valued attributes might be omitted in entirety if it the attribute value strictly
+        // evaluates to
         // null  or false. Consequently defer the prefix generation until we encounter the attribute value.
         if (attributeValuesCount != 1)
         {
@@ -708,20 +725,25 @@ public abstract class RazorPageBase : IRazorPage
     }
 
     /// <summary>
-    /// Invokes <see cref="TextWriter.FlushAsync()"/> on <see cref="Output"/> and <see cref="m:Stream.FlushAsync"/>
+    /// Invokes <see cref="TextWriter.FlushAsync()"/> on <see cref="Output"/> and <see
+    // cref="m:Stream.FlushAsync"/>
     /// on the response stream, writing out any buffered content to the <see cref="HttpResponse.Body"/>.
     /// </summary>
-    /// <returns>A <see cref="Task{HtmlString}"/> that represents the asynchronous flush operation and on
+    /// <returns>A <see cref="Task{HtmlString}"/> that represents the asynchronous flush operation and
+    // on
     /// completion returns an empty <see cref="IHtmlContent"/>.</returns>
     /// <remarks>The value returned is a token value that allows FlushAsync to work directly in an HTML
     /// section. However the value does not represent the rendered content.
     /// This method also writes out headers, so any modifications to headers must be done before
-    /// <see cref="FlushAsync"/> is called. For example, call <see cref="SetAntiforgeryCookieAndHeader"/> to send
-    /// antiforgery cookie token and X-Frame-Options header to client before this method flushes headers out.
+    /// <see cref="FlushAsync"/> is called. For example, call <see
+    // cref="SetAntiforgeryCookieAndHeader"/> to send
+    /// antiforgery cookie token and X-Frame-Options header to client before this method flushes headers
+    // out.
     /// </remarks>
     public virtual async Task<HtmlString> FlushAsync()
     {
-        // If there are active scopes, then we should throw. Cannot flush content that has the potential to change.
+        // If there are active scopes, then we should throw. Cannot flush content that has the potential to
+        // change.
         if (TagHelperScopes.Count > 0)
         {
             throw new InvalidOperationException(
@@ -729,7 +751,8 @@ public abstract class RazorPageBase : IRazorPage
             );
         }
 
-        // Calls to Flush are allowed if the page does not specify a Layout or if it is executing a section in the
+        // Calls to Flush are allowed if the page does not specify a Layout or if it is executing a section
+        // in the
         // Layout.
         if (!IsLayoutBeingRendered && !string.IsNullOrEmpty(Layout))
         {

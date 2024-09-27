@@ -54,7 +54,8 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Enforces that parent has exactly 1 child of type XML element and nothing else (barring comments and whitespaces)
+        /// Enforces that parent has exactly 1 child of type XML element and nothing else (barring comments
+        // and whitespaces)
         /// and returns the child
         /// </summary>
         internal static XmlElement GetChildElement(XmlElement parent)

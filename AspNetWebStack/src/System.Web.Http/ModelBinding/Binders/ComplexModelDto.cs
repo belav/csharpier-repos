@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,8 @@ using System.Web.Http.Metadata;
 
 namespace System.Web.Http.ModelBinding.Binders
 {
-    // Describes a complex model, but uses a collection rather than individual properties as the data store.
+    // Describes a complex model, but uses a collection rather than individual properties as the data
+    // store.
     public class ComplexModelDto
     {
         public ComplexModelDto(

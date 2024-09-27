@@ -105,15 +105,19 @@ namespace System.DirectoryServices.ActiveDirectory
 
             //
             // this api obtains the list of DCs/GCs based on dns records. The DCs/GCs that have registered
-            // non site specific records for the domain/forest are returned. Additionally DCs/GCs that have registered site specific records
-            // (site is either specified or defaulted to the site of the local machine) are also returned in this list.
+            // non site specific records for the domain/forest are returned. Additionally DCs/GCs that have
+            // registered site specific records
+            // (site is either specified or defaulted to the site of the local machine) are also returned in
+            // this list.
             //
 
             if (siteName == null)
             {
                 //
-                // if the site name is not specified then we get the site specific records for the local machine's site (in the context of the domain/forest/application partition that is specified)
-                // (sitename could still be null if the machine is not in any site for the specified domain/forest, in that case we don't look for any site specific records)
+                // if the site name is not specified then we get the site specific records for the local machine's
+                // site (in the context of the domain/forest/application partition that is specified)
+                // (sitename could still be null if the machine is not in any site for the specified domain/forest,
+                // in that case we don't look for any site specific records)
                 //
                 DomainControllerInfo domainControllerInfo;
 

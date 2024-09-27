@@ -54,7 +54,8 @@ namespace System.Composition.Convention
         /// <summary>
         /// Specify the contract name for the export.
         /// </summary>
-        /// <param name="getContractNameFromPartType">A Func to retrieve the contract name from the part typeThe contract name.</param>
+        /// <param name="getContractNameFromPartType">A Func to retrieve the contract name from the part
+        // typeThe contract name.</param>
         /// <returns>An export builder allowing further configuration.</returns>
         public ImportConventionBuilder AsContractName(
             Func<Type, string> getContractNameFromPartType
@@ -130,7 +131,8 @@ namespace System.Composition.Convention
         /// Add an import constraint
         /// </summary>
         /// <param name="name">The name of the constraint item.</param>
-        /// <param name="getConstraintValueFromPartType">A function that calculates the value to match.</param>
+        /// <param name="getConstraintValueFromPartType">A function that calculates the value to
+        // match.</param>
         /// <returns>An export builder allowing further configuration.</returns>
         public ImportConventionBuilder AddMetadataConstraint(
             string name,

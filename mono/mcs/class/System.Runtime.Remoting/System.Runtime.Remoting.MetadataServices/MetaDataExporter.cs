@@ -148,9 +148,9 @@ namespace System.Runtime.Remoting.MetadataServices
 
             // Bindings
 
-            /*			foreach (ServiceType st in servicetypes)
-                            WriteServiceBinding (tw, st);
-            */
+/*			foreach (ServiceType st in servicetypes)
+WriteServiceBinding (tw, st);
+*/
             foreach (ServiceType st in services)
                 WriteServiceBinding(tw, st, dataTypes);
 

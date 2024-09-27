@@ -22,7 +22,8 @@ internal static class Template
             var entry = entries[i];
 
             // In attribute routing, same template is used for all actions within that controller. The following
-            // simulates that where we only increment the controller count when a new endpoint for a new template
+            // simulates that where we only increment the controller count when a new endpoint for a new
+            // template
             // is being created.
             var template = entry.Template.TemplateText;
             if (!templatesVisited.TryGetValue(template, out var visitedTemplateInfo))

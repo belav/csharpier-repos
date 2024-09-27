@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         /// <summary>
         /// Determines the desired indentation of a given line.  May return <see langword="null"/> if the
         /// no automatic indentation is desired.  May also return <see langword="null"/> if the line in
-        /// question is not blank and thus indentation should be deferred to the formatting command handler to handle.
+        /// question is not blank and thus indentation should be deferred to the formatting command handler
+        // to handle.
         /// </summary>
         FSharpIndentationResult? GetDesiredIndentation(
             HostLanguageServices services,

@@ -15,7 +15,8 @@ public abstract class TemplateBinderFactory
     /// <paramref name="defaults"/>.
     /// </summary>
     /// <param name="template">The route template.</param>
-    /// <param name="defaults">A collection of extra default values that do not appear in the route template.</param>
+    /// <param name="defaults">A collection of extra default values that do not appear in the route
+    // template.</param>
     /// <returns>A <see cref="TemplateBinder"/>.</returns>
     public abstract TemplateBinder Create(RouteTemplate template, RouteValueDictionary defaults);
 

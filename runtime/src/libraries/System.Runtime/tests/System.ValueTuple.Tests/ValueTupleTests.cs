@@ -2028,7 +2028,8 @@ namespace System.Tests
             );
             ValueTupleDriverA.TestNotEqual();
 
-            //ValueTuple-9 and ValueTuple-10 are not necessary because they use the same code path as ValueTuple-8
+            //ValueTuple-9 and ValueTuple-10 are not necessary because they use the same code path as
+            // ValueTuple-8
         }
 
         [Fact]
@@ -2201,7 +2202,8 @@ namespace System.Tests
             );
             ValueTupleDriverA.TestCompareToThrows();
 
-            //ValueTuple-9 and ValueTuple-10 are not necessary because they use the same code path as ValueTuple-8
+            //ValueTuple-9 and ValueTuple-10 are not necessary because they use the same code path as
+            // ValueTuple-8
         }
 
         [Fact]

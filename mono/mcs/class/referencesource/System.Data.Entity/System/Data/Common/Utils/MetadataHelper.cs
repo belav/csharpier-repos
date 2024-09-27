@@ -81,7 +81,8 @@ namespace System.Data.Common.Utils
         }
 
         /// <summary>
-        /// effects: determines if the given function import returns collection type, and if so returns the type
+        /// effects: determines if the given function import returns collection type, and if so returns the
+        // type
         /// </summary>
         internal static bool TryGetFunctionImportReturnCollectionType(
             EdmFunction functionImport,
@@ -104,7 +105,8 @@ namespace System.Data.Common.Utils
         }
 
         /// <summary>
-        /// Gets the resultSetIndexth return parameter for functionImport, or null if resultSetIndex is out of range
+        /// Gets the resultSetIndexth return parameter for functionImport, or null if resultSetIndex is out
+        // of range
         /// </summary>
         internal static FunctionParameter GetReturnParameter(
             EdmFunction functionImport,
@@ -169,7 +171,8 @@ namespace System.Data.Common.Utils
         )
         {
             // currently there are only two possible spatial O-space types, but 16 C-space types.
-            // Normalize the C-space type to the base type before we check to see if it matches the O-space type.
+            // Normalize the C-space type to the base type before we check to see if it matches the O-space
+            // type.
             bool isGeographic;
             EdmType spatialNormalizedEdmType = expectedEdmType;
             if (Helper.IsSpatialType(expectedEdmType, out isGeographic))
@@ -316,7 +319,8 @@ namespace System.Data.Common.Utils
             return associationSet.AssociationSetEnds[endMember.Name].EntitySet;
         }
 
-        // effects: Returns the AssociationEndMember at the other end of the parent association (first found)
+        // effects: Returns the AssociationEndMember at the other end of the parent association (first
+        // found)
         internal static AssociationEndMember GetOtherAssociationEnd(AssociationEndMember endMember)
         {
             ReadOnlyMetadataCollection<EdmMember> members = endMember.DeclaringType.Members;
@@ -356,7 +360,8 @@ namespace System.Data.Common.Utils
         }
 
         // requires: toEnd and type are given
-        // effects: determines whether the given association end can be referenced by an entity of the given type
+        // effects: determines whether the given association end can be referenced by an entity of the given
+        // type
         internal static bool IsAssociationValidForEntityType(
             AssociationSetEnd toEnd,
             EntityType type
@@ -419,7 +424,8 @@ namespace System.Data.Common.Utils
         }
 
         /// <summary>
-        /// Given a table EntitySet this function finds out all C-side EntitySets that are mapped to the table.
+        /// Given a table EntitySet this function finds out all C-side EntitySets that are mapped to the
+        // table.
         /// </summary>
         internal static IEnumerable<EntitySet> GetInfluencingEntitySetsForTable(
             EntitySet table,
@@ -561,11 +567,13 @@ namespace System.Data.Common.Utils
         }
 
         /// <summary>
-        /// Builds an undirected graph (represented as a directional graph with reciprocal navigation edges) of the all the types in the workspace.
+        /// Builds an undirected graph (represented as a directional graph with reciprocal navigation edges)
+        // of the all the types in the workspace.
         /// This is used to traverse inheritance hierarchy up and down.
         /// O(n), where n=number of types
         /// </summary>
-        /// <returns>A dictionary of type t -> set of types {s}, such that there is an edge between t and elem(s) iff t and s are related DIRECTLY via inheritance (child or parent type) </returns>
+        /// <returns>A dictionary of type t -> set of types {s}, such that there is an edge between t and
+        // elem(s) iff t and s are related DIRECTLY via inheritance (child or parent type) </returns>
         internal static Dictionary<EntityType, Set<EntityType>> BuildUndirectedGraphOfTypes(
             EdmItemCollection edmItemCollection
         )
@@ -639,8 +647,10 @@ namespace System.Data.Common.Utils
         }
 
         /// <summary>
-        /// Checks wither the given AssociationEnd's keys are sufficient for identifying a unique tuple in the AssociationSet.
-        /// This is possible because refconstraints make certain Keys redundant. We subtract such redundant key sof "other" ends
+        /// Checks wither the given AssociationEnd's keys are sufficient for identifying a unique tuple in
+        // the AssociationSet.
+        /// This is possible because refconstraints make certain Keys redundant. We subtract such redundant
+        // key sof "other" ends
         /// and see if what is left is contributed only from the given end's keys.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -698,7 +708,8 @@ namespace System.Data.Common.Utils
                     continue;
                 }
 
-                //Essentially ref constraints is an equality condition, so remove redundant members from entity set key
+                //Essentially ref constraints is an equality condition, so remove redundant members from entity set
+                // key
                 foreach (EdmMember member in otherEndProperties)
                 {
                     associationkeys.Remove(new Pair<EdmMember, EntityType>(member, otherEndType));
@@ -791,7 +802,8 @@ namespace System.Data.Common.Utils
         }
 
         // requires: entitySet and associationType
-        // effects: Returns the associations that refer to associationType and refer to entitySet in one of its end.
+        // effects: Returns the associations that refer to associationType and refer to entitySet in one of
+        // its end.
         // If none is found, returns an empty set
         internal static AssociationSet GetAssociationsForEntitySetAndAssociationType(
             EntityContainer entityContainer,

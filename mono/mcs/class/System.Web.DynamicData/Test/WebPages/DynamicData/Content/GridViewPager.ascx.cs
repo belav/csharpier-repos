@@ -65,7 +65,8 @@ public partial class GridViewPager : System.Web.UI.UserControl
         _gridView.DataBind();
         if (_gridView.PageIndex != pageindex)
         {
-            //if page index changed it means the previous page was not valid and was adjusted. Rebind to fill control with adjusted page
+            //if page index changed it means the previous page was not valid and was adjusted. Rebind to fill
+            // control with adjusted page
             _gridView.DataBind();
         }
     }

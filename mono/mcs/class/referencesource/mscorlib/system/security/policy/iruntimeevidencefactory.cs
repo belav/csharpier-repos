@@ -13,7 +13,8 @@ namespace System.Security.Policy
 {
     /// <summary>
     ///     IRuntimeEvidenceFactory is implemented by runtime types which the CLR knows how to delay
-    ///     generate evidence for.  It is used by the Evidence class to get evidence on demand when we first
+    ///     generate evidence for.  It is used by the Evidence class to get evidence on demand when we
+    // first
     ///     need it.
     /// </summary>
     internal interface IRuntimeEvidenceFactory
@@ -30,7 +31,8 @@ namespace System.Security.Policy
         IEnumerable<EvidenceBase> GetFactorySuppliedEvidence();
 
         /// <summary>
-        ///     Generate a specific type of evidence for this object, returning null if the specified type of
+        ///     Generate a specific type of evidence for this object, returning null if the specified type
+        // of
         ///     evidence cannot be generated.
         /// </summary>
         EvidenceBase GenerateEvidence(Type evidenceType);

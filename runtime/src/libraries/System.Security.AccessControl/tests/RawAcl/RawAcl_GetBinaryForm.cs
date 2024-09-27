@@ -110,7 +110,8 @@ namespace System.Security.AccessControl.Tests
             sidBinaryForm = new byte[sid.BinaryLength];
             sid.GetBinaryForm(sidBinaryForm, 0);
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-            //223 include ObjectInherit, ContainerInherit, NoPropagateInherit, InheritOnly, Inherited, SuccessfulAccess and FailedAccess
+            //223 include ObjectInherit, ContainerInherit, NoPropagateInherit, InheritOnly, Inherited,
+            // SuccessfulAccess and FailedAccess
             gAce = new CommonAce((AceFlags)223, AceQualifier.SystemAudit, 1, sid, false, null);
             rAcl.InsertAce(0, gAce);
             binaryForm = new byte[rAcl.BinaryLength];

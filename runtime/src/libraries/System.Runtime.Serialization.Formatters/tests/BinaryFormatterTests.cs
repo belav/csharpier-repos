@@ -49,7 +49,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 .Select(i => new Point(i, i + 1))
                 .ToArray();
 
-            // This should not throw a SerializationException as we removed the artificial limit in the ObjectIDGenerator.
+            // This should not throw a SerializationException as we removed the artificial limit in the
+            // ObjectIDGenerator.
             // Instead of round tripping we only serialize to minimize test time.
             // This will throw on .NET Framework as the artificial limit is still enabled.
             var bf = new BinaryFormatter();
@@ -249,7 +250,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void ArraySegmentDefaultCtor()
         {
-            // This is workaround for Xunit bug which tries to pretty print test case name and enumerate this object.
+            // This is workaround for Xunit bug which tries to pretty print test case name and enumerate this
+            // object.
             // When inner array is not initialized it throws an exception when this happens.
             object obj = new ArraySegment<int>();
             string corefxBlob =
@@ -271,7 +273,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void ValidateDeserializationOfObjectWithDifferentAssemblyVersion()
         {
-            // To generate this properly, change AssemblyVersion to a value which is unlikely to happen in production and generate base64(serialized-data)
+            // To generate this properly, change AssemblyVersion to a value which is unlikely to happen in
+            // production and generate base64(serialized-data)
             // For this test 9.98.7.987 is being used
             var obj = new SomeType() { SomeField = 7 };
             string serializedObj =
@@ -288,7 +291,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void ValidateDeserializationOfObjectWithGenericTypeWhichGenericArgumentHasDifferentAssemblyVersion()
         {
-            // To generate this properly, change AssemblyVersion to a value which is unlikely to happen in production and generate base64(serialized-data)
+            // To generate this properly, change AssemblyVersion to a value which is unlikely to happen in
+            // production and generate base64(serialized-data)
             // For this test 9.98.7.987 is being used
             var obj = new GenericTypeWithArg<SomeType>()
             {
@@ -734,7 +738,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 || obj is Color
                 || name == "System.Collections.SortedList+SyncSortedList"
                 ||
-                // Due to non-deterministic field ordering the types below will fail when using IL Emit-based Invoke.
+                // Due to non-deterministic field ordering the types below will fail when using IL Emit-based
+                // Invoke.
                 // The types above may also be failing for the same reason.
                 // Remove these cases once https://github.com/dotnet/runtime/issues/46272 is fixed.
                 name == "System.Collections.Comparer"

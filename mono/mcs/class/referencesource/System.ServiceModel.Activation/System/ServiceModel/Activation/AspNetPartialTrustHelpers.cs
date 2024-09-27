@@ -112,7 +112,8 @@ namespace System.ServiceModel
         }
 
         /// <summary>
-        /// Used to guard usage of System.Web types in partial trust outside the ASP.NET context (because they are not secure),
+        /// Used to guard usage of System.Web types in partial trust outside the ASP.NET context (because
+        // they are not secure),
         /// in which case we shutdown the process.
         /// </summary>
         [Fx.Tag.SecurityNote(
@@ -124,7 +125,8 @@ namespace System.ServiceModel
         {
             if (!isInPartialTrustOutsideAspNetInitialized)
             {
-                // The HostingEnvironment.IsHosted property is safe to be called in partial trust outside the ASP.NET context.
+                // The HostingEnvironment.IsHosted property is safe to be called in partial trust outside the
+                // ASP.NET context.
                 isInPartialTrustOutsideAspNet = !(
                     PartialTrustHelpers.AppDomainFullyTrusted || HostingEnvironment.IsHosted
                 );

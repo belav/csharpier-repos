@@ -12,7 +12,8 @@ namespace System.Linq.Parallel.Tests
         // Average
         //
 
-        // Get a set of ranges from 0 to each count, with an extra parameter containing the expected average.
+        // Get a set of ranges from 0 to each count, with an extra parameter containing the expected
+        // average.
         public static IEnumerable<object[]> AverageData(int[] counts)
         {
             foreach (int count in counts)

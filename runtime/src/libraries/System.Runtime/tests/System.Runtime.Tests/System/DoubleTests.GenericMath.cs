@@ -2947,7 +2947,9 @@ namespace System.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(9223372036854775808.0, NumberBaseHelper<double>.CreateChecked<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual(9223372036854775808.0,
+                // NumberBaseHelper<double>.CreateChecked<nuint>(unchecked((nuint)0x8000000000000000)));
+                //
                 // AssertBitwiseEqual(18446744073709551615.0,NumberBaseHelper<double>.CreateChecked<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
@@ -2966,8 +2968,10 @@ namespace System.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(2147483648.0, NumberBaseHelper<double>.CreateChecked<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual(4294967295.0, NumberBaseHelper<double>.CreateChecked<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual(2147483648.0,
+                // NumberBaseHelper<double>.CreateChecked<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual(4294967295.0,
+                // NumberBaseHelper<double>.CreateChecked<nuint>((nuint)0xFFFFFFFF));
             }
         }
 
@@ -3602,8 +3606,10 @@ namespace System.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(9223372036854775808.0, NumberBaseHelper<double>.CreateSaturating<nuint>(unchecked((nuint)0x8000000000000000)));
-                // AssertBitwiseEqual(18446744073709551615.0, NumberBaseHelper<double>.CreateSaturating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
+                // AssertBitwiseEqual(9223372036854775808.0,
+                // NumberBaseHelper<double>.CreateSaturating<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual(18446744073709551615.0,
+                // NumberBaseHelper<double>.CreateSaturating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
             {
@@ -3621,8 +3627,10 @@ namespace System.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(2147483648.0, NumberBaseHelper<double>.CreateSaturating<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual(4294967295.0, NumberBaseHelper<double>.CreateSaturating<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual(2147483648.0,
+                // NumberBaseHelper<double>.CreateSaturating<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual(4294967295.0,
+                // NumberBaseHelper<double>.CreateSaturating<nuint>((nuint)0xFFFFFFFF));
             }
         }
 
@@ -4257,8 +4265,10 @@ namespace System.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(9223372036854775808.0, NumberBaseHelper<double>.CreateTruncating<nuint>(unchecked((nuint)0x8000000000000000)));
-                // AssertBitwiseEqual(18446744073709551615.0, NumberBaseHelper<double>.CreateTruncating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
+                // AssertBitwiseEqual(9223372036854775808.0,
+                // NumberBaseHelper<double>.CreateTruncating<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual(18446744073709551615.0,
+                // NumberBaseHelper<double>.CreateTruncating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
             {
@@ -4276,8 +4286,10 @@ namespace System.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(2147483648.0, NumberBaseHelper<double>.CreateTruncating<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual(4294967295.0, NumberBaseHelper<double>.CreateTruncating<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual(2147483648.0,
+                // NumberBaseHelper<double>.CreateTruncating<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual(4294967295.0,
+                // NumberBaseHelper<double>.CreateTruncating<nuint>((nuint)0xFFFFFFFF));
             }
         }
 

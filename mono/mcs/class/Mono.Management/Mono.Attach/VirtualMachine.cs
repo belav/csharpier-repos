@@ -12,9 +12,9 @@ using Mono.Unix.Native;
 
 namespace Mono.Attach
 {
-    /*
-     * Represents a running mono virtual machine.
-     */
+/*
+* Represents a running mono virtual machine.
+*/
     public class VirtualMachine
     {
         long pid;
@@ -45,10 +45,10 @@ namespace Mono.Attach
             return UnixPath.ReadLink("/proc/" + pid + "/cwd");
         }
 
-        /*
-         * Return the list of running mono vms owned by the current user. The
-         * result includes the current vm too.
-         */
+/*
+* Return the list of running mono vms owned by the current user. The
+* result includes the current vm too.
+*/
         public static List<VirtualMachine> GetVirtualMachines()
         {
             PerformanceCounterCategory p = new PerformanceCounterCategory(".NET CLR JIT");
@@ -66,9 +66,9 @@ namespace Mono.Attach
             return res;
         }
 
-        /*
-         * Loads the specific agent assembly into this vm.
-         */
+/*
+* Loads the specific agent assembly into this vm.
+*/
         public void Attach(string agent, string args)
         {
             string user = UnixUserInfo.GetRealUser().UserName;
@@ -112,10 +112,10 @@ namespace Mono.Attach
                 }
             }
 
-            /*
-             * We communicate with the agent inside the runtime using a simlified
-             * version of the .net remoting protocol.
-             */
+/*
+* We communicate with the agent inside the runtime using a simlified
+* version of the .net remoting protocol.
+*/
 
             string path = "/tmp/mono-" + user + "/.mono-" + pid;
 

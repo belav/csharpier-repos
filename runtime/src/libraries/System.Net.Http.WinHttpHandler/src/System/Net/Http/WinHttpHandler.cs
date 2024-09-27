@@ -86,7 +86,8 @@ namespace System.Net.Http
         private TimeSpan _receiveDataTimeout = TimeSpan.FromSeconds(30);
 
         // Using OS defaults for "Keep-alive timeout" and "keep-alive interval"
-        // as documented in https://docs.microsoft.com/en-us/windows/win32/winsock/sio-keepalive-vals#remarks
+        // as documented in
+        // https://docs.microsoft.com/en-us/windows/win32/winsock/sio-keepalive-vals#remarks
         private TimeSpan _tcpKeepAliveTime = TimeSpan.FromHours(2);
         private TimeSpan _tcpKeepAliveInterval = TimeSpan.FromSeconds(1);
         private bool _tcpKeepAliveEnabled;
@@ -355,8 +356,10 @@ namespace System.Net.Http
         /// </summary>
         /// <remarks>
         /// Only supported on Windows 10 version 2004 or newer.
-        /// If enabled, the values of <see cref="TcpKeepAliveInterval" /> and <see cref="TcpKeepAliveTime"/> will be forwarded
-        /// to set WINHTTP_OPTION_TCP_KEEPALIVE, enabling and configuring TCP keep-alive for the backing TCP socket.
+        /// If enabled, the values of <see cref="TcpKeepAliveInterval" /> and <see cref="TcpKeepAliveTime"/>
+        // will be forwarded
+        /// to set WINHTTP_OPTION_TCP_KEEPALIVE, enabling and configuring TCP keep-alive for the backing TCP
+        // socket.
         /// </remarks>
         public bool TcpKeepAliveEnabled
         {
@@ -1004,7 +1007,8 @@ namespace System.Net.Http
                 // call of the response body data. WINHTTP_OPTION_RECEIVE_TIMEOUT sets a timeout on each
                 // lower layer winsock read.
                 // Timeout.InfiniteTimeSpan will be converted to uint.MaxValue milliseconds (~ 50 days).
-                // The result a of double->uint cast is unspecified for -1 and may differ on ARM, returning 0 instead of uint.MaxValue.
+                // The result a of double->uint cast is unspecified for -1 and may differ on ARM, returning 0
+                // instead of uint.MaxValue.
                 // To handle Timeout.InfiniteTimespan correctly, we need to cast to int first.
                 uint optionData = (uint)(int)_receiveDataTimeout.TotalMilliseconds;
                 SetWinHttpOption(
@@ -1021,7 +1025,8 @@ namespace System.Net.Http
                 );
                 state.Tcs.TrySetResult(responseMessage);
 
-                // HttpStatusCode cast is needed for 308 Moved Permenantly, which we support but is not included in NetStandard status codes.
+                // HttpStatusCode cast is needed for 308 Moved Permenantly, which we support but is not included in
+                // NetStandard status codes.
                 if (
                     NetEventSource.Log.IsEnabled()
                     && (
@@ -1164,7 +1169,8 @@ namespace System.Net.Http
                     onoff = 1,
 
                     // Timeout.InfiniteTimeSpan will be converted to uint.MaxValue milliseconds (~ 50 days)
-                    // The result a of double->uint cast is unspecified for -1 and may differ on ARM, returning 0 instead of uint.MaxValue.
+                    // The result a of double->uint cast is unspecified for -1 and may differ on ARM, returning 0
+                    // instead of uint.MaxValue.
                     // To handle Timeout.InfiniteTimespan correctly, we need to cast to int first.
                     keepaliveinterval = (uint)(int)_tcpKeepAliveInterval.TotalMilliseconds,
                     keepalivetime = (uint)(int)_tcpKeepAliveTime.TotalMilliseconds,
@@ -1185,9 +1191,11 @@ namespace System.Net.Http
             {
                 // Setting WINHTTP_OPTION_REQUIRE_STREAM_END to TRUE is needed for WinHttp to read trailing headers
                 // in case the response has Content-Length defined.
-                // According to the WinHttp team, the feature-detection logic in WinHttpTrailersHelper.OsSupportsTrailers
+                // According to the WinHttp team, the feature-detection logic in
+                // WinHttpTrailersHelper.OsSupportsTrailers
                 // should also indicate the support of WINHTTP_OPTION_REQUIRE_STREAM_END.
-                // WINHTTP_OPTION_REQUIRE_STREAM_END doesn't have effect on HTTP 1.1 requests, therefore it's safe to set it on
+                // WINHTTP_OPTION_REQUIRE_STREAM_END doesn't have effect on HTTP 1.1 requests, therefore it's safe
+                // to set it on
                 // the session handle so it is inhereted by all request handles.
                 uint optionData = 1;
                 if (
@@ -1360,8 +1368,10 @@ namespace System.Net.Http
             Debug.Assert(state.RequestMessage.RequestUri != null);
             Debug.Assert(state.RequestHandle != null);
 
-            // We've already set the proxy on the session handle if we're using no proxy or default proxy settings.
-            // We only need to change it on the request handle if we have a specific IWebProxy or need to manually
+            // We've already set the proxy on the session handle if we're using no proxy or default proxy
+            // settings.
+            // We only need to change it on the request handle if we have a specific IWebProxy or need to
+            // manually
             // implement Wininet-style auto proxy detection.
             if (
                 state.WindowsProxyUsePolicy == WindowsProxyUsePolicy.UseCustomProxy
@@ -1644,13 +1654,19 @@ namespace System.Net.Http
         private void SetRequestHandleCredentialsOptions(WinHttpRequestState state)
         {
             Debug.Assert(state.RequestHandle != null);
-            // By default, WinHTTP sets the default credentials policy such that it automatically sends default credentials
-            // (current user's logged on Windows credentials) to a proxy when needed (407 response). It only sends
+            // By default, WinHTTP sets the default credentials policy such that it automatically sends default
+            // credentials
+            // (current user's logged on Windows credentials) to a proxy when needed (407 response). It only
+            // sends
             // default credentials to a server (401 response) if the server is considered to be on the Intranet.
-            // WinHttpHandler uses a more granual opt-in model for using default credentials that can be different between
-            // proxy and server credentials. It will explicitly allow default credentials to be sent at a later stage in
-            // the request processing (after getting a 401/407 response) when the proxy or server credential is set as
-            // CredentialCache.DefaultNetworkCredential. For now, we set the policy to prevent any default credentials
+            // WinHttpHandler uses a more granual opt-in model for using default credentials that can be
+            // different between
+            // proxy and server credentials. It will explicitly allow default credentials to be sent at a later
+            // stage in
+            // the request processing (after getting a 401/407 response) when the proxy or server credential is
+            // set as
+            // CredentialCache.DefaultNetworkCredential. For now, we set the policy to prevent any default
+            // credentials
             // from being automatically sent until we get a 401/407 response.
             _authHelper.ChangeDefaultCredentialsPolicy(
                 state.RequestHandle,
@@ -1739,7 +1755,8 @@ namespace System.Net.Http
             else if (ex is WinHttpException || ex is IOException || ex is InvalidOperationException)
             {
                 // Wrap expected exceptions as HttpRequestExceptions since this is considered an error during
-                // execution. All other exception types, including ArgumentExceptions and ProtocolViolationExceptions
+                // execution. All other exception types, including ArgumentExceptions and
+                // ProtocolViolationExceptions
                 // are 'unexpected' or caused by user error and should not be wrapped.
                 state.Tcs.TrySetException(
                     new HttpRequestException(SR.net_http_client_execution_error, ex)

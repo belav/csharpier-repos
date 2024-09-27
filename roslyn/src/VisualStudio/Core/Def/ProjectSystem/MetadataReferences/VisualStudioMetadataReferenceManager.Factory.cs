@@ -11,8 +11,10 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
-    // TODO: Remove this type. This factory is needed just to instantiate a singleton of VisualStudioMetadataReferenceProvider.
-    // We should be able to MEF-instantiate a singleton of VisualStudioMetadataReferenceProvider without creating this factory.
+    // TODO: Remove this type. This factory is needed just to instantiate a singleton of
+    // VisualStudioMetadataReferenceProvider.
+    // We should be able to MEF-instantiate a singleton of VisualStudioMetadataReferenceProvider without
+    // creating this factory.
     [
         ExportWorkspaceServiceFactory(
             typeof(VisualStudioMetadataReferenceManager),

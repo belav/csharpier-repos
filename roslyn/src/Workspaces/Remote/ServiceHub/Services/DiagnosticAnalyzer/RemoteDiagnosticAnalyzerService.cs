@@ -56,8 +56,10 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         /// <summary>
-        /// Calculate diagnostics. this works differently than other ones such as todo comments or designer attribute scanner
-        /// since in proc and out of proc runs quite differently due to concurrency and due to possible amount of data
+        /// Calculate diagnostics. this works differently than other ones such as todo comments or designer
+        // attribute scanner
+        /// since in proc and out of proc runs quite differently due to concurrency and due to possible
+        // amount of data
         /// that needs to pass through between processes
         /// </summary>
         public async ValueTask<SerializableDiagnosticAnalysisResults> CalculateDiagnosticsAsync(
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             // Complete RPC right away so the client can start reading from the stream.
-            // The fire-and forget task starts writing to the output stream and the client will read it until it reads all expected data.
+            // The fire-and forget task starts writing to the output stream and the client will read it until it
+            // reads all expected data.
 
             using (
                 TelemetryLogging.LogBlockTimeAggregated(

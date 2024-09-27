@@ -22,7 +22,8 @@ public enum ApiConventionNameMatchBehavior
     /// The parameter or method name in the convention is a proper prefix.
     /// <para>
     /// Casing is used to delineate words in a given name. For instance, with this behavior
-    /// the convention name "Get" will match "Get", "GetPerson" or "GetById", but not "getById", "Getaway".
+    /// the convention name "Get" will match "Get", "GetPerson" or "GetById", but not "getById",
+    // "Getaway".
     /// </para>
     /// </summary>
     Prefix,

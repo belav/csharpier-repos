@@ -275,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 correspondingDefaultFieldOpt
             )
         {
-            // The underlying field for 'Hanna' (an 8-th named element) in a long tuple is Item1. The corresponding field is Item8.
+            // The underlying field for 'Hanna' (an 8-th named element) in a long tuple is Item1. The
+            // corresponding field is Item8.
 
             Debug.Assert(container.IsTupleType);
             Debug.Assert(underlyingField.ContainingType.IsTupleType);

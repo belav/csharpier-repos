@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 using System;
@@ -2879,25 +2879,25 @@ namespace C5UnitTests.linkedlists.plain
             //Properties
 
             //
-            /*ActiveEvents,
-      AllowsDuplicates,
-      ContainsSpeed,
-      Count,
-      CountSpeed,
-      Direction,
-      DuplicatesByCounting,
-      FIFO,
-      First,
-      EqualityComparer,
-      IsEmpty,
-      IsReadOnly,
-      this[int index],
-      this[int start, int count],
-      Last,
-      Offset,
-      SyncRoot,
-      Underlying
-      */
+/*ActiveEvents,
+AllowsDuplicates,
+ContainsSpeed,
+Count,
+CountSpeed,
+Direction,
+DuplicatesByCounting,
+FIFO,
+First,
+EqualityComparer,
+IsEmpty,
+IsReadOnly,
+this[int index],
+this[int start, int count],
+Last,
+Offset,
+SyncRoot,
+Underlying
+*/
             [Test]
             [ExpectedException(typeof(ViewDisposedException))]
             public void Add()
@@ -3054,78 +3054,78 @@ namespace C5UnitTests.linkedlists.plain
             }
 
             //TODO: wonder if it is allright to wait with the exception till the enumerator is actually used?
-            /*    [Test]
-            [ExpectedException(typeof(ListDisposedException))]
-            public void GetEnumerator()
-            {
-              view.GetEnumerator();
-            }
-          */
-            /*Method overview
-            Check(),
-            checkRange(int start, int count),
-            Dispose(),
-            Equals(object obj),
-            Finalize(),
-            fireBagItemsAdded(T item, int count),
-            fireBagItemsRemoved(T item, int count),
-            fireCollectionChanged(),
-            fireCollectionCleared(int start, int count),
-            fireItemAdded(T item),
-            fireItemInserted(T item, int index),
-            fireItemRemoved(T item),
-            fireItemRemovedAt(T item, int index),
-            GetEnumerator(),
-            GetHashCode(),
-            GetSequencedHashCode(),
-            GetType(),
-            GetUnsequencedHashCode(),
-            IndexOf(T item),
-            Insert(int i, T item),
-            ViewOf().InsertLast(T item, T target),
-            InsertAll(int i, IEnumerable<T> items),
-            ViewOf().InsertFirst(T item, T target),
-            InsertFirst(T item),
-            InsertLast(T item),
-            IsSorted(SCG.IComparer<T> c),
-            LastIndexOf(T item),
-            LastViewOf(T item),
-            Map<V>(Fun<T,V> mapper),
-            Map<V>(Fun<T,V> mapper, SCG.IEqualityComparer<V> equalityComparer),
-            MemberwiseClone(),
-            modifycheck(int stamp),
-            Pop(),
-            Push(T item),
-            Remove(),
-            Remove(T item),
-            Remove(T item, out T removeditem),
-            RemoveAll(IEnumerable<T> items),
-            RemoveAllCopies(T item),
-            RemoveAt(int i),
-            RemoveFirst(),
-            RemoveInterval(int start, int count),
-            RemoveLast(),
-            RetainAll(IEnumerable<T> items),
-            Reverse(),
-            Reverse(int start, int count),
-            SequencedEquals(ISequenced<T> that),
-            Shuffle(),
-            Shuffle(System.Random rnd),
-            Slide(int offset),
-            Slide(int offset, int size),
-            Sort(),
-            Sort(SCG.IComparer<T> c),
-            ToArray(),
-            ToString(),
-            UnsequencedEquals(ICollection<T> that),
-            Update(T item),
-            Update(T item, out T olditem),
-            updatecheck(),
-            UpdateOrAdd(T item),
-            UpdateOrAdd(T item, out T olditem),
-            View(int start, int count),
-            ViewOf(T item)
-                  */
+/*    [Test]
+[ExpectedException(typeof(ListDisposedException))]
+public void GetEnumerator()
+{
+view.GetEnumerator();
+}
+*/
+/*Method overview
+Check(),
+checkRange(int start, int count),
+Dispose(),
+Equals(object obj),
+Finalize(),
+fireBagItemsAdded(T item, int count),
+fireBagItemsRemoved(T item, int count),
+fireCollectionChanged(),
+fireCollectionCleared(int start, int count),
+fireItemAdded(T item),
+fireItemInserted(T item, int index),
+fireItemRemoved(T item),
+fireItemRemovedAt(T item, int index),
+GetEnumerator(),
+GetHashCode(),
+GetSequencedHashCode(),
+GetType(),
+GetUnsequencedHashCode(),
+IndexOf(T item),
+Insert(int i, T item),
+ViewOf().InsertLast(T item, T target),
+InsertAll(int i, IEnumerable<T> items),
+ViewOf().InsertFirst(T item, T target),
+InsertFirst(T item),
+InsertLast(T item),
+IsSorted(SCG.IComparer<T> c),
+LastIndexOf(T item),
+LastViewOf(T item),
+Map<V>(Fun<T,V> mapper),
+Map<V>(Fun<T,V> mapper, SCG.IEqualityComparer<V> equalityComparer),
+MemberwiseClone(),
+modifycheck(int stamp),
+Pop(),
+Push(T item),
+Remove(),
+Remove(T item),
+Remove(T item, out T removeditem),
+RemoveAll(IEnumerable<T> items),
+RemoveAllCopies(T item),
+RemoveAt(int i),
+RemoveFirst(),
+RemoveInterval(int start, int count),
+RemoveLast(),
+RetainAll(IEnumerable<T> items),
+Reverse(),
+Reverse(int start, int count),
+SequencedEquals(ISequenced<T> that),
+Shuffle(),
+Shuffle(System.Random rnd),
+Slide(int offset),
+Slide(int offset, int size),
+Sort(),
+Sort(SCG.IComparer<T> c),
+ToArray(),
+ToString(),
+UnsequencedEquals(ICollection<T> that),
+Update(T item),
+Update(T item, out T olditem),
+updatecheck(),
+UpdateOrAdd(T item),
+UpdateOrAdd(T item, out T olditem),
+View(int start, int count),
+ViewOf(T item)
+*/
         }
     }
 

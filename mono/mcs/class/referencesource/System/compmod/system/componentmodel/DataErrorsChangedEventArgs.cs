@@ -22,7 +22,8 @@ namespace System.ComponentModel
         private readonly string propertyName;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.DataErrorsChangedEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.DataErrorsChangedEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public DataErrorsChangedEventArgs(string propertyName)

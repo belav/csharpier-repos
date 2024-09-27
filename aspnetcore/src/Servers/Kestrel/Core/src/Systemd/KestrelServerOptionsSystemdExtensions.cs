@@ -17,7 +17,8 @@ public static class KestrelServerOptionsSystemdExtensions
     private const string ListenFdsEnvVar = "LISTEN_FDS";
 
     /// <summary>
-    /// Open file descriptors (starting from SD_LISTEN_FDS_START) initialized by systemd socket-based activation logic if available.
+    /// Open file descriptors (starting from SD_LISTEN_FDS_START) initialized by systemd socket-based
+    // activation logic if available.
     /// </summary>
     /// <returns>
     /// The <see cref="KestrelServerOptions"/>.
@@ -28,7 +29,8 @@ public static class KestrelServerOptionsSystemdExtensions
     }
 
     /// <summary>
-    /// Open file descriptors (starting from SD_LISTEN_FDS_START) initialized by systemd socket-based activation logic if available.
+    /// Open file descriptors (starting from SD_LISTEN_FDS_START) initialized by systemd socket-based
+    // activation logic if available.
     /// Specify callback to configure endpoint-specific settings.
     /// </summary>
     /// <returns>
@@ -47,7 +49,8 @@ public static class KestrelServerOptionsSystemdExtensions
             )
         )
         {
-            // This matches sd_listen_fds behavior that requires %LISTEN_FDS% to be present and in range [1;INT_MAX-SD_LISTEN_FDS_START]
+            // This matches sd_listen_fds behavior that requires %LISTEN_FDS% to be present and in range
+            // [1;INT_MAX-SD_LISTEN_FDS_START]
             if (
                 int.TryParse(
                     Environment.GetEnvironmentVariable(ListenFdsEnvVar),

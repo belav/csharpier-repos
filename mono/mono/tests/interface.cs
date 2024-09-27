@@ -65,14 +65,14 @@ namespace Obj
             rect = new Rect(0, 0, 10, 20);
             circle = new Circle(0, 0, 20);
             sum = rect.Area() + circle.Area();
-            /* surprise! this calls Obj.Area... */
+/* surprise! this calls Obj.Area... */
             if (sum != 0.0)
                 return 1;
-            /* now call the derived methods */
+/* now call the derived methods */
             sum = ((Rect)rect).Area() + ((Circle)circle).Area();
             if (sum != (200 + 400 * System.Math.PI))
                 return 2;
-            /* let's try to cast to the interface, instead */
+/* let's try to cast to the interface, instead */
             sum = ((Measurable)rect).Area() + ((Measurable)circle).Area();
             if (sum != 0.0)
                 return 3;

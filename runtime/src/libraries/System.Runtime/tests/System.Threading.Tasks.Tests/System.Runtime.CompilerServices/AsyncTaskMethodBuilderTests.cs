@@ -166,7 +166,8 @@ namespace System.Threading.Tasks.Tests
             avmb.SetResult();
         }
 
-        // Creating a task builder, building it, completing it successfully, and making sure it can't be reset
+        // Creating a task builder, building it, completing it successfully, and making sure it can't be
+        // reset
         [Fact]
         public static void TaskMethodBuilder_CantBeReset()
         {
@@ -193,7 +194,8 @@ namespace System.Threading.Tasks.Tests
             });
         }
 
-        // Creating a task builder <T>, building it, completing it successfully, and making sure it can't be reset
+        // Creating a task builder <T>, building it, completing it successfully, and making sure it can't be
+        // reset
         [Fact]
         public static void TaskMethodBuilderT_CantBeReset()
         {

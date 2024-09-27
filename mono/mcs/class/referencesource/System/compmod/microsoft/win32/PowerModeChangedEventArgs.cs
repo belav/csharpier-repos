@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace Microsoft.Win32
 {
     using System;
@@ -13,7 +13,8 @@ namespace Microsoft.Win32
     using System.Security.Permissions;
 
     /// <devdoc>
-    /// <para>Provides data for the <see cref='Microsoft.Win32.SystemEvents.PowerModeChanged'/> event.</para>
+    /// <para>Provides data for the <see cref='Microsoft.Win32.SystemEvents.PowerModeChanged'/>
+    // event.</para>
     /// </devdoc>
     [System.Security.Permissions.PermissionSetAttribute(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -29,7 +30,8 @@ namespace Microsoft.Win32
         private readonly PowerModes mode;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='Microsoft.Win32.PowerModeChangedEventArgs'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='Microsoft.Win32.PowerModeChangedEventArgs'/>
+        // class.</para>
         /// </devdoc>
         public PowerModeChangedEventArgs(PowerModes mode)
         {

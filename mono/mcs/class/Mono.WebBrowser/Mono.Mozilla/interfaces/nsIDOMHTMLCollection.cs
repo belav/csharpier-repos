@@ -49,7 +49,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int namedItem(
-            /*DOMString*/HandleRef name,
+/*DOMString*/HandleRef name,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret
         );
 

@@ -15,7 +15,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// Scope for setting up analyzers for an entire session, automatically associating actions with analyzers.
+    /// Scope for setting up analyzers for an entire session, automatically associating actions with
+    // analyzers.
     /// </summary>
     internal sealed class AnalyzerAnalysisContext : AnalysisContext
     {
@@ -149,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     }
 
     /// <summary>
-    /// Scope for setting up analyzers for a compilation, automatically associating actions with analyzers.
+    /// Scope for setting up analyzers for a compilation, automatically associating actions with
+    // analyzers.
     /// </summary>
     internal sealed class AnalyzerCompilationStartAnalysisContext : CompilationStartAnalysisContext
     {
@@ -367,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     }
 
     /// <summary>
-    /// Scope for setting up analyzers for a code block, automatically associating actions with analyzers.
+    /// Scope for setting up analyzers for a code block, automatically associating actions with
+    // analyzers.
     /// </summary>
     internal sealed class AnalyzerCodeBlockStartAnalysisContext<TLanguageKindEnum>
         : CodeBlockStartAnalysisContext<TLanguageKindEnum>
@@ -418,7 +421,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     }
 
     /// <summary>
-    /// Scope for setting up analyzers for an operation block, automatically associating actions with analyzers.
+    /// Scope for setting up analyzers for an operation block, automatically associating actions with
+    // analyzers.
     /// </summary>
     internal sealed class AnalyzerOperationBlockStartAnalysisContext
         : OperationBlockStartAnalysisContext
@@ -920,10 +924,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// <summary>
     /// Actions registered by a particular analyzer.
     /// </summary>
-    // ToDo: AnalyzerActions, and all of the mechanism around it, can be eliminated if the IDE diagnostic analyzer driver
-    // moves from an analyzer-centric model to an action-centric model. For example, the driver would need to stop asking
-    // if a particular analyzer can analyze syntax trees, and instead ask if any syntax tree actions are present. Also,
-    // the driver needs to apply all relevant actions rather then applying the actions of individual analyzers.
+    // ToDo: AnalyzerActions, and all of the mechanism around it, can be eliminated if the IDE
+    // diagnostic analyzer driver
+    // moves from an analyzer-centric model to an action-centric model. For example, the driver would
+    // need to stop asking
+    // if a particular analyzer can analyze syntax trees, and instead ask if any syntax tree actions are
+    // present. Also,
+    // the driver needs to apply all relevant actions rather then applying the actions of individual
+    // analyzers.
     internal struct AnalyzerActions
     {
         public static readonly AnalyzerActions Empty = new AnalyzerActions(concurrent: false);

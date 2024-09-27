@@ -122,9 +122,9 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        /*
-         * Compile
-         */
+/*
+* Compile
+*/
         internal override void Compile(Compiler compiler)
         {
             CompileDocument(
@@ -190,7 +190,8 @@ namespace System.Xml.Xsl.XsltOld
                         this.attributeSetTable[srcAttSet.Name] = dstAttSet;
                     }
                     ArrayList dstAttList = dstAttSet.containedActions;
-                    // We adding attributes in reverse order for purpuse. In the mirged list most importent attset shoud go last one
+                    // We adding attributes in reverse order for purpuse. In the mirged list most importent attset shoud
+                    // go last one
                     // so we'll need to invert dstAttList finaly.
                     if (srcAttList != null)
                     {

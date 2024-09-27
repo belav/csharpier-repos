@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net.Http;
 
@@ -14,7 +15,8 @@ namespace System.Web.Http
         /// Gets the static <see cref="HttpMethod"/> instance for any given HTTP method name.
         /// </summary>
         /// <param name="method">The HTTP request method.</param>
-        /// <returns>An existing static <see cref="HttpMethod"/> or a new instance if the method was not found.</returns>
+        /// <returns>An existing static <see cref="HttpMethod"/> or a new instance if the method was not
+        // found.</returns>
         internal static HttpMethod GetHttpMethod(string method)
         {
             if (String.IsNullOrEmpty(method))

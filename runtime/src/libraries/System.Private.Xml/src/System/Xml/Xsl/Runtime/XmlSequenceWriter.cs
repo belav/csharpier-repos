@@ -12,7 +12,8 @@ namespace System.Xml.Xsl.Runtime
 {
     /// <summary>
     ///                         External XmlWriter      Cached Sequence
-    /// ===================================================================================================
+    ///
+    // ===================================================================================================
     /// Multiple Trees          Merged into Entity      Multiple Trees
     ///
     /// Attributes              Error                   Floating
@@ -124,12 +125,16 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// An implementation of XmlSequenceWriter that converts an instance of the XQuery data model into a series
-    /// of calls to XmlRawWriter.  The algorithm to do this is designed to be compatible with the rules in the
+    /// An implementation of XmlSequenceWriter that converts an instance of the XQuery data model into a
+    // series
+    /// of calls to XmlRawWriter.  The algorithm to do this is designed to be compatible with the rules
+    // in the
     /// "XSLT 2.0 and XQuery 1.0 Serialization" spec.  Here are the rules we use:
     ///   1. An exception is thrown if the top-level sequence contains attribute or namespace nodes
-    ///   2. Each atomic value in the top-level sequence is converted to text, and XmlWriter.WriteString is called
-    ///   3. A call to XmlRawWriter.WriteWhitespace(" ") is made between adjacent atomic values at the top-level
+    ///   2. Each atomic value in the top-level sequence is converted to text, and XmlWriter.WriteString
+    // is called
+    ///   3. A call to XmlRawWriter.WriteWhitespace(" ") is made between adjacent atomic values at the
+    // top-level
     ///   4. All items in the top-level sequence are merged together into a single result document.
     /// </summary>
     internal sealed class XmlMergeSequenceWriter : XmlSequenceWriter
@@ -294,7 +299,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Begin shallow copy of the specified node to the writer.  Returns true if the node might have content.
+        /// Begin shallow copy of the specified node to the writer.  Returns true if the node might have
+        // content.
         /// </summary>
         private bool CopyShallowNode(XPathNavigator nav)
         {
@@ -347,7 +353,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Copy all or some (which depends on nsScope) of the namespaces on the navigator's current node to the
+        /// Copy all or some (which depends on nsScope) of the namespaces on the navigator's current node to
+        // the
         /// raw writer.
         /// </summary>
         private void CopyNamespaces(XPathNavigator nav, XPathNamespaceScope nsScope)

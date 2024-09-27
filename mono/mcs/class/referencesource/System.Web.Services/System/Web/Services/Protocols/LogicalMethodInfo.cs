@@ -58,7 +58,8 @@ namespace System.Web.Services.Protocols
         MethodInfo declaration;
         static HashAlgorithm hash;
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.LogicalMethodInfo"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.LogicalMethodInfo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -149,7 +150,8 @@ namespace System.Web.Services.Protocols
             attributes = new Hashtable();
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.ToString"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.ToString"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -201,7 +203,8 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.BeginInvoke"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.BeginInvoke"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -220,7 +223,8 @@ namespace System.Web.Services.Protocols
             return (IAsyncResult)methodInfo.Invoke(target, asyncValues);
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.EndInvoke"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.EndInvoke"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -257,7 +261,8 @@ namespace System.Web.Services.Protocols
             get { return declaration; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.DeclaringType"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.DeclaringType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -275,7 +280,8 @@ namespace System.Web.Services.Protocols
             get { return methodName; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.AsyncResultParameter"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.AsyncResultParameter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -284,7 +290,8 @@ namespace System.Web.Services.Protocols
             get { return resultParam; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.AsyncCallbackParameter"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.AsyncCallbackParameter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -293,7 +300,8 @@ namespace System.Web.Services.Protocols
             get { return callbackParam; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.AsyncStateParameter"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.AsyncStateParameter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -302,7 +310,8 @@ namespace System.Web.Services.Protocols
             get { return stateParam; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.ReturnType"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.ReturnType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -329,7 +338,8 @@ namespace System.Web.Services.Protocols
             get { return endMethodInfo != null; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.InParameters"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.InParameters"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -338,7 +348,8 @@ namespace System.Web.Services.Protocols
             get { return inParams; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.OutParameters"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.OutParameters"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -347,7 +358,8 @@ namespace System.Web.Services.Protocols
             get { return outParams; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.Parameters"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.Parameters"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -356,7 +368,8 @@ namespace System.Web.Services.Protocols
             get { return parameters; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.GetCustomAttributes"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.GetCustomAttributes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -419,7 +432,8 @@ namespace System.Web.Services.Protocols
             return attrForType;
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.GetCustomAttribute"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.GetCustomAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -447,7 +461,8 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.CustomAttributeProvider"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.CustomAttributeProvider"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -457,7 +472,8 @@ namespace System.Web.Services.Protocols
             get { return methodInfo; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.ReturnTypeCustomAttributeProvider"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.ReturnTypeCustomAttributeProvider"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -474,7 +490,8 @@ namespace System.Web.Services.Protocols
         // Do not use this to property get custom attributes.  Instead use the CustomAttributeProvider
         // property which automatically handles where the custom attributes belong for async methods
         // (which are actually two methods: BeginXXX and EndXXX).
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.MethodInfo"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.MethodInfo"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -483,7 +500,8 @@ namespace System.Web.Services.Protocols
             get { return endMethodInfo == null ? methodInfo : null; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.BeginMethodInfo"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.BeginMethodInfo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -492,7 +510,8 @@ namespace System.Web.Services.Protocols
             get { return methodInfo; }
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.EndMethodInfo"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.EndMethodInfo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -595,7 +614,8 @@ namespace System.Web.Services.Protocols
             return paramInfo.IsOut || paramInfo.ParameterType.IsByRef;
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.IsBeginMethod"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.IsBeginMethod"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -605,7 +625,8 @@ namespace System.Web.Services.Protocols
                 && methodInfo.Name.StartsWith("Begin", StringComparison.Ordinal);
         }
 
-        /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodInfo.IsEndMethod"]/*' />
+        /// <include file='doc\LogicalMethodInfo.uex'
+        // path='docs/doc[@for="LogicalMethodInfo.IsEndMethod"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

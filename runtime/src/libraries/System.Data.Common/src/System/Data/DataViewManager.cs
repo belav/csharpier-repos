@@ -372,7 +372,7 @@ namespace System.Data
                         new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)
                     )
                 :
-                /*default*/null! // TODO: This is very likely wrong
+/*default*/null! // TODO: This is very likely wrong
             );
         }
 
@@ -396,7 +396,7 @@ namespace System.Data
                         new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
                     )
                 :
-                /*default*/null! // TODO: This is very likely wrong
+/*default*/null! // TODO: This is very likely wrong
             );
         }
     }

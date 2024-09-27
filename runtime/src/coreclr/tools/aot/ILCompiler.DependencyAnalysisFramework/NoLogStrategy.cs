@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace ILCompiler.DependencyAnalysisFramework
 {
     /// <summary>
-    /// Very memory efficient, and potentially faster mark strategy that eschews keeping track of what caused what to exist
+    /// Very memory efficient, and potentially faster mark strategy that eschews keeping track of what
+    // caused what to exist
     /// </summary>
     /// <typeparam name="DependencyContextType"></typeparam>
     public struct NoLogStrategy<DependencyContextType>

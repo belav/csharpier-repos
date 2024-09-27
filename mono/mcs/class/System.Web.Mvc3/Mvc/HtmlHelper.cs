@@ -122,7 +122,8 @@
         public MvcHtmlString AntiForgeryToken(string salt, string domain, string path)
         {
             //Disabled to compile MVC3 with the newer System.Web.WebPages helpers
-            //return new MvcHtmlString(AntiForgery.GetHtml(ViewContext.HttpContext, salt, domain, path).ToString());
+            //return new MvcHtmlString(AntiForgery.GetHtml(ViewContext.HttpContext, salt, domain,
+            // path).ToString());
             return new MvcHtmlString(AntiForgery.GetHtml().ToString());
         }
 
@@ -242,7 +243,8 @@
                 throw new ArgumentNullException("idAttributeDotReplacement");
             }
 
-            // TagBuilder.CreateSanitizedId returns null for empty strings, return String.Empty instead to avoid breaking change
+            // TagBuilder.CreateSanitizedId returns null for empty strings, return String.Empty instead to avoid
+            // breaking change
             if (name.Length == 0)
             {
                 return String.Empty;
@@ -458,7 +460,8 @@
         }
 
         // Only render attributes if unobtrusive client-side validation is enabled, and then only if we've
-        // never rendered validation for a field with this name in this form. Also, if there's no form context,
+        // never rendered validation for a field with this name in this form. Also, if there's no form
+        // context,
         // then we can't render the attributes (we'd have no <form> to attach them to).
         public IDictionary<string, object> GetUnobtrusiveValidationAttributes(
             string name,

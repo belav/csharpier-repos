@@ -52,7 +52,8 @@ namespace ILLink.Shared.TrimAnalysis
                 method = method.GetTypicalMethodDefinition();
                 TypeAnnotations typeAnnotations = GetAnnotations(method.OwningType);
                 // This will return true even if the method has annotations on generic parameters,
-                // but the callers don't rely on that - it's just easier to leave it this way (and it makes very little difference)
+                // but the callers don't rely on that - it's just easier to leave it this way (and it makes very
+                // little difference)
                 return typeAnnotations.TryGetAnnotation(method, out _);
             }
             catch (TypeSystemException)
@@ -238,8 +239,10 @@ namespace ILLink.Shared.TrimAnalysis
             //   {
             //       public void PrintFields(Base base)
             //       {
-            //            // No warning here - GetTypeWithFields is correctly annotated to allow GetFields on the return value.
-            //            Console.WriteLine(string.Join(" ", base.GetTypeWithFields().GetFields().Select(f => f.Name)));
+            //            // No warning here - GetTypeWithFields is correctly annotated to allow GetFields on
+            // the return value.
+            //            Console.WriteLine(string.Join(" ", base.GetTypeWithFields().GetFields().Select(f =>
+            // f.Name)));
             //       }
             //   }
             //
@@ -251,7 +254,8 @@ namespace ILLink.Shared.TrimAnalysis
             //       public override Type GetTypeWithFields() { return typeof(TestType); }
             //   }
             //
-            // If TestType from above is trimmed, it may note have all its fields, and there would be no warnings generated.
+            // If TestType from above is trimmed, it may note have all its fields, and there would be no
+            // warnings generated.
             // But there has to be code like this somewhere in the app, in order to generate the override:
             //   class RuntimeTypeGenerator
             //   {
@@ -374,9 +378,12 @@ namespace ILLink.Shared.TrimAnalysis
             {
                 // We scan the entire type at this point; the reason for doing that is properties.
                 //
-                // We allow annotating properties, but those annotations need to flow onto individual get/set methods
-                // and backing fields. Without scanning all properties, we can't answer questions about fields/methods.
-                // And if we're going over all properties, we might as well go over everything else to keep things simple.
+                // We allow annotating properties, but those annotations need to flow onto individual get/set
+                // methods
+                // and backing fields. Without scanning all properties, we can't answer questions about
+                // fields/methods.
+                // And if we're going over all properties, we might as well go over everything else to keep things
+                // simple.
 
                 Debug.Assert(key.IsTypeDefinition);
                 if (key is not EcmaType ecmaType)
@@ -450,7 +457,8 @@ namespace ILLink.Shared.TrimAnalysis
 
                     if (!IsTypeInterestingForDataflow(field.FieldType))
                     {
-                        // Already know that there's a non-empty annotation on a field which is not System.Type/String and we're about to ignore it
+                        // Already know that there's a non-empty annotation on a field which is not System.Type/String and
+                        // we're about to ignore it
                         _logger.LogWarning(
                             field,
                             DiagnosticId.DynamicallyAccessedMembersOnFieldCanOnlyApplyToTypesOrStrings,
@@ -486,7 +494,8 @@ namespace ILLink.Shared.TrimAnalysis
                         continue;
                     }
 
-                    // If there's an annotation on the method itself and it's one of the special types (System.Type for example)
+                    // If there's an annotation on the method itself and it's one of the special types (System.Type for
+                    // example)
                     // treat that annotation as annotating the "this" parameter.
                     if (methodMemberTypes != DynamicallyAccessedMemberTypes.None)
                     {
@@ -655,13 +664,17 @@ namespace ILLink.Shared.TrimAnalysis
                     MethodDesc setMethod = property.SetMethod;
                     if (setMethod != null)
                     {
-                        // Abstract property backing field propagation doesn't make sense, and any derived property will be validated
-                        // to have the exact same annotations on getter/setter, and thus if it has a detectable backing field that will be validated as well.
+                        // Abstract property backing field propagation doesn't make sense, and any derived property will be
+                        // validated
+                        // to have the exact same annotations on getter/setter, and thus if it has a detectable backing
+                        // field that will be validated as well.
                         MethodIL methodBody = _ilProvider.GetMethodIL(setMethod);
                         if (methodBody != null)
                         {
-                            // Look for the compiler generated backing field. If it doesn't work out simply move on. In such case we would still
-                            // propagate the annotation to the setter/getter and later on when analyzing the setter/getter we will warn
+                            // Look for the compiler generated backing field. If it doesn't work out simply move on. In such
+                            // case we would still
+                            // propagate the annotation to the setter/getter and later on when analyzing the setter/getter we
+                            // will warn
                             // that the field (which ever it is) must be annotated as well.
                             ScanMethodBodyForFieldAccess(
                                 methodBody,
@@ -677,7 +690,8 @@ namespace ILLink.Shared.TrimAnalysis
                                 setterAnnotation = annotatedMethod;
                         }
 
-                        // If 'value' parameter is annotated, then warn. Other parameters can be annotated for indexable properties
+                        // If 'value' parameter is annotated, then warn. Other parameters can be annotated for indexable
+                        // properties
                         if (
                             setterAnnotation?.ParameterAnnotations?[^1]
                             is not (null or DynamicallyAccessedMemberTypes.None)
@@ -721,13 +735,17 @@ namespace ILLink.Shared.TrimAnalysis
                     MethodDesc getMethod = property.GetMethod;
                     if (getMethod != null)
                     {
-                        // Abstract property backing field propagation doesn't make sense, and any derived property will be validated
-                        // to have the exact same annotations on getter/setter, and thus if it has a detectable backing field that will be validated as well.
+                        // Abstract property backing field propagation doesn't make sense, and any derived property will be
+                        // validated
+                        // to have the exact same annotations on getter/setter, and thus if it has a detectable backing
+                        // field that will be validated as well.
                         MethodIL methodBody = _ilProvider.GetMethodIL(getMethod);
                         if (methodBody != null)
                         {
-                            // Look for the compiler generated backing field. If it doesn't work out simply move on. In such case we would still
-                            // propagate the annotation to the setter/getter and later on when analyzing the setter/getter we will warn
+                            // Look for the compiler generated backing field. If it doesn't work out simply move on. In such
+                            // case we would still
+                            // propagate the annotation to the setter/getter and later on when analyzing the setter/getter we
+                            // will warn
                             // that the field (which ever it is) must be annotated as well.
                             ScanMethodBodyForFieldAccess(
                                 methodBody,
@@ -743,7 +761,8 @@ namespace ILLink.Shared.TrimAnalysis
                                 getterAnnotation = annotatedMethod;
                         }
 
-                        // If return value is annotated, then warn. Otherwise, parameters can be annotated for indexable properties
+                        // If return value is annotated, then warn. Otherwise, parameters can be annotated for indexable
+                        // properties
                         if (
                             getterAnnotation?.ReturnParameterAnnotation
                             is not (null or DynamicallyAccessedMemberTypes.None)
@@ -1357,7 +1376,8 @@ namespace ILLink.Shared.TrimAnalysis
             GetMethodParameterValue(param, GetParameterAnnotation(param));
 
 #pragma warning disable CA1822 // Mark members as static - Should be an instance method for consistency
-        // overrideIsThis is needed for backwards compatibility with MakeGenericType/Method https://github.com/dotnet/linker/issues/2428
+        // overrideIsThis is needed for backwards compatibility with MakeGenericType/Method
+        // https://github.com/dotnet/linker/issues/2428
         internal MethodParameterValue GetMethodThisParameterValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes,

@@ -29,7 +29,8 @@ namespace System.Net
             get { return _dataChunkIndex > -1; }
         }
 
-        // This low level API should only be consumed if the caller can make sure that the state is not corrupted
+        // This low level API should only be consumed if the caller can make sure that the state is not
+        // corrupted
         // WebSocketHttpListenerDuplexStream (a duplex wrapper around HttpRequestStream/HttpResponseStream)
         // is currenlty the only consumer of this API
         internal HttpListenerContext InternalHttpContext
@@ -341,7 +342,8 @@ namespace System.Net
             _inOpaqueMode = true;
         }
 
-        // This low level API should only be consumed if the caller can make sure that the state is not corrupted
+        // This low level API should only be consumed if the caller can make sure that the state is not
+        // corrupted
         // WebSocketHttpListenerDuplexStream (a duplex wrapper around HttpRequestStream/HttpResponseStream)
         // is currenlty the only consumer of this API
         internal uint GetChunks(byte[] buffer, int offset, int size)

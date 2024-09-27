@@ -12,10 +12,12 @@ namespace Microsoft.CodeAnalysis.Formatting
     /// <summary>
     /// it represents a token that is inside of token stream not also outside of token stream
     ///
-    /// it uses an index to navigate previous and after tokens in the stream to make navigation faster. and regular
+    /// it uses an index to navigate previous and after tokens in the stream to make navigation faster.
+    // and regular
     /// Previous/NextToken for tokens outside of the stream.
     ///
-    /// this object is supposed to be live very short but created a lot of time. that is why it is struct.
+    /// this object is supposed to be live very short but created a lot of time. that is why it is
+    // struct.
     /// (same reason why SyntaxToken is struct - to reduce heap allocation)
     /// </summary>
     internal readonly record struct TokenData : IComparable<TokenData>

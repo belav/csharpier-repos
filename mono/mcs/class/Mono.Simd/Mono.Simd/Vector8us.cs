@@ -189,10 +189,10 @@ namespace Mono.Simd
             return res;
         }
 
-        /*
-         * NOTE: Thou pmullw states it does signed multiplication, it works for unsigned numbers
-         * if only the lower part is considered and the flags disregarded.
-         */
+/*
+* NOTE: Thou pmullw states it does signed multiplication, it works for unsigned numbers
+* if only the lower part is considered and the flags disregarded.
+*/
         [Acceleration(AccelMode.SSE2)]
         public static unsafe Vector8us operator *(Vector8us va, Vector8us vb)
         {

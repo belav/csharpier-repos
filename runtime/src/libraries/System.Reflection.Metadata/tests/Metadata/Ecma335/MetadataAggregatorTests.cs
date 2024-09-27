@@ -348,7 +348,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                 expectedGeneration: 2
             );
 
-            // GUIDs on the heap accumulate, previous content is copied to the next gen, so the expected handle is the same as the given handle
+            // GUIDs on the heap accumulate, previous content is copied to the next gen, so the expected handle
+            // is the same as the given handle
             TestGenerationHandle(
                 aggregator,
                 MetadataTokens.GuidHandle(1),

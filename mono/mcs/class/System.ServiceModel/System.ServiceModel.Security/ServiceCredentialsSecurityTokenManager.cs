@@ -205,34 +205,34 @@ namespace System.ServiceModel.Security
             );
             p.SecurityBindingElement = sbe;
 
-            /*
-                        // I doubt the binding is acquired this way ...
-                        Binding binding;
-                        if (!r.TryGetProperty<Binding> (ReqType.IssuerBindingProperty, out binding))
-                            binding = new CustomBinding (
-                                new TextMessageEncodingBindingElement (),
-                                new HttpTransportBindingElement ());
-                        p.IssuerBinding = binding;
-            
-                        // not sure if it is used only for this purpose though ...
-                        BindingContext ctx = r.GetProperty<BindingContext> (ReqType.IssuerBindingContextProperty);
-                        foreach (IEndpointBehavior b in ctx.BindingParameters.FindAll<IEndpointBehavior> ())
-                            p.IssuerChannelBehaviors.Add (b);
-            */
+/*
+// I doubt the binding is acquired this way ...
+Binding binding;
+if (!r.TryGetProperty<Binding> (ReqType.IssuerBindingProperty, out binding))
+binding = new CustomBinding (
+new TextMessageEncodingBindingElement (),
+new HttpTransportBindingElement ());
+p.IssuerBinding = binding;
+
+// not sure if it is used only for this purpose though ...
+BindingContext ctx = r.GetProperty<BindingContext> (ReqType.IssuerBindingContextProperty);
+foreach (IEndpointBehavior b in ctx.BindingParameters.FindAll<IEndpointBehavior> ())
+p.IssuerChannelBehaviors.Add (b);
+*/
 
             SecurityTokenVersion ver = r.GetProperty<SecurityTokenVersion>(
                 ReqType.MessageSecurityVersionProperty
             );
             p.SecurityTokenSerializer = CreateSecurityTokenSerializer(ver);
 
-            /*
-                        // seems like they are optional here ... (but possibly
-                        // used later)
-                        EndpointAddress address;
-                        if (!r.TryGetProperty<EndpointAddress> (ReqType.IssuerAddressProperty, out address))
-                            address = p.TargetAddress;
-                        p.IssuerAddress = address;
-            */
+/*
+// seems like they are optional here ... (but possibly
+// used later)
+EndpointAddress address;
+if (!r.TryGetProperty<EndpointAddress> (ReqType.IssuerAddressProperty, out address))
+address = p.TargetAddress;
+p.IssuerAddress = address;
+*/
 
             // It is somehow not checked as mandatory ...
             SecurityAlgorithmSuite suite = null;

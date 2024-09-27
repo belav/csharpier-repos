@@ -322,7 +322,8 @@ namespace Roslyn.Test.Utilities
         public static MetadataReference MscorlibRef_v46 => s_mscorlibRef_v46.Value;
 
         /// <summary>
-        /// Reference to an mscorlib silverlight assembly in which the System.Array does not contain the special member LongLength.
+        /// Reference to an mscorlib silverlight assembly in which the System.Array does not contain the
+        // special member LongLength.
         /// </summary>
         private static readonly Lazy<MetadataReference> s_mscorlibRef_silverlight =
             new Lazy<MetadataReference>(

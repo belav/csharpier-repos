@@ -68,7 +68,8 @@ namespace Tests.Integration
         [Fact]
         public void PartAddedTwice_AppearsTwice()
         {
-            //  You probably shouldn't be adding a part to the container twice, but it's not something we're going to check for and throw an exception on
+            //  You probably shouldn't be adding a part to the container twice, but it's not something we're
+            // going to check for and throw an exception on
             var container = new CompositionContainer();
             var disposable = new AnyPartDisposable();
             var part = AttributedModelServices.CreatePart(disposable);

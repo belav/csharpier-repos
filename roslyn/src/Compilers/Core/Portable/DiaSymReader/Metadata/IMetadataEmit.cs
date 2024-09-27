@@ -16,7 +16,8 @@ namespace Microsoft.DiaSymReader
     [SuppressUnmanagedCodeSecurity]
     internal unsafe interface IMetadataEmit
     {
-        // SymWriter doesn't use any methods from this interface except for GetTokenFromSig, which is only called when
+        // SymWriter doesn't use any methods from this interface except for GetTokenFromSig, which is only
+        // called when
         // DefineLocalVariable(2) and DefineConstant(2) don't specify signature token, or the token is nil.
 
         void __SetModuleProps();

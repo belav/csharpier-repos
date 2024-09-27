@@ -149,7 +149,8 @@ public delegate void MethodDelegate();
 
 public delegate Object InvokeDelegate(Object obj, Object[] parms);
 
-// the 0.1% case from https://docs.microsoft.com/en-us/archive/blogs/shawnfa/silverlight-security-iii-inheritance
+// the 0.1% case from
+// https://docs.microsoft.com/en-us/archive/blogs/shawnfa/silverlight-security-iii-inheritance
 public class TransparentClassWithSafeCriticalDefaultConstructor
 {
     [SecuritySafeCritical]
@@ -214,13 +215,13 @@ public class Test
         error("safe-critical-interface-derived method called");
     }
 
-    /*
-    static unsafe void unsafeMethod ()
-    {
-        byte *p = null;
-        error ("unsafe method called");
-    }
-    */
+/*
+static unsafe void unsafeMethod ()
+{
+byte *p = null;
+error ("unsafe method called");
+}
+*/
 
     static void doBadTransparentOverrideClass()
     {
@@ -273,7 +274,8 @@ public class Test
     {
         // Transparent creating an array of a Critical type
         // using Class[] (rank == 1) throws a TypeLoadException on SL2 - but that looks like a bug
-        // reported as https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=490406
+        // reported as
+        // https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=490406
         CClass[] c_array = new CClass[0];
         // Transparent creating an array of a SafeCritical type
         SCClass[] sc_array = new SCClass[0];
@@ -393,12 +395,12 @@ public class Test
         }
         catch (TypeLoadException) { }
 
-        /*
-        try {
-            unsafeMethod ();
-        } catch (VerificationException) {
-        }
-        */
+/*
+try {
+unsafeMethod ();
+} catch (VerificationException) {
+}
+*/
 
         try
         {
@@ -486,7 +488,8 @@ public class Test
         // arrays creation tests
         ArraysCreatedByTransparentCaller();
         ArraysCreatedBySafeCriticalCaller();
-        // the above also calls ArraysCreatedBySafeCriticalCaller since (Transparent) Main cannot call it directly
+        // the above also calls ArraysCreatedBySafeCriticalCaller since (Transparent) Main cannot call it
+        // directly
 
         if (haveError)
             return 1;

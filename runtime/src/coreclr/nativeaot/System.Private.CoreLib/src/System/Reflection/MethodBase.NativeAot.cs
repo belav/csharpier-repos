@@ -23,7 +23,8 @@ namespace System.Reflection
             throw NotImplemented.ByDesign;
         } //Implemented by toolchain.
 
-        // This is not an api but needs to be declared public so that System.Private.Reflection.Core can access (and override it)
+        // This is not an api but needs to be declared public so that System.Private.Reflection.Core can
+        // access (and override it)
         public virtual ReadOnlySpan<ParameterInfo> GetParametersAsSpan() => GetParameters();
 
         //
@@ -41,7 +42,8 @@ namespace System.Reflection
         //  Throws NotSupportedException if the MethodBase is not a metadata-represented method
         //  (for example, the methods returned on Array types.)
         //
-        // This is not an api but needs to be declared public so that System.Private.Reflection.Core can access (and override it)
+        // This is not an api but needs to be declared public so that System.Private.Reflection.Core can
+        // access (and override it)
         public virtual MethodBase MetadataDefinitionMethod
         {
             get { throw NotImplemented.ByDesign; }

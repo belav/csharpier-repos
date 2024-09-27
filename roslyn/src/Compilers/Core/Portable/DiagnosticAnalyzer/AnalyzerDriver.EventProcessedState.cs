@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             /// <summary>
             /// Subset of processed analyzers.
-            /// NOTE: This property is only non-null for <see cref="EventProcessedStateKind.PartiallyProcessed"/>.
+            /// NOTE: This property is only non-null for <see
+            // cref="EventProcessedStateKind.PartiallyProcessed"/>.
             /// </summary>
             public ImmutableArray<DiagnosticAnalyzer> SubsetProcessedAnalyzers { get; }
 

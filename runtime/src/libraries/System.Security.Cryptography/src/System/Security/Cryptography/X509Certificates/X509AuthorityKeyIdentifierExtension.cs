@@ -118,7 +118,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   <list type="bullet">
         ///     <item>The encoded extension does not include an <c>authorityCertIssuer</c> value.</item>
         ///     <item>The <c>authorityCertIssuer</c> value contains no <c>directoryName</c> values.</item>
-        ///     <item>The <c>authorityCertIssuer</c> value contains multiple <c>directoryName</c> values.</item>
+        ///     <item>The <c>authorityCertIssuer</c> value contains multiple <c>directoryName</c>
+        // values.</item>
         ///     <item>
         ///       The <c>directoryName</c> value did not successfully decode as
         ///       an <see cref="X500DistinguishedName"/>.

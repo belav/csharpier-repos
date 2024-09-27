@@ -46,7 +46,8 @@ namespace Internal.Runtime.TypeLoader
         }
 
         /// <summary>
-        /// From a string, get a pointer to an allocated memory location that holds a NativeFormat encoded string.
+        /// From a string, get a pointer to an allocated memory location that holds a NativeFormat encoded
+        // string.
         /// This is used for the creation of RuntimeFieldHandles from metadata.
         /// </summary>
         /// <param name="str"></param>
@@ -306,7 +307,8 @@ namespace Internal.Runtime.TypeLoader
             fieldName = null;
             declaringTypeHandle = default(RuntimeTypeHandle);
 
-            // Make sure it's not a dynamically allocated RuntimeFieldHandle before we attempt to use it to parse native layout data
+            // Make sure it's not a dynamically allocated RuntimeFieldHandle before we attempt to use it to
+            // parse native layout data
             Debug.Assert(((*(IntPtr*)&runtimeFieldHandle).ToInt64() & 0x1) == 0);
 
             RuntimeFieldHandleInfo* fieldData = *(RuntimeFieldHandleInfo**)&runtimeFieldHandle;
@@ -314,7 +316,8 @@ namespace Internal.Runtime.TypeLoader
 
             // The native layout info signature is a pair.
             // The first is a pointer that points to the TypeManager indirection cell.
-            // The second is the offset into the native layout info blob in that TypeManager, where the native signature is encoded.
+            // The second is the offset into the native layout info blob in that TypeManager, where the native
+            // signature is encoded.
             IntPtr* nativeLayoutInfoSignatureData = (IntPtr*)fieldData->NativeLayoutInfoSignature;
 
             signature = RuntimeSignature.CreateFromNativeLayoutSignature(
@@ -334,7 +337,8 @@ namespace Internal.Runtime.TypeLoader
             )
                 return false;
 
-            // GetTypeFromSignatureAndContext parses the type from the signature and returns a pointer to the next
+            // GetTypeFromSignatureAndContext parses the type from the signature and returns a pointer to the
+            // next
             // part of the native layout signature to read which we get the field name from
             var reader = GetNativeLayoutInfoReader(remainingSignature);
             var parser = new NativeParser(reader, remainingSignature.NativeLayoutOffset);
@@ -347,8 +351,10 @@ namespace Internal.Runtime.TypeLoader
 
         #region Method Ldtoken Functions
         /// <summary>
-        /// Create a runtime method handle from name, signature and generic arguments. If the methodSignature
-        /// is constructed from a metadata token, the methodName should be IntPtr.Zero, as it already encodes the method
+        /// Create a runtime method handle from name, signature and generic arguments. If the
+        // methodSignature
+        /// is constructed from a metadata token, the methodName should be IntPtr.Zero, as it already
+        // encodes the method
         /// name.
         /// </summary>
         public unsafe RuntimeMethodHandle GetRuntimeMethodHandleForComponents(
@@ -402,7 +408,8 @@ namespace Internal.Runtime.TypeLoader
                         genericArgPtr[i] = *(IntPtr*)&currentArg;
                     }
 
-                    // Special flag in the handle value to indicate it was dynamically allocated, and doesn't point into the InvokeMap blob
+                    // Special flag in the handle value to indicate it was dynamically allocated, and doesn't point into
+                    // the InvokeMap blob
                     runtimeMethodHandleValue++;
                     runtimeMethodHandle = *(RuntimeMethodHandle*)&runtimeMethodHandleValue;
 
@@ -471,7 +478,8 @@ namespace Internal.Runtime.TypeLoader
             IntPtr runtimeMethodHandleValue = *(IntPtr*)&runtimeMethodHandle;
             Debug.Assert((runtimeMethodHandleValue.ToInt64() & 0x1) == 0x1);
 
-            // Special flag in the handle value to indicate it was dynamically allocated, and doesn't point into the InvokeMap blob
+            // Special flag in the handle value to indicate it was dynamically allocated, and doesn't point into
+            // the InvokeMap blob
             runtimeMethodHandleValue--;
 
             DynamicMethodHandleInfo* methodData = (DynamicMethodHandleInfo*)
@@ -593,7 +601,8 @@ namespace Internal.Runtime.TypeLoader
             RuntimeMethodHandle runtimeMethodHandle
         )
         {
-            // Make sure it's not a dynamically allocated RuntimeMethodHandle before we attempt to use it to parse native layout data
+            // Make sure it's not a dynamically allocated RuntimeMethodHandle before we attempt to use it to
+            // parse native layout data
             Debug.Assert(((*(IntPtr*)&runtimeMethodHandle).ToInt64() & 0x1) == 0);
 
             RuntimeMethodHandleInfo* methodData = *(RuntimeMethodHandleInfo**)&runtimeMethodHandle;
@@ -601,7 +610,8 @@ namespace Internal.Runtime.TypeLoader
 
             // The native layout info signature is a pair.
             // The first is a pointer that points to the TypeManager indirection cell.
-            // The second is the offset into the native layout info blob in that TypeManager, where the native signature is encoded.
+            // The second is the offset into the native layout info blob in that TypeManager, where the native
+            // signature is encoded.
             IntPtr* nativeLayoutInfoSignatureData = (IntPtr*)methodData->NativeLayoutInfoSignature;
 
             signature = RuntimeSignature.CreateFromNativeLayoutSignature(

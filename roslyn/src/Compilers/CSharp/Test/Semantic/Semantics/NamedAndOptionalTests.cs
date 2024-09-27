@@ -184,7 +184,8 @@ class C : Middle
                     Diagnostic(ErrorCode.ERR_BadNamedArgument, "optParam3")
                         .WithArguments("Goo", "optParam3")
                         .WithLocation(37, 15),
-                    // (39,30): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                    // (39,30): error CS1738: Named argument specifications must appear after all fixed arguments have
+                    // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                     //         c.Goo(optArg1: 3333, 11111);
                     Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "11111")
                         .WithArguments("7.2")
@@ -244,17 +245,20 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (10,9): error CS7036: There is no argument given that corresponds to the required parameter 'fg' of 'C.F'
+                    // (10,9): error CS7036: There is no argument given that corresponds to the required parameter 'fg'
+                    // of 'C.F'
                     //         f(0, fz : 456);
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "f")
                         .WithArguments("fg", "C.F")
                         .WithLocation(10, 9),
-                    // (11,9): error CS7036: There is no argument given that corresponds to the required parameter 'my' of 'C.M(int, int, int)'
+                    // (11,9): error CS7036: There is no argument given that corresponds to the required parameter 'my'
+                    // of 'C.M(int, int, int)'
                     //         M(0, mz : 456);
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("my", "C.M(int, int, int)")
                         .WithLocation(11, 9),
-                    // (12,13): error CS7036: There is no argument given that corresponds to the required parameter 'cy' of 'C.C(int, int, int)'
+                    // (12,13): error CS7036: There is no argument given that corresponds to the required parameter 'cy'
+                    // of 'C.C(int, int, int)'
                     //         new C(0, cz : 456);
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
                         .WithArguments("cy", "C.C(int, int, int)")
@@ -312,7 +316,8 @@ class C
                     Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "C")
                         .WithArguments("C")
                         .WithLocation(4, 15),
-                    // (7,16): error CS1744: Named argument 'x' specifies a parameter for which a positional argument has already been given
+                    // (7,16): error CS1744: Named argument 'x' specifies a parameter for which a positional argument
+                    // has already been given
                     //     C(1, 2, 3, x:4);
                     Diagnostic(ErrorCode.ERR_NamedArgumentUsedInPositional, "x")
                         .WithArguments("x")
@@ -785,7 +790,8 @@ partial class C
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,25): warning CS8826: Partial method declarations 'void C.PartialMethod(int x)' and 'void C.PartialMethod(int y)' have signature differences.
+                    // (9,25): warning CS8826: Partial method declarations 'void C.PartialMethod(int x)' and 'void
+                    // C.PartialMethod(int y)' have signature differences.
                     //     static partial void PartialMethod(int y) { Console.WriteLine(y); }
                     Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "PartialMethod")
                         .WithArguments("void C.PartialMethod(int x)", "void C.PartialMethod(int y)")
@@ -1044,7 +1050,8 @@ class Test{
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,21): error CS1745: Cannot specify default parameter value in conjunction with DefaultParameterAttribute or OptionalAttribute
+                    // (9,21): error CS1745: Cannot specify default parameter value in conjunction with
+                    // DefaultParameterAttribute or OptionalAttribute
                     //     public int Bar([DefaultParameterValue(1)]int i = 2) {
                     Diagnostic(
                             ErrorCode.ERR_DefaultValueUsedWithAttributes,
@@ -1055,7 +1062,8 @@ class Test{
                     //     public int Bar([DefaultParameterValue(1)]int i = 2) {
                     Diagnostic(ErrorCode.ERR_ParamDefaultValueDiffersFromAttribute, "2")
                         .WithLocation(9, 54),
-                    // (5,21): error CS1745: Cannot specify default parameter value in conjunction with DefaultParameterAttribute or OptionalAttribute
+                    // (5,21): error CS1745: Cannot specify default parameter value in conjunction with
+                    // DefaultParameterAttribute or OptionalAttribute
                     //     public int Goo([Optional]object i = null) {
                     Diagnostic(ErrorCode.ERR_DefaultValueUsedWithAttributes, "Optional")
                         .WithLocation(5, 21)
@@ -1101,7 +1109,8 @@ public class Parent
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,10): error CS7036: There is no argument given that corresponds to the required parameter 'x' of 'Parent.Goo(ref int)'
+                // (8,10): error CS7036: There is no argument given that corresponds to the required parameter 'x'
+                // of 'Parent.Goo(ref int)'
                 //          Goo();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
                     .WithArguments("x", "Parent.Goo(ref int)")
@@ -1216,96 +1225,125 @@ public static class ErrorCases
             // NOTE: anywhere dev10 reported CS1909, roslyn reports CS1910.
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (27,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (27,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(0)]         bool b1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (28,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (28,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue("hello")]   bool b2,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (31,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (31,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(12)]        sbyte sb1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (32,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (32,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue("hello")]   byte by1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (35,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (35,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue("c")]       char ch1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (38,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (38,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(1.0)]       float fl1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (42,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (42,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(0)]         I8 i8,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (43,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (43,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(12)]        U8 u8,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (44,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (44,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue("hello")]   I16 i16,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (47,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (47,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(5)]         string str1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (48,20): error CS1910: Argument of type 'int[]' is not applicable for the DefaultParameterValue attribute
+                    // (48,20): error CS1910: Argument of type 'int[]' is not applicable for the DefaultParameterValue
+                    // attribute
                     //         [Optional][DefaultParameterValue(new int[] { 12 })] string str2,
                     Diagnostic(ErrorCode.ERR_DefaultValueBadValueType, "DefaultParameterValue")
                         .WithArguments("int[]"),
-                    // (51,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (51,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(2)]         C c1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (52,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (52,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue("hello")]   C c2,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (54,10): error CS1910: Argument of type 'int[]' is not applicable for the DefaultParameterValue attribute
+                    // (54,10): error CS1910: Argument of type 'int[]' is not applicable for the DefaultParameterValue
+                    // attribute
                     //         [DefaultParameterValue(new int[] { 1, 2 })]  int[] arr1,
                     Diagnostic(ErrorCode.ERR_DefaultValueBadValueType, "DefaultParameterValue")
                         .WithArguments("int[]"),
                     // NOTE: Roslyn specifically allows this usage (illegal in dev10).
 
-                    //// (55,10): error CS1909: The DefaultParameterValue attribute is not applicable on parameters of type 'int[]', unless the default value is null
+                    //// (55,10): error CS1909: The DefaultParameterValue attribute is not applicable on parameters of
+                    // type 'int[]', unless the default value is null
                     ////         [DefaultParameterValue(null)]                int[] arr2,
-                    //Diagnostic(ErrorCode.ERR_DefaultValueBadParamType, "DefaultParameterValue").WithArguments("int[]"),
+                    //Diagnostic(ErrorCode.ERR_DefaultValueBadParamType,
+                    // "DefaultParameterValue").WithArguments("int[]"),
 
-                    // (56,10): error CS1910: Argument of type 'int[]' is not applicable for the DefaultParameterValue attribute
+                    // (56,10): error CS1910: Argument of type 'int[]' is not applicable for the DefaultParameterValue
+                    // attribute
                     //         [DefaultParameterValue(new int[] { 1, 2 })]  object arr3,
                     Diagnostic(ErrorCode.ERR_DefaultValueBadValueType, "DefaultParameterValue")
                         .WithArguments("int[]"),
-                    // (58,10): error CS1910: Argument of type 'System.Type' is not applicable for the DefaultParameterValue attribute
+                    // (58,10): error CS1910: Argument of type 'System.Type' is not applicable for the
+                    // DefaultParameterValue attribute
                     //         [DefaultParameterValue(typeof(object))]      System.Type type1,
                     Diagnostic(ErrorCode.ERR_DefaultValueBadValueType, "DefaultParameterValue")
                         .WithArguments("System.Type"),
                     // NOTE: Roslyn specifically allows this usage (illegal in dev10).
 
-                    //// (59,10): error CS1909: The DefaultParameterValue attribute is not applicable on parameters of type 'System.Type', unless the default value is null
+                    //// (59,10): error CS1909: The DefaultParameterValue attribute is not applicable on parameters of
+                    // type 'System.Type', unless the default value is null
                     ////         [DefaultParameterValue(null)]                System.Type type2,
-                    //Diagnostic(ErrorCode.ERR_DefaultValueBadParamType, "DefaultParameterValue").WithArguments("System.Type"),
+                    //Diagnostic(ErrorCode.ERR_DefaultValueBadParamType,
+                    // "DefaultParameterValue").WithArguments("System.Type"),
 
-                    // (60,10): error CS1910: Argument of type 'System.Type' is not applicable for the DefaultParameterValue attribute
+                    // (60,10): error CS1910: Argument of type 'System.Type' is not applicable for the
+                    // DefaultParameterValue attribute
                     //         [DefaultParameterValue(typeof(object))]      object type3,
                     Diagnostic(ErrorCode.ERR_DefaultValueBadValueType, "DefaultParameterValue")
                         .WithArguments("System.Type"),
-                    // (63,10): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (63,10): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [DefaultParameterValue(null)]                S userStruct1,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (64,10): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (64,10): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [DefaultParameterValue(0)]                   S userStruct2,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (65,10): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (65,10): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [DefaultParameterValue("hel")]               S userStruct3,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (68,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (68,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(null)]      bool b3,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (71,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (71,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(null)]      int i2,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (74,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (74,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(null)]      char ch2,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (77,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (77,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(null)]      float fl2,
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue"),
-                    // (80,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                    // (80,20): error CS1908: The type of the argument to the DefaultParameterValue attribute must match
+                    // the parameter type
                     //         [Optional][DefaultParameterValue(null)]      I8 i82
                     Diagnostic(ErrorCode.ERR_DefaultValueTypeMustMatch, "DefaultParameterValue")
                 );
@@ -1495,12 +1533,14 @@ class C
             );
             comp.MakeMemberMissing(WellKnownMember.System_Type__Missing);
             comp.VerifyDiagnostics(
-                // (15,9): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.UnknownWrapper..ctor'
+                // (15,9): error CS0656: Missing compiler required member
+                // 'System.Runtime.InteropServices.UnknownWrapper..ctor'
                 //         M1();
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "M1()")
                     .WithArguments("System.Runtime.InteropServices.UnknownWrapper", ".ctor")
                     .WithLocation(15, 9),
-                // (16,9): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.DispatchWrapper..ctor'
+                // (16,9): error CS0656: Missing compiler required member
+                // 'System.Runtime.InteropServices.DispatchWrapper..ctor'
                 //         M2();
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "M2()")
                     .WithArguments("System.Runtime.InteropServices.DispatchWrapper", ".ctor")
@@ -1548,7 +1588,8 @@ class C
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (25,9): error CS7036: There is no argument given that corresponds to the required parameter 'o' of 'D.M(ref object)'
+                    // (25,9): error CS7036: There is no argument given that corresponds to the required parameter 'o'
+                    // of 'D.M(ref object)'
                     //         d.M(); //CS1501
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                         .WithArguments("o", "D.M(ref object)")
@@ -1901,7 +1942,8 @@ class P
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,26): error CS7036: There is no argument given that corresponds to the required parameter 'o' of 'I.M(out object)'
+                // (11,26): error CS7036: There is no argument given that corresponds to the required parameter 'o'
+                // of 'I.M(out object)'
                 //     static void Q(I i) { i.M(); }
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                     .WithArguments("o", "I.M(out object)")
@@ -2814,12 +2856,14 @@ class C
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (4,20): error CS1763: 'obj' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                // (4,20): error CS1763: 'obj' is of type 'object'. A default parameter value of a reference type
+                // other than string can only be initialized with null
                 //     void M1(object obj = 1) // 1
                 Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "obj")
                     .WithArguments("obj", "object")
                     .WithLocation(4, 20),
-                // (8,14): error CS1763: 'obj' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                // (8,14): error CS1763: 'obj' is of type 'object'. A default parameter value of a reference type
+                // other than string can only be initialized with null
                 //     C(object obj = System.DayOfWeek.Monday) // 2
                 Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "obj")
                     .WithArguments("obj", "object")
@@ -2860,32 +2904,38 @@ class C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,33): error CS0134: 'C.y' is of type 'IEnumerable<char>'. A const field of a reference type other than string can only be initialized with null.
+                // (6,33): error CS0134: 'C.y' is of type 'IEnumerable<char>'. A const field of a reference type
+                // other than string can only be initialized with null.
                 //     const IEnumerable<char> y = "world"; // 1
                 Diagnostic(ErrorCode.ERR_NotNullConstRefField, @"""world""")
                     .WithArguments("C.y", "System.Collections.Generic.IEnumerable<char>")
                     .WithLocation(6, 33),
-                // (8,23): error CS0134: 'C.y3' is of type 'object'. A const field of a reference type other than string can only be initialized with null.
+                // (8,23): error CS0134: 'C.y3' is of type 'object'. A const field of a reference type other than
+                // string can only be initialized with null.
                 //     const object y3 = "world"; // 2
                 Diagnostic(ErrorCode.ERR_NotNullConstRefField, @"""world""")
                     .WithArguments("C.y3", "object")
                     .WithLocation(8, 23),
-                // (9,24): error CS0134: 'C.y4' is of type 'dynamic'. A const field of a reference type other than string can only be initialized with null.
+                // (9,24): error CS0134: 'C.y4' is of type 'dynamic'. A const field of a reference type other than
+                // string can only be initialized with null.
                 //     const dynamic y4 = "world"; // 3
                 Diagnostic(ErrorCode.ERR_NotNullConstRefField, @"""world""")
                     .WithArguments("C.y4", "dynamic")
                     .WithLocation(9, 24),
-                // (11,30): error CS1763: 'x' is of type 'IEnumerable<char>'. A default parameter value of a reference type other than string can only be initialized with null
+                // (11,30): error CS1763: 'x' is of type 'IEnumerable<char>'. A default parameter value of a
+                // reference type other than string can only be initialized with null
                 //     void M(IEnumerable<char> x = "hello") // 4
                 Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
                     .WithArguments("x", "System.Collections.Generic.IEnumerable<char>")
                     .WithLocation(11, 30),
-                // (19,20): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                // (19,20): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type
+                // other than string can only be initialized with null
                 //     void M3(object x = "hello") // 5
                 Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
                     .WithArguments("x", "object")
                     .WithLocation(19, 20),
-                // (23,21): error CS1763: 'x' is of type 'dynamic'. A default parameter value of a reference type other than string can only be initialized with null
+                // (23,21): error CS1763: 'x' is of type 'dynamic'. A default parameter value of a reference type
+                // other than string can only be initialized with null
                 //     void M4(dynamic x = "hello") // 6
                 Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
                     .WithArguments("x", "dynamic")

@@ -87,16 +87,20 @@ namespace System.Security.Claims
         // adding claims to this list will affect the Authorization for this Identity
         // originally marked this as SecurityCritical, however because enumerators access it
         // we would need to extend SecuritySafeCritical to the enumerator methods AND the constructors.
-        // In the end, this requires additional [SecuritySafeCritical] attributes.  So if any additional access
-        // is added to 'm_instanceClaims' then this must be carefully monitored. This is equivalent to adding sids to the
+        // In the end, this requires additional [SecuritySafeCritical] attributes.  So if any additional
+        // access
+        // is added to 'm_instanceClaims' then this must be carefully monitored. This is equivalent to
+        // adding sids to the
         // NTToken and will be used up the stack to make Authorization decisions.
         //
 
-        // these are claims that are added by using the AddClaim, AddClaims methods or passed in the constructor.
+        // these are claims that are added by using the AddClaim, AddClaims methods or passed in the
+        // constructor.
         [NonSerialized]
         List<Claim> m_instanceClaims = new List<Claim>();
 
-        // These are claims that are external to the identity. .Net runtime attaches roles owned by principals GenericPrincpal and RolePrincipal here.
+        // These are claims that are external to the identity. .Net runtime attaches roles owned by
+        // principals GenericPrincpal and RolePrincipal here.
         // They are not serialized OR remembered when cloned. Access through public method: ClaimProviders.
         [NonSerialized]
         Collection<IEnumerable<Claim>> m_externalClaims = new Collection<IEnumerable<Claim>>();
@@ -143,10 +147,12 @@ namespace System.Security.Claims
             : this((Claim[])null) { }
 
         /// <summary>
-        /// Initializes an instance of <see cref="ClaimsIdentity"/> using the name and authentication type from
+        /// Initializes an instance of <see cref="ClaimsIdentity"/> using the name and authentication type
+        // from
         /// an <see cref="IIdentity"/> instance.
         /// </summary>
-        /// <param name="identity"><see cref="IIdentity"/> to draw the name and authentication type from.</param>
+        /// <param name="identity"><see cref="IIdentity"/> to draw the name and authentication type
+        // from.</param>
         /// <exception cref="ArgumentNullException"> if <paramref name="identity"/> is null.</exception>
         public ClaimsIdentity(IIdentity identity)
             : this(identity, (IEnumerable<Claim>)null) { }
@@ -193,10 +199,12 @@ namespace System.Security.Claims
             : this((IIdentity)null, claims, authenticationType, null, null) { }
 
         /// <summary>
-        /// Initializes an instance of <see cref="ClaimsIdentity"/> using the name and authentication type from
+        /// Initializes an instance of <see cref="ClaimsIdentity"/> using the name and authentication type
+        // from
         /// an <see cref="IIdentity"/> instance.
         /// </summary>
-        /// <param name="identity"><see cref="IIdentity"/> to draw the name and authentication type from.</param>
+        /// <param name="identity"><see cref="IIdentity"/> to draw the name and authentication type
+        // from.</param>
         /// <exception cref="ArgumentNullException"> if <paramref name="identity"/> is null.</exception>
         public ClaimsIdentity(IIdentity identity, IEnumerable<Claim> claims)
             : this(identity, claims, (string)null, (string)null, (string)null) { }
@@ -219,9 +227,11 @@ namespace System.Security.Claims
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/> using an enumeration of type
-        /// <see cref="Claim"/>, authentication type, name claim type, role claim type, and bootstrapContext.
+        /// <see cref="Claim"/>, authentication type, name claim type, role claim type, and
+        // bootstrapContext.
         /// </summary>
-        /// <param name="claims">An enumeration of type <see cref="Claim"/> to initialize this identity</param>
+        /// <param name="claims">An enumeration of type <see cref="Claim"/> to initialize this
+        // identity</param>
         /// <param name="authenticationType">The type of authentication used.</param>
         /// <param name="nameType">The claim type to identify NameClaims.</param>
         /// <param name="roleType">The claim type to identify RoleClaims.</param>
@@ -235,10 +245,12 @@ namespace System.Security.Claims
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/> using an enumeration of type
-        /// <see cref="Claim"/>, authentication type, name claim type, role claim type, and bootstrapContext.
+        /// <see cref="Claim"/>, authentication type, name claim type, role claim type, and
+        // bootstrapContext.
         /// </summary>
         /// <param name="identity">The initial identity to base this identity from.</param>
-        /// <param name="claims">An enumeration of type <see cref="Claim"/> to initialize this identity.</param>
+        /// <param name="claims">An enumeration of type <see cref="Claim"/> to initialize this
+        // identity.</param>
         /// <param name="authenticationType">The type of authentication used.</param>
         /// <param name="nameType">The claim type to identify NameClaims.</param>
         /// <param name="roleType">The claim type to identify RoleClaims.</param>
@@ -252,15 +264,18 @@ namespace System.Security.Claims
             : this(identity, claims, authenticationType, nameType, roleType, true) { }
 
         /// <summary>
-        /// This constructor was added so that the WindowsIdentity could control if the authenticationType should be checked. For WindowsIdentities this
+        /// This constructor was added so that the WindowsIdentity could control if the authenticationType
+        // should be checked. For WindowsIdentities this
         /// leads to a priviledged call and will fail where the caller has low priviledge.
         /// </summary>
         /// <param name="identity">The initial identity to base this identity from.</param>
-        /// <param name="claims">An enumeration of type <see cref="Claim"/> to initialize this identity.</param>
+        /// <param name="claims">An enumeration of type <see cref="Claim"/> to initialize this
+        // identity.</param>
         /// <param name="authenticationType">The type of authentication used.</param>
         /// <param name="nameType">The claim type to identify NameClaims.</param>
         /// <param name="roleType">The claim type to identify RoleClaims.</param>
-        /// <param name="checkAuthType">This boolean flag controls if we blindly set the authenticationType, since call WindowsIdentity.AuthenticationType is a priviledged call.</param>
+        /// <param name="checkAuthType">This boolean flag controls if we blindly set the authenticationType,
+        // since call WindowsIdentity.AuthenticationType is a priviledged call.</param>
         internal ClaimsIdentity(
             IIdentity identity,
             IEnumerable<Claim> claims,
@@ -273,11 +288,13 @@ namespace System.Security.Claims
             bool nameTypeSet = false;
             bool roleTypeSet = false;
 
-            // move the authtype, nameType and roleType over from the identity ONLY if they weren't specifically set.
+            // move the authtype, nameType and roleType over from the identity ONLY if they weren't specifically
+            // set.
             if (checkAuthType && null != identity && string.IsNullOrEmpty(authenticationType))
             {
                 // can safely ignore UnauthorizedAccessException from WindowsIdentity,
-                // LSA didn't allow the call and WindowsIdentity throws if property is never accessed, no reason to fail.
+                // LSA didn't allow the call and WindowsIdentity throws if property is never accessed, no reason to
+                // fail.
                 if (identity is WindowsIdentity)
                 {
                     try
@@ -400,7 +417,8 @@ namespace System.Security.Claims
         /// Initializes an instance of <see cref="ClaimsIdentity"/> using a <see cref="BinaryReader"/>.
         /// Normally the reader is constructed from the bytes returned from <see cref="WriteTo"/>
         /// </summary>
-        /// <param name="reader">a <see cref="BinaryReader"/> pointing to a <see cref="ClaimsIdentity"/>.</param>
+        /// <param name="reader">a <see cref="BinaryReader"/> pointing to a <see
+        // cref="ClaimsIdentity"/>.</param>
         /// <exception cref="ArgumentNullException">if 'reader' is null.</exception>
         public ClaimsIdentity(BinaryReader reader)
         {
@@ -448,7 +466,8 @@ namespace System.Security.Claims
         /// The <see cref="SerializationInfo"/> to read from.
         /// </param>
         /// <param name="context">The <see cref="StreamingContext"/> for serialization. Can be null.</param>
-        /// <exception cref="ArgumentNullException">Thrown is the <paramref name="info"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown is the <paramref name="info"/> is
+        // null.</exception>
         [SecurityCritical]
         protected ClaimsIdentity(SerializationInfo info, StreamingContext context)
         {
@@ -467,7 +486,8 @@ namespace System.Security.Claims
         /// <param name="info">
         /// The <see cref="SerializationInfo"/> to read from.
         /// </param>
-        /// <exception cref="ArgumentNullException">Thrown is the <paramref name="info"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown is the <paramref name="info"/> is
+        // null.</exception>
         [SecurityCritical]
         protected ClaimsIdentity(SerializationInfo info)
         {
@@ -532,7 +552,8 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Gets the claims as <see cref="IEnumerable{Claim}"/>, associated with this <see cref="ClaimsIdentity"/>.
+        /// Gets the claims as <see cref="IEnumerable{Claim}"/>, associated with this <see
+        // cref="ClaimsIdentity"/>.
         /// </summary>
         /// <remarks>May contain nulls.</remarks>
         public virtual IEnumerable<Claim> Claims
@@ -561,7 +582,8 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Contains any additional data provided by a derived type, typically set when calling <see cref="WriteTo(BinaryWriter, byte[])"/>.</param>
+        /// Contains any additional data provided by a derived type, typically set when calling <see
+        // cref="WriteTo(BinaryWriter, byte[])"/>.</param>
         /// </summary>
         protected virtual byte[] CustomSerializationData
         {
@@ -570,8 +592,10 @@ namespace System.Security.Claims
 
         /// <summary>
         /// Allow the association of claims with this instance of <see cref="ClaimsIdentity"/>.
-        /// The claims will not be serialized or added in Clone(). They will be included in searches, finds and returned from the call to Claims.
-        /// It is recommended the creator of the claims ensures the subject of the claims reflects this <see cref="ClaimsIdentity"/>.
+        /// The claims will not be serialized or added in Clone(). They will be included in searches, finds
+        // and returned from the call to Claims.
+        /// It is recommended the creator of the claims ensures the subject of the claims reflects this <see
+        // cref="ClaimsIdentity"/>.
         /// </summary>
         internal Collection<IEnumerable<Claim>> ExternalClaims
         {
@@ -589,7 +613,8 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Gets the value of the first claim that has a type of NameClaimType. If no claim is found, null is returned.
+        /// Gets the value of the first claim that has a type of NameClaimType. If no claim is found, null
+        // is returned.
         /// </summary>
         public virtual string Name
         {
@@ -665,11 +690,13 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Adds a single claim to this ClaimsIdentity. The claim is examined and if the subject != this, then a new claim is
+        /// Adds a single claim to this ClaimsIdentity. The claim is examined and if the subject != this,
+        // then a new claim is
         /// created by calling claim.Clone(this).  This creates a new claim, with the correct subject.
         /// </summary>
         /// <param name="claims">Enumeration of claims to add.</param>
-        /// This is SecurityCritical as we need to control who can add claims to the Identity. Futher down the pipe
+        /// This is SecurityCritical as we need to control who can add claims to the Identity. Futher down
+        // the pipe
         /// Authorization decisions will be made based on the claims found in this collection.
         [SecurityCritical]
         public virtual void AddClaim(Claim claim)
@@ -692,11 +719,13 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Adds a list of claims to this Claims Identity. Each claim is examined and if the subject != this, then a new claim is
+        /// Adds a list of claims to this Claims Identity. Each claim is examined and if the subject !=
+        // this, then a new claim is
         /// created by calling claim.Clone(this).  This creates a new claim, with the correct subject.
         /// </summary>
         /// <param name="claims">Enumeration of claims to add.</param>
-        /// This is SecurityCritical as we need to control who can add claims to the Identity. Futher down the pipe
+        /// This is SecurityCritical as we need to control who can add claims to the Identity. Futher down
+        // the pipe
         /// Authorization decisions will be made based on the claims found in this collection.
         [SecurityCritical]
         public virtual void AddClaims(IEnumerable<Claim> claims)
@@ -720,7 +749,8 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Attempts to remove a claim from the identity.  It is possible that the claim cannot be removed since it is not owned
+        /// Attempts to remove a claim from the identity.  It is possible that the claim cannot be removed
+        // since it is not owned
         /// by the identity.  This would be the case for role claims that are owned by the Principal.
         /// Matches by object reference.
         /// <summary/>
@@ -796,7 +826,8 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Retrieves a <see cref="IEnumerable{Claim}"/> where each claim is matched by <param name="match"/>.
+        /// Retrieves a <see cref="IEnumerable{Claim}"/> where each claim is matched by <param
+        // name="match"/>.
         /// </summary>
         /// <param name="match">The function that performs the matching logic.</param>
         /// <returns>A <see cref="IEnumerable{Claim}"/> of matched claims.</returns>
@@ -823,7 +854,8 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Retrieves a <see cref="IEnumerable{Claim}"/> where each Claim.Type equals <paramref name="type"/>.
+        /// Retrieves a <see cref="IEnumerable{Claim}"/> where each Claim.Type equals <paramref
+        // name="type"/>.
         /// </summary>
         /// <param name="type">The type of the claim to match.</param>
         /// <returns>A <see cref="IEnumerable{Claim}"/> of matched claims.</returns>
@@ -884,7 +916,8 @@ namespace System.Security.Claims
         /// <param name="type"> the type of the claim to match.</param>
         /// <param name="value"> the value of the claim to match.</param>
         /// <returns>true if a claim is matched, false otherwise.</returns>
-        /// <remarks>Does not check Issuer or OriginalIssuer.  Comparison is made using Ordinal, case sensitive on value, case in-sensitive on type.</remarks>
+        /// <remarks>Does not check Issuer or OriginalIssuer.  Comparison is made using Ordinal, case
+        // sensitive on value, case in-sensitive on type.</remarks>
         public virtual bool HasClaim(string type, string value)
         {
             if (type == null)
@@ -1017,9 +1050,11 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Populates the specified <see cref="SerializationInfo"/> with the serialization data for the ClaimsIdentity
+        /// Populates the specified <see cref="SerializationInfo"/> with the serialization data for the
+        // ClaimsIdentity
         /// </summary>
-        /// <param name="info">The serialization information stream to write to. Satisfies ISerializable contract.</param>
+        /// <param name="info">The serialization information stream to write to. Satisfies ISerializable
+        // contract.</param>
         /// <param name="context">Context for serialization. Can be null.</param>
         /// <exception cref="ArgumentNullException">Thrown if the info parameter is null.</exception>
         [SecurityCritical]
@@ -1148,9 +1183,11 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Initializes from a <see cref="BinaryReader"/>. Normally the reader is initialized in the same as the one passed to <see cref="Serialize(BinaryWriter)"/>
+        /// Initializes from a <see cref="BinaryReader"/>. Normally the reader is initialized in the same as
+        // the one passed to <see cref="Serialize(BinaryWriter)"/>
         /// </summary>
-        /// <param name="reader">a <see cref="BinaryReader"/> pointing to a <see cref="ClaimsIdentity"/>.</param>
+        /// <param name="reader">a <see cref="BinaryReader"/> pointing to a <see
+        // cref="ClaimsIdentity"/>.</param>
         /// <exception cref="ArgumentNullException">if 'reader' is null.</exception>
         private void Initialize(BinaryReader reader)
         {
@@ -1362,7 +1399,8 @@ namespace System.Security.Claims
             writer.Flush();
         }
 
-        // <param name="useContext"></param> The reason for this param is due to WindowsIdentity deciding to have an
+        // <param name="useContext"></param> The reason for this param is due to WindowsIdentity deciding to
+        // have an
         // api that doesn't pass the context to its internal constructor.
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, SerializationFormatter = true)]

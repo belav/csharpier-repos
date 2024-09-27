@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,8 @@ public class ILVerifier : IResolver, IDisposable
                 VerifierError.None
                 // ex. localloc cannot be statically verified by ILVerify
                 or VerifierError.Unverifiable
-                // initlocals must be set for verifiable methods with one or more local variables - Lots of these in class libraries
+                // initlocals must be set for verifiable methods with one or more local variables - Lots of these in
+                // class libraries
                 or VerifierError.InitLocals => false,
                 _ => true,
             }

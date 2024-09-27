@@ -25,11 +25,14 @@ namespace System.Composition.Hosting.Core
         /// <summary>
         /// Create a promise for an export descriptor.
         /// </summary>
-        /// <param name="origin">A description of where the export is being provided from (e.g. the part type).
+        /// <param name="origin">A description of where the export is being provided from (e.g. the part
+        // type).
         /// Used to provide friendly errors.</param>
-        /// <param name="isShared">True if the export is shared within some context, otherwise false. Used in cycle
+        /// <param name="isShared">True if the export is shared within some context, otherwise false. Used
+        // in cycle
         /// checking.</param>
-        /// <param name="dependencies">A function providing dependencies required in order to fulfill the promise.</param>
+        /// <param name="dependencies">A function providing dependencies required in order to fulfill the
+        // promise.</param>
         /// <param name="getDescriptor">A function providing the promise.</param>
         /// <param name="contract">The contract fulfilled by this promise.</param>
         /// <seealso cref="ExportDescriptorProvider"/>.

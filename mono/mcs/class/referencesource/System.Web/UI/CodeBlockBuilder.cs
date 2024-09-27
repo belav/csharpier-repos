@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Handle <%= ... %>, <% ... %>, <%# ... %>, <%: ... %>, <%#: ... %> blocks
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Handle <%= ... %>, <% ... %>, <%# ... %>, <%: ... %>, <%#: ... %> blocks
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {

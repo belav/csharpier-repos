@@ -109,9 +109,12 @@ namespace System.Net.Http
 
         /// <summary>Stores the supplied trailing headers into this instance.</summary>
         /// <remarks>
-        /// In the common/desired case where response.TrailingHeaders isn't accessed until after the whole payload has been
-        /// received, <see cref="_trailingHeaders" /> will still be null, and we can simply store the supplied instance into
-        /// <see cref="_trailingHeaders" /> and assume ownership of the instance.  In the uncommon case where it was accessed,
+        /// In the common/desired case where response.TrailingHeaders isn't accessed until after the whole
+        // payload has been
+        /// received, <see cref="_trailingHeaders" /> will still be null, and we can simply store the
+        // supplied instance into
+        /// <see cref="_trailingHeaders" /> and assume ownership of the instance.  In the uncommon case
+        // where it was accessed,
         /// we add all of the headers to the existing instance.
         /// </remarks>
         internal void StoreReceivedTrailingHeaders(HttpResponseHeaders headers)
@@ -214,7 +217,8 @@ namespace System.Net.Http
 
         protected virtual void Dispose(bool disposing)
         {
-            // The reason for this type to implement IDisposable is that it contains instances of types that implement
+            // The reason for this type to implement IDisposable is that it contains instances of types that
+            // implement
             // IDisposable (content).
             if (disposing && !_disposed)
             {

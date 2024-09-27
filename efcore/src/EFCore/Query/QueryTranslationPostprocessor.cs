@@ -6,16 +6,20 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// <summary>
 ///     <para>
 ///         A class that post-processes the translated query.
-///         This class allows to process the generated server query expression and the associated shaper expression.
+///         This class allows to process the generated server query expression and the associated
+// shaper expression.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public class QueryTranslationPostprocessor
 {

@@ -14,7 +14,8 @@ using Internal.Reflection.Core.Execution;
 namespace System.Reflection.Runtime.MethodInfos
 {
     //
-    // The runtime's implementation of non-constructor MethodInfo's that represent an open or closed costruction of a generic method.
+    // The runtime's implementation of non-constructor MethodInfo's that represent an open or closed
+    // costruction of a generic method.
     //
     internal sealed partial class RuntimeConstructedGenericMethodInfo : RuntimeMethodInfo
     {

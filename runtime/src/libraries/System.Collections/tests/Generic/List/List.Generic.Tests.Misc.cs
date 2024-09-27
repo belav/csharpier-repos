@@ -320,44 +320,44 @@ namespace System.Collections.Tests
                 { /**/
                     items.Length,
                     1,
-                    /**/
+/**/
                     items.Length + 1,
                     0,
-                    /**/
+/**/
                     items.Length + 1,
                     1,
-                    /**/
+/**/
                     items.Length,
                     2,
-                    /**/
+/**/
                     items.Length / 2,
                     items.Length / 2 + 1,
-                    /**/
+/**/
                     items.Length - 1,
                     2,
-                    /**/
+/**/
                     items.Length - 2,
                     3,
-                    /**/
+/**/
                     1,
                     items.Length,
-                    /**/
+/**/
                     0,
                     items.Length + 1,
-                    /**/
+/**/
                     1,
                     items.Length + 1,
-                    /**/
+/**/
                     2,
                     items.Length,
-                    /**/
+/**/
                     items.Length / 2
                         + 1,
                     items.Length / 2,
-                    /**/
+/**/
                     2,
                     items.Length - 1,
-                    /**/
+/**/
                     3,
                     items.Length - 2,
                 };
@@ -379,25 +379,25 @@ namespace System.Collections.Tests
 
                 bad = new int[]
                 {
-                    /**/
+/**/
                     -1,
                     -1,
-                    /**/
+/**/
                     -1,
                     0,
-                    /**/
+/**/
                     -1,
                     1,
-                    /**/
+/**/
                     -1,
                     2,
-                    /**/
+/**/
                     0,
                     -1,
-                    /**/
+/**/
                     1,
                     -1,
-                    /**/
+/**/
                     2,
                     -1,
                 };

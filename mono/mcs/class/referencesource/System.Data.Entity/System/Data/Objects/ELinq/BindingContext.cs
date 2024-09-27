@@ -37,7 +37,8 @@ namespace System.Data.Objects.ELinq
     /// CqtExpression inputBinding = CreateExpressionBinding(inputCqt).Var;
     ///
     /// // push the scope defined by the parameter
-    /// context.PushBindingScope(new KeyValuePair{ParameterExpression, CqtExpression}(whereLambda.Parameters[0], inputBinding));
+    /// context.PushBindingScope(new KeyValuePair{ParameterExpression,
+    // CqtExpression}(whereLambda.Parameters[0], inputBinding));
     ///
     /// // translate the expression in this context
     /// CqtExpression result = Translate(whereLambda.Expression);

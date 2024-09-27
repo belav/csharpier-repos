@@ -124,7 +124,8 @@ namespace System.Web.Services.Diagnostics
         }
 
         /// <devdoc>
-        ///    <para>Called when the system is shutting down, used to prevent additional logging post-shutdown</para>
+        ///    <para>Called when the system is shutting down, used to prevent additional logging
+        // post-shutdown</para>
         /// </devdoc>
         private static void AppDomainUnloadEvent(object sender, EventArgs e)
         {

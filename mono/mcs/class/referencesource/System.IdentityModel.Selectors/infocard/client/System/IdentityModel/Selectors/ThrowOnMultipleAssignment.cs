@@ -35,7 +35,8 @@ namespace System.IdentityModel.Selectors
 
         //
         // Parameters:
-        //  errorString  - If Value gets assigned to more than once an argument exception will be thrown with this
+        //  errorString  - If Value gets assigned to more than once an argument exception will be thrown
+        // with this
         //                 string as the Exception string.
         //
         public ThrowOnMultipleAssignment(string errorString)

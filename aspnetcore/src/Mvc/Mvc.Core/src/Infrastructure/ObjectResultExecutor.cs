@@ -61,7 +61,8 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
     /// <param name="context">The <see cref="ActionContext"/> for the current request.</param>
     /// <param name="result">The <see cref="ObjectResult"/>.</param>
     /// <returns>
-    /// A <see cref="Task"/> which will complete once the <see cref="ObjectResult"/> is written to the response.
+    /// A <see cref="Task"/> which will complete once the <see cref="ObjectResult"/> is written to the
+    // response.
     /// </returns>
     public virtual Task ExecuteAsync(ActionContext context, ObjectResult result)
     {
@@ -138,7 +139,8 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
     {
         Debug.Assert(result.ContentTypes != null);
 
-        // If the user sets the content type both on the ObjectResult (example: by Produces) and Response object,
+        // If the user sets the content type both on the ObjectResult (example: by Produces) and Response
+        // object,
         // then the one set on ObjectResult takes precedence over the Response object
         var responseContentType = context.HttpContext.Response.ContentType;
         if (result.ContentTypes.Count == 0 && !string.IsNullOrEmpty(responseContentType))

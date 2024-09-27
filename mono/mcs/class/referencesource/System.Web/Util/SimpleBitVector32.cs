@@ -80,7 +80,8 @@ namespace System.Web.Util
         {
             Debug.Assert(mask > 0, "Mask must be nonempty and non-negative.");
 
-            // Offset must be between 0 and 30 inclusive, since only 31 bits are available and at least one bit must be used.
+            // Offset must be between 0 and 30 inclusive, since only 31 bits are available and at least one bit
+            // must be used.
             Debug.Assert(offset >= 0 && offset <= 30, "Offset must be between 0 and 30 inclusive.");
 
             Debug.Assert(

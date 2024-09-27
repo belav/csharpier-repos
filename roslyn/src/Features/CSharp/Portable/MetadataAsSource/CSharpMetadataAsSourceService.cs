@@ -102,13 +102,18 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             );
 
         /// <summary>
-        /// Adds <c>#nullable enable</c> and <c>#nullable disable</c> annotations to the file as necessary.  Note that
-        /// this does not try to be 100% accurate, but rather it handles the most common cases out there.  Specifically,
-        /// if a file contains any nullable annotated/not-annotated types, then we prefix the file with <c>#nullable
-        /// enable</c>.  Then if we hit any members that explicitly have *oblivious* types, but no annotated or
+        /// Adds <c>#nullable enable</c> and <c>#nullable disable</c> annotations to the file as necessary.
+        // Note that
+        /// this does not try to be 100% accurate, but rather it handles the most common cases out there.
+        // Specifically,
+        /// if a file contains any nullable annotated/not-annotated types, then we prefix the file with
+        // <c>#nullable
+        /// enable</c>.  Then if we hit any members that explicitly have *oblivious* types, but no annotated
+        // or
         /// non-annotated types, then we switch to <c>#nullable disable</c> for those specific members.
         /// <para/>
-        /// This is technically innacurate for possible, but very uncommon cases.  For example, if the user's code
+        /// This is technically innacurate for possible, but very uncommon cases.  For example, if the
+        // user's code
         /// explicitly did something like this:
         ///
         /// <code>
@@ -119,8 +124,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         ///                 string baz);
         /// </code>
         ///
-        /// Then we would be unable to handle that.  However, this is highly unlikely to happen, and so we accept the
-        /// inaccuracy for the purpose of simplicity and for handling the much more common cases of either the entire
+        /// Then we would be unable to handle that.  However, this is highly unlikely to happen, and so we
+        // accept the
+        /// inaccuracy for the purpose of simplicity and for handling the much more common cases of either
+        // the entire
         /// file being annotated, or the user individually disabling annotations at the member level.
         /// </summary>
         protected override async Task<Document> AddNullableRegionsAsync(
@@ -161,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
 
         private static bool HasAnnotation(SyntaxNode node, SyntaxAnnotation annotation)
         {
-            // see if any child nodes have this annotation.  Ignore anything in attributes (like `[Obsolete]void Goo()`
+            // see if any child nodes have this annotation.  Ignore anything in attributes (like `[Obsolete]void
+            // Goo()`
             // as these are not impacted by `#nullable` regions.  Instead, we only care about signature types.
             var annotatedChildren = node.GetAnnotatedNodes(annotation);
             return annotatedChildren.Any(n => n.GetAncestorOrThis<AttributeSyntax>() == null);

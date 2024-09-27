@@ -3,20 +3,20 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    RequestCachePolicy.cs
+RequestCachePolicy.cs
 
 Abstract:
-    The class implements caching policy paradigms that is used by all webrequest cache-aware clients
+The class implements caching policy paradigms that is used by all webrequest cache-aware clients
 
 Author:
 
-    Alexei Vopilov    21-Dec-2002
+Alexei Vopilov    21-Dec-2002
 
 Revision History:
 
-    4  Dec 2003  - Reworked as per design review.
+4  Dec 2003  - Reworked as per design review.
 
-    30 Jul 2004  - Updated to accomodate FTP caching feature
+30 Jul 2004  - Updated to accomodate FTP caching feature
 
 --*/
 namespace System.Net.Cache
@@ -85,16 +85,16 @@ namespace System.Net.Cache
         //
         //
 #if TRAVE
-        /*
-        // Consider removing.
-        internal static string ToString(RequestCachePolicy Policy)
-        {
-            if (Policy == null) {
-                return "null";
-            }
-            return Policy.ToString();
-        }
-        */
+/*
+// Consider removing.
+internal static string ToString(RequestCachePolicy Policy)
+{
+if (Policy == null) {
+return "null";
+}
+return Policy.ToString();
+}
+*/
 #endif
     }
 

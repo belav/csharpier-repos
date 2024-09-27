@@ -18,7 +18,8 @@ namespace System.Threading.Channels
         /// <summary>The mode used when the channel hits its bound.</summary>
         private readonly BoundedChannelFullMode _mode;
 
-        /// <summary>The delegate that will be invoked when the channel hits its bound and an item is dropped from the channel.</summary>
+        /// <summary>The delegate that will be invoked when the channel hits its bound and an item is
+        // dropped from the channel.</summary>
         private readonly Action<T>? _itemDropped;
 
         /// <summary>Task signaled when the channel has completed.</summary>
@@ -43,7 +44,8 @@ namespace System.Threading.Channels
         /// <summary>Linked list of WaitToWriteAsync waiters.</summary>
         private AsyncOperation<bool>? _waitingWritersTail;
 
-        /// <summary>Whether to force continuations to be executed asynchronously from producer writes.</summary>
+        /// <summary>Whether to force continuations to be executed asynchronously from producer
+        // writes.</summary>
         private readonly bool _runContinuationsAsynchronously;
 
         /// <summary>Set to non-null once Complete has been called.</summary>
@@ -55,8 +57,10 @@ namespace System.Threading.Channels
         /// <summary>Initializes the <see cref="BoundedChannel{T}"/>.</summary>
         /// <param name="bufferedCapacity">The positive bounded capacity for the channel.</param>
         /// <param name="mode">The mode used when writing to a full channel.</param>
-        /// <param name="runContinuationsAsynchronously">Whether to force continuations to be executed asynchronously.</param>
-        /// <param name="itemDropped">Delegate that will be invoked when an item is dropped from the channel. See <see cref="BoundedChannelFullMode"/>.</param>
+        /// <param name="runContinuationsAsynchronously">Whether to force continuations to be executed
+        // asynchronously.</param>
+        /// <param name="itemDropped">Delegate that will be invoked when an item is dropped from the
+        // channel. See <see cref="BoundedChannelFullMode"/>.</param>
         internal BoundedChannel(
             int bufferedCapacity,
             BoundedChannelFullMode mode,
@@ -118,9 +122,11 @@ namespace System.Threading.Channels
                 }
             }
 
-            /// <summary>Gets the number of items in the channel. This should only be used by the debugger.</summary>
+            /// <summary>Gets the number of items in the channel. This should only be used by the
+            // debugger.</summary>
             /// <remarks>
-            /// Unlike <see cref="Count"/>, avoids locking so as to not block the debugger if another suspended thread is holding the lock.
+            /// Unlike <see cref="Count"/>, avoids locking so as to not block the debugger if another suspended
+            // thread is holding the lock.
             /// Hence, this must only be used from the debugger in a serialized context.
             /// </remarks>
             private int ItemsCountForDebugger => _parent._items.Count;
@@ -201,14 +207,22 @@ namespace System.Threading.Channels
                         }
                     }
 
-                    // Otherwise, queue a reader.  Note that in addition to checking whether synchronous continuations were requested,
-                    // we also check whether the supplied cancellation token can be canceled.  The writer calls UnregisterCancellation
-                    // while holding the lock, and if a callback needs to be unregistered and is currently running, it needs to wait
-                    // for that callback to complete so that the subsequent code knows it won't be contending with another thread
-                    // trying to complete the operation.  However, if we allowed a synchronous continuation from this operation, that
-                    // cancellation callback could end up running arbitrary code, including code that called back into the reader or
-                    // writer and tried to take the same lock held by the thread running UnregisterCancellation... deadlock.  As such,
-                    // we only allow synchronous continuations here if both a) the caller requested it and the token isn't cancelable.
+                    // Otherwise, queue a reader.  Note that in addition to checking whether synchronous continuations
+                    // were requested,
+                    // we also check whether the supplied cancellation token can be canceled.  The writer calls
+                    // UnregisterCancellation
+                    // while holding the lock, and if a callback needs to be unregistered and is currently running, it
+                    // needs to wait
+                    // for that callback to complete so that the subsequent code knows it won't be contending with
+                    // another thread
+                    // trying to complete the operation.  However, if we allowed a synchronous continuation from this
+                    // operation, that
+                    // cancellation callback could end up running arbitrary code, including code that called back into
+                    // the reader or
+                    // writer and tried to take the same lock held by the thread running UnregisterCancellation...
+                    // deadlock.  As such,
+                    // we only allow synchronous continuations here if both a) the caller requested it and the token
+                    // isn't cancelable.
                     var reader = new AsyncOperation<T>(
                         parent._runContinuationsAsynchronously | cancellationToken.CanBeCanceled,
                         cancellationToken
@@ -258,14 +272,22 @@ namespace System.Threading.Channels
                         }
                     }
 
-                    // Otherwise, queue a reader.  Note that in addition to checking whether synchronous continuations were requested,
-                    // we also check whether the supplied cancellation token can be canceled.  The writer calls UnregisterCancellation
-                    // while holding the lock, and if a callback needs to be unregistered and is currently running, it needs to wait
-                    // for that callback to complete so that the subsequent code knows it won't be contending with another thread
-                    // trying to complete the operation.  However, if we allowed a synchronous continuation from this operation, that
-                    // cancellation callback could end up running arbitrary code, including code that called back into the reader or
-                    // writer and tried to take the same lock held by the thread running UnregisterCancellation... deadlock.  As such,
-                    // we only allow synchronous continuations here if both a) the caller requested it and the token isn't cancelable.
+                    // Otherwise, queue a reader.  Note that in addition to checking whether synchronous continuations
+                    // were requested,
+                    // we also check whether the supplied cancellation token can be canceled.  The writer calls
+                    // UnregisterCancellation
+                    // while holding the lock, and if a callback needs to be unregistered and is currently running, it
+                    // needs to wait
+                    // for that callback to complete so that the subsequent code knows it won't be contending with
+                    // another thread
+                    // trying to complete the operation.  However, if we allowed a synchronous continuation from this
+                    // operation, that
+                    // cancellation callback could end up running arbitrary code, including code that called back into
+                    // the reader or
+                    // writer and tried to take the same lock held by the thread running UnregisterCancellation...
+                    // deadlock.  As such,
+                    // we only allow synchronous continuations here if both a) the caller requested it and the token
+                    // isn't cancelable.
                     var waiter = new AsyncOperation<bool>(
                         parent._runContinuationsAsynchronously | cancellationToken.CanBeCanceled,
                         cancellationToken
@@ -739,7 +761,8 @@ namespace System.Threading.Channels
                 return default;
             }
 
-            /// <summary>Gets the number of items in the channel. This should only be used by the debugger.</summary>
+            /// <summary>Gets the number of items in the channel. This should only be used by the
+            // debugger.</summary>
             private int ItemsCountForDebugger => _parent._items.Count;
 
             /// <summary>Gets the capacity of the channel. This should only be used by the debugger.</summary>
@@ -808,10 +831,12 @@ namespace System.Threading.Channels
             }
         }
 
-        /// <summary>Gets the number of items in the channel.  This should only be used by the debugger.</summary>
+        /// <summary>Gets the number of items in the channel.  This should only be used by the
+        // debugger.</summary>
         private int ItemsCountForDebugger => _items.Count;
 
-        /// <summary>Report if the channel is closed or not. This should only be used by the debugger.</summary>
+        /// <summary>Report if the channel is closed or not. This should only be used by the
+        // debugger.</summary>
         private bool ChannelIsClosedForDebugger => _doneWriting != null;
 
         /// <summary>Gets an enumerator the debugger can use to show the contents of the channel.</summary>

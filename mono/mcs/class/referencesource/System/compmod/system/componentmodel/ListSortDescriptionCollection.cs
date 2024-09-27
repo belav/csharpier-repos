@@ -166,7 +166,8 @@ namespace System.ComponentModel
         {
             get
             {
-                // true because after the constructor finished running the ListSortDescriptionCollection is Read Only
+                // true because after the constructor finished running the ListSortDescriptionCollection is Read
+                // Only
                 return true;
             }
         }

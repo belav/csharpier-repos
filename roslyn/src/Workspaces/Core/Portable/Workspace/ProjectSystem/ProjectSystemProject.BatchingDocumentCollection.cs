@@ -22,24 +22,29 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
     internal sealed partial class ProjectSystemProject
     {
         /// <summary>
-        /// Helper class to manage collections of source-file like things; this exists just to avoid duplicating all the logic for regular source files
+        /// Helper class to manage collections of source-file like things; this exists just to avoid
+        // duplicating all the logic for regular source files
         /// and additional files.
         /// </summary>
-        /// <remarks>This class should be free-threaded, and any synchronization is done via <see cref="ProjectSystemProject._gate"/>.
-        /// This class is otherwise free to operate on private members of <see cref="_project"/> if needed.</remarks>
+        /// <remarks>This class should be free-threaded, and any synchronization is done via <see
+        // cref="ProjectSystemProject._gate"/>.
+        /// This class is otherwise free to operate on private members of <see cref="_project"/> if
+        // needed.</remarks>
         private sealed class BatchingDocumentCollection
         {
             private readonly ProjectSystemProject _project;
 
             /// <summary>
-            /// The map of file paths to the underlying <see cref="DocumentId"/>. This document may exist in <see cref="_documentsAddedInBatch"/> or has been
+            /// The map of file paths to the underlying <see cref="DocumentId"/>. This document may exist in
+            // <see cref="_documentsAddedInBatch"/> or has been
             /// pushed to the actual workspace.
             /// </summary>
             private readonly Dictionary<string, DocumentId> _documentPathsToDocumentIds =
                 new(StringComparer.OrdinalIgnoreCase);
 
             /// <summary>
-            /// A map of explicitly-added "always open" <see cref="SourceTextContainer"/> and their associated <see cref="DocumentId"/>. This does not contain
+            /// A map of explicitly-added "always open" <see cref="SourceTextContainer"/> and their associated
+            // <see cref="DocumentId"/>. This does not contain
             /// any regular files that have been open.
             /// </summary>
             private IBidirectionalMap<
@@ -51,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             >.Empty;
 
             /// <summary>
-            /// The map of <see cref="DocumentId"/> to <see cref="IDynamicFileInfoProvider"/> whose <see cref="DynamicFileInfo"/> got added into <see cref="Workspace"/>
+            /// The map of <see cref="DocumentId"/> to <see cref="IDynamicFileInfoProvider"/> whose <see
+            // cref="DynamicFileInfo"/> got added into <see cref="Workspace"/>
             /// </summary>
             private readonly Dictionary<
                 DocumentId,
@@ -65,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 ImmutableArray.CreateBuilder<DocumentInfo>();
 
             /// <summary>
-            /// The current list of documents that are being removed in this batch. Once the document is in this list, it is no longer in <see cref="_documentPathsToDocumentIds"/>.
+            /// The current list of documents that are being removed in this batch. Once the document is in this
+            // list, it is no longer in <see cref="_documentPathsToDocumentIds"/>.
             /// </summary>
             private readonly List<DocumentId> _documentsRemovedInBatch = new();
 
@@ -139,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         );
                     }
 
-                    // If we have an ordered document ids batch, we need to add the document id to the end of it as well.
+                    // If we have an ordered document ids batch, we need to add the document id to the end of it as
+                    // well.
                     _orderedDocumentsInBatch = _orderedDocumentsInBatch?.Add(documentId);
 
                     _documentPathsToDocumentIds.Add(fullPath, documentId);
@@ -267,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     );
                 }
 
-                // If we have an ordered document ids batch, we need to add the document id to the end of it as well.
+                // If we have an ordered document ids batch, we need to add the document id to the end of it as
+                // well.
                 _orderedDocumentsInBatch = _orderedDocumentsInBatch?.Add(documentId);
 
                 _documentPathsToDocumentIds.Add(filePath, documentId);
@@ -575,7 +584,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             /// Process file content changes
             /// </summary>
             /// <param name="projectSystemFilePath">filepath given from project system</param>
-            /// <param name="workspaceFilePath">filepath used in workspace. it might be different than projectSystemFilePath</param>
+            /// <param name="workspaceFilePath">filepath used in workspace. it might be different than
+            // projectSystemFilePath</param>
             public void ProcessDynamicFileChange(
                 string projectSystemFilePath,
                 string workspaceFilePath
@@ -620,7 +630,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                 return;
                             }
 
-                            // we do not expect JTF to be used around this code path. and contract of fileInfoProvider is it being real free-threaded
+                            // we do not expect JTF to be used around this code path. and contract of fileInfoProvider is it
+                            // being real free-threaded
                             // meaning it can't use JTF to go back to UI thread.
                             // so, it is okay for us to call regular ".Result" on a task here.
                             var fileInfo = fileInfoProvider
@@ -637,7 +648,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                 "We previously received a dynamic file for this path, and we're responding to a change, so we expect to get a new one."
                             );
 
-                            // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
+                            // Right now we're only supporting dynamic files as actual source files, so it's OK to call
+                            // GetDocument here
                             var attributes = w
                                 .CurrentSolution.GetRequiredDocument(documentId)
                                 .State.Attributes;

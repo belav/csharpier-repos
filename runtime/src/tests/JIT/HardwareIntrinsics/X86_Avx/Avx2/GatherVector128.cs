@@ -63,7 +63,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         indexl256 = Avx.LoadVector256(l256ptr);
                     }
 
-                    // public static unsafe Vector128<float> GatherVector128(float* baseAddress, Vector128<int> index, byte scale)
+                    // public static unsafe Vector128<float> GatherVector128(float* baseAddress, Vector128<int> index,
+                    // byte scale)
                     using (
                         TestTable<float, int> floatTable = new TestTable<float, int>(
                             floatSourceTable,
@@ -189,7 +190,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<double> GatherVector128(double* baseAddress, Vector128<int> index, byte scale)
+                    // public static unsafe Vector128<double> GatherVector128(double* baseAddress, Vector128<int> index,
+                    // byte scale)
                     using (
                         TestTable<double, int> doubletTable = new TestTable<double, int>(
                             doubleSourceTable,
@@ -327,7 +329,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<int> GatherVector128(int* baseAddress, Vector128<int> index, byte scale)
+                    // public static unsafe Vector128<int> GatherVector128(int* baseAddress, Vector128<int> index, byte
+                    // scale)
                     using (
                         TestTable<int, int> intTable = new TestTable<int, int>(
                             intSourceTable,
@@ -428,7 +431,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<uint> GatherVector128(uint* baseAddress, Vector128<int> index, byte scale)
+                    // public static unsafe Vector128<uint> GatherVector128(uint* baseAddress, Vector128<int> index,
+                    // byte scale)
                     using (
                         TestTable<int, int> intTable = new TestTable<int, int>(
                             intSourceTable,
@@ -533,7 +537,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<long> GatherVector128(long* baseAddress, Vector128<int> index, byte scale)
+                    // public static unsafe Vector128<long> GatherVector128(long* baseAddress, Vector128<int> index,
+                    // byte scale)
                     using (
                         TestTable<long, int> longTable = new TestTable<long, int>(
                             longSourceTable,
@@ -638,7 +643,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<ulong> GatherVector128(ulong* baseAddress, Vector128<int> index, byte scale)
+                    // public static unsafe Vector128<ulong> GatherVector128(ulong* baseAddress, Vector128<int> index,
+                    // byte scale)
                     using (
                         TestTable<long, int> longTable = new TestTable<long, int>(
                             longSourceTable,
@@ -743,7 +749,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<int> GatherVector128(int* baseAddress, Vector128<long> index, byte scale)
+                    // public static unsafe Vector128<int> GatherVector128(int* baseAddress, Vector128<long> index, byte
+                    // scale)
                     using (
                         TestTable<int, long> intTable = new TestTable<int, long>(
                             intSourceTable,
@@ -846,7 +853,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<uint> GatherVector128(uint* baseAddress, Vector128<long> index, byte scale)
+                    // public static unsafe Vector128<uint> GatherVector128(uint* baseAddress, Vector128<long> index,
+                    // byte scale)
                     using (
                         TestTable<int, long> intTable = new TestTable<int, long>(
                             intSourceTable,
@@ -953,7 +961,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<long> GatherVector128(long* baseAddress, Vector128<long> index, byte scale)
+                    // public static unsafe Vector128<long> GatherVector128(long* baseAddress, Vector128<long> index,
+                    // byte scale)
                     using (
                         TestTable<long, long> longTable = new TestTable<long, long>(
                             longSourceTable,
@@ -1060,7 +1069,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<ulong> GatherVector128(ulong* baseAddress, Vector128<long> index, byte scale)
+                    // public static unsafe Vector128<ulong> GatherVector128(ulong* baseAddress, Vector128<long> index,
+                    // byte scale)
                     using (
                         TestTable<long, long> longTable = new TestTable<long, long>(
                             longSourceTable,
@@ -1167,7 +1177,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<float> GatherVector128(float* baseAddress, Vector128<long> index, byte scale)
+                    // public static unsafe Vector128<float> GatherVector128(float* baseAddress, Vector128<long> index,
+                    // byte scale)
                     using (
                         TestTable<float, long> floatTable = new TestTable<float, long>(
                             floatSourceTable,
@@ -1295,7 +1306,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<double> GatherVector128(double* baseAddress, Vector128<long> index, byte scale)
+                    // public static unsafe Vector128<double> GatherVector128(double* baseAddress, Vector128<long>
+                    // index, byte scale)
                     using (
                         TestTable<double, long> doubletTable = new TestTable<double, long>(
                             doubleSourceTable,
@@ -1435,7 +1447,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<int> GatherVector128(int* baseAddress, Vector256<long> index, byte scale)
+                    // public static unsafe Vector128<int> GatherVector128(int* baseAddress, Vector256<long> index, byte
+                    // scale)
                     using (
                         TestTable<int, long> intTable = new TestTable<int, long>(
                             intSourceTable,
@@ -1542,7 +1555,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<uint> GatherVector128(uint* baseAddress, Vector256<long> index, byte scale)
+                    // public static unsafe Vector128<uint> GatherVector128(uint* baseAddress, Vector256<long> index,
+                    // byte scale)
                     using (
                         TestTable<int, long> intTable = new TestTable<int, long>(
                             intSourceTable,
@@ -1647,7 +1661,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
                         }
                     }
 
-                    // public static unsafe Vector128<float> GatherVector128(float* baseAddress, Vector256<long> index, byte scale)
+                    // public static unsafe Vector128<float> GatherVector128(float* baseAddress, Vector256<long> index,
+                    // byte scale)
                     using (
                         TestTable<float, long> floatTable = new TestTable<float, long>(
                             floatSourceTable,

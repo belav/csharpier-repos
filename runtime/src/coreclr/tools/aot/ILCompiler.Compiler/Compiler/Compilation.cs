@@ -173,7 +173,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Resolves a reference to an intrinsic method to a new method that takes it's place in the compilation.
+        /// Resolves a reference to an intrinsic method to a new method that takes it's place in the
+        // compilation.
         /// This is used for intrinsics where the intrinsic expansion depends on the callsite.
         /// </summary>
         /// <param name="intrinsicMethod">The intrinsic method called.</param>
@@ -364,7 +365,8 @@ namespace ILCompiler
                 {
                     var type = (TypeDesc)targetOfLookup;
 
-                    // We counter-intuitively ask for a constructed type symbol. This is needed due to IDynamicInterfaceCastable.
+                    // We counter-intuitively ask for a constructed type symbol. This is needed due to
+                    // IDynamicInterfaceCastable.
                     // If this cast happens with an object that implements IDynamicIntefaceCastable, user code will
                     // see a RuntimeTypeHandle representing this interface.
                     if (type.IsInterface)
@@ -427,7 +429,8 @@ namespace ILCompiler
             }
 
             //
-            // Some helpers represent logical concepts that might not be something that can be looked up in a dictionary
+            // Some helpers represent logical concepts that might not be something that can be looked up in a
+            // dictionary
             //
 
             // Downgrade type handle for casting to a normal type handle if possible
@@ -472,7 +475,8 @@ namespace ILCompiler
                         contextMethod.OwningType
                     );
 
-                // If the dictionary layout has fixed slots, we can compute the lookup now. Otherwise defer to helper.
+                // If the dictionary layout has fixed slots, we can compute the lookup now. Otherwise defer to
+                // helper.
                 if (dictionaryLayout.HasFixedSlots)
                 {
                     int pointerSize = _nodeFactory.Target.PointerSize;
@@ -574,23 +578,28 @@ namespace ILCompiler
                 targetMethod.Instantiation
             );
 
-            // Since the slot normalization logic modified what method we're looking at, we need to compute the new target of lookup.
+            // Since the slot normalization logic modified what method we're looking at, we need to compute the
+            // new target of lookup.
             //
-            // If we could use virtual method resolution logic with runtime determined methods, we wouldn't need what we're going
+            // If we could use virtual method resolution logic with runtime determined methods, we wouldn't need
+            // what we're going
             // to do below.
             MethodDesc runtimeDeterminedSlotNormalizedMethod;
             if (!slotNormalizedMethod.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any))
             {
-                // If the owning type is not generic, we can use it as-is, potentially only replacing the runtime-determined
+                // If the owning type is not generic, we can use it as-is, potentially only replacing the
+                // runtime-determined
                 // method instantiation part.
                 runtimeDeterminedSlotNormalizedMethod = slotNormalizedMethod.GetMethodDefinition();
             }
             else
             {
-                // If we need a runtime lookup but a normalization to the slot defining method happened above, we need to compute
+                // If we need a runtime lookup but a normalization to the slot defining method happened above, we
+                // need to compute
                 // the runtime lookup in terms of the base type that introduced the slot.
                 //
-                // To do that, we walk the base hierarchy of the runtime determined thing, looking for a type definition that matches
+                // To do that, we walk the base hierarchy of the runtime determined thing, looking for a type
+                // definition that matches
                 // the slot-normalized virtual method. We then find the method on that type.
                 TypeDesc runtimeDeterminedOwningType = calledMethod.OwningType;
 

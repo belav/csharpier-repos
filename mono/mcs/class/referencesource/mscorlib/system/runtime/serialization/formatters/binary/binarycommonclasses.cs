@@ -4,14 +4,14 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: CommonBinaryClasses
- **
- **
- ** Purpose: utility classes
- **
- **
- ===========================================================*/
+**
+** Class: CommonBinaryClasses
+**
+**
+** Purpose: utility classes
+**
+**
+===========================================================*/
 
 
 namespace System.Runtime.Serialization.Formatters.Binary
@@ -933,10 +933,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
         [System.Security.SecurityCritical] // auto-generated
         internal IMethodCallMessage ReadArray(Object[] callA, Object handlerObject)
         {
-            /*
-            if (callA.Length != 7)
-                throw new SerializationException(String.Format(Environment.GetResourceString("Serialization_Method")));
-                */
+/*
+if (callA.Length != 7)
+throw new
+SerializationException(String.Format(Environment.GetResourceString("Serialization_Method")));
+*/
 
             if (IOUtil.FlagTest(messageEnum, MessageEnum.ArgsIsArray))
             {
@@ -1759,7 +1760,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             for (int i = 0; i < numMembers; i++)
                 sout.WriteByte((Byte)binaryTypeEnumA[i]);
             for (int i = 0; i < numMembers; i++)
-                //if (binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt && binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUser)
+                //if (binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt && binaryTypeEnumA[i] !=
+                // BinaryTypeEnum.ObjectUser)
                 BinaryConverter.WriteTypeInfo(
                     binaryTypeEnumA[i],
                     typeInformationA[i],
@@ -1850,13 +1852,13 @@ namespace System.Runtime.Serialization.Formatters.Binary
                             );
                     }
 
-                /*
-                for (int i=0; i<numMembers; i++)
-                {
-                if (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUser)
-                BinaryUtil.NVTraceI("memberAssemId("+i+") (Int32)", memberAssemIds[i]);
-                }
-        */
+/*
+for (int i=0; i<numMembers; i++)
+{
+if (binaryTypeEnumA[i] == BinaryTypeEnum.ObjectUser)
+BinaryUtil.NVTraceI("memberAssemId("+i+") (Int32)", memberAssemIds[i]);
+}
+*/
                 if (binaryHeaderEnum == BinaryHeaderEnum.ObjectWithMapTypedAssemId)
                     BinaryUtil.NVTraceI("assemId (Int32)", assemId);
                 BCLDebug.Trace("BINARY", "****************************");
@@ -2368,7 +2370,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
     }
 
-    // When an ObjectWithMap or an ObjectWithMapTyped is read off the stream, an ObjectMap class is created
+    // When an ObjectWithMap or an ObjectWithMapTyped is read off the stream, an ObjectMap class is
+    // created
     // to remember the type information.
     internal sealed class ObjectMap
     {
@@ -2476,7 +2479,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     out isVariant
                 );
                 //if ((object)type == null)
-                //    throw new SerializationException(String.Format(Environment.GetResourceString("Serialization_TypeResolved"),objectName+" "+memberNames[i]+" "+typeInformationA[i]));
+                //    throw new
+                //
+                //
+                // SerializationException(String.Format(Environment.GetResourceString("Serialization_TypeResolved"),objectName+"
+                // "+memberNames[i]+" "+typeInformationA[i]));
                 memberTypes[i] = type;
             }
 
@@ -2550,9 +2557,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
     }
 
-    // For each object or array being read off the stream, an ObjectProgress object is created. This object
+    // For each object or array being read off the stream, an ObjectProgress object is created. This
+    // object
     // keeps track of the progress of the parsing. When an object is being parsed, it keeps track of
-    // the object member being parsed. When an array is being parsed it keeps track of the position within the
+    // the object member being parsed. When an array is being parsed it keeps track of the position
+    // within the
     // array.
     internal sealed class ObjectProgress
     {

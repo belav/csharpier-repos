@@ -1,17 +1,17 @@
 ﻿/* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -34,11 +34,14 @@ using System.Runtime.Remoting;
 namespace System.Dynamic
 {
     /// <summary>
-    /// The dynamic call site binder that participates in the <see cref="DynamicMetaObject"/> binding protocol.
+    /// The dynamic call site binder that participates in the <see cref="DynamicMetaObject"/> binding
+    // protocol.
     /// </summary>
     /// <remarks>
-    /// The <see cref="CallSiteBinder"/> performs the binding of the dynamic operation using the runtime values
-    /// as input. On the other hand, the <see cref="DynamicMetaObjectBinder"/> participates in the <see cref="DynamicMetaObject"/>
+    /// The <see cref="CallSiteBinder"/> performs the binding of the dynamic operation using the runtime
+    // values
+    /// as input. On the other hand, the <see cref="DynamicMetaObjectBinder"/> participates in the <see
+    // cref="DynamicMetaObject"/>
     /// binding protocol.
     /// </remarks>
     public abstract class DynamicMetaObjectBinder : CallSiteBinder
@@ -62,8 +65,10 @@ namespace System.Dynamic
         /// Performs the runtime binding of the dynamic operation on a set of arguments.
         /// </summary>
         /// <param name="args">An array of arguments to the dynamic operation.</param>
-        /// <param name="parameters">The array of <see cref="ParameterExpression"/> instances that represent the parameters of the call site in the binding process.</param>
-        /// <param name="returnLabel">A LabelTarget used to return the result of the dynamic binding.</param>
+        /// <param name="parameters">The array of <see cref="ParameterExpression"/> instances that represent
+        // the parameters of the call site in the binding process.</param>
+        /// <param name="returnLabel">A LabelTarget used to return the result of the dynamic
+        // binding.</param>
         /// <returns>
         /// An Expression that performs tests on the dynamic operation arguments, and
         /// performs the dynamic operation if the tests are valid. If the tests fail on
@@ -157,7 +162,8 @@ namespace System.Dynamic
                 }
             }
 
-            // if the target is IDO, standard binders ask it to bind the rule so we may have a target-specific binding.
+            // if the target is IDO, standard binders ask it to bind the rule so we may have a target-specific
+            // binding.
             // it makes sense to restrict on the target's type in such cases.
             // ideally IDO metaobjects should do this, but they often miss that type of "this" is significant.
             if (IsStandardBinder && args[0] as IDynamicMetaObjectProvider != null)
@@ -275,7 +281,8 @@ namespace System.Dynamic
         /// This is typically used when the "version" of a dynamic object has
         /// changed.
         /// </summary>
-        /// <param name="type">The <see cref="Expression.Type">Type</see> property of the resulting expression; any type is allowed.</param>
+        /// <param name="type">The <see cref="Expression.Type">Type</see> property of the resulting
+        // expression; any type is allowed.</param>
         /// <returns>The update expression.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Performance",
@@ -287,7 +294,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// Defers the binding of the operation until later time when the runtime values of all dynamic operation arguments have been computed.
+        /// Defers the binding of the operation until later time when the runtime values of all dynamic
+        // operation arguments have been computed.
         /// </summary>
         /// <param name="target">The target of the dynamic operation.</param>
         /// <param name="args">An array of arguments of the dynamic operation.</param>
@@ -310,7 +318,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// Defers the binding of the operation until later time when the runtime values of all dynamic operation arguments have been computed.
+        /// Defers the binding of the operation until later time when the runtime values of all dynamic
+        // operation arguments have been computed.
         /// </summary>
         /// <param name="args">An array of arguments of the dynamic operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
@@ -356,7 +365,8 @@ namespace System.Dynamic
 
         private static bool IsComObject(object obj)
         {
-            // we can't use System.Runtime.InteropServices.Marshal.IsComObject(obj) since it doesn't work in partial trust
+            // we can't use System.Runtime.InteropServices.Marshal.IsComObject(obj) since it doesn't work in
+            // partial trust
             return obj != null && ComObjectType.IsAssignableFrom(obj.GetType());
         }
 #endif

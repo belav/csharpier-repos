@@ -220,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // The local has to be associated with a syntax that is tracked by EnC source mapping.
-            // At most one ConditionalBranchDiscriminator variable shall be associated with any given EnC tracked syntax node.
+            // At most one ConditionalBranchDiscriminator variable shall be associated with any given EnC
+            // tracked syntax node.
             var local = factory.SynthesizedLocal(
                 condition.Type,
                 synthesizedVariableSyntax,

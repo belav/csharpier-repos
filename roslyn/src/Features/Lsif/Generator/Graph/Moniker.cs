@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         public string? Kind { get; }
 
         /// <summary>
-        /// Corresponds to the uniqueness level of a moniker, per https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#uniquenessLevel.
+        /// Corresponds to the uniqueness level of a moniker, per
+        // https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#uniquenessLevel.
         /// </summary>
         public string? Unique { get; }
 

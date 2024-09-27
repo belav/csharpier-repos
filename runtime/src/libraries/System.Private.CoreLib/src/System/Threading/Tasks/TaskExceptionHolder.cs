@@ -38,7 +38,8 @@ namespace System.Threading.Tasks
         /// <summary>An exception that triggered the task to cancel.</summary>
         private ExceptionDispatchInfo? m_cancellationException;
 
-        /// <summary>Whether the holder was "observed" and thus doesn't cause finalization behavior.</summary>
+        /// <summary>Whether the holder was "observed" and thus doesn't cause finalization
+        // behavior.</summary>
         private volatile bool m_isHandled;
 
         /// <summary>
@@ -75,7 +76,8 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Gets whether the exception holder is currently storing any exceptions for faults.</summary>
+        /// <summary>Gets whether the exception holder is currently storing any exceptions for
+        // faults.</summary>
         internal bool ContainsFaultList => m_faultExceptions != null;
 
         /// <summary>
@@ -133,7 +135,8 @@ namespace System.Threading.Tasks
                 m_faultExceptions == null,
                 "Expected SetCancellationException to be called before any faults were added."
             );
-            // Breaking this assumption shouldn't hurt anything here, but it implies something may be wrong elsewhere.
+            // Breaking this assumption shouldn't hurt anything here, but it implies something may be wrong
+            // elsewhere.
             // If this changes, make sure to only conditionally mark as handled below.
 
             // Store the cancellation exception
@@ -167,7 +170,8 @@ namespace System.Threading.Tasks
                 "AddFaultException(): Expected a non-null exceptionObject"
             );
 
-            // Initialize the exceptions list if necessary.  The list should be non-null iff it contains exceptions.
+            // Initialize the exceptions list if necessary.  The list should be non-null iff it contains
+            // exceptions.
             List<ExceptionDispatchInfo>? exceptions = m_faultExceptions ??=
                 new List<ExceptionDispatchInfo>(1);
 
@@ -185,7 +189,8 @@ namespace System.Threading.Tasks
                 }
                 else
                 {
-                    // Handle enumerables of exceptions by capturing each of the contained exceptions into an EDI and storing it
+                    // Handle enumerables of exceptions by capturing each of the contained exceptions into an EDI and
+                    // storing it
                     if (exceptionObject is IEnumerable<Exception> exColl)
                     {
 #if DEBUG

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         None = 0,
 
         /// <summary>
-        /// Edit and continue is generally available with the set of capabilities that Mono 6, .NET Framework and .NET 5 have in common.
+        /// Edit and continue is generally available with the set of capabilities that Mono 6, .NET
+        // Framework and .NET 5 have in common.
         /// </summary>
         Baseline = 1 << 0,
 
@@ -47,17 +48,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         ChangeCustomAttributes = 1 << 5,
 
         /// <summary>
-        /// Whether the runtime supports updating the Param table, and hence related edits (eg parameter renames)
+        /// Whether the runtime supports updating the Param table, and hence related edits (eg parameter
+        // renames)
         /// </summary>
         UpdateParameters = 1 << 6,
 
         /// <summary>
-        /// Adding a static or instance method, property or event to an existing type (without backing fields), such that the method and/or the type are generic.
+        /// Adding a static or instance method, property or event to an existing type (without backing
+        // fields), such that the method and/or the type are generic.
         /// </summary>
         GenericAddMethodToExistingType = 1 << 7,
 
         /// <summary>
-        /// Updating an existing static or instance method, property or event (without backing fields) that is generic and/or contained in a generic type.
+        /// Updating an existing static or instance method, property or event (without backing fields) that
+        // is generic and/or contained in a generic type.
         /// </summary>
         GenericUpdateMethod = 1 << 8,
 

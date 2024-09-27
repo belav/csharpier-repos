@@ -239,8 +239,10 @@ namespace System.Xml
 
             Uri IDtdParserAdapter.BaseUri
             {
-                // SxS: DtdParserProxy_BaseUri property on the reader may expose machine scope resources. This property
-                // is just returning the value of the other property, so it may expose machine scope resource as well.
+                // SxS: DtdParserProxy_BaseUri property on the reader may expose machine scope resources. This
+                // property
+                // is just returning the value of the other property, so it may expose machine scope resource as
+                // well.
 #if !SILVERLIGHT
                 [ResourceConsumption(ResourceScope.Machine)]
                 [ResourceExposure(ResourceScope.Machine)]
@@ -426,7 +428,8 @@ namespace System.Xml
             internal string nameWPrefix;
 
             // value:
-            // value == null -> the value is kept in the 'chars' buffer starting at valueStartPos and valueLength long
+            // value == null -> the value is kept in the 'chars' buffer starting at valueStartPos and
+            // valueLength long
             string value;
             char[] chars;
             int valueStartPos;

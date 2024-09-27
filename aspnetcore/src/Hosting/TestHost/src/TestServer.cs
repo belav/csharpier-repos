@@ -101,7 +101,8 @@ public class TestServer : IServer
     }
 
     /// <summary>
-    /// Gets or sets the base address associated with the HttpClient returned by the test server. Defaults to http://localhost/.
+    /// Gets or sets the base address associated with the HttpClient returned by the test server.
+    // Defaults to http://localhost/.
     /// </summary>
     public Uri BaseAddress { get; set; } = new Uri("http://localhost/");
 
@@ -130,12 +131,16 @@ public class TestServer : IServer
     public IFeatureCollection Features { get; }
 
     /// <summary>
-    /// Gets or sets a value that controls whether synchronous IO is allowed for the <see cref="HttpContext.Request"/> and <see cref="HttpContext.Response"/>. The default value is <see langword="false" />.
+    /// Gets or sets a value that controls whether synchronous IO is allowed for the <see
+    // cref="HttpContext.Request"/> and <see cref="HttpContext.Response"/>. The default value is <see
+    // langword="false" />.
     /// </summary>
     public bool AllowSynchronousIO { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that controls if <see cref="ExecutionContext"/> and <see cref="AsyncLocal{T}"/> values are preserved from the client to the server. The default value is <see langword="false" />.
+    /// Gets or sets a value that controls if <see cref="ExecutionContext"/> and <see
+    // cref="AsyncLocal{T}"/> values are preserved from the client to the server. The default value is <see
+    // langword="false" />.
     /// </summary>
     public bool PreserveExecutionContext { get; set; }
 
@@ -152,7 +157,8 @@ public class TestServer : IServer
         BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
 
     /// <summary>
-    /// Creates a custom <see cref="HttpMessageHandler" /> for processing HTTP requests/responses with the test server.
+    /// Creates a custom <see cref="HttpMessageHandler" /> for processing HTTP requests/responses with
+    // the test server.
     /// </summary>
     public HttpMessageHandler CreateHandler()
     {
@@ -164,7 +170,8 @@ public class TestServer : IServer
     }
 
     /// <summary>
-    /// Creates a custom <see cref="HttpMessageHandler" /> for processing HTTP requests/responses with custom configuration with the test server.
+    /// Creates a custom <see cref="HttpMessageHandler" /> for processing HTTP requests/responses with
+    // custom configuration with the test server.
     /// </summary>
     public HttpMessageHandler CreateHandler(Action<HttpContext> additionalContextConfiguration)
     {
@@ -205,14 +212,16 @@ public class TestServer : IServer
     /// Begins constructing a request message for submission.
     /// </summary>
     /// <param name="path"></param>
-    /// <returns><see cref="RequestBuilder"/> to use in constructing additional request details.</returns>
+    /// <returns><see cref="RequestBuilder"/> to use in constructing additional request
+    // details.</returns>
     public RequestBuilder CreateRequest(string path)
     {
         return new RequestBuilder(this, path);
     }
 
     /// <summary>
-    /// Creates, configures, sends, and returns a <see cref="HttpContext"/>. This completes as soon as the response is started.
+    /// Creates, configures, sends, and returns a <see cref="HttpContext"/>. This completes as soon as
+    // the response is started.
     /// </summary>
     /// <returns></returns>
     public async Task<HttpContext> SendAsync(

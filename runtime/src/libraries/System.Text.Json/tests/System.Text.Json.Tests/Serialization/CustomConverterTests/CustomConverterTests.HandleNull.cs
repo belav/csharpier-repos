@@ -218,7 +218,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // For compat, deserialize does not call converter for null token unless the type doesn't support
             // null or HandleNull is overridden and returns 'true'.
-            // For compat, serialize does not call converter for null unless null is a valid value and HandleNull is true.
+            // For compat, serialize does not call converter for null unless null is a valid value and
+            // HandleNull is true.
             var options = new JsonSerializerOptions();
             options.Converters.Add(new NullableInt32NullConverter_SpecialCaseNull());
 

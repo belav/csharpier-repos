@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// Options that can be used to modify the symbol lookup mechanism.
     /// </summary>
     /// <remarks>
-    /// Multiple options can be combined together.  LookupOptions.AreValid checks for valid combinations.
+    /// Multiple options can be combined together.  LookupOptions.AreValid checks for valid
+    // combinations.
     /// </remarks>
     [Flags]
     internal enum LookupOptions
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         MustNotBeNamespace = 1 << 6,
 
         /// <summary>
-        /// Consider methods of any arity when arity zero is specified. Because type parameters can be inferred, it is
+        /// Consider methods of any arity when arity zero is specified. Because type parameters can be
+        // inferred, it is
         /// often desired to consider generic methods when no type arguments were present.
         /// </summary>
         AllMethodsOnArityZero = 1 << 7,
@@ -86,13 +88,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Consider lookup name to be a verbatim identifier.
-        /// If this flag is specified, then only one lookup is performed for attribute name: lookup with the given name,
+        /// If this flag is specified, then only one lookup is performed for attribute name: lookup with the
+        // given name,
         /// and attribute name lookup with "Attribute" suffix is skipped.
         /// </summary>
         VerbatimNameAttributeTypeOnly = (1 << 12) | AttributeTypeOnly,
 
         /// <summary>
-        /// Consider named types of any arity when arity zero is specified. It is specifically desired for nameof in such situations: nameof(System.Collections.Generic.List)
+        /// Consider named types of any arity when arity zero is specified. It is specifically desired for
+        // nameof in such situations: nameof(System.Collections.Generic.List)
         /// </summary>
         AllNamedTypesOnArityZero = 1 << 13,
 
@@ -125,8 +129,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// - If one of MustBeInstance or MustNotBeInstance are set, the other one must not be set.
         /// - If any of MustNotBeInstance, MustBeInstance, or MustNotBeNonInvocableMember are set,
         ///   the options are considered valid.
-        /// - If MustNotBeNamespace is set, neither NamespaceAliasesOnly nor NamespacesOrTypesOnly must be set.
-        /// - Otherwise, only one of NamespaceAliasesOnly, NamespacesOrTypesOnly, or AllMethodsOnArityZero must be set.
+        /// - If MustNotBeNamespace is set, neither NamespaceAliasesOnly nor NamespacesOrTypesOnly must be
+        // set.
+        /// - Otherwise, only one of NamespaceAliasesOnly, NamespacesOrTypesOnly, or AllMethodsOnArityZero
+        // must be set.
         /// </remarks>
         internal static bool AreValid(this LookupOptions options)
         {
@@ -149,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            // If MustNotBeNamespace or MustNotBeMethodTypeParameter is set, neither NamespaceAliasesOnly nor NamespacesOrTypesOnly must be set.
+            // If MustNotBeNamespace or MustNotBeMethodTypeParameter is set, neither NamespaceAliasesOnly nor
+            // NamespacesOrTypesOnly must be set.
             if (
                 (
                     options

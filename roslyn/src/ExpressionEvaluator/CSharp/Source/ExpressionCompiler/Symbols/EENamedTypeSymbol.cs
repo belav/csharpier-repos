@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             // What we want is to map all original type parameters to the corresponding new type parameters
             // (since the old ones have the wrong owners).  Unfortunately, we have a circular dependency:
-            //   1) Each new type parameter requires the entire map in order to be able to construct its constraint list.
+            //   1) Each new type parameter requires the entire map in order to be able to construct its
+            // constraint list.
             //   2) The map cannot be constructed until all new type parameters exist.
             // Our solution is to pass each new type parameter a lazy reference to the type map.  We then
             // initialize the map as soon as the new type parameters are available - and before they are

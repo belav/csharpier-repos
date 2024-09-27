@@ -50,7 +50,7 @@ namespace MonoSamples.System.Drawing
             int x = 0;
             int y = 0;
 
-            /* First Row */
+/* First Row */
             dc.DrawRectangle(BluePen, x, y, 50, 50);
             x += 50;
             dc.DrawEllipse(RedPen, x, y, 70, 50);
@@ -93,7 +93,7 @@ namespace MonoSamples.System.Drawing
             // Fill pie to screen.
             dc.FillPie(blueBrush, x, 0, 200.0F, 100.0f, 300.0F, 45.0F);
 
-            /* second row */
+/* second row */
             y += 80;
             x = 0;
 

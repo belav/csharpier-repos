@@ -515,7 +515,8 @@ namespace System.DirectoryServices.AccountManagement
         // Getting changes to persist (or to build a query from a QBE filter)
         //
 
-        // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
+        // Given a property name, returns true if that property has changed since it was loaded, false
+        // otherwise.
         internal override bool GetChangeStatusForProperty(string propertyName)
         {
             GlobalDebug.WriteLineIf(

@@ -15,32 +15,35 @@ namespace System.Web.Configuration
     using System.Text;
     using System.Xml;
 
-    /*         <!-- Configuration for siteMap:
-               Attributes:
-                  defaultProvider="string"  Name of provider to use by default
-                  enabled="[true|false]"    Determine if the feature is enabled.
+/*         <!-- Configuration for siteMap:
+Attributes:
+defaultProvider="string"  Name of provider to use by default
+enabled="[true|false]"    Determine if the feature is enabled.
 
-                <providers>              Providers (class must inherit from SiteMapProvider)
+<providers>              Providers (class must inherit from SiteMapProvider)
 
-                    <add                 Add a provider
-                        name="string"    Required string by which the SiteMap class identifies this provider
-                        type="string"    Required string which represents the type to instantiate: type must inherit from SiteMapProvider
-                        securityTrimmingEnabled="[true|false]"   Determine if security trimming is enabled. (default is false)
-                        provider-specific-configuration />
+<add                 Add a provider
+name="string"    Required string by which the SiteMap class identifies this provider
+type="string"    Required string which represents the type to instantiate: type must inherit from
+SiteMapProvider
+securityTrimmingEnabled="[true|false]"   Determine if security trimming is enabled. (default is
+false)
+provider-specific-configuration />
 
-                    <remove              Remove a provider
-                        name="string" /> Name of provider to remove
+<remove              Remove a provider
+name="string" /> Name of provider to remove
 
-                    <clear/>             Remove all providers
-        -->
-        <siteMap defaultProvider="AspNetXmlSiteMapProvider" enabled="true">
-            <providers>
-                <add name="AspNetXmlSiteMapProvider"
-                     description="SiteMap provider which reads in .sitemap XML files."
-                     type="System.Web.XmlSiteMapProvider, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
-                     siteMapFile="web.sitemap" />
-            </providers>
-        </siteMap>
+<clear/>             Remove all providers
+-->
+<siteMap defaultProvider="AspNetXmlSiteMapProvider" enabled="true">
+<providers>
+<add name="AspNetXmlSiteMapProvider"
+description="SiteMap provider which reads in .sitemap XML files."
+type="System.Web.XmlSiteMapProvider, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral,
+PublicKeyToken=%MICROSOFT_PUBLICKEY%"
+siteMapFile="web.sitemap" />
+</providers>
+</siteMap>
 */
     public sealed class SiteMapSection : ConfigurationSection
     {

@@ -141,17 +141,18 @@ namespace System.Globalization
 #endif
         }
 
-        /*=================================GetCompareInfo==========================
-        **Action: Get the CompareInfo constructed from the data table in the specified assembly for the specified culture.
-        **       Warning: The assembly versioning mechanism is dead!
-        **Returns: The CompareInfo for the specified culture.
-        **Arguments:
-        **   culture     the ID of the culture
-        **   assembly   the assembly which contains the sorting table.
-        **Exceptions:
-        **  ArugmentNullException when the assembly is null
-        **  ArgumentException if culture is invalid.
-        ============================================================================*/
+/*=================================GetCompareInfo==========================
+**Action: Get the CompareInfo constructed from the data table in the specified assembly for the
+specified culture.
+**       Warning: The assembly versioning mechanism is dead!
+**Returns: The CompareInfo for the specified culture.
+**Arguments:
+**   culture     the ID of the culture
+**   assembly   the assembly which contains the sorting table.
+**Exceptions:
+**  ArugmentNullException when the assembly is null
+**  ArgumentException if culture is invalid.
+============================================================================*/
 #if FEATURE_USE_LCID
         //
         public static CompareInfo GetCompareInfo(int culture, Assembly assembly)
@@ -171,17 +172,18 @@ namespace System.Globalization
         }
 #endif
 
-        /*=================================GetCompareInfo==========================
-        **Action: Get the CompareInfo constructed from the data table in the specified assembly for the specified culture.
-        **       The purpose of this method is to provide version for CompareInfo tables.
-        **Returns: The CompareInfo for the specified culture.
-        **Arguments:
-        **   name    the name of the culture
-        **   assembly   the assembly which contains the sorting table.
-        **Exceptions:
-        **  ArugmentNullException when the assembly is null
-        **  ArgumentException if name is invalid.
-        ============================================================================*/
+/*=================================GetCompareInfo==========================
+**Action: Get the CompareInfo constructed from the data table in the specified assembly for the
+specified culture.
+**       The purpose of this method is to provide version for CompareInfo tables.
+**Returns: The CompareInfo for the specified culture.
+**Arguments:
+**   name    the name of the culture
+**   assembly   the assembly which contains the sorting table.
+**Exceptions:
+**  ArugmentNullException when the assembly is null
+**  ArgumentException if name is invalid.
+============================================================================*/
         //
         public static CompareInfo GetCompareInfo(String name, Assembly assembly)
         {
@@ -199,15 +201,15 @@ namespace System.Globalization
             return GetCompareInfo(name);
         }
 
-        /*=================================GetCompareInfo==========================
-        **Action: Get the CompareInfo for the specified culture.
-        ** This method is provided for ease of integration with NLS-based software.
-        **Returns: The CompareInfo for the specified culture.
-        **Arguments:
-        **   culture    the ID of the culture.
-        **Exceptions:
-        **  ArgumentException if culture is invalid.
-        ============================================================================*/
+/*=================================GetCompareInfo==========================
+**Action: Get the CompareInfo for the specified culture.
+** This method is provided for ease of integration with NLS-based software.
+**Returns: The CompareInfo for the specified culture.
+**Arguments:
+**   culture    the ID of the culture.
+**Exceptions:
+**  ArgumentException if culture is invalid.
+============================================================================*/
 
 #if FEATURE_USE_LCID
         // People really shouldn't be calling LCID versions, no custom support
@@ -228,14 +230,14 @@ namespace System.Globalization
         }
 #endif
 
-        /*=================================GetCompareInfo==========================
-        **Action: Get the CompareInfo for the specified culture.
-        **Returns: The CompareInfo for the specified culture.
-        **Arguments:
-        **   name    the name of the culture.
-        **Exceptions:
-        **  ArgumentException if name is invalid.
-        ============================================================================*/
+/*=================================GetCompareInfo==========================
+**Action: Get the CompareInfo for the specified culture.
+**Returns: The CompareInfo for the specified culture.
+**Arguments:
+**   name    the name of the culture.
+**Exceptions:
+**  ArgumentException if name is invalid.
+============================================================================*/
 
         public static CompareInfo GetCompareInfo(String name)
         {
@@ -335,7 +337,8 @@ namespace System.Globalization
         [OnSerializing]
         private void OnSerializing(StreamingContext ctx)
         {
-            // This is merely for serialization compatibility with Whidbey/Orcas, it can go away when we don't want that compat any more.
+            // This is merely for serialization compatibility with Whidbey/Orcas, it can go away when we don't
+            // want that compat any more.
             culture = CultureInfo.GetCultureInfo(this.Name).LCID; // This is the lcid of the constructing culture (still have to dereference to get target sort)
             Contract.Assert(
                 m_name != null,
@@ -797,8 +800,10 @@ namespace System.Globalization
                 return false;
             return Compare(source, 0, prefix.Length, prefix, 0, prefix.Length, options) == 0;
 #else
-            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
-            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with every call to SortFindString.
+            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings
+            // are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
+            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with
+            // every call to SortFindString.
 
             return (
                 InternalFindNLSStringEx(
@@ -887,8 +892,10 @@ namespace System.Globalization
                 ) == 0;
 #else
 
-            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
-            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with every call to SortFindString.
+            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings
+            // are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
+            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with
+            // every call to SortFindString.
             return InternalFindNLSStringEx(
                     m_dataHandle,
                     m_handleOrigin,
@@ -1078,8 +1085,10 @@ namespace System.Globalization
 #if MONO
             return internal_index_switch(source, startIndex, count, value, options, true);
 #else
-            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
-            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with every call to SortFindString.
+            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings
+            // are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
+            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with
+            // every call to SortFindString.
             return InternalFindNLSStringEx(
                 m_dataHandle,
                 m_handleOrigin,
@@ -1120,7 +1129,8 @@ namespace System.Globalization
             }
             Contract.EndContractBlock();
 
-            // In Everett we used to return -1 for empty string even if startIndex is negative number so we keeping same behavior here.
+            // In Everett we used to return -1 for empty string even if startIndex is negative number so we
+            // keeping same behavior here.
             // We return 0 if both source and value are empty strings for Everett compatibility too.
             if (source.Length == 0)
             {
@@ -1161,8 +1171,10 @@ namespace System.Globalization
 #if MONO
             return internal_index_switch(source, startIndex, count, value, options, true);
 #else
-            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
-            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with every call to SortFindString.
+            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings
+            // are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
+            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with
+            // every call to SortFindString.
             return InternalFindNLSStringEx(
                 m_dataHandle,
                 m_handleOrigin,
@@ -1358,8 +1370,10 @@ namespace System.Globalization
 #if MONO
             return internal_index_switch(source, startIndex, count, value, options, false);
 #else
-            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
-            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with every call to SortFindString.
+            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings
+            // are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
+            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with
+            // every call to SortFindString.
             return InternalFindNLSStringEx(
                 m_dataHandle,
                 m_handleOrigin,
@@ -1447,8 +1461,10 @@ namespace System.Globalization
 #if MONO
             return internal_index_switch(source, startIndex, count, value, options, false);
 #else
-            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
-            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with every call to SortFindString.
+            // to let the sorting DLL do the call optimization in case of Ascii strings, we check if the strings
+            // are in Ascii and then send the flag RESERVED_FIND_ASCII_STRING  to
+            // the sorting DLL API SortFindString so sorting DLL don't have to check if the string is Ascii with
+            // every call to SortFindString.
             return InternalFindNLSStringEx(
                 m_dataHandle,
                 m_handleOrigin,
@@ -1656,7 +1672,8 @@ namespace System.Globalization
         //
         //  The hash code is guaranteed to be the same for string A and B where A.Equals(B) is true and both
         //  the CompareInfo and the CompareOptions are the same. If two different CompareInfo objects
-        //  treat the string the same way, this implementation will treat them differently (the same way that
+        //  treat the string the same way, this implementation will treat them differently (the same way
+        // that
         //  Sortkey does at the moment).
         //
         //  This method will never be made public itself, but public consumers of it could be created, e.g.:
@@ -1836,7 +1853,8 @@ namespace System.Globalization
             out IntPtr handleOrigin
         );
 
-        // Get a locale sensitive sort hash code from native code -- COMNlsInfo::InternalGetGlobalizedHashCode
+        // Get a locale sensitive sort hash code from native code --
+        // COMNlsInfo::InternalGetGlobalizedHashCode
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]

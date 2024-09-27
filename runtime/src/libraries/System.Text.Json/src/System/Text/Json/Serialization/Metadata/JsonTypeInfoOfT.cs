@@ -37,13 +37,17 @@ namespace System.Text.Json.Serialization.Metadata
         ///
         /// -or-
         ///
-        /// A parameterless factory is not supported for the current metadata <see cref="JsonTypeInfo.Kind"/>.
+        /// A parameterless factory is not supported for the current metadata <see
+        // cref="JsonTypeInfo.Kind"/>.
         /// </exception>
         /// <remarks>
-        /// If set to <see langword="null" />, any attempt to deserialize instances of the given type will fail at runtime.
+        /// If set to <see langword="null" />, any attempt to deserialize instances of the given type will
+        // fail at runtime.
         ///
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// types with a single default constructor or default constructors annotated with <see cref="JsonConstructorAttribute"/>
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// types with a single default constructor or default constructors annotated with <see
+        // cref="JsonConstructorAttribute"/>
         /// will be mapped to this delegate.
         /// </remarks>
         public new Func<T>? CreateObject

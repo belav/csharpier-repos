@@ -389,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (statements is [ReturnStatementSyntax { Expression: null }])
                     return OperationStatus.NoActiveStatement;
 
-                // Look for at least one non local-variable-decl statement, or at least one local variable with an initializer.
+                // Look for at least one non local-variable-decl statement, or at least one local variable with an
+                // initializer.
                 foreach (var statement in statements)
                 {
                     if (statement is not LocalDeclarationStatementSyntax declStatement)
@@ -473,7 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             continue;
                         }
 
-                        // Prepend the trivia from the declarations without initialization to the next persisting variable declaration
+                        // Prepend the trivia from the declarations without initialization to the next persisting variable
+                        // declaration
                         if (triviaList.Count > 0)
                         {
                             list.Add(variableDeclaration.WithPrependedLeadingTrivia(triviaList));
@@ -851,8 +853,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                // in hybrid code cases such as extract method, formatter will have some difficulties on where it breaks lines in two.
-                // here, we explicitly insert newline at the end of "{" of auto generated method decl so that anchor knows how to find out
+                // in hybrid code cases such as extract method, formatter will have some difficulties on where it
+                // breaks lines in two.
+                // here, we explicitly insert newline at the end of "{" of auto generated method decl so that anchor
+                // knows how to find out
                 // indentation of inserted statements (from users code) with user code style preserved
                 var root = newDocument.Root;
                 var methodDefinition = root.GetAnnotatedNodes<SyntaxNode>(
@@ -1063,7 +1067,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var nameGenerator = new UniqueNameGenerator(semanticModel);
                 var scope = this.SelectionResult.GetContainingScope();
 
-                // If extracting a local function, we want to ensure all local variables are considered when generating a unique name.
+                // If extracting a local function, we want to ensure all local variables are considered when
+                // generating a unique name.
                 if (LocalFunction)
                 {
                     scope = this.SelectionResult.GetFirstTokenInSelection().Parent;
@@ -1085,7 +1090,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return methodName;
                 }
 
-                // For local functions, pascal case and camel case should be the most common and therefore we only consider those cases.
+                // For local functions, pascal case and camel case should be the most common and therefore we only
+                // consider those cases.
                 var localFunctionPreferences = Options.NamingStyle.SymbolSpecifications.Where(
                     symbol =>
                         symbol.AppliesTo(

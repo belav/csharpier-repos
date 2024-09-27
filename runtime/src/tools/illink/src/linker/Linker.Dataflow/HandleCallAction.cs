@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.Reflection;
@@ -118,9 +119,12 @@ namespace ILLink.Shared.TrimAnalysis
                 ) || resolvedTypeDefinition.IsTypeOf(WellKnownType.System_Array)
             )
             {
-                // It's not wrong to have a reference to non-existing type - the code may well expect to get an exception in this case
-                // Note that we did find the assembly, so it's not a ILLink config problem, it's either intentional, or wrong versions of assemblies
-                // but ILLink can't know that. In case a user tries to create an array using System.Activator we should simply ignore it, the user
+                // It's not wrong to have a reference to non-existing type - the code may well expect to get an
+                // exception in this case
+                // Note that we did find the assembly, so it's not a ILLink config problem, it's either intentional,
+                // or wrong versions of assemblies
+                // but ILLink can't know that. In case a user tries to create an array using System.Activator we
+                // should simply ignore it, the user
                 // might expect an exception to be thrown.
                 resolvedType = default;
                 return false;

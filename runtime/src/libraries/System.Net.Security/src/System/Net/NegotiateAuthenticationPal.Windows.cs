@@ -169,7 +169,8 @@ namespace System.Net
                                 );
 
                             // This will return a client token when conducted authentication on server side.
-                            // This token can be used for impersonation. We use it to create a WindowsIdentity and hand it out to the server app.
+                            // This token can be used for impersonation. We use it to create a WindowsIdentity and hand it out
+                            // to the server app.
                             Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
                                 SSPIWrapper.QuerySecurityContextToken(
                                     GlobalSSPI.SSPIAuth,
@@ -999,7 +1000,8 @@ namespace System.Net
                 );
 
                 contextFlags = Interop.SspiCli.ContextFlags.Zero;
-                // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
+                // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is
+                // safe.
                 SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
                 Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
                     SSPIWrapper.InitializeSecurityContext(
@@ -1025,7 +1027,8 @@ namespace System.Net
                 ReadOnlySpan<byte> incomingBlob
             )
             {
-                // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
+                // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is
+                // safe.
                 SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
                 var inSecurityBuffer = new InputSecurityBuffer(
                     incomingBlob,
@@ -1071,7 +1074,8 @@ namespace System.Net
                 );
 
                 contextFlags = Interop.SspiCli.ContextFlags.Zero;
-                // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
+                // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is
+                // safe.
                 SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
                 Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
                     SSPIWrapper.AcceptSecurityContext(

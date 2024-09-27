@@ -99,7 +99,8 @@ namespace System.Speech.Recognition
                 {
                     try
                     {
-                        // Get the sml Content and toy with this variable to fool the compiler in not doing the calucation at all
+                        // Get the sml Content and toy with this variable to fool the compiler in not doing the calucation
+                        // at all
                         string sml = phrase.SmlContent;
                         RecognizedAudio audio = Audio;
                         if (
@@ -253,7 +254,9 @@ namespace System.Speech.Recognition
         }
 
         // Alternates. This returns a list of Alternate recognitions.
-        // We use the same class here for alternates as the main RecognitionResult class. This simplifies the API surface. Calling Alternates on a Result that's already an Alternate will throw a NotSupportedException.
+        // We use the same class here for alternates as the main RecognitionResult class. This simplifies
+        // the API surface. Calling Alternates on a Result that's already an Alternate will throw a
+        // NotSupportedException.
         public ReadOnlyCollection<RecognizedPhrase> Alternates
         {
             get { return new ReadOnlyCollection<RecognizedPhrase>(GetAlternates()); }
@@ -264,7 +267,8 @@ namespace System.Speech.Recognition
         #region Internal Methods
 
         /// <summary>
-        /// This method converts a given pronunciation from SAPI phonetic alphabet to IPA for a given language
+        /// This method converts a given pronunciation from SAPI phonetic alphabet to IPA for a given
+        // language
         /// </summary>
         /// <returns>New pronunciation in IPA alphabet</returns>
         internal string ConvertPronunciation(string pronunciation, int langId)
@@ -389,7 +393,8 @@ namespace System.Speech.Recognition
                     _isSapi53Header
                 );
 
-                // Get the alphabet of the main phrase, which should be the same as the current alphabet selected by us (applications).
+                // Get the alphabet of the main phrase, which should be the same as the current alphabet selected by
+                // us (applications).
                 bool hasIPAPronunciation =
                     (_header.fAlphabet & (uint)SPRESULTALPHABET.SPRA_APP_UPS) != 0;
 
@@ -470,7 +475,8 @@ namespace System.Speech.Recognition
                             offset += (int)alt.cbAltExtra; // no alignment padding
                         }
 
-                        // we cannot use a constructor parameter because RecognitionResult also derives from RecognizedPhrase
+                        // we cannot use a constructor parameter because RecognitionResult also derives from
+                        // RecognizedPhrase
                         IntPtr phraseBuffer = new((long)buffer + offset);
                         SPSERIALIZEDPHRASE serializedPhrase = RecognizedPhrase.GetPhraseHeader(
                             phraseBuffer,
@@ -557,7 +563,8 @@ namespace System.Speech.Recognition
                                 // Build a recognition phrase result
                                 RecognizedPhrase phrase = new();
 
-                                // we cannot use a constructor parameter because RecognitionResult also derives from RecognizedPhrase
+                                // we cannot use a constructor parameter because RecognitionResult also derives from
+                                // RecognizedPhrase
                                 SPSERIALIZEDPHRASE serializedPhrase =
                                     RecognizedPhrase.GetPhraseHeader(
                                         coMemSerializedPhrase,

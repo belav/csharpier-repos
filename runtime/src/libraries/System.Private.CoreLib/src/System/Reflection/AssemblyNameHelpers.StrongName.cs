@@ -33,13 +33,15 @@ namespace System.Reflection
         }
 
         //
-        // This validation logic is a port of StrongNameIsValidPublicKey() from src\coreclr\md\runtime\strongnameinternal.cpp
+        // This validation logic is a port of StrongNameIsValidPublicKey() from
+        // src\coreclr\md\runtime\strongnameinternal.cpp
         //
         private static bool IsValidPublicKey(byte[] publicKey)
         {
             uint publicKeyLength = (uint)(publicKey.Length);
 
-            // The buffer must be at least as large as the public key structure (for compat with desktop, we actually compare with the size of the header + 4).
+            // The buffer must be at least as large as the public key structure (for compat with desktop, we
+            // actually compare with the size of the header + 4).
             if (publicKeyLength < SizeOfPublicKeyBlob + 4)
                 return false;
 
@@ -55,7 +57,8 @@ namespace System.Reflection
 
             // The buffer itself looks reasonable, but the public key structure needs to be validated as well
 
-            // The ECMA key doesn't look like a valid key so it will fail the below checks. If we were passed that
+            // The ECMA key doesn't look like a valid key so it will fail the below checks. If we were passed
+            // that
             // key, then we can skip them.
             if (EcmaKey.SequenceEqual(publicKeyBlob))
                 return true;

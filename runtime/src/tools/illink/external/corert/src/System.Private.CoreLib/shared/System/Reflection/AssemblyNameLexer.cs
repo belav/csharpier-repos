@@ -14,7 +14,8 @@ namespace System.Reflection
     {
         internal AssemblyNameLexer(string s)
         {
-            // Convert string to char[] with NUL terminator. (An actual NUL terminator in the input string will be treated
+            // Convert string to char[] with NUL terminator. (An actual NUL terminator in the input string will
+            // be treated
             // as an actual end of string: this is compatible with desktop behavior.)
             char[] chars = new char[s.Length + 1];
             s.CopyTo(0, chars, 0, s.Length);

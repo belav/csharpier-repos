@@ -114,21 +114,21 @@ namespace ICSharpCode.SharpZipLib.GZip
             int mod_time = (int)(DateTime.Now.Ticks / 10000L); // Ticks give back 100ns intervals
             byte[] gzipHeader =
             {
-                /* The two magic bytes */
+/* The two magic bytes */
                 (byte)(GZipConstants.GZIP_MAGIC >> 8),
                 (byte)GZipConstants.GZIP_MAGIC,
-                /* The compression type */
+/* The compression type */
                 (byte)Deflater.DEFLATED,
-                /* The flags (not set) */
+/* The flags (not set) */
                 0,
-                /* The modification time */
+/* The modification time */
                 (byte)mod_time,
                 (byte)(mod_time >> 8),
                 (byte)(mod_time >> 16),
                 (byte)(mod_time >> 24),
-                /* The extra flags */
+/* The extra flags */
                 0,
-                /* The OS type (unknown) */
+/* The OS type (unknown) */
                 (byte)255,
             };
             baseOutputStream.Write(gzipHeader, 0, gzipHeader.Length);
@@ -157,7 +157,8 @@ namespace ICSharpCode.SharpZipLib.GZip
             int totalin = def.TotalIn;
             int crcval = (int)(crc.Value & 0xffffffff);
 
-            //    System.err.println("CRC val is " + Integer.toHexString( crcval ) 		       + " and length " + Integer.toHexString(totalin));
+            //    System.err.println("CRC val is " + Integer.toHexString( crcval ) 		       + " and length " +
+            // Integer.toHexString(totalin));
 
             byte[] gzipFooter =
             {

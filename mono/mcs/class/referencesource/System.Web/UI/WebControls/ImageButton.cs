@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -42,12 +42,15 @@ namespace System.Web.UI.WebControls
         private double yRaw = 0;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ImageButton'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ImageButton'/>
+        // class.</para>
         /// </devdoc>
         public ImageButton() { }
 
         /// <devdoc>
-        /// <para>Gets or sets the command associated with the <see cref='System.Web.UI.WebControls.ImageButton'/> that is propogated in the <see langword='Command'/> event along with the <see cref='System.Web.UI.WebControls.ImageButton.CommandArgument'/>
+        /// <para>Gets or sets the command associated with the <see
+        // cref='System.Web.UI.WebControls.ImageButton'/> that is propogated in the <see langword='Command'/>
+        // event along with the <see cref='System.Web.UI.WebControls.ImageButton.CommandArgument'/>
         /// property.</para>
         /// </devdoc>
         [
@@ -90,9 +93,12 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets or sets whether pressing the button causes page validation to fire. This defaults to True so that when
-        ///          using validation controls, the validation state of all controls are updated when the button is clicked, both
-        ///          on the client and the server. Setting this to False is useful when defining a cancel or reset button on a page
+        ///    <para>Gets or sets whether pressing the button causes page validation to fire. This defaults
+        // to True so that when
+        ///          using validation controls, the validation state of all controls are updated when the
+        // button is clicked, both
+        ///          on the client and the server. Setting this to False is useful when defining a cancel or
+        // reset button on a page
         ///          that has validators.</para>
         /// </devdoc>
         [
@@ -196,7 +202,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para> Gets a value that represents the tag HtmlTextWriterTag.Input. This property is read-only.</para>
+        ///    <para> Gets a value that represents the tag HtmlTextWriterTag.Input. This property is
+        // read-only.</para>
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         protected override HtmlTextWriterTag TagKey
@@ -221,7 +228,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Represents the method that will handle the <see langword='ImageClick'/> event of an <see cref='System.Web.UI.WebControls.ImageButton'/>.</para>
+        /// <para>Represents the method that will handle the <see langword='ImageClick'/> event of an <see
+        // cref='System.Web.UI.WebControls.ImageButton'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.ImageButton_OnClick)]
         public event ImageClickEventHandler Click
@@ -231,7 +239,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Represents the method that will handle the <see langword='Click'/> event of an <see cref='System.Web.UI.WebControls.ImageButton'/>.</para>
+        /// <para>Represents the method that will handle the <see langword='Click'/> event of an <see
+        // cref='System.Web.UI.WebControls.ImageButton'/>.</para>
         /// </devdoc>
         event EventHandler IButtonControl.Click
         {
@@ -240,7 +249,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Represents the method that will handle the <see langword='Command'/> event of an <see cref='System.Web.UI.WebControls.ImageButton'/>.</para>
+        /// <para>Represents the method that will handle the <see langword='Command'/> event of an <see
+        // cref='System.Web.UI.WebControls.ImageButton'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.ImageButton_OnCommand)]
         public event CommandEventHandler Command
@@ -251,7 +261,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Adds the attributes of an <see cref='System.Web.UI.WebControls.ImageButton'/> to the output
+        /// <para>Adds the attributes of an <see cref='System.Web.UI.WebControls.ImageButton'/> to the
+        // output
         ///    stream for rendering on the client.</para>
         /// </devdoc>
         protected override void AddAttributesToRender(HtmlTextWriter writer)
@@ -368,7 +379,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Processes posted data for the <see cref='System.Web.UI.WebControls.ImageButton'/> control.</para>
+        /// <para>Processes posted data for the <see cref='System.Web.UI.WebControls.ImageButton'/>
+        // control.</para>
         /// </devdoc>
         bool IPostBackDataHandler.LoadPostData(
             string postDataKey,
@@ -380,7 +392,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Processes posted data for the <see cref='System.Web.UI.WebControls.ImageButton'/> control.</para>
+        /// <para>Processes posted data for the <see cref='System.Web.UI.WebControls.ImageButton'/>
+        // control.</para>
         /// </devdoc>
         protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
@@ -509,7 +522,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// IButtonControl.Text implementation.  IButtonControl is used internally for adaptive rendering, but
+        /// IButtonControl.Text implementation.  IButtonControl is used internally for adaptive rendering,
+        // but
         /// property is explicitly implemented because the developer should use AlternateText, as in V1.
         /// </devdoc>
         string IButtonControl.Text
@@ -520,7 +534,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// IButtonControl.Text implementation.  IButtonControl is used internally for adaptive rendering, but
+        /// IButtonControl.Text implementation.  IButtonControl is used internally for adaptive rendering,
+        // but
         /// property is explicitly implemented because the developer should use AlternateText, as in V1.
         /// </devdoc>
         protected virtual string Text

@@ -14,7 +14,8 @@ namespace System.Xml.Serialization
     using System.Reflection;
     using System.Xml.Schema;
 
-    /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides"]/*' />
+    /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -22,7 +23,8 @@ namespace System.Xml.Serialization
     {
         Hashtable types = new Hashtable();
 
-        /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides.Add"]/*' />
+        /// <include file='doc\SoapAttributeOverrides.uex'
+        // path='docs/doc[@for="SoapAttributeOverrides.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -31,7 +33,8 @@ namespace System.Xml.Serialization
             Add(type, string.Empty, attributes);
         }
 
-        /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides.Add1"]/*' />
+        /// <include file='doc\SoapAttributeOverrides.uex'
+        // path='docs/doc[@for="SoapAttributeOverrides.Add1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -52,7 +55,8 @@ namespace System.Xml.Serialization
             members.Add(member, attributes);
         }
 
-        /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides.this"]/*' />
+        /// <include file='doc\SoapAttributeOverrides.uex'
+        // path='docs/doc[@for="SoapAttributeOverrides.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -61,7 +65,8 @@ namespace System.Xml.Serialization
             get { return this[type, string.Empty]; }
         }
 
-        /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides.this1"]/*' />
+        /// <include file='doc\SoapAttributeOverrides.uex'
+        // path='docs/doc[@for="SoapAttributeOverrides.this1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

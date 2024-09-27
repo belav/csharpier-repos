@@ -73,7 +73,8 @@ namespace System.Resources.Extensions
         /// This is done to avoid activating arbitrary types during resource writing.
         /// </summary>
         /// <param name="name">Resource name</param>
-        /// <param name="value">Value of the resource in string form understood by the type's TypeConverter</param>
+        /// <param name="value">Value of the resource in string form understood by the type's
+        // TypeConverter</param>
         /// <param name="typeName">Assembly qualified type name of the resource</param>
         public void AddResource(string name, string value, string typeName)
         {
@@ -136,7 +137,8 @@ namespace System.Resources.Extensions
         /// passed to the type's TypeConverter when reading the resource.
         /// </summary>
         /// <param name="name">Resource name</param>
-        /// <param name="value">Value of the resource in byte[] form understood by the type's TypeConverter</param>
+        /// <param name="value">Value of the resource in byte[] form understood by the type's
+        // TypeConverter</param>
         /// <param name="typeName">Assembly qualified type name of the resource</param>
         public void AddTypeConverterResource(string name, byte[] value, string typeName)
         {
@@ -208,9 +210,11 @@ namespace System.Resources.Extensions
         /// passed to the type's constructor when reading the resource.
         /// </summary>
         /// <param name="name">Resource name</param>
-        /// <param name="value">Value of the resource in Stream form understood by the types constructor</param>
+        /// <param name="value">Value of the resource in Stream form understood by the types
+        // constructor</param>
         /// <param name="typeName">Assembly qualified type name of the resource</param>
-        /// <param name="closeAfterWrite">Indicates that the stream should be closed after resources have been written</param>
+        /// <param name="closeAfterWrite">Indicates that the stream should be closed after resources have
+        // been written</param>
         public void AddActivatorResource(
             string name,
             Stream value,

@@ -7,8 +7,10 @@ using System.Collections.Generic;
 namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 {
     /// <summary>
-    /// A little helper type to hold onto the <see cref="Solution"/> being updated in a batch, which also
-    /// keeps track of the right <see cref="CodeAnalysis.WorkspaceChangeKind"/> to raise when we are done.
+    /// A little helper type to hold onto the <see cref="Solution"/> being updated in a batch, which
+    // also
+    /// keeps track of the right <see cref="CodeAnalysis.WorkspaceChangeKind"/> to raise when we are
+    // done.
     /// </summary>
     internal sealed class SolutionChangeAccumulator(Solution startingSolution)
     {
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         }
 
         /// <summary>
-        /// The same as <see cref="UpdateSolutionForDocumentAction(Solution, WorkspaceChangeKind, IEnumerable{DocumentId})" /> but also records
+        /// The same as <see cref="UpdateSolutionForDocumentAction(Solution, WorkspaceChangeKind,
+        // IEnumerable{DocumentId})" /> but also records
         /// the removed documents into <see cref="DocumentIdsRemoved"/>.
         /// </summary>
         public void UpdateSolutionForRemovedDocumentAction(
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         }
 
         /// <summary>
-        /// Should be called to update the solution if there isn't a specific document change kind that should be
+        /// Should be called to update the solution if there isn't a specific document change kind that
+        // should be
         /// given to <see cref="UpdateSolutionForDocumentAction"/>
         /// </summary>
         public void UpdateSolutionForProjectAction(ProjectId projectId, Solution newSolution)

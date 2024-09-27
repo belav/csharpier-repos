@@ -21,7 +21,8 @@ public interface IKeyManager
     /// the new key to the underlying repository.
     /// </summary>
     /// <param name="activationDate">The date on which encryptions to this key may begin.</param>
-    /// <param name="expirationDate">The date after which encryptions to this key may no longer take place.</param>
+    /// <param name="expirationDate">The date after which encryptions to this key may no longer take
+    // place.</param>
     /// <returns>The newly-created IKey instance.</returns>
     IKey CreateNewKey(DateTimeOffset activationDate, DateTimeOffset expirationDate);
 

@@ -796,11 +796,11 @@ namespace MonoTests.System.Globalization
             string br_str = null;
 
             /* explicitly set CurrentCulture, as the documentation states:
-             * > If you have not explicitly set the culture of any existing
-             * > threads executing in an application domain, setting the
-             * > P:System.Globalization.CultureInfo.DefaultThreadCurrentCulture
-             * > property also changes the culture of these threads.
-             */
+            * > If you have not explicitly set the culture of any existing
+            * > threads executing in an application domain, setting the
+            * > P:System.Globalization.CultureInfo.DefaultThreadCurrentCulture
+            * > property also changes the culture of these threads.
+            */
             Thread.CurrentThread.CurrentCulture = old_culture;
 
             var thread = new Thread(() =>

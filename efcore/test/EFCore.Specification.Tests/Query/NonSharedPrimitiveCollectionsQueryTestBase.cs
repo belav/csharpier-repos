@@ -154,7 +154,8 @@ public abstract class NonSharedPrimitiveCollectionsQueryTestBase : NonSharedMode
         var result = await context.Set<TestEntity>().SingleAsync(m => m.Ints == ints);
         Assert.Equal(1, result.Id);
 
-        // Custom converters allow reading/writing, but not querying, as we have no idea about the internal representation
+        // Custom converters allow reading/writing, but not querying, as we have no idea about the internal
+        // representation
         await AssertTranslationFailed(
             () => context.Set<TestEntity>().SingleAsync(m => m.Ints.Length == 2)
         );
@@ -252,7 +253,8 @@ public abstract class NonSharedPrimitiveCollectionsQueryTestBase : NonSharedMode
     }
 
     /// <summary>
-    ///     A utility that allows easy testing of querying out arbitrary element types from a primitive collection, provided two distinct
+    ///     A utility that allows easy testing of querying out arbitrary element types from a primitive
+    // collection, provided two distinct
     ///     element values.
     /// </summary>
     protected async Task TestArray<TElement>(
@@ -310,7 +312,8 @@ public abstract class NonSharedPrimitiveCollectionsQueryTestBase : NonSharedMode
             entityParam
         );
 
-        // context.Set<TestEntity>().SingleAsync(m => EF.Property<int[]>(m, "SomeArray").Count(a => a == <value1>) == 2)
+        // context.Set<TestEntity>().SingleAsync(m => EF.Property<int[]>(m, "SomeArray").Count(a => a ==
+        // <value1>) == 2)
         var result = await context.Set<TestEntity>().SingleAsync(predicate);
         Assert.Equal(1, result.Id);
     }

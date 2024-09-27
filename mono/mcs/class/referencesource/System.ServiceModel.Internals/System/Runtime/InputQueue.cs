@@ -65,10 +65,12 @@ namespace System.Runtime
             }
         }
 
-        // Users like ServiceModel can hook this abort ICommunicationObject or handle other non-IDisposable objects
+        // Users like ServiceModel can hook this abort ICommunicationObject or handle other non-IDisposable
+        // objects
         public Action<T> DisposeItemCallback { get; set; }
 
-        // Users like ServiceModel can hook this to wrap the AsyncQueueReader callback functionality for tracing, etc
+        // Users like ServiceModel can hook this to wrap the AsyncQueueReader callback functionality for
+        // tracing, etc
         Func<Action<AsyncCallback, IAsyncResult>> AsyncCallbackGenerator { get; set; }
 
         object ThisLock

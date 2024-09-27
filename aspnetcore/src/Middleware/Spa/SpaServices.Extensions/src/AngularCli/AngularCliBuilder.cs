@@ -27,7 +27,8 @@ public class AngularCliBuilder : ISpaPrerendererBuilder
     /// <summary>
     /// Constructs an instance of <see cref="AngularCliBuilder"/>.
     /// </summary>
-    /// <param name="npmScript">The name of the script in your package.json file that builds the server-side bundle for your Angular application.</param>
+    /// <param name="npmScript">The name of the script in your package.json file that builds the
+    // server-side bundle for your Angular application.</param>
     public AngularCliBuilder(string npmScript)
     {
         if (string.IsNullOrEmpty(npmScript))

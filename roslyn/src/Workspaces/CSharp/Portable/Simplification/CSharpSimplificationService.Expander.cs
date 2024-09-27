@@ -867,7 +867,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
 
                 ////
-                //// 4. If this is a standalone identifier or the left side of a qualified name or member access try to fully qualify it
+                //// 4. If this is a standalone identifier or the left side of a qualified name or member access try
+                // to fully qualify it
                 ////
 
                 // we need to treat the constructor as type name, so just get the containing type.
@@ -931,7 +932,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         {
                             ExpressionSyntax left;
 
-                            // Assumption here is, if the enclosing and containing types are different then there is inheritance relationship
+                            // Assumption here is, if the enclosing and containing types are different then there is inheritance
+                            // relationship
                             if (
                                 !Equals(
                                     _semanticModel.GetEnclosingNamedType(
@@ -1246,7 +1248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     || symbol.ContainingNamespace != null
                 )
                 {
-                    // we either need to create an AliasQualifiedName if the symbol is directly contained in the global namespace,
+                    // we either need to create an AliasQualifiedName if the symbol is directly contained in the global
+                    // namespace,
                     // otherwise it a QualifiedName.
                     if (
                         !replaceNode
@@ -1296,7 +1299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                 .WithTrailingTrivia(rewrittenNode.GetTrailingTrivia());
                         }
 
-                        // now create syntax for the combination of left and right syntax, or a simple replacement in case of an identifier
+                        // now create syntax for the combination of left and right syntax, or a simple replacement in case
+                        // of an identifier
                         var parent = originalNode.Parent;
                         var leadingTrivia = rewrittenNode.GetLeadingTrivia();
                         rewrittenNode = rewrittenNode.WithLeadingTrivia(null);
@@ -1412,7 +1416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         semanticModel.GetTypeInfo(typeOfExpression.Type, _cancellationToken).Type
                         as INamedTypeSymbol;
 
-                    // It's possible the immediate type might not be an unbound type, such as typeof(A<>.B). So walk through
+                    // It's possible the immediate type might not be an unbound type, such as typeof(A<>.B). So walk
+                    // through
                     // parent types too
                     while (type != null)
                     {
@@ -1509,8 +1514,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 IMethodSymbol reducedExtensionMethod
             )
             {
-                // It may be the case that this extension method cannot be called in static form.  For example, if the
-                // qualified name for the type containing the extension would be ambiguous.  In that case, just return
+                // It may be the case that this extension method cannot be called in static form.  For example, if
+                // the
+                // qualified name for the type containing the extension would be ambiguous.  In that case, just
+                // return
                 // the original call as is.
                 var containingTypeString = reducedExtensionMethod.ContainingType.ToDisplayString(
                     s_typeNameFormatWithGenerics
@@ -1546,7 +1553,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     .Argument(thisExpression)
                     .WithLeadingTrivia(SyntaxTriviaList.Empty);
 
-                // Copies the annotation for the left hand side of the member access expression to the first argument in the complexified form
+                // Copies the annotation for the left hand side of the member access expression to the first
+                // argument in the complexified form
                 thisArgument = originalMemberAccess.Expression.CopyAnnotationsTo(thisArgument);
 
                 var arguments = originalNode.ArgumentList.Arguments.Insert(0, thisArgument);

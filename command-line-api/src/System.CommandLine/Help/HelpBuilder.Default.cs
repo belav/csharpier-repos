@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -41,13 +42,15 @@ public partial class HelpBuilder
         }
 
         /// <summary>
-        /// Gets the description for an argument (typically used in the second column text in the arguments section).
+        /// Gets the description for an argument (typically used in the second column text in the arguments
+        // section).
         /// </summary>
         public static string GetArgumentDescription(CliArgument argument) =>
             argument.Description ?? string.Empty;
 
         /// <summary>
-        /// Gets the usage title for an argument (for example: <c>&lt;value&gt;</c>, typically used in the first column text in the arguments usage section, or within the synopsis.
+        /// Gets the usage title for an argument (for example: <c>&lt;value&gt;</c>, typically used in the
+        // first column text in the arguments usage section, or within the synopsis.
         /// </summary>
         public static string GetArgumentUsageLabel(CliArgument argument)
         {
@@ -75,7 +78,8 @@ public partial class HelpBuilder
         }
 
         /// <summary>
-        /// Gets the usage label for the specified symbol (typically used as the first column text in help output).
+        /// Gets the usage label for the specified symbol (typically used as the first column text in help
+        // output).
         /// </summary>
         /// <param name="symbol">The symbol to get a help item for.</param>
         /// <returns>Text to display.</returns>
@@ -265,7 +269,8 @@ public partial class HelpBuilder
             };
 
         ///  <summary>
-        /// Writes a help section describing a command's additional arguments, typically shown only when <see cref="CliCommand.TreatUnmatchedTokensAsErrors"/> is set to <see langword="true"/>.
+        /// Writes a help section describing a command's additional arguments, typically shown only when
+        // <see cref="CliCommand.TreatUnmatchedTokensAsErrors"/> is set to <see langword="true"/>.
         ///  </summary>
         public static Func<HelpContext, bool> AdditionalArgumentsSection() =>
             ctx => ctx.HelpBuilder.WriteAdditionalArguments(ctx);

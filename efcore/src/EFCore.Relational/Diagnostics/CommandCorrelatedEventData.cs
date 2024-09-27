@@ -4,10 +4,12 @@
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     The <see cref="DiagnosticSource" /> event payload for events correlated with a <see cref="DbCommand" />.
+///     The <see cref="DiagnosticSource" /> event payload for events correlated with a <see
+// cref="DbCommand" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public class CommandCorrelatedEventData : DbContextEventData
 {
@@ -17,10 +19,13 @@ public class CommandCorrelatedEventData : DbContextEventData
     /// <param name="eventDefinition">The event definition.</param>
     /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
     /// <param name="connection">The <see cref="DbConnection" /> being used.</param>
-    /// <param name="context">The <see cref="DbContext" /> currently being used, to null if not known.</param>
+    /// <param name="context">The <see cref="DbContext" /> currently being used, to null if not
+    // known.</param>
     /// <param name="executeMethod">The <see cref="DbCommand" /> method.</param>
-    /// <param name="commandId">A correlation ID that identifies the <see cref="DbCommand" /> instance being used.</param>
-    /// <param name="connectionId">A correlation ID that identifies the <see cref="DbConnection" /> instance being used.</param>
+    /// <param name="commandId">A correlation ID that identifies the <see cref="DbCommand" /> instance
+    // being used.</param>
+    /// <param name="connectionId">A correlation ID that identifies the <see cref="DbConnection" />
+    // instance being used.</param>
     /// <param name="async">Indicates whether or not the command was executed asynchronously.</param>
     /// <param name="startTime">The start time of this event.</param>
     /// <param name="commandSource">Source of the command.</param>

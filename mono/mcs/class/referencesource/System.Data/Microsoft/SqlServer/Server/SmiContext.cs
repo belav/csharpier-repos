@@ -79,7 +79,8 @@ namespace Microsoft.SqlServer.Server
             // Adding as of V3
 
             // Implement body with throw because there are only a couple of ways to get to this code:
-            //  1) Client is calling this method even though the server negotiated for V2- and hasn't implemented V3 yet.
+            //  1) Client is calling this method even though the server negotiated for V2- and hasn't
+            // implemented V3 yet.
             //  2) Server didn't implement V3, but negotiated V3+.
             System.Data.Common.ADP.InternalError(
                 System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod

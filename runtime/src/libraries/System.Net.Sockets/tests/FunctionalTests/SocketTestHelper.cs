@@ -482,7 +482,8 @@ namespace System.Net.Sockets.Tests
     // Same as above, but call the CancellationToken overloads where possible
     public class SocketHelperCancellableTask : SocketHelperBase
     {
-        // Use a cancellable CancellationToken that we never cancel so that implementations can't just elide handling the CancellationToken.
+        // Use a cancellable CancellationToken that we never cancel so that implementations can't just elide
+        // handling the CancellationToken.
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
 
         // This variant is typically working with Memory<T> overloads.
@@ -844,7 +845,8 @@ namespace System.Net.Sockets.Tests
 
         // A helper method to observe exceptions on sync paths of async variants.
         // In that case, exceptions should be seen without awaiting completion.
-        // Synchronous variants are started on a separate thread using Task.Run(), therefore we should await the task.
+        // Synchronous variants are started on a separate thread using Task.Run(), therefore we should await
+        // the task.
         protected async Task<TException> AssertThrowsSynchronously<TException>(Func<Task> testCode)
             where TException : Exception
         {

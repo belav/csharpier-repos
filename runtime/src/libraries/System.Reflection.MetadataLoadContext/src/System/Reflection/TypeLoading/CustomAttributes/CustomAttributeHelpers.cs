@@ -36,7 +36,8 @@ namespace System.Reflection.TypeLoading
         }
 
         /// <summary>
-        /// Clones a cached CustomAttributeTypedArgument list into a freshly allocated one suitable for direct return through an api.
+        /// Clones a cached CustomAttributeTypedArgument list into a freshly allocated one suitable for
+        // direct return through an api.
         /// </summary>
         public static ReadOnlyCollection<CustomAttributeTypedArgument> CloneForApiReturn(
             this IList<CustomAttributeTypedArgument> cats
@@ -55,7 +56,8 @@ namespace System.Reflection.TypeLoading
         }
 
         /// <summary>
-        /// Clones a cached CustomAttributeNamedArgument list into a freshly allocated one suitable for direct return through an api.
+        /// Clones a cached CustomAttributeNamedArgument list into a freshly allocated one suitable for
+        // direct return through an api.
         /// </summary>
         public static ReadOnlyCollection<CustomAttributeNamedArgument> CloneForApiReturn(
             this IList<CustomAttributeNamedArgument> cans
@@ -74,7 +76,8 @@ namespace System.Reflection.TypeLoading
         }
 
         /// <summary>
-        /// Clones a cached CustomAttributeTypedArgument into a freshly allocated one suitable for direct return through an api.
+        /// Clones a cached CustomAttributeTypedArgument into a freshly allocated one suitable for direct
+        // return through an api.
         /// </summary>
         private static CustomAttributeTypedArgument CloneForApiReturn(
             this CustomAttributeTypedArgument cat
@@ -99,7 +102,8 @@ namespace System.Reflection.TypeLoading
         }
 
         /// <summary>
-        /// Clones a cached CustomAttributeNamedArgument into a freshly allocated one suitable for direct return through an api.
+        /// Clones a cached CustomAttributeNamedArgument into a freshly allocated one suitable for direct
+        // return through an api.
         /// </summary>
         private static CustomAttributeNamedArgument CloneForApiReturn(
             this CustomAttributeNamedArgument can
@@ -112,7 +116,8 @@ namespace System.Reflection.TypeLoading
         }
 
         /// <summary>
-        /// Convert MarshalAsAttribute data into CustomAttributeData form. Returns null if the core assembly cannot be loaded or if the necessary
+        /// Convert MarshalAsAttribute data into CustomAttributeData form. Returns null if the core assembly
+        // cannot be loaded or if the necessary
         /// types aren't in the core assembly.
         /// </summary>
         public static CustomAttributeData? TryComputeMarshalAsCustomAttributeData(
@@ -120,7 +125,8 @@ namespace System.Reflection.TypeLoading
             MetadataLoadContext loader
         )
         {
-            // Make sure all the necessary framework types exist in this MetadataLoadContext's core assembly. If one doesn't, skip.
+            // Make sure all the necessary framework types exist in this MetadataLoadContext's core assembly. If
+            // one doesn't, skip.
             CoreTypes ct = loader.GetAllFoundCoreTypes();
             if (
                 ct[CoreType.String] == null
@@ -138,7 +144,8 @@ namespace System.Reflection.TypeLoading
 
             Func<CustomAttributeArguments> argumentsPromise = () =>
             {
-                // The expensive work goes in here. It will not execute unless someone invokes the Constructor/NamedArguments properties on
+                // The expensive work goes in here. It will not execute unless someone invokes the
+                // Constructor/NamedArguments properties on
                 // the CustomAttributeData.
 
                 MarshalAsAttribute ma = marshalAsAttributeComputer();

@@ -15,8 +15,10 @@ namespace Microsoft.AspNetCore.Components;
 /// Performs conversions during binding.
 /// </summary>
 //
-// Perf: our conversion routines present a regular API surface that allows us to specialize on types to avoid boxing.
-// for instance, many of these types could be cast to IFormattable to do the appropriate formatting, but that's going
+// Perf: our conversion routines present a regular API surface that allows us to specialize on types
+// to avoid boxing.
+// for instance, many of these types could be cast to IFormattable to do the appropriate formatting,
+// but that's going
 // to allocate.
 public static class BindConverter
 {
@@ -42,7 +44,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -63,7 +66,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -73,7 +77,8 @@ public static class BindConverter
     )]
     public static bool FormatValue(bool value, CultureInfo? culture = null)
     {
-        // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
+        // Formatting for bool is special-cased. We need to produce a boolean value for conditional
+        // attributes
         // to work.
         return value;
     }
@@ -81,7 +86,8 @@ public static class BindConverter
     // Used with generics
     private static object FormatBoolValueCore(bool value, CultureInfo? _)
     {
-        // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
+        // Formatting for bool is special-cased. We need to produce a boolean value for conditional
+        // attributes
         // to work.
         return value ? BoxedTrue : BoxedFalse;
     }
@@ -91,7 +97,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -101,7 +108,8 @@ public static class BindConverter
     )]
     public static bool? FormatValue(bool? value, CultureInfo? culture = null)
     {
-        // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
+        // Formatting for bool is special-cased. We need to produce a boolean value for conditional
+        // attributes
         // to work.
         return value == null ? (bool?)null : value.Value;
     }
@@ -109,7 +117,8 @@ public static class BindConverter
     // Used with generics
     private static object? FormatNullableBoolValueCore(bool? value, CultureInfo? _)
     {
-        // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
+        // Formatting for bool is special-cased. We need to produce a boolean value for conditional
+        // attributes
         // to work.
         return value == null ? null
             : value.Value ? BoxedTrue
@@ -121,7 +130,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -142,7 +152,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -168,7 +179,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -189,7 +201,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -215,7 +228,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -236,7 +250,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -262,7 +277,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -283,7 +299,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -309,7 +326,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -330,7 +348,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -356,7 +375,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -377,7 +397,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -403,7 +424,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -418,9 +440,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateTimeOffset.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateTimeOffset.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -458,7 +482,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -473,9 +498,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateTime.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateTime.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -523,7 +550,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -538,9 +566,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateTimeOffset.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateTimeOffset.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -578,7 +608,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -593,9 +624,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateTimeOffset.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateTimeOffset.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -646,7 +679,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -661,9 +695,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -704,7 +740,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -719,9 +756,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -772,7 +811,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -787,9 +827,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -830,7 +872,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -845,9 +888,11 @@ public static class BindConverter
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
-    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string, IFormatProvider)"/>.</param>
+    /// <param name="format">The format to use. Provided to <see cref="DateOnly.ToString(string,
+    // IFormatProvider)"/>.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -908,7 +953,8 @@ public static class BindConverter
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <param name="culture">
-    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
+    /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see
+    // cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
     [SuppressMessage(
@@ -2254,7 +2300,8 @@ public static class BindConverter
         {
             if (!_cache.TryGetValue(typeof(T), out var formatter))
             {
-                // We need to replicate all of the primitive cases that we handle here so that they will behave the same way.
+                // We need to replicate all of the primitive cases that we handle here so that they will behave the
+                // same way.
                 // The result will be cached.
                 if (typeof(T) == typeof(string))
                 {
@@ -2439,7 +2486,8 @@ public static class BindConverter
 
             string? FormatWithTypeConverter(T value, CultureInfo? culture)
             {
-                // We intentionally close-over the TypeConverter to cache it. The TypeDescriptor infrastructure is slow.
+                // We intentionally close-over the TypeConverter to cache it. The TypeDescriptor infrastructure is
+                // slow.
                 return typeConverter.ConvertToString(
                     context: null,
                     culture ?? CultureInfo.CurrentCulture,
@@ -2474,7 +2522,8 @@ public static class BindConverter
         {
             if (!_cache.TryGetValue(typeof(T), out var parser))
             {
-                // We need to replicate all of the primitive cases that we handle here so that they will behave the same way.
+                // We need to replicate all of the primitive cases that we handle here so that they will behave the
+                // same way.
                 // The result will be cached.
                 if (typeof(T) == typeof(string))
                 {
@@ -2676,7 +2725,8 @@ public static class BindConverter
 
             bool ConvertWithTypeConverter(object? obj, CultureInfo? culture, out T value)
             {
-                // We intentionally close-over the TypeConverter to cache it. The TypeDescriptor infrastructure is slow.
+                // We intentionally close-over the TypeConverter to cache it. The TypeDescriptor infrastructure is
+                // slow.
                 if (obj == null)
                 {
                     value = default!;

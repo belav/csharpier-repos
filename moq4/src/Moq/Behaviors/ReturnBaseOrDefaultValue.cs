@@ -8,44 +8,44 @@ namespace Moq.Behaviors
 {
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
-        internal sealed class ReturnBaseOrDefaultValue : Behavior
+    internal sealed class ReturnBaseOrDefaultValue : Behavior
     After:
-        sealed class ReturnBaseOrDefaultValue : Behavior
+    sealed class ReturnBaseOrDefaultValue : Behavior
     */
 
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
-        internal sealed class ReturnBaseOrDefaultValue : Behavior
+    internal sealed class ReturnBaseOrDefaultValue : Behavior
     After:
-        sealed class ReturnBaseOrDefaultValue : Behavior
+    sealed class ReturnBaseOrDefaultValue : Behavior
     */
 
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
-        internal sealed class ReturnBaseOrDefaultValue : Behavior
+    internal sealed class ReturnBaseOrDefaultValue : Behavior
     After:
-        sealed class ReturnBaseOrDefaultValue : Behavior
+    sealed class ReturnBaseOrDefaultValue : Behavior
     */
     sealed class ReturnBaseOrDefaultValue : Behavior
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
-            private readonly Mock mock;
+    private readonly Mock mock;
     After:
-            readonly Mock mock;
+    readonly Mock mock;
     */
 
     /* Unmerged change from project 'Moq(netstandard2.1)'
     Before:
-            private readonly Mock mock;
+    private readonly Mock mock;
     After:
-            readonly Mock mock;
+    readonly Mock mock;
     */
 
     /* Unmerged change from project 'Moq(net6.0)'
     Before:
-            private readonly Mock mock;
+    private readonly Mock mock;
     After:
-            readonly Mock mock;
+    readonly Mock mock;
     */
     {
         readonly Mock mock;

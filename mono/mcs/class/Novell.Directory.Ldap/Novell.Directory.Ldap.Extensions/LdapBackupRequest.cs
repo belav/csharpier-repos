@@ -69,10 +69,10 @@ namespace Novell.Directory.Ldap.Extensions
     {
         static LdapBackupRequest()
         {
-            /*
-            * Register the extendedresponse class which is returned by the server
-            * in response to a LdapBackupRequest
-            */
+/*
+* Register the extendedresponse class which is returned by the server
+* in response to a LdapBackupRequest
+*/
             try
             {
                 LdapExtendedResponse.register(
@@ -90,26 +90,26 @@ namespace Novell.Directory.Ldap.Extensions
             }
         }
 
-        /**
-        *
-        * Constructs an extended operations object for getting data about any Object.
-        *
-        * @param objectDN 		The DN of the object to be backed up
-        * <br>
-        * @param passwd 		The encrypted password required for the object to
-        * be backed up
-        * <br>
-        * @param stateInfo     The state information of the object to backup.
-        * This parameter is a String which contains combination of modification
-        * timestamp and revision number of object being backed up. The format
-        * of both modification time stamp and revision should pertain to eDirectoty
-        * standard format of taking modification timestamp and revision.
-        * Separator being used between these two is a '+' character.<br>
-        *
-        *
-        * @exception LdapException A general exception which includes an error
-        *                          message and an LDAP error code.
-        */
+/**
+*
+* Constructs an extended operations object for getting data about any Object.
+*
+* @param objectDN 		The DN of the object to be backed up
+* <br>
+* @param passwd 		The encrypted password required for the object to
+* be backed up
+* <br>
+* @param stateInfo     The state information of the object to backup.
+* This parameter is a String which contains combination of modification
+* timestamp and revision number of object being backed up. The format
+* of both modification time stamp and revision should pertain to eDirectoty
+* standard format of taking modification timestamp and revision.
+* Separator being used between these two is a '+' character.<br>
+*
+*
+* @exception LdapException A general exception which includes an error
+*                          message and an LDAP error code.
+*/
         public LdapBackupRequest(String objectDN, byte[] passwd, String stateInfo)
             : base(BackupRestoreConstants.NLDAP_LDAP_BACKUP_REQUEST, null)
         {

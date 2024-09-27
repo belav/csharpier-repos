@@ -38,13 +38,15 @@ namespace System.Text.Json.SourceGeneration
         }
 
         /// <summary>
-        /// Returns true if the specified location is contained in one of the syntax trees in the compilation.
+        /// Returns true if the specified location is contained in one of the syntax trees in the
+        // compilation.
         /// </summary>
         public static bool ContainsLocation(this Compilation compilation, Location location) =>
             location.SourceTree != null && compilation.ContainsSyntaxTree(location.SourceTree);
 
         /// <summary>
-        /// Removes any type metadata that is erased at compile time, such as NRT annotations and tuple labels.
+        /// Removes any type metadata that is erased at compile time, such as NRT annotations and tuple
+        // labels.
         /// </summary>
         public static ITypeSymbol EraseCompileTimeMetadata(
             this Compilation compilation,

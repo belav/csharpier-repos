@@ -7,9 +7,11 @@ using Debug = System.Diagnostics.Debug;
 namespace Internal.IL.Stubs
 {
     /// <summary>
-    /// Thunk to dynamically invoke a method using reflection. The method accepts an parameters as byrefs
+    /// Thunk to dynamically invoke a method using reflection. The method accepts an parameters as
+    // byrefs
     /// lays them out on the stack, and calls the target method. This thunk has heavy dependencies
-    /// on the general dynamic invocation infrastructure in System.InvokeUtils and gets called from there
+    /// on the general dynamic invocation infrastructure in System.InvokeUtils and gets called from
+    // there
     /// at runtime. See comments in System.InvokeUtils for a more thorough explanation.
     /// </summary>
     public sealed partial class DynamicInvokeMethodThunk : ILStubMethod
@@ -25,7 +27,8 @@ namespace Internal.IL.Stubs
         }
 
         // MethodSignature does not track information about the type of the this pointer. We will steal
-        // one of the unused upper bits to track whether the this pointer is a byref or an object. This makes
+        // one of the unused upper bits to track whether the this pointer is a byref or an object. This
+        // makes
         // the information passed around seamlesly, including name mangling.
         private static MethodSignatureFlags MethodSignatureFlags_ValueTypeInstanceMethod =>
             (MethodSignatureFlags)0x8000;
@@ -40,8 +43,10 @@ namespace Internal.IL.Stubs
             {
                 flags |= MethodSignatureFlags.Static;
             }
-            // TODO: Reflection invoke assumes unboxing stubs. It means that the "this" pointer is always a regular boxed object reference and
-            // that the dynamic invoke thunks cannot be used to invoke instance methods on unboxed value types currently. This will need
+            // TODO: Reflection invoke assumes unboxing stubs. It means that the "this" pointer is always a
+            // regular boxed object reference and
+            // that the dynamic invoke thunks cannot be used to invoke instance methods on unboxed value types
+            // currently. This will need
             // to be addressed for the eventual allocation-free reflection invoke.
             // else if (valueTypeInstanceMethod)
             // {

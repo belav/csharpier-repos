@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -45,7 +46,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         static Type s_typeWithPublicParameterlessConstructor;
 
         [Kept]
-        // Trimmer and analyzer use different formats for ref parameters: https://github.com/dotnet/linker/issues/2406
+        // Trimmer and analyzer use different formats for ref parameters:
+        // https://github.com/dotnet/linker/issues/2406
         [ExpectedWarning(
             "IL2077",
             nameof(ByRefDataflow) + "." + nameof(MethodWithRefParameter) + "(Type&)",
@@ -82,7 +84,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        // Trimmer and analyzer use different formats for ref parameters: https://github.com/dotnet/linker/issues/2406
+        // Trimmer and analyzer use different formats for ref parameters:
+        // https://github.com/dotnet/linker/issues/2406
         [ExpectedWarning(
             "IL2067",
             nameof(ByRefDataflow) + "." + nameof(MethodWithRefParameter) + "(Type&)",

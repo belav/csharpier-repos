@@ -10,12 +10,21 @@ namespace System.IO.Enumeration
     internal static class FileSystemEnumerableFactory
     {
         /// <summary>
-        /// Validates the directory and expression strings to check that they have no invalid characters, any special DOS wildcard characters in Win32 in the expression get replaced with their proper escaped representation, and if the expression string begins with a directory name, the directory name is moved and appended at the end of the directory string.
+        /// Validates the directory and expression strings to check that they have no invalid characters,
+        // any special DOS wildcard characters in Win32 in the expression get replaced with their proper
+        // escaped representation, and if the expression string begins with a directory name, the directory
+        // name is moved and appended at the end of the directory string.
         /// </summary>
-        /// <param name="directory">A reference to a directory string that we will be checking for normalization.</param>
-        /// <param name="expression">A reference to a expression string that we will be checking for normalization.</param>
-        /// <param name="matchType">The kind of matching we want to check in the expression. If the value is Win32, we will replace special DOS wild characters to their safely escaped representation. This replacement does not affect the normalization status of the expression.</param>
-        /// <returns><cref langword="false" /> if the directory reference string get modified inside this function due to the expression beginning with a directory name. <cref langword="true" /> if the directory reference string was not modified.</returns>
+        /// <param name="directory">A reference to a directory string that we will be checking for
+        // normalization.</param>
+        /// <param name="expression">A reference to a expression string that we will be checking for
+        // normalization.</param>
+        /// <param name="matchType">The kind of matching we want to check in the expression. If the value is
+        // Win32, we will replace special DOS wild characters to their safely escaped representation. This
+        // replacement does not affect the normalization status of the expression.</param>
+        /// <returns><cref langword="false" /> if the directory reference string get modified inside this
+        // function due to the expression beginning with a directory name. <cref langword="true" /> if the
+        // directory reference string was not modified.</returns>
         /// <exception cref="ArgumentException">
         /// The expression is a rooted path.
         /// -or-
@@ -78,9 +87,12 @@ namespace System.IO.Enumeration
                     }
                     else
                     {
-                        // These all have special meaning in DOS name matching. '\' is the escaping character (which conveniently
-                        // is the directory separator and cannot be part of any path segment in Windows). The other three are the
-                        // special case wildcards that we'll convert some * and ? into. They're also valid as filenames on Unix,
+                        // These all have special meaning in DOS name matching. '\' is the escaping character (which
+                        // conveniently
+                        // is the directory separator and cannot be part of any path segment in Windows). The other three
+                        // are the
+                        // special case wildcards that we'll convert some * and ? into. They're also valid as filenames on
+                        // Unix,
                         // which is not true in Windows and as such we'll escape any that occur on the input string.
                         if (
                             Path.DirectorySeparatorChar != '\\'

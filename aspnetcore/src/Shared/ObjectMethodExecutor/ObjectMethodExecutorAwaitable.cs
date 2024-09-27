@@ -111,8 +111,10 @@ internal readonly struct ObjectMethodExecutorAwaitable
             //   needs the execution context to be preserved (which it signals by calling OnCompleted), or
             //   that it doesn't (which it signals by calling UnsafeOnCompleted). Obviously it's faster *not*
             //   to preserve and restore the context, so we prefer that where possible.
-            // - If a caller doesn't need the execution context to be preserved and hence calls UnsafeOnCompleted,
-            //   there's no harm in preserving it anyway - it's just a bit of wasted cost. That's what will happen
+            // - If a caller doesn't need the execution context to be preserved and hence calls
+            // UnsafeOnCompleted,
+            //   there's no harm in preserving it anyway - it's just a bit of wasted cost. That's what will
+            // happen
             //   if a caller sees that the proxy implements ICriticalNotifyCompletion but the proxy chooses to
             //   pass the call on to the underlying awaitable's OnCompleted method.
 

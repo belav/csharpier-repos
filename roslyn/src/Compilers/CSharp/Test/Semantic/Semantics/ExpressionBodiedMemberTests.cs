@@ -489,7 +489,8 @@ class Program
 "
             );
             comp.VerifyDiagnostics(
-                // (4,25): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (4,25): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //     private void M() => (new object());
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "(new object())").WithLocation(4, 25)
             );
@@ -1327,17 +1328,20 @@ public class C
             CreateCompilation(source, parseOptions: TestOptions.Regular).VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular6)
                 .VerifyDiagnostics(
-                    // (5,9): error CS8059: Feature 'expression body constructor and destructor' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (5,9): error CS8059: Feature 'expression body constructor and destructor' is not available in C#
+                    // 6. Please use language version 7.0 or greater.
                     //     C() => Console.WriteLine(1);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "=>")
                         .WithArguments("expression body constructor and destructor", "7.0")
                         .WithLocation(5, 9),
-                    // (6,10): error CS8059: Feature 'expression body constructor and destructor' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (6,10): error CS8059: Feature 'expression body constructor and destructor' is not available in C#
+                    // 6. Please use language version 7.0 or greater.
                     //     ~C() => Console.WriteLine(2);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "=>")
                         .WithArguments("expression body constructor and destructor", "7.0")
                         .WithLocation(6, 10),
-                    // (7,17): error CS8059: Feature 'expression body property accessor' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (7,17): error CS8059: Feature 'expression body property accessor' is not available in C# 6.
+                    // Please use language version 7.0 or greater.
                     //     int P { set => Console.WriteLine(value); }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "=>")
                         .WithArguments("expression body property accessor", "7.0")

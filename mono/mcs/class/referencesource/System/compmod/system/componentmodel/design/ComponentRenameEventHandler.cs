@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel.Design
 {
     using System;
@@ -14,7 +14,8 @@ namespace System.ComponentModel.Design
     using System.Security.Permissions;
 
     /// <devdoc>
-    /// <para>Represents the method that will handle a <see cref='System.ComponentModel.Design.IComponentChangeService.ComponentRename'/> event.</para>
+    /// <para>Represents the method that will handle a <see
+    // cref='System.ComponentModel.Design.IComponentChangeService.ComponentRename'/> event.</para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
     [System.Runtime.InteropServices.ComVisible(true)]

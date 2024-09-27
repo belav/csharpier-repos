@@ -14,7 +14,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Hosting;
 
 /// <summary>
-/// Extension methods for <see cref="ListenOptions"/> that configure Kestrel to use HTTPS for a given endpoint.
+/// Extension methods for <see cref="ListenOptions"/> that configure Kestrel to use HTTPS for a
+// given endpoint.
 /// </summary>
 public static class ListenOptionsHttpsExtensions
 {
@@ -31,7 +32,8 @@ public static class ListenOptionsHttpsExtensions
     /// Configure Kestrel to use HTTPS.
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
-    /// <param name="fileName">The name of a certificate file, relative to the directory that contains the application
+    /// <param name="fileName">The name of a certificate file, relative to the directory that contains
+    // the application
     /// content files.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(this ListenOptions listenOptions, string fileName)
@@ -46,7 +48,8 @@ public static class ListenOptionsHttpsExtensions
     /// Configure Kestrel to use HTTPS.
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
-    /// <param name="fileName">The name of a certificate file, relative to the directory that contains the application
+    /// <param name="fileName">The name of a certificate file, relative to the directory that contains
+    // the application
     /// content files.</param>
     /// <param name="password">The password required to access the X.509 certificate data.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
@@ -66,9 +69,11 @@ public static class ListenOptionsHttpsExtensions
     /// Configure Kestrel to use HTTPS.
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
-    /// <param name="fileName">The name of a certificate file, relative to the directory that contains the application content files.</param>
+    /// <param name="fileName">The name of a certificate file, relative to the directory that contains
+    // the application content files.</param>
     /// <param name="password">The password required to access the X.509 certificate data.</param>
-    /// <param name="configureOptions">An Action to configure the <see cref="HttpsConnectionAdapterOptions"/>.</param>
+    /// <param name="configureOptions">An Action to configure the <see
+    // cref="HttpsConnectionAdapterOptions"/>.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(
         this ListenOptions listenOptions,
@@ -103,7 +108,8 @@ public static class ListenOptionsHttpsExtensions
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="storeName">The certificate store to load the certificate from.</param>
     /// <param name="subject">The subject name for the certificate to load.</param>
-    /// <param name="allowInvalid">Indicates if invalid certificates should be considered, such as self-signed certificates.</param>
+    /// <param name="allowInvalid">Indicates if invalid certificates should be considered, such as
+    // self-signed certificates.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(
         this ListenOptions listenOptions,
@@ -118,7 +124,8 @@ public static class ListenOptionsHttpsExtensions
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="storeName">The certificate store to load the certificate from.</param>
     /// <param name="subject">The subject name for the certificate to load.</param>
-    /// <param name="allowInvalid">Indicates if invalid certificates should be considered, such as self-signed certificates.</param>
+    /// <param name="allowInvalid">Indicates if invalid certificates should be considered, such as
+    // self-signed certificates.</param>
     /// <param name="location">The store location to load the certificate from.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(
@@ -142,9 +149,11 @@ public static class ListenOptionsHttpsExtensions
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="storeName">The certificate store to load the certificate from.</param>
     /// <param name="subject">The subject name for the certificate to load.</param>
-    /// <param name="allowInvalid">Indicates if invalid certificates should be considered, such as self-signed certificates.</param>
+    /// <param name="allowInvalid">Indicates if invalid certificates should be considered, such as
+    // self-signed certificates.</param>
     /// <param name="location">The store location to load the certificate from.</param>
-    /// <param name="configureOptions">An Action to configure the <see cref="HttpsConnectionAdapterOptions"/>.</param>
+    /// <param name="configureOptions">An Action to configure the <see
+    // cref="HttpsConnectionAdapterOptions"/>.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(
         this ListenOptions listenOptions,
@@ -190,7 +199,8 @@ public static class ListenOptionsHttpsExtensions
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="serverCertificate">The X.509 certificate.</param>
-    /// <param name="configureOptions">An Action to configure the <see cref="HttpsConnectionAdapterOptions"/>.</param>
+    /// <param name="configureOptions">An Action to configure the <see
+    // cref="HttpsConnectionAdapterOptions"/>.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(
         this ListenOptions listenOptions,
@@ -221,10 +231,12 @@ public static class ListenOptionsHttpsExtensions
     {
         ArgumentNullException.ThrowIfNull(configureOptions);
 
-        // We consider calls to `UseHttps` to be a clear expression of user intent to pull in HTTPS configuration support
+        // We consider calls to `UseHttps` to be a clear expression of user intent to pull in HTTPS
+        // configuration support
         listenOptions.KestrelServerOptions.EnableHttpsConfiguration();
 
-        // If there's a configuration, load it so that the results will be available to ApplyDefaultCertificate
+        // If there's a configuration, load it so that the results will be available to
+        // ApplyDefaultCertificate
         listenOptions.KestrelServerOptions.ConfigurationLoader?.LoadInternal();
 
         var options = new HttpsConnectionAdapterOptions();
@@ -243,8 +255,10 @@ public static class ListenOptionsHttpsExtensions
     }
 
     /// <summary>
-    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults specified via config or
-    /// <see cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
+    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults
+    // specified via config or
+    /// <see
+    // cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="httpsOptions">Options to configure HTTPS.</param>
@@ -278,8 +292,10 @@ public static class ListenOptionsHttpsExtensions
     }
 
     /// <summary>
-    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults specified via config or
-    /// <see cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
+    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults
+    // specified via config or
+    /// <see
+    // cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="serverOptionsSelectionCallback">Callback to configure HTTPS options.</param>
@@ -299,13 +315,16 @@ public static class ListenOptionsHttpsExtensions
     }
 
     /// <summary>
-    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults specified via config or
-    /// <see cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
+    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults
+    // specified via config or
+    /// <see
+    // cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="serverOptionsSelectionCallback">Callback to configure HTTPS options.</param>
     /// <param name="state">State for the <paramref name="serverOptionsSelectionCallback"/>.</param>
-    /// <param name="handshakeTimeout">Specifies the maximum amount of time allowed for the TLS/SSL handshake. This must be positive and finite.</param>
+    /// <param name="handshakeTimeout">Specifies the maximum amount of time allowed for the TLS/SSL
+    // handshake. This must be positive and finite.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(
         this ListenOptions listenOptions,
@@ -331,8 +350,10 @@ public static class ListenOptionsHttpsExtensions
     }
 
     /// <summary>
-    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults specified via config or
-    /// <see cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
+    /// Configure Kestrel to use HTTPS. This does not use default certificates or other defaults
+    // specified via config or
+    /// <see
+    // cref="KestrelServerOptions.ConfigureHttpsDefaults(Action{HttpsConnectionAdapterOptions})"/>.
     /// </summary>
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <param name="callbackOptions">Options for a per connection callback.</param>

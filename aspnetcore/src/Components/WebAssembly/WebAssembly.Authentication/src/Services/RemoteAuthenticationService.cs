@@ -13,11 +13,15 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>
-/// The default implementation for <see cref="IRemoteAuthenticationService{TRemoteAuthenticationState}"/> that uses JS interop to authenticate the user.
+/// The default implementation for <see
+// cref="IRemoteAuthenticationService{TRemoteAuthenticationState}"/> that uses JS interop to
+// authenticate the user.
 /// </summary>
-/// <typeparam name="TRemoteAuthenticationState">The state to preserve across authentication operations.</typeparam>
+/// <typeparam name="TRemoteAuthenticationState">The state to preserve across authentication
+// operations.</typeparam>
 /// <typeparam name="TAccount">The type of the <see cref="RemoteUserAccount" />.</typeparam>
-/// <typeparam name="TProviderOptions">The options to be passed down to the underlying JavaScript library handling the authentication operations.</typeparam>
+/// <typeparam name="TProviderOptions">The options to be passed down to the underlying JavaScript
+// library handling the authentication operations.</typeparam>
 public class RemoteAuthenticationService<
     [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState,
     [DynamicallyAccessedMembers(JsonSerialized)] TAccount,
@@ -49,7 +53,8 @@ public class RemoteAuthenticationService<
     protected NavigationManager Navigation { get; }
 
     /// <summary>
-    /// Gets the <see cref="AccountClaimsPrincipalFactory{TAccount}"/> to map accounts to <see cref="ClaimsPrincipal"/>.
+    /// Gets the <see cref="AccountClaimsPrincipalFactory{TAccount}"/> to map accounts to <see
+    // cref="ClaimsPrincipal"/>.
     /// </summary>
     protected AccountClaimsPrincipalFactory<TAccount> AccountClaimsPrincipalFactory { get; }
 
@@ -61,10 +66,14 @@ public class RemoteAuthenticationService<
     /// <summary>
     /// Initializes a new instance.
     /// </summary>
-    /// <param name="jsRuntime">The <see cref="IJSRuntime"/> to use for performing JavaScript interop operations.</param>
-    /// <param name="options">The options to be passed down to the underlying JavaScript library handling the authentication operations.</param>
+    /// <param name="jsRuntime">The <see cref="IJSRuntime"/> to use for performing JavaScript interop
+    // operations.</param>
+    /// <param name="options">The options to be passed down to the underlying JavaScript library
+    // handling the authentication operations.</param>
     /// <param name="navigation">The <see cref="NavigationManager"/> used to generate URLs.</param>
-    /// <param name="accountClaimsPrincipalFactory">The <see cref="AccountClaimsPrincipalFactory{TAccount}"/> used to generate the <see cref="ClaimsPrincipal"/> for the user.</param>
+    /// <param name="accountClaimsPrincipalFactory">The <see
+    // cref="AccountClaimsPrincipalFactory{TAccount}"/> used to generate the <see cref="ClaimsPrincipal"/>
+    // for the user.</param>
     [Obsolete(
         "Use the constructor RemoteAuthenticationService(IJSRuntime,IOptionsSnapshot<RemoteAuthenticationOptions<TProviderOptions>>,NavigationManager,AccountClaimsPrincipalFactory<TAccount>,ILogger<RemoteAuthenticationService<TRemoteAuthenticationState, TAccount, TProviderOptions>>) instead."
     )]
@@ -79,10 +88,14 @@ public class RemoteAuthenticationService<
     /// <summary>
     /// Initializes a new instance.
     /// </summary>
-    /// <param name="jsRuntime">The <see cref="IJSRuntime"/> to use for performing JavaScript interop operations.</param>
-    /// <param name="options">The options to be passed down to the underlying JavaScript library handling the authentication operations.</param>
+    /// <param name="jsRuntime">The <see cref="IJSRuntime"/> to use for performing JavaScript interop
+    // operations.</param>
+    /// <param name="options">The options to be passed down to the underlying JavaScript library
+    // handling the authentication operations.</param>
     /// <param name="navigation">The <see cref="NavigationManager"/> used to generate URLs.</param>
-    /// <param name="accountClaimsPrincipalFactory">The <see cref="AccountClaimsPrincipalFactory{TAccount}"/> used to generate the <see cref="ClaimsPrincipal"/> for the user.</param>
+    /// <param name="accountClaimsPrincipalFactory">The <see
+    // cref="AccountClaimsPrincipalFactory{TAccount}"/> used to generate the <see cref="ClaimsPrincipal"/>
+    // for the user.</param>
     /// <param name="logger">The logger to use for login authentication operations.</param>
     public RemoteAuthenticationService(
         IJSRuntime jsRuntime,
@@ -243,7 +256,8 @@ public class RemoteAuthenticationService<
     /// <summary>
     /// Gets the current authenticated used using JavaScript interop.
     /// </summary>
-    /// <returns>A <see cref="Task{ClaimsPrincipal}"/>that will return the current authenticated user when completes.</returns>
+    /// <returns>A <see cref="Task{ClaimsPrincipal}"/>that will return the current authenticated user
+    // when completes.</returns>
     protected internal virtual async ValueTask<ClaimsPrincipal> GetAuthenticatedUser()
     {
         await EnsureAuthService();

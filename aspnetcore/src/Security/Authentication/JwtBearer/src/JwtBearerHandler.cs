@@ -15,7 +15,8 @@ using Microsoft.Net.Http.Headers;
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
 /// <summary>
-/// An <see cref="AuthenticationHandler{TOptions}"/> that can perform JWT-bearer based authentication.
+/// An <see cref="AuthenticationHandler{TOptions}"/> that can perform JWT-bearer based
+// authentication.
 /// </summary>
 public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 {
@@ -44,8 +45,10 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
         : base(options, logger, encoder) { }
 
     /// <summary>
-    /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
-    /// If it is not provided a default instance is supplied which does nothing when the methods are called.
+    /// The handler calls methods on the events which give the application control at certain points
+    // where processing is occurring.
+    /// If it is not provided a default instance is supplied which does nothing when the methods are
+    // called.
     /// </summary>
     protected new JwtBearerEvents Events
     {
@@ -58,7 +61,8 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
         Task.FromResult<object>(new JwtBearerEvents());
 
     /// <summary>
-    /// Searches the 'Authorization' header for a 'Bearer' token. If the 'Bearer' token is found, it is validated using <see cref="TokenValidationParameters"/> set in the options.
+    /// Searches the 'Authorization' header for a 'Bearer' token. If the 'Bearer' token is found, it is
+    // validated using <see cref="TokenValidationParameters"/> set in the options.
     /// </summary>
     /// <returns></returns>
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -261,8 +265,10 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             exceptions.Add(exception);
         }
 
-        // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also request a refresh in the event.
-        // Refreshing on SecurityTokenSignatureKeyNotFound may be redundant if Last-Known-Good is enabled, it won't do much harm, most likely will be a nop.
+        // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also
+        // request a refresh in the event.
+        // Refreshing on SecurityTokenSignatureKeyNotFound may be redundant if Last-Known-Good is enabled,
+        // it won't do much harm, most likely will be a nop.
         if (
             Options.RefreshOnIssuerKeyNotFound
             && Options.ConfigurationManager != null
@@ -311,7 +317,8 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
     private static DateTime? GetSafeDateTime(DateTime dateTime)
     {
-        // Assigning DateTime.MinValue or default(DateTime) to a DateTimeOffset when in a UTC+X timezone will throw
+        // Assigning DateTime.MinValue or default(DateTime) to a DateTimeOffset when in a UTC+X timezone
+        // will throw
         // Since we don't really care about DateTime.MinValue in this case let's just set the field to null
         if (dateTime == DateTime.MinValue)
         {
@@ -329,7 +336,8 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             AuthenticateFailure = authResult?.Failure,
         };
 
-        // Avoid returning error=invalid_token if the error is not caused by an authentication failure (e.g missing token).
+        // Avoid returning error=invalid_token if the error is not caused by an authentication failure (e.g
+        // missing token).
         if (Options.IncludeErrorDetails && eventContext.AuthenticateFailure != null)
         {
             eventContext.Error = "invalid_token";
@@ -357,7 +365,8 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
         else
         {
             // https://tools.ietf.org/html/rfc6750#section-3.1
-            // WWW-Authenticate: Bearer realm="example", error="invalid_token", error_description="The access token expired"
+            // WWW-Authenticate: Bearer realm="example", error="invalid_token", error_description="The access
+            // token expired"
             var builder = new StringBuilder(Options.Challenge);
             if (Options.Challenge.IndexOf(' ') > 0)
             {

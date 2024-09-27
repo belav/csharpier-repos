@@ -206,7 +206,7 @@ namespace System.IO
                         RenamedEventArgs renamed = null;
 
                         fsw.DispatchEvents(FileAction.Added, filename, ref renamed);
-                        /* If a file has been created, then it has been written to */
+/* If a file has been created, then it has been written to */
                         fsw.DispatchEvents(FileAction.Modified, filename, ref renamed);
 
                         if (fsw.Waiting)

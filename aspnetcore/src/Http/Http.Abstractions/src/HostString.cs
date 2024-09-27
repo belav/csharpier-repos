@@ -10,7 +10,8 @@ using Microsoft.Extensions.Primitives;
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
-/// Represents the host portion of a URI can be used to construct URI's properly formatted and encoded for use in
+/// Represents the host portion of a URI can be used to construct URI's properly formatted and
+// encoded for use in
 /// HTTP headers.
 /// </summary>
 [DebuggerDisplay("{Value}")]
@@ -29,7 +30,8 @@ public readonly struct HostString : IEquatable<HostString>
     private readonly string _value;
 
     /// <summary>
-    /// Creates a new HostString without modification. The value should be Unicode rather than punycode, and may have a port.
+    /// Creates a new HostString without modification. The value should be Unicode rather than punycode,
+    // and may have a port.
     /// IPv4 and IPv6 addresses are also allowed, and also may have ports.
     /// </summary>
     /// <param name="value"></param>
@@ -41,8 +43,10 @@ public readonly struct HostString : IEquatable<HostString>
     /// <summary>
     /// Creates a new HostString from its host and port parts.
     /// </summary>
-    /// <param name="host">The value should be Unicode rather than punycode. IPv6 addresses must use square braces.</param>
-    /// <param name="port">A positive, greater than 0 value representing the port in the host string.</param>
+    /// <param name="host">The value should be Unicode rather than punycode. IPv6 addresses must use
+    // square braces.</param>
+    /// <param name="port">A positive, greater than 0 value representing the port in the host
+    // string.</param>
     public HostString(string host, int port)
     {
         ArgumentNullException.ThrowIfNull(host);
@@ -139,7 +143,8 @@ public readonly struct HostString : IEquatable<HostString>
 
     /// <summary>
     /// Returns the value properly formatted and encoded for use in a URI in a HTTP header.
-    /// Any Unicode is converted to punycode. IPv6 addresses will have brackets added if they are missing.
+    /// Any Unicode is converted to punycode. IPv6 addresses will have brackets added if they are
+    // missing.
     /// </summary>
     /// <returns>The <see cref="HostString"/> value formated for use in a URI or HTTP header.</returns>
     public string ToUriComponent()
@@ -167,7 +172,8 @@ public readonly struct HostString : IEquatable<HostString>
     /// Creates a new HostString from the given URI component.
     /// Any punycode will be converted to Unicode.
     /// </summary>
-    /// <param name="uriComponent">The URI component string to create a <see cref="HostString"/> from.</param>
+    /// <param name="uriComponent">The URI component string to create a <see cref="HostString"/>
+    // from.</param>
     /// <returns>The <see cref="HostString"/> that was created.</returns>
     public static HostString FromUriComponent(string uriComponent)
     {
@@ -241,7 +247,8 @@ public readonly struct HostString : IEquatable<HostString>
     /// "abc.example.com:443" but not "example.com:443".
     /// Matching is case insensitive.
     /// </remarks>
-    /// <returns><see langword="true" /> if <paramref name="value"/> matches any of the patterns.</returns>
+    /// <returns><see langword="true" /> if <paramref name="value"/> matches any of the
+    // patterns.</returns>
     public static bool MatchesAny(StringSegment value, IList<StringSegment> patterns)
     {
         if (value == null)
@@ -335,7 +342,8 @@ public readonly struct HostString : IEquatable<HostString>
     /// </summary>
     /// <param name="left">The left parameter.</param>
     /// <param name="right">The right parameter.</param>
-    /// <returns><see langword="true" /> if both <see cref="HostString"/>'s have the same value.</returns>
+    /// <returns><see langword="true" /> if both <see cref="HostString"/>'s have the same
+    // value.</returns>
     public static bool operator ==(HostString left, HostString right)
     {
         return left.Equals(right);
@@ -346,7 +354,8 @@ public readonly struct HostString : IEquatable<HostString>
     /// </summary>
     /// <param name="left">The left parameter.</param>
     /// <param name="right">The right parameter.</param>
-    /// <returns><see langword="true" /> if both <see cref="HostString"/>'s values are not equal.</returns>
+    /// <returns><see langword="true" /> if both <see cref="HostString"/>'s values are not
+    // equal.</returns>
     public static bool operator !=(HostString left, HostString right)
     {
         return !left.Equals(right);
@@ -356,8 +365,10 @@ public readonly struct HostString : IEquatable<HostString>
     /// Parses the current value. IPv6 addresses will have brackets added if they are missing.
     /// </summary>
     /// <param name="value">The value to get the parts of.</param>
-    /// <param name="host">The portion of the <paramref name="value"/> which represents the host.</param>
-    /// <param name="port">The portion of the <paramref name="value"/> which represents the port.</param>
+    /// <param name="host">The portion of the <paramref name="value"/> which represents the
+    // host.</param>
+    /// <param name="port">The portion of the <paramref name="value"/> which represents the
+    // port.</param>
     private static void GetParts(
         StringSegment value,
         out StringSegment host,

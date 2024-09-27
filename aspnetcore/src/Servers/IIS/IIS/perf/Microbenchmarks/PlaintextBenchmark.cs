@@ -45,7 +45,8 @@ public class PlaintextBenchmark
         await _client.GetAsync("/plaintext");
     }
 
-    // Copied from https://github.com/aspnet/benchmarks/blob/dev/src/Benchmarks/Middleware/PlaintextMiddleware.cs
+    // Copied from
+    // https://github.com/aspnet/benchmarks/blob/dev/src/Benchmarks/Middleware/PlaintextMiddleware.cs
     public class PlaintextMiddleware
     {
         private static readonly PathString _path = new PathString("/plaintext");

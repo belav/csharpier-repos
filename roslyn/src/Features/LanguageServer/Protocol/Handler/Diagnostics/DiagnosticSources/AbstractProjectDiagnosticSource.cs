@@ -53,7 +53,8 @@ internal abstract class AbstractProjectDiagnosticSource(Project project) : IDiag
     ) : AbstractProjectDiagnosticSource(project)
     {
         /// <summary>
-        /// This is a normal project source that represents live/fresh diagnostics that should supersede everything else.
+        /// This is a normal project source that represents live/fresh diagnostics that should supersede
+        // everything else.
         /// </summary>
         public override bool IsLiveSource() => true;
 
@@ -64,8 +65,10 @@ internal abstract class AbstractProjectDiagnosticSource(Project project) : IDiag
         )
         {
             // Directly use the IDiagnosticAnalyzerService.  This will use the actual snapshots
-            // we're passing in.  If information is already cached for that snapshot, it will be returned.  Otherwise,
-            // it will be computed on demand.  Because it is always accurate as per this snapshot, all spans are correct
+            // we're passing in.  If information is already cached for that snapshot, it will be returned.
+            // Otherwise,
+            // it will be computed on demand.  Because it is always accurate as per this snapshot, all spans are
+            // correct
             // and do not need to be adjusted.
             return await diagnosticAnalyzerService
                 .GetProjectDiagnosticsForIdsAsync(
@@ -87,8 +90,10 @@ internal abstract class AbstractProjectDiagnosticSource(Project project) : IDiag
     ) : AbstractProjectDiagnosticSource(project)
     {
         /// <summary>
-        /// This source provides the results of the *last* explicitly kicked off "run code analysis" command from the
-        /// user.  As such, it is definitely not "live" data, and it should be overridden by any subsequent fresh data
+        /// This source provides the results of the *last* explicitly kicked off "run code analysis" command
+        // from the
+        /// user.  As such, it is definitely not "live" data, and it should be overridden by any subsequent
+        // fresh data
         /// that has been produced.
         /// </summary>
         public override bool IsLiveSource() => false;

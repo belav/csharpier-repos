@@ -37,7 +37,8 @@ namespace System.Web
             CachedPathData.OnCacheItemRemoved
         );
 
-        // initialize the URL metadata cache expiration here, just in case there's an issue with HttpRuntime.HostingInit
+        // initialize the URL metadata cache expiration here, just in case there's an issue with
+        // HttpRuntime.HostingInit
         private static TimeSpan s_urlMetadataSlidingExpiration =
             HostingEnvironmentSection.DefaultUrlMetadataSlidingExpiration;
         private static bool s_doNotCacheUrlMetadata = false;
@@ -187,7 +188,8 @@ namespace System.Web
             return GetConfigPathData(configPath);
         }
 
-        // Dev10 862204: AppDomain does not restart when the application's web.config is touched 2 minutes after the last request
+        // Dev10 862204: AppDomain does not restart when the application's web.config is touched 2 minutes
+        // after the last request
         static private bool IsCachedPathDataRemovable(string configPath)
         {
             // have we initialized yet?
@@ -218,7 +220,8 @@ namespace System.Web
             bool exists = false;
             bool isDirectory = false;
             bool isRemovable = IsCachedPathDataRemovable(configPath);
-            // if the sliding expiration is zero, we won't cache it unless it is a configPath for root web.config or above
+            // if the sliding expiration is zero, we won't cache it unless it is a configPath for root
+            // web.config or above
             if (isRemovable && DoNotCacheUrlMetadata)
             {
                 string pathSiteID = null;
@@ -691,7 +694,8 @@ namespace System.Web
             }
         }
 
-        // Ensure that Request.PhysicalPath is valid (canonical, not too long, and contains valid characters).
+        // Ensure that Request.PhysicalPath is valid (canonical, not too long, and contains valid
+        // characters).
         // The work is done by CheckSuspiciousPhysicalPath, but as a perf optimization, we can compare
         // Request.PhysicalPath with the cached path result.  The cached path result is validated before
         // it is cached.  As long as the cached path result is identical to Request.PhysicalPath, we don't

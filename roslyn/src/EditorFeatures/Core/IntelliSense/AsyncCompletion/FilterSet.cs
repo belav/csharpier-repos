@@ -19,9 +19,12 @@ using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {
     /// <summary>
-    /// Provides an efficient way to compute a set of completion filters associated with a collection of completion items.
-    /// Presence of expander and filter in the set have different meanings. Set contains a filter means the filter is
-    /// available but unselected, whereas it means available and selected for an expander. Note that even though VS supports
+    /// Provides an efficient way to compute a set of completion filters associated with a collection of
+    // completion items.
+    /// Presence of expander and filter in the set have different meanings. Set contains a filter means
+    // the filter is
+    /// available but unselected, whereas it means available and selected for an expander. Note that
+    // even though VS supports
     /// having multiple expanders, we only support one.
     /// </summary>
     internal sealed class FilterSet(bool supportExpander)
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             var previousMask = 0;
 
-            // Filters will show up in the VS completion list in the same order. 'a' is used as access key for expander button.
+            // Filters will show up in the VS completion list in the same order. 'a' is used as access key for
+            // expander button.
             NamespaceFilter = CreateCompletionFilterAndAddToBuilder(
                 FeaturesResources.Namespaces,
                 'n',

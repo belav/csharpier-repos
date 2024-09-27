@@ -195,8 +195,10 @@ namespace System.Linq.Expressions.Interpreter
     /// It pops values (arguments) from the evaluation stack that the expression tree nodes in between
     /// the goto expression and the target label node pushed and not consumed yet.
     /// A goto expression can jump into a node that evaluates arguments only if it carries
-    /// a value and jumps right after the first argument (the carried value will be used as the first argument).
-    /// Goto can jump into an arbitrary child of a BlockExpression since the block doesn't accumulate values
+    /// a value and jumps right after the first argument (the carried value will be used as the first
+    // argument).
+    /// Goto can jump into an arbitrary child of a BlockExpression since the block doesn't accumulate
+    // values
     /// on evaluation stack as its child expressions are being evaluated.
     ///
     /// Goto needs to execute any finally blocks on the way to the target label.
@@ -206,10 +208,13 @@ namespace System.Linq.Expressions.Interpreter
     ///     L: ...
     /// }
     /// </example>
-    /// The goto expression here jumps to label L while having 4 items on evaluation stack (1, 2, 3 and 4).
+    /// The goto expression here jumps to label L while having 4 items on evaluation stack (1, 2, 3 and
+    // 4).
     /// The jump needs to execute both finally blocks, the first one on stack level 4 the
-    /// second one on stack level 2. So, it needs to jump the first finally block, pop 2 items from the stack,
-    /// run second finally block and pop another 2 items from the stack and set instruction pointer to label L.
+    /// second one on stack level 2. So, it needs to jump the first finally block, pop 2 items from the
+    // stack,
+    /// run second finally block and pop another 2 items from the stack and set instruction pointer to
+    // label L.
     ///
     /// Goto also needs to rethrow ThreadAbortException iff it jumps out of a catch handler and
     /// the current thread is in "abort requested" state.
@@ -228,9 +233,12 @@ namespace System.Linq.Expressions.Interpreter
         private readonly bool _hasValue;
         private readonly bool _labelTargetGetsValue;
 
-        // Should technically return 1 for ConsumedContinuations and ProducedContinuations for gotos that target a label whose continuation depth
-        // is different from the current continuation depth. This is because we will consume one continuation from the _continuations
-        // and at meantime produce a new _pendingContinuation. However, in case of forward gotos, we don't not know that is the
+        // Should technically return 1 for ConsumedContinuations and ProducedContinuations for gotos that
+        // target a label whose continuation depth
+        // is different from the current continuation depth. This is because we will consume one
+        // continuation from the _continuations
+        // and at meantime produce a new _pendingContinuation. However, in case of forward gotos, we don't
+        // not know that is the
         // case until the label is emitted. By then the consumed and produced stack information is useless.
         // The important thing here is that the stack balance is 0.
 
@@ -428,10 +436,13 @@ namespace System.Linq.Expressions.Interpreter
                     // We get to the finally block in two paths:
                     //  1. Jump from the try/catch blocks. This includes two sub-routes:
                     //        a. 'Goto' instruction in the middle of try/catch block
-                    //        b. try/catch block runs to its end. Then the 'Goto(end)' will be trigger to jump out of the try/catch block
+                    //        b. try/catch block runs to its end. Then the 'Goto(end)' will be trigger to jump out of
+                    // the try/catch block
                     //  2. Exception thrown from the try/catch blocks
-                    // In the first path, the continuation mechanism works and frame.InstructionIndex will be updated to point to the first instruction of the finally block
-                    // In the second path, the continuation mechanism is not involved and frame.InstructionIndex is not updated
+                    // In the first path, the continuation mechanism works and frame.InstructionIndex will be updated to
+                    // point to the first instruction of the finally block
+                    // In the second path, the continuation mechanism is not involved and frame.InstructionIndex is not
+                    // updated
 #if DEBUG
                     bool isFromJump = frame.IsJumpHappened();
                     Debug.Assert(
@@ -499,8 +510,10 @@ namespace System.Linq.Expressions.Interpreter
             Instruction[] instructions = frame.Interpreter.Instructions.Instructions;
 
             // C# 6 has no direct support for fault blocks, but they can be faked or coerced out of the compiler
-            // in several ways. Catch-and-rethrow can work in specific cases, but not generally as the double-pass
-            // will not work correctly with filters higher up the call stack. Iterators can be used to produce real
+            // in several ways. Catch-and-rethrow can work in specific cases, but not generally as the
+            // double-pass
+            // will not work correctly with filters higher up the call stack. Iterators can be used to produce
+            // real
             // fault blocks, but it depends on an implementation detail rather than a guarantee, and is rather
             // indirect. This leaves using a finally block and not doing anything in it if the body ran to
             // completion, which is the approach used here.
@@ -576,9 +589,11 @@ namespace System.Linq.Expressions.Interpreter
 
         public override int Run(InterpretedFrame frame)
         {
-            // If _pendingContinuation == -1 then we were getting into the finally block because an exception was thrown
+            // If _pendingContinuation == -1 then we were getting into the finally block because an exception
+            // was thrown
             //      in this case we need to set the stack depth
-            // Else we were getting into this finally block from a 'Goto' jump, and the stack depth is already set properly
+            // Else we were getting into this finally block from a 'Goto' jump, and the stack depth is already
+            // set properly
             if (!frame.IsJumpHappened())
             {
                 frame.SetStackDepth(GetLabel(frame).StackDepth);
@@ -606,8 +621,10 @@ namespace System.Linq.Expressions.Interpreter
         {
             frame.PopPendingContinuation();
 
-            // If _pendingContinuation == -1 then we were getting into the finally block because an exception was thrown
-            // In this case we just return 1, and the real instruction index will be calculated by GotoHandler later
+            // If _pendingContinuation == -1 then we were getting into the finally block because an exception
+            // was thrown
+            // In this case we just return 1, and the real instruction index will be calculated by GotoHandler
+            // later
             if (!frame.IsJumpHappened())
             {
                 return 1;
@@ -726,10 +743,12 @@ namespace System.Linq.Expressions.Interpreter
 
         public override string InstructionName => "EnterExceptionHandler";
 
-        // If an exception is throws in try-body the expression result of try-body is not evaluated and loaded to the stack.
+        // If an exception is throws in try-body the expression result of try-body is not evaluated and
+        // loaded to the stack.
         // So the stack doesn't contain the try-body's value when we start executing the handler.
         // However, while emitting instructions try block falls thru the catch block with a value on stack.
-        // We need to declare it consumed so that the stack state upon entry to the handler corresponds to the real
+        // We need to declare it consumed so that the stack state upon entry to the handler corresponds to
+        // the real
         // stack depth after throw jumped to this catch block.
         public override int ConsumedStack => _hasValue ? 1 : 0;
 
@@ -784,7 +803,8 @@ namespace System.Linq.Expressions.Interpreter
 
         public override int Run(InterpretedFrame frame)
         {
-            // CLR rethrows ThreadAbortException when leaving catch handler if abort is requested on the current thread.
+            // CLR rethrows ThreadAbortException when leaving catch handler if abort is requested on the current
+            // thread.
 #if FEATURE_THREAD_ABORT
             Interpreter.AbortThreadIfRequested(frame, _labelIndex);
 #endif

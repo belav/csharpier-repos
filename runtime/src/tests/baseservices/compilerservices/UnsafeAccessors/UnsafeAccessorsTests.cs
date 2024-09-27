@@ -53,7 +53,8 @@ public static unsafe class UnsafeAccessorsTests
 
         // The "init" is important to have here - custom modifier test.
         // The signature of set_Prop is
-        // instance void modreq([System.Runtime]System.Runtime.CompilerServices.IsExternalInit) set_Prop ( string 'value')
+        // instance void modreq([System.Runtime]System.Runtime.CompilerServices.IsExternalInit) set_Prop (
+        // string 'value')
         private string Prop { get; init; }
 
         // Used to validate ambiguity is handled via custom modifiers.
@@ -672,7 +673,8 @@ public static unsafe class UnsafeAccessorsTests
         [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = DoesNotExist)]
         static extern ref string StaticFieldNotFound(UserDataClass d);
 
-        // Pointers generally degrade to `void*`, but that isn't true for UnsafeAccessor signature validation.
+        // Pointers generally degrade to `void*`, but that isn't true for UnsafeAccessor signature
+        // validation.
         [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = UserDataClass.MethodPointerName)]
         static extern string CallPointerMethod(
             UserDataClass d,

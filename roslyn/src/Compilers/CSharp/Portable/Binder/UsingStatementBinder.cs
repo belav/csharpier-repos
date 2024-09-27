@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     declarationSyntax.Variables.Count
                 );
 
-                // gather expression-declared variables from invalid array dimensions. eg. using(int[x is var y] z = new int[0])
+                // gather expression-declared variables from invalid array dimensions. eg. using(int[x is var y] z =
+                // new int[0])
                 declarationSyntax.Type.VisitRankSpecifiers(
                     (rankSpecifier, args) =>
                     {
@@ -244,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // This is not awesome, but its factored.
-            // In the future it might be better to have a separate shared type that we add the info to, and have the callers create the appropriate bound nodes from it
+            // In the future it might be better to have a separate shared type that we add the info to, and have
+            // the callers create the appropriate bound nodes from it
             if (isUsingDeclaration)
             {
                 return new BoundUsingLocalDeclarations(
@@ -315,7 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeSymbol? type = fromExpression ? expressionOpt!.Type : declarationTypeOpt;
 
                 // If this is a ref struct, or we're in a valid asynchronous using, try binding via pattern.
-                // We won't need to try and bind a second time if it fails, as async dispose can't be pattern based (ref structs are not allowed in async methods)
+                // We won't need to try and bind a second time if it fails, as async dispose can't be pattern based
+                // (ref structs are not allowed in async methods)
                 if (type is object && (type.IsRefLikeType || hasAwait))
                 {
                     BoundExpression? receiver = fromExpression
@@ -351,9 +354,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ImmutableArray<int> argsToParams = default;
                         bool expanded = disposeMethod.HasParamsParameter();
                         originalBinder.BindDefaultArgumentsAndParamsArray(
-                            // If this is a using statement, then we want to use the whole `using (expr) { }` as the argument location. These arguments
-                            // will be represented in the IOperation tree and the "correct" node for them, given that they are an implicit invocation
-                            // at the end of the using statement, is on the whole using statement, not on the current expression.
+                            // If this is a using statement, then we want to use the whole `using (expr) { }` as the argument
+                            // location. These arguments
+                            // will be represented in the IOperation tree and the "correct" node for them, given that they are
+                            // an implicit invocation
+                            // at the end of the using statement, is on the whole using statement, not on the current
+                            // expression.
                             usingBinderOpt?._syntax ?? syntax,
                             disposeMethod.Parameters,
                             argumentsBuilder,

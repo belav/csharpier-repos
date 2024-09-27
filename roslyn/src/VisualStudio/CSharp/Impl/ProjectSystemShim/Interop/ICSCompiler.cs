@@ -21,8 +21,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         ICSNameTable GetNameTable();
 
         /// <summary>
-        /// Shutdown the compiler. This is called by whoever is "in charge" of the compiler (usually the host itself)
-        /// when it is done with it.  It is used to relieve circular references between the compiler and its host.
+        /// Shutdown the compiler. This is called by whoever is "in charge" of the compiler (usually the
+        // host itself)
+        /// when it is done with it.  It is used to relieve circular references between the compiler and its
+        // host.
         /// </summary>
         void Shutdown();
 
@@ -42,8 +44,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         [return: MarshalAs(UnmanagedType.LPWStr)]
         string GetOutputFileName();
 
-        // WARNING: the next two methods are complicated signatures, and so these two functions (CreateParser and
-        // CreateLanguageAnalysisEngine) are declared here to hold the vtable slot only. If they are needed, the
+        // WARNING: the next two methods are complicated signatures, and so these two functions
+        // (CreateParser and
+        // CreateLanguageAnalysisEngine) are declared here to hold the vtable slot only. If they are needed,
+        // the
         // declarations will have to be filled out.
 
         [return: MarshalAs(UnmanagedType.IUnknown)]

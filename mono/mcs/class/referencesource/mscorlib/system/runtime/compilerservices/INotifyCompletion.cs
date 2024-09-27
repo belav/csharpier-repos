@@ -3,13 +3,16 @@
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
 // ==--==
+//
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 //
 // INotifyCompletion.cs
 //
 // <OWNER>stoub</OWNER>
 //
-// Interfaces used to represent instances that notify listeners of their completion via continuations.
+// Interfaces used to represent instances that notify listeners of their completion via
+// continuations.
+//
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 using System;
@@ -24,7 +27,8 @@ namespace System.Runtime.CompilerServices
     {
         /// <summary>Schedules the continuation action to be invoked when the instance completes.</summary>
         /// <param name="continuation">The action to invoke when the operation completes.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is null (Nothing in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is
+        // null (Nothing in Visual Basic).</exception>
         void OnCompleted(Action continuation);
     }
 
@@ -35,8 +39,10 @@ namespace System.Runtime.CompilerServices
     {
         /// <summary>Schedules the continuation action to be invoked when the instance completes.</summary>
         /// <param name="continuation">The action to invoke when the operation completes.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is null (Nothing in Visual Basic).</exception>
-        /// <remarks>Unlike OnCompleted, UnsafeOnCompleted need not propagate ExecutionContext information.</remarks>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is
+        // null (Nothing in Visual Basic).</exception>
+        /// <remarks>Unlike OnCompleted, UnsafeOnCompleted need not propagate ExecutionContext
+        // information.</remarks>
         [SecurityCritical]
         void UnsafeOnCompleted(Action continuation);
     }

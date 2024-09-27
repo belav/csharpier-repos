@@ -246,8 +246,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     )
             );
 
-            // !!IMPORTANT!!: This test verifies the exact match of the entire output of the command (not a substring!)
-            // This is important as the output of --list-runtimes is considered machine readable and thus must not change even in a minor way (unintentionally)
+            // !!IMPORTANT!!: This test verifies the exact match of the entire output of the command (not a
+            // substring!)
+            // This is important as the output of --list-runtimes is considered machine readable and thus must
+            // not change even in a minor way (unintentionally)
             RunTest(
                     new TestSettings().WithCommandLine("--list-runtimes"),
                     multiLevelLookup,

@@ -28,6 +28,7 @@ public abstract class TemplatedModelGenerator : ModelCodeGenerator
     ///     Checks whether the templates required for this generator are present.
     /// </summary>
     /// <param name="projectDir">The root project directory.</param>
-    /// <returns><see langword="true" /> if the templates are present; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the templates are present; otherwise, <see langword="false"
+    // />.</returns>
     public abstract bool HasTemplates(string projectDir);
 }

@@ -307,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             if (member.GetSymbolType()?.IsValueType ?? false)
             {
-                // There is no reason to generate the bulkier syntax of EqualityComparer<>.Default.GetHashCode for value
+                // There is no reason to generate the bulkier syntax of EqualityComparer<>.Default.GetHashCode for
+                // value
                 // types. No null check is necessary, and there's no performance advantage on .NET Core for using
                 // EqualityComparer.GetHashCode instead of calling GetHashCode directly. On .NET Framework, using
                 // EqualityComparer.GetHashCode on value types actually performs more poorly.

@@ -251,13 +251,16 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             if (reader.IsStartElement(trustConstants.Elements.Claims, trustConstants.NamespaceURI))
             {
-                // According to trust specification, Trust13 requires Claims\@Dialect attribute but not TrustFeb2005.
-                // Even for Trust13, the Dialect Uri is open.  After research, "http://schemas.xmlsoap.org/ws/2005/05/identity"
+                // According to trust specification, Trust13 requires Claims\@Dialect attribute but not
+                // TrustFeb2005.
+                // Even for Trust13, the Dialect Uri is open.  After research,
+                // "http://schemas.xmlsoap.org/ws/2005/05/identity"
                 // seems to be the most common and IDFx will use that if none defined.
                 // Our implementation is, for reading/writing, we will be looking specifically for
                 // "http://docs.oasis-open.org/wsfed/authorization/200706/authclaims" (as defined in ws-federation)
                 // and fallback to "http://schemas.xmlsoap.org/ws/2005/05/identity" for others.
-                // This would also tolerate WCF Orcas which send us "http://schemas.xmlsoap.org/ws/2005/05/IdentityClaims"
+                // This would also tolerate WCF Orcas which send us
+                // "http://schemas.xmlsoap.org/ws/2005/05/IdentityClaims"
                 // as dialect.
                 rst.Claims.Dialect = reader.GetAttribute(trustConstants.Attributes.Dialect);
                 if (
@@ -444,7 +447,8 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if (!reader.IsEmptyElement)
                 {
-                    // Check that we have the SecurityTokenHandlerCollection that we need for OnBehalfOf. If not, then fail now.
+                    // Check that we have the SecurityTokenHandlerCollection that we need for OnBehalfOf. If not, then
+                    // fail now.
                     if (
                         context.SecurityTokenHandlerCollectionManager.ContainsKey(
                             SecurityTokenHandlerCollectionManager.Usage.OnBehalfOf
@@ -485,7 +489,8 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if (!reader.IsEmptyElement)
                 {
-                    // Check that we have the SecurityTokenHandlerCollection that we need for ActAs. If not, then fail now.
+                    // Check that we have the SecurityTokenHandlerCollection that we need for ActAs. If not, then fail
+                    // now.
                     if (
                         context.SecurityTokenHandlerCollectionManager.ContainsKey(
                             SecurityTokenHandlerCollectionManager.Usage.ActAs
@@ -584,7 +589,8 @@ namespace System.IdentityModel.Protocols.WSTrust
                     }
 
                     // Ensure that the provided UseKey SKI can be resolved by the UseKeyTokenResolver.
-                    // This provides proof of possession because the keys in that resolver are ones that the client has used for signature.
+                    // This provides proof of possession because the keys in that resolver are ones that the client has
+                    // used for signature.
                     SecurityToken resolvedUseKeyToken;
 
                     if (

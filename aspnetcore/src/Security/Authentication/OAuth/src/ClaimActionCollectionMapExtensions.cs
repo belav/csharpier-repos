@@ -51,7 +51,8 @@ public static class ClaimActionCollectionMapExtensions
     }
 
     /// <summary>
-    /// Select a second level value from the json user data with the given top level key name and second level sub key name and add it as a Claim.
+    /// Select a second level value from the json user data with the given top level key name and second
+    // level sub key name and add it as a Claim.
     /// This no-ops if the keys are not found or the value is empty.
     /// </summary>
     /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
@@ -71,7 +72,8 @@ public static class ClaimActionCollectionMapExtensions
     }
 
     /// <summary>
-    /// Select a second level value from the json user data with the given top level key name and second level sub key name and add it as a Claim.
+    /// Select a second level value from the json user data with the given top level key name and second
+    // level sub key name and add it as a Claim.
     /// This no-ops if the keys are not found or the value is empty.
     /// </summary>
     /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
@@ -98,7 +100,8 @@ public static class ClaimActionCollectionMapExtensions
     /// </summary>
     /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
     /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
-    /// <param name="resolver">The Func that will be called to select value from the given json user data.</param>
+    /// <param name="resolver">The Func that will be called to select value from the given json user
+    // data.</param>
     public static void MapCustomJson(
         this ClaimActionCollection collection,
         string claimType,
@@ -117,7 +120,8 @@ public static class ClaimActionCollectionMapExtensions
     /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
     /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
     /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
-    /// <param name="resolver">The Func that will be called to select value from the given json user data.</param>
+    /// <param name="resolver">The Func that will be called to select value from the given json user
+    // data.</param>
     public static void MapCustomJson(
         this ClaimActionCollection collection,
         string claimType,
@@ -131,7 +135,8 @@ public static class ClaimActionCollectionMapExtensions
     }
 
     /// <summary>
-    /// Clears any current ClaimsActions and maps all values from the json user data as claims, excluding duplicates.
+    /// Clears any current ClaimsActions and maps all values from the json user data as claims,
+    // excluding duplicates.
     /// </summary>
     /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
     public static void MapAll(this ClaimActionCollection collection)
@@ -143,7 +148,8 @@ public static class ClaimActionCollectionMapExtensions
     }
 
     /// <summary>
-    /// Clears any current ClaimsActions and maps all values from the json user data as claims, excluding the specified types.
+    /// Clears any current ClaimsActions and maps all values from the json user data as claims,
+    // excluding the specified types.
     /// </summary>
     /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
     /// <param name="exclusions">The types to exclude.</param>

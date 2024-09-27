@@ -13,13 +13,17 @@ namespace System.IO.Compression
     }
 
     /// <summary>
-    /// The upper byte of the "version made by" flag in the central directory header of a zip file represents the
-    /// OS of the system on which the zip was created. Any zip created with an OS byte not equal to Windows (0)
+    /// The upper byte of the "version made by" flag in the central directory header of a zip file
+    // represents the
+    /// OS of the system on which the zip was created. Any zip created with an OS byte not equal to
+    // Windows (0)
     /// or Unix (3) will be treated as equal to the current OS.
     /// </summary>
     /// <remarks>
-    /// The value of 0 more specifically corresponds to the FAT file system while NTFS is assigned a higher value. However
-    /// for historical and compatibility reasons, Windows is always assigned a 0 value regardless of file system.
+    /// The value of 0 more specifically corresponds to the FAT file system while NTFS is assigned a
+    // higher value. However
+    /// for historical and compatibility reasons, Windows is always assigned a 0 value regardless of
+    // file system.
     /// </remarks>
     internal enum ZipVersionMadeByPlatform : byte
     {

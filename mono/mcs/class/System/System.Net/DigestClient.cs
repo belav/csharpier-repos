@@ -11,6 +11,7 @@
 // (c) 2003 Novell, Inc. (http://www.novell.com)
 //
 // Original (server-side) source code available at
+//
 // http://www.rassoc.com/gregr/weblog/stories/2002/07/09/webServicesSecurityHttpDigestAuthenticationWithoutActiveDirectory.html
 //
 

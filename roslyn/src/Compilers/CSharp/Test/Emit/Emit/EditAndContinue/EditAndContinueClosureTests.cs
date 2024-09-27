@@ -3549,8 +3549,10 @@ class C
             var reader1 = md1.Reader;
 
             // 3 method updates:
-            // Note that even if the change is in the inner lambda such a change will usually impact sequence point
-            // spans in outer lambda and the method body. So although the IL doesn't change we usually need to update the outer methods.
+            // Note that even if the change is in the inner lambda such a change will usually impact sequence
+            // point
+            // spans in outer lambda and the method body. So although the IL doesn't change we usually need to
+            // update the outer methods.
             CheckEncLogDefinitions(
                 reader1,
                 Row(2, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
@@ -5995,7 +5997,8 @@ class C
 
             var generation0 = CreateInitialBaseline(compilation0, md0, EmptyLocalsProvider);
 
-            // This update emulates "Reloadable" type behavior - a new type is generated instead of updating the existing one.
+            // This update emulates "Reloadable" type behavior - a new type is generated instead of updating the
+            // existing one.
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Replace, null, c1))

@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             if (textChangeOpt is not TextChange textChange)
                 return false;
 
-            // Looks good.  First, let the quote get added by the normal type char handlers.  Then make our text change.
+            // Looks good.  First, let the quote get added by the normal type char handlers.  Then make our text
+            // change.
             // We do this in two steps so that undo can work properly.
             nextCommandHandler();
 
@@ -90,8 +91,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
         }
 
         /// <summary>
-        /// When typing <c>"</c> given a normal string like <c>""$$</c>, then update the text to be <c>"""$$"""</c>.
-        /// Note that this puts the user in the position where TryGrowInitialEmptyRawString can now take effect.
+        /// When typing <c>"</c> given a normal string like <c>""$$</c>, then update the text to be
+        // <c>"""$$"""</c>.
+        /// Note that this puts the user in the position where TryGrowInitialEmptyRawString can now take
+        // effect.
         /// </summary>
         private static TextChange? TryGenerateInitialEmptyRawString(
             SnapshotPoint caret,
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             var snapshot = caret.Snapshot;
             var position = caret.Position;
 
-            // if we have ""$$"   then typing `"` here should not be handled by this path but by TryGrowInitialEmptyRawString
+            // if we have ""$$"   then typing `"` here should not be handled by this path but by
+            // TryGrowInitialEmptyRawString
             if (position + 1 < snapshot.Length && snapshot[position + 1] == '"')
                 return null;
 
@@ -143,9 +147,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
         }
 
         /// <summary>
-        /// When typing <c>"</c> given a raw string like <c>"""$$"""</c> (or a similar multiline form), then update the
-        /// text to be: <c>""""$$""""</c>.  i.e. grow both the start and end delimiters to keep the string properly
-        /// balanced.  This differs from TryGrowRawStringDelimeters in that the language will consider that initial
+        /// When typing <c>"</c> given a raw string like <c>"""$$"""</c> (or a similar multiline form), then
+        // update the
+        /// text to be: <c>""""$$""""</c>.  i.e. grow both the start and end delimiters to keep the string
+        // properly
+        /// balanced.  This differs from TryGrowRawStringDelimeters in that the language will consider that
+        // initial
         /// <c>""""""</c> text to be a single delimeter, while we want to treat it as two.
         /// </summary>
         private static TextChange? TryGrowInitialEmptyRawString(
@@ -206,8 +213,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
         }
 
         /// <summary>
-        /// When typing <c>"</c> given a raw string like <c>"""$$ goo bar """</c> (or a similar multiline form), then
-        /// update the text to be: <c>"""" goo bar """"</c>.  i.e. grow both the start and end delimiters to keep the
+        /// When typing <c>"</c> given a raw string like <c>"""$$ goo bar """</c> (or a similar multiline
+        // form), then
+        /// update the text to be: <c>"""" goo bar """"</c>.  i.e. grow both the start and end delimiters to
+        // keep the
         /// string properly balanced.
         /// </summary>
         private static TextChange? TryGrowRawStringDelimeters(
@@ -218,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             var snapshot = caret.Snapshot;
             var position = caret.Position;
 
-            // if we have """$$"   then typing `"` here should not grow the start/end quotes.  we only want to grow them
+            // if we have """$$"   then typing `"` here should not grow the start/end quotes.  we only want to
+            // grow them
             // if the user is at the end of the start delimeter.
             if (position < snapshot.Length && snapshot[position] == '"')
                 return null;

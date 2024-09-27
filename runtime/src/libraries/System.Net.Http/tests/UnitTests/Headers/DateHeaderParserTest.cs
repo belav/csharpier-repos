@@ -19,7 +19,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            // We don't need to validate all possible date values, since they're already tested in HttpRuleParserTest.
+            // We don't need to validate all possible date values, since they're already tested in
+            // HttpRuleParserTest.
             // Just make sure the parser calls HttpRuleParser methods correctly.
             CheckValidParsedValue(
                 "Tue, 15 Nov 1994 08:12:31 GMT",

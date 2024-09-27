@@ -111,11 +111,12 @@ namespace Mono.Security.X509
         public void Clear()
         {
             /*
-             * Both _certificates and _crls extend CollectionBase, whose Clear() method calls OnClear() and
-             * OnClearComplete(), which should be overridden in derivative classes. So we should not worry about
-             * other threads that might be holding references to _certificates or _crls. They should be smart enough
-             * to handle this gracefully.  And if not, it's their own fault.
-             */
+            * Both _certificates and _crls extend CollectionBase, whose Clear() method calls OnClear() and
+            * OnClearComplete(), which should be overridden in derivative classes. So we should not worry about
+            * other threads that might be holding references to _certificates or _crls. They should be smart
+            enough
+            * to handle this gracefully.  And if not, it's their own fault.
+            */
             ClearCertificates();
             ClearCrls();
         }

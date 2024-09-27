@@ -382,7 +382,8 @@ public class ViewDataDictionaryOfTModelTest
         exception = Assert.Throws<InvalidOperationException>(() => viewData3.Model = 25);
         Assert.Equal(expectedMessage, exception.Message);
 
-        // Non-generic ViewDataDictionary maintains type restrictions of source with 1-parameter constructor.
+        // Non-generic ViewDataDictionary maintains type restrictions of source with 1-parameter
+        // constructor.
         exception = Assert.Throws<InvalidOperationException>(() => viewData4.Model = 26);
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -410,7 +411,8 @@ public class ViewDataDictionaryOfTModelTest
         exception = Assert.Throws<InvalidOperationException>(() => viewData3.Model = null);
         Assert.Equal(expectedMessage, exception.Message);
 
-        // Non-generic ViewDataDictionary maintains type restrictions of source with 1-parameter constructor.
+        // Non-generic ViewDataDictionary maintains type restrictions of source with 1-parameter
+        // constructor.
         exception = Assert.Throws<InvalidOperationException>(() => viewData4.Model = null);
         Assert.Equal(expectedMessage, exception.Message);
     }

@@ -43,7 +43,8 @@ namespace System.Diagnostics
             HandlerBase.CheckForUnrecognizedAttributes(section);
 
             // Since the tracing and switch code lives in System.Dll and config is in System.Configuration.dll
-            // the settings just go into a hashtable to communicate to the values to the diagnostics code in System.dll
+            // the settings just go into a hashtable to communicate to the values to the diagnostics code in
+            // System.dll
             Hashtable parentConfig = (Hashtable)parent;
             Hashtable config;
             if (parentConfig == null)

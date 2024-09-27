@@ -4,7 +4,8 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.NoKeptCtor.OverrideRemoval
 {
     [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
-    // The order is important - since the bug this uncovers depends on order of processing of assemblies in the sweep step
+    // The order is important - since the bug this uncovers depends on order of processing of assemblies
+    // in the sweep step
     [SetupCompileBefore(
         "library.dll",
         new[] { "Dependencies/OverrideOfAbstractIsKeptNonEmptyLibrary.cs" }

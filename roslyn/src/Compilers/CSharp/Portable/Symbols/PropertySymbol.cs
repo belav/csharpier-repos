@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal abstract partial class PropertySymbol : Symbol
     {
         /// <summary>
-        /// As a performance optimization, cache parameter types and refkinds - overload resolution uses them a lot.
+        /// As a performance optimization, cache parameter types and refkinds - overload resolution uses
+        // them a lot.
         /// </summary>
         private ParameterSignature _lazyParameterSignature;
 
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
-        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined in
+        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined
+        // in
         /// source or metadata.
         /// </summary>
         public new virtual PropertySymbol OriginalDefinition
@@ -135,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is false if the symbol is static.
+        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is
+        // false if the symbol is static.
         /// </summary>
         public virtual bool RequiresInstanceReceiver => !IsStatic;
 
@@ -143,11 +146,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns whether the property is really an indexer.
         /// </summary>
         /// <remarks>
-        /// In source, we regard a property as an indexer if it is declared with an IndexerDeclarationSyntax.
-        /// From metadata, we regard a property if it has parameters and is a default member of the containing
+        /// In source, we regard a property as an indexer if it is declared with an
+        // IndexerDeclarationSyntax.
+        /// From metadata, we regard a property if it has parameters and is a default member of the
+        // containing
         /// type.
         /// CAVEAT: To ensure that this property (and indexer Names) roundtrip, source properties are not
-        /// indexers if they are explicit interface implementations (since they will not be marked as default
+        /// indexers if they are explicit interface implementations (since they will not be marked as
+        // default
         /// members in metadata).
         /// </remarks>
         public abstract bool IsIndexer { get; }
@@ -192,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// True if the property itself is excluded from code coverage instrumentation.
-        /// True for source properties marked with <see cref="AttributeDescription.ExcludeFromCodeCoverageAttribute"/>.
+        /// True for source properties marked with <see
+        // cref="AttributeDescription.ExcludeFromCodeCoverageAttribute"/>.
         /// </summary>
         internal virtual bool IsDirectlyExcludedFromCodeCoverage
         {
@@ -286,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //      public class C : B { ... new B().P ... }       // A.P is not accessible from here
                 //   }
                 //
-                // See InternalsVisibleToAndStrongNameTests: IvtVirtualCall1, IvtVirtualCall2, IvtVirtual_ParamsAndDynamic.
+                // See InternalsVisibleToAndStrongNameTests: IvtVirtualCall1, IvtVirtualCall2,
+                // IvtVirtual_ParamsAndDynamic.
                 PropertySymbol overridden = p.OverriddenProperty;
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                 if (
@@ -445,7 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if the error code is highest priority while calculating use site error for this symbol.
+        /// Returns true if the error code is highest priority while calculating use site error for this
+        // symbol.
         /// </summary>
         protected sealed override bool IsHighestPriorityUseSiteErrorCode(int code) =>
             code is (int)ErrorCode.ERR_UnsupportedCompilerFeature or (int)ErrorCode.ERR_BindToBogus;
@@ -490,7 +499,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return nps.Equals(this, compareKind);
             }
 
-            // This checks if the property have the same definition and the type parameters on the containing types have been
+            // This checks if the property have the same definition and the type parameters on the containing
+            // types have been
             // substituted in the same way.
             return TypeSymbol.Equals(this.ContainingType, other.ContainingType, compareKind)
                 && ReferenceEquals(this.OriginalDefinition, other.OriginalDefinition);

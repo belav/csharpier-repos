@@ -726,9 +726,12 @@ L1:
             Assert.Equal("ax", GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
             Assert.Equal("p, z, ax", GetSymbolNamesJoined(dataFlowAnalysisResults.AlwaysAssigned));
             Assert.Equal("x, y", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
-            // y flows out as follows: the assignment in the try block, followed by an exception taking it into the catch
-            // block, then goto L1, (now the value is outside the region), followed by flowing back in to the try block,
-            // then another exception arising before executing the assignment to y, then reading y in the catch block.
+            // y flows out as follows: the assignment in the try block, followed by an exception taking it into
+            // the catch
+            // block, then goto L1, (now the value is outside the region), followed by flowing back in to the
+            // try block,
+            // then another exception arising before executing the assignment to y, then reading y in the catch
+            // block.
             Assert.Equal("p, y, z", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));
             Assert.Equal("x, y", GetSymbolNamesJoined(dataFlowAnalysisResults.ReadInside));
             Assert.Equal("p, y, z", GetSymbolNamesJoined(dataFlowAnalysisResults.ReadOutside));

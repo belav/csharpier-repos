@@ -87,8 +87,10 @@ public sealed class HealthCheckPublisherOptions
     public Func<HealthCheckRegistration, bool>? Predicate { get; set; }
 
     /// <summary>
-    /// Gets or sets the timeout for executing the health checks an all <see cref="IHealthCheckPublisher"/>
-    /// instances. Use <see cref="System.Threading.Timeout.InfiniteTimeSpan"/> to execute with no timeout.
+    /// Gets or sets the timeout for executing the health checks an all <see
+    // cref="IHealthCheckPublisher"/>
+    /// instances. Use <see cref="System.Threading.Timeout.InfiniteTimeSpan"/> to execute with no
+    // timeout.
     /// The default value is 30 seconds.
     /// </summary>
     public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);

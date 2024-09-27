@@ -8,7 +8,8 @@ using System.Text;
 namespace System.Net.Http.Headers
 {
     // According to the RFC, in places where a "parameter" is required, the value is mandatory
-    // (e.g. Media-Type, Accept). However, we don't introduce a dedicated type for it. So NameValueHeaderValue supports
+    // (e.g. Media-Type, Accept). However, we don't introduce a dedicated type for it. So
+    // NameValueHeaderValue supports
     // name-only values in addition to name/value pairs.
     public class NameValueHeaderValue : ICloneable
     {
@@ -90,7 +91,8 @@ namespace System.Net.Http.Headers
             }
 
             // RFC2616: 14.20: unquoted tokens should use case-INsensitive comparison; quoted-strings should use
-            // case-sensitive comparison. The RFC doesn't mention how to compare quoted-strings outside the "Expect"
+            // case-sensitive comparison. The RFC doesn't mention how to compare quoted-strings outside the
+            // "Expect"
             // header. We treat all quoted-strings the same: case-sensitive comparison.
 
             if (string.IsNullOrEmpty(_value))
@@ -275,7 +277,8 @@ namespace System.Net.Http.Headers
                 return 0; // We have an invalid value.
             }
 
-            // Use parameterless ctor to avoid double-parsing of name and value, i.e. skip public ctor validation.
+            // Use parameterless ctor to avoid double-parsing of name and value, i.e. skip public ctor
+            // validation.
             parsedValue = nameValueCreator();
             parsedValue._name = name;
             parsedValue._value = input.Substring(current, valueLength);
@@ -389,7 +392,8 @@ namespace System.Net.Http.Headers
 
         private static void CheckValueFormat(string? value)
         {
-            // Either value is null/empty or a valid token/quoted string https://tools.ietf.org/html/rfc7230#section-3.2.6
+            // Either value is null/empty or a valid token/quoted string
+            // https://tools.ietf.org/html/rfc7230#section-3.2.6
             if (string.IsNullOrEmpty(value))
             {
                 return;

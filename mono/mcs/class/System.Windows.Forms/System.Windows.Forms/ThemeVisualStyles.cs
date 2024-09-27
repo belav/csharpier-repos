@@ -855,7 +855,8 @@ namespace System.Windows.Forms
             );
         }
 
-        //TODO: Until somebody figures out how to obtain the proper width this will need to be updated when new Windows versions/themes are released.
+        //TODO: Until somebody figures out how to obtain the proper width this will need to be updated when
+        // new Windows versions/themes are released.
         const int DateTimePickerDropDownWidthOnWindowsVista = 34;
         const int DateTimePickerDropDownHeightOnWindowsVista = 20;
 
@@ -1499,7 +1500,7 @@ namespace System.Windows.Forms
                 new Rectangle(Point.Empty, ctrl.Size)
             );
             renderer = new VisualStyleRenderer(VisualStyleElement.ProgressBar.Chunk.Normal);
-            /* Draw Blocks */
+/* Draw Blocks */
             int draw_mode = 0;
             int max_blocks = int.MaxValue;
             int start_pixel = client_area.X;

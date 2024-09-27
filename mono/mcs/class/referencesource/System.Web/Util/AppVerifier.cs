@@ -179,7 +179,8 @@
                     ) as long?
                 ) ?? (long)(-1);
 
-            // REG_QWORD used as a mask to control call stack collection on individual asserts (useful if we event log only). No key means all asserts will collect stack traces
+            // REG_QWORD used as a mask to control call stack collection on individual asserts (useful if we
+            // event log only). No key means all asserts will collect stack traces
             AppVerifierErrorCodeCollectCallStackMask =
                 (
                     Misc.GetAspNetRegValue(
@@ -189,7 +190,8 @@
                     ) as long?
                 ) ?? (long)(-1);
 
-            // REG_DWORD mask to disable call stack collection on begin* / end* methods. No key means all call stacks are collected
+            // REG_DWORD mask to disable call stack collection on begin* / end* methods. No key means all call
+            // stacks are collected
             AppVerifierCollectCallStackMask = (CallStackCollectionBitMasks)(
                 (
                     Misc.GetAspNetRegValue(
@@ -301,12 +303,17 @@
         }
 
         /// <summary>
-        /// Wraps the Begin* part of a Begin / End method pair to allow for signaling when assertions have been violated.
-        /// The instrumentation can be a performance hit, so this method should not be called if AppVerifier is not enabled.
+        /// Wraps the Begin* part of a Begin / End method pair to allow for signaling when assertions have
+        // been violated.
+        /// The instrumentation can be a performance hit, so this method should not be called if AppVerifier
+        // is not enabled.
         /// </summary>
-        /// <param name="httpApplication">The HttpApplication instance for this request, used to get HttpContext and related items.</param>
-        /// <param name="beginMethod">The Begin* part of a Begin / End method pair, likely wrapped in a lambda so only the AsyncCallback and object parameters are exposed.</param>
-        /// <param name="originalDelegate">The original user-provided delegate, e.g. the thing that 'beginMethod' wraps. Provided so that we can show correct methods when asserting.</param>
+        /// <param name="httpApplication">The HttpApplication instance for this request, used to get
+        // HttpContext and related items.</param>
+        /// <param name="beginMethod">The Begin* part of a Begin / End method pair, likely wrapped in a
+        // lambda so only the AsyncCallback and object parameters are exposed.</param>
+        /// <param name="originalDelegate">The original user-provided delegate, e.g. the thing that
+        // 'beginMethod' wraps. Provided so that we can show correct methods when asserting.</param>
         /// <param name="errorHandler">The listener that can handle verification failures.</param>
         /// <returns>The instrumented Begin* method.</returns>
         internal static Func<AsyncCallback, object, IAsyncResult> WrapBeginMethodImpl(
@@ -360,7 +367,8 @@
                     }
                 }
 
-                // If the condition passed to this method evaluates to false, we will raise an error to whoever is listening.
+                // If the condition passed to this method evaluates to false, we will raise an error to whoever is
+                // listening.
                 AssertDelegate assert = (condition, errorCode) =>
                 {
                     long mask = 1L << (int)errorCode;
@@ -546,7 +554,8 @@
                                     // just as long as BeginHandler hasn't yet returned (which in true in this case).
                                     if (!asyncResult.CompletedSynchronously)
                                     {
-                                        // If 'CompletedSynchronously = false', we must be on a different thread than the BeginHandler invocation.
+                                        // If 'CompletedSynchronously = false', we must be on a different thread than the BeginHandler
+                                        // invocation.
                                         assert(
                                             tempThreadWhichCalledBeginHandler
                                                 != Thread.CurrentThread,
@@ -632,7 +641,8 @@
                     if (asyncResultReturnedByBeginHandler.CompletedSynchronously)
                     {
                         // If 'CompletedSynchronously = true', the IAsyncResult must be marked 'IsCompleted = true'
-                        // and the AsyncCallback must have been invoked synchronously (checked in the AsyncCallback verification logic).
+                        // and the AsyncCallback must have been invoked synchronously (checked in the AsyncCallback
+                        // verification logic).
                         assert(
                             asyncResultReturnedByBeginHandler.IsCompleted,
                             AppVerifierErrorCode.BeginHandlerReturnedAsyncResultMarkedCompletedSynchronouslyButWhichWasNotCompleted
@@ -651,7 +661,8 @@
 
                     // The AsyncCallback may have been invoked (either synchronously or asynchronously). If it has been
                     // invoked, we need to verify that it was given the same IAsyncResult returned by BeginHandler.
-                    // If the AsyncCallback hasn't yet been called, we skip this check, as the AsyncCallback verification
+                    // If the AsyncCallback hasn't yet been called, we skip this check, as the AsyncCallback
+                    // verification
                     // logic will eventually perform the check at the appropriate time.
                     if (tempAsyncResultPassedToCallback != null)
                     {
@@ -763,11 +774,15 @@
         }
 
         /// <summary>
-        /// Returns an Action<bool> that determines whether SynchronizationContext.Send or Post was called after the underlying request
-        /// or the request notification finished. The bool parameter controls whether to check if Post is attempted in nested notification.
-        /// The instrumentation can be a performance hit, so this method should not be called if AppVerifier is not enabled.
+        /// Returns an Action<bool> that determines whether SynchronizationContext.Send or Post was called
+        // after the underlying request
+        /// or the request notification finished. The bool parameter controls whether to check if Post is
+        // attempted in nested notification.
+        /// The instrumentation can be a performance hit, so this method should not be called if AppVerifier
+        // is not enabled.
         /// </summary>
-        /// <param name="syncContext">The ISyncContext (HttpApplication, WebSocketPipeline, etc.) on which to perform the check.</param>
+        /// <param name="syncContext">The ISyncContext (HttpApplication, WebSocketPipeline, etc.) on which
+        // to perform the check.</param>
         /// <param name="errorHandler">The listener that can handle verification failures.</param>
         /// <returns>A callback which performs the verification.</returns>
         internal static Action<bool> GetSyncContextCheckDelegateImpl(
@@ -795,7 +810,8 @@
                 originalHttpContext = null;
             }
 
-            // If the condition passed to this method evaluates to false, we will raise an error to whoever is listening.
+            // If the condition passed to this method evaluates to false, we will raise an error to whoever is
+            // listening.
             AssertDelegate assert = GetAssertDelegateImpl(
                 requestUrl,
                 errorHandler,
@@ -853,9 +869,12 @@
         // This generic method invokes a delegate that was created by AppVerifier at an earlier time.
         // It is safe to call it even if the returned delegate is null (e.g. AppVerifier is off).
         // Here is the typical usage scenario:
-        //      var verifierCheck = AppVerifier.Get*CheckDelegate(...);         // get the delegate which can capture some state
-        //      T result = <...>                                                // the result of some code execution
-        //      AppVerifier.InvokeVerifierCheck(verifierCheckDelegate, result); // invoke the verification of the result
+        //      var verifierCheck = AppVerifier.Get*CheckDelegate(...);         // get the delegate which
+        // can capture some state
+        //      T result = <...>                                                // the result of some code
+        // execution
+        //      AppVerifier.InvokeVerifierCheck(verifierCheckDelegate, result); // invoke the verification
+        // of the result
         internal static void InvokeVerifierCheck<T>(Action<T> verifierCheckDelegate, T result)
         {
             if (verifierCheckDelegate != null)
@@ -872,7 +891,8 @@
             }
         }
 
-        // Gets a delegate that checks for inconsistencies after managed code finished processing one or more request notifications.
+        // Gets a delegate that checks for inconsistencies after managed code finished processing one or
+        // more request notifications.
         // The Action returned by this method could be null.
         internal static Action<RequestNotificationStatus> GetRequestNotificationStatusCheckDelegate(
             HttpContext context,
@@ -943,8 +963,10 @@
                 }
                 else
                 {
-                    // Completing synchronously with pending NotificationContext means a bug in either user code or the pipeline.
-                    // NotificationContext being null means we already completed asynchronously before completing synchronously.
+                    // Completing synchronously with pending NotificationContext means a bug in either user code or the
+                    // pipeline.
+                    // NotificationContext being null means we already completed asynchronously before completing
+                    // synchronously.
                     // Both cases indicate that we have some async operations we failed to account for.
                     assert(
                         context.NotificationContext != null
@@ -953,7 +975,8 @@
                     );
 
                     // Can't have a different NotificationContext after finishing the notification
-                    // Even if it was changed while processing nested notifications it should be restored back before we unwind
+                    // Even if it was changed while processing nested notifications it should be restored back before we
+                    // unwind
                     assert(
                         context.NotificationContext == originalNotificationContext,
                         AppVerifierErrorCode.NotificationContextHasChangedAfterSynchronouslyProcessingNotification
@@ -969,7 +992,8 @@
         /// </summary>
         /// <param name="requestUrl">The Url of the request.</param>
         /// <param name="errorHandler">The listener that can handle verification failures.</param>
-        /// <param name="appendAdditionalInfoDelegate">The caller can provide this delegate to append additional information to the exception. Could be null.</param>
+        /// <param name="appendAdditionalInfoDelegate">The caller can provide this delegate to append
+        // additional information to the exception. Could be null.</param>
         /// <returns>A callback which performs the verification.</returns>
         private static AssertDelegate GetAssertDelegateImpl(
             string requestUrl,
@@ -977,7 +1001,8 @@
             AppendAdditionalInfoDelegate appendAdditionalInfoDelegate
         )
         {
-            // If the condition passed to this method evaluates to false, we will raise an error to whoever is listening.
+            // If the condition passed to this method evaluates to false, we will raise an error to whoever is
+            // listening.
             return (condition, errorCode) =>
             {
                 long mask = 1L << (int)errorCode;

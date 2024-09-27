@@ -14,7 +14,8 @@ namespace System.IdentityModel.Protocols.WSTrust
     public abstract class WSTrustRequestSerializer
     {
         /// <summary>
-        /// When overriden in the derived class deserializes the RST from the XmlReader to a RequestSecurityToken object.
+        /// When overriden in the derived class deserializes the RST from the XmlReader to a
+        // RequestSecurityToken object.
         /// </summary>
         /// <param name="reader">XML reader over the RST</param>
         /// <param name="context">Current Serialization context.</param>
@@ -28,7 +29,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// When overridden in the derived class reads a child element inside RST.
         /// </summary>
         /// <param name="reader">Reader pointing at an element to read inside the RST.</param>
-        /// <param name="requestSecurityToken">The RequestSecurityToken element that is being populated from the reader.</param>
+        /// <param name="requestSecurityToken">The RequestSecurityToken element that is being populated from
+        // the reader.</param>
         /// <param name="context">Current Serialization context.</param>
         public abstract void ReadXmlElement(
             XmlReader reader,
@@ -77,7 +79,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         );
 
         /// <summary>
-        /// Creates an instance of the RequestSecurityToken object that this class can Serialize or Deserialize.
+        /// Creates an instance of the RequestSecurityToken object that this class can Serialize or
+        // Deserialize.
         /// </summary>
         /// <returns>Instance of RequestSecurityToken object</returns>
         public virtual RequestSecurityToken CreateRequestSecurityToken()
@@ -89,7 +92,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Validates the RequestSecurityToken object that has been deserialized.
         /// </summary>
         /// <param name="requestSecurityToken">The RequestSecurityToken object to Validate.</param>
-        /// <exception cref="InvalidOperationException">An Issue Request for an Asymmetric Key did not specify UseKey.</exception>
+        /// <exception cref="InvalidOperationException">An Issue Request for an Asymmetric Key did not
+        // specify UseKey.</exception>
         public virtual void Validate(RequestSecurityToken requestSecurityToken)
         {
             if (requestSecurityToken == null)
@@ -123,10 +127,12 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// When implemented in the derived class checks if the given reader is positioned at a RequestSecurityToken element.
+        /// When implemented in the derived class checks if the given reader is positioned at a
+        // RequestSecurityToken element.
         /// </summary>
         /// <param name="reader">The reader to read from.</param>
-        /// <returns>'True' if the reader is positioned at an RST element that this serializer can read.</returns>
+        /// <returns>'True' if the reader is positioned at an RST element that this serializer can
+        // read.</returns>
         public abstract bool CanRead(XmlReader reader);
 
         /// <summary>

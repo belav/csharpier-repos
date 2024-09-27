@@ -49,7 +49,9 @@ namespace DebuggerTests
                     "DebuggerTests.StepInTest<string>.TestedMethod"
                 },
                 // [ActiveIssue("https://github.com/dotnet/runtime/issues/64188")]
-                // { "MONO_TYPE_ENUM",        TEnum("DebuggerTests.RGB", "Red"),                       TEnum("DebuggerTests.RGB", "Blue"),                     "DebuggerTests.StepInTest<DebuggerTests.RGB>.TestedMethod"},
+                // { "MONO_TYPE_ENUM",        TEnum("DebuggerTests.RGB", "Red"),
+                // TEnum("DebuggerTests.RGB", "Blue"),
+                // "DebuggerTests.StepInTest<DebuggerTests.RGB>.TestedMethod"},
 
                 {
                     "MONO_TYPE_ARRAY",
@@ -76,7 +78,8 @@ namespace DebuggerTests
                     "DebuggerTests.StepInTest<System.Func<int>>.TestedMethod"
                 },
                 // Disabled due to https://github.com/dotnet/runtime/issues/65881
-                //{ "MONO_TYPE_FNPTR",       TPointer("*()",  is_null: true),                         TPointer("*()") },
+                //{ "MONO_TYPE_FNPTR",       TPointer("*()",  is_null: true),
+                // TPointer("*()") },
 
                 {
                     "MONO_TYPE_PTR",

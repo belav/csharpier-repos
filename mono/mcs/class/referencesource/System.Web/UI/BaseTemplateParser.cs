@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements the ASP.NET template parser
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Implements the ASP.NET template parser
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -31,8 +31,8 @@ namespace System.Web.UI
     using HttpException = System.Web.HttpException;
 
     /*
-     * Parser for Template Files (TemplateControls and PageTheme)
-     */
+    * Parser for Template Files (TemplateControls and PageTheme)
+    */
 
     /// <internalonly/>
     /// <devdoc>
@@ -70,8 +70,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Compile a nested .ascx file (a User Control) and return its Type
-         */
+        * Compile a nested .ascx file (a User Control) and return its Type
+        */
 
         protected internal Type GetUserControlType(string virtualPath)
         {
@@ -105,8 +105,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Compile a .aspx/.ascx file and return its Type
-         */
+        * Compile a .aspx/.ascx file and return its Type
+        */
 
         protected Type GetReferencedType(string virtualPath)
         {
@@ -318,10 +318,10 @@ namespace System.Web.UI
     }
 
     /*
-     * Entry representing a register directive
-     * e.g. <%@ Register tagprefix="tagprefix" Namespace="namespace" Assembly="assembly" %> OR
-     * e.g. <%@ Register tagprefix="tagprefix" Tagname="tagname" Src="pathname" %>
-     */
+    * Entry representing a register directive
+    * e.g. <%@ Register tagprefix="tagprefix" Namespace="namespace" Assembly="assembly" %> OR
+    * e.g. <%@ Register tagprefix="tagprefix" Tagname="tagname" Src="pathname" %>
+    */
     internal abstract class RegisterDirectiveEntry : SourceLineInfo
     {
         internal RegisterDirectiveEntry(string tagPrefix)
@@ -337,9 +337,9 @@ namespace System.Web.UI
     }
 
     /*
-     * Entry representing the registration of a tag namespace
-     * e.g. <%@ Register tagprefix="tagprefix" Namespace="namespace" Assembly="assembly" %>
-     */
+    * Entry representing the registration of a tag namespace
+    * e.g. <%@ Register tagprefix="tagprefix" Namespace="namespace" Assembly="assembly" %>
+    */
     internal class TagNamespaceRegisterEntry : RegisterDirectiveEntry
     {
         internal TagNamespaceRegisterEntry(
@@ -381,9 +381,9 @@ namespace System.Web.UI
     }
 
     /*
-     * Entry representing the registration of a user control
-     * e.g. <%@ Register tagprefix="tagprefix" Tagname="tagname" Src="pathname" %>
-     */
+    * Entry representing the registration of a user control
+    * e.g. <%@ Register tagprefix="tagprefix" Tagname="tagname" Src="pathname" %>
+    */
     internal class UserControlRegisterEntry : RegisterDirectiveEntry
     {
         internal UserControlRegisterEntry(string tagPrefix, string tagName)

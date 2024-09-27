@@ -15,7 +15,8 @@ namespace System.Data.Objects.Internal
     using System.Reflection;
 
     /// <summary>
-    /// Implementation of the property accessor strategy that gets and sets values on POCO entities.  That is,
+    /// Implementation of the property accessor strategy that gets and sets values on POCO entities.
+    // That is,
     /// entities that do not implement IEntityWithRelationships.
     /// </summary>
     internal sealed class PocoPropertyAccessorStrategy : IPropertyAccessorStrategy

@@ -74,12 +74,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 
             compilation = compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(syntaxTrees);
 
-            // We need to inherit most of the projects options, mainly for VB (RootNamespace, GlobalImports etc.), but we need to override about some specific things surrounding the output
+            // We need to inherit most of the projects options, mainly for VB (RootNamespace, GlobalImports
+            // etc.), but we need to override about some specific things surrounding the output
             compilation = compilation.WithOptions(
                 compilation
                     .Options
                     // copied from the old TempPE compiler used by legacy, for parity.
-                    // See: https://github.com/dotnet/roslyn/blob/fab7134296816fc80019c60b0f5bef7400cf23ea/src/VisualStudio/CSharp/Impl/ProjectSystemShim/TempPECompilerService.cs#L58
+                    // See:
+                    // https://github.com/dotnet/roslyn/blob/fab7134296816fc80019c60b0f5bef7400cf23ea/src/VisualStudio/CSharp/Impl/ProjectSystemShim/TempPECompilerService.cs#L58
                     .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
                     .WithSourceReferenceResolver(SourceFileResolver.Default)
                     .WithXmlReferenceResolver(XmlFileResolver.Default)
@@ -98,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                     .WithStrongNameProvider(null)
             );
 
-            // AssemblyName should be set to the filename of the output file because multiple TempPE DLLs can be created for the same project
+            // AssemblyName should be set to the filename of the output file because multiple TempPE DLLs can be
+            // created for the same project
             compilation = compilation.WithAssemblyName(Path.GetFileName(outputFileName));
 
             cancellationToken.ThrowIfCancellationRequested();

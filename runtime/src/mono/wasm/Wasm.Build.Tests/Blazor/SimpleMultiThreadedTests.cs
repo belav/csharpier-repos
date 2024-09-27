@@ -31,11 +31,15 @@ public class SimpleMultiThreadedTests : BlazorWasmTestBase
     //     string projectFile = CreateWasmTemplateProject(id, "blazorwasm");
 
     //     AddItemsPropertiesToProject(projectFile, "<WasmEnableThreads>true</WasmEnableThreads>");
-    //     BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack, RuntimeType: RuntimeType.MultiThreaded));
+    //     BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack, RuntimeType:
+    // RuntimeType.MultiThreaded));
     //     // await BlazorRunForBuildWithDotnetRun(config);
 
-    //     await BlazorRunTest($"{s_xharnessRunnerCommand} wasm webserver --app=. --web-server-use-default-files --web-server-use-cors --web-server-use-cop --web-server-use-https --timeout=15:00:00",
-    //                          Path.GetFullPath(Path.Combine(FindBlazorBinFrameworkDir(config, forPublish: false), "..")));
+    //     await BlazorRunTest($"{s_xharnessRunnerCommand} wasm webserver --app=.
+    // --web-server-use-default-files --web-server-use-cors --web-server-use-cop --web-server-use-https
+    // --timeout=15:00:00",
+    //                          Path.GetFullPath(Path.Combine(FindBlazorBinFrameworkDir(config,
+    // forPublish: false), "..")));
     // }
 
     [ConditionalTheory(

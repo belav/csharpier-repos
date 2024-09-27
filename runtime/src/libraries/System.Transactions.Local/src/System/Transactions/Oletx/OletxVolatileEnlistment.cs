@@ -152,7 +152,8 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                 "OletxPhase0VolatileEnlistmentContainer.DependentCloneCompleted - incompleteDependentClones < 0"
             );
 
-            // If we have not more incomplete dependent clones and we are in Phase 0, we need to "fake out" a notification completion.
+            // If we have not more incomplete dependent clones and we are in Phase 0, we need to "fake out" a
+            // notification completion.
             if (IncompleteDependentClones == 0 && Phase == 0)
             {
                 OutstandingNotifications++;
@@ -475,8 +476,10 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                     _aborting = true;
                 }
             }
-            // It's possible that we are in phase 2 if we got an Aborted outcome from the transaction before we got the
-            // Phase0Request.  In both cases, we just respond to the proxy and don't bother telling the enlistments.
+            // It's possible that we are in phase 2 if we got an Aborted outcome from the transaction before we
+            // got the
+            // Phase0Request.  In both cases, we just respond to the proxy and don't bother telling the
+            // enlistments.
             // They have either already heard about the abort or will soon.
             if (Phase == 2 || Phase == -1)
             {
@@ -485,8 +488,10 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                     Phase = 0;
                 }
 
-                // If we got an abort hint or we are the committable transaction and Commit has not yet been called or the TM went down,
-                // we don't want to do any more work on the transaction.  The abort notifications will be sent by the phase 1
+                // If we got an abort hint or we are the committable transaction and Commit has not yet been called
+                // or the TM went down,
+                // we don't want to do any more work on the transaction.  The abort notifications will be sent by
+                // the phase 1
                 // enlistment
                 if (_aborting || _tmWentDown || commitNotYetCalled || Phase == 2)
                 {
@@ -497,9 +502,12 @@ internal sealed class OletxPhase0VolatileEnlistmentContainer : OletxVolatileEnli
                         try
                         {
                             _phase0EnlistmentShim.Phase0Done(false);
-                            // We need to set the alreadyVoted flag to true once we successfully voted, so later we don't vote again when OletxDependentTransaction::Complete is called
-                            // Otherwise, in OletxPhase0VolatileEnlistmentContainer::DecrementOutstandingNotifications code path, we are going to call Phase0Done( true ) again
-                            // and result in an access violation while accessing the pPhase0EnlistmentAsync member variable of the Phase0Shim object.
+                            // We need to set the alreadyVoted flag to true once we successfully voted, so later we don't vote
+                            // again when OletxDependentTransaction::Complete is called
+                            // Otherwise, in OletxPhase0VolatileEnlistmentContainer::DecrementOutstandingNotifications code
+                            // path, we are going to call Phase0Done( true ) again
+                            // and result in an access violation while accessing the pPhase0EnlistmentAsync member variable of
+                            // the Phase0Shim object.
                             AlreadyVoted = true;
                         }
                         // I am not going to check for XACT_E_PROTOCOL here because that check is a workaround for a bug
@@ -655,7 +663,8 @@ internal sealed class OletxPhase1VolatileEnlistmentContainer : OletxVolatileEnli
             etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, description);
         }
 
-        // This is to synchronize with the corresponding AddDependentClone which takes the container lock while incrementing the incompleteDependentClone count
+        // This is to synchronize with the corresponding AddDependentClone which takes the container lock
+        // while incrementing the incompleteDependentClone count
         lock (this)
         {
             IncompleteDependentClones--;

@@ -67,10 +67,13 @@ public class AuthenticationBuilder
     }
 
     /// <summary>
-    /// Adds a <see cref="AuthenticationScheme"/> which can be used by <see cref="IAuthenticationService"/>.
+    /// Adds a <see cref="AuthenticationScheme"/> which can be used by <see
+    // cref="IAuthenticationService"/>.
     /// </summary>
-    /// <typeparam name="TOptions">The <see cref="AuthenticationSchemeOptions"/> type to configure the handler.</typeparam>
-    /// <typeparam name="THandler">The <see cref="AuthenticationHandler{TOptions}"/> used to handle this scheme.</typeparam>
+    /// <typeparam name="TOptions">The <see cref="AuthenticationSchemeOptions"/> type to configure the
+    // handler.</typeparam>
+    /// <typeparam name="THandler">The <see cref="AuthenticationHandler{TOptions}"/> used to handle this
+    // scheme.</typeparam>
     /// <param name="authenticationScheme">The name of this scheme.</param>
     /// <param name="displayName">The display name of this scheme.</param>
     /// <param name="configureOptions">Used to configure the scheme options.</param>
@@ -84,10 +87,13 @@ public class AuthenticationBuilder
         AddSchemeHelper<TOptions, THandler>(authenticationScheme, displayName, configureOptions);
 
     /// <summary>
-    /// Adds a <see cref="AuthenticationScheme"/> which can be used by <see cref="IAuthenticationService"/>.
+    /// Adds a <see cref="AuthenticationScheme"/> which can be used by <see
+    // cref="IAuthenticationService"/>.
     /// </summary>
-    /// <typeparam name="TOptions">The <see cref="AuthenticationSchemeOptions"/> type to configure the handler.</typeparam>
-    /// <typeparam name="THandler">The <see cref="AuthenticationHandler{TOptions}"/> used to handle this scheme.</typeparam>
+    /// <typeparam name="TOptions">The <see cref="AuthenticationSchemeOptions"/> type to configure the
+    // handler.</typeparam>
+    /// <typeparam name="THandler">The <see cref="AuthenticationHandler{TOptions}"/> used to handle this
+    // scheme.</typeparam>
     /// <param name="authenticationScheme">The name of this scheme.</param>
     /// <param name="configureOptions">Used to configure the scheme options.</param>
     /// <returns>The builder.</returns>
@@ -104,11 +110,14 @@ public class AuthenticationBuilder
         );
 
     /// <summary>
-    /// Adds a <see cref="RemoteAuthenticationHandler{TOptions}"/> based <see cref="AuthenticationScheme"/> that supports remote authentication
+    /// Adds a <see cref="RemoteAuthenticationHandler{TOptions}"/> based <see
+    // cref="AuthenticationScheme"/> that supports remote authentication
     /// which can be used by <see cref="IAuthenticationService"/>.
     /// </summary>
-    /// <typeparam name="TOptions">The <see cref="RemoteAuthenticationOptions"/> type to configure the handler.</typeparam>
-    /// <typeparam name="THandler">The <see cref="RemoteAuthenticationHandler{TOptions}"/> used to handle this scheme.</typeparam>
+    /// <typeparam name="TOptions">The <see cref="RemoteAuthenticationOptions"/> type to configure the
+    // handler.</typeparam>
+    /// <typeparam name="THandler">The <see cref="RemoteAuthenticationHandler{TOptions}"/> used to
+    // handle this scheme.</typeparam>
     /// <param name="authenticationScheme">The name of this scheme.</param>
     /// <param name="displayName">The display name of this scheme.</param>
     /// <param name="configureOptions">Used to configure the scheme options.</param>

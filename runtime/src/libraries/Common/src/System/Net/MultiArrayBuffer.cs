@@ -7,17 +7,23 @@ using System.Diagnostics;
 namespace System.Net
 {
     // Warning: Mutable struct!
-    // The purpose of this struct is to simplify buffer management in cases where the size of the buffer may grow large (e.g. >64K),
-    // thus making it worthwhile to add the overhead involved in managing multiple individual array allocations.
-    // Like ArrayBuffer, this manages a sliding buffer where bytes can be added at the end and removed at the beginning.
-    // Unlike ArrayBuffer, the buffer itself is managed using 16K blocks which are added/removed to the block list as necessary.
+    // The purpose of this struct is to simplify buffer management in cases where the size of the buffer
+    // may grow large (e.g. >64K),
+    // thus making it worthwhile to add the overhead involved in managing multiple individual array
+    // allocations.
+    // Like ArrayBuffer, this manages a sliding buffer where bytes can be added at the end and removed
+    // at the beginning.
+    // Unlike ArrayBuffer, the buffer itself is managed using 16K blocks which are added/removed to the
+    // block list as necessary.
 
-    // 'ActiveBuffer' contains the current buffer contents; these bytes will be preserved on any call to TryEnsureAvailableBytesUpToLimit.
+    // 'ActiveBuffer' contains the current buffer contents; these bytes will be preserved on any call to
+    // TryEnsureAvailableBytesUpToLimit.
     // 'AvailableBuffer' contains the available bytes past the end of the current content,
     // and can be written to in order to add data to the end of the buffer.
     // Commit(byteCount) will extend the ActiveBuffer by 'byteCount' bytes into the AvailableBuffer.
     // Discard(byteCount) will discard 'byteCount' bytes as the beginning of the ActiveBuffer.
-    // TryEnsureAvailableBytesUpToLimit will grow the buffer if necessary; *however*, this may invalidate
+    // TryEnsureAvailableBytesUpToLimit will grow the buffer if necessary; *however*, this may
+    // invalidate
     // old values of 'ActiveBuffer' and 'AvailableBuffer', so they must be retrieved again.
 
     internal struct MultiArrayBuffer : IDisposable
@@ -35,7 +41,8 @@ namespace System.Net
         public MultiArrayBuffer(int initialBufferSize)
             : this()
         {
-            // 'initialBufferSize' is ignored for now. Some callers are passing useful info here that we might want to act on in the future.
+            // 'initialBufferSize' is ignored for now. Some callers are passing useful info here that we might
+            // want to act on in the future.
             Debug.Assert(initialBufferSize >= 0);
         }
 
@@ -218,7 +225,8 @@ namespace System.Net
                         // We can shift the array down to make enough space
                         _blocks.AsSpan((int)unusedInitialBlocks, (int)usedBlocks).CopyTo(_blocks);
 
-                        // Null out the part of the array left over from the shift, so that we aren't holding references to those blocks.
+                        // Null out the part of the array left over from the shift, so that we aren't holding references to
+                        // those blocks.
                         _blocks.AsSpan((int)usedBlocks, (int)unusedInitialBlocks).Clear();
                     }
 

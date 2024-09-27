@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -125,8 +126,10 @@ namespace Microsoft.Web.Mvc.Internal
             return expression.Object.ToString();
         }
 
-        // This method contains some heuristics that will help determine the correct action name from a given MethodInfo
-        // assuming the default sync / async invokers are in use. The logic's not foolproof, but it should be good enough
+        // This method contains some heuristics that will help determine the correct action name from a
+        // given MethodInfo
+        // assuming the default sync / async invokers are in use. The logic's not foolproof, but it should
+        // be good enough
         // for most uses.
         private static string GetTargetActionName(MethodInfo methodInfo)
         {

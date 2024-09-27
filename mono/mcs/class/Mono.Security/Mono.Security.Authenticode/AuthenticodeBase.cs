@@ -40,14 +40,16 @@ i.e. with a large MS-DOS header. The code should just read the entire
 file into memory.
 
 - It has a number of missing or incorrect range checks.
-  Incorrect, as in, checking that record or field starts within
-  range, but does not end within range.
+Incorrect, as in, checking that record or field starts within
+range, but does not end within range.
 
 - It removes/ignores COFF symbols. These rarely/never occur, but removing
 them is not likely correct. It is not mentioned in either of the two specifications.
 This seems to be extra unnecessary incorrect code.
 
 - There are two specifications, Authenticode and PE:
+
+
 https://download.microsoft.com/download/9/c/5/9c5b2167-8017-4bae-9fde-d599bac8184a/Authenticode_PE.docx
 https://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx
 https://msdn.microsoft.com/library/windows/desktop/ms680547(v=vs.85).aspx
@@ -57,21 +59,21 @@ Such data is usually absent. More comparison is need between
 Mono runtime and desktop runtime/tools.
 The most common such data is an older signature, which is supposed to be ignored.
 The next most common is appended setup data, which isn't likely with managed code.
-  However this code has nothing to do with signing managed code specifically, just PEs.
+However this code has nothing to do with signing managed code specifically, just PEs.
 There is a slight inconsistency in the Authenticode_PE.doc around the location
 of the signature vs. other data past sections.
 The picture has the signature first, the text puts last.
 
 - A buffer size of 4K is small and probably not performant.
-  Buffering makes the code harder to update and correct, vs.
-  reading the entire file into memory.
+Buffering makes the code harder to update and correct, vs.
+reading the entire file into memory.
 
 - It does not validate NumberOfRvasAndSizes field.
-  Usually it is valid.
+Usually it is valid.
 
 - It is missing a number of other validations.
-  For example, the optional header magic was ignored, so in the
-  interest of small change, we treat all non-0x20B values the same.
+For example, the optional header magic was ignored, so in the
+interest of small change, we treat all non-0x20B values the same.
 
 Mail with Microsoft confirms the documents do not agree, and that the PE document
 is outdated and/or incorrect and/or referring to no longer supported v1 Authenticode,
@@ -79,12 +81,12 @@ and that the intent is for the signature to be at the end, per the text and not 
 And that data past the sections is to be hashed -- there rarely is any.
 
 The plan is therefore:
- read the entire file into memory
- add missing validation
- hash, excluding checksum, security directory, and security content
- place security content at the end, replacing what is there if anything
- remove the symbol code (here and in formatter)
- expose more offsets from here to cleanup the formatter code
+read the entire file into memory
+add missing validation
+hash, excluding checksum, security directory, and security content
+place security content at the end, replacing what is there if anything
+remove the symbol code (here and in formatter)
+expose more offsets from here to cleanup the formatter code
 
 There is also no unit tests for this code it seems.
 */

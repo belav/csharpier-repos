@@ -16,7 +16,8 @@ namespace System.Data.Objects.DataClasses
     /// <summary>
     /// Base attribute for properties mapped to store elements.
     /// Implied default AttributeUsage properties Inherited=True, AllowMultiple=False,
-    /// The metadata system expects this and will only look at the first of each of these attributes, even if there are more.
+    /// The metadata system expects this and will only look at the first of each of these attributes,
+    // even if there are more.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",

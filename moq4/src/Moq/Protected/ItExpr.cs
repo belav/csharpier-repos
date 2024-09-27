@@ -22,7 +22,8 @@ namespace Moq.Protected
     public static class ItExpr
     {
         /// <summary>
-        /// Contains matchers for <see langword="ref"/> (C#) / <see langword="ByRef"/> (VB.NET) parameters of type <typeparamref name="TValue"/>.
+        /// Contains matchers for <see langword="ref"/> (C#) / <see langword="ByRef"/> (VB.NET) parameters
+        // of type <typeparamref name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The parameter type.</typeparam>
         public static class Ref<TValue>

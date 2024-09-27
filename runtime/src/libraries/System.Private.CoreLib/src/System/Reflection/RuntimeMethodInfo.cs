@@ -104,8 +104,10 @@ namespace System.Reflection
         )
         {
             // ContainsStackPointers means that the struct (either the declaring type or the return type)
-            // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These structs cannot
-            // be boxed and thus cannot be invoked through reflection which only deals with boxed value type objects.
+            // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These
+            // structs cannot
+            // be boxed and thus cannot be invoked through reflection which only deals with boxed value type
+            // objects.
             if (
                 (
                     InvocationFlags

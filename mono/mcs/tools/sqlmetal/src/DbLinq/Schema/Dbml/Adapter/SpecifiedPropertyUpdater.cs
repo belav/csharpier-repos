@@ -47,7 +47,8 @@ namespace DbLinq.Schema.Dbml.Adapter
         /// Handles the PropertyChanged event of the Notify control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance
+        // containing the event data.</param>
         private static void Notify_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // if there is a property for us

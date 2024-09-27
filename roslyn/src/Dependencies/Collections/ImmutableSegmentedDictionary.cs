@@ -9,7 +9,8 @@ using System.Linq;
 namespace Microsoft.CodeAnalysis.Collections
 {
     /// <summary>
-    /// Provides methods for creating a segmented dictionary that is immutable; meaning it cannot be changed once it is
+    /// Provides methods for creating a segmented dictionary that is immutable; meaning it cannot be
+    // changed once it is
     /// created.
     /// </summary>
     internal static class ImmutableSegmentedDictionary

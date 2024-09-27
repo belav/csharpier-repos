@@ -242,9 +242,11 @@ namespace System.Net.Http.Tests
                 new ViaHeaderValue("x11x", "[FE18:AB64::156]:80", null, "(comment,)")
             );
 
-            // The parser reads until it reaches an invalid/unexpected character. If until then it was able to create
+            // The parser reads until it reaches an invalid/unexpected character. If until then it was able to
+            // create
             // a valid ViaHeaderValue, it will return the length of the parsed string. Therefore a string like
-            // "1.1 host," is considered valid (until ','), whereas "1.1 host (invalid" is considered invalid, since
+            // "1.1 host," is considered valid (until ','), whereas "1.1 host (invalid" is considered invalid,
+            // since
             // the comment is in an invalid format.
             CheckGetViaLength(
                 "WS/version example.com,next",

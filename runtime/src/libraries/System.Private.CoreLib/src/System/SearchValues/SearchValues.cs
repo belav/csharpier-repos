@@ -13,10 +13,12 @@ using System.Runtime.Intrinsics.X86;
 namespace System.Buffers
 {
     /// <summary>
-    /// Provides a set of initialization methods for instances of the <see cref="SearchValues{T}"/> class.
+    /// Provides a set of initialization methods for instances of the <see cref="SearchValues{T}"/>
+    // class.
     /// </summary>
     /// <remarks>
-    /// SearchValues are optimized for situations where the same set of values is frequently used for searching at runtime.
+    /// SearchValues are optimized for situations where the same set of values is frequently used for
+    // searching at runtime.
     /// </remarks>
     public static class SearchValues
     {
@@ -24,7 +26,8 @@ namespace System.Buffers
         /// Creates an optimized representation of <paramref name="values"/> used for efficient searching.
         /// </summary>
         /// <param name="values">The set of values.</param>
-        /// <returns>The optimized representation of <paramref name="values"/> used for efficient searching.</returns>
+        /// <returns>The optimized representation of <paramref name="values"/> used for efficient
+        // searching.</returns>
         public static SearchValues<byte> Create(ReadOnlySpan<byte> values)
         {
             if (values.IsEmpty)
@@ -67,7 +70,8 @@ namespace System.Buffers
         /// Creates an optimized representation of <paramref name="values"/> used for efficient searching.
         /// </summary>
         /// <param name="values">The set of values.</param>
-        /// /// <returns>The optimized representation of <paramref name="values"/> used for efficient searching.</returns>
+        /// /// <returns>The optimized representation of <paramref name="values"/> used for efficient
+        // searching.</returns>
         public static SearchValues<char> Create(ReadOnlySpan<char> values)
         {
             if (values.IsEmpty)
@@ -122,7 +126,8 @@ namespace System.Buffers
                     : new Any3CharSearchValues<FalseConst>(value0, value1, value2);
             }
 
-            // IndexOfAnyAsciiSearcher for chars is slower than Any3CharSearchValues, but faster than Any4SearchValues
+            // IndexOfAnyAsciiSearcher for chars is slower than Any3CharSearchValues, but faster than
+            // Any4SearchValues
             if (IndexOfAnyAsciiSearcher.IsVectorizationSupported && maxInclusive < 128)
             {
                 return (Ssse3.IsSupported || PackedSimd.IsSupported) && minInclusive == 0
@@ -190,9 +195,12 @@ namespace System.Buffers
         /// Creates an optimized representation of <paramref name="values"/> used for efficient searching.
         /// </summary>
         /// <param name="values">The set of values.</param>
-        /// <param name="comparisonType">Specifies whether to use <see cref="StringComparison.Ordinal"/> or <see cref="StringComparison.OrdinalIgnoreCase"/> search semantics.</param>
-        /// <returns>The optimized representation of <paramref name="values"/> used for efficient searching.</returns>
-        /// <remarks>Only <see cref="StringComparison.Ordinal"/> or <see cref="StringComparison.OrdinalIgnoreCase"/> may be used.</remarks>
+        /// <param name="comparisonType">Specifies whether to use <see cref="StringComparison.Ordinal"/> or
+        // <see cref="StringComparison.OrdinalIgnoreCase"/> search semantics.</param>
+        /// <returns>The optimized representation of <paramref name="values"/> used for efficient
+        // searching.</returns>
+        /// <remarks>Only <see cref="StringComparison.Ordinal"/> or <see
+        // cref="StringComparison.OrdinalIgnoreCase"/> may be used.</remarks>
         public static SearchValues<string> Create(
             ReadOnlySpan<string> values,
             StringComparison comparisonType

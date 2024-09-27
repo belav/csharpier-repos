@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a new Solution Id
         /// </summary>
-        /// <param name="debugName">An optional name to make this id easier to recognize while debugging.</param>
+        /// <param name="debugName">An optional name to make this id easier to recognize while
+        // debugging.</param>
         public static SolutionId CreateNewId(string debugName = null) =>
             CreateFromSerialized(Guid.NewGuid(), debugName);
 

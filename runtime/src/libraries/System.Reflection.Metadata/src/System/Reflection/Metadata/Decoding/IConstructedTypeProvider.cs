@@ -8,7 +8,8 @@ namespace System.Reflection.Metadata
     public interface IConstructedTypeProvider<TType> : ISZArrayTypeProvider<TType>
     {
         /// <summary>
-        /// Gets the type symbol for a generic instantiation of the given generic type with the given type arguments.
+        /// Gets the type symbol for a generic instantiation of the given generic type with the given type
+        // arguments.
         /// </summary>
         TType GetGenericInstantiation(TType genericType, ImmutableArray<TType> typeArguments);
 

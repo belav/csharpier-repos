@@ -49,9 +49,12 @@ namespace System.Activities.Core.Presentation
             };
         }
 
-        // When the CaseDesigner is collapsed, its CaseKeyBox will be disabled. Thus CaseKeyBox.RegainFocus() doesn't
-        // work in such situation, we must re-focus the CaseDesigner to expand it first to re-enable the CaseKeyBox.
-        // This situation happens when inputting and invalid case key value and clicking on another Case or Default in
+        // When the CaseDesigner is collapsed, its CaseKeyBox will be disabled. Thus
+        // CaseKeyBox.RegainFocus() doesn't
+        // work in such situation, we must re-focus the CaseDesigner to expand it first to re-enable the
+        // CaseKeyBox.
+        // This situation happens when inputting and invalid case key value and clicking on another Case or
+        // Default in
         // the same parent SwitchDesigner.
         public Action<CaseKeyBox> FocusSelf
         {

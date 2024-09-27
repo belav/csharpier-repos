@@ -28,7 +28,8 @@ namespace Microsoft.Build.Tasks.Xaml
         XamlBuildTypeInspectionExtensionContext buildContextForExtensions;
         IDictionary<string, ITaskItem> applicationMarkupWithTypeName;
 
-        // Set the lease lifetime according to the environment variable with the name defined by RemotingLeaseLifetimeInMinutesEnvironmentVariableName
+        // Set the lease lifetime according to the environment variable with the name defined by
+        // RemotingLeaseLifetimeInMinutesEnvironmentVariableName
         public override object InitializeLifetimeService()
         {
             ILease lease = (ILease)base.InitializeLifetimeService();

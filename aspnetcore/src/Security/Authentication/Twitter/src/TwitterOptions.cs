@@ -83,14 +83,19 @@ public class TwitterOptions : RemoteAuthenticationOptions
     /// </summary>
     /// <remarks>
     /// <para>
-    /// If an explicit <see cref="CookieBuilder.Name"/> is not provided, the system will automatically generate a
+    /// If an explicit <see cref="CookieBuilder.Name"/> is not provided, the system will automatically
+    // generate a
     /// unique name that begins with <c>__TwitterState</c>.
     /// </para>
     /// <list type="bullet">
-    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see cref="SameSiteMode.Lax"/>.</description></item>
-    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to <c>true</c>.</description></item>
-    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to <c>true</c>.</description></item>
-    /// <item><description><see cref="CookieBuilder.SecurePolicy"/> defaults to <see cref="CookieSecurePolicy.SameAsRequest"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see
+    // cref="SameSiteMode.Lax"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to
+    // <c>true</c>.</description></item>
+    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to
+    // <c>true</c>.</description></item>
+    /// <item><description><see cref="CookieBuilder.SecurePolicy"/> defaults to <see
+    // cref="CookieSecurePolicy.SameAsRequest"/>.</description></item>
     /// </list>
     /// </remarks>
     public CookieBuilder StateCookie
@@ -100,7 +105,8 @@ public class TwitterOptions : RemoteAuthenticationOptions
     }
 
     /// <summary>
-    /// Added the validate method to ensure that the customer key and customer secret values are not not empty for the twitter authentication middleware
+    /// Added the validate method to ensure that the customer key and customer secret values are not not
+    // empty for the twitter authentication middleware
     /// </summary>
     public override void Validate()
     {

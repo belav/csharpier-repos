@@ -497,14 +497,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         ///  }
         ///
         /// The resulting projection buffer (with unnamed span markup preserved) would look like:
-        ///  ABC [|DEF|] [|GHI[|JKL|]|]int [|abc[|d$$ef|]|] = goo; [|MNOint [|def|] = goo;PQR S$$TU|] 456789123
+        ///  ABC [|DEF|] [|GHI[|JKL|]|]int [|abc[|d$$ef|]|] = goo; [|MNOint [|def|] = goo;PQR S$$TU|]
+        // 456789123
         ///
         /// The union of unnamed spans from the surface buffer markup and each of the projected
         /// spans is sorted as it would have been sorted by MarkupTestFile had it parsed the entire
         /// projection buffer as one file, which it would do in a stack-based manner. In our example,
         /// the order of the unnamed spans would be as follows:
         ///
-        ///  ABC [|DEF|] [|GHI[|JKL|]|]int [|abc[|d$$ef|]|] = goo; [|MNOint [|def|] = goo;PQR S$$TU|] 456789123
+        ///  ABC [|DEF|] [|GHI[|JKL|]|]int [|abc[|d$$ef|]|] = goo; [|MNOint [|def|] = goo;PQR S$$TU|]
+        // 456789123
         ///       -----1       -----2            -------4                    -----6
         ///               ------------3     --------------5         --------------------------------7
         /// </summary>
@@ -765,7 +767,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     {
                         if (projectionSpan is string text)
                         {
-                            // this currently has a bug where it can't distinguish a markup of {|ProjectionMarkup:|}{|Markup1:|} and {|Markup1:{|ProjectionMarkup:|}|}
+                            // this currently has a bug where it can't distinguish a markup of {|ProjectionMarkup:|}{|Markup1:|}
+                            // and {|Markup1:{|ProjectionMarkup:|}|}
                             // it always map markup1 span as the later one.
                             // tracking issue - {|ProjectionMarkup:|}{|Markup1:|} and {|Markup1:{|ProjectionMarkup:|}|}
                             if (
@@ -823,7 +826,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         }
 
         /// <summary>
-        /// Overriding base impl so that when we close a document it goes back to the initial state when the test
+        /// Overriding base impl so that when we close a document it goes back to the initial state when the
+        // test
         /// workspace was loaded, throwing away any changes made to the open version.
         /// </summary>
         internal override ValueTask TryOnDocumentClosedAsync(
@@ -1015,7 +1019,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             ProjectId referencedProject
         )
         {
-            // VisualStudioWorkspace asserts the main thread for this call, so do the same thing here to catch tests
+            // VisualStudioWorkspace asserts the main thread for this call, so do the same thing here to catch
+            // tests
             // that fail to account for this possibility.
             var threadingContext = ExportProvider.GetExportedValue<IThreadingContext>();
             Contract.ThrowIfFalse(
@@ -1032,8 +1037,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string initialText
         )
         {
-            // If we don't have a file path we'll just make something up for the purpose of this dictionary so all
-            // buffers are still held onto. This isn't a file name used in the workspace itself so it's unobservable.
+            // If we don't have a file path we'll just make something up for the purpose of this dictionary so
+            // all
+            // buffers are still held onto. This isn't a file name used in the workspace itself so it's
+            // unobservable.
             if (RoslynString.IsNullOrEmpty(filePath))
             {
                 filePath = Guid.NewGuid().ToString();
@@ -1049,7 +1056,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         initialText
                     );
 
-                    // Ensure that the editor options on the text buffer matches that of the options that can be directly set in the workspace
+                    // Ensure that the editor options on the text buffer matches that of the options that can be
+                    // directly set in the workspace
                     var editorOptions = ExportProvider
                         .GetExportedValue<IEditorOptionsFactoryService>()
                         .GetOptions(textBuffer);

@@ -29,7 +29,8 @@ public sealed class DpapiNGXmlEncryptor : IXmlEncryptor
     /// <summary>
     /// Creates a new instance of a <see cref="DpapiNGXmlEncryptor"/>.
     /// </summary>
-    /// <param name="protectionDescriptorRule">The rule string from which to create the protection descriptor.</param>
+    /// <param name="protectionDescriptorRule">The rule string from which to create the protection
+    // descriptor.</param>
     /// <param name="flags">Flags controlling the creation of the protection descriptor.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public DpapiNGXmlEncryptor(

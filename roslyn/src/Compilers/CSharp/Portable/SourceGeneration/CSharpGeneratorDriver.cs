@@ -20,10 +20,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a new instance of <see cref="CSharpGeneratorDriver"/>
         /// </summary>
-        /// <param name="parseOptions">The <see cref="CSharpParseOptions"/> that should be used when parsing generated files.</param>
+        /// <param name="parseOptions">The <see cref="CSharpParseOptions"/> that should be used when parsing
+        // generated files.</param>
         /// <param name="generators">The generators that will run as part of this driver.</param>
-        /// <param name="optionsProvider">An <see cref="AnalyzerConfigOptionsProvider"/> that can be used to retrieve analyzer config values by the generators in this driver.</param>
-        /// <param name="additionalTexts">A list of <see cref="AdditionalText"/>s available to generators in this driver.</param>
+        /// <param name="optionsProvider">An <see cref="AnalyzerConfigOptionsProvider"/> that can be used to
+        // retrieve analyzer config values by the generators in this driver.</param>
+        /// <param name="additionalTexts">A list of <see cref="AdditionalText"/>s available to generators in
+        // this driver.</param>
         internal CSharpGeneratorDriver(
             CSharpParseOptions parseOptions,
             ImmutableArray<ISourceGenerator> generators,
@@ -37,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             : base(state) { }
 
         /// <summary>
-        /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see cref="ISourceGenerator"/>s and default options
+        /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see
+        // cref="ISourceGenerator"/>s and default options
         /// </summary>
         /// <param name="generators">The generators to create this driver with</param>
         /// <returns>A new <see cref="CSharpGeneratorDriver"/> instance.</returns>
@@ -45,9 +49,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             Create(generators, additionalTexts: null);
 
         /// <summary>
-        /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see cref="IIncrementalGenerator"/>s and default options
+        /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see
+        // cref="IIncrementalGenerator"/>s and default options
         /// </summary>
-        /// <param name="incrementalGenerators">The incremental generators to create this driver with</param>
+        /// <param name="incrementalGenerators">The incremental generators to create this driver
+        // with</param>
         /// <returns>A new <see cref="CSharpGeneratorDriver"/> instance.</returns>
         public static CSharpGeneratorDriver Create(
             params IIncrementalGenerator[] incrementalGenerators
@@ -58,13 +64,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
         /// <summary>
-        /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see cref="ISourceGenerator"/>s and the provided options or default.
+        /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see
+        // cref="ISourceGenerator"/>s and the provided options or default.
         /// </summary>
         /// <param name="generators">The generators to create this driver with</param>
-        /// <param name="additionalTexts">A list of <see cref="AdditionalText"/>s available to generators in this driver, or <c>null</c> if there are none.</param>
-        /// <param name="parseOptions">The <see cref="CSharpParseOptions"/> that should be used when parsing generated files, or <c>null</c> to use <see cref="CSharpParseOptions.Default"/></param>
-        /// <param name="optionsProvider">An <see cref="AnalyzerConfigOptionsProvider"/> that can be used to retrieve analyzer config values by the generators in this driver, or <c>null</c> if there are none.</param>
-        /// <param name="driverOptions">A <see cref="GeneratorDriverOptions"/> that controls the behavior of the created driver.</param>
+        /// <param name="additionalTexts">A list of <see cref="AdditionalText"/>s available to generators in
+        // this driver, or <c>null</c> if there are none.</param>
+        /// <param name="parseOptions">The <see cref="CSharpParseOptions"/> that should be used when parsing
+        // generated files, or <c>null</c> to use <see cref="CSharpParseOptions.Default"/></param>
+        /// <param name="optionsProvider">An <see cref="AnalyzerConfigOptionsProvider"/> that can be used to
+        // retrieve analyzer config values by the generators in this driver, or <c>null</c> if there are
+        // none.</param>
+        /// <param name="driverOptions">A <see cref="GeneratorDriverOptions"/> that controls the behavior of
+        // the created driver.</param>
         /// <returns>A new <see cref="CSharpGeneratorDriver"/> instance.</returns>
         public static CSharpGeneratorDriver Create(
             IEnumerable<ISourceGenerator> generators,

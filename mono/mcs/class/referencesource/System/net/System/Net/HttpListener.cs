@@ -58,8 +58,10 @@ namespace System.Net
             }
         }
 
-        // ReleasePins() should be called exactly once.  It must be called before Dispose() is called, which means it must be called
-        // before an object (HttpListenerReqeust) which closes the RequestContext on demand is returned to the application.
+        // ReleasePins() should be called exactly once.  It must be called before Dispose() is called, which
+        // means it must be called
+        // before an object (HttpListenerReqeust) which closes the RequestContext on demand is returned to
+        // the application.
         internal void ReleasePins()
         {
             GlobalLog.Assert(
@@ -305,12 +307,15 @@ namespace System.Net
         // FileCompletionNotificationModes.SkipCompletionPortOnSuccess flag.
         // This bug was only hit when the buffer passed into HttpReceiveClientCertificate
         // (1500 bytes initially) is tool small for the certificate.
-        // Due to this bug in downlevel operating systems the FileCompletionNotificationModes.SkipCompletionPortOnSuccess
+        // Due to this bug in downlevel operating systems the
+        // FileCompletionNotificationModes.SkipCompletionPortOnSuccess
         // flag is only used on Win8 and later.
         internal static readonly bool SkipIOCPCallbackOnSuccess = ComNetOS.IsWin8orLater;
 
-        // Mitigate potential DOS attacks by limiting the number of unknown headers we accept.  Numerous header names
-        // with hash collisions will cause the server to consume excess CPU.  1000 headers limits CPU time to under
+        // Mitigate potential DOS attacks by limiting the number of unknown headers we accept.  Numerous
+        // header names
+        // with hash collisions will cause the server to consume excess CPU.  1000 headers limits CPU time
+        // to under
         // 0.5 seconds per request.  Respond with a 400 Bad Request.
         private const int UnknownHeaderLimit = 1000;
 
@@ -1152,7 +1157,8 @@ namespace System.Net
         private void AttachRequestQueueToUrlGroup()
         {
             //
-            // Set the association between request queue and url group. After this, requests for registered urls will
+            // Set the association between request queue and url group. After this, requests for registered urls
+            // will
             // get delivered to this request queue.
             //
             UnsafeNclNativeMethods.HttpApi.HTTP_BINDING_INFO info =
@@ -1177,7 +1183,8 @@ namespace System.Net
             );
 
             //
-            // Break the association between request queue and url group. After this, requests for registered urls
+            // Break the association between request queue and url group. After this, requests for registered
+            // urls
             // will get 503s.
             // Note that this method may be called multiple times (Stop() and then Abort()). This
             // is fine since http.sys allows to set HttpServerBindingProperty multiple times for valid
@@ -1555,7 +1562,8 @@ namespace System.Net
 
                     if (stoleBlob)
                     {
-                        // The request has been handed to the user, which means this code can't reuse the blob.  Reset it here.
+                        // The request has been handed to the user, which means this code can't reuse the blob.  Reset it
+                        // here.
                         memoryBlob = null;
                         stoleBlob = false;
                     }
@@ -1868,7 +1876,8 @@ namespace System.Net
                     disconnectResult = null;
                 }
 
-                // Pick out the old context now.  By default, it'll be removed in the finally, unless context is set somewhere.
+                // Pick out the old context now.  By default, it'll be removed in the finally, unless context is set
+                // somewhere.
                 if (disconnectResult != null)
                 {
                     oldContext = disconnectResult.Session;
@@ -1931,7 +1940,8 @@ namespace System.Net
                 }
                 else
                 {
-                    // We didn't give the request to the user yet, so we haven't lost control of the unmanaged blob and can
+                    // We didn't give the request to the user yet, so we haven't lost control of the unmanaged blob and
+                    // can
                     // continue to reuse the buffer.
                     stoleBlob = false;
                 }
@@ -2054,7 +2064,8 @@ namespace System.Net
                     }
                 }
 
-                // httpError holds the error we will return if an Authorization header is present but can't be authenticated
+                // httpError holds the error we will return if an Authorization header is present but can't be
+                // authenticated
                 HttpStatusCode httpError = HttpStatusCode.InternalServerError;
                 bool error = false;
 
@@ -2137,19 +2148,29 @@ namespace System.Net
                             );
 
                             // WDigest had some weird behavior.  This is what I have discovered:
-                            // Local accounts don't work, only domain accounts.  The domain (i.e. REDMOND) is implied.  Not sure how it is chosen.
-                            // If the domain is specified and the credentials are correct, it works.  If they're not (domain, username or password):
-                            //      AcceptSecurityContext (GetOutgoingDigestBlob) returns success but with a bogus 4k challenge, and
+                            // Local accounts don't work, only domain accounts.  The domain (i.e. REDMOND) is implied.  Not sure
+                            // how it is chosen.
+                            // If the domain is specified and the credentials are correct, it works.  If they're not (domain,
+                            // username or password):
+                            //      AcceptSecurityContext (GetOutgoingDigestBlob) returns success but with a bogus 4k challenge,
+                            // and
                             //      QuerySecurityContextToken (GetContextToken) fails with NoImpersonation.
-                            // If the domain isn't specified, AcceptSecurityContext returns NoAuthenticatingAuthority for a bad username,
+                            // If the domain isn't specified, AcceptSecurityContext returns NoAuthenticatingAuthority for a bad
+                            // username,
                             // and LogonDenied for a bad password.
 
-                            // Also interesting is that WDigest requires us to keep a reference to the previous context, but fails if we
-                            // actually pass it in!  (It't ok to pass it in for the first request, but not if nc > 1.)  For Whidbey,
-                            // we create a new context and associate it with the connection, just like NTLM, but instead of using it for
-                            // the next request on the connection, we always create a new context and swap the old one out.  As long
-                            // as we keep the old one around until after we authenticate with the new one, it works.  For this reason,
-                            // we also keep these contexts around past the lifetime of the connection, so that KeepAlive=false works.
+                            // Also interesting is that WDigest requires us to keep a reference to the previous context, but
+                            // fails if we
+                            // actually pass it in!  (It't ok to pass it in for the first request, but not if nc > 1.)  For
+                            // Whidbey,
+                            // we create a new context and associate it with the connection, just like NTLM, but instead of
+                            // using it for
+                            // the next request on the connection, we always create a new context and swap the old one out.  As
+                            // long
+                            // as we keep the old one around until after we authenticate with the new one, it works.  For this
+                            // reason,
+                            // we also keep these contexts around past the lifetime of the connection, so that KeepAlive=false
+                            // works.
                             binding = GetChannelBinding(
                                 connectionId,
                                 isSecureConnection,
@@ -2194,7 +2215,8 @@ namespace System.Net
                                     + "]"
                             );
 
-                            // WDigest bug: sometimes when AcceptSecurityContext returns success, it provides a bogus, empty 4k buffer.
+                            // WDigest bug: sometimes when AcceptSecurityContext returns success, it provides a bogus, empty 4k
+                            // buffer.
                             // Ignore it.  (Should find out what's going on here from WDigest people.)
                             if (statusCodeNew == SecurityStatus.OK)
                             {
@@ -2593,7 +2615,8 @@ namespace System.Net
                 ArrayList challenges = null;
                 if (httpContext == null)
                 {
-                    // If we already have a challenge, just use it.  Otherwise put a challenge for each acceptable scheme.
+                    // If we already have a challenge, just use it.  Otherwise put a challenge for each acceptable
+                    // scheme.
                     if (challenge != null)
                     {
                         AddChallenge(ref challenges, challenge);
@@ -2647,7 +2670,8 @@ namespace System.Net
                     }
                 }
 
-                // Check if we need to call WaitForDisconnect, because if we do and it fails, we want to send a 500 instead.
+                // Check if we need to call WaitForDisconnect, because if we do and it fails, we want to send a 500
+                // instead.
                 if (disconnectResult == null && newContext != null)
                 {
                     RegisterForDisconnectNotification(connectionId, ref disconnectResult);
@@ -2817,8 +2841,10 @@ namespace System.Net
             }
         }
 
-        // Using the configured Auth schemes, populate the auth challenge headers. This is for scenarios where
-        // Anonymous access is allowed for some resources, but the server later determines that authorization
+        // Using the configured Auth schemes, populate the auth challenge headers. This is for scenarios
+        // where
+        // Anonymous access is allowed for some resources, but the server later determines that
+        // authorization
         // is required for this request.
         internal void SetAuthenticationHeaders(HttpListenerContext context)
         {
@@ -3301,7 +3327,8 @@ namespace System.Net
                     || statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
                 )
                 {
-                    // Need to make sure it's going to get returned before adding it to the hash.  That way it'll be handled
+                    // Need to make sure it's going to get returned before adding it to the hash.  That way it'll be
+                    // handled
                     // correctly in HandleAuthentication's finally.
                     disconnectResult = result;
                     DisconnectResults[connectionId] = disconnectResult;
@@ -3927,9 +3954,12 @@ namespace System.Net
                     if (m_Session.Package == NegotiationInfoClass.WDigest)
                     {
                         // VSWhidbey #497767
-                        // WDigest doesn't like having the context passed back in on the next request on a connection, but it does want
-                        // the server to keep a reference to it for as long as a client might reuse the nonce.  The heuristic we use is,
-                        // keep contexts for five minutes, up to a maximum of 1024, except also keep all contexts at least 10 seconds to avoid
+                        // WDigest doesn't like having the context passed back in on the next request on a connection, but
+                        // it does want
+                        // the server to keep a reference to it for as long as a client might reuse the nonce.  The
+                        // heuristic we use is,
+                        // keep contexts for five minutes, up to a maximum of 1024, except also keep all contexts at least
+                        // 10 seconds to avoid
                         // total DoS (where no handshakes can be completed in time).
                         m_HttpListener.SaveDigestContext(m_Session);
                     }
@@ -3982,69 +4012,69 @@ namespace System.Net
         }
     }
 
-    /*  Proposed Future HTTP Base Classes
-        see \ndp\mb\docs\specs\NetworkFramework\HTTPSYS\ASP.NET\stub.cs
-    
-        // System.Net exposes base abstract classes that System.Web will inherit from
-    
-        public abstract class BaseHttpContext {
-            public virtual IPrincipal User { get; set; }
-    
-            // it doesn't make sense to make these virtual because we can't override
-            // and change the returned type for System.Web or people would break.
-            // the only thing we can do is to declare them normally and hide the
-            // base implementation like "public new System.Web.HttpRequest Request"
-    
-            public BaseHttpRequest Request { get; }
-            public BaseHttpResponse Response { get; }
-    
-            // these provide plumbing to make the above two methods callable with a BaseHttpContext reference
-    
-            protected virtual BaseHttpRequest GetRequest();
-            protected virtual BaseHttpResponse GetResponse();
-        }
-    
-        public abstract class BaseHttpRequest {
-            public virtual string[] AcceptTypes { get; }
-            public virtual Encoding ContentEncoding { get; set; }
-            public virtual string ContentType { get; set; }
-            public virtual NameValueCollection Headers { get; }
-            public virtual string HttpMethod { get; }
-            public virtual Stream InputStream { get; }
-            public virtual bool IsAuthenticated { get; }
-            public virtual bool IsLocal { get; }
-            public virtual bool IsSecureConnection { get; }
-            public virtual NameValueCollection QueryString { get; }
-            public virtual string RawUrl { get; }
-            public virtual Uri Url { get; }
-            public virtual Uri UrlReferrer { get; }
-            public virtual string UserAgent { get; }
-            public virtual string UserHostAddress { get; }
-            public virtual string UserHostName { get; }
-            public virtual string[] UserLanguages { get; }
-    
-            // APIs that are in the base class but are new to ASP .NET
-    
-            public virtual long ContentLengthLong { get; }
-            public virtual bool HasEntityBody { get; }
-            public virtual bool KeepAlive { get; }
-            public virtual IPEndPoint RemoteEndPoint { get; }
-            public virtual IPEndPoint LocalEndPoint { get; }
-        }
-    
-        public abstract class BaseHttpResponse {
-            public virtual void AppendHeader(string name, string value);
-            public virtual void Close();
-            public virtual Encoding ContentEncoding { get; set; }
-            public virtual string ContentType { get; set; }
-            public virtual Stream OutputStream { get; }
-            public virtual string RedirectLocation { get; set; }
-            public virtual int StatusCode { get; set; }
-            public virtual string StatusDescription { get; set; }
-    
-            // APIs that are in the base class but are new to ASP .NET
-    
-            public virtual bool KeepAlive { get; set; }
-        }
-    */
+/*  Proposed Future HTTP Base Classes
+see \ndp\mb\docs\specs\NetworkFramework\HTTPSYS\ASP.NET\stub.cs
+
+// System.Net exposes base abstract classes that System.Web will inherit from
+
+public abstract class BaseHttpContext {
+public virtual IPrincipal User { get; set; }
+
+// it doesn't make sense to make these virtual because we can't override
+// and change the returned type for System.Web or people would break.
+// the only thing we can do is to declare them normally and hide the
+// base implementation like "public new System.Web.HttpRequest Request"
+
+public BaseHttpRequest Request { get; }
+public BaseHttpResponse Response { get; }
+
+// these provide plumbing to make the above two methods callable with a BaseHttpContext reference
+
+protected virtual BaseHttpRequest GetRequest();
+protected virtual BaseHttpResponse GetResponse();
+}
+
+public abstract class BaseHttpRequest {
+public virtual string[] AcceptTypes { get; }
+public virtual Encoding ContentEncoding { get; set; }
+public virtual string ContentType { get; set; }
+public virtual NameValueCollection Headers { get; }
+public virtual string HttpMethod { get; }
+public virtual Stream InputStream { get; }
+public virtual bool IsAuthenticated { get; }
+public virtual bool IsLocal { get; }
+public virtual bool IsSecureConnection { get; }
+public virtual NameValueCollection QueryString { get; }
+public virtual string RawUrl { get; }
+public virtual Uri Url { get; }
+public virtual Uri UrlReferrer { get; }
+public virtual string UserAgent { get; }
+public virtual string UserHostAddress { get; }
+public virtual string UserHostName { get; }
+public virtual string[] UserLanguages { get; }
+
+// APIs that are in the base class but are new to ASP .NET
+
+public virtual long ContentLengthLong { get; }
+public virtual bool HasEntityBody { get; }
+public virtual bool KeepAlive { get; }
+public virtual IPEndPoint RemoteEndPoint { get; }
+public virtual IPEndPoint LocalEndPoint { get; }
+}
+
+public abstract class BaseHttpResponse {
+public virtual void AppendHeader(string name, string value);
+public virtual void Close();
+public virtual Encoding ContentEncoding { get; set; }
+public virtual string ContentType { get; set; }
+public virtual Stream OutputStream { get; }
+public virtual string RedirectLocation { get; set; }
+public virtual int StatusCode { get; set; }
+public virtual string StatusDescription { get; set; }
+
+// APIs that are in the base class but are new to ASP .NET
+
+public virtual bool KeepAlive { get; set; }
+}
+*/
 }

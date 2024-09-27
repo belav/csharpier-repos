@@ -52,10 +52,12 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DefaultModelBindingMessageProvider"/> class based on
+    /// Initializes a new instance of the <see cref="DefaultModelBindingMessageProvider"/> class based
+    // on
     /// <paramref name="originalProvider"/>.
     /// </summary>
-    /// <param name="originalProvider">The <see cref="DefaultModelBindingMessageProvider"/> to duplicate.</param>
+    /// <param name="originalProvider">The <see cref="DefaultModelBindingMessageProvider"/> to
+    // duplicate.</param>
     public DefaultModelBindingMessageProvider(DefaultModelBindingMessageProvider originalProvider)
     {
         ArgumentNullException.ThrowIfNull(originalProvider);

@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel.Design
 {
     using System;
@@ -56,7 +56,8 @@ namespace System.ComponentModel.Design
 
         /// <devdoc>
         ///    <para>
-        ///       Removes the specified <see cref='System.ComponentModel.Design.MenuCommand'/> from the document.
+        ///       Removes the specified <see cref='System.ComponentModel.Design.MenuCommand'/> from the
+        // document.
         ///    </para>
         /// </devdoc>
         void RemoveCommand(MenuCommand command);

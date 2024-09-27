@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     Contextual information associated with each convention call.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public interface IConventionContext
 {
@@ -20,7 +21,8 @@ public interface IConventionContext
     void StopProcessing();
 
     /// <summary>
-    ///     Prevents conventions from being executed immediately when a metadata aspect is modified. All the delayed conventions
+    ///     Prevents conventions from being executed immediately when a metadata aspect is modified. All
+    // the delayed conventions
     ///     will be executed after the returned object is disposed.
     /// </summary>
     /// <remarks>

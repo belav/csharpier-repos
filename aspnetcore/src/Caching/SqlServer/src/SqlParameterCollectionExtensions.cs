@@ -13,7 +13,8 @@ internal static class SqlParameterCollectionExtensions
     // parameter for better performance.
     public const int DefaultValueColumnWidth = 8000;
 
-    // Maximum size of a primary key column is 900 bytes (898 bytes from the key + 2 additional bytes required by
+    // Maximum size of a primary key column is 900 bytes (898 bytes from the key + 2 additional bytes
+    // required by
     // the Sql Server).
     public const int CacheItemIdColumnWidth = 449;
 

@@ -79,8 +79,10 @@ namespace Microsoft.CodeAnalysis.Text
             > s_textSnapshotMap = new ConditionalWeakTable<ITextSnapshot, SnapshotSourceText>();
 
             /// <summary>
-            /// Reverse map of roslyn text to editor snapshot. unlike forward map, this doesn't strongly hold onto editor snapshot so that
-            /// we don't leak editor snapshot which should go away once editor is closed. roslyn source's lifetime is not usually tied to view.
+            /// Reverse map of roslyn text to editor snapshot. unlike forward map, this doesn't strongly hold
+            // onto editor snapshot so that
+            /// we don't leak editor snapshot which should go away once editor is closed. roslyn source's
+            // lifetime is not usually tied to view.
             /// </summary>
             private static readonly ConditionalWeakTable<
                 ITextImage,
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Text
             }
 
             /// <summary>
-            /// This only exist to break circular dependency on creating buffer. nobody except extension itself should use it
+            /// This only exist to break circular dependency on creating buffer. nobody except extension itself
+            // should use it
             /// </summary>
             internal static SourceText From(
                 ITextBufferCloneService? textBufferCloneService,
@@ -490,7 +493,8 @@ namespace Microsoft.CodeAnalysis.Text
                     {
                         if (changes != null)
                         {
-                            // Oops - more than one "textual" change between these snapshots, bail and try to find smallest changes span
+                            // Oops - more than one "textual" change between these snapshots, bail and try to find smallest
+                            // changes span
                             Logger.Log(
                                 FunctionId.Workspace_SourceText_GetChangeRanges,
                                 s_textLog,

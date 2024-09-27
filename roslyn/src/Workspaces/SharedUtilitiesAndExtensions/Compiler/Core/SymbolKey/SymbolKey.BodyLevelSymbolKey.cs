@@ -45,16 +45,22 @@ namespace Microsoft.CodeAnalysis
             {
                 var cancellationToken = visitor.CancellationToken;
 
-                // Store the body level symbol in two forms.  The first, a highly precise form that should find explicit
-                // symbols for the case of resolving a symbol key back in the *same* solution snapshot it was created
-                // from. The second, in a more query-oriented form that can allow the symbol to be found in some cases
+                // Store the body level symbol in two forms.  The first, a highly precise form that should find
+                // explicit
+                // symbols for the case of resolving a symbol key back in the *same* solution snapshot it was
+                // created
+                // from. The second, in a more query-oriented form that can allow the symbol to be found in some
+                // cases
                 // even if the solution changed (which is a supported use case for SymbolKey).
                 //
-                // The first way just stores the location of the symbol, which we can then validate during resolution
+                // The first way just stores the location of the symbol, which we can then validate during
+                // resolution
                 // maps back to the same symbol kind/name.
                 //
-                // The second determines the sequence of symbols of the same kind and same name in the file and keeps
-                // track of our index in that sequence.  That way, if trivial edits happen, or symbols with different
+                // The second determines the sequence of symbols of the same kind and same name in the file and
+                // keeps
+                // track of our index in that sequence.  That way, if trivial edits happen, or symbols with
+                // different
                 // names/types are added/removed, we can still find what is likely to be this symbol after the edit.
 
                 var kind = symbol.Kind;

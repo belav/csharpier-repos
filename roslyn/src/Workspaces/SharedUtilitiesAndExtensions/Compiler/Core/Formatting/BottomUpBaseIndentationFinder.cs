@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (operation != null)
             {
                 // make sure we found new starting point of new indentation.
-                // such operation should start span after the token (a token that is right before the new indentation),
+                // such operation should start span after the token (a token that is right before the new
+                // indentation),
                 // contains current position, and position should be before the existing next token
                 if (
                     token.Span.End <= operation.TextSpan.Start
@@ -195,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 var baseToken = operation.BaseToken;
                 RoslynDebug.AssertNotNull(baseToken.SyntaxTree);
 
-                // If the SmartIndenter created this IndentationFinder then tokenStream will be a null hence we should do a null check on the tokenStream
+                // If the SmartIndenter created this IndentationFinder then tokenStream will be a null hence we
+                // should do a null check on the tokenStream
                 if (operation.Option.IsOn(IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine))
                 {
                     if (_tokenStream != null)
@@ -337,7 +339,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             var startNode = token.Parent;
 
-            // starting from given token, move up to the root until it finds the first set of appropriate operations
+            // starting from given token, move up to the root until it finds the first set of appropriate
+            // operations
             var list = new List<IndentBlockOperation>();
 
             var currentNode = startNode;

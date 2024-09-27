@@ -25,7 +25,8 @@ namespace System.ComponentModel
 
         /// <summary>
         /// Specifies the default value for the <see cref='System.ComponentModel.BindableAttribute'/>, which
-        /// is <see cref='System.ComponentModel.BindableAttribute.No'/>. This <see langword='static '/>field is
+        /// is <see cref='System.ComponentModel.BindableAttribute.No'/>. This <see langword='static '/>field
+        // is
         /// read-only.
         /// </summary>
         public static readonly BindableAttribute Default = No;

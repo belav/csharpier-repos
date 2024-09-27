@@ -47,7 +47,8 @@ namespace System.Net.Sockets
 
             Socket.Blocking_icall(handle, false, out error);
 #if FULL_AOT_DESKTOP
-            /* It's only for platforms that do not have working syscall abort mechanism, like WatchOS and TvOS */
+/* It's only for platforms that do not have working syscall abort mechanism, like WatchOS and TvOS
+*/
             Socket.Shutdown_icall(handle, SocketShutdown.Both, out error);
 #endif
 

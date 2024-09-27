@@ -14,9 +14,12 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     /// <summary>
-    /// Helper type that can be used to ask for a <see cref="Compilation"/> to be produced in our OOP server for a
-    /// particular <see cref="Project"/>, asking for a callback to be executed when that has happened.  Each time this
-    /// is asked for for a particular project, any existing outstanding work to produce a <see cref="Compilation"/> for
+    /// Helper type that can be used to ask for a <see cref="Compilation"/> to be produced in our OOP
+    // server for a
+    /// particular <see cref="Project"/>, asking for a callback to be executed when that has happened.
+    // Each time this
+    /// is asked for for a particular project, any existing outstanding work to produce a <see
+    // cref="Compilation"/> for
     /// a prior <see cref="Project"/> will be cancelled.
     /// </summary>
     internal class CompilationAvailableEventSource(IAsynchronousOperationListener asyncListener)
@@ -33,8 +36,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public void Dispose() => _cancellationSeries.Dispose();
 
         /// <summary>
-        /// Request that the compilation for <see cref="Project"/> be made available in our OOP server, calling back on
-        /// <paramref name="onCompilationAvailable"/> once that happens.  Subsequence calls to this method will cancel
+        /// Request that the compilation for <see cref="Project"/> be made available in our OOP server,
+        // calling back on
+        /// <paramref name="onCompilationAvailable"/> once that happens.  Subsequence calls to this method
+        // will cancel
         /// any outstanding requests in flight.
         /// </summary>
         public void EnsureCompilationAvailability(Project project, Action onCompilationAvailable)
@@ -62,8 +67,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 {
                     // Support cancellation without throwing.
                     //
-                    // We choose a long delay here so that we can avoid this work as long as the user is continually making
-                    // changes to their code.  During that time, features that use this are already kicking off fast work
+                    // We choose a long delay here so that we can avoid this work as long as the user is continually
+                    // making
+                    // changes to their code.  During that time, features that use this are already kicking off fast
+                    // work
                     // with frozen-partial semantics and we'd like that to not have to contend with more expensive work
                     // kicked off in OOP to compute full compilations.
                     await _asyncListener
@@ -95,13 +102,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     }
                     else
                     {
-                        // if we can't get the client, just compute the compilation locally and fire the event once we have it.
+                        // if we can't get the client, just compute the compilation locally and fire the event once we have
+                        // it.
                         await CompilationAvailableHelpers
                             .ComputeCompilationInCurrentProcessAsync(project, cancellationToken)
                             .ConfigureAwait(false);
                     }
 
-                    // now that we know we have an full compilation, let the caller know so it can do whatever it needs in
+                    // now that we know we have an full compilation, let the caller know so it can do whatever it needs
+                    // in
                     // response.
                     onCompilationAvailable();
                 },

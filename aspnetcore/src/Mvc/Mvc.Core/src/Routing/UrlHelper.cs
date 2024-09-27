@@ -90,10 +90,12 @@ public class UrlHelper : UrlHelperBase
     /// Gets the <see cref="VirtualPathData"/> for the specified <paramref name="routeName"/> and route
     /// <paramref name="values"/>.
     /// </summary>
-    /// <param name="routeName">The name of the route that is used to generate the <see cref="VirtualPathData"/>.
+    /// <param name="routeName">The name of the route that is used to generate the <see
+    // cref="VirtualPathData"/>.
     /// </param>
     /// <param name="values">
-    /// The <see cref="RouteValueDictionary"/>. The <see cref="Router"/> uses these values, in combination with
+    /// The <see cref="RouteValueDictionary"/>. The <see cref="Router"/> uses these values, in
+    // combination with
     /// <see cref="UrlHelperBase.AmbientValues"/>, to generate the URL.
     /// </param>
     /// <returns>The <see cref="VirtualPathData"/>.</returns>

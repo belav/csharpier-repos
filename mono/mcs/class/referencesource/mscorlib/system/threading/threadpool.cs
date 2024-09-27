@@ -18,17 +18,17 @@
 #pragma warning disable 0420
 
 /*
- * Below you'll notice two sets of APIs that are separated by the
- * use of 'Unsafe' in their names.  The unsafe versions are called
- * that because they do not propagate the calling stack onto the
- * worker thread.  This allows code to lose the calling stack and
- * thereby elevate its security privileges.  Note that this operation
- * is much akin to the combined ability to control security policy
- * and control security evidence.  With these privileges, a person
- * can gain the right to load assemblies that are fully trusted which
- * then assert full trust and can call any code they want regardless
- * of the previous stack information.
- */
+* Below you'll notice two sets of APIs that are separated by the
+* use of 'Unsafe' in their names.  The unsafe versions are called
+* that because they do not propagate the calling stack onto the
+* worker thread.  This allows code to lose the calling stack and
+* thereby elevate its security privileges.  Note that this operation
+* is much akin to the combined ability to control security policy
+* and control security evidence.  With these privileges, a person
+* can gain the right to load assemblies that are fully trusted which
+* then assert full trust and can call any code they want regardless
+* of the previous stack information.
+*/
 
 namespace System.Threading
 {
@@ -102,7 +102,8 @@ namespace System.Threading
         public static readonly ThreadPoolWorkQueue workQueue = new ThreadPoolWorkQueue();
 
 #if NETCORE
-        /// <summary>Shim used to invoke <see cref="IAsyncStateMachineBox.MoveNext"/> of the supplied <see cref="IAsyncStateMachineBox"/>.</summary>
+        /// <summary>Shim used to invoke <see cref="IAsyncStateMachineBox.MoveNext"/> of the supplied <see
+        // cref="IAsyncStateMachineBox"/>.</summary>
         internal static readonly Action<object> s_invokeAsyncStateMachineBox = state =>
         {
             if (!(state is IAsyncStateMachineBox box))
@@ -839,7 +840,8 @@ namespace System.Threading
         {
             var workQueue = ThreadPoolGlobals.workQueue;
             //
-            // The clock is ticking!  We have ThreadPoolGlobals.tpQuantum milliseconds to get some work done, and then
+            // The clock is ticking!  We have ThreadPoolGlobals.tpQuantum milliseconds to get some work done,
+            // and then
             // we need to return to the VM.
             //
             int quantumStartTime = Environment.TickCount;
@@ -850,7 +852,8 @@ namespace System.Threading
             // reason, and we believe there might still be work in the queue.
             //
             // Note that if this thread is aborted before we get a chance to request another one, the VM will
-            // record a thread request on our behalf.  So we don't need to worry about getting aborted right here.
+            // record a thread request on our behalf.  So we don't need to worry about getting aborted right
+            // here.
             //
             workQueue.MarkThreadRequestSatisfied();
 
@@ -905,8 +908,10 @@ namespace System.Threading
                         else
                         {
                             //
-                            // If we found work, there may be more work.  Ask for another thread so that the other work can be processed
-                            // in parallel.  Note that this will only ask for a max of #procs threads, so it's safe to call it for every dequeue.
+                            // If we found work, there may be more work.  Ask for another thread so that the other work can be
+                            // processed
+                            // in parallel.  Note that this will only ask for a max of #procs threads, so it's safe to call it
+                            // for every dequeue.
                             //
                             workQueue.EnsureThreadRequested();
                         }
@@ -963,7 +968,8 @@ namespace System.Threading
                         }
 
                         //
-                        // Notify the VM that we executed this workitem.  This is also our opportunity to ask whether Hill Climbing wants
+                        // Notify the VM that we executed this workitem.  This is also our opportunity to ask whether Hill
+                        // Climbing wants
                         // us to return the thread to the pool or not.
                         //
                         if (!ThreadPool.NotifyWorkItemComplete())
@@ -976,9 +982,12 @@ namespace System.Threading
             catch (ThreadAbortException tae)
             {
                 //
-                // This is here to catch the case where this thread is aborted between the time we exit the finally block in the dispatch
-                // loop, and the time we execute the work item.  QueueUserWorkItemCallback uses this to update its accounting of whether
-                // it was executed or not (in debug builds only).  Task uses this to communicate the ThreadAbortException to anyone
+                // This is here to catch the case where this thread is aborted between the time we exit the finally
+                // block in the dispatch
+                // loop, and the time we execute the work item.  QueueUserWorkItemCallback uses this to update its
+                // accounting of whether
+                // it was executed or not (in debug builds only).  Task uses this to communicate the
+                // ThreadAbortException to anyone
                 // who waits for the task to complete.
                 //
 #if !NETCORE
@@ -989,7 +998,8 @@ namespace System.Threading
                 // In this case, the VM is going to request another thread on our behalf.  No need to do it twice.
                 //
                 needAnotherThread = false;
-                // throw;  //no need to explicitly rethrow a ThreadAbortException, and doing so causes allocations on amd64.
+                // throw;  //no need to explicitly rethrow a ThreadAbortException, and doing so causes allocations
+                // on amd64.
             }
             finally
             {
@@ -1001,7 +1011,8 @@ namespace System.Threading
                     workQueue.EnsureThreadRequested();
             }
 
-            // we can never reach this point, but the C# compiler doesn't know that, because it doesn't know the ThreadAbortException will be reraised above.
+            // we can never reach this point, but the C# compiler doesn't know that, because it doesn't know the
+            // ThreadAbortException will be reraised above.
             Contract.Assert(false);
             return true;
         }
@@ -1289,9 +1300,12 @@ namespace System.Threading
 #endif // !MONO
 
     //
-    // This type is necessary because VS 2010's debugger looks for a method named _ThreadPoolWaitCallbacck.PerformWaitCallback
-    // on the stack to determine if a thread is a ThreadPool thread or not.  We have a better way to do this for .NET 4.5, but
-    // still need to maintain compatibility with VS 2010.  When compat with VS 2010 is no longer an issue, this type may be
+    // This type is necessary because VS 2010's debugger looks for a method named
+    // _ThreadPoolWaitCallbacck.PerformWaitCallback
+    // on the stack to determine if a thread is a ThreadPool thread or not.  We have a better way to do
+    // this for .NET 4.5, but
+    // still need to maintain compatibility with VS 2010.  When compat with VS 2010 is no longer an
+    // issue, this type may be
     // removed.
     //
     internal static class _ThreadPoolWaitCallback
@@ -1311,7 +1325,8 @@ namespace System.Threading
         internal static bool PerformWaitCallback()
         {
 #if FEATURE_INTERCEPTABLE_THREADPOOL_CALLBACK
-            // store locally first to ensure another thread doesn't clear the field between checking for null and using it.
+            // store locally first to ensure another thread doesn't clear the field between checking for null
+            // and using it.
             var dispatcher = _ThreadPoolWaitCallback.dispatcher;
             if (dispatcher != null)
                 return dispatcher(ThreadPoolWorkQueue.Dispatch);
@@ -1425,7 +1440,8 @@ namespace System.Threading
         void IThreadPoolWorkItem.MarkAborted(ThreadAbortException tae)
         {
 #if DEBUG
-            // this workitem didn't execute because we got a ThreadAbortException prior to the call to ExecuteWorkItem.
+            // this workitem didn't execute because we got a ThreadAbortException prior to the call to
+            // ExecuteWorkItem.
             // This counts as being executed for our purposes.
             MarkExecuted(true);
 #endif
@@ -1659,7 +1675,8 @@ namespace System.Threading
                     ref stackMark
                 );
                 state = (Object)callBackHelper;
-                // call SetWaitObject before native call so that waitObject won't be closed before threadpoolmgr registration
+                // call SetWaitObject before native call so that waitObject won't be closed before threadpoolmgr
+                // registration
                 // this could occur if callback were to fire before SetWaitObject does its addref
                 registeredWaitHandle.SetWaitObject(waitObject);
                 IntPtr nativeRegisteredWaitHandle = RegisterWaitForSingleObjectNative(
@@ -2280,7 +2297,8 @@ namespace System.Threading
             "ThreadPool.BindHandle(IntPtr) has been deprecated.  Please use ThreadPool.BindHandle(SafeHandle) instead.",
             false
         )]
-        //        [SecurityPermissionAttribute( SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        //        [SecurityPermissionAttribute( SecurityAction.Demand, Flags =
+        // SecurityPermissionFlag.UnmanagedCode)]
         public static bool BindHandle(IntPtr osHandle)
         {
             return BindIOCompletionCallbackNative(osHandle);
@@ -2293,7 +2311,8 @@ namespace System.Threading
         [System.Security.SecuritySafeCritical]
 #endif
         //#pragma warning disable 618
-        //        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        //        [SecurityPermissionAttribute(SecurityAction.Demand, Flags =
+        // SecurityPermissionFlag.UnmanagedCode)]
         //#pragma warning restore 618
         public static bool BindHandle(SafeHandle osHandle)
         {

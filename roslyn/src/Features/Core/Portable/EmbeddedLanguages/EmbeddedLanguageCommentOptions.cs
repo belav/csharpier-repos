@@ -13,8 +13,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
     /// <summary>
     /// Helps match patterns of the form: language=name,option1,option2,option3
     /// <para/>
-    /// All matching is case insensitive, with spaces allowed between the punctuation. Option values will be or'ed
-    /// together to produce final options value.  If an unknown option is encountered, processing will stop with
+    /// All matching is case insensitive, with spaces allowed between the punctuation. Option values
+    // will be or'ed
+    /// together to produce final options value.  If an unknown option is encountered, processing will
+    // stop with
     /// whatever value has accumulated so far.
     /// <para/>
     /// Option names are the values from the TOptions enum.

@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// We will record non-fatal-watson if any analyzer with this interface throws an exception.
     ///
     /// also, built in analyzer can do things that third-party analyzer (command line analyzer) can't do
-    /// such as reporting all diagnostic descriptors as hidden when it can return different severity on runtime.
+    /// such as reporting all diagnostic descriptors as hidden when it can return different severity on
+    // runtime.
     ///
     /// or reporting diagnostics ID that is not reported by SupportedDiagnostics.
     ///

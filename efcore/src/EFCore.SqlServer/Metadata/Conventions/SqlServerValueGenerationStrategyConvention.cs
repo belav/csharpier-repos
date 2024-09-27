@@ -6,12 +6,14 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures the default model <see cref="SqlServerValueGenerationStrategy" /> as
+///     A convention that configures the default model <see cref="SqlServerValueGenerationStrategy"
+// /> as
 ///     <see cref="SqlServerValueGenerationStrategy.IdentityColumn" />.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public class SqlServerValueGenerationStrategyConvention
@@ -22,7 +24,8 @@ public class SqlServerValueGenerationStrategyConvention
     ///     Creates a new instance of <see cref="SqlServerValueGenerationStrategyConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public SqlServerValueGenerationStrategyConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

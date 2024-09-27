@@ -7,7 +7,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Extension methods for setting up authentication services in an <see cref="IServiceCollection" />.
+/// Extension methods for setting up authentication services in an <see cref="IServiceCollection"
+// />.
 /// </summary>
 public static class AuthenticationCoreServiceCollectionExtensions
 {
@@ -31,7 +32,8 @@ public static class AuthenticationCoreServiceCollectionExtensions
     /// Add core authentication services needed for <see cref="IAuthenticationService"/>.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="configureOptions">Used to configure the <see cref="AuthenticationOptions"/>.</param>
+    /// <param name="configureOptions">Used to configure the <see
+    // cref="AuthenticationOptions"/>.</param>
     /// <returns>The service collection.</returns>
     public static IServiceCollection AddAuthenticationCore(
         this IServiceCollection services,

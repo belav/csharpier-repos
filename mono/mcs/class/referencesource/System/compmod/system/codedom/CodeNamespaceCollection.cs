@@ -29,7 +29,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeNamespaceCollection'/> based on another <see cref='System.CodeDom.CodeNamespaceCollection'/>.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeNamespaceCollection'/> based
+        // on another <see cref='System.CodeDom.CodeNamespaceCollection'/>.
         ///    </para>
         /// </devdoc>
         public CodeNamespaceCollection(CodeNamespaceCollection value)
@@ -39,7 +40,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeNamespaceCollection'/> containing any array of <see cref='System.CodeDom.CodeNamespace'/> objects.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeNamespaceCollection'/>
+        // containing any array of <see cref='System.CodeDom.CodeNamespace'/> objects.
         ///    </para>
         /// </devdoc>
         public CodeNamespaceCollection(CodeNamespace[] value)
@@ -48,7 +50,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Represents the entry at the specified index of the <see cref='System.CodeDom.CodeNamespace'/>.</para>
+        /// <para>Represents the entry at the specified index of the <see
+        // cref='System.CodeDom.CodeNamespace'/>.</para>
         /// </devdoc>
         public CodeNamespace this[int index]
         {
@@ -66,7 +69,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the elements of an array to the end of the <see cref='System.CodeDom.CodeNamespaceCollection'/>.</para>
+        /// <para>Copies the elements of an array to the end of the <see
+        // cref='System.CodeDom.CodeNamespaceCollection'/>.</para>
         /// </devdoc>
         public void AddRange(CodeNamespace[] value)
         {
@@ -82,7 +86,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Adds the contents of another <see cref='System.CodeDom.CodeNamespaceCollection'/> to the end of the collection.
+        ///       Adds the contents of another <see cref='System.CodeDom.CodeNamespaceCollection'/> to the
+        // end of the collection.
         ///    </para>
         /// </devdoc>
         public void AddRange(CodeNamespaceCollection value)
@@ -100,7 +105,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         /// <para>Gets a value indicating whether the
-        ///    <see cref='System.CodeDom.CodeNamespaceCollection'/> contains the specified <see cref='System.CodeDom.CodeNamespace'/>.</para>
+        ///    <see cref='System.CodeDom.CodeNamespaceCollection'/> contains the specified <see
+        // cref='System.CodeDom.CodeNamespace'/>.</para>
         /// </devdoc>
         public bool Contains(CodeNamespace value)
         {
@@ -108,7 +114,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.CodeDom.CodeNamespaceCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the <see cref='System.CodeDom.CodeNamespaceCollection'/> values to a
+        // one-dimensional <see cref='System.Array'/> instance at the
         ///    specified index.</para>
         /// </devdoc>
         public void CopyTo(CodeNamespace[] array, int index)
@@ -126,7 +133,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Inserts a <see cref='System.CodeDom.CodeNamespace'/> into the <see cref='System.CodeDom.CodeNamespaceCollection'/> at the specified index.</para>
+        /// <para>Inserts a <see cref='System.CodeDom.CodeNamespace'/> into the <see
+        // cref='System.CodeDom.CodeNamespaceCollection'/> at the specified index.</para>
         /// </devdoc>
         public void Insert(int index, CodeNamespace value)
         {

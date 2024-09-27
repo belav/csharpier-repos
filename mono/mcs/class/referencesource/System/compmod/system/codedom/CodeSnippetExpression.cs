@@ -33,7 +33,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeSnippetExpression'/> using the specified snippet
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeSnippetExpression'/> using the
+        // specified snippet
         ///       expression.
         ///    </para>
         /// </devdoc>

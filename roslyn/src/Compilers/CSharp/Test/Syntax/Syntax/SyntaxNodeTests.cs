@@ -55,7 +55,8 @@ class C {
         [Fact]
         public void TestQualifiedNameSyntaxWith()
         {
-            // this is just a test to prove that at least one generate With method exists and functions correctly. :-)
+            // this is just a test to prove that at least one generate With method exists and functions
+            // correctly. :-)
             var qname = (QualifiedNameSyntax)SyntaxFactory.ParseName("A.B");
             var qname2 = qname.WithRight(SyntaxFactory.IdentifierName("C"));
             var text = qname2.ToString();
@@ -415,7 +416,8 @@ class C {
                 compilationUnit
                     .GetDiagnostics()
                     .Verify(
-                        // (1,17): error CS1040: Preprocessor directives must appear as the first non-whitespace character on a line
+                        // (1,17): error CS1040: Preprocessor directives must appear as the first non-whitespace character
+                        // on a line
                         // namespace N { } #if false
                         TestBase
                             .Diagnostic(ErrorCode.ERR_BadDirectivePlacement, "#")
@@ -2308,7 +2310,8 @@ class Test
 "
             );
 
-            // Verify the kind of the CSharpSyntaxNode "int IX.GOO" is MethodDeclaration and NOT FieldDeclaration
+            // Verify the kind of the CSharpSyntaxNode "int IX.GOO" is MethodDeclaration and NOT
+            // FieldDeclaration
             Assert.Equal(
                 SyntaxKind.MethodDeclaration,
                 tree.GetCompilationUnitRoot()
@@ -3167,7 +3170,8 @@ c)"
         [Fact]
         public void TestRemoveLastNode_KeepExteriorTrivia()
         {
-            // this tests removing the last node in a non-terminal such that there is no token to the right of the removed
+            // this tests removing the last node in a non-terminal such that there is no token to the right of
+            // the removed
             // node to attach the kept trivia too.  The trivia must be attached to the previous token.
 
             var cu = SyntaxFactory.ParseCompilationUnit("class C { void M() { } /* trivia */ }");

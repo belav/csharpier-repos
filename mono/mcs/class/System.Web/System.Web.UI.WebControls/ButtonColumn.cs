@@ -120,9 +120,9 @@ namespace System.Web.UI.WebControls
 
         public override void Initialize()
         {
-            /* No documentation for this method, so it's
-             * only here to keep corcompare quiet
-             */
+/* No documentation for this method, so it's
+* only here to keep corcompare quiet
+*/
             base.Initialize();
         }
 

@@ -18,6 +18,7 @@ namespace System.Transactions.Configuration
 {
     public class DefaultSettingsSection : ConfigurationSection
     {
+        //
         // http://msdn.microsoft.com/en-us/library/system.transactions.configuration.defaultsettingssection.timeout.aspx
         [ConfigurationProperty("timeout", DefaultValue = "00:01:00")]
         [TimeSpanValidator(
@@ -34,6 +35,7 @@ namespace System.Transactions.Configuration
             }
         }
 
+        //
         // http://msdn.microsoft.com/en-us/library/system.transactions.configuration.defaultsettingssection.distributedtransactionmanagername(v=VS.90).aspx
         [ConfigurationProperty("distributedTransactionManagerName", DefaultValue = "")]
         public string DistributedTransactionManagerName

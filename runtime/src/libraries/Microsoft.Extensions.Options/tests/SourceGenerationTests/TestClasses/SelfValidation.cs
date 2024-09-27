@@ -49,7 +49,8 @@ namespace SelfValidation
     [OptionsValidator]
     public partial struct FirstValidator : IValidateOptions<FirstModel> { }
 
-    // SelfValidateOptions is self validate class as it implements IValidatableObject and contains no properties have ValidationAttribute
+    // SelfValidateOptions is self validate class as it implements IValidatableObject and contains no
+    // properties have ValidationAttribute
     // Source generator should generate valid code for this class
     [OptionsValidator]
     public partial class SelfValidateOptions

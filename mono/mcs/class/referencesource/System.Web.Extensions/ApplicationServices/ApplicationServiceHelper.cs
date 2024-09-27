@@ -22,7 +22,8 @@ namespace System.Web.ApplicationServices
     {
         // store profile properties allowed for get/set over the webservice
         // a dictionary is used for perf, as .ContainsKey is called often
-        // These dictionaries are used for concurrent reads, but all writes are done on a new instance one per thread
+        // These dictionaries are used for concurrent reads, but all writes are done on a new instance one
+        // per thread
         // and isn't available for reading from other threads until the operation is complete.
         // So it is safe to use Dictionary<K,V> in this case.
         // We use Dictionary<string, object> instead of Dictionary<string, bool> to avoid violating

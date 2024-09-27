@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.ApiDescription.Client;
 /// </summary>
 /// <remarks>
 /// Based on and uses the same escaping as
-/// https://github.com/Microsoft/msbuild/blob/e70a3159d64f9ed6ec3b60253ef863fa883a99b1/src/Shared/EscapingUtilities.cs
+///
+// https://github.com/Microsoft/msbuild/blob/e70a3159d64f9ed6ec3b60253ef863fa883a99b1/src/Shared/EscapingUtilities.cs
 /// </remarks>
 public static class MetadataSerializer
 {
@@ -21,7 +22,8 @@ public static class MetadataSerializer
     private static readonly HashSet<char> CharsToEscapeHash = new HashSet<char>(CharsToEscape);
 
     /// <summary>
-    /// Add the given <paramref name="key"/> and <paramref name="value"/> to the <paramref name="item"/>. Or,
+    /// Add the given <paramref name="key"/> and <paramref name="value"/> to the <paramref
+    // name="item"/>. Or,
     /// modify existing value to be <paramref name="value"/>.
     /// </summary>
     /// <param name="item">The <see cref="ITaskItem"/> to update.</param>

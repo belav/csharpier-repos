@@ -392,7 +392,8 @@ namespace MonoTests.System.Data
 
             // Rule = None, Delete Exception
             fc.DeleteRule = Rule.None;
-            //Exception = "Cannot delete this row because constraints are enforced on relation Constraint1, and deleting this row will strand child rows."
+            //Exception = "Cannot delete this row because constraints are enforced on relation Constraint1, and
+            // deleting this row will strand child rows."
             try
             {
                 dtParent.Rows.Find(1).Delete();
@@ -442,10 +443,10 @@ namespace MonoTests.System.Data
 
             DataRow[] arr = ds1.Tables[1].Select("ChildId is null");
 
-            /*foreach (DataRow dr in arr)
-                    {
-                        Assert.AreEqual(null, dr["ChildId"], "FKC");
-                    }*/
+/*foreach (DataRow dr in arr)
+{
+Assert.AreEqual(null, dr["ChildId"], "FKC");
+}*/
 
             Assert.AreEqual(4, arr.Length, "FKC46");
 
@@ -623,10 +624,10 @@ namespace MonoTests.System.Data
 
             ds.Tables[0].Rows[0]["ParentId"] = 5;
 
-            /*ds.Tables[0].AcceptChanges();
-            ds.Tables[1].AcceptChanges();
-            //Checking the table
-            Compare(ds.Tables[1].Select("ParentId=8").Length ,0);*/
+/*ds.Tables[0].AcceptChanges();
+ds.Tables[1].AcceptChanges();
+//Checking the table
+Compare(ds.Tables[1].Select("ParentId=8").Length ,0);*/
         }
 
         [Test]

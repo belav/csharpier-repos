@@ -34,12 +34,14 @@ internal static class Program
             propertiesBuilder.Add(propertyParts[0], propertyParts[1]);
         }
 
-        // Create a console logger that logs everything to standard error instead of standard out; by setting the threshold to Trace
+        // Create a console logger that logs everything to standard error instead of standard out; by
+        // setting the threshold to Trace
         // everything will go to standard error.
         var loggerFactory = LoggerFactory.Create(builder =>
             builder.AddConsole(configure =>
             {
-                // DisableColors is deprecated in favor of us moving to simple console, but that loses the LogToStandardErrorThreshold
+                // DisableColors is deprecated in favor of us moving to simple console, but that loses the
+                // LogToStandardErrorThreshold
                 // which we also need
 #pragma warning disable CS0618
                 configure.DisableColors = true;

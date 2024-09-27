@@ -1,22 +1,25 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+
 /*****************************************************************************************************
 Rules for Multiple Nested Parent, enforce following constraints
 
 1) At all times, only 1(ONE) FK can be NON-Null in a row.
 2) NULL FK values are not associated with PARENT(x), even if PK is NULL in Parent
 3) Enforce <rule 1> when
-        a) Any FK value is changed
-        b) A relation created that result in Multiple Nested Child
+a) Any FK value is changed
+b) A relation created that result in Multiple Nested Child
 
 WriteXml
 
 1) WriteXml will throw if <rule 1> is violated
-2) if NON-Null FK has parentRow (boolean check) print as Nested, else it will get written as normal row
+2) if NON-Null FK has parentRow (boolean check) print as Nested, else it will get written as normal
+row
 
 additional notes:
 We decided to enforce the rule 1 just if Xml being persisted
+
 ******************************************************************************************************/
 
 using System.Collections.Generic;
@@ -62,7 +65,8 @@ namespace System.Data
         internal bool _nested;
 
         /// <summary>
-        /// This stores whether the relationship should make sure that KeyConstraints and ForeignKeyConstraints
+        /// This stores whether the relationship should make sure that KeyConstraints and
+        // ForeignKeyConstraints
         /// exist when added to the ConstraintsCollections of the table.
         /// </summary>
         internal bool _createConstraints;
@@ -73,14 +77,16 @@ namespace System.Data
         private readonly int _objectID = Interlocked.Increment(ref s_objectTypeCount);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name,
+        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name,
         /// parent, and child columns.
         /// </summary>
         public DataRelation(string? relationName, DataColumn parentColumn, DataColumn childColumn)
             : this(relationName, parentColumn, childColumn, true) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name, parent, and child columns, and
+        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name, parent, and child columns, and
         /// value to create constraints.
         /// </summary>
         public DataRelation(
@@ -107,7 +113,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name
+        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name
         /// and matched arrays of parent and child columns.
         /// </summary>
         public DataRelation(
@@ -118,7 +125,8 @@ namespace System.Data
             : this(relationName, parentColumns, childColumns, true) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name, matched arrays of parent
+        /// Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name, matched arrays of parent
         /// and child columns, and value to create constraints.
         /// </summary>
         public DataRelation(
@@ -556,14 +564,15 @@ namespace System.Data
             }
         }
 
-        /********************
-          The Namespace of a table nested inside multiple parents can be
-          1. Explicitly specified
-          2. Inherited from Parent Table
-          3. Empty (Form = unqualified case)
-          However, Schema does not allow (3) to be a global element and multiple nested child has to be a global element.
-          Therefore we'll reduce case (3) to (2) if all parents have same namespace else throw.
-         ********************/
+/********************
+The Namespace of a table nested inside multiple parents can be
+1. Explicitly specified
+2. Inherited from Parent Table
+3. Empty (Form = unqualified case)
+However, Schema does not allow (3) to be a global element and multiple nested child has to be a
+global element.
+Therefore we'll reduce case (3) to (2) if all parents have same namespace else throw.
+********************/
 
         /// <summary>
         /// Gets or sets a value indicating whether relations are nested.
@@ -792,7 +801,8 @@ namespace System.Data
 
         internal event PropertyChangedEventHandler? PropertyChanging;
 
-        // If we're not in a dataSet relations collection, we need to verify on every property get that we're
+        // If we're not in a dataSet relations collection, we need to verify on every property get that
+        // we're
         // still a good relation object.
         internal void CheckState()
         {

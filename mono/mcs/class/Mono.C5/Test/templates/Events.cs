@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 using System;
@@ -1206,89 +1206,89 @@ namespace C5UnitTests.Templates.Events
             seen.Check(new CollectionEvent<int>[] { });
         }
 
-        /*
-     
-         * /
-            //[TearDown]
-            //public void Dispose() { list = null; seen = null; }
-            /*
-            [Test]
-            [ExpectedException(typeof(UnlistenableEventException))]
-            public void ViewChanged()
-            {
-              IList<int> w = collection.View(0, 0);
-              w.CollectionChanged += new CollectionChangedHandler<int>(w_CollectionChanged);
-            }
-    
-            [Test]
-            [ExpectedException(typeof(UnlistenableEventException))]
-            public void ViewCleared()
-            {
-              IList<int> w = collection.View(0, 0);
-              w.CollectionCleared += new CollectionClearedHandler<int>(w_CollectionCleared);
-            }
-    
-            [Test]
-            [ExpectedException(typeof(UnlistenableEventException))]
-            public void ViewAdded()
-            {
-              IList<int> w = collection.View(0, 0);
-              w.ItemsAdded += new ItemsAddedHandler<int>(w_ItemAdded);
-            }
-    
-            [Test]
-            [ExpectedException(typeof(UnlistenableEventException))]
-            public void ViewInserted()
-            {
-              IList<int> w = collection.View(0, 0);
-              w.ItemInserted += new ItemInsertedHandler<int>(w_ItemInserted);
-            }
-    
-            [Test]
-            [ExpectedException(typeof(UnlistenableEventException))]
-            public void ViewRemoved()
-            {
-              IList<int> w = collection.View(0, 0);
-              w.ItemsRemoved += new ItemsRemovedHandler<int>(w_ItemRemoved);
-            }
-    
-            [Test]
-            [ExpectedException(typeof(UnlistenableEventException))]
-            public void ViewRemovedAt()
-            {
-              IList<int> w = collection.View(0, 0);
-              w.ItemRemovedAt += new ItemRemovedAtHandler<int>(w_ItemRemovedAt);
-            }
-    
-            void w_CollectionChanged(object sender)
-            {
-              throw new NotImplementedException();
-            }
-    
-            void w_CollectionCleared(object sender, ClearedEventArgs eventArgs)
-            {
-              throw new NotImplementedException();
-            }
-    
-            void w_ItemAdded(object sender, ItemCountEventArgs<int> eventArgs)
-            {
-              throw new NotImplementedException();
-            }
-    
-            void w_ItemInserted(object sender, ItemAtEventArgs<int> eventArgs)
-            {
-              throw new NotImplementedException();
-            }
-    
-            void w_ItemRemoved(object sender, ItemCountEventArgs<int> eventArgs)
-            {
-              throw new NotImplementedException();
-            }
-    
-            void w_ItemRemovedAt(object sender, ItemAtEventArgs<int> eventArgs)
-            {
-              throw new NotImplementedException();
-            }*/
+/*
+
+* /
+//[TearDown]
+//public void Dispose() { list = null; seen = null; }
+/*
+[Test]
+[ExpectedException(typeof(UnlistenableEventException))]
+public void ViewChanged()
+{
+IList<int> w = collection.View(0, 0);
+w.CollectionChanged += new CollectionChangedHandler<int>(w_CollectionChanged);
+}
+
+[Test]
+[ExpectedException(typeof(UnlistenableEventException))]
+public void ViewCleared()
+{
+IList<int> w = collection.View(0, 0);
+w.CollectionCleared += new CollectionClearedHandler<int>(w_CollectionCleared);
+}
+
+[Test]
+[ExpectedException(typeof(UnlistenableEventException))]
+public void ViewAdded()
+{
+IList<int> w = collection.View(0, 0);
+w.ItemsAdded += new ItemsAddedHandler<int>(w_ItemAdded);
+}
+
+[Test]
+[ExpectedException(typeof(UnlistenableEventException))]
+public void ViewInserted()
+{
+IList<int> w = collection.View(0, 0);
+w.ItemInserted += new ItemInsertedHandler<int>(w_ItemInserted);
+}
+
+[Test]
+[ExpectedException(typeof(UnlistenableEventException))]
+public void ViewRemoved()
+{
+IList<int> w = collection.View(0, 0);
+w.ItemsRemoved += new ItemsRemovedHandler<int>(w_ItemRemoved);
+}
+
+[Test]
+[ExpectedException(typeof(UnlistenableEventException))]
+public void ViewRemovedAt()
+{
+IList<int> w = collection.View(0, 0);
+w.ItemRemovedAt += new ItemRemovedAtHandler<int>(w_ItemRemovedAt);
+}
+
+void w_CollectionChanged(object sender)
+{
+throw new NotImplementedException();
+}
+
+void w_CollectionCleared(object sender, ClearedEventArgs eventArgs)
+{
+throw new NotImplementedException();
+}
+
+void w_ItemAdded(object sender, ItemCountEventArgs<int> eventArgs)
+{
+throw new NotImplementedException();
+}
+
+void w_ItemInserted(object sender, ItemAtEventArgs<int> eventArgs)
+{
+throw new NotImplementedException();
+}
+
+void w_ItemRemoved(object sender, ItemCountEventArgs<int> eventArgs)
+{
+throw new NotImplementedException();
+}
+
+void w_ItemRemovedAt(object sender, ItemAtEventArgs<int> eventArgs)
+{
+throw new NotImplementedException();
+}*/
     }
 
     public class StackTester<U> : CollectionValueTester<U>

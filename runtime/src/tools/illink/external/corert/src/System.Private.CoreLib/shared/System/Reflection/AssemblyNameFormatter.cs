@@ -85,7 +85,8 @@ namespace System.Reflection
             if (contentType == AssemblyContentType.WindowsRuntime)
                 sb.Append(", ContentType=WindowsRuntime");
 
-            // NOTE: By design (desktop compat) AssemblyName.FullName and ToString() do not include ProcessorArchitecture.
+            // NOTE: By design (desktop compat) AssemblyName.FullName and ToString() do not include
+            // ProcessorArchitecture.
 
             return sb.ToString();
         }
@@ -95,7 +96,8 @@ namespace System.Reflection
             bool needsQuoting = false;
             const char quoteChar = '\"';
 
-            // App-compat: You can use double or single quotes to quote a name, and Fusion (or rather the IdentityAuthority) picks one
+            // App-compat: You can use double or single quotes to quote a name, and Fusion (or rather the
+            // IdentityAuthority) picks one
             // by some algorithm. Rather than guess at it, we use double quotes consistently.
             if (s != s.Trim() || s.Contains('"') || s.Contains('\''))
                 needsQuoting = true;

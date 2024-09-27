@@ -8,8 +8,10 @@ namespace System.Net.Http.Headers
 {
     /// <remarks>
     /// Kept internal for now:
-    /// A user depending on this strongly-typed header is dubious, as Alt-Svc values can also be received via the ALTSVC frame in HTTP/2.
-    /// This type does not conform to the typical API for header values, and should be updated if ever made public.
+    /// A user depending on this strongly-typed header is dubious, as Alt-Svc values can also be
+    // received via the ALTSVC frame in HTTP/2.
+    /// This type does not conform to the typical API for header values, and should be updated if ever
+    // made public.
     /// </remarks>
     internal sealed class AltSvcHeaderValue
     {
@@ -58,7 +60,8 @@ namespace System.Net.Http.Headers
         /// If true, the service should persist across network changes.
         /// Otherwise, the service should be invalidated if a network change is detected.
         /// </summary>
-        /// <remarks>TODO: if made public, this should be made internal as Persist is left open-ended and can be non-boolean in the future.</remarks>
+        /// <remarks>TODO: if made public, this should be made internal as Persist is left open-ended and
+        // can be non-boolean in the future.</remarks>
         public bool Persist { get; }
 
         public override string ToString()

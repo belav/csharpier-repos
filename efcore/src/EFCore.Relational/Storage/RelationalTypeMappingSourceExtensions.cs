@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///     Extension methods for the <see cref="IRelationalTypeMappingSource" /> class.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public static class RelationalTypeMappingSourceExtensions
@@ -125,7 +126,8 @@ public static class RelationalTypeMappingSourceExtensions
     ///     Gets the mapping that represents the given database type, throwing if no mapping is found.
     /// </summary>
     /// <remarks>
-    ///     Note that sometimes the same store type can have different mappings; this method returns the default.
+    ///     Note that sometimes the same store type can have different mappings; this method returns the
+    // default.
     /// </remarks>
     /// <param name="typeMappingSource">The type mapping source.</param>
     /// <param name="typeName">The type to get the mapping for.</param>

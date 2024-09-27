@@ -124,7 +124,8 @@ public class FormCollection : IFormCollection
     /// Returns an struct enumerator that iterates through a collection without boxing and
     /// is also used via the <see cref="IFormCollection" /> interface.
     /// </summary>
-    /// <returns>An <see cref="Enumerator" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="Enumerator" /> object that can be used to iterate through the
+    // collection.</returns>
     public Enumerator GetEnumerator()
     {
         if (Store == null || Store.Count == 0)
@@ -139,7 +140,8 @@ public class FormCollection : IFormCollection
     /// <summary>
     /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
     /// </summary>
-    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the
+    // collection.</returns>
     IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
         KeyValuePair<string, StringValues>
     >.GetEnumerator()
@@ -156,7 +158,8 @@ public class FormCollection : IFormCollection
     /// <summary>
     /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
     /// </summary>
-    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the
+    // collection.</returns>
     IEnumerator IEnumerable.GetEnumerator()
     {
         if (Store == null || Store.Count == 0)

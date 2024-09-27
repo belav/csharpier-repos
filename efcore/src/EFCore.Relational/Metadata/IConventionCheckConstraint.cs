@@ -7,14 +7,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a check constraint on the entity type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+// constraints</see> for more information and examples.
 /// </remarks>
 public interface IConventionCheckConstraint : IReadOnlyCheckConstraint, IConventionAnnotatable
 {
     /// <summary>
     ///     Gets the builder that can be used to configure this check constraint.
     /// </summary>
-    /// <exception cref="InvalidOperationException">If the check constraint has been removed from the model.</exception>
+    /// <exception cref="InvalidOperationException">If the check constraint has been removed from the
+    // model.</exception>
     new IConventionCheckConstraintBuilder Builder { get; }
 
     /// <summary>
@@ -32,7 +34,8 @@ public interface IConventionCheckConstraint : IReadOnlyCheckConstraint, IConvent
     ///     Sets the name of the check constraint in the database.
     /// </summary>
     /// <param name="name">The name of the check constraint in the database.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     string? SetName(string? name, bool fromDataAnnotation = false);
 

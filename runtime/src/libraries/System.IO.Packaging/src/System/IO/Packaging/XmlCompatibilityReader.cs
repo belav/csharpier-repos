@@ -354,7 +354,8 @@ namespace System.IO.Packaging
         /// The index of the attribute. The index is zero-based. (The first attribute has index 0.)
         /// </param>
         /// <returns>
-        /// The value of the specified attribute. If the attribute is not found, a null reference is returned.
+        /// The value of the specified attribute. If the attribute is not found, a null reference is
+        // returned.
         /// </returns>
         public override string GetAttribute(int i)
         {
@@ -386,7 +387,8 @@ namespace System.IO.Packaging
         /// The qualified name of the attribute.
         /// </param>
         /// <returns>
-        /// The value of the specified attribute. If the attribute is not found, a null reference is returned.
+        /// The value of the specified attribute. If the attribute is not found, a null reference is
+        // returned.
         /// </returns>
         public override string? GetAttribute(string name)
         {
@@ -422,7 +424,8 @@ namespace System.IO.Packaging
         /// The namespace URI of the attribute.
         /// </param>
         /// <returns>
-        /// The value of the specified attribute. If the attribute is not found, a null reference is returned.
+        /// The value of the specified attribute. If the attribute is not found, a null reference is
+        // returned.
         /// </returns>
         public override string? GetAttribute(string localName, string? namespaceURI)
         {
@@ -483,7 +486,8 @@ namespace System.IO.Packaging
         /// The qualified name of the attribute.
         /// </param>
         /// <returns>
-        /// true if the attribute is found; otherwise, false. If false, the reader's position does not change.
+        /// true if the attribute is found; otherwise, false. If false, the reader's position does not
+        // change.
         /// </returns>
         public override bool MoveToAttribute(string name)
         {
@@ -520,7 +524,8 @@ namespace System.IO.Packaging
         /// The namespace URI of the attribute.
         /// </param>
         /// <returns>
-        /// true if the attribute is found; otherwise, false. If false, the reader's position does not change.
+        /// true if the attribute is found; otherwise, false. If false, the reader's position does not
+        // change.
         /// </returns>
         public override bool MoveToAttribute(string localName, string? namespaceURI)
         {
@@ -859,7 +864,8 @@ namespace System.IO.Packaging
         }
 
         /// <summary>
-        /// Used to determine whether a given namespace should be ignored.  A namespace should be ignored if:
+        /// Used to determine whether a given namespace should be ignored.  A namespace should be ignored
+        // if:
         /// EITHER
         /// a) the namespace is not known/supported and has been marked Ignorable
         /// OR
@@ -1496,7 +1502,8 @@ namespace System.IO.Packaging
 
         /// <summary>
         /// CompatibilityScopes are used to handle markup-compatibility elements and attributes.
-        /// Each scope stores the "previous" or parent scope, its depth, and an associated XmlCompatibilityReader.
+        /// Each scope stores the "previous" or parent scope, its depth, and an associated
+        // XmlCompatibilityReader.
         /// At a particular Reader depth, only one scope should be pushed.
         /// </summary>
         private sealed class CompatibilityScope

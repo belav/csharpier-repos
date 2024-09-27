@@ -81,7 +81,8 @@ namespace System.Configuration
             {
                 string error = null;
 
-                // First group of errors - the min and max range are the same. i.e. the valid value must be the same/equal to the min(max)
+                // First group of errors - the min and max range are the same. i.e. the valid value must be the
+                // same/equal to the min(max)
                 if (min.Equals(max))
                 {
                     if (exclusiveRange)

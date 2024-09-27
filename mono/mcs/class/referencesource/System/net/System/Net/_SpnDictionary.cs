@@ -3,16 +3,16 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    _SpnDictionary.cs
+_SpnDictionary.cs
 
 Abstract:
-    This internal class implements a static mutlithreaded dictionary for user-registered SPNs.
-    An SPN is mapped based on a Uri prefix that contains scheme, host and port.
+This internal class implements a static mutlithreaded dictionary for user-registered SPNs.
+An SPN is mapped based on a Uri prefix that contains scheme, host and port.
 
 
 Author:
 
-    Alexei Vopilov    15-Nov-2003
+Alexei Vopilov    15-Nov-2003
 
 Revision History:
 

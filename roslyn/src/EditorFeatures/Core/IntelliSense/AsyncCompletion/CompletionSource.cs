@@ -57,13 +57,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static readonly EditorOptionKey<bool> s_nonBlockingCompletionEditorOption =
             new(NonBlockingCompletion);
 
-        // Use CWT to cache data needed to create VSCompletionItem, so the table would be cleared when Roslyn completion item cache is cleared.
+        // Use CWT to cache data needed to create VSCompletionItem, so the table would be cleared when
+        // Roslyn completion item cache is cleared.
         private static readonly ConditionalWeakTable<
             RoslynCompletionItem,
             StrongBox<VSCompletionItemData>
         > s_roslynItemToVsItemData = new();
 
-        // Cancellation series we use to stop background task for expanded items when exclusive items are returned by core providers.
+        // Cancellation series we use to stop background task for expanded items when exclusive items are
+        // returned by core providers.
         private readonly CancellationSeries _expandedItemsTaskCancellationSeries = new();
 
         private readonly ITextView _textView;
@@ -144,8 +146,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     !blockForCompletionItem
                 );
 
-                // In case of calls with multiple completion services for the same view (e.g. TypeScript and C#), those completion services must not be called simultaneously for the same session.
-                // Therefore, in each completion session we use a list of commit character for a specific completion service and a specific content type.
+                // In case of calls with multiple completion services for the same view (e.g. TypeScript and C#),
+                // those completion services must not be called simultaneously for the same session.
+                // Therefore, in each completion session we use a list of commit character for a specific completion
+                // service and a specific content type.
                 _textView.Properties[PotentialCommitCharacters] = service
                     .GetRules(options)
                     .DefaultCommitCharacters;
@@ -284,38 +288,61 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 // The computation of completion items is divided into two tasks:
                 //
-                // 1. "Core" items (i.e. non-expanded) which should be included in the list regardless of the selection of expander.
+                // 1. "Core" items (i.e. non-expanded) which should be included in the list regardless of the
+                // selection of expander.
                 //    Right now this includes all items except those from unimported namespaces.
                 //
-                // 2. Expanded items which only show in the completion list when expander is selected, or by default if the corresponding
-                //    features are enabled. Right now only items from unimported namespaces are associated with expander.
+                // 2. Expanded items which only show in the completion list when expander is selected, or by default
+                // if the corresponding
+                //    features are enabled. Right now only items from unimported namespaces are associated with
+                // expander.
                 //
-                // #1 is the essence of completion so we'd always wait until its task is completed and return the results. However, because we have
-                // a really tight perf budget in completion, and computing those items in #2 could be expensive especially in a large solution
-                // (e.g. requires syntax/symbol indices and/or runs in OOP,) we decide to kick off the computation in parallel when completion is
+                // #1 is the essence of completion so we'd always wait until its task is completed and return the
+                // results. However, because we have
+                // a really tight perf budget in completion, and computing those items in #2 could be expensive
+                // especially in a large solution
+                // (e.g. requires syntax/symbol indices and/or runs in OOP,) we decide to kick off the computation
+                // in parallel when completion is
                 // triggered, but only include its results if:
                 //
                 //      (a) it's completed by the time task #1 is completed and
-                //      (b) including them won't interfere with users' ability to browse the list (e.g. when the list is too long since filter text is short)
+                //      (b) including them won't interfere with users' ability to browse the list (e.g. when the
+                // list is too long since filter text is short)
                 //
-                // Otherwise we don't wait on it and return items from #1 immediately. Task #2 will still be running in the background
-                // (until session is dismissed/committed) and we'd check back to see if it's completed whenever we have a chance to update the completion list,
-                // i.e. when user typed another character, a filter was selected, etc. If so, those items will be added as part of the refresh.
+                // Otherwise we don't wait on it and return items from #1 immediately. Task #2 will still be running
+                // in the background
+                // (until session is dismissed/committed) and we'd check back to see if it's completed whenever we
+                // have a chance to update the completion list,
+                // i.e. when user typed another character, a filter was selected, etc. If so, those items will be
+                // added as part of the refresh.
                 //
-                // The reason of adopting this approach is we want to minimize typing delays. There are two ways user might perceive a delay in typing.
-                // First, they could see a delay between typing a character and completion list being displayed if they want to examine the items available.
-                // Second, they might be typing continuously w/o paying attention to completion list, and simply expect the completion to do the "right thing"
-                // when a commit char is typed (e.g. commit "cancellationToken" when typing 'can$TAB$'). However, the commit could be delayed if completion is
-                // still waiting on the computation of all available items, which manifests as UI delays and in worst case timeouts in commit which results in
-                // unexpected behavior (e.g. typing 'can$TAB$' results in a 250ms UI freeze and still ends up with "can" instead of "cancellationToken".)
+                // The reason of adopting this approach is we want to minimize typing delays. There are two ways
+                // user might perceive a delay in typing.
+                // First, they could see a delay between typing a character and completion list being displayed if
+                // they want to examine the items available.
+                // Second, they might be typing continuously w/o paying attention to completion list, and simply
+                // expect the completion to do the "right thing"
+                // when a commit char is typed (e.g. commit "cancellationToken" when typing 'can$TAB$'). However,
+                // the commit could be delayed if completion is
+                // still waiting on the computation of all available items, which manifests as UI delays and in
+                // worst case timeouts in commit which results in
+                // unexpected behavior (e.g. typing 'can$TAB$' results in a 250ms UI freeze and still ends up with
+                // "can" instead of "cancellationToken".)
                 //
-                // This approach would ensure the computation of #2 will not be the cause of such delays, with the obvious trade off of potentially not providing
-                // expanded items until later (or never) in a completion session even if the feature is enabled. Note that in most cases we'd expect task #2 to finish
-                // in time and complete result would be available when it's most likely needed (see `ShouldHideExpandedItems` helper in ItemManager for details.)
-                // However, even in the case only partial result is returned at the start, we still believe this is acceptable given how critical perf is in typing scenario.
-                // Additionally, expanded items are usually considered complementary. The need for them only rise occasionally (it's rare when users need to add imports,)
-                // and when they are needed, our hypothesis is because of their more intrusive nature (adding an import to the document) users would more likely to
-                // contemplate such action thus typing slower before commit and/or spending more time examining the list, which give us some opportunities
+                // This approach would ensure the computation of #2 will not be the cause of such delays, with the
+                // obvious trade off of potentially not providing
+                // expanded items until later (or never) in a completion session even if the feature is enabled.
+                // Note that in most cases we'd expect task #2 to finish
+                // in time and complete result would be available when it's most likely needed (see
+                // `ShouldHideExpandedItems` helper in ItemManager for details.)
+                // However, even in the case only partial result is returned at the start, we still believe this is
+                // acceptable given how critical perf is in typing scenario.
+                // Additionally, expanded items are usually considered complementary. The need for them only rise
+                // occasionally (it's rare when users need to add imports,)
+                // and when they are needed, our hypothesis is because of their more intrusive nature (adding an
+                // import to the document) users would more likely to
+                // contemplate such action thus typing slower before commit and/or spending more time examining the
+                // list, which give us some opportunities
                 // to still provide those items later before they are truly required.
 
                 var showCompletionItemFilters = _editorOptionsService.GlobalOptions.GetOption(
@@ -337,7 +364,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 if (!options.ShouldShowItemsFromUnimportedNamespaces)
                 {
-                    // No need to trigger expanded providers at all if the feature is disabled, just trigger core providers and return;
+                    // No need to trigger expanded providers at all if the feature is disabled, just trigger core
+                    // providers and return;
                     var (context, list) = await GetCompletionContextWorkerAsync(
                             session,
                             document,
@@ -358,12 +386,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 else
                 {
                     // Kicking off the task for expanded items, so it runs in parallel with regular providers.
-                    // Otherwise, the computation of unimported items won't start until we return those regular items to editor,
-                    // which combined with our behavior of not showing expanded items until ready (and only adding them during
-                    // completion list refresh) means increased chance that users won't see those items for the first few characters typed.
-                    // This does mean we might do unnecessary work if any regular provider is `exclusive`, but such cases are relatively infrequent
-                    // and we'd like to have expanded items available when they are needed. As these results come back potentially after
-                    // presentation (and sorting) of the non-expanded results, we need these results to come back already sorted.
+                    // Otherwise, the computation of unimported items won't start until we return those regular items to
+                    // editor,
+                    // which combined with our behavior of not showing expanded items until ready (and only adding them
+                    // during
+                    // completion list refresh) means increased chance that users won't see those items for the first
+                    // few characters typed.
+                    // This does mean we might do unnecessary work if any regular provider is `exclusive`, but such
+                    // cases are relatively infrequent
+                    // and we'd like to have expanded items available when they are needed. As these results come back
+                    // potentially after
+                    // presentation (and sorting) of the non-expanded results, we need these results to come back
+                    // already sorted.
                     var expandedItemsTaskCancellationToken =
                         _expandedItemsTaskCancellationSeries.CreateNext(cancellationToken);
                     var expandedItemsTask = Task.Run(
@@ -451,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 var initialTriggerLocation = sessionData.ExpandedItemTriggerLocation.Value;
                 AsyncCompletionLogger.LogExpanderUsage();
 
-                // It's possible we didn't provide expanded items at the beginning of completion session because it was slow even if the feature is enabled.
+                // It's possible we didn't provide expanded items at the beginning of completion session because it
+                // was slow even if the feature is enabled.
                 // ExpandedItemsTask would be available in this case, so we just need to return its result.
                 if (sessionData.ExpandedItemsTask is not null)
                 {
@@ -474,7 +509,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 if (sessionData.CombinedSortedList is null)
                 {
-                    // We only reach here when expanded items are disabled, but user requested them explicitly via expander.
+                    // We only reach here when expanded items are disabled, but user requested them explicitly via
+                    // expander.
                     // In this case, enable expanded items and trigger the completion only for them.
                     var document =
                         initialTriggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
@@ -613,8 +649,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             sessionData.CompletionListSpan = completionList.Span;
 
             // This is a code supporting original completion scenarios:
-            // Controller.Session_ComputeModel: if completionList.SuggestionModeItem != null, then suggestionMode = true
-            // If there are suggestionItemOptions, then later HandleNormalFiltering should set selection to SoftSelection.
+            // Controller.Session_ComputeModel: if completionList.SuggestionModeItem != null, then
+            // suggestionMode = true
+            // If there are suggestionItemOptions, then later HandleNormalFiltering should set selection to
+            // SoftSelection.
             sessionData.HasSuggestionItemOptions |= completionList.SuggestionModeItem != null;
 
             var excludedCommitCharactersFromList = GetExcludedCommitCharacters(
@@ -644,10 +682,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             session.Properties[ExcludedCommitCharacters] =
                 excludedCommitCharactersMap.Keys.ToImmutableArray();
 
-            // We need to remember the trigger location for when a completion service claims expanded items are available
-            // since the initial trigger we are able to get from IAsyncCompletionSession might not be the same (e.g. in projection scenarios)
+            // We need to remember the trigger location for when a completion service claims expanded items are
+            // available
+            // since the initial trigger we are able to get from IAsyncCompletionSession might not be the same
+            // (e.g. in projection scenarios)
             // so when they are requested via expander later, we can retrieve it.
-            // Technically we should save the trigger location for each individual service that made such claim, but in reality only Roslyn's
+            // Technically we should save the trigger location for each individual service that made such claim,
+            // but in reality only Roslyn's
             // completion service uses expander, so we can get away with not making such distinction.
             if (!sessionData.ExpandedItemTriggerLocation.HasValue)
             {
@@ -729,9 +770,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         }
 
         /// <summary>
-        /// We'd like to cache VS Completion item directly to avoid allocation completely. However it holds references
+        /// We'd like to cache VS Completion item directly to avoid allocation completely. However it holds
+        // references
         /// to transient objects, which would cause memory leak (among other potential issues) if cached.
-        /// So as a compromise,  we cache data that can be calculated from Roslyn completion item to avoid repeated
+        /// So as a compromise,  we cache data that can be calculated from Roslyn completion item to avoid
+        // repeated
         /// calculation cost for cached Roslyn completion items.
         /// FilterSetData is the bit vector value from the FilterSet of this item.
         /// </summary>
@@ -797,7 +840,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     InsertionText: insertionText
                 );
 
-                // It doesn't make sense to cache VS item data for those Roslyn items created from scratch for each session,
+                // It doesn't make sense to cache VS item data for those Roslyn items created from scratch for each
+                // session,
                 // since CWT uses object identity for comparison.
                 if (roslynItem.Flags.IsCached())
                 {

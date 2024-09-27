@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Snippets
                 );
             var expressionStatement = generator.ExpressionStatement(invocation);
 
-            // Need to normalize the whitespace for the asynchronous case because it doesn't insert a space following the await
+            // Need to normalize the whitespace for the asynchronous case because it doesn't insert a space
+            // following the await
             return new TextChange(
                 TextSpan.FromBounds(position, position),
                 expressionStatement.NormalizeWhitespace().ToFullString()

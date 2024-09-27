@@ -36,7 +36,8 @@ namespace System.ComponentModel
         private EventHandlerList events;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.MarshalByValueComponent'/> class.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.MarshalByValueComponent'/> class.</para>
         /// </devdoc>
         public MarshalByValueComponent() { }
 
@@ -203,7 +204,8 @@ namespace System.ComponentModel
         /// <internalonly/>
         /// <devdoc>
         ///    <para>
-        ///       Returns a <see cref='System.String'/> containing the name of the <see cref='System.ComponentModel.Component'/> , if any. This method should not be
+        ///       Returns a <see cref='System.String'/> containing the name of the <see
+        // cref='System.ComponentModel.Component'/> , if any. This method should not be
         ///       overridden. For
         ///       internal use only.
         ///    </para>

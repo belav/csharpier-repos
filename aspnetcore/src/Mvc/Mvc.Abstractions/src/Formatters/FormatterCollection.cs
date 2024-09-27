@@ -13,7 +13,8 @@ public class FormatterCollection<TFormatter> : Collection<TFormatter>
     where TFormatter : notnull
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="FormatterCollection{TFormatter}"/> class that is empty.
+    /// Initializes a new instance of the <see cref="FormatterCollection{TFormatter}"/> class that is
+    // empty.
     /// </summary>
     public FormatterCollection() { }
 

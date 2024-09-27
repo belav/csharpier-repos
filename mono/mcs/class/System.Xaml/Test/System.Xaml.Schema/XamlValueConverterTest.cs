@@ -104,7 +104,8 @@ namespace MonoTests.System.Xaml.Schema
         [Test]
         public void ObjectType()
         {
-            // This test asserts that XamlLanguage.Object.TypeConverter.ConverterType is null for different reason.
+            // This test asserts that XamlLanguage.Object.TypeConverter.ConverterType is null for different
+            // reason.
             var c = new XamlValueConverter<TypeConverter>(
                 typeof(TypeConverter),
                 XamlLanguage.Object,

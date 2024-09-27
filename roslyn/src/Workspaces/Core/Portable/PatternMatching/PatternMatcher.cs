@@ -16,9 +16,12 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.PatternMatching
 {
     /// <summary>
-    /// The pattern matcher is not thread-safe.  Do not use the pattern matcher across mutiple threads concurrently.  It
-    /// also keeps an internal cache of data for speeding up operations.  As such, it should be disposed when done to
-    /// release the cached data back. and release the matcher appropriately once you no longer need it. Also, while the
+    /// The pattern matcher is not thread-safe.  Do not use the pattern matcher across mutiple threads
+    // concurrently.  It
+    /// also keeps an internal cache of data for speeding up operations.  As such, it should be disposed
+    // when done to
+    /// release the cached data back. and release the matcher appropriately once you no longer need it.
+    // Also, while the
     /// pattern matcher is culture aware, it uses the culture specified in the constructor.
     /// </summary>
     internal abstract partial class PatternMatcher : IDisposable
@@ -34,7 +37,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         private readonly bool _includeMatchedSpans;
         private readonly bool _allowFuzzyMatching;
 
-        // PERF: Cache the culture's compareInfo to avoid the overhead of asking for them repeatedly in inner loops
+        // PERF: Cache the culture's compareInfo to avoid the overhead of asking for them repeatedly in
+        // inner loops
         private readonly CompareInfo _compareInfo;
         private readonly TextInfo _textInfo;
 
@@ -44,7 +48,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// Construct a new PatternMatcher using the specified culture.
         /// </summary>
         /// <param name="culture">The culture to use for string searching and comparison.</param>
-        /// <param name="includeMatchedSpans">Whether or not the matching parts of the candidate should be supplied in results.</param>
+        /// <param name="includeMatchedSpans">Whether or not the matching parts of the candidate should be
+        // supplied in results.</param>
         /// <param name="allowFuzzyMatching">Whether or not close matches should count as matches.</param>
         protected PatternMatcher(
             bool includeMatchedSpans,
@@ -332,12 +337,16 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             if (match != null)
                 return match;
 
-            // If pattern was all lowercase, we allow it to match an all lowercase section of the candidate.  But
-            // only after we've tried all other forms first.  This is the weakest of all matches.  For example, if
-            // user types 'bin' we want to match 'OperatorBinary' (start of word) or 'BinaryInformationNode' (camel
+            // If pattern was all lowercase, we allow it to match an all lowercase section of the candidate.
+            // But
+            // only after we've tried all other forms first.  This is the weakest of all matches.  For example,
+            // if
+            // user types 'bin' we want to match 'OperatorBinary' (start of word) or 'BinaryInformationNode'
+            // (camel
             // humps) before matching 'Combine'.
             //
-            // We only do this for strings longer than three characters to avoid too many false positives when the
+            // We only do this for strings longer than three characters to avoid too many false positives when
+            // the
             // user has only barely started writing a word.
             if (patternIsLowercase && caseInsensitiveIndex > 0 && patternChunk.Text.Length >= 3)
             {
@@ -383,14 +392,16 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// <remarks>
         /// PERF: Designed to minimize allocations in common cases.
         /// If there's no match, then null is returned.
-        /// If there's a single match, or the caller only wants the first match, then it is returned (as a Nullable)
+        /// If there's a single match, or the caller only wants the first match, then it is returned (as a
+        // Nullable)
         /// If there are multiple matches, and the caller wants them all, then a List is allocated.
         /// </remarks>
         /// <param name="candidate">The word being tested.</param>
         /// <param name="segment">The segment of the pattern to check against the candidate.</param>
         /// <param name="matches">The result array to place the matches in.</param>
         /// <param name="fuzzyMatch">If a fuzzy match should be performed</param>
-        /// <returns>If there's only one match, then the return value is that match. Otherwise it is null.</returns>
+        /// <returns>If there's only one match, then the return value is that match. Otherwise it is
+        // null.</returns>
         private bool MatchPatternSegment(
             string candidate,
             ref PatternSegment segment,
@@ -492,8 +503,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// <param name="pattern">The pattern text</param>
         /// <param name="patternPart">The span within the <paramref name="pattern"/> text</param>
         /// <param name="compareOptions">Options for doing the comparison (case sensitive or not)</param>
-        /// <returns>True if the span identified by <paramref name="candidatePart"/> within <paramref name="candidate"/> starts with
-        /// the span identified by <paramref name="patternPart"/> within <paramref name="pattern"/>.</returns>
+        /// <returns>True if the span identified by <paramref name="candidatePart"/> within <paramref
+        // name="candidate"/> starts with
+        /// the span identified by <paramref name="patternPart"/> within <paramref
+        // name="pattern"/>.</returns>
         private bool PartStartsWith(
             string candidate,
             TextSpan candidatePart,
@@ -526,7 +539,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// <param name="candidatePart">The span within the <paramref name="candidate"/> text</param>
         /// <param name="pattern">The pattern text</param>
         /// <param name="compareOptions">Options for doing the comparison (case sensitive or not)</param>
-        /// <returns>True if the span identified by <paramref name="candidatePart"/> within <paramref name="candidate"/> starts with <paramref name="pattern"/></returns>
+        /// <returns>True if the span identified by <paramref name="candidatePart"/> within <paramref
+        // name="candidate"/> starts with <paramref name="pattern"/></returns>
         private bool PartStartsWith(
             string candidate,
             TextSpan candidatePart,
@@ -575,9 +589,12 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 //      i.e. CoFiPro would match CodeFixProvider, but CofiPro would not.
                 if (patternChunk.PatternHumps.Count > 0)
                 {
-                    // PERF: This can be called thousands of times per completion session with only a handful of matches found.
-                    // Checking for case insensitive initially reduces the TryUpperCaseCamelCaseMatch call count to 1 for the
-                    // non-matching candidates, but increases the call count to 2 for the much less frequent matching candidates.
+                    // PERF: This can be called thousands of times per completion session with only a handful of matches
+                    // found.
+                    // Checking for case insensitive initially reduces the TryUpperCaseCamelCaseMatch call count to 1
+                    // for the
+                    // non-matching candidates, but increases the call count to 2 for the much less frequent matching
+                    // candidates.
                     var camelCaseKindIgnoreCase = TryUpperCaseCamelCaseMatch(
                         candidate,
                         candidateHumps,

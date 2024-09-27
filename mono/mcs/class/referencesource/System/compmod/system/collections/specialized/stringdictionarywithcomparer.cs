@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-// StringDictionary compares keys by converting them to lowercase first, using the Invariant culture.
+// StringDictionary compares keys by converting them to lowercase first, using the Invariant
+// culture.
 // This is not the right thing to do for file names, registry keys, environment variable etc.
 // This internal version of StringDictionary accepts an IEqualityComparer and enables you to
 // customize the string comparison to be StringComparer.OrdinalIgnoreCase for the above cases.

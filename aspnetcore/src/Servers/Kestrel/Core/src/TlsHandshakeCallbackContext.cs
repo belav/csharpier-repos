@@ -42,7 +42,8 @@ public class TlsHandshakeCallbackContext
     public ConnectionContext Connection { get; internal set; } = default!;
 
     /// <summary>
-    /// Indicates if the application is allowed to request a client certificate after the handshake has completed.
+    /// Indicates if the application is allowed to request a client certificate after the handshake has
+    // completed.
     /// The default is false. See <see cref="ITlsConnectionFeature.GetClientCertificateAsync"/>
     /// </summary>
     public bool AllowDelayedClientCertificateNegotation { get; set; }

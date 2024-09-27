@@ -20,13 +20,13 @@ using WebCntrls = System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile BaseValidator class.
-     * The BaseValidator class provides a core implementation common to all
-     * specific validator controls.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile BaseValidator class.
+* The BaseValidator class provides a core implementation common to all
+* specific validator controls.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator"]/*' />
     [
         DataBindingHandler(
@@ -80,7 +80,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.CreateWebValidator"]/*' />
+        /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.CreateWebValidator"]/*'
+        // />
         /// <summary>
         /// <para>
         /// Virtual method for subclass to create its own aggregated
@@ -148,7 +149,8 @@ namespace System.Web.UI.MobileControls
             set { _webBaseValidator.ErrorMessage = value; }
         }
 
-        /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.ControlToValidate"]/*' />
+        /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.ControlToValidate"]/*'
+        // />
         [
             Bindable(false),
             DefaultValue(""),
@@ -281,7 +283,8 @@ namespace System.Web.UI.MobileControls
         // Helper functions adopted from WebForms base validator
         /////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.ControlPropertiesValid"]/*' />
+        /// <include file='doc\BaseValidator.uex'
+        // path='docs/doc[@for="BaseValidator.ControlPropertiesValid"]/*' />
         protected virtual bool ControlPropertiesValid()
         {
             // Check for blank control to validate
@@ -299,7 +302,8 @@ namespace System.Web.UI.MobileControls
             return true;
         }
 
-        /// <include file='doc\BaseValidator.uex' path='docs/doc[@for="BaseValidator.CheckControlValidationProperty"]/*' />
+        /// <include file='doc\BaseValidator.uex'
+        // path='docs/doc[@for="BaseValidator.CheckControlValidationProperty"]/*' />
         protected void CheckControlValidationProperty(String name, String propertyName)
         {
             // Get the control using the relative name

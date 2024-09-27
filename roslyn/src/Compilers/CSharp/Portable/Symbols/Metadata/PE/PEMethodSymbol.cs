@@ -345,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             // and we know which one of the states we have from IsUseSiteDiagnosticPopulated
             //
             // Setting _lazyUseSiteDiagnostic to a sentinel value here would introduce
-            // a number of extra states for various permutations of IsUseSiteDiagnosticPopulated, UncommonFields and _lazyUseSiteDiagnostic
+            // a number of extra states for various permutations of IsUseSiteDiagnosticPopulated, UncommonFields
+            // and _lazyUseSiteDiagnostic
             // Some of them, in tight races, may lead to returning the sentinel as the diagnostics.
             //
 
@@ -399,10 +400,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         /// <summary>
         /// A single field to hold optional auxiliary data.
-        /// In many scenarios it is possible to avoid allocating this, thus saving total space in <see cref="PEModuleSymbol"/>.
-        /// Even for lazily-computed values, it may be possible to avoid allocating <see cref="_uncommonFields"/> if
-        /// the computed value is a well-known "empty" value. In this case, bits in <see cref="_packedFlags"/> are used
-        /// to indicate that the lazy values have been computed and, if <see cref="_uncommonFields"/> is null, then
+        /// In many scenarios it is possible to avoid allocating this, thus saving total space in <see
+        // cref="PEModuleSymbol"/>.
+        /// Even for lazily-computed values, it may be possible to avoid allocating <see
+        // cref="_uncommonFields"/> if
+        /// the computed value is a well-known "empty" value. In this case, bits in <see
+        // cref="_packedFlags"/> are used
+        /// to indicate that the lazy values have been computed and, if <see cref="_uncommonFields"/> is
+        // null, then
         /// the "empty" value should be inferred.
         /// </summary>
         private UncommonFields _uncommonFields;
@@ -592,7 +597,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal MethodDefinitionHandle Handle => _handle;
 
         // Has to have the abstract flag.
-        // NOTE: dev10 treats the method as abstract (i.e. requiring an impl in subtypes) event if it is not metadata virtual.
+        // NOTE: dev10 treats the method as abstract (i.e. requiring an impl in subtypes) event if it is not
+        // metadata virtual.
         public override bool IsAbstract => HasFlag(MethodAttributes.Abstract);
 
         // NOTE: abstract final methods are a bit strange.  First, they don't
@@ -629,7 +635,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         // Has to be metadata virtual and cannot be a destructor.
         // Must either lack the newslot flag or be an explicit override (i.e. via the MethodImpl table).
         //
-        // The IsExplicitClassOverride case is based on LangImporter::DefineMethodImplementations in the native compiler.
+        // The IsExplicitClassOverride case is based on LangImporter::DefineMethodImplementations in the
+        // native compiler.
         // ECMA-335
         // 10.3.1 Introducing a virtual method
         // If the definition is not marked newslot, the definition creates a new virtual method only
@@ -1495,9 +1502,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 var moduleSymbol = _containingType.ContainingPEModule;
 
-                // Context: we need the containing type of this method as context so that we can substitute appropriately into
-                // any generic interfaces that we might be explicitly implementing.  There is no reason to pass in the method
-                // context, however, because any method type parameters will belong to the implemented (i.e. interface) method,
+                // Context: we need the containing type of this method as context so that we can substitute
+                // appropriately into
+                // any generic interfaces that we might be explicitly implementing.  There is no reason to pass in
+                // the method
+                // context, however, because any method type parameters will belong to the implemented (i.e.
+                // interface) method,
                 // which we do not yet know.
                 var explicitlyOverriddenMethods = new MetadataDecoder(
                     moduleSymbol,
@@ -1575,7 +1585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 // CONSIDER: what we'd really like to do is set this bit only in cases where the explicitly
                 // overridden method matches the method that will be returned by MethodSymbol.OverriddenMethod.
-                // Unfortunately, this MethodSymbol will not be sufficiently constructed (need IsOverride and MethodKind,
+                // Unfortunately, this MethodSymbol will not be sufficiently constructed (need IsOverride and
+                // MethodKind,
                 // which depend on this property) to determine which method OverriddenMethod will return.
                 _packedFlags.InitializeIsExplicitOverride(
                     isExplicitFinalizerOverride: sawObjectFinalize,

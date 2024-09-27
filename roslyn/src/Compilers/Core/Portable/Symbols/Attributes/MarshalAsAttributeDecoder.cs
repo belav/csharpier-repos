@@ -334,7 +334,8 @@ namespace Microsoft.CodeAnalysis
                             SpecialType.System_Enum
                         );
 
-                        // for some reason, Dev10 metadata writer disallows CustomMarshaler type as an element type of non-fixed arrays
+                        // for some reason, Dev10 metadata writer disallows CustomMarshaler type as an element type of
+                        // non-fixed arrays
                         if (
                             !isFixed && elementType == Cci.Constants.UnmanagedType_CustomMarshaler
                             || (int)elementType < 0
@@ -411,8 +412,10 @@ namespace Microsoft.CodeAnalysis
 
             if (isFixed && elementCount is null)
             {
-                // SizeConst must be specified for fixed arrays, but due to back-compat with the native compiler and older versions of Roslyn
-                // we can't issue the same error as we do for other cases. Instead, issue a warning and fall back to emitting the attribute with element count 1.
+                // SizeConst must be specified for fixed arrays, but due to back-compat with the native compiler and
+                // older versions of Roslyn
+                // we can't issue the same error as we do for other cases. Instead, issue a warning and fall back to
+                // emitting the attribute with element count 1.
                 if (messageProvider.WRN_ByValArraySizeConstRequired is { } warningCode)
                 {
                     arguments.Diagnostics.Add(

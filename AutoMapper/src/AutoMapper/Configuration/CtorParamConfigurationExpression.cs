@@ -7,7 +7,8 @@ public interface ICtorParamConfigurationExpression
     /// <summary>
     /// Specify the source member(s) to map from.
     /// </summary>
-    /// <param name="sourceMembersPath">Property name referencing the source member to map against. Or a dot separated member path.</param>
+    /// <param name="sourceMembersPath">Property name referencing the source member to map against. Or a
+    // dot separated member path.</param>
     void MapFrom(string sourceMembersPath);
 
     /// <summary>

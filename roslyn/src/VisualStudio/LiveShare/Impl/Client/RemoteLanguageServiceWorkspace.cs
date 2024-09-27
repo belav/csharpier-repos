@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         private CollaborationSession? _session;
 
         /// <summary>
-        /// Stores the current base folder path(s) on the client that hold files retrieved from the host workspace(s).
+        /// Stores the current base folder path(s) on the client that hold files retrieved from the host
+        // workspace(s).
         /// </summary>
         private ImmutableHashSet<string> _remoteWorkspaceRootPaths;
 
@@ -185,7 +186,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             );
 
         /// <summary>
-        /// Event that gets triggered whenever the active workspace changes.  If we're in a live share session
+        /// Event that gets triggered whenever the active workspace changes.  If we're in a live share
+        // session
         /// this means that the remote workpace roots have also changed and need to be updated.
         /// This will not be called concurrently.
         /// </summary>
@@ -198,7 +200,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         }
 
         /// <summary>
-        /// Retrieves the base folder paths for files on the client that have been retrieved from the remote host.
+        /// Retrieves the base folder paths for files on the client that have been retrieved from the remote
+        // host.
         /// Triggers a refresh of all open files so we make sure they are in the correct workspace.
         /// </summary>
         private async Task UpdatePathsToRemoteFilesAsync(CollaborationSession session)
@@ -379,16 +382,21 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
 
-            // The protocol converter would have synced the file to disk but we the document snapshot that was in the workspace before the sync would have empty text.
+            // The protocol converter would have synced the file to disk but we the document snapshot that was
+            // in the workspace before the sync would have empty text.
             // So we need to read from disk in order to map from line\column to a textspan.
             if (string.IsNullOrEmpty(text.ToString()))
             {
                 text = SourceText.From(File.ReadAllText(document.FilePath));
 
-                // Some features like the FindRefs window try to get the text at the span without opening the document (for eg to classify the span).
-                // So fork the document to get one with the text. Note that this new document will not be in the CurrentSolution and we don't intend to
-                // apply it back. By fetching the file, the workspace will get updated anyway. The assumption here is that this document that we are
-                // handing out is only used for simple inspection and it's version is never compared with the Workspace.CurrentSolution.
+                // Some features like the FindRefs window try to get the text at the span without opening the
+                // document (for eg to classify the span).
+                // So fork the document to get one with the text. Note that this new document will not be in the
+                // CurrentSolution and we don't intend to
+                // apply it back. By fetching the file, the workspace will get updated anyway. The assumption here
+                // is that this document that we are
+                // handing out is only used for simple inspection and it's version is never compared with the
+                // Workspace.CurrentSolution.
                 document = document.WithText(text);
             }
 
@@ -610,7 +618,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                 else
                 {
                     // The edits would get sent by the co-authoring service to the owner.
-                    // The invisible editor saves the file on being disposed, which should get reflected  on the owner's side.
+                    // The invisible editor saves the file on being disposed, which should get reflected  on the owner's
+                    // side.
                     using (
                         var invisibleEditor = new InvisibleEditor(
                             _serviceProvider,

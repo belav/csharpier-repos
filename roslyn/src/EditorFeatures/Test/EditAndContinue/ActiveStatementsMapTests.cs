@@ -331,7 +331,8 @@ S1();
                     ActiveStatementFlags.MethodUpToDate
                 );
 
-            // Create a bad active span that is outside the document, but passes the `TryGetTextSpan` check in ActiveStatementMap
+            // Create a bad active span that is outside the document, but passes the `TryGetTextSpan` check in
+            // ActiveStatementMap
             var debugInfos = ImmutableArray.Create(CreateInfo(7, 9, 7, 10, "a.cs"));
 
             var map = ActiveStatementsMap.Create(
@@ -500,7 +501,8 @@ class C
                 unmappedActiveStatements[0].Statement.FilePath
             ][0];
 
-            // Span shouldn't be mapped because the only non-remappable region mapping is an exception region, not an active statement:
+            // Span shouldn't be mapped because the only non-remappable region mapping is an exception region,
+            // not an active statement:
             Assert.Equal(unmappedActiveStatements[0].Statement.Span, activeStatement.FileSpan.Span);
         }
 
@@ -557,7 +559,8 @@ class C
                 unmappedActiveStatements[0].Statement.FilePath
             ];
 
-            // Span shouldn't be mapped because the only non-remappable region mapping is an exception region, not an active statement:
+            // Span shouldn't be mapped because the only non-remappable region mapping is an exception region,
+            // not an active statement:
             Assert.Equal(
                 unmappedActiveStatements[0].Statement.Span.AddLineDelta(+1),
                 newActiveStatements[0].FileSpan.Span

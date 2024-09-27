@@ -18,11 +18,16 @@ public class SessionOptions
     /// </summary>
     /// <remarks>
     /// <list type="bullet">
-    /// <item><description><see cref="CookieBuilder.Name"/> defaults to <see cref="SessionDefaults.CookieName"/>.</description></item>
-    /// <item><description><see cref="CookieBuilder.Path"/> defaults to <see cref="SessionDefaults.CookiePath"/>.</description></item>
-    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see cref="SameSiteMode.Lax"/>.</description></item>
-    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to <c>true</c>.</description></item>
-    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to <c>false</c>.</description></item>
+    /// <item><description><see cref="CookieBuilder.Name"/> defaults to <see
+    // cref="SessionDefaults.CookieName"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.Path"/> defaults to <see
+    // cref="SessionDefaults.CookiePath"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see
+    // cref="SameSiteMode.Lax"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to
+    // <c>true</c>.</description></item>
+    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to
+    // <c>false</c>.</description></item>
     /// </list>
     /// </remarks>
     public CookieBuilder Cookie
@@ -32,14 +37,17 @@ public class SessionOptions
     }
 
     /// <summary>
-    /// The IdleTimeout indicates how long the session can be idle before its contents are abandoned. Each session access
+    /// The IdleTimeout indicates how long the session can be idle before its contents are abandoned.
+    // Each session access
     /// resets the timeout. Note this only applies to the content of the session, not the cookie.
     /// </summary>
     public TimeSpan IdleTimeout { get; set; } = TimeSpan.FromMinutes(20);
 
     /// <summary>
-    /// The maximum amount of time allowed to load a session from the store or to commit it back to the store.
-    /// Note this may only apply to asynchronous operations. This timeout can be disabled using <see cref="Timeout.InfiniteTimeSpan"/>.
+    /// The maximum amount of time allowed to load a session from the store or to commit it back to the
+    // store.
+    /// Note this may only apply to asynchronous operations. This timeout can be disabled using <see
+    // cref="Timeout.InfiniteTimeSpan"/>.
     /// </summary>
     public TimeSpan IOTimeout { get; set; } = TimeSpan.FromMinutes(1);
 

@@ -4,7 +4,8 @@
 namespace System.ComponentModel.Composition
 {
     /// <summary>
-    ///     Specifies metadata for a type to be used as a <see cref="Primitives.ComposablePartDefinition"/> and
+    ///     Specifies metadata for a type to be used as a <see
+    // cref="Primitives.ComposablePartDefinition"/> and
     ///     <see cref="Primitives.ComposablePart"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]

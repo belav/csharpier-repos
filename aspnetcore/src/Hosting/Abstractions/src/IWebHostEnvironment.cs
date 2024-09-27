@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Hosting;
 public interface IWebHostEnvironment : IHostEnvironment
 {
     /// <summary>
-    /// Gets or sets the absolute path to the directory that contains the web-servable application content files.
+    /// Gets or sets the absolute path to the directory that contains the web-servable application
+    // content files.
     /// This defaults to the 'wwwroot' subfolder.
     /// </summary>
     string WebRootPath { get; set; }

@@ -102,7 +102,8 @@ namespace System.Threading.Tasks.Tests
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
 
             //
-            // Do all of the read tests again, except with Task.Factory.FromAsync<string>(), instead of Task<string>.Factory.FromAsync().
+            // Do all of the read tests again, except with Task.Factory.FromAsync<string>(), instead of
+            // Task<string>.Factory.FromAsync().
             //
             fac.EndWrite(fac.StartWrite("12345678aaaaAAAAzzzz", null, null));
 

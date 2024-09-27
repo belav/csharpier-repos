@@ -77,7 +77,8 @@ namespace RunTests
                 ConsoleUtil.WriteLine(
                     "BUILD_BUILDID environment variable was not set, will not publish test results for a local run."
                 );
-                // in a local run we assume the user runs using the root test.sh and that the test payload is nested in the artifacts directory.
+                // in a local run we assume the user runs using the root test.sh and that the test payload is nested
+                // in the artifacts directory.
                 msbuildTestPayloadRoot = Path.Combine(
                     msbuildTestPayloadRoot,
                     "artifacts/testPayload"
@@ -87,8 +88,10 @@ namespace RunTests
             var correlationPayload = $@"<HelixCorrelationPayload Include=""{duplicateDir}"" />";
 
             // https://github.com/dotnet/roslyn/issues/50661
-            // it's possible we should be using the BUILD_SOURCEVERSIONAUTHOR instead here a la https://github.com/dotnet/arcade/blob/main/src/Microsoft.DotNet.Helix/Sdk/tools/xharness-runner/Readme.md#how-to-use
-            // however that variable isn't documented at https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
+            // it's possible we should be using the BUILD_SOURCEVERSIONAUTHOR instead here a la
+            // https://github.com/dotnet/arcade/blob/main/src/Microsoft.DotNet.Helix/Sdk/tools/xharness-runner/Readme.md#how-to-use
+            // however that variable isn't documented at
+            // https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
             var queuedBy = Environment.GetEnvironmentVariable("BUILD_QUEUEDBY");
             if (queuedBy is null)
             {
@@ -255,9 +258,12 @@ namespace RunTests
 
             string MakeHelixWorkItemProject(WorkItemInfo workItemInfo)
             {
-                // Currently, it's required for the client machine to use the same OS family as the target Helix queue.
-                // We could relax this and allow for example Linux clients to kick off Windows jobs, but we'd have to
-                // figure out solutions for issues such as creating file paths in the correct format for the target machine.
+                // Currently, it's required for the client machine to use the same OS family as the target Helix
+                // queue.
+                // We could relax this and allow for example Linux clients to kick off Windows jobs, but we'd have
+                // to
+                // figure out solutions for issues such as creating file paths in the correct format for the target
+                // machine.
                 var isUnix = !RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
                 var setEnvironmentVariable = isUnix ? "export" : "set";
@@ -327,9 +333,11 @@ namespace RunTests
                 File.WriteAllText(Path.Combine(payloadDirectory, rspFileName), rspFileContents);
 
                 // Build the command to run the rsp file.
-                // dotnet test does not pass rsp files correctly the vs test console, so we have to manually invoke vs test console.
+                // dotnet test does not pass rsp files correctly the vs test console, so we have to manually invoke
+                // vs test console.
                 // See https://github.com/microsoft/vstest/issues/3513
-                // The dotnet sdk includes the vstest.console.dll executable in the sdk folder in the installed version, so we look it up using the
+                // The dotnet sdk includes the vstest.console.dll executable in the sdk folder in the installed
+                // version, so we look it up using the
                 // DOTNET_ROOT environment variable set by helix.
                 if (isUnix)
                 {
@@ -351,18 +359,22 @@ namespace RunTests
                     command.AppendLine($"dotnet exec \"%vstestConsolePath%\" @{rspFileName}");
                 }
 
-                // The command string contains characters like % which are not valid XML to pass into the helix csproj.
+                // The command string contains characters like % which are not valid XML to pass into the helix
+                // csproj.
                 var escapedCommand = SecurityElement.Escape(command.ToString());
 
                 // We want to collect any dumps during the post command step here; these commands are ran after the
-                // return value of the main command is captured; a Helix Job is considered to fail if the main command returns a
-                // non-zero error code, and we don't want the cleanup steps to interefere with that. PostCommands exist
+                // return value of the main command is captured; a Helix Job is considered to fail if the main
+                // command returns a
+                // non-zero error code, and we don't want the cleanup steps to interefere with that. PostCommands
+                // exist
                 // precisely to address this problem.
                 var postCommands = new StringBuilder();
 
                 if (isUnix)
                 {
-                    // Write out this command into a separate file; unfortunately the use of single quotes and ; that is required
+                    // Write out this command into a separate file; unfortunately the use of single quotes and ; that is
+                    // required
                     // for the command to work causes too much escaping issues in MSBuild.
                     File.WriteAllText(
                         Path.Combine(payloadDirectory, "copy-dumps.sh"),
@@ -405,8 +417,10 @@ namespace RunTests
             CancellationToken cancellationToken
         )
         {
-            // Use 1.5 times the number of processors for unit tests, but only 1 processor for the open integration tests
-            // since they perform actual UI operations (such as mouse clicks and sending keystrokes) and we don't want two
+            // Use 1.5 times the number of processors for unit tests, but only 1 processor for the open
+            // integration tests
+            // since they perform actual UI operations (such as mouse clicks and sending keystrokes) and we
+            // don't want two
             // tests to conflict with one-another.
             var max = _options.Sequential ? 1 : (int)(Environment.ProcessorCount * 1.5);
             var waiting = new Stack<WorkItemInfo>(workItems);

@@ -21,7 +21,8 @@ public class RequestPathBaseCookieBuilder : CookieBuilder
     /// <inheritdoc />
     public override CookieOptions Build(HttpContext context, DateTimeOffset expiresFrom)
     {
-        // check if the user has overridden the default value of path. If so, use that instead of our default value.
+        // check if the user has overridden the default value of path. If so, use that instead of our
+        // default value.
         var path = Path;
         if (path == null)
         {

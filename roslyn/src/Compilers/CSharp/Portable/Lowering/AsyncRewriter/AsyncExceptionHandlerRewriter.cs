@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// 1) Await containing finally blocks:
         ///     The general strategy is to rewrite await containing handlers into synthetic handlers.
         ///     Synthetic handlers are not handlers in IL sense so it is ok to have awaits in them.
-        ///     Since synthetic handlers are just blocks, we have to deal with pending exception/branch/return manually
+        ///     Since synthetic handlers are just blocks, we have to deal with pending
+        // exception/branch/return manually
         ///     (this is the hard part of the rewrite).
         ///
         ///     try{
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///     int pendingBranch = 0;
         ///
         ///     try{
-        ///         code;  // any gotos/returns are rewritten to code that pends the necessary info and goes to finallyLabel
+        ///         code;  // any gotos/returns are rewritten to code that pends the necessary info and goes
+        // to finallyLabel
         ///         goto finallyLabel;
         ///     }catch (ex){  // essentially pend the currently active exception
         ///     };

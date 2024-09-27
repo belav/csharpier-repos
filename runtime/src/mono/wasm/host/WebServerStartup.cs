@@ -37,11 +37,14 @@ internal sealed class WebServerStartup
 
     public static int StartDebugProxy(string devToolsHost)
     {
-        //we need to start another process, otherwise it will be running the BrowserDebugProxy in the same process that will be debugged, so pausing in a breakpoint
-        //on managed code will freeze because it will not be able to continue executing the BrowserDebugProxy to get the locals value
+        //we need to start another process, otherwise it will be running the BrowserDebugProxy in the same
+        // process that will be debugged, so pausing in a breakpoint
+        //on managed code will freeze because it will not be able to continue executing the
+        // BrowserDebugProxy to get the locals value
         var executablePath = Path.Combine(System.AppContext.BaseDirectory, "BrowserDebugHost.dll");
         var ownerPid = Environment.ProcessId;
-        // generate a random port in a given range, skipping the ports blocked by browsers: https://chromestatus.com/feature/5064283639513088
+        // generate a random port in a given range, skipping the ports blocked by browsers:
+        // https://chromestatus.com/feature/5064283639513088
         var generateRandomPort = GetNextRandomExcept(
             5000..5300,
             5060, // SIP

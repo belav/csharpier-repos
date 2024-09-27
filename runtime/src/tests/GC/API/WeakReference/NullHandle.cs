@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * TEST NAME: NullHandle
- * DESCRIPTION: operates on Weakhandles whose m_handle is null
- */
+* TEST NAME: NullHandle
+* DESCRIPTION: operates on Weakhandles whose m_handle is null
+*/
 
 using System;
 using System.Runtime.CompilerServices;

@@ -48,10 +48,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private ICollection<string> _lazyMemberNames;
 
         /// <summary>
-        /// We used to sort symbols on demand and relied on row ids to figure out the order between symbols of the same kind.
-        /// However, that was fragile because, when map tables are used in metadata, row ids in the map table define the order
+        /// We used to sort symbols on demand and relied on row ids to figure out the order between symbols
+        // of the same kind.
+        /// However, that was fragile because, when map tables are used in metadata, row ids in the map
+        // table define the order
         /// and we don't have them.
-        /// Members are grouped by kind. First we store fields, then methods, then properties, then events and finally nested types.
+        /// Members are grouped by kind. First we store fields, then methods, then properties, then events
+        // and finally nested types.
         /// Within groups, members are sorted based on declaration order.
         /// </summary>
         private ImmutableArray<Symbol> _lazyMembersInDeclarationOrder;
@@ -143,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private sealed class UncommonProperties
         {
             /// <summary>
-            /// Need to import them for an enum from a linked assembly, when we are embedding it. These symbols are not included into lazyMembersInDeclarationOrder.
+            /// Need to import them for an enum from a linked assembly, when we are embedding it. These symbols
+            // are not included into lazyMembersInDeclarationOrder.
             /// </summary>
             internal ImmutableArray<PEFieldSymbol> lazyInstanceEnumFields;
             internal NamedTypeSymbol lazyEnumUnderlyingType;
@@ -380,7 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 throw ExceptionUtilities.Unreachable();
             }
 
-            // when a file-local type from source is loaded from metadata, we do a best-effort check to identify it as a file type
+            // when a file-local type from source is loaded from metadata, we do a best-effort check to identify
+            // it as a file type
             // this is needed to allow EE to bind to file types from metadata, for example.
             if (
                 container.IsNamespace
@@ -461,9 +466,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                // `lazyFilePathChecksum` and `lazyDisplayFileName` of `_lazyUncommonProperties` are initialized in the constructor, not on demand.
+                // `lazyFilePathChecksum` and `lazyDisplayFileName` of `_lazyUncommonProperties` are initialized in
+                // the constructor, not on demand.
                 // Therefore we can use `_lazyUncommonProperties` directly to avoid additional computations.
-                // Also important, that computing full uncommon properties here may lead to stack overflow if there is a circular dependency between types in the metadata.
+                // Also important, that computing full uncommon properties here may lead to stack overflow if there
+                // is a circular dependency between types in the metadata.
                 return
                     _lazyUncommonProperties
                         is {
@@ -1174,7 +1181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return nonEventFields;
                 }
 
-                // We need to merge non-event fields with event fields while preserving their relative declaration order
+                // We need to merge non-event fields with event fields while preserving their relative declaration
+                // order
                 var handleToFieldMap = new SmallDictionary<FieldDefinitionHandle, FieldSymbol>();
                 int count = 0;
 
@@ -1296,7 +1304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             gapSize = 1;
                         }
 
-                        // We don't have a symbol to return, so, even if the name doesn't represent a gap, we still have a gap.
+                        // We don't have a symbol to return, so, even if the name doesn't represent a gap, we still have a
+                        // gap.
                         do
                         {
                             yield return null;
@@ -1353,11 +1362,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 // From §8.5.2
                 // An enum is considerably more restricted than a true type, as
                 // follows:
-                // - It shall have exactly one instance field, and the type of that field defines the underlying type of
+                // - It shall have exactly one instance field, and the type of that field defines the underlying
+                // type of
                 // the enumeration.
                 // - It shall not have any static fields unless they are literal. (see §8.6.1.2)
 
-                // The underlying type shall be a built-in integer type. Enums shall derive from System.Enum, hence they are
+                // The underlying type shall be a built-in integer type. Enums shall derive from System.Enum, hence
+                // they are
                 // value types. Like all value types, they shall be sealed (see §8.9.9).
 
                 var moduleSymbol = this.ContainingPEModule;
@@ -2087,9 +2098,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             var moduleSymbol = this.ContainingPEModule;
             var module = moduleSymbol.Module;
 
-            // for ordinary struct types we import private fields so that we can distinguish empty structs from non-empty structs
+            // for ordinary struct types we import private fields so that we can distinguish empty structs from
+            // non-empty structs
             var isOrdinaryStruct = false;
-            // for ordinary embeddable struct types we import private members so that we can report appropriate errors if the structure is used
+            // for ordinary embeddable struct types we import private members so that we can report appropriate
+            // errors if the structure is used
             var isOrdinaryEmbeddableStruct = false;
 
             if (this.TypeKind == TypeKind.Struct)
@@ -2159,7 +2172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             var module = moduleSymbol.Module;
             var map = PooledDictionary<MethodDefinitionHandle, PEMethodSymbol>.GetInstance();
 
-            // for ordinary embeddable struct types we import private members so that we can report appropriate errors if the structure is used
+            // for ordinary embeddable struct types we import private members so that we can report appropriate
+            // errors if the structure is used
             var isOrdinaryEmbeddableStruct =
                 (this.TypeKind == TypeKind.Struct)
                 && (this.SpecialType == Microsoft.CodeAnalysis.SpecialType.None)
@@ -2356,7 +2370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         protected virtual DiagnosticInfo GetUseSiteDiagnosticImpl()
         {
-            // GetCompilerFeatureRequiredDiagnostic depends on UnsupportedCompilerFeature being the highest priority diagnostic, or it will return incorrect
+            // GetCompilerFeatureRequiredDiagnostic depends on UnsupportedCompilerFeature being the highest
+            // priority diagnostic, or it will return incorrect
             // results and assert in Debug mode.
             DiagnosticInfo diagnostic = DeriveCompilerFeatureRequiredDiagnostic();
 
@@ -2368,7 +2383,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (!MergeUseSiteDiagnostics(ref diagnostic, CalculateUseSiteDiagnostic()))
             {
                 // Check if this type is marked by RequiredAttribute attribute.
-                // If so mark the type as bad, because it relies upon semantics that are not understood by the C# compiler.
+                // If so mark the type as bad, because it relies upon semantics that are not understood by the C#
+                // compiler.
                 if (this.ContainingPEModule.Module.HasRequiredAttributeAttribute(_handle))
                 {
                     diagnostic = new CSDiagnosticInfo(ErrorCode.ERR_BogusType, this);
@@ -2935,7 +2951,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         /// <summary>
         /// Specialized PENamedTypeSymbol for types with type parameters in metadata.
-        /// NOTE: the type may have Arity == 0 if it has same metadata arity as the metadata arity of the containing type.
+        /// NOTE: the type may have Arity == 0 if it has same metadata arity as the metadata arity of the
+        // containing type.
         /// </summary>
         private sealed class PENamedTypeSymbolGeneric : PENamedTypeSymbol
         {
@@ -3017,12 +3034,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 if (_lazyTypeParameters.IsDefault)
                 {
-                    // If _arity is zero, we should have assigned empty immutable array to _lazyTypeParameters early in the constructor.
+                    // If _arity is zero, we should have assigned empty immutable array to _lazyTypeParameters early in
+                    // the constructor.
                     Debug.Assert(_arity > 0);
 
                     var moduleSymbol = ContainingPEModule;
 
-                    // If this is a nested type generic parameters in metadata include generic parameters of the outer types.
+                    // If this is a nested type generic parameters in metadata include generic parameters of the outer
+                    // types.
                     int firstIndex = _genericParameterHandles.Count - _arity;
 
                     var ownedParams = ArrayBuilder<TypeParameterSymbol>.GetInstance(_arity);

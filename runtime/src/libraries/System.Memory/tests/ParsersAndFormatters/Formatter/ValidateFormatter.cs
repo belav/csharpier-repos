@@ -9,8 +9,10 @@ namespace System.Buffers.Text.Tests
     {
         private static void ValidateFormatter<T>(FormatterTestData<T> testData)
         {
-            // It's useful to do the over-sized buffer test first. If the formatter api has a bug that generates output text that's longer than
-            // the expected string, this test will fail with an "Expected/Actual" diff while the exact-sized buffer test would say "Oops. The api returned 'false' and no output"."
+            // It's useful to do the over-sized buffer test first. If the formatter api has a bug that generates
+            // output text that's longer than
+            // the expected string, this test will fail with an "Expected/Actual" diff while the exact-sized
+            // buffer test would say "Oops. The api returned 'false' and no output"."
             FormatterTestData<T> oversizedTestData = new FormatterTestData<T>(
                 testData.Value,
                 testData.Format,
@@ -93,15 +95,18 @@ namespace System.Buffers.Text.Tests
                 string expected = testData.ExpectedOutput;
                 if (actual != expected)
                 {
-                    // We'll allocate (and not throw) the TestException (so that someone with a breakpoint inside TestException's constructor will break as desired) but
-                    // use Assert.Equals() to trigger the actual failure so we get XUnit's more useful comparison output into the log.
+                    // We'll allocate (and not throw) the TestException (so that someone with a breakpoint inside
+                    // TestException's constructor will break as desired) but
+                    // use Assert.Equals() to trigger the actual failure so we get XUnit's more useful comparison output
+                    // into the log.
                     new TestException(
                         $"This format attempt ({testData}) succeeded as expected but generated the wrong text:\n  Expected: \"{expected}\"\n  Actual:   \"{actual}\"\n"
                     );
                     Assert.Equal(expected, actual);
                 }
 
-                // If the api scribbled into the Span past the reported 'bytesWritten' (but still within the bounds of the Span itself), this should raise eyebrows at least.
+                // If the api scribbled into the Span past the reported 'bytesWritten' (but still within the bounds
+                // of the Span itself), this should raise eyebrows at least.
                 CanaryCheck(
                     testData,
                     new ReadOnlySpan<byte>(backingArray, span.Length, CanarySize),
@@ -135,8 +140,10 @@ namespace System.Buffers.Text.Tests
                     );
                 }
 
-                // Note: It's not guaranteed that partial (and useless) results will be written to the buffer despite
-                // byteWritten being 0. (In particular, ulong values that are larger than long.MaxValue using the "N" format.)
+                // Note: It's not guaranteed that partial (and useless) results will be written to the buffer
+                // despite
+                // byteWritten being 0. (In particular, ulong values that are larger than long.MaxValue using the
+                // "N" format.)
                 // We can only check the canary portion for overwrites.
                 CanaryCheck(
                     testData,

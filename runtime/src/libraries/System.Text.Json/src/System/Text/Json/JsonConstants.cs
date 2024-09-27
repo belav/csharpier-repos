@@ -50,22 +50,28 @@ namespace System.Text.Json
         public const int SpacesPerIndent = 2;
         public const int RemoveFlagsBitMask = 0x7FFFFFFF;
 
-        // In the worst case, an ASCII character represented as a single utf-8 byte could expand 6x when escaped.
+        // In the worst case, an ASCII character represented as a single utf-8 byte could expand 6x when
+        // escaped.
         // For example: '+' becomes '\u0043'
-        // Escaping surrogate pairs (represented by 3 or 4 utf-8 bytes) would expand to 12 bytes (which is still <= 6x).
+        // Escaping surrogate pairs (represented by 3 or 4 utf-8 bytes) would expand to 12 bytes (which is
+        // still <= 6x).
         // The same factor applies to utf-16 characters.
         public const int MaxExpansionFactorWhileEscaping = 6;
 
         // In the worst case, a single UTF-16 character could be expanded to 3 UTF-8 bytes.
-        // Only surrogate pairs expand to 4 UTF-8 bytes but that is a transformation of 2 UTF-16 characters going to 4 UTF-8 bytes (factor of 2).
+        // Only surrogate pairs expand to 4 UTF-8 bytes but that is a transformation of 2 UTF-16 characters
+        // going to 4 UTF-8 bytes (factor of 2).
         // All other UTF-16 characters can be represented by either 1 or 2 UTF-8 bytes.
         public const int MaxExpansionFactorWhileTranscoding = 3;
 
-        // When transcoding from UTF8 -> UTF16, the byte count threshold where we rent from the array pool before performing a normal alloc.
+        // When transcoding from UTF8 -> UTF16, the byte count threshold where we rent from the array pool
+        // before performing a normal alloc.
         public const long ArrayPoolMaxSizeBeforeUsingNormalAlloc = 1024 * 1024;
 
-        // The maximum number of characters allowed when writing raw UTF-16 JSON. This is the maximum length that we can guarantee can
-        // be safely transcoded to UTF-8 and fit within an integer-length span, given the max expansion factor of a single character (3).
+        // The maximum number of characters allowed when writing raw UTF-16 JSON. This is the maximum length
+        // that we can guarantee can
+        // be safely transcoded to UTF-8 and fit within an integer-length span, given the max expansion
+        // factor of a single character (3).
         public const int MaxUtf16RawValueLength = int.MaxValue / MaxExpansionFactorWhileTranscoding;
 
         public const int MaxEscapedTokenSize = 1_000_000_000; // Max size for already escaped value.

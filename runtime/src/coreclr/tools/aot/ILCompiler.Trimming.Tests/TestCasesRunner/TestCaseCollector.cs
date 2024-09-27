@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -96,8 +97,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     var relativeParents = file.RelativeTo(_rootDirectory);
                     // Magic : Anything in a directory named Dependencies is assumed to be a dependency to a test case
                     // and never a test itself
-                    // This makes life a little easier when writing these supporting files as it removes some constraints you would previously have
-                    // had to follow such as ensuring a class exists that matches the file name and putting [NotATestCase] on that class
+                    // This makes life a little easier when writing these supporting files as it removes some
+                    // constraints you would previously have
+                    // had to follow such as ensuring a class exists that matches the file name and putting
+                    // [NotATestCase] on that class
                     if (
                         relativeParents.RecursiveParents.Any(p =>
                             p.Elements.Any() && p.FileName == "Dependencies"
@@ -105,7 +108,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     )
                         continue;
 
-                    // Magic: Anything in a directory named Individual is expected to be ran by it's own [Test] rather than as part of [TestCaseSource]
+                    // Magic: Anything in a directory named Individual is expected to be ran by it's own [Test] rather
+                    // than as part of [TestCaseSource]
                     if (
                         relativeParents.RecursiveParents.Any(p =>
                             p.Elements.Any() && p.FileName == "Individual"

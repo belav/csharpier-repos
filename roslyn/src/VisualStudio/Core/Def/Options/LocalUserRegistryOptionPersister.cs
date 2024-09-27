@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
 
         public static LocalUserRegistryOptionPersister Create(ILocalRegistry4 localRegistry)
         {
-            // SLocalRegistry service is free-threaded -- see https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1408594.
+            // SLocalRegistry service is free-threaded -- see
+            // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1408594.
             Contract.ThrowIfFalse(
                 ErrorHandler.Succeeded(
                     localRegistry.GetLocalRegistryRootEx(

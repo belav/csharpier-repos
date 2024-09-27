@@ -245,7 +245,8 @@ public class FormPipeReaderTests
                     isFinalBlock: false
                 )
         );
-        // Make sure that FormPipeReader throws an exception after hitting KeyLengthLimit + ValueLengthLimit,
+        // Make sure that FormPipeReader throws an exception after hitting KeyLengthLimit +
+        // ValueLengthLimit,
         // Rather than after reading the entire request.
         Assert.Equal(
             string.Format(

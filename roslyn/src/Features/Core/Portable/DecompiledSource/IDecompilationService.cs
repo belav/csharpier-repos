@@ -8,7 +8,8 @@ using Microsoft.CodeAnalysis.Host;
 namespace Microsoft.CodeAnalysis.DecompiledSource;
 
 /// <summary>
-/// Abstraction over the actual decompilation libraries so we can avoid shipping them in source built assemblies.
+/// Abstraction over the actual decompilation libraries so we can avoid shipping them in source
+// built assemblies.
 /// </summary>
 internal interface IDecompilationService : ILanguageService
 {

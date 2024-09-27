@@ -646,7 +646,8 @@ namespace System.ServiceModel.ComIntegration
 
         public int ImpersonateClient()
         {
-            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.  Also,
+            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.
+            // Also,
             // we don't want CLR to set the ErrorInfo object.
 
             int hresult = HR.E_FAIL;
@@ -672,7 +673,8 @@ namespace System.ServiceModel.ComIntegration
 
         public int RevertToSelf()
         {
-            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.  Also,
+            // We want to return known COM hresults here rather than random CLR-Exception mapped HRESULTS.
+            // Also,
             // we don't want CLR to set the ErrorInfo object.
 
             int hresult = HR.E_FAIL;

@@ -28,9 +28,12 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Transactions;
     using System.Xml.Linq;
 
-    // WorkflowServiceInstance is free-threaded. It is responsible for the correct locking and usage of the underlying WorkflowInstance.
-    // Given that there are two simultaneous users of WorkflowInstance (WorkflowServiceInstance and Activities),
-    // it is imperative that WorkflowServiceInstance only calls into WorkflowInstance when there are no activities executing
+    // WorkflowServiceInstance is free-threaded. It is responsible for the correct locking and usage of
+    // the underlying WorkflowInstance.
+    // Given that there are two simultaneous users of WorkflowInstance (WorkflowServiceInstance and
+    // Activities),
+    // it is imperative that WorkflowServiceInstance only calls into WorkflowInstance when there are no
+    // activities executing
     // (and thus no worries about colliding with AEC calls).
 
     // LOCKING SCHEME DESCRIPTION
@@ -54,7 +57,8 @@ namespace System.ServiceModel.Activities.Dispatcher
     //   Resume (Release) resulting in an instance operation which times out when it shouldn't have.
     // ActiveOperations RefCount - The activeOperations ref count MUST be incremented before calling
     //   any of the Enter variations and must be decremented after leaving the Enter.  ActiveOperations
-    //   is how ReleaseLock determines whether to hand the lock off to a waiting operation or to continue
+    //   is how ReleaseLock determines whether to hand the lock off to a waiting operation or to
+    // continue
     //   execution workflow when the workflow is in a runnable state.
     // Future Innovation - If necessary we can consider iterating on the current code to provide
     //   better guarantees around async handoff.  For example, at the risk of starvation we could
@@ -86,7 +90,8 @@ namespace System.ServiceModel.Activities.Dispatcher
         List<AsyncWaitHandle> nextIdleWaiters;
         List<WaitForCanPersistAsyncResult> checkCanPersistWaiters;
 
-        // Used for synchronizing ResumeBookmark calls on the the load path from extensions (e.g DurableTimerExtension)
+        // Used for synchronizing ResumeBookmark calls on the the load path from extensions (e.g
+        // DurableTimerExtension)
         AsyncWaitHandle workflowServiceInstanceReadyWaitHandle;
         bool isWorkflowServiceInstanceReady;
 
@@ -298,7 +303,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        // create a dummy instance to configure extensions and determine if a load-time transaction is required
+        // create a dummy instance to configure extensions and determine if a load-time transaction is
+        // required
         public static bool IsLoadTransactionRequired(WorkflowServiceHost host)
         {
             WorkflowServiceInstance instance = new WorkflowServiceInstance(host);
@@ -494,16 +500,21 @@ namespace System.ServiceModel.Activities.Dispatcher
         void StartUnloadInstancePolicyIfNecessary()
         {
             // The conditions to start unload policy.
-            // - referenceCount is 1.  Like COM, This is the last reference count hold by WorkflowServiceInstance itself.
+            // - referenceCount is 1.  Like COM, This is the last reference count hold by
+            // WorkflowServiceInstance itself.
             //   It is incremented per command (control/resumebookmark) and decremented when command is done.
-            // - No lock pending.  In general, when referenceCount is 1, the executor lock is freed and WF is idled.
-            //   There is, however, one narrow case for Persist activity.  When it goes async (executing Sql command),
+            // - No lock pending.  In general, when referenceCount is 1, the executor lock is freed and WF is
+            // idled.
+            //   There is, however, one narrow case for Persist activity.  When it goes async (executing Sql
+            // command),
             //   the referenceCount is decremented to 1 but WF sheduler still busy.  In this case, we will let
             //   the lock release to initiate the policy.
             // - Not in transaction (TxCommit will take care of this).
             // - Must not be in completed or unloaded or aborted states.
-            // Note: it is okay to dirty read referenceCount and isLocked.  If the UnloadInstancePolicy starts before
-            //   increment, the increment will correct and cancel it.  If the increment happens before, ReleaseReference
+            // Note: it is okay to dirty read referenceCount and isLocked.  If the UnloadInstancePolicy starts
+            // before
+            //   increment, the increment will correct and cancel it.  If the increment happens before,
+            // ReleaseReference
             //   will have a chance to start the policy.  Same applies to isLocked.
             if (
                 this.referenceCount == 1
@@ -527,7 +538,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (this.IsHandlerThread)
             {
-                // We're in a handler, on the handler thread, and doing work synchronously so we already have the lock
+                // We're in a handler, on the handler thread, and doing work synchronously so we already have the
+                // lock
                 return;
             }
 
@@ -830,7 +842,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         void ReleaseLock(ref bool ownsLock, bool hasBeenPersistedByIdlePolicy)
         {
-            // The hasBeenPersistedByIdlePolicy flag is only true when this is part of the idle policy initiated persist.
+            // The hasBeenPersistedByIdlePolicy flag is only true when this is part of the idle policy initiated
+            // persist.
 
             if (!ownsLock)
             {
@@ -1081,7 +1094,8 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             this.abortingExtensions = true;
 
-            // Need to ensure that either components see the Aborted state, this method sees the components, or both.
+            // Need to ensure that either components see the Aborted state, this method sees the components, or
+            // both.
             Thread.MemoryBarrier();
 
             if (this.persistenceContext != null)
@@ -1272,10 +1286,14 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             Fx.Assert(!String.IsNullOrEmpty(reason), "reason string must not be null or empty!");
 
-            // the FaultException below is created using the FaultException(FaultReason, FaultCode) ctor instead of the FaultException(MessageFault) ctor
-            // because the latter ctor saves the fault in its fault member.  Saving the fault is problematic because faultException would serialize its
-            // fault member and operationExecutionFault is not serializable.  The faultException might need to be serialized if the workflowServiceInstance
-            // is ever persisted since the faultException below ultimately becomes the terminationException saved with the workflowServiceInstance.
+            // the FaultException below is created using the FaultException(FaultReason, FaultCode) ctor instead
+            // of the FaultException(MessageFault) ctor
+            // because the latter ctor saves the fault in its fault member.  Saving the fault is problematic
+            // because faultException would serialize its
+            // fault member and operationExecutionFault is not serializable.  The faultException might need to
+            // be serialized if the workflowServiceInstance
+            // is ever persisted since the faultException below ultimately becomes the terminationException
+            // saved with the workflowServiceInstance.
             OperationExecutionFault fault = OperationExecutionFault.CreateTerminatedFault(reason);
             return BeginTerminate(
                 new FaultException(fault.Reason, fault.Code),
@@ -2554,9 +2572,11 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         public void RemovePendingOperation(string sessionId, IAsyncResult result)
         {
-            // remove the async result from the queue. The result could represent the operation currently being processed for the session
+            // remove the async result from the queue. The result could represent the operation currently being
+            // processed for the session
             // or could be an operation that had timed out waiting to get to the head of the queue.
-            // Also, note that if the instance has already completed/aborted etc all pending operations would call OnWorkflowOperationCompleted
+            // Also, note that if the instance has already completed/aborted etc all pending operations would
+            // call OnWorkflowOperationCompleted
             // simultaneously and this.pendingOperations would be null.
             lock (this.thisLock)
             {
@@ -2568,8 +2588,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (pendingList.Count > 0)
                     {
-                        // In the happy path, RemovePendingOperation might get called more than more than once(HandleEndResume & ProcessReply)
-                        // wasInProcess would be false the second time. When wasInProcess is false, we do not unblock the next item in the list
+                        // In the happy path, RemovePendingOperation might get called more than more than
+                        // once(HandleEndResume & ProcessReply)
+                        // wasInProcess would be false the second time. When wasInProcess is false, we do not unblock the
+                        // next item in the list
                         bool wasInProcess = pendingList[0] == result;
 
                         if (pendingList.Remove((PendingOperationAsyncResult)result))
@@ -4102,7 +4124,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 // Save off the current transaction in case we have an async operation before we end up creating
                 // the WorkflowPersistenceContext and create it on another thread. Do a simple clone here to prevent
-                // the object referenced by Transaction.Current from disposing before we get around to referencing it
+                // the object referenced by Transaction.Current from disposing before we get around to referencing
+                // it
                 // when we create the WorkflowPersistenceContext.
                 //
                 // This will throw TransactionAbortedException by design, if the transaction is already rolled back.
@@ -4348,7 +4371,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                 }
 
-                // We finally have the lock and are passed the guard.  Let's update our operation if this is an Unload.
+                // We finally have the lock and are passed the guard.  Let's update our operation if this is an
+                // Unload.
                 if (
                     this.operation == PersistenceOperation.Unload
                     && this.instance.Controller.State == WorkflowInstanceState.Complete
@@ -5238,7 +5262,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             protected override void PerformOperation()
             {
-                // This is the synchronous code path. This path terminates the unload and leaves the instance intact.
+                // This is the synchronous code path. This path terminates the unload and leaves the instance
+                // intact.
                 Fx.Assert(
                     !this.shouldTrackAbort && this.Instance.hasDataToPersist,
                     "We should only get here when we need to terminate the unload."

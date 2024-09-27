@@ -87,7 +87,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         /// <summary>
         /// True iff <see cref=" m_memberPath"/> and <paramref name="outputMember"/> types do not match,
-        /// We assume that the mapping loader has already checked that the casts are ok and emitted warnings.
+        /// We assume that the mapping loader has already checked that the casts are ok and emitted
+        // warnings.
         /// </summary>
         private bool NeedToCastCqlValue(
             MemberPath outputMember,
@@ -144,8 +145,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         #region Helper methods
         /// <summary>
-        /// Given the <paramref name="prefix"/>, determines the slots in <paramref name="slots"/> that correspond to the entity key for the entity set or the
-        /// association set end. Returns the list of slots.  Returns null if even one of the key slots is not present in slots.
+        /// Given the <paramref name="prefix"/>, determines the slots in <paramref name="slots"/> that
+        // correspond to the entity key for the entity set or the
+        /// association set end. Returns the list of slots.  Returns null if even one of the key slots is
+        // not present in slots.
         /// </summary>
         /// <param name="prefix">corresponds to an entity set or an association end</param>
         internal static List<MemberProjectedSlot> GetKeySlots(
@@ -166,7 +169,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Searches for members in <paramref name="slots"/> and returns the corresponding slots in the same order as present in
+        /// Searches for members in <paramref name="slots"/> and returns the corresponding slots in the same
+        // order as present in
         /// <paramref name="members"/>. Returns null if even one member is not present in slots.
         /// </summary>
         internal static List<MemberProjectedSlot> GetSlots(
@@ -191,7 +195,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Searches for <paramref name="member"/> in <paramref name="slots"/> and returns the corresponding slot. If none is found, returns null.
+        /// Searches for <paramref name="member"/> in <paramref name="slots"/> and returns the corresponding
+        // slot. If none is found, returns null.
         /// </summary>
         internal static MemberProjectedSlot GetSlotForMember(
             IEnumerable<ProjectedSlot> slots,

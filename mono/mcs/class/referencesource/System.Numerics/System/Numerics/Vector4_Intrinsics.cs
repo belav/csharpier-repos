@@ -1,14 +1,19 @@
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Runtime.CompilerServices;
 
 namespace System.Numerics
 {
-    // This file contains the definitions for all of the JIT intrinsic methods and properties that are recognized by the current x64 JIT compiler.
-    // The implementation defined here is used in any circumstance where the JIT fails to recognize these members as intrinsic.
-    // The JIT recognizes these methods and properties by name and signature: if either is changed, the JIT will no longer recognize the member.
-    // Some methods declared here are not strictly intrinsic, but delegate to an intrinsic method. For example, only one overload of CopyTo()
+    // This file contains the definitions for all of the JIT intrinsic methods and properties that are
+    // recognized by the current x64 JIT compiler.
+    // The implementation defined here is used in any circumstance where the JIT fails to recognize
+    // these members as intrinsic.
+    // The JIT recognizes these methods and properties by name and signature: if either is changed, the
+    // JIT will no longer recognize the member.
+    // Some methods declared here are not strictly intrinsic, but delegate to an intrinsic method. For
+    // example, only one overload of CopyTo()
 
     public partial struct Vector4
     {
@@ -101,15 +106,18 @@ namespace System.Numerics
         /// </summary>
         /// <exception cref="ArgumentNullException">If array is null.</exception>
         /// <exception cref="RankException">If array is multidimensional.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If index is greater than end of the array or index is less than zero.</exception>
-        /// <exception cref="ArgumentException">If number of elements in source vector is greater than those available in destination array.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If index is greater than end of the array or index
+        // is less than zero.</exception>
+        /// <exception cref="ArgumentException">If number of elements in source vector is greater than those
+        // available in destination array.</exception>
         [JitIntrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CopyTo(Single[] array, int index)
         {
             if (array == null)
             {
-                // Match the JIT's exception type here. For perf, a NullReference is thrown instead of an ArgumentNull.
+                // Match the JIT's exception type here. For perf, a NullReference is thrown instead of an
+                // ArgumentNull.
                 throw new NullReferenceException(SR.GetString("Arg_NullArgumentNullRef"));
             }
             if (index < 0 || index >= array.Length)
@@ -160,7 +168,8 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Returns a vector whose elements are the minimum of each of the pairs of elements in the two source vectors.
+        /// Returns a vector whose elements are the minimum of each of the pairs of elements in the two
+        // source vectors.
         /// </summary>
         /// <param name="value1">The first source vector.</param>
         /// <param name="value2">The second source vector.</param>
@@ -178,7 +187,8 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Returns a vector whose elements are the maximum of each of the pairs of elements in the two source vectors.
+        /// Returns a vector whose elements are the maximum of each of the pairs of elements in the two
+        // source vectors.
         /// </summary>
         /// <param name="value1">The first source vector.</param>
         /// <param name="value2">The second source vector.</param>

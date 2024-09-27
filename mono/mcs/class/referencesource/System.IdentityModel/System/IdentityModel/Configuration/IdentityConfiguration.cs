@@ -19,7 +19,8 @@ using System.Xml;
 namespace System.IdentityModel.Configuration
 {
     /// <summary>
-    /// Defines the collection of configurable properties controlling the behavior of the Windows Identity Foundation.
+    /// Defines the collection of configurable properties controlling the behavior of the Windows
+    // Identity Foundation.
     /// </summary>
     public class IdentityConfiguration
     {
@@ -63,7 +64,8 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Initializes an instance of <see cref="IdentityConfiguration"/>
         /// </summary>
-        /// <param name="serviceCertificate">The service certificate to be used in ServiceTokenResolver and SessionSecurityTokenHandler.</param>
+        /// <param name="serviceCertificate">The service certificate to be used in ServiceTokenResolver and
+        // SessionSecurityTokenHandler.</param>
         public IdentityConfiguration(X509Certificate2 serviceCertificate)
             : this()
         {
@@ -101,7 +103,8 @@ namespace System.IdentityModel.Configuration
         /// Initializes an instance of <see cref="IdentityConfiguration"/>
         /// </summary>
         /// <param name="loadConfig">Whether or not config should be loaded.</param>
-        /// <param name="serviceCertificate">The service certificate to be used in ServiceTokenResolver and SessionSecurityTokenHandler.</param>
+        /// <param name="serviceCertificate">The service certificate to be used in ServiceTokenResolver and
+        // SessionSecurityTokenHandler.</param>
         /// <exception cref="InvalidOperationException">Thrown if loadConfig is set to true but there is no
         /// &lt;System.IdentityModel> configuration element</exception>
         public IdentityConfiguration(bool loadConfig, X509Certificate2 serviceCertificate)
@@ -113,9 +116,12 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Initializes an instance of <see cref="IdentityConfiguration"/>
         /// </summary>
-        /// <param name="identityConfigurationName">The name of the &lt;service> element from which configuration is to be loaded.</param>
-        /// <exception cref="InvalidOperationException">Thrown if there is no &lt;System.IdentityModel> configuration element</exception>
-        /// <remarks>If this constructor is called then a System.IdentityModel config section with the provided name must exist.</remarks>
+        /// <param name="identityConfigurationName">The name of the &lt;service> element from which
+        // configuration is to be loaded.</param>
+        /// <exception cref="InvalidOperationException">Thrown if there is no &lt;System.IdentityModel>
+        // configuration element</exception>
+        /// <remarks>If this constructor is called then a System.IdentityModel config section with the
+        // provided name must exist.</remarks>
         public IdentityConfiguration(string identityConfigurationName)
         {
             if (identityConfigurationName == null)
@@ -142,10 +148,14 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Initializes an instance of <see cref="IdentityConfiguration"/>
         /// </summary>
-        /// <param name="identityConfigurationName">The name of the &lt;service> element from which configuration is to be loaded.</param>
-        /// <exception cref="InvalidOperationException">Thrown if there is no &lt;System.IdentityModel> configuration element</exception>
-        /// <param name="serviceCertificate">Thrown if there is no &lt;System.IdentityModel> configuration element</param>
-        /// <remarks>If this constructor is called then a System.IdentityModel config section with the provided name must exist.</remarks>
+        /// <param name="identityConfigurationName">The name of the &lt;service> element from which
+        // configuration is to be loaded.</param>
+        /// <exception cref="InvalidOperationException">Thrown if there is no &lt;System.IdentityModel>
+        // configuration element</exception>
+        /// <param name="serviceCertificate">Thrown if there is no &lt;System.IdentityModel> configuration
+        // element</param>
+        /// <remarks>If this constructor is called then a System.IdentityModel config section with the
+        // provided name must exist.</remarks>
         public IdentityConfiguration(
             string identityConfigurationName,
             X509Certificate2 serviceCertificate
@@ -325,14 +335,16 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Updates properties in the <see cref="SecurityTokenHandlerConfiguration"/> objects for the
         /// <see cref="SecurityTokenHandlerCollection"/> objects contained in
-        /// <see cref="IdentityConfiguration.SecurityTokenHandlerCollectionManager"/> to be consistent with the property
+        /// <see cref="IdentityConfiguration.SecurityTokenHandlerCollectionManager"/> to be consistent with
+        // the property
         /// values on this <see cref="IdentityConfiguration"/> instance.
         /// </summary>
         /// <remarks>
         /// This method should be invoked prior to using these token handlers
         /// for token processing.
         /// </remarks>
-        /// <exception cref="InvalidOperationException">If this method is invoked more than once.</exception>
+        /// <exception cref="InvalidOperationException">If this method is invoked more than
+        // once.</exception>
         public virtual void Initialize()
         {
             if (this.IsInitialized)
@@ -357,7 +369,8 @@ namespace System.IdentityModel.Configuration
                 return;
             }
 
-            // Update the ServiceTokenResolver of the default TokenHandlerCollection's configuration, if serviceCertificate is set.
+            // Update the ServiceTokenResolver of the default TokenHandlerCollection's configuration, if
+            // serviceCertificate is set.
             if (this.ServiceCertificate != null)
             {
                 SecurityTokenResolver serviceCertificateResolver =
@@ -463,7 +476,8 @@ namespace System.IdentityModel.Configuration
         /// Loads the settings for the IdentityConfiguration from the application or web configuration file.
         /// </summary>
         /// <remarks>
-        /// If there is no configuration file, or the named section does not exist, then no exception is thrown,
+        /// If there is no configuration file, or the named section does not exist, then no exception is
+        // thrown,
         /// instead the class is loaded with a set of default values.
         /// </remarks>
         protected void LoadConfiguration(IdentityConfigurationElement element)
@@ -504,14 +518,16 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Loads the <see cref="SecurityTokenHandlerCollectionManager"/> defined for a given service.
         /// </summary>
-        /// <param name="serviceElement">The <see cref="IdentityConfigurationElement"/> used to configure this instance.</param>
+        /// <param name="serviceElement">The <see cref="IdentityConfigurationElement"/> used to configure
+        // this instance.</param>
         /// <returns></returns>
         protected SecurityTokenHandlerCollectionManager LoadHandlers(
             IdentityConfigurationElement serviceElement
         )
         {
             //
-            // We start with a token handler collection manager that contains a single collection that includes the default
+            // We start with a token handler collection manager that contains a single collection that includes
+            // the default
             // handlers for the system.
             //
             SecurityTokenHandlerCollectionManager manager =
@@ -542,7 +558,8 @@ namespace System.IdentityModel.Configuration
                             )
                             {
                                 //
-                                // For the default collection, merge the IdentityConfiguration with the underlying config, if it exists.
+                                // For the default collection, merge the IdentityConfiguration with the underlying config, if it
+                                // exists.
                                 //
                                 if (
                                     handlerElementCollection
@@ -552,8 +569,10 @@ namespace System.IdentityModel.Configuration
                                 {
                                     //
                                     // Configuration from a nested configuration object. We start with Service level configuration for
-                                    // handlers and then override the collection specific configuration. The result is a new configuration
-                                    // object that can only be modified by accessing the collection or handlers configuration properties.
+                                    // handlers and then override the collection specific configuration. The result is a new
+                                    // configuration
+                                    // object that can only be modified by accessing the collection or handlers configuration
+                                    // properties.
                                     //
                                     _serviceHandlerConfiguration = LoadHandlerConfiguration(
                                         serviceElement
@@ -576,7 +595,8 @@ namespace System.IdentityModel.Configuration
                             else
                             {
                                 //
-                                // This is a non-default collection. There should be no settings inherited from IdentityConfiguration.
+                                // This is a non-default collection. There should be no settings inherited from
+                                // IdentityConfiguration.
                                 //
                                 if (
                                     handlerElementCollection
@@ -793,8 +813,10 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Loads configuration elements pertaining to the <see cref="SecurityTokenHandlerCollection"/>
         /// </summary>
-        /// <param name="baseConfiguration">Base <see cref="SecurityTokenHandlerConfiguration"/> from which to inherit default values.</param>
-        /// <param name="element">The <see cref="SecurityTokenHandlerConfigurationElement"/> from the configuration file.</param>
+        /// <param name="baseConfiguration">Base <see cref="SecurityTokenHandlerConfiguration"/> from which
+        // to inherit default values.</param>
+        /// <param name="element">The <see cref="SecurityTokenHandlerConfigurationElement"/> from the
+        // configuration file.</param>
         /// <returns></returns>
         protected SecurityTokenHandlerConfiguration LoadHandlerConfiguration(
             SecurityTokenHandlerConfiguration baseConfiguration,
@@ -809,7 +831,8 @@ namespace System.IdentityModel.Configuration
             if (element.AudienceUris.IsConfigured)
             {
                 //
-                // There is no inheritance of the content of the element from base to child, only the whole element. If the
+                // There is no inheritance of the content of the element from base to child, only the whole element.
+                // If the
                 // user specifies any part, they must specify it all.
                 //
                 handlerConfiguration.AudienceRestriction.AudienceMode = AudienceUriMode.Always;
@@ -989,7 +1012,8 @@ namespace System.IdentityModel.Configuration
         }
 
         /// <summary>
-        /// The service certificate to initialize the ServiceTokenResolver and the SessionSecurityTokenHandler.
+        /// The service certificate to initialize the ServiceTokenResolver and the
+        // SessionSecurityTokenHandler.
         /// </summary>
         public X509Certificate2 ServiceCertificate
         {
@@ -1047,7 +1071,8 @@ namespace System.IdentityModel.Configuration
         }
 
         /// <summary>
-        /// Gets or sets if BootstrapContext is saved in the ClaimsIdentity and Sessions after token validation.
+        /// Gets or sets if BootstrapContext is saved in the ClaimsIdentity and Sessions after token
+        // validation.
         /// </summary>
         public bool SaveBootstrapContext
         {
@@ -1056,7 +1081,8 @@ namespace System.IdentityModel.Configuration
         }
 
         /// <summary>
-        /// The <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </summary>
         public SecurityTokenHandlerCollectionManager SecurityTokenHandlerCollectionManager
@@ -1065,7 +1091,8 @@ namespace System.IdentityModel.Configuration
         }
 
         /// <summary>
-        /// The <see cref="SecurityTokenHandlerCollection" /> collection of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollection" /> collection of <see cref="SecurityTokenHandler"
+        // />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// If user wants to register their own token handler, they
         /// can simply add their own handler to this collection.

@@ -693,7 +693,8 @@ namespace System.Threading.Tests
                     innerContextIndex++
                 )
                 {
-                    // Validate locals are correctly restored Running with another non-Default context from a non-Default context
+                    // Validate locals are correctly restored Running with another non-Default context from a
+                    // non-Default context
                     ExecutionContext.Run(
                         capturedContexts[innerContextIndex].CreateCopy(),
                         o => ValidateAsyncLocalsValues(thresholdIndex: (int)o),
@@ -729,7 +730,8 @@ namespace System.Threading.Tests
                 }
             }
 
-            // Synchronous function is async to create different ExecutionContexts for each set, and check async unwinding
+            // Synchronous function is async to create different ExecutionContexts for each set, and check async
+            // unwinding
             async Task SetLocalsRecursivelyAsync(int index)
             {
                 // Set AsyncLocal

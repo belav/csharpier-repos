@@ -17,7 +17,8 @@ namespace System.ComponentModel.Composition.Hosting
     public partial class FilteredCatalog
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependecies.
+        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from
+        // the orignal filtered catalog and all their dependecies.
         /// </summary>
         /// <returns></returns>
         public FilteredCatalog IncludeDependencies()
@@ -26,7 +27,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependencies that
+        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from
+        // the orignal filtered catalog and all their dependencies that
         /// can be reached via imports that match the specified filter.
         /// </summary>
         /// <param name="importFilter">The import filter.</param>
@@ -40,7 +42,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependents.
+        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from
+        // the orignal filtered catalog and all their dependents.
         /// </summary>
         /// <returns></returns>
         public FilteredCatalog IncludeDependents()
@@ -49,7 +52,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependents that
+        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from
+        // the orignal filtered catalog and all their dependents that
         /// can be reached via imports that match the specified filter.
         /// </summary>
         /// <param name="importFilter">The import filter.</param>
@@ -67,7 +71,8 @@ namespace System.ComponentModel.Composition.Hosting
             Assumes.NotNull(traversal);
 
             // we make sure that the underlyiong catalog cannot change while we are doing the trasversal
-            // After thaty traversal is done, the freeze is lifted, and the catalog is free to change, but the changes
+            // After thaty traversal is done, the freeze is lifted, and the catalog is free to change, but the
+            // changes
             // cannot affect partitioning
             this.FreezeInnerCatalog();
 

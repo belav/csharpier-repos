@@ -4,17 +4,21 @@
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     Event IDs for SQL Server events that correspond to messages logged to an <see cref="ILogger" />
+///     Event IDs for SQL Server events that correspond to messages logged to an <see cref="ILogger"
+// />
 ///     and events sent to a <see cref="DiagnosticSource" />.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure the
+///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure
+// the
 ///         behavior of warnings.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see>, and
-///         <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see>, and
+///         <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -83,7 +87,8 @@ public static class SqlServerEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId DecimalTypeKeyWarning = MakeValidationId(
@@ -98,7 +103,8 @@ public static class SqlServerEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId DecimalTypeDefaultWarning = MakeValidationId(
@@ -113,7 +119,8 @@ public static class SqlServerEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ByteIdentityColumnWarning = MakeValidationId(
@@ -142,7 +149,8 @@ public static class SqlServerEventId
     private static EventId MakeTransactionId(Id id) => new((int)id, TransactionPrefix + id);
 
     /// <summary>
-    ///     Savepoints have been disabled when saving changes with an external transaction, because Multiple Active Result Sets is
+    ///     Savepoints have been disabled when saving changes with an external transaction, because
+    // Multiple Active Result Sets is
     ///     enabled.
     /// </summary>
     /// <remarks>
@@ -307,8 +315,10 @@ public static class SqlServerEventId
     );
 
     /// <summary>
-    ///     The database user has not been granted 'VIEW DEFINITION' rights. Scaffolding requires these rights to construct the Entity Framework
-    ///     model correctly. Without these rights, parts of the scaffolded model may be missing, resulting in incorrect interactions between Entity
+    ///     The database user has not been granted 'VIEW DEFINITION' rights. Scaffolding requires these
+    // rights to construct the Entity Framework
+    ///     model correctly. Without these rights, parts of the scaffolded model may be missing,
+    // resulting in incorrect interactions between Entity
     ///     Framework and the database at runtime.
     /// </summary>
     /// <remarks>

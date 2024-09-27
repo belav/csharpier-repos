@@ -113,7 +113,8 @@ namespace MonoTests.System.Windows.Forms
             myMonthCal1.SelectionStart = new DateTime(2005, 09, 02);
             myMonthCal1.SelectionEnd = new DateTime(2005, 09, 03);
             Assert.AreEqual(new DateTime(2005, 09, 03), myMonthCal1.SelectionEnd, "#S2");
-            //Assert.AreEqual (new SelectionRange (new DateTime(2005,09,02), new DateTime(2005,09,03)), myMonthCal1.SelectionRange, "#S3");
+            //Assert.AreEqual (new SelectionRange (new DateTime(2005,09,02), new DateTime(2005,09,03)),
+            // myMonthCal1.SelectionRange, "#S3");
             Assert.AreEqual(new DateTime(2005, 09, 02), myMonthCal1.SelectionStart, "#S4");
             Assert.AreEqual(true, myMonthCal1.ShowToday, "#S5");
             Assert.AreEqual(true, myMonthCal1.ShowTodayCircle, "#S6");

@@ -423,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 var parameters = symbol.GetParameters();
 
-                // if this has parameters, then add them here.  Otherwise, if this is a method without parameters, but
+                // if this has parameters, then add them here.  Otherwise, if this is a method without parameters,
+                // but
                 // there are overloads of it, then also add the parameters to disambiguate.
                 if (parameters.Length > 0 || (symbol is IMethodSymbol && groupCount >= 2))
                 {

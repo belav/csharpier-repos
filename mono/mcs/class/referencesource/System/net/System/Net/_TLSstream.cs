@@ -44,7 +44,8 @@ namespace System.Net
         )
             : base(networkStream, true)
         {
-            // WebRequest manages the execution context manually so we have to ensure we get one for SSL client certificate demand
+            // WebRequest manages the execution context manually so we have to ensure we get one for SSL client
+            // certificate demand
             _ExecutionContext = executionContext;
             if (_ExecutionContext == null)
             {
@@ -99,7 +100,8 @@ namespace System.Net
         }
 
         //
-        // HttpWebRequest as a consumer of this class will ignore any write error, by relying on the read side exception.
+        // HttpWebRequest as a consumer of this class will ignore any write error, by relying on the read
+        // side exception.
         // We want to keep the right failure status for a user application.
         //
         internal WebExceptionStatus ExceptionStatus
@@ -122,8 +124,10 @@ namespace System.Net
             {
                 if (disposing)
                 {
-                    // When KeepAlive is turned off, the TlsStream will be closed before the auth headers for the next request
-                    // are computed.  We cannot retrieve the ChannelBinding from the TlsStream after closing it, so we need to
+                    // When KeepAlive is turned off, the TlsStream will be closed before the auth headers for the next
+                    // request
+                    // are computed.  We cannot retrieve the ChannelBinding from the TlsStream after closing it, so we
+                    // need to
                     // cache it now.
                     m_CachedChannelBinding = GetChannelBinding(ChannelBindingKind.Endpoint);
 
@@ -681,7 +685,8 @@ namespace System.Net
                         }
 
                         //
-                        // TlsStream is used by classes that manually control ExecutionContext, so set it here if we need to.
+                        // TlsStream is used by classes that manually control ExecutionContext, so set it here if we need
+                        // to.
                         //
                         if (_ExecutionContext != null)
                         {

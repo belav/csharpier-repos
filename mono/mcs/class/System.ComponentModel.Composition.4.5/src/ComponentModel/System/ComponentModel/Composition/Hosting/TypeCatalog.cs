@@ -20,7 +20,8 @@ using Microsoft.Internal.Collections;
 namespace System.ComponentModel.Composition.Hosting
 {
     /// <summary>
-    ///     An immutable ComposablePartCatalog created from a type array or a list of managed types.  This class is threadsafe.
+    ///     An immutable ComposablePartCatalog created from a type array or a list of managed types.
+    // This class is threadsafe.
     ///     It is Disposable.
     /// </summary>
     [DebuggerTypeProxy(typeof(ComposablePartCatalogDebuggerProxy))]
@@ -99,7 +100,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="types"/> is <see langword="null"/>.
         /// </exception>
         /// <param name="definitionOrigin">
-        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the source for parts.
+        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the
+        // source for parts.
         /// </param>
         /// <exception cref="ArgumentException">
         ///     <paramref name="types"/> contains an element that is <see langword="null"/>.
@@ -164,7 +166,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     interpreting the types to inject attributes into the type definition.
         /// </param>
         /// <param name="definitionOrigin">
-        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the source for parts.
+        ///     The <see cref="ICompositionElement"/> CompositionElement used by Diagnostics to identify the
+        // source for parts.
         /// </param>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="types"/> is <see langword="null"/>.
@@ -278,7 +281,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the display name of the type catalog.
         /// </summary>
         /// <value>
-        ///     A <see cref="String"/> containing a human-readable display name of the <see cref="TypeCatalog"/>.
+        ///     A <see cref="String"/> containing a human-readable display name of the <see
+        // cref="TypeCatalog"/>.
         /// </value>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
         string ICompositionElement.DisplayName
@@ -402,7 +406,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns a string representation of the type catalog.
         /// </summary>
         /// <returns>
-        ///     A <see cref="String"/> containing the string representation of the <see cref="TypeCatalog"/>.
+        ///     A <see cref="String"/> containing the string representation of the <see
+        // cref="TypeCatalog"/>.
         /// </returns>
         public override string ToString()
         {

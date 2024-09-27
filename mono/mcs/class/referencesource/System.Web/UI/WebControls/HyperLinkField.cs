@@ -14,7 +14,8 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
 
     /// <devdoc>
-    /// <para>Creates a field within the <see cref='System.Web.UI.WebControls.DataBoundControl'/> containing hyperlinks that
+    /// <para>Creates a field within the <see cref='System.Web.UI.WebControls.DataBoundControl'/>
+    // containing hyperlinks that
     ///    navigate to specified URLs.</para>
     /// </devdoc>
     public class HyperLinkField : DataControlField
@@ -23,12 +24,14 @@ namespace System.Web.UI.WebControls
         private PropertyDescriptor[] urlFieldDescs;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.HyperLinkField'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.HyperLinkField'/>
+        // class.</para>
         /// </devdoc>
         public HyperLinkField() { }
 
         /// <devdoc>
-        /// <para>Gets or sets the fields in the DataSource that provides the URL of the page to navigate to.</para>
+        /// <para>Gets or sets the fields in the DataSource that provides the URL of the page to navigate
+        // to.</para>
         /// </devdoc>
         [
             WebCategory("Data"),
@@ -71,7 +74,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the formatting applied to the <see cref='System.Web.UI.WebControls.HyperLinkField.NavigateUrl'/>
+        /// <para>Gets or sets the formatting applied to the <see
+        // cref='System.Web.UI.WebControls.HyperLinkField.NavigateUrl'/>
         /// property.</para>
         /// </devdoc>
         [
@@ -130,7 +134,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the formatting applied to the <see cref='System.Web.UI.WebControls.HyperLinkField.Text'/>
+        /// <para>Gets or sets the formatting applied to the <see
+        // cref='System.Web.UI.WebControls.HyperLinkField.Text'/>
         /// property.</para>
         /// </devdoc>
         [
@@ -493,7 +498,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// <para>Override with an empty body if the field's controls all support callback.
-        ///  Otherwise, override and throw a useful error message about why the field can't support callbacks.</para>
+        ///  Otherwise, override and throw a useful error message about why the field can't support
+        // callbacks.</para>
         /// </devdoc>
         public override void ValidateSupportsCallback() { }
     }

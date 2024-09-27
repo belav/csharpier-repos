@@ -167,7 +167,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         #region Tool Members
 
-        // Same separators as those used by Process.OutputDataReceived to maintain consistency between csc and VBCSCompiler
+        // Same separators as those used by Process.OutputDataReceived to maintain consistency between csc
+        // and VBCSCompiler
         private static readonly string[] s_separators = { "\r\n", "\r", "\n" };
 
         internal override void LogCompilerOutput(string output, MessageImportance messageImportance)
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Fills the provided CommandLineBuilderExtension with those switches and other information that can go into a response file.
+        /// Fills the provided CommandLineBuilderExtension with those switches and other information that
+        // can go into a response file.
         /// </summary>
         protected override void AddResponseFileCommands(CommandLineBuilderExtension commandLine)
         {
@@ -226,7 +228,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchIfNotNull("/nullable:", Nullable);
             commandLine.AppendWhenTrue("/nosdkpath", _store, nameof(DisableSdkPath));
 
-            // If not design time build and the globalSessionGuid property was set then add a -globalsessionguid:<guid>
+            // If not design time build and the globalSessionGuid property was set then add a
+            // -globalsessionguid:<guid>
             bool designTime = false;
             if (HostObject is ICscHostObject csHost)
             {
@@ -254,7 +257,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             // This should come after the "TreatWarningsAsErrors" flag is processed (in managedcompiler.cs).
             // Because if TreatWarningsAsErrors=false, then we'll have a /warnaserror- on the command-line,
             // and then any specific warnings that should be treated as errors should be specified with
-            // /warnaserror+:<list> after the /warnaserror- switch.  The order of the switches on the command-line
+            // /warnaserror+:<list> after the /warnaserror- switch.  The order of the switches on the
+            // command-line
             // does matter.
             //
             // Note that
@@ -325,7 +329,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         /// <summary>
         /// The C# compiler (starting with Whidbey) supports assembly aliasing for references.
-        /// See spec at http://devdiv/spectool/Documents/Whidbey/VCSharp/Design%20Time/M3%20DCRs/DCR%20Assembly%20aliases.doc.
+        /// See spec at
+        // http://devdiv/spectool/Documents/Whidbey/VCSharp/Design%20Time/M3%20DCRs/DCR%20Assembly%20aliases.doc.
         /// This method handles the necessary work of looking at the "Aliases" attribute on
         /// the incoming "References" items, and making sure to generate the correct
         /// command-line on csc.exe.  The syntax for aliasing a reference is:
@@ -532,7 +537,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
             try
             {
-                // Need to set these separately, because they don't require a CommitChanges to the C# compiler in the IDE.
+                // Need to set these separately, because they don't require a CommitChanges to the C# compiler in
+                // the IDE.
                 CheckHostObjectSupport(
                     param = nameof(LinkResources),
                     cscHostObject.SetLinkResources(LinkResources)
@@ -671,7 +677,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 );
                 CheckHostObjectSupport(param = nameof(PdbFile), cscHostObject.SetPdbFile(PdbFile));
 
-                // For host objects which support it, set platform with 32BitPreference, HighEntropyVA, and SubsystemVersion
+                // For host objects which support it, set platform with 32BitPreference, HighEntropyVA, and
+                // SubsystemVersion
                 ICscHostObject4? cscHostObject4 = cscHostObject as ICscHostObject4;
                 if (cscHostObject4 != null)
                 {
@@ -826,7 +833,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                 // If we have been given a property value that the host compiler doesn't support
                 // then we need to state that we are falling back to the command line compiler.
-                // Null is supported because it means that option should be omitted, and compiler default used - obviously always valid.
+                // Null is supported because it means that option should be omitted, and compiler default used -
+                // obviously always valid.
                 // Explicitly specified name of current locale is also supported, since it is effectively a no-op.
                 // Other options are not supported since in-proc compiler always uses current locale.
                 if (
@@ -958,7 +966,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                             // references don't exist on disk, we know the command-line compiler will fail, so save
                             // the trouble, and just throw a consistent error ourselves.  This allows us to give
                             // more information than the compiler would, and also make things consistent across
-                            // Vbc / Csc / etc.  Actually, the real reason is bug 275726 (ddsuites\src\vs\env\vsproject\refs\ptp3).
+                            // Vbc / Csc / etc.  Actually, the real reason is bug 275726
+                            // (ddsuites\src\vs\env\vsproject\refs\ptp3).
                             // This suite behaves differently in localized builds than on English builds because
                             // VBC.EXE doesn't localize the word "error" when they emit errors and so we can't scan for it.
                             if (!CheckAllReferencesExistOnDisk())

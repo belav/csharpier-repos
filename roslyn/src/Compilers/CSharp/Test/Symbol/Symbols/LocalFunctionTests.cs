@@ -186,7 +186,8 @@ class C
                     // (5,16): error CS1513: } expected
                     //         static partial void local() { }
                     Diagnostic(ErrorCode.ERR_RbraceExpected, "partial").WithLocation(5, 16),
-                    // (5,29): error CS0759: No defining declaration found for implementing declaration of partial method 'C.local()'
+                    // (5,29): error CS0759: No defining declaration found for implementing declaration of partial
+                    // method 'C.local()'
                     //         static partial void local() { }
                     Diagnostic(ErrorCode.ERR_PartialMethodMustHaveLatent, "local")
                         .WithArguments("C.local()")
@@ -219,7 +220,8 @@ class C
                     // (4,6): error CS1513: } expected
                     //     {
                     Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(4, 6),
-                    // (5,22): error CS0759: No defining declaration found for implementing declaration of partial method 'C.local()'
+                    // (5,22): error CS0759: No defining declaration found for implementing declaration of partial
+                    // method 'C.local()'
                     //         partial void local() { }
                     Diagnostic(ErrorCode.ERR_PartialMethodMustHaveLatent, "local")
                         .WithArguments("C.local()")
@@ -429,11 +431,13 @@ class C
                     """
                 )
                 .VerifyDiagnostics(
-                    // (14,26): error CS8821: A static anonymous function cannot contain a reference to 'this' or 'base'.
+                    // (14,26): error CS8821: A static anonymous function cannot contain a reference to 'this' or
+                    // 'base'.
                     //                 var x1 = this.MyExtension;
                     Diagnostic(ErrorCode.ERR_StaticAnonymousFunctionCannotCaptureThis, "this")
                         .WithLocation(14, 26),
-                    // (15,43): error CS8821: A static anonymous function cannot contain a reference to 'this' or 'base'.
+                    // (15,43): error CS8821: A static anonymous function cannot contain a reference to 'this' or
+                    // 'base'.
                     //                 var x2 = new Func<string>(this.MyExtension);
                     Diagnostic(ErrorCode.ERR_StaticAnonymousFunctionCannotCaptureThis, "this")
                         .WithLocation(15, 43)

@@ -40,11 +40,15 @@ namespace System.Resources
 
 #if FEATURE_APPX
     //
-    // This is implemented in System.Runtime.WindowsRuntime as function System.Resources.WindowsRuntimeResourceManager,
+    // This is implemented in System.Runtime.WindowsRuntime as function
+    // System.Resources.WindowsRuntimeResourceManager,
     // allowing us to ask for a WinRT-specific ResourceManager.
-    // It is important to have WindowsRuntimeResourceManagerBase as regular class with virtual methods and default implementations.
-    // Defining WindowsRuntimeResourceManagerBase as abstract class or interface will cause issues when adding more methods to it
-    // because it�ll create dependency between mscorlib and System.Runtime.WindowsRuntime which will require always shipping both DLLs together.
+    // It is important to have WindowsRuntimeResourceManagerBase as regular class with virtual methods
+    // and default implementations.
+    // Defining WindowsRuntimeResourceManagerBase as abstract class or interface will cause issues when
+    // adding more methods to it
+    // because it�ll create dependency between mscorlib and System.Runtime.WindowsRuntime which will
+    // require always shipping both DLLs together.
     // Also using interface or abstract class will not play nice with FriendAccessAllowed.
     //
     [FriendAccessAllowed]
@@ -90,7 +94,8 @@ namespace System.Resources
     //
     // During Dev11 CLR RC Ask mode, the Windows Modern Resource Manager
     // made a breaking change such that ResourceMap.GetSubtree returns null when a subtree is
-    // not found instead of throwing an exception. As a result the name of this class is no longer accurate.
+    // not found instead of throwing an exception. As a result the name of this class is no longer
+    // accurate.
     // It should be called PRIErrorInfo. However changing the name of this internal class would cause
     // mscorlib.asmmeta and System.Runtime.WindowsRuntime.asmmeta to change,
     // which would in turn require updating of the mscorlib and System.Runtime.WindowsRuntime
@@ -273,7 +278,8 @@ namespace System.Resources
         //
         //It would be better if we could use _neutralCulture instead of calling
         //CultureInfo.InvariantCulture everywhere, but we run into problems with the .cctor.  CultureInfo
-        //initializes assembly, which initializes ResourceManager, which tries to get a CultureInfo which isn't
+        //initializes assembly, which initializes ResourceManager, which tries to get a CultureInfo which
+        // isn't
         //there yet because CultureInfo's class initializer hasn't finished.  If we move SystemResMgr off of
         //Assembly (or at least make it an internal property) we should be able to circumvent this problem.
         //
@@ -1107,7 +1113,8 @@ namespace System.Resources
             }
             return ver;
 #else
-            // On the phone return null. The calling code will use the assembly version instead to avoid potential type
+            // On the phone return null. The calling code will use the assembly version instead to avoid
+            // potential type
             // and library loads caused by CA lookup. NetCF uses the assembly version always.
             return null;
 #endif
@@ -1229,8 +1236,10 @@ namespace System.Resources
             return resourceString;
         }
 
-        // Since we can't directly reference System.Runtime.WindowsRuntime from mscorlib, we have to get the type via reflection.
-        // It would be better if we could just implement WindowsRuntimeResourceManager in mscorlib, but we can't, because
+        // Since we can't directly reference System.Runtime.WindowsRuntime from mscorlib, we have to get the
+        // type via reflection.
+        // It would be better if we could just implement WindowsRuntimeResourceManager in mscorlib, but we
+        // can't, because
         // we can do very little with WinRT in mscorlib.
         [SecurityCritical]
         internal static WindowsRuntimeResourceManagerBase GetWinRTResourceManager()
@@ -1272,10 +1281,12 @@ namespace System.Resources
         // 1) For Framework assemblies, we always use satellite assembly based lookup.
         // 2) For non-FX assemblies:
         //
-        //    a) If the assembly lives under PLATFORM_RESOURCE_ROOTS (as specified by the host during AppDomain creation),
+        //    a) If the assembly lives under PLATFORM_RESOURCE_ROOTS (as specified by the host during
+        // AppDomain creation),
         //       then we will use satellite assembly based lookup in assemblies like *.resources.dll.
         //
-        //    b) For any other non-FX assembly, we will use the modern resource manager with the premise that app package
+        //    b) For any other non-FX assembly, we will use the modern resource manager with the premise
+        // that app package
         //       contains the PRI resources.
         [SecuritySafeCritical]
         private bool ShouldUseSatelliteAssemblyResourceLookupUnderAppX(
@@ -1288,7 +1299,8 @@ namespace System.Resources
 #if FEATURE_CORECLR
             if (!fUseSatelliteAssemblyResourceLookupUnderAppX)
             {
-                // Check to see if the assembly is under PLATFORM_RESOURCE_ROOTS. If it is, then we should use satellite assembly lookup for it.
+                // Check to see if the assembly is under PLATFORM_RESOURCE_ROOTS. If it is, then we should use
+                // satellite assembly lookup for it.
                 String platformResourceRoots = (String)(
                     AppDomain.CurrentDomain.GetData("PLATFORM_RESOURCE_ROOTS")
                 );
@@ -1310,7 +1322,8 @@ namespace System.Resources
                             )
                         )
                         {
-                            // Found the resource assembly to be present in one of the PLATFORM_RESOURCE_ROOT, so stop the enumeration loop.
+                            // Found the resource assembly to be present in one of the PLATFORM_RESOURCE_ROOT, so stop the
+                            // enumeration loop.
                             fUseSatelliteAssemblyResourceLookupUnderAppX = true;
                             break;
                         }
@@ -1351,7 +1364,8 @@ namespace System.Resources
                     {
                         s_IsAppXModel = true;
 
-                        // If we have the type information from the ResourceManager(Type) constructor, we use it. Otherwise, we use BaseNameField.
+                        // If we have the type information from the ResourceManager(Type) constructor, we use it. Otherwise,
+                        // we use BaseNameField.
                         String reswFilename =
                             _locationInfo == null ? BaseNameField : _locationInfo.FullName;
 
@@ -1393,8 +1407,10 @@ namespace System.Resources
 
                         if (!bUsingSatelliteAssembliesUnderAppX)
                         {
-                            // See AssemblyNative::IsFrameworkAssembly for details on which kinds of assemblies are considered Framework assemblies.
-                            // The Modern Resource Manager is not used for such assemblies - they continue to use satellite assemblies (i.e. .resources.dll files).
+                            // See AssemblyNative::IsFrameworkAssembly for details on which kinds of assemblies are considered
+                            // Framework assemblies.
+                            // The Modern Resource Manager is not used for such assemblies - they continue to use satellite
+                            // assemblies (i.e. .resources.dll files).
                             _bUsingModernResourceManagement =
                                 !ShouldUseSatelliteAssemblyResourceLookupUnderAppX(
                                     resourcesAssembly
@@ -1405,7 +1421,8 @@ namespace System.Resources
                                 // Only now are we certain that we need the PRI file.
 
                                 // Note that if IsAppXDesignMode is false, we haven't checked if the PRI file exists.
-                                // This is by design. We will find out in the call to WindowsRuntimeResourceManager.Initialize below.
+                                // This is by design. We will find out in the call to WindowsRuntimeResourceManager.Initialize
+                                // below.
 
                                 // At this point it is important NOT to set _bUsingModernResourceManagement to false
                                 // if the PRI file does not exist because we are now certain we need to load PRI
@@ -1480,7 +1497,8 @@ namespace System.Resources
                     }
                 }
             }
-            // resourcesAssembly == null should not happen but it can. See the comment on Assembly.GetCallingAssembly.
+            // resourcesAssembly == null should not happen but it can. See the comment on
+            // Assembly.GetCallingAssembly.
             // However for the sake of 100% backwards compatibility on Win7 and below, we must leave
             // _bUsingModernResourceManagement as false.
 #endif // FEATURE_APPX
@@ -1508,11 +1526,16 @@ namespace System.Resources
 #if FEATURE_APPX
             if (s_IsAppXModel)
             {
-                // If the caller explictily passed in a culture that was obtained by calling CultureInfo.CurrentUICulture,
-                // null it out, so that we re-compute it.  If we use modern resource lookup, we may end up getting a "better"
-                // match, since CultureInfo objects can't represent all the different languages the AppX resource model supports.
-                // For classic resources, this causes us to ignore the languages list and instead use the older Win32 behavior,
-                // which is the design choice we've made. (See the call a little later to GetCurrentUICultureNoAppX()).
+                // If the caller explictily passed in a culture that was obtained by calling
+                // CultureInfo.CurrentUICulture,
+                // null it out, so that we re-compute it.  If we use modern resource lookup, we may end up getting a
+                // "better"
+                // match, since CultureInfo objects can't represent all the different languages the AppX resource
+                // model supports.
+                // For classic resources, this causes us to ignore the languages list and instead use the older
+                // Win32 behavior,
+                // which is the design choice we've made. (See the call a little later to
+                // GetCurrentUICultureNoAppX()).
                 if (Object.ReferenceEquals(culture, CultureInfo.CurrentUICulture))
                 {
                     culture = null;
@@ -1555,7 +1578,8 @@ namespace System.Resources
             {
                 if (null == culture)
                 {
-                    // When running inside AppX we want to ignore the languages list when trying to come up with our CurrentUICulture.
+                    // When running inside AppX we want to ignore the languages list when trying to come up with our
+                    // CurrentUICulture.
                     // This line behaves the same way as CultureInfo.CurrentUICulture would have in .NET 4
                     culture = Thread.CurrentThread.GetCurrentUICultureNoAppX();
                 }
@@ -1656,8 +1680,10 @@ namespace System.Resources
 #if FEATURE_APPX
             if (s_IsAppXModel)
             {
-                // If the caller explictily passed in a culture that was obtained by calling CultureInfo.CurrentUICulture,
-                // null it out, so that we re-compute it based on the Win32 value and not the AppX language list value.
+                // If the caller explictily passed in a culture that was obtained by calling
+                // CultureInfo.CurrentUICulture,
+                // null it out, so that we re-compute it based on the Win32 value and not the AppX language list
+                // value.
                 // (See the call a little later to GetCurrentUICultureNoAppX()).
                 if (Object.ReferenceEquals(culture, CultureInfo.CurrentUICulture))
                 {
@@ -1668,7 +1694,8 @@ namespace System.Resources
 
             if (null == culture)
             {
-                // When running inside AppX we want to ignore the languages list when trying to come up with our CurrentUICulture.
+                // When running inside AppX we want to ignore the languages list when trying to come up with our
+                // CurrentUICulture.
                 // This line behaves the same way as CultureInfo.CurrentUICulture would have in .NET 4
                 culture = Thread.CurrentThread.GetCurrentUICultureNoAppX();
             }

@@ -80,7 +80,8 @@ namespace System.Xml.Xsl.IlGen
                 new ReflectionPermission(ReflectionPermissionFlag.MemberAccess)
             );
             // DynamicMethod constructor demands ControlEvidence permissions.
-            // Emitting symbols in DefineDynamicModule (to allow to debug the stylesheet) requires UnmanagedCode permission.
+            // Emitting symbols in DefineDynamicModule (to allow to debug the stylesheet) requires UnmanagedCode
+            // permission.
             CreateModulePermissionSet.AddPermission(
                 new SecurityPermission(
                     SecurityPermissionFlag.ControlEvidence | SecurityPermissionFlag.UnmanagedCode
@@ -102,7 +103,8 @@ namespace System.Xml.Xsl.IlGen
             {
                 CreateModulePermissionSet.Assert();
 
-                // Add custom attribute to assembly marking it as security transparent so that Assert will not be allowed
+                // Add custom attribute to assembly marking it as security transparent so that Assert will not be
+                // allowed
                 // and link demands will be converted to full demands.
                 asmBldr.SetCustomAttribute(
                     new CustomAttributeBuilder(XmlILConstructors.Transparent, new object[] { })
@@ -181,7 +183,8 @@ namespace System.Xml.Xsl.IlGen
                     this.persistAsm ? AssemblyBuilderAccess.RunAndSave : AssemblyBuilderAccess.Run
                 );
 
-                // Add custom attribute to assembly marking it as security transparent so that Assert will not be allowed
+                // Add custom attribute to assembly marking it as security transparent so that Assert will not be
+                // allowed
                 // and link demands will be converted to full demands.
                 asmBldr.SetCustomAttribute(
                     new CustomAttributeBuilder(XmlILConstructors.Transparent, new object[] { })
@@ -272,7 +275,8 @@ namespace System.Xml.Xsl.IlGen
 
                 if (emitSymbols && (xmlAttrs & XmlILMethodAttributes.NonUser) != 0)
                 {
-                    // Add DebuggerStepThroughAttribute and DebuggerNonUserCodeAttribute to non-user methods so that debugging is a better experience
+                    // Add DebuggerStepThroughAttribute and DebuggerNonUserCodeAttribute to non-user methods so that
+                    // debugging is a better experience
                     methBldr.SetCustomAttribute(
                         new CustomAttributeBuilder(XmlILConstructors.StepThrough, new object[] { })
                     );
@@ -382,7 +386,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Add the file name of a document containing source code for this module and return a symbol writer.
+        /// Add the file name of a document containing source code for this module and return a symbol
+        // writer.
         /// </summary>
         public ISymbolDocumentWriter AddSourceDocument(string fileName)
         {
@@ -408,11 +413,14 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Once all methods have been defined, CreateModule must be called in order to "bake" the methods within
+        /// Once all methods have been defined, CreateModule must be called in order to "bake" the methods
+        // within
         /// this module.
         /// </summary>
-        // SxS note: AssemblyBuilder.Save() below is using name which is not SxS safe. This file is written only for
-        // internal tracing/debugging purposes. In retail builds persistAsm will be always false and the file should
+        // SxS note: AssemblyBuilder.Save() below is using name which is not SxS safe. This file is written
+        // only for
+        // internal tracing/debugging purposes. In retail builds persistAsm will be always false and the
+        // file should
         // never be written. As a result it's fine just to supress the the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]

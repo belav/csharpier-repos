@@ -106,7 +106,8 @@ namespace System.Data.Tests.SqlTypes
         {
             private static TheoryData<string, string> _filesAndBaselines;
 
-            // The test files are made available through the System.Data.Common.TestData package included in dotnet/runtime-assets
+            // The test files are made available through the System.Data.Common.TestData package included in
+            // dotnet/runtime-assets
             private static void EnsureFileList()
             {
                 if (_filesAndBaselines is null)
@@ -120,7 +121,8 @@ namespace System.Data.Tests.SqlTypes
                         "*.bmx"
                     );
 
-                    // Make sure that we found our test files; otherwise the theories would succeed without validating anything
+                    // Make sure that we found our test files; otherwise the theories would succeed without validating
+                    // anything
                     Assert.NotEmpty(text);
                     Assert.NotEmpty(binary);
 

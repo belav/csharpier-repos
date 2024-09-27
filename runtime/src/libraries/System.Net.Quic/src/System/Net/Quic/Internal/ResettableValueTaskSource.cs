@@ -13,9 +13,12 @@ namespace System.Net.Quic;
 
 internal sealed class ResettableValueTaskSource : IValueTaskSource
 {
-    // None -> [TryGetValueTask] -> Awaiting -> [TrySetResult|TrySetException(final: false)] -> Ready -> [GetResult] -> None
-    // None -> [TrySetResult|TrySetException(final: false)] -> Ready -> [TryGetValueTask] -> [GetResult] -> None
-    // None|Awaiting -> [TrySetResult|TrySetException(final: true)] -> Completed(never leaves this state)
+    // None -> [TryGetValueTask] -> Awaiting -> [TrySetResult|TrySetException(final: false)] -> Ready ->
+    // [GetResult] -> None
+    // None -> [TrySetResult|TrySetException(final: false)] -> Ready -> [TryGetValueTask] -> [GetResult]
+    // -> None
+    // None|Awaiting -> [TrySetResult|TrySetException(final: true)] -> Completed(never leaves this
+    // state)
     // Ready -> [GetResult: TrySet*(final: true) was called] -> Completed(never leaves this state)
     private enum State
     {
@@ -49,8 +52,10 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     }
 
     /// <summary>
-    /// Allows setting additional cancellation action to be called if token passed to <see cref="TryGetValueTask(out ValueTask, object?, CancellationToken)"/> fires off.
-    /// The argument for the action is the <c>keepAlive</c> object from the same <see cref="TryGetValueTask(out ValueTask, object?, CancellationToken)"/> call.
+    /// Allows setting additional cancellation action to be called if token passed to <see
+    // cref="TryGetValueTask(out ValueTask, object?, CancellationToken)"/> fires off.
+    /// The argument for the action is the <c>keepAlive</c> object from the same <see
+    // cref="TryGetValueTask(out ValueTask, object?, CancellationToken)"/> call.
     /// </summary>
     public Action<object?> CancellationAction
     {
@@ -58,22 +63,29 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     }
 
     /// <summary>
-    /// Returns <c>true</c> is this task source has entered its final state, i.e. <see cref="TrySetResult(bool)"/> or <see cref="TrySetException(Exception, bool)"/>
+    /// Returns <c>true</c> is this task source has entered its final state, i.e. <see
+    // cref="TrySetResult(bool)"/> or <see cref="TrySetException(Exception, bool)"/>
     /// was called with <c>final</c> set to <c>true</c> and the result was propagated.
     /// </summary>
     public bool IsCompleted =>
         (State)Volatile.Read(ref Unsafe.As<State, byte>(ref _state)) == State.Completed;
 
     /// <summary>
-    /// Tries to get a value task representing this task source. If this task source is <see cref="State.None"/>, it'll also transition it into <see cref="State.Awaiting"/> state.
-    /// It prevents concurrent operations from being invoked since it'll return <c>false</c> if the task source was already in <see cref="State.Awaiting"/> state.
-    /// In other states, it'll return a value task representing this task source without any other work. So to determine whether to invoke a P/Invoke operation or not,
+    /// Tries to get a value task representing this task source. If this task source is <see
+    // cref="State.None"/>, it'll also transition it into <see cref="State.Awaiting"/> state.
+    /// It prevents concurrent operations from being invoked since it'll return <c>false</c> if the task
+    // source was already in <see cref="State.Awaiting"/> state.
+    /// In other states, it'll return a value task representing this task source without any other work.
+    // So to determine whether to invoke a P/Invoke operation or not,
     /// the state of <paramref name="valueTask"/> must also be checked.
     /// </summary>
-    /// <param name="valueTask">A value task representing the result. Only meaningful in case this method returns <c>true</c>. Might already be completed.</param>
-    /// <param name="keepAlive">An object to hold during a P/Invoke call. It'll get release with setting the result/exception.</param>
+    /// <param name="valueTask">A value task representing the result. Only meaningful in case this
+    // method returns <c>true</c>. Might already be completed.</param>
+    /// <param name="keepAlive">An object to hold during a P/Invoke call. It'll get release with setting
+    // the result/exception.</param>
     /// <param name="cancellationToken">A cancellation token which might cancel the value task.</param>
-    /// <returns><c>true</c> if this is not an overlapping call (task source transitioned or was already set); otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if this is not an overlapping call (task source transitioned or was already
+    // set); otherwise, <c>false</c>.</returns>
     public bool TryGetValueTask(
         out ValueTask valueTask,
         object? keepAlive = null,
@@ -82,7 +94,8 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     {
         lock (this)
         {
-            // Cancellation might kick off synchronously, re-entering the lock and changing the state to completed.
+            // Cancellation might kick off synchronously, re-entering the lock and changing the state to
+            // completed.
             if (_state == State.None)
             {
                 // Register cancellation if the token can be cancelled and the task is not completed yet.
@@ -138,9 +151,11 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     }
 
     /// <summary>
-    /// Gets a <see cref="Task"/> that will transition to a completed state with the last transition of this source, i.e. into <see cref="State.Completed"/>.
+    /// Gets a <see cref="Task"/> that will transition to a completed state with the last transition of
+    // this source, i.e. into <see cref="State.Completed"/>.
     /// </summary>
-    /// <returns>The <see cref="Task"/> that will transition to a completed state with the last transition of this source.</returns>
+    /// <returns>The <see cref="Task"/> that will transition to a completed state with the last
+    // transition of this source.</returns>
     public Task GetFinalTask(object? keepAlive)
     {
         lock (this)
@@ -151,8 +166,10 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
 
     private bool TryComplete(Exception? exception, bool final)
     {
-        // Dispose the cancellation registration before completing the task, so that it cannot run after the awaiting method returned.
-        // Dispose must be done outside of lock since it will wait on pending cancellation callbacks that can hold the lock from another thread.
+        // Dispose the cancellation registration before completing the task, so that it cannot run after the
+        // awaiting method returned.
+        // Dispose must be done outside of lock since it will wait on pending cancellation callbacks that
+        // can hold the lock from another thread.
         CancellationTokenRegistration cancellationRegistration = default;
         lock (this)
         {
@@ -235,23 +252,33 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     }
 
     /// <summary>
-    /// Tries to transition from <see cref="State.Awaiting"/> to either <see cref="State.Ready"/> or <see cref="State.Completed"/>, depending on the value of <paramref name="final"/>.
-    /// Only the first call (with either value for <paramref name="final"/>) is able to do that. I.e.: <c>TrySetResult()</c> followed by <c>TrySetResult(true)</c> will both return <c>true</c>.
+    /// Tries to transition from <see cref="State.Awaiting"/> to either <see cref="State.Ready"/> or
+    // <see cref="State.Completed"/>, depending on the value of <paramref name="final"/>.
+    /// Only the first call (with either value for <paramref name="final"/>) is able to do that. I.e.:
+    // <c>TrySetResult()</c> followed by <c>TrySetResult(true)</c> will both return <c>true</c>.
     /// </summary>
-    /// <param name="final">Whether this is the final transition to <see cref="State.Completed" /> or just a transition into <see cref="State.Ready"/> from which the task source can be reset back to <see cref="State.None"/>.</param>
-    /// <returns><c>true</c> if this is the first call that set the result; otherwise, <c>false</c>.</returns>
+    /// <param name="final">Whether this is the final transition to <see cref="State.Completed" /> or
+    // just a transition into <see cref="State.Ready"/> from which the task source can be reset back to
+    // <see cref="State.None"/>.</param>
+    /// <returns><c>true</c> if this is the first call that set the result; otherwise,
+    // <c>false</c>.</returns>
     public bool TrySetResult(bool final = false)
     {
         return TryComplete(null, final);
     }
 
     /// <summary>
-    /// Tries to transition from <see cref="State.Awaiting"/> to either <see cref="State.Ready"/> or <see cref="State.Completed"/>, depending on the value of <paramref name="final"/>.
-    /// Only the first call is able to do that with the exception of <c>TrySetResult()</c> followed by <c>TrySetResult(true)</c>, which will both return <c>true</c>.
+    /// Tries to transition from <see cref="State.Awaiting"/> to either <see cref="State.Ready"/> or
+    // <see cref="State.Completed"/>, depending on the value of <paramref name="final"/>.
+    /// Only the first call is able to do that with the exception of <c>TrySetResult()</c> followed by
+    // <c>TrySetResult(true)</c>, which will both return <c>true</c>.
     /// </summary>
-    /// <param name="final">Whether this is the final transition to <see cref="State.Completed" /> or just a transition into <see cref="State.Ready"/> from which the task source can be reset back to <see cref="State.None"/>.</param>
+    /// <param name="final">Whether this is the final transition to <see cref="State.Completed" /> or
+    // just a transition into <see cref="State.Ready"/> from which the task source can be reset back to
+    // <see cref="State.None"/>.</param>
     /// <param name="exception">The exception to set as a result of the value task.</param>
-    /// <returns><c>true</c> if this is the first call that set the result; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if this is the first call that set the result; otherwise,
+    // <c>false</c>.</returns>
     public bool TrySetException(Exception exception, bool final = false)
     {
         return TryComplete(exception, final);
@@ -312,8 +339,10 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
     }
 
     /// <summary>
-    /// It remembers the result from <see cref="TryComplete"/> and propagates it to <see cref="_finalTaskSource"/> only after <see cref="TrySignal"/> is called.
-    /// Effectively allowing to separate setting of the result from task completion, which is necessary when the resettable portion of the value task source needs to consumed first.
+    /// It remembers the result from <see cref="TryComplete"/> and propagates it to <see
+    // cref="_finalTaskSource"/> only after <see cref="TrySignal"/> is called.
+    /// Effectively allowing to separate setting of the result from task completion, which is necessary
+    // when the resettable portion of the value task source needs to consumed first.
     /// </summary>
     private struct FinalTaskSource
     {

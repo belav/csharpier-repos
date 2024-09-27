@@ -192,10 +192,14 @@ namespace XLinqTests
         //  - elem, text/XText (concatenation), PI, Comment - for XE
         //  - elem (just root), PI, Comment, XDecl/XDocType (order!)
         //  - on other node types
-        //[Variation(Priority = 1, Desc = "Adding multiple (4) objects into XElement - not connected", Params = new object[] { false, 4 })]
-        //[Variation(Priority = 1, Desc = "Adding multiple (4) objects into XElement - connected", Params = new object[] { true, 4 })]
-        //[Variation(Priority = 1, Desc = "Adding single object into XElement - not connected", Params = new object[] { false, 1 })]
-        //[Variation(Priority = 1, Desc = "Adding single object into XElement - connected", Params = new object[] { true, 1 })]
+        //[Variation(Priority = 1, Desc = "Adding multiple (4) objects into XElement - not connected",
+        // Params = new object[] { false, 4 })]
+        //[Variation(Priority = 1, Desc = "Adding multiple (4) objects into XElement - connected", Params =
+        // new object[] { true, 4 })]
+        //[Variation(Priority = 1, Desc = "Adding single object into XElement - not connected", Params = new
+        // object[] { false, 1 })]
+        //[Variation(Priority = 1, Desc = "Adding single object into XElement - connected", Params = new
+        // object[] { true, 1 })]
 
         public void AddingMultipleNodesIntoElement()
         {
@@ -385,10 +389,14 @@ namespace XLinqTests
             }
         }
 
-        //[Variation(Priority = 0, Desc = "XDocument valid add - connected (single)", Params = new object[] { true, 1 })]
-        //[Variation(Priority = 0, Desc = "XDocument valid add - not connected (single)", Params = new object[] { false, 1 })]
-        //[Variation(Priority = 1, Desc = "XDocument valid add - connected (multiple)", Params = new object[] { true, 3 })]
-        //[Variation(Priority = 1, Desc = "XDocument valid add - not connected (multiple)", Params = new object[] { false, 3 })]
+        //[Variation(Priority = 0, Desc = "XDocument valid add - connected (single)", Params = new object[]
+        // { true, 1 })]
+        //[Variation(Priority = 0, Desc = "XDocument valid add - not connected (single)", Params = new
+        // object[] { false, 1 })]
+        //[Variation(Priority = 1, Desc = "XDocument valid add - connected (multiple)", Params = new
+        // object[] { true, 3 })]
+        //[Variation(Priority = 1, Desc = "XDocument valid add - not connected (multiple)", Params = new
+        // object[] { false, 3 })]
         public void ValidAddIntoXDocument()
         {
             ValidAddIntoXDocument(

@@ -81,7 +81,8 @@ namespace System.Data.Common.EntitySql
     }
 
     /// <summary>
-    /// Represents an eSQL expression classified as <see cref="ExpressionResolutionClass.EntityContainer"/>.
+    /// Represents an eSQL expression classified as <see
+    // cref="ExpressionResolutionClass.EntityContainer"/>.
     /// </summary>
     internal sealed class EntityContainerExpression : ExpressionResolution
     {
@@ -144,7 +145,8 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// Creates a copy of <see cref="SemanticResolver"/> with clean scopes and shared inline function definitions inside of the type resolver.
+        /// Creates a copy of <see cref="SemanticResolver"/> with clean scopes and shared inline function
+        // definitions inside of the type resolver.
         /// </summary>
         internal SemanticResolver CloneForInlineFunctionConversion()
         {
@@ -186,7 +188,8 @@ namespace System.Data.Common.EntitySql
         /// Validates that the specified parameters have valid, non-duplicated names
         /// </summary>
         /// <param name="paramDefs">The set of query parameters</param>
-        /// <returns>A valid dictionary that maps parameter names to <see cref="DbParameterReferenceExpression"/>s using the current NameComparer</returns>
+        /// <returns>A valid dictionary that maps parameter names to <see
+        // cref="DbParameterReferenceExpression"/>s using the current NameComparer</returns>
         private static Dictionary<string, DbParameterReferenceExpression> ProcessParameters(
             IEnumerable<DbParameterReferenceExpression> paramDefs,
             ParserOptions parserOptions
@@ -224,7 +227,8 @@ namespace System.Data.Common.EntitySql
         /// Validates that the specified variables have valid, non-duplicated names
         /// </summary>
         /// <param name="varDefs">The set of free variables</param>
-        /// <returns>A valid dictionary that maps variable names to <see cref="DbVariableReferenceExpression"/>s using the current NameComparer</returns>
+        /// <returns>A valid dictionary that maps variable names to <see
+        // cref="DbVariableReferenceExpression"/>s using the current NameComparer</returns>
         private static Dictionary<string, DbVariableReferenceExpression> ProcessVariables(
             IEnumerable<DbVariableReferenceExpression> varDefs,
             ParserOptions parserOptions
@@ -356,44 +360,61 @@ namespace System.Data.Common.EntitySql
             //
             // If
             //      1) we are in the context of a group aggregate or group key,
-            //      2) and the scopeEntry can have multiple interpretations depending on the aggregation context,
-            //      3) and the defining scope region of the scopeEntry is outer or equal to the defining scope region of the group aggregate,
-            //      4) and the defining scope region of the scopeEntry is not performing conversion of a group key definition,
-            // Then the expression that corresponds to the scopeEntry is either the GroupVarBasedExpression or the GroupAggBasedExpression.
-            // Otherwise the default expression that corresponds to the scopeEntry is provided by scopeEntry.GetExpression(...) call.
+            //      2) and the scopeEntry can have multiple interpretations depending on the aggregation
+            // context,
+            //      3) and the defining scope region of the scopeEntry is outer or equal to the defining scope
+            // region of the group aggregate,
+            //      4) and the defining scope region of the scopeEntry is not performing conversion of a group
+            // key definition,
+            // Then the expression that corresponds to the scopeEntry is either the GroupVarBasedExpression or
+            // the GroupAggBasedExpression.
+            // Otherwise the default expression that corresponds to the scopeEntry is provided by
+            // scopeEntry.GetExpression(...) call.
             //
             // Explanation for #2 from the list above:
             // A scope entry may have multiple aggregation-context interpretations:
-            //      - An expression in the context of a group key definition, obtained by scopeEntry.GetExpression(...);
+            //      - An expression in the context of a group key definition, obtained by
+            // scopeEntry.GetExpression(...);
             //        Example: select k1 from {0} as a group by a%2 as k1
             //                                                  ^^^
-            //      - An expression in the context of a function aggregate, provided by iGroupExpressionExtendedInfo.GroupVarBasedExpression;
+            //      - An expression in the context of a function aggregate, provided by
+            // iGroupExpressionExtendedInfo.GroupVarBasedExpression;
             //        Example: select max( a ) from {0} as a group by a%2 as k1
             //                            ^^^
-            //      - An expression in the context of a group partition, provided by iGroupExpressionExtendedInfo.GroupAggBasedExpression;
+            //      - An expression in the context of a group partition, provided by
+            // iGroupExpressionExtendedInfo.GroupAggBasedExpression;
             //        Example: select GroupPartition( a ) from {0} as a group by a%2 as k1
             //                                       ^^^
-            // Note that expressions obtained from aggregation-context-dependent scope entries outside of the three contexts mentioned above
-            // will default to the value returned by the scopeEntry.GetExpression(...) call. This value is the same as in the group key definition context.
+            // Note that expressions obtained from aggregation-context-dependent scope entries outside of the
+            // three contexts mentioned above
+            // will default to the value returned by the scopeEntry.GetExpression(...) call. This value is the
+            // same as in the group key definition context.
             // These expressions have correct result types which enables partial expression validation.
-            // However the contents of the expressions are invalid outside of the group key definitions, hence they can not appear in the final expression tree.
-            // SemanticAnalyzer.ProcessGroupByClause(...) method guarantees that such expressions are only temporarily used during GROUP BY clause processing and
+            // However the contents of the expressions are invalid outside of the group key definitions, hence
+            // they can not appear in the final expression tree.
+            // SemanticAnalyzer.ProcessGroupByClause(...) method guarantees that such expressions are only
+            // temporarily used during GROUP BY clause processing and
             // dropped afterwards.
             // Example: select a, k1 from {0} as a group by a%2 as k1
-            //                 ^^^^^ - these expressions are processed twice: once during GROUP BY and then SELECT clause processing,
-            //                         the expressions obtained during GROUP BY clause processing are dropped and only
+            //                 ^^^^^ - these expressions are processed twice: once during GROUP BY and then
+            // SELECT clause processing,
+            //                         the expressions obtained during GROUP BY clause processing are dropped
+            // and only
             //                         the ones obtained during SELECT clause processing are accepted.
             //
             // Explanation for #3 from the list above:
-            //      - An outer scope entry referenced inside of an aggregate may lift the aggregate to the outer scope region for evaluation,
-            //        hence such a scope entry must be interpreted in the aggregation context. See explanation for #4 below for more info.
+            //      - An outer scope entry referenced inside of an aggregate may lift the aggregate to the outer
+            // scope region for evaluation,
+            //        hence such a scope entry must be interpreted in the aggregation context. See explanation
+            // for #4 below for more info.
             //        Example:
             //
             //          select
             //              (select max(x) from {1} as y)
             //          from {0} as x
             //
-            //      - If a scope entry is defined inside of a group aggregate, then the scope entry is not affected by the aggregate,
+            //      - If a scope entry is defined inside of a group aggregate, then the scope entry is not
+            // affected by the aggregate,
             //        hence such a scope entry is not interpreted in the aggregation context.
             //        Example:
             //
@@ -403,13 +424,18 @@ namespace System.Data.Common.EntitySql
             //          from {0} as a group by a %2 as a1
             //
             //        In this query the aggregate argument contains a nested query expression.
-            //        The nested query references b. Because b is defined inside of the aggregate it is not interpreted in the aggregation context and
-            //        the expression for b should not be GroupVar/GroupAgg based, even though the reference to b appears inside of an aggregate.
+            //        The nested query references b. Because b is defined inside of the aggregate it is not
+            // interpreted in the aggregation context and
+            //        the expression for b should not be GroupVar/GroupAgg based, even though the reference to b
+            // appears inside of an aggregate.
             //
             // Explanation for #4 from the list above:
-            // An aggregate evaluating on a particular scope region defines the interpretation of scope entries defined on that scope region.
-            // In the case when an inner aggregate references a scope entry belonging to the evaluating region of an outer aggregate, the interpretation
-            // of the scope entry is controlled by the outer aggregate, otherwise it is controlled by the inner aggregate.
+            // An aggregate evaluating on a particular scope region defines the interpretation of scope entries
+            // defined on that scope region.
+            // In the case when an inner aggregate references a scope entry belonging to the evaluating region
+            // of an outer aggregate, the interpretation
+            // of the scope entry is controlled by the outer aggregate, otherwise it is controlled by the inner
+            // aggregate.
             // Example:
             //
             //      select a1
@@ -417,10 +443,14 @@ namespace System.Data.Common.EntitySql
             //                                anyelement(select value max(a + b) from {1} as b)
             //                          as a1
             //
-            // In this query the aggregate inside of a1 group key definition, the max(a + b), references scope entry a.
-            // Because a is referenced inside of the group key definition (which serves as an outer aggregate) and the key definition belongs to
-            // the same scope region as a, a is interpreted in the context of the group key definition, not the function aggregate and
-            // the expression for a is obtained by scopeEntry.GetExpression(...) call, not iGroupExpressionExtendedInfo.GroupVarBasedExpression.
+            // In this query the aggregate inside of a1 group key definition, the max(a + b), references scope
+            // entry a.
+            // Because a is referenced inside of the group key definition (which serves as an outer aggregate)
+            // and the key definition belongs to
+            // the same scope region as a, a is interpreted in the context of the group key definition, not the
+            // function aggregate and
+            // the expression for a is obtained by scopeEntry.GetExpression(...) call, not
+            // iGroupExpressionExtendedInfo.GroupVarBasedExpression.
             //
 
             DbExpression expr = scopeEntry.GetExpression(varName, errCtx);
@@ -450,7 +480,8 @@ namespace System.Data.Common.EntitySql
                     {
                         //
                         // Find the aggregate that controls interpretation of the current scope entry.
-                        // This would be a containing aggregate with the defining scope region matching definingScopeRegionOfScopeEntry.
+                        // This would be a containing aggregate with the defining scope region matching
+                        // definingScopeRegionOfScopeEntry.
                         // If there is no such aggregate, then the current containing aggregate controls interpretation.
                         //
                         GroupAggregateInfo expressionInterpretationContext;
@@ -625,8 +656,10 @@ namespace System.Data.Common.EntitySql
         internal MetadataMember ResolveSimpleFunctionName(string name, ErrorContext errCtx)
         {
             //
-            // "Foo()" represents a simple function name. Resolve it as an unqualified name by calling the type resolver directly.
-            // Note that calling type resolver directly will avoid resolution of the identifier as a local variable or entity container
+            // "Foo()" represents a simple function name. Resolve it as an unqualified name by calling the type
+            // resolver directly.
+            // Note that calling type resolver directly will avoid resolution of the identifier as a local
+            // variable or entity container
             // (these resolutions are performed only by ResolveSimpleName(...)).
             //
             var resolution = this.TypeResolver.ResolveUnqualifiedName(
@@ -727,7 +760,8 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// Try resolving <paramref name="name"/> as a property of the value returned by the <paramref name="valueExpr"/>.
+        /// Try resolving <paramref name="name"/> as a property of the value returned by the <paramref
+        // name="valueExpr"/>.
         /// </summary>
         private bool TryResolveAsPropertyAccess(
             DbExpression valueExpr,
@@ -770,7 +804,8 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// If <paramref name="valueExpr"/> returns a reference, then deref and try resolving <paramref name="name"/> as a property of the dereferenced value.
+        /// If <paramref name="valueExpr"/> returns a reference, then deref and try resolving <paramref
+        // name="name"/> as a property of the dereferenced value.
         /// </summary>
         private bool TryResolveAsRefPropertyAccess(
             DbExpression valueExpr,
@@ -811,7 +846,8 @@ namespace System.Data.Common.EntitySql
 
         #region Resolve entity container member access
         /// <summary>
-        /// Resolve entity set or function import <paramref name="name"/> in the <paramref name="entityContainer"/>
+        /// Resolve entity set or function import <paramref name="name"/> in the <paramref
+        // name="entityContainer"/>
         /// </summary>
         internal ExpressionResolution ResolveEntityContainerMemberAccess(
             EntityContainer entityContainer,
@@ -883,7 +919,8 @@ namespace System.Data.Common.EntitySql
 
         #region Resolve metadata member access
         /// <summary>
-        /// Resolve namespace, type or function <paramref name="name"/> in the <paramref name="metadataMember"/>
+        /// Resolve namespace, type or function <paramref name="name"/> in the <paramref
+        // name="metadataMember"/>
         /// </summary>
         internal MetadataMember ResolveMetadataMemberAccess(
             MetadataMember metadataMember,
@@ -926,7 +963,8 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// Try resolving multipart identifier as an alternative name of a group key (see SemanticAnalyzer.ProcessGroupByClause(...) for more info).
+        /// Try resolving multipart identifier as an alternative name of a group key (see
+        // SemanticAnalyzer.ProcessGroupByClause(...) for more info).
         /// </summary>
         internal bool TryResolveDotExprAsGroupKeyAlternativeName(
             AST.DotExpr dotExpr,
@@ -1016,7 +1054,8 @@ namespace System.Data.Common.EntitySql
 
         /// <summary>
         /// Returns alias name from <paramref name="aliasedExpr"/> ast node if it contains an alias,
-        /// otherwise creates a new alias name based on the <paramref name="aliasedExpr"/>.Expr or <paramref name="convertedExpression"/> information.
+        /// otherwise creates a new alias name based on the <paramref name="aliasedExpr"/>.Expr or <paramref
+        // name="convertedExpression"/> information.
         /// </summary>
         internal string InferAliasName(
             AST.AliasedExpr aliasedExpr,
@@ -1127,7 +1166,8 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// Returns true if any of the ScopeRegions from the closest to the outermost has IsAggregating = true
+        /// Returns true if any of the ScopeRegions from the closest to the outermost has IsAggregating =
+        // true
         /// </summary>
         internal bool IsInAnyGroupScope()
         {
@@ -1368,19 +1408,22 @@ namespace System.Data.Common.EntitySql
 
         /// <summary>
         /// Inside of an aggregate function (Max, Min, etc).
-        /// All range variables originating on the defining scope of this aggregate should yield <see cref="IGroupExpressionExtendedInfo.GroupVarBasedExpression"/>.
+        /// All range variables originating on the defining scope of this aggregate should yield <see
+        // cref="IGroupExpressionExtendedInfo.GroupVarBasedExpression"/>.
         /// </summary>
         Function,
 
         /// <summary>
         /// Inside of GROUPPARTITION expression.
-        /// All range variables originating on the defining scope of this aggregate should yield <see cref="IGroupExpressionExtendedInfo.GroupAggBasedExpression"/>.
+        /// All range variables originating on the defining scope of this aggregate should yield <see
+        // cref="IGroupExpressionExtendedInfo.GroupAggBasedExpression"/>.
         /// </summary>
         Partition,
 
         /// <summary>
         /// Inside of a group key definition
-        /// All range variables originating on the defining scope of this aggregate should yield <see cref="ScopeEntry.GetExpression"/>.
+        /// All range variables originating on the defining scope of this aggregate should yield <see
+        // cref="ScopeEntry.GetExpression"/>.
         /// </summary>
         GroupKey,
     }
@@ -1439,7 +1482,8 @@ namespace System.Data.Common.EntitySql
 
         /// <summary>
         /// Updates referenced scope index of the aggregate.
-        /// Function call is not allowed after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has been called.
+        /// Function call is not allowed after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has
+        // been called.
         /// </summary>
         internal void UpdateScopeIndex(int referencedScopeIndex, SemanticResolver sr)
         {
@@ -1462,9 +1506,12 @@ namespace System.Data.Common.EntitySql
 
         /// <summary>
         /// Gets/sets the innermost referenced scope region of the current aggregate.
-        /// This property is used to save/restore the scope region value during a potentially throw-away attempt to
-        /// convert an <see cref="AST.MethodExpr"/> as a collection function in the <see cref="SemanticAnalyzer.ConvertAggregateFunctionInGroupScope"/> method.
-        /// Setting the value is not allowed after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has been called.
+        /// This property is used to save/restore the scope region value during a potentially throw-away
+        // attempt to
+        /// convert an <see cref="AST.MethodExpr"/> as a collection function in the <see
+        // cref="SemanticAnalyzer.ConvertAggregateFunctionInGroupScope"/> method.
+        /// Setting the value is not allowed after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has
+        // been called.
         /// </summary>
         internal ScopeRegion InnermostReferencedScopeRegion
         {
@@ -1482,7 +1529,8 @@ namespace System.Data.Common.EntitySql
 
         /// <summary>
         /// Validates the aggregate info and computes <see cref="EvaluatingScopeRegion"/> property.
-        /// Seals the aggregate info object (no more AddContainedAggregate(...), RemoveContainedAggregate(...) and UpdateScopeIndex(...) calls allowed).
+        /// Seals the aggregate info object (no more AddContainedAggregate(...),
+        // RemoveContainedAggregate(...) and UpdateScopeIndex(...) calls allowed).
         /// </summary>
         internal void ValidateAndComputeEvaluatingScopeRegion(SemanticResolver sr)
         {
@@ -1491,7 +1539,8 @@ namespace System.Data.Common.EntitySql
                 "_evaluatingScopeRegion has already been initialized"
             );
             //
-            // If _innermostReferencedScopeRegion is null, it means the aggregate is not correlated (a constant value),
+            // If _innermostReferencedScopeRegion is null, it means the aggregate is not correlated (a constant
+            // value),
             // so resolve it to the DefiningScopeRegion.
             //
             _evaluatingScopeRegion = _innermostReferencedScopeRegion ?? DefiningScopeRegion;
@@ -1499,15 +1548,19 @@ namespace System.Data.Common.EntitySql
             if (!_evaluatingScopeRegion.IsAggregating)
             {
                 //
-                // In some cases the found scope region does not aggregate (has no grouping). So adding the aggregate to that scope won't work.
-                // In this situation we need to backtrack from the found region to the first inner region that performs aggregation.
+                // In some cases the found scope region does not aggregate (has no grouping). So adding the
+                // aggregate to that scope won't work.
+                // In this situation we need to backtrack from the found region to the first inner region that
+                // performs aggregation.
                 // Example:
                 // select yy.cx, yy.cy, yy.cz
                 // from {1, 2} as x cross apply (select zz.cx, zz.cy, zz.cz
-                //                               from {3, 4} as y cross apply (select Count(x) as cx, Count(y) as cy, Count(z) as cz
+                //                               from {3, 4} as y cross apply (select Count(x) as cx, Count(y) as
+                // cy, Count(z) as cz
                 //                                                             from {5, 6} as z) as zz
                 //                              ) as yy
-                // Note that Count aggregates cx and cy refer to scope regions that do aggregate. All three aggregates needs to be added to the only
+                // Note that Count aggregates cx and cy refer to scope regions that do aggregate. All three
+                // aggregates needs to be added to the only
                 // aggregating region - the innermost.
                 //
                 int scopeRegionIndex = _evaluatingScopeRegion.ScopeRegionIndex;
@@ -1539,14 +1592,16 @@ namespace System.Data.Common.EntitySql
             //               from {1} as y)
             //      from {0} as x
             //
-            // Example of an allowed query where the ESR of the nested aggregate is outer to the ESR of the outer aggregate:
+            // Example of an allowed query where the ESR of the nested aggregate is outer to the ESR of the
+            // outer aggregate:
             //
             //      select
             //              (select max(y + max(x))
             //               from {1} as y)
             //      from {0} as x
             //
-            // Example of an allowed query where the ESR of the nested aggregate is inner to the DSR of the outer aggregate:
+            // Example of an allowed query where the ESR of the nested aggregate is inner to the DSR of the
+            // outer aggregate:
             //
             //      select max(x + anyelement(select value max(y) from {1} as y))
             //      from {0} as x
@@ -1566,8 +1621,10 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// Recursively validates that <see cref="GroupAggregateInfo.EvaluatingScopeRegion"/> of all contained aggregates
-        /// is outside of the range of scope regions defined by <paramref name="outerBoundaryScopeRegionIndex"/> and <paramref name="innerBoundaryScopeRegionIndex"/>.
+        /// Recursively validates that <see cref="GroupAggregateInfo.EvaluatingScopeRegion"/> of all
+        // contained aggregates
+        /// is outside of the range of scope regions defined by <paramref
+        // name="outerBoundaryScopeRegionIndex"/> and <paramref name="innerBoundaryScopeRegionIndex"/>.
         /// Throws in the case of violation.
         /// </summary>
         private void ValidateContainedAggregates(
@@ -1639,7 +1696,8 @@ namespace System.Data.Common.EntitySql
                 // Aggregates in this query
                 //
                 //      select value max(anyelement(select value max(b + max(a + anyelement(select value c1
-                //                                                                          from {2} as c group by c as c1)))
+                //                                                                          from {2} as c group by c
+                // as c1)))
                 //                                  from {1} as b group by b as b1))
                 //
                 //      from {0} as a group by a as a1
@@ -1648,32 +1706,43 @@ namespace System.Data.Common.EntitySql
                 // 1.  the outermost aggregate (max1) begins processing as a collection function;
                 // 2.  the middle aggregate (max2) begins processing as a collection function;
                 // 3.  the innermost aggregate (max3) is processed as a collection function;
-                // 4.  max3 is reprocessed as an aggregate; it does not see any containing aggregates at this point, so it's not wired up;
+                // 4.  max3 is reprocessed as an aggregate; it does not see any containing aggregates at this point,
+                // so it's not wired up;
                 //     max3 is validated and sealed;
                 //     evaluating scope region for max3 is the outermost scope region, to which it gets assigned;
                 //     max3 aggregate info object is attached to the corresponding AST node;
                 // 5.  max2 completes processing as a collection function and begins processing as an aggregate;
-                // 6.  max3 is reprocessed as an aggregate in the SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) method, and
+                // 6.  max3 is reprocessed as an aggregate in the
+                // SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) method, and
                 //     wired up to max2 as contained/containing;
                 // 7.  max2 completes processing as an aggregate;
                 //     max2 is validated and sealed;
-                //     note that max2 does not see any containing aggregates at this point, so it's wired up only to max3;
+                //     note that max2 does not see any containing aggregates at this point, so it's wired up only to
+                // max3;
                 //     evaluating scope region for max2 is the middle scope region to which it gets assigned;
-                // 6.  middle scope region completes processing, yields a DbExpression and cleans up all aggregate info objects assigned to it (max2);
+                // 6.  middle scope region completes processing, yields a DbExpression and cleans up all aggregate
+                // info objects assigned to it (max2);
                 //     max2 is detached from the corresponding AST node;
-                //     at this point max3 is still assigned to the outermost scope region and still wired to the dropped max2 as containing/contained;
+                //     at this point max3 is still assigned to the outermost scope region and still wired to the
+                // dropped max2 as containing/contained;
                 // 7.  max1 completes processing as a collection function and begins processing as an aggregate;
-                // 8.  max2 is revisited and begins processing as a collection function (note that because the old aggregate info object for max2 was dropped
-                //     and detached from the AST node in step 6, SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) does not recognize max2 as an aggregate);
-                // 9.  max3 is recognized as an aggregate in the SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) method;
-                //     max3 is rewired from the dropped max2 (step 6) to max1 as contained/containing, now max1 and max3 are wired as containing/contained;
+                // 8.  max2 is revisited and begins processing as a collection function (note that because the old
+                // aggregate info object for max2 was dropped
+                //     and detached from the AST node in step 6,
+                // SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) does not recognize max2 as an aggregate);
+                // 9.  max3 is recognized as an aggregate in the
+                // SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) method;
+                //     max3 is rewired from the dropped max2 (step 6) to max1 as contained/containing, now max1 and
+                // max3 are wired as containing/contained;
                 // 10. max2 completes processing as a collection function and begins processing as an aggregate;
                 //     max2 sees max1 as a containing aggregate and wires to it;
-                // 11. max3 is reprocessed as resolved aggregate inside of TryConvertAsResolvedGroupAggregate(...) method;
+                // 11. max3 is reprocessed as resolved aggregate inside of TryConvertAsResolvedGroupAggregate(...)
+                // method;
                 //     max3 is rewired from max1 to max2 as containing/contained aggregate;
                 // 12. at this point max1 is wired to max2 and max2 is wired to max3, the tree is correct;
                 //
-                // ... both max1 and max3 are assigned to the same scope for evaluation, this is detected and an error is reported;
+                // ... both max1 and max3 are assigned to the same scope for evaluation, this is detected and an
+                // error is reported;
                 //
 
                 //
@@ -1693,7 +1762,8 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// Function call is not allowed after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has been called.
+        /// Function call is not allowed after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has
+        // been called.
         /// Adding new contained aggregate may invalidate the current aggregate.
         /// </summary>
         private void AddContainedAggregate(GroupAggregateInfo containedAggregate)
@@ -1717,23 +1787,31 @@ namespace System.Data.Common.EntitySql
         private List<GroupAggregateInfo> _containedAggregates;
 
         /// <summary>
-        /// Function call is _allowed_ after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has been called.
+        /// Function call is _allowed_ after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has been
+        // called.
         /// Removing contained aggregates cannot invalidate the current aggregate.
         ///
         /// Consider the following query:
         ///
         ///   select value max(a + anyelement(select value max(b + max(a + anyelement(select value c1
-        ///                                                                           from {2} as c group by c as c1)))
+        ///                                                                           from {2} as c group by
+        // c as c1)))
         ///                                   from {1} as b group by b as b1))
         ///   from {0} as a group by a as a1
         ///
         /// Outer aggregate - max1, middle aggregate - max2, inner aggregate - max3.
-        /// In this query after max1 have been processed as a collection function, max2 and max3 are wired as containing/contained.
-        /// There is a point later when max1 is processed as an aggregate, max2 is processed as a collection function and max3 is processed as
-        /// an aggregate. Note that at this point the "aggregate" version of max2 is dropped and detached from the AST node when the middle scope region
-        /// completes processing; also note that because evaluating scope region of max3 is the outer scope region, max3 aggregate info is still attached to
-        /// the AST node and it is still wired to the dropped aggregate info object of max2. At this point max3 does not see new max2 as a containing aggregate,
-        /// and it rewires to max1, during this rewiring it needs to to remove itself from the old max2 and add itself to max1.
+        /// In this query after max1 have been processed as a collection function, max2 and max3 are wired
+        // as containing/contained.
+        /// There is a point later when max1 is processed as an aggregate, max2 is processed as a collection
+        // function and max3 is processed as
+        /// an aggregate. Note that at this point the "aggregate" version of max2 is dropped and detached
+        // from the AST node when the middle scope region
+        /// completes processing; also note that because evaluating scope region of max3 is the outer scope
+        // region, max3 aggregate info is still attached to
+        /// the AST node and it is still wired to the dropped aggregate info object of max2. At this point
+        // max3 does not see new max2 as a containing aggregate,
+        /// and it rewires to max1, during this rewiring it needs to to remove itself from the old max2 and
+        // add itself to max1.
         /// The old max2 at this point is sealed, so the removal is performed on the sealed object.
         /// </summary>
         private void RemoveContainedAggregate(GroupAggregateInfo containedAggregate)

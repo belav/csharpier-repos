@@ -275,8 +275,10 @@ namespace System.Activities
             //First register the default subinstance
             this.bookmarkScopes.Add(BookmarkScopeHandle.Default);
 
-            // Note that we are starting the LocationEnvironment traversal from the current environment's Parent. We don't
-            // want to include any BookmarkScopeHandles that are at the same scope level as the ExclusiveHandle. The ExclusiveHandle
+            // Note that we are starting the LocationEnvironment traversal from the current environment's
+            // Parent. We don't
+            // want to include any BookmarkScopeHandles that are at the same scope level as the ExclusiveHandle.
+            // The ExclusiveHandle
             // should only be dependent on BookmarkScopeHandles that are higher in the scope tree.
             LocationEnvironment current = this.owningInstance.Environment;
             if (current != null)
@@ -324,9 +326,12 @@ namespace System.Activities
             this.bookmarkScopesListIsDefault = true;
         }
 
-        // Exclusive handle needs to track bookmarks such that it can tell the difference between two bookmarks in
-        // different bookmark scopes with the same name.  Since we always deal in terms of the internal bookmark
-        // reference that we have, we can do an object.ReferenceEquals comparison to determine distinct bookmarks
+        // Exclusive handle needs to track bookmarks such that it can tell the difference between two
+        // bookmarks in
+        // different bookmark scopes with the same name.  Since we always deal in terms of the internal
+        // bookmark
+        // reference that we have, we can do an object.ReferenceEquals comparison to determine distinct
+        // bookmarks
         // without having to add some sort of "containing scope" property to Bookmark.
         [DataContract]
         internal class ExclusiveHandleBookmarkList

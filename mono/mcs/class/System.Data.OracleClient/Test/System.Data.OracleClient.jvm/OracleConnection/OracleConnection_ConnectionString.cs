@@ -80,7 +80,8 @@ namespace MonoTests.System.Data.OracleClient
             string description;
 
             //The complete list of properties is:
-            //Provider, Password, User ID, Data Source, HostName, Port, Location, retrieveMessagesFromServerOnGetMessage
+            //Provider, Password, User ID, Data Source, HostName, Port, Location,
+            // retrieveMessagesFromServerOnGetMessage
 
             description = "Test connection string without 'retrieveMessagesFromServerOnGetMessage'";
             propsToUse = new string[]

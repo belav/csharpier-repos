@@ -7,7 +7,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides an empty <see cref="FrozenDictionary{TKey, TValue}"/> to use when there are zero key/value pairs to be stored.</summary>
+    /// <summary>Provides an empty <see cref="FrozenDictionary{TKey, TValue}"/> to use when there are
+    // zero key/value pairs to be stored.</summary>
     internal sealed class EmptyFrozenDictionary<TKey, TValue> : FrozenDictionary<TKey, TValue>
         where TKey : notnull
     {

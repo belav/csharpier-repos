@@ -129,7 +129,8 @@ namespace System.Security.Cryptography.Tests
             );
         }
 
-        // These test cases are from http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf Appendix B
+        // These test cases are from http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf Appendix
+        // B
         [Fact]
         public void Sha256_Fips180_1()
         {

@@ -347,8 +347,8 @@ namespace System.Web.UI.WebControls
         {
             base.DataBind();
 
-            /* the child controls get bound in
-             * base.DataBind */
+/* the child controls get bound in
+* base.DataBind */
             foreach (Control c in Controls)
             {
                 if (c is SiteMapNodeItem)

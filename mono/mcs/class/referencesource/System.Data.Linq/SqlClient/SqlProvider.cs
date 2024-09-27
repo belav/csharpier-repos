@@ -500,8 +500,10 @@ namespace System.Data.Linq.SqlClient
                 }
             }
 
-            // If fileOrServerOrConnectionString != null, that means we just created the connection instance and we have to tell
-            // the SqlConnectionManager that it should dispose the connection when the context is disposed. Otherwise the user owns
+            // If fileOrServerOrConnectionString != null, that means we just created the connection instance and
+            // we have to tell
+            // the SqlConnectionManager that it should dispose the connection when the context is disposed.
+            // Otherwise the user owns
             // the connection and should dispose of it themselves.
             this.conManager = new SqlConnectionManager(
                 this,
@@ -564,7 +566,8 @@ namespace System.Data.Linq.SqlClient
         }
 
         // Not implementing finalizer here because there are no unmanaged resources
-        // to release. See http://msdnwiki.microsoft.com/en-us/mtpswiki/12afb1ea-3a17-4a3f-a1f0-fcdb853e2359.aspx
+        // to release. See
+        // http://msdnwiki.microsoft.com/en-us/mtpswiki/12afb1ea-3a17-4a3f-a1f0-fcdb853e2359.aspx
 
         // The bulk of the clean-up code is implemented in Dispose(bool)
         protected virtual void Dispose(bool disposing)
@@ -684,7 +687,8 @@ namespace System.Data.Linq.SqlClient
             this.CheckDispose();
             this.CheckInitialized();
             // Don't need to call CheckNotDeleted() here since we allow CreateDatabase after DeleteDatabase
-            // Don't need to call InitializeProviderMode() here since we don't need to know the provider to do this.
+            // Don't need to call InitializeProviderMode() here since we don't need to know the provider to do
+            // this.
             string catalog = null;
             string filename = null;
 
@@ -919,7 +923,8 @@ namespace System.Data.Linq.SqlClient
         {
             this.CheckDispose();
             this.CheckInitialized();
-            // Don't need to call InitializeProviderMode() here since we don't need to know the provider to do this.
+            // Don't need to call InitializeProviderMode() here since we don't need to know the provider to do
+            // this.
             if (this.deleted)
             {
                 // 2nd delete is no-op.
@@ -989,7 +994,8 @@ namespace System.Data.Linq.SqlClient
             {
                 return false;
             }
-            // Don't need to call InitializeProviderMode() here since we don't need to know the provider to do this.
+            // Don't need to call InitializeProviderMode() here since we don't need to know the provider to do
+            // this.
 
             bool exists = false;
             if (this.mode == ProviderMode.SqlCE)

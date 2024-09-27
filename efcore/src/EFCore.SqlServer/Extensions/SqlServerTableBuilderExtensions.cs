@@ -16,7 +16,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
@@ -36,7 +37,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
@@ -58,7 +60,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
@@ -82,7 +85,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
@@ -109,7 +113,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
@@ -129,7 +134,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
@@ -151,7 +157,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
@@ -180,7 +187,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table as temporal.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
@@ -218,7 +226,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server
+    // memory-optimized tables with EF Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
@@ -238,7 +247,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server
+    // memory-optimized tables with EF Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
@@ -260,7 +270,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server
+    // memory-optimized tables with EF Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
@@ -280,7 +291,8 @@ public static class SqlServerTableBuilderExtensions
     ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server
+    // memory-optimized tables with EF Core</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
@@ -309,14 +321,17 @@ public static class SqlServerTableBuilderExtensions
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using the SQL OUTPUT clause with SQL Server</see>
+    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using
+    // the SQL OUTPUT clause with SQL Server</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
-    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving changes to the table.</param>
+    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving
+    // changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder UseSqlOutputClause(
         this TableBuilder tableBuilder,
@@ -335,15 +350,18 @@ public static class SqlServerTableBuilderExtensions
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using the SQL OUTPUT clause with SQL Server</see>
+    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using
+    // the SQL OUTPUT clause with SQL Server</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
-    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving changes to the table.</param>
+    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving
+    // changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder<TEntity> UseSqlOutputClause<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
@@ -354,14 +372,17 @@ public static class SqlServerTableBuilderExtensions
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using the SQL OUTPUT clause with SQL Server</see>
+    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using
+    // the SQL OUTPUT clause with SQL Server</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
-    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving changes to the table.</param>
+    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving
+    // changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static SplitTableBuilder UseSqlOutputClause(
         this SplitTableBuilder tableBuilder,
@@ -380,15 +401,18 @@ public static class SqlServerTableBuilderExtensions
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using the SQL OUTPUT clause with SQL Server</see>
+    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using
+    // the SQL OUTPUT clause with SQL Server</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
-    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving changes to the table.</param>
+    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving
+    // changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static SplitTableBuilder<TEntity> UseSqlOutputClause<TEntity>(
         this SplitTableBuilder<TEntity> tableBuilder,
@@ -400,14 +424,17 @@ public static class SqlServerTableBuilderExtensions
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using the SQL OUTPUT clause with SQL Server</see>
+    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using
+    // the SQL OUTPUT clause with SQL Server</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
-    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving changes to the table.</param>
+    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving
+    // changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationTableBuilder UseSqlOutputClause(
         this OwnedNavigationTableBuilder tableBuilder,
@@ -426,16 +453,19 @@ public static class SqlServerTableBuilderExtensions
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using the SQL OUTPUT clause with SQL Server</see>
+    ///     See <see href="https://aka.ms/efcore-docs-sqlserver-save-changes-and-output-clause">Using
+    // the SQL OUTPUT clause with SQL Server</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
     /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
-    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving changes to the table.</param>
+    /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving
+    // changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> UseSqlOutputClause<
         TOwnerEntity,

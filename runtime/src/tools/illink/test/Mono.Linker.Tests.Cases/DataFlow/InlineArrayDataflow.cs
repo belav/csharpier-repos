@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public BindingFlags value;
         }
 
-        // This case will fallback to not understanding the binding flags and will end up marking all properties
+        // This case will fallback to not understanding the binding flags and will end up marking all
+        // properties
         static void AccessPrimitiveTypeArray()
         {
             PrimitiveTypeArray a = new PrimitiveTypeArray();

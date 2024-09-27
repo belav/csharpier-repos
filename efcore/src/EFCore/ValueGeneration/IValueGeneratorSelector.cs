@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 ///         Selects value generators to be used to generate values for properties of entities.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -20,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -31,7 +33,8 @@ public interface IValueGeneratorSelector
     /// </summary>
     /// <param name="property">The property to get the value generator for.</param>
     /// <param name="typeBase">
-    ///     The type that the value generator will be used for. When called on inherited properties on derived types,
+    ///     The type that the value generator will be used for. When called on inherited properties on
+    // derived types,
     ///     this type may be different from the declaring type for <paramref name="property" />
     /// </param>
     /// <returns>The value generator to be used.</returns>

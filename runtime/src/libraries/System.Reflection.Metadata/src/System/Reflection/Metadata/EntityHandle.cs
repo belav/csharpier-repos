@@ -8,7 +8,8 @@ using System.Reflection.Metadata.Ecma335;
 namespace System.Reflection.Metadata
 {
     /// <summary>
-    /// Represents a metadata entity (type reference/definition/specification, method definition, custom attribute, etc.).
+    /// Represents a metadata entity (type reference/definition/specification, method definition, custom
+    // attribute, etc.).
     /// </summary>
     /// <remarks>
     /// Use <see cref="EntityHandle"/> to store multiple kinds of entity handles.
@@ -69,7 +70,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// Value stored in a specific entity handle (see <see cref="TypeDefinitionHandle"/>, <see cref="MethodDefinitionHandle"/>, etc.).
+        /// Value stored in a specific entity handle (see <see cref="TypeDefinitionHandle"/>, <see
+        // cref="MethodDefinitionHandle"/>, etc.).
         /// </summary>
         internal uint SpecificHandleValue
         {

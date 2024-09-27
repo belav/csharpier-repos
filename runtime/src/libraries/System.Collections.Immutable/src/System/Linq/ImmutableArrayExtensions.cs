@@ -8,7 +8,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Linq
 {
     /// <summary>
-    /// LINQ extension method overrides that offer greater efficiency for <see cref="ImmutableArray{T}"/> than the standard LINQ methods
+    /// LINQ extension method overrides that offer greater efficiency for <see
+    // cref="ImmutableArray{T}"/> than the standard LINQ methods
     /// </summary>
     public static class ImmutableArrayExtensions
     {
@@ -39,16 +40,21 @@ namespace System.Linq
         /// flattens the resulting sequences into one sequence, and invokes a result
         /// selector function on each element therein.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of <paramref name="immutableArray"/>.</typeparam>
-        /// <typeparam name="TCollection">The type of the intermediate elements collected by <paramref name="collectionSelector"/>.</typeparam>
+        /// <typeparam name="TSource">The type of the elements of <paramref
+        // name="immutableArray"/>.</typeparam>
+        /// <typeparam name="TCollection">The type of the intermediate elements collected by <paramref
+        // name="collectionSelector"/>.</typeparam>
         /// <typeparam name="TResult">The type of the elements of the resulting sequence.</typeparam>
         /// <param name="immutableArray">The immutable array.</param>
-        /// <param name="collectionSelector">A transform function to apply to each element of the input sequence.</param>
-        /// <param name="resultSelector">A transform function to apply to each element of the intermediate sequence.</param>
+        /// <param name="collectionSelector">A transform function to apply to each element of the input
+        // sequence.</param>
+        /// <param name="resultSelector">A transform function to apply to each element of the intermediate
+        // sequence.</param>
         /// <returns>
         /// An <see cref="IEnumerable{T}"/> whose elements are the result
         /// of invoking the one-to-many transform function <paramref name="collectionSelector"/> on each
-        /// element of <paramref name="immutableArray"/> and then mapping each of those sequence elements and their
+        /// element of <paramref name="immutableArray"/> and then mapping each of those sequence elements
+        // and their
         /// corresponding source element to a result element.
         /// </returns>
         public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(
@@ -137,7 +143,8 @@ namespace System.Linq
         /// <param name="immutableArray"></param>
         /// <param name="predicate">The predicate.</param>
         /// <returns>
-        /// <c>true</c> if every element of the source sequence passes the test in the specified predicate, or if the sequence is empty; otherwise, <c>false</c>.
+        /// <c>true</c> if every element of the source sequence passes the test in the specified predicate,
+        // or if the sequence is empty; otherwise, <c>false</c>.
         /// </returns>
         public static bool All<T>(this ImmutableArray<T> immutableArray, Func<T, bool> predicate)
         {
@@ -318,7 +325,8 @@ namespace System.Linq
         /// <param name="immutableArray">An immutable array to aggregate over.</param>
         /// <param name="seed">The initial accumulator value.</param>
         /// <param name="func">An accumulator function to be invoked on each element.</param>
-        /// <param name="resultSelector">A function to transform the final accumulator value into the result type.</param>
+        /// <param name="resultSelector">A function to transform the final accumulator value into the result
+        // type.</param>
         public static TResult Aggregate<TAccumulate, TResult, T>(
             this ImmutableArray<T> immutableArray,
             TAccumulate seed,
@@ -341,7 +349,8 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the element at a specified index in a sequence or a default value if the index is out of range.
+        /// Returns the element at a specified index in a sequence or a default value if the index is out of
+        // range.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         public static T? ElementAtOrDefault<T>(this ImmutableArray<T> immutableArray, int index)
@@ -389,7 +398,8 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the first element of a sequence, or a default value if the sequence contains no elements.
+        /// Returns the first element of a sequence, or a default value if the sequence contains no
+        // elements.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         /// <param name="immutableArray"></param>
@@ -399,7 +409,8 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the first element of the sequence that satisfies a condition or a default value if no such element is found.
+        /// Returns the first element of the sequence that satisfies a condition or a default value if no
+        // such element is found.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         public static T? FirstOrDefault<T>(
@@ -466,7 +477,8 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the last element of a sequence that satisfies a condition or a default value if no such element is found.
+        /// Returns the last element of a sequence that satisfies a condition or a default value if no such
+        // element is found.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         public static T? LastOrDefault<T>(
@@ -488,7 +500,8 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the only element of a sequence, and throws an exception if there is not exactly one element in the sequence.
+        /// Returns the only element of a sequence, and throws an exception if there is not exactly one
+        // element in the sequence.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         /// <param name="immutableArray"></param>
@@ -499,7 +512,8 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the only element of a sequence that satisfies a specified condition, and throws an exception if more than one such element exists.
+        /// Returns the only element of a sequence that satisfies a specified condition, and throws an
+        // exception if more than one such element exists.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         /// <param name="immutableArray">The immutable array to return a single element from.</param>
@@ -533,7 +547,8 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the only element of a sequence, or a default value if the sequence is empty; this method throws an exception if there is more than one element in the sequence.
+        /// Returns the only element of a sequence, or a default value if the sequence is empty; this method
+        // throws an exception if there is more than one element in the sequence.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         /// <param name="immutableArray"></param>
@@ -544,7 +559,9 @@ namespace System.Linq
         }
 
         /// <summary>
-        /// Returns the only element of a sequence that satisfies a specified condition or a default value if no such element exists; this method throws an exception if more than one element satisfies the condition.
+        /// Returns the only element of a sequence that satisfies a specified condition or a default value
+        // if no such element exists; this method throws an exception if more than one element satisfies the
+        // condition.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
         public static T? SingleOrDefault<T>(

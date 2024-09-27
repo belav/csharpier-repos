@@ -9,11 +9,13 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         A class that processes a SQL tree based on nullability of nodes to apply null semantics in use and
+///         A class that processes a SQL tree based on nullability of nodes to apply null semantics
+// in use and
 ///         optimize it based on parameter values.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -28,7 +30,8 @@ public class SqlNullabilityProcessor
     ///     Creates a new instance of the <see cref="SqlNullabilityProcessor" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-    /// <param name="useRelationalNulls">A bool value indicating whether relational null semantics are in use.</param>
+    /// <param name="useRelationalNulls">A bool value indicating whether relational null semantics are
+    // in use.</param>
     public SqlNullabilityProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
         bool useRelationalNulls
@@ -63,7 +66,8 @@ public class SqlNullabilityProcessor
     /// </summary>
     /// <param name="queryExpression">A query expression to process.</param>
     /// <param name="parameterValues">A dictionary of parameter values in use.</param>
-    /// <param name="canCache">A bool value indicating whether the query expression can be cached.</param>
+    /// <param name="canCache">A bool value indicating whether the query expression can be
+    // cached.</param>
     /// <returns>An optimized query expression.</returns>
     public virtual Expression Process(
         Expression queryExpression,
@@ -129,7 +133,8 @@ public class SqlNullabilityProcessor
     protected virtual void DoNotCache() => _canCache = false;
 
     /// <summary>
-    ///     Adds a column to non nullable columns list to further optimizations can take the column as non-nullable.
+    ///     Adds a column to non nullable columns list to further optimizations can take the column as
+    // non-nullable.
     /// </summary>
     /// <param name="columnExpression">A column expression to add.</param>
     protected virtual void AddNonNullableColumn(ColumnExpression columnExpression) =>
@@ -407,7 +412,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="SqlExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="sqlExpression">A sql expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     [return: NotNullIfNotNull("sqlExpression")]
@@ -544,10 +550,12 @@ public class SqlNullabilityProcessor
     }
 
     /// <summary>
-    ///     Visits a custom <see cref="SqlExpression" /> added by providers and computes its nullability.
+    ///     Visits a custom <see cref="SqlExpression" /> added by providers and computes its
+    // nullability.
     /// </summary>
     /// <param name="sqlExpression">A sql expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitCustomSqlExpression(
@@ -564,10 +572,14 @@ public class SqlNullabilityProcessor
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual SqlExpression VisitAtTimeZone(
         AtTimeZoneExpression atTimeZoneExpression,
@@ -587,7 +599,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="CaseExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="caseExpression">A case expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitCase(
@@ -662,7 +675,8 @@ public class SqlNullabilityProcessor
             return elseResult ?? _sqlExpressionFactory.Constant(null, caseExpression.TypeMapping);
         }
 
-        // if there is only one When clause and it's test evaluates to 'true' AND there is no else block, simply return the result
+        // if there is only one When clause and it's test evaluates to 'true' AND there is no else block,
+        // simply return the result
         return elseResult == null && whenClauses.Count == 1 && IsTrue(whenClauses[0].Test)
             ? whenClauses[0].Result
             : caseExpression.Update(operand, whenClauses, elseResult);
@@ -672,7 +686,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="CollateExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="collateExpression">A collate expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitCollate(
@@ -685,7 +700,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="ColumnExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="columnExpression">A column expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitColumn(
@@ -703,7 +719,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="DistinctExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="distinctExpression">A collate expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitDistinct(
@@ -716,7 +733,8 @@ public class SqlNullabilityProcessor
     ///     Visits an <see cref="ExistsExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="existsExpression">An exists expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitExists(
@@ -739,7 +757,8 @@ public class SqlNullabilityProcessor
     ///     Visits an <see cref="InExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="inExpression">An in expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitIn(
@@ -748,7 +767,8 @@ public class SqlNullabilityProcessor
         out bool nullable
     )
     {
-        // SQL IN returns null when the item is null, and when the values (or subquery projection) contains NULL and no match was made.
+        // SQL IN returns null when the item is null, and when the values (or subquery projection) contains
+        // NULL and no match was made.
 
         var item = Visit(inExpression.Item, out var itemNullable);
         inExpression = inExpression.Update(
@@ -770,9 +790,11 @@ public class SqlNullabilityProcessor
                 return _sqlExpressionFactory.Constant(false, inExpression.TypeMapping);
             }
 
-            // Check whether the subquery projects out a nullable value; note that we unwrap any casts to get to the underlying
+            // Check whether the subquery projects out a nullable value; note that we unwrap any casts to get to
+            // the underlying
             // ColumnExpression (since casts don't affect nullability).
-            // Note: we could broaden the optimization if we knew the nullability of the projection but we don't keep that information and
+            // Note: we could broaden the optimization if we knew the nullability of the projection but we don't
+            // keep that information and
             // we want to avoid double visitation
             var subqueryProjection = subquery.Projection.Single().Expression;
 
@@ -813,17 +835,22 @@ public class SqlNullabilityProcessor
 
                 case (true, false):
                 {
-                    // If the item is actually null (not just nullable) and the projection is non-nullable, just return false immediately:
+                    // If the item is actually null (not just nullable) and the projection is non-nullable, just return
+                    // false immediately:
                     // WHERE NULL IN (SELECT NonNullable FROM foo) -> false
                     if (IsNull(item))
                     {
                         return _sqlExpressionFactory.Constant(false, inExpression.TypeMapping);
                     }
 
-                    // Otherwise, since the projection is non-nullable, NULL will only be returned if the item wasn't found. Use as-is
-                    // in optimized expansion (NULL is interpreted as false anyway), or compensate for the item being possibly null:
-                    // WHERE Nullable IN (SELECT NonNullable FROM foo) -> WHERE Nullable IN (SELECT NonNullable FROM foo) AND Nullable IS NOT NULL
-                    // WHERE Nullable NOT IN (SELECT NonNullable FROM foo) -> WHERE Nullable NOT IN (SELECT NonNullable FROM foo) OR Nullable IS NULL
+                    // Otherwise, since the projection is non-nullable, NULL will only be returned if the item wasn't
+                    // found. Use as-is
+                    // in optimized expansion (NULL is interpreted as false anyway), or compensate for the item being
+                    // possibly null:
+                    // WHERE Nullable IN (SELECT NonNullable FROM foo) -> WHERE Nullable IN (SELECT NonNullable FROM
+                    // foo) AND Nullable IS NOT NULL
+                    // WHERE Nullable NOT IN (SELECT NonNullable FROM foo) -> WHERE Nullable NOT IN (SELECT NonNullable
+                    // FROM foo) OR Nullable IS NULL
                     return allowOptimizedExpansion
                         ? inExpression
                         : _sqlExpressionFactory.AndAlso(
@@ -834,16 +861,20 @@ public class SqlNullabilityProcessor
 
                 case (false, true):
                 {
-                    // If the item is non-nullable but the projection is nullable, NULL will only be returned if the item wasn't found
+                    // If the item is non-nullable but the projection is nullable, NULL will only be returned if the
+                    // item wasn't found
                     // (as with the above case).
-                    // Use as-is in optimized expansion (NULL is interpreted as false anyway), or compensate by coalescing NULL to false:
-                    // WHERE NonNullable IN (SELECT Nullable FROM foo) -> WHERE COALESCE(NonNullable IN (SELECT Nullable FROM foo), false)
+                    // Use as-is in optimized expansion (NULL is interpreted as false anyway), or compensate by
+                    // coalescing NULL to false:
+                    // WHERE NonNullable IN (SELECT Nullable FROM foo) -> WHERE COALESCE(NonNullable IN (SELECT Nullable
+                    // FROM foo), false)
                     if (allowOptimizedExpansion)
                     {
                         return inExpression;
                     }
 
-                    // On SQL Server, EXISTS isn't less efficient than IN, and the additional COALESCE (and CASE/WHEN which it requires)
+                    // On SQL Server, EXISTS isn't less efficient than IN, and the additional COALESCE (and CASE/WHEN
+                    // which it requires)
                     // add unneeded clutter (and possibly hurt perf). So allow providers to prefer EXISTS.
                     if (PreferExistsToInWithCoalesce)
                     {
@@ -859,10 +890,12 @@ public class SqlNullabilityProcessor
                 case (true, true):
                     TransformToExists:
                     // Worst case: both sides are nullable; there's no way to distinguish the item was found or not.
-                    // We rewrite to an EXISTS subquery where we can generate a precise predicate to check for what we need. Note that this
+                    // We rewrite to an EXISTS subquery where we can generate a precise predicate to check for what we
+                    // need. Note that this
                     // performs (significantly) worse than an IN expression, since it involves a correlated subquery.
 
-                    // We'll need to mutate the subquery to introduce the predicate inside it, but it might be referenced by other places in
+                    // We'll need to mutate the subquery to introduce the predicate inside it, but it might be
+                    // referenced by other places in
                     // the tree, so we create a copy to work on.
 
                     // No need for a projection with EXISTS, clear it to get SELECT 1
@@ -912,8 +945,10 @@ public class SqlNullabilityProcessor
             };
         }
 
-        // For all other scenarios, we need to compensate for the presence of nulls (constants/parameters) and nullables
-        // (columns/arbitrary expressions) in the value list. The following visits all the values, removing nulls (but not nullables)
+        // For all other scenarios, we need to compensate for the presence of nulls (constants/parameters)
+        // and nullables
+        // (columns/arbitrary expressions) in the value list. The following visits all the values, removing
+        // nulls (but not nullables)
         // and returns the visited values with some information on what was found.
         inExpression = ProcessInExpressionValues(
             inExpression,
@@ -950,7 +985,8 @@ public class SqlNullabilityProcessor
                 );
         }
 
-        // If the item is non-nullable and there are no nullables, return the expression without compensation; null has already been removed
+        // If the item is non-nullable and there are no nullables, return the expression without
+        // compensation; null has already been removed
         // as it will never match, and the expression doesn't return NULL in any case:
         // non_nullable IN (1, 2) -> non_nullable IN (1, 2)
         // non_nullable IN (1, 2, NULL) -> non_nullable IN (1, 2)
@@ -959,8 +995,10 @@ public class SqlNullabilityProcessor
             return inExpression;
         }
 
-        // If we're in optimized mode and the item isn't nullable (no matter what the values have), or there are no nulls/nullable values,
-        // also return without compensation; null will only be returned if the item isn't found, and that will evaluate to false in
+        // If we're in optimized mode and the item isn't nullable (no matter what the values have), or there
+        // are no nulls/nullable values,
+        // also return without compensation; null will only be returned if the item isn't found, and that
+        // will evaluate to false in
         // optimized mode:
         // non_nullable IN (1, 2, NULL, nullable) -> non_nullable IN (1, 2, nullable) (optimized)
         // nullable IN (1, 2) -> nullable IN (1, 2) (optimized)
@@ -972,7 +1010,8 @@ public class SqlNullabilityProcessor
             return inExpression;
         }
 
-        // At this point, if there are any nullable values, we need to extract them out to create a pure, non-nullable/non-null list of
+        // At this point, if there are any nullable values, we need to extract them out to create a pure,
+        // non-nullable/non-null list of
         // values. We'll add them back via separate equality checks.
         if (nullableValues.Count > 0)
         {
@@ -987,7 +1026,8 @@ public class SqlNullabilityProcessor
 
         SqlExpression result = inExpression;
 
-        // If the item is nullable, we need to add compensation based on whether null was found in the values or not:
+        // If the item is nullable, we need to add compensation based on whether null was found in the
+        // values or not:
         // nullable IN (1, 2) -> nullable IN (1, 2) AND nullable IS NOT NULL (full)
         // nullable IN (1, 2, NULL) -> nullable IN (1, 2) OR nullable IS NULL (full)
         if (itemNullable)
@@ -1006,10 +1046,13 @@ public class SqlNullabilityProcessor
             return result;
         }
 
-        // At this point we know that there are nullable values; we need to extract these out and add regular individual equality checks
+        // At this point we know that there are nullable values; we need to extract these out and add
+        // regular individual equality checks
         // for each one.
-        // non_nullable IN (1, 2, nullable) -> non_nullable IN (1, 2) OR (non_nullable = nullable AND nullable IS NOT NULL) (full)
-        // non_nullable IN (1, 2, NULL, nullable) -> non_nullable IN (1, 2) OR (non_nullable = nullable AND nullable IS NOT NULL) (full)
+        // non_nullable IN (1, 2, nullable) -> non_nullable IN (1, 2) OR (non_nullable = nullable AND
+        // nullable IS NOT NULL) (full)
+        // non_nullable IN (1, 2, NULL, nullable) -> non_nullable IN (1, 2) OR (non_nullable = nullable AND
+        // nullable IS NOT NULL) (full)
         return nullableValues.Aggregate(
             result,
             (expr, nullableValue) =>
@@ -1036,7 +1079,8 @@ public class SqlNullabilityProcessor
 
             if (inExpression.ValuesParameter is SqlParameterExpression valuesParameter)
             {
-                // The InExpression has a values parameter. Expand it out, embedding its values as constants into the SQL; disable SQL
+                // The InExpression has a values parameter. Expand it out, embedding its values as constants into
+                // the SQL; disable SQL
                 // caching.
                 DoNotCache();
                 var typeMapping = inExpression.ValuesParameter.TypeMapping;
@@ -1122,7 +1166,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="LikeExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="likeExpression">A like expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitLike(
@@ -1146,7 +1191,8 @@ public class SqlNullabilityProcessor
 
         nullable = false;
 
-        // The null semantics behavior we implement for LIKE is that it only returns true when both sides are non-null and match; any other
+        // The null semantics behavior we implement for LIKE is that it only returns true when both sides
+        // are non-null and match; any other
         // input returns false:
         // foo LIKE f% -> true
         // foo LIKE null -> false
@@ -1158,7 +1204,8 @@ public class SqlNullabilityProcessor
             return _sqlExpressionFactory.Constant(false, likeExpression.TypeMapping);
         }
 
-        // A constant match-all pattern (%) returns true for all cases, except where the match string is null:
+        // A constant match-all pattern (%) returns true for all cases, except where the match string is
+        // null:
         // nullable_foo LIKE % -> foo IS NOT NULL
         // non_nullable_foo LIKE % -> true
         if (pattern is SqlConstantExpression { Value: "%" })
@@ -1200,7 +1247,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="RowNumberExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="rowNumberExpression">A row number expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitRowNumber(
@@ -1235,7 +1283,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="RowValueExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="rowValueExpression">A row value expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitRowValue(
@@ -1250,7 +1299,8 @@ public class SqlNullabilityProcessor
         {
             var value = rowValueExpression.Values[i];
 
-            // Note that we disallow optimized expansion, since the null vs. false distinction does matter inside the row's values
+            // Note that we disallow optimized expansion, since the null vs. false distinction does matter
+            // inside the row's values
             var newValue = Visit(value, allowOptimizedExpansion: false, out _);
             if (newValue != value && newValues is null)
             {
@@ -1277,7 +1327,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="ScalarSubqueryExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="scalarSubqueryExpression">A scalar subquery expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitScalarSubquery(
@@ -1295,7 +1346,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="SqlBinaryExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="sqlBinaryExpression">A sql binary expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitSqlBinary(
@@ -1331,7 +1383,8 @@ public class SqlNullabilityProcessor
 
         if (sqlBinaryExpression.OperatorType == ExpressionType.OrElse)
         {
-            // in case of OrElse, we can assume all null value columns on the left side can be treated as non-nullable on the right
+            // in case of OrElse, we can assume all null value columns on the left side can be treated as
+            // non-nullable on the right
             // e.g. (a == null || b == null) || f(a, b)
             // f(a, b) will only be executed if a != null and b != null
             _nonNullableColumns.AddRange(
@@ -1360,7 +1413,8 @@ public class SqlNullabilityProcessor
         }
         else if (sqlBinaryExpression.OperatorType != ExpressionType.AndAlso)
         {
-            // in case of AndAlso we already have what we need as the column information propagates from left to right
+            // in case of AndAlso we already have what we need as the column information propagates from left to
+            // right
             RestoreNonNullableColumnsList(currentNonNullableColumnsCount);
         }
 
@@ -1480,7 +1534,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="SqlConstantExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="sqlConstantExpression">A sql constant expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitSqlConstant(
@@ -1498,7 +1553,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="SqlFragmentExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="sqlFragmentExpression">A sql fragment expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitSqlFragment(
@@ -1516,7 +1572,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="SqlFunctionExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="sqlFunctionExpression">A sql function expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitSqlFunction(
@@ -1582,7 +1639,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="SqlParameterExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="sqlParameterExpression">A sql parameter expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitSqlParameter(
@@ -1602,7 +1660,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="SqlUnaryExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="sqlUnaryExpression">A sql unary expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitSqlUnary(
@@ -1652,7 +1711,8 @@ public class SqlNullabilityProcessor
     ///     Visits a <see cref="JsonScalarExpression" /> and computes its nullability.
     /// </summary>
     /// <param name="jsonScalarExpression">A json scalar expression to visit.</param>
-    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which considers null value as false value is allowed.</param>
+    /// <param name="allowOptimizedExpansion">A bool value indicating if optimized expansion which
+    // considers null value as false value is allowed.</param>
     /// <param name="nullable">A bool value indicating whether the sql expression is nullable.</param>
     /// <returns>An optimized sql expression.</returns>
     protected virtual SqlExpression VisitJsonScalar(
@@ -1667,12 +1727,14 @@ public class SqlNullabilityProcessor
     }
 
     /// <summary>
-    ///     Determines whether an <see cref="InExpression" /> will be transformed to an <see cref="ExistsExpression" /> when it would
+    ///     Determines whether an <see cref="InExpression" /> will be transformed to an <see
+    // cref="ExistsExpression" /> when it would
     ///     otherwise require complex compensation for null semantics.
     /// </summary>
     protected virtual bool PreferExistsToInWithCoalesce => false;
 
-    // Note that we can check parameter values for null since we cache by the parameter nullability; but we cannot do the same for bool.
+    // Note that we can check parameter values for null since we cache by the parameter nullability; but
+    // we cannot do the same for bool.
     private bool IsNull(SqlExpression? expression) =>
         expression is SqlConstantExpression { Value: null }
         || expression is SqlParameterExpression { Name: string parameterName }
@@ -1967,7 +2029,8 @@ public class SqlNullabilityProcessor
         {
             if (leftNullable && rightNullable)
             {
-                // ?a == ?b <=> !(?a) == !(?b) -> [(a == b) && (a != null && b != null)] || (a == null && b == null))
+                // ?a == ?b <=> !(?a) == !(?b) -> [(a == b) && (a != null && b != null)] || (a == null && b ==
+                // null))
                 // !(?a) == ?b <=> ?a == !(?b) -> [(a != b) && (a != null && b != null)] || (a == null && b == null)
                 return leftNegated == rightNegated
                     ? ExpandNullableEqualNullable(
@@ -2134,7 +2197,8 @@ public class SqlNullabilityProcessor
     ///     Attempts to simplify a unary not operation on a non-nullable operand.
     /// </summary>
     /// <param name="sqlUnaryExpression">The expression to simplify.</param>
-    /// <returns>The simplified expression, or the original expression if it cannot be simplified.</returns>
+    /// <returns>The simplified expression, or the original expression if it cannot be
+    // simplified.</returns>
     protected virtual SqlExpression OptimizeNonNullableNotExpression(
         SqlUnaryExpression sqlUnaryExpression
     )
@@ -2183,7 +2247,8 @@ public class SqlNullabilityProcessor
                             or ExpressionType.OrElse
                     )
                     {
-                        // since entire AndAlso/OrElse expression is non-nullable, both sides of it (left and right) must also be non-nullable
+                        // since entire AndAlso/OrElse expression is non-nullable, both sides of it (left and right) must
+                        // also be non-nullable
                         // so it's safe to perform recursive optimization here
                         var left = OptimizeNonNullableNotExpression(
                             _sqlExpressionFactory.Not(sqlBinaryOperand.Left)
@@ -2372,8 +2437,10 @@ public class SqlNullabilityProcessor
                 // for AndAlso, OrElse we can't do this optimization
                 // we could do something like this, but it seems too complicated:
                 // (a && b) == null -> a == null && b != 0 || a != 0 && b == null
-                // NOTE: we don't preserve nullabilities of left/right individually so we are using nullability binary expression as a whole
-                // this may lead to missing some optimizations, where one of the operands (left or right) is not nullable and the other one is
+                // NOTE: we don't preserve nullabilities of left/right individually so we are using nullability
+                // binary expression as a whole
+                // this may lead to missing some optimizations, where one of the operands (left or right) is not
+                // nullable and the other one is
                 var left = ProcessNullNotNull(
                     _sqlExpressionFactory.MakeUnary(
                         sqlUnaryExpression.OperatorType,

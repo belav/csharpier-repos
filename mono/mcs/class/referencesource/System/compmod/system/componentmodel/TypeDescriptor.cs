@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -705,7 +705,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     This creates a new event descriptor identical to an existing event descriptor.  The new event descriptor
+        ///     This creates a new event descriptor identical to an existing event descriptor.  The new
+        // event descriptor
         ///     has the specified metadata attributes merged with the existing metadata attributes.
         /// </devdoc>
         [ReflectionPermission(
@@ -791,7 +792,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     This creates a new property descriptor identical to an existing property descriptor.  The new property descriptor
+        ///     This creates a new property descriptor identical to an existing property descriptor.  The
+        // new property descriptor
         ///     has the specified metadata attributes merged with the existing metadata attributes.
         /// </devdoc>
         [ReflectionPermission(
@@ -804,11 +806,14 @@ namespace System.ComponentModel
             params Attribute[] attributes
         )
         {
-            // We must do some special case work here for extended properties.  If the old property descriptor is really
+            // We must do some special case work here for extended properties.  If the old property descriptor
+            // is really
             // an extender property that is being surfaced on a component as a normal property, then we must
-            // do work here or else ReflectPropertyDescriptor will fail to resolve the get and set methods.  We check
+            // do work here or else ReflectPropertyDescriptor will fail to resolve the get and set methods.  We
+            // check
             // for the necessary ExtenderProvidedPropertyAttribute and if we find it, we create an
-            // ExtendedPropertyDescriptor instead.  We only do this if the component class is the same, since the user
+            // ExtendedPropertyDescriptor instead.  We only do this if the component class is the same, since
+            // the user
             // may want to re-route the property to a different target.
             //
             if (componentType == oldPropertyDescriptor.ComponentType)

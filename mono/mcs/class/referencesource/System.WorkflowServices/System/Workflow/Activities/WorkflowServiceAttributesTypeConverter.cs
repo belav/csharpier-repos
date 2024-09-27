@@ -14,7 +14,8 @@ namespace System.Workflow.Activities
             Attribute[] attributes
         )
         {
-            // TypeDescriptor.GetProperties is used here to get the sub properties of the property that we want to be able
+            // TypeDescriptor.GetProperties is used here to get the sub properties of the property that we want
+            // to be able
             // to be expandable in the property browser
             PropertyDescriptorCollection subProperties = TypeDescriptor.GetProperties(
                 value,

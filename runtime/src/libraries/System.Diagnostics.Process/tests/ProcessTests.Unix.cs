@@ -493,7 +493,8 @@ namespace System.Diagnostics.Tests
             );
             using (var px = Process.Start(programToOpenWith, fileToOpen))
             {
-                // Assert.Equal(programToOpenWith, px.ProcessName); // on OSX, process name is dotnet for some reason. Refer to https://github.com/dotnet/runtime/issues/23525
+                // Assert.Equal(programToOpenWith, px.ProcessName); // on OSX, process name is dotnet for some
+                // reason. Refer to https://github.com/dotnet/runtime/issues/23525
                 Console.WriteLine(
                     $"in OSX, {nameof(programToOpenWith)} is {programToOpenWith}, while {nameof(px.ProcessName)} is {px.ProcessName}."
                 );

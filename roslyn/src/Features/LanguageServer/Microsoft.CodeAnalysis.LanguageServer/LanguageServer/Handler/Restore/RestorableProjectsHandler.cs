@@ -37,8 +37,10 @@ internal sealed class RestorableProjectsHandler(
         Contract.ThrowIfNull(context.Solution);
 
         // We use a sorted set here for the following reasons
-        //   1.  Ensures the client gets a consistent ordering in the picker (especially useful for integration tests).
-        //   2.  Removes projects with duplicate file paths (for example multi-targeted projects).  They all get restored
+        //   1.  Ensures the client gets a consistent ordering in the picker (especially useful for
+        // integration tests).
+        //   2.  Removes projects with duplicate file paths (for example multi-targeted projects).  They all
+        // get restored
         //       together by file path.
         var projects = new SortedSet<string>();
         foreach (var project in context.Solution.Projects)

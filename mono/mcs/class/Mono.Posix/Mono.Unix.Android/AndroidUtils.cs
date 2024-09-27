@@ -41,8 +41,10 @@ namespace Mono.Unix.Android
 
             detectCPUAndArchitecture(out built_for_cpu, out running_on_cpu, out is64bit);
 
-            // CPUArchitecture builtForCPU = Enum.IsDefined (typeof (CPUArchitecture), built_for_cpu) ? (CPUArchitecture)built_for_cpu : CPUArchitecture.Unknown;
-            // CPUArchitecture runningOnCPU = Enum.IsDefined (typeof (CPUArchitecture), running_on_cpu) ? (CPUArchitecture)running_on_cpu : CPUArchitecture.Unknown;
+            // CPUArchitecture builtForCPU = Enum.IsDefined (typeof (CPUArchitecture), built_for_cpu) ?
+            // (CPUArchitecture)built_for_cpu : CPUArchitecture.Unknown;
+            // CPUArchitecture runningOnCPU = Enum.IsDefined (typeof (CPUArchitecture), running_on_cpu) ?
+            // (CPUArchitecture)running_on_cpu : CPUArchitecture.Unknown;
 
             // Log.Info (TAG, " Built for CPU: {0}", builtForCPU);
             // Log.Info (TAG, "Running on CPU: {0}", runningOnCPU);

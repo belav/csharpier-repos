@@ -56,7 +56,8 @@ using CustomAttribute = System.MonoCustomAttrs;
 
 namespace System
 {
-    // this is a work around to get the concept of a calli. It's not as fast but it would be interesting to
+    // this is a work around to get the concept of a calli. It's not as fast but it would be interesting
+    // to
     // see how it compares to the current implementation.
     // This delegate will disappear at some point in favor of calli
 
@@ -78,9 +79,12 @@ namespace System
         FormatStubInfo = 0x00000080, // Include stub info like {unbox-stub}
         FormatGenericParam = 0x00000100, // Use !name and !!name for generic type and method parameters
 
-        // If we want to be able to distinguish between overloads whose parameter types have the same name but come from different assemblies,
-        // we can add FormatAssembly | FormatNoVersion to FormatSerialization. But we are omitting it because it is not a useful scenario
-        // and including the assembly name will normally increase the size of the serialized data and also decrease the performance.
+        // If we want to be able to distinguish between overloads whose parameter types have the same name
+        // but come from different assemblies,
+        // we can add FormatAssembly | FormatNoVersion to FormatSerialization. But we are omitting it
+        // because it is not a useful scenario
+        // and including the assembly name will normally increase the size of the serialized data and also
+        // decrease the performance.
         FormatSerialization = FormatNamespace | FormatGenericParam | FormatFullInst,
     }
 
@@ -105,7 +109,8 @@ namespace System
             HandleToInfo,
         }
 
-        // Helper to build lists of MemberInfos. Special cased to avoid allocations for lists of one element.
+        // Helper to build lists of MemberInfos. Special cased to avoid allocations for lists of one
+        // element.
         private struct ListBuilder<T>
             where T : class
         {
@@ -284,7 +289,8 @@ namespace System
                 private CerHashtable<string, T[]> m_csMemberInfos;
                 private CerHashtable<string, T[]> m_cisMemberInfos;
 
-                // List of MemberInfos given out. When m_cacheComplete is false, it may have null entries at the end to avoid
+                // List of MemberInfos given out. When m_cacheComplete is false, it may have null entries at the end
+                // to avoid
                 // reallocating the list every time a new entry is added.
                 private T[] m_allMembers;
                 private bool m_cacheComplete;
@@ -684,7 +690,8 @@ namespace System
                                     // Grow the list by exactly one element in this case to avoid null entries at the end.
                                     //
 
-                                    // DevDiv #339308 is fixed, but we are keeping this code here for Dev11 in case there are other instances of this bug.
+                                    // DevDiv #339308 is fixed, but we are keeping this code here for Dev11 in case there are other
+                                    // instances of this bug.
                                     // Remove for Dev12.
 
                                     Contract.Assert(false);
@@ -699,7 +706,8 @@ namespace System
                                     );
                                 }
 
-                                // Use different variable for ref argument to Array.Resize to allow enregistration of cachedMembers by the JIT
+                                // Use different variable for ref argument to Array.Resize to allow enregistration of cachedMembers
+                                // by the JIT
                                 T[] cachedMembers2 = cachedMembers;
                                 Array.Resize(ref cachedMembers2, newSize);
                                 cachedMembers = cachedMembers2;
@@ -756,8 +764,10 @@ namespace System
 
                             #region Loop through all methods on the interface
                             Contract.Assert(!methodHandle.IsNullHandle());
-                            // Except for .ctor, .cctor, IL_STUB*, and static methods, all interface methods should be abstract, virtual, and non-RTSpecialName.
-                            // Note that this assumption will become invalid when we add support for non-abstract or static methods on interfaces.
+                            // Except for .ctor, .cctor, IL_STUB*, and static methods, all interface methods should be abstract,
+                            // virtual, and non-RTSpecialName.
+                            // Note that this assumption will become invalid when we add support for non-abstract or static
+                            // methods on interfaces.
                             Contract.Assert(
                                 (
                                     RuntimeMethodHandle.GetAttributes(methodHandle)
@@ -2056,10 +2066,14 @@ namespace System
 
                     case TypeNameKind.FullName:
                         // We exclude the types that contain generic parameters because their names cannot be roundtripped.
-                        // We allow generic type definitions (and their refs, ptrs, and arrays) because their names can be roundtriped.
-                        // Theoretically generic types instantiated with generic type definitions can be roundtripped, e.g. List`1<Dictionary`2>.
-                        // But these kind of types are useless, rare, and hard to identity. We would need to recursively examine all the
-                        // generic arguments with the same criteria. We will exclude them unless we see a real user scenario.
+                        // We allow generic type definitions (and their refs, ptrs, and arrays) because their names can be
+                        // roundtriped.
+                        // Theoretically generic types instantiated with generic type definitions can be roundtripped, e.g.
+                        // List`1<Dictionary`2>.
+                        // But these kind of types are useless, rare, and hard to identity. We would need to recursively
+                        // examine all the
+                        // generic arguments with the same criteria. We will exclude them unless we see a real user
+                        // scenario.
                         if (
                             !m_runtimeType.GetRootElementType().IsGenericTypeDefinition
                             && m_runtimeType.ContainsGenericParameters
@@ -2590,8 +2604,10 @@ namespace System
                     // remap the method to same method on the subclass ReflectedType
                     declaredType = baseType;
 
-                    // if the original methodHandle was the definition then we don't need to rebind generic method arguments
-                    // because all RuntimeMethodHandles retrieved off of the canonical method table are definitions. That's
+                    // if the original methodHandle was the definition then we don't need to rebind generic method
+                    // arguments
+                    // because all RuntimeMethodHandles retrieved off of the canonical method table are definitions.
+                    // That's
                     // why for everything else we need to rebind the generic method arguments.
                     if (!RuntimeMethodHandle.IsGenericMethodDefinition(methodHandle))
                     {
@@ -2621,11 +2637,13 @@ namespace System
             }
 
             // If methodInstantiation is not null, GetStubIfNeeded will rebind the generic method arguments
-            // if declaredType is an instantiated generic type and methodHandle is not generic, get the instantiated MethodDesc (if needed)
+            // if declaredType is an instantiated generic type and methodHandle is not generic, get the
+            // instantiated MethodDesc (if needed)
             // if declaredType is a value type, get the unboxing stub (if needed)
 
             // this is so that our behavior here is consistent with that of Type.GetMethod
-            // See MemberInfoCache<RuntimeConstructorInfo>.PopulateMethods and MemberInfoCache<RuntimeMethodInfoInfo>.PopulateConstructors
+            // See MemberInfoCache<RuntimeConstructorInfo>.PopulateMethods and
+            // MemberInfoCache<RuntimeMethodInfoInfo>.PopulateConstructors
 
             methodHandle = RuntimeMethodHandle.GetStubIfNeeded(
                 methodHandle,
@@ -2945,7 +2963,8 @@ namespace System
             }
         }
 
-        // Used by the singular GetXXX APIs (Event, Field, Interface, NestedType) where prefixLookup is not supported.
+        // Used by the singular GetXXX APIs (Event, Field, Interface, NestedType) where prefixLookup is not
+        // supported.
         private static void FilterHelper(
             BindingFlags bindingFlags,
             ref string name,
@@ -2964,8 +2983,10 @@ namespace System
             );
         }
 
-        // Only called by GetXXXCandidates, GetInterfaces, and GetNestedTypes when FilterHelper has set "prefixLookup" to true.
-        // Most of the plural GetXXX methods allow prefix lookups while the singular GetXXX methods mostly do not.
+        // Only called by GetXXXCandidates, GetInterfaces, and GetNestedTypes when FilterHelper has set
+        // "prefixLookup" to true.
+        // Most of the plural GetXXX methods allow prefix lookups while the singular GetXXX methods mostly
+        // do not.
         private static bool FilterApplyPrefixLookup(
             MemberInfo memberInfo,
             string name,
@@ -3068,7 +3089,8 @@ namespace System
             #endregion
 
             #region Asymmetries
-            // @Asymmetry - Internal, inherited, instance, non-protected, non-virtual, non-abstract members returned
+            // @Asymmetry - Internal, inherited, instance, non-protected, non-virtual, non-abstract members
+            // returned
             //              iff BindingFlags !DeclaredOnly, Instance and Public are present except for fields
             if (
                 ((bindingFlags & BindingFlags.DeclaredOnly) == 0)
@@ -3165,7 +3187,8 @@ namespace System
             );
         }
 
-        // Used by GetMethodCandidates/GetConstructorCandidates, InvokeMember, and CreateInstanceImpl to perform the necessary filtering.
+        // Used by GetMethodCandidates/GetConstructorCandidates, InvokeMember, and CreateInstanceImpl to
+        // perform the necessary filtering.
         // Should only be called by FilterApplyMethodInfo and FilterApplyConstructorInfo.
         private static bool FilterApplyMethodBase(
             MethodBase methodBase,
@@ -3210,7 +3233,8 @@ namespace System
                 {
                     #region Invoke Member, Get\Set & Create Instance specific case
                     // If the number of supplied arguments differs than the number in the signature AND
-                    // we are not filtering for a dynamic call -- InvokeMethod or CreateInstance -- filter out the method.
+                    // we are not filtering for a dynamic call -- InvokeMethod or CreateInstance -- filter out the
+                    // method.
                     if (
                         (
                             bindingFlags
@@ -4077,7 +4101,8 @@ namespace System
 
                 // GetMethodBase will convert this to the instantiating/unboxing stub if necessary
                 MethodBase rtTypeMethodBase = RuntimeType.GetMethodBase(this, classRtMethodHandle);
-                // a class may not implement all the methods of an interface (abstract class) so null is a valid value
+                // a class may not implement all the methods of an interface (abstract class) so null is a valid
+                // value
                 Contract.Assert(rtTypeMethodBase == null || rtTypeMethodBase is RuntimeMethodInfo);
                 im.TargetMethods[i] = (MethodInfo)rtTypeMethodBase;
             }
@@ -4257,7 +4282,8 @@ namespace System
                 else
                 {
                     if ((object)returnType == null)
-                        // if we are here we have no args or property type to select over and we have more than one property with that name
+                        // if we are here we have no args or property type to select over and we have more than one property
+                        // with that name
                         throw new AmbiguousMatchException(
                             Environment.GetResourceString("Arg_AmbiguousMatchException")
                         );
@@ -4981,7 +5007,7 @@ namespace System
         /*
         protected override bool IsMarshalByRefImpl()
         {
-            return GetTypeHandleInternal().IsMarshalByRef();
+        return GetTypeHandleInternal().IsMarshalByRef();
         }
         */
 
@@ -5599,7 +5625,8 @@ namespace System
                 RuntimeType elementType = RuntimeTypeHandle.GetElementType(this);
                 if (elementType.IsInstanceOfType(value) || value == null)
                 {
-                    // need to create an instance of the ByRef if null was provided, but only if primitive, enum or value type
+                    // need to create an instance of the ByRef if null was provided, but only if primitive, enum or
+                    // value type
                     return AllocateValueType(elementType, value, false);
                 }
             }
@@ -5962,7 +5989,8 @@ namespace System
 
                 if (name == null)
                 {
-                    // in InvokeMember we always pretend there is a default member if none is provided and we make it ToString
+                    // in InvokeMember we always pretend there is a default member if none is provided and we make it
+                    // ToString
                     name = "ToString";
                 }
             }
@@ -6127,7 +6155,7 @@ namespace System
             #region Caching Logic
             /*
             bool useCache = false;
-
+            
             // Note that when we add something to the cache, we are careful to ensure
             // that the actual providedArgs matches the parameters of the method.  Otherwise,
             // some default argument processing has occurred.  We don't want anyone
@@ -6135,14 +6163,14 @@ namespace System
             // cache hit because then they would bypass the default argument processing
             // and the invocation would fail.
             if (bDefaultBinder && namedParams == null && argCnt < 6)
-                useCache = true;
-
+            useCache = true;
+            
             if (useCache)
             {
-                MethodBase invokeMethod = GetMethodFromCache (name, bindingFlags, argCnt, providedArgs);
-
-                if (invokeMethod != null)
-                    return ((MethodInfo) invokeMethod).Invoke(target, bindingFlags, binder, providedArgs, culture);
+            MethodBase invokeMethod = GetMethodFromCache (name, bindingFlags, argCnt, providedArgs);
+            
+            if (invokeMethod != null)
+            return ((MethodInfo) invokeMethod).Invoke(target, bindingFlags, binder, providedArgs, culture);
             }
             */
             #endregion
@@ -6482,13 +6510,18 @@ namespace System
         }
 #endif
 
-        // This is used by the ToString() overrides of all reflection types. The legacy behavior has the following problems:
-        //  1. Use only Name for nested types, which can be confused with global types and generic parameters of the same name.
-        //  2. Use only Name for generic parameters, which can be confused with nested types and global types of the same name.
+        // This is used by the ToString() overrides of all reflection types. The legacy behavior has the
+        // following problems:
+        //  1. Use only Name for nested types, which can be confused with global types and generic
+        // parameters of the same name.
+        //  2. Use only Name for generic parameters, which can be confused with nested types and global
+        // types of the same name.
         //  3. Remove the namespace ("System") for all primitive types, which is not language neutral.
-        //  4. MethodBase.ToString() use "ByRef" for byref parameters which is different than Type.ToString().
+        //  4. MethodBase.ToString() use "ByRef" for byref parameters which is different than
+        // Type.ToString().
         //  5. ConstructorInfo.ToString() outputs "Void" as the return type. Why Void?
-        // Since it could be a breaking changes to fix these legacy behaviors, we only use the better and more unambiguous format
+        // Since it could be a breaking changes to fix these legacy behaviors, we only use the better and
+        // more unambiguous format
         // in serialization (MemberInfoSerializationHolder).
         internal override string FormatTypeName(bool serialization)
         {
@@ -6623,7 +6656,8 @@ namespace System
                     if (binder == null)
                         binder = DefaultBinder;
 
-                    // deal with the __COMObject case first. It is very special because from a reflection point of view it has no ctors
+                    // deal with the __COMObject case first. It is very special because from a reflection point of view
+                    // it has no ctors
                     // so a call to GetMemberCons would fail
                     bool publicOnly = (bindingAttr & BindingFlags.NonPublic) == 0;
                     bool wrapExceptions = (bindingAttr & BindingFlags.DoNotWrapExceptions) == 0;
@@ -7469,12 +7503,16 @@ namespace System
 
     // this is the introspection only type. This type overrides all the functions with runtime semantics
     // and throws an exception.
-    // The idea behind this type is that it relieves RuntimeType from doing honerous checks about ReflectionOnly
+    // The idea behind this type is that it relieves RuntimeType from doing honerous checks about
+    // ReflectionOnly
     // context.
     // This type should not derive from RuntimeType but it's doing so for convinience.
-    // That should not present a security threat though it is risky as a direct call to one of the base method
-    // method (RuntimeType) and an instance of this type will work around the reason to have this type in the
-    // first place. However given RuntimeType is not public all its methods are protected and require full trust
+    // That should not present a security threat though it is risky as a direct call to one of the base
+    // method
+    // method (RuntimeType) and an instance of this type will work around the reason to have this type
+    // in the
+    // first place. However given RuntimeType is not public all its methods are protected and require
+    // full trust
     // to be accessed
     [Serializable]
     internal class ReflectionOnlyType : RuntimeType
@@ -7637,8 +7675,10 @@ namespace System
 #if !MONO
 namespace System.Reflection
 {
-    // Reliable hashtable thread safe for multiple readers and single writer. Note that the reliability goes together with thread
-    // safety. Thread safety for multiple readers requires atomic update of the state that also makes makes the table
+    // Reliable hashtable thread safe for multiple readers and single writer. Note that the reliability
+    // goes together with thread
+    // safety. Thread safety for multiple readers requires atomic update of the state that also makes
+    // makes the table
     // reliable in the presence of asynchronous exceptions.
     internal struct CerHashtable<K, V>
         where K : class
@@ -7678,7 +7718,8 @@ namespace System.Reflection
 
                         // This volatile write has to be last. It is going to publish the result atomically.
                         //
-                        // Note that incrementing the count or setting the value does not do any harm without setting the key. The inconsistency will be ignored
+                        // Note that incrementing the count or setting the value does not do any harm without setting the
+                        // key. The inconsistency will be ignored
                         // and it will go away completely during next rehash.
                         Volatile.Write(ref keys[index], key);
 

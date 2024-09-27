@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal static partial class ValueSetFactory
     {
         /// <summary>
-        /// A value set factory that only supports equality and works by including or excluding specific values.
+        /// A value set factory that only supports equality and works by including or excluding specific
+        // values.
         /// </summary>
         private sealed class EnumeratedValueSetFactory<T, TTC> : IValueSetFactory<T>
             where TTC : struct, IEquatableValueTC<T>

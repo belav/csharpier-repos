@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis
         internal readonly string? KeyFilePath;
 
         /// <summary>
-        /// True when the assembly contains a <see cref="System.Reflection.AssemblySignatureKeyAttribute"/> value
+        /// True when the assembly contains a <see cref="System.Reflection.AssemblySignatureKeyAttribute"/>
+        // value
         /// and hence signing requires counter signature verification.
         /// </summary>
         internal readonly bool HasCounterSignature;

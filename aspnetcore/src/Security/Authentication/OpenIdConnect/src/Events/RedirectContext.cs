@@ -7,8 +7,10 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 /// <summary>
-/// When a user configures the <see cref="OpenIdConnectHandler"/> to be notified prior to redirecting to an IdentityProvider
-/// an instance of <see cref="RedirectContext"/> is passed to the <see cref="OpenIdConnectEvents.RedirectToIdentityProvider(RedirectContext)"/>
+/// When a user configures the <see cref="OpenIdConnectHandler"/> to be notified prior to
+// redirecting to an IdentityProvider
+/// an instance of <see cref="RedirectContext"/> is passed to the <see
+// cref="OpenIdConnectEvents.RedirectToIdentityProvider(RedirectContext)"/>
 /// and <see cref="OpenIdConnectEvents.RedirectToIdentityProviderForSignOut(RedirectContext)"/>.
 /// </summary>
 public class RedirectContext : PropertiesContext<OpenIdConnectOptions>

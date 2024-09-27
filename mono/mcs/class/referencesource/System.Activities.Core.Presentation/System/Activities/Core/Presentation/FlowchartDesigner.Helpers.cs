@@ -127,7 +127,8 @@ namespace System.Activities.Core.Presentation
         /// <summary>
         /// for connection:
         /// 1. return all free connection points are available on the object
-        /// 2. return any existing points that are already connected on the object, excluding the unmatched type.
+        /// 2. return any existing points that are already connected on the object, excluding the unmatched
+        // type.
         ///    Fallback: return all connection points of the given object
         /// </summary>
         /// <param name="sourceConnectionPoint"></param>
@@ -394,7 +395,8 @@ namespace System.Activities.Core.Presentation
             return location;
         }
 
-        // This creates a link from modelItems[i] to modelItems[i+1] - foreach i between 0 and modelItems.Count-2;
+        // This creates a link from modelItems[i] to modelItems[i+1] - foreach i between 0 and
+        // modelItems.Count-2;
         void CreateLinks(List<ModelItem> modelItems)
         {
             Fx.Assert(modelItems.Count > 1, "Link creation requires more than one ModelItem");

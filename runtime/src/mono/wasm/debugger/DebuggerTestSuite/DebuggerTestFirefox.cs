@@ -66,8 +66,8 @@ public class DebuggerTestFirefox : DebuggerTestBase
             {
                 var script_id = args?["source"]?["actor"].Value<string>();
                 var url = args?["source"]?["sourceMapBaseURL"]?.Value<string>();
-                /*_testOutput.WriteLine(script_id);
-                _testOutput.WriteLine(args);*/
+/*_testOutput.WriteLine(script_id);
+_testOutput.WriteLine(args);*/
                 if (script_id.StartsWith("dotnet://"))
                 {
                     var dbgUrl = args?["source"]?["dotNetUrl"]?.Value<string>();
@@ -441,7 +441,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
         return ret;
     }
 
-    /* @fn_args is for use with `Runtime.callFunctionOn` only */
+/* @fn_args is for use with `Runtime.callFunctionOn` only */
     internal override async Task<JToken> GetProperties(
         string id,
         JToken fn_args = null,

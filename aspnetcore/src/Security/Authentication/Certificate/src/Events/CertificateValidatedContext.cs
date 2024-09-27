@@ -15,7 +15,8 @@ public class CertificateValidatedContext : ResultContext<CertificateAuthenticati
     /// Creates a new instance of <see cref="CertificateValidatedContext"/>.
     /// </summary>
     /// <param name="context">The HttpContext the validate context applies too.</param>
-    /// <param name="scheme">The scheme used when the Certificate Authentication handler was registered.</param>
+    /// <param name="scheme">The scheme used when the Certificate Authentication handler was
+    // registered.</param>
     /// <param name="options">The <see cref="CertificateAuthenticationOptions"/>.</param>
     public CertificateValidatedContext(
         HttpContext context,

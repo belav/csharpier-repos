@@ -26,7 +26,8 @@ namespace System.Collections.Generic
             // these exist for unbounded collections
             // for instance, you could allow this subset to be defined for i > 10. The set will throw if
             // anything <= 10 is added, but there is no upper bound. These features Head(), Tail(), were punted
-            // in the spec, and are not available, but the framework is there to make them available at some point.
+            // in the spec, and are not available, but the framework is there to make them available at some
+            // point.
             private readonly bool _lBoundActive,
                 _uBoundActive;
             // used to see if the count is out of date

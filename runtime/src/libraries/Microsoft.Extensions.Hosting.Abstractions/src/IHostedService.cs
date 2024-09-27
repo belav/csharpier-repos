@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Hosting
         /// <summary>
         /// Triggered when the application host is performing a graceful shutdown.
         /// </summary>
-        /// <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
+        /// <param name="cancellationToken">Indicates that the shutdown process should no longer be
+        // graceful.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous Stop operation.</returns>
         Task StopAsync(CancellationToken cancellationToken);
     }

@@ -3,7 +3,8 @@
 
 namespace System.Collections.Concurrent.Tests
 {
-    // Allows the ConcurrentDictionary tests to run on targets that do not have the new GetOrAdd/AddOrUpdate overloads.
+    // Allows the ConcurrentDictionary tests to run on targets that do not have the new
+    // GetOrAdd/AddOrUpdate overloads.
     internal static class ConcurrentDictionaryExtensions
     {
         public static TValue GetOrAdd<TKey, TValue, TArg>(

@@ -5,6 +5,7 @@
 #nullable disable
 
 #region Assembly Microsoft.VisualStudio.Debugger.Engine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+//
 // C:\Enlistments\Roslyn2\_Download\Concord\0.0.1+b140327.201033\Microsoft.VisualStudio.Debugger.Engine.dll
 
 #endregion

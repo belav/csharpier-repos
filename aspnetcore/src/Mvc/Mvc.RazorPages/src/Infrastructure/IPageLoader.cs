@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 public interface IPageLoader
 {
     /// <summary>
-    /// Produces a <see cref="CompiledPageActionDescriptor"/> given a <see cref="PageActionDescriptor"/>.
+    /// Produces a <see cref="CompiledPageActionDescriptor"/> given a <see
+    // cref="PageActionDescriptor"/>.
     /// </summary>
     /// <param name="actionDescriptor">The <see cref="PageActionDescriptor"/>.</param>
     /// <returns>The <see cref="CompiledPageActionDescriptor"/>.</returns>

@@ -20,24 +20,29 @@ public class UserValidator<TUser> : IUserValidator<TUser>
     /// <summary>
     /// Creates a new instance of <see cref="UserValidator{TUser}"/>.
     /// </summary>
-    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error messages.</param>
+    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error
+    // messages.</param>
     public UserValidator(IdentityErrorDescriber? errors = null)
     {
         Describer = errors ?? new IdentityErrorDescriber();
     }
 
     /// <summary>
-    /// Gets the <see cref="IdentityErrorDescriber"/> used to provider error messages for the current <see cref="UserValidator{TUser}"/>.
+    /// Gets the <see cref="IdentityErrorDescriber"/> used to provider error messages for the current
+    // <see cref="UserValidator{TUser}"/>.
     /// </summary>
-    /// <value>The <see cref="IdentityErrorDescriber"/> used to provider error messages for the current <see cref="UserValidator{TUser}"/>.</value>
+    /// <value>The <see cref="IdentityErrorDescriber"/> used to provider error messages for the current
+    // <see cref="UserValidator{TUser}"/>.</value>
     public IdentityErrorDescriber Describer { get; private set; }
 
     /// <summary>
     /// Validates the specified <paramref name="user"/> as an asynchronous operation.
     /// </summary>
-    /// <param name="manager">The <see cref="UserManager{TUser}"/> that can be used to retrieve user properties.</param>
+    /// <param name="manager">The <see cref="UserManager{TUser}"/> that can be used to retrieve user
+    // properties.</param>
     /// <param name="user">The user to validate.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the validation operation.</returns>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the validation operation.</returns>
     public virtual async Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user)
     {
         ArgumentNullThrowHelper.ThrowIfNull(manager);

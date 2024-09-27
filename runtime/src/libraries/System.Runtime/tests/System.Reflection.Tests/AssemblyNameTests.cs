@@ -154,7 +154,8 @@ namespace System.Reflection.Tests
 
         public static IEnumerable<object[]> Ctor_ProcessorArchitecture_TestData()
         {
-            // Note that "None" is not valid as part of the name. To get it, the ProcessorArchitecture must be omitted.
+            // Note that "None" is not valid as part of the name. To get it, the ProcessorArchitecture must be
+            // omitted.
             yield return new object[] { "MSIL", ProcessorArchitecture.MSIL };
             yield return new object[] { "msil", ProcessorArchitecture.MSIL };
             yield return new object[] { "mSiL", ProcessorArchitecture.MSIL };
@@ -811,7 +812,8 @@ namespace System.Reflection.Tests
                 versionStr.Split('.').Length < 2
                 || // Version(string) should throw when the minor version is not specified
                 (
-                    // The Version class has components of size int32, while AssemblyName(string) only allows uint16 values
+                    // The Version class has components of size int32, while AssemblyName(string) only allows uint16
+                    // values
                     versionStr.IndexOf(VersionUnspecifiedStr, StringComparison.Ordinal) == -1
                     && versionStr.IndexOf("65536", StringComparison.Ordinal) == -1
                 )
@@ -840,7 +842,8 @@ namespace System.Reflection.Tests
 
             // All components
             yield return new object[] { new Version(1, 1, 1, 1), "1.1.1.1" };
-            // 65535 causes the component to be considered unspecified. That's not very interesting, so using 65534 instead.
+            // 65535 causes the component to be considered unspecified. That's not very interesting, so using
+            // 65534 instead.
             yield return new object[]
             {
                 new Version(65534, 65534, 65534, 65534),
@@ -875,7 +878,8 @@ namespace System.Reflection.Tests
 
             var versionFromStr = new Version(versionStr);
 
-            // The Version class has components of size int32, while AssemblyName(string) only allows uint16 values
+            // The Version class has components of size int32, while AssemblyName(string) only allows uint16
+            // values
             if (versionStr.IndexOf(VersionUnspecifiedStr, StringComparison.Ordinal) == -1)
             {
                 Assert.Equal(expectedVersion, versionFromStr);

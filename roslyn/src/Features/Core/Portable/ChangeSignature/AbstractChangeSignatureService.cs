@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         );
 
         /// <summary>
-        /// A temporarily hack that should be removed once/if https://github.com/dotnet/roslyn/issues/53092 is fixed.
+        /// A temporarily hack that should be removed once/if https://github.com/dotnet/roslyn/issues/53092
+        // is fixed.
         /// </summary>
         protected abstract ImmutableArray<IParameterSymbol> GetParameters(
             ISymbol declarationSymbol
@@ -741,7 +742,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
                 var updatedIndex = updatedSignature.GetUpdatedIndex(originalIndex);
 
-                // If there's no value, then we may be handling a method with more parameters than the original symbol (like BeginInvoke).
+                // If there's no value, then we may be handling a method with more parameters than the original
+                // symbol (like BeginInvoke).
                 parameterToIndexMap[decl] = updatedIndex ?? -1;
             }
 
@@ -820,7 +822,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 }
             }
 
-            // 6. Add the remaining arguments. These will already have names or be params arguments, but may have been removed.
+            // 6. Add the remaining arguments. These will already have names or be params arguments, but may
+            // have been removed.
             var removedParams =
                 updatedSignature.OriginalConfiguration.ParamsParameter != null
                 && updatedSignature.UpdatedConfiguration.ParamsParameter == null;
@@ -853,8 +856,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         }
 
         /// <summary>
-        /// Sometimes signature changes can cascade from a declaration with m parameters to one with n > m parameters, such as
-        /// delegate Invoke methods (m) and delegate BeginInvoke methods (n = m + 2). This method adds on those extra parameters
+        /// Sometimes signature changes can cascade from a declaration with m parameters to one with n > m
+        // parameters, such as
+        /// delegate Invoke methods (m) and delegate BeginInvoke methods (n = m + 2). This method adds on
+        // those extra parameters
         /// to the base <see cref="SignatureChange"/>.
         /// </summary>
         private SignatureChange UpdateSignatureChangeToIncludeExtraParametersFromTheDeclarationSymbol(
@@ -1504,8 +1509,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             if (parameter is null)
                 return 0;
 
-            // If we're in the invocation of an extension method that is called via this.Method(params). The 'this'
-            // argument has an ordinal value of -1 but change signature is expecting all params to start at 0 (including
+            // If we're in the invocation of an extension method that is called via this.Method(params). The
+            // 'this'
+            // argument has an ordinal value of -1 but change signature is expecting all params to start at 0
+            // (including
             // the 'this' param).
             return parameter.ContainingSymbol.IsReducedExtension()
                 ? parameter.Ordinal + 1

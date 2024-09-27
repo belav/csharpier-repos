@@ -149,7 +149,8 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(0, charsWritten);
             Assert.All(buffer, (b => Assert.Equal(0, '\0')));
 
-            // ensure that reader is still able to complete the read operation if a large enough buffer is supplied subsequently
+            // ensure that reader is still able to complete the read operation if a large enough buffer is
+            // supplied subsequently
             result = reader.TryReadTextString(buffer, out charsWritten);
             Assert.True(result);
             Assert.Equal(actualValue.Length, charsWritten);
@@ -178,7 +179,8 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(0, charsWritten);
             Assert.All(buffer, (b => Assert.Equal(0, '\0')));
 
-            // ensure that reader is still able to perform the read operation if a large enough buffer is supplied subsequently
+            // ensure that reader is still able to perform the read operation if a large enough buffer is
+            // supplied subsequently
             result = reader.TryReadTextString(buffer, out charsWritten);
             Assert.True(result);
             Assert.Equal(expectedValue.Length, charsWritten);

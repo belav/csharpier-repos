@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
-///     <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for
+// more information and examples.
 /// </remarks>
 public class StoredProcedureConvention : IEntityTypeAddedConvention
 {
@@ -18,7 +19,8 @@ public class StoredProcedureConvention : IEntityTypeAddedConvention
     ///     Creates a new instance of <see cref="StoredProcedureConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public StoredProcedureConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

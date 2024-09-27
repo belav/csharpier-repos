@@ -328,7 +328,8 @@ namespace System.Data.SqlClient
             // Handle skipping default-valued fields
             while (targetColumn > _currentField)
             {
-                // All intermediate fields must be default fields (i.e. have a "true" entry in SmiDefaultFieldsProperty
+                // All intermediate fields must be default fields (i.e. have a "true" entry in
+                // SmiDefaultFieldsProperty
                 Debug.Assert(
                     (
                         (SmiDefaultFieldsProperty)

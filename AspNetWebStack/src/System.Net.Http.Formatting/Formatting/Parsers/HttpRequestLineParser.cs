@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -26,7 +27,8 @@ namespace System.Net.Http.Formatting.Parsers
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestLineParser"/> class.
         /// </summary>
-        /// <param name="httpRequest"><see cref="HttpUnsortedRequest"/> instance where the request line properties will be set as they are parsed.</param>
+        /// <param name="httpRequest"><see cref="HttpUnsortedRequest"/> instance where the request line
+        // properties will be set as they are parsed.</param>
         /// <param name="maxRequestLineSize">Maximum length of HTTP header.</param>
         public HttpRequestLineParser(HttpUnsortedRequest httpRequest, int maxRequestLineSize)
         {
@@ -61,7 +63,8 @@ namespace System.Net.Http.Formatting.Parsers
 
         /// <summary>
         /// Parse an HTTP request line.
-        /// Bytes are parsed in a consuming manner from the beginning of the request buffer meaning that the same bytes can not be
+        /// Bytes are parsed in a consuming manner from the beginning of the request buffer meaning that the
+        // same bytes can not be
         /// present in the request buffer.
         /// </summary>
         /// <param name="buffer">Request buffer from where request is read</param>

@@ -61,7 +61,8 @@ namespace System.IO.Compression
 
         public unsafe int Inflate(byte[] bytes, int offset, int length)
         {
-            // If Inflate is called on an invalid or unready inflater, return 0 to indicate no bytes have been read.
+            // If Inflate is called on an invalid or unready inflater, return 0 to indicate no bytes have been
+            // read.
             if (length == 0)
                 return 0;
 
@@ -74,7 +75,8 @@ namespace System.IO.Compression
 
         public unsafe int Inflate(Span<byte> destination)
         {
-            // If Inflate is called on an invalid or unready inflater, return 0 to indicate no bytes have been read.
+            // If Inflate is called on an invalid or unready inflater, return 0 to indicate no bytes have been
+            // read.
             if (destination.Length == 0)
                 return 0;
 

@@ -149,7 +149,8 @@ namespace System.Data.ProviderBase
                             if (_items[counter].Tag == tag)
                             {
                                 // NOTE: Check if the returned value is null twice may seem wasteful, but this if for performance
-                                // Since checking for null twice is cheaper than calling both HasTarget and Target OR always attempting to typecast
+                                // Since checking for null twice is cheaper than calling both HasTarget and Target OR always
+                                // attempting to typecast
                                 object value = _items[counter].Target;
                                 if (value != null)
                                 {

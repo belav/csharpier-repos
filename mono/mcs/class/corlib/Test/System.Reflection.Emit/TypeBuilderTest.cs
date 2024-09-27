@@ -2146,8 +2146,8 @@ namespace MonoTests.System.Reflection.Emit
             // works under MS .NET in the first place ???
             /*
             try {
-                tb.DefineNestedType ("AA", TypeAttributes.Public, null, null);
-                Fail ("Nested visibility must be specified.");
+            tb.DefineNestedType ("AA", TypeAttributes.Public, null, null);
+            Fail ("Nested visibility must be specified.");
             }
             catch (ArgumentException) {
             }
@@ -9779,7 +9779,8 @@ namespace MonoTests.System.Reflection.Emit
             catch (TypeLoadException)
             {
                 // Could not load type '...' from assembly
-                // 'MonoTests.System.Reflection.Emit.TypeBuilderTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                // 'MonoTests.System.Reflection.Emit.TypeBuilderTest, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'
             }
             Assert.IsTrue(typeBuilder.IsCreated(), "#2");
             Assert.IsNull(typeBuilder.CreateType(), "#3");
@@ -12433,11 +12434,11 @@ namespace MonoTests.System.Reflection.Emit
         }
 
         /*
-         * Tests for passing user types to Ref.Emit. Currently these only test
-         * whenever the runtime code can handle them without crashing, since we
-         * don't support user types yet.
-         * These tests are disabled for windows since the MS runtime trips on them.
-         */
+        * Tests for passing user types to Ref.Emit. Currently these only test
+        * whenever the runtime code can handle them without crashing, since we
+        * don't support user types yet.
+        * These tests are disabled for windows since the MS runtime trips on them.
+        */
         [Test]
         [Category("NotDotNet")] //Proper UT handling is a mono extension to SRE bugginess
         public void UserTypes()
@@ -12496,14 +12497,14 @@ namespace MonoTests.System.Reflection.Emit
             }
             catch { }
             /* this is mono only
-                        try {
-                            UnmanagedMarshal m = UnmanagedMarshal.DefineCustom (t, "foo", "bar", Guid.Empty);
-                            TypeBuilder tb = module.DefineType (genTypeName (), TypeAttributes.Public, typeof (object));
-                            FieldBuilder fb = tb.DefineField ("Foo", typeof (int), FieldAttributes.Public);
-                            fb.SetMarshal (m);
-                            tb.CreateType ();
-                        } catch {
-                        }
+            try {
+            UnmanagedMarshal m = UnmanagedMarshal.DefineCustom (t, "foo", "bar", Guid.Empty);
+            TypeBuilder tb = module.DefineType (genTypeName (), TypeAttributes.Public, typeof (object));
+            FieldBuilder fb = tb.DefineField ("Foo", typeof (int), FieldAttributes.Public);
+            fb.SetMarshal (m);
+            tb.CreateType ();
+            } catch {
+            }
             */
             try
             {
@@ -12998,9 +12999,12 @@ namespace MonoTests.System.Reflection.Emit
 
         [Test]
         [Category("AndroidNotWorking")]
-        // It's not possible to save the assembly in the current directory on Android and AssemblyBuilder.DefineDynamicModule will not
-        // allow a full path to the assembly to be passed to it. Trying to change the current directory before saving will not work either as
-        // FileStream will then prepend / to the file name (perhaps it's another bug) and write access to the filesystem root is, obviously, denied
+        // It's not possible to save the assembly in the current directory on Android and
+        // AssemblyBuilder.DefineDynamicModule will not
+        // allow a full path to the assembly to be passed to it. Trying to change the current directory
+        // before saving will not work either as
+        // FileStream will then prepend / to the file name (perhaps it's another bug) and write access to
+        // the filesystem root is, obviously, denied
         public void Ldfld_Encoding_10122()
         {
             Build2<Example<int>>();
@@ -13179,16 +13183,16 @@ namespace MonoTests.System.Reflection.Emit
         public void GenericFieldInCreatedType()
         {
             /*
-             * Regression test for #47867.
-             * We construct the following, but only call CreateType on R.
-             *
-             * public class S<T> {
-             *   public T t;
-             * }
-             * public class R {
-             *   public static S<R> sr;
-             * }
-             */
+            * Regression test for #47867.
+            * We construct the following, but only call CreateType on R.
+            *
+            * public class S<T> {
+            *   public T t;
+            * }
+            * public class R {
+            *   public static S<R> sr;
+            * }
+            */
             var aname = new AssemblyName("example1");
             var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 aname,
@@ -13213,18 +13217,18 @@ namespace MonoTests.System.Reflection.Emit
         public void GenericFieldInCreatedTypeIncompleteTypeTLE()
         {
             /*
-             * Regression test for #47867.
-             * We construct the following, but only call CreateType on R.
-             * Then we try to use R.sr which is expected throw a
-             * TLE because S hasn't been created yet.
-             *
-             * public class S<T> {
-             *   public T t;
-             * }
-             * public class R {
-             *   public static S<R> sr;
-             * }
-             */
+            * Regression test for #47867.
+            * We construct the following, but only call CreateType on R.
+            * Then we try to use R.sr which is expected throw a
+            * TLE because S hasn't been created yet.
+            *
+            * public class S<T> {
+            *   public T t;
+            * }
+            * public class R {
+            *   public static S<R> sr;
+            * }
+            */
             var aname = new AssemblyName("example1");
             var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 aname,

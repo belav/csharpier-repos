@@ -31,7 +31,8 @@ public static class RequestDecompressionServiceExtensions
     /// Add request decompression services and configure the related options.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="RequestDecompressionOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="RequestDecompressionOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddRequestDecompression(
         this IServiceCollection services,

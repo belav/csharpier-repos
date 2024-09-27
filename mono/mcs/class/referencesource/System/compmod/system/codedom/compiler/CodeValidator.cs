@@ -14,10 +14,14 @@ namespace System.CodeDom.Compiler
     using System.Globalization;
     using System.IO;
 
-    // This is an internal helper class which walks the tree for the ValidateIdentifiers API in the CodeGenerator. For the most part the generator code has been copied and
-    // turned into validation code. This code will only validate identifiers and types to check that they are ok in a language
-    // independent manner. By default, this will not be turned on. This gives clients of codedom a mechanism to
-    // protect themselves against certain types of code injection attacks (using identifier and type names).
+    // This is an internal helper class which walks the tree for the ValidateIdentifiers API in the
+    // CodeGenerator. For the most part the generator code has been copied and
+    // turned into validation code. This code will only validate identifiers and types to check that
+    // they are ok in a language
+    // independent manner. By default, this will not be turned on. This gives clients of codedom a
+    // mechanism to
+    // protect themselves against certain types of code injection attacks (using identifier and type
+    // names).
     // You can pass in any node in the tree that is a subclass of CodeObject.
     internal class CodeValidator
     {
@@ -229,7 +233,8 @@ namespace System.CodeDom.Compiler
         private void ValidateTypeDeclaration(CodeTypeDeclaration e)
         {
             // This function can be called recursively and will modify the global variable currentClass
-            // We will save currentClass to a local, modify it to do whatever we want and restore it back when we exit so that it is re-entrant.
+            // We will save currentClass to a local, modify it to do whatever we want and restore it back when
+            // we exit so that it is re-entrant.
             CodeTypeDeclaration savedClass = currentClass;
             currentClass = e;
 

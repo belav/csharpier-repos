@@ -116,12 +116,14 @@ public class RazorComponentResultTest
             MaskComponentIds(GetStringContent(responseBody))
         );
 
-        // Assert 2: Result task remains incomplete for as long as the component's loading operation remains in flight
+        // Assert 2: Result task remains incomplete for as long as the component's loading operation remains
+        // in flight
         // This keeps the HTTP response open
         await Task.Yield();
         Assert.False(completionTask.IsCompleted);
 
-        // Act/Assert 3: When loading completes, it emits a streaming batch update and completes the response
+        // Act/Assert 3: When loading completes, it emits a streaming batch update and completes the
+        // response
         tcs.SetResult();
         await completionTask;
         Assert.Equal(
@@ -151,7 +153,8 @@ public class RazorComponentResultTest
             MaskComponentIds(GetStringContent(responseBody))
         );
 
-        // Act/Assert 2: When loading completes, it emits a streaming batch update with only one copy of the final output,
+        // Act/Assert 2: When loading completes, it emits a streaming batch update with only one copy of the
+        // final output,
         // despite the RenderBatch containing two diffs from the component
         tcs.SetResult();
         await completionTask;
@@ -384,7 +387,8 @@ public class RazorComponentResultTest
         var testContext = PrepareVaryStreamingScenariosTests();
         var initialOutputTask = Task.WhenAll(testContext.Renderer.NonStreamingPendingTasks);
 
-        // Act/Assert: Even if all other blocking tasks complete, we don't produce output until the top-level
+        // Act/Assert: Even if all other blocking tasks complete, we don't produce output until the
+        // top-level
         // nonstreaming component completes
         testContext.WithinNestedNonstreamingRegionTask.SetResult();
         await Task.Yield(); // Just to show it's still not completed after
@@ -431,7 +435,8 @@ public class RazorComponentResultTest
         Assert.Contains("[Within streaming region: <!--bl:X-->Loading...<!--/bl:X-->]", html);
         Assert.DoesNotContain("blazor-ssr", html);
 
-        // Assert: No boundary markers around nonstreaming components, even if they are nested in a streaming region
+        // Assert: No boundary markers around nonstreaming components, even if they are nested in a
+        // streaming region
         Assert.Contains("[Top level component: Loaded]", html);
         Assert.Contains("[Within nested nonstreaming region: Loaded]", html);
 
@@ -445,7 +450,8 @@ public class RazorComponentResultTest
         );
     }
 
-    // We don't want these tests to be hardcoded for specific component ID numbers, so replace them all with X for assertions
+    // We don't want these tests to be hardcoded for specific component ID numbers, so replace them all
+    // with X for assertions
     private static readonly Regex TemplateElementComponentIdRegex = new Regex(
         "blazor-component-id=\"\\d+\""
     );
@@ -545,9 +551,12 @@ public class RazorComponentResultTest
         return result;
     }
 
-    // Some tests want to observe the output state when some content has been written, but without waiting for
-    // the whole streaming task to complete. There isn't any public API that exposes this specific phase, so
-    // rather than making the renderer track additional tasks that would only be used in tests, this allows the
+    // Some tests want to observe the output state when some content has been written, but without
+    // waiting for
+    // the whole streaming task to complete. There isn't any public API that exposes this specific
+    // phase, so
+    // rather than making the renderer track additional tasks that would only be used in tests, this
+    // allows the
     // tests to continue once the first batch of output was written.
     private static async Task WaitForContentWrittenAsync(Stream stream, TimeSpan? timeout = default)
     {

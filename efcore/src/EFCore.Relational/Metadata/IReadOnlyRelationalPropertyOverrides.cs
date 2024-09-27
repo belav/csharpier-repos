@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents property facet overrides for a particular table-like store object.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IReadOnlyRelationalPropertyOverrides : IReadOnlyAnnotatable
 {
@@ -24,7 +25,8 @@ public interface IReadOnlyRelationalPropertyOverrides : IReadOnlyAnnotatable
     StoreObjectIdentifier StoreObject { get; }
 
     /// <summary>
-    ///     Gets the column that the property maps to when targeting the specified table-like store object.
+    ///     Gets the column that the property maps to when targeting the specified table-like store
+    // object.
     /// </summary>
     string? ColumnName { get; }
 

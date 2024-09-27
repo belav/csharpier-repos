@@ -145,9 +145,12 @@ namespace System.Data.Entity.Design
             }
 
             /// <summary>
-            /// Attempts to get the primitive store type for the given type name. This method takes the target .NET Framework
-            /// into account and only returns primitive types that are supported by the Framework that is being targeted.
-            /// If a type is recognized but excluded because it is not supported by the target Framework then the excludedForTarget
+            /// Attempts to get the primitive store type for the given type name. This method takes the target
+            // .NET Framework
+            /// into account and only returns primitive types that are supported by the Framework that is being
+            // targeted.
+            /// If a type is recognized but excluded because it is not supported by the target Framework then
+            // the excludedForTarget
             /// flag is set to true.
             /// </summary>
             internal bool TryGetStorePrimitiveType(
@@ -163,8 +166,10 @@ namespace System.Data.Entity.Design
                     out primitiveType
                 );
 
-                // If targetting 4.0 using 4.5 then we need to ignore geometry and geography types just like we would have done when
-                // generating with 4.0. We can only get the base spatial types since we won't reverse engineer to derived spatial
+                // If targetting 4.0 using 4.5 then we need to ignore geometry and geography types just like we
+                // would have done when
+                // generating with 4.0. We can only get the base spatial types since we won't reverse engineer to
+                // derived spatial
                 // types. We don't need to do anything for enums because we will never reverse engineer to an enum.
                 if (
                     success

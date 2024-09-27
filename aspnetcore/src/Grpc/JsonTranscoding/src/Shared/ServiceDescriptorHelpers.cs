@@ -358,10 +358,13 @@ internal static class ServiceDescriptorHelpers
         }
     }
 
-    // Transcoding assumes that the app is referencing Google.Api.CommonProtos and HttpRule is from that assembly.
-    // However, it's possible the app has compiled http.proto with Grpc.Tools, so the extension value is HttpRule from a different assembly.
+    // Transcoding assumes that the app is referencing Google.Api.CommonProtos and HttpRule is from that
+    // assembly.
+    // However, it's possible the app has compiled http.proto with Grpc.Tools, so the extension value is
+    // HttpRule from a different assembly.
     // This custom extension uses the HttpRule field number but has a return type of object.
-    // The method always returns the extension value, and the calling code can convert it to the expected type.
+    // The method always returns the extension value, and the calling code can convert it to the
+    // expected type.
     // See https://github.com/protocolbuffers/protobuf/issues/9626 for more details.
     private static readonly Extension<MethodOptions, object> UntypedHttpExtension = new Extension<
         MethodOptions,
@@ -375,8 +378,10 @@ internal static class ServiceDescriptorHelpers
     {
         var options = methodDescriptor.GetOptions();
 
-        // The untyped extension always returns the extension value. If the type is already the expected HttpRule then use it directly.
-        // A different message indicates a custom HttpRule was used. Convert the message to bytes and reparse it to the known HttpRule type.
+        // The untyped extension always returns the extension value. If the type is already the expected
+        // HttpRule then use it directly.
+        // A different message indicates a custom HttpRule was used. Convert the message to bytes and
+        // reparse it to the known HttpRule type.
         var extensionValue = options?.GetExtension(UntypedHttpExtension);
         httpRule = extensionValue switch
         {

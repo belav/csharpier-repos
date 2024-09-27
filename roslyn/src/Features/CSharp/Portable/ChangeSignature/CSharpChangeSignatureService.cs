@@ -189,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             var symbolInfo = semanticModel.GetSymbolInfo(matchingNode, cancellationToken);
             var parameterIndex = 0;
 
-            // If we're being called on an invocation and not a definition we need to find the selected argument index based on the original definition.
+            // If we're being called on an invocation and not a definition we need to find the selected argument
+            // index based on the original definition.
             var argumentList = matchingNode is ObjectCreationExpressionSyntax objCreation
                 ? objCreation.ArgumentList
                 : matchingNode.GetAncestorOrThis<InvocationExpressionSyntax>()?.ArgumentList;
@@ -278,7 +279,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 return node;
             }
 
-            // TODO: file bug about this: var invocation = csnode.Ancestors().FirstOrDefault(a => a.Kind == SyntaxKind.InvocationExpression);
+            // TODO: file bug about this: var invocation = csnode.Ancestors().FirstOrDefault(a => a.Kind ==
+            // SyntaxKind.InvocationExpression);
             var matchingNode = node.AncestorsAndSelf()
                 .FirstOrDefault(n => _updatableAncestorKinds.Contains(n.Kind()));
             if (matchingNode == null)
@@ -1224,7 +1226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         {
             RoslynDebug.Assert(parameterSymbol.IsParams);
 
-            // These arguments are part of a params array, and should not have any modifiers, making it okay to just use their expressions.
+            // These arguments are part of a params array, and should not have any modifiers, making it okay to
+            // just use their expressions.
             var listOfArguments = SeparatedList(
                 newArguments
                     .Skip(indexInExistingList)

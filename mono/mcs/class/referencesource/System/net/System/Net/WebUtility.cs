@@ -444,14 +444,16 @@ namespace System.Net
                 catch (ConfigurationException)
                 {
                     // Continue with default values
-                    // HtmlDecode and related methods can still be called and format the error page intended for the client
+                    // HtmlDecode and related methods can still be called and format the error page intended for the
+                    // client
                     // No need to retry again to initialize from the config in case of config errors
                     decodingConformance = defaultDecodeConformance;
                 }
                 catch
                 {
                     // DevDiv: 642025
-                    // ASP.NET uses own ConfigurationManager which can throw in more situations than config errors (i.e. BadRequest)
+                    // ASP.NET uses own ConfigurationManager which can throw in more situations than config errors (i.e.
+                    // BadRequest)
                     // It's ok to swallow the exception here and continue using the default value
                     // Try to initialize again the next time
                     return defaultDecodeConformance;
@@ -498,14 +500,16 @@ namespace System.Net
                 catch (ConfigurationException)
                 {
                     // Continue with default values
-                    // HtmlEncode and related methods can still be called and format the error page intended for the client
+                    // HtmlEncode and related methods can still be called and format the error page intended for the
+                    // client
                     // No need to retry again to initialize from the config in case of config errors
                     encodingConformance = defaultEncodeConformance;
                 }
                 catch
                 {
                     // DevDiv: 642025
-                    // ASP.NET uses own ConfigurationManager which can throw in more situations than config errors (i.e. BadRequest)
+                    // ASP.NET uses own ConfigurationManager which can throw in more situations than config errors (i.e.
+                    // BadRequest)
                     // It's ok to swallow the exception here and continue using the default value
                     // Try to initialize again the next time
                     return defaultEncodeConformance;
@@ -908,7 +912,8 @@ namespace System.Net
         // *** Source: alm/tfs_core/Framework/Common/UriUtility/HttpUtility.cs
         // This specific code was copied from above ASP.NET codebase.
 
-        // Internal class to facilitate URL decoding -- keeps char buffer and byte buffer, allows appending of either chars or bytes
+        // Internal class to facilitate URL decoding -- keeps char buffer and byte buffer, allows appending
+        // of either chars or bytes
         private class UrlDecoder
         {
             private int _bufferSize;

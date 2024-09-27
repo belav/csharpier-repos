@@ -51,7 +51,8 @@ namespace ILCompiler
     public partial class CompilerTypeSystemContext
     {
         /// <summary>
-        /// For a shared (canonical) instance method on a generic valuetype, gets a method that can be used to call the
+        /// For a shared (canonical) instance method on a generic valuetype, gets a method that can be used
+        // to call the
         /// method given a boxed version of the generic valuetype as 'this' pointer.
         /// </summary>
         public MethodDesc GetSpecialUnboxingThunk(
@@ -534,7 +535,8 @@ namespace ILCompiler
                     )
                 );
 
-                // Load the MethodTable of the boxed valuetype (this is the hidden generic context parameter expected
+                // Load the MethodTable of the boxed valuetype (this is the hidden generic context parameter
+                // expected
                 // by the (canonical) instance method, but normally not part of the signature in IL).
                 codeStream.EmitLdArg(0);
                 codeStream.Emit(ILOpcode.ldfld, emit.NewToken(eeTypeField));
@@ -664,7 +666,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Represents an instance method on a generic valuetype with an explicit instantiation parameter in the
+        /// Represents an instance method on a generic valuetype with an explicit instantiation parameter in
+        // the
         /// signature. This is so that we can refer to the parameter from IL. References to this method will
         /// be replaced by the actual instance method after codegen is done.
         /// </summary>

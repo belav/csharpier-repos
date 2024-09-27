@@ -85,8 +85,10 @@ namespace System.DirectoryServices
                 catch (System.Runtime.InteropServices.COMException e)
                 {
                     if (e.ErrorCode != unchecked((int)0x80004005) || (value == null))
-                        // WinNT provider throws E_FAIL when null value is specified though actually ADS_PROPERTY_CLEAR option is used, need to catch exception
-                        // here. But at the same time we don't want to catch the exception if user explicitly sets the value to null.
+                        // WinNT provider throws E_FAIL when null value is specified though actually ADS_PROPERTY_CLEAR
+                        // option is used, need to catch exception
+                        // here. But at the same time we don't want to catch the exception if user explicitly sets the value
+                        // to null.
                         throw;
                 }
 
@@ -98,7 +100,8 @@ namespace System.DirectoryServices
 
                 if (value is Array)
                 {
-                    // byte[] is a special case, we will follow what ADSI is doing, it must be an octet string. So treat it as a single valued attribute
+                    // byte[] is a special case, we will follow what ADSI is doing, it must be an octet string. So treat
+                    // it as a single valued attribute
                     if (value is byte[])
                         _changeList.Add(value);
                     else if (value is object[])
@@ -218,7 +221,8 @@ namespace System.DirectoryServices
                 }
                 catch (ArgumentException)
                 {
-                    // exception is thrown because value does not exist in the current cache, but it actually might do exist just because it is a very
+                    // exception is thrown because value does not exist in the current cache, but it actually might do
+                    // exist just because it is a very
                     // large multivalued attribute, the value has not been downloaded yet.
                     OnRemoveComplete(0, value);
                 }

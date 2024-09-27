@@ -95,21 +95,29 @@ internal partial class RemoteRenderer : WebRenderer
         if (_unacknowledgedRenderBatches.Count >= _options.MaxBufferedUnacknowledgedRenderBatches)
         {
             // If we got here it means we are at max capacity, so we don't want to actually process the queue,
-            // as we have a client that is not acknowledging render batches fast enough (something we consider needs
+            // as we have a client that is not acknowledging render batches fast enough (something we consider
+            // needs
             // to be fast).
             // The result is something as follows:
             // Lets imagine an extreme case where the server produces a new batch every millisecond.
             // Lets say the client is able to ACK a batch every 100 milliseconds.
-            // When the app starts the client might see the sequence 0->(MaxUnacknowledgedRenderBatches-1) and then
-            // after 100 milliseconds it sees it jump to 1xx, then to 2xx where xx is something between {0..99} the
-            // reason for this is that the server slows down rendering new batches to as fast as the client can consume
+            // When the app starts the client might see the sequence 0->(MaxUnacknowledgedRenderBatches-1) and
+            // then
+            // after 100 milliseconds it sees it jump to 1xx, then to 2xx where xx is something between {0..99}
+            // the
+            // reason for this is that the server slows down rendering new batches to as fast as the client can
+            // consume
             // them.
-            // Similarly, if a client were to send events at a faster pace than the server can consume them, the server
-            // would still process the events, but would not produce new renders until it gets an ack that frees up space
+            // Similarly, if a client were to send events at a faster pace than the server can consume them, the
+            // server
+            // would still process the events, but would not produce new renders until it gets an ack that frees
+            // up space
             // for a new render.
-            // We should never see UnacknowledgedRenderBatches.Count > _options.MaxBufferedUnacknowledgedRenderBatches
+            // We should never see UnacknowledgedRenderBatches.Count >
+            // _options.MaxBufferedUnacknowledgedRenderBatches
 
-            // But if we do, it's safer to simply disable the rendering in that case too instead of allowing batches to
+            // But if we do, it's safer to simply disable the rendering in that case too instead of allowing
+            // batches to
             Log.FullUnacknowledgedRenderBatchesQueue(_logger);
 
             return;
@@ -241,9 +249,12 @@ internal partial class RemoteRenderer : WebRenderer
             Log.SendBatchDataFailed(_logger, e);
         }
 
-        // We don't have to remove the entry from the list of pending batches if we fail to send it or the client fails to
-        // acknowledge that it received it. We simply keep it in the queue until we receive another ack from the client for
-        // a later batch (clientBatchId > thisBatchId) or the circuit becomes disconnected and we ultimately get evicted and
+        // We don't have to remove the entry from the list of pending batches if we fail to send it or the
+        // client fails to
+        // acknowledge that it received it. We simply keep it in the queue until we receive another ack from
+        // the client for
+        // a later batch (clientBatchId > thisBatchId) or the circuit becomes disconnected and we ultimately
+        // get evicted and
         // disposed.
     }
 
@@ -257,7 +268,8 @@ internal partial class RemoteRenderer : WebRenderer
 
         // When clients send acks we know for sure they received and applied the batch.
         // We send batches right away, and hold them in memory until we receive an ACK.
-        // If one or more client ACKs get lost (e.g., with long polling, client->server delivery is not guaranteed)
+        // If one or more client ACKs get lost (e.g., with long polling, client->server delivery is not
+        // guaranteed)
         // we might receive an ack for a higher batch.
         // We confirm all previous batches at that point (because receiving an ack is guarantee
         // from the client that it has received and successfully applied all batches up to that point).
@@ -268,14 +280,20 @@ internal partial class RemoteRenderer : WebRenderer
         // If that were to be the case, it would just be enough to relax the checks here and simply skip
         // the message.
 
-        // A batch might get lost when we send it to the client, because the client might disconnect before receiving and processing it.
-        // In this case, once it reconnects the server will re-send any unacknowledged batches, some of which the
-        // client might have received and even believe it did send back an acknowledgement for. The client handles
+        // A batch might get lost when we send it to the client, because the client might disconnect before
+        // receiving and processing it.
+        // In this case, once it reconnects the server will re-send any unacknowledged batches, some of
+        // which the
+        // client might have received and even believe it did send back an acknowledgement for. The client
+        // handles
         // those by re-acknowledging.
 
-        // Even though we're not on the renderer sync context here, it's safe to assume ordered execution of the following
-        // line (i.e., matching the order in which we received batch completion messages) based on the fact that SignalR
-        // synchronizes calls to hub methods. That is, it won't issue more than one call to this method from the same hub
+        // Even though we're not on the renderer sync context here, it's safe to assume ordered execution of
+        // the following
+        // line (i.e., matching the order in which we received batch completion messages) based on the fact
+        // that SignalR
+        // synchronizes calls to hub methods. That is, it won't issue more than one call to this method from
+        // the same hub
         // at the same time on different threads.
 
         if (
@@ -296,7 +314,8 @@ internal partial class RemoteRenderer : WebRenderer
             )
             {
                 lastBatchId = nextUnacknowledgedBatch.BatchId;
-                // At this point the queue is definitely not full, we have at least emptied one slot, so we allow a further
+                // At this point the queue is definitely not full, we have at least emptied one slot, so we allow a
+                // further
                 // full queue log entry the next time it fills up.
                 _unacknowledgedRenderBatches.TryDequeue(out _);
                 ProcessPendingBatch(errorMessageOrNull, nextUnacknowledgedBatch);
@@ -304,7 +323,8 @@ internal partial class RemoteRenderer : WebRenderer
 
             if (lastBatchId < incomingBatchId)
             {
-                // This exception is due to a bad client input, so we mark it as such to prevent logging it as a warning and
+                // This exception is due to a bad client input, so we mark it as such to prevent logging it as a
+                // warning and
                 // flooding the logs with warnings.
                 throw new InvalidOperationException(
                     $"Received an acknowledgement for batch with id '{incomingBatchId}' when the last batch produced was '{lastBatchId}'."

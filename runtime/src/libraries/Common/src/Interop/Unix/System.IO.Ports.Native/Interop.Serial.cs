@@ -37,7 +37,8 @@ internal static partial class Interop
         /// <param name="count">The size of the buffer</param>
         /// <returns>
         /// Returns the number of bytes read on success; otherwise, -1 is returned
-        /// Note - on fail. the position of the stream may change depending on the platform; consult man 2 read for more info
+        /// Note - on fail. the position of the stream may change depending on the platform; consult man 2
+        // read for more info
         /// </returns>
         [LibraryImport(
             Libraries.IOPortsNative,
@@ -67,8 +68,10 @@ internal static partial class Interop
         /// </summary>
         /// <param name="pollEvents">A list of PollEvent entries</param>
         /// <param name="eventCount">The number of entries in pollEvents</param>
-        /// <param name="timeout">The amount of time to wait; -1 for infinite, 0 for immediate return, and a positive number is the number of milliseconds</param>
-        /// <param name="triggered">The number of events triggered (i.e. the number of entries in pollEvents with a non-zero TriggeredEvents). May be zero in the event of a timeout.</param>
+        /// <param name="timeout">The amount of time to wait; -1 for infinite, 0 for immediate return, and a
+        // positive number is the number of milliseconds</param>
+        /// <param name="triggered">The number of events triggered (i.e. the number of entries in pollEvents
+        // with a non-zero TriggeredEvents). May be zero in the event of a timeout.</param>
         /// <returns>An error or Error.SUCCESS.</returns>
         [LibraryImport(Libraries.IOPortsNative, EntryPoint = "SystemIoPortsNative_Poll")]
         private static unsafe partial Error Poll(
@@ -83,8 +86,10 @@ internal static partial class Interop
         /// </summary>
         /// <param name="fd">The descriptor to poll</param>
         /// <param name="events">The events to poll for</param>
-        /// <param name="timeout">The amount of time to wait; -1 for infinite, 0 for immediate return, and a positive number is the number of milliseconds</param>
-        /// <param name="triggered">The events that were returned by the poll call. May be PollEvents.POLLNONE in the case of a timeout.</param>
+        /// <param name="timeout">The amount of time to wait; -1 for infinite, 0 for immediate return, and a
+        // positive number is the number of milliseconds</param>
+        /// <param name="triggered">The events that were returned by the poll call. May be
+        // PollEvents.POLLNONE in the case of a timeout.</param>
         /// <returns>An error or Error.SUCCESS.</returns>
         internal static unsafe Error Poll(
             SafeHandle fd,

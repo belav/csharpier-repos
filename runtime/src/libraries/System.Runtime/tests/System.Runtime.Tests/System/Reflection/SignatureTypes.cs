@@ -13,7 +13,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void IsSignatureType()
         {
-            // Executing [Theory] logic manually. Signature Types cannot be used in theory data because Xunit preemptively invokes an unguarded
+            // Executing [Theory] logic manually. Signature Types cannot be used in theory data because Xunit
+            // preemptively invokes an unguarded
             // System.Type pretty printer that invokes members that Signature Types don't support.
             foreach (object[] pair in IsSignatureTypeTestData)
             {
@@ -248,7 +249,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void SigTypeResolutionResilience()
         {
-            // Make sure the framework can't be tricked into throwing an exception because it tried to look up a nonexistent method generic parameter
+            // Make sure the framework can't be tricked into throwing an exception because it tried to look up a
+            // nonexistent method generic parameter
             // or trying to construct a generic type where the constraints don't validate.
             Type t = typeof(TestClass4<>);
             Type[] args =
@@ -657,7 +659,8 @@ namespace System.Reflection.Tests
             Assert.Equal(MemberTypes.TypeInfo, type.MemberType);
             Assert.Same(type, type.UnderlyingSystemType);
 
-            // SignatureTypes don't override Equality/GetHashCode at this time, but they don't promise never to do so either.
+            // SignatureTypes don't override Equality/GetHashCode at this time, but they don't promise never to
+            // do so either.
             // Thus, we'll only test the most basic behavior.
             Assert.True(type.Equals((object)type));
             Assert.True(type.Equals((Type)type));

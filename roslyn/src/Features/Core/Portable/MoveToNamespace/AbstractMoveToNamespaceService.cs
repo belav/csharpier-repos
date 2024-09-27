@@ -306,7 +306,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                         compilationUnit
                     );
                     // We are trying to move a selected type from global namespace to the target namespace.
-                    // This is supported if the selected type is the only member declared in the global namespace in this document.
+                    // This is supported if the selected type is the only member declared in the global namespace in
+                    // this document.
                     // (See `TryAnalyzeNamedTypeAsync`)
                     Debug.Assert(compilationUnitMembers.Count == 1);
                     return compilationUnitMembers.SelectAsArray(member =>
@@ -428,7 +429,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             CancellationToken cancellationToken
         )
         {
-            // Need to make sure elastic trivia is formatted properly before pushing the text to other documents.
+            // Need to make sure elastic trivia is formatted properly before pushing the text to other
+            // documents.
             var formattedDocument = await Formatter
                 .FormatAsync(
                     document,

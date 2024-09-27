@@ -158,7 +158,7 @@ namespace MonoTests.System.Web.UI.WebControls
             d.Visible = false;
             Assert.IsFalse(d.Visible, "Visible");
 
-            /* Visible remains in the ViewState */
+/* Visible remains in the ViewState */
             Assert.AreEqual(1, d.GetViewState().Count, "ViewState.Count");
         }
 
@@ -186,7 +186,7 @@ namespace MonoTests.System.Web.UI.WebControls
             d.SortExpression = null;
             d.Visible = false;
 
-            /* Visible remains in the ViewState */
+/* Visible remains in the ViewState */
             Assert.AreEqual(1, d.GetViewState().Count, "ViewState.Count after clear");
         }
 
@@ -204,9 +204,9 @@ namespace MonoTests.System.Web.UI.WebControls
             DataGrid grid = new DataGrid();
             TestDataGridColumn d = new TestDataGridColumn();
 
-            /* Test DesignMode if I find a class that
-             * implements ISite
-             */
+/* Test DesignMode if I find a class that
+* implements ISite
+*/
             Assert.IsNull(d.GetOwner(), "Owner before Add");
 
             grid.Columns.Add(d);
@@ -241,9 +241,9 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("*item-style*", d.ItemStyle.CssClass, "Item style");
             Assert.AreEqual(SDColor.RoyalBlue, d.ItemStyle.BackColor, "Item background");
 
-            /* not sorted, text, no sort expression, no
-             * header/footer text
-             */
+/* not sorted, text, no sort expression, no
+* header/footer text
+*/
             TableCell header_cell_ns_t_ne_nhft = new TableCell();
             TableCell footer_cell_ns_t_ne_nhft = new TableCell();
             TableCell item_cell_ns_t_ne_nhft = new TableCell();
@@ -489,9 +489,9 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual(String.Empty, pager_cell_ns_t_ne_nhft.Text, "Pager ns_t_ne_nhft text");
 
-            /* sorted, text, no sort expression, no
-             * header/footer text
-             */
+/* sorted, text, no sort expression, no
+* header/footer text
+*/
 
             grid.AllowSorting = true;
 
@@ -736,9 +736,9 @@ namespace MonoTests.System.Web.UI.WebControls
             );
             Assert.AreEqual(String.Empty, pager_cell_s_t_ne_nhft.Text, "Pager s_t_ne_nhft text");
 
-            /* sorted, text, sort expression, no
-             * header/footer text
-             */
+/* sorted, text, sort expression, no
+* header/footer text
+*/
 
             d.SortExpression = "*sort_expression*";
 
@@ -989,14 +989,14 @@ namespace MonoTests.System.Web.UI.WebControls
                 "Header s_t_e_nhft LinkButton command argument"
             );
 
-            /* XXXXXX  Image starts here XXXXXX */
+/* XXXXXX  Image starts here XXXXXX */
 
 
 
 
-            /* not sorted, image, no sort expression, no
-             * header/footer text
-             */
+/* not sorted, image, no sort expression, no
+* header/footer text
+*/
 
             d.HeaderImageUrl = "*header_image_url*";
             d.SortExpression = null;
@@ -1260,9 +1260,9 @@ namespace MonoTests.System.Web.UI.WebControls
                 "Header ns_i_ne_nhft Image command name"
             );
 
-            /* sorted, image, no sort expression, no
-             * header/footer text
-             */
+/* sorted, image, no sort expression, no
+* header/footer text
+*/
 
             grid.AllowSorting = true;
 
@@ -1515,9 +1515,9 @@ namespace MonoTests.System.Web.UI.WebControls
                 "Header s_i_ne_nhft Image command name"
             );
 
-            /* sorted, image, sort expression, no
-             * header/footer text
-             */
+/* sorted, image, sort expression, no
+* header/footer text
+*/
 
             d.SortExpression = "*sort_expression*";
 

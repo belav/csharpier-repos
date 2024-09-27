@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.CommandLine.Binding;
@@ -103,7 +104,8 @@ public class ModelBindingCommandHandler : BindingHandler
     /// Binds a method or constructor parameter based on the specified <see cref="CliArgument"/>.
     /// </summary>
     /// <param name="param">The parameter to bind.</param>
-    /// <param name="argument">The argument whose parsed result will be the source of the bound value.</param>
+    /// <param name="argument">The argument whose parsed result will be the source of the bound
+    // value.</param>
     public void BindParameter(ParameterInfo param, CliArgument argument)
     {
         var _ =
@@ -115,7 +117,8 @@ public class ModelBindingCommandHandler : BindingHandler
     /// Binds a method or constructor parameter based on the specified <see cref="CliOption"/>.
     /// </summary>
     /// <param name="param">The parameter to bind.</param>
-    /// <param name="option">The option whose parsed result will be the source of the bound value.</param>
+    /// <param name="option">The option whose parsed result will be the source of the bound
+    // value.</param>
     public void BindParameter(ParameterInfo param, CliOption option)
     {
         var _ = option ?? throw new InvalidOperationException("You must specify an option to bind");

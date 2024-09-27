@@ -14,12 +14,14 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
 
     /// <devdoc>
-    /// <para>Interacts with the parser to build a <see cref='System.Web.UI.WebControls.HyperLink'/>.</para>
+    /// <para>Interacts with the parser to build a <see
+    // cref='System.Web.UI.WebControls.HyperLink'/>.</para>
     /// </devdoc>
     public class HyperLinkControlBuilder : ControlBuilder
     {
         /// <devdoc>
-        ///    <para>Gets a value to indicate whether or not white spaces are allowed in literals for this control. This
+        ///    <para>Gets a value to indicate whether or not white spaces are allowed in literals for this
+        // control. This
         ///       property is read-only.</para>
         /// </devdoc>
         public override bool AllowWhitespaceLiterals()
@@ -46,13 +48,15 @@ namespace System.Web.UI.WebControls
         private bool _textSetByAddParsedSubObject = false;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.HyperLink'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.HyperLink'/>
+        // class.</para>
         /// </devdoc>
         public HyperLink()
             : base(HtmlTextWriterTag.A) { }
 
         /// <devdoc>
-        ///    <para>Gets or sets the URL reference to an image to display as an alternative to plain text for the
+        ///    <para>Gets or sets the URL reference to an image to display as an alternative to plain text
+        // for the
         ///       hyperlink.</para>
         /// </devdoc>
         [
@@ -150,7 +154,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>Gets or sets the target window or frame the contents of
-        ///       the <see cref='System.Web.UI.WebControls.HyperLink'/> will be displayed into when clicked.</para>
+        ///       the <see cref='System.Web.UI.WebControls.HyperLink'/> will be displayed into when
+        // clicked.</para>
         /// </devdoc>
         [
             WebCategory("Navigation"),
@@ -170,7 +175,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets the text displayed for the <see cref='System.Web.UI.WebControls.HyperLink'/>.</para>
+        ///       Gets or sets the text displayed for the <see
+        // cref='System.Web.UI.WebControls.HyperLink'/>.</para>
         /// </devdoc>
         [
             Localizable(true),
@@ -199,7 +205,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Adds the attribututes of the a <see cref='System.Web.UI.WebControls.HyperLink'/> to the output
+        /// <para>Adds the attribututes of the a <see cref='System.Web.UI.WebControls.HyperLink'/> to the
+        // output
         ///    stream for rendering.</para>
         /// </devdoc>
         protected override void AddAttributesToRender(HtmlTextWriter writer)
@@ -251,7 +258,8 @@ namespace System.Web.UI.WebControls
                     string currentText = Text;
                     if (currentText.Length != 0)
                     {
-                        //Text was set to String.Empty, which cause clearing all child controls when LoadViewState(DevDiv Bugs 159505)
+                        //Text was set to String.Empty, which cause clearing all child controls when LoadViewState(DevDiv
+                        // Bugs 159505)
                         Text = null;
                         base.AddParsedSubObject(new LiteralControl(currentText));
                     }

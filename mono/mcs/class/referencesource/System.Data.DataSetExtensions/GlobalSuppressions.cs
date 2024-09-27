@@ -7,7 +7,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-// They recommend something along the lines of 'TypedBaseDataTable' instead of 'TypedTableBase', this can't be changed at this point
+// They recommend something along the lines of 'TypedBaseDataTable' instead of 'TypedTableBase',
+// this can't be changed at this point
 [module: SuppressMessage(
     "Microsoft.Naming",
     "CA1710:IdentifiersShouldHaveCorrectSuffix",

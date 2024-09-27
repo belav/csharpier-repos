@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * ReadWriteObjectLock
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* ReadWriteObjectLock
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 
 namespace System.Web.Util
 {
@@ -90,19 +90,19 @@ namespace System.Web.Util
                 Monitor.PulseAll(this);
             }
         }
-        /*
-                internal virtual void AssertReadLock() {
-        #if DBG
-                    Debug.Assert(_lock > 0);
-        #endif
-                }
-        
-        
-                internal virtual void AssertWriteLock() {
-        #if DBG
-                    Debug.Assert(_lock == -1);
-        #endif
-                }
-        */
+/*
+internal virtual void AssertReadLock() {
+#if DBG
+Debug.Assert(_lock > 0);
+#endif
+}
+
+
+internal virtual void AssertWriteLock() {
+#if DBG
+Debug.Assert(_lock == -1);
+#endif
+}
+*/
     }
 }

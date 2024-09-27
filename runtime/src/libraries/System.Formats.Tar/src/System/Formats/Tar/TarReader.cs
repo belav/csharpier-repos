@@ -24,12 +24,18 @@ namespace System.Formats.Tar
         internal Stream _archiveStream;
 
         /// <summary>
-        /// Initializes a <see cref="TarReader"/> instance that can read tar entries from the specified stream, and can optionally leave the stream open upon disposal of this instance.
+        /// Initializes a <see cref="TarReader"/> instance that can read tar entries from the specified
+        // stream, and can optionally leave the stream open upon disposal of this instance.
         /// </summary>
         /// <param name="archiveStream">The stream to read from.</param>
-        /// <param name="leaveOpen"><see langword="false"/> to dispose the <paramref name="archiveStream"/> when this instance is disposed, as well as all the non-null <see cref="TarEntry.DataStream"/> instances from the entries that were visited by this reader; <see langword="true"/> to leave all the streams open.</param>
-        /// <exception cref="ArgumentException"><paramref name="archiveStream"/> does not support reading.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="archiveStream"/> is <see langword="null"/>.</exception>
+        /// <param name="leaveOpen"><see langword="false"/> to dispose the <paramref name="archiveStream"/>
+        // when this instance is disposed, as well as all the non-null <see cref="TarEntry.DataStream"/>
+        // instances from the entries that were visited by this reader; <see langword="true"/> to leave all the
+        // streams open.</param>
+        /// <exception cref="ArgumentException"><paramref name="archiveStream"/> does not support
+        // reading.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="archiveStream"/> is <see
+        // langword="null"/>.</exception>
         public TarReader(Stream archiveStream, bool leaveOpen = false)
         {
             ArgumentNullException.ThrowIfNull(archiveStream);
@@ -51,9 +57,14 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// Disposes the current <see cref="TarReader"/> instance, closes the archive stream, and disposes the non-null <see cref="TarEntry.DataStream"/> instances of all the entries that were read from the archive if the <c>leaveOpen</c> argument was set to <see langword="false"/> in the constructor.
+        /// Disposes the current <see cref="TarReader"/> instance, closes the archive stream, and disposes
+        // the non-null <see cref="TarEntry.DataStream"/> instances of all the entries that were read from the
+        // archive if the <c>leaveOpen</c> argument was set to <see langword="false"/> in the constructor.
         /// </summary>
-        /// <remarks>The <see cref="TarEntry.DataStream"/> property of any entry can be replaced with a new stream. If the user decides to replace it on a <see cref="TarEntry"/> instance that was obtained using a <see cref="TarReader"/>, the underlying stream gets disposed immediately, freeing the <see cref="TarReader"/> of origin from the responsibility of having to dispose it.</remarks>
+        /// <remarks>The <see cref="TarEntry.DataStream"/> property of any entry can be replaced with a new
+        // stream. If the user decides to replace it on a <see cref="TarEntry"/> instance that was obtained
+        // using a <see cref="TarReader"/>, the underlying stream gets disposed immediately, freeing the <see
+        // cref="TarReader"/> of origin from the responsibility of having to dispose it.</remarks>
         public void Dispose()
         {
             if (!_isDisposed)
@@ -76,9 +87,13 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// Asynchronously disposes the current <see cref="TarReader"/> instance, and disposes the non-null <see cref="TarEntry.DataStream"/> instances of all the entries that were read from the archive.
+        /// Asynchronously disposes the current <see cref="TarReader"/> instance, and disposes the non-null
+        // <see cref="TarEntry.DataStream"/> instances of all the entries that were read from the archive.
         /// </summary>
-        /// <remarks>The <see cref="TarEntry.DataStream"/> property of any entry can be replaced with a new stream. If the user decides to replace it on a <see cref="TarEntry"/> instance that was obtained using a <see cref="TarReader"/>, the underlying stream gets disposed immediately, freeing the <see cref="TarReader"/> of origin from the responsibility of having to dispose it.</remarks>
+        /// <remarks>The <see cref="TarEntry.DataStream"/> property of any entry can be replaced with a new
+        // stream. If the user decides to replace it on a <see cref="TarEntry"/> instance that was obtained
+        // using a <see cref="TarReader"/>, the underlying stream gets disposed immediately, freeing the <see
+        // cref="TarReader"/> of origin from the responsibility of having to dispose it.</remarks>
         public async ValueTask DisposeAsync()
         {
             if (!_isDisposed)
@@ -103,17 +118,24 @@ namespace System.Formats.Tar
         /// <summary>
         /// Retrieves the next entry from the archive stream.
         /// </summary>
-        /// <param name="copyData"><para>Set it to <see langword="true"/> to copy the data of the entry into a new <see cref="MemoryStream"/>. This is helpful when the underlying archive stream is unseekable, and the data needs to be accessed later.</para>
-        /// <para>Set it to <see langword="false"/> if the data should not be copied into a new stream. If the underlying stream is unseekable, the user has the responsibility of reading and processing the <see cref="TarEntry.DataStream"/> immediately after calling this method.</para>
+        /// <param name="copyData"><para>Set it to <see langword="true"/> to copy the data of the entry into
+        // a new <see cref="MemoryStream"/>. This is helpful when the underlying archive stream is unseekable,
+        // and the data needs to be accessed later.</para>
+        /// <para>Set it to <see langword="false"/> if the data should not be copied into a new stream. If
+        // the underlying stream is unseekable, the user has the responsibility of reading and processing the
+        // <see cref="TarEntry.DataStream"/> immediately after calling this method.</para>
         /// <para>The default value is <see langword="false"/>.</para></param>
-        /// <returns>A <see cref="TarEntry"/> instance if a valid entry was found, or <see langword="null"/> if the end of the archive has been reached.</returns>
+        /// <returns>A <see cref="TarEntry"/> instance if a valid entry was found, or <see langword="null"/>
+        // if the end of the archive has been reached.</returns>
         /// <exception cref="InvalidDataException"><para>The entry's data is malformed.</para>
         /// <para>-or-</para>
         /// <para>The archive contains entries in different formats.</para>
         /// <para>-or-</para>
-        /// <para>More than one Global Extended Attributes Entry was found in the current <see cref="TarEntryFormat.Pax"/> archive.</para>
+        /// <para>More than one Global Extended Attributes Entry was found in the current <see
+        // cref="TarEntryFormat.Pax"/> archive.</para>
         /// <para>-or-</para>
-        /// <para>Two or more Extended Attributes entries were found consecutively in the current <see cref="TarEntryFormat.Pax"/> archive.</para></exception>
+        /// <para>Two or more Extended Attributes entries were found consecutively in the current <see
+        // cref="TarEntryFormat.Pax"/> archive.</para></exception>
         /// <exception cref="IOException">An I/O problem occurred.</exception>
         public TarEntry? GetNextEntry(bool copyData = false)
         {
@@ -166,18 +188,26 @@ namespace System.Formats.Tar
         /// <summary>
         /// Asynchronously retrieves the next entry from the archive stream.
         /// </summary>
-        /// <param name="copyData"><para>Set it to <see langword="true"/> to copy the data of the entry into a new <see cref="MemoryStream"/>. This is helpful when the underlying archive stream is unseekable, and the data needs to be accessed later.</para>
-        /// <para>Set it to <see langword="false"/> if the data should not be copied into a new stream. If the underlying stream is unseekable, the user has the responsibility of reading and processing the <see cref="TarEntry.DataStream"/> immediately after calling this method.</para>
+        /// <param name="copyData"><para>Set it to <see langword="true"/> to copy the data of the entry into
+        // a new <see cref="MemoryStream"/>. This is helpful when the underlying archive stream is unseekable,
+        // and the data needs to be accessed later.</para>
+        /// <para>Set it to <see langword="false"/> if the data should not be copied into a new stream. If
+        // the underlying stream is unseekable, the user has the responsibility of reading and processing the
+        // <see cref="TarEntry.DataStream"/> immediately after calling this method.</para>
         /// <para>The default value is <see langword="false"/>.</para></param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
-        /// <returns>A value task containing a <see cref="TarEntry"/> instance if a valid entry was found, or <see langword="null"/> if the end of the archive has been reached.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+        // value is <see cref="CancellationToken.None" />.</param>
+        /// <returns>A value task containing a <see cref="TarEntry"/> instance if a valid entry was found,
+        // or <see langword="null"/> if the end of the archive has been reached.</returns>
         /// <exception cref="InvalidDataException"><para>The archive is malformed.</para>
         /// <para>-or-</para>
         /// <para>The archive contains entries in different formats.</para>
         /// <para>-or-</para>
-        /// <para>More than one Global Extended Attributes Entry was found in the current <see cref="TarEntryFormat.Pax"/> archive.</para>
+        /// <para>More than one Global Extended Attributes Entry was found in the current <see
+        // cref="TarEntryFormat.Pax"/> archive.</para>
         /// <para>-or-</para>
-        /// <para>Two or more Extended Attributes entries were found consecutively in the current <see cref="TarEntryFormat.Pax"/> archive.</para></exception>
+        /// <para>Two or more Extended Attributes entries were found consecutively in the current <see
+        // cref="TarEntryFormat.Pax"/> archive.</para></exception>
         /// <exception cref="IOException">An I/O problem occurred.</exception>
         public ValueTask<TarEntry?> GetNextEntryAsync(
             bool copyData = false,
@@ -223,10 +253,13 @@ namespace System.Formats.Tar
             }
             else if (_previouslyReadEntry._header._size > 0)
             {
-                // When working with seekable streams, every time we return an entry, we avoid advancing the pointer beyond the data section
-                // This is so the user can read the data if desired. But if the data was not read by the user, we need to advance the pointer
+                // When working with seekable streams, every time we return an entry, we avoid advancing the pointer
+                // beyond the data section
+                // This is so the user can read the data if desired. But if the data was not read by the user, we
+                // need to advance the pointer
                 // here until it's located at the beginning of the next entry header.
-                // This should only be done if the previous entry came from a TarReader and it still had its original SubReadStream or SeekableSubReadStream.
+                // This should only be done if the previous entry came from a TarReader and it still had its
+                // original SubReadStream or SeekableSubReadStream.
 
                 if (_previouslyReadEntry._header._dataStream is not SubReadStream dataStream)
                 {
@@ -251,7 +284,8 @@ namespace System.Formats.Tar
             }
         }
 
-        // Asynchronously moves the underlying archive stream position pointer to the beginning of the next header.
+        // Asynchronously moves the underlying archive stream position pointer to the beginning of the next
+        // header.
         internal async ValueTask AdvanceDataStreamIfNeededAsync(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -270,10 +304,13 @@ namespace System.Formats.Tar
             }
             else if (_previouslyReadEntry._header._size > 0)
             {
-                // When working with seekable streams, every time we return an entry, we avoid advancing the pointer beyond the data section
-                // This is so the user can read the data if desired. But if the data was not read by the user, we need to advance the pointer
+                // When working with seekable streams, every time we return an entry, we avoid advancing the pointer
+                // beyond the data section
+                // This is so the user can read the data if desired. But if the data was not read by the user, we
+                // need to advance the pointer
                 // here until it's located at the beginning of the next entry header.
-                // This should only be done if the previous entry came from a TarReader and it still had its original SubReadStream or SeekableSubReadStream.
+                // This should only be done if the previous entry came from a TarReader and it still had its
+                // original SubReadStream or SeekableSubReadStream.
 
                 if (_previouslyReadEntry._header._dataStream is not SubReadStream dataStream)
                 {
@@ -346,7 +383,8 @@ namespace System.Formats.Tar
         // Returns true if an entry header was collected successfully, false otherwise.
         // An entry header represents any typeflag that is contains metadata.
         // Metadata typeflags: ExtendedAttributes, GlobalExtendedAttributes, LongLink, LongPath.
-        // Metadata typeflag entries get handled internally by this method until a valid header entry can be returned.
+        // Metadata typeflag entries get handled internally by this method until a valid header entry can be
+        // returned.
         private TarHeader? TryGetNextEntryHeader(bool copyData)
         {
             Debug.Assert(!_reachedEndMarkers);
@@ -393,7 +431,8 @@ namespace System.Formats.Tar
         // Returns true if an entry header was collected successfully, false otherwise.
         // An entry header represents any typeflag that is contains metadata.
         // Metadata typeflags: ExtendedAttributes, GlobalExtendedAttributes, LongLink, LongPath.
-        // Metadata typeflag entries get handled internally by this method until a valid header entry can be returned.
+        // Metadata typeflag entries get handled internally by this method until a valid header entry can be
+        // returned.
         private async ValueTask<TarHeader?> TryGetNextEntryHeaderAsync(
             bool copyData,
             CancellationToken cancellationToken
@@ -453,8 +492,10 @@ namespace System.Formats.Tar
             return header;
         }
 
-        // Tries to read the contents of the PAX metadata entry as extended attributes, tries to also read the actual entry that follows,
-        // and returns the actual entry with the processed extended attributes saved in the _extendedAttributes dictionary.
+        // Tries to read the contents of the PAX metadata entry as extended attributes, tries to also read
+        // the actual entry that follows,
+        // and returns the actual entry with the processed extended attributes saved in the
+        // _extendedAttributes dictionary.
         private bool TryProcessExtendedAttributesHeader(
             TarHeader extendedAttributesHeader,
             bool copyData,
@@ -475,7 +516,8 @@ namespace System.Formats.Tar
                 return false;
             }
 
-            // We're currently processing an extended attributes header, so we can never have two extended entries in a row
+            // We're currently processing an extended attributes header, so we can never have two extended
+            // entries in a row
             if (
                 actualHeader._typeFlag
                 is TarEntryType.GlobalExtendedAttributes
@@ -504,8 +546,10 @@ namespace System.Formats.Tar
             return true;
         }
 
-        // Asynchronously tries to read the contents of the PAX metadata entry as extended attributes, tries to also read the actual entry that follows,
-        // and returns the actual entry with the processed extended attributes saved in the _extendedAttributes dictionary.
+        // Asynchronously tries to read the contents of the PAX metadata entry as extended attributes, tries
+        // to also read the actual entry that follows,
+        // and returns the actual entry with the processed extended attributes saved in the
+        // _extendedAttributes dictionary.
         private async ValueTask<TarHeader?> TryProcessExtendedAttributesHeaderAsync(
             TarHeader extendedAttributesHeader,
             bool copyData,
@@ -530,7 +574,8 @@ namespace System.Formats.Tar
                 return null;
             }
 
-            // We're currently processing an extended attributes header, so we can never have two extended entries in a row
+            // We're currently processing an extended attributes header, so we can never have two extended
+            // entries in a row
             if (
                 actualHeader._typeFlag
                 is TarEntryType.GlobalExtendedAttributes
@@ -571,8 +616,10 @@ namespace System.Formats.Tar
             return actualHeader;
         }
 
-        // Tries to read the contents of the GNU metadata entry, then tries to read the next entry, which could either be another GNU metadata entry
-        // or the actual entry. Processes them all and returns the actual entry updating its path and/or linkpath fields as needed.
+        // Tries to read the contents of the GNU metadata entry, then tries to read the next entry, which
+        // could either be another GNU metadata entry
+        // or the actual entry. Processes them all and returns the actual entry updating its path and/or
+        // linkpath fields as needed.
         private bool TryProcessGnuMetadataHeader(
             TarHeader header,
             bool copyData,
@@ -681,8 +728,10 @@ namespace System.Formats.Tar
             return true;
         }
 
-        // Asynchronously tries to read the contents of the GNU metadata entry, then tries to read the next entry, which could either be another GNU metadata entry
-        // or the actual entry. Processes them all and returns the actual entry updating its path and/or linkpath fields as needed.
+        // Asynchronously tries to read the contents of the GNU metadata entry, then tries to read the next
+        // entry, which could either be another GNU metadata entry
+        // or the actual entry. Processes them all and returns the actual entry updating its path and/or
+        // linkpath fields as needed.
         private async ValueTask<TarHeader?> TryProcessGnuMetadataHeaderAsync(
             TarHeader header,
             bool copyData,

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations;
 ///     A base class inherited by each EF Core migration.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 public abstract class Migration
 {
@@ -23,10 +24,12 @@ public abstract class Migration
     private List<MigrationOperation>? _downOperations;
 
     /// <summary>
-    ///     The <see cref="IModel" /> that the database will map to after the migration has been applied.
+    ///     The <see cref="IModel" /> that the database will map to after the migration has been
+    // applied.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     public virtual IModel TargetModel
     {
@@ -54,7 +57,8 @@ public abstract class Migration
     ///         with regard to this migration.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
     public virtual IReadOnlyList<MigrationOperation> UpOperations =>
@@ -70,7 +74,8 @@ public abstract class Migration
     ///         state that it was in before this migration was applied.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
     public virtual IReadOnlyList<MigrationOperation> DownOperations =>
@@ -85,7 +90,8 @@ public abstract class Migration
     ///         can be made to the database depending on the type of database being used.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
     [DisallowNull]
@@ -95,7 +101,8 @@ public abstract class Migration
     ///     Implemented to build the <see cref="TargetModel" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="modelBuilder">The <see cref="ModelBuilder" /> to use to build the model.</param>
     protected virtual void BuildTargetModel(ModelBuilder modelBuilder) { }
@@ -109,13 +116,16 @@ public abstract class Migration
     ///         previous migration so that it is up-to-date with regard to this migration.
     ///     </para>
     ///     <para>
-    ///         This method must be overridden in each class that inherits from <see cref="Migration" />.
+    ///         This method must be overridden in each class that inherits from <see cref="Migration"
+    // />.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
-    /// <param name="migrationBuilder">The <see cref="MigrationBuilder" /> that will build the operations.</param>
+    /// <param name="migrationBuilder">The <see cref="MigrationBuilder" /> that will build the
+    // operations.</param>
     protected abstract void Up(MigrationBuilder migrationBuilder);
 
     /// <summary>
@@ -124,18 +134,23 @@ public abstract class Migration
     /// <remarks>
     ///     <para>
     ///         That is, builds the operations that will take the database from the state left in by
-    ///         this migration so that it returns to the state that it was in before this migration was applied.
+    ///         this migration so that it returns to the state that it was in before this migration was
+    // applied.
     ///     </para>
     ///     <para>
-    ///         This method must be overridden in each class that inherits from <see cref="Migration" /> if
-    ///         both 'up' and 'down' migrations are to be supported. If it is not overridden, then calling it
+    ///         This method must be overridden in each class that inherits from <see cref="Migration" />
+    // if
+    ///         both 'up' and 'down' migrations are to be supported. If it is not overridden, then
+    // calling it
     ///         will throw and it will not be possible to migrate in the 'down' direction.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
-    /// <param name="migrationBuilder">The <see cref="MigrationBuilder" /> that will build the operations.</param>
+    /// <param name="migrationBuilder">The <see cref="MigrationBuilder" /> that will build the
+    // operations.</param>
     protected virtual void Down(MigrationBuilder migrationBuilder) =>
         throw new NotSupportedException(RelationalStrings.MigrationDownMissing);
 

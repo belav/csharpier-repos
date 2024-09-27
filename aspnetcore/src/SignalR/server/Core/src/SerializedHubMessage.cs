@@ -37,14 +37,17 @@ public class SerializedHubMessage
     /// <summary>
     /// Initializes a new instance of the <see cref="SerializedHubMessage"/> class.
     /// </summary>
-    /// <param name="message">The hub message for the cache. This will be serialized with an <see cref="IHubProtocol"/> in <see cref="GetSerializedMessage"/> to get the message's serialized representation.</param>
+    /// <param name="message">The hub message for the cache. This will be serialized with an <see
+    // cref="IHubProtocol"/> in <see cref="GetSerializedMessage"/> to get the message's serialized
+    // representation.</param>
     public SerializedHubMessage(HubMessage message)
     {
         Message = message;
     }
 
     /// <summary>
-    /// Gets the serialized representation of the <see cref="HubMessage"/> using the specified <see cref="IHubProtocol"/>.
+    /// Gets the serialized representation of the <see cref="HubMessage"/> using the specified <see
+    // cref="IHubProtocol"/>.
     /// </summary>
     /// <param name="protocol">The protocol used to create the serialized representation.</param>
     /// <returns>The serialized representation of the <see cref="HubMessage"/>.</returns>

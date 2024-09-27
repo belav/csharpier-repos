@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 
 #if !COMPONENTS
 /// <summary>
-/// Constrains a route parameter to be a string of a given length or within a given range of lengths.
+/// Constrains a route parameter to be a string of a given length or within a given range of
+// lengths.
 /// </summary>
 public class LengthRouteConstraint
     : IRouteConstraint,

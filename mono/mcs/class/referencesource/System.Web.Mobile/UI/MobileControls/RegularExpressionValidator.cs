@@ -21,14 +21,15 @@ using WebCntrls = System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile RegularExpressionValidator class.
-     * The RegularExpressionValidator provides validation using a regular
-     * expression as the validation criteria.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
-    /// <include file='doc\RegularExpressionValidator.uex' path='docs/doc[@for="RegularExpressionValidator"]/*' />
+/*
+* Mobile RegularExpressionValidator class.
+* The RegularExpressionValidator provides validation using a regular
+* expression as the validation criteria.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
+    /// <include file='doc\RegularExpressionValidator.uex'
+    // path='docs/doc[@for="RegularExpressionValidator"]/*' />
     [
         ToolboxData(
             "<{0}:RegularExpressionValidator runat=\"server\" ErrorMessage=\"RegularExpressionValidator\"></{0}:RegularExpressionValidator>"
@@ -50,7 +51,8 @@ namespace System.Web.UI.MobileControls
     {
         private WebCntrls.RegularExpressionValidator _webRegularExpressionValidator;
 
-        /// <include file='doc\RegularExpressionValidator.uex' path='docs/doc[@for="RegularExpressionValidator.CreateWebValidator"]/*' />
+        /// <include file='doc\RegularExpressionValidator.uex'
+        // path='docs/doc[@for="RegularExpressionValidator.CreateWebValidator"]/*' />
         protected override WebCntrls.BaseValidator CreateWebValidator()
         {
             _webRegularExpressionValidator = new WebCntrls.RegularExpressionValidator();
@@ -62,7 +64,8 @@ namespace System.Web.UI.MobileControls
         // The properties are got and set directly from the original RegularExpressionValidator.
         ////////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\RegularExpressionValidator.uex' path='docs/doc[@for="RegularExpressionValidator.ValidationExpression"]/*' />
+        /// <include file='doc\RegularExpressionValidator.uex'
+        // path='docs/doc[@for="RegularExpressionValidator.ValidationExpression"]/*' />
         [
             Bindable(true),
             DefaultValue(""),
@@ -79,7 +82,8 @@ namespace System.Web.UI.MobileControls
             set { _webRegularExpressionValidator.ValidationExpression = value; }
         }
 
-        /// <include file='doc\RegularExpressionValidator.uex' path='docs/doc[@for="RegularExpressionValidator.EvaluateIsValid"]/*' />
+        /// <include file='doc\RegularExpressionValidator.uex'
+        // path='docs/doc[@for="RegularExpressionValidator.EvaluateIsValid"]/*' />
         protected override bool EvaluateIsValid()
         {
             return EvaluateIsValidInternal();

@@ -220,7 +220,8 @@ namespace System.Xml
                 doc.Foliate(this, newState);
         }
 
-        // Foliate the node as a side effect of user calling functions on this node (like NextSibling) OR as a side effect of DataDocNav using nodes to do editing
+        // Foliate the node as a side effect of user calling functions on this node (like NextSibling) OR as
+        // a side effect of DataDocNav using nodes to do editing
         private void AutoFoliate()
         {
             XmlDataDocument doc = (XmlDataDocument)OwnerDocument;
@@ -391,9 +392,12 @@ namespace System.Xml
 
         public override XmlNodeList GetElementsByTagName(string name)
         {
-            // Retrieving nodes from the returned nodelist may cause foliation which causes new nodes to be created,
-            // so the System.Xml iterator will throw if this happens during iteration. To avoid this, foliate everything
-            // before iteration, so iteration will not cause foliation (and as a result of this, creation of new nodes).
+            // Retrieving nodes from the returned nodelist may cause foliation which causes new nodes to be
+            // created,
+            // so the System.Xml iterator will throw if this happens during iteration. To avoid this, foliate
+            // everything
+            // before iteration, so iteration will not cause foliation (and as a result of this, creation of new
+            // nodes).
             XmlNodeList tempNodeList = base.GetElementsByTagName(name);
 
             int tempint = tempNodeList.Count;

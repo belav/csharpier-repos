@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Design.Internal;
 
 /// <summary>
-///     Base class to be used by relational database providers when implementing an <see cref="ICSharpRuntimeAnnotationCodeGenerator" />
+///     Base class to be used by relational database providers when implementing an <see
+// cref="ICSharpRuntimeAnnotationCodeGenerator" />
 /// </summary>
 #pragma warning disable EF1001 // Internal EF Core API usage.
 public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnotationCodeGenerator
@@ -15,7 +16,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
     ///     Initializes a new instance of this class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
+    /// <param name="relationalDependencies">Parameter object containing relational dependencies for
+    // this service.</param>
     public RelationalCSharpRuntimeAnnotationCodeGenerator(
         CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies,
         RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies relationalDependencies
@@ -1297,7 +1299,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
     /// <summary>
     ///     Generates code to create the given annotations.
     /// </summary>
-    /// <param name="uniqueConstraint">The unique constraint to which the annotations are applied.</param>
+    /// <param name="uniqueConstraint">The unique constraint to which the annotations are
+    // applied.</param>
     /// <param name="parameters">Additional parameters used during code generation.</param>
     public virtual void Generate(
         IUniqueConstraint uniqueConstraint,
@@ -1718,7 +1721,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
     /// <summary>
     ///     Generates code to create the given annotations.
     /// </summary>
-    /// <param name="sqlQueryMapping">The SQL query mapping to which the annotations are applied.</param>
+    /// <param name="sqlQueryMapping">The SQL query mapping to which the annotations are
+    // applied.</param>
     /// <param name="parameters">Additional parameters used during code generation.</param>
     public virtual void Generate(
         ISqlQueryMapping sqlQueryMapping,
@@ -1902,7 +1906,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
     /// <summary>
     ///     Generates code to create the given annotations.
     /// </summary>
-    /// <param name="sprocMapping">The stored procedure mapping to which the annotations are applied.</param>
+    /// <param name="sprocMapping">The stored procedure mapping to which the annotations are
+    // applied.</param>
     /// <param name="parameters">Additional parameters used during code generation.</param>
     public virtual void Generate(
         IStoredProcedureMapping sprocMapping,
@@ -2172,7 +2177,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
     /// <summary>
     ///     Generates code to create the given annotations.
     /// </summary>
-    /// <param name="functionParameter">The function parameter to which the annotations are applied.</param>
+    /// <param name="functionParameter">The function parameter to which the annotations are
+    // applied.</param>
     /// <param name="parameters">Additional parameters used during code generation.</param>
     public virtual void Generate(
         IDbFunctionParameter functionParameter,

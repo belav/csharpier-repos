@@ -80,7 +80,8 @@ namespace System.Runtime.InteropServices.Tests
         public void AlignedAllocOverflowByteCountTest()
         {
             // POSIX requires byteCount to be a multiple of alignment and so we will internally upsize.
-            // This upsizing can overflow for certain values since we do (byteCount + (alignment - 1)) & ~(alignment - 1)
+            // This upsizing can overflow for certain values since we do (byteCount + (alignment - 1)) &
+            // ~(alignment - 1)
             //
             // However, this overflow is "harmless" since it will result in a value that is less than alignment
             // given that alignment is a power of two and will ultimately be a value less than alignment which
@@ -89,7 +90,8 @@ namespace System.Runtime.InteropServices.Tests
             // Take for example a 64-bit system where the max power of two is (1UL << 63): 9223372036854775808
             // * 9223372036854775808 + 9223372036854775807 == ulong.MaxValue, so no overflow
             // * 9223372036854775809 + 9223372036854775807 == 0, so overflows and is less than alignment
-            // *      ulong.MaxValue + 9223372036854775807 == 9223372036854775806, so overflows and is less than alignment
+            // *      ulong.MaxValue + 9223372036854775807 == 9223372036854775806, so overflows and is less than
+            // alignment
             //
             // Likewise, for small alignments such as 8 (which is the smallest on a 64-bit system for POSIX):
             // * 18446744073709551608 + 7 == ulong.MaxValue, so no overflow

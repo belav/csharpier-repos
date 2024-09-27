@@ -131,7 +131,8 @@ namespace MonoTests.System.Diagnostics.Contracts
         }
 
         /// <summary>
-        /// Event handler calls SetHandled() and SetUnwind(), so exception of type ContractException should be thrown,
+        /// Event handler calls SetHandled() and SetUnwind(), so exception of type ContractException should
+        // be thrown,
         /// as SetUnwind overrides SetHandled.
         /// </summary>
         [Test, RunAgainstReference]
@@ -163,7 +164,8 @@ namespace MonoTests.System.Diagnostics.Contracts
 
         /// <summary>
         /// Event handler throws exception.
-        /// ContractException is thrown by Contract.Assert(), with InnerException set to the thrown exception.
+        /// ContractException is thrown by Contract.Assert(), with InnerException set to the thrown
+        // exception.
         /// </summary>
         [Test, RunAgainstReference]
         public void TestAssertEventHandlerThrows()

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// Creates a new <see cref="CharacterSetModificationRule"/> instance.
         /// </summary>
         /// <param name="kind">The kind of rule.</param>
-        /// <param name="characters">One or more characters. These are typically punctuation characters.</param>
+        /// <param name="characters">One or more characters. These are typically punctuation
+        // characters.</param>
         /// <returns></returns>
         public static CharacterSetModificationRule Create(
             CharacterSetModificationKind kind,
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// Creates a new <see cref="CharacterSetModificationRule"/> instance.
         /// </summary>
         /// <param name="kind">The kind of rule.</param>
-        /// <param name="characters">One or more characters. These are typically punctuation characters.</param>
+        /// <param name="characters">One or more characters. These are typically punctuation
+        // characters.</param>
         /// <returns></returns>
         public static CharacterSetModificationRule Create(
             CharacterSetModificationKind kind,

@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 internal abstract partial class AbstractVirtualCharService
 {
     /// <summary>
-    /// Abstraction to allow generic algorithms to run over a string or <see cref="SourceText"/> without any
+    /// Abstraction to allow generic algorithms to run over a string or <see cref="SourceText"/> without
+    // any
     /// overhead.
     /// </summary>
     private interface ITextInfo<T>

@@ -340,7 +340,8 @@ namespace System.Buffers.Text.Tests
 
             // int.MaxValue - (int.MaxValue % 4) => 2147483644, largest multiple of 4 less than int.MaxValue
             // CLR default limit of 2 gigabytes (GB).
-            // 1610612734, larger than MaximumEncodeLength, requires output buffer of size 2147483648 (which is > int.MaxValue)
+            // 1610612734, larger than MaximumEncodeLength, requires output buffer of size 2147483648 (which is
+            // > int.MaxValue)
             const int sourceCount = (int.MaxValue >> 2) * 3 + 1;
             const int encodedCount = 2000000000;
 

@@ -363,7 +363,8 @@ public class RemoteWindowsDeployer : ApplicationDeployer
                 );
 
                 // Wait a minute for the script to run or fail. The StartServer script will only terminate when the
-                // Deployer is disposed, so we don't want to wait for it to terminate here because it would deadlock.
+                // Deployer is disposed, so we don't want to wait for it to terminate here because it would
+                // deadlock.
                 await Task.Delay(TimeSpan.FromMinutes(1));
 
                 if (
@@ -422,7 +423,8 @@ public class RemoteWindowsDeployer : ApplicationDeployer
             "StopServer.ps1",
         };
 
-        // Copy the scripts from this assembly's embedded resources to the temp path on the machine where these
+        // Copy the scripts from this assembly's embedded resources to the temp path on the machine where
+        // these
         // tests are being run
         var assembly = typeof(RemoteWindowsDeployer).GetTypeInfo().Assembly;
         var embeddedFileProvider = new EmbeddedFileProvider(

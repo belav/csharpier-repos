@@ -68,7 +68,8 @@ public static class Extensions
     /// <param name="configuration">Mapper configuration</param>
     /// <param name="parameters">Optional parameter object for parameterized mapping expressions</param>
     /// <param name="membersToExpand">Explicit members to expand</param>
-    /// <returns>Queryable result, use queryable extension methods to project and execute result</returns>
+    /// <returns>Queryable result, use queryable extension methods to project and execute
+    // result</returns>
     public static IQueryable<TDestination> ProjectTo<TDestination>(
         this IQueryable source,
         IConfigurationProvider configuration,
@@ -105,7 +106,8 @@ public static class Extensions
     /// <param name="configuration">Mapper configuration</param>
     /// <param name="parameters">Optional parameter object for parameterized mapping expressions</param>
     /// <param name="membersToExpand">Explicit members to expand</param>
-    /// <returns>Queryable result, use queryable extension methods to project and execute result</returns>
+    /// <returns>Queryable result, use queryable extension methods to project and execute
+    // result</returns>
     public static IQueryable ProjectTo(
         this IQueryable source,
         Type destinationType,

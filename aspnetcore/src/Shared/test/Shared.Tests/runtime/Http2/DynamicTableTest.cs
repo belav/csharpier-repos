@@ -137,7 +137,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             }
 
             // Now check to see that we can retrieve the remaining headers.
-            // Some headers will have been evacuated from the table during this process, so we don't exhaust the entire insertedHeaders stack.
+            // Some headers will have been evacuated from the table during this process, so we don't exhaust the
+            // entire insertedHeaders stack.
             Assert.True(table.Count > 0);
             Assert.True(table.Count < insertedHeaders.Count);
 
@@ -159,7 +160,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             int insertSize
         )
         {
-            // This is purely to make it simple to perfectly reach our initial max size to test growing a full but non-wrapping buffer.
+            // This is purely to make it simple to perfectly reach our initial max size to test growing a full
+            // but non-wrapping buffer.
             Debug.Assert(
                 (insertSize % 64) == 0,
                 $"{nameof(insertSize)} must be a multiple of 64 ({nameof(HeaderField)}.{nameof(HeaderField.RfcOverhead)} * 2)"

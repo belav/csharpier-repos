@@ -69,13 +69,13 @@ namespace Microsoft.Win32
 
         #region Internal Methods
 
-        /**
-         * Changes a Variant from one type to another, calling the OLE
-         * Automation VariantChangeTypeEx routine.  Note the legal types here are
-         * restricted to the subset of what can be legally found in a VB
-         * Variant and the types that CLR supports explicitly in the
-         * CLR Variant class.
-         */
+/**
+* Changes a Variant from one type to another, calling the OLE
+* Automation VariantChangeTypeEx routine.  Note the legal types here are
+* restricted to the subset of what can be legally found in a VB
+* Variant and the types that CLR supports explicitly in the
+* CLR Variant class.
+*/
         [System.Security.SecurityCritical] // auto-generated
         internal static Variant ChangeType(
             Variant source,

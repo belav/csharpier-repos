@@ -3,9 +3,11 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BaseProvidesInterfaceMember
 {
-    // mcs silently generates an explicit interface `Method` on `FooWithBase` that calls `BaseFoo.Method`, this leads to a failure
+    // mcs silently generates an explicit interface `Method` on `FooWithBase` that calls
+    // `BaseFoo.Method`, this leads to a failure
     // because the explicit interface `Method` needs a `[Kept]` on it.
-    // To work around this, use csc so that the IL that is produced matches the test assertions we define
+    // To work around this, use csc so that the IL that is produced matches the test assertions we
+    // define
     [SetupCSharpCompilerToUse("csc")]
     public class GenericInterfaceWithMethodComplex2
     {

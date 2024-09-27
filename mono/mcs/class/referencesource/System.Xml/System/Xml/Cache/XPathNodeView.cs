@@ -93,7 +93,8 @@ namespace System.Xml.XPath.DataBinding
             return collection.RowShape.Name;
         }
 
-        /// <include file='doc\XPathNodeView.uex' path='docs/doc[@for="XPathNodeView.GetComponentName"]/*' />
+        /// <include file='doc\XPathNodeView.uex' path='docs/doc[@for="XPathNodeView.GetComponentName"]/*'
+        // />
         public String GetComponentName()
         {
             return null;
@@ -111,7 +112,8 @@ namespace System.Xml.XPath.DataBinding
             return null;
         }
 
-        /// <include file='doc\XPathNodeView.uex' path='docs/doc[@for="XPathNodeView.GetDefaultProperty"]/*' />
+        /// <include file='doc\XPathNodeView.uex' path='docs/doc[@for="XPathNodeView.GetDefaultProperty"]/*'
+        // />
         public PropertyDescriptor GetDefaultProperty()
         {
             return null;
@@ -135,7 +137,8 @@ namespace System.Xml.XPath.DataBinding
             return null;
         }
 
-        /// <include file='doc\XPathNodeView.uex' path='docs/doc[@for="XPathNodeView.GetPropertyOwner"]/*' />
+        /// <include file='doc\XPathNodeView.uex' path='docs/doc[@for="XPathNodeView.GetPropertyOwner"]/*'
+        // />
         public object GetPropertyOwner(PropertyDescriptor pd)
         {
             return null;

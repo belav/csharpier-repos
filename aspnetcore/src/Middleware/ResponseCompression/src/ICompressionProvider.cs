@@ -9,12 +9,14 @@ namespace Microsoft.AspNetCore.ResponseCompression;
 public interface ICompressionProvider
 {
     /// <summary>
-    /// The encoding name used in the 'Accept-Encoding' request header and 'Content-Encoding' response header.
+    /// The encoding name used in the 'Accept-Encoding' request header and 'Content-Encoding' response
+    // header.
     /// </summary>
     string EncodingName { get; }
 
     /// <summary>
-    /// Indicates if the given provider supports Flush and FlushAsync. If not, compression may be disabled in some scenarios.
+    /// Indicates if the given provider supports Flush and FlushAsync. If not, compression may be
+    // disabled in some scenarios.
     /// </summary>
     bool SupportsFlush { get; }
 

@@ -280,7 +280,8 @@ namespace System.Web
 
         // If virtualPath is:
         // Absolute, the ToAbsolute method returns the virtual path with no changes.
-        // Application relative, the ToAbsolute method adds applicationPath to the beginning of the virtual path.
+        // Application relative, the ToAbsolute method adds applicationPath to the beginning of the virtual
+        // path.
         // Not rooted, the ToAbsolute method raises an ArgumentOutOfRangeException exception.
         public static string ToAbsolute(string virtualPath, string applicationPath)
         {

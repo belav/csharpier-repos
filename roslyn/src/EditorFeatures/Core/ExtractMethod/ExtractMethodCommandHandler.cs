@@ -246,7 +246,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
         if (result is { Succeeded: true, Reasons.Length: 0 })
             return result;
 
-        // We have some sort of issue.  See what the user wants to do.  If we have no way to inform the user bail
+        // We have some sort of issue.  See what the user wants to do.  If we have no way to inform the user
+        // bail
         // out rather than doing something wrong.
         var notificationService =
             document.Project.Solution.Services.GetService<INotificationService>();
@@ -291,7 +292,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
             return alternativeResult;
         }
 
-        // The alternative approach wasn't better.  If we failed, just let the user know and bail out.  Otherwise,
+        // The alternative approach wasn't better.  If we failed, just let the user know and bail out.
+        // Otherwise,
         // if we succeeded with messages, tell the user and let them decide if they want to proceed or not.
         if (!result.Succeeded)
         {
@@ -306,8 +308,10 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
             return null;
         }
 
-        // We succeed and have a not null document.  We must them have some issues to report to the user (otherwise
-        // we would have fast returned at the top of this method).  Tell the user about them and let them decide
+        // We succeed and have a not null document.  We must them have some issues to report to the user
+        // (otherwise
+        // we would have fast returned at the top of this method).  Tell the user about them and let them
+        // decide
         // what they want to do.
         Contract.ThrowIfTrue(result.Reasons.Length == 0);
 

@@ -225,15 +225,15 @@ namespace System.Net
                     }
                 }
 
-                /* Apache forces closing the connection for these status codes:
-                 *    HttpStatusCode.BadRequest                 400
-                 *    HttpStatusCode.RequestTimeout             408
-                 *    HttpStatusCode.LengthRequired             411
-                 *    HttpStatusCode.RequestEntityTooLarge     413
-                 *    HttpStatusCode.RequestUriTooLong         414
-                 *    HttpStatusCode.InternalServerError      500
-                 *    HttpStatusCode.ServiceUnavailable         503
-                 */
+/* Apache forces closing the connection for these status codes:
+*    HttpStatusCode.BadRequest                 400
+*    HttpStatusCode.RequestTimeout             408
+*    HttpStatusCode.LengthRequired             411
+*    HttpStatusCode.RequestEntityTooLarge     413
+*    HttpStatusCode.RequestUriTooLong         414
+*    HttpStatusCode.InternalServerError      500
+*    HttpStatusCode.ServiceUnavailable         503
+*/
                 bool conn_close = (
                     _statusCode == (int)HttpStatusCode.BadRequest
                     || _statusCode == (int)HttpStatusCode.RequestTimeout
@@ -307,7 +307,7 @@ namespace System.Net
             int preamble = encoding.Preamble.Length;
             EnsureResponseStream();
 
-            /* Assumes that the ms was at position 0 */
+/* Assumes that the ms was at position 0 */
             ms.Position = preamble;
             SentHeaders = !isWebSocketHandshake;
         }

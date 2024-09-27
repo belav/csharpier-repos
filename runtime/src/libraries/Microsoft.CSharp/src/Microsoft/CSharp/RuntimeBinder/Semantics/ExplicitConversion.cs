@@ -66,22 +66,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 get { return _exprDest; }
             }
 
-            /*
-             * BindExplicitConversion
-             *
-             * This is a complex routine with complex parameter. Generally, this should
-             * be called through one of the helper methods that insulates you
-             * from the complexity of the interface. This routine handles all the logic
-             * associated with explicit conversions.
-             *
-             * Note that this function calls BindImplicitConversion first, so the main
-             * logic is only concerned with conversions that can be made explicitly, but
-             * not implicitly.
-             */
+/*
+* BindExplicitConversion
+*
+* This is a complex routine with complex parameter. Generally, this should
+* be called through one of the helper methods that insulates you
+* from the complexity of the interface. This routine handles all the logic
+* associated with explicit conversions.
+*
+* Note that this function calls BindImplicitConversion first, so the main
+* logic is only concerned with conversions that can be made explicitly, but
+* not implicitly.
+*/
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
             public bool Bind()
             {
-                // To test for a standard conversion, call canConvert(exprSrc, typeDest, STANDARDANDCONVERTTYPE.NOUDC) and
+                // To test for a standard conversion, call canConvert(exprSrc, typeDest,
+                // STANDARDANDCONVERTTYPE.NOUDC) and
                 // canConvert(typeDest, typeSrc, STANDARDANDCONVERTTYPE.NOUDC).
                 Debug.Assert((_flags & CONVERTTYPE.STANDARD) == 0);
 
@@ -283,7 +284,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 //
                 // The explicit reference conversions are:
                 //
-                // * From a one-dimensional array-type S[] to System.Collections.Generic.IList<T>, System.Collections.Generic.IReadOnlyList<T> and
+                // * From a one-dimensional array-type S[] to System.Collections.Generic.IList<T>,
+                // System.Collections.Generic.IReadOnlyList<T> and
                 //   their base interfaces, provided there is an explicit reference conversion from S to T.
 
                 Debug.Assert(_typeSrc != null);
@@ -344,9 +346,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 //
                 // The explicit reference conversions are:
                 //
-                // * From System.Collections.Generic.IList<T>, System.Collections.Generic.IReadOnlyList<T> and their base interfaces
-                //   to a one-dimensional array-type S[], provided there is an implicit or explicit reference conversion from
-                //   S[] to System.Collections.Generic.IList<T> or System.Collections.Generic.IReadOnlyList<T>. This is precisely when either S and T
+                // * From System.Collections.Generic.IList<T>, System.Collections.Generic.IReadOnlyList<T> and their
+                // base interfaces
+                //   to a one-dimensional array-type S[], provided there is an implicit or explicit reference
+                // conversion from
+                //   S[] to System.Collections.Generic.IList<T> or System.Collections.Generic.IReadOnlyList<T>. This
+                // is precisely when either S and T
                 //   are the same type or there is an implicit or explicit reference conversion from S to T.
 
                 if (

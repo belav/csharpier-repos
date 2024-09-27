@@ -31,10 +31,10 @@ using System.Threading;
 
 namespace System.Windows.Forms
 {
-    /*
-        When writing this code the Wine project was of great help to
-        understand the logic behind some Win32 issues. Thanks to them. Jordi,
-    */
+/*
+When writing this code the Wine project was of great help to
+understand the logic behind some Win32 issues. Thanks to them. Jordi,
+*/
     // UIA Framework Note: This class used by UIA for its mouse action methods.
     internal class MenuTracker
     {
@@ -251,19 +251,19 @@ namespace System.Windows.Forms
         // UIA Framework Note: Used to expand/collapse MenuItems
         public void OnMouseUp(MouseEventArgs args)
         {
-            /* mouse down dont comes from menu */
+/* mouse down dont comes from menu */
             if (!mouse_down)
                 return;
 
             mouse_down = false;
 
-            /* is not left button */
+/* is not left button */
             if ((args.Button & MouseButtons.Left) == 0)
                 return;
 
             MenuItem item = GetItemAtXY(args.X, args.Y);
 
-            /* the user released the mouse button outside the menu */
+/* the user released the mouse button outside the menu */
             if (item == null)
             {
                 Deactivate();
@@ -273,7 +273,7 @@ namespace System.Windows.Forms
             if (!item.Enabled)
                 return;
 
-            /* Deactivate the menu when is topmenu and popdown and */
+/* Deactivate the menu when is topmenu and popdown and */
             if (
                 ((CurrentMenu == TopMenu) && !(CurrentMenu is ContextMenu) && popdown_menu)
                 || !item.IsPopup
@@ -283,7 +283,7 @@ namespace System.Windows.Forms
                 UpdateCursor();
             }
 
-            /* Perform click when is not a popup */
+/* Perform click when is not a popup */
             if (!item.IsPopup)
             {
                 DeselectItem(item);
@@ -381,12 +381,12 @@ namespace System.Windows.Forms
 
             item.Selected = false;
 
-            /* When popup item then close all sub popups and unselect all sub items */
+/* When popup item then close all sub popups and unselect all sub items */
             if (item.IsPopup)
             {
                 HideSubPopups(item, TopMenu);
 
-                /* Unselect all selected sub itens */
+/* Unselect all selected sub itens */
                 foreach (MenuItem subitem in item.MenuItems)
                     if (subitem.Selected)
                         DeselectItem(subitem);
@@ -589,7 +589,7 @@ namespace System.Windows.Forms
             {
                 case ItemNavigation.First:
 
-                    /* First item that is not separator and it is visible*/
+/* First item that is not separator and it is visible*/
                     for (pos = 0; pos < menu.MenuItems.Count; pos++)
                     {
                         item = menu.MenuItems[pos];
@@ -606,7 +606,7 @@ namespace System.Windows.Forms
 
                     pos = menu.SelectedItem == null ? -1 : menu.SelectedItem.Index;
 
-                    /* Next item that is not separator and it is visible*/
+/* Next item that is not separator and it is visible*/
                     for (pos++; pos < menu.MenuItems.Count; pos++)
                     {
                         item = menu.MenuItems[pos];
@@ -617,7 +617,7 @@ namespace System.Windows.Forms
                     if (pos >= menu.MenuItems.Count)
                     { /* Jump at the start of the menu */
                         pos = 0;
-                        /* Next item that is not separator and it is visible*/
+/* Next item that is not separator and it is visible*/
                         for (; pos < menu.MenuItems.Count; pos++)
                         {
                             item = menu.MenuItems[pos];
@@ -632,7 +632,7 @@ namespace System.Windows.Forms
                     if (menu.SelectedItem != null)
                         pos = menu.SelectedItem.Index;
 
-                    /* Previous item that is not separator and it is visible*/
+/* Previous item that is not separator and it is visible*/
                     for (pos--; pos >= 0; pos--)
                     {
                         item = menu.MenuItems[pos];
@@ -643,7 +643,7 @@ namespace System.Windows.Forms
                     if (pos < 0)
                     { /* Jump at the end of the menu*/
                         pos = menu.MenuItems.Count - 1;
-                        /* Previous item that is not separator and it is visible*/
+/* Previous item that is not separator and it is visible*/
                         for (; pos >= 0; pos--)
                         {
                             item = menu.MenuItems[pos];

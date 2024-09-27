@@ -800,7 +800,8 @@ public class MessageBodyTests : LoggedTest
     public async Task UpgradeConnectionAcceptsContentLengthZero()
     {
         // https://tools.ietf.org/html/rfc7230#section-3.3.2
-        // "A user agent SHOULD NOT send a Content-Length header field when the request message does not contain
+        // "A user agent SHOULD NOT send a Content-Length header field when the request message does not
+        // contain
         // a payload body and the method semantics do not anticipate such a body."
         //  ==> it can actually send that header
         var headerConnection = "Upgrade, Keep-Alive";
@@ -1075,7 +1076,8 @@ public class MessageBodyTests : LoggedTest
             Assert.Equal(6, readResult.Buffer.Length);
             body.AdvanceTo(readResult.Buffer.End);
 
-            // Due to the limits set on HttpProtocol.RequestBodyPipe, backpressure should be triggered on every write to that pipe.
+            // Due to the limits set on HttpProtocol.RequestBodyPipe, backpressure should be triggered on every
+            // write to that pipe.
             mockTimeoutControl.Verify(
                 timeoutControl => timeoutControl.StopTimingRead(),
                 Times.Exactly(2)

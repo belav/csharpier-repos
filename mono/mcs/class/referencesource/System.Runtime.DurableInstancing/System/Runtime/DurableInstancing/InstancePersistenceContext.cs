@@ -88,7 +88,8 @@ namespace System.Runtime.DurableInstancing
                     "Mismatched lock tokens."
                 );
 
-                // If the handle doesn't own the lock yet, return the owner LockToken, which is needed to check whether this owner already owns locks.
+                // If the handle doesn't own the lock yet, return the owner LockToken, which is needed to check
+                // whether this owner already owns locks.
                 return InstanceHandle.Owner == null ? Guid.Empty : InstanceHandle.Owner.OwnerToken;
             }
         }
@@ -931,7 +932,8 @@ namespace System.Runtime.DurableInstancing
             );
             Fx.AssertAndThrow(Active, "RequireTransaction called when no command is active.");
 
-            // It's ok if some time has passed since the timeout value was acquired, it is ok to run long.  This transaction is not generally responsible
+            // It's ok if some time has passed since the timeout value was acquired, it is ok to run long.  This
+            // transaction is not generally responsible
             // for timing out the Execute operation. The exception to this rule is during Commit.
             this.myTransaction = new CommittableTransaction(
                 new TransactionOptions()
@@ -1518,7 +1520,8 @@ namespace System.Runtime.DurableInstancing
                             this.context.RequireTransaction();
                         }
 
-                        // Intentionally calling MayBindLockToInstanceHandle prior to Validate.  This is a publically visible order.
+                        // Intentionally calling MayBindLockToInstanceHandle prior to Validate.  This is a publically
+                        // visible order.
                         bool mayBindLockToInstanceHandle =
                             CurrentCommand.AutomaticallyAcquiringLock;
                         CurrentCommand.Validate(this.context.InstanceView);
@@ -1674,7 +1677,8 @@ namespace System.Runtime.DurableInstancing
                     return false;
                 }
 
-                // If this is an inner command, return true right away to continue this execution episode in a different async result.
+                // If this is an inner command, return true right away to continue this execution episode in a
+                // different async result.
                 if (this.initialInstanceHandle == null)
                 {
                     return true;

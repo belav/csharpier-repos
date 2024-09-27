@@ -19,7 +19,8 @@ namespace System.Web.Services.Description
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    /// <include file='doc\ServiceDescriptionReflector.uex' path='docs/doc[@for="ServiceDescriptionReflector"]/*' />
+    /// <include file='doc\ServiceDescriptionReflector.uex'
+    // path='docs/doc[@for="ServiceDescriptionReflector"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -49,7 +50,8 @@ namespace System.Web.Services.Description
             get { return this.uriFixups; }
         }
 
-        /// <include file='doc\ServiceDescriptionReflector.uex' path='docs/doc[@for="ServiceDescriptionReflector.ServiceDescriptions"]/*' />
+        /// <include file='doc\ServiceDescriptionReflector.uex'
+        // path='docs/doc[@for="ServiceDescriptionReflector.ServiceDescriptions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -58,7 +60,8 @@ namespace System.Web.Services.Description
             get { return descriptions; }
         }
 
-        /// <include file='doc\ServiceDescriptionReflector.uex' path='docs/doc[@for="ServiceDescriptionReflector.Schemas"]/*' />
+        /// <include file='doc\ServiceDescriptionReflector.uex'
+        // path='docs/doc[@for="ServiceDescriptionReflector.Schemas"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -127,7 +130,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescriptionReflector.uex' path='docs/doc[@for="ServiceDescriptionReflector.ServiceDescriptionReflector"]/*' />
+        /// <include file='doc\ServiceDescriptionReflector.uex'
+        // path='docs/doc[@for="ServiceDescriptionReflector.ServiceDescriptionReflector"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -198,7 +202,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescriptionReflector.uex' path='docs/doc[@for="ServiceDescriptionReflector.Reflect"]/*' />
+        /// <include file='doc\ServiceDescriptionReflector.uex'
+        // path='docs/doc[@for="ServiceDescriptionReflector.Reflect"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -228,7 +233,8 @@ namespace System.Web.Services.Description
             if (serviceAttr.Description != null && serviceAttr.Description.Length > 0)
                 ServiceDescription.Documentation = serviceAttr.Description;
 
-            // need to preprocess all exported schemas to make sure that IXmlSerializable schemas are Merged and the resulting set is valid
+            // need to preprocess all exported schemas to make sure that IXmlSerializable schemas are Merged and
+            // the resulting set is valid
             ServiceDescription.Types.Schemas.Compile(null, false);
 
             if (ServiceDescriptions.Count > 1)

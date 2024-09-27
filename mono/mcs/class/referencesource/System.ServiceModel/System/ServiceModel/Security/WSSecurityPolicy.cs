@@ -925,7 +925,8 @@ namespace System.ServiceModel.Security
 
         public virtual XmlElement CreateWsspAssertionMustSupportRefEncryptedKeyName()
         {
-            // protectionTokenHasAsymmetricKey is only set to true for a SymmetricBindingElement having an asymmetric key
+            // protectionTokenHasAsymmetricKey is only set to true for a SymmetricBindingElement having an
+            // asymmetric key
             if (_protectionTokenHasAsymmetricKey)
             {
                 return CreateWsspAssertion(MustSupportRefEncryptedKeyName);
@@ -3890,7 +3891,8 @@ namespace System.ServiceModel.Security
                 }
 
                 //
-                // Copy the State from the first importer to the second one so that the state can be passed to the second round wsdl retrieval
+                // Copy the State from the first importer to the second one so that the state can be passed to the
+                // second round wsdl retrieval
                 //
                 if (
                     (importer.State != null)
@@ -3968,7 +3970,8 @@ namespace System.ServiceModel.Security
                 IssuedSecurityTokenParameters parameters
             )
             {
-                // check if an explicit issuer address has been specified. If so,add the endpoint corresponding to that address only. If not add all acceptable endpoints.
+                // check if an explicit issuer address has been specified. If so,add the endpoint corresponding to
+                // that address only. If not add all acceptable endpoints.
 
                 bool isIssuerSpecified = (
                     parameters.IssuerAddress != null && !parameters.IssuerAddress.IsAnonymous

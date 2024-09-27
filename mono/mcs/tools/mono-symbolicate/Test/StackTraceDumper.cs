@@ -100,15 +100,17 @@ class StackTraceDumper
 
         Catch(() => TestIterator().ToArray());
 
-        /*
-        The following test include ambiguous methods we can't resolve. Testing this is hard, so I'm leaving a test behind but disabling it for the time being
-        In this case the ambiguous methods are:
-            public static void Foo<K> (int a, bool hard_crash, GenClass<T> arg, List<int> zz)
-            public static void Foo<K> (int a, bool hard_crash, GenClass<T> arg, List<double> zz)
+/*
+The following test include ambiguous methods we can't resolve. Testing this is hard, so I'm leaving
+a test behind but disabling it for the time being
+In this case the ambiguous methods are:
+public static void Foo<K> (int a, bool hard_crash, GenClass<T> arg, List<int> zz)
+public static void Foo<K> (int a, bool hard_crash, GenClass<T> arg, List<double> zz)
 
-        The are ambiguous because the only difference is the instantiation on the last parameter which we can't
-        figure out from a stacktrace.
-        */
+The are ambiguous because the only difference is the instantiation on the last parameter which we
+can't
+figure out from a stacktrace.
+*/
         //Catch (() => ComplicatedTestCase.Run ());
     }
 

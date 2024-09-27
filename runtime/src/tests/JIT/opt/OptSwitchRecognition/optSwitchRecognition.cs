@@ -126,7 +126,8 @@ public class CSwitchRecognitionTest
     public static void TestRecSwitch128JumpTables(int arg1, bool expected) =>
         Assert.Equal(expected, RecSwitch128JumpTables(arg1));
 
-    // Skips `bit test` conversion because Switch jump targets are > 2 (should skip Switch Recognition optimization)
+    // Skips `bit test` conversion because Switch jump targets are > 2 (should skip Switch Recognition
+    // optimization)
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int RecSwitchSkipBitTest(int arch)
     {

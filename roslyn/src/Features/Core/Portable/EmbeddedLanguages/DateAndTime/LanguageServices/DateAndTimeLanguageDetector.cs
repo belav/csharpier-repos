@@ -14,7 +14,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime.LanguageServices;
 
 /// <summary>
-/// Helper class to detect <see cref="DateTime"/> and <see cref="DateTimeOffset"/> format strings in a document efficiently.
+/// Helper class to detect <see cref="DateTime"/> and <see cref="DateTimeOffset"/> format strings in
+// a document efficiently.
 /// </summary>
 internal sealed class DateAndTimeLanguageDetector(
     EmbeddedLanguageInfo info,
@@ -60,14 +61,16 @@ internal sealed class DateAndTimeLanguageDetector(
         out DateAndTimeOptions options
     )
     {
-        // DateTime never has any options.  So just return empty and 'true' so we stop processing immediately.
+        // DateTime never has any options.  So just return empty and 'true' so we stop processing
+        // immediately.
         options = default;
         return true;
     }
 
     protected override DateTimeTree? TryParse(VirtualCharSequence chars, DateAndTimeOptions options)
     {
-        // Once we've determined something is a DateTime string, then parsing is a no-op.  We just return a dummy
+        // Once we've determined something is a DateTime string, then parsing is a no-op.  We just return a
+        // dummy
         // instance to satisfy the detector requirements.
         return DateTimeTree.Instance;
     }

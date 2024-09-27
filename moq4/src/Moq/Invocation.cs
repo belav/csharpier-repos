@@ -10,83 +10,83 @@ using Moq.Async;
 
 namespace Moq
 {
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-        internal abstract class Invocation : IInvocation
-    After:
-        abstract class Invocation : IInvocation
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+internal abstract class Invocation : IInvocation
+After:
+abstract class Invocation : IInvocation
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-        internal abstract class Invocation : IInvocation
-    After:
-        abstract class Invocation : IInvocation
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+internal abstract class Invocation : IInvocation
+After:
+abstract class Invocation : IInvocation
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-        internal abstract class Invocation : IInvocation
-    After:
-        abstract class Invocation : IInvocation
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+internal abstract class Invocation : IInvocation
+After:
+abstract class Invocation : IInvocation
+*/
     abstract class Invocation : IInvocation
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-            private object[] arguments;
-            private MethodInfo method;
-            private MethodInfo methodImplementation;
-            private readonly Type proxyType;
-            private object result;
-            private Setup matchingSetup;
-            private bool verified;
-    After:
-            object[] arguments;
-            MethodInfo method;
-            MethodInfo methodImplementation;
-            readonly Type proxyType;
-            object result;
-            Setup matchingSetup;
-            bool verified;
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private object[] arguments;
+private MethodInfo method;
+private MethodInfo methodImplementation;
+private readonly Type proxyType;
+private object result;
+private Setup matchingSetup;
+private bool verified;
+After:
+object[] arguments;
+MethodInfo method;
+MethodInfo methodImplementation;
+readonly Type proxyType;
+object result;
+Setup matchingSetup;
+bool verified;
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-            private object[] arguments;
-            private MethodInfo method;
-            private MethodInfo methodImplementation;
-            private readonly Type proxyType;
-            private object result;
-            private Setup matchingSetup;
-            private bool verified;
-    After:
-            object[] arguments;
-            MethodInfo method;
-            MethodInfo methodImplementation;
-            readonly Type proxyType;
-            object result;
-            Setup matchingSetup;
-            bool verified;
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private object[] arguments;
+private MethodInfo method;
+private MethodInfo methodImplementation;
+private readonly Type proxyType;
+private object result;
+private Setup matchingSetup;
+private bool verified;
+After:
+object[] arguments;
+MethodInfo method;
+MethodInfo methodImplementation;
+readonly Type proxyType;
+object result;
+Setup matchingSetup;
+bool verified;
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-            private object[] arguments;
-            private MethodInfo method;
-            private MethodInfo methodImplementation;
-            private readonly Type proxyType;
-            private object result;
-            private Setup matchingSetup;
-            private bool verified;
-    After:
-            object[] arguments;
-            MethodInfo method;
-            MethodInfo methodImplementation;
-            readonly Type proxyType;
-            object result;
-            Setup matchingSetup;
-            bool verified;
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private object[] arguments;
+private MethodInfo method;
+private MethodInfo methodImplementation;
+private readonly Type proxyType;
+private object result;
+private Setup matchingSetup;
+private bool verified;
+After:
+object[] arguments;
+MethodInfo method;
+MethodInfo methodImplementation;
+readonly Type proxyType;
+object result;
+Setup matchingSetup;
+bool verified;
+*/
     {
         object[] arguments;
         MethodInfo method;
@@ -99,9 +99,11 @@ namespace Moq
         /// <summary>
         /// Initializes a new instance of the <see cref="Invocation"/> class.
         /// </summary>
-        /// <param name="proxyType">The <see cref="Type"/> of the concrete proxy object on which a method is being invoked.</param>
+        /// <param name="proxyType">The <see cref="Type"/> of the concrete proxy object on which a method is
+        // being invoked.</param>
         /// <param name="method">The method being invoked.</param>
-        /// <param name="arguments">The arguments with which the specified <paramref name="method"/> is being invoked.</param>
+        /// <param name="arguments">The arguments with which the specified <paramref name="method"/> is
+        // being invoked.</param>
         protected Invocation(Type proxyType, MethodInfo method, params object[] arguments)
         {
             Debug.Assert(proxyType != null);
@@ -135,7 +137,8 @@ namespace Moq
         /// Gets the arguments of the invocation.
         /// </summary>
         /// <remarks>
-        /// Arguments may be modified. Derived classes must ensure that by-reference parameters are written back
+        /// Arguments may be modified. Derived classes must ensure that by-reference parameters are written
+        // back
         /// when the invocation is ended by a call to any of the three <c>Returns</c> methods.
         /// </remarks>
         public object[] Arguments => this.arguments;
@@ -242,31 +245,32 @@ namespace Moq
 
             return builder.ToString();
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private readonly struct ExceptionResult
-            After:
-                    readonly struct ExceptionResult
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private readonly struct ExceptionResult
+After:
+readonly struct ExceptionResult
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private readonly struct ExceptionResult
-            After:
-                    readonly struct ExceptionResult
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private readonly struct ExceptionResult
+After:
+readonly struct ExceptionResult
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private readonly struct ExceptionResult
-            After:
-                    readonly struct ExceptionResult
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private readonly struct ExceptionResult
+After:
+readonly struct ExceptionResult
+*/
         }
 
         /// <summary>
         /// Internal type to mark invocation results as "exception occurred during execution". The type just
-        /// wraps the Exception so a thrown exception can be distinguished from an <see cref="System.Exception"/>
+        /// wraps the Exception so a thrown exception can be distinguished from an <see
+        // cref="System.Exception"/>
         /// return value.
         /// </summary>
         readonly struct ExceptionResult

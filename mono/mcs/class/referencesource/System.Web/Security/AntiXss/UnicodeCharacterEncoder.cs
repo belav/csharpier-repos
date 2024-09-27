@@ -176,7 +176,8 @@ namespace System.Web.Security.AntiXss
         /// Encodes input strings for use in HTML.
         /// </summary>
         /// <param name="input">String to be encoded</param>
-        /// <param name="useNamedEntities">Value indicating if the HTML 4.0 named entities should be used.</param>
+        /// <param name="useNamedEntities">Value indicating if the HTML 4.0 named entities should be
+        // used.</param>
         /// <returns>
         /// Encoded string for use in HTML.
         /// </returns>
@@ -249,7 +250,8 @@ namespace System.Web.Security.AntiXss
         /// Encodes input strings for use in HTML.
         /// </summary>
         /// <param name="input">String to be encoded</param>
-        /// <param name="useNamedEntities">Value indicating if the HTML 4.0 named entities should be used.</param>
+        /// <param name="useNamedEntities">Value indicating if the HTML 4.0 named entities should be
+        // used.</param>
         /// <param name="encoderTweak">A <see cref="MethodSpecificEncoder"/> function, if needed.</param>
         /// <returns>
         /// Encoded string for use in HTML.
@@ -383,9 +385,12 @@ namespace System.Web.Security.AntiXss
         /// Applies Html specific values to the internal value list.
         /// </summary>
         /// <remarks>
-        /// ASP.NET 4 and Razor introduced a new syntax &lt;%: %&gt; and @ which are used to HTML-encode values.
-        /// For example, &lt;%: foo %&gt; is shorthand for &lt;%= HttpUtility.HtmlEncode(foo) %&gt;. Since these could
-        /// occur inside an attribute, e.g. &lt;a href="@Foo"&gt;, ASP.NET mandates that HtmlEncode also encode
+        /// ASP.NET 4 and Razor introduced a new syntax &lt;%: %&gt; and @ which are used to HTML-encode
+        // values.
+        /// For example, &lt;%: foo %&gt; is shorthand for &lt;%= HttpUtility.HtmlEncode(foo) %&gt;. Since
+        // these could
+        /// occur inside an attribute, e.g. &lt;a href="@Foo"&gt;, ASP.NET mandates that HtmlEncode also
+        // encode
         /// characters that are meaningful inside HTML attributes, like the single quote. Encoding spaces
         /// isn't mandatory since it's expected that users will surround such variables with quotes.
         /// </remarks>

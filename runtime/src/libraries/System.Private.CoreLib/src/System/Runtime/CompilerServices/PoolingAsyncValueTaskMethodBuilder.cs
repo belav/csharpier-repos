@@ -7,21 +7,25 @@ using StateMachineBox = System.Runtime.CompilerServices.PoolingAsyncValueTaskMet
 
 namespace System.Runtime.CompilerServices
 {
-    /// <summary>Represents a builder for asynchronous methods that return a <see cref="ValueTask"/>.</summary>
+    /// <summary>Represents a builder for asynchronous methods that return a <see
+    // cref="ValueTask"/>.</summary>
     [StructLayout(LayoutKind.Auto)]
     public struct PoolingAsyncValueTaskMethodBuilder
     {
-        /// <summary>Sentinel object used to indicate that the builder completed synchronously and successfully.</summary>
+        /// <summary>Sentinel object used to indicate that the builder completed synchronously and
+        // successfully.</summary>
         private static readonly StateMachineBox s_syncSuccessSentinel =
             PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.s_syncSuccessSentinel;
 
         /// <summary>The wrapped state machine box.</summary>
         /// <remarks>
-        /// If the operation completed synchronously and successfully, this will be <see cref="s_syncSuccessSentinel"/>.
+        /// If the operation completed synchronously and successfully, this will be <see
+        // cref="s_syncSuccessSentinel"/>.
         /// </remarks>
         private StateMachineBox? m_task; // Debugger depends on the exact name of this field.
 
-        /// <summary>Creates an instance of the <see cref="PoolingAsyncValueTaskMethodBuilder"/> struct.</summary>
+        /// <summary>Creates an instance of the <see cref="PoolingAsyncValueTaskMethodBuilder"/>
+        // struct.</summary>
         /// <returns>The initialized instance.</returns>
         public static PoolingAsyncValueTaskMethodBuilder Create() => default;
 
@@ -67,11 +71,15 @@ namespace System.Runtime.CompilerServices
                 }
 
                 // With normal access paterns, m_task should always be non-null here: the async method should have
-                // either completed synchronously, in which case SetResult would have set m_task to a non-null object,
-                // or it should be completing asynchronously, in which case AwaitUnsafeOnCompleted would have similarly
+                // either completed synchronously, in which case SetResult would have set m_task to a non-null
+                // object,
+                // or it should be completing asynchronously, in which case AwaitUnsafeOnCompleted would have
+                // similarly
                 // initialized m_task to a state machine object.  However, if the type is used manually (not via
-                // compiler-generated code) and accesses Task directly, we force it to be initialized.  Things will then
-                // "work" but in a degraded mode, as we don't know the TStateMachine type here, and thus we use a box around
+                // compiler-generated code) and accesses Task directly, we force it to be initialized.  Things will
+                // then
+                // "work" but in a degraded mode, as we don't know the TStateMachine type here, and thus we use a
+                // box around
                 // the interface instead.
 
                 StateMachineBox? box = m_task ??=
@@ -80,7 +88,8 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
+        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter
+        // completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">The awaiter.</param>
@@ -97,7 +106,8 @@ namespace System.Runtime.CompilerServices
                 ref m_task
             );
 
-        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
+        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter
+        // completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">The awaiter.</param>
@@ -121,7 +131,8 @@ namespace System.Runtime.CompilerServices
         /// <remarks>
         /// This property lazily instantiates the ID in a non-thread-safe manner.
         /// It must only be used by the debugger and tracing purposes, and only in a single-threaded manner
-        /// when no other threads are in the middle of accessing this or other members that lazily initialize the box.
+        /// when no other threads are in the middle of accessing this or other members that lazily
+        // initialize the box.
         /// </remarks>
         internal object ObjectIdForDebugger =>
             m_task ??=

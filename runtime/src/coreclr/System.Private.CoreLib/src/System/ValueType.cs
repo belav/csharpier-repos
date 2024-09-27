@@ -75,16 +75,16 @@ namespace System
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern bool CanCompareBits(object obj);
 
-        /*=================================GetHashCode==================================
-        **Action: Our algorithm for returning the hashcode is a little bit complex.  We look
-        **        for the first non-static field and get its hashcode.  If the type has no
-        **        non-static fields, we return the hashcode of the type.  We can't take the
-        **        hashcode of a static member because if that member is of the same type as
-        **        the original type, we'll end up in an infinite loop.
-        **Returns: The hashcode for the type.
-        **Arguments: None.
-        **Exceptions: None.
-        ==============================================================================*/
+/*=================================GetHashCode==================================
+**Action: Our algorithm for returning the hashcode is a little bit complex.  We look
+**        for the first non-static field and get its hashcode.  If the type has no
+**        non-static fields, we return the hashcode of the type.  We can't take the
+**        hashcode of a static member because if that member is of the same type as
+**        the original type, we'll end up in an infinite loop.
+**Returns: The hashcode for the type.
+**Arguments: None.
+**Exceptions: None.
+==============================================================================*/
         [MethodImpl(MethodImplOptions.InternalCall)]
         public extern override int GetHashCode();
 

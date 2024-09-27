@@ -88,8 +88,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Checks if an applied attribute with the given attributeType matches the namespace name and type name of the given early attribute's description
-        /// and the attribute description has a signature with parameter count equal to the given attributeArgCount.
+        /// Checks if an applied attribute with the given attributeType matches the namespace name and type
+        // name of the given early attribute's description
+        /// and the attribute description has a signature with parameter count equal to the given
+        // attributeArgCount.
         /// NOTE: We don't allow early decoded attributes to have optional parameters.
         /// </summary>
         internal static bool IsTargetEarlyAttribute(
@@ -187,11 +189,13 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns named attribute argument with the given <paramref name="name"/> as type <typeparamref name="T"/>.
+        /// Returns named attribute argument with the given <paramref name="name"/> as type <typeparamref
+        // name="T"/>.
         /// If there is more than one named argument with this name, it returns the last one.
         /// If no named argument is found then the <paramref name="defaultValue"/> is returned.
         /// </summary>
-        /// <param name="name">The metadata property or field name. This name is case sensitive (both VB and C#).</param>
+        /// <param name="name">The metadata property or field name. This name is case sensitive (both VB and
+        // C#).</param>
         /// <param name="specialType">SpecialType of the named argument.</param>
         /// <param name="defaultValue">Default value for the named argument.</param>
         /// <remarks>
@@ -425,7 +429,8 @@ namespace Microsoft.CodeAnalysis
         // Note: it is disallowed to declare a property and a field
         // with the same name in C# or VB source, even if it is allowed in IL.
         //
-        // We use a virtual method and override to prevent having to realize the public symbols just to decode obsolete attributes.
+        // We use a virtual method and override to prevent having to realize the public symbols just to
+        // decode obsolete attributes.
         // Ideally we would use an abstract method, but that would require making the method visible to
         // public consumers who inherit from this class, which we don't want to do.
         // Therefore we just make it a 'private protected virtual' method instead.
@@ -731,7 +736,8 @@ namespace Microsoft.CodeAnalysis
             //   Native C# compiler preloads all the well known attribute types from mscorlib prior to binding,
             //   hence it uses the AttributeUsage type defined in mscorlib for attribute usage validation.
             //
-            //   See Roslyn Bug 8603: ETA crashes with InvalidOperationException on duplicate attributes for details.
+            //   See Roslyn Bug 8603: ETA crashes with InvalidOperationException on duplicate attributes for
+            // details.
 
             Debug.Assert(positionalArg.ValueInternal is object);
             var validOn = (AttributeTargets)positionalArg.ValueInternal;

@@ -104,7 +104,8 @@ namespace System.Net.Http.Headers
             DateTimeOffset date = DateTimeOffset.MinValue;
             int deltaSeconds = -1; // use -1 to indicate that the value was not set. 'delta' values are always >=0
 
-            // We either have a timespan or a date/time value. Determine which one we have by looking at the first char.
+            // We either have a timespan or a date/time value. Determine which one we have by looking at the
+            // first char.
             // If it is a number, we have a timespan, otherwise we assume we have a date.
             char firstChar = input[current];
 
@@ -122,7 +123,8 @@ namespace System.Net.Http.Headers
                 current += deltaLength;
                 current += HttpRuleParser.GetWhitespaceLength(input, current);
 
-                // RetryConditionHeaderValue only allows 1 value. There must be no delimiter/other chars after 'delta'
+                // RetryConditionHeaderValue only allows 1 value. There must be no delimiter/other chars after
+                // 'delta'
                 if (current != input.Length)
                 {
                     return 0;

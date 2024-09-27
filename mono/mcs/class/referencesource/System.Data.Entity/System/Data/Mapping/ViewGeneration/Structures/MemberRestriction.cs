@@ -36,14 +36,17 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     {
         #region Constructors
         /// <summary>
-        /// Creates an incomplete member restriction with the meaning "<paramref name="slot"/> = <paramref name="value"/>".
-        /// "Partial" means that the <see cref="Domain"/> in this restriction is partial - hence the operations on the restriction are limited.
+        /// Creates an incomplete member restriction with the meaning "<paramref name="slot"/> = <paramref
+        // name="value"/>".
+        /// "Partial" means that the <see cref="Domain"/> in this restriction is partial - hence the
+        // operations on the restriction are limited.
         /// </summary>
         protected MemberRestriction(MemberProjectedSlot slot, Constant value)
             : this(slot, new Constant[] { value }) { }
 
         /// <summary>
-        /// Creates an incomplete member restriction with the meaning "<paramref name="slot"/> in <paramref name="values"/>".
+        /// Creates an incomplete member restriction with the meaning "<paramref name="slot"/> in <paramref
+        // name="values"/>".
         /// </summary>
         protected MemberRestriction(MemberProjectedSlot slot, IEnumerable<Constant> values)
         {
@@ -52,7 +55,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Creates a complete member restriction with the meaning "<paramref name="slot"/> in <paramref name="domain"/>".
+        /// Creates a complete member restriction with the meaning "<paramref name="slot"/> in <paramref
+        // name="domain"/>".
         /// </summary>
         protected MemberRestriction(MemberProjectedSlot slot, Domain domain)
         {
@@ -67,7 +71,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Creates a complete member restriction with the meaning "<paramref name="slot"/> in <paramref name="values"/>".
+        /// Creates a complete member restriction with the meaning "<paramref name="slot"/> in <paramref
+        // name="values"/>".
         /// </summary>
         /// <param name="possibleValues">all the values that the <paramref name="slot"/> can take</param>
         protected MemberRestriction(
@@ -136,7 +141,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Creates a complete member restriction based on the existing restriction with possible values for the domain being given by <paramref name="possibleValues"/>.
+        /// Creates a complete member restriction based on the existing restriction with possible values for
+        // the domain being given by <paramref name="possibleValues"/>.
         /// </summary>
         internal abstract MemberRestriction CreateCompleteMemberRestriction(
             IEnumerable<Constant> possibleValues
@@ -157,7 +163,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// See <see cref="BoolLiteral.IsEqualTo"/>. Member restriction can be incomplete for this operation.
+        /// See <see cref="BoolLiteral.IsEqualTo"/>. Member restriction can be incomplete for this
+        // operation.
         /// </summary>
         protected override bool IsEqualTo(BoolLiteral right)
         {
@@ -195,7 +202,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// See <see cref="BoolLiteral.IsIdentifierEqualTo"/>. Member restriction can be incomplete for this operation.
+        /// See <see cref="BoolLiteral.IsIdentifierEqualTo"/>. Member restriction can be incomplete for this
+        // operation.
         /// </summary>
         protected override bool IsIdentifierEqualTo(BoolLiteral right)
         {
@@ -215,7 +223,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// See <see cref="BoolLiteral.GetIdentifierHash"/>. Member restriction can be incomplete for this operation.
+        /// See <see cref="BoolLiteral.GetIdentifierHash"/>. Member restriction can be incomplete for this
+        // operation.
         /// </summary>
         protected override int GetIdentifierHash()
         {
@@ -228,7 +237,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Converts this to a user-understandable string.
         /// </summary>
-        /// <param name="invertOutput">indicates whether the text needs to say "x in .." or "x in NOT ..."  (i.e., the latter if <paramref name="invertOutput"/> is true)</param>
+        /// <param name="invertOutput">indicates whether the text needs to say "x in .." or "x in NOT ..."
+        // (i.e., the latter if <paramref name="invertOutput"/> is true)</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Performance",
             "CA1811:AvoidUncalledPrivateCode"
@@ -356,7 +366,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Modifies builder to contain a message for inverting the typeConstants, i.e., NOT(p in Person) becomes p in Customer.
+        /// Modifies builder to contain a message for inverting the typeConstants, i.e., NOT(p in Person)
+        // becomes p in Customer.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Performance",

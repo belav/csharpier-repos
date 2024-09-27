@@ -68,7 +68,8 @@ namespace System.Xml.Xsl.Xslt
         }
 
         /*
-        *   LocationPathPattern ::= '/' RelativePathPattern? | '//'? RelativePathPattern | IdKeyPattern (('/' | '//') RelativePathPattern)?
+        *   LocationPathPattern ::= '/' RelativePathPattern? | '//'? RelativePathPattern | IdKeyPattern
+        (('/' | '//') RelativePathPattern)?
         */
         private QilNode ParseLocationPathPattern()
         {

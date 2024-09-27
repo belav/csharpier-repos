@@ -13,8 +13,10 @@ namespace System.Security.Cryptography
     ///   Computes the SHAKE256 hash for the input data.
     /// </summary>
     /// <remarks>
-    ///   This algorithm is specified by FIPS 202. The SHAKE algorithm family is an extendable-output function (XOF)
-    ///   which allows the output to be extended to any length. The size of the XOF indicates the security strength of
+    ///   This algorithm is specified by FIPS 202. The SHAKE algorithm family is an extendable-output
+    // function (XOF)
+    ///   which allows the output to be extended to any length. The size of the XOF indicates the
+    // security strength of
     ///   the algorithm, not the output size.
     /// </remarks>
     public sealed partial class Shake256 : IDisposable
@@ -27,7 +29,8 @@ namespace System.Security.Cryptography
         ///   Initializes a new instance of the <see cref="Shake256" /> class.
         /// </summary>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public Shake256()
@@ -95,7 +98,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Fills the buffer with the hash for the data accumulated from prior calls to the <c>AppendData</c> methods,
+        ///   Fills the buffer with the hash for the data accumulated from prior calls to the
+        // <c>AppendData</c> methods,
         ///   and resets the object to its initial state.
         /// </summary>
         /// <param name="destination">The buffer to fill with the hash.</param>
@@ -131,7 +135,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Fills the buffer with the hash for the data accumulated from prior calls to the <c>AppendData</c> methods,
+        ///   Fills the buffer with the hash for the data accumulated from prior calls to the
+        // <c>AppendData</c> methods,
         ///   without resetting the object to its initial state.
         /// </summary>
         /// <param name="destination">The buffer to fill with the hash.</param>
@@ -168,7 +173,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="source" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public static byte[] HashData(byte[] source, int outputLength)
@@ -188,7 +194,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="outputLength" /> is negative.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public static byte[] HashData(ReadOnlySpan<byte> source, int outputLength)
@@ -207,7 +214,8 @@ namespace System.Security.Cryptography
         /// <param name="source">The data to hash.</param>
         /// <param name="destination">The buffer to fill with the hash.</param>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public static void HashData(ReadOnlySpan<byte> source, Span<byte> destination)
@@ -232,7 +240,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="source" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public static byte[] HashData(Stream source, int outputLength)
@@ -261,7 +270,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="source" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public static void HashData(Stream source, Span<byte> destination)
@@ -297,7 +307,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="cancellationToken"/> has been canceled.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public static ValueTask HashDataAsync(
@@ -347,7 +358,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="cancellationToken"/> has been canceled.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException">
-        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
+        ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" />
+        // property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
         public static ValueTask<byte[]> HashDataAsync(

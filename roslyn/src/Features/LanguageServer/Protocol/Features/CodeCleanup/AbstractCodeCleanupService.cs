@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     .ConfigureAwait(false);
             }
 
-            // do the remove usings after code fix, as code fix might remove some code which can results in unused usings.
+            // do the remove usings after code fix, as code fix might remove some code which can results in
+            // unused usings.
             if (organizeUsings)
             {
                 progressTracker.Report(
@@ -242,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             CancellationToken cancellationToken
         )
         {
-            // Enable fixes for all diagnostic severities if any of the diagnostic IDs has been explicitly enabled in Code Cleanup.
+            // Enable fixes for all diagnostic severities if any of the diagnostic IDs has been explicitly
+            // enabled in Code Cleanup.
             // Otherwise, only enable fixes for Warning and Error severity diagnostics.
             var minimumSeverity = isAnyDiagnosticIdExplicitlyEnabled
                 ? DiagnosticSeverity.Hidden
@@ -392,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     .ConfigureAwait(false);
 
                 // If changes were made to the solution snap shot outside the current document discard the changes.
-                // The assumption here is that if we are applying a third party code fix to a document it only affects the document.
+                // The assumption here is that if we are applying a third party code fix to a document it only
+                // affects the document.
                 // Symbol renames and other complex refactorings we do not want to include in code cleanup.
                 // We can revisit this if we get feedback to the contrary
                 if (!ChangesMadeOutsideDocument(document, updatedDocument))

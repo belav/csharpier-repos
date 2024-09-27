@@ -190,7 +190,8 @@ namespace System.Runtime.Loader
         )
         {
             AssemblyLoadContext context;
-            // This check exists because the function can be called early in startup, before the default ALC is initialized
+            // This check exists because the function can be called early in startup, before the default ALC is
+            // initialized
             if (gchManagedAssemblyLoadContext == IntPtr.Zero)
                 context = Default;
             else

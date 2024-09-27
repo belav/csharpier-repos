@@ -72,7 +72,8 @@ namespace System.Text.Json
                 ThrowHelper.ThrowNotSupportedException_CollectionIsReadOnly();
             }
 
-            // A check for a null propertyName is not required since this method is only called by internal code.
+            // A check for a null propertyName is not required since this method is only called by internal
+            // code.
             Debug.Assert(propertyName != null);
 
             return TryAddValue(propertyName, value);

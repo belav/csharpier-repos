@@ -185,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 return impls;
             }
 
-            // CONSIDER: we could skip the builder until the first time we see a different method after retargeting
+            // CONSIDER: we could skip the builder until the first time we see a different method after
+            // retargeting
 
             var builder = ArrayBuilder<PropertySymbol>.GetInstance();
 

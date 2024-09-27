@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             const string funcTypeMetadataName = "System.Func`1";
 
-            // mscorlib contains this type, so we should be able to find it without looking in referenced assemblies.
+            // mscorlib contains this type, so we should be able to find it without looking in referenced
+            // assemblies.
             var funcType = corlibAssembly.GetTypeByMetadataName(
                 funcTypeMetadataName,
                 includeReferences: false,
@@ -290,7 +291,9 @@ class Derived : Base
                 // class Derived : Base
                 Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
                     .WithArguments("Base", "pe2"),
-                // (2,17): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                // (2,17): error CS1070: The type name 'Base' could not be found. This type has been forwarded to
+                // assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                // to that assembly.
                 // class Derived : Base
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
                     .WithArguments(
@@ -379,7 +382,9 @@ class Test
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
                     .WithArguments("Base", "pe3"),
-                // (6,9): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                // (6,9): error CS1070: The type name 'Base' could not be found. This type has been forwarded to
+                // assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                // to that assembly.
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
                     .WithArguments(
@@ -390,7 +395,9 @@ class Test
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
                     .WithArguments("Base", "pe3"),
-                // (6,22): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                // (6,22): error CS1070: The type name 'Base' could not be found. This type has been forwarded to
+                // assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                // to that assembly.
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
                     .WithArguments(
@@ -837,7 +844,8 @@ class Test : Derived
             // NOTE: not referring to pe3, even though pe2 forwards there.
             var comp3 = CreateCompilation(csharp, new[] { ref1, ref2 });
             comp3.VerifyDiagnostics(
-                // (2,7): error CS0012: The type 'Base' is defined in an assembly that is not referenced. You must add a reference to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,7): error CS0012: The type 'Base' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // class Test : Derived
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "Derived")
                     .WithArguments(
@@ -900,7 +908,9 @@ class Test
 
             CreateCompilation(csharp, new[] { ref1 })
                 .VerifyDiagnostics(
-                    // (5,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                    // (5,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to
+                    // assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                    // to that assembly.
                     //     Outer.Inner M() { return null; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
                         .WithArguments(
@@ -908,12 +918,15 @@ class Test
                             "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(5, 5),
-                    // (8,5): error CS0246: The type or namespace name 'Generic' could not be found (are you missing a using directive or an assembly reference?)
+                    // (8,5): error CS0246: The type or namespace name 'Generic' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     Generic G0 { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Generic")
                         .WithArguments("Generic")
                         .WithLocation(8, 5),
-                    // (9,5): error CS1070: The type name 'Generic<>' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                    // (9,5): error CS1070: The type name 'Generic<>' could not be found. This type has been forwarded
+                    // to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a
+                    // reference to that assembly.
                     //     Generic<int> G1 { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Generic<int>")
                         .WithArguments(
@@ -921,12 +934,15 @@ class Test
                             "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(9, 5),
-                    // (10,5): error CS0246: The type or namespace name 'Generic<,>' could not be found (are you missing a using directive or an assembly reference?)
+                    // (10,5): error CS0246: The type or namespace name 'Generic<,>' could not be found (are you missing
+                    // a using directive or an assembly reference?)
                     //     Generic<int, int> G2 { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Generic<int, int>")
                         .WithArguments("Generic<,>")
                         .WithLocation(10, 5),
-                    // (4,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                    // (4,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to
+                    // assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                    // to that assembly.
                     //     Outer P { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
                         .WithArguments(
@@ -934,7 +950,9 @@ class Test
                             "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(4, 5),
-                    // (6,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                    // (6,5): error CS1070: The type name 'Outer' could not be found. This type has been forwarded to
+                    // assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                    // to that assembly.
                     //     Outer.Inner<string> F;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Outer")
                         .WithArguments(
@@ -985,19 +1003,23 @@ class Test
             // NOTE: nothing about forwarded types.
             CreateCompilation(csharp, new[] { ref1 })
                 .VerifyDiagnostics(
-                    // (4,5): error CS0246: The type or namespace name 'upper' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,5): error CS0246: The type or namespace name 'upper' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     upper P1 { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "upper")
                         .WithArguments("upper"),
-                    // (5,5): error CS0246: The type or namespace name 'uPPeR' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,5): error CS0246: The type or namespace name 'uPPeR' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     uPPeR P2 { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "uPPeR")
                         .WithArguments("uPPeR"),
-                    // (6,5): error CS0246: The type or namespace name 'LOWER' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,5): error CS0246: The type or namespace name 'LOWER' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     LOWER.mixed P3 { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "LOWER")
                         .WithArguments("LOWER"),
-                    // (7,5): error CS0246: The type or namespace name 'lOwEr' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,5): error CS0246: The type or namespace name 'lOwEr' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     lOwEr.MIXED P4 { get; set; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "lOwEr")
                         .WithArguments("lOwEr")
@@ -1033,7 +1055,9 @@ class Test
 
             CreateCompilation(csharp, new[] { ref1 })
                 .VerifyDiagnostics(
-                    // (6,29): error CS1068: The type name 'Forwarded' could not be found in the global namespace. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                    // (6,29): error CS1068: The type name 'Forwarded' could not be found in the global namespace. This
+                    // type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                    // Consider adding a reference to that assembly.
                     //         var f = new global::Forwarded();
                     Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFoundFwd, "Forwarded")
                         .WithArguments(
@@ -1094,7 +1118,9 @@ class Test
 
             CreateCompilation(csharp, new[] { ref1 })
                 .VerifyDiagnostics(
-                    // (8,21): error CS1069: The type name 'Forwarded' could not be found in the namespace 'Namespace'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                    // (8,21): error CS1069: The type name 'Forwarded' could not be found in the namespace 'Namespace'.
+                    // This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null' Consider adding a reference to that assembly.
                     //         var f = new Forwarded();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "Forwarded")
                         .WithArguments(
@@ -1139,7 +1165,9 @@ class Test
 
             CreateCompilation(csharp, new[] { ref1 })
                 .VerifyDiagnostics(
-                    // (8,21): error CS1069: The type name 'Forwarded<>' could not be found in the namespace 'Namespace'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                    // (8,21): error CS1069: The type name 'Forwarded<>' could not be found in the namespace
+                    // 'Namespace'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null' Consider adding a reference to that assembly.
                     //         var f = new Forwarded<int>();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "Forwarded<int>")
                         .WithArguments(
@@ -1219,14 +1247,18 @@ class Test
             var compilation = CreateCompilation(csharp, new[] { ref1 });
 
             compilation.VerifyDiagnostics(
-                // (4,5): error CS1070: The type name 'T0' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                // (4,5): error CS1070: The type name 'T0' could not be found. This type has been forwarded to
+                // assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                // to that assembly.
                 //     T0 P0 { get; set; }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "T0")
                     .WithArguments(
                         "T0",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (5,8): error CS1069: The type name 'T1' could not be found in the namespace 'Ns'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (5,8): error CS1069: The type name 'T1' could not be found in the namespace 'Ns'. This type has
+                // been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider
+                // adding a reference to that assembly.
                 //     Ns.T1 P1 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T1")
                     .WithArguments(
@@ -1234,7 +1266,9 @@ class Test
                         "Ns",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (6,11): error CS1069: The type name 'T2' could not be found in the namespace 'Ns.Ms'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (6,11): error CS1069: The type name 'T2' could not be found in the namespace 'Ns.Ms'. This type
+                // has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider
+                // adding a reference to that assembly.
                 //     Ns.Ms.T2 P2 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T2")
                     .WithArguments(
@@ -1242,18 +1276,23 @@ class Test
                         "Ns.Ms",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (7,11): error CS0234: The type or namespace name 'Ls' does not exist in the namespace 'Ns.Ms' (are you missing an assembly reference?)
+                // (7,11): error CS0234: The type or namespace name 'Ls' does not exist in the namespace 'Ns.Ms'
+                // (are you missing an assembly reference?)
                 //     Ns.Ms.Ls.T3 P3 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Ls")
                     .WithArguments("Ls", "Ns.Ms"),
-                // (9,5): error CS1070: The type name 'T4<>' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
+                // (9,5): error CS1070: The type name 'T4<>' could not be found. This type has been forwarded to
+                // assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference
+                // to that assembly.
                 //     T4<int> P4 { get; set; }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "T4<int>")
                     .WithArguments(
                         "T4<>",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (10,8): error CS1069: The type name 'T5<>' could not be found in the namespace 'Ns'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (10,8): error CS1069: The type name 'T5<>' could not be found in the namespace 'Ns'. This type
+                // has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider
+                // adding a reference to that assembly.
                 //     Ns.T5<int> P5 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T5<int>")
                     .WithArguments(
@@ -1261,7 +1300,9 @@ class Test
                         "Ns",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (11,11): error CS1069: The type name 'T6<>' could not be found in the namespace 'Ns.Ms'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (11,11): error CS1069: The type name 'T6<>' could not be found in the namespace 'Ns.Ms'. This
+                // type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                // Consider adding a reference to that assembly.
                 //     Ns.Ms.T6<int> P6 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T6<int>")
                     .WithArguments(
@@ -1269,22 +1310,27 @@ class Test
                         "Ns.Ms",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (12,11): error CS0234: The type or namespace name 'Ls' does not exist in the namespace 'Ns.Ms' (are you missing an assembly reference?)
+                // (12,11): error CS0234: The type or namespace name 'Ls' does not exist in the namespace 'Ns.Ms'
+                // (are you missing an assembly reference?)
                 //     Ns.Ms.Ls.T7<int> P7 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Ls")
                     .WithArguments("Ls", "Ns.Ms"),
-                // (14,5): error CS0246: The type or namespace name 'Nope' could not be found (are you missing a using directive or an assembly reference?)
+                // (14,5): error CS0246: The type or namespace name 'Nope' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     Nope P8 { get; set; }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Nope").WithArguments("Nope"),
-                // (15,8): error CS0234: The type or namespace name 'Nope' does not exist in the namespace 'Ns' (are you missing an assembly reference?)
+                // (15,8): error CS0234: The type or namespace name 'Nope' does not exist in the namespace 'Ns' (are
+                // you missing an assembly reference?)
                 //     Ns.Nope P9 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Nope")
                     .WithArguments("Nope", "Ns"),
-                // (16,11): error CS0234: The type or namespace name 'Nope' does not exist in the namespace 'Ns.Ms' (are you missing an assembly reference?)
+                // (16,11): error CS0234: The type or namespace name 'Nope' does not exist in the namespace 'Ns.Ms'
+                // (are you missing an assembly reference?)
                 //     Ns.Ms.Nope P10 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Nope")
                     .WithArguments("Nope", "Ns.Ms"),
-                // (17,11): error CS0234: The type or namespace name 'Ls' does not exist in the namespace 'Ns.Ms' (are you missing an assembly reference?)
+                // (17,11): error CS0234: The type or namespace name 'Ls' does not exist in the namespace 'Ns.Ms'
+                // (are you missing an assembly reference?)
                 //     Ns.Ms.Ls.Nope P11 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Ls")
                     .WithArguments("Ls", "Ns.Ms")
@@ -1351,7 +1397,9 @@ namespace N1
             var compilation = CreateCompilation(csharp, new[] { ref1 });
 
             compilation.VerifyDiagnostics(
-                // (7,15): error CS1069: The type name 'T' could not be found in the namespace 'N1.N2.N3'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (7,15): error CS1069: The type name 'T' could not be found in the namespace 'N1.N2.N3'. This type
+                // has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider
+                // adding a reference to that assembly.
                 //         N2.N3.T t2 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T")
                     .WithArguments(
@@ -1359,7 +1407,9 @@ namespace N1
                         "N1.N2.N3",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (9,18): error CS1069: The type name 'T' could not be found in the namespace 'N1.N2.N3'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (9,18): error CS1069: The type name 'T' could not be found in the namespace 'N1.N2.N3'. This type
+                // has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider
+                // adding a reference to that assembly.
                 //         N1.N2.N3.T t4 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T")
                     .WithArguments(
@@ -1430,7 +1480,9 @@ namespace N1
             var compilation = CreateCompilation(csharp, new[] { ref1 });
 
             compilation.VerifyDiagnostics(
-                // (7,15): error CS1069: The type name 'T<>' could not be found in the namespace 'N1.N2.N3'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (7,15): error CS1069: The type name 'T<>' could not be found in the namespace 'N1.N2.N3'. This
+                // type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                // Consider adding a reference to that assembly.
                 //         N2.N3.T<int> t2 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T<int>")
                     .WithArguments(
@@ -1438,7 +1490,9 @@ namespace N1
                         "N1.N2.N3",
                         "pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     ),
-                // (9,18): error CS1069: The type name 'T<>' could not be found in the namespace 'N1.N2.N3'. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (9,18): error CS1069: The type name 'T<>' could not be found in the namespace 'N1.N2.N3'. This
+                // type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                // Consider adding a reference to that assembly.
                 //         N1.N2.N3.T<int> t4 { get; set; }
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "T<int>")
                     .WithArguments(
@@ -1726,11 +1780,13 @@ namespace NS
         }
 
         /// <summary>
-        /// Verify type forwarders in metadata symbols for compiled sources and in ExportedTypes metadata table.
+        /// Verify type forwarders in metadata symbols for compiled sources and in ExportedTypes metadata
+        // table.
         /// </summary>
         /// <param name="source1">Assembly actually containing types.</param>
         /// <param name="source2">Assembly that forwards types.</param>
-        /// <param name="forwardedTypeFullNames">Forwarded type names should be in metadata format (Namespace.Outer`Arity+Inner`Arity).</param>
+        /// <param name="forwardedTypeFullNames">Forwarded type names should be in metadata format
+        // (Namespace.Outer`Arity+Inner`Arity).</param>
         private void CheckForwarderEmit(
             string source1,
             string source2,
@@ -2132,7 +2188,8 @@ public class CF1
             appCompilation
                 .GetDeclarationDiagnostics()
                 .Verify(
-                    // error CS0012: The type 'CF1' is defined in an assembly that is not referenced. You must add a reference to assembly 'Test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // error CS0012: The type 'CF1' is defined in an assembly that is not referenced. You must add a
+                    // reference to assembly 'Test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     Diagnostic(ErrorCode.ERR_NoTypeDef)
                         .WithArguments(
                             "CF1",
@@ -2466,7 +2523,9 @@ class Program
                 }
             );
             comp.VerifyDiagnostics(
-                // (8,36): error CS1069: The type name 'MyClass' could not be found in the namespace 'MyNamespace'. This type has been forwarded to assembly 'BImpl, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (8,36): error CS1069: The type name 'MyClass' could not be found in the namespace 'MyNamespace'.
+                // This type has been forwarded to assembly 'BImpl, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' Consider adding a reference to that assembly.
                 //         var b = new B::MyNamespace.MyClass();
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "MyClass")
                     .WithArguments(
@@ -2488,7 +2547,8 @@ class Program
                 }
             );
             comp.VerifyDiagnostics(
-                // (8,24): error CS0234: The type or namespace name 'MyNamespace' does not exist in the namespace 'B' (are you missing an assembly reference?)
+                // (8,24): error CS0234: The type or namespace name 'MyNamespace' does not exist in the namespace
+                // 'B' (are you missing an assembly reference?)
                 //         var b = new B::MyNamespace.MyClass();
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "MyNamespace")
                     .WithArguments("MyNamespace", "B")
@@ -2560,7 +2620,9 @@ class Program
                 }
             );
             comp.VerifyDiagnostics(
-                // (8,36): error CS1069: The type name 'MyClass<>' could not be found in the namespace 'MyNamespace'. This type has been forwarded to assembly 'BImpl, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' Consider adding a reference to that assembly.
+                // (8,36): error CS1069: The type name 'MyClass<>' could not be found in the namespace
+                // 'MyNamespace'. This type has been forwarded to assembly 'BImpl, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' Consider adding a reference to that assembly.
                 //         var b = new B::MyNamespace.MyClass<int>();
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd, "MyClass<int>")
                     .WithArguments(
@@ -2582,7 +2644,8 @@ class Program
                 }
             );
             comp.VerifyDiagnostics(
-                // (8,24): error CS0234: The type or namespace name 'MyNamespace' does not exist in the namespace 'B' (are you missing an assembly reference?)
+                // (8,24): error CS0234: The type or namespace name 'MyNamespace' does not exist in the namespace
+                // 'B' (are you missing an assembly reference?)
                 //         var b = new B::MyNamespace.MyClass<int>();
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "MyNamespace")
                     .WithArguments("MyNamespace", "B")

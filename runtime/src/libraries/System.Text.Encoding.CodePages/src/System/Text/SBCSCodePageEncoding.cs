@@ -46,12 +46,14 @@ namespace System.Text
         // We have a managed code page entry, so load our tables
         // SBCS data section looks like:
         //
-        // char[256]  - what each byte maps to in unicode.  No support for surrogates. 0 is undefined code point
+        // char[256]  - what each byte maps to in unicode.  No support for surrogates. 0 is undefined code
+        // point
         //              (except 0 for byte 0 is expected to be a real 0)
         //
         // byte/char* - Data for best fit (unicode->bytes), again no best fit for Unicode
         //              1st WORD is Unicode // of 1st character position
-        //              Next bytes are best fit byte for that position.  Position is incremented after each byte
+        //              Next bytes are best fit byte for that position.  Position is incremented after each
+        // byte
         //              byte < 0x20 means skip the next n positions.  (Where n is the byte #)
         //              byte == 1 means that next word is another unicode code point #
         //              byte == 0 is unknown.  (doesn't override initial WCHAR[256] table!
@@ -79,7 +81,8 @@ namespace System.Text
                 _charUnknown = pCodePage->UnicodeReplace;
 
                 // Get our mapped section 65536 bytes for unicode->bytes, 256 * 2 bytes for bytes->unicode
-                // Plus 4 byte to remember CP # when done loading it. (Don't want to get IA64 or anything out of alignment)
+                // Plus 4 byte to remember CP # when done loading it. (Don't want to get IA64 or anything out of
+                // alignment)
                 const int UnicodeToBytesMappingSize = 65536;
                 const int BytesToUnicodeMappingSize = 256 * 2;
                 const int CodePageNumberSize = 4;
@@ -219,7 +222,8 @@ namespace System.Text
                         // which is right after our 256 byte data table
                         int iBestFitCount = 0;
 
-                        // Now do the UnicodeToBytes Best Fit mapping (this is the one we normally think of when we say "best fit")
+                        // Now do the UnicodeToBytes Best Fit mapping (this is the one we normally think of when we say
+                        // "best fit")
                         // pData should be pointing at the first data point for Bytes->Unicode table
                         int unicodePosition = ReadUInt16(pData);
                         pData += 2;
@@ -365,9 +369,11 @@ namespace System.Text
                 (fallback != null && fallback.MaxCharCount == 1) /* || bIsBestFit*/
             )
             {
-                // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is always
+                // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is
+                // always
                 // same as input size.
-                // Note that no existing SBCS code pages map code points to supplementary characters, so this is easy.
+                // Note that no existing SBCS code pages map code points to supplementary characters, so this is
+                // easy.
 
                 // We could however have 1 extra byte if the last call had an encoder and a funky fallback and
                 // if we don't use the funky fallback this time.
@@ -508,7 +514,8 @@ namespace System.Text
                 );
                 //                if (encoder.m_throwOnOverflow && encoder.InternalHasFallbackBuffer &&
                 //                    encoder.FallbackBuffer.Remaining > 0)
-                //                    throw new ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
+                //                    throw new
+                // ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
                 //                        EncodingName, encoder.Fallback.GetType()));
             }
             else
@@ -1036,7 +1043,8 @@ namespace System.Text
             // Just return length, SBCS stay the same length because they don't map to surrogate
             long charCount = (long)byteCount;
 
-            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be longer.
+            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be
+            // longer.
             if (DecoderFallback.MaxCharCount > 1)
                 charCount *= DecoderFallback.MaxCharCount;
 

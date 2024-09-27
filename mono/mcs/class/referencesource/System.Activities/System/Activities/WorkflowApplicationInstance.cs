@@ -14,8 +14,10 @@ namespace System.Activities
     using System.Threading;
     using System.Xml.Linq;
 
-    // Wrapper over instance data retrieved from the Instance Store but not yet loaded into a WorkflowApplication.
-    // Once this instance is loaded into a WFApp using WFApp.Load(), this object is stale and trying to abort or reload it wil throw.
+    // Wrapper over instance data retrieved from the Instance Store but not yet loaded into a
+    // WorkflowApplication.
+    // Once this instance is loaded into a WFApp using WFApp.Load(), this object is stale and trying to
+    // abort or reload it wil throw.
     // Free-threaded: needs to be resillient to simultaneous loads/aborts on multiple threads
     public class WorkflowApplicationInstance
     {

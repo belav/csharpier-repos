@@ -664,7 +664,8 @@ namespace System.ServiceModel.Channels
             }
 
             // we need to make sure System.Net will buffer faults (sent as 500 requests) up to our allowed size
-            // Their value is in Kbytes and ours is in bytes. We round up so that the KB value is large enough to
+            // Their value is in Kbytes and ours is in bytes. We round up so that the KB value is large enough
+            // to
             // encompass our MaxReceivedMessageSize. See MB#20860 and related for details
 
             if (
@@ -699,7 +700,8 @@ namespace System.ServiceModel.Channels
                     }
                     catch (SecurityException exception)
                     {
-                        // CSDMain\33725 - setting DefaultMaximumErrorResponseLength should not fail HttpChannelFactory.OnOpen
+                        // CSDMain\33725 - setting DefaultMaximumErrorResponseLength should not fail
+                        // HttpChannelFactory.OnOpen
                         // if the user does not have the permission to do so.
                         httpWebRequestWebPermissionDenied = true;
 

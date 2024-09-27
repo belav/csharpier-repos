@@ -311,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             ITypeSymbol newTypeSymbol
         )
         {
-            // We're going to be passed through the simplifier.  Tell it to not just convert this back to var (as
+            // We're going to be passed through the simplifier.  Tell it to not just convert this back to var
+            // (as
             // that would defeat the purpose of this refactoring entirely).
             var newTypeSyntax = newTypeSymbol
                 .GenerateTypeSyntax(allowVar: false)

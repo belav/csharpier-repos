@@ -56,7 +56,8 @@ public class AssetsComputingHelper
             ".c" when fromMonoPackage => "extension is .c is not supported.",
             ".h" when fromMonoPackage => "extension is .h is not supported.",
             // It is safe to filter out all XML files since we are not interested in any XML file from the list
-            // of ResolvedFilesToPublish to become a static web asset. Things like this include XML doc files and
+            // of ResolvedFilesToPublish to become a static web asset. Things like this include XML doc files
+            // and
             // so on.
             ".xml" => "it is a documentation file",
             ".rsp" when fromMonoPackage => "extension is .rsp is not supported.",

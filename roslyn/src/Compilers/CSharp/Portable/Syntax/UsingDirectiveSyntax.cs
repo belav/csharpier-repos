@@ -9,11 +9,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     public partial class UsingDirectiveSyntax
     {
         /// <summary>
-        /// Returns the name this <see cref="UsingDirectiveSyntax"/> points at, or <see langword="null"/> if it does not
-        /// point at a name.  A normal <c>using X.Y.Z;</c> or <c>using static X.Y.Z;</c> will always point at a name and
-        /// will always return a value for this.  However, a using-alias (e.g. <c>using x = ...;</c>) may or may not
-        /// point at a name and may return <see langword="null"/> here.  An example of when that may happen is the type
-        /// on the right side of the <c>=</c> is not a name.  For example <c>using x = (X.Y.Z, A.B.C);</c>.  Here, as
+        /// Returns the name this <see cref="UsingDirectiveSyntax"/> points at, or <see langword="null"/> if
+        // it does not
+        /// point at a name.  A normal <c>using X.Y.Z;</c> or <c>using static X.Y.Z;</c> will always point
+        // at a name and
+        /// will always return a value for this.  However, a using-alias (e.g. <c>using x = ...;</c>) may or
+        // may not
+        /// point at a name and may return <see langword="null"/> here.  An example of when that may happen
+        // is the type
+        /// on the right side of the <c>=</c> is not a name.  For example <c>using x = (X.Y.Z, A.B.C);</c>.
+        // Here, as
         /// the type is a tuple-type there is no name to return.
         /// </summary>
         public NameSyntax? Name => this.NamespaceOrType as NameSyntax;

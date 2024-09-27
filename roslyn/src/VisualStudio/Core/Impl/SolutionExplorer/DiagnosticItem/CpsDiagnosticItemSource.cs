@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private readonly string _projectDirectoryPath;
 
         /// <summary>
-        /// The analyzer reference that has been found. Once it's been assigned a non-null value, it'll never be assigned null again.
+        /// The analyzer reference that has been found. Once it's been assigned a non-null value, it'll
+        // never be assigned null again.
         /// </summary>
         private AnalyzerReference? _analyzerReference;
 
@@ -43,9 +44,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             _analyzerReference = TryGetAnalyzerReference(Workspace.CurrentSolution);
             if (_analyzerReference == null)
             {
-                // The ProjectId that was given to us was found by enumerating the list of projects in the solution, thus the project must have already
-                // been added to the workspace at some point. As long as the project is still there, we're going to assume the reason we don't have the reference
-                // yet is because while we have a project, we don't have all the references added yet. We'll wait until we see the reference and then connect to it.
+                // The ProjectId that was given to us was found by enumerating the list of projects in the solution,
+                // thus the project must have already
+                // been added to the workspace at some point. As long as the project is still there, we're going to
+                // assume the reason we don't have the reference
+                // yet is because while we have a project, we don't have all the references added yet. We'll wait
+                // until we see the reference and then connect to it.
                 if (workspace.CurrentSolution.ContainsProject(projectId))
                 {
                     Workspace.WorkspaceChanged += OnWorkspaceChangedLookForAnalyzer;
@@ -71,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         private void IVsHierarchyItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // IVsHierarchyItem implements ISupportDisposalNotification, which allows us to know when it's been removed
+            // IVsHierarchyItem implements ISupportDisposalNotification, which allows us to know when it's been
+            // removed
             if (e.PropertyName == nameof(ISupportDisposalNotification.IsDisposed))
             {
                 UnsubscribeFromEvents();
@@ -87,7 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         private void OnWorkspaceChangedLookForAnalyzer(object sender, WorkspaceChangeEventArgs e)
         {
-            // If the project has gone away in this change, it's not coming back, so we can stop looking at this point
+            // If the project has gone away in this change, it's not coming back, so we can stop looking at this
+            // point
             if (!e.NewSolution.ContainsProject(ProjectId))
             {
                 UnsubscribeFromEvents();

@@ -12,12 +12,17 @@ using System.Web.UI.WebControls.Expressions;
 namespace System.Web.DynamicData
 {
     /// <summary>
-    /// A Dynamic Data-specific implementation of DataSourceExpression that modifies an IQueryable based on a data key (selected row)
+    /// A Dynamic Data-specific implementation of DataSourceExpression that modifies an IQueryable based
+    // on a data key (selected row)
     /// in a data bound controls such as GridView, ListView, DetailsView, or FormView.
-    /// If the Column property is left empty, the control treats the data key as the primary key of current table (this is useful
-    /// in a List-Details scenario where the databound control and the datasource are displaying items of the same type). If the
-    /// Column property is not empty, this control treats the data key as a foreign key (this is useful in a Parent-Children scenario,
-    /// where the databound control is displaying a list of Categories, and the data source is to be filtered to only display the
+    /// If the Column property is left empty, the control treats the data key as the primary key of
+    // current table (this is useful
+    /// in a List-Details scenario where the databound control and the datasource are displaying items
+    // of the same type). If the
+    /// Column property is not empty, this control treats the data key as a foreign key (this is useful
+    // in a Parent-Children scenario,
+    /// where the databound control is displaying a list of Categories, and the data source is to be
+    // filtered to only display the
     /// Products that belong to the selected Category).
     /// </summary>
     public class ControlFilterExpression : DataSourceExpression
@@ -25,7 +30,8 @@ namespace System.Web.DynamicData
         private PropertyExpression _propertyExpression;
 
         /// <summary>
-        /// The ID of a data-bound control such as a GridView, ListView, DetailsView, or FormView whose data key will be used to build
+        /// The ID of a data-bound control such as a GridView, ListView, DetailsView, or FormView whose data
+        // key will be used to build
         /// the expression that gets used in a QueryExtender.
         /// </summary>
         [SuppressMessage(

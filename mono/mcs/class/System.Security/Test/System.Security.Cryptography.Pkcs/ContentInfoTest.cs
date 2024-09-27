@@ -1644,18 +1644,18 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
         [Ignore("need a working sample")]
         public void GetContentType_digestedData()
         {
-            /*ASN1 eci = new ASN1 (0x30);
-            eci.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.1"));
-            eci.Add (new ASN1 (0x05));
-            ASN1 dData = new ASN1 (0x30);
-            dData.Add (new ASN1 (0x02, new byte[1] { 2 }));
-            dData.Add (PKCS7.AlgorithmIdentifier (CryptoConfig.MapNameToOID ("SHA1")));
-            ASN1 a0 = new ASN1 (0xA0);
-            a0.Add (dData);
-            ASN1 contentInfo = new ASN1 (0x30);
-            contentInfo.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.5"));
-            contentInfo.Add (a0);
-            byte[] digestedData = contentInfo.GetBytes ();*/
+/*ASN1 eci = new ASN1 (0x30);
+eci.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.1"));
+eci.Add (new ASN1 (0x05));
+ASN1 dData = new ASN1 (0x30);
+dData.Add (new ASN1 (0x02, new byte[1] { 2 }));
+dData.Add (PKCS7.AlgorithmIdentifier (CryptoConfig.MapNameToOID ("SHA1")));
+ASN1 a0 = new ASN1 (0xA0);
+a0.Add (dData);
+ASN1 contentInfo = new ASN1 (0x30);
+contentInfo.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.5"));
+contentInfo.Add (a0);
+byte[] digestedData = contentInfo.GetBytes ();*/
 
             byte[] digestedData = null;
             Oid o = ContentInfo.GetContentType(digestedData);
@@ -1666,18 +1666,18 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
         [Ignore("need a working sample")]
         public void GetContentType_encryptedData()
         {
-            /* ASN1 eci = new ASN1 (0x30);
-            eci.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.1"));
-            eci.Add (PKCS7.AlgorithmIdentifier ("1.2.840.113549.1.1.1"));
-            ASN1 eData = new ASN1 (0x30);
-            eData.Add (new ASN1 (0x02, new byte[1] { 2 }));
-            eData.Add (eci);
-            ASN1 a0 = new ASN1 (0xA0);
-            a0.Add (eci);
-            ASN1 contentInfo = new ASN1 (0x30);
-            contentInfo.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.6"));
-            contentInfo.Add (a0);
-            byte[] encryptedData = contentInfo.GetBytes (); */
+/* ASN1 eci = new ASN1 (0x30);
+eci.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.1"));
+eci.Add (PKCS7.AlgorithmIdentifier ("1.2.840.113549.1.1.1"));
+ASN1 eData = new ASN1 (0x30);
+eData.Add (new ASN1 (0x02, new byte[1] { 2 }));
+eData.Add (eci);
+ASN1 a0 = new ASN1 (0xA0);
+a0.Add (eci);
+ASN1 contentInfo = new ASN1 (0x30);
+contentInfo.Add (ASN1Convert.FromOid ("1.2.840.113549.1.7.6"));
+contentInfo.Add (a0);
+byte[] encryptedData = contentInfo.GetBytes (); */
 
             byte[] encryptedData = null;
             Oid o = ContentInfo.GetContentType(encryptedData);

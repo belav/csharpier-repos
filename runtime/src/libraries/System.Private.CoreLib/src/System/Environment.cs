@@ -38,7 +38,8 @@ namespace System
             }
         }
 
-        // Unconditionally return false since .NET Core does not support object finalization during shutdown.
+        // Unconditionally return false since .NET Core does not support object finalization during
+        // shutdown.
         public static bool HasShutdownStarted => false;
 
         public static string? GetEnvironmentVariable(string variable)
@@ -164,7 +165,8 @@ namespace System
                 if (processId == 0)
                 {
                     s_processId = processId = GetProcessId();
-                    // Assume that process Id zero is invalid for user processes. It holds for all mainstream operating systems.
+                    // Assume that process Id zero is invalid for user processes. It holds for all mainstream operating
+                    // systems.
                     Debug.Assert(processId != 0);
                 }
                 return processId;
@@ -174,11 +176,13 @@ namespace System
         private static volatile string? s_processPath;
 
         /// <summary>
-        /// Returns the path of the executable that started the currently executing process. Returns null when the path is not available.
+        /// Returns the path of the executable that started the currently executing process. Returns null
+        // when the path is not available.
         /// </summary>
         /// <returns>Path of the executable that started the currently executing process</returns>
         /// <remarks>
-        /// If the executable is renamed or deleted before this property is first accessed, the return value is undefined and depends on the operating system.
+        /// If the executable is renamed or deleted before this property is first accessed, the return value
+        // is undefined and depends on the operating system.
         /// </remarks>
         public static string? ProcessPath
         {

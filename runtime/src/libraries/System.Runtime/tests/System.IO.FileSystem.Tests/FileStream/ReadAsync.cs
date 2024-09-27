@@ -82,7 +82,8 @@ namespace System.IO.Tests
 
                 Array.Clear(buffer);
 
-                // read should now complete synchronously since it is serviced by the read buffer filled in the first request
+                // read should now complete synchronously since it is serviced by the read buffer filled in the
+                // first request
                 Assert.Equal(
                     TestBuffer.Length,
                     FSAssert.CompletesSynchronously(ReadAsync(fs, buffer, 0, buffer.Length))
@@ -235,9 +236,11 @@ namespace System.IO.Tests
                 {
                     // 1. Populates the private stream buffer, leaves bufferSize - 1 bytes available for next read.
                     await ReadAndAssertAsync(stream, 1);
-                    // 2. Consumes all available data from the buffer, reads another bufferSize-many bytes from the disk and copies the 1 missing byte.
+                    // 2. Consumes all available data from the buffer, reads another bufferSize-many bytes from the disk
+                    // and copies the 1 missing byte.
                     await ReadAndAssertAsync(stream, BufferSize);
-                    // 3. Seek back by the number of bytes consumed from the buffer, all buffered data is now available for next read.
+                    // 3. Seek back by the number of bytes consumed from the buffer, all buffered data is now available
+                    // for next read.
                     stream.Position -= 1;
                     // 4. Consume all buffered data.
                     await ReadAndAssertAsync(stream, BufferSize);

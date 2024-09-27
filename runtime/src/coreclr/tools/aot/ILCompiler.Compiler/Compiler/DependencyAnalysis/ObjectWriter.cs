@@ -1099,7 +1099,8 @@ namespace ILCompiler.DependencyAnalysis
 
             // For now consider all method symbols address taken.
             // We could restrict this in the future to those that are referenced from
-            // reflection tables, EH tables, were actually address taken in code, or are referenced from vtables.
+            // reflection tables, EH tables, were actually address taken in code, or are referenced from
+            // vtables.
             if (
                 (_options & ObjectWritingOptions.ControlFlowGuard) != 0
                 && (target is IMethodNode || target is AssemblyStubNode)
@@ -1211,7 +1212,8 @@ namespace ILCompiler.DependencyAnalysis
             if (!(node is ISymbolNode))
                 return false;
 
-            // These intentionally clash with one another, but are merged with linker directives so should not be Comdat folded
+            // These intentionally clash with one another, but are merged with linker directives so should not
+            // be Comdat folded
             if (node is ModulesSectionNode)
                 return false;
 

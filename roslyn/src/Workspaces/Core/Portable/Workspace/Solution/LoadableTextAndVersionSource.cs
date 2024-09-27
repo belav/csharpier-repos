@@ -24,17 +24,23 @@ internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cache
         private readonly SemaphoreSlim _gate = new(initialCount: 1);
 
         /// <summary>
-        /// Strong reference to the loaded text and version.  Only held onto once computed if <see cref="Source"/>.<see
-        /// cref="CacheResult"/> is <see langword="true"/>.  Once held onto, this will be returned from all calls to
-        /// <see cref="TryGetValue"/>, <see cref="GetValue"/> or <see cref="GetValueAsync"/>.  Once non-null will always
+        /// Strong reference to the loaded text and version.  Only held onto once computed if <see
+        // cref="Source"/>.<see
+        /// cref="CacheResult"/> is <see langword="true"/>.  Once held onto, this will be returned from all
+        // calls to
+        /// <see cref="TryGetValue"/>, <see cref="GetValue"/> or <see cref="GetValueAsync"/>.  Once non-null
+        // will always
         /// remain non-null.
         /// </summary>
         private TextAndVersion? _instance;
 
         /// <summary>
-        /// Weak reference to the loaded text and version that we create whenever the value is computed.  We will
-        /// attempt to return from this if still alive when clients call back into this.  If neither this, nor <see
-        /// cref="_instance"/> are available, the value will be reloaded.  Once non-null, this will always be non-null.
+        /// Weak reference to the loaded text and version that we create whenever the value is computed.  We
+        // will
+        /// attempt to return from this if still alive when clients call back into this.  If neither this,
+        // nor <see
+        /// cref="_instance"/> are available, the value will be reloaded.  Once non-null, this will always
+        // be non-null.
         /// </summary>
         private WeakReference<TextAndVersion>? _weakInstance;
 
@@ -93,7 +99,8 @@ internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cache
 
             if (this.Source.CacheResult)
             {
-                // if our source wants us to hold onto the value strongly, do so.  No need to involve the weak-refs as
+                // if our source wants us to hold onto the value strongly, do so.  No need to involve the weak-refs
+                // as
                 // this will now hold onto the value forever.
                 _instance = textAndVersion;
             }

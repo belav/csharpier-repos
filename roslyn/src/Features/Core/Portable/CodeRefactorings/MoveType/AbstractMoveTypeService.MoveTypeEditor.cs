@@ -57,10 +57,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 //
                 // 1. Produce the new document, with the moved type, with all the same imports as the original file.
                 // 2. Remove the original type from the first document, not touching the imports in it.  This is
-                //    necessary to prevent duplicate symbol errors (and other compiler issues) as we process imports.
+                //    necessary to prevent duplicate symbol errors (and other compiler issues) as we process
+                // imports.
                 // 3. Now that the type has been moved to the new file, remove the unnecessary imports from the new
                 //    file.  This will also tell us which imports are necessary in the new file.
-                // 4. Now go back to the original file and remove any unnecessary imports *if* they are in the new file.
+                // 4. Now go back to the original file and remove any unnecessary imports *if* they are in the new
+                // file.
                 //    these imports only were needed for the moved type, and so they shouldn't stay in the original
                 //    file.
 
@@ -189,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 foreach (var member in membersToRemove)
                     documentEditor.RemoveNode(member, SyntaxRemoveOptions.KeepNoTrivia);
 
-                // Remove attributes from the root node as well, since those will apply as AttributeTarget.Assembly and
+                // Remove attributes from the root node as well, since those will apply as AttributeTarget.Assembly
+                // and
                 // don't need to be specified multiple times
                 documentEditor.RemoveAllAttributes(root);
 

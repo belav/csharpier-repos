@@ -60,9 +60,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         /// <summary>
         /// Verifies that the order of built-in argument providers is deterministic.
         /// </summary>
-        /// <remarks>We ensure that the order is deterministic by the list being explicit: each provider except the first must have
-        /// a Before or After attribute that explicitly orders it by the next one in the list. This ensures that if more than
-        /// one provider provides the same argument, the provider that provides the winning one is consistent.</remarks>
+        /// <remarks>We ensure that the order is deterministic by the list being explicit: each provider
+        // except the first must have
+        /// a Before or After attribute that explicitly orders it by the next one in the list. This ensures
+        // that if more than
+        /// one provider provides the same argument, the provider that provides the winning one is
+        // consistent.</remarks>
         [Fact]
         public void TestArgumentProviderOrderMetadata()
         {
@@ -90,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                     // The last one isn't before anything else
                     Assert.Empty(orderedCSharpArgumentProviders[i].Metadata.BeforeTyped);
 
-                    // The last argument marker should be last; this is ensured by either the last "real" provider saying it comes before the
+                    // The last argument marker should be last; this is ensured by either the last "real" provider
+                    // saying it comes before the
                     // marker, or the last argument marker comes after the last "real" provider.
                     if (
                         !orderedCSharpArgumentProviders[i]

@@ -171,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         /// <para> 1. "dotnet_style_object_initializer = true   # Optional comment"</para>
         /// <para> 2. "dotnet_style_object_initializer = true:suggestion   ; Optional comment"</para>
         /// <para> 3. "dotnet_diagnostic.CA2000.severity = suggestion   # Optional comment"</para>
-        /// <para> 4. "dotnet_analyzer_diagnostic.category-Security.severity = suggestion   # Optional comment"</para>
+        /// <para> 4. "dotnet_analyzer_diagnostic.category-Security.severity = suggestion   # Optional
+        // comment"</para>
         /// <para> 5. "dotnet_analyzer_diagnostic.severity = suggestion   # Optional comment"</para>
         /// <para>Regex groups:</para>
         /// <para> 1. Option key</para>
@@ -429,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             }
 
             // We need to generate a new header such as '[*.cs]' or '[*.vb]':
-            //      - For compiler diagnostic entries and code style entries which have per-language option = false, generate only [*.cs] or [*.vb].
+            //      - For compiler diagnostic entries and code style entries which have per-language option =
+            // false, generate only [*.cs] or [*.vb].
             //      - For the remainder, generate [*.{cs,vb}]
             // Insert a newline if not already present
             var lines = editorConfigText.Lines;

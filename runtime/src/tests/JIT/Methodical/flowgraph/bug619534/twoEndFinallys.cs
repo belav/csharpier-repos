@@ -2,18 +2,27 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * The basic scenario is the test should have two returns (endfinallys) in the finally block.
- * We cannot put a return statement in the finally block for C#
- * In ordinary circumstances, like this, the C# compiler generates one finally with a branch to that finally for the first break statement.
- * Hence the IL manually inserts another endfinally within to reproduce this bug.
- * When optimizing away the if(dummy != 0) block, since it contains a return, the JIT looks at the finally block when removing this basic block.
- * The x86 JIT expected exactly one return from the finally block, and this test breaks that assumption.
- *
- * From notes from the dev:
- * When we are trying to delete a sequence of block because they have become unreachable due to an optimization we can hit this assert when we attempt to delete the BBJ_CALL/BBJ_ALWAYS blocks
- * A BBJ_CALL block is a call to a finally region the assert is expecting that the will be exactly one BBJ_RET branch back from the finally block to the BBJ_ALWAYS block.  Typically this is true, however for finally blocks that use multiple return statements (generally a poor practice IMHO)  we can have more than one BBJ_RET back to the BBJ_ALWAYS block.  Thus hitting the assert.  For a retail build we would not assert and would instead just remove one of the back edges to the BBJ_ALWAYS block, which is wrong but does actually cause any further problems in a retail build.
- * The fix is to loop over all of the back edged into the BBJ_ALWAYS block and remove all of them.
- */
+* The basic scenario is the test should have two returns (endfinallys) in the finally block.
+* We cannot put a return statement in the finally block for C#
+* In ordinary circumstances, like this, the C# compiler generates one finally with a branch to that
+finally for the first break statement.
+* Hence the IL manually inserts another endfinally within to reproduce this bug.
+* When optimizing away the if(dummy != 0) block, since it contains a return, the JIT looks at the
+finally block when removing this basic block.
+* The x86 JIT expected exactly one return from the finally block, and this test breaks that
+assumption.
+*
+* From notes from the dev:
+* When we are trying to delete a sequence of block because they have become unreachable due to an
+optimization we can hit this assert when we attempt to delete the BBJ_CALL/BBJ_ALWAYS blocks
+* A BBJ_CALL block is a call to a finally region the assert is expecting that the will be exactly
+one BBJ_RET branch back from the finally block to the BBJ_ALWAYS block.  Typically this is true,
+however for finally blocks that use multiple return statements (generally a poor practice IMHO)  we
+can have more than one BBJ_RET back to the BBJ_ALWAYS block.  Thus hitting the assert.  For a retail
+build we would not assert and would instead just remove one of the back edges to the BBJ_ALWAYS
+block, which is wrong but does actually cause any further problems in a retail build.
+* The fix is to loop over all of the back edged into the BBJ_ALWAYS block and remove all of them.
+*/
 
 using System;
 using System.Runtime.CompilerServices;

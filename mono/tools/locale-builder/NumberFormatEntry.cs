@@ -50,12 +50,12 @@ namespace Mono.Tools.LocaleBuilder
         public string[] NumberGroupSizes = new string[Constants.GROUP_SIZE];
         public string NumberNegativePattern;
 
-        /*
-        public int PercentDecimalDigits;
-        public string PercentDecimalSeparator = ",";
-        public string PercentGroupSeparator = ",";
-        public string[] PercentGroupSizes = new string[Constants.GROUP_SIZE];
-        */
+/*
+public int PercentDecimalDigits;
+public string PercentDecimalSeparator = ",";
+public string PercentGroupSeparator = ",";
+public string[] PercentGroupSizes = new string[Constants.GROUP_SIZE];
+*/
         public string PercentNegativePattern;
         public string PercentPositivePattern;
         public string PercentSymbol = "%";

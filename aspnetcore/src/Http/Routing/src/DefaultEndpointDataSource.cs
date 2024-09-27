@@ -19,7 +19,8 @@ public sealed class DefaultEndpointDataSource : EndpointDataSource
     /// <summary>
     /// Initializes a new instance of the <see cref="DefaultEndpointDataSource" /> class.
     /// </summary>
-    /// <param name="endpoints">The <see cref="Endpoint"/> instances that the data source will return.</param>
+    /// <param name="endpoints">The <see cref="Endpoint"/> instances that the data source will
+    // return.</param>
     public DefaultEndpointDataSource(params Endpoint[] endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
@@ -30,7 +31,8 @@ public sealed class DefaultEndpointDataSource : EndpointDataSource
     /// <summary>
     /// Initializes a new instance of the <see cref="DefaultEndpointDataSource" /> class.
     /// </summary>
-    /// <param name="endpoints">The <see cref="Endpoint"/> instances that the data source will return.</param>
+    /// <param name="endpoints">The <see cref="Endpoint"/> instances that the data source will
+    // return.</param>
     public DefaultEndpointDataSource(IEnumerable<Endpoint> endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);

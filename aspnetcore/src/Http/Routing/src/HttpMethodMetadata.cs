@@ -31,7 +31,8 @@ public sealed class HttpMethodMetadata : IHttpMethodMetadata
     /// The HTTP methods used during routing.
     /// An empty collection means any HTTP method will be accepted.
     /// </param>
-    /// <param name="acceptCorsPreflight">A value indicating whether routing accepts CORS preflight requests.</param>
+    /// <param name="acceptCorsPreflight">A value indicating whether routing accepts CORS preflight
+    // requests.</param>
     public HttpMethodMetadata(IEnumerable<string> httpMethods, bool acceptCorsPreflight)
     {
         ArgumentNullException.ThrowIfNull(httpMethods);
@@ -41,7 +42,8 @@ public sealed class HttpMethodMetadata : IHttpMethodMetadata
     }
 
     /// <summary>
-    /// Returns a value indicating whether the associated endpoint should accept CORS preflight requests.
+    /// Returns a value indicating whether the associated endpoint should accept CORS preflight
+    // requests.
     /// </summary>
     public bool AcceptCorsPreflight { get; set; }
 

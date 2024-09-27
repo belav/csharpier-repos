@@ -553,7 +553,8 @@ namespace MonoTests.System.Drawing
                     GDIPlus.GdipDrawImageI(graphics, image, -1073741824, 0),
                     "IntXMin"
                 );
-                // the real limit of MS GDI+ is -1073741825 but int-to-float convertion in libgdiplus turns this into a -1073741824
+                // the real limit of MS GDI+ is -1073741825 but int-to-float convertion in libgdiplus turns this
+                // into a -1073741824
                 Assert.AreEqual(
                     Status.ValueOverflow,
                     GDIPlus.GdipDrawImageI(graphics, image, -1073741899, 0),
@@ -1281,18 +1282,29 @@ namespace MonoTests.System.Drawing
             int result;
             PointF[] points = new PointF[count];
             byte[] types = new byte[count];
-            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterEnumerate (HandleRefZero, out result, points, types, count), "GdipPathIterEnumerate-iter");
-            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, null, types, count), "GdipPathIterEnumerate-points");
-            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, points, null, count), "GdipPathIterEnumerate-types");
-            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, points, types, -1), "GdipPathIterEnumerate-count");
-            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, points, types, count), "GdipPathIterEnumerate");
+            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterEnumerate (HandleRefZero, out
+            // result, points, types, count), "GdipPathIterEnumerate-iter");
+            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterEnumerate (iterHandle, out
+            // result, null, types, count), "GdipPathIterEnumerate-points");
+            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterEnumerate (iterHandle, out
+            // result, points, null, count), "GdipPathIterEnumerate-types");
+            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, points,
+            // types, -1), "GdipPathIterEnumerate-count");
+            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, points,
+            // types, count), "GdipPathIterEnumerate");
 
-            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterCopyData (HandleRefZero, out result, points, types, 0, 0), "GdipPathIterCopyData-iter");
-            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterCopyData (iterHandle, out result, null, types, 0, 0), "GdipPathIterCopyData-points");
-            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points, null, 0, 0), "GdipPathIterCopyData-types");
-            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points, types, -1, 0), "GdipPathIterCopyData-start");
-            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points, types, 0, -1), "GdipPathIterCopyData-end");
-            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points, types, 0, 0), "GdipPathIterCopyData");
+            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterCopyData (HandleRefZero, out
+            // result, points, types, 0, 0), "GdipPathIterCopyData-iter");
+            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterCopyData (iterHandle, out result,
+            // null, types, 0, 0), "GdipPathIterCopyData-points");
+            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipPathIterCopyData (iterHandle, out result,
+            // points, null, 0, 0), "GdipPathIterCopyData-types");
+            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points,
+            // types, -1, 0), "GdipPathIterCopyData-start");
+            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points,
+            // types, 0, -1), "GdipPathIterCopyData-end");
+            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points,
+            // types, 0, 0), "GdipPathIterCopyData");
 
             Assert.AreEqual(
                 (int)Status.InvalidParameter,
@@ -1478,11 +1490,13 @@ namespace MonoTests.System.Drawing
             int result = -1;
             //			PointF[] points = new PointF[count];
             //			byte[] types = new byte[count];
-            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, points, types, count), "GdipPathIterEnumerate");
+            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterEnumerate (iterHandle, out result, points,
+            // types, count), "GdipPathIterEnumerate");
             //			Assert.AreEqual (0, result, "result-1");
 
             //			result = -1;
-            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points, types, 0, 0), "GdipPathIterCopyData");
+            //			Assert.AreEqual (Status.Ok, GDIPlus.GdipPathIterCopyData (iterHandle, out result, points,
+            // types, 0, 0), "GdipPathIterCopyData");
             //			Assert.AreEqual (0, result, "result-2");
 
             result = -1;
@@ -1865,7 +1879,8 @@ namespace MonoTests.System.Drawing
                 "GdipCreateMatrix3-null"
             );
 
-            // provding less than 3 points would results in AccessViolationException under MS 2.0 but can't happen using the managed SD code
+            // provding less than 3 points would results in AccessViolationException under MS 2.0 but can't
+            // happen using the managed SD code
             PointF[] points = new PointF[3];
             Assert.AreEqual(
                 Status.OutOfMemory,
@@ -3076,7 +3091,8 @@ namespace MonoTests.System.Drawing
 
             IntPtr image2;
             // this would throw an AccessViolationException under MS 2.0 (missing null check?)
-            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetTextureImage (IntPtr.Zero, out image2), "GdipGetTextureImage-brush");
+            //			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetTextureImage (IntPtr.Zero, out
+            // image2), "GdipGetTextureImage-brush");
             Assert.AreEqual(
                 (int)Status.Ok,
                 GDIPlus.GdipGetTextureImage(brushHandle, out image2),
@@ -3442,7 +3458,8 @@ namespace MonoTests.System.Drawing
                     "GdipGetMetafileHeaderFromMetafile(null,header)"
                 );
                 // We get access violation here!
-                //				Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetMetafileHeaderFromMetafile (metafile, IntPtr.Zero), "GdipGetMetafileHeaderFromMetafile(metafile,null)");
+                //				Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetMetafileHeaderFromMetafile (metafile,
+                // IntPtr.Zero), "GdipGetMetafileHeaderFromMetafile(metafile,null)");
                 Assert.AreEqual(
                     Status.Ok,
                     GDIPlus.GdipGetMetafileHeaderFromMetafile(metafile, header),
@@ -3487,7 +3504,8 @@ namespace MonoTests.System.Drawing
                     "GdipGetMetafileHeaderFromFile(null,ptr)"
                 );
                 // We get access violation here!
-                //				Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetMetafileHeaderFromFile (filename, IntPtr.Zero), "GdipGetMetafileHeaderFromFile(file,null)");
+                //				Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetMetafileHeaderFromFile (filename,
+                // IntPtr.Zero), "GdipGetMetafileHeaderFromFile(file,null)");
                 Assert.AreEqual(
                     Status.Ok,
                     GDIPlus.GdipGetMetafileHeaderFromFile(filename, ptr),
@@ -3543,7 +3561,8 @@ namespace MonoTests.System.Drawing
                     "GdipGetMetafileHeaderFromEmf(null,header)"
                 );
                 // We get access violation here!
-                //				Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetMetafileHeaderFromEmf (emf, IntPtr.Zero), "GdipGetMetafileHeaderFromEmf(emf,null)");
+                //				Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipGetMetafileHeaderFromEmf (emf,
+                // IntPtr.Zero), "GdipGetMetafileHeaderFromEmf(emf,null)");
                 // the HEMF handle cannot be used here
                 Assert.AreEqual(
                     Status.InvalidParameter,
@@ -3775,7 +3794,8 @@ namespace MonoTests.System.Drawing
                 GDIPlus.GdipRemovePropertyItem(image, 0),
                 "GdipRemovePropertyItem"
             );
-            //Assert.AreEqual (Status.NotImplemented, GDIPlus.GdipSetPropertyItem (image, image), "GdipSetPropertyItem");
+            //Assert.AreEqual (Status.NotImplemented, GDIPlus.GdipSetPropertyItem (image, image),
+            // "GdipSetPropertyItem");
             Assert.AreEqual(
                 Status.NotImplemented,
                 GDIPlus.GdipGetAllPropertyItems(image, 1000, 1, image),

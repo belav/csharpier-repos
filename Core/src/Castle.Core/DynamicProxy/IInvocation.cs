@@ -80,11 +80,13 @@ namespace Castle.DynamicProxy
         object GetArgumentValue(int index);
 
         /// <summary>
-        ///   Returns the concrete instantiation of the <see cref = "Method" /> on the proxy, with any generic
+        ///   Returns the concrete instantiation of the <see cref = "Method" /> on the proxy, with any
+        // generic
         ///   parameters bound to real types.
         /// </summary>
         /// <returns>
-        ///   The concrete instantiation of the <see cref = "Method" /> on the proxy, or the <see cref = "Method" /> if
+        ///   The concrete instantiation of the <see cref = "Method" /> on the proxy, or the <see cref =
+        // "Method" /> if
         ///   not a generic method.
         /// </returns>
         /// <remarks>
@@ -115,7 +117,8 @@ namespace Castle.DynamicProxy
         void Proceed();
 
         /// <summary>
-        ///   Returns an object describing the <see cref="Proceed"/> operation for this <see cref="IInvocation"/>
+        ///   Returns an object describing the <see cref="Proceed"/> operation for this <see
+        // cref="IInvocation"/>
         ///   at this specific point during interception.
         /// </summary>
         IInvocationProceedInfo CaptureProceedInfo();

@@ -244,7 +244,8 @@ namespace System.Resources.Tools
                 StringComparer.OrdinalIgnoreCase
             );
 
-            //allow ArgumentException to be raised on case insensitive dupes,InvalidCastException on key not being string
+            //allow ArgumentException to be raised on case insensitive dupes,InvalidCastException on key not
+            // being string
             foreach (DictionaryEntry de in resourceList)
                 resourceItemDict.Add((string)de.Key, new ResourceItem(de.Value));
 

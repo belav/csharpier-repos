@@ -57,10 +57,13 @@ namespace Microsoft.Win32.SafeHandles
     }
 
     /// <summary>
-    ///     SafeHandle base class for CAPI handles (such as HCRYPTKEY and HCRYPTHASH) which must keep their
-    ///     CSP alive as long as they stay alive as well. CAPI requires that all child handles belonging to a
+    ///     SafeHandle base class for CAPI handles (such as HCRYPTKEY and HCRYPTHASH) which must keep
+    // their
+    ///     CSP alive as long as they stay alive as well. CAPI requires that all child handles belonging
+    // to a
     ///     HCRYPTPROV must be destroyed up before the reference count to the HCRYPTPROV drops to zero.
-    ///     Since we cannot control the order of finalization between the two safe handles, SafeCapiHandleBase
+    ///     Since we cannot control the order of finalization between the two safe handles,
+    // SafeCapiHandleBase
     ///     maintains a native refcount on its parent HCRYPTPROV to ensure that if the corresponding
     ///     SafeCspKeyHandle is finalized first CAPI still keeps the provider alive.
     /// </summary>

@@ -16,75 +16,81 @@ namespace System.Web.Configuration
     using System.Web.Util;
     using System.Xml;
 
-    /*          <!--
-            Configuration for profile:
-                enabled="[true|false]"   Feature is enabled?
-                defaultProvider="string" Name of provider to use by default
+/*          <!--
+Configuration for profile:
+enabled="[true|false]"   Feature is enabled?
+defaultProvider="string" Name of provider to use by default
 
-                <providers>              Providers (class must inherit from ProfileProvider)
+<providers>              Providers (class must inherit from ProfileProvider)
 
-                    <add                 Add a provider
-                        name="string"    Name to identify this provider instance by
-                        type="string"   Class that implements ProfileProvider
-                        provider-specific-configuration />
+<add                 Add a provider
+name="string"    Name to identify this provider instance by
+type="string"   Class that implements ProfileProvider
+provider-specific-configuration />
 
-                    <remove              Remove a provider
-                        name="string" /> Name of provider to remove
-                    <clear/>             Remove all providers
-
-
-                <properties>                Optional element. List of properties in the Profile system
-                    <property            Properties in the profile
-                            name="string"                 Name of the property
-                            type="string"                 Optional. Type of the property. Default: string.
-                            readOnly="[true|false]"       Optional. Is Value read-only. Default: false.
-                            defaultValue="string"         Optional. Default Value. Default: Empty string.
-                            allowAnonymous="[true|false]" Optional. Allow storing values for anonymous users. Default: false.
-                            provider="string              Optional. Name of provider. Default: Default provider.
-                            serializeAs=["String|Xml|Binary|ProviderSpecific"] Optional. How to serialize the type. Default: ProviderSpecific.
-                        />
+<remove              Remove a provider
+name="string" /> Name of provider to remove
+<clear/>             Remove all providers
 
 
-                    <group              Optional element. Group of properties: Note: groups can not nested
-                        name="string"   Name of the group
-
-                        <property       Property in the group
-                            name="string"                 Name of the property
-                            type="type-name"              Optional. Type of the property. Default: "string".
-                            readOnly="[true|false]"       Optional. Is Value read-only. Default: false.
-                            defaultValue="string"         Optional. Default Value. Default: Empty string.
-                            allowAnonymous="[true|false]" Optional. Allow storing values for anonymous users. Default: false.
-                            provider="string              Optional. Name of provider. Default: Default provider.
-                            serializeAs=["String|Xml|Binary|ProviderSpecific"] Optional. How to serialize the type. Default: ProviderSpecific.
-                        />
-                    </group>
-                </properties>
-
-             Configuration for SqlProfileProvider:
-                   connectionStringName="string"  Name corresponding to the entry in <connectionStrings> section where the connection string for the provider is specified
-                   description="string"           Description of what the provider does
-                   commandTimeout="int"           Command timeout value for SQL command
-
-        -->
+<properties>                Optional element. List of properties in the Profile system
+<property            Properties in the profile
+name="string"                 Name of the property
+type="string"                 Optional. Type of the property. Default: string.
+readOnly="[true|false]"       Optional. Is Value read-only. Default: false.
+defaultValue="string"         Optional. Default Value. Default: Empty string.
+allowAnonymous="[true|false]" Optional. Allow storing values for anonymous users. Default: false.
+provider="string              Optional. Name of provider. Default: Default provider.
+serializeAs=["String|Xml|Binary|ProviderSpecific"] Optional. How to serialize the type. Default:
+ProviderSpecific.
+/>
 
 
-        <profile enabled="true" defaultProvider="AspNetSqlProfileProvider" inherits="System.Web.Profile.ProfileBase, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%" >
-           <providers>
-              <add  name="AspNetSqlProfileProvider"
-                    type="System.Web.Profile.SqlProfileProvider, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
-                    connectionStringName="LocalSqlServer"
-                    applicationName="/"
-                    description="Stores and retrieves profile data from the local Microsoft SQL Server database" />
-           </providers>
+<group              Optional element. Group of properties: Note: groups can not nested
+name="string"   Name of the group
 
-           <properties>
-                <!-- Add profile properties here. Example:
-                       <property name="FriendlyName" type="string" />
-                       <property name="Height"       type="int"    />
-                       <property name="Weight"       type="int"    />
-                -->
-           </properties>
-        </profile>
+<property       Property in the group
+name="string"                 Name of the property
+type="type-name"              Optional. Type of the property. Default: "string".
+readOnly="[true|false]"       Optional. Is Value read-only. Default: false.
+defaultValue="string"         Optional. Default Value. Default: Empty string.
+allowAnonymous="[true|false]" Optional. Allow storing values for anonymous users. Default: false.
+provider="string              Optional. Name of provider. Default: Default provider.
+serializeAs=["String|Xml|Binary|ProviderSpecific"] Optional. How to serialize the type. Default:
+ProviderSpecific.
+/>
+</group>
+</properties>
+
+Configuration for SqlProfileProvider:
+connectionStringName="string"  Name corresponding to the entry in <connectionStrings> section where
+the connection string for the provider is specified
+description="string"           Description of what the provider does
+commandTimeout="int"           Command timeout value for SQL command
+
+-->
+
+
+<profile enabled="true" defaultProvider="AspNetSqlProfileProvider"
+inherits="System.Web.Profile.ProfileBase, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral,
+PublicKeyToken=%MICROSOFT_PUBLICKEY%" >
+<providers>
+<add  name="AspNetSqlProfileProvider"
+type="System.Web.Profile.SqlProfileProvider, System.Web, Version=%ASSEMBLY_VERSION%,
+Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
+connectionStringName="LocalSqlServer"
+applicationName="/"
+description="Stores and retrieves profile data from the local Microsoft SQL Server database" />
+</providers>
+
+<properties>
+<!-- Add profile properties here. Example:
+<property name="FriendlyName" type="string" />
+<property name="Height"       type="int"    />
+<property name="Weight"       type="int"    />
+-->
+</properties>
+</profile>
 */
     public sealed class ProfileSection : ConfigurationSection
     {

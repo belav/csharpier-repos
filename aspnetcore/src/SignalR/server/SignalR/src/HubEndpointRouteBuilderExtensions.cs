@@ -24,7 +24,8 @@ public static class HubEndpointRouteBuilderExtensions
     /// <typeparam name="THub">The <see cref="Hub"/> type to map requests to.</typeparam>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The route pattern.</param>
-    /// <returns>An <see cref="HubEndpointConventionBuilder"/> for endpoints associated with the connections.</returns>
+    /// <returns>An <see cref="HubEndpointConventionBuilder"/> for endpoints associated with the
+    // connections.</returns>
     public static HubEndpointConventionBuilder MapHub<
         [DynamicallyAccessedMembers(HubAccessibility)] THub
     >(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern)
@@ -40,7 +41,8 @@ public static class HubEndpointRouteBuilderExtensions
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The route pattern.</param>
     /// <param name="configureOptions">A callback to configure dispatcher options.</param>
-    /// <returns>An <see cref="HubEndpointConventionBuilder"/> for endpoints associated with the connections.</returns>
+    /// <returns>An <see cref="HubEndpointConventionBuilder"/> for endpoints associated with the
+    // connections.</returns>
     public static HubEndpointConventionBuilder MapHub<
         [DynamicallyAccessedMembers(HubAccessibility)] THub
     >(

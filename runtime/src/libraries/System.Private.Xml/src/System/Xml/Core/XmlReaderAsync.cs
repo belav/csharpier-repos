@@ -19,8 +19,10 @@ namespace System.Xml
             throw new NotImplementedException();
         }
 
-        // Concatenates values of textual nodes of the current content, ignoring comments and PIs, expanding entity references,
-        // and returns the content as the most appropriate type (by default as string). Stops at start tags and end tags.
+        // Concatenates values of textual nodes of the current content, ignoring comments and PIs, expanding
+        // entity references,
+        // and returns the content as the most appropriate type (by default as string). Stops at start tags
+        // and end tags.
         public virtual async Task<object> ReadContentAsObjectAsync()
         {
             if (!CanReadContentAs())
@@ -30,7 +32,8 @@ namespace System.Xml
             return await InternalReadContentAsStringAsync().ConfigureAwait(false);
         }
 
-        // Concatenates values of textual nodes of the current content, ignoring comments and PIs, expanding entity references,
+        // Concatenates values of textual nodes of the current content, ignoring comments and PIs, expanding
+        // entity references,
         // and returns the content as a string. Stops at start tags and end tags.
         public virtual Task<string> ReadContentAsStringAsync()
         {
@@ -41,7 +44,8 @@ namespace System.Xml
             return InternalReadContentAsStringAsync();
         }
 
-        // Concatenates values of textual nodes of the current content, ignoring comments and PIs, expanding entity references,
+        // Concatenates values of textual nodes of the current content, ignoring comments and PIs, expanding
+        // entity references,
         // and converts the content to the requested type. Stops at start tags and end tags.
         public virtual async Task<object> ReadContentAsAsync(
             Type returnType,
@@ -87,7 +91,8 @@ namespace System.Xml
             }
         }
 
-        // Returns the content of the current element as the most appropriate type. Moves to the node following the element's end tag.
+        // Returns the content of the current element as the most appropriate type. Moves to the node
+        // following the element's end tag.
         public virtual async Task<object> ReadElementContentAsObjectAsync()
         {
             if (
@@ -102,7 +107,8 @@ namespace System.Xml
             return string.Empty;
         }
 
-        // Returns the content of the current element as a string. Moves to the node following the element's end tag.
+        // Returns the content of the current element as a string. Moves to the node following the element's
+        // end tag.
         public virtual async Task<string> ReadElementContentAsStringAsync()
         {
             if (
@@ -117,7 +123,8 @@ namespace System.Xml
             return string.Empty;
         }
 
-        // Returns the content of the current element as the requested type. Moves to the node following the element's end tag.
+        // Returns the content of the current element as the requested type. Moves to the node following the
+        // element's end tag.
         public virtual async Task<object> ReadElementContentAsAsync(
             Type returnType,
             IXmlNamespaceResolver namespaceResolver
@@ -156,7 +163,8 @@ namespace System.Xml
             return ReadState != ReadState.Interactive ? Task.CompletedTask : SkipSubtreeAsync();
         }
 
-        // Returns decoded bytes of the current base64 text content. Call this methods until it returns 0 to get all the data.
+        // Returns decoded bytes of the current base64 text content. Call this methods until it returns 0 to
+        // get all the data.
         public virtual Task<int> ReadContentAsBase64Async(byte[] buffer, int index, int count)
         {
             throw new NotSupportedException(
@@ -164,7 +172,8 @@ namespace System.Xml
             );
         }
 
-        // Returns decoded bytes of the current base64 element content. Call this methods until it returns 0 to get all the data.
+        // Returns decoded bytes of the current base64 element content. Call this methods until it returns 0
+        // to get all the data.
         public virtual Task<int> ReadElementContentAsBase64Async(
             byte[] buffer,
             int index,
@@ -176,7 +185,8 @@ namespace System.Xml
             );
         }
 
-        // Returns decoded bytes of the current bin hex text content. Call this methods until it returns 0 to get all the data.
+        // Returns decoded bytes of the current bin hex text content. Call this methods until it returns 0
+        // to get all the data.
         public virtual Task<int> ReadContentAsBinHexAsync(byte[] buffer, int index, int count)
         {
             throw new NotSupportedException(
@@ -184,7 +194,8 @@ namespace System.Xml
             );
         }
 
-        // Returns decoded bytes of the current bin hex element content. Call this methods until it returns 0 to get all the data.
+        // Returns decoded bytes of the current bin hex element content. Call this methods until it returns
+        // 0 to get all the data.
         public virtual Task<int> ReadElementContentAsBinHexAsync(
             byte[] buffer,
             int index,
@@ -203,9 +214,12 @@ namespace System.Xml
             throw new NotSupportedException(SR.Xml_ReadValueChunkNotSupported);
         }
 
-        // Checks whether the current node is a content (non-whitespace text, CDATA, Element, EndElement, EntityReference
-        // or EndEntity) node. If the node is not a content node, then the method skips ahead to the next content node or
-        // end of file. Skips over nodes of type ProcessingInstruction, DocumentType, Comment, Whitespace and SignificantWhitespace.
+        // Checks whether the current node is a content (non-whitespace text, CDATA, Element, EndElement,
+        // EntityReference
+        // or EndEntity) node. If the node is not a content node, then the method skips ahead to the next
+        // content node or
+        // end of file. Skips over nodes of type ProcessingInstruction, DocumentType, Comment, Whitespace
+        // and SignificantWhitespace.
         public virtual async Task<XmlNodeType> MoveToContentAsync()
         {
             do
@@ -350,7 +364,8 @@ namespace System.Xml
         //
         // Private methods
         //
-        //SkipSubTree is called whenever validation of the skipped subtree is required on a reader with XsdValidation
+        //SkipSubTree is called whenever validation of the skipped subtree is required on a reader with
+        // XsdValidation
         private async Task<bool> SkipSubtreeAsync()
         {
             MoveToElement();

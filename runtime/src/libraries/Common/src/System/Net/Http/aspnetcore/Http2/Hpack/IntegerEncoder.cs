@@ -16,10 +16,12 @@ namespace System.Net.Http.HPack
         /// Encodes an integer into one or more bytes.
         /// </summary>
         /// <param name="value">The value to encode. Must not be negative.</param>
-        /// <param name="numBits">The length of the prefix, in bits, to encode <paramref name="value"/> within. Must be between 1 and 8.</param>
+        /// <param name="numBits">The length of the prefix, in bits, to encode <paramref name="value"/>
+        // within. Must be between 1 and 8.</param>
         /// <param name="destination">The destination span to encode <paramref name="value"/> to.</param>
         /// <param name="bytesWritten">The number of bytes used to encode <paramref name="value"/>.</param>
-        /// <returns>If <paramref name="destination"/> had enough storage to encode <paramref name="value"/>, true. Otherwise, false.</returns>
+        /// <returns>If <paramref name="destination"/> had enough storage to encode <paramref
+        // name="value"/>, true. Otherwise, false.</returns>
         public static bool Encode(
             int value,
             int numBits,

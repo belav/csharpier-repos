@@ -8,10 +8,14 @@ using System.Text.Json;
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class SqlServerTypeMappingSource : RelationalTypeMappingSource
 {
@@ -242,10 +246,14 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public SqlServerTypeMappingSource(
         TypeMappingSourceDependencies dependencies,
@@ -254,10 +262,14 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
         : base(dependencies, relationalDependencies) { }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override RelationalTypeMapping? FindMapping(
         in RelationalTypeMappingInfo mappingInfo
@@ -301,7 +313,8 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
                 || _storeTypeMappings.TryGetValue(storeTypeNameBase, out mappings)
             )
             {
-                // We found the user-specified store type. No CLR type was provided - we're probably scaffolding from an existing database,
+                // We found the user-specified store type. No CLR type was provided - we're probably scaffolding
+                // from an existing database,
                 // take the first mapping as the default.
                 if (clrType is null)
                 {
@@ -322,9 +335,12 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
             }
 
             // SQL Server supports aliases (e.g. CREATE TYPE datetimeAlias FROM datetime2(6))
-            // Since we don't know the store name above, usually we end up in the clrType-only lookup below and everything goes well.
-            // However, when a facet is specified (length/precision/scale), that facet would get appended to the store type; we don't want
-            // this in the case of aliased types, since the facet is already part of the type. So we check whether the CLR type supports
+            // Since we don't know the store name above, usually we end up in the clrType-only lookup below and
+            // everything goes well.
+            // However, when a facet is specified (length/precision/scale), that facet would get appended to the
+            // store type; we don't want
+            // this in the case of aliased types, since the facet is already part of the type. So we check
+            // whether the CLR type supports
             // facets, and return a special type mapping that doesn't support facets.
             if (clrType != null && _clrNoFacetTypeMappings.TryGetValue(clrType, out var mapping))
             {
@@ -438,10 +454,14 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
         };
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override string? ParseStoreTypeName(
         string? storeTypeName,

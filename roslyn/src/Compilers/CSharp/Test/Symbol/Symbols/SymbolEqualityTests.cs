@@ -76,7 +76,8 @@ class C
 }";
             var comp = CreateCompilation(src, options: WithNullableEnable());
             comp.VerifyDiagnostics(
-                // (17,9): warning CS8604: Possible null reference argument for parameter 'o' in 'void Extensions.StringExt(object o)'.
+                // (17,9): warning CS8604: Possible null reference argument for parameter 'o' in 'void
+                // Extensions.StringExt(object o)'.
                 //         s.StringExt();
                 Diagnostic(ErrorCode.WRN_NullReferenceArgument, "s")
                     .WithArguments("o", "void Extensions.StringExt(object o)")
@@ -941,7 +942,8 @@ public class A<T>
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,41): warning CS8618: Non-nullable event 'MyEvent' is uninitialized. Consider declaring the event as nullable.
+                // (6,41): warning CS8618: Non-nullable event 'MyEvent' is uninitialized. Consider declaring the
+                // event as nullable.
                 //     public event System.EventHandler<T> MyEvent;
                 Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "MyEvent")
                     .WithArguments("event", "MyEvent")

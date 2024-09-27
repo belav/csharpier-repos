@@ -73,7 +73,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             Debug.Assert(reader != null, "reader != null");
 
-            // xsd validation will report an error if the value is not a valid xs:long number. If the number is valid
+            // xsd validation will report an error if the value is not a valid xs:long number. If the number is
+            // valid
             // xs:long number then long.TryParse will succeed.
             long tmpValue;
             if (

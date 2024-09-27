@@ -14,7 +14,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
     /// <summary>
     /// DebugInfoTableNode emits the data structures required to support managed code debugging
-    /// for ready to run code. See https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/cordebuginfo.h
+    /// for ready to run code. See
+    // https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/cordebuginfo.h
     /// for the types this information is based on. We store two tables of information in an
     /// image:
     ///

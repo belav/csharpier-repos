@@ -48,7 +48,8 @@ internal ref struct ReverseStringBuilder
         }
 
         // There wasn't enough space in the current buffer.
-        // What we do next depends on whether we're writing to the provided "initial" buffer or a rented one.
+        // What we do next depends on whether we're writing to the provided "initial" buffer or a rented
+        // one.
 
         if (_fallbackSequenceSegment is null)
         {

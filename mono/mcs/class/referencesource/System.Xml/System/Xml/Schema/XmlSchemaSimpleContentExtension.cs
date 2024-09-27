@@ -9,7 +9,8 @@ namespace System.Xml.Schema
 {
     using System.Xml.Serialization;
 
-    /// <include file='doc\XmlSchemaSimpleContentExtension.uex' path='docs/doc[@for="XmlSchemaSimpleContentExtension"]/*' />
+    /// <include file='doc\XmlSchemaSimpleContentExtension.uex'
+    // path='docs/doc[@for="XmlSchemaSimpleContentExtension"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -19,7 +20,8 @@ namespace System.Xml.Schema
         XmlSchemaAnyAttribute anyAttribute;
         XmlQualifiedName baseTypeName = XmlQualifiedName.Empty;
 
-        /// <include file='doc\XmlSchemaSimpleContentExtension.uex' path='docs/doc[@for="XmlSchemaSimpleContentExtension.BaseTypeName"]/*' />
+        /// <include file='doc\XmlSchemaSimpleContentExtension.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleContentExtension.BaseTypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -30,7 +32,8 @@ namespace System.Xml.Schema
             set { baseTypeName = (value == null ? XmlQualifiedName.Empty : value); }
         }
 
-        /// <include file='doc\XmlSchemaSimpleContentExtension.uex' path='docs/doc[@for="XmlSchemaSimpleContentExtension.Attributes"]/*' />
+        /// <include file='doc\XmlSchemaSimpleContentExtension.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleContentExtension.Attributes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -43,7 +46,8 @@ namespace System.Xml.Schema
             get { return attributes; }
         }
 
-        /// <include file='doc\XmlSchemaSimpleContentExtension.uex' path='docs/doc[@for="XmlSchemaSimpleContentExtension.AnyAttribute"]/*' />
+        /// <include file='doc\XmlSchemaSimpleContentExtension.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleContentExtension.AnyAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

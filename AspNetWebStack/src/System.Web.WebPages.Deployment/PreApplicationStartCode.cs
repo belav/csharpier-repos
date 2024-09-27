@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -22,7 +23,8 @@ namespace System.Web.WebPages.Deployment
     public static class PreApplicationStartCode
     {
         /// <summary>
-        /// Key used to indicate to tooling that the compile exception we throw to refresh the app domain originated from us so that they can deal with it correctly.
+        /// Key used to indicate to tooling that the compile exception we throw to refresh the app domain
+        // originated from us so that they can deal with it correctly.
         /// </summary>
         private const string ToolingIndicatorKey = "WebPages.VersionChange";
 
@@ -37,8 +39,10 @@ namespace System.Web.WebPages.Deployment
 
         public static void Start()
         {
-            // Even though ASP.NET will only call each PreAppStart once, we sometimes internally call one PreAppStart from
-            // another PreAppStart to ensure that things get initialized in the right order. ASP.NET does not guarantee the
+            // Even though ASP.NET will only call each PreAppStart once, we sometimes internally call one
+            // PreAppStart from
+            // another PreAppStart to ensure that things get initialized in the right order. ASP.NET does not
+            // guarantee the
             // order so we have to guard against multiple calls.
             // All Start calls are made on same thread, so no lock needed here.
 
@@ -98,7 +102,8 @@ namespace System.Web.WebPages.Deployment
             Debug.Assert(maxWebPagesVersion != null, "Function must return some max value.");
             if (AssemblyUtils.ThisAssemblyName.Version != maxWebPagesVersion)
             {
-                // Always let the highest version determine what needs to be done. This would make future proofing simpler.
+                // Always let the highest version determine what needs to be done. This would make future proofing
+                // simpler.
                 Debug.WriteLine(
                     "WebPages Bootstrapper v{0}: Higher version v{1} is available.",
                     AssemblyUtils.ThisAssemblyName.Version,
@@ -120,7 +125,8 @@ namespace System.Web.WebPages.Deployment
             Version configVersion = WebPagesDeployment.GetVersionFromConfig(appSettings);
             Version version = configVersion ?? binVersion ?? AssemblyUtils.WebPagesV1Version;
 
-            // Asserts to ensure unit tests are set up correctly. So essentially, we're unit testing the unit tests.
+            // Asserts to ensure unit tests are set up correctly. So essentially, we're unit testing the unit
+            // tests.
             Debug.Assert(version != null, "GetVersion always returns a version");
             Debug.Assert(
                 binVersion == null || binVersion <= maxWebPagesVersion,
@@ -129,7 +135,8 @@ namespace System.Web.WebPages.Deployment
 
             if ((binVersion != null) && (binVersion != version))
             {
-                // Determine if there's a version conflict. A conflict could occur if there's a version specified in the bin which is different from the version specified in the
+                // Determine if there's a version conflict. A conflict could occur if there's a version specified in
+                // the bin which is different from the version specified in the
                 // config that is different.
                 throw new InvalidOperationException(
                     String.Format(
@@ -164,7 +171,8 @@ namespace System.Web.WebPages.Deployment
                     && binVersion == null
                 )
                 {
-                    // No version was specified. We're implicitly assuming that the site is a v1 site. However, the user does not have V1 binaries available.
+                    // No version was specified. We're implicitly assuming that the site is a v1 site. However, the user
+                    // does not have V1 binaries available.
                     throw new InvalidOperationException(
                         ConfigurationResources.WebPagesImplicitVersionFailure
                     );
@@ -187,7 +195,8 @@ namespace System.Web.WebPages.Deployment
                 AssemblyUtils.ThisAssemblyName.Version,
                 version
             );
-            // If the version the application was compiled earlier was different, invalidate compilation results by adding a file to the bin.
+            // If the version the application was compiled earlier was different, invalidate compilation results
+            // by adding a file to the bin.
             InvalidateCompilationResultsIfVersionChanged(
                 buildManager,
                 fileSystem,
@@ -199,8 +208,10 @@ namespace System.Web.WebPages.Deployment
         }
 
         /// <summary>
-        /// WebPages stores the version to be compiled against in AppSettings as &gt;add key="webpages:version" value="1.0" /&lt;.
-        /// Changing values AppSettings does not cause recompilation therefore we could run into a state where we have files compiled against v1 but the application is
+        /// WebPages stores the version to be compiled against in AppSettings as &gt;add
+        // key="webpages:version" value="1.0" /&lt;.
+        /// Changing values AppSettings does not cause recompilation therefore we could run into a state
+        // where we have files compiled against v1 but the application is
         /// currently v2.
         /// </summary>
         private static void InvalidateCompilationResultsIfVersionChanged(
@@ -221,7 +232,8 @@ namespace System.Web.WebPages.Deployment
             }
             else if (previousVersion != currentVersion)
             {
-                // If the previous runtime version is different, perturb the bin directory so that it forces recompilation.
+                // If the previous runtime version is different, perturb the bin directory so that it forces
+                // recompilation.
                 WebPagesDeployment.ForceRecompile(fileSystem, binDirectory);
                 var httpCompileException = new HttpCompileException(
                     ConfigurationResources.WebPagesVersionChanges
@@ -256,7 +268,8 @@ namespace System.Web.WebPages.Deployment
                 }
                 catch
                 {
-                    // GetCustomAttributes invokes the constructors of the attributes, so it is possible that they might throw unexpected exceptions.
+                    // GetCustomAttributes invokes the constructors of the attributes, so it is possible that they might
+                    // throw unexpected exceptions.
                     // (Dev10 bug 831981)
                 }
 
@@ -283,14 +296,14 @@ namespace System.Web.WebPages.Deployment
                     }
 
                     // No-op if the attribute is invalid
-                    /*
-                    else {
-                        throw new HttpException(SR.GetString(SR.Invalid_PreApplicationStartMethodAttribute_value,
-                            assembly.FullName,
-                            (attribute.Type != null ? attribute.Type.FullName : String.Empty),
-                            attribute.MethodName));
-                    }
-                    */
+/*
+else {
+throw new HttpException(SR.GetString(SR.Invalid_PreApplicationStartMethodAttribute_value,
+assembly.FullName,
+(attribute.Type != null ? attribute.Type.FullName : String.Empty),
+attribute.MethodName));
+}
+*/
                 }
             }
             return methods;
@@ -304,7 +317,8 @@ namespace System.Web.WebPages.Deployment
             MethodInfo method = null;
             if (type.IsPublic)
             {
-                // Verify that type is public to avoid allowing internal code execution. This implementation will not match
+                // Verify that type is public to avoid allowing internal code execution. This implementation will
+                // not match
                 // nested public types.
                 method = type.GetMethod(
                     methodName,

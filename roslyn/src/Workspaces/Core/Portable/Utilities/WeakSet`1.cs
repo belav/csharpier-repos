@@ -7,7 +7,8 @@ using System.Collections.Generic;
 namespace Roslyn.Utilities
 {
     /// <summary>
-    /// A simple collection of values held as weak references. Objects in the set are compared by reference equality.
+    /// A simple collection of values held as weak references. Objects in the set are compared by
+    // reference equality.
     /// </summary>
     /// <typeparam name="T">The type of object stored in the set.</typeparam>
     internal sealed class WeakSet<T>

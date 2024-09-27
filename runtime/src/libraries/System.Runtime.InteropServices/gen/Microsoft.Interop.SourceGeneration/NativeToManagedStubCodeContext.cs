@@ -31,7 +31,8 @@ namespace Microsoft.Interop
         public override (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {
             // If the info is in the native return position, then we need to generate a name to use
-            // for both the managed and native values since there is no name in the signature for the return value.
+            // for both the managed and native values since there is no name in the signature for the return
+            // value.
             if (info.IsNativeReturnPosition)
             {
                 // If the info is in the native exception position,
@@ -47,8 +48,10 @@ namespace Microsoft.Interop
             // If the info is in the managed return position but is not in the native return position,
             // then that means that the stub is introducing an additional info for the return position.
             // This element can be in any position in the native signature,
-            // but since it isn't in the managed signature, there is no name in source for this info, so we must provide one here.
-            // We can't use ReturnIdentifier or ReturnNativeIdentifier since that will be used by the return value of the stub itself.
+            // but since it isn't in the managed signature, there is no name in source for this info, so we must
+            // provide one here.
+            // We can't use ReturnIdentifier or ReturnNativeIdentifier since that will be used by the return
+            // value of the stub itself.
             // As a result, we generate another name for the native return value.
             if (info.IsManagedReturnPosition)
             {

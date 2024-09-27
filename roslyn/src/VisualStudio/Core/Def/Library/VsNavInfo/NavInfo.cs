@@ -29,16 +29,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
         private ImmutableArray<NavInfoNode> _classViewEnumNodes;
 
         /// <summary>
-        /// Creates a new NavInfo object that implements <see cref="IVsNavInfo"/> and <see cref="IVsNavInfo2"/>.
+        /// Creates a new NavInfo object that implements <see cref="IVsNavInfo"/> and <see
+        // cref="IVsNavInfo2"/>.
         /// </summary>
         /// <param name="factory">The <see cref="NavInfoFactory"/> that created this NavInfo.</param>
-        /// <param name="libraryName">The name of the library (project or assembly) to use for navigation.</param>
-        /// <param name="referenceOwnerName">If this NavInfo is inside of an assembly or project reference, this is the name of the project
-        /// that owns the reference. In general, this is only set when the NavInfo is constructed from the Class View window, where references
+        /// <param name="libraryName">The name of the library (project or assembly) to use for
+        // navigation.</param>
+        /// <param name="referenceOwnerName">If this NavInfo is inside of an assembly or project reference,
+        // this is the name of the project
+        /// that owns the reference. In general, this is only set when the NavInfo is constructed from the
+        // Class View window, where references
         /// are parented inside of projects.</param>
         /// <param name="namespaceName">The name of the namespace used for navigation.</param>
-        /// <param name="className">The name of the class used for navigation (should be contained by <paramref name="namespaceName"/>).</param>
-        /// <param name="memberName">The name of the member used for navigation (should be contained by <paramref name="memberName"/>).</param>
+        /// <param name="className">The name of the class used for navigation (should be contained by
+        // <paramref name="namespaceName"/>).</param>
+        /// <param name="memberName">The name of the member used for navigation (should be contained by
+        // <paramref name="memberName"/>).</param>
         public NavInfo(
             NavInfoFactory factory,
             string libraryName,
@@ -98,8 +104,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
 
                 var startIndex = 0;
 
-                // In some cases, Class View presentation NavInfo objects will have extra nodes (LLT_PACKAGE & LLT_HIERARCHY) up front.
-                // When this NavInfo is consumed by Object Browser (for 'Browse to Definition'), we need to skip first two nodes
+                // In some cases, Class View presentation NavInfo objects will have extra nodes (LLT_PACKAGE &
+                // LLT_HIERARCHY) up front.
+                // When this NavInfo is consumed by Object Browser (for 'Browse to Definition'), we need to skip
+                // first two nodes
                 if (
                     isObjectBrowser
                     && !isCanonical

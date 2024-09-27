@@ -645,10 +645,10 @@ namespace Mono.Data.Tds.Protocol
 
         private void WriteParameterInfo(TdsMetaParameter param)
         {
-            /*
-            Ms.net send non-nullable datatypes as nullable and allows setting null values
-            to int/float etc.. So, using Nullable form of type for all data
-            */
+/*
+Ms.net send non-nullable datatypes as nullable and allows setting null values
+to int/float etc.. So, using Nullable form of type for all data
+*/
             param.IsNullable = true;
             TdsColumnType colType = param.GetMetaType();
             param.IsNullable = false;
@@ -662,10 +662,10 @@ namespace Mono.Data.Tds.Protocol
                 size = param.GetActualSize();
             }
 
-            /*
-             * If the value is null, not setting the size to 0 will cause varchar
-             * fields to get inserted as an empty string rather than an null.
-             */
+/*
+* If the value is null, not setting the size to 0 will cause varchar
+* fields to get inserted as an empty string rather than an null.
+*/
             if (colType != TdsColumnType.IntN && colType != TdsColumnType.DateTimeN)
             {
                 if (param.Value == null || param.Value == DBNull.Value)
@@ -673,14 +673,14 @@ namespace Mono.Data.Tds.Protocol
             }
 
             // Change colType according to the following table
-            /*
-             * Original Type	Maxlen		New Type
-             *
-             * NVarChar		4000 UCS2	NText
-             * BigVarChar		8000 ASCII	Text
-             * BigVarBinary		8000 bytes	Image
-             *
-             */
+/*
+* Original Type	Maxlen		New Type
+*
+* NVarChar		4000 UCS2	NText
+* BigVarChar		8000 ASCII	Text
+* BigVarBinary		8000 bytes	Image
+*
+*/
             TdsColumnType origColType = colType;
             if (colType == TdsColumnType.BigNVarChar)
             {
@@ -709,14 +709,14 @@ namespace Mono.Data.Tds.Protocol
                 colType = TdsColumnType.Char;
             }
             // Calculation of TypeInfo field
-            /*
-             * orig size value		TypeInfo field
-             *
-             * >= 0 <= Maxlen		origColType + content len
-             * > Maxlen		NewType as per above table + content len
-             * -1		origColType + USHORTMAXLEN (0xFFFF) + content len (TDS 9)
-             *
-             */
+/*
+* orig size value		TypeInfo field
+*
+* >= 0 <= Maxlen		origColType + content len
+* > Maxlen		NewType as per above table + content len
+* -1		origColType + USHORTMAXLEN (0xFFFF) + content len (TDS 9)
+*
+*/
             // Write updated colType, iff partLenType == false
             if (TdsVersion > TdsVersion.tds81 && partLenType)
             {
@@ -762,17 +762,17 @@ namespace Mono.Data.Tds.Protocol
                 }
             }
 
-            /* VARADHAN: TDS 8 Debugging */
-            /*
-            if (Collation != null) {
-                Console.WriteLine ("Collation is not null");
-                Console.WriteLine ("Column Type: {0}", colType);
-                Console.WriteLine ("Collation bytes: {0} {1} {2} {3} {4}", Collation[0], Collation[1], Collation[2],
-                                   Collation[3], Collation[4]);
-            } else {
-                Console.WriteLine ("Collation is null");
-            }
-            */
+/* VARADHAN: TDS 8 Debugging */
+/*
+if (Collation != null) {
+Console.WriteLine ("Collation is not null");
+Console.WriteLine ("Column Type: {0}", colType);
+Console.WriteLine ("Collation bytes: {0} {1} {2} {3} {4}", Collation[0], Collation[1], Collation[2],
+Collation[3], Collation[4]);
+} else {
+Console.WriteLine ("Collation is null");
+}
+*/
 
             // Tds > 7.0 uses collation
             if (

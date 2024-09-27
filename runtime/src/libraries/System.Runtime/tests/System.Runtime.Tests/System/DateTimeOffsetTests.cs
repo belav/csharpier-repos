@@ -3195,9 +3195,13 @@ namespace System.Tests
             //                     var dto = new DateTimeOffset(seed1, TimeSpan.FromSeconds(seed2));
             //                     if (format[0] is 'o' or 'O' or 'r' or 'R' or 'u' or 's')
             //                     {
-            //                         Console.WriteLine($"yield return new object[] {{ new DateTimeOffset({seed1}, TimeSpan.FromSeconds({seed2})), \"{format}\", null, \"{dto.ToString(format)}\" }};");
+            //                         Console.WriteLine($"yield return new object[] {{ new
+            // DateTimeOffset({seed1}, TimeSpan.FromSeconds({seed2})), \"{format}\", null,
+            // \"{dto.ToString(format)}\" }};");
             //                     }
-            //                     Console.WriteLine($"yield return new object[] {{ new DateTimeOffset({seed1}, TimeSpan.FromSeconds({seed2})), \"{format}\", CultureInfo.InvariantCulture, \"{dto.ToString(format, CultureInfo.InvariantCulture)}\" }};");
+            //                     Console.WriteLine($"yield return new object[] {{ new DateTimeOffset({seed1},
+            // TimeSpan.FromSeconds({seed2})), \"{format}\", CultureInfo.InvariantCulture, \"{dto.ToString(format,
+            // CultureInfo.InvariantCulture)}\" }};");
             //                     i++;
             //                 }
             //                 catch { }

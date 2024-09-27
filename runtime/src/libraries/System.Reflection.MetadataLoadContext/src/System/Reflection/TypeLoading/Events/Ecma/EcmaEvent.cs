@@ -11,7 +11,8 @@ using System.Text;
 namespace System.Reflection.TypeLoading.Ecma
 {
     /// <summary>
-    /// Base class for all EventInfo objects created by a MetadataLoadContext and get its metadata from a PEReader.
+    /// Base class for all EventInfo objects created by a MetadataLoadContext and get its metadata from
+    // a PEReader.
     /// </summary>
     internal sealed class EcmaEvent : RoEvent
     {

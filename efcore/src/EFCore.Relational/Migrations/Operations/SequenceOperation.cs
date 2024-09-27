@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     See also <see cref="CreateSequenceOperation" /> and <see cref="AlterSequenceOperation" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 public abstract class SequenceOperation : MigrationOperation
 {

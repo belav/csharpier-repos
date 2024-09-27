@@ -24,7 +24,8 @@ namespace System.Web.UI.WebControls
         private IOrderedDictionary _oldValues;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.FormViewUpdatedEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.FormViewUpdatedEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public FormViewUpdatedEventArgs(int affectedRows, Exception e)
@@ -44,7 +45,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets the exception (if any) that occurred during the operation. This property is read-only.</para>
+        ///    <para>Gets the exception (if any) that occurred during the operation. This property is
+        // read-only.</para>
         /// </devdoc>
         public Exception Exception
         {
@@ -85,7 +87,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary NewValues
         {
@@ -100,7 +103,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with pre-edit row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with pre-edit row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary OldValues
         {

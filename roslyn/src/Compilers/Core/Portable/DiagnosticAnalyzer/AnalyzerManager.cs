@@ -15,17 +15,21 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// Manages properties of analyzers (such as registered actions, supported diagnostics) for analyzer host's lifetime
+    /// Manages properties of analyzers (such as registered actions, supported diagnostics) for analyzer
+    // host's lifetime
     /// and executes the callbacks into the analyzers.
     ///
     /// It ensures the following for the lifetime of analyzer host:
-    /// 1) <see cref="DiagnosticAnalyzer.Initialize(AnalysisContext)"/> is invoked only once per-analyzer.
+    /// 1) <see cref="DiagnosticAnalyzer.Initialize(AnalysisContext)"/> is invoked only once
+    // per-analyzer.
     /// 2) <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> is invoked only once per-analyzer.
-    /// 3) <see cref="CompilationStartAnalyzerAction"/> registered during Initialize are invoked only once per-compilation per-analyzer and analyzer options.
+    /// 3) <see cref="CompilationStartAnalyzerAction"/> registered during Initialize are invoked only
+    // once per-compilation per-analyzer and analyzer options.
     /// </summary>
     internal partial class AnalyzerManager
     {
-        // This cache stores the analyzer execution context per-analyzer (i.e. registered actions, supported descriptors, etc.).
+        // This cache stores the analyzer execution context per-analyzer (i.e. registered actions, supported
+        // descriptors, etc.).
         // Not created as ImmutableDictionary for perf considerations, but should be treated as immutable
         private readonly Dictionary<
             DiagnosticAnalyzer,
@@ -247,8 +251,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Get all the analyzer actions to execute for the given analyzer against a given compilation.
-        /// The returned actions include the actions registered during <see cref="DiagnosticAnalyzer.Initialize(AnalysisContext)"/> method as well as
-        /// the actions registered during <see cref="CompilationStartAnalyzerAction"/> for the given compilation.
+        /// The returned actions include the actions registered during <see
+        // cref="DiagnosticAnalyzer.Initialize(AnalysisContext)"/> method as well as
+        /// the actions registered during <see cref="CompilationStartAnalyzerAction"/> for the given
+        // compilation.
         /// </summary>
         [PerformanceSensitive(
             "https://github.com/dotnet/roslyn/issues/23582",
@@ -286,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Get the per-symbol analyzer actions to be executed by the given analyzer.
-        /// These are the actions registered during the various RegisterSymbolStartAction method invocations for the given symbol on different analysis contexts.
+        /// These are the actions registered during the various RegisterSymbolStartAction method invocations
+        // for the given symbol on different analysis contexts.
         /// </summary>
         [PerformanceSensitive(
             "https://github.com/dotnet/roslyn/issues/23582",
@@ -362,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Returns true if the given analyzer has enabled concurrent execution by invoking <see cref="AnalysisContext.EnableConcurrentExecution"/>.
+        /// Returns true if the given analyzer has enabled concurrent execution by invoking <see
+        // cref="AnalysisContext.EnableConcurrentExecution"/>.
         /// </summary>
         public async Task<bool> IsConcurrentAnalyzerAsync(
             DiagnosticAnalyzer analyzer,
@@ -381,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Returns <see cref="GeneratedCodeAnalysisFlags"/> for the given analyzer.
-        /// If an analyzer hasn't configured generated code analysis, returns <see cref="AnalyzerDriver.DefaultGeneratedCodeAnalysisFlags"/>.
+        /// If an analyzer hasn't configured generated code analysis, returns <see
+        // cref="AnalyzerDriver.DefaultGeneratedCodeAnalysisFlags"/>.
         /// </summary>
         public async Task<GeneratedCodeAnalysisFlags> GetGeneratedCodeAnalysisFlagsAsync(
             DiagnosticAnalyzer analyzer,
@@ -399,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Return <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref name="analyzer"/>.
+        /// Return <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> of given <paramref
+        // name="analyzer"/>.
         /// </summary>
         public ImmutableArray<DiagnosticDescriptor> GetSupportedDiagnosticDescriptors(
             DiagnosticAnalyzer analyzer,
@@ -416,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Return <see cref="DiagnosticSuppressor.SupportedSuppressions"/> of given <paramref name="suppressor"/>.
+        /// Return <see cref="DiagnosticSuppressor.SupportedSuppressions"/> of given <paramref
+        // name="suppressor"/>.
         /// </summary>
         public ImmutableArray<SuppressionDescriptor> GetSupportedSuppressionDescriptors(
             DiagnosticSuppressor suppressor,
@@ -440,14 +451,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            // Avoid realizing all the descriptors for all compiler diagnostics by assuming that compiler analyzer doesn't report unsupported diagnostics.
+            // Avoid realizing all the descriptors for all compiler diagnostics by assuming that compiler
+            // analyzer doesn't report unsupported diagnostics.
             if (isCompilerAnalyzer(analyzer))
             {
                 return true;
             }
 
-            // Get all the supported diagnostics and scan them linearly to see if the reported diagnostic is supported by the analyzer.
-            // The linear scan is okay, given that this runs only if a diagnostic is being reported and a given analyzer is quite unlikely to have hundreds of thousands of supported diagnostics.
+            // Get all the supported diagnostics and scan them linearly to see if the reported diagnostic is
+            // supported by the analyzer.
+            // The linear scan is okay, given that this runs only if a diagnostic is being reported and a given
+            // analyzer is quite unlikely to have hundreds of thousands of supported diagnostics.
             var supportedDescriptors = GetSupportedDiagnosticDescriptors(
                 analyzer,
                 analyzerExecutor,
@@ -465,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through options.
+        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through
+        // options.
         /// </summary>
         internal bool IsDiagnosticAnalyzerSuppressed(
             DiagnosticAnalyzer analyzer,
@@ -508,7 +523,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     foreach (var tree in analysisScope.SyntaxTrees)
                     {
-                        // Check if diagnostic is enabled by SyntaxTree.DiagnosticOptions or Bulk configuration from AnalyzerConfigOptions.
+                        // Check if diagnostic is enabled by SyntaxTree.DiagnosticOptions or Bulk configuration from
+                        // AnalyzerConfigOptions.
                         if (
                             treeOptions.TryGetDiagnosticValue(
                                 tree,
@@ -541,7 +557,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through options.
+        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through
+        // options.
         /// </summary>
         internal static bool IsDiagnosticAnalyzerSuppressed(
             DiagnosticAnalyzer analyzer,
@@ -562,7 +579,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             if (isCompilerAnalyzer(analyzer))
             {
-                // Compiler analyzer must always be executed for compiler errors, which cannot be suppressed or filtered.
+                // Compiler analyzer must always be executed for compiler errors, which cannot be suppressed or
+                // filtered.
                 return false;
             }
 
@@ -575,7 +593,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     if (diag.IsEnabledByDefault)
                     {
-                        // Diagnostic descriptor is not configurable, so the diagnostics created through it cannot be suppressed.
+                        // Diagnostic descriptor is not configurable, so the diagnostics created through it cannot be
+                        // suppressed.
                         return false;
                     }
                     else
@@ -586,8 +605,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
                 else if (diag.IsCustomSeverityConfigurable())
                 {
-                    // Analyzer supports custom ways for configuring diagnostic severity that may not be understood by the compiler.
-                    // We always consider such analyzers to be non-suppressed. Analyzer is responsible for bailing out early if
+                    // Analyzer supports custom ways for configuring diagnostic severity that may not be understood by
+                    // the compiler.
+                    // We always consider such analyzers to be non-suppressed. Analyzer is responsible for bailing out
+                    // early if
                     // it has been suppressed by some custom configuration.
                     return false;
                 }
@@ -596,8 +617,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var isSuppressed = !diag.IsEnabledByDefault;
 
                 // Global editorconfig settings overrides the analyzer author
-                // Compilation wide user settings (diagnosticOptions) from ruleset/nowarn/warnaserror overrides the analyzer author and global editorconfig settings.
-                // Note that "/warnaserror-:DiagnosticId" adds a diagnostic option with value 'ReportDiagnostic.Default',
+                // Compilation wide user settings (diagnosticOptions) from ruleset/nowarn/warnaserror overrides the
+                // analyzer author and global editorconfig settings.
+                // Note that "/warnaserror-:DiagnosticId" adds a diagnostic option with value
+                // 'ReportDiagnostic.Default',
                 // which should not alter 'isSuppressed'.
                 if (
                     (

@@ -248,7 +248,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     bl_counts[i] = 0;
                 }
 
-                /* First calculate optimal bit lengths */
+/* First calculate optimal bit lengths */
                 int[] lengths = new int[numNodes];
                 lengths[numNodes - 1] = 0;
 
@@ -266,7 +266,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     }
                     else
                     {
-                        /* A leaf node */
+/* A leaf node */
                         int bitLength = lengths[i];
                         bl_counts[bitLength - 1]++;
                         this.length[childs[2 * i]] = (byte)lengths[i];
@@ -289,13 +289,13 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 int incrBitLen = maxLength - 1;
                 do
                 {
-                    /* Find the first bit length which could increase: */
+/* Find the first bit length which could increase: */
                     while (bl_counts[--incrBitLen] == 0)
                         ;
 
-                    /* Move this node one down and remove a corresponding
-                    * amount of overflow nodes.
-                    */
+/* Move this node one down and remove a corresponding
+* amount of overflow nodes.
+*/
                     do
                     {
                         bl_counts[incrBitLen]--;
@@ -304,20 +304,20 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     } while (overflow > 0 && incrBitLen < maxLength - 1);
                 } while (overflow > 0);
 
-                /* We may have overshot above.  Move some nodes from maxLength to
-                * maxLength-1 in that case.
-                */
+/* We may have overshot above.  Move some nodes from maxLength to
+* maxLength-1 in that case.
+*/
                 bl_counts[maxLength - 1] += overflow;
                 bl_counts[maxLength - 2] -= overflow;
 
-                /* Now recompute all bit lengths, scanning in increasing
-                * frequency.  It is simpler to reconstruct all lengths instead of
-                * fixing only the wrong ones. This idea is taken from 'ar'
-                * written by Haruhiko Okumura.
-                *
-                * The nodes were inserted with decreasing frequency into the childs
-                * array.
-                */
+/* Now recompute all bit lengths, scanning in increasing
+* frequency.  It is simpler to reconstruct all lengths instead of
+* fixing only the wrong ones. This idea is taken from 'ar'
+* written by Haruhiko Okumura.
+*
+* The nodes were inserted with decreasing frequency into the childs
+* array.
+*/
                 int nodePtr = 2 * numLeafs;
                 for (int bits = maxLength; bits != 0; bits--)
                 {
@@ -327,7 +327,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                         int childPtr = 2 * childs[nodePtr++];
                         if (childs[childPtr + 1] == -1)
                         {
-                            /* We found another leaf */
+/* We found another leaf */
                             length[childs[childPtr]] = (byte)bits;
                             n--;
                         }
@@ -349,14 +349,14 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             {
                 int numSymbols = freqs.Length;
 
-                /* heap is a priority queue, sorted by frequency, least frequent
-                * nodes first.  The heap is a binary tree, with the property, that
-                * the parent node is smaller than both child nodes.  This assures
-                * that the smallest node is the first parent.
-                *
-                * The binary tree is encoded in an array:  0 is root node and
-                * the nodes 2*n+1, 2*n+2 are the child nodes of node n.
-                */
+/* heap is a priority queue, sorted by frequency, least frequent
+* nodes first.  The heap is a binary tree, with the property, that
+* the parent node is smaller than both child nodes.  This assures
+* that the smallest node is the first parent.
+*
+* The binary tree is encoded in an array:  0 is root node and
+* the nodes 2*n+1, 2*n+2 are the child nodes of node n.
+*/
                 int[] heap = new int[numSymbols];
                 int heapLen = 0;
                 int maxCode = 0;
@@ -365,7 +365,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     int freq = freqs[n];
                     if (freq != 0)
                     {
-                        /* Insert n into heap */
+/* Insert n into heap */
                         int pos = heapLen++;
                         int ppos;
                         while (pos > 0 && freqs[heap[ppos = (pos - 1) / 2]] > freq)
@@ -379,11 +379,11 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     }
                 }
 
-                /* We could encode a single literal with 0 bits but then we
-                * don't see the literals.  Therefore we force at least two
-                * literals to avoid this case.  We don't care about order in
-                * this case, both literals get a 1 bit code.
-                */
+/* We could encode a single literal with 0 bits but then we
+* don't see the literals.  Therefore we force at least two
+* literals to avoid this case.  We don't care about order in
+* this case, both literals get a 1 bit code.
+*/
                 while (heapLen < 2)
                 {
                     int node = maxCode < 2 ? ++maxCode : 0;
@@ -405,15 +405,15 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                     heap[i] = i;
                 }
 
-                /* Construct the Huffman tree by repeatedly combining the least two
-                * frequent nodes.
-                */
+/* Construct the Huffman tree by repeatedly combining the least two
+* frequent nodes.
+*/
                 do
                 {
                     int first = heap[0];
                     int last = heap[--heapLen];
 
-                    /* Propagate the hole to the leafs of the heap */
+/* Propagate the hole to the leafs of the heap */
                     int ppos = 0;
                     int path = 1;
 
@@ -429,9 +429,9 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                         path = path * 2 + 1;
                     }
 
-                    /* Now propagate the last element down along path.  Normally
-                    * it shouldn't go too deep.
-                    */
+/* Now propagate the last element down along path.  Normally
+* it shouldn't go too deep.
+*/
                     int lastVal = values[last];
                     while ((path = ppos) > 0 && values[heap[ppos = (path - 1) / 2]] > lastVal)
                     {
@@ -441,14 +441,14 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
 
                     int second = heap[0];
 
-                    /* Create a new node father of first and second */
+/* Create a new node father of first and second */
                     last = numNodes++;
                     childs[2 * last] = first;
                     childs[2 * last + 1] = second;
                     int mindepth = Math.Min(values[first] & 0xff, values[second] & 0xff);
                     values[last] = lastVal = values[first] + values[second] - mindepth + 1;
 
-                    /* Again, propagate the hole to the leafs */
+/* Again, propagate the hole to the leafs */
                     ppos = 0;
                     path = 1;
 
@@ -464,7 +464,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                         path = ppos * 2 + 1;
                     }
 
-                    /* Now propagate the new element down along path */
+/* Now propagate the new element down along path */
                     while ((path = ppos) > 0 && values[heap[ppos = (path - 1) / 2]] > lastVal)
                     {
                         heap[path] = heap[ppos];
@@ -660,8 +660,8 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
 
         static DeflaterHuffman()
         {
-            /* See RFC 1951 3.2.6 */
-            /* Literal codes */
+/* See RFC 1951 3.2.6 */
+/* Literal codes */
             staticLCodes = new short[LITERAL_NUM];
             staticLLength = new byte[LITERAL_NUM];
             int i = 0;
@@ -686,7 +686,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 staticLLength[i++] = 8;
             }
 
-            /* Distant codes */
+/* Distant codes */
             staticDCodes = new short[DIST_NUM];
             staticDLength = new byte[DIST_NUM];
             for (i = 0; i < DIST_NUM; i++)
@@ -864,15 +864,15 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
         {
             literalTree.freqs[EOF_SYMBOL]++;
 
-            /* Build trees */
+/* Build trees */
             literalTree.BuildTree();
             distTree.BuildTree();
 
-            /* Calculate bitlen frequency */
+/* Calculate bitlen frequency */
             literalTree.CalcBLFreq(blTree);
             distTree.CalcBLFreq(blTree);
 
-            /* Build bitlen tree */
+/* Build bitlen tree */
             blTree.BuildTree();
 
             int blTreeCodes = 4;
@@ -902,13 +902,13 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             }
             if (opt_len >= static_len)
             {
-                /* Force static trees */
+/* Force static trees */
                 opt_len = static_len;
             }
 
             if (storedOffset >= 0 && (storedLength + 4 < (opt_len >> 3)))
             {
-                /* Store Block */
+/* Store Block */
                 //				if (DeflaterConstants.DEBUGGING) {
                 //					//Console.WriteLine("Storing, since " + storedLength + " < " + opt_len
                 //					                  + " <= " + static_len);
@@ -917,7 +917,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             }
             else if (opt_len == static_len)
             {
-                /* Encode with static tree */
+/* Encode with static tree */
                 pending.WriteBits((DeflaterConstants.STATIC_TREES << 1) + (lastBlock ? 1 : 0), 3);
                 literalTree.SetStaticCodes(staticLCodes, staticLLength);
                 distTree.SetStaticCodes(staticDCodes, staticDLength);
@@ -926,7 +926,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             }
             else
             {
-                /* Encode with dynamic tree */
+/* Encode with dynamic tree */
                 pending.WriteBits((DeflaterConstants.DYN_TREES << 1) + (lastBlock ? 1 : 0), 3);
                 SendAllTrees(blTreeCodes);
                 CompressBlock();

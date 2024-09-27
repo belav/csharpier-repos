@@ -280,7 +280,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -291,7 +292,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -381,8 +383,10 @@ namespace System.ComponentModel.Composition.Hosting
         ///
         ///     For example the <see cref="CatalogExportProvider"/> will only release
         ///     an <see cref="Export"/> if it comes from a <see cref="ComposablePart"/> that was constructed
-        ///     under a <see cref="CreationPolicy.NonShared" /> context. Release in this context means walking
-        ///     the dependency chain of the <see cref="Export"/>s, detaching references from the container and
+        ///     under a <see cref="CreationPolicy.NonShared" /> context. Release in this context means
+        // walking
+        ///     the dependency chain of the <see cref="Export"/>s, detaching references from the container
+        // and
         ///     calling Dispose on the <see cref="ComposablePart"/>s as needed. If the <see cref="Export"/>
         ///     was constructed under a <see cref="CreationPolicy.Shared" /> context the
         ///     <see cref="CatalogExportProvider"/> will do nothing as it may be in use by other requestors.
@@ -412,9 +416,12 @@ namespace System.ComponentModel.Composition.Hosting
         ///     released causing them to be detached from the container.
         ///
         ///     For example the <see cref="CatalogExportProvider"/> will only release
-        ///     an <see cref="Lazy{T}"/> if it comes from a <see cref="ComposablePart"/> that was constructed
-        ///     under a <see cref="CreationPolicy.NonShared" /> context. Release in this context means walking
-        ///     the dependency chain of the <see cref="Export"/>s, detaching references from the container and
+        ///     an <see cref="Lazy{T}"/> if it comes from a <see cref="ComposablePart"/> that was
+        // constructed
+        ///     under a <see cref="CreationPolicy.NonShared" /> context. Release in this context means
+        // walking
+        ///     the dependency chain of the <see cref="Export"/>s, detaching references from the container
+        // and
         ///     calling Dispose on the <see cref="ComposablePart"/>s as needed. If the <see cref="Export"/>
         ///     was constructed under a <see cref="CreationPolicy.Shared" /> context the
         ///     <see cref="CatalogExportProvider"/> will do nothing as it may be in use by other requestors.
@@ -569,7 +576,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// 	<note type="inheritinfo">
         /// The implementers should not treat the cardinality-related mismatches as errors, and are not
         /// expected to throw exceptions in those cases.
-        /// For instance, if the import requests exactly one export and the provider has no matching exports or more than one,
+        /// For instance, if the import requests exactly one export and the provider has no matching exports
+        // or more than one,
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>

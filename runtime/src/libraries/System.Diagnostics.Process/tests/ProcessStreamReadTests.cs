@@ -149,7 +149,8 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public async Task TestAsyncOutputStream_CancelOutputRead()
         {
-            // This test might have some false negatives due to possible race condition in System.Diagnostics.AsyncStreamReader.ReadBufferAsync
+            // This test might have some false negatives due to possible race condition in
+            // System.Diagnostics.AsyncStreamReader.ReadBufferAsync
             // There is not way to know if parent process has processed async output from child process
 
             using (
@@ -522,19 +523,27 @@ namespace System.Diagnostics.Tests
             // This is the test for the fix of https://github.com/dotnet/runtime/issues/19277.
             //
             // Summary of the issue:
-            // When an application starts more than one child processes with their standard inputs redirected on Unix,
-            // closing the standard input stream of the first child process won't unblock the 'Console.ReadLine()' call
+            // When an application starts more than one child processes with their standard inputs redirected on
+            // Unix,
+            // closing the standard input stream of the first child process won't unblock the
+            // 'Console.ReadLine()' call
             // in the first child process (it's expected to receive EOF).
             //
             // Root cause of the issue:
-            // The file descriptor for the write end of the first child process standard input redirection pipe gets
-            // inherited by the second child process, which makes the reference count of the pipe write end become 2.
-            // When closing the standard input stream of the first child process, the file descriptor held by the parent
-            // process is released, but the one inherited by the second child process is still referencing the pipe
-            // write end, which cause the 'Console.ReadLine()' continue to be blocked in the first child process.
+            // The file descriptor for the write end of the first child process standard input redirection pipe
+            // gets
+            // inherited by the second child process, which makes the reference count of the pipe write end
+            // become 2.
+            // When closing the standard input stream of the first child process, the file descriptor held by
+            // the parent
+            // process is released, but the one inherited by the second child process is still referencing the
+            // pipe
+            // write end, which cause the 'Console.ReadLine()' continue to be blocked in the first child
+            // process.
             //
             // Fix:
-            // Set the O_CLOEXEC flag when creating the redirection pipes. So that no child process would inherit the
+            // Set the O_CLOEXEC flag when creating the redirection pipes. So that no child process would
+            // inherit the
             // file descriptors referencing those pipes.
             const string ExpectedLine = "NULL";
             Process p1 = CreateProcessPortable(RemotelyInvokable.ReadLineWriteIfNull);
@@ -692,8 +701,10 @@ namespace System.Diagnostics.Tests
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
 
-            // On netfx, the handler is called once with the Data as null, even if the process writes nothing to the pipe.
-            // That behavior is documented here https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.datareceivedeventhandler
+            // On netfx, the handler is called once with the Data as null, even if the process writes nothing to
+            // the pipe.
+            // That behavior is documented here
+            // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.datareceivedeventhandler
 
             p.Start();
             p.BeginOutputReadLine();

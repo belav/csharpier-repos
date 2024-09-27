@@ -7,7 +7,8 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-// allows capture of written payloads into a ReadOnlySequence<byte> based on RecyclableReadOnlySequenceSegment
+// allows capture of written payloads into a ReadOnlySequence<byte> based on
+// RecyclableReadOnlySequenceSegment
 internal sealed class RecyclableSequenceBuilder : IDisposable
 {
     private RecyclableReadOnlySequenceSegment? _firstSegment,

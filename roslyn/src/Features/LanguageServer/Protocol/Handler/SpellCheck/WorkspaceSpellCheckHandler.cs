@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
                         continue;
                     }
 
-                    // Do not attempt to get spell check results for Razor files, Razor will directly ask us for document based results
+                    // Do not attempt to get spell check results for Razor files, Razor will directly ask us for
+                    // document based results
                     // for any razor file they are interested in.
                     if (document.IsRazorDocument())
                     {

@@ -16,8 +16,10 @@ using Xunit;
 namespace System.Text.RegularExpressions.Tests
 {
     /// <summary>
-    /// These tests have been ported from the pcre2 test suite located at https://github.com/PCRE2Project/pcre2/tree/8b133fa0ba0a1817ea45df2e8e2ad642501e2fcf/testdata
-    /// in order to increase .NET's test coverage. You can find the relevant repo license in this folder's THIRD-PARTY-NOTICES.TXT file.
+    /// These tests have been ported from the pcre2 test suite located at
+    // https://github.com/PCRE2Project/pcre2/tree/8b133fa0ba0a1817ea45df2e8e2ad642501e2fcf/testdata
+    /// in order to increase .NET's test coverage. You can find the relevant repo license in this
+    // folder's THIRD-PARTY-NOTICES.TXT file.
     /// </summary>
     public class RegexPcre2Tests
     {
@@ -1707,7 +1709,8 @@ namespace System.Text.RegularExpressions.Tests
             yield return ("a*", RegexOptions.None, "abbab", true);
             yield return ("[\\s]+", RegexOptions.None, "> \t\n\f\r\v<", true);
             yield return ("\\s+", RegexOptions.None, "> \t\n\f\r\v<", true);
-            // yield return ("a\vb", RegexOptions.IgnorePatternWhitespace, "ab", true); https://github.com/dotnet/runtime/issues/73206
+            // yield return ("a\vb", RegexOptions.IgnorePatternWhitespace, "ab", true);
+            // https://github.com/dotnet/runtime/issues/73206
             yield return ("abc.", RegexOptions.None, "abc1abc2xyzabc3", true);
             yield return ("a(?x: b c )d", RegexOptions.None, "XabcdY", true);
             yield return ("a(?x: b c )d", RegexOptions.None, "Xa b c d Y", false);
@@ -1721,7 +1724,9 @@ namespace System.Text.RegularExpressions.Tests
             yield return ("((?i)AB(?-i)C|D)E", RegexOptions.None, "abCe", false);
             yield return ("((?i)AB(?-i)C|D)E", RegexOptions.None, "dE", false);
             yield return ("((?i)AB(?-i)C|D)E", RegexOptions.None, "De", false);
-            // yield return ("(a+)*b", RegexOptions.None, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false); // https://github.com/dotnet/runtime/issues/73208
+            // yield return ("(a+)*b", RegexOptions.None,
+            // "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false); //
+            // https://github.com/dotnet/runtime/issues/73208
             yield return ("(?i)reg(?:ul(?:[a\u00E4]|ae)r|ex)", RegexOptions.None, "REGular", true);
             yield return ("(?i)reg(?:ul(?:[a\u00E4]|ae)r|ex)", RegexOptions.None, "regulaer", true);
             yield return ("(?i)reg(?:ul(?:[a\u00E4]|ae)r|ex)", RegexOptions.None, "Regex", true);
@@ -2633,7 +2638,8 @@ namespace System.Text.RegularExpressions.Tests
             yield return ("[q-u]+", RegexOptions.IgnoreCase, "Ss\u017F", true);
             yield return ("^s?c", RegexOptions.IgnoreCase | RegexOptions.Multiline, "scat", true);
             yield return ("[A-`]", RegexOptions.IgnoreCase, "abcdefghijklmno", true);
-            // yield return ("A\u000C\u000A\u000D\u0009\u000B\u0085B", RegexOptions.IgnorePatternWhitespace, "AB", true); https://github.com/dotnet/runtime/issues/73206
+            // yield return ("A\u000C\u000A\u000D\u0009\u000B\u0085B", RegexOptions.IgnorePatternWhitespace,
+            // "AB", true); https://github.com/dotnet/runtime/issues/73206
             yield return (
                 "A\u00E2\u0080\u0082B",
                 RegexOptions.IgnorePatternWhitespace,
@@ -2748,7 +2754,8 @@ namespace System.Text.RegularExpressions.Tests
             yield return ("^X\\p{Lu}{1,3}?Z", RegexOptions.Singleline, "XY!", false);
             yield return ("^X.+?Z", RegexOptions.Singleline, "XYY", false);
             yield return ("^X\\p{L}{1,3}Z", RegexOptions.None, "XY", false);
-            // yield return ("A      \n\v\f\n\u0085B", RegexOptions.IgnorePatternWhitespace, "AB", true); https://github.com/dotnet/runtime/issues/73206
+            // yield return ("A      \n\v\f\n\u0085B", RegexOptions.IgnorePatternWhitespace, "AB", true);
+            // https://github.com/dotnet/runtime/issues/73206
             yield return ("ab*c", RegexOptions.None, "abbbbc", true);
             yield return ("ab*c", RegexOptions.None, "ac", true);
             yield return ("ab+c", RegexOptions.None, "abc", true);

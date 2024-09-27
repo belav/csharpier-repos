@@ -7,7 +7,8 @@ namespace System.Web.Util
 {
     internal static class UriUtil
     {
-        // Just extracts the query string and fragment from the input path by splitting on the separator characters.
+        // Just extracts the query string and fragment from the input path by splitting on the separator
+        // characters.
         // Doesn't perform any validation as to whether the input represents a valid URL.
         // Concatenating the pieces back together will form the original input string.
         private static void ExtractQueryAndFragment(
@@ -31,7 +32,8 @@ namespace System.Web.Util
         }
 
         // Attempts to split a URI into its constituent pieces.
-        // Even if this method returns true, one or more of the out parameters might contain a null or empty string, e.g. if there is no query / fragment.
+        // Even if this method returns true, one or more of the out parameters might contain a null or empty
+        // string, e.g. if there is no query / fragment.
         // Concatenating the pieces back together will form the original input string.
         internal static bool TrySplitUriForPathEncode(
             string input,

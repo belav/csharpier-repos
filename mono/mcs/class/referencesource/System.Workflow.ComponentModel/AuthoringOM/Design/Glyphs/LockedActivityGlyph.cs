@@ -9,7 +9,8 @@ namespace System.Workflow.ComponentModel.Design
 
 
     #region Class LockedActivityGlyph
-    //Class is internal but not sealed as we dont expect the ActivityDesigner writers to supply their own
+    //Class is internal but not sealed as we dont expect the ActivityDesigner writers to supply their
+    // own
     //Glyph instead based on comment property comment glyph is shown
     //Exception: StripItemCommentGlyph
     [Obsolete(

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,8 @@ namespace System.CommandLine.Parsing
         internal override bool UseDefaultValueFor(ArgumentResult argumentResult) =>
             argumentResult.Argument.HasDefaultValue && argumentResult.Tokens.Count == 0;
 
-        /// <param name="completeValidation">Only the inner most command goes through complete validation.</param>
+        /// <param name="completeValidation">Only the inner most command goes through complete
+        // validation.</param>
         internal void Validate(bool completeValidation)
         {
             if (completeValidation)

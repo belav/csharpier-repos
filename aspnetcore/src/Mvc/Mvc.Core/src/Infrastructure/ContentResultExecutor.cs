@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 /// <summary>
-/// A <see cref="IActionResultExecutor{ContentResult}"/> that is responsible for <see cref="ContentResult"/>
+/// A <see cref="IActionResultExecutor{ContentResult}"/> that is responsible for <see
+// cref="ContentResult"/>
 /// </summary>
 public partial class ContentResultExecutor : IActionResultExecutor<ContentResult>
 {

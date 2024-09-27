@@ -2,7 +2,8 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-// NOTE: will eventually get generated from 'xd.xml' if we get extra performance from XML Dictionary strings
+// NOTE: will eventually get generated from 'xd.xml' if we get extra performance from XML Dictionary
+// strings
 // This would entail elevating the most common strings into a "Main" dictionary
 
 namespace System.ServiceModel

@@ -25,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis
         /// descendant, but different from the <see cref="ClassCode"/> of any other descendant.
         /// </summary>
         /// <remarks>
-        /// This is really just a number, ideally produced by "new Random().Next(int.MinValue, int.MaxValue)".
+        /// This is really just a number, ideally produced by "new Random().Next(int.MinValue,
+        // int.MaxValue)".
         /// If two manage to conflict (which is pretty unlikely), just make a new one...
         /// </remarks>
         public abstract int ClassCode { get; }

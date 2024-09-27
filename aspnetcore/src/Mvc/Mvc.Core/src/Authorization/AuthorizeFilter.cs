@@ -15,11 +15,13 @@ namespace Microsoft.AspNetCore.Mvc.Authorization;
 
 /// <summary>
 /// An implementation of <see cref="IAsyncAuthorizationFilter"/> which applies a specific
-/// <see cref="AuthorizationPolicy"/>. MVC recognizes the <see cref="AuthorizeAttribute"/> and adds an instance of
+/// <see cref="AuthorizationPolicy"/>. MVC recognizes the <see cref="AuthorizeAttribute"/> and adds
+// an instance of
 /// this filter to the associated action or controller.
 /// </summary>
 /// <remarks>
-/// An authorize filter is not meant to be used in combination with <see cref="AuthorizationOptions.FallbackPolicy"/>.
+/// An authorize filter is not meant to be used in combination with <see
+// cref="AuthorizationOptions.FallbackPolicy"/>.
 /// The fallback policy takes precedence over an authorize filter.
 /// </remarks>
 public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
@@ -44,8 +46,10 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
     /// <summary>
     /// Initialize a new <see cref="AuthorizeFilter"/> instance.
     /// </summary>
-    /// <param name="policyProvider">The <see cref="IAuthorizationPolicyProvider"/> to use to resolve policy names.</param>
-    /// <param name="authorizeData">The <see cref="IAuthorizeData"/> to combine into an <see cref="IAuthorizeData"/>.</param>
+    /// <param name="policyProvider">The <see cref="IAuthorizationPolicyProvider"/> to use to resolve
+    // policy names.</param>
+    /// <param name="authorizeData">The <see cref="IAuthorizeData"/> to combine into an <see
+    // cref="IAuthorizeData"/>.</param>
     public AuthorizeFilter(
         IAuthorizationPolicyProvider policyProvider,
         IEnumerable<IAuthorizeData> authorizeData
@@ -60,7 +64,8 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
     /// <summary>
     /// Initializes a new instance of <see cref="AuthorizeFilter"/>.
     /// </summary>
-    /// <param name="authorizeData">The <see cref="IAuthorizeData"/> to combine into an <see cref="IAuthorizeData"/>.</param>
+    /// <param name="authorizeData">The <see cref="IAuthorizeData"/> to combine into an <see
+    // cref="IAuthorizeData"/>.</param>
     public AuthorizeFilter(IEnumerable<IAuthorizeData> authorizeData)
     {
         ArgumentNullException.ThrowIfNull(authorizeData);
@@ -90,7 +95,8 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
     /// </summary>
     /// <remarks>
     /// If<c>null</c>, the policy will be constructed using
-    /// <see cref="AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider, IEnumerable{IAuthorizeData})"/>.
+    /// <see cref="AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider,
+    // IEnumerable{IAuthorizeData})"/>.
     /// </remarks>
     public AuthorizationPolicy? Policy { get; }
 
@@ -140,11 +146,15 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
         var endpoint = context.HttpContext.GetEndpoint();
         if (endpoint != null)
         {
-            // When doing endpoint routing, MVC does not create filters for any authorization specific metadata i.e [Authorize] does not
-            // get translated into AuthorizeFilter. Consequently, there are some rough edges when an application uses a mix of AuthorizeFilter
+            // When doing endpoint routing, MVC does not create filters for any authorization specific metadata
+            // i.e [Authorize] does not
+            // get translated into AuthorizeFilter. Consequently, there are some rough edges when an application
+            // uses a mix of AuthorizeFilter
             // explicilty configured by the user (e.g. global auth filter), and uses endpoint metadata.
-            // To keep the behavior of AuthFilter identical to pre-endpoint routing, we will gather auth data from endpoint metadata
-            // and produce a policy using this. This would mean we would have effectively run some auth twice, but it maintains compat.
+            // To keep the behavior of AuthFilter identical to pre-endpoint routing, we will gather auth data
+            // from endpoint metadata
+            // and produce a policy using this. This would mean we would have effectively run some auth twice,
+            // but it maintains compat.
             var policyProvider =
                 PolicyProvider
                 ?? context.HttpContext.RequestServices.GetRequiredService<IAuthorizationPolicyProvider>();
@@ -175,7 +185,8 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
             return;
         }
 
-        // IMPORTANT: Changes to authorization logic should be mirrored in security's AuthorizationMiddleware
+        // IMPORTANT: Changes to authorization logic should be mirrored in security's
+        // AuthorizationMiddleware
         var effectivePolicy = await GetEffectivePolicyAsync(context);
         if (effectivePolicy == null)
         {
@@ -237,7 +248,8 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
             }
         }
 
-        // When doing endpoint routing, MVC does not add AllowAnonymousFilters for AllowAnonymousAttributes that
+        // When doing endpoint routing, MVC does not add AllowAnonymousFilters for AllowAnonymousAttributes
+        // that
         // were discovered on controllers and actions. To maintain compat with 2.x,
         // we'll check for the presence of IAllowAnonymous in endpoint metadata.
         var endpoint = context.HttpContext.GetEndpoint();

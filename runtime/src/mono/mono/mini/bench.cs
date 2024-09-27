@@ -2,27 +2,27 @@ using System;
 using System.Reflection;
 
 /*
- * Licensed under the MIT license. See LICENSE file in the project root for full license information.
- * Regression tests for the mono JIT.
- *
- * Each test needs to be of the form:
- *
- * static int test_<result>_<name> ();
- *
- * where <result> is an integer (the value that needs to be returned by
- * the method to make it pass.
- * <name> is a user-displayed name used to identify the test.
- *
- * The tests can be driven in two ways:
- * *) running the program directly: Main() uses reflection to find and invoke
- * 	the test methods (this is useful mostly to check that the tests are correct)
- * *) with the --regression switch of the jit (this is the preferred way since
- * 	all the tests will be run with optimizations on and off)
- *
- * The reflection logic could be moved to a .dll since we need at least another
- * regression test file written in IL code to have better control on how
- * the IL code looks.
- */
+* Licensed under the MIT license. See LICENSE file in the project root for full license information.
+* Regression tests for the mono JIT.
+*
+* Each test needs to be of the form:
+*
+* static int test_<result>_<name> ();
+*
+* where <result> is an integer (the value that needs to be returned by
+* the method to make it pass.
+* <name> is a user-displayed name used to identify the test.
+*
+* The tests can be driven in two ways:
+* *) running the program directly: Main() uses reflection to find and invoke
+* 	the test methods (this is useful mostly to check that the tests are correct)
+* *) with the --regression switch of the jit (this is the preferred way since
+* 	all the tests will be run with optimizations on and off)
+*
+* The reflection logic could be moved to a .dll since we need at least another
+* regression test file written in IL code to have better control on how
+* the IL code looks.
+*/
 
 class Tests
 {
@@ -236,42 +236,42 @@ class Tests
         return loops;
     }
 
-    /*
-        /// Gaussian blur of a generated grayscale picture
-        private int test_0_blur(int size) {
-        const int num  = 5; // Number of time to blur
-        byte[,] arr1 = new byte[size, size];
-        byte[,] arr2 = new byte[size, size];
+/*
+/// Gaussian blur of a generated grayscale picture
+private int test_0_blur(int size) {
+const int num  = 5; // Number of time to blur
+byte[,] arr1 = new byte[size, size];
+byte[,] arr2 = new byte[size, size];
 
-        int iterations = 1;
-        
-        while(iterations-- > 0) {
+int iterations = 1;
 
-            // Draw fake picture
-            for(int i = 0; i < size; i++) {
-                for(int j = 0; j < size; j++) {
-                    arr1[i, j] = (byte) (i%255);
-                }
-            }
+while(iterations-- > 0) {
 
-            for(int n = 0; n < num; n++) { // num rounds of blurring
-                for(int i = 3; i < size-3; i++) // vertical blur arr1 -> arr2
-                    for(int j = 0; j < size; j++)
-                        arr2[i, j] = (byte)((arr1[i-3, j] + arr1[i+3, j]
-                                     + 6*(arr1[i-2, j]+arr1[i+2, j])
-                                     + 15*(arr1[i-1, j]+arr1[i+1, j])
-                                     + 20*arr1[i, j] + 32)>>6);
+// Draw fake picture
+for(int i = 0; i < size; i++) {
+for(int j = 0; j < size; j++) {
+arr1[i, j] = (byte) (i%255);
+}
+}
 
-                for(int j = 3; j < size-3; j++) // horizontal blur arr1 -> arr2
-                    for(int i = 0; i < size; i++)
-                        arr1[i, j] = (byte)((arr2[i, j-3] + arr2[i, j+3]
-                                     + 6*(arr2[i, j-2]+arr2[i, j+2])
-                                     + 15*(arr2[i, j-1]+arr2[i, j+1])
-                                     + 20*arr2[i, j] + 32)>>6);
-            }
-        }
+for(int n = 0; n < num; n++) { // num rounds of blurring
+for(int i = 3; i < size-3; i++) // vertical blur arr1 -> arr2
+for(int j = 0; j < size; j++)
+arr2[i, j] = (byte)((arr1[i-3, j] + arr1[i+3, j]
++ 6*(arr1[i-2, j]+arr1[i+2, j])
++ 15*(arr1[i-1, j]+arr1[i+1, j])
++ 20*arr1[i, j] + 32)>>6);
 
-        return 0;
-        }
-     */
+for(int j = 3; j < size-3; j++) // horizontal blur arr1 -> arr2
+for(int i = 0; i < size; i++)
+arr1[i, j] = (byte)((arr2[i, j-3] + arr2[i, j+3]
++ 6*(arr2[i, j-2]+arr2[i, j+2])
++ 15*(arr2[i, j-1]+arr2[i, j+1])
++ 20*arr2[i, j] + 32)>>6);
+}
+}
+
+return 0;
+}
+*/
 }

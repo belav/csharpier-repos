@@ -34,7 +34,8 @@ namespace System.IO.Pipes.Tests
             return false;
         }
 
-        // @todo: These are called by some Windows-specific tests. Those tests should really be split out into
+        // @todo: These are called by some Windows-specific tests. Those tests should really be split out
+        // into
         // partial classes and included only in Windows builds.
         internal static bool CancelIoEx(SafeHandle handle)
         {

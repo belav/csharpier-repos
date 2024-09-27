@@ -169,7 +169,8 @@ namespace System
                 throw new OverflowException(Environment.GetResourceString("Overflow_Int16"), e);
             }
 
-            // We need this check here since we don't allow signs to specified in hex numbers. So we fixup the result
+            // We need this check here since we don't allow signs to specified in hex numbers. So we fixup the
+            // result
             // for negative numbers
             if ((style & NumberStyles.AllowHexSpecifier) != 0)
             { // We are parsing a hexadecimal number
@@ -215,7 +216,8 @@ namespace System
                 return false;
             }
 
-            // We need this check here since we don't allow signs to specified in hex numbers. So we fixup the result
+            // We need this check here since we don't allow signs to specified in hex numbers. So we fixup the
+            // result
             // for negative numbers
             if ((style & NumberStyles.AllowHexSpecifier) != 0)
             { // We are parsing a hexadecimal number
@@ -396,7 +398,8 @@ namespace System
         ///        }
         ///
         ///        /// <internalonly/>
-        ///        Int16 IArithmetic<Int16>.DivideRemainder(Int16 divisor, out Int16 remainder, out bool overflowed) {
+        ///        Int16 IArithmetic<Int16>.DivideRemainder(Int16 divisor, out Int16 remainder, out bool
+        // overflowed) {
         ///            remainder = (Int16) (m_value % divisor);
         ///            overflowed = (divisor == -1 && m_value == MinValue);
         ///            return (Int16) unchecked(m_value / divisor);
@@ -422,7 +425,8 @@ namespace System
         ///        private static Int16ArithmeticDescriptor s_descriptor;
         ///
         ///        class Int16ArithmeticDescriptor : ArithmeticDescriptor<Int16> {
-        ///            public Int16ArithmeticDescriptor(ArithmeticCapabilities capabilities) : base(capabilities) {}
+        ///            public Int16ArithmeticDescriptor(ArithmeticCapabilities capabilities) :
+        // base(capabilities) {}
         ///
         ///            public override Int16 One {
         ///                get {

@@ -415,7 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     // error should have been reported earlier
-                    // Bound.Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsMultiDimensionalArrayInitializer, node.Syntax.Location);
+                    // Bound.Diagnostics.Add(ErrorCode.ERR_ExpressionTreeContainsMultiDimensionalArrayInitializer,
+                    // node.Syntax.Location);
                     return new BoundBadExpression(
                         node.Syntax,
                         default(LookupResultKind),
@@ -783,7 +784,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Visit the expression, but do so in a way that ensures that its type is precise.  That means that any
+        /// Visit the expression, but do so in a way that ensures that its type is precise.  That means that
+        // any
         /// sometimes-unnecessary conversions (such as an implicit reference conversion) are retained.
         /// </summary>
         private BoundExpression VisitExactType(BoundExpression e)
@@ -979,8 +981,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 // 4.0 and earlier we do it this way
-                //createDelegate = (MethodSymbol)Bound.WellKnownMember(WellKnownMember.System_Delegate__CreateDelegate);
-                //operand = Bound.Call(nullObject, createDelegate, Bound.Typeof(node.Type), receiver, Bound.MethodInfo(method));
+                //createDelegate =
+                // (MethodSymbol)Bound.WellKnownMember(WellKnownMember.System_Delegate__CreateDelegate);
+                //operand = Bound.Call(nullObject, createDelegate, Bound.Typeof(node.Type), receiver,
+                // Bound.MethodInfo(method));
                 unquoted = _bound.StaticCall(
                     _bound.SpecialType(SpecialType.System_Delegate),
                     "CreateDelegate",
@@ -1216,7 +1220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var sym = ((BoundObjectInitializerMember)a.Left).MemberSymbol;
 
-                        // An error is reported in diagnostics pass when a dynamic object initializer is encountered in an ET:
+                        // An error is reported in diagnostics pass when a dynamic object initializer is encountered in an
+                        // ET:
                         Debug.Assert((object)sym != null);
 
                         InitializerKind elementKind;

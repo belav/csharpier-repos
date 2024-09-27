@@ -58,16 +58,16 @@ namespace MonoTests.System.ServiceModel.Syndication
             new Atom10FeedFormatter((Type)null);
         }
 
-        /*
-        [Test]
-        public void FeedType ()
-        {
-            Atom10FeedFormatter f = new Atom10FeedFormatter ();
-            Assert.IsNull (f.FeedType, "#1");
-            f = new Atom10FeedFormatter (new SyndicationFeed ());
-            Assert.IsNull (f.FeedType, "#2");
-        }
-        */
+/*
+[Test]
+public void FeedType ()
+{
+Atom10FeedFormatter f = new Atom10FeedFormatter ();
+Assert.IsNull (f.FeedType, "#1");
+f = new Atom10FeedFormatter (new SyndicationFeed ());
+Assert.IsNull (f.FeedType, "#2");
+}
+*/
 
         [Test]
         public void Version()

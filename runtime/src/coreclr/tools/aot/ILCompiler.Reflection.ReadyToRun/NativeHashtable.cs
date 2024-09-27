@@ -7,7 +7,8 @@ using System.Text;
 namespace ILCompiler.Reflection.ReadyToRun
 {
     /// <summary>
-    /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/nativeformatreader.h">NativeFormat::NativeParser</a>
+    /// based on <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/nativeformatreader.h">NativeFormat::NativeParser</a>
     /// </summary>
     public struct NativeParser
     {
@@ -80,7 +81,8 @@ namespace ILCompiler.Reflection.ReadyToRun
     }
 
     /// <summary>
-    /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/nativeformatreader.h">NativeFormat::NativeHashtable</a>
+    /// based on <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/nativeformatreader.h">NativeFormat::NativeHashtable</a>
     /// </summary>
     public struct NativeHashtable
     {
@@ -242,7 +244,8 @@ namespace ILCompiler.Reflection.ReadyToRun
     }
 
     /// <summary>
-    /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/nativeformatreader.h">NativeFormat::NativeHashtable</a>
+    /// based on <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/nativeformatreader.h">NativeFormat::NativeHashtable</a>
     /// </summary>
     public struct NativeCuckooFilter
     {

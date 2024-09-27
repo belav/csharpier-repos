@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
-        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined in
+        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined
+        // in
         /// source or metadata.
         /// </summary>
         public new virtual FieldSymbol OriginalDefinition
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public abstract bool IsVolatile { get; }
 
         /// <summary>
-        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is false if the symbol is static.
+        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is
+        // false if the symbol is static.
         /// </summary>
         public virtual bool RequiresInstanceReceiver => !IsStatic;
 
@@ -133,15 +135,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public abstract bool IsConst { get; }
 
-        // Gets a value indicating whether this instance is metadata constant. A constant field is considered to be
-        // metadata constant unless they are of type decimal, because decimals are not regarded as constant by the CLR.
+        // Gets a value indicating whether this instance is metadata constant. A constant field is
+        // considered to be
+        // metadata constant unless they are of type decimal, because decimals are not regarded as constant
+        // by the CLR.
         public bool IsMetadataConstant
         {
             get { return this.IsConst && (this.Type.SpecialType != SpecialType.System_Decimal); }
         }
 
         /// <summary>
-        /// Returns false if the field wasn't declared as "const", or constant value was omitted or erroneous.
+        /// Returns false if the field wasn't declared as "const", or constant value was omitted or
+        // erroneous.
         /// True otherwise.
         /// </summary>
         public virtual bool HasConstantValue
@@ -162,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If IsConst returns true, then returns the constant value of the field or enum member. If IsConst returns
+        /// If IsConst returns true, then returns the constant value of the field or enum member. If IsConst
+        // returns
         /// false, then returns null.
         /// </summary>
         public virtual object ConstantValue
@@ -392,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if the error code is highest priority while calculating use site error for this symbol.
+        /// Returns true if the error code is highest priority while calculating use site error for this
+        // symbol.
         /// </summary>
         protected sealed override bool IsHighestPriorityUseSiteErrorCode(int code) =>
             code is (int)ErrorCode.ERR_UnsupportedCompilerFeature or (int)ErrorCode.ERR_BindToBogus;

@@ -13,8 +13,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis;
 
 /// <summary>
-/// A small struct that holds the values that define the identity of a source generated document, and don't change
-/// as new generations happen. This is mostly for convenience as we are reguarly working with this combination of values.
+/// A small struct that holds the values that define the identity of a source generated document,
+// and don't change
+/// as new generations happen. This is mostly for convenience as we are reguarly working with this
+// combination of values.
 /// </summary>
 [DataContract]
 internal readonly record struct SourceGeneratedDocumentIdentity
@@ -54,18 +56,24 @@ internal readonly record struct SourceGeneratedDocumentIdentity
         AnalyzerReference analyzerReference
     )
     {
-        // We want the DocumentId generated for a generated output to be stable between Compilations; this is so
-        // features that track a document by DocumentId can find it after some change has happened that requires
-        // generators to run again. To achieve this we'll just do a crytographic hash of the generator name and hint
-        // name; the choice of a cryptographic hash as opposed to a more generic string hash is we actually want to
+        // We want the DocumentId generated for a generated output to be stable between Compilations; this
+        // is so
+        // features that track a document by DocumentId can find it after some change has happened that
+        // requires
+        // generators to run again. To achieve this we'll just do a crytographic hash of the generator name
+        // and hint
+        // name; the choice of a cryptographic hash as opposed to a more generic string hash is we actually
+        // want to
         // ensure we don't have collisions.
         var generatorIdentity = SourceGeneratorIdentity.Create(generator, analyzerReference);
 
-        // Combine the strings together; we'll use Encoding.Unicode since that'll match the underlying format; this can be made much
+        // Combine the strings together; we'll use Encoding.Unicode since that'll match the underlying
+        // format; this can be made much
         // faster once we're on .NET Core since we could directly treat the strings as ReadOnlySpan<char>.
         var projectIdBytes = projectId.Id.ToByteArray();
 
-        // The assembly path should exist in any normal scenario; the hashing of the name only would apply if the user loaded a
+        // The assembly path should exist in any normal scenario; the hashing of the name only would apply
+        // if the user loaded a
         // dynamic assembly they produced at runtime and passed us that via a custom AnalyzerReference.
         var assemblyNameToHash = generatorIdentity.AssemblyPath ?? generatorIdentity.AssemblyName;
 
@@ -82,7 +90,8 @@ internal readonly record struct SourceGeneratedDocumentIdentity
         );
         hashInput.AddRange(projectIdBytes);
 
-        // Add a null to separate the generator name and hint name; since this is effectively a joining of UTF-16 bytes
+        // Add a null to separate the generator name and hint name; since this is effectively a joining of
+        // UTF-16 bytes
         // we'll use a UTF-16 null just to make sure there's absolutely no risk of collision.
         hashInput.AddRange(Encoding.Unicode.GetBytes(assemblyNameToHash));
         hashInput.AddRange(0, 0);
@@ -90,7 +99,8 @@ internal readonly record struct SourceGeneratedDocumentIdentity
         hashInput.AddRange(0, 0);
         hashInput.AddRange(Encoding.Unicode.GetBytes(hintName));
 
-        // The particular choice of crypto algorithm here is arbitrary and can be always changed as necessary. The only requirement
+        // The particular choice of crypto algorithm here is arbitrary and can be always changed as
+        // necessary. The only requirement
         // is it must be collision resistant, and provide enough bits to fill a GUID.
         using var crytpoAlgorithm = System.Security.Cryptography.SHA256.Create();
         var hash = crytpoAlgorithm.ComputeHash(hashInput.ToArray());

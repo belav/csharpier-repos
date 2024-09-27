@@ -185,7 +185,8 @@ public static class RedisTestConfig
                     var serverArgs = "--port " + RedisPort + " --maxheap 512MB";
                     var processInfo = new ProcessStartInfo
                     {
-                        // start the process in users TMP dir (a .dat file will be created but will be removed when the server dies)
+                        // start the process in users TMP dir (a .dat file will be created but will be removed when the
+                        // server dies)
                         Arguments = serverArgs,
                         WorkingDirectory = tempPath,
                         CreateNoWindow = true,

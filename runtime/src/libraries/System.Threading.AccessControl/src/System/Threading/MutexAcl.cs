@@ -12,14 +12,27 @@ namespace System.Threading
 {
     public static class MutexAcl
     {
-        /// <summary>Gets or creates <see cref="Mutex" /> instance, allowing a <see cref="MutexSecurity" /> to be optionally specified to set it during the mutex creation.</summary>
-        /// <param name="initiallyOwned"><see langword="true" /> to give the calling thread initial ownership of the named system mutex if the named system mutex is created as a result of this call; otherwise, <see langword="false" />.</param>
-        /// <param name="name">The optional name of the system mutex. If this argument is set to <see langword="null" /> or <see cref="string.Empty" />, a local mutex is created.</param>
-        /// <param name="createdNew">When this method returns, this argument is always set to <see langword="true" /> if a local mutex is created; that is, when <paramref name="name" /> is <see langword="null" /> or <see cref="string.Empty" />. If <paramref name="name" /> has a valid non-empty value, this argument is set to <see langword="true" /> when the system mutex is created, or it is set to <see langword="false" /> if an existing system mutex is found with that name. This parameter is passed uninitialized.</param>
+        /// <summary>Gets or creates <see cref="Mutex" /> instance, allowing a <see cref="MutexSecurity" />
+        // to be optionally specified to set it during the mutex creation.</summary>
+        /// <param name="initiallyOwned"><see langword="true" /> to give the calling thread initial
+        // ownership of the named system mutex if the named system mutex is created as a result of this call;
+        // otherwise, <see langword="false" />.</param>
+        /// <param name="name">The optional name of the system mutex. If this argument is set to <see
+        // langword="null" /> or <see cref="string.Empty" />, a local mutex is created.</param>
+        /// <param name="createdNew">When this method returns, this argument is always set to <see
+        // langword="true" /> if a local mutex is created; that is, when <paramref name="name" /> is <see
+        // langword="null" /> or <see cref="string.Empty" />. If <paramref name="name" /> has a valid non-empty
+        // value, this argument is set to <see langword="true" /> when the system mutex is created, or it is
+        // set to <see langword="false" /> if an existing system mutex is found with that name. This parameter
+        // is passed uninitialized.</param>
         /// <param name="mutexSecurity">The optional mutex access control security to apply.</param>
-        /// <returns>An object that represents a system mutex, if named, or a local mutex, if nameless.</returns>
-        /// <exception cref="ArgumentException">.NET Framework only: The length of the name exceeds the maximum limit.</exception>
-        /// <exception cref="WaitHandleCannotBeOpenedException">A mutex handle with system-wide <paramref name="name" /> cannot be created. A mutex handle of a different type might have the same name.</exception>
+        /// <returns>An object that represents a system mutex, if named, or a local mutex, if
+        // nameless.</returns>
+        /// <exception cref="ArgumentException">.NET Framework only: The length of the name exceeds the
+        // maximum limit.</exception>
+        /// <exception cref="WaitHandleCannotBeOpenedException">A mutex handle with system-wide <paramref
+        // name="name" /> cannot be created. A mutex handle of a different type might have the same
+        // name.</exception>
         public static unsafe Mutex Create(
             bool initiallyOwned,
             string? name,
@@ -85,15 +98,20 @@ namespace System.Threading
         /// <summary>
         /// Opens a specified named mutex, if it already exists, applying the desired access rights.
         /// </summary>
-        /// <param name="name">The name of the mutex to be opened. If it's prefixed by "Global", it refers to a machine-wide mutex. If it's prefixed by "Local", or doesn't have a prefix, it refers to a session-wide mutex. Both prefix and name are case-sensitive.</param>
+        /// <param name="name">The name of the mutex to be opened. If it's prefixed by "Global", it refers
+        // to a machine-wide mutex. If it's prefixed by "Local", or doesn't have a prefix, it refers to a
+        // session-wide mutex. Both prefix and name are case-sensitive.</param>
         /// <param name="rights">The desired access rights to apply to the returned mutex.</param>
         /// <returns>An existing named mutex.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"
+        // />.</exception>
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
-        /// <exception cref="WaitHandleCannotBeOpenedException">The named mutex does not exist or is invalid.</exception>
+        /// <exception cref="WaitHandleCannotBeOpenedException">The named mutex does not exist or is
+        // invalid.</exception>
         /// <exception cref="DirectoryNotFoundException">The path was not found.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
-        /// <exception cref="UnauthorizedAccessException">The named mutex exists, but the user does not have the security access required to use it.</exception>
+        /// <exception cref="UnauthorizedAccessException">The named mutex exists, but the user does not have
+        // the security access required to use it.</exception>
         public static Mutex OpenExisting(string name, MutexRights rights)
         {
             switch (OpenExistingWorker(name, rights, out Mutex? result))
@@ -120,16 +138,24 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Tries to open a specified named mutex, if it already exists, applying the desired access rights, and returns a value that indicates whether the operation succeeded.
+        /// Tries to open a specified named mutex, if it already exists, applying the desired access rights,
+        // and returns a value that indicates whether the operation succeeded.
         /// </summary>
-        /// <param name="name">The name of the mutex to be opened. If it's prefixed by "Global", it refers to a machine-wide mutex. If it's prefixed by "Local", or doesn't have a prefix, it refers to a session-wide mutex. Both prefix and name are case-sensitive.</param>
+        /// <param name="name">The name of the mutex to be opened. If it's prefixed by "Global", it refers
+        // to a machine-wide mutex. If it's prefixed by "Local", or doesn't have a prefix, it refers to a
+        // session-wide mutex. Both prefix and name are case-sensitive.</param>
         /// <param name="rights">The desired access rights to apply to the returned mutex.</param>
-        /// <param name="result">When this method returns <see langword="true" />, contains an object that represents the named mutex if the call succeeded, or <see langword="null" /> otherwise. This parameter is treated as uninitialized.</param>
-        /// <returns><see langword="true" /> if the named mutex was opened successfully; otherwise, <see langword="false" />.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null" /></exception>
+        /// <param name="result">When this method returns <see langword="true" />, contains an object that
+        // represents the named mutex if the call succeeded, or <see langword="null" /> otherwise. This
+        // parameter is treated as uninitialized.</param>
+        /// <returns><see langword="true" /> if the named mutex was opened successfully; otherwise, <see
+        // langword="false" />.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"
+        // /></exception>
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
-        /// <exception cref="UnauthorizedAccessException">The named mutex exists, but the user does not have the security access required to use it.</exception>
+        /// <exception cref="UnauthorizedAccessException">The named mutex exists, but the user does not have
+        // the security access required to use it.</exception>
         public static bool TryOpenExisting(
             string name,
             MutexRights rights,

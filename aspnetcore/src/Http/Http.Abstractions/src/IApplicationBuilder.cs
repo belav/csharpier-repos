@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Builder;
 public interface IApplicationBuilder
 {
     /// <summary>
-    /// Gets or sets the <see cref="IServiceProvider"/> that provides access to the application's service container.
+    /// Gets or sets the <see cref="IServiceProvider"/> that provides access to the application's
+    // service container.
     /// </summary>
     IServiceProvider ApplicationServices { get; set; }
 

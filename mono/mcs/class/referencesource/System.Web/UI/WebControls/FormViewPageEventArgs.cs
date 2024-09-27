@@ -19,7 +19,8 @@ namespace System.Web.UI.WebControls
         private int _newPageIndex;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.FormViewPageEventArgs'/> class.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.FormViewPageEventArgs'/> class.</para>
         /// </devdoc>
         public FormViewPageEventArgs(int newPageIndex)
         {
@@ -27,7 +28,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the index of the first new Page to be displayed in the <see cref='System.Web.UI.WebControls.FormView'/>.
+        /// <para>Gets the index of the first new Page to be displayed in the <see
+        // cref='System.Web.UI.WebControls.FormView'/>.
         ///    This property is read-only.</para>
         /// </devdoc>
         public int NewPageIndex

@@ -68,9 +68,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
         {
             // Dispose pattern should be implemented only if -
             // 1. An interface named 'System.IDisposable' is unimplemented.
-            // 2. This interface has one and only one member - a non-generic method named 'Dispose' that takes no arguments and returns 'void'.
-            // 3. The implementing type is a class that does not already declare any conflicting members named 'disposedValue' or 'Dispose'
-            //    (because we will be generating a 'disposedValue' field and a couple of methods named 'Dispose' as part of implementing
+            // 2. This interface has one and only one member - a non-generic method named 'Dispose' that takes
+            // no arguments and returns 'void'.
+            // 3. The implementing type is a class that does not already declare any conflicting members named
+            // 'disposedValue' or 'Dispose'
+            //    (because we will be generating a 'disposedValue' field and a couple of methods named 'Dispose'
+            // as part of implementing
             //    the dispose pattern).
             if (state.ClassOrStructType.TypeKind != TypeKind.Class)
                 return false;
@@ -459,8 +462,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             }
 
             /// <summary>
-            /// This helper is implementing access to the editorconfig option. This would usually be done via <see cref="CodeFixOptionsProvider"/> but
-            /// we do not have access to <see cref="CodeActionOptionsProvider"/> here since the code action implementation is also used to implement <see cref="IImplementInterfaceService "/>.
+            /// This helper is implementing access to the editorconfig option. This would usually be done via
+            // <see cref="CodeFixOptionsProvider"/> but
+            /// we do not have access to <see cref="CodeActionOptionsProvider"/> here since the code action
+            // implementation is also used to implement <see cref="IImplementInterfaceService "/>.
             /// TODO: remove - see https://github.com/dotnet/roslyn/issues/60990.
             /// </summary>
             public async ValueTask<AccessibilityModifiersRequired> GetAccessibilityModifiersRequiredAsync(

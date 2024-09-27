@@ -73,7 +73,8 @@ public class KestrelServerOptions
     /// <seealso href="https://datatracker.ietf.org/doc/html/rfc9112#section-3.2.2-8"/>
     public bool AllowHostHeaderOverride { get; set; }
 
-    // The following two lists configure the endpoints that Kestrel should listen to. If both lists are empty, the "urls" config setting (e.g. UseUrls) is used.
+    // The following two lists configure the endpoints that Kestrel should listen to. If both lists are
+    // empty, the "urls" config setting (e.g. UseUrls) is used.
     internal List<ListenOptions> CodeBackedListenOptions { get; } = new List<ListenOptions>();
     internal List<ListenOptions> ConfigurationBackedListenOptions { get; } =
         new List<ListenOptions>();
@@ -105,7 +106,8 @@ public class KestrelServerOptions
 
     /// <summary>
     /// Gets or sets a value that controls whether dynamic compression of response headers is allowed.
-    /// For more information about the security considerations of HPack dynamic header compression, visit
+    /// For more information about the security considerations of HPack dynamic header compression,
+    // visit
     /// <see href="https://tools.ietf.org/html/rfc7541#section-7"/>.
     /// </summary>
     /// <remarks>
@@ -114,7 +116,8 @@ public class KestrelServerOptions
     public bool AllowResponseHeaderCompression { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets a value that controls whether synchronous IO is allowed for the <see cref="HttpContext.Request"/> and <see cref="HttpContext.Response"/>
+    /// Gets or sets a value that controls whether synchronous IO is allowed for the <see
+    // cref="HttpContext.Request"/> and <see cref="HttpContext.Response"/>
     /// </summary>
     /// <remarks>
     /// Defaults to false.
@@ -122,13 +125,18 @@ public class KestrelServerOptions
     public bool AllowSynchronousIO { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that controls how the `:scheme` field for HTTP/2 and HTTP/3 requests is validated.
+    /// Gets or sets a value that controls how the `:scheme` field for HTTP/2 and HTTP/3 requests is
+    // validated.
     /// <para>
-    /// If <c>false</c> then the `:scheme` field for HTTP/2 and HTTP/3 requests must exactly match the transport (e.g. https for TLS
-    /// connections, http for non-TLS). If <c>true</c> then the `:scheme` field for HTTP/2 and HTTP/3 requests can be set to alternate values
+    /// If <c>false</c> then the `:scheme` field for HTTP/2 and HTTP/3 requests must exactly match the
+    // transport (e.g. https for TLS
+    /// connections, http for non-TLS). If <c>true</c> then the `:scheme` field for HTTP/2 and HTTP/3
+    // requests can be set to alternate values
     /// and this will be reflected by `HttpRequest.Scheme`. The Scheme must still be valid according to
-    /// <see href="https://datatracker.ietf.org/doc/html/rfc3986/#section-3.1"/>. Only enable this when working with a trusted proxy. This can be used in
-    /// scenarios such as proxies converting from alternate protocols. See <see href="https://datatracker.ietf.org/doc/html/rfc7540#section-8.1.2.3"/>.
+    /// <see href="https://datatracker.ietf.org/doc/html/rfc3986/#section-3.1"/>. Only enable this when
+    // working with a trusted proxy. This can be used in
+    /// scenarios such as proxies converting from alternate protocols. See <see
+    // href="https://datatracker.ietf.org/doc/html/rfc7540#section-8.1.2.3"/>.
     /// Applications that enable this should validate an expected scheme is provided before using it.
     /// </para>
     /// </summary>
@@ -159,7 +167,8 @@ public class KestrelServerOptions
     public bool EnableAltSvc { get; set; }
 
     /// <summary>
-    /// Gets or sets a callback that returns the <see cref="Encoding"/> to decode the value for the specified request header name,
+    /// Gets or sets a callback that returns the <see cref="Encoding"/> to decode the value for the
+    // specified request header name,
     /// or <see langword="null"/> to use the default <see cref="UTF8Encoding"/>.
     /// </summary>
     public Func<string, Encoding?> RequestHeaderEncodingSelector
@@ -171,7 +180,8 @@ public class KestrelServerOptions
     }
 
     /// <summary>
-    /// Gets or sets a callback that returns the <see cref="Encoding"/> to encode the value for the specified response header
+    /// Gets or sets a callback that returns the <see cref="Encoding"/> to encode the value for the
+    // specified response header
     /// or trailer name, or <see langword="null"/> to use the default <see cref="ASCIIEncoding"/>.
     /// </summary>
     public Func<string, Encoding?> ResponseHeaderEncodingSelector
@@ -183,7 +193,8 @@ public class KestrelServerOptions
     }
 
     /// <summary>
-    /// Enables the Listen options callback to resolve and use services registered by the application during startup.
+    /// Enables the Listen options callback to resolve and use services registered by the application
+    // during startup.
     /// Typically initialized by UseKestrel().
     /// </summary>
     public IServiceProvider ApplicationServices { get; set; } = default!; // This should typically be set
@@ -200,7 +211,8 @@ public class KestrelServerOptions
     public KestrelConfigurationLoader? ConfigurationLoader { get; set; }
 
     /// <summary>
-    /// A default configuration action for all endpoints. Use for Listen, configuration, the default url, and URLs.
+    /// A default configuration action for all endpoints. Use for Listen, configuration, the default
+    // url, and URLs.
     /// </summary>
     private Action<ListenOptions> EndpointDefaults { get; set; } = _ => { };
 
@@ -210,7 +222,8 @@ public class KestrelServerOptions
     private Action<HttpsConnectionAdapterOptions> HttpsDefaults { get; set; } = _ => { };
 
     /// <summary>
-    /// The development server certificate for https endpoints. This is applied lazily after HttpsDefaults and user options.
+    /// The development server certificate for https endpoints. This is applied lazily after
+    // HttpsDefaults and user options.
     /// </summary>
     /// <remarks>
     /// Getter exposed for testing.
@@ -228,7 +241,8 @@ public class KestrelServerOptions
     internal bool IsDevelopmentCertificateLoaded { get; set; }
 
     /// <summary>
-    /// Internal AppContext switch to toggle the WebTransport and HTTP/3 datagrams experiemental features.
+    /// Internal AppContext switch to toggle the WebTransport and HTTP/3 datagrams experiemental
+    // features.
     /// </summary>
     private bool? _enableWebTransportAndH3Datagrams;
     internal bool EnableWebTransportAndH3Datagrams
@@ -250,7 +264,8 @@ public class KestrelServerOptions
     }
 
     /// <summary>
-    /// Internal AppContext switch to toggle whether a request line can end with LF only instead of CR/LF.
+    /// Internal AppContext switch to toggle whether a request line can end with LF only instead of
+    // CR/LF.
     /// </summary>
     private bool? _disableHttp1LineFeedTerminators;
     internal bool DisableHttp1LineFeedTerminators
@@ -272,7 +287,8 @@ public class KestrelServerOptions
     }
 
     /// <summary>
-    /// Specifies a configuration Action to run for each newly created endpoint. Calling this again will replace
+    /// Specifies a configuration Action to run for each newly created endpoint. Calling this again will
+    // replace
     /// the prior action.
     /// </summary>
     public void ConfigureEndpointDefaults(Action<ListenOptions> configureOptions)
@@ -289,7 +305,8 @@ public class KestrelServerOptions
     }
 
     /// <summary>
-    /// Specifies a configuration Action to run for each newly created https endpoint. Calling this again will replace
+    /// Specifies a configuration Action to run for each newly created https endpoint. Calling this
+    // again will replace
     /// the prior action.
     /// </summary>
     public void ConfigureHttpsDefaults(Action<HttpsConnectionAdapterOptions> configureOptions)
@@ -311,7 +328,8 @@ public class KestrelServerOptions
             return;
         }
 
-        // It's important (and currently true) that we don't reach here with https configuration uninitialized because
+        // It's important (and currently true) that we don't reach here with https configuration
+        // uninitialized because
         // we might incorrectly favor the development certificate over one specified by the user.
         Debug.Assert(
             ApplicationServices.GetRequiredService<IHttpsConfigurationService>().IsInitialized,
@@ -435,9 +453,12 @@ public class KestrelServerOptions
             );
             if (!status.Success)
             {
-                // Display a warning indicating to the user that a prompt might appear and provide instructions on what to do in that
-                // case. The underlying implementation of this check is specific to Mac OS and is handled within CheckCertificateState.
-                // Kestrel must NEVER cause a UI prompt on a production system. We only attempt this here because Mac OS is not supported
+                // Display a warning indicating to the user that a prompt might appear and provide instructions on
+                // what to do in that
+                // case. The underlying implementation of this check is specific to Mac OS and is handled within
+                // CheckCertificateState.
+                // Kestrel must NEVER cause a UI prompt on a production system. We only attempt this here because
+                // Mac OS is not supported
                 // in production.
                 Debug.Assert(
                     status.FailureMessage != null,
@@ -470,25 +491,31 @@ public class KestrelServerOptions
     public KestrelConfigurationLoader Configure() => Configure(new ConfigurationBuilder().Build());
 
     /// <summary>
-    /// Creates a configuration loader for setting up Kestrel that takes an <see cref="IConfiguration"/> as input.
+    /// Creates a configuration loader for setting up Kestrel that takes an <see cref="IConfiguration"/>
+    // as input.
     /// This configuration must be scoped to the configuration section for Kestrel.
     /// Call <see cref="Configure(IConfiguration, bool)"/> to enable dynamic endpoint binding updates.
     /// </summary>
     /// <param name="config">The configuration section for Kestrel.</param>
-    /// <returns>A <see cref="KestrelConfigurationLoader"/> for further endpoint configuration.</returns>
+    /// <returns>A <see cref="KestrelConfigurationLoader"/> for further endpoint
+    // configuration.</returns>
     public KestrelConfigurationLoader Configure(IConfiguration config) =>
         Configure(config, reloadOnChange: false);
 
     /// <summary>
-    /// Creates a configuration loader for setting up Kestrel that takes an <see cref="IConfiguration"/> as input.
+    /// Creates a configuration loader for setting up Kestrel that takes an <see cref="IConfiguration"/>
+    // as input.
     /// This configuration must be scoped to the configuration section for Kestrel.
     /// </summary>
     /// <param name="config">The configuration section for Kestrel.</param>
     /// <param name="reloadOnChange">
-    /// If <see langword="true"/>, Kestrel will dynamically update endpoint bindings when configuration changes.
-    /// This will only reload endpoints defined in the "Endpoints" section of your <paramref name="config"/>. Endpoints defined in code will not be reloaded.
+    /// If <see langword="true"/>, Kestrel will dynamically update endpoint bindings when configuration
+    // changes.
+    /// This will only reload endpoints defined in the "Endpoints" section of your <paramref
+    // name="config"/>. Endpoints defined in code will not be reloaded.
     /// </param>
-    /// <returns>A <see cref="KestrelConfigurationLoader"/> for further endpoint configuration.</returns>
+    /// <returns>A <see cref="KestrelConfigurationLoader"/> for further endpoint
+    // configuration.</returns>
     public KestrelConfigurationLoader Configure(IConfiguration config, bool reloadOnChange)
     {
         if (ApplicationServices is null)
@@ -579,13 +606,15 @@ public class KestrelServerOptions
     }
 
     /// <summary>
-    /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
+    /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is
+    // not supported
     /// for this type of endpoint.
     /// </summary>
     public void ListenLocalhost(int port) => ListenLocalhost(port, options => { });
 
     /// <summary>
-    /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
+    /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is
+    // not supported
     /// for this type of endpoint.
     /// </summary>
     public void ListenLocalhost(int port, Action<ListenOptions> configure)

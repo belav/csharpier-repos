@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
 /// <summary>
-/// An implementation of this interface provides the collection of <see cref="ITagHelperComponent"/>s
+/// An implementation of this interface provides the collection of <see
+// cref="ITagHelperComponent"/>s
 /// that will be used by <see cref="TagHelperComponentTagHelper"/>s.
 /// </summary>
 public interface ITagHelperComponentManager

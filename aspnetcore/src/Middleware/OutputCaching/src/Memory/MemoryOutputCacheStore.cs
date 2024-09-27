@@ -32,7 +32,8 @@ internal sealed class MemoryOutputCacheStore : IOutputCacheStore
             {
                 if (keys != null && keys.Count > 0)
                 {
-                    // If MemoryCache changed to run eviction callbacks inline in Remove, iterating over keys could throw
+                    // If MemoryCache changed to run eviction callbacks inline in Remove, iterating over keys could
+                    // throw
                     // To prevent allocating a copy of the keys we check if the eviction callback ran,
                     // and if it did we restart the loop.
 
@@ -82,8 +83,10 @@ internal sealed class MemoryOutputCacheStore : IOutputCacheStore
 
         if (tags != null)
         {
-            // Lock with SetEntry() to prevent EvictByTagAsync() from trying to remove a tag whose entry hasn't been added yet.
-            // It might be acceptable to not lock SetEntry() since in this case Remove(key) would just no-op and the user retry to evict.
+            // Lock with SetEntry() to prevent EvictByTagAsync() from trying to remove a tag whose entry hasn't
+            // been added yet.
+            // It might be acceptable to not lock SetEntry() since in this case Remove(key) would just no-op and
+            // the user retry to evict.
 
             lock (_tagsLock)
             {

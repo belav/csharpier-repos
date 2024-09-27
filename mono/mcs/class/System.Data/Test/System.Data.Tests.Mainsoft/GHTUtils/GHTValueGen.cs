@@ -98,8 +98,10 @@ namespace GHTUtils
             {
                 Type ElementType;
                 //get the type of the elements in the array.
-                //work around of GH behavior for array of enums : will give type enum    (Array)obj).GetValue(0).GetType()
-                //                                              : will give type Int32   obj.GetType().GetElementType()
+                //work around of GH behavior for array of enums : will give type enum
+                // (Array)obj).GetValue(0).GetType()
+                //                                              : will give type Int32
+                // obj.GetType().GetElementType()
                 if (((Array)obj).Length > 0)
                     ElementType = ((Array)obj).GetValue(0).GetType();
                 else

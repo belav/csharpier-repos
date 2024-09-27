@@ -81,6 +81,7 @@ foreach (var ruleById in allRulesById)
     }
 
     // The angle brackets around helpLinkUri are added to follow MD034 rule:
+    //
     // https://github.com/DavidAnson/markdownlint/blob/82cf68023f7dbd2948a65c53fc30482432195de4/doc/Rules.md#md034---bare-url-used
     if (!string.IsNullOrWhiteSpace(helpLinkUri))
     {
@@ -91,8 +92,10 @@ foreach (var ruleById in allRulesById)
     var line = $"{ruleId} | {helpLinkUri} | {escapedTitle} |";
     if (validateOnly)
     {
-        // We consider having "extra" entries as valid. This is to prevent CI failures due to rules being documented.
-        // However, we consider "missing" entries as invalid. This is to force updating the file when new rules are added.
+        // We consider having "extra" entries as valid. This is to prevent CI failures due to rules being
+        // documented.
+        // However, we consider "missing" entries as invalid. This is to force updating the file when new
+        // rules are added.
         if (!actualContent.Contains(line))
         {
             await Console
@@ -101,7 +104,8 @@ foreach (var ruleById in allRulesById)
                 )
                 .ConfigureAwait(false);
             await Console.Error.WriteLineAsync(line).ConfigureAwait(false);
-            // The file is missing an entry. Mark it as invalid and break the loop as there is no need to continue validating.
+            // The file is missing an entry. Mark it as invalid and break the loop as there is no need to
+            // continue validating.
             return 1;
         }
     }

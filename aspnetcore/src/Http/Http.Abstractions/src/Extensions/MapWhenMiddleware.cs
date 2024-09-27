@@ -16,7 +16,8 @@ public class MapWhenMiddleware
     /// <summary>
     /// Creates a new instance of <see cref="MapWhenMiddleware"/>.
     /// </summary>
-    /// <param name="next">The delegate representing the next middleware in the request pipeline.</param>
+    /// <param name="next">The delegate representing the next middleware in the request
+    // pipeline.</param>
     /// <param name="options">The middleware options.</param>
     public MapWhenMiddleware(RequestDelegate next, MapWhenOptions options)
     {

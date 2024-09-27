@@ -138,9 +138,11 @@ namespace System.Net.Sockets
         }
 
         /// <summary>
-        /// This represents whether the Socket instance is blocking or non-blocking *from the user's point of view*,
+        /// This represents whether the Socket instance is blocking or non-blocking *from the user's point
+        // of view*,
         /// i.e. it corresponds to the Socket.Blocking property (except in reverse).
-        /// Even if this is false, the underlying native socket may still be non-blocking if anything ever caused it to become non-blocking,
+        /// Even if this is false, the underlying native socket may still be non-blocking if anything ever
+        // caused it to become non-blocking,
         /// either by issuing an async operation or explicitly setting this property to true.
         /// </summary>
         internal bool IsNonBlocking
@@ -150,8 +152,10 @@ namespace System.Net.Sockets
             {
                 _nonBlocking = value;
 
-                // If transitioning from blocking to non-blocking, we need to set the native socket to non-blocking mode.
-                // If transitioning from non-blocking to blocking, we keep the native socket in non-blocking mode, and emulate
+                // If transitioning from blocking to non-blocking, we need to set the native socket to non-blocking
+                // mode.
+                // If transitioning from non-blocking to blocking, we keep the native socket in non-blocking mode,
+                // and emulate
                 // blocking operations within SocketAsyncContext on top of epoll/kqueue.
                 // This avoids problems with switching to native blocking while there are pending operations.
                 if (value)
@@ -201,8 +205,10 @@ namespace System.Net.Sockets
         private unsafe bool TryUnblockSocket(bool abortive)
         {
             // Calling 'close' on a socket that has pending blocking calls (e.g. recv, send, accept, ...)
-            // may block indefinitely. This is a best-effort attempt to not get blocked and make those operations return.
-            // We need to ensure we keep the expected TCP behavior that is observed by the socket peer (FIN vs RST close).
+            // may block indefinitely. This is a best-effort attempt to not get blocked and make those
+            // operations return.
+            // We need to ensure we keep the expected TCP behavior that is observed by the socket peer (FIN vs
+            // RST close).
             // What we do here isn't specified by POSIX and doesn't work on all OSes.
             // On Linux this works well.
             // On OSX, TCP connections will be closed with a FIN close instead of an abortive RST close.
@@ -268,7 +274,8 @@ namespace System.Net.Sockets
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, $"handle:{handle} Following 'non-abortive' branch.");
 
-                // Close, and if its errno is other than EWOULDBLOCK, there's nothing more to do - we either succeeded or failed.
+                // Close, and if its errno is other than EWOULDBLOCK, there's nothing more to do - we either
+                // succeeded or failed.
                 errorCode = CloseHandle(handle);
                 if (errorCode != Interop.Error.EWOULDBLOCK)
                 {
@@ -286,7 +293,8 @@ namespace System.Net.Sockets
                 // The socket could not be made blocking; fall through to the regular abortive close.
             }
 
-            // By default or if the non-abortive path failed, set linger timeout to zero to get an abortive close (RST).
+            // By default or if the non-abortive path failed, set linger timeout to zero to get an abortive
+            // close (RST).
             var linger = new Interop.Sys.LingerOption { OnOff = 1, Seconds = 0 };
 
             errorCode = Interop.Sys.SetLingerOption(handle, &linger);

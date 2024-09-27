@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
     /// Calculates and caches results of changed documents analysis.
-    /// The work is triggered by an incremental analyzer on idle or explicitly when "continue" operation is executed.
+    /// The work is triggered by an incremental analyzer on idle or explicitly when "continue" operation
+    // is executed.
     /// Contains analyses of the latest observed document versions.
     /// </summary>
     internal sealed class EditAndContinueDocumentAnalysesCache(
@@ -81,11 +82,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// Returns a document analysis or kicks off a new one if one is not available for the specified document snapshot.
+        /// Returns a document analysis or kicks off a new one if one is not available for the specified
+        // document snapshot.
         /// </summary>
         /// <param name="oldSolution">Committed solution.</param>
         /// <param name="newDocument">Document snapshot to analyze.</param>
-        /// <param name="activeStatementSpanProvider">Provider of active statement spans tracked by the editor for the solution snapshot of the <paramref name="newDocument"/>.</param>
+        /// <param name="activeStatementSpanProvider">Provider of active statement spans tracked by the
+        // editor for the solution snapshot of the <paramref name="newDocument"/>.</param>
         public async ValueTask<DocumentAnalysisResults> GetDocumentAnalysisAsync(
             CommittedSolution oldSolution,
             Document? oldDocument,
@@ -104,12 +107,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     )
                     .ConfigureAwait(false);
 
-                // The base project may have been updated as documents were brought up-to-date in the committed solution.
-                // Get the latest available snapshot of the base project from the committed solution and use it for analyses of all documents,
+                // The base project may have been updated as documents were brought up-to-date in the committed
+                // solution.
+                // Get the latest available snapshot of the base project from the committed solution and use it for
+                // analyses of all documents,
                 // so that we use a single compilation for the base project (for efficiency).
-                // Note that some other request might be updating documents in the committed solution that were not changed (not in changedOrAddedDocuments)
-                // but are not up-to-date. These documents do not have impact on the analysis unless we read semantic information
-                // from the project compilation. When reading such information we need to be aware of its potential incompleteness
+                // Note that some other request might be updating documents in the committed solution that were not
+                // changed (not in changedOrAddedDocuments)
+                // but are not up-to-date. These documents do not have impact on the analysis unless we read
+                // semantic information
+                // from the project compilation. When reading such information we need to be aware of its potential
+                // incompleteness
                 // and consult the compiler output binary (see https://github.com/dotnet/roslyn/issues/51261).
                 var oldProject =
                     oldDocument?.Project ?? oldSolution.GetRequiredProject(newDocument.Project.Id);
@@ -135,7 +143,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// Calculates unmapped active statement spans in the <paramref name="newDocument"/> from spans provided by <paramref name="newActiveStatementSpanProvider"/>.
+        /// Calculates unmapped active statement spans in the <paramref name="newDocument"/> from spans
+        // provided by <paramref name="newActiveStatementSpanProvider"/>.
         /// </summary>
         private async Task<
             ImmutableArray<LinePositionSpan>
@@ -163,7 +172,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 .ConfigureAwait(false);
             var newLineMappings = newTree.GetLineMappings(cancellationToken);
 
-            // No #line directives -- retrieve the current location of tracking spans directly for this document:
+            // No #line directives -- retrieve the current location of tracking spans directly for this
+            // document:
             if (!newLineMappings.Any())
             {
                 var newMappedDocumentSpans = await newActiveStatementSpanProvider(
@@ -175,7 +185,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return newMappedDocumentSpans.SelectAsArray(s => s.LineSpan);
             }
 
-            // The document has #line directives. In order to determine all active statement spans in the document
+            // The document has #line directives. In order to determine all active statement spans in the
+            // document
             // we need to find all documents that #line directives in this document map to.
             // We retrieve the tracking spans for all such documents and then map them back to this document.
 
@@ -221,7 +232,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     continue;
                 }
 
-                // all baseline spans are being tracked in their corresponding mapped documents (if a span is deleted it's still tracked as empty):
+                // all baseline spans are being tracked in their corresponding mapped documents (if a span is
+                // deleted it's still tracked as empty):
                 var newMappedDocumentActiveSpan = newMappedDocumentSpans.GetStatement(
                     oldActiveStatement.Statement.Ordinal
                 );
@@ -250,17 +262,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<LinePositionSpan> activeStatementSpans
         )
         {
-            // Do not reuse an analysis of the document unless its snasphot is exactly the same as was used to calculate the results.
-            // Note that comparing document snapshots in effect compares the entire solution snapshots (when another document is changed a new solution snapshot is created
+            // Do not reuse an analysis of the document unless its snasphot is exactly the same as was used to
+            // calculate the results.
+            // Note that comparing document snapshots in effect compares the entire solution snapshots (when
+            // another document is changed a new solution snapshot is created
             // that creates new document snapshots for all queried documents).
-            // Also check the base project snapshot since the analysis uses semantic information from the base project as well.
+            // Also check the base project snapshot since the analysis uses semantic information from the base
+            // project as well.
             //
-            // It would be possible to reuse analysis results of documents whose content does not change in between two solution snapshots.
-            // However, we'd need rather sophisticated caching logic. The semantic analysis gathers information from other documents when
-            // calculating results for a specific document. In some cases it's easy to record the set of documents the analysis depends on.
-            // For example, when analyzing a partial class we can record all documents its declaration spans. However, in other cases the analysis
-            // checks for absence of a top-level type symbol. Adding a symbol to any document thus invalidates such analysis. It'd be possible
-            // to keep track of which type symbols an analysis is conditional upon, if it was worth the extra complexity.
+            // It would be possible to reuse analysis results of documents whose content does not change in
+            // between two solution snapshots.
+            // However, we'd need rather sophisticated caching logic. The semantic analysis gathers information
+            // from other documents when
+            // calculating results for a specific document. In some cases it's easy to record the set of
+            // documents the analysis depends on.
+            // For example, when analyzing a partial class we can record all documents its declaration spans.
+            // However, in other cases the analysis
+            // checks for absence of a top-level type symbol. Adding a symbol to any document thus invalidates
+            // such analysis. It'd be possible
+            // to keep track of which type symbols an analysis is conditional upon, if it was worth the extra
+            // complexity.
             if (
                 _analyses.TryGetValue(document.Id, out var analysis)
                 && analysis.baseProject == baseProject

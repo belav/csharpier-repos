@@ -46,7 +46,8 @@ namespace System.Xml
         {
             XmlNode nextNode;
             ElementState oldState = rowElement.ElementState;
-            // We do not want to cause any foliation w/ this iterator or use this iterator once the region was defoliated
+            // We do not want to cause any foliation w/ this iterator or use this iterator once the region was
+            // defoliated
             Debug.Assert(oldState != ElementState.None);
 
             // Try to move to the first child
@@ -71,7 +72,8 @@ namespace System.Xml
 
         internal override bool NextRight()
         {
-            // Make sure we do not get past the rowElement if we call NextRight on a just initialized iterator and rowElement has no children
+            // Make sure we do not get past the rowElement if we call NextRight on a just initialized iterator
+            // and rowElement has no children
             if (currentNode == rowElement)
             {
                 currentNode = null;
@@ -79,7 +81,8 @@ namespace System.Xml
             }
 
             ElementState oldState = rowElement.ElementState;
-            // We do not want to cause any foliation w/ this iterator or use this iterator once the region was defoliated
+            // We do not want to cause any foliation w/ this iterator or use this iterator once the region was
+            // defoliated
             Debug.Assert(oldState != ElementState.None);
 
             XmlNode nextNode = currentNode.NextSibling;
@@ -130,14 +133,16 @@ namespace System.Xml
             return true;
         }
 
-        // Get the initial text value for the current node. You should be positioned on the node (element) for
+        // Get the initial text value for the current node. You should be positioned on the node (element)
+        // for
         // which to get the initial text value, not on the text node.
         internal bool NextInitialTextLikeNodes(out String value)
         {
             Debug.Assert(this.CurrentNode != null);
             Debug.Assert(this.CurrentNode.NodeType == XmlNodeType.Element);
 #if DEBUG
-            // It's not OK to try to read the initial text value for sub-regions, because we do not know how to revert their initial state
+            // It's not OK to try to read the initial text value for sub-regions, because we do not know how to
+            // revert their initial state
             if (
                 this.CurrentNode.NodeType == XmlNodeType.Element
                 && mapper.GetTableSchemaForElement((XmlElement)(this.CurrentNode)) != null
@@ -149,7 +154,8 @@ namespace System.Xml
 #endif
 
             ElementState oldState = rowElement.ElementState;
-            // We do not want to cause any foliation w/ this iterator or use this iterator once the region was defoliated
+            // We do not want to cause any foliation w/ this iterator or use this iterator once the region was
+            // defoliated
             Debug.Assert(oldState != ElementState.None);
 
             XmlNode n = this.CurrentNode.FirstChild;

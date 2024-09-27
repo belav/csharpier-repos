@@ -2,7 +2,8 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-// ***NOTE*** If this code is changed, make corresponding changes in System.Runtime.Serialization.CodeGenerator also
+// ***NOTE*** If this code is changed, make corresponding changes in
+// System.Runtime.Serialization.CodeGenerator also
 
 namespace System.ServiceModel.Dispatcher
 {

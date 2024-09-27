@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Web.Hosting;
 
@@ -25,14 +26,16 @@ namespace System.Web.WebPages
         private static readonly object _userAgentKey = new object();
 
         /// <summary>
-        /// Clears the set browser for the request. After clearing the browser the overridden browser will be the browser for the request.
+        /// Clears the set browser for the request. After clearing the browser the overridden browser will
+        // be the browser for the request.
         /// </summary>
         public static void ClearOverriddenBrowser(this HttpContextBase httpContext)
         {
             SetOverriddenBrowser(httpContext, userAgent: null);
         }
 
-        // Default implementation to generate an HttpBrowserCapabilities object using the current HttpCapabilitiesProvider
+        // Default implementation to generate an HttpBrowserCapabilities object using the current
+        // HttpCapabilitiesProvider
         private static HttpBrowserCapabilitiesBase CreateOverriddenBrowser(string userAgent)
         {
             HttpBrowserCapabilities overriddenBrowser = new HttpContext(
@@ -55,7 +58,8 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// Internal GetOverriddenBrowser overload to allow the browser creation function to changed. Defaults to CreateOverridenBrowser if createBrowser is null.
+        /// Internal GetOverriddenBrowser overload to allow the browser creation function to changed.
+        // Defaults to CreateOverridenBrowser if createBrowser is null.
         /// </summary>
         internal static HttpBrowserCapabilitiesBase GetOverriddenBrowser(
             this HttpContextBase httpContext,
@@ -98,7 +102,8 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// Gets the overridden user agent for the request. If no overridden user agent is set, returns the user agent for the request.
+        /// Gets the overridden user agent for the request. If no overridden user agent is set, returns the
+        // user agent for the request.
         /// </summary>
         public static string GetOverriddenUserAgent(this HttpContextBase httpContext)
         {
@@ -142,7 +147,8 @@ namespace System.Web.WebPages
             switch (browserOverride)
             {
                 case BrowserOverride.Desktop:
-                    // bug:262389 override only if the request was not made from a browser or the browser is not of a desktop device
+                    // bug:262389 override only if the request was not made from a browser or the browser is not of a
+                    // desktop device
                     if (
                         httpContext.Request.Browser == null
                         || httpContext.Request.Browser.IsMobileDevice

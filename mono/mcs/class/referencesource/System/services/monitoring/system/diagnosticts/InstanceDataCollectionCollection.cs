@@ -12,10 +12,13 @@ namespace System.Diagnostics
     using System.Globalization;
 
     /// <devdoc>
-    ///     The collection returned from  the <see cref='System.Diagnostics.PerformanceCounterCategory.ReadCategory'/> method.
+    ///     The collection returned from  the <see
+    // cref='System.Diagnostics.PerformanceCounterCategory.ReadCategory'/> method.
     ///     that contains all the counter and instance data.
-    ///     The collection contains an InstanceDataCollection object for each counter.  Each InstanceDataCollection
-    ///     object contains the performance data for all counters for that instance.  In other words the data is
+    ///     The collection contains an InstanceDataCollection object for each counter.  Each
+    // InstanceDataCollection
+    ///     object contains the performance data for all counters for that instance.  In other words the
+    // data is
     ///     indexed by counter name and then by instance name.
     /// </devdoc>
     public class InstanceDataCollectionCollection : DictionaryBase

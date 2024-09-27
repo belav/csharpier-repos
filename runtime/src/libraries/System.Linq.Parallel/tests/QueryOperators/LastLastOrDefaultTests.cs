@@ -46,7 +46,8 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(LastData), new[] { 1, 2, 16 })]
         public static void Last(Labeled<ParallelQuery<int>> labeled, int count, int position)
         {
-            // For unordered collections, which element is chosen isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is chosen isn't actually guaranteed, but an effect of
+            // the implementation.
             // If this test starts failing it should be split, and possibly mentioned in release notes.
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(count - 1, query.Last());
@@ -85,7 +86,8 @@ namespace System.Linq.Parallel.Tests
             int position
         )
         {
-            // For unordered collections, which element is chosen isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is chosen isn't actually guaranteed, but an effect of
+            // the implementation.
             // If this test starts failing it should be split, and possibly mentioned in release notes.
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(count - 1, query.Last());

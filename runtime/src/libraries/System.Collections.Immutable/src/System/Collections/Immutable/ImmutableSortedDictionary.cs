@@ -8,7 +8,8 @@ using System.Linq;
 namespace System.Collections.Immutable
 {
     /// <summary>
-    /// A set of initialization methods for instances of <see cref="ImmutableSortedDictionary{TKey, TValue}"/>.
+    /// A set of initialization methods for instances of <see cref="ImmutableSortedDictionary{TKey,
+    // TValue}"/>.
     /// </summary>
     public static class ImmutableSortedDictionary
     {
@@ -165,8 +166,10 @@ namespace System.Collections.Immutable
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <typeparam name="TValue">The type of value in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
-        /// <param name="elementSelector">The function that will produce the value for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
+        /// <param name="elementSelector">The function that will produce the value for the map from each
+        // sequence element.</param>
         /// <param name="keyComparer">The key comparer to use for the map.</param>
         /// <param name="valueComparer">The value comparer to use for the map.</param>
         /// <returns>The immutable map.</returns>
@@ -220,8 +223,10 @@ namespace System.Collections.Immutable
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <typeparam name="TValue">The type of value in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
-        /// <param name="elementSelector">The function that will produce the value for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
+        /// <param name="elementSelector">The function that will produce the value for the map from each
+        // sequence element.</param>
         /// <param name="keyComparer">The key comparer to use for the map.</param>
         /// <returns>The immutable map.</returns>
         public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<
@@ -252,8 +257,10 @@ namespace System.Collections.Immutable
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <typeparam name="TValue">The type of value in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
-        /// <param name="elementSelector">The function that will produce the value for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
+        /// <param name="elementSelector">The function that will produce the value for the map from each
+        // sequence element.</param>
         /// <returns>The immutable map.</returns>
         public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<
             TSource,

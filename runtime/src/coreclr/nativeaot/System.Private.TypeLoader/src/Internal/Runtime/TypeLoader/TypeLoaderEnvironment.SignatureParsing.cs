@@ -72,7 +72,8 @@ namespace Internal.Runtime.TypeLoader
             }
             else
             {
-                // For now, RuntimeSignatures are only used to compare for method signature equality (along with their Name)
+                // For now, RuntimeSignatures are only used to compare for method signature equality (along with
+                // their Name)
                 // So we can implement this with the simple equals check
                 if (signature1.Token != signature2.Token)
                     return false;

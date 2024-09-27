@@ -10,7 +10,8 @@ namespace System.Formats.Asn1
         /// <summary>
         ///   Write NULL with a specified tag.
         /// </summary>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 5).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 5).</param>
         /// <exception cref="ArgumentException">
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagClass"/> is
         ///   <see cref="TagClass.Universal"/>, but

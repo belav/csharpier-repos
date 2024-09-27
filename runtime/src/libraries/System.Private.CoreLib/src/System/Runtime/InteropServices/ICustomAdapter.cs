@@ -5,7 +5,8 @@ using System.ComponentModel;
 
 namespace System.Runtime.InteropServices
 {
-    // This the base interface that custom adapters can chose to implement when they want to expose the underlying object.
+    // This the base interface that custom adapters can chose to implement when they want to expose the
+    // underlying object.
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICustomAdapter
     {

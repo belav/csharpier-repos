@@ -10,7 +10,8 @@
 //
 // Bill Seurer (seurer@linux.vnet.ibm.com)
 //
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 using System;
@@ -492,32 +493,33 @@ public class Test_double
             return 2;
         }
 
-        /*
-        //  NOTE: this test does not work properly because mini_type_is_hfa in mini-codegen.c does not handle arrays.
-        //        Uncomment this when mini_type_is_hfa is fixed.
-                unsafe {
-                double_array4 sa4;
-                sa4.f1[0] = 1;
-                sa4.f1[1] = 2;
-                sa4 = mono_return_double_array4(sa4, 9);
-                if (sa4.f1[0] != 1+9) {
-                    Console.WriteLine("   double_array4 sa4.f1[0]: got {0} but expected {1}", sa4.f1[0], 1+9);
-                    return 1;
-                }
-                if (sa4.f1[1] != 2+9) {
-                    Console.WriteLine("   double_array4 sa4.f1[1]: got {0} but expected {1}", sa4.f1[1], 2+9);
-                    return 2;
-                }
-                if (sa4.f1[2] != 3+9) {
-                    Console.WriteLine("   double_array4 sa4.f1[2]: got {0} but expected {1}", sa4.f1[2], 3+9);
-                    return 3;
-                }
-                if (sa4.f1[3] != 4+9) {
-                    Console.WriteLine("   double_array4 sa4.f1[3]: got {0} but expected {1}", sa4.f1[3], 4+9);
-                    return 4;
-                }
-                }
-        */
+/*
+//  NOTE: this test does not work properly because mini_type_is_hfa in mini-codegen.c does not
+handle arrays.
+//        Uncomment this when mini_type_is_hfa is fixed.
+unsafe {
+double_array4 sa4;
+sa4.f1[0] = 1;
+sa4.f1[1] = 2;
+sa4 = mono_return_double_array4(sa4, 9);
+if (sa4.f1[0] != 1+9) {
+Console.WriteLine("   double_array4 sa4.f1[0]: got {0} but expected {1}", sa4.f1[0], 1+9);
+return 1;
+}
+if (sa4.f1[1] != 2+9) {
+Console.WriteLine("   double_array4 sa4.f1[1]: got {0} but expected {1}", sa4.f1[1], 2+9);
+return 2;
+}
+if (sa4.f1[2] != 3+9) {
+Console.WriteLine("   double_array4 sa4.f1[2]: got {0} but expected {1}", sa4.f1[2], 3+9);
+return 3;
+}
+if (sa4.f1[3] != 4+9) {
+Console.WriteLine("   double_array4 sa4.f1[3]: got {0} but expected {1}", sa4.f1[3], 4+9);
+return 4;
+}
+}
+*/
 
         return 0;
     } // end Main

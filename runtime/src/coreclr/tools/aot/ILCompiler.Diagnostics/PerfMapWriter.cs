@@ -75,7 +75,8 @@ namespace ILCompiler.Diagnostics
         {
             byte[] signature = PerfMapV1SignatureHelper(inputAssemblies, details);
 
-            // Make sure these get emitted in this order, other tools in the ecosystem like the symbol uploader and PerfView rely on this.
+            // Make sure these get emitted in this order, other tools in the ecosystem like the symbol uploader
+            // and PerfView rely on this.
             // In particular, the order of it. Append only.
             string signatureFormatted = Convert.ToHexString(signature);
 

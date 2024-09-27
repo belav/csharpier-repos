@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Globalization;
@@ -7,7 +8,8 @@ using System.Globalization;
 namespace Microsoft.TestCommon
 {
     /// <summary>
-    /// Equatable class wrapping a single instance of type <paramref name="T"/>. Equatable to ease test assertions.
+    /// Equatable class wrapping a single instance of type <paramref name="T"/>. Equatable to ease test
+    // assertions.
     /// </summary>
     /// <typeparam name="T">The <see cref="Type"/> to wrap.</typeparam>
     public class TestDataHolder<T> : IEquatable<TestDataHolder<T>>

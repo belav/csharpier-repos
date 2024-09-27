@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics;
 using System.Web.Razor.Parser.SyntaxTree;
@@ -34,7 +35,8 @@ namespace System.Web.Razor.Parser
 
         public abstract void ParseBlock();
 
-        // Markup Parsers need the ParseDocument and ParseSection methods since the markup parser is the first parser to hit the document
+        // Markup Parsers need the ParseDocument and ParseSection methods since the markup parser is the
+        // first parser to hit the document
         // and the logic may be different than the ParseBlock method.
         public virtual void ParseDocument()
         {

@@ -103,12 +103,14 @@ class C
 "
             );
             comp.VerifyDiagnostics(
-                // (5,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (5,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid
+                // modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<readonly string> p1,
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
                     .WithArguments("readonly")
                     .WithLocation(5, 19),
-                // (6,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (6,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid
+                // modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<readonly ref string> p2,
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
                     .WithArguments("readonly")
@@ -118,22 +120,26 @@ class C
                 Diagnostic(ErrorCode.ERR_DupReturnTypeMod, "ref")
                     .WithArguments("ref")
                     .WithLocation(7, 23),
-                // (7,27): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (7,27): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid
+                // modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<ref ref readonly string> p3,
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
                     .WithArguments("readonly")
                     .WithLocation(7, 27),
-                // (8,32): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (8,32): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid
+                // modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<ref readonly readonly string> p4,
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
                     .WithArguments("readonly")
                     .WithLocation(8, 32),
-                // (9,19): error CS8808: 'this' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (9,19): error CS8808: 'this' is not a valid function pointer return type modifier. Valid
+                // modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<this string> p5,
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "this")
                     .WithArguments("this")
                     .WithLocation(9, 19),
-                // (10,19): error CS8808: 'params' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (10,19): error CS8808: 'params' is not a valid function pointer return type modifier. Valid
+                // modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<params string> p6,
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "params")
                     .WithArguments("params")
@@ -143,7 +149,8 @@ class C
                 Diagnostic(ErrorCode.ERR_DupReturnTypeMod, "ref")
                     .WithArguments("ref")
                     .WithLocation(11, 23),
-                // (12,19): error CS8808: 'out' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (12,19): error CS8808: 'out' is not a valid function pointer return type modifier. Valid
+                // modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<out string> p8)
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "out")
                     .WithArguments("out")
@@ -353,7 +360,8 @@ class C
                 if (expectedConvention == CallingConvention.Unmanaged)
                 {
                     comp.VerifyDiagnostics(
-                        // (4,36): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
+                        // (4,36): error CS8889: The target runtime doesn't support extensible or runtime-environment
+                        // default calling conventions.
                         //     public unsafe void M(delegate* unmanaged<string> p) {}
                         Diagnostic(
                                 ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv,
@@ -419,7 +427,8 @@ class C
             );
 
             comp.VerifyDiagnostics(
-                // (4,47): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
+                // (4,47): error CS8889: The target runtime doesn't support extensible or runtime-environment
+                // default calling conventions.
                 //     public unsafe void M1(delegate* unmanaged[invalid]<void> p) {}
                 Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "invalid")
                     .WithLocation(4, 47),
@@ -428,7 +437,8 @@ class C
                 Diagnostic(ErrorCode.ERR_TypeNotFound, "invalid")
                     .WithArguments("CallConvinvalid")
                     .WithLocation(4, 47),
-                // (5,37): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
+                // (5,37): error CS8889: The target runtime doesn't support extensible or runtime-environment
+                // default calling conventions.
                 //     public unsafe void M2(delegate* unmanaged[invalid, Stdcall]<void> p) {}
                 Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "unmanaged")
                     .WithLocation(5, 37),
@@ -440,7 +450,8 @@ class C
                 // (6,47): error CS1001: Identifier expected
                 //     public unsafe void M3(delegate* unmanaged[]<void> p) {}
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "]").WithLocation(6, 47),
-                // (6,47): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
+                // (6,47): error CS8889: The target runtime doesn't support extensible or runtime-environment
+                // default calling conventions.
                 //     public unsafe void M3(delegate* unmanaged[]<void> p) {}
                 Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "")
                     .WithLocation(6, 47)
@@ -1400,12 +1411,14 @@ class C
             comp.MakeTypeMissing(WellKnownType.System_Runtime_InteropServices_InAttribute);
             comp.MakeTypeMissing(WellKnownType.System_Runtime_InteropServices_OutAttribute);
             comp.VerifyDiagnostics(
-                // (4,29): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
+                // (4,29): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined
+                // or imported
                 //     unsafe void M(delegate*<in string, out string, void> p1) {}
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in string")
                     .WithArguments("System.Runtime.InteropServices.InAttribute")
                     .WithLocation(4, 29),
-                // (4,40): error CS0518: Predefined type 'System.Runtime.InteropServices.OutAttribute' is not defined or imported
+                // (4,40): error CS0518: Predefined type 'System.Runtime.InteropServices.OutAttribute' is not
+                // defined or imported
                 //     unsafe void M(delegate*<in string, out string, void> p1) {}
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "out string")
                     .WithArguments("System.Runtime.InteropServices.OutAttribute")
@@ -1542,7 +1555,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
                     .WithArguments("a")
                     .WithLocation(6, 13),
-                // (7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         delegate*<int[a]> local;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[a]").WithLocation(7, 22),
                 // (7,27): warning CS0168: The variable 'local' is declared but never used
@@ -1660,7 +1674,8 @@ unsafe class C
                 Diagnostic(ErrorCode.ERR_BadArgRef, "s")
                     .WithArguments("1", "ref")
                     .WithLocation(17, 15),
-                // (18,16): error CS9194: Argument 1 may not be passed with the 'ref' keyword in language version 9.0. To pass 'ref' arguments to 'in' parameters, upgrade to language version 12.0 or greater.
+                // (18,16): error CS9194: Argument 1 may not be passed with the 'ref' keyword in language version
+                // 9.0. To pass 'ref' arguments to 'in' parameters, upgrade to language version 12.0 or greater.
                 //         p5(ref s);
                 Diagnostic(ErrorCode.ERR_BadArgExtraRefLangVersion, "s")
                     .WithArguments("1", "9.0", "12.0")
@@ -1804,7 +1819,8 @@ unsafe static class C
             );
 
             comp.VerifyDiagnostics(
-                // (4,25): error CS1103: The first parameter of an extension method cannot be of type 'delegate*<void>'
+                // (4,25): error CS1103: The first parameter of an extension method cannot be of type
+                // 'delegate*<void>'
                 //     static void M1(this delegate*<void> ptr) {}
                 Diagnostic(ErrorCode.ERR_BadTypeforThis, "delegate*<void>")
                     .WithArguments("delegate*<void>")
@@ -2737,22 +2753,26 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (7,19): error CS8808: 'out' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (7,19): error CS8808: 'out' is not a valid function pointer return type modifier. Valid modifiers
+                // are 'ref' and 'ref readonly'.
                 //         delegate*<out int> ptr1;
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "out")
                     .WithArguments("out")
                     .WithLocation(7, 19),
-                // (8,19): error CS8808: 'in' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                // (8,19): error CS8808: 'in' is not a valid function pointer return type modifier. Valid modifiers
+                // are 'ref' and 'ref readonly'.
                 //         delegate*<in int> ptr2;
                 Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "in")
                     .WithArguments("in")
                     .WithLocation(8, 19),
-                // (9,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.RequiresLocationAttribute' is not defined or imported
+                // (9,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.RequiresLocationAttribute'
+                // is not defined or imported
                 //         delegate*<ref readonly int, void> ptr3;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly int")
                     .WithArguments("System.Runtime.CompilerServices.RequiresLocationAttribute")
                     .WithLocation(9, 19),
-                // (9,23): error CS8773: Feature 'ref readonly parameters' is not available in C# 9.0. Please use language version 12.0 or greater.
+                // (9,23): error CS8773: Feature 'ref readonly parameters' is not available in C# 9.0. Please use
+                // language version 12.0 or greater.
                 //         delegate*<ref readonly int, void> ptr3;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "readonly")
                     .WithArguments("ref readonly parameters", "12.0")
@@ -3318,7 +3338,8 @@ namespace System
                         TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
                     )
                 );
-                // If we weren't expected the ref version to be equal, but we were expecting the type version to be equal, then that means
+                // If we weren't expected the ref version to be equal, but we were expecting the type version to be
+                // equal, then that means
                 // the type version will be identical because it will have no ref modifiers
                 Assert.Equal(
                     expectedTypeConventionEquality && !expectedRefConventionEquality,

@@ -5,14 +5,15 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.Diagnostics;
     using System.Globalization;
 
     /// <devdoc>
-    ///    <para>Specifies the editor to use to change a property. This class cannot be inherited.</para>
+    ///    <para>Specifies the editor to use to change a property. This class cannot be
+    // inherited.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public sealed class EditorAttribute : Attribute
@@ -22,7 +23,8 @@ namespace System.ComponentModel
         private string typeId;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/> class with the default editor, which is
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/>
+        // class with the default editor, which is
         ///    no editor.</para>
         /// </devdoc>
         public EditorAttribute()
@@ -32,7 +34,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/> class with the type name and base type
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/>
+        // class with the type name and base type
         ///    name of the editor.</para>
         /// </devdoc>
         public EditorAttribute(string typeName, string baseTypeName)
@@ -47,7 +50,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/>
+        // class.</para>
         /// </devdoc>
         public EditorAttribute(string typeName, Type baseType)
         {
@@ -71,7 +75,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///    <para>Gets the name of the base class or interface serving as a lookup key for this editor.</para>
+        ///    <para>Gets the name of the base class or interface serving as a lookup key for this
+        // editor.</para>
         /// </devdoc>
         public string EditorBaseTypeName
         {

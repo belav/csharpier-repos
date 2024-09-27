@@ -80,7 +80,8 @@ namespace System.ComponentModel.Composition.Hosting
                 && specifiedContractType.IsGenericType
             )
             {
-                // if the memeber type is closed and the specified contract type is open and they have exatly the same number of parameters
+                // if the memeber type is closed and the specified contract type is open and they have exatly the
+                // same number of parameters
                 // we will close the specfied contract type
                 if (
                     specifiedContractType.ContainsGenericParameters
@@ -95,7 +96,8 @@ namespace System.ComponentModel.Composition.Hosting
                         return specifiedContractType.MakeGenericType(typeGenericArguments);
                     }
                 }
-                // if both member type and the contract type are open generic types, make sure that their parameters are ordered the same way
+                // if both member type and the contract type are open generic types, make sure that their parameters
+                // are ordered the same way
                 else if (
                     specifiedContractType.ContainsGenericParameters
                     && memberType.ContainsGenericParameters
@@ -352,7 +354,8 @@ namespace System.ComponentModel.Composition.Hosting
                         );
                     }
 
-                    // we pass "null" for valueType which would make it inferred. We don;t have additional type information when metadata
+                    // we pass "null" for valueType which would make it inferred. We don;t have additional type
+                    // information when metadata
                     // goes through the ExportMetadataAttribute path
                     if (
                         !dictionary.TryContributeMetadataValue(
@@ -516,7 +519,8 @@ namespace System.ComponentModel.Composition.Hosting
                     itemType = item.GetType();
                 }
 
-                // Types are special, because the are abstract classes, so if the item casts to Type, we assume System.Type
+                // Types are special, because the are abstract classes, so if the item casts to Type, we assume
+                // System.Type
                 if (item is Type)
                 {
                     itemType = TypeType;
@@ -543,7 +547,8 @@ namespace System.ComponentModel.Composition.Hosting
                 else
                 {
                     // if there's a disagreement on the array type, we flip to Object
-                    // NOTE : we can try to do better in the future to find common base class, but given that we support very limited set of types
+                    // NOTE : we can try to do better in the future to find common base class, but given that we support
+                    // very limited set of types
                     // in metadata right now, it's a moot point
                     if (this._arrayType != itemType)
                     {
@@ -576,13 +581,15 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         //UNDONE: Need to add these warnings somewhere...Dev10:472538 should address this.
-        //internal static CompositionResult MatchRequiredMetadata(this IDictionary<string, object> metadata, IEnumerable<string> requiredMetadata, string contractName)
+        //internal static CompositionResult MatchRequiredMetadata(this IDictionary<string, object> metadata,
+        // IEnumerable<string> requiredMetadata, string contractName)
         //{
         //    Assumes.IsTrue(metadata != null);
 
         //    var result = CompositionResult.SucceededResult;
 
-        //    var missingMetadata = (requiredMetadata == null) ? null : requiredMetadata.Except<string>(metadata.Keys);
+        //    var missingMetadata = (requiredMetadata == null) ? null :
+        // requiredMetadata.Except<string>(metadata.Keys);
         //    if (missingMetadata != null && missingMetadata.Any())
         //    {
         //        result = result.MergeIssue(
@@ -617,9 +624,12 @@ namespace System.ComponentModel.Composition.Hosting
                 .Where(property => property.GetFirstAttribute<DefaultValueAttribute>() == null)
                 .ToList();
 
-            // NOTE : this is a carefully found balance between eager and delay-evaluation - the properties are filtered once and upfront
-            // whereas the key/Type pairs are created every time. The latter is fine as KVPs are structs and as such copied on access regardless.
-            // This also allows us to avoid creation of List<KVP> which - at least according to FxCop - leads to isues with NGEN
+            // NOTE : this is a carefully found balance between eager and delay-evaluation - the properties are
+            // filtered once and upfront
+            // whereas the key/Type pairs are created every time. The latter is fine as KVPs are structs and as
+            // such copied on access regardless.
+            // This also allows us to avoid creation of List<KVP> which - at least according to FxCop - leads to
+            // isues with NGEN
             return properties.Select(property => new KeyValuePair<string, Type>(
                 property.Name,
                 property.PropertyType
@@ -782,7 +792,8 @@ namespace System.ComponentModel.Composition.Hosting
             Assumes.NotNull(type);
             // Definitions of valid attribute type taken from C# 3.0 Specification section 17.1.3.
 
-            // One of the following types: bool, byte, char, double, float, int, long, sbyte, short, string, uint, ulong, ushort.
+            // One of the following types: bool, byte, char, double, float, int, long, sbyte, short, string,
+            // uint, ulong, ushort.
             if (type.IsPrimitive)
             {
                 return true;
@@ -793,7 +804,8 @@ namespace System.ComponentModel.Composition.Hosting
                 return true;
             }
 
-            // An enum type, provided it has public accessibility and the types in which it is nested (if any) also have public accessibility
+            // An enum type, provided it has public accessibility and the types in which it is nested (if any)
+            // also have public accessibility
             if (type.IsEnum && type.IsVisible)
             {
                 return true;

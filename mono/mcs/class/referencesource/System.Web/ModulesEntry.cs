@@ -5,9 +5,9 @@
 //------------------------------------------------------------------------------
 
 /*
- * Config related classes for HttpApplication
- *
- */
+* Config related classes for HttpApplication
+*
+*/
 
 namespace System.Web.Configuration.Common
 {
@@ -27,9 +27,9 @@ namespace System.Web.Configuration.Common
     using System.Web.SessionState;
     using System.Web.Util;
 
-    /*
-     * Single Entry of request to class
-     */
+/*
+* Single Entry of request to class
+*/
     internal class ModulesEntry
     {
         private String _name;

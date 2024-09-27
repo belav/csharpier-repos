@@ -8,18 +8,22 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         An expression that represents an entity query root in query expression.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public class EntityQueryRootExpression : QueryRootExpression, IPrintableExpression
 {
     /// <summary>
-    ///     Creates a new instance of the <see cref="EntityQueryRootExpression" /> class with associated query provider.
+    ///     Creates a new instance of the <see cref="EntityQueryRootExpression" /> class with associated
+    // query provider.
     /// </summary>
     /// <param name="asyncQueryProvider">The query provider associated with this query root.</param>
     /// <param name="entityType">The entity type this query root represents.</param>
@@ -30,7 +34,8 @@ public class EntityQueryRootExpression : QueryRootExpression, IPrintableExpressi
     }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="EntityQueryRootExpression" /> class without any query provider.
+    ///     Creates a new instance of the <see cref="EntityQueryRootExpression" /> class without any
+    // query provider.
     /// </summary>
     /// <param name="entityType">The entity type this query root represents.</param>
     public EntityQueryRootExpression(IEntityType entityType)
@@ -72,7 +77,8 @@ public class EntityQueryRootExpression : QueryRootExpression, IPrintableExpressi
     protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <summary>
-    ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
+    ///     Creates a printable string representation of the given expression using <see
+    // cref="ExpressionPrinter" />.
     /// </summary>
     /// <param name="expressionPrinter">The expression printer to use.</param>
     protected override void Print(ExpressionPrinter expressionPrinter) =>

@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     public static class DiagnosticAnalyzerExtensions
     {
-        /// <inheritdoc cref="WithAnalyzers(Compilation, ImmutableArray{DiagnosticAnalyzer}, AnalyzerOptions?)"/>
+        /// <inheritdoc cref="WithAnalyzers(Compilation, ImmutableArray{DiagnosticAnalyzer},
+        // AnalyzerOptions?)"/>
         [Obsolete("Use WithAnalyzers overload without a cancellation token", error: false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static CompilationWithAnalyzers WithAnalyzers(
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         /// <param name="compilation">Compilation to which analyzers are to be added.</param>
         /// <param name="analyzers">The set of analyzers to include in future analyses.</param>
-        /// <param name="analysisOptions">Options to configure analyzer execution within <see cref="CompilationWithAnalyzers"/>.</param>
+        /// <param name="analysisOptions">Options to configure analyzer execution within <see
+        // cref="CompilationWithAnalyzers"/>.</param>
         public static CompilationWithAnalyzers WithAnalyzers(
             this Compilation compilation,
             ImmutableArray<DiagnosticAnalyzer> analyzers,

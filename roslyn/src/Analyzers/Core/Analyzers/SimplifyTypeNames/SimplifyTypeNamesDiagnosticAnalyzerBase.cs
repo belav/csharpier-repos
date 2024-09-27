@@ -152,10 +152,14 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         /// <summary>
         /// Determine if a code block is eligible for analysis by <see cref="AnalyzeCodeBlock"/>.
         /// </summary>
-        /// <param name="codeBlock">The syntax node provided via <see cref="CodeBlockAnalysisContext.CodeBlock"/>.</param>
-        /// <returns><see langword="true"/> if the code block should be analyzed by <see cref="AnalyzeCodeBlock"/>;
-        /// otherwise, <see langword="false"/> to skip analysis of the block. If a block is skipped, one or more child
-        /// blocks may be analyzed by <see cref="AnalyzeCodeBlock"/>, and any remaining spans can be analyzed by
+        /// <param name="codeBlock">The syntax node provided via <see
+        // cref="CodeBlockAnalysisContext.CodeBlock"/>.</param>
+        /// <returns><see langword="true"/> if the code block should be analyzed by <see
+        // cref="AnalyzeCodeBlock"/>;
+        /// otherwise, <see langword="false"/> to skip analysis of the block. If a block is skipped, one or
+        // more child
+        /// blocks may be analyzed by <see cref="AnalyzeCodeBlock"/>, and any remaining spans can be
+        // analyzed by
         /// <see cref="AnalyzeSemanticModel"/>.</returns>
         protected abstract bool IsIgnoredCodeBlock(SyntaxNode codeBlock);
         protected abstract ImmutableArray<Diagnostic> AnalyzeCodeBlock(
@@ -308,16 +312,20 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             /// Tracks the analysis state of syntax trees in a compilation. Each syntax tree has the properties:
             /// <list type="bullet">
             /// <item><description>
-            /// <para><c>completed</c>: <see langword="true"/> to indicate that <c>intervalTree</c> has been obtained
-            /// for use in a <see cref="SemanticModelAnalysisContext"/> callback; otherwise, <see langword="false"/> to
-            /// indicate that <c>intervalTree</c> may be updated by adding a new non-overlapping <see cref="TextSpan"/>
+            /// <para><c>completed</c>: <see langword="true"/> to indicate that <c>intervalTree</c> has been
+            // obtained
+            /// for use in a <see cref="SemanticModelAnalysisContext"/> callback; otherwise, <see
+            // langword="false"/> to
+            /// indicate that <c>intervalTree</c> may be updated by adding a new non-overlapping <see
+            // cref="TextSpan"/>
             /// for analysis performed by a <see cref="CodeBlockAnalysisContext"/> callback.</para>
             ///
             /// <para>This field also serves as the lock object for updating both <c>completed</c> and
             /// <c>intervalTree</c>.</para>
             /// </description></item>
             /// <item><description>
-            /// <para><c>intervalTree</c>: the set of intervals analyzed by <see cref="CodeBlockAnalysisContext"/>
+            /// <para><c>intervalTree</c>: the set of intervals analyzed by <see
+            // cref="CodeBlockAnalysisContext"/>
             /// callbacks, and therefore do not need to be analyzed again by a
             /// <see cref="SemanticModelAnalysisContext"/> callback.</para>
             ///
@@ -400,14 +408,16 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             {
                 // Get the state information for the syntax tree. If the state information is not available, it is
                 // initialized directly to a completed state, ensuring that concurrent (or future) calls to
-                // AnalyzeCodeBlock will always read completed==true, and intervalTree does not need to be initialized
+                // AnalyzeCodeBlock will always read completed==true, and intervalTree does not need to be
+                // initialized
                 // to a non-null value.
                 var (completed, intervalTree) = _codeBlockIntervals.GetOrAdd(
                     context.SemanticModel.SyntaxTree,
                     syntaxTree => (new StrongBox<bool>(true), null)
                 );
 
-                // Since SemanticModel callbacks only occur once per syntax tree, the completed state can be safely read
+                // Since SemanticModel callbacks only occur once per syntax tree, the completed state can be safely
+                // read
                 // here. It will have one of the values:
                 //
                 //   false: the state was initialized in AnalyzeCodeBlock, and intervalTree will be a non-null tree.

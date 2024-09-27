@@ -32,12 +32,14 @@ namespace System.Net.Http
         QPackDecoder = 0x03,
 
         /// <summary>
-        /// https://ietf-wg-webtrans.github.io/draft-ietf-webtrans-http3/draft-ietf-webtrans-http3.html#name-unidirectional-streams
+        ///
+        // https://ietf-wg-webtrans.github.io/draft-ietf-webtrans-http3/draft-ietf-webtrans-http3.html#name-unidirectional-streams
         /// </summary>
         WebTransportUnidirectional = 0x54,
 
         /// <summary>
-        /// https://ietf-wg-webtrans.github.io/draft-ietf-webtrans-http3/draft-ietf-webtrans-http3.html#name-bidirectional-streams
+        ///
+        // https://ietf-wg-webtrans.github.io/draft-ietf-webtrans-http3/draft-ietf-webtrans-http3.html#name-bidirectional-streams
         /// </summary>
         WebTransportBidirectional = 0x41,
     }

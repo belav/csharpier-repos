@@ -88,7 +88,8 @@ namespace System.IO
 
         internal static void EndReadCalledTwice()
         {
-            // Should ideally be InvalidOperationExc but we can't maitain parity with Stream and FileStream without some work
+            // Should ideally be InvalidOperationExc but we can't maitain parity with Stream and FileStream
+            // without some work
             throw new ArgumentException(
                 Environment.GetResourceString("InvalidOperation_EndReadCalledMultiple")
             );
@@ -96,7 +97,8 @@ namespace System.IO
 
         internal static void EndWriteCalledTwice()
         {
-            // Should ideally be InvalidOperationExc but we can't maintain parity with Stream and FileStream without some work
+            // Should ideally be InvalidOperationExc but we can't maintain parity with Stream and FileStream
+            // without some work
             throw new ArgumentException(
                 Environment.GetResourceString("InvalidOperation_EndWriteCalledMultiple")
             );

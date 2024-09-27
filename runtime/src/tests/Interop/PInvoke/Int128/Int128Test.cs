@@ -90,7 +90,8 @@ unsafe partial class Int128Native
         StructWithInt128 rhs
     );
 
-    // Test alignment and proper register usage for Int128 with various amounts of other registers in use. These tests are designed to stress the calling convention of Arm64 and Unix X64.
+    // Test alignment and proper register usage for Int128 with various amounts of other registers in
+    // use. These tests are designed to stress the calling convention of Arm64 and Unix X64.
     [DllImport(nameof(Int128Native))]
     public static extern Int128 AddInt128_1(long dummy1, Int128 lhs, Int128 rhs);
 

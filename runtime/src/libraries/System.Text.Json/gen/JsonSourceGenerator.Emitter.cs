@@ -103,14 +103,17 @@ namespace System.Text.Json.SourceGeneration
             private readonly Dictionary<TypeRef, TypeGenerationSpec> _typeIndex = new();
 
             /// <summary>
-            /// Cache of property names (statically determined) found across the type graph of the JsonSerializerContext.
-            /// The dictionary Key is the JSON property name, and the Value is the variable name which is the same as the property
+            /// Cache of property names (statically determined) found across the type graph of the
+            // JsonSerializerContext.
+            /// The dictionary Key is the JSON property name, and the Value is the variable name which is the
+            // same as the property
             /// name except for cases where special characters are used with [JsonPropertyName].
             /// </summary>
             private readonly Dictionary<string, string> _propertyNames = new();
 
             /// <summary>
-            /// Indicates that the type graph contains a nullable property with a design-time custom converter declaration.
+            /// Indicates that the type graph contains a nullable property with a design-time custom converter
+            // declaration.
             /// </summary>
             private bool _emitGetConverterForNullablePropertyMethod;
 
@@ -1024,7 +1027,8 @@ namespace System.Text.Json.SourceGeneration
                     string effectiveJsonPropertyName = propertyGenSpec.EffectiveJsonPropertyName;
                     string propertyNameFieldName = propertyGenSpec.PropertyNameFieldName;
 
-                    // Add the property names to the context-wide cache; we'll generate the source to initialize them at the end of generation.
+                    // Add the property names to the context-wide cache; we'll generate the source to initialize them at
+                    // the end of generation.
                     Debug.Assert(
                         !_propertyNames.TryGetValue(
                             effectiveJsonPropertyName,

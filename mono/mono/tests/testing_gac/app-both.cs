@@ -1,7 +1,8 @@
 // reference both versions of gactestlib via extern aliases.
 
 // N.B. the order of the aliases is important - the compiler will emit
-// .assembly declarations in the IL file in order, and Mono will try to load the declarations in the same order.
+// .assembly declarations in the IL file in order, and Mono will try to load the declarations in the
+// same order.
 // The test relies on V1 being loaded first and then V2 being tried from V1's MONO_PATH directory.
 extern alias V1;
 extern alias V2;

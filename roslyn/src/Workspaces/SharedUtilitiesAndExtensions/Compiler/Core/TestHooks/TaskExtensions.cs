@@ -13,15 +13,19 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
     internal static partial class TaskExtensions
     {
-        // Following code is copied from Microsoft.VisualStudio.Threading.TplExtensions (renamed to avoid ambiguity)
+        // Following code is copied from Microsoft.VisualStudio.Threading.TplExtensions (renamed to avoid
+        // ambiguity)
+        //
         // https://github.com/microsoft/vs-threading/blob/main/src/Microsoft.VisualStudio.Threading/TplExtensions.cs
 
         /// <summary>
         /// Returns an awaitable for the specified task that will never throw, even if the source task
         /// faults or is canceled.
         /// </summary>
-        /// <param name="task">The task whose completion should signal the completion of the returned awaitable.</param>
-        /// <param name="captureContext">if set to <c>true</c> the continuation will be scheduled on the caller's context; <c>false</c> to always execute the continuation on the threadpool.</param>
+        /// <param name="task">The task whose completion should signal the completion of the returned
+        // awaitable.</param>
+        /// <param name="captureContext">if set to <c>true</c> the continuation will be scheduled on the
+        // caller's context; <c>false</c> to always execute the continuation on the threadpool.</param>
         /// <returns>An awaitable.</returns>
         public static NoThrowTaskAwaitable NoThrowAwaitableInternal(
             this Task task,
@@ -50,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             /// Initializes a new instance of the <see cref="NoThrowTaskAwaitable" /> struct.
             /// </summary>
             /// <param name="task">The task.</param>
-            /// <param name="captureContext">Whether the continuation should be scheduled on the current sync context.</param>
+            /// <param name="captureContext">Whether the continuation should be scheduled on the current sync
+            // context.</param>
             public NoThrowTaskAwaitable(Task task, bool captureContext)
             {
                 Contract.ThrowIfNull(task, nameof(task));

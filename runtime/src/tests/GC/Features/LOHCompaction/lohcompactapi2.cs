@@ -17,7 +17,8 @@ namespace LOHCompactAPI
         static volatile bool testDone = false;
 
         //There are several threads that allocate, and the main thread calls the compacting API
-        //Verify that the compaction mode changes to default after a blocking GC happened, and does not change if a blocking GC did not happen.
+        //Verify that the compaction mode changes to default after a blocking GC happened, and does not
+        // change if a blocking GC did not happen.
         public static int Main(string[] args)
         {
             int retVal = 100;

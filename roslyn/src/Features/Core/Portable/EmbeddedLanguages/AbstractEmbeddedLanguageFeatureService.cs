@@ -32,8 +32,10 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
     private readonly ImmutableArray<Lazy<TService, EmbeddedLanguageMetadata>> _legacyServices;
 
     /// <summary>
-    /// Ordered mapping of a lang ID (like 'Json') to all the services for that language. This allows for multiple
-    /// classifiers to be available.  The first service though that returns results for a string will 'win' and no
+    /// Ordered mapping of a lang ID (like 'Json') to all the services for that language. This allows
+    // for multiple
+    /// classifiers to be available.  The first service though that returns results for a string will
+    // 'win' and no
     /// other services will contribute.
     /// </summary>
     private readonly ImmutableDictionary<

@@ -141,14 +141,16 @@ namespace System.Tests
             ArraySegment<T> empty = ArraySegment<T>.Empty;
 
             // Assert.NotEqual uses its own Comparer, when it is comparing IEnumerables it calls GetEnumerator()
-            // ArraySegment<T>.GetEnumerator() throws InvalidOperationException when the array is null and default() returns null
+            // ArraySegment<T>.GetEnumerator() throws InvalidOperationException when the array is null and
+            // default() returns null
             Assert.True(default(ArraySegment<T>) != empty);
 
             // Check that two Empty invocations return equal ArraySegments.
             Assert.Equal(empty, ArraySegment<T>.Empty);
 
             // Check that two Empty invocations return ArraySegments with a cached empty array.
-            // An empty array is necessary to ensure that someone doesn't use the indexer to store data in the array Empty refers to.
+            // An empty array is necessary to ensure that someone doesn't use the indexer to store data in the
+            // array Empty refers to.
             Assert.Same(empty.Array, ArraySegment<T>.Empty.Array);
             Assert.Equal(0, empty.Array.Length);
             Assert.Equal(0, empty.Offset);
@@ -577,7 +579,8 @@ namespace System.Tests
         {
             int count = arraySegment.Count;
 
-            // ArraySegment.CopyTo calls Array.Copy internally, so the exception parameter names come from there.
+            // ArraySegment.CopyTo calls Array.Copy internally, so the exception parameter names come from
+            // there.
 
             // Destination is null
             AssertExtensions.Throws<ArgumentNullException>(
@@ -898,7 +901,8 @@ namespace System.Tests
         [MemberData(nameof(ArraySegment_TestData))]
         public static void ToArray(ArraySegment<int> arraySegment)
         {
-            // ToList is called here so we copy the data and raise an assert if ToArray modifies the underlying array.
+            // ToList is called here so we copy the data and raise an assert if ToArray modifies the underlying
+            // array.
             List<int> expected = arraySegment
                 .Array.Skip(arraySegment.Offset)
                 .Take(arraySegment.Count)

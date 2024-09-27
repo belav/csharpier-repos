@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt
+// in the project root for license information.
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 .Values.SelectMany(analyzersAndFixers => analyzersAndFixers.Fixers)
                 .ToImmutableArray();
 
-            // Only include compiler diagnostics if we have an associated fixer that supports FixAllScope.Solution
+            // Only include compiler diagnostics if we have an associated fixer that supports
+            // FixAllScope.Solution
             var fixableCompilerDiagnostics = _includeCompilerDiagnostics
                 ? allFixers
                     .Where(codefix =>
@@ -457,7 +459,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             CancellationToken cancellationToken
         )
         {
-            // We only want to run analyzers for each project that have the potential for reporting a diagnostic with
+            // We only want to run analyzers for each project that have the potential for reporting a diagnostic
+            // with
             // a severity equal to or greater than specified.
             var projectAnalyzers = ImmutableDictionary.CreateBuilder<
                 ProjectId,

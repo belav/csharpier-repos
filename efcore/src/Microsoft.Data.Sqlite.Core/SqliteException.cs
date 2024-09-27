@@ -11,7 +11,8 @@ namespace Microsoft.Data.Sqlite
     /// <summary>
     ///     Represents a SQLite error.
     /// </summary>
-    /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database Errors</seealso>
+    /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database
+    // Errors</seealso>
     public class SqliteException : DbException
     {
         /// <summary>

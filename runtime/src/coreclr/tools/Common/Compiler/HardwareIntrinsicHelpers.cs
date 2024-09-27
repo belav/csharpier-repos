@@ -11,7 +11,8 @@ namespace ILCompiler
     public static partial class HardwareIntrinsicHelpers
     {
         /// <summary>
-        /// Gets a value indicating whether this is a hardware intrinsic on the platform that we're compiling for.
+        /// Gets a value indicating whether this is a hardware intrinsic on the platform that we're
+        // compiling for.
         /// </summary>
         public static bool IsHardwareIntrinsic(MethodDesc method)
         {

@@ -12,19 +12,25 @@ using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore
 
 namespace ILCompiler
 {
-    // Class that computes the initial state of static fields on a type by interpreting the static constructor.
+    // Class that computes the initial state of static fields on a type by interpreting the static
+    // constructor.
     //
-    // Values are represented by instances of an abstract Value class. Several specialized descendants of
+    // Values are represented by instances of an abstract Value class. Several specialized descendants
+    // of
     // the Value class exist, representing value types (including e.g. a specialized class representing
     // RuntimeFieldHandle), or reference types (including e.g. specialized class representing an array).
     //
-    // For simplicity, non-reference values are represented as byte arrays. This requires many short lived array
-    // allocations, but makes a lot of things simpler (e.g. byrefs to values are essentially free because they
+    // For simplicity, non-reference values are represented as byte arrays. This requires many short
+    // lived array
+    // allocations, but makes a lot of things simpler (e.g. byrefs to values are essentially free
+    // because they
     // only carry a reference to the original array and an optional index).
     //
     // When dealing with non-reference types (valuetypes and unmanaged pointers) we need to be careful
-    // about assignment semantics. Some operations need to make a copy of the valuetype bytes while others
-    // are fine to reuse the original byte array. Whenever storing a value into a location, we need to assign
+    // about assignment semantics. Some operations need to make a copy of the valuetype bytes while
+    // others
+    // are fine to reuse the original byte array. Whenever storing a value into a location, we need to
+    // assign
     // a new value to the existing Value instance to keep byrefs working.
     public class TypePreinit
     {
@@ -513,7 +519,8 @@ namespace ILCompiler
                                 && !field.OwningType.HasStaticConstructor
                             )
                             {
-                                // (Effectively) read only field but no static constructor to set it: the value is default-initialized.
+                                // (Effectively) read only field but no static constructor to set it: the value is
+                                // default-initialized.
                                 stack.PushFromLocation(
                                     field.FieldType,
                                     NewUninitializedLocationValue(field.FieldType)
@@ -3451,7 +3458,8 @@ namespace ILCompiler
 
             public override void WriteFieldData(ref ObjectDataBuilder builder, NodeFactory factory)
             {
-                // This would imply we have a byref-typed static field. The layout algorithm should have blocked this.
+                // This would imply we have a byref-typed static field. The layout algorithm should have blocked
+                // this.
                 throw new NotImplementedException();
             }
 

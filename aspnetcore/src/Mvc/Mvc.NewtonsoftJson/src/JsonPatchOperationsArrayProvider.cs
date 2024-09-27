@@ -28,7 +28,8 @@ internal sealed class JsonPatchOperationsArrayProvider : IApiDescriptionProvider
 
     /// <inheritdoc />
     /// <remarks>
-    /// The order -999 ensures that this provider is executed right after the <c>Microsoft.AspNetCore.Mvc.ApiExplorer.DefaultApiDescriptionProvider</c>.
+    /// The order -999 ensures that this provider is executed right after the
+    // <c>Microsoft.AspNetCore.Mvc.ApiExplorer.DefaultApiDescriptionProvider</c>.
     /// </remarks>
     public int Order => -999;
 

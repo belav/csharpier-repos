@@ -172,7 +172,8 @@ public interface IInterfaceVisibleTrueNoGuidGeneric
 }
 
 /// <summary>
-/// Interface visible with ComVisible(true), without Custom Attribute Guid and a method with a parameter which is a generic interface.
+/// Interface visible with ComVisible(true), without Custom Attribute Guid and a method with a
+// parameter which is a generic interface.
 /// </summary>
 [ComVisible(true)]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]

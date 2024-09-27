@@ -17,10 +17,13 @@ using Internal.Runtime.TypeLoader;
 
 namespace Internal.Reflection.Execution
 {
-    //==========================================================================================================
+    //
+    // //==========================================================================================================
     // These ExecutionEnvironment entrypoints provide basic runtime allocation and policy services to
     // Reflection. Our implementation merely forwards to System.Private.CoreLib.
-    //==========================================================================================================
+
+    //
+    // //==========================================================================================================
     internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
         public sealed override void GetInterfaceMap(

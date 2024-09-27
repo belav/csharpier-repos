@@ -28,7 +28,8 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
     /// <summary>
-    /// Base type of all asynchronous tagger providers (<see cref="ITaggerProvider"/> and <see cref="IViewTaggerProvider"/>).
+    /// Base type of all asynchronous tagger providers (<see cref="ITaggerProvider"/> and <see
+    // cref="IViewTaggerProvider"/>).
     /// </summary>
     internal abstract partial class AbstractAsynchronousTaggerProvider<TTag>
         where TTag : ITag
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// The behavior the tagger engine will have when text changes happen to the subject buffer
         /// it is attached to.  Most taggers can simply use <see cref="TaggerTextChangeBehavior.None"/>.
         /// However, advanced taggers that want to perform specialized behavior depending on what has
-        /// actually changed in the file can specify <see cref="TaggerTextChangeBehavior.TrackTextChanges"/>.
+        /// actually changed in the file can specify <see
+        // cref="TaggerTextChangeBehavior.TrackTextChanges"/>.
         ///
         /// If this is specified the tagger engine will track text changes and pass them along as
         /// <see cref="TaggerContext{TTag}.TextChangeRange"/> when calling
@@ -67,17 +69,22 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         protected virtual SpanTrackingMode SpanTrackingMode => SpanTrackingMode.EdgeExclusive;
 
         /// <summary>
-        /// Global options controlling if the tagger should tag or not.  These correspond to user facing options to
+        /// Global options controlling if the tagger should tag or not.  These correspond to user facing
+        // options to
         /// completely disable a feature or not.
         /// <para>
-        /// An empty enumerable can be returned to indicate that this tagger should run unconditionally.</para>
+        /// An empty enumerable can be returned to indicate that this tagger should run
+        // unconditionally.</para>
         /// </summary>
-        /// <remarks>All values must either be an <see cref="Option2{T}"/> or a <see cref="PerLanguageOption2{T}"/>.</remarks>
+        /// <remarks>All values must either be an <see cref="Option2{T}"/> or a <see
+        // cref="PerLanguageOption2{T}"/>.</remarks>
         protected virtual ImmutableArray<IOption2> Options => ImmutableArray<IOption2>.Empty;
 
         /// <summary>
-        /// Options controlling the feature that should be used to determine if the feature should recompute tags.
-        /// These generally correspond to user facing options to change how a feature behaves if it is running.
+        /// Options controlling the feature that should be used to determine if the feature should recompute
+        // tags.
+        /// These generally correspond to user facing options to change how a feature behaves if it is
+        // running.
         /// </summary>
         protected virtual ImmutableArray<IOption2> FeatureOptions => ImmutableArray<IOption2>.Empty;
 
@@ -94,15 +101,18 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         protected virtual TaggerDelay AddedTagNotificationDelay => TaggerDelay.NearImmediate;
 
         /// <summary>
-        /// Whether or not events from the <see cref="ITaggerEventSource"/> should cancel in-flight tag-computation.
+        /// Whether or not events from the <see cref="ITaggerEventSource"/> should cancel in-flight
+        // tag-computation.
         /// </summary>
         protected virtual bool CancelOnNewWork { get; }
 
         protected virtual void BeforeTagsChanged(ITextSnapshot snapshot) { }
 
         /// <summary>
-        /// Comparer used to check if two tags are the same.  Used so that when new tags are produced, they can be
-        /// appropriately 'diffed' to determine what changes to actually report in <see cref="ITagger{T}.TagsChanged"/>.
+        /// Comparer used to check if two tags are the same.  Used so that when new tags are produced, they
+        // can be
+        /// appropriately 'diffed' to determine what changes to actually report in <see
+        // cref="ITagger{T}.TagsChanged"/>.
         /// <para>
         /// Subclasses should always override this.  It is only virtual for binary compat.
         /// </para>
@@ -226,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// notifications from the <see cref="ITaggerEventSource"/> that something has changed, and
         /// will only be called from the UI thread.  The tagger infrastructure will then determine
         /// the <see cref="DocumentSnapshotSpan"/>s associated with these <see cref="SnapshotSpan"/>s
-        /// and will asynchronously call into <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/> at some point in
+        /// and will asynchronously call into <see cref="ProduceTagsAsync(TaggerContext{TTag},
+        // CancellationToken)"/> at some point in
         /// the future to produce tags for these spans.
         /// </summary>
         protected virtual IEnumerable<SnapshotSpan> GetSpansToTag(
@@ -241,8 +252,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         }
 
         /// <summary>
-        /// Creates the <see cref="ITaggerEventSource"/> that notifies the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/>
-        /// that it should recompute tags for the text buffer after an appropriate <see cref="TaggerDelay"/>.
+        /// Creates the <see cref="ITaggerEventSource"/> that notifies the <see
+        // cref="AbstractAsynchronousTaggerProvider{TTag}"/>
+        /// that it should recompute tags for the text buffer after an appropriate <see
+        // cref="TaggerDelay"/>.
         /// </summary>
         protected abstract ITaggerEventSource CreateEventSource(
             ITextView? textView,

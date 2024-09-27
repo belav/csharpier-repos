@@ -14,12 +14,14 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         Represents the mapping between a .NET type and a database type.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public abstract class RelationalTypeMapping : CoreTypeMapping
@@ -32,15 +34,22 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
         /// <summary>
         ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object.
         /// </summary>
-        /// <param name="coreParameters">Parameters for the <see cref="CoreTypeMapping" /> base class.</param>
+        /// <param name="coreParameters">Parameters for the <see cref="CoreTypeMapping" /> base
+        // class.</param>
         /// <param name="storeType">The name of the database type.</param>
-        /// <param name="storeTypePostfix">Indicates which values should be appended to the store type name.</param>
+        /// <param name="storeTypePostfix">Indicates which values should be appended to the store type
+        // name.</param>
         /// <param name="dbType">The <see cref="System.Data.DbType" /> to be used.</param>
-        /// <param name="unicode">A value indicating whether the type should handle Unicode data or not.</param>
-        /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
-        /// <param name="fixedLength">A value indicating whether the type is constrained to fixed-length data.</param>
-        /// <param name="precision">The precision of data the property is configured to store, or null if no size is configured.</param>
-        /// <param name="scale">The scale of data the property is configured to store, or null if no size is configured.</param>
+        /// <param name="unicode">A value indicating whether the type should handle Unicode data or
+        // not.</param>
+        /// <param name="size">The size of data the property is configured to store, or null if no size is
+        // configured.</param>
+        /// <param name="fixedLength">A value indicating whether the type is constrained to fixed-length
+        // data.</param>
+        /// <param name="precision">The precision of data the property is configured to store, or null if no
+        // size is configured.</param>
+        /// <param name="scale">The scale of data the property is configured to store, or null if no size is
+        // configured.</param>
         public RelationalTypeMappingParameters(
             CoreTypeMappingParameters coreParameters,
             string storeType,
@@ -115,7 +124,8 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
         ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given
         ///     core parameters.
         /// </summary>
-        /// <param name="coreParameters">Parameters for the <see cref="CoreTypeMapping" /> base class.</param>
+        /// <param name="coreParameters">Parameters for the <see cref="CoreTypeMapping" /> base
+        // class.</param>
         /// <returns>The new parameter object.</returns>
         public RelationalTypeMappingParameters WithCoreParameters(
             in CoreTypeMappingParameters coreParameters
@@ -137,7 +147,8 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
         ///     mapping info.
         /// </summary>
         /// <param name="mappingInfo">The mapping info containing the facets to use.</param>
-        /// <param name="storeTypePostfix">The new postfix, or <see langword="null" /> to leave unchanged.</param>
+        /// <param name="storeTypePostfix">The new postfix, or <see langword="null" /> to leave
+        // unchanged.</param>
         /// <returns>The new parameter object.</returns>
         public RelationalTypeMappingParameters WithTypeMappingInfo(
             in RelationalTypeMappingInfo mappingInfo,
@@ -161,7 +172,8 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
         /// </summary>
         /// <param name="storeType">The new store type name.</param>
         /// <param name="size">The new size.</param>
-        /// <param name="storeTypePostfix">The new postfix, or <see langword="null" /> to leave unchanged.</param>
+        /// <param name="storeTypePostfix">The new postfix, or <see langword="null" /> to leave
+        // unchanged.</param>
         /// <returns>The new parameter object.</returns>
         public RelationalTypeMappingParameters WithStoreTypeAndSize(
             string storeType,
@@ -181,10 +193,13 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
             );
 
         /// <summary>
-        ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given precision and scale
+        ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given
+        // precision and scale
         /// </summary>
-        /// <param name="precision">The precision of data the property is configured to store, or null if no size is configured.</param>
-        /// <param name="scale">The scale of data the property is configured to store, or null if no size is configured.</param>
+        /// <param name="precision">The precision of data the property is configured to store, or null if no
+        // size is configured.</param>
+        /// <param name="scale">The scale of data the property is configured to store, or null if no size is
+        // configured.</param>
         /// <returns>The new parameter object.</returns>
         public RelationalTypeMappingParameters WithPrecisionAndScale(int? precision, int? scale) =>
             new(
@@ -200,9 +215,11 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
             );
 
         /// <summary>
-        ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given precision.
+        ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given
+        // precision.
         /// </summary>
-        /// <param name="precision">The precision of data the property is configured to store, or null if no size is configured.</param>
+        /// <param name="precision">The precision of data the property is configured to store, or null if no
+        // size is configured.</param>
         /// <returns>The new parameter object.</returns>
         public RelationalTypeMappingParameters WithPrecision(int? precision) =>
             new(
@@ -218,9 +235,11 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
             );
 
         /// <summary>
-        ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given scale.
+        ///     Creates a new <see cref="RelationalTypeMappingParameters" /> parameter object with the given
+        // scale.
         /// </summary>
-        /// <param name="scale">The scale of data the property is configured to store, or null if no size is configured.</param>
+        /// <param name="scale">The scale of data the property is configured to store, or null if no size is
+        // configured.</param>
         /// <returns>The new parameter object.</returns>
         public RelationalTypeMappingParameters WithScale(int? scale) =>
             new(
@@ -242,8 +261,10 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
         /// <param name="converter">The converter.</param>
         /// <param name="comparer">The comparer.</param>
         /// <param name="keyComparer">The key comparer.</param>
-        /// <param name="elementMapping">The element mapping, or <see langword="null" /> for non-collection mappings.</param>
-        /// <param name="jsonValueReaderWriter">The JSON reader/writer, or <see langword="null" /> to leave unchanged.</param>
+        /// <param name="elementMapping">The element mapping, or <see langword="null" /> for non-collection
+        // mappings.</param>
+        /// <param name="jsonValueReaderWriter">The JSON reader/writer, or <see langword="null" /> to leave
+        // unchanged.</param>
         /// <returns>The new parameter object.</returns>
         public RelationalTypeMappingParameters WithComposedConverter(
             ValueConverter? converter,
@@ -296,7 +317,8 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
         typeof(DbDataReader).GetRuntimeMethod(name, new[] { typeof(int) })!;
 
     /// <summary>
-    ///     Gets the mapping to be used when the only piece of information is that there is a null value.
+    ///     Gets the mapping to be used when the only piece of information is that there is a null
+    // value.
     /// </summary>
     public static readonly RelationalTypeMapping NullMapping = NullTypeMapping.Default;
 
@@ -333,12 +355,18 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="clrType">The .NET type.</param>
     /// <param name="dbType">The <see cref="System.Data.DbType" /> to be used.</param>
-    /// <param name="unicode">A value indicating whether the type should handle Unicode data or not.</param>
-    /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
-    /// <param name="fixedLength">A value indicating whether the type has fixed length data or not.</param>
-    /// <param name="precision">The precision of data the property is configured to store, or null if no precision is configured.</param>
-    /// <param name="scale">The scale of data the property is configured to store, or null if no scale is configured.</param>
-    /// <param name="jsonValueReaderWriter">Handles reading and writing JSON values for instances of the mapped type.</param>
+    /// <param name="unicode">A value indicating whether the type should handle Unicode data or
+    // not.</param>
+    /// <param name="size">The size of data the property is configured to store, or null if no size is
+    // configured.</param>
+    /// <param name="fixedLength">A value indicating whether the type has fixed length data or
+    // not.</param>
+    /// <param name="precision">The precision of data the property is configured to store, or null if no
+    // precision is configured.</param>
+    /// <param name="scale">The scale of data the property is configured to store, or null if no scale
+    // is configured.</param>
+    /// <param name="jsonValueReaderWriter">Handles reading and writing JSON values for instances of the
+    // mapped type.</param>
     protected RelationalTypeMapping(
         string storeType,
         Type clrType,
@@ -403,12 +431,14 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
     public virtual int? Size => Parameters.Size;
 
     /// <summary>
-    ///     Gets the precision of data the property is configured to store, or null if no precision is configured.
+    ///     Gets the precision of data the property is configured to store, or null if no precision is
+    // configured.
     /// </summary>
     public virtual int? Precision => Parameters.Precision;
 
     /// <summary>
-    ///     Gets the scale of data the property is configured to store, or null if no scale is configured.
+    ///     Gets the scale of data the property is configured to store, or null if no scale is
+    // configured.
     /// </summary>
     public virtual int? Scale => Parameters.Scale;
 
@@ -437,7 +467,8 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
-    /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
+    /// <param name="size">The size of data the property is configured to store, or null if no size is
+    // configured.</param>
     /// <returns>The newly created mapping.</returns>
     public virtual RelationalTypeMapping WithStoreTypeAndSize(string storeType, int? size) =>
         Clone(Parameters.WithStoreTypeAndSize(storeType, size));
@@ -445,8 +476,10 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
-    /// <param name="precision">The precision of data the property is configured to store, or null if no size is configured.</param>
-    /// <param name="scale">The scale of data the property is configured to store, or null if no size is configured.</param>
+    /// <param name="precision">The precision of data the property is configured to store, or null if no
+    // size is configured.</param>
+    /// <param name="scale">The scale of data the property is configured to store, or null if no size is
+    // configured.</param>
     /// <returns>The newly created mapping.</returns>
     public virtual RelationalTypeMapping WithPrecisionAndScale(int? precision, int? scale) =>
         Clone(Parameters.WithPrecisionAndScale(precision, scale));
@@ -482,14 +515,22 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
     ///     Clones the type mapping to update any parameter if needed.
     /// </summary>
     /// <param name="mappingInfo">The mapping info containing the facets to use.</param>
-    /// <param name="storeTypePostfix">The new postfix, or <see langword="null" /> to leave unchanged.</param>
-    /// <param name="clrType">The .NET type used in the EF model, or <see langword="null" /> to leave unchanged.</param>
-    /// <param name="converter">The value converter, or <see langword="null" /> to leave unchanged.</param>
-    /// <param name="comparer">The value comparer, or <see langword="null" /> to leave unchanged.</param>
-    /// <param name="keyComparer">The key value comparer, or <see langword="null" /> to leave unchanged.</param>
-    /// <param name="providerValueComparer">The provider value comparer, or <see langword="null" /> to leave unchanged.</param>
-    /// <param name="elementMapping">The element mapping, or <see langword="null" /> to leave unchanged.</param>
-    /// <param name="jsonValueReaderWriter">The JSON reader/writer, or <see langword="null" /> to leave unchanged.</param>
+    /// <param name="storeTypePostfix">The new postfix, or <see langword="null" /> to leave
+    // unchanged.</param>
+    /// <param name="clrType">The .NET type used in the EF model, or <see langword="null" /> to leave
+    // unchanged.</param>
+    /// <param name="converter">The value converter, or <see langword="null" /> to leave
+    // unchanged.</param>
+    /// <param name="comparer">The value comparer, or <see langword="null" /> to leave
+    // unchanged.</param>
+    /// <param name="keyComparer">The key value comparer, or <see langword="null" /> to leave
+    // unchanged.</param>
+    /// <param name="providerValueComparer">The provider value comparer, or <see langword="null" /> to
+    // leave unchanged.</param>
+    /// <param name="elementMapping">The element mapping, or <see langword="null" /> to leave
+    // unchanged.</param>
+    /// <param name="jsonValueReaderWriter">The JSON reader/writer, or <see langword="null" /> to leave
+    // unchanged.</param>
     /// <returns>The cloned mapping, or the original mapping if no clone was needed.</returns>
     public virtual RelationalTypeMapping Clone(
         in RelationalTypeMappingInfo? mappingInfo = null,
@@ -586,7 +627,8 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
     /// <param name="command">The command the parameter should be created on.</param>
     /// <param name="name">The name of the parameter.</param>
     /// <param name="value">The value to be assigned to the parameter.</param>
-    /// <param name="nullable">A value indicating whether the parameter should be a nullable type.</param>
+    /// <param name="nullable">A value indicating whether the parameter should be a nullable
+    // type.</param>
     /// <param name="direction">The direction of the parameter.</param>
     /// <returns>The newly created parameter.</returns>
     public virtual DbParameter CreateParameter(

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Threading.Tasks;
@@ -138,22 +139,26 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 fixedSource: fixtest,
                 baselineExpected: new[]
                 {
-                    // /0/Test0.cs(8,14): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. message.
+                    // /0/Test0.cs(8,14): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute'
+                    // can break functionality when AOT compiling. message.
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(8, 14, 8, 18)
                         .WithArguments("C.M1()", " message.", ""),
-                    // /0/Test0.cs(12,24): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. message.
+                    // /0/Test0.cs(12,24): warning IL3050: Using member 'C.M1()' which has
+                    // 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. message.
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(12, 24, 12, 30)
                         .WithArguments("C.M1()", " message.", ""),
-                    // /0/Test0.cs(16,25): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. message.
+                    // /0/Test0.cs(16,25): warning IL3050: Using member 'C.M1()' which has
+                    // 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. message.
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(16, 25, 16, 31)
                         .WithArguments("C.M1()", " message.", ""),
-                    // /0/Test0.cs(23,25): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. message.
+                    // /0/Test0.cs(23,25): warning IL3050: Using member 'C.M1()' which has
+                    // 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. message.
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(23, 25, 23, 31)
@@ -161,7 +166,8 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 },
                 fixedExpected: new[]
                 {
-                    // /0/Test0.cs(26,10): error CS7036: There is no argument given that corresponds to the required formal parameter 'message' of 'RequiresDynamicCodeAttribute.RequiresDynamicCodeAttribute(string)'
+                    // /0/Test0.cs(26,10): error CS7036: There is no argument given that corresponds to the required
+                    // formal parameter 'message' of 'RequiresDynamicCodeAttribute.RequiresDynamicCodeAttribute(string)'
                     DiagnosticResult
                         .CompilerError("CS7036")
                         .WithSpan(26, 10, 26, 31)
@@ -193,7 +199,8 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 """;
             var diag = new[]
             {
-                // /0/Test0.cs(11,16): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
+                // /0/Test0.cs(11,16): warning IL3050: Using member 'C.M1()' which has
+                // 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresDynamicCode)
                     .WithSpan(11, 16, 11, 20)
@@ -240,13 +247,15 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 	}
                 }
                 """;
-            // Roslyn currently doesn't simplify the attribute name properly, see https://github.com/dotnet/roslyn/issues/52039
+            // Roslyn currently doesn't simplify the attribute name properly, see
+            // https://github.com/dotnet/roslyn/issues/52039
             return VerifyRequiresDynamicCodeCodeFix(
                 source: src,
                 fixedSource: fix,
                 baselineExpected: new[]
                 {
-                    // /0/Test0.cs(11,22): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
+                    // /0/Test0.cs(11,22): warning IL3050: Using member 'C.M1()' which has
+                    // 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(11, 22, 11, 26)
@@ -288,13 +297,15 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                     public C() => M1();
                 }
                 """;
-            // Roslyn currently doesn't simplify the attribute name properly, see https://github.com/dotnet/roslyn/issues/52039
+            // Roslyn currently doesn't simplify the attribute name properly, see
+            // https://github.com/dotnet/roslyn/issues/52039
             return VerifyRequiresDynamicCodeCodeFix(
                 source: src,
                 fixedSource: fix,
                 baselineExpected: new[]
                 {
-                    // /0/Test0.cs(9,16): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
+                    // /0/Test0.cs(9,16): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute'
+                    // can break functionality when trimming application code. message.
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(9, 16, 9, 20)
@@ -302,7 +313,8 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 },
                 fixedExpected: new[]
                 {
-                    // /0/Test0.cs(9,6): error CS7036: There is no argument given that corresponds to the required formal parameter 'message' of 'RequiresDynamicCodeAttribute.RequiresDynamicCodeAttribute(string)'
+                    // /0/Test0.cs(9,6): error CS7036: There is no argument given that corresponds to the required
+                    // formal parameter 'message' of 'RequiresDynamicCodeAttribute.RequiresDynamicCodeAttribute(string)'
                     DiagnosticResult
                         .CompilerError("CS7036")
                         .WithSpan(9, 6, 9, 27)
@@ -331,7 +343,8 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 """;
             var diag = new[]
             {
-                // /0/Test0.cs(9,12): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
+                // /0/Test0.cs(9,12): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute'
+                // can break functionality when trimming application code. message.
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresDynamicCode)
                     .WithSpan(9, 12, 9, 16)
@@ -383,12 +396,14 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 """;
             var diag = new[]
             {
-                // /0/Test0.cs(12,16): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
+                // /0/Test0.cs(12,16): warning IL3050: Using member 'C.M1()' which has
+                // 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresDynamicCode)
                     .WithSpan(12, 16, 12, 20)
                     .WithArguments("C.M1()", " message.", ""),
-                // /0/Test0.cs(13,17): warning IL3050: Using member 'C.M1()' which has 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
+                // /0/Test0.cs(13,17): warning IL3050: Using member 'C.M1()' which has
+                // 'RequiresDynamicCodeAttribute' can break functionality when trimming application code. message.
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresDynamicCode)
                     .WithSpan(13, 17, 13, 21)

@@ -14,7 +14,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     /// <summary>
-    /// Simplified version of <see cref="VersionedPullCache{TCheapVersion, TExpensiveVersion}"/> that only uses a
+    /// Simplified version of <see cref="VersionedPullCache{TCheapVersion, TExpensiveVersion}"/> that
+    // only uses a
     /// single cheap key to check results against.
     /// </summary>
     internal class VersionedPullCache<TVersion> : VersionedPullCache<TVersion, object?>

@@ -55,12 +55,14 @@ namespace System.Runtime.InteropServices.Tests
             };
 
             // IntPtr/UIntPtr objects are _always_ converted to int/uint respectively.
-            // See OleVariant::MarshalOleVariantForObject conversion from ELEMENT_TYPE_I/ELEMENT_TYPE_U to VT_INT/VT_UINT
+            // See OleVariant::MarshalOleVariantForObject conversion from ELEMENT_TYPE_I/ELEMENT_TYPE_U to
+            // VT_INT/VT_UINT
             yield return new object[] { (IntPtr)10, VarEnum.VT_INT, (IntPtr)10, 10 };
             yield return new object[] { (UIntPtr)10, VarEnum.VT_UINT, (IntPtr)10, (uint)10 };
 
             // IntPtr/UIntPtr objects in arrays are converted to the appropriate pointer width.
-            // See OleVariant::GetVarTypeForTypeHandle conversion from IntPtr/UIntPtr to VT_INT/VT_UINT or VT_I8/VT_UI8 based on bitness
+            // See OleVariant::GetVarTypeForTypeHandle conversion from IntPtr/UIntPtr to VT_INT/VT_UINT or
+            // VT_I8/VT_UI8 based on bitness
             if (IntPtr.Size == 4)
             {
                 yield return new object[]

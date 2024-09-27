@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,7 +40,8 @@ namespace System.Net.Http
             "d MMM yyyy H:m:s", // RFC 5322 no day-of-week, no zone
         };
 
-        // Valid header token characters are within the range 0x20 < c < 0x7F excluding the following characters
+        // Valid header token characters are within the range 0x20 < c < 0x7F excluding the following
+        // characters
         private const string NonTokenChars = "()<>@,;:\\\"/[]?={}";
 
         /// <summary>
@@ -126,7 +128,8 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="type">The type to test.</param>
         /// <returns>
-        ///   <c>true</c> if <paramref name="type"/> is a <see cref="JToken"/> type; otherwise, <c>false</c>.
+        ///   <c>true</c> if <paramref name="type"/> is a <see cref="JToken"/> type; otherwise,
+        // <c>false</c>.
         /// </returns>
         public static bool IsJTokenType(Type type)
         {
@@ -134,7 +137,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Creates an empty <see cref="HttpContentHeaders"/> instance. The only way is to get it from a dummy
+        /// Creates an empty <see cref="HttpContentHeaders"/> instance. The only way is to get it from a
+        // dummy
         /// <see cref="HttpContent"/> instance.
         /// </summary>
         /// <returns>The created instance.</returns>
@@ -236,7 +240,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Parses valid integer strings with no leading signs, whitespace or other <see cref="NumberStyles"/>
+        /// Parses valid integer strings with no leading signs, whitespace or other <see
+        // cref="NumberStyles"/>
         /// </summary>
         /// <param name="value">The value to parse</param>
         /// <param name="result">The result</param>

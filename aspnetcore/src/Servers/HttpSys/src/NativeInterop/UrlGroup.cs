@@ -123,7 +123,8 @@ internal sealed partial class UrlGroup : IDisposable
     internal unsafe void AttachToQueue()
     {
         CheckDisposed();
-        // Set the association between request queue and url group. After this, requests for registered urls will
+        // Set the association between request queue and url group. After this, requests for registered urls
+        // will
         // get delivered to this request queue.
 
         var info = new HTTP_BINDING_INFO
@@ -140,7 +141,8 @@ internal sealed partial class UrlGroup : IDisposable
     internal unsafe void DetachFromQueue()
     {
         CheckDisposed();
-        // Break the association between request queue and url group. After this, requests for registered urls
+        // Break the association between request queue and url group. After this, requests for registered
+        // urls
         // will get 503s.
         // Note that this method may be called multiple times (Stop() and then Abort()). This
         // is fine since http.sys allows to set HttpServerBindingProperty multiple times for valid

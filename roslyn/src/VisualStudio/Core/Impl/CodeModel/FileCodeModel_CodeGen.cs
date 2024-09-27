@@ -182,7 +182,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                         throw Exceptions.ThrowEInvalidArg();
                     }
 
-                    // TODO(DustinCa): This is duplicating the C# source. Is it true that non-zero based arrays are supported?
+                    // TODO(DustinCa): This is duplicating the C# source. Is it true that non-zero based arrays are
+                    // supported?
                     var lowerBound = realArray.GetLowerBound(0);
                     var upperBound = realArray.GetUpperBound(0);
 

@@ -47,7 +47,8 @@ namespace System.Runtime
             /// We expect the stackwalker to adjust return addresses to point at 'return address - 1' so that we
             /// can use an interval here that is closed at the start and open at the end.  When a hardware fault
             /// occurs, the IP is pointing at the start of the instruction and will not be adjusted by the
-            /// stackwalker.  Therefore, it will naturally work with an interval that has a closed start and open
+            /// stackwalker.  Therefore, it will naturally work with an interval that has a closed start and
+            // open
             /// end.
             ///</summary>
             public bool ContainsCodeOffset(uint codeOffset)
@@ -64,7 +65,8 @@ namespace System.Runtime
         }
 
 #pragma warning disable IDE0060
-        // This is a fail-fast function used by the runtime as a last resort that will terminate the process with
+        // This is a fail-fast function used by the runtime as a last resort that will terminate the process
+        // with
         // as little effort as possible. No guarantee is made about the semantics of this fail-fast.
 #if !NATIVEAOT
         [DoesNotReturn]
@@ -84,7 +86,8 @@ namespace System.Runtime
 #pragma warning restore IDE0060
 
         // Given an address pointing somewhere into a managed module, get the classlib-defined fail-fast
-        // function and invoke it.  Any failure to find and invoke the function, or if it returns, results in
+        // function and invoke it.  Any failure to find and invoke the function, or if it returns, results
+        // in
         // MRT-defined fail-fast behavior.
 #if !NATIVEAOT
         [DoesNotReturn]
@@ -125,7 +128,8 @@ namespace System.Runtime
                 // disallow all exceptions leaking out of callbacks
             }
 
-            // The classlib's function should never return and should not throw. If it does, then we fail our way...
+            // The classlib's function should never return and should not throw. If it does, then we fail our
+            // way...
 #endif
             FallbackFailFast(reason, unhandledException);
         }
@@ -258,7 +262,8 @@ namespace System.Runtime
                 // disallow all exceptions leaking out of callbacks
             }
 
-            // The classlib's function should never return and should not throw. If it does, then we fail our way...
+            // The classlib's function should never return and should not throw. If it does, then we fail our
+            // way...
             FallbackFailFast(reason, unhandledException);
 #else
             FailFastViaClasslib(reason, unhandledException, classlibAddress);
@@ -330,7 +335,8 @@ namespace System.Runtime
 
         // Given an ExceptionID and an address pointing somewhere into a managed module, get
         // an exception object of a type that the module containing the given address will understand.
-        // This finds the classlib-defined GetRuntimeException function and asks it for the exception object.
+        // This finds the classlib-defined GetRuntimeException function and asks it for the exception
+        // object.
         internal static Exception GetClasslibException(ExceptionIDs id, IntPtr address)
         {
 #if NATIVEAOT
@@ -379,8 +385,10 @@ namespace System.Runtime
             return e;
         }
 #if NATIVEAOT
-        // Given an ExceptionID and an MethodTable address, get an exception object of a type that the module containing
-        // the given address will understand. This finds the classlib-defined GetRuntimeException function and asks
+        // Given an ExceptionID and an MethodTable address, get an exception object of a type that the
+        // module containing
+        // the given address will understand. This finds the classlib-defined GetRuntimeException function
+        // and asks
         // it for the exception object.
         internal static Exception GetClasslibExceptionFromEEType(
             ExceptionIDs id,
@@ -419,8 +427,10 @@ namespace System.Runtime
             return e;
         }
 
-        // RhExceptionHandling_ functions are used to throw exceptions out of our asm helpers. We tail-call from
-        // the asm helpers to these functions, which performs the throw. The tail-call is important: it ensures that
+        // RhExceptionHandling_ functions are used to throw exceptions out of our asm helpers. We tail-call
+        // from
+        // the asm helpers to these functions, which performs the throw. The tail-call is important: it
+        // ensures that
         // the stack is crawlable from within these functions.
         [RuntimeExport("RhExceptionHandling_ThrowClasslibOverflowException")]
         public static void ThrowClasslibOverflowException(IntPtr address)
@@ -434,7 +444,8 @@ namespace System.Runtime
         [RuntimeExport("RhExceptionHandling_ThrowClasslibDivideByZeroException")]
         public static void ThrowClasslibDivideByZeroException(IntPtr address)
         {
-            // Throw the divide by zero exception defined by the classlib, using the return address of the asm helper
+            // Throw the divide by zero exception defined by the classlib, using the return address of the asm
+            // helper
             // to find the correct classlib.
 
             throw GetClasslibException(ExceptionIDs.DivideByZero, address);

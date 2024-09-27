@@ -64,11 +64,15 @@ public static class FileSystemDebugInfo
 }
 
 /// <summary>
-/// Due to the increasing number of context indexing services (mssearch.exe, etrust) operating in our test run machines, Directory operations like Delete and Move
-/// are not guaranteed to work in first attempt. This utility class do these operations in a fail safe manner
+/// Due to the increasing number of context indexing services (mssearch.exe, etrust) operating in
+// our test run machines, Directory operations like Delete and Move
+/// are not guaranteed to work in first attempt. This utility class do these operations in a fail
+// safe manner
 /// Possible solutions
-///  - Set FileAttributes.NotContentIndex on the directory. But there is a race between creating the directory and setting this property. Other than using ACL, can't see a good solution
-///  - encourage labs to stop these services before a test run. This is under review by CLRLab but there are lots of other labs that do these too
+///  - Set FileAttributes.NotContentIndex on the directory. But there is a race between creating the
+// directory and setting this property. Other than using ACL, can't see a good solution
+///  - encourage labs to stop these services before a test run. This is under review by CLRLab but
+// there are lots of other labs that do these too
 ///  - fail and retry attempt: which is what this class does
 /// VSW 446086 and 473287 have more information on this.
 /// </summary>
@@ -162,7 +166,8 @@ public static class FailSafeDirectoryOperations
     }
 
     /// <summary>
-    /// It can take some time before the Directory.Exists will return false after a directory delete/Move
+    /// It can take some time before the Directory.Exists will return false after a directory
+    // delete/Move
     /// </summary>
     /// <param name="path"></param>
     private static void EnsureDirectoryNotExist(string path)

@@ -81,7 +81,8 @@ namespace System.Configuration
         {
             Type type = Type.GetType(typeName);
 
-            // This code is in System.Configuration.dll, but some of the classes we might want to load here are in System.dll.
+            // This code is in System.Configuration.dll, but some of the classes we might want to load here are
+            // in System.dll.
             if (type == null)
                 type = Type.GetType(typeName + ",System");
 

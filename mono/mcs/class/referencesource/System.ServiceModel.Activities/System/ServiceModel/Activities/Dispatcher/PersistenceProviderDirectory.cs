@@ -537,7 +537,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                         "Cannot call TryAddAssociations on an invisible context."
                     );
 
-                    // In the case when there is no store, if key collision is detected, the current instance will be aborted later.
+                    // In the case when there is no store, if key collision is detected, the current instance will be
+                    // aborted later.
                     // We should not add any of its keys to the keyMap.
                     if (this.store == null)
                     {
@@ -966,7 +967,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     this.loadsInProgress.TryGetValue(key, out waitHandle);
                     if (waitHandle != null)
                     {
-                        // Before we start waking up waiters, we need to remove the entry from the loadsInProgress dictionary,
+                        // Before we start waking up waiters, we need to remove the entry from the loadsInProgress
+                        // dictionary,
                         // otherwise they would just queue up again.
                         this.loadsInProgress.Remove(key);
                     }
@@ -1100,8 +1102,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             [SecuritySafeCritical]
             static void PromoteTransaction(Transaction transactionToPromote)
             {
-                // TransactionInterop.GetDtcTransaction has a link demand for full trust. If we are not running in full trust, don't make the call.
-                // If we are running in full trust, it is possible that we got invoked thru a cross AppDomain call from a partially trusted
+                // TransactionInterop.GetDtcTransaction has a link demand for full trust. If we are not running in
+                // full trust, don't make the call.
+                // If we are running in full trust, it is possible that we got invoked thru a cross AppDomain call
+                // from a partially trusted
                 // AppDomain. So extend the demand for full trust to a full demand.
                 if ((PartialTrustHelpers.AppDomainFullyTrusted) && (transactionToPromote != null))
                 {
@@ -1167,15 +1171,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 return thisPtr.Load();
             }
 
-            // Returns true if we found an entry in the cache, or an exception occurred. The exception is returned in the out parameter.
+            // Returns true if we found an entry in the cache, or an exception occurred. The exception is
+            // returned in the out parameter.
             bool LoadFromCache()
             {
                 bool completeSelf = false;
                 AsyncWaitHandle waitHandle = null;
 
-                // We need this while loop because if we end up trying to wait for the waitHandle returned by LoadInProgressWaitHandle
-                // and the call to WaitAsync returns true, then the event was signaled, but the callback was not called. So we need
-                // to try the load again. But we want to avoid a potential stack overflow that might result if we just called
+                // We need this while loop because if we end up trying to wait for the waitHandle returned by
+                // LoadInProgressWaitHandle
+                // and the call to WaitAsync returns true, then the event was signaled, but the callback was not
+                // called. So we need
+                // to try the load again. But we want to avoid a potential stack overflow that might result if we
+                // just called
                 // the callback routine and it called us again in a vicious cycle.
                 while (true)
                 {
@@ -1226,7 +1234,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 )
                             )
                             {
-                                // The waitHandle is signaled. So a load must have completed between the time we called LoadInProgressWaitHandle
+                                // The waitHandle is signaled. So a load must have completed between the time we called
+                                // LoadInProgressWaitHandle
                                 // and now. Loop back up to the top and check the cache again.
                                 continue;
                             }
@@ -1241,7 +1250,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             completeSelf = this.SyncContinue(reserveThrottleResult);
                         }
                     }
-                    // If we get here, WaitAsync returned false, so the callback will get called later or there wasn't a load
+                    // If we get here, WaitAsync returned false, so the callback will get called later or there wasn't a
+                    // load
                     // in progress, so we are moving forward to do the load. So break out of the while loop
                     break;
                 }
@@ -1429,14 +1439,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 else
                 {
-                    // A handle conflict occurred, but the instance still can't be found in the PPD's caches.  This can happen in three cases:
+                    // A handle conflict occurred, but the instance still can't be found in the PPD's caches.  This can
+                    // happen in three cases:
                     // 1.  The instance hasn't made it to the cache yet.
                     // 2.  The instance has already been removed from the cache.
-                    // 3.  We're looking up by key, and a key association is in the database but not the cache because we are racing a key disassociation.
-                    // All three of these cases are unstable and will resolve themselves in time, however none provide a notification that we can wait for.  So we keep
-                    // trying in a loop.  This is a little scary, but should converge in all cases according to this analysis.
+                    // 3.  We're looking up by key, and a key association is in the database but not the cache because
+                    // we are racing a key disassociation.
+                    // All three of these cases are unstable and will resolve themselves in time, however none provide a
+                    // notification that we can wait for.  So we keep
+                    // trying in a loop.  This is a little scary, but should converge in all cases according to this
+                    // analysis.
                     //
-                    // This is issued on a new IO thread both to give the scenario some time to resolve (no use having too tight of a loop) and to avoid a stack dive.
+                    // This is issued on a new IO thread both to give the scenario some time to resolve (no use having
+                    // too tight of a loop) and to avoid a stack dive.
                     ActionItem.Schedule(LoadOrCreateAsyncResult.handleLoadRetry, this);
                     return false;
                 }
@@ -1648,10 +1663,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     this.ppd.ThrowIfClosedOrAborted();
 
-                    // The InstanceStore is responsible for detecting and resolving ----s between creates.  If there is no store, we
-                    // do it here, taking advantage of the lock.  We don't do it as part of the initial lookup in order to avoid
-                    // holding the lock while acquiring the throttle.  Instead, we recheck here.  If we find it, we didn't need the
-                    // throttle after all - it is released in cleanup (as is the PersistenceContext that got created).  If we don't
+                    // The InstanceStore is responsible for detecting and resolving ----s between creates.  If there is
+                    // no store, we
+                    // do it here, taking advantage of the lock.  We don't do it as part of the initial lookup in order
+                    // to avoid
+                    // holding the lock while acquiring the throttle.  Instead, we recheck here.  If we find it, we
+                    // didn't need the
+                    // throttle after all - it is released in cleanup (as is the PersistenceContext that got created).
+                    // If we don't
                     // find it, we add it atomically under the same lock.
                     if (this.ppd.store == null)
                     {
@@ -1672,7 +1691,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             return true;
                         }
 
-                        // In the case when there is no store, if key collision is detected, the current instance will be aborted later.
+                        // In the case when there is no store, if key collision is detected, the current instance will be
+                        // aborted later.
                         // We should not add any of its keys to the keyMap.
                         foreach (InstanceKey instanceKey in this.context.AssociatedKeys)
                         {

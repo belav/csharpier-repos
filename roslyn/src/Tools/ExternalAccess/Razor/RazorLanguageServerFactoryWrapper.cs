@@ -127,8 +127,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             {
                 if (_razorTestCapabilitiesProvider is not null)
                 {
-                    // To avoid exposing types from MS.VS.LanguageServer.Protocol types we serialize and deserialize the capabilities
-                    // so we can just pass string around. This is obviously not great for perf, but it is only used in Razor tests.
+                    // To avoid exposing types from MS.VS.LanguageServer.Protocol types we serialize and deserialize the
+                    // capabilities
+                    // so we can just pass string around. This is obviously not great for perf, but it is only used in
+                    // Razor tests.
                     var clientCapabilitiesJson = JsonConvert.SerializeObject(clientCapabilities);
                     var serverCapabilitiesJson =
                         _razorTestCapabilitiesProvider.GetServerCapabilitiesJson(

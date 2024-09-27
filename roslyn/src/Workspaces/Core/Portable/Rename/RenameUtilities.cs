@@ -29,9 +29,12 @@ namespace Microsoft.CodeAnalysis.Rename
             string replacementText
         )
         {
-            // If the below Single() assert fails then it means the token has gone through a rename session where
-            // it obtained an AliasSyntaxAnnotation and it is going through another rename session. Make sure the token
-            // has only one annotation pertaining to the current session or try to extract only the current session annotation
+            // If the below Single() assert fails then it means the token has gone through a rename session
+            // where
+            // it obtained an AliasSyntaxAnnotation and it is going through another rename session. Make sure
+            // the token
+            // has only one annotation pertaining to the current session or try to extract only the current
+            // session annotation
             var originalAliasAnnotation = token.GetAnnotations(AliasAnnotation.Kind).Single();
             var originalAliasName = AliasAnnotation.GetAliasName(originalAliasAnnotation);
 
@@ -102,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Rename
         {
             if (IsSymbolDefinedInsideMethod(symbol))
             {
-                // if the symbol was declared inside of a method, don't check for conflicts in non-renamed documents.
+                // if the symbol was declared inside of a method, don't check for conflicts in non-renamed
+                // documents.
                 return renameLocations.Select(l => solution.GetRequiredDocument(l.DocumentId));
             }
             else
@@ -131,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 }
                 else
                 {
-                    // We are trying to figure out the projects that directly depend on the project that contains the declaration for
+                    // We are trying to figure out the projects that directly depend on the project that contains the
+                    // declaration for
                     // the rename symbol.  Other projects should not be affected by the rename.
                     var relevantProjects = projectIdsOfRenameSymbolDeclaration
                         .Concat(
@@ -170,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Rename
 
             if (symbol.IsOverride)
             {
-                // private-overrides aren't actually legal.  But if we see one, we tolerate it and search other projects in case
+                // private-overrides aren't actually legal.  But if we see one, we tolerate it and search other
+                // projects in case
                 // they override it.
                 // https://github.com/dotnet/roslyn/issues/25682
                 return false;
@@ -479,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 }
             }
 
-            // in case this is e.g. an overridden property accessor, we'll treat the property itself as the definition symbol
+            // in case this is e.g. an overridden property accessor, we'll treat the property itself as the
+            // definition symbol
             var property = await RenameUtilities
                 .TryGetPropertyFromAccessorOrAnOverrideAsync(
                     bestSymbol,

@@ -146,7 +146,8 @@ namespace MonoTests.System.Data
             ms.Close();
 
             //Test Properties of table
-            //Assert.AreEqual (tb1.RemotingFormat, dt.RemotingFormat, "#1 RemotingFormat property is Different");
+            //Assert.AreEqual (tb1.RemotingFormat, dt.RemotingFormat, "#1 RemotingFormat property is
+            // Different");
             Assert.AreEqual(
                 tb1.Columns.Count,
                 dt.Columns.Count,
@@ -243,7 +244,8 @@ namespace MonoTests.System.Data
             ms.Close();
 
             //Test Properties of table
-            //Assert.AreEqual (tb1.RemotingFormat, dt.RemotingFormat, "#1 RemotingFormat property is Different");
+            //Assert.AreEqual (tb1.RemotingFormat, dt.RemotingFormat, "#1 RemotingFormat property is
+            // Different");
             Assert.AreEqual(
                 tb1.Columns.Count,
                 dt.Columns.Count,
@@ -871,16 +873,16 @@ namespace MonoTests.System.Data
 
             //Constraints
             UniqueConstraint uKey = new UniqueConstraint(tb1.Columns["id"]);
-            /*
-            DataColumn[] parentColumns = new DataColumn[2];
-            parentColumns[0] = tb1.Columns["id"];
-            parentColumns[1] = tb1.Columns["name"];
-            DataColumn[] childColumns = new DataColumn[2];
-            childColumns[0] = tb4.Columns["ssn"];
-            childColumns[1] = tb4.Columns["Name"];
-            ForeignKeyConstraint fKey1 = new ForeignKeyConstraint(childColumns,
-                                          parentColumns);
-            */
+/*
+DataColumn[] parentColumns = new DataColumn[2];
+parentColumns[0] = tb1.Columns["id"];
+parentColumns[1] = tb1.Columns["name"];
+DataColumn[] childColumns = new DataColumn[2];
+childColumns[0] = tb4.Columns["ssn"];
+childColumns[1] = tb4.Columns["Name"];
+ForeignKeyConstraint fKey1 = new ForeignKeyConstraint(childColumns,
+parentColumns);
+*/
             ForeignKeyConstraint fKey1 = new ForeignKeyConstraint(
                 tb2.Columns["eid"],
                 tb1.Columns["id"]
@@ -1030,16 +1032,16 @@ namespace MonoTests.System.Data
 
             //Constraints
             UniqueConstraint uKey = new UniqueConstraint(tb1.Columns["id"]);
-            /*
-            DataColumn[] parentColumns = new DataColumn[2];
-            parentColumns[0] = tb1.Columns["id"];
-            parentColumns[1] = tb1.Columns["name"];
-            DataColumn[] childColumns = new DataColumn[2];
-            childColumns[0] = tb4.Columns["ssn"];
-            childColumns[1] = tb4.Columns["Name"];
-            ForeignKeyConstraint fKey1 = new ForeignKeyConstraint(childColumns,
-                                          parentColumns);
-            */
+/*
+DataColumn[] parentColumns = new DataColumn[2];
+parentColumns[0] = tb1.Columns["id"];
+parentColumns[1] = tb1.Columns["name"];
+DataColumn[] childColumns = new DataColumn[2];
+childColumns[0] = tb4.Columns["ssn"];
+childColumns[1] = tb4.Columns["Name"];
+ForeignKeyConstraint fKey1 = new ForeignKeyConstraint(childColumns,
+parentColumns);
+*/
             ForeignKeyConstraint fKey1 = new ForeignKeyConstraint(
                 tb2.Columns["eid"],
                 tb1.Columns["id"]

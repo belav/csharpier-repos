@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -49,7 +50,8 @@ namespace System.Web.Http.SelfHost.Channels
 
         /// <summary>
         /// Gets the envelope version that is used by endpoints that are configured to use an
-        /// <see cref="HttpBinding"/> binding.  Always returns <see cref="System.ServiceModel.EnvelopeVersion.None"/>.
+        /// <see cref="HttpBinding"/> binding.  Always returns <see
+        // cref="System.ServiceModel.EnvelopeVersion.None"/>.
         /// </summary>
         [SuppressMessage(
             "Microsoft.Performance",
@@ -77,7 +79,8 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the maximum amount of memory allocated for the buffer manager that manages the buffers
+        /// Gets or sets the maximum amount of memory allocated for the buffer manager that manages the
+        // buffers
         /// required by endpoints that use this binding.
         /// </summary>
         [DefaultValue(TransportDefaults.MaxBufferPoolSize)]
@@ -92,7 +95,8 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the maximum amount of memory that is allocated for use by the manager of the message
+        /// Gets or sets the maximum amount of memory that is allocated for use by the manager of the
+        // message
         /// buffers that receive messages from the channel.
         /// </summary>
         [DefaultValue(TransportDefaults.MaxBufferSize)]
@@ -121,7 +125,8 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the delegate which can configure the <see cref="HttpTransportBindingElement"/> that this binding creates.
+        /// Gets or sets the delegate which can configure the <see cref="HttpTransportBindingElement"/> that
+        // this binding creates.
         /// </summary>
         public Action<HttpTransportBindingElement> ConfigureTransportBindingElement
         {
@@ -180,7 +185,8 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets a value indicating whether incoming requests can be handled more efficiently synchronously or asynchronously.
+        /// Gets a value indicating whether incoming requests can be handled more efficiently synchronously
+        // or asynchronously.
         /// </summary>
         [SuppressMessage(
             "Microsoft.Design",

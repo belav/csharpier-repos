@@ -405,7 +405,8 @@ namespace System.ServiceModel.Channels
             base.OnOpening();
 
             // This check is necessary to avoid that the HostNameComparisonMode from the IIS listener address
-            // is copied in an ASP-Net hosted environment when the IIS hosted service acts as client of another destination service
+            // is copied in an ASP-Net hosted environment when the IIS hosted service acts as client of another
+            // destination service
             // (for example using WSDualHttpBinding in a routing service)
             if (this.HostedVirtualPath != null)
             {

@@ -138,7 +138,8 @@ namespace MonoTests.System.Windows.Markup
 
                 // String ValueSerializer is the only exceptional one that mostly fails ConvertToString().
                 // For remaining types, ConvertToString() should succeed.
-                // What is funny or annoying here is, that always return true for CanConvertToString() while everything fails at ConvertToString() on .NET.
+                // What is funny or annoying here is, that always return true for CanConvertToString() while
+                // everything fails at ConvertToString() on .NET.
                 if (t.UnderlyingType == typeof(string))
                     continue;
 
@@ -163,7 +164,8 @@ namespace MonoTests.System.Windows.Markup
                 {
                     Assert.IsTrue(v.CanConvertFromString(str, null), t.Name + "_" + str);
                     // FIXME: add tests for this large matrix someday.
-                    //Assert.AreEqual (test_values [i++], v.ConvertFromString (str, null), "value-" + t.Name + "_" + str);
+                    //Assert.AreEqual (test_values [i++], v.ConvertFromString (str, null), "value-" + t.Name + "_" +
+                    // str);
                 }
             }
         }

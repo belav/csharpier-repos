@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using Mono.Linker.Tests.Extensions;
@@ -203,7 +204,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     AddAssemblyAction(entry.Key, entry.Value);
             }
 
-            // Honoring descriptors causes a ton of stuff to be preserved.  That's good for normal use cases, but for
+            // Honoring descriptors causes a ton of stuff to be preserved.  That's good for normal use cases,
+            // but for
             // our test cases that pollutes the results
             IgnoreDescriptors(options.IgnoreDescriptors);
 
@@ -239,8 +241,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             // A list of expensive optimizations which should not run by default
             AddAdditionalArgument("--disable-opt", new[] { "ipconstprop" });
 
-            // Unity uses different argument format and needs to be able to translate to their format.  In order to make that easier
-            // we keep the information in flag + values format for as long as we can so that this information doesn't have to be parsed out of a single string
+            // Unity uses different argument format and needs to be able to translate to their format.  In order
+            // to make that easier
+            // we keep the information in flag + values format for as long as we can so that this information
+            // doesn't have to be parsed out of a single string
             foreach (var additionalArgument in options.AdditionalArguments)
                 AddAdditionalArgument(additionalArgument.Key, additionalArgument.Value);
         }

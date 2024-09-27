@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Routing;
 /// A builder for produding a mapping of keys to see <see cref="IRouteConstraint"/>.
 /// </summary>
 /// <remarks>
-/// <see cref="RouteConstraintBuilder"/> allows iterative building a set of route constraints, and will
+/// <see cref="RouteConstraintBuilder"/> allows iterative building a set of route constraints, and
+// will
 /// merge multiple entries for the same key.
 /// </remarks>
 public class RouteConstraintBuilder
@@ -90,13 +91,16 @@ internal class RouteConstraintBuilder
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="value">
-    /// The constraint instance. Must either be a string or an instance of <see cref="IRouteConstraint"/>.
+    /// The constraint instance. Must either be a string or an instance of <see
+    // cref="IRouteConstraint"/>.
     /// </param>
     /// <remarks>
-    /// If the <paramref name="value"/> is a string, it will be converted to a <see cref="RegexRouteConstraint"/>.
+    /// If the <paramref name="value"/> is a string, it will be converted to a <see
+    // cref="RegexRouteConstraint"/>.
     ///
     /// For example, the string <c>Product[0-9]+</c> will be converted to the regular expression
-    /// <c>^(Product[0-9]+)</c>. See <see cref="System.Text.RegularExpressions.Regex"/> for more details.
+    /// <c>^(Product[0-9]+)</c>. See <see cref="System.Text.RegularExpressions.Regex"/> for more
+    // details.
     /// </remarks>
     public void AddConstraint(string key, object value)
     {
@@ -131,10 +135,12 @@ internal class RouteConstraintBuilder
     /// Adds a constraint for the given key, resolved by the <see cref="IInlineConstraintResolver"/>.
     /// </summary>
     /// <param name="key">The key.</param>
-    /// <param name="constraintText">The text to be resolved by <see cref="IInlineConstraintResolver"/>.</param>
+    /// <param name="constraintText">The text to be resolved by <see
+    // cref="IInlineConstraintResolver"/>.</param>
     /// <remarks>
     /// The <see cref="IInlineConstraintResolver"/> can create <see cref="IRouteConstraint"/> instances
-    /// based on <paramref name="constraintText"/>. See <see cref="RouteOptions.ConstraintMap"/> to register
+    /// based on <paramref name="constraintText"/>. See <see cref="RouteOptions.ConstraintMap"/> to
+    // register
     /// custom constraint types.
     /// </remarks>
     public void AddResolvedConstraint(string key, string constraintText)

@@ -7,10 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         A SQL translator for LINQ <see cref="MethodCallExpression" /> expression representing an aggregate function.
+///         A SQL translator for LINQ <see cref="MethodCallExpression" /> expression representing an
+// aggregate function.
 ///     </para>
 ///     <para>
-///         This interface is typically used by database providers (and other extensions). It is generally
+///         This interface is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -21,7 +23,8 @@ public interface IAggregateMethodCallTranslator
     /// </summary>
     /// <param name="method">The method info from <see cref="MethodCallExpression.Method" />.</param>
     /// <param name="source">The source on which the aggregate method is applied.</param>
-    /// <param name="arguments">SQL representations of scalar <see cref="MethodCallExpression.Arguments" />.</param>
+    /// <param name="arguments">SQL representations of scalar <see cref="MethodCallExpression.Arguments"
+    // />.</param>
     /// <param name="logger">The query logger to use.</param>
     /// <returns>A SQL translation of the <see cref="MethodCallExpression" />.</returns>
     SqlExpression? Translate(

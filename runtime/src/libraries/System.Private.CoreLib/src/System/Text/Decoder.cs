@@ -62,13 +62,18 @@ namespace System.Text
 
         // Reset the Decoder
         //
-        // Normally if we call GetChars() and an error is thrown we don't change the state of the Decoder.  This
-        // would allow the caller to correct the error condition and try again (such as if they need a bigger buffer.)
+        // Normally if we call GetChars() and an error is thrown we don't change the state of the Decoder.
+        // This
+        // would allow the caller to correct the error condition and try again (such as if they need a
+        // bigger buffer.)
         //
-        // If the caller doesn't want to try again after GetChars() throws an error, then they need to call Reset().
+        // If the caller doesn't want to try again after GetChars() throws an error, then they need to call
+        // Reset().
         //
-        // Virtual implementation has to call GetChars with flush and a big enough buffer to clear a 0 byte string
-        // We avoid GetMaxCharCount() because a) we can't call the base encoder and b) it might be really big.
+        // Virtual implementation has to call GetChars with flush and a big enough buffer to clear a 0 byte
+        // string
+        // We avoid GetMaxCharCount() because a) we can't call the base encoder and b) it might be really
+        // big.
         public virtual void Reset()
         {
             byte[] byteTemp = Array.Empty<byte>();
@@ -229,7 +234,8 @@ namespace System.Text
         //
         // Note that if all of the input bytes are not consumed, then we'll do a /2, which means
         // that its likely that we didn't consume as many bytes as we could have.  For some
-        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger stream)
+        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger
+        // stream)
         public virtual void Convert(
             byte[] bytes,
             int byteIndex,
@@ -294,7 +300,8 @@ namespace System.Text
         //
         // Note that if all of the input bytes are not consumed, then we'll do a /2, which means
         // that its likely that we didn't consume as many bytes as we could have.  For some
-        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger stream)
+        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger
+        // stream)
         [CLSCompliant(false)]
         public virtual unsafe void Convert(
             byte* bytes,

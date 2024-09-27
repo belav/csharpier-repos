@@ -367,8 +367,10 @@ namespace ILCompiler.Dataflow
             Debug.Assert(entity is MethodDesc or FieldDesc);
 
             // Note that we're using `ShouldSuppressAnalysisWarningsForRequires` instead of `DoesMemberRequire`.
-            // This is because reflection access is actually problematic on all members which are in a "requires" scope
-            // so for example even instance methods. See for example https://github.com/dotnet/linker/issues/3140 - it's possible
+            // This is because reflection access is actually problematic on all members which are in a
+            // "requires" scope
+            // so for example even instance methods. See for example
+            // https://github.com/dotnet/linker/issues/3140 - it's possible
             // to call a method on a "null" instance via reflection.
             if (
                 _logger.ShouldSuppressAnalysisWarningsForRequires(
@@ -494,7 +496,8 @@ namespace ILCompiler.Dataflow
             if (reportOnMember)
                 origin = new MessageOrigin(entity);
 
-            // For now we decided to not report single-file or dynamic-code warnings due to type hierarchy marking.
+            // For now we decided to not report single-file or dynamic-code warnings due to type hierarchy
+            // marking.
             // It is considered too complex to figure out for the user and the likelihood of this
             // causing problems is pretty low.
 

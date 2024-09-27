@@ -42,7 +42,8 @@ class C
             var local2 = model
                 .GetDeclaredSymbol(varDeclarators.ElementAt(1))
                 .GetSymbol<SourceLocalSymbol>();
-            // Using a different method as the parent is an accurate enough simulation for these tests of equality.
+            // Using a different method as the parent is an accurate enough simulation for these tests of
+            // equality.
             Symbol m2 = model
                 .GetDeclaredSymbol(
                     root.DescendantNodes().OfType<MethodDeclarationSyntax>().ElementAt(1)

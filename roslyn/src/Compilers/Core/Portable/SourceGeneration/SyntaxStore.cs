@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis
                 if (!_tableBuilder.Contains(syntaxInputNode))
                 {
                     // CONSIDER: when the compilation is the same as previous, the syntax trees must also be the same.
-                    // if we have a previous state table for a node, we can just short circuit knowing that it is up to date
+                    // if we have a previous state table for a node, we can just short circuit knowing that it is up to
+                    // date
                     // This step isn't part of the tree, so we can skip recording.
                     var compilationIsCached = _compilation == _previous._compilation;
 
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis
                     )>.GetInstance(_syntaxInputNodes.Length);
                     foreach (var node in _syntaxInputNodes)
                     {
-                        // We don't cache the tracked incremental steps in a manner that we can easily rehydrate between runs,
+                        // We don't cache the tracked incremental steps in a manner that we can easily rehydrate between
+                        // runs,
                         // so we disable the cached compilation perf optimization when incremental step tracking is enabled.
                         if (
                             compilationIsCached
@@ -110,10 +112,12 @@ namespace Microsoft.CodeAnalysis
 
                     if (syntaxInputBuilders.Count > 0)
                     {
-                        // Ensure that even if the node that caused the update was cached, we can still adjust it to take into account other nodes that weren't
+                        // Ensure that even if the node that caused the update was cached, we can still adjust it to take
+                        // into account other nodes that weren't
                         _syntaxTimes[syntaxInputNode] = TimeSpan.Zero;
 
-                        // at this point we need to grab the syntax trees from the new compilation, and optionally diff them against the old ones
+                        // at this point we need to grab the syntax trees from the new compilation, and optionally diff them
+                        // against the old ones
                         NodeStateTable<SyntaxTree> syntaxTreeState = syntaxTreeTable;
 
                         // update each tree for the builders, sharing the semantic model
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis
                                     {
                                         var elapsed = sw.Elapsed;
 
-                                        // if this node isn't the one that caused the update, ensure we remember it and remove the time it took from the requester
+                                        // if this node isn't the one that caused the update, ensure we remember it and remove the time it
+                                        // took from the requester
                                         if (currentNode != syntaxInputNode)
                                         {
                                             _syntaxTimes[syntaxInputNode] = _syntaxTimes[
@@ -193,14 +198,18 @@ namespace Microsoft.CodeAnalysis
             /// Gets the adjustment to wall clock time that should be applied for a set of input nodes.
             /// </summary>
             /// <remarks>
-            /// The syntax store updates all input nodes in parallel the first time an input node is asked to update,
+            /// The syntax store updates all input nodes in parallel the first time an input node is asked to
+            // update,
             /// so that it can share the semantic model between multiple nodes and improve perf.
             ///
-            /// Unfortunately that means that the first generator to request the results of a syntax node will incorrectly
-            /// have its wall clock time contain the time of all other syntax nodes. And conversely other input nodes will
+            /// Unfortunately that means that the first generator to request the results of a syntax node will
+            // incorrectly
+            /// have its wall clock time contain the time of all other syntax nodes. And conversely other input
+            // nodes will
             /// not have the true time taken.
             ///
-            /// This method gets the adjustment that should be applied to the wall clock time for a set of input nodes
+            /// This method gets the adjustment that should be applied to the wall clock time for a set of input
+            // nodes
             /// so that the correct time is attributed to each.
             /// </remarks>
             public TimeSpan GetRuntimeAdjustment(ImmutableArray<SyntaxInputNode> inputNodes)

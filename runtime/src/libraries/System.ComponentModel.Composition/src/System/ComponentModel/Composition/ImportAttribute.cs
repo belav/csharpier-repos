@@ -117,7 +117,8 @@ namespace System.ComponentModel.Composition
         /// <value>
         ///     <see langword="true"/> if the property, field or parameter will be set
         ///     its type's default value when an export with the <see cref="ContractName"/> is not
-        ///     present in the <see cref="Hosting.CompositionContainer"/>; otherwise, <see langword="false"/>.
+        ///     present in the <see cref="Hosting.CompositionContainer"/>; otherwise, <see
+        // langword="false"/>.
         ///     The default value is <see langword="false"/>.
         /// </value>
         /// <remarks>

@@ -4,14 +4,14 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: SerObjectInfo
- **
- **
- ** Purpose: Holds information about an objects Members
- **
- **
- ===========================================================*/
+**
+** Class: SerObjectInfo
+**
+**
+** Purpose: Holds information about an objects Members
+**
+**
+===========================================================*/
 
 
 namespace System.Runtime.Serialization.Formatters.Binary
@@ -398,7 +398,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 {
                     Assembly objectAssembly = objectType.Assembly;
 
-                    // cache.assemblyString will be set to the value of the AssemblyFullName set on the TypeForwardedFrom attribute
+                    // cache.assemblyString will be set to the value of the AssemblyFullName set on the
+                    // TypeForwardedFrom attribute
                     if (
                         !SerializationInfo.IsAssemblyNameAssignmentSafe(
                             objectAssembly.FullName,
@@ -1037,7 +1038,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         [Conditional("SER_LOGGING")]
         private void DumpPopulateSi()
         {
-            //SerTrace.Log( this,objectInfoId," ", objectType," PopulateObjectMembers SetObjectData, ISerializable obj ");
+            //SerTrace.Log( this,objectInfoId," ", objectType," PopulateObjectMembers SetObjectData,
+            // ISerializable obj ");
             //SerializationInfoEnumerator siEnum = si.GetEnumerator();
             //for (int i=0; siEnum.MoveNext(); i++)
             //{
@@ -1077,7 +1079,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     }
                 }
 
-                //throw new SerializationException(String.Format(Environment.GetResourceString("Serialization_MissingMember"),name,objectType));
+                //throw new
+                //
+                //
+                // SerializationException(String.Format(Environment.GetResourceString("Serialization_MissingMember"),name,objectType));
                 lastPosition = 0;
                 return -1;
             }
@@ -1144,7 +1149,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     }
                     if (!isFound)
                     {
-                        // A field on the type isnt found. See if the field has OptionallySerializable and the type has the deserialization constructor
+                        // A field on the type isnt found. See if the field has OptionallySerializable and the type has the
+                        // deserialization constructor
                         Object[] attrs = cache
                             .memberInfos[i]
                             .GetCustomAttributes(typeof(OptionalFieldAttribute), false);

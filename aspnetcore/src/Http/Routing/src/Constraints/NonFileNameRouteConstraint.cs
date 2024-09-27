@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// as a the last segment.
 /// </para>
 /// <para>
-/// The <see cref="NonFileNameRouteConstraint"/> does not attempt to validate that the value contains
+/// The <see cref="NonFileNameRouteConstraint"/> does not attempt to validate that the value
+// contains
 /// a legal file name for the current operating system.
 /// </para>
 /// <para>
@@ -65,19 +66,23 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 ///     </listheader>
 ///     <item>
 ///         <term><c>/a/b/c.txt</c></term>
-///         <description>Final segment contains a <c>.</c> followed by other characters.</description>
+///         <description>Final segment contains a <c>.</c> followed by other
+// characters.</description>
 ///     </item>
 ///     <item>
 ///         <term><c>/hello.world.txt</c></term>
-///         <description>Final segment contains a <c>.</c> followed by other characters.</description>
+///         <description>Final segment contains a <c>.</c> followed by other
+// characters.</description>
 ///     </item>
 ///     <item>
 ///         <term><c>hello.world.txt</c></term>
-///         <description>Final segment contains a <c>.</c> followed by other characters.</description>
+///         <description>Final segment contains a <c>.</c> followed by other
+// characters.</description>
 ///     </item>
 ///     <item>
 ///         <term><c>.gitignore</c></term>
-///         <description>Final segment contains a <c>.</c> followed by other characters.</description>
+///         <description>Final segment contains a <c>.</c> followed by other
+// characters.</description>
 ///     </item>
 /// </list>
 /// </para>

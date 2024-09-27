@@ -34,7 +34,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeAssignStatement'/> that represents the
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeAssignStatement'/> that
+        // represents the
         ///       specified assignment values.
         ///    </para>
         /// </devdoc>

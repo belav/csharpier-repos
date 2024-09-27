@@ -21,10 +21,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlPageAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * HtmlPageAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -47,18 +47,21 @@ namespace System.Web.UI.MobileControls.Adapters
         private const String _postedFromOtherFile = ".";
         private IDictionary _cookielessDataDictionary = null;
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.HtmlPageAdapter"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.HtmlPageAdapter"]/*' />
         public HtmlPageAdapter()
             : this(DefaultPageWeight) { }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.HtmlPageAdapter1"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.HtmlPageAdapter1"]/*' />
         protected internal HtmlPageAdapter(int defaultPageWeight)
         {
             _defaultPageWeight = defaultPageWeight;
             SetPreferredEncodings(HttpContext.Current);
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.OptimumPageWeight"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.OptimumPageWeight"]/*' />
         public virtual int OptimumPageWeight
         {
             get
@@ -76,7 +79,8 @@ namespace System.Web.UI.MobileControls.Adapters
         //  this adapter
         ///////////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.DeviceQualifies"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.DeviceQualifies"]/*' />
         public static bool DeviceQualifies(HttpContext context)
         {
             String type = ((MobileCapabilities)context.Request.Browser).PreferredRenderingType;
@@ -144,7 +148,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.EndFile();
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.IsFormRendered"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.IsFormRendered"]/*'
+        // />
         public virtual bool IsFormRendered(Form form)
         {
             Debug.Assert(_renderableForms != null, "_renderableForms is null");
@@ -164,7 +169,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.RenderPostBackEvent"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.RenderPostBackEvent"]/*' />
         public virtual void RenderPostBackEvent(
             HtmlMobileTextWriter writer,
             String target,
@@ -178,7 +184,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.Write("')");
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.RenderUrlPostBackEvent"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.RenderUrlPostBackEvent"]/*' />
         public virtual void RenderUrlPostBackEvent(
             HtmlMobileTextWriter writer,
             String target,
@@ -218,19 +225,22 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.EventSourceKey"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.EventSourceKey"]/*'
+        // />
         protected virtual String EventSourceKey
         {
             get { return MobilePage.HiddenPostEventSourceId; }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.EventArgumentKey"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.EventArgumentKey"]/*' />
         protected virtual String EventArgumentKey
         {
             get { return MobilePage.HiddenPostEventArgumentId; }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.RenderHiddenVariables"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.RenderHiddenVariables"]/*' />
         protected void RenderHiddenVariables(HtmlMobileTextWriter writer)
         {
             if (Page.HasHiddenVariables())
@@ -265,7 +275,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.RenderPostBackHeader"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.RenderPostBackHeader"]/*' />
         public virtual void RenderPostBackHeader(HtmlMobileTextWriter writer, Form form)
         {
             bool postBack = form.Action.Length == 0;
@@ -310,7 +321,8 @@ namespace System.Web.UI.MobileControls.Adapters
             set { _page = value; }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.CookielessDataDictionary"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.CookielessDataDictionary"]/*' />
         public IDictionary CookielessDataDictionary
         {
             get { return _cookielessDataDictionary; }
@@ -319,20 +331,23 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private bool _persistCookielessData = true;
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.PersistCookielessData"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.PersistCookielessData"]/*' />
         public bool PersistCookielessData
         {
             get { return _persistCookielessData; }
             set { _persistCookielessData = value; }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.CreateTextWriter"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.CreateTextWriter"]/*' />
         public virtual HtmlTextWriter CreateTextWriter(TextWriter writer)
         {
             return new HtmlMobileTextWriter(writer, Device);
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.DeterminePostBackMode"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.DeterminePostBackMode"]/*' />
         public virtual NameValueCollection DeterminePostBackMode(
             HttpRequest request,
             String postEventSourceID,
@@ -347,7 +362,8 @@ namespace System.Web.UI.MobileControls.Adapters
             return baseCollection;
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.CacheVaryByHeaders"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.CacheVaryByHeaders"]/*' />
         public virtual IList CacheVaryByHeaders
         {
             get { return null; }
@@ -368,7 +384,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.HandlePagePostBackEvent"]/*' />
+        /// <include file='doc\HtmlPageAdapter.uex'
+        // path='docs/doc[@for="HtmlPageAdapter.HandlePagePostBackEvent"]/*' />
         public virtual bool HandlePagePostBackEvent(String eventSource, String eventArgument)
         {
             return false;

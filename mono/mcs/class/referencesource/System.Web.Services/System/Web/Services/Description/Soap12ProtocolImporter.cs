@@ -21,7 +21,8 @@ namespace System.Web.Services.Description
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    /// <include file='doc\Soap12ProtocolImporter.uex' path='docs/doc[@for="Soap12ProtocolImporter"]/*' />
+    /// <include file='doc\Soap12ProtocolImporter.uex' path='docs/doc[@for="Soap12ProtocolImporter"]/*'
+    // />
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
     internal class Soap12ProtocolImporter : SoapProtocolImporter
     {

@@ -116,7 +116,8 @@ namespace MonoTests.System.Windows.Forms
 
             FormBorderStyle style;
 
-            //Console.WriteLine ("Universal theme says: d2={0}, d3={1}, title_bar={2}, sizeable_factor={3}, tool_border={4}, tool_bar={5}", d2, d3, title_bar, sizeable_factor, tool_border, tool_bar);
+            //Console.WriteLine ("Universal theme says: d2={0}, d3={1}, title_bar={2}, sizeable_factor={3},
+            // tool_border={4}, tool_bar={5}", d2, d3, title_bar, sizeable_factor, tool_border, tool_bar);
 
             // Changing client size, then FormBorderStyle.
             using (Form f = new Form())

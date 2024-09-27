@@ -685,7 +685,8 @@ namespace System.Workflow.ComponentModel
                 }
                 else
                 {
-                    // The value of this ActivityBind is bound to properties or events defined on the referenced activity
+                    // The value of this ActivityBind is bound to properties or events defined on the referenced
+                    // activity
                     // Note that we don't have corresponding logic for SetRuntimeValue because value should be only set
                     // at the end of the activity reference chain.
                     Activity rootActivity = Helpers.GetRootActivity(activity);
@@ -722,15 +723,16 @@ namespace System.Workflow.ComponentModel
                         MemberBind.SetValue(referencedActivity, this.Path, value);
                 }
                 // Dependency property
-                /*else
-                {
-                    Activity rootActivity = Helpers.GetRootActivity(activity);
-                    DependencyProperty dependencyProperty = DependencyProperty.FromName(this.Path, rootActivity.GetType());
-                    if (dependencyProperty != null)
-                    {
-                        referencedActivity.SetValue(dependencyProperty, value);
-                    }
-                }*/
+/*else
+{
+Activity rootActivity = Helpers.GetRootActivity(activity);
+DependencyProperty dependencyProperty = DependencyProperty.FromName(this.Path,
+rootActivity.GetType());
+if (dependencyProperty != null)
+{
+referencedActivity.SetValue(dependencyProperty, value);
+}
+}*/
             }
         }
 
@@ -782,25 +784,28 @@ namespace System.Workflow.ComponentModel
                             }
                         }
                     }
-                    /*else
-                    {
-                        Activity rootActivity = Helpers.GetRootActivity(activity);
-                        DependencyProperty dependencyProperty = DependencyProperty.FromName(activityBind.Path, rootActivity.GetType());
-                        if (dependencyProperty != null)
-                        {
-                            if (activityBind.UserData[UserDataKeys.BindDataSource] == null)
-                                activityBind.UserData[UserDataKeys.BindDataSource] = new Hashtable();
+/*else
+{
+Activity rootActivity = Helpers.GetRootActivity(activity);
+DependencyProperty dependencyProperty = DependencyProperty.FromName(activityBind.Path,
+rootActivity.GetType());
+if (dependencyProperty != null)
+{
+if (activityBind.UserData[UserDataKeys.BindDataSource] == null)
+activityBind.UserData[UserDataKeys.BindDataSource] = new Hashtable();
 
-                            ((Hashtable)activityBind.UserData[UserDataKeys.BindDataSource])[activity.QualifiedName] = dependencyProperty;
+((Hashtable)activityBind.UserData[UserDataKeys.BindDataSource])[activity.QualifiedName] =
+dependencyProperty;
 
-                            if (dataSourceActivity != null)
-                            {
-                                if (activityBind.UserData[UserDataKeys.BindDataContextActivity] == null)
-                                    activityBind.UserData[UserDataKeys.BindDataContextActivity] = new Hashtable();
-                                ((Hashtable)activityBind.UserData[UserDataKeys.BindDataContextActivity])[activity.QualifiedName] = dataSourceActivity.QualifiedName;
-                            }
-                        }
-                    }*/
+if (dataSourceActivity != null)
+{
+if (activityBind.UserData[UserDataKeys.BindDataContextActivity] == null)
+activityBind.UserData[UserDataKeys.BindDataContextActivity] = new Hashtable();
+((Hashtable)activityBind.UserData[UserDataKeys.BindDataContextActivity])[activity.QualifiedName] =
+dataSourceActivity.QualifiedName;
+}
+}
+}*/
                 }
             }
         }
@@ -836,7 +841,8 @@ namespace System.Workflow.ComponentModel
             MemberInfo memberInfo = MemberBind.GetMemberInfo(dataSourceType, path);
 
             //The events can be either bound to properties or can be bound to methods,
-            //There are cases where fields and methods can be of same name so in that case we either make sure for
+            //There are cases where fields and methods can be of same name so in that case we either make sure
+            // for
             //in the case of event handlers we either find Property or a Method
             if (
                 targetType != null
@@ -876,19 +882,21 @@ namespace System.Workflow.ComponentModel
             {
                 memberValue = MemberBind.GetValue(memberInfo, dataSourceObject, path);
 
-                /*if (memberValue != null && targetType != null &&
-                    (memberValue.GetType().IsPrimitive || memberValue.GetType().IsEnum || memberValue.GetType() == typeof(string))
-                    && !targetType.IsAssignableFrom(memberValue.GetType()))
-                {
-                    try
-                    {
-                        memberValue = Convert.ChangeType(memberValue, targetType, CultureInfo.InvariantCulture);
-                    }
-                    catch (Exception e)
-                    {
-                        throw new Exception(SR.GetString(SR.Error_DataSourceTypeConversionFailed, memberInfo.Name, memberValue.ToString(), targetType.FullName), e);
-                    }
-                }*/
+/*if (memberValue != null && targetType != null &&
+(memberValue.GetType().IsPrimitive || memberValue.GetType().IsEnum || memberValue.GetType() ==
+typeof(string))
+&& !targetType.IsAssignableFrom(memberValue.GetType()))
+{
+try
+{
+memberValue = Convert.ChangeType(memberValue, targetType, CultureInfo.InvariantCulture);
+}
+catch (Exception e)
+{
+throw new Exception(SR.GetString(SR.Error_DataSourceTypeConversionFailed, memberInfo.Name,
+memberValue.ToString(), targetType.FullName), e);
+}
+}*/
             }
             else if (targetType != null && memberInfo is MethodInfo)
             {
@@ -907,7 +915,8 @@ namespace System.Workflow.ComponentModel
         }
 
         //This function is used to get the outermost activity bind which is bound to actual field/property
-        //The function is called in OnRuntimeInitialized and makes sure that we get outer target bind and cache
+        //The function is called in OnRuntimeInitialized and makes sure that we get outer target bind and
+        // cache
         //it so that at runtime we do not have to walk the bind chain to find the bound member
         private static ActivityBind GetContextBind(
             ActivityBind activityBind,
@@ -986,7 +995,8 @@ namespace System.Workflow.ComponentModel
         #region DesignTime Integration (DO NOT CALL THESE AT RUNTIME)
 
         #region Helper Functions
-        // This function replaces Activity1.code1 with /ParentContext.code1.  This must be done for Binds that refer to
+        // This function replaces Activity1.code1 with /ParentContext.code1.  This must be done for Binds
+        // that refer to
         // to fields, properties and methods in the top level custom activity data context.
         internal static string GetRelativePathExpression(
             Activity parentActivity,
@@ -1288,7 +1298,8 @@ namespace System.Workflow.ComponentModel
                         }
                         catch (Exception exception)
                         {
-                            //in some cases the value might not be there yet - e.g. array or dictionary is populated at runtime only (validation vs. runtime)
+                            //in some cases the value might not be there yet - e.g. array or dictionary is populated at runtime
+                            // only (validation vs. runtime)
                             value = null;
                             eventArgs.Action = PathWalkAction.Cancel;
 
@@ -1305,7 +1316,8 @@ namespace System.Workflow.ComponentModel
                         break;
                 }
 
-                //need to unwrap the activity bind if we get one - to proceed with the actual field/property/delegate
+                //need to unwrap the activity bind if we get one - to proceed with the actual
+                // field/property/delegate
                 //do not unwrap if the property/field is itself of type ActivityBind
                 //we should not unwrap the latest ActivityBind though - only intermediate ones
                 //avoid circular reference problems with the BindRecursionContext
@@ -1581,7 +1593,8 @@ namespace System.Workflow.ComponentModel
 
     //common path walker
     //it is based off the property types and the PathParser results
-    //caller might keep a ref to the actual object and call Get/Set value on the members returned in the PathMemberInfoEventArgs
+    //caller might keep a ref to the actual object and call Get/Set value on the members returned in the
+    // PathMemberInfoEventArgs
     internal class PathWalker
     {
         public EventHandler<PathMemberInfoEventArgs> MemberFound; //on every member along the path

@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.InternalTesting;
 
 /// <summary>
 /// Runs a test multiple times when it fails
-/// This can be used on an assembly, class, or method name. Requires using the AspNetCore test framework.
+/// This can be used on an assembly, class, or method name. Requires using the AspNetCore test
+// framework.
 /// </summary>
 [EditorBrowsable(EditorBrowsableState.Never)]
 [AttributeUsage(

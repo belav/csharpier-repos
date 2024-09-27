@@ -144,17 +144,17 @@ namespace MonoTests.System.Xaml
             Assert.AreEqual("urn:bar", dummy, "#5");
         }
 
-        /*
-                    var settings = new XamlSchemaContextSettings () { FullyQualifyAssemblyNamesInClrNamespaces = true };
-                    ctx = new XamlSchemaContext (new Assembly [] {typeof (XamlSchemaContext).Assembly }, settings);
-        
-                    ctx = new XamlSchemaContext (new Assembly [] {GetType ().Assembly }, settings);
-                    arr = ctx.GetAllXamlNamespaces ().ToArray ();
-                    Assert.AreEqual (2, arr.Length, "#5");
-                    Assert.IsTrue (arr.Contains ("urn:mono-test"), "#5-2");
-                    Assert.IsTrue (arr.Contains ("urn:mono-test2"), "#5-3");
-                }
-        */
+/*
+var settings = new XamlSchemaContextSettings () { FullyQualifyAssemblyNamesInClrNamespaces = true };
+ctx = new XamlSchemaContext (new Assembly [] {typeof (XamlSchemaContext).Assembly }, settings);
+
+ctx = new XamlSchemaContext (new Assembly [] {GetType ().Assembly }, settings);
+arr = ctx.GetAllXamlNamespaces ().ToArray ();
+Assert.AreEqual (2, arr.Length, "#5");
+Assert.IsTrue (arr.Contains ("urn:mono-test"), "#5-2");
+Assert.IsTrue (arr.Contains ("urn:mono-test2"), "#5-3");
+}
+*/
 
         [Test]
         public void GetXamlTypeAndAllXamlTypes()
@@ -204,8 +204,10 @@ namespace MonoTests.System.Xaml
             //Assert.IsTrue (l.Any (t => t.Name == "Property"), "#8");
             //Assert.IsFalse (l.Any (t => t.Name == "MemberDefinition"), "#9");
             //Assert.IsFalse (l.Any (t => t.Name == "PropertyDefinition"), "#10");
-            //Assert.AreEqual ("MemberDefinition", new XamlType (typeof (MemberDefinition), new XamlSchemaContext (null, null)).Name);
-            //Assert.AreEqual ("Member", l.GetAllXamlTypes (XamlLanguage.Xaml2006Namespace).First (t => t.UnderlyingType == typeof (MemberDefinition)));
+            //Assert.AreEqual ("MemberDefinition", new XamlType (typeof (MemberDefinition), new
+            // XamlSchemaContext (null, null)).Name);
+            //Assert.AreEqual ("Member", l.GetAllXamlTypes (XamlLanguage.Xaml2006Namespace).First (t =>
+            // t.UnderlyingType == typeof (MemberDefinition)));
             Assert.IsFalse(l.Any(t => t.Name == "Array"), "#11");
             Assert.IsFalse(l.Any(t => t.Name == "Null"), "#12");
             Assert.IsFalse(l.Any(t => t.Name == "Static"), "#13");

@@ -9,7 +9,8 @@ using Microsoft.Extensions.Primitives;
 namespace Microsoft.Extensions.Logging.Console
 {
     /// <summary>
-    /// This type is retained only for compatibility. The recommended alternative is ConsoleLoggerOptions.
+    /// This type is retained only for compatibility. The recommended alternative is
+    // ConsoleLoggerOptions.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Obsolete(

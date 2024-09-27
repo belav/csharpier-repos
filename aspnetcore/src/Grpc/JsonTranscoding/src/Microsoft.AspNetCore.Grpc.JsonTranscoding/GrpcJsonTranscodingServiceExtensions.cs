@@ -46,7 +46,8 @@ public static class GrpcJsonTranscodingServiceExtensions
     /// Adds gRPC JSON transcoding services to the specified <see cref="IGrpcServerBuilder" />.
     /// </summary>
     /// <param name="builder">The <see cref="IGrpcServerBuilder"/>.</param>
-    /// <param name="configureOptions">An <see cref="Action{GrpcJsonTranscodingOptions}"/> to configure the provided <see cref="GrpcJsonTranscodingOptions"/>.</param>
+    /// <param name="configureOptions">An <see cref="Action{GrpcJsonTranscodingOptions}"/> to configure
+    // the provided <see cref="GrpcJsonTranscodingOptions"/>.</param>
     /// <returns>The same instance of the <see cref="IGrpcServerBuilder"/> for chaining.</returns>
     public static IGrpcServerBuilder AddJsonTranscoding(
         this IGrpcServerBuilder builder,

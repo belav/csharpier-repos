@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Remote
     internal interface IRemoteProcessTelemetryService
     {
         /// <summary>
-        /// Enables logging of <paramref name="functionIds"/> using loggers of the specified <paramref name="loggerTypeNames"/>.
+        /// Enables logging of <paramref name="functionIds"/> using loggers of the specified <paramref
+        // name="loggerTypeNames"/>.
         /// </summary>
         ValueTask EnableLoggingAsync(
             ImmutableArray<string> loggerTypeNames,
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
         /// <summary>
         /// Sets <see cref="WorkspaceConfigurationOptions"/> for the process.
-        /// Called as soon as the remote process is created but can't guarantee that solution entities (projects, documents, syntax trees) have not been created beforehand.
+        /// Called as soon as the remote process is created but can't guarantee that solution entities
+        // (projects, documents, syntax trees) have not been created beforehand.
         /// </summary>
         /// <returns>Process ID of the remote process.</returns>
         ValueTask<int> InitializeAsync(

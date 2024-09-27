@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis
             : this(CustomAttributeBagCompletionPart.None, default(ImmutableArray<T>)) { }
 
         /// <summary>
-        /// Returns a non-sealed custom attribute bag with null initialized <see cref="_earlyDecodedWellKnownAttributeData"/>, null initialized <see cref="_decodedWellKnownAttributeData"/> and uninitialized <see cref="_customAttributes"/>.
+        /// Returns a non-sealed custom attribute bag with null initialized <see
+        // cref="_earlyDecodedWellKnownAttributeData"/>, null initialized <see
+        // cref="_decodedWellKnownAttributeData"/> and uninitialized <see cref="_customAttributes"/>.
         /// </summary>
         public static CustomAttributesBag<T> WithEmptyData()
         {
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Sets the decoded well-known attribute data (except the early data) on the bag in a thread safe manner.
+        /// Sets the decoded well-known attribute data (except the early data) on the bag in a thread safe
+        // manner.
         /// Stored decoded data is immutable and cannot be updated further.
         /// </summary>
         /// <returns>Returns true if decoded data were stored into the bag on this thread.</returns>
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the decoded well-known attribute data (except the early data) in the bag.
         /// </summary>
-        /// <remarks>This property can only be accessed on the bag after <see cref="SetDecodedWellKnownAttributeData"/> has been invoked.</remarks>
+        /// <remarks>This property can only be accessed on the bag after <see
+        // cref="SetDecodedWellKnownAttributeData"/> has been invoked.</remarks>
         public WellKnownAttributeData DecodedWellKnownAttributeData
         {
             get
@@ -157,7 +161,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the early decoded well-known attribute data in the bag.
         /// </summary>
-        /// <remarks>This property can only be accessed on the bag after <see cref="SetEarlyDecodedWellKnownAttributeData"/> has been invoked.</remarks>
+        /// <remarks>This property can only be accessed on the bag after <see
+        // cref="SetEarlyDecodedWellKnownAttributeData"/> has been invoked.</remarks>
         public EarlyWellKnownAttributeData EarlyDecodedWellKnownAttributeData
         {
             get
@@ -193,8 +198,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Return whether early decoded attribute data has been computed and stored on the bag and it is safe to access <see cref="EarlyDecodedWellKnownAttributeData"/> from this bag.
-        /// Return value of true doesn't guarantee that bound attributes or remaining decoded attribute data has also been initialized.
+        /// Return whether early decoded attribute data has been computed and stored on the bag and it is
+        // safe to access <see cref="EarlyDecodedWellKnownAttributeData"/> from this bag.
+        /// Return value of true doesn't guarantee that bound attributes or remaining decoded attribute data
+        // has also been initialized.
         /// </summary>
         internal bool IsEarlyDecodedWellKnownAttributeDataComputed
         {
@@ -207,7 +214,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Return whether all decoded attribute data has been computed and stored on the bag and it is safe to access <see cref="DecodedWellKnownAttributeData"/> from this bag.
+        /// Return whether all decoded attribute data has been computed and stored on the bag and it is safe
+        // to access <see cref="DecodedWellKnownAttributeData"/> from this bag.
         /// Return value of true doesn't guarantee that bound attributes have also been initialized.
         /// </summary>
         internal bool IsDecodedWellKnownAttributeDataComputed
@@ -221,7 +229,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Enum representing the current state of attribute binding/decoding for a corresponding CustomAttributeBag.
+        /// Enum representing the current state of attribute binding/decoding for a corresponding
+        // CustomAttributeBag.
         /// </summary>
         [Flags]
         internal enum CustomAttributeBagCompletionPart : byte
@@ -233,14 +242,17 @@ namespace Microsoft.CodeAnalysis
             None = 0,
 
             /// <summary>
-            /// Early decoded attribute data has been computed and stored on the bag, but bound attributes or remaining decoded attribute data is not stored.
+            /// Early decoded attribute data has been computed and stored on the bag, but bound attributes or
+            // remaining decoded attribute data is not stored.
             /// Only <see cref="EarlyDecodedWellKnownAttributeData"/> can be accessed from this bag.
             /// </summary>
             EarlyDecodedWellKnownAttributeData = 1 << 0,
 
             /// <summary>
-            /// All decoded attribute data has been computed and stored on the bag, but bound attributes are not yet stored.
-            /// Both <see cref="EarlyDecodedWellKnownAttributeData"/> and <see cref="DecodedWellKnownAttributeData"/> can be accessed from this bag.
+            /// All decoded attribute data has been computed and stored on the bag, but bound attributes are not
+            // yet stored.
+            /// Both <see cref="EarlyDecodedWellKnownAttributeData"/> and <see
+            // cref="DecodedWellKnownAttributeData"/> can be accessed from this bag.
             /// </summary>
             DecodedWellKnownAttributeData = 1 << 1,
 

@@ -6,7 +6,8 @@ using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 
 /// <summary>
-/// NOTE: All tests checking the output file should always call Stop before checking because Stop will flush the file to disk.
+/// NOTE: All tests checking the output file should always call Stop before checking because Stop
+// will flush the file to disk.
 /// </summary>
 namespace System.ServiceProcess.Tests
 {
@@ -49,9 +50,12 @@ namespace System.ServiceProcess.Tests
         }
 
         // [Fact]
-        // To cleanup lingering Test Services uncomment the Fact attribute, make it public and run the following command
-        // dotnet build /t:test /p:XunitMethodName=System.ServiceProcess.Tests.ServiceBaseTests.Cleanup /p:OuterLoop=true
-        // Remember to comment out the Fact again before running tests otherwise it will cleanup tests running in parallel
+        // To cleanup lingering Test Services uncomment the Fact attribute, make it public and run the
+        // following command
+        // dotnet build /t:test /p:XunitMethodName=System.ServiceProcess.Tests.ServiceBaseTests.Cleanup
+        // /p:OuterLoop=true
+        // Remember to comment out the Fact again before running tests otherwise it will cleanup tests
+        // running in parallel
         // and cause them to fail.
         private void Cleanup()
         {
@@ -209,7 +213,8 @@ namespace System.ServiceProcess.Tests
         public void LogWritten()
         {
             string serviceName = Guid.NewGuid().ToString();
-            // If the username is null, then the service is created under LocalSystem Account which has access to EventLog.
+            // If the username is null, then the service is created under LocalSystem Account which has access
+            // to EventLog.
             var testService = new TestServiceProvider(serviceName);
             Assert.True(EventLog.SourceExists(serviceName));
             testService.DeleteTestServices();
@@ -243,7 +248,8 @@ namespace System.ServiceProcess.Tests
         public void NoServiceNameOnServiceBase()
         {
             // When installing a service, you must supply a non empty name.
-            // When a service starts itself (using StartServiceCtrlDispatcher) it's legal to pass an empty string for the name.
+            // When a service starts itself (using StartServiceCtrlDispatcher) it's legal to pass an empty
+            // string for the name.
             string serviceName = "NoServiceNameOnServiceBase";
             var testService = new TestServiceProvider(serviceName);
 

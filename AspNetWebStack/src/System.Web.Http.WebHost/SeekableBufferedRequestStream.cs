@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Diagnostics;
@@ -162,8 +163,10 @@ namespace System.Web.Http.WebHost
 
         private void SwapToSeekableStream()
         {
-            // At this point we've actually read the non-seekable stream to the end, and we're about to swap streams
-            // and toggle the value of _isReadToEndComplete. Reading the non-seekable stream to the end will populate
+            // At this point we've actually read the non-seekable stream to the end, and we're about to swap
+            // streams
+            // and toggle the value of _isReadToEndComplete. Reading the non-seekable stream to the end will
+            // populate
             // InnerStream with the buffered data, so we can use it for all future operations.
             Debug.Assert(!_isReadToEndComplete);
 

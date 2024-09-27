@@ -212,7 +212,8 @@ internal partial class EndpointHtmlRenderer
 
         if (frame.FrameType != RenderTreeFrameType.NamedEvent)
         {
-            // This should not be possible, as the system doesn't create a way that the location could be wrong. But if it happens, we want to know.
+            // This should not be possible, as the system doesn't create a way that the location could be wrong.
+            // But if it happens, we want to know.
             throw new InvalidOperationException(
                 $"The named value frame for component '{componentId}' at index '{frameIndex}' unexpectedly matches a frame of type '{frame.FrameType}'."
             );
@@ -220,7 +221,8 @@ internal partial class EndpointHtmlRenderer
 
         if (!string.Equals(frame.NamedEventType, eventType, StringComparison.Ordinal))
         {
-            // This should not be possible, as currently we are only tracking name-values with the expected name. But if it happens, we want to know.
+            // This should not be possible, as currently we are only tracking name-values with the expected
+            // name. But if it happens, we want to know.
             throw new InvalidOperationException(
                 $"Expected a named value with name '{eventType}' but found the name '{frame.NamedEventType}'."
             );

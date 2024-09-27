@@ -193,7 +193,7 @@ namespace MonoTests.System.Reflection
 
             Assert.AreEqual(t, module.ResolveType(t.MetadataToken), "#1");
 
-            /* We currently throw ArgumentException for this one */
+/* We currently throw ArgumentException for this one */
             try
             {
                 module.ResolveType(1234);

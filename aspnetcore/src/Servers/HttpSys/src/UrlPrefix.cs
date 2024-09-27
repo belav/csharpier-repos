@@ -42,9 +42,12 @@ public class UrlPrefix
     /// http://msdn.microsoft.com/en-us/library/windows/desktop/aa364698(v=vs.85).aspx
     /// </summary>
     /// <param name="scheme">http or https. Will be normalized to lower case.</param>
-    /// <param name="host">+, *, IPv4, [IPv6], or a dns name. Http.Sys does not permit punycode (xn--), use Unicode instead.</param>
-    /// <param name="port">If empty, the default port for the given scheme will be used (80 or 443).</param>
-    /// <param name="path">Should start and end with a '/', though a missing trailing slash will be added. This value must be un-escaped.</param>
+    /// <param name="host">+, *, IPv4, [IPv6], or a dns name. Http.Sys does not permit punycode (xn--),
+    // use Unicode instead.</param>
+    /// <param name="port">If empty, the default port for the given scheme will be used (80 or
+    // 443).</param>
+    /// <param name="path">Should start and end with a '/', though a missing trailing slash will be
+    // added. This value must be un-escaped.</param>
     public static UrlPrefix Create(string scheme, string host, string port, string path)
     {
         int? portValue = null;
@@ -60,9 +63,12 @@ public class UrlPrefix
     /// http://msdn.microsoft.com/en-us/library/windows/desktop/aa364698(v=vs.85).aspx
     /// </summary>
     /// <param name="scheme">http or https. Will be normalized to lower case.</param>
-    /// <param name="host">+, *, IPv4, [IPv6], or a dns name. Http.Sys does not permit punycode (xn--), use Unicode instead.</param>
-    /// <param name="portValue">If empty, the default port for the given scheme will be used (80 or 443).</param>
-    /// <param name="path">Should start and end with a '/', though a missing trailing slash will be added. This value must be un-escaped.</param>
+    /// <param name="host">+, *, IPv4, [IPv6], or a dns name. Http.Sys does not permit punycode (xn--),
+    // use Unicode instead.</param>
+    /// <param name="portValue">If empty, the default port for the given scheme will be used (80 or
+    // 443).</param>
+    /// <param name="path">Should start and end with a '/', though a missing trailing slash will be
+    // added. This value must be un-escaped.</param>
     public static UrlPrefix Create(string scheme, string host, int? portValue, string path)
     {
         bool isHttps;

@@ -42,8 +42,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
         /// <summary>
         /// Use a <see cref="ConcurrentExclusiveSchedulerPair"/> to simulate a reader-writer lock.
-        /// Read operations are performed on the <see cref="ConcurrentExclusiveSchedulerPair.ConcurrentScheduler"/>
-        /// and writes are performed on the <see cref="ConcurrentExclusiveSchedulerPair.ExclusiveScheduler"/>.
+        /// Read operations are performed on the <see
+        // cref="ConcurrentExclusiveSchedulerPair.ConcurrentScheduler"/>
+        /// and writes are performed on the <see
+        // cref="ConcurrentExclusiveSchedulerPair.ExclusiveScheduler"/>.
         ///
         /// We use this as a condition of using the in-memory shared-cache sqlite DB.  This DB
         /// doesn't busy-wait when attempts are made to lock the tables in it, which can lead to

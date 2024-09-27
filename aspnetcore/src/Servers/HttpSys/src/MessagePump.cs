@@ -132,7 +132,8 @@ internal sealed partial class MessagePump : IServer, IServerDelegationFeature
             _serverAddresses.Addresses.Add(prefix.FullPrefix);
         }
 
-        // Dispatch to get off the SynchronizationContext and use UnsafeQueueUserWorkItem to avoid capturing the ExecutionContext
+        // Dispatch to get off the SynchronizationContext and use UnsafeQueueUserWorkItem to avoid capturing
+        // the ExecutionContext
         ThreadPool.UnsafeQueueUserWorkItem(
             state => state.ActivateRequestProcessingLimits(),
             this,
@@ -280,7 +281,8 @@ internal sealed partial class MessagePump : IServer, IServerDelegationFeature
                         requestContext.ReleasePins();
                         requestContext.Dispose();
 
-                        // If either of these is false then a response has already been sent to the client, so we can accept the next request
+                        // If either of these is false then a response has already been sent to the client, so we can accept
+                        // the next request
                         continue;
                     }
                 }

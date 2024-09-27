@@ -3,7 +3,8 @@
 
 using Xunit;
 
-// Most of our EventSource tests reuse an EventSource, which will cause errors if they run in parallel.
+// Most of our EventSource tests reuse an EventSource, which will cause errors if they run in
+// parallel.
 [assembly: CollectionBehavior(
     CollectionBehavior.CollectionPerAssembly,
     DisableTestParallelization = true,

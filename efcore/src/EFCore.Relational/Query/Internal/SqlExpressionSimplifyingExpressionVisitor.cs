@@ -7,10 +7,14 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
 {
@@ -18,10 +22,14 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
     private readonly bool _useRelationalNulls;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public SqlExpressionSimplifyingExpressionVisitor(
         ISqlExpressionFactory sqlExpressionFactory,
@@ -33,10 +41,14 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitExtension(Expression extensionExpression)
     {
@@ -292,7 +304,8 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 // for relational nulls we can't combine comparisons that contain null
                 // a != 1 && a != null would be converted to a NOT IN (1, null), which never returns any results
                 // we need to keep it in the original form so that a != null gets converted to a IS NOT NULL instead
-                // for c# null semantics it's fine because null semantics visitor extracts null back into proper null checks
+                // for c# null semantics it's fine because null semantics visitor extracts null back into proper
+                // null checks
                 var leftValues = leftCandidateInfo.ValueOrValues switch
                 {
                     IReadOnlyList<SqlExpression> v => v,

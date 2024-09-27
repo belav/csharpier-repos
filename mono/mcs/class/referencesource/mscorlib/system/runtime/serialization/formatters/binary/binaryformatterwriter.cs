@@ -4,14 +4,14 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: BinaryWriter
- **
- **
- ** Purpose: Writes primitive values to a stream
- **
- **
- ===========================================================*/
+**
+** Class: BinaryWriter
+**
+**
+** Purpose: Writes primitive values to a stream
+**
+**
+===========================================================*/
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
@@ -172,7 +172,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             record.Write(this);
         }
 
-        // Methods to write Binary Serialization Record onto the stream, a record is composed of primitive types
+        // Methods to write Binary Serialization Record onto the stream, a record is composed of primitive
+        // types
 
         internal void WriteSerializationHeader(
             int topId,

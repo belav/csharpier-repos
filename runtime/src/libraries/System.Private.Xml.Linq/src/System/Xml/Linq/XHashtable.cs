@@ -10,52 +10,77 @@ using Interlocked = System.Threading.Interlocked;
 namespace System.Xml.Linq
 {
     /// <summary>
-    /// This is a thread-safe hash table which maps string keys to values of type TValue.  It is assumed that the string key is embedded in the hashed value
-    /// and can be extracted via a call to ExtractKeyDelegate (in order to save space and allow cleanup of key if value is released due to a WeakReference
+    /// This is a thread-safe hash table which maps string keys to values of type TValue.  It is assumed
+    // that the string key is embedded in the hashed value
+    /// and can be extracted via a call to ExtractKeyDelegate (in order to save space and allow cleanup
+    // of key if value is released due to a WeakReference
     /// TValue releasing its target).
     /// </summary>
     /// <remarks>
     /// All methods on this class are thread-safe.
     ///
-    /// When the hash table fills up, it is necessary to resize it and rehash all contents.  Because this can be expensive,
-    /// a lock is taken, and one thread is responsible for the resize.  Other threads which need to add values must wait
+    /// When the hash table fills up, it is necessary to resize it and rehash all contents.  Because
+    // this can be expensive,
+    /// a lock is taken, and one thread is responsible for the resize.  Other threads which need to add
+    // values must wait
     /// for the resize to be complete.
     ///
     /// Thread-Safety Notes
     /// ===================
     ///
-    /// 1. Because performance and scalability are such a concern with the global name table, I have avoided the use of
-    ///    BIFALOs (Big Fat Locks).  Instead, I use CompareExchange, Interlocked.Increment, memory barriers, atomic state objects,
-    ///    etc. to avoid locks.  Any changes to code which accesses these variables should be carefully reviewed and tested,
-    ///    as it can be *very* tricky.  In particular, if you don't understand the CLR memory model or if you don't know
-    ///    what a memory barrier is, DON'T attempt to modify this code.  A good discussion of these topics can be found at
+    /// 1. Because performance and scalability are such a concern with the global name table, I have
+    // avoided the use of
+    ///    BIFALOs (Big Fat Locks).  Instead, I use CompareExchange, Interlocked.Increment, memory
+    // barriers, atomic state objects,
+    ///    etc. to avoid locks.  Any changes to code which accesses these variables should be carefully
+    // reviewed and tested,
+    ///    as it can be *very* tricky.  In particular, if you don't understand the CLR memory model or
+    // if you don't know
+    ///    what a memory barrier is, DON'T attempt to modify this code.  A good discussion of these
+    // topics can be found at
     ///    <![CDATA[http://discuss.develop.com/archives/wa.exe?A2=ind0203B&L=DOTNET&P=R375]]>.
     ///
-    /// 2. Because I am not sure if the CLR spec has changed since versions 1.0/1.1, I am assuming the weak memory model that
-    ///    is described in the ECMA spec, in which normal writes can be reordered.  This means I must introduce more memory
+    /// 2. Because I am not sure if the CLR spec has changed since versions 1.0/1.1, I am assuming the
+    // weak memory model that
+    ///    is described in the ECMA spec, in which normal writes can be reordered.  This means I must
+    // introduce more memory
     ///    barriers than otherwise would be necessary.
     ///
     /// 3. There are several thread-safety concepts and patterns I utilize in this code:
-    ///      a. Publishing -- There are a small number of places where state is exposed, or published, to multiple threads.
-    ///                       These places are marked with the comment "PUBLISH", and are key locations to consider when
+    ///      a. Publishing -- There are a small number of places where state is exposed, or published,
+    // to multiple threads.
+    ///                       These places are marked with the comment "PUBLISH", and are key locations
+    // to consider when
     ///                       reviewing the code for thread-safety.
     ///
-    ///      b. Immutable objects -- Immutable objects initialize their fields once in their constructor and then never modify
-    ///                              them again.  As long as care is taken to ensure that initial field values are visible to
-    ///                              other threads before publishing the immutable object itself, immutable objects are
+    ///      b. Immutable objects -- Immutable objects initialize their fields once in their constructor
+    // and then never modify
+    ///                              them again.  As long as care is taken to ensure that initial field
+    // values are visible to
+    ///                              other threads before publishing the immutable object itself,
+    // immutable objects are
     ///                              completely thread-safe.
     ///
-    ///      c. Atomic state objects -- Locks typically are taken when several pieces of state must be updated atomically.  In
-    ///                                 other words, there is a window in which state is inconsistent, and that window must
-    ///                                 be protected from view by locking.  However, if a new object is created each time state
-    ///                                 changes (or state changes substantially), then during creation the new object is only
-    ///                                 visible to a single thread.  Once construction is complete, an assignment (guaranteed
-    ///                                 atomic) can replace the old state object with the new state object, thus publishing a
+    ///      c. Atomic state objects -- Locks typically are taken when several pieces of state must be
+    // updated atomically.  In
+    ///                                 other words, there is a window in which state is inconsistent,
+    // and that window must
+    ///                                 be protected from view by locking.  However, if a new object is
+    // created each time state
+    ///                                 changes (or state changes substantially), then during creation
+    // the new object is only
+    ///                                 visible to a single thread.  Once construction is complete, an
+    // assignment (guaranteed
+    ///                                 atomic) can replace the old state object with the new state
+    // object, thus publishing a
     ///                                 consistent view to all threads.
     ///
-    ///      d. Retry -- When several threads contend over shared state which only one is allowed to possess, it is possible
-    ///                  to avoid locking by repeatedly attempting to acquire the shared state.  The CompareExchange method
-    ///                  is useful for atomically ensuring that only one thread succeeds, and other threads are notified that
+    ///      d. Retry -- When several threads contend over shared state which only one is allowed to
+    // possess, it is possible
+    ///                  to avoid locking by repeatedly attempting to acquire the shared state.  The
+    // CompareExchange method
+    ///                  is useful for atomically ensuring that only one thread succeeds, and other
+    // threads are notified that
     ///                  they must retry.
     ///
     /// 4. All variables which can be written by multiple threads are marked "SHARED STATE".
@@ -66,7 +91,8 @@ namespace System.Xml.Linq
 
         /// <summary>
         /// Prototype of function which is called to extract a string key value from a hashed value.
-        /// Returns null if the hashed value is invalid (e.g. value has been released due to a WeakReference TValue being cleaned up).
+        /// Returns null if the hashed value is invalid (e.g. value has been released due to a WeakReference
+        // TValue being cleaned up).
         /// </summary>
         public delegate string? ExtractKeyDelegate(TValue value);
 
@@ -92,7 +118,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Add a value to the hash table, hashed based on a string key embedded in it.  Return the added value (may be a different object than "value").
+        /// Add a value to the hash table, hashed based on a string key embedded in it.  Return the added
+        // value (may be a different object than "value").
         /// </summary>
         public TValue Add(TValue value)
         {
@@ -114,7 +141,8 @@ namespace System.Xml.Linq
                 lock (this)
                 {
                     XHashtableState newState = _state.Resize();
-                    // Use memory barrier to ensure that the resized XHashtableState object is fully constructed before it is assigned
+                    // Use memory barrier to ensure that the resized XHashtableState object is fully constructed before
+                    // it is assigned
                     Thread.MemoryBarrier();
                     _state = newState;
                 }
@@ -122,16 +150,23 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// This class contains all the hash table state.  Rather than creating a bucket object, buckets are structs
-        /// packed into an array.  Buckets with the same truncated hash code are linked into lists, so that collisions
+        /// This class contains all the hash table state.  Rather than creating a bucket object, buckets are
+        // structs
+        /// packed into an array.  Buckets with the same truncated hash code are linked into lists, so that
+        // collisions
         /// can be disambiguated.
         /// </summary>
         /// <remarks>
-        /// Note that the "buckets" and "entries" arrays are never themselves written by multiple threads.  Instead, the
-        /// *contents* of the array are written by multiple threads.  Resizing the hash table does not modify these variables,
-        /// or even modify the contents of these variables.  Instead, resizing makes an entirely new XHashtableState object
-        /// in which all entries are rehashed.  This strategy allows reader threads to continue finding values in the "old"
-        /// XHashtableState, while writer threads (those that need to add a new value to the table) are blocked waiting for
+        /// Note that the "buckets" and "entries" arrays are never themselves written by multiple threads.
+        // Instead, the
+        /// *contents* of the array are written by multiple threads.  Resizing the hash table does not
+        // modify these variables,
+        /// or even modify the contents of these variables.  Instead, resizing makes an entirely new
+        // XHashtableState object
+        /// in which all entries are rehashed.  This strategy allows reader threads to continue finding
+        // values in the "old"
+        /// XHashtableState, while writer threads (those that need to add a new value to the table) are
+        // blocked waiting for
         /// the resize to complete.
         /// </remarks>
         private sealed class XHashtableState
@@ -161,7 +196,8 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// If this table is not full, then just return "this".  Otherwise, create and return a new table with
+            /// If this table is not full, then just return "this".  Otherwise, create and return a new table
+            // with
             /// additional capacity, and rehash all values in the table.
             /// </summary>
             public XHashtableState Resize()
@@ -180,7 +216,8 @@ namespace System.Xml.Linq
 
                     if (entryIdx == EndOfList)
                     {
-                        // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to resize
+                        // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to
+                        // resize
                         entryIdx = Interlocked.CompareExchange(
                             ref _buckets[bucketIdx],
                             FullList,
@@ -197,7 +234,8 @@ namespace System.Xml.Linq
 
                         if (_entries[entryIdx].Next == EndOfList)
                         {
-                            // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to resize
+                            // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to
+                            // resize
                             entryIdx = Interlocked.CompareExchange(
                                 ref _entries[entryIdx].Next,
                                 FullList,
@@ -216,7 +254,8 @@ namespace System.Xml.Linq
                     );
                 }
 
-                // Double number of valid entries; if result is less than current capacity, then use current capacity
+                // Double number of valid entries; if result is less than current capacity, then use current
+                // capacity
                 if (newSize < _buckets.Length / 2)
                 {
                     newSize = _buckets.Length;
@@ -255,7 +294,8 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Attempt to find "key" in the table.  If the key exists, return the associated value in "value" and
+            /// Attempt to find "key" in the table.  If the key exists, return the associated value in "value"
+            // and
             /// return true.  Otherwise return false.
             /// </summary>
             public bool TryGetValue(
@@ -281,8 +321,10 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Attempt to add "value" to the table, hashed by an embedded string key.  If a value having the same key already exists,
-            /// then return the existing value in "newValue".  Otherwise, return the newly added value in "newValue".
+            /// Attempt to add "value" to the table, hashed by an embedded string key.  If a value having the
+            // same key already exists,
+            /// then return the existing value in "newValue".  Otherwise, return the newly added value in
+            // "newValue".
             ///
             /// If the hash table is full, return false.  Otherwise, return true.
             /// </summary>
@@ -296,7 +338,8 @@ namespace System.Xml.Linq
                 // Assume "value" will be added and returned as "newValue"
                 newValue = value;
 
-                // Extract the key from the value.  If it's null, then value is invalid and does not need to be added to table.
+                // Extract the key from the value.  If it's null, then value is invalid and does not need to be
+                // added to table.
                 key = _extractKey(value);
                 if (key == null)
                     return true;
@@ -304,8 +347,10 @@ namespace System.Xml.Linq
                 // Compute hash code over entire length of key
                 hashCode = ComputeHashCode(key, 0, key.Length);
 
-                // Assume value is not yet in the hash table, and prepare to add it (if table is full, return false).
-                // Use the entry index returned from Increment, which will never be zero, as zero conflicts with EndOfList.
+                // Assume value is not yet in the hash table, and prepare to add it (if table is full, return
+                // false).
+                // Use the entry index returned from Increment, which will never be zero, as zero conflicts with
+                // EndOfList.
                 // Although this means that the first entry will never be used, it avoids the need to initialize all
                 // starting buckets to the EndOfList value.
                 newEntry = Interlocked.Increment(ref _numEntries);
@@ -315,7 +360,8 @@ namespace System.Xml.Linq
                 _entries[newEntry].Value = value;
                 _entries[newEntry].HashCode = hashCode;
 
-                // Ensure that all writes to the entry can't be reordered past this barrier (or other threads might see new entry
+                // Ensure that all writes to the entry can't be reordered past this barrier (or other threads might
+                // see new entry
                 // in list before entry has been initialized!).
                 Thread.MemoryBarrier();
 
@@ -324,7 +370,8 @@ namespace System.Xml.Linq
                 while (!FindEntry(hashCode, key, 0, key.Length, ref entryIndex))
                 {
                     // PUBLISH (buckets slot)
-                    // No matching entry found, so add the new entry to the end of the list ("entryIndex" is index of last entry)
+                    // No matching entry found, so add the new entry to the end of the list ("entryIndex" is index of
+                    // last entry)
                     if (entryIndex == 0)
                         entryIndex = Interlocked.CompareExchange(
                             ref _buckets[hashCode & (_buckets.Length - 1)],
@@ -339,14 +386,18 @@ namespace System.Xml.Linq
                         );
 
                     // Return true only if the CompareExchange succeeded (happens when replaced value is EndOfList).
-                    // Return false if the linked list turned out to be full because another thread is currently resizing
-                    // the hash table.  In this case, entries[newEntry] is orphaned (not part of any linked list) and the
-                    // Add needs to be performed on the new hash table.  Otherwise, keep looping, looking for new end of list.
+                    // Return false if the linked list turned out to be full because another thread is currently
+                    // resizing
+                    // the hash table.  In this case, entries[newEntry] is orphaned (not part of any linked list) and
+                    // the
+                    // Add needs to be performed on the new hash table.  Otherwise, keep looping, looking for new end of
+                    // list.
                     if (entryIndex <= EndOfList)
                         return entryIndex == EndOfList;
                 }
 
-                // Another thread already added the value while this thread was trying to add, so return that instance instead.
+                // Another thread already added the value while this thread was trying to add, so return that
+                // instance instead.
                 // Note that entries[newEntry] will be orphaned (not part of any linked list) in this case
                 newValue = _entries[entryIndex].Value;
 
@@ -354,9 +405,12 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Searches a linked list of entries, beginning at "entryIndex".  If "entryIndex" is 0, then search starts at a hash bucket instead.
-            /// Each entry in the list is matched against the (hashCode, key, index, count) key.  If a matching entry is found, then its
-            /// entry index is returned in "entryIndex" and true is returned.  If no matching entry is found, then the index of the last entry
+            /// Searches a linked list of entries, beginning at "entryIndex".  If "entryIndex" is 0, then search
+            // starts at a hash bucket instead.
+            /// Each entry in the list is matched against the (hashCode, key, index, count) key.  If a matching
+            // entry is found, then its
+            /// entry index is returned in "entryIndex" and true is returned.  If no matching entry is found,
+            // then the index of the last entry
             /// in the list (or 0 if list is empty) is returned in "entryIndex" and false is returned.
             /// </summary>
             /// <remarks>
@@ -388,7 +442,8 @@ namespace System.Xml.Linq
                         string? keyCompare = _extractKey(_entries[currentIndex].Value);
 
                         // If the key is invalid, then attempt to remove the current entry from the linked list.
-                        // This is thread-safe in the case where the Next field points to another entry, since once a Next field points
+                        // This is thread-safe in the case where the Next field points to another entry, since once a Next
+                        // field points
                         // to another entry, it will never be modified to be EndOfList or FullList.
                         if (keyCompare == null)
                         {
@@ -433,7 +488,8 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Compute hash code for a string key (index, count substring of "key").  The algorithm used is the same on used in NameTable.cs in System.Xml.
+            /// Compute hash code for a string key (index, count substring of "key").  The algorithm used is the
+            // same on used in NameTable.cs in System.Xml.
             /// </summary>
             private static int ComputeHashCode(string key, int index, int count)
             {
@@ -442,8 +498,10 @@ namespace System.Xml.Linq
             }
 
             /// <summary>
-            /// Hash table entry.  The "Value" and "HashCode" fields are filled during initialization, and are never changed.  The "Next"
-            /// field is updated when a new entry is chained to this one, and therefore care must be taken to ensure that updates to
+            /// Hash table entry.  The "Value" and "HashCode" fields are filled during initialization, and are
+            // never changed.  The "Next"
+            /// field is updated when a new entry is chained to this one, and therefore care must be taken to
+            // ensure that updates to
             /// this field are thread-safe.
             /// </summary>
             private struct Entry

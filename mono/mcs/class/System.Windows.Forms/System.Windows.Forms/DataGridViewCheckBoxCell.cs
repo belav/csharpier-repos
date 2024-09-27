@@ -440,7 +440,8 @@ namespace System.Windows.Forms
 
         protected override void OnMouseLeave(int rowIndex)
         {
-            // if the cell's button is not in its normal state, this method causes the cell's user interface to be updated.
+            // if the cell's button is not in its normal state, this method causes the cell's user interface to
+            // be updated.
             if (!ReadOnly && check_state != PushButtonState.Normal)
             {
                 check_state = PushButtonState.Normal;

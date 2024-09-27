@@ -94,7 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         {
             var command = (OleMenuCommand)sender;
 
-            // If the option hasn't been expicitly set then fallback to whether this is enabled as part of an experiment.
+            // If the option hasn't been expicitly set then fallback to whether this is enabled as part of an
+            // experiment.
             var isOptionEnabled =
                 _globalOptions.GetOption(FeatureOnOffOptions.OfferRemoveUnusedReferences)
                 ?? _globalOptions.GetOption(

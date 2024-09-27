@@ -7,7 +7,8 @@ using Microsoft.VisualStudio.Text;
 namespace Microsoft.CodeAnalysis.Editor
 {
     /// <summary>
-    /// Represents an editor <see cref="VisualStudio.Text.SnapshotSpan"/> and the <see cref="CodeAnalysis.Document"/>
+    /// Represents an editor <see cref="VisualStudio.Text.SnapshotSpan"/> and the <see
+    // cref="CodeAnalysis.Document"/>
     /// the span was produced from.
     /// </summary>
     /// <remarks>

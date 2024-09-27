@@ -328,7 +328,8 @@ namespace System.Globalization
         /// <summary>
         /// Get the list of era values.
         /// </summary>
-        /// <returns>The int array of the era names supported in this calendar or null if era is not used.</returns>
+        /// <returns>The int array of the era names supported in this calendar or null if era is not
+        // used.</returns>
         public abstract int[] Eras { get; }
 
         // Returns the hour part of the specified DateTime. The returned value is an
@@ -398,7 +399,8 @@ namespace System.Globalization
             int dayOfYear = GetDayOfYear(time) - 1; // Make the day of year to be 0-based, so that 1/1 is day 0.
             // Calculate the day of week for the first day of the year.
             // dayOfWeek - (dayOfYear % 7) is the day of week for the first day of this year.  Note that
-            // this value can be less than 0.  It's fine since we are making it positive again in calculating offset.
+            // this value can be less than 0.  It's fine since we are making it positive again in calculating
+            // offset.
             int dayForJan1 = (int)GetDayOfWeek(time) - (dayOfYear % 7);
             int offset = (dayForJan1 - firstDayOfWeek + 14) % 7;
             Debug.Assert(offset >= 0, "Calendar.GetFirstDayWeekOfYear(): offset >= 0");
@@ -436,10 +438,12 @@ namespace System.Globalization
 
             // Day of week is 0-based.
             // Get the day of week for 1/1.  This can be derived from the day of week of the target day.
-            // Note that we can get a negative value.  It's ok since we are going to make it a positive value when calculating the offset.
+            // Note that we can get a negative value.  It's ok since we are going to make it a positive value
+            // when calculating the offset.
             dayForJan1 = (int)GetDayOfWeek(time) - (dayOfYear % 7);
 
-            // Now, calculate the offset.  Subtract the first day of week from the dayForJan1.  And make it a positive value.
+            // Now, calculate the offset.  Subtract the first day of week from the dayForJan1.  And make it a
+            // positive value.
             offset = (firstDayOfWeek - dayForJan1 + 14) % 7;
             if (offset != 0 && offset >= fullDays)
             {

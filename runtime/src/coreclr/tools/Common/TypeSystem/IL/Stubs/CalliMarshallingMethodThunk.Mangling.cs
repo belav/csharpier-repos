@@ -19,7 +19,8 @@ namespace Internal.IL.Stubs
             {
                 string prefix = RuntimeMarshallingEnabled ? "CalliWithRuntimeMarshalling" : "Calli";
 
-                // The target signature is expected to be normalized as MethodSignatureFlags.UnmanagedCallingConvention
+                // The target signature is expected to be normalized as
+                // MethodSignatureFlags.UnmanagedCallingConvention
                 Debug.Assert(
                     (_targetSignature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
                         == MethodSignatureFlags.UnmanagedCallingConvention

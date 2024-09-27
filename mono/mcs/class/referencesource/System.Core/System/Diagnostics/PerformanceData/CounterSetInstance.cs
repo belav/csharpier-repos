@@ -170,7 +170,8 @@ namespace System.Diagnostics.PerformanceData
         }
 
         /// <summary>
-        /// Access CounterSetInstanceCounterDataSet property. Developers can then use defined indexer to access
+        /// Access CounterSetInstanceCounterDataSet property. Developers can then use defined indexer to
+        // access
         /// specific CounterData object to query/update raw counter data.
         /// </summary>
         public CounterSetInstanceCounterDataSet Counters

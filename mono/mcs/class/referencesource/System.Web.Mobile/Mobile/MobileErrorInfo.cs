@@ -14,12 +14,12 @@ using System.Text.RegularExpressions;
 
 namespace System.Web.Mobile
 {
-    /*
-     * Mobile Error Info
-     * Contains information about an error that occurs in a mobile application.
-     * This information can be used to format the error for the target device.
-     *
-     *
+/*
+* Mobile Error Info
+* Contains information about an error that occurs in a mobile application.
+* This information can be used to format the error for the target device.
+*
+*
 
 
 

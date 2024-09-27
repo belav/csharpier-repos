@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 ///     </para>
 /// </remarks>
 public interface IMigrationsSqlGenerator
@@ -24,7 +25,8 @@ public interface IMigrationsSqlGenerator
     ///     Generates commands from a list of operations.
     /// </summary>
     /// <param name="operations">The operations.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="options">The options to use when generating commands.</param>
     /// <returns>The list of commands to be executed or scripted.</returns>
     IReadOnlyList<MigrationCommand> Generate(

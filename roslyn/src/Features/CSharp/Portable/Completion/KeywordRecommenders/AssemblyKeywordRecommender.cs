@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 {
                     case CompilationUnitSyntax:
                     case BaseNamespaceDeclarationSyntax:
-                    // The case where the parent of attributeList is (Class/Interface/Enum/Struct)DeclarationSyntax, like:
+                    // The case where the parent of attributeList is (Class/Interface/Enum/Struct)DeclarationSyntax,
+                    // like:
                     // [$$
                     // class Goo {
                     // for these cases is necessary check if they Parent is CompilationUnitSyntax

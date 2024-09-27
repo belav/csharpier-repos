@@ -11,161 +11,186 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="bool"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="bool"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(bool value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="bool"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="bool"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(bool? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="byte"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="byte"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(byte value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="byte"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="byte"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(byte? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="char"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="char"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(char value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="char"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="char"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(char? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="DateTime"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTime"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(DateTime value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="DateTime"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTime"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(DateTime? value) => JsonValue.Create(value);
 
         /// <summary>
-        ///   Defines an implicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
+        ///   Defines an implicit conversion of a given <see cref="DateTimeOffset"/> to a <see
+        // cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(DateTimeOffset value) => JsonValue.Create(value);
 
         /// <summary>
-        ///   Defines an implicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
+        ///   Defines an implicit conversion of a given <see cref="DateTimeOffset"/> to a <see
+        // cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(DateTimeOffset? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="decimal"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="decimal"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(decimal value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="decimal"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="decimal"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(decimal? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="double"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="double"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(double value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="double"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="double"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(double? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="Guid"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="Guid"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(Guid value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="Guid"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="Guid"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(Guid? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="short"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="short"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(short value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="short"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="short"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(short? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="int"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="int"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(int value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="int"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="int"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(int? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="long"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="long"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(long value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="long"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="long"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(long? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="sbyte"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="sbyte"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode(sbyte value) => JsonValue.Create(value);
 
@@ -173,7 +198,8 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="sbyte"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="sbyte"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode?(sbyte? value) => JsonValue.Create(value);
 
@@ -181,21 +207,24 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="float"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="float"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode(float value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="float"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="float"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         public static implicit operator JsonNode?(float? value) => JsonValue.Create(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="string"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="string"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [return: NotNullIfNotNull(nameof(value))]
         public static implicit operator JsonNode?(string? value) => JsonValue.Create(value);
 
@@ -203,7 +232,8 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="ushort"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="ushort"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode(ushort value) => JsonValue.Create(value);
 
@@ -211,7 +241,8 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="ushort"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="ushort"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode?(ushort? value) => JsonValue.Create(value);
 
@@ -219,7 +250,8 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="uint"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="uint"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode(uint value) => JsonValue.Create(value);
 
@@ -227,7 +259,8 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="uint"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="uint"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode?(uint? value) => JsonValue.Create(value);
 
@@ -235,7 +268,8 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="ulong"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="ulong"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode(ulong value) => JsonValue.Create(value);
 
@@ -243,7 +277,8 @@ namespace System.Text.Json.Nodes
         ///   Defines an implicit conversion of a given <see cref="ulong"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="ulong"/> to implicitly convert.</param>
-        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/> parameter.</returns>
+        /// <returns>A <see cref="JsonNode"/> instance converted from the <paramref name="value"/>
+        // parameter.</returns>
         [System.CLSCompliantAttribute(false)]
         public static implicit operator JsonNode?(ulong? value) => JsonValue.Create(value);
 
@@ -304,7 +339,8 @@ namespace System.Text.Json.Nodes
         public static explicit operator DateTime?(JsonNode? value) => value?.GetValue<DateTime>();
 
         /// <summary>
-        ///   Defines an explicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
+        ///   Defines an explicit conversion of a given <see cref="DateTimeOffset"/> to a <see
+        // cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to explicitly convert.</param>
         /// <returns>A value converted from the <see cref="JsonNode"/> instance.</returns>
@@ -312,7 +348,8 @@ namespace System.Text.Json.Nodes
             value.GetValue<DateTimeOffset>();
 
         /// <summary>
-        ///   Defines an explicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
+        ///   Defines an explicit conversion of a given <see cref="DateTimeOffset"/> to a <see
+        // cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to explicitly convert.</param>
         /// <returns>A value converted from the <see cref="JsonNode"/> instance.</returns>

@@ -18,13 +18,15 @@ namespace System.Xml.Serialization
     {
         string name;
 
-        /// <include file='doc\SoapEnumAttribute.uex' path='docs/doc[@for="SoapEnumAttribute.SoapEnumAttribute"]/*' />
+        /// <include file='doc\SoapEnumAttribute.uex'
+        // path='docs/doc[@for="SoapEnumAttribute.SoapEnumAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SoapEnumAttribute() { }
 
-        /// <include file='doc\SoapEnumAttribute.uex' path='docs/doc[@for="SoapEnumAttribute.SoapEnumAttribute1"]/*' />
+        /// <include file='doc\SoapEnumAttribute.uex'
+        // path='docs/doc[@for="SoapEnumAttribute.SoapEnumAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

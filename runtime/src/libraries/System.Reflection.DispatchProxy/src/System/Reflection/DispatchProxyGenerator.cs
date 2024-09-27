@@ -15,19 +15,24 @@ namespace System.Reflection
     // Helper class to handle the IL EMIT for the generation of proxies.
     // Much of this code was taken directly from the Silverlight proxy generation.
     // Differences between this and the Silverlight version are:
-    //  1. This version is based on DispatchProxy from NET Native and CoreCLR, not RealProxy in Silverlight ServiceModel.
+    //  1. This version is based on DispatchProxy from NET Native and CoreCLR, not RealProxy in
+    // Silverlight ServiceModel.
     //     There are several notable differences between them.
-    //  2. Both DispatchProxy and RealProxy permit the caller to ask for a proxy specifying a pair of types:
+    //  2. Both DispatchProxy and RealProxy permit the caller to ask for a proxy specifying a pair of
+    // types:
     //     the interface type to implement, and a base type.  But they behave slightly differently:
-    //       - RealProxy generates a proxy type that derives from Object and *implements" all the base type's
+    //       - RealProxy generates a proxy type that derives from Object and *implements" all the base
+    // type's
     //         interfaces plus all the interface type's interfaces.
     //       - DispatchProxy generates a proxy type that *derives* from the base type and implements all
-    //         the interface type's interfaces.  This is true for both the CLR version in NET Native and this
+    //         the interface type's interfaces.  This is true for both the CLR version in NET Native and
+    // this
     //         version for CoreCLR.
     //  3. DispatchProxy and RealProxy use different type hierarchies for the generated proxies:
     //       - RealProxy type hierarchy is:
     //             proxyType : proxyBaseType : object
-    //         Presumably the 'proxyBaseType' in the middle is to allow it to implement the base type's interfaces
+    //         Presumably the 'proxyBaseType' in the middle is to allow it to implement the base type's
+    // interfaces
     //         explicitly, preventing collision for same name methods on the base and interface types.
     //       - DispatchProxy hierarchy is:
     //             proxyType : baseType (where baseType : DispatchProxy)
@@ -41,7 +46,8 @@ namespace System.Reflection
     //
     internal static class DispatchProxyGenerator
     {
-        // Generated proxies have a private MethodInfo[] field that generated methods use to get the corresponding MethodInfo.
+        // Generated proxies have a private MethodInfo[] field that generated methods use to get the
+        // corresponding MethodInfo.
         // It is the first field in the class and the first ctor parameter.
         private const int MethodInfosFieldAndCtorParameterIndex = 0;
 
@@ -135,7 +141,8 @@ namespace System.Reflection
             // This cache of generated types grows unbounded, one element per unique T/ProxyT pair.
             // This approach is used to prevent regenerating identical proxy types for identical T/Proxy pairs,
             // which would ultimately be a more expensive leak.
-            // Proxy instances are not cached. Their lifetime is entirely owned by the caller of DispatchProxy.Create.
+            // Proxy instances are not cached. Their lifetime is entirely owned by the caller of
+            // DispatchProxy.Create.
             private readonly Dictionary<
                 Type,
                 Dictionary<Type, GeneratedTypeInfo>
@@ -281,7 +288,8 @@ namespace System.Reflection
                 ProxyBuilder pb = CreateProxy("generatedProxy", baseType);
 
                 foreach (Type t in interfaceType.GetInterfaces())
-                    // interfaceType is annotated as preserve All members, so any Types returned from GetInterfaces should be preserved as well once https://github.com/mono/linker/issues/1731 is fixed.
+                    // interfaceType is annotated as preserve All members, so any Types returned from GetInterfaces
+                    // should be preserved as well once https://github.com/mono/linker/issues/1731 is fixed.
 #pragma warning disable IL2072
                     pb.AddInterfaceImpl(t);
 #pragma warning restore IL2072

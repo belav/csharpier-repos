@@ -349,7 +349,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 );
             }
 
-            // We need to add the slots added by each child uniformly for others (as nulls) since this is a union operation.
+            // We need to add the slots added by each child uniformly for others (as nulls) since this is a
+            // union operation.
             if (additionalChildSlots.Count != 0)
             {
                 foreach (CqlBlock childBlock in children)
@@ -399,7 +400,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             for (int slotNum = 0; slotNum < totalSlots; slotNum++)
             {
                 SlotInfo slotInfo = firstChild.Slots[slotNum];
-                // A required slot is somehow projected by a child in Union, so set isProjected to be the same as isRequired.
+                // A required slot is somehow projected by a child in Union, so set isProjected to be the same as
+                // isRequired.
                 bool isRequired = requiredSlots[slotNum];
                 slotInfos[slotNum] = new SlotInfo(
                     isRequired,
@@ -461,7 +463,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             foreach (CellTreeNode child in Children)
             {
                 // Determine the slots that are projected by this child.
-                // These are the required slots as well - unlike Union, we do not need the child to project any extra nulls.
+                // These are the required slots as well - unlike Union, we do not need the child to project any
+                // extra nulls.
                 bool[] childProjectedSlots = child.GetProjectedSlots();
                 AndWith(childProjectedSlots, requiredSlots);
                 CqlBlock childBlock = child.ToCqlBlock(
@@ -823,7 +826,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         // Left outer join means keeping the domain of the leftmost child
                         break;
                     case CellTreeOpType.LASJ:
-                        // not used in basic view generation but current validation calls Simplify, so add this for debugging
+                        // not used in basic view generation but current validation calls Simplify, so add this for
+                        // debugging
                         fragmentQuery = qp.Difference(fragmentQuery, nextQuery);
                         break;
                     default:

@@ -114,7 +114,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             //     "item": [
             //       {
             //         "title": "Json.NET 1.3 + New license + Now on CodePlex",
-            //         "description": "Announcing the release of Json.NET 1.3, the MIT license and being available on CodePlex",
+            //         "description": "Announcing the release of Json.NET 1.3, the MIT license and being
+            // available on CodePlex",
             //         "link": "http://james.newtonking.com/projects/json-net.aspx",
             //         "category": [
             //           "Json.NET",

@@ -60,7 +60,8 @@ namespace System.Web.Services.Description
             get { return reflector.Service; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ServiceDescription"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ServiceDescription"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -69,7 +70,8 @@ namespace System.Web.Services.Description
             get { return reflector.ServiceDescription; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ServiceDescriptions"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ServiceDescriptions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -92,7 +94,8 @@ namespace System.Web.Services.Description
             get { return reflector.Schemas; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.SchemaExporter"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.SchemaExporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -101,7 +104,8 @@ namespace System.Web.Services.Description
             get { return reflector.SchemaExporter; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ReflectionImporter"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ReflectionImporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -110,7 +114,8 @@ namespace System.Web.Services.Description
             get { return reflector.ReflectionImporter; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.DefaultNamespace"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.DefaultNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -119,7 +124,8 @@ namespace System.Web.Services.Description
             get { return reflector.ServiceAttribute.Namespace; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ServiceUrl"]/*' />
+        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ServiceUrl"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -128,7 +134,8 @@ namespace System.Web.Services.Description
             get { return reflector.ServiceUrl; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ServiceType"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ServiceType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -155,7 +162,8 @@ namespace System.Web.Services.Description
             get { return binding; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.PortType"]/*' />
+        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.PortType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -173,7 +181,8 @@ namespace System.Web.Services.Description
             get { return port; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.Operation"]/*' />
+        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.Operation"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -182,7 +191,8 @@ namespace System.Web.Services.Description
             get { return operation; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.OperationBinding"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.OperationBinding"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -191,7 +201,8 @@ namespace System.Web.Services.Description
             get { return operationBinding; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.MethodAttribute"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.MethodAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -214,7 +225,8 @@ namespace System.Web.Services.Description
             get { return reflector.ReflectionContext; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.InputMessage"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.InputMessage"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -249,7 +261,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.OutputMessage"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.OutputMessage"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -284,7 +297,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.HeaderMessages"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.HeaderMessages"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -374,9 +388,12 @@ namespace System.Web.Services.Description
             // Only check for empty binding if we do not have real bindings
             if (reflectedBindings.Count == 0)
             {
-                // It should be possible to get the value for WebReference.ServiceLocationUrl even if the web service has no web methods.
-                // This is a common scenario for Whitehorse during the early stages of development when a user is defining the web
-                // components and their inter-connections, but not the details of whatmethods will be present on each web service.
+                // It should be possible to get the value for WebReference.ServiceLocationUrl even if the web
+                // service has no web methods.
+                // This is a common scenario for Whitehorse during the early stages of development when a user is
+                // defining the web
+                // components and their inter-connections, but not the details of whatmethods will be present on
+                // each web service.
                 // get all WebServiceBindings
                 emptyBinding = true;
                 ReflectedBinding binding = null;
@@ -436,7 +453,8 @@ namespace System.Web.Services.Description
             ServiceDescription.Imports.Add(newImport);
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.GetServiceDescription"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.GetServiceDescription"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -576,7 +594,8 @@ namespace System.Web.Services.Description
             get { return WsiProfiles.None; }
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ProtocolName"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ProtocolName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -587,19 +606,22 @@ namespace System.Web.Services.Description
         // information passed to the methods over time w/o breaking anyone.   They are protected
         // instead of public because this object is passed to extensions and we don't want
         // those calling these methods.
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.BeginClass"]/*' />
+        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.BeginClass"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected virtual void BeginClass() { }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ReflectMethod"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ReflectMethod"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected abstract bool ReflectMethod();
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ReflectMethodBinding"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ReflectMethodBinding"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -608,13 +630,15 @@ namespace System.Web.Services.Description
             return string.Empty;
         }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.EndClass"]/*' />
+        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.EndClass"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected virtual void EndClass() { }
 
-        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ReflectDescription"]/*' />
+        /// <include file='doc\ProtocolReflector.uex'
+        // path='docs/doc[@for="ProtocolReflector.ReflectDescription"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

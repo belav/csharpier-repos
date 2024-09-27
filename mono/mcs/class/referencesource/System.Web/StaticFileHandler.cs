@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Static File Handler
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Static File Handler
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -204,13 +204,20 @@ namespace System.Web
             return true;
         }
 
-        // The Range header consists of one or more byte range specifiers.  E.g, "Range: bytes=0-1024,-1024" is a request
-        // for the first and last 1024 bytes of a file. Before this method is called, startIndex points to the beginning
-        // of a byte range specifier; and afterwards it points to the beginning of the next byte range specifier.
-        // If the current byte range specifier is syntactially inavlid, this function will return false indicating that the
-        // Range header must be ignored.  If the function returns true, then the byte range specifier will be converted to
-        // an offset and length, and the startIndex will be incremented to the next byte range specifier.  The byte range
-        // specifier (offset and length) returned by this function is satisfiable if and only if isSatisfiable is true.
+        // The Range header consists of one or more byte range specifiers.  E.g, "Range: bytes=0-1024,-1024"
+        // is a request
+        // for the first and last 1024 bytes of a file. Before this method is called, startIndex points to
+        // the beginning
+        // of a byte range specifier; and afterwards it points to the beginning of the next byte range
+        // specifier.
+        // If the current byte range specifier is syntactially inavlid, this function will return false
+        // indicating that the
+        // Range header must be ignored.  If the function returns true, then the byte range specifier will
+        // be converted to
+        // an offset and length, and the startIndex will be incremented to the next byte range specifier.
+        // The byte range
+        // specifier (offset and length) returned by this function is satisfiable if and only if
+        // isSatisfiable is true.
         private static bool GetNextRange(
             string rangeHeader,
             ref int startIndex,
@@ -445,7 +452,8 @@ namespace System.Web
                 }
                 else
                 {
-                    // It's a date. If it is greater than or equal to the last-write time of the file, we can send the range.
+                    // It's a date. If it is greater than or equal to the last-write time of the file, we can send the
+                    // range.
                     if (IsOutDated(ifRangeHeader, lastModified))
                     {
                         return handled;
@@ -537,7 +545,8 @@ namespace System.Web
 
             if (byteRangesCount == 0)
             {
-                // we parsed the Range header and found no satisfiable byte ranges, so return "416 Requested Range Not Satisfiable"
+                // we parsed the Range header and found no satisfiable byte ranges, so return "416 Requested Range
+                // Not Satisfiable"
                 SendRangeNotSatisfiable(response, fileLength);
                 handled = true;
                 return handled;

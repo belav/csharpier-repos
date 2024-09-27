@@ -5,11 +5,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
 ///     <para>
-///         A service that resolves a single <see cref="IInterceptor" /> from all those registered on
+///         A service that resolves a single <see cref="IInterceptor" /> from all those registered
+// on
 ///         the <see cref="DbContext" /> or in the internal service provider.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -21,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for
+// more information and examples.
 ///     </para>
 /// </remarks>
 public interface IInterceptors
@@ -31,7 +34,8 @@ public interface IInterceptors
     ///     the <see cref="DbContext" /> or in the internal service provider.
     /// </summary>
     /// <typeparam name="TInterceptor">The interceptor type to resolve.</typeparam>
-    /// <returns>The resolved interceptor, which may be <see langword="null" /> if none are registered.</returns>
+    /// <returns>The resolved interceptor, which may be <see langword="null" /> if none are
+    // registered.</returns>
     TInterceptor? Aggregate<TInterceptor>()
         where TInterceptor : class, IInterceptor;
 }

@@ -22,7 +22,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Accept_AddInvalidValueUsingUnusualCasing_ParserRetrievedUsingCaseInsensitiveComparison()
         {
-            // Use uppercase header name to make sure the parser gets retrieved using case-insensitive comparison.
+            // Use uppercase header name to make sure the parser gets retrieved using case-insensitive
+            // comparison.
             Assert.Throws<FormatException>(() =>
             {
                 headers.Add("AcCePt", "this is invalid");
@@ -387,7 +388,8 @@ namespace System.Net.Http.Tests
                 "Expect header count after Expect.Clear()."
             );
 
-            // Remove '100-continue' value from store. Since there are no other 'Expect' values, remove whole header.
+            // Remove '100-continue' value from store. Since there are no other 'Expect' values, remove whole
+            // header.
             headers.ExpectContinue = false;
             Assert.True(headers.ExpectContinue == false, "ExpectContinue == false");
             Assert.Equal(0, headers.Expect.Count);
@@ -920,7 +922,8 @@ namespace System.Net.Http.Tests
             headers.From = "invalid email address";
             Assert.Equal("invalid email address", headers.From);
 
-            // Null and empty string are equivalent. Setting to empty means remove the From header value (if any).
+            // Null and empty string are equivalent. Setting to empty means remove the From header value (if
+            // any).
             headers.From = string.Empty;
             Assert.Null(headers.From);
             Assert.False(
@@ -1330,7 +1333,8 @@ namespace System.Net.Http.Tests
                 "Connection header count after Connection.Clear()."
             );
 
-            // Remove 'close' value from store. Since there are no other 'Connection' values, remove whole header.
+            // Remove 'close' value from store. Since there are no other 'Connection' values, remove whole
+            // header.
             headers.ConnectionClose = false;
             Assert.True(headers.ConnectionClose == false, "ConnectionClose == false");
             Assert.Equal(0, headers.Connection.Count);
@@ -1406,7 +1410,8 @@ namespace System.Net.Http.Tests
                 headers.TransferEncoding.ElementAt(1)
             );
 
-            // Remove 'chunked' value from store. But leave other 'Transfer-Encoding' values. Note that according to
+            // Remove 'chunked' value from store. But leave other 'Transfer-Encoding' values. Note that
+            // according to
             // the RFC this is not valid, since 'chunked' must always be present. However this check is done
             // in the transport handler since the user can add invalid header values anyways.
             headers.TransferEncodingChunked = false;
@@ -1433,7 +1438,8 @@ namespace System.Net.Http.Tests
             Assert.Equal(0, headers.TransferEncoding.Count);
             Assert.False(headers.Contains("Transfer-Encoding"));
 
-            // Remove 'chunked' value from store. Since there are no other 'Transfer-Encoding' values, remove whole
+            // Remove 'chunked' value from store. Since there are no other 'Transfer-Encoding' values, remove
+            // whole
             // header.
             headers.TransferEncodingChunked = false;
             Assert.True(

@@ -12,7 +12,8 @@ namespace System.Web.UI.WebControls.Adapters
     using System.Web.UI.WebControls;
 
     // REVIEW: Inheritance.  If this inherits from ImageButtonAdapter, there is no way to create a
-    // WmlImageAdapter and set the Control property to delegate rendering (base.Render, below). Control is read-only.
+    // WmlImageAdapter and set the Control property to delegate rendering (base.Render, below). Control
+    // is read-only.
     // Maybe Control should be get/set for this situation.
     public class WmlImageButtonAdapter : WmlImageAdapter
     {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -264,7 +265,8 @@ namespace System.Web.WebPages
             return Items.GetEnumerator();
         }
 
-        // Creates a new PageData dictionary using only the original items from the pageData (excluding the string dictionary and indexed list),
+        // Creates a new PageData dictionary using only the original items from the pageData (excluding the
+        // string dictionary and indexed list),
         // and adding the parameters.
         internal static IDictionary<object, dynamic> CreatePageDataFromParameters(
             IDictionary<object, dynamic> previousPageData,

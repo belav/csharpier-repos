@@ -454,8 +454,10 @@ public class Http2WebSocketTests : Http2TestBase
     {
         var limits = _serviceContext.ServerOptions.Limits;
 
-        // We're going to send more than the MaxRequestBodySize bytes from the client to the server over the connection
-        // Since this is not a request body, this should be allowed like it would be for an upgraded connection.
+        // We're going to send more than the MaxRequestBodySize bytes from the client to the server over the
+        // connection
+        // Since this is not a request body, this should be allowed like it would be for an upgraded
+        // connection.
         limits.MaxRequestBodySize = 5;
 
         await InitializeConnectionAsync(async context =>

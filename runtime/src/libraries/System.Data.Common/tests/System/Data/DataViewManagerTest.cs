@@ -76,7 +76,8 @@ namespace System.Data.Tests
             m.DataViewSettingCollectionString =
                 "<DataViewSettingCollectionString>blah<table2-1 RowFilter='a=b' ApplyDefaultSort='true' /></DataViewSettingCollectionString>";
             // MS.NET ignores ApplyDefaultSort.
-            //            Assert.Equal (@"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter=""a=b"" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>", m.DataViewSettingCollectionString);
+            //            Assert.Equal (@"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter=""a=b""
+            // RowStateFilter=""Deleted""/></DataViewSettingCollectionString>", m.DataViewSettingCollectionString);
         }
 
         [Fact]

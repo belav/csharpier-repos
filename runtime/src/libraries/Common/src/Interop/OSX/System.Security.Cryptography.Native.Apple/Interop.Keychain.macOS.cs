@@ -293,7 +293,8 @@ internal static partial class Interop
 
             for (int i = 0; i < random.Length; i++)
             {
-                // Instead of true hexadecimal, we simply take lower and upper 4 bits and we offset them from ASCII 'A'
+                // Instead of true hexadecimal, we simply take lower and upper 4 bits and we offset them from ASCII
+                // 'A'
                 // to get printable form. We dont use managed string to avoid lingering copies.
                 utf8Passphrase[i * 2] = (byte)((random[i] & 0x0F) + 65);
                 utf8Passphrase[i * 2 + 1] = (byte)((random[i] >> 4) & 0x0F + 65);

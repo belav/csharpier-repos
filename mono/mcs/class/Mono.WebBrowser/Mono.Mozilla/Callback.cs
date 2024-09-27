@@ -940,7 +940,8 @@ namespace Mono.Mozilla
 
     internal delegate void CallbackPtrPtr(IntPtr arg1, IntPtr arg2);
 
-    //Don't have to worry about marshalling bool, PRBool seems very constant and uses 4 bit int underneath
+    //Don't have to worry about marshalling bool, PRBool seems very constant and uses 4 bit int
+    // underneath
     internal delegate void CallbackBool(bool val);
 
     internal delegate bool KeyCallback(

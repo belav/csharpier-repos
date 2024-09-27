@@ -29,7 +29,8 @@ namespace System.Activities.Debugger
     //  1. pdb (when available)
     //  2a. parse xaml files available in the same project (or metadata store) or
     //  2b. ask user to point to the correct xaml source.
-    //  3.  Publish (serialize to tmp file) and deserialize it to collect SourceLocation (for loose xaml).
+    //  3.  Publish (serialize to tmp file) and deserialize it to collect SourceLocation (for loose
+    // xaml).
     // Current code cover only step 3.
 
     [DebuggerNonUserCode]
@@ -97,7 +98,8 @@ namespace System.Activities.Debugger
                         checksum = wfSymbol.GetChecksum();
                         // rootActivity is the activity with the attached symbol string.
                         // rootActivity.RootActivity is the workflow root activity.
-                        // if they are not the same, then it must be compiled XAML, because loose XAML (i.e. XAMLX) always have the symbol attached at the root.
+                        // if they are not the same, then it must be compiled XAML, because loose XAML (i.e. XAMLX) always
+                        // have the symbol attached at the root.
                         if (rootActivity.RootActivity != rootActivity)
                         {
                             Fx.Assert(
@@ -254,7 +256,8 @@ namespace System.Activities.Debugger
         }
 
         // For most of the time, we need source location for object that appear on XAML.
-        // During debugging, however, we must not transform the internal activity to their origin to make sure it stop when the internal activity is about the execute
+        // During debugging, however, we must not transform the internal activity to their origin to make
+        // sure it stop when the internal activity is about the execute
         // Therefore, in debugger scenario, translateInternalActivityToOrigin will be set to false.
         internal static Dictionary<object, SourceLocation> GetSourceLocations(
             Activity rootActivity,
@@ -382,7 +385,8 @@ namespace System.Activities.Debugger
             bool requirePrepareForRuntime
         )
         {
-            // For x:Class, the rootActivity here may not be the real root, but it's the first child of the x:Class activity.
+            // For x:Class, the rootActivity here may not be the real root, but it's the first child of the
+            // x:Class activity.
             Activity realRoot1 =
                 (rootActivity1.RootActivity != null) ? rootActivity1.RootActivity : rootActivity1;
             if (

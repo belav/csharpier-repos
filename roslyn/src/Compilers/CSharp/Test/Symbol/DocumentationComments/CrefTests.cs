@@ -135,10 +135,12 @@ class Program { }
                     // /// </summary>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "<")
                         .WithArguments("Identifier expected", "1001"),
-                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
+                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for
+                    // string literal.'
                     // /// See <see cref="
                     Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'see'.'
+                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag
+                    // 'see'.'
                     // /// See <see cref="
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("see")
                 );
@@ -160,13 +162,16 @@ class Program { }
                     // /// See <see cref='
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "")
                         .WithArguments("Identifier expected", "1001"),
-                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
+                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for
+                    // string literal.'
                     // /// See <see cref='
                     Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'see'.'
+                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag
+                    // 'see'.'
                     // /// See <see cref='
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("see"),
-                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                    // (3,20): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element
+                    // 'summary'.'
                     // /// See <see cref='
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary"),
                     // (2,1): warning CS1587: XML comment is not placed on a valid language element
@@ -191,10 +196,12 @@ class Program { }
                     // /// See <see cref='M(T, /// </summary>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "/")
                         .WithArguments(") expected", "1026"),
-                    // (3,28): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
+                    // (3,28): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for
+                    // string literal.'
                     // /// See <see cref='M(T, /// </summary>
                     Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (3,28): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'see'.'
+                    // (3,28): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag
+                    // 'see'.'
                     // /// See <see cref='M(T, /// </summary>
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("see"),
                     // (2,1): warning CS1587: XML comment is not placed on a valid language element
@@ -223,13 +230,16 @@ class Program { }
                     // /// See <see cref='M{
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "")
                         .WithArguments("Syntax error, '>' expected", "1003"),
-                    // (3,22): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
+                    // (3,22): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for
+                    // string literal.'
                     // /// See <see cref='M{
                     Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (3,22): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'see'.'
+                    // (3,22): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag
+                    // 'see'.'
                     // /// See <see cref='M{
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("see"),
-                    // (3,22): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                    // (3,22): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element
+                    // 'summary'.'
                     // /// See <see cref='M{
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary"),
                     // (2,1): warning CS1587: XML comment is not placed on a valid language element
@@ -248,13 +258,16 @@ class Program { }
 
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
                 .VerifyDiagnostics(
-                    // (3,21): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
+                    // (3,21): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for
+                    // string literal.'
                     // /// See <see cref='T
                     Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                    // (3,21): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'see'.'
+                    // (3,21): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag
+                    // 'see'.'
                     // /// See <see cref='T
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("see"),
-                    // (3,21): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                    // (3,21): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element
+                    // 'summary'.'
                     // /// See <see cref='T
                     Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary"),
                     // (2,1): warning CS1587: XML comment is not placed on a valid language element
@@ -336,7 +349,8 @@ class Program { }
                 // /// See <see cref="::"/> - first character is colon.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "::")
                     .WithArguments("Identifier expected", "1001"),
-                // (6,20): warning CS1584: XML comment has syntactically incorrect cref attribute '&#58;&#58;Gibberish'
+                // (6,20): warning CS1584: XML comment has syntactically incorrect cref attribute
+                // '&#58;&#58;Gibberish'
                 // /// See <see cref="&#58;&#58;Gibberish"/> - first character is colon.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "&")
                     .WithArguments("&#58;&#58;Gibberish"),
@@ -1347,7 +1361,8 @@ class C
                 crefSyntax,
                 compilation,
                 out actualWinner,
-                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'M'. Assuming 'C.M()', but could have also matched other overloads including 'C.M(int)'.
+                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'M'. Assuming 'C.M()', but could
+                // have also matched other overloads including 'C.M(int)'.
                 // /// See <see cref="M"/>.
                 Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M")
                     .WithArguments("M", "C.M()", "C.M(int)")
@@ -1557,7 +1572,8 @@ class B
                 crefSyntax,
                 compilation,
                 out actualWinner,
-                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'M()'. Assuming 'B.M()', but could have also matched other overloads including 'B.M(__arglist)'.
+                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'M()'. Assuming 'B.M()', but could
+                // have also matched other overloads including 'B.M(__arglist)'.
                 // /// See <see cref="M()"/>.
                 Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M()")
                     .WithArguments("M()", "B.M()", "B.M(__arglist)")
@@ -1896,7 +1912,8 @@ class A<T, U>
                 crefSyntax,
                 compilation,
                 out actualWinner,
-                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'A{T, T}.M(T)'. Assuming 'A<T, T>.M(T)', but could have also matched other overloads including 'A<T, T>.M(T)'.
+                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'A{T, T}.M(T)'. Assuming 'A<T,
+                // T>.M(T)', but could have also matched other overloads including 'A<T, T>.M(T)'.
                 // /// See <see cref="A{T, T}.M(T)"/>.
                 Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "A{T, T}.M(T)")
                     .WithArguments("A{T, T}.M(T)", "A<T, T>.M(T)", "A<T, T>.M(T)")
@@ -1953,7 +1970,8 @@ class A<T>
                 crefSyntax,
                 compilation,
                 out actualWinner,
-                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'A{T}.B{T}.M(T)'. Assuming 'A<T>.B<T>.M(T)', but could have also matched other overloads including 'A<T>.B<T>.M(T)'.
+                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'A{T}.B{T}.M(T)'. Assuming
+                // 'A<T>.B<T>.M(T)', but could have also matched other overloads including 'A<T>.B<T>.M(T)'.
                 // /// See <see cref="A{T}.B{T}.M(T)"/>.
                 Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "A{T}.B{T}.M(T)")
                     .WithArguments("A{T}.B{T}.M(T)", "A<T>.B<T>.M(T)", "A<T>.B<T>.M(T)")
@@ -2167,7 +2185,8 @@ class Test { }
                 crefSyntax,
                 compilation,
                 out actualSymbol,
-                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'C'. Assuming 'C', but could have also matched other overloads including 'C'.
+                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'C'. Assuming 'C', but could have
+                // also matched other overloads including 'C'.
                 // /// See <see cref="C"/>.
                 Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C")
                     .WithArguments("C", "C", "C")
@@ -2234,7 +2253,8 @@ class Other
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source);
             compilation.VerifyDiagnostics(
-                // (4,26): warning CS0649: Field 'Base.F' is never assigned to, and will always have its default value 0
+                // (4,26): warning CS0649: Field 'Base.F' is never assigned to, and will always have its default
+                // value 0
                 //     protected static int F;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
                     .WithArguments("Base.F", "0")
@@ -2274,7 +2294,8 @@ class Other
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source);
             compilation.VerifyDiagnostics(
-                // (4,26): warning CS0649: Field 'Base.F' is never assigned to, and will always have its default value 0
+                // (4,26): warning CS0649: Field 'Base.F' is never assigned to, and will always have its default
+                // value 0
                 //     protected static int F;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
                     .WithArguments("Base.F", "0")
@@ -2329,7 +2350,8 @@ class B : A
                 crefSyntax,
                 compilation,
                 out actualWinner,
-                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'A'. Assuming 'A', but could have also matched other overloads including 'A'.
+                // (3,20): warning CS0419: Ambiguous reference in cref attribute: 'A'. Assuming 'A', but could have
+                // also matched other overloads including 'A'.
                 // /// See <see cref="A"/>.
                 Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "A").WithArguments("A", "A", "A")
             );
@@ -2598,7 +2620,8 @@ class C
             var actualSymbol = GetReferencedSymbol(
                 crefSyntax,
                 compilation,
-                // (5,20): warning CS1574: XML comment has cref attribute 'LibAlias::BadType' that could not be resolved
+                // (5,20): warning CS1574: XML comment has cref attribute 'LibAlias::BadType' that could not be
+                // resolved
                 // /// See <see cref="LibAlias::BadType"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "LibAlias::BadType")
                     .WithArguments("LibAlias::BadType")
@@ -2808,7 +2831,8 @@ class C
             var actualSymbol = GetReferencedSymbol(
                 crefSyntax,
                 compilation,
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator !(int)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator !(int)' that could not be
+                // resolved
                 // /// See <see cref="operator !(int)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator !(int)")
                     .WithArguments("operator !(int)")
@@ -3029,7 +3053,8 @@ class C
             var actualSymbol = GetReferencedSymbol(
                 crefSyntax,
                 compilation,
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator /(int)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator /(int)' that could not be
+                // resolved
                 // /// See <see cref="operator /(int)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator /(int)")
                     .WithArguments("operator /(int)")
@@ -3142,7 +3167,8 @@ class op_Division
             var actualSymbol = GetReferencedSymbol(
                 crefSyntax,
                 compilation,
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator /(int)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator /(int)' that could not be
+                // resolved
                 // /// See <see cref="operator /(int)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator /(int)")
                     .WithArguments("operator /(int)")
@@ -3278,7 +3304,8 @@ class C
             var actualSymbol = GetReferencedSymbol(
                 crefSyntax,
                 compilation,
-                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator int(int)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator int(int)' that could
+                // not be resolved
                 // /// See <see cref="explicit operator int(int)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator int(int)")
                     .WithArguments("explicit operator int(int)")
@@ -4156,7 +4183,8 @@ class A
                     // (3,22): warning CS1584: XML comment has syntactically incorrect cref attribute 'G{int}'
                     // /// Error <see cref="G{int}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{int}").WithArguments("G{int}"),
-                    // (3,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                    // (3,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                    // error CS0081.
                     // /// Error <see cref="G{int}"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "int")
                         .WithArguments(
@@ -4166,7 +4194,8 @@ class A
                     // (4,22): warning CS1584: XML comment has syntactically incorrect cref attribute 'G{A.B}'
                     // /// Error <see cref="G{A.B}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{A.B}").WithArguments("G{A.B}"),
-                    // (4,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                    // (4,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                    // error CS0081.
                     // /// Error <see cref="G{A.B}"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "A.B")
                         .WithArguments(
@@ -4177,7 +4206,8 @@ class A
                     // /// Error <see cref="G{G{T}}}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{G{T}}")
                         .WithArguments("G{G{T}}}"),
-                    // (5,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                    // (5,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                    // error CS0081.
                     // /// Error <see cref="G{G{T}}}"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "G{T}")
                         .WithArguments(
@@ -4188,7 +4218,8 @@ class A
                     // /// Error <see cref="G{T}.M{int}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{T}.M{int}")
                         .WithArguments("G{T}.M{int}"),
-                    // (7,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                    // (7,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                    // error CS0081.
                     // /// Error <see cref="G{T}.M{int}"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "int")
                         .WithArguments(
@@ -4199,7 +4230,8 @@ class A
                     // /// Error <see cref="G{T}.M{A.B}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{T}.M{A.B}")
                         .WithArguments("G{T}.M{A.B}"),
-                    // (8,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                    // (8,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                    // error CS0081.
                     // /// Error <see cref="G{T}.M{A.B}"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "A.B")
                         .WithArguments(
@@ -4210,7 +4242,8 @@ class A
                     // /// Error <see cref="G{T}.M{G{T}}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{T}.M{G{T}}")
                         .WithArguments("G{T}.M{G{T}}"),
-                    // (9,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                    // (9,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                    // error CS0081.
                     // /// Error <see cref="G{T}.M{G{T}}"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "G{T}")
                         .WithArguments(
@@ -4306,7 +4339,8 @@ partial class P
 ";
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
                 .VerifyDiagnostics(
-                    // (28,18): warning CS8826: Partial method declarations 'void P.M(int y)' and 'void P.M(int x)' have signature differences.
+                    // (28,18): warning CS8826: Partial method declarations 'void P.M(int y)' and 'void P.M(int x)' have
+                    // signature differences.
                     //     partial void M(int x) { }
                     Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "M")
                         .WithArguments("void P.M(int y)", "void P.M(int x)")
@@ -4316,67 +4350,80 @@ partial class P
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
                         .WithArguments("C.E")
                         .WithLocation(16, 25),
-                    // (4,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
+                    // (4,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that
+                    // name
                     //     /// <param name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q")
                         .WithArguments("q")
                         .WithLocation(4, 22),
-                    // (5,22): warning CS1572: XML comment has a param tag for 'value', but there is no parameter by that name
+                    // (5,22): warning CS1572: XML comment has a param tag for 'value', but there is no parameter by
+                    // that name
                     //     /// <param name="value"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "value")
                         .WithArguments("value")
                         .WithLocation(5, 22),
-                    // (6,16): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.M(int)' (but other parameters do)
+                    // (6,16): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.M(int)'
+                    // (but other parameters do)
                     //     void M(int x) { }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "C.M(int)")
                         .WithLocation(6, 16),
-                    // (8,22): warning CS1572: XML comment has a param tag for 'x', but there is no parameter by that name
+                    // (8,22): warning CS1572: XML comment has a param tag for 'x', but there is no parameter by that
+                    // name
                     //     /// <param name="x"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "x")
                         .WithArguments("x")
                         .WithLocation(8, 22),
-                    // (11,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
+                    // (11,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that
+                    // name
                     //     /// <param name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q")
                         .WithArguments("q")
                         .WithLocation(11, 22),
-                    // (12,18): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.this[int, int]' (but other parameters do)
+                    // (12,18): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for
+                    // 'C.this[int, int]' (but other parameters do)
                     //     int this[int x, int y] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "C.this[int, int]")
                         .WithLocation(12, 18),
-                    // (12,25): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for 'C.this[int, int]' (but other parameters do)
+                    // (12,25): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for
+                    // 'C.this[int, int]' (but other parameters do)
                     //     int this[int x, int y] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "y")
                         .WithArguments("y", "C.this[int, int]")
                         .WithLocation(12, 25),
-                    // (14,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
+                    // (14,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that
+                    // name
                     //     /// <param name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q")
                         .WithArguments("q")
                         .WithLocation(14, 22),
-                    // (15,22): warning CS1572: XML comment has a param tag for 'value', but there is no parameter by that name
+                    // (15,22): warning CS1572: XML comment has a param tag for 'value', but there is no parameter by
+                    // that name
                     //     /// <param name="value"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "value")
                         .WithArguments("value")
                         .WithLocation(15, 22),
-                    // (27,22): warning CS1572: XML comment has a param tag for 'y', but there is no parameter by that name
+                    // (27,22): warning CS1572: XML comment has a param tag for 'y', but there is no parameter by that
+                    // name
                     //     /// <param name="y"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "y")
                         .WithArguments("y")
                         .WithLocation(27, 22),
-                    // (28,24): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'P.M(int)' (but other parameters do)
+                    // (28,24): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for
+                    // 'P.M(int)' (but other parameters do)
                     //     partial void M(int x) { }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "P.M(int)")
                         .WithLocation(28, 24),
-                    // (21,22): warning CS1572: XML comment has a param tag for 'x', but there is no parameter by that name
+                    // (21,22): warning CS1572: XML comment has a param tag for 'x', but there is no parameter by that
+                    // name
                     //     /// <param name="x"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "x")
                         .WithArguments("x")
                         .WithLocation(21, 22),
-                    // (22,24): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for 'P.M(int)' (but other parameters do)
+                    // (22,24): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for
+                    // 'P.M(int)' (but other parameters do)
                     //     partial void M(int y);
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "y")
                         .WithArguments("y", "P.M(int)")
@@ -4415,32 +4462,38 @@ partial class P
 ";
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
                 .VerifyDiagnostics(
-                    // (23,18): warning CS8826: Partial method declarations 'void P.M(int q, int r)' and 'void P.M(int x, int y)' have signature differences.
+                    // (23,18): warning CS8826: Partial method declarations 'void P.M(int q, int r)' and 'void P.M(int
+                    // x, int y)' have signature differences.
                     //     partial void M(int x, int y) { }
                     Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "M")
                         .WithArguments("void P.M(int q, int r)", "void P.M(int x, int y)")
                         .WithLocation(23, 18),
-                    // (5,23): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for 'C.M(int, int)' (but other parameters do)
+                    // (5,23): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for 'C.M(int,
+                    // int)' (but other parameters do)
                     //     void M(int x, int y) { }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "y")
                         .WithArguments("y", "C.M(int, int)")
                         .WithLocation(5, 23),
-                    // (8,25): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for 'C.this[int, int]' (but other parameters do)
+                    // (8,25): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for
+                    // 'C.this[int, int]' (but other parameters do)
                     //     int this[int x, int y] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "y")
                         .WithArguments("y", "C.this[int, int]")
                         .WithLocation(8, 25),
-                    // (11,18): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.this[int]' (but other parameters do)
+                    // (11,18): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for
+                    // 'C.this[int]' (but other parameters do)
                     //     int this[int x] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "C.this[int]")
                         .WithLocation(11, 18),
-                    // (23,31): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for 'P.M(int, int)' (but other parameters do)
+                    // (23,31): warning CS1573: Parameter 'y' has no matching param tag in the XML comment for 'P.M(int,
+                    // int)' (but other parameters do)
                     //     partial void M(int x, int y) { }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "y")
                         .WithArguments("y", "P.M(int, int)")
                         .WithLocation(23, 31),
-                    // (17,31): warning CS1573: Parameter 'r' has no matching param tag in the XML comment for 'P.M(int, int)' (but other parameters do)
+                    // (17,31): warning CS1573: Parameter 'r' has no matching param tag in the XML comment for 'P.M(int,
+                    // int)' (but other parameters do)
                     //     partial void M(int q, int r);
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "r")
                         .WithArguments("r", "P.M(int, int)")
@@ -4545,7 +4598,8 @@ partial class P
 ";
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
                 .VerifyDiagnostics(
-                    // (28,18): warning CS8826: Partial method declarations 'void P.M(int y)' and 'void P.M(int x)' have signature differences.
+                    // (28,18): warning CS8826: Partial method declarations 'void P.M(int y)' and 'void P.M(int x)' have
+                    // signature differences.
                     //     partial void M(int x) { }
                     Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "M")
                         .WithArguments("void P.M(int y)", "void P.M(int x)")
@@ -4555,42 +4609,50 @@ partial class P
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E")
                         .WithArguments("C.E")
                         .WithLocation(16, 25),
-                    // (4,25): warning CS1734: XML comment on 'C.M(int)' has a paramref tag for 'q', but there is no parameter by that name
+                    // (4,25): warning CS1734: XML comment on 'C.M(int)' has a paramref tag for 'q', but there is no
+                    // parameter by that name
                     //     /// <paramref name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "q")
                         .WithArguments("q", "C.M(int)")
                         .WithLocation(4, 25),
-                    // (5,25): warning CS1734: XML comment on 'C.M(int)' has a paramref tag for 'value', but there is no parameter by that name
+                    // (5,25): warning CS1734: XML comment on 'C.M(int)' has a paramref tag for 'value', but there is no
+                    // parameter by that name
                     //     /// <paramref name="value"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "value")
                         .WithArguments("value", "C.M(int)")
                         .WithLocation(5, 25),
-                    // (8,25): warning CS1734: XML comment on 'C.P' has a paramref tag for 'x', but there is no parameter by that name
+                    // (8,25): warning CS1734: XML comment on 'C.P' has a paramref tag for 'x', but there is no
+                    // parameter by that name
                     //     /// <paramref name="x"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "x")
                         .WithArguments("x", "C.P")
                         .WithLocation(8, 25),
-                    // (11,25): warning CS1734: XML comment on 'C.this[int, int]' has a paramref tag for 'q', but there is no parameter by that name
+                    // (11,25): warning CS1734: XML comment on 'C.this[int, int]' has a paramref tag for 'q', but there
+                    // is no parameter by that name
                     //     /// <paramref name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "q")
                         .WithArguments("q", "C.this[int, int]")
                         .WithLocation(11, 25),
-                    // (14,25): warning CS1734: XML comment on 'C.E' has a paramref tag for 'q', but there is no parameter by that name
+                    // (14,25): warning CS1734: XML comment on 'C.E' has a paramref tag for 'q', but there is no
+                    // parameter by that name
                     //     /// <paramref name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "q")
                         .WithArguments("q", "C.E")
                         .WithLocation(14, 25),
-                    // (15,25): warning CS1734: XML comment on 'C.E' has a paramref tag for 'value', but there is no parameter by that name
+                    // (15,25): warning CS1734: XML comment on 'C.E' has a paramref tag for 'value', but there is no
+                    // parameter by that name
                     //     /// <paramref name="value"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "value")
                         .WithArguments("value", "C.E")
                         .WithLocation(15, 25),
-                    // (27,25): warning CS1734: XML comment on 'P.M(int)' has a paramref tag for 'y', but there is no parameter by that name
+                    // (27,25): warning CS1734: XML comment on 'P.M(int)' has a paramref tag for 'y', but there is no
+                    // parameter by that name
                     //     /// <paramref name="y"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "y")
                         .WithArguments("y", "P.M(int)")
                         .WithLocation(27, 25),
-                    // (21,25): warning CS1734: XML comment on 'P.M(int)' has a paramref tag for 'x', but there is no parameter by that name
+                    // (21,25): warning CS1734: XML comment on 'P.M(int)' has a paramref tag for 'x', but there is no
+                    // parameter by that name
                     //     /// <paramref name="x"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "x")
                         .WithArguments("x", "P.M(int)")
@@ -4642,45 +4704,55 @@ class C
                     Diagnostic(ErrorCode.ERR_DuplicateParamName, "x").WithArguments("x"), // NOTE: double-reported in dev11
                     // Dev11 doesn't report these, but they seem reasonable (even desirable).
 
-                    // (6,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
+                    // (6,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that
+                    // name
                     //     /// <param name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q").WithArguments("q"),
-                    // (7,25): warning CS1734: XML comment on 'C.M(int, int)' has a paramref tag for 'q', but there is no parameter by that name
+                    // (7,25): warning CS1734: XML comment on 'C.M(int, int)' has a paramref tag for 'q', but there is
+                    // no parameter by that name
                     //     /// <paramref name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "q")
                         .WithArguments("q", "C.M(int, int)"),
                     // These match dev11.
 
-                    // (12,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
+                    // (12,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that
+                    // name
                     //     /// <param name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q").WithArguments("q"),
-                    // (13,25): warning CS1734: XML comment on 'C.this[int, int]' has a paramref tag for 'q', but there is no parameter by that name
+                    // (13,25): warning CS1734: XML comment on 'C.this[int, int]' has a paramref tag for 'q', but there
+                    // is no parameter by that name
                     //     /// <paramref name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "q")
                         .WithArguments("q", "C.this[int, int]"),
                     // Dev11 doesn't report these, but they seem reasonable (even desirable).
 
-                    // (16,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
+                    // (16,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that
+                    // name
                     //     /// <param name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q").WithArguments("q"),
-                    // (17,19): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.M(double, double)' (but other parameters do)
+                    // (17,19): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for
+                    // 'C.M(double, double)' (but other parameters do)
                     //     void M(double x, double x) { }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "C.M(double, double)"),
-                    // (17,29): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.M(double, double)' (but other parameters do)
+                    // (17,29): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for
+                    // 'C.M(double, double)' (but other parameters do)
                     //     void M(double x, double x) { }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "C.M(double, double)"),
                     // These match dev11.
 
-                    // (19,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
+                    // (19,22): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that
+                    // name
                     //     /// <param name="q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q").WithArguments("q"),
-                    // (20,24): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.this[double, double]' (but other parameters do)
+                    // (20,24): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for
+                    // 'C.this[double, double]' (but other parameters do)
                     //     double this[double x, double x] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "C.this[double, double]"),
-                    // (20,34): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.this[double, double]' (but other parameters do)
+                    // (20,34): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for
+                    // 'C.this[double, double]' (but other parameters do)
                     //     double this[double x, double x] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_MissingParamTag, "x")
                         .WithArguments("x", "C.this[double, double]")
@@ -4728,39 +4800,49 @@ class D<T, T>
                     // (19,15): error CS0692: Duplicate type parameter 'U'
                     //     void M<U, U>() { }
                     Diagnostic(ErrorCode.ERR_DuplicateTypeParameter, "U").WithArguments("U"),
-                    // (4,22): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter by that name
+                    // (4,22): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter
+                    // by that name
                     // /// <typeparam name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "Q").WithArguments("Q"),
-                    // (5,25): warning CS1735: XML comment on 'C<T, T>' has a typeparamref tag for 'Q', but there is no type parameter by that name
+                    // (5,25): warning CS1735: XML comment on 'C<T, T>' has a typeparamref tag for 'Q', but there is no
+                    // type parameter by that name
                     // /// <typeparamref name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "Q")
                         .WithArguments("Q", "C<T, T>"),
-                    // (10,26): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter by that name
+                    // (10,26): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter
+                    // by that name
                     //     /// <typeparam name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "Q").WithArguments("Q"),
-                    // (11,29): warning CS1735: XML comment on 'C<T, T>.M<U, U>()' has a typeparamref tag for 'Q', but there is no type parameter by that name
+                    // (11,29): warning CS1735: XML comment on 'C<T, T>.M<U, U>()' has a typeparamref tag for 'Q', but
+                    // there is no type parameter by that name
                     //     /// <typeparamref name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "Q")
                         .WithArguments("Q", "C<T, T>.M<U, U>()"),
-                    // (15,22): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter by that name
+                    // (15,22): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter
+                    // by that name
                     // /// <typeparam name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "Q").WithArguments("Q"),
-                    // (16,9): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on 'D<T, T>' (but other type parameters do)
+                    // (16,9): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on
+                    // 'D<T, T>' (but other type parameters do)
                     // class D<T, T>
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "T")
                         .WithArguments("T", "D<T, T>"),
-                    // (16,12): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on 'D<T, T>' (but other type parameters do)
+                    // (16,12): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on
+                    // 'D<T, T>' (but other type parameters do)
                     // class D<T, T>
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "T")
                         .WithArguments("T", "D<T, T>"),
-                    // (18,26): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter by that name
+                    // (18,26): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter
+                    // by that name
                     //     /// <typeparam name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "Q").WithArguments("Q"),
-                    // (19,12): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on 'D<T, T>.M<U, U>()' (but other type parameters do)
+                    // (19,12): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on
+                    // 'D<T, T>.M<U, U>()' (but other type parameters do)
                     //     void M<U, U>() { }
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "U")
                         .WithArguments("U", "D<T, T>.M<U, U>()"),
-                    // (19,15): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on 'D<T, T>.M<U, U>()' (but other type parameters do)
+                    // (19,15): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on
+                    // 'D<T, T>.M<U, U>()' (but other type parameters do)
                     //     void M<U, U>() { }
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "U")
                         .WithArguments("U", "D<T, T>.M<U, U>()")
@@ -4804,43 +4886,55 @@ partial class P<T>
 ";
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
                 .VerifyDiagnostics(
-                    // (29,18): warning CS8826: Partial method declarations 'void P<T>.M1<U>()' and 'void P<T>.M1<V>()' have signature differences.
+                    // (29,18): warning CS8826: Partial method declarations 'void P<T>.M1<U>()' and 'void P<T>.M1<V>()'
+                    // have signature differences.
                     //     partial void M1<V>() { }
                     Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "M1")
                         .WithArguments("void P<T>.M1<U>()", "void P<T>.M1<V>()")
                         .WithLocation(29, 18),
-                    // (2,22): warning CS1711: XML comment has a typeparam tag for 'T', but there is no type parameter by that name
+                    // (2,22): warning CS1711: XML comment has a typeparam tag for 'T', but there is no type parameter
+                    // by that name
                     // /// <typeparam name="T"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "T").WithArguments("T"),
-                    // (5,26): warning CS1711: XML comment has a typeparam tag for 'T', but there is no type parameter by that name
+                    // (5,26): warning CS1711: XML comment has a typeparam tag for 'T', but there is no type parameter
+                    // by that name
                     //     /// <typeparam name="T"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "T").WithArguments("T"),
-                    // (10,22): warning CS1711: XML comment has a typeparam tag for 'U', but there is no type parameter by that name
+                    // (10,22): warning CS1711: XML comment has a typeparam tag for 'U', but there is no type parameter
+                    // by that name
                     // /// <typeparam name="U"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "U").WithArguments("U"),
-                    // (14,26): warning CS1711: XML comment has a typeparam tag for 'V', but there is no type parameter by that name
+                    // (14,26): warning CS1711: XML comment has a typeparam tag for 'V', but there is no type parameter
+                    // by that name
                     //     /// <typeparam name="V"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "V").WithArguments("V"),
-                    // (18,22): warning CS1711: XML comment has a typeparam tag for 'U', but there is no type parameter by that name
+                    // (18,22): warning CS1711: XML comment has a typeparam tag for 'U', but there is no type parameter
+                    // by that name
                     // /// <typeparam name="U"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "U").WithArguments("U"),
-                    // (25,22): warning CS1711: XML comment has a typeparam tag for 'V', but there is no type parameter by that name
+                    // (25,22): warning CS1711: XML comment has a typeparam tag for 'V', but there is no type parameter
+                    // by that name
                     // /// <typeparam name="V"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "V").WithArguments("V"),
-                    // (28,26): warning CS1711: XML comment has a typeparam tag for 'U', but there is no type parameter by that name
+                    // (28,26): warning CS1711: XML comment has a typeparam tag for 'U', but there is no type parameter
+                    // by that name
                     //     /// <typeparam name="U"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "U").WithArguments("U"),
-                    // (21,26): warning CS1711: XML comment has a typeparam tag for 'V', but there is no type parameter by that name
+                    // (21,26): warning CS1711: XML comment has a typeparam tag for 'V', but there is no type parameter
+                    // by that name
                     //     /// <typeparam name="V"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "V").WithArguments("V"),
-                    // (29,21): warning CS1712: Type parameter 'V' has no matching typeparam tag in the XML comment on 'P<T>.M1<V>()' (but other type parameters do)
+                    // (29,21): warning CS1712: Type parameter 'V' has no matching typeparam tag in the XML comment on
+                    // 'P<T>.M1<V>()' (but other type parameters do)
                     //     partial void M1<V>() { }
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "V")
                         .WithArguments("V", "P<T>.M1<V>()"),
-                    // (19,17): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on 'P<T>' (but other type parameters do)
+                    // (19,17): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on
+                    // 'P<T>' (but other type parameters do)
                     // partial class P<T>
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "T").WithArguments("T", "P<T>"),
-                    // (22,21): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on 'P<T>.M1<U>()' (but other type parameters do)
+                    // (22,21): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on
+                    // 'P<T>.M1<U>()' (but other type parameters do)
                     //     partial void M1<U>();
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "U")
                         .WithArguments("U", "P<T>.M1<U>()")
@@ -4882,36 +4976,45 @@ partial class P<T, U>
 ";
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
                 .VerifyDiagnostics(
-                    // (3,12): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on 'C<T, U>' (but other type parameters do)
+                    // (3,12): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on
+                    // 'C<T, U>' (but other type parameters do)
                     // class C<T, U>
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "U")
                         .WithArguments("U", "C<T, U>"),
-                    // (6,15): warning CS1712: Type parameter 'W' has no matching typeparam tag in the XML comment on 'C<T, U>.M<V, W, X>()' (but other type parameters do)
+                    // (6,15): warning CS1712: Type parameter 'W' has no matching typeparam tag in the XML comment on
+                    // 'C<T, U>.M<V, W, X>()' (but other type parameters do)
                     //     void M<V, W, X>() { }
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "W")
                         .WithArguments("W", "C<T, U>.M<V, W, X>()"),
-                    // (6,18): warning CS1712: Type parameter 'X' has no matching typeparam tag in the XML comment on 'C<T, U>.M<V, W, X>()' (but other type parameters do)
+                    // (6,18): warning CS1712: Type parameter 'X' has no matching typeparam tag in the XML comment on
+                    // 'C<T, U>.M<V, W, X>()' (but other type parameters do)
                     //     void M<V, W, X>() { }
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "X")
                         .WithArguments("X", "C<T, U>.M<V, W, X>()"),
-                    // (9,22): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter by that name
+                    // (9,22): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter
+                    // by that name
                     // /// <typeparam name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "Q").WithArguments("Q"),
-                    // (10,9): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on 'C<T>' (but other type parameters do)
+                    // (10,9): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on
+                    // 'C<T>' (but other type parameters do)
                     // class C<T>
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "T").WithArguments("T", "C<T>"),
-                    // (12,26): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter by that name
+                    // (12,26): warning CS1711: XML comment has a typeparam tag for 'Q', but there is no type parameter
+                    // by that name
                     //     /// <typeparam name="Q"/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "Q").WithArguments("Q"),
-                    // (13,12): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on 'C<T>.M<U>()' (but other type parameters do)
+                    // (13,12): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on
+                    // 'C<T>.M<U>()' (but other type parameters do)
                     //     void M<U>() { }
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "U")
                         .WithArguments("U", "C<T>.M<U>()"),
-                    // (27,21): warning CS1712: Type parameter 'V' has no matching typeparam tag in the XML comment on 'P<T, U>.M1<V, W>()' (but other type parameters do)
+                    // (27,21): warning CS1712: Type parameter 'V' has no matching typeparam tag in the XML comment on
+                    // 'P<T, U>.M1<V, W>()' (but other type parameters do)
                     //     partial void M1<V, W>() { }
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "V")
                         .WithArguments("V", "P<T, U>.M1<V, W>()"),
-                    // (20,24): warning CS1712: Type parameter 'W' has no matching typeparam tag in the XML comment on 'P<T, U>.M1<V, W>()' (but other type parameters do)
+                    // (20,24): warning CS1712: Type parameter 'W' has no matching typeparam tag in the XML comment on
+                    // 'P<T, U>.M1<V, W>()' (but other type parameters do)
                     //     partial void M1<V, W>();
                     Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "W")
                         .WithArguments("W", "P<T, U>.M1<V, W>()")
@@ -4955,40 +5058,49 @@ partial class P<T>
 ";
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
                 .VerifyDiagnostics(
-                    // (29,18): warning CS8826: Partial method declarations 'void P<T>.M1<U>()' and 'void P<T>.M1<V>()' have signature differences.
+                    // (29,18): warning CS8826: Partial method declarations 'void P<T>.M1<U>()' and 'void P<T>.M1<V>()'
+                    // have signature differences.
                     //     partial void M1<V>() { }
                     Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "M1")
                         .WithArguments("void P<T>.M1<U>()", "void P<T>.M1<V>()")
                         .WithLocation(29, 18),
-                    // (2,25): warning CS1735: XML comment on 'C' has a typeparamref tag for 'T', but there is no type parameter by that name
+                    // (2,25): warning CS1735: XML comment on 'C' has a typeparamref tag for 'T', but there is no type
+                    // parameter by that name
                     // /// <typeparamref name="T"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "T")
                         .WithArguments("T", "C"),
-                    // (5,29): warning CS1735: XML comment on 'C.M()' has a typeparamref tag for 'T', but there is no type parameter by that name
+                    // (5,29): warning CS1735: XML comment on 'C.M()' has a typeparamref tag for 'T', but there is no
+                    // type parameter by that name
                     //     /// <typeparamref name="T"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "T")
                         .WithArguments("T", "C.M()"),
-                    // (10,25): warning CS1735: XML comment on 'C<T>' has a typeparamref tag for 'U', but there is no type parameter by that name
+                    // (10,25): warning CS1735: XML comment on 'C<T>' has a typeparamref tag for 'U', but there is no
+                    // type parameter by that name
                     // /// <typeparamref name="U"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "U")
                         .WithArguments("U", "C<T>"),
-                    // (14,29): warning CS1735: XML comment on 'C<T>.M<U>()' has a typeparamref tag for 'V', but there is no type parameter by that name
+                    // (14,29): warning CS1735: XML comment on 'C<T>.M<U>()' has a typeparamref tag for 'V', but there
+                    // is no type parameter by that name
                     //     /// <typeparamref name="V"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "V")
                         .WithArguments("V", "C<T>.M<U>()"),
-                    // (18,25): warning CS1735: XML comment on 'P<T>' has a typeparamref tag for 'U', but there is no type parameter by that name
+                    // (18,25): warning CS1735: XML comment on 'P<T>' has a typeparamref tag for 'U', but there is no
+                    // type parameter by that name
                     // /// <typeparamref name="U"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "U")
                         .WithArguments("U", "P<T>"),
-                    // (25,25): warning CS1735: XML comment on 'P<T>' has a typeparamref tag for 'V', but there is no type parameter by that name
+                    // (25,25): warning CS1735: XML comment on 'P<T>' has a typeparamref tag for 'V', but there is no
+                    // type parameter by that name
                     // /// <typeparamref name="V"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "V")
                         .WithArguments("V", "P<T>"),
-                    // (28,29): warning CS1735: XML comment on 'P<T>.M1<V>()' has a typeparamref tag for 'U', but there is no type parameter by that name
+                    // (28,29): warning CS1735: XML comment on 'P<T>.M1<V>()' has a typeparamref tag for 'U', but there
+                    // is no type parameter by that name
                     //     /// <typeparamref name="U"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "U")
                         .WithArguments("U", "P<T>.M1<V>()"),
-                    // (21,29): warning CS1735: XML comment on 'P<T>.M1<U>()' has a typeparamref tag for 'V', but there is no type parameter by that name
+                    // (21,29): warning CS1735: XML comment on 'P<T>.M1<U>()' has a typeparamref tag for 'V', but there
+                    // is no type parameter by that name
                     //     /// <typeparamref name="V"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "V")
                         .WithArguments("V", "P<T>.M1<U>()")
@@ -5133,7 +5245,8 @@ public class C
                     //     public int this[int x] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_MissingXMLComment, "this")
                         .WithArguments("C.this[int]"),
-                    // (10,32): warning CS1591: Missing XML comment for publicly visible type or member 'C.FieldLikeEvent'
+                    // (10,32): warning CS1591: Missing XML comment for publicly visible type or member
+                    // 'C.FieldLikeEvent'
                     //     public event System.Action FieldLikeEvent;
                     Diagnostic(ErrorCode.WRN_MissingXMLComment, "FieldLikeEvent")
                         .WithArguments("C.FieldLikeEvent"),
@@ -5259,7 +5372,8 @@ class C
                     // (2,16): warning CS1574: XML comment has cref attribute 'M(Q)' that could not be resolved
                     // /// <see cref="M(Q)"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "M(Q)").WithArguments("M(Q)"),
-                    // (3,16): warning CS1580: Invalid type for parameter 'C{Q}' in XML comment cref attribute: 'M(C{Q})'
+                    // (3,16): warning CS1580: Invalid type for parameter 'C{Q}' in XML comment cref attribute:
+                    // 'M(C{Q})'
                     // /// <see cref="M(C{Q})"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefParamType, "C{Q}")
                         .WithArguments("C{Q}", "M(C{Q})"),
@@ -5305,7 +5419,8 @@ class C
                     // (2,34): warning CS1581: Invalid return type in XML comment cref attribute
                     // /// <see cref="explicit operator Q"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefReturnType, "Q").WithLocation(2, 34),
-                    // (2,16): warning CS1574: XML comment has cref attribute 'explicit operator Q' that could not be resolved
+                    // (2,16): warning CS1574: XML comment has cref attribute 'explicit operator Q' that could not be
+                    // resolved
                     // /// <see cref="explicit operator Q"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator Q")
                         .WithArguments("explicit operator Q")
@@ -5313,7 +5428,8 @@ class C
                     // (3,34): warning CS1581: Invalid return type in XML comment cref attribute
                     // /// <see cref="explicit operator C{Q}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefReturnType, "C{Q}").WithLocation(3, 34),
-                    // (3,16): warning CS1574: XML comment has cref attribute 'explicit operator C{Q}' that could not be resolved
+                    // (3,16): warning CS1574: XML comment has cref attribute 'explicit operator C{Q}' that could not be
+                    // resolved
                     // /// <see cref="explicit operator C{Q}"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator C{Q}")
                         .WithArguments("explicit operator C{Q}")
@@ -5321,7 +5437,8 @@ class C
                     // (4,34): warning CS1581: Invalid return type in XML comment cref attribute
                     // /// <see cref="explicit operator Q[]"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefReturnType, "Q[]").WithLocation(4, 34),
-                    // (4,16): warning CS1574: XML comment has cref attribute 'explicit operator Q[]' that could not be resolved
+                    // (4,16): warning CS1574: XML comment has cref attribute 'explicit operator Q[]' that could not be
+                    // resolved
                     // /// <see cref="explicit operator Q[]"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator Q[]")
                         .WithArguments("explicit operator Q[]")
@@ -5329,7 +5446,8 @@ class C
                     // (5,34): warning CS1581: Invalid return type in XML comment cref attribute
                     // /// <see cref="explicit operator Q*"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefReturnType, "Q*").WithLocation(5, 34),
-                    // (5,16): warning CS1574: XML comment has cref attribute 'explicit operator Q*' that could not be resolved
+                    // (5,16): warning CS1574: XML comment has cref attribute 'explicit operator Q*' that could not be
+                    // resolved
                     // /// <see cref="explicit operator Q*"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator Q*")
                         .WithArguments("explicit operator Q*")
@@ -5353,9 +5471,12 @@ class C<T, op_Explicit, op_Division>
 ";
 
             // BREAK: Dev11 reports WRN_BadXMLRef, instead of WRN_BadXMLRefTypeVar, for the conversion operator.
-            // This seems like a bug; it binds to the type parameter, but throw it away because it's not a conversion
-            // method.  On its own, this seems reasonable, but it actually performs this filtering *after* accepting
-            // type symbols for crefs without parameter lists (see Conversion_Type()).  Therefore, conversion crefs
+            // This seems like a bug; it binds to the type parameter, but throw it away because it's not a
+            // conversion
+            // method.  On its own, this seems reasonable, but it actually performs this filtering *after*
+            // accepting
+            // type symbols for crefs without parameter lists (see Conversion_Type()).  Therefore, conversion
+            // crefs
             // can bind to aggregates, but not type parameters.  To be both more consistent and more permissive,
             // Roslyn binds to the type parameter and produces a more specific error messages.
             CreateCompilationWithMscorlib40AndDocumentationComments(source)
@@ -5363,11 +5484,13 @@ class C<T, op_Explicit, op_Division>
                     // (4,20): warning CS1723: XML comment has cref attribute 'T' that refers to a type parameter
                     //     /// <see cref="T"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefTypeVar, "T").WithArguments("T"),
-                    // (5,20): warning CS1723: XML comment has cref attribute 'explicit operator int' that refers to a type parameter
+                    // (5,20): warning CS1723: XML comment has cref attribute 'explicit operator int' that refers to a
+                    // type parameter
                     //     /// <see cref="explicit operator int"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefTypeVar, "explicit operator int")
                         .WithArguments("explicit operator int"),
-                    // (6,20): warning CS1723: XML comment has cref attribute 'operator /' that refers to a type parameter
+                    // (6,20): warning CS1723: XML comment has cref attribute 'operator /' that refers to a type
+                    // parameter
                     //     /// <see cref="operator /"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRefTypeVar, "operator /")
                         .WithArguments("operator /")
@@ -5525,7 +5648,8 @@ class A<T>
                 // (3,22): warning CS1584: XML comment has syntactically incorrect cref attribute 'A{A{T}}'
                 // /// Error <see cref="A{A{T}}"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A{A{T}}").WithArguments("A{A{T}}"),
-                // (3,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                // (3,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                // error CS0081.
                 // /// Error <see cref="A{A{T}}"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "A{T}")
                     .WithArguments(
@@ -5536,18 +5660,21 @@ class A<T>
                 // /// Error <see cref="A{T}.B{A{T}}"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A{T}.B{A{T}}")
                     .WithArguments("A{T}.B{A{T}}"),
-                // (4,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                // (4,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                // error CS0081.
                 // /// Error <see cref="A{T}.B{A{T}}"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "A{T}")
                     .WithArguments(
                         "Type parameter declaration must be an identifier not a type",
                         "0081"
                     ),
-                // (5,22): warning CS1584: XML comment has syntactically incorrect cref attribute 'A{T}.B{U}.M{A{T}}'
+                // (5,22): warning CS1584: XML comment has syntactically incorrect cref attribute
+                // 'A{T}.B{U}.M{A{T}}'
                 // /// Error <see cref="A{T}.B{U}.M{A{T}}"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A{T}.B{U}.M{A{T}}")
                     .WithArguments("A{T}.B{U}.M{A{T}}"),
-                // (5,34): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                // (5,34): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                // error CS0081.
                 // /// Error <see cref="A{T}.B{U}.M{A{T}}"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "A{T}")
                     .WithArguments(
@@ -5600,7 +5727,8 @@ class A<T>
                 // (3,22): warning CS1584: XML comment has syntactically incorrect cref attribute 'A{int}'
                 // /// Error <see cref="A{int}"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A{int}").WithArguments("A{int}"),
-                // (3,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                // (3,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                // error CS0081.
                 // /// Error <see cref="A{int}"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "int")
                     .WithArguments(
@@ -5611,7 +5739,8 @@ class A<T>
                 // /// Error <see cref="A{T}.B{int}"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A{T}.B{int}")
                     .WithArguments("A{T}.B{int}"),
-                // (4,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                // (4,29): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                // error CS0081.
                 // /// Error <see cref="A{T}.B{int}"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "int")
                     .WithArguments(
@@ -5622,7 +5751,8 @@ class A<T>
                 // /// Error <see cref="A{T}.B{U}.M{int}"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "A{T}.B{U}.M{int}")
                     .WithArguments("A{T}.B{U}.M{int}"),
-                // (5,34): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
+                // (5,34): warning CS1658: Type parameter declaration must be an identifier not a type. See also
+                // error CS0081.
                 // /// Error <see cref="A{T}.B{U}.M{int}"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "int")
                     .WithArguments(
@@ -6013,10 +6143,12 @@ class Outer<T>
                 new[] { SystemCoreRef }
             );
             compilation.VerifyDiagnostics(
-                // (2,16): warning CS1574: XML comment has cref attribute 'Outer{T}.Outer' that could not be resolved
+                // (2,16): warning CS1574: XML comment has cref attribute 'Outer{T}.Outer' that could not be
+                // resolved
                 // /// <see cref="Outer{T}.Outer"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "Outer{T}.Outer").WithArguments("Outer"),
-                // (5,20): warning CS1574: XML comment has cref attribute 'Outer{T}.Outer' that could not be resolved
+                // (5,20): warning CS1574: XML comment has cref attribute 'Outer{T}.Outer' that could not be
+                // resolved
                 //     /// <see cref="Outer{T}.Outer"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "Outer{T}.Outer").WithArguments("Outer")
             );
@@ -6068,17 +6200,23 @@ class SomeOtherClass
             );
             compilation.VerifyDiagnostics(
                 // (15,34): warning CS1574: XML comment has cref attribute 'GenericClass' that could not be resolved
-                // /// You may also like <see cref="GenericClass"/>. <see cref="GenericClass{T}"/> provides you some interesting methods.
+                // /// You may also like <see cref="GenericClass"/>. <see cref="GenericClass{T}"/> provides you some
+                // interesting methods.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "GenericClass").WithArguments("GenericClass"),
-                // (16,67): warning CS1574: XML comment has cref attribute 'GenericClass.NormalSub' that could not be resolved
-                // /// <see cref="GenericClass{T}.NormalSub"/> is normal. <see cref="GenericClass.NormalSub"/> performs a normal operation.
+                // (16,67): warning CS1574: XML comment has cref attribute 'GenericClass.NormalSub' that could not
+                // be resolved
+                // /// <see cref="GenericClass{T}.NormalSub"/> is normal. <see cref="GenericClass.NormalSub"/>
+                // performs a normal operation.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "GenericClass.NormalSub")
                     .WithArguments("NormalSub"),
-                // (17,69): warning CS1574: XML comment has cref attribute 'GenericClass.GenericSub' that could not be resolved
-                // /// <see cref="GenericClass{T}.GenericSub"/> is generic. <see cref="GenericClass.GenericSub"/> performs a generic operation.
+                // (17,69): warning CS1574: XML comment has cref attribute 'GenericClass.GenericSub' that could not
+                // be resolved
+                // /// <see cref="GenericClass{T}.GenericSub"/> is generic. <see cref="GenericClass.GenericSub"/>
+                // performs a generic operation.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "GenericClass.GenericSub")
                     .WithArguments("GenericSub"),
-                // (19,16): warning CS1574: XML comment has cref attribute 'GenericClass.GenericSub{T}' that could not be resolved
+                // (19,16): warning CS1574: XML comment has cref attribute 'GenericClass.GenericSub{T}' that could
+                // not be resolved
                 // /// <see cref="GenericClass.GenericSub{T}"/> 's parameters is called <c>T2</c>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "GenericClass.GenericSub{T}")
                     .WithArguments("GenericSub{T}")
@@ -6230,7 +6368,8 @@ class Program
             // Note: using is unused because syntactically invalid cref is never bound.
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source);
             compilation.VerifyDiagnostics(
-                // (4,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'Console.WriteLine(,,)'
+                // (4,16): warning CS1584: XML comment has syntactically incorrect cref attribute
+                // 'Console.WriteLine(,,)'
                 // /// <see cref="Console.WriteLine(,,)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "Console.WriteLine(,,)")
                     .WithArguments("Console.WriteLine(,,)"),
@@ -6766,7 +6905,8 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source);
             compilation.VerifyDiagnostics(
-                // (2,16): warning CS1580: Invalid type for parameter 'T.C' in XML comment cref attribute: 'F{T}(T.C)'
+                // (2,16): warning CS1580: Invalid type for parameter 'T.C' in XML comment cref attribute:
+                // 'F{T}(T.C)'
                 // /// <see cref="F{T}(T.C)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRefParamType, "T.C")
                     .WithArguments("T.C", "F{T}(T.C)"),
@@ -7005,7 +7145,8 @@ enum E { }
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source);
             compilation.VerifyDiagnostics(
-                // (3,16): warning CS1574: XML comment has cref attribute 'string(float[])' that could not be resolved
+                // (3,16): warning CS1574: XML comment has cref attribute 'string(float[])' that could not be
+                // resolved
                 // /// <see cref="string(float[])"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "string(float[])")
                     .WithArguments("string(float[])")
@@ -7286,10 +7427,12 @@ class Outer<T>
                 source
             );
             compilation.VerifyDiagnostics(
-                // (6,31): warning CS8018: Within cref attributes, nested types of generic types should be qualified.
+                // (6,31): warning CS8018: Within cref attributes, nested types of generic types should be
+                // qualified.
                 //     /// <see cref='Outer{Q}.M(Inner)'/>
                 Diagnostic(ErrorCode.WRN_UnqualifiedNestedTypeInCref, "Inner"),
-                // (6,20): warning CS1574: XML comment has cref attribute 'Outer{Q}.M(Inner)' that could not be resolved
+                // (6,20): warning CS1574: XML comment has cref attribute 'Outer{Q}.M(Inner)' that could not be
+                // resolved
                 //     /// <see cref='Outer{Q}.M(Inner)'/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "Outer{Q}.M(Inner)").WithArguments("M(Inner)")
             );
@@ -7528,7 +7671,8 @@ class Outer
             Assert.Equal(accessor, nonCrefInfo.CandidateSymbols.Single());
             Assert.Equal(CandidateReason.NotReferencable, nonCrefInfo.CandidateReason);
 
-            // Try an inaccessible inherited types.  Should work in a cref, but only if it's in a parameter or return type (since it's inherited).
+            // Try an inaccessible inherited types.  Should work in a cref, but only if it's in a parameter or
+            // return type (since it's inherited).
             // Should not work outside a cref, because it's inaccessible.
             // NOTE: SpeculativeBindingOptions are ignored when the position is inside a cref.
             var inheritedTypeName = SyntaxFactory.ParseName(inheritedType.Name);
@@ -8018,12 +8162,14 @@ class Test
                         )
                     )
                     .VerifyDiagnostics(
-                        // (3,16): error CS9058: Feature 'ref readonly parameters' is not available in C# 11.0. Please use language version 12.0 or greater.
+                        // (3,16): error CS9058: Feature 'ref readonly parameters' is not available in C# 11.0. Please use
+                        // language version 12.0 or greater.
                         //     void M(ref readonly int x)
                         Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "readonly")
                             .WithArguments("ref readonly parameters", "12.0")
                             .WithLocation(3, 16),
-                        // (8,26): warning CS1658: Feature 'ref readonly parameters' is not available in C# 11.0. Please use language version 12.0 or greater.. See also error CS9058.
+                        // (8,26): warning CS1658: Feature 'ref readonly parameters' is not available in C# 11.0. Please use
+                        // language version 12.0 or greater.. See also error CS9058.
                         //     /// <see cref="M(ref readonly int)"/>
                         Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
                             .WithArguments(
@@ -8096,12 +8242,14 @@ class Test
                         )
                     )
                     .VerifyDiagnostics(
-                        // (3,16): error CS9058: Feature 'ref readonly parameters' is not available in C# 11.0. Please use language version 12.0 or greater.
+                        // (3,16): error CS9058: Feature 'ref readonly parameters' is not available in C# 11.0. Please use
+                        // language version 12.0 or greater.
                         //     void M(ref readonly int x)
                         Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "readonly")
                             .WithArguments("ref readonly parameters", "12.0")
                             .WithLocation(3, 16),
-                        // (8,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'M(readonly ref int)'
+                        // (8,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'M(readonly ref
+                        // int)'
                         //     /// <see cref="M(readonly ref int)"/>
                         Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "M(")
                             .WithArguments("M(readonly ref int)")
@@ -8116,7 +8264,8 @@ class Test
 
             var expectedDiagnostics = new[]
             {
-                // (8,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'M(readonly ref int)'
+                // (8,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'M(readonly ref
+                // int)'
                 //     /// <see cref="M(readonly ref int)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "M(")
                     .WithArguments("M(readonly ref int)")
@@ -8179,7 +8328,8 @@ class Test
                 //     void M(readonly ref int x)
                 Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
                     .WithLocation(3, 12),
-                // (8,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'M(readonly ref int)'
+                // (8,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'M(readonly ref
+                // int)'
                 //     /// <see cref="M(readonly ref int)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "M(")
                     .WithArguments("M(readonly ref int)")
@@ -8257,12 +8407,14 @@ class Test
                         //     void M(readonly ref int x)
                         Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
                             .WithLocation(3, 12),
-                        // (8,20): warning CS1574: XML comment has cref attribute 'M(ref readonly int)' that could not be resolved
+                        // (8,20): warning CS1574: XML comment has cref attribute 'M(ref readonly int)' that could not be
+                        // resolved
                         //     /// <see cref="M(ref readonly int)"/>
                         Diagnostic(ErrorCode.WRN_BadXMLRef, "M(ref readonly int)")
                             .WithArguments("M(ref readonly int)")
                             .WithLocation(8, 20),
-                        // (8,26): warning CS1658: Feature 'ref readonly parameters' is not available in C# 11.0. Please use language version 12.0 or greater.. See also error CS9058.
+                        // (8,26): warning CS1658: Feature 'ref readonly parameters' is not available in C# 11.0. Please use
+                        // language version 12.0 or greater.. See also error CS9058.
                         //     /// <see cref="M(ref readonly int)"/>
                         Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
                             .WithArguments(
@@ -8279,7 +8431,8 @@ class Test
                 //     void M(readonly ref int x)
                 Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
                     .WithLocation(3, 12),
-                // (8,20): warning CS1574: XML comment has cref attribute 'M(ref readonly int)' that could not be resolved
+                // (8,20): warning CS1574: XML comment has cref attribute 'M(ref readonly int)' that could not be
+                // resolved
                 //     /// <see cref="M(ref readonly int)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "M(ref readonly int)")
                     .WithArguments("M(ref readonly int)")

@@ -30,7 +30,8 @@ namespace System.Formats.Asn1
         ///   encoding rules say sorting was required (CER and DER).
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 17).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 17).
         /// </param>
         /// <remarks>
         ///   The nested content is not evaluated by this method, except for minimal processing to
@@ -139,7 +140,8 @@ namespace System.Formats.Asn1
         ///   from the constructor (default <see langword="false"/>).
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 17).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 17).
         /// </param>
         /// <returns>
         ///   A new reader positioned at the first
@@ -182,7 +184,8 @@ namespace System.Formats.Asn1
         ///   encoding rules say sorting was required (CER and DER).
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 17).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 17).
         /// </param>
         /// <returns>
         ///   A new reader positioned at the first

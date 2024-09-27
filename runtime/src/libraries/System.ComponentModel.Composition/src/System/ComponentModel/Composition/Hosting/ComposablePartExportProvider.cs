@@ -53,7 +53,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -64,7 +65,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -174,7 +176,8 @@ namespace System.ComponentModel.Composition.Hosting
                         }
                     }
 
-                    // if we have created an engine and didn't set it because of a race condition, we need to dispose of it
+                    // if we have created an engine and didn't set it because of a race condition, we need to dispose of
+                    // it
                     importEngine?.Dispose();
                 }
 
@@ -198,7 +201,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <note type="inheritinfo">
         /// The implementers should not treat the cardinality-related mismatches as errors, and are not
         /// expected to throw exceptions in those cases.
-        /// For instance, if the import requests exactly one export and the provider has no matching exports or more than one,
+        /// For instance, if the import requests exactly one export and the provider has no matching exports
+        // or more than one,
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>
@@ -330,7 +334,8 @@ namespace System.ComponentModel.Composition.Hosting
 
             // Copy the current list of parts - we are about to modify it
             // This is an OK thing to do as this is the only method that can modify the List AND Compose can
-            // only be executed on one thread at a time - thus two different threads cannot tramp over each other
+            // only be executed on one thread at a time - thus two different threads cannot tramp over each
+            // other
             List<ComposablePart>? parts = null;
             using (_lock.LockStateForRead())
             {

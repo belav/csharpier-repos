@@ -11,8 +11,10 @@ namespace Microsoft.AspNetCore.StaticFiles;
 public class FileExtensionContentTypeProvider : IContentTypeProvider
 {
     // Notes:
-    // - This table was initially copied from IIS and has many legacy entries we will maintain for backwards compatibility.
-    // - We only plan to add new entries where we expect them to be applicable to a majority of developers such as being
+    // - This table was initially copied from IIS and has many legacy entries we will maintain for
+    // backwards compatibility.
+    // - We only plan to add new entries where we expect them to be applicable to a majority of
+    // developers such as being
     // used in the project templates.
     #region Extension mapping table
     /// <summary>

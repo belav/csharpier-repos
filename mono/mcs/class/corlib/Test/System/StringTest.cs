@@ -3841,7 +3841,8 @@ namespace MonoTests.System
                 "should not strip content after nullchar"
             );
 
-            // System.String.Replace fails with NotImplementedException https://github.com/mono/mono/issues/20948
+            // System.String.Replace fails with NotImplementedException
+            // https://github.com/mono/mono/issues/20948
             Assert.AreEqual(
                 "Original",
                 s1.Replace("o", "O", StringComparison.CurrentCulture),

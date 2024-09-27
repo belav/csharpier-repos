@@ -88,7 +88,8 @@ namespace System.Data.OleDb
 
         public static OleDbDataReader GetRootEnumerator()
         {
-            //readonly Guid CLSID_MSDAENUM = new Guid(0xc8b522d0,0x5cf3,0x11ce,0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d);
+            //readonly Guid CLSID_MSDAENUM = new
+            // Guid(0xc8b522d0,0x5cf3,0x11ce,0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d);
             //Type msdaenum = Type.GetTypeFromCLSID(CLSID_MSDAENUM, true);
             const string PROGID_MSDAENUM = "MSDAENUM";
             Type msdaenum = Type.GetTypeFromProgID(PROGID_MSDAENUM, true)!;

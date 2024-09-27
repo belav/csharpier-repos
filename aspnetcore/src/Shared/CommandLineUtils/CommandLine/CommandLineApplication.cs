@@ -16,16 +16,21 @@ namespace Microsoft.Extensions.CommandLineUtils;
 internal class CommandLineApplication
 #pragma warning restore CA1852 // Seal internal types
 {
-    // Indicates whether the parser should throw an exception when it runs into an unexpected argument. If this is
-    // set to true (the default), the parser will throw on the first unexpected argument. Otherwise, all unexpected
+    // Indicates whether the parser should throw an exception when it runs into an unexpected argument.
+    // If this is
+    // set to true (the default), the parser will throw on the first unexpected argument. Otherwise, all
+    // unexpected
     // arguments (including the first) are added to RemainingArguments.
     private readonly bool _throwOnUnexpectedArg;
 
     // Indicates whether the parser should check remaining arguments for command or option matches after
     // encountering an unexpected argument. Ignored if _throwOnUnexpectedArg is true (the default). If
-    // _throwOnUnexpectedArg and this are both false, the first unexpected argument and all remaining arguments are
-    // added to RemainingArguments. If _throwOnUnexpectedArg is false and this is true, only unexpected arguments
-    // are added to RemainingArguments -- allowing a mix of expected and unexpected arguments, commands and
+    // _throwOnUnexpectedArg and this are both false, the first unexpected argument and all remaining
+    // arguments are
+    // added to RemainingArguments. If _throwOnUnexpectedArg is false and this is true, only unexpected
+    // arguments
+    // are added to RemainingArguments -- allowing a mix of expected and unexpected arguments, commands
+    // and
     // options.
     private readonly bool _continueAfterUnexpectedArg;
 

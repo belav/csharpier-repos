@@ -320,7 +320,8 @@ namespace System.Xml.Tests
             if (expectedResId == null)
             {
                 // Pint actual exception info and quit
-                // This can be used to dump exception properties, verify them and then plug them into our expected results
+                // This can be used to dump exception properties, verify them and then plug them into our expected
+                // results
                 ExceptionInfoOutput();
                 throw new VerifyException("Did not pass resource ID to verify");
             }

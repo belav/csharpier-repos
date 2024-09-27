@@ -28,9 +28,9 @@ using System.Threading;
 
 namespace Mono
 {
-    /*
-     * The purpose of this class is to allow code in `corlib.dll` to access `System.dll` APIs.
-     */
+/*
+* The purpose of this class is to allow code in `corlib.dll` to access `System.dll` APIs.
+*/
     class SystemDependencyProvider : ISystemDependencyProvider
     {
         static SystemDependencyProvider instance;
@@ -67,9 +67,9 @@ namespace Mono
         {
             CertificateProvider = new SystemCertificateProvider();
 
-            /*
-             * Register ourselves with corlib's `DependencyInjector`.
-             */
+/*
+* Register ourselves with corlib's `DependencyInjector`.
+*/
             DependencyInjector.Register(this);
         }
     }

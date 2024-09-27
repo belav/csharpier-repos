@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Host;
 namespace Microsoft.CodeAnalysis.ProjectManagement
 {
     /// <summary>
-    /// This service provides a way to extract all the folders under a given project, or find the default namespace if it exists.
+    /// This service provides a way to extract all the folders under a given project, or find the
+    // default namespace if it exists.
     /// </summary>
     internal interface IProjectManagementService : IWorkspaceService
     {

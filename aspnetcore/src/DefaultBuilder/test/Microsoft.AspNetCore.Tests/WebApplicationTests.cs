@@ -1254,7 +1254,8 @@ public class WebApplicationTests
     [RemoteExecutionSupported]
     public void WebApplicationBuilderConfigurationSourcesOrderedCorrectly()
     {
-        // all WebApplicationBuilders have the following configuration sources ordered highest to lowest priority:
+        // all WebApplicationBuilders have the following configuration sources ordered highest to lowest
+        // priority:
         // 1. Command-line arguments
         // 2. Non-prefixed environment variables
         // 3. DOTNET_-prefixed environment variables
@@ -2152,8 +2153,10 @@ public class WebApplicationTests
         builder.Services.AddScoped<Service>();
         builder.Services.AddSingleton<Service2>();
 
-        // This currently throws an AggregateException, but any Exception from Build() is enough to make this test pass.
-        // If this is throwing for any reason other than service scope validation, we'll likely see it in other tests.
+        // This currently throws an AggregateException, but any Exception from Build() is enough to make
+        // this test pass.
+        // If this is throwing for any reason other than service scope validation, we'll likely see it in
+        // other tests.
         Assert.ThrowsAny<Exception>(() => builder.Build());
     }
 
@@ -2794,7 +2797,8 @@ public class WebApplicationTests
 
         var app = builder.Build();
 
-        // Make sure we don't lose "MemoryConfigurationProvider" from GetDebugView() when wrapping the provider.
+        // Make sure we don't lose "MemoryConfigurationProvider" from GetDebugView() when wrapping the
+        // provider.
         Assert.Contains(
             "foo=bar (MemoryConfigurationProvider)",
             ((IConfigurationRoot)app.Configuration).GetDebugView()

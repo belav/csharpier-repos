@@ -29,9 +29,12 @@ internal partial class TestRunner
 
         public void HandleLogMessage(TestMessageLevel level, string? message)
         {
-            // Don't report log messages here.  The log output is dependent on the test framework being used and does not consistently
-            // report the information we desire (for example the test names that passed).  Instead we report the test run information manually.
-            // Any information here is also reported in the vs test console logs (written to the extension logs directory).
+            // Don't report log messages here.  The log output is dependent on the test framework being used and
+            // does not consistently
+            // report the information we desire (for example the test names that passed).  Instead we report the
+            // test run information manually.
+            // Any information here is also reported in the vs test console logs (written to the extension logs
+            // directory).
             return;
         }
 

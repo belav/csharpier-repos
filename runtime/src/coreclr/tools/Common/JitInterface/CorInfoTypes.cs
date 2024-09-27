@@ -155,7 +155,8 @@ namespace Internal.JitInterface
     //
     // CORINFO_LOOKUP_KIND indicates whether a particular token in the instruction stream can be:
     // (a) Mapped to a handle (type, field or method) at compile-time (!needsRuntimeLookup)
-    // (b) Must be looked up at run-time, and if so which runtime lookup technique should be used (see below)
+    // (b) Must be looked up at run-time, and if so which runtime lookup technique should be used (see
+    // below)
     //
     // If the JIT or EE does not support code sharing for generic code, then
     // all CORINFO_LOOKUP results will be "constant lookups", i.e.
@@ -167,9 +168,11 @@ namespace Internal.JitInterface
     //
     // Constant Lookups are either:
     //     IAT_VALUE: immediate (relocatable) values,
-    //     IAT_PVALUE: immediate values access via an indirection through an immediate (relocatable) address
+    //     IAT_PVALUE: immediate values access via an indirection through an immediate (relocatable)
+    // address
     //     IAT_RELPVALUE: immediate values access via a relative indirection through an immediate offset
-    //     IAT_PPVALUE: immediate values access via a double indirection through an immediate (relocatable) address
+    //     IAT_PPVALUE: immediate values access via a double indirection through an immediate
+    // (relocatable) address
     //
     // Runtime Lookups
     // ---------------
@@ -191,13 +194,16 @@ namespace Internal.JitInterface
 
     public unsafe struct CORINFO_CONST_LOOKUP
     {
-        // If the handle is obtained at compile-time, then this handle is the "exact" handle (class, method, or field)
+        // If the handle is obtained at compile-time, then this handle is the "exact" handle (class, method,
+        // or field)
         // Otherwise, it's a representative...
         // If accessType is
         //     IAT_VALUE   --> "handle" stores the real handle or "addr " stores the computed address
         //     IAT_PVALUE  --> "addr" stores a pointer to a location which will hold the real handle
-        //     IAT_RELPVALUE --> "addr" stores a relative pointer to a location which will hold the real handle
-        //     IAT_PPVALUE --> "addr" stores a double indirection to a location which will hold the real handle
+        //     IAT_RELPVALUE --> "addr" stores a relative pointer to a location which will hold the real
+        // handle
+        //     IAT_PPVALUE --> "addr" stores a double indirection to a location which will hold the real
+        // handle
 
         public InfoAccessType accessType;
 
@@ -295,12 +301,15 @@ namespace Internal.JitInterface
         // If kind.needsRuntimeLookup then this indicates how to do the lookup
         public CORINFO_RUNTIME_LOOKUP runtimeLookup;
 
-        // If the handle is obtained at compile-time, then this handle is the "exact" handle (class, method, or field)
+        // If the handle is obtained at compile-time, then this handle is the "exact" handle (class, method,
+        // or field)
         // Otherwise, it's a representative...  If accessType is
         //     IAT_VALUE --> "handle" stores the real handle or "addr " stores the computed address
         //     IAT_PVALUE --> "addr" stores a pointer to a location which will hold the real handle
-        //     IAT_RELPVALUE --> "addr" stores a relative pointer to a location which will hold the real handle
-        //     IAT_PPVALUE --> "addr" stores a double indirection to a location which will hold the real handle
+        //     IAT_RELPVALUE --> "addr" stores a relative pointer to a location which will hold the real
+        // handle
+        //     IAT_PPVALUE --> "addr" stores a double indirection to a location which will hold the real
+        // handle
         public ref CORINFO_CONST_LOOKUP constLookup
         {
             get
@@ -402,7 +411,8 @@ namespace Internal.JitInterface
 
         CORINFO_CALLCONV_DEFAULT = 0x0,
 
-        // Instead of using the below values, use the CorInfoCallConvExtension enum for unmanaged calling conventions.
+        // Instead of using the below values, use the CorInfoCallConvExtension enum for unmanaged calling
+        // conventions.
         // CORINFO_CALLCONV_C = 0x1,
         // CORINFO_CALLCONV_STDCALL = 0x2,
         // CORINFO_CALLCONV_THISCALL = 0x3,
@@ -650,7 +660,8 @@ namespace Internal.JitInterface
         CORINFO_FLG_VALUECLASS = 0x00010000, // is the class a value class
 
         //  This flag is define din the Methods section, but is also valid on classes.
-        //  CORINFO_FLG_SHAREDINST            = 0x00020000, // This class is satisfies TypeHandle::IsCanonicalSubtype
+        //  CORINFO_FLG_SHAREDINST            = 0x00020000, // This class is satisfies
+        // TypeHandle::IsCanonicalSubtype
         CORINFO_FLG_VAROBJSIZE = 0x00040000, // the object size varies depending of constructor args
         CORINFO_FLG_ARRAY = 0x00080000, // class is an array class (initialized differently)
         CORINFO_FLG_OVERLAPPING_FIELDS = 0x00100000, // struct or class has fields that overlap (aka union)
@@ -687,11 +698,12 @@ namespace Internal.JitInterface
         public uint HandlerOffset;
         public uint HandlerLength;
         public uint ClassTokenOrOffset;
-        /*        union
-                {
-                    DWORD                   ClassToken;       // use for type-based exception handlers
-                    DWORD                   FilterOffset;     // use for filter-based exception handlers (COR_ILEXCEPTION_FILTER is set)
-                };*/
+/*        union
+{
+DWORD                   ClassToken;       // use for type-based exception handlers
+DWORD                   FilterOffset;     // use for filter-based exception handlers
+(COR_ILEXCEPTION_FILTER is set)
+};*/
     }
 
     public struct BlockCounts // Also defined here: code:CORBBTPROF_BLOCK_DATA
@@ -777,7 +789,7 @@ namespace Internal.JitInterface
         CORINFO_HFA_ELEM_VECTOR128,
     }
 
-    /* data to optimize delegate construction */
+/* data to optimize delegate construction */
     public unsafe struct DelegateCtorArgs
     {
         public void* pMethod;
@@ -786,7 +798,7 @@ namespace Internal.JitInterface
         public void* pArg5;
     }
 
-    /*****************************************************************************/
+/*****************************************************************************/
     // These are flags passed to ICorJitInfo::allocMem
     // to guide the memory allocation for the code, readonly data, and read-write data
     public enum CorJitAllocMemFlag
@@ -974,11 +986,14 @@ namespace Internal.JitInterface
     //   be resolved at compile-time (non-virtual, final or sealed).
     //
     // CORINFO_CALL_CODE_POINTER (shared generic code only) :
-    //   Indicates that the JIT should do an indirect call to the entrypoint given by address, which may be specified
+    //   Indicates that the JIT should do an indirect call to the entrypoint given by address, which may
+    // be specified
     //   as a runtime lookup by CORINFO_CALL_INFO::codePointerLookup.
     //   [targetMethodHandle] will not hold a valid value.
-    //   This flag may be combined with nullInstanceCheck=TRUE for uses of callvirt on methods whose target method can
-    //   be resolved at compile-time but whose instantiation can be resolved only through runtime lookup.
+    //   This flag may be combined with nullInstanceCheck=TRUE for uses of callvirt on methods whose
+    // target method can
+    //   be resolved at compile-time but whose instantiation can be resolved only through runtime
+    // lookup.
     //
     // CORINFO_VIRTUALCALL_STUB (interface calls) :
     //   Indicates that the EE supports "stub dispatch" and request the JIT to make a
@@ -988,7 +1003,8 @@ namespace Internal.JitInterface
     //   which allow the runtime to determine the call-site after the call has been dispatched.
     //   If the call is too complex for the JIT (e.g. because
     //   fetching the dispatch stub requires a runtime lookup, i.e. lookupKind.needsRuntimeLookup
-    //   is set) then the JIT is allowed to implement the call as if it were CORINFO_VIRTUALCALL_LDVIRTFTN
+    //   is set) then the JIT is allowed to implement the call as if it were
+    // CORINFO_VIRTUALCALL_LDVIRTFTN
     //   [targetMethodHandle] will hold the CORINFO_METHOD_HANDLE that a call to findMethod would
     //   have returned.
     //   This flag is always accompanied by nullInstanceCheck=TRUE.
@@ -1064,9 +1080,12 @@ namespace Internal.JitInterface
 
         //If set to:
         //  - CORINFO_ACCESS_ALLOWED - The access is allowed.
-        //  - CORINFO_ACCESS_ILLEGAL - This access cannot be allowed (i.e. it is public calling private).  The
-        //      JIT may either insert the callsiteCalloutHelper into the code (as per a verification error) or
-        //      call throwExceptionFromHelper on the callsiteCalloutHelper.  In this case callsiteCalloutHelper
+        //  - CORINFO_ACCESS_ILLEGAL - This access cannot be allowed (i.e. it is public calling private).
+        // The
+        //      JIT may either insert the callsiteCalloutHelper into the code (as per a verification error)
+        // or
+        //      call throwExceptionFromHelper on the callsiteCalloutHelper.  In this case
+        // callsiteCalloutHelper
         //      is guaranteed not to return.
         public CorInfoIsAccessAllowedResult accessAllowed;
         public CORINFO_HELPER_DESC callsiteCalloutHelper;
@@ -1145,7 +1164,8 @@ namespace Internal.JitInterface
         // [Out] results of resolveVirtualMethod.
         // - devirtualizedMethod is set to MethodDesc of devirt'ed method iff we were able to devirtualize.
         //      invariant is `resolveVirtualMethod(...) == (devirtualizedMethod != nullptr)`.
-        // - requiresInstMethodTableArg is set to TRUE if the devirtualized method requires a type handle arg.
+        // - requiresInstMethodTableArg is set to TRUE if the devirtualized method requires a type handle
+        // arg.
         // - exactContext is set to wrapped CORINFO_CLASS_HANDLE of devirt'ed method table.
         // - detail describes the computation done by the jit host
         //
@@ -1232,7 +1252,8 @@ namespace Internal.JitInterface
     };
 
     // System V struct passing
-    // The Classification types are described in the ABI spec at https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf
+    // The Classification types are described in the ABI spec at
+    // https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf
     public enum SystemVClassificationType : byte
     {
         SystemVClassificationTypeUnknown = 0,
@@ -1273,7 +1294,8 @@ namespace Internal.JitInterface
         public SystemVClassificationType eightByteClassifications0;
         public SystemVClassificationType eightByteClassifications1;
 
-        // The size of the eightbytes (an eightbyte could include padding. This represents the no padding size of the eightbyte).
+        // The size of the eightbytes (an eightbyte could include padding. This represents the no padding
+        // size of the eightbyte).
         public byte eightByteSizes0;
         public byte eightByteSizes1;
 
@@ -1282,7 +1304,8 @@ namespace Internal.JitInterface
         public byte eightByteOffsets1;
     };
 
-    // StructFloadFieldInfoFlags: used on LoongArch64 architecture by `getLoongArch64PassStructInRegisterFlags` and
+    // StructFloadFieldInfoFlags: used on LoongArch64 architecture by
+    // `getLoongArch64PassStructInRegisterFlags` and
     // `getRISCV64PassStructInRegisterFlags` API to convey struct argument passing information.
     //
     // `STRUCT_NO_FLOAT_FIELD` means structs are not passed using the float register(s).

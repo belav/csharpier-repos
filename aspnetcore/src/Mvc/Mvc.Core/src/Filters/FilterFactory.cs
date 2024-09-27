@@ -53,7 +53,8 @@ internal static class FilterFactory
             && filterProviders[0] is DefaultFilterProvider defaultFilterProvider
         )
         {
-            // If we know we can safely cache all filters and only the default filter provider is registered, we can
+            // If we know we can safely cache all filters and only the default filter provider is registered, we
+            // can
             // probably re-use filters between requests.
             actionDescriptor.CachedReusableFilters = filters;
         }

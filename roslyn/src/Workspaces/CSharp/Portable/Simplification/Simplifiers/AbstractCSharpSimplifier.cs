@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         /// Returns the predefined keyword kind for a given <see cref="SpecialType"/>.
         /// </summary>
         /// <param name="specialType">The <see cref="SpecialType"/> of this type.</param>
-        /// <returns>The keyword kind for a given special type, or SyntaxKind.None if the type name is not a predefined type.</returns>
+        /// <returns>The keyword kind for a given special type, or SyntaxKind.None if the type name is not a
+        // predefined type.</returns>
         protected static SyntaxToken? TryGetPredefinedKeywordToken(
             SemanticModel semanticModel,
             SpecialType specialType
@@ -103,8 +104,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (!IsAliasReplaceableExpression(node))
                 return false;
 
-            // Avoid the TryReplaceWithAlias algorithm if the tree has no using alias directives. Since the input node
-            // might be a speculative node (not fully rooted in a tree), we use the original semantic model to find the
+            // Avoid the TryReplaceWithAlias algorithm if the tree has no using alias directives. Since the
+            // input node
+            // might be a speculative node (not fully rooted in a tree), we use the original semantic model to
+            // find the
             // equivalent node in the original tree, and from there determine if the tree has any using alias
             // directives.
             var originalModel = semanticModel.GetOriginalSemanticModel();
@@ -365,7 +368,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 );
                 if (symbolInfo.Symbol is not INamespaceOrTypeSymbol)
                 {
-                    // We bound the alias to something other than a namespace or a type, which is normally not good, but if the
+                    // We bound the alias to something other than a namespace or a type, which is normally not good, but
+                    // if the
                     // types are the same then it is okay.
                     var typeInfo = semanticModel.GetSpeculativeTypeInfo(
                         node.SpanStart,
@@ -464,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (@namespace != null)
                 return @namespace.SpanStart;
 
-            // no namespace, under compilation unit directly.  Pass -1 so there is no ambiguity with a namespace decl
+            // no namespace, under compilation unit directly.  Pass -1 so there is no ambiguity with a namespace
+            // decl
             // that starts at position 0.
             return -1;
         }

@@ -25,7 +25,8 @@
 //              DataManipulator.StatisticFormula property. Here is an example of
 //              using the Anova test:
 //
-//              AnovaResult result = Chart1.DataManipulator.StatisticFormula.Anova(0.6, "Group1,Group2,Group3");
+//              AnovaResult result = Chart1.DataManipulator.StatisticFormula.Anova(0.6,
+// "Group1,Group2,Group3");
 //
 //  NOTE:       First versions of the chart use single method to execute
 //              ALL formulas. Formula name and parameters were passed as
@@ -446,7 +447,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This formula performs a two-sample F Test using the F distribution, and is used to see if the samples have different variances.
+        /// This formula performs a two-sample F Test using the F distribution, and is used to see if the
+        // samples have different variances.
         /// </summary>
         /// <param name="probability">Probability.</param>
         /// <param name="firstInputSeriesName">First input series name.</param>
@@ -639,7 +641,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This method returns the inverse of the standard normal cumulative distribution.
         /// </summary>
         /// <param name="probability">Probability.</param>
-        /// <returns>Returns value from the inverse standard normal cumulative distribution function.</returns>
+        /// <returns>Returns value from the inverse standard normal cumulative distribution
+        // function.</returns>
         public double InverseNormalDistribution(double probability)
         {
             // Make string with parameters
@@ -803,7 +806,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="value">T value</param>
         /// <param name="degreeOfFreedom">Degree of freedom</param>
-        /// <param name="oneTail">If true, one-tailed distribution is used; otherwise two-tailed distribution is used.</param>
+        /// <param name="oneTail">If true, one-tailed distribution is used; otherwise two-tailed
+        // distribution is used.</param>
         /// <returns>Returns T Distribution cumulative function</returns>
         public double TDistribution(double value, int degreeOfFreedom, bool oneTail)
         {
@@ -1103,7 +1107,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This method returns the variance for a series.
         /// </summary>
         /// <param name="inputSeriesName">Input series name.</param>
-        /// <param name="sampleVariance">If true, the data is a sample of the population.  If false, it is the entire population.</param>
+        /// <param name="sampleVariance">If true, the data is a sample of the population.  If false, it is
+        // the entire population.</param>
         /// <returns>Variance.</returns>
         public double Variance(string inputSeriesName, bool sampleVariance)
         {

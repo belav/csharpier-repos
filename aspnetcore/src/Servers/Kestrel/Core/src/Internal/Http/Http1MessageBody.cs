@@ -148,9 +148,12 @@ internal abstract class Http1MessageBody : MessageBody
             keepAlive = keepAlive && (connectionOptions & ConnectionOptions.Close) == 0;
         }
 
-        // Ignore upgrades if the request has a body. Technically it's possible to support, but we'd have to add a lot
-        // more logic to allow reading/draining the normal body before the connection could be fully upgraded.
-        // See https://tools.ietf.org/html/rfc7230#section-6.7, https://tools.ietf.org/html/rfc7540#section-3.2
+        // Ignore upgrades if the request has a body. Technically it's possible to support, but we'd have to
+        // add a lot
+        // more logic to allow reading/draining the normal body before the connection could be fully
+        // upgraded.
+        // See https://tools.ietf.org/html/rfc7230#section-6.7,
+        // https://tools.ietf.org/html/rfc7540#section-3.2
         if (
             upgrade
             && headers.ContentLength.GetValueOrDefault() == 0

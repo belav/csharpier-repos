@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.CommandLine.Binding;
 using System.Diagnostics.CodeAnalysis;
@@ -32,7 +33,8 @@ namespace System.CommandLine.Parsing
         public CliOption Option { get; }
 
         /// <summary>
-        /// Indicates whether the result was created implicitly and not due to the option being specified on the command line.
+        /// Indicates whether the result was created implicitly and not due to the option being specified on
+        // the command line.
         /// </summary>
         /// <remarks>Implicit results commonly result from options having a default value.</remarks>
         public bool Implicit => IdentifierToken is null || IdentifierToken.Implicit;
@@ -40,7 +42,8 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// The token that was parsed to specify the option.
         /// </summary>
-        /// <remarks>An identifier token is a token that matches either the option's name or one of its aliases.</remarks>
+        /// <remarks>An identifier token is a token that matches either the option's name or one of its
+        // aliases.</remarks>
         public CliToken? IdentifierToken { get; }
 
         /// <summary>

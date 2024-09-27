@@ -35,7 +35,8 @@ public class DefaultViewComponentDescriptorProvider : IViewComponentDescriptorPr
     }
 
     /// <summary>
-    /// Gets the candidate <see cref="TypeInfo"/> instances provided by the <see cref="ApplicationPartManager"/>.
+    /// Gets the candidate <see cref="TypeInfo"/> instances provided by the <see
+    // cref="ApplicationPartManager"/>.
     /// </summary>
     /// <returns>A list of <see cref="TypeInfo"/> instances.</returns>
     protected virtual IEnumerable<TypeInfo> GetCandidateTypes()

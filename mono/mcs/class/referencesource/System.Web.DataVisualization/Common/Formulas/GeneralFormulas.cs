@@ -151,8 +151,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="inputValues">Arrays of doubles - Input values.</param>
         /// <param name="outputValues">Arrays of doubles - Output values.</param>
         /// <param name="parameterList">Array of strings - Formula parameters.</param>
-        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object.</param>
-        /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
+        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from
+        // DataManipulator object.</param>
+        /// <param name="outLabels">Array of strings - Used for Labels. Description for output
+        // results.</param>
         override public void Formula(
             string formulaName,
             double[][] inputValues,

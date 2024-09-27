@@ -42,7 +42,8 @@ namespace System.Diagnostics
         /// <param name="assemblyPath">file path of the assembly or null</param>
         /// <param name="loadedPeAddress">loaded PE image address or zero</param>
         /// <param name="loadedPeSize">loaded PE image size</param>
-        /// <param name="isFileLayout">if true, the PE image is file layout, false it is loaded layout</param>
+        /// <param name="isFileLayout">if true, the PE image is file layout, false it is loaded
+        // layout</param>
         /// <param name="inMemoryPdbAddress">in memory PDB address or zero</param>
         /// <param name="inMemoryPdbSize">in memory PDB size</param>
         /// <param name="methodToken">method token</param>
@@ -131,7 +132,8 @@ namespace System.Diagnostics
         /// (pointed to by <paramref name="inMemoryPdbAddress"/> and <paramref name="inMemoryPdbSize"/>).
         /// </param>
         /// <param name="loadedPeSize">loaded PE image size</param>
-        /// <param name="isFileLayout">if true, the PE image is file layout, false it is loaded layout</param>
+        /// <param name="isFileLayout">if true, the PE image is file layout, false it is loaded
+        // layout</param>
         /// <param name="inMemoryPdbAddress">in memory PDB address or zero</param>
         /// <param name="inMemoryPdbSize">in memory PDB size</param>
         /// <returns>reader</returns>

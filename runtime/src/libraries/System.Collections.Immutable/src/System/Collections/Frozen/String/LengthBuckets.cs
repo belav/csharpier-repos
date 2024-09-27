@@ -9,10 +9,12 @@ namespace System.Collections.Frozen
 {
     internal static class LengthBuckets
     {
-        /// <summary>The maximum number of items allowed per bucket.  The larger the value, the longer it can take to search a bucket, which is sequentially examined.</summary>
+        /// <summary>The maximum number of items allowed per bucket.  The larger the value, the longer it
+        // can take to search a bucket, which is sequentially examined.</summary>
         internal const int MaxPerLength = 5;
 
-        /// <summary>Allowed ratio between buckets with values and total buckets.  Under this ratio, this implementation won't be used due to too much wasted space.</summary>
+        /// <summary>Allowed ratio between buckets with values and total buckets.  Under this ratio, this
+        // implementation won't be used due to too much wasted space.</summary>
         private const double EmptyLengthsRatio = 0.2;
 
         internal static int[]? CreateLengthBucketsArrayIfAppropriate(
@@ -98,7 +100,8 @@ namespace System.Collections.Frozen
             }
 
 #if NET6_0_OR_GREATER
-            // We don't need an array with every value initialized to zero if we are just about to overwrite every value anyway.
+            // We don't need an array with every value initialized to zero if we are just about to overwrite
+            // every value anyway.
             int[] copy = GC.AllocateUninitializedArray<int>(arraySize);
             Array.Copy(buckets, copy, arraySize);
 #else

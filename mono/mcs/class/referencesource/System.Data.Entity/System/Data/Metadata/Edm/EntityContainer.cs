@@ -22,12 +22,14 @@ namespace System.Data.Metadata.Edm
     {
         #region Constructors
         /// <summary>
-        /// The constructor for constructing the EntityContainer object with the name, namespaceName, and version.
+        /// The constructor for constructing the EntityContainer object with the name, namespaceName, and
+        // version.
         /// </summary>
         /// <param name="name">The name of this entity container</param>
         /// <param name="dataSpace">dataSpace in which this entity container belongs to</param>
         /// <exception cref="System.ArgumentNullException">Thrown if the name argument is null</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the name argument is empty string</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the name argument is empty
+        // string</exception>
         internal EntityContainer(string name, DataSpace dataSpace)
         {
             EntityUtil.CheckStringArgument(name, "name");

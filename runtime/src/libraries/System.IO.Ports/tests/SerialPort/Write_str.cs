@@ -16,7 +16,8 @@ namespace System.IO.Ports.Tests
         private const int ENCODING_STRING_SIZE = 4;
 
         // The string size used for large string testing
-        // This has been reduced from 2048 to 2000 because the associated byte buffer size (i.e. 4096 bytes) is too large
+        // This has been reduced from 2048 to 2000 because the associated byte buffer size (i.e. 4096 bytes)
+        // is too large
         // to allow single read/write transactions on a FTDI USB-Serial device
         private const int LARGE_STRING_SIZE = 2000;
 

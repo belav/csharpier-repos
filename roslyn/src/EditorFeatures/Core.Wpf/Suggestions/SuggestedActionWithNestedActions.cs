@@ -80,8 +80,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             CancellationToken cancellationToken
         )
         {
-            // A code action with nested actions is itself never invokable.  So just do nothing if this ever gets asked.
-            // Report a message in debug and log a watson exception so that if this is hit we can try to narrow down how
+            // A code action with nested actions is itself never invokable.  So just do nothing if this ever
+            // gets asked.
+            // Report a message in debug and log a watson exception so that if this is hit we can try to narrow
+            // down how
             // this happened.
             Debug.Fail(
                 $"{nameof(InnerInvokeAsync)} should not be called on a {nameof(SuggestedActionWithNestedActions)}"

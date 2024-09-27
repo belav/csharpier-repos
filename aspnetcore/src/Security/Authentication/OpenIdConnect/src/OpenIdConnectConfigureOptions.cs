@@ -23,7 +23,8 @@ internal sealed class OpenIdConnectConfigureOptions : IConfigureNamedOptions<Ope
     /// Initializes a new <see cref="OpenIdConnectConfigureOptions"/> given the configuration
     /// provided by the <paramref name="configurationProvider"/>.
     /// </summary>
-    /// <param name="configurationProvider">An <see cref="IAuthenticationConfigurationProvider"/> instance.</param>
+    /// <param name="configurationProvider">An <see cref="IAuthenticationConfigurationProvider"/>
+    // instance.</param>
     public OpenIdConnectConfigureOptions(IAuthenticationConfigurationProvider configurationProvider)
     {
         _authenticationConfigurationProvider = configurationProvider;

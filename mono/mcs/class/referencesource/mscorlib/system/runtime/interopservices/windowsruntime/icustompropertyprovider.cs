@@ -245,7 +245,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         }
 
         //
-        // override ToString() to make sure callers get correct IStringable.ToString() behavior in native code
+        // override ToString() to make sure callers get correct IStringable.ToString() behavior in native
+        // code
         //
         public override string ToString()
         {

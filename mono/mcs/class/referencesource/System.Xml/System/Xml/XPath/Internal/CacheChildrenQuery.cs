@@ -16,9 +16,12 @@ namespace MS.Internal.Xml.XPath
     using StackInt = ClonableStack<int>;
     using StackNav = ClonableStack<System.Xml.XPath.XPathNavigator>;
 
-    // This class implements Children axis on Ancestor & Descendant imputs. (as well as id(), preciding, following)
-    // The problem here is that is descenant::*/child::* and ancestor::*/child::* can produce duplicates nodes
-    // The algorithm havily uses the fact that in our implementation of both AncestorQuery and DecsndantQuery return nodes in document order.
+    // This class implements Children axis on Ancestor & Descendant imputs. (as well as id(), preciding,
+    // following)
+    // The problem here is that is descenant::*/child::* and ancestor::*/child::* can produce duplicates
+    // nodes
+    // The algorithm havily uses the fact that in our implementation of both AncestorQuery and
+    // DecsndantQuery return nodes in document order.
     // As result first child is always before or equal of next input.
     // So we don't need to call DecideNextNode() when needInput == true && stack is empty.
     internal sealed class CacheChildrenQuery : ChildrenQuery

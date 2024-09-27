@@ -240,7 +240,8 @@ namespace System.Configuration.Internal
         // it opens a stream on a temporary file created in the same directory as streamName.
         //
         // Parameters:
-        //  assertPermissions - If true, then we'll assert all required permissions.  Used by ClientSettingsConfigurationHost.
+        //  assertPermissions - If true, then we'll assert all required permissions.  Used by
+        // ClientSettingsConfigurationHost.
         //                      to allow low-trust apps to use ClientSettingsStore.
         static internal Stream StaticOpenStreamForWrite(
             string streamName,
@@ -293,10 +294,13 @@ namespace System.Configuration.Internal
 
             if (assertPermissions)
             {
-                // If we're asked to assert permission, we will assert allAccess on the directory (instead of just the file).
-                // We need to assert for the whole directory because WriteFileContext will call TempFileCollection.AddExtension,
+                // If we're asked to assert permission, we will assert allAccess on the directory (instead of just
+                // the file).
+                // We need to assert for the whole directory because WriteFileContext will call
+                // TempFileCollection.AddExtension,
                 // which will generate a temporary file and make a AllAccess Demand on that file.
-                // Since we don't know the name of the temporary file right now, we need to assert for the whole dir.
+                // Since we don't know the name of the temporary file right now, we need to assert for the whole
+                // dir.
                 new FileIOPermission(FileIOPermissionAccess.AllAccess, dir).Assert();
                 revertAssert = true;
             }
@@ -386,7 +390,8 @@ namespace System.Configuration.Internal
         }
 
         // Parameters:
-        //  assertPermissions - If true, then we'll assert all required permissions.  Used by ClientSettingsConfigurationHost.
+        //  assertPermissions - If true, then we'll assert all required permissions.  Used by
+        // ClientSettingsConfigurationHost.
         //                      to allow low-trust apps to use ClientSettingsStore.
         static internal void StaticWriteCompleted(
             string streamName,

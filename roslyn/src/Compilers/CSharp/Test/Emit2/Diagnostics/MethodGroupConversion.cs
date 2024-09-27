@@ -49,17 +49,20 @@ delegate void D(C c);
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (7,13): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(I1)' and 'Program.M(I2)'
+                // (7,13): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'Program.M(I1)' and 'Program.M(I2)'
                 //         d = M;
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                     .WithArguments("Program.M(I1)", "Program.M(I2)")
                     .WithLocation(7, 13),
-                // (8,19): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(I1)' and 'Program.M(I2)'
+                // (8,19): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'Program.M(I1)' and 'Program.M(I2)'
                 //         d = new D(M);
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                     .WithArguments("Program.M(I1)", "Program.M(I2)")
                     .WithLocation(8, 19),
-                // (9,12): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(I1)' and 'Program.M(I2)'
+                // (9,12): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'Program.M(I1)' and 'Program.M(I2)'
                 //         M2(M);
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                     .WithArguments("Program.M(I1)", "Program.M(I2)")

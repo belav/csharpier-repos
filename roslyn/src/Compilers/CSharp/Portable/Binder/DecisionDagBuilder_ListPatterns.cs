@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && subpatterns[0] is BoundSlicePattern { Pattern: null }
             )
             {
-                // If `..` is the only pattern in the list, bail. This is a no-op and we don't need to match anything further.
+                // If `..` is the only pattern in the list, bail. This is a no-op and we don't need to match
+                // anything further.
             }
             else
             {

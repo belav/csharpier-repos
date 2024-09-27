@@ -12,7 +12,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
-            // This test just verifies that MediaTypeWithQualityHeaderValue calls the correct base implementation.
+            // This test just verifies that MediaTypeWithQualityHeaderValue calls the correct base
+            // implementation.
             MediaTypeWithQualityHeaderValue source = new MediaTypeWithQualityHeaderValue(
                 "application/xml"
             );
@@ -139,7 +140,8 @@ namespace System.Net.Http.Tests
             CheckValidParse("text/plain", expected);
             CheckValidParse(" text/plain  ", expected);
 
-            // We don't have to test all possible input strings, since most of the pieces are handled by other parsers.
+            // We don't have to test all possible input strings, since most of the pieces are handled by other
+            // parsers.
             // The purpose of this test is to verify that these other parsers are combined correctly to build a
             // media-type parser.
             expected.CharSet = "utf-8";

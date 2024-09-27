@@ -146,7 +146,8 @@ namespace System.Net
 
         // For portability only:
         //
-        // Returning false indicates that the Headers property has not been implemented and should not be used.
+        // Returning false indicates that the Headers property has not been implemented and should not be
+        // used.
         // Derived types with headers should override both Headers and SupportsHeaders.
         public virtual bool SupportsHeaders
         {

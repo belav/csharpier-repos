@@ -41,8 +41,10 @@ namespace System.ServiceModel
         /// Translates the input exception to a fault using the mapping defined in ExceptionMap.
         /// </summary>
         /// <param name="ex">The exception to be mapped to a fault.</param>
-        /// <param name="soapNamespace">The SOAP Namespace to be used when generating the mapped fault.</param>
-        /// <param name="trustNamespace">The WS-Trust Namespace to be used when generating the mapped fault.</param>
+        /// <param name="soapNamespace">The SOAP Namespace to be used when generating the mapped
+        // fault.</param>
+        /// <param name="trustNamespace">The WS-Trust Namespace to be used when generating the mapped
+        // fault.</param>
         /// <returns>The fault corresponding to the input exception.</returns>
         public virtual FaultException FromException(
             Exception ex,
@@ -58,7 +60,8 @@ namespace System.ServiceModel
         /// should be handled using the defined ExceptionMap.
         /// </summary>
         /// <param name="ex">The input exception.</param>
-        /// <returns>A boolean value indicating whether the exception should be handled using the defined ExceptionMap.</returns>
+        /// <returns>A boolean value indicating whether the exception should be handled using the defined
+        // ExceptionMap.</returns>
         public virtual bool HandleSecurityTokenProcessingException(Exception ex)
         {
             if (Fx.IsFatal(ex))

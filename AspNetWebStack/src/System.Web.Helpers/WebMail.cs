@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -33,7 +34,8 @@ namespace System.Web.Helpers
         >(ReadSmtpDefaults);
 
         /// <summary>
-        /// MailMessage dictates that headers values that have equivalent properties would be discarded or overwritten. The list of values is available at
+        /// MailMessage dictates that headers values that have equivalent properties would be discarded or
+        // overwritten. The list of values is available at
         /// http://msdn.microsoft.com/en-us/library/system.net.mail.mailmessage.aspx
         /// </summary>
         private static readonly Dictionary<string, Action<MailMessage, string>> _actionableHeaders =
@@ -255,7 +257,8 @@ namespace System.Web.Helpers
             }
             catch (InvalidOperationException)
             {
-                // Due to Bug Dev10 PS 337470 ("SmtpClient reports InvalidOperationException when disposed"), we need to ignore the spurious InvalidOperationException
+                // Due to Bug Dev10 PS 337470 ("SmtpClient reports InvalidOperationException when disposed"), we
+                // need to ignore the spurious InvalidOperationException
             }
             return smtpDefaults;
         }

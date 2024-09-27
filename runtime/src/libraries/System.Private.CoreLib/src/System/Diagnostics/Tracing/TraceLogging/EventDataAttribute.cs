@@ -62,7 +62,8 @@ namespace System.Diagnostics.Tracing
         ///     eventLevel = options.Level;
         /// else if (data.GetType() has a TraceLoggingEvent attribute and attribute.Level has been set)
         ///     eventLevel = attribute.Level;
-        /// else if (a field/property contained in data has a TraceLoggingEvent attribute and attribute.Level has been set)
+        /// else if (a field/property contained in data has a TraceLoggingEvent attribute and
+        // attribute.Level has been set)
         ///     eventLevel = attribute.Level;
         /// else
         ///     eventLevel = EventLevel.LogAlways;
@@ -88,7 +89,8 @@ namespace System.Diagnostics.Tracing
         ///     eventOpcode = options.Opcode;
         /// else if (data.GetType() has a TraceLoggingEvent attribute and attribute.Opcode has been set)
         ///     eventOpcode = attribute.Opcode;
-        /// else if (a field/property contained in data has a TraceLoggingEvent attribute and attribute.Opcode has been set)
+        /// else if (a field/property contained in data has a TraceLoggingEvent attribute and
+        // attribute.Opcode has been set)
         ///     eventOpcode = attribute.Opcode;
         /// else
         ///     eventOpcode = EventOpcode.Info;

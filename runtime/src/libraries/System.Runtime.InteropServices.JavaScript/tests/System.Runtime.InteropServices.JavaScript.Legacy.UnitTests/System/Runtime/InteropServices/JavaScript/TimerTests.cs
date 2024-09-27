@@ -9,7 +9,8 @@ using Xunit;
 
 namespace System.Runtime.InteropServices.JavaScript.Tests
 {
-    // V8's implementation of setTimer ignores delay parameter and always run immediately. So it could not be used to test this.
+    // V8's implementation of setTimer ignores delay parameter and always run immediately. So it could
+    // not be used to test this.
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsBrowserDomSupported))]
     public class TimerTests : IAsyncLifetime
     {
@@ -39,7 +40,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             try
             {
                 TimersJS.Log($"Waiting for runtime to settle");
-                // the test is quite sensitive to timing and order of execution. Here we are giving time to timers of XHarness and previous tests to finish.
+                // the test is quite sensitive to timing and order of execution. Here we are giving time to timers
+                // of XHarness and previous tests to finish.
                 await Task.Delay(2000);
                 TimersJS.Install();
                 TimersJS.Log($"Ready!");

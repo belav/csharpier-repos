@@ -78,8 +78,10 @@ namespace System.Text.Tests
             int ret1 = encoder.GetBytes(chars, 0, chars.Length, bytes, 0, flush: true);
             int ret2 = encoder.GetBytes(chars, 0, chars.Length, bytes, 0, flush: false);
 
-            // If the last character is a surrogate and the encoder is flushing its state, it will return a fallback character.
-            // When the encoder isn't flushing its state then it holds on to the remnant bytes between calls so that if the next
+            // If the last character is a surrogate and the encoder is flushing its state, it will return a
+            // fallback character.
+            // When the encoder isn't flushing its state then it holds on to the remnant bytes between calls so
+            // that if the next
             // bytes passed in form a valid character you'd get that char as a result.
             // The difference in length of a low surrogate flushed vs non-flushed is 1
             if (IsHighSurrogate(chars[chars.Length - 1]))

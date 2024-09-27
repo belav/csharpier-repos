@@ -818,7 +818,8 @@ namespace System.Net.Http.HPack
         }
 
         /// <summary>
-        /// Encodes a "Literal Header Field without Indexing - New Name" to a new array, but only the name portion;
+        /// Encodes a "Literal Header Field without Indexing - New Name" to a new array, but only the name
+        // portion;
         /// a subsequent call to <c>EncodeStringLiteral</c> must be used to encode the associated value.
         /// </summary>
         public static byte[] EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(

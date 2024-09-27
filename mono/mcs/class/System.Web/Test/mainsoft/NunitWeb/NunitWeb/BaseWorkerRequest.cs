@@ -35,7 +35,8 @@ namespace MonoTests.SystemWeb.Framework
         /// <summary>
         /// Overriden to return the custom user-agent.
         /// </summary>
-        /// <param name="index">Header index, as defined by <see cref="System.Web.HttpWorkerRequest"/></param>
+        /// <param name="index">Header index, as defined by <see
+        // cref="System.Web.HttpWorkerRequest"/></param>
         /// <returns></returns>
         /// <seealso cref="System.Web.HttpWorkerRequest"/>
         public override string GetKnownRequestHeader(int index)

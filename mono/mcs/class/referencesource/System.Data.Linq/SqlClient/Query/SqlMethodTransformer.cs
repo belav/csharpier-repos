@@ -6,7 +6,8 @@ using System.Text;
 namespace System.Data.Linq.SqlClient
 {
     /// <summary>
-    /// After retyping and conversions take place, some functions need to be changed into more suitable calls.
+    /// After retyping and conversions take place, some functions need to be changed into more suitable
+    // calls.
     /// Example: LEN -> DATALENGTH for long text types.
     /// </summary>
     internal class SqlMethodTransformer : SqlVisitor

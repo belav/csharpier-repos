@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System
 {
     /// <summary>
-    /// The exception that is thrown when an attempt is made to store an element of the wrong type within an array.
+    /// The exception that is thrown when an attempt is made to store an element of the wrong type
+    // within an array.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

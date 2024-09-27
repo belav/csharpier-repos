@@ -137,7 +137,8 @@ namespace XmlCoreTest.Common
         }
 
         // XmlSpace and XmlLang are virtual, so custom writer does not need to override them.
-        // But the virtual impln returns Default and empty string respectively, which breaks many writer API tests, hence they are overridden here.
+        // But the virtual impln returns Default and empty string respectively, which breaks many writer API
+        // tests, hence they are overridden here.
         public override XmlSpace XmlSpace
         {
             get { return _writer.XmlSpace; }

@@ -10,7 +10,8 @@ using Microsoft.Extensions.Primitives;
 namespace Microsoft.Net.Http.Headers;
 
 // According to the RFC, in places where a "parameter" is required, the value is mandatory
-// (e.g. Media-Type, Accept). However, we don't introduce a dedicated type for it. So NameValueHeaderValue supports
+// (e.g. Media-Type, Accept). However, we don't introduce a dedicated type for it. So
+// NameValueHeaderValue supports
 // name-only values in addition to name/value pairs.
 /// <summary>
 /// Represents a name/value pair used in various headers as defined in RFC 2616.
@@ -147,7 +148,8 @@ public class NameValueHeaderValue
         }
 
         // RFC2616: 14.20: unquoted tokens should use case-INsensitive comparison; quoted-strings should use
-        // case-sensitive comparison. The RFC doesn't mention how to compare quoted-strings outside the "Expect"
+        // case-sensitive comparison. The RFC doesn't mention how to compare quoted-strings outside the
+        // "Expect"
         // header. We treat all quoted-strings the same: case-sensitive comparison.
 
         if (StringSegment.IsNullOrEmpty(_value))
@@ -167,7 +169,8 @@ public class NameValueHeaderValue
     }
 
     /// <summary>
-    /// If the value is a quoted-string as defined by <see href="https://tools.ietf.org/html/rfc7230#section-3.2.6">the RFC specification</see>,
+    /// If the value is a quoted-string as defined by <see
+    // href="https://tools.ietf.org/html/rfc7230#section-3.2.6">the RFC specification</see>,
     /// removes quotes and unescapes backslashes and quotes.
     /// </summary>
     /// <returns>An unescaped version of <see cref="Value"/>.</returns>
@@ -181,7 +184,8 @@ public class NameValueHeaderValue
     }
 
     /// <summary>
-    /// Sets <see cref="Value"/> after it has been quoted as defined by <see href="https://tools.ietf.org/html/rfc7230#section-3.2.6">the RFC specification</see>.
+    /// Sets <see cref="Value"/> after it has been quoted as defined by <see
+    // href="https://tools.ietf.org/html/rfc7230#section-3.2.6">the RFC specification</see>.
     /// </summary>
     /// <param name="value"></param>
     public void SetAndEscapeValue(StringSegment value)
@@ -209,11 +213,13 @@ public class NameValueHeaderValue
     }
 
     /// <summary>
-    /// Attempts to parse the specified <paramref name="input"/> as a <see cref="NameValueHeaderValue"/>.
+    /// Attempts to parse the specified <paramref name="input"/> as a <see
+    // cref="NameValueHeaderValue"/>.
     /// </summary>
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
-    /// <returns><see langword="true"/> if input is a valid <see cref="NameValueHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if input is a valid <see cref="NameValueHeaderValue"/>,
+    // otherwise <see langword="false"/>.</returns>
     public static bool TryParse(
         StringSegment input,
         [NotNullWhen(true)] out NameValueHeaderValue? parsedValue
@@ -234,7 +240,8 @@ public class NameValueHeaderValue
     }
 
     /// <summary>
-    /// Parses a sequence of inputs as a sequence of <see cref="NameValueHeaderValue"/> values using string parsing rules.
+    /// Parses a sequence of inputs as a sequence of <see cref="NameValueHeaderValue"/> values using
+    // string parsing rules.
     /// </summary>
     /// <param name="input">The values to parse.</param>
     /// <returns>The parsed values.</returns>
@@ -248,7 +255,8 @@ public class NameValueHeaderValue
     /// </summary>
     /// <param name="input">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
-    /// <returns><see langword="true"/> if all inputs are valid <see cref="NameValueHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if all inputs are valid <see cref="NameValueHeaderValue"/>,
+    // otherwise <see langword="false"/>.</returns>
     public static bool TryParseList(
         IList<string>? input,
         [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues
@@ -258,11 +266,13 @@ public class NameValueHeaderValue
     }
 
     /// <summary>
-    /// Attempts to parse the sequence of values as a sequence of <see cref="NameValueHeaderValue"/> using string parsing rules.
+    /// Attempts to parse the sequence of values as a sequence of <see cref="NameValueHeaderValue"/>
+    // using string parsing rules.
     /// </summary>
     /// <param name="input">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
-    /// <returns><see langword="true"/> if all inputs are valid <see cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if all inputs are valid <see
+    // cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
     public static bool TryParseStrictList(
         IList<string>? input,
         [NotNullWhen(true)] out IList<NameValueHeaderValue>? parsedValues
@@ -389,7 +399,8 @@ public class NameValueHeaderValue
         int valueLength = GetValueLength(input, current);
 
         // Value after the '=' may be empty
-        // Use parameterless ctor to avoid double-parsing of name and value, i.e. skip public ctor validation.
+        // Use parameterless ctor to avoid double-parsing of name and value, i.e. skip public ctor
+        // validation.
         parsedValue = new NameValueHeaderValue();
         parsedValue._name = name;
         parsedValue._value = input.Subsegment(current, valueLength);
@@ -446,7 +457,8 @@ public class NameValueHeaderValue
     /// </summary>
     /// <param name="values">The collection to search.</param>
     /// <param name="name">The name to find.</param>
-    /// <returns>The <see cref="NameValueHeaderValue" /> if found, otherwise <see langword="null" />.</returns>
+    /// <returns>The <see cref="NameValueHeaderValue" /> if found, otherwise <see langword="null"
+    // />.</returns>
     public static NameValueHeaderValue? Find(
         IList<NameValueHeaderValue>? values,
         StringSegment name

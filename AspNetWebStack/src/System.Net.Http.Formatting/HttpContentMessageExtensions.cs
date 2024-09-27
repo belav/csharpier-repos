@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,8 @@ using System.Web.Http;
 namespace System.Net.Http
 {
     /// <summary>
-    /// Extension methods to read <see cref="HttpRequestMessage"/> and <see cref="HttpResponseMessage"/> entities from <see cref="HttpContent"/> instances.
+    /// Extension methods to read <see cref="HttpRequestMessage"/> and <see cref="HttpResponseMessage"/>
+    // entities from <see cref="HttpContent"/> instances.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class HttpContentMessageExtensions
@@ -87,7 +89,8 @@ namespace System.Net.Http
         /// Read the <see cref="HttpContent"/> as an <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="content">The content to read.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         public static Task<HttpRequestMessage> ReadAsHttpRequestMessageAsync(
             this HttpContent content
         )
@@ -100,7 +103,8 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         public static Task<HttpRequestMessage> ReadAsHttpRequestMessageAsync(
             this HttpContent content,
             CancellationToken cancellationToken
@@ -119,7 +123,8 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="uriScheme">The URI scheme to use for the request URI.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1054:UriParametersShouldNotBeStrings",
@@ -140,7 +145,8 @@ namespace System.Net.Http
         /// <param name="content">The content to read.</param>
         /// <param name="uriScheme">The URI scheme to use for the request URI.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1054:UriParametersShouldNotBeStrings",
@@ -166,9 +172,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="uriScheme">The URI scheme to use for the request URI (the
-        /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
+        /// URI scheme is not actually part of the HTTP Request URI and so must be provided
+        // externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1054:UriParametersShouldNotBeStrings",
@@ -194,10 +202,12 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="uriScheme">The URI scheme to use for the request URI (the
-        /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
+        /// URI scheme is not actually part of the HTTP Request URI and so must be provided
+        // externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1054:UriParametersShouldNotBeStrings",
@@ -225,10 +235,12 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="uriScheme">The URI scheme to use for the request URI (the
-        /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
+        /// URI scheme is not actually part of the HTTP Request URI and so must be provided
+        // externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="maxHeaderSize">The max length of the HTTP header.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1054:UriParametersShouldNotBeStrings",
@@ -261,11 +273,13 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="uriScheme">The URI scheme to use for the request URI (the
-        /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
+        /// URI scheme is not actually part of the HTTP Request URI and so must be provided
+        // externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="maxHeaderSize">The max length of the HTTP header.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpRequestMessage"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1054:UriParametersShouldNotBeStrings",
@@ -406,7 +420,8 @@ namespace System.Net.Http
         /// Read the <see cref="HttpContent"/> as an <see cref="HttpResponseMessage"/>.
         /// </summary>
         /// <param name="content">The content to read.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpResponseMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpResponseMessage"/>.</returns>
         public static Task<HttpResponseMessage> ReadAsHttpResponseMessageAsync(
             this HttpContent content
         )
@@ -419,7 +434,8 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpResponseMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpResponseMessage"/>.</returns>
         public static Task<HttpResponseMessage> ReadAsHttpResponseMessageAsync(
             this HttpContent content,
             CancellationToken cancellationToken
@@ -433,7 +449,8 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="content">The content to read.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpResponseMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpResponseMessage"/>.</returns>
         public static Task<HttpResponseMessage> ReadAsHttpResponseMessageAsync(
             this HttpContent content,
             int bufferSize
@@ -452,7 +469,8 @@ namespace System.Net.Http
         /// <param name="content">The content to read.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpResponseMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpResponseMessage"/>.</returns>
         public static Task<HttpResponseMessage> ReadAsHttpResponseMessageAsync(
             this HttpContent content,
             int bufferSize,
@@ -473,7 +491,8 @@ namespace System.Net.Http
         /// <param name="content">The content to read.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="maxHeaderSize">The max length of the HTTP header.</param>
-        /// <returns>A task object representing reading the content as an <see cref="HttpResponseMessage"/>.</returns>
+        /// <returns>A task object representing reading the content as an <see
+        // cref="HttpResponseMessage"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
@@ -652,7 +671,8 @@ namespace System.Net.Http
                 );
             }
 
-            // We don't use UriBuilder as hostValues.ElementAt(0) contains 'host:port' and UriBuilder needs these split out into separate host and port.
+            // We don't use UriBuilder as hostValues.ElementAt(0) contains 'host:port' and UriBuilder needs
+            // these split out into separate host and port.
             string requestUri = String.Format(
                 CultureInfo.InvariantCulture,
                 "{0}://{1}{2}",
@@ -667,10 +687,14 @@ namespace System.Net.Http
         /// Copies the unsorted header fields to a sorted collection.
         /// </summary>
         /// <param name="source">The unsorted source headers</param>
-        /// <param name="destination">The destination <see cref="HttpRequestHeaders"/> or <see cref="HttpResponseHeaders"/>.</param>
-        /// <param name="contentStream">The input <see cref="Stream"/> used to form any <see cref="HttpContent"/> being part of this HTTP request.</param>
-        /// <param name="rewind">Start location of any request entity within the <paramref name="contentStream"/>.</param>
-        /// <returns>An <see cref="HttpContent"/> instance if header fields contained and <see cref="HttpContentHeaders"/>.</returns>
+        /// <param name="destination">The destination <see cref="HttpRequestHeaders"/> or <see
+        // cref="HttpResponseHeaders"/>.</param>
+        /// <param name="contentStream">The input <see cref="Stream"/> used to form any <see
+        // cref="HttpContent"/> being part of this HTTP request.</param>
+        /// <param name="rewind">Start location of any request entity within the <paramref
+        // name="contentStream"/>.</param>
+        /// <returns>An <see cref="HttpContent"/> instance if header fields contained and <see
+        // cref="HttpContentHeaders"/>.</returns>
         private static HttpContent CreateHeaderFields(
             HttpHeaders source,
             HttpHeaders destination,
@@ -726,12 +750,15 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Creates an <see cref="HttpRequestMessage"/> based on information provided in <see cref="HttpUnsortedRequest"/>.
+        /// Creates an <see cref="HttpRequestMessage"/> based on information provided in <see
+        // cref="HttpUnsortedRequest"/>.
         /// </summary>
         /// <param name="uriScheme">The URI scheme to use for the request URI.</param>
         /// <param name="httpRequest">The unsorted HTTP request.</param>
-        /// <param name="contentStream">The input <see cref="Stream"/> used to form any <see cref="HttpContent"/> being part of this HTTP request.</param>
-        /// <param name="rewind">Start location of any request entity within the <paramref name="contentStream"/>.</param>
+        /// <param name="contentStream">The input <see cref="Stream"/> used to form any <see
+        // cref="HttpContent"/> being part of this HTTP request.</param>
+        /// <param name="rewind">Start location of any request entity within the <paramref
+        // name="contentStream"/>.</param>
         /// <returns>A newly created <see cref="HttpRequestMessage"/> instance.</returns>
         [SuppressMessage(
             "Microsoft.Reliability",
@@ -768,11 +795,14 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Creates an <see cref="HttpResponseMessage"/> based on information provided in <see cref="HttpUnsortedResponse"/>.
+        /// Creates an <see cref="HttpResponseMessage"/> based on information provided in <see
+        // cref="HttpUnsortedResponse"/>.
         /// </summary>
         /// <param name="httpResponse">The unsorted HTTP Response.</param>
-        /// <param name="contentStream">The input <see cref="Stream"/> used to form any <see cref="HttpContent"/> being part of this HTTP Response.</param>
-        /// <param name="rewind">Start location of any Response entity within the <paramref name="contentStream"/>.</param>
+        /// <param name="contentStream">The input <see cref="Stream"/> used to form any <see
+        // cref="HttpContent"/> being part of this HTTP Response.</param>
+        /// <param name="rewind">Start location of any Response entity within the <paramref
+        // name="contentStream"/>.</param>
         /// <returns>A newly created <see cref="HttpResponseMessage"/> instance.</returns>
         [SuppressMessage(
             "Microsoft.Reliability",

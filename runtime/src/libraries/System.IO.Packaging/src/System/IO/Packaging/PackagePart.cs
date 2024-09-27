@@ -61,7 +61,8 @@ namespace System.IO.Packaging
         /// Content Type</param>
         /// <exception cref="ArgumentNullException">If parameter "package" is null</exception>
         /// <exception cref="ArgumentNullException">If parameter "partUri" is null</exception>
-        /// <exception cref="ArgumentException">If parameter "partUri" does not conform to the valid partUri syntax</exception>
+        /// <exception cref="ArgumentException">If parameter "partUri" does not conform to the valid partUri
+        // syntax</exception>
         protected PackagePart(Package package, Uri partUri, string? contentType)
             : this(package, partUri, contentType, CompressionOption.NotCompressed) { }
 
@@ -86,8 +87,10 @@ namespace System.IO.Packaging
         /// <param name="compressionOption">compression option for this part</param>
         /// <exception cref="ArgumentNullException">If parameter "package" is null</exception>
         /// <exception cref="ArgumentNullException">If parameter "partUri" is null</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If CompressionOption enumeration [compressionOption] does not have one of the valid values</exception>
-        /// <exception cref="ArgumentException">If parameter "partUri" does not conform to the valid partUri syntax</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If CompressionOption enumeration
+        // [compressionOption] does not have one of the valid values</exception>
+        /// <exception cref="ArgumentException">If parameter "partUri" does not conform to the valid partUri
+        // syntax</exception>
         protected PackagePart(
             Package package,
             Uri partUri,
@@ -133,7 +136,8 @@ namespace System.IO.Packaging
         /// </summary>
         /// <value></value>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
         public Uri Uri
         {
             get
@@ -156,8 +160,10 @@ namespace System.IO.Packaging
         /// </summary>
         /// <value>Content Type of the Part [can never return null] </value>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="InvalidOperationException">If the subclass fails to provide a non-null content type value.</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="InvalidOperationException">If the subclass fails to provide a non-null content
+        // type value.</exception>
         public string ContentType
         {
             get
@@ -197,7 +203,8 @@ namespace System.IO.Packaging
         /// </summary>
         /// <value></value>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
         public Package Package
         {
             get
@@ -212,7 +219,8 @@ namespace System.IO.Packaging
         /// The PackagePart properties can not be accessed if the parent container is closed.
         /// </summary>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
         public CompressionOption CompressionOption
         {
             get
@@ -241,8 +249,10 @@ namespace System.IO.Packaging
         /// assigned.
         /// </summary>
         /// <returns>Content type for the Part</returns>
-        /// <exception cref="NotSupportedException">By default, this method throws a NotSupportedException. If a subclass wants to
-        /// initialize the content type for a PackagePart in a lazy manner they must override this method.</exception>
+        /// <exception cref="NotSupportedException">By default, this method throws a NotSupportedException.
+        // If a subclass wants to
+        /// initialize the content type for a PackagePart in a lazy manner they must override this
+        // method.</exception>
         protected virtual string GetContentTypeCore()
         {
             throw new NotSupportedException(SR.GetContentTypeCoreNotImplemented);
@@ -261,8 +271,10 @@ namespace System.IO.Packaging
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="IOException">If the subclass fails to provide a non-null stream object</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="IOException">If the subclass fails to provide a non-null stream
+        // object</exception>
         public Stream GetStream()
         {
             CheckInvalidState();
@@ -279,12 +291,17 @@ namespace System.IO.Packaging
         /// <param name="mode"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If FileMode enumeration [mode] does not have one of the valid values</exception>
-        /// <exception cref="IOException">If FileAccess.Read is provided and FileMode values are any of the following -
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If FileMode enumeration [mode] does not have one
+        // of the valid values</exception>
+        /// <exception cref="IOException">If FileAccess.Read is provided and FileMode values are any of the
+        // following -
         /// FileMode.Create, FileMode.CreateNew, FileMode.Truncate, FileMode.Append</exception>
-        /// <exception cref="IOException">If the mode and access for the Package and the Stream are not compatible</exception>
-        /// <exception cref="IOException">If the subclass fails to provide a non-null stream object</exception>
+        /// <exception cref="IOException">If the mode and access for the Package and the Stream are not
+        // compatible</exception>
+        /// <exception cref="IOException">If the subclass fails to provide a non-null stream
+        // object</exception>
         public Stream GetStream(FileMode mode)
         {
             CheckInvalidState();
@@ -302,13 +319,19 @@ namespace System.IO.Packaging
         /// <param name="access"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If FileMode enumeration [mode] does not have one of the valid values</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If FileAccess enumeration [access] does not have one of the valid values</exception>
-        /// <exception cref="IOException">If FileAccess.Read is provided and FileMode values are any of the following -
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If FileMode enumeration [mode] does not have one
+        // of the valid values</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If FileAccess enumeration [access] does not have
+        // one of the valid values</exception>
+        /// <exception cref="IOException">If FileAccess.Read is provided and FileMode values are any of the
+        // following -
         /// FileMode.Create, FileMode.CreateNew, FileMode.Truncate, FileMode.Append</exception>
-        /// <exception cref="IOException">If the mode and access for the Package and the Stream are not compatible</exception>
-        /// <exception cref="IOException">If the subclass fails to provide a non-null stream object</exception>
+        /// <exception cref="IOException">If the mode and access for the Package and the Stream are not
+        // compatible</exception>
+        /// <exception cref="IOException">If the subclass fails to provide a non-null stream
+        // object</exception>
         public Stream GetStream(FileMode mode, FileAccess access)
         {
             CheckInvalidState();
@@ -367,13 +390,17 @@ namespace System.IO.Packaging
         /// uniquely identify the role of the relationship</param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
         /// <exception cref="IOException">If the package is readonly, it cannot be modified</exception>
         /// <exception cref="ArgumentNullException">If parameter "targetUri" is null</exception>
         /// <exception cref="ArgumentNullException">If parameter "relationshipType" is null</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If parameter "targetMode" enumeration does not have a valid value</exception>
-        /// <exception cref="ArgumentException">If TargetMode is TargetMode.Internal and the targetUri is an absolute Uri </exception>
-        /// <exception cref="ArgumentException">If relationship is being targeted to a relationship part</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If parameter "targetMode" enumeration does not
+        // have a valid value</exception>
+        /// <exception cref="ArgumentException">If TargetMode is TargetMode.Internal and the targetUri is an
+        // absolute Uri </exception>
+        /// <exception cref="ArgumentException">If relationship is being targeted to a relationship
+        // part</exception>
         public PackageRelationship CreateRelationship(
             Uri targetUri,
             TargetMode targetMode,
@@ -395,15 +422,20 @@ namespace System.IO.Packaging
         /// relationships. Null is OK (ID will be generated). An empty string is an invalid XML ID.</param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
         /// <exception cref="IOException">If the package is readonly, it cannot be modified</exception>
         /// <exception cref="ArgumentNullException">If parameter "targetUri" is null</exception>
         /// <exception cref="ArgumentNullException">If parameter "relationshipType" is null</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If parameter "targetMode" enumeration does not have a valid value</exception>
-        /// <exception cref="ArgumentException">If TargetMode is TargetMode.Internal and the targetUri is an absolute Uri </exception>
-        /// <exception cref="ArgumentException">If relationship is being targeted to a relationship part</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If parameter "targetMode" enumeration does not
+        // have a valid value</exception>
+        /// <exception cref="ArgumentException">If TargetMode is TargetMode.Internal and the targetUri is an
+        // absolute Uri </exception>
+        /// <exception cref="ArgumentException">If relationship is being targeted to a relationship
+        // part</exception>
         /// <exception cref="System.Xml.XmlException">If parameter "id" is not a valid Xsd Id</exception>
-        /// <exception cref="System.Xml.XmlException">If an id is provided in the method, and its not unique</exception>
+        /// <exception cref="System.Xml.XmlException">If an id is provided in the method, and its not
+        // unique</exception>
         public PackageRelationship CreateRelationship(
             Uri targetUri,
             TargetMode targetMode,
@@ -425,7 +457,8 @@ namespace System.IO.Packaging
         /// <param name="id">The ID of the relationship to delete. An invalid ID will not
         /// throw an exception, but nothing will be deleted.</param>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
         /// <exception cref="IOException">If the package is readonly, it cannot be modified</exception>
         /// <exception cref="ArgumentNullException">If parameter "id" is null</exception>
         /// <exception cref="System.Xml.XmlException">If parameter "id" is not a valid Xsd Id</exception>
@@ -449,8 +482,10 @@ namespace System.IO.Packaging
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="IOException">If the package is write only, no information can be retrieved from it</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="IOException">If the package is write only, no information can be retrieved from
+        // it</exception>
         public PackageRelationshipCollection GetRelationships()
         {
             //All the validations for dispose and file access are done in the
@@ -467,10 +502,13 @@ namespace System.IO.Packaging
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="IOException">If the package is write only, no information can be retrieved from it</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="IOException">If the package is write only, no information can be retrieved from
+        // it</exception>
         /// <exception cref="ArgumentNullException">If parameter "relationshipType" is null</exception>
-        /// <exception cref="ArgumentException">If parameter "relationshipType" is an empty string</exception>
+        /// <exception cref="ArgumentException">If parameter "relationshipType" is an empty
+        // string</exception>
         public PackageRelationshipCollection GetRelationshipsByType(string relationshipType)
         {
             //These checks are made in the GetRelationshipsHelper as well, but we make them
@@ -492,11 +530,14 @@ namespace System.IO.Packaging
         /// <param name="id">The relationship ID.</param>
         /// <returns>The relationship with ID 'id' or throw an exception if not found.</returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="IOException">If the package is write only, no information can be retrieved from it</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="IOException">If the package is write only, no information can be retrieved from
+        // it</exception>
         /// <exception cref="ArgumentNullException">If parameter "id" is null</exception>
         /// <exception cref="System.Xml.XmlException">If parameter "id" is not a valid Xsd Id</exception>
-        /// <exception cref="InvalidOperationException">If the requested relationship does not exist in the Package</exception>
+        /// <exception cref="InvalidOperationException">If the requested relationship does not exist in the
+        // Package</exception>
         public PackageRelationship GetRelationship(string id)
         {
             //All the validations for dispose and file access are done in the
@@ -515,8 +556,10 @@ namespace System.IO.Packaging
         /// <param name="id">The relationship ID.</param>
         /// <returns>true iff a relationship with ID 'id' is defined on this source.</returns>
         /// <exception cref="InvalidOperationException">If this part has been deleted</exception>
-        /// <exception cref="InvalidOperationException">If the parent package has been closed or disposed</exception>
-        /// <exception cref="IOException">If the package is write only, no information can be retrieved from it</exception>
+        /// <exception cref="InvalidOperationException">If the parent package has been closed or
+        // disposed</exception>
+        /// <exception cref="IOException">If the package is write only, no information can be retrieved from
+        // it</exception>
         /// <exception cref="ArgumentNullException">If parameter "id" is null</exception>
         /// <exception cref="System.Xml.XmlException">If parameter "id" is not a valid Xsd Id</exception>
         public bool RelationshipExists(string id)
@@ -717,7 +760,8 @@ namespace System.IO.Packaging
             ThrowIfParentContainerClosed();
         }
 
-        //If the parent container is closed then the operations on this part like getting stream make no sense
+        //If the parent container is closed then the operations on this part like getting stream make no
+        // sense
         private void ThrowIfParentContainerClosed()
         {
             if (_container == null)

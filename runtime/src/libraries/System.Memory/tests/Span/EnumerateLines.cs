@@ -60,8 +60,10 @@ namespace System.SpanTests
         [InlineData("abc<NAK>%def", new[] { ".." })] // we don't recognize EBCDIC encodings for LF (see Unicode Standard, Sec. 5.8, Table 5-1)
         public static void EnumerateLines_Battery(string input, string[] expectedRanges)
         {
-            // This test is similar to the string.ReplaceLineEndings test, but it checks ranges instead of substrings,
-            // as we want to ensure that the method under test points to very specific slices within the original input string.
+            // This test is similar to the string.ReplaceLineEndings test, but it checks ranges instead of
+            // substrings,
+            // as we want to ensure that the method under test points to very specific slices within the
+            // original input string.
 
             input = FixupSequences(input);
             Range[] expectedRangesNormalized = expectedRanges

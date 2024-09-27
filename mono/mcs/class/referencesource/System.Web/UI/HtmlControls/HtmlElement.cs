@@ -31,9 +31,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["manifest"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Override to process manifest attribute
-         */
+/*
+* Override to process manifest attribute
+*/
         protected override void RenderAttributes(HtmlTextWriter writer)
         {
             PreProcessRelativeReferenceAttribute(writer, "manifest");

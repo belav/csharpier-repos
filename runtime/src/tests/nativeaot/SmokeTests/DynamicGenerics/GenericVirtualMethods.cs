@@ -389,7 +389,8 @@ public static class GenericVirtualMethods
         Assert.AreEqual(default(float), d2(1, 2));
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d2));
 
-        // Start checking to ensure that duplicate and/or empty generic dictionaries don't result in not having
+        // Start checking to ensure that duplicate and/or empty generic dictionaries don't result in not
+        // having
         // the correct equality behavior
 
         // Empty Generic MethodDictionaries

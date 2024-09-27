@@ -15,7 +15,8 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
 
     /// <devdoc>
-    /// <para>Serves as the abstract base class for the <see cref='System.Web.UI.WebControls.DataList'/> and <see cref='System.Web.UI.WebControls.DataGrid'/>
+    /// <para>Serves as the abstract base class for the <see cref='System.Web.UI.WebControls.DataList'/>
+    // and <see cref='System.Web.UI.WebControls.DataGrid'/>
     /// controls and implements the selection semantics which are common to both
     /// controls.</para>
     /// </devdoc>
@@ -162,7 +163,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicatesthe primary key field in the data source referenced by <see cref='System.Web.UI.WebControls.BaseDataList.DataSource'/>.</para>
+        /// <para>Indicatesthe primary key field in the data source referenced by <see
+        // cref='System.Web.UI.WebControls.BaseDataList.DataSource'/>.</para>
         /// </devdoc>
         [
             DefaultValue(""),
@@ -549,7 +551,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Raises the <see langword='DataBinding '/>event of a <see cref='System.Web.UI.WebControls.BaseDataList'/>
+        /// <para>Raises the <see langword='DataBinding '/>event of a <see
+        // cref='System.Web.UI.WebControls.BaseDataList'/>
         /// .</para>
         /// </devdoc>
         protected override void OnDataBinding(EventArgs e)
@@ -614,7 +617,8 @@ namespace System.Web.UI.WebControls
             if (Page != null && !_pagePreLoadFired && ViewState[ItemCountViewStateKey] == null)
             {
                 // If the control was added after PagePreLoad, we still need to databind it because it missed its
-                // first change in PagePreLoad.  If this control was created by a call to a parent control's DataBind
+                // first change in PagePreLoad.  If this control was created by a call to a parent control's
+                // DataBind
                 // in Page_Load (with is relatively common), this control will already have been databound even
                 // though pagePreLoad never fired and the page isn't a postback.
                 if (!Page.IsPostBack)
@@ -623,7 +627,8 @@ namespace System.Web.UI.WebControls
                 }
                 // If the control was added to the page after page.PreLoad, we'll never get the event and we'll
                 // never databind the control.  So if we're catching up and Load happens but PreLoad never happened,
-                // call DataBind.  This may make the control get databound twice if the user called DataBind on the control
+                // call DataBind.  This may make the control get databound twice if the user called DataBind on the
+                // control
                 // directly in Page.OnLoad, but better to bind twice than never to bind at all.
                 else if (IsViewStateEnabled)
                 {
@@ -673,7 +678,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Raises the <see cref='System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged'/>event of a <see cref='System.Web.UI.WebControls.BaseDataList'/>.</para>
+        /// <para>Raises the <see cref='System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged'/>event
+        // of a <see cref='System.Web.UI.WebControls.BaseDataList'/>.</para>
         /// </devdoc>
         protected virtual void OnSelectedIndexChanged(EventArgs e)
         {

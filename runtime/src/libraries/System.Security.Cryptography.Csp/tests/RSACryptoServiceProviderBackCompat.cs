@@ -152,7 +152,8 @@ namespace System.Security.Cryptography.Csp.Tests
         [InlineData(true, true)]
         [InlineData(true, false)]
         [InlineData(false, true)]
-        // (false, false) is not required, that would be equivalent to the RSA AlgorithmImplementation suite.
+        // (false, false) is not required, that would be equivalent to the RSA AlgorithmImplementation
+        // suite.
         public static void VerifyLegacySignVerifyHash(bool useLegacySign, bool useLegacyVerify)
         {
             byte[] dataHash,

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
         /// All assemblies this assembly references.
         /// </summary>
         /// <remarks>
-        /// A concatenation of assemblies referenced by each module in the order they are listed in <see cref="_modules"/>.
+        /// A concatenation of assemblies referenced by each module in the order they are listed in <see
+        // cref="_modules"/>.
         /// </remarks>
         internal readonly ImmutableArray<AssemblyIdentity> AssemblyReferences;
 

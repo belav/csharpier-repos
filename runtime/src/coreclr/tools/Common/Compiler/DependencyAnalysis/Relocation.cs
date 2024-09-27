@@ -536,7 +536,8 @@ namespace ILCompiler.DependencyAnalysis
         /// corresponding to the IMAGE_REL_BASED_ABSOLUTE no-op relocation record.
         /// </summary>
         /// <param name="relocationType">Relocation type</param>
-        /// <returns>File-level relocation type or 0 (IMAGE_REL_BASED_ABSOLUTE) if none is required</returns>
+        /// <returns>File-level relocation type or 0 (IMAGE_REL_BASED_ABSOLUTE) if none is
+        // required</returns>
         public static RelocType GetFileRelocationType(RelocType relocationType)
         {
             switch (relocationType)

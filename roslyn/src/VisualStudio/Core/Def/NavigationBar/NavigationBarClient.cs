@@ -104,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
                 | DROPDOWNENTRYTYPE.ENTRY_IMAGE
             );
 
-            // We no longer need to return an HIMAGELIST, we now use IVsDropdownBarClient4.GetEntryImage which uses monikers directly.
+            // We no longer need to return an HIMAGELIST, we now use IVsDropdownBarClient4.GetEntryImage which
+            // uses monikers directly.
             phImageList = IntPtr.Zero;
 
             switch (iCombo)
@@ -210,7 +211,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
 
         int IVsDropdownBarClient.GetEntryImage(int iCombo, int iIndex, out int piImageIndex)
         {
-            // This class implements IVsDropdownBarClient4 and expects IVsDropdownBarClient4.GetEntryImage() to be called instead
+            // This class implements IVsDropdownBarClient4 and expects IVsDropdownBarClient4.GetEntryImage() to
+            // be called instead
             piImageIndex = -1;
             return VSConstants.E_UNEXPECTED;
         }
@@ -305,7 +307,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             out IntPtr phImageList
         )
         {
-            // This class implements IVsDropdownBarClient4 and expects IVsDropdownBarClient4.GetEntryImage() to be called instead
+            // This class implements IVsDropdownBarClient4 and expects IVsDropdownBarClient4.GetEntryImage() to
+            // be called instead
             phImageList = IntPtr.Zero;
             piImageIndex = -1;
 

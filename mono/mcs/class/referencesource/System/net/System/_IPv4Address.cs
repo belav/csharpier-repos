@@ -101,7 +101,8 @@ namespace System
             bool unknownScheme
         )
         {
-            // IPv6 can only have canonical IPv4 embedded. Unknown schemes will not attempt parsing of non-canonical IPv4 addresses.
+            // IPv6 can only have canonical IPv4 embedded. Unknown schemes will not attempt parsing of
+            // non-canonical IPv4 addresses.
             if (allowIPv6 || unknownScheme)
             {
                 return IsValidCanonical(name, start, ref end, allowIPv6, notImplicitFile);
@@ -115,7 +116,8 @@ namespace System
         //
         // IsValidCanonical
         //
-        //  Checks if the substring is a valid canonical IPv4 address or an IPv4 address embedded in an IPv6 literal
+        //  Checks if the substring is a valid canonical IPv4 address or an IPv4 address embedded in an IPv6
+        // literal
         //  This is an attempt to parse ABNF productions from RFC3986, Section 3.2.2:
         //     IP-literal = "[" ( IPv6address / IPvFuture  ) "]"
         //     IPv4address = dec-octet "." dec-octet "." dec-octet "." dec-octet
@@ -204,7 +206,8 @@ namespace System
 
         // Parse any canonical or noncanonical IPv4 formats and return a long between 0 and MaxIPv4Value.
         // Return Invalid (-1) for failures.
-        // If the address has less than three dots, only the rightmost section is assumed to contain the combined value for
+        // If the address has less than three dots, only the rightmost section is assumed to contain the
+        // combined value for
         // the missing sections: 0xFF00FFFF == 0xFF.0x00.0xFF.0xFF == 0xFF.0xFFFF
         internal unsafe static long ParseNonCanonical(
             char* name,

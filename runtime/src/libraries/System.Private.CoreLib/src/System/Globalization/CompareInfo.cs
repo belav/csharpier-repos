@@ -230,7 +230,8 @@ namespace System.Globalization
         [OnSerializing]
         private void OnSerializing(StreamingContext ctx)
         {
-            // This is merely for serialization compatibility with Whidbey/Orcas, it can go away when we don't want that compat any more.
+            // This is merely for serialization compatibility with Whidbey/Orcas, it can go away when we don't
+            // want that compat any more.
             culture = CultureInfo.GetCultureInfo(Name).LCID; // This is the lcid of the constructing culture (still have to dereference to get target sort)
             Debug.Assert(
                 m_name != null,
@@ -609,10 +610,12 @@ namespace System.Globalization
         /// Determines whether a string starts with a specific prefix.
         /// </summary>
         /// <param name="source">The string to search within.</param>
-        /// <param name="prefix">The prefix to attempt to match at the start of <paramref name="source"/>.</param>
+        /// <param name="prefix">The prefix to attempt to match at the start of <paramref
+        // name="source"/>.</param>
         /// <param name="options">The <see cref="CompareOptions"/> to use during the match.</param>
         /// <returns>
-        /// <see langword="true"/> if <paramref name="prefix"/> occurs at the start of <paramref name="source"/>;
+        /// <see langword="true"/> if <paramref name="prefix"/> occurs at the start of <paramref
+        // name="source"/>;
         /// otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
@@ -676,14 +679,16 @@ namespace System.Globalization
         /// Determines whether a string starts with a specific prefix.
         /// </summary>
         /// <param name="source">The string to search within.</param>
-        /// <param name="prefix">The prefix to attempt to match at the start of <paramref name="source"/>.</param>
+        /// <param name="prefix">The prefix to attempt to match at the start of <paramref
+        // name="source"/>.</param>
         /// <param name="options">The <see cref="CompareOptions"/> to use during the match.</param>
         /// <param name="matchLength">When this method returns, contains the number of characters of
         /// <paramref name="source"/> that matched the desired prefix. This may be different than the
         /// length of <paramref name="prefix"/> if a linguistic comparison is performed. Set to 0
         /// if the prefix did not match.</param>
         /// <returns>
-        /// <see langword="true"/> if <paramref name="prefix"/> occurs at the start of <paramref name="source"/>;
+        /// <see langword="true"/> if <paramref name="prefix"/> occurs at the start of <paramref
+        // name="source"/>;
         /// otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
@@ -777,10 +782,12 @@ namespace System.Globalization
         /// Determines whether a string ends with a specific suffix.
         /// </summary>
         /// <param name="source">The string to search within.</param>
-        /// <param name="suffix">The suffix to attempt to match at the end of <paramref name="source"/>.</param>
+        /// <param name="suffix">The suffix to attempt to match at the end of <paramref
+        // name="source"/>.</param>
         /// <param name="options">The <see cref="CompareOptions"/> to use during the match.</param>
         /// <returns>
-        /// <see langword="true"/> if <paramref name="suffix"/> occurs at the end of <paramref name="source"/>;
+        /// <see langword="true"/> if <paramref name="suffix"/> occurs at the end of <paramref
+        // name="source"/>;
         /// otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
@@ -844,14 +851,16 @@ namespace System.Globalization
         /// Determines whether a string ends with a specific suffix.
         /// </summary>
         /// <param name="source">The string to search within.</param>
-        /// <param name="suffix">The suffix to attempt to match at the end of <paramref name="source"/>.</param>
+        /// <param name="suffix">The suffix to attempt to match at the end of <paramref
+        // name="source"/>.</param>
         /// <param name="options">The <see cref="CompareOptions"/> to use during the match.</param>
         /// <param name="matchLength">When this method returns, contains the number of characters of
         /// <paramref name="source"/> that matched the desired suffix. This may be different than the
         /// length of <paramref name="suffix"/> if a linguistic comparison is performed. Set to 0
         /// if the suffix did not match.</param>
         /// <returns>
-        /// <see langword="true"/> if <paramref name="suffix"/> occurs at the end of <paramref name="source"/>;
+        /// <see langword="true"/> if <paramref name="suffix"/> occurs at the end of <paramref
+        // name="source"/>;
         /// otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
@@ -1101,7 +1110,8 @@ namespace System.Globalization
         /// <param name="options">The <see cref="CompareOptions"/> to use during the search.</param>
         /// <returns>
         /// The zero-based index into <paramref name="source"/> where the substring <paramref name="value"/>
-        /// first appears; or -1 if <paramref name="value"/> cannot be found within <paramref name="source"/>.
+        /// first appears; or -1 if <paramref name="value"/> cannot be found within <paramref
+        // name="source"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
@@ -1179,7 +1189,8 @@ namespace System.Globalization
         /// if <paramref name="value"/> is not found within <paramref name="source"/>.</param>
         /// <returns>
         /// The zero-based index into <paramref name="source"/> where the substring <paramref name="value"/>
-        /// first appears; or -1 if <paramref name="value"/> cannot be found within <paramref name="source"/>.
+        /// first appears; or -1 if <paramref name="value"/> cannot be found within <paramref
+        // name="source"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
@@ -1210,7 +1221,8 @@ namespace System.Globalization
         /// <param name="options">The <see cref="CompareOptions"/> to use during the search.</param>
         /// <returns>
         /// The zero-based index into <paramref name="source"/> where <paramref name="value"/>
-        /// first appears; or -1 if <paramref name="value"/> cannot be found within <paramref name="source"/>.
+        /// first appears; or -1 if <paramref name="value"/> cannot be found within <paramref
+        // name="source"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
@@ -1413,11 +1425,14 @@ namespace System.Globalization
 
             TryAgain:
 
-            // Previous versions of the Framework special-cased empty 'source' to allow startIndex = -1 or startIndex = 0,
-            // ignoring 'count' and short-circuiting the entire operation. We'll silently fix up the 'count' parameter
+            // Previous versions of the Framework special-cased empty 'source' to allow startIndex = -1 or
+            // startIndex = 0,
+            // ignoring 'count' and short-circuiting the entire operation. We'll silently fix up the 'count'
+            // parameter
             // if this occurs.
             //
-            // See the comments just before string.IndexOf(string) for more information on how these computations are
+            // See the comments just before string.IndexOf(string) for more information on how these
+            // computations are
             // performed.
 
             if ((uint)startIndex >= (uint)source.Length)
@@ -1482,11 +1497,14 @@ namespace System.Globalization
 
             TryAgain:
 
-            // Previous versions of the Framework special-cased empty 'source' to allow startIndex = -1 or startIndex = 0,
-            // ignoring 'count' and short-circuiting the entire operation. We'll silently fix up the 'count' parameter
+            // Previous versions of the Framework special-cased empty 'source' to allow startIndex = -1 or
+            // startIndex = 0,
+            // ignoring 'count' and short-circuiting the entire operation. We'll silently fix up the 'count'
+            // parameter
             // if this occurs.
             //
-            // See the comments just before string.IndexOf(string) for more information on how these computations are
+            // See the comments just before string.IndexOf(string) for more information on how these
+            // computations are
             // performed.
 
             if ((uint)startIndex >= (uint)source.Length)
@@ -1540,7 +1558,8 @@ namespace System.Globalization
         /// <param name="options">The <see cref="CompareOptions"/> to use during the search.</param>
         /// <returns>
         /// The zero-based index into <paramref name="source"/> where the substring <paramref name="value"/>
-        /// last appears; or -1 if <paramref name="value"/> cannot be found within <paramref name="source"/>.
+        /// last appears; or -1 if <paramref name="value"/> cannot be found within <paramref
+        // name="source"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
@@ -1616,7 +1635,8 @@ namespace System.Globalization
         /// if <paramref name="value"/> is not found within <paramref name="source"/>.</param>
         /// <returns>
         /// The zero-based index into <paramref name="source"/> where the substring <paramref name="value"/>
-        /// last appears; or -1 if <paramref name="value"/> cannot be found within <paramref name="source"/>.
+        /// last appears; or -1 if <paramref name="value"/> cannot be found within <paramref
+        // name="source"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
@@ -1647,7 +1667,8 @@ namespace System.Globalization
         /// <param name="options">The <see cref="CompareOptions"/> to use during the search.</param>
         /// <returns>
         /// The zero-based index into <paramref name="source"/> where <paramref name="value"/>
-        /// last appears; or -1 if <paramref name="value"/> cannot be found within <paramref name="source"/>.
+        /// last appears; or -1 if <paramref name="value"/> cannot be found within <paramref
+        // name="source"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
@@ -1808,7 +1829,8 @@ namespace System.Globalization
         ///
         /// The hash code is guaranteed to be the same for string A and B where A.Equals(B) is true and both
         /// the CompareInfo and the CompareOptions are the same. If two different CompareInfo objects
-        /// treat the string the same way, this implementation will treat them differently (the same way that
+        /// treat the string the same way, this implementation will treat them differently (the same way
+        // that
         /// Sortkey does at the moment).
         /// </summary>
         public int GetHashCode(string source, CompareOptions options)

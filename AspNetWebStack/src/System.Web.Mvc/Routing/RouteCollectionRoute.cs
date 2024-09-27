@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace System.Web.Mvc.Routing
     /// A single route that is the composite of multiple "sub routes".
     /// </summary>
     /// <remarks>
-    /// Corresponds to the Web API implementation of attribute routing in System.Web.Http.Routing.RouteCollectionRoute.
+    /// Corresponds to the Web API implementation of attribute routing in
+    // System.Web.Http.Routing.RouteCollectionRoute.
     /// </remarks>
     internal class RouteCollectionRoute : RouteBase, IReadOnlyCollection<RouteBase>
     {

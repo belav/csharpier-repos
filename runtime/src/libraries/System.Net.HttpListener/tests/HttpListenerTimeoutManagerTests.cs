@@ -210,7 +210,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void DrainEntityBody_SetTimeoutNoStart_GetReturnsNewValue()
         {
-            // Set the DrainEntityBody timeout without calling Start and make sure that native layer return new value.
+            // Set the DrainEntityBody timeout without calling Start and make sure that native layer return new
+            // value.
             _listener.TimeoutManager.DrainEntityBody = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.DrainEntityBody);
 
@@ -220,7 +221,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void DrainEntityBody_SetTimeoutAfterStart_GetReturnsNewValue()
         {
-            // Set the DrainEntityBody timeout after calling Start and make sure that native layer return new value.
+            // Set the DrainEntityBody timeout after calling Start and make sure that native layer return new
+            // value.
             _listener.Start();
             _listener.TimeoutManager.DrainEntityBody = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.DrainEntityBody);
@@ -231,7 +233,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void EntityBody_SetTimeoutNoStart_GetReturnsNewValue()
         {
-            // Set the DrainEntityBody timeout without calling Start and make sure that native layer return new value.
+            // Set the DrainEntityBody timeout without calling Start and make sure that native layer return new
+            // value.
             _listener.TimeoutManager.EntityBody = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.EntityBody);
 
@@ -252,7 +255,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void HeaderWait_SetTimeoutNoStart_GetReturnsNewValue()
         {
-            // Set the HeaderWait timeout without calling Start and make sure that native layer return new value.
+            // Set the HeaderWait timeout without calling Start and make sure that native layer return new
+            // value.
             _listener.TimeoutManager.HeaderWait = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.HeaderWait);
 
@@ -273,7 +277,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void RequestQueue_SetTimeoutNoStart_GetReturnsNewValue()
         {
-            // Set the DrainEntityBody timeout without calling Start and make sure that native layer return new value.
+            // Set the DrainEntityBody timeout without calling Start and make sure that native layer return new
+            // value.
             _listener.TimeoutManager.RequestQueue = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.RequestQueue);
 
@@ -283,7 +288,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void RequestQueue_SetTimeoutAfterStart_GetReturnsNewValue()
         {
-            // Set the RequestQueue timeout after calling Start and make sure that native layer return new value.
+            // Set the RequestQueue timeout after calling Start and make sure that native layer return new
+            // value.
             _listener.Start();
             _listener.TimeoutManager.RequestQueue = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.RequestQueue);
@@ -294,7 +300,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void IdleConnection_SetTimeoutNoStart_GetReturnsNewValue()
         {
-            // Set the IdleConnection timeout without calling Start and make sure that native layer return new value.
+            // Set the IdleConnection timeout without calling Start and make sure that native layer return new
+            // value.
             _listener.TimeoutManager.IdleConnection = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.IdleConnection);
 
@@ -304,7 +311,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void IdleConnection_SetTimeoutAfterStart_GetReturnsNewValue()
         {
-            // Set the IdleConnection timeout after calling Start and make sure that native layer return new value.
+            // Set the IdleConnection timeout after calling Start and make sure that native layer return new
+            // value.
             _listener.Start();
             _listener.TimeoutManager.IdleConnection = new TimeSpan(0, 0, 300);
             int seconds = (int)GetServerTimeout(_listener, HTTP_TIMEOUT_TYPE.IdleConnection);
@@ -338,7 +346,8 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         public void MinSendBytesPerSecond_SetAfterClose_GetObjectDisposedException()
         {
-            // Set the MinSendBytesPerSecond timeout after calling Close and make sure that we get the exception.
+            // Set the MinSendBytesPerSecond timeout after calling Close and make sure that we get the
+            // exception.
             _listener.Start();
             _listener.Close();
             Assert.Throws<ObjectDisposedException>(

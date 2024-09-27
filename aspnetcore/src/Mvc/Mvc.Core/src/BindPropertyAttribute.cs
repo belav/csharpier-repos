@@ -8,13 +8,17 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// An attribute that can specify a model name or type of <see cref="IModelBinder"/> to use for binding the
+/// An attribute that can specify a model name or type of <see cref="IModelBinder"/> to use for
+// binding the
 /// associated property.
 /// </summary>
 /// <remarks>
-/// Similar to <see cref="ModelBinderAttribute"/>. Unlike that attribute, <see cref="BindPropertyAttribute"/>
-/// applies only to properties and adds an <see cref="IRequestPredicateProvider"/> implementation that by default
-/// indicates the property should not be bound for HTTP GET requests (see also <see cref="SupportsGet"/>).
+/// Similar to <see cref="ModelBinderAttribute"/>. Unlike that attribute, <see
+// cref="BindPropertyAttribute"/>
+/// applies only to properties and adds an <see cref="IRequestPredicateProvider"/> implementation
+// that by default
+/// indicates the property should not be bound for HTTP GET requests (see also <see
+// cref="SupportsGet"/>).
 /// </remarks>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 public class BindPropertyAttribute
@@ -31,7 +35,8 @@ public class BindPropertyAttribute
 
     /// <summary>
     /// Gets or sets an indication the associated property should be bound in HTTP GET requests. If
-    /// <see langword="true"/>, the property should be bound in all requests. Otherwise, the property should not be
+    /// <see langword="true"/>, the property should be bound in all requests. Otherwise, the property
+    // should not be
     /// bound in HTTP GET requests.
     /// </summary>
     /// <value>Defaults to <see langword="false"/>.</value>
@@ -39,8 +44,10 @@ public class BindPropertyAttribute
 
     /// <inheritdoc />
     /// <remarks>
-    /// Subclass this attribute and set <see cref="BindingSource"/> if <see cref="BindingSource.Custom"/> is not
-    /// correct for the specified (non-<see langword="null"/>) <see cref="IModelBinder"/> implementation.
+    /// Subclass this attribute and set <see cref="BindingSource"/> if <see
+    // cref="BindingSource.Custom"/> is not
+    /// correct for the specified (non-<see langword="null"/>) <see cref="IModelBinder"/>
+    // implementation.
     /// </remarks>
     public Type? BinderType
     {
@@ -64,7 +71,8 @@ public class BindPropertyAttribute
 
     /// <inheritdoc />
     /// <value>
-    /// If <see cref="BinderType"/> is <see langword="null"/>, defaults to <see langword="null"/>. Otherwise,
+    /// If <see cref="BinderType"/> is <see langword="null"/>, defaults to <see langword="null"/>.
+    // Otherwise,
     /// defaults to <see cref="BindingSource.Custom"/>. May be overridden in a subclass.
     /// </value>
     public virtual BindingSource? BindingSource

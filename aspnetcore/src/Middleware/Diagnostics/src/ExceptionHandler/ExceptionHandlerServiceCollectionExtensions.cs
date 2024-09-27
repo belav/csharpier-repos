@@ -16,7 +16,8 @@ public static class ExceptionHandlerServiceCollectionExtensions
     /// Adds services and options for the exception handler middleware.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="ExceptionHandlerOptions"/>.</param>
     /// <returns></returns>
     public static IServiceCollection AddExceptionHandler(
         this IServiceCollection services,
@@ -33,7 +34,8 @@ public static class ExceptionHandlerServiceCollectionExtensions
     /// Adds services and options for the exception handler middleware.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="ExceptionHandlerOptions"/>.</param>
     /// <returns></returns>
     public static IServiceCollection AddExceptionHandler<TService>(
         this IServiceCollection services,
@@ -49,7 +51,8 @@ public static class ExceptionHandlerServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds an `IExceptionHandler` implementation to services. `IExceptionHandler` implementations are used by the exception handler middleware to handle unexpected request exceptions.
+    /// Adds an `IExceptionHandler` implementation to services. `IExceptionHandler` implementations are
+    // used by the exception handler middleware to handle unexpected request exceptions.
     /// Multiple handlers can be added and they're called by the middleware in the order they're added.
     /// </summary>
     /// <typeparam name="T">The type of the exception handler implementation.</typeparam>

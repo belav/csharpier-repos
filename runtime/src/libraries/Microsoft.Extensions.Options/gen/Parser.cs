@@ -15,7 +15,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Microsoft.Extensions.Options.Generators
 {
     /// <summary>
-    /// Holds an internal parser class that extracts necessary information for generating IValidateOptions.
+    /// Holds an internal parser class that extracts necessary information for generating
+    // IValidateOptions.
     /// </summary>
     internal sealed class Parser
     {
@@ -153,7 +154,8 @@ namespace Microsoft.Extensions.Options.Generators
 
                         string keyword = GetTypeKeyword(validatorType);
 
-                        // following code establishes the containment hierarchy for the generated type in terms of nested types
+                        // following code establishes the containment hierarchy for the generated type in terms of nested
+                        // types
 
                         var parents = new List<string>();
                         var parent = syntax.Parent as TypeDeclarationSyntax;
@@ -422,17 +424,18 @@ namespace Microsoft.Extensions.Options.Generators
                     memberType = prop.Type;
                     break;
 
-                /* The runtime doesn't support fields validation yet. If we allow that in the future, we need to add the following code back.
-                case IFieldSymbol field:
-                    if (field.AssociatedSymbol is not null)
-                    {
-                        // a backing field for a property, don't need those
-                        return null;
-                    }
+/* The runtime doesn't support fields validation yet. If we allow that in the future, we need to add
+the following code back.
+case IFieldSymbol field:
+if (field.AssociatedSymbol is not null)
+{
+// a backing field for a property, don't need those
+return null;
+}
 
-                    memberType = field.Type;
-                    break;
-                */
+memberType = field.Type;
+break;
+*/
                 default:
                     // we only care about properties
                     return null;

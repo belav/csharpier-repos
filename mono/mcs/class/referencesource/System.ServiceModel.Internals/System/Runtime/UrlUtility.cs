@@ -399,7 +399,8 @@ namespace System.Runtime
             return false;
         }
 
-        // Internal class to facilitate URL decoding -- keeps char buffer and byte buffer, allows appending of either chars or bytes
+        // Internal class to facilitate URL decoding -- keeps char buffer and byte buffer, allows appending
+        // of either chars or bytes
         class UrlDecoder
         {
             int _bufferSize;

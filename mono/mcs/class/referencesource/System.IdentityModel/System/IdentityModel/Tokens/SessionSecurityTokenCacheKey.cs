@@ -10,14 +10,20 @@ namespace System.IdentityModel.Tokens
     using SystemUniqueId = System.Xml.UniqueId;
 
     /// <summary>
-    /// When caching an <see cref="SessionSecurityToken"/> there are two indexes required. One is the ContextId
-    /// that is unique across all <see cref="SessionSecurityToken"/> and the next is KeyGeneration which is
-    /// unique within a session. When an <see cref="SessionSecurityToken"/> is issued it has only a ContextId. When
-    /// the <see cref="SessionSecurityToken"/> is renewed the KeyGeneration is added as an second index to the
-    /// <see cref="SessionSecurityToken"/>. Now the renewed <see cref="SessionSecurityToken"/> is uniquely identifiable via the ContextId and
+    /// When caching an <see cref="SessionSecurityToken"/> there are two indexes required. One is the
+    // ContextId
+    /// that is unique across all <see cref="SessionSecurityToken"/> and the next is KeyGeneration which
+    // is
+    /// unique within a session. When an <see cref="SessionSecurityToken"/> is issued it has only a
+    // ContextId. When
+    /// the <see cref="SessionSecurityToken"/> is renewed the KeyGeneration is added as an second index
+    // to the
+    /// <see cref="SessionSecurityToken"/>. Now the renewed <see cref="SessionSecurityToken"/> is
+    // uniquely identifiable via the ContextId and
     /// KeyGeneration.
     /// The class <see cref="SessionSecurityTokenCacheKey"/> is used as the index
-    /// to the <see cref="SessionSecurityToken"/> cache. This index will always have a valid ContextId specified
+    /// to the <see cref="SessionSecurityToken"/> cache. This index will always have a valid ContextId
+    // specified
     /// but the KeyGeneration may be null. There is also an optional EndpointId
     /// which gives the endpoint to which the token is scoped.
     /// </summary>
@@ -32,9 +38,11 @@ namespace System.IdentityModel.Tokens
         /// Creates an instance of <see cref="SessionSecurityTokenCacheKey"/> which
         /// is used as an index while caching <see cref="SessionSecurityToken"/>.
         /// </summary>
-        /// <param name="endpointId">The endpoint Id to which the <see cref="SessionSecurityToken"/> is scoped.</param>
+        /// <param name="endpointId">The endpoint Id to which the <see cref="SessionSecurityToken"/> is
+        // scoped.</param>
         /// <param name="contextId">UniqueId of the <see cref="SessionSecurityToken"/>.</param>
-        /// <param name="keyGeneration">UniqueId which is available when the <see cref="SessionSecurityToken"/> is renewed. Will be
+        /// <param name="keyGeneration">UniqueId which is available when the <see
+        // cref="SessionSecurityToken"/> is renewed. Will be
         /// null when caching a new <see cref="SessionSecurityToken"/>.</param>
         public SessionSecurityTokenCacheKey(
             string endpointId,

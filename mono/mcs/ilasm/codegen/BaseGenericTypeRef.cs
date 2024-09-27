@@ -22,14 +22,14 @@ namespace Mono.ILASM
         )
             : base(full_name, is_valuetype, conv_list, sig_mod) { }
 
-        /* Used to resolve any gen params in arguments, constraints etc */
+/* Used to resolve any gen params in arguments, constraints etc */
         public abstract void Resolve(
             GenericParameters type_gen_params,
             GenericParameters method_gen_params
         );
 
-        /* Only resolves, does not add it to the TypeSpec
-           table */
+/* Only resolves, does not add it to the TypeSpec
+table */
         public abstract void ResolveNoTypeSpec(CodeGen code_gen);
 
         public override GenericTypeInst GetGenericTypeInst(GenericArguments gen_args)

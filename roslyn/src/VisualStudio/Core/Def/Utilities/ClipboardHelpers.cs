@@ -74,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         // data from an OLE IDataObject. We use our own logic because there are built in
         // mechanisms within WPF that result in retries on getting clipboard data which
         // is undesirable for paths that check the clipboard data in a hot path.
-        // See https://github.com/dotnet/wpf/blob/212f376fbca58bf2970964610c426ee05e633872/src/Microsoft.DotNet.Wpf/src/PresentationCore/System/Windows/dataobject.cs
+        // See
+        // https://github.com/dotnet/wpf/blob/212f376fbca58bf2970964610c426ee05e633872/src/Microsoft.DotNet.Wpf/src/PresentationCore/System/Windows/dataobject.cs
         // for information on how dataobject is used in WPF. This code only supports
         // a subset of the functionality for now because it is limited to text.
         //

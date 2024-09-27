@@ -102,7 +102,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public void CloseSolution(bool saveFirst = false) => GetDTE().Solution.Close(saveFirst);
 
         /// <summary>
-        /// Creates and loads a new solution in the host process, optionally saving the existing solution if one exists.
+        /// Creates and loads a new solution in the host process, optionally saving the existing solution if
+        // one exists.
         /// </summary>
         public void CreateSolution(string solutionName, bool saveExistingSolutionIfExists = false)
         {
@@ -364,7 +365,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         }
                     }
 
-                    // Save the full path to the solution. This is so we can cleanup any folders after the solution is closed.
+                    // Save the full path to the solution. This is so we can cleanup any folders after the solution is
+                    // closed.
                     // The solution might be zero-impact and thus has no name, so deal with that
                     var solutionFullName = dte.Solution.FullName;
 
@@ -398,7 +400,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
 #if TODO// https://github.com/dotnet/roslyn/issues/35965
             // This delay was originally added to address test failures in BasicEditAndContinue. When running
-            // multiple tests in sequence, situations were observed where the Edit and Continue state was not reset:
+            // multiple tests in sequence, situations were observed where the Edit and Continue state was not
+            // reset:
             //
             // 1. Test A runs, starts debugging with Edit and Continue
             // 2. Test A completes, and the debugger is terminated
@@ -573,11 +576,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         }
 
         /// <summary>
-        /// Update the given file if it already exists in the project, otherwise add a new file to the project.
+        /// Update the given file if it already exists in the project, otherwise add a new file to the
+        // project.
         /// </summary>
         /// <param name="projectName">The project that contains the file.</param>
         /// <param name="fileName">The name of the file to update or add.</param>
-        /// <param name="contents">The contents of the file to overwrite if the file already exists or set if the file it created. Empty string is used if null is passed.</param>
+        /// <param name="contents">The contents of the file to overwrite if the file already exists or set
+        // if the file it created. Empty string is used if null is passed.</param>
         /// <param name="open">Whether to open the file after it has been updated/created.</param>
         public void UpdateOrAddFile(
             string projectName,
@@ -602,7 +607,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// </summary>
         /// <param name="projectName">The project that contains the file.</param>
         /// <param name="fileName">The name of the file to update or add.</param>
-        /// <param name="contents">The contents of the file to overwrite. Empty string is used if null is passed.</param>
+        /// <param name="contents">The contents of the file to overwrite. Empty string is used if null is
+        // passed.</param>
         /// <param name="open">Whether to open the file after it has been updated.</param>
         public void UpdateFile(
             string projectName,
@@ -616,7 +622,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 InvokeOnUIThread(cancellationToken =>
                 {
                     // The active text view might not have finished composing yet, waiting for the application to 'idle'
-                    // means that it is done pumping messages (including WM_PAINT) and the window should return the correct text view
+                    // means that it is done pumping messages (including WM_PAINT) and the window should return the
+                    // correct text view
                     WaitForApplicationIdle(Helper.HangMitigatingTimeout);
 
                     var vsTextManager = GetGlobalService<SVsTextManager, IVsTextManager>();
@@ -659,7 +666,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// </summary>
         /// <param name="projectName">The project that contains the file.</param>
         /// <param name="fileName">The name of the file to add.</param>
-        /// <param name="contents">The contents of the file to overwrite. An empty file is create if null is passed.</param>
+        /// <param name="contents">The contents of the file to overwrite. An empty file is create if null is
+        // passed.</param>
         /// <param name="open">Whether to open the file after it has been updated.</param>
         public void AddFile(
             string projectName,

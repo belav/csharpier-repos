@@ -27,7 +27,8 @@ namespace System.Web.UI.WebControls
     /// </summary>
     public class ModelDataSourceView : DataSourceView, IStateManager
     {
-        // Having the immediate caller of MethodInfo.Invoke be a dynamic method gives us two security advantages:
+        // Having the immediate caller of MethodInfo.Invoke be a dynamic method gives us two security
+        // advantages:
         //  - It forces the callee to be a public method on a public type.
         //  - It forces a CAS transparency check on the callee.
         private delegate object MethodInvokerDispatcher(
@@ -192,7 +193,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// First of the DataKeyNames array of the data bound control if applicable (FormView/ListView/GridView/DetailsView) and present.
+        /// First of the DataKeyNames array of the data bound control if applicable
+        // (FormView/ListView/GridView/DetailsView) and present.
         /// </summary>
         public string DataKeyName
         {
@@ -413,7 +415,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// Invokes the select method and gets the result. Also handles auto paging and sorting when required.
+        /// Invokes the select method and gets the result. Also handles auto paging and sorting when
+        // required.
         /// </summary>
         /// <param name="arguments">The DataSourceSelectArguments for the select operation.
         /// When applicable, this method sets the TotalRowCount out parameter in the arguments.
@@ -435,14 +438,19 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// Evaluates the select method parameters and also determines the options for processing select result like auto paging and sorting behavior.
+        /// Evaluates the select method parameters and also determines the options for processing select
+        // result like auto paging and sorting behavior.
         /// </summary>
         /// <param name="arguments">The DataSourceSelectArguments for the select operation.</param>
-        /// <param name="selectResultProcessingOptions">The <see cref="System.Web.UI.WebControls.DataSourceSelectResultProcessingOptions"/> to use
-        /// for processing the select result once select operation is complete. These options are determined in this method and later used
-        /// by the method <see cref="System.Web.UI.WebControls.ModelDataSourceView.ProcessSelectMethodResult"/>.
+        /// <param name="selectResultProcessingOptions">The <see
+        // cref="System.Web.UI.WebControls.DataSourceSelectResultProcessingOptions"/> to use
+        /// for processing the select result once select operation is complete. These options are determined
+        // in this method and later used
+        /// by the method <see
+        // cref="System.Web.UI.WebControls.ModelDataSourceView.ProcessSelectMethodResult"/>.
         /// </param>
-        /// <returns>A <see cref="System.Web.UI.WebControls.ModelDataSourceMethod"/> with the information required to invoke the select method.</returns>
+        /// <returns>A <see cref="System.Web.UI.WebControls.ModelDataSourceMethod"/> with the information
+        // required to invoke the select method.</returns>
         protected virtual ModelDataSourceMethod EvaluateSelectMethodParameters(
             DataSourceSelectArguments arguments,
             out DataSourceSelectResultProcessingOptions selectResultProcessingOptions
@@ -478,8 +486,10 @@ namespace System.Web.UI.WebControls
             Type modelType = ModelType;
             if (modelType == null)
             {
-                //When ModelType is not specified but SelectMethod returns IQueryable<T>, we treat T as model type for auto paging and sorting.
-                //If the return type is something like CustomType<U,T> : IQueryable<T>, we should use T for paging and sorting, hence
+                //When ModelType is not specified but SelectMethod returns IQueryable<T>, we treat T as model type
+                // for auto paging and sorting.
+                //If the return type is something like CustomType<U,T> : IQueryable<T>, we should use T for paging
+                // and sorting, hence
                 //we walk over the return type's generic arguments for a proper match.
                 foreach (Type typeParameter in selectMethodReturnType.GetGenericArguments())
                 {
@@ -496,7 +506,8 @@ namespace System.Web.UI.WebControls
             Type queryableModelType =
                 (modelType != null) ? typeof(IQueryable<>).MakeGenericType(modelType) : null;
 
-            //We do auto paging or auto sorting when the select method is returning an IQueryable and does not have parameters for paging or sorting.
+            //We do auto paging or auto sorting when the select method is returning an IQueryable and does not
+            // have parameters for paging or sorting.
             bool isReturningQueryable =
                 queryableModelType != null
                 && queryableModelType.IsAssignableFrom(selectMethodReturnType);
@@ -571,11 +582,15 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// This method performs operations on the select method result like auto paging and sorting if applicable.
+        /// This method performs operations on the select method result like auto paging and sorting if
+        // applicable.
         /// </summary>
         /// <param name="arguments">The DataSourceSelectArguments for the select operation.</param>
-        /// <param name="selectResultProcessingOptions">The <see cref="System.Web.UI.WebControls.DataSourceSelectResultProcessingOptions"/> to use for processing the select result.
-        /// These options are determined in an earlier call to <see cref="System.Web.UI.WebControls.ModelDataSourceView.EvaluateSelectMethodParameters"/>.
+        /// <param name="selectResultProcessingOptions">The <see
+        // cref="System.Web.UI.WebControls.DataSourceSelectResultProcessingOptions"/> to use for processing the
+        // select result.
+        /// These options are determined in an earlier call to <see
+        // cref="System.Web.UI.WebControls.ModelDataSourceView.EvaluateSelectMethodParameters"/>.
         /// </param>
         /// <param name="result">The result after operations like auto paging/sorting are done.</param>
         /// <returns></returns>
@@ -604,7 +619,8 @@ namespace System.Web.UI.WebControls
                 arguments.TotalRowCount = (int)
                     countHelperMethod.Invoke(null, new object[] { result.ReturnValue });
 
-                //Bug 180907: We would like to auto sort on DataKeyName when paging is enabled and result is not already sorted by user to overcome a limitation in EF.
+                //Bug 180907: We would like to auto sort on DataKeyName when paging is enabled and result is not
+                // already sorted by user to overcome a limitation in EF.
                 MethodInfo isOrderingMethodFoundMethod = typeof(QueryableHelpers)
                     .GetMethod("IsOrderingMethodFound")
                     .MakeGenericMethod(modelType);
@@ -622,7 +638,8 @@ namespace System.Web.UI.WebControls
             }
             else if (arguments.StartRowIndex >= 0 && arguments.MaximumRows > 0)
             {
-                //When paging is handled by developer, we need to set the TotalRowCount parameter from the select method out parameter.
+                //When paging is handled by developer, we need to set the TotalRowCount parameter from the select
+                // method out parameter.
                 arguments.TotalRowCount = (int)result.OutputParameters[TotalRowCountParameterName];
             }
 
@@ -684,7 +701,8 @@ namespace System.Web.UI.WebControls
         /// </summary>
         /// <param name="result">The return value of select method.</param>
         /// <returns>Returns the value wrapping it into IEnumerable if necessary.
-        /// If ItemType is set and the return value is not of proper type, throws an InvalidOperationException.
+        /// If ItemType is set and the return value is not of proper type, throws an
+        // InvalidOperationException.
         /// </returns>
         protected virtual IEnumerable CreateSelectResult(object result)
         {
@@ -998,7 +1016,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// This method is used by ExecuteInsert/Update/Delete methods to return the result if it's an integer or return a default value.
+        /// This method is used by ExecuteInsert/Update/Delete methods to return the result if it's an
+        // integer or return a default value.
         /// </summary>
         /// <param name="result">The return value from one of the above operations.</param>
         /// <returns>Returns the result as is if it's integer. Otherwise returns -1.</returns>
@@ -1056,7 +1075,8 @@ namespace System.Web.UI.WebControls
             // The first edition of the async model binding feature was implemented by registering async binding
             // function as PageAsyncTask. We, however, decided not to do that because postponing data binding
             // to page async point changed the order of page events and caused many problems.
-            // See the comment on SynchronizationHelper.QueueAsynchronousAsync for more details regarding to the PostAsync
+            // See the comment on SynchronizationHelper.QueueAsynchronousAsync for more details regarding to the
+            // PostAsync
             // function.
             syncContext.PostAsync(func, null);
         }
@@ -1380,7 +1400,8 @@ namespace System.Web.UI.WebControls
             return GetSelectAsyncFunc(arguments, callback, method);
         }
 
-        //Evaluates the select method parameters using the custom value provides. This is done after page load so that
+        //Evaluates the select method parameters using the custom value provides. This is done after page
+        // load so that
         //we raise the DataSourceChanged event if the values of parameters change.
         private void EvaluateSelectParameters()
         {
@@ -1399,8 +1420,10 @@ namespace System.Web.UI.WebControls
         /// <summary>
         /// Evaluates the method parameters using model binding.
         /// </summary>
-        /// <param name="dataSourceOperation">The datasource operation for which parameters are being evaluated.</param>
-        /// <param name="modelDataSourceMethod">The ModelDataSourceMethod object for which the Parameter collection is being evaluated. The MethodInfo property should already be set on this object.</param>
+        /// <param name="dataSourceOperation">The datasource operation for which parameters are being
+        // evaluated.</param>
+        /// <param name="modelDataSourceMethod">The ModelDataSourceMethod object for which the Parameter
+        // collection is being evaluated. The MethodInfo property should already be set on this object.</param>
         /// <param name="controlValues">The values from the data bound control.</param>
         protected virtual void EvaluateMethodParameters(
             DataSourceOperation dataSourceOperation,
@@ -1419,11 +1442,15 @@ namespace System.Web.UI.WebControls
         /// <summary>
         /// Evaluates the method parameters using model binding.
         /// </summary>
-        /// <param name="dataSourceOperation">The datasource operation for which parameters are being evaluated.</param>
-        /// <param name="modelDataSourceMethod">The ModelDataSourceMethod object for which the Parameter collection is being evaluated. The MethodInfo property should already be set on this object.</param>
+        /// <param name="dataSourceOperation">The datasource operation for which parameters are being
+        // evaluated.</param>
+        /// <param name="modelDataSourceMethod">The ModelDataSourceMethod object for which the Parameter
+        // collection is being evaluated. The MethodInfo property should already be set on this object.</param>
         /// <param name="controlValues">The values from the data bound control.</param>
-        /// <param name="isPageLoadComplete">This must be set to true only when this method is called in Page's LoadComplete event handler
-        /// to evaluate the select method parameters that use custom value providers so that we can identify any changes
+        /// <param name="isPageLoadComplete">This must be set to true only when this method is called in
+        // Page's LoadComplete event handler
+        /// to evaluate the select method parameters that use custom value providers so that we can identify
+        // any changes
         /// to those and mark the data-bound control for data binding if necessary.</param>
         protected virtual void EvaluateMethodParameters(
             DataSourceOperation dataSourceOperation,
@@ -1498,8 +1525,10 @@ namespace System.Web.UI.WebControls
                         out validateRequest
                     );
 
-                    //When we are evaluating the parameter at the time of page load, we do not want to populate the actual ModelState
-                    //because there will be another evaluation at data-binding causing duplicate errors if model validation fails.
+                    //When we are evaluating the parameter at the time of page load, we do not want to populate the
+                    // actual ModelState
+                    //because there will be another evaluation at data-binding causing duplicate errors if model
+                    // validation fails.
                     ModelStateDictionary modelState = isPageLoadComplete
                         ? new ModelStateDictionary()
                         : _owner.DataControl.Page.ModelState;
@@ -1518,7 +1547,8 @@ namespace System.Web.UI.WebControls
                     };
 
                     //Select parameters that take custom values providers are tracked by ViewState so that
-                    //we can detect any changes from previous page request and mark the data bound control for data binding if necessary.
+                    //we can detect any changes from previous page request and mark the data bound control for data
+                    // binding if necessary.
                     if (
                         dataSourceOperation == DataSourceOperation.Select
                         && customValueProvider != null
@@ -1544,7 +1574,8 @@ namespace System.Web.UI.WebControls
                                 dataSourceOperation == DataSourceOperation.Select,
                                 "Only Select Operation should have been done immediately after page load"
                             );
-                            //When this method is called as part of Page's LoadComplete event handler we do not have values in defaultValueProvider
+                            //When this method is called as part of Page's LoadComplete event handler we do not have values in
+                            // defaultValueProvider
                             //(i.e., values from DataBoundControl), so we need not evaluate the parameters values.
                             continue;
                         }
@@ -1651,7 +1682,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// Finds the method to be executed. Raises the CallingDataMethods event to see if developer opted in for custom model method look-up instead of page/usercontrol code behind.
+        /// Finds the method to be executed. Raises the CallingDataMethods event to see if developer opted
+        // in for custom model method look-up instead of page/usercontrol code behind.
         /// Uses the TemplateControl type as a fallback.
         /// </summary>
         /// <param name="methodName">Name of the data method.</param>
@@ -1687,7 +1719,8 @@ namespace System.Web.UI.WebControls
             }
             else
             {
-                //The compiled page code is a child class of code behind class where usually static methods are defined.
+                //The compiled page code is a child class of code behind class where usually static methods are
+                // defined.
                 //We will not get those methods unless we use FlattenHierarchy.
                 flags =
                     BindingFlags.Public
@@ -1755,7 +1788,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// Extracts the values of all output (out and ref) parameters given a list of parameters and their respective values.
+        /// Extracts the values of all output (out and ref) parameters given a list of parameters and their
+        // respective values.
         /// </summary>
         private OrderedDictionary GetOutputParameters(ParameterInfo[] parameters, object[] values)
         {
@@ -1777,7 +1811,8 @@ namespace System.Web.UI.WebControls
         /// Invokes the data method in a secure fashion.
         /// </summary>
         /// <param name="method">
-        /// The ModelDataSouceMethod object specifying the Instance on which the method should be invoked (null for static methods),
+        /// The ModelDataSouceMethod object specifying the Instance on which the method should be invoked
+        // (null for static methods),
         /// the MethodInfo of the method to be invoked and the Parameters for invoking the method.
         /// All the above properties should be populated before this method is called.
         /// </param>

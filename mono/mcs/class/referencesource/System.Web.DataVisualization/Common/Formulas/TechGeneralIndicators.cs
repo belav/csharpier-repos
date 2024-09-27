@@ -455,7 +455,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Output:
         ///		- 1 Y value Rate of Change
         /// Parameters:
-        ///		- Periods = is used to configure the number of periods to calculate the rate of Change. By default the Periods property is set to 10.
+        ///		- Periods = is used to configure the number of periods to calculate the rate of Change. By
+        // default the Periods property is set to 10.
         /// </summary>
         /// <param name="inputValues">Arrays of doubles - Input values</param>
         /// <param name="outputValues">Arrays of doubles - Output values</param>
@@ -525,7 +526,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Output:
         ///		- 1 Y value RelativeStrengthIndex
         /// Parameters:
-        ///		- Periods = is used to configure the number of periods to calculate the RSI indicator. By default the Periods property is set to 10.
+        ///		- Periods = is used to configure the number of periods to calculate the RSI indicator. By
+        // default the Periods property is set to 10.
         /// </summary>
         /// <param name="inputValues">Arrays of doubles - Input values</param>
         /// <param name="outputValues">Arrays of doubles - Output values</param>
@@ -604,16 +606,21 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         }
 
         /// <summary>
-        /// TripleExponentialMovingAverage is a momentum indicator that displays the percent rate-of-change of a triple
+        /// TripleExponentialMovingAverage is a momentum indicator that displays the percent rate-of-change
+        // of a triple
         /// exponentially smoothed moving average of the security's closing price. It is designed
         /// to keep you in trends equal to or shorter than the number of periods you specify.
-        /// The TripleExponentialMovingAverage indicator oscillates around a zero line. Its triple exponential smoothing is
+        /// The TripleExponentialMovingAverage indicator oscillates around a zero line. Its triple
+        // exponential smoothing is
         /// designed to filter out "insignificant" cycles (i.e., those that are shorter than
         /// the number of periods you specify).	Trades should be placed when the indicator changes
         /// direction (i.e., buy when it turns up and sell when it turns down). You may want to
-        /// plot a 9-period moving average of the TripleExponentialMovingAverage to create a "signal" line (similar to the
-        /// MovingAverageConvergenceDivergence indicator, and then buy when the TripleExponentialMovingAverage rises above its signal, and sell when it
-        /// falls below its signal. Divergences between the security and the TripleExponentialMovingAverage can also help
+        /// plot a 9-period moving average of the TripleExponentialMovingAverage to create a "signal" line
+        // (similar to the
+        /// MovingAverageConvergenceDivergence indicator, and then buy when the
+        // TripleExponentialMovingAverage rises above its signal, and sell when it
+        /// falls below its signal. Divergences between the security and the TripleExponentialMovingAverage
+        // can also help
         /// identify turning points.
         /// ---------------------------------------------------------
         /// Input:
@@ -621,7 +628,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Output:
         ///		- 1 Y value ( TripleExponentialMovingAverage ).
         /// Parameters:
-        ///		- Period = is used to calculate the Exponential Moving Avg, By default this property is set to 12.
+        ///		- Period = is used to calculate the Exponential Moving Avg, By default this property is set to
+        // 12.
         /// </summary>
         /// <param name="inputValues">Arrays of doubles - Input values</param>
         /// <param name="outputValues">Arrays of doubles - Output values</param>
@@ -690,27 +698,37 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         }
 
         /// <summary>
-        /// The MovingAverageConvergenceDivergence is used to determine overbought or oversold conditions in the market. Written
-        /// for stocks and stock indices, MovingAverageConvergenceDivergence can be used for commodities as well. The MovingAverageConvergenceDivergence line
+        /// The MovingAverageConvergenceDivergence is used to determine overbought or oversold conditions in
+        // the market. Written
+        /// for stocks and stock indices, MovingAverageConvergenceDivergence can be used for commodities as
+        // well. The MovingAverageConvergenceDivergence line
         /// is the difference between the long and short exponential moving averages of the chosen
-        /// item. The signal line is an exponential moving average of the MovingAverageConvergenceDivergence line. Signals are
+        /// item. The signal line is an exponential moving average of the MovingAverageConvergenceDivergence
+        // line. Signals are
         /// generated by the relationship of the two lines. As with RSI and Stochastics,
-        /// divergences between the MovingAverageConvergenceDivergence and prices may indicate an upcoming trend reversal. The MovingAverageConvergenceDivergence
+        /// divergences between the MovingAverageConvergenceDivergence and prices may indicate an upcoming
+        // trend reversal. The MovingAverageConvergenceDivergence
         /// is a trend following momentum indicator that shows the relationship between two
-        /// moving averages of prices. The MovingAverageConvergenceDivergence is the difference between a 26-day and 12-day
+        /// moving averages of prices. The MovingAverageConvergenceDivergence is the difference between a
+        // 26-day and 12-day
         /// exponential moving average. A 9-day exponential moving average, called the "signal"
-        /// (or "trigger") line is plotted on top of the MovingAverageConvergenceDivergence to show buy/sell opportunities. The
-        /// MovingAverageConvergenceDivergence is calculated by subtracting the value of a 26-day exponential moving average
+        /// (or "trigger") line is plotted on top of the MovingAverageConvergenceDivergence to show buy/sell
+        // opportunities. The
+        /// MovingAverageConvergenceDivergence is calculated by subtracting the value of a 26-day
+        // exponential moving average
         /// from a 12-day exponential moving average. A 9-day dotted exponential moving average of
-        /// the MovingAverageConvergenceDivergence (the "signal" line) is then plotted on top of the MovingAverageConvergenceDivergence.
+        /// the MovingAverageConvergenceDivergence (the "signal" line) is then plotted on top of the
+        // MovingAverageConvergenceDivergence.
         /// ---------------------------------------------------------
         /// Input:
         ///		- 1 Y value ( Close ).
         /// Output:
         ///		- 1 Y value ( MovingAverageConvergenceDivergence ).
         /// Parameters:
-        ///		- ShortPeriod = is used to configure the short Exponential Moving Average, By default this property is set to 12.
-        ///		- LongPeriod = is used to configure the Int64 Exponential Moving Average, By default this property is set to 26.
+        ///		- ShortPeriod = is used to configure the short Exponential Moving Average, By default this
+        // property is set to 12.
+        ///		- LongPeriod = is used to configure the Int64 Exponential Moving Average, By default this
+        // property is set to 26.
         /// </summary>
         /// <param name="inputValues">Arrays of doubles - Input values</param>
         /// <param name="outputValues">Arrays of doubles - Output values</param>
@@ -821,7 +839,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Output:
         ///		- 1 Y value ( CCI ).
         /// Parameters:
-        ///		- Periods = is used to configure the number of periods to calculate the CCI. By default the Periods property is set to 10.
+        ///		- Periods = is used to configure the number of periods to calculate the CCI. By default the
+        // Periods property is set to 10.
         /// </summary>
         /// <param name="inputValues">Arrays of doubles - Input values</param>
         /// <param name="outputValues">Arrays of doubles - Output values</param>
@@ -926,8 +945,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="inputValues">Arrays of doubles - Input values</param>
         /// <param name="outputValues">Arrays of doubles - Output values</param>
         /// <param name="parameterList">Array of strings - Formula parameters</param>
-        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object</param>
-        /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
+        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from
+        // DataManipulator object</param>
+        /// <param name="outLabels">Array of strings - Used for Labels. Description for output
+        // results.</param>
         override public void Formula(
             string formulaName,
             double[][] inputValues,

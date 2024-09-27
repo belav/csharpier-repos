@@ -11,7 +11,7 @@ namespace Internal.JitInterface
     {
         CORINFO_HELP_UNDEF, // invalid value. This should never be used
 
-        /* Arithmetic helpers */
+/* Arithmetic helpers */
 
         CORINFO_HELP_DIV, // For the ARM 32-bit integer divide uses a helper call :-(
         CORINFO_HELP_MOD,
@@ -43,8 +43,8 @@ namespace Internal.JitInterface
         CORINFO_HELP_FLTROUND,
         CORINFO_HELP_DBLROUND,
 
-        /* Allocating a new object. Always use ICorClassInfo::getNewHelper() to decide
-           which is the right helper to use to allocate an object of a given type. */
+/* Allocating a new object. Always use ICorClassInfo::getNewHelper() to decide
+which is the right helper to use to allocate an object of a given type. */
 
         CORINFO_HELP_NEWFAST,
         CORINFO_HELP_NEWFAST_MAYBEFROZEN, // allocator for objects that *might* allocate them on a frozen segment
@@ -63,7 +63,7 @@ namespace Internal.JitInterface
 
         CORINFO_HELP_STRCNS, // create a new string literal
 
-        /* Object model */
+/* Object model */
 
         CORINFO_HELP_INITCLASS, // Initialize class if not already initialized
         CORINFO_HELP_INITINSTCLASS, // Initialize class for instantiated type
@@ -95,7 +95,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_ARRADDR_ST, // assign to element of object array with type-checking
         CORINFO_HELP_LDELEMA_REF, // does a precise type comparison and returns address
 
-        /* Exceptions */
+/* Exceptions */
 
         CORINFO_HELP_THROW, // Throw an exception object
         CORINFO_HELP_RETHROW, // Rethrow the currently active exception
@@ -114,7 +114,7 @@ namespace Internal.JitInterface
 
         CORINFO_HELP_ENDCATCH, // call back into the EE at the end of a catch block
 
-        /* Synchronization */
+/* Synchronization */
 
         CORINFO_HELP_MON_ENTER,
         CORINFO_HELP_MON_EXIT,
@@ -126,7 +126,7 @@ namespace Internal.JitInterface
 
         // in its ManagedClassObject
 
-        /* GC support */
+/* GC support */
 
         CORINFO_HELP_STOP_FOR_GC, // Call GC (force a GC)
         CORINFO_HELP_POLL_GC, // Ask GC if it wants to collect
@@ -134,7 +134,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_STRESS_GC, // Force a GC, but then update the JITTED code to be a noop call
         CORINFO_HELP_CHECK_OBJ, // confirm that ECX is a valid object pointer (debugging only)
 
-        /* GC Write barrier support */
+/* GC Write barrier support */
 
         CORINFO_HELP_ASSIGN_REF, // universal helpers with F_CALL_CONV calling convention
         CORINFO_HELP_CHECKED_ASSIGN_REF,
@@ -143,7 +143,7 @@ namespace Internal.JitInterface
         CORINFO_HELP_ASSIGN_BYREF,
         CORINFO_HELP_ASSIGN_STRUCT,
 
-        /* Accessing fields */
+/* Accessing fields */
 
         // For COM object support (using COM get/set routines to update object)
         // and EnC and cross-context support
@@ -196,16 +196,16 @@ namespace Internal.JitInterface
         CORINFO_HELP_GETSHARED_GCTHREADSTATIC_BASE_DYNAMICCLASS,
         CORINFO_HELP_GETSHARED_NONGCTHREADSTATIC_BASE_DYNAMICCLASS,
 
-        /* Debugger */
+/* Debugger */
 
         CORINFO_HELP_DBG_IS_JUST_MY_CODE, // Check if this is "JustMyCode" and needs to be stepped through.
 
-        /* Profiling enter/leave probe addresses */
+/* Profiling enter/leave probe addresses */
         CORINFO_HELP_PROF_FCN_ENTER, // record the entry to a method (caller)
         CORINFO_HELP_PROF_FCN_LEAVE, // record the completion of current method (caller)
         CORINFO_HELP_PROF_FCN_TAILCALL, // record the completionof current method through tailcall (caller)
 
-        /* Miscellaneous */
+/* Miscellaneous */
 
         CORINFO_HELP_BBT_FCN_ENTER, // record the entry to a method for collecting Tuning data
 
@@ -233,7 +233,8 @@ namespace Internal.JitInterface
 
         CORINFO_HELP_VIRTUAL_FUNC_PTR, // look up a virtual method at run-time
 
-        // Not a real helpers. Instead of taking handle arguments, these helpers point to a small stub that loads the handle argument and calls the static helper.
+        // Not a real helpers. Instead of taking handle arguments, these helpers point to a small stub that
+        // loads the handle argument and calls the static helper.
         CORINFO_HELP_READYTORUN_NEW,
         CORINFO_HELP_READYTORUN_NEWARR_1,
         CORINFO_HELP_READYTORUN_ISINSTANCEOF,

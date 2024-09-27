@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/System.Collections.Immutable/tests/ImmutableTestBase.nonnetstandard.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -23,8 +25,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// </summary>
         /// <typeparam name="TCollection">The type of tested collection.</typeparam>
         /// <typeparam name="TElement">The type of element stored in the collection.</typeparam>
-        /// <param name="objectUnderTest">An instance of the collection to test, which must have at least two elements.</param>
-        /// <param name="additionalItem">A unique item that does not already exist in <paramref name="objectUnderTest" />.</param>
+        /// <param name="objectUnderTest">An instance of the collection to test, which must have at least
+        // two elements.</param>
+        /// <param name="additionalItem">A unique item that does not already exist in <paramref
+        // name="objectUnderTest" />.</param>
         /// <param name="equalsStructurally">A delegate that invokes the EqualsStructurally method.</param>
         protected static void StructuralEqualityHelper<TCollection, TElement>(
             TCollection objectUnderTest,

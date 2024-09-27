@@ -72,8 +72,8 @@ namespace System.Web
             Add(_form);
             Add(_serverVariables);
 
-            /* special handling for Cookies since
-             * it isn't a NameValueCollection. */
+/* special handling for Cookies since
+* it isn't a NameValueCollection. */
             for (int i = 0; i < _cookies.Count; i++)
             {
                 HttpCookie cookie = _cookies[i];

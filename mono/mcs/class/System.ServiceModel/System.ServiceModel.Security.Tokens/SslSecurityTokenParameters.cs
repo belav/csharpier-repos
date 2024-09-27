@@ -114,12 +114,13 @@ namespace System.ServiceModel.Security.Tokens
             return referenceStyle == SecurityTokenReferenceStyle.Internal
                 ? (SecurityKeyIdentifierClause)new LocalIdKeyIdentifierClause(sct.Id)
                 : new SecurityContextKeyIdentifierClause(sct.ContextId, sct.KeyGeneration);
-            /*
-            GenericXmlSecurityToken x = token as GenericXmlSecurityToken;
-            if (x == null)
-                throw new ArgumentException (String.Format ("Not supported SecurityToken: '{0}'", token));
-            return referenceStyle == SecurityTokenReferenceStyle.Internal ? x.InternalTokenReference : x.ExternalTokenReference;
-            */
+/*
+GenericXmlSecurityToken x = token as GenericXmlSecurityToken;
+if (x == null)
+throw new ArgumentException (String.Format ("Not supported SecurityToken: '{0}'", token));
+return referenceStyle == SecurityTokenReferenceStyle.Internal ? x.InternalTokenReference :
+x.ExternalTokenReference;
+*/
         }
 
         protected internal override void InitializeSecurityTokenRequirement(

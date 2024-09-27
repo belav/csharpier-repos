@@ -1,11 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+//
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 //
 //
 //
-// Interfaces used to represent instances that notify listeners of their completion via continuations.
+// Interfaces used to represent instances that notify listeners of their completion via
+// continuations.
+//
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 namespace System.Runtime.CompilerServices
@@ -17,7 +20,8 @@ namespace System.Runtime.CompilerServices
     {
         /// <summary>Schedules the continuation action to be invoked when the instance completes.</summary>
         /// <param name="continuation">The action to invoke when the operation completes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="continuation"/> argument is null (<see langword="Nothing" /> in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="continuation"/> argument is null
+        // (<see langword="Nothing" /> in Visual Basic).</exception>
         void OnCompleted(Action continuation);
     }
 
@@ -28,8 +32,10 @@ namespace System.Runtime.CompilerServices
     {
         /// <summary>Schedules the continuation action to be invoked when the instance completes.</summary>
         /// <param name="continuation">The action to invoke when the operation completes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="continuation"/> argument is null (<see langword="Nothing" /> in Visual Basic).</exception>
-        /// <remarks>Unlike OnCompleted, UnsafeOnCompleted need not propagate ExecutionContext information.</remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="continuation"/> argument is null
+        // (<see langword="Nothing" /> in Visual Basic).</exception>
+        /// <remarks>Unlike OnCompleted, UnsafeOnCompleted need not propagate ExecutionContext
+        // information.</remarks>
         void UnsafeOnCompleted(Action continuation);
     }
 }

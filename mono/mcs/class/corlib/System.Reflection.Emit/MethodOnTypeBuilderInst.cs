@@ -36,9 +36,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-    /*
-     * This class represents a method of an instantiation of a generic type builder.
-     */
+/*
+* This class represents a method of an instantiation of a generic type builder.
+*/
     [StructLayout(LayoutKind.Sequential)]
     internal class MethodOnTypeBuilderInst : MethodInfo
     {

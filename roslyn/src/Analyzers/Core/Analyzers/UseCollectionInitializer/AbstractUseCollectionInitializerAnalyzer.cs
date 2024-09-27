@@ -92,11 +92,14 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
 
         // Analysis succeeded, but the result may be empty or non empty.
         //
-        // For collection expressions, it's fine for this result to be empty.  In other words, it's ok to offer
+        // For collection expressions, it's fine for this result to be empty.  In other words, it's ok to
+        // offer
         // changing `new List<int>() { 1 }` (on its own) to `[1]`.
         //
-        // However, for collection initializers we always want at least one element to add to the initializer.  In
-        // other words, we don't want to suggest changing `new List<int>()` to `new List<int>() { }` as that's just
+        // However, for collection initializers we always want at least one element to add to the
+        // initializer.  In
+        // other words, we don't want to suggest changing `new List<int>()` to `new List<int>() { }` as
+        // that's just
         // noise.  So convert empty results to an invalid result here.
         if (analyzeForCollectionExpression)
             return result;
@@ -122,7 +125,8 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
                 this.SyntaxFacts.GetExpressionsOfObjectCollectionInitializer(initializer);
             if (initializerExpressions is [var firstInit, ..])
             {
-                // if we have an object creation, and it *already* has an initializer in it (like `new T { { x, y } }`)
+                // if we have an object creation, and it *already* has an initializer in it (like `new T { { x, y }
+                // }`)
                 // this can't legally become a collection expression.
                 if (_analyzeForCollectionExpression && this.IsComplexElementInitializer(firstInit))
                     return false;
@@ -298,7 +302,8 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
             )
                 return false;
 
-            // An index/range expression implicitly references the value being initialized.  So it cannot be used in the
+            // An index/range expression implicitly references the value being initialized.  So it cannot be
+            // used in the
             // indexing expression.
             var argExpression = this.SyntaxFacts.GetExpressionOfArgument(argument);
             argExpression = this.SyntaxFacts.WalkDownParentheses(argExpression);

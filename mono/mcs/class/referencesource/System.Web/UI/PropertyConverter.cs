@@ -24,14 +24,14 @@ namespace System.Web.UI
             typeof(IServiceProvider),
         };
 
-        /*
-         * Contains helpers to convert properties from strings to their types and vice versa.
-         */
+/*
+* Contains helpers to convert properties from strings to their types and vice versa.
+*/
 
-        /*
-         * Converts a persisted enumeration value into its numeric value.
-         * Hyphen characters in the persisted format are converted to underscores.
-         */
+/*
+* Converts a persisted enumeration value into its numeric value.
+* Hyphen characters in the persisted format are converted to underscores.
+*/
 
         /// <devdoc>
         /// </devdoc>
@@ -47,10 +47,10 @@ namespace System.Web.UI
             }
         }
 
-        /*
-         * Converts a numeric enumerated value into its persisted form, which is the
-         * code name with underscores replaced by hyphens.
-         */
+/*
+* Converts a numeric enumerated value into its persisted form, which is the
+* code name with underscores replaced by hyphens.
+*/
 
         /// <devdoc>
         /// </devdoc>
@@ -63,10 +63,10 @@ namespace System.Web.UI
             return value.Replace('_', '-');
         }
 
-        /*
-         * Converts the persisted string into an object using the object's
-         * FromString method.
-         */
+/*
+* Converts the persisted string into an object using the object's
+* FromString method.
+*/
 
         /// <devdoc>
         /// </devdoc>

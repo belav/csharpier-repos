@@ -50,9 +50,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 // We associate the body of expression-bodied property/indexer with the ArrowExpressionClause
                 // since that's the syntax node associated with the getter symbol.
-                // This approach makes it possible to change the expression body to an explicit getter and vice versa (both are method symbols).
+                // This approach makes it possible to change the expression body to an explicit getter and vice
+                // versa (both are method symbols).
                 //
-                // The property/indexer itself is considered to not have a body unless the property has an initializer.
+                // The property/indexer itself is considered to not have a body unless the property has an
+                // initializer.
                 ArrowExpressionClauseSyntax
                 {
                     Parent:
@@ -105,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                             typeDeclaration
                         ),
 
-                // Record type itself does not have a body, create body only when the declaration represents copy constructor:
+                // Record type itself does not have a body, create body only when the declaration represents copy
+                // constructor:
                 RecordDeclarationSyntax recordDeclarationSyntax
                     when symbol is not INamedTypeSymbol => new CopyConstructorDeclarationBody(
                     recordDeclarationSyntax
@@ -171,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 return;
             }
 
-            // special case for top level statements, which have no containing block other than the compilation unit
+            // special case for top level statements, which have no containing block other than the compilation
+            // unit
             if (syntax is CompilationUnitSyntax unit && unit.ContainsGlobalStatements())
             {
                 return;
@@ -260,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         }
 
         /// <summary>
-        /// True if the specified declaration node is an async method, anonymous function, lambda, local function.
+        /// True if the specified declaration node is an async method, anonymous function, lambda, local
+        // function.
         /// </summary>
         public static bool IsAsyncDeclaration(SyntaxNode declaration)
         {
@@ -288,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         }
 
         /// <summary>
-        /// Returns a list of all await expressions, await foreach statements, await using declarations and yield statements in the given body,
+        /// Returns a list of all await expressions, await foreach statements, await using declarations and
+        // yield statements in the given body,
         /// in the order in which they occur.
         /// </summary>
         /// <returns>
@@ -302,7 +308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda)
                 .Where(SyntaxBindingUtilities.BindsToResumableStateMachineState);
 
-        // Presence of yield break or yield return indicates state machine, but yield break does not bind to a resumable state.
+        // Presence of yield break or yield return indicates state machine, but yield break does not bind to
+        // a resumable state.
         public static bool IsIterator(SyntaxNode body) =>
             body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda)
                 .Any(n => n is YieldStatementSyntax);

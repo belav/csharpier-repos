@@ -299,7 +299,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies the font properties of another <see cref='System.Web.UI.WebControls.FontInfo'/> into this instance. </para>
+        /// <para>Copies the font properties of another <see cref='System.Web.UI.WebControls.FontInfo'/>
+        // into this instance. </para>
         /// </devdoc>
         public void CopyFrom(FontInfo f)
         {
@@ -350,7 +351,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Combines the font properties of another <see cref='System.Web.UI.WebControls.FontInfo'/> with this
+        /// <para>Combines the font properties of another <see cref='System.Web.UI.WebControls.FontInfo'/>
+        // with this
         ///    instance. </para>
         /// </devdoc>
         public void MergeWith(FontInfo f)

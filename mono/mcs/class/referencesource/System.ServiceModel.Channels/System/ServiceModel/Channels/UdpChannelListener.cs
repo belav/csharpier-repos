@@ -59,7 +59,8 @@ namespace System.ServiceModel.Channels
 
             this.onChannelClosed = new EventHandler(OnChannelClosed);
 
-            // We should only throw this exception if the user specified realistic MaxReceivedMessageSize less than or equal to max message size over UDP.
+            // We should only throw this exception if the user specified realistic MaxReceivedMessageSize less
+            // than or equal to max message size over UDP.
             // If the user specified something bigger like Long.MaxValue, we shouldn't stop them.
             if (
                 this.udpTransportBindingElement.MaxReceivedMessageSize
@@ -101,8 +102,10 @@ namespace System.ServiceModel.Channels
             InitUri(context);
 
             //Note: because we are binding the sockets in InitSockets, we can start receiving data immediately.
-            //If there is a delay between the Building of the listener and the call to Open, stale data could build up
-            //inside the Winsock buffer.  We have decided that making sure the port is updated correctly in the listen uri
+            //If there is a delay between the Building of the listener and the call to Open, stale data could
+            // build up
+            //inside the Winsock buffer.  We have decided that making sure the port is updated correctly in the
+            // listen uri
             //(e.g. in the ListenUriMode.Unique case) before leaving the build step is more important than the
             //potential for stale data.
             InitSockets(context.ListenUriMode == ListenUriMode.Unique);
@@ -215,7 +218,8 @@ namespace System.ServiceModel.Channels
 
                     if (message != null)
                     {
-                        // We pass in the length of the message buffer instead of the length of the message to keep track of the amount of memory that's been allocated
+                        // We pass in the length of the message buffer instead of the length of the message to keep track of
+                        // the amount of memory that's been allocated
                         continueReceiving = Dispatch(
                             message,
                             data.Array.Length,
@@ -279,9 +283,12 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        // CSDMain 238600. Both channel and listener are shutting down. There's a race condition happening here
-                        // and the bufferManager is not available at this moment. The data buffer ignored here might introduce
-                        // an issue with buffer manager, but given that we are in the shutting down case here, it should not be a
+                        // CSDMain 238600. Both channel and listener are shutting down. There's a race condition happening
+                        // here
+                        // and the bufferManager is not available at this moment. The data buffer ignored here might
+                        // introduce
+                        // an issue with buffer manager, but given that we are in the shutting down case here, it should not
+                        // be a
                         // big problem.
                         if (localBufferManager != null)
                         {
@@ -465,7 +472,8 @@ namespace System.ServiceModel.Channels
                         this.socketReceiveManager = null;
                     }
 
-                    // close the sockets to keep ref count consistent(socket will not be acutally closed unless ref count is 0).
+                    // close the sockets to keep ref count consistent(socket will not be acutally closed unless ref
+                    // count is 0).
                     foreach (UdpSocket udpSocket in this.listenSockets)
                     {
                         udpSocket.Close();
@@ -534,7 +542,8 @@ namespace System.ServiceModel.Channels
                         "DispatchMessage called when object is not fully opened.  This would indicate that the receive loop started before transitioning to CommunicationState.Opened, which should not happen."
                     );
 
-                    //Shutting down - the message will get closed by the caller (IUdpReceiveHandler.OnMessageReceivedCallback)
+                    //Shutting down - the message will get closed by the caller
+                    // (IUdpReceiveHandler.OnMessageReceivedCallback)
                     return false;
                 }
 

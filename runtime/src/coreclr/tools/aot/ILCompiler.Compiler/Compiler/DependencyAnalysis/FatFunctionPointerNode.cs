@@ -10,7 +10,8 @@ namespace ILCompiler.DependencyAnalysis
     /// <summary>
     /// Represents a fat function pointer - a data structure that captures a pointer to a canonical
     /// method body along with the instantiation context the canonical body requires.
-    /// Pointers to these structures can be created by e.g. ldftn/ldvirtftn of a method with a canonical body.
+    /// Pointers to these structures can be created by e.g. ldftn/ldvirtftn of a method with a canonical
+    // body.
     /// </summary>
     public class FatFunctionPointerNode : DehydratableObjectNode, IMethodNode, ISymbolDefinitionNode
     {

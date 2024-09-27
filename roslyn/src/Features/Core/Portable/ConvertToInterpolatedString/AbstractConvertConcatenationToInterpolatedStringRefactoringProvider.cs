@@ -56,16 +56,20 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
 
         if (!syntaxFacts.SupportsConstantInterpolatedStrings(document.Project.ParseOptions!))
         {
-            // if there is a const keyword, the refactoring shouldn't show because interpolated string is not const string
+            // if there is a const keyword, the refactoring shouldn't show because interpolated string is not
+            // const string
             var declarator = top.FirstAncestorOrSelf<SyntaxNode>(syntaxFacts.IsVariableDeclarator);
             if (declarator != null && generator.GetModifiers(declarator).IsConst)
                 return;
         }
 
-        // Currently we can concatenate only full subtrees. Therefore we can't support arbitrary selection. We could
-        // theoretically support selecting the selections that correspond to full sub-trees (e.g. prefixes of
+        // Currently we can concatenate only full subtrees. Therefore we can't support arbitrary selection.
+        // We could
+        // theoretically support selecting the selections that correspond to full sub-trees (e.g. prefixes
+        // of
         // correct length but from UX point of view that it would feel arbitrary).
-        // Thus, we only support selection that takes the whole topmost expression. It breaks some leniency around under-selection
+        // Thus, we only support selection that takes the whole topmost expression. It breaks some leniency
+        // around under-selection
         // but it's the best solution so far.
         if (
             CodeRefactoringHelpers.IsNodeUnderselected(top, textSpan)
@@ -215,7 +219,8 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
                 }
                 else
                 {
-                    // This is either the first string literal we have encountered or it is the most recent one we've seen
+                    // This is either the first string literal we have encountered or it is the most recent one we've
+                    // seen
                     // after adding an interpolation.  Add a new interpolated-string-text-node to the list.
                     content.Add(
                         generator.InterpolatedStringText(
@@ -233,7 +238,8 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
                     == isVerbatimStringLiteral
             )
             {
-                // "piece" is itself an interpolated string (of the same "verbatimity" as the new interpolated string)
+                // "piece" is itself an interpolated string (of the same "verbatimity" as the new interpolated
+                // string)
                 // "a" + $"{1+ 1}" -> instead of $"a{$"{1 + 1}"}" inline the interpolated part: $"a{1 + 1}"
                 syntaxFacts.GetPartsOfInterpolationExpression(
                     piece,
@@ -254,7 +260,8 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
                         && previousContentWasStringLiteralExpression
                     )
                     {
-                        // if piece starts with a text and the previous part was a string, merge the two parts (see also above)
+                        // if piece starts with a text and the previous part was a string, merge the two parts (see also
+                        // above)
                         // "a" + $"b{1 + 1}" -> "a" and "b" get merged
                         var newText = ConcatenateTextToTextNode(
                             generator,
@@ -269,7 +276,8 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
                         content.Add(contentPart);
                     }
 
-                    // Only the first contentPart can be merged, therefore we set previousContentWasStringLiteralExpression to false
+                    // Only the first contentPart can be merged, therefore we set
+                    // previousContentWasStringLiteralExpression to false
                     previousContentWasStringLiteralExpression = false;
                 }
             }
@@ -297,7 +305,8 @@ internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactor
             if (supportsInterpolatedStringHandler)
             {
                 // if it's a call to object's .ToString (or any override), then we can remove this if the runtime
-                // supports interpolated string handlers. This gies the most flexibility to the handler to decide what
+                // supports interpolated string handlers. This gies the most flexibility to the handler to decide
+                // what
                 // it wants to do.
                 if (syntaxFacts.IsInvocationExpression(piece))
                 {

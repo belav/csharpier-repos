@@ -141,10 +141,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
             var root = new JsonCompilationUnit(arraySequence, _currentToken);
 
-            // There are three forms of diagnostics we can detect.  The first were generated directly when parsing and
-            // relate to unknown tokens encountered or tokens that were needed but not found.  The second relates to a
-            // set of grammar check rules that apply to both strict and non-strict json.  The last is the specific
-            // strict/loose checks we perform.  We look for all three forms, but only report the first issue we found.
+            // There are three forms of diagnostics we can detect.  The first were generated directly when
+            // parsing and
+            // relate to unknown tokens encountered or tokens that were needed but not found.  The second
+            // relates to a
+            // set of grammar check rules that apply to both strict and non-strict json.  The last is the
+            // specific
+            // strict/loose checks we perform.  We look for all three forms, but only report the first issue we
+            // found.
             // We want to avoid reporting a ton of cascaded errors.
             var diagnostic1 = GetFirstDiagnostic(root);
             var diagnostic2 = CheckTopLevel(_lexer.Text, root);
@@ -187,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             {
                 // json is not allowed to be just whitespace.
                 //
-                // Note: we always have at least some content (either real nodes in the tree) or trivia on the EOF token
+                // Note: we always have at least some content (either real nodes in the tree) or trivia on the EOF
+                // token
                 // as we only parse when we have a non-empty sequence of virtual chars to begin with.
                 if (
                     text.Length > 0
@@ -379,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 result.Add(value);
 
                 // Try to consume a comma.  If we don't see one, consume an empty one as a placeholder. Create a
-                // diagnostic message depending on if we've seen only properties before this point.  If not, don't give
+                // diagnostic message depending on if we've seen only properties before this point.  If not, don't
+                // give
                 // a message about a missing comma.  Instead, we'll give a specific message that we didn't get a
                 // property when we expected one.
                 if (ShouldConsumeSequenceElement())
@@ -449,14 +455,17 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         {
             Debug.Assert(_currentToken.Kind == JsonKind.ColonToken);
 
-            // Kind could be anything else we might have parsed as a value (for example, an integer/boolean literal).
+            // Kind could be anything else we might have parsed as a value (for example, an integer/boolean
+            // literal).
             if (stringLiteralOrText.Kind != JsonKind.StringToken)
                 stringLiteralOrText = stringLiteralOrText.With(kind: JsonKind.TextToken);
 
             var colonToken = ConsumeCurrentToken();
 
-            // Newtonsoft allows "{ a: , }" as a legal property. In that case, synthesize a missing value and allow the
-            // comma to be parsed as the next value in the sequence.  The strict pass will error if it sees this missing
+            // Newtonsoft allows "{ a: , }" as a legal property. In that case, synthesize a missing value and
+            // allow the
+            // comma to be parsed as the next value in the sequence.  The strict pass will error if it sees this
+            // missing
             // comma-value as the value of a property.
             if (_currentToken.Kind == JsonKind.CommaToken)
             {

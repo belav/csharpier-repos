@@ -17,7 +17,8 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-// These tests cover the logic included in PartialViewResult.ExecuteResultAsync - see PartialViewResultExecutorTest
+// These tests cover the logic included in PartialViewResult.ExecuteResultAsync - see
+// PartialViewResultExecutorTest
 // and ViewExecutorTest for more comprehensive tests.
 public class PartialViewResultTest
 {

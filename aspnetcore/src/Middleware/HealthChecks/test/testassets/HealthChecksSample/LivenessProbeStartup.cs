@@ -37,7 +37,8 @@ public class LivenessProbeStartup
         // The readiness check might do a set of more expensive or time-consuming checks to determine
         // if all other resources are responding.
         //
-        // See https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/ for
+        // See https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+        // for
         // more details about readiness and liveness probes in Kubernetes.
         //
         // In this example, the liveness check will us an 'identity' check that always returns healthy.

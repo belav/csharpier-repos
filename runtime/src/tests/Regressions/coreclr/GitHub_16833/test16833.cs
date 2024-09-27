@@ -5,7 +5,8 @@ using Xunit;
 
 namespace TestShufflingThunk
 {
-    // This is a regression test for shuffling thunk creation on Unix AMD64. The calling convention causes some interesting shuffles that
+    // This is a regression test for shuffling thunk creation on Unix AMD64. The calling convention
+    // causes some interesting shuffles that
     // the code before the fix was not handling properly.
     struct SLongLong
     {

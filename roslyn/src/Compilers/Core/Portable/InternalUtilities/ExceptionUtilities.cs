@@ -15,7 +15,8 @@ namespace Roslyn.Utilities
         /// Creates an <see cref="InvalidOperationException"/> with information about an unexpected value.
         /// </summary>
         /// <param name="o">The unexpected value.</param>
-        /// <returns>The <see cref="InvalidOperationException"/>, which should be thrown by the caller.</returns>
+        /// <returns>The <see cref="InvalidOperationException"/>, which should be thrown by the
+        // caller.</returns>
         internal static Exception UnexpectedValue(object? o)
         {
             string output = string.Format(
@@ -38,11 +39,13 @@ namespace Roslyn.Utilities
             );
 
         /// <summary>
-        /// Determine if an exception was an <see cref="OperationCanceledException"/>, and that the provided token caused the cancellation.
+        /// Determine if an exception was an <see cref="OperationCanceledException"/>, and that the provided
+        // token caused the cancellation.
         /// </summary>
         /// <param name="exception">The exception to test.</param>
         /// <param name="cancellationToken">Checked to see if the provided token was cancelled.</param>
-        /// <returns><see langword="true"/> if the exception was an <see cref="OperationCanceledException" /> and the token was canceled.</returns>
+        /// <returns><see langword="true"/> if the exception was an <see cref="OperationCanceledException"
+        // /> and the token was canceled.</returns>
         internal static bool IsCurrentOperationBeingCancelled(
             Exception exception,
             CancellationToken cancellationToken

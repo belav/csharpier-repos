@@ -1266,9 +1266,11 @@ namespace System.Data.SqlClient
             }
             timeInfo.ticks = tickUnits * TdsEnums.TICKS_FROM_SCALE[scale];
 
-            // Once the deserialization has been completed using the value scale, we need to set the actual denormalized scale,
+            // Once the deserialization has been completed using the value scale, we need to set the actual
+            // denormalized scale,
             // coming from the data type, on the original result, so that it has the proper scale setting.
-            // This only applies for values that got serialized/deserialized for encryption. Otherwise, both scales should be equal.
+            // This only applies for values that got serialized/deserialized for encryption. Otherwise, both
+            // scales should be equal.
             timeInfo.scale = denormalizedScale;
         }
 

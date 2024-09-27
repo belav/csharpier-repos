@@ -14,7 +14,8 @@ namespace System.Formats.Asn1
         ///   accepting the two-digit year as valid in context.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 23).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 23).</param>
         /// <exception cref="ArgumentException">
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagClass"/> is
         ///   <see cref="TagClass.Universal"/>, but
@@ -40,7 +41,8 @@ namespace System.Formats.Asn1
         ///   The maximum valid year for <paramref name="value"/>, after conversion to UTC.
         ///   For the X.509 Time.utcTime range of 1950-2049, pass <c>2049</c>.
         /// </param>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 23).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 23).</param>
         /// <exception cref="ArgumentException">
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagClass"/> is
         ///   <see cref="TagClass.Universal"/>, but

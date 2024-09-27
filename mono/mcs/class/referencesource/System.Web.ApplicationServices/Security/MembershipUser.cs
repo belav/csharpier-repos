@@ -266,7 +266,8 @@ namespace System.Web.Security
             )
                 return false;
             UpdateSelf();
-            //_LastPasswordChangedDate = Membership.Providers[ ProviderName ].GetUser( UserName, false ).LastPasswordChangedDate;
+            //_LastPasswordChangedDate = Membership.Providers[ ProviderName ].GetUser( UserName, false
+            // ).LastPasswordChangedDate;
             return true;
         }
 
@@ -349,7 +350,8 @@ namespace System.Web.Security
             if (!String.IsNullOrEmpty(pass))
             {
                 UpdateSelf();
-                //_LastPasswordChangedDate = Membership.Providers[ProviderName].GetUser(UserName, false).LastPasswordChangedDate;
+                //_LastPasswordChangedDate = Membership.Providers[ProviderName].GetUser(UserName,
+                // false).LastPasswordChangedDate;
             }
             return pass;
         }

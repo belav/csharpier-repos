@@ -13,7 +13,8 @@ namespace ComInterfaceGenerator.Unit.Tests
     internal interface IComInterfaceAttributeProvider
     {
         /// <summary>
-        /// Returns the [VirtualMethodIndexAttribute] to be put into a snippet if desired. Otherwise, returns <see cref="string.Empty" />.
+        /// Returns the [VirtualMethodIndexAttribute] to be put into a snippet if desired. Otherwise,
+        // returns <see cref="string.Empty" />.
         /// </summary>
         string VirtualMethodIndex(
             int index,
@@ -27,12 +28,14 @@ namespace ComInterfaceGenerator.Unit.Tests
         );
 
         /// <summary>
-        /// Returns the [UnmanagedObjectUnwrapper] to be put into a snippet if desired. Otherwise, returns <see cref="string.Empty" />.
+        /// Returns the [UnmanagedObjectUnwrapper] to be put into a snippet if desired. Otherwise, returns
+        // <see cref="string.Empty" />.
         /// </summary>
         string UnmanagedObjectUnwrapper(Type t);
 
         /// <summary>
-        /// Returns the [GeneratedComInterface] to be put into a snippet, if desired. Otherwise, returns <see cref="string.Empty" />.
+        /// Returns the [GeneratedComInterface] to be put into a snippet, if desired. Otherwise, returns
+        // <see cref="string.Empty" />.
         /// </summary>
         string GeneratedComInterface(
             StringMarshalling? stringMarshalling = null,
@@ -40,7 +43,8 @@ namespace ComInterfaceGenerator.Unit.Tests
         );
 
         /// <summary>
-        /// Returns any additional code to be appended to the snippet that provides any additional interfaces the user must implement
+        /// Returns any additional code to be appended to the snippet that provides any additional
+        // interfaces the user must implement
         /// for the generator to function correctly.
         /// </summary>
         string AdditionalUserRequiredInterfaces(string userDefinedInterfaceName);

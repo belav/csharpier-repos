@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -16,7 +17,8 @@ using Newtonsoft.Json;
 namespace System.Web.Http.Results
 {
     /// <summary>
-    /// Represents an action result that returns an <see cref="HttpStatusCode.OK"/> response with JSON data.
+    /// Represents an action result that returns an <see cref="HttpStatusCode.OK"/> response with JSON
+    // data.
     /// </summary>
     /// <typeparam name="T">The type of content in the entity body.</typeparam>
     public class JsonResult<T> : IHttpActionResult
@@ -52,7 +54,8 @@ namespace System.Web.Http.Results
         /// <param name="content">The content value to serialize in the entity body.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <param name="encoding">The content encoding.</param>
-        /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
+        /// <param name="controller">The controller from which to obtain the dependencies needed for
+        // execution.</param>
         public JsonResult(
             T content,
             JsonSerializerSettings serializerSettings,

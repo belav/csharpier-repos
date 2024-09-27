@@ -20,7 +20,8 @@ namespace System.Xml
     ///   1. CData sections
     ///   2. DocType declaration
     ///
-    /// It also performs well-formed document checks if standalone="yes" and/or a doc-type-decl is output.
+    /// It also performs well-formed document checks if standalone="yes" and/or a doc-type-decl is
+    // output.
     /// </summary>
     internal class QueryOutputWriter : XmlRawWriter
     {
@@ -46,7 +47,8 @@ namespace System.Xml
 
             if (settings.OutputMethod == XmlOutputMethod.Xml)
             {
-                // Xml output method shouldn't output doc-type-decl if system ID is not defined (even if public ID is)
+                // Xml output method shouldn't output doc-type-decl if system ID is not defined (even if public ID
+                // is)
                 // Only check for well-formed document if output method is xml
                 if (this.systemId != null)
                 {

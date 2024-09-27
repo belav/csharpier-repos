@@ -2,16 +2,25 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // This file contains the classes necessary to represent the Transform processing model used in
-// XMLDSIG. The basic idea is as follows. A Reference object contains within it a TransformChain, which
-// is an ordered set of XMLDSIG transforms (represented by <Transform>...</Transform> clauses in the XML).
+// XMLDSIG. The basic idea is as follows. A Reference object contains within it a TransformChain,
+// which
+// is an ordered set of XMLDSIG transforms (represented by <Transform>...</Transform> clauses in the
+// XML).
 // A transform in XMLDSIG operates on an input of either an octet stream or a node set and produces
-// either an octet stream or a node set. Conversion between the two types is performed by parsing (octet stream->
-// node set) or C14N (node set->octet stream). We generalize this slightly to allow a transform to define an array of
-// input and output types (because I believe in the future there will be perf gains by being smarter about what goes in & comes out)
-// Each XMLDSIG transform is represented by a subclass of the abstract Transform class. We need to use CryptoConfig to
-// associate Transform classes with URLs for transform extensibility, but that's a future concern for this code.
-// Once the Transform chain is constructed, call TransformToOctetStream to convert some sort of input type to an octet
-// stream. (We only bother implementing that much now since every use of transform chains in XmlDsig ultimately yields something to hash).
+// either an octet stream or a node set. Conversion between the two types is performed by parsing
+// (octet stream->
+// node set) or C14N (node set->octet stream). We generalize this slightly to allow a transform to
+// define an array of
+// input and output types (because I believe in the future there will be perf gains by being smarter
+// about what goes in & comes out)
+// Each XMLDSIG transform is represented by a subclass of the abstract Transform class. We need to
+// use CryptoConfig to
+// associate Transform classes with URLs for transform extensibility, but that's a future concern
+// for this code.
+// Once the Transform chain is constructed, call TransformToOctetStream to convert some sort of
+// input type to an octet
+// stream. (We only bother implementing that much now since every use of transform chains in XmlDsig
+// ultimately yields something to hash).
 
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
@@ -60,7 +69,8 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        // The goal behind this method is to pump the input stream through the transforms and get back something that
+        // The goal behind this method is to pump the input stream through the transforms and get back
+        // something that
         // can be hashed
         internal Stream TransformToOctetStream(
             object? inputObject,
@@ -82,7 +92,8 @@ namespace System.Security.Cryptography.Xml
                 else
                 {
                     // We need translation
-                    // For now, we just know about Stream->{XmlNodeList,XmlDocument} and {XmlNodeList,XmlDocument}->Stream
+                    // For now, we just know about Stream->{XmlNodeList,XmlDocument} and
+                    // {XmlNodeList,XmlDocument}->Stream
                     if (currentInput is Stream)
                     {
                         if (transform.AcceptsType(typeof(XmlDocument)))

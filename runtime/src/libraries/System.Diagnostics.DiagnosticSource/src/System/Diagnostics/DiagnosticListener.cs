@@ -23,7 +23,10 @@ namespace System.Diagnostics
     /// will fire for every live DiagnosticListener in the appdomain (past or present).
     ///
     /// Please See the DiagnosticSource Users Guide
-    /// https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md
+    ///
+    //
+    //
+    // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md
     /// for instructions on its use.
     /// </summary>
     public partial class DiagnosticListener
@@ -54,18 +57,23 @@ namespace System.Diagnostics
 
         // Subscription implementation
         /// <summary>
-        /// Add a subscriber (Observer).  If the isEnabled parameter is non-null it indicates that some events are
+        /// Add a subscriber (Observer).  If the isEnabled parameter is non-null it indicates that some
+        // events are
         /// uninteresting and can be skipped for efficiency.
         /// </summary>
         /// <param name="observer">Subscriber (IObserver)</param>
-        /// <param name="isEnabled">Filters events based on their name (string). Should return true if the event is enabled.
+        /// <param name="isEnabled">Filters events based on their name (string). Should return true if the
+        // event is enabled.
         ///
-        /// Note that the isEnabled predicate is an OPTIONAL OPTIMIZATION to allow the instrumentation site to avoid
+        /// Note that the isEnabled predicate is an OPTIONAL OPTIMIZATION to allow the instrumentation site
+        // to avoid
         /// setting up the payload and calling 'Write' when no subscriber cares about it. In particular the
-        /// instrumentation site has the option of ignoring the IsEnabled() predicate (not calling it) and simply
+        /// instrumentation site has the option of ignoring the IsEnabled() predicate (not calling it) and
+        // simply
         /// calling Write().   Thus if the subscriber requires the filtering, it needs to do it itself.
         ///
-        /// If this parameter is null, no filtering is done (all overloads of DiagnosticSource.IsEnabled return true).
+        /// If this parameter is null, no filtering is done (all overloads of DiagnosticSource.IsEnabled
+        // return true).
         /// </param>
         public virtual IDisposable Subscribe(
             IObserver<KeyValuePair<string, object?>> observer,
@@ -93,32 +101,45 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Add a subscriber (Observer).  If the isEnabled parameter is non-null indicates that some events are
+        /// Add a subscriber (Observer).  If the isEnabled parameter is non-null indicates that some events
+        // are
         /// uninteresting can be skipped for efficiency.
         /// </summary>
         /// <param name="observer">Subscriber (IObserver)</param>
-        /// <param name="isEnabled">Filters events based on their name (string) and up to two context object (which can be null).
+        /// <param name="isEnabled">Filters events based on their name (string) and up to two context object
+        // (which can be null).
         ///
-        /// A particular instrumentation site HAS THE OPTION of calling one or more 'IsEnabled' overloads  in which
-        /// it passes the name of the event and up to two other (instrumentation site specific) objects as arguments.
-        /// If any of these 'IsEnabled' calls are made then this 'isEnabled' predicate is invoked with passed values
+        /// A particular instrumentation site HAS THE OPTION of calling one or more 'IsEnabled' overloads
+        // in which
+        /// it passes the name of the event and up to two other (instrumentation site specific) objects as
+        // arguments.
+        /// If any of these 'IsEnabled' calls are made then this 'isEnabled' predicate is invoked with
+        // passed values
         /// (if shorter overloads are used, null is passed for missing context objects).
         ///
-        /// This gives any particular instrumentation site the ability to pass up to two pieces of information to the
-        /// subscriber to do sophisticated, efficient filtering.  This requires more coupling between the instrumentation
+        /// This gives any particular instrumentation site the ability to pass up to two pieces of
+        // information to the
+        /// subscriber to do sophisticated, efficient filtering.  This requires more coupling between the
+        // instrumentation
         /// site and the subscriber code.
         ///
-        /// It IS expected that a particular instrumentation site may call different overloads of IsEnabled for the
-        /// same event, first calling IsEnable(string) which calls the filter with two null context objects and if
-        /// 'isEnabled' returns true calling again with context objects.   The isEnabled filter should be designed
+        /// It IS expected that a particular instrumentation site may call different overloads of IsEnabled
+        // for the
+        /// same event, first calling IsEnable(string) which calls the filter with two null context objects
+        // and if
+        /// 'isEnabled' returns true calling again with context objects.   The isEnabled filter should be
+        // designed
         /// with this in mind.
         ///
-        /// Note that the isEnabled predicate is an OPTIONAL OPTIMIZATION to allow the instrumentation site to avoid
+        /// Note that the isEnabled predicate is an OPTIONAL OPTIMIZATION to allow the instrumentation site
+        // to avoid
         /// setting up the payload and calling 'Write' when no subscriber cares about it. In particular the
-        /// instrumentation site has the option of ignoring the IsEnabled() predicate (not calling it) and simply
+        /// instrumentation site has the option of ignoring the IsEnabled() predicate (not calling it) and
+        // simply
         /// calling Write().   Thus if the subscriber requires the filtering, it needs to do it itself.
         ///
-        /// If this parameter is null, no filtering is done (all overloads of DiagnosticSource.IsEnabled return true).
+        /// If this parameter is null, no filtering is done (all overloads of DiagnosticSource.IsEnabled
+        // return true).
         /// </param>
         public virtual IDisposable Subscribe(
             IObserver<KeyValuePair<string, object?>> observer,
@@ -145,7 +166,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Make a new DiagnosticListener, it is a NotificationSource, which means the returned result can be used to
+        /// Make a new DiagnosticListener, it is a NotificationSource, which means the returned result can
+        // be used to
         /// log notifications, but it also has a Subscribe method so notifications can be forwarded
         /// arbitrarily.  Thus its job is to forward things from the producer to all the listeners
         /// (multi-casting).    Generally you should not be making your own DiagnosticListener but use the
@@ -167,7 +189,8 @@ namespace System.Diagnostics
             }
 
             // Touch DiagnosticSourceEventSource.Logger so we ensure that the
-            // DiagnosticSourceEventSource has been constructed (and thus is responsive to ETW requests to be enabled).
+            // DiagnosticSourceEventSource has been constructed (and thus is responsive to ETW requests to be
+            // enabled).
             GC.KeepAlive(DiagnosticSourceEventSource.Log);
         }
 
@@ -239,7 +262,8 @@ namespace System.Diagnostics
         /// </summary>
         /// <remarks> If there is an expensive setup for the notification,
         /// you may call IsEnabled() as the first and most efficient check before doing this setup.
-        /// Producers may optionally use this check before IsEnabled(string) in the most performance-critical parts of the system
+        /// Producers may optionally use this check before IsEnabled(string) in the most
+        // performance-critical parts of the system
         /// to ensure somebody listens to the DiagnosticListener at all.</remarks>
         public bool IsEnabled()
         {
@@ -298,7 +322,8 @@ namespace System.Diagnostics
                 curSubscription.Observer.OnNext(new KeyValuePair<string, object?>(name, value));
         }
 
-        // Note that Subscriptions are READ ONLY.   This means you never update any fields (even on removal!)
+        // Note that Subscriptions are READ ONLY.   This means you never update any fields (even on
+        // removal!)
         private sealed class DiagnosticSubscription : IDisposable
         {
             internal IObserver<KeyValuePair<string, object?>> Observer = null!;
@@ -312,8 +337,10 @@ namespace System.Diagnostics
             //       - IsEnabled3Arg falls back to predicate ignoring extra arguments.
             //     similarly, when Func<string, obj, obj, bool> is provided,
             //     IsEnabled1Arg falls back to IsEnabled3Arg with null context
-            // Thus, dispatching is very efficient when producer and consumer agree on number of IsEnabled arguments
-            // Argument number mismatch between producer/consumer adds extra cost of adding or omitting context parameters
+            // Thus, dispatching is very efficient when producer and consumer agree on number of IsEnabled
+            // arguments
+            // Argument number mismatch between producer/consumer adds extra cost of adding or omitting context
+            // parameters
             internal Predicate<string>? IsEnabled1Arg;
             internal Func<string, object?, object?, bool>? IsEnabled3Arg;
             internal Action<Activity, object?>? OnActivityImport;
@@ -359,7 +386,8 @@ namespace System.Diagnostics
                 }
             }
 
-            // Create a new linked list where 'subscription has been removed from the linked list of 'subscriptions'.
+            // Create a new linked list where 'subscription has been removed from the linked list of
+            // 'subscriptions'.
             private static DiagnosticSubscription? Remove(
                 DiagnosticSubscription? subscriptions,
                 DiagnosticSubscription subscription
@@ -395,8 +423,10 @@ namespace System.Diagnostics
 
         #region AllListenerObservable
         /// <summary>
-        /// Logically AllListenerObservable has a very simple task.  It has a linked list of subscribers that want
-        /// a callback when a new listener gets created.   When a new DiagnosticListener gets created it should call
+        /// Logically AllListenerObservable has a very simple task.  It has a linked list of subscribers
+        // that want
+        /// a callback when a new listener gets created.   When a new DiagnosticListener gets created it
+        // should call
         /// OnNewDiagnosticListener so that AllListenerObservable can forward it on to all the subscribers.
         /// </summary>
         private sealed class AllListenerObservable : IObservable<DiagnosticListener>
@@ -416,7 +446,8 @@ namespace System.Diagnostics
             }
 
             /// <summary>
-            /// Called when a new DiagnosticListener gets created to tell anyone who subscribed that this happened.
+            /// Called when a new DiagnosticListener gets created to tell anyone who subscribed that this
+            // happened.
             /// </summary>
             /// <param name="diagnosticListener"></param>
             internal void OnNewDiagnosticListener(DiagnosticListener diagnosticListener)

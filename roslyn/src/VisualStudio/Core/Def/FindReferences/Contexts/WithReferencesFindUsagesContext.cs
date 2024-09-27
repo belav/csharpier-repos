@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 CancellationToken cancellationToken
             )
             {
-                // If this is a definition we always want to show, then create entries for all the declaration locations
+                // If this is a definition we always want to show, then create entries for all the declaration
+                // locations
                 // immediately.  Otherwise, we'll create them on demand when we hear about references for this
                 // definition.
                 if (definition.DisplayIfNoReferences)
@@ -144,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 CancellationToken cancellationToken
             )
             {
-                // Normal references go into both sets of entries.  We ensure an entry for the definition, and an entry
+                // Normal references go into both sets of entries.  We ensure an entry for the definition, and an
+                // entry
                 // for the reference itself.
                 return OnEntryFoundAsync(
                     reference.Definition,
@@ -180,9 +182,11 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 );
                 cancellationToken.ThrowIfCancellationRequested();
 
-                // OK, we got a *reference* to some definition item.  This may have been a reference for some definition
+                // OK, we got a *reference* to some definition item.  This may have been a reference for some
+                // definition
                 // that we haven't created any declaration entries for (i.e. because it had DisplayIfNoReferences =
-                // false).  Because we've now found a reference, we want to make sure all its declaration entries are
+                // false).  Because we've now found a reference, we want to make sure all its declaration entries
+                // are
                 // added.
                 await AddDeclarationEntriesAsync(definition, expandedByDefault, cancellationToken)
                     .ConfigureAwait(false);

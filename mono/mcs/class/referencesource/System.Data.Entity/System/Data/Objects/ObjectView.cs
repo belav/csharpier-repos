@@ -27,7 +27,8 @@ namespace System.Data.Objects
     /// </typeparam>
     /// <remarks>
     /// <para>
-    /// This class provides an implementation of IBindingList that exposes a list of elements to be bound,
+    /// This class provides an implementation of IBindingList that exposes a list of elements to be
+    // bound,
     /// provides a mechanism to change the membership of the list,
     /// and events to notify interested objects when the membership of the list is modified
     /// or an element in the list is modified.
@@ -99,10 +100,12 @@ namespace System.Data.Objects
         #region ICancelAddNew implementation
 
         /// <summary>
-        /// If a new item has been added to the list, and <paramref name="itemIndex"/> is the position of that item,
+        /// If a new item has been added to the list, and <paramref name="itemIndex"/> is the position of
+        // that item,
         /// remove it from the list and cancel the add operation.
         /// </summary>
-        /// <param name="itemIndex">Index of item to be removed as a result of the cancellation of a previous addition.</param>
+        /// <param name="itemIndex">Index of item to be removed as a result of the cancellation of a
+        // previous addition.</param>
         void ICancelAddNew.CancelNew(int itemIndex)
         {
             if (_addNewIndex >= 0 && itemIndex == _addNewIndex)
@@ -353,7 +356,8 @@ namespace System.Data.Objects
             {
                 try
                 {
-                    // Suspend list changed events during the clear, since the IObjectViewData declared that it wouldn't fire an event.
+                    // Suspend list changed events during the clear, since the IObjectViewData declared that it wouldn't
+                    // fire an event.
                     // It's possible the IObjectViewData could implement Clear by repeatedly calling Remove,
                     // and we don't want these events to percolate during the Clear operation.
                     _suspendEvent = true;
@@ -524,7 +528,8 @@ namespace System.Data.Objects
             // and the collection membership changed due to an operation external to this ObjectView,
             // it is possible that the _addNewIndex position will need to be adjusted.
             //
-            // If the modification was made through this ObjectView, the pending edit would have been implicitly committed,
+            // If the modification was made through this ObjectView, the pending edit would have been implicitly
+            // committed,
             // and there would be no need to examine it here.
             TElement addNew = default(TElement);
 

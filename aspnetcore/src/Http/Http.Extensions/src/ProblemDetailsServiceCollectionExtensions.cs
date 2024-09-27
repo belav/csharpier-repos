@@ -29,7 +29,8 @@ public static class ProblemDetailsServiceCollectionExtensions
     /// Adds services required for creation of <see cref="ProblemDetails"/> for failed requests.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
-    /// <param name="configure">The <see cref="ProblemDetailsOptions"/> to configure the services with.</param>
+    /// <param name="configure">The <see cref="ProblemDetailsOptions"/> to configure the services
+    // with.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddProblemDetails(
         this IServiceCollection services,
@@ -43,7 +44,8 @@ public static class ProblemDetailsServiceCollectionExtensions
         services.TryAddEnumerable(
             ServiceDescriptor.Singleton<IProblemDetailsWriter, DefaultProblemDetailsWriter>()
         );
-        // Use IConfigureOptions (instead of post-configure) so the registration gets added/invoked relative to when AddProblemDetails() is called.
+        // Use IConfigureOptions (instead of post-configure) so the registration gets added/invoked relative
+        // to when AddProblemDetails() is called.
         services.TryAddEnumerable(
             ServiceDescriptor.Singleton<
                 IConfigureOptions<JsonOptions>,

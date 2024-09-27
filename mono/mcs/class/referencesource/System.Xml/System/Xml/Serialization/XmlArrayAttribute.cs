@@ -29,13 +29,15 @@ namespace System.Xml.Serialization
         XmlSchemaForm form = XmlSchemaForm.None;
         int order = -1;
 
-        /// <include file='doc\XmlArrayAttribute.uex' path='docs/doc[@for="XmlArrayAttribute.XmlArrayAttribute"]/*' />
+        /// <include file='doc\XmlArrayAttribute.uex'
+        // path='docs/doc[@for="XmlArrayAttribute.XmlArrayAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public XmlArrayAttribute() { }
 
-        /// <include file='doc\XmlArrayAttribute.uex' path='docs/doc[@for="XmlArrayAttribute.XmlArrayAttribute1"]/*' />
+        /// <include file='doc\XmlArrayAttribute.uex'
+        // path='docs/doc[@for="XmlArrayAttribute.XmlArrayAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -44,7 +46,8 @@ namespace System.Xml.Serialization
             this.elementName = elementName;
         }
 
-        /// <include file='doc\XmlArrayAttribute.uex' path='docs/doc[@for="XmlArrayAttribute.ElementName"]/*' />
+        /// <include file='doc\XmlArrayAttribute.uex'
+        // path='docs/doc[@for="XmlArrayAttribute.ElementName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -54,7 +57,8 @@ namespace System.Xml.Serialization
             set { elementName = value; }
         }
 
-        /// <include file='doc\XmlArrayAttribute.uex' path='docs/doc[@for="XmlArrayAttribute.Namespace"]/*' />
+        /// <include file='doc\XmlArrayAttribute.uex' path='docs/doc[@for="XmlArrayAttribute.Namespace"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -64,7 +68,8 @@ namespace System.Xml.Serialization
             set { ns = value; }
         }
 
-        /// <include file='doc\XmlArrayAttribute.uex' path='docs/doc[@for="XmlArrayAttribute.IsNullable"]/*' />
+        /// <include file='doc\XmlArrayAttribute.uex' path='docs/doc[@for="XmlArrayAttribute.IsNullable"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

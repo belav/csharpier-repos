@@ -20,7 +20,8 @@ namespace System.Runtime
                 || transaction.TransactionInformation.Status == TransactionStatus.InDoubt
             )
             {
-                //This will throw TransactionAbortedException/TransactionInDoubtException with corresponding inner exception if any
+                //This will throw TransactionAbortedException/TransactionInDoubtException with corresponding inner
+                // exception if any
                 using (TransactionScope scope = new TransactionScope(transaction))
                 {
                     //empty

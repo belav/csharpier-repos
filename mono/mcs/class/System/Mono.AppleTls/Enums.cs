@@ -5,7 +5,8 @@ using ObjCRuntimeInternal;
 
 namespace Mono.AppleTls
 {
-    // this is a subset of OSStatus -> SInt32 -> signed int - see CoreFoundation.framework/Headers/CFBase.h
+    // this is a subset of OSStatus -> SInt32 -> signed int - see
+    // CoreFoundation.framework/Headers/CFBase.h
     // values are defined in Security.framework/Headers/SecBase.h
     enum SecStatusCode
     {

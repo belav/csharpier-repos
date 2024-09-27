@@ -195,7 +195,8 @@ namespace System.Configuration
             }
 
             // Semi-hack: If there are roamable settings, let's write them before local settings so if a handler
-            // declaration is necessary, it goes in the roaming config file in preference to the local config file.
+            // declaration is necessary, it goes in the roaming config file in preference to the local config
+            // file.
             if (roamingUserSettings.Count > 0)
             {
                 ClientSettingsStore.WriteSettings(sectionName, true, roamingUserSettings);
@@ -222,7 +223,8 @@ namespace System.Configuration
 
         /// <summary>
         ///    Implementation of IClientSettingsProvider.Upgrade.
-        ///    Tries to locate a previous version of the user.config file. If found, it migrates matching settings.
+        ///    Tries to locate a previous version of the user.config file. If found, it migrates matching
+        // settings.
         ///    If not, it does nothing.
         /// </summary>
         public void Upgrade(SettingsContext context, SettingsPropertyCollection properties)
@@ -554,7 +556,8 @@ namespace System.Configuration
 
             if (!string.IsNullOrEmpty(prevConfig))
             {
-                //Filter the settings properties to exclude those that have a NoSettingsVersionUpgradeAttribute on them.
+                //Filter the settings properties to exclude those that have a NoSettingsVersionUpgradeAttribute on
+                // them.
                 SettingsPropertyCollection upgradeProperties = new SettingsPropertyCollection();
                 foreach (SettingsProperty sp in properties)
                 {

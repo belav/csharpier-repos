@@ -194,7 +194,8 @@ namespace System.Reflection.Metadata.Ecma335
     }
 
     /// <summary>
-    /// These constants are all in the byte range and apply to the interpretation of <see cref="Handle.VType"/>,
+    /// These constants are all in the byte range and apply to the interpretation of <see
+    // cref="Handle.VType"/>,
     /// </summary>
     internal static class HandleType
     {
@@ -345,12 +346,15 @@ namespace System.Reflection.Metadata.Ecma335
         /// since the token type ids are internal to the reader and not specified by ECMA spec.
         ///
         /// Spec (Partition III, 1.9 Metadata tokens):
-        /// Many CIL instructions are followed by a "metadata token". This is a 4-byte value, that specifies a row in a
+        /// Many CIL instructions are followed by a "metadata token". This is a 4-byte value, that specifies
+        // a row in a
         /// metadata table, or a starting byte offset in the User String heap.
         ///
         /// For example, a value of 0x02 specifies the TypeDef table; a value of 0x70 specifies the User
-        /// String heap.The value corresponds to the number assigned to that metadata table (see Partition II for the full
-        /// list of tables) or to 0x70 for the User String heap.The least-significant 3 bytes specify the target row within that
+        /// String heap.The value corresponds to the number assigned to that metadata table (see Partition
+        // II for the full
+        /// list of tables) or to 0x70 for the User String heap.The least-significant 3 bytes specify the
+        // target row within that
         /// metadata table, or starting byte offset within the User String heap.
         /// </summary>
         internal static bool IsEntityOrUserStringToken(uint vToken)

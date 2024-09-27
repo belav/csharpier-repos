@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 
             static ExpressionSyntax ConvertExpression(ExpressionSyntax expression)
             {
-                // This must be called from an expression from the original tree.  Not something we're already transforming.
+                // This must be called from an expression from the original tree.  Not something we're already
+                // transforming.
                 // Otherwise, we'll have no idea how to apply the preferredIndentation if present.
                 Contract.ThrowIfNull(expression.Parent);
                 return expression switch

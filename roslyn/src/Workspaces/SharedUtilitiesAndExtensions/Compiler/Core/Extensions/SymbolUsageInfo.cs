@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Provides information about the way a particular symbol is being used at a symbol reference node.
-    /// For namespaces and types, this corresponds to values from <see cref="TypeOrNamespaceUsageInfo"/>.
-    /// For methods, fields, properties, events, locals and parameters, this corresponds to values from <see cref="ValueUsageInfo"/>.
+    /// For namespaces and types, this corresponds to values from <see
+    // cref="TypeOrNamespaceUsageInfo"/>.
+    /// For methods, fields, properties, events, locals and parameters, this corresponds to values from
+    // <see cref="ValueUsageInfo"/>.
     /// </summary>
     [DataContract]
     internal readonly struct SymbolUsageInfo : IEquatable<SymbolUsageInfo>

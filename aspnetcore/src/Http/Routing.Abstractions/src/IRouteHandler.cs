@@ -14,8 +14,10 @@ public interface IRouteHandler
     /// Gets a <see cref="RequestDelegate"/> to handle the request, based on the provided
     /// <paramref name="routeData"/>.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
-    /// <param name="routeData">The <see cref="RouteData"/> associated with the current routing match.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
+    /// <param name="routeData">The <see cref="RouteData"/> associated with the current routing
+    // match.</param>
     /// <returns>
     /// A <see cref="RequestDelegate"/>, or <c>null</c> if the handler cannot handle this request.
     /// </returns>

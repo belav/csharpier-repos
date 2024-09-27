@@ -1990,7 +1990,11 @@ namespace System.Xml.Serialization
                     OpCode opCode = GetConvOpCode(Type.GetTypeCode(target));
                     if (opCode.Equals(OpCodes.Nop))
                     {
-                        //.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.NoConversionPossibleTo, DataContract.GetClrTypeFullName(target))));
+                        //
+                        //
+                        //
+                        // //.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.NoConversionPossibleTo,
+                        // DataContract.GetClrTypeFullName(target))));
                         throw new CodeGeneratorConversionException(
                             source,
                             target,
@@ -2011,7 +2015,11 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    //.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
+                    //
+                    //
+                    //
+                    // //.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.IsNotAssignableFrom,
+                    // DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
                     throw new CodeGeneratorConversionException(
                         source,
                         target,
@@ -2040,7 +2048,11 @@ namespace System.Xml.Serialization
             }
             else
             {
-                //.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
+                //
+                //
+                //
+                // //.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.IsNotAssignableFrom,
+                // DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
                 throw new CodeGeneratorConversionException(
                     source,
                     target,
@@ -2841,17 +2853,17 @@ namespace System.Xml.Serialization
         void DemandFullTrust()
         {
             fullTrustDemanded = true;
-            /*
-                        if (codeGenTrace != CodeGenTrace.None)
-                            EmitSourceComment("DemandFullTrust() {");
-            
-                        Ldc(PermissionState.Unrestricted);
-                        New(permissionSetCtor);
-                        Call(permissionSetDemand);
-            
-                        if (codeGenTrace != CodeGenTrace.None)
-                            EmitSourceComment("}");
-            */
+/*
+if (codeGenTrace != CodeGenTrace.None)
+EmitSourceComment("DemandFullTrust() {");
+
+Ldc(PermissionState.Unrestricted);
+New(permissionSetCtor);
+Call(permissionSetDemand);
+
+if (codeGenTrace != CodeGenTrace.None)
+EmitSourceComment("}");
+*/
         }
 
         static bool IsProtectedWithSecurity(MethodBase method)

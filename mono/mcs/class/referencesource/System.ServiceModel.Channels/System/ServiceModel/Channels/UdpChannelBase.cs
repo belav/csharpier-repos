@@ -157,7 +157,8 @@ namespace System.ServiceModel.Channels
 
                 if (message != null)
                 {
-                    // We pass in the length of the message buffer instead of the length of the message to keep track of the amount of memory that's been allocated
+                    // We pass in the length of the message buffer instead of the length of the message to keep track of
+                    // the amount of memory that's been allocated
                     continueReceiving = this.EnqueueMessage(
                         message,
                         data.Array.Length,
@@ -345,7 +346,8 @@ namespace System.ServiceModel.Channels
             {
                 if (this.retransmitSettings.Enabled == true)
                 {
-                    // we should only get here if some channel above us starts producing messages that don't match the encoder's message version.
+                    // we should only get here if some channel above us starts producing messages that don't match the
+                    // encoder's message version.
                     throw FxTrace.Exception.AsError(
                         new ProtocolException(
                             SR.RetransmissionRequiresAddressingOnMessage(
@@ -423,7 +425,8 @@ namespace System.ServiceModel.Channels
             this.UdpOutputChannel = udpOutputChannel;
         }
 
-        // We're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once.
+        // We're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called
+        // once.
         protected void Cleanup(bool aborting, TimeSpan timeout)
         {
             if (this.cleanedUp)
@@ -472,7 +475,8 @@ namespace System.ServiceModel.Channels
         }
 
         // Control flow for async path
-        // We use this mechanism to avoid initializing two async objects as logically cleanup+close is one operation.
+        // We use this mechanism to avoid initializing two async objects as logically cleanup+close is one
+        // operation.
         // At any point in the Begin* methods, we may go async. The steps are:
         // - Close inner UdpOutputChannel
         // - Cleanup channel

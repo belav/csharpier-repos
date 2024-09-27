@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestHost testHost
         )
         {
-            // This test is just the sanity test to make sure generators work at all. There's not a special scenario being
+            // This test is just the sanity test to make sure generators work at all. There's not a special
+            // scenario being
             // tested.
 
             using var workspace = CreateWorkspace(testHost: testHost);
@@ -79,9 +80,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace(testHost: testHost);
 
-            // AnalyzerReferences may implement equality (AnalyezrFileReference does), and we want to make sure if we substitute out one
-            // reference with another reference that's equal, we correctly update generators. We'll have the underlying generators
-            // be different since two AnalyzerFileReferences that are value equal but different instances would have their own generators as well.
+            // AnalyzerReferences may implement equality (AnalyezrFileReference does), and we want to make sure
+            // if we substitute out one
+            // reference with another reference that's equal, we correctly update generators. We'll have the
+            // underlying generators
+            // be different since two AnalyzerFileReferences that are value equal but different instances would
+            // have their own generators as well.
             const string SharedPath = "Z:\\Generator.dll";
             ISourceGenerator CreateGenerator() =>
                 new SingleFileTestGenerator("// StaticContent", hintName: "generated");
@@ -149,11 +153,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace(testHost: testHost);
 
-            // We always have a single generator in this test, and we add or remove a second one. This is critical
-            // to ensuring we correctly update our existing GeneratorDriver we may have from a prior run with the new
-            // generators passed to WithAnalyzerReferences. If we only swap from zero generators to one generator,
-            // we don't have a prior GeneratorDriver to update, since we don't make a GeneratorDriver if we have no generators.
-            // Similarly, once we go from one back to zero, we end up getting rid of our GeneratorDriver entirely since
+            // We always have a single generator in this test, and we add or remove a second one. This is
+            // critical
+            // to ensuring we correctly update our existing GeneratorDriver we may have from a prior run with
+            // the new
+            // generators passed to WithAnalyzerReferences. If we only swap from zero generators to one
+            // generator,
+            // we don't have a prior GeneratorDriver to update, since we don't make a GeneratorDriver if we have
+            // no generators.
+            // Similarly, once we go from one back to zero, we end up getting rid of our GeneratorDriver
+            // entirely since
             // we have no need for it, as an optimization.
             var generatorReferenceToKeep = new TestGeneratorReference(
                 new SingleFileTestGenerator(
@@ -195,7 +204,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
         }
 
-        // We only run this test on Release, as the compiler has asserts that trigger in Debug that the type names probably shouldn't be the same.
+        // We only run this test on Release, as the compiler has asserts that trigger in Debug that the type
+        // names probably shouldn't be the same.
         [ConditionalTheory(typeof(IsRelease)), CombinatorialData]
         public async Task GeneratorAddedWithDifferentFilePathsProducesDistinctDocumentIds(
             TestHost testHost
@@ -203,8 +213,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace(testHost: testHost);
 
-            // Produce two generator references with different paths, but the same generator by assembly/type. We will still give them separate
-            // generator instances, because in the "real" analyzer reference case each analyzer reference produces it's own generator objects.
+            // Produce two generator references with different paths, but the same generator by assembly/type.
+            // We will still give them separate
+            // generator instances, because in the "real" analyzer reference case each analyzer reference
+            // produces it's own generator objects.
             var generatorReference1 = new TestGeneratorReference(
                 new SingleFileTestGenerator("", hintName: "DuplicateFile"),
                 analyzerFilePath: "Z:\\A.dll"
@@ -280,7 +292,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
             );
 
-            // Change one of the additional documents, and rerun; we should only reprocess that one change, since this
+            // Change one of the additional documents, and rerun; we should only reprocess that one change,
+            // since this
             // is an incremental generator.
             project = project
                 .AdditionalDocuments.First()
@@ -330,7 +343,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             generatorDriver = project.Solution.State.GetTestAccessor().GetGeneratorDriver(project)!;
             runResult = generatorDriver.GetRunResult().Results[0];
 
-            // We have one extra syntax tree now, but it did not require any invocations of the incremental generator.
+            // We have one extra syntax tree now, but it did not require any invocations of the incremental
+            // generator.
             Assert.Equal(3, compilation.SyntaxTrees.Count());
             Assert.Equal(
                 2,
@@ -415,8 +429,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
         }
 
-        // This will make a series of changes to additional files and assert that we correctly update generated output at various times.
-        // By making this a theory with a bunch of booleans, it tests that we are correctly handling the situation where we queue up multiple changes
+        // This will make a series of changes to additional files and assert that we correctly update
+        // generated output at various times.
+        // By making this a theory with a bunch of booleans, it tests that we are correctly handling the
+        // situation where we queue up multiple changes
         // to the Compilation at once.
         [Theory, CombinatorialData]
         public async Task SourceGeneratorContentChangesAfterAdditionalFileChanges(
@@ -576,9 +592,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .GetRequiredProject(projectIds[1])
                 .GetSourceGeneratedDocumentsAsync();
 
-            // A DocumentId consists of a GUID and then the ProjectId it's within. Even if these two documents have the same GUID,
-            // they'll still be not equal because of the different ProjectIds. However, we'll also assert the GUIDs should be different as well,
-            // because otherwise things can get confusing. If nothing else, the DocumentId debugger display string shows only the GUID, so you could
+            // A DocumentId consists of a GUID and then the ProjectId it's within. Even if these two documents
+            // have the same GUID,
+            // they'll still be not equal because of the different ProjectIds. However, we'll also assert the
+            // GUIDs should be different as well,
+            // because otherwise things can get confusing. If nothing else, the DocumentId debugger display
+            // string shows only the GUID, so you could
             // easily confuse them as being the same.
             Assert.NotEqual(
                 generatedDocumentsInFirstProject.Single().Id.Id,
@@ -688,7 +707,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .WithFrozenPartialSemantics(CancellationToken.None)
                 .Project;
 
-            // The generated tree should still be there; even if the regular compilation fell away we've now cached the
+            // The generated tree should still be there; even if the regular compilation fell away we've now
+            // cached the
             // generated trees.
             var syntaxTree = Assert.Single(
                 (await project.GetRequiredCompilationAsync(CancellationToken.None)).SyntaxTrees,
@@ -769,7 +789,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace(testHost: testHost);
 
-            // We'll use either a generator that produces a single tree, or no tree, to ensure we efficiently handle both cases
+            // We'll use either a generator that produces a single tree, or no tree, to ensure we efficiently
+            // handle both cases
             ISourceGenerator generator = generatorProducesTree
                 ? new SingleFileTestGenerator("// StaticContent")
                 : new CallbackGenerator(onInit: _ => { }, onExecute: _ => { });
@@ -795,11 +816,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 CancellationToken.None
             );
 
-            // When we produced compilationAfterSecondChange, what we would ideally like is that compilation was produced by taking
-            // compilationAfterFirstChange and simply updating the syntax tree that changed, since the generated documents didn't change.
-            // That allows the compiler to reuse the same declaration tree for the generated file. This is hard to observe directly, but if we reflect
-            // into the Compilation we can see if the declaration tree is untouched. We won't look at the original compilation, since
-            // that original one was produced by adding the generated file as the final step, so it's cache won't be reusable, since the
+            // When we produced compilationAfterSecondChange, what we would ideally like is that compilation was
+            // produced by taking
+            // compilationAfterFirstChange and simply updating the syntax tree that changed, since the generated
+            // documents didn't change.
+            // That allows the compiler to reuse the same declaration tree for the generated file. This is hard
+            // to observe directly, but if we reflect
+            // into the Compilation we can see if the declaration tree is untouched. We won't look at the
+            // original compilation, since
+            // that original one was produced by adding the generated file as the final step, so it's cache
+            // won't be reusable, since the
             // compiler separates the "most recently changed tree" in the declaration table for efficiency.
 
             var cachedStateAfterFirstChange = GetDeclarationManagerCachedStateForUnchangingTrees(
@@ -1113,12 +1139,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var documentToFreeze = workspace.CurrentSolution.Projects.Single().Documents.Single();
 
-            // The generator shouldn't have ran before any of this since we didn't do anything that would ask for a compilation
+            // The generator shouldn't have ran before any of this since we didn't do anything that would ask
+            // for a compilation
             Assert.False(generatorRan);
 
             if (forkBeforeFreeze)
             {
-                // Forking before freezing means we'll have to do extra work to produce the final compilation, but we should still
+                // Forking before freezing means we'll have to do extra work to produce the final compilation, but
+                // we should still
                 // not be running generators
                 documentToFreeze = documentToFreeze.WithText(
                     SourceText.From("// Changed Source File")
@@ -1164,7 +1192,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .Documents.Single()
                 .WithFrozenPartialSemantics(CancellationToken.None);
 
-            // And fork with new contents; we'll ensure the contents of this tree are different, but the generator will still not be ran
+            // And fork with new contents; we'll ensure the contents of this tree are different, but the
+            // generator will still not be ran
             document = document.WithText(SourceText.From("// Something else"));
 
             var compilation = await document.Project.GetRequiredCompilationAsync(

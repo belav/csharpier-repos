@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Contains common arguments to Symbol.EarlyDecodeWellKnownAttribute method in both the language compilers.
+    /// Contains common arguments to Symbol.EarlyDecodeWellKnownAttribute method in both the language
+    // compilers.
     /// </summary>
     internal struct EarlyDecodeWellKnownAttributeArguments<
         TEarlyBinder,
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis
         public TAttributeSyntax AttributeSyntax { get; set; }
 
         /// <summary>
-        /// Specific part of the symbol to which the attributes apply, or AttributeLocation.None if the attributes apply to the symbol itself.
+        /// Specific part of the symbol to which the attributes apply, or AttributeLocation.None if the
+        // attributes apply to the symbol itself.
         /// Used e.g. for return type attributes of a method symbol.
         /// </summary>
         public TAttributeLocation SymbolPart { get; set; }

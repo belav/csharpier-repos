@@ -6,20 +6,28 @@ using Xunit;
 
 // Regression test for GitHub issue 49078: https://github.com/dotnet/runtime/issues/49078
 //
-// The problem was when a VSD interface call returning a multi-byte struct in registers was initially considered
-// to be a tailcall, but the tailcall was abandoned in morph due to not enough stack space to store outgoing
-// arguments, in which case we create a new call return local to store the return struct, and re-morph the
-// call. In doing so, we forget that we had already added VSD non-standard args, and re-add them, leaving
+// The problem was when a VSD interface call returning a multi-byte struct in registers was
+// initially considered
+// to be a tailcall, but the tailcall was abandoned in morph due to not enough stack space to store
+// outgoing
+// arguments, in which case we create a new call return local to store the return struct, and
+// re-morph the
+// call. In doing so, we forget that we had already added VSD non-standard args, and re-add them,
+// leaving
 // the originally added arg as a "normal" arg that shouldn't be there.
 //
 // So, in summary, for a call A->B, to see this failure, we need:
 //
 // 1. The call is considered a potential tailcall (by the importer)
-// 2. The call requires non-standard arguments that add call argument IR in AddFinalArgsAndDetermineABIInfo
+// 2. The call requires non-standard arguments that add call argument IR in
+// AddFinalArgsAndDetermineABIInfo
 //    (e.g., VSD call -- in this case, a generic interface call)
-// 3. We reject the tailcall in fgMorphPotentialTailCall() (e.g., not enough incoming arg stack space in A
-//    to store B's outgoing args), in this case because the first arg is a large struct. We can't reject
-//    it earlier, due to things like address exposed locals -- we must get far enough through the checks
+// 3. We reject the tailcall in fgMorphPotentialTailCall() (e.g., not enough incoming arg stack
+// space in A
+//    to store B's outgoing args), in this case because the first arg is a large struct. We can't
+// reject
+//    it earlier, due to things like address exposed locals -- we must get far enough through the
+// checks
 //    to have called AddFinalArgsAndDetermineABIInfo to add the extra non-standard arg.
 // 4. B returns a struct in multiple registers (e.g., a 16-byte struct in Linux x64 ABI)
 

@@ -121,7 +121,8 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void Select_Indexed_Unordered(int count)
         {
-            // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is at which index isn't actually guaranteed, but an
+            // effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
             foreach (
@@ -175,7 +176,8 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void Select_Indexed_Unordered_NotPipelined(int count)
         {
-            // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is at which index isn't actually guaranteed, but an
+            // effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
             Assert.All(
@@ -284,7 +286,8 @@ namespace System.Linq.Parallel.Tests
         //   The result was that enumerators could falsely believe they had been canceled when
         //   another inner-enumerator was disposed.
         //
-        //   Note: the failure was intermittent.  this test would fail about 1 in 2 times on mikelid1 (4-core).
+        //   Note: the failure was intermittent.  this test would fail about 1 in 2 times on mikelid1
+        // (4-core).
 
         public static IEnumerable<object[]> SelectManyUnorderedData(int[] counts)
         {
@@ -659,7 +662,8 @@ namespace System.Linq.Parallel.Tests
             int expansion
         )
         {
-            // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is at which index isn't actually guaranteed, but an
+            // effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);
@@ -703,7 +707,8 @@ namespace System.Linq.Parallel.Tests
             int expansion
         )
         {
-            // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is at which index isn't actually guaranteed, but an
+            // effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);
@@ -837,7 +842,8 @@ namespace System.Linq.Parallel.Tests
             int expansion
         )
         {
-            // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is at which index isn't actually guaranteed, but an
+            // effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);
@@ -884,7 +890,8 @@ namespace System.Linq.Parallel.Tests
             int expansion
         )
         {
-            // For unordered collections, which element is at which index isn't actually guaranteed, but an effect of the implementation.
+            // For unordered collections, which element is at which index isn't actually guaranteed, but an
+            // effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             IntegerRangeSet seen = new IntegerRangeSet(0, count * expansion);

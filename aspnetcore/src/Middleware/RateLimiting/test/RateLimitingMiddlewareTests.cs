@@ -479,7 +479,8 @@ public class RateLimitingMiddlewareTests
         var endpointName1 = "myEndpoint1";
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
-        // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
+        // Two policies with the same partition key should not collide, because DefaultKeyType has reference
+        // equality
         options.Value.AddPolicy<string>(
             endpointName1,
             new TestRateLimiterPolicy(duplicateKey, 404, false)
@@ -526,7 +527,8 @@ public class RateLimitingMiddlewareTests
         var endpointName1 = "myEndpoint1";
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
-        // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
+        // Two policies with the same partition key should not collide, because DefaultKeyType has reference
+        // equality
         options.Value.AddPolicy<string>(
             endpointName1,
             key =>

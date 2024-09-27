@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
 #pragma warning disable IDE0060 // Remove unused parameter
         /// <summary>
-        /// For testing purposes only. Razor does not use MEF composition for host services so we need to return a mock.
+        /// For testing purposes only. Razor does not use MEF composition for host services so we need to
+        // return a mock.
         /// </summary>
         public static RazorGlobalOptions GetGlobalOptions(Workspace workspace) =>
             new(new TestGlobalOptionService());

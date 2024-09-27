@@ -6,9 +6,12 @@
 
     // Thrown when the AppVerifier fails an assert.
 
-    // This type is used solely as a support / diagnostics tool and will never appear over the normal course of an application.
-    // Specifically, it will never cross an AppDomain boundary, and we don't want to mark it as [Serializable] since that is
-    // essentially a public contract, and the AppVerifier feature has no public API surface. We want to retain the ability to
+    // This type is used solely as a support / diagnostics tool and will never appear over the normal
+    // course of an application.
+    // Specifically, it will never cross an AppDomain boundary, and we don't want to mark it as
+    // [Serializable] since that is
+    // essentially a public contract, and the AppVerifier feature has no public API surface. We want to
+    // retain the ability to
     // change this feature on a whim without risk of breaking anybody.
     [SuppressMessage(
         "Microsoft.Usage",

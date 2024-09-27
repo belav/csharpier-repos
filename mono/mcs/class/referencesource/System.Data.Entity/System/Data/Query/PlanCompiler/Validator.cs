@@ -351,7 +351,8 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         /// <remarks>
         /// BitVec can be a struct because it contains a readonly reference to an int[].
-        /// This code is a copy of System.Collections.BitArray so that we can have an efficient implementation of Minus.
+        /// This code is a copy of System.Collections.BitArray so that we can have an efficient
+        // implementation of Minus.
         /// </remarks>
         internal struct BitVec
         {

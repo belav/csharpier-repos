@@ -25,11 +25,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// * In non-speculative scenarios, the identifier for the file being bound.
-        /// * In speculative scenarios, the identifier for the file from the original compilation used as the speculation context.
-        /// * In EE scenarios, the identifier for the file from the original compilation used as the evaluation context.
+        /// * In speculative scenarios, the identifier for the file from the original compilation used as
+        // the speculation context.
+        /// * In EE scenarios, the identifier for the file from the original compilation used as the
+        // evaluation context.
         ///
-        /// This is <see langword="null"/> in some scenarios, such as the binder used for <see cref="CSharpCompilation.Conversions" />
-        /// or the binder used to bind usings in <see cref="CSharpCompilation.UsingsFromOptionsAndDiagnostics"/>.
+        /// This is <see langword="null"/> in some scenarios, such as the binder used for <see
+        // cref="CSharpCompilation.Conversions" />
+        /// or the binder used to bind usings in <see
+        // cref="CSharpCompilation.UsingsFromOptionsAndDiagnostics"/>.
         /// </summary>
         internal readonly FileIdentifier? AssociatedFileIdentifier;
 
@@ -195,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            // There's supposed to be an overrider of this method (e.g. SwitchExpressionArmBinder) for the arm in the chain.
+            // There's supposed to be an overrider of this method (e.g. SwitchExpressionArmBinder) for the arm
+            // in the chain.
             throw ExceptionUtilities.Unreachable();
         }
 

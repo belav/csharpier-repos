@@ -74,7 +74,9 @@ namespace Microsoft.Extensions.Logging.Console
         /// Gets the log level for the specified switch.
         /// </summary>
         /// <param name="name">The name of the switch to look up</param>
-        /// <param name="level">An out parameter that will be set to the value of the switch if it is found. If the switch is not found, the method returns false and sets the value of level to LogLevel.None</param>
+        /// <param name="level">An out parameter that will be set to the value of the switch if it is found.
+        // If the switch is not found, the method returns false and sets the value of level to
+        // LogLevel.None</param>
         /// <returns>True if the switch was found, otherwise false.</returns>
         /// <exception cref="InvalidOperationException"></exception>
         public bool TryGetSwitch(string name, out LogLevel level)

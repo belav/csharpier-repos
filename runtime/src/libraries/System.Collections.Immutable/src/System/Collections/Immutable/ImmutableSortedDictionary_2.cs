@@ -297,9 +297,11 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Applies a given set of key=value pairs to an immutable dictionary, replacing any conflicting keys in the resulting dictionary.
+        /// Applies a given set of key=value pairs to an immutable dictionary, replacing any conflicting
+        // keys in the resulting dictionary.
         /// </summary>
-        /// <param name="items">The key=value pairs to set on the map.  Any keys that conflict with existing keys will overwrite the previous values.</param>
+        /// <param name="items">The key=value pairs to set on the map.  Any keys that conflict with existing
+        // keys will overwrite the previous values.</param>
         /// <returns>An immutable dictionary.</returns>
         public ImmutableSortedDictionary<TKey, TValue> SetItems(
             IEnumerable<KeyValuePair<TKey, TValue>> items
@@ -382,7 +384,8 @@ namespace System.Collections.Immutable
                 }
                 else
                 {
-                    // When the key comparer is the same but the value comparer is different, we don't need a whole new tree
+                    // When the key comparer is the same but the value comparer is different, we don't need a whole new
+                    // tree
                     // because the structure of the tree does not depend on the value comparer.
                     // We just need a new root node to store the new value comparer.
                     return new ImmutableSortedDictionary<TKey, TValue>(
@@ -459,9 +462,11 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Applies a given set of key=value pairs to an immutable dictionary, replacing any conflicting keys in the resulting dictionary.
+        /// Applies a given set of key=value pairs to an immutable dictionary, replacing any conflicting
+        // keys in the resulting dictionary.
         /// </summary>
-        /// <param name="items">The key=value pairs to set on the map.  Any keys that conflict with existing keys will overwrite the previous values.</param>
+        /// <param name="items">The key=value pairs to set on the map.  Any keys that conflict with existing
+        // keys will overwrite the previous values.</param>
         /// <returns>An immutable dictionary.</returns>
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.SetItems(
             IEnumerable<KeyValuePair<TKey, TValue>> items
@@ -560,7 +565,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="key">The key of the element to remove.</param>
         /// <returns>
-        /// true if the element is successfully removed; otherwise, false.  This method also returns false if <paramref name="key"/> was not found in the original <see cref="IDictionary{TKey, TValue}"/>.
+        /// true if the element is successfully removed; otherwise, false.  This method also returns false
+        // if <paramref name="key"/> was not found in the original <see cref="IDictionary{TKey, TValue}"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="key"/> is null.
         /// </exception>
@@ -613,7 +619,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Gets a value indicating whether the <see cref="IDictionary"/> object has a fixed size.
         /// </summary>
-        /// <returns>true if the <see cref="IDictionary"/> object has a fixed size; otherwise, false.</returns>
+        /// <returns>true if the <see cref="IDictionary"/> object has a fixed size; otherwise,
+        // false.</returns>
         bool IDictionary.IsFixedSize
         {
             get { return true; }
@@ -630,10 +637,12 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Gets an <see cref="ICollection{T}"/> containing the keys of the <see cref="IDictionary{TKey, TValue}"/>.
+        /// Gets an <see cref="ICollection{T}"/> containing the keys of the <see cref="IDictionary{TKey,
+        // TValue}"/>.
         /// </summary>
         /// <returns>
-        /// An <see cref="ICollection{T}"/> containing the keys of the object that implements <see cref="IDictionary{TKey, TValue}"/>.
+        /// An <see cref="ICollection{T}"/> containing the keys of the object that implements <see
+        // cref="IDictionary{TKey, TValue}"/>.
         ///   </returns>
         ICollection IDictionary.Keys
         {
@@ -641,10 +650,12 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Gets an <see cref="ICollection{T}"/> containing the values in the <see cref="IDictionary{TKey, TValue}"/>.
+        /// Gets an <see cref="ICollection{T}"/> containing the values in the <see cref="IDictionary{TKey,
+        // TValue}"/>.
         /// </summary>
         /// <returns>
-        /// An <see cref="ICollection{T}"/> containing the values in the object that implements <see cref="IDictionary{TKey, TValue}"/>.
+        /// An <see cref="ICollection{T}"/> containing the values in the object that implements <see
+        // cref="IDictionary{TKey, TValue}"/>.
         ///   </returns>
         ICollection IDictionary.Values
         {
@@ -666,7 +677,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Determines whether the <see cref="IDictionary"/> object contains an element with the specified key.
+        /// Determines whether the <see cref="IDictionary"/> object contains an element with the specified
+        // key.
         /// </summary>
         /// <param name="key">The key to locate in the <see cref="IDictionary"/> object.</param>
         /// <returns>
@@ -722,10 +734,14 @@ namespace System.Collections.Immutable
         #region ICollection Methods
 
         /// <summary>
-        /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+        /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a
+        // particular <see cref="Array"/> index.
         /// </summary>
-        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based indexing.</param>
-        /// <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the
+        // elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based
+        // indexing.</param>
+        /// <param name="index">The zero-based index in <paramref name="array"/> at which copying
+        // begins.</param>
         void ICollection.CopyTo(Array array, int index)
         {
             _root.CopyTo(array, index, this.Count);
@@ -738,7 +754,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Gets an object that can be used to synchronize access to the <see cref="ICollection"/>.
         /// </summary>
-        /// <returns>An object that can be used to synchronize access to the <see cref="ICollection"/>.</returns>
+        /// <returns>An object that can be used to synchronize access to the <see
+        // cref="ICollection"/>.</returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         object ICollection.SyncRoot
         {
@@ -746,9 +763,11 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Gets a value indicating whether access to the <see cref="ICollection"/> is synchronized (thread safe).
+        /// Gets a value indicating whether access to the <see cref="ICollection"/> is synchronized (thread
+        // safe).
         /// </summary>
-        /// <returns>true if access to the <see cref="ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
+        /// <returns>true if access to the <see cref="ICollection"/> is synchronized (thread safe);
+        // otherwise, false.</returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         bool ICollection.IsSynchronized
         {
@@ -832,11 +851,13 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Attempts to discover an <see cref="ImmutableSortedDictionary{TKey, TValue}"/> instance beneath some enumerable sequence
+        /// Attempts to discover an <see cref="ImmutableSortedDictionary{TKey, TValue}"/> instance beneath
+        // some enumerable sequence
         /// if one exists.
         /// </summary>
         /// <param name="sequence">The sequence that may have come from an immutable map.</param>
-        /// <param name="other">Receives the concrete <see cref="ImmutableSortedDictionary{TKey, TValue}"/> typed value if one can be found.</param>
+        /// <param name="other">Receives the concrete <see cref="ImmutableSortedDictionary{TKey, TValue}"/>
+        // typed value if one can be found.</param>
         /// <returns><c>true</c> if the cast was successful; <c>false</c> otherwise.</returns>
         private static bool TryCastToImmutableMap(
             IEnumerable<KeyValuePair<TKey, TValue>> sequence,
@@ -862,8 +883,11 @@ namespace System.Collections.Immutable
         /// Bulk adds entries to the map.
         /// </summary>
         /// <param name="items">The entries to add.</param>
-        /// <param name="overwriteOnCollision"><c>true</c> to allow the <paramref name="items"/> sequence to include duplicate keys and let the last one win; <c>false</c> to throw on collisions.</param>
-        /// <param name="avoidToSortedMap"><c>true</c> when being called from <see cref="WithComparers(IComparer{TKey}, IEqualityComparer{TValue})"/> to avoid a stack overflow.</param>
+        /// <param name="overwriteOnCollision"><c>true</c> to allow the <paramref name="items"/> sequence to
+        // include duplicate keys and let the last one win; <c>false</c> to throw on collisions.</param>
+        /// <param name="avoidToSortedMap"><c>true</c> when being called from <see
+        // cref="WithComparers(IComparer{TKey}, IEqualityComparer{TValue})"/> to avoid a stack
+        // overflow.</param>
         private ImmutableSortedDictionary<TKey, TValue> AddRange(
             IEnumerable<KeyValuePair<TKey, TValue>> items,
             bool overwriteOnCollision,
@@ -913,7 +937,8 @@ namespace System.Collections.Immutable
         /// Creates a wrapping collection type around a root node.
         /// </summary>
         /// <param name="root">The root node to wrap.</param>
-        /// <param name="adjustedCountIfDifferentRoot">The number of elements in the new tree, assuming it's different from the current tree.</param>
+        /// <param name="adjustedCountIfDifferentRoot">The number of elements in the new tree, assuming it's
+        // different from the current tree.</param>
         /// <returns>A wrapping collection type for the new tree.</returns>
         private ImmutableSortedDictionary<TKey, TValue> Wrap(
             Node root,

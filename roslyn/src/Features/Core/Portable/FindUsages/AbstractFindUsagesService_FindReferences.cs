@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            // If this is a symbol from a metadata-as-source project, then map that symbol back to a symbol in the primary workspace.
+            // If this is a symbol from a metadata-as-source project, then map that symbol back to a symbol in
+            // the primary workspace.
             var symbolAndProject = await FindUsagesHelpers
                 .GetRelevantSymbolAndProjectAtPositionAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);

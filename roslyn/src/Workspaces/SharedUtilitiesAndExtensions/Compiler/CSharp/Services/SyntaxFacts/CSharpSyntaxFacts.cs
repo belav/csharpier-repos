@@ -1391,7 +1391,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             switch (node.Kind())
             {
                 // Because fields declarations can define multiple symbols "public int a, b;"
-                // We want to get the VariableDeclarator node inside the field declaration to print out the symbol for the name.
+                // We want to get the VariableDeclarator node inside the field declaration to print out the symbol
+                // for the name.
                 case SyntaxKind.VariableDeclarator:
                     return node.Parent?.Parent?.Kind()
                         is SyntaxKind.FieldDeclaration

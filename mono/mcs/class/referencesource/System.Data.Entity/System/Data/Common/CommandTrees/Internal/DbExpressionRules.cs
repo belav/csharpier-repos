@@ -19,13 +19,16 @@ using System.Linq;
 namespace System.Data.Common.CommandTrees.Internal
 {
     /// <summary>
-    /// Enacapsulates the logic that defines an expression 'rule' which is capable of transforming a candidate <see cref="DbExpression"/>
-    /// into a result DbExpression, and indicating what action should be taken on that result expression by the rule application logic.
+    /// Enacapsulates the logic that defines an expression 'rule' which is capable of transforming a
+    // candidate <see cref="DbExpression"/>
+    /// into a result DbExpression, and indicating what action should be taken on that result expression
+    // by the rule application logic.
     /// </summary>
     internal abstract class DbExpressionRule
     {
         /// <summary>
-        /// Indicates what action the rule processor should take if the rule successfully processes an expression.
+        /// Indicates what action the rule processor should take if the rule successfully processes an
+        // expression.
         /// </summary>
         internal enum ProcessedAction
         {
@@ -46,29 +49,38 @@ namespace System.Data.Common.CommandTrees.Internal
         }
 
         /// <summary>
-        /// Indicates whether <see cref="TryProcess"/> should be called on the specified argument expression.
+        /// Indicates whether <see cref="TryProcess"/> should be called on the specified argument
+        // expression.
         /// </summary>
-        /// <param name="expression">The <see cref="DbExpression"/> that the rule should inspect and determine if processing is possible</param>
-        /// <returns><c>true</c> if the rule can attempt processing of the expression via the <see cref="TryProcess"/> method; otherwise <c>false</c></returns>
+        /// <param name="expression">The <see cref="DbExpression"/> that the rule should inspect and
+        // determine if processing is possible</param>
+        /// <returns><c>true</c> if the rule can attempt processing of the expression via the <see
+        // cref="TryProcess"/> method; otherwise <c>false</c></returns>
         internal abstract bool ShouldProcess(DbExpression expression);
 
         /// <summary>
-        /// Attempts to process the input <paramref name="expression"/> to produce a <paramref name="result"/> <see cref="DbExpression"/>.
+        /// Attempts to process the input <paramref name="expression"/> to produce a <paramref
+        // name="result"/> <see cref="DbExpression"/>.
         /// </summary>
         /// <param name="expression">The input expression that the rule should process</param>
-        /// <param name="result">The result expression produced by the rule if processing was successful</param>
-        /// <returns><c>true</c> if the rule was able to successfully process the input expression and produce a result expression; otherwise <c>false</c></returns>
+        /// <param name="result">The result expression produced by the rule if processing was
+        // successful</param>
+        /// <returns><c>true</c> if the rule was able to successfully process the input expression and
+        // produce a result expression; otherwise <c>false</c></returns>
         internal abstract bool TryProcess(DbExpression expression, out DbExpression result);
 
         /// <summary>
-        /// Indicates what action - as a <see cref="ProcessedAction"/> value - the rule processor should take if <see cref="TryProcess"/> returns true.
+        /// Indicates what action - as a <see cref="ProcessedAction"/> value - the rule processor should
+        // take if <see cref="TryProcess"/> returns true.
         /// </summary>
         internal abstract ProcessedAction OnExpressionProcessed { get; }
     }
 
     /// <summary>
-    /// Abstract base class for a DbExpression visitor that can apply a collection of <see cref="DbExpressionRule"/>s during the visitor pass, returning the final result expression.
-    /// This class encapsulates the rule application logic that applies regardless of how the ruleset - modelled as the abstract <see cref="GetRules"/> method - is provided.
+    /// Abstract base class for a DbExpression visitor that can apply a collection of <see
+    // cref="DbExpressionRule"/>s during the visitor pass, returning the final result expression.
+    /// This class encapsulates the rule application logic that applies regardless of how the ruleset -
+    // modelled as the abstract <see cref="GetRules"/> method - is provided.
     /// </summary>
     internal abstract class DbExpressionRuleProcessingVisitor : DefaultExpressionVisitor
     {

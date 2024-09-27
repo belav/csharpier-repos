@@ -287,7 +287,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Removes an attribute from the list, using its name. If there are more than one attributes with this name, they will all be removed.
+        /// Removes an attribute from the list, using its name. If there are more than one attributes with
+        // this name, they will all be removed.
         /// </summary>
         /// <param name="name">The attribute's name. May not be null.</param>
         public void Remove(string name)

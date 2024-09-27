@@ -36,8 +36,10 @@ namespace Internal.Reflection.Execution.FieldAccessors
         {
             if (RuntimeAugments.IsValueType(this.DeclaringTypeHandle))
             {
-                // We're being asked to read a field from the value type pointed to by the TypedReference. This code path
-                // avoids boxing that value type by adding this field's offset to the TypedReference's managed pointer.
+                // We're being asked to read a field from the value type pointed to by the TypedReference. This code
+                // path
+                // avoids boxing that value type by adding this field's offset to the TypedReference's managed
+                // pointer.
                 Type targetType = TypedReference.GetTargetType(typedReference);
                 if (!(targetType.TypeHandle.Equals(this.DeclaringTypeHandle)))
                     throw new ArgumentException();
@@ -45,7 +47,8 @@ namespace Internal.Reflection.Execution.FieldAccessors
             }
             else
             {
-                // We're being asked to read a field from a reference type. There's no boxing to optimize out in that case so just handle it as
+                // We're being asked to read a field from a reference type. There's no boxing to optimize out in
+                // that case so just handle it as
                 // if this was a FieldInfo.GetValue() call.
                 object obj = TypedReference.ToObject(typedReference);
                 return GetField(obj);
@@ -70,9 +73,12 @@ namespace Internal.Reflection.Execution.FieldAccessors
         {
             if (RuntimeAugments.IsValueType(this.DeclaringTypeHandle))
             {
-                // We're being asked to store a field into the value type pointed to by the TypedReference. This code path
-                // bypasses boxing that value type by adding this field's offset to the TypedReference's managed pointer.
-                // (Otherwise, the store would go into a useless temporary copy rather than the intended destination.)
+                // We're being asked to store a field into the value type pointed to by the TypedReference. This
+                // code path
+                // bypasses boxing that value type by adding this field's offset to the TypedReference's managed
+                // pointer.
+                // (Otherwise, the store would go into a useless temporary copy rather than the intended
+                // destination.)
                 Type targetType = TypedReference.GetTargetType(typedReference);
                 if (!(targetType.TypeHandle.Equals(this.DeclaringTypeHandle)))
                     throw new ArgumentException();
@@ -84,7 +90,8 @@ namespace Internal.Reflection.Execution.FieldAccessors
             }
             else
             {
-                // We're being asked to store a field from a reference type. There's no boxing to bypass in that case so just handle it as
+                // We're being asked to store a field from a reference type. There's no boxing to bypass in that
+                // case so just handle it as
                 // if this was a FieldInfo.SetValue() call (but using SetValueDirect's argument coercing semantics)
                 object obj = TypedReference.ToObject(typedReference);
                 if (obj == null)

@@ -31,7 +31,8 @@ internal sealed class QueryCollectionInternal : IQueryCollection
     /// Gets the associated set of values from the collection.
     /// </summary>
     /// <param name="key">The key name.</param>
-    /// <returns>the associated value from the collection as a StringValues or StringValues.Empty if the key is not present.</returns>
+    /// <returns>the associated value from the collection as a StringValues or StringValues.Empty if the
+    // key is not present.</returns>
     public StringValues this[string key] =>
         TryGetValue(key, out var value) ? value : StringValues.Empty;
 
@@ -50,7 +51,8 @@ internal sealed class QueryCollectionInternal : IQueryCollection
     /// Determines whether the <see cref="QueryCollection" /> contains a specific key.
     /// </summary>
     /// <param name="key">The key.</param>
-    /// <returns>true if the <see cref="QueryCollection" /> contains a specific key; otherwise, false.</returns>
+    /// <returns>true if the <see cref="QueryCollection" /> contains a specific key; otherwise,
+    // false.</returns>
     public bool ContainsKey(string key) => Store.ContainsKey(key);
 
     /// <summary>
@@ -58,20 +60,23 @@ internal sealed class QueryCollectionInternal : IQueryCollection
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="value">The value.</param>
-    /// <returns>true if the <see cref="QueryCollection" /> contains the key; otherwise, false.</returns>
+    /// <returns>true if the <see cref="QueryCollection" /> contains the key; otherwise,
+    // false.</returns>
     public bool TryGetValue(string key, out StringValues value) =>
         Store.TryGetValue(key, out value);
 
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
-    /// <returns>An <see cref="Enumerator" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="Enumerator" /> object that can be used to iterate through the
+    // collection.</returns>
     public Enumerator GetEnumerator() => new Enumerator(Store.GetEnumerator());
 
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
-    /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the
+    // collection.</returns>
     IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
         KeyValuePair<string, StringValues>
     >.GetEnumerator() => Store.GetEnumerator();
@@ -79,7 +84,8 @@ internal sealed class QueryCollectionInternal : IQueryCollection
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
-    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the
+    // collection.</returns>
     IEnumerator IEnumerable.GetEnumerator() => Store.GetEnumerator();
 
     /// <summary>

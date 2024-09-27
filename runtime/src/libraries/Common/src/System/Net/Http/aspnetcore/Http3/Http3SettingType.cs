@@ -30,14 +30,16 @@ namespace System.Net.Http
 
         /// <summary>
         /// SETTINGS_QPACK_BLOCKED_STREAMS
-        /// The maximum number of request streams that can be blocked waiting for QPack instructions. The default is 0.
+        /// The maximum number of request streams that can be blocked waiting for QPack instructions. The
+        // default is 0.
         /// https://tools.ietf.org/html/draft-ietf-quic-qpack-11#section-5
         /// </summary>
         QPackBlockedStreams = 0x7,
 
         /// <summary>
         /// SETTINGS_ENABLE_WEBTRANSPORT, default is 0 (off)
-        /// https://www.ietf.org/archive/id/draft-ietf-webtrans-http3-01.html#name-http-3-settings-parameter-r
+        ///
+        // https://www.ietf.org/archive/id/draft-ietf-webtrans-http3-01.html#name-http-3-settings-parameter-r
         /// </summary>
         EnableWebTransport = 0x2b603742,
 

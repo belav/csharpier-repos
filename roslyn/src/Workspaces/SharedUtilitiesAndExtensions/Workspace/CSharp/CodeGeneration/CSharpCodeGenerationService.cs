@@ -874,7 +874,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 && info.Context.BestLocation is null
             )
             {
-                // This path supports top-level statement insertion. It only applies when best location is unspecified
+                // This path supports top-level statement insertion. It only applies when best location is
+                // unspecified
                 // so the fallback code below can handle cases where the insertion location is provided.
                 //
                 // Insert the new global statement(s) at the end of any current global statements.
@@ -898,8 +899,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 && statement.IsParentKind(SyntaxKind.GlobalStatement)
             )
             {
-                // We are adding a statement to a global statement in script, where the CompilationUnitSyntax is not a
-                // statement container. If the global statement is not already a block, create a block which can hold
+                // We are adding a statement to a global statement in script, where the CompilationUnitSyntax is not
+                // a
+                // statement container. If the global statement is not already a block, create a block which can
+                // hold
                 // both the original statement and any new statements we are adding to it.
                 var block = statement as BlockSyntax ?? SyntaxFactory.Block(statement);
                 return Cast<TDeclarationNode>(

@@ -30,7 +30,8 @@ public readonly struct EventCallbackWorkItem
     /// Invokes the delegate associated with this <see cref="EventCallbackWorkItem"/>.
     /// </summary>
     /// <param name="arg">The argument to provide to the delegate. May be <c>null</c>.</param>
-    /// <returns>A <see cref="Task"/> then will complete asynchronously once the delegate has completed.</returns>
+    /// <returns>A <see cref="Task"/> then will complete asynchronously once the delegate has
+    // completed.</returns>
     public Task InvokeAsync(object? arg)
     {
         return InvokeAsync<object?>(_delegate, arg);

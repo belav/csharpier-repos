@@ -277,7 +277,8 @@ namespace System.ServiceModel.Dispatcher
                         && !durableInstance.CurrentOperationInvocation.IsCompleted
                     )
                     {
-                        // If we are here, it means the workflow instance completed, terminated, or otherwise unloaded without
+                        // If we are here, it means the workflow instance completed, terminated, or otherwise unloaded
+                        // without
                         // completing the current operation invocation. In such case, we want to make the best effort to let
                         // service model to consider this operation invocation failed.
                         try

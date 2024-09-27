@@ -1218,7 +1218,8 @@ namespace Microsoft.CodeAnalysis
 
             private void AnalyzeSymbol(SymbolAnalysisContext context)
             {
-                // Ensure we are not invoked for merged namespace symbol, but instead for constituent namespace scoped to the source assembly.
+                // Ensure we are not invoked for merged namespace symbol, but instead for constituent namespace
+                // scoped to the source assembly.
                 var ns = (INamespaceSymbol)context.Symbol;
                 if (
                     ns.ContainingAssembly != context.Compilation.Assembly
@@ -1630,8 +1631,10 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// This analyzer is intended to be used only when concurrent execution is enabled for analyzers.
-        /// This analyzer will deadlock if the driver runs analyzers on a single thread OR takes a lock around callbacks into this analyzer to prevent concurrent analyzer execution
-        /// Former indicates a bug in the test using this analyzer and the latter indicates a bug in the analyzer driver.
+        /// This analyzer will deadlock if the driver runs analyzers on a single thread OR takes a lock
+        // around callbacks into this analyzer to prevent concurrent analyzer execution
+        /// Former indicates a bug in the test using this analyzer and the latter indicates a bug in the
+        // analyzer driver.
         /// </summary>
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         public class ConcurrentAnalyzer : DiagnosticAnalyzer
@@ -1718,8 +1721,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// This analyzer will report diagnostics only if it receives any concurrent action callbacks, which would be a
-        /// bug in the analyzer driver as this analyzer doesn't invoke <see cref="AnalysisContext.EnableConcurrentExecution"/>.
+        /// This analyzer will report diagnostics only if it receives any concurrent action callbacks, which
+        // would be a
+        /// bug in the analyzer driver as this analyzer doesn't invoke <see
+        // cref="AnalysisContext.EnableConcurrentExecution"/>.
         /// </summary>
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         public class NonConcurrentAnalyzer : DiagnosticAnalyzer

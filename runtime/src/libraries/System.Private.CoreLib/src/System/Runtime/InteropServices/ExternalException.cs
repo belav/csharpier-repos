@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System.Runtime.InteropServices
 {
     /// <summary>
-    /// The base exception type for all COM interop exceptions and structured exception handling (SEH) exceptions.
+    /// The base exception type for all COM interop exceptions and structured exception handling (SEH)
+    // exceptions.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

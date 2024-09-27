@@ -178,7 +178,8 @@ namespace System.Xml.Serialization
             return null;
         }
 
-        /// <include file='doc\XmlCodeExporter.uex' path='docs/doc[@for="XmlCodeExporter.IncludeMetadata"]/*' />
+        /// <include file='doc\XmlCodeExporter.uex'
+        // path='docs/doc[@for="XmlCodeExporter.IncludeMetadata"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -293,7 +294,8 @@ namespace System.Xml.Serialization
                     != arrayMapping.Elements[i].Mapping.DefaultElementName
                 )
                 {
-                    // in the case we need custom attributes to serialize an array instance, we cannot include arrau mapping without explicit reference.
+                    // in the case we need custom attributes to serialize an array instance, we cannot include arrau
+                    // mapping without explicit reference.
                     return false;
                 }
             }

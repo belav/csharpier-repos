@@ -497,17 +497,17 @@ namespace System.Windows.Forms
             this.rows.Add(new_row);
             new_row.OnControlAdded(control, 0);
         }
-        /*
-        private Region FindBackgroundRegion ()
-        {
-            Region r = new Region (this.Bounds);
+/*
+private Region FindBackgroundRegion ()
+{
+Region r = new Region (this.Bounds);
 
-            foreach (Control c in this.Controls)
-                r.Exclude (c.Bounds);
+foreach (Control c in this.Controls)
+r.Exclude (c.Bounds);
 
-            return r;
-        }
-        */
+return r;
+}
+*/
         #endregion
 
         #region Nested Classes

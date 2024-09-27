@@ -3,16 +3,16 @@ Copyright (c) 2000 Microsoft Corporation
 
 Module Name:
 
-    _FixedSizeReader.cs
+_FixedSizeReader.cs
 
 Abstract:
-    The class is a simple wrapper on top of a read stream.
-    It will read the exact number of bytes requested.
-    It operates either sync or async.
+The class is a simple wrapper on top of a read stream.
+It will read the exact number of bytes requested.
+It operates either sync or async.
 
 Author:
 
-    Alexei Vopilov  Aug 18 2003
+Alexei Vopilov  Aug 18 2003
 
 Revision History:
 
@@ -116,7 +116,8 @@ namespace System.Net
         {
             if (bytes == 0)
             {
-                // 0 bytes was requested or EOF in the beginning of a frame, the caller should decide whether it's OK
+                // 0 bytes was requested or EOF in the beginning of a frame, the caller should decide whether it's
+                // OK
                 if (_TotalRead == 0)
                 {
                     _Request.CompleteRequest(0);

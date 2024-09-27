@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.Diagnostics;
@@ -34,7 +34,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.TypeConverterAttribute'/> class with the
+        ///       Initializes a new instance of the <see
+        // cref='System.ComponentModel.TypeConverterAttribute'/> class with the
         ///       default type converter, which
         ///       is an
         ///       empty string ("").
@@ -46,7 +47,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.TypeConverterAttribute'/> class, using
+        /// <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.TypeConverterAttribute'/> class, using
         ///    the specified type as the data converter for the object this attribute
         ///    is bound
         ///    to.</para>
@@ -57,8 +59,10 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.TypeConverterAttribute'/> class, using
-        ///    the specified type name as the data converter for the object this attribute is bound to.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.TypeConverterAttribute'/> class, using
+        ///    the specified type name as the data converter for the object this attribute is bound
+        // to.</para>
         /// </devdoc>
         public TypeConverterAttribute(string typeName)
         {

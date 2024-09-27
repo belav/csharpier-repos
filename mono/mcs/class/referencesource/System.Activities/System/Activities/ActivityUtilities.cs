@@ -903,7 +903,8 @@ namespace System.Activities
                     }
                 }
 
-                // NOTE: At this point the declared environment is complete (either we're using the parent or we've got a new one)
+                // NOTE: At this point the declared environment is complete (either we're using the parent or we've
+                // got a new one)
                 if (newPublicEnvironment == null)
                 {
                     activity.PublicEnvironment = new ActivityLocationReferenceEnvironment(
@@ -1164,7 +1165,8 @@ namespace System.Activities
             }
         }
 
-        // This API is only valid from ProcessActivityCallbacks.  It will cache the rest of the subtree rooted at the
+        // This API is only valid from ProcessActivityCallbacks.  It will cache the rest of the subtree
+        // rooted at the
         // provided activity allowing inspection of child metadata before the normal caching pass hits it.
         public static void FinishCachingSubtree(
             ChildActivity subtreeRoot,
@@ -1931,9 +1933,12 @@ namespace System.Activities
                             useLocationReferenceValue
                         );
 
-                        // Create an "empty" (locationReference = null) instance to put in the cache. This empty instance will only be used to create other instances,
-                        // including the instance returned from this method. The cached instance will never be included in an activity tree, so the cached instance's
-                        // rootActivity field will not be filled in and thus will not pin all the objects in the activity tree. The cached empty instance has a null
+                        // Create an "empty" (locationReference = null) instance to put in the cache. This empty instance
+                        // will only be used to create other instances,
+                        // including the instance returned from this method. The cached instance will never be included in
+                        // an activity tree, so the cached instance's
+                        // rootActivity field will not be filled in and thus will not pin all the objects in the activity
+                        // tree. The cached empty instance has a null
                         // locationReference because locationReference also pins parts of activity tree.
                         existingInstance = (ILocationReferenceExpression)
                             Activator.CreateInstance(

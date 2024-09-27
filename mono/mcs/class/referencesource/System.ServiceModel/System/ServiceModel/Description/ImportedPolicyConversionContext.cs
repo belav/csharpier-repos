@@ -364,7 +364,8 @@ namespace System.ServiceModel.Description
                 //   e.g. given all the policy alternatives in all the messages in a contract,
                 //   we can enumerate over all the possilbe policy selections.
                 //
-                // Note: A general implementation of this method would differ in that it would probably use a List<T> or an array instead of
+                // Note: A general implementation of this method would differ in that it would probably use a
+                // List<T> or an array instead of
                 // a dictionary and it would yield clones of the the counterValue.
                 //  - We don't clone because we know that we don't need to based on our useage
                 //  - We use a dictionary because we need to correlate the selections with the alternative source.
@@ -375,7 +376,8 @@ namespace System.ServiceModel.Description
                 {
                     Dictionary<K, V> counterValue = new Dictionary<K, V>(sets.Count);
 
-                    // The iterator is implemented as a counter with each digit being an IEnumerator over one of the sets.
+                    // The iterator is implemented as a counter with each digit being an IEnumerator over one of the
+                    // sets.
                     KeyValuePair<K, IEnumerator<V>>[] digits = InitializeCounter<K, V>(
                         sets,
                         counterValue

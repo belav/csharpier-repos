@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
         internal static string DotNetHome { get; } = GetDotNetHome();
 
-        // Compare to https://github.com/aspnet/BuildTools/blob/314c98e4533217a841ff9767bb38e144eb6c93e4/tools/KoreBuild.Console/Commands/CommandContext.cs#L76
+        // Compare to
+        // https://github.com/aspnet/BuildTools/blob/314c98e4533217a841ff9767bb38e144eb6c93e4/tools/KoreBuild.Console/Commands/CommandContext.cs#L76
         public static string GetDotNetHome()
         {
             var dotnetHome = Environment.GetEnvironmentVariable("DOTNET_HOME");

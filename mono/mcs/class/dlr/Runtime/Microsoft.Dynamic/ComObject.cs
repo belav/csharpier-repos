@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Microsoft Public License. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Microsoft Public License, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Microsoft Public License.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Microsoft Public License. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Microsoft Public License, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Microsoft Public License.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 using System;
 using Microsoft;
 #if !SILVERLIGHT // ComObject
@@ -36,7 +36,8 @@ namespace Microsoft.Scripting
 {
 #endif
     /// <summary>
-    /// This is a helper class for runtime-callable-wrappers of COM instances. We create one instance of this type
+    /// This is a helper class for runtime-callable-wrappers of COM instances. We create one instance of
+    // this type
     /// for every generic RCW instance.
     /// </summary>
     internal class ComObject : IDynamicMetaObjectProvider
@@ -161,7 +162,8 @@ namespace Microsoft.Scripting
 
         internal static bool IsComObject(object obj)
         {
-            // we can't use System.Runtime.InteropServices.Marshal.IsComObject(obj) since it doesn't work in partial trust
+            // we can't use System.Runtime.InteropServices.Marshal.IsComObject(obj) since it doesn't work in
+            // partial trust
             return obj != null && ComObjectType.IsAssignableFrom(obj.GetType());
         }
     }

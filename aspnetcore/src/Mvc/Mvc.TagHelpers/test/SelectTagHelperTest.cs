@@ -130,7 +130,8 @@ public class SelectTagHelperTest
         }
     }
 
-    // Items property value, attribute name, attribute value, expected items value (passed to generator). Provides
+    // Items property value, attribute name, attribute value, expected items value (passed to
+    // generator). Provides
     // cross product of Items and attributes. These values should not interact.
     public static TheoryData<
         IEnumerable<SelectListItem>,

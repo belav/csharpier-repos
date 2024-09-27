@@ -47,9 +47,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
         {
             // For the single document case, that is the only doc we want to process.
             //
-            // Note: context.Document may be null in the case where the client is asking about a document that we have
+            // Note: context.Document may be null in the case where the client is asking about a document that
+            // we have
             // since removed from the workspace.  In this case, we don't really have anything to process.
-            // GetPreviousResults will be used to properly realize this and notify the client that the doc is gone.
+            // GetPreviousResults will be used to properly realize this and notify the client that the doc is
+            // gone.
             return context.Document == null
                 ? ImmutableArray<Document>.Empty
                 : ImmutableArray.Create(context.Document);

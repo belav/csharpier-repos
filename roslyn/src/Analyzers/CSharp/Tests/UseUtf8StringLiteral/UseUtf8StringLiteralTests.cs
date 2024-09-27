@@ -739,7 +739,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         [Fact]
         public async Task TestUsingWithParamArray()
         {
-            // From: https://github.com/dotnet/roslyn/blob/0c7c0b33f0871fc4308eb2d75d77b87fc9293290/src/Compilers/CSharp/Test/IOperation/IOperation/IOperationTests_IUsingStatement.cs#L1189-L1194
+            // From:
+            // https://github.com/dotnet/roslyn/blob/0c7c0b33f0871fc4308eb2d75d77b87fc9293290/src/Compilers/CSharp/Test/IOperation/IOperation/IOperationTests_IUsingStatement.cs#L1189-L1194
             // There is an array creation operation for the param array
             await new VerifyCS.Test
             {
@@ -766,7 +767,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         [Theory]
         // Standard C# escape characters
         [InlineData(new byte[] { 0, 7, 8, 12, 11 })]
-        // Various cases copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http2/HuffmanDecodingTests.cs
+        // Various cases copied from
+        // https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http2/HuffmanDecodingTests.cs
         [InlineData(new byte[] { 0xff, 0xcf })]
         [InlineData(new byte[] { 0b100111_00, 0b101_10100, 0b0_101000_0, 0b0111_1111 })]
         [InlineData(
@@ -795,13 +797,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseUtf8StringLiteral
         [InlineData(new byte[] { 0xfe, 0x53 })]
         [InlineData(new byte[] { 0xff, 0xff, 0xf6, 0xff, 0xff, 0xfd, 0x68 })]
         [InlineData(new byte[] { 0xff, 0xff, 0xf9, 0xff, 0xff, 0xfd, 0x86 })]
-        // Various cases copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http3/QPackDecoderTest.cs
+        // Various cases copied from
+        // https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/Tests/System/Net/aspnetcore/Http3/QPackDecoderTest.cs
         [InlineData(new byte[] { 0xa8, 0xbe, 0x16, 0x9c, 0xa3, 0x90, 0xb6, 0x7f })]
         [InlineData(
             new byte[] { 0x37, 0x02, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x6c, 0x61, 0x74, 0x65 }
         )]
         [InlineData(new byte[] { 0x3f, 0x01 })]
-        // DaysInMonth365 from https://github.com/dotnet/runtime/blob/b5a8ece073110140e2d9696cdfdc047ec78c2fa1/src/libraries/System.Private.CoreLib/src/System/DateTime.cs
+        // DaysInMonth365 from
+        // https://github.com/dotnet/runtime/blob/b5a8ece073110140e2d9696cdfdc047ec78c2fa1/src/libraries/System.Private.CoreLib/src/System/DateTime.cs
         [InlineData(new byte[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 })]
         public async Task TestInvalidUtf8Strings(byte[] bytes)
         {
@@ -823,7 +827,8 @@ public class C
         [Fact]
         public async Task TestDoesNotOfferForControlCharacters()
         {
-            // Copied from https://github.com/dotnet/runtime/blob/6a889d234267a4c96ed21d0e1660dce787d78a38/src/libraries/Microsoft.CSharp/src/Microsoft/CSharp/RuntimeBinder/Semantics/Conversion.cs
+            // Copied from
+            // https://github.com/dotnet/runtime/blob/6a889d234267a4c96ed21d0e1660dce787d78a38/src/libraries/Microsoft.CSharp/src/Microsoft/CSharp/RuntimeBinder/Semantics/Conversion.cs
             var input = """
                 class C
                 {

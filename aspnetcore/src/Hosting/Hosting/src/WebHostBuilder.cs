@@ -85,10 +85,12 @@ public class WebHostBuilder : IWebHostBuilder
     }
 
     /// <summary>
-    /// Adds a delegate for configuring additional services for the host or web application. This may be called
+    /// Adds a delegate for configuring additional services for the host or web application. This may be
+    // called
     /// multiple times.
     /// </summary>
-    /// <param name="configureServices">A delegate for configuring the <see cref="IServiceCollection"/>.</param>
+    /// <param name="configureServices">A delegate for configuring the <see
+    // cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public IWebHostBuilder ConfigureServices(Action<IServiceCollection> configureServices)
     {
@@ -98,10 +100,12 @@ public class WebHostBuilder : IWebHostBuilder
     }
 
     /// <summary>
-    /// Adds a delegate for configuring additional services for the host or web application. This may be called
+    /// Adds a delegate for configuring additional services for the host or web application. This may be
+    // called
     /// multiple times.
     /// </summary>
-    /// <param name="configureServices">A delegate for configuring the <see cref="IServiceCollection"/>.</param>
+    /// <param name="configureServices">A delegate for configuring the <see
+    // cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public IWebHostBuilder ConfigureServices(
         Action<WebHostBuilderContext, IServiceCollection> configureServices
@@ -112,13 +116,18 @@ public class WebHostBuilder : IWebHostBuilder
     }
 
     /// <summary>
-    /// Adds a delegate for configuring the <see cref="IConfigurationBuilder"/> that will construct an <see cref="IConfiguration"/>.
+    /// Adds a delegate for configuring the <see cref="IConfigurationBuilder"/> that will construct an
+    // <see cref="IConfiguration"/>.
     /// </summary>
-    /// <param name="configureDelegate">The delegate for configuring the <see cref="IConfigurationBuilder" /> that will be used to construct an <see cref="IConfiguration" />.</param>
+    /// <param name="configureDelegate">The delegate for configuring the <see
+    // cref="IConfigurationBuilder" /> that will be used to construct an <see cref="IConfiguration"
+    // />.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     /// <remarks>
-    /// The <see cref="IConfiguration"/> and <see cref="ILoggerFactory"/> on the <see cref="WebHostBuilderContext"/> are uninitialized at this stage.
-    /// The <see cref="IConfigurationBuilder"/> is pre-populated with the settings of the <see cref="IWebHostBuilder"/>.
+    /// The <see cref="IConfiguration"/> and <see cref="ILoggerFactory"/> on the <see
+    // cref="WebHostBuilderContext"/> are uninitialized at this stage.
+    /// The <see cref="IConfigurationBuilder"/> is pre-populated with the settings of the <see
+    // cref="IWebHostBuilder"/>.
     /// </remarks>
     public IWebHostBuilder ConfigureAppConfiguration(
         Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate

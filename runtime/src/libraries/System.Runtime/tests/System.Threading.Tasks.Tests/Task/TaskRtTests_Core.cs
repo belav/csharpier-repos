@@ -813,12 +813,14 @@ namespace System.Threading.Tasks.Tests
                         {
                             if (useObj)
                             {
-                                //Debug.WriteLine(" - ctor(Func<obj, int>, obj, ct({0})); Start();", preCanceledToken ? "signaled" : "unsignaled");
+                                //Debug.WriteLine(" - ctor(Func<obj, int>, obj, ct({0})); Start();", preCanceledToken ? "signaled" :
+                                // "unsignaled");
                                 f1 = new Task<int>(obj => 42, refObj, ct);
                             }
                             else
                             {
-                                // Debug.WriteLine(" - ctor(Func<int>, ct({0})); Start();", preCanceledToken ? "signaled" : "unsignaled");
+                                // Debug.WriteLine(" - ctor(Func<int>, ct({0})); Start();", preCanceledToken ? "signaled" :
+                                // "unsignaled");
                                 f1 = new Task<int>(() => 42, ct);
                             }
                             if (!preCanceledToken)
@@ -828,12 +830,14 @@ namespace System.Threading.Tasks.Tests
                         {
                             if (useObj)
                             {
-                                // Debug.WriteLine(" - T<int>.F.StartNew(Func<obj, int>, obj, ct({0}))", preCanceledToken ? "signaled" : "unsignaled");
+                                // Debug.WriteLine(" - T<int>.F.StartNew(Func<obj, int>, obj, ct({0}))", preCanceledToken ?
+                                // "signaled" : "unsignaled");
                                 f1 = Task<int>.Factory.StartNew(obj => 42, refObj, ct);
                             }
                             else
                             {
-                                // Debug.WriteLine(" - T<int>.F.StartNew(Func<int>, ct({0}))", preCanceledToken ? "signaled" : "unsignaled");
+                                // Debug.WriteLine(" - T<int>.F.StartNew(Func<int>, ct({0}))", preCanceledToken ? "signaled" :
+                                // "unsignaled");
                                 f1 = Task<int>.Factory.StartNew(() => 42, ct);
                             }
                         }
@@ -977,7 +981,8 @@ namespace System.Threading.Tasks.Tests
             }
         }
 
-        // Test overloads for Task<T> ctor, Task<T>.Factory.StartNew that accept a CancellationToken and TaskCreationOptions
+        // Test overloads for Task<T> ctor, Task<T>.Factory.StartNew that accept a CancellationToken and
+        // TaskCreationOptions
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TestTaskTConstruction_ct_tco()
         {
@@ -1060,7 +1065,8 @@ namespace System.Threading.Tasks.Tests
             }
         }
 
-        // Basic future functionality. This is also covered in scenario unit tests, here we focus on wait functionality, and promises
+        // Basic future functionality. This is also covered in scenario unit tests, here we focus on wait
+        // functionality, and promises
         [Fact]
         public static void RunBasicFutureTest()
         {
@@ -1232,7 +1238,8 @@ namespace System.Threading.Tasks.Tests
                 {
                     promiseValueObserved = promise2.Task.Result;
 
-                    // the following should throw, because t2 will be calling Cancel on promise3 little after we block here
+                    // the following should throw, because t2 will be calling Cancel on promise3 little after we block
+                    // here
                     try
                     {
                         int i = promise3.Task.Result;
@@ -1278,7 +1285,8 @@ namespace System.Threading.Tasks.Tests
                 );
             }
 
-            // Creating a TCS with a promise-style constructor that only allows TaskCreationOptions.AttachedToParent
+            // Creating a TCS with a promise-style constructor that only allows
+            // TaskCreationOptions.AttachedToParent
             try
             {
                 TaskCompletionSource<int> tcs = new TaskCompletionSource<int>(
@@ -1326,7 +1334,8 @@ namespace System.Threading.Tasks.Tests
             }
             catch (InvalidOperationException)
             {
-                // Assert.Fail(string.Format("RunSynchronouslyTest:    > properly threw exception: {0}", e.Message));
+                // Assert.Fail(string.Format("RunSynchronouslyTest:    > properly threw exception: {0}",
+                // e.Message));
             }
             catch (Exception e)
             {
@@ -1920,7 +1929,8 @@ namespace System.Threading.Tasks.Tests
             testWaitAnyWithCT(100, true, false);
         }
 
-        // creates a large number of tasks and does WaitAll on them from a thread of the specified apartment state
+        // creates a large number of tasks and does WaitAll on them from a thread of the specified apartment
+        // state
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         [OuterLoop]
         public static void RunTaskWaitAllTests()
@@ -1961,7 +1971,8 @@ namespace System.Threading.Tasks.Tests
             int nFirstHalfCount = middleCeiling;
             int nSecondHalfCount = nTaskCount - nFirstHalfCount;
 
-            //CancellationTokenSource ctsForSleepAndAckCancelAction = null; // this needs to be allocated every time sleepAndAckCancelAction is about to be used
+            //CancellationTokenSource ctsForSleepAndAckCancelAction = null; // this needs to be allocated every
+            // time sleepAndAckCancelAction is about to be used
             Action<object> emptyAction = delegate(object o) { };
             Action<object> sleepAction = delegate(object o)
             {
@@ -2009,7 +2020,8 @@ namespace System.Threading.Tasks.Tests
                 );
             }
 
-            // test case 2: WaitAll() on a group of tasks half of which is already completed, half of which is blocked when we start the wait
+            // test case 2: WaitAll() on a group of tasks half of which is already completed, half of which is
+            // blocked when we start the wait
             //Debug.WriteLine("  > trying: WaitAll() on a group of tasks half of which is already ");
             //Debug.WriteLine("  >         completed, half of which is blocked when we start the wait");
             DoRunTaskWaitAllTest(
@@ -2034,7 +2046,8 @@ namespace System.Threading.Tasks.Tests
                 );
             }
 
-            // test case 3: WaitAll() on a group of tasks half of which is Canceled, half of which is blocked when we start the wait
+            // test case 3: WaitAll() on a group of tasks half of which is Canceled, half of which is blocked
+            // when we start the wait
             //Debug.WriteLine("  > trying: WaitAll() on a group of tasks half of which is Canceled,");
             //Debug.WriteLine("  >         half of which is blocked when we start the wait");
             DoRunTaskWaitAllTest(
@@ -2164,7 +2177,8 @@ namespace System.Threading.Tasks.Tests
         }
 
         //
-        // the core function for WaitAll tests. Takes 2 types of actions to create tasks, how many copies of each task type
+        // the core function for WaitAll tests. Takes 2 types of actions to create tasks, how many copies of
+        // each task type
         // to create, whether to wait for the completion of the first group, etc
         //
         private static void DoRunTaskWaitAllTest(
@@ -2191,7 +2205,8 @@ namespace System.Threading.Tasks.Tests
                 {
                     CancellationTokenSource taskCTS = new CancellationTokenSource();
 
-                    //Both setting the cancellationtoken to the new task, and passing it in as the state object so that the delegate can acknowledge using it
+                    //Both setting the cancellationtoken to the new task, and passing it in as the state object so that
+                    // the delegate can acknowledge using it
                     tasks[i] = Task.Factory.StartNew(
                         taskAction1,
                         (object)taskCTS.Token,
@@ -2236,7 +2251,8 @@ namespace System.Threading.Tasks.Tests
         }
 
         //
-        // the core function for WaitAll tests. Takes 2 types of actions to create tasks, how many copies of each task type
+        // the core function for WaitAll tests. Takes 2 types of actions to create tasks, how many copies of
+        // each task type
         // to create, whether to wait for the completion of the first group, etc
         //
         private static void DoRunTaskWaitAllTestWithCancellationToken(
@@ -2271,7 +2287,8 @@ namespace System.Threading.Tasks.Tests
             {
                 CancellationTokenSource taskCTS = new CancellationTokenSource();
 
-                //Both setting the cancellationtoken to the new task, and passing it in as the state object so that the delegate can acknowledge using it
+                //Both setting the cancellationtoken to the new task, and passing it in as the state object so that
+                // the delegate can acknowledge using it
                 tasks[i] = Task.Factory.StartNew(
                     (obj) =>
                     {
@@ -3241,7 +3258,8 @@ namespace System.Threading.Tasks.Tests
             }
 
             //
-            // Test for TaskStatus.Canceled for unstarted task being created with an already signaled CTS (this became a case of interest with the TPL Cancellation DCR)
+            // Test for TaskStatus.Canceled for unstarted task being created with an already signaled CTS (this
+            // became a case of interest with the TPL Cancellation DCR)
             //
             {
                 CancellationTokenSource cts = new CancellationTokenSource();
@@ -3262,7 +3280,8 @@ namespace System.Threading.Tasks.Tests
             }
 
             //
-            // Test for TaskStatus.Canceled for unstarted task being created with an already signaled CTS (this became a case of interest with the TPL Cancellation DCR)
+            // Test for TaskStatus.Canceled for unstarted task being created with an already signaled CTS (this
+            // became a case of interest with the TPL Cancellation DCR)
             //
             {
                 CancellationTokenSource cts = new CancellationTokenSource();

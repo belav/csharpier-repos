@@ -8,7 +8,8 @@ using ILCompiler.Logging;
 namespace ILCompiler
 {
     /// <summary>
-    /// Represents a known error that occurred during compilation time which is not solvable by the user.
+    /// Represents a known error that occurred during compilation time which is not solvable by the
+    // user.
     /// This is used when we want to present the non-recoverable error with a specific error code.
     /// </summary>
     public class NativeAotFatalErrorException : Exception

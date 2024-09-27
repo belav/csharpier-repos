@@ -14,14 +14,16 @@ namespace System.Net.Sockets
     // Note on asynchronous behavior here:
 
     // The asynchronous socket operations here generally do the following:
-    // (1) If the operation queue is Ready (queue is empty), try to perform the operation immediately, non-blocking.
+    // (1) If the operation queue is Ready (queue is empty), try to perform the operation immediately,
+    // non-blocking.
     // If this completes (i.e. does not return EWOULDBLOCK), then we return the results immediately
     // for both success (SocketError.Success) or failure.
     // No callback will happen; callers are expected to handle these synchronous completions themselves.
     // (2) If EWOULDBLOCK is returned, or the queue is not empty, then we enqueue an operation to the
     // appropriate queue and return SocketError.IOPending.
     // Enqueuing itself may fail because the socket is closed before the operation can be enqueued;
-    // in this case, we return SocketError.OperationAborted (which matches what Winsock would return in this case).
+    // in this case, we return SocketError.OperationAborted (which matches what Winsock would return in
+    // this case).
     // (3) When we receive an epoll notification for the socket, we post a work item to the threadpool
     // to perform the I/O and invoke the callback with the I/O result.
 
@@ -184,7 +186,8 @@ namespace System.Net.Sockets
                     return OperationResult.Completed;
                 }
 
-                // Set state back to Waiting, unless we were canceled, in which case we have to process cancellation now
+                // Set state back to Waiting, unless we were canceled, in which case we have to process cancellation
+                // now
                 int newState;
                 while (true)
                 {
@@ -220,7 +223,8 @@ namespace System.Net.Sockets
             {
                 Trace("Enter");
 
-                // Note we could be cancelling because of socket close. Regardless, we don't need the registration anymore.
+                // Note we could be cancelling because of socket close. Regardless, we don't need the registration
+                // anymore.
                 CancellationRegistration.Dispose();
 
                 int newState;
@@ -976,9 +980,12 @@ namespace System.Net.Sockets
                 // It is safe to read _state and _sequence without using Lock.
                 // - The return value is soley based on Volatile.Read of _state.
                 // - The Volatile.Read of _sequenceNumber ensures we read a value before executing the operation.
-                //   This is needed to retry the operation in StartAsyncOperation in case the _sequenceNumber incremented.
-                // - Because no Lock is taken, it is possible we observe a sequence number increment before the state
-                //   becomes Ready. When that happens, observedSequenceNumber is decremented, and StartAsyncOperation will
+                //   This is needed to retry the operation in StartAsyncOperation in case the _sequenceNumber
+                // incremented.
+                // - Because no Lock is taken, it is possible we observe a sequence number increment before the
+                // state
+                //   becomes Ready. When that happens, observedSequenceNumber is decremented, and
+                // StartAsyncOperation will
                 //   execute the operation because the sequence number won't match.
 
                 Debug.Assert(sizeof(QueueState) == sizeof(int));
@@ -2871,14 +2878,22 @@ namespace System.Net.Sockets
             return SocketError.IOPending;
         }
 
-        // Called on the epoll thread, speculatively tries to process synchronous events and errors for synchronous events, and
-        // returns any remaining events that remain to be processed. Taking a lock for each operation queue to deterministically
-        // handle synchronous events on the epoll thread seems to significantly reduce throughput in benchmarks. On the other
-        // hand, the speculative checks make it nondeterministic, where it would be possible for the epoll thread to think that
-        // the next operation in a queue is not synchronous when it is (due to a race, old caches, etc.) and cause the event to
-        // be scheduled instead. It's not functionally incorrect to schedule the release of a synchronous operation, just it may
-        // lead to thread pool starvation issues if the synchronous operations are blocking thread pool threads (typically not
-        // advised) and more threads are not immediately available to run work items that would release those operations.
+        // Called on the epoll thread, speculatively tries to process synchronous events and errors for
+        // synchronous events, and
+        // returns any remaining events that remain to be processed. Taking a lock for each operation queue
+        // to deterministically
+        // handle synchronous events on the epoll thread seems to significantly reduce throughput in
+        // benchmarks. On the other
+        // hand, the speculative checks make it nondeterministic, where it would be possible for the epoll
+        // thread to think that
+        // the next operation in a queue is not synchronous when it is (due to a race, old caches, etc.) and
+        // cause the event to
+        // be scheduled instead. It's not functionally incorrect to schedule the release of a synchronous
+        // operation, just it may
+        // lead to thread pool starvation issues if the synchronous operations are blocking thread pool
+        // threads (typically not
+        // advised) and more threads are not immediately available to run work items that would release
+        // those operations.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Interop.Sys.SocketEvents HandleSyncEventsSpeculatively(
             Interop.Sys.SocketEvents events
@@ -2954,9 +2969,12 @@ namespace System.Net.Sockets
                     ? _sendQueue.ProcessSyncEventOrGetAsyncEvent(this)
                     : null;
 
-            // This method is called from a thread pool thread. When we have only one operation to process, process it
-            // synchronously to avoid an extra thread pool work item. When we have two operations to process, processing both
-            // synchronously may delay the second operation, so schedule one onto the thread pool and process the other
+            // This method is called from a thread pool thread. When we have only one operation to process,
+            // process it
+            // synchronously to avoid an extra thread pool work item. When we have two operations to process,
+            // processing both
+            // synchronously may delay the second operation, so schedule one onto the thread pool and process
+            // the other
             // synchronously. There might be better ways of doing this.
             if (sendOperation == null)
             {

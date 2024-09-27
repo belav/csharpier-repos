@@ -15,7 +15,8 @@ namespace System.Text.Unicode
     {
         // Returns &inputBuffer[inputLength] if the input buffer is valid.
         /// <summary>
-        /// Given an input buffer <paramref name="pInputBuffer"/> of char length <paramref name="inputLength"/>,
+        /// Given an input buffer <paramref name="pInputBuffer"/> of char length <paramref
+        // name="inputLength"/>,
         /// returns a pointer to where the first invalid data appears in <paramref name="pInputBuffer"/>.
         /// </summary>
         /// <remarks>
@@ -111,9 +112,11 @@ namespace System.Text.Unicode
                         // Sets the 0x8080 bits of each element in 'charIsNonAscii' if the corresponding
                         // input was 0x0800 <= [value]. This also handles the missing range a few lines above.
 
-                        // Since 3-byte elements have a value >= 0x0800, we'll perform a saturating add of 0x7800 in order to
+                        // Since 3-byte elements have a value >= 0x0800, we'll perform a saturating add of 0x7800 in order
+                        // to
                         // get all 3-byte elements to have their 0x8000 bits set. A saturating add will not set the 0x8000
-                        // bit for 1-byte or 2-byte elements. The 0x0080 bit will already have been set for non-ASCII (2-byte
+                        // bit for 1-byte or 2-byte elements. The 0x0080 bit will already have been set for non-ASCII
+                        // (2-byte
                         // and 3-byte) elements.
 
                         Vector128<ushort> charIsThreeByteUtf8Encoded = Vector128.AddSaturate(

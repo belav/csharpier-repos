@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Binder that owns the scope for the local, the one that returns it in its <see cref="Binder.Locals"/> array.
+        /// Binder that owns the scope for the local, the one that returns it in its <see
+        // cref="Binder.Locals"/> array.
         /// </summary>
         internal Binder ScopeBinder
         {
@@ -132,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <param name="containingSymbol"></param>
         /// <param name="scopeBinder">
-        /// Binder that owns the scope for the local, the one that returns it in its <see cref="Binder.Locals"/> array.
+        /// Binder that owns the scope for the local, the one that returns it in its <see
+        // cref="Binder.Locals"/> array.
         /// </param>
         /// <param name="nodeBinder">
         /// Enclosing binder for the location where the local is declared.
@@ -178,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Make a local variable symbol whose type can be inferred (if necessary) by binding and enclosing construct.
+        /// Make a local variable symbol whose type can be inferred (if necessary) by binding and enclosing
+        // construct.
         /// </summary>
         internal static LocalSymbol MakeLocalSymbolWithEnclosingContext(
             Symbol containingSymbol,
@@ -244,11 +247,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Make a local variable symbol which can be inferred (if necessary) by binding its initializing expression.
+        /// Make a local variable symbol which can be inferred (if necessary) by binding its initializing
+        // expression.
         /// </summary>
         /// <param name="containingSymbol"></param>
         /// <param name="scopeBinder">
-        /// Binder that owns the scope for the local, the one that returns it in its <see cref="Binder.Locals"/> array.
+        /// Binder that owns the scope for the local, the one that returns it in its <see
+        // cref="Binder.Locals"/> array.
         /// </param>
         /// <param name="allowRefKind"></param>
         /// <param name="allowScoped"></param>
@@ -257,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <param name="declarationKind"></param>
         /// <param name="initializer"></param>
         /// <param name="initializerBinderOpt">
-        /// Binder that should be used to bind initializer, if different from the <paramref name="scopeBinder"/>.
+        /// Binder that should be used to bind initializer, if different from the <paramref
+        // name="scopeBinder"/>.
         /// </param>
         /// <returns></returns>
         public static SourceLocalSymbol MakeLocal(
@@ -501,7 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Gets the locations where the local symbol was originally defined in source.
-        /// There should not be local symbols from metadata, and there should be only one local variable declared.
+        /// There should not be local symbols from metadata, and there should be only one local variable
+        // declared.
         /// TODO: check if there are multiple same name local variables - error symbol or local symbol?
         /// </summary>
         public override ImmutableArray<Location> Locations =>
@@ -670,8 +677,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             /// Determine the constant value of this local and the corresponding diagnostics.
             /// Set both to constantTuple in a single operation for thread safety.
             /// </summary>
-            /// <param name="inProgress">Null for the initial call, non-null if we are in the process of evaluating a constant.</param>
-            /// <param name="boundInitValue">If we already have the bound node for the initial value, pass it in to avoid recomputing it.</param>
+            /// <param name="inProgress">Null for the initial call, non-null if we are in the process of
+            // evaluating a constant.</param>
+            /// <param name="boundInitValue">If we already have the bound node for the initial value, pass it in
+            // to avoid recomputing it.</param>
             private void MakeConstantTuple(LocalSymbol inProgress, BoundExpression boundInitValue)
             {
                 if (this.IsConst && _constantTuple == null)
@@ -827,7 +836,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 BindingDiagnosticBag diagnostics
             )
             {
-                // Try binding enclosing deconstruction-declaration (the top-level VariableDeclaration), this should force the inference.
+                // Try binding enclosing deconstruction-declaration (the top-level VariableDeclaration), this should
+                // force the inference.
                 switch (_deconstruction.Kind())
                 {
                     case SyntaxKind.SimpleAssignmentExpression:

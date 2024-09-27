@@ -191,7 +191,7 @@ namespace System.Data.Linq.SqlClient
                 this.orders = null;
                 this.rowNumberOrders = save; // lest orders be null when we need info
 
-                /* do all the lower level stuff */
+/* do all the lower level stuff */
                 select.Where = this.VisitExpression(select.Where);
                 for (int i = 0, n = select.GroupBy.Count; i < n; i++)
                 {

@@ -66,7 +66,8 @@ namespace System.Text.Json.Serialization
                 if (success)
                 {
                     // Read any trailing whitespace. This will throw if JsonCommentHandling=Disallow.
-                    // Avoiding setting ReturnValue for the final block; reader.Read() returns 'false' even when this is the final block.
+                    // Avoiding setting ReturnValue for the final block; reader.Read() returns 'false' even when this is
+                    // the final block.
                     if (!reader.Read() && !reader.IsFinalBlock)
                     {
                         // This method will re-enter if so set `ReturnValue` which will be returned during re-entry.
@@ -106,7 +107,8 @@ namespace System.Text.Json.Serialization
             }
             catch (NotSupportedException ex)
             {
-                // If the message already contains Path, just re-throw. This could occur in serializer re-entry cases.
+                // If the message already contains Path, just re-throw. This could occur in serializer re-entry
+                // cases.
                 // To get proper Path semantics in re-entry cases, APIs that take 'state' need to be used.
                 if (ex.Message.Contains(" Path: "))
                 {

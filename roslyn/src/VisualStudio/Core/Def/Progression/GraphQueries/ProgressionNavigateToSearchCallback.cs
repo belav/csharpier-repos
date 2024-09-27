@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             public void Done(bool isFullyLoaded)
             {
                 // Do nothing here.  Even though the navigate to search completed, we still haven't passed any
-                // information along to progression.  That will happen in GraphQueryManager.PopulateContextGraphAsync
+                // information along to progression.  That will happen in
+                // GraphQueryManager.PopulateContextGraphAsync
             }
 
             public void ReportProgress(int current, int maximum) =>
@@ -48,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     .ConfigureAwait(false);
                 if (node != null)
                 {
-                    // _context.OutputNodes is not threadsafe.  So ensure only one navto callback can mutate it at a time.
+                    // _context.OutputNodes is not threadsafe.  So ensure only one navto callback can mutate it at a
+                    // time.
                     lock (this)
                         _context.OutputNodes.Add(node);
                 }

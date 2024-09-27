@@ -5,9 +5,12 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-// The original repro for this test was an assertion after code generation that the actual maximum depth of the stack
-// was less than or identical to the estimated depth of the stack as calculated during morph. The calculation was
-// incorrect when a math intrinsic was used as an argument to a function with on-stack parameters (e.g. the call to
+// The original repro for this test was an assertion after code generation that the actual maximum
+// depth of the stack
+// was less than or identical to the estimated depth of the stack as calculated during morph. The
+// calculation was
+// incorrect when a math intrinsic was used as an argument to a function with on-stack parameters
+// (e.g. the call to
 // `M` on line 18).
 
 public static class C

@@ -116,12 +116,17 @@ namespace System.Web.ClientServices.Providers
                 throw new NotImplementedException();
 
                 //                 CustomBinding binding = ProxyHelper.GetBinding();
-                //                 ChannelFactory<LoginService> channelFactory = new ChannelFactory<LoginService>(binding, new EndpointAddress(serviceUri)); //(@"http://localhost/AuthSvc/service.svc"));
+                //                 ChannelFactory<LoginService> channelFactory = new
+                // ChannelFactory<LoginService>(binding, new EndpointAddress(serviceUri));
+                // //(@"http://localhost/AuthSvc/service.svc"));
                 //                 LoginService clientService = channelFactory.CreateChannel();
                 //                 using (new OperationContextScope((IContextChannel)clientService)) {
-                //                     ProxyHelper.AddCookiesToWCF(cookies, serviceUri, username, connectionString, connectionStringProvider);
-                //                     bool validated = clientService.Login(username, password, string.Empty, rememberMe);
-                //                     ProxyHelper.GetCookiesFromWCF(cookies, serviceUri, username, connectionString, connectionStringProvider);
+                //                     ProxyHelper.AddCookiesToWCF(cookies, serviceUri, username, connectionString,
+                // connectionStringProvider);
+                //                     bool validated = clientService.Login(username, password, string.Empty,
+                // rememberMe);
+                //                     ProxyHelper.GetCookiesFromWCF(cookies, serviceUri, username,
+                // connectionString, connectionStringProvider);
                 //                     return validated;
                 //                 }
             }
@@ -301,12 +306,15 @@ namespace System.Web.ClientServices.Providers
                         throw new NotImplementedException();
 
                         //                         CustomBinding binding = ProxyHelper.GetBinding();
-                        //                         ChannelFactory<LoginService> channelFactory = new ChannelFactory<LoginService>(binding, new EndpointAddress(GetServiceUri()));
+                        //                         ChannelFactory<LoginService> channelFactory = new
+                        // ChannelFactory<LoginService>(binding, new EndpointAddress(GetServiceUri()));
                         //                         LoginService clientService = channelFactory.CreateChannel();
                         //                         using (new OperationContextScope((IContextChannel)clientService)) {
-                        //                             ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), p.Identity.Name, _ConnectionString, _ConnectionStringProvider);
+                        //                             ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(),
+                        // p.Identity.Name, _ConnectionString, _ConnectionStringProvider);
                         //                             clientService.Logout();
-                        //                             ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(), p.Identity.Name, _ConnectionString, _ConnectionStringProvider);
+                        //                             ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(),
+                        // p.Identity.Name, _ConnectionString, _ConnectionStringProvider);
                         //                         }
                     }
                     else
@@ -834,12 +842,15 @@ namespace System.Web.ClientServices.Providers
                 throw new NotImplementedException();
 
                 //                 CustomBinding binding = ProxyHelper.GetBinding();
-                //                 ChannelFactory<LoginService> channelFactory = new ChannelFactory<LoginService>(binding, new EndpointAddress(GetServiceUri()));
+                //                 ChannelFactory<LoginService> channelFactory = new
+                // ChannelFactory<LoginService>(binding, new EndpointAddress(GetServiceUri()));
                 //                 LoginService clientService = channelFactory.CreateChannel();
                 //                 using (new OperationContextScope((IContextChannel)clientService)) {
-                //                     ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), username, _ConnectionString, _ConnectionStringProvider);
+                //                     ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), username,
+                // _ConnectionString, _ConnectionStringProvider);
                 //                     bool validated = clientService.IsLoggedIn();
-                //                     ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(), username, _ConnectionString, _ConnectionStringProvider);
+                //                     ProxyHelper.GetCookiesFromWCF(cookies, GetServiceUri(), username,
+                // _ConnectionString, _ConnectionStringProvider);
                 //                     return validated;
                 //                 }
             }

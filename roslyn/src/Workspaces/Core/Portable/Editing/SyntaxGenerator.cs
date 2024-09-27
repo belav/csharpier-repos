@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editing
         #region Declarations
 
         /// <summary>
-        /// Returns the node if it is a declaration, the immediate enclosing declaration if one exists, or null.
+        /// Returns the node if it is a declaration, the immediate enclosing declaration if one exists, or
+        // null.
         /// </summary>
         public SyntaxNode? GetDeclaration(SyntaxNode? node)
         {
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         public SyntaxNode FieldDeclaration(IFieldSymbol field)
         {
-            // don't use field references in initializers for fields in certain special types -  since those might reference the field being declared.
+            // don't use field references in initializers for fields in certain special types -  since those
+            // might reference the field being declared.
             var canUseFieldReference = !LiteralSpecialValues.HasSpecialValues(
                 field.ContainingType.SpecialType
             );
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
         //internal abstract SyntaxNode ObjectMemberInitializer(IEnumerable<SyntaxNode> fieldInitializers);
         //internal abstract SyntaxNode NamedFieldInitializer(SyntaxNode name, SyntaxNode value);
-        //internal abstract SyntaxNode WithObjectCreationInitializer(SyntaxNode objectCreationExpression, SyntaxNode initializer);
+        //internal abstract SyntaxNode WithObjectCreationInitializer(SyntaxNode objectCreationExpression,
+        // SyntaxNode initializer);
 
         /// <summary>
         /// Creates a method declaration.
@@ -218,8 +221,10 @@ namespace Microsoft.CodeAnalysis.Editing
 
             if (method.TypeParameters.Length > 0)
             {
-                // Overrides are special.  Specifically, in an override, if a type parameter has no constraints, then we
-                // want to still add `where T : default` if that type parameter is used with NRT (e.g. `T?`) that way
+                // Overrides are special.  Specifically, in an override, if a type parameter has no constraints,
+                // then we
+                // want to still add `where T : default` if that type parameter is used with NRT (e.g. `T?`) that
+                // way
                 // the language can distinguish if this is a Nullable Value Type or not.
                 if (method.IsOverride)
                 {
@@ -711,7 +716,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
         /// <summary>
         /// Converts method, property and indexer declarations into public interface implementations.
-        /// This is equivalent to an implicit C# interface implementation (you can access it via the interface or directly via the named member.)
+        /// This is equivalent to an implicit C# interface implementation (you can access it via the
+        // interface or directly via the named member.)
         /// </summary>
         public SyntaxNode? AsPublicInterfaceImplementation(
             SyntaxNode declaration,
@@ -720,7 +726,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
         /// <summary>
         /// Converts method, property and indexer declarations into public interface implementations.
-        /// This is equivalent to an implicit C# interface implementation (you can access it via the interface or directly via the named member.)
+        /// This is equivalent to an implicit C# interface implementation (you can access it via the
+        // interface or directly via the named member.)
         /// </summary>
         public abstract SyntaxNode? AsPublicInterfaceImplementation(
             SyntaxNode declaration,
@@ -730,7 +737,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
         /// <summary>
         /// Converts method, property and indexer declarations into private interface implementations.
-        /// This is equivalent to a C# explicit interface implementation (you can declare it for access via the interface, but cannot call it directly).
+        /// This is equivalent to a C# explicit interface implementation (you can declare it for access via
+        // the interface, but cannot call it directly).
         /// </summary>
         public SyntaxNode? AsPrivateInterfaceImplementation(
             SyntaxNode declaration,
@@ -740,7 +748,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
         /// <summary>
         /// Converts method, property and indexer declarations into private interface implementations.
-        /// This is equivalent to a C# explicit interface implementation (you can declare it for access via the interface, but cannot call it directly).
+        /// This is equivalent to a C# explicit interface implementation (you can declare it for access via
+        // the interface, but cannot call it directly).
         /// </summary>
         public abstract SyntaxNode? AsPrivateInterfaceImplementation(
             SyntaxNode declaration,
@@ -1019,7 +1028,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
         private static bool CanBeDeclared(ISymbol symbol)
         {
-            // Skip implicitly declared members from a record.  No need to synthesize those as the compiler will do it
+            // Skip implicitly declared members from a record.  No need to synthesize those as the compiler will
+            // do it
             // anyways.
             if (symbol.ContainingType?.IsRecord is true)
             {
@@ -1243,13 +1253,15 @@ namespace Microsoft.CodeAnalysis.Editing
         /// <summary>
         /// Creates a compilation unit declaration
         /// </summary>
-        /// <param name="declarations">Zero or more namespace import, namespace or type declarations.</param>
+        /// <param name="declarations">Zero or more namespace import, namespace or type
+        // declarations.</param>
         public abstract SyntaxNode CompilationUnit(IEnumerable<SyntaxNode> declarations);
 
         /// <summary>
         /// Creates a compilation unit declaration
         /// </summary>
-        /// <param name="declarations">Zero or more namespace import, namespace or type declarations.</param>
+        /// <param name="declarations">Zero or more namespace import, namespace or type
+        // declarations.</param>
         public SyntaxNode CompilationUnit(params SyntaxNode[] declarations) =>
             CompilationUnit((IEnumerable<SyntaxNode>)declarations);
 
@@ -1956,7 +1968,8 @@ namespace Microsoft.CodeAnalysis.Editing
         }
 
         /// <summary>
-        /// Creates a new instance of the node with the leading and trailing trivia removed and replaced with elastic markers.
+        /// Creates a new instance of the node with the leading and trailing trivia removed and replaced
+        // with elastic markers.
         /// </summary>
         [return: MaybeNull, NotNullIfNotNull(nameof(node))]
         public abstract TNode ClearTrivia<TNode>([MaybeNull] TNode node)
@@ -2029,7 +2042,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Creates statement that allows an expression to execute in a statement context.
         /// This is typically an invocation or assignment expression.
         /// </summary>
-        /// <param name="expression">The expression that is to be executed. This is usually a method invocation expression.</param>
+        /// <param name="expression">The expression that is to be executed. This is usually a method
+        // invocation expression.</param>
         public abstract SyntaxNode ExpressionStatement(SyntaxNode expression);
 
         /// <summary>
@@ -2128,7 +2142,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         /// <param name="condition">A condition expression.</param>
         /// <param name="trueStatements">The statements that are executed if the condition is true.</param>
-        /// <param name="falseStatements">The statements that are executed if the condition is false.</param>
+        /// <param name="falseStatements">The statements that are executed if the condition is
+        // false.</param>
         public abstract SyntaxNode IfStatement(
             SyntaxNode condition,
             IEnumerable<SyntaxNode> trueStatements,
@@ -2140,7 +2155,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         /// <param name="condition">A condition expression.</param>
         /// <param name="trueStatements">The statements that are executed if the condition is true.</param>
-        /// <param name="falseStatement">A single statement that is executed if the condition is false.</param>
+        /// <param name="falseStatement">A single statement that is executed if the condition is
+        // false.</param>
         public SyntaxNode IfStatement(
             SyntaxNode condition,
             IEnumerable<SyntaxNode> trueStatements,
@@ -2148,7 +2164,8 @@ namespace Microsoft.CodeAnalysis.Editing
         ) => IfStatement(condition, trueStatements, new[] { falseStatement });
 
         /// <summary>
-        /// Creates a switch statement that branches to individual sections based on the value of the specified expression.
+        /// Creates a switch statement that branches to individual sections based on the value of the
+        // specified expression.
         /// </summary>
         public abstract SyntaxNode SwitchStatement(
             SyntaxNode expression,
@@ -2156,7 +2173,8 @@ namespace Microsoft.CodeAnalysis.Editing
         );
 
         /// <summary>
-        /// Creates a switch statement that branches to individual sections based on the value of the specified expression.
+        /// Creates a switch statement that branches to individual sections based on the value of the
+        // specified expression.
         /// </summary>
         public SyntaxNode SwitchStatement(SyntaxNode expression, params SyntaxNode[] sections) =>
             SwitchStatement(expression, (IEnumerable<SyntaxNode>)sections);
@@ -2774,7 +2792,8 @@ namespace Microsoft.CodeAnalysis.Editing
         public abstract SyntaxNode ArrayCreationExpression(SyntaxNode elementType, SyntaxNode size);
 
         /// <summary>
-        /// Creates an array creation expression for a single dimensional array with specified initial element values.
+        /// Creates an array creation expression for a single dimensional array with specified initial
+        // element values.
         /// </summary>
         public abstract SyntaxNode ArrayCreationExpression(
             SyntaxNode elementType,

@@ -388,7 +388,8 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, byteXmitBuffer.Length);
 
-                //Read Every Byte except the last one. The last bye should be left in the last position of SerialPort's
+                //Read Every Byte except the last one. The last bye should be left in the last position of
+                // SerialPort's
                 //internal buffer. When we try to read this char as UTF32 the buffer should have to be resized so
                 //the other 3 bytes of the ut32 encoded char can be in the buffer
                 com1.Read(new char[1023], 0, 1023);
@@ -639,8 +640,10 @@ namespace System.IO.Ports.Tests
 
                 com2.Write(byteXmitBuffer, 3, byteXmitBuffer.Length - 3);
 
-                //        retValue &= TCSupport.WaitForPredicate(delegate() {return com1.BytesToRead == byteXmitBuffer.Length; },
-                //            5000, "Err_91818aheid Expected BytesToRead={0} actual={1}", byteXmitBuffer.Length, com1.BytesToRead);
+                //        retValue &= TCSupport.WaitForPredicate(delegate() {return com1.BytesToRead ==
+                // byteXmitBuffer.Length; },
+                //            5000, "Err_91818aheid Expected BytesToRead={0} actual={1}", byteXmitBuffer.Length,
+                // com1.BytesToRead);
 
                 TCSupport.WaitForExpected(
                     () => com1.BytesToRead,
@@ -1290,16 +1293,16 @@ namespace System.IO.Ports.Tests
 
                 Assert.Equal(0, com1.BytesToRead);
 
-                /*DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
-            if (!retValue) {
-                for (int i=0; i<xmitCharBuffer.Length; ++i) {
-                    Debug.WriteLine("(char){0}, ", (int)xmitCharBuffer[i]);
-                }
+/*DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
+if (!retValue) {
+for (int i=0; i<xmitCharBuffer.Length; ++i) {
+Debug.WriteLine("(char){0}, ", (int)xmitCharBuffer[i]);
+}
 
-                for (int i=0; i<xmitCharBuffer.Length; ++i) {
-                    Debug.WriteLine("{0}, ", (int)xmitByteBuffer[i]);
-                }
-            }*/
+for (int i=0; i<xmitCharBuffer.Length; ++i) {
+Debug.WriteLine("{0}, ", (int)xmitByteBuffer[i]);
+}
+}*/
             }
         }
 

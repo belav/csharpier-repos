@@ -378,7 +378,8 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonSerializable(typeof(ClassWithProperty_BaseClassWithPolymorphismOnSerializationOnly))]
     [JsonSerializable(typeof(BaseClassRecursive))]
     [JsonSerializable(typeof(ClassWithClassProperty))]
-    // TODO: Consider support for following syntax [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<>))]
+    // TODO: Consider support for following syntax
+    // [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<>))]
     [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<int>))]
     [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<int?>))]
     [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<int[]>))]
@@ -390,7 +391,8 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<ImmutableList<int>>))]
     [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<ImmutableQueue<int>>))]
     [JsonSerializable(typeof(ClassWithWritablePropertyWithoutPopulate<ImmutableStack<int>>))]
-    // TODO: Consider support for following syntax [JsonSerializable(typeof(ClassWithWritableProperty<>))]
+    // TODO: Consider support for following syntax
+    // [JsonSerializable(typeof(ClassWithWritableProperty<>))]
     [JsonSerializable(typeof(ClassWithWritableProperty<int>))]
     [JsonSerializable(typeof(ClassWithWritableProperty<int?>))]
     [JsonSerializable(typeof(ClassWithWritableProperty<int[]>))]

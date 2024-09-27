@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         internal SafeHandleLease(SafeHandle handle) => _handle = handle;
 
         /// <summary>
-        /// Releases the <see cref="SafeHandle"/> lease. The behavior of this method is unspecified if called more than
+        /// Releases the <see cref="SafeHandle"/> lease. The behavior of this method is unspecified if
+        // called more than
         /// once.
         /// </summary>
         public void Dispose() => _handle?.DangerousRelease();

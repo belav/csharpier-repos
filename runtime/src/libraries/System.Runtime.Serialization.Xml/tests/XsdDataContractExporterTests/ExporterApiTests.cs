@@ -66,7 +66,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public static IEnumerable<object[]> CanExport_MemberData()
         {
             //yield return new object[] { true, "", (XsdDataContractExporter exp) => exp.CanExport() };
-            //yield return new object[] { false, "", (XsdDataContractExporter exp) => exp.CanExport(), typeof(), @"" };
+            //yield return new object[] { false, "", (XsdDataContractExporter exp) => exp.CanExport(), typeof(),
+            // @"" };
 
             // CanExport(Type)
             yield return new object[]
@@ -228,7 +229,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             _output.WriteLine("Count = " + exporter.Schemas.Count);
             _output.WriteLine(schemas);
 
-            // When checking schema count, be sure to include the "Serialization" schema - which is omitted from 'DumpSchema' - as
+            // When checking schema count, be sure to include the "Serialization" schema - which is omitted from
+            // 'DumpSchema' - as
             // well as the XmlSchema, both of which are the base from which all further schemas build.
             if (schemaCheck != null)
                 schemaCheck(schemas, exporter.Schemas);
@@ -527,7 +529,9 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 typeof(ArgumentException),
                 @"Cannot export null assembly provided via 'assemblies' parameter.",
             };
-            // This exception message might change with updates to this test assembly. Right now, 'NonSerializablePerson' is the non-serializable type that gets found first. If this becomes an issue, consider not verifying the exception message.
+            // This exception message might change with updates to this test assembly. Right now,
+            // 'NonSerializablePerson' is the non-serializable type that gets found first. If this becomes an
+            // issue, consider not verifying the exception message.
             yield return new object[]
             {
                 "cainv",
@@ -763,9 +767,12 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public void get_Schemas_Bug()
         {
             // Bug 23200 from who knows which ancient bug database
-            // I believe the gist of this is that modifying the XmlSchemaSet provided by XsdDataContractExporter.get_Schemas
-            // can result in that same property throwing an exception? I'm not really sure what this bug is, or if this really
-            // is a bug. Neither the code in NetFx nor here actually throws an exception without the newly added lines.
+            // I believe the gist of this is that modifying the XmlSchemaSet provided by
+            // XsdDataContractExporter.get_Schemas
+            // can result in that same property throwing an exception? I'm not really sure what this bug is, or
+            // if this really
+            // is a bug. Neither the code in NetFx nor here actually throws an exception without the newly added
+            // lines.
             XsdDataContractExporter exporter = new XsdDataContractExporter();
             exporter.Export(typeof(Types.Circle));
             XmlSchemaSet schemaSet = exporter.Schemas; // added - exception

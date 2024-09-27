@@ -68,7 +68,8 @@ namespace System.Workflow.Runtime.Tracking
         }
 
         /// <summary>
-        /// Determines if tracking data should be held and transactionally written to the database at persistence points.
+        /// Determines if tracking data should be held and transactionally written to the database at
+        // persistence points.
         /// </summary>
         /// <value></value>
         public bool IsTransactional
@@ -78,7 +79,8 @@ namespace System.Workflow.Runtime.Tracking
         }
 
         /// <summary>
-        /// Indicates that records should be moved from the active instance tables to the appropriate parition tables when the instance completes.
+        /// Indicates that records should be moved from the active instance tables to the appropriate
+        // parition tables when the instance completes.
         /// </summary>
         public bool PartitionOnCompletion
         {
@@ -87,7 +89,8 @@ namespace System.Workflow.Runtime.Tracking
         }
 
         /// <summary>
-        /// Determines if the default profile should be used for workflow types that do not have a profile specified for them.
+        /// Determines if the default profile should be used for workflow types that do not have a profile
+        // specified for them.
         /// </summary>
         /// <value></value>
         public bool UseDefaultProfile
@@ -306,7 +309,8 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentNullException("workflowType");
 
             // parameter wantToCreateDefault = false:
-            // looking for a specific version that has already been running with this instance; don't use a default here
+            // looking for a specific version that has already been running with this instance; don't use a
+            // default here
             return GetProfileByScheduleType(workflowType, profileVersion, false);
         }
 
@@ -2039,7 +2043,8 @@ namespace System.Workflow.Runtime.Tracking
                 );
                 //
                 // Hashed ids of QName, context and pcontext used as key for storing activity record ids
-                // Save these for each record in the list so we don't have to recompute them below when adding to the cache
+                // Save these for each record in the list so we don't have to recompute them below when adding to
+                // the cache
                 string[] ids = new string[] { null, null, null, null, null };
 
                 for (int i = 0; i < activities.Count; i++)
@@ -2258,7 +2263,8 @@ namespace System.Workflow.Runtime.Tracking
                 long aid = -1;
                 bool cached = false;
                 //
-                // Check if we have the activityInstanceId in the cache - we cache to avoid repeatedly searching this table.
+                // Check if we have the activityInstanceId in the cache - we cache to avoid repeatedly searching
+                // this table.
                 string id = BuildQualifiedNameVarName(
                     record.QualifiedName,
                     record.ContextGuid,
@@ -2270,7 +2276,8 @@ namespace System.Workflow.Runtime.Tracking
                 BuildInsertUserEventParameters(internalId, aid, record, command);
                 command.ExecuteNonQuery();
                 //
-                // If we didn't already have the activityInstanceId get it from the IN/OUT param and put it in the cache
+                // If we didn't already have the activityInstanceId get it from the IN/OUT param and put it in the
+                // cache
                 if (!cached)
                     SetActivityInstanceId(
                         id,
@@ -3027,7 +3034,8 @@ namespace System.Workflow.Runtime.Tracking
             }
 
             /// <summary>
-            /// Build a string to uniquely identify each activity that should be recorded as a seperate instance.
+            /// Build a string to uniquely identify each activity that should be recorded as a seperate
+            // instance.
             /// A separate instance is defined by the combination of QualifiedName, Context and ParentContext
             /// </summary>
             /// <param name="record"></param>
@@ -3356,33 +3364,33 @@ namespace System.Workflow.Runtime.Tracking
                 return val.Replace("'", "''");
             }
 
-            /*
-            static char[] hexDigits = {
-            '0', '1', '2', '3', '4', '5', '6', '7',
-            '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-            /// <summary>
-            /// Convert a byte array to a string of hex chars for sql image type
-            /// </summary>
-            /// <param name="bytes"></param>
-            /// <returns></returns>
-            private static string ToHexString( byte[] bytes )
-            {
-                if ( null == bytes )
-                    return null;
+/*
+static char[] hexDigits = {
+'0', '1', '2', '3', '4', '5', '6', '7',
+'8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+/// <summary>
+/// Convert a byte array to a string of hex chars for sql image type
+/// </summary>
+/// <param name="bytes"></param>
+/// <returns></returns>
+private static string ToHexString( byte[] bytes )
+{
+if ( null == bytes )
+return null;
 
-                if ( 0 == bytes.Length )
-                    return null;
+if ( 0 == bytes.Length )
+return null;
 
-                char[] chars = new char[bytes.Length * 2];
-                for ( int i = 0; i < bytes.Length; i++ )
-                {
-                    int b = bytes[i];
-                    chars[i * 2] = hexDigits[b >> 4];
-                    chars[i * 2 + 1] = hexDigits[b & 0xF];
-                }
-                return "0x" + new string( chars );
-            }
-            */
+char[] chars = new char[bytes.Length * 2];
+for ( int i = 0; i < bytes.Length; i++ )
+{
+int b = bytes[i];
+chars[i * 2] = hexDigits[b >> 4];
+chars[i * 2 + 1] = hexDigits[b & 0xF];
+}
+return "0x" + new string( chars );
+}
+*/
             private void GetCallPathKeys(IList<string> callPath)
             {
                 if ((null == callPath) || (callPath.Count <= 0))

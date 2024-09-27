@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
-            // If we aren't in a host that supports paste tracking, we can't do anything. This is just to avoid creating MEF part rejections for
+            // If we aren't in a host that supports paste tracking, we can't do anything. This is just to avoid
+            // creating MEF part rejections for
             // things composing the Features layer.
             if (_pasteTrackingService == null)
                 return;

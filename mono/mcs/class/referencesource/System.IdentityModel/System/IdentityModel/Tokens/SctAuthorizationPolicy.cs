@@ -10,7 +10,8 @@ namespace System.IdentityModel.Tokens
     /// <summary>
     /// This class serves as a dummy AuthorizationPolicy on an issued token so that when
     /// WCF renews a token it can match the identity of the issuer with the renewer. This is
-    /// required as in the IDFX layer we throw the WCF generated AuthorizationPolicy ( UnconditionalPolicy )
+    /// required as in the IDFX layer we throw the WCF generated AuthorizationPolicy (
+    // UnconditionalPolicy )
     /// </summary>
     internal class SctAuthorizationPolicy : IAuthorizationPolicy
     {

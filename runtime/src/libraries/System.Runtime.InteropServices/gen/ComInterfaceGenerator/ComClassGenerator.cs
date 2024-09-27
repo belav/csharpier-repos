@@ -213,7 +213,9 @@ namespace Microsoft.Interop
             List<StatementSyntax> vtableInitializationBlock =
                 new()
                 {
-                    // ComInterfaceEntry* vtables = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(<ClassInfoTypeName>), sizeof(ComInterfaceEntry) * <numInterfaces>);
+                    // ComInterfaceEntry* vtables =
+                    // (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(<ClassInfoTypeName>),
+                    // sizeof(ComInterfaceEntry) * <numInterfaces>);
                     Declare(
                         PointerType(
                             TypeSyntaxes.System_Runtime_InteropServices_ComWrappers_ComInterfaceEntry
@@ -253,7 +255,8 @@ namespace Microsoft.Interop
             {
                 string ifaceName = implementedInterfaces[i];
 
-                // details = StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(typeof(<ifaceName>).TypeHandle);
+                // details =
+                // StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(typeof(<ifaceName>).TypeHandle);
                 vtableInitializationBlock.Add(
                     AssignmentStatement(
                         IdentifierName(detailsTempLocal),

@@ -7,7 +7,8 @@ using System.Diagnostics;
 namespace System.Reflection.Runtime.Dispensers
 {
     //
-    // A monikor for each reflection cache. The name should follow the style "key" followed by underscore followed by "value".
+    // A monikor for each reflection cache. The name should follow the style "key" followed by
+    // underscore followed by "value".
     //
     internal enum DispenserScenario
     {

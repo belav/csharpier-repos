@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.IO;
@@ -8,7 +9,8 @@ using System.Threading.Tasks;
 namespace System.Net.Http.Handlers
 {
     /// <summary>
-    /// Wraps an inner <see cref="HttpContent"/> in order to insert a <see cref="ProgressStream"/> on writing data.
+    /// Wraps an inner <see cref="HttpContent"/> in order to insert a <see cref="ProgressStream"/> on
+    // writing data.
     /// </summary>
     internal class ProgressContent : HttpContent
     {

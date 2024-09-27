@@ -187,7 +187,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
     // <Area> dynamic in unsafe code </Area>
     // <Title>Regression</Title>
     // <Description>
-    // VerificationException thrown when dynamically dispatching a method call with out/ref arguments which are pointer types
+    // VerificationException thrown when dynamically dispatching a method call with out/ref arguments
+    // which are pointer types
     // </Description>
     // <RelatedBug></RelatedBug>
     // <Expects Status=success></Expects>

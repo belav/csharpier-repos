@@ -21,13 +21,15 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {
     /// <summary>
     /// A class that holds an expression of the form "(SELECT .. FROM .. WHERE) AS alias".
-    /// Essentially, it allows generating Cql query in a localized manner, i.e., all global decisions about nulls, constants,
+    /// Essentially, it allows generating Cql query in a localized manner, i.e., all global decisions
+    // about nulls, constants,
     /// case statements, etc have already been made.
     /// </summary>
     internal abstract class CqlBlock : InternalBase
     {
         /// <summary>
-        /// Initializes a <see cref="CqlBlock"/> with the SELECT (<paramref name="slotInfos"/>), FROM (<paramref name="children"/>),
+        /// Initializes a <see cref="CqlBlock"/> with the SELECT (<paramref name="slotInfos"/>), FROM
+        // (<paramref name="children"/>),
         /// WHERE (<paramref name="whereClause"/>), AS (<paramref name="blockAliasNum"/>).
         /// </summary>
         protected CqlBlock(
@@ -108,7 +110,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 
         #region Abstract Methods
         /// <summary>
-        /// Returns a string corresponding to the eSQL representation of this block (and its children below).
+        /// Returns a string corresponding to the eSQL representation of this block (and its children
+        // below).
         /// </summary>
         internal abstract StringBuilder AsEsql(
             StringBuilder builder,
@@ -124,7 +127,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 
         #region Methods
         /// <summary>
-        /// For the given <paramref name="slotNum"/> creates a <see cref="QualifiedSlot"/> qualified with <see cref="CqlAlias"/> of the current block:
+        /// For the given <paramref name="slotNum"/> creates a <see cref="QualifiedSlot"/> qualified with
+        // <see cref="CqlAlias"/> of the current block:
         /// "<see cref="CqlAlias"/>.slot_alias"
         /// </summary>
         internal QualifiedSlot QualifySlotWithBlockAlias(int slotNum)
@@ -212,7 +216,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 
         /// <summary>
         /// Generates "NewRow(A, B, C, ...)" for all the slots in the block.
-        /// If <paramref name="isTopLevel"/>=true then generates "A" for the only slot that is marked as <see cref="SlotInfo.IsRequiredByParent"/>.
+        /// If <paramref name="isTopLevel"/>=true then generates "A" for the only slot that is marked as
+        // <see cref="SlotInfo.IsRequiredByParent"/>.
         /// </summary>
         protected DbExpression GenerateProjectionCqt(DbExpression row, bool isTopLevel)
         {
@@ -247,7 +252,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         }
 
         /// <summary>
-        /// Searches the input <paramref name="row"/> for the property that represents the current <see cref="CqlBlock"/>.
+        /// Searches the input <paramref name="row"/> for the property that represents the current <see
+        // cref="CqlBlock"/>.
         /// In all cases except JOIN, the <paramref name="row"/> is returned as is.
         /// In case of JOIN, <paramref name="row"/>.JoinVarX.JoinVarY...blockVar is returned.
         /// See <see cref="SetJoinTreeContext"/> for more info.
@@ -289,7 +295,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         /// CqlBlock1   CqlBlock2   CqlBlock3   CqlBlock4
         ///
         /// Example of <see cref="JoinTreeContext"/>s for the <see cref="CqlBlock"/>s:
-        /// block#   m_parentQualifiers   m_indexInParentQualifiers   m_leafQualifier    FindInput(row) = ...
+        /// block#   m_parentQualifiers   m_indexInParentQualifiers   m_leafQualifier    FindInput(row) =
+        // ...
         ///   1          (L2, L3)                    0                      L1             row.(L3.L2).L1
         ///   2          (L2, L3)                    0                      R1             row.(L3.L2).R1
         ///   3          (L2, L3)                    1                      R2             row.(L3).R2

@@ -126,9 +126,13 @@ namespace Microsoft.Interop
         /// <typeparam name="T">The type of element.</typeparam>
         /// <param name="elements">The initial collection of elements.</param>
         /// <param name="keyFn">A function to create a key for the element.</param>
-        /// <param name="getDependentIndicesFn">A function to resolve the dependencies of a given item in the <paramref name="elements"/> collection as index values that would be returned by <paramref name="keyFn"/>.</param>
-        /// <returns>A topologically sorted collection of the elemens of the <paramref name="elements"/> collection.</returns>
-        /// <exception cref="InvalidOperationException">The graph of <paramref name="elements"/> nodes and the edges produced by <paramref name="getDependentIndicesFn"/> has cycles.</exception>
+        /// <param name="getDependentIndicesFn">A function to resolve the dependencies of a given item in
+        // the <paramref name="elements"/> collection as index values that would be returned by <paramref
+        // name="keyFn"/>.</param>
+        /// <returns>A topologically sorted collection of the elemens of the <paramref name="elements"/>
+        // collection.</returns>
+        /// <exception cref="InvalidOperationException">The graph of <paramref name="elements"/> nodes and
+        // the edges produced by <paramref name="getDependentIndicesFn"/> has cycles.</exception>
         public static IEnumerable<T> GetTopologicallySortedElements<T, U>(
             ICollection<T> elements,
             Func<T, U> keyFn,
@@ -162,7 +166,8 @@ namespace Microsoft.Interop
 
             // Now that we have initialized our map of edges and we have our list of nodes,
             // we'll use Khan's algorithm to calculate a topological sort of the elements.
-            // Algorithm adapted from A. B. Kahn. 1962. Topological sorting of large networks. Commun. ACM 5, 11 (Nov. 1962), 558-562. DOI:https://doi.org/10.1145/368996.369025
+            // Algorithm adapted from A. B. Kahn. 1962. Topological sorting of large networks. Commun. ACM 5, 11
+            // (Nov. 1962), 558-562. DOI:https://doi.org/10.1145/368996.369025
 
             // L is the sorted list
             List<T> L = new(elements.Count);
@@ -229,7 +234,8 @@ namespace Microsoft.Interop
             /// </summary>
             /// <param name="to">The node the edge points to.</param>
             /// <param name="from">The node the edge start at.</param>
-            /// <returns>If there exists an edge that starts at <paramref name="from"/> and ends at <paramref name="to"/></returns>
+            /// <returns>If there exists an edge that starts at <paramref name="from"/> and ends at <paramref
+            // name="to"/></returns>
             public bool this[int to, int from]
             {
                 get => _edgeMap[to * NodeCount + from];
@@ -330,9 +336,13 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Get the marshalling direction for a given <see cref="TypePositionInfo"/> in a given <see cref="StubCodeContext"/>.
-        /// For example, an out parameter is marshalled in the <see cref="MarshalDirection.UnmanagedToManaged"/> direction in a <see cref="MarshalDirection.ManagedToUnmanaged"/> stub,
-        /// but from <see cref="MarshalDirection.ManagedToUnmanaged"/> in a <see cref="MarshalDirection.UnmanagedToManaged"/> stub.
+        /// Get the marshalling direction for a given <see cref="TypePositionInfo"/> in a given <see
+        // cref="StubCodeContext"/>.
+        /// For example, an out parameter is marshalled in the <see
+        // cref="MarshalDirection.UnmanagedToManaged"/> direction in a <see
+        // cref="MarshalDirection.ManagedToUnmanaged"/> stub,
+        /// but from <see cref="MarshalDirection.ManagedToUnmanaged"/> in a <see
+        // cref="MarshalDirection.UnmanagedToManaged"/> stub.
         /// </summary>
         /// <param name="info">The info for an element.</param>
         /// <param name="context">The context for the stub.</param>
@@ -404,7 +414,8 @@ namespace Microsoft.Interop
             StubCodeContext context
         )
         {
-            // Unmanaged to managed doesn't properly handle lifetimes right now and will default to the original behavior.
+            // Unmanaged to managed doesn't properly handle lifetimes right now and will default to the original
+            // behavior.
             // Failures will only occur when marshalling fails, and would only cause leaks, not double frees.
             // See https://github.com/dotnet/runtime/issues/89483 for more details
             if (context.Direction is MarshalDirection.UnmanagedToManaged)
@@ -420,9 +431,12 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Ensure that the count of a collection is available at call time if the parameter is not an out parameter.
-        /// It only looks at an indirection level of 0 (the size of the outer array), so there are some holes in
-        /// analysis if the parameter is a multidimensional array, but that case seems very unlikely to be hit.
+        /// Ensure that the count of a collection is available at call time if the parameter is not an out
+        // parameter.
+        /// It only looks at an indirection level of 0 (the size of the outer array), so there are some
+        // holes in
+        /// analysis if the parameter is a multidimensional array, but that case seems very unlikely to be
+        // hit.
         /// </summary>
         public static void ValidateCountInfoAvailableAtCall(
             MarshalDirection stubDirection,
@@ -468,7 +482,8 @@ namespace Microsoft.Interop
                         )
                     );
                 }
-                // If the parameter is multidimensional and a higher indirection level parameter is ByValue [Out], then we should warn.
+                // If the parameter is multidimensional and a higher indirection level parameter is ByValue [Out],
+                // then we should warn.
             }
         }
     }

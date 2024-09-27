@@ -16,7 +16,8 @@ public interface IHtmlContentBuilder : IHtmlContentContainer
     IHtmlContentBuilder AppendHtml(IHtmlContent content);
 
     /// <summary>
-    /// Appends a <see cref="string"/> value. The value is treated as unencoded as-provided, and will be HTML
+    /// Appends a <see cref="string"/> value. The value is treated as unencoded as-provided, and will be
+    // HTML
     /// encoded before writing to output.
     /// </summary>
     /// <param name="unencoded">The <see cref="string"/> to append.</param>
@@ -24,7 +25,8 @@ public interface IHtmlContentBuilder : IHtmlContentContainer
     IHtmlContentBuilder Append(string unencoded);
 
     /// <summary>
-    /// Appends an HTML encoded <see cref="string"/> value. The value is treated as HTML encoded as-provided, and
+    /// Appends an HTML encoded <see cref="string"/> value. The value is treated as HTML encoded
+    // as-provided, and
     /// no further encoding will be performed.
     /// </summary>
     /// <param name="encoded">The HTML encoded <see cref="string"/> to append.</param>

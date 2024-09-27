@@ -127,16 +127,19 @@ namespace System.Reflection.Emit
             // Get the types of the constructor's formal parameters.
             paramTypes = con.GetParameterTypes();
 
-            // Since we're guaranteed a non-var calling convention, the number of arguments must equal the number of parameters.
+            // Since we're guaranteed a non-var calling convention, the number of arguments must equal the
+            // number of parameters.
             if (paramTypes.Length != constructorArgs.Length)
                 throw new ArgumentException(SR.Argument_BadParameterCountsForConstructor);
 
-            // Verify that the constructor has a valid signature (custom attributes only support a subset of our type system).
+            // Verify that the constructor has a valid signature (custom attributes only support a subset of our
+            // type system).
             for (i = 0; i < paramTypes.Length; i++)
                 if (!ValidateType(paramTypes[i]))
                     throw new ArgumentException(SR.Argument_BadTypeInCustomAttribute);
 
-            // Now verify that the types of the actual parameters are compatible with the types of the formal parameters.
+            // Now verify that the types of the actual parameters are compatible with the types of the formal
+            // parameters.
             for (i = 0; i < paramTypes.Length; i++)
             {
                 object? constructorArg = constructorArgs[i];
@@ -155,14 +158,16 @@ namespace System.Reflection.Emit
                 );
             }
 
-            // Allocate a memory stream to represent the CA blob in the metadata and a binary writer to help format it.
+            // Allocate a memory stream to represent the CA blob in the metadata and a binary writer to help
+            // format it.
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream);
 
             // Write the blob protocol version (currently 1).
             writer.Write((ushort)1);
 
-            // Now emit the constructor argument values (no need for types, they're inferred from the constructor signature).
+            // Now emit the constructor argument values (no need for types, they're inferred from the
+            // constructor signature).
             for (i = 0; i < constructorArgs.Length; i++)
                 EmitValue(writer, paramTypes[i], constructorArgs[i]);
 
@@ -437,7 +442,8 @@ namespace System.Reflection.Emit
 
         private static void EmitString(BinaryWriter writer, string str)
         {
-            // Strings are emitted with a length prefix in a compressed format (1, 2 or 4 bytes) as used internally by metadata.
+            // Strings are emitted with a length prefix in a compressed format (1, 2 or 4 bytes) as used
+            // internally by metadata.
             byte[] utf8Str = Encoding.UTF8.GetBytes(str);
             uint length = (uint)utf8Str.Length;
             if (length <= 0x7f)
@@ -574,9 +580,12 @@ namespace System.Reflection.Emit
             }
             else if (type == typeof(object))
             {
-                // Tagged object case. Type instances aren't actually Type, they're some subclass (such as RuntimeType or
-                // TypeBuilder), so we need to canonicalize this case back to Type. If we have a null value we follow the convention
-                // used by C# and emit a null typed as a string (it doesn't really matter what type we pick as long as it's a
+                // Tagged object case. Type instances aren't actually Type, they're some subclass (such as
+                // RuntimeType or
+                // TypeBuilder), so we need to canonicalize this case back to Type. If we have a null value we
+                // follow the convention
+                // used by C# and emit a null typed as a string (it doesn't really matter what type we pick as long
+                // as it's a
                 // reference type).
                 Type ot =
                     value == null ? typeof(string)

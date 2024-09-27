@@ -8,7 +8,9 @@ using System.Text;
 namespace ILCompiler.Reflection.ReadyToRun
 {
     /// <summary>
-    /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/gcinfotypes.h">src\inc\gcinfotypes.h</a> infoHdrAdjustConstants
+    /// based on <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/gcinfotypes.h">src\inc\gcinfotypes.h</a>
+    // infoHdrAdjustConstants
     /// </summary>
     enum InfoHdrAdjustConstants
     {
@@ -26,7 +28,9 @@ namespace ILCompiler.Reflection.ReadyToRun
 
     /// <summary>
     /// Enum to define codes that are used to incrementally adjust the InfoHdr structure.
-    /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/gcinfotypes.h">src\inc\gcinfotypes.h</a> infoHdrAdjustConstants
+    /// based on <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/gcinfotypes.h">src\inc\gcinfotypes.h</a>
+    // infoHdrAdjustConstants
     /// </summary>
     enum InfoHdrAdjust
     {
@@ -68,7 +72,8 @@ namespace ILCompiler.Reflection.ReadyToRun
     };
 
     /// <summary>
-    /// based on macros defined in <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/gcinfotypes.h">src\inc\gcinfotypes.h</a>
+    /// based on macros defined in <a
+    // href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/gcinfotypes.h">src\inc\gcinfotypes.h</a>
     /// </summary>
     public class GcInfoTypes
     {

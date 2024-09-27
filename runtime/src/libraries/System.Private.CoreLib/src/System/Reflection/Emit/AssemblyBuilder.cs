@@ -99,7 +99,8 @@ namespace System.Reflection.Emit
         /// <summary>
         /// Allows dynamic code even though RuntimeFeature.IsDynamicCodeSupported is false.
         /// </summary>
-        /// <returns>An object that, when disposed, will revert allowing dynamic code back to its initial state.</returns>
+        /// <returns>An object that, when disposed, will revert allowing dynamic code back to its initial
+        // state.</returns>
         /// <remarks>
         /// This is useful for cases where RuntimeFeature.IsDynamicCodeSupported returns false, but
         /// the runtime is still capable of emitting dynamic code. For example, when generating delegates

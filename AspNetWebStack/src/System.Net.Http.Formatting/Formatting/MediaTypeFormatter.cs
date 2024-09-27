@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// Base class to handle serializing and deserializing strongly-typed objects using <see cref="ObjectContent"/>.
+    /// Base class to handle serializing and deserializing strongly-typed objects using <see
+    // cref="ObjectContent"/>.
     /// </summary>
     public abstract class MediaTypeFormatter
     {
@@ -62,7 +64,8 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Initializes a new instance of the <see cref="MediaTypeFormatter"/> class.
         /// </summary>
-        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> instance to copy settings from.</param>
+        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> instance to copy settings
+        // from.</param>
         protected MediaTypeFormatter(MediaTypeFormatter formatter)
         {
             if (formatter == null)
@@ -158,12 +161,15 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Returns a <see cref="Task"/> to deserialize an object of the given <paramref name="type"/> from the given <paramref name="readStream"/>
+        /// Returns a <see cref="Task"/> to deserialize an object of the given <paramref name="type"/> from
+        // the given <paramref name="readStream"/>
         /// </summary>
         /// <remarks>
-        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should override this method if the formatter
+        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should
+        // override this method if the formatter
         /// supports reading.</para>
-        /// <para>An implementation of this method should NOT close <paramref name="readStream"/> upon completion. The stream will be closed independently when
+        /// <para>An implementation of this method should NOT close <paramref name="readStream"/> upon
+        // completion. The stream will be closed independently when
         /// the <see cref="HttpContent"/> instance is disposed.
         /// </para>
         /// </remarks>
@@ -188,12 +194,15 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Returns a <see cref="Task"/> to deserialize an object of the given <paramref name="type"/> from the given <paramref name="readStream"/>
+        /// Returns a <see cref="Task"/> to deserialize an object of the given <paramref name="type"/> from
+        // the given <paramref name="readStream"/>
         /// </summary>
         /// <remarks>
-        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should override this method if the formatter
+        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should
+        // override this method if the formatter
         /// supports reading.</para>
-        /// <para>An implementation of this method should NOT close <paramref name="readStream"/> upon completion. The stream will be closed independently when
+        /// <para>An implementation of this method should NOT close <paramref name="readStream"/> upon
+        // completion. The stream will be closed independently when
         /// the <see cref="HttpContent"/> instance is disposed.
         /// </para>
         /// </remarks>
@@ -222,13 +231,16 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Returns a <see cref="Task"/> that serializes the given <paramref name="value"/> of the given <paramref name="type"/>
+        /// Returns a <see cref="Task"/> that serializes the given <paramref name="value"/> of the given
+        // <paramref name="type"/>
         /// to the given <paramref name="writeStream"/>.
         /// </summary>
         /// <remarks>
-        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should override this method if the formatter
+        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should
+        // override this method if the formatter
         /// supports reading.</para>
-        /// <para>An implementation of this method should NOT close <paramref name="writeStream"/> upon completion. The stream will be closed independently when
+        /// <para>An implementation of this method should NOT close <paramref name="writeStream"/> upon
+        // completion. The stream will be closed independently when
         /// the <see cref="HttpContent"/> instance is disposed.
         /// </para>
         /// </remarks>
@@ -236,7 +248,8 @@ namespace System.Net.Http.Formatting
         /// <param name="value">The object value to write.  It may be <c>null</c>.</param>
         /// <param name="writeStream">The <see cref="Stream"/> to which to write.</param>
         /// <param name="content">The <see cref="HttpContent"/> if available. It may be <c>null</c>.</param>
-        /// <param name="transportContext">The <see cref="TransportContext"/> if available. It may be <c>null</c>.</param>
+        /// <param name="transportContext">The <see cref="TransportContext"/> if available. It may be
+        // <c>null</c>.</param>
         /// <returns>A <see cref="Task"/> that will perform the write.</returns>
         /// <exception cref="NotSupportedException">Derived types need to support writing.</exception>
         /// <seealso cref="CanWriteType(Type)"/>
@@ -248,8 +261,10 @@ namespace System.Net.Http.Formatting
             TransportContext transportContext
         )
         {
-            // HttpContent.SerializeToStreamAsync doesn't take in a CancellationToken. So, there is no easy way to get the CancellationToken
-            // to the formatter while writing response. We are cheating here by passing fake cancellation tokens. We should fix this
+            // HttpContent.SerializeToStreamAsync doesn't take in a CancellationToken. So, there is no easy way
+            // to get the CancellationToken
+            // to the formatter while writing response. We are cheating here by passing fake cancellation
+            // tokens. We should fix this
             // when we fix HttpContent.
             return WriteToStreamAsync(
                 type,
@@ -262,13 +277,16 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Returns a <see cref="Task"/> that serializes the given <paramref name="value"/> of the given <paramref name="type"/>
+        /// Returns a <see cref="Task"/> that serializes the given <paramref name="value"/> of the given
+        // <paramref name="type"/>
         /// to the given <paramref name="writeStream"/>.
         /// </summary>
         /// <remarks>
-        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should override this method if the formatter
+        /// <para>This implementation throws a <see cref="NotSupportedException"/>. Derived types should
+        // override this method if the formatter
         /// supports reading.</para>
-        /// <para>An implementation of this method should NOT close <paramref name="writeStream"/> upon completion. The stream will be closed independently when
+        /// <para>An implementation of this method should NOT close <paramref name="writeStream"/> upon
+        // completion. The stream will be closed independently when
         /// the <see cref="HttpContent"/> instance is disposed.
         /// </para>
         /// </remarks>
@@ -276,7 +294,8 @@ namespace System.Net.Http.Formatting
         /// <param name="value">The object value to write.  It may be <c>null</c>.</param>
         /// <param name="writeStream">The <see cref="Stream"/> to which to write.</param>
         /// <param name="content">The <see cref="HttpContent"/> if available. It may be <c>null</c>.</param>
-        /// <param name="transportContext">The <see cref="TransportContext"/> if available. It may be <c>null</c>.</param>
+        /// <param name="transportContext">The <see cref="TransportContext"/> if available. It may be
+        // <c>null</c>.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="Task"/> that will perform the write.</returns>
         /// <exception cref="NotSupportedException">Derived types need to support writing.</exception>
@@ -318,9 +337,11 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// This method converts <see cref="IEnumerable{T}"/> (and interfaces that mandate it) to a <see cref="DelegatingEnumerable{T}"/> for serialization purposes.
+        /// This method converts <see cref="IEnumerable{T}"/> (and interfaces that mandate it) to a <see
+        // cref="DelegatingEnumerable{T}"/> for serialization purposes.
         /// </summary>
-        /// <param name="type">The type to potentially be wrapped. If the type is wrapped, it's changed in place.</param>
+        /// <param name="type">The type to potentially be wrapped. If the type is wrapped, it's changed in
+        // place.</param>
         /// <returns>Returns <c>true</c> if the type was wrapped; <c>false</c>, otherwise</returns>
         internal static bool TryGetDelegatingTypeForIEnumerableGenericOrSame(ref Type type)
         {
@@ -331,9 +352,11 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// This method converts <see cref="IQueryable{T}"/> (and interfaces that mandate it) to a <see cref="DelegatingEnumerable{T}"/> for serialization purposes.
+        /// This method converts <see cref="IQueryable{T}"/> (and interfaces that mandate it) to a <see
+        // cref="DelegatingEnumerable{T}"/> for serialization purposes.
         /// </summary>
-        /// <param name="type">The type to potentially be wrapped. If the type is wrapped, it's changed in place.</param>
+        /// <param name="type">The type to potentially be wrapped. If the type is wrapped, it's changed in
+        // place.</param>
         /// <returns>Returns <c>true</c> if the type was wrapped; <c>false</c>, otherwise</returns>
         internal static bool TryGetDelegatingTypeForIQueryableGenericOrSame(ref Type type)
         {
@@ -352,10 +375,13 @@ namespace System.Net.Http.Formatting
 
         /// <summary>
         /// Determines the best <see cref="Encoding"/> amongst the supported encodings
-        /// for reading or writing an HTTP entity body based on the provided <paramref name="contentHeaders"/>.
+        /// for reading or writing an HTTP entity body based on the provided <paramref
+        // name="contentHeaders"/>.
         /// </summary>
-        /// <param name="contentHeaders">The content headers provided as part of the request or response.</param>
-        /// <returns>The <see cref="Encoding"/> to use when reading the request or writing the response.</returns>
+        /// <param name="contentHeaders">The content headers provided as part of the request or
+        // response.</param>
+        /// <returns>The <see cref="Encoding"/> to use when reading the request or writing the
+        // response.</returns>
         public Encoding SelectCharacterEncoding(HttpContentHeaders contentHeaders)
         {
             // Performance-sensitive
@@ -408,17 +434,22 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Sets the default headers for content that will be formatted using this formatter. This method
         /// is called from the <see cref="ObjectContent"/> constructor.
-        /// This implementation sets the Content-Type header to the value of <paramref name="mediaType"/> if it is
-        /// not <c>null</c>. If it is <c>null</c> it sets the Content-Type to the default media type of this formatter.
+        /// This implementation sets the Content-Type header to the value of <paramref name="mediaType"/> if
+        // it is
+        /// not <c>null</c>. If it is <c>null</c> it sets the Content-Type to the default media type of this
+        // formatter.
         /// If the Content-Type does not specify a charset it will set it using this formatters configured
         /// <see cref="Encoding"/>.
         /// </summary>
         /// <remarks>
-        /// Subclasses can override this method to set content headers such as Content-Type etc. Subclasses should
-        /// call the base implementation. Subclasses should treat the passed in <paramref name="mediaType"/> (if not <c>null</c>)
+        /// Subclasses can override this method to set content headers such as Content-Type etc. Subclasses
+        // should
+        /// call the base implementation. Subclasses should treat the passed in <paramref name="mediaType"/>
+        // (if not <c>null</c>)
         /// as the authoritative media type and use that as the Content-Type.
         /// </remarks>
-        /// <param name="type">The type of the object being serialized. See <see cref="ObjectContent"/>.</param>
+        /// <param name="type">The type of the object being serialized. See <see
+        // cref="ObjectContent"/>.</param>
         /// <param name="headers">The content headers that should be configured.</param>
         /// <param name="mediaType">The authoritative media type. Can be <c>null</c>.</param>
         public virtual void SetDefaultContentHeaders(
@@ -471,17 +502,21 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Returns a specialized instance of the <see cref="MediaTypeFormatter"/> that can handle formatting a response for the given
-        /// parameters. This method is called after a formatter has been selected through content negotiation.
+        /// Returns a specialized instance of the <see cref="MediaTypeFormatter"/> that can handle
+        // formatting a response for the given
+        /// parameters. This method is called after a formatter has been selected through content
+        // negotiation.
         /// </summary>
         /// <remarks>
-        /// The default implementation returns <c>this</c> instance. Derived classes can choose to return a new instance if
+        /// The default implementation returns <c>this</c> instance. Derived classes can choose to return a
+        // new instance if
         /// they need to close over any of the parameters.
         /// </remarks>
         /// <param name="type">The type being serialized.</param>
         /// <param name="request">The request.</param>
         /// <param name="mediaType">The media type chosen for the serialization. Can be <c>null</c>.</param>
-        /// <returns>An instance that can format a response to the given <paramref name="request"/>.</returns>
+        /// <returns>An instance that can format a response to the given <paramref
+        // name="request"/>.</returns>
         public virtual MediaTypeFormatter GetPerRequestFormatterInstance(
             Type type,
             HttpRequestMessage request,
@@ -508,7 +543,8 @@ namespace System.Net.Http.Formatting
         /// Derived classes must implement this method and indicate if a type can or cannot be deserialized.
         /// </remarks>
         /// <param name="type">The type of object that will be deserialized.</param>
-        /// <returns><c>true</c> if this <see cref="MediaTypeFormatter"/> can deserialize an object of that type; otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if this <see cref="MediaTypeFormatter"/> can deserialize an object of that
+        // type; otherwise <c>false</c>.</returns>
         public abstract bool CanReadType(Type type);
 
         /// <summary>
@@ -519,7 +555,8 @@ namespace System.Net.Http.Formatting
         /// Derived classes must implement this method and indicate if a type can or cannot be serialized.
         /// </remarks>
         /// <param name="type">The type of object that will be serialized.</param>
-        /// <returns><c>true</c> if this <see cref="MediaTypeFormatter"/> can serialize an object of that type; otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if this <see cref="MediaTypeFormatter"/> can serialize an object of that
+        // type; otherwise <c>false</c>.</returns>
         public abstract bool CanWriteType(Type type);
 
         private static Type GetOrAddDelegatingType(Type type, Type genericType)
@@ -528,7 +565,8 @@ namespace System.Net.Http.Formatting
                 type,
                 (typeToRemap) =>
                 {
-                    // The current method is called by methods that already checked the type for is not null, is generic and is or implements IEnumerable<T>
+                    // The current method is called by methods that already checked the type for is not null, is generic
+                    // and is or implements IEnumerable<T>
                     // This retrieves the T type of the IEnumerable<T> interface.
                     Type elementType = genericType.GetGenericArguments()[0];
                     Type delegatingType =
@@ -591,7 +629,8 @@ namespace System.Net.Http.Formatting
                 : base(list) { }
 
             /// <summary>
-            /// Inserts the <paramref name="item"/> into the collection at the specified <paramref name="index"/>.
+            /// Inserts the <paramref name="item"/> into the collection at the specified <paramref
+            // name="index"/>.
             /// </summary>
             /// <param name="index">The zero-based index at which item should be inserted.</param>
             /// <param name="item">The object to insert. It cannot be <c>null</c>.</param>
@@ -605,7 +644,8 @@ namespace System.Net.Http.Formatting
             /// Replaces the element at the specified <paramref name="index"/>.
             /// </summary>
             /// <param name="index">The zero-based index of the item that should be replaced.</param>
-            /// <param name="item">The new value for the element at the specified index.  It cannot be <c>null</c>.</param>
+            /// <param name="item">The new value for the element at the specified index.  It cannot be
+            // <c>null</c>.</param>
             protected override void SetItem(int index, MediaTypeHeaderValue item)
             {
                 ValidateMediaType(item);

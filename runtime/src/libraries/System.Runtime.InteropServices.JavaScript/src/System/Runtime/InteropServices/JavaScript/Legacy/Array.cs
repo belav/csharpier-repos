@@ -60,7 +60,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Index of the search element.
         /// </summary>
-        /// <returns>The index of first occurrence of searchElement in the Array or -1 if not Found.</returns>
+        /// <returns>The index of first occurrence of searchElement in the Array or -1 if not
+        // Found.</returns>
         /// <param name="searchElement">Search element.</param>
         /// <param name="fromIndex">The index to start the search from.</param>
         public int IndexOf(object searchElement, int fromIndex = 0) =>
@@ -75,7 +76,8 @@ namespace System.Runtime.InteropServices.JavaScript
             (int)this.Invoke("lastIndexOf", searchElement);
 
         /// <summary>
-        /// Finds the index of the last occurrence of<paramref name="searchElement" /> between 0 and <paramref name="endIndex" />.
+        /// Finds the index of the last occurrence of<paramref name="searchElement" /> between 0 and
+        // <paramref name="endIndex" />.
         /// </summary>
         /// <returns>The index of the last occurrence.</returns>
         /// <param name="searchElement">Search element.</param>

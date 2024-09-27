@@ -182,7 +182,8 @@ namespace System.IO.Ports.Tests
                 );
                 com1.Open();
 
-                //Call EnableRTS asynchronously this will enable RTS in the middle of the following write call allowing it to succeed
+                //Call EnableRTS asynchronously this will enable RTS in the middle of the following write call
+                // allowing it to succeed
                 //before the timeout is reached
                 t.Start();
                 TCSupport.WaitForTaskToStart(t);
@@ -358,7 +359,8 @@ namespace System.IO.Ports.Tests
                         Random rndGen = new Random(-55);
                         int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
 
-                        //Sleep some random period with of a maximum duration of half the largest possible timeout value for a write method on COM1
+                        //Sleep some random period with of a maximum duration of half the largest possible timeout value for
+                        // a write method on COM1
                         Thread.Sleep(sleepPeriod);
 
                         com2.Open();
@@ -449,7 +451,8 @@ namespace System.IO.Ports.Tests
             actualTime /= NUM_TRYS;
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
 
-            //Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
+            //Verify that the percentage difference between the expected and actual timeout is less then
+            // maxPercentageDifference
             if (maxPercentageDifference < percentageDifference)
             {
                 Fail(
@@ -518,7 +521,8 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForWriteBufferToLoad(com1, randomLineBytes.Length + numNewLineBytes);
 
-                //Verify that CtsHolding is false if the RequestToSend or RequestToSendXOnXOff handshake method is used
+                //Verify that CtsHolding is false if the RequestToSend or RequestToSendXOnXOff handshake method is
+                // used
                 if (
                     (
                         Handshake.RequestToSend == handshake
@@ -548,7 +552,8 @@ namespace System.IO.Ports.Tests
 
                 Assert.Equal(0, com1.BytesToWrite);
 
-                //Verify that CtsHolding is true if the RequestToSend or RequestToSendXOnXOff handshake method is used
+                //Verify that CtsHolding is true if the RequestToSend or RequestToSendXOnXOff handshake method is
+                // used
                 if (
                     (
                         Handshake.RequestToSend == handshake

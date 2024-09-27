@@ -62,7 +62,8 @@ namespace System.Runtime.Intrinsics.X86
             }
 
             /// <summary>
-            /// unsigned __int64 _udiv128(unsigned __int64 highdividend, unsigned __int64 lowdividend, unsigned __int64 divisor, unsigned __int64* remainder)
+            /// unsigned __int64 _udiv128(unsigned __int64 highdividend, unsigned __int64 lowdividend, unsigned
+            // __int64 divisor, unsigned __int64* remainder)
             ///   DIV reg/m64
             /// </summary>
             [RequiresPreviewFeatures("DivRem is in preview.")]

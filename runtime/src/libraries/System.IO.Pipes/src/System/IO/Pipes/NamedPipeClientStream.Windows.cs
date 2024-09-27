@@ -16,16 +16,21 @@ namespace System.IO.Pipes
     /// </summary>
     public sealed partial class NamedPipeClientStream : PipeStream
     {
-        // Waits for a pipe instance to become available. This method may return before WaitForConnection is called
-        // on the server end, but WaitForConnection will not return until we have returned.  Any data written to the
-        // pipe by us after we have connected but before the server has called WaitForConnection will be available
+        // Waits for a pipe instance to become available. This method may return before WaitForConnection is
+        // called
+        // on the server end, but WaitForConnection will not return until we have returned.  Any data
+        // written to the
+        // pipe by us after we have connected but before the server has called WaitForConnection will be
+        // available
         // to the server after it calls WaitForConnection.
         private bool TryConnect(int timeout)
         {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = PipeStream.GetSecAttrs(_inheritability);
 
-            // PipeOptions.CurrentUserOnly is special since it doesn't match directly to a corresponding Win32 valid flag.
-            // Remove it, while keeping others untouched since historically this has been used as a way to pass flags to
+            // PipeOptions.CurrentUserOnly is special since it doesn't match directly to a corresponding Win32
+            // valid flag.
+            // Remove it, while keeping others untouched since historically this has been used as a way to pass
+            // flags to
             // CreateNamedPipeClient that were not defined in the enumeration.
             int _pipeFlags = (int)(_pipeOptions & ~PipeOptions.CurrentUserOnly);
             if (_impersonationLevel != TokenImpersonationLevel.None)
@@ -57,7 +62,8 @@ namespace System.IO.Pipes
 
                 handle.Dispose();
 
-                // CreateFileW: "If the CreateNamedPipe function was not successfully called on the server prior to this operation,
+                // CreateFileW: "If the CreateNamedPipe function was not successfully called on the server prior to
+                // this operation,
                 // a pipe will not exist and CreateFile will fail with ERROR_FILE_NOT_FOUND"
                 // WaitNamedPipeW: "If no instances of the specified named pipe exist,
                 // the WaitNamedPipe function returns immediately, regardless of the time-out value."

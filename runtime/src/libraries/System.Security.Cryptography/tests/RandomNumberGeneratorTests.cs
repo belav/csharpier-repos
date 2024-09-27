@@ -227,7 +227,8 @@ namespace System.Security.Cryptography.Tests
         [InlineData(1048576)]
         public static void DifferentParallel(int arraySize)
         {
-            // Ensure that two RNGs don't produce the same data series (such as being implemented via new Random(1)).
+            // Ensure that two RNGs don't produce the same data series (such as being implemented via new
+            // Random(1)).
             byte[] first = new byte[arraySize];
             byte[] second = new byte[arraySize];
 
@@ -747,8 +748,10 @@ namespace System.Security.Cryptography.Tests
         [MemberData(nameof(GetHexStringLengths))]
         public static void GetHexString_Allocating_Random(int length)
         {
-            // We generate 256 strings and verify that there is no offset into the strings at which all strings contain
-            // the same character. The odds of throwing 256 d16's and all of them landing the same is nearly nothing so
+            // We generate 256 strings and verify that there is no offset into the strings at which all strings
+            // contain
+            // the same character. The odds of throwing 256 d16's and all of them landing the same is nearly
+            // nothing so
             // this would be a good signal that the random buffer is not being filled correctly.
             string[] samples = new string[256];
             HashSet<char> hashSet = new HashSet<char>(samples.Length);
@@ -778,7 +781,8 @@ namespace System.Security.Cryptography.Tests
         [MemberData(nameof(GetHexStringLengths))]
         public static void GetHexString_Buffer_Random(int length)
         {
-            // We generate 256 strings and verify that all positions in those 256 strings don't contain identical
+            // We generate 256 strings and verify that all positions in those 256 strings don't contain
+            // identical
             // characters. The odds of throwing 256 d16's and all of them landing the same is nearly nothing so
             // this would be a good signal that the random buffer is not being filled correctly.
             char[][] samples = new char[256][];

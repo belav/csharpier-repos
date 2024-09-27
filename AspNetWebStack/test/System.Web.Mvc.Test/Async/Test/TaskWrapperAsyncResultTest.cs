@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,7 +37,8 @@ namespace System.Web.Mvc.Async.Test
             Assert.Equal(mockTask.Object, taskWrapper.Task);
         }
 
-        // Assists in mocking a Task by passing a dummy action to the Task constructor [which defers execution]
+        // Assists in mocking a Task by passing a dummy action to the Task constructor [which defers
+        // execution]
         public class MyTask : Task, IAsyncResult
         {
             public MyTask()

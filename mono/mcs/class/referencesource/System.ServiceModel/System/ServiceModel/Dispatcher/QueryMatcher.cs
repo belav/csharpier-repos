@@ -292,7 +292,8 @@ namespace System.ServiceModel.Dispatcher
                 new XPathFunctionLibrary(),
             };
 
-            // For some incomprehensible reason, the Framework XPath compiler requires an instance of an XPath navigator
+            // For some incomprehensible reason, the Framework XPath compiler requires an instance of an XPath
+            // navigator
             // to compile an xpath. This compiler uses a dummy xml document to create a navigator
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<a/>");
@@ -358,7 +359,8 @@ namespace System.ServiceModel.Dispatcher
             // Fx will bind prefixes and functions here.
             if (namespaces != null)
             {
-                // There's a bug in System.Xml.XPath.  If we pass an XsltContext to SetContext it won't throw if there's
+                // There's a bug in System.Xml.XPath.  If we pass an XsltContext to SetContext it won't throw if
+                // there's
                 // an undefined prefix.
                 if (namespaces is XsltContext)
                 {
@@ -605,14 +607,16 @@ namespace System.ServiceModel.Dispatcher
         }
 
         /// <summary>
-        /// Execute matches over the given seekable navigator. If the navigator is not safe, wrap it with one that is
+        /// Execute matches over the given seekable navigator. If the navigator is not safe, wrap it with
+        // one that is
         /// </summary>
         internal FilterResult Match(
             SeekableXPathNavigator navigator,
             ICollection<MessageFilter> matches
         )
         {
-            // If the matcher places restrictions on the # of nodes we will inspect, and the navigator passed does
+            // If the matcher places restrictions on the # of nodes we will inspect, and the navigator passed
+            // does
             // not do any nodecounting itself, we must make that navigator safe by wrapping it
             if (this.maxNodes < int.MaxValue)
             {
@@ -749,7 +753,8 @@ namespace System.ServiceModel.Dispatcher
         /// <summary>
         /// If the xpath is an empty string, there is nothing to compile and the filter always matches
         /// If not, try to compile the filter for execution within the filter engine's own query processor
-        /// If that query processor cannot accept the filter (it doesn't fall within the class of xpaths it can handle),
+        /// If that query processor cannot accept the filter (it doesn't fall within the class of xpaths it
+        // can handle),
         /// then revert to the fall-back solution - the slower Fx engine
         /// </summary>
         internal void Compile(string expression, XmlNamespaceManager namespaces)

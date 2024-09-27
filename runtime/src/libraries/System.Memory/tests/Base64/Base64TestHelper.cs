@@ -13,7 +13,8 @@ namespace System.Buffers.Text.Tests
         public static string s_characters =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-        // Pre-computing this table using a custom string(s_characters) and GenerateEncodingMapAndVerify (found in tests)
+        // Pre-computing this table using a custom string(s_characters) and GenerateEncodingMapAndVerify
+        // (found in tests)
         public static readonly byte[] s_encodingMap =
         {
             65,
@@ -83,7 +84,8 @@ namespace System.Buffers.Text.Tests
             ,
         };
 
-        // Pre-computing this table using a custom string(s_characters) and GenerateDecodingMapAndVerify (found in tests)
+        // Pre-computing this table using a custom string(s_characters) and GenerateDecodingMapAndVerify
+        // (found in tests)
         public static readonly sbyte[] s_decodingMap =
         {
             -1,

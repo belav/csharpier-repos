@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * PassportIdentity
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* PassportIdentity
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Security
 {

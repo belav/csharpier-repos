@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -54,7 +55,8 @@ namespace System.Web.Mvc
         )
         {
             // If metadata is being created for a property then containerType != null && propertyName != null
-            // If metadata is being created for a type then containerType == null && propertyName == null, so we have to use modelType for the cache key.
+            // If metadata is being created for a type then containerType == null && propertyName == null, so we
+            // have to use modelType for the cache key.
             Type typeForCache = containerType ?? modelType;
             string cacheKey = GetCacheKey(typeForCache, propertyName);
             TModelMetadata prototype = PrototypeCache.Get(cacheKey) as TModelMetadata;

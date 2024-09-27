@@ -29,7 +29,8 @@ namespace MonoTests.System.Security.Cryptography
     public class SelectableHmacSha384 : HMAC
     {
         // legacy parameter:
-        //      http://blogs.msdn.com/shawnfa/archive/2007/01/31/please-do-not-use-the-net-2-0-hmacsha512-and-hmacsha384-classes.aspx
+        //
+        // http://blogs.msdn.com/shawnfa/archive/2007/01/31/please-do-not-use-the-net-2-0-hmacsha512-and-hmacsha384-classes.aspx
 
         public SelectableHmacSha384(byte[] key, bool legacy)
         {
@@ -308,7 +309,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         [Test]
-        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224 and SHA-256).
+        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224
+        // and SHA-256).
         public void RFC4231_TC3_Normal()
         {
             byte[] key =
@@ -443,7 +445,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         [Test]
-        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224 and SHA-256).
+        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224
+        // and SHA-256).
         public void RFC4231_TC4_Normal()
         {
             byte[] key =
@@ -1169,7 +1172,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         [Test]
-        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224 and SHA-256).
+        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224
+        // and SHA-256).
         public void RFC4231_TC3_Legacy()
         {
             byte[] key =
@@ -1304,7 +1308,8 @@ namespace MonoTests.System.Security.Cryptography
         }
 
         [Test]
-        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224 and SHA-256).
+        // Test with a combined length of key and data that is larger than 64 bytes (= block-size of SHA-224
+        // and SHA-256).
         public void RFC4231_TC4_Legacy()
         {
             byte[] key =

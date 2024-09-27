@@ -107,7 +107,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // This emulates the case when:
             //  1) One-off deployment of older runtime (not in global location)
             //  2) Older apphost executed, but found newer runtime because of multi-level lookup on Windows
-            //     Note that we don't have multi-level on hostfxr so we will always find the older\one-off hostfxr
+            //     Note that we don't have multi-level on hostfxr so we will always find the older\one-off
+            // hostfxr
             if (OperatingSystem.IsWindows())
             {
                 File.Copy(previousVersionApp.HostFxrDll, app.HostFxrDll, true);

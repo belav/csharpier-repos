@@ -32,8 +32,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             _accessKeyIndex = _originalContent.IndexOf('_');
 
-            // We strip out the access key so it doesn't interupt search, and because we have to handle displaying it ourselves anyway.
-            // Since we strip it out, we also don't need to worry about the access key being the character after the underscore
+            // We strip out the access key so it doesn't interupt search, and because we have to handle
+            // displaying it ourselves anyway.
+            // Since we strip it out, we also don't need to worry about the access key being the character after
+            // the underscore
             _content = _originalContent.Replace("_", "");
         }
 

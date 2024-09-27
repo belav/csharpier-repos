@@ -904,7 +904,8 @@ namespace System.Globalization.Tests
 
         public static IEnumerable<object[]> LastIndexOf_U_WithDiaeresis_TestData()
         {
-            // Searches for the combining character sequence Latin capital letter U with diaeresis or Latin small letter u with diaeresis.
+            // Searches for the combining character sequence Latin capital letter U with diaeresis or Latin
+            // small letter u with diaeresis.
             string source = "Is \u0055\u0308 or \u0075\u0308 the same as \u00DC or \u00FC?";
             yield return new object[]
             {
@@ -1079,7 +1080,8 @@ namespace System.Globalization.Tests
             }
             if (count - startIndex - 1 == 0)
             {
-                // Use LastIndexOf(string, string, int, CompareOptions) or LastIndexOf(string, string, CompareOptions)
+                // Use LastIndexOf(string, string, int, CompareOptions) or LastIndexOf(string, string,
+                // CompareOptions)
                 if (startIndex == source.Length)
                 {
                     // Use LastIndexOf(string, string, CompareOptions)
@@ -1139,7 +1141,8 @@ namespace System.Globalization.Tests
                     source.LastIndexOf(value, startIndex, count, stringComparison)
                 );
 
-                // Use int MemoryExtensions.LastIndexOf(this ReadOnlySpan<char>, ReadOnlySpan<char>, StringComparison)
+                // Use int MemoryExtensions.LastIndexOf(this ReadOnlySpan<char>, ReadOnlySpan<char>,
+                // StringComparison)
                 Assert.Equal(
                     expected - adjustmentFactor,
                     sourceSpan.LastIndexOf(value.AsSpan(), stringComparison)

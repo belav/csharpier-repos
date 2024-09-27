@@ -17,9 +17,9 @@ namespace Mono.Debugger.Soft
 
         public int MinorVersion { get; set; }
 
-        /*
-         * Check that this version is at least major:minor
-         */
+/*
+* Check that this version is at least major:minor
+*/
         public bool AtLeast(int major, int minor)
         {
             if ((MajorVersion > major) || ((MajorVersion == major && MinorVersion >= minor)))
@@ -404,15 +404,15 @@ namespace Mono.Debugger.Soft
         public string ErrorMessage { get; set; }
     }
 
-    /*
-     * Represents the connection to the debuggee
-     */
+/*
+* Represents the connection to the debuggee
+*/
     public abstract class Connection
     {
-        /*
-         * The protocol and the packet format is based on JDWP, the differences
-         * are in the set of supported events, and the commands.
-         */
+/*
+* The protocol and the packet format is based on JDWP, the differences
+* are in the set of supported events, and the commands.
+*/
         internal const string HANDSHAKE_STRING = "DWP-Handshake";
 
         internal const int HEADER_LENGTH = 11;
@@ -423,13 +423,13 @@ namespace Mono.Debugger.Soft
         static int ConnectionId;
         readonly StreamWriter LoggingStream;
 
-        /*
-         * Th version of the wire-protocol implemented by the library. The library
-         * and the debuggee can communicate if they implement the same major version.
-         * If they implement a different minor version, they can communicate, but some
-         * features might not be available. This allows older clients to communicate
-         * with newer runtimes, and vice versa.
-         */
+/*
+* Th version of the wire-protocol implemented by the library. The library
+* and the debuggee can communicate if they implement the same major version.
+* If they implement a different minor version, they can communicate, but some
+* features might not be available. This allows older clients to communicate
+* with newer runtimes, and vice versa.
+*/
         internal const int MAJOR_VERSION = 2;
         internal const int MINOR_VERSION = 58;
 
@@ -524,10 +524,10 @@ namespace Mono.Debugger.Soft
             GET_STATE = 3,
             GET_INFO = 4,
 
-            /* FIXME: Merge into GET_INFO when the major protocol version is increased */
+/* FIXME: Merge into GET_INFO when the major protocol version is increased */
             GET_ID = 5,
 
-            /* Ditto */
+/* Ditto */
             GET_TID = 6,
             SET_IP = 7,
             GET_ELAPSED_TIME = 8,
@@ -605,10 +605,10 @@ namespace Mono.Debugger.Soft
             GET_FIELD_CATTRS = 11,
             GET_PROPERTY_CATTRS = 12,
 
-            /* FIXME: Merge into GET_SOURCE_FILES when the major protocol version is increased */
+/* FIXME: Merge into GET_SOURCE_FILES when the major protocol version is increased */
             GET_SOURCE_FILES_2 = 13,
 
-            /* FIXME: Merge into GET_VALUES when the major protocol version is increased */
+/* FIXME: Merge into GET_VALUES when the major protocol version is increased */
             GET_VALUES_2 = 14,
             CMD_TYPE_GET_METHODS_BY_NAME_FLAGS = 15,
             GET_INTERFACES = 16,
@@ -2011,7 +2011,7 @@ namespace Mono.Debugger.Soft
             buffered_packets.Clear();
         }
 
-        /* Send a request and call cb when a result is received */
+/* Send a request and call cb when a result is received */
         int Send(
             CommandSet command_set,
             int command,
@@ -2046,7 +2046,7 @@ namespace Mono.Debugger.Soft
                     {
                         if (EnableConnectionLogging)
                             LogPacket(packet_id, encoded_packet, p, command_set, command, watch);
-                        /* Run the callback on a tp thread to avoid blocking the receive thread */
+/* Run the callback on a tp thread to avoid blocking the receive thread */
                         PacketReader r = new PacketReader(this, p);
                         cb.BeginInvoke(r, null, null);
                     };
@@ -2095,7 +2095,7 @@ namespace Mono.Debugger.Soft
 
             int packetId = id;
 
-            /* Wait for the reply packet */
+/* Wait for the reply packet */
             while (true)
             {
                 lock (reply_packets_monitor)
@@ -2220,9 +2220,9 @@ namespace Mono.Debugger.Soft
             }
         }
 
-        /*
-         * Implementation of debugger commands
-         */
+/*
+* Implementation of debugger commands
+*/
 
         internal VersionInfo VM_GetVersion()
         {
@@ -2503,9 +2503,9 @@ namespace Mono.Debugger.Soft
             Send(CommandSet.VM, (int)CmdVM.STOP_BUFFERING);
         }
 
-        /*
-         * DOMAIN
-         */
+/*
+* DOMAIN
+*/
 
         internal long RootDomain
         {
@@ -2588,9 +2588,9 @@ namespace Mono.Debugger.Soft
                 .ReadId();
         }
 
-        /*
-         * METHOD
-         */
+/*
+* METHOD
+*/
 
         internal string Method_GetName(long id)
         {
@@ -2867,9 +2867,9 @@ namespace Mono.Debugger.Soft
             return r.ReadId();
         }
 
-        /*
-         * THREAD
-         */
+/*
+* THREAD
+*/
 
         internal string Thread_GetName(long id)
         {
@@ -2973,9 +2973,9 @@ namespace Mono.Debugger.Soft
             );
         }
 
-        /*
-         * MODULE
-         */
+/*
+* MODULE
+*/
 
         internal ModuleInfo Module_GetInfo(long id)
         {
@@ -3006,9 +3006,9 @@ namespace Mono.Debugger.Soft
             );
         }
 
-        /*
-         * ASSEMBLY
-         */
+/*
+* ASSEMBLY
+*/
 
         internal string Assembly_GetLocation(long id)
         {
@@ -3150,9 +3150,9 @@ namespace Mono.Debugger.Soft
             return ReadCattrs(r);
         }
 
-        /*
-         * TYPE
-         */
+/*
+* TYPE
+*/
 
         internal TypeInfo Type_GetInfo(long id)
         {
@@ -3456,9 +3456,9 @@ namespace Mono.Debugger.Soft
             return r.ReadInt();
         }
 
-        /*
-         * FIELD
-         */
+/*
+* FIELD
+*/
 
         internal FieldMirrorInfo Field_GetInfo(long id)
         {
@@ -3477,9 +3477,9 @@ namespace Mono.Debugger.Soft
             return info;
         }
 
-        /*
-         * EVENTS
-         */
+/*
+* EVENTS
+*/
 
         internal int EnableEvent(EventType etype, SuspendPolicy suspend_policy, List<Modifier> mods)
         {
@@ -3523,7 +3523,7 @@ namespace Mono.Debugger.Soft
                         w.WriteId(em.Type);
                         if (Version.MajorVersion > 2 || Version.MinorVersion > 0)
                         {
-                            /* This is only supported in protocol version 2.1 */
+/* This is only supported in protocol version 2.1 */
                             w.WriteBool(em.Caught);
                             w.WriteBool(em.Uncaught);
                         }
@@ -3604,9 +3604,9 @@ namespace Mono.Debugger.Soft
             );
         }
 
-        /*
-         * STACK FRAME
-         */
+/*
+* STACK FRAME
+*/
         internal ValueImpl StackFrame_GetThis(long thread_id, long id)
         {
             PacketReader r = SendReceive(
@@ -3619,8 +3619,8 @@ namespace Mono.Debugger.Soft
 
         internal ValueImpl[] StackFrame_GetValues(long thread_id, long id, int[] pos)
         {
-            /* pos < 0 -> argument at pos (-pos) - 1 */
-            /* pos >= 0 -> local at pos */
+/* pos < 0 -> argument at pos (-pos) - 1 */
+/* pos >= 0 -> local at pos */
             int len = pos.Length;
             PacketReader r = SendReceive(
                 CommandSet.STACK_FRAME,
@@ -3636,8 +3636,8 @@ namespace Mono.Debugger.Soft
 
         internal void StackFrame_SetValues(long thread_id, long id, int[] pos, ValueImpl[] values)
         {
-            /* pos < 0 -> argument at pos (-pos) - 1 */
-            /* pos >= 0 -> local at pos */
+/* pos < 0 -> argument at pos (-pos) - 1 */
+/* pos >= 0 -> local at pos */
             int len = pos.Length;
             SendReceive(
                 CommandSet.STACK_FRAME,
@@ -3670,9 +3670,9 @@ namespace Mono.Debugger.Soft
             );
         }
 
-        /*
-         * ARRAYS
-         */
+/*
+* ARRAYS
+*/
         internal int[] Array_GetLength(long id, out int rank, out int[] lower_bounds)
         {
             var r = SendReceive(
@@ -3733,9 +3733,9 @@ namespace Mono.Debugger.Soft
             SendReceive(CommandSet.ARRAY_REF, (int)CmdArrayRef.SET_VALUES, w);
         }
 
-        /*
-         * STRINGS
-         */
+/*
+* STRINGS
+*/
         internal string String_GetValue(long id)
         {
             var r = SendReceive(
@@ -3778,9 +3778,9 @@ namespace Mono.Debugger.Soft
             return res;
         }
 
-        /*
-         * POINTERS
-         */
+/*
+* POINTERS
+*/
 
         internal ValueImpl Pointer_GetValue(long address, TypeMirror type)
         {
@@ -3792,9 +3792,9 @@ namespace Mono.Debugger.Soft
                 .ReadValue();
         }
 
-        /*
-         * OBJECTS
-         */
+/*
+* OBJECTS
+*/
         internal long Object_GetType(long id)
         {
             return SendReceive(
@@ -3928,7 +3928,7 @@ namespace Mono.Debugger.Soft
         }
     }
 
-    /* This is the interface exposed by the debugger towards the debugger agent */
+/* This is the interface exposed by the debugger towards the debugger agent */
     interface IEventHandler
     {
         void Events(SuspendPolicy suspend_policy, EventInfo[] events);

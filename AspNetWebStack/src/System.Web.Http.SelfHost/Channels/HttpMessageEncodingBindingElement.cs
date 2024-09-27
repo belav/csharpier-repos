@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel.Channels;
@@ -16,9 +17,11 @@ namespace System.Web.Http.SelfHost.Channels
         private static readonly Type _replyChannelType = typeof(IReplyChannel);
 
         /// <summary>
-        /// Gets or sets the message version that can be handled by the message encoders produced by the message encoder factory.
+        /// Gets or sets the message version that can be handled by the message encoders produced by the
+        // message encoder factory.
         /// </summary>
-        /// <returns>The <see cref="MessageVersion"/> used by the encoders produced by the message encoder factory.</returns>
+        /// <returns>The <see cref="MessageVersion"/> used by the encoders produced by the message encoder
+        // factory.</returns>
         public override MessageVersion MessageVersion
         {
             get { return MessageVersion.None; }
@@ -40,21 +43,26 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the binding element can build a listener for a specific type of channel.
+        /// Returns a value that indicates whether the binding element can build a listener for a specific
+        // type of channel.
         /// </summary>
         /// <typeparam name="TChannel">The type of channel the listener accepts.</typeparam>
-        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding element</param>
-        /// <returns>true if the <see cref="IChannelListener{TChannel}"/> of type <see cref="IChannel"/> can be built by the binding element; otherwise, false.</returns>
+        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding
+        // element</param>
+        /// <returns>true if the <see cref="IChannelListener{TChannel}"/> of type <see cref="IChannel"/> can
+        // be built by the binding element; otherwise, false.</returns>
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
             return false;
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the binding element can build a channel factory for a specific type of channel.
+        /// Returns a value that indicates whether the binding element can build a channel factory for a
+        // specific type of channel.
         /// </summary>
         /// <typeparam name="TChannel">The type of channel the channel factory produces.</typeparam>
-        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding element</param>
+        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding
+        // element</param>
         /// <returns>ALways false.</returns>
         public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
             BindingContext context
@@ -68,10 +76,12 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the binding element can build a channel factory for a specific type of channel.
+        /// Returns a value that indicates whether the binding element can build a channel factory for a
+        // specific type of channel.
         /// </summary>
         /// <typeparam name="TChannel">The type of channel the channel factory produces.</typeparam>
-        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding element</param>
+        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding
+        // element</param>
         /// <returns>ALways false.</returns>
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
@@ -90,8 +100,10 @@ namespace System.Web.Http.SelfHost.Channels
         /// Initializes a channel listener to accept channels of a specified type from the binding context.
         /// </summary>
         /// <typeparam name="TChannel">The type of channel the listener is built to accept.</typeparam>
-        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding element</param>
-        /// <returns>The <see cref="IChannelListener{TChannel}"/> of type <see cref="IChannel"/> initialized from the context.</returns>
+        /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding
+        // element</param>
+        /// <returns>The <see cref="IChannelListener{TChannel}"/> of type <see cref="IChannel"/> initialized
+        // from the context.</returns>
         public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
             BindingContext context
         )

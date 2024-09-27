@@ -32,16 +32,16 @@ namespace System.Net
     }
 
     /*++
-
-        ConnectStream  - a stream interface to a Connection object.
-
-        This class implements the Stream interface, as well as a
-        WriteHeaders call. Inside this stream we handle details like
-        chunking, dechunking and tracking of ContentLength. To write
-        or read data, we call a method on the connection object. The
-        connection object is responsible for protocol stuff that happens
-        'below' the level of the HTTP request, for example MUX or SSL
-
+    
+    ConnectStream  - a stream interface to a Connection object.
+    
+    This class implements the Stream interface, as well as a
+    WriteHeaders call. Inside this stream we handle details like
+    chunking, dechunking and tracking of ContentLength. To write
+    or read data, we call a method on the connection object. The
+    connection object is responsible for protocol stuff that happens
+    'below' the level of the HTTP request, for example MUX or SSL
+    
     --*/
 
     internal class ConnectStream : Stream, ICloseEx, IRequestLifetimeTracker
@@ -160,14 +160,17 @@ namespace System.Net
         }
 
         //
-        // If the KeepAlive=true then we  must be prepares for a write socket errors trying to flush the body
+        // If the KeepAlive=true then we  must be prepares for a write socket errors trying to flush the
+        // body
         // If the KeepAlive=false then we should cease body writing as the connection is probably dead
-        // If fatal=true then the connection is dead due to IO fault (discovered during read), throw IO exception
+        // If fatal=true then the connection is dead due to IO fault (discovered during read), throw IO
+        // exception
         //
         // m_IgnoreSocketErrors and m_ThrowSocketError are mostly for a write type of streams.
         // However a response read stream may have this member set when draning a response on resubmit.
         //
-        // This this isn't synchronized, we also check after receiving an exception from the transport whether these have been set
+        // This this isn't synchronized, we also check after receiving an exception from the transport
+        // whether these have been set
         // and take them into account if they have (on writes).
         private bool m_ErrorResponseStatus;
 
@@ -185,7 +188,8 @@ namespace System.Net
         }
 
         // This means we should throw a connection closed exception from now on (write only).
-        // It's unclear whether this needs to be better synchronized with m_ErrorResponseStatus, such as if ErrorResponseNotify
+        // It's unclear whether this needs to be better synchronized with m_ErrorResponseStatus, such as if
+        // ErrorResponseNotify
         // were called (asynchronously) while a m_ErrorException was already set.
         internal void FatalResponseNotify()
         {
@@ -212,25 +216,25 @@ namespace System.Net
         }
 
         /*++
-            Write Constructor for this class. This is the write constructor;
-            it takes as a parameter the amount of entity body data to be written,
-            with a value of -1 meaning to write it out as chunked. The other
-            parameter is the Connection of which we'll be writing.
-
-            Right now we use the DefaultBufferSize for the stream. In
-            the future we'd like to pass a 0 and have the stream be
-            unbuffered for write.
-
-            Input:
-
-                Conn            - Connection for this stream.
-                BytesToWrite    - Total bytes to be written, or -1
-                                    if we're doing chunked encoding.
-
-            Returns:
-
-                Nothing.
-
+        Write Constructor for this class. This is the write constructor;
+        it takes as a parameter the amount of entity body data to be written,
+        with a value of -1 meaning to write it out as chunked. The other
+        parameter is the Connection of which we'll be writing.
+        
+        Right now we use the DefaultBufferSize for the stream. In
+        the future we'd like to pass a 0 and have the stream be
+        unbuffered for write.
+        
+        Input:
+        
+        Conn            - Connection for this stream.
+        BytesToWrite    - Total bytes to be written, or -1
+        if we're doing chunked encoding.
+        
+        Returns:
+        
+        Nothing.
+        
         --*/
 
         public ConnectStream(Connection connection, HttpWebRequest request)
@@ -243,7 +247,8 @@ namespace System.Net
             //
             // we need to save a reference to the request for two things
             // 1. In case of buffer-only we kick in actual submition when the stream is closed by a user
-            // 2. In case of write stream abort() we notify the request so the response stream is handled properly
+            // 2. In case of write stream abort() we notify the request so the response stream is handled
+            // properly
             //
             m_Request = request;
             m_HttpWriteMode = request.HttpWriteMode;
@@ -275,31 +280,31 @@ namespace System.Net
         }
 
         /*++
-
-            Read constructor for this class. This constructor takes in
-            the connection and some information about a buffer that already
-            contains data. Reads from this stream will read first from the
-            buffer, and after that is exhausted will read from the connection.
-
-            We also take in a size of bytes to read, or -1 if we're to read
-            to connection close, and a flag indicating whether or now
-            we're chunked.
-
-            Input:
-
-                Conn                - Connection for this stream.
-                buffer              - Initial buffer to read from.
-                offset              - offset into buffer to start reading.
-                size               - number of bytes in buffer to read.
-                readSize            - Number of bytes allowed to be read from
-                                        the stream, -1 for read to connection
-                                        close.
-                chunked             - True if we're doing chunked decoding.
-
-            Returns:
-
-                Nothing.
-
+        
+        Read constructor for this class. This constructor takes in
+        the connection and some information about a buffer that already
+        contains data. Reads from this stream will read first from the
+        buffer, and after that is exhausted will read from the connection.
+        
+        We also take in a size of bytes to read, or -1 if we're to read
+        to connection close, and a flag indicating whether or now
+        we're chunked.
+        
+        Input:
+        
+        Conn                - Connection for this stream.
+        buffer              - Initial buffer to read from.
+        offset              - offset into buffer to start reading.
+        size               - number of bytes in buffer to read.
+        readSize            - Number of bytes allowed to be read from
+        the stream, -1 for read to connection
+        close.
+        chunked             - True if we're doing chunked decoding.
+        
+        Returns:
+        
+        Nothing.
+        
         --*/
 
         public ConnectStream(
@@ -344,7 +349,8 @@ namespace System.Net
             }
 
             //
-            // A request reference is used to verify (by the connection class) that this request should start a next one on Close.
+            // A request reference is used to verify (by the connection class) that this request should start a
+            // next one on Close.
             //
             m_Request = request;
             GlobalLog.Print(
@@ -375,7 +381,7 @@ namespace System.Net
         {
             /* Consider Removing
             get {
-                return m_SuppressWrite;
+            return m_SuppressWrite;
             }
             */
             set { m_SuppressWrite = value; }
@@ -420,16 +426,16 @@ namespace System.Net
         }
 
         /*++
-
-            ErrorInStream - indicates an exception was caught
-            internally due to a stream error, and that I/O
-            operations should not continue
-
-            Input: Nothing.
-
-            Returns: True if there is an error
-
-         --*/
+        
+        ErrorInStream - indicates an exception was caught
+        internally due to a stream error, and that I/O
+        operations should not continue
+        
+        Input: Nothing.
+        
+        Returns: True if there is an error
+        
+        --*/
 
         internal bool ErrorInStream
         {
@@ -437,18 +443,18 @@ namespace System.Net
         }
 
         /*++
-
-            CallDone - calls out to the Connection that spawned this
-            Stream (using the DoneRead/DoneWrite method).
-            If the Connection specified that we don't need to
-            do this, or if we've already done this already, then
-            we return silently.
-
-            Input: Nothing.
-
-            Returns: Nothing.
-
-         --*/
+        
+        CallDone - calls out to the Connection that spawned this
+        Stream (using the DoneRead/DoneWrite method).
+        If the Connection specified that we don't need to
+        do this, or if we've already done this already, then
+        we return silently.
+        
+        Input: Nothing.
+        
+        Returns: Nothing.
+        
+        --*/
         internal void CallDone()
         {
             CallDone(null);
@@ -554,15 +560,15 @@ namespace System.Net
         }
 
         /*++
-
-            Read property for this class. We return the readability of
-            this stream. This is a read only property.
-
-            Input: Nothing.
-
-            Returns: True if this is a read stream, false otherwise.
-
-         --*/
+        
+        Read property for this class. We return the readability of
+        this stream. This is a read only property.
+        
+        Input: Nothing.
+        
+        Returns: True if this is a read stream, false otherwise.
+        
+        --*/
 
         public override bool CanRead
         {
@@ -570,15 +576,15 @@ namespace System.Net
         }
 
         /*++
-
-            Seek property for this class. Since this stream is not
-            seekable, we just return false. This is a read only property.
-
-            Input: Nothing.
-
-            Returns: false
-
-         --*/
+        
+        Seek property for this class. Since this stream is not
+        seekable, we just return false. This is a read only property.
+        
+        Input: Nothing.
+        
+        Returns: false
+        
+        --*/
 
         public override bool CanSeek
         {
@@ -586,15 +592,15 @@ namespace System.Net
         }
 
         /*++
-
-            CanWrite property for this class. We return the writeability of
-            this stream. This is a read only property.
-
-            Input: Nothing.
-
-            Returns: True if this is a write stream, false otherwise.
-
-         --*/
+        
+        CanWrite property for this class. We return the writeability of
+        this stream. This is a read only property.
+        
+        Input: Nothing.
+        
+        Returns: True if this is a write stream, false otherwise.
+        
+        --*/
 
         public override bool CanWrite
         {
@@ -602,15 +608,15 @@ namespace System.Net
         }
 
         /*++
-
-            Length property for this class. Since we don't support seeking,
-            this property just throws a NotSupportedException.
-
-            Input: Nothing.
-
-            Returns: Throws exception.
-
-         --*/
+        
+        Length property for this class. Since we don't support seeking,
+        this property just throws a NotSupportedException.
+        
+        Input: Nothing.
+        
+        Returns: Throws exception.
+        
+        --*/
 
         public override long Length
         {
@@ -618,15 +624,15 @@ namespace System.Net
         }
 
         /*++
-
-            Position property for this class. Since we don't support seeking,
-            this property just throws a NotSupportedException.
-
-            Input: Nothing.
-
-            Returns: Throws exception.
-
-         --*/
+        
+        Position property for this class. Since we don't support seeking,
+        this property just throws a NotSupportedException.
+        
+        Input: Nothing.
+        
+        Returns: Throws exception.
+        
+        --*/
 
         public override long Position
         {
@@ -635,15 +641,15 @@ namespace System.Net
         }
 
         /*++
-
-            Eof property to indicate when the read is no longer allowed,
-            because all data has been already read from socket.
-
-            Input: Nothing.
-
-            Returns: true/false depending on whether we are complete
-
-         --*/
+        
+        Eof property to indicate when the read is no longer allowed,
+        because all data has been already read from socket.
+        
+        Input: Nothing.
+        
+        Returns: true/false depending on whether we are complete
+        
+        --*/
 
         internal bool Eof
         {
@@ -673,18 +679,18 @@ namespace System.Net
         }
 
         /*++
-            Uses an old Stream to resubmit buffered data using the current
-             stream, this is used in cases of POST, or authentication,
-             where we need to buffer upload data so that it can be resubmitted
-
-            Input:
-
-                OldStream - Old Stream that was previously used
-
-            Returns:
-
-                Nothing.
-
+        Uses an old Stream to resubmit buffered data using the current
+        stream, this is used in cases of POST, or authentication,
+        where we need to buffer upload data so that it can be resubmitted
+        
+        Input:
+        
+        OldStream - Old Stream that was previously used
+        
+        Returns:
+        
+        Nothing.
+        
         --*/
 
         //
@@ -897,20 +903,20 @@ namespace System.Net
         }
 
         /*++
-            FillFromBufferedData - This fills in a buffer from data that we have buffered.
-
-            This method pulls out the buffered data that may have been provided as
-            excess actual data from the header parsing
-
-            Input:
-
-                buffer          - Buffer to read into.
-                offset          - Offset in buffer to read into.
-                size           - Size in bytes to read.
-
-            Returns:
-                Number of bytes read.
-
+        FillFromBufferedData - This fills in a buffer from data that we have buffered.
+        
+        This method pulls out the buffered data that may have been provided as
+        excess actual data from the header parsing
+        
+        Input:
+        
+        buffer          - Buffer to read into.
+        offset          - Offset in buffer to read into.
+        size           - Size in bytes to read.
+        
+        Returns:
+        Number of bytes read.
+        
         --*/
         internal int FillFromBufferedData(byte[] buffer, ref int offset, ref int size)
         {
@@ -960,24 +966,24 @@ namespace System.Net
         }
 
         /*++
-            Write
-
-            This function write data to the network. If we were given a definite
-            content length when constructed, we won't write more than that amount
-            of data to the network. If the caller tries to do that, we'll throw
-            an exception. If we're doing chunking, we'll chunk it up before
-            sending to the connection.
-
-
-            Input:
-
-                buffer          - buffer to write.
-                offset          - offset in buffer to write from.
-                size           - size in bytes to write.
-
-            Returns:
-                Nothing.
-
+        Write
+        
+        This function write data to the network. If we were given a definite
+        content length when constructed, we won't write more than that amount
+        of data to the network. If the caller tries to do that, we'll throw
+        an exception. If we're doing chunking, we'll chunk it up before
+        sending to the connection.
+        
+        
+        Input:
+        
+        buffer          - buffer to write.
+        offset          - offset in buffer to write from.
+        size           - size in bytes to write.
+        
+        Returns:
+        Nothing.
+        
         --*/
         public override void Write(byte[] buffer, int offset, int size)
         {
@@ -1020,28 +1026,28 @@ namespace System.Net
         }
 
         /*++
-            BeginWrite - Does async write to the Stream
-
-            Splits the operation into two outcomes, for the
-            non-chunking case, we calculate size to write,
-            then call BeginWrite on the Connection directly,
-            and then we're finish, for the Chunked case,
-            we procede with use two callbacks to continue the
-            chunking after the first write, and then second write.
-            In order that all of the Chunk data/header/terminator,
-            in the correct format are sent.
-
-            Input:
-
-                buffer          - Buffer to write into.
-                offset          - Offset in buffer to write into.
-                size           - Size in bytes to write.
-                callback        - the callback to be called on result
-                state           - object to be passed to callback
-
-            Returns:
-                IAsyncResult    - the async result
-
+        BeginWrite - Does async write to the Stream
+        
+        Splits the operation into two outcomes, for the
+        non-chunking case, we calculate size to write,
+        then call BeginWrite on the Connection directly,
+        and then we're finish, for the Chunked case,
+        we procede with use two callbacks to continue the
+        chunking after the first write, and then second write.
+        In order that all of the Chunk data/header/terminator,
+        in the correct format are sent.
+        
+        Input:
+        
+        buffer          - Buffer to write into.
+        offset          - Offset in buffer to write into.
+        size           - Size in bytes to write.
+        callback        - the callback to be called on result
+        state           - object to be passed to callback
+        
+        Returns:
+        IAsyncResult    - the async result
+        
         --*/
 
 
@@ -1576,19 +1582,19 @@ namespace System.Net
         }
 
         /*++
-            WriteDataCallback
-
-            This is a callback, that is part of the main BeginWrite
-            code, this is part of the normal transfer code.
-
-            Input:
-
-               asyncResult - IAsyncResult generated from BeginWrite
-
-            Returns:
-
-               None
-
+        WriteDataCallback
+        
+        This is a callback, that is part of the main BeginWrite
+        code, this is part of the normal transfer code.
+        
+        Input:
+        
+        asyncResult - IAsyncResult generated from BeginWrite
+        
+        Returns:
+        
+        None
+        
         --*/
         private void WriteCallback(IAsyncResult asyncResult)
         {
@@ -1709,14 +1715,14 @@ namespace System.Net
         }
 
         /*++
-            EndWrite - Finishes off async write of data, just calls into
-                m_Connection.EndWrite to get the result.
-
-            Input:
-
-                asyncResult     - The AsyncResult returned by BeginWrite
-
-
+        EndWrite - Finishes off async write of data, just calls into
+        m_Connection.EndWrite to get the result.
+        
+        Input:
+        
+        asyncResult     - The AsyncResult returned by BeginWrite
+        
+        
         --*/
         public override void EndWrite(IAsyncResult asyncResult)
         {
@@ -1807,25 +1813,25 @@ namespace System.Net
         }
 
         /*++
-            Read - Read from the connection.
-            ReadWithoutValidation
-
-            This method reads from the network, or our internal buffer if there's
-            data in that. If there's not, we'll read from the network. If we're
-
-            doing chunked decoding, we'll decode it before returning from this
-            call.
-
-
-            Input:
-
-                buffer          - Buffer to read into.
-                offset          - Offset in buffer to read into.
-                size           - Size in bytes to read.
-
-            Returns:
-                Nothing.
-
+        Read - Read from the connection.
+        ReadWithoutValidation
+        
+        This method reads from the network, or our internal buffer if there's
+        data in that. If there's not, we'll read from the network. If we're
+        
+        doing chunked decoding, we'll decode it before returning from this
+        call.
+        
+        
+        Input:
+        
+        buffer          - Buffer to read into.
+        offset          - Offset in buffer to read into.
+        size           - Size in bytes to read.
+        
+        Returns:
+        Nothing.
+        
         --*/
         public override int Read([In, Out] byte[] buffer, int offset, int size)
         {
@@ -1942,15 +1948,15 @@ namespace System.Net
         }
 
         /*++
-            ReadWithoutValidation - Read from the connection.
-
-            Sync version of BeginReadWithoutValidation
-
-            This method reads from the network, or our internal buffer if there's
-            data in that. If there's not, we'll read from the network. If we're
-            doing chunked decoding, we'll decode it before returning from this
-            call.
-
+        ReadWithoutValidation - Read from the connection.
+        
+        Sync version of BeginReadWithoutValidation
+        
+        This method reads from the network, or our internal buffer if there's
+        data in that. If there's not, we'll read from the network. If we're
+        doing chunked decoding, we'll decode it before returning from this
+        call.
+        
         --*/
         private int ReadWithoutValidation(byte[] buffer, int offset, int size)
         {
@@ -1970,7 +1976,8 @@ namespace System.Net
             GlobalLog.Print("int ConnectStream::ReadWithoutValidation()");
             GlobalLog.Print("(start)m_ReadBytes = " + m_ReadBytes);
 
-            // ********** WARNING - updating logic below should also be updated in BeginReadWithoutValidation *****************
+            // ********** WARNING - updating logic below should also be updated in BeginReadWithoutValidation
+            // *****************
 
             //
             // Figure out how much we should really read.
@@ -2115,29 +2122,30 @@ namespace System.Net
 
             GlobalLog.Print("bytesTransferred = " + bytesToRead);
             GlobalLog.Print("(end)m_ReadBytes = " + m_ReadBytes);
-            // ********** WARNING - updating logic above should also be updated in BeginReadWithoutValidation and EndReadWithoutValidation *****************
+            // ********** WARNING - updating logic above should also be updated in BeginReadWithoutValidation
+            // and EndReadWithoutValidation *****************
             return bytesTransferred;
         }
 
         /*++
-            BeginRead - Read from the connection.
-            BeginReadWithoutValidation
-
-            This method reads from the network, or our internal buffer if there's
-            data in that. If there's not, we'll read from the network. If we're
-            doing chunked decoding, we'll decode it before returning from this
-            call.
-
-
-            Input:
-
-                buffer          - Buffer to read into.
-                offset          - Offset in buffer to read into.
-                size           - Size in bytes to read.
-
-            Returns:
-                Nothing.
-
+        BeginRead - Read from the connection.
+        BeginReadWithoutValidation
+        
+        This method reads from the network, or our internal buffer if there's
+        data in that. If there's not, we'll read from the network. If we're
+        doing chunked decoding, we'll decode it before returning from this
+        call.
+        
+        
+        Input:
+        
+        buffer          - Buffer to read into.
+        offset          - Offset in buffer to read into.
+        size           - Size in bytes to read.
+        
+        Returns:
+        Nothing.
+        
         --*/
 
 
@@ -2260,25 +2268,25 @@ namespace System.Net
         }
 
         /*++
-            BeginReadWithoutValidation - Read from the connection.
-
-            internal version of BeginRead above, without validation
-
-            This method reads from the network, or our internal buffer if there's
-            data in that. If there's not, we'll read from the network. If we're
-            doing chunked decoding, we'll decode it before returning from this
-            call.
-
-
-            Input:
-
-                buffer          - Buffer to read into.
-                offset          - Offset in buffer to read into.
-                size           - Size in bytes to read.
-
-            Returns:
-                Nothing.
-
+        BeginReadWithoutValidation - Read from the connection.
+        
+        internal version of BeginRead above, without validation
+        
+        This method reads from the network, or our internal buffer if there's
+        data in that. If there's not, we'll read from the network. If we're
+        doing chunked decoding, we'll decode it before returning from this
+        call.
+        
+        
+        Input:
+        
+        buffer          - Buffer to read into.
+        offset          - Offset in buffer to read into.
+        size           - Size in bytes to read.
+        
+        Returns:
+        Nothing.
+        
         --*/
 
         private IAsyncResult BeginReadWithoutValidation(
@@ -2442,11 +2450,11 @@ namespace System.Net
         }
 
         /*++
-            InternalRead
-
-            This is an interal version of Read without validation,
-             that is called from the Chunked code as well the normal codepaths.
-
+        InternalRead
+        
+        This is an interal version of Read without validation,
+        that is called from the Chunked code as well the normal codepaths.
+        
         --*/
 
         private int InternalRead(byte[] buffer, int offset, int size)
@@ -2476,18 +2484,18 @@ namespace System.Net
         }
 
         /*++
-            ReadCallback
-
-            This callback is only used by chunking as the last step of its multi-phase async operation.
-
-            Input:
-
-               asyncResult - IAsyncResult generated from BeginWrite
-
-            Returns:
-
-               None
-
+        ReadCallback
+        
+        This callback is only used by chunking as the last step of its multi-phase async operation.
+        
+        Input:
+        
+        asyncResult - IAsyncResult generated from BeginWrite
+        
+        Returns:
+        
+        None
+        
         --*/
         private void ReadCallback(IAsyncResult asyncResult)
         {
@@ -2534,19 +2542,19 @@ namespace System.Net
         }
 
         /*++
-            EndRead - Finishes off the Read for the Connection
-            EndReadWithoutValidation
-
-            This method completes the async call created from BeginRead,
-            it attempts to determine how many bytes were actually read,
-            and if any errors occured.
-
-            Input:
-                asyncResult - created by BeginRead
-
-            Returns:
-                int - size of bytes read, or < 0 on error
-
+        EndRead - Finishes off the Read for the Connection
+        EndReadWithoutValidation
+        
+        This method completes the async call created from BeginRead,
+        it attempts to determine how many bytes were actually read,
+        and if any errors occured.
+        
+        Input:
+        asyncResult - created by BeginRead
+        
+        Returns:
+        int - size of bytes read, or < 0 on error
+        
         --*/
 
         public override int EndRead(IAsyncResult asyncResult)
@@ -2633,7 +2641,8 @@ namespace System.Net
                 }
                 else
                 {
-                    // If it's not a NestedSingleAsyncResult, we forwarded directly to the Connection and need to call EndRead.
+                    // If it's not a NestedSingleAsyncResult, we forwarded directly to the Connection and need to call
+                    // EndRead.
                     try
                     {
                         bytesTransferred = m_Connection.EndRead(asyncResult);
@@ -2667,19 +2676,19 @@ namespace System.Net
         }
 
         /*++
-            EndReadWithoutValidation - Finishes off the Read for the Connection
-                Called internally by EndRead.
-
-            This method completes the async call created from BeginRead,
-            it attempts to determine how many bytes were actually read,
-            and if any errors occured.
-
-            Input:
-                asyncResult - created by BeginRead
-
-            Returns:
-                int - size of bytes read, or < 0 on error
-
+        EndReadWithoutValidation - Finishes off the Read for the Connection
+        Called internally by EndRead.
+        
+        This method completes the async call created from BeginRead,
+        it attempts to determine how many bytes were actually read,
+        and if any errors occured.
+        
+        Input:
+        asyncResult - created by BeginRead
+        
+        Returns:
+        int - size of bytes read, or < 0 on error
+        
         --*/
         private int EndReadWithoutValidation(int bytesTransferred, bool zeroLengthRead)
         {
@@ -2830,18 +2839,18 @@ namespace System.Net
         }
 
         /*++
-            WriteHeaders
-
-            This function writes header data to the network. Headers are special
-            in that they don't have any non-header transforms applied to them,
-            and are not subject to content-length constraints. We just write them
-            through, and if we're done writing headers we tell the connection that.
-
-            Returns:
-                WebExceptionStatus.Pending      - we don't have a stream yet.
-                WebExceptionStatus.SendFailure  - there was an error while writing to the wire.
-                WebExceptionStatus.Success      - success.
-
+        WriteHeaders
+        
+        This function writes header data to the network. Headers are special
+        in that they don't have any non-header transforms applied to them,
+        and are not subject to content-length constraints. We just write them
+        through, and if we're done writing headers we tell the connection that.
+        
+        Returns:
+        WebExceptionStatus.Pending      - we don't have a stream yet.
+        WebExceptionStatus.SendFailure  - there was an error while writing to the wire.
+        WebExceptionStatus.Success      - success.
+        
         --*/
         internal void WriteHeaders(bool async)
         {
@@ -3110,20 +3119,20 @@ namespace System.Net
         }
 
         /*++
-            Close - Close the stream
-
-            Called when the stream is closed. We close our parent stream first.
-            Then if this is a write stream, we'll send the terminating chunk
-            (if needed) and call the connection DoneWriting() method.
-
-            Input:
-
-                Nothing.
-
-            Returns:
-
-                Nothing.
-
+        Close - Close the stream
+        
+        Called when the stream is closed. We close our parent stream first.
+        Then if this is a write stream, we'll send the terminating chunk
+        (if needed) and call the connection DoneWriting() method.
+        
+        Input:
+        
+        Nothing.
+        
+        Returns:
+        
+        Nothing.
+        
         --*/
 
         protected override void Dispose(bool disposing)
@@ -3178,7 +3187,8 @@ namespace System.Net
         }
 
         //
-        // Optionally sends chunk terminator and proceeds with close that was collided with pending user write IO
+        // Optionally sends chunk terminator and proceeds with close that was collided with pending user
+        // write IO
         //
         void ResumeInternalClose(LazyAsyncResult userResult)
         {
@@ -3689,21 +3699,21 @@ namespace System.Net
         }
 
         /*++
-            Flush - Flush the stream
-
-            Called when the user wants to flush the stream. This is meaningless to
-            us, so we just ignore it.
-
-            Input:
-
-                Nothing.
-
-            Returns:
-
-                Nothing.
-
-
-
+        Flush - Flush the stream
+        
+        Called when the user wants to flush the stream. This is meaningless to
+        us, so we just ignore it.
+        
+        Input:
+        
+        Nothing.
+        
+        Returns:
+        
+        Nothing.
+        
+        
+        
         --*/
         public override void Flush() { }
 
@@ -3713,22 +3723,22 @@ namespace System.Net
         }
 
         /*++
-            Seek - Seek on the stream
-
-            Called when the user wants to seek the stream. Since we don't support
-            seek, we'll throw an exception.
-
-            Input:
-
-                offset      - offset to see
-                origin      - where to start seeking
-
-            Returns:
-
-                Throws exception
-
-
-
+        Seek - Seek on the stream
+        
+        Called when the user wants to seek the stream. Since we don't support
+        seek, we'll throw an exception.
+        
+        Input:
+        
+        offset      - offset to see
+        origin      - where to start seeking
+        
+        Returns:
+        
+        Throws exception
+        
+        
+        
         --*/
         public override long Seek(long offset, SeekOrigin origin)
         {
@@ -3736,21 +3746,21 @@ namespace System.Net
         }
 
         /*++
-            SetLength - Set the length on the stream
-
-            Called when the user wants to set the stream length. Since we don't
-            support seek, we'll throw an exception.
-
-            Input:
-
-                value       - length of stream to set
-
-            Returns:
-
-                Throws exception
-
-
-
+        SetLength - Set the length on the stream
+        
+        Called when the user wants to set the stream length. Since we don't
+        support seek, we'll throw an exception.
+        
+        Input:
+        
+        value       - length of stream to set
+        
+        Returns:
+        
+        Throws exception
+        
+        
+        
         --*/
         public override void SetLength(long value)
         {
@@ -3758,12 +3768,12 @@ namespace System.Net
         }
 
         /*++
-            DrainSocket - Reads data from the connection, till we'll ready
-                to finish off the stream, or close the connection for good.
-
-
-            returns - bool true on success, false on failure
-
+        DrainSocket - Reads data from the connection, till we'll ready
+        to finish off the stream, or close the connection for good.
+        
+        
+        returns - bool true on success, false on failure
+        
         --*/
         private bool DrainSocket()
         {
@@ -3784,7 +3794,8 @@ namespace System.Net
                 return true;
             }
 
-            // Optimization for non-chunked responses: when data is already present in the buffer, skip parsing it.
+            // Optimization for non-chunked responses: when data is already present in the buffer, skip parsing
+            // it.
             long ReadBytes = m_ReadBytes;
 
             if (!m_Chunked)
@@ -3987,8 +3998,10 @@ namespace System.Net
             if (bytesRead != 0)
             {
                 //
-                // bytesRead > 0 means that we still have data from a chunked transfer but we have exceeded c_MaxDrainBytes.
-                // bytesRead = -1 indicates a failure or a time out (either SO_RCVTIMEO or total execution time exceeded).
+                // bytesRead > 0 means that we still have data from a chunked transfer but we have exceeded
+                // c_MaxDrainBytes.
+                // bytesRead = -1 indicates a failure or a time out (either SO_RCVTIMEO or total execution time
+                // exceeded).
                 // For appCompat reasons we must call AbortSocket(false) and return true below.
                 //
 
@@ -4039,16 +4052,16 @@ namespace System.Net
         internal static byte[] s_DrainingBuffer = new byte[4096];
 
         /*++
-            IOError - Handle an IOError on the stream.
-
-            Input:
-
-                exception       - optional Exception that will be later thrown
-
-            Returns:
-
-                Nothing or may throw
-
+        IOError - Handle an IOError on the stream.
+        
+        Input:
+        
+        exception       - optional Exception that will be later thrown
+        
+        Returns:
+        
+        Nothing or may throw
+        
         --*/
         private void IOError(Exception exception)
         {
@@ -4140,22 +4153,22 @@ namespace System.Net
         }
 
         /*++
-
-            GetChunkHeader
-
-            A private utility routine to convert an integer to a chunk header,
-            which is an ASCII hex number followed by a CRLF. The header is retuned
-            as a byte array.
-
-            Input:
-
-                size        - Chunk size to be encoded
-                offset      - Out parameter where we store offset into buffer.
-
-            Returns:
-
-                A byte array with the header in int.
-
+        
+        GetChunkHeader
+        
+        A private utility routine to convert an integer to a chunk header,
+        which is an ASCII hex number followed by a CRLF. The header is retuned
+        as a byte array.
+        
+        Input:
+        
+        size        - Chunk size to be encoded
+        offset      - Out parameter where we store offset into buffer.
+        
+        Returns:
+        
+        A byte array with the header in int.
+        
         --*/
 
         internal static byte[] GetChunkHeader(int size, out int offset)

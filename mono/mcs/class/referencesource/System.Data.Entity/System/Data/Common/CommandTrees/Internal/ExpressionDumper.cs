@@ -17,7 +17,8 @@ using System.Diagnostics;
 namespace System.Data.Common.CommandTrees.Internal
 {
     /// <summary>
-    /// Writes a description of a given expression, in a format determined by the specific implementation of a derived type
+    /// Writes a description of a given expression, in a format determined by the specific
+    // implementation of a derived type
     /// </summary>
     internal abstract class ExpressionDumper : DbExpressionVisitor
     {
@@ -129,13 +130,15 @@ namespace System.Data.Common.CommandTrees.Internal
         }
 
         /// <summary>
-        /// Dumps each DbExpression in the specified enumerable. The entire output is decorated with the 'pluralName'
+        /// Dumps each DbExpression in the specified enumerable. The entire output is decorated with the
+        // 'pluralName'
         /// block name while each element DbExpression is decorated with the 'singularName' block name.
         /// If the list is empty only the pluralName decoration start/end will appear.
         /// </summary>
         /// <param name="exprs">The enumerable list of Expressions to dump</param>
         /// <param name="pluralName">The overall list decoration block name</param>
-        /// <param name="singularName">The decoration block name that will be applied to each element DbExpression</param>
+        /// <param name="singularName">The decoration block name that will be applied to each element
+        // DbExpression</param>
         internal void Dump(IEnumerable<DbExpression> exprs, string pluralName, string singularName)
         {
             Begin(pluralName);
@@ -151,7 +154,8 @@ namespace System.Data.Common.CommandTrees.Internal
         }
 
         /// <summary>
-        /// Dumps each Parameter metadata in the specified enumerable. The entire output is decorated with the "Parameters"
+        /// Dumps each Parameter metadata in the specified enumerable. The entire output is decorated with
+        // the "Parameters"
         /// block name while each metadata element is decorated with the "Parameter" block name.
         /// If the list is empty only the "Parameters" decoration start/end will appear.
         /// </summary>
@@ -308,7 +312,8 @@ namespace System.Data.Common.CommandTrees.Internal
         }
 
         /// <summary>
-        /// Dumps the specified Navigation Property EdmMember metadata instance with the specified decoration
+        /// Dumps the specified Navigation Property EdmMember metadata instance with the specified
+        // decoration
         /// </summary>
         /// <param name="navProp">The Navigation Property metadata to dump</param>
         /// <param name="name">The decorating block name</param>

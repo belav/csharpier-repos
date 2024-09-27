@@ -21,7 +21,8 @@ public interface IConnectionTimeoutFeature
     void ResetTimeout(TimeSpan timeSpan);
 
     /// <summary>
-    /// Prevent the connection from closing after a timeout specified by <see cref="SetTimeout(TimeSpan)"/>
+    /// Prevent the connection from closing after a timeout specified by <see
+    // cref="SetTimeout(TimeSpan)"/>
     /// or <see cref="ResetTimeout(TimeSpan)"/>.
     /// </summary>
     void CancelTimeout();

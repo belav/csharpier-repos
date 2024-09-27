@@ -9,7 +9,8 @@ namespace System.Web.Services.Protocols
     using System;
     using System.Web.Services.Description;
 
-    /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute"]/*' />
+    /// <include file='doc\SoapDocumentMethodAttribute.uex'
+    // path='docs/doc[@for="SoapDocumentMethodAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -26,13 +27,15 @@ namespace System.Web.Services.Protocols
         SoapParameterStyle style = SoapParameterStyle.Default;
         string binding;
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.SoapDocumentMethodAttribute"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.SoapDocumentMethodAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SoapDocumentMethodAttribute() { }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.SoapDocumentMethodAttribute1"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.SoapDocumentMethodAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -41,7 +44,8 @@ namespace System.Web.Services.Protocols
             this.action = action;
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.Action"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.Action"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -51,7 +55,8 @@ namespace System.Web.Services.Protocols
             set { action = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.OneWay"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.OneWay"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -61,7 +66,8 @@ namespace System.Web.Services.Protocols
             set { oneWay = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.RequestNamespace"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.RequestNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -71,7 +77,8 @@ namespace System.Web.Services.Protocols
             set { requestNamespace = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.ResponseNamespace"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.ResponseNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -81,7 +88,8 @@ namespace System.Web.Services.Protocols
             set { responseNamespace = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.RequestElementName"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.RequestElementName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -91,7 +99,8 @@ namespace System.Web.Services.Protocols
             set { requestName = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.ResponseElementName"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.ResponseElementName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -101,7 +110,8 @@ namespace System.Web.Services.Protocols
             set { responseName = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.Use"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.Use"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -111,7 +121,8 @@ namespace System.Web.Services.Protocols
             set { use = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.ParameterStyle"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.ParameterStyle"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -121,7 +132,8 @@ namespace System.Web.Services.Protocols
             set { style = value; }
         }
 
-        /// <include file='doc\SoapDocumentMethodAttribute.uex' path='docs/doc[@for="SoapDocumentMethodAttribute.Binding"]/*' />
+        /// <include file='doc\SoapDocumentMethodAttribute.uex'
+        // path='docs/doc[@for="SoapDocumentMethodAttribute.Binding"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

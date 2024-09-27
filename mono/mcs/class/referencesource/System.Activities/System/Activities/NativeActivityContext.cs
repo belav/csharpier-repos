@@ -383,7 +383,8 @@ namespace System.Activities
             );
         }
 
-        // we don't just do CreateBookmark(BookmarkCallback callback = null, BookmarkOptions options = BookmarkOptions.None) below
+        // we don't just do CreateBookmark(BookmarkCallback callback = null, BookmarkOptions options =
+        // BookmarkOptions.None) below
         // since there would be overload resolution issues between it and CreateBookmark(string)
         public Bookmark CreateBookmark()
         {
@@ -3495,7 +3496,8 @@ namespace System.Activities
                 return ActivityInstance.CreateCanceledInstance(activityDelegate.Handler);
             }
 
-            // Activity delegates execute in the environment of the declaring actvity and not the invoking activity.
+            // Activity delegates execute in the environment of the declaring actvity and not the invoking
+            // activity.
             return this.executor.ScheduleDelegate(
                 activityDelegate,
                 inputParameters,

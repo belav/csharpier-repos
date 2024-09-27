@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Routing;
 namespace Microsoft.AspNetCore.Identity.Data;
 
 /// <summary>
-/// The request type for the "/register" endpoint added by <see cref="IdentityApiEndpointRouteBuilderExtensions.MapIdentityApi"/>.
+/// The request type for the "/register" endpoint added by <see
+// cref="IdentityApiEndpointRouteBuilderExtensions.MapIdentityApi"/>.
 /// </summary>
 public sealed class RegisterRequest
 {

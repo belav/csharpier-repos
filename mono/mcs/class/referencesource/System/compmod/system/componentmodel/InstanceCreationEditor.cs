@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.Collections;
@@ -19,9 +19,12 @@ namespace System.ComponentModel
     using Microsoft.Win32;
 
     /// <devdoc>
-    ///     An InstanceCreationEditor allows the user to create an instance of a particular type of property from a dropdown
-    ///     Within the PropertyGrid.  Usually, the text specified by InstanceCreationEditor.Text will be displayed on the
-    ///     dropdown from the PropertyGrid as a link or button.  When clicked, the InstanceCreationEditor.CreateInstance
+    ///     An InstanceCreationEditor allows the user to create an instance of a particular type of
+    // property from a dropdown
+    ///     Within the PropertyGrid.  Usually, the text specified by InstanceCreationEditor.Text will be
+    // displayed on the
+    ///     dropdown from the PropertyGrid as a link or button.  When clicked, the
+    // InstanceCreationEditor.CreateInstance
     ///     method will be called with the Type of the object to create.
     /// </devdoc>
     [HostProtection(SharedState = true)]
@@ -35,8 +38,10 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        /// This method is invoked when you user chooses the link displayed by the PropertyGrid for the InstanceCreationEditor.
-        /// The object returned from this method must be an instance of the specified type, or null in which case the editor will do nothing.
+        /// This method is invoked when you user chooses the link displayed by the PropertyGrid for the
+        // InstanceCreationEditor.
+        /// The object returned from this method must be an instance of the specified type, or null in which
+        // case the editor will do nothing.
         ///
         /// </devdoc>
         public abstract object CreateInstance(ITypeDescriptorContext context, Type instanceType);

@@ -229,7 +229,7 @@ public class Tests
             return 5;
         }
 
-        /*TODO: Reject Guid.Empty when we support generated class GUIDs*/
+/*TODO: Reject Guid.Empty when we support generated class GUIDs*/
         if (
             typeof(TestParent).GUID != Guid.Empty
             && typeof(TestParent).GUID != new Guid("7dcc27e3-e226-35ca-a942-2286b21f2525")
@@ -242,7 +242,7 @@ public class Tests
             return 6;
         }
 
-        /*TODO: Reject Guid.Empty when we support generated class GUIDs*/
+/*TODO: Reject Guid.Empty when we support generated class GUIDs*/
         if (
             typeof(int).GUID != Guid.Empty
             && typeof(int).GUID != new Guid("a310fadd-7c33-377c-9d6b-599b0317d7f2")

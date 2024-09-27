@@ -30,7 +30,8 @@ public static class TagHelperServicesExtensions
     ///  Configures the memory size limits on the cache of the <see cref="CacheTagHelper"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
-    /// <param name="configure">The <see cref="Action{CacheTagHelperOptions}"/>to configure the cache options.</param>
+    /// <param name="configure">The <see cref="Action{CacheTagHelperOptions}"/>to configure the cache
+    // options.</param>
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddCacheTagHelperLimits(
         this IMvcBuilder builder,
@@ -49,7 +50,8 @@ public static class TagHelperServicesExtensions
     ///  Configures the memory size limits on the cache of the <see cref="CacheTagHelper"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
-    /// <param name="configure">The <see cref="Action{CacheTagHelperOptions}"/>to configure the cache options.</param>
+    /// <param name="configure">The <see cref="Action{CacheTagHelperOptions}"/>to configure the cache
+    // options.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddCacheTagHelperLimits(
         this IMvcCoreBuilder builder,

@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Tests
     {
         private List<T> _list = new List<T>();
 
-        // we track count separately to make sure tests are not passing by accident because we use reference to list inside of struct
+        // we track count separately to make sure tests are not passing by accident because we use reference
+        // to list inside of struct
         private int _count;
 
         public T this[int index]
@@ -133,7 +134,8 @@ namespace System.Text.Json.Serialization.Tests
     {
         private List<T> _list = new List<T>();
 
-        // we track count separately to make sure tests are not passing by accident because we use reference to list inside of struct
+        // we track count separately to make sure tests are not passing by accident because we use reference
+        // to list inside of struct
         private int _count;
 
         public int Count => _count;
@@ -183,7 +185,8 @@ namespace System.Text.Json.Serialization.Tests
     {
         private HashSet<T> _set = new HashSet<T>();
 
-        // we track count separately to make sure tests are not passing by accident because we use reference to list inside of struct
+        // we track count separately to make sure tests are not passing by accident because we use reference
+        // to list inside of struct
         private int _count;
 
         public int Count => _count;
@@ -286,7 +289,8 @@ namespace System.Text.Json.Serialization.Tests
     {
         private Dictionary<TKey, TValue> _dict = new();
 
-        // we track count separately to make sure tests are not passing by accident because we use reference to list inside of struct
+        // we track count separately to make sure tests are not passing by accident because we use reference
+        // to list inside of struct
         private int _count;
 
         [JsonConstructor]

@@ -19,10 +19,10 @@ public class DescriptorTest
                     l.Fill(objs);
             }
 
-            /*
-              if (i % 10007 == 0)
-              Console.WriteLine (o.GetType ().Name + " " + which);
-            */
+/*
+if (i % 10007 == 0)
+Console.WriteLine (o.GetType ().Name + " " + which);
+*/
 
             if (i % 5 == 0)
                 objs[r.Next(objs.Length)] = null;

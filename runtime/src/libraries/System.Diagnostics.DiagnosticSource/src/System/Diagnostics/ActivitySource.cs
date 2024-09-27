@@ -61,7 +61,8 @@ namespace System.Diagnostics
 
         /// <summary>
         /// Check if there is any listeners for this ActivitySource.
-        /// This property can be helpful to tell if there is no listener, then no need to create Activity object
+        /// This property can be helpful to tell if there is no listener, then no need to create Activity
+        // object
         /// and avoid creating the objects needed to create Activity (e.g. ActivityContext)
         /// Example of that is http scenario which can avoid reading the context data from the wire.
         /// </summary>
@@ -72,30 +73,40 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Creates a new <see cref="Activity"/> object if there is any listener to the Activity, returns null otherwise.
+        /// Creates a new <see cref="Activity"/> object if there is any listener to the Activity, returns
+        // null otherwise.
         /// </summary>
         /// <param name="name">The operation name of the Activity</param>
         /// <param name="kind">The <see cref="ActivityKind"/></param>
-        /// <returns>The created <see cref="Activity"/> object or null if there is no any event listener.</returns>
+        /// <returns>The created <see cref="Activity"/> object or null if there is no any event
+        // listener.</returns>
         /// <remarks>
-        /// If the Activity object is created, it will not start automatically. Callers need to call <see cref="Activity.Start()"/> to start it.
+        /// If the Activity object is created, it will not start automatically. Callers need to call <see
+        // cref="Activity.Start()"/> to start it.
         /// </remarks>
         public Activity? CreateActivity(string name, ActivityKind kind) =>
             CreateActivity(name, kind, default, null, null, null, default, startIt: false);
 
         /// <summary>
-        /// Creates a new <see cref="Activity"/> object if there is any listener to the Activity, returns null otherwise.
-        /// If the Activity object is created, it will not automatically start. Callers will need to call <see cref="Activity.Start()"/> to start it.
+        /// Creates a new <see cref="Activity"/> object if there is any listener to the Activity, returns
+        // null otherwise.
+        /// If the Activity object is created, it will not automatically start. Callers will need to call
+        // <see cref="Activity.Start()"/> to start it.
         /// </summary>
         /// <param name="name">The operation name of the Activity.</param>
         /// <param name="kind">The <see cref="ActivityKind"/></param>
-        /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the created Activity object with.</param>
-        /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
-        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
+        /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the
+        // created Activity object with.</param>
+        /// <param name="tags">The optional tags list to initialize the created Activity object
+        // with.</param>
+        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created
+        // Activity object with.</param>
         /// <param name="idFormat">The default Id format to use.</param>
-        /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
+        /// <returns>The created <see cref="Activity"/> object or null if there is no any
+        // listener.</returns>
         /// <remarks>
-        /// If the Activity object is created, it will not start automatically. Callers need to call <see cref="Activity.Start()"/> to start it.
+        /// If the Activity object is created, it will not start automatically. Callers need to call <see
+        // cref="Activity.Start()"/> to start it.
         /// </remarks>
         public Activity? CreateActivity(
             string name,
@@ -118,17 +129,22 @@ namespace System.Diagnostics
             );
 
         /// <summary>
-        /// Creates a new <see cref="Activity"/> object if there is any listener to the Activity, returns null otherwise.
+        /// Creates a new <see cref="Activity"/> object if there is any listener to the Activity, returns
+        // null otherwise.
         /// </summary>
         /// <param name="name">The operation name of the Activity.</param>
         /// <param name="kind">The <see cref="ActivityKind"/></param>
         /// <param name="parentId">The parent Id to initialize the created Activity object with.</param>
-        /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
-        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
+        /// <param name="tags">The optional tags list to initialize the created Activity object
+        // with.</param>
+        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created
+        // Activity object with.</param>
         /// <param name="idFormat">The default Id format to use.</param>
-        /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
+        /// <returns>The created <see cref="Activity"/> object or null if there is no any
+        // listener.</returns>
         /// <remarks>
-        /// If the Activity object is created, it will not start automatically. Callers need to call <see cref="Activity.Start()"/> to start it.
+        /// If the Activity object is created, it will not start automatically. Callers need to call <see
+        // cref="Activity.Start()"/> to start it.
         /// </remarks>
         public Activity? CreateActivity(
             string name,
@@ -151,26 +167,34 @@ namespace System.Diagnostics
             );
 
         /// <summary>
-        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity, returns null otherwise.
+        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity,
+        // returns null otherwise.
         /// </summary>
         /// <param name="name">The operation name of the Activity</param>
         /// <param name="kind">The <see cref="ActivityKind"/></param>
-        /// <returns>The created <see cref="Activity"/> object or null if there is no any event listener.</returns>
+        /// <returns>The created <see cref="Activity"/> object or null if there is no any event
+        // listener.</returns>
         public Activity? StartActivity(
             [CallerMemberName] string name = "",
             ActivityKind kind = ActivityKind.Internal
         ) => CreateActivity(name, kind, default, null, null, null, default);
 
         /// <summary>
-        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity events, returns null otherwise.
+        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity
+        // events, returns null otherwise.
         /// </summary>
         /// <param name="name">The operation name of the Activity.</param>
         /// <param name="kind">The <see cref="ActivityKind"/></param>
-        /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the created Activity object with.</param>
-        /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
-        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
-        /// <param name="startTime">The optional start timestamp to set on the created Activity object.</param>
-        /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
+        /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the
+        // created Activity object with.</param>
+        /// <param name="tags">The optional tags list to initialize the created Activity object
+        // with.</param>
+        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created
+        // Activity object with.</param>
+        /// <param name="startTime">The optional start timestamp to set on the created Activity
+        // object.</param>
+        /// <returns>The created <see cref="Activity"/> object or null if there is no any
+        // listener.</returns>
         public Activity? StartActivity(
             string name,
             ActivityKind kind,
@@ -181,15 +205,20 @@ namespace System.Diagnostics
         ) => CreateActivity(name, kind, parentContext, null, tags, links, startTime);
 
         /// <summary>
-        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity events, returns null otherwise.
+        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity
+        // events, returns null otherwise.
         /// </summary>
         /// <param name="name">The operation name of the Activity.</param>
         /// <param name="kind">The <see cref="ActivityKind"/></param>
         /// <param name="parentId">The parent Id to initialize the created Activity object with.</param>
-        /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
-        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
-        /// <param name="startTime">The optional start timestamp to set on the created Activity object.</param>
-        /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
+        /// <param name="tags">The optional tags list to initialize the created Activity object
+        // with.</param>
+        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created
+        // Activity object with.</param>
+        /// <param name="startTime">The optional start timestamp to set on the created Activity
+        // object.</param>
+        /// <returns>The created <see cref="Activity"/> object or null if there is no any
+        // listener.</returns>
         public Activity? StartActivity(
             string name,
             ActivityKind kind,
@@ -200,15 +229,21 @@ namespace System.Diagnostics
         ) => CreateActivity(name, kind, default, parentId, tags, links, startTime);
 
         /// <summary>
-        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity events, returns null otherwise.
+        /// Creates and starts a new <see cref="Activity"/> object if there is any listener to the Activity
+        // events, returns null otherwise.
         /// </summary>
         /// <param name="kind">The <see cref="ActivityKind"/></param>
-        /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the created Activity object with.</param>
-        /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
-        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
-        /// <param name="startTime">The optional start timestamp to set on the created Activity object.</param>
+        /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the
+        // created Activity object with.</param>
+        /// <param name="tags">The optional tags list to initialize the created Activity object
+        // with.</param>
+        /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created
+        // Activity object with.</param>
+        /// <param name="startTime">The optional start timestamp to set on the created Activity
+        // object.</param>
         /// <param name="name">The operation name of the Activity.</param>
-        /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
+        /// <returns>The created <see cref="Activity"/> object or null if there is no any
+        // listener.</returns>
         public Activity? StartActivity(
             ActivityKind kind,
             ActivityContext parentContext = default,
@@ -292,9 +327,11 @@ namespace System.Diagnostics
                         }
                         else if (data.IdFormat == ActivityIdFormat.W3C)
                         {
-                            // In case we have a parent Id and the listener not providing the SampleUsingParentId, we'll try to find out if the following conditions are true:
+                            // In case we have a parent Id and the listener not providing the SampleUsingParentId, we'll try to
+                            // find out if the following conditions are true:
                             //   - The listener is providing the Sample callback
-                            //   - Can convert the parent Id to a Context. ActivityCreationOptions.TraceId != default means parent id converted to a valid context.
+                            //   - Can convert the parent Id to a Context. ActivityCreationOptions.TraceId != default means
+                            // parent id converted to a valid context.
                             // Then we can call the listener Sample callback with the constructed context.
                             SampleActivity<ActivityContext>? sample = listener.Sample;
                             if (sample != null)
@@ -385,8 +422,10 @@ namespace System.Diagnostics
 
                 if (!useCurrentActivityContext)
                 {
-                    // We use the context stored inside ActivityCreationOptions as it is possible the trace id get automatically generated during the sampling.
-                    // We don't use the context stored inside ActivityCreationOptions only in case if we used Activity.Current context, the reason is we need to
+                    // We use the context stored inside ActivityCreationOptions as it is possible the trace id get
+                    // automatically generated during the sampling.
+                    // We don't use the context stored inside ActivityCreationOptions only in case if we used
+                    // Activity.Current context, the reason is we need to
                     // create the new child activity with Parent set to Activity.Current.
                     context = aco.GetContext();
                 }
@@ -419,7 +458,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Dispose the ActivitySource object and remove the current instance from the global list. empty the listeners list too.
+        /// Dispose the ActivitySource object and remove the current instance from the global list. empty
+        // the listeners list too.
         /// </summary>
         public void Dispose()
         {
@@ -430,7 +470,8 @@ namespace System.Diagnostics
         /// <summary>
         /// Add a listener to the <see cref="Activity"/> starting and stopping events.
         /// </summary>
-        /// <param name="listener"> The <see cref="ActivityListener"/> object to use for listening to the <see cref="Activity"/> events.</param>
+        /// <param name="listener"> The <see cref="ActivityListener"/> object to use for listening to the
+        // <see cref="Activity"/> events.</param>
         public static void AddActivityListener(ActivityListener listener)
         {
             if (listener is null)
@@ -516,9 +557,11 @@ namespace System.Diagnostics
     }
 
     // SynchronizedList<T> is a helper collection which ensure thread safety on the collection
-    // and allow enumerating the collection items and execute some action on the enumerated item and can detect any change in the collection
+    // and allow enumerating the collection items and execute some action on the enumerated item and can
+    // detect any change in the collection
     // during the enumeration which force restarting the enumeration again.
-    // Caution: We can have the action executed on the same item more than once which is ok in our scenarios.
+    // Caution: We can have the action executed on the same item more than once which is ok in our
+    // scenarios.
     internal sealed class SynchronizedList<T>
     {
         private readonly List<T> _list;

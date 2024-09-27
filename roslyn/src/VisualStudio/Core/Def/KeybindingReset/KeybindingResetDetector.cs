@@ -33,9 +33,12 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
     /// to reset if so.
     /// </summary>
     /// <remarks>
-    /// The only objects to hold permanent references to this object should be callbacks that are registered for in
-    /// <see cref="InitializeCore"/>. No other external objects should hold a reference to this. Unless the user clicks
-    /// 'Never show this again', this will persist for the life of the VS instance, and does not need to be manually disposed
+    /// The only objects to hold permanent references to this object should be callbacks that are
+    // registered for in
+    /// <see cref="InitializeCore"/>. No other external objects should hold a reference to this. Unless
+    // the user clicks
+    /// 'Never show this again', this will persist for the life of the VS instance, and does not need to
+    // be manually disposed
     /// in that case.
     /// </remarks>
     /// <para>
@@ -84,7 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
 
         /// <summary>
         /// If false, ReSharper is either not installed, or has been disabled in the extension manager.
-        /// If true, the ReSharper extension is enabled. ReSharper's internal status could be either suspended or enabled.
+        /// If true, the ReSharper extension is enabled. ReSharper's internal status could be either
+        // suspended or enabled.
         /// </summary>
         private bool _resharperExtensionInstalledAndEnabled = false;
         private bool _infoBarOpen = false;
@@ -141,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
 
             if (_resharperExtensionInstalledAndEnabled)
             {
-                // We need to monitor for suspend/resume commands, so create and install the command target and the modal callback.
+                // We need to monitor for suspend/resume commands, so create and install the command target and the
+                // modal callback.
                 var priorityCommandTargetRegistrar = _serviceProvider.GetServiceOnMainThread<
                     SVsRegisterPriorityCommandTarget,
                     IVsRegisterPriorityCommandTarget
@@ -159,7 +164,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
                     return;
                 }
 
-                // Initialize the OleComponent to listen for modal changes (which will tell us when Tools->Options is closed)
+                // Initialize the OleComponent to listen for modal changes (which will tell us when Tools->Options
+                // is closed)
                 _oleComponent = OleComponent.CreateHostedComponent("Keybinding Reset Detector");
                 _oleComponent.ModalStateChanged += OnModalStateChanged;
             }
@@ -321,7 +327,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
 
                 var suspendFlag = await QueryStatusAsync(SuspendId).ConfigureAwait(false);
 
-                // In the case of an error when attempting to get the status, pretend that ReSharper isn't enabled. We also
+                // In the case of an error when attempting to get the status, pretend that ReSharper isn't enabled.
+                // We also
                 // shut down monitoring so we don't keep hitting this.
                 if (suspendFlag == 0)
                 {
@@ -437,7 +444,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
             _globalOptions.SetGlobalOption(KeybindingResetOptionsStorage.NeedsReset, false);
             KeybindingsResetLogger.Log("NeverShowAgain");
 
-            // The only external references to this object are as callbacks, which are removed by the Shutdown method.
+            // The only external references to this object are as callbacks, which are removed by the Shutdown
+            // method.
             ThreadingContext.JoinableTaskFactory.Run(ShutdownAsync);
         }
 
@@ -480,7 +488,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
                 StartUpdateStateMachine();
             }
 
-            // No matter the command, we never actually want to respond to it, so always return not supported. We're just monitoring.
+            // No matter the command, we never actually want to respond to it, so always return not supported.
+            // We're just monitoring.
             return (int)OLE.Interop.Constants.OLECMDERR_E_NOTSUPPORTED;
         }
 
@@ -488,8 +497,10 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
         {
             ThisCanBeCalledOnAnyThread();
 
-            // Only monitor for StateTransitionType.Exit. This will be fired when the shell is leaving a modal state, including
-            // Tools->Options being exited. This will fire more than just on Options close, but there's no harm from running an
+            // Only monitor for StateTransitionType.Exit. This will be fired when the shell is leaving a modal
+            // state, including
+            // Tools->Options being exited. This will fire more than just on Options close, but there's no harm
+            // from running an
             // extra QueryStatus.
             if (args.TransitionType == StateTransitionType.Exit)
             {

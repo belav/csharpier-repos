@@ -15,17 +15,20 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// A base class for components that instrument various portions of executable code.
     /// It provides a set of APIs that are called by <see cref="LocalRewriter"/> to instrument
     /// specific portions of the code. These APIs have at least two parameters:
-    ///     - original bound node produced by the <see cref="Binder"/> for the relevant portion of the code;
+    ///     - original bound node produced by the <see cref="Binder"/> for the relevant portion of the
+    // code;
     ///     - rewritten bound node created by the <see cref="LocalRewriter"/> for the original node.
     /// The APIs are expected to return new state of the rewritten node, after they apply appropriate
     /// modifications, if any.
     ///
-    /// The base class provides default implementation for all APIs, which simply returns the rewritten node.
+    /// The base class provides default implementation for all APIs, which simply returns the rewritten
+    // node.
     /// </summary>
     internal class Instrumenter
     {
         /// <summary>
-        /// The singleton NoOp instrumenter, can be used to terminate the chain of <see cref="CompoundInstrumenter"/>s.
+        /// The singleton NoOp instrumenter, can be used to terminate the chain of <see
+        // cref="CompoundInstrumenter"/>s.
         /// </summary>
         public static readonly Instrumenter NoOp = new Instrumenter();
 
@@ -77,9 +80,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="original">Original block.</param>
         /// <param name="rewriter">Local rewriter.</param>
-        /// <param name="additionalLocals">Local symbols to be added to <see cref="BoundBlock.Locals"/> of the resulting block.</param>
-        /// <param name="prologue">Node to be added to the beginning of the statement list of the instrumented block.</param>
-        /// <param name="epilogue">Node to be added at the end of the statement list of the instrumented block.</param>
+        /// <param name="additionalLocals">Local symbols to be added to <see cref="BoundBlock.Locals"/> of
+        // the resulting block.</param>
+        /// <param name="prologue">Node to be added to the beginning of the statement list of the
+        // instrumented block.</param>
+        /// <param name="epilogue">Node to be added at the end of the statement list of the instrumented
+        // block.</param>
         public virtual void InstrumentBlock(
             BoundBlock original,
             LocalRewriter rewriter,
@@ -369,7 +375,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Instrument a switch case when clause, which is translated to a conditional branch to the body of the case block.
+        /// Instrument a switch case when clause, which is translated to a conditional branch to the body of
+        // the case block.
         /// </summary>
         /// <param name="original">the bound expression of the when clause</param>
         /// <param name="ifConditionGotoBody">the lowered conditional branch into the case block</param>

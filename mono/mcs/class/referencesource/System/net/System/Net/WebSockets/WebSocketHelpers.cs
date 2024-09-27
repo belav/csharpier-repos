@@ -26,13 +26,18 @@ namespace System.Net.WebSockets
         internal const int DefaultClientSendBufferSize = 16 * 1024;
         internal const int MaxControlFramePayloadLength = 123;
 
-        // RFC 6455 requests WebSocket clients to let the server initiate the TCP close to avoid that client sockets
+        // RFC 6455 requests WebSocket clients to let the server initiate the TCP close to avoid that client
+        // sockets
         // end up in TIME_WAIT-state
         //
-        // After both sending and receiving a Close message, an endpoint considers the WebSocket connection closed and
-        // MUST close the underlying TCP connection.  The server MUST close the underlying TCP connection immediately;
-        // the client SHOULD wait for the server to close the connection but MAY close the connection at any time after
-        // sending and receiving a Close message, e.g., if it has not received a TCP Close from the server in a
+        // After both sending and receiving a Close message, an endpoint considers the WebSocket connection
+        // closed and
+        // MUST close the underlying TCP connection.  The server MUST close the underlying TCP connection
+        // immediately;
+        // the client SHOULD wait for the server to close the connection but MAY close the connection at any
+        // time after
+        // sending and receiving a Close message, e.g., if it has not received a TCP Close from the server
+        // in a
         // reasonable time period.
         internal const int ClientTcpCloseTimeout = 1000; // 1s
 
@@ -583,7 +588,8 @@ namespace System.Net.WebSockets
                 || closeStatusCode == CloseStatusCodeFailedTLSHandshake
             )
             {
-                // CloseStatus 1006 means Aborted - this will never appear on the wire and is reflected by calling WebSocket.Abort
+                // CloseStatus 1006 means Aborted - this will never appear on the wire and is reflected by calling
+                // WebSocket.Abort
                 throw new ArgumentException(
                     SR.GetString(SR.net_WebSockets_InvalidCloseStatusCode, closeStatusCode),
                     "closeStatus"

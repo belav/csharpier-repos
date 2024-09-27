@@ -88,16 +88,22 @@ namespace System.Web.UI.Design.MobileControls
         /// <remarks>
         ///    <para>
         ///       Call <see langword='Dispose'/> when
-        ///       you are finished using the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/>. The <see langword='Dispose'/> method leaves the <see cref='System.Web.UI.Design.WebControls.DataListDesigner'/> in an unusable state. After
+        ///       you are finished using the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/>.
+        // The <see langword='Dispose'/> method leaves the <see
+        // cref='System.Web.UI.Design.WebControls.DataListDesigner'/> in an unusable state. After
         ///       calling <see langword='Dispose'/>, you must release all
-        ///       references to the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/> so the memory it was occupying
+        ///       references to the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/> so the
+        // memory it was occupying
         ///       can be reclaimed by garbage collection.
         ///    </para>
         ///    <note type="note">
         ///       Always call <see langword='Dispose'/> before you release your last reference to
-        ///       the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/>. Otherwise, the resources
-        ///       the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/> is using will not be freed
-        ///       until garbage collection calls the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/> object's
+        ///       the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/>. Otherwise, the
+        // resources
+        ///       the <see cref='System.Web.UI.Design.MobileControls.ListDesigner'/> is using will not be
+        // freed
+        ///       until garbage collection calls the <see
+        // cref='System.Web.UI.Design.MobileControls.ListDesigner'/> object's
         ///       destructor.
         ///    </note>
         /// </remarks>

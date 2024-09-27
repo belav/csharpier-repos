@@ -68,7 +68,7 @@ namespace MonoTests.System.Configuration
             Assert.Equal(typeof(TimeSpan), o.GetType());
             Assert.Equal(TimeSpan.FromSeconds(59), o);
 
-            /* and now test infinity */
+/* and now test infinity */
             o = cv.ConvertFrom(null, null, "Infinite");
             Assert.Equal(TimeSpan.MaxValue, o);
         }
@@ -98,7 +98,7 @@ namespace MonoTests.System.Configuration
                 cv.ConvertTo(null, null, TimeSpan.FromSeconds(144), typeof(string))
             );
 
-            /* infinity tests */
+/* infinity tests */
             Assert.Equal("Infinite", cv.ConvertTo(null, null, TimeSpan.MaxValue, typeof(string)));
             Assert.Equal(
                 "10675199.02:48:04.4775807",

@@ -31,7 +31,8 @@ namespace System.IO.Tests
 
         /// <summary>
         /// Changes the current working directory path to a new temporary directory.
-        /// Important: Make sure to call this inside a remote executor to avoid changing the cwd for all tests in same process.
+        /// Important: Make sure to call this inside a remote executor to avoid changing the cwd for all
+        // tests in same process.
         /// </summary>
         /// <returns>The path of the new cwd.</returns>
         protected string ChangeCurrentDirectory()

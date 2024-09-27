@@ -13,7 +13,8 @@ public readonly struct ActionSelectorCandidate
     /// <summary>
     /// Creates a new <see cref="ActionSelectorCandidate"/>.
     /// </summary>
-    /// <param name="action">The <see cref="ActionDescriptor"/> representing a candidate for selection.</param>
+    /// <param name="action">The <see cref="ActionDescriptor"/> representing a candidate for
+    // selection.</param>
     /// <param name="constraints">
     /// The list of <see cref="IActionConstraint"/> instances associated with <paramref name="action"/>.
     /// </param>

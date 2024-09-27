@@ -156,7 +156,8 @@ namespace System.Reflection.Metadata
 
         // This is only for binding
         /// <summary>
-        /// Represents a custom modifier applied to a type within a signature that the caller must understand.
+        /// Represents a custom modifier applied to a type within a signature that the caller must
+        // understand.
         /// </summary>
         RequiredModifier = CorElementType.ELEMENT_TYPE_CMOD_REQD, // required C modifier : E_T_CMOD_REQD <mdTypeRef/mdTypeDef>
 
@@ -177,7 +178,8 @@ namespace System.Reflection.Metadata
         TypeHandle = CorElementType.ELEMENT_TYPE_HANDLE, // CLASS | VALUETYPE <class Token>
 
         /// <summary>
-        /// Represents a marker to indicate the end of fixed arguments and the beginning of variable arguments.
+        /// Represents a marker to indicate the end of fixed arguments and the beginning of variable
+        // arguments.
         /// </summary>
         Sentinel = CorElementType.ELEMENT_TYPE_SENTINEL,
 

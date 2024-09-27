@@ -22,7 +22,8 @@ namespace System.Activities
         [EnumMember]
         Faulted,
 
-        // If any more states are added, ensure they are also added to ActivityInstanceStateExtension.GetStateName
+        // If any more states are added, ensure they are also added to
+        // ActivityInstanceStateExtension.GetStateName
     }
 
     internal static class ActivityInstanceStateExtension

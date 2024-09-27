@@ -410,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 serializationVersion = 5;
             }
 
-            // Add future version checks here. If the version is off by more than 1, these upgrades will run in sequence.
+            // Add future version checks here. If the version is off by more than 1, these upgrades will run in
+            // sequence.
             // The next one should check serializationVersion == 5 and update it to 6.
             // It is also important to create a new roaming location in NamingStyleOptions.NamingPreferences
             // so that we never store the new format in an older version.

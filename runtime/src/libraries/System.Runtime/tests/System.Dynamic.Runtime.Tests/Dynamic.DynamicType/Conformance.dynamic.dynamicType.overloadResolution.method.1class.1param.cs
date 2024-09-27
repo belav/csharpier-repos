@@ -338,7 +338,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 {
     // <Title>Overload resolution of methods involving pointer types</Title>
     // <Description>
-    // Method overload resolution with dynamic argument resolving to array parameter with the corresponding pointer type as the parameter for the other method
+    // Method overload resolution with dynamic argument resolving to array parameter with the
+    // corresponding pointer type as the parameter for the other method
     // </Description>
     //<Expects Status=warning>\(19,9\).*CS0169</Expects>
     // <RelatedBugs></RelatedBugs>
@@ -472,7 +473,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     //{
     //return 0;
     //}
-    //[Test][Priority(Priority.Priority2)]public void DynamicCSharpRunTest(){Assert.AreEqual(0, MainMethod());} public static int MainMethod()
+    //[Test][Priority(Priority.Priority2)]public void DynamicCSharpRunTest(){Assert.AreEqual(0,
+    // MainMethod());} public static int MainMethod()
     //{
     //dynamic c1 = "Testing".ToCharArray();
     //if (Test1(c1) == 1) return 1;
@@ -515,7 +517,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 {
     // <Title>Overload resolution of methods involving pointer types</Title>
     // <Description>
-    // Method overload resolution with dynamic argument resolving to array parameter with the corresponding pointer type as the parameter for the other method
+    // Method overload resolution with dynamic argument resolving to array parameter with the
+    // corresponding pointer type as the parameter for the other method
     // </Description>
 
     // <RelatedBugs></RelatedBugs>

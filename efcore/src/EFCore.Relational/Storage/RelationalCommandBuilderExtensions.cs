@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///     Extension methods for the <see cref="IRelationalCommandBuilder" /> class.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public static class RelationalCommandBuilderExtensions
@@ -37,7 +38,8 @@ public static class RelationalCommandBuilderExtensions
     /// </summary>
     /// <param name="commandBuilder">The command builder.</param>
     /// <param name="value">The object to be written.</param>
-    /// <param name="skipFinalNewline">If <see langword="true" />, then the final newline character is skipped.</param>
+    /// <param name="skipFinalNewline">If <see langword="true" />, then the final newline character is
+    // skipped.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static IRelationalCommandBuilder AppendLines(
         this IRelationalCommandBuilder commandBuilder,
@@ -88,8 +90,10 @@ public static class RelationalCommandBuilderExtensions
     /// </summary>
     /// <param name="commandBuilder">The command builder.</param>
     /// <param name="invariantName">
-    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just represents a
-    ///     placeholder for a parameter and not the actual value. This is because the same command can be
+    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just
+    // represents a
+    ///     placeholder for a parameter and not the actual value. This is because the same command can
+    // be
     ///     reused multiple times with different parameter values.
     /// </param>
     /// <param name="name">
@@ -108,15 +112,18 @@ public static class RelationalCommandBuilderExtensions
     /// </summary>
     /// <param name="commandBuilder">The command builder.</param>
     /// <param name="invariantName">
-    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just represents a
-    ///     placeholder for a parameter and not the actual value. This is because the same command can be
+    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just
+    // represents a
+    ///     placeholder for a parameter and not the actual value. This is because the same command can
+    // be
     ///     reused multiple times with different parameter values.
     /// </param>
     /// <param name="name">
     ///     The name to be used for the parameter when the command is executed against the database.
     /// </param>
     /// <param name="relationalTypeMapping">The relational type mapping for this parameter.</param>
-    /// <param name="nullable">A value indicating whether the parameter could contain a null value.</param>
+    /// <param name="nullable">A value indicating whether the parameter could contain a null
+    // value.</param>
     /// <param name="direction">The parameter direction.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static IRelationalCommandBuilder AddParameter(
@@ -138,13 +145,16 @@ public static class RelationalCommandBuilderExtensions
         );
 
     /// <summary>
-    ///     Adds a parameter that is ultimately represented as multiple <see cref="DbParameter" />s in the
+    ///     Adds a parameter that is ultimately represented as multiple <see cref="DbParameter" />s in
+    // the
     ///     final command.
     /// </summary>
     /// <param name="commandBuilder">The command builder.</param>
     /// <param name="invariantName">
-    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just represents a
-    ///     placeholder for a parameter and not the actual value. This is because the same command can be
+    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just
+    // represents a
+    ///     placeholder for a parameter and not the actual value. This is because the same command can
+    // be
     ///     reused multiple times with different parameter values.
     /// </param>
     /// <param name="subParameters">The parameters to include in the composite.</param>
@@ -170,8 +180,10 @@ public static class RelationalCommandBuilderExtensions
     /// </summary>
     /// <param name="commandBuilder">The command builder.</param>
     /// <param name="invariantName">
-    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just represents a
-    ///     placeholder for a parameter and not the actual value. This is because the same command can be
+    ///     The key that identifies this parameter. Note that <see cref="IRelationalParameter" /> just
+    // represents a
+    ///     placeholder for a parameter and not the actual value. This is because the same command can
+    // be
     ///     reused multiple times with different parameter values.
     /// </param>
     /// <param name="dbParameter">The DbParameter being added.</param>

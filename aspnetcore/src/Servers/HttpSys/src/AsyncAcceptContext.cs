@@ -79,7 +79,8 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
                 //  (uint)backingBuffer.Length - AlignmentPadding
                 AllocateNativeRequest(numBytes, _requestContext.RequestId);
 
-                // We need to issue a new request, either because auth failed, or because our buffer was too small the first time.
+                // We need to issue a new request, either because auth failed, or because our buffer was too small
+                // the first time.
                 var statusCode = QueueBeginGetContext();
 
                 if (
@@ -141,7 +142,8 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
             )
             {
                 // ERROR_CONNECTION_INVALID:
-                // The client reset the connection between the time we got the MORE_DATA error and when we called HttpReceiveHttpRequest
+                // The client reset the connection between the time we got the MORE_DATA error and when we called
+                // HttpReceiveHttpRequest
                 // with the new buffer. We can clear the request id and move on to the next request.
                 //
                 // ERROR_INVALID_PARAMETER: Historical check from HttpListener.

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="compilation">The compilation to reference.</param>
         /// <param name="aliases">Extern aliases for this reference.</param>
-        /// <param name="embedInteropTypes">Should interop types be embedded in the created assembly?</param>
+        /// <param name="embedInteropTypes">Should interop types be embedded in the created
+        // assembly?</param>
         public CSharpCompilationReference(
             CSharpCompilation compilation,
             ImmutableArray<string> aliases = default(ImmutableArray<string>),

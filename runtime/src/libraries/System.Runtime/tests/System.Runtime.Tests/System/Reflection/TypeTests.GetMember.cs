@@ -73,7 +73,8 @@ public static class TypeTests_GetMember
     {
         Type t = typeof(Mixed);
 
-        // .NET Framework compat: Type.GetMember() returns the most specific array type possible given the MemberType combinations passed in.
+        // .NET Framework compat: Type.GetMember() returns the most specific array type possible given the
+        // MemberType combinations passed in.
         for (MemberTypes memberType = (MemberTypes)0; memberType <= MemberTypes.All; memberType++)
         {
             MemberInfo[] m = t.GetMember(

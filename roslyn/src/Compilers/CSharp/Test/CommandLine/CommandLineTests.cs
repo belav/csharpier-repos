@@ -556,7 +556,8 @@ dotnet_diagnostic.cs0169.severity = suppress";
         public void CompilerBinariesAreAnyCPU()
         {
 #pragma warning disable SYSLIB0037
-            // warning SYSLIB0037: 'AssemblyName.ProcessorArchitecture' is obsolete: 'AssemblyName members HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete and not supported.'
+            // warning SYSLIB0037: 'AssemblyName.ProcessorArchitecture' is obsolete: 'AssemblyName members
+            // HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete and not supported.'
             Assert.Equal(
                 ProcessorArchitecture.MSIL,
                 AssemblyName.GetAssemblyName(s_CSharpCompilerExecutable).ProcessorArchitecture
@@ -719,7 +720,8 @@ d.cs
             AssertEx.Equal(ImmutableArray.Create<string>(), parser.KeyFileSearchPaths);
             Assert.Null(parser.OutputDirectory);
             parser.Errors.Verify(
-                // error CS2021: File name 'web.config' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'web.config' is empty, contains invalid characters, has a drive
+                // specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName)
                     .WithArguments("web.config")
                     .WithLocation(1, 1),
@@ -1335,7 +1337,8 @@ class C
                 embedded: false
             );
             diags.Verify(
-                // error CS1906: Invalid option '\somepath\someFile.goo.bar'; Resource visibility must be either 'public' or 'private'
+                // error CS1906: Invalid option '\somepath\someFile.goo.bar'; Resource visibility must be either
+                // 'public' or 'private'
                 Diagnostic(ErrorCode.ERR_BadResourceVis)
                     .WithArguments(@"\somepath\someFile.goo.bar")
             );
@@ -1351,7 +1354,8 @@ class C
                 embedded: false
             );
             diags.Verify(
-                // error CS1906: Invalid option '\somepath\someFile.goo.bar'; Resource visibility must be either 'public' or 'private'
+                // error CS1906: Invalid option '\somepath\someFile.goo.bar'; Resource visibility must be either
+                // 'public' or 'private'
                 Diagnostic(ErrorCode.ERR_BadResourceVis)
                     .WithArguments(@"\somepath\someFile.goo.bar")
             );
@@ -1653,7 +1657,13 @@ class C
                 embedded: false
             );
             diags.Verify(
-                // error CS2021: File name 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name
+                //
+                //
+                // 'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+                // is empty, contains invalid characters, has a drive specification without an absolute path, or is
+                // too
+                // long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName)
                     .WithArguments(
                         "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
@@ -2061,7 +2071,8 @@ class C
 
             parsedArgs = DefaultParse(new[] { "/target:" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or 'module'
+                // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or
+                // 'module'
                 Diagnostic(ErrorCode.FTL_InvalidTarget).WithLocation(1, 1),
                 // warning CS2008: No source files specified.
                 Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
@@ -2071,7 +2082,8 @@ class C
 
             parsedArgs = DefaultParse(new[] { "/target:xyz" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or 'module'
+                // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or
+                // 'module'
                 Diagnostic(ErrorCode.FTL_InvalidTarget).WithLocation(1, 1),
                 // warning CS2008: No source files specified.
                 Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
@@ -2221,7 +2233,8 @@ class C
                 sdkDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS1617: Invalid option '-1' for /langversion. Use '/langversion:?' to list supported values.
+                // error CS1617: Invalid option '-1' for /langversion. Use '/langversion:?' to list supported
+                // values.
                 Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments("-1").WithLocation(1, 1)
             );
 
@@ -2429,8 +2442,11 @@ class C
         {
             DefaultParse(new[] { $"/langversion:{value}", "a.cs" }, WorkingDirectory)
                 .Errors.Verify(
-                    // error CS1617: Invalid option 'XXX' for /langversion. Use '/langversion:?' to list supported values.
-                    Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments(value).WithLocation(1, 1)
+                    // error CS1617: Invalid option 'XXX' for /langversion. Use '/langversion:?' to list supported
+                    // values.
+                    Diagnostic(ErrorCode.ERR_BadCompatMode)
+                        .WithArguments(value)
+                        .WithLocation(1, 1)
                 );
         }
 
@@ -2487,7 +2503,8 @@ class C
             // - update the "UpgradeProject" codefixer
             // - update all the tests that call this canary
             // - update MaxSupportedLangVersion (a relevant test should break when new version is introduced)
-            // - email release management to add to the release notes (see old example: https://github.com/dotnet/core/pull/1454)
+            // - email release management to add to the release notes (see old example:
+            // https://github.com/dotnet/core/pull/1454)
             AssertEx.SetEqual(
                 new[]
                 {
@@ -2555,7 +2572,8 @@ class C
 
             AssertEx.SetEqual(versions, errorCodes);
 
-            // The canary check is a reminder that this test needs to be updated when a language version is added
+            // The canary check is a reminder that this test needs to be updated when a language version is
+            // added
             LanguageVersionAdded_Canary();
         }
 
@@ -2589,7 +2607,8 @@ class C
             Assert.Equal(expectedMappedVersion, input.MapSpecifiedToEffectiveVersion());
             Assert.True(expectedMappedVersion.IsValid());
 
-            // The canary check is a reminder that this test needs to be updated when a language version is added
+            // The canary check is a reminder that this test needs to be updated when a language version is
+            // added
             LanguageVersionAdded_Canary();
         }
 
@@ -2646,7 +2665,8 @@ class C
             Assert.Equal(success, LanguageVersionFacts.TryParse(input, out var version));
             Assert.Equal(expected, version);
 
-            // The canary check is a reminder that this test needs to be updated when a language version is added
+            // The canary check is a reminder that this test needs to be updated when a language version is
+            // added
             LanguageVersionAdded_Canary();
         }
 
@@ -3002,7 +3022,8 @@ class C
             // temp: path changed
             //parsedArgs = DefaultParse(new[] { "/debug", "/pdb:.x", "a.cs" }, baseDirectory);
             //parsedArgs.Errors.Verify(
-            //    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+            //    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive
+            // specification without an absolute path, or is too long
             //    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x"));
 
             parsedArgs = DefaultParse(new[] { @"/pdb:""""", "/debug", "a.cs" }, WorkingDirectory);
@@ -3068,11 +3089,13 @@ class C
             );
             parsedArgs.Errors.Verify();
             // Temp: Path info changed
-            // Assert.Equal(FileUtilities.ResolveRelativePath("MyPdb.pdb", "..\\", baseDirectory), parsedArgs.PdbPath);
+            // Assert.Equal(FileUtilities.ResolveRelativePath("MyPdb.pdb", "..\\", baseDirectory),
+            // parsedArgs.PdbPath);
 
             parsedArgs = DefaultParse(new[] { @"/pdb:\\b", "/debug", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
             );
             Assert.Null(parsedArgs.PdbPath);
@@ -3082,8 +3105,10 @@ class C
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b\OkFileName.pdb")
+                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
+                Diagnostic(ErrorCode.FTL_InvalidInputFileName)
+                    .WithArguments(@"\\b\OkFileName.pdb")
             );
             Assert.Null(parsedArgs.PdbPath);
 
@@ -3112,14 +3137,16 @@ class C
             // Dev11 reports CS0016: Could not write to output file 'd:\Temp\q\a<>.z'
             parsedArgs = DefaultParse(new[] { @"/pdb:""a<>.pdb""", "a.vb" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.pdb' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'a<>.pdb' is empty, contains invalid characters, has a drive
+                // specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.pdb")
             );
             Assert.Null(parsedArgs.PdbPath);
 
             parsedArgs = DefaultParse(new[] { "/pdb:.x", "/debug", "a.cs" }, WorkingDirectory);
             //parsedArgs.Errors.Verify(
-            //    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+            //    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive
+            // specification without an absolute path, or is too long
             //    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x"));
             Assert.Null(parsedArgs.PdbPath);
         }
@@ -4001,7 +4028,8 @@ class C
                 WorkingDirectory
             );
             //parsedArgs.Errors.Verify(
-            //    Diagnostic(ErrorCode.ERR_CantReadRulesetFile).WithArguments(file.Path, "Data at the root level is invalid. Line 1, position 1."));
+            //    Diagnostic(ErrorCode.ERR_CantReadRulesetFile).WithArguments(file.Path, "Data at the root level
+            // is invalid. Line 1, position 1."));
             Assert.Equal(expected: file.Path, actual: parsedArgs.RuleSetPath);
             var err = parsedArgs.Errors.Single();
 
@@ -5120,7 +5148,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             var parsedArgs = DefaultParse(new[] { @"/out:""""", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '' contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '' contains invalid characters, has a drive specification without an
+                // absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("")
             );
 
@@ -5279,7 +5308,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             char currentDrive = Directory.GetCurrentDirectory()[0];
             parsedArgs = DefaultParse(new[] { currentDrive + @":a.cs", "b.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name 'D:a.cs' is contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'D:a.cs' is contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName)
                     .WithArguments(currentDrive + ":a.cs")
             );
@@ -5292,7 +5322,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             // UNC
             parsedArgs = DefaultParse(new[] { @"/out:\\b", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
             );
 
@@ -5314,7 +5345,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             // invalid name:
             parsedArgs = DefaultParse(new[] { "/out:a.b\0b", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b")
             );
 
@@ -5325,13 +5357,15 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             // Temporary skip following scenarios because of the error message changed (path)
             //parsedArgs = DefaultParse(new[] { "/out:a\uD800b.dll", "a.cs" }, baseDirectory);
             //parsedArgs.Errors.Verify(
-            //    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+            //    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive
+            // specification without an absolute path, or is too long
             //    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a\uD800b.dll"));
 
             // Dev11 reports CS0016: Could not write to output file 'd:\Temp\q\a<>.z'
             parsedArgs = DefaultParse(new[] { @"/out:""a<>.dll""", "a.vb" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'a<>.dll' is empty, contains invalid characters, has a drive
+                // specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.dll")
             );
 
@@ -5341,7 +5375,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/out:.exe", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".exe")
             );
 
@@ -5351,7 +5386,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/t:exe", @"/out:.exe", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".exe")
             );
 
@@ -5361,7 +5397,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/t:library", @"/out:.dll", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".dll")
             );
 
@@ -5374,7 +5411,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 baseDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.netmodule' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.netmodule' is empty, contains invalid characters, has a drive
+                // specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".netmodule")
             );
 
@@ -5398,7 +5436,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/t:library", ".cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".dll")
             );
 
@@ -5421,7 +5460,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
         {
             var parsedArgs = DefaultParse(new[] { "/out:.x", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x")
             );
 
@@ -5431,7 +5471,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { "/out:.x", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x")
             );
 
@@ -5663,7 +5704,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 baseDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName)
                     .WithArguments(currentDrive + ":a.xml")
             );
@@ -5704,11 +5746,13 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             //    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a\uD800b.xml"));
 
             // Assert.Null(parsedArgs.DocumentationPath);
-            // Assert.Equal(DocumentationMode.Diagnose, parsedArgs.ParseOptions.DocumentationMode); //Even though the format was incorrect
+            // Assert.Equal(DocumentationMode.Diagnose, parsedArgs.ParseOptions.DocumentationMode); //Even
+            // though the format was incorrect
 
             parsedArgs = DefaultParse(new[] { @"/doc:""a<>.xml""", "a.vb" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive
+                // specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.xml")
             );
 
@@ -5726,7 +5770,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             var parsedArgs = DefaultParse(new[] { @"/errorlog:""""", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:' option
+                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:'
+                // option
                 Diagnostic(ErrorCode.ERR_SwitchNeedsString)
                     .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog:")
             );
@@ -5735,7 +5780,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/errorlog:", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:' option
+                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:'
+                // option
                 Diagnostic(ErrorCode.ERR_SwitchNeedsString)
                     .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog:")
             );
@@ -5744,7 +5790,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/errorlog", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog' option
+                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog'
+                // option
                 Diagnostic(ErrorCode.ERR_SwitchNeedsString)
                     .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog")
             );
@@ -5805,7 +5852,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 baseDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName)
                     .WithArguments(currentDrive + ":a.xml")
             );
@@ -5841,7 +5889,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/errorlog:""a<>.xml""", "a.vb" }, baseDirectory);
             parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive
+                // specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.xml")
             );
 
@@ -5873,7 +5922,9 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     baseDirectory
                 );
                 parsedArgs.Errors.Verify(
-                    // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=42' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
+                    // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=42' is not a valid
+                    // value for the '/errorlog:' option. The value must be of the form
+                    // '<file>[,version={1|1.0|2|2.1}]'.
                     Diagnostic(ErrorCode.ERR_BadSwitchValue)
                         .WithArguments(
                             invalidSarifVersion,
@@ -5892,7 +5943,9 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 baseDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,invalid=42' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
+                // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,invalid=42' is not a valid
+                // value for the '/errorlog:' option. The value must be of the form
+                // '<file>[,version={1|1.0|2|2.1}]'.
                 Diagnostic(ErrorCode.ERR_BadSwitchValue)
                     .WithArguments(
                         InvalidErrorLogQualifier,
@@ -5911,7 +5964,9 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 baseDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=2,version=2' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
+                // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=2,version=2' is not a
+                // valid value for the '/errorlog:' option. The value must be of the form
+                // '<file>[,version={1|1.0|2|2.1}]'.
                 Diagnostic(ErrorCode.ERR_BadSwitchValue)
                     .WithArguments(
                         TooManyErrorLogQualifiers,
@@ -5953,7 +6008,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             parsedArgs.Errors.Verify();
             Assert.Equal(@"C:\abc\def\baz\a.exe.config", parsedArgs.AppConfigPath);
 
-            // If ParseDoc succeeds, all other possible AppConfig paths should succeed as well -- they both call ParseGenericFilePath
+            // If ParseDoc succeeds, all other possible AppConfig paths should succeed as well -- they both call
+            // ParseGenericFilePath
         }
 
         [Fact]
@@ -6109,7 +6165,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
+                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of
+                // 'module'
                 Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
             );
 
@@ -6118,7 +6175,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
+                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of
+                // 'module'
                 Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
             );
 
@@ -6127,7 +6185,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
+                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of
+                // 'module'
                 Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
             );
         }
@@ -6470,10 +6529,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path 'c:lib2' specified in '/LIB option' -- 'path is too long or invalid'
+                // warning CS1668: Invalid search path 'c:lib2' specified in '/LIB option' -- 'path is too long or
+                // invalid'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(@"c:lib2", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path 'o:\sdk1' specified in '/LIB option' -- 'directory does not exist'
+                // warning CS1668: Invalid search path 'o:\sdk1' specified in '/LIB option' -- 'directory does not
+                // exist'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(@"o:\sdk1", "/LIB option", "directory does not exist")
             );
@@ -6483,10 +6544,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does not exist'
+                // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does
+                // not exist'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(@"o:\Windows", "/LIB option", "directory does not exist"),
-                // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or invalid'
+                // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or
+                // invalid'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(@"e:", "/LIB option", "path is too long or invalid")
             );
@@ -6496,7 +6559,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path '.\Windows' specified in '/LIB option' -- 'directory does not exist'
+                // warning CS1668: Invalid search path '.\Windows' specified in '/LIB option' -- 'directory does not
+                // exist'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(@".\Windows", "/LIB option", "directory does not exist"),
                 // warning CS1668: Invalid search path 'e' specified in '/LIB option' -- 'directory does not exist'
@@ -6509,19 +6573,24 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does not exist'
+                // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does
+                // not exist'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(@"o:\Windows", "/LIB option", "directory does not exist"),
-                // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or invalid'
+                // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or
+                // invalid'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments("e:", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
+                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or
+                // invalid'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(" ", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
+                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or
+                // invalid'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(" ", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
+                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or
+                // invalid'
                 Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                     .WithArguments(" ", "/LIB option", "path is too long or invalid")
             );
@@ -6703,7 +6772,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.0. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.0. Please use language version '8.0'
+                // or greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Enable", "7.0", "8.0")
                     .WithLocation(1, 1)
@@ -6741,7 +6811,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             parsedArgs = DefaultParse(new[] { @"/nullable:yes", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("yes")
                     .WithLocation(1, 1)
@@ -6756,7 +6827,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.0. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.0. Please use language version '8.0' or
+                // greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Enable", "7.0", "8.0")
                     .WithLocation(1, 1)
@@ -6781,7 +6853,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -6837,7 +6910,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("yes")
                     .WithLocation(1, 1)
@@ -6872,7 +6946,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'Safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'Safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("Safeonly")
                     .WithLocation(1, 1)
@@ -6928,7 +7003,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("YES")
                     .WithLocation(1, 1)
@@ -6963,7 +7039,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7019,7 +7096,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("YES")
                     .WithLocation(1, 1)
@@ -7054,7 +7132,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7065,7 +7144,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7080,7 +7160,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7095,7 +7176,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7110,7 +7192,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1),
@@ -7129,11 +7212,13 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1),
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("YES")
                     .WithLocation(1, 1)
@@ -7148,7 +7233,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7163,7 +7249,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7178,11 +7265,13 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1),
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7212,7 +7301,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'yeS' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'yeS' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("yeS")
                     .WithLocation(1, 1)
@@ -7227,7 +7317,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.3. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.3. Please use language version '8.0' or
+                // greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Enable", "7.3", "8.0")
                     .WithLocation(1, 1)
@@ -7252,7 +7343,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0'
+                // or greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Enable", "7.3", "8.0")
                     .WithLocation(1, 1)
@@ -7267,7 +7359,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0'
+                // or greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Enable", "7.3", "8.0")
                     .WithLocation(1, 1)
@@ -7292,7 +7385,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7321,7 +7415,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonly")
                     .WithLocation(1, 1)
@@ -7336,7 +7431,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option '"enable"' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option '"enable"' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("\"enable\"")
                     .WithLocation(1, 1)
@@ -7351,7 +7447,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option '\\disable\\' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option '\\disable\\' for /nullable; must be 'disable', 'enable', 'warnings'
+                // or 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("\\\\disable\\\\")
                     .WithLocation(1, 1)
@@ -7366,7 +7463,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option '\enable\' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option '\enable\' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("\\enable\\")
                     .WithLocation(1, 1)
@@ -7381,7 +7479,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonlywarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonlywarnings' for /nullable; must be 'disable', 'enable',
+                // 'warnings' or 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonlywarnings")
                     .WithLocation(1, 1)
@@ -7396,7 +7495,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'SafeonlyWarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'SafeonlyWarnings' for /nullable; must be 'disable', 'enable',
+                // 'warnings' or 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("SafeonlyWarnings")
                     .WithLocation(1, 1)
@@ -7411,7 +7511,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonlyWarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'safeonlyWarnings' for /nullable; must be 'disable', 'enable',
+                // 'warnings' or 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("safeonlyWarnings")
                     .WithLocation(1, 1)
@@ -7426,7 +7527,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Warnings' for C# 7.0. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Warnings' for C# 7.0. Please use language version '8.0'
+                // or greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Warnings", "7.0", "8.0")
                     .WithLocation(1, 1)
@@ -7516,7 +7618,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("YES")
                     .WithLocation(1, 1)
@@ -7561,7 +7664,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version
+                // '8.0' or greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Warnings", "7.3", "8.0")
                     .WithLocation(1, 1)
@@ -7576,7 +7680,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.0. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.0. Please use language version
+                // '8.0' or greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Annotations", "7.0", "8.0")
                     .WithLocation(1, 1)
@@ -7666,7 +7771,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or
+                // 'annotations'
                 Diagnostic(ErrorCode.ERR_BadNullableContextOption)
                     .WithArguments("YES")
                     .WithLocation(1, 1)
@@ -7717,7 +7823,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version '8.0' or greater.
+                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version
+                // '8.0' or greater.
                 Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
                     .WithArguments("nullable", "Annotations", "7.3", "8.0")
                     .WithLocation(1, 1)
@@ -9342,9 +9449,12 @@ public class CS1698_a {}
             // Roslyn no longer generates a warning for this...since this was only a warning, we're not really
             // saving anyone...does not provide high value to implement...
 
-            // warning CS1698: Circular assembly reference 'CS1698a, Version=2.0.0.0, Culture=neutral,PublicKeyToken = 9e9d6755e7bb4c10'
-            // does not match the output assembly name 'CS1698a, Version = 3.0.0.0, Culture = neutral, PublicKeyToken = 9e9d6755e7bb4c10'.
-            // Try adding a reference to 'CS1698a, Version = 2.0.0.0, Culture = neutral, PublicKeyToken = 9e9d6755e7bb4c10' or changing the output assembly name to match.
+            // warning CS1698: Circular assembly reference 'CS1698a, Version=2.0.0.0,
+            // Culture=neutral,PublicKeyToken = 9e9d6755e7bb4c10'
+            // does not match the output assembly name 'CS1698a, Version = 3.0.0.0, Culture = neutral,
+            // PublicKeyToken = 9e9d6755e7bb4c10'.
+            // Try adding a reference to 'CS1698a, Version = 2.0.0.0, Culture = neutral, PublicKeyToken =
+            // 9e9d6755e7bb4c10' or changing the output assembly name to match.
             parsedArgs.Errors.Verify();
 
             CleanupAllGeneratedFiles(snkFile.Path);
@@ -9379,7 +9489,8 @@ public class CS1698_a {}
         [ConditionalFact(typeof(WindowsOnly), typeof(IsEnglishLocal))]
         public void Bug15538()
         {
-            // Several Jenkins VMs are still running with local systems permissions.  This suite won't run properly
+            // Several Jenkins VMs are still running with local systems permissions.  This suite won't run
+            // properly
             // in that environment.  Removing this check is being tracked by issue #79.
             using (var identity = System.Security.Principal.WindowsIdentity.GetCurrent())
             {
@@ -9388,7 +9499,8 @@ public class CS1698_a {}
                     return;
                 }
 
-                // The icacls command fails on our Helix machines and it appears to be related to the use of the $ in
+                // The icacls command fails on our Helix machines and it appears to be related to the use of the $
+                // in
                 // the username.
                 // https://github.com/dotnet/roslyn/issues/28836
                 if (
@@ -10192,7 +10304,8 @@ class C
             int exitCode = csc.Run(outWriter);
             Assert.NotEqual(0, exitCode);
 
-            // If "error" was localized, below assert will fail on PLOC builds. The output would be something like: "!pTCvB!vbc : !FLxft!error 表! CS5001:"
+            // If "error" was localized, below assert will fail on PLOC builds. The output would be something
+            // like: "!pTCvB!vbc : !FLxft!error 表! CS5001:"
             Assert.Contains("error CS5001:", outWriter.ToString().Trim());
 
             CleanupAllGeneratedFiles(file.Path);
@@ -11456,7 +11569,8 @@ public class C
                 StringComparison.Ordinal
             );
 
-            // Checks the case with /noconfig inside the response file as along with /nowarn (expect to see warning)
+            // Checks the case with /noconfig inside the response file as along with /nowarn (expect to see
+            // warning)
             // to verify that this warning is not suppressed by the /nowarn option (See MSDN).
             outWriter = new StringWriter(CultureInfo.InvariantCulture);
             csc = CreateCSharpCompiler(
@@ -11517,7 +11631,8 @@ public class C
                 StringComparison.Ordinal
             );
 
-            // Checks the case with /NOCONFIG inside the response file as along with /nowarn (expect to see warning)
+            // Checks the case with /NOCONFIG inside the response file as along with /nowarn (expect to see
+            // warning)
             // to verify that this warning is not suppressed by the /nowarn option (See MSDN).
             outWriter = new StringWriter(CultureInfo.InvariantCulture);
             csc = CreateCSharpCompiler(
@@ -11575,7 +11690,8 @@ public class C
                 StringComparison.Ordinal
             );
 
-            // Checks the case with -noconfig inside the response file as along with /nowarn (expect to see warning)
+            // Checks the case with -noconfig inside the response file as along with /nowarn (expect to see
+            // warning)
             // to verify that this warning is not suppressed by the /nowarn option (See MSDN).
             outWriter = new StringWriter(CultureInfo.InvariantCulture);
             csc = CreateCSharpCompiler(
@@ -12280,7 +12396,8 @@ public class C
                 StringComparison.Ordinal
             );
 
-            // Checks the base case without /fullpaths when the file is located in the sub-folder (expect to see relative path name)
+            // Checks the base case without /fullpaths when the file is located in the sub-folder (expect to see
+            // relative path name)
             //      c:\temp> csc.exe c:\temp\example\a.cs
             //      example\a.cs(6,16): warning CS0168: The variable 'x' is declared but never used
             outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -12298,7 +12415,8 @@ public class C
             );
             Assert.DoesNotContain(source, outWriter.ToString(), StringComparison.Ordinal);
 
-            // Checks the base case without /fullpaths when the file is not located under the base directory (expect to see the full path name)
+            // Checks the base case without /fullpaths when the file is not located under the base directory
+            // (expect to see the full path name)
             //      c:\temp> csc.exe c:\test\a.cs
             //      c:\test\a.cs(6,16): warning CS0168: The variable 'x' is declared but never used
             outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -12332,7 +12450,8 @@ public class C
                 StringComparison.Ordinal
             );
 
-            // Checks the base case without /fullpaths when the file is located in the sub-folder (expect to see the full path name)
+            // Checks the base case without /fullpaths when the file is located in the sub-folder (expect to see
+            // the full path name)
             //      c:\temp> csc.exe c:\temp\example\a.cs /fullpaths
             //      c:\temp\example\a.cs(6,16): warning CS0168: The variable 'x' is declared but never used
             outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -12349,7 +12468,8 @@ public class C
                 StringComparison.Ordinal
             );
 
-            // Checks the base case without /fullpaths when the file is not located under the base directory (expect to see the full path name)
+            // Checks the base case without /fullpaths when the file is not located under the base directory
+            // (expect to see the full path name)
             //      c:\temp> csc.exe c:\test\a.cs /fullpaths
             //      c:\test\a.cs(6,16): warning CS0168: The variable 'x' is declared but never used
             outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -13066,7 +13186,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.",
             }
         }
 
-        // Seems like File.SetAttributes(libDll.Path, FileAttributes.ReadOnly) doesn't restrict access to the file on Mac (Linux passes).
+        // Seems like File.SetAttributes(libDll.Path, FileAttributes.ReadOnly) doesn't restrict access to
+        // the file on Mac (Linux passes).
         [
             ConditionalFact(typeof(WindowsOnly)),
             WorkItem(8939, "https://github.com/dotnet/roslyn/issues/8939")
@@ -13631,7 +13752,8 @@ public class C { }
             commandLineArgs = new[] { tempFile.Path, @"tmpDi\r*a?.cs" };
             var parseDiags = new[]
             {
-                // error CS2021: File name 'tmpDi\r*a?.cs' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'tmpDi\r*a?.cs' is empty, contains invalid characters, has a drive
+                // specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"tmpDi\r*a?.cs"),
                 // error CS2001: Source file 'tmpDi\r*a?.cs' could not be found.
                 Diagnostic(ErrorCode.ERR_FileNotFound).WithArguments(@"tmpDi\r*a?.cs"),
@@ -13642,7 +13764,8 @@ public class C { }
             commandLineArgs = new[] { tempFile.Path, currentDrive + @":a.cs" };
             parseDiags = new[]
             {
-                // error CS2021: File name 'e:a.cs' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                // error CS2021: File name 'e:a.cs' is empty, contains invalid characters, has a drive specification
+                // without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName)
                     .WithArguments(currentDrive + @":a.cs"),
             };
@@ -13979,14 +14102,16 @@ class C { }
             Assert.Equal(0, exitCode);
             var output = outWriter.ToString();
 
-            // Verify that the diagnostic reported by AnalyzerThatThrowsInGetMessage is reported, though it doesn't have the message.
+            // Verify that the diagnostic reported by AnalyzerThatThrowsInGetMessage is reported, though it
+            // doesn't have the message.
             Assert.Contains(
                 AnalyzerThatThrowsInGetMessage.Rule.Id,
                 output,
                 StringComparison.Ordinal
             );
 
-            // Verify that the analyzer exception diagnostic for the exception throw in AnalyzerThatThrowsInGetMessage is also reported.
+            // Verify that the analyzer exception diagnostic for the exception throw in
+            // AnalyzerThatThrowsInGetMessage is also reported.
             Assert.Contains(
                 AnalyzerExecutor.AnalyzerExceptionDiagnosticId,
                 output,
@@ -14021,7 +14146,8 @@ class C { }
             Assert.NotEqual(0, exitCode);
             var output = outWriter.ToString();
 
-            // Verify that the analyzer exception diagnostic for the exception throw in AnalyzerThatThrowsInGetMessage is also reported.
+            // Verify that the analyzer exception diagnostic for the exception throw in
+            // AnalyzerThatThrowsInGetMessage is also reported.
             Assert.Contains(
                 AnalyzerExecutor.AnalyzerExceptionDiagnosticId,
                 output,
@@ -14051,7 +14177,8 @@ class C { }
             Assert.Equal(0, exitCode);
             var output = outWriter.ToString();
 
-            // Verify that the diagnostic reported by AnalyzerReportingMisformattedDiagnostic is reported with the message format string, instead of the formatted message.
+            // Verify that the diagnostic reported by AnalyzerReportingMisformattedDiagnostic is reported with
+            // the message format string, instead of the formatted message.
             Assert.Contains(
                 AnalyzerThatThrowsInGetMessage.Rule.Id,
                 output,
@@ -14175,7 +14302,8 @@ using System*
                 .Run(outWriter);
             Assert.NotEqual(0, exitCode);
 
-            // error CS2021: File name '' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+            // error CS2021: File name '' is empty, contains invalid characters, has a drive specification
+            // without an absolute path, or is too long
             Assert.Contains("CS2021", outWriter.ToString(), StringComparison.Ordinal);
         }
 
@@ -14281,13 +14409,15 @@ using System.Diagnostics; // Unused.
             // lib switch
             DefaultParse(new[] { "/lib:" + invalidPath, sourceFile.Path }, WorkingDirectory)
                 .Errors.Verify(
-                    // warning CS1668: Invalid search path '::' specified in '/LIB option' -- 'path is too long or invalid'
+                    // warning CS1668: Invalid search path '::' specified in '/LIB option' -- 'path is too long or
+                    // invalid'
                     Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                         .WithArguments("::", "/LIB option", "path is too long or invalid")
                 );
             DefaultParse(new[] { "/lib:" + nonExistentPath, sourceFile.Path }, WorkingDirectory)
                 .Errors.Verify(
-                    // warning CS1668: Invalid search path 'DoesNotExist' specified in '/LIB option' -- 'directory does not exist'
+                    // warning CS1668: Invalid search path 'DoesNotExist' specified in '/LIB option' -- 'directory does
+                    // not exist'
                     Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                         .WithArguments("DoesNotExist", "/LIB option", "directory does not exist")
                 );
@@ -14299,7 +14429,8 @@ using System.Diagnostics; // Unused.
                 additionalReferenceDirectories: invalidPath
             )
                 .Errors.Verify(
-                    // warning CS1668: Invalid search path '::' specified in 'LIB environment variable' -- 'path is too long or invalid'
+                    // warning CS1668: Invalid search path '::' specified in 'LIB environment variable' -- 'path is too
+                    // long or invalid'
                     Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                         .WithArguments(
                             "::",
@@ -14313,7 +14444,8 @@ using System.Diagnostics; // Unused.
                 additionalReferenceDirectories: nonExistentPath
             )
                 .Errors.Verify(
-                    // warning CS1668: Invalid search path 'DoesNotExist' specified in 'LIB environment variable' -- 'directory does not exist'
+                    // warning CS1668: Invalid search path 'DoesNotExist' specified in 'LIB environment variable' --
+                    // 'directory does not exist'
                     Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
                         .WithArguments(
                             "DoesNotExist",
@@ -15121,8 +15253,10 @@ class C
             Assert.Equal(2, sourceCallbackCount);
             Assert.Equal(1, sourceCallbackCount2);
 
-            // this seems counterintuitive, but when the only thing to change is the generator, we end up back at the state of the project when
-            // we just ran a single generator. Thus we already have an entry in the cache we can use (the one created by the original call to
+            // this seems counterintuitive, but when the only thing to change is the generator, we end up back
+            // at the state of the project when
+            // we just ran a single generator. Thus we already have an entry in the cache we can use (the one
+            // created by the original call to
             // RunWithOneGenerator above) meaning we can use the previously cached results and not run.
             RunWithOneGenerator();
             Assert.Equal(2, sourceCallbackCount);
@@ -15578,7 +15712,8 @@ class C
             );
             Assert.Contains("error CS8032", output, StringComparison.Ordinal);
 
-            // TEST: Verify that compiler warning CS8032 can be individually promoted to an error via /warnaserror:.
+            // TEST: Verify that compiler warning CS8032 can be individually promoted to an error via
+            // /warnaserror:.
             output = VerifyOutput(
                 dir,
                 file,
@@ -15834,10 +15969,12 @@ class C
         [CombinatorialData, Theory]
         public void NoWarnAndWarnAsError_InfoDiagnostic(bool errorlog)
         {
-            // NOTE: Info diagnostics are only logged on command line when /errorlog is specified. See https://github.com/dotnet/roslyn/issues/42166 for details.
+            // NOTE: Info diagnostics are only logged on command line when /errorlog is specified. See
+            // https://github.com/dotnet/roslyn/issues/42166 for details.
 
             // This assembly has an InfoDiagnosticAnalyzer type which should produce custom info
-            // diagnostics for the #pragma warning restore directives present in the compilations created in this test.
+            // diagnostics for the #pragma warning restore directives present in the compilations created in
+            // this test.
             var source =
                 @"using System;
 #pragma warning restore";
@@ -15876,7 +16013,8 @@ class C
             );
             Assert.Contains("warning CS8032", output, StringComparison.Ordinal);
 
-            // TEST: Verify that custom info diagnostic Info01 can never be promoted to an error via /warnaserror+.
+            // TEST: Verify that custom info diagnostic Info01 can never be promoted to an error via
+            // /warnaserror+.
             output = GetOutput(
                 name,
                 source,
@@ -15891,7 +16029,8 @@ class C
                     StringComparison.Ordinal
                 );
 
-            // TEST: Verify that custom info diagnostic Info01 is still reported as an info when /warnaserror- is used.
+            // TEST: Verify that custom info diagnostic Info01 is still reported as an info when /warnaserror-
+            // is used.
             output = GetOutput(
                 name,
                 source,
@@ -15908,7 +16047,8 @@ class C
                     StringComparison.Ordinal
                 );
 
-            // TEST: Verify that custom info diagnostic Info01 can be individually promoted to an error via /warnaserror:.
+            // TEST: Verify that custom info diagnostic Info01 can be individually promoted to an error via
+            // /warnaserror:.
             output = GetOutput(
                 name,
                 source,
@@ -15924,7 +16064,8 @@ class C
                 StringComparison.Ordinal
             );
 
-            // TEST: Verify that custom info diagnostic Info01 is still reported as an info when passed to /warnaserror-:.
+            // TEST: Verify that custom info diagnostic Info01 is still reported as an info when passed to
+            // /warnaserror-:.
             output = GetOutput(
                 name,
                 source,
@@ -16224,11 +16365,13 @@ class C
                 StringComparison.Ordinal
             );
 
-            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be suppressed via /warn:0.
+            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be
+            // suppressed via /warn:0.
             output = VerifyOutput(dir, file, additionalFlags: new[] { "/warn:0" });
             Assert.True(string.IsNullOrEmpty(output));
 
-            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be individually suppressed via /nowarn:.
+            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be
+            // individually suppressed via /nowarn:.
             output = VerifyOutput(
                 dir,
                 file,
@@ -16256,7 +16399,8 @@ class C
             );
             Assert.Contains("warning CS8032", output, StringComparison.Ordinal);
 
-            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be promoted to errors via /warnaserror.
+            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be
+            // promoted to errors via /warnaserror.
             output = VerifyOutput(
                 dir,
                 file,
@@ -16274,7 +16418,8 @@ class C
                 StringComparison.Ordinal
             );
 
-            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be promoted to errors via /warnaserror+.
+            // TEST: Verify that compiler warning CS0168 as well as custom warning diagnostic Warning01 can be
+            // promoted to errors via /warnaserror+.
             output = VerifyOutput(
                 dir,
                 file,
@@ -16292,7 +16437,8 @@ class C
                 StringComparison.Ordinal
             );
 
-            // TEST: Verify that /warnaserror- keeps compiler warning CS0168 as well as custom warning diagnostic Warning01 as warnings.
+            // TEST: Verify that /warnaserror- keeps compiler warning CS0168 as well as custom warning
+            // diagnostic Warning01 as warnings.
             output = VerifyOutput(
                 dir,
                 file,
@@ -16311,7 +16457,8 @@ class C
             );
             Assert.Contains("warning CS8032", output, StringComparison.Ordinal);
 
-            // TEST: Verify that custom warning diagnostic Warning01 can be individually promoted to an error via /warnaserror:.
+            // TEST: Verify that custom warning diagnostic Warning01 can be individually promoted to an error
+            // via /warnaserror:.
             output = VerifyOutput(
                 dir,
                 file,
@@ -16331,8 +16478,10 @@ class C
             );
             Assert.Contains("warning CS8032", output, StringComparison.Ordinal);
 
-            // TEST: Verify that compiler warning CS0168 can be individually promoted to an error via /warnaserror+:.
-            // This doesn't work correctly currently - promoting compiler warning CS0168 to an error causes us to no longer report any custom warning diagnostics as errors (Bug 998069).
+            // TEST: Verify that compiler warning CS0168 can be individually promoted to an error via
+            // /warnaserror+:.
+            // This doesn't work correctly currently - promoting compiler warning CS0168 to an error causes us
+            // to no longer report any custom warning diagnostics as errors (Bug 998069).
             output = VerifyOutput(
                 dir,
                 file,
@@ -16371,7 +16520,8 @@ class C
             );
             Assert.Contains("warning CS8032", output, StringComparison.Ordinal);
 
-            // TEST: Verify that custom warning diagnostic Warning01 as well as compiler warning CS0168 can be promoted to errors via /warnaserror:.
+            // TEST: Verify that custom warning diagnostic Warning01 as well as compiler warning CS0168 can be
+            // promoted to errors via /warnaserror:.
             output = VerifyOutput(
                 dir,
                 file,
@@ -16704,7 +16854,8 @@ class C
         public void NoWarnAndWarnAsError_ErrorDiagnostic()
         {
             // This assembly has an ErrorDiagnosticAnalyzer type which should produce custom error
-            // diagnostics for #pragma warning disable directives present in the compilations created in this test.
+            // diagnostics for #pragma warning disable directives present in the compilations created in this
+            // test.
             string source =
                 @"using System;
 #pragma warning disable";
@@ -16814,7 +16965,8 @@ class C
             );
             Assert.Contains("warning CS8032", output, StringComparison.Ordinal);
 
-            // TEST: Verify that nothing bad happens when using /warnaserror[+/-] when custom error diagnostic Error01 is present.
+            // TEST: Verify that nothing bad happens when using /warnaserror[+/-] when custom error diagnostic
+            // Error01 is present.
             output = VerifyOutput(
                 dir,
                 file,
@@ -16845,7 +16997,8 @@ class C
                 StringComparison.Ordinal
             );
 
-            // TEST: Verify that nothing bad happens if someone passes custom error diagnostic Error01 to /warnaserror[+/-]:.
+            // TEST: Verify that nothing bad happens if someone passes custom error diagnostic Error01 to
+            // /warnaserror[+/-]:.
             output = VerifyOutput(
                 dir,
                 file,
@@ -17060,7 +17213,8 @@ class C
                 StringComparison.Ordinal
             );
 
-            // TEST: Verify that nothing bad happens when using /warnaserror[+/-] when compiler error CS0029 is present.
+            // TEST: Verify that nothing bad happens when using /warnaserror[+/-] when compiler error CS0029 is
+            // present.
             output = VerifyOutput(
                 dir,
                 file,
@@ -17100,7 +17254,8 @@ class C
                 StringComparison.Ordinal
             );
 
-            // TEST: Verify that nothing bad happens if someone passes compiler error CS0029 to /warnaserror[+/-]:.
+            // TEST: Verify that nothing bad happens if someone passes compiler error CS0029 to
+            // /warnaserror[+/-]:.
             output = VerifyOutput(
                 dir,
                 file,
@@ -17563,7 +17718,8 @@ class C {
             parsedArgs.Errors.Verify();
             Assert.Equal(Path.Combine(dir, @"data.pdb"), parsedArgs.PdbPath);
 
-            // This value is calculate during Emit phases and should be null even in the face of a pathmap targeting it.
+            // This value is calculate during Emit phases and should be null even in the face of a pathmap
+            // targeting it.
             Assert.Null(parsedArgs.EmitOptions.PdbFilePath);
         }
 
@@ -18099,7 +18255,8 @@ class C
         {
             var parsedArgs = DefaultParse(new[] { "/langversion:1000", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(
-                // error CS1617: Invalid option '1000' for /langversion. Use '/langversion:?' to list supported values.
+                // error CS1617: Invalid option '1000' for /langversion. Use '/langversion:?' to list supported
+                // values.
                 Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments("1000").WithLocation(1, 1)
             );
         }
@@ -18835,7 +18992,8 @@ class C
             Assert.DoesNotContain($"error CS0078", output, StringComparison.Ordinal);
             Assert.DoesNotContain($"warning CS0078", output, StringComparison.Ordinal);
 
-            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+            // ID '{2}' and justification '{3}'
             var suppressionMessage = string.Format(
                 CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
                 suppressor.SuppressionDescriptor.SuppressedDiagnosticId,
@@ -18887,7 +19045,8 @@ class C
             // and info diagnostic is logged with programmatic suppression information.
             var suppressor = new DiagnosticSuppressorForId("CS1522");
 
-            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+            // ID '{2}' and justification '{3}'
             var suppressionMessage = string.Format(
                 CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
                 suppressor.SuppressionDescriptor.SuppressedDiagnosticId,
@@ -18924,7 +19083,8 @@ class C
             );
             Assert.Contains("error CS1522", output, StringComparison.Ordinal);
 
-            // Verify that compiler warning CS1522 is suppressed with diagnostic suppressor even with /warnaserror
+            // Verify that compiler warning CS1522 is suppressed with diagnostic suppressor even with
+            // /warnaserror
             // and info diagnostic is logged with programmatic suppression information.
             output = VerifyOutput(
                 srcDirectory,
@@ -18975,7 +19135,8 @@ class C
             // and info diagnostic is logged with programmatic suppression information.
             var suppressor = new DiagnosticSuppressorForId("CS0169");
 
-            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+            // ID '{2}' and justification '{3}'
             var suppressionMessage = string.Format(
                 CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
                 suppressor.SuppressionDescriptor.SuppressedDiagnosticId,
@@ -19012,7 +19173,8 @@ class C
             );
             Assert.Contains("error CS0169", output, StringComparison.Ordinal);
 
-            // Verify that compiler warning CS0169 is suppressed with diagnostic suppressor even with /warnaserror
+            // Verify that compiler warning CS0169 is suppressed with diagnostic suppressor even with
+            // /warnaserror
             // and info diagnostic is logged with programmatic suppression information.
             output = VerifyOutput(
                 srcDirectory,
@@ -19065,11 +19227,13 @@ class C
             var sourceFile = sourceDirectory.CreateFile("BuggyCode.cs");
             sourceFile.WriteAllText(SourceCode);
 
-            // During the parsing stage, both CS8848 (a warning) and CS1001 (an unsuppressible error) will be detected.
+            // During the parsing stage, both CS8848 (a warning) and CS1001 (an unsuppressible error) will be
+            // detected.
             // This test verifies that CS8848 is correctly suppressed, and that CS1001 is correctly reported.
             var precedenceInversionWarningSuppressor = new DiagnosticSuppressorForId("CS8848");
 
-            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+            // ID '{2}' and justification '{3}'
             var suppressionMessage = string.Format(
                 CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
                 precedenceInversionWarningSuppressor.SuppressionDescriptor.SuppressedDiagnosticId,
@@ -19082,7 +19246,8 @@ class C
             );
 
             // CS8848 is automatically suppressed if the warning level is <5.
-            // Set the warning level to 5 to ensure that it will not get automatically suppressed, and leave it up to the `precedenceInversionWarningSuppressor` to suppress it.
+            // Set the warning level to 5 to ensure that it will not get automatically suppressed, and leave it
+            // up to the `precedenceInversionWarningSuppressor` to suppress it.
             var output = VerifyOutput(
                 sourceDirectory,
                 sourceFile,
@@ -19102,8 +19267,10 @@ class C
             Assert.Contains("info SP0001", output, StringComparison.Ordinal);
             Assert.Contains("error CS1001", output, StringComparison.Ordinal);
 
-            // During the parsing stage, both CS8848 (a warning) and CS1001 (an unsuppressible error) will be detected.
-            // This test verifies that CS8848 is correctly suppressed even when elevated as an error (using `warnaserror`), and that CS1001 is correctly reported.
+            // During the parsing stage, both CS8848 (a warning) and CS1001 (an unsuppressible error) will be
+            // detected.
+            // This test verifies that CS8848 is correctly suppressed even when elevated as an error (using
+            // `warnaserror`), and that CS1001 is correctly reported.
             output = VerifyOutput(
                 sourceDirectory,
                 sourceFile,
@@ -19175,7 +19342,8 @@ class C
             // 3. Compiler error `CS0180` is reported.
             var partialStructWarningSuppressor = new DiagnosticSuppressorForId("CS0282");
 
-            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+            // ID '{2}' and justification '{3}'
             var suppressionMessage = string.Format(
                 CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
                 partialStructWarningSuppressor.SuppressionDescriptor.SuppressedDiagnosticId,
@@ -19207,7 +19375,8 @@ class C
             Assert.Contains("error CS0180", output, StringComparison.Ordinal);
 
             // The generated code will trigger `CS0282`. This test verifies 3 things:
-            // 1. Compiler warning `CS0282` is suppressed with diagnostic suppressor even when elevated as an error (using `/warnaserror`),
+            // 1. Compiler warning `CS0282` is suppressed with diagnostic suppressor even when elevated as an
+            // error (using `/warnaserror`),
             // 2. Info diagnostic for the suppression is logged with programmatic suppression information,
             // 3. Compiler error `CS0180` is reported.
             output = VerifyOutput(
@@ -19294,7 +19463,8 @@ class C
             // 3. Compiler error `CS1001` is reported.
             var partialStructWarningSuppressor = new DiagnosticSuppressorForId("CS0282");
 
-            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+            // ID '{2}' and justification '{3}'
             var suppressionMessage = string.Format(
                 CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
                 partialStructWarningSuppressor.SuppressionDescriptor.SuppressedDiagnosticId,
@@ -19326,7 +19496,8 @@ class C
             Assert.Contains("error CS0122", output, StringComparison.Ordinal);
 
             // The generated code will trigger `CS0282`. This test verifies 3 things:
-            // 1. Compiler warning `CS0282` is suppressed with diagnostic suppressor even when elevated as an error (using `/warnaserror`),
+            // 1. Compiler warning `CS0282` is suppressed with diagnostic suppressor even when elevated as an
+            // error (using `/warnaserror`),
             // 2. Info diagnostic for the suppression is logged with programmatic suppression information,
             // 3. Compiler error `CS1001` is reported.
             output = VerifyOutput(
@@ -19391,7 +19562,8 @@ class { }";
         [Fact]
         public void TestNoSuppression_CompilerSemanticError()
         {
-            // error CS0246: The type or namespace name 'UndefinedType' could not be found (are you missing a using directive or an assembly reference?)
+            // error CS0246: The type or namespace name 'UndefinedType' could not be found (are you missing a
+            // using directive or an assembly reference?)
             string source =
                 @"
 class C
@@ -19453,7 +19625,8 @@ class C { }";
             // and info diagnostic is logged with programmatic suppression information.
             var suppressor = new DiagnosticSuppressorForId(analyzer.Descriptor.Id);
 
-            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+            // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+            // ID '{2}' and justification '{3}'
             var suppressionMessage = string.Format(
                 CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
                 suppressor.SuppressionDescriptor.SuppressedDiagnosticId,
@@ -19707,7 +19880,8 @@ dotnet_analyzer_diagnostic.category-{category}.severity = error";
                 expectedDiagnosticSeverity: ReportDiagnostic.Suppress
             );
 
-            // Verify disabled by default analyzer is not enabled by category based configuration in global config
+            // Verify disabled by default analyzer is not enabled by category based configuration in global
+            // config
             analyzer = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                 isEnabledByDefault: false,
                 defaultSeverity
@@ -19793,7 +19967,8 @@ dotnet_analyzer_diagnostic.category-{category}.severity = none";
             var diagnosticId = analyzer.Descriptor.Id;
 
             // Verify bulk configuration without any diagnostic ID configuration is respected,
-            // unless analyzer reports 'CustomConfigurable' diagnostics, which explicitly disables bulk configuration.
+            // unless analyzer reports 'CustomConfigurable' diagnostics, which explicitly disables bulk
+            // configuration.
             var defaultReportDiagnostic = DiagnosticDescriptor.MapSeverityToReport(defaultSeverity);
             var expectedDiagnosticSeverity = customConfigurable
                 ? defaultReportDiagnostic
@@ -19835,7 +20010,8 @@ dotnet_analyzer_diagnostic.severity = error";
             );
 
             // Verify bulk configuration before diagnostic ID configuration is not respected.
-            // If the analyzer reports 'CustomConfigurable' diagnostics, all editorconfig configurations are ignored.
+            // If the analyzer reports 'CustomConfigurable' diagnostics, all editorconfig configurations are
+            // ignored.
             expectedDiagnosticSeverity = customConfigurable
                 ? defaultReportDiagnostic
                 : ReportDiagnostic.Warn;
@@ -19852,7 +20028,8 @@ dotnet_diagnostic.{diagnosticId}.severity = warning";
             );
 
             // Verify bulk configuration after diagnostic ID configuration is not respected.
-            // If the analyzer reports 'CustomConfigurable' diagnostics, all editorconfig configurations are ignored.
+            // If the analyzer reports 'CustomConfigurable' diagnostics, all editorconfig configurations are
+            // ignored.
             analyzerConfigText =
                 $@"
 [*.cs]
@@ -19866,7 +20043,8 @@ dotnet_analyzer_diagnostic.severity = error";
             );
 
             // Verify bulk configuration to warning + /warnaserror reports errors.
-            // If the analyzer reports 'CustomConfigurable' diagnostics, all editorconfig configurations are ignored.
+            // If the analyzer reports 'CustomConfigurable' diagnostics, all editorconfig configurations are
+            // ignored.
             expectedDiagnosticSeverity =
                 customConfigurable && defaultReportDiagnostic != ReportDiagnostic.Warn
                     ? defaultReportDiagnostic
@@ -19911,7 +20089,8 @@ dotnet_analyzer_diagnostic.severity = error";
             )
             {
                 // Verify analyzer with Hidden severity OR Info severity + no /errorlog is not executed.
-                // Unless the analyzer reports 'CustomConfigurable' diagnostics, in which case it is always executed.
+                // Unless the analyzer reports 'CustomConfigurable' diagnostics, in which case it is always
+                // executed.
                 expectedDiagnosticSeverity = customConfigurable
                     ? defaultReportDiagnostic
                     : ReportDiagnostic.Suppress;
@@ -19991,7 +20170,8 @@ dotnet_analyzer_diagnostic.category-{category}.severity = error";
                 expectedDiagnosticSeverity: ReportDiagnostic.Error
             );
 
-            // Verify neither category based nor bulk diagnostic configuration is respected when specific diagnostic ID is configured in analyzer config.
+            // Verify neither category based nor bulk diagnostic configuration is respected when specific
+            // diagnostic ID is configured in analyzer config.
             analyzerConfigText =
                 $@"
 [*.cs]
@@ -20005,7 +20185,8 @@ dotnet_analyzer_diagnostic.severity = suggestion";
                 expectedDiagnosticSeverity: ReportDiagnostic.Warn
             );
 
-            // Verify neither category based nor bulk diagnostic configuration is respected when specific diagnostic ID is configured in ruleset.
+            // Verify neither category based nor bulk diagnostic configuration is respected when specific
+            // diagnostic ID is configured in ruleset.
             analyzerConfigText =
                 $@"
 [*.cs]
@@ -20379,7 +20560,8 @@ class C
 dotnet_diagnostic.{descriptor.Id}.severity = {analyzerConfigSeverity.ToAnalyzerConfigString()}"
                 );
 
-            // Severity of 'CustomSeverityConfigurable' diagnostics should not be affected by editorconfig entries.
+            // Severity of 'CustomSeverityConfigurable' diagnostics should not be affected by editorconfig
+            // entries.
             if (customConfigurable)
                 analyzerConfigSeverity = DiagnosticDescriptor.MapSeverityToReport(
                     descriptor.DefaultSeverity
@@ -20419,7 +20601,8 @@ dotnet_diagnostic.{descriptor.Id}.severity = {analyzerConfigSeverity.ToAnalyzerC
                 !noWarn && analyzerConfigSeverity == ReportDiagnostic.Error ? 1 : 0;
             Assert.Equal(expectedErrorCode, exitCode);
 
-            // NOTE: Info diagnostics are only logged on command line when /errorlog is specified. See https://github.com/dotnet/roslyn/issues/42166 for details.
+            // NOTE: Info diagnostics are only logged on command line when /errorlog is specified. See
+            // https://github.com/dotnet/roslyn/issues/42166 for details.
             if (
                 !noWarn
                 && (
@@ -20485,7 +20668,10 @@ generated_code = true"
                 includeCurrentAssemblyAsAnalyzerReference: false
             );
             Assert.DoesNotContain("warning CS8602", output, StringComparison.Ordinal);
-            // warning CS8669: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context. Auto-generated code requires an explicit '#nullable' directive in source.
+            // warning CS8669: The annotation for nullable reference types should only be used in code within a
+            // '#nullable' annotations context. Auto-generated code requires an explicit '#nullable' directive
+            // in
+            // source.
             Assert.Contains("warning CS8669", output, StringComparison.Ordinal);
 
             // generated_code = false
@@ -20532,7 +20718,8 @@ generated_code = auto"
             // This test verifies that analyzer execution is skipped at build time for the following:
             //   1. Analyzer reporting Hidden diagnostics
             //   2. Analyzer reporting Info diagnostics, when /errorlog is not specified
-            // However, an analyzer that reports diagnostics with "CustomSeverityConfigurable" tag should never be skipped for execution.
+            // However, an analyzer that reports diagnostics with "CustomSeverityConfigurable" tag should never
+            // be skipped for execution.
             var analyzerShouldBeSkipped =
                 (
                     defaultSeverity == DiagnosticSeverity.Hidden
@@ -20581,11 +20768,15 @@ generated_code = auto"
             bool customConfigurable
         )
         {
-            // This test verifies that '/warnaserror-:DiagnosticId' does not affect if analyzers are executed or skipped..
-            // Setup the analyzer to always throw an exception on analyzer callbacks for cases where we expect analyzer execution to be skipped:
+            // This test verifies that '/warnaserror-:DiagnosticId' does not affect if analyzers are executed or
+            // skipped..
+            // Setup the analyzer to always throw an exception on analyzer callbacks for cases where we expect
+            // analyzer execution to be skipped:
             //   1. Disabled by default analyzer, i.e. 'isEnabledByDefault == false'.
-            //   2. Default severity Hidden/Info: We only execute analyzers reporting Warning/Error severity diagnostics on command line builds.
-            // However, an analyzer reporting diagnostics with "CustomSeverityConfigurable" tag should never be skipped for execution.
+            //   2. Default severity Hidden/Info: We only execute analyzers reporting Warning/Error severity
+            // diagnostics on command line builds.
+            // However, an analyzer reporting diagnostics with "CustomSeverityConfigurable" tag should never be
+            // skipped for execution.
             var analyzerShouldBeSkipped =
                 (
                     !isEnabledByDefault
@@ -20642,7 +20833,8 @@ generated_code = auto"
 
         [WorkItem(49446, "https://github.com/dotnet/roslyn/issues/49446")]
         [Theory]
-        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when config file bumps severity to 'Warning'
+        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when config file bumps severity to
+        // 'Warning'
         [InlineData(
             false,
             false,
@@ -20675,7 +20867,8 @@ generated_code = auto"
             null,
             DiagnosticSeverity.Warning
         )]
-        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when custom configured analyzer bumps severity to 'Warning'
+        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when custom configured analyzer bumps
+        // severity to 'Warning'
         [InlineData(
             false,
             false,
@@ -20708,7 +20901,8 @@ generated_code = auto"
             DiagnosticSeverity.Warning,
             DiagnosticSeverity.Warning
         )]
-        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when default severity is 'Warning' and no config file or custom configured setting is specified.
+        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when default severity is 'Warning' and
+        // no config file or custom configured setting is specified.
         [InlineData(false, false, DiagnosticSeverity.Warning, null, null, DiagnosticSeverity.Error)]
         [InlineData(
             true,
@@ -20720,7 +20914,8 @@ generated_code = auto"
         )]
         [InlineData(false, true, DiagnosticSeverity.Warning, null, null, DiagnosticSeverity.Error)]
         [InlineData(true, true, DiagnosticSeverity.Warning, null, null, DiagnosticSeverity.Warning)]
-        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when default severity is 'Warning' and config file bumps severity to 'Error'
+        // Verify '/warnaserror-:ID' prevents escalation to 'Error' when default severity is 'Warning' and
+        // config file bumps severity to 'Error'
         [InlineData(
             false,
             false,
@@ -20753,7 +20948,8 @@ generated_code = auto"
             null,
             DiagnosticSeverity.Warning
         )]
-        // Verify '/warnaserror-:ID' has no effect when default severity is 'Info' and config file bumps severity to 'Error'
+        // Verify '/warnaserror-:ID' has no effect when default severity is 'Info' and config file bumps
+        // severity to 'Error'
         [InlineData(
             false,
             false,
@@ -20786,7 +20982,8 @@ generated_code = auto"
             null,
             DiagnosticSeverity.Error
         )]
-        // Verify '/warnaserror-:ID' has no effect when default severity is 'Info' or 'Warning' and custom configured severity is 'Error'
+        // Verify '/warnaserror-:ID' has no effect when default severity is 'Info' or 'Warning' and custom
+        // configured severity is 'Error'
         [InlineData(
             false,
             false,
@@ -20999,19 +21196,24 @@ class C
             var generatedSource = "public class D { }";
             var generator = new SingleFileTestGenerator(generatedSource, "generatedSource.cs");
 
-            // 'skipAnalyzers' should have no impact on source generator execution, but should prevent analyzer execution.
+            // 'skipAnalyzers' should have no impact on source generator execution, but should prevent analyzer
+            // execution.
             var skipAnalyzersFlag = "/skipAnalyzers" + (skipAnalyzers ? "+" : "-");
 
             // Verify analyzers were executed only if both the following conditions were satisfied:
-            //  1. Current assembly was added as an analyzer reference, i.e. "includeCurrentAssemblyAsAnalyzerReference = true" and
+            //  1. Current assembly was added as an analyzer reference, i.e.
+            // "includeCurrentAssemblyAsAnalyzerReference = true" and
             //  2. We did not explicitly request skipping analyzers, i.e. "skipAnalyzers = false".
             var expectedAnalyzerExecution =
                 includeCurrentAssemblyAsAnalyzerReference && !skipAnalyzers;
 
             // 'WarningDiagnosticAnalyzer' generates a warning for each named type.
-            // We expect two warnings for this test: type "C" defined in source and the source generator defined type.
-            // Additionally, we also have an analyzer that generates "warning CS8032: An instance of analyzer cannot be created"
-            // CS8032 is generated with includeCurrentAssemblyAsAnalyzerReference even when we are skipping analyzers as we will instantiate all analyzers, just not execute them.
+            // We expect two warnings for this test: type "C" defined in source and the source generator defined
+            // type.
+            // Additionally, we also have an analyzer that generates "warning CS8032: An instance of analyzer
+            // cannot be created"
+            // CS8032 is generated with includeCurrentAssemblyAsAnalyzerReference even when we are skipping
+            // analyzers as we will instantiate all analyzers, just not execute them.
             var expectedWarningCount = expectedAnalyzerExecution
                 ? 3
                 : (includeCurrentAssemblyAsAnalyzerReference ? 1 : 0);
@@ -21509,7 +21711,8 @@ public class TestGenerator : ISourceGenerator
             ValidateWrittenSources(
                 new()
                 {
-                    //  { Path.Combine(generatedDir.Path,  "generator", "TestGenerator"), new() { { "generatedSource.cs", "//from version 1.0.0.0" } } },
+                    //  { Path.Combine(generatedDir.Path,  "generator", "TestGenerator"), new() { {
+                    // "generatedSource.cs", "//from version 1.0.0.0" } } },
                     {
                         Path.Combine(generatedDir.Path, "generator", "TestGenerator"),
                         new() { { "generatedSource.cs", "//from version 2.0.0.0" } }
@@ -22285,7 +22488,8 @@ option1 = def"
                 includeCurrentAssemblyAsAnalyzerReference: false
             );
 
-            // warning MultipleGlobalAnalyzerKeys: Multiple global analyzer config files set the same key 'option1' in section 'Global Section'. It has been unset. Key was set by the following files: ...
+            // warning MultipleGlobalAnalyzerKeys: Multiple global analyzer config files set the same key
+            // 'option1' in section 'Global Section'. It has been unset. Key was set by the following files: ...
             Assert.Contains("MultipleGlobalAnalyzerKeys:", output, StringComparison.Ordinal);
             Assert.Contains("'option1'", output, StringComparison.Ordinal);
             Assert.Contains("'Global Section'", output, StringComparison.Ordinal);
@@ -22317,7 +22521,8 @@ option1 = def"
                 includeCurrentAssemblyAsAnalyzerReference: false
             );
 
-            // warning MultipleGlobalAnalyzerKeys: Multiple global analyzer config files set the same key 'option1' in section 'file.cs'. It has been unset. Key was set by the following files: ...
+            // warning MultipleGlobalAnalyzerKeys: Multiple global analyzer config files set the same key
+            // 'option1' in section 'file.cs'. It has been unset. Key was set by the following files: ...
             Assert.Contains("MultipleGlobalAnalyzerKeys:", output, StringComparison.Ordinal);
             Assert.Contains("'option1'", output, StringComparison.Ordinal);
             Assert.Contains("'/file.cs'", output, StringComparison.Ordinal);

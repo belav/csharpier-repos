@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Advances the enumerator to the next token in the collection.
             /// </summary>
-            /// <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator
+            /// <returns>true if the enumerator was successfully advanced to the next element; false if the
+            // enumerator
             /// has passed the end of the collection.</returns>
             public bool MoveNext()
             {

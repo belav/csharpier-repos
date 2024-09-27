@@ -8,7 +8,8 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// Base class for all RoParameter's returned by MethodBase.GetParameters() that have an entry in the Param table.
+    /// Base class for all RoParameter's returned by MethodBase.GetParameters() that have an entry in
+    // the Param table.
     /// </summary>
     internal abstract class RoFatMethodParameter : RoMethodParameter
     {

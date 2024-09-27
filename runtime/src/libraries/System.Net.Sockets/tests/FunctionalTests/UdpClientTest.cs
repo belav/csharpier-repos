@@ -11,7 +11,8 @@ namespace System.Net.Sockets.Tests
 {
     public class UdpClientTest
     {
-        // Port 8 is unassigned as per https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
+        // Port 8 is unassigned as per
+        // https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
         private const int UnusedPort = 8;
 
         private const int DiscardPort = 9;

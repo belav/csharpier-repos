@@ -29,7 +29,8 @@ namespace System.Workflow.Runtime.Configuration
         public WorkflowRuntimeServiceElement() { }
 
         /// <summary> The assembly-qualified type name of the service </summary>
-        /// <remarks> Type is also used as the collection key in WorkflowRuntimeServiceSettingsCollections </remarks>
+        /// <remarks> Type is also used as the collection key in WorkflowRuntimeServiceSettingsCollections
+        // </remarks>
         [ConfigurationProperty(_type, DefaultValue = null)]
         public string Type
         {

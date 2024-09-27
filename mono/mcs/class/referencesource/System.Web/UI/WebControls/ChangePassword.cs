@@ -480,7 +480,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets or sets the text that is displayed when the new password does not match the confirm password.
+        ///     Gets or sets the text that is displayed when the new password does not match the confirm
+        // password.
         /// </devdoc>
         [
             Localizable(true),
@@ -501,7 +502,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets or sets the text to be shown in the validation summary when the confirm password is empty.
+        ///     Gets or sets the text to be shown in the validation summary when the confirm password is
+        // empty.
         /// </devdoc>
         [
             Localizable(true),
@@ -1045,7 +1047,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets or sets the name of the membership provider.  If null or empty, the default provider is used.
+        ///     Gets or sets the name of the membership provider.  If null or empty, the default provider is
+        // used.
         /// </devdoc>
         [
             WebCategory("Data"),
@@ -1344,7 +1347,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// The content and format of the e-mail message that contains a successful change password notification.
+        /// The content and format of the e-mail message that contains a successful change password
+        // notification.
         /// </devdoc>
         [
             WebCategory("Behavior"),
@@ -1392,7 +1396,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// The URL that the user is directed to after the password has been changed.
-        /// If non-null, always redirect the user to this page after successful password change.  Else, perform the refresh action.
+        /// If non-null, always redirect the user to this page after successful password change.  Else,
+        // perform the refresh action.
         /// </devdoc>
         [
             WebCategory("Behavior"),
@@ -2160,13 +2165,15 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Overridden to set the editable child control properteries and hide the control when appropriate.
+        ///     Overridden to set the editable child control properteries and hide the control when
+        // appropriate.
         /// </devdoc>
         protected internal override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
 
-            // Set the editable child control properties here instead of Render, so they get into viewstate for the user template.
+            // Set the editable child control properties here instead of Render, so they get into viewstate for
+            // the user template.
             switch (CurrentView)
             {
                 case View.ChangePassword:
@@ -2217,7 +2224,7 @@ namespace System.Web.UI.WebControls
                     newPassword,
                     MailDefinition, /*defaultSubject*/
                     null,
-                    /*defaultBody*/null,
+/*defaultBody*/null,
                     OnSendingMail,
                     OnSendMailError,
                     this
@@ -2409,7 +2416,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// Allows the designer to set the CurrentView, so the different templates can be shown in the designer.
+        /// Allows the designer to set the CurrentView, so the different templates can be shown in the
+        // designer.
         /// </devdoc>
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         protected override void SetDesignModeState(IDictionary data)
@@ -2864,7 +2872,8 @@ namespace System.Web.UI.WebControls
         /// </devdoc>
         private void SetEditableChildProperties()
         {
-            // We need to use UserNameInternal for the DropDownList case where it won't fire a TextChanged for the first item
+            // We need to use UserNameInternal for the DropDownList case where it won't fire a TextChanged for
+            // the first item
             if (UserNameInternal.Length > 0 && DisplayUserName)
             {
                 ITextControl userNameTextBox = (ITextControl)
@@ -3516,8 +3525,10 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///     Container for the layout template.  Contains properties that reference each child control.
         ///     For the default template, the properties are set when the child controls are created.
-        ///     For the user template, the controls are looked up dynamically by ID.  Some controls are required,
-        ///     and an exception is thrown if they are missing.  Other controls are optional, and an exception is
+        ///     For the user template, the controls are looked up dynamically by ID.  Some controls are
+        // required,
+        ///     and an exception is thrown if they are missing.  Other controls are optional, and an
+        // exception is
         ///     thrown if they have the wrong type.
         ///     Internal instead of private because it must be used by LoginAdapter.
         /// </devdoc>

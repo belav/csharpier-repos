@@ -25,13 +25,16 @@ public sealed class RateLimiterOptions
         );
 
     /// <summary>
-    /// Gets or sets the global <see cref="PartitionedRateLimiter{HttpContext}"/> that will be applied on all requests.
-    /// The global limiter will be executed first, followed by the endpoint-specific limiter, if one exists.
+    /// Gets or sets the global <see cref="PartitionedRateLimiter{HttpContext}"/> that will be applied
+    // on all requests.
+    /// The global limiter will be executed first, followed by the endpoint-specific limiter, if one
+    // exists.
     /// </summary>
     public PartitionedRateLimiter<HttpContext>? GlobalLimiter { get; set; }
 
     /// <summary>
-    /// Gets or sets a <see cref="Func{OnRejectedContext, CancellationToken, ValueTask}"/> that handles requests rejected by this middleware.
+    /// Gets or sets a <see cref="Func{OnRejectedContext, CancellationToken, ValueTask}"/> that handles
+    // requests rejected by this middleware.
     /// </summary>
     public Func<OnRejectedContext, CancellationToken, ValueTask>? OnRejected { get; set; }
 
@@ -40,7 +43,8 @@ public sealed class RateLimiterOptions
     /// Defaults to <see cref="StatusCodes.Status503ServiceUnavailable"/>.
     /// </summary>
     /// <remarks>
-    /// This status code will be set before <see cref="OnRejected"/> is called, so any status code set by
+    /// This status code will be set before <see cref="OnRejected"/> is called, so any status code set
+    // by
     /// <see cref="OnRejected"/> will "win" over this default.
     /// </remarks>
     public int RejectionStatusCode { get; set; } = StatusCodes.Status503ServiceUnavailable;
@@ -48,8 +52,10 @@ public sealed class RateLimiterOptions
     /// <summary>
     /// Adds a new rate limiting policy with the given <paramref name="policyName"/>
     /// </summary>
-    /// <param name="policyName">The name to be associated with the given <see cref="RateLimiter"/>.</param>
-    /// <param name="partitioner">Method called every time an Acquire or WaitAsync call is made to determine what rate limiter to apply to the request.</param>
+    /// <param name="policyName">The name to be associated with the given <see
+    // cref="RateLimiter"/>.</param>
+    /// <param name="partitioner">Method called every time an Acquire or WaitAsync call is made to
+    // determine what rate limiter to apply to the request.</param>
     public RateLimiterOptions AddPolicy<TPartitionKey>(
         string policyName,
         Func<HttpContext, RateLimitPartition<TPartitionKey>> partitioner
@@ -116,7 +122,8 @@ public sealed class RateLimiterOptions
     /// <summary>
     /// Adds a new rate limiting policy with the given policyName.
     /// </summary>
-    /// <param name="policyName">The name to be associated with the given <see cref="IRateLimiterPolicy{TPartitionKey}"/>.</param>
+    /// <param name="policyName">The name to be associated with the given <see
+    // cref="IRateLimiterPolicy{TPartitionKey}"/>.</param>
     /// <param name="policy">The <see cref="IRateLimiterPolicy{TPartitionKey}"/> to be applied.</param>
     public RateLimiterOptions AddPolicy<TPartitionKey>(
         string policyName,
@@ -146,7 +153,8 @@ public sealed class RateLimiterOptions
         return this;
     }
 
-    // Converts a Partition<TKey> to a Partition<DefaultKeyType<TKey>> to prevent accidental collisions with the keys we create in the the RateLimiterOptionsExtensions.
+    // Converts a Partition<TKey> to a Partition<DefaultKeyType<TKey>> to prevent accidental collisions
+    // with the keys we create in the the RateLimiterOptionsExtensions.
     internal static Func<
         HttpContext,
         RateLimitPartition<DefaultKeyType>

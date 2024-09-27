@@ -194,8 +194,10 @@ namespace System.SpanTests
             Assert.Equal("Hello", dst[0]);
         }
 
-        // This test case tests the Span.CopyTo method for large buffers of size 4GB or more. In the fast path,
-        // the CopyTo method performs copy in chunks of size 4GB (uint.MaxValue) with final iteration copying
+        // This test case tests the Span.CopyTo method for large buffers of size 4GB or more. In the fast
+        // path,
+        // the CopyTo method performs copy in chunks of size 4GB (uint.MaxValue) with final iteration
+        // copying
         // the residual chunk of size (bufferSize % 4GB). The inputs sizes to this method, 4GB and 4GB+256B,
         // test the two size selection paths in CoptyTo method - memory size that is multiple of 4GB or,
         // a multiple of 4GB + some more size.

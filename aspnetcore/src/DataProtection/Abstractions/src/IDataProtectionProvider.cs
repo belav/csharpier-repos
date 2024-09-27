@@ -17,8 +17,10 @@ public interface IDataProtectionProvider
     /// <returns>An IDataProtector tied to the provided purpose.</returns>
     /// <remarks>
     /// The <paramref name="purpose"/> parameter must be unique for the intended use case; two
-    /// different <see cref="IDataProtector"/> instances created with two different <paramref name="purpose"/>
-    /// values will not be able to decipher each other's payloads. The <paramref name="purpose"/> parameter
+    /// different <see cref="IDataProtector"/> instances created with two different <paramref
+    // name="purpose"/>
+    /// values will not be able to decipher each other's payloads. The <paramref name="purpose"/>
+    // parameter
     /// value is not intended to be kept secret.
     /// </remarks>
     IDataProtector CreateProtector(string purpose);

@@ -122,8 +122,10 @@ WHERE "c0"."ShippingAddress_ZipCode" <> 7728
         );
     }
 
-    // This test fails because when OptionalCustomer is null, we get all-null results because of the LEFT JOIN, and we materialize this
-    // as an empty ShippingAddress instead of null (see SQL). The proper solution here would be to project the Customer ID just for the
+    // This test fails because when OptionalCustomer is null, we get all-null results because of the
+    // LEFT JOIN, and we materialize this
+    // as an empty ShippingAddress instead of null (see SQL). The proper solution here would be to
+    // project the Customer ID just for the
     // purpose of knowing that it's there.
     public override async Task Project_complex_type_via_optional_navigation(bool async)
     {
@@ -529,8 +531,10 @@ WHERE "v0"."ShippingAddress_ZipCode" <> 7728
         );
     }
 
-    // This test fails because when OptionalCustomer is null, we get all-null results because of the LEFT JOIN, and we materialize this
-    // as an empty ShippingAddress instead of null (see SQL). The proper solution here would be to project the Customer ID just for the
+    // This test fails because when OptionalCustomer is null, we get all-null results because of the
+    // LEFT JOIN, and we materialize this
+    // as an empty ShippingAddress instead of null (see SQL). The proper solution here would be to
+    // project the Customer ID just for the
     // purpose of knowing that it's there.
     public override async Task Project_struct_complex_type_via_optional_navigation(bool async)
     {

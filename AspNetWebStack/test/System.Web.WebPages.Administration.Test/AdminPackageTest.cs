@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Specialized;
 using System.IO;
@@ -218,7 +219,8 @@ namespace System.Web.WebPages.Administration.Test
             // Assert
             Assert.True(passwordSaved);
             string savedPassword = Encoding.Default.GetString(ms.ToArray());
-            // Trim everything after the new line. Cannot use the properties from the stream since it is already closed by the writer.
+            // Trim everything after the new line. Cannot use the properties from the stream since it is already
+            // closed by the writer.
             savedPassword = savedPassword.Substring(0, savedPassword.IndexOf(Environment.NewLine));
 
             Assert.True(Crypto.VerifyHashedPassword(savedPassword, password));

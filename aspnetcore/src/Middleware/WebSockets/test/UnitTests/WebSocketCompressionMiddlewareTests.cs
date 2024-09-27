@@ -147,7 +147,8 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
         }
     }
 
-    // Smoke test that compression works, we aren't responsible for the specifics of the compression frames
+    // Smoke test that compression works, we aren't responsible for the specifics of the compression
+    // frames
     [Fact]
     public async Task CanSendAndReceiveCompressedData()
     {

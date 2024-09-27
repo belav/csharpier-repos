@@ -89,7 +89,8 @@ namespace System.Net.Security
         // internal buffer for storing incoming data. Wrapper around ArrayBuffer which adds
         // separation between decrypted and still encrypted part of the active region.
         //   - Encrypted: Contains incoming TLS frames, the last such frame may be incomplete
-        //   - Decrypted: Contains decrypted data from *one* TLS frame which have not been read by the user yet.
+        //   - Decrypted: Contains decrypted data from *one* TLS frame which have not been read by the user
+        // yet.
         private struct SslBuffer
         {
             private ArrayBuffer _buffer;

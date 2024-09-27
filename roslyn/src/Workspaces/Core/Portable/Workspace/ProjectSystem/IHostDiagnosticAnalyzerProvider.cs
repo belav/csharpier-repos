@@ -8,7 +8,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 {
     /// <summary>
-    /// An interface implemented by hosts to provide the host-level analyzers; for example in Visual Studio for Windows this
+    /// An interface implemented by hosts to provide the host-level analyzers; for example in Visual
+    // Studio for Windows this
     /// is where we'll fetch VSIX-defined analyzers.
     /// </summary>
     internal interface IHostDiagnosticAnalyzerProvider

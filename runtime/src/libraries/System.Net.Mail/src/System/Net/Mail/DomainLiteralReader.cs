@@ -9,7 +9,8 @@ namespace System.Net.Mail
 {
     //
     // RFC 2822 Section 3.4.1 - Addr-Spec, Domain-Literals
-    // A domain literal is a domain identifier that does not conform to the dot-atom format (Section 3.2.4) and must be
+    // A domain literal is a domain identifier that does not conform to the dot-atom format (Section
+    // 3.2.4) and must be
     // enclosed in brackets '[' ']'.  Domain literals may contain quoted-pairs.
     //
     internal static class DomainLiteralReader
@@ -26,7 +27,8 @@ namespace System.Net.Mail
         //   e.g. In (user@[domain]), starting at index=12 (]) returns index=4 (@).
         //
         // A FormatException will be thrown or false is returned if:
-        // - A non-escaped character is encountered that is not valid in a domain literal, including Unicode.
+        // - A non-escaped character is encountered that is not valid in a domain literal, including
+        // Unicode.
         // - The final bracket is not found.
         //
         internal static bool TryReadReverse(

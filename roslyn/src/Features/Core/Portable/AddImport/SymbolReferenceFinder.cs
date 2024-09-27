@@ -226,7 +226,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             /// <summary>
-            /// Searches for types that match the name the user has written.  Returns <see cref="SymbolReference"/>s
+            /// Searches for types that match the name the user has written.  Returns <see
+            // cref="SymbolReference"/>s
             /// to the <see cref="INamespaceSymbol"/>s or <see cref="INamedTypeSymbol"/>s those types are
             /// contained in.
             /// </summary>
@@ -292,7 +293,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 var editorBrowserInfo = new EditorBrowsableInfo(_semanticModel.Compilation);
 
-                // Only keep symbols which are accessible from the current location and that are allowed by the current
+                // Only keep symbols which are accessible from the current location and that are allowed by the
+                // current
                 // editor browsable rules.
                 var accessibleTypeSymbols = typeSymbols.WhereAsArray(s =>
                     ArityAccessibilityAndAttributeContextAreCorrect(
@@ -361,7 +363,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             /// <summary>
-            /// Searches for namespaces that match the name the user has written.  Returns <see cref="SymbolReference"/>s
+            /// Searches for namespaces that match the name the user has written.  Returns <see
+            // cref="SymbolReference"/>s
             /// to the <see cref="INamespaceSymbol"/>s those namespaces are contained in.
             /// </summary>
             private async Task<
@@ -874,8 +877,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                 CancellationToken cancellationToken
             )
             {
-                // See if the name binds to something other then the error type. If it does, there's nothing further we need to do.
-                // For extension methods, however, we will continue to search if there exists any better matched method.
+                // See if the name binds to something other then the error type. If it does, there's nothing further
+                // we need to do.
+                // For extension methods, however, we will continue to search if there exists any better matched
+                // method.
                 cancellationToken.ThrowIfCancellationRequested();
                 var symbolInfo = _semanticModel.GetSymbolInfo(nameNode, cancellationToken);
                 if (

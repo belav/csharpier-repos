@@ -61,10 +61,13 @@ namespace Microsoft.Extensions.Hosting
         public IDictionary<object, object> Properties { get; } = new Dictionary<object, object>();
 
         /// <summary>
-        /// Set up the configuration for the builder itself. This will be used to initialize the <see cref="IHostEnvironment"/>
-        /// for use later in the build process. This can be called multiple times and the results will be additive.
+        /// Set up the configuration for the builder itself. This will be used to initialize the <see
+        // cref="IHostEnvironment"/>
+        /// for use later in the build process. This can be called multiple times and the results will be
+        // additive.
         /// </summary>
-        /// <param name="configureDelegate">The delegate for configuring the <see cref="IConfigurationBuilder"/> that will be used
+        /// <param name="configureDelegate">The delegate for configuring the <see
+        // cref="IConfigurationBuilder"/> that will be used
         /// to construct the <see cref="IConfiguration"/> for the host.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureHostConfiguration(
@@ -78,11 +81,14 @@ namespace Microsoft.Extensions.Hosting
         }
 
         /// <summary>
-        /// Sets up the configuration for the remainder of the build process and application. This can be called multiple times and
-        /// the results will be additive. The results will be available at <see cref="HostBuilderContext.Configuration"/> for
+        /// Sets up the configuration for the remainder of the build process and application. This can be
+        // called multiple times and
+        /// the results will be additive. The results will be available at <see
+        // cref="HostBuilderContext.Configuration"/> for
         /// subsequent operations, as well as in <see cref="IHost.Services"/>.
         /// </summary>
-        /// <param name="configureDelegate">The delegate for configuring the <see cref="IConfigurationBuilder"/> that will be used
+        /// <param name="configureDelegate">The delegate for configuring the <see
+        // cref="IConfigurationBuilder"/> that will be used
         /// to construct the <see cref="IConfiguration"/> for the host.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureAppConfiguration(
@@ -96,9 +102,11 @@ namespace Microsoft.Extensions.Hosting
         }
 
         /// <summary>
-        /// Adds services to the container. This can be called multiple times and the results will be additive.
+        /// Adds services to the container. This can be called multiple times and the results will be
+        // additive.
         /// </summary>
-        /// <param name="configureDelegate">The delegate for configuring the <see cref="IConfigurationBuilder"/> that will be used
+        /// <param name="configureDelegate">The delegate for configuring the <see
+        // cref="IConfigurationBuilder"/> that will be used
         /// to construct the <see cref="IConfiguration"/> for the host.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureServices(
@@ -153,7 +161,8 @@ namespace Microsoft.Extensions.Hosting
         /// the results will be additive.
         /// </summary>
         /// <typeparam name="TContainerBuilder">The type of the builder to create.</typeparam>
-        /// <param name="configureDelegate">The delegate for configuring the <see cref="IConfigurationBuilder"/> that will be used
+        /// <param name="configureDelegate">The delegate for configuring the <see
+        // cref="IConfigurationBuilder"/> that will be used
         /// to construct the <see cref="IConfiguration"/> for the host.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder ConfigureContainer<TContainerBuilder>(
@@ -172,7 +181,8 @@ namespace Microsoft.Extensions.Hosting
         /// Run the given actions to initialize the host. This can only be called once.
         /// </summary>
         /// <returns>An initialized <see cref="IHost"/></returns>
-        /// <remarks>Adds basic services to the host such as application lifetime, host environment, and logging.</remarks>
+        /// <remarks>Adds basic services to the host such as application lifetime, host environment, and
+        // logging.</remarks>
         public IHost Build()
         {
             if (_hostBuilt)
@@ -373,7 +383,8 @@ namespace Microsoft.Extensions.Hosting
 
             services.AddSingleton<IHost>(_ =>
             {
-                // We use serviceProviderGetter() instead of the _ parameter because these can be different given a custom IServiceProviderFactory.
+                // We use serviceProviderGetter() instead of the _ parameter because these can be different given a
+                // custom IServiceProviderFactory.
                 // We want the host to always dispose the IServiceProvider returned by the IServiceProviderFactory.
                 // https://github.com/dotnet/runtime/issues/36060
                 IServiceProvider appServices = serviceProviderGetter();

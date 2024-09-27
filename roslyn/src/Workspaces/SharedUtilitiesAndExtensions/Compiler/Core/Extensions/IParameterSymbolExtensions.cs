@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                 )
                 {
-                    // this was a primary constructor. see if we can map this parameter to a corresponding synthesized property
+                    // this was a primary constructor. see if we can map this parameter to a corresponding synthesized
+                    // property
                     foreach (var member in containingType.GetMembers(parameter.Name))
                     {
                         if (

@@ -514,7 +514,8 @@ public class FieldReflectionTests
     public static void TestFieldSetValueOnInstantiationsThatAlreadyExistButAreNotKnownToReflection()
     {
 #if UNIVERSAL_GENERICS
-        // The int instantiation is visible to both nutc and analysis, MyGenericClass<int>.MyGenericField appears in RequiredGenericFields.
+        // The int instantiation is visible to both nutc and analysis, MyGenericClass<int>.MyGenericField
+        // appears in RequiredGenericFields.
         // This works.
         MyGenericClass<int>.SetField(3);
         FieldInfo intField = typeof(MyGenericClass<int>)
@@ -522,7 +523,8 @@ public class FieldReflectionTests
             .GetDeclaredField("MyGenericField");
         intField.SetValue(null, 4);
 
-        // The object instantiation is visible to both nutc and analysis, MyGenericClass<object>.MyGenericField appears in RequiredGenericFields.
+        // The object instantiation is visible to both nutc and analysis,
+        // MyGenericClass<object>.MyGenericField appears in RequiredGenericFields.
         // This works.
         MyOtherGenericClass<object>.SetField(3);
         FieldInfo objectField = typeof(MyGenericClass<object>)
@@ -530,7 +532,8 @@ public class FieldReflectionTests
             .GetDeclaredField("MyGenericField");
         objectField.SetValue(null, 4);
 
-        // The double instantiation isn't visible to either nutc or analysis. Confirmed that SetField uses USG code.
+        // The double instantiation isn't visible to either nutc or analysis. Confirmed that SetField uses
+        // USG code.
         // This works.
         Type obfuscatedDoubleType = TypeOf.Double;
         Type doubleInstantiation = typeof(MyGenericClass<>).MakeGenericType(obfuscatedDoubleType);
@@ -543,7 +546,8 @@ public class FieldReflectionTests
             .GetDeclaredField("MyGenericField");
         doubleField.SetValue(null, 2.0);
 
-        // The string instantiation isn't visible to either nutc or analysis. Confirmed that SetField uses USG (__UniversalCanon, not __Canon).
+        // The string instantiation isn't visible to either nutc or analysis. Confirmed that SetField uses
+        // USG (__UniversalCanon, not __Canon).
         Type obfuscatedStringType = TypeOf.String;
         Type stringInstantiation = typeof(MyGenericClass<>).MakeGenericType(obfuscatedStringType);
         MethodInfo stringSetterMethod = stringInstantiation
@@ -555,7 +559,8 @@ public class FieldReflectionTests
             .GetDeclaredField("MyGenericField");
         stringField.SetValue(null, "foo");
 
-        // The stringbuilder instantiation is visible to nutc, but analysis doesn't know it needs reflection. Even though the type has compiled code (__Canon shared generic),
+        // The stringbuilder instantiation is visible to nutc, but analysis doesn't know it needs
+        // reflection. Even though the type has compiled code (__Canon shared generic),
         // the reflection method invoke calls into __UniversalCanon USG. The field invoke throws.
         MyGenericClass<StringBuilder>.SetField(new StringBuilder("baz")); // Uses __Canon implementation
         string obfuscatedSbName = "System.Text.StringBuildery";
@@ -570,7 +575,8 @@ public class FieldReflectionTests
         uriField.SetValue(null, newStringBuilder); // Throws a MissingRuntimeArtifactException
         Assert.AreEqual(newStringBuilder, MyGenericClass<StringBuilder>.MyGenericField);
 
-        // The float instantiation is visible to nutc, but analysis doesn't know it needs reflection. Even though the type has compiled code (specialized to float),
+        // The float instantiation is visible to nutc, but analysis doesn't know it needs reflection. Even
+        // though the type has compiled code (specialized to float),
         // the reflection method invoke calls into __UniversalCanon USG. The field invoke throws.
         MyGenericClass<float>.SetField(1.0f); // Uses float implementation (even uses vector registers!)
         string obfuscatedFloatName = "System.Singley";
@@ -593,7 +599,8 @@ public class FieldReflectionTests
         threadStaticFloatField.SetValue(null, 6.0f); // Throws a MissingRuntimeArtifactException
         Assert.AreEqual(6.0f, MyGenericClass<float>.MyThreadStaticField);
 
-        // The stringbuilder instantiation is visible to nutc, but analysis doesn't know it needs reflection.
+        // The stringbuilder instantiation is visible to nutc, but analysis doesn't know it needs
+        // reflection.
         MyOtherGenericClass<StringBuilder>.SetField(new StringBuilder("baz")); // Uses __Canon implementation
         Type sbInstantiationOther = typeof(MyOtherGenericClass<>).MakeGenericType(obfuscatedSbType);
         MethodInfo sbOtherSetterMethod = sbInstantiationOther

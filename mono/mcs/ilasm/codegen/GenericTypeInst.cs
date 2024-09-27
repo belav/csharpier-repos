@@ -23,7 +23,7 @@ namespace Mono.ILASM
         private GenericArguments gen_args;
         private bool is_added; /* Added to PEFile (to TypeSpec table) ? */
 
-        /* Note: Using static hashtable here as GenericTypeInsts is not cached */
+/* Note: Using static hashtable here as GenericTypeInsts is not cached */
         private static Hashtable s_method_table = new Hashtable();
         private static Hashtable s_field_table = new Hashtable();
 
@@ -130,7 +130,7 @@ namespace Mono.ILASM
             int gen_param_count
         )
         {
-            /* Note: Using FullName here as we are caching in a static hashtable */
+/* Note: Using FullName here as we are caching in a static hashtable */
             string key =
                 FullName
                 + MethodDef.CreateSignature(
@@ -160,7 +160,7 @@ namespace Mono.ILASM
 
         protected override IFieldRef CreateFieldRef(BaseTypeRef ret_type, string field_name)
         {
-            /* Note: Using FullName here as we are caching in a static hashtable */
+/* Note: Using FullName here as we are caching in a static hashtable */
             string key = FullName + ret_type.FullName + field_name;
 
             IFieldRef fr = (IFieldRef)s_field_table[key];

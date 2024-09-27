@@ -80,7 +80,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Creates a ProcessInfo from the data parsed from a /proc/pid/stat file and the associated tasks directory.
+        /// Creates a ProcessInfo from the data parsed from a /proc/pid/stat file and the associated tasks
+        // directory.
         /// </summary>
         internal static ProcessInfo CreateProcessInfo(
             ref Interop.procfs.ParsedStat procFsStat,
@@ -184,7 +185,8 @@ namespace System.Diagnostics
             }
         }
 
-        /// <summary>Gets a ThreadState to represent the value returned from the status field of /proc/pid/stat.</summary>
+        /// <summary>Gets a ThreadState to represent the value returned from the status field of
+        // /proc/pid/stat.</summary>
         /// <param name="c">The status field value.</param>
         /// <returns></returns>
         private static ThreadState ProcFsStateToThreadState(char c)

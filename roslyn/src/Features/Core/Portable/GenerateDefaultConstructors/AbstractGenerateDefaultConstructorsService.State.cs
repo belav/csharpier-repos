@@ -137,8 +137,10 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                         return true;
                     }
 
-                    // If this is a struct that has initializers, but is missing a parameterless constructor then we are fixing
-                    // an error (CS8983) but since this is the only scenario where we support structs we don't need to actually
+                    // If this is a struct that has initializers, but is missing a parameterless constructor then we are
+                    // fixing
+                    // an error (CS8983) but since this is the only scenario where we support structs we don't need to
+                    // actually
                     // check for anything else.
                     if (classType.TypeKind == TypeKind.Struct)
                     {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -1395,7 +1396,8 @@ namespace System.Web.Mvc.Html.Test
                 DefaultEditorTemplates.DateTimeInputTemplate(helper)
             );
 
-            // Override FormattedModelValue and let helper think this string came from a default [DataType] attribute.
+            // Override FormattedModelValue and let helper think this string came from a default [DataType]
+            // attribute.
             helper.ViewData.TemplateInfo.FormattedModelValue = "Another string";
 
             Assert.Equal(
@@ -1487,7 +1489,8 @@ namespace System.Web.Mvc.Html.Test
                 DefaultEditorTemplates.DateTimeLocalInputTemplate(helper)
             );
 
-            // Override FormattedModelValue and let helper think this string came from a default [DataType] attribute.
+            // Override FormattedModelValue and let helper think this string came from a default [DataType]
+            // attribute.
             helper.ViewData.TemplateInfo.FormattedModelValue = "Another string";
 
             Assert.Equal(
@@ -1585,7 +1588,8 @@ namespace System.Web.Mvc.Html.Test
                 DefaultEditorTemplates.DateInputTemplate(helper)
             );
 
-            // Override FormattedModelValue and let helper think this string came from a default [DataType] attribute.
+            // Override FormattedModelValue and let helper think this string came from a default [DataType]
+            // attribute.
             helper.ViewData.TemplateInfo.FormattedModelValue = "Another string";
 
             Assert.Equal(
@@ -1674,7 +1678,8 @@ namespace System.Web.Mvc.Html.Test
                 DefaultEditorTemplates.TimeInputTemplate(helper)
             );
 
-            // Override FormattedModelValue and let helper think this string came from a default [DataType] attribute.
+            // Override FormattedModelValue and let helper think this string came from a default [DataType]
+            // attribute.
             helper.ViewData.TemplateInfo.FormattedModelValue = "Another string";
 
             Assert.Equal(
@@ -1939,7 +1944,8 @@ namespace System.Web.Mvc.Html.Test
 
         public void Dispose()
         {
-            // Reset ScopeStorage (written via e.g. ScopeStorage.CurrentProvider.CurrentScope) between tests to avoid unexpected interactions.
+            // Reset ScopeStorage (written via e.g. ScopeStorage.CurrentProvider.CurrentScope) between tests to
+            // avoid unexpected interactions.
             ScopeStorage.CurrentProvider = new StaticScopeStorageProvider();
             ScopeStorage.GlobalScope.Clear();
         }

@@ -92,7 +92,8 @@ namespace MonoTests.System.Text.RegularExpressions
             new testcase("texts", "(?<foo>e)(x)", "${foo}$1$2$`", "texetts"),
             new testcase("texts", "(?<foo>e)(x)", "${foo}$1$2$'", "texetsts"),
             new testcase("texts", "(?<foo>e)(x)", "${foo}$1$2$&", "texeexts"),
-            //new testcase ("F2345678910L71",	@"(F)(2)(3)(4)(5)(6)(?<S>7)(8)(9)(10)(L)\11",	"${S}$11$1", "77F1"	),
+            //new testcase ("F2345678910L71",	@"(F)(2)(3)(4)(5)(6)(?<S>7)(8)(9)(10)(L)\11",	"${S}$11$1",
+            // "77F1"	),
             new testcase(
                 "F2345678910L71",
                 @"(F)(2)(3)(4)(5)(6)(7)(8)(9)(10)(L)\11",

@@ -166,13 +166,15 @@ namespace System.Net
                 return null;
             }
 
-            // prepopulate the channel binding token so we can try preauth (but only for modules that actually need it!)
+            // prepopulate the channel binding token so we can try preauth (but only for modules that actually
+            // need it!)
             if (httpWebRequest.ChallengedUri.Scheme == Uri.UriSchemeHttps)
             {
                 object binding = httpWebRequest.ServicePoint.CachedChannelBinding;
 
 #if DEBUG
-                // the ModuleRequiresChannelBinding method is only compiled in DEBUG so the assert must be restricted to DEBUG
+                // the ModuleRequiresChannelBinding method is only compiled in DEBUG so the assert must be
+                // restricted to DEBUG
                 // as well
 
                 // If the authentication module does CBT, we require that it also caches channel bindings.

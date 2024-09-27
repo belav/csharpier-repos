@@ -99,7 +99,8 @@ namespace MonoTests.System.Xaml
             Assert.IsNotNull(Provider.GetService(typeof(IAmbientProvider)), "#7");
             //Assert.IsNull (Provider.GetService (typeof (IAttachedPropertyStore)), "#8");
             Assert.IsNotNull(Provider.GetService(typeof(IDestinationTypeProvider)), "#9");
-            //Assert.IsNull (Provider.GetService (typeof (IXamlObjectWriterFactory)), "#10"); -> call to this method causes some internal exception. Smells like a .NET bug.
+            //Assert.IsNull (Provider.GetService (typeof (IXamlObjectWriterFactory)), "#10"); -> call to this
+            // method causes some internal exception. Smells like a .NET bug.
         }
 
         [Test]

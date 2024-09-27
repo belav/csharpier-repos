@@ -67,7 +67,8 @@ namespace System.Security.Cryptography.Xml
             try
             {
                 tripleDES = TripleDES.Create();
-                // Don't add padding, use CBC mode: for example, a 192 bits key will yield 40 bytes of encrypted data
+                // Don't add padding, use CBC mode: for example, a 192 bits key will yield 40 bytes of encrypted
+                // data
                 tripleDES.Padding = PaddingMode.None;
                 enc1 = tripleDES.CreateEncryptor(rgbKey, rgbIV);
                 enc2 = tripleDES.CreateEncryptor(rgbKey, s_rgbTripleDES_KW_IV);

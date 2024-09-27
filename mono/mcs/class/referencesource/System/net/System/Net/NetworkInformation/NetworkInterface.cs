@@ -77,20 +77,23 @@ namespace System.Net.NetworkInformation
             get { throw new NotImplementedException(); }
         }
 
-        /// Gets a bool value that indicates whether the network interface is set to only receive data packets.
+        /// Gets a bool value that indicates whether the network interface is set to only receive data
+        // packets.
         public virtual bool IsReceiveOnly
         {
             get { throw new NotImplementedException(); }
         }
 
-        /// Gets a bool value that indicates whether this network interface is enabled to receive multicast packets.
+        /// Gets a bool value that indicates whether this network interface is enabled to receive multicast
+        // packets.
         public virtual bool SupportsMulticast
         {
             get { throw new NotImplementedException(); }
         }
 
         /// Gets the physical address of this network interface
-        /// <b>deonb. This is okay if you don't support this in Whidbey. This actually belongs in the NetworkAdapter derived class</b>
+        /// <b>deonb. This is okay if you don't support this in Whidbey. This actually belongs in the
+        // NetworkAdapter derived class</b>
         public virtual PhysicalAddress GetPhysicalAddress()
         {
             throw new NotImplementedException();

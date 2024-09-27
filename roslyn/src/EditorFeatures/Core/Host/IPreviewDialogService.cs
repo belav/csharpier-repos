@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.Host
         /// <param name="topLevelGlyph">The <see cref="Glyph"/> of the root item in the treeview.</param>
         /// <param name="newSolution">The changes to preview.</param>
         /// <param name="oldSolution">The baseline solution.</param>
-        /// <param name="showCheckBoxes">Whether or not preview dialog should display item checkboxes.</param>
+        /// <param name="showCheckBoxes">Whether or not preview dialog should display item
+        // checkboxes.</param>
         /// <returns>Returns <paramref name="oldSolution"/> with the changes selected in the dialog
         /// applied. Returns null if cancelled.</returns>
         Solution PreviewChanges(

@@ -1079,7 +1079,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public static void ContextWithInterpolatedAnnotations_WorksAsExpected()
         {
-            // Regression test for https://github.com/dotnet/runtime/issues/82997 and https://github.com/dotnet/runtime/issues/69207
+            // Regression test for https://github.com/dotnet/runtime/issues/82997 and
+            // https://github.com/dotnet/runtime/issues/69207
             Assert.IsAssignableFrom<JsonTypeInfo<TestPoco>>(
                 ContextWithInterpolatedAnnotations.Default.TestPocoSomeUniqueSuffixSuffix2
             );

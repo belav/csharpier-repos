@@ -4,11 +4,11 @@
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 /* https://tools.ietf.org/html/rfc7540#section-6.3
-    +-+-------------------------------------------------------------+
-    |E|                  Stream Dependency (31)                     |
-    +-+-------------+-----------------------------------------------+
-    |   Weight (8)  |
-    +-+-------------+
++-+-------------------------------------------------------------+
+|E|                  Stream Dependency (31)                     |
++-+-------------+-----------------------------------------------+
+|   Weight (8)  |
++-+-------------+
 */
 internal partial class Http2Frame
 {

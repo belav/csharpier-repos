@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
-    This class is just meant to mock out the "MapTcpState" method in the shim.
-    For the tests that parse strings, we need to have a single definition for these mappings
-    in order for the tests to run on different platforms against the same standard test files.
+This class is just meant to mock out the "MapTcpState" method in the shim.
+For the tests that parse strings, we need to have a single definition for these mappings
+in order for the tests to run on different platforms against the same standard test files.
 */
 
 using System.Net.NetworkInformation;

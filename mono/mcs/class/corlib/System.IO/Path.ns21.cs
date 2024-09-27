@@ -124,7 +124,8 @@ namespace System.IO
             return StringBuilderCache.GetStringAndRelease(sb);
         }
 
-        /// <summary>Returns a comparison that can be used to compare file and directory names for equality.</summary>
+        /// <summary>Returns a comparison that can be used to compare file and directory names for
+        // equality.</summary>
         internal static StringComparison StringComparison
         {
             get

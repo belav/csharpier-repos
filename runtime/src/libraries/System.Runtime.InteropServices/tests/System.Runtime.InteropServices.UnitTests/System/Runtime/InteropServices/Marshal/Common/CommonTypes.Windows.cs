@@ -49,7 +49,8 @@ namespace System.Runtime.InteropServices.Tests.Common
     }
 
     /// <summary>
-    /// Class factory used to provide a unmanaged IClassFactory instance for testing with <see cref="ComObject"/>.
+    /// Class factory used to provide a unmanaged IClassFactory instance for testing with <see
+    // cref="ComObject"/>.
     /// </summary>
     internal unsafe struct ComObjectFactory
     {

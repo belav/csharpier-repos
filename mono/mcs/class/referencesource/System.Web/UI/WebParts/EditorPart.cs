@@ -107,12 +107,14 @@ namespace System.Web.UI.WebControls.WebParts
         }
 
         /// <devdoc>
-        /// Called by the Zone when the EditorPart should apply values to its associated control.  True indicates
+        /// Called by the Zone when the EditorPart should apply values to its associated control.  True
+        // indicates
         /// that the save was successful, false indicates that an error occurred.
         /// </devdoc>
         public abstract bool ApplyChanges();
 
-        // If custom errors are enabled, we do not want to render the exception message to the browser. (VSWhidbey 381646)
+        // If custom errors are enabled, we do not want to render the exception message to the browser.
+        // (VSWhidbey 381646)
         internal string CreateErrorMessage(string exceptionMessage)
         {
             if (Context != null && Context.IsCustomErrorEnabled)
@@ -294,7 +296,8 @@ namespace System.Web.UI.WebControls.WebParts
 
         /// <devdoc>
         /// Called by the Zone when the EditorPart should sync its values because other EditorParts
-        /// may have changed control properties.  This is only called after all the ApplyChanges have returned.
+        /// may have changed control properties.  This is only called after all the ApplyChanges have
+        // returned.
         /// </devdoc>
         public abstract void SyncChanges();
     }

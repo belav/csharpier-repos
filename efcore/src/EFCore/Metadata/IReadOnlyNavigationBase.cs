@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a navigation property which can be used to navigate a relationship.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IReadOnlyNavigationBase : IReadOnlyPropertyBase
 {
@@ -39,12 +40,14 @@ public interface IReadOnlyNavigationBase : IReadOnlyPropertyBase
     bool IsEagerLoaded => (bool?)this[CoreAnnotationNames.EagerLoaded] ?? false;
 
     /// <summary>
-    ///     Determines whether or not this navigation should lazy-load if lazy-loading is enabled and a mechanism for lazy-loading
+    ///     Determines whether or not this navigation should lazy-load if lazy-loading is enabled and a
+    // mechanism for lazy-loading
     ///     has been configured in the model.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-lazy-loading">Lazy loading</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-lazy-loading">Lazy loading</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
     bool LazyLoadingEnabled => (bool?)this[CoreAnnotationNames.LazyLoadingEnabled] ?? true;

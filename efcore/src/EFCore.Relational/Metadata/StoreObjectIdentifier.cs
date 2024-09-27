@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     A type that represents the id of a store object
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public readonly struct StoreObjectIdentifier
     : IComparable<StoreObjectIdentifier>,
@@ -104,7 +105,8 @@ public readonly struct StoreObjectIdentifier
     }
 
     /// <summary>
-    ///     Creates an id for the SQL query mapped using <see cref="O:RelationalEntityTypeBuilderExtensions.ToSqlQuery" />.
+    ///     Creates an id for the SQL query mapped using <see
+    // cref="O:RelationalEntityTypeBuilderExtensions.ToSqlQuery" />.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <returns>The SQL query id.</returns>
@@ -238,7 +240,8 @@ public readonly struct StoreObjectIdentifier
     /// </summary>
     /// <param name="left">The first id.</param>
     /// <param name="right">The second id.</param>
-    /// <returns><see langword="true" /> if they represent the same store object; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they represent the same store object; <see langword="false"
+    // /> otherwise.</returns>
     public static bool operator ==(StoreObjectIdentifier left, StoreObjectIdentifier right) =>
         left.Equals(right);
 
@@ -247,7 +250,8 @@ public readonly struct StoreObjectIdentifier
     /// </summary>
     /// <param name="left">The first id.</param>
     /// <param name="right">The second id.</param>
-    /// <returns><see langword="false" /> if they represent the same store object; <see langword="true" /> otherwise.</returns>
+    /// <returns><see langword="false" /> if they represent the same store object; <see langword="true"
+    // /> otherwise.</returns>
     public static bool operator !=(StoreObjectIdentifier left, StoreObjectIdentifier right) =>
         !(left == right);
 }

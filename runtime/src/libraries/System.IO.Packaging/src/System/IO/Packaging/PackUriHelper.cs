@@ -26,7 +26,8 @@ namespace System.IO.Packaging
         /// 7. And is refined correctly
         /// </summary>
         /// <param name="partUri">The relative uri that represents the part within a package</param>
-        /// <returns>Returns a relative URI with an absolute path that points to a part within a package</returns>
+        /// <returns>Returns a relative URI with an absolute path that points to a part within a
+        // package</returns>
         /// <exception cref="ArgumentNullException">If partUri parameter is null</exception>
         /// <exception cref="ArgumentException">If partUri parameter is an absolute Uri</exception>
         /// <exception cref="ArgumentException">If partUri parameter is empty</exception>
@@ -76,9 +77,12 @@ namespace System.IO.Packaging
         /// package.</param>
         /// <param name="targetUri">This URI can be any relative URI</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException">If either sourcePartUri or targetUri parameter is null</exception>
-        /// <exception cref="ArgumentException">If either sourcePartUri or targetUri parameter is an absolute Uri</exception>
-        /// <exception cref="ArgumentException">If sourcePartUri parameter does not conform to the valid partUri syntax</exception>
+        /// <exception cref="ArgumentNullException">If either sourcePartUri or targetUri parameter is
+        // null</exception>
+        /// <exception cref="ArgumentException">If either sourcePartUri or targetUri parameter is an
+        // absolute Uri</exception>
+        /// <exception cref="ArgumentException">If sourcePartUri parameter does not conform to the valid
+        // partUri syntax</exception>
         public static Uri ResolvePartUri(Uri sourcePartUri, Uri targetUri)
         {
             if (sourcePartUri is null)
@@ -112,8 +116,10 @@ namespace System.IO.Packaging
         /// <param name="sourcePartUri"></param>
         /// <param name="targetPartUri"></param>
         /// <returns>The relative path between two parts</returns>
-        /// <exception cref="ArgumentNullException">If either the sourcePartUri or targetPartUri parameter is null</exception>
-        /// <exception cref="ArgumentException">If either sourcePartUri or targetPartUri parameter does not conform to the valid partUri syntax</exception>
+        /// <exception cref="ArgumentNullException">If either the sourcePartUri or targetPartUri parameter
+        // is null</exception>
+        /// <exception cref="ArgumentException">If either sourcePartUri or targetPartUri parameter does not
+        // conform to the valid partUri syntax</exception>
         public static Uri GetRelativeUri(Uri sourcePartUri, Uri targetPartUri)
         {
             if (sourcePartUri is null)
@@ -137,7 +143,8 @@ namespace System.IO.Packaging
         /// <param name="partUri">Part Uri</param>
         /// <returns>Normalized Part Uri</returns>
         /// <exception cref="ArgumentNullException">If partUri is null</exception>
-        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri syntax</exception>
+        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri
+        // syntax</exception>
         public static Uri GetNormalizedPartUri(Uri partUri)
         {
             if (partUri is null)
@@ -156,11 +163,13 @@ namespace System.IO.Packaging
         /// </summary>
         /// <param name="firstPartUri">First part Uri to be compared</param>
         /// <param name="secondPartUri">Second part Uri to be compared</param>
-        /// <returns>A 32-bit signed integer indicating the lexical relationship between the compared Uri components.
+        /// <returns>A 32-bit signed integer indicating the lexical relationship between the compared Uri
+        // components.
         /// Value - Less than zero means firstUri is less than secondUri
         /// Value - Equal to zero means both the Uris are equal</returns>
         /// Value - Greater than zero means firstUri is greater than secondUri
-        /// <exception cref="ArgumentException">If firstPartUri or secondPartUri parameter does not conform to the valid partUri syntax</exception>
+        /// <exception cref="ArgumentException">If firstPartUri or secondPartUri parameter does not conform
+        // to the valid partUri syntax</exception>
         public static int ComparePartUri(Uri? firstPartUri, Uri? secondPartUri)
         {
             if (firstPartUri != null)
@@ -187,7 +196,8 @@ namespace System.IO.Packaging
         /// <remarks>Does not inspect the part contents - this is based solely on the name</remarks>
         /// <exception cref="ArgumentNullException">If partUri parameter is null</exception>
         /// <exception cref="ArgumentException">If partUri parameter is an absolute Uri</exception>
-        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri Syntax</exception>
+        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri
+        // Syntax</exception>
         public static bool IsRelationshipPartUri(Uri partUri)
         {
             if (partUri is null)
@@ -210,10 +220,12 @@ namespace System.IO.Packaging
         /// </summary>
         /// <param name="partUri">Part Uri for which the relationship part Uri is wanted</param>
         /// <returns>returns a Uri that conforms to the relationship part Uri syntax</returns>
-        /// <exception cref="ArgumentException">If the input Uri is a relationship part Uri itself</exception>
+        /// <exception cref="ArgumentException">If the input Uri is a relationship part Uri
+        // itself</exception>
         /// <exception cref="ArgumentNullException">If partUri parameter is null</exception>
         /// <exception cref="ArgumentException">If partUri parameter is an absolute Uri</exception>
-        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri Syntax</exception>
+        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri
+        // Syntax</exception>
         public static Uri GetRelationshipPartUri(Uri partUri)
         {
             if (partUri is null)
@@ -275,10 +287,14 @@ namespace System.IO.Packaging
         /// <param name="relationshipPartUri">relationship part Uri</param>
         /// <returns>A uri that is a valid source part Uri for the relationship Uri provided</returns>
         /// <exception cref="ArgumentNullException">If relationshipPartUri parameter is null</exception>
-        /// <exception cref="ArgumentException">If relationshipPartUri parameter is an absolute Uri</exception>
-        /// <exception cref="ArgumentException">If relationshipPartUri parameter does not conform to the valid partUri Syntax</exception>
-        /// <exception cref="ArgumentException">If the relationshipPartUri is not a relationship part Uri itself</exception>
-        /// <exception cref="ArgumentException">If the resultant Uri obtained is a relationship part Uri</exception>
+        /// <exception cref="ArgumentException">If relationshipPartUri parameter is an absolute
+        // Uri</exception>
+        /// <exception cref="ArgumentException">If relationshipPartUri parameter does not conform to the
+        // valid partUri Syntax</exception>
+        /// <exception cref="ArgumentException">If the relationshipPartUri is not a relationship part Uri
+        // itself</exception>
+        /// <exception cref="ArgumentException">If the resultant Uri obtained is a relationship part
+        // Uri</exception>
         public static Uri GetSourcePartUriFromRelationshipPartUri(Uri relationshipPartUri)
         {
             if (relationshipPartUri is null)
@@ -397,7 +413,8 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentException">If partUri parameter starts with two "/"</exception>
         /// <exception cref="ArgumentException">If partUri parameter ends with a "/"</exception>
         /// <exception cref="ArgumentException">If partUri parameter has a fragment</exception>
-        /// <exception cref="ArgumentException">If partUri parameter has some escaped characters that should not be escaped
+        /// <exception cref="ArgumentException">If partUri parameter has some escaped characters that should
+        // not be escaped
         /// or some characters that should be escaped are not escaped.</exception>
         internal static ValidatedPartUri ValidatePartUri(Uri partUri)
         {
@@ -592,7 +609,8 @@ namespace System.IO.Packaging
             );
         }
 
-        //Returns the part name in its escaped string form from an Absolute [must be pack://] or a Relative URI
+        //Returns the part name in its escaped string form from an Absolute [must be pack://] or a Relative
+        // URI
         private static string GetStringForPartUriFromAnyUri(Uri partUri)
         {
             Debug.Assert(
@@ -655,7 +673,8 @@ namespace System.IO.Packaging
             );
 
             // Uri.GetComponents may return a single forward slash when there is no absolute path.
-            // This is Whidbey PS399695.  Until that is changed, we check for both cases - either an entirely empty string,
+            // This is Whidbey PS399695.  Until that is changed, we check for both cases - either an entirely
+            // empty string,
             // or a single forward slash character.  Either case means there is no part name.
             return (
                 partName.Length == 0
@@ -882,12 +901,15 @@ namespace System.IO.Packaging
                 )
                     return true;
 
-                // Look for pattern that matches: "XXX/_rels/YYY.rels" where XXX is zero or more part name characters and
+                // Look for pattern that matches: "XXX/_rels/YYY.rels" where XXX is zero or more part name
+                // characters and
                 // YYY is any legal part name characters.
-                // We can assume that the string is a valid URI because it would have been rejected by the Uri parsing
+                // We can assume that the string is a valid URI because it would have been rejected by the Uri
+                // parsing
                 // code in the Uri constructor if it wasn't.
                 // Uri's are case insensitive so we can compare them by upper-casing them
-                // Essentially, we will just look for the existence of a "folder" called _rels and the trailing extension
+                // Essentially, we will just look for the existence of a "folder" called _rels and the trailing
+                // extension
                 // of .rels.  The folder must also be the last "folder".
                 // Comparing using the normalized string to reduce the number of ToUpperInvariant operations
                 // required for case-insensitive comparison
@@ -915,7 +937,8 @@ namespace System.IO.Packaging
                     result = segments[segments.Length - 2] == RelationshipPartUpperCaseSegmentName;
                 }
 
-                // In addition we need to make sure that the relationship is not created by taking another relationship
+                // In addition we need to make sure that the relationship is not created by taking another
+                // relationship
                 // as the source of this uri. So XXX/_rels/_rels/YYY.rels.rels would be invalid.
                 if (segments.Length > 3 && result)
                 {
@@ -940,7 +963,8 @@ namespace System.IO.Packaging
             //1. Take the well-formed and escaped partUri string and case fold to UpperInvariant
             private string GetNormalizedPartUriString()
             {
-                //Case Fold the partUri string to Invariant Upper case (this helps us perform case insensitive comparison)
+                //Case Fold the partUri string to Invariant Upper case (this helps us perform case insensitive
+                // comparison)
                 //We follow the Simple case folding specified in the Unicode standard
 
                 if (_isNormalized)

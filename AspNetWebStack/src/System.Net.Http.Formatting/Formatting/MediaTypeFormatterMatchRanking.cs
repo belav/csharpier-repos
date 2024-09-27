@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 namespace System.Net.Http.Formatting
 {
@@ -44,7 +45,8 @@ namespace System.Net.Http.Formatting
         MatchOnRequestWithMediaTypeMapping,
 
         /// <summary>
-        /// Matched on the media type of the <see cref="HttpContent"/> of the <see cref="HttpRequestMessage"/>.
+        /// Matched on the media type of the <see cref="HttpContent"/> of the <see
+        // cref="HttpRequestMessage"/>.
         /// </summary>
         MatchOnRequestMediaType,
     }

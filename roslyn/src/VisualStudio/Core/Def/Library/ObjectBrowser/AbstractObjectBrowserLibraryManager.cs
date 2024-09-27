@@ -563,7 +563,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         {
             try
             {
-                // Let the presented know we're starting a search.  It will give us back the context object that the FAR
+                // Let the presented know we're starting a search.  It will give us back the context object that the
+                // FAR
                 // service will push results into.  Because we kicked off this work in a fire and forget fashion,
                 // the presenter owns canceling this work (i.e. if it's closed or if another FAR request is made).
                 var (context, cancellationToken) = presenter.StartSearch(

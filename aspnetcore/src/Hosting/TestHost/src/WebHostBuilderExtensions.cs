@@ -70,10 +70,12 @@ public static class WebHostBuilderExtensions
     }
 
     /// <summary>
-    /// Configures the <see cref="IWebHostBuilder" /> instance with the services provided in <paramref name="servicesConfiguration" />.
+    /// Configures the <see cref="IWebHostBuilder" /> instance with the services provided in <paramref
+    // name="servicesConfiguration" />.
     /// </summary>
     /// <param name="webHostBuilder">The <see cref="IWebHostBuilder"/>.</param>
-    /// <param name="servicesConfiguration">An <see cref="Action"/> that registers services onto the <see cref="IServiceCollection"/>.</param>
+    /// <param name="servicesConfiguration">An <see cref="Action"/> that registers services onto the
+    // <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder ConfigureTestServices(
         this IWebHostBuilder webHostBuilder,
@@ -103,10 +105,12 @@ public static class WebHostBuilderExtensions
     }
 
     /// <summary>
-    /// Configures the <see cref="IWebHostBuilder" /> instance with the services provided in <paramref name="servicesConfiguration" />.
+    /// Configures the <see cref="IWebHostBuilder" /> instance with the services provided in <paramref
+    // name="servicesConfiguration" />.
     /// </summary>
     /// <param name="webHostBuilder">The <see cref="IWebHostBuilder"/>.</param>
-    /// <param name="servicesConfiguration">An <see cref="Action"/> that registers services onto the <typeparamref name="TContainer"/>.</param>
+    /// <param name="servicesConfiguration">An <see cref="Action"/> that registers services onto the
+    // <typeparamref name="TContainer"/>.</param>
     /// <typeparam name="TContainer">A collection of service descriptors.</typeparam>
     /// <returns></returns>
     public static IWebHostBuilder ConfigureTestContainer<TContainer>(
@@ -135,7 +139,8 @@ public static class WebHostBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IWebHostBuilder"/>.</param>
     /// <param name="solutionRelativePath">The directory of the solution file.</param>
-    /// <param name="solutionName">The name of the solution file to make the content root relative to.</param>
+    /// <param name="solutionName">The name of the solution file to make the content root relative
+    // to.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -161,7 +166,8 @@ public static class WebHostBuilderExtensions
     /// <param name="builder">The <see cref="IWebHostBuilder"/>.</param>
     /// <param name="solutionRelativePath">The directory of the solution file.</param>
     /// <param name="applicationBasePath">The root of the app's directory.</param>
-    /// <param name="solutionName">The name of the solution file to make the content root relative to.</param>
+    /// <param name="solutionName">The name of the solution file to make the content root relative
+    // to.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     [SuppressMessage(
         "ApiDesign",

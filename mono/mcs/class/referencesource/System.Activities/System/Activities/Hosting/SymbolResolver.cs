@@ -62,14 +62,16 @@ namespace System.Activities.Hosting
             }
             set
             {
-                // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+                // We don't need to check key for null since we want the exception to bubble up from the inner
+                // dictionary
                 this.symbols[key] = CreateReference(key, value);
             }
         }
 
         public void Add(string key, object value)
         {
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
             this.symbols.Add(key, CreateReference(key, value));
         }
 
@@ -80,7 +82,8 @@ namespace System.Activities.Hosting
                 throw FxTrace.Exception.ArgumentNull("type");
             }
 
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
             this.symbols.Add(
                 key,
                 new ExternalLocationReference(key, type, TypeHelper.GetDefaultValueForType(type))
@@ -99,7 +102,8 @@ namespace System.Activities.Hosting
                 throw FxTrace.Exception.Argument("value", SR.ValueMustBeAssignableToType);
             }
 
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
             this.symbols.Add(key, new ExternalLocationReference(key, type, value));
         }
 
@@ -127,7 +131,8 @@ namespace System.Activities.Hosting
 
         public bool Contains(KeyValuePair<string, object> item)
         {
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
             ExternalLocationReference reference;
             if (this.symbols.TryGetValue(item.Key, out reference))
             {
@@ -139,7 +144,8 @@ namespace System.Activities.Hosting
 
         public bool ContainsKey(string key)
         {
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
             return this.symbols.ContainsKey(key);
         }
 
@@ -203,13 +209,15 @@ namespace System.Activities.Hosting
 
         public bool Remove(string key)
         {
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
             return this.symbols.Remove(key);
         }
 
         public bool Remove(KeyValuePair<string, object> item)
         {
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
             ExternalLocationReference reference;
             if (this.symbols.TryGetValue(item.Key, out reference))
             {
@@ -225,7 +233,8 @@ namespace System.Activities.Hosting
 
         public bool TryGetValue(string key, out object value)
         {
-            // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
+            // We don't need to check key for null since we want the exception to bubble up from the inner
+            // dictionary
 
             ExternalLocationReference reference;
             if (this.symbols.TryGetValue(key, out reference))

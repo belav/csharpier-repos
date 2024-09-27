@@ -6,7 +6,8 @@ using System;
 namespace Microsoft.AspNetCore.Connections;
 
 /// <summary>
-/// An exception that is thrown when there the current address Kestrel is trying to bind to is in use.
+/// An exception that is thrown when there the current address Kestrel is trying to bind to is in
+// use.
 /// </summary>
 public class AddressInUseException : InvalidOperationException
 {

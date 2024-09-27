@@ -61,8 +61,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
         public static string GetProjectDisplayName(this Project project)
         {
-            // If the project name is unambiguous within the solution, use that name. Otherwise, use the unique name
-            // provided by IVsSolution3.GetUniqueUINameOfProject. This covers all cases except for a single solution
+            // If the project name is unambiguous within the solution, use that name. Otherwise, use the unique
+            // name
+            // provided by IVsSolution3.GetUniqueUINameOfProject. This covers all cases except for a single
+            // solution
             // with two or more multi-targeted projects with the same name and same targets.
             //
             // https://github.com/dotnet/roslyn/pull/43800

@@ -6,7 +6,8 @@ namespace System.Activities
 {
     using System;
 
-    // NOTE: This may get generated from 'xd.xml' if we get extra performance from XML Dictionary strings,
+    // NOTE: This may get generated from 'xd.xml' if we get extra performance from XML Dictionary
+    // strings,
     // which would entail elevating the most common strings into a "Main" dictionary
     static class XD
     {

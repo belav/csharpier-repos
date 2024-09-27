@@ -166,8 +166,8 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(1, grpCol.Count, "#A2");
         }
 
-        /* There's an inconsistency between other collections using
-         * Key methods and the impl of this collection */
+/* There's an inconsistency between other collections using
+* Key methods and the impl of this collection */
         [Test]
         public void IndexerKeyTest()
         {

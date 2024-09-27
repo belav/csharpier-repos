@@ -525,7 +525,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Walks the tree starting with "this" node and returns first annotation of type <see cref="SaveOptions"/>
+        /// Walks the tree starting with "this" node and returns first annotation of type <see
+        // cref="SaveOptions"/>
         ///   found in the ancestors.
         /// </summary>
         /// <returns>The effective <see cref="SaveOptions"/> for this <see cref="XObject"/></returns>

@@ -22,7 +22,8 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
     /// <summary>
     /// Create a new instance of <see cref="DataAnnotationsModelValidatorProvider"/>.
     /// </summary>
-    /// <param name="validationAttributeAdapterProvider">The <see cref="IValidationAttributeAdapterProvider"/>
+    /// <param name="validationAttributeAdapterProvider">The <see
+    // cref="IValidationAttributeAdapterProvider"/>
     /// that supplies <see cref="IAttributeAdapter"/>s.</param>
     /// <param name="options">The <see cref="IOptions{MvcDataAnnotationsLocalizationOptions}"/>.</param>
     /// <param name="stringLocalizerFactory">The <see cref="IStringLocalizerFactory"/>.</param>

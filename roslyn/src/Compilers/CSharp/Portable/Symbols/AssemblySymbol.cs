@@ -31,19 +31,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         /// <summary>
-        /// The system assembly, which provides primitive types like Object, String, etc., e.g. mscorlib.dll.
-        /// The value is provided by ReferenceManager and must not be modified. For SourceAssemblySymbol, non-missing
-        /// coreLibrary must match one of the referenced assemblies returned by GetReferencedAssemblySymbols() method of
-        /// the main module. If there is no existing assembly that can be used as a source for the primitive types,
+        /// The system assembly, which provides primitive types like Object, String, etc., e.g.
+        // mscorlib.dll.
+        /// The value is provided by ReferenceManager and must not be modified. For SourceAssemblySymbol,
+        // non-missing
+        /// coreLibrary must match one of the referenced assemblies returned by
+        // GetReferencedAssemblySymbols() method of
+        /// the main module. If there is no existing assembly that can be used as a source for the primitive
+        // types,
         /// the value is a Compilation.MissingCorLibrary.
         /// </summary>
         private AssemblySymbol _corLibrary;
 
         /// <summary>
-        /// The system assembly, which provides primitive types like Object, String, etc., e.g. mscorlib.dll.
-        /// The value is MissingAssemblySymbol if none of the referenced assemblies can be used as a source for the
-        /// primitive types and the owning assembly cannot be used as the source too. Otherwise, it is one of
-        /// the referenced assemblies returned by GetReferencedAssemblySymbols() method or the owning assembly.
+        /// The system assembly, which provides primitive types like Object, String, etc., e.g.
+        // mscorlib.dll.
+        /// The value is MissingAssemblySymbol if none of the referenced assemblies can be used as a source
+        // for the
+        /// primitive types and the owning assembly cannot be used as the source too. Otherwise, it is one
+        // of
+        /// the referenced assemblies returned by GetReferencedAssemblySymbols() method or the owning
+        // assembly.
         /// </summary>
         internal AssemblySymbol CorLibrary
         {
@@ -87,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Assembly version pattern with wildcards represented by <see cref="ushort.MaxValue"/>,
-        /// or null if the version string specified in the <see cref="AssemblyVersionAttribute"/> doesn't contain a wildcard.
+        /// or null if the version string specified in the <see cref="AssemblyVersionAttribute"/> doesn't
+        // contain a wildcard.
         ///
         /// For example,
         ///   AssemblyVersion("1.2.*") is represented as 1.2.65535.65535,
@@ -104,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Indicates that this PE file makes Win32 calls. See CorPEKind.pe32BitRequired for more information (http://msdn.microsoft.com/en-us/library/ms230275.aspx).
+        /// Indicates that this PE file makes Win32 calls. See CorPEKind.pe32BitRequired for more
+        // information (http://msdn.microsoft.com/en-us/library/ms230275.aspx).
         /// </summary>
         internal bool Bit32Required
         {
@@ -161,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Gets a read-only list of all the modules in this assembly. (There must be at least one.) The first one is the main module
+        /// Gets a read-only list of all the modules in this assembly. (There must be at least one.) The
+        // first one is the main module
         /// that holds the assembly manifest.
         /// </summary>
         public abstract ImmutableArray<ModuleSymbol> Modules { get; }
@@ -363,7 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Lookup declaration for predefined CorLib type in this Assembly.
         /// </summary>
-        /// <returns>The symbol for the pre-defined type or an error type if the type is not defined in the core library.</returns>
+        /// <returns>The symbol for the pre-defined type or an error type if the type is not defined in the
+        // core library.</returns>
         internal abstract NamedTypeSymbol GetDeclaredSpecialType(SpecialType type);
 
         /// <summary>
@@ -448,7 +460,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Keep in sync with VB's AssemblySymbol.RuntimeSupportsNumericIntPtr
             get
             {
-                // CorLibrary should never be null, but that invariant is broken in some cases for MissingAssemblySymbol.
+                // CorLibrary should never be null, but that invariant is broken in some cases for
+                // MissingAssemblySymbol.
                 // Tracked by https://github.com/dotnet/roslyn/issues/61262
                 return CorLibrary is not null
                     && RuntimeSupportsFeature(
@@ -597,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Gets the symbol for the pre-defined type from core library associated with this assembly.
         /// </summary>
-        /// <returns>The symbol for the pre-defined type or an error type if the type is not defined in the core library.</returns>
+        /// <returns>The symbol for the pre-defined type or an error type if the type is not defined in the
+        // core library.</returns>
         internal NamedTypeSymbol GetSpecialType(SpecialType type)
         {
             return CorLibrary.GetDeclaredSpecialType(type);
@@ -659,21 +673,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// For source assembly, this is equivalent to all assembly references given to compilation.
         /// </param>
         /// <param name="isWellKnownType">
-        /// Extra restrictions apply when searching for a well-known type.  In particular, the type must be public.
+        /// Extra restrictions apply when searching for a well-known type.  In particular, the type must be
+        // public.
         /// </param>
         /// <param name="useCLSCompliantNameArityEncoding">
-        /// While resolving the name, consider only types following CLS-compliant generic type names and arity encoding (ECMA-335, section 10.7.2).
-        /// I.e. arity is inferred from the name and matching type must have the same emitted name and arity.
+        /// While resolving the name, consider only types following CLS-compliant generic type names and
+        // arity encoding (ECMA-335, section 10.7.2).
+        /// I.e. arity is inferred from the name and matching type must have the same emitted name and
+        // arity.
         /// </param>
         /// <param name="warnings">
         /// A diagnostic bag to receive warnings if we should allow multiple definitions and pick one.
         /// </param>
         /// <param name="ignoreCorLibraryDuplicatedTypes">
-        /// In case duplicate types are found, ignore the one from corlib. This is useful for any kind of compilation at runtime
+        /// In case duplicate types are found, ignore the one from corlib. This is useful for any kind of
+        // compilation at runtime
         /// (EE/scripting/Powershell) using a type that is being migrated to corlib.
         /// </param>
         /// <param name="conflicts">
-        /// In cases a type could not be found because of ambiguity, we return two of the candidates that caused the ambiguity.
+        /// In cases a type could not be found because of ambiguity, we return two of the candidates that
+        // caused the ambiguity.
         /// </param>
         /// <returns>Null if the type can't be found.</returns>
         internal NamedTypeSymbol? GetTypeByMetadataName(
@@ -900,7 +919,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             int remainingTypeArguments = typeArguments.Length - currentTypeArgument;
 
-            // in case we are specializing a nested generic definition we might have more arguments than the current symbol:
+            // in case we are specializing a nested generic definition we might have more arguments than the
+            // current symbol:
             Debug.Assert(remainingTypeArguments >= symbol.Arity);
 
             if (remainingTypeArguments == 0)
@@ -934,10 +954,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             // Type from this assembly always wins.
-            // After that we look in references, which may yield ambiguities. If `ignoreCorLibraryDuplicatedTypes` is set,
+            // After that we look in references, which may yield ambiguities. If
+            // `ignoreCorLibraryDuplicatedTypes` is set,
             // corlib does not contribute to ambiguities (corlib loses over other references).
-            // For well-known types before C# 7, ambiguities are reported as a warning and the first candidate wins.
-            // For other types, when `ignoreCorLibraryDuplicatedTypes` isn't set, finding a candidate in corlib resolves
+            // For well-known types before C# 7, ambiguities are reported as a warning and the first candidate
+            // wins.
+            // For other types, when `ignoreCorLibraryDuplicatedTypes` isn't set, finding a candidate in corlib
+            // resolves
             // ambiguities (corlib wins over other references).
 
             Debug.Assert(warnings is null || isWellKnownType);
@@ -954,7 +977,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 result = null;
             }
 
-            // ignore any types of the same name that might be in referenced assemblies (prefer the current assembly):
+            // ignore any types of the same name that might be in referenced assemblies (prefer the current
+            // assembly):
             if (result is object || !includeReferences)
             {
                 return result;
@@ -1055,7 +1079,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        // The predefined type '{0}' is defined in multiple assemblies in the global alias; using definition from '{1}'
+                        // The predefined type '{0}' is defined in multiple assemblies in the global alias; using definition
+                        // from '{1}'
                         warnings.Add(
                             ErrorCode.WRN_MultiplePredefTypes,
                             NoLocation.Singleton,
@@ -1147,7 +1172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract ImmutableArray<byte> PublicKey { get; }
 
         /// <summary>
-        /// If this symbol represents a metadata assembly returns the underlying <see cref="AssemblyMetadata"/>.
+        /// If this symbol represents a metadata assembly returns the underlying <see
+        // cref="AssemblyMetadata"/>.
         ///
         /// Otherwise, this returns <see langword="null"/>.
         /// </summary>

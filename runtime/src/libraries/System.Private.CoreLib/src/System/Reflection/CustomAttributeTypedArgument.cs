@@ -97,9 +97,11 @@ namespace System.Reflection
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is CustomAttributeTypedArgument cata && Equals(cata);
 
-        /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
+        /// <summary>Indicates whether the current instance is equal to another instance of the same
+        // type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>
-        /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
+        /// <returns>true if the current instance is equal to the other instance; otherwise,
+        // false.</returns>
         public bool Equals(CustomAttributeTypedArgument other) =>
             _value == other._value && _argumentType == other._argumentType;
 

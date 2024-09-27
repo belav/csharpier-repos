@@ -1425,7 +1425,10 @@ namespace MonoTests.System.Data
             Assert.AreEqual(al.ToArray(), drSelect, "DT128");
 
             //-------------------------------------------------------------
-            //If a column name contains one of the above characters,(ex. #\/=><+-*%&|^'" and so on) the name must be wrapped in brackets. For example to use a column named "Column#" in an expression, you would write "[Column#]":
+            //If a column name contains one of the above characters,(ex. #\/=><+-*%&|^'" and so on) the name
+            // must be wrapped in brackets. For example to use a column named "Column#" in an expression, you
+            // would
+            // write "[Column#]":
             al.Clear();
             foreach (DataRow dr in dt.Rows)
                 if ((int)dr["Column#"] <= 0)
@@ -1503,11 +1506,11 @@ namespace MonoTests.System.Data
             /*
             al.Clear();
             foreach (DataRow dr in ds.Tables[0].Rows)
-                if (dr.IsNull("ParentBool") || (bool)dr["ParentBool"])
-                    al.Add(dr);
-                // Select_S - IsNull(ParentBool,true)
-                drSelect = ds.Tables[0].Select("IsNull(ParentBool,true) ");
-                Assert.AreEqual (al.ToArray(), drSelect, "DT131");
+            if (dr.IsNull("ParentBool") || (bool)dr["ParentBool"])
+            al.Add(dr);
+            // Select_S - IsNull(ParentBool,true)
+            drSelect = ds.Tables[0].Select("IsNull(ParentBool,true) ");
+            Assert.AreEqual (al.ToArray(), drSelect, "DT131");
             */
             //-------------------------------------------------------------
             al.Clear();
@@ -1955,7 +1958,8 @@ namespace MonoTests.System.Data
             ds.Tables.Add(dtChild);
             dtParent.PrimaryKey = null;
             //this test was addedd to check java exception:
-            //System.ArgumentException: Cannot remove UniqueConstraint because the ForeignKeyConstraint myRelation exists.
+            //System.ArgumentException: Cannot remove UniqueConstraint because the ForeignKeyConstraint
+            // myRelation exists.
             // check add primary key with relation
             ds.Relations.Add(
                 new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
@@ -2689,8 +2693,8 @@ namespace MonoTests.System.Data
             table1.PrimaryKey = new DataColumn[] {table1.Columns[0]};
             table3 = table1.Clone ();
             try {
-                table3.Merge(table2);
-                Assert.Fail("#6");
+            table3.Merge(table2);
+            Assert.Fail("#6");
             } catch (DataException e) {}
             */
 

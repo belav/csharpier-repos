@@ -99,7 +99,8 @@ namespace System.Activities.Statements
         }
 
         /// <summary>
-        /// When StateMachine enters a state, condition evaluation bookmark of that state would be added to activeBookmarks collection.
+        /// When StateMachine enters a state, condition evaluation bookmark of that state would be added to
+        // activeBookmarks collection.
         /// </summary>
         /// <param name="bookmark">Bookmark reference.</param>
         public void AddActiveBookmark(Bookmark bookmark)
@@ -153,7 +154,8 @@ namespace System.Activities.Statements
         }
 
         /// <summary>
-        /// When StateMachine leaves a state, condition evaluation bookmark of that state would be removed from activeBookmarks collection.
+        /// When StateMachine leaves a state, condition evaluation bookmark of that state would be removed
+        // from activeBookmarks collection.
         /// </summary>
         /// <param name="bookmark">Bookmark reference.</param>
         public void RemoveActiveBookmark(Bookmark bookmark)

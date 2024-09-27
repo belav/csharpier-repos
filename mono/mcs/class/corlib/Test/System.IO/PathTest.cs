@@ -805,7 +805,8 @@ namespace MonoTests.System.IO
                 }
             }
 
-            // These cases require that we don't pass a root to GetFullPath - it should return the proper drive root.
+            // These cases require that we don't pass a root to GetFullPath - it should return the proper drive
+            // root.
             string root4 = Path.GetPathRoot(Directory.GetCurrentDirectory());
             Assert.AreEqual(root4, Path.GetFullPath(@"\"));
             Assert.AreEqual(root4, Path.GetFullPath("/"));
@@ -1161,7 +1162,8 @@ namespace MonoTests.System.IO
                 }
                 else
                 {
-                    // To fix issue https://github.com/mono/mono/issues/18933 we set the AltDirectorySeparatorChar as well.
+                    // To fix issue https://github.com/mono/mono/issues/18933 we set the AltDirectorySeparatorChar as
+                    // well.
                     // This causes the Assert.IsTrue (!Path.IsPathRooted ("\\"), "IsPathRooted #09"); to fail.
                     // Path.IsPathFullyQualified Method handles paths that use both the DirectorySeparatorChar
                     // and the AltDirectorySeparatorChar characters.

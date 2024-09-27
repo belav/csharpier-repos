@@ -80,13 +80,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 }
             }
 
-            // Original expression and current node being semantically equivalent isn't enough when the original expression
-            // is a member access via instance reference (either implicit or explicit), the check only ensures that the expression
-            // and current node are both backed by the same member symbol. So in this case, in addition to SemanticEquivalence check,
+            // Original expression and current node being semantically equivalent isn't enough when the original
+            // expression
+            // is a member access via instance reference (either implicit or explicit), the check only ensures
+            // that the expression
+            // and current node are both backed by the same member symbol. So in this case, in addition to
+            // SemanticEquivalence check,
             // we also check if expression and current node are both instance member access.
             //
             // For example, even though the first `c` binds to a field and we are introducing a local for it,
-            // we don't want other references to that field to be replaced as well (i.e. the second `c` in the expression).
+            // we don't want other references to that field to be replaced as well (i.e. the second `c` in the
+            // expression).
             //
             //  class C
             //  {

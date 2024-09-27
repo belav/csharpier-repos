@@ -28,7 +28,8 @@ internal sealed unsafe class AesGcmAuthenticatedEncryptor
 
     // See CngGcmAuthenticatedEncryptor.CreateContextHeader for how these were precomputed
 
-    // 128 "00-01-00-00-00-10-00-00-00-0C-00-00-00-10-00-00-00-10-95-7C-50-FF-69-2E-38-8B-9A-D5-C7-68-9E-4B-9E-2B"
+    // 128
+    // "00-01-00-00-00-10-00-00-00-0C-00-00-00-10-00-00-00-10-95-7C-50-FF-69-2E-38-8B-9A-D5-C7-68-9E-4B-9E-2B"
     private static readonly byte[] AES_128_GCM_Header = new byte[]
     {
         0x00,
@@ -67,7 +68,8 @@ internal sealed unsafe class AesGcmAuthenticatedEncryptor
         0x2B,
     };
 
-    // 192 "00-01-00-00-00-18-00-00-00-0C-00-00-00-10-00-00-00-10-0D-AA-01-3A-95-0A-DA-2B-79-8F-5F-F2-72-FA-D3-63"
+    // 192
+    // "00-01-00-00-00-18-00-00-00-0C-00-00-00-10-00-00-00-10-0D-AA-01-3A-95-0A-DA-2B-79-8F-5F-F2-72-FA-D3-63"
     private static readonly byte[] AES_192_GCM_Header = new byte[]
     {
         0x00,
@@ -106,7 +108,8 @@ internal sealed unsafe class AesGcmAuthenticatedEncryptor
         0x63,
     };
 
-    // 256 00-01-00-00-00-20-00-00-00-0C-00-00-00-10-00-00-00-10-E7-DC-CE-66-DF-85-5A-32-3A-6B-B7-BD-7A-59-BE-45
+    // 256
+    // 00-01-00-00-00-20-00-00-00-0C-00-00-00-10-00-00-00-10-E7-DC-CE-66-DF-85-5A-32-3A-6B-B7-BD-7A-59-BE-45
     private static readonly byte[] AES_256_GCM_Header = new byte[]
     {
         0x00,
@@ -347,7 +350,8 @@ internal sealed unsafe class AesGcmAuthenticatedEncryptor
                     using var aes = new AesGcm(derivedKey, TAG_SIZE_IN_BYTES);
                     aes.Encrypt(nonce, plaintext, encrypted, tag);
 
-                    // At this point, retVal := { preBuffer | keyModifier | nonce | encryptedData | authenticationTag | postBuffer }
+                    // At this point, retVal := { preBuffer | keyModifier | nonce | encryptedData | authenticationTag |
+                    // postBuffer }
                     // And we're done!
                     return retVal;
                 }

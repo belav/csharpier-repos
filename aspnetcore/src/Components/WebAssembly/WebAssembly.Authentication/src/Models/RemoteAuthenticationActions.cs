@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>
-/// Represents the list of authentication actions that can be performed by the <see cref="RemoteAuthenticatorViewCore{TAuthenticationState}"/>.
+/// Represents the list of authentication actions that can be performed by the <see
+// cref="RemoteAuthenticatorViewCore{TAuthenticationState}"/>.
 /// </summary>
 public class RemoteAuthenticationActions
 {
@@ -54,7 +55,8 @@ public class RemoteAuthenticationActions
     public const string LogOutSucceeded = "logged-out";
 
     /// <summary>
-    /// Whether or not a given <paramref name="candidate"/> represents a given <see cref="RemoteAuthenticationActions"/>.
+    /// Whether or not a given <paramref name="candidate"/> represents a given <see
+    // cref="RemoteAuthenticationActions"/>.
     /// </summary>
     /// <param name="action">The <see cref="RemoteAuthenticationActions"/>.</param>
     /// <param name="candidate">The candidate.</param>

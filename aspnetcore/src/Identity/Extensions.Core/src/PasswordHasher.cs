@@ -18,20 +18,20 @@ namespace Microsoft.AspNetCore.Identity;
 public class PasswordHasher<TUser> : IPasswordHasher<TUser>
     where TUser : class
 {
-    /* =======================
-     * HASHED PASSWORD FORMATS
-     * =======================
-     *
-     * Version 2:
-     * PBKDF2 with HMAC-SHA1, 128-bit salt, 256-bit subkey, 1000 iterations.
-     * (See also: SDL crypto guidelines v5.1, Part III)
-     * Format: { 0x00, salt, subkey }
-     *
-     * Version 3:
-     * PBKDF2 with HMAC-SHA512, 128-bit salt, 256-bit subkey, 100000 iterations.
-     * Format: { 0x01, prf (UInt32), iter count (UInt32), salt length (UInt32), salt, subkey }
-     * (All UInt32s are stored big-endian.)
-     */
+/* =======================
+* HASHED PASSWORD FORMATS
+* =======================
+*
+* Version 2:
+* PBKDF2 with HMAC-SHA1, 128-bit salt, 256-bit subkey, 1000 iterations.
+* (See also: SDL crypto guidelines v5.1, Part III)
+* Format: { 0x00, salt, subkey }
+*
+* Version 3:
+* PBKDF2 with HMAC-SHA512, 128-bit salt, 256-bit subkey, 100000 iterations.
+* Format: { 0x01, prf (UInt32), iter count (UInt32), salt length (UInt32), salt, subkey }
+* (All UInt32s are stored big-endian.)
+*/
 
     private readonly PasswordHasherCompatibilityMode _compatibilityMode;
     private readonly int _iterCount;
@@ -74,7 +74,8 @@ public class PasswordHasher<TUser> : IPasswordHasher<TUser>
     }
 
 #if NETSTANDARD2_0 || NETFRAMEWORK
-    // Compares two byte arrays for equality. The method is specifically written so that the loop is not optimized.
+    // Compares two byte arrays for equality. The method is specifically written so that the loop is not
+    // optimized.
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     private static bool ByteArraysEqual(byte[] a, byte[] b)
     {
@@ -96,11 +97,13 @@ public class PasswordHasher<TUser> : IPasswordHasher<TUser>
 #endif
 
     /// <summary>
-    /// Returns a hashed representation of the supplied <paramref name="password"/> for the specified <paramref name="user"/>.
+    /// Returns a hashed representation of the supplied <paramref name="password"/> for the specified
+    // <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user whose password is to be hashed.</param>
     /// <param name="password">The password to hash.</param>
-    /// <returns>A hashed representation of the supplied <paramref name="password"/> for the specified <paramref name="user"/>.</returns>
+    /// <returns>A hashed representation of the supplied <paramref name="password"/> for the specified
+    // <paramref name="user"/>.</returns>
     public virtual string HashPassword(TUser user, string password)
     {
         ArgumentNullThrowHelper.ThrowIfNull(password);
@@ -177,12 +180,14 @@ public class PasswordHasher<TUser> : IPasswordHasher<TUser>
     }
 
     /// <summary>
-    /// Returns a <see cref="PasswordVerificationResult"/> indicating the result of a password hash comparison.
+    /// Returns a <see cref="PasswordVerificationResult"/> indicating the result of a password hash
+    // comparison.
     /// </summary>
     /// <param name="user">The user whose password should be verified.</param>
     /// <param name="hashedPassword">The hash value for a user's stored password.</param>
     /// <param name="providedPassword">The password supplied for comparison.</param>
-    /// <returns>A <see cref="PasswordVerificationResult"/> indicating the result of a password hash comparison.</returns>
+    /// <returns>A <see cref="PasswordVerificationResult"/> indicating the result of a password hash
+    // comparison.</returns>
     /// <remarks>Implementations of this method should be time consistent.</remarks>
     public virtual PasswordVerificationResult VerifyHashedPassword(
         TUser user,
@@ -205,7 +210,8 @@ public class PasswordHasher<TUser> : IPasswordHasher<TUser>
             case 0x00:
                 if (VerifyHashedPasswordV2(decodedHashedPassword, providedPassword))
                 {
-                    // This is an old password hash format - the caller needs to rehash if we're not running in an older compat mode.
+                    // This is an old password hash format - the caller needs to rehash if we're not running in an older
+                    // compat mode.
                     return (_compatibilityMode == PasswordHasherCompatibilityMode.IdentityV3)
                         ? PasswordVerificationResult.SuccessRehashNeeded
                         : PasswordVerificationResult.Success;

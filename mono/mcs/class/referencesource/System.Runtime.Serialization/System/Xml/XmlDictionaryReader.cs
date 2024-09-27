@@ -728,7 +728,8 @@ namespace System.Xml
         {
             byte[][] buffers = new byte[32][];
             byte[] buffer;
-            // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when converting text
+            // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when
+            // converting text
             int count = 384;
             int bufferCount = 0;
             int totalRead = 0;
@@ -916,7 +917,8 @@ namespace System.Xml
                 XmlExceptionHelper.ThrowUndefinedPrefix(this, prefix);
         }
 
-        /* string, bool, int, long, float, double, decimal, DateTime, base64, binhex, uniqueID, object, list*/
+        /* string, bool, int, long, float, double, decimal, DateTime, base64, binhex, uniqueID, object,
+        list*/
         public override string ReadElementContentAsString()
         {
             bool isEmptyElement = IsStartElement() && IsEmptyElement;

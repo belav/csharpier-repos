@@ -13,7 +13,8 @@ namespace Microsoft.Interop
     internal static class Comparers
     {
         /// <summary>
-        /// Comparer for an individual generated stub source as a syntax tree and the generated diagnostics for the stub.
+        /// Comparer for an individual generated stub source as a syntax tree and the generated diagnostics
+        // for the stub.
         /// </summary>
         public static readonly IEqualityComparer<(
             MemberDeclarationSyntax Syntax,
@@ -39,7 +40,8 @@ namespace Microsoft.Interop
         private readonly IEqualityComparer<T> _elementComparer;
 
         /// <summary>
-        /// Creates an <see cref="ImmutableArraySequenceEqualComparer{T}"/> with a custom comparer for the elements of the collection.
+        /// Creates an <see cref="ImmutableArraySequenceEqualComparer{T}"/> with a custom comparer for the
+        // elements of the collection.
         /// </summary>
         /// <param name="elementComparer">The comparer instance for the collection elements.</param>
         public ImmutableArraySequenceEqualComparer(IEqualityComparer<T> elementComparer)

@@ -60,7 +60,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             try
@@ -198,7 +199,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Raises the <see cref="E:Changed"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see
+        // cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance
+        // containing the event data.</param>
         protected virtual void OnChanged(ComposablePartCatalogChangeEventArgs e)
         {
             EventHandler<ComposablePartCatalogChangeEventArgs> changedEvent = this.Changed;
@@ -211,7 +214,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Raises the <see cref="E:Changing"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see
+        // cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance
+        // containing the event data.</param>
         protected virtual void OnChanging(ComposablePartCatalogChangeEventArgs e)
         {
             EventHandler<ComposablePartCatalogChangeEventArgs> changingEvent = this.Changing;
@@ -243,7 +248,8 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePartCatalogChangeEventArgs e
         )
         {
-            // the constructor for ComposablePartCatalogChangeEventArgs takes a snapshot of the arguments, so we don't have to
+            // the constructor for ComposablePartCatalogChangeEventArgs takes a snapshot of the arguments, so we
+            // don't have to
             var result = new ComposablePartCatalogChangeEventArgs(
                 e.AddedDefinitions.Where(this._filter),
                 e.RemovedDefinitions.Where(this._filter),

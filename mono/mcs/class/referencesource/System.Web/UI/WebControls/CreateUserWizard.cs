@@ -358,7 +358,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets or sets the text to be shown in the validation summary when the confirm password is empty.
+        ///     Gets or sets the text to be shown in the validation summary when the confirm password is
+        // empty.
         /// </devdoc>
         [
             Localizable(true),
@@ -845,7 +846,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets or sets the text to be shown in the validation summary when the email fails the reg exp.
+        ///     Gets or sets the text to be shown in the validation summary when the email fails the reg
+        // exp.
         /// </devdoc>
         [
             WebCategory("Validation"),
@@ -1229,7 +1231,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets or sets the name of the membership provider.  If null or empty, the default provider is used.
+        ///     Gets or sets the name of the membership provider.  If null or empty, the default provider is
+        // used.
         /// </devdoc>
         [
             WebCategory("Data"),
@@ -1371,7 +1374,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets or sets the text to be shown in the validation summary when the password fails the reg exp.
+        ///     Gets or sets the text to be shown in the validation summary when the password fails the reg
+        // exp.
         /// </devdoc>
         [
             WebCategory("Validation"),
@@ -1817,7 +1821,8 @@ namespace System.Web.UI.WebControls
         /// </devdoc>
         private void ApplyCommonCreateUserValues()
         {
-            // We need to use Internal for the DropDownList case where it won't fire a TextChanged for the first item
+            // We need to use Internal for the DropDownList case where it won't fire a TextChanged for the first
+            // item
             if (!String.IsNullOrEmpty(UserNameInternal))
             {
                 ITextControl userNameTextBox = (ITextControl)
@@ -2327,7 +2332,7 @@ namespace System.Web.UI.WebControls
                         UserNameInternal,
                         PasswordInternal,
                         MailDefinition,
-                        /*defaultSubject*/null, /*defaultBody*/
+/*defaultSubject*/null, /*defaultBody*/
                         null,
                         OnSendingMail,
                         OnSendMailError,

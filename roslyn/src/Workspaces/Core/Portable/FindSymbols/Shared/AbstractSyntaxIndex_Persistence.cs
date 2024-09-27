@@ -21,8 +21,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CodeAnalysis.Checksum.Create("38");
 
         /// <summary>
-        /// Cache of ParseOptions to a checksum for the <see cref="ParseOptions.PreprocessorSymbolNames"/> contained
-        /// within.  Useful so we don't have to continually reenumerate and regenerate the checksum given how rarely
+        /// Cache of ParseOptions to a checksum for the <see cref="ParseOptions.PreprocessorSymbolNames"/>
+        // contained
+        /// within.  Useful so we don't have to continually reenumerate and regenerate the checksum given
+        // how rarely
         /// these ever change.
         /// </summary>
         private static readonly ConditionalWeakTable<
@@ -50,13 +52,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             );
             var stringTable = SyntaxTreeIndex.GetStringTable(project);
 
-            // Try to read from the DB using either checksum.  If the writer determined there were no pp-directives,
+            // Try to read from the DB using either checksum.  If the writer determined there were no
+            // pp-directives,
             // then we may match it using textChecksum.  If there were pp directives, then we may match is using
-            // textAndDirectivesChecksum.  if we match neither that means that either the data is not in the persistence
-            // service, or it was written against genuinely different doc/pp-directive contents than before and we have
+            // textAndDirectivesChecksum.  if we match neither that means that either the data is not in the
+            // persistence
+            // service, or it was written against genuinely different doc/pp-directive contents than before and
+            // we have
             // to recompute and store again.
             //
-            // This does mean we have to potentially do two reads here.  However, that is cheap, and still nicer than
+            // This does mean we have to potentially do two reads here.  However, that is cheap, and still nicer
+            // than
             // trying to produce the index again in the common case where we don't have to.
             return await LoadAsync(
                         storageService,
@@ -131,24 +137,35 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         )
         {
             // Since we build the SyntaxTreeIndex from a SyntaxTree, we need our checksum to change any time the
-            // SyntaxTree could have changed.  Right now, that can only happen if the text of the document changes, or
-            // the preprocessor directives change.  So we get the checksums for both of those, and merge them together
+            // SyntaxTree could have changed.  Right now, that can only happen if the text of the document
+            // changes, or
+            // the preprocessor directives change.  So we get the checksums for both of those, and merge them
+            // together
             // to make the final checksum.
             //
-            // Note: this intentionally ignores *other* ParseOption changes.  This may look like it could cause us to
+            // Note: this intentionally ignores *other* ParseOption changes.  This may look like it could cause
+            // us to
             // get inaccurate results, but here's why it's ok.  The other ParseOption changes include:
             //
-            //  1. LanguageVersion changes.  It's ok to ignore that as for practically all language versions we don't
-            //     produce different trees.  And, while there are some lang versions that produce different trees (for
+            //  1. LanguageVersion changes.  It's ok to ignore that as for practically all language versions we
+            // don't
+            //     produce different trees.  And, while there are some lang versions that produce different
+            // trees (for
             //     example around how records are parsed), it's not realistic that the user would somehow have a
-            //     document that did *not* include pp directives, which somehow had one of those constructs *and*
-            //     somehow had the code produce different trees across different language versions.  e.g. no code out
-            //     there is realistically depending on `record` parsing as a method in C# X and as an actual record in
-            //     C# X+1.  If code is using constructs that are actually parsing differently downlevel, they will have
+            //     document that did *not* include pp directives, which somehow had one of those constructs
+            // *and*
+            //     somehow had the code produce different trees across different language versions.  e.g. no
+            // code out
+            //     there is realistically depending on `record` parsing as a method in C# X and as an actual
+            // record in
+            //     C# X+1.  If code is using constructs that are actually parsing differently downlevel, they
+            // will have
             //     pp directives to avoid even using that construct downlevel.
             //
-            //  2. DocComment parsing mode changes. However, in the IDE we always at least parse doc comments (though we
-            //     have options to control if we report errors in it or not).  Since we're always parsing, we're always
+            //  2. DocComment parsing mode changes. However, in the IDE we always at least parse doc comments
+            // (though we
+            //     have options to control if we report errors in it or not).  Since we're always parsing, we're
+            // always
             //     at least getting the same syntax tree shape at the end of the day.
             //
             // We also want the checksum to change any time our serialization format changes.  If the format has

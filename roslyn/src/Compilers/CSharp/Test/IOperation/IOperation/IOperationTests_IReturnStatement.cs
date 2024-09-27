@@ -159,7 +159,8 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // (6,26): error CS0664: Literal of type double cannot be implicitly converted to type 'float'; use an 'F' suffix to create a literal of this type
+                // (6,26): error CS0664: Literal of type double cannot be implicitly converted to type 'float'; use
+                // an 'F' suffix to create a literal of this type
                 //         /*<bind>*/return 0.0;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_LiteralDoubleCast, "0.0")
                     .WithArguments("F", "float")

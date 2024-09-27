@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +9,8 @@ namespace System.Web.Http.Controllers
 {
     /// <summary>
     /// Represents a container for services that can be specific to a controller.
-    /// This shadows the services from its parent <see cref="ServicesContainer"/>. A controller can either set a service here, or fall through
+    /// This shadows the services from its parent <see cref="ServicesContainer"/>. A controller can
+    // either set a service here, or fall through
     /// to the more global set of services.
     /// </summary>
     public class ControllerServices : ServicesContainer
@@ -99,7 +101,8 @@ namespace System.Web.Http.Controllers
                 // Copy parents list.
                 list = new List<object>(_parent.GetServices(serviceType));
 
-                // Copy into per-controller. If they're asking for the list, the expectation is that it's going to get mutated.
+                // Copy into per-controller. If they're asking for the list, the expectation is that it's going to
+                // get mutated.
                 _overrideMulti[serviceType] = list;
             }
             return list;

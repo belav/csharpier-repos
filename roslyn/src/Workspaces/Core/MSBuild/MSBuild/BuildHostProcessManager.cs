@@ -44,7 +44,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     }
 
     /// <summary>
-    /// Returns the best <see cref="RemoteBuildHost"/> to use for this project; if it picked a fallback option because the preferred kind was unavailable, that's returned too, otherwise null.
+    /// Returns the best <see cref="RemoteBuildHost"/> to use for this project; if it picked a fallback
+    // option because the preferred kind was unavailable, that's returned too, otherwise null.
     /// </summary>
     public async Task<(RemoteBuildHost, BuildHostProcessKind? PreferredKind)> GetBuildHostAsync(
         string projectFilePath,
@@ -73,8 +74,10 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
         var buildHost = await GetBuildHostAsync(neededBuildHostKind, cancellationToken)
             .ConfigureAwait(false);
 
-        // If this is a .NET Framework build host, we may not have have build tools installed and thus can't actually use it to build.
-        // Check if this is the case. Unlike the mono case, we have to actually ask the other process since MSBuildLocator only allows
+        // If this is a .NET Framework build host, we may not have have build tools installed and thus can't
+        // actually use it to build.
+        // Check if this is the case. Unlike the mono case, we have to actually ask the other process since
+        // MSBuildLocator only allows
         // us to discover VS instances in .NET Framework hosts right now.
         if (neededBuildHostKind == BuildHostProcessKind.NetFramework)
         {
@@ -122,7 +125,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
                 buildHostProcess = new BuildHostProcess(process, _loggerFactory);
                 buildHostProcess.Disconnected += BuildHostProcess_Disconnected;
 
-                // We've subscribed to Disconnected, but if the process crashed before that point we might have not seen it
+                // We've subscribed to Disconnected, but if the process crashed before that point we might have not
+                // seen it
                 if (process.HasExited)
                 {
                     throw new Exception(
@@ -149,7 +153,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
             using (await _gate.DisposableWaitAsync().ConfigureAwait(false))
             {
-                // Remove it from our map; it's possible it might have already been removed if we had more than one way we observed a disconnect.
+                // Remove it from our map; it's possible it might have already been removed if we had more than one
+                // way we observed a disconnect.
                 var existingProcess = _processes.SingleOrNull(p => p.Value == sender);
                 if (existingProcess.HasValue)
                 {
@@ -171,7 +176,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     {
         List<BuildHostProcess> processesToDispose;
 
-        // Copy the list out while we're in the lock, otherwise as we dispose these events will get fired, which
+        // Copy the list out while we're in the lock, otherwise as we dispose these events will get fired,
+        // which
         // may try to mutate the list while we're enumerating.
         using (await _gate.DisposableWaitAsync().ConfigureAwait(false))
         {
@@ -192,13 +198,16 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
                 : "dotnet",
         };
 
-        // We need to roll forward to the latest runtime, since the project may be using an SDK (or an SDK required runtime) newer than we ourselves built with.
-        // We set the environment variable since --roll-forward LatestMajor doesn't roll forward to prerelease SDKs otherwise.
+        // We need to roll forward to the latest runtime, since the project may be using an SDK (or an SDK
+        // required runtime) newer than we ourselves built with.
+        // We set the environment variable since --roll-forward LatestMajor doesn't roll forward to
+        // prerelease SDKs otherwise.
         processStartInfo.Environment["DOTNET_ROLL_FORWARD_TO_PRERELEASE"] = "1";
         AddArgument(processStartInfo, "--roll-forward");
         AddArgument(processStartInfo, "LatestMajor");
 
-        // The .NET Core build host is deployed as a content folder next to the application into the BuildHost-netcore path
+        // The .NET Core build host is deployed as a content folder next to the application into the
+        // BuildHost-netcore path
         var netCoreBuildHostPath = Path.Combine(
             Path.GetDirectoryName(typeof(BuildHostProcessManager).Assembly.Location)!,
             "BuildHost-netcore",
@@ -235,7 +244,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
     private static string GetPathToDotNetFrameworkBuildHost()
     {
-        // The .NET Framework build host is deployed as a content folder next to the application into the BuildHost-net472 path
+        // The .NET Framework build host is deployed as a content folder next to the application into the
+        // BuildHost-net472 path
         var netFrameworkBuildHost = Path.Combine(
             Path.GetDirectoryName(typeof(BuildHostProcessManager).Assembly.Location)!,
             "BuildHost-net472",
@@ -267,7 +277,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
             AddArgument(processStartInfo, _binaryLogPath);
         }
 
-        // MSBUILD_EXE_PATH is read by MSBuild to find related tasks and targets. We don't want this to be inherited by our build process, or otherwise
+        // MSBUILD_EXE_PATH is read by MSBuild to find related tasks and targets. We don't want this to be
+        // inherited by our build process, or otherwise
         // it might try to load targets that aren't appropriate for the build host.
         processStartInfo.Environment.Remove("MSBUILD_EXE_PATH");
 
@@ -280,7 +291,8 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
     private static void AddArgument(ProcessStartInfo processStartInfo, string argument)
     {
-        // On .NET Core 2.1 and higher we can just use ArgumentList to do the right thing; downlevel we need to manually
+        // On .NET Core 2.1 and higher we can just use ArgumentList to do the right thing; downlevel we need
+        // to manually
         // construct the string
 #if NET
         processStartInfo.ArgumentList.Add(argument);
@@ -300,13 +312,16 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
     private static BuildHostProcessKind GetKindForProject(string projectFilePath)
     {
-        // In Source Build builds, we don't have a net472 host at all, so the answer is simple. We unfortunately can't create a net472 build because there's no
+        // In Source Build builds, we don't have a net472 host at all, so the answer is simple. We
+        // unfortunately can't create a net472 build because there's no
         // reference assemblies to build against.
 #if DOTNET_BUILD_FROM_SOURCE
         return BuildHostProcessKind.NetCore;
 #else
 
-        // This implements the algorithm as stated in https://github.com/dotnet/project-system/blob/9a761848e0f330a45e349685a266fea00ac3d9c5/docs/opening-with-new-project-system.md;
+        // This implements the algorithm as stated in
+        //
+        // https://github.com/dotnet/project-system/blob/9a761848e0f330a45e349685a266fea00ac3d9c5/docs/opening-with-new-project-system.md;
         // we'll load the XML of the project directly, and inspect for certain elements.
         XDocument document;
 
@@ -323,8 +338,10 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
         }
         catch (Exception e) when (e is IOException or XmlException)
         {
-            // We were unable to read the file; rather than having callers of the build process manager have to deal with this special case
-            // we'll instead just give them a host that corresponds to what they are running as; we know that host unquestionably exists
+            // We were unable to read the file; rather than having callers of the build process manager have to
+            // deal with this special case
+            // we'll instead just give them a host that corresponds to what they are running as; we know that
+            // host unquestionably exists
             // and the rest of the code can deal with this cleanly.
 #if NET
             return BuildHostProcessKind.NetCore;
@@ -418,11 +435,13 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
 
         public async ValueTask DisposeAsync()
         {
-            // Ensure only one thing disposes; while we disconnect the process will go away, which will call us to do this again
+            // Ensure only one thing disposes; while we disconnect the process will go away, which will call us
+            // to do this again
             if (Interlocked.CompareExchange(ref _disposed, value: 1, comparand: 0) != 0)
                 return;
 
-            // We will call Shutdown in a try/catch; if the process has gone bad it's possible the connection is no longer functioning.
+            // We will call Shutdown in a try/catch; if the process has gone bad it's possible the connection is
+            // no longer functioning.
             try
             {
                 if (!_process.HasExited)

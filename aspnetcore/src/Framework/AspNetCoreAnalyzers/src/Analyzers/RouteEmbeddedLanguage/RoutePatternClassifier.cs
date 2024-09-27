@@ -96,6 +96,7 @@ internal sealed class RoutePatternClassifier : IAspNetCoreEmbeddedLanguageClassi
         {
             // Parameter name should look like a regular parameter.
             // ClassificationTypeNames.ParameterName isn't working so temporarily reuse color from JSON syntax:
+            //
             // https://github.com/dotnet/roslyn/blob/e1ee2f544a7a4f8d536278bed4e180c54919276e/src/Workspaces/Core/Portable/Classification/ClassificationTypeNames.cs#L181
             //
             // TODO: Fix properly with https://github.com/dotnet/aspnetcore/issues/46207
@@ -152,7 +153,8 @@ internal sealed class RoutePatternClassifier : IAspNetCoreEmbeddedLanguageClassi
         }
     }
 
-    // IAspNetCoreEmbeddedLanguageClassifier is internal and tests don't have access to it. Provide a way to get its assembly.
+    // IAspNetCoreEmbeddedLanguageClassifier is internal and tests don't have access to it. Provide a
+    // way to get its assembly.
     // Just for unit tests. Don't use in production code.
     internal static class TestAccessor
     {

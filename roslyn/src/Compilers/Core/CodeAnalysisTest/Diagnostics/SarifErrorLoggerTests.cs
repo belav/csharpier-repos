@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         {
             var descriptors = new[]
             {
-                // Toughest case: generation of TST001-001 collides with actual TST001-001 and must be bumped to TST001-002
+                // Toughest case: generation of TST001-001 collides with actual TST001-001 and must be bumped to
+                // TST001-002
                 new DiagnosticDescriptor(
                     "TST001-001",
                     "_TST001-001_",
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 // Descriptors with same values should not get distinct entries in log
                 new DiagnosticDescriptor("TST002", "", "", "", DiagnosticSeverity.Warning, true),
                 new DiagnosticDescriptor("TST002", "", "", "", DiagnosticSeverity.Warning, true),
-                // Changing only the message format (which we do not write out) should not produce a distinct entry in log.
+                // Changing only the message format (which we do not write out) should not produce a distinct entry
+                // in log.
                 new DiagnosticDescriptor(
                     "TST002",
                     "",

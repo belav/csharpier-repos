@@ -111,7 +111,8 @@ namespace System.Diagnostics.TraceSourceTests
         [InlineData(SourceLevels.Verbose, TraceEventType.Verbose, 1)]
         [InlineData(SourceLevels.All, TraceEventType.Critical, 1)]
         [InlineData(SourceLevels.All, TraceEventType.Verbose, 1)]
-        // NOTE: tests to cover a TraceEventType value that is not in CoreFX (0x20 == TraceEventType.Start in 4.5)
+        // NOTE: tests to cover a TraceEventType value that is not in CoreFX (0x20 == TraceEventType.Start
+        // in 4.5)
         [InlineData(SourceLevels.Verbose, (TraceEventType)0x20, 0)]
         [InlineData(SourceLevels.All, (TraceEventType)0x20, 1)]
         public void SwitchLevelTest(

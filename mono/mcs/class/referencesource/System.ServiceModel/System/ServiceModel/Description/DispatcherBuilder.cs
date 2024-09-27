@@ -625,7 +625,8 @@ namespace System.ServiceModel.Description
             {
                 Type channelType = supportedChannels[i];
 
-                // For SessionMode.Allowed or SessionMode.NotAllowed we will accept session-ful variants as well and adapt them
+                // For SessionMode.Allowed or SessionMode.NotAllowed we will accept session-ful variants as well and
+                // adapt them
                 if (channelType == typeof(IInputChannel))
                 {
                     if (binding.CanBuildChannelListener<IInputSessionChannel>(parameters))
@@ -666,7 +667,8 @@ namespace System.ServiceModel.Description
 
                 if (supportContextSession)
                 {
-                    // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the session management, so
+                    // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the
+                    // session management, so
                     // accept datagram variants if that is the case
                     if (channelType == typeof(IReplySessionChannel))
                     {
@@ -796,7 +798,8 @@ namespace System.ServiceModel.Description
             }
         }
 
-        //This method generates the BindingParameterCollection in the same way it is created during DispatcherBuilder.InitializeServiceHost
+        //This method generates the BindingParameterCollection in the same way it is created during
+        // DispatcherBuilder.InitializeServiceHost
         internal static BindingParameterCollection GetBindingParameters(
             ServiceHostBase serviceHost,
             Collection<ServiceEndpoint> endpoints

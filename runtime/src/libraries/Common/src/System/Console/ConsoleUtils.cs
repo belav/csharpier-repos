@@ -24,7 +24,8 @@ namespace System
                 // other threads, and that's ok; this is idempotent unless someone is currently changing
                 // the value of the relevant environment variables, in which case behavior here is undefined.
 
-                // By default, we emit ANSI color codes if output isn't redirected, and suppress them if output is redirected.
+                // By default, we emit ANSI color codes if output isn't redirected, and suppress them if output is
+                // redirected.
                 bool enabled = !Console.IsOutputRedirected;
 
                 if (enabled)

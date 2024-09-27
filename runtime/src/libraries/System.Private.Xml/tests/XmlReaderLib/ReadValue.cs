@@ -744,8 +744,10 @@ namespace System.Xml.Tests
             return TEST_FAIL;
         }
 
-        //[Variation("Call on invalid element content after 4k boundary", Pri = 1, Params = new object[] { false, 1024 * 4})]
-        //[Variation("Call on invalid element content after 64k boundary for Async", Pri = 1, Params = new object[] { true, 1024 * 64 })]
+        //[Variation("Call on invalid element content after 4k boundary", Pri = 1, Params = new object[] {
+        // false, 1024 * 4})]
+        //[Variation("Call on invalid element content after 64k boundary for Async", Pri = 1, Params = new
+        // object[] { true, 1024 * 64 })]
         public int TestReadChar21()
         {
             if (IsRoundTrippedReader())
@@ -1347,10 +1349,14 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        //[Variation("ReadValueChunk on an xmlns attribute", Param = "<foo xmlns='default'> <bar > id='1'/> </foo>")]
-        //[Variation("ReadValueChunk on an xmlns:k attribute", Param = "<k:foo xmlns:k='default'> <k:bar id='1'/> </k:foo>")]
-        //[Variation("ReadValueChunk on an xml:space attribute", Param = "<foo xml:space='default'> <bar > id='1'/> </foo>")]
-        //[Variation("ReadValueChunk on an xml:lang attribute", Param = "<foo xml:lang='default'> <bar > id='1'/> </foo>")]
+        //[Variation("ReadValueChunk on an xmlns attribute", Param = "<foo xmlns='default'> <bar > id='1'/>
+        // </foo>")]
+        //[Variation("ReadValueChunk on an xmlns:k attribute", Param = "<k:foo xmlns:k='default'> <k:bar
+        // id='1'/> </k:foo>")]
+        //[Variation("ReadValueChunk on an xml:space attribute", Param = "<foo xml:space='default'> <bar >
+        // id='1'/> </foo>")]
+        //[Variation("ReadValueChunk on an xml:lang attribute", Param = "<foo xml:lang='default'> <bar >
+        // id='1'/> </foo>")]
         public int TestReadValue_6()
         {
             string xml = (string)this.CurVariation.Param;

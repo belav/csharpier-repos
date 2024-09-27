@@ -44,7 +44,7 @@ namespace System.Windows.Forms
     [ToolboxItem("System.Windows.Forms.Design.AutoSizeToolboxItem," + Consts.AssemblySystem_Design)]
     public class LinkLabel : Label, IButtonControl
     {
-        /* Encapsulates a piece of text (regular or link)*/
+/* Encapsulates a piece of text (regular or link)*/
         internal class Piece
         {
             public string text;
@@ -79,8 +79,8 @@ namespace System.Windows.Forms
         private Link active_link;
         private Link hovered_link;
 
-        /* this is an index instead of a Link because we have
-         * to search through sorted links for the new one */
+/* this is an index instead of a Link because we have
+* to search through sorted links for the new one */
         private int focused_index;
 
         #region Events
@@ -464,15 +464,15 @@ namespace System.Windows.Forms
 
             Cursor = (hovered_link != null) ? OverrideCursor : Cursors.Default;
 
-            /* XXX this shouldn't be here.  the
-             * Link.Invalidate machinery should be enough,
-             * but it seems the piece regions don't
-             * contain the area with the underline.  this
-             * can be seen easily when you click on a link
-             * and the focus rectangle shows up (it's too
-             * far up), and also the bottom few pixels of
-             * a linklabel aren't active when it comes to
-             * hovering */
+/* XXX this shouldn't be here.  the
+* Link.Invalidate machinery should be enough,
+* but it seems the piece regions don't
+* contain the area with the underline.  this
+* can be seen easily when you click on a link
+* and the focus rectangle shows up (it's too
+* far up), and also the bottom few pixels of
+* a linklabel aren't active when it comes to
+* hovering */
             Invalidate();
         }
 
@@ -698,7 +698,7 @@ namespace System.Windows.Forms
             TabStop = (LinkArea.Length > 0);
             SetStyle(ControlStyles.Selectable, TabStop);
 
-            /* don't bother doing the rest if our handle hasn't been created */
+/* don't bother doing the rest if our handle hasn't been created */
             if (!IsHandleCreated)
                 return;
 
@@ -712,9 +712,9 @@ namespace System.Windows.Forms
 
                 if (new_link_start > current_end)
                 {
-                    /* create/push a piece
-                     * containing the text between
-                     * the previous/new link */
+/* create/push a piece
+* containing the text between
+* the previous/new link */
                     ArrayList text_pieces = CreatePiecesFromText(
                         current_end,
                         new_link_start - current_end,
@@ -723,8 +723,8 @@ namespace System.Windows.Forms
                     pieces_list.AddRange(text_pieces);
                 }
 
-                /* now create a group of pieces for
-                 * the new link (split up by \n's) */
+/* now create a group of pieces for
+* the new link (split up by \n's) */
                 ArrayList link_pieces = CreatePiecesFromText(
                     new_link_start,
                     sorted_links[l].Length,
@@ -782,7 +782,7 @@ namespace System.Windows.Forms
             Array.Sort(sorted_links, new LinkComparer());
         }
 
-        /* Check if the links overlap */
+/* Check if the links overlap */
         private void CheckLinks()
         {
             SortLinks();
@@ -1075,10 +1075,10 @@ namespace System.Windows.Forms
             public int Add(Link value)
             {
                 value.Owner = owner;
-                /* remove the default 0,-1 link */
+/* remove the default 0,-1 link */
                 if (IsDefault)
                 {
-                    /* don't call Clear() here to save the additional CreateLinkPieces */
+/* don't call Clear() here to save the additional CreateLinkPieces */
                     owner.links.Clear();
                 }
 

@@ -14,7 +14,8 @@ internal sealed class ConfigSectionClone
     {
         Value = configSection.Value;
 
-        // GetChildren() should return an empty IEnumerable instead of null, but we guard against it since it's a public interface.
+        // GetChildren() should return an empty IEnumerable instead of null, but we guard against it since
+        // it's a public interface.
         var children = configSection.GetChildren() ?? Enumerable.Empty<IConfigurationSection>();
         Children = children.ToDictionary(
             child => child.Key,

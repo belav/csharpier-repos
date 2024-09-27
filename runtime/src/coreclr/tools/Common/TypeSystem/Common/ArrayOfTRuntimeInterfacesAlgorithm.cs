@@ -18,7 +18,8 @@ namespace Internal.TypeSystem
         /// <summary>
         /// RuntimeInterfaces algorithm for array types which are similar to a generic type
         /// </summary>
-        /// <param name="arrayOfTType">Open type to instantiate to get the interfaces associated with an array.</param>
+        /// <param name="arrayOfTType">Open type to instantiate to get the interfaces associated with an
+        // array.</param>
         public ArrayOfTRuntimeInterfacesAlgorithm(MetadataType arrayOfTType)
         {
             _arrayOfTType = arrayOfTType;

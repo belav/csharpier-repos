@@ -202,9 +202,12 @@ namespace System.Net
 
         ///     Pipelined command resolution.
         ///     How this works:
-        ///     A list of commands that need to be sent to the FTP server are spliced together into an array,
-        ///     each command such STOR, PORT, etc, is sent to the server, then the response is parsed into a string,
-        ///     with the response, the delegate is called, which returns an instruction (either continue, stop, or read additional
+        ///     A list of commands that need to be sent to the FTP server are spliced together into an
+        // array,
+        ///     each command such STOR, PORT, etc, is sent to the server, then the response is parsed into a
+        // string,
+        ///     with the response, the delegate is called, which returns an instruction (either continue,
+        // stop, or read additional
         ///     responses from server).
         protected Stream? ContinueCommandPipeline()
         {
@@ -533,7 +536,8 @@ namespace System.Net
         }
 
         /// <summary>
-        /// This function is implemented in a derived class to determine whether a response is valid, and when it is complete.
+        /// This function is implemented in a derived class to determine whether a response is valid, and
+        // when it is complete.
         /// </summary>
         protected virtual bool CheckValid(
             ResponseDescription response,
@@ -556,7 +560,8 @@ namespace System.Net
 
             try
             {
-                // If a string of nonzero length was decoded from the buffered bytes after the last complete response, then we
+                // If a string of nonzero length was decoded from the buffered bytes after the last complete
+                // response, then we
                 // will use this string as our first string to append to the response StatusBuffer, and we will
                 // forego a Connection.Receive here.
                 if (_buffer.Length > 0)
@@ -613,13 +618,18 @@ namespace System.Net
         }
 
         /// <summary>
-        /// ReceiveCommandResponseCallback is the main "while loop" of the ReceiveCommandResponse function family.
-        /// In general, what is does is perform an EndReceive() to complete the previous retrieval of bytes from the
+        /// ReceiveCommandResponseCallback is the main "while loop" of the ReceiveCommandResponse function
+        // family.
+        /// In general, what is does is perform an EndReceive() to complete the previous retrieval of bytes
+        // from the
         /// server (unless it is using a buffered response)  It then processes what is received by using the
-        /// implementing class's CheckValid() function, as described above. If the response is complete, it returns the single complete
-        /// response in the GeneralResponseDescription created in BeginReceiveComamndResponse, and buffers the rest as described above.
+        /// implementing class's CheckValid() function, as described above. If the response is complete, it
+        // returns the single complete
+        /// response in the GeneralResponseDescription created in BeginReceiveComamndResponse, and buffers
+        // the rest as described above.
         ///
-        /// If the response is not complete, it issues another Connection.BeginReceive, with callback ReceiveCommandResponse2,
+        /// If the response is not complete, it issues another Connection.BeginReceive, with callback
+        // ReceiveCommandResponse2,
         /// so the action will continue at the next invocation of ReceiveCommandResponse2.
         /// </summary>
         private void ReceiveCommandResponseCallback(ReceiveState state, int bytesRead)
@@ -632,7 +642,8 @@ namespace System.Net
             {
                 int validThrough = state.ValidThrough; // passed to checkvalid
 
-                // If we have a Buffered response (ie data was received with the last response that was past the end of that response)
+                // If we have a Buffered response (ie data was received with the last response that was past the end
+                // of that response)
                 // deal with it as if we had just received it now instead of actually doing another receive
                 if (_buffer.Length > 0)
                 {
@@ -663,7 +674,8 @@ namespace System.Net
                         );
                     }
 
-                    // decode the bytes in the receive buffer into a string, append it to the statusbuffer, and invoke checkvalid.
+                    // decode the bytes in the receive buffer into a string, append it to the statusbuffer, and invoke
+                    // checkvalid.
                     // Decoder automatically takes care of caching partial codepoints at the end of a buffer.
 
                     char[] chars = new char[_decoder.GetCharCount(state.Buffer, 0, bytesRead)];
@@ -681,7 +693,8 @@ namespace System.Net
                         );
                     }
 
-                    // If the response is complete, then determine how many characters are left over...these bytes need to be set into Buffer.
+                    // If the response is complete, then determine how many characters are left over...these bytes need
+                    // to be set into Buffer.
                     if (completeLength >= 0)
                     {
                         int unusedChars = state.Resp.StatusBuffer.Length - completeLength;
@@ -695,9 +708,11 @@ namespace System.Net
                     }
                 }
 
-                // Now, in general, if the response is not complete, update the "valid through" length for the efficiency of checkValid,
+                // Now, in general, if the response is not complete, update the "valid through" length for the
+                // efficiency of checkValid,
                 // and perform the next receive.
-                // Note that there may NOT be bytes in the beginning of the receive buffer (even if there were partial characters left over after the
+                // Note that there may NOT be bytes in the beginning of the receive buffer (even if there were
+                // partial characters left over after the
                 // last encoding), because they get tracked in the Decoder.
                 if (completeLength < 0)
                 {
@@ -741,7 +756,8 @@ namespace System.Net
             // Otherwise, we have a complete response.
             string responseString = state.Resp.StatusBuffer.ToString();
             state.Resp.StatusDescription = responseString.Substring(0, completeLength);
-            // Set the StatusDescription to the complete part of the response.  Note that the Buffer has already been taken care of above.
+            // Set the StatusDescription to the complete part of the response.  Note that the Buffer has already
+            // been taken care of above.
 
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(

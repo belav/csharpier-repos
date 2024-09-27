@@ -65,9 +65,11 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets or sets how the object's properties with null values are handled during serialization and deserialization.
+        /// Gets or sets how the object's properties with null values are handled during serialization and
+        // deserialization.
         /// </summary>
-        /// <value>How the object's properties with null values are handled during serialization and deserialization.</value>
+        /// <value>How the object's properties with null values are handled during serialization and
+        // deserialization.</value>
         public NullValueHandling ItemNullValueHandling
         {
             get => _itemNullValueHandling ?? default;
@@ -92,7 +94,8 @@ namespace Newtonsoft.Json
         public JsonObjectAttribute() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class with the specified member serialization.
+        /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class with the specified
+        // member serialization.
         /// </summary>
         /// <param name="memberSerialization">The member serialization.</param>
         public JsonObjectAttribute(MemberSerialization memberSerialization)
@@ -101,7 +104,8 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class with the specified container Id.
+        /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class with the specified
+        // container Id.
         /// </summary>
         /// <param name="id">The container Id.</param>
         public JsonObjectAttribute(string id)

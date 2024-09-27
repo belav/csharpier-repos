@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     }
                 )
                 {
-                    // We have either `var x = (stackalloc byte[8])` or `Span<byte> x = (stackalloc byte[8])`.  The former
+                    // We have either `var x = (stackalloc byte[8])` or `Span<byte> x = (stackalloc byte[8])`.  The
+                    // former
                     // is not safe to remove. the latter is.
                     if (
                         semanticModel
@@ -354,7 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return false;
             }
 
-            // (condition ? ref a : ref b ) = SomeValue, parenthesis can't be removed for when conditional expression appears at left
+            // (condition ? ref a : ref b ) = SomeValue, parenthesis can't be removed for when conditional
+            // expression appears at left
             // This syntax is only allowed since C# 7.2
             if (
                 expression.IsKind(SyntaxKind.ConditionalExpression)
@@ -386,7 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             CancellationToken cancellationToken
         )
         {
-            // With cases like: `if (x is (Y))` then we cannot remove the parens if it would make Y now bind to a type
+            // With cases like: `if (x is (Y))` then we cannot remove the parens if it would make Y now bind to
+            // a type
             // instead of a constant.
             if (node.Parent is not ConstantPatternSyntax { Parent: IsPatternExpressionSyntax })
                 return false;
@@ -445,7 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                     foreach (var nodeOrToken in expression.ChildNodesAndTokens())
                     {
-                        // Note: There's no need drill into other parenthesized expressions, since any colons in them would be unambiguous.
+                        // Note: There's no need drill into other parenthesized expressions, since any colons in them would
+                        // be unambiguous.
                         if (
                             nodeOrToken.IsNode
                             && !nodeOrToken.IsKind(SyntaxKind.ParenthesizedExpression)
@@ -552,13 +556,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         return parentBinaryExpression.Left == node;
                     }
 
-                    // All other binary operators are left associative; removing parens from the RHS changes the association.
+                    // All other binary operators are left associative; removing parens from the RHS changes the
+                    // association.
                     return parentBinaryExpression.Right == node;
                 }
 
                 if (parentExpression is AssignmentExpressionSyntax parentAssignmentExpression)
                 {
-                    // Assignment expressions are right associative; removing parens from the LHS changes the association.
+                    // Assignment expressions are right associative; removing parens from the LHS changes the
+                    // association.
                     return parentAssignmentExpression.Left == node;
                 }
 

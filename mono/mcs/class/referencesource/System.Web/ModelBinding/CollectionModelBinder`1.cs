@@ -6,7 +6,8 @@
 
     public class CollectionModelBinder<TElement> : IModelBinder
     {
-        // Used when the ValueProvider contains the collection to be bound as multiple elements, e.g. foo[0], foo[1].
+        // Used when the ValueProvider contains the collection to be bound as multiple elements, e.g.
+        // foo[0], foo[1].
         private static List<TElement> BindComplexCollection(
             ModelBindingExecutionContext modelBindingExecutionContext,
             ModelBindingContext bindingContext
@@ -122,7 +123,8 @@
             return retVal;
         }
 
-        // Used when the ValueProvider contains the collection to be bound as a single element, e.g. the raw value
+        // Used when the ValueProvider contains the collection to be bound as a single element, e.g. the raw
+        // value
         // is [ "1", "2" ] and needs to be converted to an int[].
         internal static List<TElement> BindSimpleCollection(
             ModelBindingExecutionContext modelBindingExecutionContext,

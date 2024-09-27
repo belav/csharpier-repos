@@ -46,7 +46,8 @@ namespace System.Messaging
         "System.Messaging.Design.QueuePathEditor",
         "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
     )]
-    //	[Designer ("Microsoft.VisualStudio.Install.MessageQueueInstallableComponentDesigner, " + Consts.AssemblyMicrosoft_VisualStudio)]
+    //	[Designer ("Microsoft.VisualStudio.Install.MessageQueueInstallableComponentDesigner, " +
+    // Consts.AssemblyMicrosoft_VisualStudio)]
     [InstallerType(typeof(MessageQueueInstaller))]
     [DefaultEvent("ReceiveCompleted")]
     public class MessageQueue : Component, IEnumerable

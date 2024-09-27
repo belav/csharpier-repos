@@ -20,7 +20,8 @@ namespace System.Web.UI.WebControls
     public class CommandField : ButtonFieldBase
     {
         /// <devdoc>
-        /// <para>Initializes a new instance of an <see cref='System.Web.UI.WebControls.CommandField'/> class.</para>
+        /// <para>Initializes a new instance of an <see cref='System.Web.UI.WebControls.CommandField'/>
+        // class.</para>
         /// </devdoc>
         public CommandField() { }
 
@@ -854,7 +855,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// <para>Override with an empty body if the field's controls all support callback.
-        ///  Otherwise, override and throw a useful error message about why the field can't support callbacks.</para>
+        ///  Otherwise, override and throw a useful error message about why the field can't support
+        // callbacks.</para>
         /// </devdoc>
         public override void ValidateSupportsCallback()
         {

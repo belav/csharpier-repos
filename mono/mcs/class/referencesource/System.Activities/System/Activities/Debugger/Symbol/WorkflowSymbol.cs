@@ -14,7 +14,8 @@ namespace System.Activities.Debugger.Symbol
     using System.Text;
 
     // Represent debug symbol of a workflow tree (similar to pdb file).
-    // It contains the absolute path of the xaml file and the location of each activity in the workflow tree.
+    // It contains the absolute path of the xaml file and the location of each activity in the workflow
+    // tree.
     // This is used to instrument the workflow without having access to the original xaml file.
     public class WorkflowSymbol
     {

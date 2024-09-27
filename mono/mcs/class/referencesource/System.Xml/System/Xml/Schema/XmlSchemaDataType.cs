@@ -20,19 +20,22 @@ namespace System.Xml.Schema
     /// </devdoc>
     public abstract class XmlSchemaDatatype
     {
-        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.ValueType"]/*' />
+        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.ValueType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public abstract Type ValueType { get; }
 
-        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.TokenizedType"]/*' />
+        /// <include file='doc\XmlSchemaDatatype.uex'
+        // path='docs/doc[@for="XmlSchemaDatatype.TokenizedType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public abstract XmlTokenizedType TokenizedType { get; }
 
-        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.ParseValue"]/*' />
+        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.ParseValue"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -51,7 +54,8 @@ namespace System.Xml.Schema
             get { return XmlSchemaDatatypeVariety.Atomic; }
         }
 
-        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.ChangeType1"]/*' />
+        /// <include file='doc\XmlSchemaDatatype.uex'
+        // path='docs/doc[@for="XmlSchemaDatatype.ChangeType1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -68,7 +72,8 @@ namespace System.Xml.Schema
             return ValueConverter.ChangeType(value, targetType);
         }
 
-        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.ChangeType2"]/*' />
+        /// <include file='doc\XmlSchemaDatatype.uex'
+        // path='docs/doc[@for="XmlSchemaDatatype.ChangeType2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -93,7 +98,8 @@ namespace System.Xml.Schema
             return ValueConverter.ChangeType(value, targetType, namespaceResolver);
         }
 
-        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.TypeCode"]/*' />
+        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.TypeCode"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -102,7 +108,8 @@ namespace System.Xml.Schema
             get { return XmlTypeCode.None; }
         }
 
-        /// <include file='doc\XmlSchemaDatatype.uex' path='docs/doc[@for="XmlSchemaDatatype.IsDerivedFrom"]/*' />
+        /// <include file='doc\XmlSchemaDatatype.uex'
+        // path='docs/doc[@for="XmlSchemaDatatype.IsDerivedFrom"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

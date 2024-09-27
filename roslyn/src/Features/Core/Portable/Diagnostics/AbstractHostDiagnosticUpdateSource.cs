@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ProjectId projectId
         )
         {
-            // Perf: if we don't have any diagnostics at all, just return right away; this avoids loading the analyzers
+            // Perf: if we don't have any diagnostics at all, just return right away; this avoids loading the
+            // analyzers
             // which may have not been loaded if you didn't do too much in your session.
             if (_analyzerHostDiagnosticsMap.Count == 0)
                 return;

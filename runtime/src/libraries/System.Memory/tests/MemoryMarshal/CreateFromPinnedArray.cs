@@ -207,7 +207,8 @@ namespace System.SpanTests
         [Fact]
         public static void CreateFromPinnedArrayWithStartAndLengthBothEqual()
         {
-            // Valid for start to equal the array length. This returns an empty memory that starts "just past the array."
+            // Valid for start to equal the array length. This returns an empty memory that starts "just past
+            // the array."
             int[] a = { 91, 92, 93 };
             Memory<int> pinnedMemory = MemoryMarshal.CreateFromPinnedArray(a, 3, 0);
             pinnedMemory.Validate();

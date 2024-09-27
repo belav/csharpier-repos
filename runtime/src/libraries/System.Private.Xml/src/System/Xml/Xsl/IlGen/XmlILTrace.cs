@@ -21,7 +21,8 @@ namespace System.Xml.Xsl.IlGen
         private const int MAX_REWRITES = 200;
 
         /// <summary>
-        /// Check environment variable in order to determine whether to write out trace files.  This really should be a
+        /// Check environment variable in order to determine whether to write out trace files.  This really
+        // should be a
         /// check of the configuration file, but System.Xml does not yet have a good tracing story.
         /// </summary>
         private static volatile string? s_dirName;
@@ -32,7 +33,8 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         public static bool IsEnabled
         {
-            // SxS: This property poses potential SxS issue. However the class is used only in debug builds (it won't
+            // SxS: This property poses potential SxS issue. However the class is used only in debug builds (it
+            // won't
             // get compiled into ret build) so it's OK to suppress the SxS warning.
             get
             {
@@ -56,7 +58,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// If tracing is enabled, this method will delete the contents of "filename" in preparation for append
+        /// If tracing is enabled, this method will delete the contents of "filename" in preparation for
+        // append
         /// operations.
         /// </summary>
         public static void PrepareTraceWriter(string fileName)
@@ -68,7 +71,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// If tracing is enabled, this method will open a TextWriter over "fileName" and return it.  Otherwise,
+        /// If tracing is enabled, this method will open a TextWriter over "fileName" and return it.
+        // Otherwise,
         /// null will be returned.
         /// </summary>
         public static TextWriter? GetTraceWriter(string fileName)

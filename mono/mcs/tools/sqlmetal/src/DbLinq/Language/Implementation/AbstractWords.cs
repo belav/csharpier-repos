@@ -249,7 +249,8 @@ namespace DbLinq.Language.Implementation
         }
 
         /// <summary>
-        /// Extracts words from a "word magma" by splitting the string on every position and keep the best score.
+        /// Extracts words from a "word magma" by splitting the string on every position and keep the best
+        // score.
         /// The method is recursive
         /// </summary>
         /// <param name="magma">The magma.</param>

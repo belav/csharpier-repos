@@ -12,7 +12,7 @@ public class Item
     public string ItemID;
     public decimal ItemPrice;
 
-    /* Needed so it can be serialized */
+/* Needed so it can be serialized */
     public Item() { }
 
     public Item(string id, decimal price)

@@ -8,7 +8,8 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization
 {
     /// <summary>
-    /// Base class for dictionary converters such as IDictionary, Hashtable, Dictionary{,} IDictionary{,} and SortedList.
+    /// Base class for dictionary converters such as IDictionary, Hashtable, Dictionary{,}
+    // IDictionary{,} and SortedList.
     /// </summary>
     internal abstract class JsonDictionaryConverter<TDictionary>
         : JsonResumableConverter<TDictionary>
@@ -27,7 +28,8 @@ namespace System.Text.Json.Serialization
     }
 
     /// <summary>
-    /// Base class for dictionary converters such as IDictionary, Hashtable, Dictionary{,} IDictionary{,} and SortedList.
+    /// Base class for dictionary converters such as IDictionary, Hashtable, Dictionary{,}
+    // IDictionary{,} and SortedList.
     /// </summary>
     internal abstract class JsonDictionaryConverter<TDictionary, TKey, TValue>
         : JsonDictionaryConverter<TDictionary>
@@ -44,7 +46,8 @@ namespace System.Text.Json.Serialization
         );
 
         /// <summary>
-        /// When overridden, converts the temporary collection held in state.Current.ReturnValue to the final collection.
+        /// When overridden, converts the temporary collection held in state.Current.ReturnValue to the
+        // final collection.
         /// This is used with immutable collections.
         /// </summary>
         protected virtual void ConvertCollection(
@@ -53,7 +56,8 @@ namespace System.Text.Json.Serialization
         ) { }
 
         /// <summary>
-        /// When overridden, create the collection. It may be a temporary collection or the final collection.
+        /// When overridden, create the collection. It may be a temporary collection or the final
+        // collection.
         /// </summary>
         protected virtual void CreateCollection(
             ref Utf8JsonReader reader,
@@ -227,7 +231,8 @@ namespace System.Text.Json.Serialization
                     state.Current.ObjectState = StackFrameObjectState.ReadMetadata;
                 }
 
-                // Dispatch to any polymorphic converters: should always be entered regardless of ObjectState progress
+                // Dispatch to any polymorphic converters: should always be entered regardless of ObjectState
+                // progress
                 if (
                     (state.Current.MetadataPropertyNames & MetadataPropertyName.Type) != 0
                     && state.Current.PolymorphicSerializationState

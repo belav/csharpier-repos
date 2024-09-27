@@ -30,7 +30,8 @@ namespace System.Data.Common
         internal const bool OmitOracleConnectionName = false;
 
         // SqlClient
-        //internal const ApplicationIntent ApplicationIntent = System.Data.SqlClient.ApplicationIntent.ReadWrite;
+        //internal const ApplicationIntent ApplicationIntent =
+        // System.Data.SqlClient.ApplicationIntent.ReadWrite;
         internal const string ApplicationName = ".Net SqlClient Data Provider";
         internal const bool AsynchronousProcessing = false;
         internal const string AttachDBFilename = "";
@@ -64,8 +65,10 @@ namespace System.Data.Common
         internal const string TransactionBinding = "Implicit Unbind";
         internal const int ConnectRetryCount = 1;
         internal const int ConnectRetryInterval = 10;
-        //internal static readonly SqlAuthenticationMethod Authentication = SqlAuthenticationMethod.NotSpecified;
-        //internal static readonly SqlConnectionColumnEncryptionSetting ColumnEncryptionSetting = SqlConnectionColumnEncryptionSetting.Disabled;
+        //internal static readonly SqlAuthenticationMethod Authentication =
+        // SqlAuthenticationMethod.NotSpecified;
+        //internal static readonly SqlConnectionColumnEncryptionSetting ColumnEncryptionSetting =
+        // SqlConnectionColumnEncryptionSetting.Disabled;
         //internal const PoolBlockingPeriod PoolBlockingPeriod = SqlClient.PoolBlockingPeriod.Auto;
     }
 

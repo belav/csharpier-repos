@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal static class ObsoleteAttributeHelpers
     {
         /// <summary>
-        /// Initialize the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData. This can be
-        /// done for Metadata symbol easily whereas trying to do this for source symbols could result in cycles.
+        /// Initialize the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData.
+        // This can be
+        /// done for Metadata symbol easily whereas trying to do this for source symbols could result in
+        // cycles.
         /// </summary>
         internal static void InitializeObsoleteDataFromMetadata(
             ref ObsoleteAttributeData data,
@@ -53,8 +55,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Get the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData. This can be
-        /// done for Metadata symbol easily whereas trying to do this for source symbols could result in cycles.
+        /// Get the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData. This
+        // can be
+        /// done for Metadata symbol easily whereas trying to do this for source symbols could result in
+        // cycles.
         /// </summary>
         internal static ObsoleteAttributeData GetObsoleteDataFromMetadata(
             EntityHandle token,
@@ -75,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// This method checks to see if the given symbol is Obsolete or if any symbol in the parent hierarchy is Obsolete.
+        /// This method checks to see if the given symbol is Obsolete or if any symbol in the parent
+        // hierarchy is Obsolete.
         /// </summary>
         /// <returns>
         /// True if some symbol in the parent hierarchy is known to be Obsolete. Unknown if any
@@ -269,7 +274,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
                 var errorCode = (message: data.Message, isError: data.IsError, isColInit) switch
                 {
-                    // dev11 had a bug in this area (i.e. always produce a warning when there's no message) and we have to match it.
+                    // dev11 had a bug in this area (i.e. always produce a warning when there's no message) and we have
+                    // to match it.
                     (message: null, isError: _, isColInit: true) =>
                         ErrorCode.WRN_DeprecatedCollectionInitAdd,
                     (message: null, isError: _, isColInit: false) => ErrorCode.WRN_DeprecatedSymbol,

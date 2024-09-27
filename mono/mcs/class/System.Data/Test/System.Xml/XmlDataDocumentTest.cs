@@ -450,7 +450,8 @@ namespace MonoTests.System.Data.Xml
             string substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
 
-            //Assert.AreEqual ("<?xml version=\"1.0\" encoding=\"utf-16\" standalone=\"yes\"?>", substring, "#B01");
+            //Assert.AreEqual ("<?xml version=\"1.0\" encoding=\"utf-16\" standalone=\"yes\"?>", substring,
+            // "#B01");
 
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);

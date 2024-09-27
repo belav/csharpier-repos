@@ -132,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             //
             //     object? o = new |
             //
-            // We strip the top-level nullability so we don't end up suggesting "new object?" here. Nested nullability would still
+            // We strip the top-level nullability so we don't end up suggesting "new object?" here. Nested
+            // nullability would still
             // be generated.
             if (symbol is ITypeSymbol typeSymbol)
             {

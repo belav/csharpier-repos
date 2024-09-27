@@ -29,11 +29,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         /// <summary>
         /// Cache the symbol tree infos for assembly symbols produced from a particular <see
-        /// cref="PortableExecutableReference"/>. Generating symbol trees for metadata can be expensive (in large
-        /// metadata cases).  And it's common for us to have many threads to want to search the same metadata
-        /// simultaneously. As such, we use an AsyncLazy to compute the value that can be shared among all callers.
+        /// cref="PortableExecutableReference"/>. Generating symbol trees for metadata can be expensive (in
+        // large
+        /// metadata cases).  And it's common for us to have many threads to want to search the same
+        // metadata
+        /// simultaneously. As such, we use an AsyncLazy to compute the value that can be shared among all
+        // callers.
         /// <para>
-        /// We store this keyed off of the <see cref="Checksum"/> produced by <see cref="GetMetadataChecksum"/>.  This
+        /// We store this keyed off of the <see cref="Checksum"/> produced by <see
+        // cref="GetMetadataChecksum"/>.  This
         /// ensures that
         /// </para>
         /// </summary>
@@ -43,13 +47,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         > s_peReferenceToInfo = new();
 
         /// <summary>
-        /// Similar to <see cref="s_peReferenceToInfo"/> except that this caches based on metadata id.  The primary
+        /// Similar to <see cref="s_peReferenceToInfo"/> except that this caches based on metadata id.  The
+        // primary
         /// difference here is that you can have the same MetadataId from two different <see
-        /// cref="PortableExecutableReference"/>s, while having different checksums.  For example, if the aliases of a
+        /// cref="PortableExecutableReference"/>s, while having different checksums.  For example, if the
+        // aliases of a
         /// <see cref="PortableExecutableReference"/> are changed (see <see
-        /// cref="PortableExecutableReference.WithAliases(IEnumerable{string})"/>, then it will have a different
-        /// checksum, but same metadata ID.  As such, we can use this table to ensure we only do the expensive
-        /// computation of the <see cref="SymbolTreeInfo"/> once per <see cref="MetadataId"/>, but we may then have to
+        /// cref="PortableExecutableReference.WithAliases(IEnumerable{string})"/>, then it will have a
+        // different
+        /// checksum, but same metadata ID.  As such, we can use this table to ensure we only do the
+        // expensive
+        /// computation of the <see cref="SymbolTreeInfo"/> once per <see cref="MetadataId"/>, but we may
+        // then have to
         /// make a copy of it with a new <see cref="Checksum"/> if the checksums differ.
         /// </summary>
         private static readonly ConditionalWeakTable<
@@ -107,7 +116,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Note:  will never return null;
         /// </summary>
         /// <param name="checksum">Optional checksum for the <paramref name="reference"/> (produced by <see
-        /// cref="GetMetadataChecksum"/>).  Can be provided if already computed.  If not provided it will be computed
+        /// cref="GetMetadataChecksum"/>).  Can be provided if already computed.  If not provided it will be
+        // computed
         /// and used for the <see cref="SymbolTreeInfo"/>.</param>
         [PerformanceSensitive(
             "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834",
@@ -134,7 +144,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Note:  will never return null;
         /// </summary>
         /// <param name="checksum">Optional checksum for the <paramref name="reference"/> (produced by <see
-        /// cref="GetMetadataChecksum"/>).  Can be provided if already computed.  If not provided it will be computed
+        /// cref="GetMetadataChecksum"/>).  Can be provided if already computed.  If not provided it will be
+        // computed
         /// and used for the <see cref="SymbolTreeInfo"/>.</param>
         [PerformanceSensitive(
             "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834",
@@ -179,12 +190,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                // Important: this captured async lazy may live a long time *without* computing the final results. As
-                // such, it is important that it not capture any large state.  For example, it should not hold onto a
+                // Important: this captured async lazy may live a long time *without* computing the final results.
+                // As
+                // such, it is important that it not capture any large state.  For example, it should not hold onto
+                // a
                 // Solution instance.
                 //
                 // this is keyed per reference, so that have unique SymbolTreeInfo's per reference with their own
-                // correct checksum.  Ensuring we only compute this once per *Metadata* instance though is handled below in
+                // correct checksum.  Ensuring we only compute this once per *Metadata* instance though is handled
+                // below in
                 // CreateMetadataSymbolTreeInfoAsync
                 var asyncLazy = s_peReferenceToInfo.GetValue(
                     reference,
@@ -239,9 +253,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
 
-                // we got the info that was originally computed against this particular metadata-id.  However, the same
-                // ID could be reused across different PEReferences/checksums (for example, a PEReference whose aliases
-                // were changed).  As such, if this doesn't correspond to the same checksum, make a copy of this tree
+                // we got the info that was originally computed against this particular metadata-id.  However, the
+                // same
+                // ID could be reused across different PEReferences/checksums (for example, a PEReference whose
+                // aliases
+                // were changed).  As such, if this doesn't correspond to the same checksum, make a copy of this
+                // tree
                 // specific to the checksum we were asked for.
                 return metadataIdSymbolTreeInfo.WithChecksum(checksum);
             }
@@ -291,8 +308,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             "_Metadata_" + reference.FilePath;
 
         /// <summary>
-        /// Loads any info we have for this reference from our persistence store.  Will succeed regardless of the
-        /// checksum of the <paramref name="reference"/>.  Should only be used by clients that are ok with potentially
+        /// Loads any info we have for this reference from our persistence store.  Will succeed regardless
+        // of the
+        /// checksum of the <paramref name="reference"/>.  Should only be used by clients that are ok with
+        // potentially
         /// stale data.
         /// </summary>
         public static Task<SymbolTreeInfo?> LoadAnyInfoForMetadataReferenceAsync(
@@ -562,7 +581,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             var signature = decoder.DecodeMethodSignature(ref blob);
 
                             // It'd be good if we don't need to go through all parameters and make unnecessary allocations.
-                            // However, this is not possible with meatadata reader API right now (although it's possible by copying code from meatadata reader implementaion)
+                            // However, this is not possible with meatadata reader API right now (although it's possible by
+                            // copying code from meatadata reader implementaion)
                             if (signature.ParameterTypes.Length > 0)
                             {
                                 _containsExtensionsMethod = true;
@@ -999,7 +1019,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 SharedPools.Default<MetadataNode>();
 
             /// <summary>
-            /// Represent this as non-null because that will be true when this is not in a pool and it is being used by
+            /// Represent this as non-null because that will be true when this is not in a pool and it is being
+            // used by
             /// other services.
             /// </summary>
             public string Name { get; private set; } = null!;

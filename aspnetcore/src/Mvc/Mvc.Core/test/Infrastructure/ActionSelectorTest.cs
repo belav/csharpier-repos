@@ -212,7 +212,8 @@ public class ActionSelectorTest
         Assert.Empty(candidates);
     }
 
-    // In this context `CaseSensitiveMatch` means that the input route values exactly match one of the action
+    // In this context `CaseSensitiveMatch` means that the input route values exactly match one of the
+    // action
     // descriptor's route values in terms of casing. This is important because we optimize for this case
     // in the implementation.
     [Fact]

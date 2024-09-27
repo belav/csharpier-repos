@@ -10,15 +10,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Provides a simple API for configuring a one-to-one relationship.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceReferenceBuilder(
@@ -29,10 +34,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         : base(declaringEntityType, relatedEntityType, foreignKey) { }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected ReferenceReferenceBuilder(
@@ -46,12 +55,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         : base(builder, oldBuilder, inverted, foreignKeySet, principalKeySet, requiredSet) { }
 
     /// <summary>
-    ///     Adds or updates an annotation on the relationship. If an annotation with the key specified in
+    ///     Adds or updates an annotation on the relationship. If an annotation with the key specified
+    // in
     ///     <paramref name="annotation" /> already exists its value will be updated.
     /// </summary>
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual ReferenceReferenceBuilder HasAnnotation(string annotation, object? value)
     {
         Check.NotEmpty(annotation, nameof(annotation));
@@ -66,27 +77,35 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         If the specified property name(s) do not exist on the entity type then a new shadow state
+    ///         If the specified property name(s) do not exist on the entity type then a new shadow
+    // state
     ///         property(s) will be added to serve as the foreign key. A shadow state property is one
-    ///         that does not have a corresponding property in the entity class. The current value for the
-    ///         property is stored in the <see cref="ChangeTracker" /> rather than being stored in instances
+    ///         that does not have a corresponding property in the entity class. The current value for
+    // the
+    ///         property is stored in the <see cref="ChangeTracker" /> rather than being stored in
+    // instances
     ///         of the entity class.
     ///     </para>
     ///     <para>
-    ///         If <see cref="HasPrincipalKey(Type,string[])" /> is not specified, then an attempt will be made to
-    ///         match the data type and order of foreign key properties against the primary key of the principal
-    ///         entity type. If they do not match, new shadow state properties that form a unique index will be
+    ///         If <see cref="HasPrincipalKey(Type,string[])" /> is not specified, then an attempt will
+    // be made to
+    ///         match the data type and order of foreign key properties against the primary key of the
+    // principal
+    ///         entity type. If they do not match, new shadow state properties that form a unique index
+    // will be
     ///         added to the principal entity type to serve as the reference key.
     ///     </para>
     /// </remarks>
     /// <param name="dependentEntityTypeName">
-    ///     The name of the entity type that is the dependent in this relationship (the type that has the foreign
+    ///     The name of the entity type that is the dependent in this relationship (the type that has
+    // the foreign
     ///     key properties).
     /// </param>
     /// <param name="foreignKeyPropertyNames">
     ///     The name(s) of the foreign key property(s).
     /// </param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual ReferenceReferenceBuilder HasForeignKey(
         string dependentEntityTypeName,
         params string[] foreignKeyPropertyNames
@@ -110,27 +129,35 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         If the specified property name(s) do not exist on the entity type then a new shadow state
+    ///         If the specified property name(s) do not exist on the entity type then a new shadow
+    // state
     ///         property(s) will be added to serve as the foreign key. A shadow state property is one
-    ///         that does not have a corresponding property in the entity class. The current value for the
-    ///         property is stored in the <see cref="ChangeTracker" /> rather than being stored in instances
+    ///         that does not have a corresponding property in the entity class. The current value for
+    // the
+    ///         property is stored in the <see cref="ChangeTracker" /> rather than being stored in
+    // instances
     ///         of the entity class.
     ///     </para>
     ///     <para>
-    ///         If <see cref="HasPrincipalKey(Type,string[])" /> is not specified, then an attempt will be made to
-    ///         match the data type and order of foreign key properties against the primary key of the principal
-    ///         entity type. If they do not match, new shadow state properties that form a unique index will be
+    ///         If <see cref="HasPrincipalKey(Type,string[])" /> is not specified, then an attempt will
+    // be made to
+    ///         match the data type and order of foreign key properties against the primary key of the
+    // principal
+    ///         entity type. If they do not match, new shadow state properties that form a unique index
+    // will be
     ///         added to the principal entity type to serve as the reference key.
     ///     </para>
     /// </remarks>
     /// <param name="dependentEntityType">
-    ///     The entity type that is the dependent in this relationship (the type that has the foreign key
+    ///     The entity type that is the dependent in this relationship (the type that has the foreign
+    // key
     ///     properties).
     /// </param>
     /// <param name="foreignKeyPropertyNames">
     ///     The name(s) of the foreign key property(s).
     /// </param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual ReferenceReferenceBuilder HasForeignKey(
         Type dependentEntityType,
         params string[] foreignKeyPropertyNames
@@ -147,10 +174,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
@@ -165,10 +196,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
@@ -211,14 +246,19 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     }
 
     /// <summary>
-    ///     Configures the unique property(s) that this relationship targets. Typically you would only call this
-    ///     method if you want to use a property(s) other than the primary key as the principal property(s). If
-    ///     the specified property(s) is not already a unique constraint (or the primary key) then a new unique
+    ///     Configures the unique property(s) that this relationship targets. Typically you would only
+    // call this
+    ///     method if you want to use a property(s) other than the primary key as the principal
+    // property(s). If
+    ///     the specified property(s) is not already a unique constraint (or the primary key) then a new
+    // unique
     ///     constraint will be introduced.
     /// </summary>
     /// <remarks>
-    ///     If multiple principal key properties are specified, the order of principal key properties should
-    ///     match the order that the primary key or unique constraint properties were configured on the principal
+    ///     If multiple principal key properties are specified, the order of principal key properties
+    // should
+    ///     match the order that the primary key or unique constraint properties were configured on the
+    // principal
     ///     entity type.
     /// </remarks>
     /// <param name="principalEntityTypeName">
@@ -226,7 +266,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     ///     that has the reference key properties).
     /// </param>
     /// <param name="keyPropertyNames">The name(s) of the reference key property(s).</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual ReferenceReferenceBuilder HasPrincipalKey(
         string principalEntityTypeName,
         params string[] keyPropertyNames
@@ -246,14 +287,19 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         );
 
     /// <summary>
-    ///     Configures the unique property(s) that this relationship targets. Typically you would only call this
-    ///     method if you want to use a property(s) other than the primary key as the principal property(s). If
-    ///     the specified property(s) is not already a unique constraint (or the primary key) then a new unique
+    ///     Configures the unique property(s) that this relationship targets. Typically you would only
+    // call this
+    ///     method if you want to use a property(s) other than the primary key as the principal
+    // property(s). If
+    ///     the specified property(s) is not already a unique constraint (or the primary key) then a new
+    // unique
     ///     constraint will be introduced.
     /// </summary>
     /// <remarks>
-    ///     If multiple principal key properties are specified, the order of principal key properties should
-    ///     match the order that the primary key or unique constraint properties were configured on the principal
+    ///     If multiple principal key properties are specified, the order of principal key properties
+    // should
+    ///     match the order that the primary key or unique constraint properties were configured on the
+    // principal
     ///     entity type.
     /// </remarks>
     /// <param name="principalEntityType">
@@ -261,7 +307,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     ///     that has the reference key properties).
     /// </param>
     /// <param name="keyPropertyNames">The name(s) of the reference key property(s).</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual ReferenceReferenceBuilder HasPrincipalKey(
         Type principalEntityType,
         params string[] keyPropertyNames
@@ -278,10 +325,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(
@@ -296,10 +347,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(
@@ -342,10 +397,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual EntityType? ResolveEntityType(string entityTypeName)
@@ -384,10 +443,14 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual EntityType? ResolveEntityType(Type entityType)
@@ -406,11 +469,13 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
             : (EntityType)DeclaringEntityType;
 
     /// <summary>
-    ///     Configures whether this is a required relationship (i.e. whether the foreign key property(s) can
+    ///     Configures whether this is a required relationship (i.e. whether the foreign key property(s)
+    // can
     ///     be assigned <see langword="null" />).
     /// </summary>
     /// <param name="required">A value indicating whether this is a required relationship.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual ReferenceReferenceBuilder IsRequired(bool required = true) =>
         new(Builder.IsRequired(required, ConfigurationSource.Explicit)!, this, requiredSet: true);
 
@@ -419,7 +484,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     ///     principal is deleted or the relationship is severed.
     /// </summary>
     /// <param name="deleteBehavior">The action to perform.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual ReferenceReferenceBuilder OnDelete(DeleteBehavior deleteBehavior) =>
         new(Builder.OnDelete(deleteBehavior, ConfigurationSource.Explicit)!, this);
 }

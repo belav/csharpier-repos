@@ -11,7 +11,8 @@ namespace System.Xml.Schema
     using System.ComponentModel;
     using System.Xml.Serialization;
 
-    /// <include file='doc\XmlSchemaDocumentation.uex' path='docs/doc[@for="XmlSchemaDocumentation"]/*' />
+    /// <include file='doc\XmlSchemaDocumentation.uex' path='docs/doc[@for="XmlSchemaDocumentation"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -24,7 +25,8 @@ namespace System.Xml.Schema
             new XmlQualifiedName("language", XmlReservedNs.NsXs)
         );
 
-        /// <include file='doc\XmlSchemaDocumentation.uex' path='docs/doc[@for="XmlSchemaDocumentation.Source"]/*' />
+        /// <include file='doc\XmlSchemaDocumentation.uex'
+        // path='docs/doc[@for="XmlSchemaDocumentation.Source"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -35,7 +37,8 @@ namespace System.Xml.Schema
             set { source = value; }
         }
 
-        /// <include file='doc\XmlSchemaDocumentation.uex' path='docs/doc[@for="XmlSchemaDocumentation.Language"]/*' />
+        /// <include file='doc\XmlSchemaDocumentation.uex'
+        // path='docs/doc[@for="XmlSchemaDocumentation.Language"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -54,7 +57,8 @@ namespace System.Xml.Schema
             }
         }
 
-        /// <include file='doc\XmlSchemaDocumentation.uex' path='docs/doc[@for="XmlSchemaDocumentation.Markup"]/*' />
+        /// <include file='doc\XmlSchemaDocumentation.uex'
+        // path='docs/doc[@for="XmlSchemaDocumentation.Markup"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

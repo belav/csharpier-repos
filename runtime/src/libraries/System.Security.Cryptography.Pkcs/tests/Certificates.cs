@@ -132,7 +132,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             "1111"
         );
 
-        // Note: the raw data is its own (nested) class to avoid problems with static field initialization ordering.
+        // Note: the raw data is its own (nested) class to avoid problems with static field initialization
+        // ordering.
         private static class RawData
         {
             public static byte[] s_RSAKeyTransfer1Cer = (
@@ -294,8 +295,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             //
             // Built by:
             //
-            //   makecert -r -len 1024 -n "CN=RSAKeyTransferCapi1" -b 04/15/2015 -e 04/15/2025 RSAKeyTransferCapi1.cer -sv RSAKeyTransferCapi1.pvk -sky exchange
-            //   pvk2pfx.exe -pvk RSAKeyTransferCapi1.pvk -spc RSAKeyTransferCapi1.cer -pfx RSAKeyTransferCapi1.pfx -po 1111
+            //   makecert -r -len 1024 -n "CN=RSAKeyTransferCapi1" -b 04/15/2015 -e 04/15/2025
+            // RSAKeyTransferCapi1.cer -sv RSAKeyTransferCapi1.pvk -sky exchange
+            //   pvk2pfx.exe -pvk RSAKeyTransferCapi1.pvk -spc RSAKeyTransferCapi1.cer -pfx
+            // RSAKeyTransferCapi1.pfx -po 1111
             //
             public static byte[] s_RSAKeyTransferCapi1Pfx = (
                 "30820626020103308205e206092a864886f70d010701a08205d3048205cf308205cb3082035806092a864886f70d010701a0"
@@ -2135,7 +2138,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             internal static readonly byte[] s_RSAKeyTransfer4_ExplicitSkiCer =
                 Convert.FromBase64String(
-                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Dummy certificate for testing.")]
+                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+                    // approved. Dummy certificate for testing.")]
                     "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURhakNDQWxLZ0F3SUJBZ0lKQUppdWpocnpi"
                         + "Sk9XTUEwR0NTcUdTSWIzRFFFQkN3VUFNR014Q3pBSkJnTlYKQkFZVEFsVlRNUk13RVFZRFZRUUlE"
                         + "QXBYWVhOb2FXNW5kRzl1TVJBd0RnWURWUVFIREFkU1pXUnRiMjVrTVJJdwpFQVlEVlFRS0RBbE5h"
@@ -2162,7 +2166,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             private static readonly byte[] s_RSAKeyTransfer4_ExplicitSkiPfx_RC2ContentEncryption =
                 Convert.FromBase64String(
-                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Dummy certificate for testing.")]
+                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+                    // approved. Dummy certificate for testing.")]
                     "MIIJqQIBAzCCCW8GCSqGSIb3DQEHAaCCCWAEgglcMIIJWDCCBA8GCSqGSIb3DQEHBqCCBAAwggP8"
                         + "AgEAMIID9QYJKoZIhvcNAQcBMBwGCiqGSIb3DQEMAQYwDgQI2rQEBhq4HAUCAggAgIIDyEn+zCF3"
                         + "wteqkmcbOFO7Aa2HbI8d1Dbp8M2QESYZhIZr/nX69etCuh4UewErHwwxfJYVQjhKO9NhWO4wB3UP"
@@ -2211,7 +2216,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             private static readonly byte[] s_RSAKeyTransfer4_ExplicitSkiPfx_TripleDESContentEncryption =
                 Convert.FromBase64String(
-                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Dummy certificate for testing.")]
+                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+                    // approved. Dummy certificate for testing.")]
                     "MIIJuwIBAzCCCXcGCSqGSIb3DQEHAaCCCWgEgglkMIIJYDCCBBcGCSqGSIb3DQEHBqCCBAgwggQE"
                         + "AgEAMIID/QYJKoZIhvcNAQcBMCQGCiqGSIb3DQEMAQMwFgQQzMqKF6TLC64Jd+DF7mgQmQICB9CA"
                         + "ggPIoCkOExBhWQ0rnLj6ZlwP9pkKhnC07NHHXBuRKQTLdZgQlchqjz6wMebmc+ZlwVQbaPvJmXMF"
@@ -2265,7 +2271,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             internal static readonly byte[] s_RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4Cer =
                 Convert.FromBase64String(
-                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Dummy certificate for testing.")]
+                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+                    // approved. Dummy certificate for testing.")]
                     "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURhakNDQWxLZ0F3SUJBZ0lKQUs0cjJQai96"
                         + "ZnF2TUEwR0NTcUdTSWIzRFFFQkN3VUFNR014Q3pBSkJnTlYKQkFZVEFsVlRNUk13RVFZRFZRUUlE"
                         + "QXBYWVhOb2FXNW5kRzl1TVJBd0RnWURWUVFIREFkU1pXUnRiMjVrTVJJdwpFQVlEVlFRS0RBbE5h"
@@ -2292,7 +2299,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             private static readonly byte[] s_RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4Pfx_RC2ContentEncryption =
                 Convert.FromBase64String(
-                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Dummy certificate for testing.")]
+                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+                    // approved. Dummy certificate for testing.")]
                     "MIIJqQIBAzCCCW8GCSqGSIb3DQEHAaCCCWAEgglcMIIJWDCCBA8GCSqGSIb3DQEHBqCCBAAwggP8"
                         + "AgEAMIID9QYJKoZIhvcNAQcBMBwGCiqGSIb3DQEMAQYwDgQITLms5nr095wCAggAgIIDyPyxib5c"
                         + "oCEPC3OpfmCzzieARKf56sQZU31qlDJNDet7v1R68T7X9vu236kHOphKvqedPVNXKEPpaQXIxkSY"
@@ -2341,7 +2349,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             private static readonly byte[] s_RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4Pfx_TripleDESContentEncryption =
                 Convert.FromBase64String(
-                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Dummy certificate for testing.")]
+                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+                    // approved. Dummy certificate for testing.")]
                     "MIIJuwIBAzCCCXcGCSqGSIb3DQEHAaCCCWgEgglkMIIJYDCCBBcGCSqGSIb3DQEHBqCCBAgwggQE"
                         + "AgEAMIID/QYJKoZIhvcNAQcBMCQGCiqGSIb3DQEMAQMwFgQQcikkI3mNYPzp9KgATYd+sgICB9CA"
                         + "ggPI8jMlpeNA98igwqedfn4BlSDksVxqex+KPgGDn/UYx/S5yfQMUxq2vocr3mXGBGm5B7/4v7mV"

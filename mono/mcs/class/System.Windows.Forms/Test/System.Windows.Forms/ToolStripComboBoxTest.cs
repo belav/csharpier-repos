@@ -42,7 +42,8 @@ namespace MonoTests.System.Windows.Forms
         {
             ToolStripComboBox tsi = new ToolStripComboBox();
 
-            //Assert.AreEqual ("System.Windows.Forms.AutoCompleteStringCollection", tsi.AutoCompleteCustomSource.GetType ().ToString (), "A1");
+            //Assert.AreEqual ("System.Windows.Forms.AutoCompleteStringCollection",
+            // tsi.AutoCompleteCustomSource.GetType ().ToString (), "A1");
             //Assert.AreEqual (AutoCompleteMode.None, tsi.AutoCompleteMode, "A2");
             //Assert.AreEqual (AutoCompleteSource.None, tsi.AutoCompleteSource, "A3");
             Assert.AreEqual(

@@ -110,7 +110,8 @@ namespace ILCompiler.DependencyAnalysis
         private int _perfMapFormatVersion;
 
         /// <summary>
-        /// If non-zero, the PE file will be laid out such that it can naturally be mapped with a higher alignment than 4KB.
+        /// If non-zero, the PE file will be laid out such that it can naturally be mapped with a higher
+        // alignment than 4KB.
         /// This is used to support loading via large pages on Linux.
         /// </summary>
         private readonly int _customPESectionAlignment;
@@ -519,7 +520,8 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         /// <summary>
-        /// Helper method to generate the name of a given DependencyNode. Returns null if a name is not needed.
+        /// Helper method to generate the name of a given DependencyNode. Returns null if a name is not
+        // needed.
         /// A name is needed only when the executable generator should output a map file.
         /// </summary>
         /// <param name="depNode">The DependencyNode to return a name for, if one is needed.</param>
@@ -549,10 +551,12 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         /// <summary>
-        /// Update the PE header directories by setting up the exception directory to point to the runtime functions table.
+        /// Update the PE header directories by setting up the exception directory to point to the runtime
+        // functions table.
         /// This is needed for RtlLookupFunctionEntry / RtlLookupFunctionTable to work.
         /// </summary>
-        /// <param name="builder">PE header directory builder can be used to override RVA's / sizes of any of the directories</param>
+        /// <param name="builder">PE header directory builder can be used to override RVA's / sizes of any
+        // of the directories</param>
         private RuntimeFunctionsTableNode GetRuntimeFunctionsTable() =>
             _nodeFactory.RuntimeFunctionsTable;
 

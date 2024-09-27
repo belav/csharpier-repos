@@ -31,7 +31,8 @@ public static class RequestTimeoutsIEndpointConventionBuilderExtensions
     /// Specifies a timeout policy for to the endpoint(s).
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
-    /// <param name="policyName">The name (case-insensitive) of the policy to apply for the endpoint(s).</param>
+    /// <param name="policyName">The name (case-insensitive) of the policy to apply for the
+    // endpoint(s).</param>
     /// <returns>The original convention builder parameter.</returns>
     public static IEndpointConventionBuilder WithRequestTimeout(
         this IEndpointConventionBuilder builder,
@@ -62,7 +63,8 @@ public static class RequestTimeoutsIEndpointConventionBuilderExtensions
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
     /// <returns>The original convention builder parameter.</returns>
-    /// <remarks>Will skip both the default timeout, and any endpoint-specific timeout that apply to the endpoint(s).</remarks>
+    /// <remarks>Will skip both the default timeout, and any endpoint-specific timeout that apply to the
+    // endpoint(s).</remarks>
     public static IEndpointConventionBuilder DisableRequestTimeout(
         this IEndpointConventionBuilder builder
     )

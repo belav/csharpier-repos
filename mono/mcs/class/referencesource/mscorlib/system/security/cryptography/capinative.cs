@@ -5,8 +5,10 @@
 // ==--==
 
 //
-// This source file is marked up so that it can be built both as part of the BCL and as part of the fx tree
-// as well. Since the security annotation process is different between the two trees, SecurityCritical
+// This source file is marked up so that it can be built both as part of the BCL and as part of the
+// fx tree
+// as well. Since the security annotation process is different between the two trees,
+// SecurityCritical
 // attributes appear directly in this file, instead of being marked up by the BCL annotator tool.
 //
 
@@ -327,9 +329,12 @@ namespace System.Security.Cryptography
         {
             Contract.Assert(keyContainer == null, "Key containers are not supported");
 
-            // Specifying both verify context (for an ephemeral key) and machine keyset (for a persisted machine key)
-            // does not make sense.  Additionally, Widows is beginning to lock down against uses of MACHINE_KEYSET
-            // (for instance in the app container), even if verify context is present.   Therefore, if we're using
+            // Specifying both verify context (for an ephemeral key) and machine keyset (for a persisted machine
+            // key)
+            // does not make sense.  Additionally, Widows is beginning to lock down against uses of
+            // MACHINE_KEYSET
+            // (for instance in the app container), even if verify context is present.   Therefore, if we're
+            // using
             // an ephemeral key, strip out MACHINE_KEYSET from the flags.
             if (
                 (
@@ -681,13 +686,16 @@ namespace System.Security.Cryptography
     }
 
     /// <summary>
-    ///    SafeHandle representing a native HCRYPTPROV on Windows, or representing all state associated with
-    ///    loading a CSSM CSP on the Mac.  The HCRYPTPROV SafeHandle usage is straightforward, however CSSM
+    ///    SafeHandle representing a native HCRYPTPROV on Windows, or representing all state associated
+    // with
+    ///    loading a CSSM CSP on the Mac.  The HCRYPTPROV SafeHandle usage is straightforward, however
+    // CSSM
     ///    usage is slightly different.
     ///
     ///    For CSSM we hold three pieces of state:
     ///      * m_initializedCssm - a flag indicating that CSSM_Init() was successfully called
-    ///      * m_cspModuleGuid   - the module GUID of the CSP we loaded, if that CSP was successfully loaded
+    ///      * m_cspModuleGuid   - the module GUID of the CSP we loaded, if that CSP was successfully
+    // loaded
     ///      * handle            - handle resulting from attaching to the CSP
     ///
     ///    We need to keep all three pieces of state, since we need to teardown in a specific order. If
@@ -753,22 +761,32 @@ namespace System.Security.Cryptography
     /// <summary>
     ///     SafeHandle representing a native HCRYPTKEY on Windows.
     ///
-    ///     On the Mac, we generate our keys by hand, so they are really just CSSM_KEY structures along with
-    ///     the associated data blobs.  Because of this, the only resource that needs to be released when the
+    ///     On the Mac, we generate our keys by hand, so they are really just CSSM_KEY structures along
+    // with
+    ///     the associated data blobs.  Because of this, the only resource that needs to be released
+    // when the
     ///     key is freed is the memory associated with the key blob.
     ///
-    ///     However, in order for a SafeCspKeyHandle to marshal as a CSSM_KEY_PTR, as one would expect, the
-    ///     handle value on the Mac is actually a pointer to the CSSM_KEY.  We maintain a seperate m_data
+    ///     However, in order for a SafeCspKeyHandle to marshal as a CSSM_KEY_PTR, as one would expect,
+    // the
+    ///     handle value on the Mac is actually a pointer to the CSSM_KEY.  We maintain a seperate
+    // m_data
     ///     pointer which is the buffer holding the actual key data.
     ///
-    ///     Both of these details add a further invarient that on the Mac a SafeCspKeyHandle may never be an
-    ///     [out] parameter from an API.  This is because we always expect that we control the memory buffer
+    ///     Both of these details add a further invarient that on the Mac a SafeCspKeyHandle may never
+    // be an
+    ///     [out] parameter from an API.  This is because we always expect that we control the memory
+    // buffer
     ///     that the CSSM_KEY resides in and that we don't have to call CSSM_FreeKey on the data.
     ///
-    ///     Keeping this in a SafeHandle rather than just marshaling the key structure direclty buys us a
-    ///     level of abstraction, in that if we ever do need to work with keys that require a CSSM_FreeKey
-    ///     call, we can continue to use the same key handle object.  It also means that keys are represented
-    ///     by the same type on both Windows and Mac, so that consumers of the CapiNative layer don't have
+    ///     Keeping this in a SafeHandle rather than just marshaling the key structure direclty buys us
+    // a
+    ///     level of abstraction, in that if we ever do need to work with keys that require a
+    // CSSM_FreeKey
+    ///     call, we can continue to use the same key handle object.  It also means that keys are
+    // represented
+    ///     by the same type on both Windows and Mac, so that consumers of the CapiNative layer don't
+    // have
     ///     to know the difference between the two.
     /// </summary>
     [SecurityCritical]

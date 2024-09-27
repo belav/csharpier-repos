@@ -74,7 +74,8 @@ namespace System.Security.Cryptography.Xml
         public const string XmlDsigRSASHA256Url =
             "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
 
-        // Yes, SHA384 is in the xmldsig-more namespace even though all the other SHA variants are in xmlenc. That's the standard.
+        // Yes, SHA384 is in the xmldsig-more namespace even though all the other SHA variants are in
+        // xmlenc. That's the standard.
         public const string XmlDsigSHA384Url = "http://www.w3.org/2001/04/xmldsig-more#sha384";
         public const string XmlDsigRSASHA384Url =
             "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384";
@@ -462,7 +463,8 @@ namespace System.Security.Cryptography.Xml
             if (key == null)
                 throw new CryptographicException(SR.Cryptography_Xml_LoadKeyFailed);
 
-            // Check the signature algorithm associated with the key so that we can accordingly set the signature method
+            // Check the signature algorithm associated with the key so that we can accordingly set the
+            // signature method
             if (SignedInfo!.SignatureMethod == null)
             {
                 if (key is DSA)
@@ -570,7 +572,8 @@ namespace System.Security.Cryptography.Xml
 
             _keyInfoEnum ??= KeyInfo.GetEnumerator();
 
-            // In our implementation, we move to the next KeyInfo clause which is an RSAKeyValue, DSAKeyValue or KeyInfoX509Data
+            // In our implementation, we move to the next KeyInfo clause which is an RSAKeyValue, DSAKeyValue or
+            // KeyInfoX509Data
             while (_keyInfoEnum.MoveNext())
             {
                 switch (_keyInfoEnum.Current)
@@ -1105,11 +1108,15 @@ namespace System.Security.Cryptography.Xml
             return true;
         }
 
-        // Methods _must_ be marked both No Inlining and No Optimization to be fully opted out of optimization.
-        // This is because if a candidate method is inlined, its method level attributes, including the NoOptimization
+        // Methods _must_ be marked both No Inlining and No Optimization to be fully opted out of
+        // optimization.
+        // This is because if a candidate method is inlined, its method level attributes, including the
+        // NoOptimization
         // attribute, are lost.
-        // This method makes no attempt to disguise the length of either of its inputs. It is assumed the attacker has
-        // knowledge of the algorithms used, and thus the output length. Length is difficult to properly blind in modern CPUs.
+        // This method makes no attempt to disguise the length of either of its inputs. It is assumed the
+        // attacker has
+        // knowledge of the algorithms used, and thus the output length. Length is difficult to properly
+        // blind in modern CPUs.
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static bool CryptographicEquals(byte[]? a, byte[]? b)
         {
@@ -1123,7 +1130,8 @@ namespace System.Security.Cryptography.Xml
                 return false;
             unchecked
             {
-                // Normally this caching doesn't matter, but with the optimizer off, this nets a non-trivial speedup.
+                // Normally this caching doesn't matter, but with the optimizer off, this nets a non-trivial
+                // speedup.
                 int aLength = a.Length;
 
                 for (int i = 0; i < aLength; i++)
@@ -1259,13 +1267,16 @@ namespace System.Security.Cryptography.Xml
             // escaping that needs to be done here.
             string xPath = "//*[@" + idAttributeName + "=\"" + idValue + "\"]";
 
-            // http://www.w3.org/TR/xmldsig-core/#sec-ReferenceProcessingModel says that for the form URI="#chapter1":
+            // http://www.w3.org/TR/xmldsig-core/#sec-ReferenceProcessingModel says that for the form
+            // URI="#chapter1":
             //
             //   Identifies a node-set containing the element with ID attribute value 'chapter1' ...
             //
-            // Note that it uses the singular. Therefore, if the match is ambiguous, we should consider the document invalid.
+            // Note that it uses the singular. Therefore, if the match is ambiguous, we should consider the
+            // document invalid.
             //
-            // In this case, we'll treat it the same as having found nothing across all fallbacks (but shortcut so that we don't
+            // In this case, we'll treat it the same as having found nothing across all fallbacks (but shortcut
+            // so that we don't
             // fall into a trap of finding a secondary element which wasn't the originally signed one).
 
             XmlNodeList? nodeList = document.SelectNodes(xPath);
@@ -1290,17 +1301,22 @@ namespace System.Security.Cryptography.Xml
             if (actualType == expectedType)
                 return true;
 
-            // This check exists solely for compatibility with 4.6. Normally, we would expect "expectedType" to be the superclass type and
+            // This check exists solely for compatibility with 4.6. Normally, we would expect "expectedType" to
+            // be the superclass type and
             // the actualType to be the subclass.
             if (expectedType.IsSubclassOf(actualType))
                 return true;
 
             //
-            // "expectedType" comes from the KeyAlgorithm property of a SignatureDescription. The BCL SignatureDescription classes have historically
-            // denoted provider-specific implementations ("RSACryptoServiceProvider") rather than the base class for the algorithm ("RSA"). We could
-            // change those (at the risk of creating other compat problems) but we have no control over third party SignatureDescriptions.
+            // "expectedType" comes from the KeyAlgorithm property of a SignatureDescription. The BCL
+            // SignatureDescription classes have historically
+            // denoted provider-specific implementations ("RSACryptoServiceProvider") rather than the base class
+            // for the algorithm ("RSA"). We could
+            // change those (at the risk of creating other compat problems) but we have no control over third
+            // party SignatureDescriptions.
             //
-            // So, in the absence of a better approach, walk up the parent hierarchy until we find the ancestor that's a direct subclass of
+            // So, in the absence of a better approach, walk up the parent hierarchy until we find the ancestor
+            // that's a direct subclass of
             // AsymmetricAlgorithm and treat that as the algorithm identifier.
             //
             while (expectedType != null && expectedType.BaseType != typeof(AsymmetricAlgorithm))

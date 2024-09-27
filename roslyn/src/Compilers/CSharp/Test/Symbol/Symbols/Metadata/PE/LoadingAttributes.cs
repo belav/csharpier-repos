@@ -554,8 +554,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             //    <AType(GetType(List(Of KeyValuePair(Of C1, string))))>
             //    Public L4 As List(Of KeyValuePair(Of C1, string))
 
-            //    <AType(GetType(List(Of KeyValuePair(Of String, C1.InnerC1(of integer).InnerC2(of string, string)))))>
-            //    Public L5 As List(Of KeyValuePair(Of String, C1.InnerC1(of integer).InnerC2(of string, string)))
+            //    <AType(GetType(List(Of KeyValuePair(Of String, C1.InnerC1(of integer).InnerC2(of string,
+            // string)))))>
+            //    Public L5 As List(Of KeyValuePair(Of String, C1.InnerC1(of integer).InnerC2(of string,
+            // string)))
 
             var c2 = (NamedTypeSymbol)
                 assemblies[0].Modules[0].GlobalNamespace.GetMembers("C2").Single();
@@ -843,7 +845,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             }
         }
 
-        /// Did not Skip the test - will remove the explicit cast (from IMethodSymbol to MethodSymbol) once this bug is fixed
+        /// Did not Skip the test - will remove the explicit cast (from IMethodSymbol to MethodSymbol) once
+        // this bug is fixed
         [Fact]
         public void TestInteropAttributesInterface()
         {
@@ -924,7 +927,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             );
 
             // [Serializable, ComVisible(false)]
-            // [UnmanagedFunctionPointerAttribute(CallingConvention.StdCall, BestFitMapping = true, CharSet = CharSet.Ansi, SetLastError = true, ThrowOnUnmappableChar = true)]
+            // [UnmanagedFunctionPointerAttribute(CallingConvention.StdCall, BestFitMapping = true, CharSet =
+            // CharSet.Ansi, SetLastError = true, ThrowOnUnmappableChar = true)]
             // public delegate void DFoo(char p1, sbyte p2);
 
             var sysNS = (NamespaceSymbol)assemblies[1].GlobalNamespace.GetMember("System");
@@ -1017,7 +1021,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             );
 
             //[ComImport, TypeLibType(TypeLibTypeFlags.FAggregatable)]
-            //[Guid("A88A175D-2448-447A-B786-CCC82CBEF156"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+            //[Guid("A88A175D-2448-447A-B786-CCC82CBEF156"),
+            // InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
             //[CoClass(typeof(CBar))]
             //public interface IBar             '{
             //    [DispId(10)]
@@ -1027,22 +1032,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             //    int this[int idx] { get; set; }
 
             //    [DispId(30), PreserveSig]
-            //    int MixedAttrMethod1([In] [MarshalAs(UnmanagedType.U4)] uint v1, [In, Out][MarshalAs(UnmanagedType.I4)] ref int v2);
+            //    int MixedAttrMethod1([In] [MarshalAs(UnmanagedType.U4)] uint v1, [In,
+            // Out][MarshalAs(UnmanagedType.I4)] ref int v2);
 
-            //    [DispId(40), MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-            //    void IDispatchParameters([MarshalAs(UnmanagedType.IDispatch)] object v1, [Out] [MarshalAs(UnmanagedType.IUnknown)] out object v2);
+            //    [DispId(40), MethodImpl(MethodImplOptions.InternalCall, MethodCodeType =
+            // MethodCodeType.Runtime)]
+            //    void IDispatchParameters([MarshalAs(UnmanagedType.IDispatch)] object v1, [Out]
+            // [MarshalAs(UnmanagedType.IUnknown)] out object v2);
 
             //    [DispId(50), TypeLibFunc(TypeLibFuncFlags.FBindable)]
             //    void SCodeParameter([MarshalAs(UnmanagedType.Error)] int v1);
 
             //    [DispId(60)]
             //    [return: MarshalAs(UnmanagedType.BStr)]
-            //    string VariantParameters([MarshalAs(UnmanagedType.CustomMarshaler, MarshalCookie = "YumYum", MarshalType = "IUnknown")] object v1, [In][Out] ref object v2);
+            //    string VariantParameters([MarshalAs(UnmanagedType.CustomMarshaler, MarshalCookie = "YumYum",
+            // MarshalType = "IUnknown")] object v1, [In][Out] ref object v2);
 
             //    [LCIDConversion(1)]
-            //    void DecimalStringParameter([In] decimal v1, [MarshalAs(UnmanagedType.LPStr)] string v2, [MarshalAs(UnmanagedType.LPWStr)] string v3);
+            //    void DecimalStringParameter([In] decimal v1, [MarshalAs(UnmanagedType.LPStr)] string v2,
+            // [MarshalAs(UnmanagedType.LPWStr)] string v3);
             //    void CurrencyParameter([In, MarshalAs(UnmanagedType.Currency)] decimal v1);
-            //    // int MixedAttrMethod([In] [ComAliasName(stdole.OLE_COLOR)]uint v1, [In][Out][MarshalAs(UnmanagedType.I4)] ref int v2);
+            //    // int MixedAttrMethod([In] [ComAliasName(stdole.OLE_COLOR)]uint v1,
+            // [In][Out][MarshalAs(UnmanagedType.I4)] ref int v2);
             //}
 
             var sysNS = (NamespaceSymbol)assemblies[1].GlobalNamespace.GetMember("System");
@@ -1183,7 +1194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             //    // default: method
             //    [AllInheritMultiple(p3:1.234f, p2: 1056, p1: "555")]
             //    // attribute on return, param
-            //    [return: AllInheritMultiple("obj", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Static)]
+            //    [return: AllInheritMultiple("obj", System.Reflection.BindingFlags.Instance |
+            // System.Reflection.BindingFlags.Static)]
             //    V Method([param: DerivedAttribute(new sbyte[] {-1, 0, 1}, ObjectField = typeof(IList<>))]T t);
             //}
             //
@@ -1220,7 +1232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             // object
 
-            // [return: AllInheritMultiple("obj", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Static)]
+            // [return: AllInheritMultiple("obj", System.Reflection.BindingFlags.Instance |
+            // System.Reflection.BindingFlags.Static)]
             attrSym = mtd.GetReturnTypeAttributes().First();
             Assert.Equal(2, attrSym.CommonConstructorArguments.Length);
             Assert.Equal("obj", attrSym.CommonConstructorArguments[0].Value);
@@ -1241,12 +1254,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         }
 
         //[AllInheritMultiple(new char[] { '1', '2' }, UIntField = 112233)]
-        //[type: AllInheritMultiple(new char[] { 'a', '\0', '\t' }, AryField = new ulong[] { 0, 1, ulong.MaxValue })]
-        //[AllInheritMultiple(null, "", null, "1234", AryProp = new object[2] { new ushort[] { 1 }, new ushort[] { 2, 3, 4 } })]
+        //[type: AllInheritMultiple(new char[] { 'a', '\0', '\t' }, AryField = new ulong[] { 0, 1,
+        // ulong.MaxValue })]
+        //[AllInheritMultiple(null, "", null, "1234", AryProp = new object[2] { new ushort[] { 1 }, new
+        // ushort[] { 2, 3, 4 } })]
         //public class Foo<[typevar: AllInheritMultiple(null), AllInheritMultiple()] T> : IFoo<T, ushort>
         //{
         //    // named parameters
-        //    [field: AllInheritMultiple(p2: System.Reflection.BindingFlags.DeclaredOnly | System.Reflection.BindingFlags.Public, p1: -123)]
+        //    [field: AllInheritMultiple(p2: System.Reflection.BindingFlags.DeclaredOnly |
+        // System.Reflection.BindingFlags.Public, p1: -123)]
         //    [AllInheritMultiple(p1: 111, p2: System.Reflection.BindingFlags.NonPublic)]
         //    public int ClassField;
 
@@ -1306,7 +1322,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             {
                 var pos0 = a.CommonConstructorArguments[0].Values;
                 Assert.Equal("char[]", a.CommonConstructorArguments[0].Type.ToDisplayString());
-                // [AllInheritMultiple(null, "", null, "1234", AryProp = new object[2] { new ushort[] { 1 }, new ushort[] { 2, 3, 4 } })]
+                // [AllInheritMultiple(null, "", null, "1234", AryProp = new object[2] { new ushort[] { 1 }, new
+                // ushort[] { 2, 3, 4 } })]
                 if (pos0.IsDefaultOrEmpty)
                 {
                     count += 1;
@@ -1327,7 +1344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     count += 2;
                     Assert.Equal(1, a.CommonNamedArguments.Length);
-                    // [type: AllInheritMultiple(new char[] { 'a', '\0', '\t' }, AryField = new ulong[] { 0, 1, ulong.MaxValue })]
+                    // [type: AllInheritMultiple(new char[] { 'a', '\0', '\t' }, AryField = new ulong[] { 0, 1,
+                    // ulong.MaxValue })]
                 }
                 else if (pos0.Length == 3)
                 {
@@ -1458,7 +1476,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var dbgProxyAttr = (NamedTypeSymbol)
                 diagNS.GetTypeMembers("DebuggerTypeProxyAttribute").Single();
 
-            // [DebuggerTypeProxy(typeof(Expression.BinaryExpressionProxy))] - internal class as argument to typeof()
+            // [DebuggerTypeProxy(typeof(Expression.BinaryExpressionProxy))] - internal class as argument to
+            // typeof()
             // public class BinaryExpression : Expression {... }
             var attr1 = exprNS
                 .GetTypeMembers("BinaryExpression")
@@ -1535,7 +1554,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var type01 = (NamedTypeSymbol)thirdNS.GetTypeMembers("DataAdapter").Single();
             var prop = type01.GetMember("MissingMappingAction") as PropertySymbol;
 
-            // [DefaultValue(1), ResCategory("DataCategory_Mapping"), ResDescription("DataAdapter_MissingMappingAction")]
+            // [DefaultValue(1), ResCategory("DataCategory_Mapping"),
+            // ResDescription("DataAdapter_MissingMappingAction")]
             // public MissingMappingAction MissingMappingAction { get; set; }
             var attr = prop.GetAttributes(resCatAttr).Single();
             attr.VerifyValue(0, TypedConstantKind.Primitive, "DataCategory_Mapping");

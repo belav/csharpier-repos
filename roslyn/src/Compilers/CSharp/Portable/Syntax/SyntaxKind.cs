@@ -207,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>Represents <c>??=</c> token.</summary>
         QuestionQuestionEqualsToken = 8284,
 
-        // Don't use 8285. It corresponds to the deleted kind ExclamationExclamationToken which was previously shipped.
+        // Don't use 8285. It corresponds to the deleted kind ExclamationExclamationToken which was
+        // previously shipped.
 
         /// <summary>Represents <c>&gt;&gt;&gt;</c> token.</summary>
         GreaterThanGreaterThanGreaterThanToken = 8286,
@@ -685,20 +686,25 @@ namespace Microsoft.CodeAnalysis.CSharp
         UnderscoreToken = 8491,
 
         /// <summary>Represents that nothing was specified as a type argument.
-        /// <para>For example <c>Dictionary&lt;,&gt;</c> which has <see cref="OmittedTypeArgumentToken"/> as a child of
-        /// <see cref="T:Microsoft.CodeAnalysis.CSharp.Syntax.OmittedTypeArgumentSyntax"/> before and after the <see cref="CommaToken"/>.
+        /// <para>For example <c>Dictionary&lt;,&gt;</c> which has <see cref="OmittedTypeArgumentToken"/> as
+        // a child of
+        /// <see cref="T:Microsoft.CodeAnalysis.CSharp.Syntax.OmittedTypeArgumentSyntax"/> before and after
+        // the <see cref="CommaToken"/>.
         /// </para>
         /// </summary>
         OmittedTypeArgumentToken = 8492,
 
         /// <summary>Represents that nothing was specified as an array size.
-        /// <para>For example <c>int[,]</c> which has <see cref="OmittedArraySizeExpressionToken"/> as a child of
-        /// <see cref="T:Microsoft.CodeAnalysis.CSharp.Syntax.OmittedArraySizeExpressionSyntax"/> before and after the <see cref="CommaToken"/>.
+        /// <para>For example <c>int[,]</c> which has <see cref="OmittedArraySizeExpressionToken"/> as a
+        // child of
+        /// <see cref="T:Microsoft.CodeAnalysis.CSharp.Syntax.OmittedArraySizeExpressionSyntax"/> before and
+        // after the <see cref="CommaToken"/>.
         /// </para>
         /// </summary>
         OmittedArraySizeExpressionToken = 8493,
 
-        /// <summary>Represents a token that comes after the end of a directive such as <c>#endif</c>.</summary>
+        /// <summary>Represents a token that comes after the end of a directive such as
+        // <c>#endif</c>.</summary>
         EndOfDirectiveToken = 8494,
 
         /// <summary>Represents the end of a triple-slash documentation comment.</summary>
@@ -718,7 +724,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         XmlTextLiteralNewLineToken = 8514,
 
         /// <summary>
-        /// Token for a whole interpolated string <c>$""" ... { expr } ..."""</c>. This only exists in transient form during parsing.
+        /// Token for a whole interpolated string <c>$""" ... { expr } ..."""</c>. This only exists in
+        // transient form during parsing.
         /// </summary>
         InterpolatedStringToken = 8515,
         InterpolatedStringTextToken = 8517, // literal text that is part of an interpolated string

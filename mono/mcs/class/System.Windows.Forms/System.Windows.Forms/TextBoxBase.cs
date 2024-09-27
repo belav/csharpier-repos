@@ -1492,7 +1492,8 @@ namespace System.Windows.Forms
 
                 //case Keys.Enter: {
                 //        // ignoring accepts_return, fixes bug #76355
-                //        if (!read_only && document.multiline && (accepts_return || (FindForm() != null && FindForm().AcceptButton == null) || ((Control.ModifierKeys & Keys.Control) != 0))) {
+                //        if (!read_only && document.multiline && (accepts_return || (FindForm() != null &&
+                // FindForm().AcceptButton == null) || ((Control.ModifierKeys & Keys.Control) != 0))) {
                 //                Line	line;
 
                 //                if (document.selection_visible) {
@@ -2458,7 +2459,8 @@ namespace System.Windows.Forms
             var canvas_width_changed = CalculateScrollBars();
             if (e.HeightChanged && canvas_width_changed)
                 CalculateDocument(); // Viewport has changed due to the document change, update the document.
-            // TODO: technically the opposite situation could happen too, where a document width change causes a change in canvas height.
+            // TODO: technically the opposite situation could happen too, where a document width change causes a
+            // change in canvas height.
         }
 
         private void ScrollLinks(int xChange, int yChange)
@@ -2715,13 +2717,16 @@ namespace System.Windows.Forms
             document.MoveCaretToTextTag();
             pos = document.Caret;
 
-            //Console.WriteLine("Caret now at {0} (Thumb: {1}x{2}, Canvas: {3}x{4}, Document {5}x{6})", pos, hscroll.Value, vscroll.Value, canvas_width, canvas_height, document.Width, document.Height);
+            //Console.WriteLine("Caret now at {0} (Thumb: {1}x{2}, Canvas: {3}x{4}, Document {5}x{6})", pos,
+            // hscroll.Value, vscroll.Value, canvas_width, canvas_height, document.Width, document.Height);
 
 
             // Horizontal scrolling:
-            // If the caret moves to the left outside the visible area, we jump the document into view, not just one
+            // If the caret moves to the left outside the visible area, we jump the document into view, not just
+            // one
             // character, but 1/3 of the width of the document
-            // If the caret moves to the right outside the visible area, we scroll just enough to keep the caret visible
+            // If the caret moves to the right outside the visible area, we scroll just enough to keep the caret
+            // visible
             // For comparison, in Windows 8.1 / .Net 4:
             //  Multiline: as above, but 1/4
             //  Single line: either direction with the cursors jumps 1/4
@@ -2849,7 +2854,8 @@ namespace System.Windows.Forms
             else if (format.Name == DataFormats.Bitmap)
             {
                 document.undo.BeginUserAction(Locale.GetText("Paste"));
-                //	document.InsertImage (document.caret.line, document.caret.pos, (Image) clip.GetData (DataFormats.Bitmap));
+                //	document.InsertImage (document.caret.line, document.caret.pos, (Image) clip.GetData
+                // (DataFormats.Bitmap));
                 document.MoveCaret(CaretDirection.CharForward);
                 document.undo.EndUserAction();
                 return true;

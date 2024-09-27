@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     return closeBraceLeadingDirectives.Length == 0;
                 }
 
-                // Ok, we have some if/elif/else/endif pp directives above us.  If we're one of hte branches, and all
+                // Ok, we have some if/elif/else/endif pp directives above us.  If we're one of hte branches, and
+                // all
                 // the rest of the branches are ok as well, we can convert this.
 
                 if (leadingDirectives.Any(t => t.Kind() == SyntaxKind.EndIfDirectiveTrivia))

@@ -91,9 +91,12 @@ End Class",
         {
             using var _ = ArrayBuilder<string>.GetInstance(out var builder);
 
-            // NOTE: 'CSharpLspBuildOnlyDiagnosticsTests' and 'VisualBasicLspBuildOnlyDiagnosticsTests' already verify that
-            // the corresponding build-only diagnostic providers return expected compiler build-only diagnostic IDs.
-            // So, here we just directly append 'attribute.BuildOnlyDiagnostics' from these providers to our expected build-only diagnostic IDs.
+            // NOTE: 'CSharpLspBuildOnlyDiagnosticsTests' and 'VisualBasicLspBuildOnlyDiagnosticsTests' already
+            // verify that
+            // the corresponding build-only diagnostic providers return expected compiler build-only diagnostic
+            // IDs.
+            // So, here we just directly append 'attribute.BuildOnlyDiagnostics' from these providers to our
+            // expected build-only diagnostic IDs.
             var compilerBuildOnlyDiagnosticsType = languageName switch
             {
                 LanguageNames.CSharp => typeof(CSharp.LanguageServer.CSharpLspBuildOnlyDiagnostics),

@@ -147,7 +147,8 @@ namespace System.ServiceModel.Channels
         //
         // Additionally, the fault sub code is not looked for:
         //
-        // See: https://referencesource.microsoft.com/#System.ServiceModel/System/ServiceModel/Channels/MessageFault.cs,f23a5298fd999b2d
+        // See:
+        // https://referencesource.microsoft.com/#System.ServiceModel/System/ServiceModel/Channels/MessageFault.cs,f23a5298fd999b2d
         //
         static FaultCode ReadFaultCode11(XmlDictionaryReader reader, int maxBufferSize)
         {

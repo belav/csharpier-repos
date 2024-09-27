@@ -211,8 +211,10 @@ namespace System.Net.Quic.Tests
                     await clientConnection.OpenOutboundStreamAsync(QuicStreamType.Bidirectional);
                 Assert.Equal(0, clientStream.Id);
 
-                // TODO: stream that is opened by client but left unaccepted by server may cause AccessViolationException in its Finalizer
-                // explicitly closing the connections seems to help, but the problem should still be investigated, we should have a meaningful
+                // TODO: stream that is opened by client but left unaccepted by server may cause
+                // AccessViolationException in its Finalizer
+                // explicitly closing the connections seems to help, but the problem should still be investigated,
+                // we should have a meaningful
                 // exception instead of AccessViolationException
                 await clientConnection.CloseAsync(0);
             }
@@ -1414,7 +1416,8 @@ namespace System.Net.Quic.Tests
 
                     await using QuicStream stream = await connection.AcceptInboundStreamAsync();
                     await stream.WriteAsync(new byte[payloadSize], completeWrites: true);
-                    // Make sure the data gets received by the peer if we expect the reading side to get buffered including FIN.
+                    // Make sure the data gets received by the peer if we expect the reading side to get buffered
+                    // including FIN.
                     if (payloadSize <= BufferPayload)
                     {
                         await stream.WritesClosed;

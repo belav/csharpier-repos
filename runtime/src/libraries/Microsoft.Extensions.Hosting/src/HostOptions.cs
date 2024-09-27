@@ -34,12 +34,14 @@ namespace Microsoft.Extensions.Hosting
         public TimeSpan StartupTimeout { get; set; } = Timeout.InfiniteTimeSpan;
 
         /// <summary>
-        /// Determines if the <see cref="IHost"/> will start registered instances of <see cref="IHostedService"/> concurrently or sequentially. Defaults to false.
+        /// Determines if the <see cref="IHost"/> will start registered instances of <see
+        // cref="IHostedService"/> concurrently or sequentially. Defaults to false.
         /// </summary>
         public bool ServicesStartConcurrently { get; set; }
 
         /// <summary>
-        /// Determines if the <see cref="IHost"/> will stop registered instances of <see cref="IHostedService"/> concurrently or sequentially. Defaults to false.
+        /// Determines if the <see cref="IHost"/> will stop registered instances of <see
+        // cref="IHostedService"/> concurrently or sequentially. Defaults to false.
         /// </summary>
         public bool ServicesStopConcurrently { get; set; }
 

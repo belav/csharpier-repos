@@ -76,7 +76,8 @@ public abstract class TagHelperContent : IHtmlContentBuilder
     public abstract TagHelperContent AppendHtml(IHtmlContent htmlContent);
 
     /// <summary>
-    /// Appends <paramref name="encoded"/> to the existing content. <paramref name="encoded"/> is assumed
+    /// Appends <paramref name="encoded"/> to the existing content. <paramref name="encoded"/> is
+    // assumed
     /// to be an HTML encoded <see cref="string"/> and no further encoding will be performed.
     /// </summary>
     /// <param name="encoded">The <see cref="string"/> to be appended.</param>
@@ -89,7 +90,8 @@ public abstract class TagHelperContent : IHtmlContentBuilder
     /// corresponding item in the <paramref name="args"/> array.
     /// </summary>
     /// <param name="format">
-    /// The composite format <see cref="string"/> (see http://msdn.microsoft.com/en-us/library/txafckwd.aspx).
+    /// The composite format <see cref="string"/> (see
+    // http://msdn.microsoft.com/en-us/library/txafckwd.aspx).
     /// </param>
     /// <param name="args">The object array to format.</param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
@@ -103,13 +105,16 @@ public abstract class TagHelperContent : IHtmlContentBuilder
     }
 
     /// <summary>
-    /// Appends the specified <paramref name="format"/> to the existing content with information from the
-    /// <paramref name="provider"/> after replacing each format item with the HTML encoded <see cref="string"/>
+    /// Appends the specified <paramref name="format"/> to the existing content with information from
+    // the
+    /// <paramref name="provider"/> after replacing each format item with the HTML encoded <see
+    // cref="string"/>
     /// representation of the corresponding item in the <paramref name="args"/> array.
     /// </summary>
     /// <param name="provider">An object that supplies culture-specific formatting information.</param>
     /// <param name="format">
-    /// The composite format <see cref="string"/> (see http://msdn.microsoft.com/en-us/library/txafckwd.aspx).
+    /// The composite format <see cref="string"/> (see
+    // http://msdn.microsoft.com/en-us/library/txafckwd.aspx).
     /// </param>
     /// <param name="args">The object array to format.</param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>

@@ -12,7 +12,8 @@ using Xunit;
 
 namespace System.IO
 {
-    /// <summary>Base class for test classes the use temporary files that need to be cleaned up.</summary>
+    /// <summary>Base class for test classes the use temporary files that need to be cleaned
+    // up.</summary>
     public abstract partial class FileCleanupTestBase : IDisposable
     {
         private string fallbackGuid = Guid.NewGuid().ToString("N").Substring(0, 10);
@@ -22,13 +23,18 @@ namespace System.IO
         {
             tempDirectory ??= Path.GetTempPath();
 
-            // Use a unique test directory per test class.  The test directory lives in the user's temp directory,
-            // and includes both the name of the test class and a random string.  The test class name is included
-            // so that it can be easily correlated if necessary, and the random string to helps avoid conflicts if
-            // the same test should be run concurrently with itself (e.g. if a [Fact] method lives on a base class)
+            // Use a unique test directory per test class.  The test directory lives in the user's temp
+            // directory,
+            // and includes both the name of the test class and a random string.  The test class name is
+            // included
+            // so that it can be easily correlated if necessary, and the random string to helps avoid conflicts
+            // if
+            // the same test should be run concurrently with itself (e.g. if a [Fact] method lives on a base
+            // class)
             // or if some stray files were left over from a previous run.
 
-            // Make 3 attempts since we have seen this on rare occasions fail with access denied, perhaps due to machine
+            // Make 3 attempts since we have seen this on rare occasions fail with access denied, perhaps due to
+            // machine
             // configuration, and it doesn't make sense to fail arbitrary tests for this reason.
             string failure = string.Empty;
             for (int i = 0; i <= 2; i++)
@@ -138,7 +144,8 @@ namespace System.IO
             _testDirectoryActualCasing ??= GetTestDirectoryActualCasing();
 
         /// <summary>Gets a test file full path that is associated with the call site.</summary>
-        /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
+        /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a
+        // loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
         protected virtual string GetTestFilePath(
@@ -148,7 +155,8 @@ namespace System.IO
         ) => Path.Combine(TestDirectory, GetTestFileName(index, memberName, lineNumber));
 
         /// <summary>Gets a test file name that is associated with the call site.</summary>
-        /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
+        /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a
+        // loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
         protected string GetTestFileName(
@@ -231,9 +239,12 @@ namespace System.IO
             return sb.ToString();
         }
 
-        // Some Windows versions like Windows Nano Server have the %TEMP% environment variable set to "C:\TEMP" but the
-        // actual folder name is "C:\Temp", which prevents asserting path values using Assert.Equal due to case sensitiveness.
-        // So instead of using TestDirectory directly, we retrieve the real path with proper casing of the initial folder path.
+        // Some Windows versions like Windows Nano Server have the %TEMP% environment variable set to
+        // "C:\TEMP" but the
+        // actual folder name is "C:\Temp", which prevents asserting path values using Assert.Equal due to
+        // case sensitiveness.
+        // So instead of using TestDirectory directly, we retrieve the real path with proper casing of the
+        // initial folder path.
         private unsafe string GetTestDirectoryActualCasing()
         {
             if (!PlatformDetection.IsWindows)

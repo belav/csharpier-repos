@@ -147,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
 
         private static bool IsNullConditionalInvocationExpression(ExpressionSyntax expressionSyntax)
         {
-            // Check if the expression syntax is like an invocation expression nested inside ConditionalAccessExpressionSyntax.
+            // Check if the expression syntax is like an invocation expression nested inside
+            // ConditionalAccessExpressionSyntax.
             // For example: a?.b.c()
             //
             // If the expression is ended with an invocation
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             // ConditionalAccessExpressionSyntax -> InvocationExpression.
             // And in case of example like a?.b?.d?.c();
             // This is case it would be
-            // ConditionalAccessExpressionSyntax -> ConditionalAccessExpressionSyntax -> ... -> InvocationExpression.
+            // ConditionalAccessExpressionSyntax -> ConditionalAccessExpressionSyntax -> ... ->
+            // InvocationExpression.
             return expressionSyntax
                     is ConditionalAccessExpressionSyntax { WhenNotNull: var whenNotNull }
                 && (

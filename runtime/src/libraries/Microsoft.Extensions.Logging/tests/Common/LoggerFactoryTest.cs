@@ -727,8 +727,10 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 LogText.Add(formatter(state, exception));
 
-                // Notice that other ILoggers maybe not call "ToString()" on the scope but enumerate it and this isn't covered by this implementation.
-                // E.g. the SimpleConsoleFormatter calls "ToString()" like it's done here but the "JsonConsoleFormatter" enumerates a scope
+                // Notice that other ILoggers maybe not call "ToString()" on the scope but enumerate it and this
+                // isn't covered by this implementation.
+                // E.g. the SimpleConsoleFormatter calls "ToString()" like it's done here but the
+                // "JsonConsoleFormatter" enumerates a scope
                 // if the Scope is of type IEnumerable<KeyValuePair<string, object>>.
                 ScopeProvider.ForEachScope(
                     (scope, builder) => builder.Add(scope.ToString()),

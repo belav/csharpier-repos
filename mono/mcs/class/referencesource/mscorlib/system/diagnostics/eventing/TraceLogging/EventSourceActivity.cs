@@ -43,7 +43,7 @@ namespace System.Diagnostics.Tracing
             return new EventSourceActivity(eventSource);
         }
 
-        /* Properties */
+/* Properties */
         /// <summary>
         /// Gets the event source to which this activity writes events.
         /// </summary>
@@ -73,21 +73,29 @@ namespace System.Diagnostics.Tracing
 #endif
 
         /// <summary>
-        /// Writes a Start event with the specified name and data.   If the start event is not active (because the provider
-        /// is not on or keyword-level indiates the event is off, then the returned activity is simply the 'this' poitner
+        /// Writes a Start event with the specified name and data.   If the start event is not active
+        // (because the provider
+        /// is not on or keyword-level indiates the event is off, then the returned activity is simply the
+        // 'this' poitner
         /// and it is effectively like the Start d
         ///
         /// A new activityID GUID is generated and the returned
-        /// EventSourceActivity remembers this activity and will mark every event (including the start stop and any writes)
-        /// with this activityID.   In addition the Start activity will log a 'relatedActivityID' that was the activity
-        /// ID before the start event.   This way event processors can form a linked list of all the activities that
+        /// EventSourceActivity remembers this activity and will mark every event (including the start stop
+        // and any writes)
+        /// with this activityID.   In addition the Start activity will log a 'relatedActivityID' that was
+        // the activity
+        /// ID before the start event.   This way event processors can form a linked list of all the
+        // activities that
         /// caused this one (directly or indirectly).
         /// </summary>
         /// <param name="eventName">
-        /// The name to use for the event.   It is strongly suggested that this name end in 'Start' (e.g. DownloadStart).
-        /// If you do this, then the Stop() method will automatically replace the 'Start' suffix with a 'Stop' suffix.
+        /// The name to use for the event.   It is strongly suggested that this name end in 'Start' (e.g.
+        // DownloadStart).
+        /// If you do this, then the Stop() method will automatically replace the 'Start' suffix with a
+        // 'Stop' suffix.
         /// </param>
-        /// <param name="options">Allow options (keywords, level) to be set for the write associated with this start
+        /// <param name="options">Allow options (keywords, level) to be set for the write associated with
+        // this start
         /// These will also be used for the stop event.</param>
         /// <param name="data">The data to include in the event.</param>
         public EventSourceActivity Start<T>(string eventName, EventSourceOptions options, T data)
@@ -96,7 +104,8 @@ namespace System.Diagnostics.Tracing
         }
 
         /// <summary>
-        /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is empty (no keywords
+        /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is
+        // empty (no keywords
         /// and level==Info) Data payload is empty.
         /// </summary>
         public EventSourceActivity Start(string eventName)
@@ -107,7 +116,8 @@ namespace System.Diagnostics.Tracing
         }
 
         /// <summary>
-        /// Shortcut version see Start(string eventName, EventSourceOptions options, T data).  Data payload is empty.
+        /// Shortcut version see Start(string eventName, EventSourceOptions options, T data).  Data payload
+        // is empty.
         /// </summary>
         public EventSourceActivity Start(string eventName, EventSourceOptions options)
         {
@@ -116,7 +126,8 @@ namespace System.Diagnostics.Tracing
         }
 
         /// <summary>
-        /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is empty (no keywords
+        /// Shortcut version see Start(string eventName, EventSourceOptions options, T data) Options is
+        // empty (no keywords
         /// and level==Info)
         /// </summary>
         public EventSourceActivity Start<T>(string eventName, T data)
@@ -139,7 +150,8 @@ namespace System.Diagnostics.Tracing
         }
 
         /// <summary>
-        /// Used if you wish to use the non-default stop name (which is the start name with Start replace with 'Stop')
+        /// Used if you wish to use the non-default stop name (which is the start name with Start replace
+        // with 'Stop')
         /// This can be useful to indicate unusual ways of stoping (but it is still STRONGLY recommeded that
         /// you start with the same prefix used for the start event and you end with the 'Stop' suffix.
         /// </summary>
@@ -150,7 +162,8 @@ namespace System.Diagnostics.Tracing
         }
 
         /// <summary>
-        /// Used if you wish to use the non-default stop name (which is the start name with Start replace with 'Stop')
+        /// Used if you wish to use the non-default stop name (which is the start name with Start replace
+        // with 'Stop')
         /// This can be useful to indicate unusual ways of stoping (but it is still STRONGLY recommeded that
         /// you start with the same prefix used for the start event and you end with the 'Stop' suffix.
         /// </summary>
@@ -257,7 +270,8 @@ namespace System.Diagnostics.Tracing
             if (this.state != State.Started)
                 throw new InvalidOperationException();
 
-            // If the source is not on at all, then we don't need to do anything and we can simply return ourselves.
+            // If the source is not on at all, then we don't need to do anything and we can simply return
+            // ourselves.
             if (!this.eventSource.IsEnabled())
                 return this;
 
@@ -280,7 +294,8 @@ namespace System.Diagnostics.Tracing
             }
             else
             {
-                // If we are not active, we don't set the eventName, which basically also turns off the Stop event as well.
+                // If we are not active, we don't set the eventName, which basically also turns off the Stop event
+                // as well.
                 newActivity.activityId = this.Id;
             }
 

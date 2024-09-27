@@ -16,9 +16,12 @@ public class HtmlHelperOptions
     /// Gets or sets the <see cref="Html5DateRenderingMode.Html5DateRenderingMode"/> value.
     /// </summary>
     /// <remarks>
-    /// Set this property to <see cref="Html5DateRenderingMode.CurrentCulture" /> to have templated helpers such as
-    /// <see cref="IHtmlHelper.Editor" /> and <see cref="IHtmlHelper{TModel}.EditorFor" /> render date and time
-    /// values using the current culture. By default, these helpers render dates and times as RFC 3339 compliant strings.
+    /// Set this property to <see cref="Html5DateRenderingMode.CurrentCulture" /> to have templated
+    // helpers such as
+    /// <see cref="IHtmlHelper.Editor" /> and <see cref="IHtmlHelper{TModel}.EditorFor" /> render date
+    // and time
+    /// values using the current culture. By default, these helpers render dates and times as RFC 3339
+    // compliant strings.
     /// </remarks>
     public Html5DateRenderingMode Html5DateRenderingMode { get; set; }
 
@@ -63,8 +66,10 @@ public class HtmlHelperOptions
     /// Gets or sets a value that determines how form &lt;input/&gt; elements are rendered.
     /// </summary>
     /// <remarks>
-    /// Some form elements (e.g., &lt;input type="text"/&gt;) require culture-specific formatting and parsing because their values are
-    /// directly entered by the user. However, other inputs (e.g., &lt;input type="number"/&gt;) use culture-invariant
+    /// Some form elements (e.g., &lt;input type="text"/&gt;) require culture-specific formatting and
+    // parsing because their values are
+    /// directly entered by the user. However, other inputs (e.g., &lt;input type="number"/&gt;) use
+    // culture-invariant
     /// formatting both in the HTML source and in the form request.
     /// </remarks>
     public FormInputRenderMode FormInputRenderMode { get; set; }

@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Routing;
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 /// <summary>
-/// <see cref="ITagHelper"/> implementation targeting &lt;button&gt; elements and &lt;input&gt; elements with
+/// <see cref="ITagHelper"/> implementation targeting &lt;button&gt; elements and &lt;input&gt;
+// elements with
 /// their <c>type</c> attribute set to <c>image</c> or <c>submit</c>.
 /// </summary>
 [HtmlTargetElement("button", Attributes = ActionAttributeName)]
@@ -176,7 +177,8 @@ public class FormActionTagHelper : TagHelper
     public ViewContext ViewContext { get; set; }
 
     /// <summary>
-    /// Gets the <see cref="IUrlHelperFactory"/> used to create an <see cref="IUrlHelper"/> to generate links.
+    /// Gets the <see cref="IUrlHelperFactory"/> used to create an <see cref="IUrlHelper"/> to generate
+    // links.
     /// </summary>
     protected IUrlHelperFactory UrlHelperFactory { get; }
 
@@ -246,9 +248,12 @@ public class FormActionTagHelper : TagHelper
     /// <inheritdoc />
     /// <remarks>Does nothing if user provides an <c>FormAction</c> attribute.</remarks>
     /// <exception cref="InvalidOperationException">
-    /// Thrown if <c>FormAction</c> attribute is provided and <see cref="Action"/>, <see cref="Controller"/>,
-    /// <see cref="Fragment"/> or <see cref="Route"/> are non-<c>null</c> or if the user provided <c>asp-route-*</c> attributes.
-    /// Also thrown if <see cref="Route"/> and one or both of <see cref="Action"/> and <see cref="Controller"/>
+    /// Thrown if <c>FormAction</c> attribute is provided and <see cref="Action"/>, <see
+    // cref="Controller"/>,
+    /// <see cref="Fragment"/> or <see cref="Route"/> are non-<c>null</c> or if the user provided
+    // <c>asp-route-*</c> attributes.
+    /// Also thrown if <see cref="Route"/> and one or both of <see cref="Action"/> and <see
+    // cref="Controller"/>
     /// are non-<c>null</c>
     /// </exception>
     public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -256,7 +261,8 @@ public class FormActionTagHelper : TagHelper
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(output);
 
-        // If "FormAction" is already set, it means the user is attempting to use a normal button or input element.
+        // If "FormAction" is already set, it means the user is attempting to use a normal button or input
+        // element.
         if (output.Attributes.ContainsName(FormAction))
         {
             if (

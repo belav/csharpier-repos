@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     Provides methods for manipulating string identifiers.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public static class Uniquifier
@@ -44,7 +45,8 @@ public static class Uniquifier
     /// <typeparam name="TKey">The type of the key that contains the identifier.</typeparam>
     /// <typeparam name="TValue">The type of the object the identifier maps to.</typeparam>
     /// <param name="currentIdentifier">The base identifier.</param>
-    /// <param name="otherIdentifiers">A dictionary where the identifier will be used as part of the key.</param>
+    /// <param name="otherIdentifiers">A dictionary where the identifier will be used as part of the
+    // key.</param>
     /// <param name="keySelector">Creates the key object from an identifier.</param>
     /// <param name="maxLength">The maximum length of the identifier.</param>
     /// <returns>A unique identifier.</returns>
@@ -66,7 +68,8 @@ public static class Uniquifier
     }
 
     /// <summary>
-    ///     Ensures the given identifier is shorter than the given length by removing the extra characters from the end.
+    ///     Ensures the given identifier is shorter than the given length by removing the extra
+    // characters from the end.
     /// </summary>
     /// <param name="identifier">The identifier to shorten.</param>
     /// <param name="maxLength">The maximum length of the identifier.</param>

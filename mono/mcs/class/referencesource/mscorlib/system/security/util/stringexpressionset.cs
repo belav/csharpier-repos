@@ -834,7 +834,8 @@ namespace System.Security.Util
                 path = (longPath != null) ? longPath : path;
             }
 
-            // This blocks usage of alternate data streams and some extended syntax paths (\\?\C:\). Checking after
+            // This blocks usage of alternate data streams and some extended syntax paths (\\?\C:\). Checking
+            // after
             // normalization allows valid paths such as " C:\" to be considered ok (as it will become "C:\").
             if (path.IndexOf(':', 2) != -1)
                 throw new NotSupportedException(

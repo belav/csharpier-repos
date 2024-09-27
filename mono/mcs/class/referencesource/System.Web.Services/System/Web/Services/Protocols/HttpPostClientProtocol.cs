@@ -9,20 +9,23 @@ namespace System.Web.Services.Protocols
     using System.IO;
     using System.Net;
 
-    /// <include file='doc\HttpPostClientProtocol.uex' path='docs/doc[@for="HttpPostClientProtocol"]/*' />
+    /// <include file='doc\HttpPostClientProtocol.uex' path='docs/doc[@for="HttpPostClientProtocol"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public class HttpPostClientProtocol : HttpSimpleClientProtocol
     {
-        /// <include file='doc\HttpPostClientProtocol.uex' path='docs/doc[@for="HttpPostClientProtocol.HttpPostClientProtocol"]/*' />
+        /// <include file='doc\HttpPostClientProtocol.uex'
+        // path='docs/doc[@for="HttpPostClientProtocol.HttpPostClientProtocol"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public HttpPostClientProtocol()
             : base() { }
 
-        /// <include file='doc\HttpPostClientProtocol.uex' path='docs/doc[@for="HttpPostClientProtocol.GetWebRequest"]/*' />
+        /// <include file='doc\HttpPostClientProtocol.uex'
+        // path='docs/doc[@for="HttpPostClientProtocol.GetWebRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

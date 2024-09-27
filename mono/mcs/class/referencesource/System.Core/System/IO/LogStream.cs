@@ -525,7 +525,8 @@ namespace System.IO
                             catch (IOException)
                             {
                                 // Should we do this only for ERROR_SHARING_VIOLATION?
-                                //if (UnsafeNativeMethods.MakeErrorCodeFromHR(Marshal.GetHRForException(ioexc)) != InternalResources.ERROR_SHARING_VIOLATION) break;
+                                //if (UnsafeNativeMethods.MakeErrorCodeFromHR(Marshal.GetHRForException(ioexc)) !=
+                                // InternalResources.ERROR_SHARING_VIOLATION) break;
 
                                 // Possible sharing violation - ----? Let the next iteration try again
                                 // For now revert the handle to the original one

@@ -64,7 +64,8 @@ namespace System.Data
             );
         }
 
-        // Gathers all linear expressions in to this.linearExpression and all binary expressions in to their respective candidate columns expressions
+        // Gathers all linear expressions in to this.linearExpression and all binary expressions in to their
+        // respective candidate columns expressions
         private void AnalyzeExpression(BinaryNode expr)
         {
             Debug.Assert(_candidateColumns != null);
@@ -357,7 +358,8 @@ namespace System.Data
             }
         }
 
-        // Based on the required sorting and candidate columns settings, create a new index; Should be called only when there is no existing index to be reused
+        // Based on the required sorting and candidate columns settings, create a new index; Should be
+        // called only when there is no existing index to be reused
         private void CreateIndex()
         {
             Debug.Assert(_candidateColumns != null);
@@ -445,7 +447,8 @@ namespace System.Data
                         if (!IsOperatorIn(_expression))
                         {
                             // if the expression contains an 'IN' operator, the index will not be shared
-                            // therefore we do not need to index.AddRef, also table would track index consuming more memory until first write
+                            // therefore we do not need to index.AddRef, also table would track index consuming more memory
+                            // until first write
                             _index.AddRef();
                         }
 
@@ -480,7 +483,8 @@ namespace System.Data
                                 }
                             }
                         }
-                        //                        Debug.Assert(j == nCandidates+indexNotInCandidates, "Whole ndxDesc should be filled!");
+                        //                        Debug.Assert(j == nCandidates+indexNotInCandidates, "Whole ndxDesc should
+                        // be filled!");
 
                         _index = new Index(_table, ndxFields, _recordStates, null);
                         _matchedCandidates = 0;
@@ -528,7 +532,8 @@ namespace System.Data
             return false;
         }
 
-        // Based on the current index and candidate columns settings, build the linear expression; Should be called only when there is atleast something for Binary Searching
+        // Based on the current index and candidate columns settings, build the linear expression; Should be
+        // called only when there is atleast something for Binary Searching
         private void BuildLinearExpression()
         {
             Debug.Assert(_candidateColumns != null);
@@ -549,9 +554,12 @@ namespace System.Data
                 );
                 canColumn.flag = true;
             }
-            //this is invalid assert, assumption was that all equals operator exists at the beginning of candidateColumns
+            //this is invalid assert, assumption was that all equals operator exists at the beginning of
+            // candidateColumns
             // but with QFE 1704, this assumption is not true anymore
-            //            Debug.Assert(matchedCandidates==1 || candidateColumns[matchedCandidates-1].equalsOperator, "BuildLinearExpression : Invalid matched candidates");
+            //            Debug.Assert(matchedCandidates==1 ||
+            // candidateColumns[matchedCandidates-1].equalsOperator, "BuildLinearExpression : Invalid matched
+            // candidates");
             int lenCanColumns = _candidateColumns.Length;
             for (i = 0; i < lenCanColumns; i++)
             {

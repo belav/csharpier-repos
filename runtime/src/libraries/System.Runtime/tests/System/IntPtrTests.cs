@@ -1072,7 +1072,8 @@ namespace System.Tests
                 yield return new object[] { "   \0\0", style, null, typeof(FormatException) };
             }
 
-            // Leading or trailing chars for which char.IsWhiteSpace is true but that's not valid for leading/trailing whitespace
+            // Leading or trailing chars for which char.IsWhiteSpace is true but that's not valid for
+            // leading/trailing whitespace
             foreach (
                 string c in new[]
                 {

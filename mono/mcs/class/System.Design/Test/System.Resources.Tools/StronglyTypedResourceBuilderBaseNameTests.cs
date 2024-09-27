@@ -194,7 +194,8 @@ namespace MonoTests.System.Resources.Tools
         [Test, ExpectedException(typeof(ArgumentException))]
         public void BaseNameInvalidIdentifier()
         {
-            // identifier invalid after Going through provider.CreateValidIdentifier throw exception in .NET framework
+            // identifier invalid after Going through provider.CreateValidIdentifier throw exception in .NET
+            // framework
             string[] unmatchables;
             string input;
 

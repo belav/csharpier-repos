@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 )
                 .Unwrap();
 
-            // We do not want background work to implicitly block on the availability of the SVsFileChangeEx to avoid any deadlock risk,
+            // We do not want background work to implicitly block on the availability of the SVsFileChangeEx to
+            // avoid any deadlock risk,
             // since the first fetch for a file watcher might end up happening on the background.
             Watcher = new FileChangeWatcher(listenerProvider, fileChangeService);
         }

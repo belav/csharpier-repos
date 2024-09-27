@@ -17,7 +17,8 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// <summary>
     ///     Gets the builder that can be used to configure this stored procedure.
     /// </summary>
-    /// <exception cref="InvalidOperationException">If the stored procedure has been removed from the model.</exception>
+    /// <exception cref="InvalidOperationException">If the stored procedure has been removed from the
+    // model.</exception>
     new IConventionStoredProcedureBuilder Builder { get; }
 
     /// <summary>
@@ -30,7 +31,8 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     ///     Sets the name of the stored procedure in the database.
     /// </summary>
     /// <param name="name">The name of the stored procedure in the database.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     string? SetName(string? name, bool fromDataAnnotation = false);
 
@@ -44,7 +46,8 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     ///     Sets the schema of the stored procedure in the database.
     /// </summary>
     /// <param name="schema">The schema of the stored procedure in the database.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     string? SetSchema(string? schema, bool fromDataAnnotation = false);
 
@@ -63,14 +66,16 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     ///     Returns the parameter corresponding to the given property.
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
-    /// <returns>The parameter corresponding to the given property if found; <see langword="null" /> otherwise.</returns>
+    /// <returns>The parameter corresponding to the given property if found; <see langword="null" />
+    // otherwise.</returns>
     new IConventionStoredProcedureParameter? FindParameter(string propertyName);
 
     /// <summary>
     ///     Adds a new parameter mapped to the property with the given name.
     /// </summary>
     /// <param name="propertyName">The name of the corresponding property.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The added parameter.</returns>
     IConventionStoredProcedureParameter? AddParameter(
         string propertyName,
@@ -82,7 +87,8 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
     /// <returns>
-    ///     The original value parameter corresponding to the given property if found; <see langword="null" /> otherwise.
+    ///     The original value parameter corresponding to the given property if found; <see
+    // langword="null" /> otherwise.
     /// </returns>
     new IConventionStoredProcedureParameter? FindOriginalValueParameter(string propertyName);
 
@@ -90,7 +96,8 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     ///     Adds a new parameter that will hold the original value of the property with the given name.
     /// </summary>
     /// <param name="propertyName">The name of the corresponding property.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The added parameter.</returns>
     IConventionStoredProcedureParameter? AddOriginalValueParameter(
         string propertyName,
@@ -108,7 +115,8 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// <summary>
     ///     Adds an output parameter that returns the rows affected by this stored procedure.
     /// </summary>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The added parameter.</returns>
     IConventionStoredProcedureParameter? AddRowsAffectedParameter(bool fromDataAnnotation = false);
 
@@ -121,14 +129,17 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     ///     Returns the result column corresponding to the given property.
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
-    /// <returns>The result column corresponding to the given property if found; <see langword="null" /> otherwise.</returns>
+    /// <returns>The result column corresponding to the given property if found; <see langword="null" />
+    // otherwise.</returns>
     new IConventionStoredProcedureResultColumn? FindResultColumn(string propertyName);
 
     /// <summary>
-    ///     Adds a new column of the result for this stored procedure mapped to the property with the given name
+    ///     Adds a new column of the result for this stored procedure mapped to the property with the
+    // given name
     /// </summary>
     /// <param name="propertyName">The name of the corresponding property.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The added column.</returns>
     IConventionStoredProcedureResultColumn? AddResultColumn(
         string propertyName,
@@ -144,7 +155,8 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// <summary>
     ///     Adds a new column of the result that contains the rows affected by this stored procedure.
     /// </summary>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The added column.</returns>
     IConventionStoredProcedureResultColumn? AddRowsAffectedResultColumn(
         bool fromDataAnnotation = false
@@ -153,8 +165,10 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// <summary>
     ///     Configures whether this stored procedure returns the number of rows affected.
     /// </summary>
-    /// <param name="rowsAffectedReturned">A value indicating whether the number of rows affected is returned.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="rowsAffectedReturned">A value indicating whether the number of rows affected is
+    // returned.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     bool SetIsRowsAffectedReturned(bool rowsAffectedReturned, bool fromDataAnnotation = false);
 }

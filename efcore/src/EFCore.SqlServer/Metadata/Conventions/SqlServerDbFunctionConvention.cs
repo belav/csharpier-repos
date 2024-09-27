@@ -6,12 +6,14 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that ensures that <see cref="IReadOnlyDbFunction.Schema" /> is populated for database functions which
+///     A convention that ensures that <see cref="IReadOnlyDbFunction.Schema" /> is populated for
+// database functions which
 ///     have <see cref="IReadOnlyDbFunction.IsBuiltIn" /> flag set to <see langword="false" />.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public class SqlServerDbFunctionConvention : IModelFinalizingConvention
@@ -20,7 +22,8 @@ public class SqlServerDbFunctionConvention : IModelFinalizingConvention
     ///     Creates a new instance of <see cref="SqlServerDbFunctionConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public SqlServerDbFunctionConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

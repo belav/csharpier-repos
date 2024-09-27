@@ -1807,10 +1807,14 @@ namespace System.Xml.XmlConvertTests
             return TestValid(array0, array1, "datetime.Unspecified");
         }
 
-        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.Local", Param = XmlDateTimeSerializationMode.Local)]
-        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.RoundtripKind", Param = XmlDateTimeSerializationMode.RoundtripKind)]
-        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.Unspecified", Param = XmlDateTimeSerializationMode.Unspecified)]
-        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.Utc", Param = XmlDateTimeSerializationMode.Utc)]
+        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.Local", Param =
+        // XmlDateTimeSerializationMode.Local)]
+        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.RoundtripKind", Param =
+        // XmlDateTimeSerializationMode.RoundtripKind)]
+        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.Unspecified", Param =
+        // XmlDateTimeSerializationMode.Unspecified)]
+        //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.Utc", Param =
+        // XmlDateTimeSerializationMode.Utc)]
         public int ToType51()
         {
             XmlDateTimeSerializationMode mode = (XmlDateTimeSerializationMode)
@@ -1828,8 +1832,10 @@ namespace System.Xml.XmlConvertTests
         }
 
         //[Variation("ToDateTimeOffset(String s) - valid cases", Param = "datetimeOffset")]
-        //[Variation("ToDateTimeOffset(String s, String format) - valid cases", Param = "datetimeOffset.format")]
-        //[Variation("ToDateTimeOffset(String s, String[] formats) - valid cases", Param = "datetimeOffset.formats")]
+        //[Variation("ToDateTimeOffset(String s, String format) - valid cases", Param =
+        // "datetimeOffset.format")]
+        //[Variation("ToDateTimeOffset(String s, String[] formats) - valid cases", Param =
+        // "datetimeOffset.formats")]
         public int ToType52()
         {
             var param = (string)CurVariation.Param;
@@ -2106,8 +2112,10 @@ namespace System.Xml.XmlConvertTests
             return TestValid(array0, array1, param, format);
         }
 
-        //[Variation("ToDateTimeOffset(String s, String format) with offset = hh:60 - invalid", Param = "datetimeOffset.format")]
-        //[Variation("ToDateTimeOffset(String s, String[] formats) with offset = hh:60 - invalid", Param = "datetimeOffset.formats")]
+        //[Variation("ToDateTimeOffset(String s, String format) with offset = hh:60 - invalid", Param =
+        // "datetimeOffset.format")]
+        //[Variation("ToDateTimeOffset(String s, String[] formats) with offset = hh:60 - invalid", Param =
+        // "datetimeOffset.formats")]
         public int ToType54()
         {
             var param = (string)CurVariation.Param;
@@ -2143,8 +2151,10 @@ namespace System.Xml.XmlConvertTests
         }
 
         //[Variation("ToDateTimeOffset(String s) - invalid cases", Param = "datetimeOffset")]
-        //[Variation("ToDateTimeOffset(String s, String format) - invalid cases", Param = "datetimeOffset.format")]
-        //[Variation("ToDateTimeOffset(String s, String[] formats) - invalid cases", Param = "datetimeOffset.formats")]
+        //[Variation("ToDateTimeOffset(String s, String format) - invalid cases", Param =
+        // "datetimeOffset.format")]
+        //[Variation("ToDateTimeOffset(String s, String[] formats) - invalid cases", Param =
+        // "datetimeOffset.formats")]
         public int ToType55()
         {
             var param = (string)CurVariation.Param;
@@ -2523,7 +2533,8 @@ namespace System.Xml.XmlConvertTests
         //[Variation("3. Roundtrip: String-DateTimeOffset-String", Param = "9998-12-31T12:59:59-14:00")]
         //[Variation("4. Roundtrip: String-DateTimeOffset-String", Param = "9999-12-31T23:59:59+14:00")]
         //[Variation("5. Roundtrip: String-DateTimeOffset-String", Param = "9999-12-31T23:59:59Z")]
-        //[Variation("6. Roundtrip: String-DateTimeOffset-String", Param = "2000-02-29T23:59:59.9999999+13:59")]
+        //[Variation("6. Roundtrip: String-DateTimeOffset-String", Param =
+        // "2000-02-29T23:59:59.9999999+13:59")]
         public int ToType59()
         {
             var s = (string)CurVariation.Param;

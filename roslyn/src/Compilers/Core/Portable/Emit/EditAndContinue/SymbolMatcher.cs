@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Emit
         }
 
         /// <summary>
-        /// Merges synthesized or deleted members generated during lowering, or emit, of the current compilation with aggregate
+        /// Merges synthesized or deleted members generated during lowering, or emit, of the current
+        // compilation with aggregate
         /// synthesized or deleted members from all previous source generations (gen >= 1).
         /// </summary>
         /// <remarks>
@@ -216,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Emit
             bool isDeletedMemberMapping
         )
         {
-            // Note: we can't just return previous members if there are no new members, since we still need to map the symbols to the new compilation.
+            // Note: we can't just return previous members if there are no new members, since we still need to
+            // map the symbols to the new compilation.
 
             if (previousMembers.Count == 0)
             {

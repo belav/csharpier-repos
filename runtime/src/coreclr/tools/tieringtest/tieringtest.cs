@@ -48,8 +48,10 @@ class Program
         // Todo: root cause these and fix tests if possible.
         //
         // With Full PGO:
-        // RngchkStress2_o can hit a jit assert: '!m_failedToConverge' in 'SimpleArray_01.Test:Test1()' during 'Profile incorporation'
-        // GitHub_25027 can hit a jit assert: 'verCurrentState.esStackDepth == 0' in 'X:Main():int' during 'Morph - Inlining'
+        // RngchkStress2_o can hit a jit assert: '!m_failedToConverge' in 'SimpleArray_01.Test:Test1()'
+        // during 'Profile incorporation'
+        // GitHub_25027 can hit a jit assert: 'verCurrentState.esStackDepth == 0' in 'X:Main():int' during
+        // 'Morph - Inlining'
         //
         string[][] exclusionPatterns =
         {

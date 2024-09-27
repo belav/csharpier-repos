@@ -321,7 +321,8 @@ namespace System.Net
                 object binding = httpWebRequest.ServicePoint.CachedChannelBinding;
 
 #if DEBUG
-                // The ModuleRequiresChannelBinding method is only compiled in DEBUG so the assert must be restricted
+                // The ModuleRequiresChannelBinding method is only compiled in DEBUG so the assert must be
+                // restricted
                 // to DEBUG as well.
 
                 // If the authentication module does CBT, we require that it also caches channel bindings.

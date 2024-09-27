@@ -45,7 +45,8 @@ internal static class UseCollectionExpressionHelpers
 
         // X[] = new Y[] { 1, 2, 3 }
         //
-        // First, we don't change things if X and Y are different.  That could lead to something observable at
+        // First, we don't change things if X and Y are different.  That could lead to something observable
+        // at
         // runtime in the case of something like:  object[] x = new string[] ...
 
         var originalTypeInfo = semanticModel.GetTypeInfo(topMostExpression, cancellationToken);
@@ -58,8 +59,10 @@ internal static class UseCollectionExpressionHelpers
         if (!IsConstructibleCollectionType(originalTypeInfo.ConvertedType.OriginalDefinition))
             return false;
 
-        // Conservatively, avoid making this change if the original expression was itself converted. Consider, for
-        // example, `IEnumerable<string> x = new List<string>()`.  If we change that to `[]` we will still compile,
+        // Conservatively, avoid making this change if the original expression was itself converted.
+        // Consider, for
+        // example, `IEnumerable<string> x = new List<string>()`.  If we change that to `[]` we will still
+        // compile,
         // but it's possible we'll end up with different types at runtime that may cause problems.
         //
         // Note: we can relax this on a case by case basis if we feel like it's acceptable.
@@ -73,7 +76,8 @@ internal static class UseCollectionExpressionHelpers
         }
 
         // HACK: Workaround lack of compiler information for collection expression conversions with casts.
-        // Specifically, hardcode in knowledge that a cast to a constructible collection type of the empty collection
+        // Specifically, hardcode in knowledge that a cast to a constructible collection type of the empty
+        // collection
         // expression will always succeed, and there's no need to actually validate semantics there.
         // Tracked by https://github.com/dotnet/roslyn/issues/68826
         if (parent is CastExpressionSyntax)
@@ -81,10 +85,14 @@ internal static class UseCollectionExpressionHelpers
                 semanticModel.GetTypeInfo(parent, cancellationToken).Type
             );
 
-        // Looks good as something to replace.  Now check the semantics of making the replacement to see if there would
-        // any issues.  To keep things simple, all we do is replace the existing expression with the `[]` literal. This
-        // is an 'untyped' collection expression literal, so it tells us if the new code will have any issues moving to
-        // something untyped.  This will also tell us if we have any ambiguities (because there are multiple destination
+        // Looks good as something to replace.  Now check the semantics of making the replacement to see if
+        // there would
+        // any issues.  To keep things simple, all we do is replace the existing expression with the `[]`
+        // literal. This
+        // is an 'untyped' collection expression literal, so it tells us if the new code will have any
+        // issues moving to
+        // something untyped.  This will also tell us if we have any ambiguities (because there are multiple
+        // destination
         // types that could accept the collection expression).
         var speculationAnalyzer = new SpeculationAnalyzer(
             topMostExpression,
@@ -98,8 +106,10 @@ internal static class UseCollectionExpressionHelpers
         if (speculationAnalyzer.ReplacementChangesSemantics())
             return false;
 
-        // Ensure that we have a collection conversion with the replacement.  If not, this wasn't a legal replacement
-        // (for example, we're trying to replace an expression that is converted to something that isn't even a
+        // Ensure that we have a collection conversion with the replacement.  If not, this wasn't a legal
+        // replacement
+        // (for example, we're trying to replace an expression that is converted to something that isn't
+        // even a
         // collection type).
         //
         // Note: an identity conversion is always legal without needing any more checks.
@@ -113,7 +123,8 @@ internal static class UseCollectionExpressionHelpers
         if (!conversion.IsCollectionExpression)
             return false;
 
-        // The new expression's converted type has to equal the old expressions as well.  Otherwise, we're now
+        // The new expression's converted type has to equal the old expressions as well.  Otherwise, we're
+        // now
         // converting this to some different collection type unintentionally.
         var replacedTypeInfo = speculationAnalyzer.SpeculativeSemanticModel.GetTypeInfo(
             speculationAnalyzer.ReplacedExpression,
@@ -229,7 +240,8 @@ internal static class UseCollectionExpressionHelpers
 
             // ReadOnlySpan<X> x = stackalloc[] ...
             //
-            // This will be a Span<X> converted to a ReadOnlySpan<X>.  This is always safe as ReadOnlySpan is more
+            // This will be a Span<X> converted to a ReadOnlySpan<X>.  This is always safe as ReadOnlySpan is
+            // more
             // restrictive than Span<X>
             var isSpanToReadOnlySpan =
                 convertedToReadOnlySpan
@@ -242,8 +254,10 @@ internal static class UseCollectionExpressionHelpers
             // ReadOnlySpan<X> x = new X[] ...  or
             // Span<X> x = new X[] ...
             //
-            // This may or may not be safe.  If the original 'x' was a local, then it would previously have had global
-            // scope (due to the array).  In that case, we have to make sure converting to a collection expression
+            // This may or may not be safe.  If the original 'x' was a local, then it would previously have had
+            // global
+            // scope (due to the array).  In that case, we have to make sure converting to a collection
+            // expression
             // (which would had local scope) will not cause problems.
 
             if (
@@ -287,7 +301,8 @@ internal static class UseCollectionExpressionHelpers
         }
         else
         {
-            // Otherwise, if this is an Array.Empty<T>() invocation or `new X[0]` instantiation, then this is always
+            // Otherwise, if this is an Array.Empty<T>() invocation or `new X[0]` instantiation, then this is
+            // always
             // safe to convert from an array to a span.
             if (IsCollectionEmptyAccess(semanticModel, expression, cancellationToken))
                 return true;
@@ -308,12 +323,16 @@ internal static class UseCollectionExpressionHelpers
             return false;
         }
 
-        // Ok, we have non primitive/constant values.  Moving to a collection expression will make this span have local
-        // scope.  Have to make sure that's ok.  We do our analysis in an iterative fashion.  Starting with the original
-        // expression and seeing how its scope flows outward (including to other locals).  We will then require that any
+        // Ok, we have non primitive/constant values.  Moving to a collection expression will make this span
+        // have local
+        // scope.  Have to make sure that's ok.  We do our analysis in an iterative fashion.  Starting with
+        // the original
+        // expression and seeing how its scope flows outward (including to other locals).  We will then
+        // require that any
         // ref-type values we encounter (including the initial one) cannot flow out of the method we're in.
         //
-        // Because we're analyzing the code in multiple passes (until we reach a fixed point), we have to ensure we only
+        // Because we're analyzing the code in multiple passes (until we reach a fixed point), we have to
+        // ensure we only
         // examine locals and expressions once.
         using var _1 = ArrayBuilder<ExpressionSyntax>.GetInstance(out var expressionsToProcess);
         using var _2 = PooledHashSet<ExpressionSyntax>.GetInstance(out var seenExpressions);
@@ -331,7 +350,8 @@ internal static class UseCollectionExpressionHelpers
             if (locallyScopedExpression.Parent is ExpressionStatementSyntax)
                 continue;
 
-            // If the expression is returned out, then it definitely has non-local scope and we definitely cannot
+            // If the expression is returned out, then it definitely has non-local scope and we definitely
+            // cannot
             // convert it.
             if (
                 locallyScopedExpression.Parent
@@ -420,7 +440,8 @@ internal static class UseCollectionExpressionHelpers
                 && assignment.Right == locallyScopedExpression
             )
             {
-                // If it's assigned to something on the left, that's only safe if it's another locally scoped symbol.
+                // If it's assigned to something on the left, that's only safe if it's another locally scoped
+                // symbol.
                 var leftSymbol = semanticModel
                     .GetSymbolInfo(assignment.Left, cancellationToken)
                     .Symbol;
@@ -434,7 +455,8 @@ internal static class UseCollectionExpressionHelpers
             return false;
         }
 
-        // Everything we processed was good.  Can safely convert this global-scoped array to a local scoped span.
+        // Everything we processed was good.  Can safely convert this global-scoped array to a local scoped
+        // span.
         return true;
 
         void AddExpressionToProcess(ExpressionSyntax expression)
@@ -455,12 +477,14 @@ internal static class UseCollectionExpressionHelpers
             if (!seenLocals.Add(local))
                 return true;
 
-            // If the local we're assigning to isn't a ref-type, then scoping isn't relevant, and we don't have to
+            // If the local we're assigning to isn't a ref-type, then scoping isn't relevant, and we don't have
+            // to
             // examine it.
             if (!local.Type.IsRefLikeType)
                 return true;
 
-            // If the local is already scoped locally, then we don't need to do any additional checks on how it is
+            // If the local is already scoped locally, then we don't need to do any additional checks on how it
+            // is
             // used.  It's always safe to convert to a locally scoped span.
             if (local.ScopedKind == ScopedKind.ScopedValue)
                 return true;
@@ -623,7 +647,8 @@ internal static class UseCollectionExpressionHelpers
                 };
 
         static bool IsInTargetTypedCastExpression(CastExpressionSyntax castExpression)
-            // (X[])[1, 2, 3] is target typed.  `(X)[1, 2, 3]` is currently not (because it looks like indexing into an expr).
+            // (X[])[1, 2, 3] is target typed.  `(X)[1, 2, 3]` is currently not (because it looks like indexing
+            // into an expr).
             =>
             castExpression.Type is not IdentifierNameSyntax;
 
@@ -735,7 +760,8 @@ internal static class UseCollectionExpressionHelpers
         bool wasOnSingleLine
     )
     {
-        // if the initializer is already on multiple lines, keep it that way.  otherwise, squash from `{ 1, 2, 3 }` to `[1, 2, 3]`
+        // if the initializer is already on multiple lines, keep it that way.  otherwise, squash from `{ 1,
+        // 2, 3 }` to `[1, 2, 3]`
         var openBracket = Token(SyntaxKind.OpenBracketToken)
             .WithTriviaFrom(initializer.OpenBraceToken);
         var elements = initializer
@@ -744,8 +770,10 @@ internal static class UseCollectionExpressionHelpers
         var closeBracket = Token(SyntaxKind.CloseBracketToken)
             .WithTriviaFrom(initializer.CloseBraceToken);
 
-        // If it was on a single line to begin with, then remove the inner spaces on the `{ ... }` to create `[...]`. If
-        // it was multiline, leave alone as we want the brackets to just replace the existing braces exactly as they are.
+        // If it was on a single line to begin with, then remove the inner spaces on the `{ ... }` to create
+        // `[...]`. If
+        // it was multiline, leave alone as we want the brackets to just replace the existing braces exactly
+        // as they are.
         if (wasOnSingleLine)
         {
             // convert '{ ' to '['
@@ -809,7 +837,8 @@ internal static class UseCollectionExpressionHelpers
         bool newCollectionIsSingleLine
     )
     {
-        // Any time we have `{ x, y, z }` in any form, then always just replace the whole original expression
+        // Any time we have `{ x, y, z }` in any form, then always just replace the whole original
+        // expression
         // with `[x, y, z]`.
         if (
             newCollectionIsSingleLine
@@ -838,7 +867,8 @@ internal static class UseCollectionExpressionHelpers
             return true;
         }
 
-        // Initializer was on multiple lines, and was not on the same line as the 'new' keyword, and the 'new' is on a newline:
+        // Initializer was on multiple lines, and was not on the same line as the 'new' keyword, and the
+        // 'new' is on a newline:
         //
         //      var v2 =
         //          new[]
@@ -1064,8 +1094,10 @@ internal static class UseCollectionExpressionHelpers
 
         var compilation = semanticModel.Compilation;
 
-        // The pattern is a type like `ImmutableArray` (non-generic), returning an instance of `ImmutableArray<T>`.  The
-        // actual collection type (`ImmutableArray<T>`) has to have a `[CollectionBuilder(...)]` attribute on it that
+        // The pattern is a type like `ImmutableArray` (non-generic), returning an instance of
+        // `ImmutableArray<T>`.  The
+        // actual collection type (`ImmutableArray<T>`) has to have a `[CollectionBuilder(...)]` attribute
+        // on it that
         // then points at the factory type.
         var collectionBuilderAttributeData = createMethod
             .ReturnType.OriginalDefinition.GetAttributes()
@@ -1079,7 +1111,8 @@ internal static class UseCollectionExpressionHelpers
         if (!factoryType.OriginalDefinition.Equals(collectionBuilderType.OriginalDefinition))
             return false;
 
-        // Ok, this is type that has a collection-builder option available.  We can switch over if the current method
+        // Ok, this is type that has a collection-builder option available.  We can switch over if the
+        // current method
         // we're calling has one of the following signatures:
         //
         //  `Create()`.  Trivial case, can be replaced with `[]`.
@@ -1101,14 +1134,16 @@ internal static class UseCollectionExpressionHelpers
 
             var arguments = invocationExpression.ArgumentList.Arguments;
 
-            // Don't bother offering if any of the arguments are named.  It's unlikely for this to occur in practice, and it
+            // Don't bother offering if any of the arguments are named.  It's unlikely for this to occur in
+            // practice, and it
             // means we do not have to worry about order of operations.
             if (arguments.Any(static a => a.NameColon != null))
                 return false;
 
             if (originalCreateMethod.Name is CreateRangeName)
             {
-                // If we have `CreateRange<T>(IEnumerable<T> values)` this is legal if we have an array, or no-arg object creation.
+                // If we have `CreateRange<T>(IEnumerable<T> values)` this is legal if we have an array, or no-arg
+                // object creation.
                 if (
                     originalCreateMethod.Parameters
                         is [
@@ -1148,7 +1183,8 @@ internal static class UseCollectionExpressionHelpers
                         )
                             return false;
 
-                        // If it's got an initializer, it has to be a collection initializer (or an empty object initializer);
+                        // If it's got an initializer, it has to be a collection initializer (or an empty object
+                        // initializer);
                         if (
                             objectCreation.Initializer.IsKind(SyntaxKind.ObjectCreationExpression)
                             && objectCreation.Initializer.Expressions.Count > 0
@@ -1175,7 +1211,8 @@ internal static class UseCollectionExpressionHelpers
                 )
                     return arguments.Count == originalCreateMethod.Parameters.Length;
 
-                // If we have `Create<T>(params T[])` this is legal if there are multiple arguments.  Or a single argument that
+                // If we have `Create<T>(params T[])` this is legal if there are multiple arguments.  Or a single
+                // argument that
                 // is an array literal.
                 if (
                     originalCreateMethod.Parameters
@@ -1213,9 +1250,11 @@ internal static class UseCollectionExpressionHelpers
                     return false;
                 }
 
-                // If we have `Create<T>(ReadOnlySpan<T> values)` this is legal if a stack-alloc expression is passed along.
+                // If we have `Create<T>(ReadOnlySpan<T> values)` this is legal if a stack-alloc expression is
+                // passed along.
                 //
-                // Runtime needs to support inline arrays in order for this to be ok.  Otherwise compiler will change the
+                // Runtime needs to support inline arrays in order for this to be ok.  Otherwise compiler will
+                // change the
                 // stack alloc to a heap alloc, which could be very bad for user perf.
 
                 if (
@@ -1403,7 +1442,8 @@ internal static class UseCollectionExpressionHelpers
     {
         var arguments = invocationExpression.ArgumentList.Arguments;
 
-        // If we're not unwrapping a singular argument expression, then just pass back all the explicit argument
+        // If we're not unwrapping a singular argument expression, then just pass back all the explicit
+        // argument
         // expressions the user wrote out.
         if (!unwrapArgument)
             return arguments;

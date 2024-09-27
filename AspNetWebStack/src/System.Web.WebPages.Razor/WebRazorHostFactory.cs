@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -179,7 +180,8 @@ namespace System.Web.WebPages.Razor
 
         internal static RazorWebSectionGroup GetRazorSection(string virtualPath)
         {
-            // Get the individual sections (we can only use GetSection in medium trust) and then reconstruct the section group
+            // Get the individual sections (we can only use GetSection in medium trust) and then reconstruct the
+            // section group
             return new RazorWebSectionGroup()
             {
                 Host = (HostSection)

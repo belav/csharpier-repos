@@ -315,7 +315,8 @@ namespace System.Diagnostics
                             }
                             catch (System.ObjectDisposedException)
                             {
-                                // This races with Dispose, it's safe to ignore the error as it comes from a SafeHandle doing its job
+                                // This races with Dispose, it's safe to ignore the error as it comes from a SafeHandle doing its
+                                // job
                             }
                         }
                     }

@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Components;
 public readonly struct NavigationOptions
 {
     /// <summary>
-    /// If true, bypasses client-side routing and forces the browser to load the new page from the server, whether or not the URI would normally be handled by the client-side router.
+    /// If true, bypasses client-side routing and forces the browser to load the new page from the
+    // server, whether or not the URI would normally be handled by the client-side router.
     /// </summary>
     public bool ForceLoad { get; init; }
 

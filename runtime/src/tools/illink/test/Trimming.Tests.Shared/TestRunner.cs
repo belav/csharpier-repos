@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 #nullable enable
 using System;
@@ -157,8 +158,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
             catch (Exception)
             {
-                // If completing the input assembly task threw, we need to wait for the expectations task to complete before continuing
-                // otherwise we could set the next test up for a race condition with the expectations compilation over access to the sandbox directory
+                // If completing the input assembly task threw, we need to wait for the expectations task to
+                // complete before continuing
+                // otherwise we could set the next test up for a race condition with the expectations compilation
+                // over access to the sandbox directory
                 if (inputAssemblyPath == null && expectationsAssemblyPath == null)
                 {
                     try

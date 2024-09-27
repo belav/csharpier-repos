@@ -326,19 +326,22 @@ namespace System.Speech.Recognition
             RecoBase.RecognizeAsync(mode);
         }
 
-        // This method stops recognition immediately without completing processing the audio. Then a RecognizeCompelted event is sent.
+        // This method stops recognition immediately without completing processing the audio. Then a
+        // RecognizeCompelted event is sent.
         public void RecognizeAsyncCancel()
         {
             RecoBase.RecognizeAsyncCancel();
         }
 
-        // This method stops recognition but audio currently buffered is still processed, so a final SpeechRecognized event may be sent {before the RecognizeCompleted event}.
+        // This method stops recognition but audio currently buffered is still processed, so a final
+        // SpeechRecognized event may be sent {before the RecognizeCompleted event}.
         public void RecognizeAsyncStop()
         {
             RecoBase.RecognizeAsyncStop();
         }
 
-        // Note: Currently this can't be exposed as a true collection in Yakima {it can't be enumerated}. If we think this would be useful we could do this.
+        // Note: Currently this can't be exposed as a true collection in Yakima {it can't be enumerated}. If
+        // we think this would be useful we could do this.
         public object QueryRecognizerSetting(string settingName)
         {
             return RecoBase.QueryRecognizerSetting(settingName);
@@ -612,7 +615,8 @@ namespace System.Speech.Recognition
                 }
             }
 
-            // For the SpeechRecognitionEngine we don't want recognition to start until the Recognize() or RecognizeAsync() methods are called.
+            // For the SpeechRecognitionEngine we don't want recognition to start until the Recognize() or
+            // RecognizeAsync() methods are called.
             _sapiRecognizer.SetRecoState(SPRECOSTATE.SPRST_INACTIVE);
         }
 

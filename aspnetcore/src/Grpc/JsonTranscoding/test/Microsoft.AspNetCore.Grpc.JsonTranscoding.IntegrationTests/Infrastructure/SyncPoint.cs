@@ -40,7 +40,8 @@ public class SyncPoint
     /// Used by the code-under-test to wait for the test code to sync up.
     /// </summary>
     /// <remarks>
-    /// This code will unblock <see cref="WaitForSyncPoint"/> and then block waiting for <see cref="Continue"/> to be called.
+    /// This code will unblock <see cref="WaitForSyncPoint"/> and then block waiting for <see
+    // cref="Continue"/> to be called.
     /// </remarks>
     /// <returns></returns>
     public Task WaitToContinue()
@@ -63,7 +64,8 @@ public class SyncPoint
     /// Creates a re-entrant function that waits for sync points in sequence.
     /// </summary>
     /// <param name="count">The number of sync points to expect</param>
-    /// <param name="syncPoints">The <see cref="SyncPoint"/> objects that can be used to coordinate the sync point</param>
+    /// <param name="syncPoints">The <see cref="SyncPoint"/> objects that can be used to coordinate the
+    // sync point</param>
     /// <returns></returns>
     public static Func<Task> Create(
         int count,

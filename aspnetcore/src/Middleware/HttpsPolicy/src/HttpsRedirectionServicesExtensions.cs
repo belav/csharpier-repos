@@ -15,7 +15,8 @@ public static class HttpsRedirectionServicesExtensions
     /// Adds HTTPS redirection services.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="HttpsRedirectionOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="HttpsRedirectionOptions"/>.</param>
     /// <returns></returns>
     public static IServiceCollection AddHttpsRedirection(
         this IServiceCollection services,

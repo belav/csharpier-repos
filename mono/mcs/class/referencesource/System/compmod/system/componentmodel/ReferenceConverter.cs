@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.Collections;
@@ -30,7 +30,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.ReferenceConverter'/> class.
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.ReferenceConverter'/>
+        // class.
         ///    </para>
         /// </devdoc>
         public ReferenceConverter(Type type)
@@ -222,7 +223,8 @@ namespace System.ComponentModel
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Gets a value indicating whether the list of standard values returned from
-        ///    <see cref='System.ComponentModel.ReferenceConverter.GetStandardValues'/> is an exclusive list. </para>
+        ///    <see cref='System.ComponentModel.ReferenceConverter.GetStandardValues'/> is an exclusive
+        // list. </para>
         /// </devdoc>
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {

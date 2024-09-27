@@ -459,11 +459,16 @@ namespace System.Text.Encodings.Web.Tests
         private readonly char _allowedChar; // representative allowed char for this encoder
         private readonly char _disallowedChar; // representative never-allowed char for this encoder
 
-        // U+2D2E is in the Georgian Supplement block but is not currently assigned, hence disallowed by all inbox encoders.
-        // U+2D2E is an interesting test case because both U+002D ('-') and U+002E ('.') are allowed by all inbox encoders,
-        // so using U+2D2E exercises our UTF-16 -> ASCII narrowing paths to make sure that the narrowing process doesn't
-        // inadvertently treat a single non-ASCII BMP char as two independent ASCII chars. IF U+2D2E is ever assigned in
-        // the future, this could cause unit tests to fail, but we'll deal with that problem when (if?) the time comes.
+        // U+2D2E is in the Georgian Supplement block but is not currently assigned, hence disallowed by all
+        // inbox encoders.
+        // U+2D2E is an interesting test case because both U+002D ('-') and U+002E ('.') are allowed by all
+        // inbox encoders,
+        // so using U+2D2E exercises our UTF-16 -> ASCII narrowing paths to make sure that the narrowing
+        // process doesn't
+        // inadvertently treat a single non-ASCII BMP char as two independent ASCII chars. IF U+2D2E is ever
+        // assigned in
+        // the future, this could cause unit tests to fail, but we'll deal with that problem when (if?) the
+        // time comes.
         private const char BmpExtendedDisallowedChar = '\u2d2e';
 
         protected InboxEncoderCommonTestBase(
@@ -728,7 +733,8 @@ namespace System.Text.Encodings.Web.Tests
                     )
                 );
 
-                // Then, uncorrupt the element by making it a well-formed but never-allowed code point (U+009F is a never-allowed C1 control code point)
+                // Then, uncorrupt the element by making it a well-formed but never-allowed code point (U+009F is a
+                // never-allowed C1 control code point)
                 span[span.Length - allowedCharAsUtf8.Length] = 0xC2;
                 span[span.Length - allowedCharAsUtf8.Length + 1] = 0x9F;
                 Assert.Equal(

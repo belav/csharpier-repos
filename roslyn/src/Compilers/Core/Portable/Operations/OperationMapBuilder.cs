@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis
     internal static class OperationMapBuilder
     {
         /// <summary>
-        /// Populates a empty dictionary of SyntaxNode->IOperation, where every key corresponds to an explicit IOperation node.
+        /// Populates a empty dictionary of SyntaxNode->IOperation, where every key corresponds to an
+        // explicit IOperation node.
         /// If there is a SyntaxNode with more than one explicit IOperation, this will throw.
         /// </summary>
         internal static void AddToMap(
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis
                 Dictionary<SyntaxNode, IOperation> argument
             )
             {
-                // In order to handle very large nested operators, we implement manual iteration here. Our operations are not order sensitive,
+                // In order to handle very large nested operators, we implement manual iteration here. Our
+                // operations are not order sensitive,
                 // so we don't need to maintain a stack, just iterate through every level.
                 while (true)
                 {
@@ -67,7 +69,8 @@ namespace Microsoft.CodeAnalysis
                 Dictionary<SyntaxNode, IOperation> argument
             )
             {
-                // OperationWalker skips these nodes by default, to avoid having public consumers deal with NoneOperation.
+                // OperationWalker skips these nodes by default, to avoid having public consumers deal with
+                // NoneOperation.
                 // we need to deal with it here, however, so delegate to DefaultVisit.
                 return DefaultVisit(operation, argument);
             }

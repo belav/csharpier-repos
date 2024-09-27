@@ -33,7 +33,8 @@ namespace System.Xml.Xsl.XsltOld
         )
         {
             // if name == "xmlns" we don't need to generate this attribute.
-            // to avoid i'ts generation we can return false and not add AtributeCation to it's parent container action
+            // to avoid i'ts generation we can return false and not add AtributeCation to it's parent container
+            // action
             // for now not creating this.qname will do the trick at execution time
             if (name == "xmlns")
                 return null;
@@ -87,7 +88,8 @@ namespace System.Xml.Xsl.XsltOld
             this.name = PrecalculateAvt(ref this.nameAvt);
             this.nsUri = PrecalculateAvt(ref this.nsAvt);
 
-            // if both name and ns are not AVT we can calculate qname at compile time and will not need namespace manager anymore
+            // if both name and ns are not AVT we can calculate qname at compile time and will not need
+            // namespace manager anymore
             if (this.nameAvt == null && this.nsAvt == null)
             {
                 if (this.name != "xmlns")

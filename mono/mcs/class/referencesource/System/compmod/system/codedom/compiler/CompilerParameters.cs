@@ -72,7 +72,8 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerParameters'/> using the specified
+        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerParameters'/>
+        // using the specified
         ///       assembly names.
         ///    </para>
         /// </devdoc>
@@ -83,7 +84,8 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerParameters'/> using the specified
+        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerParameters'/>
+        // using the specified
         ///       assembly names and output name.
         ///    </para>
         /// </devdoc>
@@ -94,7 +96,8 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerParameters'/> using the specified
+        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerParameters'/>
+        // using the specified
         ///       assembly names, output name and a whether to include debug information flag.
         ///    </para>
         /// </devdoc>
@@ -114,17 +117,26 @@ namespace System.CodeDom.Compiler
         }
 
         /// <summary>
-        /// The "core" or "standard" assembly that contains basic types such as <code>Object</code>, <code>Int32</code> and the like
+        /// The "core" or "standard" assembly that contains basic types such as <code>Object</code>,
+        // <code>Int32</code> and the like
         /// that is to be used for the compilation.<br />
-        /// If the value of this property is an empty string (or <code>null</code>), the default core assembly will be used by the
-        /// compiler (depending on the compiler version this may be <code>mscorlib.dll</code> or <code>System.Runtime.dll</code> in
+        /// If the value of this property is an empty string (or <code>null</code>), the default core
+        // assembly will be used by the
+        /// compiler (depending on the compiler version this may be <code>mscorlib.dll</code> or
+        // <code>System.Runtime.dll</code> in
         /// a Framework or reference assembly directory).<br />
-        /// If the value of this property is not empty, CodeDOM will emit compiler options to not reference <em>any</em> assemblies
-        /// implicitly during compilation. It will also explicitly reference the assembly file specified in this property.<br />
-        /// For compilers that only implicitly reference the "core" or "standard" assembly by default, this option can be used on its own.
-        /// For compilers that implicitly reference more assemblies on top of the "core" / "standard" assembly, using this option may require
-        /// specifying additional entries in the <code>System.CodeDom.Compiler.<bold>ReferencedAssemblies</bold></code> collection.<br />
-        /// Note: An <code>ICodeCompiler</code> / <code>CoodeDomProvider</code> implementation may choose to ignore this property.
+        /// If the value of this property is not empty, CodeDOM will emit compiler options to not reference
+        // <em>any</em> assemblies
+        /// implicitly during compilation. It will also explicitly reference the assembly file specified in
+        // this property.<br />
+        /// For compilers that only implicitly reference the "core" or "standard" assembly by default, this
+        // option can be used on its own.
+        /// For compilers that implicitly reference more assemblies on top of the "core" / "standard"
+        // assembly, using this option may require
+        /// specifying additional entries in the
+        // <code>System.CodeDom.Compiler.<bold>ReferencedAssemblies</bold></code> collection.<br />
+        /// Note: An <code>ICodeCompiler</code> / <code>CoodeDomProvider</code> implementation may choose to
+        // ignore this property.
         /// </summary>
         public string CoreAssemblyFileName
         {

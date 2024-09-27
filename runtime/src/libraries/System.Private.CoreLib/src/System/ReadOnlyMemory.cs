@@ -36,7 +36,8 @@ namespace System
         /// </summary>
         /// <param name="array">The target array.</param>
         /// <remarks>Returns default when <paramref name="array"/> is null.</remarks>
-        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant and array's type is not exactly T[].</exception>
+        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant
+        // and array's type is not exactly T[].</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlyMemory(T[]? array)
         {
@@ -59,9 +60,11 @@ namespace System
         /// <param name="start">The index at which to begin the memory.</param>
         /// <param name="length">The number of items in the memory.</param>
         /// <remarks>Returns default when <paramref name="array"/> is null.</remarks>
-        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant and array's type is not exactly T[].</exception>
+        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant
+        // and array's type is not exactly T[].</exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when the specified <paramref name="start"/> or end index is not in the range (&lt;0 or &gt;Length).
+        /// Thrown when the specified <paramref name="start"/> or end index is not in the range (&lt;0 or
+        // &gt;Length).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlyMemory(T[]? array, int start, int length)
@@ -87,7 +90,8 @@ namespace System
             _length = length;
         }
 
-        /// <summary>Creates a new memory over the existing object, start, and length. No validation is performed.</summary>
+        /// <summary>Creates a new memory over the existing object, start, and length. No validation is
+        // performed.</summary>
         /// <param name="obj">The target object.</param>
         /// <param name="start">The index at which to begin the memory.</param>
         /// <param name="length">The number of items in the memory.</param>
@@ -116,7 +120,8 @@ namespace System
             new ReadOnlyMemory<T>(array);
 
         /// <summary>
-        /// Defines an implicit conversion of a <see cref="ArraySegment{T}"/> to a <see cref="ReadOnlyMemory{T}"/>
+        /// Defines an implicit conversion of a <see cref="ArraySegment{T}"/> to a <see
+        // cref="ReadOnlyMemory{T}"/>
         /// </summary>
         public static implicit operator ReadOnlyMemory<T>(ArraySegment<T> segment) =>
             new ReadOnlyMemory<T>(segment.Array, segment.Offset, segment.Count);
@@ -137,7 +142,8 @@ namespace System
         public bool IsEmpty => _length == 0;
 
         /// <summary>
-        /// For <see cref="ReadOnlyMemory{Char}"/>, returns a new instance of string that represents the characters pointed to by the memory.
+        /// For <see cref="ReadOnlyMemory{Char}"/>, returns a new instance of string that represents the
+        // characters pointed to by the memory.
         /// Otherwise, returns a <see cref="string"/> with the name of the type and the number of elements.
         /// </summary>
         public override string ToString()
@@ -174,7 +180,8 @@ namespace System
         /// <param name="start">The index at which to begin this slice.</param>
         /// <param name="length">The desired length for the slice (exclusive).</param>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when the specified <paramref name="start"/> or end index is not in range (&lt;0 or &gt;Length).
+        /// Thrown when the specified <paramref name="start"/> or end index is not in range (&lt;0 or
+        // &gt;Length).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlyMemory<T> Slice(int start, int length)
@@ -252,8 +259,10 @@ namespace System
                         lengthOfUnderlyingSpan = memoryManagerSpan.Length;
                     }
 
-                    // If the Memory<T> or ReadOnlyMemory<T> instance is torn, this property getter has undefined behavior.
-                    // We try to detect this condition and throw an exception, but it's possible that a torn struct might
+                    // If the Memory<T> or ReadOnlyMemory<T> instance is torn, this property getter has undefined
+                    // behavior.
+                    // We try to detect this condition and throw an exception, but it's possible that a torn struct
+                    // might
                     // appear to us to be valid, and we'll return an undesired span. Such a span is always guaranteed at
                     // least to be in-bounds when compared with the original Memory<T> instance, so using the span won't
                     // AV the process.
@@ -410,7 +419,8 @@ namespace System
         public override int GetHashCode()
         {
             // We use RuntimeHelpers.GetHashCode instead of Object.GetHashCode because the hash
-            // code is based on object identity and referential equality, not deep equality (as common with string).
+            // code is based on object identity and referential equality, not deep equality (as common with
+            // string).
             return (_object != null)
                 ? HashCode.Combine(RuntimeHelpers.GetHashCode(_object), _index, _length)
                 : 0;

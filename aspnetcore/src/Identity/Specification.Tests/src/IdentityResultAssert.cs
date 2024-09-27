@@ -42,7 +42,8 @@ public static class IdentityResultAssert
     }
 
     /// <summary>
-    /// Asserts that the result has not Succeeded and that first error matches error's code and Description.
+    /// Asserts that the result has not Succeeded and that first error matches error's code and
+    // Description.
     /// </summary>
     public static void IsFailure(IdentityResult result, IdentityError error = null)
     {

@@ -62,9 +62,9 @@ using System.Text;
 
 namespace RabbitMQ.Util
 {
-    /**
-     * A class for allocating integer IDs in a given range.
-     */
+/**
+* A class for allocating integer IDs in a given range.
+*/
     public class IntAllocator
     {
         private IntervalList Base;
@@ -72,9 +72,9 @@ namespace RabbitMQ.Util
         private readonly int[] unsorted;
         private int unsortedCount = 0;
 
-        /**
-         * A class representing a list of inclusive intervals
-         */
+/**
+* A class representing a list of inclusive intervals
+*/
         public class IntervalList
         {
             public IntervalList(int start, int end)
@@ -153,9 +153,9 @@ namespace RabbitMQ.Util
             }
         }
 
-        /**
-         * Creates an IntAllocator allocating integer IDs within the inclusive range [start, end]
-         */
+/**
+* Creates an IntAllocator allocating integer IDs within the inclusive range [start, end]
+*/
         public IntAllocator(int start, int end)
         {
             if (start > end)
@@ -166,10 +166,10 @@ namespace RabbitMQ.Util
             Base = new IntervalList(start, end);
         }
 
-        /**
-         * Allocate a fresh integer from the range, or return -1 if no more integers
-         * are available. This operation is guaranteed to run in O(1)
-         */
+/**
+* Allocate a fresh integer from the range, or return -1 if no more integers
+* are available. This operation is guaranteed to run in O(1)
+*/
         public int Allocate()
         {
             if (unsortedCount > 0)
@@ -198,15 +198,15 @@ namespace RabbitMQ.Util
             }
         }
 
-        /**
-         * Make the provided integer available for allocation again. This operation
-         * runs in amortized O(sqrt(range size)) time: About every sqrt(range size)
-         * operations  will take O(range_size + number of intervals) to complete and
-         * the rest run in constant time.
-         *
-         * No error checking is performed, so if you double Free or Free an integer
-         * that was not originally Allocated the results are undefined. Sorry.
-         */
+/**
+* Make the provided integer available for allocation again. This operation
+* runs in amortized O(sqrt(range size)) time: About every sqrt(range size)
+* operations  will take O(range_size + number of intervals) to complete and
+* the rest run in constant time.
+*
+* No error checking is performed, so if you double Free or Free an integer
+* that was not originally Allocated the results are undefined. Sorry.
+*/
         public void Free(int id)
         {
             if (unsortedCount >= unsorted.Length)

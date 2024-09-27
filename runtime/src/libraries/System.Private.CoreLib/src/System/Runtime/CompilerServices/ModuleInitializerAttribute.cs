@@ -14,14 +14,16 @@ namespace System.Runtime.CompilerServices
     ///
     /// Certain requirements are imposed on any method targeted with this attribute:
     /// - The method must be `static`.
-    /// - The method must be an ordinary member method, as opposed to a property accessor, constructor, local function, etc.
+    /// - The method must be an ordinary member method, as opposed to a property accessor, constructor,
+    // local function, etc.
     /// - The method must be parameterless.
     /// - The method must return `void`.
     /// - The method must not be generic or be contained in a generic type.
     /// - The method's effective accessibility must be `internal` or `public`.
     ///
     /// The specification for module initializers in the .NET runtime can be found here:
-    /// https://github.com/dotnet/runtime/blob/main/docs/design/specs/Ecma-335-Augments.md#module-initializer
+    ///
+    // https://github.com/dotnet/runtime/blob/main/docs/design/specs/Ecma-335-Augments.md#module-initializer
     /// </remarks>
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     public sealed class ModuleInitializerAttribute : Attribute

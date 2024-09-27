@@ -126,7 +126,8 @@ namespace MS.Internal.Xml.XPath
                     function != null ? function.ReturnType : XPathResultType.Any;
                 if (result == XPathResultType.Error)
                 {
-                    // In v.1 we confused Error & Any so now for backward compatibility we should allow users to return any of them.
+                    // In v.1 we confused Error & Any so now for backward compatibility we should allow users to return
+                    // any of them.
                     result = XPathResultType.Any;
                 }
                 return result;

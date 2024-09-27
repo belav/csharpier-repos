@@ -449,7 +449,8 @@ public class ResponseTrailersTests : LoggedTest
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.NotEmpty(response.TrailingHeaders);
-            // We can't actually assert they are sent as separate headers using HttpClient, we'd have to write a lower level test
+            // We can't actually assert they are sent as separate headers using HttpClient, we'd have to write a
+            // lower level test
             // that read the header frames directly.
             Assert.Equal(
                 new[] { "TrailerValue0", "TrailerValue1" },
@@ -495,7 +496,8 @@ public class ResponseTrailersTests : LoggedTest
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.NotEmpty(response.TrailingHeaders);
-            // We can't actually assert they are sent in multiple frames using HttpClient, we'd have to write a lower level test
+            // We can't actually assert they are sent in multiple frames using HttpClient, we'd have to write a
+            // lower level test
             // that read the header frames directly. We at least verify that really large values work.
             Assert.Equal(
                 values,

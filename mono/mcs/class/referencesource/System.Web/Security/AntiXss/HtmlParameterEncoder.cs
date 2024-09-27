@@ -54,8 +54,10 @@ namespace System.Web.Security.AntiXss
         /// <param name="encoding">The encoding for the text parameter.</param>
         /// <returns>The URL-encoded text.</returns>
         /// <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings.
-        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers.
-        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser
+        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be
+        // truncated or corrupted by some browsers.
+        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the
+        // strings can be re-sent by a browser
         /// in a request string.</remarks>
         /// <exception cref="ArgumentNullException">Thrown if the encoding is null.</exception>
         internal static string QueryStringParameterEncode(string s, Encoding encoding)
@@ -70,8 +72,10 @@ namespace System.Web.Security.AntiXss
         /// <param name="encoding">The encoding for the text parameter.</param>
         /// <returns>The URL-encoded text.</returns>
         /// <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings.
-        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers.
-        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser
+        /// Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be
+        // truncated or corrupted by some browsers.
+        /// As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the
+        // strings can be re-sent by a browser
         /// in a request string.</remarks>
         /// <exception cref="ArgumentNullException">Thrown if the encoding is null.</exception>
         internal static string FormStringParameterEncode(string s, Encoding encoding)
@@ -147,7 +151,8 @@ namespace System.Web.Security.AntiXss
                                 encodedCharacter = QueryStringSpace;
                                 break;
 
-                            // Special case for Html Form data, from http://www.w3.org/TR/html401/appendix/notes.html#non-ascii-chars
+                            // Special case for Html Form data, from
+                            // http://www.w3.org/TR/html401/appendix/notes.html#non-ascii-chars
                             case EncodingType.HtmlForm:
                                 encodedCharacter = FormStringSpace;
                                 break;

@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        /// <returns><c>True</c> if a value for the specified key was found, otherwise <c>false</c>.</returns>
+        /// <returns><c>True</c> if a value for the specified key was found, otherwise
+        // <c>false</c>.</returns>
         bool TryGet(string key, out string? value);
 
         /// <summary>
@@ -29,11 +30,13 @@ namespace Microsoft.Extensions.Configuration
         /// <summary>
         /// Attempts to get an <see cref="IChangeToken"/> for change tracking.
         /// </summary>
-        /// <returns>An <see cref="IChangeToken"/> token if this provider supports change tracking, <see langword="null"/> otherwise.</returns>
+        /// <returns>An <see cref="IChangeToken"/> token if this provider supports change tracking, <see
+        // langword="null"/> otherwise.</returns>
         IChangeToken GetReloadToken();
 
         /// <summary>
-        /// Loads configuration values from the source represented by this <see cref="IConfigurationProvider"/>.
+        /// Loads configuration values from the source represented by this <see
+        // cref="IConfigurationProvider"/>.
         /// </summary>
         void Load();
 
@@ -42,7 +45,8 @@ namespace Microsoft.Extensions.Configuration
         /// <see cref="IConfigurationProvider"/>s data and the set of keys returned by all the preceding
         /// <see cref="IConfigurationProvider"/>s.
         /// </summary>
-        /// <param name="earlierKeys">The child keys returned by the preceding providers for the same parent path.</param>
+        /// <param name="earlierKeys">The child keys returned by the preceding providers for the same parent
+        // path.</param>
         /// <param name="parentPath">The parent path.</param>
         /// <returns>The child keys.</returns>
         IEnumerable<string> GetChildKeys(IEnumerable<string> earlierKeys, string? parentPath);

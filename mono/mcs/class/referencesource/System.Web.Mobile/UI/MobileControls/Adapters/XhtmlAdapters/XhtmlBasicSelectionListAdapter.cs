@@ -20,7 +20,8 @@ namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
 namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 #endif
 {
-    /// <include file='doc\XhtmlBasicSelectionListAdapter.uex' path='docs/doc[@for="XhtmlSelectionListAdapter"]/*' />
+    /// <include file='doc\XhtmlBasicSelectionListAdapter.uex'
+    // path='docs/doc[@for="XhtmlSelectionListAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -34,13 +35,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlSelectionListAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex' path='docs/doc[@for="XhtmlSelectionListAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex'
+        // path='docs/doc[@for="XhtmlSelectionListAdapter.Control"]/*' />
         protected new SelectionList Control
         {
             get { return base.Control as SelectionList; }
         }
 
-        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex' path='docs/doc[@for="XhtmlSelectionListAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex'
+        // path='docs/doc[@for="XhtmlSelectionListAdapter.Render"]/*' />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             // Assumption: XhtmlBasic devices all support tables (conforming to spec).
@@ -97,7 +100,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             writer.AddOnEnterForwardSetVar(Control.UniqueID, builder.ToString());
         }
 
-        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex' path='docs/doc[@for="XhtmlSelectionListAdapter.LoadPostData"]/*' />
+        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex'
+        // path='docs/doc[@for="XhtmlSelectionListAdapter.LoadPostData"]/*' />
         public override bool LoadPostData(
             String key,
             NameValueCollection data,
@@ -206,7 +210,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                 : (((string)Device["usePOverDiv"] == "true") ? "p" : "div");
             ListSelectType selectType = Control.SelectType;
             MobileListItemCollection items = Control.Items;
-            // Review: We always render a table.  Should we optimize away the table tags when the alignment is left?
+            // Review: We always render a table.  Should we optimize away the table tags when the alignment is
+            // left?
             String selectTypeString = (selectType == ListSelectType.Radio) ? "radio" : "checkbox";
 
             ClearPendingBreakIfDeviceBreaksOnBlockLevel(writer); // Since we are writing a block-level element in all cases.
@@ -331,7 +336,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex' path='docs/doc[@for="XhtmlSelectionListAdapter.RenderAsHiddenInputField"]/*' />
+        /// <include file='doc\XhtmlBasicSelectionListAdapter.uex'
+        // path='docs/doc[@for="XhtmlSelectionListAdapter.RenderAsHiddenInputField"]/*' />
         protected override void RenderAsHiddenInputField(XhtmlMobileTextWriter writer)
         {
             // Optimization - if viewstate is enabled for this control, and the

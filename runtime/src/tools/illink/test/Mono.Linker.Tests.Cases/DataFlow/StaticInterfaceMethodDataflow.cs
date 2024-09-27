@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -33,7 +34,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             class ImplIFoo : IFoo
             {
                 // NativeAOT correctly finds out that the method is not actually used by anything
-                // and removes it. The only caveat is GetInterfaceMap - see https://github.com/dotnet/runtimelab/issues/861
+                // and removes it. The only caveat is GetInterfaceMap - see
+                // https://github.com/dotnet/runtimelab/issues/861
                 [Kept(By = Tool.Trimmer)]
                 public static void VirtualMethod() { }
             }
@@ -115,12 +117,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             class ImplIFoo : IFoo
             {
                 // NativeAOT correctly finds out that the method is not actually used by anything
-                // and removes it. The only caveat is GetInterfaceMap - see https://github.com/dotnet/runtimelab/issues/861
+                // and removes it. The only caveat is GetInterfaceMap - see
+                // https://github.com/dotnet/runtimelab/issues/861
                 [Kept(By = Tool.Trimmer)]
                 public static void VirtualMethod() { }
 
                 // NativeAOT correctly finds out that the method is not actually used by anything
-                // and removes it. The only caveat is GetInterfaceMap - see https://github.com/dotnet/runtimelab/issues/861
+                // and removes it. The only caveat is GetInterfaceMap - see
+                // https://github.com/dotnet/runtimelab/issues/861
                 [Kept(By = Tool.Trimmer)]
                 public static void AbstractMethod() { }
             }

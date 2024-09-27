@@ -26,18 +26,23 @@ namespace System.Data.Objects
         /// The Entity-SQL text that defines the query.
         /// </summary>
         /// <remarks>
-        /// It is important that this field is readonly for consistency reasons wrt <see cref="_queryExpression"/>.
-        /// If this field becomes read-write, then write should be allowed only when <see cref="_queryExpression"/> is null,
+        /// It is important that this field is readonly for consistency reasons wrt <see
+        // cref="_queryExpression"/>.
+        /// If this field becomes read-write, then write should be allowed only when <see
+        // cref="_queryExpression"/> is null,
         /// or there should be a mechanism keeping both fields consistent.
         /// </remarks>
         private readonly string _queryText;
 
         /// <summary>
-        /// Optional <see cref="DbExpression"/> that defines the query. Must be semantically equal to the <see cref="_queryText"/>.
+        /// Optional <see cref="DbExpression"/> that defines the query. Must be semantically equal to the
+        // <see cref="_queryText"/>.
         /// </summary>
         /// <remarks>
-        /// It is important that this field is readonly for consistency reasons wrt <see cref="_queryText"/>.
-        /// If this field becomes read-write, then there should be a mechanism keeping both fields consistent.
+        /// It is important that this field is readonly for consistency reasons wrt <see
+        // cref="_queryText"/>.
+        /// If this field becomes read-write, then there should be a mechanism keeping both fields
+        // consistent.
         /// </remarks>
         private readonly DbExpression _queryExpression;
 
@@ -90,7 +95,8 @@ namespace System.Data.Objects
         ///     The Entity-SQL text of the query
         /// </param>
         /// <param name="expression">
-        ///     Optional <see cref="DbExpression"/> that defines the query. Must be semantically equal to the <paramref name="commandText"/>.
+        ///     Optional <see cref="DbExpression"/> that defines the query. Must be semantically equal to
+        // the <paramref name="commandText"/>.
         /// </param>
         /// <param name="mergeOption">
         ///     The merge option to use when retrieving results if an explicit merge option is not specified
@@ -261,7 +267,8 @@ namespace System.Data.Objects
                     QueryCacheEntry foundEntry = null;
                     if (cacheManager.TryLookupAndAdd(newEntry, out foundEntry))
                     {
-                        // If TryLookupAndAdd returns 'true' then the entry was already present in the cache when the attempt to add was made.
+                        // If TryLookupAndAdd returns 'true' then the entry was already present in the cache when the
+                        // attempt to add was made.
                         // In this case the existing execution plan should be used.
                         plan = (ObjectQueryExecutionPlan)foundEntry.GetTarget();
                     }

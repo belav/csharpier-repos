@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * Config related classes for HttpApplication
- */
+* Config related classes for HttpApplication
+*/
 
 namespace System.Web.Configuration
 {

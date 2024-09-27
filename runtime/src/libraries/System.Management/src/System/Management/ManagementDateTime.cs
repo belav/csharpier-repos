@@ -15,7 +15,8 @@ namespace System.Management
     /// using System;
     /// using System.Management;
     ///
-    /// // The sample below demonstrates the various conversions that can be done using ManagementDateTimeConverter class
+    /// // The sample below demonstrates the various conversions that can be done using
+    // ManagementDateTimeConverter class
     /// class Sample_ManagementDateTimeConverterClass
     /// {
     ///     public static int Main(string[] args)
@@ -45,7 +46,8 @@ namespace System.Management
     /// Imports System
     /// Imports System.Management
     ///
-    /// 'The sample below demonstrates the various conversions that can be done using ManagementDateTimeConverter class
+    /// 'The sample below demonstrates the various conversions that can be done using
+    // ManagementDateTimeConverter class
     /// Class Sample_ManagementClass
     ///     Overloads Public Shared Function Main(args() As String) As Integer
     ///         Dim dmtfDate As String = "20020408141835.999999-420"
@@ -80,7 +82,8 @@ namespace System.Management
         private ManagementDateTimeConverter() { }
 
         /// <summary>
-        /// <para>Converts a given DMTF datetime to <see cref='System.DateTime'/> object. The returned DateTime will be in the
+        /// <para>Converts a given DMTF datetime to <see cref='System.DateTime'/> object. The returned
+        // DateTime will be in the
         ///            current TimeZone of the system.</para>
         /// </summary>
         /// <param name='dmtfDate'>A string representing the datetime in DMTF format.</param>
@@ -88,11 +91,15 @@ namespace System.Management
         /// <para>A <see cref='System.DateTime'/> object that represents the given DMTF datetime.</para>
         /// </returns>
         /// <remarks>
-        ///            <para> Date and time in WMI is represented in DMTF datetime format. This format is explained in WMI SDK documentation.
+        ///            <para> Date and time in WMI is represented in DMTF datetime format. This format is
+        // explained in WMI SDK documentation.
         ///                DMTF datetime string has an UTC offset which this datetime string represents.
-        ///                 During conversion to <see cref='System.DateTime'/>, UTC offset is used to convert the date to the
-        ///                current timezone. According to DMTF format a particular field can be represented by the character
-        ///                '*'. This will be converted to the MinValue of this field that can be represented in <see cref='System.DateTime'/>.
+        ///                 During conversion to <see cref='System.DateTime'/>, UTC offset is used to
+        // convert the date to the
+        ///                current timezone. According to DMTF format a particular field can be represented
+        // by the character
+        ///                '*'. This will be converted to the MinValue of this field that can be represented
+        // in <see cref='System.DateTime'/>.
         ///            </para>
         /// </remarks>
         /// <example>
@@ -233,15 +240,19 @@ namespace System.Management
         /// <para>Converts a given <see cref='System.DateTime'/> object to DMTF format.</para>
         ///
         /// </summary>
-        /// <param name='date'>A <see cref='System.DateTime'/> object representing the datetime to be converted to DMTF datetime.</param>
+        /// <param name='date'>A <see cref='System.DateTime'/> object representing the datetime to be
+        // converted to DMTF datetime.</param>
         /// <returns>
         /// <para>A string that represents the DMTF datetime for the given DateTime object.</para>
         /// </returns>
         /// <remarks>
-        ///            <para> Date and time in WMI is represented in DMTF datetime format. This format is explained in WMI SDK documentation.
-        ///                The DMTF datetime string represented will be with respect to the UTC offset of the
+        ///            <para> Date and time in WMI is represented in DMTF datetime format. This format is
+        // explained in WMI SDK documentation.
+        ///                The DMTF datetime string represented will be with respect to the UTC offset of
+        // the
         ///                current timezone. The lowest precision in DMTF is microseconds and
-        ///                in <see cref='System.DateTime'/> is Ticks , which is equivalent to 100 of nanoseconds.
+        ///                in <see cref='System.DateTime'/> is Ticks , which is equivalent to 100 of
+        // nanoseconds.
         ///                 During conversion these Ticks are converted to microseconds and rounded
         ///                 off to the nearest microsecond.
         ///            </para>
@@ -260,7 +271,8 @@ namespace System.Management
         {
             string UtcString = string.Empty;
             // Fill up the UTC field in the DMTF date with the current
-            // zones UTC value. If date kind is UTC use offset of zero to match .NET Framework (i.e.: TimeZone.GetUtcOffset)
+            // zones UTC value. If date kind is UTC use offset of zero to match .NET Framework (i.e.:
+            // TimeZone.GetUtcOffset)
             TimeSpan tickOffset =
                 date.Kind == DateTimeKind.Utc
                     ? TimeSpan.Zero
@@ -333,12 +345,15 @@ namespace System.Management
         /// </summary>
         /// <param name='dmtfTimespan'>A string represesentation of the DMTF time interval.</param>
         /// <returns>
-        /// <para>A <see cref='System.TimeSpan'/> object that represents the given DMTF time interval.</para>
+        /// <para>A <see cref='System.TimeSpan'/> object that represents the given DMTF time
+        // interval.</para>
         /// </returns>
         /// <remarks>
-        ///            <para> Time interval in WMI is represented in DMTF format. This format is explained in WMI SDK documentation.
+        ///            <para> Time interval in WMI is represented in DMTF format. This format is explained
+        // in WMI SDK documentation.
         ///                    If the DMTF time interval value is more than that of
-        ///                    <see cref='System.TimeSpan.MaxValue'/> then <see cref='System.ArgumentOutOfRangeException'/> is thrown.
+        ///                    <see cref='System.TimeSpan.MaxValue'/> then <see
+        // cref='System.ArgumentOutOfRangeException'/> is thrown.
         ///            </para>
         /// </remarks>
         /// <example>
@@ -428,7 +443,8 @@ namespace System.Management
         /// <summary>
         /// <para>Converts a given <see cref='System.TimeSpan'/> object to DMTF time interval.</para>
         /// </summary>
-        /// <param name='timespan'> A <see cref='System.TimeSpan'/> object representing the datetime to be converted to DMTF time interval.
+        /// <param name='timespan'> A <see cref='System.TimeSpan'/> object representing the datetime to be
+        // converted to DMTF time interval.
         /// </param>
         /// <returns>
         /// <para>A string that represents the DMTF time interval for the given TimeSpan object.</para>
@@ -436,7 +452,8 @@ namespace System.Management
         /// <remarks>
         ///            <para> Time interval in WMI is represented in DMTF datetime format. This format
         ///                is explained in WMI SDK documentation. The lowest precision in
-        ///                DMTF is microseconds and in <see cref='System.TimeSpan'/> is Ticks , which is equivalent
+        ///                DMTF is microseconds and in <see cref='System.TimeSpan'/> is Ticks , which is
+        // equivalent
         ///                to 100 of nanoseconds.During conversion these Ticks are converted to
         ///                microseconds and rounded off to the nearest microsecond.
         ///            </para>

@@ -2765,7 +2765,8 @@ namespace System.Runtime.Intrinsics.X86
         ///    SQRTSD xmm1,               xmm2/m64
         ///   VSQRTSD xmm1,         xmm2, xmm3/m64
         ///   VSQRTSD xmm1 {k1}{z}, xmm2, xmm3/m64{er}
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> SqrtScalar(Vector128<double> value)
         {

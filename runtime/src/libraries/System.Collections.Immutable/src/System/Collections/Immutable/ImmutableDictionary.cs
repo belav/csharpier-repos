@@ -8,7 +8,8 @@ using System.Linq;
 namespace System.Collections.Immutable
 {
     /// <summary>
-    /// A set of initialization methods for instances of <see cref="ImmutableDictionary{TKey, TValue}"/>.
+    /// A set of initialization methods for instances of <see cref="ImmutableDictionary{TKey,
+    // TValue}"/>.
     /// </summary>
     public static class ImmutableDictionary
     {
@@ -169,8 +170,10 @@ namespace System.Collections.Immutable
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <typeparam name="TValue">The type of value in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
-        /// <param name="elementSelector">The function that will produce the value for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
+        /// <param name="elementSelector">The function that will produce the value for the map from each
+        // sequence element.</param>
         /// <param name="keyComparer">The key comparer to use for the map.</param>
         /// <param name="valueComparer">The value comparer to use for the map.</param>
         /// <returns>The immutable map.</returns>
@@ -223,8 +226,10 @@ namespace System.Collections.Immutable
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <typeparam name="TValue">The type of value in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
-        /// <param name="elementSelector">The function that will produce the value for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
+        /// <param name="elementSelector">The function that will produce the value for the map from each
+        // sequence element.</param>
         /// <param name="keyComparer">The key comparer to use for the map.</param>
         /// <returns>The immutable map.</returns>
         public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<
@@ -248,7 +253,8 @@ namespace System.Collections.Immutable
         /// <typeparam name="TSource">The type of element in the sequence.</typeparam>
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
         /// <returns>The immutable map.</returns>
         public static ImmutableDictionary<TKey, TSource> ToImmutableDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
@@ -265,7 +271,8 @@ namespace System.Collections.Immutable
         /// <typeparam name="TSource">The type of element in the sequence.</typeparam>
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
         /// <param name="keyComparer">The key comparer to use for the map.</param>
         /// <returns>The immutable map.</returns>
         public static ImmutableDictionary<TKey, TSource> ToImmutableDictionary<TSource, TKey>(
@@ -285,8 +292,10 @@ namespace System.Collections.Immutable
         /// <typeparam name="TKey">The type of key in the resulting map.</typeparam>
         /// <typeparam name="TValue">The type of value in the resulting map.</typeparam>
         /// <param name="source">The sequence to enumerate to generate the map.</param>
-        /// <param name="keySelector">The function that will produce the key for the map from each sequence element.</param>
-        /// <param name="elementSelector">The function that will produce the value for the map from each sequence element.</param>
+        /// <param name="keySelector">The function that will produce the key for the map from each sequence
+        // element.</param>
+        /// <param name="elementSelector">The function that will produce the value for the map from each
+        // sequence element.</param>
         /// <returns>The immutable map.</returns>
         public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<
             TSource,
@@ -390,7 +399,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="dictionary">The dictionary to retrieve the value from.</param>
         /// <param name="key">The key to search for.</param>
-        /// <returns>The value for the key, or the default value of type <typeparamref name="TValue"/> if no matching key was found.</returns>
+        /// <returns>The value for the key, or the default value of type <typeparamref name="TValue"/> if no
+        // matching key was found.</returns>
         public static TValue? GetValueOrDefault<TKey, TValue>(
             this IImmutableDictionary<TKey, TValue> dictionary,
             TKey key
@@ -407,7 +417,8 @@ namespace System.Collections.Immutable
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="dictionary">The dictionary to retrieve the value from.</param>
         /// <param name="key">The key to search for.</param>
-        /// <param name="defaultValue">The default value to return if no matching key is found in the dictionary.</param>
+        /// <param name="defaultValue">The default value to return if no matching key is found in the
+        // dictionary.</param>
         /// <returns>
         /// The value for the key, or <paramref name="defaultValue"/> if no matching key was found.
         /// </returns>

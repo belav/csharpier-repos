@@ -1375,8 +1375,10 @@ namespace System.Globalization.Tests
 
             // Zero-weight code points
             // In both NLS (Windows) and ICU the code point U+200C ZERO WIDTH NON-JOINER has a zero weight,
-            // so it's compared as equal to the empty string. This means that we can't special-case GetHashCode("")
-            // and return a fixed value; we actually need to call the underlying OS or ICU API to calculate the sort key.
+            // so it's compared as equal to the empty string. This means that we can't special-case
+            // GetHashCode("")
+            // and return a fixed value; we actually need to call the underlying OS or ICU API to calculate the
+            // sort key.
             yield return new object[] { s_invariantCompare, "", "\u200c", CompareOptions.None, 0 };
         }
 

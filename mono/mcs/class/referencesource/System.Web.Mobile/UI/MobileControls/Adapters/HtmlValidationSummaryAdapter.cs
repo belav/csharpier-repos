@@ -23,12 +23,13 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlValidationSummaryAdapter provides the html device functionality for
-     * ValidationSummary control.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
-    /// <include file='doc\HtmlValidationSummaryAdapter.uex' path='docs/doc[@for="HtmlValidationSummaryAdapter"]/*' />
+    * HtmlValidationSummaryAdapter provides the html device functionality for
+    * ValidationSummary control.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
+    /// <include file='doc\HtmlValidationSummaryAdapter.uex'
+    // path='docs/doc[@for="HtmlValidationSummaryAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -45,13 +46,15 @@ namespace System.Web.UI.MobileControls.Adapters
         private List _list; // to paginate error messages
         private Link _link; // to go back to the form validated by this control
 
-        /// <include file='doc\HtmlValidationSummaryAdapter.uex' path='docs/doc[@for="HtmlValidationSummaryAdapter.Control"]/*' />
+        /// <include file='doc\HtmlValidationSummaryAdapter.uex'
+        // path='docs/doc[@for="HtmlValidationSummaryAdapter.Control"]/*' />
         protected new ValidationSummary Control
         {
             get { return (ValidationSummary)base.Control; }
         }
 
-        /// <include file='doc\HtmlValidationSummaryAdapter.uex' path='docs/doc[@for="HtmlValidationSummaryAdapter.OnInit"]/*' />
+        /// <include file='doc\HtmlValidationSummaryAdapter.uex'
+        // path='docs/doc[@for="HtmlValidationSummaryAdapter.OnInit"]/*' />
         public override void OnInit(EventArgs e)
         {
             // Create child controls to help on rendering
@@ -61,7 +64,8 @@ namespace System.Web.UI.MobileControls.Adapters
             Control.Controls.Add(_link);
         }
 
-        /// <include file='doc\HtmlValidationSummaryAdapter.uex' path='docs/doc[@for="HtmlValidationSummaryAdapter.Render"]/*' />
+        /// <include file='doc\HtmlValidationSummaryAdapter.uex'
+        // path='docs/doc[@for="HtmlValidationSummaryAdapter.Render"]/*' />
         public override void Render(HtmlMobileTextWriter writer)
         {
             String[] errorMessages = null;

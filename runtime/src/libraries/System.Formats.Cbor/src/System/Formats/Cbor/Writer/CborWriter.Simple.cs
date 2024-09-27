@@ -7,15 +7,20 @@ namespace System.Formats.Cbor
 {
     public partial class CborWriter
     {
-        // CBOR RFC 8949 says: if NaN is an allowed value, and there is no intent to support NaN payloads or signaling NaNs, the protocol needs to pick a single representation, typically 0xf97e00. If that simple choice is not possible, specific attention will be needed for NaN handling.
-        // In this implementation "that simple choice is not possible" for CTAP2 mode (RequiresPreservingFloatPrecision), in which "representations of any floating-point values are not changed".
+        // CBOR RFC 8949 says: if NaN is an allowed value, and there is no intent to support NaN payloads or
+        // signaling NaNs, the protocol needs to pick a single representation, typically 0xf97e00. If that
+        // simple choice is not possible, specific attention will be needed for NaN handling.
+        // In this implementation "that simple choice is not possible" for CTAP2 mode
+        // (RequiresPreservingFloatPrecision), in which "representations of any floating-point values are not
+        // changed".
         private const ushort PositiveQNaNBitsHalf = 0x7e00;
 
         // Implements major type 7 encoding per https://tools.ietf.org/html/rfc7049#section-2.1
 
         /// <summary>Writes a single-precision floating point number (major type 7).</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -37,7 +42,8 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes a double-precision floating point number (major type 7).</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -88,7 +94,8 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes a boolean value (major type 7).</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="InvalidOperationException">Writing a new value exceeds the definite length of the parent data item.
+        /// <exception cref="InvalidOperationException">Writing a new value exceeds the definite length of
+        // the parent data item.
         /// -or-
         /// The major type of the encoded value is not permitted in the parent data item.
         /// -or-
@@ -99,7 +106,8 @@ namespace System.Formats.Cbor
         }
 
         /// <summary>Writes a <see langword="null" /> value (major type 7).</summary>
-        /// <exception cref="InvalidOperationException">Writing a new value exceeds the definite length of the parent data item.
+        /// <exception cref="InvalidOperationException">Writing a new value exceeds the definite length of
+        // the parent data item.
         /// -or-
         /// The major type of the encoded value is not permitted in the parent data item.
         /// -or-
@@ -111,8 +119,10 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes a simple value encoding (major type 7).</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value" /> parameter is in the invalid 24-31 range.</exception>
-        /// <exception cref="InvalidOperationException">Writing a new value exceeds the definite length of the parent data item.
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value" /> parameter is in the
+        // invalid 24-31 range.</exception>
+        /// <exception cref="InvalidOperationException">Writing a new value exceeds the definite length of
+        // the parent data item.
         /// -or-
         /// The major type of the encoded value is not permitted in the parent data item.
         /// -or-

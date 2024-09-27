@@ -171,7 +171,8 @@ class C
                     throw new Win32Exception(Marshal.GetLastWin32Error());
 
                 //the manifest and version primitives are tested elsewhere. This is to test that the resources
-                //we expect are present. Also need to check that the actual contents of at least one of the resources
+                //we expect are present. Also need to check that the actual contents of at least one of the
+                // resources
                 //is good. That tests our processing of the relocations.
 
                 uint size;
@@ -258,7 +259,8 @@ class C
             );
 
             result.Diagnostics.Verify(
-                // error CS1566: Error reading resource 'file' -- 'Resource data provider should return non-null stream'
+                // error CS1566: Error reading resource 'file' -- 'Resource data provider should return non-null
+                // stream'
                 Diagnostic(ErrorCode.ERR_CantReadResource)
                     .WithArguments(
                         "file",
@@ -368,7 +370,8 @@ class C
             );
 
             result.Diagnostics.Verify(
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
+                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is
+                // specified more than once in this assembly
                 Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo")
             );
         }
@@ -447,7 +450,8 @@ class C
             result.Diagnostics.Verify(
                 // error CS1508: Resource identifier 'A' has already been used in this assembly
                 Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A"),
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
+                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is
+                // specified more than once in this assembly
                 Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo")
             );
 
@@ -462,7 +466,8 @@ class C
             );
 
             result.Diagnostics.Verify(
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
+                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is
+                // specified more than once in this assembly
                 Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo"),
                 // error CS1508: Resource identifier 'B' has already been used in this assembly
                 Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("B")
@@ -476,7 +481,8 @@ class C
                 }
             );
 
-            //make sure there's no problem when the name of the primary module conflicts with a file name of an added resource.
+            //make sure there's no problem when the name of the primary module conflicts with a file name of an
+            // added resource.
             result.Diagnostics.Verify();
 
             var netModule1 = TestReferences.SymbolsTests.netModule.netModule1;
@@ -493,7 +499,8 @@ class C
 
             // Native compiler gives CS0013 (FTL_MetadataEmitFailure) at Emit stage
             result.Diagnostics.Verify(
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'netmodule1.netmodule' is specified more than once in this assembly
+                // error CS7041: Each linked resource and module must have a unique filename. Filename
+                // 'netmodule1.netmodule' is specified more than once in this assembly
                 Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique)
                     .WithArguments("netModule1.netmodule")
             );
@@ -505,7 +512,8 @@ class C
         {
             string source = @"public class C { static public void Main() {} }";
 
-            // Do not name the compilation, a unique guid is used as a name by default. It prevents conflicts with other assemblies loaded via Assembly.ReflectionOnlyLoad.
+            // Do not name the compilation, a unique guid is used as a name by default. It prevents conflicts
+            // with other assemblies loaded via Assembly.ReflectionOnlyLoad.
             var c1 = CreateCompilation(source);
 
             var resourceFileName = "RoslynResourceFile.goo";
@@ -573,7 +581,8 @@ class C
 
             var sourceTree = SyntaxFactory.ParseSyntaxTree("");
 
-            // Do not name the compilation, a unique guid is used as a name by default. It prevents conflicts with other assemblies loaded via Assembly.ReflectionOnlyLoad.
+            // Do not name the compilation, a unique guid is used as a name by default. It prevents conflicts
+            // with other assemblies loaded via Assembly.ReflectionOnlyLoad.
             var c1 = CSharpCompilation.Create(
                 Guid.NewGuid().ToString(),
                 new[] { sourceTree },
@@ -1169,7 +1178,8 @@ public class Maine
                 );
 
                 result.Diagnostics.Verify(
-                    // error CS1566: Error reading resource 'res' -- 'Resource stream ended at 4 bytes, expected 6 bytes.'
+                    // error CS1566: Error reading resource 'res' -- 'Resource stream ended at 4 bytes, expected 6
+                    // bytes.'
                     Diagnostic(ErrorCode.ERR_CantReadResource)
                         .WithArguments("res", "Resource stream ended at 4 bytes, expected 6 bytes.")
                         .WithLocation(1, 1)

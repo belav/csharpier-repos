@@ -39,7 +39,8 @@ namespace System.Xml
         string sourceUri;
 
         // message != null for V1 exceptions deserialized in Whidbey
-        // message == null for V2 or higher exceptions; the exception message is stored on the base class (Exception._message)
+        // message == null for V2 or higher exceptions; the exception message is stored on the base class
+        // (Exception._message)
         string message;
 
 #if !SILVERLIGHT
@@ -74,7 +75,8 @@ namespace System.Xml
             }
             else
             {
-                // deserializing V2 or higher exception -> exception message is serialized by the base class (Exception._message)
+                // deserializing V2 or higher exception -> exception message is serialized by the base class
+                // (Exception._message)
                 message = null;
             }
         }
@@ -299,8 +301,10 @@ namespace System.Xml
                             new string[] { message, lineNumberStr, linePositionStr }
                         );
                     }
-                    // Debug resources are not available -> add line information to the args and call the GetString to get the default
-                    // fallback message with the updated arguments. We need to handle the the case when the debug resources are not
+                    // Debug resources are not available -> add line information to the args and call the GetString to
+                    // get the default
+                    // fallback message with the updated arguments. We need to handle the the case when the debug
+                    // resources are not
                     // available like this; otherwise we would end up with two fallback messages in the final string.
                     else
                     {
@@ -357,7 +361,8 @@ namespace System.Xml
         {
             string[] aStringList = new string[2];
 
-            // for surrogate characters include both high and low char in the message so that a full character is displayed
+            // for surrogate characters include both high and low char in the message so that a full character
+            // is displayed
             if (XmlCharType.IsHighSurrogate(invChar) && nextChar != 0)
             {
                 int combinedChar = XmlCharType.CombineSurrogateChar(nextChar, invChar);
@@ -370,7 +375,8 @@ namespace System.Xml
             }
             else
             {
-                // don't include 0 character in the string - in means eof-of-string in native code, where this may bubble up to
+                // don't include 0 character in the string - in means eof-of-string in native code, where this may
+                // bubble up to
                 if ((int)invChar == 0)
                 {
                     aStringList[0] = ".";

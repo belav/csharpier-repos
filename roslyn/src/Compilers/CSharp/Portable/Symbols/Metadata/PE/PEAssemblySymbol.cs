@@ -166,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             AssemblySymbol SecondSymbol
         ) LookupAssembliesForForwardedMetadataType(ref MetadataTypeName emittedName)
         {
-            // Look in the type forwarders of the primary module of this assembly, clr does not honor type forwarder
+            // Look in the type forwarders of the primary module of this assembly, clr does not honor type
+            // forwarder
             // in non-primary modules.
 
             // Examine the type forwarders, but only from the primary module.
@@ -193,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 if ((object)secondSymbol != null)
                 {
-                    // Report the main module as that is the only one checked. clr does not honor type forwarders in non-primary modules.
+                    // Report the main module as that is the only one checked. clr does not honor type forwarders in
+                    // non-primary modules.
                     return CreateMultipleForwardingErrorTypeSymbol(
                         ref emittedName,
                         this.PrimaryModule,

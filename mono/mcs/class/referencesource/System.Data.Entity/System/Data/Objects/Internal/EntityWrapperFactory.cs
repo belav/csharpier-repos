@@ -62,7 +62,8 @@ namespace System.Data.Objects.Internal
             IEntityWrapper wrappedEntity = _delegateCache.Evaluate(entity.GetType())(entity);
             wrappedEntity.RelationshipManager.SetWrappedOwner(wrappedEntity, entity);
             // We cast to object here to avoid calling the overridden != operator on EntityKey.
-            // This creates a very small perf gain, which is none-the-less significant for lean no-tracking cases.
+            // This creates a very small perf gain, which is none-the-less significant for lean no-tracking
+            // cases.
             if ((object)key != null && (object)wrappedEntity.EntityKey == null)
             {
                 wrappedEntity.EntityKey = key;
@@ -83,9 +84,11 @@ namespace System.Data.Objects.Internal
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static Func<object, IEntityWrapper> CreateWrapperDelegate(Type entityType)
         {
-            // For entities that implement all our interfaces we create a special lightweight wrapper that is both
+            // For entities that implement all our interfaces we create a special lightweight wrapper that is
+            // both
             // smaller and faster than the strategy-based wrapper.
-            // Otherwise, the wrapper is provided with different delegates depending on which interfaces are implemented.
+            // Otherwise, the wrapper is provided with different delegates depending on which interfaces are
+            // implemented.
             bool isIEntityWithRelationships = typeof(IEntityWithRelationships).IsAssignableFrom(
                 entityType
             );
@@ -134,7 +137,8 @@ namespace System.Data.Objects.Internal
             return (entity) => new LightweightEntityWrapper<TEntity>((TEntity)entity);
         }
 
-        // Returns a delegate that creates a strategy-based wrapper for entities that implement IEntityWithRelationships
+        // Returns a delegate that creates a strategy-based wrapper for entities that implement
+        // IEntityWithRelationships
         private static Func<
             object,
             IEntityWrapper
@@ -159,7 +163,8 @@ namespace System.Data.Objects.Internal
                 );
         }
 
-        // Returns a delegate that creates a strategy-based wrapper for entities that do not implement IEntityWithRelationships
+        // Returns a delegate that creates a strategy-based wrapper for entities that do not implement
+        // IEntityWithRelationships
         private static Func<
             object,
             IEntityWrapper
@@ -290,7 +295,8 @@ namespace System.Data.Objects.Internal
         /// </summary>
         /// <param name="entity">The entity to wrap</param>
         /// <param name="context">The state manager  in which the entity may exist, or null</param>
-        /// <param name="existingEntry">The existing state entry for the given entity if one exists, otherwise null</param>
+        /// <param name="existingEntry">The existing state entry for the given entity if one exists,
+        // otherwise null</param>
         /// <returns>A new or existing wrapper</returns>
         internal static IEntityWrapper WrapEntityUsingStateManagerGettingEntry(
             object entity,
@@ -369,7 +375,8 @@ namespace System.Data.Objects.Internal
         }
 
         /// <summary>
-        /// When an entity enters Object Services that was retreived with NoTracking, it may not have certain fields set that are in many cases
+        /// When an entity enters Object Services that was retreived with NoTracking, it may not have
+        // certain fields set that are in many cases
         /// assumed to be present. This method updates the wrapper with a key and a context.
         /// </summary>
         /// <param name="wrapper">The wrapped entity</param>
@@ -407,7 +414,8 @@ namespace System.Data.Objects.Internal
         }
 
         /// <summary>
-        /// Returns a func that will create a null IPropertyAccessorStrategy strategy object for a given entity.
+        /// Returns a func that will create a null IPropertyAccessorStrategy strategy object for a given
+        // entity.
         /// </summary>
         /// <returns>The func to be used to create the strategy object.</returns>
         internal static Func<

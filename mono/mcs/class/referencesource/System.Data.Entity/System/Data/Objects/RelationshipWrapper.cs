@@ -69,8 +69,12 @@ namespace System.Data.Objects
             // this assert is explictly commented out to show that the two are similar but different
             // we should always use AssociationEndMembers, never CorrespondingAssociationEndMember
             //Debug.Assert(AssociationSet.AssociationSetEnds.Count == 2, "only 2 set ends supported");
-            //Debug.Assert(extent.ElementType.AssociationEndMembers[0] == AssociationSet.AssociationSetEnds[0].CorrespondingAssociationEndMember, "should be same end member");
-            //Debug.Assert(extent.ElementType.AssociationEndMembers[1] == AssociationSet.AssociationSetEnds[1].CorrespondingAssociationEndMember, "should be same end member");
+            //Debug.Assert(extent.ElementType.AssociationEndMembers[0] ==
+            // AssociationSet.AssociationSetEnds[0].CorrespondingAssociationEndMember, "should be same end
+            // member");
+            //Debug.Assert(extent.ElementType.AssociationEndMembers[1] ==
+            // AssociationSet.AssociationSetEnds[1].CorrespondingAssociationEndMember, "should be same end
+            // member");
 
             if (extent.ElementType.AssociationEndMembers[0].Name == role0)
             {

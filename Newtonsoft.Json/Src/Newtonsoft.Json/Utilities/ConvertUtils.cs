@@ -1111,7 +1111,8 @@ namespace Newtonsoft.Json.Utilities
             };
 
             /// <summary>
-            /// Packs <paramref name="val"/>*10^<paramref name="scale"/> as 64-bit floating point value according to IEEE 754 standard
+            /// Packs <paramref name="val"/>*10^<paramref name="scale"/> as 64-bit floating point value
+            // according to IEEE 754 standard
             /// </summary>
             /// <param name="negative">Sign</param>
             /// <param name="val">Mantissa</param>
@@ -1238,7 +1239,8 @@ namespace Newtonsoft.Json.Utilities
                 {
                     if (exp == -52 && (val >= 0x8000000000000058))
                     {
-                        // round X where {Epsilon > X >= 2.470328229206232730000000E-324} up to Epsilon (instead of down to zero)
+                        // round X where {Epsilon > X >= 2.470328229206232730000000E-324} up to Epsilon (instead of down to
+                        // zero)
                         val = 0x0000000000000001;
                     }
                     else if (exp <= -52)

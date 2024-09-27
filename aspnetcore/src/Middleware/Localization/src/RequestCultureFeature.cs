@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Localization;
 public class RequestCultureFeature : IRequestCultureFeature
 {
     /// <summary>
-    /// Creates a new <see cref="RequestCultureFeature"/> with the specified <see cref="Localization.RequestCulture"/>.
+    /// Creates a new <see cref="RequestCultureFeature"/> with the specified <see
+    // cref="Localization.RequestCulture"/>.
     /// </summary>
     /// <param name="requestCulture">The <see cref="Localization.RequestCulture"/>.</param>
     /// <param name="provider">The <see cref="IRequestCultureProvider"/>.</param>

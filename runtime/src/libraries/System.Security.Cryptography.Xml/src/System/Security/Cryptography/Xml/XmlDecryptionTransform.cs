@@ -23,7 +23,8 @@ namespace System.Security.Cryptography.Xml
         private XmlDocument? _containingDocument;
         private XmlNamespaceManager? _nsm;
 
-        // work around https://github.com/dotnet/runtime/issues/81864 by splitting this into a separate class.
+        // work around https://github.com/dotnet/runtime/issues/81864 by splitting this into a separate
+        // class.
         internal static class Consts
         {
             internal const string XmlDecryptionTransformNamespaceUrl =

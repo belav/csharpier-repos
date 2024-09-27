@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Get all the members of this symbol.
         /// </summary>
-        /// <returns>An ImmutableArray containing all the members of this symbol. If this symbol has no members,
+        /// <returns>An ImmutableArray containing all the members of this symbol. If this symbol has no
+        // members,
         /// returns an empty ImmutableArray. Never returns Null.</returns>
         public override ImmutableArray<Symbol> GetMembers()
         {
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Get all the members of this symbol that have a particular name.
         /// </summary>
-        /// <returns>An ImmutableArray containing all the members of this symbol with the given name. If there are
+        /// <returns>An ImmutableArray containing all the members of this symbol with the given name. If
+        // there are
         /// no members with this name, returns an empty ImmutableArray. Never returns Null.</returns>
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Get all the members of this symbol that are types.
         /// </summary>
-        /// <returns>An ImmutableArray containing all the types that are members of this symbol. If this symbol has no type members,
+        /// <returns>An ImmutableArray containing all the types that are members of this symbol. If this
+        // symbol has no type members,
         /// returns an empty ImmutableArray. Never returns null.</returns>
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
         {
@@ -183,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Get all the members of this symbol that are types that have a particular name, of any arity.
         /// </summary>
-        /// <returns>An ImmutableArray containing all the types that are members of this symbol with the given name.
+        /// <returns>An ImmutableArray containing all the types that are members of this symbol with the
+        // given name.
         /// If this symbol has no type members with this name,
         /// returns an empty ImmutableArray. Never returns null.</returns>
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name)
@@ -194,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Get all the members of this symbol that are types that have a particular name and arity
         /// </summary>
-        /// <returns>An ImmutableArray containing all the types that are members of this symbol with the given name and arity.
+        /// <returns>An ImmutableArray containing all the types that are members of this symbol with the
+        // given name and arity.
         /// If this symbol has no type members with this name and arity,
         /// returns an empty ImmutableArray. Never returns null.</returns>
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(

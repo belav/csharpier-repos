@@ -322,25 +322,25 @@ namespace System.Data
             {
                 _nodeToSchemaMap = new XmlToDatasetMap(_dataSet!, xdoc.NameTable);
             }
-            /*
-                        // Top level table or dataset ?
-                        XmlElement rootElement = xdoc.DocumentElement;
-                        Hashtable tableAtoms = new Hashtable();
-                        XmlNode tabNode;
-                        if (CountNonNSAttributes (rootElement) > 0)
-                            dataSet.fTopLevelTable = true;
-                        else {
-                            for (tabNode = rootElement.FirstChild; tabNode != null; tabNode = tabNode.NextSibling) {
-                                if (tabNode is XmlElement && tabNode.LocalName != Keywords.XSD_SCHEMA) {
-                                    object value = tableAtoms[QualifiedName (tabNode.LocalName, tabNode.NamespaceURI)];
-                                    if (value == null || (bool)value == false) {
-                                        dataSet.fTopLevelTable = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-            */
+/*
+// Top level table or dataset ?
+XmlElement rootElement = xdoc.DocumentElement;
+Hashtable tableAtoms = new Hashtable();
+XmlNode tabNode;
+if (CountNonNSAttributes (rootElement) > 0)
+dataSet.fTopLevelTable = true;
+else {
+for (tabNode = rootElement.FirstChild; tabNode != null; tabNode = tabNode.NextSibling) {
+if (tabNode is XmlElement && tabNode.LocalName != Keywords.XSD_SCHEMA) {
+object value = tableAtoms[QualifiedName (tabNode.LocalName, tabNode.NamespaceURI)];
+if (value == null || (bool)value == false) {
+dataSet.fTopLevelTable = true;
+break;
+}
+}
+}
+}
+*/
             DataRow? topRow = null;
             if (_isTableLevel || (_dataSet != null && _dataSet._fTopLevelTable))
             {
@@ -868,7 +868,8 @@ namespace System.Data
 
             _dataReader.Read(); // Proceed to the next element.
 
-            // It's the time to populate row with loaded data and add it to the table we'we just read to the table
+            // It's the time to populate row with loaded data and add it to the table we'we just read to the
+            // table
 
             for (int i = foundColumns.Length - 1; i >= 0; --i)
             {
@@ -1137,7 +1138,8 @@ namespace System.Data
                 _dataReader.Read(); // We're done here, proceed to the next element.
             }
 
-            // It's the time to populate row with loaded data and add it to the table we'we just read to the table
+            // It's the time to populate row with loaded data and add it to the table we'we just read to the
+            // table
 
             if (_isDiffgram)
             { // In case of diffgram
@@ -1258,7 +1260,8 @@ namespace System.Data
                     typeName = _dataReader.GetAttribute(Keywords.MSD_INSTANCETYPE, Keywords.MSDNS);
                 }
 
-                // Check if need to use XmlSerializer. We need to do that if type does not implement IXmlSerializable.
+                // Check if need to use XmlSerializer. We need to do that if type does not implement
+                // IXmlSerializable.
                 // We also need to do that if no polymorphism for this type allowed.
 
                 bool useXmlSerializer =

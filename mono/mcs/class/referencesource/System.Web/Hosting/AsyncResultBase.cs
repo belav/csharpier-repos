@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * IAsyncResult for asynchronous reads.
- *
- * Copyright (c) 2010 Microsoft Corporation
- */
+* IAsyncResult for asynchronous reads.
+*
+* Copyright (c) 2010 Microsoft Corporation
+*/
 
 namespace System.Web.Hosting
 {

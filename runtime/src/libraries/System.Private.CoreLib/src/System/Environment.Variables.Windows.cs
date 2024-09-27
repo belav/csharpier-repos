@@ -41,7 +41,8 @@ namespace System
             return builder.ToString();
         }
 
-        /// <summary>GetEnvironmentVariableCore that avoids using the ArrayPool. Environment variables must be less than 128 characters in length or won't be found.</summary>
+        /// <summary>GetEnvironmentVariableCore that avoids using the ArrayPool. Environment variables must
+        // be less than 128 characters in length or won't be found.</summary>
         internal static string? GetEnvironmentVariableCore_NoArrayPool(string variable)
         {
             Span<char> span = stackalloc char[128];
@@ -116,7 +117,8 @@ namespace System
                         break;
                     }
 
-                    // Find the = separating the key and value. We skip entries that begin with =.  We also skip entries that don't
+                    // Find the = separating the key and value. We skip entries that begin with =.  We also skip entries
+                    // that don't
                     // have =, which can happen on some older OSes when the environment block gets corrupted.
                     int i = variable.IndexOf('=');
                     if (i > 0)

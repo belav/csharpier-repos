@@ -46,19 +46,23 @@ namespace System.Security.Cryptography
 
         public abstract ECDiffieHellmanPublicKey PublicKey { get; }
 
-        // This method must be implemented by derived classes. In order to conform to the contract, it cannot be abstract.
+        // This method must be implemented by derived classes. In order to conform to the contract, it
+        // cannot be abstract.
         public virtual byte[] DeriveKeyMaterial(ECDiffieHellmanPublicKey otherPartyPublicKey)
         {
             throw DerivedClassMustOverride();
         }
 
         /// <summary>
-        /// Derive key material using the formula HASH(x) where x is the computed result of the EC Diffie-Hellman algorithm.
+        /// Derive key material using the formula HASH(x) where x is the computed result of the EC
+        // Diffie-Hellman algorithm.
         /// </summary>
-        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual secret.</param>
+        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual
+        // secret.</param>
         /// <param name="hashAlgorithm">The identifier for the hash algorithm to use.</param>
         /// <returns>A hashed output suitable for key material</returns>
-        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different curve than this key</exception>
+        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different
+        // curve than this key</exception>
         public byte[] DeriveKeyFromHash(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm
@@ -68,15 +72,20 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Derive key material using the formula HASH(secretPrepend || x || secretAppend) where x is the computed
+        /// Derive key material using the formula HASH(secretPrepend || x || secretAppend) where x is the
+        // computed
         /// result of the EC Diffie-Hellman algorithm.
         /// </summary>
-        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual secret.</param>
+        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual
+        // secret.</param>
         /// <param name="hashAlgorithm">The identifier for the hash algorithm to use.</param>
-        /// <param name="secretPrepend">A value to prepend to the derived secret before hashing. A <c>null</c> value is treated as an empty array.</param>
-        /// <param name="secretAppend">A value to append to the derived secret before hashing. A <c>null</c> value is treated as an empty array.</param>
+        /// <param name="secretPrepend">A value to prepend to the derived secret before hashing. A
+        // <c>null</c> value is treated as an empty array.</param>
+        /// <param name="secretAppend">A value to append to the derived secret before hashing. A <c>null</c>
+        // value is treated as an empty array.</param>
         /// <returns>A hashed output suitable for key material</returns>
-        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different curve than this key</exception>
+        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different
+        // curve than this key</exception>
         public virtual byte[] DeriveKeyFromHash(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
@@ -91,11 +100,14 @@ namespace System.Security.Cryptography
         /// Derive key material using the formula HMAC(hmacKey, x) where x is the computed
         /// result of the EC Diffie-Hellman algorithm.
         /// </summary>
-        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual secret.</param>
+        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual
+        // secret.</param>
         /// <param name="hashAlgorithm">The identifier for the hash algorithm to use.</param>
-        /// <param name="hmacKey">The key to use in the HMAC. A <c>null</c> value indicates that the result of the EC Diffie-Hellman algorithm should be used as the HMAC key.</param>
+        /// <param name="hmacKey">The key to use in the HMAC. A <c>null</c> value indicates that the result
+        // of the EC Diffie-Hellman algorithm should be used as the HMAC key.</param>
         /// <returns>A hashed output suitable for key material</returns>
-        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different curve than this key</exception>
+        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different
+        // curve than this key</exception>
         public byte[] DeriveKeyFromHmac(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
@@ -106,16 +118,22 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Derive key material using the formula HMAC(hmacKey, secretPrepend || x || secretAppend) where x is the computed
+        /// Derive key material using the formula HMAC(hmacKey, secretPrepend || x || secretAppend) where x
+        // is the computed
         /// result of the EC Diffie-Hellman algorithm.
         /// </summary>
-        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual secret.</param>
+        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual
+        // secret.</param>
         /// <param name="hashAlgorithm">The identifier for the hash algorithm to use.</param>
-        /// <param name="hmacKey">The key to use in the HMAC. A <c>null</c> value indicates that the result of the EC Diffie-Hellman algorithm should be used as the HMAC key.</param>
-        /// <param name="secretPrepend">A value to prepend to the derived secret before hashing. A <c>null</c> value is treated as an empty array.</param>
-        /// <param name="secretAppend">A value to append to the derived secret before hashing. A <c>null</c> value is treated as an empty array.</param>
+        /// <param name="hmacKey">The key to use in the HMAC. A <c>null</c> value indicates that the result
+        // of the EC Diffie-Hellman algorithm should be used as the HMAC key.</param>
+        /// <param name="secretPrepend">A value to prepend to the derived secret before hashing. A
+        // <c>null</c> value is treated as an empty array.</param>
+        /// <param name="secretAppend">A value to append to the derived secret before hashing. A <c>null</c>
+        // value is treated as an empty array.</param>
         /// <returns>A hashed output suitable for key material</returns>
-        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different curve than this key</exception>
+        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different
+        // curve than this key</exception>
         public virtual byte[] DeriveKeyFromHmac(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
@@ -130,14 +148,17 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Derive key material using the TLS pseudo-random function (PRF) derivation algorithm.
         /// </summary>
-        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual secret.</param>
+        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual
+        // secret.</param>
         /// <param name="prfLabel">The ASCII encoded PRF label.</param>
         /// <param name="prfSeed">The 64-byte PRF seed.</param>
         /// <returns>A 48-byte output of the TLS pseudo-random function.</returns>
-        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different curve than this key</exception>
+        /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different
+        // curve than this key</exception>
         /// <exception cref="ArgumentNullException"><paramref name="prfLabel"/> is null</exception>
         /// <exception cref="ArgumentNullException"><paramref name="prfSeed"/> is null</exception>
-        /// <exception cref="CryptographicException"><paramref name="prfSeed"/> is not exactly 64 bytes in length</exception>
+        /// <exception cref="CryptographicException"><paramref name="prfSeed"/> is not exactly 64 bytes in
+        // length</exception>
         public virtual byte[] DeriveKeyTls(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             byte[] prfLabel,
@@ -150,10 +171,12 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Derive raw key material.
         /// </summary>
-        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual secret.</param>
+        /// <param name="otherPartyPublicKey">The public key of the party with which to derive a mutual
+        // secret.</param>
         /// <returns>The raw key agreement.</returns>
         /// <remarks>
-        /// Care must be taking when using the raw derived secret agreement value. The raw value is expected to be used
+        /// Care must be taking when using the raw derived secret agreement value. The raw value is expected
+        // to be used
         /// as input in to a Key Derivation Function, and not used directly as key material.
         /// </remarks>
         /// <exception cref="ArgumentNullException">

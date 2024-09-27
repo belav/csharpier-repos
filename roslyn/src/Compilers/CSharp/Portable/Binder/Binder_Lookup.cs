@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Look for any symbols in scope with the given name and arity.
         /// </summary>
         /// <remarks>
-        /// Makes a second attempt if the results are not viable, in order to produce more detailed failure information (symbols and diagnostics).
+        /// Makes a second attempt if the results are not viable, in order to produce more detailed failure
+        // information (symbols and diagnostics).
         /// </remarks>
         private Binder LookupSymbolsWithFallback(
             LookupResult result,
@@ -474,12 +475,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Lookup a member name in a submission chain.
         /// </summary>
         /// <remarks>
-        /// We start with the current submission class and walk the submission chain back to the first submission.
+        /// We start with the current submission class and walk the submission chain back to the first
+        // submission.
         /// The search has two phases
-        /// 1) We are looking for any symbol matching the given name, arity, and options. If we don't find any the search is over.
-        ///    If we find and overloadable symbol(s) (a method or an indexer) we start looking for overloads of this kind
+        /// 1) We are looking for any symbol matching the given name, arity, and options. If we don't find
+        // any the search is over.
+        ///    If we find and overloadable symbol(s) (a method or an indexer) we start looking for overloads
+        // of this kind
         ///    (lookingForOverloadsOfKind) of symbol in phase 2.
-        /// 2) If a visited submission contains a matching member of a kind different from lookingForOverloadsOfKind we stop
+        /// 2) If a visited submission contains a matching member of a kind different from
+        // lookingForOverloadsOfKind we stop
         ///    looking further. Otherwise, if we find viable overload(s) we add them into the result.
         ///
         /// Note that indexers are not supported in script but we deal with them here to handle errors.
@@ -538,7 +543,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     submissionImports = Imports.Empty;
                 }
 
-                // If a viable using alias and a matching member are both defined in the submission an error is reported elsewhere.
+                // If a viable using alias and a matching member are both defined in the submission an error is
+                // reported elsewhere.
                 // Ignore the member in such case.
                 if (
                     (options & LookupOptions.NamespaceAliasesOnly) == 0
@@ -558,7 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         basesBeingResolved
                     );
 
-                    // NB: It doesn't matter that submissionImports hasn't been expanded since we're not actually using the alias target.
+                    // NB: It doesn't matter that submissionImports hasn't been expanded since we're not actually using
+                    // the alias target.
                     if (
                         submissionSymbols.IsMultiViable
                         && considerUsings
@@ -569,7 +576,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                     )
                     {
-                        // using alias is ambiguous with another definition within the same submission iff the other definition is a 0-ary type or a non-type:
+                        // using alias is ambiguous with another definition within the same submission iff the other
+                        // definition is a 0-ary type or a non-type:
                         Symbol existingDefinition = submissionSymbols.Symbols.First();
                         if (existingDefinition.Kind != SymbolKind.NamedType || arity == 0)
                         {
@@ -621,7 +629,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (!submissionSymbols.IsMultiViable)
                     {
-                        // skip non-viable members, but remember them in case no viable members are found in previous submissions:
+                        // skip non-viable members, but remember them in case no viable members are found in previous
+                        // submissions:
                         nonViable.MergePrioritized(submissionSymbols);
                         continue;
                     }
@@ -832,11 +841,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Lookup attribute name in the given binder. By default two name lookups are performed:
         ///     (1) With the provided name
         ///     (2) With an Attribute suffix added to the provided name
-        /// Lookup with Attribute suffix is performed only if LookupOptions.VerbatimAttributeName is not set.
+        /// Lookup with Attribute suffix is performed only if LookupOptions.VerbatimAttributeName is not
+        // set.
         ///
         /// If either lookup is ambiguous, we return the corresponding result with ambiguous symbols.
         /// Else if exactly one result is single viable attribute type, we return that result.
-        /// Otherwise, we return a non-viable result with LookupResult.NotAnAttributeType or an empty result.
+        /// Otherwise, we return a non-viable result with LookupResult.NotAnAttributeType or an empty
+        // result.
         /// </summary>
         private void LookupAttributeType(
             LookupResult result,
@@ -858,9 +869,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             //  SPEC:   If an attribute class is found both with and without this suffix, an ambiguity
             //  SPEC:   is present, and a compile-time error results. If the attribute-name is spelled
             //  SPEC:   such that its right-most identifier is a verbatim identifier (§2.4.2), then only
-            //  SPEC:   an attribute without a suffix is matched, thus enabling such an ambiguity to be resolved.
+            //  SPEC:   an attribute without a suffix is matched, thus enabling such an ambiguity to be
+            // resolved.
 
-            // Roslyn Bug 9681: Compilers incorrectly use the *failure* of binding some subexpression to indicate some other strategy is applicable (attributes, 'var')
+            // Roslyn Bug 9681: Compilers incorrectly use the *failure* of binding some subexpression to
+            // indicate some other strategy is applicable (attributes, 'var')
 
             // Roslyn reproduces Dev10 compiler behavior which doesn't report an error if one of the
             // lookups is single viable and other lookup is ambiguous. If one of the lookup results
@@ -921,7 +934,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Single viable lookup symbol found both with and without Attribute suffix.
                 // We merge both results, ambiguity error will be reported later in ResultSymbol,
-                // no need to adjust useSiteInfo based on attributeTypeWithoutSuffixViabilityUseSiteInfo/attributeTypeWithSuffixViabilityUseSiteInfo.
+                // no need to adjust useSiteInfo based on
+                // attributeTypeWithoutSuffixViabilityUseSiteInfo/attributeTypeWithSuffixViabilityUseSiteInfo.
                 result.MergeEqual(resultWithSuffix);
             }
             else if (resultWithoutSuffixIsViable)
@@ -940,7 +954,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 // Both results are clear, non-viable or ambiguous.
-                // No need to adjust useSiteInfo based on attributeTypeWithoutSuffixViabilityUseSiteInfo/attributeTypeWithSuffixViabilityUseSiteInfo.
+                // No need to adjust useSiteInfo based on
+                // attributeTypeWithoutSuffixViabilityUseSiteInfo/attributeTypeWithSuffixViabilityUseSiteInfo.
 
                 if (!result.IsClear)
                 {
@@ -994,9 +1009,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 default:
                     // If there are two or more symbols in the result, one from source and others from PE,
                     // then the source symbol overrides the PE symbols and must be chosen.
-                    // NOTE: Kind of the symbol doesn't matter here. If the resolved symbol is not an attribute type, we will subsequently generate a lookup error.
+                    // NOTE: Kind of the symbol doesn't matter here. If the resolved symbol is not an attribute type, we
+                    // will subsequently generate a lookup error.
 
-                    // CONSIDER: If this source symbol is the eventual result symbol for attribute type lookup and it is not a valid attribute type,
+                    // CONSIDER: If this source symbol is the eventual result symbol for attribute type lookup and it is
+                    // not a valid attribute type,
                     // CONSIDER: we generate an error but don't generate warning CS0436 for source/PE name conflict.
                     // CONSIDER: We may want to also generate CS0436 for this case.
 
@@ -1172,10 +1189,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Return the extension methods from this specific binding scope that match the name and optional
-        /// arity. Since the lookup of extension methods is iterative, proceeding one binding scope at a time,
+        /// arity. Since the lookup of extension methods is iterative, proceeding one binding scope at a
+        // time,
         /// GetCandidateExtensionMethods should not defer to the next binding scope. Instead, the caller is
-        /// responsible for walking the nested binding scopes from innermost to outermost. This method is overridden
-        /// to search the available members list in binding types that represent types, namespaces, and usings.
+        /// responsible for walking the nested binding scopes from innermost to outermost. This method is
+        // overridden
+        /// to search the available members list in binding types that represent types, namespaces, and
+        // usings.
         /// </summary>
         internal virtual void GetCandidateExtensionMethods(
             ArrayBuilder<MethodSymbol> methods,
@@ -1203,8 +1223,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (Symbol member in members)
             {
-                // Do we need to exclude override members, or is that done later by overload resolution. It seems like
-                // not excluding them here can't lead to problems, because we will always find the overridden method as well.
+                // Do we need to exclude override members, or is that done later by overload resolution. It seems
+                // like
+                // not excluding them here can't lead to problems, because we will always find the overridden method
+                // as well.
                 SingleLookupResult resultOfThisMember = originalBinder.CheckViability(
                     member,
                     arity,
@@ -1301,7 +1323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                 }
 
-                // any viable non-methods [non-indexers] found here will hide viable methods [indexers] (with the same name) in any further base classes
+                // any viable non-methods [non-indexers] found here will hide viable methods [indexers] (with the
+                // same name) in any further base classes
                 bool tmpHidesMethodOrIndexers =
                     tmp.IsMultiViable && !IsMethodOrIndexer(tmp.Symbols[0]);
 
@@ -1559,7 +1582,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
         }
 
-        // find the nearest symbol in list to the symbol 'type'.  It may be the same symbol if its the only one.
+        // find the nearest symbol in list to the symbol 'type'.  It may be the same symbol if its the only
+        // one.
         private static Symbol GetNearestOtherSymbol(ConsList<TypeSymbol> list, TypeSymbol type)
         {
             TypeSymbol other = type;
@@ -1676,22 +1700,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            // The C# language specification forbids an interface from extending another interface that depends on it.
+            // The C# language specification forbids an interface from extending another interface that depends
+            // on it.
             // That prevents a legal program from having an infinite inheritance chain.  We protect most of the
             // compiler from having to deal with infinite inheritance chains arising in such illegal programs by
             // removing the dependent base interfaces from the interface list.  This is accomplished by calling
-            // `BaseTypeAnalysis.TypeDependsOn` in `SourceNamedTypeSymbol.MakeAcyclicInterfaces`.  With the addition
+            // `BaseTypeAnalysis.TypeDependsOn` in `SourceNamedTypeSymbol.MakeAcyclicInterfaces`.  With the
+            // addition
             // of support for types nested within interfaces in C# 8.0, type lookup within an interface needs to
-            // traverse base interfaces.  We cannot depend on the interfaces having been previously bound and cleaned
-            // of these cycles because such cycles might arise while we are binding a base clause.  The following
+            // traverse base interfaces.  We cannot depend on the interfaces having been previously bound and
+            // cleaned
+            // of these cycles because such cycles might arise while we are binding a base clause.  The
+            // following
             // code is specifically used in that case: to get the list of base interfaces for use in name lookup
             // while some base clause is being bound.  To prevent infinite recursion in the case of (erroneous)
-            // infinite inheritance, we stop enumerating base interfaces when we encounter an interface type that
+            // infinite inheritance, we stop enumerating base interfaces when we encounter an interface type
+            // that
             // inherits from an instantiation of the same interface.  We therefore track, in `cycleGuard`, the
             // current set of interfaces whose base interfaces we are enumerating.
             var cycleGuard = ConsList<NamedTypeSymbol>.Empty.Prepend(type.OriginalDefinition);
 
-            // Consumers of the result depend on the sorting performed by AllInterfacesWithDefinitionUseSiteDiagnostics.
+            // Consumers of the result depend on the sorting performed by
+            // AllInterfacesWithDefinitionUseSiteDiagnostics.
             // Let's use similar sort algorithm.
             var result = ArrayBuilder<NamedTypeSymbol>.GetInstance();
             var visited = new HashSet<NamedTypeSymbol>(
@@ -1980,8 +2010,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         // Merge resultHidden into resultHiding, whereby viable results in resultHiding should hide results
-        // in resultHidden if the owner of the symbol in resultHiding is a subtype of the owner of the symbol
-        // in resultHidden. We merge together methods [indexers], but non-methods [non-indexers] hide everything and methods [indexers] hide non-methods [non-indexers].
+        // in resultHidden if the owner of the symbol in resultHiding is a subtype of the owner of the
+        // symbol
+        // in resultHidden. We merge together methods [indexers], but non-methods [non-indexers] hide
+        // everything and methods [indexers] hide non-methods [non-indexers].
         private void MergeHidingLookupResults(
             LookupResult resultHiding,
             LookupResult resultHidden,
@@ -2038,7 +2070,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             goto symIsHidden;
                         }
 
-                        // Note: We do not implement hiding by signature in non-interfaces here; that is handled later in overload lookup.
+                        // Note: We do not implement hiding by signature in non-interfaces here; that is handled later in
+                        // overload lookup.
                     }
 
                     hidingSymbols.Add(sym); // not hidden
@@ -2163,7 +2196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (binder is BuckStopsHereBinder lastBinder)
                     {
-                        // we never expect to bind a file type in a context where the BuckStopsHereBinder lacks an AssociatedFileIdentifier
+                        // we never expect to bind a file type in a context where the BuckStopsHereBinder lacks an
+                        // AssociatedFileIdentifier
                         return lastBinder.AssociatedFileIdentifier
                             ?? throw ExceptionUtilities.Unreachable();
                     }
@@ -2174,7 +2208,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <remarks>
-        /// Distinguish from <see cref="CanAddLookupSymbolInfo"/>, which performs an analogous task for Add*LookupSymbolsInfo*.
+        /// Distinguish from <see cref="CanAddLookupSymbolInfo"/>, which performs an analogous task for
+        // Add*LookupSymbolsInfo*.
         /// </remarks>
         internal SingleLookupResult CheckViability(
             Symbol symbol,
@@ -2373,7 +2408,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             bool IsBadIvtSpecification()
             {
-                // Ensures that during binding we don't ask for public key which results in attribute binding and stack overflow.
+                // Ensures that during binding we don't ask for public key which results in attribute binding and
+                // stack overflow.
                 // If looking up attributes, don't ask for public key.
                 if (
                     (
@@ -2455,7 +2491,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Used by Add*LookupSymbolsInfo* to determine whether the symbol is of interest.
-        /// Distinguish from <see cref="CheckViability"/>, which performs an analogous task for LookupSymbols*.
+        /// Distinguish from <see cref="CheckViability"/>, which performs an analogous task for
+        // LookupSymbols*.
         /// </summary>
         /// <remarks>
         /// Does not consider <see cref="Symbol.CanBeReferencedByName"/> - that is left to the caller.
@@ -2544,9 +2581,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol accessThroughType
         )
         {
-            // Normally, when we access a protected instance member, we need to know the type of the receiver so we
-            // can determine whether the member is actually accessible in the containing type.  There is one exception:
-            // If the receiver is "base", then it's okay if the receiver type isn't derived from the containing type.
+            // Normally, when we access a protected instance member, we need to know the type of the receiver so
+            // we
+            // can determine whether the member is actually accessible in the containing type.  There is one
+            // exception:
+            // If the receiver is "base", then it's okay if the receiver type isn't derived from the containing
+            // type.
             return ((options & LookupOptions.UseBaseReferenceAccessibility) != 0)
                 ? null
                 : accessThroughType;
@@ -2637,7 +2677,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <remarks>
-        /// Should only be called by <see cref="IsAccessible(Symbol, TypeSymbol, out bool, ref CompoundUseSiteInfo{AssemblySymbol}, ConsList{TypeSymbol})"/>,
+        /// Should only be called by <see cref="IsAccessible(Symbol, TypeSymbol, out bool, ref
+        // CompoundUseSiteInfo{AssemblySymbol}, ConsList{TypeSymbol})"/>,
         /// which will already have checked for <see cref="BinderFlags.IgnoreAccessibility"/>.
         /// </remarks>
         internal virtual bool IsAccessibleHelper(

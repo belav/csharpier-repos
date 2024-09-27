@@ -83,11 +83,13 @@ namespace Microsoft.Cci
                 _metadataWriter.GetMethodHandle(methodBody.MethodDefinition);
 
             // A state machine kickoff method doesn't have sequence points as it only contains generated code.
-            // We could avoid emitting debug info for it if the corresponding MoveNext method had no sequence points,
+            // We could avoid emitting debug info for it if the corresponding MoveNext method had no sequence
+            // points,
             // but there is no real need for such optimization.
             //
             // Special case a hidden entry point (#line hidden applied) that would otherwise have no debug info.
-            // This is to accommodate for a requirement of Windows PDB writer that the entry point method must have some debug information.
+            // This is to accommodate for a requirement of Windows PDB writer that the entry point method must
+            // have some debug information.
             bool isKickoffMethod = methodBody.StateMachineTypeName != null;
             bool emitAllDebugInfo =
                 isKickoffMethod
@@ -97,7 +99,8 @@ namespace Microsoft.Cci
 
             var compilationOptions = Context.Module.CommonCompilation.Options;
 
-            // We need to avoid emitting CDI DynamicLocals = 5 and EditAndContinueLocalSlotMap = 6 for files processed by WinMDExp until
+            // We need to avoid emitting CDI DynamicLocals = 5 and EditAndContinueLocalSlotMap = 6 for files
+            // processed by WinMDExp until
             // bug #1067635 is fixed and available in SDK.
             bool suppressNewCustomDebugInfo =
                 compilationOptions.OutputKind == OutputKind.WindowsRuntimeMetadata;
@@ -105,7 +108,8 @@ namespace Microsoft.Cci
             bool emitDynamicAndTupleInfo = emitAllDebugInfo && !suppressNewCustomDebugInfo;
 
             // Emit EnC info for all methods even if they do not have sequence points.
-            // The information facilitates reusing lambdas and closures. The reuse is important for runtimes that can't add new members (e.g. Mono).
+            // The information facilitates reusing lambdas and closures. The reuse is important for runtimes
+            // that can't add new members (e.g. Mono).
             bool emitEncInfo =
                 compilationOptions.EnableEditAndContinue
                 && _metadataWriter.IsFullMetadata
@@ -665,7 +669,8 @@ namespace Microsoft.Cci
             if (IsDeterministic)
             {
                 // Calculate hash of the stream content.
-                // Note: all bits of the signature currently stored in the PDB stream were initialized to 1 by InitializeDeterministic.
+                // Note: all bits of the signature currently stored in the PDB stream were initialized to 1 by
+                // InitializeDeterministic.
                 contentId = BlobContentId.FromHash(
                     CryptographicHashProvider.ComputeHash(
                         _hashAlgorithmNameOpt,

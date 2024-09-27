@@ -180,9 +180,10 @@ namespace System.Data.Common
             }
         }
 
-        /*/// <include file='doc\DataTableMappingCollection.uex' path='docs/doc[@for="DataTableMappingCollection.AddCloneOfRange"]/*' />
+        /*/// <include file='doc\DataTableMappingCollection.uex'
+        path='docs/doc[@for="DataTableMappingCollection.AddCloneOfRange"]/*' />
         public void AddCloneOfRange(IEnumerable values) {
-            AddEnumerableRange(values, true);
+        AddEnumerableRange(values, true);
         }*/
 
         public DataTableMapping Add(string sourceTable, string dataSetTable)

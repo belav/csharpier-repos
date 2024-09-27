@@ -27,7 +27,8 @@ public interface IViewComponentFactory
     /// </summary>
     /// <param name="context">The context associated with the <paramref name="component"/>.</param>
     /// <param name="component">The view component.</param>
-    /// <returns>A <see cref="ValueTask"/> that completes when the view component has been released.</returns>
+    /// <returns>A <see cref="ValueTask"/> that completes when the view component has been
+    // released.</returns>
     ValueTask ReleaseViewComponentAsync(ViewComponentContext context, object component)
     {
         ReleaseViewComponent(context, component);

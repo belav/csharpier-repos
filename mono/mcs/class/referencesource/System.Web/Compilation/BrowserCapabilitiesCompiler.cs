@@ -138,10 +138,10 @@ namespace System.Web.Compilation
                     // first try if app browser dir exists
                     string physicalDir = HostingEnvironment.MapPathInternal(AppBrowsersVirtualDir);
 
-                    /* DevDivBugs 173531
-                     * For the App_Browsers scenario, we need to cache the generated browser caps processing
-                     * code. We need to add path dependency on all files so that changes to them will
-                     * invalidate the cache entry and cause recompilation. */
+/* DevDivBugs 173531
+* For the App_Browsers scenario, we need to cache the generated browser caps processing
+* code. We need to add path dependency on all files so that changes to them will
+* invalidate the cache entry and cause recompilation. */
                     if (directory != null && Directory.Exists(physicalDir))
                     {
                         ArrayList browserFileList = new ArrayList();
@@ -389,7 +389,8 @@ namespace System.Web.Compilation
                 BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic;
 
             BrowserDefinition bd = null;
-            //GEN: protected override object ConfigureBrowserCapabilities(NameValueCollection headers, HttpBrowserCapabilities browserCaps)
+            //GEN: protected override object ConfigureBrowserCapabilities(NameValueCollection headers,
+            // HttpBrowserCapabilities browserCaps)
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Override | MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(void));
@@ -464,7 +465,8 @@ namespace System.Web.Compilation
                 }
 
                 //GenerateMethodsToOverrideBrowsers
-                //Gen: protected override void Xxx_ProcessChildBrowsers(bool ignoreApplicationBrowsers, MNameValueCollection headers, HttpBrowserCapabilities browserCaps) ;
+                //Gen: protected override void Xxx_ProcessChildBrowsers(bool ignoreApplicationBrowsers,
+                // MNameValueCollection headers, HttpBrowserCapabilities browserCaps) ;
 
                 string methodName =
                     parentName + (isBrowserDefinition ? "ProcessBrowsers" : "ProcessGateways");

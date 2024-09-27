@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
         public SyntaxToken LeftToken { get; }
 
         /// <summary>
-        /// The first token to the left of <see cref="Position"/> that we're not touching. Equal to <see cref="LeftToken"/>
+        /// The first token to the left of <see cref="Position"/> that we're not touching. Equal to <see
+        // cref="LeftToken"/>
         /// if we aren't touching <see cref="LeftToken" />.
         /// </summary>
         public SyntaxToken TargetToken { get; }

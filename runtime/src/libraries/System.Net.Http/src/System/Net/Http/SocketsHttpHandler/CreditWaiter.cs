@@ -25,7 +25,8 @@ namespace System.Net.Http
         /// <summary><see cref="IValueTaskSource"/> implementation.</summary>
         private ManualResetValueTaskSourceCore<int> _source;
 
-        // State carried with the waiter for the consumer to use; these aren't used at all in the implementation.
+        // State carried with the waiter for the consumer to use; these aren't used at all in the
+        // implementation.
 
         /// <summary>Amount of credit desired by this waiter.</summary>
         public int Amount;
@@ -49,7 +50,8 @@ namespace System.Net.Http
             RegisterCancellation(cancellationToken);
         }
 
-        /// <summary>Registers with the cancellation token to transition the source to a canceled state.</summary>
+        /// <summary>Registers with the cancellation token to transition the source to a canceled
+        // state.</summary>
         /// <param name="cancellationToken">The cancellation token with which to register.</param>
         private void RegisterCancellation(CancellationToken cancellationToken)
         {
@@ -68,12 +70,14 @@ namespace System.Net.Http
             );
         }
 
-        /// <summary>Wraps the instance as a <see cref="ValueTask{TResult}"/> to make it awaitable.</summary>
+        /// <summary>Wraps the instance as a <see cref="ValueTask{TResult}"/> to make it
+        // awaitable.</summary>
         public ValueTask<int> AsValueTask() => new ValueTask<int>(this, _source.Version);
 
         /// <summary>Completes the instance with the specified result.</summary>
         /// <param name="result">The result value.</param>
-        /// <returns>true if the instance was successfully completed; false if it was or is being canceled.</returns>
+        /// <returns>true if the instance was successfully completed; false if it was or is being
+        // canceled.</returns>
         public bool TrySetResult(int result)
         {
             if (UnregisterAndOwnCompletion())
@@ -102,12 +106,17 @@ namespace System.Net.Http
         }
 
         /// <summary>Unregisters the cancellation callback.</summary>
-        /// <returns>true if the non-cancellation caller has the right to complete the instance; false if the instance was or is being completed by cancellation.</returns>
+        /// <returns>true if the non-cancellation caller has the right to complete the instance; false if
+        // the instance was or is being completed by cancellation.</returns>
         private bool UnregisterAndOwnCompletion() =>
-            // Unregister the cancellation callback.  If Unregister returns true, then the cancellation callback was successfully removed,
-            // meaning it hasn't run and won't ever run.  If it returns false, a) cancellation already occurred or is occurring and thus
-            // the callback couldn't be removed, b) cancellation occurred prior to the UnsafeRegister call such that _registration was
-            // set to a default value (or hasn't been set yet), or c) a default CancellationToken was used.  (a) and (b) are effectively
+            // Unregister the cancellation callback.  If Unregister returns true, then the cancellation callback
+            // was successfully removed,
+            // meaning it hasn't run and won't ever run.  If it returns false, a) cancellation already occurred
+            // or is occurring and thus
+            // the callback couldn't be removed, b) cancellation occurred prior to the UnsafeRegister call such
+            // that _registration was
+            // set to a default value (or hasn't been set yet), or c) a default CancellationToken was used.  (a)
+            // and (b) are effectively
             // the same, and (c) can be checked via CanBeCanceled.
             _registration.Unregister() || !_cancellationToken.CanBeCanceled;
 

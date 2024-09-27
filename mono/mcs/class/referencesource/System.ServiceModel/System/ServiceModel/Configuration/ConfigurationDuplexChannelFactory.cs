@@ -10,7 +10,8 @@ namespace System.ServiceModel.Configuration
 
     public sealed class ConfigurationDuplexChannelFactory<TChannel> : DuplexChannelFactory<TChannel>
     {
-        // TChannel provides ContractDescription, attr/config|Config object [TChannel,name] provides Binding, provide Address explicitly
+        // TChannel provides ContractDescription, attr/config|Config object [TChannel,name] provides
+        // Binding, provide Address explicitly
         public ConfigurationDuplexChannelFactory(
             object callbackObject,
             string endpointConfigurationName,

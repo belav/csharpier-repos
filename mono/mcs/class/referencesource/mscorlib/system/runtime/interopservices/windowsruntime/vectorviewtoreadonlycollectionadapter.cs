@@ -17,13 +17,16 @@ using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    // This is a set of stub methods implementing the support for the IReadOnlyCollection<T> interface on WinRT
+    // This is a set of stub methods implementing the support for the IReadOnlyCollection<T> interface
+    // on WinRT
     // objects that support IVectorView<T>. Used by the interop mashaling infrastructure.
     //
     // The methods on this class must be written VERY carefully to avoid introducing security holes.
     // That's because they are invoked with special "this"! The "this" object
-    // for all of these methods are not VectorViewToReadOnlyCollectionAdapter objects. Rather, they are of type
-    // IVectorView<T>. No actual VectorViewToReadOnlyCollectionAdapter object is ever instantiated. Thus, you will see
+    // for all of these methods are not VectorViewToReadOnlyCollectionAdapter objects. Rather, they are
+    // of type
+    // IVectorView<T>. No actual VectorViewToReadOnlyCollectionAdapter object is ever instantiated.
+    // Thus, you will see
     // a lot of expressions that cast "this" to "IVectorView<T>".
     internal sealed class VectorViewToReadOnlyCollectionAdapter
     {

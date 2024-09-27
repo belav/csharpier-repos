@@ -6,7 +6,8 @@ using System.Reflection;
 using System.Web.Util;
 
 /// <summary>
-/// This is a helper class lives in the VS appdomain where the CBM is created, and passed into the CBM-hosted appdomain
+/// This is a helper class lives in the VS appdomain where the CBM is created, and passed into the
+// CBM-hosted appdomain
 /// to allow cross-appdomain calls to get filtered runtime member information.
 /// </summary>
 internal class ClientBuildManagerTypeDescriptionProviderBridge : MarshalByRefObject

@@ -19,7 +19,8 @@ namespace System.Net.PeerToPeer
     /// There are two special static readonly members we support
     /// Cloud.All and Cloud.AllLinkLocal
     /// Cloud.All is really a notational convinience of null in the native world
-    /// Cloud.AllLinkLocal is equivalent to PEER_PNRP_ALL_LINK_CLOUDS const in the header file (declared in p2p.h)
+    /// Cloud.AllLinkLocal is equivalent to PEER_PNRP_ALL_LINK_CLOUDS const in the header file (declared
+    // in p2p.h)
     ///
     /// This class is serializable.
     /// This class is not sealed because there is no reason for it to be sealed.
@@ -134,7 +135,8 @@ namespace System.Net.PeerToPeer
         public static Cloud Global
         {
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: GetCloudOrClouds(String, Boolean, CloudCollection&, Cloud&):Void" Ring="1" />
+            // <ReferencesCritical Name="Method: GetCloudOrClouds(String, Boolean, CloudCollection&,
+            // Cloud&):Void" Ring="1" />
             // </SecurityKernel>
             //[System.Security.SecurityCritical]
             get
@@ -148,7 +150,8 @@ namespace System.Net.PeerToPeer
         }
 
         // <SecurityKernel Critical="True" Ring="1">
-        // <ReferencesCritical Name="Method: GetCloudOrClouds(String, Boolean, CloudCollection&, Cloud&):Void" Ring="1" />
+        // <ReferencesCritical Name="Method: GetCloudOrClouds(String, Boolean, CloudCollection&,
+        // Cloud&):Void" Ring="1" />
         // </SecurityKernel>
         //[System.Security.SecurityCritical]
         public static Cloud GetCloudByName(string cloudName)
@@ -168,7 +171,8 @@ namespace System.Net.PeerToPeer
         /// </summary>
         /// <returns></returns>
         // <SecurityKernel Critical="True" Ring="1">
-        // <ReferencesCritical Name="Method: GetCloudOrClouds(String, Boolean, CloudCollection&, Cloud&):Void" Ring="1" />
+        // <ReferencesCritical Name="Method: GetCloudOrClouds(String, Boolean, CloudCollection&,
+        // Cloud&):Void" Ring="1" />
         // </SecurityKernel>
         //[System.Security.SecurityCritical]
         public static CloudCollection GetAvailableClouds()
@@ -180,7 +184,9 @@ namespace System.Net.PeerToPeer
         }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerPnrpGetCloudInfo(System.UInt32&,System.Net.PeerToPeer.SafePeerData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeP2PNativeMethods.PeerPnrpGetCloudInfo(System.UInt32&,System.Net.PeerToPeer.SafePeerData&):System.Int32"
+        // />
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStringUni(System.IntPtr):System.String" />
@@ -188,7 +194,9 @@ namespace System.Net.PeerToPeer
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
         // <ReferencesCritical Name="Local ArrayOfCloudInfoStructures of type: SafePeerData" Ring="1" />
         // <ReferencesCritical Name="Method: UnsafeP2PNativeMethods.PnrpStartup():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [SuppressMessage(
             "Microsoft.Security",

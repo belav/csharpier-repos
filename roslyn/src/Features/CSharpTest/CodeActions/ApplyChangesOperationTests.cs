@@ -146,7 +146,8 @@ class Program2
         [WpfFact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_queries/edit/1419139")]
         public async Task TestMakeTextChangeWithInterveningEditToSameFile()
         {
-            // This should fail as the code action is trying to edit a file that is was already edited by the actual
+            // This should fail as the code action is trying to edit a file that is was already edited by the
+            // actual
             // workspace edit that already went in.
             await TestFailureApplicationAsync(
                 @"<Workspace>
@@ -228,7 +229,8 @@ class Program2
         [WpfFact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_queries/edit/1419139")]
         public async Task TestMakeProjectChangeWithInterveningTextEdit()
         {
-            // This should fail as we don't want to make non-text changes that may have undesirable results to the solution
+            // This should fail as we don't want to make non-text changes that may have undesirable results to
+            // the solution
             // given the intervening edits.
             await TestFailureApplicationAsync(
                 @"<Workspace>

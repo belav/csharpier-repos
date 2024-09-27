@@ -34,7 +34,8 @@ namespace System.Workflow.Activities.Rules
         }
 
         /// <summary>
-        /// Mark the DeclarativeConditionDefinitionCollection as Runtime Initialized to prevent direct runtime updates.
+        /// Mark the DeclarativeConditionDefinitionCollection as Runtime Initialized to prevent direct
+        // runtime updates.
         /// </summary>
         internal void OnRuntimeInitialized()
         {

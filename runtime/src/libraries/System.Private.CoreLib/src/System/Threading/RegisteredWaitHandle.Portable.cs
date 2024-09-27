@@ -8,7 +8,8 @@ using Microsoft.Win32.SafeHandles;
 namespace System.Threading
 {
     /// <summary>
-    /// An object representing the registration of a <see cref="WaitHandle"/> via <see cref="ThreadPool.RegisterWaitForSingleObject"/>.
+    /// An object representing the registration of a <see cref="WaitHandle"/> via <see
+    // cref="ThreadPool.RegisterWaitForSingleObject"/>.
     /// </summary>
 #if !FEATURE_WASM_THREADS
     [UnsupportedOSPlatform("browser")]
@@ -48,7 +49,8 @@ namespace System.Threading
         private AutoResetEvent? _removed;
 
         /// <summary>
-        /// The <see cref="PortableThreadPool.WaitThread"/> this <see cref="RegisteredWaitHandle"/> was registered on.
+        /// The <see cref="PortableThreadPool.WaitThread"/> this <see cref="RegisteredWaitHandle"/> was
+        // registered on.
         /// </summary>
         internal PortableThreadPool.WaitThread? WaitThread { get; set; }
 
@@ -94,7 +96,8 @@ namespace System.Threading
 
         private bool UnregisterPortableCore(WaitHandle waitObject)
         {
-            // The registered wait handle must have been registered by this time, otherwise the instance is not handed out to
+            // The registered wait handle must have been registered by this time, otherwise the instance is not
+            // handed out to
             // the caller of the public variants of RegisterWaitForSingleObject
             Debug.Assert(WaitThread != null);
 
@@ -162,7 +165,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Signal <see cref="UserUnregisterWaitHandle"/> if it has not been signaled yet and is a valid handle.
+        /// Signal <see cref="UserUnregisterWaitHandle"/> if it has not been signaled yet and is a valid
+        // handle.
         /// </summary>
         private void SignalUserWaitHandle()
         {
@@ -186,7 +190,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Perform the registered callback if the <see cref="UserUnregisterWaitHandle"/> has not been signaled.
+        /// Perform the registered callback if the <see cref="UserUnregisterWaitHandle"/> has not been
+        // signaled.
         /// </summary>
         /// <param name="timedOut">Whether or not the wait timed out.</param>
         internal void PerformCallbackPortableCore(bool timedOut)
@@ -224,7 +229,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Called when the wait thread removes this handle registration. This will signal the user's event if there are no callbacks pending,
+        /// Called when the wait thread removes this handle registration. This will signal the user's event
+        // if there are no callbacks pending,
         /// or note that the user's event must be signaled when the callbacks complete.
         /// </summary>
         internal void OnRemoveWait()
@@ -249,7 +255,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Reduces the number of callbacks requested. If there are no more callbacks and the user's handle is queued to be signaled, signal it.
+        /// Reduces the number of callbacks requested. If there are no more callbacks and the user's handle
+        // is queued to be signaled, signal it.
         /// </summary>
         private void CompleteCallbackRequest()
         {

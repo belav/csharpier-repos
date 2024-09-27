@@ -30,7 +30,8 @@ public abstract class StartupBase : IStartup
     public virtual void ConfigureServices(IServiceCollection services) { }
 
     /// <summary>
-    /// Creates an <see cref="IServiceProvider" /> instance for a given <see cref="ConfigureServices(IServiceCollection)" />.
+    /// Creates an <see cref="IServiceProvider" /> instance for a given <see
+    // cref="ConfigureServices(IServiceCollection)" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <returns>The <see cref="IServiceProvider"/>.</returns>
@@ -41,9 +42,11 @@ public abstract class StartupBase : IStartup
 }
 
 /// <summary>
-/// Base class for initializing services and middlewares used for configuring a <typeparamref name="TBuilder"/>.
+/// Base class for initializing services and middlewares used for configuring a <typeparamref
+// name="TBuilder"/>.
 /// </summary>
-/// <typeparam name="TBuilder">The type of builder associated with the startup configuration.</typeparam>
+/// <typeparam name="TBuilder">The type of builder associated with the startup
+// configuration.</typeparam>
 public abstract class StartupBase<TBuilder> : StartupBase
     where TBuilder : notnull
 {
@@ -52,14 +55,16 @@ public abstract class StartupBase<TBuilder> : StartupBase
     /// <summary>
     /// Constructor for StartupBase class.
     /// </summary>
-    /// <param name="factory">A factory used to generate <see cref="IServiceProvider"/> instances.</param>
+    /// <param name="factory">A factory used to generate <see cref="IServiceProvider"/>
+    // instances.</param>
     public StartupBase(IServiceProviderFactory<TBuilder> factory)
     {
         _factory = factory;
     }
 
     /// <summary>
-    /// Creates an <see cref="IServiceProvider" /> instance for a given <see cref="IServiceCollection" />.
+    /// Creates an <see cref="IServiceProvider" /> instance for a given <see cref="IServiceCollection"
+    // />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <returns>The <see cref="IServiceProvider"/>.</returns>

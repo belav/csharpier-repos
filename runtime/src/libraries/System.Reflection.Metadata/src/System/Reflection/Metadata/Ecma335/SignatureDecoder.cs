@@ -19,9 +19,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Creates a new SignatureDecoder.
         /// </summary>
-        /// <param name="provider">The provider used to obtain type symbols as the signature is decoded.</param>
+        /// <param name="provider">The provider used to obtain type symbols as the signature is
+        // decoded.</param>
         /// <param name="metadataReader">
-        /// The metadata reader from which the signature was obtained. It may be null if the given provider allows it.
+        /// The metadata reader from which the signature was obtained. It may be null if the given provider
+        // allows it.
         /// </param>
         /// <param name="genericContext">
         /// Additional context needed to resolve generic parameters.
@@ -46,11 +48,14 @@ namespace System.Reflection.Metadata.Ecma335
         /// Decodes a type embedded in a signature and advances the reader past the type.
         /// </summary>
         /// <param name="blobReader">The blob reader positioned at the leading SignatureTypeCode</param>
-        /// <param name="allowTypeSpecifications">Allow a <see cref="TypeSpecificationHandle"/> to follow a (CLASS | VALUETYPE) in the signature.
-        /// At present, the only context where that would be valid is in a LocalConstantSig as defined by the Portable PDB specification.
+        /// <param name="allowTypeSpecifications">Allow a <see cref="TypeSpecificationHandle"/> to follow a
+        // (CLASS | VALUETYPE) in the signature.
+        /// At present, the only context where that would be valid is in a LocalConstantSig as defined by
+        // the Portable PDB specification.
         /// </param>
         /// <returns>The decoded type.</returns>
-        /// <exception cref="System.BadImageFormatException">The reader was not positioned at a valid signature type.</exception>
+        /// <exception cref="System.BadImageFormatException">The reader was not positioned at a valid
+        // signature type.</exception>
         public TType DecodeType(ref BlobReader blobReader, bool allowTypeSpecifications = false)
         {
             return DecodeType(
@@ -147,7 +152,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Decodes a list of types, with at least one instance that is preceded by its count as a compressed integer.
+        /// Decodes a list of types, with at least one instance that is preceded by its count as a
+        // compressed integer.
         /// </summary>
         private ImmutableArray<TType> DecodeTypeSequence(ref BlobReader blobReader)
         {
@@ -240,7 +246,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Decodes a method specification signature blob and advances the reader past the signature.
         /// </summary>
-        /// <param name="blobReader">A BlobReader positioned at a valid method specification signature.</param>
+        /// <param name="blobReader">A BlobReader positioned at a valid method specification
+        // signature.</param>
         /// <returns>The types used to instantiate a generic method via the method specification.</returns>
         public ImmutableArray<TType> DecodeMethodSpecificationSignature(ref BlobReader blobReader)
         {
@@ -254,7 +261,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <param name="blobReader">The blob reader positioned at a local variable signature.</param>
         /// <returns>The local variable types.</returns>
-        /// <exception cref="System.BadImageFormatException">The local variable signature is invalid.</exception>
+        /// <exception cref="System.BadImageFormatException">The local variable signature is
+        // invalid.</exception>
         public ImmutableArray<TType> DecodeLocalSignature(ref BlobReader blobReader)
         {
             SignatureHeader header = blobReader.ReadSignatureHeader();
@@ -353,6 +361,7 @@ namespace System.Reflection.Metadata.Ecma335
                         if (!allowTypeSpecifications)
                         {
                             // To prevent cycles, the token following (CLASS | VALUETYPE) must not be a type spec.
+                            //
                             // https://github.com/dotnet/coreclr/blob/8ff2389204d7c41b17eff0e9536267aea8d6496f/src/md/compiler/mdvalidator.cpp#L6154-L6160
                             throw new BadImageFormatException(SR.NotTypeDefOrRefHandle);
                         }

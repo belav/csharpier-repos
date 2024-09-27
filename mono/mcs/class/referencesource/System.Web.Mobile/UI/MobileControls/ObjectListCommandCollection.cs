@@ -17,13 +17,14 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Object List Command Collection class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Object List Command Collection class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection"]/*' />
+    /// <include file='doc\ObjectListCommandCollection.uex'
+    // path='docs/doc[@for="ObjectListCommandCollection"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -75,13 +76,15 @@ namespace System.Web.UI.MobileControls
 
         internal ObjectListCommandCollection() { }
 
-        /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.this"]/*' />
+        /// <include file='doc\ObjectListCommandCollection.uex'
+        // path='docs/doc[@for="ObjectListCommandCollection.this"]/*' />
         public ObjectListCommand this[int index]
         {
             get { return (ObjectListCommand)Items[index]; }
         }
 
-        /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.Clear"]/*' />
+        /// <include file='doc\ObjectListCommandCollection.uex'
+        // path='docs/doc[@for="ObjectListCommandCollection.Clear"]/*' />
         public void Clear()
         {
             foreach (ObjectListCommand command in Items)
@@ -92,13 +95,15 @@ namespace System.Web.UI.MobileControls
             SetDirty();
         }
 
-        /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.Add"]/*' />
+        /// <include file='doc\ObjectListCommandCollection.uex'
+        // path='docs/doc[@for="ObjectListCommandCollection.Add"]/*' />
         public void Add(ObjectListCommand command)
         {
             AddAt(-1, command);
         }
 
-        /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.AddAt"]/*' />
+        /// <include file='doc\ObjectListCommandCollection.uex'
+        // path='docs/doc[@for="ObjectListCommandCollection.AddAt"]/*' />
         public void AddAt(int index, ObjectListCommand command)
         {
             if (index == -1)
@@ -113,13 +118,15 @@ namespace System.Web.UI.MobileControls
             SetDirty();
         }
 
-        /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.Remove"]/*' />
+        /// <include file='doc\ObjectListCommandCollection.uex'
+        // path='docs/doc[@for="ObjectListCommandCollection.Remove"]/*' />
         public void Remove(String s)
         {
             RemoveAt(IndexOf(s));
         }
 
-        /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.RemoveAt"]/*' />
+        /// <include file='doc\ObjectListCommandCollection.uex'
+        // path='docs/doc[@for="ObjectListCommandCollection.RemoveAt"]/*' />
         public void RemoveAt(int index)
         {
             (this[index]).Owner = null;
@@ -127,7 +134,8 @@ namespace System.Web.UI.MobileControls
             SetDirty();
         }
 
-        /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.IndexOf"]/*' />
+        /// <include file='doc\ObjectListCommandCollection.uex'
+        // path='docs/doc[@for="ObjectListCommandCollection.IndexOf"]/*' />
         public int IndexOf(String s)
         {
             int index = 0;

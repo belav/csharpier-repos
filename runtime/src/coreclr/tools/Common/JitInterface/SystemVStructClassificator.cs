@@ -156,7 +156,8 @@ namespace Internal.JitInterface
             }
         }
 
-        // If we have a field classification already, but there is a union, we must merge the classification type of the field. Returns the
+        // If we have a field classification already, but there is a union, we must merge the classification
+        // type of the field. Returns the
         // new, merged classification type.
         private static SystemVClassificationType ReClassifyField(
             SystemVClassificationType originalClassification,
@@ -173,7 +174,8 @@ namespace Internal.JitInterface
             switch (newFieldClassification)
             {
                 case SystemVClassificationTypeInteger:
-                    // Integer overrides everything; the resulting classification is Integer. Can't merge Integer and IntegerReference.
+                    // Integer overrides everything; the resulting classification is Integer. Can't merge Integer and
+                    // IntegerReference.
                     Debug.Assert(
                         (originalClassification == SystemVClassificationTypeInteger)
                             || (originalClassification == SystemVClassificationTypeSSE)
@@ -182,7 +184,8 @@ namespace Internal.JitInterface
                     return SystemVClassificationTypeInteger;
 
                 case SystemVClassificationTypeSSE:
-                    // If the old and new classifications are both SSE, then the merge is SSE, otherwise it will be integer. Can't merge SSE and IntegerReference.
+                    // If the old and new classifications are both SSE, then the merge is SSE, otherwise it will be
+                    // integer. Can't merge SSE and IntegerReference.
                     Debug.Assert(
                         (originalClassification == SystemVClassificationTypeInteger)
                             || (originalClassification == SystemVClassificationTypeSSE)
@@ -240,7 +243,8 @@ namespace Internal.JitInterface
                 return false;
             }
 
-            // The SIMD and Int128 Intrinsic types are meant to be handled specially and should not be passed as struct registers
+            // The SIMD and Int128 Intrinsic types are meant to be handled specially and should not be passed as
+            // struct registers
             if (typeDesc.IsIntrinsic)
             {
                 InstantiatedType instantiatedType = typeDesc as InstantiatedType;
@@ -316,7 +320,8 @@ namespace Internal.JitInterface
 
                     if (!structRet)
                     {
-                        // If the nested struct says not to enregister, there's no need to continue analyzing at this level. Just return do not enregister.
+                        // If the nested struct says not to enregister, there's no need to continue analyzing at this level.
+                        // Just return do not enregister.
                         return false;
                     }
 
@@ -573,8 +578,10 @@ namespace Internal.JitInterface
                     {
                         if (!foundFieldInEightByte)
                         {
-                            // If we didn't find a field in an eight-byte (i.e. there are no explicit offsets that start a field in this eightbyte)
-                            // then the classification of this eightbyte might be NoClass. We can't hand a classification of NoClass to the JIT
+                            // If we didn't find a field in an eight-byte (i.e. there are no explicit offsets that start a field
+                            // in this eightbyte)
+                            // then the classification of this eightbyte might be NoClass. We can't hand a classification of
+                            // NoClass to the JIT
                             // so set the class to Integer (as though the struct has a char[8] padding) if the class is NoClass.
                             if (
                                 helper.EightByteClassifications[

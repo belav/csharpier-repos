@@ -70,7 +70,8 @@ namespace System.Collections
     {
         int IList.Add(Object value)
         {
-            //Contract.Ensures(((IList)this).Count == Contract.OldValue(((IList)this).Count) + 1);  // Not threadsafe
+            //Contract.Ensures(((IList)this).Count == Contract.OldValue(((IList)this).Count) + 1);  // Not
+            // threadsafe
             // This method should return the index in which an item was inserted, but we have
             // some internal collections that don't always insert items into the list, as well
             // as an MSDN sample code showing us returning -1.  Allow -1 to mean "did not insert".
@@ -148,7 +149,8 @@ namespace System.Collections
         {
             //Contract.Requires(index >= 0);
             //Contract.Requires(index <= ((IList)this).Count);  // For inserting immediately after the end.
-            //Contract.Ensures(((IList)this).Count == Contract.OldValue(((IList)this).Count) + 1);  // Not threadsafe
+            //Contract.Ensures(((IList)this).Count == Contract.OldValue(((IList)this).Count) + 1);  // Not
+            // threadsafe
         }
 
         void IList.Remove(Object value)
@@ -160,7 +162,8 @@ namespace System.Collections
         {
             //Contract.Requires(index >= 0);
             //Contract.Requires(index < ((IList)this).Count);
-            //Contract.Ensures(((IList)this).Count == Contract.OldValue(((IList)this).Count) - 1);  // Not threadsafe
+            //Contract.Ensures(((IList)this).Count == Contract.OldValue(((IList)this).Count) - 1);  // Not
+            // threadsafe
         }
 
         Object ICollection.SyncRoot

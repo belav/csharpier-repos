@@ -96,15 +96,24 @@ namespace System.Xml.Tests
         private string _xml =
             "<root><elem1><elempi/><?pi target?><elem2 xmlns='xyz'><elem/><!--Comment--><x:elem3 xmlns:x='pqr'><elem4 attr4='4'/></x:elem3></elem2></elem1><elem5/><elem6/></root>";
 
-        //[Variation("ReadSubtree Test on Root", Pri = 0, Params = new object[]{"root", "", "ELEMENT", "", "", "NONE" })]
-        //[Variation("ReadSubtree Test depth=1", Pri = 0, Params = new object[] { "elem1", "", "ELEMENT", "elem5", "", "ELEMENT" })]
-        //[Variation("ReadSubtree Test depth=2", Pri = 0, Params = new object[] { "elem2", "", "ELEMENT", "elem1", "", "ENDELEMENT" })]
-        //[Variation("ReadSubtree Test depth=3", Pri = 0, Params = new object[] { "x:elem3", "", "ELEMENT", "elem2", "", "ENDELEMENT" })]
-        //[Variation("ReadSubtree Test depth=4", Pri = 0, Params = new object[] { "elem4", "", "ELEMENT", "x:elem3", "", "ENDELEMENT" })]
-        //[Variation("ReadSubtree Test empty element", Pri = 0, Params = new object[] { "elem5", "", "ELEMENT", "elem6", "", "ELEMENT" })]
-        //[Variation("ReadSubtree Test empty element before root", Pri = 0, Params = new object[] { "elem6", "", "ELEMENT", "root", "", "ENDELEMENT" })]
-        //[Variation("ReadSubtree Test PI after element", Pri = 0, Params = new object[] { "elempi", "", "ELEMENT", "pi", "target", "PROCESSINGINSTRUCTION" })]
-        //[Variation("ReadSubtree Test Comment after element", Pri = 0, Params = new object[] { "elem", "", "ELEMENT", "", "Comment", "COMMENT" })]
+        //[Variation("ReadSubtree Test on Root", Pri = 0, Params = new object[]{"root", "", "ELEMENT", "",
+        // "", "NONE" })]
+        //[Variation("ReadSubtree Test depth=1", Pri = 0, Params = new object[] { "elem1", "", "ELEMENT",
+        // "elem5", "", "ELEMENT" })]
+        //[Variation("ReadSubtree Test depth=2", Pri = 0, Params = new object[] { "elem2", "", "ELEMENT",
+        // "elem1", "", "ENDELEMENT" })]
+        //[Variation("ReadSubtree Test depth=3", Pri = 0, Params = new object[] { "x:elem3", "", "ELEMENT",
+        // "elem2", "", "ENDELEMENT" })]
+        //[Variation("ReadSubtree Test depth=4", Pri = 0, Params = new object[] { "elem4", "", "ELEMENT",
+        // "x:elem3", "", "ENDELEMENT" })]
+        //[Variation("ReadSubtree Test empty element", Pri = 0, Params = new object[] { "elem5", "",
+        // "ELEMENT", "elem6", "", "ELEMENT" })]
+        //[Variation("ReadSubtree Test empty element before root", Pri = 0, Params = new object[] { "elem6",
+        // "", "ELEMENT", "root", "", "ENDELEMENT" })]
+        //[Variation("ReadSubtree Test PI after element", Pri = 0, Params = new object[] { "elempi", "",
+        // "ELEMENT", "pi", "target", "PROCESSINGINSTRUCTION" })]
+        //[Variation("ReadSubtree Test Comment after element", Pri = 0, Params = new object[] { "elem", "",
+        // "ELEMENT", "", "Comment", "COMMENT" })]
         public int v2()
         {
             int count = 0;
@@ -212,8 +221,10 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        //[Variation("Close on inner reader with CloseInput should not close the outer reader", Pri = 1, Params = new object[] { "true" })]
-        //[Variation("Close on inner reader with CloseInput should not close the outer reader", Pri = 1, Params = new object[] { "false" })]
+        //[Variation("Close on inner reader with CloseInput should not close the outer reader", Pri = 1,
+        // Params = new object[] { "true" })]
+        //[Variation("Close on inner reader with CloseInput should not close the outer reader", Pri = 1,
+        // Params = new object[] { "false" })]
 
         public int v7()
         {
@@ -518,30 +529,54 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        //[Variation("1. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 1)]
-        //[Variation("2. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 2)]
-        //[Variation("3. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 3)]
-        //[Variation("4. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 4)]
-        //[Variation("5. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 5)]
-        //[Variation("6. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 6)]
-        //[Variation("7. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 7)]
-        //[Variation("8. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 8)]
-        //[Variation("9. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 9)]
-        //[Variation("10. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 10)]
-        //[Variation("11. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 11)]
-        //[Variation("12. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 12)]
-        //[Variation("13. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 13)]
-        //[Variation("14. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 14)]
-        //[Variation("15. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 15)]
-        //[Variation("16. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 16)]
-        //[Variation("17. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 17)]
-        //[Variation("18. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 18)]
-        //[Variation("19. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 19)]
-        //[Variation("20. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 20)]
-        //[Variation("21. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 21)]
-        //[Variation("22. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 22)]
-        //[Variation("23. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 23)]
-        //[Variation("24. Close on a subtree reader that is in error state gets doesn't it into in infinite loop", Param = 24)]
+        //[Variation("1. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 1)]
+        //[Variation("2. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 2)]
+        //[Variation("3. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 3)]
+        //[Variation("4. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 4)]
+        //[Variation("5. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 5)]
+        //[Variation("6. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 6)]
+        //[Variation("7. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 7)]
+        //[Variation("8. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 8)]
+        //[Variation("9. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 9)]
+        //[Variation("10. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 10)]
+        //[Variation("11. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 11)]
+        //[Variation("12. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 12)]
+        //[Variation("13. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 13)]
+        //[Variation("14. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 14)]
+        //[Variation("15. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 15)]
+        //[Variation("16. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 16)]
+        //[Variation("17. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 17)]
+        //[Variation("18. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 18)]
+        //[Variation("19. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 19)]
+        //[Variation("20. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 20)]
+        //[Variation("21. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 21)]
+        //[Variation("22. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 22)]
+        //[Variation("23. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 23)]
+        //[Variation("24. Close on a subtree reader that is in error state gets doesn't it into in infinite
+        // loop", Param = 24)]
         public int DisposingSubtreeReaderThatIsInErrorStateWorksProperly()
         {
             int param = (int)CurVariation.Param;

@@ -15,12 +15,15 @@ public struct HealthCheckResult
         new Dictionary<string, object>();
 
     /// <summary>
-    /// Creates a new <see cref="HealthCheckResult"/> with the specified values for <paramref name="status"/>,
+    /// Creates a new <see cref="HealthCheckResult"/> with the specified values for <paramref
+    // name="status"/>,
     /// <paramref name="exception"/>, <paramref name="description"/>, and <paramref name="data"/>.
     /// </summary>
     /// <param name="status">A value indicating the status of the component that was checked.</param>
-    /// <param name="description">A human-readable description of the status of the component that was checked.</param>
-    /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status (if any).</param>
+    /// <param name="description">A human-readable description of the status of the component that was
+    // checked.</param>
+    /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown
+    // when checking for status (if any).</param>
     /// <param name="data">Additional key-value pairs describing the health of the component.</param>
     public HealthCheckResult(
         HealthStatus status,
@@ -46,7 +49,8 @@ public struct HealthCheckResult
     public string? Description { get; }
 
     /// <summary>
-    /// Gets an <see cref="Exception"/> representing the exception that was thrown when checking for status (if any).
+    /// Gets an <see cref="Exception"/> representing the exception that was thrown when checking for
+    // status (if any).
     /// </summary>
     public Exception? Exception { get; }
 
@@ -58,8 +62,10 @@ public struct HealthCheckResult
     /// <summary>
     /// Creates a <see cref="HealthCheckResult"/> representing a healthy component.
     /// </summary>
-    /// <param name="description">A human-readable description of the status of the component that was checked. Optional.</param>
-    /// <param name="data">Additional key-value pairs describing the health of the component. Optional.</param>
+    /// <param name="description">A human-readable description of the status of the component that was
+    // checked. Optional.</param>
+    /// <param name="data">Additional key-value pairs describing the health of the component.
+    // Optional.</param>
     /// <returns>A <see cref="HealthCheckResult"/> representing a healthy component.</returns>
     public static HealthCheckResult Healthy(
         string? description = null,
@@ -77,9 +83,12 @@ public struct HealthCheckResult
     /// <summary>
     /// Creates a <see cref="HealthCheckResult"/> representing a degraded component.
     /// </summary>
-    /// <param name="description">A human-readable description of the status of the component that was checked. Optional.</param>
-    /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status. Optional.</param>
-    /// <param name="data">Additional key-value pairs describing the health of the component. Optional.</param>
+    /// <param name="description">A human-readable description of the status of the component that was
+    // checked. Optional.</param>
+    /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown
+    // when checking for status. Optional.</param>
+    /// <param name="data">Additional key-value pairs describing the health of the component.
+    // Optional.</param>
     /// <returns>A <see cref="HealthCheckResult"/> representing a degraged component.</returns>
     public static HealthCheckResult Degraded(
         string? description = null,
@@ -98,9 +107,12 @@ public struct HealthCheckResult
     /// <summary>
     /// Creates a <see cref="HealthCheckResult"/> representing an unhealthy component.
     /// </summary>
-    /// <param name="description">A human-readable description of the status of the component that was checked. Optional.</param>
-    /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status. Optional.</param>
-    /// <param name="data">Additional key-value pairs describing the health of the component. Optional.</param>
+    /// <param name="description">A human-readable description of the status of the component that was
+    // checked. Optional.</param>
+    /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown
+    // when checking for status. Optional.</param>
+    /// <param name="data">Additional key-value pairs describing the health of the component.
+    // Optional.</param>
     /// <returns>A <see cref="HealthCheckResult"/> representing an unhealthy component.</returns>
     public static HealthCheckResult Unhealthy(
         string? description = null,

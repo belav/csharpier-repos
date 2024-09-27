@@ -90,12 +90,14 @@ class Program
                     assemblyName: "Source"
                 )
                 .VerifyDiagnostics(
-                    // (6,38): error CS0234: The type or namespace name 'TestType1' does not exist in the namespace 'TestReference' (are you missing an assembly reference?)
+                    // (6,38): error CS0234: The type or namespace name 'TestType1' does not exist in the namespace
+                    // 'TestReference' (are you missing an assembly reference?)
                     //         var obj1 = new TestReference.TestType1();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "TestType1")
                         .WithArguments("TestType1", "TestReference")
                         .WithLocation(6, 38),
-                    // (7,38): error CS0234: The type or namespace name 'TestType2' does not exist in the namespace 'TestReference' (are you missing an assembly reference?)
+                    // (7,38): error CS0234: The type or namespace name 'TestType2' does not exist in the namespace
+                    // 'TestReference' (are you missing an assembly reference?)
                     //         var obj2 = new TestReference.TestType2();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "TestType2")
                         .WithArguments("TestType2", "TestReference")
@@ -141,12 +143,14 @@ class Program
 
             CreateCompilation(code, references: new[] { reference }, assemblyName: "Source")
                 .VerifyDiagnostics(
-                    // (6,38): error CS0234: The type or namespace name 'TestType1' does not exist in the namespace 'TestReference' (are you missing an assembly reference?)
+                    // (6,38): error CS0234: The type or namespace name 'TestType1' does not exist in the namespace
+                    // 'TestReference' (are you missing an assembly reference?)
                     //         var obj1 = new TestReference.TestType1();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "TestType1")
                         .WithArguments("TestType1", "TestReference")
                         .WithLocation(6, 38),
-                    // (7,38): error CS0234: The type or namespace name 'TestType2' does not exist in the namespace 'TestReference' (are you missing an assembly reference?)
+                    // (7,38): error CS0234: The type or namespace name 'TestType2' does not exist in the namespace
+                    // 'TestReference' (are you missing an assembly reference?)
                     //         var obj2 = new TestReference.TestType2();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "TestType2")
                         .WithArguments("TestType2", "TestReference")
@@ -189,12 +193,14 @@ class Program
 
             CreateCompilation(code, references: new[] { reference.ToMetadataReference() })
                 .VerifyDiagnostics(
-                    // (6,38): error CS0234: The type or namespace name 'TestType1' does not exist in the namespace 'TestReference' (are you missing an assembly reference?)
+                    // (6,38): error CS0234: The type or namespace name 'TestType1' does not exist in the namespace
+                    // 'TestReference' (are you missing an assembly reference?)
                     //         var obj1 = new TestReference.TestType1();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "TestType1")
                         .WithArguments("TestType1", "TestReference")
                         .WithLocation(6, 38),
-                    // (7,38): error CS0234: The type or namespace name 'TestType2' does not exist in the namespace 'TestReference' (are you missing an assembly reference?)
+                    // (7,38): error CS0234: The type or namespace name 'TestType2' does not exist in the namespace
+                    // 'TestReference' (are you missing an assembly reference?)
                     //         var obj2 = new TestReference.TestType2();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "TestType2")
                         .WithArguments("TestType2", "TestReference")
@@ -255,7 +261,8 @@ class Test
 
             CreateCompilation(code, assemblyName: "testModule")
                 .VerifyEmitDiagnostics(
-                    // (4,18): error CS8336: The type name 'Microsoft.CodeAnalysis.EmbeddedAttribute' is reserved to be used by the compiler.
+                    // (4,18): error CS8336: The type name 'Microsoft.CodeAnalysis.EmbeddedAttribute' is reserved to be
+                    // used by the compiler.
                     //     public class EmbeddedAttribute : System.Attribute { }
                     Diagnostic(ErrorCode.ERR_TypeReserved, "EmbeddedAttribute")
                         .WithArguments("Microsoft.CodeAnalysis.EmbeddedAttribute")
@@ -290,7 +297,8 @@ class Test
 
             CreateCompilation(code, references: new[] { moduleRef })
                 .VerifyEmitDiagnostics(
-                    // error CS8004: Type 'EmbeddedAttribute' exported from module 'testModule.netmodule' conflicts with type declared in primary module of this assembly.
+                    // error CS8004: Type 'EmbeddedAttribute' exported from module 'testModule.netmodule' conflicts with
+                    // type declared in primary module of this assembly.
                     Diagnostic(ErrorCode.ERR_ExportedTypeConflictsWithDeclaration)
                         .WithArguments(
                             "Microsoft.CodeAnalysis.EmbeddedAttribute",
@@ -326,7 +334,8 @@ class Test
 
             CreateCompilation(code, references: new[] { reference })
                 .VerifyEmitDiagnostics(
-                    // error CS8006: Forwarded type 'EmbeddedAttribute' conflicts with type declared in primary module of this assembly.
+                    // error CS8006: Forwarded type 'EmbeddedAttribute' conflicts with type declared in primary module
+                    // of this assembly.
                     Diagnostic(ErrorCode.ERR_ForwardedTypeConflictsWithDeclaration)
                         .WithArguments("Microsoft.CodeAnalysis.EmbeddedAttribute")
                         .WithLocation(1, 1)

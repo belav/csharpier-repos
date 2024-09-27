@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Mono.Debugger.Soft
 {
-    /*
-     * Represents an enum value in the debuggee
-     */
+/*
+* Represents an enum value in the debuggee
+*/
     public class EnumMirror : StructMirror
     {
         internal EnumMirror(VirtualMachine vm, TypeMirror type, Value[] fields)

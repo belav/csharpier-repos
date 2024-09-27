@@ -203,7 +203,8 @@ public class ShadowCopyTests : IISFunctionalTestBase
             "Expected 0 shadow copy directory to be skipped"
         );
 
-        // Depending on timing, this could result in a shutdown failure, but sometimes it succeeds, handle both situations
+        // Depending on timing, this could result in a shutdown failure, but sometimes it succeeds, handle
+        // both situations
         if (!response.IsSuccessStatusCode)
         {
             Assert.True(
@@ -265,7 +266,8 @@ public class ShadowCopyTests : IISFunctionalTestBase
             "Expected 0 shadow copy directory to be skipped"
         );
 
-        // Depending on timing, this could result in a shutdown failure, but sometimes it succeeds, handle both situations
+        // Depending on timing, this could result in a shutdown failure, but sometimes it succeeds, handle
+        // both situations
         if (!response.IsSuccessStatusCode)
         {
             Assert.True(

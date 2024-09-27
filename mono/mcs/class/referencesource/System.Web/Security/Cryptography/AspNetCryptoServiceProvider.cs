@@ -70,7 +70,8 @@ namespace System.Web.Security.Cryptography
             ICryptoService cryptoService;
             if (_isDataProtectorEnabled && options == CryptoServiceOptions.None)
             {
-                // We can only use DataProtector if it's configured and the caller didn't ask for any special behavior like cacheability
+                // We can only use DataProtector if it's configured and the caller didn't ask for any special
+                // behavior like cacheability
                 cryptoService = GetDataProtectorCryptoService(purpose);
             }
             else

@@ -99,17 +99,24 @@ namespace MonoTests.System.Runtime.Caching
 
             var paths = new List<string> { missingFile };
 
-            // Actually thrown by FileSystemWatcher constructor - note that the exception message suggests the file's
+            // Actually thrown by FileSystemWatcher constructor - note that the exception message suggests the
+            // file's
             // parent directory is being watched, not the file itself:
             //
             // MonoTests.System.Runtime.Caching.HostFileChangeMonitorTest.Constructor_MissingFiles:
             // System.ArgumentException : The directory name c:\missing\file is invalid.
             // at System.IO.FileSystemWatcher..ctor(String path, String filter)
             // at System.IO.FileSystemWatcher..ctor(String path)
-            // at System.Runtime.Caching.FileChangeNotificationSystem.System.Runtime.Caching.Hosting.IFileChangeNotificationSystem.StartMonitoring(String filePath, OnChangedCallback onChangedCallback, Object& state, DateTimeOffset& lastWriteTime, Int64& fileSize)
+            // at
+            // System.Runtime.Caching.FileChangeNotificationSystem.System.Runtime.Caching.Hosting.IFileChangeNotificationSystem.StartMonitoring(String
+            // filePath, OnChangedCallback onChangedCallback, Object& state, DateTimeOffset& lastWriteTime, Int64&
+            // fileSize)
             // at System.Runtime.Caching.HostFileChangeMonitor.InitDisposableMembers()
             // at System.Runtime.Caching.HostFileChangeMonitor..ctor(IList`1 filePaths)
-            // at MonoTests.System.Runtime.Caching.HostFileChangeMonitorTest.Constructor_MissingFiles() in c:\users\grendel\documents\visual studio 2010\Projects\System.Runtime.Caching.Test\System.Runtime.Caching.Test\System.Runtime.Caching\HostFileChangeMonitorTest.cs:line 68
+            // at MonoTests.System.Runtime.Caching.HostFileChangeMonitorTest.Constructor_MissingFiles() in
+            // c:\users\grendel\documents\visual studio
+            // 2010\Projects\System.Runtime.Caching.Test\System.Runtime.Caching.Test\System.Runtime.Caching\HostFileChangeMonitorTest.cs:line
+            // 68
             Assert.Throws<ArgumentException>(() =>
             {
                 new HostFileChangeMonitor(paths);

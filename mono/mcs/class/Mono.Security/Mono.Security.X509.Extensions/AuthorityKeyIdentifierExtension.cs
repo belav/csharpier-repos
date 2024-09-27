@@ -35,15 +35,15 @@ using Mono.Security.X509;
 namespace Mono.Security.X509.Extensions
 {
     /*
-     * id-ce-authorityKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 35 }
-     *
-     * AuthorityKeyIdentifier ::= SEQUENCE {
-     *    keyIdentifier             [0] KeyIdentifier           OPTIONAL,
-     *    authorityCertIssuer       [1] GeneralNames            OPTIONAL,
-     *    authorityCertSerialNumber [2] CertificateSerialNumber OPTIONAL  }
-     *
-     * KeyIdentifier ::= OCTET STRING
-     */
+    * id-ce-authorityKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 35 }
+    *
+    * AuthorityKeyIdentifier ::= SEQUENCE {
+    *    keyIdentifier             [0] KeyIdentifier           OPTIONAL,
+    *    authorityCertIssuer       [1] GeneralNames            OPTIONAL,
+    *    authorityCertSerialNumber [2] CertificateSerialNumber OPTIONAL  }
+    *
+    * KeyIdentifier ::= OCTET STRING
+    */
 
 #if INSIDE_SYSTEM
     internal

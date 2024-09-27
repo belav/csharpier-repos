@@ -177,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     out var finalTrivia
                 );
 
-                // If all the using directives were removed, and the group was followed by a blank line, remove a single
+                // If all the using directives were removed, and the group was followed by a blank line, remove a
+                // single
                 // blank line as well.
                 if (compilationUnit.Usings.Count > 0 && finalUsings.Count == 0)
                 {
@@ -261,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     out var finalTrivia
                 );
 
-                // If all the using directives were removed, and the group was followed by a blank line, remove a single
+                // If all the using directives were removed, and the group was followed by a blank line, remove a
+                // single
                 // blank line as well.
                 if (namespaceDeclaration.Usings.Count > 0 && finalUsings.Count == 0)
                 {

@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 
 #if !COMPONENTS
 /// <summary>
-/// Defines a constraint on an optional parameter. If the parameter is present, then it is constrained by InnerConstraint.
+/// Defines a constraint on an optional parameter. If the parameter is present, then it is
+// constrained by InnerConstraint.
 /// </summary>
 public class OptionalRouteConstraint : IRouteConstraint
 #else
@@ -19,7 +20,8 @@ internal class OptionalRouteConstraint : IRouteConstraint
 #endif
 {
     /// <summary>
-    /// Creates a new <see cref="OptionalRouteConstraint"/> instance given the <paramref name="innerConstraint"/>.
+    /// Creates a new <see cref="OptionalRouteConstraint"/> instance given the <paramref
+    // name="innerConstraint"/>.
     /// </summary>
     /// <param name="innerConstraint"></param>
     public OptionalRouteConstraint(IRouteConstraint innerConstraint)

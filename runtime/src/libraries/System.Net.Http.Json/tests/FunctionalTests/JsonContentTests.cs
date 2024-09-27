@@ -288,7 +288,8 @@ namespace System.Net.Http.Json.Functional.Tests
                 {
                     using (HttpClient client = new HttpClient(handler))
                     {
-                        // EnsureDefaultOptions uses a JsonConverter where we validate the JsonSerializerOptions when not provided to JsonContent.Create.
+                        // EnsureDefaultOptions uses a JsonConverter where we validate the JsonSerializerOptions when not
+                        // provided to JsonContent.Create.
                         EnsureDefaultOptions dummyObj = new EnsureDefaultOptions();
                         var request = new HttpRequestMessage(HttpMethod.Post, uri);
                         request.Content = JsonContent.Create(dummyObj);

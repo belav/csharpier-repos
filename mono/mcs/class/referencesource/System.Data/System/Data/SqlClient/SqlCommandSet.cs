@@ -100,9 +100,9 @@ namespace System.Data.SqlClient
 
         internal int CommandTimeout
         {
-            /*get {
-                return BatchCommand.CommandTimeout;
-            }*/
+/*get {
+return BatchCommand.CommandTimeout;
+}*/
             set { BatchCommand.CommandTimeout = value; }
         }
 
@@ -114,9 +114,9 @@ namespace System.Data.SqlClient
 
         internal SqlTransaction Transaction
         {
-            /*get {
-                return BatchCommand.Transaction;
-            }*/
+/*get {
+return BatchCommand.Transaction;
+}*/
             set { BatchCommand.Transaction = value; }
         }
 

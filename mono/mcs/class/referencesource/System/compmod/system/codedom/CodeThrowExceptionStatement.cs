@@ -34,7 +34,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeThrowExceptionStatement'/> using the specified statement.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeThrowExceptionStatement'/>
+        // using the specified statement.
         ///    </para>
         /// </devdoc>
         public CodeThrowExceptionStatement(CodeExpression toThrow)

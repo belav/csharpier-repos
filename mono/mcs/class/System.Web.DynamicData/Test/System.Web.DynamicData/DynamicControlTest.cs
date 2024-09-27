@@ -497,7 +497,8 @@ namespace MonoTests.System.Web.DynamicData
             var lc = p.FindControl("ListView1") as ListView;
             Assert.IsNotNull(lc, "#A1");
 
-            // System.InvalidOperationException : System.InvalidOperationException: The 'PokerDynamicControl' control 'FirstName' must have a DataField attribute.
+            // System.InvalidOperationException : System.InvalidOperationException: The 'PokerDynamicControl'
+            // control 'FirstName' must have a DataField attribute.
             //   at System.Web.DynamicData.DynamicControl.ResolveColumn()
             //   at System.Web.DynamicData.DynamicControl.OnInit(EventArgs e)
 
@@ -539,7 +540,8 @@ namespace MonoTests.System.Web.DynamicData
             var lc = p.FindControl("ListView1") as ListView;
             Assert.IsNotNull(lc, "#A1");
 
-            // System.InvalidOperationException : System.InvalidOperationException: The table 'EmployeeTable' does not have a column named 'NoSuchColumn'.
+            // System.InvalidOperationException : System.InvalidOperationException: The table 'EmployeeTable'
+            // does not have a column named 'NoSuchColumn'.
             //   at System.Web.DynamicData.MetaTable.GetColumn(String columnName)
             //   at System.Web.DynamicData.DynamicControl.ResolveColumn()
             //   at System.Web.DynamicData.DynamicControl.OnInit(EventArgs e)

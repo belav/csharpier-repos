@@ -28,9 +28,12 @@ namespace Microsoft.CodeAnalysis
 
         // text buffer maps
         /// <summary>
-        /// Tracks the document ID in the current context for a source text container for an opened text buffer.
+        /// Tracks the document ID in the current context for a source text container for an opened text
+        // buffer.
         /// </summary>
-        /// <remarks>For each entry in this map, there must be a corresponding entry in <see cref="_bufferToAssociatedDocumentsMap"/> where the document ID in current context is one of associated document IDs.</remarks>
+        /// <remarks>For each entry in this map, there must be a corresponding entry in <see
+        // cref="_bufferToAssociatedDocumentsMap"/> where the document ID in current context is one of
+        // associated document IDs.</remarks>
         private readonly Dictionary<
             SourceTextContainer,
             DocumentId
@@ -60,7 +63,8 @@ namespace Microsoft.CodeAnalysis
         public virtual bool CanOpenDocuments => false;
 
         /// <summary>
-        /// True if this workspace supports manually changing the active context document of a text buffer by calling <see cref="SetDocumentContext(DocumentId)" />.
+        /// True if this workspace supports manually changing the active context document of a text buffer
+        // by calling <see cref="SetDocumentContext(DocumentId)" />.
         /// </summary>
         internal virtual bool CanChangeActiveContextDocument => false;
 
@@ -242,7 +246,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the ids for documents in the <see cref="CurrentSolution"/> snapshot associated with the given <paramref name="container"/>.
+        /// Gets the ids for documents in the <see cref="CurrentSolution"/> snapshot associated with the
+        // given <paramref name="container"/>.
         /// Documents are normally associated with a text container when the documents are opened.
         /// </summary>
         public virtual IEnumerable<DocumentId> GetRelatedDocumentIds(SourceTextContainer container)
@@ -337,7 +342,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Call this method to tell the host environment to change the current active context to this document. Only supported if
+        /// Call this method to tell the host environment to change the current active context to this
+        // document. Only supported if
         /// <see cref="CanChangeActiveContextDocument"/> returns true.
         /// </summary>
         internal virtual void SetDocumentContext(DocumentId documentId) =>
@@ -511,7 +517,8 @@ namespace Microsoft.CodeAnalysis
                     }
                     else
                     {
-                        // We don't have the old text or version.  Rather than trying to reuse a version that we still have, let's just assume the file has changed.
+                        // We don't have the old text or version.  Rather than trying to reuse a version that we still have,
+                        // let's just assume the file has changed.
                         // keep open document text alive by using PreserveIdentity
                         return oldSolution.WithDocumentText(
                             documentId,
@@ -561,8 +568,10 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Registers a SourceTextContainer to a source generated document. Unlike <see
-        /// cref="OnDocumentOpened(DocumentId, SourceTextContainer, bool)" />, this doesn't result in the workspace
-        /// being updated any time the contents of the container is changed; instead this ensures that features going
+        /// cref="OnDocumentOpened(DocumentId, SourceTextContainer, bool)" />, this doesn't result in the
+        // workspace
+        /// being updated any time the contents of the container is changed; instead this ensures that
+        // features going
         /// from the text container to the buffer back to a document get a usable document.
         /// </summary>
         // TODO: switch this protected once we have confidence in API shape
@@ -807,9 +816,12 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Tries to close the document identified by <paramref name="documentId"/>.  This is only needed by
-        /// implementations of ILspWorkspace to indicate that the workspace should try to transition to the closed state
-        /// for this document, but can bail out gracefully if they don't know about it (for example if they haven't
-        /// heard about the file from the project system).  Subclasses should determine what file contents they should
+        /// implementations of ILspWorkspace to indicate that the workspace should try to transition to the
+        // closed state
+        /// for this document, but can bail out gracefully if they don't know about it (for example if they
+        // haven't
+        /// heard about the file from the project system).  Subclasses should determine what file contents
+        // they should
         /// transition to if the file is within the workspace.
         /// </summary>
         /// <param name="documentId"></param>
@@ -838,10 +850,14 @@ namespace Microsoft.CodeAnalysis
             bool requireDocumentPresentAndOpen
         )
         {
-            // The try/catch here is to find additional telemetry for https://devdiv.visualstudio.com/DevDiv/_queries/query/71ee8553-7220-4b2a-98cf-20edab701fd1/,
-            // where we have one theory that OnDocumentClosed is running but failing somewhere in the middle and thus failing to get to the RaiseDocumentClosedEventAsync() line.
-            // We are choosing ReportWithoutCrashAndPropagate because this is a public API that has callers outside VS and also non-VisualStudioWorkspace callers inside VS, and
-            // we don't want to be crashing underneath them if they were already handling exceptions or (worse) was using those exceptions for expected code flow.
+            // The try/catch here is to find additional telemetry for
+            // https://devdiv.visualstudio.com/DevDiv/_queries/query/71ee8553-7220-4b2a-98cf-20edab701fd1/,
+            // where we have one theory that OnDocumentClosed is running but failing somewhere in the middle and
+            // thus failing to get to the RaiseDocumentClosedEventAsync() line.
+            // We are choosing ReportWithoutCrashAndPropagate because this is a public API that has callers
+            // outside VS and also non-VisualStudioWorkspace callers inside VS, and
+            // we don't want to be crashing underneath them if they were already handling exceptions or (worse)
+            // was using those exceptions for expected code flow.
             try
             {
                 this.SetCurrentSolution(
@@ -1048,7 +1064,8 @@ namespace Microsoft.CodeAnalysis
             _bufferToAssociatedDocumentsMap[textContainer] = docIds;
         }
 
-        /// <returns>The DocumentId of the current context document attached to the textContainer, if any.</returns>
+        /// <returns>The DocumentId of the current context document attached to the textContainer, if
+        // any.</returns>
         private DocumentId? RemoveDocumentFromCurrentContextMapping_NoLock(
             SourceTextContainer textContainer,
             DocumentId closedDocumentId
@@ -1076,7 +1093,8 @@ namespace Microsoft.CodeAnalysis
                 return null;
             }
 
-            // Update the new list of documents attached to the given textContainer and the current context document, and return the latter.
+            // Update the new list of documents attached to the given textContainer and the current context
+            // document, and return the latter.
             _bufferToAssociatedDocumentsMap[textContainer] = docIds;
             _bufferToDocumentInCurrentContextMap[textContainer] = docIds[0];
             return docIds[0];

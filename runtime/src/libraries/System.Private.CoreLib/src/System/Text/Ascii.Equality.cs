@@ -18,8 +18,10 @@ namespace System.Text
         /// </summary>
         /// <param name="left">The buffer to compare with <paramref name="right" />.</param>
         /// <param name="right">The buffer to compare with <paramref name="left" />.</param>
-        /// <returns><see langword="true" /> if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal and ASCII. <see langword="false" /> otherwise.</returns>
-        /// <remarks>If both buffers contain equal, but non-ASCII characters, the method returns <see langword="false" />.</remarks>
+        /// <returns><see langword="true" /> if the corresponding elements in <paramref name="left" /> and
+        // <paramref name="right" /> were equal and ASCII. <see langword="false" /> otherwise.</returns>
+        /// <remarks>If both buffers contain equal, but non-ASCII characters, the method returns <see
+        // langword="false" />.</remarks>
         public static bool Equals(ReadOnlySpan<byte> left, ReadOnlySpan<byte> right) =>
             left.Length == right.Length
             && Equals<byte, byte, PlainLoader<byte>>(
@@ -256,12 +258,16 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Determines whether the provided buffers contain equal ASCII characters, ignoring case considerations.
+        /// Determines whether the provided buffers contain equal ASCII characters, ignoring case
+        // considerations.
         /// </summary>
         /// <param name="left">The buffer to compare with <paramref name="right" />.</param>
         /// <param name="right">The buffer to compare with <paramref name="left" />.</param>
-        /// <returns><see langword="true" /> if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal ignoring case considerations and ASCII. <see langword="false" /> otherwise.</returns>
-        /// <remarks>If both buffers contain equal, but non-ASCII characters, the method returns <see langword="false" />.</remarks>
+        /// <returns><see langword="true" /> if the corresponding elements in <paramref name="left" /> and
+        // <paramref name="right" /> were equal ignoring case considerations and ASCII. <see langword="false"
+        // /> otherwise.</returns>
+        /// <remarks>If both buffers contain equal, but non-ASCII characters, the method returns <see
+        // langword="false" />.</remarks>
         public static bool EqualsIgnoreCase(ReadOnlySpan<byte> left, ReadOnlySpan<byte> right) =>
             left.Length == right.Length
             && EqualsIgnoreCase<byte, byte, PlainLoader<byte>>(
@@ -733,7 +739,8 @@ namespace System.Text
             [CompExactlyDependsOn(typeof(Avx))]
             public static bool EqualAndAscii256(ref byte utf8, ref ushort utf16)
             {
-                // We widen the utf8 param so we can compare it to utf16, this doubles how much of the utf16 vector we search
+                // We widen the utf8 param so we can compare it to utf16, this doubles how much of the utf16 vector
+                // we search
                 Debug.Assert(Vector256<byte>.Count == Vector256<ushort>.Count * 2);
 
                 Vector256<byte> leftNotWidened = Vector256.LoadUnsafe(ref utf8);
@@ -763,7 +770,8 @@ namespace System.Text
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualAndAscii512(ref byte utf8, ref ushort utf16)
             {
-                // We widen the utf8 param so we can compare it to utf16, this doubles how much of the utf16 vector we search
+                // We widen the utf8 param so we can compare it to utf16, this doubles how much of the utf16 vector
+                // we search
                 Debug.Assert(Vector512<byte>.Count == Vector512<ushort>.Count * 2);
 
                 Vector512<byte> leftNotWidened = Vector512.LoadUnsafe(ref utf8);

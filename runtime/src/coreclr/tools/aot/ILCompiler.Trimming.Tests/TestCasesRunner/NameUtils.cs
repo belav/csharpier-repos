@@ -66,8 +66,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             // Split it into . separated parts and if one is ending with > rewrite it to `1 format
-            // ILC folows the reflection format which doesn't actually use generic instantiations on anything but the last type
-            // in nested hierarchy - it's difficult to replicate this with Cecil as it has different representation so just strip that info
+            // ILC folows the reflection format which doesn't actually use generic instantiations on anything
+            // but the last type
+            // in nested hierarchy - it's difficult to replicate this with Cecil as it has different
+            // representation so just strip that info
             var parts = value.Split('.');
             StringBuilder sb = new StringBuilder();
             foreach (var part in parts)

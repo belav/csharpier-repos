@@ -13,7 +13,8 @@ namespace System.Numerics
         /// <summary>Computes the quotient and remainder of two values.</summary>
         /// <param name="left">The value which <paramref name="right" /> divides.</param>
         /// <param name="right">The value which divides <paramref name="left" />.</param>
-        /// <returns>The quotient and remainder of <paramref name="left" /> divided-by <paramref name="right" />.</returns>
+        /// <returns>The quotient and remainder of <paramref name="left" /> divided-by <paramref
+        // name="right" />.</returns>
         static virtual (TSelf Quotient, TSelf Remainder) DivRem(TSelf left, TSelf right)
         {
             TSelf quotient = left / right;
@@ -45,11 +46,15 @@ namespace System.Numerics
         /// <returns>The number of set bits in <paramref name="value" />.</returns>
         static abstract TSelf PopCount(TSelf value);
 
-        /// <summary>Reads a two's complement number from a given array, in big-endian format, and converts it to an instance of the current type.</summary>
+        /// <summary>Reads a two's complement number from a given array, in big-endian format, and converts
+        // it to an instance of the current type.</summary>
         /// <param name="source">The array from which the two's complement number should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
         /// <returns>The value read from <paramref name="source" />.</returns>
-        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by <typeparamref name="TSelf" /></exception>
+        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by
+        // <typeparamref name="TSelf" /></exception>
         static virtual TSelf ReadBigEndian(byte[] source, bool isUnsigned)
         {
             if (!TSelf.TryReadBigEndian(source, isUnsigned, out TSelf value))
@@ -59,12 +64,17 @@ namespace System.Numerics
             return value;
         }
 
-        /// <summary>Reads a two's complement number from a given array, in big-endian format, and converts it to an instance of the current type.</summary>
+        /// <summary>Reads a two's complement number from a given array, in big-endian format, and converts
+        // it to an instance of the current type.</summary>
         /// <param name="source">The array from which the two's complement number should be read.</param>
         /// <param name="startIndex">The starting index from which the value should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
-        /// <returns>The value read from <paramref name="source" /> starting at <paramref name="startIndex" />.</returns>
-        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by <typeparamref name="TSelf" /></exception>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
+        /// <returns>The value read from <paramref name="source" /> starting at <paramref name="startIndex"
+        // />.</returns>
+        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by
+        // <typeparamref name="TSelf" /></exception>
         static virtual TSelf ReadBigEndian(byte[] source, int startIndex, bool isUnsigned)
         {
             if (!TSelf.TryReadBigEndian(source.AsSpan(startIndex), isUnsigned, out TSelf value))
@@ -74,11 +84,15 @@ namespace System.Numerics
             return value;
         }
 
-        /// <summary>Reads a two's complement number from a given span, in big-endian format, and converts it to an instance of the current type.</summary>
+        /// <summary>Reads a two's complement number from a given span, in big-endian format, and converts
+        // it to an instance of the current type.</summary>
         /// <param name="source">The array from which the two's complement number should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
         /// <returns>The value read from <paramref name="source" />.</returns>
-        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by <typeparamref name="TSelf" /></exception>
+        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by
+        // <typeparamref name="TSelf" /></exception>
         static virtual TSelf ReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned)
         {
             if (!TSelf.TryReadBigEndian(source, isUnsigned, out TSelf value))
@@ -88,11 +102,15 @@ namespace System.Numerics
             return value;
         }
 
-        /// <summary>Reads a two's complement number from a given array, in little-endian format, and converts it to an instance of the current type.</summary>
+        /// <summary>Reads a two's complement number from a given array, in little-endian format, and
+        // converts it to an instance of the current type.</summary>
         /// <param name="source">The array from which the two's complement number should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
         /// <returns>The value read from <paramref name="source" />.</returns>
-        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by <typeparamref name="TSelf" /></exception>
+        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by
+        // <typeparamref name="TSelf" /></exception>
         static virtual TSelf ReadLittleEndian(byte[] source, bool isUnsigned)
         {
             if (!TSelf.TryReadLittleEndian(source, isUnsigned, out TSelf value))
@@ -102,12 +120,17 @@ namespace System.Numerics
             return value;
         }
 
-        /// <summary>Reads a two's complement number from a given array, in little-endian format, and converts it to an instance of the current type.</summary>
+        /// <summary>Reads a two's complement number from a given array, in little-endian format, and
+        // converts it to an instance of the current type.</summary>
         /// <param name="source">The array from which the two's complement number should be read.</param>
         /// <param name="startIndex">The starting index from which the value should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
-        /// <returns>The value read from <paramref name="source" /> starting at <paramref name="startIndex" />.</returns>
-        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by <typeparamref name="TSelf" /></exception>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
+        /// <returns>The value read from <paramref name="source" /> starting at <paramref name="startIndex"
+        // />.</returns>
+        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by
+        // <typeparamref name="TSelf" /></exception>
         static virtual TSelf ReadLittleEndian(byte[] source, int startIndex, bool isUnsigned)
         {
             if (!TSelf.TryReadLittleEndian(source.AsSpan(startIndex), isUnsigned, out TSelf value))
@@ -117,11 +140,15 @@ namespace System.Numerics
             return value;
         }
 
-        /// <summary>Reads a two's complement number from a given span, in little-endian format, and converts it to an instance of the current type.</summary>
+        /// <summary>Reads a two's complement number from a given span, in little-endian format, and
+        // converts it to an instance of the current type.</summary>
         /// <param name="source">The array from which the two's complement number should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
         /// <returns>The value read from <paramref name="source" />.</returns>
-        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by <typeparamref name="TSelf" /></exception>
+        /// <exception cref="OverflowException"><paramref name="source" /> is not representable by
+        // <typeparamref name="TSelf" /></exception>
         static virtual TSelf ReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned)
         {
             if (!TSelf.TryReadLittleEndian(source, isUnsigned, out TSelf value))
@@ -133,8 +160,10 @@ namespace System.Numerics
 
         /// <summary>Rotates a value left by a given amount.</summary>
         /// <param name="value">The value which is rotated left by <paramref name="rotateAmount" />.</param>
-        /// <param name="rotateAmount">The amount by which <paramref name="value" /> is rotated left.</param>
-        /// <returns>The result of rotating <paramref name="value" /> left by <paramref name="rotateAmount" />.</returns>
+        /// <param name="rotateAmount">The amount by which <paramref name="value" /> is rotated
+        // left.</param>
+        /// <returns>The result of rotating <paramref name="value" /> left by <paramref name="rotateAmount"
+        // />.</returns>
         static virtual TSelf RotateLeft(TSelf value, int rotateAmount)
         {
             if (!typeof(TSelf).IsValueType)
@@ -147,9 +176,12 @@ namespace System.Numerics
         }
 
         /// <summary>Rotates a value right by a given amount.</summary>
-        /// <param name="value">The value which is rotated right by <paramref name="rotateAmount" />.</param>
-        /// <param name="rotateAmount">The amount by which <paramref name="value" /> is rotated right.</param>
-        /// <returns>The result of rotating <paramref name="value" /> right by <paramref name="rotateAmount" />.</returns>
+        /// <param name="value">The value which is rotated right by <paramref name="rotateAmount"
+        // />.</param>
+        /// <param name="rotateAmount">The amount by which <paramref name="value" /> is rotated
+        // right.</param>
+        /// <returns>The result of rotating <paramref name="value" /> right by <paramref name="rotateAmount"
+        // />.</returns>
         static virtual TSelf RotateRight(TSelf value, int rotateAmount)
         {
             if (!typeof(TSelf).IsValueType)
@@ -166,46 +198,64 @@ namespace System.Numerics
         /// <returns>The number of trailing zero bits in <paramref name="value" />.</returns>
         static abstract TSelf TrailingZeroCount(TSelf value);
 
-        /// <summary>Tries to read a two's complement number from a span, in big-endian format, and convert it to an instance of the current type.</summary>
+        /// <summary>Tries to read a two's complement number from a span, in big-endian format, and convert
+        // it to an instance of the current type.</summary>
         /// <param name="source">The span from which the two's complement number should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
-        /// <param name="value">On return, contains the value read from <paramref name="source" /> or <c>default</c> if a value could not be read.</param>
-        /// <returns><c>true</c> if the value was succesfully read from <paramref name="source" />; otherwise, <c>false</c>.</returns>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
+        /// <param name="value">On return, contains the value read from <paramref name="source" /> or
+        // <c>default</c> if a value could not be read.</param>
+        /// <returns><c>true</c> if the value was succesfully read from <paramref name="source" />;
+        // otherwise, <c>false</c>.</returns>
         static abstract bool TryReadBigEndian(
             ReadOnlySpan<byte> source,
             bool isUnsigned,
             out TSelf value
         );
 
-        /// <summary>Tries to read a two's complement number from a span, in little-endian format, and convert it to an instance of the current type.</summary>
+        /// <summary>Tries to read a two's complement number from a span, in little-endian format, and
+        // convert it to an instance of the current type.</summary>
         /// <param name="source">The span from which the two's complement number should be read.</param>
-        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement number.</param>
-        /// <param name="value">On return, contains the value read from <paramref name="source" /> or <c>default</c> if a value could not be read.</param>
-        /// <returns><c>true</c> if the value was succesfully read from <paramref name="source" />; otherwise, <c>false</c>.</returns>
+        /// <param name="isUnsigned"><c>true</c> if <paramref name="source" /> represents an unsigned two's
+        // complement number; otherwise, <c>false</c> to indicate it represents a signed two's complement
+        // number.</param>
+        /// <param name="value">On return, contains the value read from <paramref name="source" /> or
+        // <c>default</c> if a value could not be read.</param>
+        /// <returns><c>true</c> if the value was succesfully read from <paramref name="source" />;
+        // otherwise, <c>false</c>.</returns>
         static abstract bool TryReadLittleEndian(
             ReadOnlySpan<byte> source,
             bool isUnsigned,
             out TSelf value
         );
 
-        /// <summary>Gets the number of bytes that will be written as part of <see cref="TryWriteLittleEndian(Span{byte}, out int)" />.</summary>
-        /// <returns>The number of bytes that will be written as part of <see cref="TryWriteLittleEndian(Span{byte}, out int)" />.</returns>
+        /// <summary>Gets the number of bytes that will be written as part of <see
+        // cref="TryWriteLittleEndian(Span{byte}, out int)" />.</summary>
+        /// <returns>The number of bytes that will be written as part of <see
+        // cref="TryWriteLittleEndian(Span{byte}, out int)" />.</returns>
         int GetByteCount();
 
-        /// <summary>Gets the length, in bits, of the shortest two's complement representation of the current value.</summary>
-        /// <returns>The length, in bits, of the shortest two's complement representation of the current value.</returns>
+        /// <summary>Gets the length, in bits, of the shortest two's complement representation of the
+        // current value.</summary>
+        /// <returns>The length, in bits, of the shortest two's complement representation of the current
+        // value.</returns>
         int GetShortestBitLength();
 
         /// <summary>Tries to write the current value, in big-endian format, to a given span.</summary>
         /// <param name="destination">The span to which the current value should be written.</param>
-        /// <param name="bytesWritten">The number of bytes written to <paramref name="destination" />.</param>
-        /// <returns><c>true</c> if the value was successfully written to <paramref name="destination" />; otherwise, <c>false</c>.</returns>
+        /// <param name="bytesWritten">The number of bytes written to <paramref name="destination"
+        // />.</param>
+        /// <returns><c>true</c> if the value was successfully written to <paramref name="destination" />;
+        // otherwise, <c>false</c>.</returns>
         bool TryWriteBigEndian(Span<byte> destination, out int bytesWritten);
 
         /// <summary>Tries to write the current value, in little-endian format, to a given span.</summary>
         /// <param name="destination">The span to which the current value should be written.</param>
-        /// <param name="bytesWritten">The number of bytes written to <paramref name="destination" />.</param>
-        /// <returns><c>true</c> if the value was successfully written to <paramref name="destination" />; otherwise, <c>false</c>.</returns>
+        /// <param name="bytesWritten">The number of bytes written to <paramref name="destination"
+        // />.</param>
+        /// <returns><c>true</c> if the value was successfully written to <paramref name="destination" />;
+        // otherwise, <c>false</c>.</returns>
         bool TryWriteLittleEndian(Span<byte> destination, out int bytesWritten);
 
         /// <summary>Writes the current value, in big-endian format, to a given array.</summary>
@@ -223,7 +273,8 @@ namespace System.Numerics
         /// <summary>Writes the current value, in big-endian format, to a given array.</summary>
         /// <param name="destination">The array to which the current value should be written.</param>
         /// <param name="startIndex">The starting index at which the value should be written.</param>
-        /// <returns>The number of bytes written to <paramref name="destination" /> starting at <paramref name="startIndex" />.</returns>
+        /// <returns>The number of bytes written to <paramref name="destination" /> starting at <paramref
+        // name="startIndex" />.</returns>
         int WriteBigEndian(byte[] destination, int startIndex)
         {
             if (!TryWriteBigEndian(destination.AsSpan(startIndex), out int bytesWritten))
@@ -260,7 +311,8 @@ namespace System.Numerics
         /// <summary>Writes the current value, in little-endian format, to a given array.</summary>
         /// <param name="destination">The array to which the current value should be written.</param>
         /// <param name="startIndex">The starting index at which the value should be written.</param>
-        /// <returns>The number of bytes written to <paramref name="destination" /> starting at <paramref name="startIndex" />.</returns>
+        /// <returns>The number of bytes written to <paramref name="destination" /> starting at <paramref
+        // name="startIndex" />.</returns>
         int WriteLittleEndian(byte[] destination, int startIndex)
         {
             if (!TryWriteLittleEndian(destination.AsSpan(startIndex), out int bytesWritten))

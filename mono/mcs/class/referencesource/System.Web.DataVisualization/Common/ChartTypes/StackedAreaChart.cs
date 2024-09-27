@@ -473,7 +473,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// This method calculates position of the area and either draws it or checks selection.
         /// </summary>
-        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is
+        // active.</param>
         /// <param name="graph">The Chart Graphics object.</param>
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
@@ -1288,10 +1289,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
         /// <param name="topDarkening">Darkenning scale for top surface. 0 - None.</param>
         /// <param name="bottomDarkening">Darkenning scale for bottom surface. 0 - None.</param>
-        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN if same as in "firstPoint".</param>
-        /// <param name="fourthPointPosition">Position where the fourth point is actually located or float.NaN if same as in "secondPoint".</param>
-        /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should be drawn.</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN
+        // if same as in "firstPoint".</param>
+        /// <param name="fourthPointPosition">Position where the fourth point is actually located or
+        // float.NaN if same as in "secondPoint".</param>
+        /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should
+        // be drawn.</param>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         protected override GraphicsPath Draw3DSurface(
             ChartArea area,
             ChartGraphics graph,
@@ -1374,7 +1379,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="positionZ">Z coordinate of the back side of the cube.</param>
         /// <param name="depth">Cube depth.</param>
         /// <param name="matrix">Coordinate transformation matrix.</param>
-        /// <param name="visibleSurfaces">Surface visibility reference. Initialized with bounary cube visibility.</param>
+        /// <param name="visibleSurfaces">Surface visibility reference. Initialized with bounary cube
+        // visibility.</param>
         protected override void GetTopSurfaceVisibility(
             ChartArea area,
             DataPoint3D firstPoint,
@@ -1497,8 +1503,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="axisPosition">Axis position.</param>
         /// <param name="firstPoint">First top point coordinates.</param>
         /// <param name="secondPoint">Second top point coordinates.</param>
-        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN if same as in "firstPoint".</param>
-        /// <param name="fourthPointPosition">Position where the fourth point is actually located or float.NaN if same as in "secondPoint".</param>
+        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN
+        // if same as in "firstPoint".</param>
+        /// <param name="fourthPointPosition">Position where the fourth point is actually located or
+        // float.NaN if same as in "secondPoint".</param>
         /// <param name="thirdPoint">Returns third bottom point coordinates.</param>
         /// <param name="fourthPoint">Returns fourth bottom point coordinates.</param>
         protected override void GetBottomPointsPosition(
@@ -1939,7 +1947,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

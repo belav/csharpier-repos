@@ -148,7 +148,8 @@ namespace MonoTests.System.Diagnostics
         [Test]
         public void XPathNavigatorAsData()
         {
-            // While XmlReader, XmlDocument and XDocument are not supported as direct xml content (i.e. to not get escaped), XPathNavigator is.
+            // While XmlReader, XmlDocument and XDocument are not supported as direct xml content (i.e. to not
+            // get escaped), XPathNavigator is.
             var sw = new StringWriter();
             var xl = new XmlWriterTraceListener(sw);
             var doc = new XmlDocument();

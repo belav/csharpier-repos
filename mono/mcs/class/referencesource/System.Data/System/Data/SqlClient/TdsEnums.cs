@@ -238,7 +238,8 @@ namespace System.Data.SqlClient
             Integrated = ADALWORKFLOW_ACTIVEDIRECTORYINTEGRATED,
         }
 
-        // The string used for username in the error message when Authentication = Active Directory Integrated with FedAuth is used, if authentication fails.
+        // The string used for username in the error message when Authentication = Active Directory
+        // Integrated with FedAuth is used, if authentication fails.
         public const string NTAUTHORITYANONYMOUSLOGON = @"NT Authority\Anonymous Logon";
 
         //    Loginrec defines
@@ -256,40 +257,40 @@ namespace System.Data.SqlClient
         public const int TEXT_TIME_STAMP_LEN = 8;
         public const int COLLATION_INFO_LEN = 4;
 
-        /*
-                public const byte INT4_LSB_HI   = 0;     // lsb is low byte (eg 68000)
-                //    public const byte INT4_LSB_LO   = 1;     // lsb is low byte (eg VAX)
-                public const byte INT2_LSB_HI   = 2;     // lsb is low byte (eg 68000)
-                //    public const byte INT2_LSB_LO   = 3;     // lsb is low byte (eg VAX)
-                public const byte FLT_IEEE_HI   = 4;     // lsb is low byte (eg 68000)
-                public const byte CHAR_ASCII    = 6;     // ASCII character set
-                public const byte TWO_I4_LSB_HI = 8;     // lsb is low byte (eg 68000
-                //    public const byte TWO_I4_LSB_LO = 9;     // lsb is low byte (eg VAX)
-                //    public const byte FLT_IEEE_LO   = 10;    // lsb is low byte (eg MSDOS)
-                public const byte FLT4_IEEE_HI  = 12;    // IEEE 4-byte floating point -lsb is high byte
-                //    public const byte FLT4_IEEE_LO  = 13;    // IEEE 4-byte floating point -lsb is low byte
-                public const byte TWO_I2_LSB_HI = 16;    // lsb is high byte
-                //    public const byte TWO_I2_LSB_LO = 17;    // lsb is low byte
-        
-                public const byte LDEFSQL     = 0;    // server sends its default
-                public const byte LDEFUSER    = 0;    // regular old user
-                public const byte LINTEGRATED = 8;    // integrated security login
-        */
+/*
+public const byte INT4_LSB_HI   = 0;     // lsb is low byte (eg 68000)
+//    public const byte INT4_LSB_LO   = 1;     // lsb is low byte (eg VAX)
+public const byte INT2_LSB_HI   = 2;     // lsb is low byte (eg 68000)
+//    public const byte INT2_LSB_LO   = 3;     // lsb is low byte (eg VAX)
+public const byte FLT_IEEE_HI   = 4;     // lsb is low byte (eg 68000)
+public const byte CHAR_ASCII    = 6;     // ASCII character set
+public const byte TWO_I4_LSB_HI = 8;     // lsb is low byte (eg 68000
+//    public const byte TWO_I4_LSB_LO = 9;     // lsb is low byte (eg VAX)
+//    public const byte FLT_IEEE_LO   = 10;    // lsb is low byte (eg MSDOS)
+public const byte FLT4_IEEE_HI  = 12;    // IEEE 4-byte floating point -lsb is high byte
+//    public const byte FLT4_IEEE_LO  = 13;    // IEEE 4-byte floating point -lsb is low byte
+public const byte TWO_I2_LSB_HI = 16;    // lsb is high byte
+//    public const byte TWO_I2_LSB_LO = 17;    // lsb is low byte
 
-        /* Versioning scheme table:
+public const byte LDEFSQL     = 0;    // server sends its default
+public const byte LDEFUSER    = 0;    // regular old user
+public const byte LINTEGRATED = 8;    // integrated security login
+*/
 
-            Client sends:
-            0x70000000 -> Sphinx
-            0x71000000 -> Shiloh RTM
-            0x71000001 -> Shiloh SP1
-            0x72xx0002 -> Yukon RTM
+/* Versioning scheme table:
 
-            Server responds:
-            0x07000000 -> Sphinx     // Notice server response format is different for bwd compat
-            0x07010000 -> Shiloh RTM // Notice server response format is different for bwd compat
-            0x71000001 -> Shiloh SP1
-            0x72xx0002 -> Yukon RTM
-        */
+Client sends:
+0x70000000 -> Sphinx
+0x71000000 -> Shiloh RTM
+0x71000001 -> Shiloh SP1
+0x72xx0002 -> Yukon RTM
+
+Server responds:
+0x07000000 -> Sphinx     // Notice server response format is different for bwd compat
+0x07010000 -> Shiloh RTM // Notice server response format is different for bwd compat
+0x71000001 -> Shiloh SP1
+0x72xx0002 -> Yukon RTM
+*/
 
         // Pre Shiloh SP1 versioning scheme:
         public const int SPHINXORSHILOH_MAJOR = 0x07; // The high byte (b3) is not sufficient to distinguish
@@ -1037,7 +1038,8 @@ namespace System.Data.SqlClient
     public enum SqlCommandColumnEncryptionSetting
     {
         /// <summary>
-        /// if �Column Encryption Setting=Enabled� in the connection string, use Enabled. Otherwise, maps to Disabled.
+        /// if �Column Encryption Setting=Enabled� in the connection string, use Enabled. Otherwise, maps to
+        // Disabled.
         /// </summary>
         UseConnectionSetting = 0,
 
@@ -1047,7 +1049,8 @@ namespace System.Data.SqlClient
         Enabled,
 
         /// <summary>
-        /// Parameters will not be encrypted, only the ResultSet will be decrypted. This is an optimization for queries that do not pass any encrypted input parameters.
+        /// Parameters will not be encrypted, only the ResultSet will be decrypted. This is an optimization
+        // for queries that do not pass any encrypted input parameters.
         /// Overrides the connection level setting for this command.
         /// </summary>
         ResultSetOnly,
@@ -1067,7 +1070,8 @@ namespace System.Data.SqlClient
     }
 
     // This enum indicates the state of TransparentNetworkIPResolution
-    // The first attempt when TNIR is on should be sequential. If the first attempt failes next attempts should be parallel.
+    // The first attempt when TNIR is on should be sequential. If the first attempt failes next attempts
+    // should be parallel.
     internal enum TransparentNetworkResolutionState
     {
         DisabledMode = 0,

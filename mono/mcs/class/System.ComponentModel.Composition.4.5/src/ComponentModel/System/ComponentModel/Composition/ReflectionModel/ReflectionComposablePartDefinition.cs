@@ -205,7 +205,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private IEnumerable<Type[]> GetCandidateParameters(Type[] genericParameters)
         {
-            // we iterate over all exports and find only generic ones. Assuming the arity matches, we reorder the original parameters
+            // we iterate over all exports and find only generic ones. Assuming the arity matches, we reorder
+            // the original parameters
             foreach (ExportDefinition export in this.ExportDefinitions)
             {
                 var genericParametersOrder = export.Metadata.GetValue<int[]>(

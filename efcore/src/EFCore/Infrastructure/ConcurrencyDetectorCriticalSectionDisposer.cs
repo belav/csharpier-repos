@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
-///     A <see cref="IDisposable" /> returned by an <see cref="IConcurrencyDetector" />, which will exit the ongoing
+///     A <see cref="IDisposable" /> returned by an <see cref="IConcurrencyDetector" />, which will
+// exit the ongoing
 ///     critical section when disposed.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public readonly struct ConcurrencyDetectorCriticalSectionDisposer : IDisposable

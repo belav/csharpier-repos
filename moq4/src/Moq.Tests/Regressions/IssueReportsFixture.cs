@@ -656,9 +656,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private static void Checker(ILogger log)
+                private static void Checker(ILogger log)
                 After:
-                            static void Checker(ILogger log)
+                static void Checker(ILogger log)
                 */
             }
 
@@ -802,9 +802,9 @@ namespace Moq.Tests.Regressions
             public class Foo
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private readonly IDependency dependency;
+            private readonly IDependency dependency;
             After:
-                            readonly IDependency dependency;
+            readonly IDependency dependency;
             */
             {
                 readonly IDependency dependency;
@@ -1168,9 +1168,9 @@ namespace Moq.Tests.Regressions
         public class Issue275
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
-                    private const int EXPECTED = int.MaxValue;
+        private const int EXPECTED = int.MaxValue;
         After:
-                    const int EXPECTED = int.MaxValue;
+        const int EXPECTED = int.MaxValue;
         */
         {
             const int EXPECTED = int.MaxValue;
@@ -1467,9 +1467,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                    private T value;
+                    private T value;
                     After:
-                                    T value;
+                    T value;
                     */
                 }
 
@@ -1803,9 +1803,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                    private bool _IsMale;
+                    private bool _IsMale;
                     After:
-                                    bool _IsMale;
+                    bool _IsMale;
                     */
                 }
 
@@ -1817,9 +1817,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                    private bool _Antlers;
+                    private bool _Antlers;
                     After:
-                                    bool _Antlers;
+                    bool _Antlers;
                     */
                 }
 
@@ -1910,9 +1910,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                    private bool _IsMale;
+                    private bool _IsMale;
                     After:
-                                    bool _IsMale;
+                    bool _IsMale;
                     */
                 }
 
@@ -1924,9 +1924,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                    private bool _Antlers;
+                    private bool _Antlers;
                     After:
-                                    bool _Antlers;
+                    bool _Antlers;
                     */
                 }
 
@@ -2174,9 +2174,11 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private static void RegisterInvocations(IMock<ITest> m, System.Collections.Concurrent.ConcurrentQueue<int> invocationsQueue)
+                private static void RegisterInvocations(IMock<ITest> m,
+                System.Collections.Concurrent.ConcurrentQueue<int> invocationsQueue)
                 After:
-                            static void RegisterInvocations(IMock<ITest> m, System.Collections.Concurrent.ConcurrentQueue<int> invocationsQueue)
+                static void RegisterInvocations(IMock<ITest> m, System.Collections.Concurrent.ConcurrentQueue<int>
+                invocationsQueue)
                 */
             }
 
@@ -2289,9 +2291,9 @@ namespace Moq.Tests.Regressions
         public class Issue592 : IDisposable
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
-                    private UnobservedTaskExceptionEventArgs _unobservedEventArgs;
+        private UnobservedTaskExceptionEventArgs _unobservedEventArgs;
         After:
-                    UnobservedTaskExceptionEventArgs _unobservedEventArgs;
+        UnobservedTaskExceptionEventArgs _unobservedEventArgs;
         */
         {
             UnobservedTaskExceptionEventArgs _unobservedEventArgs;
@@ -2302,9 +2304,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+                private void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
                 After:
-                            void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+                void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
                 */
             }
 
@@ -3011,9 +3013,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private async Task<Exception> GetVerificationErrorAsync()
+                private async Task<Exception> GetVerificationErrorAsync()
                 After:
-                            async Task<Exception> GetVerificationErrorAsync()
+                async Task<Exception> GetVerificationErrorAsync()
                 */
             }
 
@@ -3142,11 +3144,11 @@ namespace Moq.Tests.Regressions
             public class AB : IA, IB
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private Action ae;
-                            private Action be;
+            private Action ae;
+            private Action be;
             After:
-                            Action ae;
-                            Action be;
+            Action ae;
+            Action be;
             */
             {
                 Action ae;
@@ -3177,9 +3179,9 @@ namespace Moq.Tests.Regressions
         public class Issue897
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
-                    private readonly List<int> data;
+        private readonly List<int> data;
         After:
-                    readonly List<int> data;
+        readonly List<int> data;
         */
         {
             readonly List<int> data;
@@ -3231,9 +3233,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private readonly Mock<IX> mock;
+                private readonly Mock<IX> mock;
                 After:
-                            readonly Mock<IX> mock;
+                readonly Mock<IX> mock;
                 */
             }
 
@@ -3293,9 +3295,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private void InvokeBoolMethod()
+                private void InvokeBoolMethod()
                 After:
-                            void InvokeBoolMethod()
+                void InvokeBoolMethod()
                 */
             }
 
@@ -3305,9 +3307,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private void InvokeIntMethod()
+                private void InvokeIntMethod()
                 After:
-                            void InvokeIntMethod()
+                void InvokeIntMethod()
                 */
             }
 
@@ -3317,9 +3319,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private void SetupBoolMethod(Action callback)
+                private void SetupBoolMethod(Action callback)
                 After:
-                            void SetupBoolMethod(Action callback)
+                void SetupBoolMethod(Action callback)
                 */
             }
 
@@ -3329,9 +3331,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private void SetupIntMethod(Action callback)
+                private void SetupIntMethod(Action callback)
                 After:
-                            void SetupIntMethod(Action callback)
+                void SetupIntMethod(Action callback)
                 */
             }
 
@@ -3415,11 +3417,14 @@ namespace Moq.Tests.Regressions
             {
                 var mock = new Mock<X> { DefaultValue = DefaultValue.Mock };
 
-                // The following call will cause Moq to produce and return an auto-mocked instance of `IReadOnlyList<I>`.
-                // Additionally, an internal setup is added that will keep returning the same instance on subsequent calls:
+                // The following call will cause Moq to produce and return an auto-mocked instance of
+                // `IReadOnlyList<I>`.
+                // Additionally, an internal setup is added that will keep returning the same instance on subsequent
+                // calls:
                 mock.Object.Method<I>();
 
-                // The following call should not trigger the above setup, since we expect to get a `IReadOnlyList<C>`
+                // The following call should not trigger the above setup, since we expect to get a
+                // `IReadOnlyList<C>`
                 // and the cached `IReadOnlyList<I>` wouldn't fit:
                 mock.Object.Method<C>();
             }
@@ -3451,9 +3456,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private const string toStringReturnValue = "some string here";
+                private const string toStringReturnValue = "some string here";
                 After:
-                            const string toStringReturnValue = "some string here";
+                const string toStringReturnValue = "some string here";
                 */
             }
 
@@ -3480,9 +3485,9 @@ namespace Moq.Tests.Regressions
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'
                 Before:
-                            private void TestImpl(Action<Mock<IContent>> setup)
+                private void TestImpl(Action<Mock<IContent>> setup)
                 After:
-                            void TestImpl(Action<Mock<IContent>> setup)
+                void TestImpl(Action<Mock<IContent>> setup)
                 */
             }
 
@@ -3889,9 +3894,9 @@ namespace Moq.Tests.Regressions
             public class MyTestObject
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private readonly MyClass _myMockObject;
+            private readonly MyClass _myMockObject;
             After:
-                            readonly MyClass _myMockObject;
+            readonly MyClass _myMockObject;
             */
             {
                 readonly MyClass _myMockObject;
@@ -3971,9 +3976,9 @@ namespace Moq.Tests.Regressions
             public class GenericHidingEventConsumer
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private IGenericHidingEvents<bool> myHidingEvents;
+            private IGenericHidingEvents<bool> myHidingEvents;
             After:
-                            IGenericHidingEvents<bool> myHidingEvents;
+            IGenericHidingEvents<bool> myHidingEvents;
             */
             {
                 IGenericHidingEvents<bool> myHidingEvents;
@@ -3985,9 +3990,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                    private void HidingEventsOnCreated(object theSender, bool theE)
+                    private void HidingEventsOnCreated(object theSender, bool theE)
                     After:
-                                    void HidingEventsOnCreated(object theSender, bool theE)
+                    void HidingEventsOnCreated(object theSender, bool theE)
                     */
                 }
 
@@ -4094,9 +4099,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                private static void DoWork(IHardware hw, byte[] send)
+                    private static void DoWork(IHardware hw, byte[] send)
                     After:
-                                static void DoWork(IHardware hw, byte[] send)
+                    static void DoWork(IHardware hw, byte[] send)
                     */
                 }
             }
@@ -4900,9 +4905,9 @@ namespace Moq.Tests.Regressions
             public class Baz
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private readonly IBar _bar;
+            private readonly IBar _bar;
             After:
-                            readonly IBar _bar;
+            readonly IBar _bar;
             */
             {
                 readonly IBar _bar;
@@ -5616,9 +5621,9 @@ namespace Moq.Tests.Regressions
             public class Service
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private IRepository repository;
+            private IRepository repository;
             After:
-                            IRepository repository;
+            IRepository repository;
             */
             {
                 IRepository repository;
@@ -5779,9 +5784,9 @@ namespace Moq.Tests.Regressions
             public class OperationUser
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private readonly IPerformOperation m_OperationPerformer;
+            private readonly IPerformOperation m_OperationPerformer;
             After:
-                            readonly IPerformOperation m_OperationPerformer;
+            readonly IPerformOperation m_OperationPerformer;
             */
             {
                 readonly IPerformOperation m_OperationPerformer;
@@ -5800,9 +5805,9 @@ namespace Moq.Tests.Regressions
             public class HelperSetup
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                            private Mock<IPerformOperation> m_OperationStub;
+            private Mock<IPerformOperation> m_OperationStub;
             After:
-                            Mock<IPerformOperation> m_OperationStub;
+            Mock<IPerformOperation> m_OperationStub;
             */
             {
                 Mock<IPerformOperation> m_OperationStub;
@@ -5847,9 +5852,9 @@ namespace Moq.Tests.Regressions
 
                     /* Unmerged change from project 'Moq.Tests(net6.0)'
                     Before:
-                                    private void SetupOperationStub<T>(Func<T, string> valueFunction)
+                    private void SetupOperationStub<T>(Func<T, string> valueFunction)
                     After:
-                                    void SetupOperationStub<T>(Func<T, string> valueFunction)
+                    void SetupOperationStub<T>(Func<T, string> valueFunction)
                     */
                 }
 

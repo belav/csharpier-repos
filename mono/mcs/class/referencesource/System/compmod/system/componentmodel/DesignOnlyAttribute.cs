@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -23,7 +23,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignOnlyAttribute'/> class.
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignOnlyAttribute'/>
+        // class.
         ///    </para>
         /// </devdoc>
         public DesignOnlyAttribute(bool isDesignOnly)
@@ -62,7 +63,9 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Specifies the default value for the <see cref='System.ComponentModel.DesignOnlyAttribute'/>, which is <see cref='System.ComponentModel.DesignOnlyAttribute.No'/>. This <see langword='static'/> field is
+        ///       Specifies the default value for the <see
+        // cref='System.ComponentModel.DesignOnlyAttribute'/>, which is <see
+        // cref='System.ComponentModel.DesignOnlyAttribute.No'/>. This <see langword='static'/> field is
         ///       read-only.
         ///    </para>
         /// </devdoc>

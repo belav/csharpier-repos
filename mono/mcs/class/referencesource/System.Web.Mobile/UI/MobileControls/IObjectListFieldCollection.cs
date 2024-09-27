@@ -15,15 +15,16 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Object List Field Collection interface. This provides a read-only base
-     * interface for the real object list field collection class, and is used when
-     * read-only access to a field collection is desired.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Object List Field Collection interface. This provides a read-only base
+* interface for the real object list field collection class, and is used when
+* read-only access to a field collection is desired.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection"]/*' />
+    /// <include file='doc\IObjectListFieldCollection.uex'
+    // path='docs/doc[@for="IObjectListFieldCollection"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -37,18 +38,22 @@ namespace System.Web.UI.MobileControls
     )]
     public interface IObjectListFieldCollection : ICollection
     {
-        /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection.GetAll"]/*' />
+        /// <include file='doc\IObjectListFieldCollection.uex'
+        // path='docs/doc[@for="IObjectListFieldCollection.GetAll"]/*' />
         ObjectListField[] GetAll();
 
-        /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection.this"]/*' />
+        /// <include file='doc\IObjectListFieldCollection.uex'
+        // path='docs/doc[@for="IObjectListFieldCollection.this"]/*' />
 
         ObjectListField this[int index] { get; }
 
-        /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection.IndexOf"]/*' />
+        /// <include file='doc\IObjectListFieldCollection.uex'
+        // path='docs/doc[@for="IObjectListFieldCollection.IndexOf"]/*' />
 
         int IndexOf(ObjectListField field);
 
-        /// <include file='doc\IObjectListFieldCollection.uex' path='docs/doc[@for="IObjectListFieldCollection.IndexOf1"]/*' />
+        /// <include file='doc\IObjectListFieldCollection.uex'
+        // path='docs/doc[@for="IObjectListFieldCollection.IndexOf1"]/*' />
         int IndexOf(String fieldIDOrTitle);
     }
 }

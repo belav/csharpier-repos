@@ -23,7 +23,8 @@ namespace System.Web.UI.WebControls
         public ControlParameter() { }
 
         /// <devdoc>
-        /// Creates an instance of the ControlParameter class with the specified parameter name and control ID.
+        /// Creates an instance of the ControlParameter class with the specified parameter name and control
+        // ID.
         /// </devdoc>
         public ControlParameter(string name, string controlID)
             : base(name)
@@ -32,7 +33,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the ControlParameter class with the specified parameter name, control ID, and property name.
+        /// Creates an instance of the ControlParameter class with the specified parameter name, control ID,
+        // and property name.
         /// </devdoc>
         public ControlParameter(string name, string controlID, string propertyName)
             : base(name)
@@ -42,7 +44,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the ControlParameter class with the specified parameter name, database type,
+        /// Creates an instance of the ControlParameter class with the specified parameter name, database
+        // type,
         /// control ID, and property name.
         /// </devdoc>
         public ControlParameter(string name, DbType dbType, string controlID, string propertyName)
@@ -53,7 +56,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the ControlParameter class with the specified parameter name, type, control ID, and property name.
+        /// Creates an instance of the ControlParameter class with the specified parameter name, type,
+        // control ID, and property name.
         /// </devdoc>
         public ControlParameter(string name, TypeCode type, string controlID, string propertyName)
             : base(name, type)
@@ -104,7 +108,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// The name of the control's property to get the value from.
-        /// If none is specified, the ControlValueProperty attribute of the control will be examined to determine the default property name.
+        /// If none is specified, the ControlValueProperty attribute of the control will be examined to
+        // determine the default property name.
         /// </devdoc>
         [
             DefaultValue(""),
@@ -171,7 +176,8 @@ namespace System.Web.UI.WebControls
             ControlValuePropertyAttribute controlValueProp = (ControlValuePropertyAttribute)
                 TypeDescriptor.GetAttributes(foundControl)[typeof(ControlValuePropertyAttribute)];
 
-            // If no property name is specified, use the ControlValuePropertyAttribute to determine which property to use.
+            // If no property name is specified, use the ControlValuePropertyAttribute to determine which
+            // property to use.
             if (propertyName.Length == 0)
             {
                 if ((controlValueProp != null) && (!String.IsNullOrEmpty(controlValueProp.Name)))
@@ -189,7 +195,8 @@ namespace System.Web.UI.WebControls
             // Get the value of the property
             object value = DataBinder.Eval(foundControl, propertyName);
 
-            // Convert the value to null if this is the default property and the value is the property's default value
+            // Convert the value to null if this is the default property and the value is the property's default
+            // value
             if (
                 controlValueProp != null
                 && String.Equals(

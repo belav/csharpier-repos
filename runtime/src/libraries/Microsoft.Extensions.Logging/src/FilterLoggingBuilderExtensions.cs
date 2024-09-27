@@ -38,7 +38,8 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the filter to.</param>
         /// <param name="categoryLevelFilter">The filter to be added.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddFilter<T>(
             this ILoggingBuilder builder,
@@ -63,7 +64,8 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the filter to.</param>
         /// <param name="levelFilter">The filter to be added.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddFilter<T>(
             this ILoggingBuilder builder,
@@ -91,7 +93,8 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the filter to.</param>
         /// <param name="category">The category to filter.</param>
         /// <param name="level">The level to filter.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddFilter<T>(
             this ILoggingBuilder builder,
@@ -120,7 +123,8 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the filter to.</param>
         /// <param name="category">The category to filter.</param>
         /// <param name="levelFilter">The filter function to apply.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddFilter<T>(
             this ILoggingBuilder builder,
@@ -146,7 +150,8 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="LoggerFilterOptions"/> to add the filter to.</param>
         /// <param name="categoryLevelFilter">The filter function to apply.</param>
-        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be chained.</returns>
+        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be
+        // chained.</returns>
         public static LoggerFilterOptions AddFilter(
             this LoggerFilterOptions builder,
             Func<string?, LogLevel, bool> categoryLevelFilter
@@ -157,8 +162,10 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="LoggerFilterOptions"/> to add the filter to.</param>
         /// <param name="categoryLevelFilter">The filter function to apply.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
-        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be chained.</returns>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
+        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be
+        // chained.</returns>
         public static LoggerFilterOptions AddFilter<T>(
             this LoggerFilterOptions builder,
             Func<string?, LogLevel, bool> categoryLevelFilter
@@ -175,7 +182,8 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="LoggerFilterOptions"/> to add the filter to.</param>
         /// <param name="levelFilter">The filter function to apply.</param>
-        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be chained.</returns>
+        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be
+        // chained.</returns>
         public static LoggerFilterOptions AddFilter(
             this LoggerFilterOptions builder,
             Func<LogLevel, bool> levelFilter
@@ -186,8 +194,10 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="LoggerFilterOptions"/> to add the filter to.</param>
         /// <param name="levelFilter">The filter function to apply.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
-        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be chained.</returns>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
+        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be
+        // chained.</returns>
         public static LoggerFilterOptions AddFilter<T>(
             this LoggerFilterOptions builder,
             Func<LogLevel, bool> levelFilter
@@ -205,7 +215,8 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="LoggerFilterOptions"/> to add the filter to.</param>
         /// <param name="category">The category to filter.</param>
         /// <param name="level">The level to filter.</param>
-        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be chained.</returns>
+        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be
+        // chained.</returns>
         public static LoggerFilterOptions AddFilter(
             this LoggerFilterOptions builder,
             string? category,
@@ -218,8 +229,10 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="LoggerFilterOptions"/> to add the filter to.</param>
         /// <param name="category">The category to filter.</param>
         /// <param name="level">The level to filter.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
-        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be chained.</returns>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
+        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be
+        // chained.</returns>
         public static LoggerFilterOptions AddFilter<T>(
             this LoggerFilterOptions builder,
             string? category,
@@ -234,7 +247,8 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="LoggerFilterOptions"/> to add the filter to.</param>
         /// <param name="category">The category to filter.</param>
         /// <param name="levelFilter">The filter function to apply.</param>
-        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be chained.</returns>
+        /// <returns>The <see cref="LoggerFilterOptions"/> so that additional calls can be
+        // chained.</returns>
         public static LoggerFilterOptions AddFilter(
             this LoggerFilterOptions builder,
             string? category,
@@ -248,7 +262,8 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the filter to.</param>
         /// <param name="category">The category to filter.</param>
         /// <param name="levelFilter">The filter function to apply.</param>
-        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added for.</typeparam>
+        /// <typeparam name="T">The <see cref="ILoggerProvider"/> which this filter will be added
+        // for.</typeparam>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static LoggerFilterOptions AddFilter<T>(
             this LoggerFilterOptions builder,

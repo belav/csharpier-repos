@@ -151,7 +151,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                                 if (hasSeenEncryptedInfo)
                                 {
                                     // We will process at most one encryptedData ContentInfo. This is the most typical scenario where
-                                    // certificates are stored in an encryptedData ContentInfo, and keys are shrouded in a data ContentInfo.
+                                    // certificates are stored in an encryptedData ContentInfo, and keys are shrouded in a data
+                                    // ContentInfo.
                                     throw new CryptographicException(
                                         SR.Cryptography_Der_Invalid_Encoding
                                     );
@@ -266,7 +267,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                 encryptedData.EncryptedContentInfo.ContentEncryptionAlgorithm
             );
 
-            // This encryptData is encrypted with more rounds than we are willing to process. Bail out of the whole thing.
+            // This encryptData is encrypted with more rounds than we are willing to process. Bail out of the
+            // whole thing.
             if (iterations > MaxIterationWork)
             {
                 throw new X509IterationCountExceededException();
@@ -292,7 +294,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                         destination
                     );
 
-                    // When padding happens to be as expected (false-positive), we can detect gibberish and prevent unexpected failures later
+                    // When padding happens to be as expected (false-positive), we can detect gibberish and prevent
+                    // unexpected failures later
                     // This extra check makes it so it's very unlikely we'll end up with false positive.
                     AsnValueReader outerSafeBag = new AsnValueReader(
                         destination.AsSpan(0, written),

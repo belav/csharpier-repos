@@ -50,8 +50,10 @@ namespace System.Xml.Serialization.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        // Supply a type converter, even though it's a plain type converter, to get around ConfigurationProperty's internal
-        // Enum conversion routine.  The internal one is case-sensitive, we want this to be case-insensitive.
+        // Supply a type converter, even though it's a plain type converter, to get around
+        // ConfigurationProperty's internal
+        // Enum conversion routine.  The internal one is case-sensitive, we want this to be
+        // case-insensitive.
         readonly ConfigurationProperty checkDeserializeAdvances = new ConfigurationProperty(
             ConfigurationStrings.CheckDeserializeAdvances,
             typeof(bool),

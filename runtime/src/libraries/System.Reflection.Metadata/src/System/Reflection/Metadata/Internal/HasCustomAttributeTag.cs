@@ -33,7 +33,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal const uint MethodSpec = 0x00000015;
         internal const uint TagMask = 0x0000001F;
 
-        // Arbitrary value not equal to any of the token types in the array. This includes 0 which is TokenTypeIds.Module.
+        // Arbitrary value not equal to any of the token types in the array. This includes 0 which is
+        // TokenTypeIds.Module.
         internal const uint InvalidTokenType = uint.MaxValue;
 
         internal static ReadOnlySpan<uint> TagToTokenTypeArray =>

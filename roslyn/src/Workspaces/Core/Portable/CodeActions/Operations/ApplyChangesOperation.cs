@@ -22,12 +22,16 @@ namespace Microsoft.CodeAnalysis.CodeActions
     /// <see cref="ApplyChangesOperation"/>s, but if a <see cref="CodeAction"/> requires custom
     /// host behavior not supported by a single <see cref="ApplyChangesOperation"/>, then instead:
     /// <list type="bullet">
-    /// <description><text>Implement a custom <see cref="CodeAction"/> and <see cref="CodeActionOperation"/>s</text></description>
-    /// <description><text>Do not return any <see cref="ApplyChangesOperation"/> from <see cref="CodeAction.GetOperationsAsync(CancellationToken)"/></text></description>
+    /// <description><text>Implement a custom <see cref="CodeAction"/> and <see
+    // cref="CodeActionOperation"/>s</text></description>
+    /// <description><text>Do not return any <see cref="ApplyChangesOperation"/> from <see
+    // cref="CodeAction.GetOperationsAsync(CancellationToken)"/></text></description>
     /// <description><text>Directly apply any workspace edits</text></description>
     /// <description><text>Handle any custom host behavior</text></description>
-    /// <description><text>Produce a preview for <see cref="CodeAction.GetPreviewOperationsAsync(CancellationToken)"/>
-    ///   by creating a custom <see cref="PreviewOperation"/> or returning a single <see cref="ApplyChangesOperation"/>
+    /// <description><text>Produce a preview for <see
+    // cref="CodeAction.GetPreviewOperationsAsync(CancellationToken)"/>
+    ///   by creating a custom <see cref="PreviewOperation"/> or returning a single <see
+    // cref="ApplyChangesOperation"/>
     ///   to use the built-in preview mechanism</text></description>
     /// </list>
     /// </summary>
@@ -83,16 +87,23 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 return result;
             }
 
-            // Otherwise, we need to see what changes were actually made and see if we can apply them.  The general rules are:
+            // Otherwise, we need to see what changes were actually made and see if we can apply them.  The
+            // general rules are:
             //
-            // 1. we only support text changes when doing merges.  Any other changes to projects/documents are not
-            //    supported because it's very unclear what impact they may have wrt other workspace updates that have
+            // 1. we only support text changes when doing merges.  Any other changes to projects/documents are
+            // not
+            //    supported because it's very unclear what impact they may have wrt other workspace updates that
+            // have
             //    already happened.
             //
-            // 2. For text changes, we only support it if the current text of the document we're changing itself has not
-            //    changed. This means we can merge in edits if there were changes to unrelated files, but not if there
-            //    are changes to the current file.  We could consider relaxing this in the future, esp. if we make use
-            //    of some sort of text-merging-library to handle this.  However, the user would then have to handle diff
+            // 2. For text changes, we only support it if the current text of the document we're changing itself
+            // has not
+            //    changed. This means we can merge in edits if there were changes to unrelated files, but not if
+            // there
+            //    are changes to the current file.  We could consider relaxing this in the future, esp. if we
+            // make use
+            //    of some sort of text-merging-library to handle this.  However, the user would then have to
+            // handle diff
             //    markers being inserted into their code that they then have to handle.
 
             var solutionChanges = changedSolution.GetChanges(originalSolution);
@@ -111,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 return false;
             }
 
-            // Take the actual current solution the workspace is pointing to and fork it with just the text changes the
+            // Take the actual current solution the workspace is pointing to and fork it with just the text
+            // changes the
             // code action wanted to make.  Then apply that fork back into the workspace.
             var forkedSolution = currentSolution;
 

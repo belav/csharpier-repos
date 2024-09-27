@@ -1809,7 +1809,8 @@ namespace System.Security.AccessControl
 
         //
         // The following access mask bits in object aces may refer to an objectType that
-        // identifies the property set, property, extended right, or type of child object to which the ACE applies
+        // identifies the property set, property, extended right, or type of child object to which the ACE
+        // applies
         //
         //    ADS_RIGHT_DS_CREATE_CHILD = 0x1,
         //    ADS_RIGHT_DS_DELETE_CHILD = 0x2,

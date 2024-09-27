@@ -61,7 +61,8 @@ public class WorkspaceProjectFactoryServiceTests
         );
         await batch.ApplyAsync(CancellationToken.None);
 
-        // Verify it actually did something; we won't exclusively test each method since those are tested at lower layers
+        // Verify it actually did something; we won't exclusively test each method since those are tested at
+        // lower layers
         var project = workspaceFactory.Workspace.CurrentSolution.Projects.Single();
         Assert.Equal(sourceFilePath, project.Documents.Single().FilePath);
         Assert.Equal(additionalFilePath, project.AdditionalDocuments.Single().FilePath);

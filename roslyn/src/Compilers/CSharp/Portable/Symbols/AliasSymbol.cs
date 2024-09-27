@@ -34,15 +34,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// following APIs may produce a result that contains an AliasSymbol:
     /// <pre>
     ///     SemanticInfo SemanticModel.GetSemanticInfo(ExpressionSyntax expression);
-    ///     SemanticInfo SemanticModel.BindExpression(CSharpSyntaxNode location, ExpressionSyntax expression);
+    ///     SemanticInfo SemanticModel.BindExpression(CSharpSyntaxNode location, ExpressionSyntax
+    // expression);
     ///     SemanticInfo SemanticModel.BindType(CSharpSyntaxNode location, ExpressionSyntax type);
-    ///     SemanticInfo SemanticModel.BindNamespaceOrType(CSharpSyntaxNode location, ExpressionSyntax type);
+    ///     SemanticInfo SemanticModel.BindNamespaceOrType(CSharpSyntaxNode location, ExpressionSyntax
+    // type);
     /// </pre>
     /// Also, the following are affected if container==null (and, for the latter, when arity==null
     /// or arity==0):
     /// <pre>
-    ///     IList&lt;string&gt; SemanticModel.LookupNames(CSharpSyntaxNode location, NamespaceOrTypeSymbol container = null, LookupOptions options = LookupOptions.Default, List&lt;string> result = null);
-    ///     IList&lt;Symbol&gt; SemanticModel.LookupSymbols(CSharpSyntaxNode location, NamespaceOrTypeSymbol container = null, string name = null, int? arity = null, LookupOptions options = LookupOptions.Default, List&lt;Symbol> results = null);
+    ///     IList&lt;string&gt; SemanticModel.LookupNames(CSharpSyntaxNode location,
+    // NamespaceOrTypeSymbol container = null, LookupOptions options = LookupOptions.Default,
+    // List&lt;string> result = null);
+    ///     IList&lt;Symbol&gt; SemanticModel.LookupSymbols(CSharpSyntaxNode location,
+    // NamespaceOrTypeSymbol container = null, string name = null, int? arity = null, LookupOptions options
+    // = LookupOptions.Default, List&lt;Symbol> results = null);
     /// </pre>
     /// </summary>
     internal abstract class AliasSymbol : Symbol
@@ -68,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _containingSymbol = containingSymbol;
         }
 
-        // For the purposes of SemanticModel, it is convenient to have an AliasSymbol for the "global" namespace that "global::" binds
+        // For the purposes of SemanticModel, it is convenient to have an AliasSymbol for the "global"
+        // namespace that "global::" binds
         // to. This alias symbol is returned only when binding "global::" (special case code).
         internal static AliasSymbol CreateGlobalNamespaceAlias(NamespaceSymbol globalNamespace)
         {
@@ -183,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal sealed override ObsoleteAttributeData? ObsoleteAttributeData
         {
@@ -352,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Debug.Assert(won, "Only one thread can win the alias target CompareExchange");
 
                     _state.NotePartComplete(CompletionPart.AliasTarget);
-                    // we do not clear this.aliasTargetName, as another thread might be about to use it for ResolveAliasTarget(...)
+                    // we do not clear this.aliasTargetName, as another thread might be about to use it for
+                    // ResolveAliasTarget(...)
                 }
                 else
                 {
@@ -423,8 +432,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                // Prior to C#12, allow the alias to be an unsafe region.  This allows us to maintain compat with prior
-                // versions of the compiler that allowed `using X = List<int*[]>` to be written.  In 12.0 and onwards
+                // Prior to C#12, allow the alias to be an unsafe region.  This allows us to maintain compat with
+                // prior
+                // versions of the compiler that allowed `using X = List<int*[]>` to be written.  In 12.0 and
+                // onwards
                 // though, we require the code to explicitly contain the `unsafe` keyword.
                 if (!DeclaringCompilation.IsFeatureEnabled(MessageID.IDS_FeatureUsingTypeAlias))
                     flags |= BinderFlags.UnsafeRegion;

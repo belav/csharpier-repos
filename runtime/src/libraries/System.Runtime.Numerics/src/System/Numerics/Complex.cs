@@ -51,11 +51,13 @@ namespace System.Numerics
 
         private const double InverseOfLog10 = 0.43429448190325; // 1 / Log(10)
 
-        // This is the largest x for which (Hypot(x,x) + x) will not overflow. It is used for branching inside Sqrt.
+        // This is the largest x for which (Hypot(x,x) + x) will not overflow. It is used for branching
+        // inside Sqrt.
         private static readonly double s_sqrtRescaleThreshold =
             double.MaxValue / (Math.Sqrt(2.0) + 1.0);
 
-        // This is the largest x for which 2 x^2 will not overflow. It is used for branching inside Asin and Acos.
+        // This is the largest x for which 2 x^2 will not overflow. It is used for branching inside Asin and
+        // Acos.
         private static readonly double s_asinOverflowThreshold = Math.Sqrt(double.MaxValue) / 2.0;
 
         // This value is used inside Asin and Acos.
@@ -252,7 +254,8 @@ namespace System.Numerics
             double c = right.m_real;
             double d = right.m_imaginary;
 
-            // Computing c * c + d * d will overflow even in cases where the actual result of the division does not overflow.
+            // Computing c * c + d * d will overflow even in cases where the actual result of the division does
+            // not overflow.
             if (Math.Abs(d) < Math.Abs(c))
             {
                 double doc = d / c;
@@ -301,7 +304,8 @@ namespace System.Numerics
             double c = right.m_real;
             double d = right.m_imaginary;
 
-            // Computing c * c + d * d will overflow even in cases where the actual result of the division does not overflow.
+            // Computing c * c + d * d will overflow even in cases where the actual result of the division does
+            // not overflow.
             if (Math.Abs(d) < Math.Abs(c))
             {
                 double doc = d / c;
@@ -451,16 +455,20 @@ namespace System.Numerics
 
         public static Complex Sin(Complex value)
         {
-            // We need both sinh and cosh of imaginary part. To avoid multiple calls to Math.Exp with the same value,
+            // We need both sinh and cosh of imaginary part. To avoid multiple calls to Math.Exp with the same
+            // value,
             // we compute them both here from a single call to Math.Exp.
             double p = Math.Exp(value.m_imaginary);
             double q = 1.0 / p;
             double sinh = (p - q) * 0.5;
             double cosh = (p + q) * 0.5;
             return new Complex(Math.Sin(value.m_real) * cosh, Math.Cos(value.m_real) * sinh);
-            // There is a known limitation with this algorithm: inputs that cause sinh and cosh to overflow, but for
-            // which sin or cos are small enough that sin * cosh or cos * sinh are still representable, nonetheless
-            // produce overflow. For example, Sin((0.01, 711.0)) should produce (~3.0E306, PositiveInfinity), but
+            // There is a known limitation with this algorithm: inputs that cause sinh and cosh to overflow, but
+            // for
+            // which sin or cos are small enough that sin * cosh or cos * sinh are still representable,
+            // nonetheless
+            // produce overflow. For example, Sin((0.01, 711.0)) should produce (~3.0E306, PositiveInfinity),
+            // but
             // instead produces (PositiveInfinity, PositiveInfinity).
         }
 
@@ -602,6 +610,7 @@ namespace System.Numerics
             // This method for the inverse complex sine (and cosine) is described in Hull, Fairgrieve,
             // and Tang, "Implementing the Complex Arcsine and Arccosine Functions Using Exception Handling",
             // ACM Transactions on Mathematical Software (1997)
+            //
             // (https://www.researchgate.net/profile/Ping_Tang3/publication/220493330_Implementing_the_Complex_Arcsine_and_Arccosine_Functions_Using_Exception_Handling/links/55b244b208ae9289a085245d.pdf)
 
             // First, the basics: start with sin(w) = (e^{iw} - e^{-iw}) / (2i) = z. Here z is the input
@@ -618,14 +627,16 @@ namespace System.Numerics
             //   arccos(w) = arccos(beta) - i sign(y) log(alpha + sqrt(alpha^2 - 1))
             // So alpha and beta together give us arcsin(w) and arccos(w).
 
-            // As written, alpha is not susceptible to cancelation errors, but beta is. To avoid cancelation, note
+            // As written, alpha is not susceptible to cancelation errors, but beta is. To avoid cancelation,
+            // note
             //   beta = (rho^2 - sigma^2) / (rho + sigma) / 2 = (2 x) / (rho + sigma) = x / alpha
             // which is not subject to cancelation. Note alpha >= 1 and |beta| <= 1.
 
             // For alpha ~ 1, the argument of the log is near unity, so we compute (alpha - 1) instead,
             // write the argument as 1 + (alpha - 1) + sqrt((alpha - 1)(alpha + 1)), and use the log1p function
             // to compute the log without loss of accuracy.
-            // For beta ~ 1, arccos does not accurately resolve small angles, so we compute the tangent of the angle
+            // For beta ~ 1, arccos does not accurately resolve small angles, so we compute the tangent of the
+            // angle
             // instead.
             // Hull, Fairgrieve, and Tang derive formulas for (alpha - 1) and beta' = tan(u) that do not suffer
             // from cancelation in these cases.
@@ -781,7 +792,8 @@ namespace System.Numerics
             // All this reduces our total cost to two sqrts and a few flops, and it respects the desired
             // symmetries. Much better than atan + cos + sin!
 
-            // The signs are a matter of choice of branch cut, which is traditionally taken so x > 0 and sign(y) = sign(b).
+            // The signs are a matter of choice of branch cut, which is traditionally taken so x > 0 and sign(y)
+            // = sign(b).
 
             // If the components are too large, Hypot will overflow, even though the subsequent sqrt would
             // make the result representable. To avoid this, we re-scale (by exact powers of 2 for accuracy)
@@ -879,7 +891,8 @@ namespace System.Numerics
             return new Complex((double)value, 0.0);
         }
 
-        /// <summary>Explicitly converts a <see cref="Int128" /> value to a double-precision complex number.</summary>
+        /// <summary>Explicitly converts a <see cref="Int128" /> value to a double-precision complex
+        // number.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a double-precision complex number.</returns>
         public static explicit operator Complex(Int128 value)
@@ -892,7 +905,8 @@ namespace System.Numerics
             return new Complex((double)value, 0.0);
         }
 
-        /// <summary>Explicitly converts a <see cref="UInt128" /> value to a double-precision complex number.</summary>
+        /// <summary>Explicitly converts a <see cref="UInt128" /> value to a double-precision complex
+        // number.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a double-precision complex number.</returns>
         [CLSCompliant(false)]
@@ -910,7 +924,8 @@ namespace System.Numerics
             return new Complex(value, 0.0);
         }
 
-        /// <summary>Implicitly converts a <see cref="char" /> value to a double-precision complex number.</summary>
+        /// <summary>Implicitly converts a <see cref="char" /> value to a double-precision complex
+        // number.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a double-precision complex number.</returns>
         public static implicit operator Complex(char value)
@@ -923,7 +938,8 @@ namespace System.Numerics
             return new Complex(value, 0.0);
         }
 
-        /// <summary>Implicitly converts a <see cref="Half" /> value to a double-precision complex number.</summary>
+        /// <summary>Implicitly converts a <see cref="Half" /> value to a double-precision complex
+        // number.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a double-precision complex number.</returns>
         public static implicit operator Complex(Half value)
@@ -946,7 +962,8 @@ namespace System.Numerics
             return new Complex(value, 0.0);
         }
 
-        /// <summary>Implicitly converts a <see cref="IntPtr" /> value to a double-precision complex number.</summary>
+        /// <summary>Implicitly converts a <see cref="IntPtr" /> value to a double-precision complex
+        // number.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a double-precision complex number.</returns>
         public static implicit operator Complex(nint value)
@@ -983,7 +1000,8 @@ namespace System.Numerics
             return new Complex(value, 0.0);
         }
 
-        /// <summary>Implicitly converts a <see cref="UIntPtr" /> value to a double-precision complex number.</summary>
+        /// <summary>Implicitly converts a <see cref="UIntPtr" /> value to a double-precision complex
+        // number.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a double-precision complex number.</returns>
         [CLSCompliant(false)]
@@ -1553,7 +1571,8 @@ namespace System.Numerics
             return y;
         }
 
-        /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{char}, NumberStyles, IFormatProvider?)" />
+        /// <inheritdoc cref="INumberBase{TSelf}.Parse(ReadOnlySpan{char}, NumberStyles, IFormatProvider?)"
+        // />
         public static Complex Parse(
             ReadOnlySpan<char> s,
             NumberStyles style,
@@ -2263,7 +2282,8 @@ namespace System.Numerics
             }
         }
 
-        /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{char}, NumberStyles, IFormatProvider?, out TSelf)" />
+        /// <inheritdoc cref="INumberBase{TSelf}.TryParse(ReadOnlySpan{char}, NumberStyles,
+        // IFormatProvider?, out TSelf)" />
         public static bool TryParse(
             ReadOnlySpan<char> s,
             NumberStyles style,
@@ -2383,7 +2403,8 @@ namespace System.Numerics
             }
         }
 
-        /// <inheritdoc cref="INumberBase{TSelf}.TryParse(string, NumberStyles, IFormatProvider?, out TSelf)" />
+        /// <inheritdoc cref="INumberBase{TSelf}.TryParse(string, NumberStyles, IFormatProvider?, out
+        // TSelf)" />
         public static bool TryParse(
             [NotNullWhen(true)] string? s,
             NumberStyles style,
@@ -2425,7 +2446,8 @@ namespace System.Numerics
         // ISpanFormattable
         //
 
-        /// <inheritdoc cref="ISpanFormattable.TryFormat(Span{char}, out int, ReadOnlySpan{char}, IFormatProvider?)" />
+        /// <inheritdoc cref="ISpanFormattable.TryFormat(Span{char}, out int, ReadOnlySpan{char},
+        // IFormatProvider?)" />
         public bool TryFormat(
             Span<char> destination,
             out int charsWritten,
@@ -2520,7 +2542,8 @@ namespace System.Numerics
         public static Complex Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
             Parse(s, DefaultNumberStyle, provider);
 
-        /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
+        /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out
+        // TSelf)" />
         public static bool TryParse(
             ReadOnlySpan<char> s,
             IFormatProvider? provider,

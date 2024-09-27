@@ -33,7 +33,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v2 - Schemas with null on non empty collection without schemas without ns", Priority = 0)]
+        //[Variation(Desc = "v2 - Schemas with null on non empty collection without schemas without ns",
+        // Priority = 0)]
         [Fact]
         public void v2()
         {
@@ -48,7 +49,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v3 - Schemas with null on non empty collection with schemas without ns", Priority = 0)]
+        //[Variation(Desc = "v3 - Schemas with null on non empty collection with schemas without ns",
+        // Priority = 0)]
         [Fact]
         public void v3()
         {
@@ -63,7 +65,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v4 - Schemas on non empty collection with existing ns, all members of ICollection")]
+        //[Variation(Desc = "v4 - Schemas on non empty collection with existing ns, all members of
+        // ICollection")]
         [Fact]
         public void v4()
         {
@@ -103,7 +106,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v6 - Schemas on non empty collection with null ns,call Schemas,Edit check all members of ICollection")]
+        //[Variation(Desc = "v6 - Schemas on non empty collection with null ns,call Schemas,Edit check all
+        // members of ICollection")]
         [Fact]
         public void v6()
         {

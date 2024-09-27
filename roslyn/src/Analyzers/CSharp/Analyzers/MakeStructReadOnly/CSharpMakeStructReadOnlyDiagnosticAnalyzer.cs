@@ -57,7 +57,8 @@ internal sealed class CSharpMakeStructReadOnlyDiagnosticAnalyzer
                     )
                         return;
 
-                    // Looks good.  However, we have to make sure that the struct has no code which actually overwrites 'this'
+                    // Looks good.  However, we have to make sure that the struct has no code which actually overwrites
+                    // 'this'
 
                     var writesToThis = false;
                     context.RegisterSyntaxNodeAction(

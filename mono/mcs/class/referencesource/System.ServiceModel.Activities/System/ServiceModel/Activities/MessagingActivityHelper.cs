@@ -142,15 +142,18 @@ namespace System.ServiceModel.Activities
         }
 
         // both receive and send initialize correlations using this method
-        // if selectHandle is not null, we first try to initalize instanceKey with it , else we try to initalize the ambient handle
-        // if ambient handle is not used for initializing instance key , we might use it for initalizing  queryCorrelationsInitalizer.
+        // if selectHandle is not null, we first try to initalize instanceKey with it , else we try to
+        // initalize the ambient handle
+        // if ambient handle is not used for initializing instance key , we might use it for initalizing
+        // queryCorrelationsInitalizer.
 
         // SelectHandle usage:
         // Receive: selectHandle is the correlatesWith handle
         // SendReply: in case of context based correlation, this is the context handle
         // Send: in case of context based correlation, this will be the callback handle
         // ReceiveReply: selectHandle will be always null
-        // Note that only Receive can initialize a content based correlation with a selectHandle (parallel convoy)
+        // Note that only Receive can initialize a content based correlation with a selectHandle (parallel
+        // convoy)
         internal static void InitializeCorrelationHandles(
             NativeActivityContext context,
             CorrelationHandle selectHandle,

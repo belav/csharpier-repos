@@ -42,7 +42,8 @@ namespace System.Data.Mapping.Update.Internal
         private readonly PropagatorResult m_originalValues;
         private readonly PropagatorResult m_currentValues;
 
-        // When it is not possible to order two commands based on their contents, we assign an 'ordering identifier'
+        // When it is not possible to order two commands based on their contents, we assign an 'ordering
+        // identifier'
         // so that one will consistently precede the other.
         private static int s_orderingIdentifierCounter;
         private int m_orderingIdentifier;
@@ -208,8 +209,10 @@ namespace System.Data.Mapping.Update.Internal
         /// Executes the current update command.
         /// </summary>
         /// <param name="translator">Translator context.</param>
-        /// <param name="connection">EntityConnection to use (and implicitly, the EntityTransaction to use).</param>
-        /// <param name="identifierValues">Aggregator for identifier values (read for InputIdentifiers; write for
+        /// <param name="connection">EntityConnection to use (and implicitly, the EntityTransaction to
+        // use).</param>
+        /// <param name="identifierValues">Aggregator for identifier values (read for InputIdentifiers;
+        // write for
         /// OutputIdentifiers</param>
         /// <param name="generatedValues">Aggregator for server generated values.</param>
         /// <returns>Number of rows affected by the command.</returns>
@@ -226,24 +229,33 @@ namespace System.Data.Mapping.Update.Internal
         internal abstract int CompareToType(UpdateCommand other);
 
         /// <summary>
-        /// Provides a suggested ordering between two commands. Ensuring a consistent ordering is important to avoid deadlocks
-        /// between two clients because it means locks are acquired in the same order where possible. The ordering criteria are as
-        /// follows (and are partly implemented in the CompareToType method). In some cases there are specific secondary
-        /// reasons for the order (e.g. operator kind), but for the most case we just care that a consistent ordering
+        /// Provides a suggested ordering between two commands. Ensuring a consistent ordering is important
+        // to avoid deadlocks
+        /// between two clients because it means locks are acquired in the same order where possible. The
+        // ordering criteria are as
+        /// follows (and are partly implemented in the CompareToType method). In some cases there are
+        // specific secondary
+        /// reasons for the order (e.g. operator kind), but for the most case we just care that a consistent
+        // ordering
         /// is applied:
         ///
         /// - The kind of command (dynamic or function). This is an arbitrary criteria.
-        /// - The kind of operator (insert, update, delete). See <see cref="ModificationOperator"/> for details of the ordering.
+        /// - The kind of operator (insert, update, delete). See <see cref="ModificationOperator"/> for
+        // details of the ordering.
         /// - The target of the modification (table for dynamic, set for function).
         /// - Primary key for the modification (table key for dynamic, entity keys for function).
         ///
-        /// If it is not possible to differentiate between two commands (e.g., where the user is inserting entities with server-generated
-        /// primary keys and has not given explicit values), arbitrary ordering identifiers are assigned to the commands to
-        /// ensure CompareTo is well-behaved (doesn't return 0 for different commands and suggests consistent ordering).
+        /// If it is not possible to differentiate between two commands (e.g., where the user is inserting
+        // entities with server-generated
+        /// primary keys and has not given explicit values), arbitrary ordering identifiers are assigned to
+        // the commands to
+        /// ensure CompareTo is well-behaved (doesn't return 0 for different commands and suggests
+        // consistent ordering).
         /// </summary>
         public int CompareTo(UpdateCommand other)
         {
-            // If the commands are the same (by reference), return 0 immediately. Otherwise, we try to find (and eventually
+            // If the commands are the same (by reference), return 0 immediately. Otherwise, we try to find (and
+            // eventually
             // force) an ordering between them by returning a value that is non-zero.
             if (this.Equals(other))
             {
@@ -262,7 +274,8 @@ namespace System.Data.Mapping.Update.Internal
             {
                 return result;
             }
-            // if the commands are indistinguishable, assign arbitrary identifiers to them to ensure consistent ordering
+            // if the commands are indistinguishable, assign arbitrary identifiers to them to ensure consistent
+            // ordering
             unchecked
             {
                 if (this.m_orderingIdentifier == 0)

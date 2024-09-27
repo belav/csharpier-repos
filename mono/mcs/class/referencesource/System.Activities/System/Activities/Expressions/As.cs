@@ -20,8 +20,10 @@ namespace System.Activities.Expressions
     )]
     public sealed class As<TOperand, TResult> : CodeActivity<TResult>
     {
-        //Lock is not needed for operationFunction here. The reason is that delegates for a given As<TLeft, TRight, TResult> are the same.
-        //It's possible that 2 threads are assigning the operationFucntion at the same time. But it's okay because the compiled codes are the same.
+        //Lock is not needed for operationFunction here. The reason is that delegates for a given As<TLeft,
+        // TRight, TResult> are the same.
+        //It's possible that 2 threads are assigning the operationFucntion at the same time. But it's okay
+        // because the compiled codes are the same.
         static Func<TOperand, TResult> operationFunction;
 
         [RequiredArgument]

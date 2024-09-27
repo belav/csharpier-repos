@@ -158,7 +158,8 @@ namespace Mono.AppleTls
     enum SslCipherSuite : ushort
     {
 #endif
-        // DO NOT RENAME VALUES - they don't look good but we need them to keep compatibility with our System.dll code
+        // DO NOT RENAME VALUES - they don't look good but we need them to keep compatibility with our
+        // System.dll code
         // it's how it's defined across most SSL/TLS implementation (from RFC)
 
         SSL_NULL_WITH_NULL_NULL = 0x0000, // value used before (not after) negotiation

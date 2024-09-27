@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,8 @@ namespace Mono.Linker.Tests.Tests
         }
 
         /// <summary>
-        /// Virtual to allow creation of a derived test suite for a different expectations assembly, or multiple
+        /// Virtual to allow creation of a derived test suite for a different expectations assembly, or
+        // multiple
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerable<NPath> ExpectationAssemblies()
@@ -87,11 +89,13 @@ namespace Mono.Linker.Tests.Tests
             if (type.IsEnum)
                 return true;
 
-            // Attributes are OK because that is the purpose of the Expectations assembly, to provide attributes for annotating test cases
+            // Attributes are OK because that is the purpose of the Expectations assembly, to provide attributes
+            // for annotating test cases
             if (IsAttributeType(type))
                 return true;
 
-            // Anything else is not OK and should probably be defined in Mono.Linker.Tests.Cases and use SandboxDependency in order to be included
+            // Anything else is not OK and should probably be defined in Mono.Linker.Tests.Cases and use
+            // SandboxDependency in order to be included
             // with the tests that need it
             return false;
         }

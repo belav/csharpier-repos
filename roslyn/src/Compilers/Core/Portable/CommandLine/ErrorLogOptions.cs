@@ -7,7 +7,8 @@ using System;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Options controlling the generation of a SARIF log file containing compilation or analyzer diagnostics.
+    /// Options controlling the generation of a SARIF log file containing compilation or analyzer
+    // diagnostics.
     /// </summary>
     public sealed class ErrorLogOptions
     {

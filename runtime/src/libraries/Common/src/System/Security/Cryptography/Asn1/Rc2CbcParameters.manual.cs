@@ -8,7 +8,8 @@ namespace System.Security.Cryptography.Asn1
     //
     // The RFC3370 structure is the second CHOICE option for RC2-CBCParameter (it has no name).
     // Since 3370 says to just use that alternative there's no fallback in this code for handling
-    // just an IV which means that an effective key size of 32-bits has been chosen.  Since 40-bit is the
+    // just an IV which means that an effective key size of 32-bits has been chosen.  Since 40-bit is
+    // the
     // smallest supported by .NET that's not really a problem.
     internal partial struct Rc2CbcParameters
     {

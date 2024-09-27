@@ -11,12 +11,14 @@ using System.Runtime.CompilerServices;
 
 namespace System.Text.Json
 {
-    // TODO: Replace the escaping logic with publicly shipping APIs from https://github.com/dotnet/runtime/issues/27919
+    // TODO: Replace the escaping logic with publicly shipping APIs from
+    // https://github.com/dotnet/runtime/issues/27919
     internal static partial class JsonWriterHelper
     {
         // Only allow ASCII characters between ' ' (0x20) and '~' (0x7E), inclusively,
         // but exclude characters that need to be escaped as hex: '"', '\'', '&', '+', '<', '>', '`'
-        // and exclude characters that need to be escaped by adding a backslash: '\n', '\r', '\t', '\\', '\b', '\f'
+        // and exclude characters that need to be escaped by adding a backslash: '\n', '\r', '\t', '\\',
+        // '\b', '\f'
         //
         // non-zero = allowed, 0 = disallowed
         public const int LastAsciiCharacter = 0x7F;
@@ -150,7 +152,8 @@ namespace System.Text.Json
                 1,
                 1,
                 0, // U+0070..U+007F
-                // Also include the ranges from U+0080 to U+00FF for performance to avoid UTF8 code from checking boundary.
+                // Also include the ranges from U+0080 to U+00FF for performance to avoid UTF8 code from checking
+                // boundary.
                 0,
                 0,
                 0,

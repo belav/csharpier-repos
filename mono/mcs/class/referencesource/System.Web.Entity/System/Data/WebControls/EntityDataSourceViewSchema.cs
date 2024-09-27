@@ -54,7 +54,8 @@ namespace System.Web.UI.WebControls
             : this(results, null) { }
 
         /// <summary>
-        /// Creates a view schema with a set of typed results and an optional set of keyName properties on those results
+        /// Creates a view schema with a set of typed results and an optional set of keyName properties on
+        // those results
         /// </summary>
         internal EntityDataSourceViewSchema(IEnumerable results, string[] keyNames)
         {

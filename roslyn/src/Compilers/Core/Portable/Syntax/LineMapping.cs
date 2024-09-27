@@ -10,7 +10,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Represents a line mapping defined by a single line mapping directive (<c>#line</c> in C# or <c>#ExternalSource</c> in VB).
+    /// Represents a line mapping defined by a single line mapping directive (<c>#line</c> in C# or
+    // <c>#ExternalSource</c> in VB).
     /// </summary>
     public readonly struct LineMapping : IEquatable<LineMapping>
     {
@@ -20,14 +21,18 @@ namespace Microsoft.CodeAnalysis
         public readonly LinePositionSpan Span { get; }
 
         /// <summary>
-        /// The optional offset in the syntax tree for the line immediately following an enhanced <c>#line</c> directive in C#.
+        /// The optional offset in the syntax tree for the line immediately following an enhanced
+        // <c>#line</c> directive in C#.
         /// </summary>
         public readonly int? CharacterOffset { get; }
 
         /// <summary>
-        /// If the line mapping directive maps the span into an explicitly specified file the <see cref="FileLinePositionSpan.HasMappedPath"/> is true.
-        /// If the path is not mapped <see cref="FileLinePositionSpan.Path"/> is empty and <see cref="FileLinePositionSpan.HasMappedPath"/> is false.
-        /// If the line mapping directive marks hidden code <see cref="FileLinePositionSpan.IsValid"/> is false.
+        /// If the line mapping directive maps the span into an explicitly specified file the <see
+        // cref="FileLinePositionSpan.HasMappedPath"/> is true.
+        /// If the path is not mapped <see cref="FileLinePositionSpan.Path"/> is empty and <see
+        // cref="FileLinePositionSpan.HasMappedPath"/> is false.
+        /// If the line mapping directive marks hidden code <see cref="FileLinePositionSpan.IsValid"/> is
+        // false.
         /// </summary>
         public readonly FileLinePositionSpan MappedSpan { get; }
 

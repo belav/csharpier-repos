@@ -38,11 +38,13 @@ namespace System.Linq.Parallel
         /// </summary>
         internal static PlinqEtwProvider Log = new PlinqEtwProvider();
 
-        /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
+        /// <summary>Prevent external instantiation.  All logging should go through the Log
+        // instance.</summary>
         private PlinqEtwProvider() { }
 
         /// <summary>Cached id for the default scheduler.</summary>
-        /// <remarks>If PLINQ ever supports other schedulers, that information will need to be passed into the query events.</remarks>
+        /// <remarks>If PLINQ ever supports other schedulers, that information will need to be passed into
+        // the query events.</remarks>
         private static readonly int s_defaultSchedulerId = TaskScheduler.Default.Id;
 
         /// <summary>Static counter used to generate unique IDs</summary>
@@ -110,7 +112,8 @@ namespace System.Linq.Parallel
         /// Denotes the entry point for a PLINQ query, and declares the fork/join context ID
         /// which will be shared by subsequent events fired by tasks that service this query
         /// </summary>
-        /// <param name="taskSchedulerId">The ID of the task scheduler to which the query is scheduled.</param>
+        /// <param name="taskSchedulerId">The ID of the task scheduler to which the query is
+        // scheduled.</param>
         /// <param name="taskId">The ID of the task starting the query; 0 if there is no task.</param>
         /// <param name="queryId">The ID of the query.</param>
         [Event(
@@ -143,7 +146,8 @@ namespace System.Linq.Parallel
         /// <summary>
         /// Denotes the end of PLINQ query that was declared previously with the same query ID.
         /// </summary>
-        /// <param name="taskSchedulerId">The ID of the task scheduler to which the query was scheduled.</param>
+        /// <param name="taskSchedulerId">The ID of the task scheduler to which the query was
+        // scheduled.</param>
         /// <param name="taskId">The ID of the task ending the query; 0 if there is no task.</param>
         /// <param name="queryId">The ID of the query.</param>
         [Event(
@@ -180,7 +184,8 @@ namespace System.Linq.Parallel
         /// Before this event is fired, the query ID must have been declared with a
         /// ParallelQueryBegin event.
         /// </summary>
-        /// <param name="taskSchedulerId">The ID of the task scheduler to which the task was scheduled.</param>
+        /// <param name="taskSchedulerId">The ID of the task scheduler to which the task was
+        // scheduled.</param>
         /// <param name="taskId">The ID of the task joining the query.</param>
         /// <param name="queryId">The ID of the query.</param>
         [Event(
@@ -215,7 +220,8 @@ namespace System.Linq.Parallel
         /// Denotes the end of an individual task that serviced a parallel query.
         /// This should match a previous ParallelQueryFork event with a matching query ID.
         /// </summary>
-        /// <param name="taskSchedulerId">The ID of the task scheduler to which the task was scheduled.</param>
+        /// <param name="taskSchedulerId">The ID of the task scheduler to which the task was
+        // scheduled.</param>
         /// <param name="taskId">The ID of the task joining the query.</param>
         /// <param name="queryId">The ID of the query.</param>
         [Event(

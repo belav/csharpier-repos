@@ -1418,7 +1418,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 o.Events.OnValidatePrincipal = c =>
                 {
                     // https://github.com/aspnet/Security/issues/1607
-                    // On sliding refresh the transformed principal should not be serialized into the cookie, only the original principal.
+                    // On sliding refresh the transformed principal should not be serialized into the cookie, only the
+                    // original principal.
                     Assert.Single(c.Principal.Identities);
                     Assert.True(c.Principal.Identities.First().HasClaim("marker", "true"));
                     return Task.CompletedTask;

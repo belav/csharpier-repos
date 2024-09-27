@@ -2398,7 +2398,8 @@ internal static class ReflectionTest
                 throw new Exception();
             }
 #else
-            // If reflection from usage is not active, we shouldn't even see the owning type, despite the field use
+            // If reflection from usage is not active, we shouldn't even see the owning type, despite the field
+            // use
             if (SecretGetType(nameof(TestFieldMetadata), nameof(ClassWithTwoFields)) != null)
             {
                 throw new Exception();

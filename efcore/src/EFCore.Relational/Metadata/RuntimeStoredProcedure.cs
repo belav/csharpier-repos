@@ -7,10 +7,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
 {
@@ -27,7 +31,8 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     /// <param name="entityType">The mapped entity type.</param>
     /// <param name="name">The name.</param>
     /// <param name="schema">The schema.</param>
-    /// <param name="rowsAffectedReturned">Whether this stored procedure returns the number of rows affected.</param>
+    /// <param name="rowsAffectedReturned">Whether this stored procedure returns the number of rows
+    // affected.</param>
     public RuntimeStoredProcedure(
         RuntimeEntityType entityType,
         string name,
@@ -75,7 +80,8 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     }
 
     /// <summary>
-    ///     Adds a new column of the result for this stored procedure mapped to the property with the given name
+    ///     Adds a new column of the result for this stored procedure mapped to the property with the
+    // given name
     /// </summary>
     /// <param name="name">The name of the result column.</param>
     /// <param name="forRowsAffected">Whether the column holds the rows affected.</param>
@@ -97,19 +103,27 @@ public class RuntimeStoredProcedure : AnnotatableBase, IRuntimeStoredProcedure
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override string ToString() =>
         ((IStoredProcedure)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual DebugView DebugView =>

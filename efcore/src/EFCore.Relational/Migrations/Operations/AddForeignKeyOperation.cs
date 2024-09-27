@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     A <see cref="MigrationOperation" /> to add a new foreign key.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 [DebuggerDisplay("ALTER TABLE {Table} ADD CONSTRAINT {Name} FOREIGN KEY")]
 public class AddForeignKeyOperation : MigrationOperation, ITableMigrationOperation
@@ -18,7 +19,8 @@ public class AddForeignKeyOperation : MigrationOperation, ITableMigrationOperati
     public virtual string Name { get; set; } = null!;
 
     /// <summary>
-    ///     The schema that contains the table, or <see langword="null" /> if the default schema should be used.
+    ///     The schema that contains the table, or <see langword="null" /> if the default schema should
+    // be used.
     /// </summary>
     public virtual string? Schema { get; set; }
 
@@ -44,7 +46,8 @@ public class AddForeignKeyOperation : MigrationOperation, ITableMigrationOperati
     public virtual string PrincipalTable { get; set; } = null!;
 
     /// <summary>
-    ///     The ordered-list of column names for the columns to which the columns that make up this foreign key are constrained, or
+    ///     The ordered-list of column names for the columns to which the columns that make up this
+    // foreign key are constrained, or
     ///     <see langword="null" /> to constrain to the primary key columns.
     /// </summary>
     public virtual string[]? PrincipalColumns { get; set; }

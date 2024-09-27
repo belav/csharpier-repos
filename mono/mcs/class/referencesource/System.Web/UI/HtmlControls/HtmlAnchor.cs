@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlAnchor.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlAnchor.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -34,12 +34,13 @@ namespace System.Web.UI.HtmlControls
     {
         private static readonly object EventServerClick = new object();
 
-        /*
-         *  Creates an intrinsic Html A control.
-         */
+/*
+*  Creates an intrinsic Html A control.
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/>
+        // class.</para>
         /// </devdoc>
         public HtmlAnchor()
             : base("a") { }
@@ -55,9 +56,9 @@ namespace System.Web.UI.HtmlControls
             set { ViewState["CausesValidation"] = value; }
         }
 
-        /*
-         * Href property.
-         */
+/*
+* Href property.
+*/
 
         /// <devdoc>
         ///    <para>Gets or sets the URL target of the link specified in the
@@ -80,12 +81,13 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["href"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Name of group this radio is in.
-         */
+/*
+* Name of group this radio is in.
+*/
 
         /// <devdoc>
-        /// <para>Gets or sets the bookmark name defined in the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/>
+        /// <para>Gets or sets the bookmark name defined in the <see
+        // cref='System.Web.UI.HtmlControls.HtmlAnchor'/>
         /// server
         /// control.</para>
         /// </devdoc>
@@ -104,9 +106,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["name"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Target window property.
-         */
+/*
+* Target window property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -130,9 +132,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["target"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Title property.
-         */
+/*
+* Title property.
+*/
 
         /// <devdoc>
         ///    <para> Gets or sets the title that
@@ -170,7 +172,8 @@ namespace System.Web.UI.HtmlControls
         }
 
         /// <devdoc>
-        /// <para>Occurs on the server when a user clicks the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/> control on the
+        /// <para>Occurs on the server when a user clicks the <see
+        // cref='System.Web.UI.HtmlControls.HtmlAnchor'/> control on the
         ///    browser.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.HtmlControl_OnServerClick)]
@@ -210,9 +213,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Override to generate postback code for onclick.
-         */
+/*
+* Override to generate postback code for onclick.
+*/
 
         /// <internalonly/>
         /// <devdoc>
@@ -241,9 +244,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Method used to raise the OnServerClick event.
-         */
+/*
+* Method used to raise the OnServerClick event.
+*/
 
         /// <devdoc>
         /// <para>Raises the <see langword='ServerClick'/>
@@ -256,10 +259,10 @@ namespace System.Web.UI.HtmlControls
                 handler(this, e);
         }
 
-        /*
-         * Method of IPostBackEventHandler interface to raise events on post back.
-         * Button fires an OnServerClick event.
-         */
+/*
+* Method of IPostBackEventHandler interface to raise events on post back.
+* Button fires an OnServerClick event.
+*/
 
         /// <internalonly/>
         /// <devdoc>

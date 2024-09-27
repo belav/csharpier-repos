@@ -28,7 +28,7 @@ namespace DefaultNamespace
                 GC.Collect();
             }
             return 457444902;
-            /* 7 operator(s) emitted */
+/* 7 operator(s) emitted */
         }
     }
 
@@ -51,7 +51,7 @@ namespace DefaultNamespace
             else
                 local2 = BB.m_static1;
             return 49548;
-            /* 6 operator(s) emitted */
+/* 6 operator(s) emitted */
         }
 
         [Fact]

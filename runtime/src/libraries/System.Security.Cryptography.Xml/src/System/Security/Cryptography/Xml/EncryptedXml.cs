@@ -461,7 +461,8 @@ namespace System.Security.Cryptography.Xml
                         {
                             throw new CryptographicException(SR.Cryptography_Xml_MissingAlgorithm);
                         }
-                        // kek is either a SymmetricAlgorithm or an RSA key, otherwise, we wouldn't be able to insert it in the hash table
+                        // kek is either a SymmetricAlgorithm or an RSA key, otherwise, we wouldn't be able to insert it in
+                        // the hash table
                         if (kek is SymmetricAlgorithm)
                             return EncryptedXml.DecryptKey(
                                 encryptedKey.CipherData.CipherValue,
@@ -645,7 +646,8 @@ namespace System.Security.Cryptography.Xml
                 ek.EncryptionMethod = new EncryptionMethod(EncryptedXml.XmlEncRSA15Url);
                 ek.KeyInfo.AddClause(new KeyInfoX509Data(certificate));
 
-                // Create a random AES session key and encrypt it with the public key associated with the certificate.
+                // Create a random AES session key and encrypt it with the public key associated with the
+                // certificate.
                 using (Aes aes = Aes.Create())
                 {
                     ek.CipherData.CipherValue = EncryptedXml.EncryptKey(
@@ -695,7 +697,8 @@ namespace System.Security.Cryptography.Xml
             if (encryptionKey == null)
                 throw new CryptographicException(SR.Cryptography_Xml_MissingEncryptionKey);
 
-            // kek is either a SymmetricAlgorithm or an RSA key, otherwise, we wouldn't be able to insert it in the hash table
+            // kek is either a SymmetricAlgorithm or an RSA key, otherwise, we wouldn't be able to insert it in
+            // the hash table
             SymmetricAlgorithm symKey = (encryptionKey as SymmetricAlgorithm)!;
             RSA rsa = (encryptionKey as RSA)!;
 
@@ -744,7 +747,8 @@ namespace System.Security.Cryptography.Xml
             ek.EncryptionMethod = new EncryptionMethod(encryptionMethod);
             ek.KeyInfo.AddClause(new KeyInfoName(keyName));
 
-            // Create a random AES session key and encrypt it with the public key associated with the certificate.
+            // Create a random AES session key and encrypt it with the public key associated with the
+            // certificate.
             using (Aes aes = Aes.Create())
             {
                 ek.CipherData.CipherValue = (
@@ -982,7 +986,8 @@ namespace System.Security.Cryptography.Xml
                     parent.AppendChild(dummy);
 
                     // Replace the children of the dummy node with the sequence of bytes passed in.
-                    // The string will be parsed into DOM objects in the context of the parent of the EncryptedData element.
+                    // The string will be parsed into DOM objects in the context of the parent of the EncryptedData
+                    // element.
                     dummy.InnerXml = _encoding.GetString(decryptedData);
 
                     // Move the children of the dummy node up to the parent.

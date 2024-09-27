@@ -7,7 +7,8 @@ namespace MS.Internal.Xml.XPath
 {
     internal abstract class ResettableIterator : XPathNodeIterator
     {
-        // the best place for this constructors to be is XPathNodeIterator, to avoid DCR at this time let's ground them here
+        // the best place for this constructors to be is XPathNodeIterator, to avoid DCR at this time let's
+        // ground them here
         public ResettableIterator()
         {
             base.count = -1;

@@ -991,7 +991,8 @@ struct Outer
             Assert.Equal(0, comp.GetDeclarationDiagnostics().Count());
             comp.GetMethodBodyDiagnostics()
                 .Verify(
-                    // (10,21): error CS0120: An object reference is required for the non-static field, method, or property 'Outer.f1'
+                    // (10,21): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'Outer.f1'
                     //             var x = f1 - 1;
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "f1")
                         .WithArguments("Outer.f1")
@@ -1033,7 +1034,8 @@ class Program
             var comp = CreateCompilation(tree);
             comp.GetMethodBodyDiagnostics()
                 .Verify(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'D.explicit operator D(Goo)' and 'D.implicit operator D(Action)' when converting from 'method group' to 'D'
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'D.explicit operator D(Goo)' and
+                    // 'D.implicit operator D(Action)' when converting from 'method group' to 'D'
                     //          D d = (D) Main;
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "(D) Main")
                         .WithArguments(

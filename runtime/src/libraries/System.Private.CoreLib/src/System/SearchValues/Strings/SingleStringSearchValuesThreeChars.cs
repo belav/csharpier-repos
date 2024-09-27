@@ -13,7 +13,8 @@ namespace System.Buffers
 {
     // Based on SpanHelpers.IndexOf(ref char, int, ref char, int)
     // This implementation uses 3 precomputed anchor points when searching.
-    // This implementation may also be used for length=2 values, in which case two anchors point at the same position.
+    // This implementation may also be used for length=2 values, in which case two anchors point at the
+    // same position.
     // Has an O(i * m) worst-case, with the expected time closer to O(n) for most inputs.
     internal sealed class SingleStringSearchValuesThreeChars<TCaseSensitivity>
         : StringSearchValuesBase
@@ -34,7 +35,8 @@ namespace System.Buffers
         public SingleStringSearchValuesThreeChars(HashSet<string>? uniqueValues, string value)
             : base(uniqueValues)
         {
-            // We could have more than one entry in 'uniqueValues' if this value is an exact prefix of all the others.
+            // We could have more than one entry in 'uniqueValues' if this value is an exact prefix of all the
+            // others.
             Debug.Assert(value.Length > 1);
 
             CharacterFrequencyHelper.GetSingleStringMultiCharacterOffsets(
@@ -151,7 +153,8 @@ namespace System.Buffers
                             return -1;
                         }
 
-                        // We have fewer than 32 characters remaining. Adjust the input position such that we will do one last loop iteration.
+                        // We have fewer than 32 characters remaining. Adjust the input position such that we will do one
+                        // last loop iteration.
                         searchSpace = ref lastSearchSpace;
                     }
 
@@ -239,7 +242,8 @@ namespace System.Buffers
                             return -1;
                         }
 
-                        // We have fewer than 16 characters remaining. Adjust the input position such that we will do one last loop iteration.
+                        // We have fewer than 16 characters remaining. Adjust the input position such that we will do one
+                        // last loop iteration.
                         searchSpace = ref lastSearchSpace;
                     }
 
@@ -324,7 +328,8 @@ namespace System.Buffers
                             return -1;
                         }
 
-                        // We have fewer than 8 characters remaining. Adjust the input position such that we will do one last loop iteration.
+                        // We have fewer than 8 characters remaining. Adjust the input position such that we will do one
+                        // last loop iteration.
                         searchSpace = ref lastSearchSpace;
                     }
 
@@ -356,7 +361,8 @@ namespace System.Buffers
             {
                 ref char cur = ref Unsafe.Add(ref searchSpace, i);
 
-                // CaseInsensitiveUnicode doesn't support single-character transformations, so we skip checking the first character first.
+                // CaseInsensitiveUnicode doesn't support single-character transformations, so we skip checking the
+                // first character first.
                 if (
                     (
                         typeof(TCaseSensitivity) == typeof(CaseInsensitiveUnicode)
@@ -382,7 +388,8 @@ namespace System.Buffers
         )
         {
             // Load 3 vectors from the input.
-            // One from the current search space, the other two at an offset based on the distance of those characters from the first one.
+            // One from the current search space, the other two at an offset based on the distance of those
+            // characters from the first one.
             if (typeof(TCaseSensitivity) == typeof(CaseSensitive))
             {
                 Vector128<ushort> cmpCh1 = Vector128.Equals(
@@ -407,8 +414,10 @@ namespace System.Buffers
             else
             {
                 // For each, AND the value with ~0x20 so that letters are uppercased.
-                // For characters that aren't ASCII letters, this may produce wrong results, but only false-positives.
-                // We will take care of those in the verification step if the other characters also indicate a possible match.
+                // For characters that aren't ASCII letters, this may produce wrong results, but only
+                // false-positives.
+                // We will take care of those in the verification step if the other characters also indicate a
+                // possible match.
                 Vector128<ushort> caseConversion = Vector128.Create(CaseConversionMask);
 
                 Vector128<ushort> cmpCh1 = Vector128.Equals(
@@ -427,7 +436,8 @@ namespace System.Buffers
                         .LoadUnsafe(ref Unsafe.As<char, byte>(ref searchSpace), ch3ByteOffset)
                         .AsUInt16() & caseConversion
                 );
-                // AND all 3 together to get a mask of possible match positions that likely match in at least 3 places.
+                // AND all 3 together to get a mask of possible match positions that likely match in at least 3
+                // places.
                 return (cmpCh1 & cmpCh2 & cmpCh3).AsByte();
             }
         }

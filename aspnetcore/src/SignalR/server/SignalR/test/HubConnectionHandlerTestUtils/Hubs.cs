@@ -869,7 +869,8 @@ public class StreamingHub : TestHub
 
         public override bool TryRead(out T item)
         {
-            // Not implemented to verify this is consumed as an IAsyncEnumerable<T> instead of a ChannelReader<T>.
+            // Not implemented to verify this is consumed as an IAsyncEnumerable<T> instead of a
+            // ChannelReader<T>.
             throw new NotImplementedException();
         }
 
@@ -877,7 +878,8 @@ public class StreamingHub : TestHub
             CancellationToken cancellationToken = default
         )
         {
-            // Not implemented to verify this is consumed as an IAsyncEnumerable<T> instead of a ChannelReader<T>.
+            // Not implemented to verify this is consumed as an IAsyncEnumerable<T> instead of a
+            // ChannelReader<T>.
             throw new NotImplementedException();
         }
 

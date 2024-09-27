@@ -268,7 +268,8 @@ namespace ICSharpCode.SharpZipLib.Tar
 
             if (this.debug)
             {
-                //Console.WriteLine.WriteLine("TarInputStream: SKIP currENTRY '" + this.currEntry.Name + "' SZ " + this.entrySize + " OFF " + this.entryOffset + "  skipping " + numToSkip + " bytes");
+                //Console.WriteLine.WriteLine("TarInputStream: SKIP currENTRY '" + this.currEntry.Name + "' SZ " +
+                // this.entrySize + " OFF " + this.entryOffset + "  skipping " + numToSkip + " bytes");
             }
 
             if (numToSkip > 0)
@@ -453,7 +454,8 @@ namespace ICSharpCode.SharpZipLib.Tar
 
                     if (this.debug)
                     {
-                        //Console.WriteLine.WriteLine("TarInputStream: SET CURRENTRY '" + this.currEntry.Name + "' size = " + this.currEntry.Size);
+                        //Console.WriteLine.WriteLine("TarInputStream: SET CURRENTRY '" + this.currEntry.Name + "' size = "
+                        // + this.currEntry.Size);
                     }
 
                     this.entryOffset = 0;
@@ -646,16 +648,16 @@ namespace ICSharpCode.SharpZipLib.Tar
 }
 
 /* The original Java file had this header:
-    ** Authored by Timothy Gerard Endres
-    ** <mailto:time@gjt.org>  <http://www.trustice.com>
-    **
-    ** This work has been placed into the public domain.
-    ** You may use this work in any way and for any purpose you wish.
-    **
-    ** THIS SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY OF ANY KIND,
-    ** NOT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY. THE AUTHOR
-    ** OF THIS SOFTWARE, ASSUMES _NO_ RESPONSIBILITY FOR ANY
-    ** CONSEQUENCE RESULTING FROM THE USE, MODIFICATION, OR
-    ** REDISTRIBUTION OF THIS SOFTWARE.
-    **
-    */
+** Authored by Timothy Gerard Endres
+** <mailto:time@gjt.org>  <http://www.trustice.com>
+**
+** This work has been placed into the public domain.
+** You may use this work in any way and for any purpose you wish.
+**
+** THIS SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY OF ANY KIND,
+** NOT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY. THE AUTHOR
+** OF THIS SOFTWARE, ASSUMES _NO_ RESPONSIBILITY FOR ANY
+** CONSEQUENCE RESULTING FROM THE USE, MODIFICATION, OR
+** REDISTRIBUTION OF THIS SOFTWARE.
+**
+*/

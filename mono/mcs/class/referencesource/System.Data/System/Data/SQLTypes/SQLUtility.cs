@@ -240,11 +240,11 @@ namespace System.Data.SqlTypes
             Debug.Assert(condition, conditionString, "");
         }
 
-        /*
-        [System.Diagnostics.Conditional("DEBUG")]
-        internal static void Message(String traceMessage) {
-            Debug.WriteLine(SQLResource.MessageString + ": " + traceMessage);
-        }
-        */
+/*
+[System.Diagnostics.Conditional("DEBUG")]
+internal static void Message(String traceMessage) {
+Debug.WriteLine(SQLResource.MessageString + ": " + traceMessage);
+}
+*/
     } // SQLDebug
 } // namespace System.Data.SqlTypes

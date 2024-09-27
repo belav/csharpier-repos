@@ -8,7 +8,8 @@ using Xunit;
 // Seed: 951014135056301943
 // Reduced from 152.5 KiB to 0.3 KiB in 00:01:22
 // Hits JIT assert in Release:
-// Assertion failed 'ins == INS_add' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Generate code' (IL size 28)
+// Assertion failed 'ins == INS_add' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during
+// 'Generate code' (IL size 28)
 //
 //     File: D:\a\_work\3\s\src\coreclr\jit\emitarm64.cpp Line: 13602
 //

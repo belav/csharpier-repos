@@ -7,12 +7,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
 ///     A convention that configures a property as <see cref="ValueGenerated.OnAdd" /> if
-///     <see cref="DatabaseGeneratedOption.Identity" /> is specified, <see cref="ValueGenerated.OnAddOrUpdate" /> if
-///     <see cref="DatabaseGeneratedOption.Computed" /> is specified or <see cref="ValueGenerated.Never" /> if
-///     <see cref="DatabaseGeneratedOption.None" /> is specified using a <see cref="DatabaseGeneratedAttribute" />.
+///     <see cref="DatabaseGeneratedOption.Identity" /> is specified, <see
+// cref="ValueGenerated.OnAddOrUpdate" /> if
+///     <see cref="DatabaseGeneratedOption.Computed" /> is specified or <see
+// cref="ValueGenerated.Never" /> if
+///     <see cref="DatabaseGeneratedOption.None" /> is specified using a <see
+// cref="DatabaseGeneratedAttribute" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class DatabaseGeneratedAttributeConvention
     : PropertyAttributeConventionBase<DatabaseGeneratedAttribute>

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Page class definition
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Page class definition
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -37,11 +37,12 @@ namespace System.Web.UI
     using Debug = System.Web.Util.Debug;
 
     /*
-     * Base class for Pages and UserControls
-     */
+    * Base class for Pages and UserControls
+    */
 
     /// <devdoc>
-    /// <para>Provides the <see cref='System.Web.UI.Page'/> class and the <see cref='System.Web.UI.UserControl'/> class with a base set of functionality.</para>
+    /// <para>Provides the <see cref='System.Web.UI.Page'/> class and the <see
+    // cref='System.Web.UI.UserControl'/> class with a base set of functionality.</para>
     /// </devdoc>
     public abstract class TemplateControl : Control, INamingContainer, IFilterResolutionService
     {
@@ -196,8 +197,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Receive a no-compile build result that we call during FrameworkInitialize
-         */
+        * Receive a no-compile build result that we call during FrameworkInitialize
+        */
         internal void SetNoCompileBuildResult(
             BuildResultNoCompileTemplateControl noCompileBuildResult
         )
@@ -211,14 +212,15 @@ namespace System.Web.UI
         }
 
         /*
-         * Method sometime overidden by the generated sub classes.  Users
-         * should not override.
-         */
+        * Method sometime overidden by the generated sub classes.  Users
+        * should not override.
+        */
 
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Initializes the requested page. While this is sometimes
-        ///       overridden when the page is generated at runtime, you should not explicitly override this method.</para>
+        ///       overridden when the page is generated at runtime, you should not explicitly override this
+        // method.</para>
         /// </devdoc>
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual void FrameworkInitialize()
@@ -244,9 +246,9 @@ namespace System.Web.UI
         }
 
         /*
-         * This property is overriden by the generated classes (hence it cannot be internal)
-         * If false, we don't do the HookUpAutomaticHandlers() magic.
-         */
+        * This property is overriden by the generated classes (hence it cannot be internal)
+        * If false, we don't do the HookUpAutomaticHandlers() magic.
+        */
 
         /// <internalonly/>
         /// <devdoc>
@@ -259,9 +261,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Returns a pointer to the resource buffer, and the largest valid offset
-         * in the buffer (for security reason)
-         */
+        * Returns a pointer to the resource buffer, and the largest valid offset
+        * in the buffer (for security reason)
+        */
         internal IntPtr StringResourcePointer
         {
             get { return _stringResourcePointer; }
@@ -372,8 +374,8 @@ namespace System.Web.UI
         }
 
         /*
-         * This method is overriden by the generated classes (hence it cannot be internal)
-         */
+        * This method is overriden by the generated classes (hence it cannot be internal)
+        */
 
         /// <internalonly/>
         /// <devdoc>
@@ -950,7 +952,8 @@ namespace System.Web.UI
 #endif
 
         /// <devdoc>
-        /// Used by simplified databinding methods to ensure they can only be called when the control is on a page.
+        /// Used by simplified databinding methods to ensure they can only be called when the control is on
+        // a page.
         /// </devdoc>
         private void CheckPageExists()
         {
@@ -963,8 +966,10 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding Eval() method. This method uses the current data item to evaluate an expression using DataBinder.Eval().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// Simplified databinding Eval() method. This method uses the current data item to evaluate an
+        // expression using DataBinder.Eval().
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal object Eval(string expression)
@@ -974,8 +979,10 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding Eval() method with a format expression. This method uses the current data item to evaluate an expression using DataBinder.Eval().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// Simplified databinding Eval() method with a format expression. This method uses the current data
+        // item to evaluate an expression using DataBinder.Eval().
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal string Eval(string expression, string format)
@@ -985,8 +992,10 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding XPath() method. This method uses the current data item to evaluate an XPath expression using XPathBinder.Eval().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// Simplified databinding XPath() method. This method uses the current data item to evaluate an
+        // XPath expression using XPathBinder.Eval().
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal object XPath(string xPathExpression)
@@ -996,9 +1005,11 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding XPath() method. This method uses the current data item and a namespace resolver
+        /// Simplified databinding XPath() method. This method uses the current data item and a namespace
+        // resolver
         /// to evaluate an XPath expression using XPathBinder.Eval().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal object XPath(string xPathExpression, IXmlNamespaceResolver resolver)
@@ -1008,8 +1019,10 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding XPath() method with a format expression. This method uses the current data item to evaluate an XPath expression using XPathBinder.Eval().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// Simplified databinding XPath() method with a format expression. This method uses the current
+        // data item to evaluate an XPath expression using XPathBinder.Eval().
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal string XPath(string xPathExpression, string format)
@@ -1019,9 +1032,11 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding XPath() method with a format expression. This method uses the current data item and a namespace resolver
+        /// Simplified databinding XPath() method with a format expression. This method uses the current
+        // data item and a namespace resolver
         /// to evaluate an XPath expression using XPathBinder.Eval().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal string XPath(
@@ -1035,8 +1050,10 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding XPathSelect() method. This method uses the current data item to evaluate an XPath expression that returns a node list using XPathBinder.Select().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// Simplified databinding XPathSelect() method. This method uses the current data item to evaluate
+        // an XPath expression that returns a node list using XPathBinder.Select().
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal IEnumerable XPathSelect(string xPathExpression)
@@ -1046,9 +1063,11 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Simplified databinding XPathSelect() method. This method uses the current data item and a namespace resolver
+        /// Simplified databinding XPathSelect() method. This method uses the current data item and a
+        // namespace resolver
         /// to evaluate an XPath expression that returns a node list using XPathBinder.Select().
-        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a property called 'DataItem'.
+        /// The data item is retrieved using either the IDataItemContainer interface or by looking for a
+        // property called 'DataItem'.
         /// If the data item is not found, an exception is thrown.
         /// </devdoc>
         protected internal IEnumerable XPathSelect(

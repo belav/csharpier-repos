@@ -18,10 +18,12 @@ namespace Microsoft.AspNetCore.Builder;
 public static class ControllerEndpointRouteBuilderExtensions
 {
     /// <summary>
-    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> without specifying any routes.
+    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> without
+    // specifying any routes.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
-    /// <returns>An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions.</returns>
+    /// <returns>An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated
+    // with controller actions.</returns>
     public static ControllerActionEndpointConventionBuilder MapControllers(
         this IEndpointRouteBuilder endpoints
     )
@@ -34,12 +36,14 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> and adds the default route
+    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> and adds the
+    // default route
     /// <c>{controller=Home}/{action=Index}/{id?}</c>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
     /// <returns>
-    /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions for this route.
+    /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with
+    // controller actions for this route.
     /// </returns>
     public static ControllerActionEndpointConventionBuilder MapDefaultControllerRoute(
         this IEndpointRouteBuilder endpoints
@@ -60,7 +64,8 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> and specifies a route
+    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> and specifies a
+    // route
     /// with the given <paramref name="name"/>, <paramref name="pattern"/>,
     /// <paramref name="defaults"/>, <paramref name="constraints"/>, and <paramref name="dataTokens"/>.
     /// </summary>
@@ -68,19 +73,23 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// <param name="name">The name of the route.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the
     /// names and values of the default values.
     /// </param>
     /// <param name="constraints">
-    /// An object that contains constraints for the route. The object's properties represent the names and
+    /// An object that contains constraints for the route. The object's properties represent the names
+    // and
     /// values of the constraints.
     /// </param>
     /// <param name="dataTokens">
-    /// An object that contains data tokens for the route. The object's properties represent the names and
+    /// An object that contains data tokens for the route. The object's properties represent the names
+    // and
     /// values of the data tokens.
     /// </param>
     /// <returns>
-    /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions for this route.
+    /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with
+    // controller actions for this route.
     /// </returns>
     public static ControllerActionEndpointConventionBuilder MapControllerRoute(
         this IEndpointRouteBuilder endpoints,
@@ -106,7 +115,8 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> and specifies a route
+    /// Adds endpoints for controller actions to the <see cref="IEndpointRouteBuilder"/> and specifies a
+    // route
     /// with the given <paramref name="name"/>, <paramref name="areaName"/>, <paramref name="pattern"/>,
     /// <paramref name="defaults"/>, <paramref name="constraints"/>, and <paramref name="dataTokens"/>.
     /// </summary>
@@ -115,19 +125,23 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// <param name="areaName">The area name.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the
     /// names and values of the default values.
     /// </param>
     /// <param name="constraints">
-    /// An object that contains constraints for the route. The object's properties represent the names and
+    /// An object that contains constraints for the route. The object's properties represent the names
+    // and
     /// values of the constraints.
     /// </param>
     /// <param name="dataTokens">
-    /// An object that contains data tokens for the route. The object's properties represent the names and
+    /// An object that contains data tokens for the route. The object's properties represent the names
+    // and
     /// values of the data tokens.
     /// </param>
     /// <returns>
-    /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions for this route.
+    /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with
+    // controller actions for this route.
     /// </returns>
     public static ControllerActionEndpointConventionBuilder MapAreaControllerRoute(
         this IEndpointRouteBuilder endpoints,
@@ -163,8 +177,10 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a controller endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // controller endpoint that
     /// matches <paramref name="action"/>, and <paramref name="controller"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
@@ -172,23 +188,31 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// <param name="controller">The controller name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> is intended to handle cases where URL path of
-    /// the request does not contain a file name, and no other endpoint has matched. This is convenient for routing
-    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> is intended to
+    // handle cases where URL path of
+    /// the request does not contain a file name, and no other endpoint has matched. This is convenient
+    // for routing
+    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent
+    // files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> registers an endpoint using the pattern
+    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> registers an
+    // endpoint using the pattern
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the <c>path</c> route value
+    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> does not re-execute
+    // routing, and will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the
+    // <c>path</c> route value
     /// will be available.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> does not attempt to disambiguate between
-    /// multiple actions that match the provided <paramref name="action"/> and <paramref name="controller"/>. If multiple
+    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string)"/> does not attempt to
+    // disambiguate between
+    /// multiple actions that match the provided <paramref name="action"/> and <paramref
+    // name="controller"/>. If multiple
     /// actions match these values, the result is implementation defined.
     /// </para>
     /// </remarks>
@@ -222,8 +246,10 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a controller endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // controller endpoint that
     /// matches <paramref name="action"/>, and <paramref name="controller"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
@@ -232,26 +258,34 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// <param name="controller">The controller name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string, string)"/> is intended to handle cases
-    /// where URL path of the request does not contain a file name, and no other endpoint has matched. This is convenient
-    /// for routing requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string, string)"/> is intended
+    // to handle cases
+    /// where URL path of the request does not contain a file name, and no other endpoint has matched.
+    // This is convenient
+    /// for routing requests for dynamic content to a SPA framework, while also allowing requests for
+    // non-existent files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
     /// The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c> route contraint
+    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c>
+    // route contraint
     /// to exclude requests for static files.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the route values provided by matching
+    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string, string)"/> does not
+    // re-execute routing, and will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the route
+    // values provided by matching
     /// <paramref name="pattern"/> will be available.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string, string)"/> does not attempt to disambiguate between
-    /// multiple actions that match the provided <paramref name="action"/> and <paramref name="controller"/>. If multiple
+    /// <see cref="MapFallbackToController(IEndpointRouteBuilder, string, string, string)"/> does not
+    // attempt to disambiguate between
+    /// multiple actions that match the provided <paramref name="action"/> and <paramref
+    // name="controller"/>. If multiple
     /// actions match these values, the result is implementation defined.
     /// </para>
     /// </remarks>
@@ -287,8 +321,10 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a controller endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // controller endpoint that
     /// matches <paramref name="action"/>, <paramref name="controller"/>, and <paramref name="area"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
@@ -297,23 +333,31 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// <param name="area">The area name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/> is intended to handle cases where URL path of
-    /// the request does not contain a file name, and no other endpoint has matched. This is convenient for routing
-    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/> is
+    // intended to handle cases where URL path of
+    /// the request does not contain a file name, and no other endpoint has matched. This is convenient
+    // for routing
+    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent
+    // files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/> registers an endpoint using the pattern
+    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/>
+    // registers an endpoint using the pattern
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the <c>path</c> route value
+    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/> does
+    // not re-execute routing, and will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the
+    // <c>path</c> route value
     /// will be available.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/> does not attempt to disambiguate between
-    /// multiple actions that match the provided <paramref name="action"/>, <paramref name="controller"/>, and <paramref name="area"/>. If multiple
+    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string)"/> does
+    // not attempt to disambiguate between
+    /// multiple actions that match the provided <paramref name="action"/>, <paramref
+    // name="controller"/>, and <paramref name="area"/>. If multiple
     /// actions match these values, the result is implementation defined.
     /// </para>
     /// </remarks>
@@ -348,8 +392,10 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a controller endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // controller endpoint that
     /// matches <paramref name="action"/>, <paramref name="controller"/>, and <paramref name="area"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
@@ -359,26 +405,34 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// <param name="area">The area name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string, string)"/> is intended to handle
-    /// cases where URL path of the request does not contain a file name, and no other endpoint has matched. This is
-    /// convenient for routing requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string, string)"/>
+    // is intended to handle
+    /// cases where URL path of the request does not contain a file name, and no other endpoint has
+    // matched. This is
+    /// convenient for routing requests for dynamic content to a SPA framework, while also allowing
+    // requests for non-existent files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
     /// The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c> route contraint
+    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c>
+    // route contraint
     /// to exclude requests for static files.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the route values provided by matching
+    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string, string)"/>
+    // does not re-execute routing, and will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the route
+    // values provided by matching
     /// <paramref name="pattern"/> will be available.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string, string)"/> does not attempt to disambiguate between
-    /// multiple actions that match the provided <paramref name="action"/>, <paramref name="controller"/>, and <paramref name="area"/>. If multiple
+    /// <see cref="MapFallbackToAreaController(IEndpointRouteBuilder, string, string, string, string)"/>
+    // does not attempt to disambiguate between
+    /// multiple actions that match the provided <paramref name="action"/>, <paramref
+    // name="controller"/>, and <paramref name="area"/>. If multiple
     /// actions match these values, the result is implementation defined.
     /// </para>
     /// </remarks>
@@ -415,20 +469,26 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will
-    /// attempt to select a controller action using the route values produced by <typeparamref name="TTransformer"/>.
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will
+    /// attempt to select a controller action using the route values produced by <typeparamref
+    // name="TTransformer"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
-    /// <typeparam name="TTransformer">The type of a <see cref="DynamicRouteValueTransformer"/>.</typeparam>
+    /// <typeparam name="TTransformer">The type of a <see
+    // cref="DynamicRouteValueTransformer"/>.</typeparam>
     /// <remarks>
     /// <para>
-    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see cref="DynamicRouteValueTransformer"/>
+    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see
+    // cref="DynamicRouteValueTransformer"/>
     /// that combine to dynamically select a controller action using custom logic.
     /// </para>
     /// <para>
-    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency injection container.
-    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
+    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency
+    // injection container.
+    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in
+    // <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
     public static void MapDynamicControllerRoute<TTransformer>(
@@ -443,21 +503,28 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will
-    /// attempt to select a controller action using the route values produced by <typeparamref name="TTransformer"/>.
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will
+    /// attempt to select a controller action using the route values produced by <typeparamref
+    // name="TTransformer"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
-    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" /> instance.</param>
-    /// <typeparam name="TTransformer">The type of a <see cref="DynamicRouteValueTransformer"/>.</typeparam>
+    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" />
+    // instance.</param>
+    /// <typeparam name="TTransformer">The type of a <see
+    // cref="DynamicRouteValueTransformer"/>.</typeparam>
     /// <remarks>
     /// <para>
-    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see cref="DynamicRouteValueTransformer"/>
+    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see
+    // cref="DynamicRouteValueTransformer"/>
     /// that combine to dynamically select a controller action using custom logic.
     /// </para>
     /// <para>
-    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency injection container.
-    /// Register <typeparamref name="TTransformer"/> as transient in <c>ConfigureServices</c>. Using the transient lifetime
+    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency
+    // injection container.
+    /// Register <typeparamref name="TTransformer"/> as transient in <c>ConfigureServices</c>. Using the
+    // transient lifetime
     /// is required when using <paramref name="state" />.
     /// </para>
     /// </remarks>
@@ -486,22 +553,29 @@ public static class ControllerEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will
-    /// attempt to select a controller action using the route values produced by <typeparamref name="TTransformer"/>.
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will
+    /// attempt to select a controller action using the route values produced by <typeparamref
+    // name="TTransformer"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
-    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" /> instance.</param>
+    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" />
+    // instance.</param>
     /// <param name="order">The matching order for the dynamic route.</param>
-    /// <typeparam name="TTransformer">The type of a <see cref="DynamicRouteValueTransformer"/>.</typeparam>
+    /// <typeparam name="TTransformer">The type of a <see
+    // cref="DynamicRouteValueTransformer"/>.</typeparam>
     /// <remarks>
     /// <para>
-    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see cref="DynamicRouteValueTransformer"/>
+    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see
+    // cref="DynamicRouteValueTransformer"/>
     /// that combine to dynamically select a controller action using custom logic.
     /// </para>
     /// <para>
-    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency injection container.
-    /// Register <typeparamref name="TTransformer"/> as transient in <c>ConfigureServices</c>. Using the transient lifetime
+    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency
+    // injection container.
+    /// Register <typeparamref name="TTransformer"/> as transient in <c>ConfigureServices</c>. Using the
+    // transient lifetime
     /// is required when using <paramref name="state" />.
     /// </para>
     /// </remarks>

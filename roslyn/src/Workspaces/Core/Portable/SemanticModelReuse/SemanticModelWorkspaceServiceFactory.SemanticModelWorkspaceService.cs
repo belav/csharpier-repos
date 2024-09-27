@@ -21,13 +21,15 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
     )
     {
         /// <summary>
-        /// The original <em>non-speculative</em> semantic model we retrieved for this document at some point.
+        /// The original <em>non-speculative</em> semantic model we retrieved for this document at some
+        // point.
         /// </summary>
         public readonly SemanticModel PreviousNonSpeculativeSemanticModel =
             previousNonSpeculativeSemanticModel;
 
         /// <summary>
-        /// The current semantic model we retrieved <see cref="SemanticModel"/> for the <see cref="BodyNode"/>.  Could
+        /// The current semantic model we retrieved <see cref="SemanticModel"/> for the <see
+        // cref="BodyNode"/>.  Could
         /// be speculative or non-speculative.
         /// </summary>
         public readonly SemanticModel CurrentSemanticModel = currentSemanticModel;
@@ -38,7 +40,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         public readonly SyntaxNode BodyNode = bodyNode;
 
         /// <summary>
-        /// The top level version of the project when we retrieved <see cref="SemanticModel"/>.  As long as this is the
+        /// The top level version of the project when we retrieved <see cref="SemanticModel"/>.  As long as
+        // this is the
         /// same we can continue getting speculative models to use.
         /// </summary>
         public readonly VersionStamp TopLevelSemanticVersion = topLevelSementicVersion;
@@ -52,16 +55,21 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             private readonly Workspace _workspace;
 
             /// <summary>
-            /// A mapping from a document id to the last semantic model we produced for it, along with the top level
-            /// semantic version that that semantic model corresponds to.  We can continue reusing the semantic model as
+            /// A mapping from a document id to the last semantic model we produced for it, along with the top
+            // level
+            /// semantic version that that semantic model corresponds to.  We can continue reusing the semantic
+            // model as
             /// long as no top level changes occur.
             /// <para>
-            /// In general this dictionary will only contain a single key-value pair.  However, in the case of linked
-            /// documents, there will be a key-value pair for each of the independent document links that a document
+            /// In general this dictionary will only contain a single key-value pair.  However, in the case of
+            // linked
+            /// documents, there will be a key-value pair for each of the independent document links that a
+            // document
             /// has.
             /// </para>
             /// <para>
-            /// A <see langword="null"/> value simply means we haven't cached any information for that particular id.
+            /// A <see langword="null"/> value simply means we haven't cached any information for that
+            // particular id.
             /// </para>
             /// </summary>
             private ImmutableDictionary<DocumentId, SemanticModelReuseInfo?> _semanticModelMap =
@@ -110,18 +118,24 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                         .GetRequiredSemanticModelAsync(cancellationToken)
                         .ConfigureAwait(false);
 
-                // We were in a method body. Compute the updated map that will contain the appropriate semantic model
+                // We were in a method body. Compute the updated map that will contain the appropriate semantic
+                // model
                 // for this document.
                 //
-                // In terms of concurrency we the map so that we can operate on it independently of other threads.  When
-                // we compute the final map, we'll grab the semantic model out of it to return (which must be correct
-                // since we're the thread that created that map).  Then, we overwrite the instance map with our final
+                // In terms of concurrency we the map so that we can operate on it independently of other threads.
+                // When
+                // we compute the final map, we'll grab the semantic model out of it to return (which must be
+                // correct
+                // since we're the thread that created that map).  Then, we overwrite the instance map with our
+                // final
                 // map. This map may be stomped on by another thread, but that's fine.  We don't have any sort of
-                // ordering requirement. We just want someone to win and place the new map so that it's there for the
+                // ordering requirement. We just want someone to win and place the new map so that it's there for
+                // the
                 // next caller (which is likely to use the same body node).
                 var originalMap = _semanticModelMap;
 
-                // If we already have a cached *real* semantic model for this body, then just provide that. Note: this
+                // If we already have a cached *real* semantic model for this body, then just provide that. Note:
+                // this
                 // is also a requirement as you cannot speculate on a semantic model using a node from that same
                 // semantic model.
                 if (
@@ -142,8 +156,10 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                     )
                     .ConfigureAwait(false);
 
-                // Grab the resultant semantic model and then overwrite the existing map.  We return the semantic model
-                // from the map *we* computed so that we're isolated from other threads writing to the map stored in the
+                // Grab the resultant semantic model and then overwrite the existing map.  We return the semantic
+                // model
+                // from the map *we* computed so that we're isolated from other threads writing to the map stored in
+                // the
                 // field.
                 var info = updatedMap[document.Id]!.Value;
                 var semanticModel = info.CurrentSemanticModel;
@@ -164,13 +180,15 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 var linkedIds = document.GetLinkedDocumentIds();
 
                 // Get the current top level version for this document's project.  If it has changed, then we cannot
-                // reuse any existing cached data for it.  This also ensures that we can do things like find the same
+                // reuse any existing cached data for it.  This also ensures that we can do things like find the
+                // same
                 // method body node prior to an edit just by counting it's top-level index in the file.
                 var topLevelSemanticVersion = await document
                     .Project.GetDependentSemanticVersionAsync(cancellationToken)
                     .ConfigureAwait(false);
 
-                // If we are able to reuse a semantic model, then ensure that this is now the semantic model we're now
+                // If we are able to reuse a semantic model, then ensure that this is now the semantic model we're
+                // now
                 // pointing at for this document.
                 var reuseInfo = await TryReuseCachedSemanticModelAsync(
                         map,
@@ -195,7 +213,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                     SemanticModelReuseInfo?
                 >();
 
-                // Note: we are intentionally storing the semantic model instance in the speculative location as well.
+                // Note: we are intentionally storing the semantic model instance in the speculative location as
+                // well.
                 builder.Add(
                     document.Id,
                     new SemanticModelReuseInfo(
@@ -238,8 +257,10 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 if (reuseInfo.TopLevelSemanticVersion != topLevelSemanticVersion)
                     return null;
 
-                // If multiple callers are asking for the exact same body, they can share the exact same semantic model.
-                // This is valuable when several clients (like completion providers) get called at the same time on the
+                // If multiple callers are asking for the exact same body, they can share the exact same semantic
+                // model.
+                // This is valuable when several clients (like completion providers) get called at the same time on
+                // the
                 // same method body edit.
                 if (reuseInfo.BodyNode == bodyNode)
                     return reuseInfo;

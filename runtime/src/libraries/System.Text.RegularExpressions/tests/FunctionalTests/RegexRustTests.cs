@@ -9,7 +9,8 @@ using Xunit;
 namespace System.Text.RegularExpressions.Tests
 {
     /// <summary>
-    /// These tests were ported from https://github.com/rust-lang/regex/tree/6ff285e37555d4adc52f24e97318681f8a5ecd48/tests
+    /// These tests were ported from
+    // https://github.com/rust-lang/regex/tree/6ff285e37555d4adc52f24e97318681f8a5ecd48/tests
     /// </summary>
     public class RegexRustTests
     {

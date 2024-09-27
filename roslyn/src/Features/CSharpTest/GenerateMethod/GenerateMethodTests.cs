@@ -1456,7 +1456,8 @@ public class GenerateMethodTests(ITestOutputHelper logger)
     public async Task TestGenericAssignmentWithTopLevelNullableReferenceTypeBeingAssignedTo()
     {
         // Here we assert that if the type argument was string, but the return value was string?, we still
-        // make the return value T, and assume the user just wanted to assign it to a nullable value because they
+        // make the return value T, and assume the user just wanted to assign it to a nullable value because
+        // they
         // might be assigning null later in the caller.
         await TestInRegularAndScriptAsync(
             """
@@ -1498,7 +1499,8 @@ public class GenerateMethodTests(ITestOutputHelper logger)
     {
         // Here, we are asserting that the return type of the generated method is T, effectively discarding
         // the difference of nested nullability. Since there's no way to generate a method any other way,
-        // we're assuming this is betetr than inferring that the return type is explicitly IEnumerable<string>
+        // we're assuming this is betetr than inferring that the return type is explicitly
+        // IEnumerable<string>
         await TestInRegularAndScriptAsync(
             """
             #nullable enable

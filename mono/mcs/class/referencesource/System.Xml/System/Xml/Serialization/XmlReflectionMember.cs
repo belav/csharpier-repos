@@ -23,7 +23,8 @@ namespace System.Xml.Serialization
         bool isReturnValue;
         bool overrideIsNullable;
 
-        /// <include file='doc\XmlReflectionMember.uex' path='docs/doc[@for="XmlReflectionMember.MemberType"]/*' />
+        /// <include file='doc\XmlReflectionMember.uex'
+        // path='docs/doc[@for="XmlReflectionMember.MemberType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -33,7 +34,8 @@ namespace System.Xml.Serialization
             set { type = value; }
         }
 
-        /// <include file='doc\XmlReflectionMember.uex' path='docs/doc[@for="XmlReflectionMember.XmlAttributes"]/*' />
+        /// <include file='doc\XmlReflectionMember.uex'
+        // path='docs/doc[@for="XmlReflectionMember.XmlAttributes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -43,7 +45,8 @@ namespace System.Xml.Serialization
             set { xmlAttributes = value; }
         }
 
-        /// <include file='doc\XmlReflectionMember.uex' path='docs/doc[@for="XmlReflectionMember.SoapAttributes"]/*' />
+        /// <include file='doc\XmlReflectionMember.uex'
+        // path='docs/doc[@for="XmlReflectionMember.SoapAttributes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -53,7 +56,8 @@ namespace System.Xml.Serialization
             set { soapAttributes = value; }
         }
 
-        /// <include file='doc\XmlReflectionMember.uex' path='docs/doc[@for="XmlReflectionMember.MemberName"]/*' />
+        /// <include file='doc\XmlReflectionMember.uex'
+        // path='docs/doc[@for="XmlReflectionMember.MemberName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -63,7 +67,8 @@ namespace System.Xml.Serialization
             set { memberName = value; }
         }
 
-        /// <include file='doc\XmlReflectionMember.uex' path='docs/doc[@for="XmlReflectionMember.IsReturnValue"]/*' />
+        /// <include file='doc\XmlReflectionMember.uex'
+        // path='docs/doc[@for="XmlReflectionMember.IsReturnValue"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -73,7 +78,8 @@ namespace System.Xml.Serialization
             set { isReturnValue = value; }
         }
 
-        /// <include file='doc\XmlReflectionMember.uex' path='docs/doc[@for="XmlReflectionMember.OverrideIsNullable"]/*' />
+        /// <include file='doc\XmlReflectionMember.uex'
+        // path='docs/doc[@for="XmlReflectionMember.OverrideIsNullable"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

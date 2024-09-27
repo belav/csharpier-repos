@@ -18,16 +18,21 @@ namespace Microsoft.CodeAnalysis.Remote;
 internal partial class SolutionAssetStorage
 {
     /// <summary>
-    /// Lock over <see cref="_checksumToScope"/>.  Note: We could consider making this a SemaphoreSlim if
-    /// the locking proves to be a problem. However, it would greatly complicate the implementation and consumption
+    /// Lock over <see cref="_checksumToScope"/>.  Note: We could consider making this a SemaphoreSlim
+    // if
+    /// the locking proves to be a problem. However, it would greatly complicate the implementation and
+    // consumption
     /// side due to the pattern around <c>await using</c>.
     /// </summary>
     private readonly object _gate = new();
 
     /// <summary>
-    /// Mapping from operation checksum to the scope for the syncing operation that we've created for it.
-    /// Ref-counted so that if we have many concurrent calls going out from the host to the OOP side that we share
-    /// the same storage here so that all OOP calls can safely call back into us and get the assets they need, even
+    /// Mapping from operation checksum to the scope for the syncing operation that we've created for
+    // it.
+    /// Ref-counted so that if we have many concurrent calls going out from the host to the OOP side
+    // that we share
+    /// the same storage here so that all OOP calls can safely call back into us and get the assets they
+    // need, even
     /// if individual calls get canceled.
     /// </summary>
     private readonly Dictionary<Checksum, Scope> _checksumToScope = new();
@@ -51,7 +56,8 @@ internal partial class SolutionAssetStorage
     }
 
     /// <summary>
-    /// Adds given snapshot into the storage. This snapshot will be available within the returned <see cref="Scope"/>.
+    /// Adds given snapshot into the storage. This snapshot will be available within the returned <see
+    // cref="Scope"/>.
     /// </summary>
     public ValueTask<Scope> StoreAssetsAsync(
         Solution solution,
@@ -114,7 +120,8 @@ internal partial class SolutionAssetStorage
             if (scope.RefCount > 0)
                 return;
 
-            // Last ref went away, update our maps while under the lock, then cleanup its context data outside of the lock.
+            // Last ref went away, update our maps while under the lock, then cleanup its context data outside
+            // of the lock.
             _checksumToScope.Remove(solutionChecksum);
         }
 

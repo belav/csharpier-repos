@@ -344,7 +344,8 @@ namespace System.ServiceModel.Channels
                         sessionFactory.StandardsManager;
                     channelListener.SessionServerSettings.SessionProtocolFactory = sessionFactory;
 
-                    // pass in the error handler for handling unknown security sessions - dont do this if the underlying channel is duplex since sending
+                    // pass in the error handler for handling unknown security sessions - dont do this if the underlying
+                    // channel is duplex since sending
                     // back faults in response to badly secured requests over duplex can result in DoS.
                     if (
                         context.BindingParameters != null
@@ -467,7 +468,8 @@ namespace System.ServiceModel.Channels
                     );
                 }
 
-                // In AllowInsecureTransport mode there is no assertion provider to export the endpoint supporting tokens. Hence we explicitly call into ExportPolicyForTransportTokenAssertionProviders.
+                // In AllowInsecureTransport mode there is no assertion provider to export the endpoint supporting
+                // tokens. Hence we explicitly call into ExportPolicyForTransportTokenAssertionProviders.
                 SecurityBindingElement.ExportPolicyForTransportTokenAssertionProviders(
                     exporter,
                     policyContext

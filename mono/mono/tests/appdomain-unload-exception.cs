@@ -24,7 +24,7 @@ class Driver
         if (!mre.WaitOne(5000))
             Environment.Exit(1);
 
-        /* Wait for exception unwinding */
+/* Wait for exception unwinding */
         Thread.Sleep(500);
     }
 

@@ -645,7 +645,8 @@ namespace System.Web.Util
             return true;
         }
 
-        // Internal class to facilitate URL decoding -- keeps char buffer and byte buffer, allows appending of either chars or bytes
+        // Internal class to facilitate URL decoding -- keeps char buffer and byte buffer, allows appending
+        // of either chars or bytes
         private sealed class UrlDecoder
         {
             private readonly int _bufferSize;
@@ -700,12 +701,12 @@ namespace System.Web.Util
             {
                 // if there are no pending bytes treat 7 bit bytes as characters
                 // this optimization is temp disable as it doesn't work for some encodings
-                /*
-                                if (_numBytes == 0 && ((b & 0x80) == 0)) {
-                                    AddChar((char)b);
-                                }
-                                else
-                */
+/*
+if (_numBytes == 0 && ((b & 0x80) == 0)) {
+AddChar((char)b);
+}
+else
+*/
                 {
                     _byteBuffer ??= new byte[_bufferSize];
 

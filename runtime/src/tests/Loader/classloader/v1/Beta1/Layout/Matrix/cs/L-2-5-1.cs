@@ -208,7 +208,8 @@ struct A
 
             ////////////////////////////////////////////
             // Test access from within the nested class
-            //@todo - Look at testing accessing one nested class from another, @bugug - NEED TO ADD SUCH TESTING, access the public nested class fields from here, etc...
+            //@todo - Look at testing accessing one nested class from another, @bugug - NEED TO ADD SUCH
+            // TESTING, access the public nested class fields from here, etc...
 
             return mi_RetCode;
         }

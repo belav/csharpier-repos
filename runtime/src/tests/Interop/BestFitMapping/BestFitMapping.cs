@@ -360,7 +360,8 @@ public class BestFitMapping
         //Windows
         if (TestLibrary.Utilities.IsWindows)
         {
-            //Since the CoreCLR doesnt support Encoding.ASCII, so i have to hardcode this. or maybe get it from Native SIde
+            //Since the CoreCLR doesnt support Encoding.ASCII, so i have to hardcode this. or maybe get it from
+            // Native SIde
             //This value can be gotten through GetByteForWideChar()
             byte[] b = new byte[1];
             b[0] = GetByteForWideChar();

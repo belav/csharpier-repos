@@ -24,7 +24,8 @@ namespace System.Web.UI
             Debug.Assert(control != null);
             Debug.Assert(type != null);
             Debug.Assert(!String.IsNullOrEmpty(url));
-            // null and empty "key" are treated different by asp.net script duplicate detection so null is allowed.
+            // null and empty "key" are treated different by asp.net script duplicate detection so null is
+            // allowed.
             _scriptType = RegisteredScriptType.ClientScriptInclude;
             _control = control;
             _type = type;
@@ -47,7 +48,8 @@ namespace System.Web.UI
                 "OnSubmitStatements cannot have addScriptTags."
             );
             Debug.Assert(type != null);
-            // null and empty "key" are treated different by asp.net script duplicate detection so null is allowed.
+            // null and empty "key" are treated different by asp.net script duplicate detection so null is
+            // allowed.
             // null script allowed
 
             _scriptType = scriptType;

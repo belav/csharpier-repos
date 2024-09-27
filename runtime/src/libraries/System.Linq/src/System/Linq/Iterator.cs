@@ -87,7 +87,8 @@ namespace System.Linq
             /// <summary>
             /// Retrieves the next item in this iterator and yields it via <see cref="Current"/>.
             /// </summary>
-            /// <returns><c>true</c> if there was another value to be yielded; otherwise, <c>false</c>.</returns>
+            /// <returns><c>true</c> if there was another value to be yielded; otherwise,
+            // <c>false</c>.</returns>
             public abstract bool MoveNext();
 
             /// <summary>

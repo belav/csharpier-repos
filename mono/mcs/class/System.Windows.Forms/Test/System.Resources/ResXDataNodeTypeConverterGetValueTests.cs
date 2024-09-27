@@ -127,7 +127,8 @@ namespace MonoTests.System.Resources
             object obj2 = node.GetValue((AssemblyName[])null); //should cause exception here
         }
 
-        //FIXME: does the way this test is run by NUnit affect the validity of the results showing that you need assembly name to pull type from current assembly?
+        //FIXME: does the way this test is run by NUnit affect the validity of the results showing that you
+        // need assembly name to pull type from current assembly?
         [Test, ExpectedException(typeof(TypeLoadException))]
         public void CantLoadTypeFromThisAssemblyWithOnlyFullName()
         {

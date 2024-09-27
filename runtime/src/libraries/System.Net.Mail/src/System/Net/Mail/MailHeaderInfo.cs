@@ -37,7 +37,8 @@ namespace System.Net.Mail
         // Keep the initializers in sync with the enum above.
         private static readonly HeaderInfo[] s_headerInfo =
         {
-            //             ID                                     NormalizedString             IsSingleton      IsUserSettable      AllowsUnicode
+            //             ID                                     NormalizedString             IsSingleton
+            // IsUserSettable      AllowsUnicode
             new HeaderInfo(MailHeaderID.Bcc, "Bcc", true, false, true),
             new HeaderInfo(MailHeaderID.Cc, "Cc", true, false, true),
             new HeaderInfo(MailHeaderID.Comments, "Comments", false, true, true),

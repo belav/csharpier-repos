@@ -90,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 }
             }
 
-            // This ultimately ends up calling GetOrCreateFileCodeModel(fileName, parent) with the correct "parent" object
+            // This ultimately ends up calling GetOrCreateFileCodeModel(fileName, parent) with the correct
+            // "parent" object
             // through the project system.
             var newFileCodeModel = (EnvDTE80.FileCodeModel2)
                 _codeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(filePath);

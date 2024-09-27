@@ -65,9 +65,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
         {
             /// <summary>
             /// Code action ranges:
-            ///     1. (0 - 4) => Code actions for diagnostic "ID" configuration with severity None, Silent, Suggestion, Warning and Error
-            ///     2. (5 - 9) => Code actions for diagnostic "Category" configuration with severity None, Silent, Suggestion, Warning and Error
-            ///     3. (10 - 14) => Code actions for all analyzer diagnostics configuration with severity None, Silent, Suggestion, Warning and Error
+            ///     1. (0 - 4) => Code actions for diagnostic "ID" configuration with severity None, Silent,
+            // Suggestion, Warning and Error
+            ///     2. (5 - 9) => Code actions for diagnostic "Category" configuration with severity None,
+            // Silent, Suggestion, Warning and Error
+            ///     3. (10 - 14) => Code actions for all analyzer diagnostics configuration with severity None,
+            // Silent, Suggestion, Warning and Error
             /// </summary>
             protected override int CodeActionIndex => 6;
 
@@ -283,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_RegexHeaderMatch()
             {
-                // NOTE: Even though we have a regex match, bulk configuration code fix is always applied to all files
+                // NOTE: Even though we have a regex match, bulk configuration code fix is always applied to all
+                // files
                 // within the editorconfig cone, so it generates a new entry.
                 var input = """
                     <Workspace>

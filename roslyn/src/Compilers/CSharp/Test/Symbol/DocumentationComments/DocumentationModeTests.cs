@@ -40,10 +40,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestInline(
                 xml,
                 expectedText,
-                // Diagnose.cs(4,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'unclosed'.'
+                // Diagnose.cs(4,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for
+                // element 'unclosed'.'
                 //  */
                 Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("unclosed"),
-                // Diagnose.cs(9,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'unclosed'.'
+                // Diagnose.cs(9,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for
+                // element 'unclosed'.'
                 //  */
                 Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("unclosed")
             );
@@ -85,12 +87,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 xpath,
                 expectedTextTemplate, /*fallbackToErrorCodeOnlyForNonEnglish*/
                 true,
-                // ff1abe1df1d7.xml(1,11): warning CS1592: Badly formed XML in included comments file -- 'Unexpected end of file has occurred. The following elements are not closed: unclosed.'
+                // ff1abe1df1d7.xml(1,11): warning CS1592: Badly formed XML in included comments file -- 'Unexpected
+                // end of file has occurred. The following elements are not closed: unclosed.'
                 Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
                     .WithArguments(
                         "Unexpected end of file has occurred. The following elements are not closed: unclosed."
                     ),
-                // ff1abe1df1d7.xml(1,11): warning CS1592: Badly formed XML in included comments file -- 'Unexpected end of file has occurred. The following elements are not closed: unclosed.'
+                // ff1abe1df1d7.xml(1,11): warning CS1592: Badly formed XML in included comments file -- 'Unexpected
+                // end of file has occurred. The following elements are not closed: unclosed.'
                 Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
                     .WithArguments(
                         "Unexpected end of file has occurred. The following elements are not closed: unclosed."
@@ -188,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 includeElement =>
                     new[]
                     {
-                        // ExpandIncludes.cs(2,5): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
+                        // ExpandIncludes.cs(2,5): warning CS1584: XML comment has syntactically incorrect cref attribute
+                        // '#'
                         // /// <include file='d6f61c210f5e.xml' path='see' />
                         Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement)
                             .WithArguments("#"),
@@ -200,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         // /// <include file='d6f61c210f5e.xml' path='see' />
                         Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
                             .WithArguments("Unexpected character '#'", "1056"),
-                        // ExpandIncludes.cs(5,21): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
+                        // ExpandIncludes.cs(5,21): warning CS1584: XML comment has syntactically incorrect cref attribute
+                        // '#'
                         // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
                         Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement)
                             .WithArguments("#"),
@@ -247,10 +253,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestInline(
                 xml,
                 expectedText,
-                // Diagnose.cs(9,12): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                // Diagnose.cs(9,12): warning CS1574: XML comment has cref attribute 'NotFound' that could not be
+                // resolved
                 // <see cref='NotFound' />
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "NotFound").WithArguments("NotFound"),
-                // ExpandIncludes.cs(9,12): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                // ExpandIncludes.cs(9,12): warning CS1574: XML comment has cref attribute 'NotFound' that could not
+                // be resolved
                 // <see cref='NotFound' />
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "NotFound").WithArguments("NotFound")
             );
@@ -290,11 +298,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 includeElement =>
                     new[]
                     {
-                        // ExpandIncludes.cs(2,5): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                        // ExpandIncludes.cs(2,5): warning CS1574: XML comment has cref attribute 'NotFound' that could not
+                        // be resolved
                         // /// <include file='5127bff2acf3.xml' path='see' />
                         Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement)
                             .WithArguments("NotFound"),
-                        // ExpandIncludes.cs(5,21): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                        // ExpandIncludes.cs(5,21): warning CS1574: XML comment has cref attribute 'NotFound' that could not
+                        // be resolved
                         // /// ExpandIncludes: <include file='5127bff2acf3.xml' path='see' />
                         Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement)
                             .WithArguments("NotFound"),
@@ -333,11 +343,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestInline(
                 xml,
                 expectedText,
-                // Diagnose.cs(3,18): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                // Diagnose.cs(3,18): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is
+                // no type parameter by that name
                 // <typeparam name='NotFound' />
                 Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "NotFound")
                     .WithArguments("NotFound"),
-                // Diagnose.cs(9,18): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                // Diagnose.cs(9,18): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is
+                // no type parameter by that name
                 // <typeparam name='NotFound' />
                 Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "NotFound")
                     .WithArguments("NotFound")
@@ -378,11 +390,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 includeElement =>
                     new[]
                     {
-                        // ExpandIncludes.cs(5,21): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                        // ExpandIncludes.cs(5,21): warning CS1711: XML comment has a typeparam tag for 'NotFound', but
+                        // there is no type parameter by that name
                         // /// ExpandIncludes: <include file='3590e97bd224.xml' path='typeparam' />
                         Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
                             .WithArguments("NotFound"),
-                        // ExpandIncludes.cs(2,5): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                        // ExpandIncludes.cs(2,5): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there
+                        // is no type parameter by that name
                         // /// <include file='3590e97bd224.xml' path='typeparam' />
                         Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
                             .WithArguments("NotFound"),

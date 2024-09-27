@@ -25,7 +25,8 @@ public class LocalizedString
     /// </summary>
     /// <param name="name">The name of the string in the resource it was loaded from.</param>
     /// <param name="value">The actual string.</param>
-    /// <param name="resourceNotFound">Whether the string was not found in a resource. Set this to <c>true</c> to indicate an alternate string value was used.</param>
+    /// <param name="resourceNotFound">Whether the string was not found in a resource. Set this to
+    // <c>true</c> to indicate an alternate string value was used.</param>
     public LocalizedString(string name, string value, bool resourceNotFound)
         : this(name, value, resourceNotFound, searchedLocation: null) { }
 
@@ -34,7 +35,8 @@ public class LocalizedString
     /// </summary>
     /// <param name="name">The name of the string in the resource it was loaded from.</param>
     /// <param name="value">The actual string.</param>
-    /// <param name="resourceNotFound">Whether the string was not found in a resource. Set this to <c>true</c> to indicate an alternate string value was used.</param>
+    /// <param name="resourceNotFound">Whether the string was not found in a resource. Set this to
+    // <c>true</c> to indicate an alternate string value was used.</param>
     /// <param name="searchedLocation">The location which was searched for a localization value.</param>
     public LocalizedString(
         string name,
@@ -73,7 +75,8 @@ public class LocalizedString
     public string Value { get; }
 
     /// <summary>
-    /// Whether the string was not found in a resource. If <c>true</c>, an alternate string value was used.
+    /// Whether the string was not found in a resource. If <c>true</c>, an alternate string value was
+    // used.
     /// </summary>
     public bool ResourceNotFound { get; }
 

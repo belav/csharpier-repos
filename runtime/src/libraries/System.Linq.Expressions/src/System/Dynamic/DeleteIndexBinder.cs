@@ -8,7 +8,8 @@ using System.Linq.Expressions;
 namespace System.Dynamic
 {
     /// <summary>
-    /// Represents the dynamic delete index operation at the call site, providing the binding semantic and the details about the operation.
+    /// Represents the dynamic delete index operation at the call site, providing the binding semantic
+    // and the details about the operation.
     /// </summary>
     [RequiresDynamicCode(Expression.CallSiteRequiresDynamicCode)]
     public abstract class DeleteIndexBinder : DynamicMetaObjectBinder
@@ -56,7 +57,8 @@ namespace System.Dynamic
         internal sealed override bool IsStandardBinder => true;
 
         /// <summary>
-        /// Performs the binding of the dynamic delete index operation if the target dynamic object cannot bind.
+        /// Performs the binding of the dynamic delete index operation if the target dynamic object cannot
+        // bind.
         /// </summary>
         /// <param name="target">The target of the dynamic delete index operation.</param>
         /// <param name="indexes">The arguments of the dynamic delete index operation.</param>
@@ -70,7 +72,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// When overridden in the derived class, performs the binding of the dynamic delete index operation if the target dynamic object cannot bind.
+        /// When overridden in the derived class, performs the binding of the dynamic delete index operation
+        // if the target dynamic object cannot bind.
         /// </summary>
         /// <param name="target">The target of the dynamic delete index operation.</param>
         /// <param name="indexes">The arguments of the dynamic delete index operation.</param>

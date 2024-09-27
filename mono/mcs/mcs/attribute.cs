@@ -861,7 +861,8 @@ namespace Mono.CSharp
         public AttributeUsageAttribute GetAttributeUsageAttribute()
         {
             if (!arg_resolved)
-                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor args.
+                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor
+                // args.
                 // But because a lot of attribute class code must be rewritten will be better to wait...
                 Resolve();
 
@@ -889,7 +890,8 @@ namespace Mono.CSharp
         public string GetIndexerAttributeValue()
         {
             if (!arg_resolved)
-                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor args.
+                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor
+                // args.
                 // But because a lot of attribute class code must be rewritten will be better to wait...
                 Resolve();
 
@@ -905,7 +907,8 @@ namespace Mono.CSharp
         public string GetConditionalAttributeValue()
         {
             if (!arg_resolved)
-                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor args.
+                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor
+                // args.
                 // But because a lot of attribute class code must be rewritten will be better to wait...
                 Resolve();
 
@@ -927,7 +930,8 @@ namespace Mono.CSharp
                 if (c != null && !c.HasMembersDefined)
                     c.Define();
 
-                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor args.
+                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor
+                // args.
                 // But because a lot of attribute class code must be rewritten will be better to wait...
                 Resolve();
             }
@@ -953,7 +957,8 @@ namespace Mono.CSharp
         public bool GetClsCompliantAttributeValue()
         {
             if (!arg_resolved)
-                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor args.
+                // TODO: It is not neccessary to call whole Resolve (ApplyAttribute does it now) we need only ctor
+                // args.
                 // But because a lot of attribute class code must be rewritten will be better to wait...
                 Resolve();
 
@@ -1140,7 +1145,8 @@ namespace Mono.CSharp
         }
 
         /// <summary>
-        /// Creates instance of SecurityAttribute class and add result of CreatePermission method to permission table.
+        /// Creates instance of SecurityAttribute class and add result of CreatePermission method to
+        // permission table.
         /// </summary>
         /// <returns></returns>
         public void ExtractSecurityPermissionSet(MethodSpec ctor, ref SecurityType permissions)

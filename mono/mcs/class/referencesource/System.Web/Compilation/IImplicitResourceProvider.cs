@@ -19,25 +19,25 @@ namespace System.Web.Compilation
     using System.Web.UI;
     using System.Web.Util;
 
-    /*
-     * Interface to access implicit (automatic) page resources
-     */
+/*
+* Interface to access implicit (automatic) page resources
+*/
     public interface IImplicitResourceProvider
     {
-        /*
-         * Retrieve a resource object for the passed in key and culture
-         */
+/*
+* Retrieve a resource object for the passed in key and culture
+*/
         object GetObject(ImplicitResourceKey key, CultureInfo culture);
 
-        /*
-         * Return a collection of ImplicitResourceKey's for the given prefix
-         */
+/*
+* Return a collection of ImplicitResourceKey's for the given prefix
+*/
         ICollection GetImplicitResourceKeys(string keyPrefix);
     }
 
-    /*
-     * Contains fields which identify a specific implicit resource key
-     */
+/*
+* Contains fields which identify a specific implicit resource key
+*/
     public sealed class ImplicitResourceKey
     {
         private string _filter;
@@ -53,27 +53,27 @@ namespace System.Web.Compilation
             _property = property;
         }
 
-        /*
-         * The filter, if any
-         */
+/*
+* The filter, if any
+*/
         public string Filter
         {
             get { return _filter; }
             set { _filter = value; }
         }
 
-        /*
-         * The prefix, as appears on tag's meta:resourcekey attributes
-         */
+/*
+* The prefix, as appears on tag's meta:resourcekey attributes
+*/
         public string KeyPrefix
         {
             get { return _keyPrefix; }
             set { _keyPrefix = value; }
         }
 
-        /*
-         * The property, possibly including sub-properties (e.g. MyProp.MySubProp)
-         */
+/*
+* The property, possibly including sub-properties (e.g. MyProp.MySubProp)
+*/
         public string Property
         {
             get { return _property; }
@@ -81,9 +81,9 @@ namespace System.Web.Compilation
         }
     }
 
-    /*
-     * IImplicitResourceProvider implementation on top of an arbitrary IResourceProvider
-     */
+/*
+* IImplicitResourceProvider implementation on top of an arbitrary IResourceProvider
+*/
     internal class DefaultImplicitResourceProvider : IImplicitResourceProvider
     {
         private IResourceProvider _resourceProvider;
@@ -117,11 +117,11 @@ namespace System.Web.Compilation
             return (ICollection)_implicitResources[keyPrefix];
         }
 
-        /*
-         * Create a dictionary, in which the key is a resource key (as found on meta:resourcekey
-         * attributes), and the value is an ArrayList containing all the resources for that
-         * resource key.  Each element of the ArrayList is an ImplicitResourceKey
-         */
+/*
+* Create a dictionary, in which the key is a resource key (as found on meta:resourcekey
+* attributes), and the value is an ArrayList containing all the resources for that
+* resource key.  Each element of the ArrayList is an ImplicitResourceKey
+*/
         internal void EnsureGetPageResources()
         {
             // If we already attempted to get them, don't do it again
@@ -162,10 +162,10 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Parse a complete page resource key into a ImplicitResourceKey.
-         * Return null if the key does not appear to be meant for implict resources.
-         */
+/*
+* Parse a complete page resource key into a ImplicitResourceKey.
+* Return null if the key does not appear to be meant for implict resources.
+*/
         private static ImplicitResourceKey ParseFullKey(string key)
         {
             string filter = String.Empty;

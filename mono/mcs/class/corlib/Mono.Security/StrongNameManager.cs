@@ -43,38 +43,38 @@ using Mono.Xml;
 
 namespace Mono.Security
 {
-    /* RUNTIME
-     *				yes
-     *	in_gac ---------------------------------\
-     *		|				|
-     *		| no				\/
-     *		|			return true
-     * CLASS LIBRARY|
-     *		|
-     * 		|
-     *		|
-     *	bool StrongNameManager.MustVerify
-     *		|
-     *		|
-     *		\/		not found
-     *		Token --------------------------\
-     *		|				|
-     *		| present ?			|
-     *		|				|
-     *		\/		not found	|
-     *	Assembly Name --------------------------|
-     *		|				|
-     *		| present ?			|
-     *		| or "*"			|
-     *		\/		not found	|
-     *		User ---------------------------|
-     *		|				|
-     *		| present ?			|
-     *		| or "*"			|
-     *		\/				\/
-     *	return false			return true
-     *	SKIP VERIFICATION		VERIFY ASSEMBLY
-     */
+/* RUNTIME
+*				yes
+*	in_gac ---------------------------------\
+*		|				|
+*		| no				\/
+*		|			return true
+* CLASS LIBRARY|
+*		|
+* 		|
+*		|
+*	bool StrongNameManager.MustVerify
+*		|
+*		|
+*		\/		not found
+*		Token --------------------------\
+*		|				|
+*		| present ?			|
+*		|				|
+*		\/		not found	|
+*	Assembly Name --------------------------|
+*		|				|
+*		| present ?			|
+*		| or "*"			|
+*		\/		not found	|
+*		User ---------------------------|
+*		|				|
+*		| present ?			|
+*		| or "*"			|
+*		\/				\/
+*	return false			return true
+*	SKIP VERIFICATION		VERIFY ASSEMBLY
+*/
 
     internal class StrongNameManager
     {

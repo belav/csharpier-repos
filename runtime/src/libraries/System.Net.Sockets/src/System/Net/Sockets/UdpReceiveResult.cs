@@ -6,7 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Net.Sockets
 {
     /// <summary>
-    /// Presents UDP receive result information from a call to the <see cref="UdpClient.ReceiveAsync()"/> and <see cref="UdpClient.ReceiveAsync(System.Threading.CancellationToken)"/> method
+    /// Presents UDP receive result information from a call to the <see
+    // cref="UdpClient.ReceiveAsync()"/> and <see
+    // cref="UdpClient.ReceiveAsync(System.Threading.CancellationToken)"/> method
     /// </summary>
     public struct UdpReceiveResult : IEquatable<UdpReceiveResult>
     {
@@ -56,7 +58,8 @@ namespace System.Net.Sockets
         /// Returns a value that indicates whether this instance is equal to a specified object
         /// </summary>
         /// <param name="obj">The object to compare with this instance</param>
-        /// <returns>true if obj is an instance of <see cref="UdpReceiveResult"/> and equals the value of the instance; otherwise, false</returns>
+        /// <returns>true if obj is an instance of <see cref="UdpReceiveResult"/> and equals the value of
+        // the instance; otherwise, false</returns>
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is UdpReceiveResult other && Equals(other);
 
@@ -64,7 +67,8 @@ namespace System.Net.Sockets
         /// Returns a value that indicates whether this instance is equal to a specified object
         /// </summary>
         /// <param name="other">The object to compare with this instance</param>
-        /// <returns>true if other is an instance of <see cref="UdpReceiveResult"/> and equals the value of the instance; otherwise, false</returns>
+        /// <returns>true if other is an instance of <see cref="UdpReceiveResult"/> and equals the value of
+        // the instance; otherwise, false</returns>
         public bool Equals(UdpReceiveResult other)
         {
             return object.Equals(_buffer, other._buffer)
@@ -74,8 +78,10 @@ namespace System.Net.Sockets
         /// <summary>
         /// Tests whether two specified <see cref="UdpReceiveResult"/> instances are equivalent
         /// </summary>
-        /// <param name="left">The <see cref="UdpReceiveResult"/> instance that is to the left of the equality operator</param>
-        /// <param name="right">The <see cref="UdpReceiveResult"/> instance that is to the right of the equality operator</param>
+        /// <param name="left">The <see cref="UdpReceiveResult"/> instance that is to the left of the
+        // equality operator</param>
+        /// <param name="right">The <see cref="UdpReceiveResult"/> instance that is to the right of the
+        // equality operator</param>
         /// <returns>true if left and right are equal; otherwise, false</returns>
         public static bool operator ==(UdpReceiveResult left, UdpReceiveResult right)
         {
@@ -85,8 +91,10 @@ namespace System.Net.Sockets
         /// <summary>
         /// Tests whether two specified <see cref="UdpReceiveResult"/> instances are not equal
         /// </summary>
-        /// <param name="left">The <see cref="UdpReceiveResult"/> instance that is to the left of the not equal operator</param>
-        /// <param name="right">The <see cref="UdpReceiveResult"/> instance that is to the right of the not equal operator</param>
+        /// <param name="left">The <see cref="UdpReceiveResult"/> instance that is to the left of the not
+        // equal operator</param>
+        /// <param name="right">The <see cref="UdpReceiveResult"/> instance that is to the right of the not
+        // equal operator</param>
         /// <returns>true if left and right are unequal; otherwise, false</returns>
         public static bool operator !=(UdpReceiveResult left, UdpReceiveResult right)
         {

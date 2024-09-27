@@ -46,7 +46,8 @@ namespace System.Net
 
         internal static readonly char[] PortSplitDelimiters = new char[] { ' ', ',', '\"' };
 
-        // Space (' ') should be reserved as well per RFCs, but major web browsers support it and some web sites use it - so we support it too
+        // Space (' ') should be reserved as well per RFCs, but major web browsers support it and some web
+        // sites use it - so we support it too
         private static readonly SearchValues<char> s_reservedToNameChars = SearchValues.Create(
             "\t\r\n=;,"
         );
@@ -93,15 +94,24 @@ namespace System.Net
         }
 #endif
 
-        // These DynamicDependency attributes are a workaround for https://github.com/dotnet/runtime/issues/19348.
-        // HttpListener uses the non-public ToServerString, which isn't used by anything else in this assembly,
-        // and which accesses other internals and can't be moved to HttpListener (at least not without incurring
-        // functional differences).  However, once we do our initial System.Net.Primitives build and ToServerString
-        // survives to it, we no longer want the DynamicDependencyAttribute to remain around, so that ToServerString
-        // can be trimmed out if the relevant functionality from HttpListener isn't used when performing whole-app
-        // analysis.  As such, when trimming System.Net.Primitives, we build the assembly with ILLinkKeepDepAttributes=false,
-        // such that when this assembly is compiled, ToServerString will remain but the DynamicDependency attributes
-        // will be removed.  This hack will need to be revisited if anything else in the assembly starts using
+        // These DynamicDependency attributes are a workaround for
+        // https://github.com/dotnet/runtime/issues/19348.
+        // HttpListener uses the non-public ToServerString, which isn't used by anything else in this
+        // assembly,
+        // and which accesses other internals and can't be moved to HttpListener (at least not without
+        // incurring
+        // functional differences).  However, once we do our initial System.Net.Primitives build and
+        // ToServerString
+        // survives to it, we no longer want the DynamicDependencyAttribute to remain around, so that
+        // ToServerString
+        // can be trimmed out if the relevant functionality from HttpListener isn't used when performing
+        // whole-app
+        // analysis.  As such, when trimming System.Net.Primitives, we build the assembly with
+        // ILLinkKeepDepAttributes=false,
+        // such that when this assembly is compiled, ToServerString will remain but the DynamicDependency
+        // attributes
+        // will be removed.  This hack will need to be revisited if anything else in the assembly starts
+        // using
         // DynamicDependencyAttribute.
         // https://github.com/mono/linker/issues/802
 
@@ -452,7 +462,8 @@ namespace System.Net
                     }
                     else if (domain.IndexOf('.', 1, domain.Length - 2) == -1)
                     {
-                        // A single label domain is valid only if the domain is exactly the same as the host specified in the URI.
+                        // A single label domain is valid only if the domain is exactly the same as the host specified in
+                        // the URI.
                         if (!IsDomainEqualToHost(domain, host))
                         {
                             valid = false;

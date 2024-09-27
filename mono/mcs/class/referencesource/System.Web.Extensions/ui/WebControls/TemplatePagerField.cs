@@ -42,7 +42,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para> Specifies the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how items are rendered. </para>
+        /// <para> Specifies the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how items
+        // are rendered. </para>
         /// </devdoc>
         [
             Browsable(false),
@@ -130,7 +131,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Raises the <see cref='System.Web.UI.WebControls.ListView.TotalRowCountAvailable'/>event of a <see cref='System.Web.UI.WebControls.ListView'/>.</para>
+        /// <para>Raises the <see cref='System.Web.UI.WebControls.ListView.TotalRowCountAvailable'/>event of
+        // a <see cref='System.Web.UI.WebControls.ListView'/>.</para>
         /// </devdoc>
         [SuppressMessage(
             "Microsoft.Security",

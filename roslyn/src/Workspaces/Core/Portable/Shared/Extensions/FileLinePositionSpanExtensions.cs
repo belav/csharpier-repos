@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns a new <see cref="LinePositionSpan"/> based off of the positions in <paramref name="span"/>, but
+        /// Returns a new <see cref="LinePositionSpan"/> based off of the positions in <paramref
+        // name="span"/>, but
         /// which is guaranteed to fall entirely within the span of <paramref name="text"/>.
         /// </summary>
         public static LinePositionSpan GetClampedSpan(this LinePositionSpan span, SourceText text)
@@ -54,26 +55,30 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             if (startLine < 0)
             {
-                // If the start line is negative (e.g. before the start of the actual document) then move the start to the 0,0 position.
+                // If the start line is negative (e.g. before the start of the actual document) then move the start
+                // to the 0,0 position.
                 startLine = 0;
                 startColumn = 0;
             }
             else if (startLine >= lines.Count)
             {
-                // if the start line is after the end of the document, move the start to the last location in the document.
+                // if the start line is after the end of the document, move the start to the last location in the
+                // document.
                 startLine = lines.Count - 1;
                 startColumn = lines[startLine].SpanIncludingLineBreak.Length;
             }
 
             if (endLine < 0)
             {
-                // if the end is before the start of the document, then move the end to wherever the start position was determined to be.
+                // if the end is before the start of the document, then move the end to wherever the start position
+                // was determined to be.
                 endLine = startLine;
                 endColumn = startColumn;
             }
             else if (endLine >= lines.Count)
             {
-                // if the end line is after the end of the document, move the end to the last location in the document.
+                // if the end line is after the end of the document, move the end to the last location in the
+                // document.
                 endLine = lines.Count - 1;
                 endColumn = lines[endLine].SpanIncludingLineBreak.Length;
             }

@@ -513,7 +513,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         await onCompletedTcs.Task.DefaultTimeout();
     }
 
-    // https://github.com/aspnet/KestrelHttpServer/pull/1111/files#r80584475 explains the reason for this test.
+    // https://github.com/aspnet/KestrelHttpServer/pull/1111/files#r80584475 explains the reason for
+    // this test.
     [Fact]
     public async Task NoErrorResponseSentWhenAppSwallowsBadRequestException()
     {
@@ -1385,7 +1386,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     httpContext.Response.ContentLength = 12;
                     await httpContext.Response.WriteAsync("hello,");
 
-                    // Wait until the request is aborted so we know HttpProtocol will skip the response content length check.
+                    // Wait until the request is aborted so we know HttpProtocol will skip the response content length
+                    // check.
                     await requestAborted.Task.DefaultTimeout();
                 },
                 new TestServiceContext(LoggerFactory)

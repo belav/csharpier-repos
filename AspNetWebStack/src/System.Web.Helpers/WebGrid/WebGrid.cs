@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,8 +55,10 @@ namespace System.Web.Helpers
         /// <param name="rowsPerPage">Number of rows per page.</param>
         /// <param name="canPage"></param>
         /// <param name="canSort"></param>
-        /// <param name="ajaxUpdateContainerId">ID for the grid's container element. This enables AJAX support.</param>
-        /// <param name="ajaxUpdateCallback">Callback function for the AJAX functionality once the update is complete</param>
+        /// <param name="ajaxUpdateContainerId">ID for the grid's container element. This enables AJAX
+        // support.</param>
+        /// <param name="ajaxUpdateCallback">Callback function for the AJAX functionality once the update is
+        // complete</param>
         /// <param name="fieldNamePrefix">Prefix for query string fields to support multiple grids.</param>
         /// <param name="pageFieldName">Query string field name for page number.</param>
         /// <param name="selectionFieldName">Query string field name for selected row number.</param>
@@ -100,7 +103,8 @@ namespace System.Web.Helpers
             }
         }
 
-        // NOTE: WebGrid uses an IEnumerable<dynamic> data source instead of IEnumerable<T> to avoid generics in the syntax.
+        // NOTE: WebGrid uses an IEnumerable<dynamic> data source instead of IEnumerable<T> to avoid
+        // generics in the syntax.
         internal WebGrid(
             HttpContextBase context,
             string defaultSort = null,
@@ -164,7 +168,8 @@ namespace System.Web.Helpers
         {
             get
             {
-                // Review: Assuming that the users always binds the source and provides column names / we infer the default columns names on binding
+                // Review: Assuming that the users always binds the source and provides column names / we infer the
+                // default columns names on binding
                 // Would not work if we want to allow column names to be independently set.
                 EnsureDataBound();
                 return _columnNames;
@@ -280,7 +285,8 @@ namespace System.Web.Helpers
                 }
                 else
                 {
-                    // Once data bound, perform bounds check on the PageIndex. Also ensure the data source has not been materialized.
+                    // Once data bound, perform bounds check on the PageIndex. Also ensure the data source has not been
+                    // materialized.
                     if ((value < 0) || (value >= PageCount))
                     {
                         throw new ArgumentOutOfRangeException(
@@ -658,8 +664,10 @@ namespace System.Web.Helpers
         /// <param name="selectedRowStyle">Selected row class for styling.</param>
         /// <param name="displayHeader">Whether the header row should be displayed.</param>
         /// <param name="caption">The string displayed as the table caption</param>
-        /// <param name="fillEmptyRows">Whether the table can add empty rows to ensure the rowsPerPage row count.</param>
-        /// <param name="emptyRowCellValue">Value used to populate empty rows. This property is only used when <paramref name="fillEmptyRows"/> is set</param>
+        /// <param name="fillEmptyRows">Whether the table can add empty rows to ensure the rowsPerPage row
+        // count.</param>
+        /// <param name="emptyRowCellValue">Value used to populate empty rows. This property is only used
+        // when <paramref name="fillEmptyRows"/> is set</param>
         /// <param name="columns">Column model for customizing column rendering.</param>
         /// <param name="exclusions">Columns to exclude when auto-populating columns.</param>
         /// <param name="mode">Modes for pager rendering.</param>
@@ -668,7 +676,8 @@ namespace System.Web.Helpers
         /// <param name="nextText">Text for link to next page.</param>
         /// <param name="lastText">Text for link to last page.</param>
         /// <param name="numericLinksCount">Number of numeric links that should display.</param>
-        /// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
+        /// <param name="htmlAttributes">An object that contains the HTML attributes to set for the
+        // element.</param>
         public IHtmlString GetHtml(
             string tableStyle = null,
             string headerStyle = null,
@@ -827,8 +836,10 @@ namespace System.Web.Helpers
         /// <param name="nextText">Text for link to next page.</param>
         /// <param name="lastText">Text for link to last page.</param>
         /// <param name="numericLinksCount">Number of numeric links that should display.</param>
-        /// <param name="explicitlyCalled">The Pager can be explicitly called by the public API or is called by the WebGrid when no footer is provided.
-        /// In the explicit scenario, we would need to render a container for the pager to allow identifying the pager links.
+        /// <param name="explicitlyCalled">The Pager can be explicitly called by the public API or is called
+        // by the WebGrid when no footer is provided.
+        /// In the explicit scenario, we would need to render a container for the pager to allow identifying
+        // the pager links.
         /// In the implicit scenario, the grid table would be the container.
         /// </param>
         private HelperResult Pager(
@@ -927,12 +938,15 @@ namespace System.Web.Helpers
         /// <param name="selectedRowStyle">Selected row class for styling.</param>
         /// <param name="caption">The table caption</param>
         /// <param name="displayHeader">Whether the header row should be displayed.</param>
-        /// <param name="fillEmptyRows">Whether the table can add empty rows to ensure the rowsPerPage row count.</param>
-        /// <param name="emptyRowCellValue">Value used to populate empty rows. This property is only used when <paramref name="fillEmptyRows"/> is set</param>
+        /// <param name="fillEmptyRows">Whether the table can add empty rows to ensure the rowsPerPage row
+        // count.</param>
+        /// <param name="emptyRowCellValue">Value used to populate empty rows. This property is only used
+        // when <paramref name="fillEmptyRows"/> is set</param>
         /// <param name="columns">Column model for customizing column rendering.</param>
         /// <param name="exclusions">Columns to exclude when auto-populating columns.</param>
         /// <param name="footer">Table footer template.</param>
-        /// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
+        /// <param name="htmlAttributes">An object that contains the HTML attributes to set for the
+        // element.</param>
         public IHtmlString Table(
             string tableStyle = null,
             string headerStyle = null,
@@ -958,8 +972,10 @@ namespace System.Web.Helpers
             // (1) "columns" argument of this method
             // (2) "exclusion" argument of this method
             // (3) "columnNames" argument of the constructor.
-            // At the time of binding we can verify if a simple property specified in the query string is a column that would be visible to the user.
-            // However, for complex properties or if either of (1) or (2) arguments are specified, we can only verify at this point.
+            // At the time of binding we can verify if a simple property specified in the query string is a
+            // column that would be visible to the user.
+            // However, for complex properties or if either of (1) or (2) arguments are specified, we can only
+            // verify at this point.
             EnsureColumnIsSortable(columns);
 
             if (emptyRowCellValue == null)
@@ -991,14 +1007,17 @@ namespace System.Web.Helpers
         /// Adds a specific sort function for a given column.
         /// </summary>
         /// <typeparam name="TElement">The type of elements in the grid's source.</typeparam>
-        /// <typeparam name="TProperty">The column type, usually inferred from the keySelector function's return type.</typeparam>
+        /// <typeparam name="TProperty">The column type, usually inferred from the keySelector function's
+        // return type.</typeparam>
         /// <param name="columnName">The column name (as used for sorting)</param>
-        /// <param name="keySelector">The function used to select a key to sort by, for each element in the grid's source.</param>
+        /// <param name="keySelector">The function used to select a key to sort by, for each element in the
+        // grid's source.</param>
         /// <returns>The current grid, with the new custom sorter applied.</returns>
         /// <example>
         /// <code>
         /// var grid = new WebGrid(items)
-        ///     .AddSorter("Manager.Name", (Employee x) => (x == null || x.Manager == null) ? null : x.Manager.Name);
+        ///     .AddSorter("Manager.Name", (Employee x) => (x == null || x.Manager == null) ? null :
+        // x.Manager.Name);
         /// </code>
         /// </example>
         [SuppressMessage(
@@ -1019,8 +1038,10 @@ namespace System.Web.Helpers
         private void EnsureColumnIsSortable(IEnumerable<WebGridColumn> columns)
         {
             // Fix for bug 941102
-            // The ValidateSortColumn can validate a few regular cases for sorting and reset those values to default. However, for sort columns that are complex expressions,
-            // or if the user specifies a subset of columns in the GetHtml method (via columns / exclusions), the method is ineffective.
+            // The ValidateSortColumn can validate a few regular cases for sorting and reset those values to
+            // default. However, for sort columns that are complex expressions,
+            // or if the user specifies a subset of columns in the GetHtml method (via columns / exclusions),
+            // the method is ineffective.
             // Review: Should this method not throw if the data was not explicitly sorted and paged by the user
             if (
                 _canSort

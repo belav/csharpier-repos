@@ -68,7 +68,8 @@ public class MouseEventArgs : EventArgs
     /// Left button=0,
     /// middle button=1 (if present),
     /// right button=2.
-    /// For mice configured for left handed use in which the button actions are reversed the values are instead read from right to left.
+    /// For mice configured for left handed use in which the button actions are reversed the values are
+    // instead read from right to left.
     /// </summary>
     public long Button { get; set; }
 

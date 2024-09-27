@@ -23,7 +23,8 @@ namespace System.Xml
     //
     // XSL HTML output method properties
     //
-    // Keep the first four bits in sync, so that the element and attribute mask operation can be combined.
+    // Keep the first four bits in sync, so that the element and attribute mask operation can be
+    // combined.
     internal enum ElementProperties : uint
     {
         DEFAULT = 0,
@@ -45,15 +46,15 @@ namespace System.Xml
         NAME = 4,
     }
 
-    /**
-     * TernaryTreeRO
-     * -------------
-     *
-     * Ternary tree implementation used to make fast dictionary lookups in pre-generated
-     * ternary trees.
-     *
-     * Note: Only strings composed of ASCII characters can exist in the tree.
-     */
+/**
+* TernaryTreeRO
+* -------------
+*
+* Ternary tree implementation used to make fast dictionary lookups in pre-generated
+* ternary trees.
+*
+* Note: Only strings composed of ASCII characters can exist in the tree.
+*/
     /// <include file='doc\ReadOnlyTernaryTree.uex' path='docs/doc[@for="TernaryTreeReadOnly"]/*' />
     internal class TernaryTreeReadOnly
     {
@@ -62,19 +63,21 @@ namespace System.Xml
         //define the array positions
 
 
-        /// <include file='doc\ReadOnlyTernaryTree.uex' path='docs/doc[@for="TernaryTreeReadOnly.TernaryTreeReadOnly"]/*' />
+        /// <include file='doc\ReadOnlyTernaryTree.uex'
+        // path='docs/doc[@for="TernaryTreeReadOnly.TernaryTreeReadOnly"]/*' />
         public TernaryTreeReadOnly(byte[] nodeBuffer)
         {
             this.nodeBuffer = nodeBuffer;
         }
 
-        /*  ----------------------------------------------------------------------------
-            findStringI()
+/*  ----------------------------------------------------------------------------
+findStringI()
 
-            Find a Unicode string in the ternary tree and return the data byte it's
-            mapped to.  Find is case-insensitive.
-        */
-        /// <include file='doc\ReadOnlyTernaryTree.uex' path='docs/doc[@for="TernaryTreeReadOnly.FindCaseInsensitiveString"]/*' />
+Find a Unicode string in the ternary tree and return the data byte it's
+mapped to.  Find is case-insensitive.
+*/
+        /// <include file='doc\ReadOnlyTernaryTree.uex'
+        // path='docs/doc[@for="TernaryTreeReadOnly.FindCaseInsensitiveString"]/*' />
         public byte FindCaseInsensitiveString(String stringToFind)
         {
             //Debug.Assert(wszFind != null && wszFind.Length != 0);
@@ -97,7 +100,8 @@ namespace System.Xml
                 int pos = nodePos * 4;
 
                 charInTheTree = node[pos + (int)TernaryTreeByte.characterByte];
-                //Console.WriteLine("charToFind: {0},charInTheTree: {1}, nodePos: {2}", charToFind, charInTheTree, nodePos);
+                //Console.WriteLine("charToFind: {0},charInTheTree: {1}, nodePos: {2}", charToFind, charInTheTree,
+                // nodePos);
 
                 if (charToFind < charInTheTree)
                 {

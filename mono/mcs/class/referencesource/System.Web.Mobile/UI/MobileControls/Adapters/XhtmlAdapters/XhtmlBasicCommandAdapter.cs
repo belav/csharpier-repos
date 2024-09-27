@@ -17,7 +17,8 @@ namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
 namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 #endif
 {
-    /// <include file='doc\XhtmlBasicCommandAdapter.uex' path='docs/doc[@for="XhtmlCommandAdapter"]/*' />
+    /// <include file='doc\XhtmlBasicCommandAdapter.uex' path='docs/doc[@for="XhtmlCommandAdapter"]/*'
+    // />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -31,7 +32,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlCommandAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicCommandAdapter.uex' path='docs/doc[@for="XhtmlCommandAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicCommandAdapter.uex'
+        // path='docs/doc[@for="XhtmlCommandAdapter.Control"]/*' />
         protected new Command Control
         {
             get { return base.Control as Command; }
@@ -63,7 +65,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             return base.LoadPostData(key, data, controlPrivateData, out dataChanged);
         }
 
-        /// <include file='doc\XhtmlBasicCommandAdapter.uex' path='docs/doc[@for="XhtmlCommandAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicCommandAdapter.uex'
+        // path='docs/doc[@for="XhtmlCommandAdapter.Render"]/*' />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             // Note: Since XHTML Basic and MP do not include the script element, we ignore the

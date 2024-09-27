@@ -15,7 +15,8 @@ public class Program
         var superDerivedClass = new SuperDerivedClass();
 
         //
-        // C# will generate a call to the unmodified version of the method so this is easy to check statically
+        // C# will generate a call to the unmodified version of the method so this is easy to check
+        // statically
         //
 
         if (baseClass.Override(0) != 3)

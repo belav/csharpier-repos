@@ -353,21 +353,21 @@ namespace System.Web.UI
             }
         }
 
-        /*
-                //
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        */
+/*
+//
+
+
+
+
+
+
+
+
+
+
+
+
+*/
         public virtual void BeginRender() { }
 
         //Closes the document being written to.
@@ -1400,7 +1400,8 @@ namespace System.Web.UI
 
         public virtual void WriteBreak()
         {
-            // Space between br and / is for improved html compatibility.  See XHTML 1.0 specification, section C.2.
+            // Space between br and / is for improved html compatibility.  See XHTML 1.0 specification, section
+            // C.2.
             Write("<br />");
         }
 
@@ -1577,12 +1578,12 @@ namespace System.Web.UI
             private bool _wrap;
             private HorizontalAlign _align;
 
-            /*
-            public Layout(Layout currentLayout) {
-                Align = currentLayout.Align;
-                Wrap = currentLayout.Wrap;
-            }
-             */
+/*
+public Layout(Layout currentLayout) {
+Align = currentLayout.Align;
+Wrap = currentLayout.Wrap;
+}
+*/
 
             public Layout(HorizontalAlign alignment, bool wrapping)
             {
@@ -1602,21 +1603,21 @@ namespace System.Web.UI
                 set { _align = value; }
             }
 
-            /*
-            public bool Compare(Layout layout) {
-                return Wrap == layout.Wrap && Align == layout.Align;
-            }
-             
+/*
+public bool Compare(Layout layout) {
+return Wrap == layout.Wrap && Align == layout.Align;
+}
 
-            public void MergeWith(Layout layout) {
-                if (Align == HorizontalAlign.NotSet) {
-                    Align = layout.Align;
-                }
-                if (Wrap) {
-                    Wrap = layout.Wrap;
-                }
-            }
-             */
+
+public void MergeWith(Layout layout) {
+if (Align == HorizontalAlign.NotSet) {
+Align = layout.Align;
+}
+if (Wrap) {
+Wrap = layout.Wrap;
+}
+}
+*/
         }
 
         private struct TagStackEntry

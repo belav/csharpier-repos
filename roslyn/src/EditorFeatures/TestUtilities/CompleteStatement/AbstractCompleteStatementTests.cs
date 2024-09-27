@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
         }
 
         /// <summary>
-        /// Verify that typing a semicolon at the location in <paramref name="initialMarkup"/> marked with <c>$$</c>
+        /// Verify that typing a semicolon at the location in <paramref name="initialMarkup"/> marked with
+        // <c>$$</c>
         /// produces the result in <paramref name="expectedMarkup"/>. The final caret location in
         /// <paramref name="expectedMarkup"/> is marked with <c>$$</c>.
         /// </summary>

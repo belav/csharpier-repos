@@ -118,10 +118,12 @@ internal sealed unsafe class KeyRingBasedDataProtector : IDataProtector, IPersis
             }
 
             // We'll need to apply the default key id to the template if it hasn't already been applied.
-            // If the default key id has been updated since the last call to Protect, also write back the updated template.
+            // If the default key id has been updated since the last call to Protect, also write back the
+            // updated template.
             var aad = _aadTemplate.GetAadForKey(defaultKeyId, isProtecting: true);
 
-            // We allocate a 20-byte pre-buffer so that we can inject the magic header and key id into the return value.
+            // We allocate a 20-byte pre-buffer so that we can inject the magic header and key id into the
+            // return value.
             var retVal = defaultEncryptorInstance.Encrypt(
                 plaintext: new ArraySegment<byte>(plaintext),
                 additionalAuthenticatedData: new ArraySegment<byte>(aad),
@@ -366,7 +368,8 @@ internal sealed unsafe class KeyRingBasedDataProtector : IDataProtector, IPersis
             const int MEMORYSTREAM_DEFAULT_CAPACITY = 0x100; // matches MemoryStream.EnsureCapacity
             var ms = new MemoryStream(MEMORYSTREAM_DEFAULT_CAPACITY);
 
-            // additionalAuthenticatedData := { magicHeader (32-bit) || keyId || purposeCount (32-bit) || (purpose)* }
+            // additionalAuthenticatedData := { magicHeader (32-bit) || keyId || purposeCount (32-bit) ||
+            // (purpose)* }
             // purpose := { utf8ByteCount (7-bit encoded) || utf8Text }
 
             using (var writer = new PurposeBinaryWriter(ms))

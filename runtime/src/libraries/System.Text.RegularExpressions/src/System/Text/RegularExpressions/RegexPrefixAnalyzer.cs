@@ -8,7 +8,8 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions
 {
-    /// <summary>Detects various forms of prefixes in the regular expression that can help FindFirstChars optimize its search.</summary>
+    /// <summary>Detects various forms of prefixes in the regular expression that can help
+    // FindFirstChars optimize its search.</summary>
     internal static class RegexPrefixAnalyzer
     {
         /// <summary>Computes the leading substring in <paramref name="node"/>; may be empty.</summary>
@@ -158,7 +159,8 @@ namespace System.Text.RegularExpressions
             }
         }
 
-        /// <summary>Computes the leading ordinal case-insensitive substring in <paramref name="node"/>.</summary>
+        /// <summary>Computes the leading ordinal case-insensitive substring in <paramref
+        // name="node"/>.</summary>
         public static string? FindPrefixOrdinalCaseInsensitive(RegexNode node)
         {
             while (true)
@@ -192,7 +194,8 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Finds sets at fixed-offsets from the beginning of the pattern/</summary>
         /// <param name="root">The RegexNode tree root.</param>
-        /// <param name="thorough">true to spend more time finding sets (e.g. through alternations); false to do a faster analysis that's potentially more incomplete.</param>
+        /// <param name="thorough">true to spend more time finding sets (e.g. through alternations); false
+        // to do a faster analysis that's potentially more incomplete.</param>
         /// <returns>The array of found sets, or null if there aren't any.</returns>
         public static List<RegexFindOptimizations.FixedDistanceSet>? FindFixedDistanceSets(
             RegexNode root,
@@ -280,7 +283,8 @@ namespace System.Text.RegularExpressions
             // from the node's starting position.  The function returns true if the entire contents of the node
             // is at a fixed distance, in which case distance will have been updated to include the full length
             // of the node.  If it returns false, the node isn't entirely fixed, in which case subsequent nodes
-            // shouldn't be examined and distance should no longer be trusted.  However, regardless of whether it
+            // shouldn't be examined and distance should no longer be trusted.  However, regardless of whether
+            // it
             // returns true or false, it may have populated results, and all populated results are valid. All
             // FixedDistanceSet result will only have its Set string and Distance populated; the rest is left
             // to be populated by FindFixedDistanceSets after this returns.
@@ -415,8 +419,10 @@ namespace System.Text.RegularExpressions
                     case RegexNodeKind.Start:
                     case RegexNodeKind.NegativeLookaround:
                     case RegexNodeKind.PositiveLookaround:
-                        // Zero-width anchors and assertions.  In theory, for PositiveLookaround and NegativeLookaround we could also
-                        // investigate them and use the learned knowledge to impact the generated sets, at least for lookaheads.
+                        // Zero-width anchors and assertions.  In theory, for PositiveLookaround and NegativeLookaround we
+                        // could also
+                        // investigate them and use the learned knowledge to impact the generated sets, at least for
+                        // lookaheads.
                         // For now, we don't bother.
                         return true;
 
@@ -596,7 +602,8 @@ namespace System.Text.RegularExpressions
                         {
                             // Prefer sets with less frequent values.  The frequency is only an approximation,
                             // used as a tie-breaker when we'd otherwise effectively be picking randomly.
-                            // True frequencies will vary widely based on the actual data being searched, the language of the data, etc.
+                            // True frequencies will vary widely based on the actual data being searched, the language of the
+                            // data, etc.
                             float s1Frequency = SumFrequencies(s1Chars);
                             float s2Frequency = SumFrequencies(s2Chars);
 
@@ -691,12 +698,18 @@ namespace System.Text.RegularExpressions
         public static string? FindFirstCharClass(RegexNode root)
         {
             // Explore the graph, adding found chars into a result set, which is lazily initialized so that
-            // we can initialize it to a parsed set if we discover one first (this is helpful not just for allocation
-            // but because it enables supporting starting negated sets, which wouldn't work if they had to be merged
-            // into a non-negated default set). If the operation returns true, we successfully explore all relevant nodes
-            // in the graph.  If it returns false, we were unable to successfully explore all relevant nodes, typically
-            // due to conflicts when trying to add characters into the result set, e.g. we may have read a negated set
-            // and were then unable to merge into that a subsequent non-negated set.  If it returns null, it means the
+            // we can initialize it to a parsed set if we discover one first (this is helpful not just for
+            // allocation
+            // but because it enables supporting starting negated sets, which wouldn't work if they had to be
+            // merged
+            // into a non-negated default set). If the operation returns true, we successfully explore all
+            // relevant nodes
+            // in the graph.  If it returns false, we were unable to successfully explore all relevant nodes,
+            // typically
+            // due to conflicts when trying to add characters into the result set, e.g. we may have read a
+            // negated set
+            // and were then unable to merge into that a subsequent non-negated set.  If it returns null, it
+            // means the
             // whole pattern was nullable such that it could match an empty string, in which case we
             // can't make any statements about what begins a match.
             RegexCharClass? cc = null;
@@ -725,7 +738,8 @@ namespace System.Text.RegularExpressions
 
                 switch (node.Kind)
                 {
-                    // Base cases where we have results to add to the result set. Add the values into the result set, if possible.
+                    // Base cases where we have results to add to the result set. Add the values into the result set, if
+                    // possible.
                     // If this is a loop and it has a lower bound of 0, then it's zero-width, so return null.
                     case RegexNodeKind.One
                     or RegexNodeKind.Oneloop
@@ -799,7 +813,8 @@ namespace System.Text.RegularExpressions
                         }
                         return false;
 
-                    // Zero-width elements.  These don't contribute to the starting set, so return null to indicate a caller
+                    // Zero-width elements.  These don't contribute to the starting set, so return null to indicate a
+                    // caller
                     // should keep looking past them.
                     case RegexNodeKind.Empty:
                     case RegexNodeKind.Nothing:
@@ -818,13 +833,16 @@ namespace System.Text.RegularExpressions
                     case RegexNodeKind.NegativeLookaround:
                         return null;
 
-                    // Groups.  These don't contribute anything of their own, and are just pass-throughs to their children.
+                    // Groups.  These don't contribute anything of their own, and are just pass-throughs to their
+                    // children.
                     case RegexNodeKind.Atomic:
                     case RegexNodeKind.Capture:
                         return TryFindFirstCharClass(node.Child(0), ref cc);
 
-                    // Loops.  Like groups, these are mostly pass-through: if the child fails, then the whole operation needs
-                    // to fail, and if the child is nullable, then the loop is as well.  However, if the child succeeds but
+                    // Loops.  Like groups, these are mostly pass-through: if the child fails, then the whole operation
+                    // needs
+                    // to fail, and if the child is nullable, then the loop is as well.  However, if the child succeeds
+                    // but
                     // the loop has a lower bound of 0, then the loop is still nullable.
                     case RegexNodeKind.Loop:
                     case RegexNodeKind.Lazyloop:
@@ -835,9 +853,12 @@ namespace System.Text.RegularExpressions
                             _ => node.M == 0 ? null : true,
                         };
 
-                    // Concatenation.  Loop through the children as long as they're nullable.  The moment a child returns true,
-                    // we don't need or want to look further, as that child represents non-zero-width and nothing beyond it can
-                    // contribute to the starting character set.  The moment a child returns false, we need to fail the whole thing.
+                    // Concatenation.  Loop through the children as long as they're nullable.  The moment a child
+                    // returns true,
+                    // we don't need or want to look further, as that child represents non-zero-width and nothing beyond
+                    // it can
+                    // contribute to the starting character set.  The moment a child returns false, we need to fail the
+                    // whole thing.
                     // If every child is nullable, then the concatenation is also nullable.
                     case RegexNodeKind.Concatenate:
                     {
@@ -853,9 +874,12 @@ namespace System.Text.RegularExpressions
                         return null;
                     }
 
-                    // Alternation. Every child is its own fork/branch and contributes to the starting set.  As with concatenation,
-                    // the moment any child fails, fail.  And if any child is nullable, the alternation is also nullable (since that
-                    // zero-width path could be taken).  Otherwise, if every branch returns true, so too does the alternation.
+                    // Alternation. Every child is its own fork/branch and contributes to the starting set.  As with
+                    // concatenation,
+                    // the moment any child fails, fail.  And if any child is nullable, the alternation is also nullable
+                    // (since that
+                    // zero-width path could be taken).  Otherwise, if every branch returns true, so too does the
+                    // alternation.
                     case RegexNodeKind.Alternate:
                     {
                         int childCount = node.ChildCount();
@@ -875,7 +899,8 @@ namespace System.Text.RegularExpressions
                         return anyChildWasNull ? null : true;
                     }
 
-                    // Conditionals.  Just like alternation for their "yes"/"no" child branches.  If either returns false, return false.
+                    // Conditionals.  Just like alternation for their "yes"/"no" child branches.  If either returns
+                    // false, return false.
                     // If either is nullable, this is nullable. If both return true, return true.
                     case RegexNodeKind.BackreferenceConditional:
                     case RegexNodeKind.ExpressionConditional:
@@ -891,7 +916,8 @@ namespace System.Text.RegularExpressions
                             _ => true,
                         };
 
-                    // Backreferences.  We can't easily make any claims about what content they might match, so just give up.
+                    // Backreferences.  We can't easily make any claims about what content they might match, so just
+                    // give up.
                     case RegexNodeKind.Backreference:
                         return false;
                 }
@@ -903,8 +929,10 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>
-        /// Analyzes the pattern for a leading set loop followed by a non-overlapping literal. If such a pattern is found, an implementation
-        /// can search for the literal and then walk backward through all matches for the loop until the beginning is found.
+        /// Analyzes the pattern for a leading set loop followed by a non-overlapping literal. If such a
+        // pattern is found, an implementation
+        /// can search for the literal and then walk backward through all matches for the loop until the
+        // beginning is found.
         /// </summary>
         public static (
             RegexNode LoopNode,
@@ -917,9 +945,12 @@ namespace System.Text.RegularExpressions
                 return null;
             }
 
-            // Find the first concatenation.  We traverse through atomic and capture nodes as they don't effect flow control.  (We don't
-            // want to explore loops, even if they have a guaranteed iteration, because we may use information about the node to then
-            // skip the node's execution in the matching algorithm, and we would need to special-case only skipping the first iteration.)
+            // Find the first concatenation.  We traverse through atomic and capture nodes as they don't effect
+            // flow control.  (We don't
+            // want to explore loops, even if they have a guaranteed iteration, because we may use information
+            // about the node to then
+            // skip the node's execution in the matching algorithm, and we would need to special-case only
+            // skipping the first iteration.)
             while (node.Kind is RegexNodeKind.Atomic or RegexNodeKind.Capture)
             {
                 node = node.Child(0);
@@ -929,12 +960,17 @@ namespace System.Text.RegularExpressions
                 return null;
             }
 
-            // Bail if the first node isn't a set loop.  We treat any kind of set loop (Setloop, Setloopatomic, and Setlazy)
-            // the same because of two important constraints: the loop must not have an upper bound, and the literal we look
-            // for immediately following it must not overlap.  With those constraints, all three of these kinds of loops will
-            // end up having the same semantics; in fact, if atomic optimizations are used, we will have converted Setloop
+            // Bail if the first node isn't a set loop.  We treat any kind of set loop (Setloop, Setloopatomic,
+            // and Setlazy)
+            // the same because of two important constraints: the loop must not have an upper bound, and the
+            // literal we look
+            // for immediately following it must not overlap.  With those constraints, all three of these kinds
+            // of loops will
+            // end up having the same semantics; in fact, if atomic optimizations are used, we will have
+            // converted Setloop
             // into a Setloopatomic (but those optimizations are disabled for NonBacktracking in general). This
-            // could also be made to support Oneloopatomic and Notoneloopatomic, but the scenarios for that are rare.
+            // could also be made to support Oneloopatomic and Notoneloopatomic, but the scenarios for that are
+            // rare.
             Debug.Assert(node.ChildCount() >= 2);
             RegexNode firstChild = node.Child(0);
             while (firstChild.Kind is RegexNodeKind.Atomic or RegexNodeKind.Capture)
@@ -954,7 +990,8 @@ namespace System.Text.RegularExpressions
                 return null;
             }
 
-            // Get the subsequent node.  An UpdateBumpalong may have been added as an optimization, but it doesn't have an
+            // Get the subsequent node.  An UpdateBumpalong may have been added as an optimization, but it
+            // doesn't have an
             // impact on semantics and we can skip it.
             RegexNode nextChild = node.Child(1);
             if (nextChild.Kind == RegexNodeKind.UpdateBumpalong)
@@ -1026,10 +1063,14 @@ namespace System.Text.RegularExpressions
                 );
             }
 
-            // Is the set loop followed by a set we can search for? Whereas the above helpers will drill down into
-            // children as is appropriate, to examine a set here, we need to drill in ourselves. We can drill through
-            // atomic and capture nodes, as they don't affect flow control, and into the left-most node of a concatenate,
-            // as the first child is guaranteed next. We can also drill into a loop or lazy loop that has a guaranteed
+            // Is the set loop followed by a set we can search for? Whereas the above helpers will drill down
+            // into
+            // children as is appropriate, to examine a set here, we need to drill in ourselves. We can drill
+            // through
+            // atomic and capture nodes, as they don't affect flow control, and into the left-most node of a
+            // concatenate,
+            // as the first child is guaranteed next. We can also drill into a loop or lazy loop that has a
+            // guaranteed
             // iteration, for the same reason as with concatenate.
             while (
                 (
@@ -1087,7 +1128,8 @@ namespace System.Text.RegularExpressions
         {
             if (!StackHelper.TryEnsureSufficientExecutionStack())
             {
-                // We only recur for alternations, but with a really deep nesting of alternations we could potentially overflow.
+                // We only recur for alternations, but with a really deep nesting of alternations we could
+                // potentially overflow.
                 // In such a case, simply stop searching for an anchor.
                 return RegexNodeKind.Unknown;
             }
@@ -1114,8 +1156,10 @@ namespace System.Text.RegularExpressions
                         continue;
 
                     case RegexNodeKind.Concatenate:
-                    // For concatenations, we expect primarily to explore its first (for leading) or last (for trailing) child,
-                    // but we can also skip over certain kinds of nodes (e.g. Empty), and thus iterate through its children backward
+                    // For concatenations, we expect primarily to explore its first (for leading) or last (for trailing)
+                    // child,
+                    // but we can also skip over certain kinds of nodes (e.g. Empty), and thus iterate through its
+                    // children backward
                     // looking for the last we shouldn't skip.
                     {
                         int childCount = node.ChildCount();
@@ -1459,9 +1503,12 @@ namespace System.Text.RegularExpressions
                 ,
             ];
 
-        // The above table was generated programmatically with the following.  This can be augmented to incorporate additional data sources,
-        // though it is only intended to be a rough approximation use when tie-breaking and we'd otherwise be picking randomly, so, it's something.
-        // The frequencies may be wildly inaccurate when used with data sources different in nature than the training set, in which case we shouldn't
+        // The above table was generated programmatically with the following.  This can be augmented to
+        // incorporate additional data sources,
+        // though it is only intended to be a rough approximation use when tie-breaking and we'd otherwise
+        // be picking randomly, so, it's something.
+        // The frequencies may be wildly inaccurate when used with data sources different in nature than the
+        // training set, in which case we shouldn't
         // be much worse off than just picking randomly:
         //
         // using System.Runtime.InteropServices;
@@ -1482,7 +1529,8 @@ namespace System.Text.RegularExpressions
         //
         // long total = counts.Sum(i => i.Value);
         //
-        // Console.WriteLine("/// <summary>Percent occurrences in source text (100 * char count / total count).</summary>");
+        // Console.WriteLine("/// <summary>Percent occurrences in source text (100 * char count / total
+        // count).</summary>");
         // Console.WriteLine("private static ReadOnlySpan<float> Frequency =>");
         // Console.WriteLine("[");
         // int i = 0;
@@ -1493,7 +1541,8 @@ namespace System.Text.RegularExpressions
         //     {
         //         counts.TryGetValue((byte)i, out long charCount);
         //         float frequency = (float)(charCount / (double)total) * 100;
-        //         Console.Write($" {frequency:N3}f /* '{(i >= 32 && i < 127 ? $"   {(char)i}" : $"\\x{i:X2}")}' */,");
+        //         Console.Write($" {frequency:N3}f /* '{(i >= 32 && i < 127 ? $"   {(char)i}" :
+        // $"\\x{i:X2}")}' */,");
         //         i++;
         //     }
         //     Console.WriteLine();

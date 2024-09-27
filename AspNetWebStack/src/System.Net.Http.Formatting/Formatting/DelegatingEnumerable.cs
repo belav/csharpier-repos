@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// Helper class to serialize <see cref="IEnumerable{T}"/> types by delegating them through a concrete implementation."/>.
+    /// Helper class to serialize <see cref="IEnumerable{T}"/> types by delegating them through a
+    // concrete implementation."/>.
     /// </summary>
-    /// <typeparam name="T">The interface implementing <see cref="IEnumerable{T}"/> to proxy.</typeparam>
+    /// <typeparam name="T">The interface implementing <see cref="IEnumerable{T}"/> to
+    // proxy.</typeparam>
     [SuppressMessage(
         "Microsoft.Naming",
         "CA1710:IdentifiersShouldHaveCorrectSuffix",
@@ -23,7 +26,8 @@ namespace System.Net.Http.Formatting
         private IEnumerable<T> _source;
 
         /// <summary>
-        /// Initialize a DelegatingEnumerable. This constructor is necessary for <see cref="System.Runtime.Serialization.DataContractSerializer"/> to work.
+        /// Initialize a DelegatingEnumerable. This constructor is necessary for <see
+        // cref="System.Runtime.Serialization.DataContractSerializer"/> to work.
         /// </summary>
         public DelegatingEnumerable()
         {
@@ -31,9 +35,12 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Initialize a DelegatingEnumerable with an <see cref="IEnumerable{T}"/>. This is a helper class to proxy <see cref="IEnumerable{T}"/> interfaces for <see cref="System.Xml.Serialization.XmlSerializer"/>.
+        /// Initialize a DelegatingEnumerable with an <see cref="IEnumerable{T}"/>. This is a helper class
+        // to proxy <see cref="IEnumerable{T}"/> interfaces for <see
+        // cref="System.Xml.Serialization.XmlSerializer"/>.
         /// </summary>
-        /// <param name="source">The <see cref="IEnumerable{T}"/> instance to get the enumerator from.</param>
+        /// <param name="source">The <see cref="IEnumerable{T}"/> instance to get the enumerator
+        // from.</param>
         public DelegatingEnumerable(IEnumerable<T> source)
         {
             if (source == null)

@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
     /// An event for each declaration in the program (namespace, type, method, field, parameter, etc).
-    /// Note that some symbols may have multiple declarations (namespaces, partial types) and may therefore
+    /// Note that some symbols may have multiple declarations (namespaces, partial types) and may
+    // therefore
     /// have multiple events.
     /// </summary>
     internal sealed class SymbolDeclaredCompilationEvent : CompilationEvent
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public SemanticModel? SemanticModelWithCachedBoundNodes { get; }
 
-        // PERF: We avoid allocations in re-computing syntax references for declared symbol during event processing by caching them directly on this member.
+        // PERF: We avoid allocations in re-computing syntax references for declared symbol during event
+        // processing by caching them directly on this member.
         public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
             _lazyCachedDeclaringReferences.Value;
 

@@ -223,18 +223,20 @@ namespace System.Data.OleDb
             Debug.Assert(!(adodb is DataTable), "call Fill( (DataTable) value)");
             Debug.Assert(!(adodb is DataSet), "call Fill( (DataSet) value)");
 
-            /*
-            IntPtr adodbptr = ADP.PtrZero;
-            try { // generate a new COM Callable Wrapper around the user object so they can't ReleaseComObject on us.
-                adodbptr = Marshal.GetIUnknownForObject(adodb);
-                adodb = System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(adodbptr);
-            }
-            finally {
-                if (ADP.PtrZero != adodbptr) {
-                    Marshal.Release(adodbptr);
-                }
-            }
-            */
+/*
+IntPtr adodbptr = ADP.PtrZero;
+try { // generate a new COM Callable Wrapper around the user object so they can't ReleaseComObject
+on us.
+adodbptr = Marshal.GetIUnknownForObject(adodb);
+adodb =
+System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(adodbptr);
+}
+finally {
+if (ADP.PtrZero != adodbptr) {
+Marshal.Release(adodbptr);
+}
+}
+*/
 
             bool closeRecordset = multipleResults;
             UnsafeNativeMethods.ADORecordsetConstruction? recordset = (
@@ -246,7 +248,8 @@ namespace System.Data.OleDb
             {
                 if (multipleResults)
                 {
-                    // The NextRecordset method is not available on a disconnected Recordset object, where ActiveConnection has been set to NULL
+                    // The NextRecordset method is not available on a disconnected Recordset object, where
+                    // ActiveConnection has been set to NULL
                     object activeConnection;
                     activeConnection = (
                         (UnsafeNativeMethods.Recordset15)adodb

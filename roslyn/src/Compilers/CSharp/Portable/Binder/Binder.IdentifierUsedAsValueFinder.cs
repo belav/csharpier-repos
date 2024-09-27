@@ -311,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Follows the logic of <see cref="Binder.BindInstanceMemberAccess"/> and <see cref="Binder.BindMemberOfType"/>
+            /// Follows the logic of <see cref="Binder.BindInstanceMemberAccess"/> and <see
+            // cref="Binder.BindMemberOfType"/>
             /// </summary>
             protected static bool TreatAsInstanceMemberAccess(
                 Binder enclosingBinder,

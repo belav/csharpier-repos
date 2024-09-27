@@ -42,7 +42,8 @@ public static class MvcRazorMvcCoreBuilderExtensions
     /// Registers Razor view engine services.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
-    /// <param name="setupAction">A setup action that configures the <see cref="RazorViewEngineOptions"/>.</param>
+    /// <param name="setupAction">A setup action that configures the <see
+    // cref="RazorViewEngineOptions"/>.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddRazorViewEngine(
         this IMvcCoreBuilder builder,
@@ -76,7 +77,8 @@ public static class MvcRazorMvcCoreBuilderExtensions
     }
 
     /// <summary>
-    /// Registers discovered tag helpers as services and changes the existing <see cref="ITagHelperActivator"/>
+    /// Registers discovered tag helpers as services and changes the existing <see
+    // cref="ITagHelperActivator"/>
     /// for an <see cref="ServiceBasedTagHelperActivator"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/> instance this method extends.</param>
@@ -94,7 +96,8 @@ public static class MvcRazorMvcCoreBuilderExtensions
     /// </summary>
     /// <remarks>
     /// The callback will be invoked on any <typeparamref name="TTagHelper"/> instance before the
-    /// <see cref="ITagHelperComponent.ProcessAsync(TagHelperContext, TagHelperOutput)"/> method is called.
+    /// <see cref="ITagHelperComponent.ProcessAsync(TagHelperContext, TagHelperOutput)"/> method is
+    // called.
     /// </remarks>
     /// <typeparam name="TTagHelper">The type of <see cref="ITagHelper"/> being initialized.</typeparam>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/> instance this method extends.</param>
@@ -141,14 +144,16 @@ public static class MvcRazorMvcCoreBuilderExtensions
         services.TryAddSingleton<IRazorViewEngine, RazorViewEngine>();
         services.TryAddSingleton<IViewCompilerProvider, DefaultViewCompilerProvider>();
 
-        // In the default scenario the following services are singleton by virtue of being initialized as part of
+        // In the default scenario the following services are singleton by virtue of being initialized as
+        // part of
         // creating the singleton RazorViewEngine instance.
         services.TryAddTransient<IRazorPageFactoryProvider, DefaultRazorPageFactoryProvider>();
 
         // This caches Razor page activation details that are valid for the lifetime of the application.
         services.TryAddSingleton<IRazorPageActivator, RazorPageActivator>();
 
-        // Only want one ITagHelperActivator and ITagHelperComponentPropertyActivator so it can cache Type activation information. Types won't conflict.
+        // Only want one ITagHelperActivator and ITagHelperComponentPropertyActivator so it can cache Type
+        // activation information. Types won't conflict.
         services.TryAddSingleton<ITagHelperActivator, DefaultTagHelperActivator>();
         services.TryAddSingleton<
             ITagHelperComponentPropertyActivator,

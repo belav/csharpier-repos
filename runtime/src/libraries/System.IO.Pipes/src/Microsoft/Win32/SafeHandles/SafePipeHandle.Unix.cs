@@ -18,7 +18,8 @@ namespace Microsoft.Win32.SafeHandles
         // For anonymous pipes, SafePipeHandle.handle is the file descriptor of the pipe.
         // For named pipes, SafePipeHandle.handle is a copy of the file descriptor
         // extracted from the Socket's SafeHandle.
-        // This allows operations related to file descriptors to be performed directly on the SafePipeHandle,
+        // This allows operations related to file descriptors to be performed directly on the
+        // SafePipeHandle,
         // and operations that should go through the Socket to be done via PipeSocket. We keep the
         // Socket's SafeHandle alive as long as this SafeHandle is alive.
 

@@ -14,7 +14,8 @@ namespace System.Web.Services.Protocols
     /// </devdoc>
     public enum SoapParameterStyle
     {
-        /// <include file='doc\SoapParameterStyle.uex' path='docs/doc[@for="SoapParameterStyle.Default"]/*' />
+        /// <include file='doc\SoapParameterStyle.uex' path='docs/doc[@for="SoapParameterStyle.Default"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -26,7 +27,8 @@ namespace System.Web.Services.Protocols
         /// </devdoc>
         Bare, // parameters appear directly
 
-        /// <include file='doc\SoapParameterStyle.uex' path='docs/doc[@for="SoapParameterStyle.Wrapped"]/*' />
+        /// <include file='doc\SoapParameterStyle.uex' path='docs/doc[@for="SoapParameterStyle.Wrapped"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

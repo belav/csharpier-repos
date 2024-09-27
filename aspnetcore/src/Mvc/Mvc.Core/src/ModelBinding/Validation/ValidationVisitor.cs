@@ -22,10 +22,13 @@ public class ValidationVisitor
     /// <summary>
     /// Creates a new <see cref="ValidationVisitor"/>.
     /// </summary>
-    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
+    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current
+    // request.</param>
     /// <param name="validatorProvider">The <see cref="IModelValidatorProvider"/>.</param>
-    /// <param name="validatorCache">The <see cref="ValidatorCache"/> that provides a list of <see cref="IModelValidator"/>s.</param>
-    /// <param name="metadataProvider">The provider used for reading metadata for the model type.</param>
+    /// <param name="validatorCache">The <see cref="ValidatorCache"/> that provides a list of <see
+    // cref="IModelValidator"/>s.</param>
+    /// <param name="metadataProvider">The provider used for reading metadata for the model
+    // type.</param>
     /// <param name="validationState">The <see cref="ValidationStateDictionary"/>.</param>
     public ValidationVisitor(
         ActionContext actionContext,
@@ -108,11 +111,13 @@ public class ValidationVisitor
     /// <summary>
     /// Gets or sets the maximum depth to constrain the validation visitor when validating.
     /// <para>
-    /// <see cref="ValidationVisitor"/> traverses the object graph of the model being validated. For models
+    /// <see cref="ValidationVisitor"/> traverses the object graph of the model being validated. For
+    // models
     /// that are very deep or are infinitely recursive, validation may result in stack overflow.
     /// </para>
     /// <para>
-    /// When not <see langword="null"/>, <see cref="Visit(ModelMetadata, string, object)"/> will throw if
+    /// When not <see langword="null"/>, <see cref="Visit(ModelMetadata, string, object)"/> will throw
+    // if
     /// current traversal depth exceeds the specified value.
     /// </para>
     /// </summary>
@@ -131,7 +136,8 @@ public class ValidationVisitor
     }
 
     /// <summary>
-    /// Indicates whether validation of a complex type should be performed if validation fails for any of its children. The default behavior is false.
+    /// Indicates whether validation of a complex type should be performed if validation fails for any
+    // of its children. The default behavior is false.
     /// </summary>
     public bool ValidateComplexTypesIfChildValidationFails { get; set; }
 
@@ -153,7 +159,8 @@ public class ValidationVisitor
     /// <param name="metadata">The <see cref="ModelMetadata"/> associated with the model.</param>
     /// <param name="key">The model prefix key.</param>
     /// <param name="model">The model object.</param>
-    /// <param name="alwaysValidateAtTopLevel">If <c>true</c>, applies validation rules even if the top-level value is <c>null</c>.</param>
+    /// <param name="alwaysValidateAtTopLevel">If <c>true</c>, applies validation rules even if the
+    // top-level value is <c>null</c>.</param>
     /// <returns><c>true</c> if the object is valid, otherwise <c>false</c>.</returns>
     public virtual bool Validate(
         ModelMetadata? metadata,
@@ -168,7 +175,8 @@ public class ValidationVisitor
     /// <param name="metadata">The <see cref="ModelMetadata"/> associated with the model.</param>
     /// <param name="key">The model prefix key.</param>
     /// <param name="model">The model object.</param>
-    /// <param name="alwaysValidateAtTopLevel">If <c>true</c>, applies validation rules even if the top-level value is <c>null</c>.</param>
+    /// <param name="alwaysValidateAtTopLevel">If <c>true</c>, applies validation rules even if the
+    // top-level value is <c>null</c>.</param>
     /// <param name="container">The model container.</param>
     /// <returns><c>true</c> if the object is valid, otherwise <c>false</c>.</returns>
     public virtual bool Validate(
@@ -190,7 +198,8 @@ public class ValidationVisitor
         {
             var entry = ModelState[key];
 
-            // Rationale: We might see the same model state key for two different objects and want to preserve any
+            // Rationale: We might see the same model state key for two different objects and want to preserve
+            // any
             // known invalidity.
             if (entry != null && entry.ValidationState != ModelValidationState.Invalid)
             {
@@ -200,8 +209,10 @@ public class ValidationVisitor
             return true;
         }
 
-        // Container is non-null only when validation top-level properties. Start off by treating "container" as the "Model" instance.
-        // Invoking StateManager.Recurse later in this invocation will result in it being correctly used as the container instance during the
+        // Container is non-null only when validation top-level properties. Start off by treating
+        // "container" as the "Model" instance.
+        // Invoking StateManager.Recurse later in this invocation will result in it being correctly used as
+        // the container instance during the
         // validation of "model".
         Model = container;
         return Visit(metadata!, key, model);
@@ -322,7 +333,8 @@ public class ValidationVisitor
                     break;
 
                 default:
-                    // Since the minimum depth is never 0, MetadataKind can never be Parameter. Consequently we only special case MetadataKind.Property.
+                    // Since the minimum depth is never 0, MetadataKind can never be Parameter. Consequently we only
+                    // special case MetadataKind.Property.
                     message = Resources.FormatValidationVisitor_ExceededMaxDepth(
                         nameof(ValidationVisitor),
                         MaxValidationDepth,
@@ -356,8 +368,10 @@ public class ValidationVisitor
             SuppressValidation(entry.Key);
             return true;
         }
-        // If the metadata indicates that no validators exist AND the aggregate state for the key says that the model graph
-        // is not invalid (i.e. is one of Unvalidated, Valid, or Skipped) we can safely mark the graph as valid.
+        // If the metadata indicates that no validators exist AND the aggregate state for the key says that
+        // the model graph
+        // is not invalid (i.e. is one of Unvalidated, Valid, or Skipped) we can safely mark the graph as
+        // valid.
         else if (
             metadata.HasValidators == false
             && ModelState.GetFieldValidationState(key) != ModelValidationState.Invalid
@@ -368,7 +382,8 @@ public class ValidationVisitor
                 metadata.ThrowIfRecordTypeHasValidationOnProperties();
             }
 
-            // No validators will be created for this graph of objects. Mark it as valid if it wasn't previously validated.
+            // No validators will be created for this graph of objects. Mark it as valid if it wasn't previously
+            // validated.
             var entries = ModelState.FindKeysWithPrefix(key);
             foreach (var item in entries)
             {
@@ -398,7 +413,8 @@ public class ValidationVisitor
     }
 
     /// <summary>
-    /// Validate complex types, this covers everything VisitSimpleType does not i.e. both enumerations and complex types.
+    /// Validate complex types, this covers everything VisitSimpleType does not i.e. both enumerations
+    // and complex types.
     /// </summary>
     /// <param name="defaultStrategy">The default validation strategy to use.</param>
     /// <returns><see langword="true" /> if valid, otherwise <see langword="false" />.</returns>
@@ -420,7 +436,8 @@ public class ValidationVisitor
         }
 
         // Double-checking HasReachedMaxErrors just in case this model has no properties.
-        // If validation has failed for any children, only validate the parent if ValidateComplexTypesIfChildValidationFails is true.
+        // If validation has failed for any children, only validate the parent if
+        // ValidateComplexTypesIfChildValidationFails is true.
         if (
             (isValid || ValidateComplexTypesIfChildValidationFails)
             && !ModelState.HasReachedMaxErrors
@@ -451,7 +468,8 @@ public class ValidationVisitor
     /// Validate all the child nodes using the specified strategy.
     /// </summary>
     /// <param name="strategy">The validation strategy.</param>
-    /// <returns><see langword="true" /> if all children are valid, otherwise <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if all children are valid, otherwise <see langword="false"
+    // />.</returns>
     protected virtual bool VisitChildren(IValidationStrategy strategy)
     {
         Debug.Assert(Metadata is not null && Key is not null && Model is not null);

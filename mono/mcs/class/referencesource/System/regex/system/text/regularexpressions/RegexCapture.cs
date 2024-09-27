@@ -33,8 +33,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * The index of the beginning of the matched capture
-         */
+        * The index of the beginning of the matched capture
+        */
         /// <devdoc>
         ///    <para>Returns the position in the original string where the first character of
         ///       captured substring was found.</para>
@@ -45,8 +45,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * The length of the matched capture
-         */
+        * The length of the matched capture
+        */
         /// <devdoc>
         ///    <para>
         ///       Returns the length of the captured substring.
@@ -66,8 +66,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * The capture as a string
-         */
+        * The capture as a string
+        */
         /// <devdoc>
         ///    <para>
         ///       Returns
@@ -80,24 +80,24 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * The original string
-         */
+        * The original string
+        */
         internal String GetOriginalString()
         {
             return _text;
         }
 
         /*
-         * The substring to the left of the capture
-         */
+        * The substring to the left of the capture
+        */
         internal String GetLeftSubstring()
         {
             return _text.Substring(0, _index);
         }
 
         /*
-         * The substring to the right of the capture
-         */
+        * The substring to the right of the capture
+        */
         internal String GetRightSubstring()
         {
             return _text.Substring(_index + _length, _text.Length - _index - _length);

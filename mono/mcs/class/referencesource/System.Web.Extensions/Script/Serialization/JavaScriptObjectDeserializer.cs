@@ -225,8 +225,10 @@ namespace System.Web.Script.Serialization
             return dictionary;
         }
 
-        // MSRC 12038: limit the maximum number of entries that can be added to a Json deserialized dictionary,
-        // as a large number of entries potentially can result in too many hash collisions that may cause DoS
+        // MSRC 12038: limit the maximum number of entries that can be added to a Json deserialized
+        // dictionary,
+        // as a large number of entries potentially can result in too many hash collisions that may cause
+        // DoS
         private void ThrowIfMaxJsonDeserializerMembersExceeded(int count)
         {
             if (count >= AppSettings.MaxJsonDeserializerMembers)
@@ -287,8 +289,10 @@ namespace System.Web.Script.Serialization
             bool hasDecimalPoint = input.IndexOf('.') >= 0;
             // DevDiv 56892: don't try to parse to Int32/64/Decimal if it has an exponent sign
             bool hasExponent = input.LastIndexOf("e", StringComparison.OrdinalIgnoreCase) >= 0;
-            // [Last]IndexOf(char, StringComparison) overload doesn't exist, so search for "e" as a string not a char
-            // Use 'Last'IndexOf since if there is an exponent it would be more quickly found starting from the end of the string
+            // [Last]IndexOf(char, StringComparison) overload doesn't exist, so search for "e" as a string not a
+            // char
+            // Use 'Last'IndexOf since if there is an exponent it would be more quickly found starting from the
+            // end of the string
             // since 'e' is always toward the end of the number. e.g. 1.238907598768972987E82
 
             if (!hasExponent)
@@ -351,7 +355,8 @@ namespace System.Web.Script.Serialization
             Double d;
             if (Double.TryParse(input, NumberStyles.Float, CultureInfo.InvariantCulture, out d))
             {
-                // NumberStyles.Float: AllowLeadingWhite, AllowTrailingWhite, AllowLeadingSign, AllowDecimalPoint, AllowExponent
+                // NumberStyles.Float: AllowLeadingWhite, AllowTrailingWhite, AllowLeadingSign, AllowDecimalPoint,
+                // AllowExponent
                 return d;
             }
 
@@ -495,7 +500,8 @@ namespace System.Web.Script.Serialization
         {
             // DivDiv 41127: Never confuse atlas serialized strings with dates.
             // DevDiv 74430: JavasciptSerializer will need to handle date time offset - following WCF design
-            // serialized dates look like: "\/Date(123)\/" or "\/Date(123A)" or "Date(123+4567)" or Date(123-4567)"
+            // serialized dates look like: "\/Date(123)\/" or "\/Date(123A)" or "Date(123+4567)" or
+            // Date(123-4567)"
             // the A, +14567, -4567 portion in the above example is ignored
             int pos = _s.IndexOf(DateTimeSuffix);
             Match match = Regex.Match(

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
     internal static class MembersPuller
     {
         /// <summary>
-        /// Annotation used to mark imports that we move over, so that we can remove these imports if they are unnecessary
+        /// Annotation used to mark imports that we move over, so that we can remove these imports if they
+        // are unnecessary
         /// (and so we don't remove any other unnecessary imports)
         /// </summary>
         private static readonly SyntaxAnnotation s_removableImportAnnotation =
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         private static IMethodSymbol MakePublicAccessor(IMethodSymbol getterOrSetter)
         {
             // Create a public getter/setter since user is trying to pull a non-public property to an interface.
-            // If getterOrSetter is null, it means this property doesn't have a getter/setter, so just don't generate it.
+            // If getterOrSetter is null, it means this property doesn't have a getter/setter, so just don't
+            // generate it.
             return getterOrSetter == null
                 ? getterOrSetter
                 : CodeGenerationSymbolFactory.CreateMethodSymbol(
@@ -231,11 +233,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         private static ISymbol GetSymbolsToPullUp(MemberAnalysisResult analysisResult)
         {
             var member = analysisResult.Member;
-            // We don't support generating static interface members, so we need to update to non-static before generating.
+            // We don't support generating static interface members, so we need to update to non-static before
+            // generating.
             var modifier = DeclarationModifiers.From(member).WithIsStatic(false);
             if (member is IPropertySymbol propertySymbol)
             {
-                // Property is treated differently since we need to make sure it gives right accessor symbol to ICodeGenerationService,
+                // Property is treated differently since we need to make sure it gives right accessor symbol to
+                // ICodeGenerationService,
                 // otherwise ICodeGenerationService won't give the expected declaration.
                 if (analysisResult.ChangeOriginalToPublic)
                 {
@@ -444,7 +448,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 destinationEditor.OriginalDocument.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // Remove some original members since we are pulling members into class.
-            // Note: If the user chooses to make the member abstract, then the original member will be changed to an override,
+            // Note: If the user chooses to make the member abstract, then the original member will be changed
+            // to an override,
             // and it will pull an abstract declaration up to the destination.
             // But if the member is abstract itself, it will still be removed.
             foreach (var analysisResult in result.MemberAnalysisResults)
@@ -586,9 +591,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         }
 
         /// <summary>
-        /// In the case where we have leading whitespace in front of the first member and there are no imports, adding imports
-        /// moves that trivia to above the import (and sometimes removes it entirely if the import is later removed).
-        /// So, we want to cache the trivia before, delete it, then add it back in after the imports are added.
+        /// In the case where we have leading whitespace in front of the first member and there are no
+        // imports, adding imports
+        /// moves that trivia to above the import (and sometimes removes it entirely if the import is later
+        // removed).
+        /// So, we want to cache the trivia before, delete it, then add it back in after the imports are
+        // added.
         /// </summary>
         private static SyntaxTriviaList GetLeadingTriviaBeforeFirstMember(
             SyntaxNode root,
@@ -625,7 +633,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         }
 
         /// <summary>
-        /// Get all import statements in scope for this syntax by traversing up the tree and searching in containing namespaces and compilation units.
+        /// Get all import statements in scope for this syntax by traversing up the tree and searching in
+        // containing namespaces and compilation units.
         /// </summary>
         /// <param name="start">The node to start traversing up from</param>
         /// <returns>All the import/using directives found along the traversal</returns>
@@ -759,7 +768,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 )
                     overrideMembersSet.Add(symbol);
 
-                // Since the destination and selectedMember may belong different language, so use SymbolEquivalenceComparer as comparer
+                // Since the destination and selectedMember may belong different language, so use
+                // SymbolEquivalenceComparer as comparer
                 return overrideMembersSet
                     .Intersect(destination.GetMembers(), SymbolEquivalenceComparer.Instance)
                     .Any();

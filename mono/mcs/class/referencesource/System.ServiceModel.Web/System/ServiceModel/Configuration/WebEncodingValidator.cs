@@ -22,7 +22,8 @@ namespace System.ServiceModel.Configuration
             if (
                 (encoding == null)
                 ||
-                // utf-8 case. EncodingConverter generates TextEncoderDefaults.Encoding for utf-8, different from System.Text.Encoding.UTF8
+                // utf-8 case. EncodingConverter generates TextEncoderDefaults.Encoding for utf-8, different from
+                // System.Text.Encoding.UTF8
                 (
                     (encoding.WebName != Encoding.UTF8.WebName)
                     && (encoding.WebName != Encoding.Unicode.WebName)

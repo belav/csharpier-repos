@@ -11,7 +11,8 @@ namespace System.Composition.Hosting.Core
     /// <summary>
     /// Represents a node in the lifetime tree. A <see cref="LifetimeContext"/> is the unit of
     /// sharing for shared parts, controls the disposal of bound parts, and can be used to retrieve
-    /// instances either as part of an existing <see cref="CompositionOperation"/> or as the basis of a new
+    /// instances either as part of an existing <see cref="CompositionOperation"/> or as the basis of a
+    // new
     /// composition operation. An individual lifetime context can be marked to contain parts that are
     /// constrained by particular sharing boundaries.
     /// </summary>
@@ -20,7 +21,8 @@ namespace System.Composition.Hosting.Core
     /// lock-free-readable and does not result in issues if added to during disposal. It is protected
     /// by being locked itself. Activation logic is unavoidably called under this lock.
     /// Bound part instances is always protected, by locking [this], and should never be written to
-    /// after disposal and so is set to null under a lock in Dispose(). If it were allowed it would result in
+    /// after disposal and so is set to null under a lock in Dispose(). If it were allowed it would
+    // result in
     /// disposable parts not being released. Dispose methods on parts are called outside the lock.
     /// </remarks>
     /// <seealso cref="Export{T}"/>
@@ -148,10 +150,14 @@ namespace System.Composition.Hosting.Core
         /// <param name="sharingId">Sharing id for the part in question.</param>
         /// <param name="operation">Operation in which to activate a new part instance if necessary.</param>
         /// <param name="creator">Activator that can activate a new part instance if necessary.</param>
-        /// <returns>The part instance corresponding to <paramref name="sharingId"/> within this lifetime context.</returns>
-        /// <remarks>This method is lock-free if the part instance already exists. If the part instance must be created,
-        /// a lock will be taken that will serialize other writes via this method (concurrent reads will continue to
-        /// be safe and lock-free). It is important that the composition, and thus lock acquisition, is strictly
+        /// <returns>The part instance corresponding to <paramref name="sharingId"/> within this lifetime
+        // context.</returns>
+        /// <remarks>This method is lock-free if the part instance already exists. If the part instance must
+        // be created,
+        /// a lock will be taken that will serialize other writes via this method (concurrent reads will
+        // continue to
+        /// be safe and lock-free). It is important that the composition, and thus lock acquisition, is
+        // strictly
         /// leaf-to-root in the lifetime tree.</remarks>
         public object GetOrCreate(
             int sharingId,

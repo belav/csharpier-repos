@@ -8,7 +8,8 @@ namespace System
 {
     /// <summary>
     /// The exception that is thrown when a program contains invalid IL or metadata.
-    /// This exception is also thrown when internal runtime implementation limits have been exceeded by the program.
+    /// This exception is also thrown when internal runtime implementation limits have been exceeded by
+    // the program.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

@@ -64,16 +64,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             {
                                 // Since a solution load is not yet completed, there is no document available to answer this query.
                                 // The solution explorer presumes that if somebody doesn't answer for a file, they never will.
-                                // See Providers\GraphContextAttachedCollectionSource.cs for more. Therefore we should answer by setting
+                                // See Providers\GraphContextAttachedCollectionSource.cs for more. Therefore we should answer by
+                                // setting
                                 // ContainsChildren property to either true or false, so any following updates will be tractable.
-                                // We will set it to false since the solution explorer assumes the default for this query response is 'false'.
+                                // We will set it to false since the solution explorer assumes the default for this query response
+                                // is 'false'.
 
                                 // Todo: we may need fallback to check if this node actually represents a C# or VB language
-                                // even when its extension fails to say so. One option would be to call DTEWrapper.IsRegisteredForLangService,
+                                // even when its extension fails to say so. One option would be to call
+                                // DTEWrapper.IsRegisteredForLangService,
                                 // which may not be called here however since deadlock could happen.
 
-                                // The Uri returned by `GetNestedValueByName()` above isn't necessarily absolute and the `OriginalString` is
-                                // the only property that doesn't throw if the UriKind is relative, so `OriginalString` must be used instead
+                                // The Uri returned by `GetNestedValueByName()` above isn't necessarily absolute and the
+                                // `OriginalString` is
+                                // the only property that doesn't throw if the UriKind is relative, so `OriginalString` must be used
+                                // instead
                                 // of `AbsolutePath`.
                                 var path = uri.OriginalString;
 

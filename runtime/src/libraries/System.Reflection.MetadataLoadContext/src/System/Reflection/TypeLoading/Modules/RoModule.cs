@@ -142,10 +142,14 @@ namespace System.Reflection.TypeLoading
         public sealed override Type? GetType(string className, bool throwOnError, bool ignoreCase)
         {
             //
-            // This looks bogus and against the intended meaning of the api but it's pretty close to the .NET Framework behavior.
-            // The .NET Framework Module.GetType() will search the entire assembly when encounting a non assembly-qualified type name but
-            // *only* as long as it's a generic type argument, not the top level type. If you specify the name of a type in a
-            // different module as the top level type, this api returns null (even if throwOnError is specified as true!)
+            // This looks bogus and against the intended meaning of the api but it's pretty close to the .NET
+            // Framework behavior.
+            // The .NET Framework Module.GetType() will search the entire assembly when encounting a non
+            // assembly-qualified type name but
+            // *only* as long as it's a generic type argument, not the top level type. If you specify the name
+            // of a type in a
+            // different module as the top level type, this api returns null (even if throwOnError is specified
+            // as true!)
             //
             Type type = Assembly.GetType(
                 className,
@@ -154,18 +158,22 @@ namespace System.Reflection.TypeLoading
             )!;
             if (type.Module != this)
             {
-                // We should throw if throwOnError == true, but .NET Framework doesn't so we'll keep the same behavior for the few people using this.
+                // We should throw if throwOnError == true, but .NET Framework doesn't so we'll keep the same
+                // behavior for the few people using this.
                 return null;
             }
             return type;
         }
 
         /// <summary>
-        /// Helper routine for the more general Module.GetType() family of apis. Also used in typeRef resolution.
+        /// Helper routine for the more general Module.GetType() family of apis. Also used in typeRef
+        // resolution.
         ///
-        /// Resolves top-level named types only. No nested types. No constructed types. The input name must not be escaped.
+        /// Resolves top-level named types only. No nested types. No constructed types. The input name must
+        // not be escaped.
         ///
-        /// If a type is not contained or forwarded from the module, this method returns null (does not throw.)
+        /// If a type is not contained or forwarded from the module, this method returns null (does not
+        // throw.)
         /// This supports the "throwOnError: false" behavior of Module.GetType(string, bool).
         /// </summary>
         internal RoDefinitionType? GetTypeCore(

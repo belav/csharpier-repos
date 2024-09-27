@@ -344,7 +344,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 return false;
             }
             input.DropBits(16);
-            /* The header is written in "wrong" byte order */
+/* The header is written in "wrong" byte order */
             header = ((header << 8) | (header >> 8)) & 0xffff;
             if (header % 31 != 0)
             {
@@ -356,12 +356,12 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 throw new FormatException("Compression Method unknown");
             }
 
-            /* Maximum size of the backwards window in bits.
-            * We currently ignore this, but we could use it to make the
-            * inflater window more space efficient. On the other hand the
-            * full window (15 bits) is needed most times, anyway.
-            int max_wbits = ((header & 0x7000) >> 12) + 8;
-            */
+/* Maximum size of the backwards window in bits.
+* We currently ignore this, but we could use it to make the
+* inflater window more space efficient. On the other hand the
+* full window (15 bits) is needed most times, anyway.
+int max_wbits = ((header & 0x7000) >> 12) + 8;
+*/
 
             if ((header & 0x0020) == 0)
             { // Dictionary flag?
@@ -416,7 +416,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 switch (mode)
                 {
                     case DECODE_HUFFMAN:
-                        /* This is the inner loop so it is optimized a bit */
+/* This is the inner loop so it is optimized a bit */
                         while (((symbol = litlenTree.GetSymbol(input)) & ~0xff) == 0)
                         {
                             outputWindow.Write(symbol);
@@ -433,7 +433,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                             }
                             else
                             {
-                                /* symbol == 256: end of block */
+/* symbol == 256: end of block */
                                 distTree = null;
                                 litlenTree = null;
                                 mode = DECODE_BLOCKS;
@@ -831,23 +831,23 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 }
                 return 0;
             }
-            /*			// Check for correct buff, off, len triple
-                        if (off < 0 || off + len >= buf.Length) {
-                            throw new ArgumentException("off/len outside buf bounds");
-                        }*/
+/*			// Check for correct buff, off, len triple
+if (off < 0 || off + len >= buf.Length) {
+throw new ArgumentException("off/len outside buf bounds");
+}*/
             int count = 0;
             int more;
             do
             {
                 if (mode != DECODE_CHKSUM)
                 {
-                    /* Don't give away any output, if we are waiting for the
-                    * checksum in the input stream.
-                    *
-                    * With this trick we have always:
-                    *   needsInput() and not finished()
-                    *   implies more output can be produced.
-                    */
+/* Don't give away any output, if we are waiting for the
+* checksum in the input stream.
+*
+* With this trick we have always:
+*   needsInput() and not finished()
+*   implies more output can be produced.
+*/
                     more = outputWindow.CopyOutput(buf, off, len);
                     adler.Update(buf, off, more);
                     off += more;

@@ -158,7 +158,8 @@ namespace System.ServiceModel.Description
             if (this.useIdentityConfiguration)
             {
                 //
-                // Note: the token manager we create here is always a wrapper over the default collection of token handlers
+                // Note: the token manager we create here is always a wrapper over the default collection of token
+                // handlers
                 //
                 return new FederatedSecurityTokenManager(this.Clone());
             }
@@ -197,7 +198,8 @@ namespace System.ServiceModel.Description
         )
         {
             //
-            // Only pass a name if there was a name explicitly given to this class, otherwise ServiceConfig will require
+            // Only pass a name if there was a name explicitly given to this class, otherwise ServiceConfig will
+            // require
             // a config section with the default configuration.
             //
             if (this.UseIdentityConfiguration)
@@ -208,9 +210,11 @@ namespace System.ServiceModel.Description
 
         /// <summary>
         /// Helper method that Initializes the SecurityTokenManager used by the ServiceHost.
-        /// By default the method sets the SecurityTokenHandlers initialized with IdentityConfiguration on the ServiceHost.
+        /// By default the method sets the SecurityTokenHandlers initialized with IdentityConfiguration on
+        // the ServiceHost.
         /// </summary>
-        /// <param name="serviceHost">ServiceHost instance to configure with FederatedSecurityTokenManager.</param>
+        /// <param name="serviceHost">ServiceHost instance to configure with
+        // FederatedSecurityTokenManager.</param>
         /// <exception cref="ArgumentNullException">One of the input argument is null.</exception>
         void ConfigureServiceHost(ServiceHostBase serviceHost)
         {

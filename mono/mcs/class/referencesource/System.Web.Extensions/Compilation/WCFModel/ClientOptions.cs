@@ -75,7 +75,8 @@ namespace Microsoft.VSDesigner.WCFModel
             get { return m_GenerateTaskBasedAsynchronousMethod; }
             set
             {
-                // In order to maximally keep compatible with Dev10 and previous VS, if GenerateTaskBasedAsynchronousMethod is false,
+                // In order to maximally keep compatible with Dev10 and previous VS, if
+                // GenerateTaskBasedAsynchronousMethod is false,
                 // we will not persist it.
                 m_GenerateTaskBasedAsynchronousMethod = value;
                 m_GenerateTaskBasedAsynchronousMethodSpecified = value;
@@ -112,7 +113,8 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// contains a list of types which will be excluded when the design time tool matches types automatically
+        /// contains a list of types which will be excluded when the design time tool matches types
+        // automatically
         /// </summary>
         /// <value></value>
         /// <remarks></remarks>
@@ -131,7 +133,8 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// control whether the data contract serializer should import non-DataContract types as IXmlSerializable types
+        /// control whether the data contract serializer should import non-DataContract types as
+        // IXmlSerializable types
         /// </summary>
         /// <value></value>
         /// <remarks></remarks>

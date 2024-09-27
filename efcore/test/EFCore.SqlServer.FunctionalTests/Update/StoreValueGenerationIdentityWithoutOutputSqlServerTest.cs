@@ -25,7 +25,8 @@ public class StoreValueGenerationIdentityWithoutOutputSqlServerTest
         bool withSameEntityType
     )
     {
-        // We have triggers, so any insert/update retrieving a database-generated value must be enclosed in a transaction
+        // We have triggers, so any insert/update retrieving a database-generated value must be enclosed in
+        // a transaction
         // (e.g. we use INSERT/UPDATE+SELECT or INSERT ... OUTPUT INTO+SELECT)
         if (
             generatedValues is GeneratedValues.Some or GeneratedValues.All
@@ -40,7 +41,8 @@ public class StoreValueGenerationIdentityWithoutOutputSqlServerTest
             return false;
         }
 
-        // For multiple operations, we specifically optimize multiple insertions of the same entity type with a single MERGE.
+        // For multiple operations, we specifically optimize multiple insertions of the same entity type
+        // with a single MERGE.
         return !(
             firstOperationType is EntityState.Added
             && secondOperationType is EntityState.Added

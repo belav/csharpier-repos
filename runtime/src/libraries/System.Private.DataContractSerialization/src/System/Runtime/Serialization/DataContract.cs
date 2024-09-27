@@ -417,7 +417,8 @@ namespace System.Runtime.Serialization.DataContracts
             private bool _parseMethodSet;
 
             /// <SecurityNote>
-            /// Critical - in deserialization, we initialize an object instance passing this Type to GetUninitializedObject method
+            /// Critical - in deserialization, we initialize an object instance passing this Type to
+            // GetUninitializedObject method
             /// </SecurityNote>
             private Type _typeForInitialization;
 
@@ -534,7 +535,8 @@ namespace System.Runtime.Serialization.DataContracts
                 }
             }
 
-            // check whether a corresponding update is required in ClassDataContract.IsNonAttributedTypeValidForSerialization
+            // check whether a corresponding update is required in
+            // ClassDataContract.IsNonAttributedTypeValidForSerialization
             [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             private static DataContract CreateDataContract(
@@ -658,7 +660,8 @@ namespace System.Runtime.Serialization.DataContracts
                         AssignDataContractToId(dataContract, id);
                     }
                 }
-                // !;   // If null after the lookup and creation attempts above, the 'ThrowInvalidDataContractException' kicks in.
+                // !;   // If null after the lookup and creation attempts above, the
+                // 'ThrowInvalidDataContractException' kicks in.
                 return dataContract;
             }
 
@@ -667,9 +670,12 @@ namespace System.Runtime.Serialization.DataContracts
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             internal static Type GetDataContractAdapterType(Type type)
             {
-                // Replace the DataTimeOffset ISerializable type passed in with the internal DateTimeOffsetAdapter DataContract type.
-                // DateTimeOffsetAdapter is used for serialization/deserialization purposes to bypass the ISerializable implementation
-                // on DateTimeOffset; which does not work in partial trust and to ensure correct schema import/export scenarios.
+                // Replace the DataTimeOffset ISerializable type passed in with the internal DateTimeOffsetAdapter
+                // DataContract type.
+                // DateTimeOffsetAdapter is used for serialization/deserialization purposes to bypass the
+                // ISerializable implementation
+                // on DateTimeOffset; which does not work in partial trust and to ensure correct schema
+                // import/export scenarios.
                 if (type == Globals.TypeOfDateTimeOffset)
                 {
                     return Globals.TypeOfDateTimeOffsetAdapter;
@@ -1122,11 +1128,16 @@ namespace System.Runtime.Serialization.DataContracts
             [MemberNotNull(nameof(_typeForInitialization))]
             private void SetTypeForInitialization(Type classType)
             {
-                // TODO - This 'if' was not commented out in 4.8. But 4.8 was not dealing with nullable notations, which we do have here in Core.
-                // With the absence of schema importing, it does not make sense to have a data contract without a valid serializable underlying type. (Even
-                // with schema importing it doesn't make sense, but there is a building period while we're still figuring out all the data types and contracts
-                // where the underlying type may be null.) Anyway... might it make sense to re-instate this if clause - but use it to throw an exception if
-                // we don't meet the criteria? That way we can maintain nullable semantics and not do anything silly trying to keep them simple.
+                // TODO - This 'if' was not commented out in 4.8. But 4.8 was not dealing with nullable notations,
+                // which we do have here in Core.
+                // With the absence of schema importing, it does not make sense to have a data contract without a
+                // valid serializable underlying type. (Even
+                // with schema importing it doesn't make sense, but there is a building period while we're still
+                // figuring out all the data types and contracts
+                // where the underlying type may be null.) Anyway... might it make sense to re-instate this if
+                // clause - but use it to throw an exception if
+                // we don't meet the criteria? That way we can maintain nullable semantics and not do anything silly
+                // trying to keep them simple.
                 //if (classType.IsSerializable || classType.IsDefined(Globals.TypeOfDataContractAttribute, false))
                 {
                     _typeForInitialization = classType;
@@ -2094,7 +2105,8 @@ namespace System.Runtime.Serialization.DataContracts
 
         // An incomplete implementation of MD5 necessary for back-compat.
         // "derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm"
-        // THIS HASH MAY ONLY BE USED FOR BACKWARDS-COMPATIBLE NAME GENERATION.  DO NOT USE FOR SECURITY PURPOSES.
+        // THIS HASH MAY ONLY BE USED FOR BACKWARDS-COMPATIBLE NAME GENERATION.  DO NOT USE FOR SECURITY
+        // PURPOSES.
         private static byte[] ComputeHash(byte[] namespaces)
         {
             int[] shifts = new int[] { 7, 12, 17, 22, 5, 9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21 };
@@ -2546,8 +2558,10 @@ namespace System.Runtime.Serialization.DataContracts
                     {
                         //Ignore any InvalidDataContractException as this phase is a workaround for lack of ISerializable.
                         //InvalidDataContractException may happen as we walk the type hierarchy back to Object and encounter
-                        //types that may not be valid DC. This step is purely for KeyValuePair and shouldn't fail the (de)serialization.
-                        //Any IDCE in this case fails the serialization/deserialization process which is not the optimal experience.
+                        //types that may not be valid DC. This step is purely for KeyValuePair and shouldn't fail the
+                        // (de)serialization.
+                        //Any IDCE in this case fails the serialization/deserialization process which is not the optimal
+                        // experience.
                     }
                 }
 
@@ -2577,7 +2591,9 @@ namespace System.Runtime.Serialization.DataContracts
                 )
             )
             {
-                // The alreadyExistingContract type was used as-is in NetFx. The call to get the appropriate adapter type was added in CoreFx with https://github.com/dotnet/runtime/commit/50c0a70c52fa66fafa1227be552ccdab5e4cf8e4
+                // The alreadyExistingContract type was used as-is in NetFx. The call to get the appropriate adapter
+                // type was added in CoreFx with
+                // https://github.com/dotnet/runtime/commit/50c0a70c52fa66fafa1227be552ccdab5e4cf8e4
                 // Don't throw duplicate if its a KeyValuePair<K,T> as it could have been added by Dictionary<K,T>
                 if (
                     DataContractCriticalHelper.GetDataContractAdapterType(
@@ -2686,7 +2702,8 @@ namespace System.Runtime.Serialization.DataContracts
             }
 
             // Nested types are not visible unless their declaring type is visible.
-            // Additionally, they must be either IsNestedPublic or in an assembly with InternalsVisibleTo this current assembly.
+            // Additionally, they must be either IsNestedPublic or in an assembly with InternalsVisibleTo this
+            // current assembly.
             // Non-nested types must be public or have this same InternalsVisibleTo relation.
             return t.IsNested
                 ? (t.IsNestedPublic || IsTypeVisibleInSerializationModule(t))
@@ -2695,8 +2712,10 @@ namespace System.Runtime.Serialization.DataContracts
         }
 
         /// <SecurityNote>
-        /// Review - checks constructor visibility to calculate if access to it requires MemberAccessPermission.
-        ///          note: does local check for visibility, assuming that the declaring Type visibility has been checked.
+        /// Review - checks constructor visibility to calculate if access to it requires
+        // MemberAccessPermission.
+        ///          note: does local check for visibility, assuming that the declaring Type visibility has
+        // been checked.
         ///          since this information is used to determine whether to give the generated code access
         ///          permissions to private members, any changes to the logic should be reviewed.
         /// </SecurityNote>
@@ -2707,7 +2726,8 @@ namespace System.Runtime.Serialization.DataContracts
 
         /// <SecurityNote>
         /// Review - checks method visibility to calculate if access to it requires MemberAccessPermission.
-        ///          note: does local check for visibility, assuming that the declaring Type visibility has been checked.
+        ///          note: does local check for visibility, assuming that the declaring Type visibility has
+        // been checked.
         ///          since this information is used to determine whether to give the generated code access
         ///          permissions to private members, any changes to the logic should be reviewed.
         /// </SecurityNote>
@@ -2720,7 +2740,8 @@ namespace System.Runtime.Serialization.DataContracts
 
         /// <SecurityNote>
         /// Review - checks field visibility to calculate if access to it requires MemberAccessPermission.
-        ///          note: does local check for visibility, assuming that the declaring Type visibility has been checked.
+        ///          note: does local check for visibility, assuming that the declaring Type visibility has
+        // been checked.
         ///          since this information is used to determine whether to give the generated code access
         ///          permissions to private members, any changes to the logic should be reviewed.
         /// </SecurityNote>

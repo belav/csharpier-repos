@@ -74,19 +74,23 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
             Contract.ThrowIfNull(document);
 
-            // In Live Share, typescript exports a gotodefinition service that returns no results and prevents the LSP
-            // client from handling the request.  So prevent the local service from handling goto def commands in the
+            // In Live Share, typescript exports a gotodefinition service that returns no results and prevents
+            // the LSP
+            // client from handling the request.  So prevent the local service from handling goto def commands
+            // in the
             // remote workspace. This can be removed once typescript implements LSP support for goto def.
             if (subjectBuffer.IsInLspEditorContext())
                 return false;
 
-            // If the file is empty, there's nothing to be on that we can goto-def on.  This also ensures that we can
+            // If the file is empty, there's nothing to be on that we can goto-def on.  This also ensures that
+            // we can
             // create an appropriate non-empty tracking span later on.
             var currentSnapshot = subjectBuffer.CurrentSnapshot;
             if (currentSnapshot.Length == 0)
                 return false;
 
-            // If there's a selection, use the starting point of the selection as the invocation point. Otherwise, just
+            // If there's a selection, use the starting point of the selection as the invocation point.
+            // Otherwise, just
             // pick wherever the caret is exactly at.
             var caretPos =
                 args.TextView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer).FirstOrNull()?.Start
@@ -117,7 +121,8 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             var indicatorFactory =
                 document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
 
-            // TODO: prior logic was to get a tracking span of length 1 here.  Preserving that, though it's unclear if
+            // TODO: prior logic was to get a tracking span of length 1 here.  Preserving that, though it's
+            // unclear if
             // that is necessary for the BWI to work properly.
             Contract.ThrowIfTrue(position.Snapshot.Length == 0);
             var applicableToSpan =
@@ -140,11 +145,13 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                     .GetDefinitionLocationAsync(document, position, cancellationToken)
                     .ConfigureAwait(false);
 
-                // make sure that if our background indicator got canceled, that we do not still perform the navigation.
+                // make sure that if our background indicator got canceled, that we do not still perform the
+                // navigation.
                 if (backgroundIndicator.UserCancellationToken.IsCancellationRequested)
                     return;
 
-                // we're about to navigate.  so disable cancellation on focus-lost in our indicator so we don't end up
+                // we're about to navigate.  so disable cancellation on focus-lost in our indicator so we don't end
+                // up
                 // causing ourselves to self-cancel.
                 backgroundIndicator.CancelOnFocusLost = false;
                 succeeded =

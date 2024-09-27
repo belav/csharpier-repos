@@ -5441,7 +5441,8 @@ class A { }
                     Diagnostic(ErrorCode.ERR_ErrorDirective, "version")
                         .WithArguments("version")
                         .WithLocation(1, 8),
-                    // (1,8): error CS8304: Compiler version: '42.42.42.42424 (<developer build>)'. Language version: <expectedLanguageVersion>.
+                    // (1,8): error CS8304: Compiler version: '42.42.42.42424 (<developer build>)'. Language version:
+                    // <expectedLanguageVersion>.
                     // #error version
                     Diagnostic(ErrorCode.ERR_CompilerAndLanguageVersion, "version")
                         .WithArguments(GetExpectedVersion(), expectedLanguageVersion)
@@ -5471,7 +5472,8 @@ class A { }
                     // #error version:7.1
                     Diagnostic(ErrorCode.ERR_ErrorDirective, "version:7.1")
                         .WithArguments("version:7.1"),
-                    // (1,8): error CS8025: Feature 'version' is not available in C# 4. Please use language version 7.1 or greater.
+                    // (1,8): error CS8025: Feature 'version' is not available in C# 4. Please use language version 7.1
+                    // or greater.
                     // #error version:7.1
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion4, "version:7.1")
                         .WithArguments("version", "7.1")

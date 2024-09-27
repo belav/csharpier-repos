@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 ///         reference.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 /// <typeparam name="T">The type.</typeparam>
@@ -216,7 +217,8 @@ public class ValueComparer<
     ///     Creates an expression for generating a hash code.
     /// </summary>
     /// <param name="favorStructuralComparisons">
-    ///     If <see langword="true" />, then <see cref="IStructuralEquatable" /> is used if the type implements it.
+    ///     If <see langword="true" />, then <see cref="IStructuralEquatable" /> is used if the type
+    // implements it.
     /// </param>
     /// <returns>The hash code expression.</returns>
     protected static Expression<Func<T, int>> CreateDefaultHashCodeExpression(
@@ -262,7 +264,8 @@ public class ValueComparer<
     /// </summary>
     /// <param name="left">The first instance.</param>
     /// <param name="right">The second instance.</param>
-    /// <returns><see langword="true" /> if they are equal; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they are equal; <see langword="false" />
+    // otherwise.</returns>
     public override bool Equals(object? left, object? right)
     {
         var v1Null = left == null;
@@ -284,7 +287,8 @@ public class ValueComparer<
     /// </summary>
     /// <param name="left">The first instance.</param>
     /// <param name="right">The second instance.</param>
-    /// <returns><see langword="true" /> if they are equal; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they are equal; <see langword="false" />
+    // otherwise.</returns>
     public virtual bool Equals(T? left, T? right) =>
         NonCapturingLazyInitializer.EnsureInitialized(
             ref _equals,

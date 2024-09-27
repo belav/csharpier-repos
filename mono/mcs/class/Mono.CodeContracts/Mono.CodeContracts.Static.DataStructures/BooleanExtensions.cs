@@ -54,7 +54,8 @@ namespace Mono.CodeContracts.Static.DataStructures
         /// Returns ProofOutcome value based on input.
         /// </summary>
         /// <param name="condition">Condition to check.</param>
-        /// <returns><see cref="ProofOutcome.True"/> if condition holds, otherwise <see cref="ProofOutcome.Top"/></returns>
+        /// <returns><see cref="ProofOutcome.True"/> if condition holds, otherwise <see
+        // cref="ProofOutcome.Top"/></returns>
         public static FlatDomain<bool> ToTrueOrTop(this bool condition)
         {
             return condition ? ProofOutcome.True : ProofOutcome.Top;

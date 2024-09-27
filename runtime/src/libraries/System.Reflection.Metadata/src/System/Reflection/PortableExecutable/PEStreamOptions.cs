@@ -7,7 +7,8 @@ namespace System.Reflection.PortableExecutable
     public enum PEStreamOptions
     {
         /// <summary>
-        /// By default the stream is disposed when <see cref="PEReader"/> is disposed and sections of the PE image are read lazily.
+        /// By default the stream is disposed when <see cref="PEReader"/> is disposed and sections of the PE
+        // image are read lazily.
         /// </summary>
         Default = 0,
 
@@ -20,10 +21,12 @@ namespace System.Reflection.PortableExecutable
         /// Reads metadata section into memory right away.
         /// </summary>
         /// <remarks>
-        /// Reading from other sections of the file is not allowed (<see cref="InvalidOperationException"/> is thrown by the <see cref="PEReader"/>).
+        /// Reading from other sections of the file is not allowed (<see cref="InvalidOperationException"/>
+        // is thrown by the <see cref="PEReader"/>).
         /// The underlying file may be closed and even deleted after <see cref="PEReader"/> is constructed.
         ///
-        /// <see cref="PEReader"/> closes the stream automatically by the time the constructor returns unless <see cref="LeaveOpen"/> is specified.
+        /// <see cref="PEReader"/> closes the stream automatically by the time the constructor returns
+        // unless <see cref="LeaveOpen"/> is specified.
         /// </remarks>
         PrefetchMetadata = 1 << 1,
 
@@ -31,7 +34,8 @@ namespace System.Reflection.PortableExecutable
         /// Reads the entire image into memory right away.
         /// </summary>
         /// <remarks>
-        /// <see cref="PEReader"/> closes the stream automatically by the time the constructor returns unless <see cref="LeaveOpen"/> is specified.
+        /// <see cref="PEReader"/> closes the stream automatically by the time the constructor returns
+        // unless <see cref="LeaveOpen"/> is specified.
         /// </remarks>
         PrefetchEntireImage = 1 << 2,
 

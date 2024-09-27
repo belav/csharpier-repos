@@ -533,11 +533,13 @@ namespace System.Data.Objects
 
         /// <summary>
         /// Creates a PropertyDescriptorCollection based on a StructuralType definition
-        /// Currently this includes a PropertyDescriptor for each primitive type property in the StructuralType
+        /// Currently this includes a PropertyDescriptor for each primitive type property in the
+        // StructuralType
         /// </summary>
         /// <param name="structuralType">The structural type definition</param>
         /// <param name="componentType">The type to use as the component type</param>
-        /// <param name="isReadOnly">Whether the properties in the collection should be read only or not</param>
+        /// <param name="isReadOnly">Whether the properties in the collection should be read only or
+        // not</param>
         /// <returns></returns>
         internal static PropertyDescriptorCollection CreatePropertyDescriptorCollection(
             StructuralType structuralType,

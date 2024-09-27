@@ -222,7 +222,8 @@ internal partial class IISHttpContext
         CancellationToken cancellation
     ) => SendFileFallback.SendFileAsync(ResponseBody, path, offset, count, cancellation);
 
-    // TODO: In the future this could complete the body all the way down to the server. For now it just ensures
+    // TODO: In the future this could complete the body all the way down to the server. For now it just
+    // ensures
     // any unflushed data gets flushed.
     Task IHttpResponseBodyFeature.CompleteAsync()
     {
@@ -275,8 +276,10 @@ internal partial class IISHttpContext
     }
 
     // Http/2 does not support the upgrade mechanic.
-    // Http/1.1 upgrade requests may have a request body, but that's not allowed in our main scenario (WebSockets) and much
-    // more complicated to support. See https://tools.ietf.org/html/rfc7230#section-6.7, https://tools.ietf.org/html/rfc7540#section-3.2
+    // Http/1.1 upgrade requests may have a request body, but that's not allowed in our main scenario
+    // (WebSockets) and much
+    // more complicated to support. See https://tools.ietf.org/html/rfc7230#section-6.7,
+    // https://tools.ietf.org/html/rfc7540#section-3.2
     bool IHttpUpgradeFeature.IsUpgradableRequest =>
         !RequestCanHaveBody && HttpVersion == System.Net.HttpVersion.Version11;
 
@@ -416,7 +419,8 @@ internal partial class IISHttpContext
                 && NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize != 0
             )
             {
-                // Based off of from https://referencesource.microsoft.com/#system/net/System/Net/HttpListenerRequest.cs,1037c8ec82879ba0,references
+                // Based off of from
+                // https://referencesource.microsoft.com/#system/net/System/Net/HttpListenerRequest.cs,1037c8ec82879ba0,references
                 var rawCertificateCopy = new byte[
                     NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize
                 ];

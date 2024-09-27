@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private async ValueTask<Rental> RentServiceAsync(CancellationToken cancellationToken)
         {
-            // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses ConfigureAwait(true)
+            // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses
+            // ConfigureAwait(true)
             await TaskScheduler.Default;
 
             var options = new ServiceActivationOptions { ClientRpcTarget = _callbackDispatcher };
@@ -482,15 +483,18 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             if (exception is OperationCanceledException)
             {
-                // It's a bug for a service to throw OCE based on a different cancellation token than it has received in the call.
-                // The server side filter will report NFW in such scenario, so that the underlying issue can be fixed.
+                // It's a bug for a service to throw OCE based on a different cancellation token than it has
+                // received in the call.
+                // The server side filter will report NFW in such scenario, so that the underlying issue can be
+                // fixed.
                 // Do not treat this as a critical failure of the service for now and only fail in debug build.
                 Debug.Assert(cancellationToken.IsCancellationRequested);
 
                 return false;
             }
 
-            // Do not report telemetry when the host is shutting down or the remote service threw an IO exception:
+            // Do not report telemetry when the host is shutting down or the remote service threw an IO
+            // exception:
             if (IsHostShuttingDown || IsRemoteIOException(exception))
             {
                 return true;
@@ -502,7 +506,8 @@ namespace Microsoft.CodeAnalysis.Remote
         private bool IsHostShuttingDown =>
             _shutdownCancellationService?.ShutdownToken.IsCancellationRequested == true;
 
-        // TODO: we need https://github.com/microsoft/vs-streamjsonrpc/issues/468 to be implemented in order to check for IOException subtypes.
+        // TODO: we need https://github.com/microsoft/vs-streamjsonrpc/issues/468 to be implemented in order
+        // to check for IOException subtypes.
         private static bool IsRemoteIOException(Exception exception) =>
             exception
                 is RemoteInvocationException
@@ -512,7 +517,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private void OnUnexpectedException(Exception exception, CancellationToken cancellationToken)
         {
-            // If the cancellation token passed to the remote call is not linked with the host shutdown cancellation token,
+            // If the cancellation token passed to the remote call is not linked with the host shutdown
+            // cancellation token,
             // various non-cancellation exceptions may occur during the remote call.
             // Throw cancellation exception if the cancellation token is signaled.
             // If it is not then show info to the user that the service is not available dure to shutdown.
@@ -523,15 +529,20 @@ namespace Microsoft.CodeAnalysis.Remote
                 return;
             }
 
-            // Show the error on the client. See https://github.com/dotnet/roslyn/issues/40476 for error classification details.
+            // Show the error on the client. See https://github.com/dotnet/roslyn/issues/40476 for error
+            // classification details.
             // Based on the exception type and the state of the system we report one of the following:
-            // - "Feature xyz is currently unavailable due to an intermittent error. Please try again later. Error message: '{1}'" (RemoteInvocationException: IOException)
-            // - "Feature xyz is currently unavailable due to an internal error [Details]" (exception is RemoteInvocationException, MessagePackSerializationException, ConnectionLostException)
-            // - "Feature xyz is currently unavailable since Visual Studio is shutting down" (connection exceptions during shutdown cancellation when cancellationToken is not signalled)
+            // - "Feature xyz is currently unavailable due to an intermittent error. Please try again later.
+            // Error message: '{1}'" (RemoteInvocationException: IOException)
+            // - "Feature xyz is currently unavailable due to an internal error [Details]" (exception is
+            // RemoteInvocationException, MessagePackSerializationException, ConnectionLostException)
+            // - "Feature xyz is currently unavailable since Visual Studio is shutting down" (connection
+            // exceptions during shutdown cancellation when cancellationToken is not signalled)
 
             // We expect all RPC calls to complete and not drop the connection.
             // ConnectionLostException indicates a bug that is likely thrown because the remote process crashed.
-            // Currently, ConnectionLostException is also throw when the result of the RPC method fails to serialize
+            // Currently, ConnectionLostException is also throw when the result of the RPC method fails to
+            // serialize
             // (see https://github.com/microsoft/vs-streamjsonrpc/issues/549)
 
             string message;
@@ -565,7 +576,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
             try
             {
-                // Process.ExitCode throws "Process was not started by this object, so requested information cannot be determined.",
+                // Process.ExitCode throws "Process was not started by this object, so requested information cannot
+                // be determined.",
                 // Use Win32 API directly.
                 if (
                     _remoteProcess?.HasExited == true

@@ -265,7 +265,8 @@ namespace MonoTests.System.Runtime.Serialization
             Assert.IsNotNull(element, "XmlSchemaElement not found for " + schema_type.ToString());
 
             Assert.AreEqual(name, element.Name, "#v1, Element name did not match");
-            //FIXME: Assert.AreEqual (0, element.MinOccurs, "#v0, MinOccurs should be 0 for element '" + name + "'");
+            //FIXME: Assert.AreEqual (0, element.MinOccurs, "#v0, MinOccurs should be 0 for element '" + name +
+            // "'");
             Assert.AreEqual(
                 schema_type,
                 element.SchemaTypeName,

@@ -44,17 +44,17 @@ namespace MonoTests.System.Data
     {
         public string GetNormalizedSchema(string source)
         {
-            /*
-                        // Due to the implementation difference, we must have
-                        // one more step to reorder attributes. Here, read
-                        // schema document into XmlSchema once, and compare
-                        // output string with those emission from Write().
-                        XmlSchema xs = XmlSchema.Read (new XmlTextReader (
-                            new StringReader (source)), null);
-                        StringWriter writer = new StringWriter ();
-                        xs.Write (writer);
-                        return writer.ToString ();
-            */
+/*
+// Due to the implementation difference, we must have
+// one more step to reorder attributes. Here, read
+// schema document into XmlSchema once, and compare
+// output string with those emission from Write().
+XmlSchema xs = XmlSchema.Read (new XmlTextReader (
+new StringReader (source)), null);
+StringWriter writer = new StringWriter ();
+xs.Write (writer);
+return writer.ToString ();
+*/
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(source);
             SortAttributes(doc.DocumentElement);

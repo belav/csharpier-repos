@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.IO;
@@ -12,11 +13,16 @@ using System.Web.Http;
 namespace System.Net.Http
 {
     /// <summary>
-    /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
-    /// 206 (Partial Content) byte range responses. The <see cref="ByteRangeStreamContent"/> supports one or more
-    /// byte ranges regardless of whether the ranges are consecutive or not. If there is only one range then a
-    /// single partial response body containing a Content-Range header is generated. If there are more than one
-    /// ranges then a multipart/byteranges response is generated where each body part contains a range indicated
+    /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to
+    // generate HTTP
+    /// 206 (Partial Content) byte range responses. The <see cref="ByteRangeStreamContent"/> supports
+    // one or more
+    /// byte ranges regardless of whether the ranges are consecutive or not. If there is only one range
+    // then a
+    /// single partial response body containing a Content-Range header is generated. If there are more
+    // than one
+    /// ranges then a multipart/byteranges response is generated where each body part contains a range
+    // indicated
     /// by the associated Content-Range header field.
     /// </summary>
     public class ByteRangeStreamContent : HttpContent
@@ -32,25 +38,33 @@ namespace System.Net.Http
         private bool _disposed;
 
         /// <summary>
-        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
-        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the current extend
+        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to
+        // generate HTTP
+        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the
+        // current extend
         /// of the selected resource represented by the <paramref name="content"/> parameter then an
-        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the content.
+        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the
+        // content.
         /// </summary>
         /// <param name="content">The stream over which to generate a byte range view.</param>
-        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
+        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header
+        // field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         public ByteRangeStreamContent(Stream content, RangeHeaderValue range, string mediaType)
             : this(content, range, new MediaTypeHeaderValue(mediaType), DefaultBufferSize) { }
 
         /// <summary>
-        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
-        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the current extend
+        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to
+        // generate HTTP
+        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the
+        // current extend
         /// of the selected resource represented by the <paramref name="content"/> parameter then an
-        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the content.
+        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the
+        // content.
         /// </summary>
         /// <param name="content">The stream over which to generate a byte range view.</param>
-        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
+        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header
+        // field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         /// <param name="bufferSize">The buffer size used when copying the content stream.</param>
         public ByteRangeStreamContent(
@@ -62,13 +76,17 @@ namespace System.Net.Http
             : this(content, range, new MediaTypeHeaderValue(mediaType), bufferSize) { }
 
         /// <summary>
-        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
-        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the current extend
+        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to
+        // generate HTTP
+        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the
+        // current extend
         /// of the selected resource represented by the <paramref name="content"/> parameter then an
-        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the content.
+        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the
+        // content.
         /// </summary>
         /// <param name="content">The stream over which to generate a byte range view.</param>
-        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
+        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header
+        // field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         public ByteRangeStreamContent(
             Stream content,
@@ -78,13 +96,17 @@ namespace System.Net.Http
             : this(content, range, mediaType, DefaultBufferSize) { }
 
         /// <summary>
-        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
-        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the current extend
+        /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to
+        // generate HTTP
+        /// 206 (Partial Content) byte range responses. If none of the requested ranges overlap with the
+        // current extend
         /// of the selected resource represented by the <paramref name="content"/> parameter then an
-        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the content.
+        /// <see cref="InvalidByteRangeException"/> is thrown indicating the valid Content-Range of the
+        // content.
         /// </summary>
         /// <param name="content">The stream over which to generate a byte range view.</param>
-        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
+        /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header
+        // field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         /// <param name="bufferSize">The buffer size used when copying the content stream.</param>
         public ByteRangeStreamContent(

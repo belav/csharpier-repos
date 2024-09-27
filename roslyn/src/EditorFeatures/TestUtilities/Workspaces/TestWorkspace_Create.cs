@@ -116,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             );
         }
 
-        /// <param name="files">Can pass in multiple file contents: files will be named test1.cs, test2.cs, etc.</param>
+        /// <param name="files">Can pass in multiple file contents: files will be named test1.cs, test2.cs,
+        // etc.</param>
         internal static TestWorkspace Create(
             string workspaceKind,
             string language,

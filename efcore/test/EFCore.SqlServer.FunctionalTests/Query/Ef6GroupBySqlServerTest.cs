@@ -199,7 +199,10 @@ GROUP BY [a].[FirstName]
         // @"SELECT
         // 1 AS [C1],
         // CASE WHEN ([Distinct1].[FirstName] IS NULL) THEN N'is null' ELSE N'not null' END AS [C2],
-        // CASE WHEN (((@p__linq__0 = 1) AND (@p__linq__1 = 1)) OR ((@p__linq__2 = 1) AND (@p__linq__3 = 1))) THEN cast(1 as bit) WHEN ( NOT (((@p__linq__0 = 1) AND (@p__linq__1 = 1)) OR ((@p__linq__2 = 1) AND (@p__linq__3 = 1)))) THEN cast(0 as bit) END AS [C3]
+        // CASE WHEN (((@p__linq__0 = 1) AND (@p__linq__1 = 1)) OR ((@p__linq__2 = 1) AND (@p__linq__3 =
+        // 1))) THEN cast(1 as bit) WHEN ( NOT (((@p__linq__0 = 1) AND (@p__linq__1 = 1)) OR ((@p__linq__2 =
+        // 1)
+        // AND (@p__linq__3 = 1)))) THEN cast(0 as bit) END AS [C3]
         // FROM ( SELECT DISTINCT
         // 	[Extent1].[FirstName] AS [FirstName]
         // 	FROM [dbo].[ArubaOwners] AS [Extent1]

@@ -336,17 +336,17 @@ namespace System.Reflection.Emit
         private void ll_emit(OpCode opcode)
         {
             /*
-             * there is already enough room allocated in code.
-             */
+            * there is already enough room allocated in code.
+            */
             // access op1 and op2 directly since the Value property is useless
             if (opcode.Size == 2)
                 code[code_len++] = opcode.op1;
             code[code_len++] = opcode.op2;
             /*
-             * We should probably keep track of stack needs here.
-             * Or we may want to run the verifier on the code before saving it
-             * (this may be needed anyway when the ILGenerator is not used...).
-             */
+            * We should probably keep track of stack needs here.
+            * Or we may want to run the verifier on the code before saving it
+            * (this may be needed anyway when the ILGenerator is not used...).
+            */
             switch (opcode.StackBehaviourPush)
             {
                 case StackBehaviour.Push1:
@@ -366,8 +366,8 @@ namespace System.Reflection.Emit
                 max_stack = cur_stack;
 
             /*
-             * Note that we adjust for the pop behaviour _after_ setting max_stack.
-             */
+            * Note that we adjust for the pop behaviour _after_ setting max_stack.
+            */
             switch (opcode.StackBehaviourPop)
             {
                 case StackBehaviour.Varpop:
@@ -1092,7 +1092,8 @@ namespace System.Reflection.Emit
             MarkLabel(ex_handlers[cur_block].end);
             ex_handlers[cur_block].End(code_len);
             ex_handlers[cur_block].Debug(cur_block);
-            //System.Console.WriteLine ("End Block {0} (handlers: {1})", cur_block, ex_handlers [cur_block].NumHandlers ());
+            //System.Console.WriteLine ("End Block {0} (handlers: {1})", cur_block, ex_handlers
+            // [cur_block].NumHandlers ());
             open_blocks.Pop();
             if (open_blocks.Count > 0)
                 cur_block = (int)open_blocks.Peek();

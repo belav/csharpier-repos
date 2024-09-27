@@ -102,7 +102,7 @@ namespace MonoTests.System.Web.UI.WebControls
             MyColumn column;
             TableCell cell;
 
-            /* test that for Header it just sets the cell.Text to HeaderText */
+/* test that for Header it just sets the cell.Text to HeaderText */
             column = new MyColumn();
             cell = new TableCell();
             column.HeaderText = "This is a Header";
@@ -110,7 +110,7 @@ namespace MonoTests.System.Web.UI.WebControls
 
             Assert.AreEqual("This is a Header", cell.Text, "#1");
 
-            /* test that for Item it adds a HyperLinkControl */
+/* test that for Item it adds a HyperLinkControl */
             column = new MyColumn();
             cell = new TableCell();
             column.NavigateUrl = "http://www.novell.com/";
@@ -120,7 +120,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(1, cell.Controls.Count, "#2");
             Assert.IsTrue(cell.Controls[0] is HyperLink, "#3");
 
-            /* test that for EditItem it adds a HyperLinkControl */
+/* test that for EditItem it adds a HyperLinkControl */
             column = new MyColumn();
             cell = new TableCell();
             column.NavigateUrl = "http://www.novell.com/";
@@ -130,7 +130,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(1, cell.Controls.Count, "#4");
             Assert.IsTrue(cell.Controls[0] is HyperLink, "#5");
 
-            /* test that for AlternatingItem it adds a HyperLinkControl */
+/* test that for AlternatingItem it adds a HyperLinkControl */
             column = new MyColumn();
             cell = new TableCell();
             column.NavigateUrl = "http://www.novell.com/";
@@ -140,7 +140,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(1, cell.Controls.Count, "#6");
             Assert.IsTrue(cell.Controls[0] is HyperLink, "#7");
 
-            /* test that for Footer it just sets the cell.Text to FooterText */
+/* test that for Footer it just sets the cell.Text to FooterText */
             column = new MyColumn();
             cell = new TableCell();
             column.FooterText = "This is a Footer";

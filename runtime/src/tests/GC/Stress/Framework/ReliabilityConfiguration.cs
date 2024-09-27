@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 using System;
@@ -12,8 +13,10 @@ using System.IO;
 using System.Xml;
 
 // General Notes:
-// we use the same modem for our config here as we use for icorhost.exe.  There are 2 config files.  The 1st specifies the tests
-// that are available to the runtime.  The 2nd specifies our current setup based upon the settings in the 1st configuration file.
+// we use the same modem for our config here as we use for icorhost.exe.  There are 2 config files.
+// The 1st specifies the tests
+// that are available to the runtime.  The 2nd specifies our current setup based upon the settings
+// in the 1st configuration file.
 
 public enum TestStartModeEnum
 {
@@ -54,9 +57,11 @@ public enum LoggingLevels
     All = (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x80 | 0x100),
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// ReliabilityConfig is responsible for parsing the available XML configuration files (both the primary config file & the concurrent
+/// ReliabilityConfig is responsible for parsing the available XML configuration files (both the
+// primary config file & the concurrent
 /// test config file.  We do not parse single test config files).
 /// </summary>
 public class ReliabilityConfig : IEnumerable, IEnumerator
@@ -169,7 +174,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     private const string configAssemblyLoadContextLoaderModeLazy = "lazy";
 
     /// <summary>
-    /// The ReliabilityConfig constructor.  Takes 2 config files: The primary config & the test config file.  We then load these up
+    /// The ReliabilityConfig constructor.  Takes 2 config files: The primary config & the test config
+    // file.  We then load these up
     /// and create all the properties on ourself so that the reliability harness knows what to do.
     /// </summary>
     public ReliabilityConfig(string testConfig)
@@ -915,9 +921,9 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                 discoveryPaths.Add(Environment.ExpandEnvironmentVariables(path));
                                 break;
                             case concurrentConfigAssembly:
-                                /***********************************************************************
-                                 * Here's where we process an assembly & it's options.                 *
-                                 ***********************************************************************/
+/***********************************************************************
+* Here's where we process an assembly & it's options.                 *
+***********************************************************************/
 
                                 bool disabled = false;
 
@@ -1462,7 +1468,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// Filename processing helper functions.
     /// <summary>
     /// given a base path & a potentially relative path we'll convert the potentially
@@ -1522,7 +1529,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         return (trimmedPath.Substring(0, trimmedPath.LastIndexOf("\\")));
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Enumerator related - allow enumerating over multiple test runs within the config file.
     //
 
@@ -1574,7 +1582,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
         _index = 0;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Debugging helper functions - these are only ever called when we compile with DEBUG_XML defined.
     //
     //

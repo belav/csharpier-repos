@@ -121,17 +121,21 @@ namespace Microsoft.CodeAnalysis.ForEachCast
 
             var (conversion, collectionElementType) = GetForEachInfo(semanticModel, node);
 
-            // Don't bother checking conversions that are problematic for other reasons.  The user will already have a
+            // Don't bother checking conversions that are problematic for other reasons.  The user will already
+            // have a
             // compiler error telling them the foreach is in error.
             if (!conversion.Exists)
                 return;
 
-            // If the conversion was implicit, then everything is ok.  Implicit conversions are safe and do not throw at runtime.
+            // If the conversion was implicit, then everything is ok.  Implicit conversions are safe and do not
+            // throw at runtime.
             if (conversion.IsImplicit)
                 return;
 
-            // An implicit legal conversion still shows up as explicit conversion in the object model.  But this is fine
-            // to keep as is since being an implicit-conversion means the API indicates it should always be safe to
+            // An implicit legal conversion still shows up as explicit conversion in the object model.  But this
+            // is fine
+            // to keep as is since being an implicit-conversion means the API indicates it should always be safe
+            // to
             // happen at runtime.
             if (
                 conversion.IsUserDefined
@@ -142,17 +146,25 @@ namespace Microsoft.CodeAnalysis.ForEachCast
             if (collectionElementType is null)
                 return;
 
-            // We had a conversion that was explicit.  These are potentially unsafe as they can throw at runtime.
-            // Generally, we would like to notify the user about these.  However, we have different policies depending
-            // on if we think this is a legacy API or not.  Legacy APIs are those built before generics, and thus often
-            // have APIs that will just return `objects` and thus always need some sort of cast to get them to the right
-            // type.  A good example of that is S.T.RegularExpressions.CaptureCollection.  Users will almost always
-            // write this was `foreach (Capture capture in match.Captures)` and it would be annoying to force them to
+            // We had a conversion that was explicit.  These are potentially unsafe as they can throw at
+            // runtime.
+            // Generally, we would like to notify the user about these.  However, we have different policies
+            // depending
+            // on if we think this is a legacy API or not.  Legacy APIs are those built before generics, and
+            // thus often
+            // have APIs that will just return `objects` and thus always need some sort of cast to get them to
+            // the right
+            // type.  A good example of that is S.T.RegularExpressions.CaptureCollection.  Users will almost
+            // always
+            // write this was `foreach (Capture capture in match.Captures)` and it would be annoying to force
+            // them to
             // change this.
             //
-            // What we do want to warn on are things like: `foreach (IUnrelatedInterface iface in stronglyTypedCollection)`.
+            // What we do want to warn on are things like: `foreach (IUnrelatedInterface iface in
+            // stronglyTypedCollection)`.
             //
-            // So, to detect if we're in a legacy situation, we look for iterations that are returning an object-type
+            // So, to detect if we're in a legacy situation, we look for iterations that are returning an
+            // object-type
             // where the collection itself didn't implement `IEnumerable<T>` in some way.
             if (
                 option.Value == ForEachExplicitCastInSourcePreference.WhenStronglyTyped
@@ -162,7 +174,8 @@ namespace Microsoft.CodeAnalysis.ForEachCast
                 return;
             }
 
-            // The user either always wants to write these casts explicitly, or they were calling a non-legacy API.
+            // The user either always wants to write these casts explicitly, or they were calling a non-legacy
+            // API.
             // report the issue so they can insert the appropriate cast.
 
             // We can only fix this issue if the collection type implemented ienumerable and we have

@@ -23,14 +23,17 @@ namespace System.CodeDom.Compiler
     {
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.Compiler.CompilerErrorCollection'/>.
         ///    </para>
         /// </devdoc>
         public CompilerErrorCollection() { }
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> based on another <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/>.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.Compiler.CompilerErrorCollection'/> based on another <see
+        // cref='System.CodeDom.Compiler.CompilerErrorCollection'/>.
         ///    </para>
         /// </devdoc>
         public CompilerErrorCollection(CompilerErrorCollection value)
@@ -40,7 +43,9 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> containing any array of <see cref='System.CodeDom.Compiler.CompilerError'/> objects.
+        ///       Initializes a new instance of <see
+        // cref='System.CodeDom.Compiler.CompilerErrorCollection'/> containing any array of <see
+        // cref='System.CodeDom.Compiler.CompilerError'/> objects.
         ///    </para>
         /// </devdoc>
         public CompilerErrorCollection(CompilerError[] value)
@@ -49,7 +54,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <devdoc>
-        /// <para>Represents the entry at the specified index of the <see cref='System.CodeDom.Compiler.CompilerError'/>.</para>
+        /// <para>Represents the entry at the specified index of the <see
+        // cref='System.CodeDom.Compiler.CompilerError'/>.</para>
         /// </devdoc>
         public CompilerError this[int index]
         {
@@ -58,7 +64,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <devdoc>
-        ///    <para>Adds a <see cref='System.CodeDom.Compiler.CompilerError'/> with the specified value to the
+        ///    <para>Adds a <see cref='System.CodeDom.Compiler.CompilerError'/> with the specified value to
+        // the
         ///    <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> .</para>
         /// </devdoc>
         public int Add(CompilerError value)
@@ -67,7 +74,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <devdoc>
-        /// <para>Copies the elements of an array to the end of the <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/>.</para>
+        /// <para>Copies the elements of an array to the end of the <see
+        // cref='System.CodeDom.Compiler.CompilerErrorCollection'/>.</para>
         /// </devdoc>
         public void AddRange(CompilerError[] value)
         {
@@ -83,7 +91,8 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         ///     <para>
-        ///       Adds the contents of another <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> to the end of the collection.
+        ///       Adds the contents of another <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/>
+        // to the end of the collection.
         ///    </para>
         /// </devdoc>
         public void AddRange(CompilerErrorCollection value)
@@ -101,7 +110,8 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         /// <para>Gets a value indicating whether the
-        ///    <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> contains the specified <see cref='System.CodeDom.Compiler.CompilerError'/>.</para>
+        ///    <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> contains the specified <see
+        // cref='System.CodeDom.Compiler.CompilerError'/>.</para>
         /// </devdoc>
         public bool Contains(CompilerError value)
         {
@@ -109,7 +119,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> values to a
+        // one-dimensional <see cref='System.Array'/> instance at the
         ///    specified index.</para>
         /// </devdoc>
         public void CopyTo(CompilerError[] array, int index)
@@ -175,7 +186,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <devdoc>
-        /// <para>Inserts a <see cref='System.CodeDom.Compiler.CompilerError'/> into the <see cref='System.CodeDom.Compiler.CompilerErrorCollection'/> at the specified index.</para>
+        /// <para>Inserts a <see cref='System.CodeDom.Compiler.CompilerError'/> into the <see
+        // cref='System.CodeDom.Compiler.CompilerErrorCollection'/> at the specified index.</para>
         /// </devdoc>
         public void Insert(int index, CompilerError value)
         {

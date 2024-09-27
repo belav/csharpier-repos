@@ -131,20 +131,22 @@ namespace System.Security
             }
             catch (Exception e)
             {
-                // Environment.GetResourceString will throw if we are ReadyForAbort (thread abort).  (We shouldn't do a Contract.Assert in this case or it will lock up the thread.)
+                // Environment.GetResourceString will throw if we are ReadyForAbort (thread abort).  (We shouldn't
+                // do a Contract.Assert in this case or it will lock up the thread.)
                 if (e is System.Threading.ThreadAbortException)
                     throw;
             }
 
-            /*            catch(System.Threading.ThreadAbortException)
-                        {
-                            // Environment.GetResourceString will throw if we are ReadyForAbort (thread abort).  (We shouldn't do a BCLDebug.Assert in this case or it will lock up the thread.)
-                            throw;
-                        }
-                        catch
-                        {
-                        }
-            */
+/*            catch(System.Threading.ThreadAbortException)
+{
+// Environment.GetResourceString will throw if we are ReadyForAbort (thread abort).  (We shouldn't
+do a BCLDebug.Assert in this case or it will lock up the thread.)
+throw;
+}
+catch
+{
+}
+*/
             // make the exception object
             return new SecurityException(
                 message,
@@ -204,7 +206,8 @@ namespace System.Security
         public SecurityException(String message)
             : base(message)
         {
-            // This is the constructor that gets called if you Assert but don't have permission to Assert.  (So don't assert in here.)
+            // This is the constructor that gets called if you Assert but don't have permission to Assert.  (So
+            // don't assert in here.)
             SetErrorCode(System.__HResults.COR_E_SECURITY);
         }
 

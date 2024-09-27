@@ -136,8 +136,10 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// The version made by field for entries in the central header when created by this library
         /// </summary>
         /// <remarks>
-        /// This is also the Zip version for the library when comparing against the version required to extract
-        /// for an entry.  See <see cref="ZipInputStream.CanDecompressEntry">ZipInputStream.CanDecompressEntry</see>.
+        /// This is also the Zip version for the library when comparing against the version required to
+        // extract
+        /// for an entry.  See <see
+        // cref="ZipInputStream.CanDecompressEntry">ZipInputStream.CanDecompressEntry</see>.
         /// </remarks>
         public const int VERSION_MADE_BY = 20;
 
@@ -220,7 +222,8 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// This is only used where the length, Crc, or compressed size isnt known when the
         /// entry is created and the output stream doesnt support seeking.
         /// The local entry cannot be 'patched' with the correct values in this case
-        /// so the values are recorded after the data prefixed by this header, as well as in the central directory.
+        /// so the values are recorded after the data prefixed by this header, as well as in the central
+        // directory.
         /// </remarks>
         public const int EXTSIG = 'P' | ('K' << 8) | (7 << 16) | (8 << 24);
 

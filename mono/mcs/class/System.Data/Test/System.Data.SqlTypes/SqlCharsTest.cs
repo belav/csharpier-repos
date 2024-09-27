@@ -355,7 +355,7 @@ namespace MonoTests.System.Data.SqlTypes
             ReadWriteXmlTestInternal(xml2, strtest2.ToString(), "BA02");
         }
 
-        /* Read tests */
+/* Read tests */
         [Test]
         public void Read_SuccessTest1()
         {

@@ -1291,19 +1291,19 @@ namespace MonoTests.System.XmlSerialization
             Assert.AreEqual(Infoset("<dateTime>0001-01-01T00:00:00</dateTime>"), WriterText);
         }
 
-        /*
-        FIXME
-         - decimal
-         - Guid
-         - XmlNode objects
-        
-        [Test]
-        public void TestSerialize()
-        {
-            Serialize();
-            Assert.AreEqual (WriterText, "");
-        }
-        */
+/*
+FIXME
+- decimal
+- Guid
+- XmlNode objects
+
+[Test]
+public void TestSerialize()
+{
+Serialize();
+Assert.AreEqual (WriterText, "");
+}
+*/
 
         // test basic class serialization /////////////////////////////////////
         [Test]
@@ -1698,20 +1698,24 @@ namespace MonoTests.System.XmlSerialization
                 Assert.IsNotNull(ex.InnerException.InnerException, "#B9");
 
                 //FIXME
-                /*
-                // There was an error reflecting type 'System.String'.
-                Assert.AreEqual (typeof (InvalidOperationException), ex.InnerException.InnerException.GetType (), "#B10");
-                Assert.IsNotNull (ex.InnerException.InnerException.Message, "#B11");
-                Assert.IsTrue (ex.InnerException.InnerException.Message.IndexOf (typeof (string).FullName) != -1, "#B12");
-                Assert.IsNotNull (ex.InnerException.InnerException.InnerException, "#B13");
+/*
+// There was an error reflecting type 'System.String'.
+Assert.AreEqual (typeof (InvalidOperationException), ex.InnerException.InnerException.GetType (),
+"#B10");
+Assert.IsNotNull (ex.InnerException.InnerException.Message, "#B11");
+Assert.IsTrue (ex.InnerException.InnerException.Message.IndexOf (typeof (string).FullName) != -1,
+"#B12");
+Assert.IsNotNull (ex.InnerException.InnerException.InnerException, "#B13");
 
-                // Value 'sometype' cannot be used for the XmlElementAttribute.DataType property.
-                // The datatype 'http://www.w3.org/2001/XMLSchema:sometype' is missing.
-                Assert.AreEqual (typeof (InvalidOperationException), ex.InnerException.InnerException.InnerException.GetType (), "#B14");
-                Assert.IsNotNull (ex.InnerException.InnerException.InnerException.Message, "#B15");
-                Assert.IsTrue (ex.InnerException.InnerException.InnerException.Message.IndexOf ("http://www.w3.org/2001/XMLSchema:sometype") != -1, "#B16");
-                Assert.IsNull (ex.InnerException.InnerException.InnerException.InnerException, "#B17");
-                */
+// Value 'sometype' cannot be used for the XmlElementAttribute.DataType property.
+// The datatype 'http://www.w3.org/2001/XMLSchema:sometype' is missing.
+Assert.AreEqual (typeof (InvalidOperationException),
+ex.InnerException.InnerException.InnerException.GetType (), "#B14");
+Assert.IsNotNull (ex.InnerException.InnerException.InnerException.Message, "#B15");
+Assert.IsTrue (ex.InnerException.InnerException.InnerException.Message.IndexOf
+("http://www.w3.org/2001/XMLSchema:sometype") != -1, "#B16");
+Assert.IsNull (ex.InnerException.InnerException.InnerException.InnerException, "#B17");
+*/
             }
         }
 

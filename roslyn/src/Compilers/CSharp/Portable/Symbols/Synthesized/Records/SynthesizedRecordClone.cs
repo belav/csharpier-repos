@@ -9,11 +9,16 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// If a virtual "clone" method is present in the base record, the synthesized "clone" method overrides it
-    /// and the return type of the method is the current containing type if the "covariant returns" feature is
-    /// supported and the override return type otherwise. An error is produced if the base record clone method
-    /// is sealed. If a virtual "clone" method is not present in the base record, the return type of the clone
-    /// method is the containing type and the method is virtual, unless the record is sealed or abstract.
+    /// If a virtual "clone" method is present in the base record, the synthesized "clone" method
+    // overrides it
+    /// and the return type of the method is the current containing type if the "covariant returns"
+    // feature is
+    /// supported and the override return type otherwise. An error is produced if the base record clone
+    // method
+    /// is sealed. If a virtual "clone" method is not present in the base record, the return type of the
+    // clone
+    /// method is the containing type and the method is virtual, unless the record is sealed or
+    // abstract.
     /// If the containing record is abstract, the synthesized clone method is also abstract.
     /// If the "clone" method is not abstract, it returns the result of a call to a copy constructor.
     /// </summary>
@@ -182,9 +187,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return null;
             }
 
-            // If this symbol is from metadata, getting all members can cause us to realize a lot of structures that we otherwise
-            // don't have to. Optimize for the common case here of there not being a method named <Clone>$. If there is a method
-            // with that name, it's most likely the one we're interested in, and we can't get around loading everything to find it.
+            // If this symbol is from metadata, getting all members can cause us to realize a lot of structures
+            // that we otherwise
+            // don't have to. Optimize for the common case here of there not being a method named <Clone>$. If
+            // there is a method
+            // with that name, it's most likely the one we're interested in, and we can't get around loading
+            // everything to find it.
             if (!containingNamedType.HasPossibleWellKnownCloneMethod())
             {
                 return null;

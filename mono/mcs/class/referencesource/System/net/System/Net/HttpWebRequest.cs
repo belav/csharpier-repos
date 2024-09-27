@@ -26,7 +26,8 @@ namespace System.Net
 
     /// <devdoc>
     /// <para>
-    /// <see cref='System.Net.HttpWebRequest'/> is an HTTP-specific implementation of the <see cref='System.Net.WebRequest'/> class.
+    /// <see cref='System.Net.HttpWebRequest'/> is an HTTP-specific implementation of the <see
+    // cref='System.Net.WebRequest'/> class.
     ///
     ///  Performs the major body of HTTP request processing. Handles
     ///    everything between issuing the HTTP header request to parsing the
@@ -159,7 +160,8 @@ namespace System.Net
         // Holds a WriteStream result to be processed by GetResponse.
         private object m_PendingReturnResult;
 
-        // Read and Write async results - corspond to BeginGetResponse(read), and BeginGetRequestStream(write)
+        // Read and Write async results - corspond to BeginGetResponse(read), and
+        // BeginGetRequestStream(write)
         private LazyAsyncResult _WriteAResult;
         private LazyAsyncResult _ReadAResult;
 
@@ -195,8 +197,10 @@ namespace System.Net
         // the actual verb set by caller or default
         private KnownHttpVerb _OriginVerb;
 
-        // stores the user provided Host header as Uri. If the user specified a default port explicitly we'll loose
-        // that information when converting the host string to a Uri. _HostHasPort will store that information.
+        // stores the user provided Host header as Uri. If the user specified a default port explicitly
+        // we'll loose
+        // that information when converting the host string to a Uri. _HostHasPort will store that
+        // information.
         private bool _HostHasPort;
         private Uri _HostUri;
 
@@ -209,7 +213,8 @@ namespace System.Net
 
         private const int CachedWriteBufferSize = 512;
 
-        // Because we do this asychronously, we pin buffers, so we want a cache of good buffers to pin.  Here is the cache.
+        // Because we do this asychronously, we pin buffers, so we want a cache of good buffers to pin.
+        // Here is the cache.
         private static PinnableBufferCache _WriteBufferCache = new PinnableBufferCache(
             "System.Net.HttpWebRequest",
             CachedWriteBufferSize
@@ -290,15 +295,20 @@ namespace System.Net
 
         private UnlockConnectionDelegate _UnlockDelegate;
 
-        // Used to store information whether server responses with status code != 2xx should throw exceptions or not.
+        // Used to store information whether server responses with status code != 2xx should throw
+        // exceptions or not.
         private bool _returnResponseOnFailureStatusCode;
 
-        // This delegate is used when content needs to be resent and buffering is not used (!AllowWriteStreamBuffering).
+        // This delegate is used when content needs to be resent and buffering is not used
+        // (!AllowWriteStreamBuffering).
         private Action<Stream> _resendRequestContent;
 
-        // When NTLM authentication is used, the content length (_ContentLength) is set to 0 for the first auth. leg:
-        // Since we know that there will be 2 legs, we don't bother sending the content with the first leg, so we set
-        // content length to 0. This field is used to store the original content length. The original (actual)
+        // When NTLM authentication is used, the content length (_ContentLength) is set to 0 for the first
+        // auth. leg:
+        // Since we know that there will be 2 legs, we don't bother sending the content with the first leg,
+        // so we set
+        // content length to 0. This field is used to store the original content length. The original
+        // (actual)
         // content length is re-set with the second auth. leg.
         private long _originalContentLength;
 
@@ -439,22 +449,22 @@ namespace System.Net
             get { return m_BodyStarted; }
         }
 
-        /*
-            Accessor:   KeepAlive
+/*
+Accessor:   KeepAlive
 
-            To the app, this means "I want to use a persistent connection if
-            available" if set to true, or "I don't want to use a persistent
-            connection", if set to false.
+To the app, this means "I want to use a persistent connection if
+available" if set to true, or "I don't want to use a persistent
+connection", if set to false.
 
-            This accessor allows the application simply to register its
-            desires so far as persistence is concerned. We will act on this
-            and the pipelined requirement (below) at the point that we come
-            to choose or create a connection on the application's behalf
+This accessor allows the application simply to register its
+desires so far as persistence is concerned. We will act on this
+and the pipelined requirement (below) at the point that we come
+to choose or create a connection on the application's behalf
 
-            Read:       returns the sense of the keep-alive request switch
+Read:       returns the sense of the keep-alive request switch
 
-            Write:      set the sense of the keep-alive request switch
-        */
+Write:      set the sense of the keep-alive request switch
+*/
 
         /// <devdoc>
         ///    <para>
@@ -477,20 +487,20 @@ namespace System.Net
             set { m_LockConnection = value; }
         }
 
-        /*
-            Accessor:   Pipelined
+/*
+Accessor:   Pipelined
 
-            To the app, this means "I want to use pipelining if available" if
-            set to true, or "I don't want to use pipelining", if set to false.
-            We could infer the state of the keep-alive flag from this setting
-            too, but we will decide that only at connection-initiation time.
-            If the application sets pipelining but resets keep-alive then we
-            will generate a non-pipelined, non-keep-alive request
+To the app, this means "I want to use pipelining if available" if
+set to true, or "I don't want to use pipelining", if set to false.
+We could infer the state of the keep-alive flag from this setting
+too, but we will decide that only at connection-initiation time.
+If the application sets pipelining but resets keep-alive then we
+will generate a non-pipelined, non-keep-alive request
 
-            Read:       returns the sense of the pipelined request switch
+Read:       returns the sense of the pipelined request switch
 
-            Write:      sets the sense of the pipelined request switch
-        */
+Write:      sets the sense of the pipelined request switch
+*/
 
         /// <devdoc>
         ///    <para>
@@ -704,7 +714,8 @@ namespace System.Net
                 using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
                 {
 #endif
-                    // This is a replacement of RequestCachePermission demand since we are not including the latest in the product.
+                    // This is a replacement of RequestCachePermission demand since we are not including the latest in
+                    // the product.
                     ExceptionHelper.WebPermissionUnrestricted.Demand();
 
                     RequestCacheBinding binding = RequestCacheManager.GetBinding(Uri.UriSchemeHttp);
@@ -723,7 +734,8 @@ namespace System.Net
         ///       Gets or sets the default for the MaximumResponseHeadersLength property.
         ///    </para>
         ///    <remarks>
-        ///       This value can be set in the config file, the default can be overridden using the MaximumResponseHeadersLength property.
+        ///       This value can be set in the config file, the default can be overridden using the
+        // MaximumResponseHeadersLength property.
         ///    </remarks>
         /// </devdoc>
         public static int DefaultMaximumResponseHeadersLength
@@ -779,9 +791,12 @@ namespace System.Net
         ///       Gets or sets the maximum allowed length of the response headers.
         ///    </para>
         ///    <remarks>
-        ///       The length is measured in kilobytes (1024 bytes) and it includes the response status line and the response
-        ///       headers as well as all extra control characters received as part of the HTTP protocol. A value of -1 means
-        ///       no such limit will be imposed on the response headers, a value of 0 means that all requests will fail.
+        ///       The length is measured in kilobytes (1024 bytes) and it includes the response status line
+        // and the response
+        ///       headers as well as all extra control characters received as part of the HTTP protocol. A
+        // value of -1 means
+        ///       no such limit will be imposed on the response headers, a value of 0 means that all
+        // requests will fail.
         ///    </remarks>
         /// </devdoc>
         public int MaximumResponseHeadersLength
@@ -991,21 +1006,21 @@ namespace System.Net
             get { return _OriginUri; }
         }
 
-        /*
-            Accessor:   ContentLength
+/*
+Accessor:   ContentLength
 
-            The property that controls the Content-Length of the request entity
-            body. Getting this property returns the last value set, or -1 if
-            no value has been set. Setting it sets the content length, and
-            the application must write that much data to the stream.
-            Setting this property has a side effect on InternalSendChunked, it sets it to false.
+The property that controls the Content-Length of the request entity
+body. Getting this property returns the last value set, or -1 if
+no value has been set. Setting it sets the content length, and
+the application must write that much data to the stream.
+Setting this property has a side effect on InternalSendChunked, it sets it to false.
 
-            Input:
-                Content length
+Input:
+Content length
 
-            Returns: The value of the content length on get.
+Returns: The value of the content length on get.
 
-        */
+*/
 
         /// <devdoc>
         ///    <para>
@@ -1077,7 +1092,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>Used to control the Timeout when calling Stream.Read (AND) Stream.Write.
-        ///         Effects Streams returned from GetResponse().GetResponseStream() (AND) GetRequestStream().
+        ///         Effects Streams returned from GetResponse().GetResponseStream() (AND)
+        // GetRequestStream().
         ///         Default is 5 mins.
         ///    </para>
         /// </devdoc>
@@ -1583,10 +1599,14 @@ namespace System.Net
                                     );
                                 }
 
-                                // If there's already been a _ReadAResult completed, it better have been with an exception, like an abort.
-                                // We need to check within this lock.  Before the lock, _WriteAResult didn't exist so won't have been notified.
-                                // BeginSubmitRequest() will fail silently if we go ahead and call it after an abort.  Since we know this is the
-                                // first call to any of the [Begin]GetRe... methods by the above checks, we know ProcessResponse can't have been
+                                // If there's already been a _ReadAResult completed, it better have been with an exception, like an
+                                // abort.
+                                // We need to check within this lock.  Before the lock, _WriteAResult didn't exist so won't have
+                                // been notified.
+                                // BeginSubmitRequest() will fail silently if we go ahead and call it after an abort.  Since we know
+                                // this is the
+                                // first call to any of the [Begin]GetRe... methods by the above checks, we know ProcessResponse
+                                // can't have been
                                 // called or any other valid _ReadAResult created yet.
                                 if (_ReadAResult != null)
                                 {
@@ -1759,7 +1779,8 @@ namespace System.Net
             bool success = false;
             try
             {
-                // this needs to be in the begining in order to correctly log begin request in case of ProtocolViolationException
+                // this needs to be in the begining in order to correctly log begin request in case of
+                // ProtocolViolationException
                 if (FrameworkEventSource.Log.IsEnabled())
                 {
                     LogBeginGetRequestStream(success: true, synchronous: true);
@@ -1798,10 +1819,14 @@ namespace System.Net
                                 );
                             }
 
-                            // If there's already been a _ReadAResult completed, it better have been with an exception, like an abort.
-                            // We need to check within this lock.  Before the lock, _WriteAResult didn't exist so won't have been notified.
-                            // BeginSubmitRequest() will fail silently if we go ahead and call it after an abort.  Since we know this is the
-                            // first call to any of the [Begin]GetRe... methods by the above checks, we know ProcessResponse can't have been
+                            // If there's already been a _ReadAResult completed, it better have been with an exception, like an
+                            // abort.
+                            // We need to check within this lock.  Before the lock, _WriteAResult didn't exist so won't have
+                            // been notified.
+                            // BeginSubmitRequest() will fail silently if we go ahead and call it after an abort.  Since we know
+                            // this is the
+                            // first call to any of the [Begin]GetRe... methods by the above checks, we know ProcessResponse
+                            // can't have been
                             // called or any other valid _ReadAResult created yet.
                             if (_ReadAResult != null)
                             {
@@ -1963,57 +1988,59 @@ namespace System.Net
             }
         }
 
-        /*++
+/*++
 
-            CheckBuffering - Determine if we need buffering based on having no contentlength
-
-
-                consider the case in which we have no entity body delimiters:
-                    RequireBody && ContentLength==-1 && !SendChunked == true
-
-                now we need to consider 3 cases:
-
-                AllowWriteStreamBuffering (1)
-                    - buffer internally all the data written to the request stream when the user
-                      closes the request stream send it on the wire with a ContentLength
-
-                !AllowWriteStreamBuffering
-                    - can't buffer internally all the data written to the request stream
-                      so the data MUST go to the wire and the server sees it: 2 cases
-
-                    !KeepAlive (2)
-                        - send a "Connection: close" header to the server. the server SHOULD
-                          1) send a final response
-                          2) read all the data on the connection and treat it as being part of the
-                             entity body of this request.
-
-                    KeepAlive (3)
-                        - throw, we can't do this, 'cause the server wouldn't know when the data is over.
+CheckBuffering - Determine if we need buffering based on having no contentlength
 
 
-            Input:
-                    None.
+consider the case in which we have no entity body delimiters:
+RequireBody && ContentLength==-1 && !SendChunked == true
 
-            Returns:
-                    true if we need buffering, false otherwise.
+now we need to consider 3 cases:
 
-        --*/
+AllowWriteStreamBuffering (1)
+- buffer internally all the data written to the request stream when the user
+closes the request stream send it on the wire with a ContentLength
 
-        /*
-        // Consider removing.
-        internal bool CheckBuffering {
-            //
-            // ContentLength is not set, and user is not chunking, buffering is on
-            // so force the code into writing (give the user a stream to write to)
-            // and we'll buffer for him
-            //
-            get {
-                bool checkBuffering = RequireBody && ContentLength==-1 && HttpWriteMode!=HttpWriteMode.Chunked && AllowWriteStreamBuffering && ServicePoint.HttpBehaviour!=HttpBehaviour.HTTP11;
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckBuffering() returns:" + checkBuffering.ToString());
-                return checkBuffering;
-            }
-        }
-        */
+!AllowWriteStreamBuffering
+- can't buffer internally all the data written to the request stream
+so the data MUST go to the wire and the server sees it: 2 cases
+
+!KeepAlive (2)
+- send a "Connection: close" header to the server. the server SHOULD
+1) send a final response
+2) read all the data on the connection and treat it as being part of the
+entity body of this request.
+
+KeepAlive (3)
+- throw, we can't do this, 'cause the server wouldn't know when the data is over.
+
+
+Input:
+None.
+
+Returns:
+true if we need buffering, false otherwise.
+
+--*/
+
+/*
+// Consider removing.
+internal bool CheckBuffering {
+//
+// ContentLength is not set, and user is not chunking, buffering is on
+// so force the code into writing (give the user a stream to write to)
+// and we'll buffer for him
+//
+get {
+bool checkBuffering = RequireBody && ContentLength==-1 && HttpWriteMode!=HttpWriteMode.Chunked &&
+AllowWriteStreamBuffering && ServicePoint.HttpBehaviour!=HttpBehaviour.HTTP11;
+GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckBuffering()
+returns:" + checkBuffering.ToString());
+return checkBuffering;
+}
+}
+*/
 
         internal bool HasEntityBody
         {
@@ -2065,22 +2092,22 @@ namespace System.Net
             }
         }
 
-        /*
-            Method: DoSubmitRequestProcessing
+/*
+Method: DoSubmitRequestProcessing
 
-            Does internal processing of redirect and request retries for authentication
-            Assumes that it cannot block, this returns a state var indicating when it
-            needs to block
+Does internal processing of redirect and request retries for authentication
+Assumes that it cannot block, this returns a state var indicating when it
+needs to block
 
-            Assumes that we are never called with a null response
+Assumes that we are never called with a null response
 
-            Input:
-                none
+Input:
+none
 
-            Returns:
-                HttpProcessingResult -
+Returns:
+HttpProcessingResult -
 
-        */
+*/
 
         //
         // ASSUMPTION: If this method throws the exception must be caught and handled
@@ -2280,7 +2307,8 @@ namespace System.Net
                     ConnectStream stream =
                         _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream;
 
-                    // Close the request stream if the user forgot to do so. Throw an exception if user has not written all of
+                    // Close the request stream if the user forgot to do so. Throw an exception if user has not written
+                    // all of
                     // the promised data.
                     if (stream != null && !stream.IsClosed)
                     {
@@ -2357,7 +2385,8 @@ namespace System.Net
                             }
                         }
 
-                        // Must check this after setting _ReadAResult, which holds the context which may be used for permission checks etc.
+                        // Must check this after setting _ReadAResult, which holds the context which may be used for
+                        // permission checks etc.
                         // See if we need to do the call-done processing here.
                         CheckDeferredCallDone(stream);
 
@@ -2447,7 +2476,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        ///  <para>Retreives the Response Result from an HTTP Result after an Async operation has completed</para>
+        ///  <para>Retreives the Response Result from an HTTP Result after an Async operation has
+        // completed</para>
         /// </devdoc>
         public override WebResponse EndGetResponse(IAsyncResult asyncResult)
         {
@@ -2562,7 +2592,8 @@ namespace System.Net
             }
             else if (returnResult != null && returnResult != DBNull.Value)
             {
-                // It could still be Missing.Value, which indicates ProcessWriteCallDone() should be called with null.
+                // It could still be Missing.Value, which indicates ProcessWriteCallDone() should be called with
+                // null.
                 stream.ProcessWriteCallDone(returnResult as ConnectionReturnResult);
             }
         }
@@ -2608,14 +2639,17 @@ namespace System.Net
                         CheckProtocol(false);
                     }
 
-                    // Many of these logics require GetResponse() to be called after all write-stream activity is done.  You can't call it
-                    // simultaneously on another thread and expect it to block until it can run.  Doing that can cause the request to
+                    // Many of these logics require GetResponse() to be called after all write-stream activity is done.
+                    // You can't call it
+                    // simultaneously on another thread and expect it to block until it can run.  Doing that can cause
+                    // the request to
                     // hang.
 
                     ConnectStream stream =
                         _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream;
 
-                    // Close the request stream if the user forgot to do so. Throw an exception if user has not written all of
+                    // Close the request stream if the user forgot to do so. Throw an exception if user has not written
+                    // all of
                     // the promised data.
                     if (stream != null && !stream.IsClosed)
                     {
@@ -2658,7 +2692,8 @@ namespace System.Net
 
                             Async = false;
 
-                            // Since we don't really allow switching between sync and async, if the request is already async, this needs to
+                            // Since we don't really allow switching between sync and async, if the request is already async,
+                            // this needs to
                             // capture context for use in the ongoing async operations as if it were BeginGetResponse().
                             if (Async)
                             {
@@ -2843,7 +2878,8 @@ namespace System.Net
                 return;
             }
 
-            // In some cases such as redirects, we do not expect a response from the server after we finish writing.
+            // In some cases such as redirects, we do not expect a response from the server after we finish
+            // writing.
             if (stream.FinishedAfterWrite)
             {
                 stream.ProcessWriteCallDone(returnResult);
@@ -2917,20 +2953,20 @@ namespace System.Net
             }
         }
 
-        /*
-            Accessor:   Address
+/*
+Accessor:   Address
 
-            This is just a simple Uri that is returned, indicating the end result
-            of the request, after any possible Redirects, etc, that may transpire
-            during the request.  This was added to handle this case since RequestUri
-            will not change from the moment this Request is created.
+This is just a simple Uri that is returned, indicating the end result
+of the request, after any possible Redirects, etc, that may transpire
+during the request.  This was added to handle this case since RequestUri
+will not change from the moment this Request is created.
 
-            Input:
+Input:
 
-            Returns: The Uri for this request..
+Returns: The Uri for this request..
 
 
-        */
+*/
         /// <devdoc>
         ///    <para>
         ///       Gets the Uri that actually responded to the request.
@@ -3183,12 +3219,12 @@ namespace System.Net
 
         internal bool InternalConnectionGroup
         {
-            /* Consider removing
-            get
-            {
-                return m_InternalConnectionGroup;
-            }
-            */
+/* Consider removing
+get
+{
+return m_InternalConnectionGroup;
+}
+*/
 
             set { m_InternalConnectionGroup = value; }
         }
@@ -3474,17 +3510,17 @@ namespace System.Net
             set { SetSpecialHeaders(HttpKnownHeaderNames.UserAgent, value); }
         }
 
-        /*
-            Accessor:   Expect
+/*
+Accessor:   Expect
 
-            The property that controls the Expect header
+The property that controls the Expect header
 
-            Input:
-                string Expect, null clears the Expect except for 100-continue value
+Input:
+string Expect, null clears the Expect except for 100-continue value
 
-            Returns: The value of the Expect on get.
+Returns: The value of the Expect on get.
 
-        */
+*/
 
         /// <devdoc>
         ///    <para>
@@ -3641,18 +3677,18 @@ namespace System.Net
         //    and not accessable through the normal Header objects.
         //
 
-        /*
-            Accessor:   SetSpecialHeaders
+/*
+Accessor:   SetSpecialHeaders
 
-            Private method for removing duplicate code which removes and
-              adds headers that are marked private
+Private method for removing duplicate code which removes and
+adds headers that are marked private
 
-            Input:  HeaderName, value to set headers
+Input:  HeaderName, value to set headers
 
-            Returns: none
+Returns: none
 
 
-        */
+*/
 
         private void SetSpecialHeaders(string HeaderName, string value)
         {
@@ -3664,16 +3700,16 @@ namespace System.Net
             }
         }
 
-        /*
-            Abort - Attempts to abort pending request,
+/*
+Abort - Attempts to abort pending request,
 
-            This calls into the delegate, and then closes any pending streams.
+This calls into the delegate, and then closes any pending streams.
 
-            Input: none
+Input: none
 
-            Returns: none
+Returns: none
 
-        */
+*/
         public override void Abort()
         {
 #if DEBUG
@@ -3751,7 +3787,8 @@ namespace System.Net
                     try
                     {
 #endif
-                        // Want to make sure that other threads see that we're aborted before they set an abort delegate, or that we see
+                        // Want to make sure that other threads see that we're aborted before they set an abort delegate, or
+                        // that we see
                         // the delegate if they might have missed that we're aborted.
                         Thread.MemoryBarrier();
                         HttpAbortDelegate abortDelegate = _AbortDelegate;
@@ -3842,7 +3879,8 @@ namespace System.Net
             }
         }
 
-        // TimeoutCallback - Called by the TimerThread to abort a request.  This just posts ThreadPool work item - Abort() does too
+        // TimeoutCallback - Called by the TimerThread to abort a request.  This just posts ThreadPool work
+        // item - Abort() does too
         // much to be done on the timer thread (timer thread should never block or call user code).
         private static void TimeoutCallback(
             TimerThread.Timer timer,
@@ -3872,18 +3910,18 @@ namespace System.Net
 #endif
         }
 
-        /*
-            FindServicePoint - Finds the ServicePoint for this request
+/*
+FindServicePoint - Finds the ServicePoint for this request
 
-            This calls the FindServicePoint off of the ServicePointManager
-            to determine what ServicePoint to use.  When our proxy changes,
-            or there is a redirect, this should be recalled to determine it.
+This calls the FindServicePoint off of the ServicePointManager
+to determine what ServicePoint to use.  When our proxy changes,
+or there is a redirect, this should be recalled to determine it.
 
-            Input:  forceFind        - regardless of the status, always call FindServicePoint
+Input:  forceFind        - regardless of the status, always call FindServicePoint
 
-            Returns: ServicePoint
+Returns: ServicePoint
 
-        */
+*/
         private ServicePoint FindServicePoint(bool forceFind)
         {
             GlobalLog.ThreadContract(
@@ -3929,12 +3967,12 @@ namespace System.Net
             return servicePoint;
         }
 
-        /*
-            InvokeGetRequestStreamCallback - Notify our GetRequestStream caller
+/*
+InvokeGetRequestStreamCallback - Notify our GetRequestStream caller
 
-            This is needed to tell our caller that we're finished,
-            and he can go ahead and write to the stream.
-        */
+This is needed to tell our caller that we're finished,
+and he can go ahead and write to the stream.
+*/
         private void InvokeGetRequestStreamCallback()
         {
             GlobalLog.Enter(
@@ -3985,22 +4023,22 @@ namespace System.Net
             );
         }
 
-        /*
-            RequestSubmitDone - Handle submit done callback.
+/*
+RequestSubmitDone - Handle submit done callback.
 
-            This is our submit done handler, called by the underlying connection
-            code when a stream is available for our use. We save the stream for
-            later use and signal the wait event.
+This is our submit done handler, called by the underlying connection
+code when a stream is available for our use. We save the stream for
+later use and signal the wait event.
 
-            We also handle the continuation/termination of a BeginGetRequestStream,
-            by saving out the result and calling its callback if needed.
+We also handle the continuation/termination of a BeginGetRequestStream,
+by saving out the result and calling its callback if needed.
 
-            Input:  SubmitStream        - The stream we may write on.
-                    Status              - The status of the submission.
+Input:  SubmitStream        - The stream we may write on.
+Status              - The status of the submission.
 
-            Returns: Nothing.
+Returns: Nothing.
 
-        */
+*/
         internal void SetRequestSubmitDone(ConnectStream submitStream)
         {
             GlobalLog.Enter(
@@ -4030,7 +4068,8 @@ namespace System.Net
             if (Logging.On)
                 Logging.Associate(Logging.Web, this, submitStream);
 
-            // The CBT won't actually be valid until we write to the stream for the first time, but we can create
+            // The CBT won't actually be valid until we write to the stream for the first time, but we can
+            // create
             // the TransportContext now.  We don't query it until later, when we know it's available.
             TransportContext transportContext = new ConnectStreamContext(submitStream);
             ServerAuthenticationState.TransportContext = transportContext;
@@ -4124,12 +4163,12 @@ namespace System.Net
             );
         }
 
-        /*
-            SetRequestContinue - Handle 100-continues on Posting
+/*
+SetRequestContinue - Handle 100-continues on Posting
 
-            This indicates to us that we need to continue posting,
-            and there is no need to buffer because we are now
-        */
+This indicates to us that we need to continue posting,
+and there is no need to buffer because we are now
+*/
         internal void SetRequestContinue()
         {
             SetRequestContinue(null);
@@ -4202,7 +4241,8 @@ namespace System.Net
 
         //
         // Used to keep us looping and parsing until we get a 100 continue.
-        // Since we can get more than one 100 continue during redirects or auth, we need to keep it on a counter.
+        // Since we can get more than one 100 continue during redirects or auth, we need to keep it on a
+        // counter.
         //
         internal int RequestContinueCount
         {
@@ -4218,7 +4258,8 @@ namespace System.Net
         {
             //
             // Multithreading: This method is called from the connection and under the connection lock
-            // It should not be subject to a race condition. Note that request.Abort() also ends up with the connection lock.
+            // It should not be subject to a race condition. Note that request.Abort() also ends up with the
+            // connection lock.
             GlobalLog.Print(
                 "HttpWebRequest#"
                     + ValidationHelper.HashString(this)
@@ -4233,7 +4274,8 @@ namespace System.Net
         // If the response is already received this method starts its processing.
         // Otheriwse the window for write side response processing is closed
         //
-        // We do not clear current response if any hence SetAndOrProcessResponse() will not go into concurent
+        // We do not clear current response if any hence SetAndOrProcessResponse() will not go into
+        // concurent
         // reponse processing
         //
         internal void CheckWriteSideResponseProcessing()
@@ -4301,9 +4343,11 @@ namespace System.Net
 
         //
         //
-        // Some kind of response is ready and this method will ether process it or defer until the write side response check.
+        // Some kind of response is ready and this method will ether process it or defer until the write
+        // side response check.
         //
-        // Note, when an exception comes here then the request is already taken off the list and the connection is BEING closed.
+        // Note, when an exception comes here then the request is already taken off the list and the
+        // connection is BEING closed.
         internal void SetAndOrProcessResponse(object responseOrException)
         {
             GlobalLog.Print(
@@ -4332,8 +4376,10 @@ namespace System.Net
 
             //
             // (1) This method cannot be called with two exceptions in a row or with two responses in a row.
-            // (2) If a response comes then an exception means a fatal exception overrides the response or otherwise ignored
-            // (3) If an exception comes then a response means the exception takes precedence so the response can be ignored
+            // (2) If a response comes then an exception means a fatal exception overrides the response or
+            // otherwise ignored
+            // (3) If an exception comes then a response means the exception takes precedence so the response
+            // can be ignored
             //
 
             if (responseData != null)
@@ -4395,7 +4441,8 @@ namespace System.Net
                     chkConnectionAsyncResult.InvokeCallback(responseOrException); // ref "responseOrException": could be anything except for AsyncTriState or stream
                     chkReaderAsyncResult.InvokeCallback(responseOrException); // ref "responseOrException": could be anything except for null
                 }
-                // Async response/error after writing headers but before the body, attempt to process it and respond.
+                // Async response/error after writing headers but before the body, attempt to process it and
+                // respond.
                 else if (
                     !AllowWriteStreamBuffering
                     && IsOutstandingGetRequestStream
@@ -4442,7 +4489,8 @@ namespace System.Net
                 return;
             }
 
-            // The write side response window has been closed by calling CheckWriteSideResponseProcessing() without
+            // The write side response window has been closed by calling CheckWriteSideResponseProcessing()
+            // without
             // receiving a response.  Immediately process any responses received.
             responseData = Interlocked.CompareExchange(
                 ref _CoreResponse,
@@ -4492,7 +4540,8 @@ namespace System.Net
                 throw new InternalException(); //Consider making an Assert later. If the condition is met it _might_ process a sync request on non submitting thread.
 
             FinishContinueWait();
-            // For this request the write side response window was already closed so we have to procees the response
+            // For this request the write side response window was already closed so we have to procees the
+            // response
             if (newResponse != null)
                 SetResponse(newResponse);
             else
@@ -4578,18 +4627,18 @@ namespace System.Net
             return;
         }
 
-        /*++
+/*++
 
-        Routine Description:
+Routine Description:
 
-            Wakes up blocked threads, so they can read response object,
-              from the result
+Wakes up blocked threads, so they can read response object,
+from the result
 
-            We also handle the continuation/termination of a BeginGetResponse,
-            by saving out the result and calling its callback if needed.
+We also handle the continuation/termination of a BeginGetResponse,
+by saving out the result and calling its callback if needed.
 
 
-        --*/
+--*/
         private void ProcessResponse()
         {
             GlobalLog.Enter(
@@ -4756,7 +4805,8 @@ namespace System.Net
                     if (NclUtilities.IsFatal(unexpectedException))
                         throw;
 
-                    // This is highly unexpected but if happens would result into Aborted exception with caught one as an inner exception
+                    // This is highly unexpected but if happens would result into Aborted exception with caught one as
+                    // an inner exception
                     httpResult = HttpProcessingResult.Continue;
                     E = new WebException(
                         NetRes.GetWebStatusString(
@@ -4898,7 +4948,8 @@ namespace System.Net
             get
             {
                 // Skip token capturing if no credentials are used or they don't include a default one.
-                // Also do capture the token if ICredential is not of CredentialCache type so we don't know what the exact credential response will be.
+                // Also do capture the token if ICredential is not of CredentialCache type so we don't know what the
+                // exact credential response will be.
                 CredentialCache cache;
                 return Credentials != null
                     && (
@@ -4914,7 +4965,8 @@ namespace System.Net
             }
         }
 
-        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is available.
+        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is
+        // available.
         internal override ContextAwareResult GetConnectingContext()
         {
             if (!Async)
@@ -4926,7 +4978,8 @@ namespace System.Net
                 return null;
             }
 
-            // _WriteARequest == null is the case where the user specifies POST but doesn't call GetRequestStream().
+            // _WriteARequest == null is the case where the user specifies POST but doesn't call
+            // GetRequestStream().
             ContextAwareResult context =
                 (
                     HttpWriteMode == HttpWriteMode.None
@@ -4951,7 +5004,8 @@ namespace System.Net
             return context;
         }
 
-        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is available.
+        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is
+        // available.
         internal override ContextAwareResult GetWritingContext()
         {
             if (!Async)
@@ -4988,7 +5042,8 @@ namespace System.Net
             return context;
         }
 
-        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is available.
+        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is
+        // available.
         internal override ContextAwareResult GetReadingContext()
         {
             if (!Async)
@@ -5018,28 +5073,28 @@ namespace System.Net
             return context;
         }
 
-        /*++
+/*++
 
-            BeginSubmitRequest: Begins Submit off a request to the network.
+BeginSubmitRequest: Begins Submit off a request to the network.
 
-            This is called when we need to transmit an Async Request, but
-            this function only servers to activate the submit, and does not
-            actually block
+This is called when we need to transmit an Async Request, but
+this function only servers to activate the submit, and does not
+actually block
 
-            Called when we want to submit a request to the network. We do several
-            things here - look for a proxy, find the service point, etc. In the
-            end we call the service point to get access (via a stream) to the
-            underlying connection, then serialize our headers onto that connection.
-            The actual submission request to the service point is async, so we
-            submit the request and then return, to allow the async to run its course.
+Called when we want to submit a request to the network. We do several
+things here - look for a proxy, find the service point, etc. In the
+end we call the service point to get access (via a stream) to the
+underlying connection, then serialize our headers onto that connection.
+The actual submission request to the service point is async, so we
+submit the request and then return, to allow the async to run its course.
 
-            Input:
-                forceFind - insures that always get a new ServicePoint,
-                    needed on redirects, or where the ServicePoint may have changed
+Input:
+forceFind - insures that always get a new ServicePoint,
+needed on redirects, or where the ServicePoint may have changed
 
-            Returns: Nothing
+Returns: Nothing
 
-        --*/
+--*/
 
         private void BeginSubmitRequest()
         {
@@ -5385,13 +5440,14 @@ namespace System.Net
                 throw CacheProtocol.ProtocolException;
         }
 
-        /*++
+/*++
 
-        EndSubmitRequest: End Submit off a request
+EndSubmitRequest: End Submit off a request
 
-        This function is invoked by a connection ready callback and continues the request by submitting its headers.
+This function is invoked by a connection ready callback and continues the request by submitting its
+headers.
 
-        --*/
+--*/
         private void EndSubmitRequest()
         {
             GlobalLog.Enter(
@@ -5456,18 +5512,18 @@ namespace System.Net
             );
         }
 
-        /*++
+/*++
 
-            EndWriteHeaders: End write of headers
+EndWriteHeaders: End write of headers
 
-            This Typically called by a callback that wishes to proceed
-             with the finalization of writing headers
+This Typically called by a callback that wishes to proceed
+with the finalization of writing headers
 
-            Input: Nothing.
+Input: Nothing.
 
-            Returns: bool - true if success, false if we need to go pending
+Returns: bool - true if success, false if we need to go pending
 
-        --*/
+--*/
         internal bool EndWriteHeaders(bool async)
         {
             GlobalLog.Enter(
@@ -5500,7 +5556,8 @@ namespace System.Net
                     return !async; // Already handled in WriteHeaders/Callback
                 }
 
-                // It's possible that we immediately received and processed a response, and don't want to continue here.
+                // It's possible that we immediately received and processed a response, and don't want to continue
+                // here.
                 if (FinishContinueWait() && CompleteContinueGate())
                 {
                     // No continue expected, re/upload data.
@@ -5848,23 +5905,23 @@ namespace System.Net
             );
         }
 
-        /*++
+/*++
 
-        Routine Description:
+Routine Description:
 
-            Assembles the status line for an HTTP request
-             specifically for CONNECT style verbs, that create a pipe
+Assembles the status line for an HTTP request
+specifically for CONNECT style verbs, that create a pipe
 
-        Arguments:
+Arguments:
 
-            headersSize - size of the Header string that we send after
-                this request line
+headersSize - size of the Header string that we send after
+this request line
 
-        Return Value:
+Return Value:
 
-            int - number of bytes written out
+int - number of bytes written out
 
-        --*/
+--*/
         private int GenerateConnectRequestLine(int headersSize)
         {
             int offset = 0;
@@ -5960,23 +6017,23 @@ namespace System.Net
             return s;
         }
 
-        /*++
+/*++
 
-        Routine Description:
+Routine Description:
 
-            Assembles the status line for an HTTP request
-             specifically to a proxy...
+Assembles the status line for an HTTP request
+specifically to a proxy...
 
-        Arguments:
+Arguments:
 
-            headersSize - size of the Header string that we send after
-                this request line
+headersSize - size of the Header string that we send after
+this request line
 
-        Return Value:
+Return Value:
 
-            int - number of bytes written out
+int - number of bytes written out
 
-        --*/
+--*/
         private int GenerateProxyRequestLine(int headersSize)
         {
             //
@@ -6115,22 +6172,22 @@ namespace System.Net
             return offset;
         }
 
-        /*++
+/*++
 
-        Routine Description:
+Routine Description:
 
-            Assembles the status/request line for the request.
+Assembles the status/request line for the request.
 
-        Arguments:
+Arguments:
 
-            headersSize - size of the Header string that we send after
-                this request line
+headersSize - size of the Header string that we send after
+this request line
 
-        Return Value:
+Return Value:
 
-            int - number of bytes written
+int - number of bytes written
 
-        --*/
+--*/
         private int GenerateRequestLine(int headersSize)
         {
             int offset = 0;
@@ -6174,22 +6231,22 @@ namespace System.Net
             }
         }
 
-        /*++
+/*++
 
-        Routine Description:
+Routine Description:
 
-            Assembles the data/headers for an HTTP request
-             into a buffer
+Assembles the data/headers for an HTTP request
+into a buffer
 
-        Arguments:
+Arguments:
 
-            none.
+none.
 
-        Return Value:
+Return Value:
 
-            none.
+none.
 
-        --*/
+--*/
         internal void UpdateHeaders()
         {
             GlobalLog.Enter(
@@ -6323,7 +6380,8 @@ namespace System.Net
                 }
             }
 
-            // Accept-Encoding is not a restricted header, so it should not be cleaned up by ClearRequestForResubmit(),
+            // Accept-Encoding is not a restricted header, so it should not be cleaned up by
+            // ClearRequestForResubmit(),
             // nor overriden here.  Only add gzip or deflate if they are requested and not already present.
             string acceptEncodingValues =
                 _HttpRequestHeaders.Get(HttpKnownHeaderNames.AcceptEncoding) ?? String.Empty;
@@ -6531,9 +6589,11 @@ namespace System.Net
                 NetworkingPerfCounterName.HttpWebRequestCreated
             );
 
-            // OOPS, This ctor can also be called with FTP scheme but then it should only allowed if going through the proxy
+            // OOPS, This ctor can also be called with FTP scheme but then it should only allowed if going
+            // through the proxy
             // Something to think about...
-            //if ((object)uri.Scheme != (object)Uri.UriSchemeHttp && (object)uri.Scheme != (object)Uri.UriSchemeHttps)
+            //if ((object)uri.Scheme != (object)Uri.UriSchemeHttp && (object)uri.Scheme !=
+            // (object)Uri.UriSchemeHttps)
             //throw new ArgumentOutOfRangeException("uri");
 
             GlobalLog.Print(
@@ -6620,13 +6680,20 @@ namespace System.Net
             GlobalLog.Leave("HttpWebRequest::HttpWebRequest");
         }
 
-        // This ctor is used to override the default behavior of throwing exceptions if the server responds with a
-        // final status code other than 2xx. If returnResponseOnFailureStatusCode is set to true, HWR will return a
-        // HttpWebResponse object without throwing exceptions even if the server returned 3xx, 4xx, 5xx status codes.
-        // This is also the case if the user provided e.g. credentials and authentication failed. In that case the
-        // final 401/407 response from the server will be returned to the caller. Similar, if AllowAutoRedirect is set
-        // to true, and the number of redirections was exceeded the last 3xx response is returned to the caller.
-        // This ctor overload also takes a delegate ('resendRequestContent') that is used to resend the content, as
+        // This ctor is used to override the default behavior of throwing exceptions if the server responds
+        // with a
+        // final status code other than 2xx. If returnResponseOnFailureStatusCode is set to true, HWR will
+        // return a
+        // HttpWebResponse object without throwing exceptions even if the server returned 3xx, 4xx, 5xx
+        // status codes.
+        // This is also the case if the user provided e.g. credentials and authentication failed. In that
+        // case the
+        // final 401/407 response from the server will be returned to the caller. Similar, if
+        // AllowAutoRedirect is set
+        // to true, and the number of redirections was exceeded the last 3xx response is returned to the
+        // caller.
+        // This ctor overload also takes a delegate ('resendRequestContent') that is used to resend the
+        // content, as
         // opposed to buffering the content (AllowWriteStreamBuffering).
         internal HttpWebRequest(
             Uri uri,
@@ -6647,7 +6714,8 @@ namespace System.Net
             _returnResponseOnFailureStatusCode = returnResponseOnFailureStatusCode;
             _resendRequestContent = resendRequestContent;
 
-            // This ctor uses the 'resendRequestContent' delegate to resend content. We don't do buffering in this case.
+            // This ctor uses the 'resendRequestContent' delegate to resend content. We don't do buffering in
+            // this case.
             _Booleans &= ~Booleans.AllowWriteStreamBuffering;
 
             // Make sure we don't share connection groups with user-defined connection groups.
@@ -6679,7 +6747,7 @@ namespace System.Net
             "Serialization is obsoleted for this type.  http://go.microsoft.com/fwlink/?linkid=14202"
         )]
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        /*private*/protected HttpWebRequest(
+/*private*/protected HttpWebRequest(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
         )
@@ -6776,7 +6844,8 @@ namespace System.Net
         }
 
         //
-        // FxCop: Need this in addition to the above in order to allow derived classes to access the base implementation.
+        // FxCop: Need this in addition to the above in order to allow derived classes to access the base
+        // implementation.
         //
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         protected override void GetObjectData(
@@ -7088,7 +7157,8 @@ namespace System.Net
             if (!CheckCacheRetrieveOnResponse())
             {
                 // NB: We don't have a flag that would control a generic retries
-                // So far we used _AllowAutoRedirect when doing Auth resubmits so the cache intiated retries are put into same bucket
+                // So far we used _AllowAutoRedirect when doing Auth resubmits so the cache intiated retries are put
+                // into same bucket
                 if (AllowAutoRedirect)
                 {
                     // Resubmit the request
@@ -7125,7 +7195,8 @@ namespace System.Net
         }
 
         // This helper method creates a new exception object with the provided information if this instance
-        // of HWR should not return responses with status code other than 2xx (and 3xx if AllowAutoRedirect == false).
+        // of HWR should not return responses with status code other than 2xx (and 3xx if AllowAutoRedirect
+        // == false).
         private void SetExceptionIfRequired(
             string message,
             Exception innerException,
@@ -7211,7 +7282,8 @@ namespace System.Net
                     //
                     // This is a workaround to avoid breaking change since V1
                     // Basically SSPI may refuse client credential so we abort the request.
-                    // In V1 the error was showing up as WebExceptionStatus.ProtocolError and not with WebExceptionStatus.RequestCanceled
+                    // In V1 the error was showing up as WebExceptionStatus.ProtocolError and not with
+                    // WebExceptionStatus.RequestCanceled
                     // Note that 401 or 407 reported here is from the previous response.
                     //
                     throw new WebException(
@@ -7260,7 +7332,8 @@ namespace System.Net
                     }
                 }
 
-                // This is a workaround for resubmitting a failed chunked POST through a proxy that does not support chunked POST.
+                // This is a workaround for resubmitting a failed chunked POST through a proxy that does not support
+                // chunked POST.
                 // If we have already resubmitted this way then HttpWriteMode will have changed to ContentLength.
                 if (
                     ResponseStatusCode == HttpStatusCode.BadRequest
@@ -7282,7 +7355,8 @@ namespace System.Net
                 // POST              GET             GET             GET            POST
                 //
                 // Put another way:
-                //  301 & 302  - All methods are redirected to the same method but POST. POST is redirected to a GET.
+                //  301 & 302  - All methods are redirected to the same method but POST. POST is redirected to a
+                // GET.
                 //  303 - All methods are redirected to GET
                 //  307 - All methods are redirected to the same method.
                 //
@@ -7703,24 +7777,24 @@ namespace System.Net
             }
         }
 
-        /*++
+/*++
 
-        Routine Description:
+Routine Description:
 
-            ClearRequestForResubmit - prepares object for resubmission and recall
-                of submit request, for redirects, authentication, and other uses
-                This is needed to prevent duplicate headers being added, and other
-                such things.
+ClearRequestForResubmit - prepares object for resubmission and recall
+of submit request, for redirects, authentication, and other uses
+This is needed to prevent duplicate headers being added, and other
+such things.
 
-        Arguments:
+Arguments:
 
-            None.
+None.
 
-        Return Value:
+Return Value:
 
-            None.
+None.
 
-        --*/
+--*/
         private void ClearRequestForResubmit(bool ntlmFollowupRequest)
         {
             GlobalLog.ThreadContract(
@@ -7938,7 +8012,8 @@ namespace System.Net
         //
         private Stream MakeMemoryStream(Stream stream)
         {
-            // GlobalLog.ThreadContract(ThreadKinds.Sync, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::MakeMemoryStream");
+            // GlobalLog.ThreadContract(ThreadKinds.Sync, "HttpWebRequest#" + ValidationHelper.HashString(this)
+            // + "::MakeMemoryStream");
 
             if (stream == null || stream is SyncMemoryStream)
                 return stream;
@@ -8178,7 +8253,8 @@ namespace System.Net
                 }
                 catch (ObjectDisposedException)
                 {
-                    // ObjectDisposedException is expected here in the following sequence: httpWebRequest.GetResponse().Dispose() -> httpWebRequest.GetResponse()
+                    // ObjectDisposedException is expected here in the following sequence:
+                    // httpWebRequest.GetResponse().Dispose() -> httpWebRequest.GetResponse()
                     // on the second call to GetResponse() we cannot determine the statusCode.
                 }
             }

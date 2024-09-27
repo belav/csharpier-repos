@@ -203,7 +203,8 @@ class T
         [Fact]
         public async Task TestItemOrdering3()
         {
-            // Missing as we have arguments we don't know what to do with here.  Likely a bug in user code that needs
+            // Missing as we have arguments we don't know what to do with here.  Likely a bug in user code that
+            // needs
             // fixing first.
             await TestMissingAsync(
                 @"using System;
@@ -823,7 +824,8 @@ class T
         [Fact]
         public async Task TestFormatWithNamedArguments1()
         {
-            // Missing as this scenario is too esoteric.  I was not able to find any examples of code that reorders and
+            // Missing as this scenario is too esoteric.  I was not able to find any examples of code that
+            // reorders and
             // names thigns like this with format strings.
             await TestMissingAsync(
                 @"using System;

@@ -27,7 +27,8 @@ namespace System.Web.Security
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    // This has no hosting permission demands because of DevDiv Bugs 31461: ClientAppSvcs: ASP.net Provider support
+    // This has no hosting permission demands because of DevDiv Bugs 31461: ClientAppSvcs: ASP.net
+    // Provider support
     public static class Membership
     {
         public static bool EnablePasswordRetrieval
@@ -255,18 +256,18 @@ namespace System.Web.Security
         public static bool ValidateUser(string username, string password)
         {
             return Provider.ValidateUser(username, password);
-            /*
-            if (retVal) {
-                PerfCounters.IncrementCounter(AppPerfCounter.MEMBER_SUCCESS);
-                WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditMembershipAuthenticationSuccess, username);
-            }
-            else {
-                PerfCounters.IncrementCounter(AppPerfCounter.MEMBER_FAIL);
-                WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditMembershipAuthenticationFailure, username);
-            }
+/*
+if (retVal) {
+PerfCounters.IncrementCounter(AppPerfCounter.MEMBER_SUCCESS);
+WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditMembershipAuthenticationSuccess, username);
+}
+else {
+PerfCounters.IncrementCounter(AppPerfCounter.MEMBER_FAIL);
+WebBaseEvent.RaiseSystemEvent(null, WebEventCodes.AuditMembershipAuthenticationFailure, username);
+}
 
-            return retVal;
-             */
+return retVal;
+*/
         }
 
         public static MembershipUser GetUser()
@@ -462,7 +463,8 @@ namespace System.Web.Security
                     throw s_InitializeException;
 
                 bool initializeGeneralSettings = !s_Initialized;
-                // the default provider can be initialized once the pre start init has happened (i.e. when compilation has begun)
+                // the default provider can be initialized once the pre start init has happened (i.e. when
+                // compilation has begun)
                 // or if this is not even a hosted scenario
                 bool initializeDefaultProvider =
                     !s_InitializedDefaultProvider
@@ -492,8 +494,10 @@ namespace System.Web.Security
                         settings
                     );
 
-                    // VSO #265267 log warning in event log when using clear password and encrypted password in Membership provider
-                    // VSO #433626 In order to minimize the behavior change, we are going to read the password format from the config settings only instead of getting from the provider class
+                    // VSO #265267 log warning in event log when using clear password and encrypted password in
+                    // Membership provider
+                    // VSO #433626 In order to minimize the behavior change, we are going to read the password format
+                    // from the config settings only instead of getting from the provider class
                     // Also allow user to opt-out this feature.
                     if (AppSettings.LogMembershipPasswordFormatWarning)
                     {
@@ -519,11 +523,15 @@ namespace System.Web.Security
             }
         }
 
-        // VSO #265267 we want to log a warning in the event log, whenever detect using clear password or encrypted password formats settings in Membership provider
-        // VSO #433626 In order to minimize the behavior change, we are going to read the password format from the config settings only instead of getting from the provider class
+        // VSO #265267 we want to log a warning in the event log, whenever detect using clear password or
+        // encrypted password formats settings in Membership provider
+        // VSO #433626 In order to minimize the behavior change, we are going to read the password format
+        // from the config settings only instead of getting from the provider class
         private static void CheckedPasswordFormat(MembershipSection settings)
         {
-            //VSO #294931 Since this is an optional feature, we want to prevent any corner cases that were not able to return the password format. In those cases, we will just do nothing and not log any warnings.
+            //VSO #294931 Since this is an optional feature, we want to prevent any corner cases that were not
+            // able to return the password format. In those cases, we will just do nothing and not log any
+            // warnings.
             try
             {
                 if (settings != null && settings.Providers != null)

@@ -23,12 +23,15 @@ internal sealed partial class HttpSysListener : IDisposable
     // FileCompletionNotificationModes.SkipCompletionPortOnSuccess flag.
     // This bug was only hit when the buffer passed into HttpReceiveClientCertificate
     // (1500 bytes initially) is too small for the certificate.
-    // Due to this bug in downlevel operating systems the FileCompletionNotificationModes.SkipCompletionPortOnSuccess
+    // Due to this bug in downlevel operating systems the
+    // FileCompletionNotificationModes.SkipCompletionPortOnSuccess
     // flag is only used on Win8 and later.
     internal static readonly bool SkipIOCPCallbackOnSuccess = ComNetOS.IsWin8orLater;
 
-    // Mitigate potential DOS attacks by limiting the number of unknown headers we accept.  Numerous header names
-    // with hash collisions will cause the server to consume excess CPU.  1000 headers limits CPU time to under
+    // Mitigate potential DOS attacks by limiting the number of unknown headers we accept.  Numerous
+    // header names
+    // with hash collisions will cause the server to consume excess CPU.  1000 headers limits CPU time
+    // to under
     // 0.5 seconds per request.  Respond with a 400 Bad Request.
     private const int UnknownHeaderLimit = 1000;
 
@@ -145,7 +148,8 @@ internal sealed partial class HttpSysListener : IDisposable
                     return;
                 }
 
-                // Always configure the UrlGroup if the intent was to create, only configure the queue if we actually created it
+                // Always configure the UrlGroup if the intent was to create, only configure the queue if we
+                // actually created it
                 if (
                     Options.RequestQueueMode == RequestQueueMode.Create
                     || Options.RequestQueueMode == RequestQueueMode.CreateOrAttach

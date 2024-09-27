@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -13,7 +14,8 @@ using Newtonsoft.Json.Linq;
 namespace System.Net.Http
 {
     /// <summary>
-    /// Extension methods to allow strongly typed objects to be read from the query component of <see cref="Uri"/> instances.
+    /// Extension methods to allow strongly typed objects to be read from the query component of <see
+    // cref="Uri"/> instances.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class UriExtensions
@@ -34,11 +36,14 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Reads HTML form URL encoded data provided in the <see cref="Uri"/> query component as a <see cref="JObject"/> object.
+        /// Reads HTML form URL encoded data provided in the <see cref="Uri"/> query component as a <see
+        // cref="JObject"/> object.
         /// </summary>
         /// <param name="address">The <see cref="Uri"/> instance from which to read.</param>
-        /// <param name="value">An object to be initialized with this instance or null if the conversion cannot be performed.</param>
-        /// <returns><c>true</c> if the query component can be read as <see cref="JObject"/>; otherwise <c>false</c>.</returns>
+        /// <param name="value">An object to be initialized with this instance or null if the conversion
+        // cannot be performed.</param>
+        /// <returns><c>true</c> if the query component can be read as <see cref="JObject"/>; otherwise
+        // <c>false</c>.</returns>
         public static bool TryReadQueryAsJson(this Uri address, out JObject value)
         {
             if (address == null)
@@ -51,12 +56,15 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Reads HTML form URL encoded data provided in the <see cref="Uri"/> query component as an <see cref="Object"/> of the given <paramref name="type"/>.
+        /// Reads HTML form URL encoded data provided in the <see cref="Uri"/> query component as an <see
+        // cref="Object"/> of the given <paramref name="type"/>.
         /// </summary>
         /// <param name="address">The <see cref="Uri"/> instance from which to read.</param>
         /// <param name="type">The type of the object to read.</param>
-        /// <param name="value">An object to be initialized with this instance or null if the conversion cannot be performed.</param>
-        /// <returns><c>true</c> if the query component can be read as the specified type; otherwise <c>false</c>.</returns>
+        /// <param name="value">An object to be initialized with this instance or null if the conversion
+        // cannot be performed.</param>
+        /// <returns><c>true</c> if the query component can be read as the specified type; otherwise
+        // <c>false</c>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1007:UseGenericsWhereAppropriate",
@@ -90,12 +98,15 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Reads HTML form URL encoded data provided in the <see cref="Uri"/> query component as an <see cref="Object"/> of type <typeparamref name="T"/>.
+        /// Reads HTML form URL encoded data provided in the <see cref="Uri"/> query component as an <see
+        // cref="Object"/> of type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the object to read.</typeparam>
         /// <param name="address">The <see cref="Uri"/> instance from which to read.</param>
-        /// <param name="value">An object to be initialized with this instance or null if the conversion cannot be performed.</param>
-        /// <returns><c>true</c> if the query component can be read as the specified type; otherwise <c>false</c>.</returns>
+        /// <param name="value">An object to be initialized with this instance or null if the conversion
+        // cannot be performed.</param>
+        /// <returns><c>true</c> if the query component can be read as the specified type; otherwise
+        // <c>false</c>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1004:GenericMethodsShouldProvideTypeParameter",

@@ -618,7 +618,8 @@ namespace System.Runtime.Serialization
             string? ns
         )
         {
-            // _extensionDataRead is only ever created here, so we know the casting property 'UnderlyingExtensionDataReader' won't be null.
+            // _extensionDataRead is only ever created here, so we know the casting property
+            // 'UnderlyingExtensionDataReader' won't be null.
             _extensionDataReader ??= CreateReaderDelegatorForReader(new ExtensionDataReader(this));
             _extensionDataReader.UnderlyingExtensionDataReader!.SetDataNode(dataNode, name, ns);
             object? retObj = InternalDeserialize(_extensionDataReader, type, name, ns);
@@ -1313,9 +1314,12 @@ namespace System.Runtime.Serialization
             return dataNode;
         }
 
-        // Pattern-recognition logic: the method reads XML elements into DOM. To recognize as an array, it requires that
-        // all items have the same name and namespace. To recognize as an ISerializable type, it requires that all
-        // items be unqualified. If the XML only contains elements (no attributes or other nodes) is recognized as a
+        // Pattern-recognition logic: the method reads XML elements into DOM. To recognize as an array, it
+        // requires that
+        // all items have the same name and namespace. To recognize as an ISerializable type, it requires
+        // that all
+        // items be unqualified. If the XML only contains elements (no attributes or other nodes) is
+        // recognized as a
         // class/class hierarchy. Otherwise it is deserialized as XML.
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

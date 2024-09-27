@@ -6,7 +6,8 @@ using System.Formats.Asn1;
 namespace System.Security.Cryptography
 {
     /// <summary>
-    ///     Wrapper for public key material passed between parties during Diffie-Hellman key material generation
+    ///     Wrapper for public key material passed between parties during Diffie-Hellman key material
+    // generation
     /// </summary>
     public abstract partial class ECDiffieHellmanPublicKey : IDisposable
     {
@@ -24,7 +25,8 @@ namespace System.Security.Cryptography
         /// <summary>
         /// When overridden in a derived class, exports the explicit ECParameters for an ECCurve.
         /// </summary>
-        /// <returns>The ECParameters representing the point on the curve for this key, using the explicit curve format.</returns>
+        /// <returns>The ECParameters representing the point on the curve for this key, using the explicit
+        // curve format.</returns>
         public virtual ECParameters ExportExplicitParameters()
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
@@ -35,7 +37,8 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="destination">The byte span to receive the X.509 SubjectPublicKeyInfo data.</param>
         /// <param name="bytesWritten">
-        /// When this method returns, contains a value that indicates the number of bytes written to <paramref name="destination" />.
+        /// When this method returns, contains a value that indicates the number of bytes written to
+        // <paramref name="destination" />.
         /// This parameter is treated as uninitialized.
         /// </param>
         /// <returns>
@@ -46,7 +49,8 @@ namespace System.Security.Cryptography
         /// The member <see cref="ExportParameters" /> has not been overridden in a derived class.
         /// </exception>
         /// <exception cref="ObjectDisposedException">The object has already been disposed.</exception>
-        /// <exception cref="CryptographicException">The key is invalid and could not be exported.</exception>
+        /// <exception cref="CryptographicException">The key is invalid and could not be
+        // exported.</exception>
         public virtual bool TryExportSubjectPublicKeyInfo(
             Span<byte> destination,
             out int bytesWritten
@@ -67,7 +71,8 @@ namespace System.Security.Cryptography
         /// The member <see cref="ExportParameters" /> has not been overridden in a derived class.
         /// </exception>
         /// <exception cref="ObjectDisposedException">The object has already been disposed.</exception>
-        /// <exception cref="CryptographicException">The key is invalid and could not be exported.</exception>
+        /// <exception cref="CryptographicException">The key is invalid and could not be
+        // exported.</exception>
         public virtual byte[] ExportSubjectPublicKeyInfo()
         {
             ECParameters ecParameters = ExportParameters();

@@ -81,14 +81,16 @@ namespace ILCompiler.DependencyAnalysis
 
             _writerSavedBytes = _writer.Save();
 
-            // Zero out the native writer and vertex list so that we AV if someone tries to insert after we're done.
+            // Zero out the native writer and vertex list so that we AV if someone tries to insert after we're
+            // done.
             _writer = null;
             _vertexNodesToWrite = null;
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
-            // Dependencies of the NativeLayoutInfo node are tracked by the callers that emit data into the native layout writer
+            // Dependencies of the NativeLayoutInfo node are tracked by the callers that emit data into the
+            // native layout writer
             if (relocsOnly)
                 return new ObjectData(
                     Array.Empty<byte>(),

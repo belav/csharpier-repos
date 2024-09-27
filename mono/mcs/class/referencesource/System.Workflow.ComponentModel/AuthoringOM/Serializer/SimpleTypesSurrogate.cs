@@ -10,7 +10,8 @@ namespace System.Workflow.ComponentModel.Serialization
     using System.Xml;
 
     #region SimpleTypesSurrogate
-    //This class is currently used only for Guids. The size diff is 93 bytes per guid over binary formatter
+    //This class is currently used only for Guids. The size diff is 93 bytes per guid over binary
+    // formatter
     //Will add support for other types as well, eventually.
     internal sealed class SimpleTypesSurrogate : ISerializationSurrogate
     {

@@ -355,7 +355,8 @@ namespace MonoTests.System.Windows.Forms
 
             throw new NotImplementedException("Where am I?");
             // Uncomment the following line, change the path, and comment out the exception.
-            //File.WriteAllText (@"Z:\mono\head\mcs\class\SWF\Test\System.Windows.Forms\" + classname + ".cs", result.ToString ());
+            //File.WriteAllText (@"Z:\mono\head\mcs\class\SWF\Test\System.Windows.Forms\" + classname + ".cs",
+            // result.ToString ());
 
             return string.Empty;
         }
@@ -1817,9 +1818,9 @@ namespace MonoTests.System.Windows.Forms
             return string.Join(",", selectionsList.ToArray());
 
             // (Here is the disallowed Linq version.)
-            /* return string.Join (",", (selections.Select ((List<int> x)
-                => "<" + string.Join (",", (x.Select ((int y)
-                    => (y.ToString("D")))).ToArray()) + ">").ToArray())); */
+/* return string.Join (",", (selections.Select ((List<int> x)
+=> "<" + string.Join (",", (x.Select ((int y)
+=> (y.ToString("D")))).ToArray()) + ">").ToArray())); */
         }
 
         [Test]
@@ -2143,7 +2144,8 @@ namespace MonoTests.System.Windows.Forms
                 Assert.IsNotNull(cell.DataGridView, "#cell.DataGridView");
                 Assert.IsNull(cell.DefaultNewRowValue, "#cell.DefaultNewRowValue");
                 Assert.AreEqual(false, cell.Displayed, "#cell.Displayed");
-                // /* NIE for the moment... */ Assert.AreEqual (@"", cell.EditedFormattedValue, "#cell.EditedFormattedValue");
+                // /* NIE for the moment... */ Assert.AreEqual (@"", cell.EditedFormattedValue,
+                // "#cell.EditedFormattedValue");
                 Assert.IsNotNull(cell.EditType, "#cell.EditType");
                 Assert.IsNotNull(cell.ErrorIconBounds, "#cell.ErrorIconBounds");
                 Assert.AreEqual(@"", cell.ErrorText, "#cell.ErrorText");

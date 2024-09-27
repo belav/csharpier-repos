@@ -39,7 +39,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     or during a <see cref="ExportProvider.ExportsChanged"/> event.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="addedExports"/> or <paramref name="removedExports"/> is <see langword="null"/>.
+        ///     <paramref name="addedExports"/> or <paramref name="removedExports"/> is <see
+        // langword="null"/>.
         /// </exception>
         public ExportsChangeEventArgs(
             IEnumerable<ExportDefinition> addedExports,

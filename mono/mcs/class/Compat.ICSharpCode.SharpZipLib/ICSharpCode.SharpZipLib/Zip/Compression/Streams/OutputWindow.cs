@@ -96,8 +96,8 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
                 }
                 else
                 {
-                    /* We have to copy manually, since the repeat pattern overlaps.
-                    */
+/* We have to copy manually, since the repeat pattern overlaps.
+*/
                     while (len-- > 0)
                     {
                         window[windowEnd++] = window[rep_start++];

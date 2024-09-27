@@ -118,7 +118,8 @@ internal sealed class CertificateConfigLoader : ICertificateConfigLoader
         const string DSAOid = "1.2.840.10040.4.1";
         const string ECDsaOid = "1.2.840.10045.2.1";
 
-        // Duplication is required here because there are separate CopyWithPrivateKey methods for each algorithm.
+        // Duplication is required here because there are separate CopyWithPrivateKey methods for each
+        // algorithm.
         var keyText = File.ReadAllText(keyPath);
         switch (certificate.PublicKey.Oid.Value)
         {

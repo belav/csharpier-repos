@@ -15,12 +15,17 @@ namespace Microsoft.CodeAnalysis.Rename
     public static partial class Renamer
     {
         /// <summary>
-        /// Information about rename document calls that allows them to be applied as individual actions. Actions are individual units of work
-        /// that can change the contents of one or more document in the solution. Even if the <see cref="ApplicableActions"/> is empty, the
-        /// document metadata will still be updated by calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/>
+        /// Information about rename document calls that allows them to be applied as individual actions.
+        // Actions are individual units of work
+        /// that can change the contents of one or more document in the solution. Even if the <see
+        // cref="ApplicableActions"/> is empty, the
+        /// document metadata will still be updated by calling <see cref="UpdateSolutionAsync(Solution,
+        // ImmutableArray{RenameDocumentAction}, CancellationToken)"/>
         /// <para />
-        /// To apply all actions use <see cref="UpdateSolutionAsync(Solution, CancellationToken)"/>, or use a subset
-        /// of the actions by calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/>.
+        /// To apply all actions use <see cref="UpdateSolutionAsync(Solution, CancellationToken)"/>, or use
+        // a subset
+        /// of the actions by calling <see cref="UpdateSolutionAsync(Solution,
+        // ImmutableArray{RenameDocumentAction}, CancellationToken)"/>.
         /// Actions can be applied in any order.
         /// Each action has a description of the changes that it will apply that can be presented to a user.
         /// </summary>
@@ -47,14 +52,17 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             /// <summary>
-            /// All applicable actions computed for the action. Action set may be empty, which represents updates to document
-            /// contents rather than metadata. Document metadata will still not be updated unless <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)" />
+            /// All applicable actions computed for the action. Action set may be empty, which represents
+            // updates to document
+            /// contents rather than metadata. Document metadata will still not be updated unless <see
+            // cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)" />
             /// is called.
             /// </summary>
             public ImmutableArray<RenameDocumentAction> ApplicableActions { get; }
 
             /// <summary>
-            /// Same as calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/> with
+            /// Same as calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction},
+            // CancellationToken)"/> with
             /// <see cref="ApplicableActions"/> as the argument
             /// </summary>
             public Task<Solution> UpdateSolutionAsync(
@@ -71,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Rename
             /// that will update the document properties as appropriate. This means we
             /// can still support when <see cref="ApplicableActions"/> is empty. It's desirable
             /// that consumers can call a rename API to produce a <see cref="RenameDocumentActionSet"/> and
-            /// immediately call <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/> without
+            /// immediately call <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction},
+            // CancellationToken)"/> without
             /// having to inspect the returned <see cref="ApplicableActions"/>.
             /// </remarks>
             public async Task<Solution> UpdateSolutionAsync(
@@ -136,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 }
 
                 // There are cases where we expect work to be done between when the ActionSet is first generated
-                // and when the solution can be worked on. This work can remove and add documents as part of the rename
+                // and when the solution can be worked on. This work can remove and add documents as part of the
+                // rename
                 // and thus won't have the same DocumentId.
                 //
                 // 1. Right click solution explorer > rename
@@ -144,13 +154,17 @@ namespace Microsoft.CodeAnalysis.Rename
                 // 3. CPS changes file on disk
                 // 4. CPS updates project file if necessary
                 // 5. In dotnet project system, a new design time build is started
-                // 6. Re-evaluates what files need to be passed to Roslyn. Tell Roslyn of file changed. This is a remove then add. (Asynchronous on project-system side)
-                // 7. We update the workspace snapshot in the VS Workspace. Synchronous and controlled by project system.
+                // 6. Re-evaluates what files need to be passed to Roslyn. Tell Roslyn of file changed. This is a
+                // remove then add. (Asynchronous on project-system side)
+                // 7. We update the workspace snapshot in the VS Workspace. Synchronous and controlled by project
+                // system.
                 // 8. RenameDocumentActionSet should be applied to the current Workspace Solution
                 //
-                // Since step 6 and 7 remove and add the document, step 8 can't depend on the DocumentId being available and the same document.
+                // Since step 6 and 7 remove and add the document, step 8 can't depend on the DocumentId being
+                // available and the same document.
                 // We are guaranateed that the project is the same and we know what the document name will be.
-                // https://github.com/dotnet/roslyn/issues/43729 tracks designing a more elagent system that can help alleviate
+                // https://github.com/dotnet/roslyn/issues/43729 tracks designing a more elagent system that can
+                // help alleviate
                 // this issue.
                 var project = solution.GetRequiredProject(_documentId.ProjectId);
                 return project.Documents.FirstOrDefault(d =>

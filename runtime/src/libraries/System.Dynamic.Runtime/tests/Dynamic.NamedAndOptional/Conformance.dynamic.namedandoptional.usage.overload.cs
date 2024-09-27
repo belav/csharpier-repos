@@ -892,7 +892,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -925,7 +926,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -958,7 +960,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -991,7 +994,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -1025,7 +1029,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -1062,7 +1067,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -1099,7 +1105,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent
@@ -1136,7 +1143,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
     // <Title>Overload resolution of named params and optionals</Title>
-    // <Description>Basic Overload resolution with named. This is here mostly as a regression test</Description>
+    // <Description>Basic Overload resolution with named. This is here mostly as a regression
+    // test</Description>
     // <Expects status=success></Expects>
     // <Code>
     public class Parent

@@ -20,7 +20,8 @@ public class DisplayMetadata
     public IDictionary<object, object> AdditionalValues { get; } = new Dictionary<object, object>();
 
     /// <summary>
-    /// Gets or sets a value indicating whether or not to convert an empty string value or one containing only
+    /// Gets or sets a value indicating whether or not to convert an empty string value or one
+    // containing only
     /// whitespace characters to <see langword="null"/> when representing a model as text. See
     /// <see cref="ModelMetadata.ConvertEmptyStringToNull"/>
     /// </summary>
@@ -43,7 +44,8 @@ public class DisplayMetadata
     /// See <see cref="ModelMetadata.DisplayFormatString"/>
     /// </summary>
     /// <remarks>
-    /// Setting <see cref="DisplayFormatString"/> also changes <see cref="DisplayFormatStringProvider"/>.
+    /// Setting <see cref="DisplayFormatString"/> also changes <see
+    // cref="DisplayFormatStringProvider"/>.
     /// </remarks>
     public string? DisplayFormatString
     {
@@ -56,7 +58,8 @@ public class DisplayMetadata
     /// <see cref="ModelMetadata.DisplayFormatString"/>.
     /// </summary>
     /// <remarks>
-    /// Setting <see cref="DisplayFormatStringProvider"/> also changes <see cref="DisplayFormatString"/>.
+    /// Setting <see cref="DisplayFormatStringProvider"/> also changes <see
+    // cref="DisplayFormatString"/>.
     /// </remarks>
     public Func<string?> DisplayFormatStringProvider
     {
@@ -84,7 +87,8 @@ public class DisplayMetadata
     /// Setting <see cref="EditFormatString"/> also changes <see cref="EditFormatStringProvider"/>.
     /// </para>
     /// <para>
-    /// <see cref="IDisplayMetadataProvider"/> instances that set this property to a non-<see langword="null"/>,
+    /// <see cref="IDisplayMetadataProvider"/> instances that set this property to a non-<see
+    // langword="null"/>,
     /// non-empty, non-default value should also set <see cref="HasNonDefaultEditFormat"/> to
     /// <see langword="true"/>.
     /// </para>
@@ -104,7 +108,8 @@ public class DisplayMetadata
     /// Setting <see cref="EditFormatStringProvider"/> also changes <see cref="EditFormatString"/>.
     /// </para>
     /// <para>
-    /// <see cref="IDisplayMetadataProvider"/> instances that set this property to a non-default value should
+    /// <see cref="IDisplayMetadataProvider"/> instances that set this property to a non-default value
+    // should
     /// also set <see cref="HasNonDefaultEditFormat"/> to <see langword="true"/>.
     /// </para>
     /// </remarks>
@@ -130,7 +135,8 @@ public class DisplayMetadata
 
     /// <summary>
     /// Gets the names and values of all <see cref="System.Enum"/> values in
-    /// <see cref="ModelMetadata.UnderlyingOrModelType"/>. See <see cref="ModelMetadata.EnumNamesAndValues"/>.
+    /// <see cref="ModelMetadata.UnderlyingOrModelType"/>. See <see
+    // cref="ModelMetadata.EnumNamesAndValues"/>.
     /// </summary>
     // This could be implemented in DefaultModelMetadata. But value should be cached.
     public IReadOnlyDictionary<string, string>? EnumNamesAndValues { get; set; }
@@ -182,7 +188,8 @@ public class DisplayMetadata
     }
 
     /// <summary>
-    /// Gets or sets a delegate which is used to get the text to display when the model is <see langword="null"/>.
+    /// Gets or sets a delegate which is used to get the text to display when the model is <see
+    // langword="null"/>.
     /// See <see cref="ModelMetadata.NullDisplayText"/>.
     /// </summary>
     /// <remarks>

@@ -15,9 +15,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         : IUnitTestingSolutionCrawlerRegistrationService
     {
         /// <summary>
-        /// nested class of <see cref="UnitTestingSolutionCrawlerRegistrationService"/> since it is tightly coupled with it.
+        /// nested class of <see cref="UnitTestingSolutionCrawlerRegistrationService"/> since it is tightly
+        // coupled with it.
         ///
-        /// <see cref="IUnitTestingSolutionCrawlerService"/> is implemented by this class since WorkspaceService doesn't allow a class to implement
+        /// <see cref="IUnitTestingSolutionCrawlerService"/> is implemented by this class since
+        // WorkspaceService doesn't allow a class to implement
         /// more than one <see cref="IWorkspaceService"/>.
         /// </summary>
         [

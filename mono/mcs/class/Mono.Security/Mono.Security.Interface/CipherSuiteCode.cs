@@ -63,14 +63,14 @@ namespace Mono.Security.Interface
         TLS_DH_anon_WITH_DES_CBC_SHA = 0x001A,
         TLS_DH_anon_WITH_3DES_EDE_CBC_SHA = 0x001B,
 
-        /*
-         * Note: The cipher suite values { 0x00, 0x1C } and { 0x00, 0x1D } are reserved to avoid
-         * collision with Fortezza-based cipher suites in SSL 3.
-        */
+/*
+* Note: The cipher suite values { 0x00, 0x1C } and { 0x00, 0x1D } are reserved to avoid
+* collision with Fortezza-based cipher suites in SSL 3.
+*/
 
-        /*
-         * RFC 3268
-        */
+/*
+* RFC 3268
+*/
         TLS_RSA_WITH_AES_128_CBC_SHA = 0x002F,
         TLS_DH_DSS_WITH_AES_128_CBC_SHA = 0x0030,
         TLS_DH_RSA_WITH_AES_128_CBC_SHA = 0x0031,
@@ -84,9 +84,9 @@ namespace Mono.Security.Interface
         TLS_DHE_RSA_WITH_AES_256_CBC_SHA = 0x0039,
         TLS_DH_anon_WITH_AES_256_CBC_SHA = 0x003A,
 
-        /*
-         * RFC 5932
-        */
+/*
+* RFC 5932
+*/
         TLS_RSA_WITH_CAMELLIA_128_CBC_SHA = 0x0041,
         TLS_DH_DSS_WITH_CAMELLIA_128_CBC_SHA = 0x0042,
         TLS_DH_RSA_WITH_CAMELLIA_128_CBC_SHA = 0x0043,
@@ -115,9 +115,9 @@ namespace Mono.Security.Interface
         TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 = 0x00C4,
         TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA256 = 0x00C5,
 
-        /*
-         * RFC 4162
-        */
+/*
+* RFC 4162
+*/
         TLS_RSA_WITH_SEED_CBC_SHA = 0x0096,
         TLS_DH_DSS_WITH_SEED_CBC_SHA = 0x0097,
         TLS_DH_RSA_WITH_SEED_CBC_SHA = 0x0098,
@@ -125,9 +125,9 @@ namespace Mono.Security.Interface
         TLS_DHE_RSA_WITH_SEED_CBC_SHA = 0x009A,
         TLS_DH_anon_WITH_SEED_CBC_SHA = 0x009B,
 
-        /*
-         * RFC 4279
-        */
+/*
+* RFC 4279
+*/
         TLS_PSK_WITH_RC4_128_SHA = 0x008A,
         TLS_PSK_WITH_3DES_EDE_CBC_SHA = 0x008B,
         TLS_PSK_WITH_AES_128_CBC_SHA = 0x008C,
@@ -141,9 +141,9 @@ namespace Mono.Security.Interface
         TLS_RSA_PSK_WITH_AES_128_CBC_SHA = 0x0094,
         TLS_RSA_PSK_WITH_AES_256_CBC_SHA = 0x0095,
 
-        /*
-         * RFC 4492
-        */
+/*
+* RFC 4492
+*/
         TLS_ECDH_ECDSA_WITH_NULL_SHA = 0xC001,
         TLS_ECDH_ECDSA_WITH_RC4_128_SHA = 0xC002,
         TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA = 0xC003,
@@ -170,16 +170,16 @@ namespace Mono.Security.Interface
         TLS_ECDH_anon_WITH_AES_128_CBC_SHA = 0xC018,
         TLS_ECDH_anon_WITH_AES_256_CBC_SHA = 0xC019,
 
-        /*
-         * RFC 4785
-        */
+/*
+* RFC 4785
+*/
         TLS_PSK_WITH_NULL_SHA = 0x002C,
         TLS_DHE_PSK_WITH_NULL_SHA = 0x002D,
         TLS_RSA_PSK_WITH_NULL_SHA = 0x002E,
 
-        /*
-         * RFC 5054
-        */
+/*
+* RFC 5054
+*/
         TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA = 0xC01A,
         TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA = 0xC01B,
         TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA = 0xC01C,
@@ -190,9 +190,9 @@ namespace Mono.Security.Interface
         TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA = 0xC021,
         TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA = 0xC022,
 
-        /*
-         * RFC 5246
-        */
+/*
+* RFC 5246
+*/
         TLS_RSA_WITH_NULL_SHA256 = 0x003B,
         TLS_RSA_WITH_AES_128_CBC_SHA256 = 0x003C,
         TLS_RSA_WITH_AES_256_CBC_SHA256 = 0x003D,
@@ -207,9 +207,9 @@ namespace Mono.Security.Interface
         TLS_DH_anon_WITH_AES_128_CBC_SHA256 = 0x006C,
         TLS_DH_anon_WITH_AES_256_CBC_SHA256 = 0x006D,
 
-        /*
-         * RFC 5288
-        */
+/*
+* RFC 5288
+*/
         TLS_RSA_WITH_AES_128_GCM_SHA256 = 0x009C,
         TLS_RSA_WITH_AES_256_GCM_SHA384 = 0x009D,
         TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 = 0x009E,
@@ -223,9 +223,9 @@ namespace Mono.Security.Interface
         TLS_DH_anon_WITH_AES_128_GCM_SHA256 = 0x00A6,
         TLS_DH_anon_WITH_AES_256_GCM_SHA384 = 0x00A7,
 
-        /*
-         * RFC 5289
-        */
+/*
+* RFC 5289
+*/
         TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = 0xC023,
         TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = 0xC024,
         TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256 = 0xC025,
@@ -243,9 +243,9 @@ namespace Mono.Security.Interface
         TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256 = 0xC031,
         TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384 = 0xC032,
 
-        /*
-         * RFC 5487
-        */
+/*
+* RFC 5487
+*/
         TLS_PSK_WITH_AES_128_GCM_SHA256 = 0x00A8,
         TLS_PSK_WITH_AES_256_GCM_SHA384 = 0x00A9,
         TLS_DHE_PSK_WITH_AES_128_GCM_SHA256 = 0x00AA,
@@ -265,9 +265,9 @@ namespace Mono.Security.Interface
         TLS_RSA_PSK_WITH_NULL_SHA256 = 0x00B8,
         TLS_RSA_PSK_WITH_NULL_SHA384 = 0x00B9,
 
-        /*
-         * RFC 5489
-        */
+/*
+* RFC 5489
+*/
         TLS_ECDHE_PSK_WITH_RC4_128_SHA = 0xC033,
         TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA = 0xC034,
         TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA = 0xC035,
@@ -278,14 +278,14 @@ namespace Mono.Security.Interface
         TLS_ECDHE_PSK_WITH_NULL_SHA256 = 0xC03A,
         TLS_ECDHE_PSK_WITH_NULL_SHA384 = 0xC03B,
 
-        /*
-         * RFC 5746
-        */
+/*
+* RFC 5746
+*/
         TLS_EMPTY_RENEGOTIATION_INFO_SCSV = 0x00FF,
 
-        /*
-         * RFC 6367
-        */
+/*
+* RFC 6367
+*/
         TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256 = 0xC072,
         TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384 = 0xC073,
         TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256 = 0xC074,
@@ -331,9 +331,9 @@ namespace Mono.Security.Interface
         TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256 = 0xC09A,
         TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384 = 0xC09B,
 
-        /*
-         * RFC 6655
-        */
+/*
+* RFC 6655
+*/
         TLS_RSA_WITH_AES_128_CCM = 0xC09C,
         TLS_RSA_WITH_AES_256_CCM = 0xC09D,
         TLS_DHE_RSA_WITH_AES_128_CCM = 0xC09E,
@@ -351,16 +351,16 @@ namespace Mono.Security.Interface
         TLS_PSK_DHE_WITH_AES_128_CCM_8 = 0xC0AA,
         TLS_PSK_DHE_WITH_AES_256_CCM_8 = 0xC0AB,
 
-        /*
-         * draft-agl-tls-chacha20poly1305-04
-        */
+/*
+* draft-agl-tls-chacha20poly1305-04
+*/
         TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = 0xCC13,
         TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = 0xCC14,
         TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = 0xCC15,
 
-        /*
-         * draft-josefsson-salsa20-tls-04
-        */
+/*
+* draft-josefsson-salsa20-tls-04
+*/
         TLS_RSA_WITH_ESTREAM_SALSA20_SHA1 = 0xE410,
         TLS_RSA_WITH_SALSA20_SHA1 = 0xE411,
         TLS_ECDHE_RSA_WITH_ESTREAM_SALSA20_SHA1 = 0xE412,
@@ -378,22 +378,22 @@ namespace Mono.Security.Interface
         TLS_DHE_RSA_WITH_ESTREAM_SALSA20_SHA1 = 0xE41E,
         TLS_DHE_RSA_WITH_SALSA20_SHA1 = 0xE41F,
 
-        /*
-         * draft-ietf-tls-downgrade-scsv-00
-        */
+/*
+* draft-ietf-tls-downgrade-scsv-00
+*/
         TLS_FALLBACK_SCSV = 0x5600,
 
-        /*
-        public static bool IsScsv (int cipherSuite)
-        {
-            switch (cipherSuite) {
-            case TLS_EMPTY_RENEGOTIATION_INFO_SCSV:
-            case TLS_FALLBACK_SCSV:
-                return true,
-            default:
-                return false,
-            }
-        }
-        */
+/*
+public static bool IsScsv (int cipherSuite)
+{
+switch (cipherSuite) {
+case TLS_EMPTY_RENEGOTIATION_INFO_SCSV:
+case TLS_FALLBACK_SCSV:
+return true,
+default:
+return false,
+}
+}
+*/
     }
 }

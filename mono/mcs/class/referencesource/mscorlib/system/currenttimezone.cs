@@ -135,7 +135,8 @@ namespace System
             Boolean isDst = false;
             if (startTime > endTime)
             {
-                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the beginning of next year.
+                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the
+                // beginning of next year.
                 // Note, the summer in the southern hemisphere begins late in the year.
                 isDst = (time < endTime || time >= startTime);
             }
@@ -216,9 +217,11 @@ namespace System
                         //
                         // rawData is an array of 17 short (16 bit) numbers.
                         // The first 8 numbers contains the
-                        // year/month/day/dayOfWeek/hour/minute/second/millisecond for the starting time of daylight saving time.
+                        // year/month/day/dayOfWeek/hour/minute/second/millisecond for the starting time of daylight saving
+                        // time.
                         // The next 8 numbers contains the
-                        // year/month/day/dayOfWeek/hour/minute/second/millisecond for the ending time of daylight saving time.
+                        // year/month/day/dayOfWeek/hour/minute/second/millisecond for the ending time of daylight saving
+                        // time.
                         // The last short number is the delta to the standard offset in minutes.
                         //
                         short[] rawData = nativeGetDaylightChanges(year);

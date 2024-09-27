@@ -204,8 +204,10 @@ namespace System.Runtime.Serialization
                     {
                         //
                         // Type name can contain nested generic types. Following is an example:
-                        // System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],
-                        //          [System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
+                        // System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0,
+                        // Culture=neutral, PublicKeyToken=b77a5c561934e089],
+                        //          [System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=2.0.0.0,
+                        // Culture=neutral, PublicKeyToken=b77a5c561934e089]],
                         //           mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
                         //
                         // Spliltting by ',' won't work. We need to do first-level split by ','.
@@ -420,7 +422,8 @@ namespace System.Runtime.Serialization
         // Following function will rip off assembly information and brackets
         // Following is an example:
         // " [System.Collections.Generic.List[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
-        //   PublicKeyToken=b77a5c561934e089]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]"
+        //   PublicKeyToken=b77a5c561934e089]], mscorlib, Version=2.0.0.0, Culture=neutral,
+        // PublicKeyToken=b77a5c561934e089]"
         //
         private string RipOffAssemblyInformationFromTypeName(string typeName)
         {

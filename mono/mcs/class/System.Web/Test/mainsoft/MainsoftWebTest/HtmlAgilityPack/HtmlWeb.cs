@@ -75,7 +75,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="url">The requested URL, such as "http://Myserver/Mypath/Myfile.asp".</param>
         /// <param name="path">The location of the file where you want to save the document.</param>
-        /// <param name="method">The HTTP method used to open the connection, such as GET, POST, PUT, or PROPFIND.</param>
+        /// <param name="method">The HTTP method used to open the connection, such as GET, POST, PUT, or
+        // PROPFIND.</param>
         public void Get(string url, string path, string method)
         {
             Uri uri = new Uri(url);
@@ -103,7 +104,8 @@ namespace HtmlAgilityPack
         /// Loads an HTML document from an Internet resource.
         /// </summary>
         /// <param name="url">The requested URL, such as "http://Myserver/Mypath/Myfile.asp".</param>
-        /// <param name="method">The HTTP method used to open the connection, such as GET, POST, PUT, or PROPFIND.</param>
+        /// <param name="method">The HTTP method used to open the connection, such as GET, POST, PUT, or
+        // PROPFIND.</param>
         /// <returns>A new HTML document.</returns>
         public HtmlDocument Load(string url, string method)
         {
@@ -339,7 +341,8 @@ namespace HtmlAgilityPack
                 //				{
                 //					foreach(Cookie cookie in req.CookieContainer.GetCookies(req.RequestUri))
                 //					{
-                //						HtmlLibrary.Trace("Cookie " + cookie.Name + "=" + cookie.Value + " path=" + cookie.Path + " domain=" + cookie.Domain);
+                //						HtmlLibrary.Trace("Cookie " + cookie.Name + "=" + cookie.Value + " path=" + cookie.Path + "
+                // domain=" + cookie.Domain);
                 //					}
                 //				}
             }
@@ -636,11 +639,13 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Loads an HTML document from an Internet resource and saves it to the specified XmlTextWriter, after an XSLT transformation.
+        /// Loads an HTML document from an Internet resource and saves it to the specified XmlTextWriter,
+        // after an XSLT transformation.
         /// </summary>
         /// <param name="htmlUrl">The requested URL, such as "http://Myserver/Mypath/Myfile.asp".</param>
         /// <param name="xsltUrl">The URL that specifies the XSLT stylesheet to load.</param>
-        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as input to the transform.</param>
+        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as
+        // input to the transform.</param>
         /// <param name="writer">The XmlTextWriter to which you want to save.</param>
         public void LoadHtmlAsXml(
             string htmlUrl,
@@ -653,13 +658,17 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Loads an HTML document from an Internet resource and saves it to the specified XmlTextWriter, after an XSLT transformation.
+        /// Loads an HTML document from an Internet resource and saves it to the specified XmlTextWriter,
+        // after an XSLT transformation.
         /// </summary>
-        /// <param name="htmlUrl">The requested URL, such as "http://Myserver/Mypath/Myfile.asp". May not be null.</param>
+        /// <param name="htmlUrl">The requested URL, such as "http://Myserver/Mypath/Myfile.asp". May not be
+        // null.</param>
         /// <param name="xsltUrl">The URL that specifies the XSLT stylesheet to load.</param>
-        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as input to the transform.</param>
+        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as
+        // input to the transform.</param>
         /// <param name="writer">The XmlTextWriter to which you want to save.</param>
-        /// <param name="xmlPath">A file path where the temporary XML before transformation will be saved. Mostly used for debugging purposes.</param>
+        /// <param name="xmlPath">A file path where the temporary XML before transformation will be saved.
+        // Mostly used for debugging purposes.</param>
         public void LoadHtmlAsXml(
             string htmlUrl,
             string xsltUrl,
@@ -712,7 +721,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="htmlUrl">The requested URL, such as "http://Myserver/Mypath/Myfile.asp".</param>
         /// <param name="xsltUrl">The URL that specifies the XSLT stylesheet to load.</param>
-        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as input to the transform.</param>
+        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as
+        // input to the transform.</param>
         /// <param name="type">The requested type.</param>
         /// <returns>An newly created instance.</returns>
         public object CreateInstance(
@@ -730,9 +740,11 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="htmlUrl">The requested URL, such as "http://Myserver/Mypath/Myfile.asp".</param>
         /// <param name="xsltUrl">The URL that specifies the XSLT stylesheet to load.</param>
-        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as input to the transform.</param>
+        /// <param name="xsltArgs">An XsltArgumentList containing the namespace-qualified arguments used as
+        // input to the transform.</param>
         /// <param name="type">The requested type.</param>
-        /// <param name="xmlPath">A file path where the temporary XML before transformation will be saved. Mostly used for debugging purposes.</param>
+        /// <param name="xmlPath">A file path where the temporary XML before transformation will be saved.
+        // Mostly used for debugging purposes.</param>
         /// <returns>An newly created instance.</returns>
         public object CreateInstance(
             string htmlUrl,

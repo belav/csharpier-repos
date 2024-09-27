@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.Host
     /// provides info on the given file
     ///
     /// this will be used to provide dynamic content such as generated content from cshtml to workspace
-    /// we acquire this from <see cref="IDynamicFileInfoProvider"/> exposed from external components such as razor for cshtml
+    /// we acquire this from <see cref="IDynamicFileInfoProvider"/> exposed from external components
+    // such as razor for cshtml
     /// </summary>
     internal sealed class DynamicFileInfo(
         string filePath,
@@ -19,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Host
     )
     {
         /// <summary>
-        /// The path to the generated file. in future, we will use this to get right options from editorconfig
+        /// The path to the generated file. in future, we will use this to get right options from
+        // editorconfig
         /// </summary>
         public string FilePath { get; } = filePath;
 
@@ -34,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Host
         public TextLoader TextLoader { get; } = textLoader;
 
         /// <summary>
-        /// True if the source code contained in the document is only used in design-time (e.g. for completion),
+        /// True if the source code contained in the document is only used in design-time (e.g. for
+        // completion),
         /// but is not passed to the compiler when the containing project is built, e.g. a Razor view.
         /// </summary>
         public bool DesignTimeOnly { get; } = designTimeOnly;

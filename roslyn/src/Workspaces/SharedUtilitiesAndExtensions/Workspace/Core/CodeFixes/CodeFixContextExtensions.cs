@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     internal static class CodeFixContextExtensions
     {
         /// <summary>
-        /// Use this helper to register multiple fixes (<paramref name="actions"/>) each of which addresses / fixes the same supplied <paramref name="diagnostic"/>.
+        /// Use this helper to register multiple fixes (<paramref name="actions"/>) each of which addresses
+        // / fixes the same supplied <paramref name="diagnostic"/>.
         /// </summary>
         internal static void RegisterFixes(
             this CodeFixContext context,
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         }
 
         /// <summary>
-        /// Use this helper to register multiple fixes (<paramref name="actions"/>) each of which addresses / fixes the same set of supplied <paramref name="diagnostics"/>.
+        /// Use this helper to register multiple fixes (<paramref name="actions"/>) each of which addresses
+        // / fixes the same set of supplied <paramref name="diagnostics"/>.
         /// </summary>
         internal static void RegisterFixes(
             this CodeFixContext context,

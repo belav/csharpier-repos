@@ -62,7 +62,8 @@ namespace System.Linq.Parallel.Tests
             }
         }
 
-        // Get two ranges, both from 0 to each count, and having an extra parameter denoting the degree or parallelism to use.
+        // Get two ranges, both from 0 to each count, and having an extra parameter denoting the degree or
+        // parallelism to use.
         public static IEnumerable<object[]> ZipThreadedData(int[] counts, int[] degrees)
         {
             foreach (object[] left in Sources.Ranges(counts))
@@ -85,12 +86,14 @@ namespace System.Linq.Parallel.Tests
             var expected_seen = Math.Min(leftCount, rightCount);
             foreach (var pair in leftQuery.Zip(rightQuery, (x, y) => KeyValuePair.Create(x, y)))
             {
-                // Can only validate about whether the elements have been previously seen, not anything about the order.
+                // Can only validate about whether the elements have been previously seen, not anything about the
+                // order.
                 seen_left.Add(pair.Key);
                 seen_right.Add(pair.Value);
             }
 
-            // Zip truncates the longer collection, but which elements it leaves off is undefined when unordered.
+            // Zip truncates the longer collection, but which elements it leaves off is undefined when
+            // unordered.
             Assert.Equal(expected_seen, seen_left.Count(kv => kv.Value));
             Assert.Equal(expected_seen, seen_right.Count(kv => kv.Value));
             if (leftCount <= rightCount)
@@ -120,8 +123,10 @@ namespace System.Linq.Parallel.Tests
         )
         {
             // The ordering of Zip is only guaranteed when both operands are ordered,
-            // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
-            // If this test starts failing, consider revising the operators and mention the change in release notes.
+            // however the current implementation manages to perform ordering if either operand is ordered _in
+            // most cases_.
+            // If this test starts failing, consider revising the operators and mention the change in release
+            // notes.
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seen = 0;
@@ -164,13 +169,15 @@ namespace System.Linq.Parallel.Tests
                 leftQuery.Zip(rightQuery, (x, y) => KeyValuePair.Create(x, y)).ToList(),
                 pair =>
                 {
-                    // Can only validate about whether the elements have been previously seen, not anything about the order.
+                    // Can only validate about whether the elements have been previously seen, not anything about the
+                    // order.
                     seen_left.Add(pair.Key);
                     seen_right.Add(pair.Value);
                 }
             );
 
-            // Zip truncates the longer collection, but which elements it leaves off is undefined when unordered.
+            // Zip truncates the longer collection, but which elements it leaves off is undefined when
+            // unordered.
             Assert.Equal(expected_seen, seen_left.Count(kv => kv.Value));
             Assert.Equal(expected_seen, seen_right.Count(kv => kv.Value));
             if (leftCount <= rightCount)
@@ -200,8 +207,10 @@ namespace System.Linq.Parallel.Tests
         )
         {
             // The ordering of Zip is only guaranteed when both operands are ordered,
-            // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
-            // If this test starts failing, consider revising the operators and mention the change in release notes.
+            // however the current implementation manages to perform ordering if either operand is ordered _in
+            // most cases_.
+            // If this test starts failing, consider revising the operators and mention the change in release
+            // notes.
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seen = 0;

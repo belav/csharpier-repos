@@ -234,9 +234,11 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
 #endif
         public static void TestContent(bool fromSpan)
         {
-            // Tests that the content is what it is expected to be, even if it's still encrypted. This prevents from ambiguous definitions of content.
+            // Tests that the content is what it is expected to be, even if it's still encrypted. This prevents
+            // from ambiguous definitions of content.
 
-            // The encoded message was built in ASN.1 editor and tested in framework. It contains an enveloped message version 0 with one recipient of
+            // The encoded message was built in ASN.1 editor and tested in framework. It contains an enveloped
+            // message version 0 with one recipient of
             // key transport type. The symmetric algorithm is 3DES and the contained type is data.
             byte[] encodedMessage = (
                 "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"

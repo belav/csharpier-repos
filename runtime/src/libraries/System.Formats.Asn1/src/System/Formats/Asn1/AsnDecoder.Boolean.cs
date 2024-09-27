@@ -16,7 +16,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 1).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 1).
         /// </param>
         /// <returns>
         ///   The decoded value.
@@ -89,7 +90,8 @@ namespace System.Formats.Asn1
         ///   Reads the next value as a Boolean with a specified tag.
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 1).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 1).
         /// </param>
         /// <returns>
         ///   The decoded value.

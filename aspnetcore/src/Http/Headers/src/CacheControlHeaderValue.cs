@@ -74,10 +74,14 @@ public class CacheControlHeaderValue
     /// </summary>
     public static readonly string ProxyRevalidateString = "proxy-revalidate";
 
-    // The Cache-Control header is special: It is a header supporting a list of values, but we represent the list
-    // as _one_ instance of CacheControlHeaderValue. I.e we set 'SupportsMultipleValues' to 'true' since it is
-    // OK to have multiple Cache-Control headers in a request/response message. However, after parsing all
-    // Cache-Control headers, only one instance of CacheControlHeaderValue is created (if all headers contain valid
+    // The Cache-Control header is special: It is a header supporting a list of values, but we represent
+    // the list
+    // as _one_ instance of CacheControlHeaderValue. I.e we set 'SupportsMultipleValues' to 'true' since
+    // it is
+    // OK to have multiple Cache-Control headers in a request/response message. However, after parsing
+    // all
+    // Cache-Control headers, only one instance of CacheControlHeaderValue is created (if all headers
+    // contain valid
     // values, otherwise we may have multiple strings containing the invalid values).
     private static readonly HttpHeaderParser<CacheControlHeaderValue> Parser =
         new GenericHeaderParser<CacheControlHeaderValue>(true, GetCacheControlLength);
@@ -112,7 +116,8 @@ public class CacheControlHeaderValue
     /// <summary>
     /// Gets or sets a value for the <c>no-cache</c> directive.
     /// <para>
-    /// Configuring no-cache indicates that the client must re-validate cached responses with the original server
+    /// Configuring no-cache indicates that the client must re-validate cached responses with the
+    // original server
     /// before using it.
     /// </para>
     /// </summary>
@@ -124,7 +129,8 @@ public class CacheControlHeaderValue
     }
 
     /// <summary>
-    /// Gets a collection of field names in the "no-cache" directive in a cache-control header field on an HTTP response.
+    /// Gets a collection of field names in the "no-cache" directive in a cache-control header field on
+    // an HTTP response.
     /// </summary>
     public ICollection<StringSegment> NoCacheHeaders
     {
@@ -180,7 +186,8 @@ public class CacheControlHeaderValue
     /// <summary>
     /// Gets or sets a value that determines if the <c>max-stale</c> is included.
     /// <para>
-    /// <c>max-stale</c> that the client will accept stale responses. The maximum tolerance for staleness
+    /// <c>max-stale</c> that the client will accept stale responses. The maximum tolerance for
+    // staleness
     /// is specified by <see cref="MaxStaleLimit"/>.
     /// </para>
     /// </summary>
@@ -194,7 +201,8 @@ public class CacheControlHeaderValue
     /// <summary>
     /// Gets or sets a value for the <c>max-stale</c> directive.
     /// <para>
-    /// Indicates the maximum duration an HTTP client is willing to accept a response that has exceeded its expiration time.
+    /// Indicates the maximum duration an HTTP client is willing to accept a response that has exceeded
+    // its expiration time.
     /// </para>
     /// </summary>
     /// <remarks>See <see href="https://tools.ietf.org/html/rfc7234#section-5.2.1.2"/>.</remarks>
@@ -270,7 +278,8 @@ public class CacheControlHeaderValue
     }
 
     /// <summary>
-    /// Gets a collection of field names in the "private" directive in a cache-control header field on an HTTP response.
+    /// Gets a collection of field names in the "private" directive in a cache-control header field on
+    // an HTTP response.
     /// </summary>
     public ICollection<StringSegment> PrivateHeaders
     {
@@ -285,9 +294,11 @@ public class CacheControlHeaderValue
     }
 
     /// <summary>
-    /// Gets or sets a value that determines if the <c>must-revalidate</c> response directive is included.
+    /// Gets or sets a value that determines if the <c>must-revalidate</c> response directive is
+    // included.
     /// <para>
-    /// Indicates that caches must revalidate the use of stale caches with the origin server before their use.
+    /// Indicates that caches must revalidate the use of stale caches with the origin server before
+    // their use.
     /// </para>
     /// </summary>
     /// <remarks>See <see href="https://tools.ietf.org/html/rfc7234#section-5.2.2.1"/>.</remarks>
@@ -298,9 +309,11 @@ public class CacheControlHeaderValue
     }
 
     /// <summary>
-    /// Gets or sets a value that determines if the <c>proxy-validate</c> response directive is included.
+    /// Gets or sets a value that determines if the <c>proxy-validate</c> response directive is
+    // included.
     /// <para>
-    /// Indicates that shared caches must revalidate the use of stale caches with the origin server before their use.
+    /// Indicates that shared caches must revalidate the use of stale caches with the origin server
+    // before their use.
     /// </para>
     /// </summary>
     /// <remarks>See <see href="https://tools.ietf.org/html/rfc7234#section-5.2.2.1"/>.</remarks>
@@ -473,8 +486,10 @@ public class CacheControlHeaderValue
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        // Use a different bit for bool fields: bool.GetHashCode() will return 0 (false) or 1 (true). So we would
-        // end up having the same hash code for e.g. two instances where one has only noCache set and the other
+        // Use a different bit for bool fields: bool.GetHashCode() will return 0 (false) or 1 (true). So we
+        // would
+        // end up having the same hash code for e.g. two instances where one has only noCache set and the
+        // other
         // only noStore.
         int result =
             _noCache.GetHashCode()
@@ -487,7 +502,8 @@ public class CacheControlHeaderValue
             ^ (_mustRevalidate.GetHashCode() << 7)
             ^ (_proxyRevalidate.GetHashCode() << 8);
 
-        // XOR the hashcode of timespan values with different numbers to make sure two instances with the same
+        // XOR the hashcode of timespan values with different numbers to make sure two instances with the
+        // same
         // timespan set on different fields result in different hashcodes.
         result =
             result
@@ -533,7 +549,8 @@ public class CacheControlHeaderValue
     public static CacheControlHeaderValue Parse(StringSegment input)
     {
         var index = 0;
-        // Cache-Control is unusual because there are no required values so the parser will succeed for an empty string, but still return null.
+        // Cache-Control is unusual because there are no required values so the parser will succeed for an
+        // empty string, but still return null.
         var result = Parser.ParseValue(input, ref index);
         if (result == null)
         {
@@ -543,18 +560,21 @@ public class CacheControlHeaderValue
     }
 
     /// <summary>
-    /// Attempts to parse the specified <paramref name="input"/> as a <see cref="CacheControlHeaderValue"/>.
+    /// Attempts to parse the specified <paramref name="input"/> as a <see
+    // cref="CacheControlHeaderValue"/>.
     /// </summary>
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
-    /// <returns><see langword="true"/> if input is a valid <see cref="CacheControlHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if input is a valid <see cref="CacheControlHeaderValue"/>,
+    // otherwise <see langword="false"/>.</returns>
     public static bool TryParse(
         StringSegment input,
         [NotNullWhen(true)] out CacheControlHeaderValue? parsedValue
     )
     {
         var index = 0;
-        // Cache-Control is unusual because there are no required values so the parser will succeed for an empty string, but still return null.
+        // Cache-Control is unusual because there are no required values so the parser will succeed for an
+        // empty string, but still return null.
         if (Parser.TryParseValue(input, ref index, out parsedValue) && parsedValue != null)
         {
             return true;
@@ -578,7 +598,8 @@ public class CacheControlHeaderValue
             return 0;
         }
 
-        // Cache-Control header consists of a list of name/value pairs, where the value is optional. So use an
+        // Cache-Control header consists of a list of name/value pairs, where the value is optional. So use
+        // an
         // instance of NameValueHeaderParser to parse the string.
         var current = startIndex;
         var nameValueList = new List<NameValueHeaderValue>();
@@ -601,10 +622,12 @@ public class CacheControlHeaderValue
             }
         }
 
-        // If we get here, we were able to successfully parse the string as list of name/value pairs. Now analyze
+        // If we get here, we were able to successfully parse the string as list of name/value pairs. Now
+        // analyze
         // the name/value pairs.
 
-        // Cache-Control is a header supporting lists of values. However, expose the header as an instance of
+        // Cache-Control is a header supporting lists of values. However, expose the header as an instance
+        // of
         // CacheControlHeaderValue.
         var result = new CacheControlHeaderValue();
 
@@ -852,8 +875,10 @@ public class CacheControlHeaderValue
             return true;
         }
 
-        // We need the string to be at least 3 chars long: 2x quotes and at least 1 character. Also make sure we
-        // have a quoted string. Note that NameValueHeaderValue will never have leading/trailing whitespaces.
+        // We need the string to be at least 3 chars long: 2x quotes and at least 1 character. Also make
+        // sure we
+        // have a quoted string. Note that NameValueHeaderValue will never have leading/trailing
+        // whitespaces.
         var valueString = nameValue.Value;
         if (
             (valueString.Length < 3)
@@ -864,7 +889,8 @@ public class CacheControlHeaderValue
             return false;
         }
 
-        // We have a quoted string. Now verify that the string contains a list of valid tokens separated by ','.
+        // We have a quoted string. Now verify that the string contains a list of valid tokens separated by
+        // ','.
         var current = 1; // skip the initial '"' character.
         var maxLength = valueString.Length - 1; // -1 because we don't want to parse the final '"'.
         var originalValueCount = destination == null ? 0 : destination.Count;

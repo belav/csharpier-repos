@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
             if (item is DisambiguousTargetMenuItemViewModel)
             {
-                // Template for DisambiguatingTargetMenuItemTemplate, which contains one more icon than the common TargetMenuItemTemplate.
+                // Template for DisambiguatingTargetMenuItemTemplate, which contains one more icon than the common
+                // TargetMenuItemTemplate.
                 return (DataTemplate)
                     parentItemsControl.FindResource("DisambiguatingTargetMenuItemTemplate");
             }

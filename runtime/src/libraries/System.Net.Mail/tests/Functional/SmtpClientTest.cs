@@ -438,10 +438,12 @@ namespace System.Net.Mail.Tests
             bool useSmtpUTF8
         )
         {
-            // If the server support `SMTPUTF8` and use `SmtpDeliveryFormat.International`, the server should received this subject.
+            // If the server support `SMTPUTF8` and use `SmtpDeliveryFormat.International`, the server should
+            // received this subject.
             const string subjectText = "Test \u6d4b\u8bd5 Contain \u5305\u542b UTF8";
 
-            // If the server does not support `SMTPUTF8` or use `SmtpDeliveryFormat.SevenBit`, the server should received this subject.
+            // If the server does not support `SMTPUTF8` or use `SmtpDeliveryFormat.SevenBit`, the server should
+            // received this subject.
             const string subjectBase64 = "=?utf-8?B?VGVzdCDmtYvor5UgQ29udGFpbiDljIXlkKsgVVRGOA==?=";
 
             using var server = new LoopbackSmtpServer();
@@ -457,7 +459,8 @@ namespace System.Net.Mail.Tests
             }
             else
             {
-                // If the server supports `SMTPUTF8`, subject will not be encoded. Otherwise, subject will be encoded by Base64.
+                // If the server supports `SMTPUTF8`, subject will not be encoded. Otherwise, subject will be
+                // encoded by Base64.
                 client.DeliveryFormat = SmtpDeliveryFormat.International;
             }
 
@@ -516,7 +519,8 @@ namespace System.Net.Mail.Tests
 
             server.ReceiveMultipleConnections = true;
 
-            // The server will introduce some fake latency so that the operation can be canceled before the request completes
+            // The server will introduce some fake latency so that the operation can be canceled before the
+            // request completes
             ManualResetEvent serverMre = new ManualResetEvent(false);
             server.OnConnected += _ => serverMre.WaitOne();
 

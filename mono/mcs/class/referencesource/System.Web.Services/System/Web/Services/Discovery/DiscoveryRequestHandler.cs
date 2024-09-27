@@ -19,13 +19,15 @@ namespace System.Web.Services.Discovery
     using System.Web.Services.Protocols;
     using System.Xml;
 
-    /// <include file='doc\DiscoveryRequestHandler.uex' path='docs/doc[@for="DiscoveryRequestHandler"]/*' />
+    /// <include file='doc\DiscoveryRequestHandler.uex'
+    // path='docs/doc[@for="DiscoveryRequestHandler"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public sealed class DiscoveryRequestHandler : IHttpHandler
     {
-        /// <include file='doc\DiscoveryRequestHandler.uex' path='docs/doc[@for="DiscoveryRequestHandler.IsReusable"]/*' />
+        /// <include file='doc\DiscoveryRequestHandler.uex'
+        // path='docs/doc[@for="DiscoveryRequestHandler.IsReusable"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -34,7 +36,8 @@ namespace System.Web.Services.Discovery
             get { return true; }
         }
 
-        /// <include file='doc\DiscoveryRequestHandler.uex' path='docs/doc[@for="DiscoveryRequestHandler.ProcessRequest"]/*' />
+        /// <include file='doc\DiscoveryRequestHandler.uex'
+        // path='docs/doc[@for="DiscoveryRequestHandler.ProcessRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

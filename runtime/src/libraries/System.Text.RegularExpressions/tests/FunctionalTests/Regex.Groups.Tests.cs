@@ -168,7 +168,8 @@ namespace System.Text.RegularExpressions.Tests
                 new string[] { "AZ'[]" }
             );
 
-            // (A - B) B is a superset of A (ie B contains chars that are in A plus other chars that are not in A)
+            // (A - B) B is a superset of A (ie B contains chars that are in A plus other chars that are not in
+            // A)
             yield return (
                 enUS,
                 "[abcd-[def]]+",

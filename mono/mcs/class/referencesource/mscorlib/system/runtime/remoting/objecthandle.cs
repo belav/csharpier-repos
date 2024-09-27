@@ -63,7 +63,8 @@ namespace System.Runtime.Remoting
             // we don't want to go to the base class (which will result in a lease being
             // requested from the MarshalByRefObject, which starts up the LeaseManager,
             // which starts up the ThreadPool, adding three threads to the process.
-            // We check if the wrapped object is a MarshalByRef object, and call InitializeLifetimeServices on it
+            // We check if the wrapped object is a MarshalByRef object, and call InitializeLifetimeServices on
+            // it
             // and if it returns null, we return null. Otherwise we fall back to the old behavior.
             //
 

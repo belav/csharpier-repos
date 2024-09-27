@@ -31,13 +31,18 @@ public abstract partial class CodeFixVerifier : DiagnosticVerifier
     }
 
     /// <summary>
-    /// Compare two collections of Diagnostics,and return a list of any new diagnostics that appear only in the second collection.
-    /// Note: Considers Diagnostics to be the same if they have the same Ids.  In the case of multiple diagnostics with the same Id in a row,
+    /// Compare two collections of Diagnostics,and return a list of any new diagnostics that appear only
+    // in the second collection.
+    /// Note: Considers Diagnostics to be the same if they have the same Ids.  In the case of multiple
+    // diagnostics with the same Id in a row,
     /// this method may not necessarily return the new one.
     /// </summary>
-    /// <param name="diagnostics">The Diagnostics that existed in the code before the CodeFix was applied</param>
-    /// <param name="newDiagnostics">The Diagnostics that exist in the code after the CodeFix was applied</param>
-    /// <returns>A list of Diagnostics that only surfaced in the code after the CodeFix was applied</returns>
+    /// <param name="diagnostics">The Diagnostics that existed in the code before the CodeFix was
+    // applied</param>
+    /// <param name="newDiagnostics">The Diagnostics that exist in the code after the CodeFix was
+    // applied</param>
+    /// <returns>A list of Diagnostics that only surfaced in the code after the CodeFix was
+    // applied</returns>
     private static IEnumerable<Diagnostic> GetNewDiagnostics(
         IEnumerable<Diagnostic> diagnostics,
         IEnumerable<Diagnostic> newDiagnostics

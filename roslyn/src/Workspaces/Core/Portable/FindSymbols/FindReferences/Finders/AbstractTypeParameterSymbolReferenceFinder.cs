@@ -24,13 +24,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            // TODO(cyrusn): Method type parameters are like locals.  They are only in scope in the bounds of the method
-            // they're declared within.  We could improve perf by limiting our search by only looking within the method
+            // TODO(cyrusn): Method type parameters are like locals.  They are only in scope in the bounds of
+            // the method
+            // they're declared within.  We could improve perf by limiting our search by only looking within the
+            // method
             // body's span.
 
-            // Type parameters can be found both in normal type locations, and in object creation expression (e.g. `new
-            // T()`). In the former case GetSymbolInfo can be used to bind the symbol and check if it matches this symbol.
-            // in the latter though GetSymbolInfo will fail and we have to directly check if we have the right type info.
+            // Type parameters can be found both in normal type locations, and in object creation expression
+            // (e.g. `new
+            // T()`). In the former case GetSymbolInfo can be used to bind the symbol and check if it matches
+            // this symbol.
+            // in the latter though GetSymbolInfo will fail and we have to directly check if we have the right
+            // type info.
 
             var tokens = await FindMatchingIdentifierTokensAsync(
                     state,

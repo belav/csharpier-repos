@@ -218,7 +218,9 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("<xs:schema id=\"test_dataset\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
+            //			Assert.AreEqual ("<xs:schema id=\"test_dataset\" xmlns=\"\"
+            // xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
+            // xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
             Assert.AreEqual(
                 "<xs:schema id=\"test_dataset\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">",
                 substring,
@@ -228,7 +230,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("  <xs:element name=\"test_dataset\" msdata:IsDataSet=\"true\" msdata:Locale=\"fi-FI\">", substring, "test#03");
+            //			Assert.AreEqual ("  <xs:element name=\"test_dataset\" msdata:IsDataSet=\"true\"
+            // msdata:Locale=\"fi-FI\">", substring, "test#03");
             Assert.AreEqual(
                 "  <xs:element msdata:IsDataSet=\"true\" msdata:UseCurrentLocale=\"true\" name=\"test_dataset\">",
                 substring,
@@ -262,7 +265,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("              <xs:element name=\"first\" msdata:Caption=\"test\" default=\"test_default_value\" minOccurs=\"0\">", substring, "test#09");
+            //			Assert.AreEqual ("              <xs:element name=\"first\" msdata:Caption=\"test\"
+            // default=\"test_default_value\" minOccurs=\"0\">", substring, "test#09");
             Assert.AreEqual(
                 "              <xs:element default=\"test_default_value\" minOccurs=\"0\" msdata:Caption=\"test\" name=\"first\">",
                 substring,
@@ -341,7 +345,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("              <xs:element name=\"second_first\" default=\"default_value\" minOccurs=\"0\">", substring, "test#23");
+            //			Assert.AreEqual ("              <xs:element name=\"second_first\" default=\"default_value\"
+            // minOccurs=\"0\">", substring, "test#23");
             Assert.AreEqual(
                 "              <xs:element default=\"default_value\" minOccurs=\"0\" name=\"second_first\">",
                 substring,
@@ -419,7 +424,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("    <xs:unique name=\"second_test_table_Constraint1\" msdata:ConstraintName=\"Constraint1\">", substring, "test#40");
+            //			Assert.AreEqual ("    <xs:unique name=\"second_test_table_Constraint1\"
+            // msdata:ConstraintName=\"Constraint1\">", substring, "test#40");
             Assert.AreEqual(
                 "    <xs:unique msdata:ConstraintName=\"Constraint1\" name=\"second_test_table_Constraint1\">",
                 substring,
@@ -627,7 +633,9 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("<xs:schema id=\"Root\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
+            //			Assert.AreEqual ("<xs:schema id=\"Root\" xmlns=\"\"
+            // xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
+            // xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
             Assert.AreEqual(
                 "<xs:schema id=\"Root\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">",
                 substring,
@@ -669,7 +677,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("              <xs:element name=\"RegionID\" type=\"xs:string\" minOccurs=\"0\" />", substring, "test#09");
+            //			Assert.AreEqual ("              <xs:element name=\"RegionID\" type=\"xs:string\"
+            // minOccurs=\"0\" />", substring, "test#09");
             Assert.AreEqual(
                 "              <xs:element minOccurs=\"0\" name=\"RegionID\" type=\"xs:string\" />",
                 substring,
@@ -679,7 +688,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("              <xs:element name=\"RegionDescription\" type=\"xs:string\" minOccurs=\"0\" />", substring, "test#10");
+            //			Assert.AreEqual ("              <xs:element name=\"RegionDescription\" type=\"xs:string\"
+            // minOccurs=\"0\" />", substring, "test#10");
             Assert.AreEqual(
                 "              <xs:element minOccurs=\"0\" name=\"RegionDescription\" type=\"xs:string\" />",
                 substring,
@@ -746,7 +756,9 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("<xs:schema id=\"NewDataSet\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
+            //			Assert.AreEqual ("<xs:schema id=\"NewDataSet\" xmlns=\"\"
+            // xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
+            // xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
             Assert.AreEqual(
                 "<xs:schema id=\"NewDataSet\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">",
                 substring,
@@ -764,7 +776,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"book\" type=\"bookType\" minOccurs=\"0\" maxOccurs=\"unbounded\" />", substring, "test#05");
+            //			Assert.AreEqual ("      <xs:element name=\"book\" type=\"bookType\" minOccurs=\"0\"
+            // maxOccurs=\"unbounded\" />", substring, "test#05");
             Assert.AreEqual(
                 "      <xs:element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"book\" type=\"bookType\" />",
                 substring,
@@ -790,7 +803,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"title\" type=\"xs:string\" msdata:Ordinal=\"1\" />", substring, "test#10");
+            //			Assert.AreEqual ("      <xs:element name=\"title\" type=\"xs:string\" msdata:Ordinal=\"1\" />",
+            // substring, "test#10");
 
             Assert.AreEqual(
                 "      <xs:element msdata:Ordinal=\"1\" name=\"title\" type=\"xs:string\" />",
@@ -801,7 +815,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"price\" type=\"xs:decimal\" msdata:Ordinal=\"2\" />", substring, "test#11");
+            //			Assert.AreEqual ("      <xs:element name=\"price\" type=\"xs:decimal\" msdata:Ordinal=\"2\"
+            // />", substring, "test#11");
             Assert.AreEqual(
                 "      <xs:element msdata:Ordinal=\"2\" name=\"price\" type=\"xs:decimal\" />",
                 substring,
@@ -811,7 +826,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"author\" type=\"authorName\" minOccurs=\"0\" maxOccurs=\"unbounded\" />", substring, "test#12");
+            //			Assert.AreEqual ("      <xs:element name=\"author\" type=\"authorName\" minOccurs=\"0\"
+            // maxOccurs=\"unbounded\" />", substring, "test#12");
             Assert.AreEqual(
                 "      <xs:element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"author\" type=\"authorName\" />",
                 substring,
@@ -877,7 +893,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("  <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\" msdata:Locale=\"fi-FI\">", substring, "test#23");
+            //			Assert.AreEqual ("  <xs:element name=\"NewDataSet\" msdata:IsDataSet=\"true\"
+            // msdata:Locale=\"fi-FI\">", substring, "test#23");
             Assert.AreEqual(
                 "  <xs:element msdata:IsDataSet=\"true\" msdata:Locale=\"fi-FI\" name=\"NewDataSet\">",
                 substring,
@@ -969,7 +986,9 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("<xs:schema id=\"Root\" xmlns=\"\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
+            //			Assert.AreEqual ("<xs:schema id=\"Root\" xmlns=\"\"
+            // xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
+            // xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\">", substring, "test#02");
             Assert.AreEqual(
                 "<xs:schema id=\"Root\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">",
                 substring,
@@ -987,7 +1006,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"book\" type=\"bookType\" minOccurs=\"0\" maxOccurs=\"unbounded\" />", substring, "test#05");
+            //			Assert.AreEqual ("      <xs:element name=\"book\" type=\"bookType\" minOccurs=\"0\"
+            // maxOccurs=\"unbounded\" />", substring, "test#05");
             Assert.AreEqual(
                 "      <xs:element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"book\" type=\"bookType\" />",
                 substring,
@@ -1013,7 +1033,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"title\" type=\"xs:string\" msdata:Ordinal=\"1\" />", substring, "test#10");
+            //			Assert.AreEqual ("      <xs:element name=\"title\" type=\"xs:string\" msdata:Ordinal=\"1\" />",
+            // substring, "test#10");
             Assert.AreEqual(
                 "      <xs:element msdata:Ordinal=\"1\" name=\"title\" type=\"xs:string\" />",
                 substring,
@@ -1023,7 +1044,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"price\" type=\"xs:decimal\" msdata:Ordinal=\"2\" />", substring, "test#11");
+            //			Assert.AreEqual ("      <xs:element name=\"price\" type=\"xs:decimal\" msdata:Ordinal=\"2\"
+            // />", substring, "test#11");
             Assert.AreEqual(
                 "      <xs:element msdata:Ordinal=\"2\" name=\"price\" type=\"xs:decimal\" />",
                 substring,
@@ -1033,7 +1055,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("      <xs:element name=\"author\" type=\"authorName\" minOccurs=\"0\" maxOccurs=\"unbounded\" />", substring, "test#12");
+            //			Assert.AreEqual ("      <xs:element name=\"author\" type=\"authorName\" minOccurs=\"0\"
+            // maxOccurs=\"unbounded\" />", substring, "test#12");
             Assert.AreEqual(
                 "      <xs:element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"author\" type=\"authorName\" />",
                 substring,
@@ -1099,7 +1122,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("  <xs:element name=\"Root\" msdata:IsDataSet=\"true\" msdata:Locale=\"fi-FI\">", substring, "test#23");
+            //			Assert.AreEqual ("  <xs:element name=\"Root\" msdata:IsDataSet=\"true\"
+            // msdata:Locale=\"fi-FI\">", substring, "test#23");
             Assert.AreEqual(
                 "  <xs:element msdata:IsDataSet=\"true\" msdata:Locale=\"fi-FI\" name=\"Root\">",
                 substring,
@@ -1137,7 +1161,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("              <xs:element name=\"RegionID\" type=\"xs:string\" minOccurs=\"0\" />", substring, "test#30");
+            //			Assert.AreEqual ("              <xs:element name=\"RegionID\" type=\"xs:string\"
+            // minOccurs=\"0\" />", substring, "test#30");
             Assert.AreEqual(
                 "              <xs:element minOccurs=\"0\" name=\"RegionID\" type=\"xs:string\" />",
                 substring,
@@ -1147,7 +1172,8 @@ namespace MonoTests.System.Data
             substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);
             // This is original DataSet.WriteXmlSchema() output
-            //			Assert.AreEqual ("              <xs:element name=\"RegionDescription\" type=\"xs:string\" minOccurs=\"0\" />", substring, "test#31");
+            //			Assert.AreEqual ("              <xs:element name=\"RegionDescription\" type=\"xs:string\"
+            // minOccurs=\"0\" />", substring, "test#31");
             Assert.AreEqual(
                 "              <xs:element minOccurs=\"0\" name=\"RegionDescription\" type=\"xs:string\" />",
                 substring,
@@ -1368,37 +1394,39 @@ namespace MonoTests.System.Data
             ser.Deserialize(new XmlTextReader(xml, XmlNodeType.Document, null));
         }
 
-        /* To be added
-        [Test]
-        public void WriteDiffReadAutoWriteSchema ()
-        {
-            DataSet ds = new DataSet ();
-            ds.Tables.Add ("Table1");
-            ds.Tables.Add ("Table2");
-            ds.Tables [0].Columns.Add ("Column1_1");
-            ds.Tables [0].Columns.Add ("Column1_2");
-            ds.Tables [0].Columns.Add ("Column1_3");
-            ds.Tables [1].Columns.Add ("Column2_1");
-            ds.Tables [1].Columns.Add ("Column2_2");
-            ds.Tables [1].Columns.Add ("Column2_3");
-            ds.Tables [0].Rows.Add (new object [] {"ppp", "www", "xxx"});
+/* To be added
+[Test]
+public void WriteDiffReadAutoWriteSchema ()
+{
+DataSet ds = new DataSet ();
+ds.Tables.Add ("Table1");
+ds.Tables.Add ("Table2");
+ds.Tables [0].Columns.Add ("Column1_1");
+ds.Tables [0].Columns.Add ("Column1_2");
+ds.Tables [0].Columns.Add ("Column1_3");
+ds.Tables [1].Columns.Add ("Column2_1");
+ds.Tables [1].Columns.Add ("Column2_2");
+ds.Tables [1].Columns.Add ("Column2_3");
+ds.Tables [0].Rows.Add (new object [] {"ppp", "www", "xxx"});
 
-            // save as diffgram
-            StringWriter sw = new StringWriter ();
-            ds.WriteXml (sw, XmlWriteMode.DiffGram);
-            string xml = sw.ToString ();
-            string result = new StreamReader (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/DataSetReadXmlTest1.xml"), Encoding.ASCII).ReadToEnd ();
-            Assert.AreEqual (result, xml, "#01");
+// save as diffgram
+StringWriter sw = new StringWriter ();
+ds.WriteXml (sw, XmlWriteMode.DiffGram);
+string xml = sw.ToString ();
+string result = new StreamReader (TestResourceHelper.GetFullPathOfResource
+("Test/System.Data/DataSetReadXmlTest1.xml"), Encoding.ASCII).ReadToEnd ();
+Assert.AreEqual (result, xml, "#01");
 
-            // load diffgram above
-            ds.ReadXml (new StringReader (sw.ToString ()));
-            sw = new StringWriter ();
-            ds.WriteXml (sw, XmlWriteMode.WriteSchema);
-            xml = sw.ToString ();
-            result = new StreamReader (TestResourceHelper.GetFullPathOfResource ("Test/System.Data/DataSetReadXmlTest2.xml"), Encoding.ASCII).ReadToEnd ();
-            Assert.AreEqual (result, xml, "#02");
-        }
-        */
+// load diffgram above
+ds.ReadXml (new StringReader (sw.ToString ()));
+sw = new StringWriter ();
+ds.WriteXml (sw, XmlWriteMode.WriteSchema);
+xml = sw.ToString ();
+result = new StreamReader (TestResourceHelper.GetFullPathOfResource
+("Test/System.Data/DataSetReadXmlTest2.xml"), Encoding.ASCII).ReadToEnd ();
+Assert.AreEqual (result, xml, "#02");
+}
+*/
 
         [Test]
         public void CloneCopy()

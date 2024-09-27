@@ -12,20 +12,39 @@ namespace System.Threading
 {
     public static class EventWaitHandleAcl
     {
-        /// <summary>Gets or creates an <see cref="EventWaitHandle" /> instance, allowing a <see cref="EventWaitHandleSecurity " /> instance to be optionally specified to set it during the event creation.</summary>
-        /// <param name="initialState"><see langword="true" /> to set the initial state to signaled if the named event is created as a result of this call; <see langword="false" /> to set it to non-signaled.</param>
-        /// <param name="mode">One of the enum values that determines whether the event resets automatically or manually.</param>
-        /// <param name="name">The name, if the event is a system-wide synchronization event; otherwise, <see langword="null" /> or an empty string.</param>
-        /// <param name="createdNew">When this method returns, this argument is always set to <see langword="true" /> if a local event is created; that is, when <paramref name="name" /> is <see langword="null" /> or <see cref="string.Empty" />. If <paramref name="name" /> has a valid, non-empty value, this argument is set to <see langword="true" /> when the system event is created, or it is set to <see langword="false" /> if an existing system event is found with that name. This parameter is passed uninitialized.</param>
+        /// <summary>Gets or creates an <see cref="EventWaitHandle" /> instance, allowing a <see
+        // cref="EventWaitHandleSecurity " /> instance to be optionally specified to set it during the event
+        // creation.</summary>
+        /// <param name="initialState"><see langword="true" /> to set the initial state to signaled if the
+        // named event is created as a result of this call; <see langword="false" /> to set it to
+        // non-signaled.</param>
+        /// <param name="mode">One of the enum values that determines whether the event resets automatically
+        // or manually.</param>
+        /// <param name="name">The name, if the event is a system-wide synchronization event; otherwise,
+        // <see langword="null" /> or an empty string.</param>
+        /// <param name="createdNew">When this method returns, this argument is always set to <see
+        // langword="true" /> if a local event is created; that is, when <paramref name="name" /> is <see
+        // langword="null" /> or <see cref="string.Empty" />. If <paramref name="name" /> has a valid,
+        // non-empty value, this argument is set to <see langword="true" /> when the system event is created,
+        // or it is set to <see langword="false" /> if an existing system event is found with that name. This
+        // parameter is passed uninitialized.</param>
         /// <param name="eventSecurity">The optional Windows access control security to apply.</param>
-        /// <returns>An object that represents a system event wait handle, if named, or a local event wait handle, if nameless.</returns>
-        /// <exception cref="ArgumentNullException">.NET Framework only: The <paramref name="name" /> length is beyond MAX_PATH (260 characters).</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="mode" /> enum value was out of legal range.</exception>
-        /// <exception cref="DirectoryNotFoundException">Could not find a part of the path specified in <paramref name="name" />.</exception>
-        /// <exception cref="WaitHandleCannotBeOpenedException">A system-wide synchronization event with the provided <paramref name="name" /> was not found.
+        /// <returns>An object that represents a system event wait handle, if named, or a local event wait
+        // handle, if nameless.</returns>
+        /// <exception cref="ArgumentNullException">.NET Framework only: The <paramref name="name" /> length
+        // is beyond MAX_PATH (260 characters).</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="mode" /> enum value was out of
+        // legal range.</exception>
+        /// <exception cref="DirectoryNotFoundException">Could not find a part of the path specified in
+        // <paramref name="name" />.</exception>
+        /// <exception cref="WaitHandleCannotBeOpenedException">A system-wide synchronization event with the
+        // provided <paramref name="name" /> was not found.
         /// -or-
-        /// An <see cref="EventWaitHandle" /> with system-wide name <paramref name="name" /> cannot be created. An <see cref="EventWaitHandle" /> of a different type might have the same name.</exception>
-        /// <remarks>If a `name` is passed and the system event already exists, the existing event is returned. If `name` is `null` or <see cref="string.Empty" />, a new local event is always created.</remarks>
+        /// An <see cref="EventWaitHandle" /> with system-wide name <paramref name="name" /> cannot be
+        // created. An <see cref="EventWaitHandle" /> of a different type might have the same name.</exception>
+        /// <remarks>If a `name` is passed and the system event already exists, the existing event is
+        // returned. If `name` is `null` or <see cref="string.Empty" />, a new local event is always
+        // created.</remarks>
         public static unsafe EventWaitHandle Create(
             bool initialState,
             EventResetMode mode,
@@ -91,17 +110,25 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Opens a specified named event wait handle, if it already exists, applying the desired access rights.
+        /// Opens a specified named event wait handle, if it already exists, applying the desired access
+        // rights.
         /// </summary>
-        /// <param name="name">The name of the event wait handle to be opened. If it's prefixed by "Global", it refers to a machine-wide event wait handle. If it's prefixed by "Local", or doesn't have a prefix, it refers to a session-wide event wait handle. Both prefix and name are case-sensitive.</param>
-        /// <param name="rights">The desired access rights to apply to the returned event wait handle.</param>
+        /// <param name="name">The name of the event wait handle to be opened. If it's prefixed by "Global",
+        // it refers to a machine-wide event wait handle. If it's prefixed by "Local", or doesn't have a
+        // prefix, it refers to a session-wide event wait handle. Both prefix and name are
+        // case-sensitive.</param>
+        /// <param name="rights">The desired access rights to apply to the returned event wait
+        // handle.</param>
         /// <returns>An existing named event wait handle.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"
+        // />.</exception>
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
-        /// <exception cref="WaitHandleCannotBeOpenedException">The named event wait handle does not exist or is invalid.</exception>
+        /// <exception cref="WaitHandleCannotBeOpenedException">The named event wait handle does not exist
+        // or is invalid.</exception>
         /// <exception cref="DirectoryNotFoundException">The path was not found.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
-        /// <exception cref="UnauthorizedAccessException">The named event wait handle exists, but the user does not have the security access required to use it.</exception>
+        /// <exception cref="UnauthorizedAccessException">The named event wait handle exists, but the user
+        // does not have the security access required to use it.</exception>
         public static EventWaitHandle OpenExisting(string name, EventWaitHandleRights rights)
         {
             switch (OpenExistingWorker(name, rights, out EventWaitHandle? result))
@@ -128,16 +155,26 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Tries to open a specified named event wait handle, if it already exists, applying the desired access rights, and returns a value that indicates whether the operation succeeded.
+        /// Tries to open a specified named event wait handle, if it already exists, applying the desired
+        // access rights, and returns a value that indicates whether the operation succeeded.
         /// </summary>
-        /// <param name="name">The name of the event wait handle to be opened. If it's prefixed by "Global", it refers to a machine-wide event wait handle. If it's prefixed by "Local", or doesn't have a prefix, it refers to a session-wide event wait handle. Both prefix and name are case-sensitive.</param>
-        /// <param name="rights">The desired access rights to apply to the returned event wait handle.</param>
-        /// <param name="result">When this method returns <see langword="true" />, contains an object that represents the named event wait handle if the call succeeded, or <see langword="null" /> otherwise. This parameter is treated as uninitialized.</param>
-        /// <returns><see langword="true" /> if the named event wait handle was opened successfully; otherwise, <see langword="false" />.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null" /></exception>
+        /// <param name="name">The name of the event wait handle to be opened. If it's prefixed by "Global",
+        // it refers to a machine-wide event wait handle. If it's prefixed by "Local", or doesn't have a
+        // prefix, it refers to a session-wide event wait handle. Both prefix and name are
+        // case-sensitive.</param>
+        /// <param name="rights">The desired access rights to apply to the returned event wait
+        // handle.</param>
+        /// <param name="result">When this method returns <see langword="true" />, contains an object that
+        // represents the named event wait handle if the call succeeded, or <see langword="null" /> otherwise.
+        // This parameter is treated as uninitialized.</param>
+        /// <returns><see langword="true" /> if the named event wait handle was opened successfully;
+        // otherwise, <see langword="false" />.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"
+        // /></exception>
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
-        /// <exception cref="UnauthorizedAccessException">The named event wait handle exists, but the user does not have the security access required to use it.</exception>
+        /// <exception cref="UnauthorizedAccessException">The named event wait handle exists, but the user
+        // does not have the security access required to use it.</exception>
         public static bool TryOpenExisting(
             string name,
             EventWaitHandleRights rights,

@@ -308,7 +308,8 @@ namespace System.Web.UI.WebControls
 
                 // <table cellpadding="0" cellspacing="0" border="0" height="nodespacing">
                 // Determine root menu style
-                // First initialize the root menu style that depends on the control style before we change it. (VSWhidbey 354878)
+                // First initialize the root menu style that depends on the control style before we change it.
+                // (VSWhidbey 354878)
                 Menu.EnsureRootMenuStyle();
                 if (Menu.Font != null)
                 {

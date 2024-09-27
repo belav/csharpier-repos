@@ -15,7 +15,7 @@
 ===========================================================*/
 namespace System.Runtime.Remoting.Messaging
 {
-    /* Assembly Access */
+/* Assembly Access */
     using System;
     using System.Globalization;
     using System.Reflection;

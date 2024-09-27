@@ -273,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             var rightDocument = rightBuffer.GetRelatedDocuments().Single();
 
             // Diagnostic analyzer service, which provides pull capabilities (and not to be confused with
-            // IDiagnosticService, which is push), doesn't normally register for test workspace.  So do it explicitly.
+            // IDiagnosticService, which is push), doesn't normally register for test workspace.  So do it
+            // explicitly.
             var diagnosticAnalyzer =
                 workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>();
             var incrementalAnalyzer = (IIncrementalAnalyzerProvider)diagnosticAnalyzer;
@@ -353,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             // Verify the GC can reclaim member for a workspace which has not been disposed.
             previewWorkspaceReference.AssertReleased();
 
-            // Keep the export provider alive longer than the workspace to further ensure that the workspace is not GC
+            // Keep the export provider alive longer than the workspace to further ensure that the workspace is
+            // not GC
             // rooted within the export provider instance.
             GC.KeepAlive(exportProvider);
         }

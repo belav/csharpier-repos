@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Symbols
 {
     /// <summary>
     /// Interface implemented by the compiler's internal representation of a symbol.
-    /// An object implementing this interface might also implement <see cref="ISymbol"/> (as is done in VB),
+    /// An object implementing this interface might also implement <see cref="ISymbol"/> (as is done in
+    // VB),
     /// or the compiler's symbols might be wrapped to implement ISymbol (as is done in C#).
     /// </summary>
     internal interface ISymbolInternal
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Symbols
         string MetadataName { get; }
 
         /// <summary>
-        /// Gets the metadata token associated with this symbol, or 0 if the symbol is not loaded from metadata.
+        /// Gets the metadata token associated with this symbol, or 0 if the symbol is not loaded from
+        // metadata.
         /// </summary>
         int MetadataToken { get; }
 
@@ -50,8 +52,10 @@ namespace Microsoft.CodeAnalysis.Symbols
         /// Allows a symbol to support comparisons that involve child type symbols
         /// </summary>
         /// <remarks>
-        /// Because TypeSymbol equality can differ based on e.g. nullability, any symbols that contain TypeSymbols can also differ in the same way
-        /// This call allows the symbol to accept a comparison kind that should be used when comparing its contained types
+        /// Because TypeSymbol equality can differ based on e.g. nullability, any symbols that contain
+        // TypeSymbols can also differ in the same way
+        /// This call allows the symbol to accept a comparison kind that should be used when comparing its
+        // contained types
         /// </remarks>
         bool Equals(ISymbolInternal? other, TypeCompareKind compareKind);
 
@@ -79,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Symbols
         INamedTypeSymbolInternal ContainingType { get; }
 
         /// <summary>
-        /// Gets the <see cref="INamespaceSymbolInternal"/> for the nearest enclosing namespace. Returns null if the
+        /// Gets the <see cref="INamespaceSymbolInternal"/> for the nearest enclosing namespace. Returns
+        // null if the
         /// symbol isn't contained in a namespace.
         /// </summary>
         INamespaceSymbolInternal ContainingNamespace { get; }
@@ -109,12 +114,15 @@ namespace Microsoft.CodeAnalysis.Symbols
         /// <para>
         /// Examples include (this list is not exhaustive):
         /// <list type="bullet">
-        /// <item><description>The default constructor for a class or struct that is created if one is not provided.</description></item>
+        /// <item><description>The default constructor for a class or struct that is created if one is not
+        // provided.</description></item>
         /// <item><description>The BeginInvoke/Invoke/EndInvoke methods for a delegate.</description></item>
-        /// <item><description>The generated backing field for an auto property or a field-like event.</description></item>
+        /// <item><description>The generated backing field for an auto property or a field-like
+        // event.</description></item>
         /// <item><description>The "this" parameter for non-static methods.</description></item>
         /// <item><description>The "value" parameter for a property setter.</description></item>
-        /// <item><description>The parameters on indexer accessor methods (not on the indexer itself).</description></item>
+        /// <item><description>The parameters on indexer accessor methods (not on the indexer
+        // itself).</description></item>
         /// <item><description>Methods in anonymous types.</description></item>
         /// </list>
         /// </para>
@@ -166,11 +174,13 @@ namespace Microsoft.CodeAnalysis.Symbols
         Cci.IReference GetCciAdapter();
 
         /// <summary>
-        /// <see langword="true"/> if this symbol has any location that is within <paramref name="tree"/>. <see
+        /// <see langword="true"/> if this symbol has any location that is within <paramref name="tree"/>.
+        // <see
         /// langword="false"/> otherwise. Can be more efficient than iteration over all the <see
         /// cref="ISymbol.Locations"/> as it will avoid an unnecessary array allocation.
         /// </summary>
-        /// <param name="definedWithinSpan">Optional span.  If present, the location of this symbol must be both inside
+        /// <param name="definedWithinSpan">Optional span.  If present, the location of this symbol must be
+        // both inside
         /// this tree and within the span passed in.</param>
         bool IsDefinedInSourceTree(
             SyntaxTree tree,

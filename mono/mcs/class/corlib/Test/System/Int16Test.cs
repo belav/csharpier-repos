@@ -314,14 +314,14 @@ namespace MonoTests.System
             Assert.IsTrue(String.Compare(MyString2, MyInt16_2.ToString()) == 0);
             Assert.IsTrue(String.Compare(MyString3, MyInt16_3.ToString()) == 0);
             //test ToString(string format)
-            /*
-            TODO: These tests are culture sensitive.  Need to find a way to determine the culture
-                of the system to decide the correct expected result.
-            for (int i=0; i < Formats1.Length; i++) {
-                Assert.IsTrue(String.Compare(Results1[i], MyInt16_2.ToString(Formats1[i])) == 0);
-                Assert.IsTrue(String.Compare(Results2[i], MyInt16_3.ToString(Formats2[i])) == 0);
-            }
-            */
+/*
+TODO: These tests are culture sensitive.  Need to find a way to determine the culture
+of the system to decide the correct expected result.
+for (int i=0; i < Formats1.Length; i++) {
+Assert.IsTrue(String.Compare(Results1[i], MyInt16_2.ToString(Formats1[i])) == 0);
+Assert.IsTrue(String.Compare(Results2[i], MyInt16_3.ToString(Formats2[i])) == 0);
+}
+*/
             //test ToString(string format, IFormatProvider provider);
             for (int i = 0; i < Formats1.Length; i++)
             {

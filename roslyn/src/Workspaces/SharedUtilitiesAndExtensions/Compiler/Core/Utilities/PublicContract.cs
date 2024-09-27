@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
     internal static class PublicContract
     {
         // Guidance on inlining:
-        // Inline implementation of condition checking but don't inline the code that is only executed on failure.
+        // Inline implementation of condition checking but don't inline the code that is only executed on
+        // failure.
         // This approach makes the common path efficient (both execution time and code size)
         // while keeping the rarely executed code in a separate method.
 
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Use to validate public API input for properties that are exposed as <see cref="IReadOnlyList{T}"/>.
+        /// Use to validate public API input for properties that are exposed as <see
+        // cref="IReadOnlyList{T}"/>.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IReadOnlyList<T> ToBoxedImmutableArrayWithNonNullItems<T>(
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Use to validate public API input for properties that are exposed as <see cref="IReadOnlyList{T}"/> and
+        /// Use to validate public API input for properties that are exposed as <see
+        // cref="IReadOnlyList{T}"/> and
         /// whose items should be unique.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

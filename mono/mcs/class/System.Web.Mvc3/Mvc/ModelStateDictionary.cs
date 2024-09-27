@@ -133,7 +133,8 @@
                 throw new ArgumentNullException("key");
             }
 
-            // if the key is not found in the dictionary, we just say that it's valid (since there are no errors)
+            // if the key is not found in the dictionary, we just say that it's valid (since there are no
+            // errors)
             return DictionaryHelpers
                 .FindKeysWithPrefix(this, key)
                 .All(entry => entry.Value.Errors.Count == 0);

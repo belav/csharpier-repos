@@ -41,7 +41,8 @@ namespace System.IO.MemoryMappedFiles.Tests
                 }
                 acc.Flush();
 
-                // Spawn and then wait for the other process, which will verify the data and write its own known pattern
+                // Spawn and then wait for the other process, which will verify the data and write its own known
+                // pattern
                 RemoteExecutor
                     .Invoke(new Action<string>(DataShared_OtherProcess), file.Path)
                     .Dispose();

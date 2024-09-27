@@ -9,7 +9,9 @@ namespace System.Diagnostics.Metrics
     /// Instrument{T} is the base class for all non-observable instruments.
     /// </summary>
     /// <remarks>
-    /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
+    /// This class supports only the following generic parameter types: <see cref="byte" />, <see
+    // cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double"
+    // />, and <see cref="decimal" />
     /// </remarks>
     [DebuggerDisplay("Name = {Name}, Meter = {Meter.Name}")]
     public abstract partial class Instrument<T> : Instrument
@@ -17,7 +19,8 @@ namespace System.Diagnostics.Metrics
     {
         /// <summary>
         /// Create the metrics instrument using the properties meter, name, description, and unit.
-        /// All classes extending Instrument{T} need to call this constructor when constructing object of the extended class.
+        /// All classes extending Instrument{T} need to call this constructor when constructing object of
+        // the extended class.
         /// </summary>
         /// <param name="meter">The meter that created the instrument.</param>
         /// <param name="name">The instrument name. cannot be null.</param>
@@ -28,7 +31,8 @@ namespace System.Diagnostics.Metrics
 
         /// <summary>
         /// Create the metrics instrument using the properties meter, name, description, and unit.
-        /// All classes extending Instrument{T} need to call this constructor when constructing object of the extended class.
+        /// All classes extending Instrument{T} need to call this constructor when constructing object of
+        // the extended class.
         /// </summary>
         /// <param name="meter">The meter that created the instrument.</param>
         /// <param name="name">The instrument name. cannot be null.</param>
@@ -48,14 +52,16 @@ namespace System.Diagnostics.Metrics
         }
 
         /// <summary>
-        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
+        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to
+        // this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
         protected void RecordMeasurement(T measurement) =>
             RecordMeasurement(measurement, Instrument.EmptyTags.AsSpan());
 
         /// <summary>
-        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
+        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to
+        // this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tags">A span of key-value pair tags associated with the measurement.</param>

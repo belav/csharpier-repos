@@ -380,7 +380,7 @@ namespace ICSharpCode.SharpZipLib.Zip
             }
             offset += ZipConstants.LOCHDR + name.Length + extra.Length;
 
-            /* Activate the entry. */
+/* Activate the entry. */
             curEntry = entry;
             crc.Reset();
             if (method == CompressionMethod.Deflated)
@@ -406,7 +406,7 @@ namespace ICSharpCode.SharpZipLib.Zip
                 throw new InvalidOperationException("No open entry");
             }
 
-            /* First finish the deflater, if appropriate */
+/* First finish the deflater, if appropriate */
             if (curMethod == CompressionMethod.Deflated)
             {
                 base.Finish();
@@ -450,7 +450,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 
             offset += csize;
 
-            /* Now write the data descriptor entry if needed. */
+/* Now write the data descriptor entry if needed. */
             if (curMethod == CompressionMethod.Deflated && (curEntry.Flags & 8) != 0)
             {
                 if (shouldWriteBack)

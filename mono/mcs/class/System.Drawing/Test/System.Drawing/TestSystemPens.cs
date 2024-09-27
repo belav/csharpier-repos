@@ -249,39 +249,39 @@ namespace MonoTests.System.Drawing
             {
                 Assert.IsTrue(true, tag + "#5");
             }
-            /*
-                        try {
-                            // NotImplemented
-                            pen.CompoundArray = new float[2];
-                            Assert.Fail (tag + "#6: must throw ArgumentException");
-                        } catch (ArgumentException) {
-                            Assert.IsTrue (true, tag + "#6");
-                        }
-            
-                        try {
-                            // NotImplemented
-                            pen.CustomEndCap = null;
-                            Assert.Fail (tag + "#7: must throw ArgumentException");
-                        } catch (ArgumentException) {
-                            Assert.IsTrue (true, tag + "#7");
-                        }
-            
-                        try {
-                            // NotImplemented
-                            pen.CustomStartCap = null;
-                            Assert.Fail (tag + "#8: must throw ArgumentException");
-                        } catch (ArgumentException) {
-                            Assert.IsTrue (true, tag + "#8");
-                        }
-            
-                        try {
-                            // NotImplemented
-                            pen.DashCap = DashCap.Flat;
-                            Assert.Fail (tag + "#9: must throw ArgumentException");
-                        } catch (ArgumentException) {
-                            Assert.IsTrue (true, tag + "#9");
-                        }
-            */
+/*
+try {
+// NotImplemented
+pen.CompoundArray = new float[2];
+Assert.Fail (tag + "#6: must throw ArgumentException");
+} catch (ArgumentException) {
+Assert.IsTrue (true, tag + "#6");
+}
+
+try {
+// NotImplemented
+pen.CustomEndCap = null;
+Assert.Fail (tag + "#7: must throw ArgumentException");
+} catch (ArgumentException) {
+Assert.IsTrue (true, tag + "#7");
+}
+
+try {
+// NotImplemented
+pen.CustomStartCap = null;
+Assert.Fail (tag + "#8: must throw ArgumentException");
+} catch (ArgumentException) {
+Assert.IsTrue (true, tag + "#8");
+}
+
+try {
+// NotImplemented
+pen.DashCap = DashCap.Flat;
+Assert.Fail (tag + "#9: must throw ArgumentException");
+} catch (ArgumentException) {
+Assert.IsTrue (true, tag + "#9");
+}
+*/
             try
             {
                 pen.DashOffset = 5.5F;
@@ -311,15 +311,15 @@ namespace MonoTests.System.Drawing
             {
                 Assert.IsTrue(true, tag + "#12");
             }
-            /*
-                        try {
-                            // NotImplemented
-                            pen.EndCap = LineCap.Round;
-                            Assert.Fail (tag + "#13: must throw ArgumentException");
-                        } catch (ArgumentException) {
-                            Assert.IsTrue (true, tag + "#13");
-                        }
-            */
+/*
+try {
+// NotImplemented
+pen.EndCap = LineCap.Round;
+Assert.Fail (tag + "#13: must throw ArgumentException");
+} catch (ArgumentException) {
+Assert.IsTrue (true, tag + "#13");
+}
+*/
             try
             {
                 pen.LineJoin = LineJoin.Round;
@@ -339,15 +339,15 @@ namespace MonoTests.System.Drawing
             {
                 Assert.IsTrue(true, tag + "#15");
             }
-            /*
-                        try {
-                            // NotImplemented
-                            pen.StartCap = LineCap.Square;
-                            Assert.Fail (tag + "#16: must throw ArgumentException");
-                        } catch (ArgumentException) {
-                            Assert.IsTrue (true, tag + "#16");
-                        }
-            */
+/*
+try {
+// NotImplemented
+pen.StartCap = LineCap.Square;
+Assert.Fail (tag + "#16: must throw ArgumentException");
+} catch (ArgumentException) {
+Assert.IsTrue (true, tag + "#16");
+}
+*/
             try
             {
                 pen.Transform = new Matrix(); //Matrix hangs!problem
@@ -373,15 +373,15 @@ namespace MonoTests.System.Drawing
         {
             // Try modifying a SystemPen by calling methods.
             // ArgumentException must be thrown in some cases.
-            /*
-                        try {
-                            // NotImplemented
-                            pen.SetLineCap (LineCap.Flat, LineCap.Round, DashCap.Triangle);
-                            Assert.Fail (tag + "#1: must throw ArgumentException");
-                        } catch (ArgumentException) {
-                            Assert.IsTrue (tag + "#1", true);
-                        }
-            */
+/*
+try {
+// NotImplemented
+pen.SetLineCap (LineCap.Flat, LineCap.Round, DashCap.Triangle);
+Assert.Fail (tag + "#1: must throw ArgumentException");
+} catch (ArgumentException) {
+Assert.IsTrue (tag + "#1", true);
+}
+*/
             pen.ResetTransform();
             pen.RotateTransform(90);
             pen.ScaleTransform(2, 1);

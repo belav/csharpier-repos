@@ -310,7 +310,8 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// The definitions that come from the rel-op inputs of this node that are guaranteed to be non-nullable
+        /// The definitions that come from the rel-op inputs of this node that are guaranteed to be
+        // non-nullable
         /// </summary>
         internal VarVec NonNullableVisibleDefinitions
         {
@@ -900,9 +901,11 @@ namespace System.Data.Query.InternalTrees
         /// RowCount:
         ///    FullOuterJoin: MinRows = 0, MaxRows = N
         ///    InnerJoin: MinRows = 0;
-        ///               MaxRows = N; if both inputs have RowCount lesser than (or equal to) 1, then maxCard = 1
+        ///               MaxRows = N; if both inputs have RowCount lesser than (or equal to) 1, then
+        // maxCard = 1
         ///    OuterJoin: MinRows = leftInput.MinRows
-        ///               MaxRows = N; if both inputs have RowCount lesser than (or equal to) 1, then maxCard = 1
+        ///               MaxRows = N; if both inputs have RowCount lesser than (or equal to) 1, then
+        // maxCard = 1
         /// NonNullableDefinitions:
         ///    FullOuterJoin: None.
         ///    InnerJoin: NonNullableDefinitions of both children

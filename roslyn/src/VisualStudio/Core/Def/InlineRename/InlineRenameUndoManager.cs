@@ -169,7 +169,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                 catch (COMException ex)
                     when (ex.ErrorCode == VSConstants.E_UNEXPECTED && FatalError.ReportAndCatch(ex))
                 {
-                    // According to the documentation, E_UNEXPECTED (0x8000FFFF) is raised when the UndoManager is disabled.
+                    // According to the documentation, E_UNEXPECTED (0x8000FFFF) is raised when the UndoManager is
+                    // disabled.
+                    //
                     // https://docs.microsoft.com/en-us/windows/win32/api/ocidl/nf-ocidl-ioleundomanager-undoto#return-value
                     // Report a non-fatal error so we can learn more about this scenario.
                 }
@@ -209,7 +211,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                     bufferUndoState.ConflictResolutionRenameUndoPrimitive
                     ?? startRenameUndoPrimitive;
 
-                // If we're not undoing conflict resolution, we need to undo the next unit after our startRenameUndoPrimitive
+                // If we're not undoing conflict resolution, we need to undo the next unit after our
+                // startRenameUndoPrimitive
                 var count =
                     GetUndoUnits(undoManager).SkipWhile(u => u != markerPrimitive).Count()
                     + (undoConflictResolution ? 0 : -1);

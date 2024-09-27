@@ -4,16 +4,16 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: SoapFault
- **
- ** <EMAIL>Author: Peter de Jong (Microsoft)</EMAIL>
- **
- ** Purpose: Specifies information for a Soap Fault
- **
- ** Date:  June 27, 2000
- **
- ===========================================================*/
+**
+** Class: SoapFault
+**
+** <EMAIL>Author: Peter de Jong (Microsoft)</EMAIL>
+**
+** Purpose: Specifies information for a Soap Fault
+**
+** Date:  June 27, 2000
+**
+===========================================================*/
 #if FEATURE_REMOTING || MOBILE_LEGACY
 namespace System.Runtime.Serialization.Formatters
 {

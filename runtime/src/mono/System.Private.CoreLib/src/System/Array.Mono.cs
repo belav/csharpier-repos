@@ -622,12 +622,12 @@ namespace System
         );
 
 #pragma warning disable CA1822
-        /*
-         * These methods are used to implement the implicit generic interfaces
-         * implemented by arrays in NET 2.0.
-         * Only make those methods generic which really need it, to avoid
-         * creating useless instantiations.
-         */
+/*
+* These methods are used to implement the implicit generic interfaces
+* implemented by arrays in NET 2.0.
+* Only make those methods generic which really need it, to avoid
+* creating useless instantiations.
+*/
         internal int InternalArray__ICollection_get_Count()
         {
             return Length;

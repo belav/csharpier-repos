@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             ICodeModelInstanceFactory
     {
         /// <summary>
-        /// This member is used to store a raw array of warning numbers, which is needed to properly implement
+        /// This member is used to store a raw array of warning numbers, which is needed to properly
+        // implement
         /// ICSCompilerConfig.GetWarnNumbers. Read the implementation of that function for more details.
         /// </summary>
         private readonly IntPtr _warningNumberArrayPointer;
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
         private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
-        /// Fetches the options processor for this C# project. Equivalent to the underlying member, but fixed to the derived type.
+        /// Fetches the options processor for this C# project. Equivalent to the underlying member, but
+        // fixed to the derived type.
         /// </summary>
         private new OptionsProcessor ProjectSystemProjectOptionsProcessor
         {

@@ -18,7 +18,8 @@ public interface IClientProxy
     /// </summary>
     /// <param name="method">Name of the method to invoke.</param>
     /// <param name="args">A collection of arguments to pass to the client.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     Task SendCoreAsync(
         string method,

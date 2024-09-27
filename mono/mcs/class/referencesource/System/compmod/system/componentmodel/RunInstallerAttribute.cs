@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -22,7 +22,8 @@ namespace System.ComponentModel
     {
         private bool runInstaller;
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.RunInstallerAttribute"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex'
+        // path='docs/doc[@for="RunInstallerAttribute.RunInstallerAttribute"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of
@@ -34,7 +35,8 @@ namespace System.ComponentModel
             this.runInstaller = runInstaller;
         }
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.RunInstaller"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex'
+        // path='docs/doc[@for="RunInstallerAttribute.RunInstaller"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Gets a value indicating whether an installer should be
@@ -46,7 +48,8 @@ namespace System.ComponentModel
             get { return runInstaller; }
         }
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.Yes"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex'
+        // path='docs/doc[@for="RunInstallerAttribute.Yes"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Specifies that a
@@ -56,7 +59,8 @@ namespace System.ComponentModel
         /// </devdoc>
         public static readonly RunInstallerAttribute Yes = new RunInstallerAttribute(true);
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.No"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.No"]/*'
+        // />
         /// <devdoc>
         ///    <para>
         ///       Specifies that a
@@ -67,16 +71,19 @@ namespace System.ComponentModel
         /// </devdoc>
         public static readonly RunInstallerAttribute No = new RunInstallerAttribute(false);
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.Default"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex'
+        // path='docs/doc[@for="RunInstallerAttribute.Default"]/*' />
         /// <devdoc>
         ///    <para>
-        ///       Specifies the default visiblity, which is <see cref='System.ComponentModel.RunInstallerAttribute.No'/>. This <see langword='static '/>field is
+        ///       Specifies the default visiblity, which is <see
+        // cref='System.ComponentModel.RunInstallerAttribute.No'/>. This <see langword='static '/>field is
         ///       read-only.
         ///    </para>
         /// </devdoc>
         public static readonly RunInstallerAttribute Default = No;
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.Equals"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex'
+        // path='docs/doc[@for="RunInstallerAttribute.Equals"]/*' />
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -91,7 +98,8 @@ namespace System.ComponentModel
             return other != null && other.RunInstaller == runInstaller;
         }
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.GetHashCode"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex'
+        // path='docs/doc[@for="RunInstallerAttribute.GetHashCode"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Returns the hashcode for this object.
@@ -102,7 +110,8 @@ namespace System.ComponentModel
             return base.GetHashCode();
         }
 
-        /// <include file='doc\RunInstallerAttribute.uex' path='docs/doc[@for="RunInstallerAttribute.IsDefaultAttribute"]/*' />
+        /// <include file='doc\RunInstallerAttribute.uex'
+        // path='docs/doc[@for="RunInstallerAttribute.IsDefaultAttribute"]/*' />
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>

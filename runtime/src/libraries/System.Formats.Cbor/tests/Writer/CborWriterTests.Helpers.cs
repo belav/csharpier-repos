@@ -17,7 +17,8 @@ namespace System.Formats.Cbor.Tests
 
             public const string HexByteStringIdentifier = "_hex";
 
-            // Since we inject test data using attributes, meed to represent both arrays and maps using object arrays.
+            // Since we inject test data using attributes, meed to represent both arrays and maps using object
+            // arrays.
             // To distinguish between the two types, we prepend map representations using a string constant.
             public static bool IsCborMapRepresentation(object[] values)
             {

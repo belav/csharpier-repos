@@ -12,7 +12,8 @@ using Microsoft.Extensions.ObjectPool;
 namespace Microsoft.AspNetCore.Hosting;
 
 /// <summary>
-/// <see cref="IWebHostBuilder" /> extension methods to configure the Named Pipes transport to be used by Kestrel.
+/// <see cref="IWebHostBuilder" /> extension methods to configure the Named Pipes transport to be
+// used by Kestrel.
 /// </summary>
 public static class WebHostBuilderNamedPipeExtensions
 {

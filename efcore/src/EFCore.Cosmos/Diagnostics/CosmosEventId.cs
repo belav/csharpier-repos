@@ -9,12 +9,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure the
+///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure
+// the
 ///         behavior of warnings.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see>, and
-///         <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see>, and
+///         <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF
+// Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public static class CosmosEventId
@@ -46,7 +49,8 @@ public static class CosmosEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CosmosQueryEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CosmosQueryEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecutingSqlQuery =
@@ -60,7 +64,8 @@ public static class CosmosEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CosmosReadItemEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CosmosReadItemEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecutingReadItem =
@@ -74,7 +79,8 @@ public static class CosmosEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CosmosQueryExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CosmosQueryExecutedEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecutedReadNext =
@@ -88,7 +94,8 @@ public static class CosmosEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used
+    // with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecutedReadItem =
@@ -102,7 +109,8 @@ public static class CosmosEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used
+    // with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecutedCreateItem =
@@ -116,7 +124,8 @@ public static class CosmosEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used
+    // with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecutedReplaceItem =
@@ -130,7 +139,8 @@ public static class CosmosEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used
+    // with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecutedDeleteItem =

@@ -9,7 +9,8 @@ using System.Runtime.CompilerServices;
 namespace System.Runtime.InteropServices.Marshalling
 {
     /// <summary>
-    /// A <see cref="ComWrappers"/>-based type that uses customizable strategy objects to implement COM object wrappers and managed object wrappers exposed to COM.
+    /// A <see cref="ComWrappers"/>-based type that uses customizable strategy objects to implement COM
+    // object wrappers and managed object wrappers exposed to COM.
     /// </summary>
     [CLSCompliant(false)]
     public class StrategyBasedComWrappers : ComWrappers
@@ -20,8 +21,12 @@ namespace System.Runtime.InteropServices.Marshalling
         /// The default strategy to discover interface details about COM interfaces.
         /// </summary>
         /// <remarks>
-        /// This strategy can discover interfaces and classes that use source-generated COM interop that use the <see cref="GeneratedComInterfaceAttribute"/> and <see cref="GeneratedComClassAttribute"/> attributes.
-        /// This strategy looks for an <see cref="IUnknownDerivedAttribute{T, TImpl}"/> or <see cref="ComExposedClassAttribute{T}"/> attribute on the type of the provided object to discover COM type information.
+        /// This strategy can discover interfaces and classes that use source-generated COM interop that use
+        // the <see cref="GeneratedComInterfaceAttribute"/> and <see cref="GeneratedComClassAttribute"/>
+        // attributes.
+        /// This strategy looks for an <see cref="IUnknownDerivedAttribute{T, TImpl}"/> or <see
+        // cref="ComExposedClassAttribute{T}"/> attribute on the type of the provided object to discover COM
+        // type information.
         /// </remarks>
         public static IIUnknownInterfaceDetailsStrategy DefaultIUnknownInterfaceDetailsStrategy { get; } =
             Marshalling.DefaultIUnknownInterfaceDetailsStrategy.Instance;
@@ -30,7 +35,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// The default strategy to use for calling <c>IUnknown</c> methods.
         /// </summary>
         /// <remarks>
-        /// This strategy assumes that all provided COM objects are free threaded and that calls to <c>IUnknown</c> methods can be made from any thread.
+        /// This strategy assumes that all provided COM objects are free threaded and that calls to
+        // <c>IUnknown</c> methods can be made from any thread.
         /// </remarks>
         public static IIUnknownStrategy DefaultIUnknownStrategy { get; } =
             FreeThreadedStrategy.Instance;
@@ -38,7 +44,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <summary>
         /// The default strategy to use for caching COM objects.
         /// </summary>
-        /// <returns>The default strategy caches the interface pointers per interface no matter what thread they were initially retrieved on.</returns>
+        /// <returns>The default strategy caches the interface pointers per interface no matter what thread
+        // they were initially retrieved on.</returns>
         protected static IIUnknownCacheStrategy CreateDefaultCacheStrategy() =>
             new DefaultCaching();
 
@@ -59,7 +66,8 @@ namespace System.Runtime.InteropServices.Marshalling
             }
             return DefaultIUnknownInterfaceDetailsStrategy;
 
-            // This logic is split into a separate method, otherwise the trimmer will think that these suppressions are unnecessary on various platforms and error on them.
+            // This logic is split into a separate method, otherwise the trimmer will think that these
+            // suppressions are unnecessary on various platforms and error on them.
             // The easiest way to handle this is to put the case that needs annotations into a separate method.
             [UnconditionalSuppressMessage(
                 "AOT",

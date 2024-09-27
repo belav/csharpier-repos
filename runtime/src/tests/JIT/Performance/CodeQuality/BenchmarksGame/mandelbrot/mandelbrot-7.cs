@@ -3,17 +3,18 @@
 
 // Adapted from mandelbrot C# .NET Core #7 program
 // http://benchmarksgame.alioth.debian.org/u64q/program.php?test=mandelbrot&lang=csharpcore&id=7
-// aka (as of 2017-10-02) rev 1.2 of https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/mandelbrot/mandelbrot.csharp-7.csharp?root=benchmarksgame&view=log
+// aka (as of 2017-10-02) rev 1.2 of
+// https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/mandelbrot/mandelbrot.csharp-7.csharp?root=benchmarksgame&view=log
 // Best-scoring C# .NET Core version as of 2017-10-02
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/
+http://benchmarksgame.alioth.debian.org/
 
-   started with Java #2 program (Krause/Whipkey/Bennet/AhnTran/Enotus/Stalcup)
-   adapted for C# by Jan de Vaan
-   simplified and optimised to use TPL by Anthony Lloyd
-   simplified to compute Cib alongside Crb by Tanner Gooding
-   optimized to use Vector<double> by Tanner Gooding
+started with Java #2 program (Krause/Whipkey/Bennet/AhnTran/Enotus/Stalcup)
+adapted for C# by Jan de Vaan
+simplified and optimised to use TPL by Anthony Lloyd
+simplified to compute Cib alongside Crb by Tanner Gooding
+optimized to use Vector<double> by Tanner Gooding
 */
 
 using System;

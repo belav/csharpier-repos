@@ -7,7 +7,8 @@ using System.Threading;
 
 namespace System.Runtime.CompilerServices
 {
-    /// <summary>Provides an awaitable async enumerable that enables cancelable iteration and configured awaits.</summary>
+    /// <summary>Provides an awaitable async enumerable that enables cancelable iteration and configured
+    // awaits.</summary>
     [StructLayout(LayoutKind.Auto)]
     public readonly struct ConfiguredCancelableAsyncEnumerable<T>
     {
@@ -26,10 +27,13 @@ namespace System.Runtime.CompilerServices
             _cancellationToken = cancellationToken;
         }
 
-        /// <summary>Configures how awaits on the tasks returned from an async iteration will be performed.</summary>
-        /// <param name="continueOnCapturedContext">Whether to capture and marshal back to the current context.</param>
+        /// <summary>Configures how awaits on the tasks returned from an async iteration will be
+        // performed.</summary>
+        /// <param name="continueOnCapturedContext">Whether to capture and marshal back to the current
+        // context.</param>
         /// <returns>The configured enumerable.</returns>
-        /// <remarks>This will replace any previous value set by <see cref="ConfigureAwait(bool)"/> for this iteration.</remarks>
+        /// <remarks>This will replace any previous value set by <see cref="ConfigureAwait(bool)"/> for this
+        // iteration.</remarks>
         public ConfiguredCancelableAsyncEnumerable<T> ConfigureAwait(
             bool continueOnCapturedContext
         ) =>
@@ -39,10 +43,12 @@ namespace System.Runtime.CompilerServices
                 _cancellationToken
             );
 
-        /// <summary>Sets the <see cref="CancellationToken"/> to be passed to <see cref="IAsyncEnumerable{T}.GetAsyncEnumerator(CancellationToken)"/> when iterating.</summary>
+        /// <summary>Sets the <see cref="CancellationToken"/> to be passed to <see
+        // cref="IAsyncEnumerable{T}.GetAsyncEnumerator(CancellationToken)"/> when iterating.</summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to use.</param>
         /// <returns>The configured enumerable.</returns>
-        /// <remarks>This will replace any previous <see cref="CancellationToken"/> set by <see cref="WithCancellation(CancellationToken)"/> for this iteration.</remarks>
+        /// <remarks>This will replace any previous <see cref="CancellationToken"/> set by <see
+        // cref="WithCancellation(CancellationToken)"/> for this iteration.</remarks>
         public ConfiguredCancelableAsyncEnumerable<T> WithCancellation(
             CancellationToken cancellationToken
         ) =>
@@ -52,17 +58,22 @@ namespace System.Runtime.CompilerServices
                 cancellationToken
             );
 
-        /// <summary>Returns an enumerator that iterates asynchronously through collections that enables cancelable iteration and configured awaits.</summary>
-        /// <returns>An enumerator for the <see cref="T:System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable`1" /> class.</returns>
+        /// <summary>Returns an enumerator that iterates asynchronously through collections that enables
+        // cancelable iteration and configured awaits.</summary>
+        /// <returns>An enumerator for the <see
+        // cref="T:System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable`1" /> class.</returns>
         public Enumerator GetAsyncEnumerator() =>
-            // as with other "configured" awaitable-related type in CompilerServices, we don't null check to defend against
-            // misuse like `default(ConfiguredCancelableAsyncEnumerable<T>).GetAsyncEnumerator()`, which will null ref by design.
+            // as with other "configured" awaitable-related type in CompilerServices, we don't null check to
+            // defend against
+            // misuse like `default(ConfiguredCancelableAsyncEnumerable<T>).GetAsyncEnumerator()`, which will
+            // null ref by design.
             new Enumerator(
                 _enumerable.GetAsyncEnumerator(_cancellationToken),
                 _continueOnCapturedContext
             );
 
-        /// <summary>Provides an awaitable async enumerator that enables cancelable iteration and configured awaits.</summary>
+        /// <summary>Provides an awaitable async enumerator that enables cancelable iteration and configured
+        // awaits.</summary>
         [StructLayout(LayoutKind.Auto)]
         public readonly struct Enumerator
         {
@@ -77,8 +88,10 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>Advances the enumerator asynchronously to the next element of the collection.</summary>
             /// <returns>
-            /// A <see cref="ConfiguredValueTaskAwaitable{Boolean}"/> that will complete with a result of <c>true</c>
-            /// if the enumerator was successfully advanced to the next element, or <c>false</c> if the enumerator has
+            /// A <see cref="ConfiguredValueTaskAwaitable{Boolean}"/> that will complete with a result of
+            // <c>true</c>
+            /// if the enumerator was successfully advanced to the next element, or <c>false</c> if the
+            // enumerator has
             /// passed the end of the collection.
             /// </returns>
             public ConfiguredValueTaskAwaitable<bool> MoveNextAsync() =>

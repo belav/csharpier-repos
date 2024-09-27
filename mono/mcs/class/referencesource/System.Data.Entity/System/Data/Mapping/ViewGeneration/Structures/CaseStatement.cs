@@ -77,7 +77,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         #region Methods
         /// <summary>
-        /// Recursively qualifies all <see cref="ProjectedSlot"/>s and returns a new deeply qualified <see cref="CaseStatement"/>.
+        /// Recursively qualifies all <see cref="ProjectedSlot"/>s and returns a new deeply qualified <see
+        // cref="CaseStatement"/>.
         /// </summary>
         internal CaseStatement DeepQualify(CqlBlock block)
         {
@@ -97,7 +98,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Adds an expression of the form "WHEN <paramref name="condition"/> THEN <paramref name="value"/>".
+        /// Adds an expression of the form "WHEN <paramref name="condition"/> THEN <paramref
+        // name="value"/>".
         /// This operation is not allowed after the <see cref="Simplify"/> call.
         /// </summary>
         internal void AddWhenThen(BoolExpression condition, ProjectedSlot value)
@@ -110,7 +112,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Returns true if the <see cref="CaseStatement"/> depends on (projects) its slot in THEN value or ELSE value.
+        /// Returns true if the <see cref="CaseStatement"/> depends on (projects) its slot in THEN value or
+        // ELSE value.
         /// </summary>
         internal bool DependsOnMemberValue
         {
@@ -176,7 +179,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Simplifies the <see cref="CaseStatement"/> so that unnecessary WHEN/THENs for nulls/undefined values are eliminated.
+        /// Simplifies the <see cref="CaseStatement"/> so that unnecessary WHEN/THENs for nulls/undefined
+        // values are eliminated.
         /// Also, adds an ELSE clause if possible.
         /// </summary>
         internal void Simplify()

@@ -6,16 +6,19 @@ using System.Diagnostics;
 
 namespace Microsoft.Win32
 {
-    /// <summary>Registry encapsulation. Contains members representing all top level system keys.</summary>
+    /// <summary>Registry encapsulation. Contains members representing all top level system
+    // keys.</summary>
     public static class Registry
     {
-        /// <summary>Current User Key. This key should be used as the root for all user specific settings.</summary>
+        /// <summary>Current User Key. This key should be used as the root for all user specific
+        // settings.</summary>
         public static readonly RegistryKey CurrentUser = RegistryKey.OpenBaseKey(
             RegistryHive.CurrentUser,
             RegistryView.Default
         );
 
-        /// <summary>Local Machine key. This key should be used as the root for all machine specific settings.</summary>
+        /// <summary>Local Machine key. This key should be used as the root for all machine specific
+        // settings.</summary>
         public static readonly RegistryKey LocalMachine = RegistryKey.OpenBaseKey(
             RegistryHive.LocalMachine,
             RegistryView.Default
@@ -39,7 +42,8 @@ namespace Microsoft.Win32
             RegistryView.Default
         );
 
-        /// <summary>Current Config Root Key. This is where current configuration information is stored.</summary>
+        /// <summary>Current Config Root Key. This is where current configuration information is
+        // stored.</summary>
         public static readonly RegistryKey CurrentConfig = RegistryKey.OpenBaseKey(
             RegistryHive.CurrentConfig,
             RegistryView.Default
@@ -79,7 +83,8 @@ namespace Microsoft.Win32
                     break; // HKEY_PERFORMANCE_DATA
             }
 
-            // If a potential base key was found, see if keyName actually starts with the potential base key's name.
+            // If a potential base key was found, see if keyName actually starts with the potential base key's
+            // name.
             if (
                 baseKey != null
                 && keyName.StartsWith(baseKey.Name, StringComparison.OrdinalIgnoreCase)

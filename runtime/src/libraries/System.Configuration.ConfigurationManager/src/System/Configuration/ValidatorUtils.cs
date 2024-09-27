@@ -57,7 +57,8 @@ namespace System.Configuration
 
             if (min.Equals(max))
             {
-                // First group of errors - the min and max range are the same. i.e. the valid value must be the same/equal to the min(max)
+                // First group of errors - the min and max range are the same. i.e. the valid value must be the
+                // same/equal to the min(max)
                 error = exclusiveRange
                     ? SR.Validation_scalar_range_violation_not_different
                     : SR.Validation_scalar_range_violation_not_equal;

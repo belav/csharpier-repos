@@ -20,7 +20,8 @@ public class PInvokes
         short s = 42;
         bool b = true;
 
-        // By default, bool is a 4-byte Windows BOOL, which will cause us to incorrectly marshal back the struct from native code.
+        // By default, bool is a 4-byte Windows BOOL, which will cause us to incorrectly marshal back the
+        // struct from native code.
         Assert.False(
             DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(
                 new StructWithShortAndBool(s, b),
@@ -85,7 +86,8 @@ public class PInvokes
         short s = 42;
         bool b = true;
 
-        // By default, bool is a 4-byte Windows BOOL, which will make the calculation of stack space for the stdcall calling convention
+        // By default, bool is a 4-byte Windows BOOL, which will make the calculation of stack space for the
+        // stdcall calling convention
         // incorrect, causing the entry point to not be found.
         Assert.Throws<EntryPointNotFoundException>(
             () =>

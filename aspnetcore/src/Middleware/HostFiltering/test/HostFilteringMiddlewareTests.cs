@@ -200,7 +200,8 @@ public class HostFilteringMiddlewareTests
     [InlineData("foo.com:443", "*.example.com")]
     [InlineData("foo.example.com.bar:443", "*.example.com")]
     [InlineData(".com:443", "*.com")]
-    // Unicode in the host shouldn't be allowed without punycode anyways. This match fails because the middleware converts
+    // Unicode in the host shouldn't be allowed without punycode anyways. This match fails because the
+    // middleware converts
     // its input to punycode.
     [InlineData("點看", "點看")]
     [InlineData("[::1", "[::1]")]

@@ -9,11 +9,14 @@ using Internal.TypeSystem;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// Canonical type instantiations are emitted, not because they are used directly by the user code, but because
+    /// Canonical type instantiations are emitted, not because they are used directly by the user code,
+    // but because
     /// they are used by the dynamic type loader when dynamically instantiating types at runtime.
-    /// The data that we emit on canonical type instantiations should just be the minimum that is needed by the template
+    /// The data that we emit on canonical type instantiations should just be the minimum that is needed
+    // by the template
     /// type loader.
-    /// Similarly, the dependencies that we track for canonical type instantiations are minimal, and are just the ones used
+    /// Similarly, the dependencies that we track for canonical type instantiations are minimal, and are
+    // just the ones used
     /// by the dynamic type loader
     /// </summary>
     public sealed class CanonicalEETypeNode : EETypeNode
@@ -118,7 +121,8 @@ namespace ILCompiler.DependencyAnalysis
         {
             for (int i = 0; i < _type.RuntimeInterfaces.Length; i++)
             {
-                // Interface omitted for canonical instantiations (constructed at runtime for dynamic types from the native layout info)
+                // Interface omitted for canonical instantiations (constructed at runtime for dynamic types from the
+                // native layout info)
                 objData.EmitZeroPointer();
             }
         }

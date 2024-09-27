@@ -277,7 +277,8 @@ namespace System.Xaml
             yield return Node(XamlNodeType.None, null);
         }
 
-        // Note that it could return invalid (None) node to tell the caller that it is not really an object element.
+        // Note that it could return invalid (None) node to tell the caller that it is not really an object
+        // element.
         IEnumerable<XamlXmlNodeInfo> ReadObjectElement(
             XamlType parentType,
             XamlMember currentMember
@@ -317,12 +318,15 @@ namespace System.Xaml
                     && (r.LocalName.IndexOf('.') > 0 || parentType.GetMember(r.LocalName) != null)
                 )
                 {
-                    // stop the iteration and signal the caller to not read current element as an object. (It resolves conflicts between "start object for current collection's item" and "start member for the next member in the parent object".
+                    // stop the iteration and signal the caller to not read current element as an object. (It resolves
+                    // conflicts between "start object for current collection's item" and "start member for the next member
+                    // in the parent object".
                     yield return Node(XamlNodeType.None, null);
                     yield break;
                 }
 
-                // creates name-only XamlType. Also, it does not seem that it does not store this XamlType to XamlSchemaContext (Try GetXamlType(xtn) after reading such xaml node, it will return null).
+                // creates name-only XamlType. Also, it does not seem that it does not store this XamlType to
+                // XamlSchemaContext (Try GetXamlType(xtn) after reading such xaml node, it will return null).
                 xt = new XamlType(
                     sti.Namespace,
                     sti.Name,
@@ -613,7 +617,8 @@ namespace System.Xaml
             XamlMember xm = null;
             var name = r.LocalName;
             int idx = name.IndexOf('.');
-            // FIXME: it skips strict type name check, as it could result in MarkupExtension mismatch (could be still checked, though)
+            // FIXME: it skips strict type name check, as it could result in MarkupExtension mismatch (could be
+            // still checked, though)
             if (
                 idx >= 0 /* && name.Substring (0, idx) == xt.Name*/
             )
@@ -648,7 +653,9 @@ namespace System.Xaml
                 // Current element could be for another member in the parent type (if exists)
                 if (parentType != null && parentType.GetMember(name) != null)
                 {
-                    // stop the iteration and signal the caller to not read current element as an object. (It resolves conflicts between "start object for current collection's item" and "start member for the next member in the parent object".
+                    // stop the iteration and signal the caller to not read current element as an object. (It resolves
+                    // conflicts between "start object for current collection's item" and "start member for the next member
+                    // in the parent object".
                     yield return Node(XamlNodeType.None, null);
                     yield break;
                 }

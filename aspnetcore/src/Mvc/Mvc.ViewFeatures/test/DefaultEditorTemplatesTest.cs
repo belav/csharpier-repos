@@ -218,8 +218,10 @@ public class DefaultEditorTemplatesTest
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
     }
 
-    // Prior to aspnet/Mvc#6638 fix, helper did not generate Property1 <label> or containing <div> with this setup.
-    // Expect almost the same HTML as in ObjectTemplateEditsSimplePropertiesOnObjectByDefault(). Only difference is
+    // Prior to aspnet/Mvc#6638 fix, helper did not generate Property1 <label> or containing <div> with
+    // this setup.
+    // Expect almost the same HTML as in ObjectTemplateEditsSimplePropertiesOnObjectByDefault(). Only
+    // difference is
     // the <div class="editor-label">...</div> is not present for Property1.
     [Fact]
     public void ObjectTemplateSkipsLabel_IfDisplayNameIsEmpty()
@@ -672,7 +674,8 @@ public class DefaultEditorTemplatesTest
         );
         helper.ViewData["Property1"] = "True";
 
-        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most templates.
+        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most
+        // templates.
         helper.ViewData.TemplateInfo.FormattedModelValue = "Formatted string";
 
         // Act
@@ -718,7 +721,8 @@ public class DefaultEditorTemplatesTest
             innerHelper => new StubbyHtmlHelper(innerHelper)
         );
 
-        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most templates.
+        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most
+        // templates.
         helper.ViewData.TemplateInfo.FormattedModelValue = "Formatted string";
 
         // Act
@@ -780,7 +784,8 @@ public class DefaultEditorTemplatesTest
         );
         helper.ViewData["Property1"] = "True";
 
-        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most templates.
+        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most
+        // templates.
         helper.ViewData.TemplateInfo.FormattedModelValue = "Formatted string";
 
         // Act
@@ -841,7 +846,8 @@ public class DefaultEditorTemplatesTest
             innerHelper => new StubbyHtmlHelper(innerHelper)
         );
 
-        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most templates.
+        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most
+        // templates.
         helper.ViewData.TemplateInfo.FormattedModelValue = "Formatted string";
 
         // Act
@@ -903,7 +909,8 @@ public class DefaultEditorTemplatesTest
         );
         helper.ViewData["Property1"] = "True";
 
-        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most templates.
+        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most
+        // templates.
         helper.ViewData.TemplateInfo.FormattedModelValue = "Formatted string";
 
         // Act
@@ -964,7 +971,8 @@ public class DefaultEditorTemplatesTest
             innerHelper => new StubbyHtmlHelper(innerHelper)
         );
 
-        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most templates.
+        // TemplateBuilder sets FormattedModelValue before calling TemplateRenderer and it's used in most
+        // templates.
         helper.ViewData.TemplateInfo.FormattedModelValue = "Formatted string";
 
         // Act

@@ -132,7 +132,8 @@ namespace Internal.IL
                 owningDelegate
             );
 
-            // Methods that have a byref-like type in the signature cannot be invoked with the object array thunk.
+            // Methods that have a byref-like type in the signature cannot be invoked with the object array
+            // thunk.
             // We would need to box the parameter and these can't be boxed.
             // Neither can be methods that have pointers in the signature.
             MethodSignature delegateSignature = owningDelegate.Signature;

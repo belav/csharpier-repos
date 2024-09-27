@@ -227,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// Should only be called during construction.
         /// </summary>
         /// <remarks>
-        /// This should probably be an extra constructor parameter, but we don't need more constructor overloads.
+        /// This should probably be an extra constructor parameter, but we don't need more constructor
+        // overloads.
         /// </remarks>
         protected void SetFactoryContext(SyntaxFactoryContext context)
         {
@@ -279,11 +280,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             >();
 
         /// <summary>
-        /// Gets the syntax node represented the structure of this trivia, if any. The HasStructure property can be used to
+        /// Gets the syntax node represented the structure of this trivia, if any. The HasStructure property
+        // can be used to
         /// determine if this trivia has structure.
         /// </summary>
         /// <returns>
-        /// A CSharpSyntaxNode derived from StructuredTriviaSyntax, with the structured view of this trivia node.
+        /// A CSharpSyntaxNode derived from StructuredTriviaSyntax, with the structured view of this trivia
+        // node.
         /// If this trivia node does not have structure, returns null.
         /// </returns>
         /// <remarks>

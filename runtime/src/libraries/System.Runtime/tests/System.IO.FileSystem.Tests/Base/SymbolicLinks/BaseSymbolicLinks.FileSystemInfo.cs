@@ -8,7 +8,8 @@ namespace System.IO.Tests
     // Contains test methods that can be used for FileInfo and DirectoryInfo.
     public abstract class BaseSymbolicLinks_FileSystemInfo : BaseSymbolicLinks_FileSystem
     {
-        // Creates and returns FileSystemInfo instance by calling either the DirectoryInfo or FileInfo constructor and passing the path.
+        // Creates and returns FileSystemInfo instance by calling either the DirectoryInfo or FileInfo
+        // constructor and passing the path.
         protected abstract FileSystemInfo GetFileSystemInfo(string path);
 
         protected override FileSystemInfo CreateSymbolicLink(string path, string pathToTarget)

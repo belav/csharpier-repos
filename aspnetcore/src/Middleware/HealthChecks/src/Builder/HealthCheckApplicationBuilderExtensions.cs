@@ -22,13 +22,18 @@ public static class HealthCheckApplicationBuilderExtensions
     /// <returns>A reference to the <paramref name="app"/> after the operation has completed.</returns>
     /// <remarks>
     /// <para>
-    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check middleware
-    /// will ignore the URL path and process all requests. If <paramref name="path"/> is set to a non-empty
-    /// value, the health check middleware will process requests with a URL that matches the provided value
-    /// of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/') character.
+    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check
+    // middleware
+    /// will ignore the URL path and process all requests. If <paramref name="path"/> is set to a
+    // non-empty
+    /// value, the health check middleware will process requests with a URL that matches the provided
+    // value
+    /// of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/')
+    // character.
     /// </para>
     /// <para>
-    /// The health check middleware will use default settings from <see cref="IOptions{HealthCheckOptions}"/>.
+    /// The health check middleware will use default settings from <see
+    // cref="IOptions{HealthCheckOptions}"/>.
     /// </para>
     /// </remarks>
     public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app, PathString path)
@@ -44,14 +49,19 @@ public static class HealthCheckApplicationBuilderExtensions
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
     /// <param name="path">The path on which to provide health check status.</param>
-    /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the middleware.</param>
+    /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the
+    // middleware.</param>
     /// <returns>A reference to the <paramref name="app"/> after the operation has completed.</returns>
     /// <remarks>
     /// <para>
-    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check middleware
-    /// will ignore the URL path and process all requests. If <paramref name="path"/> is set to a non-empty
-    /// value, the health check middleware will process requests with a URL that matches the provided value
-    /// of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/') character.
+    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check
+    // middleware
+    /// will ignore the URL path and process all requests. If <paramref name="path"/> is set to a
+    // non-empty
+    /// value, the health check middleware will process requests with a URL that matches the provided
+    // value
+    /// of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/')
+    // character.
     /// </para>
     /// </remarks>
     public static IApplicationBuilder UseHealthChecks(
@@ -72,18 +82,24 @@ public static class HealthCheckApplicationBuilderExtensions
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
     /// <param name="path">The path on which to provide health check status.</param>
-    /// <param name="port">The port to listen on. Must be a local port on which the server is listening.</param>
+    /// <param name="port">The port to listen on. Must be a local port on which the server is
+    // listening.</param>
     /// <returns>A reference to the <paramref name="app"/> after the operation has completed.</returns>
     /// <remarks>
     /// <para>
-    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check middleware
-    /// will ignore the URL path and process all requests on the specified port. If <paramref name="path"/> is
-    /// set to a non-empty value, the health check middleware will process requests with a URL that matches the
-    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/')
+    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check
+    // middleware
+    /// will ignore the URL path and process all requests on the specified port. If <paramref
+    // name="path"/> is
+    /// set to a non-empty value, the health check middleware will process requests with a URL that
+    // matches the
+    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing
+    // slash ('/')
     /// character.
     /// </para>
     /// <para>
-    /// The health check middleware will use default settings from <see cref="IOptions{HealthCheckOptions}"/>.
+    /// The health check middleware will use default settings from <see
+    // cref="IOptions{HealthCheckOptions}"/>.
     /// </para>
     /// </remarks>
     public static IApplicationBuilder UseHealthChecks(
@@ -103,18 +119,24 @@ public static class HealthCheckApplicationBuilderExtensions
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
     /// <param name="path">The path on which to provide health check status.</param>
-    /// <param name="port">The port to listen on. Must be a local port on which the server is listening.</param>
+    /// <param name="port">The port to listen on. Must be a local port on which the server is
+    // listening.</param>
     /// <returns>A reference to the <paramref name="app"/> after the operation has completed.</returns>
     /// <remarks>
     /// <para>
-    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check middleware
-    /// will ignore the URL path and process all requests on the specified port. If <paramref name="path"/> is
-    /// set to a non-empty value, the health check middleware will process requests with a URL that matches the
-    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/')
+    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check
+    // middleware
+    /// will ignore the URL path and process all requests on the specified port. If <paramref
+    // name="path"/> is
+    /// set to a non-empty value, the health check middleware will process requests with a URL that
+    // matches the
+    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing
+    // slash ('/')
     /// character.
     /// </para>
     /// <para>
-    /// The health check middleware will use default settings from <see cref="IOptions{HealthCheckOptions}"/>.
+    /// The health check middleware will use default settings from <see
+    // cref="IOptions{HealthCheckOptions}"/>.
     /// </para>
     /// </remarks>
     public static IApplicationBuilder UseHealthChecks(
@@ -140,15 +162,21 @@ public static class HealthCheckApplicationBuilderExtensions
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
     /// <param name="path">The path on which to provide health check status.</param>
-    /// <param name="port">The port to listen on. Must be a local port on which the server is listening.</param>
-    /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the middleware.</param>
+    /// <param name="port">The port to listen on. Must be a local port on which the server is
+    // listening.</param>
+    /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the
+    // middleware.</param>
     /// <returns>A reference to the <paramref name="app"/> after the operation has completed.</returns>
     /// <remarks>
     /// <para>
-    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check middleware
-    /// will ignore the URL path and process all requests on the specified port. If <paramref name="path"/> is
-    /// set to a non-empty value, the health check middleware will process requests with a URL that matches the
-    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/')
+    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check
+    // middleware
+    /// will ignore the URL path and process all requests on the specified port. If <paramref
+    // name="path"/> is
+    /// set to a non-empty value, the health check middleware will process requests with a URL that
+    // matches the
+    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing
+    // slash ('/')
     /// character.
     /// </para>
     /// </remarks>
@@ -171,15 +199,21 @@ public static class HealthCheckApplicationBuilderExtensions
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
     /// <param name="path">The path on which to provide health check status.</param>
-    /// <param name="port">The port to listen on. Must be a local port on which the server is listening.</param>
-    /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the middleware.</param>
+    /// <param name="port">The port to listen on. Must be a local port on which the server is
+    // listening.</param>
+    /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the
+    // middleware.</param>
     /// <returns>A reference to the <paramref name="app"/> after the operation has completed.</returns>
     /// <remarks>
     /// <para>
-    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check middleware
-    /// will ignore the URL path and process all requests on the specified port. If <paramref name="path"/> is
-    /// set to a non-empty value, the health check middleware will process requests with a URL that matches the
-    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing slash ('/')
+    /// If <paramref name="path"/> is set to <c>null</c> or the empty string then the health check
+    // middleware
+    /// will ignore the URL path and process all requests on the specified port. If <paramref
+    // name="path"/> is
+    /// set to a non-empty value, the health check middleware will process requests with a URL that
+    // matches the
+    /// provided value of <paramref name="path"/> case-insensitively, allowing for an extra trailing
+    // slash ('/')
     /// character.
     /// </para>
     /// </remarks>

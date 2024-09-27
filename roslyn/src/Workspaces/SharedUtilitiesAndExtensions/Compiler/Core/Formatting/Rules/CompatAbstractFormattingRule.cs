@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         ) => base.AddSuppressOperations(list, node, in nextOperation);
 
         /// <summary>
-        /// returns AnchorIndentationOperations under a node either by itself or by filtering/replacing operations returned by NextOperation
+        /// returns AnchorIndentationOperations under a node either by itself or by filtering/replacing
+        // operations returned by NextOperation
         /// </summary>
         public virtual void AddAnchorIndentationOperationsSlow(
             List<AnchorIndentationOperation> list,
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         ) => base.AddAnchorIndentationOperations(list, node, in nextOperation);
 
         /// <summary>
-        /// returns IndentBlockOperations under a node either by itself or by filtering/replacing operations returned by NextOperation
+        /// returns IndentBlockOperations under a node either by itself or by filtering/replacing operations
+        // returned by NextOperation
         /// </summary>
         public virtual void AddIndentBlockOperationsSlow(
             List<IndentBlockOperation> list,
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         ) => base.AddIndentBlockOperations(list, node, in nextOperation);
 
         /// <summary>
-        /// returns AlignTokensOperations under a node either by itself or by filtering/replacing operations returned by NextOperation
+        /// returns AlignTokensOperations under a node either by itself or by filtering/replacing operations
+        // returned by NextOperation
         /// </summary>
         public virtual void AddAlignTokensOperationsSlow(
             List<AlignTokensOperation> list,
@@ -134,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         ) => base.AddAlignTokensOperations(list, node, in nextOperation);
 
         /// <summary>
-        /// returns AdjustNewLinesOperation between two tokens either by itself or by filtering/replacing a operation returned by NextOperation
+        /// returns AdjustNewLinesOperation between two tokens either by itself or by filtering/replacing a
+        // operation returned by NextOperation
         /// </summary>
         public virtual AdjustNewLinesOperation? GetAdjustNewLinesOperationSlow(
             ref SyntaxToken previousToken,
@@ -143,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         ) => base.GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation);
 
         /// <summary>
-        /// returns AdjustSpacesOperation between two tokens either by itself or by filtering/replacing a operation returned by NextOperation
+        /// returns AdjustSpacesOperation between two tokens either by itself or by filtering/replacing a
+        // operation returned by NextOperation
         /// </summary>
         public virtual AdjustSpacesOperation? GetAdjustSpacesOperationSlow(
             ref SyntaxToken previousToken,

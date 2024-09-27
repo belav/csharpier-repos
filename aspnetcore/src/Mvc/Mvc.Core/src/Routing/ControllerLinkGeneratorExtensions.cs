@@ -17,22 +17,28 @@ public static class ControllerLinkGeneratorExtensions
     /// Generates a URI with an absolute path based on the provided values.
     /// </summary>
     /// <param name="generator">The <see cref="LinkGenerator"/>.</param>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="action">
-    /// The action name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the current action route value
+    /// The action name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the current
+    // action route value
     /// will be used.
     /// </param>
     /// <param name="controller">
-    /// The controller name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the current controller route value
+    /// The controller name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the
+    // current controller route value
     /// will be used.
     /// </param>
-    /// <param name="values">The route values. Optional. Used to resolve endpoints and expand parameters in the route template.</param>
+    /// <param name="values">The route values. Optional. Used to resolve endpoints and expand parameters
+    // in the route template.</param>
     /// <param name="pathBase">
-    /// An optional URI path base. Prepended to the path in the resulting URI. If not provided, the value of <see cref="HttpRequest.PathBase"/> will be used.
+    /// An optional URI path base. Prepended to the path in the resulting URI. If not provided, the
+    // value of <see cref="HttpRequest.PathBase"/> will be used.
     /// </param>
     /// <param name="fragment">A URI fragment. Optional. Appended to the resulting URI.</param>
     /// <param name="options">
-    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with matching
+    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with
+    // matching
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
@@ -73,11 +79,14 @@ public static class ControllerLinkGeneratorExtensions
     /// <param name="generator">The <see cref="LinkGenerator"/>.</param>
     /// <param name="action">The action name. Used to resolve endpoints.</param>
     /// <param name="controller">The controller name. Used to resolve endpoints.</param>
-    /// <param name="values">The route values. Optional. Used to resolve endpoints and expand parameters in the route template.</param>
-    /// <param name="pathBase">An optional URI path base. Prepended to the path in the resulting URI.</param>
+    /// <param name="values">The route values. Optional. Used to resolve endpoints and expand parameters
+    // in the route template.</param>
+    /// <param name="pathBase">An optional URI path base. Prepended to the path in the resulting
+    // URI.</param>
     /// <param name="fragment">A URI fragment. Optional. Appended to the resulting URI.</param>
     /// <param name="options">
-    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with matching
+    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with
+    // matching
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
@@ -114,36 +123,47 @@ public static class ControllerLinkGeneratorExtensions
     /// Generates an absolute URI based on the provided values.
     /// </summary>
     /// <param name="generator">The <see cref="LinkGenerator"/>.</param>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="action">
-    /// The action name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the current action route value
+    /// The action name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the current
+    // action route value
     /// will be used.
     /// </param>
     /// <param name="controller">
-    /// The controller name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the current controller route value
+    /// The controller name. Used to resolve endpoints. Optional. If <c>null</c> is provided, the
+    // current controller route value
     /// will be used.
     /// </param>
-    /// <param name="values">The route values. Optional. Used to resolve endpoints and expand parameters in the route template.</param>
+    /// <param name="values">The route values. Optional. Used to resolve endpoints and expand parameters
+    // in the route template.</param>
     /// <param name="scheme">
-    /// The URI scheme, applied to the resulting URI. Optional. If not provided, the value of <see cref="HttpRequest.Scheme"/> will be used.
+    /// The URI scheme, applied to the resulting URI. Optional. If not provided, the value of <see
+    // cref="HttpRequest.Scheme"/> will be used.
     /// </param>
     /// <param name="host">
-    /// The URI host/authority, applied to the resulting URI. Optional. If not provided, the value <see cref="HttpRequest.Host"/> will be used.
+    /// The URI host/authority, applied to the resulting URI. Optional. If not provided, the value <see
+    // cref="HttpRequest.Host"/> will be used.
     /// </param>
     /// <param name="pathBase">
-    /// An optional URI path base. Prepended to the path in the resulting URI. If not provided, the value of <see cref="HttpRequest.PathBase"/> will be used.
+    /// An optional URI path base. Prepended to the path in the resulting URI. If not provided, the
+    // value of <see cref="HttpRequest.PathBase"/> will be used.
     /// </param>
     /// <param name="fragment">A URI fragment. Optional. Appended to the resulting URI.</param>
     /// <param name="options">
-    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with matching
+    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with
+    // matching
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A absolute URI, or <c>null</c> if a URI cannot be created.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host" /> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host" /> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -188,21 +208,27 @@ public static class ControllerLinkGeneratorExtensions
     /// <param name="generator">The <see cref="LinkGenerator"/>.</param>
     /// <param name="action">The action name. Used to resolve endpoints.</param>
     /// <param name="controller">The controller name. Used to resolve endpoints.</param>
-    /// <param name="values">The route values. May be null. Used to resolve endpoints and expand parameters in the route template.</param>
+    /// <param name="values">The route values. May be null. Used to resolve endpoints and expand
+    // parameters in the route template.</param>
     /// <param name="scheme">The URI scheme, applied to the resulting URI.</param>
     /// <param name="host">The URI host/authority, applied to the resulting URI.</param>
-    /// <param name="pathBase">An optional URI path base. Prepended to the path in the resulting URI.</param>
+    /// <param name="pathBase">An optional URI path base. Prepended to the path in the resulting
+    // URI.</param>
     /// <param name="fragment">A URI fragment. Optional. Appended to the resulting URI.</param>
     /// <param name="options">
-    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with matching
+    /// An optional <see cref="LinkOptions"/>. Settings on provided object override the settings with
+    // matching
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A absolute URI, or <c>null</c> if a URI cannot be created.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host" /> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host" /> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>

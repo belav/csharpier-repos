@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 /// <summary>
-/// Represents properties and methods that are needed in order to render a view that uses Razor syntax.
+/// Represents properties and methods that are needed in order to render a view that uses Razor
+// syntax.
 /// </summary>
 public abstract class RazorPage : RazorPageBase
 {
@@ -25,7 +26,8 @@ public abstract class RazorPage : RazorPageBase
     public HttpContext Context => ViewContext?.HttpContext!;
 
     /// <summary>
-    /// In a Razor layout page, renders the portion of a content page that is not within a named section.
+    /// In a Razor layout page, renders the portion of a content page that is not within a named
+    // section.
     /// </summary>
     /// <returns>The HTML content to render.</returns>
     protected virtual IHtmlContent RenderBody()
@@ -41,7 +43,8 @@ public abstract class RazorPage : RazorPageBase
     }
 
     /// <summary>
-    /// In a Razor layout page, ignores rendering the portion of a content page that is not within a named section.
+    /// In a Razor layout page, ignores rendering the portion of a content page that is not within a
+    // named section.
     /// </summary>
     public void IgnoreBody()
     {
@@ -53,7 +56,8 @@ public abstract class RazorPage : RazorPageBase
     /// <see cref="RenderSection(string)"/> or <see cref="RenderSectionAsync(string, bool)"/>.
     /// </summary>
     /// <param name="name">The name of the section to create.</param>
-    /// <param name="section">The <see cref="RenderAsyncDelegate"/> to execute when rendering the section.</param>
+    /// <param name="section">The <see cref="RenderAsyncDelegate"/> to execute when rendering the
+    // section.</param>
     public override void DefineSection(string name, RenderAsyncDelegate section)
     {
         ArgumentNullException.ThrowIfNull(name);
@@ -70,7 +74,8 @@ public abstract class RazorPage : RazorPageBase
     /// Returns a value that indicates whether the specified section is defined in the content page.
     /// </summary>
     /// <param name="name">The section name to search for.</param>
-    /// <returns><c>true</c> if the specified section is defined in the content page; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if the specified section is defined in the content page; otherwise,
+    // <c>false</c>.</returns>
     public bool IsSectionDefined(string name)
     {
         ArgumentNullException.ThrowIfNull(name);
@@ -84,7 +89,8 @@ public abstract class RazorPage : RazorPageBase
     /// </summary>
     /// <param name="name">The name of the section to render.</param>
     /// <returns>An empty <see cref="IHtmlContent"/>.</returns>
-    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a token
+    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a
+    // token
     /// value that allows the Write (produced due to @RenderSection(..)) to succeed. However the
     /// value does not represent the rendered content.</remarks>
     public HtmlString? RenderSection(string name)
@@ -100,7 +106,8 @@ public abstract class RazorPage : RazorPageBase
     /// <param name="name">The section to render.</param>
     /// <param name="required">Indicates if this section must be rendered.</param>
     /// <returns>An empty <see cref="IHtmlContent"/>.</returns>
-    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a token
+    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a
+    // token
     /// value that allows the Write (produced due to @RenderSection(..)) to succeed. However the
     /// value does not represent the rendered content.</remarks>
     public HtmlString? RenderSection(string name, bool required)
@@ -114,13 +121,15 @@ public abstract class RazorPage : RazorPageBase
     }
 
     /// <summary>
-    /// In layout pages, asynchronously renders the content of the section named <paramref name="name"/>.
+    /// In layout pages, asynchronously renders the content of the section named <paramref
+    // name="name"/>.
     /// </summary>
     /// <param name="name">The section to render.</param>
     /// <returns>
     /// A <see cref="Task{HtmlString}"/> that on completion returns an empty <see cref="IHtmlContent"/>.
     /// </returns>
-    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a token
+    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a
+    // token
     /// value that allows the Write (produced due to @RenderSection(..)) to succeed. However the
     /// value does not represent the rendered content.</remarks>
     public Task<HtmlString?> RenderSectionAsync(string name)
@@ -131,7 +140,8 @@ public abstract class RazorPage : RazorPageBase
     }
 
     /// <summary>
-    /// In layout pages, asynchronously renders the content of the section named <paramref name="name"/>.
+    /// In layout pages, asynchronously renders the content of the section named <paramref
+    // name="name"/>.
     /// </summary>
     /// <param name="name">The section to render.</param>
     /// <param name="required">Indicates the <paramref name="name"/> section must be registered
@@ -139,10 +149,12 @@ public abstract class RazorPage : RazorPageBase
     /// <returns>
     /// A <see cref="Task{HtmlString}"/> that on completion returns an empty <see cref="IHtmlContent"/>.
     /// </returns>
-    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a token
+    /// <remarks>The method writes to the <see cref="RazorPageBase.Output"/> and the value returned is a
+    // token
     /// value that allows the Write (produced due to @RenderSection(..)) to succeed. However the
     /// value does not represent the rendered content.</remarks>
-    /// <exception cref="InvalidOperationException">if <paramref name="required"/> is <c>true</c> and the section
+    /// <exception cref="InvalidOperationException">if <paramref name="required"/> is <c>true</c> and
+    // the section
     /// was not registered using the <c>@section</c> in the Razor page.</exception>
     public Task<HtmlString?> RenderSectionAsync(string name, bool required)
     {
@@ -194,7 +206,8 @@ public abstract class RazorPage : RazorPageBase
     }
 
     /// <summary>
-    /// In layout pages, ignores rendering the content of the section named <paramref name="sectionName"/>.
+    /// In layout pages, ignores rendering the content of the section named <paramref
+    // name="sectionName"/>.
     /// </summary>
     /// <param name="sectionName">The section to ignore.</param>
     public void IgnoreSection(string sectionName)

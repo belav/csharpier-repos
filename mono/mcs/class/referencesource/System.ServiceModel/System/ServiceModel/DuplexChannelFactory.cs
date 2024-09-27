@@ -127,7 +127,8 @@ namespace System.ServiceModel
         public DuplexChannelFactory(object callbackObject, string endpointConfigurationName)
             : this(callbackObject, endpointConfigurationName, null) { }
 
-        // TChannel provides ContractDescription, attr/config [TChannel,name] provides Binding, provide Address explicitly
+        // TChannel provides ContractDescription, attr/config [TChannel,name] provides Binding, provide
+        // Address explicitly
         public DuplexChannelFactory(
             object callbackObject,
             string endpointConfigurationName,

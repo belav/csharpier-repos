@@ -9,20 +9,21 @@ namespace System.Globalization
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    /*=================================KoreanCalendar==========================
-    **
-    ** Korean calendar is based on the Gregorian calendar.  And the year is an offset to Gregorian calendar.
-    ** That is,
-    **      Korean year = Gregorian year + 2333.  So 2000/01/01 A.D. is Korean 4333/01/01
-    **
-    ** 0001/1/1 A.D. is Korean year 2334.
-    **
-    **  Calendar support range:
-    **      Calendar    Minimum     Maximum
-    **      ==========  ==========  ==========
-    **      Gregorian   0001/01/01   9999/12/31
-    **      Korean      2334/01/01  12332/12/31
-    ============================================================================*/
+/*=================================KoreanCalendar==========================
+**
+** Korean calendar is based on the Gregorian calendar.  And the year is an offset to Gregorian
+calendar.
+** That is,
+**      Korean year = Gregorian year + 2333.  So 2000/01/01 A.D. is Korean 4333/01/01
+**
+** 0001/1/1 A.D. is Korean year 2334.
+**
+**  Calendar support range:
+**      Calendar    Minimum     Maximum
+**      ==========  ==========  ==========
+**      Gregorian   0001/01/01   9999/12/31
+**      Korean      2334/01/01  12332/12/31
+============================================================================*/
 
 
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -42,7 +43,8 @@ namespace System.Globalization
         //  So yearOffset = -2333
         // Gregorian year 2001 is Korean year 4334.
 
-        //m_EraInfo[0] = new EraInfo(1, new DateTime(1, 1, 1).Ticks, -2333, 2334, GregorianCalendar.MaxYear + 2333);
+        //m_EraInfo[0] = new EraInfo(1, new DateTime(1, 1, 1).Ticks, -2333, 2334, GregorianCalendar.MaxYear
+        // + 2333);
 
         // Initialize our era info.
         static internal EraInfo[] koreanEraInfo = new EraInfo[]
@@ -82,21 +84,22 @@ namespace System.Globalization
             get { return CalendarAlgorithmType.SolarCalendar; }
         }
 
-        /*=================================GetDefaultInstance==========================
-        **Action: Internal method to provide a default intance of KoreanCalendar.  Used by NLS+ implementation
-        **       and other calendars.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ============================================================================*/
-        /*
-        internal static Calendar GetDefaultInstance() {
-            if (m_defaultInstance == null) {
-                m_defaultInstance = new KoreanCalendar();
-            }
-            return (m_defaultInstance);
-        }
-        */
+/*=================================GetDefaultInstance==========================
+**Action: Internal method to provide a default intance of KoreanCalendar.  Used by NLS+
+implementation
+**       and other calendars.
+**Returns:
+**Arguments:
+**Exceptions:
+============================================================================*/
+/*
+internal static Calendar GetDefaultInstance() {
+if (m_defaultInstance == null) {
+m_defaultInstance = new KoreanCalendar();
+}
+return (m_defaultInstance);
+}
+*/
 
 
         public KoreanCalendar()
@@ -127,16 +130,16 @@ namespace System.Globalization
             return (helper.AddYears(time, years));
         }
 
-        /*=================================GetDaysInMonth==========================
-        **Action: Returns the number of days in the month given by the year and month arguments.
-        **Returns: The number of days in the given month.
-        **Arguments:
-        **      year The year in Korean calendar.
-        **      month The month
-        **      era     The Japanese era value.
-        **Exceptions
-        **  ArgumentException  If month is less than 1 or greater * than 12.
-        ============================================================================*/
+/*=================================GetDaysInMonth==========================
+**Action: Returns the number of days in the month given by the year and month arguments.
+**Returns: The number of days in the given month.
+**Arguments:
+**      year The year in Korean calendar.
+**      month The month
+**      era     The Japanese era value.
+**Exceptions
+**  ArgumentException  If month is less than 1 or greater * than 12.
+============================================================================*/
 
 
         public override int GetDaysInMonth(int year, int month, int era)

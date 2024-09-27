@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 public interface IRazorViewEngine : IViewEngine
 {
     /// <summary>
-    /// Finds the page with the given <paramref name="pageName"/> using view locations and information from the
+    /// Finds the page with the given <paramref name="pageName"/> using view locations and information
+    // from the
     /// <paramref name="context"/>.
     /// </summary>
     /// <param name="context">The <see cref="ActionContext"/>.</param>
@@ -25,10 +26,12 @@ public interface IRazorViewEngine : IViewEngine
     RazorPageResult FindPage(ActionContext context, string pageName);
 
     /// <summary>
-    /// Gets the page with the given <paramref name="pagePath"/>, relative to <paramref name="executingFilePath"/>
+    /// Gets the page with the given <paramref name="pagePath"/>, relative to <paramref
+    // name="executingFilePath"/>
     /// unless <paramref name="pagePath"/> is already absolute.
     /// </summary>
-    /// <param name="executingFilePath">The absolute path to the currently-executing page, if any.</param>
+    /// <param name="executingFilePath">The absolute path to the currently-executing page, if
+    // any.</param>
     /// <param name="pagePath">The path to the page.</param>
     /// <returns>The <see cref="RazorPageResult"/> of locating the page.</returns>
     /// <remarks><seealso cref="IViewEngine.GetView"/>.</remarks>
@@ -38,11 +41,13 @@ public interface IRazorViewEngine : IViewEngine
     /// Converts the given <paramref name="pagePath"/> to be absolute, relative to
     /// <paramref name="executingFilePath"/> unless <paramref name="pagePath"/> is already absolute.
     /// </summary>
-    /// <param name="executingFilePath">The absolute path to the currently-executing page, if any.</param>
+    /// <param name="executingFilePath">The absolute path to the currently-executing page, if
+    // any.</param>
     /// <param name="pagePath">The path to the page.</param>
     /// <returns>
     /// The combination of <paramref name="executingFilePath"/> and <paramref name="pagePath"/> if
-    /// <paramref name="pagePath"/> is a relative path. The <paramref name="pagePath"/> value (unchanged)
+    /// <paramref name="pagePath"/> is a relative path. The <paramref name="pagePath"/> value
+    // (unchanged)
     /// otherwise.
     /// </returns>
     string? GetAbsolutePath(string? executingFilePath, string? pagePath);

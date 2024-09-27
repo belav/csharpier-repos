@@ -348,7 +348,8 @@ namespace System.Xml.Xsl.Qil
         {
             CheckLiteralValue(node, typeof(QilName));
             // BUGBUG: Xslt constructs invalid QNames, so don't check this
-            //Check(ValidateNames.ValidateName(node.Prefix, node.LocalName, node.NamespaceUri, XPathNodeType.Element, ValidateNames.Flags.All), node, "QName is not valid");
+            //Check(ValidateNames.ValidateName(node.Prefix, node.LocalName, node.NamespaceUri,
+            // XPathNodeType.Element, ValidateNames.Flags.All), node, "QName is not valid");
             return XmlQueryTypeFactory.QNameX;
         }
 

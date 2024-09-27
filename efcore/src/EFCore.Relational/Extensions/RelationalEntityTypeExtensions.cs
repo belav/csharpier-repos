@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Entity type extension methods for relational database metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public static class RelationalEntityTypeExtensions
 {
@@ -51,7 +52,8 @@ public static class RelationalEntityTypeExtensions
     ///     Returns the default table name that would be used for this entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the table name for.</param>
-    /// <param name="truncate">A value indicating whether the name should be truncated to the max identifier length.</param>
+    /// <param name="truncate">A value indicating whether the name should be truncated to the max
+    // identifier length.</param>
     /// <returns>The default name of the table to which the entity type would be mapped.</returns>
     public static string? GetDefaultTableName(
         this IReadOnlyEntityType entityType,
@@ -124,7 +126,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the table name for.</param>
     /// <param name="name">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured table name.</returns>
     public static string? SetTableName(
         this IConventionEntityType entityType,
@@ -221,7 +224,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the schema for.</param>
     /// <param name="value">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetSchema(
         this IConventionEntityType entityType,
@@ -251,7 +255,8 @@ public static class RelationalEntityTypeExtensions
     ///     or <see langword="null" /> if not mapped to a table.
     /// </summary>
     /// <param name="entityType">The entity type to get the table name for.</param>
-    /// <returns>The name of the table to which the entity type is mapped prepended by the schema.</returns>
+    /// <returns>The name of the table to which the entity type is mapped prepended by the
+    // schema.</returns>
     public static string? GetSchemaQualifiedTableName(this IReadOnlyEntityType entityType)
     {
         var tableName = entityType.GetTableName();
@@ -269,7 +274,8 @@ public static class RelationalEntityTypeExtensions
     ///     or <see langword="null" /> if not mapped to a view.
     /// </summary>
     /// <param name="entityType">The entity type to get the view name for.</param>
-    /// <returns>The name of the view to which the entity type is mapped prepended by the schema.</returns>
+    /// <returns>The name of the view to which the entity type is mapped prepended by the
+    // schema.</returns>
     public static string? GetSchemaQualifiedViewName(this IReadOnlyEntityType entityType)
     {
         var viewName = entityType.GetViewName();
@@ -287,7 +293,8 @@ public static class RelationalEntityTypeExtensions
     #region View mapping
 
     /// <summary>
-    ///     Returns the name of the view to which the entity type is mapped or <see langword="null" /> if not mapped to a view.
+    ///     Returns the name of the view to which the entity type is mapped or <see langword="null" />
+    // if not mapped to a view.
     /// </summary>
     /// <param name="entityType">The entity type to get the view name for.</param>
     /// <returns>The name of the view to which the entity type is mapped.</returns>
@@ -345,7 +352,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the view name for.</param>
     /// <param name="name">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetViewName(
         this IConventionEntityType entityType,
@@ -420,7 +428,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the view schema for.</param>
     /// <param name="value">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured schema.</returns>
     public static string? SetViewSchema(
         this IConventionEntityType entityType,
@@ -459,7 +468,8 @@ public static class RelationalEntityTypeExtensions
         entityType.Name + "." + DefaultQueryNameBase;
 
     /// <summary>
-    ///     Returns the SQL string used to provide data for the entity type or <see langword="null" /> if not mapped to a SQL string.
+    ///     Returns the SQL string used to provide data for the entity type or <see langword="null" />
+    // if not mapped to a SQL string.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <returns>The SQL string used to provide data for the entity type.</returns>
@@ -487,7 +497,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="name">The SQL string to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetSqlQuery(
         this IConventionEntityType entityType,
@@ -517,7 +528,8 @@ public static class RelationalEntityTypeExtensions
     #region Function mapping
 
     /// <summary>
-    ///     Returns the name of the function to which the entity type is mapped or <see langword="null" /> if not mapped to a function.
+    ///     Returns the name of the function to which the entity type is mapped or <see langword="null"
+    // /> if not mapped to a function.
     /// </summary>
     /// <param name="entityType">The entity type to get the function name for.</param>
     /// <returns>The name of the function to which the entity type is mapped.</returns>
@@ -545,7 +557,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the function name for.</param>
     /// <param name="name">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetFunctionName(
         this IConventionEntityType entityType,
@@ -631,7 +644,8 @@ public static class RelationalEntityTypeExtensions
     ///     Maps the entity type to a stored procedure for deletes.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new stored procedure.</returns>
     public static IConventionStoredProcedure? SetDeleteStoredProcedure(
         this IConventionEntityType entityType,
@@ -730,7 +744,8 @@ public static class RelationalEntityTypeExtensions
     ///     Maps the entity type to a stored procedure for inserts.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new stored procedure.</returns>
     public static IConventionStoredProcedure? SetInsertStoredProcedure(
         this IConventionEntityType entityType,
@@ -829,7 +844,8 @@ public static class RelationalEntityTypeExtensions
     ///     Maps the entity type to a stored procedure for updates.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new stored procedure.</returns>
     public static IConventionStoredProcedure? SetUpdateStoredProcedure(
         this IConventionEntityType entityType,
@@ -882,7 +898,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the check constraint for.</param>
     /// <param name="name">The check constraint name.</param>
     /// <returns>
-    ///     The <see cref="IReadOnlyCheckConstraint" /> or <see langword="null" /> if no check constraint with the
+    ///     The <see cref="IReadOnlyCheckConstraint" /> or <see langword="null" /> if no check
+    // constraint with the
     ///     given name in the given entity type was found.
     /// </returns>
     public static IReadOnlyCheckConstraint? FindCheckConstraint(
@@ -901,7 +918,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the check constraint for.</param>
     /// <param name="name">The check constraint name.</param>
     /// <returns>
-    ///     The <see cref="IMutableCheckConstraint" /> or <see langword="null" /> if no check constraint with the
+    ///     The <see cref="IMutableCheckConstraint" /> or <see langword="null" /> if no check constraint
+    // with the
     ///     given name in the given entity type was found.
     /// </returns>
     public static IMutableCheckConstraint? FindCheckConstraint(
@@ -915,7 +933,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the check constraint for.</param>
     /// <param name="name">The check constraint name.</param>
     /// <returns>
-    ///     The <see cref="IConventionCheckConstraint" /> or <see langword="null" /> if no check constraint with the
+    ///     The <see cref="IConventionCheckConstraint" /> or <see langword="null" /> if no check
+    // constraint with the
     ///     given name in the given entity type was found.
     /// </returns>
     public static IConventionCheckConstraint? FindCheckConstraint(
@@ -929,7 +948,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the check constraint for.</param>
     /// <param name="name">The check constraint name.</param>
     /// <returns>
-    ///     The <see cref="ICheckConstraint" /> or <see langword="null" /> if no check constraint with the
+    ///     The <see cref="ICheckConstraint" /> or <see langword="null" /> if no check constraint with
+    // the
     ///     given name in the given entity type was found.
     /// </returns>
     public static ICheckConstraint? FindCheckConstraint(this IEntityType entityType, string name) =>
@@ -962,7 +982,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to add the check constraint to.</param>
     /// <param name="name">The check constraint name.</param>
     /// <param name="sql">The logical constraint sql used in the check constraint.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new check constraint.</returns>
     public static IConventionCheckConstraint AddCheckConstraint(
         this IConventionEntityType entityType,
@@ -1045,8 +1066,10 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <remarks>
     ///     This method does not return check constraints declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same check constraint more than once.
-    ///     Use <see cref="GetCheckConstraints(IReadOnlyEntityType)" /> to also return check constraints declared on base types.
+    ///     It is useful when iterating over all entity types to avoid processing the same check
+    // constraint more than once.
+    ///     Use <see cref="GetCheckConstraints(IReadOnlyEntityType)" /> to also return check constraints
+    // declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
     public static IEnumerable<IReadOnlyCheckConstraint> GetDeclaredCheckConstraints(
@@ -1058,8 +1081,10 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <remarks>
     ///     This method does not return check constraints declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same check constraint more than once.
-    ///     Use <see cref="GetCheckConstraints(IMutableEntityType)" /> to also return check constraints declared on base types.
+    ///     It is useful when iterating over all entity types to avoid processing the same check
+    // constraint more than once.
+    ///     Use <see cref="GetCheckConstraints(IMutableEntityType)" /> to also return check constraints
+    // declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
     public static IEnumerable<IMutableCheckConstraint> GetDeclaredCheckConstraints(
@@ -1071,8 +1096,10 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <remarks>
     ///     This method does not return check constraints declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same check constraint more than once.
-    ///     Use <see cref="GetCheckConstraints(IConventionEntityType)" /> to also return check constraints declared on base types.
+    ///     It is useful when iterating over all entity types to avoid processing the same check
+    // constraint more than once.
+    ///     Use <see cref="GetCheckConstraints(IConventionEntityType)" /> to also return check
+    // constraints declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
     public static IEnumerable<IConventionCheckConstraint> GetDeclaredCheckConstraints(
@@ -1084,8 +1111,10 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <remarks>
     ///     This method does not return check constraints declared on base types.
-    ///     It is useful when iterating over all entity types to avoid processing the same check constraint more than once.
-    ///     Use <see cref="GetCheckConstraints(IEntityType)" /> to also return check constraints declared on base types.
+    ///     It is useful when iterating over all entity types to avoid processing the same check
+    // constraint more than once.
+    ///     Use <see cref="GetCheckConstraints(IEntityType)" /> to also return check constraints
+    // declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
     public static IEnumerable<ICheckConstraint> GetDeclaredCheckConstraints(
@@ -1119,7 +1148,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="comment">The comment for the table.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured comment.</returns>
     public static string? SetComment(
         this IConventionEntityType entityType,
@@ -1153,7 +1183,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1170,7 +1201,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1187,7 +1219,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1204,7 +1237,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1221,7 +1255,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments of the given type.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1244,7 +1279,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments of the given type.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1263,7 +1299,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments of the given type.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1282,7 +1319,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns all configured entity type mapping fragments of the given type.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1301,7 +1339,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1318,7 +1357,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1336,7 +1376,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1355,7 +1396,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1372,7 +1414,8 @@ public static class RelationalEntityTypeExtensions
     ///         Returns the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1394,13 +1437,15 @@ public static class RelationalEntityTypeExtensions
     ///         Returns the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="storeObject">The identifier of a table-like store object.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>An object that represents an entity type mapping fragment.</returns>
     public static IConventionEntityTypeMappingFragment GetOrCreateMappingFragment(
         this IConventionEntityType entityType,
@@ -1418,7 +1463,8 @@ public static class RelationalEntityTypeExtensions
     ///         Removes the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1438,7 +1484,8 @@ public static class RelationalEntityTypeExtensions
     ///         Removes the entity type mapping for a particular table-like store object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -1446,7 +1493,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="storeObject">The identifier of a table-like store object.</param>
     /// <returns>
     ///     The removed <see cref="IConventionEntityTypeMappingFragment" /> or <see langword="null" />
-    ///     if no overrides for the given store object were found or the existing overrides were configured from a higher source.
+    ///     if no overrides for the given store object were found or the existing overrides were
+    // configured from a higher source.
     /// </returns>
     public static IConventionEntityTypeMappingFragment? RemoveMappingFragment(
         this IConventionEntityType entityType,
@@ -1616,7 +1664,8 @@ public static class RelationalEntityTypeExtensions
     ///     Sets a value indicating whether the associated table is ignored by Migrations.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <param name="excluded">A value indicating whether the associated table is ignored by Migrations.</param>
+    /// <param name="excluded">A value indicating whether the associated table is ignored by
+    // Migrations.</param>
     public static void SetIsTableExcludedFromMigrations(
         this IMutableEntityType entityType,
         bool? excluded
@@ -1630,8 +1679,10 @@ public static class RelationalEntityTypeExtensions
     ///     Sets a value indicating whether the associated table is ignored by Migrations.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <param name="excluded">A value indicating whether the associated table is ignored by Migrations.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="excluded">A value indicating whether the associated table is ignored by
+    // Migrations.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? SetIsTableExcludedFromMigrations(
         this IConventionEntityType entityType,
@@ -1651,7 +1702,8 @@ public static class RelationalEntityTypeExtensions
     ///     Sets a value indicating whether the associated table is ignored by Migrations.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <param name="excluded">A value indicating whether the associated table is ignored by Migrations.</param>
+    /// <param name="excluded">A value indicating whether the associated table is ignored by
+    // Migrations.</param>
     /// <param name="storeObject">The identifier of the table-like store object.</param>
     public static void SetIsTableExcludedFromMigrations(
         this IMutableEntityType entityType,
@@ -1664,9 +1716,11 @@ public static class RelationalEntityTypeExtensions
     ///     Sets a value indicating whether the associated table is ignored by Migrations.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <param name="excluded">A value indicating whether the associated table is ignored by Migrations.</param>
+    /// <param name="excluded">A value indicating whether the associated table is ignored by
+    // Migrations.</param>
     /// <param name="storeObject">The identifier of the table-like store object.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? SetIsTableExcludedFromMigrations(
         this IConventionEntityType entityType,
@@ -1679,11 +1733,13 @@ public static class RelationalEntityTypeExtensions
             .SetIsTableExcludedFromMigrations(excluded, fromDataAnnotation);
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for <see cref="IsTableExcludedFromMigrations(IReadOnlyEntityType)" />.
+    ///     Gets the <see cref="ConfigurationSource" /> for <see
+    // cref="IsTableExcludedFromMigrations(IReadOnlyEntityType)" />.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>
-    ///     The <see cref="ConfigurationSource" /> for <see cref="IsTableExcludedFromMigrations(IReadOnlyEntityType)" />.
+    ///     The <see cref="ConfigurationSource" /> for <see
+    // cref="IsTableExcludedFromMigrations(IReadOnlyEntityType)" />.
     /// </returns>
     public static ConfigurationSource? GetIsTableExcludedFromMigrationsConfigurationSource(
         this IConventionEntityType entityType
@@ -1699,7 +1755,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <param name="storeObject">The identifier of the table-like store object.</param>
     /// <returns>
-    ///     The <see cref="ConfigurationSource" /> for <see cref="IsTableExcludedFromMigrations(IReadOnlyEntityType, in StoreObjectIdentifier)" />.
+    ///     The <see cref="ConfigurationSource" /> for <see
+    // cref="IsTableExcludedFromMigrations(IReadOnlyEntityType, in StoreObjectIdentifier)" />.
     /// </returns>
     public static ConfigurationSource? GetIsTableExcludedFromMigrationsConfigurationSource(
         this IConventionEntityType entityType,
@@ -1742,7 +1799,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="strategy">The mapping strategy for the derived types.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetMappingStrategy(
         this IConventionEntityType entityType,
@@ -1778,7 +1836,8 @@ public static class RelationalEntityTypeExtensions
     ///     Gets a value indicating whether the specified entity is mapped to a JSON column.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <returns>A value indicating whether the associated entity type is mapped to a JSON column.</returns>
+    /// <returns>A value indicating whether the associated entity type is mapped to a JSON
+    // column.</returns>
     public static bool IsMappedToJson(this IReadOnlyEntityType entityType) =>
         !string.IsNullOrEmpty(entityType.GetContainerColumnName());
 
@@ -1798,7 +1857,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the container column name for.</param>
     /// <param name="columnName">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetContainerColumnName(
         this IConventionEntityType entityType,
@@ -1857,7 +1917,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the container column type mapping for.</param>
     /// <param name="typeMapping">The type mapping to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     [Obsolete("Container column mappings are now obtained from IColumnBase.StoreTypeMapping")]
     public static RelationalTypeMapping? SetContainerColumnTypeMapping(
@@ -1906,7 +1967,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="name">The name to be used.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetJsonPropertyName(
         this IConventionEntityType entityType,
@@ -1953,10 +2015,12 @@ public static class RelationalEntityTypeExtensions
         );
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for the JSON property name for a given entity type.
+    ///     Gets the <see cref="ConfigurationSource" /> for the JSON property name for a given entity
+    // type.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the JSON property name for a given entity type.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the JSON property name for a given entity
+    // type.</returns>
     public static ConfigurationSource? GetJsonPropertyNameConfigurationSource(
         this IConventionEntityType entityType
     ) =>

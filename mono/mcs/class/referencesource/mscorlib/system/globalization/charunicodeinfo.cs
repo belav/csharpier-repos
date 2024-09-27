@@ -65,12 +65,14 @@ namespace System.Globalization
         // The numeric value table, which is indexed by s_pNumericLevel1Index.
         // Every item contains the value for numeric value.
         // unsafe static double* s_pNumericValues;
-        // To get around the IA64 alignment issue.  Our double data is aligned in 8-byte boundary, but loader loads the embeded table starting
+        // To get around the IA64 alignment issue.  Our double data is aligned in 8-byte boundary, but
+        // loader loads the embeded table starting
         // at 4-byte boundary.  This cause a alignment issue since double is 8-byte.
         [SecurityCritical]
         static unsafe byte* s_pNumericValues;
 
-        // The digit value table, which is indexed by s_pNumericLevel1Index.  It shares the same indice as s_pNumericValues.
+        // The digit value table, which is indexed by s_pNumericLevel1Index.  It shares the same indice as
+        // s_pNumericValues.
         // Every item contains the value for decimal digit/digit value.
         [SecurityCritical]
         static unsafe DigitValues* s_pDigitValues;
@@ -109,7 +111,8 @@ namespace System.Globalization
             internal uint OffsetToNumbericValue; // DWORD
         }
 
-        // NOTE: It's important to specify pack size here, since the size of the structure is 2 bytes.  Otherwise,
+        // NOTE: It's important to specify pack size here, since the size of the structure is 2 bytes.
+        // Otherwise,
         // the default pack size will be 4.
 
         [StructLayout(LayoutKind.Sequential, Pack = 2)]
@@ -356,14 +359,16 @@ namespace System.Globalization
             Contract.Assert(ch >= 0 && ch <= 0x10ffff, "ch is not in valid Unicode range.");
             // Get the level 2 item from the highest 12 bit (8 - 19) of ch.
             ushort index = EndianSwap(s_pNumericLevel1Index[ch >> 8]);
-            // Get the level 2 WORD offset from the 4 - 7 bit of ch.  This provides the base offset of the level 3 table.
+            // Get the level 2 WORD offset from the 4 - 7 bit of ch.  This provides the base offset of the level
+            // 3 table.
             // The offset is referred to an float item in m_pNumericFloatData.
             // Note that & has the lower precedence than addition, so don't forget the parathesis.
             index = EndianSwap(s_pNumericLevel1Index[index + ((ch >> 4) & 0x000f)]);
             byte* pBytePtr = (byte*)&(s_pNumericLevel1Index[index]);
             // Get the result from the 0 -3 bit of ch.
 #if WIN64
-            // To get around the IA64 alignment issue.  Our double data is aligned in 8-byte boundary, but loader loads the embeded table starting
+            // To get around the IA64 alignment issue.  Our double data is aligned in 8-byte boundary, but
+            // loader loads the embeded table starting
             // at 4-byte boundary.  This cause a alignment issue since double is 8-byte.
             byte* pSourcePtr = &(s_pNumericValues[pBytePtr[(ch & 0x000f)] * sizeof(double)]);
             if (((long)pSourcePtr % 8) != 0)
@@ -391,7 +396,8 @@ namespace System.Globalization
             Contract.Assert(ch >= 0 && ch <= 0x10ffff, "ch is not in valid Unicode range.");
             // Get the level 2 item from the highest 12 bit (8 - 19) of ch.
             ushort index = s_pNumericLevel1Index[ch >> 8];
-            // Get the level 2 WORD offset from the 4 - 7 bit of ch.  This provides the base offset of the level 3 table.
+            // Get the level 2 WORD offset from the 4 - 7 bit of ch.  This provides the base offset of the level
+            // 3 table.
             // The offset is referred to an float item in m_pNumericFloatData.
             // Note that & has the lower precedence than addition, so don't forget the parathesis.
             index = s_pNumericLevel1Index[index + ((ch >> 4) & 0x000f)];
@@ -415,10 +421,12 @@ namespace System.Globalization
         ////////////////////////////////////////////////////////////////////////
         //
         //Returns the numeric value associated with the character c. If the character is a fraction,
-        // the return value will not be an integer. If the character does not have a numeric value, the return value is -1.
+        // the return value will not be an integer. If the character does not have a numeric value, the
+        // return value is -1.
         //
         //Returns:
-        //  the numeric value for the specified Unicode character.  If the character does not have a numeric value, the return value is -1.
+        //  the numeric value for the specified Unicode character.  If the character does not have a numeric
+        // value, the return value is -1.
         //Arguments:
         //      ch  a Unicode character
         //Exceptions:
@@ -458,7 +466,8 @@ namespace System.Globalization
         // If the character does not have a numeric value, the return value is -1.
         // From Unicode.org: Decimal Digits. Digits that can be used to form decimal-radix numbers.
         //Returns:
-        //  the decimal digit value for the specified Unicode character.  If the character does not have a decimal digit value, the return value is -1.
+        //  the decimal digit value for the specified Unicode character.  If the character does not have a
+        // decimal digit value, the return value is -1.
         //Arguments:
         //      ch  a Unicode character
         //Exceptions:
@@ -496,12 +505,15 @@ namespace System.Globalization
         //Action: Returns the digit value associated with the character c.
         // If the character does not have a numeric value, the return value is -1.
         // From Unicode.org: If the character represents a digit, not necessarily a decimal digit,
-        // the value is here. This covers digits which do not form decimal radix forms, such as the compatibility superscript digits.
+        // the value is here. This covers digits which do not form decimal radix forms, such as the
+        // compatibility superscript digits.
         //
-        // An example is: U+2460 IRCLED DIGIT ONE. This character has digit value 1, but does not have associcated decimal digit value.
+        // An example is: U+2460 IRCLED DIGIT ONE. This character has digit value 1, but does not have
+        // associcated decimal digit value.
         //
         //Returns:
-        //  the digit value for the specified Unicode character.  If the character does not have a digit value, the return value is -1.
+        //  the digit value for the specified Unicode character.  If the character does not have a digit
+        // value, the return value is -1.
         //Arguments:
         //      ch  a Unicode character
         //Exceptions:
@@ -580,7 +592,8 @@ namespace System.Globalization
             Contract.Assert(ch >= 0 && ch <= 0x10ffff, "ch is not in valid Unicode range.");
             // Get the level 2 item from the highest 12 bit (8 - 19) of ch.
             ushort index = EndianSwap(s_pCategoryLevel1Index[ch >> 8]);
-            // Get the level 2 WORD offset from the 4 - 7 bit of ch.  This provides the base offset of the level 3 table.
+            // Get the level 2 WORD offset from the 4 - 7 bit of ch.  This provides the base offset of the level
+            // 3 table.
             // Note that & has the lower precedence than addition, so don't forget the parathesis.
             index = EndianSwap(s_pCategoryLevel1Index[index + ((ch >> 4) & 0x000f)]);
             byte* pBytePtr = (byte*)&(s_pCategoryLevel1Index[index]);
@@ -591,7 +604,8 @@ namespace System.Globalization
             // Make sure that OtherNotAssigned is the last category in UnicodeCategory.
             // If that changes, change the following assertion as well.
             //
-            //Contract.Assert(uc >= 0 && uc <= UnicodeCategory.OtherNotAssigned, "Table returns incorrect Unicode category");
+            //Contract.Assert(uc >= 0 && uc <= UnicodeCategory.OtherNotAssigned, "Table returns incorrect
+            // Unicode category");
             return (uc);
         }
 
@@ -639,7 +653,8 @@ namespace System.Globalization
 
         ////////////////////////////////////////////////////////////////////////
         //
-        // Get the Unicode category of the character starting at index.  If the character is in BMP, charLength will return 1.
+        // Get the Unicode category of the character starting at index.  If the character is in BMP,
+        // charLength will return 1.
         // If the character is a valid surrogate pair, charLength will return 2.
         //
         ////////////////////////////////////////////////////////////////////////

@@ -14,7 +14,8 @@ public sealed class QuicException : IOException
     /// Initializes a new instance of the <see cref='QuicException'/> class.
     /// </summary>
     /// <param name="error">The error associated with the exception.</param>
-    /// <param name="applicationErrorCode">The application protocol error code associated with the error.</param>
+    /// <param name="applicationErrorCode">The application protocol error code associated with the
+    // error.</param>
     /// <param name="message">The message for the exception.</param>
     public QuicException(QuicError error, long? applicationErrorCode, string message)
         : this(error, applicationErrorCode, null, message, null) { }
@@ -23,8 +24,10 @@ public sealed class QuicException : IOException
     /// Initializes a new instance of the <see cref='QuicException'/> class.
     /// </summary>
     /// <param name="error">The error associated with the exception.</param>
-    /// <param name="applicationErrorCode">The application protocol error code associated with the error.</param>
-    /// <param name="transportErrorCode">The transport protocol error code associated with the error.</param>
+    /// <param name="applicationErrorCode">The application protocol error code associated with the
+    // error.</param>
+    /// <param name="transportErrorCode">The transport protocol error code associated with the
+    // error.</param>
     /// <param name="message">The message for the exception.</param>
     internal QuicException(
         QuicError error,
@@ -38,9 +41,11 @@ public sealed class QuicException : IOException
     /// Initializes a new instance of the <see cref='QuicException'/> class.
     /// </summary>
     /// <param name="error">The error associated with the exception.</param>
-    /// <param name="applicationErrorCode">The application protocol error code associated with the error.</param>
+    /// <param name="applicationErrorCode">The application protocol error code associated with the
+    // error.</param>
     /// <param name="message">The message for the exception.</param>
-    /// <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    /// <param name="innerException">The exception that is the cause of the current exception, or a null
+    // reference if no inner exception is specified.</param>
     internal QuicException(
         QuicError error,
         long? applicationErrorCode,
@@ -53,10 +58,13 @@ public sealed class QuicException : IOException
     /// Initializes a new instance of the <see cref='QuicException'/> class.
     /// </summary>
     /// <param name="error">The error associated with the exception.</param>
-    /// <param name="applicationErrorCode">The application protocol error code associated with the error.</param>
-    /// <param name="transportErrorCode">The transport protocol error code associated with the error.</param>
+    /// <param name="applicationErrorCode">The application protocol error code associated with the
+    // error.</param>
+    /// <param name="transportErrorCode">The transport protocol error code associated with the
+    // error.</param>
     /// <param name="message">The message for the exception.</param>
-    /// <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    /// <param name="innerException">The exception that is the cause of the current exception, or a null
+    // reference if no inner exception is specified.</param>
     internal QuicException(
         QuicError error,
         long? applicationErrorCode,
@@ -80,7 +88,9 @@ public sealed class QuicException : IOException
     /// The application protocol error code associated with the error.
     /// </summary>
     /// <remarks>
-    /// This property contains the error code set by the application layer when closing the connection (<see cref="QuicError.ConnectionAborted"/>) or closing a read/write direction of a QUIC stream (<see cref="QuicError.StreamAborted"/>). Contains null for all other errors.
+    /// This property contains the error code set by the application layer when closing the connection
+    // (<see cref="QuicError.ConnectionAborted"/>) or closing a read/write direction of a QUIC stream (<see
+    // cref="QuicError.StreamAborted"/>). Contains null for all other errors.
     /// </remarks>
     public long? ApplicationErrorCode { get; }
 

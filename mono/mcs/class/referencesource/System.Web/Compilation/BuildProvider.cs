@@ -11,26 +11,26 @@
 Class hierarchy
 
 BuildProvider
-    ProfileBuildProvider
-    BaseResourcesBuildProvider
-        ResXBuildProvider
-        ResourcesBuildProvider
-    XsdBuildProvider
-    WsdlBuildProvider
-    InternalBuildProvider
-        SourceFileBuildProvider
-        SimpleHandlerBuildProvider
-            WebServiceBuildProvider
-            WebHandlerBuildProvider
-            ImageGeneratorBuildProvider
-        BaseTemplateBuildProvider
-            ApplicationBuildProvider
-            TemplateControlBuildProvider
-                PageBuildProvider
-                UserControlBuildProvider
-                    MasterPageBuildProvider
-            PageThemeBuildProvider
-                GlobalPageThemeBuildProvider
+ProfileBuildProvider
+BaseResourcesBuildProvider
+ResXBuildProvider
+ResourcesBuildProvider
+XsdBuildProvider
+WsdlBuildProvider
+InternalBuildProvider
+SourceFileBuildProvider
+SimpleHandlerBuildProvider
+WebServiceBuildProvider
+WebHandlerBuildProvider
+ImageGeneratorBuildProvider
+BaseTemplateBuildProvider
+ApplicationBuildProvider
+TemplateControlBuildProvider
+PageBuildProvider
+UserControlBuildProvider
+MasterPageBuildProvider
+PageThemeBuildProvider
+GlobalPageThemeBuildProvider
 
 **********************************/
 
@@ -332,10 +332,10 @@ namespace System.Web.Compilation
             dependentBuildProvider.flags[isDependedOn] = true;
         }
 
-        /*
-         * Return the culture name for this provider (e.g. "fr" or "fr-fr").
-         * If no culture applies, return null.
-         */
+/*
+* Return the culture name for this provider (e.g. "fr" or "fr-fr").
+* If no culture applies, return null.
+*/
         internal string GetCultureName()
         {
             return Util.GetCultureName(VirtualPath);

@@ -42,7 +42,8 @@ namespace System.Xml
 
         internal override bool NextRight()
         {
-            // Make sure we do not get past the nodeTop if we call NextRight on a just initialized iterator and nodeTop has no children
+            // Make sure we do not get past the nodeTop if we call NextRight on a just initialized iterator and
+            // nodeTop has no children
             if (_currentNode == _nodeTop)
             {
                 _currentNode = null!;

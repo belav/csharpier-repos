@@ -61,9 +61,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         /// </summary>
         public ITextBuffer DataBuffer { get; }
 
-        // Set when a TextViewFilter is set.  We hold onto this to keep our TagSource objects alive even if Venus
-        // disconnects the subject buffer from the view temporarily (which they do frequently).  Otherwise, we have to
-        // re-compute all of the tag data when they re-connect it, and this causes issues like classification
+        // Set when a TextViewFilter is set.  We hold onto this to keep our TagSource objects alive even if
+        // Venus
+        // disconnects the subject buffer from the view temporarily (which they do frequently).  Otherwise,
+        // we have to
+        // re-compute all of the tag data when they re-connect it, and this causes issues like
+        // classification
         // flickering.
         private readonly ITagAggregator<ITag> _bufferTagAggregator;
 
@@ -130,7 +133,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     $"{nameof(ContainedDocument)}: {filePath}"
                 );
 
-                // We must jam a document into an existing workspace, which we'll assume is safe to do with OnDocumentAdded
+                // We must jam a document into an existing workspace, which we'll assume is safe to do with
+                // OnDocumentAdded
                 Workspace.OnDocumentAdded(
                     DocumentInfo.Create(
                         documentId,
@@ -188,7 +192,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
         private void OnDataBufferChanged(object sender, TextContentChangedEventArgs e)
         {
-            // we don't actually care what has changed in primary buffer. we just want to re-analyze secondary buffer
+            // we don't actually care what has changed in primary buffer. we just want to re-analyze secondary
+            // buffer
             // when primary buffer has changed to update diagnostic positions.
             _diagnosticAnalyzerService.Reanalyze(
                 this.Workspace,

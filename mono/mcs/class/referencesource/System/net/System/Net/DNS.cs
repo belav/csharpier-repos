@@ -38,26 +38,26 @@ namespace System.Net
         // If the host name is 255 chars, the last char must be a dot.
         private const int MaxHostName = 255;
 
-        /*++
+/*++
 
-        Routine Description:
+Routine Description:
 
-            Takes a native pointer (expressed as an int) to a hostent structure,
-            and converts the information in their to an IPHostEntry class. This
-            involves walking through an array of native pointers, and a temporary
-            ArrayList object is used in doing this.
+Takes a native pointer (expressed as an int) to a hostent structure,
+and converts the information in their to an IPHostEntry class. This
+involves walking through an array of native pointers, and a temporary
+ArrayList object is used in doing this.
 
-        Arguments:
+Arguments:
 
-            nativePointer   - Native pointer to hostent structure.
+nativePointer   - Native pointer to hostent structure.
 
 
 
-        Return Value:
+Return Value:
 
-            An IPHostEntry structure.
+An IPHostEntry structure.
 
-        --*/
+--*/
 
 #if !FEATURE_PAL
         private static IPHostEntry NativeToHostEntry(IntPtr nativePointer)
@@ -181,15 +181,15 @@ namespace System.Net
             return HostEntry;
         } // NativeToHostEntry
 
-        /*****************************************************************************
-         Function :    gethostbyname
+/*****************************************************************************
+Function :    gethostbyname
 
-         Abstract:     Queries DNS for hostname address
+Abstract:     Queries DNS for hostname address
 
-         Input Parameters: str (String to query)
+Input Parameters: str (String to query)
 
-         Returns: Void
-        ******************************************************************************/
+Returns: Void
+******************************************************************************/
 
         /// <devdoc>
         /// <para>Retrieves the <see cref='System.Net.IPHostEntry'/>
@@ -311,15 +311,15 @@ namespace System.Net
             return ipHostEntry;
         } // GetHostByName
 
-        /*****************************************************************************
-         Function :    gethostbyaddr
+/*****************************************************************************
+Function :    gethostbyaddr
 
-         Abstract:     Queries IP address string and tries to match with a host name
+Abstract:     Queries IP address string and tries to match with a host name
 
-         Input Parameters: str (String to query)
+Input Parameters: str (String to query)
 
-         Returns: IPHostEntry
-        ******************************************************************************/
+Returns: IPHostEntry
+******************************************************************************/
 
         /// <devdoc>
         /// <para>Creates an <see cref='System.Net.IPHostEntry'/>
@@ -351,18 +351,19 @@ namespace System.Net
             return ipHostEntry;
         } // GetHostByAddress
 
-        /*****************************************************************************
-         Function :    gethostbyaddr
+/*****************************************************************************
+Function :    gethostbyaddr
 
-         Abstract:     Queries IP address and tries to match with a host name
+Abstract:     Queries IP address and tries to match with a host name
 
-         Input Parameters: address (address to query)
+Input Parameters: address (address to query)
 
-         Returns: IPHostEntry
-        ******************************************************************************/
+Returns: IPHostEntry
+******************************************************************************/
 
         /// <devdoc>
-        /// <para>Creates an <see cref='System.Net.IPHostEntry'/> instance from an <see cref='System.Net.IPAddress'/>
+        /// <para>Creates an <see cref='System.Net.IPHostEntry'/> instance from an <see
+        // cref='System.Net.IPAddress'/>
         /// instance.</para>
         /// </devdoc>
 
@@ -390,7 +391,8 @@ namespace System.Net
         } // GetHostByAddress
 
         // Does internal IPAddress reverse and then forward lookups (for Legacy and current public methods).
-        // Legacy methods do not include IPv6, unless configed to by Socket.LegacySupportsIPv6 and Socket.OSSupportsIPv6.
+        // Legacy methods do not include IPv6, unless configed to by Socket.LegacySupportsIPv6 and
+        // Socket.OSSupportsIPv6.
         internal static IPHostEntry InternalGetHostByAddress(IPAddress address, bool includeIPv6)
         {
             GlobalLog.Print("Dns.InternalGetHostByAddress: " + address.ToString());
@@ -485,15 +487,15 @@ namespace System.Net
             throw exception;
         } // InternalGetHostByAddress
 
-        /*****************************************************************************
-         Function :    gethostname
+/*****************************************************************************
+Function :    gethostname
 
-         Abstract:     Queries the hostname from DNS
+Abstract:     Queries the hostname from DNS
 
-         Input Parameters:
+Input Parameters:
 
-         Returns: String
-        ******************************************************************************/
+Returns: String
+******************************************************************************/
 
         /// <devdoc>
         ///    <para>Gets the host name of the local machine.</para>
@@ -532,18 +534,18 @@ namespace System.Net
             return sb.ToString();
         }
 
-        /*****************************************************************************
-         Function :    resolve
+/*****************************************************************************
+Function :    resolve
 
-         Abstract:     Converts IP/hostnames to IP numerical address using DNS
-                       Additional methods provided for convenience
-                       (These methods will resolve strings and hostnames. In case of
-                       multiple IP addresses, the address returned is chosen arbitrarily.)
+Abstract:     Converts IP/hostnames to IP numerical address using DNS
+Additional methods provided for convenience
+(These methods will resolve strings and hostnames. In case of
+multiple IP addresses, the address returned is chosen arbitrarily.)
 
-         Input Parameters: host/IP
+Input Parameters: host/IP
 
-         Returns: IPAddress
-        ******************************************************************************/
+Returns: IPAddress
+******************************************************************************/
 
         /// <devdoc>
         /// <para>Creates an <see cref='System.Net.IPAddress'/>
@@ -574,8 +576,10 @@ namespace System.Net
             IPHostEntry ipHostEntry;
 
             // Everett Compat (#497786).
-            // Everett.Resolve() returns the IPv6 address, even when IPv6 is off.  Everett.GetHostByAddress() throws.  So
-            // if IPv6 is off and they passed one in, call InternalGetHostByName which (also for compat) just returns it.
+            // Everett.Resolve() returns the IPv6 address, even when IPv6 is off.  Everett.GetHostByAddress()
+            // throws.  So
+            // if IPv6 is off and they passed one in, call InternalGetHostByName which (also for compat) just
+            // returns it.
             if (
                 IPAddress.TryParse(hostName, out address)
                 && (
@@ -615,10 +619,12 @@ namespace System.Net
             return ipHostEntry;
         }
 
-        // Returns true if the resolution was successful. IPAddresses are not resolved, but return immediately.
+        // Returns true if the resolution was successful. IPAddresses are not resolved, but return
+        // immediately.
         // Resolving String.Empty is not supported for security reasons, this would return localhost IPs.
         //
-        // Exceptions are not thrown for performance reasons.  The resulting message would never reach the user.
+        // Exceptions are not thrown for performance reasons.  The resulting message would never reach the
+        // user.
         //
         // On Win7 SP1+ this also attempts to determine if the host
         // name was changed by DNS and should not be trusted as an SPN.
@@ -673,7 +679,8 @@ namespace System.Net
                 return true; // Trusted
             }
 
-            // AI_FQDN returns the FQDN that was used for resolution, rather than the name that the server returned.
+            // AI_FQDN returns the FQDN that was used for resolution, rather than the name that the server
+            // returned.
             // This helps us detect if CNAME aliases were traversed.
             IPHostEntry fqdnResult;
             if (
@@ -801,7 +808,8 @@ namespace System.Net
         }
 
         // Helpers for async GetHostByName, ResolveToAddresses, and Resolve - they're almost identical
-        // If hostName is an IPString and justReturnParsedIP==true then no reverse lookup will be attempted, but the orriginal address is returned.
+        // If hostName is an IPString and justReturnParsedIP==true then no reverse lookup will be attempted,
+        // but the orriginal address is returned.
         private static IAsyncResult HostResolutionBeginHelper(
             string hostName,
             bool justReturnParsedIp,
@@ -878,7 +886,8 @@ namespace System.Net
             // Start the resolve.
             ThreadPool.UnsafeQueueUserWorkItem(resolveCallback, asyncResult);
 
-            // Finish the flowing, maybe it completed?  This does nothing if we didn't initiate the flowing above.
+            // Finish the flowing, maybe it completed?  This does nothing if we didn't initiate the flowing
+            // above.
             asyncResult.FinishPostingAsyncOp();
             return asyncResult;
         }
@@ -925,7 +934,8 @@ namespace System.Net
             // Start the resolve.
             ThreadPool.UnsafeQueueUserWorkItem(resolveCallback, asyncResult);
 
-            // Finish the flowing, maybe it completed?  This does nothing if we didn't initiate the flowing above.
+            // Finish the flowing, maybe it completed?  This does nothing if we didn't initiate the flowing
+            // above.
             asyncResult.FinishPostingAsyncOp();
             return asyncResult;
         }

@@ -450,7 +450,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #endregion
         #endregion
 
-        // A Visitor that produces User understandable string of the given configuration represented by the BooleanExpression
+        // A Visitor that produces User understandable string of the given configuration represented by the
+        // BooleanExpression
         #region AsUserStringVisitor
         private class AsUserStringVisitor : Visitor<BoolDomainConstraint, StringBuilder>
         {

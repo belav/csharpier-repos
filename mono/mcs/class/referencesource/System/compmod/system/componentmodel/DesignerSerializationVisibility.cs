@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -29,7 +29,8 @@ namespace System.ComponentModel
         Visible,
 
         /// <devdoc>
-        ///    <para>The code generator will produce code for the contents of the object, rather than for the object itself.</para>
+        ///    <para>The code generator will produce code for the contents of the object, rather than for
+        // the object itself.</para>
         /// </devdoc>
         Content,
     }

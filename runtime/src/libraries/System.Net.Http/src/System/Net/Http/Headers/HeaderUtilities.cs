@@ -43,7 +43,8 @@ namespace System.Net.Http.Headers
             {
                 // Note that even if we check the value here, we can't prevent a user from adding an invalid quality
                 // value using Parameters.Add(). Even if we would prevent the user from adding an invalid value
-                // using Parameters.Add() they could always add invalid values using HttpHeaders.AddWithoutValidation().
+                // using Parameters.Add() they could always add invalid values using
+                // HttpHeaders.AddWithoutValidation().
                 // So this check is really for convenience to show users that they're trying to add an invalid
                 // value.
                 double d = value.GetValueOrDefault();
@@ -119,7 +120,8 @@ namespace System.Net.Http.Headers
             return builder.ToString();
         }
 
-        /// <summary>Transforms an ASCII character into its hexadecimal representation, adding the characters to a StringBuilder.</summary>
+        /// <summary>Transforms an ASCII character into its hexadecimal representation, adding the
+        // characters to a StringBuilder.</summary>
         private static void AddHexEscaped(byte c, ref ValueStringBuilder destination)
         {
             destination.Append('%');
@@ -296,7 +298,8 @@ namespace System.Net.Http.Headers
                 }
             }
 
-            // Since we never re-use a "found" value in 'y', we expect 'alreadyFound' to have all fields set to 'true'.
+            // Since we never re-use a "found" value in 'y', we expect 'alreadyFound' to have all fields set to
+            // 'true'.
             // Otherwise the two collections can't be equal and we should not get here.
             Debug.Assert(
                 Array.TrueForAll(alreadyFound, value => value),

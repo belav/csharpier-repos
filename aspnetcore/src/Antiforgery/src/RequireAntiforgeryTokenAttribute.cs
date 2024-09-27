@@ -6,7 +6,8 @@ namespace Microsoft.AspNetCore.Antiforgery;
 /// <summary>
 /// An attribute that can be used to indicate whether the antiforgery token must be validated.
 /// </summary>
-/// <param name="required">A value indicating whether the antiforgery token should be validated.</param>
+/// <param name="required">A value indicating whether the antiforgery token should be
+// validated.</param>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class RequireAntiforgeryTokenAttribute(bool required = true)
     : Attribute,

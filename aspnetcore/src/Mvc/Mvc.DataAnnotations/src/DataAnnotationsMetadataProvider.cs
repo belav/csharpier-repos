@@ -13,7 +13,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 /// <summary>
-/// An implementation of <see cref="IBindingMetadataProvider"/> and <see cref="IDisplayMetadataProvider"/> for
+/// An implementation of <see cref="IBindingMetadataProvider"/> and <see
+// cref="IDisplayMetadataProvider"/> for
 /// the System.ComponentModel.DataAnnotations attribute classes.
 /// </summary>
 internal sealed class DataAnnotationsMetadataProvider
@@ -66,9 +67,11 @@ internal sealed class DataAnnotationsMetadataProvider
         var scaffoldColumnAttribute = attributes.OfType<ScaffoldColumnAttribute>().FirstOrDefault();
         var uiHintAttribute = attributes.OfType<UIHintAttribute>().FirstOrDefault();
 
-        // Special case the [DisplayFormat] attribute hanging off an applied [DataType] attribute. This property is
+        // Special case the [DisplayFormat] attribute hanging off an applied [DataType] attribute. This
+        // property is
         // non-null for DataType.Currency, DataType.Date, DataType.Time, and potentially custom [DataType]
-        // subclasses. The DataType.Currency, DataType.Date, and DataType.Time [DisplayFormat] attributes have a
+        // subclasses. The DataType.Currency, DataType.Date, and DataType.Time [DisplayFormat] attributes
+        // have a
         // non-null DataFormatString and the DataType.Date and DataType.Time [DisplayFormat] attributes have
         // ApplyFormatInEditMode==true.
         if (displayFormatAttribute == null && dataTypeAttribute != null)
@@ -185,7 +188,8 @@ internal sealed class DataAnnotationsMetadataProvider
             //
             // Order EnumDisplayNamesAndValues by DisplayAttribute.Order, then by the order of Enum.GetNames().
             // That method orders by absolute value, then its behavior is undefined (but hopefully stable).
-            // Add to EnumNamesAndValues in same order but Dictionary does not guarantee order will be preserved.
+            // Add to EnumNamesAndValues in same order but Dictionary does not guarantee order will be
+            // preserved.
 
             var groupedDisplayNamesAndValues = new List<KeyValuePair<EnumGroupAndName, string>>();
             var namesAndValues = new Dictionary<string, string>();
@@ -439,7 +443,8 @@ internal sealed class DataAnnotationsMetadataProvider
         return field.Name;
     }
 
-    // Return non-empty group specified in a [Display] attribute for a field, if any; string.Empty otherwise.
+    // Return non-empty group specified in a [Display] attribute for a field, if any; string.Empty
+    // otherwise.
     private static string GetDisplayGroup(FieldInfo field)
     {
         var display = field.GetCustomAttribute<DisplayAttribute>(inherit: false);

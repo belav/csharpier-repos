@@ -36,7 +36,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of Saml2AudienceRestriction.
         /// </summary>
-        /// <param name="audiences">The collection of audience elements contained in this restriction.</param>
+        /// <param name="audiences">The collection of audience elements contained in this
+        // restriction.</param>
         public Saml2AudienceRestriction(IEnumerable<Uri> audiences)
         {
             if (null == audiences)

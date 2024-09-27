@@ -195,7 +195,8 @@ namespace AppHost.Bundle.Tests
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/54234")]
-        // NOTE: when enabling this test take a look at commented code marked by "ACTIVE ISSUE:" in SharedTestState
+        // NOTE: when enabling this test take a look at commented code marked by "ACTIVE ISSUE:" in
+        // SharedTestState
         public void SelfContained_R2R_Composite()
         {
             var singleFile = sharedTestState.SelfContainedCompositeApp.Bundle(BundleOptions.None);
@@ -225,7 +226,8 @@ namespace AppHost.Bundle.Tests
                 );
 
                 // ACTIVE ISSUE: https://github.com/dotnet/runtime/issues/54234
-                //               This should be an app built with the equivalent of PublishReadyToRun=true and PublishReadyToRunComposite=true
+                //               This should be an app built with the equivalent of PublishReadyToRun=true and
+                // PublishReadyToRunComposite=true
                 SelfContainedCompositeApp = SingleFileTestApp.CreateSelfContained("AppWithSubDirs");
                 BundleHelper.AddLongNameContentToAppWithSubDirs(
                     SelfContainedCompositeApp.NonBundledLocation

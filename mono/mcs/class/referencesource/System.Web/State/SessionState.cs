@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * HttpSessionState
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* HttpSessionState
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 
 namespace System.Web.SessionState
 {
@@ -57,44 +57,44 @@ namespace System.Web.SessionState
     {
         string SessionID { get; }
 
-        /*
-         * The length of a session before it times out, in minutes.
-         */
+/*
+* The length of a session before it times out, in minutes.
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         int Timeout { get; set; }
 
-        /*
-         * Is this a new session?
-         */
+/*
+* Is this a new session?
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         bool IsNewSession { get; }
 
-        /*
-         * Is session state in a separate process
-         */
+/*
+* Is session state in a separate process
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         SessionStateMode Mode { get; }
 
-        /*
-         * Is session state cookieless?
-         */
+/*
+* Is session state cookieless?
+*/
         bool IsCookieless { get; }
 
         HttpCookieMode CookieMode { get; }
 
-        /*
-         * Abandon the session.
-         *
-         */
+/*
+* Abandon the session.
+*
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -201,9 +201,9 @@ namespace System.Web.SessionState
             get { return _container; }
         }
 
-        /*
-         * The Id of the session.
-         */
+/*
+* The Id of the session.
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -213,9 +213,9 @@ namespace System.Web.SessionState
             get { return _container.SessionID; }
         }
 
-        /*
-         * The length of a session before it times out, in minutes.
-         */
+/*
+* The length of a session before it times out, in minutes.
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -226,9 +226,9 @@ namespace System.Web.SessionState
             set { _container.Timeout = value; }
         }
 
-        /*
-         * Is this a new session?
-         */
+/*
+* Is this a new session?
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -238,9 +238,9 @@ namespace System.Web.SessionState
             get { return _container.IsNewSession; }
         }
 
-        /*
-         * Is session state in a separate process
-         */
+/*
+* Is session state in a separate process
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -250,9 +250,9 @@ namespace System.Web.SessionState
             get { return _container.Mode; }
         }
 
-        /*
-         * Is session state cookieless?
-         */
+/*
+* Is session state cookieless?
+*/
         public bool IsCookieless
         {
             get { return _container.IsCookieless; }
@@ -263,10 +263,10 @@ namespace System.Web.SessionState
             get { return _container.CookieMode; }
         }
 
-        /*
-         * Abandon the session.
-         *
-         */
+/*
+* Abandon the session.
+*
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

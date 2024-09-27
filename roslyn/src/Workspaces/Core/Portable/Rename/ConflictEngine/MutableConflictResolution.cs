@@ -16,7 +16,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 {
     /// <summary>
-    /// The result of the conflict engine. Can be made immutable by calling <see cref="ToConflictResolution()"/>.
+    /// The result of the conflict engine. Can be made immutable by calling <see
+    // cref="ToConflictResolution()"/>.
     /// </summary>
     internal sealed class MutableConflictResolution(
         Solution oldSolution,

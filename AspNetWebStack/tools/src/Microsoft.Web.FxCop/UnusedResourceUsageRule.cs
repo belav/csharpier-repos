@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -84,7 +85,8 @@ namespace Microsoft.Web.FxCop
                     var property = methodBeingCalled.DeclaringMember as PropertyNode;
 
                     ISet<PropertyNode> properties = null;
-                    // Look up the assembly from the dictionary. If the assembly could not be looked up, the resource must have been declared outside the current assembly
+                    // Look up the assembly from the dictionary. If the assembly could not be looked up, the resource
+                    // must have been declared outside the current assembly
                     if (
                         _usedResources.TryGetValue(
                             (AssemblyNode)property.DeclaringType.DeclaringModule,
@@ -129,7 +131,8 @@ namespace Microsoft.Web.FxCop
         }
 
         /// <summary>
-        /// Hack to determine if the file is "Common*Resources.resx" that is shared amongst multiple WebStack projects.
+        /// Hack to determine if the file is "Common*Resources.resx" that is shared amongst multiple
+        // WebStack projects.
         /// Strings in this resx are ignored since they may have dependencies outside the current assembly.
         /// </summary>
         private static bool IsCommonResource(PropertyNode property)

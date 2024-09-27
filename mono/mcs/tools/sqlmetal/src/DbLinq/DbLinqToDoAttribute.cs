@@ -31,7 +31,8 @@ namespace DbLinq
     /// <summary>
     /// This attribute is used to mark unterminated methods.
     /// There are some differences between MONO_STRICT and non-strict modes
-    /// - in MONO_STRICT, we inherit from the MonoTODO attribute, and use its Comment property and ctor()
+    /// - in MONO_STRICT, we inherit from the MonoTODO attribute, and use its Comment property and
+    // ctor()
     /// - in non-strict, we do our own cook
     /// </summary>
     internal class DbLinqToDoAttribute

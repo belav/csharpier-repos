@@ -34,7 +34,8 @@ namespace System.Security.Cryptography.Tests
         public static bool SupportsC2pnb163v1 { get; } =
             IsCurveSupported(EccTestData.C2pnb163v1Key1.Curve.Oid);
 
-        // Some platforms support explicitly specifying these curves, but do not support specifying them by name.
+        // Some platforms support explicitly specifying these curves, but do not support specifying them by
+        // name.
         public static bool ExplicitNamedSameSupport { get; } = !PlatformDetection.IsAndroid;
         public static bool SupportsSect163k1Explicit { get; } =
             SupportsSect163k1 || (!ExplicitNamedSameSupport && SupportsExplicitCurves);
@@ -240,7 +241,8 @@ qtlbnispri1a/EghiaPQ0po=";
         public void ReadNistP521EncryptedPkcs8_Pbes2_Aes128_Sha384_PasswordBytes()
         {
             // PBES2, PBKDF2 (SHA384), AES128
-            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Unit test key.")]
+            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+            // approved. Unit test key.")]
             const string base64 =
                 @"
 MIIBXTBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQI/JyXWyp/t3kCAggA

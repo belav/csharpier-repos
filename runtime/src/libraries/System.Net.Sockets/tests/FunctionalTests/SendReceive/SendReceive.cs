@@ -1550,7 +1550,8 @@ namespace System.Net.Sockets.Tests
             bool mayShutdownGraceful = UsesSync && PlatformDetection.IsLinux && receiveOrSend;
 
             // We try this a couple of times to deal with a timing race: if the Dispose happens
-            // before the operation is started, the peer won't see a ConnectionReset SocketException and we won't
+            // before the operation is started, the peer won't see a ConnectionReset SocketException and we
+            // won't
             // see a SocketException either.
             int msDelay = 100;
             await RetryHelper.ExecuteAsync(
@@ -1755,8 +1756,10 @@ namespace System.Net.Sockets.Tests
                             )
                         ).ToArray();
 
-                        // Give a bit of time for the pool to start executing the receives.  It's possible this won't be enough,
-                        // in which case the test we could get a false negative on the test, but we won't get spurious failures.
+                        // Give a bit of time for the pool to start executing the receives.  It's possible this won't be
+                        // enough,
+                        // in which case the test we could get a false negative on the test, but we won't get spurious
+                        // failures.
                         Thread.Sleep(1000);
 
                         // Now send to each socket.

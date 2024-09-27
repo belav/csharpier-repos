@@ -16,7 +16,8 @@ namespace System.ComponentModel
         private StandardValuesCollection? _values;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.TypeListConverter'/> class using
+        /// Initializes a new instance of the <see cref='System.ComponentModel.TypeListConverter'/> class
+        // using
         /// the type array as the available types.
         /// </summary>
         protected TypeListConverter(Type[] types)

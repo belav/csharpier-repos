@@ -29,9 +29,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Dev12 forces the receiver to be typed to dynamic to workaround a bug in the runtime binder.
                 // See DynamicRewriter::FixupIndexedProperty:
-                // "If we don't do this, then the calling object is statically typed and we pass the UseCompileTimeType to the runtime binder."
+                // "If we don't do this, then the calling object is statically typed and we pass the
+                // UseCompileTimeType to the runtime binder."
                 // However, with the cast the scenarios don't work either, so we don't mimic Dev12.
-                // loweredReceiver = BoundConversion.Synthesized(loweredReceiver.Syntax, loweredReceiver, Conversion.Identity, false, false, null, DynamicTypeSymbol.Instance);
+                // loweredReceiver = BoundConversion.Synthesized(loweredReceiver.Syntax, loweredReceiver,
+                // Conversion.Identity, false, false, null, DynamicTypeSymbol.Instance);
 
                 result = _dynamicFactory
                     .MakeDynamicGetMember(loweredReceiver, indexedPropertyName, resultIndexed: true)
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (isLeftOfAssignment && indexer.RefKind == RefKind.None)
             {
                 // This is an indexer set access. We return a BoundIndexerAccess node here.
-                // This node will be rewritten with MakePropertyAssignment when rewriting the enclosing BoundAssignmentOperator.
+                // This node will be rewritten with MakePropertyAssignment when rewriting the enclosing
+                // BoundAssignmentOperator.
 
                 return oldNodeOpt != null
                     ? oldNodeOpt.Update(
@@ -907,7 +910,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Used to produce an expression translating <paramref name="loweredExpr"/> to an integer offset
         /// according to the <paramref name="strategy"/>.
-        /// The implementation should be in sync with <see cref="DetermineMakePatternIndexOffsetExpressionStrategy"/>.
+        /// The implementation should be in sync with <see
+        // cref="DetermineMakePatternIndexOffsetExpressionStrategy"/>.
         /// </summary>
         /// <param name="loweredExpr">The lowered input for the translation</param>
         /// <param name="lengthAccess">
@@ -980,7 +984,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Determine the lowering strategy for translating a System.Index value to an integer offset value
-        /// and prepare the lowered input for the translation process handled by <see cref="MakePatternIndexOffsetExpression"/>.
+        /// and prepare the lowered input for the translation process handled by <see
+        // cref="MakePatternIndexOffsetExpression"/>.
         /// The implementation should be in sync with <see cref="MakePatternIndexOffsetExpression"/>.
         /// </summary>
         private BoundExpression DetermineMakePatternIndexOffsetExpressionStrategy(
@@ -1347,7 +1352,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     lengthAccess = VisitExpression(node.LengthOrCountAccess);
 
-                    // If length access is a local, then we are evaluating a pattern and don't need to capture the value.
+                    // If length access is a local, then we are evaluating a pattern and don't need to capture the
+                    // value.
                     if (
                         (rewriteFlags & captureLength) != 0
                         && lengthAccess.Kind is not BoundKind.Local

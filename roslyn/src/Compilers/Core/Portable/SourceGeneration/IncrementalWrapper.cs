@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis
     /// Wraps an incremental generator in a dummy <see cref="ISourceGenerator"/> interface.
     /// </summary>
     /// <remarks>
-    /// Allows us to treat both generator types as ISourceGenerator externally and not change the public API.
+    /// Allows us to treat both generator types as ISourceGenerator externally and not change the public
+    // API.
     /// Inside the driver we unwrap and use the actual generator instance.
     /// </remarks>
     internal sealed class IncrementalGeneratorWrapper : ISourceGenerator

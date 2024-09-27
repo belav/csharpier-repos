@@ -5,10 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * Wraps a Task class, optionally overriding the State object (since the Task Asynchronous Pattern doesn't normally use them).
- *
- * Copyright (c) 2010 Microsoft Corporation
- */
+* Wraps a Task class, optionally overriding the State object (since the Task Asynchronous Pattern
+doesn't normally use them).
+*
+* Copyright (c) 2010 Microsoft Corporation
+*/
 
 namespace System.Web
 {

@@ -17,7 +17,8 @@ namespace System.Text.Json.Serialization.Tests
             obj.Verify();
             string reserialized = JsonSerializer.Serialize(obj.Document);
 
-            // Properties in the exported json will be in the order that they were reflected, doing a quick check to see that
+            // Properties in the exported json will be in the order that they were reflected, doing a quick
+            // check to see that
             // we end up with the same length (i.e. same amount of data) to start.
             Assert.Equal(JsonDocumentClass.s_json.StripWhitespace().Length, reserialized.Length);
 
@@ -34,7 +35,8 @@ namespace System.Text.Json.Serialization.Tests
             obj.Verify();
             string reserialized = JsonSerializer.Serialize(obj.Document);
 
-            // Properties in the exported json will be in the order that they were reflected, doing a quick check to see that
+            // Properties in the exported json will be in the order that they were reflected, doing a quick
+            // check to see that
             // we end up with the same length (i.e. same amount of data) to start.
             Assert.Equal(
                 JsonDocumentArrayClass.s_json.StripWhitespace().Length,
@@ -49,7 +51,8 @@ namespace System.Text.Json.Serialization.Tests
         [Theory, InlineData(5), InlineData(10), InlineData(20), InlineData(1024)]
         public void ReadJsonDocumentFromStream(int defaultBufferSize)
         {
-            // Streams need to read ahead when they hit objects or arrays that are assigned to JsonElement or object.
+            // Streams need to read ahead when they hit objects or arrays that are assigned to JsonElement or
+            // object.
 
             byte[] data = Encoding.UTF8.GetBytes(
                 @"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]}"

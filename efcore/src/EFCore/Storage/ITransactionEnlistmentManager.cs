@@ -10,12 +10,14 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         Manages the current <see cref="Transaction" />.
 ///     </para>
 ///     <para>
-///         This interface is typically used by database providers (and other extensions). It is generally
+///         This interface is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public interface ITransactionEnlistmentManager

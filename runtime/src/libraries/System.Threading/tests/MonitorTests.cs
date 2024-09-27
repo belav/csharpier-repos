@@ -269,7 +269,8 @@ namespace System.Threading.Tests
                 }
             }
 
-            // When the current thread has the lock, have background threads wait for the lock in various ways. After a short
+            // When the current thread has the lock, have background threads wait for the lock in various ways.
+            // After a short
             // duration, release the lock and allow the background threads to acquire the lock.
             {
                 var backgroundTestDelegates = new List<Action<object>>();
@@ -378,7 +379,8 @@ namespace System.Threading.Tests
                     waitForThread();
             }
 
-            // When the current thread has the lock, have background threads wait for the lock in various ways and time out
+            // When the current thread has the lock, have background threads wait for the lock in various ways
+            // and time out
             // after a short duration
             {
                 var backgroundTestDelegates = new List<Action<object>>();

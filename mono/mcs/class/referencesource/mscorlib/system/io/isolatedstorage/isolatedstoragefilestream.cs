@@ -4,17 +4,17 @@
 //
 // ==--==
 /*============================================================
- *
- * Class:  IsolatedStorageFileStream
+*
+* Class:  IsolatedStorageFileStream
 //
 // <OWNER>Microsoft</OWNER>
- *
- *
- * Purpose: Provides access to files using the same interface as FileStream
- *
- * Date:  Feb 18, 2000
- *
- ===========================================================*/
+*
+*
+* Purpose: Provides access to files using the same interface as FileStream
+*
+* Date:  Feb 18, 2000
+*
+===========================================================*/
 namespace System.IO.IsolatedStorage
 {
     using System;
@@ -621,12 +621,12 @@ namespace System.IO.IsolatedStorage
 
             int allign = s_BlockSize - (int)(oldLen & ((ulong)s_BlockSize - 1));
 
-            /*
-                this will never happen since we already handled this case
-                leaving this code here for documentation
-            if ((ulong)allign > rem)
-                allign = (int)rem;
-            */
+/*
+this will never happen since we already handled this case
+leaving this code here for documentation
+if ((ulong)allign > rem)
+allign = (int)rem;
+*/
 
             m_fs.Write(buffer, 0, allign);
             rem -= (ulong)allign;

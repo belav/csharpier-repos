@@ -452,7 +452,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="graphics">Chart graphics.</param>
         /// <param name="textPosition">Text position.</param>
-        /// <param name="noSpacingForCenteredText">True if text allowed to be outside of position when centered.</param>
+        /// <param name="noSpacingForCenteredText">True if text allowed to be outside of position when
+        // centered.</param>
         /// <param name="getTextPosition">True if position text must be returned by the method.</param>
         /// <returns>Text actual position if required.</returns>
         internal RectangleF DrawText(
@@ -1005,7 +1006,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets text spacing on four different sides in relative coordinates.
         /// </summary>
-        /// <param name="annotationRelative">Indicates that spacing is in annotation relative coordinates.</param>
+        /// <param name="annotationRelative">Indicates that spacing is in annotation relative
+        // coordinates.</param>
         /// <returns>Rectangle with text spacing values.</returns>
         internal virtual RectangleF GetTextSpacing(out bool annotationRelative)
         {

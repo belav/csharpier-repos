@@ -76,7 +76,7 @@ namespace Novell.Directory.Ldap
     /// operating systems do not time slice.
     ///
     /// </summary>
-    /*package*/
+/*package*/
     sealed class Connection
     {
         public event CertificateValidationCallback OnCertificateValidation;
@@ -134,7 +134,7 @@ namespace Novell.Directory.Ldap
         /// </returns>
         internal bool Cloned
         {
-            /* package */
+/* package */
 
             get { return (cloneCount > 0); }
         }
@@ -148,7 +148,7 @@ namespace Novell.Directory.Ldap
         /// <summary> gets the host used for this connection</summary>
         internal System.String Host
         {
-            /* package */
+/* package */
 
             get { return host; }
         }
@@ -156,7 +156,7 @@ namespace Novell.Directory.Ldap
         /// <summary> gets the port used for this connection</summary>
         internal int Port
         {
-            /* package */
+/* package */
 
             get { return port; }
         }
@@ -165,10 +165,10 @@ namespace Novell.Directory.Ldap
         /// <summary> sets the writeSemaphore id used for active bind operation</summary>
         internal int BindSemId
         {
-            /* package */
+/* package */
 
             get { return bindSemaphoreId; }
-            /* package */
+/* package */
 
             set
             {
@@ -180,7 +180,7 @@ namespace Novell.Directory.Ldap
         /// <summary> checks if the writeSemaphore id used for active bind operation is clear</summary>
         internal bool BindSemIdClear
         {
-            /* package */
+/* package */
 
             get
             {
@@ -197,7 +197,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         internal bool Bound
         {
-            /* package */
+/* package */
 
             get
             {
@@ -213,7 +213,7 @@ namespace Novell.Directory.Ldap
         /// <summary> Return whether a connection has been made</summary>
         internal bool Connected
         {
-            /* package */
+/* package */
 
             get { return (in_Renamed != null); }
         }
@@ -238,10 +238,10 @@ namespace Novell.Directory.Ldap
         /// </param>
         internal BindProperties BindProperties
         {
-            /* package */
+/* package */
 
             get { return bindProperties; }
-            /* package */
+/* package */
 
             set
             {
@@ -276,7 +276,7 @@ namespace Novell.Directory.Ldap
         /// </returns>
         internal System.String ConnectionName
         {
-            /*package*/
+/*package*/
 
             get { return name; }
         }
@@ -298,12 +298,12 @@ namespace Novell.Directory.Ldap
         private LBEREncoder encoder;
         private LBERDecoder decoder;
 
-        /*
-        * socket is the current socket being used.
-        * nonTLSBackup is the backup socket if startTLS is called.
-        * if nonTLSBackup is null then startTLS has not been called,
-        * or stopTLS has been called to end TLS protection
-        */
+/*
+* socket is the current socket being used.
+* nonTLSBackup is the backup socket if startTLS is called.
+* if nonTLSBackup is null then startTLS has not been called,
+* or stopTLS has been called to end TLS protection
+*/
         private System.Net.Sockets.Socket sock = null;
         private System.Net.Sockets.TcpClient socket = null;
         private System.Net.Sockets.TcpClient nonTLSBackup = null;
@@ -358,13 +358,13 @@ namespace Novell.Directory.Ldap
         // method in LdapConnection.  Future releases might require
         // these to be local variables that can be modified using
         // the setProperty method.
-        /* package */
+/* package */
         internal static System.String sdk;
 
-        /* package */
+/* package */
         internal static System.Int32 protocol;
 
-        /* package */
+/* package */
         internal static System.String security = "simple";
 
         /// <summary> Create a new Connection object
@@ -372,7 +372,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="factory">specifies the factory to use to produce SSL sockets.
         /// </param>
-        /* package */
+/* package */
         //		internal Connection(LdapSocketFactory factory)
         internal Connection()
         {
@@ -392,7 +392,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> a shallow copy of this object
         /// </returns>
-        /* package */
+/* package */
         internal System.Object copy()
         {
             Connection c = new Connection();
@@ -414,7 +414,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> the ephemeral message id that identifies semaphore's owner
         /// </returns>
-        /* package */
+/* package */
         internal int acquireWriteSemaphore()
         {
             return acquireWriteSemaphore(0);
@@ -435,7 +435,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <returns> the semaphore value used to acquire the lock
         /// </returns>
-        /* package */
+/* package */
         internal int acquireWriteSemaphore(int msgId)
         {
             int id = msgId;
@@ -488,7 +488,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="msgId">a value that identifies the owner of this semaphore
         /// </param>
-        /* package */
+/* package */
         internal void freeWriteSemaphore(int msgId)
         {
             lock (writeSemaphore)
@@ -521,14 +521,14 @@ namespace Novell.Directory.Ldap
             return;
         }
 
-        /*
-        * Wait until the reader thread ID matches the specified parameter.
-        * Null = wait for the reader to terminate
-        * Non Null = wait for the reader to start
-        * Returns when the ID matches, i.e. reader stopped, or reader started.
-        *
-        * @param the thread id to match
-        */
+/*
+* Wait until the reader thread ID matches the specified parameter.
+* Null = wait for the reader to terminate
+* Non Null = wait for the reader to start
+* Returns when the ID matches, i.e. reader stopped, or reader started.
+*
+* @param the thread id to match
+*/
         private void waitForReader(Thread thread)
         {
             // wait for previous reader thread to terminate
@@ -558,16 +558,16 @@ namespace Novell.Directory.Ldap
                 // active.
                 try
                 {
-                    /*
-                    * The reader thread may start and immediately terminate.
-                    * To prevent the waitForReader from waiting forever
-                    * for the dead to rise, we leave traces of the deceased.
-                    * If the thread is already gone, we throw an exception.
-                    */
+/*
+* The reader thread may start and immediately terminate.
+* To prevent the waitForReader from waiting forever
+* for the dead to rise, we leave traces of the deceased.
+* If the thread is already gone, we throw an exception.
+*/
                     if (thread == deadReader)
                     {
                         if (thread == null)
-                            /* then we wanted a shutdown */
+/* then we wanted a shutdown */
                             return;
                         System.IO.IOException lex = deadReaderException;
                         deadReaderException = null;
@@ -620,14 +620,14 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <param name="port">The port on the host to connect to.
         /// </param>
-        /* package */
+/* package */
         internal void connect(System.String host, int port)
         {
             connect(host, port, 0);
             return;
         }
 
-        /****************************************************************************/
+/****************************************************************************/
         public bool ServerCertificateValidation(
             Syscert.X509Certificate certificate,
             Syscert.X509Chain chain,
@@ -660,7 +660,7 @@ namespace Novell.Directory.Ldap
             }
         }
 
-        /***********************************************************************/
+/***********************************************************************/
         /// <summary> Constructs a TCP/IP connection to a server specified in host and port.
         /// Starts the reader thread.
         ///
@@ -675,10 +675,10 @@ namespace Novell.Directory.Ldap
         /// </param>
         private void connect(System.String host, int port, int semaphoreId)
         {
-            /* Synchronized so all variables are in a consistant state and
-            * so that another thread isn't doing a connect, disconnect, or clone
-            * at the same time.
-            */
+/* Synchronized so all variables are in a consistant state and
+* so that another thread isn't doing a connect, disconnect, or clone
+* at the same time.
+*/
             // Wait for active reader to terminate
             waitForReader(null);
 
@@ -790,7 +790,7 @@ namespace Novell.Directory.Ldap
         }
 
         /// <summary>  Increments the count of cloned connections</summary>
-        /* package */
+/* package */
         internal void incrCloneCount()
         {
             lock (this)
@@ -830,7 +830,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <returns> a Connection object or null if finalizing.
         /// </returns>
-        /* package */
+/* package */
         internal Connection destroyClone(bool apiCall)
         {
             lock (this)
@@ -855,14 +855,14 @@ namespace Novell.Directory.Ldap
                     if (in_Renamed != null)
                     {
                         // Not a clone and connected
-                        /*
-                        * Either the application has called disconnect or connect
-                        * resulting in the current connection being closed. If the
-                        * application has any queues waiting on messages, we
-                        * need wake these up so the application does not hang.
-                        * The boolean flag indicates whether the close came
-                        * from an API call or from the object being finalized.
-                        */
+/*
+* Either the application has called disconnect or connect
+* resulting in the current connection being closed. If the
+* application has any queues waiting on messages, we
+* need wake these up so the application does not hang.
+* The boolean flag indicates whether the close came
+* from an API call or from the object being finalized.
+*/
                         InterThreadException notify = new InterThreadException(
                             (
                                 apiCall
@@ -887,16 +887,16 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="factory">the default factory to set
         /// </param>
-        /* package */
+/* package */
         /// <summary> gets the socket factory used for this connection
         ///
         /// </summary>
         /// <returns> the default factory for this connection
         /// </returns>
-        /* package */
+/* package */
 
         /// <summary> clears the writeSemaphore id used for active bind operation</summary>
-        /* package */
+/* package */
         internal void clearBindSemId()
         {
             bindSemaphoreId = 0;
@@ -908,7 +908,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="info">the Message containing the message to write.
         /// </param>
-        /* package */
+/* package */
         internal void writeMessage(Message info)
         {
             ExceptionMessages em = new ExceptionMessages();
@@ -945,7 +945,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="msg">the message to write.
         /// </param>
-        /* package */
+/* package */
         internal void writeMessage(LdapMessage msg)
         {
             int id;
@@ -1013,15 +1013,15 @@ namespace Novell.Directory.Ldap
                         ioe
                     );
                 }
-                /*
-                * IOException could be due to a server shutdown notification which
-                * caused our Connection to quit.  If so we send back a slightly
-                * different error message.  We could have checked this a little
-                * earlier in the method but that would be an expensive check each
-                * time we send out a message.  Since this shutdown request is
-                * going to be an infrequent occurence we check for it only when
-                * we get an IOException.  shutdown() will do the cleanup.
-                */
+/*
+* IOException could be due to a server shutdown notification which
+* caused our Connection to quit.  If so we send back a slightly
+* different error message.  We could have checked this a little
+* earlier in the method but that would be an expensive check each
+* time we send out a message.  Since this shutdown request is
+* going to be an infrequent occurence we check for it only when
+* we get an IOException.  shutdown() will do the cleanup.
+*/
                 if (clientActive)
                 {
                     // We beliefe the connection was alive
@@ -1056,7 +1056,7 @@ namespace Novell.Directory.Ldap
         }
 
         /// <summary> Returns the message agent for this msg ID</summary>
-        /* package */
+/* package */
         internal MessageAgent getMessageAgent(int msgId)
         {
             Message info = messages.findMessageById(msgId);
@@ -1068,7 +1068,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="info">the Message class to remove from the list
         /// </param>
-        /* package */
+/* package */
         internal void removeMessage(Message info)
         {
             bool done = SupportClass.VectorRemoveElement(messages, info);
@@ -1187,7 +1187,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> true if no outstanding messages
         /// </returns>
-        /* package */
+/* package */
         internal bool areMessagesComplete()
         {
             System.Object[] messages = this.messages.ObjectArray;
@@ -1217,7 +1217,7 @@ namespace Novell.Directory.Ldap
         /// to the messageID passed in to this method.  This is used by
         /// LdapConnection.StartTLS.
         /// </summary>
-        /* package */
+/* package */
         internal void stopReaderOnReply(int messageID)
         {
             this.stopReaderMessageID = messageID;
@@ -1229,7 +1229,7 @@ namespace Novell.Directory.Ldap
         /// set or changed.  In particular after client.Connection.startTLS()
         /// It assumes the reader thread is not running.
         /// </summary>
-        /* package */
+/* package */
         internal void startReader()
         {
             // Start Reader Thread
@@ -1261,18 +1261,18 @@ namespace Novell.Directory.Ldap
         /// stop and start the reader thread.  Connection.StopTLS will stop
         /// and start the reader thread.
         /// </summary>
-        /* package */
+/* package */
         internal void startTLS()
         {
             try
             {
                 waitForReader(null);
                 this.nonTLSBackup = this.socket;
-                /*				this.sock = 	new Socket ( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
-                                IPAddress hostadd = Dns.Resolve(host).AddressList[0];
-                                IPEndPoint ephost = new IPEndPoint(hostadd,port);
-                                sock.Connect(ephost);
-                */
+/*				this.sock = 	new Socket ( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+IPAddress hostadd = Dns.Resolve(host).AddressList[0];
+IPEndPoint ephost = new IPEndPoint(hostadd,port);
+sock.Connect(ephost);
+*/
                 // FIXME: Pass the custom validation callback.
                 //        The erorr code -2146762481 means SslPolicyErrors.RemoteCertificateNameMismatch.
                 var stream = new SslStream(socket.GetStream(), false);
@@ -1305,28 +1305,28 @@ namespace Novell.Directory.Ldap
             return;
         }
 
-        /*
-        * Stops TLS.
-        *
-        * StopTLS, in this package, assumes the caller has:
-        *  1) blocked writing (acquireWriteSemaphore).
-        *  2) checked that no messages are outstanding.
-        *
-        *  StopTLS Needs to do the following:
-        *  1) close the current socket
-        *      - This stops the reader thread
-        *      - set STOP_READING flag on stopReaderMessageID so that
-        *        the reader knows that the IOException is planned.
-        *  2) replace the current socket with nonTLSBackup,
-        *  3) and set nonTLSBackup to null;
-        *  4) reset input and outputstreams
-        *  5) start the reader thread by calling startReader
-        *
-        *  Note: Sun's JSSE doesn't allow the nonTLSBackup socket to be
-        * used any more, even though autoclose was false: you get an IOException.
-        * IBM's JSSE hangs when you close the JSSE socket.
-        */
-        /* package */
+/*
+* Stops TLS.
+*
+* StopTLS, in this package, assumes the caller has:
+*  1) blocked writing (acquireWriteSemaphore).
+*  2) checked that no messages are outstanding.
+*
+*  StopTLS Needs to do the following:
+*  1) close the current socket
+*      - This stops the reader thread
+*      - set STOP_READING flag on stopReaderMessageID so that
+*        the reader knows that the IOException is planned.
+*  2) replace the current socket with nonTLSBackup,
+*  3) and set nonTLSBackup to null;
+*  4) reset input and outputstreams
+*  5) start the reader thread by calling startReader
+*
+*  Note: Sun's JSSE doesn't allow the nonTLSBackup socket to be
+* used any more, even though autoclose was false: you get an IOException.
+* IBM's JSSE hangs when you close the JSSE socket.
+*/
+/* package */
         internal void stopTLS()
         {
             try
@@ -1422,9 +1422,9 @@ namespace Novell.Directory.Ldap
                         // -------------------------------------------------------
                         Asn1Identifier asn1ID;
                         System.IO.Stream myIn;
-                        /* get current value of in, keep value consistant
-                        * though the loop, i.e. even during shutdown
-                        */
+/* get current value of in, keep value consistant
+* though the loop, i.e. even during shutdown
+*/
                         myIn = this.enclosingInstance.in_Renamed;
                         if (myIn == null)
                         {
@@ -1461,37 +1461,37 @@ namespace Novell.Directory.Ldap
                         }
                         catch (System.FieldAccessException ex)
                         {
-                            /*
-                            * We get the NoSuchFieldException when we could not find
-                            * a matching message id.  First check to see if this is
-                            * an unsolicited notification (msgID == 0). If it is not
-                            * we throw it away. If it is we call any unsolicited
-                            * listeners that might have been registered to listen for these
-                            * messages.
-                            */
+/*
+* We get the NoSuchFieldException when we could not find
+* a matching message id.  First check to see if this is
+* an unsolicited notification (msgID == 0). If it is not
+* we throw it away. If it is we call any unsolicited
+* listeners that might have been registered to listen for these
+* messages.
+*/
 
 
-                            /* Note the location of this code.  We could have required
-                            * that message ID 0 be just like other message ID's but
-                            * since message ID 0 has to be treated specially we have
-                            * a separate check for message ID 0.  Also note that
-                            * this test is after the regular message list has been
-                            * checked for.  We could have always checked the list
-                            * of messages after checking if this is an unsolicited
-                            * notification but that would have inefficient as
-                            * message ID 0 is a rare event (as of this time).
-                            */
+/* Note the location of this code.  We could have required
+* that message ID 0 be just like other message ID's but
+* since message ID 0 has to be treated specially we have
+* a separate check for message ID 0.  Also note that
+* this test is after the regular message list has been
+* checked for.  We could have always checked the list
+* of messages after checking if this is an unsolicited
+* notification but that would have inefficient as
+* message ID 0 is a rare event (as of this time).
+*/
                             if (msgId == 0)
                             {
                                 // Notify any listeners that might have been registered
                                 this.enclosingInstance.notifyAllUnsolicitedListeners(msg);
 
-                                /*
-                                * Was this a server shutdown unsolicited notification.
-                                * IF so we quit. Actually calling the return will
-                                * first transfer control to the finally clause which
-                                * will do the necessary clean up.
-                                */
+/*
+* Was this a server shutdown unsolicited notification.
+* IF so we quit. Actually calling the return will
+* first transfer control to the finally clause which
+* will do the necessary clean up.
+*/
                                 if (this.enclosingInstance.unsolSvrShutDnNotification)
                                 {
                                     notify = new InterThreadException(
@@ -1559,25 +1559,25 @@ namespace Novell.Directory.Ldap
                 }
                 finally
                 {
-                    /*
-                    * There can be four states that the reader can be in at this point:
-                    *  1) We are starting TLS and will be restarting the reader
-                    *     after we have negotiated TLS.
-                    *      - Indicated by whether stopReaderMessageID does not
-                    *        equal CONTINUE_READING.
-                    *      - Don't call Shutdown.
-                    *  2) We are stoping TLS and will be restarting after TLS is
-                    *     stopped.
-                    *      - Indicated by an IOException AND stopReaderMessageID equals
-                    *        STOP_READING - in which case notify will be null.
-                    *      - Don't call Shutdown
-                    *  3) We receive a Server Shutdown notification.
-                    *      - Indicated by messageID equal to 0.
-                    *      - call Shutdown.
-                    *  4) Another error occured
-                    *      - Indicated by an IOException AND notify is not NULL
-                    *      - call Shutdown.
-                    */
+/*
+* There can be four states that the reader can be in at this point:
+*  1) We are starting TLS and will be restarting the reader
+*     after we have negotiated TLS.
+*      - Indicated by whether stopReaderMessageID does not
+*        equal CONTINUE_READING.
+*      - Don't call Shutdown.
+*  2) We are stoping TLS and will be restarting after TLS is
+*     stopped.
+*      - Indicated by an IOException AND stopReaderMessageID equals
+*        STOP_READING - in which case notify will be null.
+*      - Don't call Shutdown
+*  3) We receive a Server Shutdown notification.
+*      - Indicated by messageID equal to 0.
+*      - call Shutdown.
+*  4) Another error occured
+*      - Indicated by an IOException AND notify is not NULL
+*      - call Shutdown.
+*/
                     if ((!this.enclosingInstance.clientActive) || (notify != null))
                     {
                         //#3 & 4
@@ -1602,7 +1602,7 @@ namespace Novell.Directory.Ldap
         /// <summary>Add the specific object to the list of listeners that want to be
         /// notified when an unsolicited notification is received.
         /// </summary>
-        /* package */
+/* package */
         internal void AddUnsolicitedNotificationListener(
             LdapUnsolicitedNotificationListener listener
         )
@@ -1612,7 +1612,7 @@ namespace Novell.Directory.Ldap
         }
 
         /// <summary>Remove the specific object from current list of listeners</summary>
-        /* package */
+/* package */
         internal void RemoveUnsolicitedNotificationListener(
             LdapUnsolicitedNotificationListener listener
         )
@@ -1645,7 +1645,7 @@ namespace Novell.Directory.Ldap
             private LdapUnsolicitedNotificationListener listenerObj;
             private LdapExtendedResponse unsolicitedMsg;
 
-            /* package */
+/* package */
             internal UnsolicitedListenerThread(
                 Connection enclosingInstance,
                 LdapUnsolicitedNotificationListener l,

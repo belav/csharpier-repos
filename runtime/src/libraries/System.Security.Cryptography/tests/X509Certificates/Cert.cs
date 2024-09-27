@@ -4,9 +4,12 @@
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
     //
-    // Helper class centralizes all loading of PFX's. Loading PFX's is a problem because of the key on disk that it creates and gets left behind
-    // if the certificate isn't properly disposed. Properly disposing PFX's imported into a X509Certificate2Collection is a pain because X509Certificate2Collection
-    // doesn't implement IDisposable. To make this easier, we wrap these in an ImportedCollection class that does implement IDisposable.
+    // Helper class centralizes all loading of PFX's. Loading PFX's is a problem because of the key on
+    // disk that it creates and gets left behind
+    // if the certificate isn't properly disposed. Properly disposing PFX's imported into a
+    // X509Certificate2Collection is a pain because X509Certificate2Collection
+    // doesn't implement IDisposable. To make this easier, we wrap these in an ImportedCollection class
+    // that does implement IDisposable.
     //
     internal static class Cert
     {
@@ -25,7 +28,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         // The Import() methods have an overload for each X509Certificate2Collection.Import() overload.
         //
 
-        // Do not refactor this into a call to Import(byte[], string, X509KeyStorageFlags). The test meant to exercise
+        // Do not refactor this into a call to Import(byte[], string, X509KeyStorageFlags). The test meant
+        // to exercise
         // the api that takes only one argument.
         public static ImportedCollection Import(byte[] rawData)
         {
@@ -63,7 +67,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             return new ImportedCollection(collection);
         }
 
-        // Do not refactor this into a call to Import(string, string, X509KeyStorageFlags). The test meant to exercise
+        // Do not refactor this into a call to Import(string, string, X509KeyStorageFlags). The test meant
+        // to exercise
         // the api that takes only one argument.
         public static ImportedCollection Import(string fileName)
         {
@@ -116,7 +121,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
     {
         public ImportedCollection(X509Certificate2Collection collection)
         {
-            // Make an independent copy of the certs to dispose (in case the test mutates the collection after we return.)
+            // Make an independent copy of the certs to dispose (in case the test mutates the collection after
+            // we return.)
             _certs = new X509Certificate2[collection.Count];
             collection.CopyTo(_certs, 0);
             Collection = collection;

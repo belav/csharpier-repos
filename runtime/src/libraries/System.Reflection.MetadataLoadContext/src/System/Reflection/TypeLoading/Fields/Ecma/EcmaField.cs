@@ -10,7 +10,8 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.TypeLoading.Ecma
 {
     /// <summary>
-    /// Base class for all FieldInfo objects created by a MetadataLoadContext and get its metadata from a PEReader.
+    /// Base class for all FieldInfo objects created by a MetadataLoadContext and get its metadata from
+    // a PEReader.
     /// </summary>
     internal sealed class EcmaField : RoField
     {

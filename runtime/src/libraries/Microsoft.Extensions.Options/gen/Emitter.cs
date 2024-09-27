@@ -103,14 +103,21 @@ namespace Microsoft.Extensions.Options.Generators
         }
 
         /// <summary>
-        /// Returns the nullable annotation string to use in the code generation according to the first parameter of
-        /// <see cref="System.ComponentModel.DataAnnotations.Validator.TryValidateValue(object, ValidationContext, ICollection{ValidationResult}, IEnumerable{ValidationAttribute})"/> is nullable annotated.
+        /// Returns the nullable annotation string to use in the code generation according to the first
+        // parameter of
+        /// <see cref="System.ComponentModel.DataAnnotations.Validator.TryValidateValue(object,
+        // ValidationContext, ICollection{ValidationResult}, IEnumerable{ValidationAttribute})"/> is nullable
+        // annotated.
         /// </summary>
         /// <param name="compilation">The <see cref="Compilation"/> to consider for analysis.</param>
-        /// <returns>"!" if the first parameter is not nullable annotated, otherwise an empty string.</returns>
+        /// <returns>"!" if the first parameter is not nullable annotated, otherwise an empty
+        // string.</returns>
         /// <remarks>
-        /// In .NET 8.0 we have changed the nullable annotation on first parameter of the method cref="System.ComponentModel.DataAnnotations.Validator.TryValidateValue(object, ValidationContext, ICollection{ValidationResult}, IEnumerable{ValidationAttribute})"/>
-        /// The source generator need to detect if we need to append "!" to the first parameter of the method call when running on down-level versions.
+        /// In .NET 8.0 we have changed the nullable annotation on first parameter of the method
+        // cref="System.ComponentModel.DataAnnotations.Validator.TryValidateValue(object, ValidationContext,
+        // ICollection{ValidationResult}, IEnumerable{ValidationAttribute})"/>
+        /// The source generator need to detect if we need to append "!" to the first parameter of the
+        // method call when running on down-level versions.
         /// </remarks>
         private static string GetNullableAnnotationStringForTryValidateValueToUseInGeneratedCode(
             Compilation compilation
@@ -828,8 +835,10 @@ namespace Microsoft.Extensions.Options.Generators
 
             if (_symbolHolder.UnconditionalSuppressMessageAttributeSymbol is not null)
             {
-                // We disable the warning on `new ValidationContext(object)` usage as we use it in a safe way that not require executing the reflection code.
-                // This is done by initializing the DisplayName in the context which is the part trigger reflection if it is not initialized.
+                // We disable the warning on `new ValidationContext(object)` usage as we use it in a safe way that
+                // not require executing the reflection code.
+                // This is done by initializing the DisplayName in the context which is the part trigger reflection
+                // if it is not initialized.
                 OutLn(
                     $"[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(\"Trimming\", \"IL2026:RequiresUnreferencedCode\","
                 );

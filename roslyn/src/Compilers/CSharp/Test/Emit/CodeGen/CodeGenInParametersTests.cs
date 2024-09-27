@@ -1341,32 +1341,38 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS8331: Cannot assign to variable 'arg1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (6,9): error CS8331: Cannot assign to variable 'arg1' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         arg1 = 1;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "arg1")
                     .WithArguments("variable", "arg1")
                     .WithLocation(6, 9),
-                // (7,9): error CS8332: Cannot assign to a member of variable 'arg2' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (7,9): error CS8332: Cannot assign to a member of variable 'arg2' or use it as the right hand
+                // side of a ref assignment because it is a readonly variable
                 //         arg2.Alice = 2;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "arg2.Alice")
                     .WithArguments("variable", "arg2")
                     .WithLocation(7, 9),
-                // (9,9): error CS8331: Cannot assign to variable 'arg1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (9,9): error CS8331: Cannot assign to variable 'arg1' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         arg1 ++;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "arg1")
                     .WithArguments("variable", "arg1")
                     .WithLocation(9, 9),
-                // (10,9): error CS8332: Cannot assign to a member of variable 'arg2' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (10,9): error CS8332: Cannot assign to a member of variable 'arg2' or use it as the right hand
+                // side of a ref assignment because it is a readonly variable
                 //         arg2.Alice --;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "arg2.Alice")
                     .WithArguments("variable", "arg2")
                     .WithLocation(10, 9),
-                // (12,9): error CS8331: Cannot assign to variable 'arg1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (12,9): error CS8331: Cannot assign to variable 'arg1' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         arg1 += 1;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "arg1")
                     .WithArguments("variable", "arg1")
                     .WithLocation(12, 9),
-                // (13,9): error CS8332: Cannot assign to a member of variable 'arg2' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (13,9): error CS8332: Cannot assign to a member of variable 'arg2' or use it as the right hand
+                // side of a ref assignment because it is a readonly variable
                 //         arg2.Alice -= 2;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "arg2.Alice")
                     .WithArguments("variable", "arg2")
@@ -1410,12 +1416,14 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (18,20): error CS8333: Cannot return variable 'arg1' by writable reference because it is a readonly variable
+                // (18,20): error CS8333: Cannot return variable 'arg1' by writable reference because it is a
+                // readonly variable
                 //         return ref arg1;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField, "arg1")
                     .WithArguments("variable", "arg1")
                     .WithLocation(18, 20),
-                // (23,20): error CS8334: Members of variable 'arg2' cannot be returned by writable reference because it is a readonly variable
+                // (23,20): error CS8334: Members of variable 'arg2' cannot be returned by writable reference
+                // because it is a readonly variable
                 //         return ref arg2.Alice;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField2, "arg2.Alice")
                     .WithArguments("variable", "arg2")
@@ -1443,12 +1451,14 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,25): error CS8329: Cannot use variable 'arg1' as a ref or out value because it is a readonly variable
+                // (6,25): error CS8329: Cannot use variable 'arg1' as a ref or out value because it is a readonly
+                // variable
                 //         ref var y = ref arg1;
                 Diagnostic(ErrorCode.ERR_RefReadonlyNotField, "arg1")
                     .WithArguments("variable", "arg1")
                     .WithLocation(6, 25),
-                // (7,25): error CS8330: Members of variable 'arg2' cannot be used as a ref or out value because it is a readonly variable
+                // (7,25): error CS8330: Members of variable 'arg2' cannot be used as a ref or out value because it
+                // is a readonly variable
                 //         ref int a = ref arg2.Alice;
                 Diagnostic(ErrorCode.ERR_RefReadonlyNotField2, "arg2.Alice")
                     .WithArguments("variable", "arg2")
@@ -1486,10 +1496,12 @@ class Program
                 options: TestOptions.UnsafeReleaseDll
             );
             comp.VerifyDiagnostics(
-                // (6,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // (6,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                // statement initializer
                 //         int* a = & arg1;
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "& arg1").WithLocation(6, 18),
-                // (7,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // (7,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                // statement initializer
                 //         int* b = & arg2.Alice;
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "& arg2.Alice").WithLocation(7, 18)
             );
@@ -1523,12 +1535,14 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (10,24): error CS8333: Cannot return variable 'arg1' by writable reference because it is a readonly variable
+                // (10,24): error CS8333: Cannot return variable 'arg1' by writable reference because it is a
+                // readonly variable
                 //             return ref arg1;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField, "arg1")
                     .WithArguments("variable", "arg1")
                     .WithLocation(10, 24),
-                // (14,24): error CS8334: Members of variable 'arg2' cannot be returned by writable reference because it is a readonly variable
+                // (14,24): error CS8334: Members of variable 'arg2' cannot be returned by writable reference
+                // because it is a readonly variable
                 //             return ref arg2.Alice;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField2, "arg2.Alice")
                     .WithArguments("variable", "arg2")
@@ -1666,12 +1680,14 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (12,28): error CS8333: Cannot return variable 'arg11' by writable reference because it is a readonly variable
+                // (12,28): error CS8333: Cannot return variable 'arg11' by writable reference because it is a
+                // readonly variable
                 //                 return ref arg11;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField, "arg11")
                     .WithArguments("variable", "arg11")
                     .WithLocation(12, 28),
-                // (16,28): error CS8334: Members of variable 'arg21' cannot be returned by writable reference because it is a readonly variable
+                // (16,28): error CS8334: Members of variable 'arg21' cannot be returned by writable reference
+                // because it is a readonly variable
                 //                 return ref arg21.Alice;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField2, "arg21.Alice")
                     .WithArguments("variable", "arg21")
@@ -1849,7 +1865,8 @@ class Program
                 options: TestOptions.ReleaseExe
             );
             comp.VerifyEmitDiagnostics(
-                // (14,19): error CS8178: A reference returned by a call to 'Program.RefReturning(ref int)' cannot be preserved across 'await' or 'yield' boundary.
+                // (14,19): error CS8178: A reference returned by a call to 'Program.RefReturning(ref int)' cannot
+                // be preserved across 'await' or 'yield' boundary.
                 //             M1(in RefReturning(ref local), await GetT(2), 3);
                 Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "RefReturning(ref local)")
                     .WithArguments("Program.RefReturning(ref int)")

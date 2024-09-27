@@ -30,7 +30,8 @@ namespace System.Collections.Concurrent
         /// </summary>
         public static CDSCollectionETWBCLProvider Log = new CDSCollectionETWBCLProvider();
 
-        /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
+        /// <summary>Prevent external instantiation.  All logging should go through the Log
+        // instance.</summary>
         private CDSCollectionETWBCLProvider() { }
 
         /// <summary>Enabled for all keywords.</summary>

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     A convention that ignores entity types that have the <see cref="NotMappedAttribute" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class NotMappedTypeAttributeConvention : TypeAttributeConventionBase<NotMappedAttribute>
 {

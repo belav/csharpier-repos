@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * This class is used to create hashcodes that are Everett Compatible.
- *
- * Copyright (c) 2004 Microsoft Corporation
- */
+* This class is used to create hashcodes that are Everett Compatible.
+*
+* Copyright (c) 2004 Microsoft Corporation
+*/
 
 namespace System.Collections.Specialized
 {

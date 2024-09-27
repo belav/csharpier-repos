@@ -140,8 +140,10 @@ namespace System.ServiceModel.Channels
             this.Locations = new ReadOnlyCollection<RedirectionLocation>(locations);
         }
 
-        // The analysis tool used for the security signoff (runcodeanalysis /sdl) is getting confused, reporting that we need
-        // to put the [SecurityCritical] attribute here, when we have it already and it matches the attribute from the base class.
+        // The analysis tool used for the security signoff (runcodeanalysis /sdl) is getting confused,
+        // reporting that we need
+        // to put the [SecurityCritical] attribute here, when we have it already and it matches the
+        // attribute from the base class.
         [SuppressMessage(
             FxCop.Category.Security,
             "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",

@@ -6,7 +6,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-// SIMD8 could be retyped as a long in the past and if that long value was CSE-ed together with original SIMD8
+// SIMD8 could be retyped as a long in the past and if that long value was CSE-ed together with
+// original SIMD8
 // values we could hit an assert `IsCompatibleType(cseLclVarTyp, expTyp)`.
 
 public class Runtime_35724

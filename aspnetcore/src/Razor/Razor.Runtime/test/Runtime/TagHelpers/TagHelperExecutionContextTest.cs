@@ -413,7 +413,8 @@ public class TagHelperExecutionContextTest
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
-        // HtmlEncoderData includes another HtmlTestEncoder instance but method compares HtmlEncoder instances.
+        // HtmlEncoderData includes another HtmlTestEncoder instance but method compares HtmlEncoder
+        // instances.
         var firstEncoder = new HtmlTestEncoder();
 
         // Act

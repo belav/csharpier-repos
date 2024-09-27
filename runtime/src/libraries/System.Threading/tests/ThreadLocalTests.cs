@@ -35,7 +35,8 @@ namespace System.Threading.Tests
             catch (ArgumentNullException)
             {
                 // No other exception should be thrown.
-                // With a previous issue, if the constructor threw an exception, the finalizer would throw an exception as well.
+                // With a previous issue, if the constructor threw an exception, the finalizer would throw an
+                // exception as well.
             }
         }
 
@@ -128,7 +129,8 @@ namespace System.Threading.Tests
             var threadLocal = new ThreadLocal<SetMreOnFinalize>();
             var mres = new ManualResetEventSlim(false);
 
-            // (Careful when editing this test: saving the created thread into a local variable would likely break the
+            // (Careful when editing this test: saving the created thread into a local variable would likely
+            // break the
             // test in Debug build.)
             // We are creating the task using TaskCreationOptions.LongRunning because...
             // there is no guarantee that the Task will be created on another thread.
@@ -184,7 +186,8 @@ namespace System.Threading.Tests
         [Fact]
         public static void RunThreadLocalTest6_SlowPath()
         {
-            // the maximum fast path instances for each type is 16 ^ 3 = 4096, when this number changes in the product code, it should be changed here as well
+            // the maximum fast path instances for each type is 16 ^ 3 = 4096, when this number changes in the
+            // product code, it should be changed here as well
             int MaximumFastPathPerInstance = 4096;
             ThreadLocal<int>[] locals_int = new ThreadLocal<int>[MaximumFastPathPerInstance + 10];
             for (int i = 0; i < locals_int.Length; i++)

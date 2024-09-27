@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Can be acquired from <see cref="Solution.Services"/>, with <see cref="SolutionServices.GetService{ISupportedChangesService}"/>.
+    /// Can be acquired from <see cref="Solution.Services"/>, with <see
+    // cref="SolutionServices.GetService{ISupportedChangesService}"/>.
     /// </summary>
     public interface ISupportedChangesService : IWorkspaceService
     {

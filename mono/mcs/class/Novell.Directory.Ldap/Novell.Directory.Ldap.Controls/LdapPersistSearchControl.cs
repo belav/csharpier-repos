@@ -117,7 +117,7 @@ namespace Novell.Directory.Ldap.Controls
             }
         }
 
-        /* private data members */
+/* private data members */
         private static int SEQUENCE_SIZE = 3;
 
         private static int CHANGETYPES_INDEX = 0;
@@ -162,7 +162,7 @@ namespace Novell.Directory.Ldap.Controls
         /// </summary>
         public static readonly int ANY = ADD | DELETE | MODIFY | MODDN;
 
-        /* public constructors */
+/* public constructors */
 
         /// <summary>  The default constructor. A control with changes equal to ANY,
         /// isCritical equal to true, changesOnly equal to true, and
@@ -253,13 +253,13 @@ namespace Novell.Directory.Ldap.Controls
         static LdapPersistSearchControl()
         {
             s_encoder = new LBEREncoder();
-            /*
-            * This is where we register the control response
-            */
+/*
+* This is where we register the control response
+*/
             {
-                /* Register the Entry Change control class which is returned by the
-                * server in response to a persistent search request
-                */
+/* Register the Entry Change control class which is returned by the
+* server in response to a persistent search request
+*/
                 try
                 {
                     // Register LdapEntryChangeControl

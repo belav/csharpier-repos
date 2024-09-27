@@ -750,8 +750,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(0, angela.Manager.Subordinates.Count);
         }
 
-        //NOTE: If you implement a converter, you are on your own when handling metadata properties and therefore references.Newtonsoft does the same.
-        //However; is there a way to recall preserved references previously found in the payload and to store new ones found in the converter's payload? that would be a cool enhancement.
+        //NOTE: If you implement a converter, you are on your own when handling metadata properties and
+        // therefore references.Newtonsoft does the same.
+        //However; is there a way to recall preserved references previously found in the payload and to
+        // store new ones found in the converter's payload? that would be a cool enhancement.
         public class ListOfEmployeeConverter : JsonConverter<List<Employee>>
         {
             public override List<Employee> Read(

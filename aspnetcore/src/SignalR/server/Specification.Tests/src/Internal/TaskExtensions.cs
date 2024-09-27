@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.InternalTesting;
 
-// Copied from https://github.com/dotnet/extensions/blob/master/src/TestingUtils/Microsoft.AspNetCore.InternalTesting/src/TaskExtensions.cs
+// Copied from
+// https://github.com/dotnet/extensions/blob/master/src/TestingUtils/Microsoft.AspNetCore.InternalTesting/src/TaskExtensions.cs
 // Required because Microsoft.AspNetCore.InternalTesting is not shipped
 internal static class TaskExtensions
 {

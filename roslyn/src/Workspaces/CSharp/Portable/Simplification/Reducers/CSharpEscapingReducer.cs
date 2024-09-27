@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 }
             }
 
-            // within a query all contextual query keywords need to be escaped, even if they appear in a non query context.
+            // within a query all contextual query keywords need to be escaped, even if they appear in a non
+            // query context.
             if (token.GetAncestors(n => n is QueryExpressionSyntax).Any())
             {
                 switch (SyntaxFacts.GetContextualKeywordKind(unescapedIdentifier))
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             // TODO: handle crefs and param names of xml doc comments.
             // crefs have the same escaping rules than csharp, param names do not allow escaping in Dev11, but
-            // we may want to change that for Roslyn (Bug 17984, " Could treat '@' specially in <param>, <typeparam>, etc")
+            // we may want to change that for Roslyn (Bug 17984, " Could treat '@' specially in <param>,
+            // <typeparam>, etc")
 
             return result;
         }

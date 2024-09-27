@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace System.IO
 {
-    /// <summary>Provides a stream that delays all read and write operations by a specified period of time.</summary>
+    /// <summary>Provides a stream that delays all read and write operations by a specified period of
+    // time.</summary>
     internal sealed class DelayStream : Stream
     {
         private readonly Stream _innerStream;

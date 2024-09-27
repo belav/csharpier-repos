@@ -74,7 +74,8 @@ namespace System.Runtime.Serialization
 
         /// <SecurityNote>
         /// Review - handles all aspects of IL generation including initializing the DynamicMethod.
-        ///          changes to how IL generated could affect how data is deserialized and what gets access to data,
+        ///          changes to how IL generated could affect how data is deserialized and what gets access
+        // to data,
         ///          therefore we mark it for review so that changes to generation logic are reviewed.
         /// </SecurityNote>
         private sealed class CriticalHelper
@@ -174,7 +175,8 @@ namespace System.Runtime.Serialization
                         _ilg.Load(_objectLocal);
 
                         // Do a conversion back from DateTimeOffsetAdapter to DateTimeOffset after deserialization.
-                        // DateTimeOffsetAdapter is used here for deserialization purposes to bypass the ISerializable implementation
+                        // DateTimeOffsetAdapter is used here for deserialization purposes to bypass the ISerializable
+                        // implementation
                         // on DateTimeOffset; which does not work in partial trust.
 
                         if (classContract.UnderlyingType == Globals.TypeOfDateTimeOffsetAdapter)
@@ -1328,7 +1330,8 @@ namespace System.Runtime.Serialization
 
         /// <SecurityNote>
         /// Critical - Elevates by calling GetUninitializedObject which has a LinkDemand
-        /// Safe - marked as such so that it's callable from transparent generated IL. Takes id as parameter which
+        /// Safe - marked as such so that it's callable from transparent generated IL. Takes id as parameter
+        // which
         ///        is guaranteed to be in internal serialization cache.
         /// </SecurityNote>
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

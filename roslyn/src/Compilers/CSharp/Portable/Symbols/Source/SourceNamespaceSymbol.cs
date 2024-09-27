@@ -159,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private ImmutableArray<SyntaxReference> ComputeDeclaringReferencesCore()
         {
-            // SyntaxReference in the namespace declaration points to the name node of the namespace decl node not
+            // SyntaxReference in the namespace declaration points to the name node of the namespace decl node
+            // not
             // namespace decl node we want to return. here we will wrap the original syntax reference in
             // the translation syntax reference so that we can lazily manipulate a node return to the caller
             return _mergedDeclaration.Declarations.SelectAsArray(
@@ -274,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.AddDeclarationDiagnostics(diagnostics);
                     RegisterDeclaredCorTypes();
 
-                    // We may produce a SymbolDeclaredEvent for the enclosing namespace before events for its contained members
+                    // We may produce a SymbolDeclaredEvent for the enclosing namespace before events for its contained
+                    // members
                     DeclaringCompilation.SymbolDeclaredEvent(this);
                     var wasSetThisThread = _state.NotePartComplete(CompletionPart.NameToMembersMap);
                     Debug.Assert(wasSetThisThread);
@@ -373,7 +375,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 foreach (var symbol in result[name])
                 {
                     var nts = symbol as SourceMemberContainerTypeSymbol;
-                    // It should be impossible to have a type member of a source namespace symbol which is not a SourceMemberContainerTypeSymbol
+                    // It should be impossible to have a type member of a source namespace symbol which is not a
+                    // SourceMemberContainerTypeSymbol
                     Debug.Assert((object)nts != null || symbol is not TypeSymbol);
 
                     var arity = ((object)nts != null) ? nts.Arity : 0;
@@ -412,7 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if ((object)other != null)
                     {
-                        // To decide whether type declarations are duplicates, we need to access members which are only meaningful on source original definition symbols.
+                        // To decide whether type declarations are duplicates, we need to access members which are only
+                        // meaningful on source original definition symbols.
                         Debug.Assert(
                             (object)nts?.OriginalDefinition == nts
                                 && (object)other.OriginalDefinition == other
@@ -460,7 +464,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if ((object)nts != null)
                     {
-                        //types declared at the namespace level may only have declared accessibility of public or internal (Section 3.5.1)
+                        //types declared at the namespace level may only have declared accessibility of public or internal
+                        // (Section 3.5.1)
                         Accessibility declaredAccessibility = nts.DeclaredAccessibility;
                         if (
                             declaredAccessibility != Accessibility.Public

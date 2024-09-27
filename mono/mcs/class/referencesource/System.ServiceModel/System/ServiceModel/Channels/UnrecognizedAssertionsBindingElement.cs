@@ -115,7 +115,9 @@ namespace System.ServiceModel.Channels
 
         public override BindingElement Clone()
         {
-            //throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedBindingElementClone, typeof(UnrecognizedAssertionsBindingElement).Name)));
+            //throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+            // InvalidOperationException(SR.GetString(SR.UnsupportedBindingElementClone,
+            // typeof(UnrecognizedAssertionsBindingElement).Name)));
             // do not allow Cloning, return an empty BindingElement
             return new UnrecognizedAssertionsBindingElement(
                 new XmlQualifiedName(wsdlBinding.Name, wsdlBinding.Namespace),

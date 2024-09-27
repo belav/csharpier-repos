@@ -41,7 +41,8 @@ class Helpers
 
     public static void RunInRedirectedOutput(Action<MemoryStream> command)
     {
-        // Make sure that redirecting to a memory stream causes no special writing to the stream when using Console.CursorVisible
+        // Make sure that redirecting to a memory stream causes no special writing to the stream when using
+        // Console.CursorVisible
         MemoryStream data = new MemoryStream();
         TextWriter savedOut = Console.Out;
         try

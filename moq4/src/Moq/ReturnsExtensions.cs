@@ -21,7 +21,8 @@ namespace Moq
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
         /// <typeparam name="TResult">Type of the return value.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return
+        // type</param>
         /// <param name="value">The value to return, or <see longword="null"/>.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
@@ -37,7 +38,8 @@ namespace Moq
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
         /// <typeparam name="TResult">Type of the return value.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return
+        // type</param>
         /// <param name="value">The value to return, or <see longword="null"/>.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
@@ -53,7 +55,8 @@ namespace Moq
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
         /// <typeparam name="TResult">Type of the return value.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return
+        // type</param>
         /// <param name="valueFunction">The function that will calculate the return value.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
@@ -74,7 +77,8 @@ namespace Moq
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
         /// <typeparam name="TResult">Type of the return value.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return
+        // type</param>
         /// <param name="valueFunction">The function that will calculate the return value.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
@@ -94,7 +98,8 @@ namespace Moq
         /// Specifies the exception to throw when the asynchronous method is invoked.
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the task return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the task return
+        // type</param>
         /// <param name="exception">Exception instance to throw.</param>
         public static IReturnsResult<TMock> ThrowsAsync<TMock>(
             this IReturns<TMock, Task> mock,
@@ -114,7 +119,8 @@ namespace Moq
         /// Specifies the exception to throw when the asynchronous method is invoked.
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the valuetask return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the valuetask return
+        // type</param>
         /// <param name="exception">Exception instance to throw.</param>
         public static IReturnsResult<TMock> ThrowsAsync<TMock>(
             this IReturns<TMock, ValueTask> mock,
@@ -135,7 +141,8 @@ namespace Moq
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
         /// <typeparam name="TResult">Type of the return value.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return
+        // type</param>
         /// <param name="exception">Exception instance to throw.</param>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
@@ -156,7 +163,8 @@ namespace Moq
         /// </summary>
         /// <typeparam name="TMock">Mocked type.</typeparam>
         /// <typeparam name="TResult">Type of the return value.</typeparam>
-        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return
+        // type</param>
         /// <param name="exception">Exception instance to throw.</param>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
@@ -171,26 +179,26 @@ namespace Moq
                 return new ValueTask<TResult>(tcs.Task);
             });
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static readonly Random Random = new Random();
-            After:
-                    static readonly Random Random = new Random();
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static readonly Random Random = new Random();
+After:
+static readonly Random Random = new Random();
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static readonly Random Random = new Random();
-            After:
-                    static readonly Random Random = new Random();
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static readonly Random Random = new Random();
+After:
+static readonly Random Random = new Random();
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static readonly Random Random = new Random();
-            After:
-                    static readonly Random Random = new Random();
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static readonly Random Random = new Random();
+After:
+static readonly Random Random = new Random();
+*/
         }
 
         static readonly Random Random = new Random();
@@ -255,7 +263,8 @@ namespace Moq
 
         /// <summary>
         /// <para>Allows to specify the delayed return value of an asynchronous method.</para>
-        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across
+        // your unit test.</para>
         /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
@@ -276,7 +285,8 @@ namespace Moq
 
         /// <summary>
         /// <para>Allows to specify the delayed return value of an asynchronous method.</para>
-        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across
+        // your unit test.</para>
         /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
@@ -355,7 +365,8 @@ namespace Moq
 
         /// <summary>
         /// <para>Allows to specify the exception thrown by an asynchronous method.</para>
-        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across
+        // your unit test.</para>
         /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
@@ -376,7 +387,8 @@ namespace Moq
 
         /// <summary>
         /// <para>Allows to specify the exception thrown by an asynchronous method.</para>
-        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across
+        // your unit test.</para>
         /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
@@ -405,26 +417,26 @@ namespace Moq
             {
                 return false;
 
-                /* Unmerged change from project 'Moq(netstandard2.0)'
-                Before:
-                        private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
-                After:
-                        static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
-                */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
+After:
+static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
+*/
 
-                /* Unmerged change from project 'Moq(netstandard2.1)'
-                Before:
-                        private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
-                After:
-                        static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
-                */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
+After:
+static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
+*/
 
-                /* Unmerged change from project 'Moq(net6.0)'
-                Before:
-                        private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
-                After:
-                        static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
-                */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
+After:
+static TimeSpan GetDelay(TimeSpan minDelay, TimeSpan maxDelay, Random random)
+*/
             }
         }
 
@@ -438,26 +450,29 @@ namespace Moq
 
             return new TimeSpan(random.Next(min, max));
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>>
+mock,
+After:
+static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>>
+mock,
+After:
+static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>>
+mock,
+After:
+static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
+*/
         }
 
         static IReturnsResult<TMock> DelayedResult<TMock, TResult>(
@@ -474,26 +489,29 @@ namespace Moq
                 return Task.Delay(delay).ContinueWith(t => value);
             });
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock,
+ValueTask<TResult>> mock,
+After:
+static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock,
+ValueTask<TResult>> mock,
+After:
+static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock,
+ValueTask<TResult>> mock,
+After:
+static IReturnsResult<TMock> DelayedResult<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
+*/
         }
 
         static IReturnsResult<TMock> DelayedResult<TMock, TResult>(
@@ -510,26 +528,29 @@ namespace Moq
                 return new ValueTask<TResult>(Task.Delay(delay).ContinueWith(t => value));
             });
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>>
+mock,
+After:
+static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>>
+mock,
+After:
+static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>>
+mock,
+After:
+static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, Task<TResult>> mock,
+*/
         }
 
         static IReturnsResult<TMock> DelayedException<TMock, TResult>(
@@ -548,26 +569,32 @@ namespace Moq
                 return tcs.Task;
             });
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock,
+ValueTask<TResult>> mock,
+After:
+static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>>
+mock,
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock,
+ValueTask<TResult>> mock,
+After:
+static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>>
+mock,
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            After:
-                    static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>> mock,
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock,
+ValueTask<TResult>> mock,
+After:
+static IReturnsResult<TMock> DelayedException<TMock, TResult>(IReturns<TMock, ValueTask<TResult>>
+mock,
+*/
         }
 
         static IReturnsResult<TMock> DelayedException<TMock, TResult>(

@@ -6,11 +6,13 @@ using JetBrains.Annotations;
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     A parameter object passed to <see cref="IMaterializationInterceptor" /> methods containing data about the instance
+///     A parameter object passed to <see cref="IMaterializationInterceptor" /> methods containing
+// data about the instance
 ///     being materialized.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public readonly struct MaterializationInterceptionData
 {
@@ -21,10 +23,14 @@ public readonly struct MaterializationInterceptionData
     > _valueAccessor;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     [UsedImplicitly]
@@ -55,7 +61,8 @@ public readonly struct MaterializationInterceptionData
     public IEntityType EntityType { get; }
 
     /// <summary>
-    ///     The query tracking behavior, or <see langword="null" /> if this materialization is not from a query.
+    ///     The query tracking behavior, or <see langword="null" /> if this materialization is not from
+    // a query.
     /// </summary>
     public QueryTrackingBehavior? QueryTrackingBehavior { get; }
 
@@ -63,7 +70,8 @@ public readonly struct MaterializationInterceptionData
     ///     Gets the property value for the property with the given name.
     /// </summary>
     /// <remarks>
-    ///     This generic overload of this method will not cause a primitive or value-type property value to be boxed into
+    ///     This generic overload of this method will not cause a primitive or value-type property value
+    // to be boxed into
     ///     a heap-allocated object.
     /// </remarks>
     /// <param name="propertyName">The property name.</param>
@@ -75,7 +83,8 @@ public readonly struct MaterializationInterceptionData
     ///     Gets the property value for the property with the given name.
     /// </summary>
     /// <remarks>
-    ///     This non-generic overload of this method will always cause a primitive or value-type property value to be boxed into
+    ///     This non-generic overload of this method will always cause a primitive or value-type
+    // property value to be boxed into
     ///     a heap-allocated object.
     /// </remarks>
     /// <param name="propertyName">The property name.</param>
@@ -104,7 +113,8 @@ public readonly struct MaterializationInterceptionData
     ///     Gets the property value for the given property.
     /// </summary>
     /// <remarks>
-    ///     This generic overload of this method will not cause a primitive or value-type property value to be boxed into
+    ///     This generic overload of this method will not cause a primitive or value-type property value
+    // to be boxed into
     ///     a heap-allocated object.
     /// </remarks>
     /// <param name="property">The property.</param>
@@ -118,7 +128,8 @@ public readonly struct MaterializationInterceptionData
     ///     Gets the property value for the given property.
     /// </summary>
     /// <remarks>
-    ///     This non-generic overload of this method will always cause a primitive or value-type property value to be boxed into
+    ///     This non-generic overload of this method will always cause a primitive or value-type
+    // property value to be boxed into
     ///     a heap-allocated object.
     /// </remarks>
     /// <param name="property">The property.</param>

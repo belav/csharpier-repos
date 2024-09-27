@@ -52,7 +52,8 @@ public class HtmlHelperDisplayNameExtensionsTest
         Assert.Equal("Property1", displayNameForEnumerableResult);
     }
 
-    // If the metadata is for a type (not property), then DisplayName(expression) will evaluate the expression
+    // If the metadata is for a type (not property), then DisplayName(expression) will evaluate the
+    // expression
     [Fact]
     public void DisplayNameHelpers_DisplayName_Evaluates_Expression()
     {

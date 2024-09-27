@@ -424,7 +424,8 @@ namespace MonoTests.System.ServiceModel.Dispatcher
                         + " , "
                     );
                     //if (OperationContext.Current.InstanceContext != null)
-                    //    string_res += ("Instance = " + OperationContext.Current.InstanceContext.GetServiceInstance () + " , ");
+                    //    string_res += ("Instance = " + OperationContext.Current.InstanceContext.GetServiceInstance ()
+                    // + " , ");
                 }
             }
         }

@@ -38,15 +38,18 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
+        /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see
+        // cref="Expression"/>.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
         public sealed override ExpressionType NodeType => ExpressionType.Index;
 
         /// <summary>
-        /// Gets the static type of the expression that this <see cref="Expression"/> represents. (Inherited from <see cref="Expression"/>.)
+        /// Gets the static type of the expression that this <see cref="Expression"/> represents. (Inherited
+        // from <see cref="Expression"/>.)
         /// </summary>
-        /// <returns>The <see cref="System.Type"/> that represents the static type of the expression.</returns>
+        /// <returns>The <see cref="System.Type"/> that represents the static type of the
+        // expression.</returns>
         public sealed override Type Type
         {
             get
@@ -65,7 +68,8 @@ namespace System.Linq.Expressions
         public Expression? Object { get; }
 
         /// <summary>
-        /// Gets the <see cref="PropertyInfo"/> for the property if the expression represents an indexed property, returns null otherwise.
+        /// Gets the <see cref="PropertyInfo"/> for the property if the expression represents an indexed
+        // property, returns null otherwise.
         /// </summary>
         public PropertyInfo? Indexer { get; }
 
@@ -84,7 +88,8 @@ namespace System.Linq.Expressions
         /// </summary>
         /// <param name="object">The <see cref="Object"/> property of the result.</param>
         /// <param name="arguments">The <see cref="Arguments"/> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public IndexExpression Update(Expression @object, IEnumerable<Expression>? arguments)
         {
             if (@object == Object && arguments != null)
@@ -102,7 +107,8 @@ namespace System.Linq.Expressions
         /// Gets the argument expression with the specified <paramref name="index"/>.
         /// </summary>
         /// <param name="index">The index of the argument expression to get.</param>
-        /// <returns>The expression representing the argument at the specified <paramref name="index"/>.</returns>
+        /// <returns>The expression representing the argument at the specified <paramref
+        // name="index"/>.</returns>
         public Expression GetArgument(int index) => _arguments[index];
 
         /// <summary>
@@ -130,11 +136,14 @@ namespace System.Linq.Expressions
     public partial class Expression
     {
         /// <summary>
-        /// Creates an <see cref="IndexExpression"/> that represents accessing an indexed property in an object.
+        /// Creates an <see cref="IndexExpression"/> that represents accessing an indexed property in an
+        // object.
         /// </summary>
-        /// <param name="instance">The object to which the property belongs. Should be null if the property is static(shared).</param>
+        /// <param name="instance">The object to which the property belongs. Should be null if the property
+        // is static(shared).</param>
         /// <param name="indexer">An <see cref="Expression"/> representing the property to index.</param>
-        /// <param name="arguments">An <see cref="IEnumerable{Expression}"/> containing the arguments to be used to index the property.</param>
+        /// <param name="arguments">An <see cref="IEnumerable{Expression}"/> containing the arguments to be
+        // used to index the property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
         public static IndexExpression MakeIndex(
             Expression instance,
@@ -159,8 +168,10 @@ namespace System.Linq.Expressions
         /// </summary>
         /// <param name="array">An expression representing the array to index.</param>
         /// <param name="indexes">An array containing expressions used to index the array.</param>
-        /// <remarks>The expression representing the array can be obtained by using the <see cref="MakeMemberAccess"/> method,
-        /// or through <see cref="NewArrayBounds(Type, Expression[])"/> or <see cref="NewArrayInit(Type, Expression[])"/>.</remarks>
+        /// <remarks>The expression representing the array can be obtained by using the <see
+        // cref="MakeMemberAccess"/> method,
+        /// or through <see cref="NewArrayBounds(Type, Expression[])"/> or <see cref="NewArrayInit(Type,
+        // Expression[])"/>.</remarks>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
         public static IndexExpression ArrayAccess(Expression array, params Expression[]? indexes)
         {
@@ -171,9 +182,12 @@ namespace System.Linq.Expressions
         /// Creates an <see cref="IndexExpression"/> to access an array.
         /// </summary>
         /// <param name="array">An expression representing the array to index.</param>
-        /// <param name="indexes">An <see cref="IEnumerable{T}"/> containing expressions used to index the array.</param>
-        /// <remarks>The expression representing the array can be obtained by using the <see cref="MakeMemberAccess"/> method,
-        /// or through <see cref="NewArrayBounds(Type, IEnumerable{Expression})"/> or <see cref="NewArrayInit(Type, IEnumerable{Expression})"/>.</remarks>
+        /// <param name="indexes">An <see cref="IEnumerable{T}"/> containing expressions used to index the
+        // array.</param>
+        /// <remarks>The expression representing the array can be obtained by using the <see
+        // cref="MakeMemberAccess"/> method,
+        /// or through <see cref="NewArrayBounds(Type, IEnumerable{Expression})"/> or <see
+        // cref="NewArrayInit(Type, IEnumerable{Expression})"/>.</remarks>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
         public static IndexExpression ArrayAccess(
             Expression array,
@@ -213,9 +227,11 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates an <see cref="IndexExpression"/> representing the access to an indexed property.
         /// </summary>
-        /// <param name="instance">The object to which the property belongs. If the property is static/shared, it must be null.</param>
+        /// <param name="instance">The object to which the property belongs. If the property is
+        // static/shared, it must be null.</param>
         /// <param name="propertyName">The name of the indexer.</param>
-        /// <param name="arguments">An array of <see cref="Expression"/> objects that are used to index the property.</param>
+        /// <param name="arguments">An array of <see cref="Expression"/> objects that are used to index the
+        // property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
         public static IndexExpression Property(
@@ -233,7 +249,8 @@ namespace System.Linq.Expressions
         #region methods for finding a PropertyInfo by its name
 
         /// <summary>
-        /// The method finds the instance property with the specified name in a type. The property's type signature needs to be compatible with
+        /// The method finds the instance property with the specified name in a type. The property's type
+        // signature needs to be compatible with
         /// the arguments if it is a indexer. If the arguments is null or empty, we get a normal property.
         /// </summary>
         private static PropertyInfo FindInstanceProperty(
@@ -383,9 +400,12 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates an <see cref="IndexExpression"/> representing the access to an indexed property.
         /// </summary>
-        /// <param name="instance">The object to which the property belongs. If the property is static/shared, it must be null.</param>
-        /// <param name="indexer">The <see cref="PropertyInfo"/> that represents the property to index.</param>
-        /// <param name="arguments">An array of <see cref="Expression"/> objects that are used to index the property.</param>
+        /// <param name="instance">The object to which the property belongs. If the property is
+        // static/shared, it must be null.</param>
+        /// <param name="indexer">The <see cref="PropertyInfo"/> that represents the property to
+        // index.</param>
+        /// <param name="arguments">An array of <see cref="Expression"/> objects that are used to index the
+        // property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
         public static IndexExpression Property(
             Expression? instance,
@@ -399,9 +419,12 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates an <see cref="IndexExpression"/> representing the access to an indexed property.
         /// </summary>
-        /// <param name="instance">The object to which the property belongs. If the property is static/shared, it must be null.</param>
-        /// <param name="indexer">The <see cref="PropertyInfo"/> that represents the property to index.</param>
-        /// <param name="arguments">An <see cref="IEnumerable{T}"/> of <see cref="Expression"/> objects that are used to index the property.</param>
+        /// <param name="instance">The object to which the property belongs. If the property is
+        // static/shared, it must be null.</param>
+        /// <param name="indexer">The <see cref="PropertyInfo"/> that represents the property to
+        // index.</param>
+        /// <param name="arguments">An <see cref="IEnumerable{T}"/> of <see cref="Expression"/> objects that
+        // are used to index the property.</param>
         /// <returns>The created <see cref="IndexExpression"/>.</returns>
         public static IndexExpression Property(
             Expression? instance,

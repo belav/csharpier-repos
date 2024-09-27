@@ -24,12 +24,16 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Initializes an instance of <see cref="WSTrustServiceHost"/>
         /// </summary>
-        /// <param name="securityTokenServiceConfiguration">SecurityTokenServiceConfiguration instance used to initialize this ServiceHost.</param>
+        /// <param name="securityTokenServiceConfiguration">SecurityTokenServiceConfiguration instance used
+        // to initialize this ServiceHost.</param>
         /// <param name="baseAddresses">BaseAddress collection for the service host</param>
         /// <remarks>
-        /// A default WSTrustServiceContract is instantiated using the SecurityTokenServiceConfiguration instance.
-        /// The SecurityTokenServiceConfiguration instance is used for one-time initialization of the ServiceHost and
-        /// setting properties on the configuration instance after the host is initialization may not result in
+        /// A default WSTrustServiceContract is instantiated using the SecurityTokenServiceConfiguration
+        // instance.
+        /// The SecurityTokenServiceConfiguration instance is used for one-time initialization of the
+        // ServiceHost and
+        /// setting properties on the configuration instance after the host is initialization may not result
+        // in
         /// behavioral changes.
         /// </remarks>
         public WSTrustServiceHost(

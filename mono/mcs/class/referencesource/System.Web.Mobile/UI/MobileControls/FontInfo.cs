@@ -13,10 +13,10 @@ using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * FontInfo class.
-     * Encapsulates all of the Style font properties into a single class.
-     */
+/*
+* FontInfo class.
+* Encapsulates all of the Style font properties into a single class.
+*/
     /// <include file='doc\FontInfo.uex' path='docs/doc[@for="FontInfo"]/*' />
     [TypeConverterAttribute(typeof(ExpandableObjectConverter))]
     [AspNetHostingPermission(

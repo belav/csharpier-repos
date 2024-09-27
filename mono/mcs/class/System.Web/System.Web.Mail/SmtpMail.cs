@@ -47,7 +47,7 @@ namespace System.Web.Mail
         // Constructor
         SmtpMail()
         {
-            /* empty */
+/* empty */
         }
 
         // Properties

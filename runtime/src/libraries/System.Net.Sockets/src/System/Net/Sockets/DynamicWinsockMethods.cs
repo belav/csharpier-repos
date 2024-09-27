@@ -164,8 +164,10 @@ namespace System.Net.Sockets
             );
 
         /// <summary>
-        /// The SocketDelegateHelper implements manual marshalling wrappers for the various delegates used for the dynamic Winsock methods.
-        /// These wrappers were generated with LibraryImportGenerator and then manually converted to use function pointers as the target instead of a P/Invoke.
+        /// The SocketDelegateHelper implements manual marshalling wrappers for the various delegates used
+        // for the dynamic Winsock methods.
+        /// These wrappers were generated with LibraryImportGenerator and then manually converted to use
+        // function pointers as the target instead of a P/Invoke.
         /// </summary>
         private readonly struct SocketDelegateHelper
         {

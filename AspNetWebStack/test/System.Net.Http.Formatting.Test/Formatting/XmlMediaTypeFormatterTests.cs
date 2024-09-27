@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.IO;
@@ -19,8 +20,10 @@ namespace System.Net.Http.Formatting
 {
     public class XmlMediaTypeFormatterTests : MediaTypeFormatterTestBase<XmlMediaTypeFormatter>
     {
-        // Test data which should round-trip using a media type that includes type information.  A representative
-        // sample only; avoids types DataContractJsonSerializer fails to round trip (e.g. Guid, Uint16).  May require
+        // Test data which should round-trip using a media type that includes type information.  A
+        // representative
+        // sample only; avoids types DataContractJsonSerializer fails to round trip (e.g. Guid, Uint16).
+        // May require
         // known types or similar (de)serializer configuration.
         public static readonly RefTypeTestData<object> BunchOfTypedObjectsTestData =
             new RefTypeTestData<object>(
@@ -608,7 +611,8 @@ namespace System.Net.Http.Formatting
             }
         }
 
-        // Test alternate null value; this serializer attempts to cast DBNull to variationType so typeof(string) variation fails
+        // Test alternate null value; this serializer attempts to cast DBNull to variationType so
+        // typeof(string) variation fails
         [Fact]
         public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsyncUsingXmlSerializer_DBNull()
         {

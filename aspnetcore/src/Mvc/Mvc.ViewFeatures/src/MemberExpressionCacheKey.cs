@@ -22,8 +22,10 @@ internal readonly struct MemberExpressionCacheKey
         MemberExpression = null;
     }
 
-    // We want to avoid caching a MemberExpression since it has references to other instances in the expression tree.
-    // We instead store it as a series of MemberInfo items that comprise of the MemberExpression going from right-most
+    // We want to avoid caching a MemberExpression since it has references to other instances in the
+    // expression tree.
+    // We instead store it as a series of MemberInfo items that comprise of the MemberExpression going
+    // from right-most
     // expression to left.
     public MemberExpressionCacheKey MakeCacheable()
     {

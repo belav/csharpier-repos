@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Web.Razor.Generator;
@@ -30,7 +31,8 @@ namespace System.Web.Razor
         }
 
         /// <summary>
-        /// The name of the language (for use in System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage)
+        /// The name of the language (for use in
+        // System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage)
         /// </summary>
         public abstract string LanguageName { get; }
 

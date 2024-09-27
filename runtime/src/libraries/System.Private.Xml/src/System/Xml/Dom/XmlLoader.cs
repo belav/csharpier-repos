@@ -286,7 +286,8 @@ namespace System.Xml
                         {
                             r.ResolveEntity();
                             LoadAttributeValue(node, false);
-                            // Code internally relies on the fact that an EntRef nodes has at least one child (even an empty text node). Ensure that this holds true,
+                            // Code internally relies on the fact that an EntRef nodes has at least one child (even an empty
+                            // text node). Ensure that this holds true,
                             // if the reader does not present any children for the ent-ref
                             if (node.FirstChild == null)
                             {
@@ -325,7 +326,8 @@ namespace System.Xml
             LoadAttributeValue(attr, false);
 
             XmlUnspecifiedAttribute? defAttr = attr as XmlUnspecifiedAttribute;
-            // If user overrides CreateDefaultAttribute, then attr will NOT be a XmlUnspecifiedAttribute instance.
+            // If user overrides CreateDefaultAttribute, then attr will NOT be a XmlUnspecifiedAttribute
+            // instance.
             defAttr?.SetSpecified(false);
 
             return attr;
@@ -352,7 +354,8 @@ namespace System.Xml
                         {
                             r.ResolveEntity();
                             LoadAttributeValue(node, direct);
-                            // Code internally relies on the fact that an EntRef nodes has at least one child (even an empty text node). Ensure that this holds true,
+                            // Code internally relies on the fact that an EntRef nodes has at least one child (even an empty
+                            // text node). Ensure that this holds true,
                             // if the reader does not present any children for the ent-ref
                             if (node.FirstChild == null)
                             {
@@ -391,7 +394,8 @@ namespace System.Xml
                         eref.AppendChildForLoad(node, _doc!);
                     }
                 }
-                // Code internally relies on the fact that an EntRef nodes has at least one child (even an empty text node). Ensure that this holds true,
+                // Code internally relies on the fact that an EntRef nodes has at least one child (even an empty
+                // text node). Ensure that this holds true,
                 // if the reader does not present any children for the ent-ref
                 if (eref.LastChild == null)
                     eref.AppendChildForLoad(_doc!.CreateTextNode(string.Empty), _doc);
@@ -408,7 +412,8 @@ namespace System.Xml
             string? encoding = null;
             string? standalone = null;
 
-            // Try first to use the reader to get the xml decl "attributes". Since not all readers are required to support this, it is possible to have
+            // Try first to use the reader to get the xml decl "attributes". Since not all readers are required
+            // to support this, it is possible to have
             // implementations that do nothing
             while (_reader.MoveToNextAttribute())
             {
@@ -429,7 +434,8 @@ namespace System.Xml
                 }
             }
 
-            // For readers that do not break xml decl into attributes, we must parse the xml decl ourselves. We use version attr, b/c xml decl MUST contain
+            // For readers that do not break xml decl into attributes, we must parse the xml decl ourselves. We
+            // use version attr, b/c xml decl MUST contain
             // at least version attr, so if the reader implements them as attr, then version must be present
             if (version == null)
                 ParseXmlDeclarationValue(_reader.Value, out version, out encoding, out standalone);
@@ -470,16 +476,20 @@ namespace System.Xml
                 LoadDocumentType(dtdInfo, dtNode);
             else
             {
-                //construct our own XmlValidatingReader to parse the DocumentType node so we could get Entities and notations information
+                //construct our own XmlValidatingReader to parse the DocumentType node so we could get Entities and
+                // notations information
                 ParseDocumentType(dtNode);
             }
 
             return dtNode;
         }
 
-        // LoadNodeDirect does not use creator functions on XmlDocument. It is used loading nodes that are children of entity nodes,
-        // because we do not want to let users extend these (if we would allow this, XmlDataDocument would have a problem, because
-        // they do not know that those nodes should not be mapped). It can be also used for an optimized load path when if the
+        // LoadNodeDirect does not use creator functions on XmlDocument. It is used loading nodes that are
+        // children of entity nodes,
+        // because we do not want to let users extend these (if we would allow this, XmlDataDocument would
+        // have a problem, because
+        // they do not know that those nodes should not be mapped). It can be also used for an optimized
+        // load path when if the
         // XmlDocument is not extended if XmlDocumentType and XmlDeclaration handling is added.
         private XmlNode? LoadNodeDirect()
         {
@@ -620,7 +630,8 @@ namespace System.Xml
         internal void ParseDocumentType(XmlDocumentType dtNode)
         {
             XmlDocument doc = dtNode.OwnerDocument!;
-            //if xmlresolver is set on doc, use that one, otherwise use the default one being created by xmlvalidatingreader
+            //if xmlresolver is set on doc, use that one, otherwise use the default one being created by
+            // xmlvalidatingreader
             if (doc.HasSetResolver)
                 ParseDocumentType(dtNode, true, doc.GetResolver());
             else
@@ -930,9 +941,11 @@ namespace System.Xml
                         }
                         else
                         {
-                            // Add this namespace, so it we will behave correctly when setting "<bar xmlns:p="BAR"><foo2 xmlns:p="FOO"/></bar>" as
+                            // Add this namespace, so it we will behave correctly when setting "<bar xmlns:p="BAR"><foo2
+                            // xmlns:p="FOO"/></bar>" as
                             // InnerXml on this foo elem where foo is like this "<foo xmlns:p="FOO"></foo>"
-                            // If do not do this, then we will remove the inner p prefix definition and will let the 1st p to be in scope for
+                            // If do not do this, then we will remove the inner p prefix definition and will let the 1st p to be
+                            // in scope for
                             // the subsequent InnerXml_set or setting an EntRef inside.
                             mgr.AddNamespace(attr.LocalName, attr.Value);
                         }
@@ -947,9 +960,11 @@ namespace System.Xml
                         }
                         else
                         {
-                            // Add this namespace, so it we will behave correctly when setting "<bar xmlns:p="BAR"><foo2 xmlns:p="FOO"/></bar>" as
+                            // Add this namespace, so it we will behave correctly when setting "<bar xmlns:p="BAR"><foo2
+                            // xmlns:p="FOO"/></bar>" as
                             // InnerXml on this foo elem where foo is like this "<foo xmlns:p="FOO"></foo>"
-                            // If do not do this, then we will remove the inner p prefix definition and will let the 1st p to be in scope for
+                            // If do not do this, then we will remove the inner p prefix definition and will let the 1st p to be
+                            // in scope for
                             // the subsequent InnerXml_set or setting an EntRef inside.
                             mgr.AddNamespace(attr.LocalName, attr.Value);
                         }

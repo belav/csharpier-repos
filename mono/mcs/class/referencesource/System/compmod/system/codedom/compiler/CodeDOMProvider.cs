@@ -116,7 +116,8 @@ namespace System.CodeDom.Compiler
         }
 
         /// <devdoc>
-        ///    <para>Retrieves the default extension to use when saving files using this code dom provider.</para>
+        ///    <para>Retrieves the default extension to use when saving files using this code dom
+        // provider.</para>
         /// </devdoc>
         public virtual string FileExtension
         {
@@ -376,15 +377,19 @@ namespace System.CodeDom.Compiler
         /// the version of the framework referenced by ReferencedAssemblies property if it appears
         /// that these references point to a multi-targeting pack.  VBCodeProvider and CSharpCodeProvider
         /// use this method to provide a value for CoreAssemblyFileName if it was not set so the default
-        /// mscorlib.dll is not used in cases where it looks like the developer intended to do multi-targeting.
+        /// mscorlib.dll is not used in cases where it looks like the developer intended to do
+        // multi-targeting.
         ///
         /// The huristic here is as follows:
-        /// If there is a reference that contains "\Reference Assemblies\Microsoft\Framework\<SkuName>\v<Version>"
-        /// and for each reference of the above form, they all share the same set of directories starting with
+        /// If there is a reference that contains "\Reference
+        // Assemblies\Microsoft\Framework\<SkuName>\v<Version>"
+        /// and for each reference of the above form, they all share the same set of directories starting
+        // with
         /// Reference Assemblies, then the probable core assembly is mscorlib.dll in that directory.
         /// Otherwise, we do not have a probable core assembly.
         ///
-        /// Note that we do no validation to ensure SkuName or Version are actually valid sku names or versions.
+        /// Note that we do no validation to ensure SkuName or Version are actually valid sku names or
+        // versions.
         /// The version component must start with a v but otherwise can be in any arbitrary form.
         /// </summary>
         internal static bool TryGetProbableCoreAssemblyFilePath(
@@ -428,7 +433,8 @@ namespace System.CodeDom.Compiler
                             )
                         )
                         {
-                            // Here i+5 is the index of the thing after the vX.XXX folder (if one exists) and i+4 should look like a version.
+                            // Here i+5 is the index of the thing after the vX.XXX folder (if one exists) and i+4 should look
+                            // like a version.
                             // (i.e. start with a v).
                             if (dirs[i + 4].StartsWith("v", StringComparison.OrdinalIgnoreCase))
                             {

@@ -136,7 +136,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2NameIdentifier"/> as the authority that is making the claim(s) in the assertion. [Saml2Core, 2.3.3]
+        /// Gets or sets the <see cref="Saml2NameIdentifier"/> as the authority that is making the claim(s)
+        // in the assertion. [Saml2Core, 2.3.3]
         /// </summary>
         public Saml2NameIdentifier Issuer
         {
@@ -153,7 +154,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SigningCredentials"/> used by the issuer to protect the integrity of the assertion.
+        /// Gets or sets the <see cref="SigningCredentials"/> used by the issuer to protect the integrity of
+        // the assertion.
         /// </summary>
         public SigningCredentials SigningCredentials
         {
@@ -162,7 +164,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2Subject"/> of the statement(s) in the assertion. [Saml2Core, 2.3.3]
+        /// Gets or sets the <see cref="Saml2Subject"/> of the statement(s) in the assertion. [Saml2Core,
+        // 2.3.3]
         /// </summary>
         public Saml2Subject Subject
         {
@@ -222,7 +225,8 @@ namespace System.IdentityModel.Tokens
         /// without changes and without the need to re-sign the data. See
         /// CanWriteSourceData and WriteSourceData.
         /// </remarks>
-        /// <param name="reader"><see cref="EnvelopedSignatureReader"/> that contains the data for the assertion.</param>
+        /// <param name="reader"><see cref="EnvelopedSignatureReader"/> that contains the data for the
+        // assertion.</param>
         internal virtual void CaptureSourceData(EnvelopedSignatureReader reader)
         {
             if (null == reader)

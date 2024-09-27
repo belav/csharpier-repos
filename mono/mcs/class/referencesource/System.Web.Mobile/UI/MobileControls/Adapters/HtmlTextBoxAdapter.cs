@@ -15,10 +15,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlTextBoxAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * HtmlTextBoxAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -35,20 +35,23 @@ namespace System.Web.UI.MobileControls.Adapters
     {
         private String _staticValue;
 
-        /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.Control"]/*' />
+        /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.Control"]/*'
+        // />
         protected new TextBox Control
         {
             get { return (TextBox)base.Control; }
         }
 
-        /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.OnInit"]/*' />
+        /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.OnInit"]/*'
+        // />
         public override void OnInit(EventArgs e)
         {
             _staticValue = Control.Text;
             base.OnInit(e);
         }
 
-        /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.Render"]/*' />
+        /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.Render"]/*'
+        // />
         public override void Render(HtmlMobileTextWriter writer)
         {
             writer.EnterLayout(Style);
@@ -100,7 +103,8 @@ namespace System.Web.UI.MobileControls.Adapters
             return renderName;
         }
 
-        /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.RenderAsHiddenInputField"]/*' />
+        /// <include file='doc\HtmlTextBoxAdapter.uex'
+        // path='docs/doc[@for="HtmlTextBoxAdapter.RenderAsHiddenInputField"]/*' />
         protected override void RenderAsHiddenInputField(HtmlMobileTextWriter writer)
         {
             // Optimization - if viewstate is enabled for this control, and the

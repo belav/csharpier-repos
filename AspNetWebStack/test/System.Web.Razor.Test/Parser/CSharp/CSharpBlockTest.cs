@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Web.Razor.Generator;
 using System.Web.Razor.Parser;
@@ -351,7 +352,8 @@ else if(bar) { baz(); }",
         [Fact]
         public void ParseBlockAcceptsElseIfWithNoCondition()
         {
-            // We don't want to be a full C# parser - If the else if is missing it's condition, the C# compiler can handle that, we have all the info we need to keep parsing
+            // We don't want to be a full C# parser - If the else if is missing it's condition, the C# compiler
+            // can handle that, we have all the info we need to keep parsing
             const string ifBranch =
                 @"if(int i = 0; i < 10; new Foo { Bar = ""baz"" }) {
     Debug.WriteLine(@""foo } bar""); 

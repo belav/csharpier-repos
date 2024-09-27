@@ -81,11 +81,13 @@ public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHel
     /// </summary>
     /// <param name="name">The <see cref="TagHelperAttribute.Name"/> of the
     /// <see cref="TagHelperAttribute"/> to get.</param>
-    /// <param name="attribute">When this method returns, the first <see cref="TagHelperAttribute"/> with
+    /// <param name="attribute">When this method returns, the first <see cref="TagHelperAttribute"/>
+    // with
     /// <see cref="TagHelperAttribute.Name"/> matching <paramref name="name"/>, if found; otherwise,
     /// <c>null</c>.</param>
     /// <returns><c>true</c> if a <see cref="TagHelperAttribute"/> with the same
-    /// <see cref="TagHelperAttribute.Name"/> exists in the collection; otherwise, <c>false</c>.</returns>
+    /// <see cref="TagHelperAttribute.Name"/> exists in the collection; otherwise,
+    // <c>false</c>.</returns>
     /// <remarks><paramref name="name"/> is compared case-insensitively.</remarks>
     public bool TryGetAttribute(string name, out TagHelperAttribute attribute)
     {
@@ -105,7 +107,8 @@ public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHel
     /// <param name="attributes">When this method returns, the <see cref="TagHelperAttribute"/>s with
     /// <see cref="TagHelperAttribute.Name"/> matching <paramref name="name"/>.</param>
     /// <returns><c>true</c> if at least one <see cref="TagHelperAttribute"/> with the same
-    /// <see cref="TagHelperAttribute.Name"/> exists in the collection; otherwise, <c>false</c>.</returns>
+    /// <see cref="TagHelperAttribute.Name"/> exists in the collection; otherwise,
+    // <c>false</c>.</returns>
     /// <remarks><paramref name="name"/> is compared case-insensitively.</remarks>
     public bool TryGetAttributes(string name, out IReadOnlyList<TagHelperAttribute> attributes)
     {
@@ -141,8 +144,10 @@ public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHel
     /// case-insensitively matches <paramref name="name"/> and returns the zero-based index of the first
     /// occurrence.
     /// </summary>
-    /// <param name="name">The <see cref="TagHelperAttribute.Name"/> to locate in the collection.</param>
-    /// <returns>The zero-based index of the first matching <see cref="TagHelperAttribute"/> within the collection,
+    /// <param name="name">The <see cref="TagHelperAttribute.Name"/> to locate in the
+    // collection.</param>
+    /// <returns>The zero-based index of the first matching <see cref="TagHelperAttribute"/> within the
+    // collection,
     /// if found; otherwise, -1.</returns>
     public int IndexOfName(string name)
     {
@@ -163,12 +168,14 @@ public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHel
     }
 
     /// <summary>
-    /// Determines if the specified <paramref name="attribute"/> has the same name as <paramref name="name"/>.
+    /// Determines if the specified <paramref name="attribute"/> has the same name as <paramref
+    // name="name"/>.
     /// </summary>
     /// <param name="name">The value to compare against <paramref name="attribute"/>s
     /// <see cref="TagHelperAttribute.Name"/>.</param>
     /// <param name="attribute">The attribute to compare against.</param>
-    /// <returns><c>true</c> if <paramref name="name"/> case-insensitively matches <paramref name="attribute"/>s
+    /// <returns><c>true</c> if <paramref name="name"/> case-insensitively matches <paramref
+    // name="attribute"/>s
     /// <see cref="TagHelperAttribute.Name"/>.</returns>
     protected static bool NameEquals(string name, TagHelperAttribute attribute)
     {

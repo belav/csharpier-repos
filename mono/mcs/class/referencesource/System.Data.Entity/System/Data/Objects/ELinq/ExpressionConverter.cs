@@ -313,7 +313,8 @@ namespace System.Data.Objects.ELinq
         //      Linq: foo1 == foo2 (which presumably amounts to foo1.X == foo2.X && foo1.Y == foo2.Y
         //      ELinq: foo1.X == foo2.Y
         //
-        // Similar problems occur with set operations such as Union and Concat, where one of the initialization
+        // Similar problems occur with set operations such as Union and Concat, where one of the
+        // initialization
         // patterns may be ignored.
         //
         // This method performs an overly strict check, requiring that all initializers for a given type
@@ -394,7 +395,8 @@ namespace System.Data.Objects.ELinq
         ///     The Span information, which may be <c>null</c>.
         ///     If <c>null</c>, no attempt is made to update the dictionary of span mappings.
         /// </param>
-        /// <returns>The original <paramref name="expression"/> argument, to allow <c>return AddSpanMapping(expression, span)</c> scenarios</returns>
+        /// <returns>The original <paramref name="expression"/> argument, to allow <c>return
+        // AddSpanMapping(expression, span)</c> scenarios</returns>
         private DbExpression AddSpanMapping(DbExpression expression, Span span)
         {
             if (span != null && this.CanIncludeSpanInfo())
@@ -425,8 +427,10 @@ namespace System.Data.Objects.ELinq
         /// Attempts to retrieve Span information for the specified DbExpression.
         /// </summary>
         /// <param name="expression">The expression for which Span information should be retrieved.</param>
-        /// <param name="span">Will contain the Span information for the specified expression if it is present in the Span mapping dictionary.</param>
-        /// <returns><c>true</c> if Span information was retrieved for the specified expression and <paramref name="span"/> now contains this information; otherwise <c>false</c>.</returns>
+        /// <param name="span">Will contain the Span information for the specified expression if it is
+        // present in the Span mapping dictionary.</param>
+        /// <returns><c>true</c> if Span information was retrieved for the specified expression and
+        // <paramref name="span"/> now contains this information; otherwise <c>false</c>.</returns>
         private bool TryGetSpan(DbExpression expression, out Span span)
         {
             if (_spanMappings != null)
@@ -457,16 +461,24 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Unifies the Span information from the specified <paramref name="left"/> and <paramref name="right"/>
-        /// expressions, and applies it to the specified <paramref name="to"/> expression. Unification proceeds
+        /// Unifies the Span information from the specified <paramref name="left"/> and <paramref
+        // name="right"/>
+        /// expressions, and applies it to the specified <paramref name="to"/> expression. Unification
+        // proceeds
         /// as follows:
-        /// - If neither <paramref name="left"/> nor <paramref name="right"/> have Span information, no changes are made
-        /// - If one of <paramref name="left"/> or <paramref name="right"/> has Span information, that single Span information
-        ///   entry is removed from the Span mapping dictionary and used to create a new entry that maps from the <paramref name="to"/>
+        /// - If neither <paramref name="left"/> nor <paramref name="right"/> have Span information, no
+        // changes are made
+        /// - If one of <paramref name="left"/> or <paramref name="right"/> has Span information, that
+        // single Span information
+        ///   entry is removed from the Span mapping dictionary and used to create a new entry that maps
+        // from the <paramref name="to"/>
         ///   expression to the Span information.
-        /// - If both <paramref name="left"/> and <paramref name="right"/> have Span information, both entries are removed
-        ///   from the Span mapping dictionary, a new Span is created that contains the union of the original Spans, and
-        ///   a new entry is added to the dictionary that maps from <paramref name="to"/> expression to this new Span.
+        /// - If both <paramref name="left"/> and <paramref name="right"/> have Span information, both
+        // entries are removed
+        ///   from the Span mapping dictionary, a new Span is created that contains the union of the
+        // original Spans, and
+        ///   a new entry is added to the dictionary that maps from <paramref name="to"/> expression to this
+        // new Span.
         /// </summary>
         /// <param name="left">The first expression argument</param>
         /// <param name="right">The second expression argument</param>
@@ -586,7 +598,8 @@ namespace System.Data.Objects.ELinq
             bool preserveCastForDateTime
         )
         {
-            // An inlined ObjectQuery or an IOrderedQueryable expression being cast to IQueryable for use in a sequence method is a no-op.
+            // An inlined ObjectQuery or an IOrderedQueryable expression being cast to IQueryable for use in a
+            // sequence method is a no-op.
             if (
                 fromClrType != null
                 && fromClrType.IsGenericType
@@ -623,7 +636,8 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Check that the given cast specification is supported and if necessary adjust target type (for instance
+        /// Check that the given cast specification is supported and if necessary adjust target type (for
+        // instance
         /// add precision and scale for Integral -> Decimal casts)
         /// </summary>
         private static TypeUsage ValidateAndAdjustCastTypes(
@@ -680,7 +694,8 @@ namespace System.Data.Objects.ELinq
 
         /// <summary>
         /// Determines if an instance of fromType can be assigned to an instance of toType using
-        /// CLR semantics. in case of primitive type, it must rely on identity since unboxing primitive requires
+        /// CLR semantics. in case of primitive type, it must rely on identity since unboxing primitive
+        // requires
         /// exact match. for nominal types, rely on subtyping.
         /// </summary>
         private static bool CanOmitCast(
@@ -692,10 +707,12 @@ namespace System.Data.Objects.ELinq
             bool isPrimitiveType = TypeSemantics.IsPrimitiveType(fromType);
 
             //SQLBUDT #573573: This is to allow for a workaround on Katmai via explicit casting by the user.
-            // The issue is that SqlServer's type Date maps to Edm.DateTime, same as SqlServer's DateTime and SmallDateTime.
+            // The issue is that SqlServer's type Date maps to Edm.DateTime, same as SqlServer's DateTime and
+            // SmallDateTime.
             // However the conversion is not possible for all values of Date.
 
-            //Note: we could also call here TypeSemantics.IsPrimitiveType(TypeUsage type, PrimitiveTypeKind primitiveTypeKind),
+            //Note: we could also call here TypeSemantics.IsPrimitiveType(TypeUsage type, PrimitiveTypeKind
+            // primitiveTypeKind),
             //  but that checks again whether the type is primitive
             if (
                 isPrimitiveType
@@ -950,7 +967,8 @@ namespace System.Data.Objects.ELinq
             return TranslateLambda(lambda, binding.Variable);
         }
 
-        // Utility translator method for lambda expressions that are part of group by. Given a lambda expression and its translated
+        // Utility translator method for lambda expressions that are part of group by. Given a lambda
+        // expression and its translated
         // inputs, translates the lambda expression, assuming the input needs to be used as a grouping input
         private DbExpression TranslateLambda(
             LambdaExpression lambda,
@@ -1038,7 +1056,8 @@ namespace System.Data.Objects.ELinq
             return input;
         }
 
-        // Given a method call expression, returns the given lambda argument (unwrapping quote or closure references where
+        // Given a method call expression, returns the given lambda argument (unwrapping quote or closure
+        // references where
         // necessary)
         private LambdaExpression GetLambdaExpression(
             MethodCallExpression callExpression,
@@ -1247,10 +1266,13 @@ namespace System.Data.Objects.ELinq
 
             if (!_perspective.TryGetTypeByName(nonNullableType.FullName, false, out type))
             {
-                // If the user is casting to a type that is not a model type or a primitive type it can be a cast to an enum that
+                // If the user is casting to a type that is not a model type or a primitive type it can be a cast to
+                // an enum that
                 // is not in the model. In that case we use the underlying enum type.
-                // Note that if the underlying type is not any of the EF primitive types we will fail with and InvalidCastException.
-                // This is consistent with what we would do when seeing a cast to a primitive type that is not a EF valid primitive
+                // Note that if the underlying type is not any of the EF primitive types we will fail with and
+                // InvalidCastException.
+                // This is consistent with what we would do when seeing a cast to a primitive type that is not a EF
+                // valid primitive
                 // type (e.g. ulong).
                 if (
                     nonNullableType.IsEnum
@@ -1408,7 +1430,8 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Creates an implementation of equals using the given pattern. Throws exception when argument types
+        /// Creates an implementation of equals using the given pattern. Throws exception when argument
+        // types
         /// are not supported for equals comparison.
         /// </summary>
         private DbExpression CreateEqualsExpression(
@@ -1581,7 +1604,8 @@ namespace System.Data.Objects.ELinq
             }
         }
 
-        // Generate an equality expression where the values of the left and right operands are completely unknown
+        // Generate an equality expression where the values of the left and right operands are completely
+        // unknown
         private DbExpression ImplementEqualityUnknownArguments(
             DbExpression left,
             DbExpression right,
@@ -1622,7 +1646,8 @@ namespace System.Data.Objects.ELinq
         /// object.Method(argument), where Method is one of String.StartsWith, String.EndsWith or
         /// String.Contains is translated into:
         ///     1) If argument is a constant or parameter and the provider supports escaping:
-        ///         object like ("%") + argument1 + ("%"), where argument1 is argument escaped by the provider
+        ///         object like ("%") + argument1 + ("%"), where argument1 is argument escaped by the
+        // provider
         ///         and ("%") are appended on the begining/end depending on whether
         ///         insertPercentAtStart/insertPercentAtEnd are specified
         ///     2) Otherwise:
@@ -1694,7 +1719,8 @@ namespace System.Data.Objects.ELinq
                     "The prepared value should not be null when the input is non-null"
                 );
 
-                //Note: the result type needs to be taken from the original expression, as the user may have specified Unicode/Non-Unicode
+                //Note: the result type needs to be taken from the original expression, as the user may have
+                // specified Unicode/Non-Unicode
                 translatedPatternExpression = DbExpressionBuilder.Constant(
                     constantExpression.ResultType,
                     preparedValue
@@ -1706,7 +1732,8 @@ namespace System.Data.Objects.ELinq
             {
                 if (specifyEscape)
                 {
-                    //DevDiv #326720: The constant expression for the escape character should not have unicode set by default
+                    //DevDiv #326720: The constant expression for the escape character should not have unicode set by
+                    // default
                     var escapeExpression = DbExpressionBuilder.Constant(
                         EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(
                             PrimitiveTypeKind.String
@@ -2034,11 +2061,14 @@ namespace System.Data.Objects.ELinq
         // (1) (left EQ right) => left and right are equal and not null, so return true.
         // (2) (left IS NULL AND right IS NULL) => Both left and right are null, so return true.
         // (3) NOT (left IS NULL OR right IS NULL) =>
-        //      If only one of left or right is null, (1) evaluates to "unknown" and (2) evaluates to false. So we get "unknown" from DB which is null in C#.
-        //      This is not desired as it does not help in composability. Hence, (3) is used to return false instead of "unknown" when only one of the operands is null.
+        //      If only one of left or right is null, (1) evaluates to "unknown" and (2) evaluates to false.
+        // So we get "unknown" from DB which is null in C#.
+        //      This is not desired as it does not help in composability. Hence, (3) is used to return false
+        // instead of "unknown" when only one of the operands is null.
         //
         // Store: (1)
-        // PositiveNullEqualityNonComposable: (1) OR (2) - suitable only for Join operators, as they are not composable
+        // PositiveNullEqualityNonComposable: (1) OR (2) - suitable only for Join operators, as they are not
+        // composable
         // PositiveNullEqualityComposable: (1) OR (2) AND (3)
         //
         // In the actual implementation (see ImplementEquality), optimizations exist if one or the other

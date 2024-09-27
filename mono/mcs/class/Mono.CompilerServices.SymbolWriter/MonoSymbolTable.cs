@@ -288,7 +288,7 @@ namespace Mono.CompilerServices.SymbolWriter
             this.StartOffset = reader.ReadLeb128();
             this.EndOffset = reader.ReadLeb128();
 
-            /* Reserved for future extensions. */
+/* Reserved for future extensions. */
             if ((type_flag & 0x40) != 0)
             {
                 int data_size = reader.ReadInt16();

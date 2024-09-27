@@ -114,7 +114,8 @@ namespace System.Drawing
             int firstFailureY
         )
         {
-            // Print out the whole bitmap to provide a view of the whole image, rather than just the difference between
+            // Print out the whole bitmap to provide a view of the whole image, rather than just the difference
+            // between
             // a single pixel.
             var actualStringBuilder = new StringBuilder();
             var expectedStringBuilder = new StringBuilder();

@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             {
                 ParseText(out var nameParts, out var parameterCount);
 
-                // Notes:  In C#, indexers can't be resolved by any name.  This is acceptable, because the old language
+                // Notes:  In C#, indexers can't be resolved by any name.  This is acceptable, because the old
+                // language
                 //         service wasn't able to resolve them either.  In VB, parameterized properties will work in
                 //         the same way as any other property.
                 //         Destructors in C# can be resolved using the method name "Finalize". The resulting string
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Debugging
                         return FindMembers(types, nameParts[1]);
 
                     default:
-                        // They have a namespace or nested type qualified name.  Walk up to the root namespace trying to match.
+                        // They have a namespace or nested type qualified name.  Walk up to the root namespace trying to
+                        // match.
                         var containers = await _solution
                             .GetGlobalNamespacesAsync(cancellationToken)
                             .ConfigureAwait(false);
@@ -202,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Debugging
 
             INamespaceOrTypeSymbol container = type;
 
-            // The last element in "names" is the method/property name, but we're only matching against types here,
+            // The last element in "names" is the method/property name, but we're only matching against types
+            // here,
             // so we'll skip the last one.
             for (var i = names.Length - 2; i >= 0; i--)
             {
@@ -215,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Debugging
                     ((INamespaceOrTypeSymbol)container.ContainingType)
                     ?? container.ContainingNamespace;
 
-                // We ran out of containers to match against before we matched all the names, so this type isn't a match.
+                // We ran out of containers to match against before we matched all the names, so this type isn't a
+                // match.
                 if (container == null && i > 0)
                 {
                     return false;
@@ -230,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             params NameAndArity[] names
         )
         {
-            // Recursively expand the list of containers to include all types in all nested containers, then filter down to a
+            // Recursively expand the list of containers to include all types in all nested containers, then
+            // filter down to a
             // set of candidate types by walking the up the enclosing containers matching by simple name.
             var types = containers
                 .SelectMany(GetTypeMembersRecursive)
@@ -276,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Debugging
                 : null;
 
         /// <summary>
-        /// Is this method or property a valid place to set a breakpoint and does it match the expected parameter count?
+        /// Is this method or property a valid place to set a breakpoint and does it match the expected
+        // parameter count?
         /// </summary>
         private bool IsApplicable(
             ISymbol methodOrProperty,

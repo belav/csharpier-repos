@@ -14,7 +14,8 @@ namespace System.Web.UI.Design.WebControls
     internal class EntityDataSourceEntitySetNameItem
         : IComparable<EntityDataSourceEntitySetNameItem>
     {
-        // Only one of the following should be set. This is enforced through the constructors and the fact that these fields are readonly.
+        // Only one of the following should be set. This is enforced through the constructors and the fact
+        // that these fields are readonly.
         private readonly EntitySet _entitySet; // used when we have a real EntitySet backing this item
         private readonly string _unknownEntitySetName; // used when we have an unknown EntitySetName that we still want to include in the list
 

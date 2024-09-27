@@ -150,7 +150,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 catch (Exception)
                 {
-                    // Analyzer reported diagnostic with invalid format arguments, so just return the unformatted message.
+                    // Analyzer reported diagnostic with invalid format arguments, so just return the unformatted
+                    // message.
                     return localizedMessageFormat;
                 }
             }

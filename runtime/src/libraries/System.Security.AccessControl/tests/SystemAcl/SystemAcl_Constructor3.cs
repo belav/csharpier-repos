@@ -340,7 +340,8 @@ namespace System.Security.AccessControl.Tests
 
             Assert.True(TestConstructor(sAcl, isContainer, isDS, true, rawAcl));
 
-            //case 3, an inherit-only SystemAudit ACE without ContainerInherit or ObjectInherit flags on a container object is meaningless, will be removed
+            //case 3, an inherit-only SystemAudit ACE without ContainerInherit or ObjectInherit flags on a
+            // container object is meaningless, will be removed
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
@@ -473,7 +474,8 @@ namespace System.Security.AccessControl.Tests
                 null
             );
             rawAcl.InsertAce(rawAcl.Count, gAce);
-            //an inherit-only SystemAudit ACE without ContainerInherit or ObjectInherit flags on a container object
+            //an inherit-only SystemAudit ACE without ContainerInherit or ObjectInherit flags on a container
+            // object
             //is meaningless, will be removed
             //200 has inheritOnly, SuccessfulAccess and FailedAccess
             gAce = new CommonAce(

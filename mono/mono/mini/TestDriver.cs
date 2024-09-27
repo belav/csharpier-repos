@@ -203,7 +203,8 @@ public class TestDriver
             reporter.ReportResults(ran, nskipped, failed);
         }
 
-        //Console.WriteLine ("Regression tests: {0} ran, {1} failed in [{2}]{3}", ran, failed, type.Assembly.GetName().Name, type);
+        //Console.WriteLine ("Regression tests: {0} ran, {1} failed in [{2}]{3}", ran, failed,
+        // type.Assembly.GetName().Name, type);
         return failed;
     }
 
@@ -218,7 +219,8 @@ public class TestDriver
     }
 }
 
-/// Provide tests with the ability to find out how much time they have to run before being timed out.
+/// Provide tests with the ability to find out how much time they have to run before being timed
+// out.
 public class TestTimeout
 {
     private TimeSpan Timeout { get; }

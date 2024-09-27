@@ -117,7 +117,8 @@ namespace System.Web.Profile
             Dictionary<string, object> allowedSet = ApplicationServiceHelper.ProfileAllowedSet;
 
             // Note that profile may be null, and allowedSet may be null.
-            // Even though no properties will be saved in these cases, we still iterate over the given values to be set,
+            // Even though no properties will be saved in these cases, we still iterate over the given values to
+            // be set,
             // because we must build up the failed collection anyway.
             bool profileDirty = false;
             foreach (KeyValuePair<string, object> entry in values)

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -96,7 +97,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
             // TODO - this is mostly attribute verification
             // foreach (var originalModule in originalAssembly.Modules)
-            //   VerifyModule (originalModule, linkedAssembly.Modules.FirstOrDefault (m => m.Name == originalModule.Name));
+            //   VerifyModule (originalModule, linkedAssembly.Modules.FirstOrDefault (m => m.Name ==
+            // originalModule.Name));
 
             // TODO
             // VerifyResources (originalAssembly, linkedAssembly);
@@ -296,7 +298,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                         return false;
 
                     // Simple way to filter out system assemblies - the best way would be to get a list
-                    // of input/reference assemblies and filter on that, but it's tricky and this should work for basically everything
+                    // of input/reference assemblies and filter on that, but it's tricky and this should work for
+                    // basically everything
                     if (metadataType.Namespace.StartsWith("System"))
                         return false;
 
@@ -385,8 +388,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     return;
 
                 // Compiler generated members can't be annotated with `Kept` attributes directly
-                // For some of them we have special attributes (backing fields for example), but it's impractical to define
-                // special attributes for all types of compiler generated members (there are quite a few of them and they're
+                // For some of them we have special attributes (backing fields for example), but it's impractical to
+                // define
+                // special attributes for all types of compiler generated members (there are quite a few of them and
+                // they're
                 // going to change/increase over time).
                 // So we're effectively disabling Kept validation on compiler generated members
                 // Note that we still want to go "inside" each such member, as it might have additional attributes
@@ -425,7 +430,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         protected virtual void VerifyTypeDefinitionKept(TypeDefinition original, TypeDesc? linked)
         {
-            // NativeAOT will not keep delegate backing field type information, it's compiled down to a set of static fields
+            // NativeAOT will not keep delegate backing field type information, it's compiled down to a set of
+            // static fields
             // this infra currently doesn't track fields in any way.
             // Same goes for private implementation detail type.
             if (
@@ -466,7 +472,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 linkedMembers.Remove(token);
             }
 
-            //// Need to check properties before fields so that the KeptBackingFieldAttribute is handled correctly
+            //// Need to check properties before fields so that the KeptBackingFieldAttribute is handled
+            // correctly
             foreach (var p in original.Properties)
             {
                 AssemblyQualifiedToken token = new AssemblyQualifiedToken(p);
@@ -715,8 +722,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 )
             )
             {
-                // TODO: This is wrong - we can't validate that the method is present by looking at linked (as that is not actually linked)
-                //   we need to look into linkedMembers to see if the method was actually preserved by the compiler (and has an entry point)
+                // TODO: This is wrong - we can't validate that the method is present by looking at linked (as that
+                // is not actually linked)
+                //   we need to look into linkedMembers to see if the method was actually preserved by the compiler
+                // (and has an entry point)
                 VerifyMethodInternal(
                     src.AddMethod,
                     new LinkedMethodEntity(linked.AddMethod, false),
@@ -733,8 +742,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 )
             )
             {
-                // TODO: This is wrong - we can't validate that the method is present by looking at linked (as that is not actually linked)
-                //   we need to look into linkedMembers to see if the method was actually preserved by the compiler (and has an entry point)
+                // TODO: This is wrong - we can't validate that the method is present by looking at linked (as that
+                // is not actually linked)
+                //   we need to look into linkedMembers to see if the method was actually preserved by the compiler
+                // (and has an entry point)
                 VerifyMethodInternal(
                     src.RemoveMethod,
                     new LinkedMethodEntity(linked.RemoveMethod, false),
@@ -772,8 +783,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 if (linked == null)
                     return;
 
-                // Similar to comment on types, compiler-generated methods can't be annotated with Kept attribute directly
-                // so we're not going to validate kept/remove on them. Note that we're still going to go validate "into" them
+                // Similar to comment on types, compiler-generated methods can't be annotated with Kept attribute
+                // directly
+                // so we're not going to validate kept/remove on them. Note that we're still going to go validate
+                // "into" them
                 // to check for other properties (like parameter name presence/removal for example)
                 if (!compilerGenerated)
                     Assert.Fail(
@@ -1072,15 +1085,16 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 .Select(ReduceAssemblyFileNameOrNameToNameOnly)
                 .ToArray();
 
-            /*
-             - The test case will always need to have at least 1 reference.
-             - Forcing all tests to define their expected references seems tedious
+/*
+- The test case will always need to have at least 1 reference.
+- Forcing all tests to define their expected references seems tedious
 
-             Given the above, let's assume that when no [KeptReference] attributes are present,
-             the test case does not want to make any assertions regarding references.
+Given the above, let's assume that when no [KeptReference] attributes are present,
+the test case does not want to make any assertions regarding references.
 
-             Once 1 kept reference attribute is used, the test will need to define all of of it's expected references
-            */
+Once 1 kept reference attribute is used, the test will need to define all of of it's expected
+references
+*/
             if (expected.Length == 0)
                 return;
 
@@ -1369,7 +1383,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         }
 
         /// <summary>
-        /// Filters out some attributes that should not be taken into consideration when checking the linked result against the expected result
+        /// Filters out some attributes that should not be taken into consideration when checking the linked
+        // result against the expected result
         /// </summary>
         /// <param name="linked"></param>
         /// <returns></returns>
@@ -2370,7 +2385,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 var linkedType = linkedTypes[originalKvp.Key];
                 TypeDesc linkedTypeDesc = (TypeDesc)linkedType.Entity;
 
-                // NativeAOT field trimming is very different (it basically doesn't trim fields, not in the same way trimmer does)
+                // NativeAOT field trimming is very different (it basically doesn't trim fields, not in the same way
+                // trimmer does)
                 var originalMembers = originalKvp
                     .Value.AllMembers()
                     .Where(m => m is not FieldDefinition)

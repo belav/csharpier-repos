@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
     /// <summary>
     /// Internal code cleanup service interface.
     ///
-    /// This is not supposed to be used directly. It just provides a way to get the right service from each language.
+    /// This is not supposed to be used directly. It just provides a way to get the right service from
+    // each language.
     /// </summary>
     internal interface ICodeCleanerService : ILanguageService
     {

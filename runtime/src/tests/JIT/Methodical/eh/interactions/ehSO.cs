@@ -5,9 +5,9 @@ using Xunit;
 
 /*
 Spilling volatile objects opposed to spilling only
-  the exception objects. The equivalence of GTF_OTHER_SIDEEFF and
-  GT_CATCH_ARG is altered by impGetByRefResultType.
-  
+the exception objects. The equivalence of GTF_OTHER_SIDEEFF and
+GT_CATCH_ARG is altered by impGetByRefResultType.
+
 Actual Results:
 System.StackOverflowException during JIT of function
 

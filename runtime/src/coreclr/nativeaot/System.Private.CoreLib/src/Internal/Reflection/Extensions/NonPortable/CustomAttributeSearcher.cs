@@ -8,19 +8,25 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
 
-//==================================================================================================================
+
+// //==================================================================================================================
 // Dependency note:
-//   This class must depend only on the CustomAttribute properties that return IEnumerable<CustomAttributeData>.
-//   All of the other custom attribute api route back here so calls to them will cause an infinite recursion.
-//==================================================================================================================
+//   This class must depend only on the CustomAttribute properties that return
+// IEnumerable<CustomAttributeData>.
+//   All of the other custom attribute api route back here so calls to them will cause an infinite
+// recursion.
+
+// //==================================================================================================================
 
 namespace Internal.Reflection.Extensions.NonPortable
 {
     //
-    // Common logic for computing the effective set of custom attributes on a reflection element of type E where
+    // Common logic for computing the effective set of custom attributes on a reflection element of type
+    // E where
     // E is a MemberInfo, ParameterInfo, Assembly or Module.
     //
-    // This class is only used by the CustomAttributeExtensions class - hence, we bake in the CustomAttributeExtensions behavior of
+    // This class is only used by the CustomAttributeExtensions class - hence, we bake in the
+    // CustomAttributeExtensions behavior of
     // filtering out WinRT attributes.
     //
     internal abstract class CustomAttributeSearcher<E>
@@ -36,7 +42,8 @@ namespace Internal.Reflection.Extensions.NonPortable
             bool skipTypeValidation = false
         )
         {
-            // Do all parameter validation here before we enter the iterator function (so that exceptions from validations
+            // Do all parameter validation here before we enter the iterator function (so that exceptions from
+            // validations
             // show up immediately rather than on the first MoveNext()).
             ArgumentNullException.ThrowIfNull(element);
 
@@ -108,7 +115,8 @@ namespace Internal.Reflection.Extensions.NonPortable
         }
 
         //
-        // Subclasses should override this to compute the "parent" of the element for the purpose of finding "inherited" custom attributes.
+        // Subclasses should override this to compute the "parent" of the element for the purpose of finding
+        // "inherited" custom attributes.
         // Return null if no parent.
         //
         public virtual E GetParent(E e)
@@ -127,7 +135,8 @@ namespace Internal.Reflection.Extensions.NonPortable
         {
             Func<Type, bool> passesFilter = delegate(Type attributeType)
             {
-                // Windows prohibits instantiating WinRT custom attributes. Filter them from the search as the desktop CLR does.
+                // Windows prohibits instantiating WinRT custom attributes. Filter them from the search as the
+                // desktop CLR does.
                 TypeAttributes typeAttributes = attributeType.Attributes;
                 if (0 != (typeAttributes & TypeAttributes.WindowsRuntime))
                     return false;
@@ -146,14 +155,17 @@ namespace Internal.Reflection.Extensions.NonPortable
             }
             if (inherit)
             {
-                // Because the "inherit" parameter defaults to "true", we probably get here for a lot of elements that
-                // don't actually have any inheritance chains. Try to avoid doing any unnecessary setup for the inheritance walk
+                // Because the "inherit" parameter defaults to "true", we probably get here for a lot of elements
+                // that
+                // don't actually have any inheritance chains. Try to avoid doing any unnecessary setup for the
+                // inheritance walk
                 // unless we have to.
                 element = GetParent(element);
                 if (element != null)
                 {
                     // This dictionary serves two purposes:
-                    //   - Let us know which attribute types we've encountered at lower levels so we can block them from appearing twice in the results
+                    //   - Let us know which attribute types we've encountered at lower levels so we can block them from
+                    // appearing twice in the results
                     //     if appropriate.
                     //
                     //   - Cache the results of retrieving the usage attribute.
@@ -208,15 +220,19 @@ namespace Internal.Reflection.Extensions.NonPortable
         }
 
         //
-        // Internal helper to compute the AttributeUsage. This must be coded specially to avoid an infinite recursion.
+        // Internal helper to compute the AttributeUsage. This must be coded specially to avoid an infinite
+        // recursion.
         //
         private static AttributeUsageAttribute GetAttributeUsage(Type attributeType)
         {
-            // This is only invoked when the seacher is called with "inherit: true", thus calling the searcher again
+            // This is only invoked when the seacher is called with "inherit: true", thus calling the searcher
+            // again
             // with "inherit: false" will not cause infinite recursion.
             //
-            // Legacy: Why aren't we checking the parent types? Answer: Although AttributeUsageAttribute is itself marked inheritable, desktop Reflection
-            // treats it as *non*-inheritable for the purpose of deciding whether another attribute class is inheritable.
+            // Legacy: Why aren't we checking the parent types? Answer: Although AttributeUsageAttribute is
+            // itself marked inheritable, desktop Reflection
+            // treats it as *non*-inheritable for the purpose of deciding whether another attribute class is
+            // inheritable.
             //
             AttributeUsageAttribute? usage =
                 attributeType.GetCustomAttribute<AttributeUsageAttribute>(inherit: false);

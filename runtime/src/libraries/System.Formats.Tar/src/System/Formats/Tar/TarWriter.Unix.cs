@@ -16,7 +16,8 @@ namespace System.Formats.Tar
         private readonly Dictionary<uint, string> _groupIdentifiers =
             new Dictionary<uint, string>();
 
-        // Creates an entry for writing using the specified path and entryName. If this is being called from an async method, FileOptions should contain Asynchronous.
+        // Creates an entry for writing using the specified path and entryName. If this is being called from
+        // an async method, FileOptions should contain Asynchronous.
         private TarEntry ConstructEntryForWriting(
             string fullPath,
             string entryName,

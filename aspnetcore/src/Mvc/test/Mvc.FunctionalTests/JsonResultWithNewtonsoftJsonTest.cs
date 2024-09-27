@@ -49,7 +49,8 @@ public class JsonResultWithNewtonsoftJsonTest
         Assert.Equal("{\"message\":\"hello\"}", content);
     }
 
-    // Using an Accept header can't force Json to not be Json. If your accept header doesn't jive with the
+    // Using an Accept header can't force Json to not be Json. If your accept header doesn't jive with
+    // the
     // formatters/content-type configured on the result it will be ignored.
     [Theory]
     [InlineData("application/xml")]

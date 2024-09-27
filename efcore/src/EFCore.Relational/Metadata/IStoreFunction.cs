@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a function in the database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+// more information and examples.
 /// </remarks>
 public interface IStoreFunction : ITableBase
 {
@@ -50,7 +51,8 @@ public interface IStoreFunction : ITableBase
     new IFunctionColumn? FindColumn(string name);
 
     /// <summary>
-    ///     Gets the column mapped to the given property. Returns <see langword="null" /> if no column is mapped to the given property.
+    ///     Gets the column mapped to the given property. Returns <see langword="null" /> if no column
+    // is mapped to the given property.
     /// </summary>
     new IFunctionColumn? FindColumn(IProperty property);
 

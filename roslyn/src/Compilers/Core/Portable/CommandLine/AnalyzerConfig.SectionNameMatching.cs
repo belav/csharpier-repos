@@ -89,6 +89,7 @@ namespace Microsoft.CodeAnalysis
             // EditorConfig matching depends on the whether or not there are
             // directory separators and where they are located in the section
             // name. Specifically, the editorconfig core parser says:
+            //
             // https://github.com/editorconfig/editorconfig-core-c/blob/5d3996811e962a717a7d7fdd0a941192382241a7/src/lib/editorconfig.c#L231
             //
             //     Pattern would be:
@@ -155,7 +156,8 @@ namespace Microsoft.CodeAnalysis
             // for example c:myfile.cs is a relative path, but rooted on drive c:
             // /myfile2.cs is an absolute path but rooted to the current drive.
 
-            // in addition there are UNC paths and volume guids (see https://docs.microsoft.com/en-us/dotnet/standard/io/file-path-formats)
+            // in addition there are UNC paths and volume guids (see
+            // https://docs.microsoft.com/en-us/dotnet/standard/io/file-path-formats)
             // but these start with \\ (and thus '/' in editor config terminology)
 
             // in this implementation we choose to ignore the drive root for the purposes of

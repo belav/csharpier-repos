@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                     onItemFound,
                     onProjectCompleted: null
                 );
-                // Don't need to sync the full solution when searching a single document.  Just sync the project that doc is in.
+                // Don't need to sync the full solution when searching a single document.  Just sync the project
+                // that doc is in.
                 await client
                     .TryInvokeAsync<IRemoteNavigateToSearchService>(
                         document.Project,

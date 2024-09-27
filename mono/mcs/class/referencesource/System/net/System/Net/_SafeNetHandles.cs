@@ -3,96 +3,96 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    _SafeNetHandles.cs
+_SafeNetHandles.cs
 
 Abstract:
-        The file contains _all_ SafeHandles implementations for System.Net namespace.
-        These handle wrappers do guarantee that OS resources get cleaned up when the app domain dies.
+The file contains _all_ SafeHandles implementations for System.Net namespace.
+These handle wrappers do guarantee that OS resources get cleaned up when the app domain dies.
 
-        All PInvoke declarations that do freeing  the  OS resources  _must_ be in this file
-        All PInvoke declarations that do allocation the OS resources _must_ be in this file
+All PInvoke declarations that do freeing  the  OS resources  _must_ be in this file
+All PInvoke declarations that do allocation the OS resources _must_ be in this file
 
 
 Details:
 
-        The protection from leaking OF the OS resources is based on two technologies
-        1) SafeHandle class
-        2) Non interuptible regions using Constrained Execution Region (CER) technology
+The protection from leaking OF the OS resources is based on two technologies
+1) SafeHandle class
+2) Non interuptible regions using Constrained Execution Region (CER) technology
 
-        For simple cases SafeHandle class does all the job. The Prerequisites are:
-        - A resource is able to be represented by IntPtr type (32 bits on 32 bits platforms).
-        - There is a PInvoke availble that does the creation of the resource.
-          That PInvoke either returns the handle value or it writes the handle into out/ref parameter.
-        - The above PInvoke as part of the call does NOT free any OS resource.
+For simple cases SafeHandle class does all the job. The Prerequisites are:
+- A resource is able to be represented by IntPtr type (32 bits on 32 bits platforms).
+- There is a PInvoke availble that does the creation of the resource.
+That PInvoke either returns the handle value or it writes the handle into out/ref parameter.
+- The above PInvoke as part of the call does NOT free any OS resource.
 
-        For those "simple" cases we desinged SafeHandle-derived classes that provide
-        static methods to allocate a handle object.
-        Each such derived class provides a handle release method that is run as non-interrupted.
+For those "simple" cases we desinged SafeHandle-derived classes that provide
+static methods to allocate a handle object.
+Each such derived class provides a handle release method that is run as non-interrupted.
 
-        For more complicated cases we employ the support for non-interruptible methods (CERs).
-        Each CER is a tree of code rooted at a catch or finally clause for a specially marked exception
-        handler (preceded by the RuntimeHelpers.PrepareConstrainedRegions() marker) or the Dispose or
-        ReleaseHandle method of a SafeHandle derived class. The graph is automatically computed by the
-        runtime (typically at the jit time of the root method), but cannot follow virtual or interface
-        calls (these must be explicitly prepared via RuntimeHelpers.PrepareMethod once the definite target
-        method is known). Also, methods in the graph that must be included in the CER must be marked with
-        a reliability contract stating guarantees about the consistency of the system if an error occurs
-        while they are executing. Look for ReliabilityContract for examples (a full explanation of the
-        semantics of this contract is beyond the scope of this comment).
+For more complicated cases we employ the support for non-interruptible methods (CERs).
+Each CER is a tree of code rooted at a catch or finally clause for a specially marked exception
+handler (preceded by the RuntimeHelpers.PrepareConstrainedRegions() marker) or the Dispose or
+ReleaseHandle method of a SafeHandle derived class. The graph is automatically computed by the
+runtime (typically at the jit time of the root method), but cannot follow virtual or interface
+calls (these must be explicitly prepared via RuntimeHelpers.PrepareMethod once the definite target
+method is known). Also, methods in the graph that must be included in the CER must be marked with
+a reliability contract stating guarantees about the consistency of the system if an error occurs
+while they are executing. Look for ReliabilityContract for examples (a full explanation of the
+semantics of this contract is beyond the scope of this comment).
 
-        An example of the top-level of a CER:
+An example of the top-level of a CER:
 
-            RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            {
-                // Normal code
-            }
-            finally
-            {
-                // Guaranteed to get here even in low memory scenarios. Thread abort will not interrupt
-                // this clause and we won't fail because of a jit allocation of any method called (modulo
-                // restrictions on interface/virtual calls listed above and further restrictions listed
-                // below).
-            }
+RuntimeHelpers.PrepareConstrainedRegions();
+try
+{
+// Normal code
+}
+finally
+{
+// Guaranteed to get here even in low memory scenarios. Thread abort will not interrupt
+// this clause and we won't fail because of a jit allocation of any method called (modulo
+// restrictions on interface/virtual calls listed above and further restrictions listed
+// below).
+}
 
-        Another common pattern is an empty-try (where you really just want a region of code the runtime
-        won't interrupt you in):
+Another common pattern is an empty-try (where you really just want a region of code the runtime
+won't interrupt you in):
 
-            RuntimeHelpers.PrepareConstrainedRegions();
-            try {} finally
-            {
-                // Non-interruptible code here
-            }
+RuntimeHelpers.PrepareConstrainedRegions();
+try {} finally
+{
+// Non-interruptible code here
+}
 
-        This ugly syntax will be supplanted with compiler support at some point.
+This ugly syntax will be supplanted with compiler support at some point.
 
-        While within a CER region certain restrictions apply in order to avoid having the runtime inject
-        a potential fault point into your code (and of course you're are responsible for ensuring your
-        code doesn't inject any explicit fault points of its own unless you know how to tolerate them).
+While within a CER region certain restrictions apply in order to avoid having the runtime inject
+a potential fault point into your code (and of course you're are responsible for ensuring your
+code doesn't inject any explicit fault points of its own unless you know how to tolerate them).
 
-        A quick and dirty guide to the possible causes of fault points in CER regions:
-        - Explicit allocations (though allocating a value type only implies allocation on the stack,
-          which may not present an issue).
-        - Boxing a value type (C# does this implicitly for you in many cases, so be careful).
-        - Use of Monitor.Enter or the lock keyword.
-        - Accessing a multi-dimensional array.
-        - Calling any method outside your control that doesn't make a guarantee (e.g. via a
-          ReliabilityAttribute) that it doesn't introduce failure points.
-        - Making P/Invoke calls with non-blittable parameters types. Blittable types are:
-            - SafeHandle when used as an [in] parameter
-            - NON BOXED base types that fit onto a machine word
-            - ref struct with blittable fields
-            - class type with blittable fields
-            - pinned Unicode strings using "fixed" statement
-            - pointers of any kind
-            - IntPtr type
-        - P/Invokes should not have any CharSet attribute on it's declaration.
-          Obvioulsy string types should not appear in the parameters.
-        - String type MUST not appear in a field of a marshaled ref struct or class in a P?Invoke
+A quick and dirty guide to the possible causes of fault points in CER regions:
+- Explicit allocations (though allocating a value type only implies allocation on the stack,
+which may not present an issue).
+- Boxing a value type (C# does this implicitly for you in many cases, so be careful).
+- Use of Monitor.Enter or the lock keyword.
+- Accessing a multi-dimensional array.
+- Calling any method outside your control that doesn't make a guarantee (e.g. via a
+ReliabilityAttribute) that it doesn't introduce failure points.
+- Making P/Invoke calls with non-blittable parameters types. Blittable types are:
+- SafeHandle when used as an [in] parameter
+- NON BOXED base types that fit onto a machine word
+- ref struct with blittable fields
+- class type with blittable fields
+- pinned Unicode strings using "fixed" statement
+- pointers of any kind
+- IntPtr type
+- P/Invokes should not have any CharSet attribute on it's declaration.
+Obvioulsy string types should not appear in the parameters.
+- String type MUST not appear in a field of a marshaled ref struct or class in a P?Invoke
 
 Author:
 
-    Alexei Vopilov    04-Sept-2002
+Alexei Vopilov    04-Sept-2002
 
 Revision History:
 
@@ -419,8 +419,10 @@ namespace System.Net
     }
 
     //
-    // This class is a wrapper for Http.sys V2 server session. CreateServerSession returns an ID and not a real handle
-    // but we use CriticalHandle because it provides us the guarantee that CloseServerSession will always get called.
+    // This class is a wrapper for Http.sys V2 server session. CreateServerSession returns an ID and not
+    // a real handle
+    // but we use CriticalHandle because it provides us the guarantee that CloseServerSession will
+    // always get called.
     //
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
@@ -440,7 +442,8 @@ namespace System.Net
             serverSessionId = id;
 
             //
-            // This class uses no real handle so we need to set a dummy handle. Otherwise, IsInvalid always remains
+            // This class uses no real handle so we need to set a dummy handle. Otherwise, IsInvalid always
+            // remains
             // true.
             //
             SetHandle(new IntPtr(1));
@@ -517,7 +520,8 @@ namespace System.Net
     }
 
     //
-    // Used when working with SSPI APIs, like SafeSspiAuthDataHandle(). Holds the pointer to the auth. data blob.
+    // Used when working with SSPI APIs, like SafeSspiAuthDataHandle(). Holds the pointer to the auth.
+    // data blob.
     //
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
@@ -623,10 +627,13 @@ namespace System.Net
 
         //
         // After PINvoke call the method will fix the refHandle.handle with the returned value.
-        // The caller is responsible for creating a correct SafeHandle template or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeHandle template or null can be passed if no
+        // handle is returned.
         //
-        // This method switches between three non-interruptible helper methods.  (This method can't be both non-interruptible and
-        // reference imports from all three DLLs - doing so would cause all three DLLs to try to be bound to.)
+        // This method switches between three non-interruptible helper methods.  (This method can't be both
+        // non-interruptible and
+        // reference imports from all three DLLs - doing so would cause all three DLLs to try to be bound
+        // to.)
         //
         public unsafe static int QueryContextAttributes(
             SecurDll dll,
@@ -661,7 +668,8 @@ namespace System.Net
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
 
-            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing to jit
+            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors
+            // failing to jit
             // one of the following methods. So run within a CER non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
             try
@@ -737,7 +745,8 @@ namespace System.Net
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
 
-            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing
+            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors
+            // failing
             // to jit one of the following methods. So run within a CER non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
             try
@@ -1629,7 +1638,8 @@ namespace System.Net
 
         //
         // ATN: _handle is internal since it is used on PInvokes by other wrapper methods.
-        //      However all such wrappers MUST manually and reliably adjust refCounter of SafeDeleteContext handle.
+        //      However all such wrappers MUST manually and reliably adjust refCounter of SafeDeleteContext
+        // handle.
         //
         internal SSPIHandle _handle;
 
@@ -1690,7 +1700,8 @@ namespace System.Net
             else
             {
                 GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-                //                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+                //                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("
+                // inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
             }
             //            GlobalLog.Print("    reservedII       = 0x0");
             //            GlobalLog.Print("    newContext       = {ref} inContext");
@@ -1908,9 +1919,11 @@ namespace System.Net
 
         //
         // After PINvoke call the method will fix the handleTemplate.handle with the returned value.
-        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavour or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavour or null can be
+        // passed if no handle is returned.
         //
-        // Since it has a CER, this method can't have any references to imports from DLLs that may not exist on the system.
+        // Since it has a CER, this method can't have any references to imports from DLLs that may not exist
+        // on the system.
         //
         private static unsafe int MustRunInitializeSecurityContext_SECURITY(
             ref SafeFreeCredentials inCredentials,
@@ -2002,7 +2015,8 @@ namespace System.Net
 
                     outContext.DangerousRelease();
 
-                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
+                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the
+                    // pointer.
                     if (handleTemplate != null)
                     {
                         handleTemplate.Set(
@@ -2053,7 +2067,8 @@ namespace System.Net
             else
             {
                 GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-                //                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+                //                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("
+                // inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
             }
             //            GlobalLog.Print("    newContext       = {ref} inContext");
             //            GlobalLog.Print("    outSecBuffer     = " + SecurityBuffer.ToString(outSecBuffer));
@@ -2260,9 +2275,11 @@ namespace System.Net
 
         //
         // After PINvoke call the method will fix the handleTemplate.handle with the returned value.
-        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavour or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavour or null can be
+        // passed if no handle is returned.
         //
-        // Since it has a CER, this method can't have any references to imports from DLLs that may not exist on the system.
+        // Since it has a CER, this method can't have any references to imports from DLLs that may not exist
+        // on the system.
         //
         private static unsafe int MustRunAcceptSecurityContext_SECURITY(
             ref SafeFreeCredentials inCredentials,
@@ -2349,7 +2366,8 @@ namespace System.Net
 
                     outContext.DangerousRelease();
 
-                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
+                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the
+                    // pointer.
                     if (handleTemplate != null)
                     {
                         handleTemplate.Set(
@@ -2386,7 +2404,8 @@ namespace System.Net
             GlobalLog.Print("    refContext       = " + ValidationHelper.ToString(refContext));
 #if TRAVE
             GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-            //            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+            //            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("
+            // inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
 #endif
             GlobalLog.Assert(
                 inSecBuffers != null,
@@ -2539,7 +2558,8 @@ namespace System.Net
             GlobalLog.Print("    refContext       = " + ValidationHelper.ToString(refContext));
 #if TRAVE
             GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-            //            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+            //            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("
+            // inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
 #endif
             GlobalLog.Assert(
                 inSecBuffers != null,
@@ -2962,7 +2982,8 @@ namespace System.Net
                 SocketError errorCode;
 
                 // If m_Blockable was set in BlockingRelease, it's safe to block here, which means
-                // we can honor the linger options set on the socket.  It also means closesocket() might return WSAEWOULDBLOCK, in which
+                // we can honor the linger options set on the socket.  It also means closesocket() might return
+                // WSAEWOULDBLOCK, in which
                 // case we need to do some recovery.
                 if (m_Blockable)
                 {
@@ -3073,7 +3094,8 @@ namespace System.Net
                     // It failed.  Fall through to the regular abortive close.
                 }
 
-                // By default or if CloseAsIs() path failed, set linger timeout to zero to get an abortive close (RST).
+                // By default or if CloseAsIs() path failed, set linger timeout to zero to get an abortive close
+                // (RST).
                 Linger lingerStruct;
                 lingerStruct.OnOff = 1;
                 lingerStruct.Time = 0;
@@ -3421,7 +3443,8 @@ namespace System.Net
                 return status;
             }
 
-            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing to jit
+            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors
+            // failing to jit
             // one of the following methods. So run within a CER non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
             try
@@ -3717,8 +3740,10 @@ namespace System.Net
         private uint resClose;
     }
 
-    // This class is a wrapper for a WSPC (WebSocket protocol component) session. WebSocketCreateClientHandle and WebSocketCreateServerHandle return a PVOID and not a real handle
-    // but we use a SafeHandle because it provides us the guarantee that WebSocketDeleteHandle will always get called.
+    // This class is a wrapper for a WSPC (WebSocket protocol component) session.
+    // WebSocketCreateClientHandle and WebSocketCreateServerHandle return a PVOID and not a real handle
+    // but we use a SafeHandle because it provides us the guarantee that WebSocketDeleteHandle will
+    // always get called.
     [SuppressUnmanagedCodeSecurity]
     internal sealed class SafeWebSocketHandle : SafeHandleZeroOrMinusOneIsInvalid
     {

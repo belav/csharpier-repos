@@ -257,7 +257,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 );
 
         /// <summary>
-        /// Runs the provided compilation on the server.  If the compilation cannot be completed on the server then null
+        /// Runs the provided compilation on the server.  If the compilation cannot be completed on the
+        // server then null
         /// will be returned.
         /// </summary>
         private RunCompilationResult? RunServerCompilation(

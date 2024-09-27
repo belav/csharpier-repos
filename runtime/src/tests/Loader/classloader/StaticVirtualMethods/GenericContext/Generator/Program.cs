@@ -922,14 +922,17 @@ namespace VirtualStaticInterfaceMethodTestGen
                         swMainMethodBody.WriteLine($"{scenarioName}Done: nop");
                     }
 
-                    // If test scenario requires generic class caller, Create Caller class and make a global method method which calls it
-                    // If test scenario requires generic method caller, create global generic method as required and non-generic test method
+                    // If test scenario requires generic class caller, Create Caller class and make a global method
+                    // method which calls it
+                    // If test scenario requires generic method caller, create global generic method as required and
+                    // non-generic test method
                     // If test scenario requires non-generic method caller, just make global method as caller
                     //   Call callee
                     //
                     // Create Callee class
                     //   With callee method that implements scenario
-                    //   fill expected value static with string computed based on scenario + exact type of calle class/generic args of callee method
+                    //   fill expected value static with string computed based on scenario + exact type of calle
+                    // class/generic args of callee method
                     // compute expected result string
 
                     void EmitTestMethod()

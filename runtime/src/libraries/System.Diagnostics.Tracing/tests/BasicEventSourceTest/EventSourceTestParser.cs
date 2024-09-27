@@ -23,7 +23,9 @@ using System.Diagnostics.Tracing;
 //    public sealed class EventSourceTestTraceEventParser : TraceEventParser
 //    {
 //        public static string ProviderName = "EventSourceTest";
-//        public static Guid ProviderGuid = new Guid(unchecked((int)0x69e2aa3e), unchecked((short)0x083b), unchecked((short)0x5014), 0xca, 0xd4, 0x3e, 0x51, 0x1a, 0x0b, 0x94, 0xcf);
+//        public static Guid ProviderGuid = new Guid(unchecked((int)0x69e2aa3e),
+// unchecked((short)0x083b), unchecked((short)0x5014), 0xca, 0xd4, 0x3e, 0x51, 0x1a, 0x0b, 0x94,
+// 0xcf);
 //        public enum Keywords : long
 //        {
 //            Hasnoargs = 0x1,
@@ -420,144 +422,227 @@ using System.Diagnostics.Tracing;
 //        protected override string GetProviderName() { return ProviderName; }
 
 //        private static EmptyTraceData Event0Template(Action<EmptyTraceData> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EmptyTraceData(action, 1, 65533, "Event0", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EmptyTraceData(action, 1, 65533, "Event0", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventEnumArgs EventEnumTemplate(Action<EventEnumArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventEnumArgs(action, 19, 65515, "EventEnum", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventEnumArgs(action, 19, 65515, "EventEnum", Guid.Empty, 0, "",
+// ProviderGuid, ProviderName);
 //        }
 //        private static EventEnum1Args EventEnum1Template(Action<EventEnum1Args> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventEnum1Args(action, 20, 65514, "EventEnum1", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventEnum1Args(action, 20, 65514, "EventEnum1", Guid.Empty, 0, "",
+// ProviderGuid, ProviderName);
 //        }
 //        private static EventFlagsArgs EventFlagsTemplate(Action<EventFlagsArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventFlagsArgs(action, 21, 65513, "EventFlags", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventFlagsArgs(action, 21, 65513, "EventFlags", Guid.Empty, 0, "",
+// ProviderGuid, ProviderName);
 //        }
 //        private static EventFlags1Args EventFlags1Template(Action<EventFlags1Args> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventFlags1Args(action, 22, 65512, "EventFlags1", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventFlags1Args(action, 22, 65512, "EventFlags1", Guid.Empty, 0, "",
+// ProviderGuid, ProviderName);
 //        }
 //        private static EventIArgs EventITemplate(Action<EventIArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventIArgs(action, 2, 65532, "EventI", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventIArgs(action, 2, 65532, "EventI", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventIIArgs EventIITemplate(Action<EventIIArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventIIArgs(action, 3, 65531, "EventII", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventIIArgs(action, 3, 65531, "EventII", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventIIIArgs EventIIITemplate(Action<EventIIIArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventIIIArgs(action, 4, 65530, "EventIII", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventIIIArgs(action, 4, 65530, "EventIII", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventLArgs EventLTemplate(Action<EventLArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventLArgs(action, 5, 65529, "EventL", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventLArgs(action, 5, 65529, "EventL", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventLLArgs EventLLTemplate(Action<EventLLArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventLLArgs(action, 6, 65528, "EventLL", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventLLArgs(action, 6, 65528, "EventLL", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventLLLArgs EventLLLTemplate(Action<EventLLLArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventLLLArgs(action, 7, 65527, "EventLLL", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventLLLArgs(action, 7, 65527, "EventLLL", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
-//        private static EventNoAttributesArgs EventNoAttributesTemplate(Action<EventNoAttributesArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventNoAttributesArgs(action, 16, 65518, "EventNoAttributes", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventNoAttributesArgs
+// EventNoAttributesTemplate(Action<EventNoAttributesArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventNoAttributesArgs(action, 16, 65518, "EventNoAttributes", Guid.Empty,
+// 0, "", ProviderGuid, ProviderName);
 //        }
 //        private static EventSArgs EventSTemplate(Action<EventSArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventSArgs(action, 8, 65526, "EventS", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventSArgs(action, 8, 65526, "EventS", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventSIArgs EventSITemplate(Action<EventSIArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventSIArgs(action, 11, 65523, "EventSI", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventSIArgs(action, 11, 65523, "EventSI", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventSIIArgs EventSIITemplate(Action<EventSIIArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventSIIArgs(action, 13, 65521, "EventSII", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventSIIArgs(action, 13, 65521, "EventSII", Guid.Empty, 0, "",
+// ProviderGuid, ProviderName);
 //        }
 //        private static EventSLArgs EventSLTemplate(Action<EventSLArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventSLArgs(action, 12, 65522, "EventSL", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventSLArgs(action, 12, 65522, "EventSL", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventSSArgs EventSSTemplate(Action<EventSSArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventSSArgs(action, 9, 65525, "EventSS", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventSSArgs(action, 9, 65525, "EventSS", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static EventSSSArgs EventSSSTemplate(Action<EventSSSArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventSSSArgs(action, 10, 65524, "EventSSS", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventSSSArgs(action, 10, 65524, "EventSSS", Guid.Empty, 0, "",
+// ProviderGuid, ProviderName);
 //        }
-//        private static EventWith7StringsArgs EventWith7StringsTemplate(Action<EventWith7StringsArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWith7StringsArgs(action, 26, 65508, "EventWith7Strings", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWith7StringsArgs
+// EventWith7StringsTemplate(Action<EventWith7StringsArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWith7StringsArgs(action, 26, 65508, "EventWith7Strings", Guid.Empty,
+// 0, "", ProviderGuid, ProviderName);
 //        }
-//        private static EventWith9StringsArgs EventWith9StringsTemplate(Action<EventWith9StringsArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWith9StringsArgs(action, 27, 65507, "EventWith9Strings", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWith9StringsArgs
+// EventWith9StringsTemplate(Action<EventWith9StringsArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWith9StringsArgs(action, 27, 65507, "EventWith9Strings", Guid.Empty,
+// 0, "", ProviderGuid, ProviderName);
 //        }
-//        private static EventWithByteArrArgArgs EventWithByteArrArgTemplate(Action<EventWithByteArrArgArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithByteArrArgArgs(action, 34, 65500, "EventWithByteArrArg", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWithByteArrArgArgs
+// EventWithByteArrArgTemplate(Action<EventWithByteArrArgArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithByteArrArgArgs(action, 34, 65500, "EventWithByteArrArg",
+// Guid.Empty, 0, "", ProviderGuid, ProviderName);
 //        }
-//        private static EventWithBytePtrArgArgs EventWithBytePtrArgTemplate(Action<EventWithBytePtrArgArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithBytePtrArgArgs(action, 35, 65499, "EventWithBytePtrArg", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWithBytePtrArgArgs
+// EventWithBytePtrArgTemplate(Action<EventWithBytePtrArgArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithBytePtrArgArgs(action, 35, 65499, "EventWithBytePtrArg",
+// Guid.Empty, 0, "", ProviderGuid, ProviderName);
 //        }
-//        private static EventWithEscapingMessageArgs EventWithEscapingMessageTemplate(Action<EventWithEscapingMessageArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithEscapingMessageArgs(action, 32, 65502, "EventWithEscapingMessage", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWithEscapingMessageArgs
+// EventWithEscapingMessageTemplate(Action<EventWithEscapingMessageArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithEscapingMessageArgs(action, 32, 65502, "EventWithEscapingMessage",
+// Guid.Empty, 0, "", ProviderGuid, ProviderName);
 //        }
-//        private static EventWithManyTypeArgsArgs EventWithManyTypeArgsTemplate(Action<EventWithManyTypeArgsArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithManyTypeArgsArgs(action, 25, 65509, "EventWithManyTypeArgs", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWithManyTypeArgsArgs
+// EventWithManyTypeArgsTemplate(Action<EventWithManyTypeArgsArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithManyTypeArgsArgs(action, 25, 65509, "EventWithManyTypeArgs",
+// Guid.Empty, 0, "", ProviderGuid, ProviderName);
 //        }
-//        private static EventWithMoreEscapingMessageArgs EventWithMoreEscapingMessageTemplate(Action<EventWithMoreEscapingMessageArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithMoreEscapingMessageArgs(action, 33, 65501, "EventWithMoreEscapingMessage", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWithMoreEscapingMessageArgs
+// EventWithMoreEscapingMessageTemplate(Action<EventWithMoreEscapingMessageArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithMoreEscapingMessageArgs(action, 33, 65501,
+// "EventWithMoreEscapingMessage", Guid.Empty, 0, "", ProviderGuid, ProviderName);
 //        }
-//        private static EventWithWeirdArgsArgs EventWithWeirdArgsTemplate(Action<EventWithWeirdArgsArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithWeirdArgsArgs(action, 30, 65504, "EventWithWeirdArgs", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        private static EventWithWeirdArgsArgs
+// EventWithWeirdArgsTemplate(Action<EventWithWeirdArgsArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithWeirdArgsArgs(action, 30, 65504, "EventWithWeirdArgs", Guid.Empty,
+// 0, "", ProviderGuid, ProviderName);
 //        }
 //        private static MessageArgs MessageTemplate(Action<MessageArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new MessageArgs(action, 14, 65520, "Message", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new MessageArgs(action, 14, 65520, "Message", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
 //        private static SlowerHelperArgs SlowerHelperTemplate(Action<SlowerHelperArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new SlowerHelperArgs(action, 18, 65516, "SlowerHelper", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new SlowerHelperArgs(action, 18, 65516, "SlowerHelper", Guid.Empty, 0, "",
+// ProviderGuid, ProviderName);
 //        }
-//        private static EventDateTimeArgs WorkDateTimeOpcode1Template(Action<EventDateTimeArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventDateTimeArgs(action, 24, 5, "WorkDateTime", Guid.Empty, 11, "Opcode1", ProviderGuid, ProviderName);
+//        private static EventDateTimeArgs WorkDateTimeOpcode1Template(Action<EventDateTimeArgs>
+// action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventDateTimeArgs(action, 24, 5, "WorkDateTime", Guid.Empty, 11, "Opcode1",
+// ProviderGuid, ProviderName);
 //        }
 //        private static EmptyTraceData WorkItemTemplate(Action<EmptyTraceData> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EmptyTraceData(action, 15, 1, "WorkItem", Guid.Empty, 0, "", ProviderGuid, ProviderName);
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EmptyTraceData(action, 15, 1, "WorkItem", Guid.Empty, 0, "", ProviderGuid,
+// ProviderName);
 //        }
-//        private static LogTaskScheduledBadArgs WorkItemBadSendTemplate(Action<LogTaskScheduledBadArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new LogTaskScheduledBadArgs(action, 23, 2, "WorkItemBad", Guid.Empty, 9, "Send", ProviderGuid, ProviderName);
+//        private static LogTaskScheduledBadArgs
+// WorkItemBadSendTemplate(Action<LogTaskScheduledBadArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new LogTaskScheduledBadArgs(action, 23, 2, "WorkItemBad", Guid.Empty, 9,
+// "Send", ProviderGuid, ProviderName);
 //        }
-//        private static LogTaskScheduledArgs WorkItemSendTemplate(Action<LogTaskScheduledArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new LogTaskScheduledArgs(action, 17, 1, "WorkItem", Guid.Empty, 9, "Send", ProviderGuid, ProviderName);
+//        private static LogTaskScheduledArgs WorkItemSendTemplate(Action<LogTaskScheduledArgs>
+// action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new LogTaskScheduledArgs(action, 17, 1, "WorkItem", Guid.Empty, 9, "Send",
+// ProviderGuid, ProviderName);
 //        }
-//        private static EventWithXferManyTypeArgsArgs WorkManyArgsSendTemplate(Action<EventWithXferManyTypeArgsArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithXferManyTypeArgsArgs(action, 29, 3, "WorkManyArgs", Guid.Empty, 9, "Send", ProviderGuid, ProviderName);
+//        private static EventWithXferManyTypeArgsArgs
+// WorkManyArgsSendTemplate(Action<EventWithXferManyTypeArgsArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithXferManyTypeArgsArgs(action, 29, 3, "WorkManyArgs", Guid.Empty, 9,
+// "Send", ProviderGuid, ProviderName);
 //        }
-//        private static EventWithXferWeirdArgsArgs WorkWeirdArgsSendTemplate(Action<EventWithXferWeirdArgsArgs> action)
-//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName
-//            return new EventWithXferWeirdArgsArgs(action, 31, 4, "WorkWeirdArgs", Guid.Empty, 9, "Send", ProviderGuid, ProviderName);
+//        private static EventWithXferWeirdArgsArgs
+// WorkWeirdArgsSendTemplate(Action<EventWithXferWeirdArgsArgs> action)
+//        {                  // action, eventid, taskid, taskName, taskGuid, opcode, opcodeName,
+// providerGuid, providerName
+//            return new EventWithXferWeirdArgsArgs(action, 31, 4, "WorkWeirdArgs", Guid.Empty, 9,
+// "Send", ProviderGuid, ProviderName);
 //        }
 
 //        private static volatile TraceEvent[] s_templates;
-//        protected override void EnumerateTemplates(Func<string, string, EventFilterResponse> eventsToObserve, Action<TraceEvent> callback)
+//        protected override void EnumerateTemplates(Func<string, string, EventFilterResponse>
+// eventsToObserve, Action<TraceEvent> callback)
 //        {
 //            if (s_templates == null)
 //            {
@@ -599,7 +684,8 @@ using System.Diagnostics.Tracing;
 //                s_templates = templates;
 //            }
 //            foreach (var template in s_templates)
-//                if (eventsToObserve == null || eventsToObserve(template.ProviderName, template.EventName) == EventFilterResponse.AcceptEvent)
+//                if (eventsToObserve == null || eventsToObserve(template.ProviderName,
+// template.EventName) == EventFilterResponse.AcceptEvent)
 //                    callback(template);
 //        }
 
@@ -614,8 +700,10 @@ using System.Diagnostics.Tracing;
 //        public MyColor x { get { return (MyColor)GetInt32At(0); } }
 
 //        #region Private
-//        internal EventEnumArgs(Action<EventEnumArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventEnumArgs(Action<EventEnumArgs> target, int eventID, int task, string
+// taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -671,8 +759,10 @@ using System.Diagnostics.Tracing;
 //        public MyColor x { get { return (MyColor)GetInt32At(0); } }
 
 //        #region Private
-//        internal EventEnum1Args(Action<EventEnum1Args> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventEnum1Args(Action<EventEnum1Args> target, int eventID, int task, string
+// taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -728,8 +818,10 @@ using System.Diagnostics.Tracing;
 //        public MyFlags x { get { return (MyFlags)GetInt32At(0); } }
 
 //        #region Private
-//        internal EventFlagsArgs(Action<EventFlagsArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventFlagsArgs(Action<EventFlagsArgs> target, int eventID, int task, string
+// taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -785,8 +877,10 @@ using System.Diagnostics.Tracing;
 //        public MyFlags x { get { return (MyFlags)GetInt32At(0); } }
 
 //        #region Private
-//        internal EventFlags1Args(Action<EventFlags1Args> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventFlags1Args(Action<EventFlags1Args> target, int eventID, int task, string
+// taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -842,8 +936,10 @@ using System.Diagnostics.Tracing;
 //        public int arg1 { get { return GetInt32At(0); } }
 
 //        #region Private
-//        internal EventIArgs(Action<EventIArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventIArgs(Action<EventIArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -900,8 +996,10 @@ using System.Diagnostics.Tracing;
 //        public int arg2 { get { return GetInt32At(4); } }
 
 //        #region Private
-//        internal EventIIArgs(Action<EventIIArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventIIArgs(Action<EventIIArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -962,8 +1060,10 @@ using System.Diagnostics.Tracing;
 //        public int arg3 { get { return GetInt32At(8); } }
 
 //        #region Private
-//        internal EventIIIArgs(Action<EventIIIArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventIIIArgs(Action<EventIIIArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1025,8 +1125,10 @@ using System.Diagnostics.Tracing;
 //        public long arg1 { get { return GetInt64At(0); } }
 
 //        #region Private
-//        internal EventLArgs(Action<EventLArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventLArgs(Action<EventLArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1083,8 +1185,10 @@ using System.Diagnostics.Tracing;
 //        public long arg2 { get { return GetInt64At(8); } }
 
 //        #region Private
-//        internal EventLLArgs(Action<EventLLArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventLLArgs(Action<EventLLArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1145,8 +1249,10 @@ using System.Diagnostics.Tracing;
 //        public long arg3 { get { return GetInt64At(16); } }
 
 //        #region Private
-//        internal EventLLLArgs(Action<EventLLLArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventLLLArgs(Action<EventLLLArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1208,8 +1314,11 @@ using System.Diagnostics.Tracing;
 //        public string s { get { return GetUnicodeStringAt(0); } }
 
 //        #region Private
-//        internal EventNoAttributesArgs(Action<EventNoAttributesArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventNoAttributesArgs(Action<EventNoAttributesArgs> target, int eventID, int
+// task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1265,8 +1374,10 @@ using System.Diagnostics.Tracing;
 //        public string arg1 { get { return GetUnicodeStringAt(0); } }
 
 //        #region Private
-//        internal EventSArgs(Action<EventSArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventSArgs(Action<EventSArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1323,8 +1434,10 @@ using System.Diagnostics.Tracing;
 //        public int arg2 { get { return GetInt32At(SkipUnicodeString(0)); } }
 
 //        #region Private
-//        internal EventSIArgs(Action<EventSIArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventSIArgs(Action<EventSIArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1385,8 +1498,10 @@ using System.Diagnostics.Tracing;
 //        public int arg3 { get { return GetInt32At(SkipUnicodeString(0) + 4); } }
 
 //        #region Private
-//        internal EventSIIArgs(Action<EventSIIArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventSIIArgs(Action<EventSIIArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1449,8 +1564,10 @@ using System.Diagnostics.Tracing;
 //        public long arg2 { get { return GetInt64At(SkipUnicodeString(0)); } }
 
 //        #region Private
-//        internal EventSLArgs(Action<EventSLArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventSLArgs(Action<EventSLArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1510,8 +1627,10 @@ using System.Diagnostics.Tracing;
 //        public string arg2 { get { return GetUnicodeStringAt(SkipUnicodeString(0)); } }
 
 //        #region Private
-//        internal EventSSArgs(Action<EventSSArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventSSArgs(Action<EventSSArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1521,8 +1640,10 @@ using System.Diagnostics.Tracing;
 //        }
 //        protected override void Validate()
 //        {
-//            Debug.Assert(!(Version == 0 && EventDataLength != SkipUnicodeString(SkipUnicodeString(0))));
-//            Debug.Assert(!(Version > 0 && EventDataLength < SkipUnicodeString(SkipUnicodeString(0))));
+//            Debug.Assert(!(Version == 0 && EventDataLength !=
+// SkipUnicodeString(SkipUnicodeString(0))));
+//            Debug.Assert(!(Version > 0 && EventDataLength <
+// SkipUnicodeString(SkipUnicodeString(0))));
 //        }
 //        protected override Delegate Target
 //        {
@@ -1569,11 +1690,14 @@ using System.Diagnostics.Tracing;
 //    {
 //        public string arg1 { get { return GetUnicodeStringAt(0); } }
 //        public string arg2 { get { return GetUnicodeStringAt(SkipUnicodeString(0)); } }
-//        public string arg3 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(0))); } }
+//        public string arg3 { get { return
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(0))); } }
 
 //        #region Private
-//        internal EventSSSArgs(Action<EventSSSArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventSSSArgs(Action<EventSSSArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1583,8 +1707,10 @@ using System.Diagnostics.Tracing;
 //        }
 //        protected override void Validate()
 //        {
-//            Debug.Assert(!(Version == 0 && EventDataLength != SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))));
-//            Debug.Assert(!(Version > 0 && EventDataLength < SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))));
+//            Debug.Assert(!(Version == 0 && EventDataLength !=
+// SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))));
+//            Debug.Assert(!(Version > 0 && EventDataLength <
+// SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))));
 //        }
 //        protected override Delegate Target
 //        {
@@ -1634,15 +1760,29 @@ using System.Diagnostics.Tracing;
 //    {
 //        public string s0 { get { return GetUnicodeStringAt(0); } }
 //        public string s1 { get { return GetUnicodeStringAt(SkipUnicodeString(0)); } }
-//        public string s2 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(0))); } }
-//        public string s3 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))); } }
-//        public string s4 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))); } }
-//        public string s5 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))); } }
-//        public string s6 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))))); } }
+//        public string s2 { get { return
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(0))); } }
+//        public string s3 { get { return
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))); } }
+//        public string s4 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))); }
+// }
+//        public string s5 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))));
+// } }
+//        public string s6 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))));
+// } }
 
 //        #region Private
-//        internal EventWith7StringsArgs(Action<EventWith7StringsArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWith7StringsArgs(Action<EventWith7StringsArgs> target, int eventID, int
+// task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1652,8 +1792,12 @@ using System.Diagnostics.Tracing;
 //        }
 //        protected override void Validate()
 //        {
-//            Debug.Assert(!(Version == 0 && EventDataLength != SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))));
-//            Debug.Assert(!(Version > 0 && EventDataLength < SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))));
+//            Debug.Assert(!(Version == 0 && EventDataLength !=
+//
+// SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))));
+//            Debug.Assert(!(Version > 0 && EventDataLength <
+//
+// SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))));
 //        }
 //        protected override Delegate Target
 //        {
@@ -1715,17 +1859,37 @@ using System.Diagnostics.Tracing;
 //    {
 //        public string s0 { get { return GetUnicodeStringAt(0); } }
 //        public string s1 { get { return GetUnicodeStringAt(SkipUnicodeString(0)); } }
-//        public string s2 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(0))); } }
-//        public string s3 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))); } }
-//        public string s4 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))); } }
-//        public string s5 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))); } }
-//        public string s6 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))))); } }
-//        public string s7 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))); } }
-//        public string s8 { get { return GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))))))); } }
+//        public string s2 { get { return
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(0))); } }
+//        public string s3 { get { return
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))); } }
+//        public string s4 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))); }
+// }
+//        public string s5 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))));
+// } }
+//        public string s6 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))));
+// } }
+//        public string s7 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0))))))));
+// } }
+//        public string s8 { get { return
+//
+// GetUnicodeStringAt(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))));
+// } }
 
 //        #region Private
-//        internal EventWith9StringsArgs(Action<EventWith9StringsArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWith9StringsArgs(Action<EventWith9StringsArgs> target, int eventID, int
+// task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1735,8 +1899,12 @@ using System.Diagnostics.Tracing;
 //        }
 //        protected override void Validate()
 //        {
-//            Debug.Assert(!(Version == 0 && EventDataLength != SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))))));
-//            Debug.Assert(!(Version > 0 && EventDataLength < SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))))));
+//            Debug.Assert(!(Version == 0 && EventDataLength !=
+//
+// SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))))));
+//            Debug.Assert(!(Version > 0 && EventDataLength <
+//
+// SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(SkipUnicodeString(0)))))))))));
 //        }
 //        protected override Delegate Target
 //        {
@@ -1764,7 +1932,8 @@ using System.Diagnostics.Tracing;
 //            get
 //            {
 //                if (payloadNames == null)
-//                    payloadNames = new string[] { "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8" };
+//                    payloadNames = new string[] { "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7",
+// "s8" };
 //                return payloadNames;
 //            }
 //        }
@@ -1804,12 +1973,16 @@ using System.Diagnostics.Tracing;
 //    {
 //        public int blobSize { get { return GetInt32At(0); } }
 //        public byte[] blob { get { return GetByteArrayAt(4, blobSize); } }
-//        public int blobAt(int arrayIndex) { return GetByteAt(4 + (arrayIndex * HostOffset(1, 0))); }
+//        public int blobAt(int arrayIndex) { return GetByteAt(4 + (arrayIndex * HostOffset(1, 0)));
+// }
 //        public int n { get { return GetInt32At(0 + (blobSize) + 4); } }
 
 //        #region Private
-//        internal EventWithByteArrArgArgs(Action<EventWithByteArrArgArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithByteArrArgArgs(Action<EventWithByteArrArgArgs> target, int eventID, int
+// task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1867,12 +2040,16 @@ using System.Diagnostics.Tracing;
 //    {
 //        public int blobSize { get { return GetInt32At(0); } }
 //        public byte[] blob { get { return GetByteArrayAt(4, blobSize); } }
-//        public int blobAt(int arrayIndex) { return GetByteAt(4 + (arrayIndex * HostOffset(1, 0))); }
+//        public int blobAt(int arrayIndex) { return GetByteAt(4 + (arrayIndex * HostOffset(1, 0)));
+// }
 //        public int n { get { return GetInt32At(0 + (blobSize) + 4); } }
 
 //        #region Private
-//        internal EventWithBytePtrArgArgs(Action<EventWithBytePtrArgArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithBytePtrArgArgs(Action<EventWithBytePtrArgArgs> target, int eventID, int
+// task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -1932,8 +2109,12 @@ using System.Diagnostics.Tracing;
 //        public int n { get { return GetInt32At(SkipUnicodeString(0)); } }
 
 //        #region Private
-//        internal EventWithEscapingMessageArgs(Action<EventWithEscapingMessageArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithEscapingMessageArgs(Action<EventWithEscapingMessageArgs> target, int
+// eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid
+// providerGuid,
+// string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2003,8 +2184,12 @@ using System.Diagnostics.Tracing;
 //        public Guid guid { get { return GetGuidAt(SkipUnicodeString(0) + 40); } }
 
 //        #region Private
-//        internal EventWithManyTypeArgsArgs(Action<EventWithManyTypeArgsArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithManyTypeArgsArgs(Action<EventWithManyTypeArgsArgs> target, int eventID,
+// int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid,
+// string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2046,7 +2231,8 @@ using System.Diagnostics.Tracing;
 //            get
 //            {
 //                if (payloadNames == null)
-//                    payloadNames = new string[] { "msg", "l", "ui", "ui64", "ch", "b", "sb", "sh", "ush", "f", "d", "guid" };
+//                    payloadNames = new string[] { "msg", "l", "ui", "ui64", "ch", "b", "sb", "sh",
+// "ush", "f", "d", "guid" };
 //                return payloadNames;
 //            }
 //        }
@@ -2094,8 +2280,11 @@ using System.Diagnostics.Tracing;
 //        public int percentage { get { return GetInt32At(SkipUnicodeString(0)); } }
 
 //        #region Private
-//        internal EventWithMoreEscapingMessageArgs(Action<EventWithMoreEscapingMessageArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithMoreEscapingMessageArgs(Action<EventWithMoreEscapingMessageArgs> target,
+// int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid
+// providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2156,8 +2345,11 @@ using System.Diagnostics.Tracing;
 //        public long le { get { return GetInt64At(HostOffset(8, 1)); } }
 
 //        #region Private
-//        internal EventWithWeirdArgsArgs(Action<EventWithWeirdArgsArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithWeirdArgsArgs(Action<EventWithWeirdArgsArgs> target, int eventID, int
+// task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2219,8 +2411,10 @@ using System.Diagnostics.Tracing;
 //        public string arg1 { get { return GetUnicodeStringAt(0); } }
 
 //        #region Private
-//        internal MessageArgs(Action<MessageArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal MessageArgs(Action<MessageArgs> target, int eventID, int task, string taskName,
+// Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2277,8 +2471,10 @@ using System.Diagnostics.Tracing;
 //        public string arg2 { get { return GetUnicodeStringAt(4); } }
 
 //        #region Private
-//        internal SlowerHelperArgs(Action<SlowerHelperArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal SlowerHelperArgs(Action<SlowerHelperArgs> target, int eventID, int task, string
+// taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2337,8 +2533,10 @@ using System.Diagnostics.Tracing;
 //        public DateTime dt { get { return DateTime.FromFileTime(GetInt64At(0)); } }
 
 //        #region Private
-//        internal EventDateTimeArgs(Action<EventDateTimeArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventDateTimeArgs(Action<EventDateTimeArgs> target, int eventID, int task, string
+// taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2394,8 +2592,11 @@ using System.Diagnostics.Tracing;
 //        public string message { get { return GetUnicodeStringAt(0); } }
 
 //        #region Private
-//        internal LogTaskScheduledBadArgs(Action<LogTaskScheduledBadArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal LogTaskScheduledBadArgs(Action<LogTaskScheduledBadArgs> target, int eventID, int
+// task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2451,8 +2652,11 @@ using System.Diagnostics.Tracing;
 //        public string message { get { return GetUnicodeStringAt(0); } }
 
 //        #region Private
-//        internal LogTaskScheduledArgs(Action<LogTaskScheduledArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal LogTaskScheduledArgs(Action<LogTaskScheduledArgs> target, int eventID, int task,
+// string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string
+// providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2518,8 +2722,12 @@ using System.Diagnostics.Tracing;
 //        public Guid guid { get { return GetGuidAt(40); } }
 
 //        #region Private
-//        internal EventWithXferManyTypeArgsArgs(Action<EventWithXferManyTypeArgsArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithXferManyTypeArgsArgs(Action<EventWithXferManyTypeArgsArgs> target, int
+// eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid
+// providerGuid,
+// string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }
@@ -2560,7 +2768,8 @@ using System.Diagnostics.Tracing;
 //            get
 //            {
 //                if (payloadNames == null)
-//                    payloadNames = new string[] { "l", "ui", "ui64", "ch", "b", "sb", "sh", "ush", "f", "d", "guid" };
+//                    payloadNames = new string[] { "l", "ui", "ui64", "ch", "b", "sb", "sh", "ush",
+// "f", "d", "guid" };
 //                return payloadNames;
 //            }
 //        }
@@ -2607,8 +2816,12 @@ using System.Diagnostics.Tracing;
 //        public long le { get { return GetInt64At(HostOffset(8, 1)); } }
 
 //        #region Private
-//        internal EventWithXferWeirdArgsArgs(Action<EventWithXferWeirdArgsArgs> target, int eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid providerGuid, string providerName)
-//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid, providerName)
+//        internal EventWithXferWeirdArgsArgs(Action<EventWithXferWeirdArgsArgs> target, int
+// eventID, int task, string taskName, Guid taskGuid, int opcode, string opcodeName, Guid
+// providerGuid,
+// string providerName)
+//            : base(eventID, task, taskName, taskGuid, opcode, opcodeName, providerGuid,
+// providerName)
 //        {
 //            this.m_target = target;
 //        }

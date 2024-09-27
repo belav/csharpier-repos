@@ -10,7 +10,8 @@ namespace ILLink.Shared.TrimAnalysis
     internal interface IValueWithStaticType
     {
         /// <summary>
-        /// The static type of the value, represented as closely as possible, but not always exact.  It can be null, for
+        /// The static type of the value, represented as closely as possible, but not always exact.  It can
+        // be null, for
         /// example, when the analysis is imprecise or operating on malformed code.
         /// </summary>
         TypeProxy? StaticType { get; }

@@ -280,11 +280,11 @@ namespace ICSharpCode.SharpZipLib.Tar
         //		}
 
         /// Convert time to DateTimes
-        /**
-        * Get/Set this entry's modification time.
-        *
-        * @param time This entry's new modification time.
-        */
+/**
+* Get/Set this entry's modification time.
+*
+* @param time This entry's new modification time.
+*/
         public DateTime ModTime
         {
             get { return this.header.modTime; }
@@ -377,27 +377,28 @@ namespace ICSharpCode.SharpZipLib.Tar
             // bugfix from torhovl from #D forum:
             string name = file;
 
-            // -jr- 23-Jan-2004 HAK HAK HAK, GnuTar allows device names in path where the name is not local to the current directory
+            // -jr- 23-Jan-2004 HAK HAK HAK, GnuTar allows device names in path where the name is not local to
+            // the current directory
             if (Environment.CurrentDirectory == Path.GetDirectoryName(name))
             {
                 name = Path.GetFileName(name);
             }
-            /*
-                     if (Path.DirectorySeparatorChar == '\\')
-                        {  // check if the OS is Windows
-                            // Strip off drive letters!
-                            if (name.Length > 2)
-                            {
-                                char ch1 = name[0];
-                                char ch2 = name[1];
-                                
-                                if (ch2 == ':' && Char.IsLetter(ch1))
-                                {
-                                    name = name.Substring(2);
-                                }
-                            }
-                        }
-            */
+/*
+if (Path.DirectorySeparatorChar == '\\')
+{  // check if the OS is Windows
+// Strip off drive letters!
+if (name.Length > 2)
+{
+char ch1 = name[0];
+char ch2 = name[1];
+
+if (ch2 == ':' && Char.IsLetter(ch1))
+{
+name = name.Substring(2);
+}
+}
+}
+*/
 
             name = name.Replace(Path.DirectorySeparatorChar, '/').ToLower();
 
@@ -516,17 +517,17 @@ namespace ICSharpCode.SharpZipLib.Tar
 
 
 /* The original Java file had this header:
-    *
-    ** Authored by Timothy Gerard Endres
-    ** <mailto:time@gjt.org>  <http://www.trustice.com>
-    **
-    ** This work has been placed into the public domain.
-    ** You may use this work in any way and for any purpose you wish.
-    **
-    ** THIS SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY OF ANY KIND,
-    ** NOT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY. THE AUTHOR
-    ** OF THIS SOFTWARE, ASSUMES _NO_ RESPONSIBILITY FOR ANY
-    ** CONSEQUENCE RESULTING FROM THE USE, MODIFICATION, OR
-    ** REDISTRIBUTION OF THIS SOFTWARE.
-    **
-    */
+*
+** Authored by Timothy Gerard Endres
+** <mailto:time@gjt.org>  <http://www.trustice.com>
+**
+** This work has been placed into the public domain.
+** You may use this work in any way and for any purpose you wish.
+**
+** THIS SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY OF ANY KIND,
+** NOT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY. THE AUTHOR
+** OF THIS SOFTWARE, ASSUMES _NO_ RESPONSIBILITY FOR ANY
+** CONSEQUENCE RESULTING FROM THE USE, MODIFICATION, OR
+** REDISTRIBUTION OF THIS SOFTWARE.
+**
+*/

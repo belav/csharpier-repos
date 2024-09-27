@@ -13,7 +13,8 @@ using Microsoft.Extensions.Primitives;
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 /// <summary>
-/// Represents the state of an attempt to bind values from an HTTP Request to an action method, which includes
+/// Represents the state of an attempt to bind values from an HTTP Request to an action method,
+// which includes
 /// validation information.
 /// </summary>
 [DebuggerDisplay("Entries = {Count}, IsValid = {IsValid}")]
@@ -64,7 +65,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class by using values that are copied
+    /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class by using values that
+    // are copied
     /// from the specified <paramref name="dictionary"/>.
     /// </summary>
     /// <param name="dictionary">The <see cref="ModelStateDictionary"/> to copy values from.</param>
@@ -86,7 +88,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     public ModelStateEntry Root => _root;
 
     /// <summary>
-    /// Gets or sets the maximum allowed model state errors in this instance of <see cref="ModelStateDictionary"/>.
+    /// Gets or sets the maximum allowed model state errors in this instance of <see
+    // cref="ModelStateDictionary"/>.
     /// Defaults to <c>200</c>.
     /// </summary>
     /// <remarks>
@@ -94,11 +97,13 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// <see cref="ModelStateDictionary"/> tracks the number of model errors added by calls to
     /// <see cref="AddModelError(string, Exception, ModelMetadata)"/> or
     /// <see cref="TryAddModelError(string, Exception, ModelMetadata)"/>.
-    /// Once the value of <c>MaxAllowedErrors - 1</c> is reached, if another attempt is made to add an error,
+    /// Once the value of <c>MaxAllowedErrors - 1</c> is reached, if another attempt is made to add an
+    // error,
     /// the error message will be ignored and a <see cref="TooManyModelErrorsException"/> will be added.
     /// </para>
     /// <para>
-    /// Errors added via modifying <see cref="ModelStateEntry"/> directly do not count towards this limit.
+    /// Errors added via modifying <see cref="ModelStateEntry"/> directly do not count towards this
+    // limit.
     /// </para>
     /// </remarks>
     public int MaxAllowedErrors
@@ -148,7 +153,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     IEnumerable<ModelStateEntry> IReadOnlyDictionary<string, ModelStateEntry?>.Values => Values;
 
     /// <summary>
-    /// Gets a value that indicates whether any model state values in this model state dictionary is invalid or not validated.
+    /// Gets a value that indicates whether any model state values in this model state dictionary is
+    // invalid or not validated.
     /// </summary>
     public bool IsValid
     {
@@ -183,16 +189,20 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     internal int? MaxStateDepth { get; set; }
 
     /// <summary>
-    /// Adds the specified <paramref name="exception"/> to the <see cref="ModelStateEntry.Errors"/> instance
+    /// Adds the specified <paramref name="exception"/> to the <see cref="ModelStateEntry.Errors"/>
+    // instance
     /// that is associated with the specified <paramref name="key"/>. If the maximum number of allowed
-    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/> exception is
+    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/>
+    // exception is
     /// recorded instead.
     /// </summary>
     /// <remarks>
-    /// This method allows adding the <paramref name="exception"/> to the current <see cref="ModelStateDictionary"/>
+    /// This method allows adding the <paramref name="exception"/> to the current <see
+    // cref="ModelStateDictionary"/>
     /// when <see cref="ModelMetadata"/> is not available or the exact <paramref name="exception"/>
     /// must be maintained for later use (even if it is for example a <see cref="FormatException"/>).
-    /// Where <see cref="ModelMetadata"/> is available, use <see cref="AddModelError(string, Exception, ModelMetadata)"/> instead.
+    /// Where <see cref="ModelMetadata"/> is available, use <see cref="AddModelError(string, Exception,
+    // ModelMetadata)"/> instead.
     /// </remarks>
     /// <param name="key">The key of the <see cref="ModelStateEntry"/> to add errors to.</param>
     /// <param name="exception">The <see cref="Exception"/> to add.</param>
@@ -210,7 +220,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             && !string.IsNullOrEmpty(exception.Message)
         )
         {
-            // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
+            // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to
+            // clients
             return TryAddModelError(key, exception.Message);
         }
 
@@ -225,13 +236,16 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Adds the specified <paramref name="exception"/> to the <see cref="ModelStateEntry.Errors"/> instance
+    /// Adds the specified <paramref name="exception"/> to the <see cref="ModelStateEntry.Errors"/>
+    // instance
     /// that is associated with the specified <paramref name="key"/>. If the maximum number of allowed
-    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/> exception is
+    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/>
+    // exception is
     /// recorded instead.
     /// </summary>
     /// <param name="key">The key of the <see cref="ModelStateEntry"/> to add errors to.</param>
-    /// <param name="exception">The <see cref="Exception"/> to add. Some exception types will be replaced with
+    /// <param name="exception">The <see cref="Exception"/> to add. Some exception types will be
+    // replaced with
     /// a descriptive error message.</param>
     /// <param name="metadata">The <see cref="ModelMetadata"/> associated with the model.</param>
     public void AddModelError(string key, Exception exception, ModelMetadata metadata)
@@ -244,13 +258,17 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Attempts to add the specified <paramref name="exception"/> to the <see cref="ModelStateEntry.Errors"/>
-    /// instance that is associated with the specified <paramref name="key"/>. If the maximum number of allowed
-    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/> exception is
+    /// Attempts to add the specified <paramref name="exception"/> to the <see
+    // cref="ModelStateEntry.Errors"/>
+    /// instance that is associated with the specified <paramref name="key"/>. If the maximum number of
+    // allowed
+    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/>
+    // exception is
     /// recorded instead.
     /// </summary>
     /// <param name="key">The key of the <see cref="ModelStateEntry"/> to add errors to.</param>
-    /// <param name="exception">The <see cref="Exception"/> to add. Some exception types will be replaced with
+    /// <param name="exception">The <see cref="Exception"/> to add. Some exception types will be
+    // replaced with
     /// a descriptive error message.</param>
     /// <param name="metadata">The <see cref="ModelMetadata"/> associated with the model.</param>
     /// <returns>
@@ -310,7 +328,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             && !string.IsNullOrEmpty(exception.Message)
         )
         {
-            // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
+            // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to
+            // clients
             return TryAddModelError(key, exception.Message);
         }
 
@@ -319,9 +338,11 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Adds the specified <paramref name="errorMessage"/> to the <see cref="ModelStateEntry.Errors"/> instance
+    /// Adds the specified <paramref name="errorMessage"/> to the <see cref="ModelStateEntry.Errors"/>
+    // instance
     /// that is associated with the specified <paramref name="key"/>. If the maximum number of allowed
-    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/> exception is
+    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/>
+    // exception is
     /// recorded instead.
     /// </summary>
     /// <param name="key">The key of the <see cref="ModelStateEntry"/> to add errors to.</param>
@@ -335,9 +356,12 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Attempts to add the specified <paramref name="errorMessage"/> to the <see cref="ModelStateEntry.Errors"/>
-    /// instance that is associated with the specified <paramref name="key"/>. If the maximum number of allowed
-    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/> exception is
+    /// Attempts to add the specified <paramref name="errorMessage"/> to the <see
+    // cref="ModelStateEntry.Errors"/>
+    /// instance that is associated with the specified <paramref name="key"/>. If the maximum number of
+    // allowed
+    /// errors has already been recorded, ensures that a <see cref="TooManyModelErrorsException"/>
+    // exception is
     /// recorded instead.
     /// </summary>
     /// <param name="key">The key of the <see cref="ModelStateEntry"/> to add errors to.</param>
@@ -372,8 +396,10 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// specified <paramref name="key"/>.
     /// </summary>
     /// <param name="key">The key to look up model state errors for.</param>
-    /// <returns>Returns <see cref="ModelValidationState.Unvalidated"/> if no entries are found for the specified
-    /// key, <see cref="ModelValidationState.Invalid"/> if at least one instance is found with one or more model
+    /// <returns>Returns <see cref="ModelValidationState.Unvalidated"/> if no entries are found for the
+    // specified
+    /// key, <see cref="ModelValidationState.Invalid"/> if at least one instance is found with one or
+    // more model
     /// state errors; <see cref="ModelValidationState.Valid"/> otherwise.</returns>
     public ModelValidationState GetFieldValidationState(string key)
     {
@@ -387,7 +413,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// Returns <see cref="ModelValidationState"/> for the <paramref name="key"/>.
     /// </summary>
     /// <param name="key">The key to look up model state errors for.</param>
-    /// <returns>Returns <see cref="ModelValidationState.Unvalidated"/> if no entry is found for the specified
+    /// <returns>Returns <see cref="ModelValidationState.Unvalidated"/> if no entry is found for the
+    // specified
     /// key, <see cref="ModelValidationState.Invalid"/> if an instance is found with one or more model
     /// state errors; <see cref="ModelValidationState.Valid"/> otherwise.</returns>
     public ModelValidationState GetValidationState(string key)
@@ -423,7 +450,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Marks the <see cref="ModelStateEntry.ValidationState"/> for the entry with the specified <paramref name="key"/>
+    /// Marks the <see cref="ModelStateEntry.ValidationState"/> for the entry with the specified
+    // <paramref name="key"/>
     /// as <see cref="ModelValidationState.Skipped"/>.
     /// </summary>
     /// <param name="key">The key of the <see cref="ModelStateEntry"/> to mark as skipped.</param>
@@ -445,7 +473,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Copies the values from the specified <paramref name="dictionary"/> into this instance, overwriting
+    /// Copies the values from the specified <paramref name="dictionary"/> into this instance,
+    // overwriting
     /// existing values if keys are the same.
     /// </summary>
     /// <param name="dictionary">The <see cref="ModelStateDictionary"/> to copy values from.</param>
@@ -467,7 +496,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Sets the of <see cref="ModelStateEntry.RawValue"/> and <see cref="ModelStateEntry.AttemptedValue"/> for
+    /// Sets the of <see cref="ModelStateEntry.RawValue"/> and <see
+    // cref="ModelStateEntry.AttemptedValue"/> for
     /// the <see cref="ModelStateEntry"/> with the specified <paramref name="key"/>.
     /// </summary>
     /// <param name="key">The key for the <see cref="ModelStateEntry"/> entry.</param>
@@ -516,7 +546,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Clears <see cref="ModelStateDictionary"/> entries that match the key that is passed as parameter.
+    /// Clears <see cref="ModelStateDictionary"/> entries that match the key that is passed as
+    // parameter.
     /// </summary>
     /// <param name="key">The key of <see cref="ModelStateDictionary"/> to clear.</param>
     public void ClearValidationState(string key)
@@ -718,7 +749,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// Removes the <see cref="ModelStateEntry"/> with the specified <paramref name="key"/>.
     /// </summary>
     /// <param name="key">The key.</param>
-    /// <returns><c>true</c> if the element is successfully removed; otherwise <c>false</c>. This method also
+    /// <returns><c>true</c> if the element is successfully removed; otherwise <c>false</c>. This method
+    // also
     /// returns <c>false</c> if key was not found.</returns>
     public bool Remove(string key)
     {
@@ -809,7 +841,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <summary>
-    /// Gets a <see cref="PrefixEnumerable"/> that iterates over this instance of <see cref="ModelStateDictionary"/>
+    /// Gets a <see cref="PrefixEnumerable"/> that iterates over this instance of <see
+    // cref="ModelStateDictionary"/>
     /// using the specified <paramref name="prefix"/>.
     /// </summary>
     /// <param name="prefix">The prefix.</param>

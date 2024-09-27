@@ -3,7 +3,8 @@
 //<Title>Nullable types have a default single-parameter constructor</Title>
 //<Description>
 // A nullable type can be created with a single argument constructor
-// The HasValue property will be set to true, and the Value property will get the value of the constructor
+// The HasValue property will be set to true, and the Value property will get the value of the
+// constructor
 //</Description>
 
 #pragma warning disable 0649

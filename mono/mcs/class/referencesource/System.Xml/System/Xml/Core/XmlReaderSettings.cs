@@ -146,7 +146,8 @@ namespace System.Xml
 #if !SILVERLIGHT
         //This is used by get XmlResolver in Xsd.
         //Check if the config set to prohibit default resovler
-        //notice we must keep GetXmlResolver() to avoid dead lock when init System.Config.ConfigurationManager
+        //notice we must keep GetXmlResolver() to avoid dead lock when init
+        // System.Config.ConfigurationManager
         internal XmlResolver GetXmlResolver_CheckConfig()
         {
             if (
@@ -656,7 +657,8 @@ namespace System.Xml
             {
                 reader = CreateDtdValidatingReader(reader);
             }
-            // add conformance checking (must go after DTD validation because XmlValidatingReader works only on XmlTextReader),
+            // add conformance checking (must go after DTD validation because XmlValidatingReader works only on
+            // XmlTextReader),
             // but before XSD validation because of typed value access
             reader = AddConformanceWrapper(reader);
 
@@ -692,7 +694,8 @@ namespace System.Xml
 #pragma warning disable 618
 
 #if SILVERLIGHT
-                // Starting from Windows phone 8.1 (TargetsAtLeast_Desktop_V4_5_1) we converge with the desktop behavior so we'll let the reader
+                // Starting from Windows phone 8.1 (TargetsAtLeast_Desktop_V4_5_1) we converge with the desktop
+                // behavior so we'll let the reader
                 // not throw exception if has different conformance level than Auto.
                 if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5_1)
                 {
@@ -747,7 +750,8 @@ namespace System.Xml
 #endif
 
                 // assume the V1 readers already do all conformance checking;
-                // wrap only if IgnoreWhitespace, IgnoreComments, IgnoreProcessingInstructions or ProhibitDtd is true;
+                // wrap only if IgnoreWhitespace, IgnoreComments, IgnoreProcessingInstructions or ProhibitDtd is
+                // true;
                 if (this.ignoreWhitespace)
                 {
                     WhitespaceHandling wh = WhitespaceHandling.All;

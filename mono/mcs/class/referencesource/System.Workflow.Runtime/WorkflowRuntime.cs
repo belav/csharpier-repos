@@ -1490,7 +1490,8 @@ namespace System.Workflow.Runtime
         internal void WorkflowExecutorCreated(WorkflowExecutor workflowExecutor, bool loaded)
         {
             //
-            // Fire the event for all other components that need to register for notification of WorkflowExecutor events
+            // Fire the event for all other components that need to register for notification of
+            // WorkflowExecutor events
             EventHandler<WorkflowExecutorInitializingEventArgs> localEvent =
                 WorkflowExecutorInitializing;
             if (null != localEvent)

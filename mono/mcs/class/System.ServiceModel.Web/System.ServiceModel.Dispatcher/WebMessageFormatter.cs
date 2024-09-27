@@ -664,7 +664,8 @@ namespace System.ServiceModel.Dispatcher
 
                 // FIXME: use them.
                 // var dcob = Operation.Behaviors.Find<DataContractSerializerOperationBehavior> ();
-                // XmlObjectSerializer xos = dcob.CreateSerializer (result.GetType (), md.Body.WrapperName, md.Body.WrapperNamespace, null);
+                // XmlObjectSerializer xos = dcob.CreateSerializer (result.GetType (), md.Body.WrapperName,
+                // md.Body.WrapperNamespace, null);
                 // var xsob = Operation.Behaviors.Find<XmlSerializerOperationBehavior> ();
                 // XmlSerializer [] serializers = XmlSerializer.FromMappings (xsob.GetXmlMappings ().ToArray ());
 

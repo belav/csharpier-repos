@@ -23,7 +23,8 @@ namespace System.Web.UI.WebControls
         private IOrderedDictionary _values;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DetailsViewInsertedEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.DetailsViewInsertedEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public DetailsViewInsertedEventArgs(int affectedRows, Exception e)
@@ -43,7 +44,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets the exception (if any) that occurred during the operation. This property is read-only.</para>
+        ///    <para>Gets the exception (if any) that occurred during the operation. This property is
+        // read-only.</para>
         /// </devdoc>
         public Exception Exception
         {
@@ -69,7 +71,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with inserted row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with inserted row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary Values
         {

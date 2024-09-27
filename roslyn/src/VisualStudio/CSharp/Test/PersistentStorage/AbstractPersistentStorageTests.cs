@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         private readonly TempDirectory _persistentFolder;
 
         // 256k (larger than the 100k that CloudCache uses to decide when to dump to an external file).
-        // See https://dev.azure.com/devdiv/DevDiv/_git/VS.CloudCache?path=%2Fsrc%2FMicrosoft.VisualStudio.Cache%2FCacheService.cs&version=GBmain&line=35&lineEnd=36&lineStartColumn=1&lineEndColumn=1&lineStyle=plain&_a=contents
+        // See
+        // https://dev.azure.com/devdiv/DevDiv/_git/VS.CloudCache?path=%2Fsrc%2FMicrosoft.VisualStudio.Cache%2FCacheService.cs&version=GBmain&line=35&lineEnd=36&lineStartColumn=1&lineEndColumn=1&lineStyle=plain&_a=contents
         private const int ExtraLargeSize = 256 * 1024;
         private const int LargeSize = (int)(
             SQLite.v2.SQLitePersistentStorage.MaxPooledByteArrayLength * 2
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
 
         public void Dispose()
         {
-            // This should cause the service to release the cached connection it maintains for the primary workspace
+            // This should cause the service to release the cached connection it maintains for the primary
+            // workspace
             _storageService?.GetTestAccessor().Shutdown();
             _persistentFolderRoot.Dispose();
         }
@@ -1852,7 +1854,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                 )
             );
 
-            // Apply this to the workspace so our Solution is the primary branch ID, which matches our usual behavior
+            // Apply this to the workspace so our Solution is the primary branch ID, which matches our usual
+            // behavior
             workspace.TryApplyChanges(solution);
 
             return workspace.CurrentSolution;

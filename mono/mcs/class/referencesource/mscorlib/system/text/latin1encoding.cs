@@ -105,9 +105,11 @@ namespace System.Text
                 (fallback != null && fallback.MaxCharCount == 1) /* || bIsBestFit*/
             )
             {
-                // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is always
+                // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is
+                // always
                 // same as input size.
-                // Note that no existing SBCS code pages map code points to supplimentary characters, so this is easy.
+                // Note that no existing SBCS code pages map code points to supplimentary characters, so this is
+                // easy.
 
                 // We could however have 1 extra byte if the last call had an encoder and a funky fallback and
                 // if we don't use the funky fallback this time.
@@ -539,7 +541,8 @@ namespace System.Text
             // Just return length, SBCS stay the same length because they don't map to surrogate
             long charCount = (long)byteCount;
 
-            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be longer.
+            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be
+            // longer.
             if (DecoderFallback.MaxCharCount > 1)
                 charCount *= DecoderFallback.MaxCharCount;
 
@@ -563,7 +566,8 @@ namespace System.Text
         {
             // Latin-1 contains precomposed characters, so normal for Form C.
             // Since some are composed, not normal for D & KD.
-            // Also some letters like 0x00A8 (spacing diarisis) have compatibility decompositions, so false for KD & KC.
+            // Also some letters like 0x00A8 (spacing diarisis) have compatibility decompositions, so false for
+            // KD & KC.
 
             // Only true for form C.
             return (form == NormalizationForm.FormC);
@@ -580,7 +584,8 @@ namespace System.Text
         // Best fit for ASCII, and since it works for ASCII, we use it for latin1 as well.
         private static readonly char[] arrayCharBestFit =
         {
-            // The first many are in case you wanted to use this for ASCIIEncoding, which we don't need to do any more.
+            // The first many are in case you wanted to use this for ASCIIEncoding, which we don't need to do
+            // any more.
             //          (char)0x00a0, (char)0x0020,    // No-Break Space -> Space
             //          (char)0x00a1, (char)0x0021,    // Inverted Exclamation Mark -> !
             //          (char)0x00a2, (char)0x0063,    // Cent Sign -> c

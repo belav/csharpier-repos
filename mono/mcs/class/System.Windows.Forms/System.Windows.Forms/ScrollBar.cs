@@ -1113,48 +1113,48 @@ namespace System.Windows.Forms
 
         private void MoveThumb(Rectangle original_thumbpos, int value)
         {
-            /* so, the reason this works can best be
-             * described by the following 1 dimensional
-             * pictures
-             *
-             * say you have a scrollbar thumb positioned
-             * thusly:
-             *
-             * <---------------------|          |------------------------------>
-             *
-             * and you want it to end up looking like this:
-             *
-             * <-----------------------------|          |---------------------->
-             *
-             * that can be done with the scrolling api by
-             * extending the rectangle to encompass both
-             * positions:
-             *
-             *               start of range          end of range
-             *                       \	    	    /
-             * <---------------------|	    |-------|---------------------->
-             *
-             * so, we end up scrolling just this little region:
-             *
-             *                       |          |-------|
-             *
-             * and end up with       ********|          |
-             *
-             * where ****** is space that is automatically
-             * redrawn.
-             *
-             * It's clear that in both cases (left to
-             * right, right to left) we need to extend the
-             * size of the scroll rectangle to encompass
-             * both.  In the right to left case, we also
-             * need to decrement the X coordinate.
-             *
-             * We call Update after scrolling to make sure
-             * there's no garbage left in the window to be
-             * copied again if we're called before the
-             * paint events have been handled.
-             *
-             */
+/* so, the reason this works can best be
+* described by the following 1 dimensional
+* pictures
+*
+* say you have a scrollbar thumb positioned
+* thusly:
+*
+* <---------------------|          |------------------------------>
+*
+* and you want it to end up looking like this:
+*
+* <-----------------------------|          |---------------------->
+*
+* that can be done with the scrolling api by
+* extending the rectangle to encompass both
+* positions:
+*
+*               start of range          end of range
+*                       \	    	    /
+* <---------------------|	    |-------|---------------------->
+*
+* so, we end up scrolling just this little region:
+*
+*                       |          |-------|
+*
+* and end up with       ********|          |
+*
+* where ****** is space that is automatically
+* redrawn.
+*
+* It's clear that in both cases (left to
+* right, right to left) we need to extend the
+* size of the scroll rectangle to encompass
+* both.  In the right to left case, we also
+* need to decrement the X coordinate.
+*
+* We call Update after scrolling to make sure
+* there's no garbage left in the window to be
+* copied again if we're called before the
+* paint events have been handled.
+*
+*/
             int delta;
 
             if (vert)

@@ -5,9 +5,10 @@
 
 This is regression test for VSW 577403
 We had a breaking change between 1.1 and 2.0 when a class implements an
-  interface and a base type but doesn't override interface's method.
+interface and a base type but doesn't override interface's method.
 
-When invoking ITest.Test() on an instance of Level3 we got "Level1::Test" printed out instead of "Level2::Test".
+When invoking ITest.Test() on an instance of Level3 we got "Level1::Test" printed out instead of
+"Level2::Test".
 On v1.1 we get correctly "Level2::Test"
 
 After the fix, the Whidbey behavior is correct as well.

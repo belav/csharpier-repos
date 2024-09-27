@@ -16,7 +16,8 @@ namespace System.Net.Http.Headers
         }
     }
 
-    /// <summary>An <see cref="ICollection{T}"/> list that prohibits null elements and that is optimized for a small number of elements.</summary>
+    /// <summary>An <see cref="ICollection{T}"/> list that prohibits null elements and that is optimized
+    // for a small number of elements.</summary>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ObjectCollection<>.DebugView))]
     internal abstract class ObjectCollection<T> : ICollection<T>

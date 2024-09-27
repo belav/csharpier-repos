@@ -23,12 +23,14 @@ namespace System.Diagnostics.Tracing
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IncrementingPollingCounter"/> class.
-        /// IncrementingPollingCounter live as long as the EventSource that they are attached to unless they are
+        /// IncrementingPollingCounter live as long as the EventSource that they are attached to unless they
+        // are
         /// explicitly Disposed.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="eventSource">The event source.</param>
-        /// <param name="totalValueProvider">The delegate to invoke to get the total value for this counter.</param>
+        /// <param name="totalValueProvider">The delegate to invoke to get the total value for this
+        // counter.</param>
         public IncrementingPollingCounter(
             string name,
             EventSource eventSource,

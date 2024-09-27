@@ -37,9 +37,11 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Initializes an instance of <see cref="Saml2Subject"/> from a <see cref="Saml2SubjectConfirmation"/>.
+        /// Initializes an instance of <see cref="Saml2Subject"/> from a <see
+        // cref="Saml2SubjectConfirmation"/>.
         /// </summary>
-        /// <param name="subjectConfirmation">The <see cref="Saml2SubjectConfirmation"/> to use for initialization.</param>
+        /// <param name="subjectConfirmation">The <see cref="Saml2SubjectConfirmation"/> to use for
+        // initialization.</param>
         public Saml2Subject(Saml2SubjectConfirmation subjectConfirmation)
         {
             if (null == subjectConfirmation)
@@ -62,7 +64,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets a collection of <see cref="Saml2SubjectConfirmation"/> which can be used to validate and confirm the <see cref="Saml2Subject"/>. [Saml2Core, 2.4.1]
+        /// Gets a collection of <see cref="Saml2SubjectConfirmation"/> which can be used to validate and
+        // confirm the <see cref="Saml2Subject"/>. [Saml2Core, 2.4.1]
         /// </summary>
         /// <remarks>
         /// If more than one subject confirmation is provied, then satisfying any one of

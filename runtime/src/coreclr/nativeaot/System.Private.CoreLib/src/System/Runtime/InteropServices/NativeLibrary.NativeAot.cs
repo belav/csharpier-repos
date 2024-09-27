@@ -9,7 +9,8 @@ namespace System.Runtime.InteropServices
 {
     public static partial class NativeLibrary
     {
-        // Not a public API. We expose this so that it's possible to bypass the codepath that tries to read search path
+        // Not a public API. We expose this so that it's possible to bypass the codepath that tries to read
+        // search path
         // from custom attributes.
         internal static bool TryLoad(
             string libraryName,
@@ -132,7 +133,8 @@ namespace System.Runtime.InteropServices
                 else if ((callingAssembly != null) && searchAssemblyDirectory)
                 {
                     // Try to load the module alongside the assembly where the PInvoke was declared.
-                    // For PInvokes where the DllImportSearchPath.AssemblyDirectory is specified, look next to the application.
+                    // For PInvokes where the DllImportSearchPath.AssemblyDirectory is specified, look next to the
+                    // application.
                     ret = LoadLibraryHelper(
                         Path.Combine(AppContext.BaseDirectory, currLibNameVariation),
                         loadWithAlteredPathFlags | dllImportSearchPathFlags,

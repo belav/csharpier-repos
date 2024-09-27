@@ -121,7 +121,8 @@ namespace System.Management
         //
 
         /// <summary>
-        /// <para>Gets or sets the number of <see cref='System.Management.QualifierData'/> objects in the <see cref='System.Management.QualifierDataCollection'/>.</para>
+        /// <para>Gets or sets the number of <see cref='System.Management.QualifierData'/> objects in the
+        // <see cref='System.Management.QualifierDataCollection'/>.</para>
         /// </summary>
         /// <value>
         ///    <para>The number of objects in the collection.</para>
@@ -190,7 +191,8 @@ namespace System.Management
         /// <summary>
         /// <para> Copies the <see cref='System.Management.QualifierDataCollection'/> into an array.</para>
         /// </summary>
-        /// <param name='array'>The array to which to copy the <see cref='System.Management.QualifierDataCollection'/>. </param>
+        /// <param name='array'>The array to which to copy the <see
+        // cref='System.Management.QualifierDataCollection'/>. </param>
         /// <param name='index'>The index from which to start copying. </param>
         public void CopyTo(Array array, int index)
         {
@@ -250,7 +252,8 @@ namespace System.Management
         /// <see cref='System.Management.QualifierData'/>
         /// array.</para>
         /// </summary>
-        /// <param name='qualifierArray'><para>The specialized array of <see cref='System.Management.QualifierData'/> objects
+        /// <param name='qualifierArray'><para>The specialized array of <see
+        // cref='System.Management.QualifierData'/> objects
         /// to which to copy the <see cref='System.Management.QualifierDataCollection'/>.</para></param>
         /// <param name=' index'>The index from which to start copying.</param>
         public void CopyTo(QualifierData[] qualifierArray, int index)
@@ -269,7 +272,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Returns an enumerator for the <see cref='System.Management.QualifierDataCollection'/>. This method is strongly typed.</para>
+        /// <para>Returns an enumerator for the <see cref='System.Management.QualifierDataCollection'/>.
+        // This method is strongly typed.</para>
         /// </summary>
         /// <returns>
         /// <para>An <see cref='System.Collections.IEnumerator'/> that can be used to iterate through the
@@ -394,10 +398,12 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para>Gets or sets the current <see cref='System.Management.QualifierData'/> in the <see cref='System.Management.QualifierDataCollection'/> enumeration.</para>
+            /// <para>Gets or sets the current <see cref='System.Management.QualifierData'/> in the <see
+            // cref='System.Management.QualifierDataCollection'/> enumeration.</para>
             /// </summary>
             /// <value>
-            /// <para>The current <see cref='System.Management.QualifierData'/> element in the collection.</para>
+            /// <para>The current <see cref='System.Management.QualifierData'/> element in the
+            // collection.</para>
             /// </value>
             public QualifierData Current
             {
@@ -416,7 +422,8 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para> Moves to the next element in the <see cref='System.Management.QualifierDataCollection'/> enumeration.</para>
+            /// <para> Moves to the next element in the <see cref='System.Management.QualifierDataCollection'/>
+            // enumeration.</para>
             /// </summary>
             /// <returns>
             /// <para><see langword='true'/> if the enumerator was successfully advanced to the next
@@ -433,7 +440,8 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para>Resets the enumerator to the beginning of the <see cref='System.Management.QualifierDataCollection'/> enumeration.</para>
+            /// <para>Resets the enumerator to the beginning of the <see
+            // cref='System.Management.QualifierDataCollection'/> enumeration.</para>
             /// </summary>
             public void Reset()
             {
@@ -446,9 +454,11 @@ namespace System.Management
         //
 
         /// <summary>
-        /// <para> Gets the specified <see cref='System.Management.QualifierData'/> from the <see cref='System.Management.QualifierDataCollection'/>.</para>
+        /// <para> Gets the specified <see cref='System.Management.QualifierData'/> from the <see
+        // cref='System.Management.QualifierDataCollection'/>.</para>
         /// </summary>
-        /// <param name='qualifierName'>The name of the <see cref='System.Management.QualifierData'/> to access in the <see cref='System.Management.QualifierDataCollection'/>. </param>
+        /// <param name='qualifierName'>The name of the <see cref='System.Management.QualifierData'/> to
+        // access in the <see cref='System.Management.QualifierDataCollection'/>. </param>
         /// <value>
         /// <para>A <see cref='System.Management.QualifierData'/>, based on the name specified.</para>
         /// </value>
@@ -469,9 +479,11 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Removes a <see cref='System.Management.QualifierData'/> from the <see cref='System.Management.QualifierDataCollection'/> by name.</para>
+        /// <para>Removes a <see cref='System.Management.QualifierData'/> from the <see
+        // cref='System.Management.QualifierDataCollection'/> by name.</para>
         /// </summary>
-        /// <param name='qualifierName'>The name of the <see cref='System.Management.QualifierData'/> to remove. </param>
+        /// <param name='qualifierName'>The name of the <see cref='System.Management.QualifierData'/> to
+        // remove. </param>
         public virtual void Remove(string qualifierName)
         {
             int status = GetTypeQualifierSet().Delete_(qualifierName);
@@ -486,12 +498,16 @@ namespace System.Management
         }
 
         /// <overload>
-        /// <para>Adds a <see cref='System.Management.QualifierData'/> to the <see cref='System.Management.QualifierDataCollection'/>.</para>
+        /// <para>Adds a <see cref='System.Management.QualifierData'/> to the <see
+        // cref='System.Management.QualifierDataCollection'/>.</para>
         /// </overload>
         /// <summary>
-        /// <para>Adds a <see cref='System.Management.QualifierData'/> to the <see cref='System.Management.QualifierDataCollection'/>. This overload specifies the qualifier name and value.</para>
+        /// <para>Adds a <see cref='System.Management.QualifierData'/> to the <see
+        // cref='System.Management.QualifierDataCollection'/>. This overload specifies the qualifier name and
+        // value.</para>
         /// </summary>
-        /// <param name='qualifierName'>The name of the <see cref='System.Management.QualifierData'/> to be added to the <see cref='System.Management.QualifierDataCollection'/>. </param>
+        /// <param name='qualifierName'>The name of the <see cref='System.Management.QualifierData'/> to be
+        // added to the <see cref='System.Management.QualifierDataCollection'/>. </param>
         /// <param name='qualifierValue'>The value for the new qualifier. </param>
         public virtual void Add(string qualifierName, object qualifierValue)
         {
@@ -499,15 +515,21 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Adds a <see cref='System.Management.QualifierData'/> to the <see cref='System.Management.QualifierDataCollection'/>. This overload
-        ///    specifies all property values for a <see cref='System.Management.QualifierData'/> object.</para>
+        /// <para>Adds a <see cref='System.Management.QualifierData'/> to the <see
+        // cref='System.Management.QualifierDataCollection'/>. This overload
+        ///    specifies all property values for a <see cref='System.Management.QualifierData'/>
+        // object.</para>
         /// </summary>
         /// <param name='qualifierName'>The qualifier name. </param>
         /// <param name='qualifierValue'>The qualifier value. </param>
-        /// <param name='isAmended'><see langword='true'/> to specify that this qualifier is amended (flavor); otherwise, <see langword='false'/>. </param>
-        /// <param name='propagatesToInstance'><see langword='true'/> to propagate this qualifier to instances; otherwise, <see langword='false'/>. </param>
-        /// <param name='propagatesToSubclass'><see langword='true'/> to propagate this qualifier to subclasses; otherwise, <see langword='false'/>. </param>
-        /// <param name='isOverridable'><see langword='true'/> to specify that this qualifier's value is overridable in instances of subclasses; otherwise, <see langword='false'/>. </param>
+        /// <param name='isAmended'><see langword='true'/> to specify that this qualifier is amended
+        // (flavor); otherwise, <see langword='false'/>. </param>
+        /// <param name='propagatesToInstance'><see langword='true'/> to propagate this qualifier to
+        // instances; otherwise, <see langword='false'/>. </param>
+        /// <param name='propagatesToSubclass'><see langword='true'/> to propagate this qualifier to
+        // subclasses; otherwise, <see langword='false'/>. </param>
+        /// <param name='isOverridable'><see langword='true'/> to specify that this qualifier's value is
+        // overridable in instances of subclasses; otherwise, <see langword='false'/>. </param>
         public virtual void Add(
             string qualifierName,
             object qualifierValue,

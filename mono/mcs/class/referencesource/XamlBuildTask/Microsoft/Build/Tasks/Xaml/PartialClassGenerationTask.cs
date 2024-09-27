@@ -24,7 +24,8 @@ namespace Microsoft.Build.Tasks.Xaml
         List<ITaskItem> generatedResources = new List<ITaskItem>();
         List<ITaskItem> generatedCodeFiles = new List<ITaskItem>();
 
-        // We will do Dev10 behavior if the new required property MSBuildProjectDirectory is NOT specified. This can happen
+        // We will do Dev10 behavior if the new required property MSBuildProjectDirectory is NOT specified.
+        // This can happen
         // if a Dev10 version of the Microsoft.Xaml.Targets file is being used with Dev11 installed.
         bool supportExtensions = false;
         string msBuildProjectDirectory;
@@ -66,7 +67,8 @@ namespace Microsoft.Build.Tasks.Xaml
         [Required]
         public string OutputPath { get; set; }
 
-        // This is Required for Dev11, but to allow things to work with a Dev10 targets file, we are not marking it required.
+        // This is Required for Dev11, but to allow things to work with a Dev10 targets file, we are not
+        // marking it required.
         public string MSBuildProjectDirectory
         {
             get { return this.msBuildProjectDirectory; }
@@ -241,8 +243,10 @@ namespace Microsoft.Build.Tasks.Xaml
             );
         }
 
-        // For Intellisense builds, we re-use the AppDomain for successive builds instead of creating a new one every time,
-        // if the references have not changed (there are no new references and they have not been updated since the last build)
+        // For Intellisense builds, we re-use the AppDomain for successive builds instead of creating a new
+        // one every time,
+        // if the references have not changed (there are no new references and they have not been updated
+        // since the last build)
         // This method accesses the static referencesTimeStampCache (indirectly).
         // To ensure thread safety, this method should be called inside a lock/monitor
         AppDomain GetInProcessAppDomain(out bool newAppDomain)

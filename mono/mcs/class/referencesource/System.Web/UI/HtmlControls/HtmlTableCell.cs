@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlTableCell.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlTableCell.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -106,9 +106,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["bordercolor"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Number of columns that this cell spans.
-         */
+/*
+* Number of columns that this cell spans.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -151,9 +151,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["height"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Suppresses wrapping.
-         */
+/*
+* Suppresses wrapping.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -184,9 +184,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Number of rows that this cell spans.
-         */
+/*
+* Number of rows that this cell spans.
+*/
 
         /// <devdoc>
         ///    <para>

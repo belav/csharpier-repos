@@ -42,7 +42,8 @@ namespace Microsoft.Interop.Analyzers
                     ),
                     HashSet<string>
                 > uniqueMarshallersToFix = new();
-                // Organize all the diagnostics by marshaller, managed type, and whether or not it's a collection marshaller
+                // Organize all the diagnostics by marshaller, managed type, and whether or not it's a collection
+                // marshaller
                 foreach (Diagnostic diagnostic in diagnostics)
                 {
                     Document doc = fixAllContext.Solution.GetDocument(
@@ -265,7 +266,8 @@ namespace Microsoft.Interop.Analyzers
             bool isLinearCollectionMarshaller =
                 ManualTypeMarshallingHelper.IsLinearCollectionEntryPoint(entryPointTypeSymbol);
 
-            // Explicitly ignore the generic arity mismatch diagnostics as we will only reach here if there are no mismatches.
+            // Explicitly ignore the generic arity mismatch diagnostics as we will only reach here if there are
+            // no mismatches.
             // The analyzer will not for missing members if the managed type cannot be resolved.
             ManualTypeMarshallingHelper.TryResolveManagedType(
                 entryPointTypeSymbol,
@@ -303,8 +305,10 @@ namespace Microsoft.Interop.Analyzers
             return editor.ChangedSolution;
         }
 
-        // Get the managed type from the CustomMarshallerAttribute located at the provided location in source on the provided type.
-        // As we only get fixable diagnostics for types that have valid non-null managed types in the CustomMarshallerAttribute applications,
+        // Get the managed type from the CustomMarshallerAttribute located at the provided location in
+        // source on the provided type.
+        // As we only get fixable diagnostics for types that have valid non-null managed types in the
+        // CustomMarshallerAttribute applications,
         // we do not need to worry about the returned symbol being null.
         private static ITypeSymbol GetManagedTypeInAttributeSyntax(
             Location locationInAttribute,
@@ -365,7 +369,8 @@ namespace Microsoft.Interop.Analyzers
         )
         {
             SyntaxGenerator gen = editor.Generator;
-            // Get the methods of the shape so we can use them to determine what types to use in signatures that are not obvious.
+            // Get the methods of the shape so we can use them to determine what types to use in signatures that
+            // are not obvious.
             var (_, methods) = StatelessMarshallerShapeHelper.GetShapeForType(
                 marshallerType,
                 managedType,
@@ -382,7 +387,8 @@ namespace Microsoft.Interop.Analyzers
             var (typeParameters, _) =
                 marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
-            // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and reconstructing the syntax.
+            // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and
+            // reconstructing the syntax.
             Lazy<SyntaxNode> unmanagedTypeSyntax =
                 new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
             Lazy<ITypeSymbol> managedElementTypeSymbol =
@@ -703,7 +709,8 @@ namespace Microsoft.Interop.Analyzers
         )
         {
             SyntaxGenerator gen = editor.Generator;
-            // Get the methods of the shape so we can use them to determine what types to use in signatures that are not obvious.
+            // Get the methods of the shape so we can use them to determine what types to use in signatures that
+            // are not obvious.
             var (_, methods) = StatefulMarshallerShapeHelper.GetShapeForType(
                 marshallerType,
                 managedType,
@@ -720,7 +727,8 @@ namespace Microsoft.Interop.Analyzers
             var (typeParameters, _) =
                 marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
-            // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and reconstructing the syntax.
+            // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and
+            // reconstructing the syntax.
             Lazy<SyntaxNode> unmanagedTypeSyntax =
                 new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
             Lazy<ITypeSymbol> managedElementTypeSymbol =

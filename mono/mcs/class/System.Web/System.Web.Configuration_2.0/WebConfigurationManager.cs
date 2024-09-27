@@ -798,7 +798,7 @@ namespace System.Web.Configuration
                 if (config != null)
                     return;
 
-                /* deal with the ConfigurationSettings stuff */
+/* deal with the ConfigurationSettings stuff */
                 {
                     Web20DefaultConfig settings = Web20DefaultConfig.GetInstance();
                     Type t = typeof(ConfigurationSettings);
@@ -814,7 +814,7 @@ namespace System.Web.Configuration
                     config.Init();
                 }
 
-                /* deal with the ConfigurationManager stuff */
+/* deal with the ConfigurationManager stuff */
                 {
                     HttpConfigurationSystem system = new HttpConfigurationSystem();
                     Type t = typeof(ConfigurationManager);
@@ -851,14 +851,14 @@ namespace System.Web.Configuration
 
             if (o == null || o is IgnoreSection)
             {
-                /* this can happen when the section
-                 * handler doesn't subclass from
-                 * ConfigurationSection.  let's be
-                 * nice and try to load it using the
-                 * 1.x style routines in case there's
-                 * a 1.x section handler registered
-                 * for it.
-                 */
+/* this can happen when the section
+* handler doesn't subclass from
+* ConfigurationSection.  let's be
+* nice and try to load it using the
+* 1.x style routines in case there's
+* a 1.x section handler registered
+* for it.
+*/
                 object o1 = WebConfigurationManager.oldConfig.GetConfig(sectionName);
                 if (o1 != null)
                     return o1;

@@ -69,7 +69,7 @@ namespace System.ServiceModel.Dispatcher
         
         static XPathMessageFilter()
         {
-            XPathMessageFilter.schema = XmlSchema.Read(new StringReader(SchemaString), null);
+        XPathMessageFilter.schema = XmlSchema.Read(new StringReader(SchemaString), null);
         }
         */
 
@@ -174,7 +174,8 @@ namespace System.ServiceModel.Dispatcher
         }
 
         /// <summary>
-        /// Initializes an XPath that uses the given XsltContext to resolve prefixes, functions, and variables
+        /// Initializes an XPath that uses the given XsltContext to resolve prefixes, functions, and
+        // variables
         /// Also associated the given tag with the filter
         /// You can pass in null for namespaces.
         /// </summary>
@@ -189,23 +190,33 @@ namespace System.ServiceModel.Dispatcher
         }
 
         /// <summary>
-        /// Initializes a new instance of the class by reading in a streamed XPath with a specified Xml reader.
+        /// Initializes a new instance of the class by reading in a streamed XPath with a specified Xml
+        // reader.
         /// The reader that is to read in the streamed XPath expression.
-        /// It is assumed that the reader is parked at the element containing the XPath, with ReaderState == StartElement. The
-        /// content of the element will simply be consumed and no specific tag will be looked for. This allows the user to stash
-        /// their XPaths in whatever tag they want. The entire tag will have been consumed when the method returns.
-        /// The constructor will also automatically initialize the namespace manager by resolving all prefixes in the xpath.
+        /// It is assumed that the reader is parked at the element containing the XPath, with ReaderState ==
+        // StartElement. The
+        /// content of the element will simply be consumed and no specific tag will be looked for. This
+        // allows the user to stash
+        /// their XPaths in whatever tag they want. The entire tag will have been consumed when the method
+        // returns.
+        /// The constructor will also automatically initialize the namespace manager by resolving all
+        // prefixes in the xpath.
         /// </summary>
         public XPathMessageFilter(XmlReader reader)
             : this(reader, new XPathMessageContext()) { }
 
         /// <summary>
-        /// Initializes a new instance of the class by reading in a streamed XPath with a specified Xml reader.
+        /// Initializes a new instance of the class by reading in a streamed XPath with a specified Xml
+        // reader.
         /// The reader that is to read in the streamed XPath expression.
-        /// It is assumed that the reader is parked at the element containing the XPath, with ReaderState == StartElement. The
-        /// content of the element will simply be consumed and no specific tag will be looked for. This allows the user to stash
-        /// their XPaths in whatever tag they want. The entire tag will have been consumed when the method returns.
-        /// The constructor will also automatically initialize the namespace manager by resolving all prefixes in the xpath.
+        /// It is assumed that the reader is parked at the element containing the XPath, with ReaderState ==
+        // StartElement. The
+        /// content of the element will simply be consumed and no specific tag will be looked for. This
+        // allows the user to stash
+        /// their XPaths in whatever tag they want. The entire tag will have been consumed when the method
+        // returns.
+        /// The constructor will also automatically initialize the namespace manager by resolving all
+        // prefixes in the xpath.
         /// </summary>
         public XPathMessageFilter(XmlReader reader, XmlNamespaceManager namespaces)
             : base()
@@ -237,7 +248,8 @@ namespace System.ServiceModel.Dispatcher
 #endif
 
         /// <summary>
-        /// XPaths contain qnames with prefixes. The namespace maps maps those prefixes to actual namespaces.
+        /// XPaths contain qnames with prefixes. The namespace maps maps those prefixes to actual
+        // namespaces.
         /// </summary>
         /// <value></value>
         public XmlNamespaceManager Namespaces
@@ -248,7 +260,8 @@ namespace System.ServiceModel.Dispatcher
         /// <summary>
         /// This mitigates a security Threat.
         /// Some filters could be extremely expensive to evaluate or are very long running. Alternatively, a
-        /// filter could have a very large number of relatively simple filters that taken as a whole would be
+        /// filter could have a very large number of relatively simple filters that taken as a whole would
+        // be
         /// long running.
         /// Since filters operate on Xml infosets, a natural and simple way to set computational limits
         /// is to specify the maximum # of nodes that should be looked at during filter evaluation.
@@ -282,7 +295,8 @@ namespace System.ServiceModel.Dispatcher
         /// <summary>
         /// If the xpath is an empty string, there is nothing to compile and the filter always matches
         /// If not, try to compile the filter for execution within the filter engine's own query processor
-        /// If that query processor cannot accept the filter (it doesn't fall within the class of xpaths it can handle),
+        /// If that query processor cannot accept the filter (it doesn't fall within the class of xpaths it
+        // can handle),
         /// then revert to the fall-back solution - the slower Fx engine
         /// </summary>
         void Compile()
@@ -353,7 +367,8 @@ namespace System.ServiceModel.Dispatcher
         /// Restricts filters to testing only the Xml contained within:
         ///     <envelope><header></header></envelope>
         /// Note: since this method never probes the message body, it should NOT close the message
-        /// If the filter probes the message body, then the filter should THROW an Exception. The filter should not return false
+        /// If the filter probes the message body, then the filter should THROW an Exception. The filter
+        // should not return false
         /// This is deliberate - we don't want to produce false positives.
         /// Example of such a filter that probes the body: /env:Envelope/env:Body = ....
         /// </summary>
@@ -368,12 +383,15 @@ namespace System.ServiceModel.Dispatcher
         }
 
         /// <summary>
-        /// Calls messageBuffer.CreateMessage(), then tests whether the message satisfies the criteria of the filter.
+        /// Calls messageBuffer.CreateMessage(), then tests whether the message satisfies the criteria of
+        // the filter.
         /// MessageFilters will probe
-        /// Always make the user choose whether they want to match on the body or not - and be very aware that they made that choice.
+        /// Always make the user choose whether they want to match on the body or not - and be very aware
+        // that they made that choice.
         ///
         /// We deliberately did not use a default of Match(message), with matchOnBody = false
-        /// We don't want situations where a developer who used a body filter would wonder why the filter didn't work!
+        /// We don't want situations where a developer who used a body filter would wonder why the filter
+        // didn't work!
         /// </summary>
         public override bool Match(MessageBuffer messageBuffer)
         {
@@ -520,7 +538,8 @@ namespace System.ServiceModel.Dispatcher
                     /*
                     if(found || reader.LocalName != NodeQuotaAttr || reader.NamespaceURI != string.Empty)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FilterInvalidAttribute)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+                    InvalidOperationException(SR.GetString(SR.FilterInvalidAttribute)));
                     }
                     */
                     if (reader.LocalName == NodeQuotaAttr && reader.NamespaceURI.Length == 0)
@@ -728,7 +747,8 @@ namespace System.ServiceModel.Dispatcher
         /// <param name='prefix'>The namespace prefix of the XPath Xml element.</param>
         /// <param name='localName'><para> The local name of the XPath Xml element.</para></param>
         /// <param name='ns'>The namespace URI to associate with the Xml element.</param>
-        /// <param name='writeNamespaces'>if namespaces should be serialized out separately as attributes;  if not.</param>
+        /// <param name='writeNamespaces'>if namespaces should be serialized out separately as attributes;
+        // if not.</param>
         public void WriteXPathTo(
             XmlWriter writer,
             string prefix,
@@ -783,62 +803,62 @@ namespace System.ServiceModel.Dispatcher
             /*
             if(writeNamespaces)
             {
-                if(this.namespaces.LookupNamespace(prefix) != ns)
-                {
-                    XmlNamespaceManager resolver = new XmlNamespaceManager(new NameTable());
-                    foreach(string pre in this.namespaces)
-                    {
-                        if(pre != XmlP && pre != XmlnsP)
-                        {
-                            //resolver.AddNamespace(pre, this.namespaces.LookupNamespace(pre));
-                        }
-                    }
-                    
-                    resolver.AddNamespace(prefix, ns);
-                    WriteXPath(writer, resolver);
-                }
-                else
-                {
-                    WriteXPath(writer, this.namespaces);
-                }
+            if(this.namespaces.LookupNamespace(prefix) != ns)
+            {
+            XmlNamespaceManager resolver = new XmlNamespaceManager(new NameTable());
+            foreach(string pre in this.namespaces)
+            {
+            if(pre != XmlP && pre != XmlnsP)
+            {
+            //resolver.AddNamespace(pre, this.namespaces.LookupNamespace(pre));
+            }
+            }
+            
+            resolver.AddNamespace(prefix, ns);
+            WriteXPath(writer, resolver);
             }
             else
             {
-                writer.WriteAttributeString(NodeQuotaAttr, this.NodeQuota.ToString());
-                writer.WriteString(this.xpath);
+            WriteXPath(writer, this.namespaces);
+            }
+            }
+            else
+            {
+            writer.WriteAttributeString(NodeQuotaAttr, this.NodeQuota.ToString());
+            writer.WriteString(this.xpath);
             }
             */
             /*
             if (writeNamespaces && null != this.namespaces)
             {
-                // Lex the xpath to find all prefixes used
-                System.Collections.Generic.List<string> prefixes = new System.Collections.Generic.List<string>();
-                XPathLexer lexer = new XPathLexer(xpath, false);
-                while (lexer.MoveNext())
-                {
-                    string nsPrefix = lexer.Token.Prefix;
-
-                    if (nsPrefix.Length > 0 && !prefixes.Contains(nsPrefix))
-                    {
-                        prefixes.Add(nsPrefix);
-                    }
-                }
-                
-                // Write all the used prefixes
-                for(int i = 0; i < prefixes.Count; ++i)
-                {
-                    string nsPrefix = prefixes[i];
-                    string nsScope = this.namespaces.LookupNamespace(nsPrefix);
-                    if (null != nsScope && nsScope.Length > 0 && !nsPrefix.StartsWith("xml"))
-                    {
-                        writer.WriteAttributeString("xmlns", nsPrefix, null, nsScope);
-                    }
-                }
+            // Lex the xpath to find all prefixes used
+            System.Collections.Generic.List<string> prefixes = new System.Collections.Generic.List<string>();
+            XPathLexer lexer = new XPathLexer(xpath, false);
+            while (lexer.MoveNext())
+            {
+            string nsPrefix = lexer.Token.Prefix;
+            
+            if (nsPrefix.Length > 0 && !prefixes.Contains(nsPrefix))
+            {
+            prefixes.Add(nsPrefix);
             }
-
+            }
+            
+            // Write all the used prefixes
+            for(int i = 0; i < prefixes.Count; ++i)
+            {
+            string nsPrefix = prefixes[i];
+            string nsScope = this.namespaces.LookupNamespace(nsPrefix);
+            if (null != nsScope && nsScope.Length > 0 && !nsPrefix.StartsWith("xml"))
+            {
+            writer.WriteAttributeString("xmlns", nsPrefix, null, nsScope);
+            }
+            }
+            }
+            
             // Write the NodeQuota
             writer.WriteAttributeString(NodeQuotaAttr, this.NodeQuota.ToString());
-
+            
             writer.WriteString(this.xpath);
             */
 

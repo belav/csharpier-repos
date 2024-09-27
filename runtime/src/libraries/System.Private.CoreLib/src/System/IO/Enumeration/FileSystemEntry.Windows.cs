@@ -6,7 +6,8 @@ using System.IO;
 
 namespace System.IO.Enumeration
 {
-    /// <summary>Provides a lower level view of <see cref="FileSystemInfo" /> to help process and filter find results.</summary>
+    /// <summary>Provides a lower level view of <see cref="FileSystemInfo" /> to help process and filter
+    // find results.</summary>
     public unsafe ref partial struct FileSystemEntry
     {
         internal static void Initialize(
@@ -49,7 +50,8 @@ namespace System.IO.Enumeration
         /// <value>The file length in bytes.</value>
         public long Length => _info->EndOfFile;
 
-        /// <summary>Gets the creation time for the entry or the oldest available time stamp if the operating system does not support creation time stamps.</summary>
+        /// <summary>Gets the creation time for the entry or the oldest available time stamp if the
+        // operating system does not support creation time stamps.</summary>
         /// <value>The creation time for the entry.</value>
         public DateTimeOffset CreationTimeUtc => _info->CreationTime.ToDateTimeOffset();
 
@@ -62,11 +64,13 @@ namespace System.IO.Enumeration
         public DateTimeOffset LastWriteTimeUtc => _info->LastWriteTime.ToDateTimeOffset();
 
         /// <summary>Gets a value that indicates whether this entry is a directory.</summary>
-        /// <value><see langword="true" /> if the entry is a directory; otherwise, <see langword="false" />.</value>
+        /// <value><see langword="true" /> if the entry is a directory; otherwise, <see langword="false"
+        // />.</value>
         public bool IsDirectory => (Attributes & FileAttributes.Directory) != 0;
 
         /// <summary>Gets a value that indicates whether the file has the hidden attribute.</summary>
-        /// <value><see langword="true" /> if the file has the hidden attribute; otherwise, <see langword="false" />.</value>
+        /// <value><see langword="true" /> if the file has the hidden attribute; otherwise, <see
+        // langword="false" />.</value>
         public bool IsHidden => (Attributes & FileAttributes.Hidden) != 0;
 
         /// <summary>Converts the value of this instance to a <see cref="FileSystemInfo" />.</summary>

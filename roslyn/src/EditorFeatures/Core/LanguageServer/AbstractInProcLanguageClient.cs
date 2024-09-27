@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
         /// <summary>
         /// Unused, implementing <see cref="ILanguageClientCustomMessage2"/>.
-        /// Gets the optional target object for receiving custom messages not covered by the language server protocol.
+        /// Gets the optional target object for receiving custom messages not covered by the language server
+        // protocol.
         /// </summary>
         public object? CustomMessageTarget => null;
 
@@ -83,19 +84,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
         /// <summary>
         /// Unused, implementing <see cref="ILanguageClient"/>
-        /// No additional settings are provided for this server, so we do not need any configuration section names.
+        /// No additional settings are provided for this server, so we do not need any configuration section
+        // names.
         /// </summary>
         public IEnumerable<string>? ConfigurationSections { get; }
 
         /// <summary>
-        /// Gets the initialization options object the client wants to send when 'initialize' message is sent.
-        /// See https://microsoft.github.io/language-server-protocol/specifications/specification-3-14/#initialize
+        /// Gets the initialization options object the client wants to send when 'initialize' message is
+        // sent.
+        /// See
+        // https://microsoft.github.io/language-server-protocol/specifications/specification-3-14/#initialize
         /// We do not provide any additional initialization options.
         /// </summary>
         public object? InitializationOptions { get; }
 
         /// <summary>
-        /// Gets a value indicating whether a notification bubble show be shown when the language server fails to initialize.
+        /// Gets a value indicating whether a notification bubble show be shown when the language server
+        // fails to initialize.
         /// </summary>
         public abstract bool ShowNotificationOnInitializeFailed { get; }
 
@@ -124,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // When we create an LSP server, we compute our server capabilities; this may depend on
             // reading things like workspace options which will force us to initialize our option persisters.
             // Unfortunately some of our option persisters currently assert they are first created on the UI
-            // thread. If the first time they're created is because of LSP initialization, we might end up loading
+            // thread. If the first time they're created is because of LSP initialization, we might end up
+            // loading
             // them on a background thread which will throw exceptions and then prevent them from being created
             // again later.
             //
@@ -133,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // done there. Fixing that isn't difficult but comes with some risk I don't want to take for 16.9;
             // instead we'll just compute our capabilities here on the UI thread to ensure everything is loaded.
             // We _could_ consider doing a SwitchToMainThreadAsync in InProcLanguageServer.InitializeAsync
-            // (where the problematic call to GetCapabilites is), but that call is invoked across the StreamJsonRpc
+            // (where the problematic call to GetCapabilites is), but that call is invoked across the
+            // StreamJsonRpc
             // link where it's unclear if VS Threading rules apply. By doing this here, we are dong it in a
             // VS API that is following VS Threading rules, and it also ensures that the preereqs are loaded
             // prior to any RPC calls being made.
@@ -178,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         protected virtual void Activate_OffUIThread() { }
 
         /// <summary>
-        /// Signals that the extension has been loaded.  The server can be started immediately, or wait for user action to start.
+        /// Signals that the extension has been loaded.  The server can be started immediately, or wait for
+        // user action to start.
         /// To start the server, invoke the <see cref="StartAsync"/> event;
         /// </summary>
         public async Task OnLoadedAsync()
@@ -189,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             }
             catch (AggregateException e)
             {
-                // The VS LSP client allows an unexpected OperationCanceledException to propagate out of the StartAsync
+                // The VS LSP client allows an unexpected OperationCanceledException to propagate out of the
+                // StartAsync
                 // callback. Avoid allowing it to propagate further.
                 e.Handle(ex => ex is OperationCanceledException);
             }
@@ -198,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// <summary>
         /// Signals the extension that the language server has been successfully initialized.
         /// </summary>
-        /// <returns>A <see cref="Task"/> which completes when actions that need to be performed when the server is ready are done.</returns>
+        /// <returns>A <see cref="Task"/> which completes when actions that need to be performed when the
+        // server is ready are done.</returns>
         public Task OnServerInitializedAsync()
         {
             // We don't have any tasks that need to be triggered after the server has successfully initialized.
@@ -278,7 +288,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
         /// <summary>
         /// Unused, implementing <see cref="ILanguageClientCustomMessage2"/>.
-        /// This method is called after the language server has been activated, but connection has not been established.
+        /// This method is called after the language server has been activated, but connection has not been
+        // established.
         /// </summary>
         public Task AttachForCustomMessageAsync(JsonRpc rpc) => Task.CompletedTask;
     }

@@ -11,7 +11,8 @@ namespace ConsoleApplication1
     public class Program
     {
         /// <summary>
-        /// AV when switch optimized away in x64. Should be somewhat rare but we optimize because all the switch cases result in the same assignment
+        /// AV when switch optimized away in x64. Should be somewhat rare but we optimize because all the
+        // switch cases result in the same assignment
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>

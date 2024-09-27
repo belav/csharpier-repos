@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net.Http;
@@ -17,7 +18,8 @@ namespace System.Web.Http.ExceptionHandling
         /// <param name="context">The exception context.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>
-        /// A task that, when completed, contains the response message to return when the exception is handled, or
+        /// A task that, when completed, contains the response message to return when the exception is
+        // handled, or
         /// <see langword="null"/> when the exception remains unhandled.
         /// </returns>
         public static Task<HttpResponseMessage> HandleAsync(

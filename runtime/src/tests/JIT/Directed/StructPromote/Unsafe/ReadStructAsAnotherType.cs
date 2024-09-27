@@ -63,13 +63,15 @@ public class TestAssignFieldsBetweenPromotedNotPromotedStructs
         a.promotedField.pointerSizedField = 4;
         a.anotherField = 5;
         NotPromotedStruct b = PromotedStruct.AsNotPromotedStruct(ref a);
-        // The cast can be inlined and the field handle will refer to the `PromotedStruct.pointerSizedField`,
+        // The cast can be inlined and the field handle will refer to the
+        // `PromotedStruct.pointerSizedField`,
         // in this case we can promote it because `NotPromotedStruct.notPromotedField.pointerSizedField` has
         // the same class handle.
         Debug.Assert(b.notPromotedField.pointerSizedField == 0x4);
 
         NotPromotedStruct c = PromotedStruct.AsNotPromotedStruct(ref a);
-        // The cast can be inlined and the field handle will refer to the `PromotedStruct.pointerSizedField`,
+        // The cast can be inlined and the field handle will refer to the
+        // `PromotedStruct.pointerSizedField`,
         // in this case we cannot promote it because `NotPromotedStruct.anotherOverlappingStruct.a` has
         // a different class handle (`NotPromotedStruct.anotherOverlappingStruct`).
         Debug.Assert(c.anotherOverlappingStruct.a == 0x4);

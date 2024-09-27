@@ -948,7 +948,8 @@ namespace System.Data.Odbc
             return (0 != (ProviderInfo.RestrictedSQLBindTypes & (int)sqlcvt));
         }
 
-        // suppress this message - we cannot use SafeHandle here. Also, see notes in the code (VSTFDEVDIV# 560355)
+        // suppress this message - we cannot use SafeHandle here. Also, see notes in the code (VSTFDEVDIV#
+        // 560355)
         [SuppressMessage("Microsoft.Reliability", "CA2004:RemoveCallsToGCKeepAlive")]
         protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
         {
@@ -965,8 +966,10 @@ namespace System.Data.Odbc
                 DbTransaction transaction = InnerConnection.BeginTransaction(isolationLevel);
 
                 // VSTFDEVDIV# 560355 - InnerConnection doesn't maintain a ref on the outer connection (this) and
-                //   subsequently leaves open the possibility that the outer connection could be GC'ed before the DbTransaction
-                //   is fully hooked up (leaving a DbTransaction with a null connection property). Ensure that this is reachable
+                //   subsequently leaves open the possibility that the outer connection could be GC'ed before the
+                // DbTransaction
+                //   is fully hooked up (leaving a DbTransaction with a null connection property). Ensure that this
+                // is reachable
                 //   until the completion of BeginTransaction with KeepAlive
                 GC.KeepAlive(this);
 

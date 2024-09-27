@@ -388,9 +388,9 @@ namespace System.Data.Linq.SqlClient
                     }
                     case SqlNodeType.Value:
                     {
-                        /*
-                        * ExprSet of all literals of the same value reduce to just a single literal.
-                        */
+/*
+* ExprSet of all literals of the same value reduce to just a single literal.
+*/
                         SqlValue val0 = (SqlValue)exprs[0];
                         for (int i = 1; i < exprs.Count; ++i)
                         {

@@ -278,7 +278,8 @@ namespace System.Activities.Statements
 
             if (transactionalProperties.TransactionState != TransactionProcessState.AbortProcessed)
             {
-                // The transaction has aborted.  The WF3 runtime throws a TransactionAborted exception here, which then propagates as fault.
+                // The transaction has aborted.  The WF3 runtime throws a TransactionAborted exception here, which
+                // then propagates as fault.
                 // But WF4 aborts the workflow, so pause the scheduler and return.
                 this.scheduler.Pause();
                 transactionalProperties.TransactionState = TransactionProcessState.AbortProcessed;
@@ -398,10 +399,12 @@ namespace System.Activities.Statements
         )]
         void OnSerializing(StreamingContext context)
         {
-            // If the Interop activity is serialized twice without a EnsureReload call in between, then the root activity is null.
+            // If the Interop activity is serialized twice without a EnsureReload call in between, then the root
+            // activity is null.
             if (this.rootActivity == null)
             {
-                // The root activity has already been serialized and saved in this.persistedActivityData so there is nothing to do.
+                // The root activity has already been serialized and saved in this.persistedActivityData so there is
+                // nothing to do.
                 return;
             }
 
@@ -515,7 +518,8 @@ namespace System.Activities.Statements
                 foreach (KeyValuePair<string, object> input in inputs)
                 {
                     PropertyInfo propertyInfo;
-                    //If there was a naming collision, we renamed the InArguments and need to strip "In" from the end of the property name
+                    //If there was a naming collision, we renamed the InArguments and need to strip "In" from the end of
+                    // the property name
                     if (hasNameCollision)
                     {
                         string truncatedName = input.Key.Substring(
@@ -620,7 +624,8 @@ namespace System.Activities.Statements
 
         public void CheckpointInstanceState(Activity atomicActivity)
         {
-            // Note that the WF4 runtime does not create checkpoints.  If the transaction aborts, the workflow aborts.
+            // Note that the WF4 runtime does not create checkpoints.  If the transaction aborts, the workflow
+            // aborts.
             // We are following the WF4 behavior and not creating a checkpoint.
 
             TransactionOptions tranOpts = new TransactionOptions();
@@ -737,7 +742,8 @@ namespace System.Activities.Statements
             {
                 if (activity == this.rootActivity && !activity.PersistOnClose)
                 {
-                    // This method is called when the root activity completes.  We shouldn't perist unless the root has [PersistOnClose]
+                    // This method is called when the root activity completes.  We shouldn't perist unless the root has
+                    // [PersistOnClose]
                     return;
                 }
 
@@ -1085,8 +1091,10 @@ namespace System.Activities.Statements
                 );
 
             // The atomic activity queue contains items related to the currently executing atomic activity.
-            // While the atomic activity is executing, execution of the items that are not in the atomic context is deferred until the atomic activity completes.
-            // We need two queues to separate the items associated with the atomic activity from the other items.
+            // While the atomic activity is executing, execution of the items that are not in the atomic context
+            // is deferred until the atomic activity completes.
+            // We need two queues to separate the items associated with the atomic activity from the other
+            // items.
             Queue<SchedulableItem> schedulerQueue;
             Queue<SchedulableItem> atomicActivityQueue;
 
@@ -1147,7 +1155,8 @@ namespace System.Activities.Statements
                     {
                         item = this.atomicActivityQueue.Dequeue();
                     }
-                    // The execution of the items in the scheduler queue is deferred until the atomic activity completes.
+                    // The execution of the items in the scheduler queue is deferred until the atomic activity
+                    // completes.
                     else if (owner.CurrentAtomicActivity == null && this.schedulerQueue.Count > 0)
                     {
                         item = schedulerQueue.Dequeue();

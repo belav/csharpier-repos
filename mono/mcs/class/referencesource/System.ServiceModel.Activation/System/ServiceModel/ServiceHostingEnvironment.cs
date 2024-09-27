@@ -238,8 +238,10 @@ namespace System.ServiceModel
             else if (exception.InnerException is InsufficientMemoryException)
             {
                 //Fix for CSDMain #113776
-                //This logic prevents InsufficientMemoryExceptions from flooding the event log by logging at most a fixed number ('MaxInsufficientMemoryLogCount') of these exceptions
-                //per fixed time interval ('InsufficientMemoryLogIntervalDuration').  If this limit is hit, no exceptions of this type are logged for a full time interval.
+                //This logic prevents InsufficientMemoryExceptions from flooding the event log by logging at most a
+                // fixed number ('MaxInsufficientMemoryLogCount') of these exceptions
+                //per fixed time interval ('InsufficientMemoryLogIntervalDuration').  If this limit is hit, no
+                // exceptions of this type are logged for a full time interval.
                 DateTime now = DateTime.UtcNow;
                 bool shouldLog = false;
                 bool reachedMax = false;
@@ -248,8 +250,10 @@ namespace System.ServiceModel
                     || insufficientMemoryLogCount < MaxInsufficientMemoryLogCount
                 )
                 {
-                    //This lock ensures that the log count is only reset once, and that no race conditions exist for the log count and insufficientMemoryLogStartInterval
-                    //These 2 static variables are only modified within this lock, and only read in this lock and in its containing if statement.
+                    //This lock ensures that the log count is only reset once, and that no race conditions exist for the
+                    // log count and insufficientMemoryLogStartInterval
+                    //These 2 static variables are only modified within this lock, and only read in this lock and in its
+                    // containing if statement.
                     lock (ThisLock)
                     {
                         if (
@@ -267,7 +271,9 @@ namespace System.ServiceModel
                         }
                         if (insufficientMemoryLogCount == MaxInsufficientMemoryLogCount)
                         {
-                            //We set the 'insufficientMemoryLogStartInterval' to DateTime.Now so that no InsufficientMemoryExceptions are logged for a full time interval of duration "InsufficientMemoryLogIntervalDuration"
+                            //We set the 'insufficientMemoryLogStartInterval' to DateTime.Now so that no
+                            // InsufficientMemoryExceptions are logged for a full time interval of duration
+                            // "InsufficientMemoryLogIntervalDuration"
                             insufficientMemoryLogStartInterval = now;
                             reachedMax = true;
                         }
@@ -276,7 +282,8 @@ namespace System.ServiceModel
 
                 if (shouldLog)
                 {
-                    //The lock above ensures that this line is hit no more than MaxInsufficientMemoryLogCount per time interval.
+                    //The lock above ensures that this line is hit no more than MaxInsufficientMemoryLogCount per time
+                    // interval.
                     DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
@@ -291,7 +298,8 @@ namespace System.ServiceModel
                         exception.ToString()
                     );
 
-                    //The lock above ensures that this if statement is entered exactly once if >= MaxInsufficientMemoryLogCount InsufficientMemoryExceptions are thrown in one time interval.
+                    //The lock above ensures that this if statement is entered exactly once if >=
+                    // MaxInsufficientMemoryLogCount InsufficientMemoryExceptions are thrown in one time interval.
                     if (reachedMax)
                     {
                         DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
@@ -684,7 +692,8 @@ namespace System.ServiceModel
             );
         }
 
-        // customer input can be "/appname/<folder>/filename" or "~/<folder>/filename, we will normalize them to application relative one
+        // customer input can be "/appname/<folder>/filename" or "~/<folder>/filename, we will normalize
+        // them to application relative one
         // i.e., "~/<folder>/filename
         internal static string NormalizeVirtualPath(string virtualPath)
         {
@@ -1012,7 +1021,8 @@ namespace System.ServiceModel
                         );
                     }
                 }
-                // since we did Empty/Null string checking in configuration element validator, we should not hit ArgumentException, just catch HttpException for invalid characher
+                // since we did Empty/Null string checking in configuration element validator, we should not hit
+                // ArgumentException, just catch HttpException for invalid characher
                 catch (HttpException ex)
                 {
                     throw FxTrace.Exception.AsError(
@@ -1106,7 +1116,8 @@ namespace System.ServiceModel
                 {
                     FailActivationIfRecyling(normalizedVirtualPath);
 
-                    // We need to call RegisterObject inside the WriterLockScope because it would ---- with UnregisterObject
+                    // We need to call RegisterObject inside the WriterLockScope because it would ---- with
+                    // UnregisterObject
                     if (!isRegistered)
                     {
                         RegisterObject();
@@ -1371,10 +1382,12 @@ namespace System.ServiceModel
 
             // Why this triple try blocks instead of using "using" statement:
             // 1. "using" will do the impersonation prior to entering the try,
-            //    which leaves an opertunity to Thread.Abort this thread and get it to exit the method still impersonated.
+            //    which leaves an opertunity to Thread.Abort this thread and get it to exit the method still
+            // impersonated.
             // 2. put the assignment of unsafeImpersonate in a finally block
             //    in order to prevent Threat.Abort after impersonation but before the assignment.
-            // 3. the finally of a "using" doesn't run until exception filters higher up the stack have executed.
+            // 3. the finally of a "using" doesn't run until exception filters higher up the stack have
+            // executed.
             //    they will do so in the impersonated context if an exception is thrown inside the try.
             // In sumary, this should prevent the thread from existing this method well still impersonated.
             [Fx.Tag.SecurityNote(
@@ -1528,7 +1541,8 @@ namespace System.ServiceModel
                 // check whether there is a conflict between CBA and AspNetRouting
                 // if there is a conflict, using AspNet routing policy to decide which service should be activated
                 // we treat CBA as file. RouteExistingFiles is false means Routing should not override File
-                // Todo: when there is a conflict between file/CBA adn route and routing policy was changed dynamically, we still use the old service CSD105890
+                // Todo: when there is a conflict between file/CBA adn route and routing policy was changed
+                // dynamically, we still use the old service CSD105890
                 if (isAspNetRoutedRequest && isConfigurationBased)
                 {
                     if (!RouteTable.Routes.RouteExistingFiles)
@@ -1610,8 +1624,10 @@ namespace System.ServiceModel
                 // absolute path start with / and application name, e.g., /appName/service.svc
                 normalizedVirtualPath = virtualPath;
 
-                // convert relative virtualpath to app absolute one for consistency, since we gave an absolute path in compiledcustomstring previously
-                // xamlx, CBA, and AspNet routing use relative virtualpath, while configuration/administration needs an absolute one
+                // convert relative virtualpath to app absolute one for consistency, since we gave an absolute path
+                // in compiledcustomstring previously
+                // xamlx, CBA, and AspNet routing use relative virtualpath, while configuration/administration needs
+                // an absolute one
                 virtualPath = VirtualPathUtility.ToAbsolute(virtualPath);
 
                 // 2. Add the base addresses
@@ -1648,7 +1664,8 @@ namespace System.ServiceModel
                 else
                 {
                     // add trailing slash to support ../a.xamlx in the case .xamlx file is wrapped with .svc
-                    // otherwise when combining ~/sub with ../a.xamlx, VirtualPathUtility will return wrong value ~/a.xamlx
+                    // otherwise when combining ~/sub with ../a.xamlx, VirtualPathUtility will return wrong value
+                    // ~/a.xamlx
                     xamlFileBaseLocation = VirtualPathUtility.AppendTrailingSlash(
                         currentVirtualPath
                     );
@@ -2430,7 +2447,8 @@ namespace System.ServiceModel
                         }
                         else
                         {
-                            //The control can come here when the hosted file is a valid XAML (service OR otherwise) but is configured with
+                            //The control can come here when the hosted file is a valid XAML (service OR otherwise) but is
+                            // configured with
                             //a handler that does NOT implement IServiceModelActivationHandler and aspnetCompat=true
                             throw FxTrace.Exception.AsError(
                                 new EndpointNotFoundException(

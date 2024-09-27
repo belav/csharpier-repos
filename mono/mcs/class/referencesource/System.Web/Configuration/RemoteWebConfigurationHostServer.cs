@@ -242,7 +242,8 @@ namespace System.Web.Configuration
 
             //
             // Format of filePaths:
-            //      appPath < appSiteName < appSiteID < configPath < locationConfigPath [< configPath < fileName]+
+            //      appPath < appSiteName < appSiteID < configPath < locationConfigPath [< configPath <
+            // fileName]+
             //
             ArrayList filePaths = new ArrayList();
             filePaths.Add(VirtualPath.GetVirtualPathString(appPath));

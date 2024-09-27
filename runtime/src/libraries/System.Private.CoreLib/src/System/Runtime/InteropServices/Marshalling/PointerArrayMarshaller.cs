@@ -55,7 +55,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Gets a source for the managed elements in the array.
         /// </summary>
         /// <param name="managed">The managed array to get a source for.</param>
-        /// <returns>The <see cref="ReadOnlySpan{IntPtr}"/> containing the managed elements to marshal.</returns>
+        /// <returns>The <see cref="ReadOnlySpan{IntPtr}"/> containing the managed elements to
+        // marshal.</returns>
         public static ReadOnlySpan<IntPtr> GetManagedValuesSource(T*[]? managed) =>
             Unsafe.As<IntPtr[]>(managed);
 
@@ -100,7 +101,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <param name="unmanagedValue">The unmanaged array to get a source for.</param>
         /// <param name="numElements">The unmanaged element count.</param>
-        /// <returns>The <see cref="ReadOnlySpan{TUnmanagedElement}"/> containing the unmanaged elements to marshal.</returns>
+        /// <returns>The <see cref="ReadOnlySpan{TUnmanagedElement}"/> containing the unmanaged elements to
+        // marshal.</returns>
         public static ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(
             TUnmanagedElement* unmanagedValue,
             int numElements
@@ -132,7 +134,8 @@ namespace System.Runtime.InteropServices.Marshalling
             private Span<TUnmanagedElement> _span;
 
             /// <summary>
-            /// Initializes the <see cref="PointerArrayMarshaller{T, TUnmanagedElement}.ManagedToUnmanagedIn"/> marshaller.
+            /// Initializes the <see cref="PointerArrayMarshaller{T, TUnmanagedElement}.ManagedToUnmanagedIn"/>
+            // marshaller.
             /// </summary>
             /// <param name="array">The array to be marshalled.</param>
             /// <param name="buffer">The buffer that may be used for marshalling.</param>
@@ -175,7 +178,8 @@ namespace System.Runtime.InteropServices.Marshalling
                 Unsafe.As<IntPtr[]>(_managedArray);
 
             /// <summary>
-            /// Returns a span that points to the memory where the unmanaged values of the array should be stored.
+            /// Returns a span that points to the memory where the unmanaged values of the array should be
+            // stored.
             /// </summary>
             /// <returns>A span where unmanaged values of the array should be stored.</returns>
             public Span<TUnmanagedElement> GetUnmanagedValuesDestination() => _span;

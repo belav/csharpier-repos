@@ -10,8 +10,10 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Key extension methods for SQL Server-specific metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see>, and
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public static class SqlServerKeyExtensions
@@ -70,7 +72,8 @@ public static class SqlServerKeyExtensions
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="clustered">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? SetIsClustered(
         this IConventionKey key,

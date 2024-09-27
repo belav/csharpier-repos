@@ -10,7 +10,8 @@ using System.Runtime.InteropServices;
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Interop
 {
     /// <summary>
-    /// Implemented to support project-to-project references. Despite its name, it's used for things other than Venus.
+    /// Implemented to support project-to-project references. Despite its name, it's used for things
+    // other than Venus.
     /// </summary>
     [ComImport]
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
@@ -18,8 +19,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
     internal interface ICSharpVenusProjectSite
     {
         /// <summary>
-        /// This function should not be used by any new code; it is now superseded by AddReferenceToCodeDirectoryEx. The
-        /// function has not been removed due to the hard-dependency on this particular signature in Venus' templates.
+        /// This function should not be used by any new code; it is now superseded by
+        // AddReferenceToCodeDirectoryEx. The
+        /// function has not been removed due to the hard-dependency on this particular signature in Venus'
+        // templates.
         /// </summary>
         [Obsolete]
         void AddReferenceToCodeDirectory(
@@ -28,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         );
 
         /// <summary>
-        /// Called by the venus project system to tell the project site to remove a live reference to an existing C#
+        /// Called by the venus project system to tell the project site to remove a live reference to an
+        // existing C#
         /// code directory.
         /// </summary>
         void RemoveReferenceToCodeDirectory(
@@ -82,16 +86,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         );
 
         /// <summary>
-        /// Called by the project system to tell the project site to create a live reference to an existing C# code
+        /// Called by the project system to tell the project site to create a live reference to an existing
+        // C# code
         /// directory.
         /// </summary>
-        /// <param name="assemblyFileName">The assembly file specified by "assemblyFileName" doesn't need to physically
-        /// exist on disk for CodeSense to work, but calling "Build" on the project will fail if the file doesn't exist
+        /// <param name="assemblyFileName">The assembly file specified by "assemblyFileName" doesn't need to
+        // physically
+        /// exist on disk for CodeSense to work, but calling "Build" on the project will fail if the file
+        // doesn't exist
         /// at that point.</param>
-        /// <param name="project">The project site for "project" must exist (i.e. BindToProject(project) must have been
+        /// <param name="project">The project site for "project" must exist (i.e. BindToProject(project)
+        // must have been
         /// called prior to this call)</param>
-        /// <param name="optionID">Indicates whether the reference is a regular reference or one that needs to be
-        /// embedded into the target assembly (as indicated to the compiler through /link compiler option).</param>
+        /// <param name="optionID">Indicates whether the reference is a regular reference or one that needs
+        // to be
+        /// embedded into the target assembly (as indicated to the compiler through /link compiler
+        // option).</param>
         void AddReferenceToCodeDirectoryEx(
             [MarshalAs(UnmanagedType.LPWStr)] string assemblyFileName,
             ICSharpProjectRoot project,

@@ -14,8 +14,10 @@ using System.Xml.Xsl.Qil;
 namespace System.Xml.Xsl.IlGen
 {
     /// <summary>
-    /// Until run-time, the exact xml state cannot always be determined.  However, the construction analyzer
-    /// keeps track of the set of possible xml states at each node in order to reduce run-time state management.
+    /// Until run-time, the exact xml state cannot always be determined.  However, the construction
+    // analyzer
+    /// keeps track of the set of possible xml states at each node in order to reduce run-time state
+    // management.
     /// </summary>
     internal enum PossibleXmlStates
     {
@@ -30,7 +32,8 @@ namespace System.Xml.Xsl.IlGen
     };
 
     /// <summary>
-    /// 1. Some expressions are lazily materialized by creating an iterator over the results (ex. LiteralString, Content).
+    /// 1. Some expressions are lazily materialized by creating an iterator over the results (ex.
+    // LiteralString, Content).
     /// 2. Some expressions are incrementally constructed by a Writer (ex. ElementCtor, XsltCopy).
     /// 3. Some expressions can be iterated or written (ex. List).
     /// </summary>
@@ -151,7 +154,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Xml states that are possible as looping begins.  This is None if the annotated expression does not loop.
+        /// Xml states that are possible as looping begins.  This is None if the annotated expression does
+        // not loop.
         /// </summary>
         public PossibleXmlStates BeginLoopStates
         {
@@ -164,7 +168,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Xml states that are possible as looping ends.  This is None if the annotated expression does not loop.
+        /// Xml states that are possible as looping ends.  This is None if the annotated expression does not
+        // loop.
         /// </summary>
         public PossibleXmlStates EndLoopStates
         {
@@ -274,8 +279,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// If the annotated expression will be constructed as the content of another constructor, and this can be
-        /// guaranteed at compile-time, then this property will be the non-null XmlILConstructInfo of that constructor.
+        /// If the annotated expression will be constructed as the content of another constructor, and this
+        // can be
+        /// guaranteed at compile-time, then this property will be the non-null XmlILConstructInfo of that
+        // constructor.
         /// </summary>
         public XmlILConstructInfo? ParentInfo
         {
@@ -288,8 +295,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// If the annotated expression will be constructed as the content of an ElementCtor, and this can be
-        /// guaranteed at compile-time, then this property will be the non-null XmlILConstructInfo of that constructor.
+        /// If the annotated expression will be constructed as the content of an ElementCtor, and this can
+        // be
+        /// guaranteed at compile-time, then this property will be the non-null XmlILConstructInfo of that
+        // constructor.
         /// </summary>
         public XmlILConstructInfo? ParentElementInfo
         {
@@ -303,8 +312,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This annotation is only applicable to NamespaceDecl nodes and to ElementCtor and AttributeCtor nodes with
-        /// literal names.  If the namespace is already guaranteed to be constructed, then this property will be true.
+        /// This annotation is only applicable to NamespaceDecl nodes and to ElementCtor and AttributeCtor
+        // nodes with
+        /// literal names.  If the namespace is already guaranteed to be constructed, then this property
+        // will be true.
         /// </summary>
         public bool IsNamespaceInScope
         {
@@ -317,7 +328,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This annotation is only applicable to ElementCtor nodes.  If the element might have local namespaces
+        /// This annotation is only applicable to ElementCtor nodes.  If the element might have local
+        // namespaces
         /// added to it at runtime, then this property will be true.
         /// </summary>
         public bool MightHaveNamespaces
@@ -331,7 +343,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This annotation is only applicable to ElementCtor nodes.  If the element might have namespaces added to it after
+        /// This annotation is only applicable to ElementCtor nodes.  If the element might have namespaces
+        // added to it after
         /// attributes have already been added, then this property will be true.
         /// </summary>
         public bool MightHaveNamespacesAfterAttributes
@@ -345,7 +358,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This annotation is only applicable to ElementCtor nodes.  If the element might have attributes added to it at
+        /// This annotation is only applicable to ElementCtor nodes.  If the element might have attributes
+        // added to it at
         /// runtime, then this property will be true.
         /// </summary>
         public bool MightHaveAttributes
@@ -359,7 +373,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This annotation is only applicable to ElementCtor nodes.  If the element might have multiple attributes added to
+        /// This annotation is only applicable to ElementCtor nodes.  If the element might have multiple
+        // attributes added to
         /// it with the same name, then this property will be true.
         /// </summary>
         public bool MightHaveDuplicateAttributes
@@ -373,7 +388,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This annotation is only applicable to Function nodes.  It contains a list of XmlILConstructInfo annotations
+        /// This annotation is only applicable to Function nodes.  It contains a list of XmlILConstructInfo
+        // annotations
         /// for all QilInvoke nodes which call the annotated function.
         /// </summary>
         public ArrayList CallersInfo => _callersInfo ??= new ArrayList();
@@ -424,7 +440,8 @@ namespace System.Xml.Xsl.IlGen
     }
 
     /// <summary>
-    /// Scans the content of an constructor and tries to minimize the number of well-formed checks that will have
+    /// Scans the content of an constructor and tries to minimize the number of well-formed checks that
+    // will have
     /// to be made at runtime when constructing content.
     /// </summary>
     internal class XmlILStateAnalyzer
@@ -443,7 +460,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Perform analysis on the specified constructor and its content.  Return the ndContent that was passed in,
+        /// Perform analysis on the specified constructor and its content.  Return the ndContent that was
+        // passed in,
         /// or a replacement.
         /// </summary>
         public virtual QilNode? Analyze(QilNode? ndConstr, QilNode? ndContent)
@@ -492,7 +510,8 @@ namespace System.Xml.Xsl.IlGen
                         this.parentInfo.InitialStates = this.parentInfo.FinalStates =
                             PossibleXmlStates.WithinSequence;
 
-                    // Don't stream Rtf; fully cache the Rtf and copy it into any containing tree in order to simplify XmlILVisitor.VisitRtfCtor
+                    // Don't stream Rtf; fully cache the Rtf and copy it into any containing tree in order to simplify
+                    // XmlILVisitor.VisitRtfCtor
                     if (ndConstr.NodeType != QilNodeType.RtfCtor)
                         this.parentInfo.ConstructMethod = XmlILConstructMethod.WriterThenIterator;
                 }
@@ -743,14 +762,16 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (MaybeAttrNmsp(typ))
                 {
-                    // Node might be Attr/Nmsp or non-Attr/Nmsp, so transition from EnumAttrs to WithinContent *may* occur
+                    // Node might be Attr/Nmsp or non-Attr/Nmsp, so transition from EnumAttrs to WithinContent *may*
+                    // occur
                     if (this.xstates == PossibleXmlStates.EnumAttrs)
                         this.xstates = PossibleXmlStates.Any;
                 }
                 else
                 {
                     // Node is guaranteed not to be Attr/Nmsp, so transition to WithinContent will occur if starting
-                    // state is EnumAttrs or if constructing within an element (guaranteed to be in EnumAttrs or WithinContent state)
+                    // state is EnumAttrs or if constructing within an element (guaranteed to be in EnumAttrs or
+                    // WithinContent state)
                     if (this.xstates == PossibleXmlStates.EnumAttrs || this.withinElem)
                         this.xstates = PossibleXmlStates.WithinContent;
                 }
@@ -761,15 +782,18 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Calculate starting xml states that will result when iterating over and constructing an expression of the specified type.
+        /// Calculate starting xml states that will result when iterating over and constructing an
+        // expression of the specified type.
         /// </summary>
         private void StartLoop(XmlQueryType typ, XmlILConstructInfo info)
         {
             Debug.Assert(!typ.IsSingleton);
 
             // This is tricky, because the looping introduces a feedback loop:
-            //   1. Because loops may be executed many times, the beginning set of states must include the ending set of states.
-            //   2. Because loops may be executed 0 times, the final set of states after all looping is complete must include
+            //   1. Because loops may be executed many times, the beginning set of states must include the
+            // ending set of states.
+            //   2. Because loops may be executed 0 times, the final set of states after all looping is complete
+            // must include
             //      the initial set of states.
             //
             // +-- states-initial
@@ -789,7 +813,8 @@ namespace System.Xml.Xsl.IlGen
 
             if (typ.MaybeMany)
             {
-                // If transition might occur from EnumAttrs to WithinContent, then states-end might be WithinContent, which
+                // If transition might occur from EnumAttrs to WithinContent, then states-end might be
+                // WithinContent, which
                 // means states-begin needs to also include WithinContent.
                 if (this.xstates == PossibleXmlStates.EnumAttrs && MaybeContent(typ))
                     info.BeginLoopStates = this.xstates = PossibleXmlStates.Any;
@@ -797,7 +822,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Calculate ending xml states that will result when iterating over and constructing an expression of the specified type.
+        /// Calculate ending xml states that will result when iterating over and constructing an expression
+        // of the specified type.
         /// </summary>
         private void EndLoop(XmlQueryType typ, XmlILConstructInfo info)
         {
@@ -821,7 +847,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Return true if an instance of the specified type might be a non-empty content type (attr/nsmp don't count).
+        /// Return true if an instance of the specified type might be a non-empty content type (attr/nsmp
+        // don't count).
         /// </summary>
         private static bool MaybeContent(XmlQueryType typ)
         {
@@ -832,7 +859,8 @@ namespace System.Xml.Xsl.IlGen
     }
 
     /// <summary>
-    /// Scans the content of an ElementCtor and tries to minimize the number of well-formed checks that will have
+    /// Scans the content of an ElementCtor and tries to minimize the number of well-formed checks that
+    // will have
     /// to be made at runtime when constructing content.
     /// </summary>
     internal sealed class XmlILElementAnalyzer : XmlILStateAnalyzer
@@ -847,7 +875,8 @@ namespace System.Xml.Xsl.IlGen
             : base(fac) { }
 
         /// <summary>
-        /// Analyze the content argument of the ElementCtor.  Try to eliminate as many runtime checks as possible,
+        /// Analyze the content argument of the ElementCtor.  Try to eliminate as many runtime checks as
+        // possible,
         /// both for the ElementCtor and for content constructors.
         /// </summary>
         public override QilNode? Analyze(QilNode? ndElem, QilNode? ndContent)
@@ -855,7 +884,8 @@ namespace System.Xml.Xsl.IlGen
             Debug.Assert(ndElem!.NodeType == QilNodeType.ElementCtor);
             this.parentInfo = XmlILConstructInfo.Write(ndElem);
 
-            // Start by assuming that these properties are false (they default to true, but analyzer might be able to
+            // Start by assuming that these properties are false (they default to true, but analyzer might be
+            // able to
             // prove they are really false).
             this.parentInfo.MightHaveNamespacesAfterAttributes = false;
             this.parentInfo.MightHaveAttributes = false;
@@ -875,7 +905,8 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         protected override void AnalyzeLoop(QilLoop ndLoop, XmlILConstructInfo info)
         {
-            // Constructing attributes/namespaces in a loop can cause duplicates, namespaces after attributes, etc.
+            // Constructing attributes/namespaces in a loop can cause duplicates, namespaces after attributes,
+            // etc.
             if (ndLoop.XmlType!.MaybeMany)
                 CheckAttributeNamespaceConstruct(ndLoop.XmlType);
 
@@ -964,7 +995,8 @@ namespace System.Xml.Xsl.IlGen
             // If content might contain attributes,
             if ((typ.NodeKinds & XmlNodeKindFlags.Attribute) != XmlNodeKindFlags.None)
             {
-                // Mark element as possibly having attributes and duplicate attributes (since we don't know the names)
+                // Mark element as possibly having attributes and duplicate attributes (since we don't know the
+                // names)
                 this.parentInfo!.MightHaveAttributes = true;
                 this.parentInfo.MightHaveDuplicateAttributes = true;
 
@@ -989,7 +1021,8 @@ namespace System.Xml.Xsl.IlGen
     }
 
     /// <summary>
-    /// Scans constructed content, looking for redundant namespace declarations.  If any are found, then they are marked
+    /// Scans constructed content, looking for redundant namespace declarations.  If any are found, then
+    // they are marked
     /// and removed later.
     /// </summary>
     internal sealed class XmlILNamespaceAnalyzer
@@ -1087,8 +1120,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Determine whether an ElementCtor, AttributeCtor, or NamespaceDecl's namespace is already declared.  If it is,
-        /// set the IsNamespaceInScope property to True.  Otherwise, add the namespace to the set of in-scope namespaces if
+        /// Determine whether an ElementCtor, AttributeCtor, or NamespaceDecl's namespace is already
+        // declared.  If it is,
+        /// set the IsNamespaceInScope property to True.  Otherwise, add the namespace to the set of
+        // in-scope namespaces if
         /// addInScopeNmsp is True.  Return false if the name is computed or is invalid.
         /// </summary>
         private bool CheckNamespaceInScope(QilBinary nd)

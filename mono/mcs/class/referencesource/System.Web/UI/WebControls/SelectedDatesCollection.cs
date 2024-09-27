@@ -10,14 +10,17 @@ namespace System.Web.UI.WebControls
     using System.Collections;
 
     /// <devdoc>
-    /// <para>Encapsulates the collection of <see cref='System.Web.UI.WebControls.Calendar.SelectedDates'/> within a <see cref='System.Web.UI.WebControls.Calendar'/> control.</para>
+    /// <para>Encapsulates the collection of <see
+    // cref='System.Web.UI.WebControls.Calendar.SelectedDates'/> within a <see
+    // cref='System.Web.UI.WebControls.Calendar'/> control.</para>
     /// </devdoc>
     public sealed class SelectedDatesCollection : ICollection
     {
         private ArrayList dateList;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.SelectedDatesCollection'/> class
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.SelectedDatesCollection'/> class
         ///    with the specified date list.</para>
         /// </devdoc>
         public SelectedDatesCollection(ArrayList dateList)
@@ -34,7 +37,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a <see cref='System.DateTime' qualify='true'/> referenced by the specified ordinal index value in the collection.</para>
+        /// <para>Gets a <see cref='System.DateTime' qualify='true'/> referenced by the specified ordinal
+        // index value in the collection.</para>
         /// </devdoc>
         public DateTime this[int index]
         {
@@ -99,7 +103,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Returns an enumerator of all <see cref='System.DateTime' qualify='true'/> controls within the collection.</para>
+        /// <para>Returns an enumerator of all <see cref='System.DateTime' qualify='true'/> controls within
+        // the collection.</para>
         /// </devdoc>
         public IEnumerator GetEnumerator()
         {
@@ -107,7 +112,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies contents from the collection to a specified <see cref='System.Array' qualify='true'/> with a
+        /// <para>Copies contents from the collection to a specified <see cref='System.Array'
+        // qualify='true'/> with a
         ///    specified starting index.</para>
         /// </devdoc>
         public void CopyTo(Array array, int index)
@@ -155,7 +161,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Sets the contents of the <see cref='System.Web.UI.WebControls.SelectedDatesCollection'/> to span
+        /// <para>Sets the contents of the <see cref='System.Web.UI.WebControls.SelectedDatesCollection'/>
+        // to span
         ///    across the specified date range.</para>
         /// </devdoc>
         public void SelectRange(DateTime fromDate, DateTime toDate)

@@ -18,7 +18,8 @@ namespace ILCompiler
     //    "Microsoft.CodeAnalysis.CSharp.BinderFactory!GetBinder": [
     //        [
     //            "Microsoft.CodeAnalysis.CSharp.BinderFactory!GetBinder",
-    //            "Microsoft.CodeAnalysis.CSharp.BinderFactory+BinderFactoryVisitor!VisitCompilationUnit"
+    //
+    // "Microsoft.CodeAnalysis.CSharp.BinderFactory+BinderFactoryVisitor!VisitCompilationUnit"
     //        ],
     //        [
     //            1,
@@ -146,7 +147,11 @@ namespace ILCompiler
         {
             // Example method name entries. Can we parse them as custom attribute formatted names?
             // System.Private.CoreLib.ni.dll!System.Runtime.ExceptionServices.ExceptionDispatchInfo..ctor
+            //
+            //
             // System.Core.ni.dll!System.Linq.Enumerable+WhereSelectEnumerableIterator`2[System.__Canon,System.__Canon].MoveNext
+            //
+            //
             // Microsoft.Azure.Monitoring.WarmPath.FrontEnd.Middleware.SecurityMiddlewareBase`1+<Invoke>d__6[System.__Canon]!MoveNext
             // System.Runtime.CompilerServices.AsyncTaskMethodBuilder!Start
 #if DEBUG
@@ -179,7 +184,8 @@ namespace ILCompiler
                 if (resolvedModule == null)
                     return null;
 
-                // Resolve a name like System.Linq.Enumerable+WhereSelectEnumerableIterator`2[System.__Canon,System.__Canon].MoveNext
+                // Resolve a name like
+                // System.Linq.Enumerable+WhereSelectEnumerableIterator`2[System.__Canon,System.__Canon].MoveNext
                 // Take the string after the last period as the method name (special case for .ctor and .cctor)
                 string namespaceAndTypeName = null;
                 string methodNameWithoutType = null;
@@ -232,8 +238,11 @@ namespace ILCompiler
             }
             else
             {
-                // We have Namespace.Type!Method format with no method signature information. Check all loaded modules for a matching
+                // We have Namespace.Type!Method format with no method signature information. Check all loaded
+                // modules for a matching
                 // type name, and the first method on that type with matching name.
+                //
+                //
                 // Microsoft.Azure.Monitoring.WarmPath.FrontEnd.Middleware.SecurityMiddlewareBase`1+<Invoke>d__6[System.__Canon]!MoveNext
                 // System.Runtime.CompilerServices.AsyncTaskMethodBuilder!Start
                 string namespaceAndTypeName = splitMethodName[0];
@@ -262,8 +271,10 @@ namespace ILCompiler
 
         /// <summary>
         /// Given a parsed out module, namespace + type, and method name, try to find a matching MethodDesc
-        /// TODO: We have no signature information for the method - what policy should we apply where multiple methods exist with the same name
-        /// but different signatures? For now we'll take the first matching and ignore others. Ideally we'll improve the profile data to include this.
+        /// TODO: We have no signature information for the method - what policy should we apply where
+        // multiple methods exist with the same name
+        /// but different signatures? For now we'll take the first matching and ignore others. Ideally we'll
+        // improve the profile data to include this.
         /// </summary>
         /// <returns>MethodDesc if found, null otherwise</returns>
         private MethodDesc ResolveMethodName(
@@ -310,7 +321,8 @@ namespace ILCompiler
                     List<string> followingMethodList = new List<string>();
                     foreach (JsonElement methodListArray in methodAndCallees.Value.EnumerateArray())
                     {
-                        // This loop iterates twice: once for the callee method names, and again for a parallel list of call counts
+                        // This loop iterates twice: once for the callee method names, and again for a parallel list of call
+                        // counts
                         if (readingMethodNames)
                         {
                             foreach (

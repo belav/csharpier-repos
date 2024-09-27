@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 {
     /// <summary>
-    /// This service provides diagnostic analyzers from the analyzer assets specified in the manifest files of installed VSIX extensions.
+    /// This service provides diagnostic analyzers from the analyzer assets specified in the manifest
+    // files of installed VSIX extensions.
     /// These analyzers are used across this workspace session.
     /// </summary>
     internal partial class VisualStudioDiagnosticAnalyzerProvider : IHostDiagnosticAnalyzerProvider
@@ -140,11 +141,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             catch (TargetInvocationException ex)
                 when (ex.InnerException is InvalidOperationException)
             {
-                // this can be called from any thread, and extension manager could be disposed in the middle of us using it since
-                // now all these are free-threaded and there is no central coordinator, or API or state is immutable that prevent states from
+                // this can be called from any thread, and extension manager could be disposed in the middle of us
+                // using it since
+                // now all these are free-threaded and there is no central coordinator, or API or state is immutable
+                // that prevent states from
                 // changing in the middle of others using it.
                 //
-                // fortunately, this only happens on disposing at shutdown, so we just catch the exception and silently swallow it.
+                // fortunately, this only happens on disposing at shutdown, so we just catch the exception and
+                // silently swallow it.
                 // we are about to shutdown anyway.
                 return ImmutableArray<(AnalyzerFileReference, string)>.Empty;
             }

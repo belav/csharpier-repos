@@ -151,7 +151,8 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         /// <summary>
-        /// Compute the closure of all NFA states from root and return the size of the resulting state space.
+        /// Compute the closure of all NFA states from root and return the size of the resulting state
+        // space.
         /// </summary>
         private static int CalculateNfaStateCount(
             SymbolicRegexBuilder<BDD> builder,
@@ -167,7 +168,8 @@ namespace System.Text.RegularExpressions.Tests
                 root.GetSets(builder)
             );
 
-            // Start from the initial state that has kind 'General' when no anchors are being used, else kind 'BeginningEnd'
+            // Start from the initial state that has kind 'General' when no anchors are being used, else kind
+            // 'BeginningEnd'
             (uint, SymbolicRegexNode<BDD>) initialState = (
                 root._info.ContainsSomeAnchor ? CharKind.BeginningEnd : CharKind.General,
                 root
@@ -190,7 +192,8 @@ namespace System.Text.RegularExpressions.Tests
                         source.Kind
                     );
 
-                    //In the case of an NFA all the different alternatives in the DFA state become individual states themselves
+                    //In the case of an NFA all the different alternatives in the DFA state become individual states
+                    // themselves
                     foreach (SymbolicRegexNode<BDD> node in GetAlternatives(target))
                     {
                         (uint, SymbolicRegexNode<BDD>) state = (kind, node);
@@ -222,8 +225,10 @@ namespace System.Text.RegularExpressions.Tests
                 }
             }
 
-            // Simplified character kind calculation that omits the special case that minterm can be the very last \n
-            // This omission has practically no effect of the size of the state space, but would complicate the logic
+            // Simplified character kind calculation that omits the special case that minterm can be the very
+            // last \n
+            // This omission has practically no effect of the size of the state space, but would complicate the
+            // logic
             uint GetCharKind(BDD minterm) =>
                 minterm.Equals(builder._newLineSet)
                     ? CharKind.Newline

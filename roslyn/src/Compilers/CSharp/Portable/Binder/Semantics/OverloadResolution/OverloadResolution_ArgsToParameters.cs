@@ -284,14 +284,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             // For each argument in an argument list there has to be a corresponding parameter in
             // the function member or delegate being invoked. The parameter list used in the
             // following is determined as follows:
-            // - For virtual methods and indexers defined in classes, the parameter list is picked from the most specific
-            //   declaration or override of the function member, starting with the static type of the receiver, and searching through its base classes.
-            // - For interface methods and indexers, the parameter list is picked form the most specific definition of the member,
-            //   starting with the interface type and searching through the base interfaces. If no unique parameter list is found,
-            //   a parameter list with inaccessible names and no optional parameters is constructed, so that invocations cannot use
+            // - For virtual methods and indexers defined in classes, the parameter list is picked from the most
+            // specific
+            //   declaration or override of the function member, starting with the static type of the receiver,
+            // and searching through its base classes.
+            // - For interface methods and indexers, the parameter list is picked form the most specific
+            // definition of the member,
+            //   starting with the interface type and searching through the base interfaces. If no unique
+            // parameter list is found,
+            //   a parameter list with inaccessible names and no optional parameters is constructed, so that
+            // invocations cannot use
             //   named parameters or omit optional arguments.
             // - For partial methods, the parameter list of the defining partial method declaration is used.
-            // - For all other function members and delegates there is only a single parameter list, which is the one used.
+            // - For all other function members and delegates there is only a single parameter list, which is
+            // the one used.
             //
             // The position of an argument or parameter is defined as the number of arguments or
             // parameters preceding it in the argument list or parameter list.
@@ -318,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (seenNamedParams)
                 {
-                    // Unnamed arguments after a named argument corresponding to a params parameter cannot correspond to any parameters
+                    // Unnamed arguments after a named argument corresponding to a params parameter cannot correspond to
+                    // any parameters
                     Debug.Assert(expanded);
                     return null;
                 }
@@ -458,7 +465,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            // PERFORMANCE: This is an O(n-squared) algorithm, but n will typically be small.  We could rewrite this
+            // PERFORMANCE: This is an O(n-squared) algorithm, but n will typically be small.  We could rewrite
+            // this
             // PERFORMANCE: as a linear algorithm if we wanted to allocate more memory.
 
             for (

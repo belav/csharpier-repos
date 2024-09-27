@@ -6,7 +6,8 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
     /// A builder for configuring <see cref="System.Net.Http.SocketsHttpHandler"/> for a named
-    /// <see cref="System.Net.Http.HttpClient"/> instances returned by <see cref="System.Net.Http.IHttpClientFactory"/>.
+    /// <see cref="System.Net.Http.HttpClient"/> instances returned by <see
+    // cref="System.Net.Http.IHttpClientFactory"/>.
     /// </summary>
     public interface ISocketsHttpHandlerBuilder
     {

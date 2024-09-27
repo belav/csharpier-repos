@@ -66,12 +66,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         {
             // Scenario: change the case of the first letter of component.AppDll file name
 
-            // Changing the casing of the first letter of a dependent assembly have different behavior in the 3 platforms
+            // Changing the casing of the first letter of a dependent assembly have different behavior in the 3
+            // platforms
             // Wisely the product code stays out of casing on dependent assemblies choosing the 1st assembly
             // Linux: we fail
             // Windows and Mac, probing succeeds but
             // Windows: probing returns the original name
-            // Mac: probing return the new name including 2 assembly probing with the original and new name, and the changed deps file
+            // Mac: probing return the new name including 2 assembly probing with the original and new name, and
+            // the changed deps file
 
             var component = sharedTestState.ComponentWithNoDependencies.Copy();
 
@@ -146,14 +148,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [Fact]
         public void ComponentWithNoDependenciesCaseChangedOnDepsAndAsm()
         {
-            // Scenario: change the case of the first letter of component.AppDll and component.DepsJson file names
+            // Scenario: change the case of the first letter of component.AppDll and component.DepsJson file
+            // names
 
-            // Changing the casing of the first letter of a dependent assembly have different behavior in the 3 platforms
+            // Changing the casing of the first letter of a dependent assembly have different behavior in the 3
+            // platforms
             // Wisely the product code stays out of casing on dependent assemblies choosing the 1st assembly
             // Linux: we fail
             // Windows and Mac, probing succeeds but
             // Windows: probing returns the original name
-            // Mac: probing return the new name including 2 assembly probing with the original and new name, and the changed deps file
+            // Mac: probing return the new name including 2 assembly probing with the original and new name, and
+            // the changed deps file
 
             var component = sharedTestState.ComponentWithNoDependencies.Copy();
 
@@ -229,14 +234,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [Fact]
         public void ComponentWithNoDependenciesNoDepsCaseChangedOnAsm()
         {
-            // Scenario: change the case of the first letter of component.AppDll file name and delete component.DepsJson file
+            // Scenario: change the case of the first letter of component.AppDll file name and delete
+            // component.DepsJson file
 
-            // Changing the casing of the first letter of a dependent assembly have different behavior in the 3 platforms
+            // Changing the casing of the first letter of a dependent assembly have different behavior in the 3
+            // platforms
             // Wisely the product code stays out of casing on dependent assemblies choosing the 1st assembly
             // Linux: we fail
             // Windows and Mac, probing succeeds but
             // Windows: probing returns the original name
-            // Mac: probing return the new name including assembly probing with the new name and the changed deps file
+            // Mac: probing return the new name including assembly probing with the new name and the changed
+            // deps file
 
             var component = sharedTestState.ComponentWithNoDependencies.Copy();
 
@@ -401,7 +409,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             File.Delete(component.DepsJson);
 
             // Remove a dependency
-            // Since there's no .deps.json - there's no way for the system to know about this dependency and thus should not be reported.
+            // Since there's no .deps.json - there's no way for the system to know about this dependency and
+            // thus should not be reported.
             File.Delete(Path.Combine(component.Location, "ComponentDependency.dll"));
 
             sharedTestState
@@ -420,7 +429,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [Fact]
         public void ComponentWithSameDependencyWithDifferentExtensionShouldFail()
         {
-            // Add a reference to another package which has asset with the same name as the existing ComponentDependency
+            // Add a reference to another package which has asset with the same name as the existing
+            // ComponentDependency
             // but with a different extension. This causes a failure.
             // Make sure the file exists so that we avoid failing due to missing file.
             var component = sharedTestState.CreateComponentWithDependencies(b =>
@@ -452,7 +462,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [Fact]
         public void ComponentWithSameDependencyNativeImageShouldFail()
         {
-            // Add a reference to a package which has asset of the native image of the existing ComponentDependency.
+            // Add a reference to a package which has asset of the native image of the existing
+            // ComponentDependency.
             var component = sharedTestState.CreateComponentWithDependencies(b =>
                 b.WithPackage(
                     "ComponentDependency_NI",

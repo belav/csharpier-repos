@@ -14,7 +14,8 @@ using System.Data.Common.Utils;
 namespace System.Data.Common.CommandTrees.ExpressionBuilder
 {
     /// <summary>
-    /// The Row class is intended to provide a constructor-like means of calling <see cref="DbExpressionBuilder.NewRow"/>.
+    /// The Row class is intended to provide a constructor-like means of calling <see
+    // cref="DbExpressionBuilder.NewRow"/>.
     /// </summary>
     public sealed class Row
     {
@@ -25,8 +26,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Constructs a new Row with the specified first column value and optional successive column values
         /// </summary>
-        /// <param name="columnValue">A key-value pair that provides the first column in the new row instance (required)</param>
-        /// <param name="columnValues">Key-value pairs that provide any subsequent columns in the new row instance (optional)</param>
+        /// <param name="columnValue">A key-value pair that provides the first column in the new row
+        // instance (required)</param>
+        /// <param name="columnValues">Key-value pairs that provide any subsequent columns in the new row
+        // instance (optional)</param>
         public Row(
             KeyValuePair<string, DbExpression> columnValue,
             params KeyValuePair<string, DbExpression>[] columnValues
@@ -38,10 +41,12 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbNewInstanceExpression"/> that constructs a new row based on the columns
+        /// Creates a new <see cref="DbNewInstanceExpression"/> that constructs a new row based on the
+        // columns
         /// contained in this Row instance.
         /// </summary>
-        /// <returns>A new DbNewInstanceExpression that constructs a row with the same column names and DbExpression values as this Row instance</returns>
+        /// <returns>A new DbNewInstanceExpression that constructs a row with the same column names and
+        // DbExpression values as this Row instance</returns>
         /// <seealso cref="DbExpressionBuilder.NewRow"/>
         public DbNewInstanceExpression ToExpression()
         {

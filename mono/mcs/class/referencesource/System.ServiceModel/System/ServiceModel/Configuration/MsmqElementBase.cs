@@ -275,7 +275,8 @@ namespace System.ServiceModel.Configuration
                     binding.UseMsmqTracing
                 );
 
-                // SetPropertyValueIfNotDefaultValue won't detect defaults correctly through type conversion, check explicitly
+                // SetPropertyValueIfNotDefaultValue won't detect defaults correctly through type conversion, check
+                // explicitly
                 if (binding.ValidityDuration != MsmqDefaults.ValidityDuration)
                 {
                     this.ValidityDuration = binding.ValidityDuration;

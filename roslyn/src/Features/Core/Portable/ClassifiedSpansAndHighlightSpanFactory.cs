@@ -100,9 +100,11 @@ namespace Microsoft.CodeAnalysis.Classification
             var sourceLine = sourceText.Lines.GetLineFromPosition(referenceSpan.Start);
             var firstNonWhitespacePosition = sourceLine.GetFirstNonWhitespacePosition().Value;
 
-            // Get the span of the line from the first non-whitespace character to the end of it. Note: the reference
+            // Get the span of the line from the first non-whitespace character to the end of it. Note: the
+            // reference
             // span might actually start in the leading whitespace of the line (nothing prevents any of our
-            // languages/providers from doing that), so ensure that the line snap we clip out at least starts at that
+            // languages/providers from doing that), so ensure that the line snap we clip out at least starts at
+            // that
             // position so that our span math will be correct.
             return TextSpan.FromBounds(
                 Math.Min(firstNonWhitespacePosition, referenceSpan.Start),
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Classification
             CancellationToken cancellationToken
         )
         {
-            // We don't present things like static/assigned variables differently.  So pass `includeAdditiveSpans:
+            // We don't present things like static/assigned variables differently.  So pass
+            // `includeAdditiveSpans:
             // false` as we don't need that data.
             var result = await ClassifierHelper
                 .GetClassifiedSpansAsync(

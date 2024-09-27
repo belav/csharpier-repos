@@ -152,7 +152,8 @@ namespace MonoTests.System.Web.UI.WebControls
             e.UpdateText = "Refresh";
             p.Columns.Add(e);
 
-            // This will trigger EditCommandColumn.InitializeCell, without any EditItem set, tests the EditText render
+            // This will trigger EditCommandColumn.InitializeCell, without any EditItem set, tests the EditText
+            // render
             p.CreateControls(true);
             p.ID = "sucker";
 

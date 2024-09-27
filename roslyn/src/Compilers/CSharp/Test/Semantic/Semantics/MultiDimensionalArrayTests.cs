@@ -480,7 +480,8 @@ Test2
                 options: TestOptions.ReleaseDll
             );
             compilation.VerifyDiagnostics(
-                // (3,30): error CS0508: 'C.Test1()': return type must be 'double[*]' to match overridden member 'Test.Test1()'
+                // (3,30): error CS0508: 'C.Test1()': return type must be 'double[*]' to match overridden member
+                // 'Test.Test1()'
                 //     public override double[] Test1()
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "Test1")
                     .WithArguments("C.Test1()", "Test.Test1()", "double[*]")
@@ -565,7 +566,8 @@ Test2
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(double[])t.Test1()")
                     .WithArguments("double[*]", "double[]")
                     .WithLocation(7, 23),
-                // (8,55): error CS0029: Cannot implicitly convert type 'double[*]' to 'System.Collections.Generic.IList<double>'
+                // (8,55): error CS0029: Cannot implicitly convert type 'double[*]' to
+                // 'System.Collections.Generic.IList<double>'
                 //         System.Collections.Generic.IList<double> a3 = t.Test1();
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "t.Test1()")
                     .WithArguments("double[*]", "System.Collections.Generic.IList<double>")
@@ -575,7 +577,8 @@ Test2
                 Diagnostic(ErrorCode.ERR_BadArgType, "a4")
                     .WithArguments("1", "double[]", "double[*]")
                     .WithLocation(10, 17),
-                // (11,18): error CS0030: Cannot convert type 'double[*]' to 'System.Collections.Generic.IList<double>'
+                // (11,18): error CS0030: Cannot convert type 'double[*]' to
+                // 'System.Collections.Generic.IList<double>'
                 //         var a5 = (System.Collections.Generic.IList<double>)t.Test1();
                 Diagnostic(
                         ErrorCode.ERR_NoExplicitConv,
@@ -583,7 +586,8 @@ Test2
                     )
                     .WithArguments("double[*]", "System.Collections.Generic.IList<double>")
                     .WithLocation(11, 18),
-                // (14,19): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.IList<double>' to 'double[*]'
+                // (14,19): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.IList<double>'
+                // to 'double[*]'
                 //         mdarray = ilist;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "ilist")
                     .WithArguments("System.Collections.Generic.IList<double>", "double[*]")
@@ -658,27 +662,32 @@ Test2
             Assert.True(mdArray.LowerBounds.IsDefault);
 
             compilation.VerifyDiagnostics(
-                // (10,9): error CS0411: The type arguments for method 'C.M1<T>(T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (10,9): error CS0411: The type arguments for method 'C.M1<T>(T[])' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
                 //         M1(md);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments("C.M1<T>(T[])")
                     .WithLocation(10, 9),
-                // (13,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
                 //         M2(sz, md);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2")
                     .WithArguments("C.M2<T>(T, T)")
                     .WithLocation(13, 9),
-                // (14,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (14,9): error CS0411: The type arguments for method 'C.M2<T>(T, T)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
                 //         M2(md, sz);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2")
                     .WithArguments("C.M2<T>(T, T)")
                     .WithLocation(14, 9),
-                // (16,9): error CS0411: The type arguments for method 'C.M3<T>(IList<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (16,9): error CS0411: The type arguments for method 'C.M3<T>(IList<T>)' cannot be inferred from
+                // the usage. Try specifying the type arguments explicitly.
                 //         M3(md);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M3")
                     .WithArguments("C.M3<T>(System.Collections.Generic.IList<T>)")
                     .WithLocation(16, 9),
-                // (18,14): error CS0411: The type arguments for method 'Test.M1<T>(T[*])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (18,14): error CS0411: The type arguments for method 'Test.M1<T>(T[*])' cannot be inferred from
+                // the usage. Try specifying the type arguments explicitly.
                 //         Test.M1(sz);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments("Test.M1<T>(T[*])")
@@ -693,7 +702,8 @@ Test2
                 Diagnostic(ErrorCode.ERR_BadArgType, "md")
                     .WithArguments("1", "double[*]", "double[]")
                     .WithLocation(21, 17),
-                // (23,14): error CS0411: The type arguments for method 'Test.M2<T>(T[], T[*])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (23,14): error CS0411: The type arguments for method 'Test.M2<T>(T[], T[*])' cannot be inferred
+                // from the usage. Try specifying the type arguments explicitly.
                 //         Test.M2(md, sz);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M2")
                     .WithArguments("Test.M2<T>(T[], T[*])")

@@ -74,7 +74,8 @@ namespace System.Security.Cryptography.X509Certificates
         public int cSubtreesConstraint;
         public Interop.Crypt32.DATA_BLOB* rgSubtreesConstraint; // PCERT_NAME_BLOB
 
-        // SubjectType.pbData[0] can contain a CERT_CA_SUBJECT_FLAG that when set indicates that the certificate's subject can act as a CA
+        // SubjectType.pbData[0] can contain a CERT_CA_SUBJECT_FLAG that when set indicates that the
+        // certificate's subject can act as a CA
         public const byte CERT_CA_SUBJECT_FLAG = 0x80;
     };
 

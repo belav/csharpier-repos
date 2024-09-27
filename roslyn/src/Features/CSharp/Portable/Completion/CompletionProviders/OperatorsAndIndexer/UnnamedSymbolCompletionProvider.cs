@@ -22,9 +22,12 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
     /// <summary>
-    /// Provides completion for uncommon unnamed symbols, like conversions, indexer and operators.  These completion
-    /// items will be brought up with <c>dot</c> like normal, but will end up inserting more than just a name into
-    /// the editor.  For example, committing a conversion will insert the conversion prior to the expression being
+    /// Provides completion for uncommon unnamed symbols, like conversions, indexer and operators.
+    // These completion
+    /// items will be brought up with <c>dot</c> like normal, but will end up inserting more than just a
+    // name into
+    /// the editor.  For example, committing a conversion will insert the conversion prior to the
+    // expression being
     /// dotted off of.
     /// </summary>
     [
@@ -35,9 +38,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     internal partial class UnnamedSymbolCompletionProvider : LSPCompletionProvider
     {
         /// <summary>
-        /// CompletionItems for indexers/operators should be sorted below other suggestions like methods or properties
-        /// of the type.  We accomplish this by placing a character known to be greater than all other normal identifier
-        /// characters as the start of our item's name. This doesn't affect what we insert though as all derived
+        /// CompletionItems for indexers/operators should be sorted below other suggestions like methods or
+        // properties
+        /// of the type.  We accomplish this by placing a character known to be greater than all other
+        // normal identifier
+        /// characters as the start of our item's name. This doesn't affect what we insert though as all
+        // derived
         /// providers have specialized logic for what they need to do.
         /// </summary>
         private const string SortingPrefix = "\uFFFD";
@@ -51,8 +57,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         internal const string ConversionKindName = "Conversion";
 
         /// <summary>
-        /// Used to store the doc comment for some operators/conversions.  This is because some of them will be
-        /// synthesized, so there will be no symbol we can recover after the fact in <see cref="GetDescriptionAsync"/>.
+        /// Used to store the doc comment for some operators/conversions.  This is because some of them will
+        // be
+        /// synthesized, so there will be no symbol we can recover after the fact in <see
+        // cref="GetDescriptionAsync"/>.
         /// </summary>
         private const string DocumentationCommentXmlName = "DocumentationCommentXml";
 
@@ -71,14 +79,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         ) => text[insertedCharacterPosition] == '.';
 
         /// <summary>
-        /// We keep operators sorted in a specific order.  We don't want to sort them alphabetically, but instead want
+        /// We keep operators sorted in a specific order.  We don't want to sort them alphabetically, but
+        // instead want
         /// to keep things like <c>==</c> and <c>!=</c> together.
         /// </summary>
         private static string SortText(int sortingGroupIndex, string sortTextSymbolPart) =>
             $"{SortingPrefix}{sortingGroupIndex:000}_{sortTextSymbolPart}";
 
         /// <summary>
-        /// Gets the dot-like token we're after, and also the start of the expression we'd want to place any text before.
+        /// Gets the dot-like token we're after, and also the start of the expression we'd want to place any
+        // text before.
         /// </summary>
         private static (SyntaxToken dotLikeToken, int expressionStart) GetDotAndExpressionStart(
             SyntaxNode root,
@@ -96,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             )
                 return default;
 
-            // if we have `.Name`, we want to get the parent member-access of that to find the starting position.
+            // if we have `.Name`, we want to get the parent member-access of that to find the starting
+            // position.
             // Otherwise, if we have .. then we want the left side of that to find the starting position.
             var expression =
                 dotToken.Kind() == SyntaxKind.DotToken
@@ -106,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (expression == null)
                 return default;
 
-            // If we're after a ?. find the root of that conditional to find the start position of the expression.
+            // If we're after a ?. find the root of that conditional to find the start position of the
+            // expression.
             expression = expression.GetRootConditionalAccessExpression() ?? expression;
             return (dotToken, expression.SpanStart);
         }
@@ -117,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var document = context.Document;
             var position = context.Position;
 
-            // Escape hatch feature flag to let us disable this feature remotely if we run into any issues with it,
+            // Escape hatch feature flag to let us disable this feature remotely if we run into any issues with
+            // it,
             if (context.CompletionOptions.UnnamedSymbolCompletionDisabled)
                 return;
 

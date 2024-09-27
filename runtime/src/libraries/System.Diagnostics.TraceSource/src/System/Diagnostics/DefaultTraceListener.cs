@@ -21,7 +21,8 @@ namespace System.Diagnostics
         private string? _logFileName;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.DefaultTraceListener'/> class with
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.DefaultTraceListener'/>
+        // class with
         ///    Default as its <see cref='System.Diagnostics.TraceListener.Name'/>.</para>
         /// </devdoc>
         public DefaultTraceListener()
@@ -132,7 +133,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>
-        ///       Writes the output followed by a line terminator using <see cref="System.Diagnostics.Debug.Write(string)"/>.
+        ///       Writes the output followed by a line terminator using <see
+        // cref="System.Diagnostics.Debug.Write(string)"/>.
         ///    </para>
         /// </devdoc>
         public override void WriteLine(string? message)

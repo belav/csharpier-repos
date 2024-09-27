@@ -47,14 +47,16 @@ public partial class XmlDataContractSerializerOutputFormatter : TextOutputFormat
     /// <summary>
     /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>.
     /// </summary>
-    /// <param name="writerSettings">The settings to be used by the <see cref="DataContractSerializer"/>.</param>
+    /// <param name="writerSettings">The settings to be used by the <see
+    // cref="DataContractSerializer"/>.</param>
     public XmlDataContractSerializerOutputFormatter(XmlWriterSettings writerSettings)
         : this(writerSettings, loggerFactory: NullLoggerFactory.Instance) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>.
     /// </summary>
-    /// <param name="writerSettings">The settings to be used by the <see cref="DataContractSerializer"/>.</param>
+    /// <param name="writerSettings">The settings to be used by the <see
+    // cref="DataContractSerializer"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public XmlDataContractSerializerOutputFormatter(
         XmlWriterSettings writerSettings,
@@ -149,7 +151,8 @@ public partial class XmlDataContractSerializerOutputFormatter : TextOutputFormat
 
         try
         {
-            // Verify that type is a valid data contract by forcing the serializer to try to create a data contract
+            // Verify that type is a valid data contract by forcing the serializer to try to create a data
+            // contract
             FormattingUtilities.XsdDataContractExporter.GetRootElementName(type);
 
             // If the serializer does not support this type it will throw an exception.

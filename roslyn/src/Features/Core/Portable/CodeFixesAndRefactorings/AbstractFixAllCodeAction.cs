@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {
     /// <summary>
     /// Fix all code action for a code action registered by
-    /// a <see cref="CodeFixes.CodeFixProvider"/> or a <see cref="CodeRefactorings.CodeRefactoringProvider"/>.
+    /// a <see cref="CodeFixes.CodeFixProvider"/> or a <see
+    // cref="CodeRefactorings.CodeRefactoringProvider"/>.
     /// </summary>
     internal abstract class AbstractFixAllCodeAction : CodeAction
     {
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 _fixAllCodeAction = fixAllCodeAction;
 
             /// <summary>
-            /// Gets a reference to <see cref="_showPreviewChangesDialog"/>, which can be read or written by test code.
+            /// Gets a reference to <see cref="_showPreviewChangesDialog"/>, which can be read or written by
+            // test code.
             /// </summary>
             public ref bool ShowPreviewChangesDialog =>
                 ref _fixAllCodeAction._showPreviewChangesDialog;

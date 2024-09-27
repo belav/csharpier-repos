@@ -237,7 +237,8 @@ public sealed unsafe class Secret : IDisposable, ISecret
 
         if (_plaintextLength % CRYPTPROTECTMEMORY_BLOCK_SIZE == 0)
         {
-            // Case 1: Secret length is an exact multiple of the block size. Copy directly to the buffer and decrypt there.
+            // Case 1: Secret length is an exact multiple of the block size. Copy directly to the buffer and
+            // decrypt there.
             UnsafeBufferUtil.BlockCopy(
                 from: _localAllocHandle,
                 to: pbBuffer,

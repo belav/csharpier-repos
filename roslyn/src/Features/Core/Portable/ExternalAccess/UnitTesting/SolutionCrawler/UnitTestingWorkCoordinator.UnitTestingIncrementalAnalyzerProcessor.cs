@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
 
                 /// <summary>
-                /// The keys in this are either a string or a (string, Guid) tuple. See <see cref="UnitTestingSolutionCrawlerLogger.LogIncrementalAnalyzerProcessorStatistics"/>
+                /// The keys in this are either a string or a (string, Guid) tuple. See <see
+                // cref="UnitTestingSolutionCrawlerLogger.LogIncrementalAnalyzerProcessorStatistics"/>
                 /// for what is writing this out.
                 /// </summary>
                 private CountLogAggregator<object> _logAggregator = new();
@@ -410,7 +411,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         var reasons = workItem.InvocationReasons;
                         if (root == null || syntaxFactsService == null)
                         {
-                            // as a fallback mechanism, if we can't run one method body due to some missing service, run whole document analyzer.
+                            // as a fallback mechanism, if we can't run one method body due to some missing service, run whole
+                            // document analyzer.
                             await RunAnalyzersAsync(
                                     analyzers,
                                     document,

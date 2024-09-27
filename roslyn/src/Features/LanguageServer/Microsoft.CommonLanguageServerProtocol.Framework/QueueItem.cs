@@ -50,7 +50,8 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
         CancellationToken cancellationToken
     )
     {
-        // Set the tcs state to cancelled if the token gets cancelled outside of our callback (for example the server shutting down).
+        // Set the tcs state to cancelled if the token gets cancelled outside of our callback (for example
+        // the server shutting down).
         cancellationToken.Register(() => _completionSource.TrySetCanceled(cancellationToken));
 
         _handler = handler;
@@ -163,7 +164,8 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
                     .HandleNotificationAsync(_request, context, cancellationToken)
                     .ConfigureAwait(false);
 
-                // We know that the return type of <see cref="INotificationHandler{TRequestType, RequestContextType}"/> will always be <see cref="VoidReturn" /> even if the compiler doesn't.
+                // We know that the return type of <see cref="INotificationHandler{TRequestType,
+                // RequestContextType}"/> will always be <see cref="VoidReturn" /> even if the compiler doesn't.
                 _completionSource.TrySetResult((TResponse)(object)NoValue.Instance);
             }
             else if (
@@ -174,7 +176,8 @@ internal class QueueItem<TRequest, TResponse, TRequestContext> : IQueueItem<TReq
                     .HandleNotificationAsync(context, cancellationToken)
                     .ConfigureAwait(false);
 
-                // We know that the return type of <see cref="INotificationHandler{TRequestType, RequestContextType}"/> will always be <see cref="VoidReturn" /> even if the compiler doesn't.
+                // We know that the return type of <see cref="INotificationHandler{TRequestType,
+                // RequestContextType}"/> will always be <see cref="VoidReturn" /> even if the compiler doesn't.
                 _completionSource.TrySetResult((TResponse)(object)NoValue.Instance);
             }
             else

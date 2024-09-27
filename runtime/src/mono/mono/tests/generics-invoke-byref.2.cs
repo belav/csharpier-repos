@@ -14,7 +14,7 @@ namespace TestConsole
             Program p = new Program();
             p.GetType().GetMethod("TestMethod").Invoke(p, methodArgs);
 
-            /* Byref nullable tests */
+/* Byref nullable tests */
             object[] a = new object[1];
             int? i = 5;
             object o = i;

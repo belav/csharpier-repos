@@ -33,11 +33,13 @@ namespace Moq.Language
         ///   Specifies a function that will calculate the value to return from the method.
         ///   <para>
         ///     This overload is intended to be used in scenarios involving generic type argument matchers,
-        ///     such as <see cref="It.IsAnyType"/>. The function will receive the current <see cref="IInvocation"/>,
+        ///     such as <see cref="It.IsAnyType"/>. The function will receive the current <see
+        // cref="IInvocation"/>,
         ///     which allows discovery of both arguments and type arguments.
         ///   </para>
         ///   <para>
-        ///     For all other use cases, you should prefer the other <c>Returns</c> overloads as they provide
+        ///     For all other use cases, you should prefer the other <c>Returns</c> overloads as they
+        // provide
         ///     better static type safety.
         ///   </para>
         /// </summary>

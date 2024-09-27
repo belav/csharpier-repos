@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
             // If we have an else-if clause, we first convert it to an if statement. If there are any
-            // else-if or else clauses following the outer if statement, they will be copied and placed inside too.
+            // else-if or else clauses following the outer if statement, they will be copied and placed inside
+            // too.
 
             var innerIfStatement = ifGenerator.WithCondition(
                 ifGenerator.ToIfStatement(ifOrElseIf),

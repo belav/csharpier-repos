@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/project-system:
+//
 // https://github.com/dotnet/project-system/blob/bdf69d5420ec8d894f5bf4c3d4692900b7f2479c/src/Microsoft.VisualStudio.ProjectSystem.Managed/Threading/Tasks/CancellationSeries.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -71,8 +73,10 @@ namespace Roslyn.Utilities
             // This way we would return a cancelled token, which is reasonable.
             var nextToken = nextSource.Token;
 
-            // The following block is identical to Interlocked.Exchange, except no replacement is made if the current
-            // field value is null (latch on null). This ensures state is not corrupted if CreateNext is called after
+            // The following block is identical to Interlocked.Exchange, except no replacement is made if the
+            // current
+            // field value is null (latch on null). This ensures state is not corrupted if CreateNext is called
+            // after
             // the object is disposed.
             var priorSource = Volatile.Read(ref _cts);
             while (priorSource is not null)

@@ -39,7 +39,8 @@ class C : System.IAsyncDisposable
                 parseOptions: TestOptions.Regular7_3
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS8652: The feature 'asynchronous using' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (6,9): error CS8652: The feature 'asynchronous using' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
                     .WithArguments("asynchronous using", "8.0")
@@ -71,7 +72,8 @@ class C : System.IAsyncDisposable
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
+                // (6,9): error CS4033: The 'await' operator can only be used within an async method. Consider
+                // marking this method with the 'async' modifier and changing its return type to 'Task'.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await")
                     .WithLocation(6, 9)
@@ -102,7 +104,8 @@ class C : System.IAsyncDisposable
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS4032: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task<int>'.
+                // (6,9): error CS4032: The 'await' operator can only be used within an async method. Consider
+                // marking this method with the 'async' modifier and changing its return type to 'Task<int>'.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_BadAwaitWithoutAsyncMethod, "await")
                     .WithArguments("int")
@@ -137,7 +140,8 @@ class C : System.IAsyncDisposable
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (8,13): error CS4034: The 'await' operator can only be used within an async lambda expression. Consider marking this lambda expression with the 'async' modifier.
+                // (8,13): error CS4034: The 'await' operator can only be used within an async lambda expression.
+                // Consider marking this lambda expression with the 'async' modifier.
                 //             await using (var y = new C())
                 Diagnostic(ErrorCode.ERR_BadAwaitWithoutAsyncLambda, "await")
                     .WithArguments("lambda expression")
@@ -165,7 +169,9 @@ class C : System.IAsyncDisposable
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (3,11): error CS0738: 'C' does not implement interface member 'IAsyncDisposable.DisposeAsync()'. 'C.DisposeAsync()' cannot implement 'IAsyncDisposable.DisposeAsync()' because it does not have the matching return type of 'ValueTask'.
+                // (3,11): error CS0738: 'C' does not implement interface member 'IAsyncDisposable.DisposeAsync()'.
+                // 'C.DisposeAsync()' cannot implement 'IAsyncDisposable.DisposeAsync()' because it does not have the
+                // matching return type of 'ValueTask'.
                 // class C : System.IAsyncDisposable
                 Diagnostic(
                         ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
@@ -178,7 +184,9 @@ class C : System.IAsyncDisposable
                         "System.Threading.Tasks.ValueTask"
                     )
                     .WithLocation(3, 11),
-                // (9,23): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (9,23): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     public async Task DisposeAsync() { }
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "DisposeAsync").WithLocation(9, 23)
             );
@@ -316,7 +324,8 @@ class C : System.IAsyncDisposable
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics();
-            // https://github.com/dotnet/roslyn/issues/30257 Confirm whether this behavior is ok (currently matching behavior of obsolete Dispose in non-async using)
+            // https://github.com/dotnet/roslyn/issues/30257 Confirm whether this behavior is ok (currently
+            // matching behavior of obsolete Dispose in non-async using)
         }
 
         [Fact]
@@ -414,7 +423,9 @@ class C
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (4,53): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (4,53): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     public static async System.Threading.Tasks.Task Main()
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Main").WithLocation(4, 53)
             );
@@ -460,10 +471,14 @@ class C
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (17,43): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (17,43): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //         async System.Threading.Tasks.Task local()
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "local").WithLocation(17, 43),
-                // (6,42): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (6,42): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //         System.Action lambda1 = async () =>
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "=>").WithLocation(6, 42)
             );
@@ -600,12 +615,14 @@ class C
 ";
             var comp = CreateCompilationWithTasksExtensions(source);
             comp.VerifyDiagnostics(
-                // (6,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (6,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "new C()")
                     .WithArguments("C")
                     .WithLocation(6, 22),
-                // (9,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (9,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "var x = new C()")
                     .WithArguments("C")
@@ -635,22 +652,26 @@ class C
             var comp = CreateCompilationWithMscorlib46(source);
             comp.MakeTypeMissing(WellKnownType.System_Threading_Tasks_ValueTask);
             comp.VerifyDiagnostics(
-                // (6,9): error CS4032: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task<Task<int>>'.
+                // (6,9): error CS4032: The 'await' operator can only be used within an async method. Consider
+                // marking this method with the 'async' modifier and changing its return type to 'Task<Task<int>>'.
                 //         await using (new C())
                 Diagnostic(ErrorCode.ERR_BadAwaitWithoutAsyncMethod, "await")
                     .WithArguments("System.Threading.Tasks.Task<int>")
                     .WithLocation(6, 9),
-                // (6,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (6,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "new C()")
                     .WithArguments("C")
                     .WithLocation(6, 22),
-                // (9,9): error CS4032: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task<Task<int>>'.
+                // (9,9): error CS4032: The 'await' operator can only be used within an async method. Consider
+                // marking this method with the 'async' modifier and changing its return type to 'Task<Task<int>>'.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_BadAwaitWithoutAsyncMethod, "await")
                     .WithArguments("System.Threading.Tasks.Task<int>")
                     .WithLocation(9, 9),
-                // (9,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (9,22): error CS8410: 'C': type used in an asynchronous using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "var x = new C()")
                     .WithArguments("C")
@@ -685,12 +706,14 @@ class C
             var comp = CreateCompilationWithMscorlib46(source);
             comp.MakeTypeMissing(SpecialType.System_IDisposable);
             comp.VerifyEmitDiagnostics(
-                // (6,16): error CS1674: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (6,16): error CS1674: 'C': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //         using (new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "new C()")
                     .WithArguments("C")
                     .WithLocation(6, 16),
-                // (9,16): error CS1674: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (9,16): error CS1674: 'C': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //         using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var x = new C()")
                     .WithArguments("C")
@@ -850,7 +873,8 @@ public class C : Base
             );
             comp.MakeTypeMissing(WellKnownType.System_Threading_Tasks_ValueTask);
             comp.VerifyDiagnostics(
-                // (6,9): error CS0518: Predefined type 'System.Threading.Tasks.ValueTask' is not defined or imported
+                // (6,9): error CS0518: Predefined type 'System.Threading.Tasks.ValueTask' is not defined or
+                // imported
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "await")
                     .WithArguments("System.Threading.Tasks.ValueTask")
@@ -914,7 +938,8 @@ class C : System.IAsyncDisposable
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,16): error CS8418: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'. Did you mean 'await using' rather than 'using'?
+                // (6,16): error CS8418: 'C': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'. Did you mean 'await using' rather than 'using'?
                 //         using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIDispWrongAsync, "var x = new C()")
                     .WithArguments("C")
@@ -944,7 +969,8 @@ class C : System.IAsyncDisposable
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,16): error CS8418: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'. Did you mean 'await using'?
+                // (6,16): error CS8418: 'C': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'. Did you mean 'await using'?
                 //         using (new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIDispWrongAsync, "new C()")
                     .WithArguments("C")
@@ -1008,7 +1034,8 @@ class C : System.IDisposable
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,22): error CS8417: 'C': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable'. Did you mean 'using' rather than 'await using'?
+                // (6,22): error CS8417: 'C': type used in an async using statement must be implicitly convertible
+                // to 'System.IAsyncDisposable'. Did you mean 'using' rather than 'await using'?
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDispWrongAsync, "var x = new C()")
                     .WithArguments("C")
@@ -1038,7 +1065,8 @@ class C : System.IDisposable
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,22): error CS8417: 'C': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable'. Did you mean 'using' rather than 'await using'?
+                // (6,22): error CS8417: 'C': type used in an async using statement must be implicitly convertible
+                // to 'System.IAsyncDisposable'. Did you mean 'using' rather than 'await using'?
                 //         await using (new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDispWrongAsync, "new C()")
                     .WithArguments("C")
@@ -1335,7 +1363,8 @@ class C
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,22): error CS8410: 'method group': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable'
+                // (6,22): error CS8410: 'method group': type used in an async using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable'
                 //         await using (Main)
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "Main")
                     .WithArguments("method group")
@@ -1982,7 +2011,8 @@ public static class Extensions
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (6,22): error CS8410: 'C': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (6,22): error CS8410: 'C': type used in an async using statement must be implicitly convertible
+                // to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "var x = new C()")
                     .WithArguments("C")
@@ -2051,7 +2081,8 @@ public static class Extensions
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (6,22): error CS8410: 'C': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (6,22): error CS8410: 'C': type used in an async using statement must be implicitly convertible
+                // to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "new C()")
                     .WithArguments("C")
@@ -2131,7 +2162,8 @@ public class C
         [WorkItem(32316, "https://github.com/dotnet/roslyn/issues/32316")]
         public void TestPatternBasedDisposal_InterfacePreferredOverInstanceMethod()
         {
-            // SPEC: In the situation where a type can be implicitly converted to IDisposable and also fits the disposable pattern,
+            // SPEC: In the situation where a type can be implicitly converted to IDisposable and also fits the
+            // disposable pattern,
             // then IDisposable will be preferred.
             // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-8.0/using.md#pattern-based-using
 
@@ -2291,7 +2323,9 @@ public class C
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,22): error CS1061: 'int' does not contain a definition for 'GetAwaiter' and no accessible extension method 'GetAwaiter' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
+                // (6,22): error CS1061: 'int' does not contain a definition for 'GetAwaiter' and no accessible
+                // extension method 'GetAwaiter' accepting a first argument of type 'int' could be found (are you
+                // missing a using directive or an assembly reference?)
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "var x = new C()")
                     .WithArguments("int", "GetAwaiter")
@@ -2331,7 +2365,8 @@ public class C
                 Diagnostic(ErrorCode.ERR_BadAccess, "var x = new C()")
                     .WithArguments("C.DisposeAsync()")
                     .WithLocation(6, 22),
-                // (6,22): error CS8410: 'C': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (6,22): error CS8410: 'C': type used in an async using statement must be implicitly convertible
+                // to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (var x = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "var x = new C()")
                     .WithArguments("C")
@@ -2681,20 +2716,24 @@ class C
                 new[] { source, IAsyncDisposableDefinition }
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS8410: 'object': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (6,9): error CS8410: 'object': type used in an async using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using var x = new object();
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "await using var x = new object();")
                     .WithArguments("object")
                     .WithLocation(6, 9),
-                // (6,9): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
+                // (6,9): error CS4033: The 'await' operator can only be used within an async method. Consider
+                // marking this method with the 'async' modifier and changing its return type to 'Task'.
                 //         await using var x = new object();
                 Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await")
                     .WithLocation(6, 9),
-                // (7,9): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
+                // (7,9): error CS4033: The 'await' operator can only be used within an async method. Consider
+                // marking this method with the 'async' modifier and changing its return type to 'Task'.
                 //         await using (var y = new object()) { }
                 Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await")
                     .WithLocation(7, 9),
-                // (7,22): error CS8410: 'object': type used in an async using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (7,22): error CS8410: 'object': type used in an async using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (var y = new object()) { }
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "var y = new object()")
                     .WithArguments("object")
@@ -2788,7 +2827,8 @@ class C
             var comp = CreateCompilation(source);
             comp.MakeTypeMissing(SpecialType.System_IDisposable);
             comp.VerifyDiagnostics(
-                // source(2,8): error CS1674: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // source(2,8): error CS1674: 'C': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 // using (new C()) { }
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "new C()")
                     .WithArguments("C")

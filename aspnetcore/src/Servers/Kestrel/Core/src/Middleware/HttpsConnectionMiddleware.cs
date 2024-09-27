@@ -93,8 +93,10 @@ internal sealed class HttpsConnectionMiddleware
         _logger = loggerFactory.CreateLogger<HttpsConnectionMiddleware>();
         _metrics = metrics;
 
-        // Something similar to the following could allow us to remove more duplicate logic, but we need https://github.com/dotnet/runtime/issues/40402 to be fixed first.
-        //var sniOptionsSelector = new SniOptionsSelector("", new Dictionary<string, SniConfig> { { "*", new SniConfig() } }, new NoopCertificateConfigLoader(), options, options.HttpProtocols, _logger);
+        // Something similar to the following could allow us to remove more duplicate logic, but we need
+        // https://github.com/dotnet/runtime/issues/40402 to be fixed first.
+        //var sniOptionsSelector = new SniOptionsSelector("", new Dictionary<string, SniConfig> { { "*", new
+        // SniConfig() } }, new NoopCertificateConfigLoader(), options, options.HttpProtocols, _logger);
         //_httpsOptionsCallback = SniOptionsSelector.OptionsCallback;
         //_httpsOptionsCallbackState = sniOptionsSelector;
         //_sslStreamFactory = s => new SslStream(s);
@@ -127,7 +129,8 @@ internal sealed class HttpsConnectionMiddleware
                 certificate = LocateCertificateWithPrivateKey(certificate);
             }
 
-            // This might be do blocking IO but it'll resolve the certificate chain up front before any connections are
+            // This might be do blocking IO but it'll resolve the certificate chain up front before any
+            // connections are
             // made to the server
             _serverCertificateContext = SslStreamCertificateContext.Create(
                 certificate,
@@ -338,7 +341,8 @@ internal sealed class HttpsConnectionMiddleware
         }
     }
 
-    // This logic is replicated from https://github.com/dotnet/runtime/blob/02b24db7cada5d5806c5cc513e61e44fb2a41944/src/libraries/System.Net.Security/src/System/Net/Security/SecureChannel.cs#L195-L262
+    // This logic is replicated from
+    // https://github.com/dotnet/runtime/blob/02b24db7cada5d5806c5cc513e61e44fb2a41944/src/libraries/System.Net.Security/src/System/Net/Security/SecureChannel.cs#L195-L262
     // but with public APIs
     private X509Certificate2 LocateCertificateWithPrivateKey(X509Certificate2 certificate)
     {
@@ -639,7 +643,8 @@ internal sealed class HttpsConnectionMiddleware
         ILogger<HttpsConnectionMiddleware> logger
     )
     {
-        // This configuration will always fail per-request, preemptively fail it here. See HttpConnection.SelectProtocol().
+        // This configuration will always fail per-request, preemptively fail it here. See
+        // HttpConnection.SelectProtocol().
         if (httpProtocols == HttpProtocols.Http2)
         {
             if (!TlsAlpn.IsSupported)
@@ -731,7 +736,8 @@ internal sealed class HttpsConnectionMiddleware
         {
             sslServerAuthenticationOptions.ClientCertificateRequired = true; // We have to set this to prompt the client for a cert.
             // For AllowCertificate we override the missing cert error in RemoteCertificateValidationCallback,
-            // except QuicListener doesn't call the callback for missing certs https://github.com/dotnet/runtime/issues/57308.
+            // except QuicListener doesn't call the callback for missing certs
+            // https://github.com/dotnet/runtime/issues/57308.
             sslServerAuthenticationOptions.RemoteCertificateValidationCallback = (
                 object sender,
                 X509Certificate? certificate,

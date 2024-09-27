@@ -18,7 +18,8 @@ public class RoleValidator<TRole> : IRoleValidator<TRole>
     /// <summary>
     /// Creates a new instance of <see cref="RoleValidator{TRole}"/>.
     /// </summary>
-    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error messages.</param>
+    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error
+    // messages.</param>
     public RoleValidator(IdentityErrorDescriber? errors = null)
     {
         Describer = errors ?? new IdentityErrorDescriber();
@@ -31,7 +32,8 @@ public class RoleValidator<TRole> : IRoleValidator<TRole>
     /// </summary>
     /// <param name="manager">The <see cref="RoleManager{TRole}"/> managing the role store.</param>
     /// <param name="role">The role to validate.</param>
-    /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous validation.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the
+    // asynchronous validation.</returns>
     public virtual async Task<IdentityResult> ValidateAsync(RoleManager<TRole> manager, TRole role)
     {
         ArgumentNullThrowHelper.ThrowIfNull(manager);

@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// test has a generic type with 10,000 generic type arguments and a generic method with 10,000 generic type arguments.
+// test has a generic type with 10,000 generic type arguments and a generic method with 10,000
+// generic type arguments.
 
 using System;
 using Xunit;

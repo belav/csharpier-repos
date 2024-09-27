@@ -72,13 +72,18 @@ namespace System.ServiceModel
         }
     }
 
-    // problem: creating / getting content / settings content on a MessageHeader<T> given the type at runtime
+    // problem: creating / getting content / settings content on a MessageHeader<T> given the type at
+    // runtime
     // require reflection.
-    // solution: This class creates a cache of adapters that provide an untyped wrapper over a particular
+    // solution: This class creates a cache of adapters that provide an untyped wrapper over a
+    // particular
     // MessageHeader<T> instantiation.
-    // better solution: implement something like "IUntypedTypedHeader" that has a "object Content" property,
-    // privately implement this on TypedHeader, and then just use that iface to operation on the header (actually
-    // you'd still have the creation problem...).  the issue with that is you now have a new public interface
+    // better solution: implement something like "IUntypedTypedHeader" that has a "object Content"
+    // property,
+    // privately implement this on TypedHeader, and then just use that iface to operation on the header
+    // (actually
+    // you'd still have the creation problem...).  the issue with that is you now have a new public
+    // interface
     internal abstract class TypedHeaderManager
     {
         static Dictionary<Type, TypedHeaderManager> cache =

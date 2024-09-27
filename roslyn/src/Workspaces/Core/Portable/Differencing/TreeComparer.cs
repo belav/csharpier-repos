@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             new Match<TNode>(oldRoot, newRoot, this, knownMatches: null).GetTreeEdits();
 
         /// <summary>
-        /// Returns a match map of <paramref name="oldRoot"/> descendants to <paramref name="newRoot"/> descendants.
+        /// Returns a match map of <paramref name="oldRoot"/> descendants to <paramref name="newRoot"/>
+        // descendants.
         /// </summary>
         public Match<TNode> ComputeMatch(
             TNode oldRoot,
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Differencing
         protected internal abstract int GetLabel(TNode node);
 
         /// <summary>
-        /// Returns N > 0 if the node with specified label can't change its N-th ancestor node, zero otherwise.
+        /// Returns N > 0 if the node with specified label can't change its N-th ancestor node, zero
+        // otherwise.
         /// </summary>
         /// <remarks>
         /// 1st ancestor is the node's parent node.

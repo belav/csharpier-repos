@@ -55,7 +55,9 @@ namespace System.Net.WebSockets
             }
         }
 
-        /// <summary>Gets or sets the policy that determines how <see cref="ClientWebSocketOptions.HttpVersion" /> is interpreted and how the final HTTP version is negotiated with the server.</summary>
+        /// <summary>Gets or sets the policy that determines how <see
+        // cref="ClientWebSocketOptions.HttpVersion" /> is interpreted and how the final HTTP version is
+        // negotiated with the server.</summary>
         /// <value>The version policy used when the HTTP connection is established.</value>
         public HttpVersionPolicy HttpVersionPolicy
         {
@@ -202,7 +204,8 @@ namespace System.Net.WebSockets
         /// When present, the options are sent to the server during the handshake phase. If the server
         /// supports per-message-deflate and the options are accepted, the <see cref="WebSocket"/> instance
         /// will be created with compression enabled by default for all messages.<para />
-        /// Be aware that enabling compression makes the application subject to CRIME/BREACH type of attacks.
+        /// Be aware that enabling compression makes the application subject to CRIME/BREACH type of
+        // attacks.
         /// It is strongly advised to turn off compression when sending data containing secrets by
         /// specifying <see cref="WebSocketMessageFlags.DisableCompression" /> flag for such messages.
         /// </summary>
@@ -240,7 +243,8 @@ namespace System.Net.WebSockets
         }
 
         /// <summary>
-        /// Indicates whether <see cref="ClientWebSocket.HttpStatusCode" /> and <see cref="ClientWebSocket.HttpResponseHeaders" /> should be set when establishing the connection.
+        /// Indicates whether <see cref="ClientWebSocket.HttpStatusCode" /> and <see
+        // cref="ClientWebSocket.HttpResponseHeaders" /> should be set when establishing the connection.
         /// </summary>
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public bool CollectHttpResponseDetails

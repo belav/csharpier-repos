@@ -424,7 +424,8 @@ public class WsFederationTestHandlers
                                     OnAuthenticationFailed = context =>
                                     {
                                         context.HttpContext.Items["AuthenticationFailed"] = true;
-                                        //Change the request url to something different and skip Wsfed. This new url will handle the request and let us know if this notification was invoked.
+                                        //Change the request url to something different and skip Wsfed. This new url will handle the request
+                                        // and let us know if this notification was invoked.
                                         context.HttpContext.Request.Path = new PathString(
                                             "/AuthenticationFailed"
                                         );

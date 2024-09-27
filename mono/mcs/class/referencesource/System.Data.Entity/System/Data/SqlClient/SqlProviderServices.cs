@@ -126,7 +126,8 @@ namespace System.Data.SqlClient
             );
             command.CommandType = commandType;
 
-            // Get the function (if any) implemented by the command tree since this influences our interpretation of parameters
+            // Get the function (if any) implemented by the command tree since this influences our
+            // interpretation of parameters
             EdmFunction function = null;
             if (commandTree.CommandTreeKind == DbCommandTreeKind.Function)
             {
@@ -137,7 +138,8 @@ namespace System.Data.SqlClient
             {
                 SqlParameter parameter;
 
-                // Use the corresponding function parameter TypeUsage where available (currently, the SSDL facets and
+                // Use the corresponding function parameter TypeUsage where available (currently, the SSDL facets
+                // and
                 // type trump user-defined facets and type in the EntityCommand).
                 FunctionParameter functionParameter;
                 if (
@@ -189,7 +191,8 @@ namespace System.Data.SqlClient
                 command.Parameters.Add(parameter);
             }
 
-            // Now add parameters added as part of SQL gen (note: this feature is only safe for DML SQL gen which
+            // Now add parameters added as part of SQL gen (note: this feature is only safe for DML SQL gen
+            // which
             // does not support user parameters, where there is no risk of name collision)
             if (null != parameters && 0 < parameters.Count)
             {
@@ -241,9 +244,11 @@ namespace System.Data.SqlClient
 
                     if (previousSize > -1)
                     {
-                        // The 'max' length was chosen as a specific value for the parameter's Size property on Sql8 (4000 or 8000)
+                        // The 'max' length was chosen as a specific value for the parameter's Size property on Sql8 (4000
+                        // or 8000)
                         // because no MaxLength was specified in the TypeUsage and the provider is Sql8.
-                        // If the value's length is less than or equal to this preset size, then the Size value can be retained,
+                        // If the value's length is less than or equal to this preset size, then the Size value can be
+                        // retained,
                         // otherwise this preset size must be removed in favor of the Size inferred from the value itself.
 
                         // If the inferred Size is less than the preset 'max' size, restore that preset size
@@ -255,7 +260,8 @@ namespace System.Data.SqlClient
                     else
                     {
                         // -1 was chosen as the parameter's size because no MaxLength was specified in the TypeUsage and the
-                        // provider is more recent than Sql8. However, it is more optimal to specify a non-max (-1) value for
+                        // provider is more recent than Sql8. However, it is more optimal to specify a non-max (-1) value
+                        // for
                         // the size where possible, since 'max' parameters may prevent, for example, filter pushdown.
                         // (see Dev10#617447 for more details)
                         int suggestedLength = GetNonMaxLength(((SqlParameter)parameter).SqlDbType);
@@ -266,7 +272,8 @@ namespace System.Data.SqlClient
                         else if (parameter.Size > suggestedLength)
                         {
                             // The parameter size is greater than the suggested length, so the suggested length cannot be used.
-                            // Since the provider is Sql9 or newer, set the size to max (-1) instead of the inferred size for better plan reuse.
+                            // Since the provider is Sql9 or newer, set the size to max (-1) instead of the inferred size for
+                            // better plan reuse.
                             parameter.Size = -1;
                         }
                     }
@@ -513,11 +520,16 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Validates that the specified value is compatible with SqlParameter and if not, attempts to return an appropriate value that is.
-        /// Currently only spatial values (DbGeography/DbGeometry) may not be directly usable with SqlParameter. For these types, an instance
-        /// of the corresponding SQL Server CLR spatial UDT will be manufactured based on the spatial data contained in <paramref name="value"/>.
-        /// If <paramref name="value"/> is an instance of DbGeography/DbGeometry that was read from SQL Server by this provider, then the wrapped
-        /// CLR UDT value is available via the ProviderValue property (see SqlSpatialServices for the full conversion process from instances of
+        /// Validates that the specified value is compatible with SqlParameter and if not, attempts to
+        // return an appropriate value that is.
+        /// Currently only spatial values (DbGeography/DbGeometry) may not be directly usable with
+        // SqlParameter. For these types, an instance
+        /// of the corresponding SQL Server CLR spatial UDT will be manufactured based on the spatial data
+        // contained in <paramref name="value"/>.
+        /// If <paramref name="value"/> is an instance of DbGeography/DbGeometry that was read from SQL
+        // Server by this provider, then the wrapped
+        /// CLR UDT value is available via the ProviderValue property (see SqlSpatialServices for the full
+        // conversion process from instances of
         /// DbGeography/DbGeometry to instances of the CLR SqlGeography/SqlGeometry UDTs)
         /// </summary>
         internal static object EnsureSqlParameterValue(object value)
@@ -528,9 +540,12 @@ namespace System.Data.SqlClient
                 && Type.GetTypeCode(value.GetType()) == TypeCode.Object
             )
             {
-                // If the parameter is being created based on an actual value (typically for constants found in DML expressions) then a DbGeography/DbGeometry
-                // value must be replaced by an an appropriate Microsoft.SqlServer.Types.SqlGeography/SqlGeometry instance. Since the DbGeography/DbGeometry
-                // value may not have been originally created by this SqlClient provider services implementation, just using the ProviderValue is not sufficient.
+                // If the parameter is being created based on an actual value (typically for constants found in DML
+                // expressions) then a DbGeography/DbGeometry
+                // value must be replaced by an an appropriate Microsoft.SqlServer.Types.SqlGeography/SqlGeometry
+                // instance. Since the DbGeography/DbGeometry
+                // value may not have been originally created by this SqlClient provider services implementation,
+                // just using the ProviderValue is not sufficient.
                 DbGeography geographyValue = value as DbGeography;
                 if (geographyValue != null)
                 {
@@ -818,7 +833,8 @@ namespace System.Data.SqlClient
             }
             else
             {
-                // Specific type depends on whether the string is a unicode string and whether it is a fixed length string.
+                // Specific type depends on whether the string is a unicode string and whether it is a fixed length
+                // string.
                 // By default, assume widest type (unicode) and most common type (variable length)
                 bool unicode;
                 bool fixedLength;
@@ -855,7 +871,8 @@ namespace System.Data.SqlClient
                 "only valid for binary type"
             );
 
-            // Specific type depends on whether the binary value is fixed length. By default, assume variable length.
+            // Specific type depends on whether the binary value is fixed length. By default, assume variable
+            // length.
             bool fixedLength;
             if (!TypeHelpers.TryGetIsFixedLength(type, out fixedLength))
             {
@@ -878,9 +895,12 @@ namespace System.Data.SqlClient
 
         /// <summary>
         /// Create the database and the database objects.
-        /// If initial catalog is not specified, but AttachDBFilename is specified, we generate a random database name based on the AttachDBFilename.
-        /// Note: this causes pollution of the db, as when the connection string is later used, the mdf will get attached under a different name.
-        /// However if we try to replicate the name under which it would be attached, the following scenario would fail:
+        /// If initial catalog is not specified, but AttachDBFilename is specified, we generate a random
+        // database name based on the AttachDBFilename.
+        /// Note: this causes pollution of the db, as when the connection string is later used, the mdf will
+        // get attached under a different name.
+        /// However if we try to replicate the name under which it would be attached, the following scenario
+        // would fail:
         ///    The file does not exist, but registered with database.
         ///    The user calls:  If (DatabaseExists) DeleteDatabase
         ///                     CreateDatabase
@@ -923,10 +943,12 @@ namespace System.Data.SqlClient
                 }
             );
 
-            // Create database already succeeded. If there is a failure from this point on, the user should be informed.
+            // Create database already succeeded. If there is a failure from this point on, the user should be
+            // informed.
             try
             {
-                // Clear connection pool for the database connection since after the 'create database' call, a previously
+                // Clear connection pool for the database connection since after the 'create database' call, a
+                // previously
                 // invalid connection may now be valid.
                 SqlConnection.ClearPool(sqlConnection);
 
@@ -950,7 +972,8 @@ namespace System.Data.SqlClient
                     }
                     catch (Exception ie)
                     {
-                        // The creation of the database succeeded, the creation of the database objects failed, and the dropping of the database failed.
+                        // The creation of the database succeeded, the creation of the database objects failed, and the
+                        // dropping of the database failed.
                         if (EntityUtil.IsCatchableExceptionType(ie))
                         {
                             throw new InvalidOperationException(
@@ -964,7 +987,8 @@ namespace System.Data.SqlClient
                         }
                         throw;
                     }
-                    // The creation of the database succeeded, the creation of the database objects failed, the database was dropped, no reason to wrap the exception
+                    // The creation of the database succeeded, the creation of the database objects failed, the database
+                    // was dropped, no reason to wrap the exception
                     throw;
                 }
                 throw;
@@ -1101,15 +1125,21 @@ namespace System.Data.SqlClient
         /// <summary>
         /// Determines whether the database for the given connection exists.
         /// There are three cases:
-        /// 1.  Initial Catalog = X, AttachDBFilename = null:   (SELECT Count(*) FROM sys.databases WHERE [name]= X) > 0
-        /// 2.  Initial Catalog = X, AttachDBFilename = F:      if (SELECT Count(*) FROM sys.databases WHERE [name]= X) >  true,
-        /// if not, try to open the connection and then return (SELECT Count(*) FROM sys.databases WHERE [name]= X) > 0
-        /// 3.  Initial Catalog = null, AttachDBFilename = F:   Try to open the connection. If that succeeds the result is true, otherwise
+        /// 1.  Initial Catalog = X, AttachDBFilename = null:   (SELECT Count(*) FROM sys.databases WHERE
+        // [name]= X) > 0
+        /// 2.  Initial Catalog = X, AttachDBFilename = F:      if (SELECT Count(*) FROM sys.databases WHERE
+        // [name]= X) >  true,
+        /// if not, try to open the connection and then return (SELECT Count(*) FROM sys.databases WHERE
+        // [name]= X) > 0
+        /// 3.  Initial Catalog = null, AttachDBFilename = F:   Try to open the connection. If that succeeds
+        // the result is true, otherwise
         /// if the there are no databases corresponding to the given file return false, otherwise throw.
         ///
         /// Note: We open the connection to cover the scenario when the mdf exists, but is not attached.
-        /// Given that opening the connection would auto-attach it, it would not be appropriate to return false in this case.
-        /// Also note that checking for the existence of the file does not work for a remote server.  (Dev11 #290487)
+        /// Given that opening the connection would auto-attach it, it would not be appropriate to return
+        // false in this case.
+        /// Also note that checking for the existence of the file does not work for a remote server.  (Dev11
+        // #290487)
         /// For further details on the behavior when AttachDBFilename is specified see Dev10# 188936
         /// </summary>
         protected override bool DbDatabaseExists(
@@ -1232,8 +1262,10 @@ namespace System.Data.SqlClient
         /// if none throw
         /// 3.  If niether the catalog not the file name is specified - throw
         ///
-        /// Note that directly deleting the files does not work for a remote server.  However, even for not attached
-        /// databases the current logic would work assuming the user does: if (DatabaseExists) DeleteDatabase
+        /// Note that directly deleting the files does not work for a remote server.  However, even for not
+        // attached
+        /// databases the current logic would work assuming the user does: if (DatabaseExists)
+        // DeleteDatabase
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="commandTimeout"></param>
@@ -1402,7 +1434,8 @@ namespace System.Data.SqlClient
             }
             catch (SqlException e)
             {
-                // if it appears that the credentials have been removed from the connection string, use an alternate explanation
+                // if it appears that the credentials have been removed from the connection string, use an alternate
+                // explanation
                 if (
                     !connectionBuilder.IntegratedSecurity
                     && (

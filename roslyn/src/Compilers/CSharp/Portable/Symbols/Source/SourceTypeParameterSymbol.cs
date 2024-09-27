@@ -164,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// NOTE: This method should always be kept as a sealed override.
-        /// If you want to override attribute binding logic for a sub-class, then override <see cref="GetAttributesBag"/> method.
+        /// If you want to override attribute binding logic for a sub-class, then override <see
+        // cref="GetAttributesBag"/> method.
         /// </remarks>
         public sealed override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -172,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns null if there are no attributes applied on the symbol.
+        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns
+        // null if there are no attributes applied on the symbol.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -416,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         // Nested type parameter references might not be valid in error scenarios.
                         //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(this.ConstraintTypes));
-                        //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(ImmutableArray<TypeSymbol>.CreateFrom(this.Interfaces)));
+                        
+                        // //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(ImmutableArray<TypeSymbol>.CreateFrom(this.Interfaces)));
                         Debug.Assert(
                             this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(
                                 this.EffectiveBaseClassNoUseSiteDiagnostics

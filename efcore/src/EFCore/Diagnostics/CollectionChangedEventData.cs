@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     a collection navigation property has had entities added and/or removed.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public class CollectionChangedEventData : NavigationEventData, ICollectionChangedEventData
 {
@@ -17,7 +18,8 @@ public class CollectionChangedEventData : NavigationEventData, ICollectionChange
     /// </summary>
     /// <param name="eventDefinition">The event definition.</param>
     /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
-    /// <param name="entityEntry">The entry for the entity instance on which the property value has changed.</param>
+    /// <param name="entityEntry">The entry for the entity instance on which the property value has
+    // changed.</param>
     /// <param name="navigation">The navigation property.</param>
     /// <param name="added">The entities added to the collection.</param>
     /// <param name="removed">The entities removed from the collection.</param>

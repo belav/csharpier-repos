@@ -324,7 +324,8 @@ namespace TypeSystemTests
             Assert.Equal(virtualMethodBang0Bang1.OwningType, baseType);
 
             MethodDesc baseMethod2_3 = null;
-            // BaseMethod(!2,!3) has custom modifiers in its signature, and thus the sig is difficult to write up by hand. Just search for
+            // BaseMethod(!2,!3) has custom modifiers in its signature, and thus the sig is difficult to write
+            // up by hand. Just search for
             // it in an ad hoc manner
             foreach (MethodDesc method in baseType.GetMethods())
             {

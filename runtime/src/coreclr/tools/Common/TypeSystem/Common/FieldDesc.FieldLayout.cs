@@ -33,7 +33,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// For static fields, represents whether or not the field is held in the GC or non GC statics region.
+        /// For static fields, represents whether or not the field is held in the GC or non GC statics
+        // region.
         /// </summary>
         public bool HasGCStaticBase
         {

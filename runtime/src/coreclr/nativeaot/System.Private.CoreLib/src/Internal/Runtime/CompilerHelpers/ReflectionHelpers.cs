@@ -12,7 +12,8 @@ namespace Internal.Runtime.CompilerHelpers
     /// </summary>
     internal static class ReflectionHelpers
     {
-        // This entry is used to implement Type.GetType()'s ability to detect the calling assembly and use it as
+        // This entry is used to implement Type.GetType()'s ability to detect the calling assembly and use
+        // it as
         // a default assembly name.
         public static Type GetType(
             string typeName,
@@ -29,7 +30,8 @@ namespace Internal.Runtime.CompilerHelpers
             );
         }
 
-        // This entry is used to implement Type.GetType()'s ability to detect the calling assembly and use it as
+        // This entry is used to implement Type.GetType()'s ability to detect the calling assembly and use
+        // it as
         // a default assembly name.
         public static Type ExtensibleGetType(
             string typeName,

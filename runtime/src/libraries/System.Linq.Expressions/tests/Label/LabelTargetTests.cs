@@ -8,10 +8,14 @@ namespace System.Linq.Expressions.Tests
 {
     public class LabelTargetTests
     {
-        // The actual use of label targets when compiling, interpreting or otherwise acting upon an expression
-        // that makes use of them is by necessity covered by testing those GotoExpressions that make use of them.
-        // These tests focus on the LabelTarget class and the factory methods producing them, with compilation
-        // only when some feature of a target itself (viz. a name that is not a valid C# name is still valid)
+        // The actual use of label targets when compiling, interpreting or otherwise acting upon an
+        // expression
+        // that makes use of them is by necessity covered by testing those GotoExpressions that make use of
+        // them.
+        // These tests focus on the LabelTarget class and the factory methods producing them, with
+        // compilation
+        // only when some feature of a target itself (viz. a name that is not a valid C# name is still
+        // valid)
         // could perhaps have an effect in a regression error.
 
         private class CustomException : Exception

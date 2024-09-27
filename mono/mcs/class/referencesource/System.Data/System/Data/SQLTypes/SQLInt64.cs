@@ -728,7 +728,8 @@ namespace System.Data.SqlTypes
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
             if (isNull != null && XmlConvert.ToBoolean(isNull))
             {
-                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
+                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix -
+                // Read the next value.
                 reader.ReadElementString();
                 m_fNotNull = false;
             }

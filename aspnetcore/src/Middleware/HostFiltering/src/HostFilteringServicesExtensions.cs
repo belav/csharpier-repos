@@ -15,7 +15,8 @@ public static class HostFilteringServicesExtensions
     /// Adds services and options for the host filtering middleware.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="HostFilteringOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="HostFilteringOptions"/>.</param>
     /// <returns></returns>
     public static IServiceCollection AddHostFiltering(
         this IServiceCollection services,

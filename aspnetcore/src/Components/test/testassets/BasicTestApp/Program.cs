@@ -78,7 +78,8 @@ public class Program
 
     private static void ConfigureCulture(WebAssemblyHost host)
     {
-        // In the absence of a specified value, we want the culture to be en-US so that the tests for bind can work consistently.
+        // In the absence of a specified value, we want the culture to be en-US so that the tests for bind
+        // can work consistently.
         var culture = new CultureInfo("en-US");
 
         Uri uri = null;
@@ -88,7 +89,8 @@ public class Program
         }
         catch (ArgumentException)
         {
-            // Some of our tests set this application up incorrectly so that querying NavigationManager.Uri throws.
+            // Some of our tests set this application up incorrectly so that querying NavigationManager.Uri
+            // throws.
         }
 
         if (uri != null && HttpUtility.ParseQueryString(uri.Query)["culture"] is string cultureName)

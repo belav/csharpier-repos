@@ -76,12 +76,12 @@ internal static class StaticRouteHandlerModelEmitter
         return verbSymbol;
     }
 
-    /*
-     * Emit invocation to the request handler. The structure
-     * involved here consists of a call to bind parameters, check
-     * their validity (optionality), invoke the underlying handler with
-     * the arguments bound from HTTP context, and write out the response.
-     */
+/*
+* Emit invocation to the request handler. The structure
+* involved here consists of a call to bind parameters, check
+* their validity (optionality), invoke the underlying handler with
+* the arguments bound from HTTP context, and write out the response.
+*/
     public static void EmitRequestHandler(this Endpoint endpoint, CodeWriter codeWriter)
     {
         codeWriter.WriteLine(
@@ -534,9 +534,12 @@ internal static class StaticRouteHandlerModelEmitter
 
         for (var i = 0; i < endpoint.Parameters.Length; i++)
         {
-            // The null suppression operator on the GetArgument(...) call here is required because we'll occassionally be
-            // dealing with nullable types here. We could try to do fancy things to branch the logic here depending on
-            // the nullability, but at the end of the day we are going to call GetArguments(...) - at runtime the nullability
+            // The null suppression operator on the GetArgument(...) call here is required because we'll
+            // occassionally be
+            // dealing with nullable types here. We could try to do fancy things to branch the logic here
+            // depending on
+            // the nullability, but at the end of the day we are going to call GetArguments(...) - at runtime
+            // the nullability
             // suppression operator doesn't come into play - so its not worth worrying about.
             sb.Append(
                 $"ic.GetArgument<{EmitUnwrappedParameterType(endpoint.Parameters[i])}>({i})!"

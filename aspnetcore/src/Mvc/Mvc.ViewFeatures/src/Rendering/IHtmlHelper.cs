@@ -14,9 +14,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering;
 public interface IHtmlHelper
 {
     /// <summary>
-    /// Set this property to <see cref="Html5DateRenderingMode.CurrentCulture" /> to have templated helpers such as
+    /// Set this property to <see cref="Html5DateRenderingMode.CurrentCulture" /> to have templated
+    // helpers such as
     /// <see cref="Editor" /> and <see cref="IHtmlHelper{TModel}.EditorFor" /> render date and time
-    /// values using the current culture. By default, these helpers render dates and times as RFC 3339 compliant strings.
+    /// values using the current culture. By default, these helpers render dates and times as RFC 3339
+    // compliant strings.
     /// </summary>
     Html5DateRenderingMode Html5DateRenderingMode { get; set; }
 
@@ -61,12 +63,15 @@ public interface IHtmlHelper
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="actionName">The name of the action.</param>
     /// <param name="controllerName">The name of the controller.</param>
-    /// <param name="protocol">The protocol for the URL, such as &quot;http&quot; or &quot;https&quot;.</param>
+    /// <param name="protocol">The protocol for the URL, such as &quot;http&quot; or
+    // &quot;https&quot;.</param>
     /// <param name="hostname">The host name for the URL.</param>
     /// <param name="fragment">The URL fragment name (the anchor name).</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the route parameters.
     /// </param>
@@ -94,21 +99,25 @@ public interface IHtmlHelper
     IHtmlContent AntiForgeryToken();
 
     /// <summary>
-    /// Renders a &lt;form&gt; start tag to the response. When the user submits the form, the action with name
+    /// Renders a &lt;form&gt; start tag to the response. When the user submits the form, the action
+    // with name
     /// <paramref name="actionName"/> will process the request.
     /// </summary>
     /// <param name="actionName">The name of the action method.</param>
     /// <param name="controllerName">The name of the controller.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the route parameters.
     /// </param>
     /// <param name="method">The HTTP method for processing the form, either GET or POST.</param>
     /// <param name="antiforgery">
     /// If <c>true</c>, &lt;form&gt; elements will include an antiforgery token.
-    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery token.
+    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery
+    // token.
     /// If <c>null</c>, &lt;form&gt; elements will include an antiforgery token only if
     /// <paramref name="method"/> is not <see cref="FormMethod.Get"/>.
     /// </param>
@@ -120,7 +129,8 @@ public interface IHtmlHelper
     /// An <see cref="MvcForm"/> instance which renders the &lt;/form&gt; end tag when disposed.
     /// </returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     MvcForm BeginForm(
         string actionName,
@@ -132,20 +142,24 @@ public interface IHtmlHelper
     );
 
     /// <summary>
-    /// Renders a &lt;form&gt; start tag to the response. The route with name <paramref name="routeName"/>
+    /// Renders a &lt;form&gt; start tag to the response. The route with name <paramref
+    // name="routeName"/>
     /// generates the &lt;form&gt;'s <c>action</c> attribute value.
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the route parameters.
     /// </param>
     /// <param name="method">The HTTP method for processing the form, either GET or POST.</param>
     /// <param name="antiforgery">
     /// If <c>true</c>, &lt;form&gt; elements will include an antiforgery token.
-    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery token.
+    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery
+    // token.
     /// If <c>null</c>, &lt;form&gt; elements will include an antiforgery token only if
     /// <paramref name="method"/> is not <see cref="FormMethod.Get"/>.
     /// </param>
@@ -157,7 +171,8 @@ public interface IHtmlHelper
     /// An <see cref="MvcForm"/> instance which renders the &lt;/form&gt; end tag when disposed.
     /// </returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     MvcForm BeginRouteForm(
         string routeName,
@@ -168,14 +183,17 @@ public interface IHtmlHelper
     );
 
     /// <summary>
-    /// Returns an &lt;input&gt; element of type "checkbox" with value "true" and an &lt;input&gt; element of type
-    /// "hidden" with value "false" for the specified <paramref name="expression"/>. Adds a "checked" attribute to
+    /// Returns an &lt;input&gt; element of type "checkbox" with value "true" and an &lt;input&gt;
+    // element of type
+    /// "hidden" with value "false" for the specified <paramref name="expression"/>. Adds a "checked"
+    // attribute to
     /// the "checkbox" element based on the first non-<c>null</c> value found in:
     /// the <paramref name="htmlAttributes"/> dictionary entry with key "checked",
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
     /// the <see cref="ViewData"/> entry with full name, or
     /// the <paramref name="expression"/> evaluated against <see cref="ViewDataDictionary.Model"/>.
-    /// If <paramref name="isChecked"/> is non-<c>null</c>, instead uses the first non-<c>null</c> value found in:
+    /// If <paramref name="isChecked"/> is non-<c>null</c>, instead uses the first non-<c>null</c> value
+    // found in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name, or
     /// the <paramref name="isChecked"/> parameter.
     /// See <see cref="Name"/> for more information about a "full name".
@@ -183,20 +201,25 @@ public interface IHtmlHelper
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="isChecked">If <c>true</c>, checkbox is initially checked.</param>
     /// <param name="htmlAttributes">
-    /// An <see cref="object"/> that contains the HTML attributes for the checkbox element. Alternatively, an
+    /// An <see cref="object"/> that contains the HTML attributes for the checkbox element.
+    // Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the HTML attributes.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;input&gt; elements.</returns>
     /// <remarks>
-    /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set checkbox
-    /// element's "name" attribute. Sanitizes <paramref name="expression"/> to set checkbox element's "id"
+    /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
+    // checkbox
+    /// element's "name" attribute. Sanitizes <paramref name="expression"/> to set checkbox element's
+    // "id"
     /// attribute.
     /// </remarks>
     IHtmlContent CheckBox(string expression, bool? isChecked, object htmlAttributes);
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using a display template, specified HTML field
-    /// name, and additional view data. The template is found using the <paramref name="templateName"/> or the
+    /// Returns HTML markup for the <paramref name="expression"/>, using a display template, specified
+    // HTML field
+    /// name, and additional view data. The template is found using the <paramref name="templateName"/>
+    // or the
     /// <paramref name="expression"/>'s <see cref="ModelMetadata"/>.
     /// </summary>
     /// <param name="expression">
@@ -209,22 +232,27 @@ public interface IHtmlHelper
     /// properties that have the same name.
     /// </param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="IDictionary{String, Object}"/> that can contain additional
-    /// view data that will be merged into the <see cref="ViewDataDictionary{TModel}"/> instance created for the
+    /// An anonymous <see cref="object"/> or <see cref="IDictionary{String, Object}"/> that can contain
+    // additional
+    /// view data that will be merged into the <see cref="ViewDataDictionary{TModel}"/> instance created
+    // for the
     /// template.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the created HTML.</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> display template includes markup for each property in the
+    /// For example the default <see cref="object"/> display template includes markup for each property
+    // in the
     /// <paramref name="expression"/>'s value.
     /// </para>
     /// <para>
-    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current model and
+    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current
+    // model and
     /// <c>"prop"</c> which identifies the current model's "prop" property.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -253,32 +281,40 @@ public interface IHtmlHelper
     string DisplayText(string expression);
 
     /// <summary>
-    /// Returns a single-selection HTML &lt;select&gt; element for the <paramref name="expression"/>. Adds
-    /// &lt;option&gt; elements based on <paramref name="optionLabel"/> and <paramref name="selectList"/>. Adds a
-    /// "selected" attribute to an &lt;option&gt; if its <see cref="SelectListItem.Value"/> (if non-<c>null</c>) or
+    /// Returns a single-selection HTML &lt;select&gt; element for the <paramref name="expression"/>.
+    // Adds
+    /// &lt;option&gt; elements based on <paramref name="optionLabel"/> and <paramref
+    // name="selectList"/>. Adds a
+    /// "selected" attribute to an &lt;option&gt; if its <see cref="SelectListItem.Value"/> (if
+    // non-<c>null</c>) or
     /// <see cref="SelectListItem.Text"/> matches the first non-<c>null</c> value found in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
-    /// the <see cref="ViewData"/> entry with full name (unless used instead of <paramref name="selectList"/>), or
+    /// the <see cref="ViewData"/> entry with full name (unless used instead of <paramref
+    // name="selectList"/>), or
     /// the <paramref name="expression"/> evaluated against <see cref="ViewDataDictionary.Model"/>.
     /// See <see cref="Name"/> for more information about a "full name".
     /// </summary>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="selectList">
-    /// A collection of <see cref="SelectListItem"/> objects used to populate the &lt;select&gt; element with
-    /// &lt;optgroup&gt; and &lt;option&gt; elements. If <c>null</c>, uses the <see cref="ViewData"/> entry with
+    /// A collection of <see cref="SelectListItem"/> objects used to populate the &lt;select&gt; element
+    // with
+    /// &lt;optgroup&gt; and &lt;option&gt; elements. If <c>null</c>, uses the <see cref="ViewData"/>
+    // entry with
     /// full name and that entry must be a collection of <see cref="SelectListItem"/> objects.
     /// </param>
     /// <param name="optionLabel">
     /// The text for a default empty item. Does not include such an item if argument is <c>null</c>.
     /// </param>
     /// <param name="htmlAttributes">
-    /// An <see cref="object"/> that contains the HTML attributes for the &lt;select&gt; element. Alternatively, an
+    /// An <see cref="object"/> that contains the HTML attributes for the &lt;select&gt; element.
+    // Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the HTML attributes.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;select&gt; element.</returns>
     /// <remarks>
     /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
-    /// &lt;select&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
+    /// &lt;select&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set
+    // element's "id"
     /// attribute.
     /// </remarks>
     IHtmlContent DropDownList(
@@ -289,8 +325,10 @@ public interface IHtmlHelper
     );
 
     /// <summary>
-    /// Returns HTML markup for the <paramref name="expression"/>, using an editor template, specified HTML field
-    /// name, and additional view data. The template is found using the <paramref name="templateName"/> or the
+    /// Returns HTML markup for the <paramref name="expression"/>, using an editor template, specified
+    // HTML field
+    /// name, and additional view data. The template is found using the <paramref name="templateName"/>
+    // or the
     /// <paramref name="expression"/>'s <see cref="ModelMetadata"/>.
     /// </summary>
     /// <param name="expression">
@@ -303,22 +341,27 @@ public interface IHtmlHelper
     /// properties that have the same name.
     /// </param>
     /// <param name="additionalViewData">
-    /// An anonymous <see cref="object"/> or <see cref="IDictionary{String, Object}"/> that can contain additional
-    /// view data that will be merged into the <see cref="ViewDataDictionary{TModel}"/> instance created for the
+    /// An anonymous <see cref="object"/> or <see cref="IDictionary{String, Object}"/> that can contain
+    // additional
+    /// view data that will be merged into the <see cref="ViewDataDictionary{TModel}"/> instance created
+    // for the
     /// template.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;input&gt; element(s).</returns>
     /// <remarks>
     /// <para>
-    /// For example the default <see cref="object"/> editor template includes &lt;label&gt; and &lt;input&gt;
+    /// For example the default <see cref="object"/> editor template includes &lt;label&gt; and
+    // &lt;input&gt;
     /// elements for each property in the <paramref name="expression"/>'s value.
     /// </para>
     /// <para>
-    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current model and
+    /// Example <paramref name="expression"/>s include <c>string.Empty</c> which identifies the current
+    // model and
     /// <c>"prop"</c> which identifies the current model's "prop" property.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>EditorTemplates</c> folder. The folder name is case-sensitive on
+    /// Custom templates are found under a <c>EditorTemplates</c> folder. The folder name is
+    // case-sensitive on
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
@@ -347,7 +390,8 @@ public interface IHtmlHelper
     /// Renders the &lt;/form&gt; end tag to the response.
     /// </summary>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     void EndForm();
 
@@ -356,7 +400,8 @@ public interface IHtmlHelper
     /// </summary>
     /// <param name="value">The value.</param>
     /// <param name="format">
-    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the return
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>)
+    // used to format the return
     /// value.
     /// </param>
     /// <returns>A <see cref="string"/> containing the formatted value.</returns>
@@ -408,7 +453,8 @@ public interface IHtmlHelper
     IEnumerable<SelectListItem> GetEnumSelectList(Type enumType);
 
     /// <summary>
-    /// Returns an &lt;input&gt; element of type "hidden" for the specified <paramref name="expression"/>. Adds a
+    /// Returns an &lt;input&gt; element of type "hidden" for the specified <paramref
+    // name="expression"/>. Adds a
     /// "value" attribute to the element containing the first non-<c>null</c> value found in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
     /// the <paramref name="value"/> parameter,
@@ -426,7 +472,8 @@ public interface IHtmlHelper
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;input&gt; element.</returns>
     /// <remarks>
     /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
-    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
+    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set
+    // element's "id"
     /// attribute.
     /// </remarks>
     IHtmlContent Hidden(string expression, object value, object htmlAttributes);
@@ -452,28 +499,35 @@ public interface IHtmlHelper
 
     /// <summary>
     /// Returns a multi-selection &lt;select&gt; element for the <paramref name="expression"/>. Adds
-    /// &lt;option&gt; elements based on <paramref name="selectList"/>. Adds a "selected" attribute to an
+    /// &lt;option&gt; elements based on <paramref name="selectList"/>. Adds a "selected" attribute to
+    // an
     /// &lt;option&gt; if its <see cref="SelectListItem.Value"/> (if non-<c>null</c>) or
-    /// <see cref="SelectListItem.Text"/> matches an entry in the first non-<c>null</c> collection found in:
+    /// <see cref="SelectListItem.Text"/> matches an entry in the first non-<c>null</c> collection found
+    // in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
-    /// the <see cref="ViewData"/> entry with full name (unless used instead of <paramref name="selectList"/>), or
+    /// the <see cref="ViewData"/> entry with full name (unless used instead of <paramref
+    // name="selectList"/>), or
     /// the <paramref name="expression"/> evaluated against <see cref="ViewDataDictionary.Model"/>.
     /// See <see cref="Name"/> for more information about a "full name".
     /// </summary>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="selectList">
-    /// A collection of <see cref="SelectListItem"/> objects used to populate the &lt;select&gt; element with
-    /// &lt;optgroup&gt; and &lt;option&gt; elements. If <c>null</c>, finds the <see cref="SelectListItem"/>
+    /// A collection of <see cref="SelectListItem"/> objects used to populate the &lt;select&gt; element
+    // with
+    /// &lt;optgroup&gt; and &lt;option&gt; elements. If <c>null</c>, finds the <see
+    // cref="SelectListItem"/>
     /// collection with name <paramref name="expression"/> in <see cref="ViewData"/>.
     /// </param>
     /// <param name="htmlAttributes">
-    /// An <see cref="object"/> that contains the HTML attributes for the &lt;select&gt; element. Alternatively, an
+    /// An <see cref="object"/> that contains the HTML attributes for the &lt;select&gt; element.
+    // Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the HTML attributes.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;select&gt; element.</returns>
     /// <remarks>
     /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
-    /// &lt;select&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
+    /// &lt;select&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set
+    // element's "id"
     /// attribute.
     /// </remarks>
     IHtmlContent ListBox(
@@ -484,7 +538,8 @@ public interface IHtmlHelper
 
     /// <summary>
     /// Returns the full HTML element name for the specified <paramref name="expression"/>. Uses
-    /// <see cref="TemplateInfo.HtmlFieldPrefix"/> (if non-empty) to reflect relationship between current
+    /// <see cref="TemplateInfo.HtmlFieldPrefix"/> (if non-empty) to reflect relationship between
+    // current
     /// <see cref="ViewDataDictionary.Model"/> and the top-level view's model.
     /// </summary>
     /// <param name="expression">Expression name, relative to the current model.</param>
@@ -500,7 +555,8 @@ public interface IHtmlHelper
     /// <param name="model">A model to pass into the partial view.</param>
     /// <param name="viewData">A <see cref="ViewDataDictionary"/> to pass into the partial view.</param>
     /// <returns>
-    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance containing
+    /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance
+    // containing
     /// the created HTML.
     /// </returns>
     Task<IHtmlContent> PartialAsync(
@@ -510,7 +566,8 @@ public interface IHtmlHelper
     );
 
     /// <summary>
-    /// Returns an &lt;input&gt; element of type "password" for the specified <paramref name="expression"/>. Adds a
+    /// Returns an &lt;input&gt; element of type "password" for the specified <paramref
+    // name="expression"/>. Adds a
     /// "value" attribute containing the first non-<c>null</c> value in:
     /// the <paramref name="value"/> parameter, or
     /// the <paramref name="htmlAttributes"/> dictionary entry with key "value".
@@ -524,23 +581,27 @@ public interface IHtmlHelper
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;input&gt; element.</returns>
     /// <remarks>
     /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
-    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
+    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set
+    // element's "id"
     /// attribute.
     /// </remarks>
     IHtmlContent Password(string expression, object value, object htmlAttributes);
 
     /// <summary>
-    /// Returns an &lt;input&gt; element of type "radio" for the specified <paramref name="expression"/>.
+    /// Returns an &lt;input&gt; element of type "radio" for the specified <paramref
+    // name="expression"/>.
     /// Adds a "value" attribute to the element containing the first non-<c>null</c> value found in:
     /// the <paramref name="value"/> parameter, or
     /// the <paramref name="htmlAttributes"/> dictionary entry with key "value".
-    /// Adds a "checked" attribute to the element if <paramref name="value"/> matches the first non-<c>null</c>
+    /// Adds a "checked" attribute to the element if <paramref name="value"/> matches the first
+    // non-<c>null</c>
     /// value found in:
     /// the <paramref name="htmlAttributes"/> dictionary entry with key "checked",
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
     /// the <see cref="ViewData"/> entry with full name, or
     /// the <paramref name="expression"/> evaluated against <see cref="ViewDataDictionary.Model"/>.
-    /// If <paramref name="isChecked"/> is non-<c>null</c>, instead uses the first non-<c>null</c> value found in:
+    /// If <paramref name="isChecked"/> is non-<c>null</c>, instead uses the first non-<c>null</c> value
+    // found in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name, or
     /// the <paramref name="isChecked"/> parameter.
     /// See <see cref="Name"/> for more information about a "full name".
@@ -563,7 +624,8 @@ public interface IHtmlHelper
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;input&gt; element.</returns>
     /// <remarks>
     /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
-    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
+    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set
+    // element's "id"
     /// attribute.
     /// </remarks>
     IHtmlContent RadioButton(
@@ -599,7 +661,8 @@ public interface IHtmlHelper
     /// <param name="viewData">A <see cref="ViewDataDictionary"/> to pass into the partial view.</param>
     /// <returns>A <see cref="Task"/> that renders the created HTML when it executes.</returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     Task RenderPartialAsync(string partialViewName, object model, ViewDataDictionary viewData);
 
@@ -608,12 +671,15 @@ public interface IHtmlHelper
     /// </summary>
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="routeName">The name of the route.</param>
-    /// <param name="protocol">The protocol for the URL, such as &quot;http&quot; or &quot;https&quot;.</param>
+    /// <param name="protocol">The protocol for the URL, such as &quot;http&quot; or
+    // &quot;https&quot;.</param>
     /// <param name="hostName">The host name for the URL.</param>
     /// <param name="fragment">The URL fragment name (the anchor name).</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the route parameters.
     /// </param>
@@ -633,7 +699,8 @@ public interface IHtmlHelper
     );
 
     /// <summary>
-    /// Returns a &lt;textarea&gt; element for the specified <paramref name="expression"/>. Adds content to the
+    /// Returns a &lt;textarea&gt; element for the specified <paramref name="expression"/>. Adds content
+    // to the
     /// element body based on the first non-<c>null</c> value found in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
     /// the <paramref name="value"/> parameter,
@@ -652,7 +719,8 @@ public interface IHtmlHelper
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;textarea&gt; element.</returns>
     /// <remarks>
     /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
-    /// &lt;textarea&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
+    /// &lt;textarea&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set
+    // element's "id"
     /// attribute.
     /// </remarks>
     IHtmlContent TextArea(
@@ -664,7 +732,8 @@ public interface IHtmlHelper
     );
 
     /// <summary>
-    /// Returns an &lt;input&gt; element of type "text" for the specified <paramref name="expression"/>. Adds a
+    /// Returns an &lt;input&gt; element of type "text" for the specified <paramref name="expression"/>.
+    // Adds a
     /// "value" attribute to the element containing the first non-<c>null</c> value found in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
     /// the <paramref name="value"/> parameter,
@@ -676,7 +745,8 @@ public interface IHtmlHelper
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="value">If non-<c>null</c>, value to include in the element.</param>
     /// <param name="format">
-    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the "value"
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>)
+    // used to format the "value"
     /// attribute unless that came from model binding.
     /// </param>
     /// <param name="htmlAttributes">
@@ -686,24 +756,29 @@ public interface IHtmlHelper
     /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;input&gt; element.</returns>
     /// <remarks>
     /// Combines <see cref="TemplateInfo.HtmlFieldPrefix"/> and <paramref name="expression"/> to set
-    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
+    /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set
+    // element's "id"
     /// attribute.
     /// </remarks>
     IHtmlContent TextBox(string expression, object value, string format, object htmlAttributes);
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelStateDictionary"/> object
+    /// Returns the validation message if an error exists in the <see cref="ModelStateDictionary"/>
+    // object
     /// for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="message">
     /// The message to be displayed. If <c>null</c> or empty, method extracts an error string from the
-    /// <see cref="ModelStateDictionary"/> object. Message will always be visible but client-side validation may
+    /// <see cref="ModelStateDictionary"/> object. Message will always be visible but client-side
+    // validation may
     /// update the associated CSS class.
     /// </param>
     /// <param name="htmlAttributes">
-    /// An <see cref="object"/> that contains the HTML attributes for the <paramref name="tag"/> element.
-    /// Alternatively, an <see cref="IDictionary{String, Object}"/> instance containing the HTML attributes.
+    /// An <see cref="object"/> that contains the HTML attributes for the <paramref name="tag"/>
+    // element.
+    /// Alternatively, an <see cref="IDictionary{String, Object}"/> instance containing the HTML
+    // attributes.
     /// </param>
     /// <param name="tag">
     /// The tag to wrap the <paramref name="message"/> in the generated HTML. Its default value is
@@ -711,7 +786,8 @@ public interface IHtmlHelper
     /// </param>
     /// <returns>
     /// A new <see cref="IHtmlContent"/> containing a <paramref name="tag"/> element. An empty
-    /// <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side validation is
+    /// <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    // validation is
     /// disabled.
     /// </returns>
     IHtmlContent ValidationMessage(
@@ -731,15 +807,18 @@ public interface IHtmlHelper
     /// <param name="message">The message to display with the validation summary.</param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the topmost (&lt;div&gt;) element.
-    /// Alternatively, an <see cref="IDictionary{String, Object}"/> instance containing the HTML attributes.
+    /// Alternatively, an <see cref="IDictionary{String, Object}"/> instance containing the HTML
+    // attributes.
     /// </param>
     /// <param name="tag">
     /// The tag to wrap the <paramref name="message"/> in the generated HTML. Its default value is
     /// <see cref="ViewContext.ValidationSummaryMessageElement" />.
     /// </param>
     /// <returns>
-    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref name="tag"/> element
-    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid and
+    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref
+    // name="tag"/> element
+    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid
+    // and
     /// client-side validation is disabled.
     /// </returns>
     IHtmlContent ValidationSummary(
@@ -750,7 +829,8 @@ public interface IHtmlHelper
     );
 
     /// <summary>
-    /// Returns the formatted value for the specified <paramref name="expression"/>. Specifically, returns the
+    /// Returns the formatted value for the specified <paramref name="expression"/>. Specifically,
+    // returns the
     /// first non-<c>null</c> value found in:
     /// the <see cref="ActionContext.ModelState"/> entry with full name,
     /// the <see cref="ViewData"/> entry with full name, or
@@ -759,7 +839,8 @@ public interface IHtmlHelper
     /// </summary>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="format">
-    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the return
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>)
+    // used to format the return
     /// value unless that came from model binding.
     /// </param>
     /// <returns>A <see cref="string"/> containing the formatted value.</returns>

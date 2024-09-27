@@ -158,7 +158,8 @@ internal class DirectoryNode
             // ParentDirectory.Path -> /Views/Home/
             // CurrentDirectory.Path -> /Views/Home/SubDir/
             // Path -> /Views/Home/SubDir/MorePath/File.cshtml
-            // Each invocation of FindSubDirectory returns the immediate subdirectory along the path to the file.
+            // Each invocation of FindSubDirectory returns the immediate subdirectory along the path to the
+            // file.
 
             var currentDirectory = parentDirectory.Directories[i];
             var directoryPath = currentDirectory.Path;

@@ -13,7 +13,8 @@ namespace ILCompiler.Logging
         ///  A visitor that generates the part of the documentation comment after the initial type
         ///  and colon.
         ///  Adapted from Roslyn's DocumentattionCommentIDVisitor.PartVisitor:
-        ///  https://github.com/dotnet/roslyn/blob/master/src/Compilers/CSharp/Portable/DocumentationComments/DocumentationCommentIDVisitor.PartVisitor.cs
+        ///
+        // https://github.com/dotnet/roslyn/blob/master/src/Compilers/CSharp/Portable/DocumentationComments/DocumentationCommentIDVisitor.PartVisitor.cs
         /// </summary>
         public sealed class PartVisitor : TypeNameFormatter
         {
@@ -241,7 +242,8 @@ namespace ILCompiler.Logging
                 if (containingType is null)
                     return null;
 
-                // If the type doesn't follow C# scheme where nested types inherit generic parameters from their container type
+                // If the type doesn't follow C# scheme where nested types inherit generic parameters from their
+                // container type
                 // return the container type as-is.
                 if (
                     !containingType.HasInstantiation

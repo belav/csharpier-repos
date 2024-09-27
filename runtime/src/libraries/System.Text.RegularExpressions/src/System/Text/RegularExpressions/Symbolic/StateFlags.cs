@@ -6,10 +6,14 @@ using System.Runtime.CompilerServices;
 namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>
-    /// These flags provide context-independent information available for every state. They provide a fast way to evaluate
-    /// conditions in the inner matching loops of <see cref="SymbolicRegexMatcher{TSet}"/>. The matcher caches one of these
-    /// for every state, for which they are created by <see cref="MatchingState{TSet}.BuildStateFlags(ISolver{TSet}, bool)"/>.
-    /// In DFA mode the cached flags are used directly, while in NFA mode the <see cref="SymbolicRegexMatcher{TSet}.NfaStateHandler"/>
+    /// These flags provide context-independent information available for every state. They provide a
+    // fast way to evaluate
+    /// conditions in the inner matching loops of <see cref="SymbolicRegexMatcher{TSet}"/>. The matcher
+    // caches one of these
+    /// for every state, for which they are created by <see
+    // cref="MatchingState{TSet}.BuildStateFlags(ISolver{TSet}, bool)"/>.
+    /// In DFA mode the cached flags are used directly, while in NFA mode the <see
+    // cref="SymbolicRegexMatcher{TSet}.NfaStateHandler"/>
     /// handles aggregating the flags in the state set.
     /// </summary>
     [Flags]
@@ -23,7 +27,8 @@ namespace System.Text.RegularExpressions.Symbolic
     }
 
     /// <summary>
-    /// These extension methods for <see cref="StateFlags"/> make checking for the presence of flags more concise.
+    /// These extension methods for <see cref="StateFlags"/> make checking for the presence of flags
+    // more concise.
     /// </summary>
     internal static class StateFlagsExtensions
     {

@@ -10,7 +10,8 @@ namespace System.ComponentModel
     public sealed class InitializationEventAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.InitializationEventAttribute'/> class.
+        /// Initializes a new instance of the <see
+        // cref='System.ComponentModel.InitializationEventAttribute'/> class.
         /// </summary>
         public InitializationEventAttribute(string eventName)
         {

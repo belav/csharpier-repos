@@ -25,12 +25,15 @@ public class PolicyEvaluator : IPolicyEvaluator
     }
 
     /// <summary>
-    /// Does authentication for <see cref="AuthorizationPolicy.AuthenticationSchemes"/> and sets the resulting
-    /// <see cref="ClaimsPrincipal"/> to <see cref="HttpContext.User"/>.  If no schemes are set, this is a no-op.
+    /// Does authentication for <see cref="AuthorizationPolicy.AuthenticationSchemes"/> and sets the
+    // resulting
+    /// <see cref="ClaimsPrincipal"/> to <see cref="HttpContext.User"/>.  If no schemes are set, this is
+    // a no-op.
     /// </summary>
     /// <param name="policy">The <see cref="AuthorizationPolicy"/>.</param>
     /// <param name="context">The <see cref="HttpContext"/>.</param>
-    /// <returns><see cref="AuthenticateResult.Success"/> unless all schemes specified by <see cref="AuthorizationPolicy.AuthenticationSchemes"/> failed to authenticate.  </returns>
+    /// <returns><see cref="AuthenticateResult.Success"/> unless all schemes specified by <see
+    // cref="AuthorizationPolicy.AuthenticationSchemes"/> failed to authenticate.  </returns>
     public virtual async Task<AuthenticateResult> AuthenticateAsync(
         AuthorizationPolicy policy,
         HttpContext context
@@ -92,14 +95,16 @@ public class PolicyEvaluator : IPolicyEvaluator
     /// Attempts authorization for a policy using <see cref="IAuthorizationService"/>.
     /// </summary>
     /// <param name="policy">The <see cref="AuthorizationPolicy"/>.</param>
-    /// <param name="authenticationResult">The result of a call to <see cref="AuthenticateAsync(AuthorizationPolicy, HttpContext)"/>.</param>
+    /// <param name="authenticationResult">The result of a call to <see
+    // cref="AuthenticateAsync(AuthorizationPolicy, HttpContext)"/>.</param>
     /// <param name="context">The <see cref="HttpContext"/>.</param>
     /// <param name="resource">
     /// An optional resource the policy should be checked with.
     /// If a resource is not required for policy evaluation you may pass null as the value.
     /// </param>
     /// <returns>Returns <see cref="PolicyAuthorizationResult.Success"/> if authorization succeeds.
-    /// Otherwise returns <see cref="PolicyAuthorizationResult.Forbid(AuthorizationFailure)"/> if <see cref="AuthenticateResult.Succeeded"/>, otherwise
+    /// Otherwise returns <see cref="PolicyAuthorizationResult.Forbid(AuthorizationFailure)"/> if <see
+    // cref="AuthenticateResult.Succeeded"/>, otherwise
     /// returns  <see cref="PolicyAuthorizationResult.Challenge"/></returns>
     public virtual async Task<PolicyAuthorizationResult> AuthorizeAsync(
         AuthorizationPolicy policy,

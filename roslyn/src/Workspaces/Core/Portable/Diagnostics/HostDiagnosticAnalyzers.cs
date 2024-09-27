@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly ImmutableDictionary<object, AnalyzerReference> _hostAnalyzerReferencesMap;
 
         /// <summary>
-        /// Key is the language the <see cref="DiagnosticAnalyzer"/> supports and key for the second map is analyzer reference identity and
+        /// Key is the language the <see cref="DiagnosticAnalyzer"/> supports and key for the second map is
+        // analyzer reference identity and
         /// <see cref="DiagnosticAnalyzer"/> for that assembly reference.
         ///
         /// Entry will be lazily filled in.
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Key is <see cref="AnalyzerReference.Id"/>.
         ///
-        /// Value is set of <see cref="DiagnosticAnalyzer"/> that belong to the <see cref="AnalyzerReference"/>.
+        /// Value is set of <see cref="DiagnosticAnalyzer"/> that belong to the <see
+        // cref="AnalyzerReference"/>.
         ///
         /// We populate it lazily. otherwise, we will bring in all analyzers preemptively
         /// </summary>
@@ -50,11 +52,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ImmutableDictionary<string, DiagnosticAnalyzer> _compilerDiagnosticAnalyzerMap;
 
         /// <summary>
-        /// Maps list of analyzer references and <see cref="LanguageNames"/> to <see cref="SkippedHostAnalyzersInfo"/>.
+        /// Maps list of analyzer references and <see cref="LanguageNames"/> to <see
+        // cref="SkippedHostAnalyzersInfo"/>.
         /// </summary>
         /// <remarks>
         /// TODO: https://github.com/dotnet/roslyn/issues/42848
-        /// It is quite common for multiple projects to have the same set of analyzer references, yet we will create
+        /// It is quite common for multiple projects to have the same set of analyzer references, yet we
+        // will create
         /// multiple instances of the analyzer list and thus not share the info.
         /// </remarks>
         private readonly ConditionalWeakTable<
@@ -86,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public IReadOnlyList<AnalyzerReference> HostAnalyzerReferences { get; }
 
         /// <summary>
-        /// Get <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for given <paramref name="language"/>
+        /// Get <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for given
+        // <paramref name="language"/>
         /// </summary>
         public ImmutableDictionary<
             object,
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Create <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for given <paramref name="project"/> that
+        /// Create <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for
+        // given <paramref name="project"/> that
         /// includes both host and project analyzers
         /// </summary>
         public ImmutableDictionary<
@@ -188,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Create <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for given <paramref name="project"/> that
+        /// Create <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for
+        // given <paramref name="project"/> that
         /// has only project analyzers
         /// </summary>
         public ImmutableDictionary<
@@ -328,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ImmutableArray<DiagnosticAnalyzer>
             >();
 
-            // Randomize the order we process analyzer references to minimize static constructor/JIT contention during analyzer instantiation.
+            // Randomize the order we process analyzer references to minimize static constructor/JIT contention
+            // during analyzer instantiation.
             foreach (var reference in Shuffle(analyzerReferencesMap))
             {
                 var analyzers =

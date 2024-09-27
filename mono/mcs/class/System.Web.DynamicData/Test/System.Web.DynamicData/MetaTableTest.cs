@@ -448,7 +448,8 @@ namespace MonoTests.System.Web.DynamicData
             var dataList = new List<object>();
             dataList.Add("first item");
 
-            // Yet another lack of parameter checking - the number of items passed in the dataList must be at least equal
+            // Yet another lack of parameter checking - the number of items passed in the dataList must be at
+            // least equal
             // to the number of columns in the PrimaryKeyColumns collection
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => t.GetActionPath(PageAction.Details, dataList),
@@ -678,7 +679,8 @@ namespace MonoTests.System.Web.DynamicData
             var dataList = new List<object>();
             dataList.Add("first item");
 
-            // Yet another lack of parameter checking - the number of items passed in the dataList must be at least equal
+            // Yet another lack of parameter checking - the number of items passed in the dataList must be at
+            // least equal
             // to the number of columns in the PrimaryKeyColumns collection
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => t.GetActionPath(PageAction.Details, dataList),

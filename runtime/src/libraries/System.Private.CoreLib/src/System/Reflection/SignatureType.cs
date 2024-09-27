@@ -9,9 +9,12 @@ using System.Runtime.InteropServices;
 namespace System.Reflection
 {
     //
-    // Signature Types are highly restricted Type objects that can be passed in the Type[] parameter to Type.GetMethod(). Their primary
-    // use is to pass types representing generic parameters defined by the method, or types composed from them. Passing in the normal
-    // generic parameter Type obtained from MethodInfo.GetGenericArguments() is usually impractical (if you had the method, you wouldn't
+    // Signature Types are highly restricted Type objects that can be passed in the Type[] parameter to
+    // Type.GetMethod(). Their primary
+    // use is to pass types representing generic parameters defined by the method, or types composed
+    // from them. Passing in the normal
+    // generic parameter Type obtained from MethodInfo.GetGenericArguments() is usually impractical (if
+    // you had the method, you wouldn't
     // be looking for it!)
     //
     internal abstract class SignatureType : Type

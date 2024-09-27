@@ -30,7 +30,8 @@ namespace RunTests
                     Filters.Keys.Select(a => Path.GetFileNameWithoutExtension(a.AssemblyName))
                 );
 
-                // Currently some helix APIs don't work when the work item friendly name is more than 200 characters.
+                // Currently some helix APIs don't work when the work item friendly name is more than 200
+                // characters.
                 // Until that is fixed we manually truncate the name ourselves to a reasonable limit.
                 // https://github.com/dotnet/arcade/issues/11079
                 assembliesString =
@@ -45,7 +46,8 @@ namespace RunTests
     internal sealed class AssemblyScheduler
     {
         /// <summary>
-        /// We attempt to partition our tests into work items that execute in under 2 minutes 30s.  This is a derived limit based on a goal of running all tests
+        /// We attempt to partition our tests into work items that execute in under 2 minutes 30s.  This is
+        // a derived limit based on a goal of running all tests
         /// in under 5 minutes.  However because of overhead in setting up the test run, e.g.
         ///   1.  Test discovery.
         ///   2.  Downloading assets to the helix machine.
@@ -56,7 +58,8 @@ namespace RunTests
         private static readonly TimeSpan s_maxExecutionTime = TimeSpan.FromSeconds(150);
 
         /// <summary>
-        /// If we were unable to find the test execution history, we fall back to partitioning by just method count.
+        /// If we were unable to find the test execution history, we fall back to partitioning by just
+        // method count.
         /// </summary>
         private static readonly int s_maxMethodCount = 500;
 
@@ -112,13 +115,17 @@ namespace RunTests
                 return workItemsByMethodCount;
             }
 
-            // Now for our current set of test methods we got from the assemblies we built, match them to tests from our test run history
+            // Now for our current set of test methods we got from the assemblies we built, match them to tests
+            // from our test run history
             // so that we can extract an estimate of the test execution time for each test.
             orderedTypeInfos = UpdateTestsWithExecutionTimes(orderedTypeInfos, testHistory);
 
-            // Create work items by partitioning tests by historical execution time with the goal of running under our time limit.
-            // While we do our best to run tests from the same assembly together (by building work items in assembly order) it is expected
-            // that some work items will run tests from multiple assemblies due to large variances in test execution time.
+            // Create work items by partitioning tests by historical execution time with the goal of running
+            // under our time limit.
+            // While we do our best to run tests from the same assembly together (by building work items in
+            // assembly order) it is expected
+            // that some work items will run tests from multiple assemblies due to large variances in test
+            // execution time.
             var workItems = BuildWorkItems<TimeSpan>(
                 orderedTypeInfos,
                 isOverLimitFunc: (accumulatedExecutionTime) =>
@@ -156,7 +163,8 @@ namespace RunTests
             ImmutableDictionary<string, TimeSpan> testHistory
         )
         {
-            // Determine the average execution time so that we can use it for tests that do not have any history.
+            // Determine the average execution time so that we can use it for tests that do not have any
+            // history.
             var averageExecutionTime = TimeSpan.FromMilliseconds(
                 testHistory.Values.Average(t => t.TotalMilliseconds)
             );
@@ -164,7 +172,8 @@ namespace RunTests
             // Store the tests we found locally that were missing remote historical data.
             var unmatchedLocalTests = new HashSet<string>();
 
-            // Store the tests we found in the remote historical data so we can report any we didn't find locally.
+            // Store the tests we found in the remote historical data so we can report any we didn't find
+            // locally.
             var matchedRemoteTests = new HashSet<string>();
 
             var updated = assemblyTypes.ToImmutableSortedDictionary(
@@ -184,8 +193,10 @@ namespace RunTests
             TestMethodInfo WithTestExecutionTime(TestMethodInfo methodInfo)
             {
                 // Match by fully qualified test method name to azure devops historical data.
-                // Note for combinatorial tests, azure devops helpfully groups all sub-runs under a top level method (with combined test run times) with the same fully qualified method name
-                // that we get during test discovery.  Since we only filter by the single method name (and not individual combinatorial runs) we do want the combined execution time.
+                // Note for combinatorial tests, azure devops helpfully groups all sub-runs under a top level method
+                // (with combined test run times) with the same fully qualified method name
+                // that we get during test discovery.  Since we only filter by the single method name (and not
+                // individual combinatorial runs) we do want the combined execution time.
                 if (testHistory.TryGetValue(methodInfo.FullyQualifiedName, out var executionTime))
                 {
                     matchedRemoteTests.Add(methodInfo.FullyQualifiedName);
@@ -193,7 +204,8 @@ namespace RunTests
                 }
 
                 // We didn't find the local type from our assembly in test run historical data.
-                // This usually occurs when tests have been added in between the last passing branch run and this PR.
+                // This usually occurs when tests have been added in between the last passing branch run and this
+                // PR.
                 unmatchedLocalTests.Add(methodInfo.FullyQualifiedName);
                 return methodInfo with { ExecutionTime = averageExecutionTime };
             }
@@ -253,7 +265,8 @@ namespace RunTests
             // Keep track of the types we're planning to add to the current work item.
             var currentFilters = new SortedDictionary<AssemblyInfo, List<TestMethodInfo>>();
 
-            // First find any assemblies we need to run in single assembly work items (due to state sharing concerns).
+            // First find any assemblies we need to run in single assembly work items (due to state sharing
+            // concerns).
             var singlePartitionAssemblies = typeInfos.Where(kvp =>
                 ShouldPartitionInSingleWorkItem(kvp.Key.AssemblyPath)
             );
@@ -351,7 +364,8 @@ namespace RunTests
                 );
                 if (totalExecutionTime > s_maxExecutionTime)
                 {
-                    // Log a warning to the console with work item details when we were not able to partition in under our limit.
+                    // Log a warning to the console with work item details when we were not able to partition in under
+                    // our limit.
                     // This can happen when a single specific test exceeds our execution time limit.
                     ConsoleUtil.Warning(
                         $"Work item {workItem.PartitionIndex} estimated execution {totalExecutionTime} time exceeds max execution time {s_maxExecutionTime}."

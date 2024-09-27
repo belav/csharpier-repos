@@ -365,7 +365,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Returns true if the given raw (non-virtual) handle represents the same string as given ASCII string.
+        /// Returns true if the given raw (non-virtual) handle represents the same string as given ASCII
+        // string.
         /// </summary>
         internal bool EqualsRaw(StringHandle rawHandle, string asciiString)
         {
@@ -378,7 +379,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Returns the heap index of the given ASCII character or -1 if not found prior null terminator or end of heap.
+        /// Returns the heap index of the given ASCII character or -1 if not found prior null terminator or
+        // end of heap.
         /// </summary>
         internal int IndexOfRaw(int startIndex, char asciiChar)
         {
@@ -387,7 +389,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Returns true if the given raw (non-virtual) handle represents a string that starts with given ASCII prefix.
+        /// Returns true if the given raw (non-virtual) handle represents a string that starts with given
+        // ASCII prefix.
         /// </summary>
         internal bool StartsWithRaw(StringHandle rawHandle, string asciiPrefix)
         {
@@ -400,7 +403,8 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Equivalent to Array.BinarySearch, searches for given raw (non-virtual) handle in given array of ASCII strings.
+        /// Equivalent to Array.BinarySearch, searches for given raw (non-virtual) handle in given array of
+        // ASCII strings.
         /// </summary>
         internal int BinarySearchRaw(string[] asciiKeys, StringHandle rawHandle)
         {

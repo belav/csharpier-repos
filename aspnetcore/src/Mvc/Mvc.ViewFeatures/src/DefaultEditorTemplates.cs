@@ -64,7 +64,8 @@ internal static class DefaultEditorTemplates
         var enumerable = model as IEnumerable;
         if (enumerable == null)
         {
-            // Only way we could reach here is if user passed templateName: "Collection" to an Editor() overload.
+            // Only way we could reach here is if user passed templateName: "Collection" to an Editor()
+            // overload.
             throw new InvalidOperationException(
                 Resources.FormatTemplates_TypeMustImplementIEnumerable(
                     "Collection",
@@ -81,7 +82,8 @@ internal static class DefaultEditorTemplates
         var serviceProvider = htmlHelper.ViewContext.HttpContext.RequestServices;
         var metadataProvider = serviceProvider.GetRequiredService<IModelMetadataProvider>();
 
-        // Use typeof(string) instead of typeof(object) for IEnumerable collections. Neither type is Nullable<T>.
+        // Use typeof(string) instead of typeof(object) for IEnumerable collections. Neither type is
+        // Nullable<T>.
         if (elementMetadata.ModelType == typeof(object))
         {
             elementMetadata = metadataProvider.GetMetadataForType(typeof(string));

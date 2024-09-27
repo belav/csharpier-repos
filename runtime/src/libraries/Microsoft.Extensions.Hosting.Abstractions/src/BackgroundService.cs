@@ -24,12 +24,15 @@ namespace Microsoft.Extensions.Hosting
         public virtual Task? ExecuteTask => _executeTask;
 
         /// <summary>
-        /// This method is called when the <see cref="IHostedService"/> starts. The implementation should return a task that represents
+        /// This method is called when the <see cref="IHostedService"/> starts. The implementation should
+        // return a task that represents
         /// the lifetime of the long running operation(s) being performed.
         /// </summary>
-        /// <param name="stoppingToken">Triggered when <see cref="IHostedService.StopAsync(CancellationToken)"/> is called.</param>
+        /// <param name="stoppingToken">Triggered when <see
+        // cref="IHostedService.StopAsync(CancellationToken)"/> is called.</param>
         /// <returns>A <see cref="Task"/> that represents the long running operations.</returns>
-        /// <remarks>See <see href="https://docs.microsoft.com/dotnet/core/extensions/workers">Worker Services in .NET</see> for implementation guidelines.</remarks>
+        /// <remarks>See <see href="https://docs.microsoft.com/dotnet/core/extensions/workers">Worker
+        // Services in .NET</see> for implementation guidelines.</remarks>
         protected abstract Task ExecuteAsync(CancellationToken stoppingToken);
 
         /// <summary>
@@ -58,7 +61,8 @@ namespace Microsoft.Extensions.Hosting
         /// <summary>
         /// Triggered when the application host is performing a graceful shutdown.
         /// </summary>
-        /// <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
+        /// <param name="cancellationToken">Indicates that the shutdown process should no longer be
+        // graceful.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous Stop operation.</returns>
         public virtual async Task StopAsync(CancellationToken cancellationToken)
         {
@@ -86,7 +90,8 @@ namespace Microsoft.Extensions.Hosting
                     s => ((TaskCompletionSource<object>)s!).SetCanceled(),
                     tcs
                 );
-                // Do not await the _executeTask because cancelling it will throw an OperationCanceledException which we are explicitly ignoring
+                // Do not await the _executeTask because cancelling it will throw an OperationCanceledException
+                // which we are explicitly ignoring
                 await Task.WhenAny(_executeTask, tcs.Task).ConfigureAwait(false);
 #endif
             }

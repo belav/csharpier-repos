@@ -12,12 +12,15 @@ namespace System.IO.Ports.Tests
     [KnownFailure]
     public class StopBits_Property : PortsTest
     {
-        //The default ammount of time the a transfer should take at any given baud rate and stop bits combination.
-        //The bytes sent should be adjusted to take this ammount of time to transfer at the specified baud rate and stop bits combination.
+        //The default ammount of time the a transfer should take at any given baud rate and stop bits
+        // combination.
+        //The bytes sent should be adjusted to take this ammount of time to transfer at the specified baud
+        // rate and stop bits combination.
         private const int DEFAULT_TIME = 750;
 
         //If the percentage difference between the expected time to transfer with the specified stopBits
-        //and the actual time found through Stopwatch is greater then 5% then the StopBits value was not correctly
+        //and the actual time found through Stopwatch is greater then 5% then the StopBits value was not
+        // correctly
         //set and the testcase fails.
         private const double MAX_ACCEPTABEL_PERCENTAGE_DIFFERENCE = .07;
 

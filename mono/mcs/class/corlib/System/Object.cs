@@ -127,12 +127,12 @@ namespace System
 #pragma warning disable 169
         void FieldGetter(string typeName, string fieldName, ref object val)
         {
-            /* never called */
+/* never called */
         }
 
         void FieldSetter(string typeName, string fieldName, object val)
         {
-            /* never called */
+/* never called */
         }
 #pragma warning restore 169
     }

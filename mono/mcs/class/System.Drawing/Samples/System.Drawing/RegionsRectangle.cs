@@ -72,7 +72,7 @@ public class Regions
 
         dc.DrawString("Region samples using two Rectangle classes", fnttitle, whiteBrush, 5, 5);
 
-        /* First */
+/* First */
         if (complement)
         {
             rect1 = new Rectangle(20, 30, 60, 80);
@@ -94,7 +94,7 @@ public class Regions
             DumpRegion(rgn1);
         }
 
-        /* Second */
+/* Second */
         if (exclude)
         {
             rect3 = new Rectangle(130, 30, 60, 80);
@@ -116,7 +116,7 @@ public class Regions
             DumpRegion(rgn3);
         }
 
-        /* Third */
+/* Third */
         if (intersect)
         {
             Rectangle rect5 = new Rectangle(260, 30, 60, 80);
@@ -138,7 +138,7 @@ public class Regions
             DumpRegion(rgn5);
         }
 
-        /* Four */
+/* Four */
         if (xor)
         {
             Rectangle rect7 = new Rectangle(380, 30, 60, 80);
@@ -160,7 +160,7 @@ public class Regions
             DumpRegion(rgn7);
         }
 
-        /* Fifht */
+/* Fifht */
         if (union)
         {
             Rectangle rect9 = new Rectangle(500, 30, 60, 80);
@@ -184,7 +184,7 @@ public class Regions
 
         dc.DrawString("Region samples using three Rectangle class", fnttitle, whiteBrush, 5, 155);
 
-        /* First */
+/* First */
         x = 0;
 
         if (complement)
@@ -215,7 +215,7 @@ public class Regions
         }
         x += 110;
 
-        /* Second */
+/* Second */
         if (exclude)
         {
             rect1 = new Rectangle(20 + x, 180, 40, 50);
@@ -244,7 +244,7 @@ public class Regions
         }
         x += 110;
 
-        /* Third */
+/* Third */
         if (intersect)
         {
             rect1 = new Rectangle(20 + x, 180, 40, 50);
@@ -273,7 +273,7 @@ public class Regions
         }
         x += 110;
 
-        /* Fourth */
+/* Fourth */
         if (xor)
         {
             rect1 = new Rectangle(20 + x, 180, 40, 50);
@@ -302,7 +302,7 @@ public class Regions
         }
         x += 110;
 
-        /* Fifth */
+/* Fifth */
         if (union)
         {
             rect1 = new Rectangle(20 + x, 180, 40, 50);
@@ -333,7 +333,7 @@ public class Regions
 
         dc.DrawString("Region samples using four Rectangle class", fnttitle, whiteBrush, 5, 300);
 
-        /* First */
+/* First */
         x = 0;
 
         if (complement)
@@ -368,7 +368,7 @@ public class Regions
         }
         x += 110;
 
-        /* Second */
+/* Second */
         if (exclude)
         {
             rect1 = new Rectangle(20 + x, 330, 40, 50);
@@ -400,7 +400,7 @@ public class Regions
         }
         x += 110;
 
-        /* Third */
+/* Third */
         if (intersect)
         {
             rect1 = new Rectangle(20 + x, 330, 40, 50);
@@ -433,7 +433,7 @@ public class Regions
         }
         x += 110;
 
-        /* Fourth */
+/* Fourth */
         if (xor)
         {
             rect1 = new Rectangle(20 + x, 330, 40, 50);
@@ -467,7 +467,7 @@ public class Regions
         }
         x += 110;
 
-        /* Fifth */
+/* Fifth */
         if (union)
         {
             rect1 = new Rectangle(20 + x, 330, 40, 50);

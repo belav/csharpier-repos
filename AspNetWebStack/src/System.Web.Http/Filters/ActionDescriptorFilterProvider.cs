@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ using System.Web.Http.Controllers;
 namespace System.Web.Http.Filters
 {
     /// <summary>
-    /// This <see cref="IFilterProvider"/> implementation retrieves <see cref="FilterInfo">filters</see> associated with an <see cref="HttpActionDescriptor"/>
+    /// This <see cref="IFilterProvider"/> implementation retrieves <see cref="FilterInfo">filters</see>
+    // associated with an <see cref="HttpActionDescriptor"/>
     /// instance.
     /// </summary>
     public class ActionDescriptorFilterProvider : IFilterProvider
@@ -17,7 +19,8 @@ namespace System.Web.Http.Filters
         /// Returns the collection of filters associated with <paramref name="actionDescriptor"/>.
         /// </summary>
         /// <remarks>
-        /// The implementation invokes <see cref="HttpActionDescriptor.GetFilters()"/> and <see cref="HttpControllerDescriptor.GetFilters()"/>.
+        /// The implementation invokes <see cref="HttpActionDescriptor.GetFilters()"/> and <see
+        // cref="HttpControllerDescriptor.GetFilters()"/>.
         /// </remarks>
         /// <param name="configuration">The configuration. This value is not used.</param>
         /// <param name="actionDescriptor">The action descriptor.</param>

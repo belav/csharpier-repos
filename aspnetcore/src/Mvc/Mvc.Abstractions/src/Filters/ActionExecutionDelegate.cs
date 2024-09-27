@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
 /// <summary>
-/// A delegate that asynchronously returns an <see cref="ActionExecutedContext"/> indicating the action or the next
+/// A delegate that asynchronously returns an <see cref="ActionExecutedContext"/> indicating the
+// action or the next
 /// action filter has executed.
 /// </summary>
 /// <returns>

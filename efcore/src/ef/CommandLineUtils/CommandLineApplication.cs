@@ -22,8 +22,10 @@ internal class CommandLineApplication
     }
 
     // Indicates whether the parser should throw an exception when it runs into an unexpected argument.
-    // If this field is set to false, the parser will stop parsing when it sees an unexpected argument, and all
-    // remaining arguments, including the first unexpected argument, will be stored in RemainingArguments property.
+    // If this field is set to false, the parser will stop parsing when it sees an unexpected argument,
+    // and all
+    // remaining arguments, including the first unexpected argument, will be stored in
+    // RemainingArguments property.
     private readonly bool _throwOnUnexpectedArg;
 
     public CommandLineApplication(bool throwOnUnexpectedArg = true)

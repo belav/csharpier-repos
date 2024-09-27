@@ -130,9 +130,13 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileStream" /> class with the specified path, creation mode, read/write and sharing permission, the access other FileStreams can have to the same file, the buffer size, additional file options and the allocation size.
+        /// Initializes a new instance of the <see cref="FileStream" /> class with the specified path,
+        // creation mode, read/write and sharing permission, the access other FileStreams can have to the
+        // same
+        // file, the buffer size, additional file options and the allocation size.
         /// </summary>
-        /// <remarks><see cref="FileStream(string,FileStreamOptions)"/> for information about exceptions.</remarks>
+        /// <remarks><see cref="FileStream(string,FileStreamOptions)"/> for information about
+        // exceptions.</remarks>
         public static FileStream Open(string path, FileStreamOptions options) =>
             new FileStream(path, options);
 
@@ -155,35 +159,68 @@ namespace System.IO
         ) => new FileStream(path, mode, access, share);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SafeFileHandle" /> class with the specified path, creation mode, read/write and sharing permission, the access other SafeFileHandles can have to the same file, additional file options and the allocation size.
+        /// Initializes a new instance of the <see cref="SafeFileHandle" /> class with the specified path,
+        // creation mode, read/write and sharing permission, the access other SafeFileHandles can have to
+        // the
+        // same file, additional file options and the allocation size.
         /// </summary>
-        /// <param name="path">A relative or absolute path for the file that the current <see cref="SafeFileHandle" /> instance will encapsulate.</param>
-        /// <param name="mode">One of the enumeration values that determines how to open or create the file. The default value is <see cref="FileMode.Open" /></param>
-        /// <param name="access">A bitwise combination of the enumeration values that determines how the file can be accessed. The default value is <see cref="FileAccess.Read" /></param>
-        /// <param name="share">A bitwise combination of the enumeration values that determines how the file will be shared by processes. The default value is <see cref="FileShare.Read" />.</param>
-        /// <param name="preallocationSize">The initial allocation size in bytes for the file. A positive value is effective only when a regular file is being created, overwritten, or replaced.
-        /// Negative values are not allowed. In other cases (including the default 0 value), it's ignored.</param>
-        /// <param name="options">An object that describes optional <see cref="SafeFileHandle" /> parameters to use.</param>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see langword="null" />.</exception>
-        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is an empty string (""), contains only white space, or contains one or more invalid characters.
+        /// <param name="path">A relative or absolute path for the file that the current <see
+        // cref="SafeFileHandle" /> instance will encapsulate.</param>
+        /// <param name="mode">One of the enumeration values that determines how to open or create the file.
+        // The default value is <see cref="FileMode.Open" /></param>
+        /// <param name="access">A bitwise combination of the enumeration values that determines how the
+        // file can be accessed. The default value is <see cref="FileAccess.Read" /></param>
+        /// <param name="share">A bitwise combination of the enumeration values that determines how the file
+        // will be shared by processes. The default value is <see cref="FileShare.Read" />.</param>
+        /// <param name="preallocationSize">The initial allocation size in bytes for the file. A positive
+        // value is effective only when a regular file is being created, overwritten, or replaced.
+        /// Negative values are not allowed. In other cases (including the default 0 value), it's
+        // ignored.</param>
+        /// <param name="options">An object that describes optional <see cref="SafeFileHandle" /> parameters
+        // to use.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see
+        // langword="null" />.</exception>
+        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is an empty string (""),
+        // contains only white space, or contains one or more invalid characters.
         /// -or-
-        /// <paramref name="path" /> refers to a non-file device, such as <c>CON:</c>, <c>COM1:</c>, <c>LPT1:</c>, etc. in an NTFS environment.</exception>
-        /// <exception cref="T:System.NotSupportedException"><paramref name="path" /> refers to a non-file device, such as <c>CON:</c>, <c>COM1:</c>, <c>LPT1:</c>, etc. in a non-NTFS environment.</exception>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="preallocationSize" /> is negative.
+        /// <paramref name="path" /> refers to a non-file device, such as <c>CON:</c>, <c>COM1:</c>,
+        // <c>LPT1:</c>, etc. in an NTFS environment.</exception>
+        /// <exception cref="T:System.NotSupportedException"><paramref name="path" /> refers to a non-file
+        // device, such as <c>CON:</c>, <c>COM1:</c>, <c>LPT1:</c>, etc. in a non-NTFS
+        // environment.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="preallocationSize" /> is
+        // negative.
         /// -or-
-        /// <paramref name="mode" />, <paramref name="access" />, or <paramref name="share" /> contain an invalid value.</exception>
-        /// <exception cref="T:System.IO.FileNotFoundException">The file cannot be found, such as when <paramref name="mode" /> is <see cref="FileMode.Truncate" /> or <see cref="FileMode.Open" />, and the file specified by <paramref name="path" /> does not exist. The file must already exist in these modes.</exception>
-        /// <exception cref="T:System.IO.IOException">An I/O error, such as specifying <see cref="FileMode.CreateNew" /> when the file specified by <paramref name="path" /> already exists, occurred.
+        /// <paramref name="mode" />, <paramref name="access" />, or <paramref name="share" /> contain an
+        // invalid value.</exception>
+        /// <exception cref="T:System.IO.FileNotFoundException">The file cannot be found, such as when
+        // <paramref name="mode" /> is <see cref="FileMode.Truncate" /> or <see cref="FileMode.Open" />, and
+        // the file specified by <paramref name="path" /> does not exist. The file must already exist in
+        // these
+        // modes.</exception>
+        /// <exception cref="T:System.IO.IOException">An I/O error, such as specifying <see
+        // cref="FileMode.CreateNew" /> when the file specified by <paramref name="path" /> already exists,
+        // occurred.
         ///  -or-
-        ///  The disk was full (when <paramref name="preallocationSize" /> was provided and <paramref name="path" /> was pointing to a regular file).
+        ///  The disk was full (when <paramref name="preallocationSize" /> was provided and <paramref
+        // name="path" /> was pointing to a regular file).
         ///  -or-
-        ///  The file was too large (when <paramref name="preallocationSize" /> was provided and <paramref name="path" /> was pointing to a regular file).</exception>
-        /// <exception cref="T:System.Security.SecurityException">The caller does not have the required permission.</exception>
-        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive.</exception>
-        /// <exception cref="T:System.UnauthorizedAccessException">The <paramref name="access" /> requested is not permitted by the operating system for the specified <paramref name="path" />, such as when <paramref name="access" />  is <see cref="FileAccess.Write" /> or <see cref="FileAccess.ReadWrite" /> and the file or directory is set for read-only access.
+        ///  The file was too large (when <paramref name="preallocationSize" /> was provided and <paramref
+        // name="path" /> was pointing to a regular file).</exception>
+        /// <exception cref="T:System.Security.SecurityException">The caller does not have the required
+        // permission.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid, such as
+        // being on an unmapped drive.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The <paramref name="access" /> requested
+        // is not permitted by the operating system for the specified <paramref name="path" />, such as when
+        // <paramref name="access" />  is <see cref="FileAccess.Write" /> or <see
+        // cref="FileAccess.ReadWrite"
+        // /> and the file or directory is set for read-only access.
         ///  -or-
-        /// <see cref="F:System.IO.FileOptions.Encrypted" /> is specified for <paramref name="options" />, but file encryption is not supported on the current platform.</exception>
-        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length. </exception>
+        /// <see cref="F:System.IO.FileOptions.Encrypted" /> is specified for <paramref name="options" />,
+        // but file encryption is not supported on the current platform.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed
+        // the system-defined maximum length. </exception>
         public static SafeFileHandle OpenHandle(
             string path,
             FileMode mode = FileMode.Open,
@@ -227,17 +264,20 @@ namespace System.IO
         /// Sets the date and time the file or directory was created.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the creation date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the creation date and
+        // time information.
         /// </param>
         /// <param name="creationTime">
-        /// A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="fileHandle"/>.
+        /// A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref
+        // name="fileHandle"/>.
         /// This value is expressed in local time.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="fileHandle"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="creationTime"/> specifies a value outside the range of dates, times, or both permitted for this operation.
+        /// <paramref name="creationTime"/> specifies a value outside the range of dates, times, or both
+        // permitted for this operation.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
         /// The caller does not have the required permission.
@@ -259,20 +299,24 @@ namespace System.IO
             );
 
         /// <summary>
-        /// Sets the date and time, in coordinated universal time (UTC), that the file or directory was created.
+        /// Sets the date and time, in coordinated universal time (UTC), that the file or directory was
+        // created.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the creation date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the creation date and
+        // time information.
         /// </param>
         /// <param name="creationTimeUtc">
-        /// A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="fileHandle"/>.
+        /// A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref
+        // name="fileHandle"/>.
         /// This value is expressed in UTC time.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="fileHandle"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="creationTimeUtc"/> specifies a value outside the range of dates, times, or both permitted for this operation.
+        /// <paramref name="creationTimeUtc"/> specifies a value outside the range of dates, times, or both
+        // permitted for this operation.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
         /// The caller does not have the required permission.
@@ -293,7 +337,8 @@ namespace System.IO
         /// Returns the creation date and time of the specified file or directory.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain creation date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain creation date and
+        // time information.
         /// </param>
         /// <returns>
         /// A <see cref="DateTime" /> structure set to the creation date and time for the specified file or
@@ -315,10 +360,12 @@ namespace System.IO
             FileSystem.GetCreationTime(Path.GetFullPath(path)).UtcDateTime;
 
         /// <summary>
-        /// Returns the creation date and time, in coordinated universal time (UTC), of the specified file or directory.
+        /// Returns the creation date and time, in coordinated universal time (UTC), of the specified file
+        // or directory.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain creation date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain creation date and
+        // time information.
         /// </param>
         /// <returns>
         /// A <see cref="DateTime" /> structure set to the creation date and time for the specified file or
@@ -343,17 +390,20 @@ namespace System.IO
         /// Sets the date and time the specified file or directory was last accessed.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last access date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last access date
+        // and time information.
         /// </param>
         /// <param name="lastAccessTime">
-        /// A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="fileHandle"/>.
+        /// A <see cref="DateTime"/> containing the value to set for the last access date and time of
+        // <paramref name="fileHandle"/>.
         /// This value is expressed in local time.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="fileHandle"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="lastAccessTime"/> specifies a value outside the range of dates, times, or both permitted for this operation.
+        /// <paramref name="lastAccessTime"/> specifies a value outside the range of dates, times, or both
+        // permitted for this operation.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
         /// The caller does not have the required permission.
@@ -375,20 +425,24 @@ namespace System.IO
             );
 
         /// <summary>
-        /// Sets the date and time, in coordinated universal time (UTC), that the specified file or directory was last accessed.
+        /// Sets the date and time, in coordinated universal time (UTC), that the specified file or
+        // directory was last accessed.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last access date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last access date
+        // and time information.
         /// </param>
         /// <param name="lastAccessTimeUtc">
-        /// A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="fileHandle"/>.
+        /// A <see cref="DateTime"/> containing the value to set for the last access date and time of
+        // <paramref name="fileHandle"/>.
         /// This value is expressed in UTC time.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="fileHandle"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="lastAccessTimeUtc"/> specifies a value outside the range of dates, times, or both permitted for this operation.
+        /// <paramref name="lastAccessTimeUtc"/> specifies a value outside the range of dates, times, or
+        // both permitted for this operation.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
         /// The caller does not have the required permission.
@@ -412,10 +466,12 @@ namespace System.IO
         /// Returns the last access date and time of the specified file or directory.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last access date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last access date
+        // and time information.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime" /> structure set to the last access date and time for the specified file or
+        /// A <see cref="DateTime" /> structure set to the last access date and time for the specified file
+        // or
         /// directory. This value is expressed in local time.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -434,13 +490,16 @@ namespace System.IO
             FileSystem.GetLastAccessTime(Path.GetFullPath(path)).UtcDateTime;
 
         /// <summary>
-        /// Returns the last access date and time, in coordinated universal time (UTC), of the specified file or directory.
+        /// Returns the last access date and time, in coordinated universal time (UTC), of the specified
+        // file or directory.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last access date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last access date
+        // and time information.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime" /> structure set to the last access date and time for the specified file or
+        /// A <see cref="DateTime" /> structure set to the last access date and time for the specified file
+        // or
         /// directory. This value is expressed in UTC time.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -462,17 +521,20 @@ namespace System.IO
         /// Sets the date and time that the specified file or directory was last written to.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last write date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last write date
+        // and time information.
         /// </param>
         /// <param name="lastWriteTime">
-        /// A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="fileHandle"/>.
+        /// A <see cref="DateTime"/> containing the value to set for the last write date and time of
+        // <paramref name="fileHandle"/>.
         /// This value is expressed in local time.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="fileHandle"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="lastWriteTime"/> specifies a value outside the range of dates, times, or both permitted for this operation.
+        /// <paramref name="lastWriteTime"/> specifies a value outside the range of dates, times, or both
+        // permitted for this operation.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
         /// The caller does not have the required permission.
@@ -494,20 +556,24 @@ namespace System.IO
             );
 
         /// <summary>
-        /// Sets the date and time, in coordinated universal time (UTC), that the specified file or directory was last written to.
+        /// Sets the date and time, in coordinated universal time (UTC), that the specified file or
+        // directory was last written to.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last write date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to set the last write date
+        // and time information.
         /// </param>
         /// <param name="lastWriteTimeUtc">
-        /// A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="fileHandle"/>.
+        /// A <see cref="DateTime"/> containing the value to set for the last write date and time of
+        // <paramref name="fileHandle"/>.
         /// This value is expressed in UTC time.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="fileHandle"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="lastWriteTimeUtc"/> specifies a value outside the range of dates, times, or both permitted for this operation.
+        /// <paramref name="lastWriteTimeUtc"/> specifies a value outside the range of dates, times, or both
+        // permitted for this operation.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
         /// The caller does not have the required permission.
@@ -528,10 +594,12 @@ namespace System.IO
         /// Returns the last write date and time of the specified file or directory.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last write date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last write date and
+        // time information.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime" /> structure set to the last write date and time for the specified file or
+        /// A <see cref="DateTime" /> structure set to the last write date and time for the specified file
+        // or
         /// directory. This value is expressed in local time.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -550,13 +618,16 @@ namespace System.IO
             FileSystem.GetLastWriteTime(Path.GetFullPath(path)).UtcDateTime;
 
         /// <summary>
-        /// Returns the last write date and time, in coordinated universal time (UTC), of the specified file or directory.
+        /// Returns the last write date and time, in coordinated universal time (UTC), of the specified file
+        // or directory.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last write date and time information.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which to obtain last write date and
+        // time information.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime" /> structure set to the last write date and time for the specified file or
+        /// A <see cref="DateTime" /> structure set to the last write date and time for the specified file
+        // or
         /// directory. This value is expressed in UTC time.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -575,10 +646,12 @@ namespace System.IO
             FileSystem.GetAttributes(Path.GetFullPath(path));
 
         /// <summary>
-        /// Gets the specified <see cref="FileAttributes"/> of the file or directory associated to <paramref name="fileHandle"/>
+        /// Gets the specified <see cref="FileAttributes"/> of the file or directory associated to <paramref
+        // name="fileHandle"/>
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which the attributes are to be retrieved.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which the attributes are to be
+        // retrieved.
         /// </param>
         /// <returns>
         /// The <see cref="FileAttributes"/> of the file or directory.
@@ -599,10 +672,12 @@ namespace System.IO
             FileSystem.SetAttributes(Path.GetFullPath(path), fileAttributes);
 
         /// <summary>
-        /// Sets the specified <see cref="FileAttributes"/> of the file or directory associated to <paramref name="fileHandle"/>.
+        /// Sets the specified <see cref="FileAttributes"/> of the file or directory associated to <paramref
+        // name="fileHandle"/>.
         /// </summary>
         /// <param name="fileHandle">
-        /// A <see cref="SafeFileHandle" /> to the file or directory for which <paramref name="fileAttributes"/> should be set.
+        /// A <see cref="SafeFileHandle" /> to the file or directory for which <paramref
+        // name="fileAttributes"/> should be set.
         /// </param>
         /// <param name="fileAttributes">
         /// A bitwise combination of the enumeration values.
@@ -626,16 +701,24 @@ namespace System.IO
         /// <summary>Gets the <see cref="T:System.IO.UnixFileMode" /> of the file on the path.</summary>
         /// <param name="path">The path to the file.</param>
         /// <returns>The <see cref="T:System.IO.UnixFileMode" /> of the file on the path.</returns>
-        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is a zero-length string, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see langword="null" />.</exception>
-        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.</exception>
-        /// <exception cref="T:System.IO.PathTooLongException">The specified path exceeds the system-defined maximum length.</exception>
-        /// <exception cref="T:System.IO.DirectoryNotFoundException">A component of the <paramref name="path" /> is not a directory.</exception>
+        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is a zero-length string,
+        // or contains one or more invalid characters. You can query for invalid characters by using the
+        // <see
+        // cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see
+        // langword="null" />.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required
+        // permission.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path exceeds the system-defined
+        // maximum length.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">A component of the <paramref
+        // name="path" /> is not a directory.</exception>
         /// <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
         [UnsupportedOSPlatform("windows")]
         public static UnixFileMode GetUnixFileMode(string path) => GetUnixFileModeCore(path);
 
-        /// <summary>Gets the <see cref="T:System.IO.UnixFileMode" /> of the specified file handle.</summary>
+        /// <summary>Gets the <see cref="T:System.IO.UnixFileMode" /> of the specified file
+        // handle.</summary>
         /// <param name="fileHandle">The file handle.</param>
         /// <returns>The <see cref="T:System.IO.UnixFileMode" /> of the file handle.</returns>
         /// <exception cref="T:System.ObjectDisposedException">The file is closed.</exception>
@@ -643,25 +726,37 @@ namespace System.IO
         public static UnixFileMode GetUnixFileMode(SafeFileHandle fileHandle) =>
             GetUnixFileModeCore(fileHandle);
 
-        /// <summary>Sets the specified <see cref="T:System.IO.UnixFileMode" /> of the file on the specified path.</summary>
+        /// <summary>Sets the specified <see cref="T:System.IO.UnixFileMode" /> of the file on the specified
+        // path.</summary>
         /// <param name="path">The path to the file.</param>
         /// <param name="mode">The unix file mode.</param>
-        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is a zero-length string, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see langword="null" />.</exception>
-        /// <exception cref="T:System.ArgumentException">The caller attempts to use an invalid file mode.</exception>
-        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.</exception>
-        /// <exception cref="T:System.IO.PathTooLongException">The specified path exceeds the system-defined maximum length.</exception>
-        /// <exception cref="T:System.IO.DirectoryNotFoundException">A component of the <paramref name="path" /> is not a directory.</exception>
+        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is a zero-length string,
+        // or contains one or more invalid characters. You can query for invalid characters by using the
+        // <see
+        // cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see
+        // langword="null" />.</exception>
+        /// <exception cref="T:System.ArgumentException">The caller attempts to use an invalid file
+        // mode.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required
+        // permission.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path exceeds the system-defined
+        // maximum length.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">A component of the <paramref
+        // name="path" /> is not a directory.</exception>
         /// <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
         [UnsupportedOSPlatform("windows")]
         public static void SetUnixFileMode(string path, UnixFileMode mode) =>
             SetUnixFileModeCore(path, mode);
 
-        /// <summary>Sets the specified <see cref="T:System.IO.UnixFileMode" /> of the specified file handle.</summary>
+        /// <summary>Sets the specified <see cref="T:System.IO.UnixFileMode" /> of the specified file
+        // handle.</summary>
         /// <param name="fileHandle">The file handle.</param>
         /// <param name="mode">The unix file mode.</param>
-        /// <exception cref="T:System.ArgumentException">The caller attempts to use an invalid file mode.</exception>
-        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.</exception>
+        /// <exception cref="T:System.ArgumentException">The caller attempts to use an invalid file
+        // mode.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required
+        // permission.</exception>
         /// <exception cref="T:System.ObjectDisposedException">The file is closed.</exception>
         [UnsupportedOSPlatform("windows")]
         public static void SetUnixFileMode(SafeFileHandle fileHandle, UnixFileMode mode) =>
@@ -725,7 +820,8 @@ namespace System.IO
 
                 if (fileLength == 0)
                 {
-                    // Some file systems (e.g. procfs on Linux) return 0 for length even when there's content; also there are non-seekable files.
+                    // Some file systems (e.g. procfs on Linux) return 0 for length even when there's content; also
+                    // there are non-seekable files.
                     // Thus we need to assume 0 doesn't mean empty.
                     return ReadAllBytesUnknownLength(sfh);
                 }
@@ -769,7 +865,8 @@ namespace System.IO
         /// <param name="path">The file to append to.</param>
         /// <param name="bytes">The bytes to append to the file.</param>
         /// <exception cref="System.ArgumentException">
-        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one more invalid characters defined by the <see cref="System.IO.Path.GetInvalidPathChars"/> method.
+        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one more
+        // invalid characters defined by the <see cref="System.IO.Path.GetInvalidPathChars"/> method.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// Either <paramref name="path"/> or <paramref name="bytes"/> is null.
@@ -791,14 +888,17 @@ namespace System.IO
 
         /// <summary>
         /// Asynchronously appends the specified byte array to the end of the file at the given path.
-        /// If the file doesn't exist, this method creates a new file. If the operation is canceled, the task will return in a canceled state.
+        /// If the file doesn't exist, this method creates a new file. If the operation is canceled, the
+        // task will return in a canceled state.
         /// </summary>
         /// <param name="path">The file to append to.</param>
         /// <param name="bytes">The bytes to append to the file.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="System.Threading.CancellationToken.None"/>.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+        // value is <see cref="System.Threading.CancellationToken.None"/>.</param>
         /// <returns>A task that represents the asynchronous append operation.</returns>
         /// <exception cref="System.ArgumentException">
-        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one more invalid characters defined by the <see cref="System.IO.Path.GetInvalidPathChars"/> method.
+        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one more
+        // invalid characters defined by the <see cref="System.IO.Path.GetInvalidPathChars"/> method.
         /// </exception>
         /// <exception cref="System.ArgumentNullException">
         /// Either <paramref name="path"/> or <paramref name="bytes"/> is null.
@@ -866,8 +966,10 @@ namespace System.IO
         /// Asynchronously reads the lines of a file.
         /// </summary>
         /// <param name="path">The file to read.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>The async enumerable that represents all the lines of the file, or the lines that are the result of a query.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+        // value is <see cref="CancellationToken.None"/>.</param>
+        /// <returns>The async enumerable that represents all the lines of the file, or the lines that are
+        // the result of a query.</returns>
         public static IAsyncEnumerable<string> ReadLinesAsync(
             string path,
             CancellationToken cancellationToken = default
@@ -878,8 +980,10 @@ namespace System.IO
         /// </summary>
         /// <param name="path">The file to read.</param>
         /// <param name="encoding">The encoding that is applied to the contents of the file.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
-        /// <returns>The async enumerable that represents all the lines of the file, or the lines that are the result of a query.</returns>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+        // value is <see cref="CancellationToken.None"/>.</param>
+        /// <returns>The async enumerable that represents all the lines of the file, or the lines that are
+        // the result of a query.</returns>
         public static IAsyncEnumerable<string> ReadLinesAsync(
             string path,
             Encoding encoding,
@@ -1426,16 +1530,22 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Creates a file symbolic link identified by <paramref name="path"/> that points to <paramref name="pathToTarget"/>.
+        /// Creates a file symbolic link identified by <paramref name="path"/> that points to <paramref
+        // name="pathToTarget"/>.
         /// </summary>
         /// <param name="path">The path where the symbolic link should be created.</param>
         /// <param name="pathToTarget">The path of the target to which the symbolic link points.</param>
-        /// <returns>A <see cref="FileInfo"/> instance that wraps the newly created file symbolic link.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="path"/> or <paramref name="pathToTarget"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="path"/> or <paramref name="pathToTarget"/> is empty.
+        /// <returns>A <see cref="FileInfo"/> instance that wraps the newly created file symbolic
+        // link.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="path"/> or <paramref
+        // name="pathToTarget"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path"/> or <paramref name="pathToTarget"/>
+        // is empty.
         /// -or-
-        /// <paramref name="path"/> or <paramref name="pathToTarget"/> contains a null character.</exception>
-        /// <exception cref="IOException">A file or directory already exists in the location of <paramref name="path"/>.
+        /// <paramref name="path"/> or <paramref name="pathToTarget"/> contains a null
+        // character.</exception>
+        /// <exception cref="IOException">A file or directory already exists in the location of <paramref
+        // name="path"/>.
         /// -or-
         /// An I/O error occurred.</exception>
         public static FileSystemInfo CreateSymbolicLink(string path, string pathToTarget)
@@ -1451,14 +1561,18 @@ namespace System.IO
         /// Gets the target of the specified file link.
         /// </summary>
         /// <param name="linkPath">The path of the file link.</param>
-        /// <param name="returnFinalTarget"><see langword="true"/> to follow links to the final target; <see langword="false"/> to return the immediate next link.</param>
-        /// <returns>A <see cref="FileInfo"/> instance if <paramref name="linkPath"/> exists, independently if the target exists or not. <see langword="null"/> if <paramref name="linkPath"/> is not a link.</returns>
+        /// <param name="returnFinalTarget"><see langword="true"/> to follow links to the final target; <see
+        // langword="false"/> to return the immediate next link.</param>
+        /// <returns>A <see cref="FileInfo"/> instance if <paramref name="linkPath"/> exists, independently
+        // if the target exists or not. <see langword="null"/> if <paramref name="linkPath"/> is not a
+        // link.</returns>
         /// <exception cref="IOException">The file on <paramref name="linkPath"/> does not exist.
         /// -or-
         /// The link's file system entry type is inconsistent with that of its target.
         /// -or-
         /// Too many levels of symbolic links.</exception>
-        /// <remarks>When <paramref name="returnFinalTarget"/> is <see langword="true"/>, the maximum number of symbolic links that are followed are 40 on Unix and 63 on Windows.</remarks>
+        /// <remarks>When <paramref name="returnFinalTarget"/> is <see langword="true"/>, the maximum number
+        // of symbolic links that are followed are 40 on Unix and 63 on Windows.</remarks>
         public static FileSystemInfo? ResolveLinkTarget(string linkPath, bool returnFinalTarget)
         {
             FileSystem.VerifyValidPath(linkPath, nameof(linkPath));
@@ -1695,7 +1809,8 @@ namespace System.IO
             int preambleSize
         )
         {
-            // for a single write operation, setting preallocationSize has no perf benefit, as it requires an additional sys-call
+            // for a single write operation, setting preallocationSize has no perf benefit, as it requires an
+            // additional sys-call
             if (contents is null || contents.Length < ChunkSize)
             {
                 return 0;

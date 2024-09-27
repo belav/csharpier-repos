@@ -40,31 +40,31 @@ namespace Microsoft.Win32
 
         unsafe void GetSecurityId( /* [in] */
             string pwszUrl,
-            /* [size_is][out] */byte* pbSecurityId,
-            /* [out][in] */int* pcbSecurityId,
-            /* [in] */int dwReserved
+/* [size_is][out] */byte* pbSecurityId,
+/* [out][in] */int* pcbSecurityId,
+/* [in] */int dwReserved
         );
 
         unsafe void ProcessUrlAction(
-            /* [in] */string pwszUrl,
-            /* [in] */int dwAction,
-            /* [size_is][out] */byte* pPolicy,
-            /* [in] */int cbPolicy,
-            /* [in] */byte* pContext,
-            /* [in] */int cbContext,
-            /* [in] */int dwFlags,
-            /* [in] */int dwReserved
+/* [in] */string pwszUrl,
+/* [in] */int dwAction,
+/* [size_is][out] */byte* pPolicy,
+/* [in] */int cbPolicy,
+/* [in] */byte* pContext,
+/* [in] */int cbContext,
+/* [in] */int dwFlags,
+/* [in] */int dwReserved
         );
 
         unsafe void QueryCustomPolicy(
-            /* [in] */string pwszUrl,
-            /* [in] */
-            /*REFGUID*/void* guidKey,
-            /* [size_is][size_is][out] */byte** ppPolicy,
-            /* [out] */int* pcbPolicy,
-            /* [in] */byte* pContext,
-            /* [in] */int cbContext,
-            /* [in] */int dwReserved
+/* [in] */string pwszUrl,
+/* [in] */
+/*REFGUID*/void* guidKey,
+/* [size_is][size_is][out] */byte** ppPolicy,
+/* [out] */int* pcbPolicy,
+/* [in] */byte* pContext,
+/* [in] */int cbContext,
+/* [in] */int dwReserved
         );
 
         unsafe void SetZoneMapping( /* [in] */

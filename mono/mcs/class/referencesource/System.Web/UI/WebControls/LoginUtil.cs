@@ -28,8 +28,10 @@ namespace System.Web.UI.WebControls
             bool setTableCellVisible
         )
         {
-            // setTableCellVisible is used when we DO NOT make the whole table cell invisible, because in some layouts
-            // it must exist for things to align correctly and its uncommon that this property will be empty anyway.
+            // setTableCellVisible is used when we DO NOT make the whole table cell invisible, because in some
+            // layouts
+            // it must exist for things to align correctly and its uncommon that this property will be empty
+            // anyway.
 
             bool visible = false;
             if (!String.IsNullOrEmpty(text))
@@ -260,7 +262,8 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        // Sets the visibility of the table cell that contains the control.  The whole cell is made invisible
+        // Sets the visibility of the table cell that contains the control.  The whole cell is made
+        // invisible
         // to shrink rendered size and improve rendered appearance if cell padding or spacing is set.
         internal static void SetTableCellVisible(Control control, bool visible)
         {
@@ -413,9 +416,11 @@ namespace System.Web.UI.WebControls
             }
 
             /// <devdoc>
-            ///     Renders the template contents.  The default template is rendered directly since it is already a table.
+            ///     Renders the template contents.  The default template is rendered directly since it is
+            // already a table.
             ///     A user template is rendered inside a table with one row and one cell.
-            ///     User a single-cell table instead of a <div>, since the <div> always spans the full width of its
+            ///     User a single-cell table instead of a <div>, since the <div> always spans the full width of
+            // its
             ///     containing element, while a <table> sets width to contents.
             /// </devdoc>
             protected internal sealed override void Render(HtmlTextWriter writer)
@@ -492,7 +497,8 @@ namespace System.Web.UI.WebControls
 
                 LayoutTable table = new LayoutTable(1, 1, Page);
 
-                // Don't render out the child controls if we are using region editing, just output the region attribute
+                // Don't render out the child controls if we are using region editing, just output the region
+                // attribute
                 if (RenderDesignerRegion)
                 {
                     table[0, 0].Attributes[HtmlTextWriter.DesignerRegionAttributeName] =

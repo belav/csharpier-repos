@@ -36,7 +36,8 @@ namespace Newtonsoft.Json.Linq
     /// Represents a JSON array.
     /// </summary>
     /// <example>
-    ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
+    ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs"
+    // region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
     /// </example>
     public partial class JArray : JContainer, IList<JToken>
     {
@@ -60,7 +61,8 @@ namespace Newtonsoft.Json.Linq
         public JArray() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JArray"/> class from another <see cref="JArray"/> object.
+        /// Initializes a new instance of the <see cref="JArray"/> class from another <see cref="JArray"/>
+        // object.
         /// </summary>
         /// <param name="other">A <see cref="JArray"/> object to copy from.</param>
         public JArray(JArray other)
@@ -98,8 +100,10 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Loads an <see cref="JArray"/> from a <see cref="JsonReader"/>.
         /// </summary>
-        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JArray"/>.</param>
-        /// <returns>A <see cref="JArray"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
+        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see
+        // cref="JArray"/>.</param>
+        /// <returns>A <see cref="JArray"/> that contains the JSON that was read from the specified <see
+        // cref="JsonReader"/>.</returns>
         public new static JArray Load(JsonReader reader)
         {
             return Load(reader, null);
@@ -108,10 +112,12 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Loads an <see cref="JArray"/> from a <see cref="JsonReader"/>.
         /// </summary>
-        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JArray"/>.</param>
+        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see
+        // cref="JArray"/>.</param>
         /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
-        /// <returns>A <see cref="JArray"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
+        /// <returns>A <see cref="JArray"/> that contains the JSON that was read from the specified <see
+        // cref="JsonReader"/>.</returns>
         public new static JArray Load(JsonReader reader, JsonLoadSettings? settings)
         {
             if (reader.TokenType == JsonToken.None)
@@ -152,7 +158,8 @@ namespace Newtonsoft.Json.Linq
         /// <param name="json">A <see cref="String"/> that contains JSON.</param>
         /// <returns>A <see cref="JArray"/> populated from the string that contains JSON.</returns>
         /// <example>
-        ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
+        ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs"
+        // region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
         /// </example>
         public new static JArray Parse(string json)
         {
@@ -167,7 +174,8 @@ namespace Newtonsoft.Json.Linq
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <returns>A <see cref="JArray"/> populated from the string that contains JSON.</returns>
         /// <example>
-        ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
+        ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs"
+        // region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
         /// </example>
         public new static JArray Parse(string json, JsonLoadSettings? settings)
         {
@@ -198,7 +206,8 @@ namespace Newtonsoft.Json.Linq
         /// Creates a <see cref="JArray"/> from an object.
         /// </summary>
         /// <param name="o">The object that will be used to create <see cref="JArray"/>.</param>
-        /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used to read the object.</param>
+        /// <param name="jsonSerializer">The <see cref="JsonSerializer"/> that will be used to read the
+        // object.</param>
         /// <returns>A <see cref="JArray"/> with the values of the specified object.</returns>
         public new static JArray FromObject(object o, JsonSerializer jsonSerializer)
         {
@@ -221,7 +230,8 @@ namespace Newtonsoft.Json.Linq
         /// Writes this token to a <see cref="JsonWriter"/>.
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
-        /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
+        /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when
+        // writing the token.</param>
         public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
         {
             writer.WriteStartArray();
@@ -322,7 +332,8 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Inserts an item to the <see cref="JArray"/> at the specified index.
         /// </summary>
-        /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+        /// <param name="index">The zero-based index at which <paramref name="item"/> should be
+        // inserted.</param>
         /// <param name="item">The object to insert into the <see cref="JArray"/>.</param>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="index"/> is not a valid index in the <see cref="JArray"/>.
@@ -348,7 +359,8 @@ namespace Newtonsoft.Json.Linq
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        /// A <see cref="IEnumerator{T}"/> of <see cref="JToken"/> that can be used to iterate through the collection.
+        /// A <see cref="IEnumerator{T}"/> of <see cref="JToken"/> that can be used to iterate through the
+        // collection.
         /// </returns>
         public IEnumerator<JToken> GetEnumerator()
         {
@@ -379,7 +391,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="item">The object to locate in the <see cref="JArray"/>.</param>
         /// <returns>
-        /// <c>true</c> if <paramref name="item"/> is found in the <see cref="JArray"/>; otherwise, <c>false</c>.
+        /// <c>true</c> if <paramref name="item"/> is found in the <see cref="JArray"/>; otherwise,
+        // <c>false</c>.
         /// </returns>
         public bool Contains(JToken item)
         {
@@ -387,7 +400,8 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Copies the elements of the <see cref="JArray"/> to an array, starting at a particular array index.
+        /// Copies the elements of the <see cref="JArray"/> to an array, starting at a particular array
+        // index.
         /// </summary>
         /// <param name="array">The array.</param>
         /// <param name="arrayIndex">Index of the array.</param>
@@ -399,7 +413,8 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Gets a value indicating whether the <see cref="JArray"/> is read-only.
         /// </summary>
-        /// <returns><c>true</c> if the <see cref="JArray"/> is read-only; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if the <see cref="JArray"/> is read-only; otherwise,
+        // <c>false</c>.</returns>
         public bool IsReadOnly => false;
 
         /// <summary>
@@ -407,7 +422,9 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="item">The object to remove from the <see cref="JArray"/>.</param>
         /// <returns>
-        /// <c>true</c> if <paramref name="item"/> was successfully removed from the <see cref="JArray"/>; otherwise, <c>false</c>. This method also returns <c>false</c> if <paramref name="item"/> is not found in the original <see cref="JArray"/>.
+        /// <c>true</c> if <paramref name="item"/> was successfully removed from the <see cref="JArray"/>;
+        // otherwise, <c>false</c>. This method also returns <c>false</c> if <paramref name="item"/> is not
+        // found in the original <see cref="JArray"/>.
         /// </returns>
         public bool Remove(JToken item)
         {

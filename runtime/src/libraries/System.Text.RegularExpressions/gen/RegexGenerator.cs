@@ -26,7 +26,8 @@ namespace System.Text.RegularExpressions.Generator
         /// <summary>Namespace containing all the generated code.</summary>
         private const string GeneratedNamespace = "System.Text.RegularExpressions.Generated";
 
-        /// <summary>Code for a [GeneratedCode] attribute to put on the top-level generated members.</summary>
+        /// <summary>Code for a [GeneratedCode] attribute to put on the top-level generated
+        // members.</summary>
         private static readonly string s_generatedCodeAttribute =
             $"GeneratedCodeAttribute(\"{typeof(RegexGenerator).Assembly.GetName().Name}\", \"{typeof(RegexGenerator).Assembly.GetName().Version}\")";
 
@@ -50,17 +51,24 @@ namespace System.Text.RegularExpressions.Generator
         {
             // Produces one entry per generated regex.  This may be:
             // - DiagnosticData in the case of a failure that should end the compilation
-            // - (RegexMethod regexMethod, string runnerFactoryImplementation, Dictionary<string, string[]> requiredHelpers) in the case of valid regex
-            // - (RegexMethod regexMethod, string reason, DiagnosticData diagnostic) in the case of a limited-support regex
+            // - (RegexMethod regexMethod, string runnerFactoryImplementation, Dictionary<string, string[]>
+            // requiredHelpers) in the case of valid regex
+            // - (RegexMethod regexMethod, string reason, DiagnosticData diagnostic) in the case of a
+            // limited-support regex
             IncrementalValueProvider<ImmutableArray<object>> results = context
                 .SyntaxProvider
-                // Find all MethodDeclarationSyntax nodes attributed with GeneratedRegex and gather the required information.
+                // Find all MethodDeclarationSyntax nodes attributed with GeneratedRegex and gather the required
+                // information.
                 // The predicate will be run once for every attributed node in the same file that's being modified.
                 // The transform will be run once for every attributed node in the compilation.
-                // Thus, both should do the minimal amount of work required and get out.  This should also have extracted
-                // everything from the target necessary to do all subsequent analysis and should return an object that's
-                // meaningfully comparable and that doesn't reference anything from the compilation: we want to ensure
-                // that any successful cached results are idempotent for the input such that they don't trigger downstream work
+                // Thus, both should do the minimal amount of work required and get out.  This should also have
+                // extracted
+                // everything from the target necessary to do all subsequent analysis and should return an object
+                // that's
+                // meaningfully comparable and that doesn't reference anything from the compilation: we want to
+                // ensure
+                // that any successful cached results are idempotent for the input such that they don't trigger
+                // downstream work
                 // if there are no changes.
                 .ForAttributeWithMetadataName(
                     GeneratedRegexAttributeName,
@@ -69,8 +77,10 @@ namespace System.Text.RegularExpressions.Generator
                 )
                 // Filter out any parsing errors that resulted in null objects being returned.
                 .Where(static m => m is not null)
-                // The input here will either be a DiagnosticData (in the case of something erroneous detected in GetRegexMethodDataOrFailureDiagnostic)
-                // or it will be a RegexPatternAndSyntax containing all of the successfully parsed data from the attribute/method.
+                // The input here will either be a DiagnosticData (in the case of something erroneous detected in
+                // GetRegexMethodDataOrFailureDiagnostic)
+                // or it will be a RegexPatternAndSyntax containing all of the successfully parsed data from the
+                // attribute/method.
                 .Select(
                     (methodOrDiagnostic, _) =>
                     {
@@ -110,7 +120,8 @@ namespace System.Text.RegularExpressions.Generator
                         return methodOrDiagnostic;
                     }
                 )
-                // Generate the RunnerFactory for each regex, if possible.  This is where the bulk of the implementation occurs.
+                // Generate the RunnerFactory for each regex, if possible.  This is where the bulk of the
+                // implementation occurs.
                 .Select(
                     (state, _) =>
                     {
@@ -162,7 +173,8 @@ namespace System.Text.RegularExpressions.Generator
                         );
                     }
                 )
-                // Combine all of the generated text outputs into a single batch. We then generate a single source output from that batch.
+                // Combine all of the generated text outputs into a single batch. We then generate a single source
+                // output from that batch.
                 .Collect()
                 // Apply sequence equality comparison on the result array for incremental caching.
                 .WithComparer(new ObjectImmutableArraySequenceEqualityComparer());
@@ -211,8 +223,10 @@ namespace System.Text.RegularExpressions.Generator
                     // the work required to generate the actual matching code for the regex.
                     int id = 0;
 
-                    // To minimize generated code in the event of duplicated regexes, we only emit one derived Regex type per unique
-                    // expression/options/timeout.  A Dictionary<(expression, options, timeout), RegexMethod> is used to deduplicate, where the value of the
+                    // To minimize generated code in the event of duplicated regexes, we only emit one derived Regex
+                    // type per unique
+                    // expression/options/timeout.  A Dictionary<(expression, options, timeout), RegexMethod> is used to
+                    // deduplicate, where the value of the
                     // pair is the implementation used for the key.
                     var emittedExpressions =
                         new Dictionary<
@@ -220,9 +234,11 @@ namespace System.Text.RegularExpressions.Generator
                             RegexMethod
                         >();
 
-                    // If we have any (RegexMethod regexMethod, string generatedName, string reason, DiagnosticData diagnostic), these are regexes for which we have
+                    // If we have any (RegexMethod regexMethod, string generatedName, string reason, DiagnosticData
+                    // diagnostic), these are regexes for which we have
                     // limited support and need to simply output boilerplate.  We need to emit their diagnostics.
-                    // If we have any (RegexMethod regexMethod, string generatedName, string runnerFactoryImplementation, Dictionary<string, string[]> requiredHelpers),
+                    // If we have any (RegexMethod regexMethod, string generatedName, string
+                    // runnerFactoryImplementation, Dictionary<string, string[]> requiredHelpers),
                     // those are generated implementations to be emitted.  We need to gather up their required helpers.
                     Dictionary<string, string[]> requiredHelpers = new();
                     foreach (object? result in results)
@@ -288,14 +304,17 @@ namespace System.Text.RegularExpressions.Generator
                         }
                     }
 
-                    // At this point we've emitted all the partial method definitions, but we still need to emit the actual regex-derived implementations.
+                    // At this point we've emitted all the partial method definitions, but we still need to emit the
+                    // actual regex-derived implementations.
                     // These are all emitted inside of our generated class.
 
                     writer.WriteLine($"namespace {GeneratedNamespace}");
                     writer.WriteLine($"{{");
 
-                    // We emit usings here now that we're inside of a namespace block and are no longer emitting code into
-                    // a user's partial type.  We can now rely on binding rules mapping to these usings and don't need to
+                    // We emit usings here now that we're inside of a namespace block and are no longer emitting code
+                    // into
+                    // a user's partial type.  We can now rely on binding rules mapping to these usings and don't need
+                    // to
                     // use global-qualified names for the rest of the implementation.
                     writer.WriteLine($"    using System;");
                     writer.WriteLine($"    using System.Buffers;");
@@ -402,7 +421,8 @@ namespace System.Text.RegularExpressions.Generator
 
         /// <summary>Determines whether the passed in node supports C# code generation.</summary>
         /// <remarks>
-        // It also provides a human-readable string to explain the reason. It will be emitted by the source generator
+        // It also provides a human-readable string to explain the reason. It will be emitted by the source
+        // generator
         // as a comment into the C# code, hence there's no need to localize.
         /// </remarks>
         private static bool SupportsCodeGeneration(
@@ -427,18 +447,25 @@ namespace System.Text.RegularExpressions.Generator
 
             if (HasCaseInsensitiveBackReferences(node))
             {
-                // For case-insensitive patterns, we use our internal Regex case equivalence table when doing character comparisons.
-                // Most of the use of this table is done at Regex construction time by substituting all characters that are involved in
-                // case conversions into sets that contain all possible characters that could match. That said, there is still one case
-                // where you may need to do case-insensitive comparisons at match time which is the case for backreferences. For that reason,
-                // and given the Regex case equivalence table is internal and can't be called by the source generated emitted type, if
-                // the pattern contains case-insensitive backreferences, we won't try to create a source generated Regex-derived type.
+                // For case-insensitive patterns, we use our internal Regex case equivalence table when doing
+                // character comparisons.
+                // Most of the use of this table is done at Regex construction time by substituting all characters
+                // that are involved in
+                // case conversions into sets that contain all possible characters that could match. That said,
+                // there is still one case
+                // where you may need to do case-insensitive comparisons at match time which is the case for
+                // backreferences. For that reason,
+                // and given the Regex case equivalence table is internal and can't be called by the source
+                // generated emitted type, if
+                // the pattern contains case-insensitive backreferences, we won't try to create a source generated
+                // Regex-derived type.
                 reason =
                     "the expression contains case-insensitive backreferences which are not supported by the source generator";
                 return false;
             }
 
-            // If Compilation is supported and pattern doesn't have case insensitive backreferences, then code generation is supported.
+            // If Compilation is supported and pattern doesn't have case insensitive backreferences, then code
+            // generation is supported.
             reason = null;
             return true;
 

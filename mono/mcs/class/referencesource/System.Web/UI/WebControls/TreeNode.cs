@@ -85,7 +85,8 @@ namespace System.Web.UI.WebControls
             : this(text, value, imageUrl, null, null) { }
 
         /// <devdoc>
-        ///     Constructs a new TreeNode with the specified text, value, image URL, navigation URL, and target.
+        ///     Constructs a new TreeNode with the specified text, value, image URL, navigation URL, and
+        // target.
         /// </devdoc>
         public TreeNode(
             string text,
@@ -261,7 +262,8 @@ namespace System.Web.UI.WebControls
             set
             {
                 bool? oldValue = Expanded;
-                // We need to set the viewstate so that it wins over ExpandDepth on the get request (VSWhidbey 331936)
+                // We need to set the viewstate so that it wins over ExpandDepth on the get request (VSWhidbey
+                // 331936)
                 // N.B. We don't want this to happen when restoring ViewState.
                 ViewState["Expanded"] = value;
                 if (value != oldValue)
@@ -1063,7 +1065,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Renders the contents of the node and its children.  It uses the position and isLast parameters
+        ///     Renders the contents of the node and its children.  It uses the position and isLast
+        // parameters
         ///     to determine which lines and which kind of lines to render.
         /// </devdoc>
         internal void Render(HtmlTextWriter writer, int position, bool[] isLast, bool enabled)
@@ -1437,14 +1440,16 @@ namespace System.Web.UI.WebControls
 
                 if (canExpand)
                 {
-                    // If we are using client script and there aren't any expand/collapse handlers attached, do all the toggling/populating
+                    // If we are using client script and there aren't any expand/collapse handlers attached, do all the
+                    // toggling/populating
                     if (_owner.RenderClientScript && !_owner.CustomExpandCollapseHandlerExists)
                     {
                         writer.AddAttribute(HtmlTextWriterAttribute.Id, myId);
 
                         if (PopulateOnDemand)
                         {
-                            // If we are populating from the client, add all the needed attributes and call the client script needed to make the callback
+                            // If we are populating from the client, add all the needed attributes and call the client script
+                            // needed to make the callback
                             if (_owner.PopulateNodesFromClient)
                             {
                                 if (ChildNodes.Count != 0)
@@ -1519,7 +1524,8 @@ namespace System.Web.UI.WebControls
                             HtmlTextWriterAttribute.Alt,
                             String.Format(CultureInfo.CurrentCulture, imageToolTip, Text)
                         );
-                        //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of framework
+                        //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of
+                        // framework
                         if (BinaryCompatibility.Current.TargetsAtLeastFramework461)
                         {
                             writer.AddAttribute(
@@ -1531,7 +1537,8 @@ namespace System.Web.UI.WebControls
                     else
                     {
                         writer.AddAttribute(HtmlTextWriterAttribute.Alt, String.Empty);
-                        //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of framework
+                        //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of
+                        // framework
                         if (BinaryCompatibility.Current.TargetsAtLeastFramework461)
                         {
                             writer.AddAttribute(HtmlTextWriterAttribute.Title, String.Empty);
@@ -1649,12 +1656,14 @@ namespace System.Web.UI.WebControls
                     && !_owner.CustomExpandCollapseHandlerExists
                 )
                 {
-                    // and if the node is being populated on demand, and we are populating nodes from the client, call the populateNode javascript
+                    // and if the node is being populated on demand, and we are populating nodes from the client, call
+                    // the populateNode javascript
                     if (PopulateOnDemand)
                     {
                         if (_owner.PopulateNodesFromClient)
                         {
-                            // writer.AddAttribute(HtmlTextWriterAttribute.Href, GetPopulateNodeAttribute(writer, myId, SelectID, lineType, depth, isLast));
+                            // writer.AddAttribute(HtmlTextWriterAttribute.Href, GetPopulateNodeAttribute(writer, myId,
+                            // SelectID, lineType, depth, isLast));
                             anchorAttributes.Add(HtmlTextWriterAttribute.Href);
                             anchorAttributes.Add(
                                 GetPopulateNodeAttribute(
@@ -1671,7 +1680,8 @@ namespace System.Web.UI.WebControls
                         else
                         {
                             // If we're not populating from the client, postback to populate
-                            // writer.AddAttribute(HtmlTextWriterAttribute.Href, _owner.Page.GetPostBackClientHyperlink(_owner, "t" + HttpUtility.HtmlEncode(InternalValuePath), true));
+                            // writer.AddAttribute(HtmlTextWriterAttribute.Href, _owner.Page.GetPostBackClientHyperlink(_owner,
+                            // "t" + HttpUtility.HtmlEncode(InternalValuePath), true));
                             anchorAttributes.Add(HtmlTextWriterAttribute.Href);
 
                             string href = "javascript:0";
@@ -1697,7 +1707,8 @@ namespace System.Web.UI.WebControls
                 // If not, just render an href for a postback
                 else if (SelectAction != TreeNodeSelectAction.None)
                 {
-                    // writer.AddAttribute(HtmlTextWriterAttribute.Href, _owner.Page.GetPostBackClientHyperlink(_owner, "s" + HttpUtility.HtmlEncode(InternalValuePath), true));
+                    // writer.AddAttribute(HtmlTextWriterAttribute.Href, _owner.Page.GetPostBackClientHyperlink(_owner,
+                    // "s" + HttpUtility.HtmlEncode(InternalValuePath), true));
                     anchorAttributes.Add(HtmlTextWriterAttribute.Href);
 
                     if (_owner.Page != null)
@@ -1756,7 +1767,8 @@ namespace System.Web.UI.WebControls
                 if (ImageToolTip.Length > 0)
                 {
                     writer.AddAttribute(HtmlTextWriterAttribute.Alt, ImageToolTip);
-                    //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of framework
+                    //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of
+                    // framework
                     if (BinaryCompatibility.Current.TargetsAtLeastFramework461)
                     {
                         writer.AddAttribute(HtmlTextWriterAttribute.Title, ImageToolTip);
@@ -1765,7 +1777,8 @@ namespace System.Web.UI.WebControls
                 else
                 {
                     writer.AddAttribute(HtmlTextWriterAttribute.Alt, String.Empty);
-                    //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of framework
+                    //fix bug 1197460, quirk it so the fix will only be enabled on projects on 4.6.1 or later version of
+                    // framework
                     if (BinaryCompatibility.Current.TargetsAtLeastFramework461)
                     {
                         writer.AddAttribute(HtmlTextWriterAttribute.Title, String.Empty);
@@ -1934,7 +1947,8 @@ namespace System.Web.UI.WebControls
                     isLast = newIsLast;
                 }
 
-                // If client script is enabled, always render the child nodes, and also render a div around the child nodes, with a 'display' style
+                // If client script is enabled, always render the child nodes, and also render a div around the
+                // child nodes, with a 'display' style
                 if (_owner.RenderClientScript)
                 {
                     if (!expanded)
@@ -2043,7 +2057,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Used by ExpandAll and CollapseAll to recusively set all nodes' Expanded property to the specified value
+        ///     Used by ExpandAll and CollapseAll to recusively set all nodes' Expanded property to the
+        // specified value
         /// </devdoc>
         private void SetExpandedRecursive(bool value)
         {
@@ -2144,7 +2159,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Sets the path of the node (without reparenting).  Used in the PopulateNodesFromClient scenario.
+        ///     Sets the path of the node (without reparenting).  Used in the PopulateNodesFromClient
+        // scenario.
         /// </devdoc>
         internal void SetPath(string newPath)
         {

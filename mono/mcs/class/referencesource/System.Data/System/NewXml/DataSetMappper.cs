@@ -15,8 +15,10 @@ namespace System.Xml
     //
     // Maps XML nodes to schema
     //
-    // With the exception of some functions (the most important is SearchMatchingTableSchema) all functions expect that each region rowElem is already associated
-    // w/ it's DataRow (basically the test to determine a rowElem is based on a != null associated DataRow). As a result of this, some functions will NOT work properly
+    // With the exception of some functions (the most important is SearchMatchingTableSchema) all
+    // functions expect that each region rowElem is already associated
+    // w/ it's DataRow (basically the test to determine a rowElem is based on a != null associated
+    // DataRow). As a result of this, some functions will NOT work properly
     // when they are used on a tree for which rowElem's are not associated w/ a DataRow.
     //
 
@@ -72,21 +74,26 @@ namespace System.Xml
             return (DataTable)(tableSchemaMap[tid]);
         }
 
-        // SearchMatchingTableSchema function works only when the elem has not been bound to a DataRow. If you want to get the table associated w/ an element after
+        // SearchMatchingTableSchema function works only when the elem has not been bound to a DataRow. If
+        // you want to get the table associated w/ an element after
         // it has been associated w/ a DataRow use GetTableSchemaForElement function.
-        // rowElem is the parent region rowElem or null if there is no parent region (in case elem is a row elem, then rowElem will be the parent region; if elem is not
+        // rowElem is the parent region rowElem or null if there is no parent region (in case elem is a row
+        // elem, then rowElem will be the parent region; if elem is not
         //    mapped to a DataRow, then rowElem is the region elem is part of)
         //
         // Those are the rules for determing if elem is a row element:
         //  1. node is an element (already meet, since elem is of type XmlElement)
-        //  2. If the node is already associated w/ a DataRow, then the node is a row element - not applicable, b/c this function is intended to be called on a
+        //  2. If the node is already associated w/ a DataRow, then the node is a row element - not
+        // applicable, b/c this function is intended to be called on a
         //    to find out if the node s/b associated w/ a DataRow (see XmlDataDocument.LoadRows)
         //  3. If the node localName/ns matches a DataTable then
         //      3.1 Take the parent region DataTable (in our case rowElem.Row.DataTable)
         //          3.2 If no parent region, then the node is associated w/ a DataTable
         //          3.3 If there is a parent region
-        //              3.3.1 If the node has no elem children and no attr other than namespace declaration, and the node can match
-        //                  a column from the parent region table, then the node is NOT associated w/ a DataTable (it is a potential DataColumn in the parent region)
+        //              3.3.1 If the node has no elem children and no attr other than namespace declaration,
+        // and the node can match
+        //                  a column from the parent region table, then the node is NOT associated w/ a
+        // DataTable (it is a potential DataColumn in the parent region)
         //              3.3.2 Else the node is a row-element (and associated w/ a DataTable / DataRow )
         //
         internal DataTable SearchMatchingTableSchema(XmlBoundElement rowElem, XmlBoundElement elem)
@@ -109,7 +116,8 @@ namespace System.Xml
             foreach (XmlAttribute a in elem.Attributes)
             {
 #if DEBUG
-                // Some sanity check to catch errors like namespace attributes have the right localName/namespace value, but a wrong atomized namespace value
+                // Some sanity check to catch errors like namespace attributes have the right localName/namespace
+                // value, but a wrong atomized namespace value
                 if (a.LocalName == "xmlns")
                 {
                     Debug.Assert(a.Prefix != null && a.Prefix.Length == 0);
@@ -162,7 +170,8 @@ namespace System.Xml
                     return col;
                 if (node.NodeType == XmlNodeType.Element && mt == MappingType.Element)
                     return col;
-                // node's (localName, ns) matches a column, but the MappingType is different (i.e. node is elem, MT is attr)
+                // node's (localName, ns) matches a column, but the MappingType is different (i.e. node is elem, MT
+                // is attr)
                 return null;
             }
             return null;
@@ -193,12 +202,14 @@ namespace System.Xml
             return c.ColumnMapping == MappingType.Hidden;
         }
 
-        // ATTENTION: GetRowFromElement( XmlElement ) and GetRowFromElement( XmlBoundElement ) should have the same functionality and side effects.
+        // ATTENTION: GetRowFromElement( XmlElement ) and GetRowFromElement( XmlBoundElement ) should have
+        // the same functionality and side effects.
         // See this code fragment for why:
         //     XmlBoundElement be = ...;
         //     XmlElement e = be;
         //     GetRowFromElement( be ); // Calls GetRowFromElement( XmlBoundElement )
-        //     GetRowFromElement( e );  // Calls GetRowFromElement( XmlElement ), in spite of e beeing an instance of XmlBoundElement
+        //     GetRowFromElement( e );  // Calls GetRowFromElement( XmlElement ), in spite of e beeing an
+        // instance of XmlBoundElement
         internal DataRow GetRowFromElement(XmlElement e)
         {
             XmlBoundElement be = e as XmlBoundElement;
@@ -213,8 +224,10 @@ namespace System.Xml
         }
 
         // Get the row-elem associatd w/ the region node is in.
-        // If node is in a region not mapped (like document element node) the function returns false and sets elem to null)
-        // This function does not work if the region is not associated w/ a DataRow (it uses DataRow association to know what is the row element associated w/ the region)
+        // If node is in a region not mapped (like document element node) the function returns false and
+        // sets elem to null)
+        // This function does not work if the region is not associated w/ a DataRow (it uses DataRow
+        // association to know what is the row element associated w/ the region)
         internal bool GetRegion(XmlNode node, out XmlBoundElement rowElem)
         {
             while (node != null)

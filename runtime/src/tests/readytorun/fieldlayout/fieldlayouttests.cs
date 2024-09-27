@@ -4,13 +4,16 @@ using Xunit;
 
 public class Test
 {
-    // This test uses the same set of types as the type system unittests use, and attempts to validate that the R2R usage of said types works well.
-    // This is done by touching the various types, and then relying on the verification logic in R2R images to detect failures.
+    // This test uses the same set of types as the type system unittests use, and attempts to validate
+    // that the R2R usage of said types works well.
+    // This is done by touching the various types, and then relying on the verification logic in R2R
+    // images to detect failures.
     [Fact]
     public static void TestEntryPoint()
     {
         ContainsGCPointersFieldsTest.Test();
-        //        ExplicitTest.Test(); // Explicit layout is known to not quite match the runtime, and if enabled this set of tests will fail.
+        //        ExplicitTest.Test(); // Explicit layout is known to not quite match the runtime, and if
+        // enabled this set of tests will fail.
         SequentialTest.Test();
         AutoTest.Test();
         EnumAlignmentTest.Test();

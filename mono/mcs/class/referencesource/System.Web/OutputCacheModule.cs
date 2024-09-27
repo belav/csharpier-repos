@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * Output cache module
- */
+* Output cache module
+*/
 namespace System.Web.Caching
 {
     using System.Collections;
@@ -25,8 +25,8 @@ namespace System.Web.Caching
     using System.Web.Util;
 
     /*
-     * Holds header and param names that this cached item varies by.
-     */
+    * Holds header and param names that this cached item varies by.
+    */
     [Serializable]
     internal class CachedVary
     {
@@ -92,13 +92,13 @@ namespace System.Web.Caching
     }
 
     /*
-     * Holds the cached response.
-     */
+    * Holds the cached response.
+    */
     internal class CachedRawResponse
     {
         /*
-         * Fields to store an actual response.
-         */
+        * Fields to store an actual response.
+        */
         internal Guid _cachedVaryId;
         internal readonly HttpRawResponse _rawResponse;
         internal readonly HttpCachePolicySettings _settings;
@@ -315,10 +315,10 @@ namespace System.Web.Caching
                 }
 
                 /*
-                 * if VaryByParms=*, and method is not a form, then
-                 * use a cryptographically strong hash of the data as
-                 * part of the key.
-                 */
+                * if VaryByParms=*, and method is not a form, then
+                * use a cryptographically strong hash of the data as
+                * part of the key.
+                */
                 sb.Append("D");
                 if (verb == HttpVerb.POST && cachedVary._varyByAllParams && request.Form.Count == 0)
                 {
@@ -343,8 +343,8 @@ namespace System.Web.Caching
                 }
 
                 /*
-                 * VaryByContentEncoding
-                 */
+                * VaryByContentEncoding
+                */
                 sb.Append("E");
                 string[] contentEncodings = cachedVary._contentEncodings;
                 if (contentEncodings != null)
@@ -372,10 +372,10 @@ namespace System.Web.Caching
         }
 
         /*
-         * Return a key to lookup a cached response. The key contains
-         * the path and optionally, vary parameters, vary headers, custom strings,
-         * and form posted data.
-         */
+        * Return a key to lookup a cached response. The key contains
+        * the path and optionally, vary parameters, vary headers, custom strings,
+        * and form posted data.
+        */
         string CreateOutputCachedItemKey(HttpContext context, CachedVary cachedVary)
         {
             return CreateOutputCachedItemKey(
@@ -387,10 +387,11 @@ namespace System.Web.Caching
         }
 
         /*
-         * GetAcceptableEncoding finds an acceptable coding for the given
-         * Accept-Encoding header (see RFC 2616)
-         * returns either i) an acceptable index in contentEncodings, ii) -1 if the identity is acceptable, or iii) -2 if nothing is acceptable
-         */
+        * GetAcceptableEncoding finds an acceptable coding for the given
+        * Accept-Encoding header (see RFC 2616)
+        * returns either i) an acceptable index in contentEncodings, ii) -1 if the identity is acceptable,
+        or iii) -2 if nothing is acceptable
+        */
         static int GetAcceptableEncoding(
             string[] contentEncodings,
             int startIndex,
@@ -615,8 +616,8 @@ namespace System.Web.Caching
         }
 
         /*
-         * Record a cache miss to the perf counters.
-         */
+        * Record a cache miss to the perf counters.
+        */
         void RecordCacheMiss()
         {
             if (!_recordedCacheMiss)
@@ -646,9 +647,9 @@ namespace System.Web.Caching
         void IHttpModule.Dispose() { }
 
         /*
-         * Try to find this request in the cache. If so, return it. Otherwise,
-         * store the cache key for use on Leave.
-         */
+        * Try to find this request in the cache. If so, return it. Otherwise,
+        * store the cache key for use on Leave.
+        */
 
         /// <devdoc>
         /// <para>Raises the <see langword='Enter'/>
@@ -709,8 +710,8 @@ namespace System.Web.Caching
             response = context.Response;
 
             /*
-             * Check if the request can be resolved for this method.
-             */
+            * Check if the request can be resolved for this method.
+            */
             switch (request.HttpVerb)
             {
                 case HttpVerb.HEAD:
@@ -729,14 +730,14 @@ namespace System.Web.Caching
             }
 
             /*
-             * Create a lookup key. Remember the key for use inside Leave()
-             */
+            * Create a lookup key. Remember the key for use inside Leave()
+            */
             _key = key = CreateOutputCachedItemKey(context, null);
             Debug.Assert(_key != null, "_key != null");
 
             /*
-             *  Lookup the cache vary for this key.
-             */
+            *  Lookup the cache vary for this key.
+            */
             item = OutputCache.Get(key);
             if (item == null)
             {
@@ -760,11 +761,11 @@ namespace System.Web.Caching
             if (cachedVary != null)
             {
                 /*
-                 * This cached output has a Vary policy. Create a new key based
-                 * on the vary headers in cachedRawResponse and try again.
-                 *
-                 * Skip this step if it's a VaryByNone vary policy.
-                 */
+                * This cached output has a Vary policy. Create a new key based
+                * on the vary headers in cachedRawResponse and try again.
+                *
+                * Skip this step if it's a VaryByNone vary policy.
+                */
 
 
                 key = CreateOutputCachedItemKey(context, cachedVary);
@@ -835,7 +836,8 @@ namespace System.Web.Caching
                         }
                     }
 
-                    // the identity should not be used if the client Accept-Encoding contains an entry in the VaryByContentEncoding list or "identity" is not acceptable
+                    // the identity should not be used if the client Accept-Encoding contains an entry in the
+                    // VaryByContentEncoding list or "identity" is not acceptable
                     if (item == null && identityIsAcceptable)
                     {
 #if DBG
@@ -894,8 +896,8 @@ namespace System.Web.Caching
             if (cachedVary == null && !settings.IgnoreParams)
             {
                 /*
-                 * This cached output has no vary policy, so make sure it doesn't have a query string or form post.
-                 */
+                * This cached output has no vary policy, so make sure it doesn't have a query string or form post.
+                */
                 if (request.HttpVerb == HttpVerb.POST)
                 {
                     Debug.Trace(
@@ -944,12 +946,12 @@ namespace System.Web.Caching
             hasValidationPolicy = settings.HasValidationPolicy();
 
             /*
-             * Determine whether the client can accept a cached copy, and
-             * get values of other cache control directives.
-             *
-             * We do this after lookup so we don't have to break down the headers
-             * if the item is not found. Cracking the headers is expensive.
-             */
+            * Determine whether the client can accept a cached copy, and
+            * get values of other cache control directives.
+            *
+            * We do this after lookup so we don't have to break down the headers
+            * if the item is not found. Cracking the headers is expensive.
+            */
             if (!hasValidationPolicy)
             {
                 cacheControl = request.Headers["Cache-Control"];
@@ -1069,8 +1071,8 @@ namespace System.Web.Caching
             else if (settings.ValidationCallbackInfo != null)
             {
                 /*
-                 * Check if the item is still valid.
-                 */
+                * Check if the item is still valid.
+                */
                 validationStatus = HttpValidationStatus.Valid;
                 validationStatusFinal = validationStatus;
                 for (i = 0, n = settings.ValidationCallbackInfo.Length; i < n; i++)
@@ -1169,16 +1171,16 @@ namespace System.Web.Caching
             }
 
             /*
-             * Try to satisfy a conditional request. The cached response
-             * must satisfy all conditions that are present.
-             *
-             * We can only satisfy a conditional request if the response
-             * is buffered and has no substitution blocks.
-             *
-             * N.B. RFC 2616 says conditional requests only occur
-             * with the GET method, but we try to satisfy other
-             * verbs (HEAD, POST) as well.
-             */
+            * Try to satisfy a conditional request. The cached response
+            * must satisfy all conditions that are present.
+            *
+            * We can only satisfy a conditional request if the response
+            * is buffered and has no substitution blocks.
+            *
+            * N.B. RFC 2616 says conditional requests only occur
+            * with the GET method, but we try to satisfy other
+            * verbs (HEAD, POST) as well.
+            */
             send304 = -1;
 
             if (!rawResponse.HasSubstBlocks)
@@ -1239,8 +1241,8 @@ namespace System.Web.Caching
             if (send304 == 1)
             {
                 /*
-                 * Send 304 Not Modified
-                 */
+                * Send 304 Not Modified
+                */
                 Debug.Trace(
                     "OutputCacheModuleEnter",
                     "Hit, conditional request satisfied, status=304."
@@ -1255,8 +1257,8 @@ namespace System.Web.Caching
             else
             {
                 /*
-                 * Send the full response.
-                 */
+                * Send the full response.
+                */
 #if DBG
                 if (send304 == -1)
                 {
@@ -1303,8 +1305,8 @@ namespace System.Web.Caching
         }
 
         /*
-         * If the item is cacheable, add it to the cache.
-         */
+        * If the item is cacheable, add it to the cache.
+        */
 
         /// <devdoc>
         /// <para>Raises the <see langword='Leave'/> event, which causes any cacheable items to
@@ -1342,8 +1344,8 @@ namespace System.Web.Caching
             string reason = null;
 #endif
             /*
-             * Determine whether the response is cacheable.
-             */
+            * Determine whether the response is cacheable.
+            */
             cacheable = false;
             do
             {
@@ -1389,14 +1391,14 @@ namespace System.Web.Caching
                 }
 
                 /*
-                 * Change a response with HttpCacheability.Public to HttpCacheability.Private
-                 * if it requires authorization, and allow it to be cached.
-                 *
-                 * Note that setting Cacheability to ServerAndPrivate would accomplish
-                 * the same thing without needing the "cacheAuthorizedPage" variable,
-                 * but in RTM we did not have ServerAndPrivate, and setting that value
-                 * would change the behavior.
-                 */
+                * Change a response with HttpCacheability.Public to HttpCacheability.Private
+                * if it requires authorization, and allow it to be cached.
+                *
+                * Note that setting Cacheability to ServerAndPrivate would accomplish
+                * the same thing without needing the "cacheAuthorizedPage" variable,
+                * but in RTM we did not have ServerAndPrivate, and setting that value
+                * would change the behavior.
+                */
                 cacheAuthorizedPage = false;
                 if (
                     cache.GetCacheability() == HttpCacheability.Public
@@ -1429,8 +1431,10 @@ namespace System.Web.Caching
                     break;
                 }
 
-                // MSRC 11855 (DevDiv 297240 / 362405) - We should suppress output caching for responses which contain non-shareable cookies.
-                // We already disable the HTTP.SYS and IIS user mode cache when *any* response cookie is present (see IIS7WorkerRequest.SendUnknownResponseHeader)
+                // MSRC 11855 (DevDiv 297240 / 362405) - We should suppress output caching for responses which
+                // contain non-shareable cookies.
+                // We already disable the HTTP.SYS and IIS user mode cache when *any* response cookie is present
+                // (see IIS7WorkerRequest.SendUnknownResponseHeader)
                 if (response.ContainsNonShareableCookies())
                 {
 #if DBG
@@ -1485,8 +1489,8 @@ namespace System.Web.Caching
             } while (false);
 
             /*
-             * Add response to cache.
-             */
+            * Add response to cache.
+            */
             if (!cacheable)
             {
 #if DBG
@@ -1535,21 +1539,21 @@ namespace System.Web.Caching
             )
             {
                 /*
-                 * This is not a varyBy item.
-                 */
+                * This is not a varyBy item.
+                */
                 keyRawResponse = _key;
                 cachedVary = null;
             }
             else
             {
                 /*
-                 * There is a vary in the cache policy. We handle this
-                 * by adding another item to the cache which contains
-                 * a list of the vary headers. A request for the item
-                 * without the vary headers in the key will return this
-                 * item. From the headers another key can be constructed
-                 * to lookup the item with the raw response.
-                 */
+                * There is a vary in the cache policy. We handle this
+                * by adding another item to the cache which contains
+                * a list of the vary headers. A request for the item
+                * without the vary headers in the key will return this
+                * item. From the headers another key can be constructed
+                * to lookup the item with the raw response.
+                */
                 if (varyByHeaders != null)
                 {
                     for (i = 0, n = varyByHeaders.Length; i < n; i++)

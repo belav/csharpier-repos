@@ -23,10 +23,12 @@ namespace System.Threading.Tasks
     /// </typeparam>
     /// <remarks>
     /// <para>
-    /// <see cref="Task{TResult}"/> instances may be created in a variety of ways. The most common approach is by
+    /// <see cref="Task{TResult}"/> instances may be created in a variety of ways. The most common
+    // approach is by
     /// using the task's <see cref="Factory"/> property to retrieve a <see
     /// cref="TaskFactory{TResult}"/> instance that can be used to create tasks for several
-    /// purposes. For example, to create a <see cref="Task{TResult}"/> that runs a function, the factory's StartNew
+    /// purposes. For example, to create a <see cref="Task{TResult}"/> that runs a function, the
+    // factory's StartNew
     /// method may be used:
     /// <code>
     /// // C#
@@ -41,9 +43,11 @@ namespace System.Threading.Tasks
     /// </code>
     /// </para>
     /// <para>
-    /// The <see cref="Task{TResult}"/> class also provides constructors that initialize the task but that do not
+    /// The <see cref="Task{TResult}"/> class also provides constructors that initialize the task but
+    // that do not
     /// schedule it for execution. For performance reasons, the StartNew method should be the
-    /// preferred mechanism for creating and scheduling computational tasks, but for scenarios where creation
+    /// preferred mechanism for creating and scheduling computational tasks, but for scenarios where
+    // creation
     /// and scheduling must be separated, the constructors may be used, and the task's
     /// <see cref="Task.Start()">Start</see>
     /// method may then be used to schedule the task for execution at a later time.
@@ -69,8 +73,10 @@ namespace System.Threading.Tasks
         // The value itself, if set.
         internal TResult? m_result;
 
-        // Extract rarely used helper for a static method in a separate type so that the Func<Task<Task>, Task<TResult>>
-        // generic instantiations don't contribute to all Task instantiations, but only those where WhenAny is used.
+        // Extract rarely used helper for a static method in a separate type so that the Func<Task<Task>,
+        // Task<TResult>>
+        // generic instantiations don't contribute to all Task instantiations, but only those where WhenAny
+        // is used.
         internal static class TaskWhenAnyCast
         {
             // Delegate used by:
@@ -136,11 +142,13 @@ namespace System.Threading.Tasks
         /// The delegate that represents the code to execute in the task. When the function has completed,
         /// the task's <see cref="Result"/> property will be set to return the result value of the function.
         /// </param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be assigned to this task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be assigned to this
+        // task.</param>
         /// <exception cref="ArgumentException">
         /// The <paramref name="function"/> argument is null.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task(Func<TResult> function, CancellationToken cancellationToken)
@@ -188,7 +196,8 @@ namespace System.Threading.Tasks
         /// The delegate that represents the code to execute in the task. When the function has completed,
         /// the task's <see cref="Result"/> property will be set to return the result value of the function.
         /// </param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="creationOptions">
         /// The <see cref="TaskCreationOptions">TaskCreationOptions</see> used to
         /// customize the task's behavior.
@@ -200,7 +209,8 @@ namespace System.Threading.Tasks
         /// The <paramref name="creationOptions"/> argument specifies an invalid value for <see
         /// cref="TaskCreationOptions"/>.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task(
@@ -247,11 +257,13 @@ namespace System.Threading.Tasks
         /// the task's <see cref="Result"/> property will be set to return the result value of the function.
         /// </param>
         /// <param name="state">An object representing data to be used by the function.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be assigned to the new
+        // task.</param>
         /// <exception cref="ArgumentException">
         /// The <paramref name="function"/> argument is null.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task(
@@ -311,7 +323,8 @@ namespace System.Threading.Tasks
         /// the task's <see cref="Result"/> property will be set to return the result value of the function.
         /// </param>
         /// <param name="state">An object representing data to be used by the function.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to be assigned to the new
+        // task.</param>
         /// <param name="creationOptions">
         /// The <see cref="TaskCreationOptions">TaskCreationOptions</see> used to
         /// customize the task's behavior.
@@ -323,7 +336,8 @@ namespace System.Threading.Tasks
         /// The <paramref name="creationOptions"/> argument specifies an invalid value for <see
         /// cref="TaskCreationOptions"/>.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task(
@@ -559,7 +573,8 @@ namespace System.Threading.Tasks
                 : m_result!;
 
         /// <summary>
-        /// Gets the result value of this <see cref="Task{TResult}"/> once the task has completed successfully.
+        /// Gets the result value of this <see cref="Task{TResult}"/> once the task has completed
+        // successfully.
         /// </summary>
         /// <remarks>
         /// This version of Result should only be used if the task completed successfully and if there's
@@ -646,7 +661,8 @@ namespace System.Threading.Tasks
 
         /// <summary>Configures an awaiter used to await this <see cref="Task{TResult}"/>.</summary>
         /// <param name="continueOnCapturedContext">
-        /// true to attempt to marshal the continuation back to the original context captured; otherwise, false.
+        /// true to attempt to marshal the continuation back to the original context captured; otherwise,
+        // false.
         /// </param>
         /// <returns>An object used to await this task.</returns>
         public new ConfiguredTaskAwaitable<TResult> ConfigureAwait(bool continueOnCapturedContext)
@@ -662,7 +678,8 @@ namespace System.Threading.Tasks
         /// <summary>Configures an awaiter used to await this <see cref="Task"/>.</summary>
         /// <param name="options">Options used to configure how awaits on this task are performed.</param>
         /// <returns>An object used to await this task.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="options"/> argument specifies an invalid value.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="options"/> argument specifies
+        // an invalid value.</exception>
         public new ConfiguredTaskAwaitable<TResult> ConfigureAwait(ConfigureAwaitOptions options)
         {
             if (
@@ -694,15 +711,22 @@ namespace System.Threading.Tasks
         #endregion
 
         #region WaitAsync methods
-        /// <summary>Gets a <see cref="Task{TResult}"/> that will complete when this <see cref="Task{TResult}"/> completes or when the specified <see cref="CancellationToken"/> has cancellation requested.</summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for a cancellation request.</param>
-        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not be the same instance as the current instance.</returns>
+        /// <summary>Gets a <see cref="Task{TResult}"/> that will complete when this <see
+        // cref="Task{TResult}"/> completes or when the specified <see cref="CancellationToken"/> has
+        // cancellation requested.</summary>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for a
+        // cancellation request.</param>
+        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not
+        // be the same instance as the current instance.</returns>
         public new Task<TResult> WaitAsync(CancellationToken cancellationToken) =>
             WaitAsync(Timeout.UnsignedInfinite, TimeProvider.System, cancellationToken);
 
-        /// <summary>Gets a <see cref="Task{TResult}"/> that will complete when this <see cref="Task{TResult}"/> completes or when the specified timeout expires.</summary>
-        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
-        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not be the same instance as the current instance.</returns>
+        /// <summary>Gets a <see cref="Task{TResult}"/> that will complete when this <see
+        // cref="Task{TResult}"/> completes or when the specified timeout expires.</summary>
+        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a
+        // <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
+        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not
+        // be the same instance as the current instance.</returns>
         public new Task<TResult> WaitAsync(TimeSpan timeout) =>
             WaitAsync(
                 ValidateTimeout(timeout, ExceptionArgument.timeout),
@@ -711,11 +735,15 @@ namespace System.Threading.Tasks
             );
 
         /// <summary>
-        /// Gets a <see cref="Task{TResult}"/> that will complete when this <see cref="Task{TResult}"/> completes or when the specified timeout expires.
+        /// Gets a <see cref="Task{TResult}"/> that will complete when this <see cref="Task{TResult}"/>
+        // completes or when the specified timeout expires.
         /// </summary>
-        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
-        /// <param name="timeProvider">The <see cref="TimeProvider"/> with which to interpret <paramref name="timeout"/>.</param>
-        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not be the same instance as the current instance.</returns>
+        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a
+        // <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
+        /// <param name="timeProvider">The <see cref="TimeProvider"/> with which to interpret <paramref
+        // name="timeout"/>.</param>
+        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not
+        // be the same instance as the current instance.</returns>
         public new Task<TResult> WaitAsync(TimeSpan timeout, TimeProvider timeProvider)
         {
             ArgumentNullException.ThrowIfNull(timeProvider);
@@ -726,10 +754,15 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Gets a <see cref="Task{TResult}"/> that will complete when this <see cref="Task{TResult}"/> completes, when the specified timeout expires, or when the specified <see cref="CancellationToken"/> has cancellation requested.</summary>
-        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for a cancellation request.</param>
-        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not be the same instance as the current instance.</returns>
+        /// <summary>Gets a <see cref="Task{TResult}"/> that will complete when this <see
+        // cref="Task{TResult}"/> completes, when the specified timeout expires, or when the specified <see
+        // cref="CancellationToken"/> has cancellation requested.</summary>
+        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a
+        // <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for a
+        // cancellation request.</param>
+        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not
+        // be the same instance as the current instance.</returns>
         public new Task<TResult> WaitAsync(TimeSpan timeout, CancellationToken cancellationToken) =>
             WaitAsync(
                 ValidateTimeout(timeout, ExceptionArgument.timeout),
@@ -738,12 +771,18 @@ namespace System.Threading.Tasks
             );
 
         /// <summary>
-        /// Gets a <see cref="Task{TResult}"/> that will complete when this <see cref="Task{TResult}"/> completes, when the specified timeout expires, or when the specified <see cref="CancellationToken"/> has cancellation requested.
+        /// Gets a <see cref="Task{TResult}"/> that will complete when this <see cref="Task{TResult}"/>
+        // completes, when the specified timeout expires, or when the specified <see cref="CancellationToken"/>
+        // has cancellation requested.
         /// </summary>
-        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
-        /// <param name="timeProvider">The <see cref="TimeProvider"/> with which to interpret <paramref name="timeout"/>.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for a cancellation request.</param>
-        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not be the same instance as the current instance.</returns>
+        /// <param name="timeout">The timeout after which the <see cref="Task"/> should be faulted with a
+        // <see cref="TimeoutException"/> if it hasn't otherwise completed.</param>
+        /// <param name="timeProvider">The <see cref="TimeProvider"/> with which to interpret <paramref
+        // name="timeout"/>.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for a
+        // cancellation request.</param>
+        /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.  It may or may not
+        // be the same instance as the current instance.</returns>
         public new Task<TResult> WaitAsync(
             TimeSpan timeout,
             TimeProvider timeProvider,
@@ -831,7 +870,8 @@ namespace System.Threading.Tasks
         /// An action to run when the <see cref="Task{TResult}"/> completes. When run, the delegate will be
         /// passed the completed task as an argument.
         /// </param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new continuation task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new continuation task.</param>
         /// <returns>A new continuation <see cref="Task"/>.</returns>
         /// <remarks>
         /// The returned <see cref="Task"/> will not be scheduled for execution until the current task has
@@ -862,7 +902,8 @@ namespace System.Threading.Tasks
         /// passed the completed task as an argument.
         /// </param>
         /// <param name="scheduler">
-        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its execution.
+        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its
+        // execution.
         /// </param>
         /// <returns>A new continuation <see cref="Task"/>.</returns>
         /// <remarks>
@@ -934,7 +975,8 @@ namespace System.Threading.Tasks
         /// An action to run when the <see cref="Task{TResult}"/> completes. When run, the delegate will be
         /// passed the completed task as an argument.
         /// </param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new continuation task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new continuation task.</param>
         /// <param name="continuationOptions">
         /// Options for when the continuation is scheduled and how it behaves. This includes criteria, such
         /// as <see
@@ -949,7 +991,8 @@ namespace System.Threading.Tasks
         /// <returns>A new continuation <see cref="Task"/>.</returns>
         /// <remarks>
         /// The returned <see cref="Task"/> will not be scheduled for execution until the current task has
-        /// completed. If the criteria specified through the <paramref name="continuationOptions"/> parameter
+        /// completed. If the criteria specified through the <paramref name="continuationOptions"/>
+        // parameter
         /// are not met, the continuation task will be canceled instead of scheduled.
         /// </remarks>
         /// <exception cref="ArgumentNullException">
@@ -1055,7 +1098,8 @@ namespace System.Threading.Tasks
         /// passed the completed task and the caller-supplied state object as arguments.
         /// </param>
         /// <param name="state">An object representing data to be used by the continuation action.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new continuation task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new continuation task.</param>
         /// <returns>A new continuation <see cref="Task"/>.</returns>
         /// <remarks>
         /// The returned <see cref="Task"/> will not be scheduled for execution until the current task has
@@ -1089,7 +1133,8 @@ namespace System.Threading.Tasks
         /// </param>
         /// <param name="state">An object representing data to be used by the continuation action.</param>
         /// <param name="scheduler">
-        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its execution.
+        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its
+        // execution.
         /// </param>
         /// <returns>A new continuation <see cref="Task"/>.</returns>
         /// <remarks>
@@ -1170,7 +1215,8 @@ namespace System.Threading.Tasks
         /// passed the completed task and the caller-supplied state object as arguments.
         /// </param>
         /// <param name="state">An object representing data to be used by the continuation action.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new continuation task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new continuation task.</param>
         /// <param name="continuationOptions">
         /// Options for when the continuation is scheduled and how it behaves. This includes criteria, such
         /// as <see
@@ -1185,7 +1231,8 @@ namespace System.Threading.Tasks
         /// <returns>A new continuation <see cref="Task"/>.</returns>
         /// <remarks>
         /// The returned <see cref="Task"/> will not be scheduled for execution until the current task has
-        /// completed. If the criteria specified through the <paramref name="continuationOptions"/> parameter
+        /// completed. If the criteria specified through the <paramref name="continuationOptions"/>
+        // parameter
         /// are not met, the continuation task will be canceled instead of scheduled.
         /// </remarks>
         /// <exception cref="ArgumentNullException">
@@ -1271,7 +1318,8 @@ namespace System.Threading.Tasks
         /// </param>
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current
         /// task has completed, whether it completes due to running to completion successfully, faulting due
         /// to an unhandled exception, or exiting out early due to being canceled.
         /// </remarks>
@@ -1300,17 +1348,20 @@ namespace System.Threading.Tasks
         /// A function to run when the <see cref="Task{TResult}"/> completes. When run, the delegate will be
         /// passed the completed task as an argument.
         /// </param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current
         /// task has completed, whether it completes due to running to completion successfully, faulting due
         /// to an unhandled exception, or exiting out early due to being canceled.
         /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="continuationFunction"/> argument is null.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TNewResult> ContinueWith<TNewResult>(
@@ -1333,15 +1384,18 @@ namespace System.Threading.Tasks
         /// The type of the result produced by the continuation.
         /// </typeparam>
         /// <param name="continuationFunction">
-        /// A function to run when the <see cref="Task{TResult}"/> completes.  When run, the delegate will be
+        /// A function to run when the <see cref="Task{TResult}"/> completes.  When run, the delegate will
+        // be
         /// passed the completed task as an argument.
         /// </param>
         /// <param name="scheduler">
-        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its execution.
+        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its
+        // execution.
         /// </param>
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current task has
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current task has
         /// completed, whether it completes due to running to completion successfully, faulting due to an
         /// unhandled exception, or exiting out early due to being canceled.
         /// </remarks>
@@ -1384,7 +1438,8 @@ namespace System.Threading.Tasks
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
         /// <para>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current
         /// task has completed, whether it completes due to running to completion successfully, faulting due
         /// to an unhandled exception, or exiting out early due to being canceled.
         /// </para>
@@ -1421,10 +1476,12 @@ namespace System.Threading.Tasks
         /// The type of the result produced by the continuation.
         /// </typeparam>
         /// <param name="continuationFunction">
-        /// A function to run when the <see cref="Task{TResult}"/> completes. When run, the delegate will be passed as
+        /// A function to run when the <see cref="Task{TResult}"/> completes. When run, the delegate will be
+        // passed as
         /// an argument this completed task.
         /// </param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="continuationOptions">
         /// Options for when the continuation is scheduled and how it behaves. This includes criteria, such
         /// as <see
@@ -1439,12 +1496,14 @@ namespace System.Threading.Tasks
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
         /// <para>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current task has
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current task has
         /// completed, whether it completes due to running to completion successfully, faulting due to an
         /// unhandled exception, or exiting out early due to being canceled.
         /// </para>
         /// <para>
-        /// The <paramref name="continuationFunction"/>, when executed, should return a <see cref="Task{TNewResult}"/>.
+        /// The <paramref name="continuationFunction"/>, when executed, should return a <see
+        // cref="Task{TNewResult}"/>.
         /// This task's completion state will be transferred to the task returned from the
         /// ContinueWith call.
         /// </para>
@@ -1459,7 +1518,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="scheduler"/> argument is null.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TNewResult> ContinueWith<TNewResult>(
@@ -1529,7 +1589,8 @@ namespace System.Threading.Tasks
         /// <param name="state">An object representing data to be used by the continuation function.</param>
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current
         /// task has completed, whether it completes due to running to completion successfully, faulting due
         /// to an unhandled exception, or exiting out early due to being canceled.
         /// </remarks>
@@ -1561,17 +1622,20 @@ namespace System.Threading.Tasks
         /// passed the completed task and the caller-supplied state object as arguments.
         /// </param>
         /// <param name="state">An object representing data to be used by the continuation function.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current
         /// task has completed, whether it completes due to running to completion successfully, faulting due
         /// to an unhandled exception, or exiting out early due to being canceled.
         /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="continuationFunction"/> argument is null.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TNewResult> ContinueWith<TNewResult>(
@@ -1596,16 +1660,19 @@ namespace System.Threading.Tasks
         /// The type of the result produced by the continuation.
         /// </typeparam>
         /// <param name="continuationFunction">
-        /// A function to run when the <see cref="Task{TResult}"/> completes.  When run, the delegate will be
+        /// A function to run when the <see cref="Task{TResult}"/> completes.  When run, the delegate will
+        // be
         /// passed the completed task and the caller-supplied state object as arguments.
         /// </param>
         /// <param name="state">An object representing data to be used by the continuation function.</param>
         /// <param name="scheduler">
-        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its execution.
+        /// The <see cref="TaskScheduler"/> to associate with the continuation task and to use for its
+        // execution.
         /// </param>
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current task has
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current task has
         /// completed, whether it completes due to running to completion successfully, faulting due to an
         /// unhandled exception, or exiting out early due to being canceled.
         /// </remarks>
@@ -1651,7 +1718,8 @@ namespace System.Threading.Tasks
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
         /// <para>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current
         /// task has completed, whether it completes due to running to completion successfully, faulting due
         /// to an unhandled exception, or exiting out early due to being canceled.
         /// </para>
@@ -1694,7 +1762,8 @@ namespace System.Threading.Tasks
         /// passed the completed task and the caller-supplied state object as arguments.
         /// </param>
         /// <param name="state">An object representing data to be used by the continuation function.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="continuationOptions">
         /// Options for when the continuation is scheduled and how it behaves. This includes criteria, such
         /// as <see
@@ -1709,12 +1778,14 @@ namespace System.Threading.Tasks
         /// <returns>A new continuation <see cref="Task{TNewResult}"/>.</returns>
         /// <remarks>
         /// <para>
-        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the current task has
+        /// The returned <see cref="Task{TNewResult}"/> will not be scheduled for execution until the
+        // current task has
         /// completed, whether it completes due to running to completion successfully, faulting due to an
         /// unhandled exception, or exiting out early due to being canceled.
         /// </para>
         /// <para>
-        /// The <paramref name="continuationFunction"/>, when executed, should return a <see cref="Task{TNewResult}"/>.
+        /// The <paramref name="continuationFunction"/>, when executed, should return a <see
+        // cref="Task{TNewResult}"/>.
         /// This task's completion state will be transferred to the task returned from the
         /// ContinueWith call.
         /// </para>
@@ -1729,7 +1800,8 @@ namespace System.Threading.Tasks
         /// <exception cref="ArgumentNullException">
         /// The <paramref name="scheduler"/> argument is null.
         /// </exception>
-        /// <exception cref="ObjectDisposedException">The provided <see cref="CancellationToken">CancellationToken</see>
+        /// <exception cref="ObjectDisposedException">The provided <see
+        // cref="CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         public Task<TNewResult> ContinueWith<TNewResult>(

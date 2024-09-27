@@ -4,9 +4,11 @@
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 /// <summary>
-/// A mapping of a <see cref="AspNetCore.Razor.TagHelpers.ITagHelper"/> mode to its required attributes.
+/// A mapping of a <see cref="AspNetCore.Razor.TagHelpers.ITagHelper"/> mode to its required
+// attributes.
 /// </summary>
-/// <typeparam name="TMode">The type representing the <see cref="AspNetCore.Razor.TagHelpers.ITagHelper"/>'s mode.</typeparam>
+/// <typeparam name="TMode">The type representing the <see
+// cref="AspNetCore.Razor.TagHelpers.ITagHelper"/>'s mode.</typeparam>
 internal sealed class ModeAttributes<TMode>
 {
     /// <summary>

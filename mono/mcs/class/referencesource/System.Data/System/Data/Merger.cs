@@ -66,7 +66,8 @@ namespace System.Data
             bool fEnforce = dataSet.EnforceConstraints;
             dataSet.EnforceConstraints = false;
             _IgnoreNSforTableLookup = (dataSet.namespaceURI != source.namespaceURI); // if two DataSets have different
-            // Namespaces, ignore NS for table lookups as we wont be able to find the right tables which inherits its NS
+            // Namespaces, ignore NS for table lookups as we wont be able to find the right tables which
+            // inherits its NS
 
             List<DataColumn> existingColumns = null; // need to cache existing columns
 
@@ -304,7 +305,8 @@ namespace System.Data
                     {
                         // Getting our own copy instead. ndxSearch = dst.primaryKey.Key.GetSortIndex();
                         // IMO, Better would be to reuse index
-                        // ndxSearch = dst.primaryKey.Key.GetSortIndex(DataViewRowState.OriginalRows | DataViewRowState.Added );
+                        // ndxSearch = dst.primaryKey.Key.GetSortIndex(DataViewRowState.OriginalRows |
+                        // DataViewRowState.Added );
                         if (null != ndxSearch)
                         {
                             ndxSearch.RemoveRef();
@@ -372,7 +374,8 @@ namespace System.Data
                 if (MissingSchemaAction.Add == missingSchemaAction)
                 {
                     targetTable = table.Clone(table.DataSet); // if we are here mainly we are called from DataSet.Merge at this point we don't set
-                    //expression columns, since it might have refer to other columns via relation, so it wont find the table and we get exception;
+                    //expression columns, since it might have refer to other columns via relation, so it wont find the
+                    // table and we get exception;
                     // do it after adding relations.
                     dataSet.Tables.Add(targetTable);
                 }

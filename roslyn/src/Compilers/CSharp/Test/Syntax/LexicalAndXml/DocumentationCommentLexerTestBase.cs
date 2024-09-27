@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         }
 
         /// <summary>
-        /// Convenience method for constructing TokenDescriptions.  If the text fields can be populated based
+        /// Convenience method for constructing TokenDescriptions.  If the text fields can be populated
+        // based
         /// on the SyntaxKind, then they will be.
         /// </summary>
         /// <param name="kind">Mandatory.</param>

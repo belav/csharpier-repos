@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace System.Threading
 {
     /// <summary>
-    /// Represents a callback delegate that has been registered with a <see cref="CancellationToken">CancellationToken</see>.
+    /// Represents a callback delegate that has been registered with a <see
+    // cref="CancellationToken">CancellationToken</see>.
     /// </summary>
     /// <remarks>
     /// To unregister a callback, dispose the corresponding Registration instance.
@@ -46,14 +47,19 @@ namespace System.Threading
                     CancellationTokenSource.CallbackNode node
                 )
                 {
-                    // We're a valid registration but we were unable to unregister, which means the callback wasn't in the list,
-                    // which means either it already executed or it's currently executing. We guarantee that we will not return
+                    // We're a valid registration but we were unable to unregister, which means the callback wasn't in
+                    // the list,
+                    // which means either it already executed or it's currently executing. We guarantee that we will not
+                    // return
                     // if the callback is being executed (assuming we are not currently called by the callback itself)
                     // We achieve this by the following rules:
-                    //    1. If we are called in the context of an executing callback, no need to wait (determined by tracking callback-executor threadID)
-                    //       - if the currently executing callback is this CTR, then waiting would deadlock. (We choose to return rather than deadlock)
+                    //    1. If we are called in the context of an executing callback, no need to wait (determined by
+                    // tracking callback-executor threadID)
+                    //       - if the currently executing callback is this CTR, then waiting would deadlock. (We choose
+                    // to return rather than deadlock)
                     //       - if not, then this CTR cannot be the one executing, hence no need to wait
-                    //    2. If unregistration failed, and we are on a different thread, then the callback may be running under control of cts.Cancel()
+                    //    2. If unregistration failed, and we are on a different thread, then the callback may be
+                    // running under control of cts.Cancel()
                     //       => poll until cts.ExecutingCallback is not the one we are trying to unregister.
                     CancellationTokenSource source = node.Registrations.Source;
                     if (
@@ -65,7 +71,8 @@ namespace System.Threading
                             != Environment.CurrentManagedThreadId
                     ) // The executing thread ID is not this thread's ID.
                     {
-                        // Callback execution is in progress, the executing thread is different from this thread and has taken the callback for execution
+                        // Callback execution is in progress, the executing thread is different from this thread and has
+                        // taken the callback for execution
                         // so observe and wait until this target callback is no longer the executing callback.
                         node.Registrations.WaitForCallbackToComplete(id);
                     }
@@ -93,7 +100,8 @@ namespace System.Threading
                 CancellationTokenSource.CallbackNode node
             )
             {
-                // Same as WaitForCallbackIfNecessary, except returning a task that'll be completed when callbacks complete.
+                // Same as WaitForCallbackIfNecessary, except returning a task that'll be completed when callbacks
+                // complete.
 
                 CancellationTokenSource source = node.Registrations.Source;
                 if (
@@ -105,7 +113,8 @@ namespace System.Threading
                         != Environment.CurrentManagedThreadId
                 ) // The executing thread ID is not this thread's ID.
                 {
-                    // Callback execution is in progress, the executing thread is different from this thread and has taken the callback for execution
+                    // Callback execution is in progress, the executing thread is different from this thread and has
+                    // taken the callback for execution
                     // so get a task that'll complete when this target callback is no longer the executing callback.
                     return node.Registrations.WaitForCallbackToCompleteAsync(id);
                 }
@@ -115,9 +124,11 @@ namespace System.Threading
             }
         }
 
-        /// <summary>Gets the <see cref="CancellationToken"/> with which this registration is associated.</summary>
+        /// <summary>Gets the <see cref="CancellationToken"/> with which this registration is
+        // associated.</summary>
         /// <remarks>
-        /// If the registration isn't associated with a token (such as for a registration returned from a call
+        /// If the registration isn't associated with a token (such as for a registration returned from a
+        // call
         /// to <see cref="CancellationToken.Register"/> on a token that already had cancellation requested),
         /// this will return a default token.
         /// </remarks>
@@ -149,7 +160,8 @@ namespace System.Threading
         ) => left.Equals(right);
 
         /// <summary>
-        /// Determines whether two <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instances are not equal.
+        /// Determines whether two <see
+        // cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instances are not equal.
         /// </summary>
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
@@ -160,12 +172,14 @@ namespace System.Threading
         ) => !left.Equals(right);
 
         /// <summary>
-        /// Determines whether the current <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instance is equal to the
+        /// Determines whether the current <see
+        // cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instance is equal to the
         /// specified <see cref="object"/>.
         /// </summary>
         /// <param name="obj">The other object to which to compare this instance.</param>
         /// <returns>True, if both this and <paramref name="obj"/> are equal. False, otherwise.
-        /// Two <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instances are equal if
+        /// Two <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instances are
+        // equal if
         /// they both refer to the output of a single call to the same Register method of a
         /// <see cref="CancellationToken">CancellationToken</see>.
         /// </returns>
@@ -173,12 +187,16 @@ namespace System.Threading
             obj is CancellationTokenRegistration other && Equals(other);
 
         /// <summary>
-        /// Determines whether the current <see cref="CancellationToken">CancellationToken</see> instance is equal to the
+        /// Determines whether the current <see cref="CancellationToken">CancellationToken</see> instance is
+        // equal to the
         /// specified <see cref="object"/>.
         /// </summary>
-        /// <param name="other">The other <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> to which to compare this instance.</param>
+        /// <param name="other">The other <see
+        // cref="CancellationTokenRegistration">CancellationTokenRegistration</see> to which to compare this
+        // instance.</param>
         /// <returns>True, if both this and <paramref name="other"/> are equal. False, otherwise.
-        /// Two <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instances are equal if
+        /// Two <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instances are
+        // equal if
         /// they both refer to the output of a single call to the same Register method of a
         /// <see cref="CancellationToken">CancellationToken</see>.
         /// </returns>
@@ -186,9 +204,11 @@ namespace System.Threading
             _node == other._node && _id == other._id;
 
         /// <summary>
-        /// Serves as a hash function for a <see cref="CancellationTokenRegistration">CancellationTokenRegistration.</see>.
+        /// Serves as a hash function for a <see
+        // cref="CancellationTokenRegistration">CancellationTokenRegistration.</see>.
         /// </summary>
-        /// <returns>A hash code for the current <see cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instance.</returns>
+        /// <returns>A hash code for the current <see
+        // cref="CancellationTokenRegistration">CancellationTokenRegistration</see> instance.</returns>
         public override int GetHashCode() =>
             _node != null ? _node.GetHashCode() ^ _id.GetHashCode() : _id.GetHashCode();
     }

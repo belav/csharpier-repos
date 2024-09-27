@@ -133,25 +133,25 @@ namespace System.Web.Services.Protocols
             return sb.ToString();
         }
 
-        /*
-        // Microsoft: adapted from UrlEscapeStringUnicode below
-        internal static string EscapeStringUnicode(string s) {
-            int l = s.Length;
-            StringBuilder sb = new StringBuilder(l);
+/*
+// Microsoft: adapted from UrlEscapeStringUnicode below
+internal static string EscapeStringUnicode(string s) {
+int l = s.Length;
+StringBuilder sb = new StringBuilder(l);
 
-            for (int i = 0; i < l; i++) {
-                char ch = s[i];
-                if ((ch & 0xff80) == 0) {
-                    sb.Append(ch);
-                }
-                else {
-                    HexEscape16(sb, ch);
-                }
-            }
+for (int i = 0; i < l; i++) {
+char ch = s[i];
+if ((ch & 0xff80) == 0) {
+sb.Append(ch);
+}
+else {
+HexEscape16(sb, ch);
+}
+}
 
-            return sb.ToString();
-        }
-        */
+return sb.ToString();
+}
+*/
 
         // Microsoft: copied from System.Web.HttpUtility
         internal static string UrlEscapeStringUnicode(string s)

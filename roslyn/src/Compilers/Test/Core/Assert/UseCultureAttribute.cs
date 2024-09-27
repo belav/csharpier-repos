@@ -76,7 +76,8 @@ namespace Roslyn.Test.Utilities
         public CultureInfo UICulture => _uiCulture.Value;
 
         /// <summary>
-        /// Stores the current <see cref="CultureInfo.CurrentCulture" /> and <see cref="CultureInfo.CurrentUICulture" />
+        /// Stores the current <see cref="CultureInfo.CurrentCulture" /> and <see
+        // cref="CultureInfo.CurrentUICulture" />
         /// and replaces them with the new cultures defined in the constructor.
         /// </summary>
         /// <param name="methodUnderTest">The method under test</param>

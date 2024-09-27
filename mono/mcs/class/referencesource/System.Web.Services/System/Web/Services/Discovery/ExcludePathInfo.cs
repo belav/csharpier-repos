@@ -17,13 +17,15 @@ namespace System.Web.Services.Discovery
     {
         private string path = null;
 
-        /// <include file='doc\ExcludePathInfo.uex' path='docs/doc[@for="ExcludePathInfo.ExcludePathInfo"]/*' />
+        /// <include file='doc\ExcludePathInfo.uex'
+        // path='docs/doc[@for="ExcludePathInfo.ExcludePathInfo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public ExcludePathInfo() { }
 
-        /// <include file='doc\ExcludePathInfo.uex' path='docs/doc[@for="ExcludePathInfo.ExcludePathInfo1"]/*' />
+        /// <include file='doc\ExcludePathInfo.uex'
+        // path='docs/doc[@for="ExcludePathInfo.ExcludePathInfo1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

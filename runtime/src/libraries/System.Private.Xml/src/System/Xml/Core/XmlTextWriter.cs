@@ -27,7 +27,8 @@ namespace System.Xml
     }
 
     // Represents a writer that provides fast non-cached forward-only way of generating XML streams
-    // containing XML documents that conform to the W3CExtensible Markup Language (XML) 1.0 specification
+    // containing XML documents that conform to the W3CExtensible Markup Language (XML) 1.0
+    // specification
     // and the Namespaces in XML specification.
 
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -220,7 +221,8 @@ namespace System.Xml
 
         private static readonly State[] s_stateTableDefault =
         {
-            //                          State.Start      State.Prolog     State.PostDTD    State.Element    State.Attribute  State.Content   State.AttrOnly   State.Epilog
+            //                          State.Start      State.Prolog     State.PostDTD    State.Element
+            // State.Attribute  State.Content   State.AttrOnly   State.Epilog
             //
             /* Token.PI             */State.Prolog,
             State.Prolog,
@@ -330,7 +332,8 @@ namespace System.Xml
 
         private static readonly State[] s_stateTableDocument =
         {
-            //                          State.Start      State.Prolog     State.PostDTD    State.Element    State.Attribute  State.Content   State.AttrOnly   State.Epilog
+            //                          State.Start      State.Prolog     State.PostDTD    State.Element
+            // State.Attribute  State.Content   State.AttrOnly   State.Epilog
             //
             /* Token.PI             */State.Error,
             State.Prolog,
@@ -536,7 +539,8 @@ namespace System.Xml
             }
         }
 
-        // Gets or sets how many IndentChars to write for each level in the hierarchy when Formatting is set to "Indented".
+        // Gets or sets how many IndentChars to write for each level in the hierarchy when Formatting is set
+        // to "Indented".
         public int Indentation
         {
             get { return _indentation; }
@@ -792,7 +796,7 @@ namespace System.Xml
                         and not really insist on a specific value. Who knows in the future it
                         might be OK to say xml:blabla
                         else {
-                            throw new ArgumentException(SR.Xml_InvalidPrefix);
+                        throw new ArgumentException(SR.Xml_InvalidPrefix);
                         }*/
                     }
                     else if (prefix == "xmlns")
@@ -972,7 +976,8 @@ namespace System.Xml
             }
         }
 
-        // Writes out a processing instruction with a space between the name and text as follows: <?name text?>
+        // Writes out a processing instruction with a space between the name and text as follows: <?name
+        // text?>
         public override void WriteProcessingInstruction(string name, string? text)
         {
             try
@@ -1223,7 +1228,8 @@ namespace System.Xml
             }
         }
 
-        // Flushes whatever is in the buffer to the underlying stream/TextWriter and flushes the underlying stream/TextWriter.
+        // Flushes whatever is in the buffer to the underlying stream/TextWriter and flushes the underlying
+        // stream/TextWriter.
         public override void Flush()
         {
             _textWriter.Flush();
@@ -1245,7 +1251,8 @@ namespace System.Xml
             }
         }
 
-        // Writes out the specified namespace-qualified name by looking up the prefix that is in scope for the given namespace.
+        // Writes out the specified namespace-qualified name by looking up the prefix that is in scope for
+        // the given namespace.
         public override void WriteQualifiedName(string localName, string? ns)
         {
             try
@@ -1288,7 +1295,8 @@ namespace System.Xml
             }
         }
 
-        // Returns the closest prefix defined in the current namespace scope for the specified namespace URI.
+        // Returns the closest prefix defined in the current namespace scope for the specified namespace
+        // URI.
         public override string? LookupPrefix(string ns)
         {
             ArgumentException.ThrowIfNullOrEmpty(ns);
@@ -1892,11 +1900,14 @@ namespace System.Xml
             _textWriter.Write(name);
         }
 
-        // This method is used for validation of the DOCTYPE, processing instruction and entity names plus names
+        // This method is used for validation of the DOCTYPE, processing instruction and entity names plus
+        // names
         // written out by the user via WriteName and WriteQualifiedName.
         // Unfortunatelly the names of elements and attributes are not validated by the XmlTextWriter.
-        // Also this method does not check wheather the character after ':' is a valid start name character. It accepts
-        // all valid name characters at that position. This can't be changed because of backwards compatibility.
+        // Also this method does not check wheather the character after ':' is a valid start name character.
+        // It accepts
+        // all valid name characters at that position. This can't be changed because of backwards
+        // compatibility.
         private void ValidateName(string name, bool isNCName)
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
@@ -1906,8 +1917,10 @@ namespace System.Xml
             // Namespaces supported
             if (_namespaces)
             {
-                // We can't use ValidateNames.ParseQName here because of backwards compatibility bug we need to preserve.
-                // The bug is that the character after ':' is validated only as a NCName characters instead of NCStartName.
+                // We can't use ValidateNames.ParseQName here because of backwards compatibility bug we need to
+                // preserve.
+                // The bug is that the character after ':' is validated only as a NCName characters instead of
+                // NCStartName.
                 int colonPosition = -1;
 
                 // Parse NCName (may be prefix, may be local name)

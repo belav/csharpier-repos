@@ -21,16 +21,21 @@ namespace Microsoft.CodeAnalysis.Formatting
     // TODO : two alternative design possible for formatting engine
     //
     //        1. use AAL (TPL Dataflow) in .NET 4.5 to run things concurrently in sequential order
-    //           * this has a problem of the new TPL lib being not released yet and possibility of not using all cores.
+    //           * this has a problem of the new TPL lib being not released yet and possibility of not
+    // using all cores.
     //
     //        2. create dependency graph between operations, and format them in topological order and
     //           run chunks that don't have dependency in parallel (kirill's idea)
-    //           * this requires defining dependencies on each operations. can't use dependency between tokens since
-    //             that would create too big graph. key for this approach is how to reduce size of graph.
+    //           * this requires defining dependencies on each operations. can't use dependency between
+    // tokens since
+    //             that would create too big graph. key for this approach is how to reduce size of
+    // graph.
     internal abstract partial class AbstractFormatEngine
     {
-        // Intentionally do not trim the capacities of these collections down.  We will repeatedly try to format large
-        // files as we edit them and this will produce a lot of garbage as we free the internal array backing the list
+        // Intentionally do not trim the capacities of these collections down.  We will repeatedly try to
+        // format large
+        // files as we edit them and this will produce a lot of garbage as we free the internal array
+        // backing the list
         // over and over again.
         private static readonly ObjectPool<
             SegmentedList<TokenPairWithOperations>
@@ -410,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     applier.ApplyAlignment(operation, previousChangesMap, cancellationToken);
                 });
 
-                // go through all relative indent block operation, and see whether it is affected by previous operations
+                // go through all relative indent block operation, and see whether it is affected by previous
+                // operations
                 context
                     .GetAllRelativeIndentBlockOperations()
                     .Do(o =>
@@ -455,7 +461,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     );
                 }
 
-                // go through all relative indent block operation, and see whether it is affected by the anchor operation
+                // go through all relative indent block operation, and see whether it is affected by the anchor
+                // operation
                 context
                     .GetAllRelativeIndentBlockOperations()
                     .Do(o =>

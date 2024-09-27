@@ -47,7 +47,8 @@ namespace System.ComponentModel.Design
         }
 
         // Return values are:
-        // true if the set of filtered attributes is to be cached; false if the filter service must query again.
+        // true if the set of filtered attributes is to be cached; false if the filter service must query
+        // again.
         //
         public bool FilterAttributes(IComponent component, IDictionary attributes)
         {

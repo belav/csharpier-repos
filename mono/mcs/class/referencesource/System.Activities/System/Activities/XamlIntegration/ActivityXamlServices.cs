@@ -615,8 +615,10 @@ namespace System.Activities.XamlIntegration
                     );
                 }
 
-                // The "official" BeforeInitializeComponent XBT Extension will not create a generic type for this helper class.
-                // This check is here so that the assembly manifest can't lure us into creating a type with a generic argument from a different assembly.
+                // The "official" BeforeInitializeComponent XBT Extension will not create a generic type for this
+                // helper class.
+                // This check is here so that the assembly manifest can't lure us into creating a type with a
+                // generic argument from a different assembly.
                 if (schemaContextType.IsGenericType || schemaContextType.IsGenericTypeDefinition)
                 {
                     throw FxTrace.Exception.AsError(

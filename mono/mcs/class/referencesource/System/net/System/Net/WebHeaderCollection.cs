@@ -56,14 +56,17 @@ namespace System.Net
         private static readonly HeaderInfoTable HInfo = new HeaderInfoTable();
 
         //
-        // Common Headers - used only when receiving a response, and internally.  If the user ever requests a header,
+        // Common Headers - used only when receiving a response, and internally.  If the user ever requests
+        // a header,
         // all the common headers are moved into the hashtable.
         //
         private string[] m_CommonHeaders;
         private int m_NumCommonHeaders;
 
-        // Grouped by first character, so lookup is faster.  The table s_CommonHeaderHints maps first letters to indexes in this array.
-        // After first character, sort by decreasing length.  It's ok if two headers have the same first character and length.
+        // Grouped by first character, so lookup is faster.  The table s_CommonHeaderHints maps first
+        // letters to indexes in this array.
+        // After first character, sort by decreasing length.  It's ok if two headers have the same first
+        // character and length.
         private static readonly string[] s_CommonHeaderNames = new string[]
         {
             HttpKnownHeaderNames.AcceptRanges, // "Accept-Ranges"       13
@@ -290,7 +293,8 @@ namespace System.Net
         }
 
         //
-        // To ensure C++ and IL callers can't pollute the underlying collection by calling overridden base members directly, we
+        // To ensure C++ and IL callers can't pollute the underlying collection by calling overridden base
+        // members directly, we
         // will use a member collection instead.
         private NameValueCollection m_InnerCollection;
 
@@ -534,7 +538,8 @@ namespace System.Net
         }
 #endif // !FEATURE_PAL
 
-        // In general, HttpWebResponse headers aren't modified, so these methods don't support common headers.
+        // In general, HttpWebResponse headers aren't modified, so these methods don't support common
+        // headers.
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -646,7 +651,8 @@ namespace System.Net
             ChangeInternal(name, value);
         }
 
-        // This even faster one can be used to add headers when it's known not to be a common header or that common headers aren't active.
+        // This even faster one can be used to add headers when it's known not to be a common header or that
+        // common headers aren't active.
         private void AddInternalNotCommon(string name, string value)
         {
             GlobalLog.Print(
@@ -1145,7 +1151,8 @@ namespace System.Net
 
         // ToString()  -
         // Routine Description:
-        //     Generates a string representation of the headers, that is ready to be sent except for it being in string format:
+        //     Generates a string representation of the headers, that is ready to be sent except for it
+        // being in string format:
         //     the format looks like:
         //
         //     Header-Name: Header-Value\r\n
@@ -1213,11 +1220,11 @@ namespace System.Net
                 /*
                 if (forTrace)
                 {
-                    // Put a condition here that if we are using basic auth,
-                    // we shouldn't put the authorization header. Otherwise
-                    // the password will get saved in the trace.
-                    if (using basic)
-                        continue;
+                // Put a condition here that if we are using basic auth,
+                // we shouldn't put the authorization header. Otherwise
+                // the password will get saved in the trace.
+                if (using basic)
+                continue;
                 }
                 */
                 if (ValidationHelper.IsBlankString(key))
@@ -1284,7 +1291,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        ///    <para>Tests if access to the HTTP header with the provided name is accessible for setting.</para>
+        ///    <para>Tests if access to the HTTP header with the provided name is accessible for
+        // setting.</para>
         /// </devdoc>
         public static bool IsRestricted(string headerName)
         {
@@ -1414,7 +1422,8 @@ namespace System.Net
         // we use this static class as a helper class to encode/decode HTTP headers.
         // what we need is a 1-1 correspondence between a char in the range U+0000-U+00FF
         // and a byte in the range 0x00-0xFF (which is the range that can hit the network).
-        // The Latin-1 encoding (ISO-88591-1) (GetEncoding(28591)) works for byte[] to string, but is a little slow.
+        // The Latin-1 encoding (ISO-88591-1) (GetEncoding(28591)) works for byte[] to string, but is a
+        // little slow.
         // It doesn't work for string -> byte[] because of best-fit-mapping problems.
         internal static class HeaderEncoding
         {
@@ -1552,13 +1561,15 @@ namespace System.Net
         //     This code is optimized for the case in which all the headers fit in the buffer.
         //     we support multiple re-entrance, but we won't save intermediate
         //     state, we will just roll back all the parsing done for the current header if we can't
-        //     parse a whole one (including multiline) or decide something else ("invalid data" or "done parsing").
+        //     parse a whole one (including multiline) or decide something else ("invalid data" or "done
+        // parsing").
         //
         //     we're going to cycle through the loop until we
         //
         //     1) find an HTTP violation (in this case we return DataParseStatus.Invalid)
         //     2) we need more data (in this case we return DataParseStatus.NeedMoreData)
-        //     3) we found the end of the headers and the beginning of the entity body (in this case we return DataParseStatus.Done)
+        //     3) we found the end of the headers and the beginning of the entity body (in this case we
+        // return DataParseStatus.Done)
         //
         //
         // Arguments:
@@ -1631,7 +1642,8 @@ namespace System.Net
                 // message-header = field-name ":" [ field-value ]
                 // field-name     = token
                 // field-value    = *( field-content | LWS )
-                // field-content  = <the OCTETs making up the field-value and consisting of either *TEXT or combinations of token, separators, and quoted-string>
+                // field-content  = <the OCTETs making up the field-value and consisting of either *TEXT or
+                // combinations of token, separators, and quoted-string>
                 // TEXT           = <any OCTET except CTLs, but including LWS>
                 // CTL            = <any US-ASCII control character (octets 0 - 31) and DEL (127)>
                 // SP             = <US-ASCII SP, space (32)>
@@ -1641,7 +1653,8 @@ namespace System.Net
                 // LWS            = [CR LF] 1*( SP | HT )
                 // CHAR           = <any US-ASCII character (octets 0 - 127)>
                 // token          = 1*<any CHAR except CTLs or separators>
-                // separators     = "(" | ")" | "<" | ">" | "@" | "," | ";" | ":" | "\" | <"> | "/" | "[" | "]" | "?" | "=" | "{" | "}" | SP | HT
+                // separators     = "(" | ")" | "<" | ">" | "@" | "," | ";" | ":" | "\" | <"> | "/" | "[" | "]" |
+                // "?" | "=" | "{" | "}" | SP | HT
                 // quoted-string  = ( <"> *(qdtext | quoted-pair ) <"> )
                 // qdtext         = <any TEXT except <">>
                 // quoted-pair    = "\" CHAR
@@ -1653,9 +1666,11 @@ namespace System.Net
                 for (; ; )
                 {
                     //
-                    // trim leading whitespaces (LWS) just for extra robustness, in fact if there are leading white spaces then:
+                    // trim leading whitespaces (LWS) just for extra robustness, in fact if there are leading white
+                    // spaces then:
                     // 1) it could be that after the status line we might have spaces. handle this.
-                    // 2) this should have been detected to be a multiline header so there'll be no spaces and we'll spend some time here.
+                    // 2) this should have been detected to be a multiline header so there'll be no spaces and we'll
+                    // spend some time here.
                     //
                     headerName = string.Empty;
                     headerValue = string.Empty;
@@ -1805,7 +1820,8 @@ namespace System.Net
                     if (numberOfLf == 2 || (numberOfLf == 1 && !spaceAfterLf))
                     {
                         //
-                        // if we've counted two '\n' we got at the end of the headers even if we're past the end of the buffer
+                        // if we've counted two '\n' we got at the end of the headers even if we're past the end of the
+                        // buffer
                         // if we've counted one '\n' and the first character after that was a ' ' or a '\t'
                         // no matter if we found a ':' or not, treat this as an empty header name.
                         //
@@ -2006,7 +2022,8 @@ namespace System.Net
         }
 
         //
-        // Alternative parsing that follows RFC2616.  Like the above, this trims both sides of the header value and replaces
+        // Alternative parsing that follows RFC2616.  Like the above, this trims both sides of the header
+        // value and replaces
         // folding with a single space.
         //
         private enum RfcChar : byte
@@ -2503,7 +2520,8 @@ namespace System.Net
         }
 
         //
-        // Keeping this version for backwards compatibility (mostly with reflection).  Remove some day, along with the interface
+        // Keeping this version for backwards compatibility (mostly with reflection).  Remove some day,
+        // along with the interface
         // explicit reimplementation.
         //
         /// <internalonly/>
@@ -2528,7 +2546,8 @@ namespace System.Net
         // Override Get() to check the common headers.
         public override string Get(string name)
         {
-            // In this case, need to make sure name doesn't have any Unicode since it's being used as an index into tables.
+            // In this case, need to make sure name doesn't have any Unicode since it's being used as an index
+            // into tables.
             if (m_CommonHeaders != null && name != null && name.Length > 0 && name[0] < 256)
             {
                 int iHeader = s_CommonHeaderHints[name[0] & 0x1f];

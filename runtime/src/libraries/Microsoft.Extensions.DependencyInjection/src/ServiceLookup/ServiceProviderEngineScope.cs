@@ -114,7 +114,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 }
                 else
                 {
-                    // sync over async, for the rare case that an object only implements IAsyncDisposable and may end up starving the thread pool.
+                    // sync over async, for the rare case that an object only implements IAsyncDisposable and may end up
+                    // starving the thread pool.
                     object? localService = service; // copy to avoid closure on other paths
                     Task.Run(() => ((IAsyncDisposable)localService).DisposeAsync().AsTask())
                         .GetAwaiter()
@@ -235,13 +236,16 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             if (IsRootScope && !RootProvider.IsDisposed())
             {
-                // If this ServiceProviderEngineScope instance is a root scope, disposing this instance will need to dispose the RootProvider too.
+                // If this ServiceProviderEngineScope instance is a root scope, disposing this instance will need to
+                // dispose the RootProvider too.
                 // Otherwise the RootProvider will never get disposed and will leak.
-                // Note, if the RootProvider get disposed first, it will automatically dispose all attached ServiceProviderEngineScope objects.
+                // Note, if the RootProvider get disposed first, it will automatically dispose all attached
+                // ServiceProviderEngineScope objects.
                 RootProvider.Dispose();
             }
 
-            // ResolvedServices is never cleared for singletons because there might be a compilation running in background
+            // ResolvedServices is never cleared for singletons because there might be a compilation running in
+            // background
             // trying to get a cached singleton service. If it doesn't find it
             // it will try to create a new one which will result in an ObjectDisposedException.
             return _disposables;

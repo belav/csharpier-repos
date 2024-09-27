@@ -363,7 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 }
 
                 // Nullable rewrite: Nullable<int> -> int?
-                // Don't rewrite in the case where Nullable<int> is part of some qualified name like Nullable<int>.Something
+                // Don't rewrite in the case where Nullable<int> is part of some qualified name like
+                // Nullable<int>.Something
                 if (
                     !name.IsVar
                     && symbol.Kind == SymbolKind.NamedType
@@ -395,7 +396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             .WithTrailingTrivia(name.GetTrailingTrivia());
                         issueSpan = name.Span;
 
-                        // we need to simplify the whole qualified name at once, because replacing the identifier on the left in
+                        // we need to simplify the whole qualified name at once, because replacing the identifier on the
+                        // left in
                         // System.Nullable<int> alone would be illegal.
                         // If this fails we want to continue to try at least to remove the System if possible.
                         if (
@@ -582,7 +584,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             var argumentDecl = argument.DeclaringSyntaxReferences.FirstOrDefault();
             if (argumentDecl == null)
             {
-                // The type argument is a type from metadata - so this is a constructed generic nullable type that can be simplified (e.g. Nullable(Of Integer)).
+                // The type argument is a type from metadata - so this is a constructed generic nullable type that
+                // can be simplified (e.g. Nullable(Of Integer)).
                 return true;
             }
 
@@ -642,7 +645,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 {
                     const string AttributeName = "Attribute";
 
-                    // an attribute that should keep it (unnecessary "Attribute" suffix should be annotated with a DoNotSimplifyAnnotation
+                    // an attribute that should keep it (unnecessary "Attribute" suffix should be annotated with a
+                    // DoNotSimplifyAnnotation
                     if (
                         identifierToken.ValueText != AttributeName
                         && identifierToken.ValueText.EndsWith(
@@ -654,7 +658,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         )
                     )
                     {
-                        // weird. the semantic model is able to bind attribute syntax like "[as()]" although it's not valid code.
+                        // weird. the semantic model is able to bind attribute syntax like "[as()]" although it's not valid
+                        // code.
                         // so we need another check for keywords manually.
                         var newAttributeName = identifierToken.ValueText[..^9];
                         if (SyntaxFacts.GetKeywordKind(newAttributeName) != SyntaxKind.None)
@@ -690,8 +695,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         }
 
         /// <summary>
-        /// Checks if the SyntaxNode is a name of a namespace declaration. To be a namespace name, the syntax
-        /// must be parented by an namespace declaration and the node itself must be equal to the declaration's Name
+        /// Checks if the SyntaxNode is a name of a namespace declaration. To be a namespace name, the
+        // syntax
+        /// must be parented by an namespace declaration and the node itself must be equal to the
+        // declaration's Name
         /// property.
         /// </summary>
         /// <param name="node"></param>

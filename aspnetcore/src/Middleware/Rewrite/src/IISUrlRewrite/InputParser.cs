@@ -27,7 +27,8 @@ internal sealed class InputParser
     /// compare to the condition. Can contain server variables, back references, etc.
     /// </summary>
     /// <param name="testString"></param>
-    /// <returns>A new <see cref="Pattern"/>, containing a list of <see cref="PatternSegment"/></returns>
+    /// <returns>A new <see cref="Pattern"/>, containing a list of <see
+    // cref="PatternSegment"/></returns>
     public Pattern ParseInputString(string testString)
     {
         return ParseInputString(testString, UriMatchPart.Path);
@@ -38,8 +39,10 @@ internal sealed class InputParser
     /// compare to the condition. Can contain server variables, back references, etc.
     /// </summary>
     /// <param name="testString"></param>
-    /// <param name="uriMatchPart">When testString evaluates to a URL segment, specify which part of the URI to evaluate.</param>
-    /// <returns>A new <see cref="Pattern"/>, containing a list of <see cref="PatternSegment"/></returns>
+    /// <param name="uriMatchPart">When testString evaluates to a URL segment, specify which part of the
+    // URI to evaluate.</param>
+    /// <returns>A new <see cref="Pattern"/>, containing a list of <see
+    // cref="PatternSegment"/></returns>
     public Pattern ParseInputString(string testString, UriMatchPart uriMatchPart)
     {
         if (testString == null)

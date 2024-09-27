@@ -15,7 +15,8 @@ namespace System.Web.UI.Design.WebControls
     internal class EntityConnectionStringBuilderItem
         : IComparable<EntityConnectionStringBuilderItem>
     {
-        // Only one of the following should be set. This is enforced through the constructors and the fact that these fields are readonly.
+        // Only one of the following should be set. This is enforced through the constructors and the fact
+        // that these fields are readonly.
         private readonly EntityConnectionStringBuilder _connectionStringBuilder;
         private readonly string _unknownConnectionString; // used when the string cannot be loaded into a connection string builder or is missing some required keywords
 
@@ -74,7 +75,8 @@ namespace System.Web.UI.Design.WebControls
                 }
                 else
                 {
-                    // if the connection string is not recognized by a EntityConnectionStringBuilder, it can't be a valid named connection
+                    // if the connection string is not recognized by a EntityConnectionStringBuilder, it can't be a
+                    // valid named connection
                     return false;
                 }
             }

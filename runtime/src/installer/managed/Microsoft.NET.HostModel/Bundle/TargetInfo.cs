@@ -59,20 +59,23 @@ namespace Microsoft.NET.HostModel.Bundle
 
             if (IsWindows)
             {
-                // We align assemblies in the bundle at 4K - per requirements of memory mapping API (MapViewOfFile3, et al).
+                // We align assemblies in the bundle at 4K - per requirements of memory mapping API (MapViewOfFile3,
+                // et al).
                 // This is only necessary for R2R assemblies, but we do it for all assemblies for simplicity.
                 AssemblyAlignment = 4096;
             }
             else if (Arch == Architecture.Arm64)
             {
-                // We align assemblies in the bundle at 4K so that we can use mmap on Unix without changing the page alignment of ARM64 R2R code.
+                // We align assemblies in the bundle at 4K so that we can use mmap on Unix without changing the page
+                // alignment of ARM64 R2R code.
                 // This is only necessary for R2R assemblies, but we do it for all assemblies for simplicity.
                 // See https://github.com/dotnet/runtime/issues/41832.
                 AssemblyAlignment = 4096;
             }
             else
             {
-                // Otherwise, assemblies are 64 bytes aligned, so that their sections can be memory-mapped cache aligned.
+                // Otherwise, assemblies are 64 bytes aligned, so that their sections can be memory-mapped cache
+                // aligned.
                 AssemblyAlignment = 64;
             }
         }
@@ -86,7 +89,8 @@ namespace Microsoft.NET.HostModel.Bundle
 
         public string GetAssemblyName(string hostName)
         {
-            // This logic to calculate assembly name from hostName should be removed (and probably moved to test helpers)
+            // This logic to calculate assembly name from hostName should be removed (and probably moved to test
+            // helpers)
             // once the SDK in the correct assembly name.
             return (IsWindows ? Path.GetFileNameWithoutExtension(hostName) : hostName);
         }
@@ -109,8 +113,10 @@ namespace Microsoft.NET.HostModel.Bundle
         public bool IsOSX => OS.Equals(OSPlatform.OSX);
         public bool IsWindows => OS.Equals(OSPlatform.Windows);
 
-        // The .net core 3 apphost doesn't care about semantics of FileType -- all files are extracted at startup.
-        // However, the apphost checks that the FileType value is within expected bounds, so set it to the first enumeration.
+        // The .net core 3 apphost doesn't care about semantics of FileType -- all files are extracted at
+        // startup.
+        // However, the apphost checks that the FileType value is within expected bounds, so set it to the
+        // first enumeration.
         public FileType TargetSpecificFileType(FileType fileType) =>
             (BundleMajorVersion == 1) ? FileType.Unknown : fileType;
 

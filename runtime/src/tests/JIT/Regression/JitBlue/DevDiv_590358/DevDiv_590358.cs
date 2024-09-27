@@ -24,7 +24,8 @@ using Xunit;
 //          vmovsd   xmm0, qword ptr[rsp + 20H]
 //          vmovsd   qword ptr[rsp + 30H], xmm0
 //
-// We should be able to elide these excessive copies and unnecessary retyping, producing close to this:
+// We should be able to elide these excessive copies and unnecessary retyping, producing close to
+// this:
 //          vmovsd   xmm0, qword ptr [rax+16]
 //          vmovsd   qword ptr[rsp + 30H], xmm0
 

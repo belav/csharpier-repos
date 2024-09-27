@@ -8,7 +8,9 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Compression
 {
-    /// <summary>Provides non-allocating, performant Brotli decompression methods. The methods decompress in a single pass without using a <see cref="System.IO.Compression.BrotliStream" /> instance.</summary>
+    /// <summary>Provides non-allocating, performant Brotli decompression methods. The methods
+    // decompress in a single pass without using a <see cref="System.IO.Compression.BrotliStream" />
+    // instance.</summary>
     public struct BrotliDecoder : IDisposable
     {
         private SafeBrotliDecoderHandle? _state;
@@ -47,15 +49,24 @@ namespace System.IO.Compression
 
         /// <summary>Decompresses data that was compressed using the Brotli algorithm.</summary>
         /// <param name="source">A buffer containing the compressed data.</param>
-        /// <param name="destination">When this method returns, a byte span containing the decompressed data.</param>
-        /// <param name="bytesConsumed">The total number of bytes that were read from <paramref name="source" />.</param>
-        /// <param name="bytesWritten">The total number of bytes that were written in the <paramref name="destination" />.</param>
-        /// <returns>One of the enumeration values that indicates the status of the decompression operation.</returns>
+        /// <param name="destination">When this method returns, a byte span containing the decompressed
+        // data.</param>
+        /// <param name="bytesConsumed">The total number of bytes that were read from <paramref
+        // name="source" />.</param>
+        /// <param name="bytesWritten">The total number of bytes that were written in the <paramref
+        // name="destination" />.</param>
+        /// <returns>One of the enumeration values that indicates the status of the decompression
+        // operation.</returns>
         /// <remarks>The return value can be as follows:
-        /// - <see cref="System.Buffers.OperationStatus.Done" />: <paramref name="source" /> was successfully and completely decompressed into <paramref name="destination" />.
-        /// - <see cref="System.Buffers.OperationStatus.DestinationTooSmall" />: There is not enough space in <paramref name="destination" /> to decompress <paramref name="source" />.
-        /// - <see cref="System.Buffers.OperationStatus.NeedMoreData" />: The decompression action is partially done at least one more byte is required to complete the decompression task. This method should be called again with more input to decompress.
-        /// - <see cref="System.Buffers.OperationStatus.InvalidData" />: The data in <paramref name="source" /> is invalid and could not be decompressed.</remarks>
+        /// - <see cref="System.Buffers.OperationStatus.Done" />: <paramref name="source" /> was
+        // successfully and completely decompressed into <paramref name="destination" />.
+        /// - <see cref="System.Buffers.OperationStatus.DestinationTooSmall" />: There is not enough space
+        // in <paramref name="destination" /> to decompress <paramref name="source" />.
+        /// - <see cref="System.Buffers.OperationStatus.NeedMoreData" />: The decompression action is
+        // partially done at least one more byte is required to complete the decompression task. This method
+        // should be called again with more input to decompress.
+        /// - <see cref="System.Buffers.OperationStatus.InvalidData" />: The data in <paramref name="source"
+        // /> is invalid and could not be decompressed.</remarks>
         public OperationStatus Decompress(
             ReadOnlySpan<byte> source,
             Span<byte> destination,
@@ -75,7 +86,8 @@ namespace System.IO.Compression
             unsafe
             {
                 // We can freely cast between int and nuint (.NET size_t equivalent) for two reasons:
-                // 1. Interop Brotli functions will always return an availableInput/Output value lower or equal to the one passed to the function
+                // 1. Interop Brotli functions will always return an availableInput/Output value lower or equal to
+                // the one passed to the function
                 // 2. Span's have a maximum length of the int boundary.
                 while ((int)availableOutput > 0)
                 {
@@ -125,10 +137,14 @@ namespace System.IO.Compression
 
         /// <summary>Attempts to decompress data that was compressed with the Brotli algorithm.</summary>
         /// <param name="source">A buffer containing the compressed data.</param>
-        /// <param name="destination">When this method returns, a byte span containing the decompressed data.</param>
-        /// <param name="bytesWritten">The total number of bytes that were written in the <paramref name="destination" />.</param>
+        /// <param name="destination">When this method returns, a byte span containing the decompressed
+        // data.</param>
+        /// <param name="bytesWritten">The total number of bytes that were written in the <paramref
+        // name="destination" />.</param>
         /// <returns><see langword="true" /> on success; <see langword="false" /> otherwise.</returns>
-        /// <remarks>If this method returns <see langword="false" />, <paramref name="destination" /> may be empty or contain partially decompressed data, with <paramref name="bytesWritten" /> being zero or greater than zero but less than the expected total.</remarks>
+        /// <remarks>If this method returns <see langword="false" />, <paramref name="destination" /> may be
+        // empty or contain partially decompressed data, with <paramref name="bytesWritten" /> being zero or
+        // greater than zero but less than the expected total.</remarks>
         public static unsafe bool TryDecompress(
             ReadOnlySpan<byte> source,
             Span<byte> destination,

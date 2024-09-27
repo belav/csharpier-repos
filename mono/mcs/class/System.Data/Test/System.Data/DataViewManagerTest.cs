@@ -87,7 +87,9 @@ namespace MonoTests.System.Data
             m.DataViewSettingCollectionString =
                 "<DataViewSettingCollectionString>blah<table2-1 RowFilter='a=b' ApplyDefaultSort='true' /></DataViewSettingCollectionString>";
             // LAMESPEC: MS.NET ignores ApplyDefaultSort.
-            //			Assert.AreEqual (@"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter=""a=b"" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>", m.DataViewSettingCollectionString, "#7");
+            //			Assert.AreEqual (@"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter=""a=b""
+            // RowStateFilter=""Deleted""/></DataViewSettingCollectionString>", m.DataViewSettingCollectionString,
+            // "#7");
         }
 
         [Test]

@@ -12,7 +12,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// A <see cref="MissingNamespaceSymbol"/> is a special kind of <see cref="NamespaceSymbol"/> that represents
+    /// A <see cref="MissingNamespaceSymbol"/> is a special kind of <see cref="NamespaceSymbol"/> that
+    // represents
     /// a namespace that couldn't be found.
     /// </summary>
     internal class MissingNamespaceSymbol : NamespaceSymbol

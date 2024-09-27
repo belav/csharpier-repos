@@ -32,14 +32,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                 public readonly SyntaxPath? ActiveMember;
 
                 /// <summary>
-                /// Non-empty if this work item is intended to be executed only for specific incremental analyzer(s).
+                /// Non-empty if this work item is intended to be executed only for specific incremental
+                // analyzer(s).
                 /// Otherwise, the work item is applicable to all relevant incremental analyzers.
                 /// </summary>
                 public readonly ImmutableHashSet<IUnitTestingIncrementalAnalyzer> SpecificAnalyzers;
 
                 /// <summary>
                 /// Gets all the applicable analyzers to execute for this work item.
-                /// If this work item has any specific analyzer(s), then returns the intersection of <see cref="SpecificAnalyzers"/>
+                /// If this work item has any specific analyzer(s), then returns the intersection of <see
+                // cref="SpecificAnalyzers"/>
                 /// and the given <paramref name="allAnalyzers"/>.
                 /// Otherwise, returns <paramref name="allAnalyzers"/>.
                 /// </summary>

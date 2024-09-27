@@ -100,7 +100,8 @@ internal sealed class HttpRequestPipeReader : PipeReader
         else
         {
             // Do not change state if there is an error because we don't want to throw a TaskCanceledException
-            // and we do not want to introduce any memory barriers at this layer. This is just for reporting errors
+            // and we do not want to introduce any memory barriers at this layer. This is just for reporting
+            // errors
             // early when we know the transport will fail.
             _state = HttpStreamState.Aborted;
         }

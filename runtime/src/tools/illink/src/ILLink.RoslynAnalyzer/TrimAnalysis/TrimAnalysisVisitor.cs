@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Immutable;
@@ -387,12 +388,16 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
         {
             // For .ctors:
             // - The instance value is empty (TopValue) and that's a bit wrong.
-            //   Technically this is an instance call and the instance is some valid value, we just don't know which
-            //   but for example it does have a static type. For now this is OK since we don't need the information
+            //   Technically this is an instance call and the instance is some valid value, we just don't know
+            // which
+            //   but for example it does have a static type. For now this is OK since we don't need the
+            // information
             //   for anything yet.
-            // - The return here is also technically problematic, the return value is an instance of a known type,
+            // - The return here is also technically problematic, the return value is an instance of a known
+            // type,
             //   but currently we return empty (since the .ctor is declared as returning void).
-            //   Especially with DAM on type, this can lead to incorrectly analyzed code (as in unknown type which leads
+            //   Especially with DAM on type, this can lead to incorrectly analyzed code (as in unknown type
+            // which leads
             //   to noise). ILLink has the same problem currently: https://github.com/dotnet/linker/issues/1952
 
             var diagnosticContext = DiagnosticContext.CreateDisabled();
@@ -483,15 +488,18 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                             // But it could be that T is annotated with for example PublicMethods:
                             //   void Method<[DAM(PublicMethods)] T>(T instance) { instance.GetType().GetMethod("Test"); }
                             // In this case it's in theory possible to handle it, by treating the T basically as a base class
-                            // for the actual type of "instance". But the analysis for this would be pretty complicated (as the marking
+                            // for the actual type of "instance". But the analysis for this would be pretty complicated (as the
+                            // marking
                             // has to happen on the callsite, which doesn't know that GetType() will be used...).
                             // For now we're intentionally ignoring this case - it will produce a warning.
                             // The counter example is:
                             //   Method<Base>(new Derived);
-                            // In this case to get correct results, trimmer would have to mark all public methods on Derived. Which
+                            // In this case to get correct results, trimmer would have to mark all public methods on Derived.
+                            // Which
                             // currently it won't do.
 
-                            // To emulate IL tools behavior (trimmer, NativeAOT compiler), we're going to intentionally "forget" the static type
+                            // To emulate IL tools behavior (trimmer, NativeAOT compiler), we're going to intentionally "forget"
+                            // the static type
                             // if it is a generic argument type.
 
                             ITypeSymbol? staticType = (valueNode as IValueWithStaticType)
@@ -502,7 +510,8 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
 
                             if (staticType is null)
                             {
-                                // We don't know anything about the type GetType was called on. Track this as a usual "result of a method call without any annotations"
+                                // We don't know anything about the type GetType was called on. Track this as a usual "result of a
+                                // method call without any annotations"
                                 AddReturnValue(
                                     FlowAnnotations.Instance.GetMethodReturnValue(new(calledMethod))
                                 );
@@ -518,7 +527,8 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                                 // We can allow Object.GetType to be modeled as System.Delegate because we keep all methods
                                 // on delegates anyway so reflection on something this approximation would miss is actually safe.
 
-                                // We can also treat all arrays as "sealed" since it's not legal to derive from Array type (even though it is not sealed itself)
+                                // We can also treat all arrays as "sealed" since it's not legal to derive from Array type (even
+                                // though it is not sealed itself)
 
                                 // We ignore the fact that the type can be annotated (see below for handling of annotated types)
                                 // This means the annotations (if any) won't be applied - instead we rely on the exact knowledge
@@ -550,7 +560,8 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                         $"Unexpected method {calledMethod.GetDisplayName()} unhandled by HandleCallAction."
                     );
 
-                    // Do nothing even if we reach a point which we didn't expect - the analyzer should never crash as it's a too disruptive experience for the user.
+                    // Do nothing even if we reach a point which we didn't expect - the analyzer should never crash as
+                    // it's a too disruptive experience for the user.
                     break;
             }
 

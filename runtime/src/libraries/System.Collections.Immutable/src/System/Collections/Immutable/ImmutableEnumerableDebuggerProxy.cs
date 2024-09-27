@@ -17,7 +17,8 @@ namespace System.Collections.Immutable
         where TKey : notnull
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImmutableDictionaryDebuggerProxy{TKey, TValue}"/> class.
+        /// Initializes a new instance of the <see cref="ImmutableDictionaryDebuggerProxy{TKey, TValue}"/>
+        // class.
         /// </summary>
         /// <param name="dictionary">The enumerable to show in the debugger.</param>
         public ImmutableDictionaryDebuggerProxy(IReadOnlyDictionary<TKey, TValue> dictionary)

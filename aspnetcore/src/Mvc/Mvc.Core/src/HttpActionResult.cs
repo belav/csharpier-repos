@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// An <see cref="ActionResult"/> that when executed will produce a response based on the <see cref="IResult"/> provided.
+/// An <see cref="ActionResult"/> that when executed will produce a response based on the <see
+// cref="IResult"/> provided.
 /// </summary>
 internal sealed class HttpActionResult : ActionResult
 {
@@ -19,7 +20,8 @@ internal sealed class HttpActionResult : ActionResult
     /// Initializes a new instance of the <see cref="HttpActionResult"/> class with the
     /// <see cref="IResult"/> provided.
     /// </summary>
-    /// <param name="result">The <see cref="IResult"/> instance to be used during the <see cref="ExecuteResultAsync"/> invocation.</param>
+    /// <param name="result">The <see cref="IResult"/> instance to be used during the <see
+    // cref="ExecuteResultAsync"/> invocation.</param>
     public HttpActionResult(IResult result)
     {
         Result = result;

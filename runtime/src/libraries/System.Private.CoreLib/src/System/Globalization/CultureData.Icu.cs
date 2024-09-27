@@ -21,12 +21,18 @@ namespace System.Globalization
         /// <param name="extension">The extension part in the original culture name.</param>
         /// <param name="collationStart">The index of the collation in the name.</param>
         /// <remarks>
-        /// BCP 47 specifications allow for extensions in the locale name, following the format language-script-region-extensions-collation. However,
-        /// not all extensions supported by ICU are supported in .NET. In the locale name, extensions are separated from the rest of the name using '-u-' or '-t-'.
-        /// In .NET, only the collation extension is supported. If the name includes a collation extension, it will be prefixed with '-u-co-'.
-        /// For example, en-US-u-co-search would be converted to the ICU name en_US@collation=search, which would then be translated to the .NET name en-US_search.
-        /// All extensions in the ICU names start with @. When normalizing the name to the .NET format, we retain the extensions in the name to ensure differentiation
-        /// between names with extensions and those without. For example, we may have a name like en-US and en-US-u-xx. Although .NET doesn't support the extension xx,
+        /// BCP 47 specifications allow for extensions in the locale name, following the format
+        // language-script-region-extensions-collation. However,
+        /// not all extensions supported by ICU are supported in .NET. In the locale name, extensions are
+        // separated from the rest of the name using '-u-' or '-t-'.
+        /// In .NET, only the collation extension is supported. If the name includes a collation extension,
+        // it will be prefixed with '-u-co-'.
+        /// For example, en-US-u-co-search would be converted to the ICU name en_US@collation=search, which
+        // would then be translated to the .NET name en-US_search.
+        /// All extensions in the ICU names start with @. When normalizing the name to the .NET format, we
+        // retain the extensions in the name to ensure differentiation
+        /// between names with extensions and those without. For example, we may have a name like en-US and
+        // en-US-u-xx. Although .NET doesn't support the extension xx,
         /// we still include it in the name to distinguish it from the name without the extension.
         /// </remarks>
         private static string NormalizeCultureName(
@@ -49,9 +55,12 @@ namespace System.Globalization
                 if (c == '-' && i < name.Length - 1 && name[i + 1] == '-')
                 {
                     // ICU changes names like `qps_plocm` (one underscore) to `qps__plocm` (two underscores)
-                    // The reason this occurs is because, while ICU canonicalizing, ulocimp_getCountry returns an empty string since the country code value is > 3 (rightly so).
-                    // But append an extra '_' thinking that country code was in-fact appended (for the empty string value as well).
-                    // Before processing, the name qps__plocm will be converted to its .NET name equivalent, which is qps--plocm.
+                    // The reason this occurs is because, while ICU canonicalizing, ulocimp_getCountry returns an empty
+                    // string since the country code value is > 3 (rightly so).
+                    // But append an extra '_' thinking that country code was in-fact appended (for the empty string
+                    // value as well).
+                    // Before processing, the name qps__plocm will be converted to its .NET name equivalent, which is
+                    // qps--plocm.
                     changed = true;
                     buffer[bufferIndex++] = '-';
                     i++;
@@ -107,8 +116,10 @@ namespace System.Globalization
         }
 
         /// <summary>
-        /// This method uses the sRealName field (which is initialized by the constructor before this is called) to
-        /// initialize the rest of the state of CultureData based on the underlying OS globalization library.
+        /// This method uses the sRealName field (which is initialized by the constructor before this is
+        // called) to
+        /// initialize the rest of the state of CultureData based on the underlying OS globalization
+        // library.
         /// </summary>
         private bool InitIcuCultureDataCore()
         {
@@ -175,7 +186,8 @@ namespace System.Globalization
                 : _sRealName;
 
             // Remove the sort from sName unless custom culture
-            // To ensure compatibility, it is necessary to allow the creation of cultures like zh_CN (using ICU notation) in the case of _bNeutral.
+            // To ensure compatibility, it is necessary to allow the creation of cultures like zh_CN (using ICU
+            // notation) in the case of _bNeutral.
             _sName =
                 collationStart < 0 || _bNeutral
                     ? _sRealName
@@ -239,7 +251,8 @@ namespace System.Globalization
             return IcuGetLocaleInfo(_sWindowsName, type, uiCultureName);
         }
 
-        // For LOCALE_SPARENT we need the option of using the "real" name (forcing neutral names) instead of the
+        // For LOCALE_SPARENT we need the option of using the "real" name (forcing neutral names) instead of
+        // the
         // "windows" name, which can be specific for downlevel (< windows 7) os's.
         private unsafe string IcuGetLocaleInfo(
             string localeName,
@@ -290,7 +303,8 @@ namespace System.Globalization
             switch (type)
             {
                 case LocaleNumberData.CalendarType:
-                    // returning 0 will cause the first supported calendar to be returned, which is the preferred calendar
+                    // returning 0 will cause the first supported calendar to be returned, which is the preferred
+                    // calendar
                     return 0;
             }
 
@@ -626,13 +640,16 @@ namespace System.Globalization
         ///
         /// Rules of implementation:
         /// * Allow only letters, digits, - and '_' or \0 (NULL is for backward compatibility).
-        /// * Allow input length of zero (for invariant culture) or otherwise greater than 1 and less than or equal LocaleNameMaxLength.
+        /// * Allow input length of zero (for invariant culture) or otherwise greater than 1 and less than
+        // or equal LocaleNameMaxLength.
         /// * Disallow input that starts or ends with '-' or '_'.
         /// * Disallow input that has any combination of consecutive '-' or '_'.
         /// * Disallow input that has multiple '_'.
         ///
-        /// The IsValidCultureName method also identifies the presence of any extensions in the name (such as -u- or -t-) and returns the index of the extension.
-        /// This is necessary because we need to append the extensions to the name when normalizing it to the .NET format.
+        /// The IsValidCultureName method also identifies the presence of any extensions in the name (such
+        // as -u- or -t-) and returns the index of the extension.
+        /// This is necessary because we need to append the extensions to the name when normalizing it to
+        // the .NET format.
         /// </remarks>
         private static bool IsValidCultureName(
             string subject,

@@ -7,7 +7,8 @@ using System.Security.Cryptography;
 
 internal static partial class Interop
 {
-    // TODO: [AndroidCrypto] Rename class to AndroidCrypto once all consumers are split in Android vs. Unix
+    // TODO: [AndroidCrypto] Rename class to AndroidCrypto once all consumers are split in Android vs.
+    // Unix
     internal static partial class Crypto
     {
         [LibraryImport(
@@ -33,7 +34,8 @@ internal static partial class Interop
                 targetSize = compactSize;
             }
 
-            // Android does not include leading zeroes (uses minimum number of bytes required to represent the value).
+            // Android does not include leading zeroes (uses minimum number of bytes required to represent the
+            // value).
             // Windows Crypt32 does.
             //
             // Since RSACryptoServiceProvider already checks that RSAParameters.DP.Length is

@@ -173,7 +173,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)
         ///    PBLENDVB xmm1,       xmm2/m128, &lt;XMM0&gt;
         ///   VPBLENDVB xmm1, xmm2, xmm3/m128, xmm4
-        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set each mask byte for the selected elements.
+        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set
+        // each mask byte for the selected elements.
         /// </summary>
         public static Vector128<short> BlendVariable(
             Vector128<short> left,
@@ -188,7 +189,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)
         ///    PBLENDVB xmm1,       xmm2/m128, &lt;XMM0&gt;
         ///   VPBLENDVB xmm1, xmm2, xmm3/m128, xmm4
-        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set each mask byte for the selected elements.
+        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set
+        // each mask byte for the selected elements.
         /// </summary>
         public static Vector128<ushort> BlendVariable(
             Vector128<ushort> left,
@@ -203,7 +205,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)
         ///    PBLENDVB xmm1,       xmm2/m128, &lt;XMM0&gt;
         ///   VPBLENDVB xmm1, xmm2, xmm3/m128, xmm4
-        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set each mask byte for the selected elements.
+        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set
+        // each mask byte for the selected elements.
         /// </summary>
         public static Vector128<int> BlendVariable(
             Vector128<int> left,
@@ -218,7 +221,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)
         ///    PBLENDVB xmm1,       xmm2/m128, &lt;XMM0&gt;
         ///   VPBLENDVB xmm1, xmm2, xmm3/m128, xmm4
-        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set each mask byte for the selected elements.
+        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set
+        // each mask byte for the selected elements.
         /// </summary>
         public static Vector128<uint> BlendVariable(
             Vector128<uint> left,
@@ -233,7 +237,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)
         ///    PBLENDVB xmm1,       xmm2/m128, &lt;XMM0&gt;
         ///   VPBLENDVB xmm1, xmm2, xmm3/m128, xmm4
-        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set each mask byte for the selected elements.
+        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set
+        // each mask byte for the selected elements.
         /// </summary>
         public static Vector128<long> BlendVariable(
             Vector128<long> left,
@@ -248,7 +253,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)
         ///    PBLENDVB xmm1,       xmm2/m128, &lt;XMM0&gt;
         ///   VPBLENDVB xmm1, xmm2, xmm3/m128, xmm4
-        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set each mask byte for the selected elements.
+        /// This intrinsic generates PBLENDVB that needs a BYTE mask-vector, so users should correctly set
+        // each mask byte for the selected elements.
         /// </summary>
         public static Vector128<ulong> BlendVariable(
             Vector128<ulong> left,
@@ -311,7 +317,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_ceil_ss (__m128 a)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(10)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> CeilingScalar(Vector128<float> value)
         {
@@ -332,7 +339,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_ceil_sd (__m128d a)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(10)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> CeilingScalar(Vector128<double> value)
         {
@@ -728,7 +736,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_floor_ss (__m128 a)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(9)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> FloorScalar(Vector128<float> value)
         {
@@ -749,7 +758,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_floor_sd (__m128d a)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(9)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> FloorScalar(Vector128<double> value)
         {
@@ -1082,7 +1092,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ps (__m128 a, _MM_FROUND_CUR_DIRECTION)
         ///    ROUNDPS xmm1, xmm2/m128, imm8(4)
         ///   VROUNDPS xmm1, xmm2/m128, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundCurrentDirection(Vector128<float> value)
         {
@@ -1093,7 +1104,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_pd (__m128d a, _MM_FROUND_CUR_DIRECTION)
         ///    ROUNDPD xmm1, xmm2/m128, imm8(4)
         ///   VROUNDPD xmm1, xmm2/m128, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundCurrentDirection(Vector128<double> value)
         {
@@ -1104,7 +1116,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, _MM_FROUND_CUR_DIRECTION)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(4)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundCurrentDirectionScalar(Vector128<float> value)
         {
@@ -1115,7 +1128,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, __m128 b, _MM_FROUND_CUR_DIRECTION)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(4)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundCurrentDirectionScalar(
             Vector128<float> upper,
@@ -1129,7 +1143,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, _MM_FROUND_CUR_DIRECTION)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(4)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundCurrentDirectionScalar(Vector128<double> value)
         {
@@ -1140,7 +1155,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, __m128d b, _MM_FROUND_CUR_DIRECTION)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(4)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(4)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundCurrentDirectionScalar(
             Vector128<double> upper,
@@ -1154,7 +1170,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ps (__m128 a, _MM_FROUND_TO_NEAREST_INT |_MM_FROUND_NO_EXC)
         ///    ROUNDPS xmm1, xmm2/m128, imm8(8)
         ///   VROUNDPS xmm1, xmm2/m128, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToNearestInteger(Vector128<float> value)
         {
@@ -1165,7 +1182,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_pd (__m128 a, _MM_FROUND_TO_NEAREST_INT |_MM_FROUND_NO_EXC)
         ///    ROUNDPD xmm1, xmm2/m128, imm8(8)
         ///   VROUNDPD xmm1, xmm2/m128, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToNearestInteger(Vector128<double> value)
         {
@@ -1176,7 +1194,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(8)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToNearestIntegerScalar(Vector128<float> value)
         {
@@ -1187,7 +1206,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, __m128 b, _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(8)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToNearestIntegerScalar(
             Vector128<float> upper,
@@ -1201,7 +1221,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(8)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToNearestIntegerScalar(Vector128<double> value)
         {
@@ -1212,7 +1233,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, __m128d b, _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(8)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(8)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToNearestIntegerScalar(
             Vector128<double> upper,
@@ -1226,7 +1248,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ps (__m128 a, _MM_FROUND_TO_NEG_INF |_MM_FROUND_NO_EXC)
         ///    ROUNDPS xmm1, xmm2/m128, imm8(9)
         ///   VROUNDPS xmm1, xmm2/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToNegativeInfinity(Vector128<float> value)
         {
@@ -1237,7 +1260,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_pd (__m128 a, _MM_FROUND_TO_NEG_INF |_MM_FROUND_NO_EXC)
         ///    ROUNDPD xmm1, xmm2/m128, imm8(9)
         ///   VROUNDPD xmm1, xmm2/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToNegativeInfinity(Vector128<double> value)
         {
@@ -1248,7 +1272,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(9)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToNegativeInfinityScalar(Vector128<float> value)
         {
@@ -1259,7 +1284,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, __m128 b, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(9)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToNegativeInfinityScalar(
             Vector128<float> upper,
@@ -1273,7 +1299,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(9)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToNegativeInfinityScalar(Vector128<double> value)
         {
@@ -1284,7 +1311,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, __m128d b, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(9)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(9)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToNegativeInfinityScalar(
             Vector128<double> upper,
@@ -1298,7 +1326,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ps (__m128 a, _MM_FROUND_TO_POS_INF |_MM_FROUND_NO_EXC)
         ///    ROUNDPS xmm1, xmm2/m128, imm8(10)
         ///   VROUNDPS xmm1, xmm2/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToPositiveInfinity(Vector128<float> value)
         {
@@ -1309,7 +1338,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_pd (__m128 a, _MM_FROUND_TO_POS_INF |_MM_FROUND_NO_EXC)
         ///    ROUNDPD xmm1, xmm2/m128, imm8(10)
         ///   VROUNDPD xmm1, xmm2/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToPositiveInfinity(Vector128<double> value)
         {
@@ -1320,7 +1350,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(10)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToPositiveInfinityScalar(Vector128<float> value)
         {
@@ -1331,7 +1362,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, __m128 b, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(10)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToPositiveInfinityScalar(
             Vector128<float> upper,
@@ -1345,7 +1377,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(10)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToPositiveInfinityScalar(Vector128<double> value)
         {
@@ -1356,7 +1389,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, __m128d b, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(10)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(10)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToPositiveInfinityScalar(
             Vector128<double> upper,
@@ -1370,7 +1404,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ps (__m128 a, _MM_FROUND_TO_ZERO |_MM_FROUND_NO_EXC)
         ///    ROUNDPS xmm1, xmm2/m128, imm8(11)
         ///   VROUNDPS xmm1, xmm2/m128, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToZero(Vector128<float> value)
         {
@@ -1381,7 +1416,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_pd (__m128 a, _MM_FROUND_TO_ZERO |_MM_FROUND_NO_EXC)
         ///    ROUNDPD xmm1, xmm2/m128, imm8(11)
         ///   VROUNDPD xmm1, xmm2/m128, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToZero(Vector128<double> value)
         {
@@ -1392,7 +1428,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(11)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToZeroScalar(Vector128<float> value)
         {
@@ -1403,7 +1440,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_round_ss (__m128 a, __m128 b, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///    ROUNDSS xmm1,       xmm2/m128, imm8(11)
         ///   VROUNDSS xmm1, xmm2, xmm3/m128, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<float> RoundToZeroScalar(
             Vector128<float> upper,
@@ -1417,7 +1455,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(11)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToZeroScalar(Vector128<double> value)
         {
@@ -1428,7 +1467,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128d _mm_round_sd (__m128d a, __m128 b, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///    ROUNDSD xmm1,       xmm2/m128, imm8(11)
         ///   VROUNDSD xmm1, xmm2, xmm3/m128, imm8(11)
-        /// The above native signature does not exist. We provide this additional overload for the recommended use case of this intrinsic.
+        /// The above native signature does not exist. We provide this additional overload for the
+        // recommended use case of this intrinsic.
         /// </summary>
         public static Vector128<double> RoundToZeroScalar(
             Vector128<double> upper,

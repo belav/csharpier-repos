@@ -21,7 +21,8 @@ internal sealed class RedisProtocol
     }
 
     // The Redis Protocol:
-    // * The message type is known in advance because messages are sent to different channels based on type
+    // * The message type is known in advance because messages are sent to different channels based on
+    // type
     // * Invocations are sent to the All, Group, Connection and User channels
     // * Group Commands are sent to the GroupManagement channel
     // * Acks are sent to the Acknowledgement channel.
@@ -30,7 +31,8 @@ internal sealed class RedisProtocol
     // * The "Variable length integer" is the length-prefixing format used by BinaryReader/BinaryWriter:
     //   * https://learn.microsoft.com/dotnet/api/system.io.binarywriter.write?view=netcore-2.2
     // * The "Length prefixed string" is the string format used by BinaryReader/BinaryWriter:
-    //   * A 7-bit variable length integer encodes the length in bytes, followed by the encoded string in UTF-8.
+    //   * A 7-bit variable length integer encodes the length in bytes, followed by the encoded string
+    // in UTF-8.
 
     public byte[] WriteInvocation(
         string methodName,
@@ -76,7 +78,8 @@ internal sealed class RedisProtocol
 
             WriteHubMessage(ref writer, new InvocationMessage(invocationId, methodName, args));
 
-            // Write last in order to preserve original order for cases where one server is updated and the other isn't.
+            // Write last in order to preserve original order for cases where one server is updated and the
+            // other isn't.
             // Not really a supported scenario, but why not be nice
             if (!string.IsNullOrEmpty(returnChannel))
             {
@@ -234,7 +237,8 @@ internal sealed class RedisProtocol
 
     private void WriteHubMessage(ref MessagePackWriter writer, HubMessage message)
     {
-        // Written as a MessagePack 'map' where the keys are the name of the protocol (as a MessagePack 'str')
+        // Written as a MessagePack 'map' where the keys are the name of the protocol (as a MessagePack
+        // 'str')
         // and the values are the serialized blob (as a MessagePack 'bin').
 
         var serializedHubMessages = _messageSerializer.SerializeMessage(message);

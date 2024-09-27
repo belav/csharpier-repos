@@ -6,9 +6,12 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-// Test to stress FP-relative addressing of generics context slot on ARM64. "str" instruction has a 32760 byte offset limit.
-// And normally, the frame pointer is at the bottom of the frame and the stored generics context at the top. If the locals
-// space is very large, we'll need another register to use instead of a constant in the addressing mode.
+// Test to stress FP-relative addressing of generics context slot on ARM64. "str" instruction has a
+// 32760 byte offset limit.
+// And normally, the frame pointer is at the bottom of the frame and the stored generics context at
+// the top. If the locals
+// space is very large, we'll need another register to use instead of a constant in the addressing
+// mode.
 
 class GenericClass<T> { }
 

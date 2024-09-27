@@ -440,7 +440,8 @@ namespace System.DirectoryServices.AccountManagement
                         .GetGroupMembership(foreignGroup, true);
                 }
 
-                // We're either just beginning the recursive expansion of a foreign group, or we're continuing the expansion
+                // We're either just beginning the recursive expansion of a foreign group, or we're continuing the
+                // expansion
                 // that we started on a previous call to MoveNext().
                 if (_foreignResultSet != null)
                 {
@@ -569,7 +570,8 @@ namespace System.DirectoryServices.AccountManagement
             return isLocal;
         }
 
-        // Resets the enumerator to before the first result in the set.  This potentially can be an expensive
+        // Resets the enumerator to before the first result in the set.  This potentially can be an
+        // expensive
         // operation, e.g., if doing a paged search, may need to re-retrieve the first page of results.
         // As a special case, if the ResultSet is already at the very beginning, this is guaranteed to be
         // a no-op.
@@ -713,7 +715,8 @@ namespace System.DirectoryServices.AccountManagement
 
         // local
 
-        // The 0th entry in this list is always the ADsPath of the original group whose membership we're querying
+        // The 0th entry in this list is always the ADsPath of the original group whose membership we're
+        // querying
         private List<string> _groupsVisited = new List<string>();
 
         private List<string> _groupsToVisit = new List<string>();

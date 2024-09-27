@@ -25,9 +25,11 @@ namespace Microsoft.Extensions.Options
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidateEnumeratedItemsAttribute"/> class.
         /// </summary>
-        /// <param name="validator">A type that implements <see cref="IValidateOptions{T}" /> for the enumerable's type.</param>
+        /// <param name="validator">A type that implements <see cref="IValidateOptions{T}" /> for the
+        // enumerable's type.</param>
         /// <remarks>
-        /// Using this constructor for a field/property tells the code generator to use the given type to validate
+        /// Using this constructor for a field/property tells the code generator to use the given type to
+        // validate
         /// the object held by the enumerable.
         /// </remarks>
         public ValidateEnumeratedItemsAttribute(Type validator)

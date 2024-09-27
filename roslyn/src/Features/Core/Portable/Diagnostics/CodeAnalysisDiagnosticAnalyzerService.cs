@@ -45,17 +45,22 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
         private readonly Workspace _workspace;
 
         /// <summary>
-        /// List of projects that we've finished running "run code analysis" on.  Cached results can now be returned for
+        /// List of projects that we've finished running "run code analysis" on.  Cached results can now be
+        // returned for
         /// these through <see cref="GetLastComputedDocumentDiagnosticsAsync"/> and <see
         /// cref="GetLastComputedProjectDiagnosticsAsync"/>.
         /// </summary>
         private readonly ConcurrentSet<ProjectId> _analyzedProjectIds = new();
 
         /// <summary>
-        /// Previously analyzed projects that we no longer want to report results for.  This happens when an explicit
-        /// build is kicked off.  At that point, we want the build results to win out for a particular project.  We mark
-        /// this project (as opposed to removing from <see cref="_analyzedProjectIds"/>) as we want our LSP handler to
-        /// still think it should process it, as that will the cause the diagnostics to be removed when they now
+        /// Previously analyzed projects that we no longer want to report results for.  This happens when an
+        // explicit
+        /// build is kicked off.  At that point, we want the build results to win out for a particular
+        // project.  We mark
+        /// this project (as opposed to removing from <see cref="_analyzedProjectIds"/>) as we want our LSP
+        // handler to
+        /// still think it should process it, as that will the cause the diagnostics to be removed when they
+        // now
         /// transition to an empty list returned from this type.
         /// </summary>
         private readonly ConcurrentSet<ProjectId> _clearedProjectIds = new();
@@ -164,7 +169,8 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
             // We need this ordering to ensure that 'HasProjectBeenAnalyzed' call above functions correctly.
             _analyzedProjectIds.Add(project.Id);
 
-            // Remove from the cleared list now that we've run a more recent "run code analysis" on this project.
+            // Remove from the cleared list now that we've run a more recent "run code analysis" on this
+            // project.
             _clearedProjectIds.Remove(project.Id);
 
             // Now raise the callback into our caller to indicate this project has been analyzed.
@@ -172,13 +178,16 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
 
             // Finally, invoke a workspace refresh request for LSP client to pull onto these diagnostics.
             // TODO: Below call will eventually be replaced with a special workspace refresh request that skips
-            //       pulling document diagnostics and also does not add any delay for pulling workspace diagnostics.
+            //       pulling document diagnostics and also does not add any delay for pulling workspace
+            // diagnostics.
             _diagnosticsRefresher.RequestWorkspaceRefresh();
         }
 
         /// <summary>
-        /// Running code analysis on the project force computes and caches the diagnostics on the DiagnosticAnalyzerService.
-        /// We return these cached document diagnostics here, including both local and non-local document diagnostics.
+        /// Running code analysis on the project force computes and caches the diagnostics on the
+        // DiagnosticAnalyzerService.
+        /// We return these cached document diagnostics here, including both local and non-local document
+        // diagnostics.
         /// </summary>
         public Task<ImmutableArray<DiagnosticData>> GetLastComputedDocumentDiagnosticsAsync(
             DocumentId documentId,
@@ -197,8 +206,10 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
                 );
 
         /// <summary>
-        /// Running code analysis on the project force computes and caches the diagnostics on the DiagnosticAnalyzerService.
-        /// We return these cached project diagnostics here, i.e. diagnostics with no location, by excluding all local and non-local document diagnostics.
+        /// Running code analysis on the project force computes and caches the diagnostics on the
+        // DiagnosticAnalyzerService.
+        /// We return these cached project diagnostics here, i.e. diagnostics with no location, by excluding
+        // all local and non-local document diagnostics.
         /// </summary>
         public Task<ImmutableArray<DiagnosticData>> GetLastComputedProjectDiagnosticsAsync(
             ProjectId projectId,

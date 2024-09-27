@@ -21,7 +21,8 @@ namespace Microsoft.Data.Sqlite
     /// <summary>
     ///     Provides methods for reading the result of a command executed against a SQLite database.
     /// </summary>
-    /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
+    /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data
+    // Types</seealso>
     public class SqliteDataReader : DbDataReader
     {
         private readonly SqliteCommand _command;
@@ -64,7 +65,8 @@ namespace Microsoft.Data.Sqlite
         ///     Gets a handle to underlying prepared statement.
         /// </summary>
         /// <value>A handle to underlying prepared statement.</value>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/interop">Interoperability</seealso>
+        /// <seealso
+        // href="https://docs.microsoft.com/dotnet/standard/data/sqlite/interop">Interoperability</seealso>
         public virtual sqlite3_stmt? Handle => _record?.Handle;
 
         /// <summary>
@@ -90,7 +92,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="name">The name of the column. The value is case-sensitive.</param>
         /// <returns>The value.</returns>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data
+        // Types</seealso>
         public override object this[string name] =>
             _record == null ? throw new InvalidOperationException(Resources.NoData) : _record[name];
 
@@ -99,7 +102,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="ordinal">The zero-based column ordinal.</param>
         /// <returns>The value.</returns>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data
+        // Types</seealso>
         public override object this[int ordinal] =>
             _record == null
                 ? throw new InvalidOperationException(Resources.NoData)
@@ -114,7 +118,8 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Advances to the next row in the result set.
         /// </summary>
-        /// <returns><see langword="true" /> if there are more rows; otherwise, <see langword="false" />.</returns>
+        /// <returns><see langword="true" /> if there are more rows; otherwise, <see langword="false"
+        // />.</returns>
         public override bool Read() =>
             _closed
                 ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(Read)))
@@ -123,10 +128,13 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Advances to the next result set for batched statements.
         /// </summary>
-        /// <returns><see langword="true" /> if there are more result sets; otherwise, <see langword="false" />.</returns>
+        /// <returns><see langword="true" /> if there are more result sets; otherwise, <see langword="false"
+        // />.</returns>
         /// <exception cref="SqliteException">A SQLite error occurs during execution.</exception>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/batching">Batching</seealso>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database Errors</seealso>
+        /// <seealso
+        // href="https://docs.microsoft.com/dotnet/standard/data/sqlite/batching">Batching</seealso>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database
+        // Errors</seealso>
         public override bool NextResult()
         {
             if (_closed)
@@ -293,13 +301,16 @@ namespace Microsoft.Data.Sqlite
             : _record.GetOrdinal(name);
 
         /// <summary>
-        ///     Gets the declared data type name of the specified column. The storage class is returned for computed
+        ///     Gets the declared data type name of the specified column. The storage class is returned for
+        // computed
         ///     columns.
         /// </summary>
         /// <param name="ordinal">The zero-based column ordinal.</param>
         /// <returns>The data type name of the column.</returns>
-        /// <remarks>Due to SQLite's dynamic type system, this may not reflect the actual type of the value.</remarks>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
+        /// <remarks>Due to SQLite's dynamic type system, this may not reflect the actual type of the
+        // value.</remarks>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data
+        // Types</seealso>
         public override string GetDataTypeName(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
@@ -331,7 +342,8 @@ namespace Microsoft.Data.Sqlite
         ///     Gets a value indicating whether the specified column is <see cref="DBNull" />.
         /// </summary>
         /// <param name="ordinal">The zero-based column ordinal.</param>
-        /// <returns><see langword="true" /> if the specified column is <see cref="DBNull" />; otherwise, <see langword="false" />.</returns>
+        /// <returns><see langword="true" /> if the specified column is <see cref="DBNull" />; otherwise,
+        // <see langword="false" />.</returns>
         public override bool IsDBNull(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(IsDBNull)))
@@ -546,12 +558,14 @@ namespace Microsoft.Data.Sqlite
 
         /// <summary>
         ///     Retrieves data as a Stream. If the reader includes rowid (or any of its aliases), a
-        ///     <see cref="SqliteBlob" /> is returned. Otherwise, the all of the data is read into memory and a
+        ///     <see cref="SqliteBlob" /> is returned. Otherwise, the all of the data is read into memory
+        // and a
         ///     <see cref="MemoryStream" /> is returned.
         /// </summary>
         /// <param name="ordinal">The zero-based column ordinal.</param>
         /// <returns>The returned object.</returns>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/blob-io">BLOB I/O</seealso>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/blob-io">BLOB
+        // I/O</seealso>
         public override Stream GetStream(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetStream)))
@@ -577,7 +591,8 @@ namespace Microsoft.Data.Sqlite
         /// <typeparam name="T">The type of the value.</typeparam>
         /// <param name="ordinal">The zero-based column ordinal.</param>
         /// <returns>The value of the column.</returns>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data
+        // Types</seealso>
         public override T GetFieldValue<T>(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
@@ -591,7 +606,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="ordinal">The zero-based column ordinal.</param>
         /// <returns>The value of the column.</returns>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data
+        // Types</seealso>
         public override object GetValue(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetValue)))
@@ -603,7 +619,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="values">An array into which the values are copied.</param>
         /// <returns>The number of values copied into the array.</returns>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data Types</seealso>
+        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/types">Data
+        // Types</seealso>
         public override int GetValues(object?[] values) =>
             _closed
                 ? throw new InvalidOperationException(Resources.DataReaderClosed(nameof(GetValues)))
@@ -611,10 +628,12 @@ namespace Microsoft.Data.Sqlite
             : _record.GetValues(values);
 
         /// <summary>
-        ///     Returns a System.Data.DataTable that describes the column metadata of the System.Data.Common.DbDataReader.
+        ///     Returns a System.Data.DataTable that describes the column metadata of the
+        // System.Data.Common.DbDataReader.
         /// </summary>
         /// <returns>A System.Data.DataTable that describes the column metadata.</returns>
-        /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/metadata">Metadata</seealso>
+        /// <seealso
+        // href="https://docs.microsoft.com/dotnet/standard/data/sqlite/metadata">Metadata</seealso>
         public override DataTable GetSchemaTable()
         {
             if (_closed)

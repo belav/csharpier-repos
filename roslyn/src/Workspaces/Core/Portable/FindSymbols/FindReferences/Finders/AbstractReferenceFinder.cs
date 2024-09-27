@@ -60,8 +60,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            // delegates don't have exposed symbols for their constructors.  so when you do `new MyDel()`, that's only a
-            // reference to a type (as we don't have any real constructor symbols that can actually cascade to).  So
+            // delegates don't have exposed symbols for their constructors.  so when you do `new MyDel()`,
+            // that's only a
+            // reference to a type (as we don't have any real constructor symbols that can actually cascade to).
+            // So
             // don't do any special finding in that case.
             var parent = symbol.IsDelegateType()
                 ? token.Parent
@@ -353,7 +355,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 var directive = node.GetRequiredParent();
 
                 // In the case of a same-named alias.  i.e. `using Console = System.Console;` we don't actually want
-                // search for the alias.  We'll already be checking any references called 'Console' and will find them
+                // search for the alias.  We'll already be checking any references called 'Console' and will find
+                // them
                 // as matches.
                 if (
                     state.SemanticModel.GetDeclaredSymbol(directive, cancellationToken)
@@ -441,7 +444,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     )
                     .ConfigureAwait(false);
                 allAliasReferences.AddRange(aliasReferences);
-                // the alias may reference an attribute and the alias name may end with an "Attribute" suffix. In this case search for the
+                // the alias may reference an attribute and the alias name may end with an "Attribute" suffix. In
+                // this case search for the
                 // shortened name as well (e.g. using GooAttribute = MyNamespace.GooAttribute; [Goo] class C1 {})
                 if (
                     TryGetNameWithoutAttributeSuffix(
@@ -484,7 +488,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     )
                     .ConfigureAwait(false);
                 allAliasReferences.AddRange(aliasReferences);
-                // the alias may reference an attribute and the alias name may end with an "Attribute" suffix. In this case search for the
+                // the alias may reference an attribute and the alias name may end with an "Attribute" suffix. In
+                // this case search for the
                 // shortened name as well (e.g. using GooAttribute = MyNamespace.GooAttribute; [Goo] class C1 {})
                 if (
                     TryGetNameWithoutAttributeSuffix(
@@ -1156,7 +1161,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
             var containingSymbol = definition.ContainingSymbol;
 
-            // Containing member should only include fields, properties, methods, or events.  Since ContainingSymbol can return other types, use the return value of GetMemberType to restrict to members only.)
+            // Containing member should only include fields, properties, methods, or events.  Since
+            // ContainingSymbol can return other types, use the return value of GetMemberType to restrict to
+            // members only.)
             if (
                 containingSymbol != null
                 && containingSymbol.GetMemberType() != null

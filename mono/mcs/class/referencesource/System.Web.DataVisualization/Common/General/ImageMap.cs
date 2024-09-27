@@ -192,7 +192,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Initializes a new instance of the <see cref="MapArea"/> class.
         /// </summary>
         /// <param name="url">The destination URL or anchor point of the map area.</param>
-        /// <param name="rect">A RectangleF structure that defines shape of the rectangular map area.</param>
+        /// <param name="rect">A RectangleF structure that defines shape of the rectangular map
+        // area.</param>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1054:UriParametersShouldNotBeStrings",
@@ -206,7 +207,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="shape">Area shape.</param>
         /// <param name="url">The destination URL or anchor point of the map area.</param>
-        /// <param name="coordinates">Coordinates array that determines the location of the circle, rectangle or polygon.
+        /// <param name="coordinates">Coordinates array that determines the location of the circle,
+        // rectangle or polygon.
         /// The type of shape that is being used determines the type of coordinates required.</param>
         [SuppressMessage(
             "Microsoft.Design",

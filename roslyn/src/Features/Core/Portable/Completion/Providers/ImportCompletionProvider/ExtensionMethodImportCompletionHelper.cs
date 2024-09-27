@@ -253,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     isGeneric: symbol.Arity > 0
                 );
 
-                // Select the overload convertible to any targeted type (if any) and with minimum number of parameters to display
+                // Select the overload convertible to any targeted type (if any) and with minimum number of
+                // parameters to display
                 if (overloadMap.TryGetValue(overloadKey, out var currentValue))
                 {
                     if (
@@ -385,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            // While we are caching data from SyntaxTreeInfo, all the things we cared about here are actually based on sources symbols.
+            // While we are caching data from SyntaxTreeInfo, all the things we cared about here are actually
+            // based on sources symbols.
             // So using source symbol checksum would suffice.
             var checksum = await SymbolTreeInfo
                 .GetSourceSymbolsChecksumAsync(project, cancellationToken)

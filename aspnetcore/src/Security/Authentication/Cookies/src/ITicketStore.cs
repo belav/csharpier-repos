@@ -23,7 +23,8 @@ public interface ITicketStore
     /// Store the identity ticket and return the associated key.
     /// </summary>
     /// <param name="ticket">The identity information to store.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The key that can be used to retrieve the identity later.</returns>
     Task<string> StoreAsync(AuthenticationTicket ticket, CancellationToken cancellationToken) =>
         StoreAsync(ticket);
@@ -32,8 +33,10 @@ public interface ITicketStore
     /// Store the identity ticket and return the associated key.
     /// </summary>
     /// <param name="ticket">The identity information to store.</param>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The key that can be used to retrieve the identity later.</returns>
     Task<string> StoreAsync(
         AuthenticationTicket ticket,
@@ -54,7 +57,8 @@ public interface ITicketStore
     /// </summary>
     /// <param name="key"></param>
     /// <param name="ticket"></param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns></returns>
     Task RenewAsync(string key, AuthenticationTicket ticket, CancellationToken cancellationToken) =>
         RenewAsync(key, ticket);
@@ -65,7 +69,8 @@ public interface ITicketStore
     /// <param name="key"></param>
     /// <param name="ticket"></param>
     /// <param name="httpContext"></param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns></returns>
     Task RenewAsync(
         string key,
@@ -85,7 +90,8 @@ public interface ITicketStore
     /// Retrieves an identity from the store for the given key.
     /// </summary>
     /// <param name="key">The key associated with the identity.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The identity associated with the given key, or <c>null</c> if not found.</returns>
     Task<AuthenticationTicket?> RetrieveAsync(string key, CancellationToken cancellationToken) =>
         RetrieveAsync(key);
@@ -94,8 +100,10 @@ public interface ITicketStore
     /// Retrieves an identity from the store for the given key.
     /// </summary>
     /// <param name="key">The key associated with the identity.</param>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The identity associated with the given key, or <c>null</c> if not found.</returns>
     Task<AuthenticationTicket?> RetrieveAsync(
         string key,
@@ -114,7 +122,8 @@ public interface ITicketStore
     /// Remove the identity associated with the given key.
     /// </summary>
     /// <param name="key">The key associated with the identity.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns></returns>
     Task RemoveAsync(string key, CancellationToken cancellationToken) => RemoveAsync(key);
 
@@ -122,8 +131,10 @@ public interface ITicketStore
     /// Remove the identity associated with the given key.
     /// </summary>
     /// <param name="key">The key associated with the identity.</param>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns></returns>
     Task RemoveAsync(string key, HttpContext httpContext, CancellationToken cancellationToken) =>
         RemoveAsync(key, cancellationToken);

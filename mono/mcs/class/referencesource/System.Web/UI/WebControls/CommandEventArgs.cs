@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -20,13 +20,15 @@ namespace System.Web.UI.WebControls
         private object argument;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.CommandEventArgs'/> class with another <see cref='System.Web.UI.WebControls.CommandEventArgs'/>.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.CommandEventArgs'/>
+        // class with another <see cref='System.Web.UI.WebControls.CommandEventArgs'/>.</para>
         /// </devdoc>
         public CommandEventArgs(CommandEventArgs e)
             : this(e.CommandName, e.CommandArgument) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.CommandEventArgs'/> class with the specified command name
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.CommandEventArgs'/>
+        // class with the specified command name
         ///    and argument.</para>
         /// </devdoc>
         public CommandEventArgs(string commandName, object argument)

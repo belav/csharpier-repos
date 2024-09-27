@@ -766,8 +766,10 @@ namespace System.Diagnostics
                 }
                 else if (Marshal.GetLastWin32Error() != Interop.Errors.ERROR_INVALID_PARAMETER)
                 {
-                    // This api should return the list of all event logs present on the system even if the current user can't open the log.
-                    // Windows returns ERROR_INVALID_PARAMETER for special keys which were added in RS5+ but do not represent actual event logs.
+                    // This api should return the list of all event logs present on the system even if the current user
+                    // can't open the log.
+                    // Windows returns ERROR_INVALID_PARAMETER for special keys which were added in RS5+ but do not
+                    // represent actual event logs.
                     logs.Add(log);
                 }
             }
@@ -1035,8 +1037,10 @@ namespace System.Diagnostics
             return UnsafeTryFormatMessage(hModule, messageNum, insertionStrings);
         }
 
-        // FormatMessageW will AV if you don't pass in enough format strings.  If you call TryFormatMessage we ensure insertionStrings
-        // is long enough.  You don't want to call this directly unless you're sure insertionStrings is long enough!
+        // FormatMessageW will AV if you don't pass in enough format strings.  If you call TryFormatMessage
+        // we ensure insertionStrings
+        // is long enough.  You don't want to call this directly unless you're sure insertionStrings is long
+        // enough!
         internal static string UnsafeTryFormatMessage(
             SafeLibraryHandle hModule,
             uint messageNum,
@@ -1272,7 +1276,8 @@ namespace System.Diagnostics
             }
         }
 
-        // The EventLog.set_Source used to do some normalization and throw some exceptions.  We mimic that behavior here.
+        // The EventLog.set_Source used to do some normalization and throw some exceptions.  We mimic that
+        // behavior here.
         private static string CheckAndNormalizeSourceName(string source)
         {
             source ??= string.Empty;

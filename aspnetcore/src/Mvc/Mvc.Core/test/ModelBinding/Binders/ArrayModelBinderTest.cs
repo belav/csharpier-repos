@@ -185,7 +185,8 @@ public class ArrayModelBinderTest
         get { return new TheoryData<int[]> { new int[0], new[] { 357 }, new[] { 357, 357 } }; }
     }
 
-    // Here "fails silently" means the call does not update the array but also does not throw or set an error.
+    // Here "fails silently" means the call does not update the array but also does not throw or set an
+    // error.
     [Theory]
     [MemberData(nameof(ArrayModelData))]
     public async Task BindModelAsync_ModelMetadataNotReadOnly_ModelNonNull_FailsSilently(

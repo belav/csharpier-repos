@@ -41,7 +41,8 @@ namespace System.Text
 
         /// <summary>
         /// The number of characters in this chunk.
-        /// This is the number of elements in <see cref="m_ChunkChars"/> that are in use, from the start of the buffer.
+        /// This is the number of elements in <see cref="m_ChunkChars"/> that are in use, from the start of
+        // the buffer.
         /// </summary>
         internal int m_ChunkLength;
 
@@ -460,7 +461,8 @@ namespace System.Text
                         int newLen = capacityToPreserve - chunk.m_ChunkOffset;
                         if (newLen > chunk.m_ChunkChars.Length)
                         {
-                            // We crossed a chunk boundary when reducing the Length. We must replace this middle-chunk with a new larger chunk,
+                            // We crossed a chunk boundary when reducing the Length. We must replace this middle-chunk with a
+                            // new larger chunk,
                             // to ensure the capacity we want is preserved.
                             char[] newArray = GC.AllocateUninitializedArray<char>(newLen);
                             Array.Copy(chunk.m_ChunkChars, newArray, chunk.m_ChunkLength);
@@ -1237,14 +1239,16 @@ namespace System.Text
                 ref AppendInterpolatedStringHandler handler
         ) => this;
 
-        /// <summary>Appends the specified interpolated string followed by the default line terminator to the end of the current StringBuilder object.</summary>
+        /// <summary>Appends the specified interpolated string followed by the default line terminator to
+        // the end of the current StringBuilder object.</summary>
         /// <param name="handler">The interpolated string to append.</param>
         /// <returns>A reference to this instance after the append operation has completed.</returns>
         public StringBuilder AppendLine(
             [InterpolatedStringHandlerArgument("")] ref AppendInterpolatedStringHandler handler
         ) => AppendLine();
 
-        /// <summary>Appends the specified interpolated string followed by the default line terminator to the end of the current StringBuilder object.</summary>
+        /// <summary>Appends the specified interpolated string followed by the default line terminator to
+        // the end of the current StringBuilder object.</summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="handler">The interpolated string to append.</param>
         /// <returns>A reference to this instance after the append operation has completed.</returns>
@@ -1650,11 +1654,13 @@ namespace System.Text
             char ch;
             while (true)
             {
-                // Skip until either the end of the input or the first unescaped opening brace, whichever comes first.
+                // Skip until either the end of the input or the first unescaped opening brace, whichever comes
+                // first.
                 // Along the way we need to also unescape escaped closing braces.
                 while (true)
                 {
-                    // Find the next brace.  If there isn't one, the remainder of the input is text to be appended, and we're done.
+                    // Find the next brace.  If there isn't one, the remainder of the input is text to be appended, and
+                    // we're done.
                     if ((uint)pos >= (uint)format.Length)
                     {
                         return this;
@@ -1672,7 +1678,8 @@ namespace System.Text
                     Append(remainder.Slice(0, countUntilNextBrace));
                     pos += countUntilNextBrace;
 
-                    // Get the brace.  It must be followed by another character, either a copy of itself in the case of being
+                    // Get the brace.  It must be followed by another character, either a copy of itself in the case of
+                    // being
                     // escaped, or an arbitrary character that's part of the hole in the case of an opening brace.
                     char brace = format[pos];
                     ch = MoveNext(format, ref pos);
@@ -1930,8 +1937,10 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Appends the string returned by processing a composite format string, which contains zero or more format items, to this instance.
-        /// Each format item is replaced by the string representation of any of the arguments using a specified format provider.
+        /// Appends the string returned by processing a composite format string, which contains zero or more
+        // format items, to this instance.
+        /// Each format item is replaced by the string representation of any of the arguments using a
+        // specified format provider.
         /// </summary>
         /// <typeparam name="TArg0">The type of the first object to format.</typeparam>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
@@ -1939,7 +1948,8 @@ namespace System.Text
         /// <param name="arg0">The first object to format.</param>
         /// <returns>A reference to this instance after the append operation has completed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="format"/> is null.</exception>
-        /// <exception cref="FormatException">The index of a format item is greater than or equal to the number of supplied arguments.</exception>
+        /// <exception cref="FormatException">The index of a format item is greater than or equal to the
+        // number of supplied arguments.</exception>
         public StringBuilder AppendFormat<TArg0>(
             IFormatProvider? provider,
             CompositeFormat format,
@@ -1952,8 +1962,10 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Appends the string returned by processing a composite format string, which contains zero or more format items, to this instance.
-        /// Each format item is replaced by the string representation of any of the arguments using a specified format provider.
+        /// Appends the string returned by processing a composite format string, which contains zero or more
+        // format items, to this instance.
+        /// Each format item is replaced by the string representation of any of the arguments using a
+        // specified format provider.
         /// </summary>
         /// <typeparam name="TArg0">The type of the first object to format.</typeparam>
         /// <typeparam name="TArg1">The type of the second object to format.</typeparam>
@@ -1963,7 +1975,8 @@ namespace System.Text
         /// <param name="arg1">The second object to format.</param>
         /// <returns>A reference to this instance after the append operation has completed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="format"/> is null.</exception>
-        /// <exception cref="FormatException">The index of a format item is greater than or equal to the number of supplied arguments.</exception>
+        /// <exception cref="FormatException">The index of a format item is greater than or equal to the
+        // number of supplied arguments.</exception>
         public StringBuilder AppendFormat<TArg0, TArg1>(
             IFormatProvider? provider,
             CompositeFormat format,
@@ -1977,8 +1990,10 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Appends the string returned by processing a composite format string, which contains zero or more format items, to this instance.
-        /// Each format item is replaced by the string representation of any of the arguments using a specified format provider.
+        /// Appends the string returned by processing a composite format string, which contains zero or more
+        // format items, to this instance.
+        /// Each format item is replaced by the string representation of any of the arguments using a
+        // specified format provider.
         /// </summary>
         /// <typeparam name="TArg0">The type of the first object to format.</typeparam>
         /// <typeparam name="TArg1">The type of the second object to format.</typeparam>
@@ -1990,7 +2005,8 @@ namespace System.Text
         /// <param name="arg2">The third object to format.</param>
         /// <returns>A reference to this instance after the append operation has completed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="format"/> is null.</exception>
-        /// <exception cref="FormatException">The index of a format item is greater than or equal to the number of supplied arguments.</exception>
+        /// <exception cref="FormatException">The index of a format item is greater than or equal to the
+        // number of supplied arguments.</exception>
         public StringBuilder AppendFormat<TArg0, TArg1, TArg2>(
             IFormatProvider? provider,
             CompositeFormat format,
@@ -2005,8 +2021,10 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Appends the string returned by processing a composite format string, which contains zero or more format items, to this instance.
-        /// Each format item is replaced by the string representation of any of the arguments using a specified format provider.
+        /// Appends the string returned by processing a composite format string, which contains zero or more
+        // format items, to this instance.
+        /// Each format item is replaced by the string representation of any of the arguments using a
+        // specified format provider.
         /// </summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="format">A <see cref="CompositeFormat"/>.</param>
@@ -2014,7 +2032,8 @@ namespace System.Text
         /// <returns>A reference to this instance after the append operation has completed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="format"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="args"/> is null.</exception>
-        /// <exception cref="FormatException">The index of a format item is greater than or equal to the number of supplied arguments.</exception>
+        /// <exception cref="FormatException">The index of a format item is greater than or equal to the
+        // number of supplied arguments.</exception>
         public StringBuilder AppendFormat(
             IFormatProvider? provider,
             CompositeFormat format,
@@ -2027,15 +2046,18 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Appends the string returned by processing a composite format string, which contains zero or more format items, to this instance.
-        /// Each format item is replaced by the string representation of any of the arguments using a specified format provider.
+        /// Appends the string returned by processing a composite format string, which contains zero or more
+        // format items, to this instance.
+        /// Each format item is replaced by the string representation of any of the arguments using a
+        // specified format provider.
         /// </summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="format">A <see cref="CompositeFormat"/>.</param>
         /// <param name="args">A span of objects to format.</param>
         /// <returns>A reference to this instance after the append operation has completed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="format"/> is null.</exception>
-        /// <exception cref="FormatException">The index of a format item is greater than or equal to the number of supplied arguments.</exception>
+        /// <exception cref="FormatException">The index of a format item is greater than or equal to the
+        // number of supplied arguments.</exception>
         public StringBuilder AppendFormat(
             IFormatProvider? provider,
             CompositeFormat format,
@@ -2129,7 +2151,8 @@ namespace System.Text
         /// Replaces all instances of one read-only character span with another in this builder.
         /// </summary>
         /// <param name="oldValue">The read-only character span to replace.</param>
-        /// <param name="newValue">The read-only character span to replace <paramref name="oldValue"/> with.</param>
+        /// <param name="newValue">The read-only character span to replace <paramref name="oldValue"/>
+        // with.</param>
         /// <remarks>
         /// If <paramref name="newValue"/> is empty, instances of <paramref name="oldValue"/>
         /// are removed from this builder.
@@ -2202,7 +2225,8 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Determines if the contents of this builder are equal to the contents of <see cref="ReadOnlySpan{Char}"/>.
+        /// Determines if the contents of this builder are equal to the contents of <see
+        // cref="ReadOnlySpan{Char}"/>.
         /// </summary>
         /// <param name="span">The <see cref="ReadOnlySpan{Char}"/>.</param>
         public bool Equals(ReadOnlySpan<char> span)
@@ -2259,7 +2283,8 @@ namespace System.Text
         /// Replaces all instances of one read-only character span with another in part of this builder.
         /// </summary>
         /// <param name="oldValue">The read-only character span to replace.</param>
-        /// <param name="newValue">The read-only character span to replace <paramref name="oldValue"/> with.</param>
+        /// <param name="newValue">The read-only character span to replace <paramref name="oldValue"/>
+        // with.</param>
         /// <param name="startIndex">The index to start in this builder.</param>
         /// <param name="count">The number of characters to read in this builder.</param>
         /// <remarks>
@@ -2576,7 +2601,8 @@ namespace System.Text
         /// <summary>
         /// Replaces strings at specified indices with a new string in a chunk.
         /// </summary>
-        /// <param name="replacements">The list of indices, relative to the beginning of the chunk, to remove at.</param>
+        /// <param name="replacements">The list of indices, relative to the beginning of the chunk, to
+        // remove at.</param>
         /// <param name="sourceChunk">The source chunk.</param>
         /// <param name="removeCount">The number of characters to remove at each replacement.</param>
         /// <param name="value">The string to insert at each replacement.</param>
@@ -2676,7 +2702,8 @@ namespace System.Text
         /// Returns a value indicating whether a substring of a builder starts with a specified prefix.
         /// </summary>
         /// <param name="chunk">The chunk in which the substring starts.</param>
-        /// <param name="indexInChunk">The index in <paramref name="chunk"/> at which the substring starts.</param>
+        /// <param name="indexInChunk">The index in <paramref name="chunk"/> at which the substring
+        // starts.</param>
         /// <param name="count">The logical count of the substring.</param>
         /// <param name="value">The prefix.</param>
         private bool StartsWith(
@@ -2810,11 +2837,14 @@ namespace System.Text
             chunk == this ? null : FindChunkForIndex(chunk.m_ChunkOffset + chunk.m_ChunkLength);
 
         /// <summary>
-        /// Transfers the character buffer from this chunk to a new chunk, and allocates a new buffer with a minimum size for this chunk.
+        /// Transfers the character buffer from this chunk to a new chunk, and allocates a new buffer with a
+        // minimum size for this chunk.
         /// </summary>
-        /// <param name="minBlockCharCount">The minimum size of the new buffer to be allocated for this chunk.</param>
+        /// <param name="minBlockCharCount">The minimum size of the new buffer to be allocated for this
+        // chunk.</param>
         /// <remarks>
-        /// This method requires that the current chunk is full. Otherwise, there's no point in shifting the characters over.
+        /// This method requires that the current chunk is full. Otherwise, there's no point in shifting the
+        // characters over.
         /// It also assumes that 'this' is the last chunk in the linked list.
         /// </remarks>
         private void ExpandByABlock(int minBlockCharCount)
@@ -2850,7 +2880,8 @@ namespace System.Text
                 throw new OutOfMemoryException();
             }
 
-            // Allocate the array before updating any state to avoid leaving inconsistent state behind in case of out of memory exception
+            // Allocate the array before updating any state to avoid leaving inconsistent state behind in case
+            // of out of memory exception
             char[] chunkChars = GC.AllocateUninitializedArray<char>(newBlockLength);
 
             // Move all of the data from this chunk to a new one, via a few O(1) reference adjustments.
@@ -2899,21 +2930,27 @@ namespace System.Text
         /// <param name="indexInChunk">The index in <paramref name="chunk"/> that points to the gap.</param>
         /// <param name="doNotMoveFollowingChars">
         /// - If <c>true</c>, then room must be made by inserting a chunk before the current chunk.
-        /// - If <c>false</c>, then room can be made by shifting characters ahead of <paramref name="index"/>
+        /// - If <c>false</c>, then room can be made by shifting characters ahead of <paramref
+        // name="index"/>
         ///   in this block forward by <paramref name="count"/> provided the characters will still fit in
         ///   the current chunk after being shifted.
-        ///   - Providing <c>false</c> does not make a difference most of the time, but it can matter when someone
+        ///   - Providing <c>false</c> does not make a difference most of the time, but it can matter when
+        // someone
         ///     inserts lots of small strings at a position in the buffer.
         /// </param>
         /// <remarks>
         /// <para>
-        /// Since chunks do not contain references to their successors, it is not always possible for us to make room
-        /// by inserting space after <paramref name="index"/> in case this chunk runs out of space. Thus, we make room
-        /// by inserting space before the specified index, and having logical indices refer to new locations by the end
+        /// Since chunks do not contain references to their successors, it is not always possible for us to
+        // make room
+        /// by inserting space after <paramref name="index"/> in case this chunk runs out of space. Thus, we
+        // make room
+        /// by inserting space before the specified index, and having logical indices refer to new locations
+        // by the end
         /// of this method.
         /// </para>
         /// <para>
-        /// <see cref="ReplaceInPlaceAtChunk"/> can be used in conjunction with this method to fill in the newly created gap.
+        /// <see cref="ReplaceInPlaceAtChunk"/> can be used in conjunction with this method to fill in the
+        // newly created gap.
         /// </para>
         /// </remarks>
         private void MakeRoom(
@@ -2945,8 +2982,10 @@ namespace System.Text
             }
             indexInChunk = index - chunk.m_ChunkOffset;
 
-            // Cool, we have some space in this block, and we don't have to copy much to get at it, so go ahead and use it.
-            // This typically happens when someone repeatedly inserts small strings at a spot (usually the absolute front) of the buffer.
+            // Cool, we have some space in this block, and we don't have to copy much to get at it, so go ahead
+            // and use it.
+            // This typically happens when someone repeatedly inserts small strings at a spot (usually the
+            // absolute front) of the buffer.
             if (
                 !doNotMoveFollowingChars
                 && chunk.m_ChunkLength <= DefaultCapacity * 2
@@ -3109,37 +3148,49 @@ namespace System.Text
             AssertInvariants();
         }
 
-        /// <summary>Provides a handler used by the language compiler to append interpolated strings into <see cref="StringBuilder"/> instances.</summary>
+        /// <summary>Provides a handler used by the language compiler to append interpolated strings into
+        // <see cref="StringBuilder"/> instances.</summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [InterpolatedStringHandler]
         public struct AppendInterpolatedStringHandler
         {
             // Implementation note:
-            // As this type is only intended to be targeted by the compiler, public APIs eschew argument validation logic
-            // in a variety of places, e.g. allowing a null input when one isn't expected to produce a NullReferenceException rather
+            // As this type is only intended to be targeted by the compiler, public APIs eschew argument
+            // validation logic
+            // in a variety of places, e.g. allowing a null input when one isn't expected to produce a
+            // NullReferenceException rather
             // than an ArgumentNullException.
 
             /// <summary>The associated StringBuilder to which to append.</summary>
             internal readonly StringBuilder _stringBuilder;
 
-            /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
+            /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat
+            // calls.</summary>
             private readonly IFormatProvider? _provider;
 
             /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
             /// <remarks>
-            /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive
-            /// in order to make them as pay-for-play as possible.  So, we avoid adding another reference type field
-            /// to reduce the size of the handler and to reduce required zero'ing, by only storing whether the provider
-            /// provides a formatter, rather than actually storing the formatter.  This in turn means, if there is a
+            /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more
+            // expensive
+            /// in order to make them as pay-for-play as possible.  So, we avoid adding another reference type
+            // field
+            /// to reduce the size of the handler and to reduce required zero'ing, by only storing whether the
+            // provider
+            /// provides a formatter, rather than actually storing the formatter.  This in turn means, if there
+            // is a
             /// formatter, we pay for the extra interface call on each AppendFormatted that needs it.
             /// </remarks>
             private readonly bool _hasCustomFormatter;
 
-            /// <summary>Creates a handler used to append an interpolated string into a <see cref="StringBuilder"/>.</summary>
-            /// <param name="literalLength">The number of constant characters outside of interpolation expressions in the interpolated string.</param>
-            /// <param name="formattedCount">The number of interpolation expressions in the interpolated string.</param>
+            /// <summary>Creates a handler used to append an interpolated string into a <see
+            // cref="StringBuilder"/>.</summary>
+            /// <param name="literalLength">The number of constant characters outside of interpolation
+            // expressions in the interpolated string.</param>
+            /// <param name="formattedCount">The number of interpolation expressions in the interpolated
+            // string.</param>
             /// <param name="stringBuilder">The associated StringBuilder to which to append.</param>
-            /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
+            /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not
+            // validated as they'd otherwise be for members intended to be used directly.</remarks>
             public AppendInterpolatedStringHandler(
                 int literalLength,
                 int formattedCount,
@@ -3151,12 +3202,16 @@ namespace System.Text
                 _hasCustomFormatter = false;
             }
 
-            /// <summary>Creates a handler used to translate an interpolated string into a <see cref="string"/>.</summary>
-            /// <param name="literalLength">The number of constant characters outside of interpolation expressions in the interpolated string.</param>
-            /// <param name="formattedCount">The number of interpolation expressions in the interpolated string.</param>
+            /// <summary>Creates a handler used to translate an interpolated string into a <see
+            // cref="string"/>.</summary>
+            /// <param name="literalLength">The number of constant characters outside of interpolation
+            // expressions in the interpolated string.</param>
+            /// <param name="formattedCount">The number of interpolation expressions in the interpolated
+            // string.</param>
             /// <param name="stringBuilder">The associated StringBuilder to which to append.</param>
             /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-            /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
+            /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not
+            // validated as they'd otherwise be for members intended to be used directly.</remarks>
             public AppendInterpolatedStringHandler(
                 int literalLength,
                 int formattedCount,
@@ -3186,8 +3241,10 @@ namespace System.Text
             public void AppendFormatted<T>(T value)
             {
                 // This method could delegate to AppendFormatted with a null format, but explicitly passing
-                // default as the format to TryFormat helps to improve code quality in some cases when TryFormat is inlined,
-                // e.g. for Int32 it enables the JIT to eliminate code in the inlined method based on a length check on the format.
+                // default as the format to TryFormat helps to improve code quality in some cases when TryFormat is
+                // inlined,
+                // e.g. for Int32 it enables the JIT to eliminate code in the inlined method based on a length check
+                // on the format.
 
                 if (_hasCustomFormatter)
                 {
@@ -3236,7 +3293,8 @@ namespace System.Text
                             if ((uint)charsWritten > (uint)destination.Length)
                             {
                                 // Protect against faulty ISpanFormattable implementations returning invalid charsWritten values.
-                                // Other code in _stringBuilder uses Unsafe manipulation, and we want to ensure m_ChunkLength remains safe.
+                                // Other code in _stringBuilder uses Unsafe manipulation, and we want to ensure m_ChunkLength
+                                // remains safe.
                                 ThrowHelper.ThrowFormatInvalidString();
                             }
 
@@ -3316,7 +3374,8 @@ namespace System.Text
                             if ((uint)charsWritten > (uint)destination.Length)
                             {
                                 // Protect against faulty ISpanFormattable implementations returning invalid charsWritten values.
-                                // Other code in _stringBuilder uses Unsafe manipulation, and we want to ensure m_ChunkLength remains safe.
+                                // Other code in _stringBuilder uses Unsafe manipulation, and we want to ensure m_ChunkLength
+                                // remains safe.
                                 ThrowHelper.ThrowFormatInvalidString();
                             }
 
@@ -3342,7 +3401,9 @@ namespace System.Text
 
             /// <summary>Writes the specified value to the handler.</summary>
             /// <param name="value">The value to write.</param>
-            /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
+            /// <param name="alignment">Minimum number of characters that should be written for this value.  If
+            // the value is negative, it indicates left-aligned and the required minimum is the absolute
+            // value.</param>
             /// <typeparam name="T">The type of the value to write.</typeparam>
             public void AppendFormatted<T>(T value, int alignment) =>
                 AppendFormatted(value, alignment, format: null);
@@ -3350,7 +3411,9 @@ namespace System.Text
             /// <summary>Writes the specified value to the handler.</summary>
             /// <param name="value">The value to write.</param>
             /// <param name="format">The format string.</param>
-            /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
+            /// <param name="alignment">Minimum number of characters that should be written for this value.  If
+            // the value is negative, it indicates left-aligned and the required minimum is the absolute
+            // value.</param>
             /// <typeparam name="T">The type of the value to write.</typeparam>
             public void AppendFormatted<T>(T value, int alignment, string? format)
             {
@@ -3372,17 +3435,22 @@ namespace System.Text
                 }
                 else
                 {
-                    // Right aligned: format into temporary space and then copy that into the handler, appropriately aligned.
+                    // Right aligned: format into temporary space and then copy that into the handler, appropriately
+                    // aligned.
                     AppendFormattedWithTempSpace(value, alignment, format);
                 }
             }
 
-            /// <summary>Formats into temporary space and then appends the result into the StringBuilder.</summary>
+            /// <summary>Formats into temporary space and then appends the result into the
+            // StringBuilder.</summary>
             private void AppendFormattedWithTempSpace<T>(T value, int alignment, string? format)
             {
-                // It's expected that either there's not enough space in the current chunk to store this formatted value,
-                // or we have a non-0 alignment that could require padding inserted. So format into temporary space and
-                // then append that written span into the StringBuilder: StringBuilder.Append(span) is able to split the
+                // It's expected that either there's not enough space in the current chunk to store this formatted
+                // value,
+                // or we have a non-0 alignment that could require padding inserted. So format into temporary space
+                // and
+                // then append that written span into the StringBuilder: StringBuilder.Append(span) is able to split
+                // the
                 // span across the current chunk and any additional chunks required.
 
                 var handler = new DefaultInterpolatedStringHandler(
@@ -3404,7 +3472,9 @@ namespace System.Text
 
             /// <summary>Writes the specified string of chars to the handler.</summary>
             /// <param name="value">The span to write.</param>
-            /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
+            /// <param name="alignment">Minimum number of characters that should be written for this value.  If
+            // the value is negative, it indicates left-aligned and the required minimum is the absolute
+            // value.</param>
             /// <param name="format">The format string.</param>
             public void AppendFormatted(
                 ReadOnlySpan<char> value,
@@ -3461,11 +3531,15 @@ namespace System.Text
 
             /// <summary>Writes the specified value to the handler.</summary>
             /// <param name="value">The value to write.</param>
-            /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
+            /// <param name="alignment">Minimum number of characters that should be written for this value.  If
+            // the value is negative, it indicates left-aligned and the required minimum is the absolute
+            // value.</param>
             /// <param name="format">The format string.</param>
             public void AppendFormatted(string? value, int alignment = 0, string? format = null) =>
-                // Format is meaningless for strings and doesn't make sense for someone to specify.  We have the overload
-                // simply to disambiguate between ROS<char> and object, just in case someone does specify a format, as
+                // Format is meaningless for strings and doesn't make sense for someone to specify.  We have the
+                // overload
+                // simply to disambiguate between ROS<char> and object, just in case someone does specify a format,
+                // as
                 // string is implicitly convertible to both. Just delegate to the T-based implementation.
                 AppendFormatted<string?>(value, alignment, format);
             #endregion
@@ -3473,11 +3547,15 @@ namespace System.Text
             #region AppendFormatted object
             /// <summary>Writes the specified value to the handler.</summary>
             /// <param name="value">The value to write.</param>
-            /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
+            /// <param name="alignment">Minimum number of characters that should be written for this value.  If
+            // the value is negative, it indicates left-aligned and the required minimum is the absolute
+            // value.</param>
             /// <param name="format">The format string.</param>
             public void AppendFormatted(object? value, int alignment = 0, string? format = null) =>
-                // This overload is expected to be used rarely, only if either a) something strongly typed as object is
-                // formatted with both an alignment and a format, or b) the compiler is unable to target type to T. It
+                // This overload is expected to be used rarely, only if either a) something strongly typed as object
+                // is
+                // formatted with both an alignment and a format, or b) the compiler is unable to target type to T.
+                // It
                 // exists purely to help make cases from (b) compile. Just delegate to the T-based implementation.
                 AppendFormatted<object?>(value, alignment, format);
             #endregion
@@ -3491,8 +3569,10 @@ namespace System.Text
             private void AppendCustomFormatter<T>(T value, string? format)
             {
                 // This case is very rare, but we need to handle it prior to the other checks in case
-                // a provider was used that supplied an ICustomFormatter which wanted to intercept the particular value.
-                // We do the cast here rather than in the ctor, even though this could be executed multiple times per
+                // a provider was used that supplied an ICustomFormatter which wanted to intercept the particular
+                // value.
+                // We do the cast here rather than in the ctor, even though this could be executed multiple times
+                // per
                 // formatting, to make the cast pay for play.
                 Debug.Assert(_hasCustomFormatter);
                 Debug.Assert(_provider != null);

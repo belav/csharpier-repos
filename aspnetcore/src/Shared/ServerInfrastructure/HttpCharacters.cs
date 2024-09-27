@@ -25,7 +25,8 @@ internal static class HttpCharacters
     );
 
     // Matches Http.Sys
-    // Matches RFC 3986 except "*" / "+" / "," / ";" / "=" and "%" HEXDIG HEXDIG which are not allowed by Http.Sys
+    // Matches RFC 3986 except "*" / "+" / "," / ";" / "=" and "%" HEXDIG HEXDIG which are not allowed
+    // by Http.Sys
     private static readonly SearchValues<char> _allowedHostChars = SearchValues.Create(
         "!$&'()-._~" + AlphaNumeric
     );

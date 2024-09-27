@@ -44,7 +44,8 @@ public partial class SystemTextJsonInputFormatter
     /// Gets the <see cref="JsonSerializerOptions"/> used to configure the <see cref="JsonSerializer"/>.
     /// </summary>
     /// <remarks>
-    /// A single instance of <see cref="SystemTextJsonInputFormatter"/> is used for all JSON formatting. Any
+    /// A single instance of <see cref="SystemTextJsonInputFormatter"/> is used for all JSON formatting.
+    // Any
     /// changes to the options will affect all input formatting.
     /// </remarks>
     public JsonSerializerOptions SerializerOptions { get; }
@@ -89,7 +90,8 @@ public partial class SystemTextJsonInputFormatter
         catch (Exception exception)
             when (exception is FormatException || exception is OverflowException)
         {
-            // The code in System.Text.Json never throws these exceptions. However a custom converter could produce these errors for instance when
+            // The code in System.Text.Json never throws these exceptions. However a custom converter could
+            // produce these errors for instance when
             // parsing a value. These error messages are considered safe to report to users using ModelState.
 
             context.ModelState.TryAddModelError(string.Empty, exception, context.Metadata);

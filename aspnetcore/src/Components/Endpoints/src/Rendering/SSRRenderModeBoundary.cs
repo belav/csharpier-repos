@@ -131,8 +131,10 @@ internal class SSRRenderModeBoundary : IComponent
 
     public Task SetParametersAsync(ParameterView parameters)
     {
-        // We have to snapshot the parameters because ParameterView is like a ref struct - it can't escape the
-        // call stack because the underlying buffer may get reused. This is enforced through a runtime check.
+        // We have to snapshot the parameters because ParameterView is like a ref struct - it can't escape
+        // the
+        // call stack because the underlying buffer may get reused. This is enforced through a runtime
+        // check.
         _latestParameters = parameters.ToDictionary();
 
         ValidateParameters(_latestParameters);
@@ -169,7 +171,8 @@ internal class SSRRenderModeBoundary : IComponent
                     // However it's very nontrivial since it means we have to execute it within the current renderer
                     // somehow without actually emitting its result directly, wait for quiescence, and then prerender
                     // the output into a separate buffer so we can serialize it in a special way.
-                    // A prototype implementation is at https://github.com/dotnet/aspnetcore/commit/ed330ff5b143974d9060828a760ad486b1d386ac
+                    // A prototype implementation is at
+                    // https://github.com/dotnet/aspnetcore/commit/ed330ff5b143974d9060828a760ad486b1d386ac
                     throw new InvalidOperationException(
                         $"Cannot pass the parameter '{name}' to component '{_componentType.Name}' with rendermode '{RenderMode.GetType().Name}'. This is because the parameter is of the delegate type '{value.GetType()}', which is arbitrary code and cannot be serialized."
                     );
@@ -224,7 +227,8 @@ internal class SSRRenderModeBoundary : IComponent
 
         if (RenderMode is InteractiveServerRenderMode or InteractiveAutoRenderMode)
         {
-            // Lazy because we don't actually want to require a whole chain of services including Data Protection
+            // Lazy because we don't actually want to require a whole chain of services including Data
+            // Protection
             // to be required unless you actually use Server render mode.
             var serverComponentSerializer =
                 httpContext.RequestServices.GetRequiredService<ServerComponentSerializer>();

@@ -11,7 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
 {
     /// <remarks>Note: this is explicitly <b>not</b> exported.  We don't want the workspace
     /// to automatically load this.  Instead, VS waits until it is ready
-    /// and then calls into the service to tell it to start analyzing the solution.  At that point we'll get
+    /// and then calls into the service to tell it to start analyzing the solution.  At that point we'll
+    // get
     /// created and added to the solution crawler.
     /// </remarks>
     internal sealed class TaskListIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider

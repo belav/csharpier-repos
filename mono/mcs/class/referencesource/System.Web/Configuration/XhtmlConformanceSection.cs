@@ -9,21 +9,21 @@ namespace System.Web.Configuration
     using System.Configuration;
     using System.Security.Permissions;
 
-    /*
-            <!--
-            xhtmlConformance Attributes:
-                mode="[Transitional|Legacy|Strict]"
-                                - Supports switching between Xhtml 1.0 transitional standard,
-                                  Xhtml 1.0 strict standard and legacy rendering which reverts
-                                  significant rendering changes made to conform to the Xhtml 1.1
-                                  standards to their version 1.1 rendering. Default is "Transitional"
-                                  to ensure conformance with the Xhtml 1.0 transitional standards
-                                  while continue to render the name attribute on the form element.
-                                  Note: Only rendering changes likely to break existing applications
-                                  will be reverted to their old behavior. There is no mechanism to
-                                  revert all changes made to conform to the Xhtml specification.
-            -->
-    */
+/*
+<!--
+xhtmlConformance Attributes:
+mode="[Transitional|Legacy|Strict]"
+- Supports switching between Xhtml 1.0 transitional standard,
+Xhtml 1.0 strict standard and legacy rendering which reverts
+significant rendering changes made to conform to the Xhtml 1.1
+standards to their version 1.1 rendering. Default is "Transitional"
+to ensure conformance with the Xhtml 1.0 transitional standards
+while continue to render the name attribute on the form element.
+Note: Only rendering changes likely to break existing applications
+will be reverted to their old behavior. There is no mechanism to
+revert all changes made to conform to the Xhtml specification.
+-->
+*/
     public sealed class XhtmlConformanceSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

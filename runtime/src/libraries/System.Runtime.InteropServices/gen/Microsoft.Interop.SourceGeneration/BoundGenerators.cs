@@ -56,7 +56,8 @@ namespace Microsoft.Interop
                 {
                     Debug.Assert(managedExceptionInfo == null);
                     managedExceptionInfo = argType;
-                    // The exception marshaller's selection might depend on the unmanaged type of the native return marshaller.
+                    // The exception marshaller's selection might depend on the unmanaged type of the native return
+                    // marshaller.
                     // Delay binding the generator until we've processed the native return marshaller.
                     continue;
                 }
@@ -87,7 +88,8 @@ namespace Microsoft.Interop
                 }
             }
 
-            // Sort the parameter marshallers by index to ensure that we handle them in order when producing signatures.
+            // Sort the parameter marshallers by index to ensure that we handle them in order when producing
+            // signatures.
             managedParamMarshallers.Sort(
                 static (m1, m2) => m1.TypeInfo.ManagedIndex.CompareTo(m2.TypeInfo.ManagedIndex)
             );
@@ -134,11 +136,16 @@ namespace Microsoft.Interop
             {
                 // We are doing a topological sort of our marshallers to ensure that each parameter/return value's
                 // dependencies are unmarshalled before their dependents. This comes up in the case of contiguous
-                // collections, where the number of elements in a collection are provided via another parameter/return value.
-                // When using nested collections, the parameter that represents the number of elements of each element of the
-                // outer collection is another collection. As a result, there are two options on how to retrieve the size.
-                // Either we partially unmarshal the collection of counts while unmarshalling the collection of elements,
-                // or we unmarshal our parameters and return value in an order such that we can use the managed identifiers
+                // collections, where the number of elements in a collection are provided via another
+                // parameter/return value.
+                // When using nested collections, the parameter that represents the number of elements of each
+                // element of the
+                // outer collection is another collection. As a result, there are two options on how to retrieve the
+                // size.
+                // Either we partially unmarshal the collection of counts while unmarshalling the collection of
+                // elements,
+                // or we unmarshal our parameters and return value in an order such that we can use the managed
+                // identifiers
                 // for our lengths.
                 // Here's an example signature where the dependency shows up:
                 //
@@ -150,8 +157,10 @@ namespace Microsoft.Interop
                 //  [MarshalUsing(CountElementName="numColumns")] ref int[] numRows,
                 //  int numColumns);
                 //
-                // In this scenario, we'd traditionally unmarshal the return value and then each parameter. However, since
-                // the return value has dependencies on numRows and numColumns and numRows has a dependency on numColumns,
+                // In this scenario, we'd traditionally unmarshal the return value and then each parameter. However,
+                // since
+                // the return value has dependencies on numRows and numColumns and numRows has a dependency on
+                // numColumns,
                 // we want to unmarshal numColumns, then numRows, then the return value.
                 // A topological sort ensures we get this order correct.
                 SignatureMarshallers = MarshallerHelpers

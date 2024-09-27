@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Linq;
 namespace System.Web.Http.Dispatcher
 {
     /// <summary>
-    /// Manages a cache of <see cref="System.Web.Http.Controllers.IHttpController"/> types detected in the system.
+    /// Manages a cache of <see cref="System.Web.Http.Controllers.IHttpController"/> types detected in
+    // the system.
     /// </summary>
     internal sealed class HttpControllerTypeCache
     {

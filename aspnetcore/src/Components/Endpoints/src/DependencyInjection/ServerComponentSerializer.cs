@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace Microsoft.AspNetCore.Components.Endpoints;
 
-// See the details of the component serialization protocol in ServerComponentDeserializer.cs on the Components solution.
+// See the details of the component serialization protocol in ServerComponentDeserializer.cs on the
+// Components solution.
 internal sealed class ServerComponentSerializer
 {
     private readonly ITimeLimitedDataProtector _dataProtector;

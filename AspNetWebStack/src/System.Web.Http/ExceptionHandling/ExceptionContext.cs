@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net.Http;
@@ -8,7 +9,8 @@ using System.Web.Http.Properties;
 
 namespace System.Web.Http.ExceptionHandling
 {
-    /// <summary>Represents an exception and the contextual data associated with it when it was caught.</summary>
+    /// <summary>Represents an exception and the contextual data associated with it when it was
+    // caught.</summary>
     public class ExceptionContext
     {
         /// <summary>Initializes a new instance of the <see cref="ExceptionContext"/> class.</summary>
@@ -33,7 +35,8 @@ namespace System.Web.Http.ExceptionHandling
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExceptionContext"/> class using the values provided.
+        /// Initializes a new instance of the <see cref="ExceptionContext"/> class using the values
+        // provided.
         /// </summary>
         /// <param name="exception">The exception caught.</param>
         /// <param name="catchBlock">The catch block where the exception was caught.</param>
@@ -90,7 +93,8 @@ namespace System.Web.Http.ExceptionHandling
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExceptionContext"/> class using the values provided.
+        /// Initializes a new instance of the <see cref="ExceptionContext"/> class using the values
+        // provided.
         /// </summary>
         /// <param name="exception">The exception caught.</param>
         /// <param name="catchBlock">The catch block where the exception was caught.</param>
@@ -112,7 +116,8 @@ namespace System.Web.Http.ExceptionHandling
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExceptionContext"/> class using the values provided.
+        /// Initializes a new instance of the <see cref="ExceptionContext"/> class using the values
+        // provided.
         /// </summary>
         /// <param name="exception">The exception caught.</param>
         /// <param name="catchBlock">The catch block where the exception was caught.</param>

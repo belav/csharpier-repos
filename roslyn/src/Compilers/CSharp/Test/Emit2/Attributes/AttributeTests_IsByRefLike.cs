@@ -284,12 +284,14 @@ public delegate ref readonly int D([IsByRefLike]in int x);
 
             CreateCompilation(codeB, references: new[] { referenceA })
                 .VerifyDiagnostics(
-                    // (4,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (4,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     // [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
                         .WithLocation(4, 2),
-                    // (5,37): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (5,37): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     // public delegate ref readonly int D([IsByRefLike]in int x);
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -321,7 +323,8 @@ public class Test
 
             CreateCompilation(codeB, references: new[] { referenceA })
                 .VerifyDiagnostics(
-                    // (4,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (4,2): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     // [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -356,7 +359,8 @@ public class Test
 
             CreateCompilation(codeB, references: new[] { referenceA })
                 .VerifyDiagnostics(
-                    // (6,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (6,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     //     [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -391,7 +395,8 @@ public class Test
 
             CreateCompilation(codeB, references: new[] { referenceA })
                 .VerifyDiagnostics(
-                    // (8,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (8,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     //     [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -428,17 +433,20 @@ public class Test
 
             CreateCompilation(codeB, references: new[] { referenceA })
                 .VerifyDiagnostics(
-                    // (6,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (6,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     //     [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
                         .WithLocation(6, 6),
-                    // (7,14): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (7,14): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     //     [return: IsByRefLike]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
                         .WithLocation(7, 14),
-                    // (8,37): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (8,37): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     //     public ref readonly int Method([IsByRefLike]in int x)
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -471,12 +479,14 @@ public class Test
 
             CreateCompilation(codeB, references: new[] { referenceA })
                 .VerifyDiagnostics(
-                    // (6,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (6,6): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     //     [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
                         .WithLocation(6, 6),
-                    // (7,35): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is reserved for compiler usage.
+                    // (7,35): error CS8335: Do not use 'System.Runtime.CompilerServices.IsByRefLikeAttribute'. This is
+                    // reserved for compiler usage.
                     //     public ref readonly int this[[IsByRefLike]in int x] { get { return ref x; } }
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "IsByRefLike")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -497,12 +507,14 @@ public class Test
 
             CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (2,2): error CS0246: The type or namespace name 'IsByRefLikeAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                    // (2,2): error CS0246: The type or namespace name 'IsByRefLikeAttribute' could not be found (are
+                    // you missing a using directive or an assembly reference?)
                     // [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IsByRefLike")
                         .WithArguments("IsByRefLikeAttribute")
                         .WithLocation(2, 2),
-                    // (2,2): error CS0246: The type or namespace name 'IsByRefLike' could not be found (are you missing a using directive or an assembly reference?)
+                    // (2,2): error CS0246: The type or namespace name 'IsByRefLike' could not be found (are you missing
+                    // a using directive or an assembly reference?)
                     // [IsByRefLike]
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IsByRefLike")
                         .WithArguments("IsByRefLike")
@@ -585,7 +597,8 @@ public ref struct S1{}
 
             CreateCompilation(code, options: TestOptions.ReleaseModule)
                 .VerifyDiagnostics(
-                    // (2,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsByRefLikeAttribute' is not defined or imported
+                    // (2,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsByRefLikeAttribute' is
+                    // not defined or imported
                     // public ref struct S1{}
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "S1")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -606,12 +619,14 @@ public class Test
 
             CreateCompilation(code, options: TestOptions.ReleaseModule)
                 .VerifyDiagnostics(
-                    // (5,23): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsByRefLikeAttribute' is not defined or imported
+                    // (5,23): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsByRefLikeAttribute' is
+                    // not defined or imported
                     //     public ref struct S2{}
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "S2")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
                         .WithLocation(5, 23),
-                    // (4,23): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsByRefLikeAttribute' is not defined or imported
+                    // (4,23): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsByRefLikeAttribute' is
+                    // not defined or imported
                     //     public ref struct S1{}
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "S1")
                         .WithArguments("System.Runtime.CompilerServices.IsByRefLikeAttribute")
@@ -762,7 +777,8 @@ class Test
 
             CreateCompilation(text, options: TestOptions.ReleaseModule)
                 .VerifyDiagnostics(
-                    // (11,23): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
+                    // (11,23): error CS0656: Missing compiler required member
+                    // 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
                     //     public ref struct S1{}
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "S1")
                         .WithArguments(
@@ -792,7 +808,8 @@ class Test
 
             CreateCompilation(text)
                 .VerifyEmitDiagnostics(
-                    // (11,22): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
+                    // (11,22): error CS0656: Missing compiler required member
+                    // 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
                     //    public ref struct S1{}
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "S1")
                         .WithArguments(
@@ -822,7 +839,8 @@ class Test
 
             CreateCompilation(text)
                 .VerifyEmitDiagnostics(
-                    // (11,23): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
+                    // (11,23): error CS0656: Missing compiler required member
+                    // 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
                     //     public ref struct S1{}
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "S1")
                         .WithArguments(
@@ -927,7 +945,8 @@ public class Test
 
             CreateCompilation(text)
                 .VerifyEmitDiagnostics(
-                    // (11,23): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
+                    // (11,23): error CS0656: Missing compiler required member
+                    // 'System.Runtime.CompilerServices.IsByRefLikeAttribute..ctor'
                     //     public ref struct S1{}
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "S1")
                         .WithArguments(
@@ -1212,7 +1231,8 @@ class Test
 
             CreateCompilation(text)
                 .VerifyEmitDiagnostics(
-                    // (7,9): error CS0619: 'Test.S1' is obsolete: 'Types with embedded references are not supported in this version of your compiler.'
+                    // (7,9): error CS0619: 'Test.S1' is obsolete: 'Types with embedded references are not supported in
+                    // this version of your compiler.'
                     //         Test.S1 v1 = default;
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Test.S1")
                         .WithArguments(
@@ -1220,7 +1240,8 @@ class Test
                             "Types with embedded references are not supported in this version of your compiler."
                         )
                         .WithLocation(7, 9),
-                    // (8,9): error CS0619: 'Test.S2' is obsolete: 'Types with embedded references are not supported in this version of your compiler.'
+                    // (8,9): error CS0619: 'Test.S2' is obsolete: 'Types with embedded references are not supported in
+                    // this version of your compiler.'
                     //         Test.S2 v2 = default;
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Test.S2")
                         .WithArguments(
@@ -1305,7 +1326,8 @@ class C1
 
             CreateCompilation(text, new[] { libComp.EmitToImageReference() })
                 .VerifyEmitDiagnostics(
-                    // (10,9): error CS0619: 'Test.S2' is obsolete: 'Types with embedded references are not supported in this version of your compiler.'
+                    // (10,9): error CS0619: 'Test.S2' is obsolete: 'Types with embedded references are not supported in
+                    // this version of your compiler.'
                     //         Test.S2 v2 = default;
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Test.S2")
                         .WithArguments(
@@ -1313,7 +1335,8 @@ class C1
                             "Types with embedded references are not supported in this version of your compiler."
                         )
                         .WithLocation(10, 9),
-                    // (13,17): error CS0619: 'Test.field' is obsolete: 'Types with embedded references are not supported in this version of your compiler.'
+                    // (13,17): error CS0619: 'Test.field' is obsolete: 'Types with embedded references are not
+                    // supported in this version of your compiler.'
                     //         var x = Test.field;
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Test.field")
                         .WithArguments(
@@ -1335,7 +1358,8 @@ class C1
 
             CreateCompilation(text, new[] { libComp.ToMetadataReference() })
                 .VerifyEmitDiagnostics(
-                    // (7,9): error CS0619: 'Test.S1' is obsolete: 'Types with embedded references are not supported in this version of your compiler.'
+                    // (7,9): error CS0619: 'Test.S1' is obsolete: 'Types with embedded references are not supported in
+                    // this version of your compiler.'
                     //         Test.S1 v1 = default;
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Test.S1")
                         .WithArguments(
@@ -1343,7 +1367,8 @@ class C1
                             "Types with embedded references are not supported in this version of your compiler."
                         )
                         .WithLocation(7, 9),
-                    // (10,9): error CS0619: 'Test.S2' is obsolete: 'Types with embedded references are not supported in this version of your compiler.'
+                    // (10,9): error CS0619: 'Test.S2' is obsolete: 'Types with embedded references are not supported in
+                    // this version of your compiler.'
                     //         Test.S2 v2 = default;
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Test.S2")
                         .WithArguments(
@@ -1351,7 +1376,8 @@ class C1
                             "Types with embedded references are not supported in this version of your compiler."
                         )
                         .WithLocation(10, 9),
-                    // (13,17): error CS0619: 'Test.field' is obsolete: 'Types with embedded references are not supported in this version of your compiler.'
+                    // (13,17): error CS0619: 'Test.field' is obsolete: 'Types with embedded references are not
+                    // supported in this version of your compiler.'
                     //         var x = Test.field;
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Test.field")
                         .WithArguments(

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         {
             /// <summary>
             /// Parameters map to variable declaration argument's name.
-            /// This is only used for C# to support the 'out' variable declaration. For VB it should always be empty.
+            /// This is only used for C# to support the 'out' variable declaration. For VB it should always be
+            // empty.
             /// Before:
             /// void Caller()
             /// {
@@ -96,10 +97,12 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 parametersToGenerateFreshVariablesFor;
 
             /// <summary>
-            /// A dictionary that contains Parameter that should be directly replaced. Key is the parameter and Value is the replacement exprssion
+            /// A dictionary that contains Parameter that should be directly replaced. Key is the parameter and
+            // Value is the replacement exprssion
             /// It includes
             /// 1. Parameter mapping to literal expression
-            /// 2. Parameter that has default value, and it has no argument. It should be replaced by the default value.
+            /// 2. Parameter that has default value, and it has no argument. It should be replaced by the
+            // default value.
             /// 3. Parameter mapping to identifier expression
             /// Before:
             /// void Caller(int i, int j, bool[] k)
@@ -194,9 +197,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
             if (statementContainingInvocation != null)
             {
-                // 1. Find all the parameter maps to an identifier from caller. After inlining, this identifier would be used to replace the parameter in callee body.
+                // 1. Find all the parameter maps to an identifier from caller. After inlining, this identifier
+                // would be used to replace the parameter in callee body.
                 // For params array, it should be included here if it is accept an array identifier as argument.
-                // Note: this might change the order of evaluation if the identifiers are property, this is by design because strictly
+                // Note: this might change the order of evaluation if the identifiers are property, this is by
+                // design because strictly
                 // follow the semantics will cause strange code and this is a refactoring.
                 // Example:
                 // Before:
@@ -224,7 +229,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 );
 
                 // 2. Find all the declaration arguments (e.g. out var declaration in C#).
-                // After inlining, an declaration needs to be put before the invocation. And also use the declared identifier to replace the mapping parameter in callee.
+                // After inlining, an declaration needs to be put before the invocation. And also use the declared
+                // identifier to replace the mapping parameter in callee.
                 // Example:
                 // Before:
                 // void Caller()
@@ -246,7 +252,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                         && argument.ArgumentKind == ArgumentKind.Explicit
                 );
 
-                // 3. Find the literal arguments, and the mapping parameter will be replaced by that literal expression
+                // 3. Find the literal arguments, and the mapping parameter will be replaced by that literal
+                // expression
                 // Example:
                 // Before:
                 // void Caller(int k)
@@ -271,7 +278,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     && argument.ArgumentKind == ArgumentKind.Explicit
                 );
 
-                // 4. Find the default value parameters. Similarly to 3, they should be replaced by the default value.
+                // 4. Find the default value parameters. Similarly to 3, they should be replaced by the default
+                // value.
                 // Example:
                 // Before:
                 // void Caller(int k)
@@ -325,7 +333,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     .RemoveRange(operationsWithDefaultValue)
                     .WhereAsArray(argument => argument.Value.Syntax is TExpressionSyntax);
 
-                // There is a special case that should be treated differently. If the parameter is only read once in the method body.
+                // There is a special case that should be treated differently. If the parameter is only read once in
+                // the method body.
                 // Then use the argument expression to directly replace it.
                 // void Caller(bool x)
                 // {
@@ -372,7 +381,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                             GenerateArgumentExpression(syntaxGenerator, argument)
                     );
 
-                // Use array instead of dictionary because using dictionary will make the parameter becomes unordered.
+                // Use array instead of dictionary because using dictionary will make the parameter becomes
+                // unordered.
                 // Example:
                 // Before:
                 // void Caller()
@@ -452,7 +462,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
 
         /// <summary>
         /// Check if the parameter is referenced only once, and it is referenced as 'read'.
-        /// Determine a special case for a parameter that should be replaced by the argument instead of generating a declaration
+        /// Determine a special case for a parameter that should be replaced by the argument instead of
+        // generating a declaration
         /// for it.
         /// Example:
         /// Before:
@@ -537,7 +548,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
 
         /// <summary>
         /// Check if there is only one variable declaration argument and it is used for assignment
-        /// in the method body. In this case, the method body and argument will be merged into one statement.
+        /// in the method body. In this case, the method body and argument will be merged into one
+        // statement.
         /// For example:
         /// Before:
         /// void Caller()

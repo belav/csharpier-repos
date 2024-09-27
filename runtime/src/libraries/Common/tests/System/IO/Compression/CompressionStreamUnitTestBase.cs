@@ -55,7 +55,8 @@ namespace System.IO.Compression
                 Task task = null;
                 try
                 {
-                    // Write needs to be big enough to trigger a write to the underlying base stream so the WriteAsync call doesn't immediately complete.
+                    // Write needs to be big enough to trigger a write to the underlying base stream so the WriteAsync
+                    // call doesn't immediately complete.
                     task = compressor.WriteAsync(buffer, 0, buffer.Length);
                     while (task.IsCompleted)
                     {

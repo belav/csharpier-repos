@@ -29,7 +29,8 @@ namespace System.Web.UI.WebControls
         private readonly double value;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure with the specified 32-bit signed integer as
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure
+        // with the specified 32-bit signed integer as
         ///    the unit value and <see langword='Pixel'/> as the (default) unit type.</para>
         /// </devdoc>
         public Unit(int value)
@@ -44,7 +45,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para> Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure with the
+        /// <para> Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure
+        // with the
         ///    specified double-precision
         ///    floating point number as the unit value and <see langword='Pixel'/>
         ///    as the (default) unit type.</para>
@@ -60,7 +62,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure with the specified
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure
+        // with the specified
         ///    double-precision floating point number as the unit value and the specified
         /// <see cref='System.Web.UI.WebControls.UnitType'/> as the unit type.</para>
         /// </devdoc>
@@ -82,7 +85,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure with the specified text
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Unit'/> structure
+        // with the specified text
         ///    string that contains the unit value and unit type. If the unit type is not
         ///    specified, the default is <see langword='Pixel'/>
         ///    . </para>
@@ -167,7 +171,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a value indicating whether the <see cref='System.Web.UI.WebControls.Unit'/> is empty.</para>
+        /// <para>Gets a value indicating whether the <see cref='System.Web.UI.WebControls.Unit'/> is
+        // empty.</para>
         /// </devdoc>
         public bool IsEmpty
         {
@@ -209,7 +214,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Compares this <see cref='System.Web.UI.WebControls.Unit'/> with the specified object.</para>
+        /// <para>Compares this <see cref='System.Web.UI.WebControls.Unit'/> with the specified
+        // object.</para>
         /// </devdoc>
         public override bool Equals(object obj)
         {
@@ -347,7 +353,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see langword='Percentage'/> from the specified 32-bit signed integer.</para>
+        /// <para>Creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see
+        // langword='Percentage'/> from the specified 32-bit signed integer.</para>
         /// </devdoc>
         public static Unit Percentage(double n)
         {
@@ -355,7 +362,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see langword='Pixel'/> from the specified 32-bit signed integer.</para>
+        /// <para>Creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see langword='Pixel'/>
+        // from the specified 32-bit signed integer.</para>
         /// </devdoc>
         public static Unit Pixel(int n)
         {
@@ -363,7 +371,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see langword='Point'/> from the
+        /// <para>Creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see langword='Point'/>
+        // from the
         ///    specified 32-bit signed integer.</para>
         /// </devdoc>
         public static Unit Point(int n)
@@ -373,7 +382,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Converts a <see cref='System.Web.UI.WebControls.Unit'/> to a <see cref='System.String' qualify='true'/> .</para>
+        /// <para>Converts a <see cref='System.Web.UI.WebControls.Unit'/> to a <see cref='System.String'
+        // qualify='true'/> .</para>
         /// </devdoc>
         public override string ToString()
         {
@@ -405,7 +415,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Implicitly creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see langword='Pixel'/> from the specified 32-bit unsigned integer.</para>
+        /// <para>Implicitly creates a <see cref='System.Web.UI.WebControls.Unit'/> of type <see
+        // langword='Pixel'/> from the specified 32-bit unsigned integer.</para>
         /// </devdoc>
         public static implicit operator Unit(int n)
         {

@@ -24,7 +24,8 @@ namespace System.Reflection
         public AssemblyNameFlags _flags;
 
         //
-        // Native AssemblySpec stores uint16 components for the version. Managed AssemblyName.Version stores int32.
+        // Native AssemblySpec stores uint16 components for the version. Managed AssemblyName.Version stores
+        // int32.
         // When the former are initialized from the latter, the components are truncated to uint16 size.
         // When the latter are initialized from the former, they are zero-extended to int32 size.
         // For uint16 components, the max value is used to indicate an unspecified component.
@@ -123,7 +124,8 @@ namespace System.Reflection
         )
         {
             // 0x70 specifies "reference assembly".
-            // For these, CLR wants to return None as arch so they can be always loaded, regardless of process type.
+            // For these, CLR wants to return None as arch so they can be always loaded, regardless of process
+            // type.
             if (((uint)aFlags & 0xF0) == 0x70)
                 return ProcessorArchitecture.None;
 

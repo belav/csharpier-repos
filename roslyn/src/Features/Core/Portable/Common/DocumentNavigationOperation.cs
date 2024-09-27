@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
     /// A <see cref="CodeActionOperation"/> for navigating to a specific position in a document.
     /// When <see cref="CodeAction.GetOperationsAsync(CancellationToken)"/> is called an implementation
     /// of <see cref="CodeAction"/> can return an instance of this operation along with the other
-    /// operations they want to apply.  For example, an implementation could generate a new <see cref="Document"/>
+    /// operations they want to apply.  For example, an implementation could generate a new <see
+    // cref="Document"/>
     /// in one <see cref="CodeActionOperation"/> and then have the host editor navigate to that
     /// <see cref="Document"/> using this operation.
     /// </summary>
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
 
         public override void Apply(Workspace workspace, CancellationToken cancellationToken)
         {
-            // Intentionally empty.  Handling of this operation is special cased in CodeActionEditHandlerService.cs
+            // Intentionally empty.  Handling of this operation is special cased in
+            // CodeActionEditHandlerService.cs
         }
     }
 }

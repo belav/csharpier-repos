@@ -24,7 +24,8 @@ internal static unsafe class DpapiSecretSerializerHelper
     private static readonly byte[] _purpose = Encoding.UTF8.GetBytes("DPAPI-Protected Secret");
 
     // Probes to see if protecting to the current Windows user account is available.
-    // In theory this should never fail if the user profile is available, so it's more a defense-in-depth check.
+    // In theory this should never fail if the user profile is available, so it's more a
+    // defense-in-depth check.
     public static bool CanProtectToCurrentUserAccount()
     {
         try
@@ -329,9 +330,12 @@ internal static unsafe class DpapiSecretSerializerHelper
         CryptoUtil.AssertSafeHandleIsValid(unencryptedPayloadHandle);
 
         // Copy the data from LocalAlloc-allocated memory into a CryptProtectMemory-protected buffer.
-        // There's a small window between NCryptUnprotectSecret returning and the call to PrepareConstrainedRegions
-        // below where the AppDomain could rudely unload. This won't leak memory (due to the SafeHandle), but it
-        // will cause the secret not to be zeroed out before the memory is freed. We won't worry about this since
+        // There's a small window between NCryptUnprotectSecret returning and the call to
+        // PrepareConstrainedRegions
+        // below where the AppDomain could rudely unload. This won't leak memory (due to the SafeHandle),
+        // but it
+        // will cause the secret not to be zeroed out before the memory is freed. We won't worry about this
+        // since
         // the window is extremely small and AppDomain unloads should not happen here in practice.
         using (unencryptedPayloadHandle)
         {

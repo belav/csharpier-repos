@@ -466,9 +466,9 @@ namespace Mono.Data.Tds
                 case "tinyint":
                 case "bit":
                     return 1;
-                /*
-                case "nvarchar" :
-                */
+/*
+case "nvarchar" :
+*/
                 case "nchar":
                 case "ntext":
                     return size * 2;

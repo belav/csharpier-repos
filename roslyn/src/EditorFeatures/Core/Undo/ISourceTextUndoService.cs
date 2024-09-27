@@ -20,20 +20,26 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
         /// <summary>
         /// Registers undo transaction for the supplied <see cref="SourceText"/>.
         /// </summary>
-        /// <param name="sourceText">The <see cref="SourceText"/> for which undo transaction is being registered.</param>
-        /// <param name="description">The display string by which the IDE's undo stack UI will subsequently refer to the transaction.</param>
+        /// <param name="sourceText">The <see cref="SourceText"/> for which undo transaction is being
+        // registered.</param>
+        /// <param name="description">The display string by which the IDE's undo stack UI will subsequently
+        // refer to the transaction.</param>
         ISourceTextUndoTransaction RegisterUndoTransaction(
             SourceText sourceText,
             string description
         );
 
         /// <summary>
-        /// Starts previously registered undo transaction for the supplied <see cref="ITextSnapshot"/> (if any).
+        /// Starts previously registered undo transaction for the supplied <see cref="ITextSnapshot"/> (if
+        // any).
         /// </summary>
-        /// <param name="snapshot">The <see cref="ITextSnapshot"/> for the <see cref="SourceText"/> for undo transaction being started.</param>
+        /// <param name="snapshot">The <see cref="ITextSnapshot"/> for the <see cref="SourceText"/> for undo
+        // transaction being started.</param>
         /// <remarks>
-        /// This method will handle the translation from <see cref="ITextSnapshot"/> to <see cref="SourceText"/>
-        /// and update the IDE's undo stack UI with the transaction's previously registered description string.
+        /// This method will handle the translation from <see cref="ITextSnapshot"/> to <see
+        // cref="SourceText"/>
+        /// and update the IDE's undo stack UI with the transaction's previously registered description
+        // string.
         /// </remarks>
         bool BeginUndoTransaction(ITextSnapshot snapshot);
 

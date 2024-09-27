@@ -31,8 +31,10 @@ namespace System.Workflow.ComponentModel.Design
 
     #region StructuredCompositeActivityDesigner Class
     /// <summary>
-    /// Base class for CompositActivityDesigner which have a structured layouts where contained ContainedDesigners
-    /// are connected to each other using connectors. Class is used when the user needs to provide different types
+    /// Base class for CompositActivityDesigner which have a structured layouts where contained
+    // ContainedDesigners
+    /// are connected to each other using connectors. Class is used when the user needs to provide
+    // different types
     /// of layouts for CompositeActivityDesigner
     /// </summary>
     [Obsolete(
@@ -202,7 +204,8 @@ namespace System.Workflow.ComponentModel.Design
 
         #region Protected Properties
         /// <summary>
-        /// Gets the index of the cuurent drop target in the array of drop targets returned by method GetDropTargets
+        /// Gets the index of the cuurent drop target in the array of drop targets returned by method
+        // GetDropTargets
         /// This property is only used when the drag drop operation is in progress
         /// </summary>
         protected virtual int CurrentDropTarget
@@ -467,7 +470,8 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Returns the collection of points which represents the inner connections of the designer. The designer can have connectors
+        /// Returns the collection of points which represents the inner connections of the designer. The
+        // designer can have connectors
         /// within it, the points returned are the connection points used for connectable designer.
         /// </summary>
         /// <param name="edges">Designer Edge along which the connection point lies</param>

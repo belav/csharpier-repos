@@ -227,13 +227,18 @@ namespace System.Workflow.ComponentModel
                 validationErrors.Add(error);
             }
 
-            // Generate a warning for unrechable code, if the catch type is all and this is not the last exception handler.
-            /*if (exceptionHandler.FaultType == typeof(System.Exception) && exceptionHandler.Parent is FaultHandlersActivity && ((FaultHandlersActivity)exceptionHandler.Parent).Activities.IndexOf(exceptionHandler) != ((FaultHandlersActivity)exceptionHandler.Parent).Activities.Count - 1)
-            {
-                error = new ValidationError(SR.GetString(SR.Error_FaultHandlerActivityAllMustBeLast), ErrorNumbers.Error_FaultHandlerActivityAllMustBeLast, true);
-                error.PropertyName = "FaultType";
-                validationErrors.Add(error);
-            }*/
+            // Generate a warning for unrechable code, if the catch type is all and this is not the last
+            // exception handler.
+/*if (exceptionHandler.FaultType == typeof(System.Exception) && exceptionHandler.Parent is
+FaultHandlersActivity &&
+((FaultHandlersActivity)exceptionHandler.Parent).Activities.IndexOf(exceptionHandler) !=
+((FaultHandlersActivity)exceptionHandler.Parent).Activities.Count - 1)
+{
+error = new ValidationError(SR.GetString(SR.Error_FaultHandlerActivityAllMustBeLast),
+ErrorNumbers.Error_FaultHandlerActivityAllMustBeLast, true);
+error.PropertyName = "FaultType";
+validationErrors.Add(error);
+}*/
 
             if (exceptionHandler.EnabledActivities.Count == 0)
                 validationErrors.Add(

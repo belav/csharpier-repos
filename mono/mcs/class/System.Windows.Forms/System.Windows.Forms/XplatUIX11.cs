@@ -297,7 +297,8 @@ namespace System.Windows.Forms
                 detectable_key_auto_repeat = false;
             }
 
-            // Handle any upcoming errors; we re-set it here, X11DesktopColor stuff might have stolen it (gtk does)
+            // Handle any upcoming errors; we re-set it here, X11DesktopColor stuff might have stolen it (gtk
+            // does)
             ErrorHandler = new XErrorHandler(HandleError);
             XSetErrorHandler(ErrorHandler);
         }
@@ -960,11 +961,11 @@ namespace System.Windows.Forms
             Control ctrl
         )
         {
-            /*
-             * If this is a form with no window manager, X is handling all the border and caption painting
-             * so remove that from the area (since the area we set of the window here is the part of the window
-             * we're painting in only)
-             */
+/*
+* If this is a form with no window manager, X is handling all the border and caption painting
+* so remove that from the area (since the area we set of the window here is the part of the window
+* we're painting in only)
+*/
             Rectangle rect = hwnd.ClientRect;
             Form form = ctrl as Form;
             CreateParams cp = null;
@@ -1006,11 +1007,11 @@ namespace System.Windows.Forms
 
         internal static Size TranslateWindowSizeToXWindowSize(CreateParams cp, Size size)
         {
-            /*
-             * If this is a form with no window manager, X is handling all the border and caption painting
-             * so remove that from the area (since the area we set of the window here is the part of the window
-             * we're painting in only)
-             */
+/*
+* If this is a form with no window manager, X is handling all the border and caption painting
+* so remove that from the area (since the area we set of the window here is the part of the window
+* we're painting in only)
+*/
             Form form = cp.control as Form;
             if (
                 form != null
@@ -1038,11 +1039,11 @@ namespace System.Windows.Forms
             int xHeight
         )
         {
-            /*
-             * If this is a form with no window manager, X is handling all the border and caption painting
-             * so remove that from the area (since the area we set of the window here is the part of the window
-             * we're painting in only)
-             */
+/*
+* If this is a form with no window manager, X is handling all the border and caption painting
+* so remove that from the area (since the area we set of the window here is the part of the window
+* we're painting in only)
+*/
             Size rect = new Size(xWidth, xHeight);
             Form form = cp.control as Form;
             if (
@@ -1263,14 +1264,14 @@ namespace System.Windows.Forms
 
             if (ExStyleSet(cp.ExStyle, WindowExStyles.WS_EX_TOOLWINDOW))
             {
-                /* tool windows get no window manager
-                   decorations.
-                */
+/* tool windows get no window manager
+decorations.
+*/
 
-                /* just because the window doesn't get any decorations doesn't
-                   mean we should disable the functions.  for instance, without
-                   MotifFunctions.Maximize, changing the windowstate to Maximized
-                   is ignored by metacity. */
+/* just because the window doesn't get any decorations doesn't
+mean we should disable the functions.  for instance, without
+MotifFunctions.Maximize, changing the windowstate to Maximized
+is ignored by metacity. */
                 functions |=
                     MotifFunctions.Move
                     | MotifFunctions.Resize
@@ -1279,7 +1280,7 @@ namespace System.Windows.Forms
             }
             else if (form != null && form.FormBorderStyle == FormBorderStyle.None)
             {
-                /* allow borderless window to be maximized */
+/* allow borderless window to be maximized */
                 functions |= MotifFunctions.All | MotifFunctions.Resize;
             }
             else
@@ -1478,16 +1479,16 @@ namespace System.Windows.Forms
 
                 if (hide_from_taskbar)
                 {
-                    /* this line keeps the window from showing up in gnome's taskbar */
+/* this line keeps the window from showing up in gnome's taskbar */
                     atoms[atom_count++] = _NET_WM_STATE_SKIP_TASKBAR.ToInt32();
                 }
-                /* we need to add these atoms in the
-                 * event we're maximized, since we're
-                 * replacing the existing
-                 * _NET_WM_STATE here.  If we don't
-                 * add them, future calls to
-                 * GetWindowState will return Normal
-                 * for a window which is maximized. */
+/* we need to add these atoms in the
+* event we're maximized, since we're
+* replacing the existing
+* _NET_WM_STATE here.  If we don't
+* add them, future calls to
+* GetWindowState will return Normal
+* for a window which is maximized. */
                 if (current_state == FormWindowState.Maximized)
                 {
                     atoms[atom_count++] = _NET_WM_STATE_MAXIMIZED_HORZ.ToInt32();
@@ -2603,7 +2604,7 @@ namespace System.Windows.Forms
                     {
                         XEvent peek;
 
-                        /* we can't do motion compression across threads, so just punt if we don't match up */
+/* we can't do motion compression across threads, so just punt if we don't match up */
                         if (Thread.CurrentThread == hwnd.Queue.Thread && hwnd.Queue.Count > 0)
                         {
                             peek = hwnd.Queue.Peek();
@@ -2617,8 +2618,8 @@ namespace System.Windows.Forms
 
                     case XEventName.KeyPress:
                         hwnd.Queue.EnqueueLocked(xevent);
-                        /* Process KeyPresses immediately. Otherwise multiple Compose messages as a result of a
-                         * single physical keypress are not processed correctly */
+/* Process KeyPresses immediately. Otherwise multiple Compose messages as a result of a
+* single physical keypress are not processed correctly */
                         return;
                     case XEventName.ButtonPress:
                     case XEventName.ButtonRelease:
@@ -5445,16 +5446,19 @@ namespace System.Windows.Forms
 
             // Windows sends WM_ENTERSIZEMOVE when a form resize/move operation starts and WM_EXITSIZEMOVE
             // when it is done. The problem in X11 is that there is no concept of start-end of a moving/sizing.
-            // Configure events ("this window has resized/moved") are sent for each step of the resize. We send a
+            // Configure events ("this window has resized/moved") are sent for each step of the resize. We send
+            // a
             // WM_ENTERSIZEMOVE when we get the first Configure event. The problem is the WM_EXITSIZEMOVE.
             //
             //  - There is no way for us to know which is the last Configure event. We can't traverse the events
             //    queue, because the next configure event might not be pending yet.
             //  - We can't get ButtonPress/Release events for the window decorations, because they are not part
             //    of the window(s) we manage.
-            //  - We can't rely on the mouse state to change to "up" before the last Configure event. It doesn't.
+            //  - We can't rely on the mouse state to change to "up" before the last Configure event. It
+            // doesn't.
             //
-            // We are almost 100% guaranteed to get another event (e.g Expose or other), but we can't know for sure
+            // We are almost 100% guaranteed to get another event (e.g Expose or other), but we can't know for
+            // sure
             // which, so we have here to check if the mouse buttons state is "up" and send the WM_EXITSIZEMOVE
             //
             if (hwnd.resizing_or_moving)
@@ -5826,8 +5830,10 @@ namespace System.Windows.Forms
                     mouse_position.X = xevent.ButtonEvent.x;
                     mouse_position.Y = xevent.ButtonEvent.y;
 
-                    // Win32 splurts MouseMove events all over the place, regardless of whether the mouse is actually moving or
-                    // not, especially after mousedown and mouseup. To support apps relying on mousemove events between and after
+                    // Win32 splurts MouseMove events all over the place, regardless of whether the mouse is actually
+                    // moving or
+                    // not, especially after mousedown and mouseup. To support apps relying on mousemove events between
+                    // and after
                     // mouse clicks to repaint or whatever, we generate a mousemove event here. *sigh*
                     if (
                         msg.message == Msg.WM_LBUTTONUP
@@ -6213,8 +6219,10 @@ namespace System.Windows.Forms
                 case XEventName.FocusIn:
                 {
                     // We received focus. We use X11 focus only to know if the app window does or does not have focus
-                    // We do not track the actual focussed window via it. Instead, this is done via FocusWindow internally
-                    // Receiving focus means we've gotten activated and therefore we need to let the actual FocusWindow know
+                    // We do not track the actual focussed window via it. Instead, this is done via FocusWindow
+                    // internally
+                    // Receiving focus means we've gotten activated and therefore we need to let the actual FocusWindow
+                    // know
                     // about it having focus again
                     if (xevent.FocusChangeEvent.detail != NotifyDetail.NotifyNonlinear)
                     {
@@ -6270,25 +6278,27 @@ namespace System.Windows.Forms
                 // in case we break a scenario not taken into account in the tests
                 case XEventName.MapNotify:
                 {
-                    /*if (client && (xevent.ConfigureEvent.xevent == xevent.ConfigureEvent.window)) {	// Ignore events for children (SubstructureNotify) and client areas
-                        hwnd.mapped = true;
-                        msg.message = Msg.WM_SHOWWINDOW;
-                        msg.wParam = (IntPtr) 1;
-                        // XXX we're missing the lParam..
-                        break;
-                    }*/
+/*if (client && (xevent.ConfigureEvent.xevent == xevent.ConfigureEvent.window)) {	// Ignore events
+for children (SubstructureNotify) and client areas
+hwnd.mapped = true;
+msg.message = Msg.WM_SHOWWINDOW;
+msg.wParam = (IntPtr) 1;
+// XXX we're missing the lParam..
+break;
+}*/
                     goto ProcessNextMessage;
                 }
 
                 case XEventName.UnmapNotify:
                 {
-                    /*if (client && (xevent.ConfigureEvent.xevent == xevent.ConfigureEvent.window)) {	// Ignore events for children (SubstructureNotify) and client areas
-                        hwnd.mapped = false;
-                        msg.message = Msg.WM_SHOWWINDOW;
-                        msg.wParam = (IntPtr) 0;
-                        // XXX we're missing the lParam..
-                        break;
-                    }*/
+/*if (client && (xevent.ConfigureEvent.xevent == xevent.ConfigureEvent.window)) {	// Ignore events
+for children (SubstructureNotify) and client areas
+hwnd.mapped = false;
+msg.message = Msg.WM_SHOWWINDOW;
+msg.wParam = (IntPtr) 0;
+// XXX we're missing the lParam..
+break;
+}*/
                     goto ProcessNextMessage;
                 }
 
@@ -7011,9 +7021,9 @@ namespace System.Windows.Forms
 
                 foreach (Rectangle r in hwnd.ClipRectangles)
                 {
-                    /* Expand the region slightly.
-                     * See bug 464464.
-                     */
+/* Expand the region slightly.
+* See bug 464464.
+*/
                     Rectangle r2 = Rectangle.FromLTRB(r.Left, r.Top, r.Right, r.Bottom + 1);
                     clip_region.Union(r2);
                 }
@@ -7317,8 +7327,8 @@ namespace System.Windows.Forms
             Rectangle r = Rectangle.Intersect(hwnd.Invalid, area);
             if (!r.IsEmpty)
             {
-                /* We have an invalid area in the window we're scrolling.
-                   Adjust our stored invalid rectangle to to match the scrolled amount */
+/* We have an invalid area in the window we're scrolling.
+Adjust our stored invalid rectangle to to match the scrolled amount */
 
                 r.X += XAmount;
                 r.Y += YAmount;
@@ -7718,13 +7728,13 @@ namespace System.Windows.Forms
             out int mask
         )
         {
-            /* this code was written with the help of
-            glance at gdk.  I never would have realized we
-            needed a loop in order to traverse down in the
-            hierarchy.  I would have assumed you'd get the
-            most deeply nested child and have to do
-            XQueryTree to move back up the hierarchy..
-            stupid me, of course. */
+/* this code was written with the help of
+glance at gdk.  I never would have realized we
+needed a loop in order to traverse down in the
+hierarchy.  I would have assumed you'd get the
+most deeply nested child and have to do
+XQueryTree to move back up the hierarchy..
+stupid me, of course. */
             IntPtr c;
 
             XGrabServer(display);
@@ -7780,13 +7790,13 @@ namespace System.Windows.Forms
                         child_y,
                         mask;
 
-                    /* we need to do a
-                     * QueryPointer before warping
-                     * because if the warp is on
-                     * the RootWindow, the x/y are
-                     * relative to the current
-                     * mouse position
-                     */
+/* we need to do a
+* QueryPointer before warping
+* because if the warp is on
+* the RootWindow, the x/y are
+* relative to the current
+* mouse position
+*/
                     QueryPointer(
                         DisplayHandle,
                         RootWindow,
@@ -7813,12 +7823,12 @@ namespace System.Windows.Forms
 
                     XFlush(DisplayHandle);
 
-                    /* then we need to a
-                     * QueryPointer after warping
-                     * to manually generate a
-                     * motion event for the window
-                     * we move into.
-                     */
+/* then we need to a
+* QueryPointer after warping
+* to manually generate a
+* motion event for the window
+* we move into.
+*/
                     QueryPointer(
                         DisplayHandle,
                         RootWindow,
@@ -7890,7 +7900,8 @@ namespace System.Windows.Forms
             Keyboard.FocusIn(FocusWindow);
             SendMessage(FocusWindow, Msg.WM_SETFOCUS, prev_focus_window, IntPtr.Zero);
 
-            //XSetInputFocus(DisplayHandle, Hwnd.ObjectFromHandle(handle).client_window, RevertTo.None, IntPtr.Zero);
+            //XSetInputFocus(DisplayHandle, Hwnd.ObjectFromHandle(handle).client_window, RevertTo.None,
+            // IntPtr.Zero);
         }
 
         internal override void SetIcon(IntPtr handle, Icon icon)
@@ -8549,10 +8560,10 @@ namespace System.Windows.Forms
                     hwnd.client_window = hwnd.whole_window;
                 }
 
-                /* by virtue of the way the tests are ordered when determining if it's PAINT
-                   or NCPAINT, client_window == whole_window will always be PAINT.  So, if we're
-                   waiting on an nc_expose, drop it and remove the hwnd from the list (unless
-                   there's a pending expose). */
+/* by virtue of the way the tests are ordered when determining if it's PAINT
+or NCPAINT, client_window == whole_window will always be PAINT.  So, if we're
+waiting on an nc_expose, drop it and remove the hwnd from the list (unless
+there's a pending expose). */
                 if (hwnd.nc_expose_pending)
                 {
                     hwnd.nc_expose_pending = false;

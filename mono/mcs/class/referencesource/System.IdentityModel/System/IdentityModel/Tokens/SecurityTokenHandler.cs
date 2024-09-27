@@ -53,7 +53,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets a value indicating whether the class provides serialization functionality to serialize token handled
+        /// Gets a value indicating whether the class provides serialization functionality to serialize
+        // token handled
         /// by this instance.
         /// </summary>
         /// <returns>true if the WriteToken method can serialize this token.</returns>
@@ -130,7 +131,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="reader">An XML reader positioned at the token's start
         /// element.</param>
-        /// <param name="tokenResolver">The SecrityTokenResolver that contains out-of-band and cached tokens.</param>
+        /// <param name="tokenResolver">The SecrityTokenResolver that contains out-of-band and cached
+        // tokens.</param>
         /// <returns>SecurityToken instance.</returns>
         public virtual SecurityToken ReadToken(
             XmlReader reader,
@@ -228,7 +230,8 @@ namespace System.IdentityModel.Tokens
         /// Serializes to XML a SecurityKeyIdentifierClause that this instance supports.
         /// </summary>
         /// <param name="writer">The XML writer.</param>
-        /// <param name="securityKeyIdentifierClause">The SecurityKeyIdentifierClause to be used to serialize the token.</param>
+        /// <param name="securityKeyIdentifierClause">The SecurityKeyIdentifierClause to be used to
+        // serialize the token.</param>
         public virtual void WriteKeyIdentifierClause(
             XmlWriter writer,
             SecurityKeyIdentifierClause securityKeyIdentifierClause
@@ -293,7 +296,8 @@ namespace System.IdentityModel.Tokens
         /// Validates a <see cref="SecurityToken"/>.
         /// </summary>
         /// <param name="token">The <see cref="SecurityToken"/> to validate.</param>
-        /// <returns>The <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
+        /// <returns>The <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing
+        // the identities contained in the token.</returns>
         /// <remarks>Derived types will validate specific tokens.</remarks>
         public virtual ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {

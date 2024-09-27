@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Web.Http;
@@ -207,7 +208,8 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Tests for parsing form-urlencoded data originated from JS arrays, using the jQuery 1.3 format (no []'s).
+        /// Tests for parsing form-urlencoded data originated from JS arrays, using the jQuery 1.3 format
+        // (no []'s).
         /// </summary>
         [
             Theory,

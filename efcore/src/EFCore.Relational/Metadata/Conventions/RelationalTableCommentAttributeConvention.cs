@@ -4,10 +4,12 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures the table comment for an entity type based on the applied <see cref="CommentAttribute" />.
+///     A convention that configures the table comment for an entity type based on the applied <see
+// cref="CommentAttribute" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class RelationalTableCommentAttributeConvention
     : TypeAttributeConventionBase<CommentAttribute>
@@ -16,7 +18,8 @@ public class RelationalTableCommentAttributeConvention
     ///     Creates a new instance of <see cref="RelationalTableCommentAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public RelationalTableCommentAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

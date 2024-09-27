@@ -50,7 +50,8 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Gets a representation of this DbGeography value that is specific to the underlying provider that constructed it.
+        /// Gets a representation of this DbGeography value that is specific to the underlying provider that
+        // constructed it.
         /// </summary>
         public object ProviderValue
         {
@@ -82,8 +83,11 @@ namespace System.Data.Spatial
         /// <summary>
         /// Creates a new <see cref="DbGeography"/> value based on the specified well known binary value.
         /// </summary>
-        /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the default geography coordinate system identifier (SRID)(<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
+        /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of
+        // the geography value.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the default
+        // geography coordinate system identifier (SRID)(<see
+        // cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="wellKnownBinary"/> is null.</exception>
         public static DbGeography FromBinary(byte[] wellKnownBinary)
         {
@@ -92,13 +96,18 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> value based on the specified well known binary value and
+        // coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
+        /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of
+        // the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="wellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography FromBinary(byte[] wellKnownBinary, int coordinateSystemId)
         {
             wellKnownBinary.CheckNull("wellKnownBinary");
@@ -109,13 +118,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known binary
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="lineWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="lineWellKnownBinary">A byte array that contains a well known binary representation
+        // of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownBinary"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography LineFromBinary(byte[] lineWellKnownBinary, int coordinateSystemId)
         {
             lineWellKnownBinary.CheckNull("lineWellKnownBinary");
@@ -126,13 +141,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known binary
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="pointWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="pointWellKnownBinary">A byte array that contains a well known binary representation
+        // of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownBinary"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography PointFromBinary(
             byte[] pointWellKnownBinary,
             int coordinateSystemId
@@ -146,13 +167,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known binary
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="polygonWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="polygonWellKnownBinary">A byte array that contains a well known binary
+        // representation of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownBinary"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography PolygonFromBinary(
             byte[] polygonWellKnownBinary,
             int coordinateSystemId
@@ -166,13 +193,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> MultiLine value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> MultiLine value based on the specified well known binary
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="multiLineWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="multiLineWellKnownBinary">A byte array that contains a well known binary
+        // representation of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownBinary"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1702:CompoundWordsShouldBeCasedCorrectly",
@@ -210,13 +243,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> MultiPoint value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> MultiPoint value based on the specified well known
+        // binary value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="multiPointWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="multiPointWellKnownBinary">A byte array that contains a well known binary
+        // representation of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownBinary"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1702:CompoundWordsShouldBeCasedCorrectly",
@@ -254,13 +293,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> MultiPolygon value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> MultiPolygon value based on the specified well known
+        // binary value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="multiPolygonWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="multiPolygonWellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="multiPolygonWellKnownBinary">A byte array that contains a well known binary
+        // representation of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="multiPolygonWellKnownBinary"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -286,13 +331,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known binary value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known
+        // binary value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="geographyCollectionWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="geographyCollectionWellKnownBinary"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="geographyCollectionWellKnownBinary">A byte array that contains a well known binary
+        // representation of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known binary value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="geographyCollectionWellKnownBinary"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography GeographyCollectionFromBinary(
             byte[] geographyCollectionWellKnownBinary,
             int coordinateSystemId
@@ -310,10 +361,13 @@ namespace System.Data.Spatial
         #region GML Static Constructors
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified Geography Markup Language (GML) value.
+        /// Creates a new <see cref="DbGeography"/> value based on the specified Geography Markup Language
+        // (GML) value.
         /// </summary>
-        /// <param name="geographyMarkup">A string that contains a Geography Markup Language (GML) representation of the geography value.</param>
-        /// <returns>A new DbGeography value as defined by the GML value with the default geography coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
+        /// <param name="geographyMarkup">A string that contains a Geography Markup Language (GML)
+        // representation of the geography value.</param>
+        /// <returns>A new DbGeography value as defined by the GML value with the default geography
+        // coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyMarkup"/> is null.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
@@ -327,13 +381,18 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified Geography Markup Language (GML) value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> value based on the specified Geography Markup Language
+        // (GML) value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="geographyMarkup">A string that contains a Geography Markup Language (GML) representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the GML value with the specified coordinate system identifier.</returns>
+        /// <param name="geographyMarkup">A string that contains a Geography Markup Language (GML)
+        // representation of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the GML value with the specified coordinate
+        // system identifier.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyMarkup"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -352,8 +411,11 @@ namespace System.Data.Spatial
         /// <summary>
         /// Creates a new <see cref="DbGeography"/> value based on the specified well known text value.
         /// </summary>
-        /// <param name="wellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the default geography coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
+        /// <param name="wellKnownText">A string that contains a well known text representation of the
+        // geography value.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the default
+        // geography coordinate system identifier (SRID) (<see
+        // cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="wellKnownText"/> is null.</exception>
         public static DbGeography FromText(string wellKnownText)
         {
@@ -362,13 +424,18 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> value based on the specified well known text value and
+        // coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="wellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
+        /// <param name="wellKnownText">A string that contains a well known text representation of the
+        // geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="wellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography FromText(string wellKnownText, int coordinateSystemId)
         {
             wellKnownText.CheckNull("wellKnownText");
@@ -376,13 +443,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known text value
+        // and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="lineWellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="lineWellKnownText">A string that contains a well known text representation of the
+        // geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownText"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography LineFromText(string lineWellKnownText, int coordinateSystemId)
         {
             lineWellKnownText.CheckNull("lineWellKnownText");
@@ -393,13 +466,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known text value
+        // and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="pointWellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="pointWellKnownText">A string that contains a well known text representation of the
+        // geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownText"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography PointFromText(string pointWellKnownText, int coordinateSystemId)
         {
             pointWellKnownText.CheckNull("pointWellKnownText");
@@ -410,13 +489,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known text
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="polygonWellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="polygonWellKnownText">A string that contains a well known text representation of
+        // the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownText"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography PolygonFromText(
             string polygonWellKnownText,
             int coordinateSystemId
@@ -430,13 +515,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> MultiLine value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> MultiLine value based on the specified well known text
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="multiLineWellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="multiLineWellKnownText">A string that contains a well known text representation of
+        // the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownText"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1702:CompoundWordsShouldBeCasedCorrectly",
@@ -474,13 +565,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> MultiPoint value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> MultiPoint value based on the specified well known text
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="multiPointWellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="multiPointWellKnownText">A string that contains a well known text representation of
+        // the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownText"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1702:CompoundWordsShouldBeCasedCorrectly",
@@ -518,13 +615,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> MultiPolygon value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> MultiPolygon value based on the specified well known
+        // text value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="multiPolygonWellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="multiPolygonWellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="multiPolygonWellKnownText">A string that contains a well known text representation
+        // of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="multiPolygonWellKnownText"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -550,13 +653,19 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known text value and coordinate system identifier (SRID).
+        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known text
+        // value and coordinate system identifier (SRID).
         /// </summary>
-        /// <param name="geographyCollectionWellKnownText">A string that contains a well known text representation of the geography value.</param>
-        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
-        /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="geographyCollectionWellKnownText"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
+        /// <param name="geographyCollectionWellKnownText">A string that contains a well known text
+        // representation of the geography value.</param>
+        /// <param name="coordinateSystemId">The identifier of the coordinate system that the new
+        // DbGeography value should use.</param>
+        /// <returns>A new DbGeography value as defined by the well known text value with the specified
+        // coordinate system identifier.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="geographyCollectionWellKnownText"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not
+        // valid.</exception>
         public static DbGeography GeographyCollectionFromText(
             string geographyCollectionWellKnownText,
             int coordinateSystemId
@@ -574,7 +683,8 @@ namespace System.Data.Spatial
         #region Geography Instance Properties
 
         /// </summary>
-        /// Gets the Spatial Reference System Identifier (Coordinate System Id) of the spatial reference system used by this DbGeography value.
+        /// Gets the Spatial Reference System Identifier (Coordinate System Id) of the spatial reference
+        // system used by this DbGeography value.
         /// </summary>
         public int CoordinateSystemId
         {
@@ -582,7 +692,8 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Gets the dimension of the given <see cref="DbGeography"/> value or, if the value is a collections, the largest element dimension.
+        /// Gets the dimension of the given <see cref="DbGeography"/> value or, if the value is a
+        // collections, the largest element dimension.
         /// </summary>
         public int Dimension
         {
@@ -610,18 +721,22 @@ namespace System.Data.Spatial
         #region Geography Well Known Format Conversion
 
         /// <summary>
-        /// Generates the well known text representation of this DbGeography value.  Includes only Longitude and Latitude for points.
+        /// Generates the well known text representation of this DbGeography value.  Includes only Longitude
+        // and Latitude for points.
         /// </summary>
-        /// <returns>A string containing the well known text representation of this DbGeography value.</returns>
+        /// <returns>A string containing the well known text representation of this DbGeography
+        // value.</returns>
         public string AsText()
         {
             return this.spatialSvcs.AsText(this);
         }
 
         /// <summary>
-        /// Generates the well known text representation of this DbGeography value.  Includes Longitude, Latitude, Elevation (Z) and Measure (M) for points.
+        /// Generates the well known text representation of this DbGeography value.  Includes Longitude,
+        // Latitude, Elevation (Z) and Measure (M) for points.
         /// </summary>
-        /// <returns>A string containing the well known text representation of this DbGeography value.</returns>
+        /// <returns>A string containing the well known text representation of this DbGeography
+        // value.</returns>
         internal string AsTextIncludingElevationAndMeasure()
         {
             return this.spatialSvcs.AsTextIncludingElevationAndMeasure(this);
@@ -630,7 +745,8 @@ namespace System.Data.Spatial
         /// <summary>
         /// Generates the well known binary representation of this DbGeography value.
         /// </summary>
-        /// <returns>A byte array containing the well known binary representation of this DbGeography value.</returns>
+        /// <returns>A byte array containing the well known binary representation of this DbGeography
+        // value.</returns>
         public byte[] AsBinary()
         {
             return this.spatialSvcs.AsBinary(this);
@@ -658,8 +774,10 @@ namespace System.Data.Spatial
         /// <summary>
         /// Determines whether this DbGeography is spatially equal to the specified DbGeography argument.
         /// </summary>
-        /// <param name="other">The geography value that should be compared with this geography value for equality.</param>
-        /// <returns><c>true</c> if <paramref name="other"/> is spatially equal to this geography value; otherwise <c>false</c>.</returns>
+        /// <param name="other">The geography value that should be compared with this geography value for
+        // equality.</param>
+        /// <returns><c>true</c> if <paramref name="other"/> is spatially equal to this geography value;
+        // otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public bool SpatialEquals(DbGeography other)
         {
@@ -668,10 +786,13 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Determines whether this DbGeography is spatially disjoint from the specified DbGeography argument.
+        /// Determines whether this DbGeography is spatially disjoint from the specified DbGeography
+        // argument.
         /// </summary>
-        /// <param name="other">The geography value that should be compared with this geography value for disjointness.</param>
-        /// <returns><c>true</c> if <paramref name="other"/> is disjoint from this geography value; otherwise <c>false</c>.</returns>
+        /// <param name="other">The geography value that should be compared with this geography value for
+        // disjointness.</param>
+        /// <returns><c>true</c> if <paramref name="other"/> is disjoint from this geography value;
+        // otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public bool Disjoint(DbGeography other)
         {
@@ -680,10 +801,13 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Determines whether this DbGeography value spatially intersects the specified DbGeography argument.
+        /// Determines whether this DbGeography value spatially intersects the specified DbGeography
+        // argument.
         /// </summary>
-        /// <param name="other">The geography value that should be compared with this geography value for intersection.</param>
-        /// <returns><c>true</c> if <paramref name="other"/> intersects this geography value; otherwise <c>false</c>.</returns>
+        /// <param name="other">The geography value that should be compared with this geography value for
+        // intersection.</param>
+        /// <returns><c>true</c> if <paramref name="other"/> intersects this geography value; otherwise
+        // <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public bool Intersects(DbGeography other)
         {
@@ -696,10 +820,13 @@ namespace System.Data.Spatial
         #region Geography Operations - Spatial Analysis
 
         /// <summary>
-        /// Creates a geography value representing all points less than or equal to <paramref name="distance"/> from this DbGeography value.
+        /// Creates a geography value representing all points less than or equal to <paramref
+        // name="distance"/> from this DbGeography value.
         /// </summary>
-        /// <param name="distance">A double value specifying how far from this geography value to buffer.</param>
-        /// <returns>A new DbGeography value representing all points less than or equal to <paramref name="distance"/> from this geography value.</returns>
+        /// <param name="distance">A double value specifying how far from this geography value to
+        // buffer.</param>
+        /// <returns>A new DbGeography value representing all points less than or equal to <paramref
+        // name="distance"/> from this geography value.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="distance"/> is null.</exception>
         public DbGeography Buffer(double? distance)
         {
@@ -711,10 +838,13 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Computes the distance between the closest points in this DbGeography value and another DbGeography value.
+        /// Computes the distance between the closest points in this DbGeography value and another
+        // DbGeography value.
         /// </summary>
-        /// <param name="other">The geography value for which the distance from this value should be computed.</param>
-        /// <returns>A double value that specifies the distance between the two closest points in this geography value and <paramref name="other"/>.</returns>
+        /// <param name="other">The geography value for which the distance from this value should be
+        // computed.</param>
+        /// <returns>A double value that specifies the distance between the two closest points in this
+        // geography value and <paramref name="other"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public double? Distance(DbGeography other)
         {
@@ -725,8 +855,10 @@ namespace System.Data.Spatial
         /// <summary>
         /// Computes the intersection of this DbGeography value and another DbGeography value.
         /// </summary>
-        /// <param name="other">The geography value for which the intersection with this value should be computed.</param>
-        /// <returns>A new DbGeography value representing the intersection between this geography value and <paramref name="other"/>.</returns>
+        /// <param name="other">The geography value for which the intersection with this value should be
+        // computed.</param>
+        /// <returns>A new DbGeography value representing the intersection between this geography value and
+        // <paramref name="other"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public DbGeography Intersection(DbGeography other)
         {
@@ -737,8 +869,10 @@ namespace System.Data.Spatial
         /// <summary>
         /// Computes the union of this DbGeography value and another DbGeography value.
         /// </summary>
-        /// <param name="other">The geography value for which the union with this value should be computed.</param>
-        /// <returns>A new DbGeography value representing the union between this geography value and <paramref name="other"/>.</returns>
+        /// <param name="other">The geography value for which the union with this value should be
+        // computed.</param>
+        /// <returns>A new DbGeography value representing the union between this geography value and
+        // <paramref name="other"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public DbGeography Union(DbGeography other)
         {
@@ -749,8 +883,10 @@ namespace System.Data.Spatial
         /// <summary>
         /// Computes the difference of this DbGeography value and another DbGeography value.
         /// </summary>
-        /// <param name="other">The geography value for which the difference with this value should be computed.</param>
-        /// <returns>A new DbGeography value representing the difference between this geography value and <paramref name="other"/>.</returns>
+        /// <param name="other">The geography value for which the difference with this value should be
+        // computed.</param>
+        /// <returns>A new DbGeography value representing the difference between this geography value and
+        // <paramref name="other"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public DbGeography Difference(DbGeography other)
         {
@@ -761,8 +897,10 @@ namespace System.Data.Spatial
         /// <summary>
         /// Computes the symmetric difference of this DbGeography value and another DbGeography value.
         /// </summary>
-        /// <param name="other">The geography value for which the symmetric difference with this value should be computed.</param>
-        /// <returns>A new DbGeography value representing the symmetric difference between this geography value and <paramref name="other"/>.</returns>
+        /// <param name="other">The geography value for which the symmetric difference with this value
+        // should be computed.</param>
+        /// <returns>A new DbGeography value representing the symmetric difference between this geography
+        // value and <paramref name="other"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         public DbGeography SymmetricDifference(DbGeography other)
         {
@@ -776,7 +914,8 @@ namespace System.Data.Spatial
 
         /// <summary>
         /// Gets the number of elements in this DbGeography value, if it represents a geography collection.
-        /// <returns>The number of elements in this geography value, if it represents a collection of other geography values; otherwise <c>null</c>.</returns>
+        /// <returns>The number of elements in this geography value, if it represents a collection of other
+        // geography values; otherwise <c>null</c>.</returns>
         /// </summary>
         public int? ElementCount
         {
@@ -784,9 +923,12 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Returns an element of this DbGeography value from a specific position, if it represents a geography collection.
-        /// <param name="index">The position within this geography value from which the element should be taken.</param>
-        /// <returns>The element in this geography value at the specified position, if it represents a collection of other geography values; otherwise <c>null</c>.</returns>
+        /// Returns an element of this DbGeography value from a specific position, if it represents a
+        // geography collection.
+        /// <param name="index">The position within this geography value from which the element should be
+        // taken.</param>
+        /// <returns>The element in this geography value at the specified position, if it represents a
+        // collection of other geography values; otherwise <c>null</c>.</returns>
         /// </summary>
         public DbGeography ElementAt(int index)
         {
@@ -799,7 +941,8 @@ namespace System.Data.Spatial
 
         /// <summary>
         /// Gets the Latitude coordinate of this DbGeography value, if it represents a point.
-        /// <returns>The Latitude coordinate value of this geography value, if it represents a point; otherwise <c>null</c>.</returns>
+        /// <returns>The Latitude coordinate value of this geography value, if it represents a point;
+        // otherwise <c>null</c>.</returns>
         /// </summary>
         public double? Latitude
         {
@@ -808,7 +951,8 @@ namespace System.Data.Spatial
 
         /// <summary>
         /// Gets the Longitude coordinate of this DbGeography value, if it represents a point.
-        /// <returns>The Longitude coordinate value of this geography value, if it represents a point; otherwise <c>null</c>.</returns>
+        /// <returns>The Longitude coordinate value of this geography value, if it represents a point;
+        // otherwise <c>null</c>.</returns>
         /// </summary>
         public double? Longitude
         {
@@ -817,7 +961,8 @@ namespace System.Data.Spatial
 
         /// <summary>
         /// Gets the elevation (Z coordinate) of this DbGeography value, if it represents a point.
-        /// <returns>The elevation (Z coordinate) value of this geography value, if it represents a point; otherwise <c>null</c>.</returns>
+        /// <returns>The elevation (Z coordinate) value of this geography value, if it represents a point;
+        // otherwise <c>null</c>.</returns>
         /// </summary>
         public double? Elevation
         {
@@ -826,7 +971,8 @@ namespace System.Data.Spatial
 
         /// <summary>
         /// Gets the M (Measure) coordinate of this DbGeography value, if it represents a point.
-        /// <returns>The M (Measure) coordinate value of this geography value, if it represents a point; otherwise <c>null</c>.</returns>
+        /// <returns>The M (Measure) coordinate value of this geography value, if it represents a point;
+        // otherwise <c>null</c>.</returns>
         /// </summary>
         public double? Measure
         {
@@ -838,7 +984,8 @@ namespace System.Data.Spatial
         #region Curve
 
         /// <summary>
-        /// Gets a nullable double value that indicates the length of this DbGeography value, which may be null if this value does not represent a curve.
+        /// Gets a nullable double value that indicates the length of this DbGeography value, which may be
+        // null if this value does not represent a curve.
         /// </summary>
         public double? Length
         {
@@ -846,7 +993,8 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Gets a DbGeography value representing the start point of this value, which may be null if this DbGeography value does not represent a curve.
+        /// Gets a DbGeography value representing the start point of this value, which may be null if this
+        // DbGeography value does not represent a curve.
         /// </summary>
         public DbGeography StartPoint
         {
@@ -854,7 +1002,8 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Gets a DbGeography value representing the start point of this value, which may be null if this DbGeography value does not represent a curve.
+        /// Gets a DbGeography value representing the start point of this value, which may be null if this
+        // DbGeography value does not represent a curve.
         /// </summary>
         public DbGeography EndPoint
         {
@@ -862,7 +1011,8 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Gets a nullable Boolean value indicating whether this DbGeography value is closed, which may be null if this value does not represent a curve.
+        /// Gets a nullable Boolean value indicating whether this DbGeography value is closed, which may be
+        // null if this value does not represent a curve.
         /// </summary>
         public bool? IsClosed
         {
@@ -874,8 +1024,10 @@ namespace System.Data.Spatial
         #region LineString, Line, LinearRing
 
         /// <summary>
-        /// Gets the number of points in this DbGeography value, if it represents a linestring or linear ring.
-        /// <returns>The number of elements in this geography value, if it represents a linestring or linear ring; otherwise <c>null</c>.</returns>
+        /// Gets the number of points in this DbGeography value, if it represents a linestring or linear
+        // ring.
+        /// <returns>The number of elements in this geography value, if it represents a linestring or linear
+        // ring; otherwise <c>null</c>.</returns>
         /// </summary>
         public int? PointCount
         {
@@ -883,9 +1035,12 @@ namespace System.Data.Spatial
         }
 
         /// <summary>
-        /// Returns an element of this DbGeography value from a specific position, if it represents a linestring or linear ring.
-        /// <param name="index">The position within this geography value from which the element should be taken.</param>
-        /// <returns>The element in this geography value at the specified position, if it represents a linestring or linear ring; otherwise <c>null</c>.</returns>
+        /// Returns an element of this DbGeography value from a specific position, if it represents a
+        // linestring or linear ring.
+        /// <param name="index">The position within this geography value from which the element should be
+        // taken.</param>
+        /// <returns>The element in this geography value at the specified position, if it represents a
+        // linestring or linear ring; otherwise <c>null</c>.</returns>
         /// </summary>
         public DbGeography PointAt(int index)
         {
@@ -897,7 +1052,8 @@ namespace System.Data.Spatial
         #region Surface
 
         /// <summary>
-        /// Gets a nullable double value that indicates the area of this DbGeography value, which may be null if this value does not represent a surface.
+        /// Gets a nullable double value that indicates the area of this DbGeography value, which may be
+        // null if this value does not represent a surface.
         /// </summary>
         public double? Area
         {

@@ -25,7 +25,8 @@ public partial class DictionaryModelBinder<TKey, TValue>
     /// Creates a new <see cref="DictionaryModelBinder{TKey, TValue}"/>.
     /// </summary>
     /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
-    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
+    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref
+    // name="TValue"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public DictionaryModelBinder(
         IModelBinder keyBinder,
@@ -46,17 +47,20 @@ public partial class DictionaryModelBinder<TKey, TValue>
     /// Creates a new <see cref="DictionaryModelBinder{TKey, TValue}"/>.
     /// </summary>
     /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
-    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
+    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref
+    // name="TValue"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="allowValidatingTopLevelNodes">
     /// Indication that validation of top-level models is enabled. If <see langword="true"/> and
-    /// <see cref="ModelMetadata.IsBindingRequired"/> is <see langword="true"/> for a top-level model, the binder
+    /// <see cref="ModelMetadata.IsBindingRequired"/> is <see langword="true"/> for a top-level model,
+    // the binder
     /// adds a <see cref="ModelStateDictionary"/> error when the model is not bound.
     /// </param>
     /// <remarks>
     /// The <paramref name="allowValidatingTopLevelNodes"/> parameter is currently ignored.
     /// <see cref="CollectionModelBinder{TElement}.AllowValidatingTopLevelNodes"/> is always
-    /// <see langword="false"/> in <see cref="DictionaryModelBinder{TKey, TValue}"/>. This class ignores that
+    /// <see langword="false"/> in <see cref="DictionaryModelBinder{TKey, TValue}"/>. This class ignores
+    // that
     /// property and unconditionally checks for unbound top-level models with
     /// <see cref="ModelMetadata.IsBindingRequired"/>.
     /// </remarks>
@@ -82,20 +86,24 @@ public partial class DictionaryModelBinder<TKey, TValue>
     /// Creates a new <see cref="DictionaryModelBinder{TKey, TValue}"/>.
     /// </summary>
     /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
-    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
+    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref
+    // name="TValue"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="allowValidatingTopLevelNodes">
     /// Indication that validation of top-level models is enabled. If <see langword="true"/> and
-    /// <see cref="ModelMetadata.IsBindingRequired"/> is <see langword="true"/> for a top-level model, the binder
+    /// <see cref="ModelMetadata.IsBindingRequired"/> is <see langword="true"/> for a top-level model,
+    // the binder
     /// adds a <see cref="ModelStateDictionary"/> error when the model is not bound.
     /// </param>
     /// <param name="mvcOptions">The <see cref="MvcOptions"/>.</param>
     /// <remarks>
-    /// <para>This is the preferred <see cref="DictionaryModelBinder{TKey, TValue}"/> constructor.</para>
+    /// <para>This is the preferred <see cref="DictionaryModelBinder{TKey, TValue}"/>
+    // constructor.</para>
     /// <para>
     /// The <paramref name="allowValidatingTopLevelNodes"/> parameter is currently ignored.
     /// <see cref="CollectionModelBinder{TElement}.AllowValidatingTopLevelNodes"/> is always
-    /// <see langword="false"/> in <see cref="DictionaryModelBinder{TKey, TValue}"/>. This class ignores that
+    /// <see langword="false"/> in <see cref="DictionaryModelBinder{TKey, TValue}"/>. This class ignores
+    // that
     /// property and unconditionally checks for unbound top-level models with
     /// <see cref="ModelMetadata.IsBindingRequired"/>.
     /// </para>
@@ -152,7 +160,8 @@ public partial class DictionaryModelBinder<TKey, TValue>
             return;
         }
 
-        // Attempt to bind dictionary from a set of prefix[key]=value entries. Get the short and long keys first.
+        // Attempt to bind dictionary from a set of prefix[key]=value entries. Get the short and long keys
+        // first.
         var prefix = bindingContext.ModelName;
         var keys = enumerableValueProvider.GetKeysFromPrefix(prefix);
         if (keys.Count == 0)

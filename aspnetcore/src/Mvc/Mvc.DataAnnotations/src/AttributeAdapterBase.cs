@@ -8,10 +8,12 @@ using Microsoft.Extensions.Localization;
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 /// <summary>
-/// An abstract subclass of <see cref="ValidationAttributeAdapter{TAttribute}"/> which wraps up all the required
+/// An abstract subclass of <see cref="ValidationAttributeAdapter{TAttribute}"/> which wraps up all
+// the required
 /// interfaces for the adapters.
 /// </summary>
-/// <typeparam name="TAttribute">The type of <see cref="ValidationAttribute"/> which is being wrapped.</typeparam>
+/// <typeparam name="TAttribute">The type of <see cref="ValidationAttribute"/> which is being
+// wrapped.</typeparam>
 public abstract class AttributeAdapterBase<TAttribute>
     : ValidationAttributeAdapter<TAttribute>,
         IAttributeAdapter
@@ -21,7 +23,8 @@ public abstract class AttributeAdapterBase<TAttribute>
     /// Instantiates a new <see cref="AttributeAdapterBase{TAttribute}"/>.
     /// </summary>
     /// <param name="attribute">The <see cref="ValidationAttribute"/> being wrapped.</param>
-    /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/> to be used in error generation.</param>
+    /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/> to be used in error
+    // generation.</param>
     public AttributeAdapterBase(TAttribute attribute, IStringLocalizer? stringLocalizer)
         : base(attribute, stringLocalizer) { }
 

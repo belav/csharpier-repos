@@ -49,7 +49,8 @@ namespace System
             get { return this.GetMethodTable()->IsSzArray; }
         }
 
-        // This is the classlib-provided "get array MethodTable" function that will be invoked whenever the runtime
+        // This is the classlib-provided "get array MethodTable" function that will be invoked whenever the
+        // runtime
         // needs to know the base type of an array.
         [RuntimeExport("GetSystemArrayEEType")]
         private static unsafe MethodTable* GetSystemArrayEEType()
@@ -217,7 +218,8 @@ namespace System
         }
 
         //
-        // Funnel for all the Array.Copy() overloads. The "reliable" parameter indicates whether the caller for ConstrainedCopy()
+        // Funnel for all the Array.Copy() overloads. The "reliable" parameter indicates whether the caller
+        // for ConstrainedCopy()
         // (must leave destination array unchanged on any exception.)
         //
         private static unsafe void CopyImpl(
@@ -387,8 +389,10 @@ namespace System
                     }
                     else
                     {
-                        // The only case remaining is that primitive types could have a widening conversion between the source element type and the destination
-                        // If a widening conversion does not exist we are going to throw an ArrayTypeMismatchException from it.
+                        // The only case remaining is that primitive types could have a widening conversion between the
+                        // source element type and the destination
+                        // If a widening conversion does not exist we are going to throw an ArrayTypeMismatchException from
+                        // it.
                         CopyImplPrimitiveTypeWithWidening(
                             sourceArray,
                             sourceIndex,
@@ -418,8 +422,10 @@ namespace System
             )
                 return false;
 
-            // It may look like we're passing the arguments to AreTypesAssignable in the wrong order but we're not. The source array is an interface or Object array, the destination
-            // array is a value type array. Our job is to check if the destination value type implements the interface - which is what this call to AreTypesAssignable does.
+            // It may look like we're passing the arguments to AreTypesAssignable in the wrong order but we're
+            // not. The source array is an interface or Object array, the destination
+            // array is a value type array. Our job is to check if the destination value type implements the
+            // interface - which is what this call to AreTypesAssignable does.
             // The copy loop still checks each element to make sure it actually is the correct valuetype.
             if (!RuntimeImports.AreTypesAssignable(destinationElementEEType, sourceElementEEType))
                 return false;
@@ -438,7 +444,8 @@ namespace System
             bool reliable
         )
         {
-            // For mismatched array types, the desktop Array.Copy has a policy that determines whether to throw an ArrayTypeMismatch without any attempt to copy
+            // For mismatched array types, the desktop Array.Copy has a policy that determines whether to throw
+            // an ArrayTypeMismatch without any attempt to copy
             // or to throw an InvalidCastException in the middle of a copy. This code replicates that policy.
             EETypePtr sourceElementEEType = sourceArray.ElementEEType;
             EETypePtr destinationElementEEType = destinationArray.ElementEEType;
@@ -473,9 +480,12 @@ namespace System
                         sourceElementEEType
                     );
 
-                // If either array is an interface array, we allow the attempt to copy even if the other element type does not statically implement the interface.
-                // We don't have an "IsInterface" property in EETypePtr so we instead check for a null BaseType. The only the other MethodTable with a null BaseType is
-                // System.Object but if that were the case, we would already have passed one of the AreTypesAssignable checks above.
+                // If either array is an interface array, we allow the attempt to copy even if the other element
+                // type does not statically implement the interface.
+                // We don't have an "IsInterface" property in EETypePtr so we instead check for a null BaseType. The
+                // only the other MethodTable with a null BaseType is
+                // System.Object but if that were the case, we would already have passed one of the
+                // AreTypesAssignable checks above.
                 attemptCopy = attemptCopy || sourceElementEEType.BaseType.IsNull;
                 attemptCopy = attemptCopy || destinationElementEEType.BaseType.IsNull;
 
@@ -792,7 +802,8 @@ namespace System
 
             if (reliable)
             {
-                // ConstrainedCopy() cannot even widen - it can only copy same type or enum to its exact integral subtype.
+                // ConstrainedCopy() cannot even widen - it can only copy same type or enum to its exact integral
+                // subtype.
                 if (sourceElementType != destElementType)
                     throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_ConstrainedCopy);
             }
@@ -813,7 +824,8 @@ namespace System
                 }
 
                 ulong dummyElementForZeroLengthCopies = 0;
-                // If the element types aren't identical and the length is zero, we're still obliged to check the types for widening compatibility.
+                // If the element types aren't identical and the length is zero, we're still obliged to check the
+                // types for widening compatibility.
                 // We do this by forcing the loop below to copy one dummy element.
                 if (length == 0)
                 {
@@ -1161,7 +1173,8 @@ namespace System
             Debug.Assert(eeType.IsArray && !eeType.IsSzArray);
             Debug.Assert(rank == eeType.ArrayRank);
 
-            // Code below assumes 0 lower bounds. MdArray of rank 1 with zero lower bounds should never be allocated.
+            // Code below assumes 0 lower bounds. MdArray of rank 1 with zero lower bounds should never be
+            // allocated.
             // The runtime always allocates an SzArray for those:
             // * newobj instance void int32[0...]::.ctor(int32)" actually gives you int[]
             // * int[] is castable to int[*] to make it mostly transparent
@@ -1317,7 +1330,8 @@ namespace System
             EETypePtr pElementEEType = ElementEEType;
             if (pElementEEType.IsValueType)
             {
-                // Unlike most callers of InvokeUtils.ChangeType(), Array.SetValue() does *not* permit conversion from a primitive to an Enum.
+                // Unlike most callers of InvokeUtils.ChangeType(), Array.SetValue() does *not* permit conversion
+                // from a primitive to an Enum.
                 if (
                     value != null
                     && !(value.GetEETypePtr() == pElementEEType)
@@ -1441,7 +1455,8 @@ namespace System
     }
 
     //
-    // Note: the declared base type and interface list also determines what Reflection returns from TypeInfo.BaseType and TypeInfo.ImplementedInterfaces for array types.
+    // Note: the declared base type and interface list also determines what Reflection returns from
+    // TypeInfo.BaseType and TypeInfo.ImplementedInterfaces for array types.
     // This also means the class must be declared "public" so that the framework can reflect on it.
     //
     public class Array<T> : Array, IEnumerable<T>, ICollection<T>, IList<T>, IReadOnlyList<T>

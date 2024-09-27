@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -50,14 +51,16 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
             public void NonStaticMethod() { }
 
-            // RequiresOnMethod.MethodWithRequires generates a warning that gets suppressed because the declaring type has RUC
+            // RequiresOnMethod.MethodWithRequires generates a warning that gets suppressed because the
+            // declaring type has RUC
             public static void CallMethodWithRequires() => RequiresOnMethod.MethodWithRequires();
 
             public class NestedClass
             {
                 public static void NestedStaticMethod() { }
 
-                // This warning doesn't get suppressed since the declaring type NestedClass is not annotated with Requires
+                // This warning doesn't get suppressed since the declaring type NestedClass is not annotated with
+                // Requires
                 [ExpectedWarning(
                     "IL2026",
                     "RequiresOnClass.RequiresOnMethod.MethodWithRequires()",
@@ -81,7 +84,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
             public static void TestSuppressions(Type[] types)
             {
-                // StaticMethod is a static method on a Requires annotated type, so it should warn. But Requires in the
+                // StaticMethod is a static method on a Requires annotated type, so it should warn. But Requires in
+                // the
                 // class suppresses other Requires messages
                 StaticMethod();
 
@@ -361,7 +365,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         {
             public static void StaticMethodInInheritedClass() { }
 
-            // A nested class is not considered a static method nor constructor therefore RequiresUnreferencedCode doesn't apply
+            // A nested class is not considered a static method nor constructor therefore
+            // RequiresUnreferencedCode doesn't apply
             // and this warning is not suppressed
             [ExpectedWarning(
                 "IL2109",
@@ -492,7 +497,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             "--ClassWithRequires--",
             ProducedBy = Tool.Analyzer | Tool.NativeAot
         )]
-        // Although we suppress the warning from RequiresOnMethod.MethodWithRequires () we still get a warning because we call CallRequiresMethod() which is an static method on a type with RUC
+        // Although we suppress the warning from RequiresOnMethod.MethodWithRequires () we still get a
+        // warning because we call CallRequiresMethod() which is an static method on a type with RUC
         [ExpectedWarning(
             "IL2026",
             "RequiresOnClass.ClassWithRequires.CallMethodWithRequires()",

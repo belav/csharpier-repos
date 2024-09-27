@@ -36,7 +36,8 @@ namespace System.Globalization
             );
             if (ret > 0)
             {
-                // Even if we can get the sort handle, it is not guaranteed to work when Windows compatibility shim is applied
+                // Even if we can get the sort handle, it is not guaranteed to work when Windows compatibility shim
+                // is applied
                 // e.g. Windows 7 compatibility mode. We need to ensure it is working before using it.
                 // otherwise the whole framework app will not start.
                 int hashValue = 0;

@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 //
-// LinkedResourceCollectionTest.cs - Unit Test Cases for System.Net.MailAddress.LinkedResourceCollection
+// LinkedResourceCollectionTest.cs - Unit Test Cases for
+// System.Net.MailAddress.LinkedResourceCollection
 //
 // Authors:
 //   John Luke (john.luke@gmail.com)

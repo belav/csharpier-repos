@@ -1317,7 +1317,8 @@ namespace System.Runtime.Serialization.DataContracts
             }
         }
 
-        // Once https://github.com/mono/linker/issues/1731 is fixed we can remove the suppression from here as it won't be needed any longer.
+        // Once https://github.com/mono/linker/issues/1731 is fixed we can remove the suppression from here
+        // as it won't be needed any longer.
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2075:GetMethod",
@@ -1385,7 +1386,8 @@ namespace System.Runtime.Serialization.DataContracts
                     ? IsCollection(baseType)
                     : false;
 
-            // Avoid creating an invalid collection contract for Serializable types since we can create a ClassDataContract instead
+            // Avoid creating an invalid collection contract for Serializable types since we can create a
+            // ClassDataContract instead
 #pragma warning disable SYSLIB0050 // Type.IsSerializable is obsolete
             bool createContractWithException = isBaseTypeCollection && !type.IsSerializable;
 #pragma warning restore SYSLIB0050
@@ -1506,9 +1508,12 @@ namespace System.Runtime.Serialization.DataContracts
                 );
                 if (defaultCtor == null && constructorRequired)
                 {
-                    // All collection types could be considered read-only collections except collection types that are marked [Serializable].
-                    // Collection types marked [Serializable] cannot be read-only collections for backward compatibility reasons.
-                    // DataContract types and POCO types cannot be collection types, so they don't need to be factored in
+                    // All collection types could be considered read-only collections except collection types that are
+                    // marked [Serializable].
+                    // Collection types marked [Serializable] cannot be read-only collections for backward compatibility
+                    // reasons.
+                    // DataContract types and POCO types cannot be collection types, so they don't need to be factored
+                    // in
 #pragma warning disable SYSLIB0050 // Type.IsSerializable is obsolete
                     if (type.IsSerializable)
                     {
@@ -1605,9 +1610,12 @@ namespace System.Runtime.Serialization.DataContracts
 
                 if (addMethod == null)
                 {
-                    // All collection types could be considered read-only collections except collection types that are marked [Serializable].
-                    // Collection types marked [Serializable] cannot be read-only collections for backward compatibility reasons.
-                    // DataContract types and POCO types cannot be collection types, so they don't need to be factored in.
+                    // All collection types could be considered read-only collections except collection types that are
+                    // marked [Serializable].
+                    // Collection types marked [Serializable] cannot be read-only collections for backward compatibility
+                    // reasons.
+                    // DataContract types and POCO types cannot be collection types, so they don't need to be factored
+                    // in.
 #pragma warning disable SYSLIB0050 // Type.IsSerializable is obsolete
                     if (type.IsSerializable || skipIfReadOnlyContract)
                     {
@@ -1835,7 +1843,8 @@ namespace System.Runtime.Serialization.DataContracts
                 : SR.Format(message, nestedMessage, param);
         }
 
-        // Once https://github.com/mono/linker/issues/1731 is fixed we can remove the suppression from here as it won't be needed any longer.
+        // Once https://github.com/mono/linker/issues/1731 is fixed we can remove the suppression from here
+        // as it won't be needed any longer.
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2075:GetMethod",
@@ -1920,7 +1929,8 @@ namespace System.Runtime.Serialization.DataContracts
             }
             else
             {
-                // GetMethod returns Add() method with parameter closest matching T in assignability/inheritance chain
+                // GetMethod returns Add() method with parameter closest matching T in assignability/inheritance
+                // chain
                 addMethod = type.GetMethod(
                     Globals.AddMethodName,
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
@@ -1985,9 +1995,12 @@ namespace System.Runtime.Serialization.DataContracts
             if (boundContracts != null && boundContracts.TryGetValue(this, out boundContract!))
                 return boundContract;
 
-            // This type-binding ('boundType') stuff is new. We did not do this in NetFx. We used to use default contract constructors and let the
-            // underlying type get filled in later. But default constructors for DataContracts runs afoul of requiring an underlying type. Our web of nullable
-            // notations make it hard to get around. But it also allows us to feel good about using .UnderlyingType from matching parameter contracts.
+            // This type-binding ('boundType') stuff is new. We did not do this in NetFx. We used to use default
+            // contract constructors and let the
+            // underlying type get filled in later. But default constructors for DataContracts runs afoul of
+            // requiring an underlying type. Our web of nullable
+            // notations make it hard to get around. But it also allows us to feel good about using
+            // .UnderlyingType from matching parameter contracts.
             Type type = UnderlyingType;
             Type[] paramTypes = type.GetGenericArguments();
             for (int i = 0; i < paramTypes.Length; i++)
@@ -2220,7 +2233,8 @@ namespace System.Runtime.Serialization.DataContracts
         {
             Debug.Assert(context != null);
 
-            // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
+            // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value
+            // can now be reset.
             context.IsGetOnlyCollection = false;
             XmlFormatWriterDelegate(xmlWriter, obj, context, this);
         }
@@ -2238,7 +2252,8 @@ namespace System.Runtime.Serialization.DataContracts
             object? o = null;
             if (context.IsGetOnlyCollection)
             {
-                // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
+                // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value
+                // can now be reset.
                 context.IsGetOnlyCollection = false;
                 XmlFormatGetOnlyCollectionReaderDelegate(
                     xmlReader,

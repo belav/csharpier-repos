@@ -106,7 +106,8 @@ namespace System.Data.Query.InternalTrees
         /// If no cloned var exists, return the input Var itself
         /// </summary>
         /// <param name="v">The Var for which the cloned Var should be retrieved</param>
-        /// <returns>The cloned Var that corresponds to the specified Var if this OpCopier is cloning across two different Commands; otherwise it is safe to return the specified Var itself</returns>
+        /// <returns>The cloned Var that corresponds to the specified Var if this OpCopier is cloning across
+        // two different Commands; otherwise it is safe to return the specified Var itself</returns>
         private Var GetMappedVar(Var v)
         {
             Var mappedVar;
@@ -259,11 +260,14 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// Creates a new Node with the specified Op as its Op and the result of visiting the specified Node's children as its children
+        /// Creates a new Node with the specified Op as its Op and the result of visiting the specified
+        // Node's children as its children
         /// </summary>
         /// <param name="op">The Op that the new Node should reference</param>
-        /// <param name="original">The Node for which the children should be visited and the resulting cloned Nodes used as the children of the new Node returned by this method</param>
-        /// <returns>A new Node with the specified Op as its Op and the cloned child Nodes as its children</returns>
+        /// <param name="original">The Node for which the children should be visited and the resulting
+        // cloned Nodes used as the children of the new Node returned by this method</param>
+        /// <returns>A new Node with the specified Op as its Op and the cloned child Nodes as its
+        // children</returns>
         private Node CopyDefault(Op op, Node original)
         {
             return m_destCmd.CreateNode(op, ProcessChildren(original));
@@ -278,7 +282,8 @@ namespace System.Data.Query.InternalTrees
         /// <param name="op">The unrecognized Op</param>
         /// <param name="n">The Node that references the Op</param>
         /// <returns>This method always throws NotSupportedException</returns>
-        /// <exception cref="NotSupportedException">By design to indicate that the Op was not recognized and is therefore unsupported</exception>
+        /// <exception cref="NotSupportedException">By design to indicate that the Op was not recognized and
+        // is therefore unsupported</exception>
         public override Node Visit(Op op, Node n)
         {
             throw new NotSupportedException(
@@ -764,7 +769,8 @@ namespace System.Data.Query.InternalTrees
             // Create a new ProjectOp based on the copied VarSet
             ProjectOp newProject = m_destCmd.CreateProjectOp(newVarSet);
 
-            // Return a new Node that references the copied ProjectOp and has the copied child Nodes as its children
+            // Return a new Node that references the copied ProjectOp and has the copied child Nodes as its
+            // children
             return m_destCmd.CreateNode(newProject, children);
         }
 
@@ -796,7 +802,8 @@ namespace System.Data.Query.InternalTrees
             // Create a new SortOp that uses the copied SortKeys
             SortOp newSortOp = m_destCmd.CreateSortOp(newSortKeys);
 
-            // Return a new Node that references the copied SortOp and has the copied child Nodes as its children
+            // Return a new Node that references the copied SortOp and has the copied child Nodes as its
+            // children
             return m_destCmd.CreateNode(newSortOp, children);
         }
 
@@ -820,7 +827,8 @@ namespace System.Data.Query.InternalTrees
                 op.WithTies
             );
 
-            // Return a new Node that references the copied SortOp and has the copied child Nodes as its children
+            // Return a new Node that references the copied SortOp and has the copied child Nodes as its
+            // children
             return m_destCmd.CreateNode(newSortOp, children);
         }
 
@@ -838,7 +846,8 @@ namespace System.Data.Query.InternalTrees
             // Create a new GroupByOp that uses copies of the Key and Output VarSets of the original GroupByOp
             GroupByOp newGroupOp = m_destCmd.CreateGroupByOp(Copy(op.Keys), Copy(op.Outputs));
 
-            // Return a new Node that references the copied GroupByOp and has the copied child Nodes as its children
+            // Return a new Node that references the copied GroupByOp and has the copied child Nodes as its
+            // children
             return m_destCmd.CreateNode(newGroupOp, children);
         }
 
@@ -860,7 +869,8 @@ namespace System.Data.Query.InternalTrees
                 Copy(op.Outputs)
             );
 
-            // Return a new Node that references the copied GroupByOp and has the copied child Nodes as its children
+            // Return a new Node that references the copied GroupByOp and has the copied child Nodes as its
+            // children
             return m_destCmd.CreateNode(newGroupOp, children);
         }
 
@@ -1047,7 +1057,8 @@ namespace System.Data.Query.InternalTrees
             // Create a new DistinctOp that uses the copied keys
             DistinctOp newDistinctOp = m_destCmd.CreateDistinctOp(newDistinctKeys);
 
-            // Return a new Node that references the copied DistinctOp and has the copied child Nodes as its children
+            // Return a new Node that references the copied DistinctOp and has the copied child Nodes as its
+            // children
             return m_destCmd.CreateNode(newDistinctOp, children);
         }
 
@@ -1127,7 +1138,8 @@ namespace System.Data.Query.InternalTrees
                 newColumnMap
             );
 
-            // Return a new Node that references the copied ProjectOp and has the copied child Nodes as its children
+            // Return a new Node that references the copied ProjectOp and has the copied child Nodes as its
+            // children
             return m_destCmd.CreateNode(newProject, children);
         }
 

@@ -40,7 +40,8 @@ namespace System.Web.Services.Protocols
             }
         }
 
-        // See comment on the ServerProtocol.IsCacheUnderPressure method for explanation of the excludeSchemeHostPortFromCachingKey logic.
+        // See comment on the ServerProtocol.IsCacheUnderPressure method for explanation of the
+        // excludeSchemeHostPortFromCachingKey logic.
         internal DiscoveryServerType(
             Type type,
             string uri,
@@ -233,7 +234,8 @@ namespace System.Web.Services.Protocols
             get { return discoDoc; }
         }
 
-        // Creates a new Uri by combining scheme/host/port from the first param and the absolute path and Query from the second
+        // Creates a new Uri by combining scheme/host/port from the first param and the absolute path and
+        // Query from the second
         internal static string CombineUris(Uri schemeHostPort, string absolutePathAndQuery)
         {
             return string.Format(

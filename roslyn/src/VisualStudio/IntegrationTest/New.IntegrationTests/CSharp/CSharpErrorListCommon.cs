@@ -312,7 +312,8 @@ class Program2
                 string.Join<string>(Environment.NewLine, actualContents)
             );
 
-            // Close the current document and verify diagnostics for closed document are not removed from error list.
+            // Close the current document and verify diagnostics for closed document are not removed from error
+            // list.
             await TestServices.SolutionExplorer.SaveAllAsync(HangMitigatingCancellationToken);
             await TestServices.Editor.SendExplicitFocusAsync(HangMitigatingCancellationToken);
 

@@ -7,7 +7,8 @@ using System.IO.Pipelines;
 namespace Microsoft.AspNetCore.OutputCaching;
 
 /// <summary>
-/// Represents a store for cached responses that uses a <see cref="IBufferWriter{byte}"/> as the target.
+/// Represents a store for cached responses that uses a <see cref="IBufferWriter{byte}"/> as the
+// target.
 /// </summary>
 public interface IOutputCacheBufferStore : IOutputCacheStore
 {
@@ -29,9 +30,11 @@ public interface IOutputCacheBufferStore : IOutputCacheStore
     /// Stores the given response in the response cache.
     /// </summary>
     /// <param name="key">The cache key to store the response under.</param>
-    /// <param name="value">The response cache entry to store; this value is only defined for the duration of the method, and should not be stored without making a copy.</param>
+    /// <param name="value">The response cache entry to store; this value is only defined for the
+    // duration of the method, and should not be stored without making a copy.</param>
     /// <param name="tags">The tags associated with the cache entry to store.</param>
-    /// <param name="validFor">The amount of time the entry will be kept in the cache before expiring, relative to now.</param>
+    /// <param name="validFor">The amount of time the entry will be kept in the cache before expiring,
+    // relative to now.</param>
     /// <param name="cancellationToken">Indicates that the operation should be cancelled.</param>
     ValueTask SetAsync(
         string key,

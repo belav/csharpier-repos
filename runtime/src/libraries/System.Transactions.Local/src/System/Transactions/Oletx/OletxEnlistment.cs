@@ -254,7 +254,8 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
     {
         lock (this)
         {
-            // If we don't have an oletxTransaction or the passed oletxTm matches that of my oletxTransaction, the TM went down.
+            // If we don't have an oletxTransaction or the passed oletxTm matches that of my oletxTransaction,
+            // the TM went down.
             if (
                 oletxTransaction == null
                 || oletxTm == oletxTransaction.RealOletxTransaction.OletxTransactionManagerInstance
@@ -644,8 +645,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             // the notification to the app and we don't need to tell the proxy.
             if (OletxEnlistmentState.Active == State)
             {
-                // If we got an abort hint or we are the committable transaction and Commit has not yet been called or the TM went down,
-                // we don't want to do any more work on the transaction.  The abort notifications will be sent by the phase 1
+                // If we got an abort hint or we are the committable transaction and Commit has not yet been called
+                // or the TM went down,
+                // we don't want to do any more work on the transaction.  The abort notifications will be sent by
+                // the phase 1
                 // enlistment
                 if (_aborting || commitNotYetCalled || _tmWentDown)
                 {

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
     /// <summary>
     /// VS for mac has some restrictions on the assemblies that they can load.
-    /// These tests are created to make sure we don't accidentally add references to the dlls that they cannot load.
+    /// These tests are created to make sure we don't accidentally add references to the dlls that they
+    // cannot load.
     /// </summary>
     public class AssemblyReferenceTests
     {

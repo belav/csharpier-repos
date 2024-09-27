@@ -105,7 +105,8 @@ namespace System.Globalization
         /// the number of days from January 1st, 1 A.D.
         /// </summary>
         /// <remarks>
-        /// This is an internal method used by DateToTicks() and the calculations of Hijri and Hebrew calendars.
+        /// This is an internal method used by DateToTicks() and the calculations of Hijri and Hebrew
+        // calendars.
         /// Number of Days in Prior Years (both common and leap years) +
         /// Number of Days in Prior Months of Current Year +
         /// Number of Days in Current Month

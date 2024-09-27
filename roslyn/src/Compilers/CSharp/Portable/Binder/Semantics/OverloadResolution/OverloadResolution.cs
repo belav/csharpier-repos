@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             get { return _binder.Conversions; }
         }
 
-        // lazily compute if the compiler is in "strict" mode (rather than duplicating bugs for compatibility)
+        // lazily compute if the compiler is in "strict" mode (rather than duplicating bugs for
+        // compatibility)
         private bool? _strict;
         private bool Strict
         {
@@ -286,16 +287,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
             where TMember : Symbol
         {
-            // If there were no dynamic arguments then overload resolution succeeds if there is exactly one method
+            // If there were no dynamic arguments then overload resolution succeeds if there is exactly one
+            // method
             // that is applicable and not worse than another method.
             //
-            // If there were dynamic arguments then overload resolution succeeds if there were one or more applicable
+            // If there were dynamic arguments then overload resolution succeeds if there were one or more
+            // applicable
             // methods; which applicable method that will be invoked, if any, will be worked out at runtime.
             //
-            // Note that we could in theory do a better job of detecting situations that we know will fail. We do not
-            // treat methods that violate generic type constraints as inapplicable; rather, if such a method is chosen
+            // Note that we could in theory do a better job of detecting situations that we know will fail. We
+            // do not
+            // treat methods that violate generic type constraints as inapplicable; rather, if such a method is
+            // chosen
             // as the best method we give an error during the "final validation" phase. In the dynamic argument
-            // scenario there could be two methods, both applicable, ambiguous as to which is better, and neither
+            // scenario there could be two methods, both applicable, ambiguous as to which is better, and
+            // neither
             // would pass final validation. In that case we could give the error at compile time, but we do not.
 
             if (hasDynamicArgument)
@@ -383,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // It is not clear from the spec how or where this is supposed to occur.
             RemoveInaccessibleTypeArguments(results, ref useSiteInfo);
 
-            // SPEC: The set of candidate methods is reduced to contain only methods from the most derived types.
+            // SPEC: The set of candidate methods is reduced to contain only methods from the most derived
+            // types.
             if (checkOverriddenOrHidden)
             {
                 RemoveLessDerivedMembers(results, ref useSiteInfo);
@@ -420,15 +427,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Also note that less derived members are not actually removed - they are simply flagged.
             ReportUseSiteInfo(results, ref useSiteInfo);
 
-            // SPEC: If the resulting set of candidate methods is empty, then further processing along the following steps are abandoned,
-            // SPEC: and instead an attempt is made to process the invocation as an extension method invocation. If this fails, then no
+            // SPEC: If the resulting set of candidate methods is empty, then further processing along the
+            // following steps are abandoned,
+            // SPEC: and instead an attempt is made to process the invocation as an extension method invocation.
+            // If this fails, then no
             // SPEC: applicable methods exist, and a binding-time error occurs.
             if (!AnyValidResult(results))
             {
                 return;
             }
 
-            // SPEC: The best method of the set of candidate methods is identified. If a single best method cannot be identified,
+            // SPEC: The best method of the set of candidate methods is identified. If a single best method
+            // cannot be identified,
             // SPEC: the method invocation is ambiguous, and a binding-time error occurs.
 
             RemoveWorseMembers(results, arguments, ref useSiteInfo);
@@ -473,10 +483,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
             where TMember : Symbol
         {
-            // When the feature 'ImprovedOverloadCandidates' is enabled, we do not include instance members when the receiver
-            // is a type, or static members when the receiver is an instance. This does not apply to extension method invocations,
-            // because extension methods are only considered when the receiver is an instance. It also does not apply when the
-            // receiver is a TypeOrValueExpression, which is used to handle the receiver of a Color-Color ambiguity, where either
+            // When the feature 'ImprovedOverloadCandidates' is enabled, we do not include instance members when
+            // the receiver
+            // is a type, or static members when the receiver is an instance. This does not apply to extension
+            // method invocations,
+            // because extension methods are only considered when the receiver is an instance. It also does not
+            // apply when the
+            // receiver is a TypeOrValueExpression, which is used to handle the receiver of a Color-Color
+            // ambiguity, where either
             // an instance or a static member would be acceptable.
             if (
                 arguments.IsExtensionMethodInvocation || Binder.IsTypeOrValueExpression(receiverOpt)
@@ -495,7 +509,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            // We are in a context where only instance (or only static) methods are permitted. We reject the others.
+            // We are in a context where only instance (or only static) methods are permitted. We reject the
+            // others.
             bool keepStatic =
                 isImplicitReceiver && isStaticContext
                 || Binder.IsMemberAccessedThroughType(receiverOpt);
@@ -525,8 +540,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
             where TMember : Symbol
         {
-            // RemoveStaticInstanceMismatches allows methods that do not need a receiver but are not declared static,
-            // such as a local function that is not declared static. This eliminates methods that are not actually
+            // RemoveStaticInstanceMismatches allows methods that do not need a receiver but are not declared
+            // static,
+            // such as a local function that is not declared static. This eliminates methods that are not
+            // actually
             // declared as static
             for (int f = 0; f < results.Count; f++)
             {
@@ -545,7 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
             where TMember : Symbol
         {
-            // When the feature 'ImprovedOverloadCandidates' is enabled, we do not include methods for which the type arguments
+            // When the feature 'ImprovedOverloadCandidates' is enabled, we do not include methods for which the
+            // type arguments
             // violate the constraints of the method's type parameters.
 
             // Constraint violations apply to method in a method group, not to properties in a "property group".
@@ -608,7 +626,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 // We're at a location where the unmanaged data might not yet been bound. This cannot be valid code
-                // anyway, as attribute arguments can't be method references, so we'll just assume that the conventions
+                // anyway, as attribute arguments can't be method references, so we'll just assume that the
+                // conventions
                 // match, as there will be other errors that supersede these anyway
                 return;
             }
@@ -648,12 +667,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // There's data from an UnmanagedCallersOnlyAttribute present, which takes precedence over the
                         // CallKind bit in the method definition. We use the following rules to decode the attribute:
-                        // * If no types are specified, the CallKind is treated as Unmanaged, with no unmanaged calling convention types
-                        // * If there is one type specified, and that type is named CallConvCdecl, CallConvThiscall, CallConvStdcall, or
-                        //   CallConvFastcall, the CallKind is treated as CDecl, ThisCall, Standard, or FastCall, respectively, with no
+                        // * If no types are specified, the CallKind is treated as Unmanaged, with no unmanaged calling
+                        // convention types
+                        // * If there is one type specified, and that type is named CallConvCdecl, CallConvThiscall,
+                        // CallConvStdcall, or
+                        //   CallConvFastcall, the CallKind is treated as CDecl, ThisCall, Standard, or FastCall,
+                        // respectively, with no
                         //   calling types.
-                        // * If multiple types are specified or the single type is not named one of the specially called out types above,
-                        //   the CallKind is treated as Unmanaged, with the union of the types specified treated as calling convention types.
+                        // * If multiple types are specified or the single type is not named one of the specially called out
+                        // types above,
+                        //   the CallKind is treated as Unmanaged, with the union of the types specified treated as calling
+                        // convention types.
 
                         var unmanagedCallingConventionTypes =
                             unmanagedCallersOnlyData.CallingConventionTypes;
@@ -711,8 +735,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // The rules for matching a calling convention are:
                     // 1. The CallKinds must match exactly
-                    // 2. If the CallKind is Unmanaged, then the set of calling convention types must match exactly, ignoring order
-                    //    and duplicates. We already have both sets in a HashSet, so we can just ensure they're the same length and
+                    // 2. If the CallKind is Unmanaged, then the set of calling convention types must match exactly,
+                    // ignoring order
+                    //    and duplicates. We already have both sets in a HashSet, so we can just ensure they're the same
+                    // length and
                     //    that everything from one set is in the other set.
 
                     if (
@@ -812,12 +838,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Remove candidates to a delegate conversion where the method's return ref kind or return type is wrong.
+        /// Remove candidates to a delegate conversion where the method's return ref kind or return type is
+        // wrong.
         /// </summary>
-        /// <param name="returnRefKind">The ref kind of the delegate's return, if known. This is only unknown in
+        /// <param name="returnRefKind">The ref kind of the delegate's return, if known. This is only
+        // unknown in
         /// error scenarios, such as a delegate type that has no invoke method.</param>
         /// <param name="returnType">The return type of the delegate, if known. It isn't
-        /// known when we're attempting to infer the return type of a method group for type inference.</param>
+        /// known when we're attempting to infer the return type of a method group for type
+        // inference.</param>
         private void RemoveDelegateConversionsWithWrongReturnType<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
@@ -827,7 +856,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
             where TMember : Symbol
         {
-            // When the feature 'ImprovedOverloadCandidates' is enabled, then a delegate conversion overload resolution
+            // When the feature 'ImprovedOverloadCandidates' is enabled, then a delegate conversion overload
+            // resolution
             // rejects candidates that have the wrong return ref kind or return type.
 
             // Delegate conversions apply to method in a method group, not to properties in a "property group".
@@ -980,7 +1010,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // If the constructor has a use site diagnostic, we don't want to discard it because we'll have to report the diagnostic later.
+            // If the constructor has a use site diagnostic, we don't want to discard it because we'll have to
+            // report the diagnostic later.
             if (
                 result.IsValid
                 || completeResults
@@ -1016,7 +1047,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return MemberAnalysisResult.ArgumentParameterMismatch(argumentAnalysis);
             }
 
-            // Check after argument analysis, but before more complicated type inference and argument type validation.
+            // Check after argument analysis, but before more complicated type inference and argument type
+            // validation.
             if (constructor.HasUseSiteError)
             {
                 return MemberAnalysisResult.UseSiteError();
@@ -1064,7 +1096,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return MemberAnalysisResult.ArgumentParameterMismatch(argumentAnalysis);
             }
 
-            // Check after argument analysis, but before more complicated type inference and argument type validation.
+            // Check after argument analysis, but before more complicated type inference and argument type
+            // validation.
             if (constructor.HasUseSiteError)
             {
                 return MemberAnalysisResult.UseSiteError();
@@ -1248,7 +1281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // First deal with eliminating generic-arity mismatches.
 
             // SPEC: If F is generic and M includes a type argument list, F is a candidate when:
-            // SPEC: * F has the same number of method type parameters as were supplied in the type argument list, and
+            // SPEC: * F has the same number of method type parameters as were supplied in the type argument
+            // list, and
             //
             // This is specifying an impossible condition; the member lookup algorithm has already filtered
             // out methods from the method group that have the wrong generic arity.
@@ -1277,7 +1311,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var result = normalResult;
             if (!normalResult.Result.IsValid)
             {
-                // Whether a virtual method [indexer] is a "params" method [indexer] or not depends solely on how the
+                // Whether a virtual method [indexer] is a "params" method [indexer] or not depends solely on how
+                // the
                 // *original* declaration was declared. There are a variety of C# or MSIL
                 // tricks you can pull to make overriding methods [indexers] inconsistent with overridden
                 // methods [indexers] (or implementing methods [indexers] inconsistent with interfaces).
@@ -1423,7 +1458,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Does the member group <paramref name="members"/> contain an override of <paramref name="member"/> or the method it
+        /// Does the member group <paramref name="members"/> contain an override of <paramref
+        // name="member"/> or the method it
         /// overrides, but in a more derived type?
         /// </summary>
         /// <param name="checkOverrideContainingType">Set to false if the caller has already checked that
@@ -1493,8 +1529,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <remarks>
-        /// This is specifically a private helper function (rather than a public property or extension method)
-        /// because applying this predicate to a non-method member doesn't have a clear meaning.  The goal was
+        /// This is specifically a private helper function (rather than a public property or extension
+        // method)
+        /// because applying this predicate to a non-method member doesn't have a clear meaning.  The goal
+        // was
         /// simply to avoid repeating ad-hoc code in a group of related collections.
         /// </remarks>
         private static bool HidesByName(Symbol member)
@@ -2064,7 +2102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(!results[i].IsValid || worse[i] != unknown);
                     if (worse[i] == worseThanSomething)
                     {
-                        // Mark those candidates, that are worse than the single notBest candidate, as Worst in order to improve error reporting.
+                        // Mark those candidates, that are worse than the single notBest candidate, as Worst in order to
+                        // improve error reporting.
                         results[i] =
                             BetterResult.Left
                             == BetterFunctionMember(
@@ -2094,7 +2133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(!results[i].IsValid || worse[i] != unknown);
                     if (worse[i] == worseThanSomething)
                     {
-                        // Mark those candidates, that are worse than something, as Worst in order to improve error reporting.
+                        // Mark those candidates, that are worse than something, as Worst in order to improve error
+                        // reporting.
                         results[i] = results[i].Worst();
                     }
                     else if (worse[i] == notBetterThanEverything)
@@ -2166,11 +2206,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return BetterResult.Right;
             }
 
-            // Omit ref feature for COM interop: We can pass arguments by value for ref parameters if we are calling a method/property on an instance of a COM imported type.
-            // We should have ignored the 'ref' on the parameter while determining the applicability of argument for the given method call.
-            // As per Devdiv Bug #696573: '[Interop] Com omit ref overload resolution is incorrect', we must prefer non-ref omitted methods over ref omitted methods
+            // Omit ref feature for COM interop: We can pass arguments by value for ref parameters if we are
+            // calling a method/property on an instance of a COM imported type.
+            // We should have ignored the 'ref' on the parameter while determining the applicability of argument
+            // for the given method call.
+            // As per Devdiv Bug #696573: '[Interop] Com omit ref overload resolution is incorrect', we must
+            // prefer non-ref omitted methods over ref omitted methods
             // when determining the BetterFunctionMember.
-            // During argument rewriting, we will replace the argument value with a temporary local and pass that local by reference.
+            // During argument rewriting, we will replace the argument value with a temporary local and pass
+            // that local by reference.
 
             bool hasAnyRefOmittedArgument1 = m1.Result.HasAnyRefOmittedArgument;
             bool hasAnyRefOmittedArgument2 = m2.Result.HasAnyRefOmittedArgument;
@@ -2204,10 +2248,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(arguments != null);
 
             // SPEC:
-            //   Parameter lists for each of the candidate function members are constructed in the following way:
+            //   Parameter lists for each of the candidate function members are constructed in the following
+            // way:
             //   The expanded form is used if the function member was applicable only in the expanded form.
             //   Optional parameters with no corresponding arguments are removed from the parameter list
-            //   The parameters are reordered so that they occur at the same position as the corresponding argument in the argument list.
+            //   The parameters are reordered so that they occur at the same position as the corresponding
+            // argument in the argument list.
             // We don't actually create these lists, for efficiency reason. But we iterate over the arguments
             // and get the correspond parameter types.
 
@@ -2216,7 +2262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool ignoreDowngradableToNeither = false;
 
             // Given an argument list A with a set of argument expressions { E1, E2, ..., EN } and two
-            // applicable function members MP and MQ with parameter types { P1, P2, ..., PN } and { Q1, Q2, ..., QN },
+            // applicable function members MP and MQ with parameter types { P1, P2, ..., PN } and { Q1, Q2, ...,
+            // QN },
             // MP is defined to be a better function member than MQ if
 
             // for each argument, the implicit conversion from EX to QX is not better than the
@@ -2308,7 +2355,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     allSame = false;
                 }
 
-                // One of them was better, even if identical up to Task-likeness. Does that contradict a previous result or add a new fact?
+                // One of them was better, even if identical up to Task-likeness. Does that contradict a previous
+                // result or add a new fact?
                 if (result == BetterResult.Neither)
                 {
                     if (!(ignoreDowngradableToNeither && okToDowngradeToNeither))
@@ -2324,7 +2372,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // is better in one place. We know we can bail out at this point; neither is
                     // going to be better than the other.
 
-                    // But first, let's see if we can ignore the ambiguity due to an undocumented legacy behavior of the compiler.
+                    // But first, let's see if we can ignore the ambiguity due to an undocumented legacy behavior of the
+                    // compiler.
                     // This is not part of the language spec.
                     if (okToDowngradeResultToNeither)
                     {
@@ -2374,7 +2423,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // In case the parameter type sequences {P1, P2, …, PN} and {Q1, Q2, …, QN} are
-            // equivalent ignoring Task-like differences (i.e. each Pi has an identity conversion to the corresponding Qi), the
+            // equivalent ignoring Task-like differences (i.e. each Pi has an identity conversion to the
+            // corresponding Qi), the
             // following tie-breaking rules are applied, in order, to determine the better function
             // member.
 
@@ -2398,8 +2448,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // We might have got out of the loop above early and allSame isn't completely calculated.
             // We need to ensure that we are not going to skip over the next 'if' because of that.
-            // One way we can break out of the above loop early is when the corresponding method parameters have identical types
-            // but different ref kinds. See RefOmittedComCall_OverloadResolution_MultipleArguments_ErrorCases for an example.
+            // One way we can break out of the above loop early is when the corresponding method parameters have
+            // identical types
+            // but different ref kinds. See RefOmittedComCall_OverloadResolution_MultipleArguments_ErrorCases
+            // for an example.
             if (
                 allSame
                 && m1ParametersUsedIncludingExpansionAndOptional
@@ -2450,8 +2502,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // SPEC VIOLATION: When checking for matching parameter type sequences {P1, P2, …, PN} and {Q1, Q2, …, QN},
-            //                 native compiler includes types of optional parameters. We partially duplicate this behavior
+            // SPEC VIOLATION: When checking for matching parameter type sequences {P1, P2, …, PN} and {Q1, Q2,
+            // …, QN},
+            //                 native compiler includes types of optional parameters. We partially duplicate
+            // this behavior
             //                 here by comparing the number of parameters used taking params expansion and
             //                 optional parameters into account.
             if (
@@ -2671,7 +2725,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return (m1ModifierCount < m2ModifierCount) ? BetterResult.Left : BetterResult.Right;
             }
 
-            // Otherwise, prefer methods with 'val' parameters over 'in' parameters and over 'ref' parameters when the argument is an interpolated string handler.
+            // Otherwise, prefer methods with 'val' parameters over 'in' parameters and over 'ref' parameters
+            // when the argument is an interpolated string handler.
             return PreferValOverInOrRefInterpolatedHandlerParameters(
                 arguments,
                 m1,
@@ -2989,7 +3044,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
         }
 
-        // Determine whether t1 or t2 is a better conversion target from node, possibly considering parameter ref kinds.
+        // Determine whether t1 or t2 is a better conversion target from node, possibly considering
+        // parameter ref kinds.
         private BetterResult BetterConversionFromExpression(
             BoundExpression node,
             TypeSymbol t1,
@@ -3007,21 +3063,31 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (considerRefKinds)
             {
-                // We may need to consider the ref kinds of the parameters while determining the better conversion from the given expression to the respective parameter types.
-                // This is needed for the omit ref feature for COM interop: We can pass arguments by value for ref parameters if we are calling a method within a COM imported type.
-                // We can reach here only if we had at least one ref omitted argument for the given call, which must be a call to a method within a COM imported type.
+                // We may need to consider the ref kinds of the parameters while determining the better conversion
+                // from the given expression to the respective parameter types.
+                // This is needed for the omit ref feature for COM interop: We can pass arguments by value for ref
+                // parameters if we are calling a method within a COM imported type.
+                // We can reach here only if we had at least one ref omitted argument for the given call, which must
+                // be a call to a method within a COM imported type.
 
-                // Algorithm for determining the better conversion from expression when ref kinds need to be considered is NOT provided in the C# language specification,
+                // Algorithm for determining the better conversion from expression when ref kinds need to be
+                // considered is NOT provided in the C# language specification,
                 // see section 7.5.3.3 'Better Conversion From Expression'.
                 // We match native compiler's behavior for determining the better conversion as follows:
-                //  1) If one of the contending parameters is a 'ref' parameter, say p1, and other is a non-ref parameter, say p2,
-                //     then p2 is a better result if the argument has an identity conversion to p2's type. Otherwise, neither result is better.
+                //  1) If one of the contending parameters is a 'ref' parameter, say p1, and other is a non-ref
+                // parameter, say p2,
+                //     then p2 is a better result if the argument has an identity conversion to p2's type.
+                // Otherwise, neither result is better.
                 //  2) Otherwise, if both the contending parameters are 'ref' parameters, neither result is better.
-                //  3) Otherwise, we use the algorithm in 7.5.3.3 for determining the better conversion without considering ref kinds.
+                //  3) Otherwise, we use the algorithm in 7.5.3.3 for determining the better conversion without
+                // considering ref kinds.
 
-                // NOTE:    Native compiler does not explicitly implement the above algorithm, but gets it by default. This is due to the fact that the RefKind of a parameter
-                // NOTE:    gets considered while classifying conversions between parameter types when computing better conversion target in the native compiler.
-                // NOTE:    Roslyn correctly follows the specification and ref kinds are not considered while classifying conversions between types, see method BetterConversionTarget.
+                // NOTE:    Native compiler does not explicitly implement the above algorithm, but gets it by
+                // default. This is due to the fact that the RefKind of a parameter
+                // NOTE:    gets considered while classifying conversions between parameter types when computing
+                // better conversion target in the native compiler.
+                // NOTE:    Roslyn correctly follows the specification and ref kinds are not considered while
+                // classifying conversions between types, see method BetterConversionTarget.
 
                 Debug.Assert(refKind1 == RefKind.None || refKind1 == RefKind.Ref);
                 Debug.Assert(refKind2 == RefKind.None || refKind2 == RefKind.Ref);
@@ -3086,7 +3152,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 || (nodeKind == BoundKind.DiscardExpression && !node.HasExpressionType())
             )
             {
-                // Neither conversion from expression is better when the argument is an implicitly-typed out variable declaration.
+                // Neither conversion from expression is better when the argument is an implicitly-typed out
+                // variable declaration.
                 okToDowngradeToNeither = false;
                 return BetterResult.Neither;
             }
@@ -3230,7 +3297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol elementType2;
             var kind2 = conv2.GetCollectionExpressionTypeKind(out elementType2);
 
-            // - T1 is System.ReadOnlySpan<E1>, and T2 is System.Span<E2>, and an implicit conversion exists from E1 to E2
+            // - T1 is System.ReadOnlySpan<E1>, and T2 is System.Span<E2>, and an implicit conversion exists
+            // from E1 to E2
             if (
                 kind1 is CollectionExpressionTypeKind.ReadOnlySpan
                 && kind2 is CollectionExpressionTypeKind.Span
@@ -3240,7 +3308,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            // - T1 is System.ReadOnlySpan<E1> or System.Span<E1>, and T2 is an array_or_array_interface_or_string_type
+            // - T1 is System.ReadOnlySpan<E1> or System.Span<E1>, and T2 is an
+            // array_or_array_interface_or_string_type
             //    with iteration type E2, and an implicit conversion exists from E1 to E2
             if (
                 kind1
@@ -3253,7 +3322,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            // - T1 is not a span_type, and T2 is not a span_type, and an implicit conversion exists from T1 to T2
+            // - T1 is not a span_type, and T2 is not a span_type, and an implicit conversion exists from T1 to
+            // T2
             if (
                 kind1
                     is not (
@@ -3346,7 +3416,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 BoundLambda lambda = ((UnboundLambda)node).BindForReturnTypeInference(d);
 
-                // - an inferred return type X exists for E in the context of the parameter list of D(§7.5.2.12), and an identity conversion exists from X to Y
+                // - an inferred return type X exists for E in the context of the parameter list of D(§7.5.2.12),
+                // and an identity conversion exists from X to Y
                 var x = lambda.GetInferredReturnType(ref useSiteInfo, out _);
                 if (x.HasType && Conversions.HasIdentityConversion(x.Type, y))
                 {
@@ -3604,7 +3675,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return BetterResult.Neither;
             }
 
-            // Given two different types T1 and T2, T1 is a better conversion target than T2 if no implicit conversion from T2 to T1 exists,
+            // Given two different types T1 and T2, T1 is a better conversion target than T2 if no implicit
+            // conversion from T2 to T1 exists,
             // and at least one of the following holds:
             bool type1ToType2 = Conversions
                 .ClassifyImplicitConversionFromType(type1, type2, ref useSiteInfo)
@@ -3725,8 +3797,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             );
                         }
 
-                        // Downgrade result to Neither if conversion used by the winner isn't actually valid method group conversion.
-                        // This is necessary to preserve compatibility, otherwise we might dismiss "worse", but truly applicable candidate
+                        // Downgrade result to Neither if conversion used by the winner isn't actually valid method group
+                        // conversion.
+                        // This is necessary to preserve compatibility, otherwise we might dismiss "worse", but truly
+                        // applicable candidate
                         // based on a "better", but, in reality, erroneous one.
                         if (node?.Kind == BoundKind.MethodGroup)
                         {
@@ -3893,7 +3967,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // Since we are dealing with variance delegate conversion and delegates have identical parameter
                             // lists, return types must be implicitly convertible in the same direction.
-                            // Or we might be dealing with error return types and we may have one error delegate matching exactly
+                            // Or we might be dealing with error return types and we may have one error delegate matching
+                            // exactly
                             // while another not being an error and not convertible.
                             Debug.Assert(
                                 r1.IsErrorType()
@@ -4125,7 +4200,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var paramRefKind = parameter.RefKind;
 
-            // 'None' argument is allowed to match 'In' parameter and should behave like 'None' for the purpose of overload resolution
+            // 'None' argument is allowed to match 'In' parameter and should behave like 'None' for the purpose
+            // of overload resolution
             // unless this is a method group conversion where 'In' must match 'In'
             // There are even more relaxations with 'ref readonly' parameters feature:
             // - 'ref' argument is allowed to match 'in' parameter,
@@ -4164,9 +4240,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return argRefKind;
             }
 
-            // Omit ref feature for COM interop: We can pass arguments by value for ref parameters if we are calling a method/property on an instance of a COM imported type.
-            // We must ignore the 'ref' on the parameter while determining the applicability of argument for the given method call.
-            // During argument rewriting, we will replace the argument value with a temporary local and pass that local by reference.
+            // Omit ref feature for COM interop: We can pass arguments by value for ref parameters if we are
+            // calling a method/property on an instance of a COM imported type.
+            // We must ignore the 'ref' on the parameter while determining the applicability of argument for the
+            // given method call.
+            // During argument rewriting, we will replace the argument value with a temporary local and pass
+            // that local by reference.
             if (
                 allowRefOmittedArguments
                 && paramRefKind == RefKind.Ref
@@ -4181,7 +4260,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return paramRefKind;
         }
 
-        // In method group conversions, 'in' is allowed to match 'ref' and 'ref readonly' is allowed to match 'ref' or 'in'.
+        // In method group conversions, 'in' is allowed to match 'ref' and 'ref readonly' is allowed to
+        // match 'ref' or 'in'.
         internal static bool AreRefsCompatibleForMethodConversion(
             RefKind x,
             RefKind y,
@@ -4317,7 +4397,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case ArgumentAnalysisResultKind.DuplicateNamedArgument:
                         if (!completeResults)
                             goto default;
-                        // When we are producing more complete results, and we have the wrong number of arguments, we push on
+                        // When we are producing more complete results, and we have the wrong number of arguments, we push
+                        // on
                         // through type inference so that lambda arguments can be bound to their delegate-typed parameters,
                         // thus improving the API and intellisense experience.
                         break;
@@ -4331,7 +4412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // Check after argument analysis, but before more complicated type inference and argument type validation.
+            // Check after argument analysis, but before more complicated type inference and argument type
+            // validation.
             // NOTE: The diagnostic may not be reported (e.g. if the member is later removed as less-derived).
             if (member.HasUseSiteError)
             {
@@ -4361,7 +4443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(!hasAnyRefOmittedArgument || allowRefOmittedArguments);
 
-            // The member passed to the following call is returned in the result (possibly a constructed version of it).
+            // The member passed to the following call is returned in the result (possibly a constructed version
+            // of it).
             // The applicability is checked based on effective parameters passed in.
             var applicableResult = IsApplicable(
                 member,
@@ -4376,8 +4459,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 useSiteInfo: ref useSiteInfo
             );
 
-            // If we were producing complete results and had missing arguments, we pushed on in order to call IsApplicable for
-            // type inference and lambda binding. In that case we still need to return the argument mismatch failure here.
+            // If we were producing complete results and had missing arguments, we pushed on in order to call
+            // IsApplicable for
+            // type inference and lambda binding. In that case we still need to return the argument mismatch
+            // failure here.
             if (completeResults && !argumentAnalysis.IsValid)
             {
                 return new MemberResolutionResult<TMember>(
@@ -4420,7 +4505,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // Check after argument analysis, but before more complicated type inference and argument type validation.
+            // Check after argument analysis, but before more complicated type inference and argument type
+            // validation.
             // NOTE: The diagnostic may not be reported (e.g. if the member is later removed as less-derived).
             if (member.HasUseSiteError)
             {
@@ -4450,7 +4536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(!hasAnyRefOmittedArgument || allowRefOmittedArguments);
 
-            // The member passed to the following call is returned in the result (possibly a constructed version of it).
+            // The member passed to the following call is returned in the result (possibly a constructed version
+            // of it).
             // The applicability is checked based on effective parameters passed in.
             var result = IsApplicable(
                 member,
@@ -4560,7 +4647,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         (Symbol)leastOverriddenMethod.ConstructedFrom.Construct(typeArguments);
 
                     // Spec (§7.6.5.1)
-                    //   Once the (inferred) type arguments are substituted for the corresponding method type parameters,
+                    //   Once the (inferred) type arguments are substituted for the corresponding method type
+                    // parameters,
                     //   all constructed types in the parameter list of F satisfy *their* constraints (§4.4.4),
                     //   and the parameter list of F is applicable with respect to A (§7.5.3.1).
                     //
@@ -4734,7 +4822,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // identical to the parameter passing mode of the corresponding parameter, and
             // * for a value parameter or a parameter array, an implicit conversion exists from the
             //   argument to the type of the corresponding parameter, or
-            // * for a ref or out parameter, the type of the argument is identical to the type of the corresponding
+            // * for a ref or out parameter, the type of the argument is identical to the type of the
+            // corresponding
             //   parameter. After all, a ref or out parameter is an alias for the argument passed.
             ArrayBuilder<Conversion> conversions = null;
             BitVector badArguments = default;
@@ -4784,7 +4873,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     bool hasInterpolatedStringRefMismatch = false;
-                    // We don't consider when we're in default parameter values or attribute arguments to avoid cycles. This is an error scenario,
+                    // We don't consider when we're in default parameter values or attribute arguments to avoid cycles.
+                    // This is an error scenario,
                     // so we don't care if we accidentally miss a parameter being applicable.
                     if (
                         !_binder.InParameterDefaultValue
@@ -4804,9 +4894,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                     )
                     {
-                        // For interpolated strings handlers, we allow an interpolated string expression to be passed as if `ref` was specified
+                        // For interpolated strings handlers, we allow an interpolated string expression to be passed as if
+                        // `ref` was specified
                         // in the source when the handler type is a value type.
-                        // https://github.com/dotnet/roslyn/issues/54584 allow binary additions of interpolated strings to match as well.
+                        // https://github.com/dotnet/roslyn/issues/54584 allow binary additions of interpolated strings to
+                        // match as well.
                         hasInterpolatedStringRefMismatch = true;
                         argumentRefKind = parameterRefKind;
                     }
@@ -4909,15 +5001,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // Spec 7.5.3.1
-            // For each argument in A, the parameter passing mode of the argument (i.e., value, ref, or out) is identical
+            // For each argument in A, the parameter passing mode of the argument (i.e., value, ref, or out) is
+            // identical
             // to the parameter passing mode of the corresponding parameter, and
             // - for a value parameter or a parameter array, an implicit conversion (§6.1)
             //   exists from the argument to the type of the corresponding parameter, or
-            // - for a ref or out parameter, the type of the argument is identical to the type of the corresponding parameter.
+            // - for a ref or out parameter, the type of the argument is identical to the type of the
+            // corresponding parameter.
 
             // effective RefKind has to match unless argument expression is of the type dynamic.
             // This is a bug in Dev11 which we also implement.
-            //       The spec is correct, this is not an intended behavior. We don't fix the bug to avoid a breaking change.
+            //       The spec is correct, this is not an intended behavior. We don't fix the bug to avoid a
+            // breaking change.
             if (
                 !(
                     argRefKind == parRefKind
@@ -4931,9 +5026,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // TODO (tomat): the spec wording isn't final yet
 
             // Spec 7.5.4: Compile-time checking of dynamic overload resolution:
-            // - Then, any parameter whose type is open (i.e. contains a type parameter; see §4.4.2) is elided, along with its corresponding parameter(s).
+            // - Then, any parameter whose type is open (i.e. contains a type parameter; see §4.4.2) is elided,
+            // along with its corresponding parameter(s).
             // and
-            // - The modified parameter list for F is applicable to the modified argument list in terms of section §7.5.3.1
+            // - The modified parameter list for F is applicable to the modified argument list in terms of
+            // section §7.5.3.1
             if (
                 ignoreOpenTypes
                 && parameterType.ContainsTypeParameter(parameterContainer: (MethodSymbol)candidate)
@@ -4977,7 +5074,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (hasInterpolatedStringRefMismatch && !conversion.IsInterpolatedStringHandler)
                 {
-                    // We allowed a ref mismatch under the assumption the conversion would be an interpolated string handler conversion. If it's not, then there was
+                    // We allowed a ref mismatch under the assumption the conversion would be an interpolated string
+                    // handler conversion. If it's not, then there was
                     // actually no conversion because of the refkind mismatch.
                     return Conversion.NoConversion;
                 }

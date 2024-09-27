@@ -115,7 +115,8 @@ namespace System.Xml
             EndElement,
             End,
 
-            // Following values are used in ReadTextChunk, ReadContentAsBase64 and ReadBinHexChunk (V2 streaming methods)
+            // Following values are used in ReadTextChunk, ReadContentAsBase64 and ReadBinHexChunk (V2 streaming
+            // methods)
             ReadValueChunk_OnCachedValue,
             ReadValueChunk_OnPartialValue,
 
@@ -133,7 +134,8 @@ namespace System.Xml
 
         #region Later Init Fileds
 
-        //later init means in the construction stage, do not opend filestream and do not read any data from Stream/TextReader
+        //later init means in the construction stage, do not opend filestream and do not read any data from
+        // Stream/TextReader
         //the purpose is to make the Create of XmlReader do not block on IO.
         class LaterInitParam
         {
@@ -309,8 +311,10 @@ namespace System.Xml
         bool disableUndeclaredEntityCheck;
 #endif
 
-        // Outer XmlReader exposed to the user - either XmlTextReader or XmlTextReaderImpl (when created via XmlReader.Create).
-        // Virtual methods called from within XmlTextReaderImpl must be called on the outer reader so in case the user overrides
+        // Outer XmlReader exposed to the user - either XmlTextReader or XmlTextReaderImpl (when created via
+        // XmlReader.Create).
+        // Virtual methods called from within XmlTextReaderImpl must be called on the outer reader so in
+        // case the user overrides
         // some of the XmlTextReader methods we will call the overriden version.
         XmlReader outerReader;
 
@@ -509,7 +513,8 @@ namespace System.Xml
         }
 
 #if !SILVERLIGHT // Needed only for XmlTextReader
-        // Initializes a new instance of the XmlTextReaderImpl class with the specified stream, baseUri and nametable
+        // Initializes a new instance of the XmlTextReaderImpl class with the specified stream, baseUri and
+        // nametable
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
         internal XmlTextReaderImpl(Stream input)
             : this(string.Empty, input, new NameTable()) { }
@@ -536,7 +541,8 @@ namespace System.Xml
             reportedEncoding = ps.encoding;
         }
 
-        // Initializes a new instance of the XmlTextReaderImpl class with the specified TextReader, baseUri and XmlNameTable.
+        // Initializes a new instance of the XmlTextReaderImpl class with the specified TextReader, baseUri
+        // and XmlNameTable.
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
         internal XmlTextReaderImpl(TextReader input)
             : this(string.Empty, input, new NameTable()) { }
@@ -556,9 +562,11 @@ namespace System.Xml
             reportedEncoding = ps.encoding;
         }
 
-        // Initializes a new instance of XmlTextReaderImpl class for parsing fragments with the specified stream, fragment type and parser context
+        // Initializes a new instance of XmlTextReaderImpl class for parsing fragments with the specified
+        // stream, fragment type and parser context
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
-        // SxS: The method resolves URI but does not expose the resolved value up the stack hence Resource Exposure scope is None.
+        // SxS: The method resolves URI but does not expose the resolved value up the stack hence Resource
+        // Exposure scope is None.
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
@@ -593,7 +601,8 @@ namespace System.Xml
             reportedEncoding = ps.encoding;
         }
 
-        // Initializes a new instance of XmlTextRreaderImpl class for parsing fragments with the specified string, fragment type and parser context
+        // Initializes a new instance of XmlTextRreaderImpl class for parsing fragments with the specified
+        // string, fragment type and parser context
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
         internal XmlTextReaderImpl(
             string xmlFragment,
@@ -640,7 +649,8 @@ namespace System.Xml
             InitFragmentReader(XmlNodeType.XmlDeclaration, context, true);
         }
 
-        // Initializes a new instance of the XmlTextReaderImpl class with the specified url and XmlNameTable.
+        // Initializes a new instance of the XmlTextReaderImpl class with the specified url and
+        // XmlNameTable.
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine)]
@@ -741,7 +751,8 @@ namespace System.Xml
 #if ASYNC
             if (laterInitParam.useAsync)
             {
-                //this will be hit when user create a XmlReader by setting Async, but the first call is Read() instead of ReadAsync(),
+                //this will be hit when user create a XmlReader by setting Async, but the first call is Read()
+                // instead of ReadAsync(),
                 //then we still should create an async stream here. And wait for the method finish.
                 System.Threading.Tasks.Task<object> t =
                     laterInitParam.inputUriResolver.GetEntityAsync(
@@ -1454,7 +1465,8 @@ namespace System.Xml
             }
         }
 
-        // Closes the input stream ot TextReader, changes the ReadState to Closed and sets all properties to zero/string.Empty
+        // Closes the input stream ot TextReader, changes the ReadState to Closed and sets all properties to
+        // zero/string.Empty
         public override void Close()
         {
             Close(closeInput);
@@ -1733,7 +1745,8 @@ namespace System.Xml
             get { return true; }
         }
 
-        // Reads and concatenates content nodes, base64-decodes the results and copies the decoded bytes into the provided buffer
+        // Reads and concatenates content nodes, base64-decodes the results and copies the decoded bytes
+        // into the provided buffer
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)
         {
             // check arguments
@@ -1764,7 +1777,8 @@ namespace System.Xml
                     return ReadContentAsBinary(buffer, index, count);
                 }
             }
-            // first call of ReadContentAsBase64 -> initialize (move to first text child (for elements) and initialize incremental read state)
+            // first call of ReadContentAsBase64 -> initialize (move to first text child (for elements) and
+            // initialize incremental read state)
             else
             {
                 if (readState != ReadState.Interactive)
@@ -1794,7 +1808,8 @@ namespace System.Xml
             return ReadContentAsBinary(buffer, index, count);
         }
 
-        // Reads and concatenates content nodes, binhex-decodes the results and copies the decoded bytes into the provided buffer
+        // Reads and concatenates content nodes, binhex-decodes the results and copies the decoded bytes
+        // into the provided buffer
         public override int ReadContentAsBinHex(byte[] buffer, int index, int count)
         {
             // check arguments
@@ -1825,7 +1840,8 @@ namespace System.Xml
                     return ReadContentAsBinary(buffer, index, count);
                 }
             }
-            // first call of ReadContentAsBinHex -> initialize (move to first text child (for elements) and initialize incremental read state)
+            // first call of ReadContentAsBinHex -> initialize (move to first text child (for elements) and
+            // initialize incremental read state)
             else
             {
                 if (readState != ReadState.Interactive)
@@ -1848,14 +1864,16 @@ namespace System.Xml
                 }
             }
 
-            // setup binhex decoder (when in first ReadContentAsBinHex call or when mixed with ReadContentAsBase64)
+            // setup binhex decoder (when in first ReadContentAsBinHex call or when mixed with
+            // ReadContentAsBase64)
             InitBinHexDecoder();
 
             // read binary data
             return ReadContentAsBinary(buffer, index, count);
         }
 
-        // Reads and concatenates content of an element, base64-decodes the results and copies the decoded bytes into the provided buffer
+        // Reads and concatenates content of an element, base64-decodes the results and copies the decoded
+        // bytes into the provided buffer
         public override int ReadElementContentAsBase64(byte[] buffer, int index, int count)
         {
             // check arguments
@@ -1916,7 +1934,8 @@ namespace System.Xml
             return ReadElementContentAsBinary(buffer, index, count);
         }
 
-        // Reads and concatenates content of an element, binhex-decodes the results and copies the decoded bytes into the provided buffer
+        // Reads and concatenates content of an element, binhex-decodes the results and copies the decoded
+        // bytes into the provided buffer
         public override int ReadElementContentAsBinHex(byte[] buffer, int index, int count)
         {
             // check arguments
@@ -1970,7 +1989,8 @@ namespace System.Xml
                 }
             }
 
-            // setup binhex decoder (when in first ReadContentAsBinHex call or when mixed with ReadContentAsBase64)
+            // setup binhex decoder (when in first ReadContentAsBinHex call or when mixed with
+            // ReadContentAsBase64)
             InitBinHexDecoder();
 
             // read binary data
@@ -2211,7 +2231,8 @@ namespace System.Xml
             }
         }
 
-        // Enables or disables XML 1.0 normalization (incl. end-of-line normalization and normalization of attributes)
+        // Enables or disables XML 1.0 normalization (incl. end-of-line normalization and normalization of
+        // attributes)
         internal bool Normalization
         {
             get
@@ -2247,7 +2268,8 @@ namespace System.Xml
             get { return (readState == ReadState.Interactive) ? reportedEncoding : null; }
         }
 
-        // Spefifies whitespace handling of the XML document, i.e. whether return all namespaces, only significant ones or none
+        // Spefifies whitespace handling of the XML document, i.e. whether return all namespaces, only
+        // significant ones or none
         internal WhitespaceHandling WhitespaceHandling
         {
             get
@@ -2320,7 +2342,8 @@ namespace System.Xml
             }
         }
 
-        // Needed to check from the schema validation if the caller set the resolver so we'll not override it
+        // Needed to check from the schema validation if the caller set the resolver so we'll not override
+        // it
         internal bool IsResolverSet
         {
             get { return xmlResolverIsSet; }
@@ -2342,7 +2365,8 @@ namespace System.Xml
             }
         }
 
-        // Reset the state of the reader so the reader is ready to parse another XML document from the same stream.
+        // Reset the state of the reader so the reader is ready to parse another XML document from the same
+        // stream.
         internal void ResetState()
         {
             Debug.Assert(
@@ -2435,7 +2459,8 @@ namespace System.Xml
             return new StringReader(remainer);
         }
 
-        // Reads the contents of an element including markup into a character buffer. Wellformedness checks are limited.
+        // Reads the contents of an element including markup into a character buffer. Wellformedness checks
+        // are limited.
         // This method is designed to read large streams of embedded text by calling it successively.
         internal int ReadChars(char[] buffer, int index, int count)
         {
@@ -2480,7 +2505,8 @@ namespace System.Xml
             }
         }
 
-        // Reads the contents of an element including markup and base64-decodes it into a byte buffer. Wellformedness checks are limited.
+        // Reads the contents of an element including markup and base64-decodes it into a byte buffer.
+        // Wellformedness checks are limited.
         // This method is designed to read base64-encoded large streams of bytes by calling it successively.
         internal int ReadBase64(byte[] array, int offset, int len)
         {
@@ -2520,7 +2546,8 @@ namespace System.Xml
             }
         }
 
-        // Reads the contents of an element including markup and binhex-decodes it into a byte buffer. Wellformedness checks are limited.
+        // Reads the contents of an element including markup and binhex-decodes it into a byte buffer.
+        // Wellformedness checks are limited.
         // This method is designed to read binhex-encoded large streams of bytes by calling it successively.
         internal int ReadBinHex(byte[] array, int offset, int len)
         {
@@ -2603,7 +2630,8 @@ namespace System.Xml
 
         internal Uri DtdParserProxy_BaseUri
         {
-            // SxS: ps.baseUri may be initialized in the constructor (public XmlTextReaderImpl( string url, XmlNameTable nt )) based on
+            // SxS: ps.baseUri may be initialized in the constructor (public XmlTextReaderImpl( string url,
+            // XmlNameTable nt )) based on
             // url provided by the user. Here the property returns ps.BaseUri - so it may expose a path.
 #if !SILVERLIGHT
             [ResourceConsumption(ResourceScope.Machine)]
@@ -2816,7 +2844,8 @@ namespace System.Xml
             return true;
         }
 
-        // SxS: The caller did not provide any SxS sensitive name or resource. No resource is being exposed either.
+        // SxS: The caller did not provide any SxS sensitive name or resource. No resource is being exposed
+        // either.
         // It is OK to suppress SxS warning.
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
@@ -3153,7 +3182,8 @@ namespace System.Xml
                 ps.chars = new char[bufferSize + 1];
             }
 
-            // make sure we have at least 4 bytes to detect the encoding (no preamble of System.Text supported encoding is longer than 4 bytes)
+            // make sure we have at least 4 bytes to detect the encoding (no preamble of System.Text supported
+            // encoding is longer than 4 bytes)
             ps.bytePos = 0;
             while (ps.bytesUsed < 4 && ps.bytes.Length - ps.bytesUsed > 0)
             {
@@ -3351,7 +3381,8 @@ namespace System.Xml
         }
 
 #if !SILVERLIGHT // Needed only for XmlTextReader
-        // SxS: This method resolve Uri but does not expose it to the caller. It's OK to suppress the warning.
+        // SxS: This method resolve Uri but does not expose it to the caller. It's OK to suppress the
+        // warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
         private void OpenUrl()
@@ -3409,7 +3440,8 @@ namespace System.Xml
         }
 #endif
 
-        // Stream input only: detect encoding from the first 4 bytes of the byte buffer starting at ps.bytes[ps.bytePos]
+        // Stream input only: detect encoding from the first 4 bytes of the byte buffer starting at
+        // ps.bytes[ps.bytePos]
         private Encoding DetectEncoding()
         {
             Debug.Assert(ps.bytes != null);
@@ -3559,7 +3591,8 @@ namespace System.Xml
             }
         }
 
-        // Returns the Encoding object for the given encoding name, if the reader's encoding can be switched to that encoding.
+        // Returns the Encoding object for the given encoding name, if the reader's encoding can be switched
+        // to that encoding.
         // Performs checks whether switching from current encoding to specified encoding is allowed.
         private Encoding CheckEncoding(string newEncodingName)
         {
@@ -3698,10 +3731,13 @@ namespace System.Xml
         // Reads more data to the character buffer, discarding already parsed chars / decoded bytes.
         int ReadData()
         {
-            // Append Mode:  Append new bytes and characters to the buffers, do not rewrite them. Allocate new buffers
+            // Append Mode:  Append new bytes and characters to the buffers, do not rewrite them. Allocate new
+            // buffers
             //               if the current ones are full
-            // Rewrite Mode: Reuse the buffers. If there is less than half of the char buffer left for new data, move
-            //               the characters that has not been parsed yet to the front of the buffer. Same for bytes.
+            // Rewrite Mode: Reuse the buffers. If there is less than half of the char buffer left for new data,
+            // move
+            //               the characters that has not been parsed yet to the front of the buffer. Same for
+            // bytes.
 
             if (ps.isEof)
             {
@@ -3993,7 +4029,8 @@ namespace System.Xml
             }
             ps.charPos += 5;
 
-            // parsing of text declarations cannot change global stringBuidler or curNode as we may be in the middle of a text node
+            // parsing of text declarations cannot change global stringBuidler or curNode as we may be in the
+            // middle of a text node
             Debug.Assert(stringBuilder.Length == 0 || isTextDecl);
             BufferBuilder sb = isTextDecl ? new BufferBuilder() : stringBuilder;
 
@@ -5030,7 +5067,8 @@ namespace System.Xml
                         {
                             // VC constraint:
                             // The standalone document declaration must have the value "no" if any external markup declarations
-                            // contain declarations of attributes with values subject to normalization, where the attribute appears in
+                            // contain declarations of attributes with values subject to normalization, where the attribute
+                            // appears in
                             // the document with a value which will change as a result of normalization,
                             string oldValue = attr.StringValue;
                             attr.TrimSpacesInValue();
@@ -6170,7 +6208,8 @@ namespace System.Xml
 
         // Parses text or white space node.
         // Returns true if a node has been parsed and its data set to curNode.
-        // Returns false when a white space has been parsed and ignored (according to current whitespace handling) or when parsing mode is not Full.
+        // Returns false when a white space has been parsed and ignored (according to current whitespace
+        // handling) or when parsing mode is not Full.
         // Also returns false if there is no text to be parsed.
         private bool ParseText()
         {
@@ -6237,7 +6276,8 @@ namespace System.Xml
                     stringBuilder.Length = 0;
                     return true;
                 }
-                // V2 reader -> do not cache the whole value yet, read only up to 4kB to decide whether the value is a whitespace
+                // V2 reader -> do not cache the whole value yet, read only up to 4kB to decide whether the value is
+                // a whitespace
                 else
                 {
                     bool fullValue = false;
@@ -6327,11 +6367,15 @@ namespace System.Xml
         }
 
         // Parses a chunk of text starting at ps.charPos.
-        //   startPos .... start position of the text chunk that has been parsed (can differ from ps.charPos before the call)
-        //   endPos ...... end position of the text chunk that has been parsed (can differ from ps.charPos after the call)
-        //   ourOrChars .. all parsed character bigger or equal to 0x20 or-ed (|) into a single int. It can be used for whitespace detection
+        //   startPos .... start position of the text chunk that has been parsed (can differ from ps.charPos
+        // before the call)
+        //   endPos ...... end position of the text chunk that has been parsed (can differ from ps.charPos
+        // after the call)
+        //   ourOrChars .. all parsed character bigger or equal to 0x20 or-ed (|) into a single int. It can
+        // be used for whitespace detection
         //                 (the text has a non-whitespace character if outOrChars > 0x20).
-        // Returns true when the whole value has been parsed. Return false when it needs to be called again to get a next chunk of value.
+        // Returns true when the whole value has been parsed. Return false when it needs to be called again
+        // to get a next chunk of value.
         private bool ParseText(out int startPos, out int endPos, ref int outOrChars)
         {
             char[] chars = ps.chars;
@@ -6586,7 +6630,8 @@ namespace System.Xml
             return c == '<';
         }
 
-        // When in ParsingState.PartialTextValue, this method parses and caches the rest of the value and stores it in curNode.
+        // When in ParsingState.PartialTextValue, this method parses and caches the rest of the value and
+        // stores it in curNode.
         void FinishPartialValue()
         {
             Debug.Assert(stringBuilder.Length == 0);
@@ -7099,7 +7144,8 @@ namespace System.Xml
             return ParsePI(null);
         }
 
-        // Parses processing instruction; if piInDtdStringBuilder != null, the processing instruction is in DTD and
+        // Parses processing instruction; if piInDtdStringBuilder != null, the processing instruction is in
+        // DTD and
         // it will be saved in the passed string builder (target, whitespace & value).
         private bool ParsePI(BufferBuilder piInDtdStringBuilder)
         {
@@ -7424,7 +7470,8 @@ namespace System.Xml
             }
         }
 
-        // Parses a chunk of CDATA section or comment. Returns true when the end of CDATA or comment was reached.
+        // Parses a chunk of CDATA section or comment. Returns true when the end of CDATA or comment was
+        // reached.
         private bool ParseCDataOrComment(XmlNodeType type, out int outStartPos, out int outEndPos)
         {
             if (ps.charsUsed - ps.charPos < 3)
@@ -8155,9 +8202,11 @@ namespace System.Xml
         }
 
         // Parses numeric character entity reference (e.g. &#32; &#x20;).
-        //      - replaces the last one or two character of the entity reference (';' and the character before) with the referenced
+        //      - replaces the last one or two character of the entity reference (';' and the character
+        // before) with the referenced
         //        character or surrogates pair (if expand == true)
-        //      - returns position of the end of the character reference, that is of the character next to the original ';'
+        //      - returns position of the end of the character reference, that is of the character next to
+        // the original ';'
         //      - if (expand == true) then ps.charPos is changed to point to the replaced character
         private int ParseNumericCharRef(
             bool expand,
@@ -8200,9 +8249,11 @@ namespace System.Xml
         // Parses numeric character entity reference (e.g. &#32; &#x20;).
         // Returns -2 if more data is needed in the buffer
         // Otherwise
-        //      - replaces the last one or two character of the entity reference (';' and the character before) with the referenced
+        //      - replaces the last one or two character of the entity reference (';' and the character
+        // before) with the referenced
         //        character or surrogates pair (if expand == true)
-        //      - returns position of the end of the character reference, that is of the character next to the original ';'
+        //      - returns position of the end of the character reference, that is of the character next to
+        // the original ';'
         private int ParseNumericCharRefInline(
             int startPos,
             bool expand,
@@ -8353,8 +8404,10 @@ namespace System.Xml
         // Parses named character entity reference (&amp; &apos; &lt; &gt; &quot;).
         // Returns -1 if the reference is not a character entity reference.
         // Otherwise
-        //      - replaces the last character of the entity reference (';') with the referenced character (if expand == true)
-        //      - returns position of the end of the character reference, that is of the character next to the original ';'
+        //      - replaces the last character of the entity reference (';') with the referenced character
+        // (if expand == true)
+        //      - returns position of the end of the character reference, that is of the character next to
+        // the original ';'
         //      - if (expand == true) then ps.charPos is changed to point to the replaced character
         private int ParseNamedCharRef(bool expand, BufferBuilder internalSubsetBuilder)
         {
@@ -8387,8 +8440,10 @@ namespace System.Xml
         // Returns -1 if the reference is not a character entity reference.
         // Returns -2 if more data is needed in the buffer
         // Otherwise
-        //      - replaces the last character of the entity reference (';') with the referenced character (if expand == true)
-        //      - returns position of the end of the character reference, that is of the character next to the original ';'
+        //      - replaces the last character of the entity reference (';') with the referenced character
+        // (if expand == true)
+        //      - returns position of the end of the character reference, that is of the character next to
+        // the original ';'
         private int ParseNamedCharRefInline(
             int startPos,
             bool expand,
@@ -8955,7 +9010,8 @@ namespace System.Xml
             curNode.xmlContextPushed = false;
         }
 
-        // Returns the whitespace node type according to the current whitespaceHandling setting and xml:space
+        // Returns the whitespace node type according to the current whitespaceHandling setting and
+        // xml:space
         private XmlNodeType GetWhitespaceType()
         {
             if (whitespaceHandling != WhitespaceHandling.None)
@@ -8984,7 +9040,8 @@ namespace System.Xml
             }
         }
 
-        // This method resolves and opens an external DTD subset or an external entity based on its SYSTEM or PUBLIC ID.
+        // This method resolves and opens an external DTD subset or an external entity based on its SYSTEM
+        // or PUBLIC ID.
         // SxS: This method may expose a name if a resource in baseUri (ref) parameter.
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine)]
@@ -9012,7 +9069,8 @@ namespace System.Xml
                 }
                 catch (Exception)
                 {
-                    // Intentionally empty - ---- all exception related to PUBLIC ID and try opening the entity via the SYSTEM ID
+                    // Intentionally empty - ---- all exception related to PUBLIC ID and try opening the entity via the
+                    // SYSTEM ID
                 }
             }
 
@@ -9070,7 +9128,8 @@ namespace System.Xml
             }
         }
 
-        // This method opens the URI as a TextReader or Stream, pushes new ParsingStateState on the stack and calls InitStreamInput or InitTextReaderInput.
+        // This method opens the URI as a TextReader or Stream, pushes new ParsingStateState on the stack
+        // and calls InitStreamInput or InitTextReaderInput.
         // Returns:
         //    - true when everything went ok.
         //    - false when XmlResolver.GetEntity returned null
@@ -9113,7 +9172,8 @@ namespace System.Xml
         }
 
         // returns true if real entity has been pushed, false if fake entity (=empty content entity)
-        // SxS: The method neither takes any name of resource directly nor it exposes any resource to the caller.
+        // SxS: The method neither takes any name of resource directly nor it exposes any resource to the
+        // caller.
         // Entity info was created based on source document. It's OK to suppress the SxS warning
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
@@ -9560,7 +9620,8 @@ namespace System.Xml
                                     Debug.Assert(ps.charPos - startPos == 0);
 
                                     int colonPos;
-                                    // ParseQName can flush the buffer, so we need to update the startPos, pos and chars after calling it
+                                    // ParseQName can flush the buffer, so we need to update the startPos, pos and chars after calling
+                                    // it
                                     int endPos = ParseQName(true, 2, out colonPos);
                                     if (
                                         XmlConvert.StrEqual(
@@ -9610,7 +9671,8 @@ namespace System.Xml
                                     Debug.Assert(ps.charPos - startPos == 0);
 
                                     int colonPos;
-                                    // ParseQName can flush the buffer, so we need to update the startPos, pos and chars after calling it
+                                    // ParseQName can flush the buffer, so we need to update the startPos, pos and chars after calling
+                                    // it
                                     int endPos = ParseQName(true, 1, out colonPos);
                                     if (
                                         XmlConvert.StrEqual(
@@ -10073,9 +10135,11 @@ namespace System.Xml
             return -1;
         }
 
-        // This method is used to enable parsing of zero-terminated streams. The old XmlTextReader implementation used
+        // This method is used to enable parsing of zero-terminated streams. The old XmlTextReader
+        // implementation used
         // to parse such streams, we this one needs to do that as well.
-        // If the last characters decoded from the stream is 0 and the stream is in EOF state, this method will remove
+        // If the last characters decoded from the stream is 0 and the stream is in EOF state, this method
+        // will remove
         // the character from the parsing buffer (decrements ps.charsUsed).
         // Note that this method calls ReadData() which may change the value of ps.chars and ps.charPos.
         private bool ZeroEndingStream(int pos)
@@ -10349,7 +10413,8 @@ namespace System.Xml
             {
                 validatingReaderCompatFlag = value;
 
-                // Fix for VSWhidbey 516556; These namespaces must be added to the nametable for back compat reasons.
+                // Fix for VSWhidbey 516556; These namespaces must be added to the nametable for back compat
+                // reasons.
                 if (value)
                 {
                     nameTable.Add(XmlReservedNs.NsXs); // Note: this is equal to XmlReservedNs.NsXsd in Everett
@@ -10789,7 +10854,8 @@ namespace System.Xml
             incReadDecoder = binHexDecoder;
         }
 
-        // SxS: URIs are resolved only to be compared. No resource exposure. It's OK to suppress the SxS warning.
+        // SxS: URIs are resolved only to be compared. No resource exposure. It's OK to suppress the SxS
+        // warning.
 #if !SILVERLIGHT
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
@@ -10939,7 +11005,8 @@ namespace System.Xml
             }
         }
 
-        // StripSpaces removes spaces at the beginning and at the end of the value and replaces sequences of spaces with a single space
+        // StripSpaces removes spaces at the beginning and at the end of the value and replaces sequences of
+        // spaces with a single space
         internal static string StripSpaces(string value)
         {
             int len = value.Length;
@@ -11008,7 +11075,8 @@ namespace System.Xml
             }
         }
 
-        // StripSpaces removes spaces at the beginning and at the end of the value and replaces sequences of spaces with a single space
+        // StripSpaces removes spaces at the beginning and at the end of the value and replaces sequences of
+        // spaces with a single space
         internal static void StripSpaces(char[] value, int index, ref int len)
         {
             if (len <= 0)

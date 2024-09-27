@@ -12,7 +12,8 @@ namespace System.Web.UI.WebControls.WebParts
     using System.Web.UI.WebControls;
 
     /// <devdoc>
-    /// Base class for all Part classes in the WebPart framework.  Common to all Part controls are properties that
+    /// Base class for all Part classes in the WebPart framework.  Common to all Part controls are
+    // properties that
     /// allow the control to be rendered in a modular fashion.
     /// </devdoc>
     [

@@ -33,8 +33,11 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// <see cref='System.Web.UI.WebControls.DataControlFieldCell'/> gets the value of ValidateRequestMode from it's <see cref='System.Web.UI.WebControls.DataControlFieldCell.ContainingField'/>.
-        /// The ValidateRequestMode property should not be set directly on <see cref='System.Web.UI.WebControls.DataControlFieldCell'/>.
+        /// <see cref='System.Web.UI.WebControls.DataControlFieldCell'/> gets the value of
+        // ValidateRequestMode from it's <see
+        // cref='System.Web.UI.WebControls.DataControlFieldCell.ContainingField'/>.
+        /// The ValidateRequestMode property should not be set directly on <see
+        // cref='System.Web.UI.WebControls.DataControlFieldCell'/>.
         /// </summary>
         public override ValidateRequestMode ValidateRequestMode
         {

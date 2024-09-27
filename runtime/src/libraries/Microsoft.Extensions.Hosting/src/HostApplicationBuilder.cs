@@ -15,7 +15,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
-    /// Represents a hosted applications and services builder which helps manage configuration, logging, lifetime, and more.
+    /// Represents a hosted applications and services builder which helps manage configuration, logging,
+    // lifetime, and more.
     /// </summary>
     public sealed class HostApplicationBuilder : IHostApplicationBuilder
     {
@@ -33,40 +34,62 @@ namespace Microsoft.Extensions.Hosting
         private bool _hostBuilt;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with preconfigured defaults.
+        /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with preconfigured
+        // defaults.
         /// </summary>
         /// <remarks>
         ///   The following defaults are applied to the returned <see cref="HostApplicationBuilder"/>:
         ///   <list type="bullet">
-        ///     <item><description>set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see cref="Directory.GetCurrentDirectory()"/></description></item>
-        ///     <item><description>load host <see cref="IConfiguration"/> from "DOTNET_" prefixed environment variables</description></item>
-        ///     <item><description>load host <see cref="IConfiguration"/> from supplied command line args</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see cref="IHostEnvironment.EnvironmentName"/>].json'</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from User Secrets when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from environment variables</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from supplied command line args</description></item>
-        ///     <item><description>configure the <see cref="ILoggerFactory"/> to log to the console, debug, and event source output</description></item>
-        ///     <item><description>enables scope validation on the dependency injection container when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development'</description></item>
+        ///     <item><description>set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of
+        // <see cref="Directory.GetCurrentDirectory()"/></description></item>
+        ///     <item><description>load host <see cref="IConfiguration"/> from "DOTNET_" prefixed
+        // environment variables</description></item>
+        ///     <item><description>load host <see cref="IConfiguration"/> from supplied command line
+        // args</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from 'appsettings.json' and
+        // 'appsettings.[<see cref="IHostEnvironment.EnvironmentName"/>].json'</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from User Secrets when <see
+        // cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry
+        // assembly</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from environment
+        // variables</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from supplied command line
+        // args</description></item>
+        ///     <item><description>configure the <see cref="ILoggerFactory"/> to log to the console, debug,
+        // and event source output</description></item>
+        ///     <item><description>enables scope validation on the dependency injection container when <see
+        // cref="IHostEnvironment.EnvironmentName"/> is 'Development'</description></item>
         ///   </list>
         /// </remarks>
         public HostApplicationBuilder()
             : this(args: null) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with preconfigured defaults.
+        /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with preconfigured
+        // defaults.
         /// </summary>
         /// <remarks>
         ///   The following defaults are applied to the returned <see cref="HostApplicationBuilder"/>:
         ///   <list type="bullet">
-        ///     <item><description>set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of <see cref="Directory.GetCurrentDirectory()"/></description></item>
-        ///     <item><description>load host <see cref="IConfiguration"/> from "DOTNET_" prefixed environment variables</description></item>
-        ///     <item><description>load host <see cref="IConfiguration"/> from supplied command line args</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from 'appsettings.json' and 'appsettings.[<see cref="IHostEnvironment.EnvironmentName"/>].json'</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from User Secrets when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry assembly</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from environment variables</description></item>
-        ///     <item><description>load app <see cref="IConfiguration"/> from supplied command line args</description></item>
-        ///     <item><description>configure the <see cref="ILoggerFactory"/> to log to the console, debug, and event source output</description></item>
-        ///     <item><description>enables scope validation on the dependency injection container when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development'</description></item>
+        ///     <item><description>set the <see cref="IHostEnvironment.ContentRootPath"/> to the result of
+        // <see cref="Directory.GetCurrentDirectory()"/></description></item>
+        ///     <item><description>load host <see cref="IConfiguration"/> from "DOTNET_" prefixed
+        // environment variables</description></item>
+        ///     <item><description>load host <see cref="IConfiguration"/> from supplied command line
+        // args</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from 'appsettings.json' and
+        // 'appsettings.[<see cref="IHostEnvironment.EnvironmentName"/>].json'</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from User Secrets when <see
+        // cref="IHostEnvironment.EnvironmentName"/> is 'Development' using the entry
+        // assembly</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from environment
+        // variables</description></item>
+        ///     <item><description>load app <see cref="IConfiguration"/> from supplied command line
+        // args</description></item>
+        ///     <item><description>configure the <see cref="ILoggerFactory"/> to log to the console, debug,
+        // and event source output</description></item>
+        ///     <item><description>enables scope validation on the dependency injection container when <see
+        // cref="IHostEnvironment.EnvironmentName"/> is 'Development'</description></item>
         ///   </list>
         /// </remarks>
         /// <param name="args">The command line args.</param>
@@ -76,7 +99,8 @@ namespace Microsoft.Extensions.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/>.
         /// </summary>
-        /// <param name="settings">Settings controlling initial configuration and whether default settings should be used.</param>
+        /// <param name="settings">Settings controlling initial configuration and whether default settings
+        // should be used.</param>
         public HostApplicationBuilder(HostApplicationBuilderSettings? settings)
         {
             settings ??= new HostApplicationBuilderSettings();
@@ -120,7 +144,8 @@ namespace Microsoft.Extensions.Hosting
 
             _createServiceProvider = () =>
             {
-                // Call _configureContainer in case anyone adds callbacks via HostBuilderAdapter.ConfigureContainer<IServiceCollection>() during build.
+                // Call _configureContainer in case anyone adds callbacks via
+                // HostBuilderAdapter.ConfigureContainer<IServiceCollection>() during build.
                 // Otherwise, this no-ops.
                 _configureContainer(Services);
                 return serviceProviderOptions is null
@@ -146,7 +171,8 @@ namespace Microsoft.Extensions.Hosting
 
             _createServiceProvider = () =>
             {
-                // Call _configureContainer in case anyone adds callbacks via HostBuilderAdapter.ConfigureContainer<IServiceCollection>() during build.
+                // Call _configureContainer in case anyone adds callbacks via
+                // HostBuilderAdapter.ConfigureContainer<IServiceCollection>() during build.
                 // Otherwise, this no-ops.
                 _configureContainer(Services);
                 return Services.BuildServiceProvider();
@@ -161,7 +187,8 @@ namespace Microsoft.Extensions.Hosting
             out MetricsBuilder metrics
         )
         {
-            // Command line args are added even when settings.DisableDefaults == true. If the caller didn't want settings.Args applied,
+            // Command line args are added even when settings.DisableDefaults == true. If the caller didn't want
+            // settings.Args applied,
             // they wouldn't have set them on the settings.
             HostingHostBuilderExtensions.AddCommandLineConfig(Configuration, settings.Args);
 
@@ -263,7 +290,8 @@ namespace Microsoft.Extensions.Hosting
             _createServiceProvider = () =>
             {
                 TContainerBuilder containerBuilder = factory.CreateBuilder(Services);
-                // Call _configureContainer in case anyone adds more callbacks via HostBuilderAdapter.ConfigureContainer<TContainerBuilder>() during build.
+                // Call _configureContainer in case anyone adds more callbacks via
+                // HostBuilderAdapter.ConfigureContainer<TContainerBuilder>() during build.
                 // Otherwise, this is equivalent to configure?.Invoke(containerBuilder).
                 _configureContainer(containerBuilder);
                 return factory.CreateServiceProvider(containerBuilder);
@@ -297,7 +325,8 @@ namespace Microsoft.Extensions.Hosting
             return HostBuilder.ResolveHost(_appServices, diagnosticListener);
         }
 
-        // Lazily allocate HostBuilderAdapter so the allocations can be avoided if there's nothing observing the events.
+        // Lazily allocate HostBuilderAdapter so the allocations can be avoided if there's nothing observing
+        // the events.
         internal IHostBuilder AsHostBuilder() =>
             _hostBuilderAdapter ??= new HostBuilderAdapter(this);
 
@@ -343,7 +372,8 @@ namespace Microsoft.Extensions.Hosting
                         configureHostAction(config);
                     }
 
-                    // Disallow changing any host settings this late in the cycle. The reasoning is that we've already loaded the default configuration
+                    // Disallow changing any host settings this late in the cycle. The reasoning is that we've already
+                    // loaded the default configuration
                     // and done other things based on environment name, application name or content root.
                     if (
                         !string.Equals(
@@ -377,8 +407,10 @@ namespace Microsoft.Extensions.Hosting
                             )
                         );
                     }
-                    // It's okay if the ConfigureHostConfiguration callbacks either left the config unchanged or set it back to the real ContentRootPath.
-                    // Setting it to anything else indicates code intends to change the content root via HostFactoryResolver which is unsupported.
+                    // It's okay if the ConfigureHostConfiguration callbacks either left the config unchanged or set it
+                    // back to the real ContentRootPath.
+                    // Setting it to anything else indicates code intends to change the content root via
+                    // HostFactoryResolver which is unsupported.
                     string? currentContentRootConfig = config[HostDefaults.ContentRootKey];
                     if (
                         !string.Equals(

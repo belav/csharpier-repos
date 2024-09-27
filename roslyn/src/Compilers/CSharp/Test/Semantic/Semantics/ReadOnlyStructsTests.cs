@@ -465,7 +465,8 @@ public partial struct S
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (10,27): error CS8662: Both partial method declarations must be readonly or neither may be readonly
+                // (10,27): error CS8662: Both partial method declarations must be readonly or neither may be
+                // readonly
                 //     readonly partial void M()
                 Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M")
                     .WithLocation(10, 27),
@@ -503,7 +504,8 @@ public partial struct S
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (10,18): error CS8662: Both partial method declarations must be readonly or neither may be readonly
+                // (10,18): error CS8662: Both partial method declarations must be readonly or neither may be
+                // readonly
                 //     partial void M()
                 Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M")
                     .WithLocation(10, 18)
@@ -579,7 +581,8 @@ public unsafe struct S2
 ";
             var comp = CreateCompilation(csharp, options: TestOptions.UnsafeReleaseDll);
             comp.VerifyDiagnostics(
-                // (12,25): warning CS8655: Call to non-readonly member 'S1.GetPinnableReference()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (12,25): warning CS8655: Call to non-readonly member 'S1.GetPinnableReference()' from a
+                // 'readonly' member results in an implicit copy of 'this'.
                 //         fixed (int *i = this) {} // warn
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                     .WithArguments("S1.GetPinnableReference()", "this")
@@ -697,7 +700,8 @@ public struct S
 
             var verifier = CompileAndVerify(csharp, expectedOutput: "123");
             verifier.VerifyDiagnostics(
-                // (11,13): warning CS8655: Call to non-readonly member 'S.M()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (11,13): warning CS8655: Call to non-readonly member 'S.M()' from a 'readonly' member results in
+                // an implicit copy of 'this'.
                 //             M();
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "M")
                     .WithArguments("S.M()", "this")
@@ -743,7 +747,8 @@ public struct S
 
             var verifier = CompileAndVerify(csharp, expectedOutput: "123");
             verifier.VerifyDiagnostics(
-                // (11,17): warning CS8655: Call to non-readonly member 'S.P2.get' from a 'readonly' member results in an implicit copy of 'this'.
+                // (11,17): warning CS8655: Call to non-readonly member 'S.P2.get' from a 'readonly' member results
+                // in an implicit copy of 'this'.
                 //             _ = P2; // warning
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "P2")
                     .WithArguments("S.P2.get", "this")
@@ -909,12 +914,14 @@ True
 False"
             );
             verifier.VerifyDiagnostics(
-                // (10,9): warning CS8656: Call to non-readonly member 'S.E.add' from a 'readonly' member results in an implicit copy of 'this'.
+                // (10,9): warning CS8656: Call to non-readonly member 'S.E.add' from a 'readonly' member results in
+                // an implicit copy of 'this'.
                 //         E += () => {}; // warning
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "E")
                     .WithArguments("S.E.add", "this")
                     .WithLocation(10, 9),
-                // (12,9): warning CS8656: Call to non-readonly member 'S.E.remove' from a 'readonly' member results in an implicit copy of 'this'.
+                // (12,9): warning CS8656: Call to non-readonly member 'S.E.remove' from a 'readonly' member results
+                // in an implicit copy of 'this'.
                 //         E -= () => {}; // warning
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "E")
                     .WithArguments("S.E.remove", "this")
@@ -1050,12 +1057,14 @@ public struct S
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (9,9): warning CS8656: Call to non-readonly member 'S.E.add' from a 'readonly' member results in an implicit copy of 'this'.
+                // (9,9): warning CS8656: Call to non-readonly member 'S.E.add' from a 'readonly' member results in
+                // an implicit copy of 'this'.
                 //         E += handler;
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "E")
                     .WithArguments("S.E.add", "this")
                     .WithLocation(9, 9),
-                // (10,9): warning CS8656: Call to non-readonly member 'S.E.remove' from a 'readonly' member results in an implicit copy of 'this'.
+                // (10,9): warning CS8656: Call to non-readonly member 'S.E.remove' from a 'readonly' member results
+                // in an implicit copy of 'this'.
                 //         E -= handler;
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "E")
                     .WithArguments("S.E.remove", "this")
@@ -1129,7 +1138,8 @@ public struct S2
     }
 }
 ";
-            // should warn about calling s2.M2 in warning wave (see https://github.com/dotnet/roslyn/issues/33968)
+            // should warn about calling s2.M2 in warning wave (see
+            // https://github.com/dotnet/roslyn/issues/33968)
             CompileAndVerify(csharp, expectedOutput: "0");
         }
 
@@ -1168,7 +1178,8 @@ public struct S2
 }
 ";
             var verifier = CompileAndVerify(csharp, expectedOutput: "123");
-            // should warn about calling s2.M2 in warning wave (see https://github.com/dotnet/roslyn/issues/33968)
+            // should warn about calling s2.M2 in warning wave (see
+            // https://github.com/dotnet/roslyn/issues/33968)
             verifier.VerifyDiagnostics();
         }
 
@@ -1273,7 +1284,8 @@ public class Program
             );
 
             comp.VerifyDiagnostics(
-                // (8,9): error CS1650: Fields of static readonly field 'Program.s' cannot be assigned to (except in a static constructor or a variable initializer)
+                // (8,9): error CS1650: Fields of static readonly field 'Program.s' cannot be assigned to (except in
+                // a static constructor or a variable initializer)
                 //         s.field = 123;
                 Diagnostic(ErrorCode.ERR_AssgReadonlyStatic2, "s.field")
                     .WithArguments("Program.s")
@@ -1790,12 +1802,14 @@ public struct S
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (4,16): error CS8663: 'S.P1': 'readonly' can only be used on accessors if the property or indexer has both a get and a set accessor
+                // (4,16): error CS8663: 'S.P1': 'readonly' can only be used on accessors if the property or indexer
+                // has both a get and a set accessor
                 //     public int P1 { readonly get; }
                 Diagnostic(ErrorCode.ERR_ReadOnlyModMissingAccessor, "P1")
                     .WithArguments("S.P1")
                     .WithLocation(4, 16),
-                // (7,16): error CS8660: Cannot specify 'readonly' modifiers on both accessors of property or indexer 'S.P4'. Instead, put a 'readonly' modifier on the property itself.
+                // (7,16): error CS8660: Cannot specify 'readonly' modifiers on both accessors of property or
+                // indexer 'S.P4'. Instead, put a 'readonly' modifier on the property itself.
                 //     public int P4 { readonly get; readonly set; }
                 Diagnostic(ErrorCode.ERR_DuplicatePropertyReadOnlyMods, "P4")
                     .WithArguments("S.P4")
@@ -1805,17 +1819,20 @@ public struct S
                 Diagnostic(ErrorCode.ERR_AutoSetterCantBeReadOnly, "set")
                     .WithArguments("S.P4.set")
                     .WithLocation(7, 44),
-                // (8,25): error CS8658: Auto-implemented property 'S.P5' cannot be marked 'readonly' because it has a 'set' accessor.
+                // (8,25): error CS8658: Auto-implemented property 'S.P5' cannot be marked 'readonly' because it has
+                // a 'set' accessor.
                 //     public readonly int P5 { get; set; }
                 Diagnostic(ErrorCode.ERR_AutoPropertyWithSetterCantBeReadOnly, "P5")
                     .WithArguments("S.P5")
                     .WithLocation(8, 25),
-                // (9,25): error CS8663: 'S.P6': 'readonly' can only be used on accessors if the property or indexer has both a get and a set accessor
+                // (9,25): error CS8663: 'S.P6': 'readonly' can only be used on accessors if the property or indexer
+                // has both a get and a set accessor
                 //     public readonly int P6 { readonly get; }
                 Diagnostic(ErrorCode.ERR_ReadOnlyModMissingAccessor, "P6")
                     .WithArguments("S.P6")
                     .WithLocation(9, 25),
-                // (9,39): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer 'S.P6' and its accessor. Remove one of them.
+                // (9,39): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer 'S.P6' and
+                // its accessor. Remove one of them.
                 //     public readonly int P6 { readonly get; }
                 Diagnostic(ErrorCode.ERR_InvalidPropertyReadOnlyMods, "get")
                     .WithArguments("S.P6")
@@ -1825,12 +1842,14 @@ public struct S
                 Diagnostic(ErrorCode.ERR_AutoSetterCantBeReadOnly, "set")
                     .WithArguments("S.P7.set")
                     .WithLocation(10, 35),
-                // (11,25): error CS8658: Auto-implemented property 'S.P8' cannot be marked 'readonly' because it has a 'set' accessor.
+                // (11,25): error CS8658: Auto-implemented property 'S.P8' cannot be marked 'readonly' because it
+                // has a 'set' accessor.
                 //     public readonly int P8 { get; readonly set; }
                 Diagnostic(ErrorCode.ERR_AutoPropertyWithSetterCantBeReadOnly, "P8")
                     .WithArguments("S.P8")
                     .WithLocation(11, 25),
-                // (11,44): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer 'S.P8' and its accessor. Remove one of them.
+                // (11,44): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer 'S.P8' and
+                // its accessor. Remove one of them.
                 //     public readonly int P8 { get; readonly set; }
                 Diagnostic(ErrorCode.ERR_InvalidPropertyReadOnlyMods, "set")
                     .WithArguments("S.P8")
@@ -1932,7 +1951,8 @@ public struct S
                 targetFramework: TargetFramework.Mscorlib45
             );
             moduleComp.VerifyDiagnostics(
-                // (12,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IsReadOnlyAttribute..ctor'
+                // (12,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IsReadOnlyAttribute..ctor'
                 //     public int P1 { readonly get; private set; }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "get")
                     .WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute", ".ctor")
@@ -1945,7 +1965,8 @@ public struct S
                 targetFramework: TargetFramework.Mscorlib45
             );
             dllComp.VerifyDiagnostics(
-                // (12,30): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IsReadOnlyAttribute..ctor'
+                // (12,30): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IsReadOnlyAttribute..ctor'
                 //     public int P1 { readonly get; private set; }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "get")
                     .WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute", ".ctor")
@@ -1969,7 +1990,8 @@ public struct S
                 targetFramework: TargetFramework.Mscorlib45
             );
             moduleComp.VerifyDiagnostics(
-                // (4,30): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsReadOnlyAttribute' is not defined or imported
+                // (4,30): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsReadOnlyAttribute' is
+                // not defined or imported
                 //     public int P1 { readonly get; private set; }
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "get")
                     .WithArguments("System.Runtime.CompilerServices.IsReadOnlyAttribute")
@@ -1996,7 +2018,8 @@ public struct S
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (4,38): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer 'S.P' and its accessor. Remove one of them.
+                // (4,38): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer 'S.P' and
+                // its accessor. Remove one of them.
                 //     public readonly int P { readonly get => 42; }
                 Diagnostic(ErrorCode.ERR_InvalidPropertyReadOnlyMods, "get")
                     .WithArguments("S.P")
@@ -2109,7 +2132,8 @@ public readonly struct S
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (12,9): error CS0191: A readonly field cannot be assigned to (except in a constructor or a variable initializer)
+                // (12,9): error CS0191: A readonly field cannot be assigned to (except in a constructor or a
+                // variable initializer)
                 //         s.i = 42; // error
                 Diagnostic(ErrorCode.ERR_AssgReadonly, "s.i").WithLocation(12, 9)
             );
@@ -2150,7 +2174,8 @@ public struct S2
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (13,27): warning CS8655: Call to non-readonly member 'S1.GetEnumerator()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (13,27): warning CS8655: Call to non-readonly member 'S1.GetEnumerator()' from a 'readonly'
+                // member results in an implicit copy of 'this'.
                 //         foreach (var x in this) {} // warning-- implicit copy
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                     .WithArguments("S1.GetEnumerator()", "this")
@@ -2173,7 +2198,8 @@ public struct S1
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (6,27): error CS1579: foreach statement cannot operate on variables of type 'S1' because 'S1' does not contain a public instance or extension definition for 'GetEnumerator'
+                // (6,27): error CS1579: foreach statement cannot operate on variables of type 'S1' because 'S1'
+                // does not contain a public instance or extension definition for 'GetEnumerator'
                 //         foreach (var x in this) {}
                 Diagnostic(ErrorCode.ERR_ForEachMissingMember, "this")
                     .WithArguments("S1", "GetEnumerator")
@@ -2221,7 +2247,8 @@ public struct S2
 ";
             var comp = CreateCompilationWithTasksExtensions(new[] { csharp, AsyncStreamsTypes });
             comp.VerifyDiagnostics(
-                // (16,33): warning CS8655: Call to non-readonly member 'S1.GetAsyncEnumerator()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (16,33): warning CS8655: Call to non-readonly member 'S1.GetAsyncEnumerator()' from a 'readonly'
+                // member results in an implicit copy of 'this'.
                 //         await foreach (var x in this) {} // warn
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                     .WithArguments("S1.GetAsyncEnumerator()", "this")
@@ -2234,7 +2261,8 @@ public struct S2
         {
             // 'using' results in a boxing conversion when the struct implements 'IDisposable'.
             // Boxing conversions are out of scope of the implicit copy warning.
-            // 'await using' can't be used with ref structs, so implicitly copy warnings can't be produced in that scenario.
+            // 'await using' can't be used with ref structs, so implicitly copy warnings can't be produced in
+            // that scenario.
             var csharp =
                 @"
 public ref struct S1
@@ -2269,7 +2297,8 @@ public ref struct S2
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (13,16): warning CS8655: Call to non-readonly member 'S1.Dispose()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (13,16): warning CS8655: Call to non-readonly member 'S1.Dispose()' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         using (this) { } // should warn
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                     .WithArguments("S1.Dispose()", "this")
@@ -2322,7 +2351,8 @@ public struct S2
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (11,22): warning CS8655: Call to non-readonly member 'S1.Deconstruct(out int, out int)' from a 'readonly' member results in an implicit copy of 'this'.
+                // (11,22): warning CS8655: Call to non-readonly member 'S1.Deconstruct(out int, out int)' from a
+                // 'readonly' member results in an implicit copy of 'this'.
                 //         var (x, y) = this; // should warn
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                     .WithArguments("S1.Deconstruct(out int, out int)", "this")
@@ -2361,12 +2391,15 @@ public struct S2
                     )
                     .WithArguments("y")
                     .WithLocation(6, 17),
-                // (6,22): error CS1061: 'S2' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'S2' could be found (are you missing a using directive or an assembly reference?)
+                // (6,22): error CS1061: 'S2' does not contain a definition for 'Deconstruct' and no accessible
+                // extension method 'Deconstruct' accepting a first argument of type 'S2' could be found (are you
+                // missing a using directive or an assembly reference?)
                 //         var (x, y) = this; // error
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "this")
                     .WithArguments("S2", "Deconstruct")
                     .WithLocation(6, 22),
-                // (6,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'S2', with 2 out parameters and a void return type.
+                // (6,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type
+                // 'S2', with 2 out parameters and a void return type.
                 //         var (x, y) = this; // error
                 Diagnostic(ErrorCode.ERR_MissingDeconstruct, "this")
                     .WithArguments("S2", "2")
@@ -2494,7 +2527,8 @@ public struct S
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (6,9): error CS7036: There is no argument given that corresponds to the required parameter 'a' of 'S.M2(Func<int>)'
+                // (6,9): error CS7036: There is no argument given that corresponds to the required parameter 'a' of
+                // 'S.M2(Func<int>)'
                 //         M2(readonly () => 42);
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M2")
                     .WithArguments("a", "S.M2(System.Func<int>)")
@@ -2591,17 +2625,20 @@ public struct S6
 ";
             var comp = CreateCompilation(csharp);
             comp.VerifyDiagnostics(
-                // (21,16): error CS8660: Cannot specify 'readonly' modifiers on both accessors of property or indexer 'S3.this[int]'. Instead, put a 'readonly' modifier on the property itself.
+                // (21,16): error CS8660: Cannot specify 'readonly' modifiers on both accessors of property or
+                // indexer 'S3.this[int]'. Instead, put a 'readonly' modifier on the property itself.
                 //     public int this[int i]
                 Diagnostic(ErrorCode.ERR_DuplicatePropertyReadOnlyMods, "this")
                     .WithArguments("S3.this[int]")
                     .WithLocation(21, 16),
-                // (31,16): error CS8663: 'S4.this[int]': 'readonly' can only be used on accessors if the property or indexer has both a get and a set accessor
+                // (31,16): error CS8663: 'S4.this[int]': 'readonly' can only be used on accessors if the property
+                // or indexer has both a get and a set accessor
                 //     public int this[int i]
                 Diagnostic(ErrorCode.ERR_ReadOnlyModMissingAccessor, "this")
                     .WithArguments("S4.this[int]")
                     .WithLocation(31, 16),
-                // (42,18): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer 'S5.this[int]' and its accessor. Remove one of them.
+                // (42,18): error CS8659: Cannot specify 'readonly' modifiers on both property or indexer
+                // 'S5.this[int]' and its accessor. Remove one of them.
                 //         readonly get { return i; }
                 Diagnostic(ErrorCode.ERR_InvalidPropertyReadOnlyMods, "get")
                     .WithArguments("S5.this[int]")
@@ -2733,37 +2770,44 @@ public struct S
 ";
             var comp = CreateCompilation(csharp, parseOptions: TestOptions.Regular7_3);
             comp.VerifyDiagnostics(
-                // (6,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (6,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //     public readonly void M() {}
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "readonly")
                     .WithArguments("readonly members", "8.0")
                     .WithLocation(6, 12),
-                // (8,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (8,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //     public readonly int P1 => 42;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "readonly")
                     .WithArguments("readonly members", "8.0")
                     .WithLocation(8, 12),
-                // (9,21): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (9,21): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //     public int P2 { readonly get => 123; set {} }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "readonly")
                     .WithArguments("readonly members", "8.0")
                     .WithLocation(9, 21),
-                // (10,33): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (10,33): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //     public int P3 { get => 123; readonly set {} }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "readonly")
                     .WithArguments("readonly members", "8.0")
                     .WithLocation(10, 33),
-                // (12,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (12,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //     public readonly int this[int i] => i;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "readonly")
                     .WithArguments("readonly members", "8.0")
                     .WithLocation(12, 12),
-                // (13,37): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (13,37): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //     public int this[int i, int j] { readonly get => i + j; set {} }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "readonly")
                     .WithArguments("readonly members", "8.0")
                     .WithLocation(13, 37),
-                // (15,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use language version 8.0 or greater.
+                // (15,12): error CS8652: The feature 'readonly members' is not available in C# 7.3. Please use
+                // language version 8.0 or greater.
                 //     public readonly event Action<EventArgs> E { add {} remove {} }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "readonly")
                     .WithArguments("readonly members", "8.0")
@@ -2815,7 +2859,8 @@ struct S
                 Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "P2")
                     .WithArguments("P2")
                     .WithLocation(21, 9),
-                // (22,9): warning CS8655: Call to non-readonly member 'S.P3.get' from a 'readonly' member results in an implicit copy of 'this'.
+                // (22,9): warning CS8655: Call to non-readonly member 'S.P3.get' from a 'readonly' member results
+                // in an implicit copy of 'this'.
                 //         P3 += 1; // warning
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "P3")
                     .WithArguments("S.P3.get", "this")

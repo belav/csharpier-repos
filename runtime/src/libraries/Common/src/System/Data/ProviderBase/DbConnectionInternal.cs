@@ -92,7 +92,8 @@ namespace System.Data.ProviderBase
                 //    _pooledCount > 1    connection is in the pool multiple times (This should not happen)
                 //    _pooledCount == 1   connection is in the pool
                 //    _pooledCount == 0   connection is out of the pool
-                //    _pooledCount == -1  connection is not a pooled connection; we shouldn't be here for non-pooled connections.
+                //    _pooledCount == -1  connection is not a pooled connection; we shouldn't be here for non-pooled
+                // connections.
                 //    _pooledCount < -1   connection out of the pool multiple times
                 //
                 // Now, our job is to return TRUE when the connection is out
@@ -293,7 +294,8 @@ namespace System.Data.ProviderBase
         /// it simply throws.  Our private closed-state connection objects
         /// override this and do the correct thing.</devdoc>
         // User code should either override DbConnectionInternal.Activate when it comes out of the pool
-        // or override DbConnectionFactory.CreateConnection when the connection is created for non-pooled connections
+        // or override DbConnectionFactory.CreateConnection when the connection is created for non-pooled
+        // connections
         internal virtual bool TryOpenConnection(
             DbConnection outerConnection,
             DbConnectionFactory connectionFactory,
@@ -437,11 +439,15 @@ namespace System.Data.ProviderBase
         }
 
         /// <summary>
-        /// When overridden in a derived class, will check if the underlying connection is still actually alive
+        /// When overridden in a derived class, will check if the underlying connection is still actually
+        // alive
         /// </summary>
-        /// <param name="throwOnException">If true an exception will be thrown if the connection is dead instead of returning true\false
-        /// (this allows the caller to have the real reason that the connection is not alive (e.g. network error, etc))</param>
-        /// <returns>True if the connection is still alive, otherwise false (If not overridden, then always true)</returns>
+        /// <param name="throwOnException">If true an exception will be thrown if the connection is dead
+        // instead of returning true\false
+        /// (this allows the caller to have the real reason that the connection is not alive (e.g. network
+        // error, etc))</param>
+        /// <returns>True if the connection is still alive, otherwise false (If not overridden, then always
+        // true)</returns>
         internal virtual bool IsConnectionAlive(bool throwOnException = false)
         {
             return true;

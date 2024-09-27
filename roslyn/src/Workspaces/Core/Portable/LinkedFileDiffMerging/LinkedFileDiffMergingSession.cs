@@ -328,7 +328,8 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                // The current comment insertion location conflicts with a merge diff location. Add the comment before the diff.
+                // The current comment insertion location conflicts with a merge diff location. Add the comment
+                // before the diff.
                 var conflictingCommentInsertionLocation = new TextSpan(mergedChange.Span.Start, 0);
                 while (
                     commentChangeIndex < commentChangesList.Count

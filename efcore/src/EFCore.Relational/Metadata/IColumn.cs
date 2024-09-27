@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a column in a table.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IColumn : IColumnBase
 {
@@ -24,7 +25,8 @@ public interface IColumn : IColumnBase
     new IReadOnlyList<IColumnMapping> PropertyMappings { get; }
 
     /// <summary>
-    ///     Gets the maximum length of data that is allowed in this column. For example, if the property is a <see cref="string" /> '
+    ///     Gets the maximum length of data that is allowed in this column. For example, if the property
+    // is a <see cref="string" /> '
     ///     then this is the maximum number of characters.
     /// </summary>
     int? MaxLength =>
@@ -33,7 +35,8 @@ public interface IColumn : IColumnBase
             .Property.GetMaxLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
-    ///     Gets the precision of data that is allowed in this column. For example, if the property is a <see cref="decimal" /> '
+    ///     Gets the precision of data that is allowed in this column. For example, if the property is a
+    // <see cref="decimal" /> '
     ///     then this is the maximum number of digits.
     /// </summary>
     int? Precision =>
@@ -42,7 +45,8 @@ public interface IColumn : IColumnBase
             .Property.GetPrecision(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
-    ///     Gets the scale of data that is allowed in this column. For example, if the property is a <see cref="decimal" /> '
+    ///     Gets the scale of data that is allowed in this column. For example, if the property is a
+    // <see cref="decimal" /> '
     ///     then this is the maximum number of decimal places.
     /// </summary>
     int? Scale =>
@@ -59,7 +63,8 @@ public interface IColumn : IColumnBase
             .Property.IsUnicode(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
-    ///     Returns a flag indicating whether the property is capable of storing only fixed-length data, such as strings.
+    ///     Returns a flag indicating whether the property is capable of storing only fixed-length data,
+    // such as strings.
     /// </summary>
     bool? IsFixedLength =>
         PropertyMappings
@@ -67,7 +72,8 @@ public interface IColumn : IColumnBase
             .Property.IsFixedLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
-    ///     Indicates whether or not this column acts as an automatic concurrency token by generating a different value
+    ///     Indicates whether or not this column acts as an automatic concurrency token by generating a
+    // different value
     ///     on every update in the same vein as 'rowversion'/'timestamp' columns on SQL Server.
     /// </summary>
     bool IsRowVersion =>
@@ -145,7 +151,8 @@ public interface IColumn : IColumnBase
             .Property.GetComputedColumnSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
-    ///     Returns whether the value of the computed column this property is mapped to is stored in the database, or calculated when
+    ///     Returns whether the value of the computed column this property is mapped to is stored in the
+    // database, or calculated when
     ///     it is read.
     /// </summary>
     bool? IsStored =>

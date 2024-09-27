@@ -76,7 +76,8 @@ public class Program
                         returnVal = -1;
                     }
 
-                    // This is the unaligned case. The value we're loading to subtract is one element earlier than what we just stored.
+                    // This is the unaligned case. The value we're loading to subtract is one element earlier than what
+                    // we just stored.
                     // So we're doing { 1, 1, 1, 1 } - { 0, 1, 0, 0 } = { 1, 0, 1, 1 }
                     Sse2.Store(
                         p + alignmentOffset + 1,

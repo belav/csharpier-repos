@@ -18,11 +18,11 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile Command class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile Command class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\Command.uex' path='docs/doc[@for="Command"]/*' />
     [
         DataBindingHandler(
@@ -241,7 +241,8 @@ namespace System.Web.UI.MobileControls
             remove { Events.RemoveHandler(EventItemCommand, value); }
         }
 
-        /// <include file='doc\Command.uex' path='docs/doc[@for="Command.IPostBackEventHandler.RaisePostBackEvent"]/*' />
+        /// <include file='doc\Command.uex'
+        // path='docs/doc[@for="Command.IPostBackEventHandler.RaisePostBackEvent"]/*' />
         /// <internalonly/>
         protected void RaisePostBackEvent(String argument)
         {

@@ -107,7 +107,8 @@ namespace System.Data
         /// </returns>
         /// <exception cref="ArgumentNullException">if source is null</exception>
         /// <exception cref="ArgumentNullException">if table is null</exception>
-        /// <exception cref="InvalidOperationException">if source DataRow is in Deleted or Detached state</exception>
+        /// <exception cref="InvalidOperationException">if source DataRow is in Deleted or Detached
+        // state</exception>
         public static void CopyToDataTable<T>(
             this IEnumerable<T> source,
             DataTable table,

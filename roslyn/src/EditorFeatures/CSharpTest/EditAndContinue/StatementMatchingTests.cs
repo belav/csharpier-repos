@@ -1992,7 +1992,8 @@ await using (D y = new D()) { }
             var match = GetMethodMatches(src1, src2, kind: MethodKind.Async);
             var actual = ToMatchingPairs(match);
 
-            // Using with a single variable could match using with an expression because they both generate a single try-finally block,
+            // Using with a single variable could match using with an expression because they both generate a
+            // single try-finally block,
             // but to simplify logic we do not match them currently.
             var expected = new MatchingPairs { { "{ }", "{ }" } };
 
@@ -2014,7 +2015,8 @@ await using (D y = new D(), z = new D()) { }
             var match = GetMethodMatches(src1, src2, kind: MethodKind.Async);
             var actual = ToMatchingPairs(match);
 
-            // Using with multiple variables should not match using with an expression because they generate different number of try-finally blocks.
+            // Using with multiple variables should not match using with an expression because they generate
+            // different number of try-finally blocks.
             var expected = new MatchingPairs { { "{ }", "{ }" } };
 
             expected.AssertEqual(actual);
@@ -2116,8 +2118,10 @@ await foreach (var (u, v) in y) {}
             var actual = ToMatchingPairs(match);
 
             // We do match await foreach to foreach, even though the latter does not represent state machine.
-            // This is ok since the previous version of the method won't have state machine state associated with the
-            // foreach statement and thus matching state machine state for the await foreach won't succeed even though
+            // This is ok since the previous version of the method won't have state machine state associated
+            // with the
+            // foreach statement and thus matching state machine state for the await foreach won't succeed even
+            // though
             // the syntax nodes match.
             var expected = new MatchingPairs()
             {

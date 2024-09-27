@@ -85,8 +85,10 @@ namespace System.ServiceModel.Channels
                                 PeerExceptionHelper.GetLastException()
                             );
 
-                        //                        if (!CertSetCertificateContextProperty(cert, CERT_KEY_PROV_INFO_PROP_ID, 0, provInfo))
-                        //                          PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
+                        //                        if (!CertSetCertificateContextProperty(cert, CERT_KEY_PROV_INFO_PROP_ID,
+                        // 0, provInfo))
+                        //
+                        // PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
                         if (!CertSetCertificateContextProperty(cert, CERT_KEY_SPEC_PROP_ID, 0, key))
                             PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
                                 PeerExceptionHelper.GetLastException()

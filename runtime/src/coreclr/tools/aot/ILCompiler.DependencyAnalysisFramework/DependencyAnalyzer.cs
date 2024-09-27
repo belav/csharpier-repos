@@ -9,12 +9,14 @@ using System.Diagnostics;
 namespace ILCompiler.DependencyAnalysisFramework
 {
     /// <summary>
-    /// Implement a dependency analysis framework. This works much like a Garbage Collector's mark algorithm
+    /// Implement a dependency analysis framework. This works much like a Garbage Collector's mark
+    // algorithm
     /// in that it finds a set of nodes from an initial root set.
     ///
     /// However, in contrast to a typical GC in addition to simple edges from a node, there may also
     /// be conditional edges where a node has a dependency if some other specific node exists in the
-    /// graph, and dynamic edges in which a node has a dependency if some other node exists in the graph,
+    /// graph, and dynamic edges in which a node has a dependency if some other node exists in the
+    // graph,
     /// but what that other node might be is not known until it may exist in the graph.
     ///
     /// This analyzer also attempts to maintain a serialized state of why nodes are in the graph
@@ -219,9 +221,11 @@ namespace ILCompiler.DependencyAnalysisFramework
         }
 
         /// <summary>
-        /// Called by the algorithm to ensure that this set of nodes is processed such that static dependencies are computed.
+        /// Called by the algorithm to ensure that this set of nodes is processed such that static
+        // dependencies are computed.
         /// </summary>
-        /// <param name="deferredStaticDependencies">List of nodes which must have static dependencies computed</param>
+        /// <param name="deferredStaticDependencies">List of nodes which must have static dependencies
+        // computed</param>
         private void ComputeDependencies(
             List<DependencyNodeCore<DependencyContextType>> deferredStaticDependencies
         )

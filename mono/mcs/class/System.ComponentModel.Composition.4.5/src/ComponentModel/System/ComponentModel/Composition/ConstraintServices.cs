@@ -14,8 +14,10 @@ namespace System.ComponentModel.Composition
 {
     internal static class ConstraintServices
     {
-        // NOTE : these are here as Reflection member search is pretty expensive, and we want that to be done once.
-        // Also, making these static would cause this class to fail loading if we rename members of ExportDefinition.
+        // NOTE : these are here as Reflection member search is pretty expensive, and we want that to be
+        // done once.
+        // Also, making these static would cause this class to fail loading if we rename members of
+        // ExportDefinition.
         private static readonly PropertyInfo _exportDefinitionContractNameProperty =
             typeof(ExportDefinition).GetProperty("ContractName");
         private static readonly PropertyInfo _exportDefinitionMetadataProperty =
@@ -149,7 +151,9 @@ namespace System.ComponentModel.Composition
             Assumes.NotNull(parameter);
 
             //    !definition.Metadata.ContainsKey(CompositionConstants.PartCreationPolicyMetadataName) ||
-            //        CreationPolicy.Any.Equals(definition.Metadata[CompositionConstants.PartCreationPolicyMetadataName]) ||
+            //
+            // CreationPolicy.Any.Equals(definition.Metadata[CompositionConstants.PartCreationPolicyMetadataName])
+            // ||
             //        policy.Equals(definition.Metadata[CompositionConstants.PartCreationPolicyMetadataName]);
 
             return Expression.MakeBinary(
@@ -185,7 +189,8 @@ namespace System.ComponentModel.Composition
             Assumes.NotNull(parameter);
 
             //    definition.Metadata.ContainsKey(CompositionServices.ExportTypeIdentity) &&
-            //        requiredTypeIdentity.Equals(definition.Metadata[CompositionConstants.ExportTypeIdentityMetadataName]);
+            //
+            // requiredTypeIdentity.Equals(definition.Metadata[CompositionConstants.ExportTypeIdentityMetadataName]);
 
             return Expression.MakeBinary(
                 ExpressionType.AndAlso,
@@ -293,6 +298,7 @@ namespace System.ComponentModel.Composition
                 Expression.Constant(CompositionConstants.ProductDefinitionMetadataName)
             );
 
+            //
             // ProductImportDefinition.Contraint((ExportDefinition)exportDefinition.Metadata["ProductDefinition"])
             Expression productMatchExpression = Expression.Invoke(
                 productImportDefinition.Constraint,
@@ -301,6 +307,7 @@ namespace System.ComponentModel.Composition
 
             // baseContraint(exportDefinition) &&
             // exportDefinition.Metadata.ContainsKey("ProductDefinition") &&
+            //
             // ProductImportDefinition.Contraint((ExportDefinition)exportDefinition.Metadata["ProductDefinition"])
             Expression<Func<ExportDefinition, bool>> constraint = Expression.Lambda<
                 Func<ExportDefinition, bool>

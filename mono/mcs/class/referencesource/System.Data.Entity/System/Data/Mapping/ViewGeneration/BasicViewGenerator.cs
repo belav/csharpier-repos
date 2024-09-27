@@ -248,12 +248,17 @@ namespace System.Data.Mapping.ViewGeneration
         /// <summary>
         /// Traverse the tree and perform the following rewrites:
         ///     1. Flatten unions contained as left children of LOJs: LOJ(A, Union(B, C)) -> LOJ(A, B, C).
-        ///     2. Rewrite flat LOJs into nested LOJs. The nesting is determined by FKs between right cell table PKs.
-        ///        Example: if we have an LOJ(A, B, C, D) and we know there are FKs from C.PK and D.PK to B.PK,
+        ///     2. Rewrite flat LOJs into nested LOJs. The nesting is determined by FKs between right cell
+        // table PKs.
+        ///        Example: if we have an LOJ(A, B, C, D) and we know there are FKs from C.PK and D.PK to
+        // B.PK,
         ///        we want to rewrite into this - LOJ(A, LOJ(B, C, D)).
-        ///     3. As a special case we also look into LOJ driving node (left most child in LOJ) and if it is an IJ,
-        ///        then we consider attaching LOJ children to nodes inside IJ based on the same principle as above.
-        ///        Example: LOJ(IJ(A, B, C), D, E, F) -> LOJ(IJ(LOJ(A, D), B, LOJ(C, E)), F) iff D has FK to A and E has FK to C.
+        ///     3. As a special case we also look into LOJ driving node (left most child in LOJ) and if it
+        // is an IJ,
+        ///        then we consider attaching LOJ children to nodes inside IJ based on the same principle as
+        // above.
+        ///        Example: LOJ(IJ(A, B, C), D, E, F) -> LOJ(IJ(LOJ(A, D), B, LOJ(C, E)), F) iff D has FK to
+        // A and E has FK to C.
         ///
         /// This normalization enables FK-based join elimination in plan compiler, so for a query such as
         /// "select e.ID from ABCDSet" we want plan compiler to produce "select a.ID from A" instead of
@@ -284,7 +289,8 @@ namespace System.Data.Mapping.ViewGeneration
             // and it turns out that there are FK associations from V2 or V3 pointing, let's say at V0,
             // then we want to rewrite the result as (V1 IJ (V0 LOJ V2 LOJ V3)).
             // If we don't do this, then plan compiler won't have a chance to eliminate LOJ V2 LOJ V3.
-            // Hence, flatten the first child or rootNode if it's IJ, but remember that its parts are driving nodes for the LOJ,
+            // Hence, flatten the first child or rootNode if it's IJ, but remember that its parts are driving
+            // nodes for the LOJ,
             // so that we don't accidentally nest them.
             OpCellTreeNode resultIJDriver = null;
             HashSet<CellTreeNode> resultIJDriverChildren = null;
@@ -321,7 +327,8 @@ namespace System.Data.Mapping.ViewGeneration
             var extentMap = new KeyToListMap<EntitySet, LeafCellTreeNode>(
                 EqualityComparer<EntitySet>.Default
             );
-            // Note that we skip non-leaf nodes (non-leaf nodes don't have FKs) and attach them directly to the result.
+            // Note that we skip non-leaf nodes (non-leaf nodes don't have FKs) and attach them directly to the
+            // result.
             foreach (var child in children)
             {
                 var leaf = child as LeafCellTreeNode;
@@ -346,7 +353,8 @@ namespace System.Data.Mapping.ViewGeneration
                 }
             }
 
-            // We only deal with simple cases - one node per extent, remove the rest from children and attach directly to result.
+            // We only deal with simple cases - one node per extent, remove the rest from children and attach
+            // directly to result.
             var nonTrivial = extentMap.KeyValuePairs.Where(m => m.Value.Count > 1).ToArray();
             foreach (var m in nonTrivial)
             {
@@ -373,8 +381,10 @@ namespace System.Data.Mapping.ViewGeneration
             // points to the PK of the left extent and is based on the PK columns of the right extent.
             // Example:
             //           table tBaseType(Id int, c1 int), PK = (tBaseType.Id)
-            //           table tDerivedType1(Id int, c2 int), PK1 = (tDerivedType1.Id), FK1 = (tDerivedType1.Id -> tBaseType.Id)
-            //           table tDerivedType2(Id int, c3 int), PK2 = (tDerivedType2.Id), FK2 = (tDerivedType2.Id -> tBaseType.Id)
+            //           table tDerivedType1(Id int, c2 int), PK1 = (tDerivedType1.Id), FK1 = (tDerivedType1.Id
+            // -> tBaseType.Id)
+            //           table tDerivedType2(Id int, c3 int), PK2 = (tDerivedType2.Id), FK2 = (tDerivedType2.Id
+            // -> tBaseType.Id)
             // Will produce:
             //           (tBaseType) -> (tDerivedType1, tDerivedType2)
             var pkFkMap = new KeyToListMap<EntitySet, EntitySet>(
@@ -394,7 +404,8 @@ namespace System.Data.Mapping.ViewGeneration
                     System.Collections.ObjectModel.ReadOnlyCollection<LeafCellTreeNode> nodes;
                     if (extentMap.TryGetListForKey(fkExtent, out nodes))
                     {
-                        // Make sure that we are not adding resultIJDriverChildren as FK dependents - we do not want them to get nested.
+                        // Make sure that we are not adding resultIJDriverChildren as FK dependents - we do not want them to
+                        // get nested.
                         if (
                             resultIJDriverChildren == null
                             || !resultIJDriverChildren.Contains(nodes.Single())
@@ -454,7 +465,8 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 if (!nestedExtents.ContainsKey(m.Key))
                 {
-                    // extentLOJ represents (Vx LOJ Vy LOJ(Vm LOJ Vn)) where Vx is the original node from rootNode.Children or resultIJDriverChildren.
+                    // extentLOJ represents (Vx LOJ Vy LOJ(Vm LOJ Vn)) where Vx is the original node from
+                    // rootNode.Children or resultIJDriverChildren.
                     var extentLOJ = m.Value;
                     if (
                         resultIJDriverChildren != null
@@ -477,7 +489,8 @@ namespace System.Data.Mapping.ViewGeneration
         {
             foreach (var pkFkInfo in principal.ForeignKeyPrincipals)
             {
-                // If principal has a related extent with FK pointing to principal and the FK is based on PK columns of the related extent,
+                // If principal has a related extent with FK pointing to principal and the FK is based on PK columns
+                // of the related extent,
                 // then add it.
                 var pkColumns = pkFkInfo.Item2.ToRole.GetEntityType().KeyMembers;
                 var fkColumns = pkFkInfo.Item2.ToProperties;

@@ -94,7 +94,8 @@
 
         private Expression CreateCallExpression(Expression property, string query)
         {
-            // LINQ to SQL does not support the overloads StartsWith(string, StringComparer) or EndsWith(string, StringComparer)
+            // LINQ to SQL does not support the overloads StartsWith(string, StringComparer) or EndsWith(string,
+            // StringComparer)
             // and Contains has not overload that takes a StringComparer
             if (SearchType == SearchType.Contains || (ViewState["ComparisonType"] == null))
             {

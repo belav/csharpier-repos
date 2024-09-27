@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// A region analysis walker that records jumps into the region.  Works by overriding NoteBranch, which is
+    /// A region analysis walker that records jumps into the region.  Works by overriding NoteBranch,
+    // which is
     /// invoked by a superclass when the two endpoints of a jump have been identified.
     /// </summary>
     internal class EntryPointsWalker : AbstractRegionControlFlowPass

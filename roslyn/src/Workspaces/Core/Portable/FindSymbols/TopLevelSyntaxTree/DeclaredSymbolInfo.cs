@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Container of the symbol that can be shown in a final presentation layer.
         /// For example, the container of a type "KeyValuePair" might be
         /// "System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;".  This can
-        /// then be shown with something like "type System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;"
+        /// then be shown with something like "type System.Collections.Generic.Dictionary&lt;TKey,
+        // TValue&gt;"
         /// to indicate where the symbol is located.
         /// </summary>
         [DataMember(Order = 2)]
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         [DataMember(Order = 5)]
         public ImmutableArray<string> InheritanceNames { get; } = inheritanceNames;
 
-        // Store the kind (5 bits), accessibility (4 bits), parameter-count (4 bits), and type-parameter-count (4 bits)
+        // Store the kind (5 bits), accessibility (4 bits), parameter-count (4 bits), and
+        // type-parameter-count (4 bits)
         // in a single int.
         [DataMember(Order = 6)]
         private readonly uint _flags = flags;

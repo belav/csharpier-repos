@@ -122,7 +122,8 @@ namespace System.Data.Tests
             DataRow myRow = myTable.Rows[0];
 
             int iProposed;
-            //After calling the DataRow object's BeginEdit method, if you change the value, the Current and Proposed values become available
+            //After calling the DataRow object's BeginEdit method, if you change the value, the Current and
+            // Proposed values become available
             myRow.BeginEdit();
             myRow[0] = 7;
             iProposed = (int)myRow[0, DataRowVersion.Proposed];
@@ -807,15 +808,17 @@ namespace System.Data.Tests
             drArrResult = drChild.GetParentRows("Parent-Child", DataRowVersion.Default);
             Assert.Equal(drArrExcepted, drArrResult);
 
-            /* .NET don't work as expected
-                //Check DataRowVersion.Proposed
-                // Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Proposed
-                drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedCurrent);
-                //drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedOriginal );
+/* .NET don't work as expected
+//Check DataRowVersion.Proposed
+// Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Proposed
+drArrExcepted = dtParent.Select("ParentId=" +
+drParent["ParentId"],"",DataViewRowState.ModifiedCurrent);
+//drArrExcepted = dtParent.Select("ParentId=" +
+drParent["ParentId"],"",DataViewRowState.ModifiedOriginal );
 
-                drArrResult = drChild.GetParentRows("Parent-Child",DataRowVersion.Proposed  );
-                Assert.Equal(drArrExcepted,  drArrResult);
-            */
+drArrResult = drChild.GetParentRows("Parent-Child",DataRowVersion.Proposed  );
+Assert.Equal(drArrExcepted,  drArrResult);
+*/
         }
 
         [Fact]
@@ -1134,7 +1137,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex1.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
@@ -1146,7 +1150,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex2.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "ZZZ" + @"[\p{Pf}\p{Po}]", ex2.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex2.Message);
 
@@ -1158,7 +1163,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex3.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col1" + @"[\p{Pf}\p{Po}]", ex3.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex3.Message);
         }
@@ -1238,7 +1244,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex.Message);
             Assert.Matches(@"\b" + "DBNull" + @"\b", ex.Message);
 
@@ -1482,7 +1489,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex.Message);
             Assert.Matches(@"\b" + "DBNull" + @"\b", ex.Message);
 
@@ -1600,7 +1608,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex1.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "Persons" + @"\b", ex1.Message);
             Assert.Null(ex1.ParamName);
@@ -1613,7 +1622,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex2.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "" + @"[\p{Pf}\p{Po}]", ex2.Message);
             Assert.Matches(@"\b" + "Persons" + @"\b", ex2.Message);
             Assert.Null(ex2.ParamName);
@@ -1679,7 +1689,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex.Message);
             Assert.Matches(@"\b" + "DBNull" + @"\b", ex.Message);
 
@@ -1850,7 +1861,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex1.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
@@ -1862,7 +1874,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex2.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "ZZZ" + @"[\p{Pf}\p{Po}]", ex2.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex2.Message);
 
@@ -1876,7 +1889,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex3.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col1" + @"[\p{Pf}\p{Po}]", ex3.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex3.Message);
         }
@@ -2459,7 +2473,8 @@ namespace System.Data.Tests
 
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "col1" + @"[\p{Pf}\p{Po}]", table.Rows[0].RowError);
             Assert.Matches(@"\b" + Regex.Escape("DBNull.Value") + @"\b", table.Rows[0].RowError);
 
@@ -2745,7 +2760,8 @@ namespace System.Data.Tests
 
             t.RowChanged += new DataRowChangeEventHandler(RowChangedHandler);
 
-            /* neither of the calls to EndEdit below generate a RowChangedHandler on MS.  the first one does on mono */
+/* neither of the calls to EndEdit below generate a RowChangedHandler on MS.  the first one does on
+mono */
             t.DefaultView[0].BeginEdit();
             t.DefaultView[0].EndEdit(); /* this generates a call to the row changed handler */
             t.DefaultView[0].EndEdit(); /* this doesn't */

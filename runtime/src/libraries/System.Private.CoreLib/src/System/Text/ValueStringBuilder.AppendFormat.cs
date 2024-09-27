@@ -32,11 +32,13 @@ namespace System.Text
             char ch;
             while (true)
             {
-                // Skip until either the end of the input or the first unescaped opening brace, whichever comes first.
+                // Skip until either the end of the input or the first unescaped opening brace, whichever comes
+                // first.
                 // Along the way we need to also unescape escaped closing braces.
                 while (true)
                 {
-                    // Find the next brace.  If there isn't one, the remainder of the input is text to be appended, and we're done.
+                    // Find the next brace.  If there isn't one, the remainder of the input is text to be appended, and
+                    // we're done.
                     if ((uint)pos >= (uint)format.Length)
                     {
                         return;
@@ -54,7 +56,8 @@ namespace System.Text
                     Append(remainder.Slice(0, countUntilNextBrace));
                     pos += countUntilNextBrace;
 
-                    // Get the brace.  It must be followed by another character, either a copy of itself in the case of being
+                    // Get the brace.  It must be followed by another character, either a copy of itself in the case of
+                    // being
                     // escaped, or an arbitrary character that's part of the hole in the case of an opening brace.
                     char brace = format[pos];
                     ch = MoveNext(format, ref pos);

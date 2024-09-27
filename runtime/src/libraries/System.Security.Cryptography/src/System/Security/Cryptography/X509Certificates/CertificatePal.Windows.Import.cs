@@ -117,7 +117,8 @@ namespace System.Security.Cryptography.X509Certificates
                         pCertContext = FilterPFXStore(rawData, password, pfxCertStoreFlags);
 
                         // If PersistKeySet is set we don't delete the key, so that it persists.
-                        // If EphemeralKeySet is set we don't delete the key, because there's no file, so it's a wasteful call.
+                        // If EphemeralKeySet is set we don't delete the key, because there's no file, so it's a wasteful
+                        // call.
                         const X509KeyStorageFlags DeleteUnless =
                             X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.EphemeralKeySet;
 
@@ -243,7 +244,8 @@ namespace System.Security.Cryptography.X509Certificates
 
             try
             {
-                // Find the first cert with private key. If none, then simply take the very first cert. Along the way, delete the keycontainers
+                // Find the first cert with private key. If none, then simply take the very first cert. Along the
+                // way, delete the keycontainers
                 // of any cert we don't accept.
                 SafeCertContextHandle pCertContext = SafeCertContextHandle.InvalidHandle;
                 SafeCertContextHandle? pEnumContext = null;
@@ -276,7 +278,8 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         if (pCertContext.IsInvalid)
                         {
-                            // Doesn't have a private key but hang on to it anyway in case we don't find any certs with a private key.
+                            // Doesn't have a private key but hang on to it anyway in case we don't find any certs with a
+                            // private key.
                             pCertContext.Dispose();
                             pCertContext = pEnumContext.Duplicate();
                         }
@@ -338,7 +341,8 @@ namespace System.Security.Cryptography.X509Certificates
                     | Interop.Crypt32.PfxCertStoreFlags.PKCS12_ALWAYS_CNG_KSP;
 
             // In .NET Framework loading a PFX then adding the key to the Windows Certificate Store would
-            // enable a native application compiled against CAPI to find that private key and interoperate with it.
+            // enable a native application compiled against CAPI to find that private key and interoperate with
+            // it.
             //
             // For .NET Core this behavior is being retained.
 

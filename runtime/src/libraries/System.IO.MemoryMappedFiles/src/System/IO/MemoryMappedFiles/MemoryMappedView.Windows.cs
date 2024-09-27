@@ -23,8 +23,10 @@ namespace System.IO.MemoryMappedFiles
         {
             // MapViewOfFile can only create views that start at a multiple of the system memory allocation
             // granularity. We decided to hide this restriction from the user by creating larger views than the
-            // user requested and hiding the parts that the user did not request.  extraMemNeeded is the amount of
-            // extra memory we allocate before the start of the requested view. MapViewOfFile will also round the
+            // user requested and hiding the parts that the user did not request.  extraMemNeeded is the amount
+            // of
+            // extra memory we allocate before the start of the requested view. MapViewOfFile will also round
+            // the
             // capacity of the view to the nearest multiple of the system page size.  Once again, we hide this
             // from the user by preventing them from writing to any memory that they did not request.
             ulong nativeSize;
@@ -67,12 +69,16 @@ namespace System.IO.MemoryMappedFiles
 
             // Allocate the pages if we were using the MemoryMappedFileOptions.DelayAllocatePages option
             // OR check if the allocated view size is smaller than the expected native size
-            // If multiple overlapping views are created over the file mapping object, the pages in a given region
-            // could have different attributes(MEM_RESERVE OR MEM_COMMIT) as MapViewOfFile preserves coherence between
+            // If multiple overlapping views are created over the file mapping object, the pages in a given
+            // region
+            // could have different attributes(MEM_RESERVE OR MEM_COMMIT) as MapViewOfFile preserves coherence
+            // between
             // views created on a mapping object backed by same file.
-            // In which case, the viewSize will be smaller than nativeSize required and viewState could be MEM_COMMIT
+            // In which case, the viewSize will be smaller than nativeSize required and viewState could be
+            // MEM_COMMIT
             // but more pages may need to be committed in the region.
-            // This is because, VirtualQuery function(that internally invokes VirtualQueryEx function) returns the attributes
+            // This is because, VirtualQuery function(that internally invokes VirtualQueryEx function) returns
+            // the attributes
             // and size of the region of pages with matching attributes starting from base address.
             // VirtualQueryEx: https://msdn.microsoft.com/en-us/library/windows/desktop/aa366907(v=vs.85).aspx
             if (

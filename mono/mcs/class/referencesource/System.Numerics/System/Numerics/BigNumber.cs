@@ -575,7 +575,8 @@ namespace System.Numerics
         }
 
         //
-        // internal [unsafe] static String FormatBigInteger(BigInteger value, String format, NumberFormatInfo info) {
+        // internal [unsafe] static String FormatBigInteger(BigInteger value, String format,
+        // NumberFormatInfo info) {
         //
 #if !SILVERLIGHT ||FEATURE_NETCORE
         [SecuritySafeCritical]
@@ -688,7 +689,8 @@ namespace System.Numerics
 
             try
             {
-                // We'll pass the rgch buffer to native code, which is going to treat it like a string of digits, so it needs
+                // We'll pass the rgch buffer to native code, which is going to treat it like a string of digits, so
+                // it needs
                 // to be null terminated.  Let's ensure that we can allocate a buffer of that size.
                 rgchBufSize = checked(cchMax + 1);
             }

@@ -497,7 +497,8 @@ namespace System.Text.Tests
 
             Assert.Equal(-1, transcodingStream.ReadByte()); // should've reached EOF
 
-            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back
+            // out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC0); // [ C0 ] is never valid in UTF-8
@@ -514,7 +515,8 @@ namespace System.Text.Tests
             Assert.Equal("[FFFD]", ErrorCheckingAsciiEncoding.GetString(sink.ToArray()));
             Assert.Equal(-1, transcodingStream.ReadByte()); // should've reached EOF
 
-            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD
+            // back out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC2); // [ C2 ] must be followed by [ 80..BF ] in UTF-8
@@ -817,7 +819,8 @@ namespace System.Text.Tests
 
             Assert.Equal(-1, await transcodingStream.ReadByteAsync(expectedCancellationToken)); // should've reached EOF
 
-            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back
+            // out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC0); // [ C0 ] is never valid in UTF-8
@@ -838,7 +841,8 @@ namespace System.Text.Tests
             Assert.Equal("[FFFD]", ErrorCheckingAsciiEncoding.GetString(sink.ToArray()));
             Assert.Equal(-1, await transcodingStream.ReadByteAsync(expectedCancellationToken)); // should've reached EOF
 
-            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD
+            // back out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC2); // [ C2 ] must be followed by [ 80..BF ] in UTF-8
@@ -1135,7 +1139,8 @@ namespace System.Text.Tests
 
             sink.SetLength(0); // reset sink
 
-            // Then test WriteAsync(ROM<byte>, CancellationToken), once with a short string and once with a long string
+            // Then test WriteAsync(ROM<byte>, CancellationToken), once with a short string and once with a long
+            // string
 
             string asciiString = GetVeryLongAsciiString(128);
             byte[] asciiBytesAsUtf8 = Encoding.UTF8.GetBytes(asciiString);
@@ -1414,7 +1419,8 @@ namespace System.Text.Tests
             }
         }
 
-        /// <summary>A custom encoding that's used to roundtrip from bytes to bytes through a string.</summary>
+        /// <summary>A custom encoding that's used to roundtrip from bytes to bytes through a
+        // string.</summary>
         private sealed class IdentityEncoding : Encoding
         {
             public override int GetByteCount(char[] chars, int index, int count) => count;

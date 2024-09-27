@@ -351,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
             )
             {
-                // Need to represent the implicit conversion as a node in order to be able to produce correct diagnostics.
+                // Need to represent the implicit conversion as a node in order to be able to produce correct
+                // diagnostics.
                 left = new BoundConversion(
                     left.Syntax,
                     left,
@@ -417,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && ConvertedHasEqual(node.OperatorKind, node.Right, out t)
                 )
                 {
-                    // Possible unintended reference comparison; to get a value comparison, cast the left hand side to type '{0}'
+                    // Possible unintended reference comparison; to get a value comparison, cast the left hand side to
+                    // type '{0}'
                     _diagnostics.Add(ErrorCode.WRN_BadRefCompareLeft, node.Syntax.Location, t);
                 }
                 else if (
@@ -427,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && ConvertedHasEqual(node.OperatorKind, node.Left, out t)
                 )
                 {
-                    // Possible unintended reference comparison; to get a value comparison, cast the right hand side to type '{0}'
+                    // Possible unintended reference comparison; to get a value comparison, cast the right hand side to
+                    // type '{0}'
                     _diagnostics.Add(ErrorCode.WRN_BadRefCompareRight, node.Syntax.Location, t);
                 }
             }
@@ -539,8 +542,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             // enum == enumConstant           -- enum types must be the same, so it must be in range.
             // enum == integralConstant       -- not legal unless the constant is zero, which is in range.
-            // enum == (ENUM)anyConstant      -- if the constant is out of range then this is not legal in the first place
-            //                                   unless we're in an unchecked context, in which case, the user probably does
+            // enum == (ENUM)anyConstant      -- if the constant is out of range then this is not legal in the
+            // first place
+            //                                   unless we're in an unchecked context, in which case, the user
+            // probably does
             //                                   not want the warning.
             // integral == enumConstant       -- never legal in the first place
             //
@@ -632,13 +637,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             // Consider the effects of this rule:
             //
-            // (uint)0xFFFF0000 | y -- gives the warning because 0xFFFF0000 as a long is not in the range of a short,
+            // (uint)0xFFFF0000 | y -- gives the warning because 0xFFFF0000 as a long is not in the range of a
+            // short,
             //                         *even though the result will not be affected by the sign extension*.
-            // (ulong)0xFFFFFFFFFFFFFFFF | y -- suppresses the warning, because 0xFFFFFFFFFFFFFFFF as a signed long fits into a short.
-            // (int)0x0000ABCD | y -- suppresses the warning, even though the 0000 is going to be wiped out by the sign extension.
+            // (ulong)0xFFFFFFFFFFFFFFFF | y -- suppresses the warning, because 0xFFFFFFFFFFFFFFFF as a signed
+            // long fits into a short.
+            // (int)0x0000ABCD | y -- suppresses the warning, even though the 0000 is going to be wiped out by
+            // the sign extension.
             //
-            // It seems clear that the intention of the heuristic is to *suppress the warning when the bits being hammered
-            // on are either all zero, or all one.*  Therefore that is the heuristic we will *actually* implement here.
+            // It seems clear that the intention of the heuristic is to *suppress the warning when the bits
+            // being hammered
+            // on are either all zero, or all one.*  Therefore that is the heuristic we will *actually*
+            // implement here.
             //
 
             switch (operatorKind)
@@ -702,7 +712,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // CS0675: Bitwise-or operator used on a sign-extended operand; consider casting to a smaller unsigned type first
+            // CS0675: Bitwise-or operator used on a sign-extended operand; consider casting to a smaller
+            // unsigned type first
             Error(ErrorCode.WRN_BitwiseOrSignExtend, node);
         }
 
@@ -897,7 +908,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case BinaryOperatorKind.Equal:
                 case BinaryOperatorKind.NotEqual:
-                    // CS0472: The result of the expression is always '{0}' since a value of type '{1}' is never equal to 'null' of type '{2}'
+                    // CS0472: The result of the expression is always '{0}' since a value of type '{1}' is never equal
+                    // to 'null' of type '{2}'
                     //
                     // Produce the warning if one side is always null and the other is never null.
                     // That is, we have something like "if (myInt == null)"
@@ -969,7 +981,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
                 case BinaryOperatorKind.Equal:
                 case BinaryOperatorKind.NotEqual:
-                    // CS0472: The result of the expression is always '{0}' since a value of type '{1}' is never equal to 'null' of type '{2}'
+                    // CS0472: The result of the expression is always '{0}' since a value of type '{1}' is never equal
+                    // to 'null' of type '{2}'
                     //
                     // Produce the warning if one side is always null and the other is never null.
                     // That is, we have something like "if (myInt == null)"

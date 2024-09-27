@@ -25,7 +25,8 @@ namespace System
         /// Create a new cache for pinned byte[] buffers
         /// </summary>
         /// <param name="cacheName">A name used in diagnostic messages</param>
-        /// <param name="numberOfElements">The size of byte[] buffers in the cache (they are all the same size)</param>
+        /// <param name="numberOfElements">The size of byte[] buffers in the cache (they are all the same
+        // size)</param>
         public PinnableBufferCache(string cacheName, int numberOfElements)
             : this(cacheName, () => new byte[numberOfElements]) { }
 
@@ -225,7 +226,8 @@ namespace System
         {
             lock (this)
             {
-                // Try again after getting the lock as another thread could have just filled the free list.  If we don't check
+                // Try again after getting the lock as another thread could have just filled the free list.  If we
+                // don't check
                 // then we unnecessarily grab a new set of buffers because we think we are out.
                 if (m_FreeList.TryPop(out returnBuffer))
                     return;
@@ -245,7 +247,8 @@ namespace System
                 if (m_NotGen2.Count == 0)
                     CreateNewBuffers();
 
-                // We have no buffers in the aged freelist, so get one from the newer list.   Try to pick the best one.
+                // We have no buffers in the aged freelist, so get one from the newer list.   Try to pick the best
+                // one.
                 // Debug.Assert(m_NotGen2.Count != 0);
                 int idx = m_NotGen2.Count - 1;
                 if (
@@ -268,11 +271,13 @@ namespace System
                     );
                 }
 
-                // If we have a Gen1 collection, then everything on m_NotGen2 should have aged.  Move them to the m_Free list.
+                // If we have a Gen1 collection, then everything on m_NotGen2 should have aged.  Move them to the
+                // m_Free list.
                 if (!AgePendingBuffers())
                 {
                     // Before we could age at set of buffers, we have handed out half of them.
-                    // This implies we should be proactive about allocating more (since we will trim them if we over-allocate).
+                    // This implies we should be proactive about allocating more (since we will trim them if we
+                    // over-allocate).
                     if (m_NotGen2.Count == m_restockSize / 2)
                     {
                         PinnableBufferCacheEventSource.Log.DebugMessage(
@@ -299,7 +304,8 @@ namespace System
                 PinnableBufferCacheEventSource.Log.AllocateBufferAged(m_CacheName, m_NotGen2.Count);
                 for (int i = 0; i < m_NotGen2.Count; i++)
                 {
-                    // We actually check every object to ensure that we aren't putting non-aged buffers into the free list.
+                    // We actually check every object to ensure that we aren't putting non-aged buffers into the free
+                    // list.
                     object currentBuffer = m_NotGen2[i];
                     if (GC.GetGeneration(currentBuffer) >= GC.MaxGeneration)
                     {
@@ -328,7 +334,8 @@ namespace System
         /// </summary>
         private void CreateNewBuffers()
         {
-            // We choose a very modest number of buffers initially because for the client case.  This is often enough.
+            // We choose a very modest number of buffers initially because for the client case.  This is often
+            // enough.
             if (m_restockSize == 0)
                 m_restockSize = 4;
             else if (m_restockSize < DefaultNumberOfBuffers)
@@ -357,8 +364,10 @@ namespace System
                 // Make a new buffer.
                 object newBuffer = m_factory();
 
-                // Create space between the objects.  We do this because otherwise it forms a single plug (group of objects)
-                // and the GC pins the entire plug making them NOT move to Gen1 and Gen2.   by putting space between them
+                // Create space between the objects.  We do this because otherwise it forms a single plug (group of
+                // objects)
+                // and the GC pins the entire plug making them NOT move to Gen1 and Gen2.   by putting space between
+                // them
                 // we ensure that object get a chance to move independently (even if some are pinned).
                 var dummyObject = new object();
                 m_NotGen2.Add(newBuffer);
@@ -382,7 +391,8 @@ namespace System
 
         /// <summary>
         /// This is called on every gen2 GC to see if we need to trim the free list.
-        /// NOTE: DO NOT CALL THIS DIRECTLY FROM THE GEN2GCCALLBACK.  INSTEAD CALL IT VIA A STATIC FUNCTION (SEE ABOVE).
+        /// NOTE: DO NOT CALL THIS DIRECTLY FROM THE GEN2GCCALLBACK.  INSTEAD CALL IT VIA A STATIC FUNCTION
+        // (SEE ABOVE).
         /// If you register a non-static function as a callback, then this object will be leaked.
         /// </summary>
         [System.Security.SecuritySafeCritical]
@@ -407,12 +417,14 @@ namespace System
                 return true;
             }
 
-            // We require a minimum amount of clock time to pass  (10 seconds) before we trim.  Ideally this time
+            // We require a minimum amount of clock time to pass  (10 seconds) before we trim.  Ideally this
+            // time
             // is larger than the typical buffer hold time.
             if (0 <= deltaMSec && deltaMSec < 10000)
                 return true;
 
-            // If we got here we have spend the last few second without needing to lengthen the free list.   Thus
+            // If we got here we have spend the last few second without needing to lengthen the free list.
+            // Thus
             // we have 'enough' buffers, but maybe we have too many.
             // See if we can trim
             lock (this)
@@ -483,7 +495,8 @@ namespace System
                     return true;
                 }
 
-                // Move buffers from teh free list back to the non-aged list.  If we don't use them by next time, then we'll consider trimming them.
+                // Move buffers from teh free list back to the non-aged list.  If we don't use them by next time,
+                // then we'll consider trimming them.
                 PinnableBufferCacheEventSource.Log.TrimExperiment(
                     m_CacheName,
                     m_buffersUnderManagement,
@@ -631,7 +644,8 @@ namespace System
             }
             catch
             {
-                // Ensure that we still get a chance to resurrect this object, even if the callback throws an exception.
+                // Ensure that we still get a chance to resurrect this object, even if the callback throws an
+                // exception.
             }
 
             // Resurrect ourselves by re-registering for finalization.

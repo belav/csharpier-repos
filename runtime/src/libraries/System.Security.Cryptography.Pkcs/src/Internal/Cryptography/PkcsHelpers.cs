@@ -116,9 +116,12 @@ namespace Internal.Cryptography
         }
 
         /// <summary>
-        /// This is not just a convenience wrapper for Array.Resize(). In DEBUG builds, it forces the array to move in memory even if no resize is needed. This should be used by
-        /// helper methods that do anything of the form "call a native api once to get the estimated size, call it again to get the data and return the data in a byte[] array."
-        /// Sometimes, that data consist of a native data structure containing pointers to other parts of the block. Using such a helper to retrieve such a block results in an intermittent
+        /// This is not just a convenience wrapper for Array.Resize(). In DEBUG builds, it forces the array
+        // to move in memory even if no resize is needed. This should be used by
+        /// helper methods that do anything of the form "call a native api once to get the estimated size,
+        // call it again to get the data and return the data in a byte[] array."
+        /// Sometimes, that data consist of a native data structure containing pointers to other parts of
+        // the block. Using such a helper to retrieve such a block results in an intermittent
         /// AV. By using this helper, you make that AV repro every time.
         /// </summary>
         public static byte[] Resize(this byte[] a, int size)
@@ -291,7 +294,8 @@ namespace Internal.Cryptography
         }
 
         /// <summary>
-        /// .NET Framework compat: We do not complain about multiple matches. Just take the first one and ignore the rest.
+        /// .NET Framework compat: We do not complain about multiple matches. Just take the first one and
+        // ignore the rest.
         /// </summary>
         public static X509Certificate2? TryFindMatchingCertificate(
             this X509Certificate2Collection certs,
@@ -299,8 +303,10 @@ namespace Internal.Cryptography
         )
         {
             //
-            // Note: SubjectIdentifier has no public constructor so the only one that can construct this type is this assembly.
-            //       Therefore, we trust that the string-ized byte array (serial or ski) in it is correct and canonicalized.
+            // Note: SubjectIdentifier has no public constructor so the only one that can construct this type is
+            // this assembly.
+            //       Therefore, we trust that the string-ized byte array (serial or ski) in it is correct and
+            // canonicalized.
             //
 
             SubjectIdentifierType recipientIdentifierType = recipientIdentifier.Type;
@@ -339,7 +345,8 @@ namespace Internal.Cryptography
                     break;
 
                 default:
-                    // RecipientInfo's can only be created by this package so if this an invalid type, it's the package's fault.
+                    // RecipientInfo's can only be created by this package so if this an invalid type, it's the
+                    // package's fault.
                     Debug.Fail($"Invalid recipientIdentifier type: {recipientIdentifierType}");
                     throw new CryptographicException();
             }
@@ -352,7 +359,8 @@ namespace Internal.Cryptography
         /// <summary>
         /// Asserts on bad or non-canonicalized input. Input must come from trusted sources.
         ///
-        /// Subject Key Identifier is string-ized as an upper case hex string. This format is part of the public api behavior and cannot be changed.
+        /// Subject Key Identifier is string-ized as an upper case hex string. This format is part of the
+        // public api behavior and cannot be changed.
         /// </summary>
         internal static byte[] ToSkiBytes(this string skiString)
         {
@@ -372,7 +380,8 @@ namespace Internal.Cryptography
         /// <summary>
         /// Asserts on bad or non-canonicalized input. Input must come from trusted sources.
         ///
-        /// Serial number is string-ized as a reversed upper case hex string. This format is part of the public api behavior and cannot be changed.
+        /// Serial number is string-ized as a reversed upper case hex string. This format is part of the
+        // public api behavior and cannot be changed.
         /// </summary>
         internal static byte[] ToSerialBytes(this string serialString)
         {
@@ -446,7 +455,8 @@ namespace Internal.Cryptography
         }
 
         /// <summary>
-        /// Useful helper for "upgrading" well-known CMS attributes to type-specific objects such as Pkcs9DocumentName, Pkcs9DocumentDescription, etc.
+        /// Useful helper for "upgrading" well-known CMS attributes to type-specific objects such as
+        // Pkcs9DocumentName, Pkcs9DocumentDescription, etc.
         /// </summary>
         public static Pkcs9AttributeObject CreateBestPkcs9AttributeObjectAvailable(
             Oid oid,

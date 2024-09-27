@@ -21,21 +21,26 @@ namespace System.Configuration
     using System.Xml;
 
     // This is the public type of the override mode enum visible to the API users
-    // The override mode is an attribute of a <location> tag and controls if the sections inside this tag
+    // The override mode is an attribute of a <location> tag and controls if the sections inside this
+    // tag
     // can be defined in child web.config files
     public enum OverrideMode
     {
-        // Default ( aka Indiferent ) - When specified on a location tag means the location tag will not alter
+        // Default ( aka Indiferent ) - When specified on a location tag means the location tag will not
+        // alter
         // the locking mode ( locked or unlocked ). Rather, the locking mode should be picked
-        // from the <location> tag with the closest parent path in the current file, or the parent file if no such location in the current one,
+        // from the <location> tag with the closest parent path in the current file, or the parent file if
+        // no such location in the current one,
         // or the default for the specific section ( section.OverrideModeDefault )
         Inherit = 0,
 
         // Allow overriding in child config files. I.e. unlock the settings for overridiing
         Allow = 1,
 
-        // Deny overriding of the settings defined in the <location> tag. It is an error for the sections in the <location> tag
-        // to appear in a child config file. It is not an error for them to appear in another <lcoation> tag in the current file
+        // Deny overriding of the settings defined in the <location> tag. It is an error for the sections in
+        // the <location> tag
+        // to appear in a child config file. It is not an error for them to appear in another <lcoation> tag
+        // in the current file
         Deny = 2,
     }
 
@@ -64,7 +69,8 @@ namespace System.Configuration
             SectionDefault._mode = (byte)OverrideMode.Allow;
 
             LocationDefault = new OverrideModeSetting();
-            // Default for location tags is INHERIT. Note that we do not make the value as existant in the XML or specified by the API
+            // Default for location tags is INHERIT. Note that we do not make the value as existant in the XML
+            // or specified by the API
             LocationDefault._mode = (byte)OverrideMode.Inherit;
         }
 
@@ -119,13 +125,16 @@ namespace System.Configuration
 
         internal static bool CanUseSameLocationTag(OverrideModeSetting x, OverrideModeSetting y)
         {
-            // This function tells if the two OverrideModeSettings are compatible enough to be used in only one location tag
+            // This function tells if the two OverrideModeSettings are compatible enough to be used in only one
+            // location tag
             // or each of them should go to a separate one
 
             // The rules here are ( in order of importance )
             // 1. The effective mode is the same ( we will use only the new OverrideMode to compare )
-            // 2. When the mode was changed( i.e. API change ) - both must be changed the same way ( i.e. using either allowOverride or OverrideMode )
-            // 3. When mode was not changed the XML - they must've been the same in the xml ( i.e. allowOverride specified on both, or overrideMode or neither of them )
+            // 2. When the mode was changed( i.e. API change ) - both must be changed the same way ( i.e. using
+            // either allowOverride or OverrideMode )
+            // 3. When mode was not changed the XML - they must've been the same in the xml ( i.e. allowOverride
+            // specified on both, or overrideMode or neither of them )
 
             bool result = false;
 
@@ -136,7 +145,8 @@ namespace System.Configuration
                 result = false;
 
                 // Check for an API change for each setting first
-                // If one mode was set through the API - the other mode has to be set in the same way through the API or has to be using the same type in the xml
+                // If one mode was set through the API - the other mode has to be set in the same way through the
+                // API or has to be using the same type in the xml
 
                 // Handle case where "x" was API modified
                 if ((x._mode & ApiDefinedAny) != 0)
@@ -151,7 +161,8 @@ namespace System.Configuration
                 // Handle case where neither "x" nor "y" was API modified
                 else
                 {
-                    // If one of the settings was XML defined - they are a match only if both were XML defined in the same way
+                    // If one of the settings was XML defined - they are a match only if both were XML defined in the
+                    // same way
                     if (((x._mode & XmlDefinedAny) != 0) || ((y._mode & XmlDefinedAny) != 0))
                     {
                         result = (x._mode & XmlDefinedAny) == (y._mode & XmlDefinedAny);
@@ -180,7 +191,8 @@ namespace System.Configuration
 
             bool result = false;
 
-            // If "y" was modified through the API as well - the modified setting must be the same ( i.e. allowOvverride or overrideMode must be modified in both settings )
+            // If "y" was modified through the API as well - the modified setting must be the same ( i.e.
+            // allowOvverride or overrideMode must be modified in both settings )
             if ((y._mode & ApiDefinedAny) != 0)
             {
                 result = (x._mode & ApiDefinedAny) == (y._mode & ApiDefinedAny);
@@ -194,7 +206,8 @@ namespace System.Configuration
                     (((x._mode & ApiDefinedNewMode) != 0) && ((y._mode & XmlDefinedNewMode) != 0))
                 ); // "x" was API changed in New and "y" was XML defined in New
             }
-            // "y" was not API or XML modified - since "x" was API modified - they are not a match ( i.e. "y" should go to an <location> with no explicit mode written out )
+            // "y" was not API or XML modified - since "x" was API modified - they are not a match ( i.e. "y"
+            // should go to an <location> with no explicit mode written out )
             else { }
 
             return result;
@@ -204,10 +217,13 @@ namespace System.Configuration
         {
             get
             {
-                // Returns true if the current value of the overrideMode setting is the default one on a section declaration
+                // Returns true if the current value of the overrideMode setting is the default one on a section
+                // declaration
 
-                // The current default value for a section's overrideMode ( i.e. overrideModeDefault ) is Allow ( see CreateDefaultForSection )
-                // It would've been nice not to repeat that rule here but since OverrideMode.Inherited means the same in this specific context we have to
+                // The current default value for a section's overrideMode ( i.e. overrideModeDefault ) is Allow (
+                // see CreateDefaultForSection )
+                // It would've been nice not to repeat that rule here but since OverrideMode.Inherited means the
+                // same in this specific context we have to
                 // I.e. the default for a section is both Allow and Inherited. In this case they mean the same
 
                 OverrideMode mode = OverrideMode;
@@ -398,7 +414,8 @@ namespace System.Configuration
 
         private void VerifyConsistentChangeModel(byte required)
         {
-            // The required API change model ( i.e. was allowOverride used or OverrideMode ) should be consistent
+            // The required API change model ( i.e. was allowOverride used or OverrideMode ) should be
+            // consistent
             // I.e. its not possible to change both on the same OverrideModeSetting object
 
             byte current = (byte)(_mode & ApiDefinedAny); // Shows whats the current setting: 0 ( none ), ApiDefinedLegacy or ApiDefinedNew

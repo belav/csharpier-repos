@@ -38,12 +38,15 @@ public class ErrorBoundary : ErrorBoundaryBase
         {
             // The default error UI doesn't include any content, because:
             // [1] We don't know whether or not you'd be happy to show the stack trace. It depends both on
-            //     whether DetailedErrors is enabled and whether you're in production, because even on WebAssembly
-            //     you likely don't want to put technical data like that in the UI for end users. A reasonable way
+            //     whether DetailedErrors is enabled and whether you're in production, because even on
+            // WebAssembly
+            //     you likely don't want to put technical data like that in the UI for end users. A reasonable
+            // way
             //     to toggle this is via something like "#if DEBUG" but that can only be done in user code.
             // [2] We can't have any other human-readable content by default, because it would need to be valid
             //     for all languages.
-            // Instead, the default project template provides locale-specific default content via CSS. This provides
+            // Instead, the default project template provides locale-specific default content via CSS. This
+            // provides
             // a quick form of customization even without having to subclass this component.
             builder.OpenElement(2, "div");
             builder.AddAttribute(3, "class", "blazor-error-boundary");

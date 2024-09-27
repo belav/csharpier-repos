@@ -25,7 +25,8 @@ public static class HeaderUtilities
         {
             // Note that even if we check the value here, we can't prevent a user from adding an invalid quality
             // value using Parameters.Add(). Even if we would prevent the user from adding an invalid value
-            // using Parameters.Add() they could always add invalid values using HttpHeaders.AddWithoutValidation().
+            // using Parameters.Add() they could always add invalid values using
+            // HttpHeaders.AddWithoutValidation().
             // So this check is really for convenience to show users that they're trying to add an invalid
             // value.
             if ((value < 0) || (value > 1))
@@ -147,7 +148,8 @@ public static class HeaderUtilities
             }
         }
 
-        // Since we never re-use a "found" value in 'y', we expected 'alreadyFound' to have all fields set to 'true'.
+        // Since we never re-use a "found" value in 'y', we expected 'alreadyFound' to have all fields set
+        // to 'true'.
         // Otherwise the two collections can't be equal and we should not get here.
         Contract.Assert(
             Contract.ForAll(
@@ -236,13 +238,16 @@ public static class HeaderUtilities
     /// The target header value to look for.
     /// </param>
     /// <param name="value">
-    /// When this method returns, contains the parsed <see cref="TimeSpan"/>, if the parsing succeeded, or
+    /// When this method returns, contains the parsed <see cref="TimeSpan"/>, if the parsing succeeded,
+    // or
     /// null if the parsing failed. The conversion fails if the <paramref name="targetValue"/> was not
-    /// found or could not be parsed as a <see cref="TimeSpan"/>. This parameter is passed uninitialized;
+    /// found or could not be parsed as a <see cref="TimeSpan"/>. This parameter is passed
+    // uninitialized;
     /// any value originally supplied in result will be overwritten.
     /// </param>
     /// <returns>
-    /// <see langword="true" /> if <paramref name="targetValue"/> is found and successfully parsed; otherwise,
+    /// <see langword="true" /> if <paramref name="targetValue"/> is found and successfully parsed;
+    // otherwise,
     /// <see langword="false" />.
     /// </returns>
     // e.g. { "headerValue=10, targetHeaderValue=30" }
@@ -317,7 +322,8 @@ public static class HeaderUtilities
     /// The target cache control directives to look for.
     /// </param>
     /// <returns>
-    /// <see langword="true" /> if <paramref name="targetDirectives"/> is contained in <paramref name="cacheControlDirectives"/>;
+    /// <see langword="true" /> if <paramref name="targetDirectives"/> is contained in <paramref
+    // name="cacheControlDirectives"/>;
     /// otherwise, <see langword="false" />.
     /// </returns>
     public static bool ContainsCacheDirective(
@@ -415,20 +421,26 @@ public static class HeaderUtilities
     }
 
     /// <summary>
-    /// Try to convert a string representation of a positive number to its 64-bit signed integer equivalent.
+    /// Try to convert a string representation of a positive number to its 64-bit signed integer
+    // equivalent.
     /// A return value indicates whether the conversion succeeded or failed.
     /// </summary>
     /// <param name="value">
     /// A string containing a number to convert.
     /// </param>
     /// <param name="result">
-    /// When this method returns, contains the 64-bit signed integer value equivalent of the number contained
-    /// in the string, if the conversion succeeded, or zero if the conversion failed. The conversion fails if
-    /// the string is null or String.Empty, is not of the correct format, is negative, or represents a number
-    /// greater than Int64.MaxValue. This parameter is passed uninitialized; any value originally supplied in
+    /// When this method returns, contains the 64-bit signed integer value equivalent of the number
+    // contained
+    /// in the string, if the conversion succeeded, or zero if the conversion failed. The conversion
+    // fails if
+    /// the string is null or String.Empty, is not of the correct format, is negative, or represents a
+    // number
+    /// greater than Int64.MaxValue. This parameter is passed uninitialized; any value originally
+    // supplied in
     /// result will be overwritten.
     /// </param>
-    /// <returns><see langword="true" /> if parsing succeeded; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if parsing succeeded; otherwise, <see langword="false"
+    // />.</returns>
     public static bool TryParseNonNegativeInt32(StringSegment value, out int result)
     {
         if (string.IsNullOrEmpty(value.Buffer) || value.Length == 0)
@@ -446,20 +458,26 @@ public static class HeaderUtilities
     }
 
     /// <summary>
-    /// Try to convert a <see cref="StringSegment"/> representation of a positive number to its 64-bit signed
+    /// Try to convert a <see cref="StringSegment"/> representation of a positive number to its 64-bit
+    // signed
     /// integer equivalent. A return value indicates whether the conversion succeeded or failed.
     /// </summary>
     /// <param name="value">
     /// A <see cref="StringSegment"/> containing a number to convert.
     /// </param>
     /// <param name="result">
-    /// When this method returns, contains the 64-bit signed integer value equivalent of the number contained
-    /// in the string, if the conversion succeeded, or zero if the conversion failed. The conversion fails if
-    /// the <see cref="StringSegment"/> is null or String.Empty, is not of the correct format, is negative, or
-    /// represents a number greater than Int64.MaxValue. This parameter is passed uninitialized; any value
+    /// When this method returns, contains the 64-bit signed integer value equivalent of the number
+    // contained
+    /// in the string, if the conversion succeeded, or zero if the conversion failed. The conversion
+    // fails if
+    /// the <see cref="StringSegment"/> is null or String.Empty, is not of the correct format, is
+    // negative, or
+    /// represents a number greater than Int64.MaxValue. This parameter is passed uninitialized; any
+    // value
     /// originally supplied in result will be overwritten.
     /// </param>
-    /// <returns><see langword="true" /> if parsing succeeded; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if parsing succeeded; otherwise, <see langword="false"
+    // />.</returns>
     public static bool TryParseNonNegativeInt64(StringSegment value, out long result)
     {
         if (string.IsNullOrEmpty(value.Buffer) || value.Length == 0)
@@ -477,7 +495,8 @@ public static class HeaderUtilities
 
     // Strict and fast RFC9110 12.4.2 Quality value parser (and without memory allocation)
     // See https://tools.ietf.org/html/rfc9110#section-12.4.2
-    // Check is made to verify if the value is between 0 and 1 (and it returns False if the check fails).
+    // Check is made to verify if the value is between 0 and 1 (and it returns False if the check
+    // fails).
     internal static bool TryParseQualityDouble(
         StringSegment input,
         int startIndex,
@@ -509,7 +528,8 @@ public static class HeaderUtilities
         }
         else
         {
-            // The RFC doesn't allow decimal values starting with dot. I.e. value ".123" is invalid. It must be in the
+            // The RFC doesn't allow decimal values starting with dot. I.e. value ".123" is invalid. It must be
+            // in the
             // form "0.123".
             return false;
         }
@@ -577,7 +597,8 @@ public static class HeaderUtilities
     /// The number to convert.
     /// </param>
     /// <returns>
-    /// The string representation of the value of this instance, consisting of a sequence of digits ranging from 0 to 9 with no leading zeroes.
+    /// The string representation of the value of this instance, consisting of a sequence of digits
+    // ranging from 0 to 9 with no leading zeroes.
     /// </returns>
     public static string FormatNonNegativeInt64(long value)
     {
@@ -605,7 +626,8 @@ public static class HeaderUtilities
     /// The number to convert.
     /// </param>
     /// <returns>
-    /// The string representation of the value of this instance, consisting of a sequence of digits ranging from 0 to 9 with no leading zeroes.
+    /// The string representation of the value of this instance, consisting of a sequence of digits
+    // ranging from 0 to 9 with no leading zeroes.
     /// In case of negative numeric value it will have a leading minus sign.
     /// </returns>
     internal static string FormatInt64(long value)
@@ -625,7 +647,8 @@ public static class HeaderUtilities
     /// <param name="input">The input value.</param>
     /// <param name="result">The parsed value.</param>
     /// <returns>
-    /// <see langword="true" /> if <paramref name="input"/> can be parsed as a date, otherwise <see langword="false" />.
+    /// <see langword="true" /> if <paramref name="input"/> can be parsed as a date, otherwise <see
+    // langword="false" />.
     /// </returns>
     public static bool TryParseDate(StringSegment input, out DateTimeOffset result)
     {
@@ -643,7 +666,8 @@ public static class HeaderUtilities
     }
 
     /// <summary>
-    /// Formats the <paramref name="dateTime"/> using the RFC1123 format specifier and optionally quotes it.
+    /// Formats the <paramref name="dateTime"/> using the RFC1123 format specifier and optionally quotes
+    // it.
     /// </summary>
     /// <param name="dateTime">The date to format.</param>
     /// <param name="quoted">Determines if the formatted date should be quoted.</param>
@@ -684,7 +708,8 @@ public static class HeaderUtilities
     /// Determines if the specified <paramref name="input"/> is quoted.
     /// </summary>
     /// <param name="input">The value to inspect.</param>
-    /// <returns><see langword="true"/> if the value is quoted, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if the value is quoted, otherwise <see
+    // langword="false"/>.</returns>
     public static bool IsQuoted(StringSegment input)
     {
         return !StringSegment.IsNullOrEmpty(input)
@@ -694,8 +719,10 @@ public static class HeaderUtilities
     }
 
     /// <summary>
-    /// Given a quoted-string as defined by <see href="https://tools.ietf.org/html/rfc7230#section-3.2.6">the RFC specification</see>,
-    /// removes quotes and unescapes backslashes and quotes. This assumes that the input is a valid quoted-string.
+    /// Given a quoted-string as defined by <see
+    // href="https://tools.ietf.org/html/rfc7230#section-3.2.6">the RFC specification</see>,
+    /// removes quotes and unescapes backslashes and quotes. This assumes that the input is a valid
+    // quoted-string.
     /// </summary>
     /// <param name="input">The quoted-string to be unescaped.</param>
     /// <returns>An unescaped version of the quoted-string.</returns>

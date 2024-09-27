@@ -100,7 +100,8 @@ namespace System.Security.Principal
                 m_fsd.SetTokenHandles(null, null);
         }
 
-        // Non-throwing version that does not new any exception objects. To be called when reliability matters
+        // Non-throwing version that does not new any exception objects. To be called when reliability
+        // matters
         [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]

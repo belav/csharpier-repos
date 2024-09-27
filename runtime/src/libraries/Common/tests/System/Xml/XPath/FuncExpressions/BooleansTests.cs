@@ -653,7 +653,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// Equality of node sets - true. Two node sets should be equal if for any node in the first node set there is a node in the second node set such that the string value of the two are equal.
+        /// Equality of node sets - true. Two node sets should be equal if for any node in the first node
+        // set there is a node in the second node set such that the string value of the two are equal.
         /// /mydoc/numbers[2]/n = /mydoc/numbers[1]/n
         /// </summary>
         [Theory]
@@ -670,7 +671,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// Equality of node sets - false. Two node sets should be equal if for any node in the first node set there is a node in the second node set such that the string value of the two are equal.
+        /// Equality of node sets - false. Two node sets should be equal if for any node in the first node
+        // set there is a node in the second node set such that the string value of the two are equal.
         /// /mydoc/numbers[2]/n = /mydoc/numbers[3]/n
         /// </summary>
         [Theory]
@@ -687,7 +689,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// = node set and number - true. = is true if a node in node set has a numeric value equal to the number. (Not testing other operators since they work similarly)
+        /// = node set and number - true. = is true if a node in node set has a numeric value equal to the
+        // number. (Not testing other operators since they work similarly)
         /// /mydoc/numbers[1]/n = 1
         /// </summary>
         [Theory]
@@ -738,7 +741,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// Comparison of node set with string. = is true if a node in node set has a string value equal to the string constant it is being compared with.
+        /// Comparison of node set with string. = is true if a node in node set has a string value equal to
+        // the string constant it is being compared with.
         /// /bookstore/book/title = 'Seven Years in Trenton'
         /// </summary>
         [Theory]

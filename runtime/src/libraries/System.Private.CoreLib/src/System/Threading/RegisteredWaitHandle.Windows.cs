@@ -64,7 +64,8 @@ namespace System.Threading
                 : UnregisterPortableCore(waitObject);
 
         /// <summary>
-        /// Perform the registered callback if the <see cref="UserUnregisterWaitHandle"/> has not been signaled.
+        /// Perform the registered callback if the <see cref="UserUnregisterWaitHandle"/> has not been
+        // signaled.
         /// </summary>
         /// <param name="timedOut">Whether or not the wait timed out.</param>
         internal void PerformCallback(bool timedOut)

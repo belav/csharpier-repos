@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
     [ConditionalClass(typeof(RC2Factory), nameof(RC2Factory.IsSupported))]
     public static partial class RC2CipherTests
     {
-        // These are the expected output of many decryptions. Changing these values requires re-generating test input.
+        // These are the expected output of many decryptions. Changing these values requires re-generating
+        // test input.
         private static readonly string s_multiBlockString = new ASCIIEncoding()
             .GetBytes(
                 "This is a sentence that is longer than a block, it ensures that multi-block functions work."

@@ -4,20 +4,21 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    UriScheme.cs
+UriScheme.cs
 
 Abstract:
-    Provides extensibility contract for System.Uri
-    The contains only public API definition.
+Provides extensibility contract for System.Uri
+The contains only public API definition.
 
-    For remaining internal stuff please refer to the _UriSyntax.cs file.
+For remaining internal stuff please refer to the _UriSyntax.cs file.
 
 Author:
 
-    Alexei Vopilov    19-Dec-2003
+Alexei Vopilov    19-Dec-2003
 
 Revision History:
-    Alexei Vopilov    60-July-2004  - Changed the extensiblity model to be based purely on derivation, also has cut Config extensibility option
+Alexei Vopilov    60-July-2004  - Changed the extensiblity model to be based purely on derivation,
+also has cut Config extensibility option
 
 
 --*/
@@ -31,7 +32,8 @@ namespace System
     // The class is used as a base for custom uri parsing and derived Uri factoring.
     // A set of protected .ctors allows to hookup on the builtin parser behaviors.
     //
-    // A developer must implement at least internal default .ctor to participate in the Uri extensibility game.
+    // A developer must implement at least internal default .ctor to participate in the Uri
+    // extensibility game.
     //
     public abstract partial class UriParser
     {

@@ -27,7 +27,8 @@ namespace System.Reflection.Runtime.CustomAttributes
             }
         }
 
-        // Equals/GetHashCode no need to override (they just implement reference equality but desktop never unified these things.)
+        // Equals/GetHashCode no need to override (they just implement reference equality but desktop never
+        // unified these things.)
 
         public sealed override IList<CustomAttributeNamedArgument> NamedArguments
         {
@@ -63,9 +64,12 @@ namespace System.Reflection.Runtime.CustomAttributes
             {
                 CustomAttributeNamedArgument namedArgument = namedArguments[i];
 
-                // Legacy: Desktop sets "typed" to "namedArgument.ArgumentType != typeof(Object)" - on Project N, this property is not available
-                // (nor conveniently computable as it's not captured in the Project N metadata.) The only consequence is that for
-                // the rare case of fields and properties typed "Object", we won't decorate the argument value with its actual type name.
+                // Legacy: Desktop sets "typed" to "namedArgument.ArgumentType != typeof(Object)" - on Project N,
+                // this property is not available
+                // (nor conveniently computable as it's not captured in the Project N metadata.) The only
+                // consequence is that for
+                // the rare case of fields and properties typed "Object", we won't decorate the argument value with
+                // its actual type name.
                 bool typed = true;
                 namedArgs += string.Format(
                     i == 0 && ctorArgs.Length == 0 ? "{0} = {1}" : ", {0} = {1}",
@@ -118,14 +122,16 @@ namespace System.Reflection.Runtime.CustomAttributes
         }
 
         //
-        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata exception.
+        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata
+        // exception.
         //
         internal abstract IList<CustomAttributeTypedArgument> GetConstructorArguments(
             bool throwIfMissingMetadata
         );
 
         //
-        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata exception.
+        // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata
+        // exception.
         //
         internal abstract IList<CustomAttributeNamedArgument> GetNamedArguments(
             bool throwIfMissingMetadata
@@ -192,7 +198,8 @@ namespace System.Reflection.Runtime.CustomAttributes
         }
 
         //
-        // Wrap a custom attribute argument (or an element of an array-typed custom attribute argument) in a CustomAttributeTypeArgument structure
+        // Wrap a custom attribute argument (or an element of an array-typed custom attribute argument) in a
+        // CustomAttributeTypeArgument structure
         // for insertion into a CustomAttributeData value.
         //
         protected static CustomAttributeTypedArgument WrapInCustomAttributeTypedArgument(
@@ -202,7 +209,8 @@ namespace System.Reflection.Runtime.CustomAttributes
         {
             if (argumentType == typeof(object))
             {
-                // If the declared attribute type is System.Object, we must report the type based on the runtime value.
+                // If the declared attribute type is System.Object, we must report the type based on the runtime
+                // value.
                 if (value == null)
                     argumentType = typeof(string); // Why is null reported as System.String? Because that's what the desktop CLR does.
                 else if (value is Type)

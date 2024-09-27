@@ -29,9 +29,12 @@ namespace System.ServiceModel.Diagnostics
         static bool endpointOOM = false;
         static bool operationOOM = false;
 
-        //we need a couple of ways of accessing the same performance counters. Normally, we know which endpoint
-        //for which we need to update a perf counter. In some cases (e.g. RM), we only have a base uri. In those
-        //cases, we update all the perf counters associated with the base uri. These two dictionaries point to
+        //we need a couple of ways of accessing the same performance counters. Normally, we know which
+        // endpoint
+        //for which we need to update a perf counter. In some cases (e.g. RM), we only have a base uri. In
+        // those
+        //cases, we update all the perf counters associated with the base uri. These two dictionaries point
+        // to
         //the same underlying perf counters, but in different ways.
         static Dictionary<string, ServiceModelPerformanceCounters> performanceCounters = null;
         static Dictionary<string, ServiceModelPerformanceCountersEntry> performanceCountersBaseUri =

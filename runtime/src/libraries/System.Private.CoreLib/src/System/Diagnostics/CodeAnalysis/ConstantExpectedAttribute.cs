@@ -7,7 +7,8 @@ namespace System.Diagnostics.CodeAnalysis
     /// Indicates that the specified method parameter expects a constant.
     /// </summary>
     /// <remarks>
-    /// This can be used to inform tooling that a constant should be used as an argument for the annotated parameter.
+    /// This can be used to inform tooling that a constant should be used as an argument for the
+    // annotated parameter.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     public sealed class ConstantExpectedAttribute : Attribute

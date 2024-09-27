@@ -33,7 +33,8 @@ namespace System.Web
             // At designtime CodeGenDir is null.
             if (HttpRuntime.CodegenDirInternal != null)
             {
-                // Module.FullyQualifiedName was changed to check for FileIOPermission regardless of the name being an existing file or not.
+                // Module.FullyQualifiedName was changed to check for FileIOPermission regardless of the name being
+                // an existing file or not.
                 // we need to Assert in order to succeed the Demand() (ASURT 121603)
                 (
                     InternalSecurityPermissions.PathDiscovery(HttpRuntime.CodegenDirInternal)

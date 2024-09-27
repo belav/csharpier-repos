@@ -51,8 +51,9 @@ namespace System.Globalization
 
         private static readonly int[,] s_yinfo =
         {
-            /*Y            LM        Lmon    Lday        DaysPerMonth    D1    D2    D3    D4    D5    D6    D7    D8    D9    D10    D11    D12    D13    #Days
-            1912    */
+/*Y            LM        Lmon    Lday        DaysPerMonth    D1    D2    D3    D4    D5    D6    D7
+D8    D9    D10    D11    D12    D13    #Days
+1912    */
             { 0, 2, 18, 42192 }, /*    30    29    30    29    29    30    29    29    30    30    29    30    0    354
 1913    */
             { 0, 2, 6, 53840 }, /*    30    30    29    30    29    29    30    29    29    30    29    30    0    354

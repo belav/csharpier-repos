@@ -266,7 +266,8 @@ public class InputFormatterTest
         Assert.False(result);
     }
 
-    // IsSubsetOf does not follow XML media type conventions. This formatter does not support "application/*+xml".
+    // IsSubsetOf does not follow XML media type conventions. This formatter does not support
+    // "application/*+xml".
     private class XmlFormatter : TestFormatter
     {
         public XmlFormatter()

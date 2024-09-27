@@ -134,9 +134,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="handlerLength">Handler length.</param>
         /// <returns>Encoder for the next clause.</returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
+        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or
+        // <paramref name="handlerLength"/> is out of range.
         /// </exception>
-        /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
+        /// <exception cref="InvalidOperationException">Method body was not declared to have exception
+        // regions.</exception>
         public ExceptionRegionEncoder AddFinally(
             int tryOffset,
             int tryLength,
@@ -164,9 +166,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="handlerLength">Handler length.</param>
         /// <returns>Encoder for the next clause.</returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
+        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or
+        // <paramref name="handlerLength"/> is out of range.
         /// </exception>
-        /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
+        /// <exception cref="InvalidOperationException">Method body was not declared to have exception
+        // regions.</exception>
         public ExceptionRegionEncoder AddFault(
             int tryOffset,
             int tryLength,
@@ -193,14 +197,17 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="handlerOffset">Handler start offset.</param>
         /// <param name="handlerLength">Handler length.</param>
         /// <param name="catchType">
-        /// <see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/> or <see cref="TypeSpecificationHandle"/>.
+        /// <see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/> or <see
+        // cref="TypeSpecificationHandle"/>.
         /// </param>
         /// <returns>Encoder for the next clause.</returns>
         /// <exception cref="ArgumentException"><paramref name="catchType"/> is invalid.</exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
+        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or
+        // <paramref name="handlerLength"/> is out of range.
         /// </exception>
-        /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
+        /// <exception cref="InvalidOperationException">Method body was not declared to have exception
+        // regions.</exception>
         public ExceptionRegionEncoder AddCatch(
             int tryOffset,
             int tryLength,
@@ -230,9 +237,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="filterOffset">Offset of the filter block.</param>
         /// <returns>Encoder for the next clause.</returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
+        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or
+        // <paramref name="handlerLength"/> is out of range.
         /// </exception>
-        /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
+        /// <exception cref="InvalidOperationException">Method body was not declared to have exception
+        // regions.</exception>
         public ExceptionRegionEncoder AddFilter(
             int tryOffset,
             int tryLength,
@@ -261,19 +270,24 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="handlerOffset">Handler start offset.</param>
         /// <param name="handlerLength">Handler length.</param>
         /// <param name="catchType">
-        /// <see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/> or <see cref="TypeSpecificationHandle"/>,
+        /// <see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/> or <see
+        // cref="TypeSpecificationHandle"/>,
         /// or nil if <paramref name="kind"/> is not <see cref="ExceptionRegionKind.Catch"/>
         /// </param>
         /// <param name="filterOffset">
-        /// Offset of the filter block, or 0 if the <paramref name="kind"/> is not <see cref="ExceptionRegionKind.Filter"/>.
+        /// Offset of the filter block, or 0 if the <paramref name="kind"/> is not <see
+        // cref="ExceptionRegionKind.Filter"/>.
         /// </param>
         /// <returns>Encoder for the next clause.</returns>
         /// <exception cref="ArgumentException"><paramref name="catchType"/> is invalid.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="kind"/> has invalid value.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="kind"/> has invalid
+        // value.</exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
+        /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or
+        // <paramref name="handlerLength"/> is out of range.
         /// </exception>
-        /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
+        /// <exception cref="InvalidOperationException">Method body was not declared to have exception
+        // regions.</exception>
         public ExceptionRegionEncoder Add(
             ExceptionRegionKind kind,
             int tryOffset,

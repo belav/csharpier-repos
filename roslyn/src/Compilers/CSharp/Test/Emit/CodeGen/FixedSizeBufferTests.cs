@@ -366,7 +366,8 @@ class Program
 
             CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (9,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
+                    // (9,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short,
+                    // int, long, char, sbyte, ushort, uint, ulong, float or double
                     //     public fixed S1 x[10];
                     Diagnostic(ErrorCode.ERR_IllegalFixedType, "S1").WithLocation(9, 18)
                 );
@@ -438,12 +439,14 @@ class Program
 
             CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (17,9): error CS1648: Members of readonly field 'S1.field' cannot be modified (except in a constructor, an init-only member or a variable initializer)
+                    // (17,9): error CS1648: Members of readonly field 'S1.field' cannot be modified (except in a
+                    // constructor, an init-only member or a variable initializer)
                     //         c.field.x[0] = 12;
                     Diagnostic(ErrorCode.ERR_AssgReadonly2, "c.field.x[0]")
                         .WithArguments("S1.field")
                         .WithLocation(17, 9),
-                    // (19,27): error CS1649: Members of readonly field 'S1.field' cannot be used as a ref or out value (except in a constructor)
+                    // (19,27): error CS1649: Members of readonly field 'S1.field' cannot be used as a ref or out value
+                    // (except in a constructor)
                     //         ref int irw = ref c.field.x[0];
                     Diagnostic(ErrorCode.ERR_RefReadonly2, "c.field.x[0]")
                         .WithArguments("S1.field")
@@ -603,7 +606,8 @@ class Program
         [Fact]
         public void SeparateCompilation()
         {
-            // Here we test round tripping - emitting a fixed-size buffer into metadata, and then reimporting that
+            // Here we test round tripping - emitting a fixed-size buffer into metadata, and then reimporting
+            // that
             // fixed-size buffer from metadata and using it in another compilation.
             var s1 =
                 @"public unsafe struct S
@@ -726,7 +730,8 @@ unsafe class C
                     // (4,15): error CS1642: Fixed size buffer fields may only be members of structs
                     //     fixed int F[G];
                     Diagnostic(ErrorCode.ERR_FixedNotInStruct, "F"),
-                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'C.G'
+                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'C.G'
                     //     fixed int F[G];
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "G").WithArguments("C.G")
                 );
@@ -748,16 +753,19 @@ unsafe struct S
             // CONSIDER: Dev11 reports CS1666 (ERR_FixedBufferNotFixed), but that's no more helpful.
             CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (6,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (6,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //     fixed int F1[(new S()).G];
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "(new S()).G")
                         .WithLocation(6, 18),
-                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'S.G'
+                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'S.G'
                     //     fixed int F[G];
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "G")
                         .WithArguments("S.G")
                         .WithLocation(4, 17),
-                    // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //     fixed int F[G];
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "G").WithLocation(4, 17)
                 );
@@ -775,21 +783,26 @@ unsafe struct S
     fixed int G[default(S).G];
 }
 ";
-            // CONSIDER: Dev11 also reports CS0110 (ERR_CircConstValue), but Roslyn doesn't regard this as a cycle:
-            // F has no initializer, so it has no constant value, so the constant value of F is "null" - not "the
+            // CONSIDER: Dev11 also reports CS0110 (ERR_CircConstValue), but Roslyn doesn't regard this as a
+            // cycle:
+            // F has no initializer, so it has no constant value, so the constant value of F is "null" - not
+            // "the
             // constant value of F" (i.e. cyclic).
             CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (5,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (5,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //     fixed int G[default(S).G];
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "default(S).G")
                         .WithLocation(5, 17),
-                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or property 'S.F'
+                    // (4,17): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'S.F'
                     //     fixed int F[F];
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "F")
                         .WithArguments("S.F")
                         .WithLocation(4, 17),
-                    // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (4,17): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //     fixed int F[F];
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "F").WithLocation(4, 17)
                 );
@@ -987,13 +1000,17 @@ class Program
                     // (8,18): error CS1002: ; expected
                     //     public fixed const UInt32 StartOfTables[ 16 ];
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "const").WithLocation(8, 18),
-                    // (8,44): error CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
+                    // (8,44): error CS0650: Bad array declarator: To declare a managed array the rank specifier
+                    // precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword
+                    // before the field type.
                     //     public fixed const UInt32 StartOfTables[ 16 ];
                     Diagnostic(ErrorCode.ERR_CStyleArray, "[ 16 ]").WithLocation(8, 44),
-                    // (8,46): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    // (8,46): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                    // with a 'new' expression)
                     //     public fixed const UInt32 StartOfTables[ 16 ];
                     Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "16").WithLocation(8, 46),
-                    // (8,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
+                    // (8,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short,
+                    // int, long, char, sbyte, ushort, uint, ulong, float or double
                     //     public fixed const UInt32 StartOfTables[ 16 ];
                     Diagnostic(ErrorCode.ERR_IllegalFixedType, "").WithLocation(8, 18),
                     // (15,25): error CS0122: 'AssemblyRecord.StartOfTables' is inaccessible due to its protection level
@@ -1239,10 +1256,12 @@ unsafe struct Foo
                     options: TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (6,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (6,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //     public int* M1 => &this.Bar[0];
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&this.Bar[0]").WithLocation(6, 23),
-                    // (7,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (7,23): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //     public int* M2 => &Bar[1];
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&Bar[1]").WithLocation(7, 23)
                 );

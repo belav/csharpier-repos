@@ -12,15 +12,19 @@ namespace System.Runtime
     using Microsoft.Win32.SafeHandles;
 
     // IOThreadTimer has several characterstics that are important for performance:
-    // - Timers that expire benefit from being scheduled to run on IO threads using IOThreadScheduler.Schedule.
+    // - Timers that expire benefit from being scheduled to run on IO threads using
+    // IOThreadScheduler.Schedule.
     // - The timer "waiter" thread thread is only allocated if there are set timers.
-    // - The timer waiter thread itself is an IO thread, which allows it to go away if there is no need for it,
+    // - The timer waiter thread itself is an IO thread, which allows it to go away if there is no need
+    // for it,
     //   and allows it to be reused for other purposes.
     // - After the timer count goes to zero, the timer waiter thread remains active for a bounded amount
     //   of time to wait for additional timers to be set.
-    // - Timers are stored in an array-based priority queue to reduce the amount of time spent in updates, and
+    // - Timers are stored in an array-based priority queue to reduce the amount of time spent in
+    // updates, and
     //   to always provide O(1) access to the minimum timer (the first one that will expire).
-    // - The standard textbook priority queue data structure is extended to allow efficient Delete in addition to
+    // - The standard textbook priority queue data structure is extended to allow efficient Delete in
+    // addition to
     //   DeleteMin for efficient handling of canceled timers.
     // - Timers that are typically set, then immediately canceled (such as a retry timer,
     //   or a flush timer), are tracked separately from more stable timers, to avoid having

@@ -158,7 +158,8 @@ namespace XPathTests.FunctionalTests.Expressions
         }
 
         /// <summary>
-        /// The document's default namespace is defined with a prefix in the XmlNamespaceManager, XPath should find the nodes with the default namespace in the document.
+        /// The document's default namespace is defined with a prefix in the XmlNamespaceManager, XPath
+        // should find the nodes with the default namespace in the document.
         /// //foo:book[1]
         /// </summary>
         [Theory]

@@ -18,7 +18,8 @@ namespace Microsoft.NET.HostModel.Tests
     public class AppHostUpdateTests
     {
         /// <summary>
-        /// hash value embedded in default apphost executable in a place where the path to the app binary should be stored.
+        /// hash value embedded in default apphost executable in a place where the path to the app binary
+        // should be stored.
         /// </summary>
         private const string AppBinaryPathPlaceholder =
             "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2";

@@ -33,7 +33,8 @@ namespace System.Net.Sockets
         private object lockObject = new object();
 
         // Called by Socket to kick off the ConnectAsync process.  We'll complete the user's SAEA
-        // when it's done.  Returns true if the operation will be asynchronous, false if it has failed synchronously
+        // when it's done.  Returns true if the operation will be asynchronous, false if it has failed
+        // synchronously
         public bool StartConnectAsync(SocketAsyncEventArgs args, DnsEndPoint endPoint)
         {
             lock (lockObject)
@@ -50,7 +51,8 @@ namespace System.Net.Sockets
                 this.endPoint = endPoint;
 
                 // If Cancel() was called before we got the lock, it only set the state to Canceled: we need to
-                // fail synchronously from here.  Once State.DnsQuery is set, the Cancel() call will handle calling AsyncFail.
+                // fail synchronously from here.  Once State.DnsQuery is set, the Cancel() call will handle calling
+                // AsyncFail.
                 if (state == State.Canceled)
                 {
                     SyncFail(new SocketException(SocketError.OperationAborted));
@@ -89,8 +91,10 @@ namespace System.Net.Sockets
             }
         }
 
-        // Called when the DNS query completes (either synchronously or asynchronously).  Checks for failure and
-        // starts the first connection attempt if it succeeded.  Returns true if the operation will be asynchronous,
+        // Called when the DNS query completes (either synchronously or asynchronously).  Checks for failure
+        // and
+        // starts the first connection attempt if it succeeded.  Returns true if the operation will be
+        // asynchronous,
         // false if it has failed synchronously.
         private bool DoDnsCallback(IAsyncResult result, bool sync)
         {
@@ -376,7 +380,8 @@ namespace System.Net.Sockets
 
                     case State.ConnectAttempt:
                         // Cancel was called after the Dns query completed, but before we had a connection result to give
-                        // to the user.  Closing the sockets will cause any in-progress ConnectAsync call to fail immediately
+                        // to the user.  Closing the sockets will cause any in-progress ConnectAsync call to fail
+                        // immediately
                         // with OperationAborted, and will cause ObjectDisposedException from any new calls to ConnectAsync
                         // (which will be translated to OperationAborted by AttemptConnection).
                         callOnFail = true;

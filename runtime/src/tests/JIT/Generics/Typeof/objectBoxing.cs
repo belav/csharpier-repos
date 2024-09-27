@@ -3,7 +3,7 @@
 //
 
 /* unboxing where a parameter is types as object and then is unboxed to its scalar type
- */
+*/
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -237,14 +237,14 @@ public class mainMethod
         string xm
     )
     {
-        /*
-        printCount(ref DS.ds_count, ds, dsm);
-        printCount(ref CS.cs_count, cs, csm);
-        printCount(ref D.d_count, d, dm);
-        printCount(ref C.c_count, c, cm);
-        printCount(ref B.b_count, b, bm);
-        printCount(ref A.a_count, a, am);
-        printCount(ref x_actual, x, xm);
+/*
+printCount(ref DS.ds_count, ds, dsm);
+printCount(ref CS.cs_count, cs, csm);
+printCount(ref D.d_count, d, dm);
+printCount(ref C.c_count, c, cm);
+printCount(ref B.b_count, b, bm);
+printCount(ref A.a_count, a, am);
+printCount(ref x_actual, x, xm);
 
 */
         checkCount(ref DS.ds_count, ds, dsm);

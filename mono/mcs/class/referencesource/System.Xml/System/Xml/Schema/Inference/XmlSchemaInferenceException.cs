@@ -38,7 +38,8 @@ namespace System.Xml.Schema
         public XmlSchemaInferenceException(String message, Exception innerException)
             : base(message, innerException, 0, 0) { }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
         public XmlSchemaInferenceException(
             String message,
             Exception innerException,

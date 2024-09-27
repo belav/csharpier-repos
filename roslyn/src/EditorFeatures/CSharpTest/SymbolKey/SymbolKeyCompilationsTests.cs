@@ -351,8 +351,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 }
                 """;
             // this should result in two entirely separate file symbols.
-            // note that the IDE can only distinguish file-local type symbols with the same name when they have distinct file paths.
-            // We are OK with this as we will require file types with identical names to have distinct file paths later in the preview.
+            // note that the IDE can only distinguish file-local type symbols with the same name when they have
+            // distinct file paths.
+            // We are OK with this as we will require file types with identical names to have distinct file
+            // paths later in the preview.
             // See https://github.com/dotnet/roslyn/issues/61999
             var originalComp = CreateCompilation(
                 new[]
@@ -391,7 +393,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         [Fact]
         public void FileType4()
         {
-            // we should be able to distinguish a file-local type and non-file-local type when they have the same source name.
+            // we should be able to distinguish a file-local type and non-file-local type when they have the
+            // same source name.
             var src1 = SyntaxFactory.ParseSyntaxTree(
                 """
                 using System;

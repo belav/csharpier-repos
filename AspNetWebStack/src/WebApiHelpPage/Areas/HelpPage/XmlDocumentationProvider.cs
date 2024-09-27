@@ -10,7 +10,8 @@ using ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions;
 namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
 {
     /// <summary>
-    /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+    /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML
+    // documentation file.
     /// </summary>
     public class XmlDocumentationProvider : IDocumentationProvider, IModelDocumentationProvider
     {
@@ -195,7 +196,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             }
             if (type.IsNested)
             {
-                // Changing the nested type name from OuterType+InnerType to OuterType.InnerType to match the XML documentation syntax.
+                // Changing the nested type name from OuterType+InnerType to OuterType.InnerType to match the XML
+                // documentation syntax.
                 name = name.Replace("+", ".");
             }
 

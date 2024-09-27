@@ -126,7 +126,8 @@ internal sealed unsafe class CbcAuthenticatedEncryptor : CngAuthenticatedEncrypt
                 byte* pbSymmetricEncryptionSubkey = pbTempKeys;
                 byte* pbHmacSubkey = &pbTempKeys[_symmetricAlgorithmSubkeyLengthInBytes];
 
-                // Encrypt a zero-length input string with an all-zero IV and copy the ciphertext to the return buffer.
+                // Encrypt a zero-length input string with an all-zero IV and copy the ciphertext to the return
+                // buffer.
                 using (
                     var symmetricKeyHandle = _symmetricAlgorithmHandle.GenerateSymmetricKey(
                         pbSymmetricEncryptionSubkey,
@@ -174,7 +175,8 @@ internal sealed unsafe class CbcAuthenticatedEncryptor : CngAuthenticatedEncrypt
             }
         }
 
-        // retVal := { version || chainingMode || symAlgKeySize || symAlgBlockSize || hmacAlgKeySize || hmacAlgDigestSize || E("") || MAC("") }.
+        // retVal := { version || chainingMode || symAlgKeySize || symAlgBlockSize || hmacAlgKeySize ||
+        // hmacAlgDigestSize || E("") || MAC("") }.
         return retVal;
     }
 
@@ -294,7 +296,8 @@ internal sealed unsafe class CbcAuthenticatedEncryptor : CngAuthenticatedEncrypt
         uint cbInput
     )
     {
-        // BCryptDecrypt mutates the provided IV; we need to clone it to prevent mutation of the original value
+        // BCryptDecrypt mutates the provided IV; we need to clone it to prevent mutation of the original
+        // value
         byte* pbClonedIV = stackalloc byte[checked((int)_symmetricAlgorithmBlockSizeInBytes)];
         UnsafeBufferUtil.BlockCopy(
             from: pbIV,
@@ -380,7 +383,8 @@ internal sealed unsafe class CbcAuthenticatedEncryptor : CngAuthenticatedEncrypt
         uint cbOutput
     )
     {
-        // BCryptEncrypt mutates the provided IV; we need to clone it to prevent mutation of the original value
+        // BCryptEncrypt mutates the provided IV; we need to clone it to prevent mutation of the original
+        // value
         byte* pbClonedIV = stackalloc byte[checked((int)_symmetricAlgorithmBlockSizeInBytes)];
         UnsafeBufferUtil.BlockCopy(
             from: pbIV,
@@ -491,7 +495,8 @@ internal sealed unsafe class CbcAuthenticatedEncryptor : CngAuthenticatedEncrypt
                         byteCount: cbKeyModifierAndIV
                     );
 
-                    // retVal will eventually contain { preBuffer | keyModifier | iv | encryptedData | HMAC(iv | encryptedData) | postBuffer }
+                    // retVal will eventually contain { preBuffer | keyModifier | iv | encryptedData | HMAC(iv |
+                    // encryptedData) | postBuffer }
                     // At this point, retVal := { preBuffer | keyModifier | iv | _____ | _____ | postBuffer }
 
                     DoCbcEncrypt(
@@ -525,7 +530,8 @@ internal sealed unsafe class CbcAuthenticatedEncryptor : CngAuthenticatedEncrypt
                         );
                     }
 
-                    // At this point, retVal := { preBuffer | keyModifier | iv | encryptedData | HMAC(iv | encryptedData) | postBuffer }
+                    // At this point, retVal := { preBuffer | keyModifier | iv | encryptedData | HMAC(iv |
+                    // encryptedData) | postBuffer }
                     // And we're done!
                     return retVal;
                 }

@@ -11,11 +11,13 @@ namespace System.Reflection
     public sealed partial class MetadataLoadContext
     {
         //
-        // List of ref AssemblyNames to successfully bound assemblies. This is not the same as _loadedAssemblies.
+        // List of ref AssemblyNames to successfully bound assemblies. This is not the same as
+        // _loadedAssemblies.
         // _loadedAssemblies keeps track of canonical Assembly instances.
         //
         // _binds keeps the resolve event from being called to resolve the same refName over and over again.
-        // If the resolve logic allows variations on the ref name, it is possible and common for the same assembly instance
+        // If the resolve logic allows variations on the ref name, it is possible and common for the same
+        // assembly instance
         // to appear multiple times (once for each variation that was used to bind to it.)
         //
         // We also latch failures. That is, _binds can bind a RuntimeAssemblyName to a RoFailedBindAssembly.

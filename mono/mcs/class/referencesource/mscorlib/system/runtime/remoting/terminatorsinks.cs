@@ -24,11 +24,11 @@ namespace System.Runtime.Remoting.Messaging
     [Serializable]
     internal class InternalSink
     {
-        /*
-         *  Checks the replySink param for NULL and type.
-         *  If the param is good, it returns NULL.
-         *  Else it returns a Message with the relevant exception.
-         */
+/*
+*  Checks the replySink param for NULL and type.
+*  If the param is good, it returns NULL.
+*  Else it returns a Message with the relevant exception.
+*/
         [System.Security.SecurityCritical] // auto-generated
         internal static IMessage ValidateMessage(IMessage reqMsg)
         {
@@ -40,11 +40,11 @@ namespace System.Runtime.Remoting.Messaging
             return retMsg;
         }
 
-        /*
-         *  This check is performed only for client & server context
-         *  terminator sinks and only on the Async path.
-         *
-         */
+/*
+*  This check is performed only for client & server context
+*  terminator sinks and only on the Async path.
+*
+*/
         [System.Security.SecurityCritical] // auto-generated
         internal static IMessage DisallowAsyncActivation(IMessage reqMsg)
         {
@@ -165,7 +165,7 @@ namespace System.Runtime.Remoting.Messaging
     // to the client context chain for the call.
     //
 
-    /* package scope */
+/* package scope */
     [Serializable]
     internal class EnvoyTerminatorSink : InternalSink, IMessageSink
     {
@@ -251,7 +251,7 @@ namespace System.Runtime.Remoting.Messaging
     //
     //
 
-    /* package scope */
+/* package scope */
     internal class ClientContextTerminatorSink : InternalSink, IMessageSink
     {
         private static volatile ClientContextTerminatorSink messageSink;
@@ -573,7 +573,7 @@ namespace System.Runtime.Remoting.Messaging
     //
     //
 
-    /* package scope */
+/* package scope */
     [Serializable]
     internal class ServerContextTerminatorSink : InternalSink, IMessageSink
     {
@@ -757,7 +757,7 @@ namespace System.Runtime.Remoting.Messaging
     // be just replaced by the dispatcher sink.
     //
 
-    /* package scope */
+/* package scope */
     [Serializable]
     internal class ServerObjectTerminatorSink : InternalSink, IMessageSink
     {
@@ -861,7 +861,7 @@ namespace System.Runtime.Remoting.Messaging
     // replies on the client side.
     //
 
-    /* package scope */
+/* package scope */
     internal class ClientAsyncReplyTerminatorSink : IMessageSink
     {
         internal IMessageSink _nextSink;

@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "e")
                         .WithArguments("e")
                         .WithLocation(1, 30),
-                    // (1,42): error CS8773: Feature 'extended property patterns' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (1,42): error CS8773: Feature 'extended property patterns' is not available in C# 9.0. Please use
+                    // language version 10.0 or greater.
                     // class C { void M() { var v = e is { a.b.c: p }; } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, ":")
                         .WithArguments("extended property patterns", "10.0")

@@ -9,7 +9,8 @@ using Internal.TypeSystem.Ecma;
 namespace ILCompiler
 {
     /// <summary>
-    /// A compilation group that only contains a single method. Useful for development purposes when investigating
+    /// A compilation group that only contains a single method. Useful for development purposes when
+    // investigating
     /// code generation issues.
     /// </summary>
     public class SingleMethodCompilationModuleGroup : ReadyToRunCompilationModuleGroupBase

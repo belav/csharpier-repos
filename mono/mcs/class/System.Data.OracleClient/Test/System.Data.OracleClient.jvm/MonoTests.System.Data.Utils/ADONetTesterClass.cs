@@ -150,7 +150,8 @@ namespace MonoTests.System.Data.Utils
             foreach (DataRow dr in ds.Tables[0].Select())
                 dr["Country"] = "NeverNeverLand";
             ds.Tables[0].Columns.Remove("HomePhone"); //remove column, this column will be addedd during the fill process
-            //ds.Tables.Remove(ds.Tables[1]); //remove the table, this table will be addedd during the fill process
+            //ds.Tables.Remove(ds.Tables[1]); //remove the table, this table will be addedd during the fill
+            // process
             ds.AcceptChanges();
 
             // create source dataset to be filled
@@ -217,7 +218,8 @@ namespace MonoTests.System.Data.Utils
             foreach (DataRow dr in ds.Tables[0].Select())
                 dr["Country"] = "NeverNeverLand";
             ds.Tables[0].Columns.Remove("HomePhone"); //remove column, this column will be addedd during the fill process
-            //ds.Tables.Remove(ds.Tables[1]); //remove the table, this table will be addedd during the fill process
+            //ds.Tables.Remove(ds.Tables[1]); //remove the table, this table will be addedd during the fill
+            // process
             ds.AcceptChanges();
 
             // create source dataset to be filled
@@ -249,7 +251,8 @@ namespace MonoTests.System.Data.Utils
             foreach (DataRow dr in ds.Tables[0].Select())
                 dr["Country"] = "NeverNeverLand";
             ds.Tables[0].Columns.Remove("HomePhone"); //remove column, this column will be addedd during the fill process
-            //ds.Tables.Remove(ds.Tables[1]); //remove the table, this table will be addedd during the fill process
+            //ds.Tables.Remove(ds.Tables[1]); //remove the table, this table will be addedd during the fill
+            // process
             ds.AcceptChanges();
 
             // create source dataset to be filled
@@ -288,7 +291,8 @@ namespace MonoTests.System.Data.Utils
             //  Note:   When handling batch SQL statements that return multiple results,
             //	the implementation of FillSchema for the .NET Framework Data Provider for OLEDB
             //	retrieves schema information for only the first result.
-            //	To retrieve schema information for multiple results, use Fill with the MissingSchemaAction set to AddWithKey
+            //	To retrieve schema information for multiple results, use Fill with the MissingSchemaAction set to
+            // AddWithKey
             //			if (dbDA.GetType() == typeof(Sys.Data.OracleClient.OracleDataAdapter))
             //				dsExpected.Tables.Remove(dsExpected.Tables[1]);
 
@@ -564,7 +568,8 @@ namespace MonoTests.System.Data.Utils
             {
                 dsExpected.Tables[0].Columns["EmployeeID"],
             };
-            //if (ReadSchemaOnly)	dsExpected.Tables[1].PrimaryKey = new DataColumn[] {dsExpected.Tables[1].Columns["CustomerID"]};
+            //if (ReadSchemaOnly)	dsExpected.Tables[1].PrimaryKey = new DataColumn[]
+            // {dsExpected.Tables[1].Columns["CustomerID"]};
             dsExpected.AcceptChanges();
 
             return RowsAffected;
@@ -697,7 +702,8 @@ namespace MonoTests.System.Data.Utils
             dsDB1.Tables[0].Rows.Find(9998).Delete();
 
             //Check Sys.Data.DBConcurrencyException
-            //The exception that is thrown by the DataAdapter during the update operation if the number of rows affected equals zero.
+            //The exception that is thrown by the DataAdapter during the update operation if the number of rows
+            // affected equals zero.
             try
             {
                 BeginCase("Check DBConcurrencyException");
@@ -737,7 +743,8 @@ namespace MonoTests.System.Data.Utils
             Exception e = null;
 
             // --------- check for DBConcurrencyException /UniqueConstraint -----------------
-            //	call AcceptChanges after each exception check in order to make sure that we check only the the current row
+            //	call AcceptChanges after each exception check in order to make sure that we check only the the
+            // current row
 
 
             try
@@ -931,7 +938,8 @@ namespace MonoTests.System.Data.Utils
             dsDB1.Tables[0].Rows.Find(9998).Delete();
 
             //Check Sys.Data.DBConcurrencyException
-            //The exception that is thrown by the DataAdapter during the update operation if the number of rows affected equals zero.
+            //The exception that is thrown by the DataAdapter during the update operation if the number of rows
+            // affected equals zero.
             try
             {
                 BeginCase("Check DBConcurrencyException");
@@ -971,7 +979,8 @@ namespace MonoTests.System.Data.Utils
             Exception e = null;
 
             // --------- check for DBConcurrencyException /UniqueConstraint -----------------
-            //	call AcceptChanges after each exception check in order to make sure that we check only the the current row
+            //	call AcceptChanges after each exception check in order to make sure that we check only the the
+            // current row
 
 
             try
@@ -1171,7 +1180,8 @@ namespace MonoTests.System.Data.Utils
             dsDB1.Tables[0].Rows.CopyTo(drArr, 0);
 
             //Check Sys.Data.DBConcurrencyException
-            //The exception that is thrown by the DataAdapter during the update operation if the number of rows affected equals zero.
+            //The exception that is thrown by the DataAdapter during the update operation if the number of rows
+            // affected equals zero.
             try
             {
                 BeginCase("Check DBConcurrencyException");
@@ -1213,7 +1223,8 @@ namespace MonoTests.System.Data.Utils
             DataRow[] drArr = new DataRow[dsResultException.Tables[0].Rows.Count];
 
             // --------- check for DBConcurrencyException /UniqueConstraint -----------------
-            //	call AcceptChanges after each exception check in order to make sure that we check only the the current row
+            //	call AcceptChanges after each exception check in order to make sure that we check only the the
+            // current row
 
             try
             {
@@ -1409,7 +1420,8 @@ namespace MonoTests.System.Data.Utils
             dsDB1.Tables[0].Rows.Find(9998).Delete();
 
             //Check Sys.Data.DBConcurrencyException
-            //The exception that is thrown by the DataAdapter during the update operation if the number of rows affected equals zero.
+            //The exception that is thrown by the DataAdapter during the update operation if the number of rows
+            // affected equals zero.
             try
             {
                 BeginCase("Check DBConcurrencyException");
@@ -1449,7 +1461,8 @@ namespace MonoTests.System.Data.Utils
             Exception e = null;
 
             // --------- check for DBConcurrencyException /UniqueConstraint -----------------
-            //	call AcceptChanges after each exception check in order to make sure that we check only the the current row
+            //	call AcceptChanges after each exception check in order to make sure that we check only the the
+            // current row
 
 
             try
@@ -1590,11 +1603,11 @@ namespace MonoTests.System.Data.Utils
             dsResultException.AcceptChanges();
         }
 
-        /*
-            *
-            * insert/update the database with data that will be used in testings
-            *
-            */
+/*
+*
+* insert/update the database with data that will be used in testings
+*
+*/
         protected void PrepareDataForTesting(string ConnectionString)
         {
             int iExists = 0;
@@ -1735,9 +1748,9 @@ namespace MonoTests.System.Data.Utils
             }
         }
 
-        /*
-        *	used to insert data to the database in order to check DataAdapter Update metods
-        */
+/*
+*	used to insert data to the database in order to check DataAdapter Update metods
+*/
         protected DataSet PrepareDBData_Update(Sys.Data.Common.DbDataAdapter dbDA)
         {
             return PrepareDBData_Update(dbDA, false);
@@ -1787,22 +1800,30 @@ namespace MonoTests.System.Data.Utils
 
             cmd.CommandText =
                 "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9992, 'Ofer', 'Borshtein', 'delete')";
-            //if (DBType == DataBaseServer.SQLServer) cmd.CommandText = "SET IDENTITY_INSERT Employees ON;" + cmd.CommandText;
+            //if (DBType == DataBaseServer.SQLServer) cmd.CommandText = "SET IDENTITY_INSERT Employees ON;" +
+            // cmd.CommandText;
             cmd.ExecuteNonQuery();
             cmd.CommandText =
                 "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9993, 'Ofer', 'Borshtein', 'Update')";
-            //if (DBType == DataBaseServer.SQLServer) cmd.CommandText = "SET IDENTITY_INSERT Employees ON;" + cmd.CommandText;
+            //if (DBType == DataBaseServer.SQLServer) cmd.CommandText = "SET IDENTITY_INSERT Employees ON;" +
+            // cmd.CommandText;
             cmd.ExecuteNonQuery();
             cmd.CommandText =
                 "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9996, 'Ofer', 'Borshtein', 'Exp')";
-            //if (DBType == DataBaseServer.SQLServer) cmd.CommandText = "SET IDENTITY_INSERT Employees ON;" + cmd.CommandText;
+            //if (DBType == DataBaseServer.SQLServer) cmd.CommandText = "SET IDENTITY_INSERT Employees ON;" +
+            // cmd.CommandText;
             cmd.ExecuteNonQuery();
 
-            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9991, 'Ofer', 'Borshtein', 'Insert'); ";
-            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9994, 'Ofer', 'Borshtein', 'Exp'); ";
-            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9995, 'Ofer', 'Borshtein', 'Exp'); ";
-            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9997, 'Ofer', 'Borshtein', 'delete'); ";
-            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9998, 'Ofer', 'Borshtein', 'delete'); ";
+            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9991,
+            // 'Ofer', 'Borshtein', 'Insert'); ";
+            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9994,
+            // 'Ofer', 'Borshtein', 'Exp'); ";
+            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9995,
+            // 'Ofer', 'Borshtein', 'Exp'); ";
+            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9997,
+            // 'Ofer', 'Borshtein', 'delete'); ";
+            //cmd.CommandText += "INSERT INTO Employees (EmployeeID, LastName, FirstName, Title) VALUES(9998,
+            // 'Ofer', 'Borshtein', 'delete'); ";
 
             DataSet ds = new DataSet();
             dbDA.Fill(ds);
@@ -2007,13 +2028,16 @@ namespace MonoTests.System.Data.Utils
 
         protected void DataAdapter_ContinueUpdateOnError(Sys.Data.Common.DbDataAdapter dbDA)
         {
-            /*
-                !!!!!! Not working (TestName "ContinueUpdateOnError - true, check value 2")!!!!!
-                If ContinueUpdateOnError is set to true, no exception is thrown when an error occurs during the update of a row.
-                The update of the row is skipped and the error information is placed in the RowError property of the row in error.
-                The DataAdapter continues to update subsequent rows.
-                If ContinueUpdateOnError is set to false, an exception is thrown when an error occurs during the update of a row.
-            */
+/*
+!!!!!! Not working (TestName "ContinueUpdateOnError - true, check value 2")!!!!!
+If ContinueUpdateOnError is set to true, no exception is thrown when an error occurs during the
+update of a row.
+The update of the row is skipped and the error information is placed in the RowError property of the
+row in error.
+The DataAdapter continues to update subsequent rows.
+If ContinueUpdateOnError is set to false, an exception is thrown when an error occurs during the
+update of a row.
+*/
             Exception exp = null;
 
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
@@ -2141,16 +2165,16 @@ namespace MonoTests.System.Data.Utils
                 exp = null;
             }
 
-            /*		- Test excluded, it is not working in .NET too!
-                    //should continue the update
-                    try
-                    {
-                        BeginCase("ContinueUpdateOnError - true, check value 2");
-                        Compare(dsDB.Tables[0].Rows[4]["Phone"] , newValue2);  //--------- NOT WORKING !!! -----------
-                    }
-                    catch(Exception ex)	{exp = ex;}
-                    finally	{EndCase(exp); exp = null;}
-            */
+/*		- Test excluded, it is not working in .NET too!
+//should continue the update
+try
+{
+BeginCase("ContinueUpdateOnError - true, check value 2");
+Compare(dsDB.Tables[0].Rows[4]["Phone"] , newValue2);  //--------- NOT WORKING !!! -----------
+}
+catch(Exception ex)	{exp = ex;}
+finally	{EndCase(exp); exp = null;}
+*/
             dsMem.Reset();
             dsDB.Reset();
             dbDA.Fill(dsMem);

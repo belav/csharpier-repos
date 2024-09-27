@@ -13,9 +13,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     internal interface IAddSolutionItemService : IWorkspaceService
     {
         /// <summary>
-        /// Tracks the given file path of a non-existent file and whenever a new file with this file path is created,
+        /// Tracks the given file path of a non-existent file and whenever a new file with this file path is
+        // created,
         /// it adds it as a solution item.
-        /// NOTE: <paramref name="filePath"/> is expected to be an absolute path of a file that does not yet exist.
+        /// NOTE: <paramref name="filePath"/> is expected to be an absolute path of a file that does not yet
+        // exist.
         /// </summary>
         void TrackFilePathAndAddSolutionItemWhenFileCreated(string filePath);
 

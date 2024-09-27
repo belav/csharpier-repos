@@ -61,11 +61,13 @@ namespace Microsoft.CodeAnalysis
                     catch (IOException e)
                     {
                         // Other process is reading the file preventing us to write to it.
-                        // We attempt to rename and delete the file in case the reader opened it with FileShare.Delete flag that
+                        // We attempt to rename and delete the file in case the reader opened it with FileShare.Delete flag
+                        // that
                         // allows the file to be deleted by other processes.
                         //
                         // Note that if the file is marked "readonly" or the current user doesn't have sufficient privileges
-                        // the exception thrown is UnauthorizedAccessException, not IOException, so we won't attempt to delete the file.
+                        // the exception thrown is UnauthorizedAccessException, not IOException, so we won't attempt to
+                        // delete the file.
 
                         try
                         {
@@ -79,7 +81,8 @@ namespace Microsoft.CodeAnalysis
                             }
                             else if (e.HResult == eWin32SharingViolation)
                             {
-                                // On Windows File.Delete only marks the file for deletion, but doesn't remove it from the directory.
+                                // On Windows File.Delete only marks the file for deletion, but doesn't remove it from the
+                                // directory.
                                 var newFilePath = Path.Combine(
                                     Path.GetDirectoryName(_filePath)!,
                                     Guid.NewGuid().ToString() + "_" + Path.GetFileName(_filePath)
@@ -91,7 +94,8 @@ namespace Microsoft.CodeAnalysis
                                 // hide the renamed file:
                                 File.SetAttributes(newFilePath, FileAttributes.Hidden);
 
-                                // Mark the renamed file for deletion, so that it's deleted as soon as the current reader is finished reading it
+                                // Mark the renamed file for deletion, so that it's deleted as soon as the current reader is
+                                // finished reading it
                                 File.Delete(newFilePath);
                             }
                         }

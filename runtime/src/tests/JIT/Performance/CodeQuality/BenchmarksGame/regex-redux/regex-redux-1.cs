@@ -3,15 +3,16 @@
 
 // Adapted from regex-redux C# .NET Core program
 // http://benchmarksgame.alioth.debian.org/u64q/program.php?test=regexredux&lang=csharpcore&id=1
-// aka (as of 2017-09-01) rev 1.3 of https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/regexredux/regexredux.csharp?root=benchmarksgame&view=log
+// aka (as of 2017-09-01) rev 1.3 of
+// https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/regexredux/regexredux.csharp?root=benchmarksgame&view=log
 // Best-scoring single-threaded C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/
- *
- * regex-dna program contributed by Isaac Gouy
- * converted from regex-dna program
- *
+http://benchmarksgame.alioth.debian.org/
+*
+* regex-dna program contributed by Isaac Gouy
+* converted from regex-dna program
+*
 */
 
 using System;

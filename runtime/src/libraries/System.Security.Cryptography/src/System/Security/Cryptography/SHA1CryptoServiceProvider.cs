@@ -7,7 +7,8 @@ using System.Diagnostics;
 namespace System.Security.Cryptography
 {
     //
-    // If you change this file, make the corresponding changes to all of the SHA*CryptoServiceProvider.cs files.
+    // If you change this file, make the corresponding changes to all of the
+    // SHA*CryptoServiceProvider.cs files.
     //
     [Obsolete(
         Obsoletions.DerivedCryptographicTypesMessage,
@@ -66,7 +67,8 @@ namespace System.Security.Cryptography
             return _incrementalHash.TryGetHashAndReset(destination, out bytesWritten);
         }
 
-        // The Hash and HashSize properties are not overridden since the correct values are returned from base.
+        // The Hash and HashSize properties are not overridden since the correct values are returned from
+        // base.
 
         protected override void Dispose(bool disposing)
         {

@@ -43,7 +43,8 @@ public static class EncoderServiceCollectionExtensions
     /// to the specified <paramref name="services" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="setupAction">An <see cref="Action{WebEncoderOptions}"/> to configure the provided <see cref="WebEncoderOptions"/>.</param>
+    /// <param name="setupAction">An <see cref="Action{WebEncoderOptions}"/> to configure the provided
+    // <see cref="WebEncoderOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddWebEncoders(
         this IServiceCollection services,

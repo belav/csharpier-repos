@@ -66,7 +66,8 @@ namespace Mono.ApiTools
         {
             if (!change.AnyChange)
             {
-                // This is most likely because the rendering doesn't take into account something that's different (solution: fix rendering).
+                // This is most likely because the rendering doesn't take into account something that's different
+                // (solution: fix rendering).
                 if (!change.HasIgnoredChanges)
                 {
                     var isField = source.Name.LocalName == "field";

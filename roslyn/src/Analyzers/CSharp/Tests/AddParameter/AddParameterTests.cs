@@ -2279,8 +2279,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_InvocationStyles_NamedAndPositional2()
         {
-            // CS1744 is not yet a supported diagnostic (just declaring the diagnostic as supported does not work)
-            // error CS1744: Named argument 's' specifies a parameter for which a positional argument has already been given
+            // CS1744 is not yet a supported diagnostic (just declaring the diagnostic as supported does not
+            // work)
+            // error CS1744: Named argument 's' specifies a parameter for which a positional argument has
+            // already been given
             var code = """
                 class C
                 {

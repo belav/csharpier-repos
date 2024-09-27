@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// Provides a string representation of the StringText located within given span.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">When given span is outside of the text range.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">When given span is outside of the text
+        // range.</exception>
         public override string ToString(TextSpan span)
         {
             if (span.End > this.Source.Length)

@@ -108,8 +108,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     BindingDiagnosticBag diagnostics
                 ) =>
                 {
-                    // Non-function pointer locations have other locations to encode in/ref readonly/outness. For function pointers,
-                    // these modreqs are the only locations where this can be encoded. If that changes, we should update this.
+                    // Non-function pointer locations have other locations to encode in/ref readonly/outness. For
+                    // function pointers,
+                    // these modreqs are the only locations where this can be encoded. If that changes, we should update
+                    // this.
                     Debug.Assert(
                         addRefReadOnlyModifier,
                         "If addReadonlyRef isn't true, we must have found a different location to encode the readonlyness of a function pointer"
@@ -1192,7 +1194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Even though "object x = (dynamic)null" is a legal identity conversion, we do not allow it.
                 // CONSIDER: We could. Doesn't hurt anything.
 
-                // error CS1750: A value of type '{0}' cannot be used as a default parameter because there are no standard conversions to type '{1}'
+                // error CS1750: A value of type '{0}' cannot be used as a default parameter because there are no
+                // standard conversions to type '{1}'
                 diagnostics.Add(
                     ErrorCode.ERR_NoConversionForDefaultParam,
                     parameterSyntax.Identifier.GetLocation(),
@@ -1209,8 +1212,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 || conversion.IsBoxing
             )
             {
-                // We don't allow object x = "hello", object x = 123, dynamic x = "hello", IEnumerable<char> x = "hello", etc.
-                // error CS1763: '{0}' is of type '{1}'. A default parameter value of a reference type other than string can only be initialized with null
+                // We don't allow object x = "hello", object x = 123, dynamic x = "hello", IEnumerable<char> x =
+                // "hello", etc.
+                // error CS1763: '{0}' is of type '{1}'. A default parameter value of a reference type other than
+                // string can only be initialized with null
                 diagnostics.Add(
                     ErrorCode.ERR_NotNullRefDefaultParameter,
                     parameterSyntax.Identifier.GetLocation(),
@@ -1243,7 +1248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // M(MyStruct? s = default(MyStruct))
 
                 // error CS1770:
-                // A value of type '{0}' cannot be used as default parameter for nullable parameter '{1}' because '{0}' is not a simple type
+                // A value of type '{0}' cannot be used as default parameter for nullable parameter '{1}' because
+                // '{0}' is not a simple type
                 diagnostics.Add(
                     ErrorCode.ERR_NoConversionForNubDefaultParam,
                     parameterSyntax.Identifier.GetLocation(),
@@ -1281,7 +1287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 || owner.IsOperator()
             )
             {
-                // CS1066: The default value specified for parameter '{0}' will have no effect because it applies to a
+                // CS1066: The default value specified for parameter '{0}' will have no effect because it applies to
+                // a
                 //         member that is used in contexts that do not allow optional arguments
                 diagnostics.Add(
                     ErrorCode.WRN_DefaultValueForUnconsumedLocation,
@@ -1292,7 +1299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (refKind == RefKind.RefReadOnlyParameter)
             {
-                // A default value is specified for 'ref readonly' parameter '{0}', but 'ref readonly' should be used only for references. Consider declaring the parameter as 'in'.
+                // A default value is specified for 'ref readonly' parameter '{0}', but 'ref readonly' should be
+                // used only for references. Consider declaring the parameter as 'in'.
                 diagnostics.Add(
                     ErrorCode.WRN_RefReadonlyParameterDefaultValue,
                     parameterSyntax.Default.Value,

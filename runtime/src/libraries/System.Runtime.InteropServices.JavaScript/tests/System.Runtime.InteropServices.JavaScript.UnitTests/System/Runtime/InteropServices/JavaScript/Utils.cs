@@ -186,25 +186,33 @@ namespace System.Runtime.InteropServices.JavaScript
             [JSMarshalAs<JSType.String>] string code
         );
 
-        /* TODO
-        [JSImport("globalThis.App.create_function")]
-        [return: JSMarshalAs(JSType.Function, JSType.Boolean, JSType.Promise)]
-        public static partial Func<bool, Task<object>> CreateFunctionBoolTask([JSMarshalAs<JSType.String>] string arg1Name, [JSMarshalAs<JSType.String>] string code);
-        [JSImport("globalThis.App.create_function")]
-        [return: JSMarshalAs(JSType.Function, JSType.Number, JSType.Promise)]
-        public static partial Func<int, Task<object>> CreateFunctionIntTask([JSMarshalAs<JSType.String>] string arg1Name, [JSMarshalAs<JSType.String>] string code);
-        [JSImport("globalThis.App.create_function")]
-        [return: JSMarshalAs(JSType.Function, JSType.Number, JSType.Promise)]
-        public static partial Func<long, Task<object>> CreateFunctionLongTask([JSMarshalAs<JSType.String>] string arg1Name, [JSMarshalAs<JSType.String>] string code);
-        [JSImport("globalThis.App.create_function")]
-        [return: JSMarshalAs(JSType.Function, JSType.Number, JSType.Promise)]
-        public static partial Func<double, Task<object>> CreateFunctionDoubleJSTask([JSMarshalAs<JSType.String>] string arg1Name, [JSMarshalAs<JSType.String>] string code);
-        [JSImport("globalThis.App.create_function")]
-        [return: JSMarshalAs(JSType.Function, JSType.String, JSType.Promise)]
-        public static partial Func<string, Task<object>> CreateFunctionStringTask([JSMarshalAs<JSType.String>] string arg1Name, [JSMarshalAs<JSType.String>] string code);
-        [return: JSMarshalAs(JSType.Function, JSType.Promise)]
-        public static partial Func<Task<object>> CreateFunctionTask([JSMarshalAs<JSType.String>] string code);
-        */
+/* TODO
+[JSImport("globalThis.App.create_function")]
+[return: JSMarshalAs(JSType.Function, JSType.Boolean, JSType.Promise)]
+public static partial Func<bool, Task<object>> CreateFunctionBoolTask([JSMarshalAs<JSType.String>]
+string arg1Name, [JSMarshalAs<JSType.String>] string code);
+[JSImport("globalThis.App.create_function")]
+[return: JSMarshalAs(JSType.Function, JSType.Number, JSType.Promise)]
+public static partial Func<int, Task<object>> CreateFunctionIntTask([JSMarshalAs<JSType.String>]
+string arg1Name, [JSMarshalAs<JSType.String>] string code);
+[JSImport("globalThis.App.create_function")]
+[return: JSMarshalAs(JSType.Function, JSType.Number, JSType.Promise)]
+public static partial Func<long, Task<object>> CreateFunctionLongTask([JSMarshalAs<JSType.String>]
+string arg1Name, [JSMarshalAs<JSType.String>] string code);
+[JSImport("globalThis.App.create_function")]
+[return: JSMarshalAs(JSType.Function, JSType.Number, JSType.Promise)]
+public static partial Func<double, Task<object>>
+CreateFunctionDoubleJSTask([JSMarshalAs<JSType.String>] string arg1Name,
+[JSMarshalAs<JSType.String>] string code);
+[JSImport("globalThis.App.create_function")]
+[return: JSMarshalAs(JSType.Function, JSType.String, JSType.Promise)]
+public static partial Func<string, Task<object>>
+CreateFunctionStringTask([JSMarshalAs<JSType.String>] string arg1Name, [JSMarshalAs<JSType.String>]
+string code);
+[return: JSMarshalAs(JSType.Function, JSType.Promise)]
+public static partial Func<Task<object>> CreateFunctionTask([JSMarshalAs<JSType.String>] string
+code);
+*/
 
         [JSImport("globalThis.App.create_function")]
         [return: JSMarshalAs<JSType.Function<JSType.Number, JSType.Number>>]

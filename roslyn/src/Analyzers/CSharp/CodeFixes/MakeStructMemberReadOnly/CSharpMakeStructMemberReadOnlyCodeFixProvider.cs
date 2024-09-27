@@ -59,7 +59,8 @@ internal sealed class CSharpMakeStructMemberReadOnlyCodeFixProvider()
 
         foreach (var declaration in declarations.OrderByDescending(t => t.SpanStart))
         {
-            // Methods and properties are easy to directly update.  We just add the 'readonly' modifier directly to them.
+            // Methods and properties are easy to directly update.  We just add the 'readonly' modifier directly
+            // to them.
             if (declaration is MethodDeclarationSyntax or BasePropertyDeclarationSyntax)
             {
                 editor.ReplaceNode(declaration, UpdateReadOnlyModifier(declaration, add: true));
@@ -83,7 +84,8 @@ internal sealed class CSharpMakeStructMemberReadOnlyCodeFixProvider()
                 }
                 else if (accessorList.Accessors.Count == 2)
                 {
-                    // `int X { readonly get { } readonly set { } }` is not legal.  Has to add the modifier to the property.
+                    // `int X { readonly get { } readonly set { } }` is not legal.  Has to add the modifier to the
+                    // property.
                     editor.ReplaceNode(
                         property,
                         (current, generator) =>
@@ -101,7 +103,8 @@ internal sealed class CSharpMakeStructMemberReadOnlyCodeFixProvider()
 
                             if (otherAccessor.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
                             {
-                                // both accessors would have 'readonly' on them.  Remove from the accessors and place on the property.
+                                // both accessors would have 'readonly' on them.  Remove from the accessors and place on the
+                                // property.
                                 currentProperty = currentProperty.ReplaceNode(
                                     otherAccessor,
                                     UpdateReadOnlyModifier(otherAccessor, add: false)

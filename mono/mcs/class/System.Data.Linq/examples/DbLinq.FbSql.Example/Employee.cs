@@ -7,7 +7,8 @@
 // | |_| | |_) | |  | |  __/ || (_| | |
 // |____/|_.__/|_|  |_|\___|\__\__,_|_|
 //
-// Auto-generated from  C:\Program Files\Firebird\Firebird_2_1\examples\empbuild\EMPLOYEE .FDB on 2008-10-06 11:08:52Z
+// Auto-generated from  C:\Program Files\Firebird\Firebird_2_1\examples\empbuild\EMPLOYEE .FDB on
+// 2008-10-06 11:08:52Z
 // Please visit http://linq.to/db for more information
 
 #endregion

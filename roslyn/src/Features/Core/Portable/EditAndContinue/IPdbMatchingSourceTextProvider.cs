@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue;
 
 internal interface IPdbMatchingSourceTextProvider
 {
-    // TODO: Return SourceText (https://github.com/dotnet/roslyn/issues/64504) or text changes (if we can maintain baseline)
+    // TODO: Return SourceText (https://github.com/dotnet/roslyn/issues/64504) or text changes (if we
+    // can maintain baseline)
     ValueTask<string?> TryGetMatchingSourceTextAsync(
         string filePath,
         ImmutableArray<byte> requiredChecksum,

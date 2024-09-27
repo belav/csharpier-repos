@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Threading;
@@ -55,7 +56,8 @@ namespace System.Web.Http.ExceptionHandling
         /// <returns>
         /// <see langword="true"/> if the exception should be handled; otherwise, <see langword="false"/>.
         /// </returns>
-        /// <remarks>The default decision is only to handle exceptions caught at top-level catch blocks.</remarks>
+        /// <remarks>The default decision is only to handle exceptions caught at top-level catch
+        // blocks.</remarks>
         public virtual bool ShouldHandle(ExceptionHandlerContext context)
         {
             if (context == null)

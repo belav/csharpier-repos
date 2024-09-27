@@ -19,13 +19,17 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
     /// <summary>
-    /// Tagger event that fires once the compilation is available in the remote OOP process for a particular project.
+    /// Tagger event that fires once the compilation is available in the remote OOP process for a
+    // particular project.
     /// Used to trigger things such as:
     /// <list type="bullet">
-    /// <item>reclassification pass as classification may show either cached classifications (from a  previous session),
+    /// <item>reclassification pass as classification may show either cached classifications (from a
+    // previous session),
     /// or incomplete classifications due to frozen-partial compilations being used.</item>
-    /// <item>recomputation of navigation bar items due to frozen-partial compilations being used.</item>
-    /// <item>recomputation of inheritance margin items due to frozen-partial compilations being used.</item>
+    /// <item>recomputation of navigation bar items due to frozen-partial compilations being
+    // used.</item>
+    /// <item>recomputation of inheritance margin items due to frozen-partial compilations being
+    // used.</item>
     /// </list>
     /// </summary>
     internal sealed class CompilationAvailableTaggerEventSource : ITaggerEventSource
@@ -33,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         private readonly ITextBuffer _subjectBuffer;
 
         /// <summary>
-        /// Other event sources we're composing over.  If they fire, we should reclassify.  However, after they fire, we
+        /// Other event sources we're composing over.  If they fire, we should reclassify.  However, after
+        // they fire, we
         /// should also refire an event once we get the next full compilation ready.
         /// </summary>
         private readonly ITaggerEventSource _underlyingSource;
@@ -58,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
         public void Connect()
         {
-            // When we are connected to, connect to all our underlying sources and have them notify us when they've changed.
+            // When we are connected to, connect to all our underlying sources and have them notify us when
+            // they've changed.
             _underlyingSource.Connect();
             _underlyingSource.Changed += OnUnderlyingSourceChanged;
         }

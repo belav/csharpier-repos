@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents a scalar value or a SQL token in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -19,7 +20,8 @@ public abstract class SqlExpression : Expression, IPrintableExpression
     ///     Creates a new instance of the <see cref="SqlExpression" /> class.
     /// </summary>
     /// <param name="type">The <see cref="System.Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     protected SqlExpression(Type type, RelationalTypeMapping? typeMapping)
     {
         Check.DebugAssert(
@@ -47,7 +49,8 @@ public abstract class SqlExpression : Expression, IPrintableExpression
     public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <summary>
-    ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
+    ///     Creates a printable string representation of the given expression using <see
+    // cref="ExpressionPrinter" />.
     /// </summary>
     /// <param name="expressionPrinter">The expression printer to use.</param>
     protected abstract void Print(ExpressionPrinter expressionPrinter);

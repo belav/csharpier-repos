@@ -112,7 +112,8 @@ namespace System.ServiceModel.Dispatcher
             BlankDom[HeaderIndex].name = HeaderTag;
             BlankDom[HeaderIndex].parent = EnvelopeIndex;
             //BlankDom[HeaderIndex].nextSibling = bodyIndex;
-            //BlankDom[HeaderIndex].firstChild = this.bodyIndex != FirstHeaderIndex ? FirstHeaderIndex : NullIndex;
+            //BlankDom[HeaderIndex].firstChild = this.bodyIndex != FirstHeaderIndex ? FirstHeaderIndex :
+            // NullIndex;
             BlankDom[HeaderIndex].firstNamespace = SoapNSIndex;
         }
 
@@ -157,7 +158,8 @@ namespace System.ServiceModel.Dispatcher
 
         // Get/Set an opaque position value.
         // This property will save and restore a navigator's position without cloning
-        // The two integers needed to uniquely identify this navigators location within the DOM are encoded in
+        // The two integers needed to uniquely identify this navigators location within the DOM are encoded
+        // in
         // a long.  The high 32 bits is the parent index, and the low 32 bits is the current node index.
         public override long CurrentPosition
         {
@@ -1232,7 +1234,10 @@ namespace System.ServiceModel.Dispatcher
             this.counter = this;
         }
 
-        // THREAD: Synchronize this function if multiple threads can try to re-initialize an instance at the same time.  Also, if you reinitialize the navigator that holds information referenced by clones, the clones will be affected as well.
+        // THREAD: Synchronize this function if multiple threads can try to re-initialize an instance at the
+        // same time.  Also, if you reinitialize the navigator that holds information referenced by clones,
+        // the
+        // clones will be affected as well.
         internal void Init(
             Message msg,
             int countMax,
@@ -1566,7 +1571,8 @@ namespace System.ServiceModel.Dispatcher
                     return p;
                 }
 
-                // If the parent is not null, make sure it is a valid parent and that the element is a namespace node
+                // If the parent is not null, make sure it is a valid parent and that the element is a namespace
+                // node
                 if (
                     p.parent > NullIndex
                     && p.parent < this.nextFreeIndex
@@ -1985,7 +1991,8 @@ namespace System.ServiceModel.Dispatcher
         // Get the index of a new unused node
         // Perform an necessary resizing
         // Must be called on the DOM object
-        // THREAD: Synchronize this function.  If LoadOnDemand is synchronized, it may be possible to avoid synchronizing this one.
+        // THREAD: Synchronize this function.  If LoadOnDemand is synchronized, it may be possible to avoid
+        // synchronizing this one.
         int NewNode()
         {
             // Resize if necessary

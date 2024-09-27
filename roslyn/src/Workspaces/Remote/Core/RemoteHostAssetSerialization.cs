@@ -30,8 +30,10 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             using var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken);
 
-            // This information is not actually needed on the receiving end.  However, we still send it so that the
-            // receiver can assert that both sides are talking about the same solution snapshot and no weird invariant
+            // This information is not actually needed on the receiving end.  However, we still send it so that
+            // the
+            // receiver can assert that both sides are talking about the same solution snapshot and no weird
+            // invariant
             // breaks have occurred.
             solutionChecksum.WriteTo(writer);
 
@@ -45,9 +47,11 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 var asset = assetMap[checksum];
 
-                // We flush after each item as that forms a reasonably sized chunk of data to want to then send over the
+                // We flush after each item as that forms a reasonably sized chunk of data to want to then send over
+                // the
                 // pipe for the reader on the other side to read.  This allows the item-writing to remain entirely
-                // synchronous without any blocking on async flushing, while also ensuring that we're not buffering the
+                // synchronous without any blocking on async flushing, while also ensuring that we're not buffering
+                // the
                 // entire stream of data into the pipe before it gets sent to the other side.
                 WriteAsset(writer, serializer, context, asset, cancellationToken);
                 await stream.FlushAsync(cancellationToken).ConfigureAwait(false);
@@ -79,11 +83,14 @@ namespace Microsoft.CodeAnalysis.Remote
             CancellationToken cancellationToken
         )
         {
-            // Suppress ExecutionContext flow for asynchronous operations operate on the pipe. In addition to avoiding
-            // ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone data set by
+            // Suppress ExecutionContext flow for asynchronous operations operate on the pipe. In addition to
+            // avoiding
+            // ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone
+            // data set by
             // CallContext.LogicalSetData at each yielding await in the task tree.
             //
-            // ⚠ DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run on the
+            // ⚠ DO NOT AWAIT INSIDE THE USING. The Dispose method that restores ExecutionContext flow must run
+            // on the
             // same thread where SuppressFlow was originally run.
             using var _ = FlowControlHelper.TrySuppressFlow();
             return ReadDataSuppressedFlowAsync(
@@ -127,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
             using var reader = ObjectReader.GetReader(stream, leaveOpen: true, cancellationToken);
 
-            // Ensure that no invariants were broken and that both sides of the communication channel are talking about
+            // Ensure that no invariants were broken and that both sides of the communication channel are
+            // talking about
             // the same pinned solution.
             var responseSolutionChecksum = Checksum.ReadFrom(reader);
             Contract.ThrowIfFalse(solutionChecksum == responseSolutionChecksum);

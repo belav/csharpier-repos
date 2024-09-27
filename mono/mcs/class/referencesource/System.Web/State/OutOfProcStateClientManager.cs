@@ -256,12 +256,12 @@ namespace System.Web.SessionState
             out int port
         )
         {
-            /*
-            * stateConnection string has the following format:
-            *
-            *     "tcpip=<server>:<port>"
-            *     "tcpip=[IPv6-address]:port", per RFC 3986, Sec. 3.2.2
-            */
+/*
+* stateConnection string has the following format:
+*
+*     "tcpip=<server>:<port>"
+*     "tcpip=[IPv6-address]:port", per RFC 3986, Sec. 3.2.2
+*/
 
             // chop off the "tcpip=" part
             if (!stateConnectionString.StartsWith("tcpip=", StringComparison.Ordinal))
@@ -649,7 +649,7 @@ namespace System.Web.SessionState
                 switch (results.httpStatus)
                 {
                     case 200:
-                        /* item found, deserialize it */
+/* item found, deserialize it */
                         contentLength = results.contentLength;
                         if (contentLength > 0)
                         {
@@ -683,7 +683,7 @@ namespace System.Web.SessionState
                         break;
 
                     case 423:
-                        /* state locked, return lock information */
+/* state locked, return lock information */
 
                         if (0 <= results.lockAge)
                         {

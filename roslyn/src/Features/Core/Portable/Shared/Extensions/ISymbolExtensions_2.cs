@@ -209,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             );
 
         /// <summary>
-        /// Returns the <see cref="DocumentationComment"/> for a symbol, even if it involves going to other symbols to find it.
+        /// Returns the <see cref="DocumentationComment"/> for a symbol, even if it involves going to other
+        // symbols to find it.
         /// </summary>
         public static DocumentationComment GetAppropriateDocumentationComment(
             this ISymbol symbol,
@@ -266,8 +267,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 && containingSymbol is IMethodSymbol methodSymbol
             )
             {
-                // There are two ways to invoke a delegate that we care about here: the Invoke()/BeginInvoke() methods. (Direct invocation is equivalent to an Invoke() call.)
-                // DynamicInvoke() takes an object array, and EndInvoke() takes a System.IAsyncResult, so we can (and should) ignore those here.
+                // There are two ways to invoke a delegate that we care about here: the Invoke()/BeginInvoke()
+                // methods. (Direct invocation is equivalent to an Invoke() call.)
+                // DynamicInvoke() takes an object array, and EndInvoke() takes a System.IAsyncResult, so we can
+                // (and should) ignore those here.
 
                 var symbolName = methodSymbol.Name;
                 if (
@@ -275,9 +278,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     && parameter.Ordinal >= (methodSymbol.Parameters.Length - 2)
                 )
                 {
-                    // Return null (similar to DocumentationComment.GetParameterText()) for the last two implicit parameters (usually called "callback" and "@object").
-                    // We can't rely on those names because they might be renamed to avoid collision with a user-defined delegate parameter of the same name,
-                    // and we have to treat them separately, because a user might add e.g. a '<param name="callback">' tag to the delegate, which would be displayed in Signature Help for that implicit parameter.
+                    // Return null (similar to DocumentationComment.GetParameterText()) for the last two implicit
+                    // parameters (usually called "callback" and "@object").
+                    // We can't rely on those names because they might be renamed to avoid collision with a user-defined
+                    // delegate parameter of the same name,
+                    // and we have to treat them separately, because a user might add e.g. a '<param name="callback">'
+                    // tag to the delegate, which would be displayed in Signature Help for that implicit parameter.
                     return null;
                 }
 
@@ -287,7 +293,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         or WellKnownMemberNames.DelegateBeginInvokeName
                 )
                 {
-                    // We know that containingSymbol is the [Begin]Invoke() method of a delegate type, so we need to go up a level and take the method's containing symbol (i.e. the delegate), which contains the documentation.
+                    // We know that containingSymbol is the [Begin]Invoke() method of a delegate type, so we need to go
+                    // up a level and take the method's containing symbol (i.e. the delegate), which contains the
+                    // documentation.
                     containingSymbol = containingSymbol.ContainingSymbol;
                 }
             }

@@ -52,46 +52,58 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxTrivia Tab { get; } = Syntax.InternalSyntax.SyntaxFactory.Tab;
 
         /// <summary>
-        /// An elastic trivia with kind EndOfLineTrivia containing both the carriage return and line feed characters.
-        /// Elastic trivia are used to denote trivia that was not produced by parsing source text, and are usually not
+        /// An elastic trivia with kind EndOfLineTrivia containing both the carriage return and line feed
+        // characters.
+        /// Elastic trivia are used to denote trivia that was not produced by parsing source text, and are
+        // usually not
         /// preserved during formatting.
         /// </summary>
         public static SyntaxTrivia ElasticCarriageReturnLineFeed { get; } =
             Syntax.InternalSyntax.SyntaxFactory.ElasticCarriageReturnLineFeed;
 
         /// <summary>
-        /// An elastic trivia with kind EndOfLineTrivia containing a single line feed character. Elastic trivia are used
-        /// to denote trivia that was not produced by parsing source text, and are usually not preserved during
+        /// An elastic trivia with kind EndOfLineTrivia containing a single line feed character. Elastic
+        // trivia are used
+        /// to denote trivia that was not produced by parsing source text, and are usually not preserved
+        // during
         /// formatting.
         /// </summary>
         public static SyntaxTrivia ElasticLineFeed { get; } =
             Syntax.InternalSyntax.SyntaxFactory.ElasticLineFeed;
 
         /// <summary>
-        /// An elastic trivia with kind EndOfLineTrivia containing a single carriage return character. Elastic trivia
-        /// are used to denote trivia that was not produced by parsing source text, and are usually not preserved during
+        /// An elastic trivia with kind EndOfLineTrivia containing a single carriage return character.
+        // Elastic trivia
+        /// are used to denote trivia that was not produced by parsing source text, and are usually not
+        // preserved during
         /// formatting.
         /// </summary>
         public static SyntaxTrivia ElasticCarriageReturn { get; } =
             Syntax.InternalSyntax.SyntaxFactory.ElasticCarriageReturn;
 
         /// <summary>
-        /// An elastic trivia with kind WhitespaceTrivia containing a single space character. Elastic trivia are used to
-        /// denote trivia that was not produced by parsing source text, and are usually not preserved during formatting.
+        /// An elastic trivia with kind WhitespaceTrivia containing a single space character. Elastic trivia
+        // are used to
+        /// denote trivia that was not produced by parsing source text, and are usually not preserved during
+        // formatting.
         /// </summary>
         public static SyntaxTrivia ElasticSpace { get; } =
             Syntax.InternalSyntax.SyntaxFactory.ElasticSpace;
 
         /// <summary>
-        /// An elastic trivia with kind WhitespaceTrivia containing a single tab character. Elastic trivia are used to
-        /// denote trivia that was not produced by parsing source text, and are usually not preserved during formatting.
+        /// An elastic trivia with kind WhitespaceTrivia containing a single tab character. Elastic trivia
+        // are used to
+        /// denote trivia that was not produced by parsing source text, and are usually not preserved during
+        // formatting.
         /// </summary>
         public static SyntaxTrivia ElasticTab { get; } =
             Syntax.InternalSyntax.SyntaxFactory.ElasticTab;
 
         /// <summary>
-        /// An elastic trivia with kind WhitespaceTrivia containing no characters. Elastic marker trivia are included
-        /// automatically by factory methods when trivia is not specified. Syntax formatting will replace elastic
+        /// An elastic trivia with kind WhitespaceTrivia containing no characters. Elastic marker trivia are
+        // included
+        /// automatically by factory methods when trivia is not specified. Syntax formatting will replace
+        // elastic
         /// markers with appropriate trivia.
         /// </summary>
         public static SyntaxTrivia ElasticMarker { get; } =
@@ -100,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a trivia with kind EndOfLineTrivia containing the specified text.
         /// </summary>
-        /// <param name="text">The text of the end of line. Any text can be specified here, however only carriage return and
+        /// <param name="text">The text of the end of line. Any text can be specified here, however only
+        // carriage return and
         /// line feed characters are recognized by the parser as end of line.</param>
         public static SyntaxTrivia EndOfLine(string text)
         {
@@ -108,10 +121,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a trivia with kind EndOfLineTrivia containing the specified text. Elastic trivia are used to
-        /// denote trivia that was not produced by parsing source text, and are usually not preserved during formatting.
+        /// Creates a trivia with kind EndOfLineTrivia containing the specified text. Elastic trivia are
+        // used to
+        /// denote trivia that was not produced by parsing source text, and are usually not preserved during
+        // formatting.
         /// </summary>
-        /// <param name="text">The text of the end of line. Any text can be specified here, however only carriage return and
+        /// <param name="text">The text of the end of line. Any text can be specified here, however only
+        // carriage return and
         /// line feed characters are recognized by the parser as end of line.</param>
         public static SyntaxTrivia ElasticEndOfLine(string text)
         {
@@ -128,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a trivia with kind WhitespaceTrivia containing the specified text.
         /// </summary>
-        /// <param name="text">The text of the whitespace. Any text can be specified here, however only specific
+        /// <param name="text">The text of the whitespace. Any text can be specified here, however only
+        // specific
         /// whitespace characters are recognized by the parser.</param>
         public static SyntaxTrivia Whitespace(string text)
         {
@@ -136,10 +153,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a trivia with kind WhitespaceTrivia containing the specified text. Elastic trivia are used to
-        /// denote trivia that was not produced by parsing source text, and are usually not preserved during formatting.
+        /// Creates a trivia with kind WhitespaceTrivia containing the specified text. Elastic trivia are
+        // used to
+        /// denote trivia that was not produced by parsing source text, and are usually not preserved during
+        // formatting.
         /// </summary>
-        /// <param name="text">The text of the whitespace. Any text can be specified here, however only specific
+        /// <param name="text">The text of the whitespace. Any text can be specified here, however only
+        // specific
         /// whitespace characters are recognized by the parser.</param>
         public static SyntaxTrivia ElasticWhitespace(string text)
         {
@@ -154,10 +174,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a trivia with kind either SingleLineCommentTrivia or MultiLineCommentTrivia containing the specified
+        /// Creates a trivia with kind either SingleLineCommentTrivia or MultiLineCommentTrivia containing
+        // the specified
         /// text.
         /// </summary>
-        /// <param name="text">The entire text of the comment including the leading '//' token for single line comments
+        /// <param name="text">The entire text of the comment including the leading '//' token for single
+        // line comments
         /// or stop or start tokens for multiline comments.</param>
         public static SyntaxTrivia Comment(string text)
         {
@@ -165,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a trivia with kind DisabledTextTrivia. Disabled text corresponds to any text between directives that
+        /// Creates a trivia with kind DisabledTextTrivia. Disabled text corresponds to any text between
+        // directives that
         /// is not considered active.
         /// </summary>
         public static SyntaxTrivia DisabledText(string text)
@@ -189,8 +212,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="kind">
         /// A <see cref="SyntaxKind"/> representing the specific kind of <see cref="SyntaxTrivia"/>. One of
         /// <see cref="SyntaxKind.WhitespaceTrivia"/>, <see cref="SyntaxKind.EndOfLineTrivia"/>,
-        /// <see cref="SyntaxKind.SingleLineCommentTrivia"/>, <see cref="SyntaxKind.MultiLineCommentTrivia"/>,
-        /// <see cref="SyntaxKind.DocumentationCommentExteriorTrivia"/>, <see cref="SyntaxKind.DisabledTextTrivia"/>
+        /// <see cref="SyntaxKind.SingleLineCommentTrivia"/>, <see
+        // cref="SyntaxKind.MultiLineCommentTrivia"/>,
+        /// <see cref="SyntaxKind.DocumentationCommentExteriorTrivia"/>, <see
+        // cref="SyntaxKind.DisabledTextTrivia"/>
         /// </param>
         /// <param name="text">
         /// The actual text of this token.
@@ -222,10 +247,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token corresponding to a syntax kind. This method can be used for token syntax kinds whose text
+        /// Creates a token corresponding to a syntax kind. This method can be used for token syntax kinds
+        // whose text
         /// can be inferred by the kind alone.
         /// </summary>
-        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or Keyword.</param>
+        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or
+        // Keyword.</param>
         /// <returns></returns>
         public static SyntaxToken Token(SyntaxKind kind)
         {
@@ -239,11 +266,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token corresponding to syntax kind. This method can be used for token syntax kinds whose text can
+        /// Creates a token corresponding to syntax kind. This method can be used for token syntax kinds
+        // whose text can
         /// be inferred by the kind alone.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
-        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or Keyword.</param>
+        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or
+        // Keyword.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken Token(
             SyntaxTriviaList leading,
@@ -257,14 +286,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token corresponding to syntax kind. This method gives control over token Text and ValueText.
+        /// Creates a token corresponding to syntax kind. This method gives control over token Text and
+        // ValueText.
         ///
-        /// For example, consider the text '&lt;see cref="operator &amp;#43;"/&gt;'.  To create a token for the value of
+        /// For example, consider the text '&lt;see cref="operator &amp;#43;"/&gt;'.  To create a token for
+        // the value of
         /// the operator symbol (&amp;#43;), one would call
-        /// Token(default(SyntaxTriviaList), SyntaxKind.PlusToken, "&amp;#43;", "+", default(SyntaxTriviaList)).
+        /// Token(default(SyntaxTriviaList), SyntaxKind.PlusToken, "&amp;#43;", "+",
+        // default(SyntaxTriviaList)).
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
-        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or Keyword.</param>
+        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or
+        // Keyword.</param>
         /// <param name="text">The text from which this token was created (e.g. lexed).</param>
         /// <param name="valueText">How C# should interpret the text of this token.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
@@ -312,10 +345,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a missing token corresponding to syntax kind. A missing token is produced by the parser when an
-        /// expected token is not found. A missing token has no text and normally has associated diagnostics.
+        /// Creates a missing token corresponding to syntax kind. A missing token is produced by the parser
+        // when an
+        /// expected token is not found. A missing token has no text and normally has associated
+        // diagnostics.
         /// </summary>
-        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or Keyword.</param>
+        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or
+        // Keyword.</param>
         public static SyntaxToken MissingToken(SyntaxKind kind)
         {
             return new SyntaxToken(
@@ -328,11 +364,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a missing token corresponding to syntax kind. A missing token is produced by the parser when an
-        /// expected token is not found. A missing token has no text and normally has associated diagnostics.
+        /// Creates a missing token corresponding to syntax kind. A missing token is produced by the parser
+        // when an
+        /// expected token is not found. A missing token has no text and normally has associated
+        // diagnostics.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
-        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or Keyword.</param>
+        /// <param name="kind">A syntax kind value for a token. These have the suffix Token or
+        // Keyword.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken MissingToken(
             SyntaxTriviaList leading,
@@ -348,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a token with kind IdentifierToken containing the specified text.
         /// </summary>
-        /// <param name="text">The raw text of the identifier name, including any escapes or leading '@' character.</param>
+        /// <param name="text">The raw text of the identifier name, including any escapes or leading '@'
+        // character.</param>
         public static SyntaxToken Identifier(string text)
         {
             return new SyntaxToken(
@@ -413,11 +453,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates a token with kind IdentifierToken containing the specified text.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
-        /// <param name="contextualKind">An alternative SyntaxKind that can be inferred for this token in special
+        /// <param name="contextualKind">An alternative SyntaxKind that can be inferred for this token in
+        // special
         /// contexts. These are usually keywords.</param>
         /// <param name="text">The raw text of the identifier name, including any escapes or leading '@'
         /// character.</param>
-        /// <param name="valueText">The text of the identifier name without escapes or leading '@' character.</param>
+        /// <param name="valueText">The text of the identifier name without escapes or leading '@'
+        // character.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         /// <returns></returns>
         public static SyntaxToken Identifier(
@@ -442,17 +484,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a token with kind NumericLiteralToken from a 4-byte signed integer value.
         /// </summary>
-        /// <param name="value">The 4-byte signed integer value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte signed integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(int value)
         {
             return Literal(ObjectDisplay.FormatLiteral(value, ObjectDisplayOptions.None), value);
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte signed integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte signed
+        // integer value.
         /// </summary>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 4-byte signed integer value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte signed integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(string text, int value)
         {
             return new SyntaxToken(
@@ -466,11 +511,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte signed integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte signed
+        // integer value.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 4-byte signed integer value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte signed integer value to be represented by the returned
+        // token.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken Literal(
             SyntaxTriviaList leading,
@@ -492,7 +539,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a token with kind NumericLiteralToken from a 4-byte unsigned integer value.
         /// </summary>
-        /// <param name="value">The 4-byte unsigned integer value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte unsigned integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(uint value)
         {
             return Literal(
@@ -502,10 +550,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte unsigned integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte unsigned
+        // integer value.
         /// </summary>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 4-byte unsigned integer value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte unsigned integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(string text, uint value)
         {
             return new SyntaxToken(
@@ -519,11 +569,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte unsigned integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte unsigned
+        // integer value.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 4-byte unsigned integer value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte unsigned integer value to be represented by the returned
+        // token.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken Literal(
             SyntaxTriviaList leading,
@@ -545,7 +597,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a token with kind NumericLiteralToken from an 8-byte signed integer value.
         /// </summary>
-        /// <param name="value">The 8-byte signed integer value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte signed integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(long value)
         {
             return Literal(
@@ -555,10 +608,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte signed integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte signed
+        // integer value.
         /// </summary>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 8-byte signed integer value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte signed integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(string text, long value)
         {
             return new SyntaxToken(
@@ -572,11 +627,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte signed integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte signed
+        // integer value.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 8-byte signed integer value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte signed integer value to be represented by the returned
+        // token.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken Literal(
             SyntaxTriviaList leading,
@@ -598,7 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a token with kind NumericLiteralToken from an 8-byte unsigned integer value.
         /// </summary>
-        /// <param name="value">The 8-byte unsigned integer value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte unsigned integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(ulong value)
         {
             return Literal(
@@ -608,10 +666,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte unsigned integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte unsigned
+        // integer value.
         /// </summary>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 8-byte unsigned integer value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte unsigned integer value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(string text, ulong value)
         {
             return new SyntaxToken(
@@ -625,11 +685,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte unsigned integer value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte unsigned
+        // integer value.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 8-byte unsigned integer value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte unsigned integer value to be represented by the returned
+        // token.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken Literal(
             SyntaxTriviaList leading,
@@ -651,7 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a token with kind NumericLiteralToken from a 4-byte floating point value.
         /// </summary>
-        /// <param name="value">The 4-byte floating point value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte floating point value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(float value)
         {
             return Literal(
@@ -661,10 +724,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte floating point value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte floating
+        // point value.
         /// </summary>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 4-byte floating point value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte floating point value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(string text, float value)
         {
             return new SyntaxToken(
@@ -678,11 +743,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte floating point value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 4-byte floating
+        // point value.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 4-byte floating point value to be represented by the returned token.</param>
+        /// <param name="value">The 4-byte floating point value to be represented by the returned
+        // token.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken Literal(
             SyntaxTriviaList leading,
@@ -704,17 +771,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a token with kind NumericLiteralToken from an 8-byte floating point value.
         /// </summary>
-        /// <param name="value">The 8-byte floating point value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte floating point value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(double value)
         {
             return Literal(ObjectDisplay.FormatLiteral(value, ObjectDisplayOptions.None), value);
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte floating point value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte floating
+        // point value.
         /// </summary>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 8-byte floating point value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte floating point value to be represented by the returned
+        // token.</param>
         public static SyntaxToken Literal(string text, double value)
         {
             return new SyntaxToken(
@@ -728,11 +798,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte floating point value.
+        /// Creates a token with kind NumericLiteralToken from the text and corresponding 8-byte floating
+        // point value.
         /// </summary>
         /// <param name="leading">A list of trivia immediately preceding the token.</param>
         /// <param name="text">The raw text of the literal.</param>
-        /// <param name="value">The 8-byte floating point value to be represented by the returned token.</param>
+        /// <param name="value">The 8-byte floating point value to be represented by the returned
+        // token.</param>
         /// <param name="trailing">A list of trivia immediately following the token.</param>
         public static SyntaxToken Literal(
             SyntaxTriviaList leading,
@@ -998,7 +1070,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a summary element within an xml documentation comment.
         /// </summary>
-        /// <param name="content">A list of xml node syntax that will be the content within the summary element.</param>
+        /// <param name="content">A list of xml node syntax that will be the content within the summary
+        // element.</param>
         public static XmlElementSyntax XmlSummaryElement(params XmlNodeSyntax[] content)
         {
             return XmlSummaryElement(List(content));
@@ -1007,7 +1080,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a summary element within an xml documentation comment.
         /// </summary>
-        /// <param name="content">A list of xml node syntax that will be the content within the summary element.</param>
+        /// <param name="content">A list of xml node syntax that will be the content within the summary
+        // element.</param>
         public static XmlElementSyntax XmlSummaryElement(SyntaxList<XmlNodeSyntax> content)
         {
             return XmlMultiLineElement(DocumentationCommentXmlNames.SummaryElementName, content);
@@ -1016,7 +1090,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a see element within an xml documentation comment.
         /// </summary>
-        /// <param name="cref">A cref syntax node that points to the referenced item (e.g. a class, struct).</param>
+        /// <param name="cref">A cref syntax node that points to the referenced item (e.g. a class,
+        // struct).</param>
         public static XmlEmptyElementSyntax XmlSeeElement(CrefSyntax cref)
         {
             return XmlEmptyElement(DocumentationCommentXmlNames.SeeElementName)
@@ -1026,7 +1101,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a seealso element within an xml documentation comment.
         /// </summary>
-        /// <param name="cref">A cref syntax node that points to the referenced item (e.g. a class, struct).</param>
+        /// <param name="cref">A cref syntax node that points to the referenced item (e.g. a class,
+        // struct).</param>
         public static XmlEmptyElementSyntax XmlSeeAlsoElement(CrefSyntax cref)
         {
             return XmlEmptyElement(DocumentationCommentXmlNames.SeeAlsoElementName)
@@ -1037,7 +1113,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates a seealso element within an xml documentation comment.
         /// </summary>
         /// <param name="linkAddress">The uri of the referenced item.</param>
-        /// <param name="linkText">A list of xml node syntax that will be used as the link text for the referenced item.</param>
+        /// <param name="linkText">A list of xml node syntax that will be used as the link text for the
+        // referenced item.</param>
         public static XmlElementSyntax XmlSeeAlsoElement(
             Uri linkAddress,
             SyntaxList<XmlNodeSyntax> linkText
@@ -1068,8 +1145,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a threadsafety element within an xml documentation comment.
         /// </summary>
-        /// <param name="isStatic">Indicates whether static member of this type are safe for multi-threaded operations.</param>
-        /// <param name="isInstance">Indicates whether instance members of this type are safe for multi-threaded operations.</param>
+        /// <param name="isStatic">Indicates whether static member of this type are safe for multi-threaded
+        // operations.</param>
+        /// <param name="isInstance">Indicates whether instance members of this type are safe for
+        // multi-threaded operations.</param>
         public static XmlEmptyElementSyntax XmlThreadSafetyElement(bool isStatic, bool isInstance)
         {
             return XmlEmptyElement(DocumentationCommentXmlNames.ThreadSafetyElementName)
@@ -1121,7 +1200,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates a syntax node for a cref attribute within a xml documentation comment.
         /// </summary>
         /// <param name="cref">The <see cref="CrefSyntax"/> used for the xml cref attribute syntax.</param>
-        /// <param name="quoteKind">The kind of the quote for the referenced item in the cref attribute.</param>
+        /// <param name="quoteKind">The kind of the quote for the referenced item in the cref
+        // attribute.</param>
         public static XmlCrefAttributeSyntax XmlCrefAttribute(CrefSyntax cref, SyntaxKind quoteKind)
         {
             cref = cref.ReplaceTokens(cref.DescendantTokens(), XmlReplaceBracketTokens);
@@ -1137,7 +1217,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a remarks element within an xml documentation comment.
         /// </summary>
-        /// <param name="content">A list of xml node syntax that will be the content within the remarks element.</param>
+        /// <param name="content">A list of xml node syntax that will be the content within the remarks
+        // element.</param>
         public static XmlElementSyntax XmlRemarksElement(params XmlNodeSyntax[] content)
         {
             return XmlRemarksElement(List(content));
@@ -1146,7 +1227,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a remarks element within an xml documentation comment.
         /// </summary>
-        /// <param name="content">A list of xml node syntax that will be the content within the remarks element.</param>
+        /// <param name="content">A list of xml node syntax that will be the content within the remarks
+        // element.</param>
         public static XmlElementSyntax XmlRemarksElement(SyntaxList<XmlNodeSyntax> content)
         {
             return XmlMultiLineElement(DocumentationCommentXmlNames.RemarksElementName, content);
@@ -1155,7 +1237,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a returns element within an xml documentation comment.
         /// </summary>
-        /// <param name="content">A list of xml node syntax that will be the content within the returns element.</param>
+        /// <param name="content">A list of xml node syntax that will be the content within the returns
+        // element.</param>
         public static XmlElementSyntax XmlReturnsElement(params XmlNodeSyntax[] content)
         {
             return XmlReturnsElement(List(content));
@@ -1164,7 +1247,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a returns element within an xml documentation comment.
         /// </summary>
-        /// <param name="content">A list of xml node syntax that will be the content within the returns element.</param>
+        /// <param name="content">A list of xml node syntax that will be the content within the returns
+        // element.</param>
         public static XmlElementSyntax XmlReturnsElement(SyntaxList<XmlNodeSyntax> content)
         {
             return XmlMultiLineElement(DocumentationCommentXmlNames.ReturnsElementName, content);
@@ -1173,7 +1257,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of an xml value element (e.g. for xml documentation comments).
         /// </summary>
-        /// <param name="content">A list of xml syntax nodes that represents the content of the value element.</param>
+        /// <param name="content">A list of xml syntax nodes that represents the content of the value
+        // element.</param>
         public static XmlElementSyntax XmlValueElement(params XmlNodeSyntax[] content)
         {
             return XmlValueElement(List(content));
@@ -1182,7 +1267,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of an xml value element (e.g. for xml documentation comments).
         /// </summary>
-        /// <param name="content">A list of xml syntax nodes that represents the content of the value element.</param>
+        /// <param name="content">A list of xml syntax nodes that represents the content of the value
+        // element.</param>
         public static XmlElementSyntax XmlValueElement(SyntaxList<XmlNodeSyntax> content)
         {
             return XmlMultiLineElement(DocumentationCommentXmlNames.ValueElementName, content);
@@ -1192,7 +1278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of an exception element within xml documentation comments.
         /// </summary>
         /// <param name="cref">Syntax representation of the reference to the exception type.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the exception element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the exception
+        // element.</param>
         public static XmlElementSyntax XmlExceptionElement(
             CrefSyntax cref,
             params XmlNodeSyntax[] content
@@ -1205,7 +1292,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of an exception element within xml documentation comments.
         /// </summary>
         /// <param name="cref">Syntax representation of the reference to the exception type.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the exception element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the exception
+        // element.</param>
         public static XmlElementSyntax XmlExceptionElement(
             CrefSyntax cref,
             SyntaxList<XmlNodeSyntax> content
@@ -1222,7 +1310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of a permission element within xml documentation comments.
         /// </summary>
         /// <param name="cref">Syntax representation of the reference to the permission type.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the permission element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the permission
+        // element.</param>
         public static XmlElementSyntax XmlPermissionElement(
             CrefSyntax cref,
             params XmlNodeSyntax[] content
@@ -1235,7 +1324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of a permission element within xml documentation comments.
         /// </summary>
         /// <param name="cref">Syntax representation of the reference to the permission type.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the permission element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the permission
+        // element.</param>
         public static XmlElementSyntax XmlPermissionElement(
             CrefSyntax cref,
             SyntaxList<XmlNodeSyntax> content
@@ -1251,7 +1341,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of an example element within xml documentation comments.
         /// </summary>
-        /// <param name="content">A list of syntax nodes that represents the content of the example element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the example
+        // element.</param>
         public static XmlElementSyntax XmlExampleElement(params XmlNodeSyntax[] content)
         {
             return XmlExampleElement(List(content));
@@ -1260,7 +1351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of an example element within xml documentation comments.
         /// </summary>
-        /// <param name="content">A list of syntax nodes that represents the content of the example element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the example
+        // element.</param>
         public static XmlElementSyntax XmlExampleElement(SyntaxList<XmlNodeSyntax> content)
         {
             XmlElementSyntax element = XmlElement(
@@ -1273,7 +1365,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of a para element within xml documentation comments.
         /// </summary>
-        /// <param name="content">A list of syntax nodes that represents the content of the para element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the para
+        // element.</param>
         public static XmlElementSyntax XmlParaElement(params XmlNodeSyntax[] content)
         {
             return XmlParaElement(List(content));
@@ -1282,7 +1375,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of a para element within xml documentation comments.
         /// </summary>
-        /// <param name="content">A list of syntax nodes that represents the content of the para element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the para
+        // element.</param>
         public static XmlElementSyntax XmlParaElement(SyntaxList<XmlNodeSyntax> content)
         {
             return XmlElement(DocumentationCommentXmlNames.ParaElementName, content);
@@ -1293,7 +1387,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// documentation of method parameters).
         /// </summary>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the param element (e.g.
+        /// <param name="content">A list of syntax nodes that represents the content of the param element
+        // (e.g.
         /// the description and meaning of the parameter).</param>
         public static XmlElementSyntax XmlParamElement(
             string parameterName,
@@ -1308,7 +1403,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// documentation of method parameters).
         /// </summary>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the param element (e.g.
+        /// <param name="content">A list of syntax nodes that represents the content of the param element
+        // (e.g.
         /// the description and meaning of the parameter).</param>
         public static XmlElementSyntax XmlParamElement(
             string parameterName,
@@ -1325,7 +1421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates the syntax representation of a paramref element within xml documentation comments (e.g. for
+        /// Creates the syntax representation of a paramref element within xml documentation comments (e.g.
+        // for
         /// referencing particular parameters of a method).
         /// </summary>
         /// <param name="parameterName">The name of the referenced parameter.</param>
@@ -1360,7 +1457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of a placeholder element within xml documentation comments.
         /// </summary>
-        /// <param name="content">A list of syntax nodes that represents the content of the placeholder element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the placeholder
+        // element.</param>
         public static XmlElementSyntax XmlPlaceholderElement(params XmlNodeSyntax[] content)
         {
             return XmlPlaceholderElement(List(content));
@@ -1369,14 +1467,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates the syntax representation of a placeholder element within xml documentation comments.
         /// </summary>
-        /// <param name="content">A list of syntax nodes that represents the content of the placeholder element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the placeholder
+        // element.</param>
         public static XmlElementSyntax XmlPlaceholderElement(SyntaxList<XmlNodeSyntax> content)
         {
             return XmlElement(DocumentationCommentXmlNames.PlaceholderElementName, content);
         }
 
         /// <summary>
-        /// Creates the syntax representation of a named empty xml element within xml documentation comments.
+        /// Creates the syntax representation of a named empty xml element within xml documentation
+        // comments.
         /// </summary>
         /// <param name="localName">The name of the empty xml element.</param>
         public static XmlEmptyElementSyntax XmlEmptyElement(string localName)
@@ -1388,7 +1488,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of a named xml element within xml documentation comments.
         /// </summary>
         /// <param name="localName">The name of the empty xml element.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the xml element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the xml
+        // element.</param>
         public static XmlElementSyntax XmlElement(
             string localName,
             SyntaxList<XmlNodeSyntax> content
@@ -1401,7 +1502,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of a named xml element within xml documentation comments.
         /// </summary>
         /// <param name="name">The name of the empty xml element.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the xml element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the xml
+        // element.</param>
         public static XmlElementSyntax XmlElement(
             XmlNameSyntax name,
             SyntaxList<XmlNodeSyntax> content
@@ -1441,7 +1543,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of an xml text attribute.
         /// </summary>
         /// <param name="name">The name of the xml text attribute.</param>
-        /// <param name="quoteKind">The kind of the quote token to be used to quote the value (e.g. " or ').</param>
+        /// <param name="quoteKind">The kind of the quote token to be used to quote the value (e.g. " or
+        // ').</param>
         /// <param name="textTokens">A list of tokens used for the value of the xml text attribute.</param>
         public static XmlTextAttributeSyntax XmlTextAttribute(
             string name,
@@ -1456,7 +1559,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of an xml text attribute.
         /// </summary>
         /// <param name="name">The name of the xml text attribute.</param>
-        /// <param name="quoteKind">The kind of the quote token to be used to quote the value (e.g. " or ').</param>
+        /// <param name="quoteKind">The kind of the quote token to be used to quote the value (e.g. " or
+        // ').</param>
         /// <param name="textTokens">A list of tokens used for the value of the xml text attribute.</param>
         public static XmlTextAttributeSyntax XmlTextAttribute(
             XmlNameSyntax name,
@@ -1472,7 +1576,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of an xml element that spans multiple text lines.
         /// </summary>
         /// <param name="localName">The name of the xml element.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the xml multi line element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the xml multi line
+        // element.</param>
         public static XmlElementSyntax XmlMultiLineElement(
             string localName,
             SyntaxList<XmlNodeSyntax> content
@@ -1485,7 +1590,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates the syntax representation of an xml element that spans multiple text lines.
         /// </summary>
         /// <param name="name">The name of the xml element.</param>
-        /// <param name="content">A list of syntax nodes that represents the content of the xml multi line element.</param>
+        /// <param name="content">A list of syntax nodes that represents the content of the xml multi line
+        // element.</param>
         public static XmlElementSyntax XmlMultiLineElement(
             XmlNameSyntax name,
             SyntaxList<XmlNodeSyntax> content
@@ -1495,7 +1601,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates the syntax representation of an xml text that contains a newline token with a documentation comment
+        /// Creates the syntax representation of an xml text that contains a newline token with a
+        // documentation comment
         /// exterior trivia at the end (continued documentation comment).
         /// </summary>
         /// <param name="text">The raw text within the new line.</param>
@@ -1505,7 +1612,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates the syntax representation of an xml newline token with a documentation comment exterior trivia at
+        /// Creates the syntax representation of an xml newline token with a documentation comment exterior
+        // trivia at
         /// the end (continued documentation comment).
         /// </summary>
         /// <param name="text">The raw text within the new line.</param>
@@ -1790,7 +1898,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a separated list of nodes from a sequence of nodes, synthesizing comma separators in between.
+        /// Creates a separated list of nodes from a sequence of nodes, synthesizing comma separators in
+        // between.
         /// </summary>
         /// <typeparam name="TNode">The specific type of the element nodes.</typeparam>
         /// <param name="nodes">A sequence of syntax nodes.</param>
@@ -1846,7 +1955,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <typeparam name="TNode">The specific type of the element nodes.</typeparam>
         /// <param name="nodes">A sequence of syntax nodes.</param>
-        /// <param name="separators">A sequence of token to be interleaved between the nodes. The number of tokens must
+        /// <param name="separators">A sequence of token to be interleaved between the nodes. The number of
+        // tokens must
         /// be one less than the number of nodes.</param>
         public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
             IEnumerable<TNode>? nodes,
@@ -1854,7 +1964,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
             where TNode : SyntaxNode
         {
-            // Interleave the nodes and the separators.  The number of separators must be equal to or 1 less than the number of nodes or
+            // Interleave the nodes and the separators.  The number of separators must be equal to or 1 less
+            // than the number of nodes or
             // an argument exception is thrown.
 
             if (nodes != null)
@@ -1906,10 +2017,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a separated list from a sequence of nodes and tokens, starting with a node and alternating between additional nodes and separator tokens.
+        /// Creates a separated list from a sequence of nodes and tokens, starting with a node and
+        // alternating between additional nodes and separator tokens.
         /// </summary>
         /// <typeparam name="TNode">The specific type of the element nodes.</typeparam>
-        /// <param name="nodesAndTokens">A sequence of nodes or tokens, alternating between nodes and separator tokens.</param>
+        /// <param name="nodesAndTokens">A sequence of nodes or tokens, alternating between nodes and
+        // separator tokens.</param>
         public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
             IEnumerable<SyntaxNodeOrToken> nodesAndTokens
         )
@@ -1919,7 +2032,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a separated list from a <see cref="SyntaxNodeOrTokenList"/>, where the list elements start with a node and then alternate between
+        /// Creates a separated list from a <see cref="SyntaxNodeOrTokenList"/>, where the list elements
+        // start with a node and then alternate between
         /// additional nodes and separator tokens.
         /// </summary>
         /// <typeparam name="TNode">The specific type of the element nodes.</typeparam>
@@ -2032,7 +2146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #pragma warning disable RS0027 // Public API with optional parameter(s) should have the most parameters amongst its public overloads.
 #pragma warning disable RS0030 // Do not used banned APIs
 #pragma warning disable CS0618 // Type or member is obsolete
-        /// <inheritdoc cref="CSharpSyntaxTree.ParseText(string, CSharpParseOptions?, string, Encoding?, CancellationToken)"/>
+        /// <inheritdoc cref="CSharpSyntaxTree.ParseText(string, CSharpParseOptions?, string, Encoding?,
+        // CancellationToken)"/>
         public static SyntaxTree ParseSyntaxTree(
             string text,
             ParseOptions? options = null,
@@ -2052,7 +2167,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 #pragma warning restore
 
-        /// <inheritdoc cref="CSharpSyntaxTree.ParseText(SourceText, CSharpParseOptions?, string, CancellationToken)"/>
+        /// <inheritdoc cref="CSharpSyntaxTree.ParseText(SourceText, CSharpParseOptions?, string,
+        // CancellationToken)"/>
         public static SyntaxTree ParseSyntaxTree(
             SourceText text,
             ParseOptions? options = null,
@@ -2165,7 +2281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// the produced tokens and its behavior is generally unspecified.
         /// </summary>
         /// <param name="text">The text of all the tokens.</param>
-        /// <param name="initialTokenPosition">An integer to use as the starting position of the first token.</param>
+        /// <param name="initialTokenPosition">An integer to use as the starting position of the first
+        // token.</param>
         /// <param name="offset">Optional offset into text.</param>
         /// <param name="options">Parse options.</param>
         public static IEnumerable<SyntaxToken> ParseTokens(
@@ -2253,9 +2370,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="text">The text of the expression.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an
+        // error</param>
         public static ExpressionSyntax ParseExpression(
             string text,
             int offset = 0,
@@ -2278,9 +2397,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="text">The text of the statement.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an
+        // error</param>
         public static StatementSyntax ParseStatement(
             string text,
             int offset = 0,
@@ -2299,14 +2420,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Parse a MemberDeclarationSyntax. This includes all of the kinds of members that could occur in a type declaration.
+        /// Parse a MemberDeclarationSyntax. This includes all of the kinds of members that could occur in a
+        // type declaration.
         /// If nothing resembling a valid member declaration is found in the input, returns null.
         /// </summary>
         /// <param name="text">The text of the declaration.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input following a declaration should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input following a declaration should
+        // be treated as an error</param>
         public static MemberDeclarationSyntax? ParseMemberDeclaration(
             string text,
             int offset = 0,
@@ -2329,12 +2453,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Parse a CompilationUnitSyntax using the grammar rule for an entire compilation unit (file). To produce a
+        /// Parse a CompilationUnitSyntax using the grammar rule for an entire compilation unit (file). To
+        // produce a
         /// SyntaxTree instance, use CSharpSyntaxTree.ParseText instead.
         /// </summary>
         /// <param name="text">The text of the compilation unit.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
         public static CompilationUnitSyntax ParseCompilationUnit(
             string text,
@@ -2342,7 +2468,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpParseOptions? options = null
         )
         {
-            // note that we do not need a "consumeFullText" parameter, because parsing a compilation unit always must
+            // note that we do not need a "consumeFullText" parameter, because parsing a compilation unit always
+            // must
             // consume input until the end-of-file
             using (var lexer = MakeLexer(text, offset, options))
             using (var parser = MakeParser(lexer))
@@ -2357,9 +2484,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="text">The text of the parenthesized parameter list.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an
+        // error</param>
         public static ParameterListSyntax ParseParameterList(
             string text,
             int offset = 0,
@@ -2382,9 +2511,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="text">The text of the bracketed parameter list.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an
+        // error</param>
         public static BracketedParameterListSyntax ParseBracketedParameterList(
             string text,
             int offset = 0,
@@ -2407,9 +2538,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="text">The text of the parenthesized argument list.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an
+        // error</param>
         public static ArgumentListSyntax ParseArgumentList(
             string text,
             int offset = 0,
@@ -2432,9 +2565,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="text">The text of the bracketed argument list.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an
+        // error</param>
         public static BracketedArgumentListSyntax ParseBracketedArgumentList(
             string text,
             int offset = 0,
@@ -2457,9 +2592,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="text">The text of the attribute argument list.</param>
         /// <param name="offset">Optional offset into text.</param>
-        /// <param name="options">The optional parse options to use. If no options are specified default options are
+        /// <param name="options">The optional parse options to use. If no options are specified default
+        // options are
         /// used.</param>
-        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an error</param>
+        /// <param name="consumeFullText">True if extra tokens in the input should be treated as an
+        // error</param>
         public static AttributeArgumentListSyntax? ParseAttributeArgumentList(
             string text,
             int offset = 0,
@@ -2517,7 +2654,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="newTree">The new tree.</param>
         /// <param name="topLevel">
         /// If true then the trees are equivalent if the contained nodes and tokens declaring
-        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside method bodies
+        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside
+        // method bodies
         /// or initializer expressions, otherwise all nodes and tokens must be equivalent.
         /// </param>
         public static bool AreEquivalent(SyntaxTree? oldTree, SyntaxTree? newTree, bool topLevel)
@@ -2547,7 +2685,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="newNode">The new node.</param>
         /// <param name="topLevel">
         /// If true then the nodes are equivalent if the contained nodes and tokens declaring
-        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside method bodies
+        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside
+        // method bodies
         /// or initializer expressions, otherwise all nodes and tokens must be equivalent.
         /// </param>
         public static bool AreEquivalent(SyntaxNode? oldNode, SyntaxNode? newNode, bool topLevel)
@@ -2566,8 +2705,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="oldNode">The old node.</param>
         /// <param name="newNode">The new node.</param>
         /// <param name="ignoreChildNode">
-        /// If specified called for every child syntax node (not token) that is visited during the comparison.
-        /// If it returns true the child is recursively visited, otherwise the child and its subtree is disregarded.
+        /// If specified called for every child syntax node (not token) that is visited during the
+        // comparison.
+        /// If it returns true the child is recursively visited, otherwise the child and its subtree is
+        // disregarded.
         /// </param>
         public static bool AreEquivalent(
             SyntaxNode? oldNode,
@@ -2610,7 +2751,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="newList">The new list.</param>
         /// <param name="topLevel">
         /// If true then the nodes are equivalent if the contained nodes and tokens declaring
-        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside method bodies
+        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside
+        // method bodies
         /// or initializer expressions, otherwise all nodes and tokens must be equivalent.
         /// </param>
         public static bool AreEquivalent<TNode>(
@@ -2629,8 +2771,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="oldList">The old list.</param>
         /// <param name="newList">The new list.</param>
         /// <param name="ignoreChildNode">
-        /// If specified called for every child syntax node (not token) that is visited during the comparison.
-        /// If it returns true the child is recursively visited, otherwise the child and its subtree is disregarded.
+        /// If specified called for every child syntax node (not token) that is visited during the
+        // comparison.
+        /// If it returns true the child is recursively visited, otherwise the child and its subtree is
+        // disregarded.
         /// </param>
         public static bool AreEquivalent<TNode>(
             SyntaxList<TNode> oldList,
@@ -2654,7 +2798,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="newList">The new list.</param>
         /// <param name="topLevel">
         /// If true then the nodes are equivalent if the contained nodes and tokens declaring
-        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside method bodies
+        /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside
+        // method bodies
         /// or initializer expressions, otherwise all nodes and tokens must be equivalent.
         /// </param>
         public static bool AreEquivalent<TNode>(
@@ -2673,8 +2818,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="oldList">The old list.</param>
         /// <param name="newList">The new list.</param>
         /// <param name="ignoreChildNode">
-        /// If specified called for every child syntax node (not token) that is visited during the comparison.
-        /// If it returns true the child is recursively visited, otherwise the child and its subtree is disregarded.
+        /// If specified called for every child syntax node (not token) that is visited during the
+        // comparison.
+        /// If it returns true the child is recursively visited, otherwise the child and its subtree is
+        // disregarded.
         /// </param>
         public static bool AreEquivalent<TNode>(
             SeparatedSyntaxList<TNode> oldList,
@@ -2969,7 +3116,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Determines whether the given text is considered a syntactically complete submission.
-        /// Throws <see cref="ArgumentException"/> if the tree was not compiled as an interactive submission.
+        /// Throws <see cref="ArgumentException"/> if the tree was not compiled as an interactive
+        // submission.
         /// </summary>
         public static bool IsCompleteSubmission(SyntaxTree tree)
         {
@@ -3025,7 +3173,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            // All top-level constructs but global statement (i.e. extern alias, using directive, global attribute, and declarations)
+            // All top-level constructs but global statement (i.e. extern alias, using directive, global
+            // attribute, and declarations)
             // should have a closing token (semicolon, closing brace or bracket) to be complete.
             if (!lastNode.IsKind(SyntaxKind.GlobalStatement))
             {

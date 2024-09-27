@@ -100,10 +100,10 @@ namespace Novell.Directory.Ldap
         /// </param>
         virtual internal System.Collections.Hashtable Properties
         {
-            /* package */
+/* package */
 
             get { return properties; }
-            /* package */
+/* package */
 
             set
             {
@@ -321,7 +321,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <returns> An LdapReferralHandler object that can process authentication.
         /// </returns>
-        /*package*/
+/*package*/
         internal virtual LdapReferralHandler getReferralHandler()
         {
             return refHandler;

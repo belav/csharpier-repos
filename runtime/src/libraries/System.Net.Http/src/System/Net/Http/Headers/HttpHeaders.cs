@@ -13,8 +13,10 @@ using System.Threading;
 namespace System.Net.Http.Headers
 {
     /// <summary>
-    /// Key/value pairs of headers. The value is either a raw <see cref="string"/> or a <see cref="HttpHeaders.HeaderStoreItemInfo"/>.
-    /// We're using a custom type instead of <see cref="KeyValuePair{TKey, TValue}"/> because we need ref access to fields.
+    /// Key/value pairs of headers. The value is either a raw <see cref="string"/> or a <see
+    // cref="HttpHeaders.HeaderStoreItemInfo"/>.
+    /// We're using a custom type instead of <see cref="KeyValuePair{TKey, TValue}"/> because we need
+    // ref access to fields.
     /// </summary>
     internal struct HeaderEntry
     {
@@ -32,25 +34,36 @@ namespace System.Net.Http.Headers
     {
         // This type is used to store a collection of headers in 'headerStore':
         // - A header can have multiple values.
-        // - A header can have an associated parser which is able to parse the raw string value into a strongly typed object.
-        // - If a header has an associated parser and the provided raw value can't be parsed, the value is considered
-        //   invalid. Invalid values are stored if added using TryAddWithoutValidation(). If the value was added using Add(),
+        // - A header can have an associated parser which is able to parse the raw string value into a
+        // strongly typed object.
+        // - If a header has an associated parser and the provided raw value can't be parsed, the value is
+        // considered
+        //   invalid. Invalid values are stored if added using TryAddWithoutValidation(). If the value was
+        // added using Add(),
         //   Add() will throw FormatException.
-        // - Since parsing header values is expensive and users usually only care about a few headers, header values are
+        // - Since parsing header values is expensive and users usually only care about a few headers,
+        // header values are
         //   lazily initialized.
         //
         // Given the properties above, a header value can have three states:
         // - 'raw': The header value was added using TryAddWithoutValidation() and it wasn't parsed yet.
-        // - 'parsed': The header value was successfully parsed. It was either added using Add() where the value was parsed
-        //   immediately, or if added using TryAddWithoutValidation() a user already accessed a property/method triggering the
+        // - 'parsed': The header value was successfully parsed. It was either added using Add() where the
+        // value was parsed
+        //   immediately, or if added using TryAddWithoutValidation() a user already accessed a
+        // property/method triggering the
         //   value to be parsed.
-        // - 'invalid': The header value was parsed, but parsing failed because the value is invalid. Storing invalid values
-        //   allows users to still retrieve the value (by calling GetValues()), but it will not be exposed as strongly typed
-        //   object. E.g. the client receives a response with the following header: 'Via: 1.1 proxy, invalid'
+        // - 'invalid': The header value was parsed, but parsing failed because the value is invalid.
+        // Storing invalid values
+        //   allows users to still retrieve the value (by calling GetValues()), but it will not be exposed
+        // as strongly typed
+        //   object. E.g. the client receives a response with the following header: 'Via: 1.1 proxy,
+        // invalid'
         //   - HttpHeaders.GetValues() will return "1.1 proxy", "invalid"
-        //   - HttpResponseHeaders.Via collection will only contain one ViaHeaderValue object with value "1.1 proxy"
+        //   - HttpResponseHeaders.Via collection will only contain one ViaHeaderValue object with value
+        // "1.1 proxy"
 
-        /// <summary>Either a <see cref="HeaderEntry"/> array or a Dictionary&lt;<see cref="HeaderDescriptor"/>, <see cref="object"/>&gt; </summary>
+        /// <summary>Either a <see cref="HeaderEntry"/> array or a Dictionary&lt;<see
+        // cref="HeaderDescriptor"/>, <see cref="object"/>&gt; </summary>
         private object? _headerStore;
         private int _count;
 
@@ -72,20 +85,23 @@ namespace System.Net.Http.Headers
             _treatAsCustomHeaderTypes = treatAsCustomHeaderTypes & ~HttpHeaderType.NonTrailing;
         }
 
-        /// <summary>Gets a view of the contents of this headers collection that does not parse nor validate the data upon access.</summary>
+        /// <summary>Gets a view of the contents of this headers collection that does not parse nor validate
+        // the data upon access.</summary>
         public HttpHeadersNonValidated NonValidated => new HttpHeadersNonValidated(this);
 
         public void Add(string name, string? value) => Add(GetHeaderDescriptor(name), value);
 
         internal void Add(HeaderDescriptor descriptor, string? value)
         {
-            // We don't use GetOrCreateHeaderInfo() here, since this would create a new header in the store. If parsing
+            // We don't use GetOrCreateHeaderInfo() here, since this would create a new header in the store. If
+            // parsing
             // the value then throws, we would have to remove the header from the store again. So just get a
             // HeaderStoreItemInfo object and try to parse the value. If it works, we'll add the header.
             PrepareHeaderInfoForAdd(descriptor, out HeaderStoreItemInfo info, out bool addToStore);
             ParseAndAddValue(descriptor, info, value);
 
-            // If we get here, then the value could be parsed correctly. If we created a new HeaderStoreItemInfo, add
+            // If we get here, then the value could be parsed correctly. If we created a new
+            // HeaderStoreItemInfo, add
             // it to the store if we added at least one value.
             if (addToStore && (info.ParsedAndInvalidValues != null))
             {
@@ -115,9 +131,12 @@ namespace System.Net.Http.Headers
             }
             finally
             {
-                // Even if one of the values was invalid, make sure we add the header for the valid ones. We need to be
-                // consistent here: If values get added to an _existing_ header, then all values until the invalid one
-                // get added. Same here: If multiple values get added to a _new_ header, make sure the header gets added
+                // Even if one of the values was invalid, make sure we add the header for the valid ones. We need to
+                // be
+                // consistent here: If values get added to an _existing_ header, then all values until the invalid
+                // one
+                // get added. Same here: If multiple values get added to a _new_ header, make sure the header gets
+                // added
                 // with the valid values.
                 // However, if all values for a _new_ header were invalid, then don't add the header.
                 if (addToStore && (info.ParsedAndInvalidValues != null))
@@ -406,7 +425,8 @@ namespace System.Net.Http.Headers
                 "Can't add parsed value if there is no parser available."
             );
 
-            // This method will first clear all values. This is used e.g. when setting the 'Date' or 'Host' header.
+            // This method will first clear all values. This is used e.g. when setting the 'Date' or 'Host'
+            // header.
             // i.e. headers not supporting collections.
             HeaderStoreItemInfo info = GetOrCreateHeaderInfo(descriptor);
 
@@ -739,7 +759,8 @@ namespace System.Net.Http.Headers
             // If we don't have the header in the store yet, add it now.
             HeaderStoreItemInfo result = new HeaderStoreItemInfo();
 
-            // If the descriptor header type is in _treatAsCustomHeaderTypes, it must be converted to a custom header before calling this method
+            // If the descriptor header type is in _treatAsCustomHeaderTypes, it must be converted to a custom
+            // header before calling this method
             Debug.Assert((descriptor.HeaderType & _treatAsCustomHeaderTypes) == 0);
 
             AddEntryToStore(new HeaderEntry(descriptor, result));
@@ -865,7 +886,8 @@ namespace System.Net.Http.Headers
         // See Add(name, string)
         internal bool TryParseAndAddValue(HeaderDescriptor descriptor, string? value)
         {
-            // We don't use GetOrCreateHeaderInfo() here, since this would create a new header in the store. If parsing
+            // We don't use GetOrCreateHeaderInfo() here, since this would create a new header in the store. If
+            // parsing
             // the value then throws, we would have to remove the header from the store again. So just get a
             // HeaderStoreItemInfo object and try to parse the value. If it works, we'll add the header.
             HeaderStoreItemInfo info;
@@ -877,7 +899,8 @@ namespace System.Net.Http.Headers
             if (result && addToStore && (info.ParsedAndInvalidValues != null))
             {
                 info.AssertContainsNoInvalidValues();
-                // If we get here, then the value could be parsed correctly. If we created a new HeaderStoreItemInfo, add
+                // If we get here, then the value could be parsed correctly. If we created a new
+                // HeaderStoreItemInfo, add
                 // it to the store if we added at least one value.
                 Debug.Assert(!Contains(descriptor));
                 AddEntryToStore(new HeaderEntry(descriptor, info));
@@ -921,7 +944,8 @@ namespace System.Net.Http.Headers
                 )
             )
             {
-                // The raw string only represented one value (which was successfully parsed). Add the value and return.
+                // The raw string only represented one value (which was successfully parsed). Add the value and
+                // return.
                 if ((value == null) || (index == value.Length))
                 {
                     if (parsedValue != null)
@@ -1126,8 +1150,10 @@ namespace System.Net.Http.Headers
                 ref index
             );
 
-            // The raw string only represented one value (which was successfully parsed). Add the value and return.
-            // If value is null we still have to first call ParseValue() to allow the parser to decide whether null is
+            // The raw string only represented one value (which was successfully parsed). Add the value and
+            // return.
+            // If value is null we still have to first call ParseValue() to allow the parser to decide whether
+            // null is
             // a valid value. If it is (i.e. no exception thrown), we set the parsed value (if any) and return.
             if ((value == null) || (index == value.Length))
             {

@@ -92,7 +92,8 @@ namespace System.IO.Pipes
                                     try
                                     {
                                         Interop.Kernel32.CancelIoEx(handle, vts._overlapped);
-                                        // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
+                                        // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the
+                                        // IOCallback.
                                     }
                                     catch (ObjectDisposedException) { } // in case the SafeHandle is (erroneously) closed concurrently
                                 }
@@ -126,16 +127,21 @@ namespace System.IO.Pipes
                 }
             }
 
-            // After calling Read/WriteFile to start the asynchronous operation, the caller may configure cancellation,
-            // and only after that should we allow for completing the operation, as completion needs to factor in work
-            // done by that cancellation registration, e.g. unregistering.  As such, we use _result to both track who's
+            // After calling Read/WriteFile to start the asynchronous operation, the caller may configure
+            // cancellation,
+            // and only after that should we allow for completing the operation, as completion needs to factor
+            // in work
+            // done by that cancellation registration, e.g. unregistering.  As such, we use _result to both
+            // track who's
             // responsible for calling Complete and for passing the necessary data between parties.
 
             /// <summary>Invoked when the async operation finished being scheduled.</summary>
             internal void FinishedScheduling()
             {
-                // Set the value to 1.  If it was already non-0, then the asynchronous operation already completed but
-                // didn't call Complete, so we call Complete here.  The read result value is the data (packed) necessary
+                // Set the value to 1.  If it was already non-0, then the asynchronous operation already completed
+                // but
+                // didn't call Complete, so we call Complete here.  The read result value is the data (packed)
+                // necessary
                 // to make the call.
                 ulong result = Interlocked.Exchange(ref _result, 1);
                 if (result != 0)
@@ -158,7 +164,8 @@ namespace System.IO.Pipes
 
                 // Set the value to a packed combination of the error code and number of bytes (plus a high-bit 1
                 // to ensure the value we're setting is non-zero).  If it was already non-0 (the common case), then
-                // the call site already finished scheduling the async operation, in which case we're ready to complete.
+                // the call site already finished scheduling the async operation, in which case we're ready to
+                // complete.
                 Debug.Assert(numBytes < int.MaxValue);
                 if (
                     Interlocked.Exchange(

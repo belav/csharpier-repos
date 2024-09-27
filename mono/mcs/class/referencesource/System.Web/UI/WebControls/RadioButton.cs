@@ -27,7 +27,8 @@ namespace System.Web.UI.WebControls
         private string _uniqueGroupName = null;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.RadioButton'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.RadioButton'/>
+        // class.</para>
         /// </devdoc>
         public RadioButton() { }
 
@@ -224,7 +225,8 @@ namespace System.Web.UI.WebControls
             if (Checked)
                 writer.AddAttribute(HtmlTextWriterAttribute.Checked, "checked");
 
-            // ASURT 119141: Render ---- attribute on the INPUT tag (instead of the SPAN) so the checkbox actually gets disabled when Enabled=false
+            // ASURT 119141: Render ---- attribute on the INPUT tag (instead of the SPAN) so the checkbox
+            // actually gets disabled when Enabled=false
             if (!IsEnabled && SupportsDisabledAttribute)
             {
                 writer.AddAttribute(HtmlTextWriterAttribute.Disabled, "disabled");

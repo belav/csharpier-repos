@@ -369,7 +369,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="key">The key.</param>
             /// <param name="comparer">The comparer.</param>
-            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+            // this operation.</param>
             /// <returns>The new tree.</returns>
             internal Node Add(T key, IComparer<T> comparer, out bool mutated)
             {
@@ -419,7 +420,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="key">The key.</param>
             /// <param name="comparer">The comparer.</param>
-            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+            // this operation.</param>
             /// <returns>The new tree.</returns>
             internal Node Remove(T key, IComparer<T> comparer, out bool mutated)
             {
@@ -517,7 +519,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Freezes this node and all descendant nodes so that any mutations require a new instance of the nodes.
+            /// Freezes this node and all descendant nodes so that any mutations require a new instance of the
+            // nodes.
             /// </summary>
             internal void Freeze()
             {
@@ -704,7 +707,8 @@ namespace System.Collections.Immutable
             /// Returns a value indicating whether the tree is in balance.
             /// </summary>
             /// <param name="tree">The tree.</param>
-            /// <returns>0 if the tree is in balance, a positive integer if the right side is heavy, or a negative integer if the left side is heavy.</returns>
+            /// <returns>0 if the tree is in balance, a positive integer if the right side is heavy, or a
+            // negative integer if the left side is heavy.</returns>
             private static int Balance(Node tree)
             {
                 Requires.NotNull(tree, nameof(tree));
@@ -765,9 +769,12 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Creates a node tree that contains the contents of a list.
             /// </summary>
-            /// <param name="items">An indexable list with the contents that the new node tree should contain.</param>
-            /// <param name="start">The starting index within <paramref name="items"/> that should be captured by the node tree.</param>
-            /// <param name="length">The number of elements from <paramref name="items"/> that should be captured by the node tree.</param>
+            /// <param name="items">An indexable list with the contents that the new node tree should
+            // contain.</param>
+            /// <param name="start">The starting index within <paramref name="items"/> that should be captured
+            // by the node tree.</param>
+            /// <param name="length">The number of elements from <paramref name="items"/> that should be
+            // captured by the node tree.</param>
             /// <returns>The root of the created node tree.</returns>
             internal static Node NodeTreeFromList(
                 IOrderedCollection<T> items,
@@ -792,7 +799,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
+            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone
+            // of this node
             /// with the described changes.
             /// </summary>
             /// <param name="left">The left branch of the mutated node.</param>

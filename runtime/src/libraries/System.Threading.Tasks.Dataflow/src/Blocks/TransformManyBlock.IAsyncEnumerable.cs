@@ -9,22 +9,29 @@ namespace System.Threading.Tasks.Dataflow
 {
     public partial class TransformManyBlock<TInput, TOutput>
     {
-        /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function.</summary>
+        /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified
+        // function.</summary>
         /// <param name="transform">
-        /// The function to invoke with each data element received.  All of the data from the returned <see cref="IAsyncEnumerable{TOutput}"/>
+        /// The function to invoke with each data element received.  All of the data from the returned <see
+        // cref="IAsyncEnumerable{TOutput}"/>
         /// will be made available as output from this <see cref="TransformManyBlock{TInput,TOutput}"/>.
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="transform"/> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="transform"/> is <see langword="null"
+        // />.</exception>
         public TransformManyBlock(Func<TInput, IAsyncEnumerable<TOutput>> transform)
             : this(transform, ExecutionDataflowBlockOptions.Default) { }
 
-        /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
+        /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified
+        // function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="transform">
-        /// The function to invoke with each data element received.  All of the data from the returned <see cref="IAsyncEnumerable{TOutput}"/>
+        /// The function to invoke with each data element received.  All of the data from the returned <see
+        // cref="IAsyncEnumerable{TOutput}"/>
         /// will be made available as output from this <see cref="TransformManyBlock{TInput,TOutput}"/>.
         /// </param>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="TransformManyBlock{TInput,TOutput}"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="transform"/> or <paramref name="dataflowBlockOptions"/> is <see langword="null" />.</exception>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="TransformManyBlock{TInput,TOutput}"/>.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="transform"/> or <paramref
+        // name="dataflowBlockOptions"/> is <see langword="null" />.</exception>
         public TransformManyBlock(
             Func<TInput, IAsyncEnumerable<TOutput>> transform,
             ExecutionDataflowBlockOptions dataflowBlockOptions
@@ -60,11 +67,13 @@ namespace System.Threading.Tasks.Dataflow
 
         // Note:
         // Enumerating the IAsyncEnumerable is done with ConfigureAwait(true), using the default behavior of
-        // paying attention to the current context/scheduler. This makes it so that the enumerable code runs on the target scheduler.
+        // paying attention to the current context/scheduler. This makes it so that the enumerable code runs
+        // on the target scheduler.
         // For this to work correctly, there can't be any ConfigureAwait(false) in the same method prior to
         // these await foreach loops, nor in the call chain prior to the method invocation.
 
-        /// <summary>Processes the message with a user-provided transform function that returns an async enumerable.</summary>
+        /// <summary>Processes the message with a user-provided transform function that returns an async
+        // enumerable.</summary>
         /// <param name="transformFunction">The transform function to use to process the message.</param>
         /// <param name="messageWithId">The message to be processed.</param>
         private async Task ProcessMessageAsync(
@@ -176,7 +185,8 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     await StoreOutputItemsNonReorderedWithIterationAsync(item)
                         .ConfigureAwait(false);
-                    // here itemCopy remains null, so that base.AddItem will finish our interactions with the reordering buffer
+                    // here itemCopy remains null, so that base.AddItem will finish our interactions with the reordering
+                    // buffer
                 }
                 else
                 {

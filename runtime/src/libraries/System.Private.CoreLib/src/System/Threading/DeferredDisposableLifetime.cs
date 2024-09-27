@@ -6,7 +6,8 @@ using System.Diagnostics;
 namespace System.Threading
 {
     /// <summary>
-    /// Provides callbacks to objects whose lifetime is managed by <see cref="DeferredDisposableLifetime{T}"/>.
+    /// Provides callbacks to objects whose lifetime is managed by <see
+    // cref="DeferredDisposableLifetime{T}"/>.
     /// </summary>
     internal interface IDeferredDisposable
     {

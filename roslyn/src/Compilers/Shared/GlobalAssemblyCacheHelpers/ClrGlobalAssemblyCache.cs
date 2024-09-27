@@ -211,7 +211,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    // for some reason it might happen that CreateAssemblyEnum returns non-zero HR that doesn't correspond to any exception:
+                    // for some reason it might happen that CreateAssemblyEnum returns non-zero HR that doesn't
+                    // correspond to any exception:
 #if SCRIPTING
                     throw new ArgumentException(
                         Microsoft.CodeAnalysis.Scripting.ScriptingResources.InvalidAssemblyName

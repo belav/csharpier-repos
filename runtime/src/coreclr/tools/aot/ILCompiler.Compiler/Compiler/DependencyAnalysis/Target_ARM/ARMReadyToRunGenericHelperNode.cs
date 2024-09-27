@@ -84,7 +84,8 @@ namespace ILCompiler.DependencyAnalysis
                         }
                         else
                         {
-                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
+                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the
+                            // non-GC statics region.
                             int cctorContextSize = NonGCStaticsNode.GetClassConstructorContextSize(
                                 factory.Target
                             );
@@ -135,7 +136,8 @@ namespace ILCompiler.DependencyAnalysis
                         }
                         else
                         {
-                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
+                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the
+                            // non-GC statics region.
                             GenericLookupResult nonGcRegionLookup =
                                 factory.GenericLookup.TypeNonGCStaticBase(target);
                             EmitDictionaryLookup(

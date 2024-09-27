@@ -775,7 +775,8 @@ namespace MonoTests.System.Globalization
                 ),
                 "#1"
             );
-            //Assert.AreEqual (1, gc.GetWeekOfYear (new DateTime (2000, 1, 1), CalendarWeekRule.FirstDay, DayOfWeek.Sunday), "#2");
+            //Assert.AreEqual (1, gc.GetWeekOfYear (new DateTime (2000, 1, 1), CalendarWeekRule.FirstDay,
+            // DayOfWeek.Sunday), "#2");
             Assert.AreEqual(
                 3,
                 gc.GetWeekOfYear(
@@ -905,13 +906,13 @@ namespace MonoTests.System.Globalization
             Assert.AreEqual(5691, hbc.ToFourDigitYear(5691), "#2-4");
             Assert.AreEqual(5999, hbc.ToFourDigitYear(5999), "#2-5");
             // LAMESPEC: .NET fails to throw an exception unlike documented
-            /*
-            try {
-                hbc.ToFourDigitYear (6000);
-                Assert.Fail ("#2-6");
-            } catch (ArgumentOutOfRangeException) {
-            }
-            */
+/*
+try {
+hbc.ToFourDigitYear (6000);
+Assert.Fail ("#2-6");
+} catch (ArgumentOutOfRangeException) {
+}
+*/
 
             ThaiBuddhistCalendar tc = new ThaiBuddhistCalendar();
             Assert.AreEqual(2572, tc.ToFourDigitYear(72), "#3-1");
@@ -920,13 +921,13 @@ namespace MonoTests.System.Globalization
             Assert.AreEqual(2573, tc.ToFourDigitYear(2573), "#3-4");
             Assert.AreEqual(9999, tc.ToFourDigitYear(9999), "#3-5");
             // LAMESPEC: .NET fails to throw an exception unlike documented
-            /*
-            try {
-                tc.ToFourDigitYear (10000);
-                Assert.Fail ("#3-6");
-            } catch (ArgumentOutOfRangeException) {
-            }
-            */
+/*
+try {
+tc.ToFourDigitYear (10000);
+Assert.Fail ("#3-6");
+} catch (ArgumentOutOfRangeException) {
+}
+*/
 
             KoreanCalendar kc = new KoreanCalendar();
             Assert.AreEqual(4362, kc.ToFourDigitYear(62), "#4-1");

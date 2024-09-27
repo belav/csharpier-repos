@@ -131,8 +131,10 @@ internal sealed class TimeoutControl : ITimeoutControl, IConnectionTimeoutFeatur
                 timeout = rate < _minReadRate.BytesPerSecond && !Debugger.IsAttached;
             }
 
-            // PauseTimingReads() cannot just set _timingReads to false. It needs to go through at least one tick
-            // before pausing, otherwise _readTimingElapsed might never be updated if PauseTimingReads() is always
+            // PauseTimingReads() cannot just set _timingReads to false. It needs to go through at least one
+            // tick
+            // before pausing, otherwise _readTimingElapsed might never be updated if PauseTimingReads() is
+            // always
             // called before the next tick.
             if (_readTimingPauseRequested)
             {
@@ -216,7 +218,8 @@ internal sealed class TimeoutControl : ITimeoutControl, IConnectionTimeoutFeatur
     {
         lock (_readTimingLock)
         {
-            // minRate is always KestrelServerLimits.MinRequestBodyDataRate for HTTP/2 which is the only protocol that supports concurrent request bodies.
+            // minRate is always KestrelServerLimits.MinRequestBodyDataRate for HTTP/2 which is the only
+            // protocol that supports concurrent request bodies.
             Debug.Assert(
                 _concurrentIncompleteRequestBodies == 0 || minRate == _minReadRate,
                 "Multiple simultaneous read data rates are not supported."

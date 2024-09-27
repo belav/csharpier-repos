@@ -29,7 +29,7 @@ class CrossDomain : MarshalByRefObject
 
 class Driver
 {
-    /* expected exit code: 255 */
+/* expected exit code: 255 */
     static void Main(string[] args)
     {
         if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)

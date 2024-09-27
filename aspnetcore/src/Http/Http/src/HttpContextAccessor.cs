@@ -6,7 +6,8 @@ using System.Diagnostics;
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
-/// Provides an implementation of <see cref="IHttpContextAccessor" /> based on the current execution context.
+/// Provides an implementation of <see cref="IHttpContextAccessor" /> based on the current execution
+// context.
 /// </summary>
 [DebuggerDisplay("HttpContext = {HttpContext}")]
 public class HttpContextAccessor : IHttpContextAccessor

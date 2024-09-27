@@ -180,12 +180,17 @@ namespace System.Reflection.TypeLoading.Ecma
                     return false;
                 }
 
-                // Should we also look for CustomConstantAttribute too? Who uses that (other than DateTimeConstantAttribute which
-                // we handled above?) CustomConstantAttribute is an abstract class which means we have to figure out how a subclass
-                // we've never heard of would set the "Value" property which is kinda hard to do when you can't Invoke().
+                // Should we also look for CustomConstantAttribute too? Who uses that (other than
+                // DateTimeConstantAttribute which
+                // we handled above?) CustomConstantAttribute is an abstract class which means we have to figure out
+                // how a subclass
+                // we've never heard of would set the "Value" property which is kinda hard to do when you can't
+                // Invoke().
                 // Even the CLR doesn't return consistent values for this between the raw and non-raw versions.
-                // Even doing the subclass check would open the door to resolving types and dependency assemblies and their
-                // resulting FileNotFoundExceptions. Which is exactly what we're trying to avoid with this name-based lookup approach.
+                // Even doing the subclass check would open the door to resolving types and dependency assemblies
+                // and their
+                // resulting FileNotFoundExceptions. Which is exactly what we're trying to avoid with this
+                // name-based lookup approach.
             }
 
             return false;

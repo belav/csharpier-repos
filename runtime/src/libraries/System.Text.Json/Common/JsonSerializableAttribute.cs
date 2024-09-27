@@ -8,8 +8,10 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization
 {
     /// <summary>
-    /// Instructs the System.Text.Json source generator to generate source code to help optimize performance
-    /// when serializing and deserializing instances of the specified type and types in its object graph.
+    /// Instructs the System.Text.Json source generator to generate source code to help optimize
+    // performance
+    /// when serializing and deserializing instances of the specified type and types in its object
+    // graph.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 #if BUILDING_SOURCE_GENERATOR
@@ -37,8 +39,10 @@ namespace System.Text.Json.Serialization
         public string? TypeInfoPropertyName { get; set; }
 
         /// <summary>
-        /// Determines what the source generator should generate for the type. If the value is <see cref="JsonSourceGenerationMode.Default"/>,
-        /// then the setting specified on <see cref="JsonSourceGenerationOptionsAttribute.GenerationMode"/> will be used.
+        /// Determines what the source generator should generate for the type. If the value is <see
+        // cref="JsonSourceGenerationMode.Default"/>,
+        /// then the setting specified on <see cref="JsonSourceGenerationOptionsAttribute.GenerationMode"/>
+        // will be used.
         /// </summary>
         public JsonSourceGenerationMode GenerationMode { get; set; }
     }

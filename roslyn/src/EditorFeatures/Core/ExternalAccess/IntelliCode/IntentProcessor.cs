@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             );
             foreach (var changedDocumentId in processorResult.ChangedDocuments)
             {
-                // Calculate the text changes by comparing the solution with intent applied to the current solution (not to be confused with the original solution, the one prior to intent detection).
+                // Calculate the text changes by comparing the solution with intent applied to the current solution
+                // (not to be confused with the original solution, the one prior to intent detection).
                 var docChanges = await GetTextChangesForDocumentAsync(
                         newSolution,
                         currentDocument.Project.Solution,

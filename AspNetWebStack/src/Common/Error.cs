@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,8 @@ namespace System.Web.Http
         /// <summary>
         /// Creates an <see cref="ArgumentException"/> with the provided properties.
         /// </summary>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static ArgumentException Argument(
@@ -46,7 +48,8 @@ namespace System.Web.Http
         /// Creates an <see cref="ArgumentException"/> with the provided properties.
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static ArgumentException Argument(
@@ -59,7 +62,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Creates an <see cref="ArgumentException"/> with a message saying that the argument must be an "http" or "https" URI.
+        /// Creates an <see cref="ArgumentException"/> with a message saying that the argument must be an
+        // "http" or "https" URI.
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
         /// <param name="actualValue">The value of the argument that causes this exception.</param>
@@ -81,7 +85,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Creates an <see cref="ArgumentException"/> with a message saying that the argument must be an absolute URI.
+        /// Creates an <see cref="ArgumentException"/> with a message saying that the argument must be an
+        // absolute URI.
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
         /// <param name="actualValue">The value of the argument that causes this exception.</param>
@@ -98,7 +103,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Creates an <see cref="ArgumentException"/> with a message saying that the argument must be an absolute URI
+        /// Creates an <see cref="ArgumentException"/> with a message saying that the argument must be an
+        // absolute URI
         /// without a query or fragment identifier and then logs it with <see cref="F:TraceLevel.Error"/>.
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
@@ -143,7 +149,8 @@ namespace System.Web.Http
         /// Creates an <see cref="ArgumentNullException"/> with the provided properties.
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static ArgumentNullException ArgumentNull(
@@ -177,7 +184,8 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
         /// <param name="actualValue">The value of the argument that causes this exception.</param>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static ArgumentOutOfRangeException ArgumentOutOfRange(
@@ -195,7 +203,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Creates an <see cref="ArgumentOutOfRangeException"/> with a message saying that the argument must be greater than or equal to <paramref name="minValue"/>.
+        /// Creates an <see cref="ArgumentOutOfRangeException"/> with a message saying that the argument
+        // must be greater than or equal to <paramref name="minValue"/>.
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
         /// <param name="actualValue">The value of the argument that causes this exception.</param>
@@ -215,7 +224,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Creates an <see cref="ArgumentOutOfRangeException"/> with a message saying that the argument must be less than or equal to <paramref name="maxValue"/>.
+        /// Creates an <see cref="ArgumentOutOfRangeException"/> with a message saying that the argument
+        // must be less than or equal to <paramref name="maxValue"/>.
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
         /// <param name="actualValue">The value of the argument that causes this exception.</param>
@@ -246,7 +256,8 @@ namespace System.Web.Http
         /// <summary>
         /// Creates an <see cref="KeyNotFoundException"/> with a message saying that the key was not found.
         /// </summary>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static KeyNotFoundException KeyNotFound(
@@ -260,7 +271,8 @@ namespace System.Web.Http
         /// <summary>
         /// Creates an <see cref="ObjectDisposedException"/> initialized according to guidelines.
         /// </summary>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static ObjectDisposedException ObjectDisposed(
@@ -284,7 +296,8 @@ namespace System.Web.Http
         /// <summary>
         /// Creates an <see cref="OperationCanceledException"/> initialized with the provided parameters.
         /// </summary>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static OperationCanceledException OperationCanceled(
@@ -300,7 +313,8 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="parameterName">The name of the parameter that caused the current exception.</param>
         /// <param name="invalidValue">The value of the argument that failed.</param>
-        /// <param name="enumClass">A <see cref="Type"/> that represents the enumeration class with the valid values.</param>
+        /// <param name="enumClass">A <see cref="Type"/> that represents the enumeration class with the
+        // valid values.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static ArgumentException InvalidEnumArgument(
             string parameterName,
@@ -314,7 +328,8 @@ namespace System.Web.Http
         /// <summary>
         /// Creates an <see cref="InvalidOperationException"/>.
         /// </summary>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static InvalidOperationException InvalidOperation(
@@ -329,7 +344,8 @@ namespace System.Web.Http
         /// Creates an <see cref="InvalidOperationException"/>.
         /// </summary>
         /// <param name="innerException">Inner exception</param>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static InvalidOperationException InvalidOperation(
@@ -347,7 +363,8 @@ namespace System.Web.Http
         /// <summary>
         /// Creates an <see cref="NotSupportedException"/>.
         /// </summary>
-        /// <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+        /// <param name="messageFormat">A composite format string explaining the reason for the
+        // exception.</param>
         /// <param name="messageArgs">An object array that contains zero or more objects to format.</param>
         /// <returns>The logged <see cref="Exception"/>.</returns>
         internal static NotSupportedException NotSupported(

@@ -822,7 +822,8 @@ namespace System.Workflow.ComponentModel.Design
                 treeView.BeginUpdate();
                 treeView.Nodes.Clear();
 
-                //Work around: ***WE DISPLAY THE COMMON PROPERTIES FOR WORKFLOW AND APPLY THEM RECURSIVELY TO DESIGNERS
+                //Work around: ***WE DISPLAY THE COMMON PROPERTIES FOR WORKFLOW AND APPLY THEM RECURSIVELY TO
+                // DESIGNERS
                 TreeNode workflowNode = new TreeNode(DR.GetString(DR.WorkflowDesc));
                 treeView.Nodes.Add(workflowNode);
 
@@ -1334,8 +1335,8 @@ namespace System.Workflow.ComponentModel.Design
                                 host.GetDesigner(activity) as ActivityDesigner;
                             if (compositeDesigner != null && activityDesigner != null)
                                 compositeDesigner.EnsureVisibleContainedDesigner(activityDesigner);
-                            /*
-                                                        //
+/*
+//
 
 
 

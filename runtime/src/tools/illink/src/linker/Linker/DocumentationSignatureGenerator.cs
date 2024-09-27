@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Text;
 using Mono.Cecil;
@@ -8,9 +9,11 @@ namespace Mono.Linker
 {
     /// <summary>
     ///  Generates a signature for a member, in the format used for C# Documentation Comments:
-    ///  https://github.com/dotnet/csharplang/blob/master/spec/documentation-comments.md#id-string-format
+    ///
+    // https://github.com/dotnet/csharplang/blob/master/spec/documentation-comments.md#id-string-format
     ///  Adapted from Roslyn's DocumentationCommentIDVisitor:
-    ///  https://github.com/dotnet/roslyn/blob/master/src/Compilers/CSharp/Portable/DocumentationComments/DocumentationCommentIDVisitor.cs
+    ///
+    // https://github.com/dotnet/roslyn/blob/master/src/Compilers/CSharp/Portable/DocumentationComments/DocumentationCommentIDVisitor.cs
     /// </summary>
     public sealed partial class DocumentationSignatureGenerator
     {

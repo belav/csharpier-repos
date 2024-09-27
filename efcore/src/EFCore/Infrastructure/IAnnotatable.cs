@@ -5,34 +5,41 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
 ///     <para>
-///         A class that exposes build-time and run-time annotations. Annotations allow for arbitrary metadata to be stored on an object.
+///         A class that exposes build-time and run-time annotations. Annotations allow for
+// arbitrary metadata to be stored on an object.
 ///     </para>
 ///     <para>
-///         This interface is typically used by database providers (and other extensions). It is generally
+///         This interface is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public interface IAnnotatable : IReadOnlyAnnotatable
 {
     /// <summary>
-    ///     Gets the runtime annotation with the given name, returning <see langword="null" /> if it does not exist.
+    ///     Gets the runtime annotation with the given name, returning <see langword="null" /> if it
+    // does not exist.
     /// </summary>
     /// <param name="name">The name of the annotation to find.</param>
     /// <returns>
-    ///     The existing runtime annotation if an annotation with the specified name already exists. Otherwise, <see langword="null" />.
+    ///     The existing runtime annotation if an annotation with the specified name already exists.
+    // Otherwise, <see langword="null" />.
     /// </returns>
     IAnnotation? FindRuntimeAnnotation(string name);
 
     /// <summary>
-    ///     Gets the value of the runtime annotation with the given name, returning <see langword="null" /> if it does not exist.
+    ///     Gets the value of the runtime annotation with the given name, returning <see langword="null"
+    // /> if it does not exist.
     /// </summary>
     /// <param name="name">The name of the annotation to find.</param>
     /// <returns>
-    ///     The value of the existing runtime annotation if an annotation with the specified name already exists.
+    ///     The value of the existing runtime annotation if an annotation with the specified name
+    // already exists.
     ///     Otherwise, <see langword="null" />.
     /// </returns>
     object? FindRuntimeAnnotationValue(string name) => FindRuntimeAnnotation(name)?.Value;
@@ -43,7 +50,8 @@ public interface IAnnotatable : IReadOnlyAnnotatable
     IEnumerable<IAnnotation> GetRuntimeAnnotations();
 
     /// <summary>
-    ///     Adds a runtime annotation to this object. Throws if an annotation with the specified name already exists.
+    ///     Adds a runtime annotation to this object. Throws if an annotation with the specified name
+    // already exists.
     /// </summary>
     /// <param name="name">The name of the annotation to be added.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
@@ -51,7 +59,8 @@ public interface IAnnotatable : IReadOnlyAnnotatable
     IAnnotation AddRuntimeAnnotation(string name, object? value);
 
     /// <summary>
-    ///     Sets the runtime annotation stored under the given key. Overwrites the existing annotation if an
+    ///     Sets the runtime annotation stored under the given key. Overwrites the existing annotation
+    // if an
     ///     annotation with the specified name already exists.
     /// </summary>
     /// <param name="name">The name of the annotation to be added.</param>
@@ -67,13 +76,16 @@ public interface IAnnotatable : IReadOnlyAnnotatable
     IAnnotation? RemoveRuntimeAnnotation(string name);
 
     /// <summary>
-    ///     Gets the value of the runtime annotation with the given name, adding it if one does not exist.
+    ///     Gets the value of the runtime annotation with the given name, adding it if one does not
+    // exist.
     /// </summary>
     /// <param name="name">The name of the annotation.</param>
-    /// <param name="valueFactory">The factory used to create the value if the annotation doesn't exist.</param>
+    /// <param name="valueFactory">The factory used to create the value if the annotation doesn't
+    // exist.</param>
     /// <param name="factoryArgument">An argument for the factory method.</param>
     /// <returns>
-    ///     The value of the existing runtime annotation if an annotation with the specified name already exists.
+    ///     The value of the existing runtime annotation if an annotation with the specified name
+    // already exists.
     ///     Otherwise a newly created value.
     /// </returns>
     TValue GetOrAddRuntimeAnnotationValue<TValue, TArg>(

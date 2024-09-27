@@ -29,7 +29,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeExpressionCollection'/> based on another <see cref='System.CodeDom.CodeExpressionCollection'/>.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeExpressionCollection'/> based
+        // on another <see cref='System.CodeDom.CodeExpressionCollection'/>.
         ///    </para>
         /// </devdoc>
         public CodeExpressionCollection(CodeExpressionCollection value)
@@ -39,7 +40,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeExpressionCollection'/> containing any array of <see cref='System.CodeDom.CodeExpression'/> objects.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeExpressionCollection'/>
+        // containing any array of <see cref='System.CodeDom.CodeExpression'/> objects.
         ///    </para>
         /// </devdoc>
         public CodeExpressionCollection(CodeExpression[] value)
@@ -48,7 +50,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Represents the entry at the specified index of the <see cref='System.CodeDom.CodeExpression'/>.</para>
+        /// <para>Represents the entry at the specified index of the <see
+        // cref='System.CodeDom.CodeExpression'/>.</para>
         /// </devdoc>
         public CodeExpression this[int index]
         {
@@ -66,7 +69,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the elements of an array to the end of the <see cref='System.CodeDom.CodeExpressionCollection'/>.</para>
+        /// <para>Copies the elements of an array to the end of the <see
+        // cref='System.CodeDom.CodeExpressionCollection'/>.</para>
         /// </devdoc>
         public void AddRange(CodeExpression[] value)
         {
@@ -82,7 +86,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Adds the contents of another <see cref='System.CodeDom.CodeExpressionCollection'/> to the end of the collection.
+        ///       Adds the contents of another <see cref='System.CodeDom.CodeExpressionCollection'/> to the
+        // end of the collection.
         ///    </para>
         /// </devdoc>
         public void AddRange(CodeExpressionCollection value)
@@ -100,7 +105,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         /// <para>Gets a value indicating whether the
-        ///    <see cref='System.CodeDom.CodeExpressionCollection'/> contains the specified <see cref='System.CodeDom.CodeExpression'/>.</para>
+        ///    <see cref='System.CodeDom.CodeExpressionCollection'/> contains the specified <see
+        // cref='System.CodeDom.CodeExpression'/>.</para>
         /// </devdoc>
         public bool Contains(CodeExpression value)
         {
@@ -108,7 +114,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.CodeDom.CodeExpressionCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the <see cref='System.CodeDom.CodeExpressionCollection'/> values to a
+        // one-dimensional <see cref='System.Array'/> instance at the
         ///    specified index.</para>
         /// </devdoc>
         public void CopyTo(CodeExpression[] array, int index)
@@ -126,7 +133,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Inserts a <see cref='System.CodeDom.CodeExpression'/> into the <see cref='System.CodeDom.CodeExpressionCollection'/> at the specified index.</para>
+        /// <para>Inserts a <see cref='System.CodeDom.CodeExpression'/> into the <see
+        // cref='System.CodeDom.CodeExpressionCollection'/> at the specified index.</para>
         /// </devdoc>
         public void Insert(int index, CodeExpression value)
         {

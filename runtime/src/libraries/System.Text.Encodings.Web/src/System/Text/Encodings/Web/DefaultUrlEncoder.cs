@@ -107,10 +107,10 @@ namespace System.Text.Encodings.Web
 
         public override int MaxOutputCharactersPerInputCharacter => 9; // "%XX%YY%ZZ" for a single char ("%XX%YY%ZZ%WW" [12 chars] for supplementary scalar value)
 
-        /*
-         * These overrides should be copied to all other subclasses that are backed
-         * by the fast inbox escaping mechanism.
-         */
+/*
+* These overrides should be copied to all other subclasses that are backed
+* by the fast inbox escaping mechanism.
+*/
 
 #pragma warning disable CS0618 // some of the adapters are intentionally marked [Obsolete]
         private protected override OperationStatus EncodeCore(
@@ -169,9 +169,9 @@ namespace System.Text.Encodings.Web
             !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
 #pragma warning restore CS0618
 
-        /*
-         * End overrides section.
-         */
+/*
+* End overrides section.
+*/
 
         private sealed class EscaperImplementation : ScalarEscaperBase
         {

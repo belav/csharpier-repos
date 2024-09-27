@@ -17,8 +17,10 @@ public sealed class XmlSerializedDescriptorInfo
     /// <summary>
     /// Creates an instance of an <see cref="XmlSerializedDescriptorInfo"/>.
     /// </summary>
-    /// <param name="serializedDescriptorElement">The XML-serialized form of the <see cref="IAuthenticatedEncryptorDescriptor"/>.</param>
-    /// <param name="deserializerType">The class whose <see cref="IAuthenticatedEncryptorDescriptorDeserializer.ImportFromXml(XElement)"/>
+    /// <param name="serializedDescriptorElement">The XML-serialized form of the <see
+    // cref="IAuthenticatedEncryptorDescriptor"/>.</param>
+    /// <param name="deserializerType">The class whose <see
+    // cref="IAuthenticatedEncryptorDescriptorDeserializer.ImportFromXml(XElement)"/>
     /// method can be used to deserialize <paramref name="serializedDescriptorElement"/>.</param>
     public XmlSerializedDescriptorInfo(XElement serializedDescriptorElement, Type deserializerType)
     {
@@ -45,7 +47,8 @@ public sealed class XmlSerializedDescriptorInfo
     }
 
     /// <summary>
-    /// The class whose <see cref="IAuthenticatedEncryptorDescriptorDeserializer.ImportFromXml(XElement)"/>
+    /// The class whose <see
+    // cref="IAuthenticatedEncryptorDescriptorDeserializer.ImportFromXml(XElement)"/>
     /// method can be used to deserialize the value stored in <see cref="SerializedDescriptorElement"/>.
     /// </summary>
     public Type DeserializerType { get; }

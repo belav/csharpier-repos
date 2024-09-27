@@ -129,7 +129,8 @@ namespace System.Xml
             }
         }
 
-        // True if output should be indented using rules that are appropriate to the output rules (i.e. Xml, Html, etc).
+        // True if output should be indented using rules that are appropriate to the output rules (i.e. Xml,
+        // Html, etc).
         public bool Indent
         {
             get => IndentInternal == TriState.True;
@@ -164,7 +165,8 @@ namespace System.Xml
             }
         }
 
-        // Whether or not the XmlWriter should close the underlying stream or TextWriter when Close is called on the XmlWriter.
+        // Whether or not the XmlWriter should close the underlying stream or TextWriter when Close is
+        // called on the XmlWriter.
         public bool CloseOutput
         {
             get => _closeOutput;
@@ -239,7 +241,8 @@ namespace System.Xml
             Initialize();
         }
 
-        // Deep clone all settings (except read-only, which is always set to false).  The original and new objects
+        // Deep clone all settings (except read-only, which is always set to false).  The original and new
+        // objects
         // can now be set independently of each other.
         public XmlWriterSettings Clone()
         {
@@ -252,7 +255,8 @@ namespace System.Xml
             return clonedSettings;
         }
 
-        // Set of XmlQualifiedNames that identify any elements that need to have text children wrapped in CData sections.
+        // Set of XmlQualifiedNames that identify any elements that need to have text children wrapped in
+        // CData sections.
         internal List<XmlQualifiedName> CDataSectionElements { get; private set; } = new();
 
         // Used in Html writer to disable encoding of uri attributes
@@ -331,7 +335,8 @@ namespace System.Xml
             }
         }
 
-        // If TriState.Unknown, then Indent property was not explicitly set.  In this case, the AutoDetect output
+        // If TriState.Unknown, then Indent property was not explicitly set.  In this case, the AutoDetect
+        // output
         // method will default to Indent=true for Html and Indent=false for Xml.
         internal TriState IndentInternal { get; set; }
         private bool IsQuerySpecific =>
@@ -344,7 +349,8 @@ namespace System.Xml
         {
             ArgumentNullException.ThrowIfNull(outputFileName);
 
-            // need to clone the settigns so that we can set CloseOutput to true to make sure the stream gets closed in the end
+            // need to clone the settigns so that we can set CloseOutput to true to make sure the stream gets
+            // closed in the end
             XmlWriterSettings newSettings = this;
             if (!newSettings.CloseOutput)
             {
@@ -437,7 +443,8 @@ namespace System.Xml
             }
 
             // Wrap with Xslt/XQuery specific writer if needed;
-            // XmlOutputMethod.AutoDetect writer does this lazily when it creates the underlying Xml or Html writer.
+            // XmlOutputMethod.AutoDetect writer does this lazily when it creates the underlying Xml or Html
+            // writer.
             if (OutputMethod != XmlOutputMethod.AutoDetect)
             {
                 if (IsQuerySpecific)
@@ -488,7 +495,8 @@ namespace System.Xml
                     return null!;
             }
 
-            // XmlOutputMethod.AutoDetect writer does this lazily when it creates the underlying Xml or Html writer.
+            // XmlOutputMethod.AutoDetect writer does this lazily when it creates the underlying Xml or Html
+            // writer.
             if (OutputMethod != XmlOutputMethod.AutoDetect)
             {
                 if (IsQuerySpecific)

@@ -22,7 +22,8 @@ namespace System.Web.UI.WebControls
         public SessionParameter() { }
 
         /// <devdoc>
-        /// Creates an instance of the SessionParameter class with the specified parameter name, and session field.
+        /// Creates an instance of the SessionParameter class with the specified parameter name, and session
+        // field.
         /// </devdoc>
         public SessionParameter(string name, string sessionField)
             : base(name)
@@ -31,7 +32,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the SessionParameter class with the specified parameter name, database type, and
+        /// Creates an instance of the SessionParameter class with the specified parameter name, database
+        // type, and
         /// session field.
         /// </devdoc>
         public SessionParameter(string name, DbType dbType, string sessionField)
@@ -41,7 +43,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the SessionParameter class with the specified parameter name, type, and session field.
+        /// Creates an instance of the SessionParameter class with the specified parameter name, type, and
+        // session field.
         /// </devdoc>
         public SessionParameter(string name, TypeCode type, string sessionField)
             : base(name, type)

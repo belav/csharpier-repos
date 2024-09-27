@@ -287,7 +287,8 @@ namespace System.Formats.Tar.Tests
                     entryName += "/" + new string('a', 50);
                 }
 
-                // Gnu and Pax writes first 100 bytes in 'name' field, then the full name is written in a metadata entry that precedes this one.
+                // Gnu and Pax writes first 100 bytes in 'name' field, then the full name is written in a metadata
+                // entry that precedes this one.
                 if (format is TarEntryFormat.Ustar)
                 {
                     // Ustar can write the directory into prefix.

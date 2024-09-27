@@ -36,13 +36,15 @@ namespace System.Text.Tests
         }
     }
 
+    //
     // Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)
     public class DecoderConvert2
     {
         private const int c_SIZE_OF_ARRAY = 127;
         private readonly RandomDataGenerator _generator = new RandomDataGenerator();
 
-        // PosTest1: Call Convert to convert an arbitrary byte array to character array by using ASCII decoder
+        // PosTest1: Call Convert to convert an arbitrary byte array to character array by using ASCII
+        // decoder
         [Fact]
         public void PosTest1()
         {
@@ -86,7 +88,8 @@ namespace System.Text.Tests
             decoder.Reset();
         }
 
-        // PosTest2: Call Convert to convert an arbitrary byte array to character array by using Unicode decoder"
+        // PosTest2: Call Convert to convert an arbitrary byte array to character array by using Unicode
+        // decoder"
         [Fact]
         public void PosTest2()
         {
@@ -311,7 +314,8 @@ namespace System.Text.Tests
                 "006.1"
             );
             decoder.Reset();
-            // There will be 1 byte left unconverted after previous statement, and set flush = false should left this 1 byte in the buffer.
+            // There will be 1 byte left unconverted after previous statement, and set flush = false should left
+            // this 1 byte in the buffer.
             VerificationHelper(
                 decoder,
                 bytes,
@@ -528,7 +532,8 @@ namespace System.Text.Tests
             decoder.Reset();
         }
 
-        // PosTest11: Call Convert with UTF-8 data, testing that flushing performs proper replacement if needed
+        // PosTest11: Call Convert with UTF-8 data, testing that flushing performs proper replacement if
+        // needed
         [Fact]
         public void PosTest11()
         {

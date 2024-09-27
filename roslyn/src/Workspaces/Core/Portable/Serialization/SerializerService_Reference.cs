@@ -314,8 +314,10 @@ namespace Microsoft.CodeAnalysis.Serialization
 
                 // for now, we will use IDocumentationProviderService to get DocumentationProvider for metadata
                 // references. if the service is not available, then use Default (NoOp) provider.
-                // since xml doc comment is not part of solution snapshot, (like xml reference resolver or strong name
-                // provider) this provider can also potentially provide content that is different than one in the host.
+                // since xml doc comment is not part of solution snapshot, (like xml reference resolver or strong
+                // name
+                // provider) this provider can also potentially provide content that is different than one in the
+                // host.
                 // an alternative approach of this is synching content of xml doc comment to remote host as well
                 // so that we can put xml doc comment as part of snapshot. but until we believe that is necessary,
                 // it will go with simpler approach
@@ -413,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                 return false;
             }
 
-            // Not clear if name should be allowed to be null here (https://github.com/dotnet/roslyn/issues/43037)
+            // Not clear if name should be allowed to be null here
+            // (https://github.com/dotnet/roslyn/issues/43037)
             using var pooled = Creator.CreateList<(string? name, long offset, long size)>();
 
             foreach (var storage in storages)

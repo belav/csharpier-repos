@@ -77,7 +77,8 @@ namespace System.Text.Encodings.Web.Tests
         public override bool WillEncode(int unicodeScalar) => !_isScalarAllowed(unicodeScalar);
 
         /// <summary>
-        /// Encodes scalar as an unsigned hexadecimal number (min. 4 hex digits) surrounded by square brackets: "[XXXX]".
+        /// Encodes scalar as an unsigned hexadecimal number (min. 4 hex digits) surrounded by square
+        // brackets: "[XXXX]".
         /// </summary>
         public override unsafe bool TryEncodeUnicodeScalar(
             int unicodeScalar,

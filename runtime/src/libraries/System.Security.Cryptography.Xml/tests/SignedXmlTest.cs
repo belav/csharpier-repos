@@ -3802,8 +3802,12 @@ namespace System.Security.Cryptography.Xml.Tests
             // reflection so I don't think it belongs in the normal test run. Uncomment these
             // lines  and the expectedPosition parameter to enable the validation
 
-            //var transform = (XmlDsigEnvelopedSignatureTransform)((Reference)subject.Signature.SignedInfo.References[0]).TransformChain[0];
-            //var signaturePositionField = typeof(XmlDsigEnvelopedSignatureTransform).GetField("_signaturePosition", Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance);
+            //var transform =
+            //
+            // (XmlDsigEnvelopedSignatureTransform)((Reference)subject.Signature.SignedInfo.References[0]).TransformChain[0];
+            //var signaturePositionField =
+            // typeof(XmlDsigEnvelopedSignatureTransform).GetField("_signaturePosition",
+            // Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance);
             //var actualPosition = (int)signaturePositionField.GetValue(transform);
             //Assert.Equal(expectedPosition, actualPosition);
 

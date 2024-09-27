@@ -35,7 +35,8 @@ namespace System.Web.Handlers
                     SR.GetString(SR.Requires_Iis_Integrated_Mode)
                 );
             }
-            // Dev10 848405: use original unencoded URL (i.e., pass null for url so W3_REQUEST::SetUrl is not called)
+            // Dev10 848405: use original unencoded URL (i.e., pass null for url so W3_REQUEST::SetUrl is not
+            // called)
             // Dev11 32511: Extensionless URL Handler should not pass parent IHttpUser to child requests
             wr.ScheduleExecuteUrl(
                 null,

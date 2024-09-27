@@ -59,7 +59,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the text representing a single JSON value into an instance of the type specified by a generic type parameter.
+        /// Parses the text representing a single JSON value into an instance of the type specified by a
+        // generic type parameter.
         /// </summary>
         /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
         /// <returns>A <typeparamref name="TValue"/> representation of the JSON value.</returns>
@@ -274,7 +275,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the text representing a single JSON value into an instance specified by the <paramref name="jsonTypeInfo"/>.
+        /// Parses the text representing a single JSON value into an instance specified by the <paramref
+        // name="jsonTypeInfo"/>.
         /// </summary>
         /// <returns>A <paramref name="jsonTypeInfo"/> representation of the JSON value.</returns>
         /// <param name="json">JSON text to parse.</param>
@@ -314,7 +316,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the text representing a single JSON value into an instance specified by the <paramref name="jsonTypeInfo"/>.
+        /// Parses the text representing a single JSON value into an instance specified by the <paramref
+        // name="jsonTypeInfo"/>.
         /// </summary>
         /// <returns>A <paramref name="jsonTypeInfo"/> representation of the JSON value.</returns>
         /// <param name="json">JSON text to parse.</param>
@@ -465,7 +468,8 @@ namespace System.Text.Json
             Debug.Assert(jsonTypeInfo.IsConfigured);
             byte[]? tempArray = null;
 
-            // For performance, avoid obtaining actual byte count unless memory usage is higher than the threshold.
+            // For performance, avoid obtaining actual byte count unless memory usage is higher than the
+            // threshold.
             Span<byte> utf8 =
                 json.Length
                 <= (
@@ -478,7 +482,8 @@ namespace System.Text.Json
                         json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding
                     )
                     :
-                    // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per current implementation)
+                    // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per
+                    // current implementation)
                     // and by using a normal alloc we can avoid the Clear().
                     new byte[JsonReaderHelper.GetUtf8ByteCount(json)];
 
@@ -506,7 +511,8 @@ namespace System.Text.Json
             Debug.Assert(jsonTypeInfo.IsConfigured);
             byte[]? tempArray = null;
 
-            // For performance, avoid obtaining actual byte count unless memory usage is higher than the threshold.
+            // For performance, avoid obtaining actual byte count unless memory usage is higher than the
+            // threshold.
             Span<byte> utf8 =
                 json.Length
                 <= (
@@ -519,7 +525,8 @@ namespace System.Text.Json
                         json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding
                     )
                     :
-                    // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per current implementation)
+                    // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per
+                    // current implementation)
                     // and by using a normal alloc we can avoid the Clear().
                     new byte[JsonReaderHelper.GetUtf8ByteCount(json)];
 

@@ -87,8 +87,10 @@ namespace System.IO
 
         private void CheckAsyncTaskInProgress()
         {
-            // We are not locking the access to _asyncWriteTask because this is not meant to guarantee thread safety.
-            // We are simply trying to deter calling any Write APIs while an async Write from the same thread is in progress.
+            // We are not locking the access to _asyncWriteTask because this is not meant to guarantee thread
+            // safety.
+            // We are simply trying to deter calling any Write APIs while an async Write from the same thread is
+            // in progress.
 
             Task t = _asyncWriteTask;
 
@@ -584,7 +586,8 @@ namespace System.IO
 
         // We pass in private instance fields of this MarshalByRefObject-derived type as local params
         // to ensure performant access inside the state machine that corresponds this async method.
-        // Fields that are written to must be assigned at the end of the method *and* before instance invocations.
+        // Fields that are written to must be assigned at the end of the method *and* before instance
+        // invocations.
         private static async Task WriteAsyncInternal(
             StreamWriter _this,
             Char value,
@@ -678,7 +681,8 @@ namespace System.IO
 
         // We pass in private instance fields of this MarshalByRefObject-derived type as local params
         // to ensure performant access inside the state machine that corresponds this async method.
-        // Fields that are written to must be assigned at the end of the method *and* before instance invocations.
+        // Fields that are written to must be assigned at the end of the method *and* before instance
+        // invocations.
         private static async Task WriteAsyncInternal(
             StreamWriter _this,
             String value,
@@ -808,7 +812,8 @@ namespace System.IO
 
         // We pass in private instance fields of this MarshalByRefObject-derived type as local params
         // to ensure performant access inside the state machine that corresponds this async method.
-        // Fields that are written to must be assigned at the end of the method *and* before instance invocations.
+        // Fields that are written to must be assigned at the end of the method *and* before instance
+        // invocations.
         private static async Task WriteAsyncInternal(
             StreamWriter _this,
             Char[] buffer,

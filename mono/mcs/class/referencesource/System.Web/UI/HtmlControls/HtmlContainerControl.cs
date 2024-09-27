@@ -14,9 +14,9 @@ namespace System.Web.UI.HtmlControls
     using System.Security.Permissions;
     using System.Web.UI;
 
-    /*
-     *  A control representing an intrinsic Html tag.
-     */
+/*
+*  A control representing an intrinsic Html tag.
+*/
 
     /// <devdoc>
     /// <para>The <see langword='HtmlContainerControl'/>
@@ -27,35 +27,37 @@ namespace System.Web.UI.HtmlControls
     /// </devdoc>
     abstract public class HtmlContainerControl : HtmlControl
     {
-        /*
-         * Creates a new WebControl
-         */
+/*
+* Creates a new WebControl
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlContainerControl'/> class using
+        /// <para>Initializes a new instance of a <see
+        // cref='System.Web.UI.HtmlControls.HtmlContainerControl'/> class using
         ///    default values.</para>
         /// </devdoc>
         protected HtmlContainerControl()
             : this("span") { }
 
-        /*
-         *  Creates a new HtmlContainerControl
-         */
+/*
+*  Creates a new HtmlContainerControl
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlContainerControl'/> class using the
+        /// <para>Initializes a new instance of a <see
+        // cref='System.Web.UI.HtmlControls.HtmlContainerControl'/> class using the
         ///    specified string.</para>
         /// </devdoc>
         public HtmlContainerControl(string tag)
             : base(tag) { }
 
-        /*
-         * The inner html content between the begin and end tag.
-         * A set will replace any existing child controls with a single literal.
-         * A get will return the text of a single literal child OR
-         * will throw an exception if there are no children, more than one
-         * child, or the single child is not a literal.
-         */
+/*
+* The inner html content between the begin and end tag.
+* A set will replace any existing child controls with a single literal.
+* A get will return the text of a single literal child OR
+* will throw an exception if there are no children, more than one
+* child, or the single child is not a literal.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -96,13 +98,13 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * The inner text content between the begin and end tag.
-         * A set will replace any existing child controls with a single literal.
-         * A get will return the text of a single literal child OR
-         * will throw an exception if there are no children, more than one child, or
-         * the single child is not a literal.
-         */
+/*
+* The inner text content between the begin and end tag.
+* A set will replace any existing child controls with a single literal.
+* A get will return the text of a single literal child OR
+* will throw an exception if there are no children, more than one child, or
+* the single child is not a literal.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -138,7 +140,8 @@ namespace System.Web.UI.HtmlControls
             {
                 base.LoadViewState(savedState);
                 string s = (string)ViewState["innerhtml"];
-                // Dev10 703061 If InnerHtml is set, we want to clear out any child controls, but not dirty viewstate
+                // Dev10 703061 If InnerHtml is set, we want to clear out any child controls, but not dirty
+                // viewstate
                 if (s != null)
                 {
                     Controls.Clear();
@@ -147,9 +150,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Render the control into the given writer.
-         */
+/*
+* Render the control into the given writer.
+*/
 
         /// <internalonly/>
         /// <devdoc>
@@ -161,9 +164,9 @@ namespace System.Web.UI.HtmlControls
             RenderEndTag(writer);
         }
 
-        /*
-         * Override to prevent InnerHtml from being rendered as an attribute.
-         */
+/*
+* Override to prevent InnerHtml from being rendered as an attribute.
+*/
 
         /// <internalonly/>
         /// <devdoc>
@@ -174,9 +177,9 @@ namespace System.Web.UI.HtmlControls
             base.RenderAttributes(writer);
         }
 
-        /*
-         * Render the end tag, &lt;/TAGNAME&gt;.
-         */
+/*
+* Render the end tag, &lt;/TAGNAME&gt;.
+*/
 
         /// <internalonly/>
         /// <devdoc>

@@ -84,7 +84,8 @@ namespace System.IdentityModel
         /// Encodes the specified binary bytes as Base64 and writes out the resulting text.
         /// </summary>
         /// <param name="buffer">Byte array to encode.</param>
-        /// <param name="index">The position in the buffer indicating the start of the bytes to write.</param>
+        /// <param name="index">The position in the buffer indicating the start of the bytes to
+        // write.</param>
         /// <param name="count">The number of bytes to write.</param>
         public override void WriteBase64(byte[] buffer, int index, int count)
         {
@@ -125,7 +126,8 @@ namespace System.IdentityModel
         /// When overridden in a derived class, writes text one buffer at a time.
         /// </summary>
         /// <param name="buffer">Character array containing the text to write.</param>
-        /// <param name="index">The position in the buffer indicating the start of the text to write.</param>
+        /// <param name="index">The position in the buffer indicating the start of the text to
+        // write.</param>
         /// <param name="count">The number of characters to write.</param>
         public override void WriteChars(char[] buffer, int index, int count)
         {
@@ -230,7 +232,8 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Writes out a processing instruction with a space between the name and text as follows: &lt;?name text?>.
+        /// Writes out a processing instruction with a space between the name and text as follows: &lt;?name
+        // text?>.
         /// </summary>
         /// <param name="name">The name of the processing instruction.</param>
         /// <param name="text">The text to include in the processing instruction.</param>
@@ -247,7 +250,8 @@ namespace System.IdentityModel
         /// When overridden in a derived class, writes raw markup manually from a character buffer.
         /// </summary>
         /// <param name="buffer">Character array containing the text to write.</param>
-        /// <param name="index">The position within the buffer indicating the start of the text to write.</param>
+        /// <param name="index">The position within the buffer indicating the start of the text to
+        // write.</param>
         /// <param name="count">The number of characters to write.</param>
         public override void WriteRaw(char[] buffer, int index, int count)
         {
@@ -302,7 +306,8 @@ namespace System.IdentityModel
         /// When overridden in a derived class, writes the XML declaration with the version
         /// "1.0" and the standalone attribute.
         /// </summary>
-        /// <param name="standalone">If true, it writes "standalone=yes"; if false, it writes "standalone=no".</param>
+        /// <param name="standalone">If true, it writes "standalone=yes"; if false, it writes
+        // "standalone=no".</param>
         public override void WriteStartDocument(bool standalone)
         {
             _innerWriter.WriteStartDocument(standalone);
@@ -353,7 +358,8 @@ namespace System.IdentityModel
         /// Generates and writes the surrogate character entity for the surrogate character pair.
         /// </summary>
         /// <param name="lowChar">The low surrogate. This must be a value between 0xDC00 and 0xDFFF.</param>
-        /// <param name="highChar">The high surrogate. This must be a value between 0xD800 and 0xDBFF.</param>
+        /// <param name="highChar">The high surrogate. This must be a value between 0xD800 and
+        // 0xDBFF.</param>
         public override void WriteSurrogateCharEntity(char lowChar, char highChar)
         {
             _innerWriter.WriteSurrogateCharEntity(lowChar, highChar);
@@ -429,12 +435,15 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Indicates the start of Canonicalization. Any write operatation following this will canonicalize the data
+        /// Indicates the start of Canonicalization. Any write operatation following this will canonicalize
+        // the data
         /// and will wirte it to the given stream.
         /// </summary>
         /// <param name="stream">Stream to which the canonical stream should be written.</param>
-        /// <param name="includeComments">The value indicates if comments written should be canonicalized as well.</param>
-        /// <param name="inclusivePrefixes">Set of prefixes that needs to be included into the canonical stream. The prefixes are defined at
+        /// <param name="includeComments">The value indicates if comments written should be canonicalized as
+        // well.</param>
+        /// <param name="inclusivePrefixes">Set of prefixes that needs to be included into the canonical
+        // stream. The prefixes are defined at
         /// the first element that is written to the canonical stream.</param>
         public override void StartCanonicalization(
             Stream stream,
@@ -446,7 +455,8 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Closes a previous Start canonicalization operation. The stream given to the StartCanonicalization is flushed
+        /// Closes a previous Start canonicalization operation. The stream given to the
+        // StartCanonicalization is flushed
         /// and any data written after this call will not be written to the canonical stream.
         /// </summary>
         public override void EndCanonicalization()

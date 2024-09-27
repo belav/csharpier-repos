@@ -17,8 +17,10 @@ public static class SendFileFallback
     /// <param name="destination">The stream to write the file segment to.</param>
     /// <param name="filePath">The full disk path to the file.</param>
     /// <param name="offset">The offset in the file to start at.</param>
-    /// <param name="count">The number of bytes to send, or null to send the remainder of the file.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to abort the transmission.</param>
+    /// <param name="count">The number of bytes to send, or null to send the remainder of the
+    // file.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to abort the
+    // transmission.</param>
     /// <returns></returns>
     public static async Task SendFileAsync(
         Stream destination,

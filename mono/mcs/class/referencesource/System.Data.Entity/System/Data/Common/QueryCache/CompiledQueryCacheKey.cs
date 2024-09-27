@@ -50,7 +50,8 @@ namespace System.Data.Common.QueryCache
         /// Returns a string representation of the state of this cache key
         /// </summary>
         /// <returns>
-        /// A string representation that includes query text, parameter information, include path information
+        /// A string representation that includes query text, parameter information, include path
+        // information
         /// and merge option information about this cache key.
         /// </returns>
         public override string ToString()

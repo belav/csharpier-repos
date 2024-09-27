@@ -82,7 +82,8 @@ namespace DbLinq.Data.Linq
         }
 
         /// <summary>
-        /// 'S' is the projected type. If you say 'from e in Employees select e.ID', then type S will be int.
+        /// 'S' is the projected type. If you say 'from e in Employees select e.ID', then type S will be
+        // int.
         /// If you say 'select new {e.ID}', then type S will be something like Projection.f__1
         /// </summary>
         IQueryable<S> IQueryProvider.CreateQuery<S>(Expression expr)
@@ -323,7 +324,8 @@ namespace DbLinq.Data.Linq
             throw new ApplicationException("L579 Not implemented");
         }
 
-        // PC: complementary to GetModifiedMembers(), we probably need a few changes to the IMemberModificationHandler,
+        // PC: complementary to GetModifiedMembers(), we probably need a few changes to the
+        // IMemberModificationHandler,
         //     to recall original values
         [Obsolete("NOT IMPLEMENTED YET")]
         [DbLinqToDo]

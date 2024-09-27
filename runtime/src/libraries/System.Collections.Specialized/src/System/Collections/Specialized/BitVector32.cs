@@ -15,7 +15,8 @@ namespace System.Collections.Specialized
         private uint _data;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the BitVector32 structure with the specified internal data.</para>
+        /// <para>Initializes a new instance of the BitVector32 structure with the specified internal
+        // data.</para>
         /// </devdoc>
         public BitVector32(int data)
         {
@@ -23,7 +24,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the BitVector32 structure with the information in the specified
+        /// <para>Initializes a new instance of the BitVector32 structure with the information in the
+        // specified
         ///    value.</para>
         /// </devdoc>
         public BitVector32(BitVector32 value)
@@ -151,9 +153,11 @@ namespace System.Collections.Specialized
         public override bool Equals([NotNullWhen(true)] object? o) =>
             o is BitVector32 other && Equals(other);
 
-        /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
+        /// <summary>Indicates whether the current instance is equal to another instance of the same
+        // type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>
-        /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
+        /// <returns>true if the current instance is equal to the other instance; otherwise,
+        // false.</returns>
         public bool Equals(BitVector32 other) => _data == other._data;
 
         public override int GetHashCode() => _data.GetHashCode();

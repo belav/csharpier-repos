@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -20,7 +20,8 @@ namespace System.Web.UI.WebControls
         private int _rowIndex;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.GridViewCancelEditEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.GridViewCancelEditEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public GridViewCancelEditEventArgs(int rowIndex)

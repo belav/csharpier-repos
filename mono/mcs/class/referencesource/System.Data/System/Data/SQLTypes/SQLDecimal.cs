@@ -127,46 +127,48 @@ namespace System.Data.SqlTypes
 
         #region DecimalHelperTableGenerator
         /*
-                // the code below will generate the DecimalHelpers tables
-                static private string[] HelperNames = {
-                    "DecimalHelpersLo", "DecimalHelpersMid", "DecimalHelpersHi", "DecimalHelpersHiHi",
-                };
+        // the code below will generate the DecimalHelpers tables
+        static private string[] HelperNames = {
+        "DecimalHelpersLo", "DecimalHelpersMid", "DecimalHelpersHi", "DecimalHelpersHiHi",
+        };
         
         
-                static private void DumpDecimalHelperParts(int index)
-                {
-                    SqlDecimal sqlDecimalValue = 10;    // start precision=2
+        static private void DumpDecimalHelperParts(int index)
+        {
+        SqlDecimal sqlDecimalValue = 10;    // start precision=2
         
-                    Console.WriteLine("static private readonly UInt32[] {0} = {{", HelperNames[index]);
-                    for (int precision = 2; precision <= SqlDecimal.MaxPrecision; precision++){
-                        Console.WriteLine("    0x{0,8:x8}, // precision:{1}, value:{2}", sqlDecimalValue.Data[index], precision, sqlDecimalValue.ToString());
-                        if (precision < SqlDecimal.MaxPrecision){
-                            sqlDecimalValue *= 10;
-                        }
-                    }
-                    sqlDecimalValue = SqlDecimal.MaxValue;
-                    int[] data = sqlDecimalValue.Data;
-                    UInt32[] udata = { (UInt32)data[0], (UInt32)data[1], (UInt32)data[2], (UInt32)data[3]};
-                    bool carry = true;
-                    for (int i = 0; i < 4; i++){
-                        if (carry){
-                            carry = (++udata[i] == 0);
-                        }
-                    }
-                    Console.WriteLine("    0x{0,8:x8}, // precision:{1}+1, value:{2}+1", udata[index], SqlDecimal.MaxPrecision, SqlDecimal.MaxValue.ToString());
+        Console.WriteLine("static private readonly UInt32[] {0} = {{", HelperNames[index]);
+        for (int precision = 2; precision <= SqlDecimal.MaxPrecision; precision++){
+        Console.WriteLine("    0x{0,8:x8}, // precision:{1}, value:{2}", sqlDecimalValue.Data[index],
+        precision, sqlDecimalValue.ToString());
+        if (precision < SqlDecimal.MaxPrecision){
+        sqlDecimalValue *= 10;
+        }
+        }
+        sqlDecimalValue = SqlDecimal.MaxValue;
+        int[] data = sqlDecimalValue.Data;
+        UInt32[] udata = { (UInt32)data[0], (UInt32)data[1], (UInt32)data[2], (UInt32)data[3]};
+        bool carry = true;
+        for (int i = 0; i < 4; i++){
+        if (carry){
+        carry = (++udata[i] == 0);
+        }
+        }
+        Console.WriteLine("    0x{0,8:x8}, // precision:{1}+1, value:{2}+1", udata[index],
+        SqlDecimal.MaxPrecision, SqlDecimal.MaxValue.ToString());
         
-                    Console.WriteLine("};");
-                    Console.WriteLine();
-                }
+        Console.WriteLine("};");
+        Console.WriteLine();
+        }
         
         
-                static public void CreateDecimalHelperTable()
-                {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        DumpDecimalHelperParts(i);
-                    }
-                }
+        static public void CreateDecimalHelperTable()
+        {
+        for (int i = 0; i < 4; i++)
+        {
+        DumpDecimalHelperParts(i);
+        }
+        }
         
         */
         #endregion
@@ -1976,31 +1978,31 @@ namespace System.Data.SqlTypes
         }
 
         /*
-                // print the data members
-                [System.Diagnostics.Conditional("DEBUG")]
-                private void Print() {
-                    if (IsNull) {
-                        Debug.WriteLine("Numeric: Null");
-                        return;
-                    }
-                    Debug.WriteLine("Numeric: data - " + m_data4.ToString() + ", " + m_data3.ToString() + ", " +
-                                      m_data2.ToString() + ", " + m_data1.ToString());
-                    Debug.WriteLine("\tlen = " + m_bLen.ToString() + ", Prec = " + m_bPrec.ToString() +
-                                      ", Scale = " + m_bScale.ToString() + ", Sign = " + IsPositive.ToString());
-                }
+        // print the data members
+        [System.Diagnostics.Conditional("DEBUG")]
+        private void Print() {
+        if (IsNull) {
+        Debug.WriteLine("Numeric: Null");
+        return;
+        }
+        Debug.WriteLine("Numeric: data - " + m_data4.ToString() + ", " + m_data3.ToString() + ", " +
+        m_data2.ToString() + ", " + m_data1.ToString());
+        Debug.WriteLine("\tlen = " + m_bLen.ToString() + ", Prec = " + m_bPrec.ToString() +
+        ", Scale = " + m_bScale.ToString() + ", Sign = " + IsPositive.ToString());
+        }
         
-                [System.Diagnostics.Conditional("DEBUG")]
-                private void Print(String s) {
-                    Debug.WriteLine("*** " + s + " ***");
-                    if (IsNull) {
-                        Debug.WriteLine("Numeric: Null");
-                        return;
-                    }
-                    Debug.WriteLine("Numeric: data - " + m_data4.ToString() + ", " + m_data3.ToString() + ", " +
-                                      m_data2.ToString() + ", " + m_data1.ToString());
-                    Debug.WriteLine("\tlen = " + m_bLen.ToString() + ", Prec = " + m_bPrec.ToString() +
-                                      ", Scale = " + m_bScale.ToString() + ", Sign = " + IsPositive.ToString());
-                }
+        [System.Diagnostics.Conditional("DEBUG")]
+        private void Print(String s) {
+        Debug.WriteLine("*** " + s + " ***");
+        if (IsNull) {
+        Debug.WriteLine("Numeric: Null");
+        return;
+        }
+        Debug.WriteLine("Numeric: data - " + m_data4.ToString() + ", " + m_data3.ToString() + ", " +
+        m_data2.ToString() + ", " + m_data1.ToString());
+        Debug.WriteLine("\tlen = " + m_bLen.ToString() + ", Prec = " + m_bPrec.ToString() +
+        ", Scale = " + m_bScale.ToString() + ", Sign = " + IsPositive.ToString());
+        }
         */
         // Set all extra uints to zero
         private static void ZeroToMaxLen(uint[] rgulData, int cUI4sCur)
@@ -2030,19 +2032,19 @@ namespace System.Data.SqlTypes
         // Set all extra uints to zero
         /*
         private void ZeroToMaxLen(int cUI4sCur) {
-            switch (cUI4sCur) {
-                case 1:
-                    m_data2 = m_data3 = m_data4 = x_uiZero;
-                    break;
-
-                case 2:
-                    m_data3 = m_data4 = x_uiZero;
-                    break;
-
-                case 3:
-                    m_data4 = x_uiZero;
-                    break;
-            }
+        switch (cUI4sCur) {
+        case 1:
+        m_data2 = m_data3 = m_data4 = x_uiZero;
+        break;
+        
+        case 2:
+        m_data3 = m_data4 = x_uiZero;
+        break;
+        
+        case 3:
+        m_data4 = x_uiZero;
+        break;
+        }
         }
         */
 
@@ -3655,7 +3657,8 @@ namespace System.Data.SqlTypes
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
             if (isNull != null && XmlConvert.ToBoolean(isNull))
             {
-                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
+                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix -
+                // Read the next value.
                 reader.ReadElementString();
                 m_bStatus = (byte)(x_bReverseNullMask & m_bStatus);
             }

@@ -161,7 +161,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                         && paths.TryGetValue(pathOnDisk, out string? referencePath)
                     )
                     {
-                        // If we only have one test in the module and we have a display name for the module the test comes from, then rename it to the module name to make on disk discovery easier.
+                        // If we only have one test in the module and we have a display name for the module the test comes
+                        // from, then rename it to the module name to make on disk discovery easier.
                         return ImmutableArray.Create(
                             (ITestInfo)new TestWithCustomDisplayName(tests[0], referencePath!)
                         );
@@ -1027,7 +1028,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 case "Xunit.SkipOnMonoAttribute":
                     if (options.GlobalOptions.RuntimeFlavor().ToLowerInvariant() != "mono")
                     {
-                        // If we're building tests not for Mono, we can skip handling the specifics of the SkipOnMonoAttribute.
+                        // If we're building tests not for Mono, we can skip handling the specifics of the
+                        // SkipOnMonoAttribute.
                         continue;
                     }
                     testInfos = DecorateWithSkipOnPlatform(
@@ -1059,7 +1061,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 case "Xunit.SkipOnCoreClrAttribute":
                     if (options.GlobalOptions.RuntimeFlavor().ToLowerInvariant() != "coreclr")
                     {
-                        // If we're building tests not for CoreCLR, we can skip handling the specifics of the SkipOnCoreClrAttribute.
+                        // If we're building tests not for CoreCLR, we can skip handling the specifics of the
+                        // SkipOnCoreClrAttribute.
                         continue;
                     }
 

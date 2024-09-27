@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         Task<Solution?> GetFixAllChangedSolutionAsync(IFixAllContext fixAllContext);
 
         /// <summary>
-        /// Previews the changes that would occur after a code fix and returns the updated solution with those changes.
+        /// Previews the changes that would occur after a code fix and returns the updated solution with
+        // those changes.
         /// </summary>
         Solution? PreviewChanges(
             Workspace workspace,

@@ -7,13 +7,13 @@
 // <OWNER>Microsoft</OWNER>
 
 /*
- * This files defines the following types:
- *  - NativeOverlapped
- *  - _IOCompletionCallback
- *  - OverlappedData
- *  - Overlapped
- *  - OverlappedDataCache
- */
+* This files defines the following types:
+*  - NativeOverlapped
+*  - _IOCompletionCallback
+*  - OverlappedData
+*  - Overlapped
+*  - OverlappedDataCache
+*/
 
 /*=============================================================================
 **

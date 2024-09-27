@@ -32,10 +32,10 @@ namespace System.Transactions.Tests
                 IntResourceManager irm = new IntResourceManager(1);
 
                 CommittableTransaction ct = new CommittableTransaction();
-                /* Set ambient Tx */
+/* Set ambient Tx */
                 Transaction.Current = ct;
 
-                /* Enlist */
+/* Enlist */
                 irm.Value = 2;
 
                 IAsyncResult ar = ct.BeginCommit(null, null);
@@ -51,10 +51,10 @@ namespace System.Transactions.Tests
                 IntResourceManager irm = new IntResourceManager(1);
 
                 CommittableTransaction ct = new CommittableTransaction();
-                /* Set ambient Tx */
+/* Set ambient Tx */
                 Transaction.Current = ct;
 
-                /* Enlist */
+/* Enlist */
                 irm.Value = 2;
                 irm.FailPrepare = true;
 
@@ -67,7 +67,7 @@ namespace System.Transactions.Tests
         private AsyncCallback _callback = null;
         private static int s_state = 0;
 
-        /* Callback called ? */
+/* Callback called ? */
         private static bool s_called = false;
         private static ManualResetEvent s_mr = new ManualResetEvent(false);
         private static Exception s_delayedException;
@@ -98,10 +98,10 @@ namespace System.Transactions.Tests
             IntResourceManager irm = new IntResourceManager(1);
 
             CommittableTransaction ct = new CommittableTransaction();
-            /* Set ambient Tx */
+/* Set ambient Tx */
             Transaction.Current = ct;
 
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
             irm.FailPrepare = true;
 
@@ -121,9 +121,9 @@ namespace System.Transactions.Tests
             IntResourceManager irm = new IntResourceManager(1);
 
             CommittableTransaction ct = new CommittableTransaction();
-            /* Set ambient Tx */
+/* Set ambient Tx */
             Transaction.Current = ct;
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
 
             _callback = new AsyncCallback(CommitCallback);
@@ -162,10 +162,10 @@ namespace System.Transactions.Tests
             IntResourceManager irm = new IntResourceManager(1);
 
             CommittableTransaction ct = new CommittableTransaction();
-            /* Set ambient Tx */
+/* Set ambient Tx */
             Transaction.Current = ct;
 
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
 
             IAsyncResult ar = ct.BeginCommit(null, null);
@@ -180,10 +180,10 @@ namespace System.Transactions.Tests
             IntResourceManager irm = new IntResourceManager(1);
 
             CommittableTransaction ct = new CommittableTransaction();
-            /* Set ambient Tx */
+/* Set ambient Tx */
             Transaction.Current = ct;
 
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
 
             IAsyncResult ar = ct.BeginCommit(null, null);
@@ -199,10 +199,10 @@ namespace System.Transactions.Tests
             IntResourceManager irm = new IntResourceManager(1);
 
             CommittableTransaction ct = new CommittableTransaction();
-            /* Set ambient Tx */
+/* Set ambient Tx */
             Transaction.Current = ct;
 
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
             irm.FailPrepare = true;
 

@@ -80,9 +80,9 @@ namespace System
         private LocalDataStoreElement[] m_DataTable;
         private LocalDataStoreMgr m_Manager;
 
-        /*=========================================================================
-        ** Initialize the data store.
-        =========================================================================*/
+/*=========================================================================
+** Initialize the data store.
+=========================================================================*/
         public LocalDataStore(LocalDataStoreMgr mgr, int InitialCapacity)
         {
             // Store the manager of the local data store.
@@ -92,17 +92,17 @@ namespace System
             m_DataTable = new LocalDataStoreElement[InitialCapacity];
         }
 
-        /*=========================================================================
-        ** Delete this store from its manager
-        =========================================================================*/
+/*=========================================================================
+** Delete this store from its manager
+=========================================================================*/
         internal void Dispose()
         {
             m_Manager.DeleteLocalDataStore(this);
         }
 
-        /*=========================================================================
-        ** Retrieves the value from the specified slot.
-        =========================================================================*/
+/*=========================================================================
+** Retrieves the value from the specified slot.
+=========================================================================*/
         public Object GetData(LocalDataStoreSlot slot)
         {
             // Validate the slot.
@@ -137,9 +137,9 @@ namespace System
             );
         }
 
-        /*=========================================================================
-        ** Sets the data in the specified slot.
-        =========================================================================*/
+/*=========================================================================
+** Sets the data in the specified slot.
+=========================================================================*/
         public void SetData(LocalDataStoreSlot slot, Object data)
         {
             // Validate the slot.
@@ -174,10 +174,10 @@ namespace System
             );
         }
 
-        /*=========================================================================
-        ** This method does clears the unused slot.
-         * Assumes lock on m_Manager is taken
-        =========================================================================*/
+/*=========================================================================
+** This method does clears the unused slot.
+* Assumes lock on m_Manager is taken
+=========================================================================*/
         internal void FreeData(int slot, long cookie)
         {
             // We try to delay allocate the dataTable (in cases like the manager clearing a
@@ -190,9 +190,9 @@ namespace System
                 m_DataTable[slot] = null;
         }
 
-        /*=========================================================================
-        ** Method used to expand the capacity of the local data store.
-        =========================================================================*/
+/*=========================================================================
+** Method used to expand the capacity of the local data store.
+=========================================================================*/
         [System.Security.SecuritySafeCritical] // auto-generated
         private LocalDataStoreElement PopulateElement(LocalDataStoreSlot slot)
         {

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * CookielessHelper class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* CookielessHelper class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Security
 {
@@ -51,8 +51,10 @@ namespace System.Web.Security
         {
             _Headers = _Context.Request.Headers[COOKIELESS_SESSION_FILTER_HEADER];
 
-            // Dev10 775061 Regression: FormsAuthentication.SignOut does not redirect if cookieless forms authentication is enabled.
-            // HttpContext.Init calls RemoveCookielessValues directly so we need to also store the OriginalHeaders for Redirect
+            // Dev10 775061 Regression: FormsAuthentication.SignOut does not redirect if cookieless forms
+            // authentication is enabled.
+            // HttpContext.Init calls RemoveCookielessValues directly so we need to also store the
+            // OriginalHeaders for Redirect
             // calling Init directly causes regressions
             _OriginalHeaders = _Headers;
             if (!String.IsNullOrEmpty(_Headers))

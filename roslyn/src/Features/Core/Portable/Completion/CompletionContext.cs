@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Completion
         public int Position { get; }
 
         /// <summary>
-        /// By providing this object, we have an opportunity to share requested SyntaxContext among all CompletionProviders
+        /// By providing this object, we have an opportunity to share requested SyntaxContext among all
+        // CompletionProviders
         /// during a completion session to reduce repeat computation.
         /// </summary>
         private SharedSyntaxContextsWithSpeculativeModel? SharedSyntaxContextsWithSpeculativeModel { get; }
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// The span of the syntax element at the caret position.
         ///
         /// This is the most common value used for <see cref="CompletionItem.Span"/> and will
-        /// be automatically assigned to any <see cref="CompletionItem"/> that has no <see cref="CompletionItem.Span"/> specified.
+        /// be automatically assigned to any <see cref="CompletionItem"/> that has no <see
+        // cref="CompletionItem.Span"/> specified.
         /// </summary>
         [Obsolete("Not used anymore. Use CompletionListSpan instead.", error: true)]
         public TextSpan DefaultItemSpan { get; }
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The span of the document the completion list corresponds to.  It will be set initially to
         /// the result of <see cref="CompletionService.GetDefaultCompletionListSpan"/>, but it can
-        /// be overwritten during <see cref="CompletionService.GetCompletionsAsync(Document, int, CompletionTrigger, ImmutableHashSet{string}, OptionSet, CancellationToken)"/>.
+        /// be overwritten during <see cref="CompletionService.GetCompletionsAsync(Document, int,
+        // CompletionTrigger, ImmutableHashSet{string}, OptionSet, CancellationToken)"/>.
         /// The purpose of the span is to:
         ///     1. Signify where the completions should be presented.
         ///     2. Designate any existing text in the document that should be used for filtering.
@@ -188,12 +191,16 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         /// <summary>
-        /// An optional <see cref="CompletionItem"/> that appears selected in the list presented to the user during suggestion mode.
+        /// An optional <see cref="CompletionItem"/> that appears selected in the list presented to the user
+        // during suggestion mode.
         ///
-        /// Suggestion mode disables auto-selection of items in the list, giving preference to the text typed by the user unless a specific item is selected manually.
+        /// Suggestion mode disables auto-selection of items in the list, giving preference to the text
+        // typed by the user unless a specific item is selected manually.
         ///
-        /// Specifying a <see cref="SuggestionModeItem"/> is a request that the completion host operate in suggestion mode.
-        /// The item specified determines the text displayed and the description associated with it unless a different item is manually selected.
+        /// Specifying a <see cref="SuggestionModeItem"/> is a request that the completion host operate in
+        // suggestion mode.
+        /// The item specified determines the text displayed and the description associated with it unless a
+        // different item is manually selected.
         ///
         /// No text is ever inserted when this item is completed, leaving the text the user typed instead.
         /// </summary>

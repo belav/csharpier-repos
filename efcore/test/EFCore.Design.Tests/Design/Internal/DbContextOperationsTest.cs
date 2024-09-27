@@ -194,7 +194,7 @@ public class DbContextOperationsTest
             rootNamespace: null,
             language: "C#",
             nullable: false,
-            /* args: */Array.Empty<string>(),
+/* args: */Array.Empty<string>(),
             new TestAppServiceProviderFactory(assembly)
         );
     }

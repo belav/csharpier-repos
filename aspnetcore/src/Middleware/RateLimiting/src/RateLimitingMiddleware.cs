@@ -10,7 +10,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.RateLimiting;
 
 /// <summary>
-/// Limits the rate of requests allowed in the application, based on limits set by a user-provided <see cref="PartitionedRateLimiter{TResource}"/>.
+/// Limits the rate of requests allowed in the application, based on limits set by a user-provided
+// <see cref="PartitionedRateLimiter{TResource}"/>.
 /// </summary>
 internal sealed partial class RateLimitingMiddleware
 {
@@ -30,7 +31,8 @@ internal sealed partial class RateLimitingMiddleware
     /// <summary>
     /// Creates a new <see cref="RateLimitingMiddleware"/>.
     /// </summary>
-    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
+    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the
+    // pipeline.</param>
     /// <param name="logger">The <see cref="ILogger"/> used for logging.</param>
     /// <param name="options">The options for the middleware.</param>
     /// <param name="serviceProvider">The service provider.</param>
@@ -81,7 +83,8 @@ internal sealed partial class RateLimitingMiddleware
         }
         var enableRateLimitingAttribute =
             endpoint?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
-        // If this endpoint has no EnableRateLimitingAttribute & there's no global limiter, don't apply any rate limits.
+        // If this endpoint has no EnableRateLimitingAttribute & there's no global limiter, don't apply any
+        // rate limits.
         if (enableRateLimitingAttribute is null && _globalLimiter is null)
         {
             return _next(context);
@@ -99,7 +102,8 @@ internal sealed partial class RateLimitingMiddleware
 
         // Cache the up/down counter enabled state at the start of the middleware.
         // This ensures that the state is consistent for the entire request.
-        // For example, if a meter listener starts after a request is queued, when the request exits the queue
+        // For example, if a meter listener starts after a request is queued, when the request exits the
+        // queue
         // the requests queued counter won't go into a negative value.
         var metricsContext = _metrics.CreateContext(policyName);
 

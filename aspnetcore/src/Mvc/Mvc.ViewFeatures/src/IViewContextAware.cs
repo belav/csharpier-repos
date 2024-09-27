@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// <summary>
 /// Contract for contextualizing a property activated by a view with the <see cref="ViewContext"/>.
 /// </summary>
-/// <remarks>This interface is used for contextualizing properties added to a Razor page using <c>@inject</c>.</remarks>
+/// <remarks>This interface is used for contextualizing properties added to a Razor page using
+// <c>@inject</c>.</remarks>
 public interface IViewContextAware
 {
     /// <summary>

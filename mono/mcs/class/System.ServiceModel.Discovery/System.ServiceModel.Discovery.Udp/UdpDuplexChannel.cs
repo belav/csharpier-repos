@@ -140,7 +140,8 @@ namespace System.ServiceModel.Discovery.Udp
 
             var ms = new MemoryStream();
             message_encoder.WriteMessage(message, ms);
-            // It seems .NET sends the same Message a couple of times so that the receivers don't miss it. So, do the same hack.
+            // It seems .NET sends the same Message a couple of times so that the receivers don't miss it. So,
+            // do the same hack.
             for (int i = 0; i < 3; i++)
             {
                 // FIXME: use MaxAnnouncementDelay. It is fixed now.

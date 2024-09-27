@@ -731,7 +731,8 @@ class M<,> { }
                     Diagnostic(ErrorCode.ERR_HasNoTypeVars, "C<A<>>")
                         .WithArguments("C", "type")
                         .WithLocation(7, 5),
-                    // (7,7): error CS0246: The type or namespace name 'A<>' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,7): error CS0246: The type or namespace name 'A<>' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //     C<A<>> a1;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "A<>")
                         .WithArguments("A<>")

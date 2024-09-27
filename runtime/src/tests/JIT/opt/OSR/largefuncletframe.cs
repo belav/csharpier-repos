@@ -282,7 +282,9 @@ set DOTNET_JitStress=2
 set DOTNET_AltJitName=clrjit_universal_arm64_x64.dll
 set DOTNET_AltJit=Method1
 
-Assert failure(PID 98024 [0x00017ee8], Thread: 54984 [0xd6c8]): Assertion failed 'genFuncletInfo.fiSpDelta1 >= -240' in 'LargeFuncletFrame:Method1(byref):S2:this' during 'Generate code' (IL size 387)
-    File: D:\git\dotnet-runtime\src\coreclr\jit\codegenarm64.cpp Line: 1620
-    Image: d:\git\dotnet-runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
+Assert failure(PID 98024 [0x00017ee8], Thread: 54984 [0xd6c8]): Assertion failed
+'genFuncletInfo.fiSpDelta1 >= -240' in 'LargeFuncletFrame:Method1(byref):S2:this' during 'Generate
+code' (IL size 387)
+File: D:\git\dotnet-runtime\src\coreclr\jit\codegenarm64.cpp Line: 1620
+Image: d:\git\dotnet-runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
 */

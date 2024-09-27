@@ -10,12 +10,14 @@ namespace System.Web.Hosting
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
 
-    /*
-     * !! USAGE NOTE !!
-     * This interface is not exposed publicly because it is expected that Helios developers will consume the
-     * no-PIA interfaces that will be released OOB. This interface only exists so that ASP.NET can interface
-     * with the Helios layer if necessary. These interfaces are subject to change.
-     */
+/*
+* !! USAGE NOTE !!
+* This interface is not exposed publicly because it is expected that Helios developers will consume
+the
+* no-PIA interfaces that will be released OOB. This interface only exists so that ASP.NET can
+interface
+* with the Helios layer if necessary. These interfaces are subject to change.
+*/
 
     /// <summary>
     /// Defines the entry point where the Helios hoster calls into the developer-provided bootstrapper.
@@ -32,12 +34,16 @@ namespace System.Web.Hosting
         /// <summary>
         /// Loads a custom runtime for the current application.
         /// </summary>
-        /// <param name="appId">The ID of the current application (e.g., IHttpApplication::GetApplicationId).</param>
-        /// <param name="appConfigPath">The configuration path of the current application (e.g., IHttpApplication::GetAppConfigPath).</param>
+        /// <param name="appId">The ID of the current application (e.g.,
+        // IHttpApplication::GetApplicationId).</param>
+        /// <param name="appConfigPath">The configuration path of the current application (e.g.,
+        // IHttpApplication::GetAppConfigPath).</param>
         /// <param name="supportFunctions">Support functions for the current host.</param>
-        /// <param name="pLoadAppData">Additional data that may be useful to a custom loader for integrating with the IIS pipeline.
+        /// <param name="pLoadAppData">Additional data that may be useful to a custom loader for integrating
+        // with the IIS pipeline.
         /// This pointer is only valid within the call to LoadApplication.</param>
-        /// <param name="loadAppDataSize">The size (in bytes) of the structure pointed to by pLoadAppData.</param>
+        /// <param name="loadAppDataSize">The size (in bytes) of the structure pointed to by
+        // pLoadAppData.</param>
         /// <returns>An ICustomRuntime instance wrapped inside an ObjectHandle.</returns>
         [return: MarshalAs(UnmanagedType.Interface)]
         IObjectHandle LoadApplication(

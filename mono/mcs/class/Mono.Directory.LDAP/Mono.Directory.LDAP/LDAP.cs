@@ -46,7 +46,7 @@ namespace Mono.Directory.LDAP
             TimeVal tv = new TimeVal();
             long nanoseconds;
 
-            /* make sure we're dealing with a positive TimeSpan */
+/* make sure we're dealing with a positive TimeSpan */
             span = span.Duration();
 
             nanoseconds = span.Ticks * 100;
@@ -67,7 +67,7 @@ namespace Mono.Directory.LDAP
 
     public class LDAP
     {
-        /* Search Scopes */
+/* Search Scopes */
         public LDAP(string uri)
         {
             int rv;

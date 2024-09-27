@@ -26,7 +26,7 @@ public struct cs
 }
 
 /* various small structs for testing struct-by-value where they are handled specially
-   on some platforms.
+on some platforms.
 */
 [StructLayout(LayoutKind.Sequential)]
 public struct sc1

@@ -33,9 +33,9 @@ using System;
 
 namespace Novell.Directory.Ldap.Extensions
 {
-    /*
-    * public class ReplicationConstants
-    */
+/*
+* public class ReplicationConstants
+*/
 
     /// <summary> Contains a collection of constants used by the replication management
     /// in Novell Ldap extensions.

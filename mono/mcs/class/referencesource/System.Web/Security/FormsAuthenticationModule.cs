@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * FormsAuthenticationModule class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* FormsAuthenticationModule class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Security
 {
@@ -39,7 +39,8 @@ namespace System.Web.Security
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Web.Security.FormsAuthenticationModule'/>
+        ///       Initializes a new instance of the <see
+        // cref='System.Web.Security.FormsAuthenticationModule'/>
         ///       class.
         ///     </para>
         /// </devdoc>

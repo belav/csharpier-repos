@@ -1383,7 +1383,8 @@ namespace Mono.CSharp
                 // Delegate obj1 = backing_field
                 // do {
                 //   Delegate obj2 = obj1;
-                //   obj1 = Interlocked.CompareExchange (ref backing_field, Delegate.Combine|Remove(obj2, value), obj1);
+                //   obj1 = Interlocked.CompareExchange (ref backing_field, Delegate.Combine|Remove(obj2, value),
+                // obj1);
                 // } while ((object)obj1 != (object)obj2)
                 //
 
@@ -2392,7 +2393,8 @@ namespace Mono.CSharp
         )
         {
             //
-            // Creates indexer parameters based on setter method parameters (the last parameter has to be removed)
+            // Creates indexer parameters based on setter method parameters (the last parameter has to be
+            // removed)
             //
             var data = new IParameterData[set_param_count];
             var types = new TypeSpec[set_param_count];

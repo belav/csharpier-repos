@@ -252,7 +252,8 @@ namespace MonoTests.System.Xaml
             var l = new List<XamlMember>();
             while (r.NodeType == XamlNodeType.StartMember)
             {
-                // It depends on XmlDocument's implenentation details. It fails on mono only because XmlDocument.SchemaInfo overrides both getter and setter.
+                // It depends on XmlDocument's implenentation details. It fails on mono only because
+                // XmlDocument.SchemaInfo overrides both getter and setter.
                 //for (int i = 0; i < 5; i++) {
                 //	Assert.AreEqual (XamlNodeType.StartMember, r.NodeType, "#3-" + i);
                 l.Add(r.Member);
@@ -549,7 +550,8 @@ namespace MonoTests.System.Xaml
             if (validateInstance != null)
                 validateInstance();
 
-            // This assumption on member ordering ("Type" then "Items") is somewhat wrong, and we might have to adjust it in the future.
+            // This assumption on member ordering ("Type" then "Items") is somewhat wrong, and we might have to
+            // adjust it in the future.
 
             if (r is XamlXmlReader)
                 ReadBase(r);
@@ -660,7 +662,8 @@ namespace MonoTests.System.Xaml
                 Assert.AreEqual(XamlNodeType.StartObject, r.NodeType, i + "#73-2");
                 Assert.IsTrue(r.Read(), i + "#74");
                 Assert.AreEqual(XamlNodeType.StartMember, r.NodeType, i + "#74-2");
-                // Here XamlObjectReader and XamlXmlReader significantly differs. (Lucky we can make this test conditional so simply)
+                // Here XamlObjectReader and XamlXmlReader significantly differs. (Lucky we can make this test
+                // conditional so simply)
                 if (isObjectReader)
                     Assert.AreEqual(XamlLanguage.PositionalParameters, r.Member, i + "#74-3");
                 else
@@ -817,7 +820,8 @@ namespace MonoTests.System.Xaml
             if (r is XamlXmlReader)
                 ReadBase(r);
 
-            // This assumption on member ordering ("Type" then "Items") is somewhat wrong, and we might have to adjust it in the future.
+            // This assumption on member ordering ("Type" then "Items") is somewhat wrong, and we might have to
+            // adjust it in the future.
 
             Assert.IsTrue(r.Read(), "#31");
             Assert.AreEqual(XamlNodeType.StartMember, r.NodeType, "#32");
@@ -890,7 +894,8 @@ namespace MonoTests.System.Xaml
             if (r is XamlXmlReader)
                 ReadBase(r);
 
-            // This assumption on member ordering ("Type" then "Items") is somewhat wrong, and we might have to adjust it in the future.
+            // This assumption on member ordering ("Type" then "Items") is somewhat wrong, and we might have to
+            // adjust it in the future.
 
             Assert.IsTrue(r.Read(), "#31");
             Assert.AreEqual(XamlNodeType.StartMember, r.NodeType, "#32");
@@ -1364,7 +1369,8 @@ namespace MonoTests.System.Xaml
 
         protected void PositionalParameters1(XamlReader r)
         {
-            // ns1 > T:PositionalParametersClass1 > M:_PositionalParameters > foo > 5 > EM:_PositionalParameters > ET:PositionalParametersClass1
+            // ns1 > T:PositionalParametersClass1 > M:_PositionalParameters > foo > 5 > EM:_PositionalParameters
+            // > ET:PositionalParametersClass1
 
             Assert.IsTrue(r.Read(), "ns#1-1");
             Assert.AreEqual(XamlNodeType.NamespaceDeclaration, r.NodeType, "ns#1-2");
@@ -1408,7 +1414,8 @@ namespace MonoTests.System.Xaml
 
         protected void PositionalParameters2(XamlReader r)
         {
-            // ns1 > T:PositionalParametersWrapper > M:Body > T:PositionalParametersClass1 > M:_PositionalParameters > foo > 5 > EM:_PositionalParameters > ET:PositionalParametersClass1
+            // ns1 > T:PositionalParametersWrapper > M:Body > T:PositionalParametersClass1 >
+            // M:_PositionalParameters > foo > 5 > EM:_PositionalParameters > ET:PositionalParametersClass1
 
             Assert.IsTrue(r.Read(), "ns#1-1");
             Assert.AreEqual(XamlNodeType.NamespaceDeclaration, r.NodeType, "ns#1-2");
@@ -2791,7 +2798,8 @@ namespace MonoTests.System.Xaml
 
             if (!extensionBased || r is XamlObjectReader)
             {
-                // t:String (as it is specific derived type as compared to the key object type in Dictionary<object,object>)
+                // t:String (as it is specific derived type as compared to the key object type in
+                // Dictionary<object,object>)
                 Assert.IsTrue(r.Read(), "so#5-1." + i);
                 Assert.AreEqual(XamlNodeType.StartObject, r.NodeType, "so#5-2." + i);
                 Assert.AreEqual(XamlLanguage.String, r.Type, "so#5-3." + i);

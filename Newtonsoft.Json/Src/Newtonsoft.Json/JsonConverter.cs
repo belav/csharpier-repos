@@ -71,13 +71,15 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Gets a value indicating whether this <see cref="JsonConverter"/> can read JSON.
         /// </summary>
-        /// <value><c>true</c> if this <see cref="JsonConverter"/> can read JSON; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if this <see cref="JsonConverter"/> can read JSON; otherwise,
+        // <c>false</c>.</value>
         public virtual bool CanRead => true;
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="JsonConverter"/> can write JSON.
         /// </summary>
-        /// <value><c>true</c> if this <see cref="JsonConverter"/> can write JSON; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if this <see cref="JsonConverter"/> can write JSON; otherwise,
+        // <c>false</c>.</value>
         public virtual bool CanWrite => true;
     }
 
@@ -158,7 +160,8 @@ namespace Newtonsoft.Json
         /// </summary>
         /// <param name="reader">The <see cref="JsonReader"/> to read from.</param>
         /// <param name="objectType">Type of the object.</param>
-        /// <param name="existingValue">The existing value of object being read. If there is no existing value then <c>null</c> will be used.</param>
+        /// <param name="existingValue">The existing value of object being read. If there is no existing
+        // value then <c>null</c> will be used.</param>
         /// <param name="hasExistingValue">The existing value has a value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>

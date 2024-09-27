@@ -68,8 +68,10 @@ namespace Legacy.Support
         public static readonly bool openDefaultDiscardNull = false;
         public static readonly byte openDefaultParityReplace = (byte)'?';
 
-        // Removing the following properties from default checks.  Sometimes these can be true (as read from the GetCommModemStatus win32 API)
-        // which causes test failures.  Since these are read-only properties and are simply obtained from a bitfield, there is a very low probability
+        // Removing the following properties from default checks.  Sometimes these can be true (as read from
+        // the GetCommModemStatus win32 API)
+        // which causes test failures.  Since these are read-only properties and are simply obtained from a
+        // bitfield, there is a very low probability
         // of regression involving these properties.
         //
         // public static readonly bool openDefaultCDHolding = false;

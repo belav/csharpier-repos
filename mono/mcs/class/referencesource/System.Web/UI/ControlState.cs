@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * The possible states a container control can be in when children are added to it.
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* The possible states a container control can be in when children are added to it.
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.UI
 {
     internal enum ControlState

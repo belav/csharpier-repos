@@ -54,10 +54,12 @@ public abstract class HttpRequest
     /// <summary>
     /// Gets or sets the portion of the request path that identifies the requested resource.
     /// <para>
-    /// The value may be <see cref="PathString.Empty"/> if <see cref="PathBase"/> contains the full path,
+    /// The value may be <see cref="PathString.Empty"/> if <see cref="PathBase"/> contains the full
+    // path,
     /// or for 'OPTIONS *' requests.
     /// The path is fully decoded by the server except for '%2F', which would decode to '/' and
-    /// change the meaning of the path segments. '%2F' can only be replaced after splitting the path into segments.
+    /// change the meaning of the path segments. '%2F' can only be replaced after splitting the path
+    // into segments.
     /// </para>
     /// </summary>
     public abstract PathString Path { get; set; }
@@ -122,7 +124,8 @@ public abstract class HttpRequest
     /// <summary>
     /// Checks the Content-Type header for form types.
     /// </summary>
-    /// <returns>true if the Content-Type header represents a form content type; otherwise, false.</returns>
+    /// <returns>true if the Content-Type header represents a form content type; otherwise,
+    // false.</returns>
     public abstract bool HasFormContentType { get; }
 
     /// <summary>
@@ -133,7 +136,8 @@ public abstract class HttpRequest
     /// </exception>
     /// <remarks>
     ///     <para>
-    ///     Invoking this property could result in thread exhaustion since it's wrapping an asynchronous implementation.
+    ///     Invoking this property could result in thread exhaustion since it's wrapping an asynchronous
+    // implementation.
     ///     To prevent this the method <see cref="ReadFormAsync(CancellationToken)"/> can be used.
     ///     For more information, see <see href="https://aka.ms/aspnet/forms-async" />.
     ///     </para>

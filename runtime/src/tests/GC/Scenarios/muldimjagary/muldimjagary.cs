@@ -5,12 +5,12 @@ namespace DefaultNamespace
 {
     using System;
 
-    /*************************************************************/
-    /* test: MulDimJagAry.cs
-    /* Purpose: Test GC with Multiple dimentions array
-    /* Coverage: int[][], Object[][], Object[][][], Variant[][][],
-    /*           take Mul_Dimention array as function argument.
-    /*************************************************************/
+/*************************************************************/
+/* test: MulDimJagAry.cs
+/* Purpose: Test GC with Multiple dimentions array
+/* Coverage: int[][], Object[][], Object[][][], Variant[][][],
+/*           take Mul_Dimention array as function argument.
+/*************************************************************/
 
 
     class MulDimJagAry

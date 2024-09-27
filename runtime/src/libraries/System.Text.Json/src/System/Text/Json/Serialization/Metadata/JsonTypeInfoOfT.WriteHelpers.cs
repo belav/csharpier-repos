@@ -77,7 +77,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (CanUseSerializeHandlerInStreaming)
             {
-                // Short-circuit calls into SerializeHandler, if the `CanUseSerializeHandlerInStreaming` heuristic allows it.
+                // Short-circuit calls into SerializeHandler, if the `CanUseSerializeHandlerInStreaming` heuristic
+                // allows it.
 
                 Debug.Assert(SerializeHandler != null);
                 Debug.Assert(CanUseSerializeHandler);
@@ -174,8 +175,10 @@ namespace System.Text.Json.Serialization.Metadata
                         }
                         finally
                         {
-                            // Await any pending resumable converter tasks (currently these can only be IAsyncEnumerator.MoveNextAsync() tasks).
-                            // Note that pending tasks are always awaited, even if an exception has been thrown or the cancellation token has fired.
+                            // Await any pending resumable converter tasks (currently these can only be
+                            // IAsyncEnumerator.MoveNextAsync() tasks).
+                            // Note that pending tasks are always awaited, even if an exception has been thrown or the
+                            // cancellation token has fired.
                             if (state.PendingTask is not null)
                             {
                                 // Exceptions should only be propagated by the resuming converter
@@ -228,7 +231,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (CanUseSerializeHandlerInStreaming)
             {
-                // Short-circuit calls into SerializeHandler, if the `CanUseSerializeHandlerInStreaming` heuristic allows it.
+                // Short-circuit calls into SerializeHandler, if the `CanUseSerializeHandlerInStreaming` heuristic
+                // allows it.
 
                 Debug.Assert(SerializeHandler != null);
                 Debug.Assert(CanUseSerializeHandler);
@@ -339,7 +343,8 @@ namespace System.Text.Json.Serialization.Metadata
         // assuming that the current type is known to produce small enough JSON payloads.
         // The `CanUseSerializeHandlerInStreaming` flag returns true iff:
         //  * The type has been used in at least `MinSerializationsSampleSize` streaming serializations AND
-        //  * No serialization size exceeding JsonSerializerOptions.DefaultBufferSize / 2 has been recorded so far.
+        //  * No serialization size exceeding JsonSerializerOptions.DefaultBufferSize / 2 has been recorded
+        // so far.
         private bool CanUseSerializeHandlerInStreaming =>
             _canUseSerializeHandlerInStreamingState == 1;
         private volatile int _canUseSerializeHandlerInStreamingState; // 0: unspecified, 1: allowed, 2: forbidden

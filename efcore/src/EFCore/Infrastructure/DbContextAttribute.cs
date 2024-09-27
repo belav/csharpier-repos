@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
-///     Identifies the <see cref="DbContext" /> that a class belongs to. For example, this attribute is used
+///     Identifies the <see cref="DbContext" /> that a class belongs to. For example, this attribute
+// is used
 ///     to identify which context a migration applies to.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-manage-schemas">Managing database schemas with EF Cor</see> for more information and
+///     See <see href="https://aka.ms/efcore-docs-manage-schemas">Managing database schemas with EF
+// Cor</see> for more information and
 ///     examples.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Class)]

@@ -239,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
                 .Cast<SourceParameterSymbol, ParameterSymbol>();
 
-            // Note: we don't need to warn on annotations used in #nullable disable context for local functions, as this is handled in binding already
+            // Note: we don't need to warn on annotations used in #nullable disable context for local functions,
+            // as this is handled in binding already
 
             var isVararg = arglistToken.Kind() == SyntaxKind.ArgListKeyword;
             if (isVararg)
@@ -327,7 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         location ??= returnTypeSyntax.Location,
                         modifyCompilation: false
                     );
-                    // Note: we don't need to warn on annotations used in #nullable disable context for local functions, as this is handled in binding already
+                    // Note: we don't need to warn on annotations used in #nullable disable context for local functions,
+                    // as this is handled in binding already
                 }
             }
 

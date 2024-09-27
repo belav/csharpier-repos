@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Classes related to complex property support.
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Classes related to complex property support.
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {

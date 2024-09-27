@@ -13,7 +13,8 @@ namespace Microsoft.Interop
     public static class MarshallingGeneratorExtensions
     {
         /// <summary>
-        /// Gets the return type for the unmanaged signature that represents the provided <paramref name="info"/>.
+        /// Gets the return type for the unmanaged signature that represents the provided <paramref
+        // name="info"/>.
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
@@ -38,7 +39,8 @@ namespace Microsoft.Interop
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
-        /// <returns>Attributes for the return type for this <paramref name="info"/>, or <c>null</c> if no attributes should be added.</returns>
+        /// <returns>Attributes for the return type for this <paramref name="info"/>, or <c>null</c> if no
+        // attributes should be added.</returns>
         public static AttributeListSyntax? GenerateAttributesForReturnType(
             this IMarshallingGenerator generator,
             TypePositionInfo info
@@ -66,7 +68,8 @@ namespace Microsoft.Interop
         private const string ParameterIdentifierSuffix = "param";
 
         /// <summary>
-        /// Gets a parameter for the unmanaged signature that represents the provided <paramref name="info"/> in the given <paramref name="context"/>.
+        /// Gets a parameter for the unmanaged signature that represents the provided <paramref
+        // name="info"/> in the given <paramref name="context"/>.
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
@@ -93,9 +96,11 @@ namespace Microsoft.Interop
             {
                 // This name is introduced into the stub's scope.
                 // When we are passing the managed identifier as-is, we can just use that name everywhere.
-                // When we're passing the native identifier as-is or casting the value to the native type in managed->unmanaged cases,
+                // When we're passing the native identifier as-is or casting the value to the native type in
+                // managed->unmanaged cases,
                 // we can use the native identifier.
-                // When we're passing the address of the native identifier, we need to introduce a new name to hold this value
+                // When we're passing the address of the native identifier, we need to introduce a new name to hold
+                // this value
                 // before we assign it to the managed value.
                 (string managed, string native) = context.GetIdentifiers(info);
                 string param = context.GetAdditionalIdentifier(info, ParameterIdentifierSuffix);
@@ -168,7 +173,8 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Gets an argument expression for the unmanaged signature that can be used to pass a value of the provided <paramref name="info" /> in the specified <paramref name="context" />.
+        /// Gets an argument expression for the unmanaged signature that can be used to pass a value of the
+        // provided <paramref name="info" /> in the specified <paramref name="context" />.
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>

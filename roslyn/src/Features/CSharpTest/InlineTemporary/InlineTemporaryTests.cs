@@ -5758,7 +5758,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 (1 + 1).ToString();
                 """;
 
-            // Global statements in regular code are local variables, so Inline Temporary works. Script code is not
+            // Global statements in regular code are local variables, so Inline Temporary works. Script code is
+            // not
             // tested because global statements in script code are field declarations, which are not considered
             // temporary.
             await TestAsync(
@@ -5782,7 +5783,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 System.Console.WriteLine(val + 1);
                 """;
 
-            // Global statements in regular code are local variables, so Inline Temporary works. Script code is not
+            // Global statements in regular code are local variables, so Inline Temporary works. Script code is
+            // not
             // tested because global statements in script code are field declarations, which are not considered
             // temporary.
             await TestAsync(

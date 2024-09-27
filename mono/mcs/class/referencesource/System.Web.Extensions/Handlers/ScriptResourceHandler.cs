@@ -508,7 +508,8 @@ namespace System.Web.Handlers
             }
             else
             {
-                // expected: <assembly1>|<resource1a>,<culture1a>,<resource1b>,<culture1b>,...|<assembly2>|<resource2a>,<culture2a>,<resource2b>,<culture2b>,...|#|<hash>
+                // expected:
+                // <assembly1>|<resource1a>,<culture1a>,<resource1b>,<culture1b>,...|<assembly2>|<resource2a>,<culture2a>,<resource2b>,<culture2b>,...|#|<hash>
                 if (decryptedData.Length % 2 != 0)
                 {
                     // The decrypted data must have an even number of parts separated by pipes.
@@ -549,11 +550,14 @@ namespace System.Web.Handlers
             else
             {
                 // composite script reference, format is:
+                //
                 // <assembly1>|<resource1a>,<culture1a>,<resource1b>,<culture1b>,...|<assembly2>|<resource2a>,<culture2a>,<resource2b>,<culture2b>,...
                 // Assembly is empty for path based scripts, and their resource/culture list is <path1>,<path2>,...
 
-                // If an assembly starts with "#", the segment is ignored (expected that this includes a hash to ensure
-                // url uniqueness when resources are changed). Also, for forward compatibility '#' segments may contain
+                // If an assembly starts with "#", the segment is ignored (expected that this includes a hash to
+                // ensure
+                // url uniqueness when resources are changed). Also, for forward compatibility '#' segments may
+                // contain
                 // other data.
 
                 bool needsNewline = false;
@@ -783,7 +787,8 @@ namespace System.Web.Handlers
 
                 // If all the scripts are assembly resources, we can cache the generated ScriptResource URL, since
                 // the appdomain will reset if any of the assemblies are changed.  We cannot cache the URL if any
-                // scripts are path-based, since the cache entry will not be removed if a path-based script is changed.
+                // scripts are path-based, since the cache entry will not be removed if a path-based script is
+                // changed.
                 if (allAssemblyResources)
                 {
                     List<object> cacheKeys = new List<object>();
@@ -834,7 +839,8 @@ namespace System.Web.Handlers
                 // If there's only a single assembly resource, format is
                 //      [Z|U|z|u]<assembly>|<resource>|<culture>
                 // If there are multiple resources, or a single resource that is path based, format is
-                //      [Q|R|q|r]<assembly1>|<resource1a>,<culture1a>,<resource1b>,<culture1b>...|<assembly2>|<resource2a>,<culture2a>,<resource2b>,<culture2b>...
+                //
+                // [Q|R|q|r]<assembly1>|<resource1a>,<culture1a>,<resource1b>,<culture1b>...|<assembly2>|<resource2a>,<culture2a>,<resource2b>,<culture2b>...
                 // A path based reference has no assembly (empty).
                 // (the Q/R indicators used in place of Z/U give the handler indiciation that the url is a composite
                 // reference, and allows for System.Web.Extensions SP1 to maintain compatibility with RTM, should a
@@ -1002,7 +1008,8 @@ namespace System.Web.Handlers
                 // cause a new request to the server, but it would be served via cache since 'd' would be the same.
                 // This isn't a problem for assembly based resources since changing them also restarts the app and
                 // clears the cache. We do not vary by 't' because that makes it possible to flood the server cache
-                // with cache entries, since anything could be used for 't'. Putting the hash in 'd' ensures a different
+                // with cache entries, since anything could be used for 't'. Putting the hash in 'd' ensures a
+                // different
                 // url and different cache entry when a script changes, but without the possibility of flooding
                 // the server cache.
 

@@ -754,7 +754,8 @@ namespace System.Numerics.Tests
 
             Assert.Equal(expectedValue, (double)bigInteger);
 
-            // Double can only accurately represent integers between -9007199254740992 and 9007199254740992 exclusive.
+            // Double can only accurately represent integers between -9007199254740992 and 9007199254740992
+            // exclusive.
             // ToString starts to become inaccurate at this point.
             if (expectedValue < 9007199254740992 && -9007199254740992 < expectedValue)
             {

@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 var normalizedSpan = spans.ToNormalizedSpans();
                 if (CleanupWholeNode(root.FullSpan, normalizedSpan))
                 {
-                    // We are cleaning up the whole document, so there is no need to do expansive span tracking between cleaners.
+                    // We are cleaning up the whole document, so there is no need to do expansive span tracking between
+                    // cleaners.
                     return await IterateAllCodeCleanupProvidersAsync(
                             document,
                             document,
@@ -72,10 +73,12 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     cancellationToken
                 );
 
-                // If it urns out we don't need to annotate anything since all spans are merged to one span that covers the whole node...
+                // If it urns out we don't need to annotate anything since all spans are merged to one span that
+                // covers the whole node...
                 if (newNode == null)
                 {
-                    // ... then we are cleaning up the whole document, so there is no need to do expansive span tracking between cleaners.
+                    // ... then we are cleaning up the whole document, so there is no need to do expansive span tracking
+                    // between cleaners.
                     return await IterateAllCodeCleanupProvidersAsync(
                             document,
                             document,
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 var normalizedSpan = spans.ToNormalizedSpans();
                 if (CleanupWholeNode(root.FullSpan, normalizedSpan))
                 {
-                    // We are cleaning up the whole document, so there is no need to do expansive span tracking between cleaners.
+                    // We are cleaning up the whole document, so there is no need to do expansive span tracking between
+                    // cleaners.
                     return await IterateAllCodeCleanupProvidersAsync(
                             root,
                             root,
@@ -147,10 +151,12 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     cancellationToken
                 );
 
-                // If it urns out we don't need to annotate anything since all spans are merged to one span that covers the whole node...
+                // If it urns out we don't need to annotate anything since all spans are merged to one span that
+                // covers the whole node...
                 if (newNode == null)
                 {
-                    // ... then we are cleaning up the whole document, so there is no need to do expansive span tracking between cleaners.
+                    // ... then we are cleaning up the whole document, so there is no need to do expansive span tracking
+                    // between cleaners.
                     return await IterateAllCodeCleanupProvidersAsync(
                             root,
                             root,
@@ -264,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             }
 
             // Quick error check * we don't have any token, ignore this one.
-            // This can't happen unless one of cleaners violated the contract of only changing things inside of the provided span.
+            // This can't happen unless one of cleaners violated the contract of only changing things inside of
+            // the provided span.
             if (hasNoPreviousToken && hasNoNextToken)
             {
                 return false;
@@ -272,7 +279,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 
             // We don't have the previous token, but we do have one next token.
             // nextTokenMarker has hint to how to find the opposite marker.
-            // If we can't find the other side, then it means one of cleaners has violated the contract. Ignore span.
+            // If we can't find the other side, then it means one of cleaners has violated the contract. Ignore
+            // span.
             if (hasNoPreviousToken && hasOneNextToken)
             {
                 if (nextTokenMarker.OppositeMarkerType == SpanMarkerType.BeginningOfFile)
@@ -304,8 +312,10 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 return false;
             }
 
-            // Now the simple cases are done. Now we need to deal with cases where annotations found more than one corresponding token.
-            // Mostly it means one of cleaners violated the contract, so we can just ignore the span except in one cases where it involves the beginning and end of the tree.
+            // Now the simple cases are done. Now we need to deal with cases where annotations found more than
+            // one corresponding token.
+            // Mostly it means one of cleaners violated the contract, so we can just ignore the span except in
+            // one cases where it involves the beginning and end of the tree.
             Contract.ThrowIfFalse(hasMultiplePreviousToken || hasMultipleNextToken);
 
             // Check whether it is one of special cases or not
@@ -332,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 return true;
             }
 
-            // All other cases are invalid cases where one of code cleaners messed things up by moving around things it shouldn't move.
+            // All other cases are invalid cases where one of code cleaners messed things up by moving around
+            // things it shouldn't move.
             return false;
         }
 
@@ -389,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         }
 
         /// <summary>
-        /// Inject annotations into the node so that it can re-calculate spans for each code cleaner after each tree transformation.
+        /// Inject annotations into the node so that it can re-calculate spans for each code cleaner after
+        // each tree transformation.
         /// </summary>
         private static (
             SyntaxNode newNode,
@@ -461,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             }
 
             // Do a quick check.
-            // If, after all merges, the spans are merged into one span that covers the whole tree, return right away.
+            // If, after all merges, the spans are merged into one span that covers the whole tree, return right
+            // away.
             if (CleanupWholeNode(annotations))
             {
                 // This will indicate that no annotation is needed.
@@ -474,7 +487,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         }
 
         /// <summary>
-        /// Make sure annotations are positioned outside of any spans. If not, merge two adjacent spans to one.
+        /// Make sure annotations are positioned outside of any spans. If not, merge two adjacent spans to
+        // one.
         /// </summary>
         private static ImmutableArray<TextSpan> GetNonOverlappingSpans(
             SyntaxNode root,
@@ -505,7 +519,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                     includeDocumentationComments: true
                 );
 
-                // Make sure the previous and next tokens we found do not overlap with any existing spans. If they do, merge two spans.
+                // Make sure the previous and next tokens we found do not overlap with any existing spans. If they
+                // do, merge two spans.
                 previousToken =
                     (previousToken.RawKind == 0)
                         ? root.GetFirstToken(includeZeroWidth: true)
@@ -717,7 +732,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                         spans = GetSpans(root, spanGetter);
                     }
 
-                    // If we are at the end and there were no changes to the document, use the original document for the cleanup.
+                    // If we are at the end and there were no changes to the document, use the original document for the
+                    // cleanup.
                     if (current == count && currentDocument == annotatedDocument)
                     {
                         currentDocument = originalDocument;
@@ -816,7 +832,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                         spans = GetSpans(currentRoot, spanGetter);
                     }
 
-                    // If we are at the end and there were no changes to the document, use the original document for the cleanup.
+                    // If we are at the end and there were no changes to the document, use the original document for the
+                    // cleanup.
                     if (current == count && currentRoot == annotatedRoot)
                     {
                         currentRoot = originalRoot;

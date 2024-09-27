@@ -4,12 +4,15 @@
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
-///     A key that uniquely identifies the model for a given context. This is used to store and lookup
-///     a cached model for a given context. This default implementation uses the context type as they key, thus
+///     A key that uniquely identifies the model for a given context. This is used to store and
+// lookup
+///     a cached model for a given context. This default implementation uses the context type as
+// they key, thus
 ///     assuming that all contexts of a given type have the same model.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-model-caching">EF Core model caching</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-model-caching">EF Core model caching</see> for
+// more information and examples.
 /// </remarks>
 public class ModelCacheKey
 {
@@ -41,25 +44,29 @@ public class ModelCacheKey
     }
 
     /// <summary>
-    ///     Determines if this key is equivalent to a given key (i.e. if they are for the same context type).
+    ///     Determines if this key is equivalent to a given key (i.e. if they are for the same context
+    // type).
     /// </summary>
     /// <param name="other">
     ///     The key to compare this key to.
     /// </param>
     /// <returns>
-    ///     <see langword="true" /> if the key is for the same context type, otherwise <see langword="false" />.
+    ///     <see langword="true" /> if the key is for the same context type, otherwise <see
+    // langword="false" />.
     /// </returns>
     protected virtual bool Equals(ModelCacheKey other) =>
         _dbContextType == other._dbContextType && _designTime == other._designTime;
 
     /// <summary>
-    ///     Determines if this key is equivalent to a given object (i.e. if they are keys for the same context type).
+    ///     Determines if this key is equivalent to a given object (i.e. if they are keys for the same
+    // context type).
     /// </summary>
     /// <param name="obj">
     ///     The object to compare this key to.
     /// </param>
     /// <returns>
-    ///     <see langword="true" /> if the object is a <see cref="ModelCacheKey" /> and is for the same context type, otherwise
+    ///     <see langword="true" /> if the object is a <see cref="ModelCacheKey" /> and is for the same
+    // context type, otherwise
     ///     <see langword="false" />.
     /// </returns>
     public override bool Equals(object? obj) =>

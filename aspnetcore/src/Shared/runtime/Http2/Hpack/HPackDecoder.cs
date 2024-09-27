@@ -269,8 +269,10 @@ namespace System.Net.Http.HPack
         {
             if (TryDecodeInteger(data, ref currentIndex, out int intResult))
             {
-                // IntegerDecoder disallows overlong encodings, where an integer is encoded with more bytes than is strictly required.
-                // 0 should always be represented by a single byte, so we shouldn't need to check for it in the continuation case.
+                // IntegerDecoder disallows overlong encodings, where an integer is encoded with more bytes than is
+                // strictly required.
+                // 0 should always be represented by a single byte, so we shouldn't need to check for it in the
+                // continuation case.
                 Debug.Assert(
                     intResult != 0,
                     "A header name length of 0 should never be encoded with a continuation byte."
@@ -289,7 +291,8 @@ namespace System.Net.Http.HPack
         {
             if (TryDecodeInteger(data, ref currentIndex, out int intResult))
             {
-                // 0 should always be represented by a single byte, so we shouldn't need to check for it in the continuation case.
+                // 0 should always be represented by a single byte, so we shouldn't need to check for it in the
+                // continuation case.
                 Debug.Assert(
                     intResult != 0,
                     "A header value length of 0 should never be encoded with a continuation byte."

@@ -29,7 +29,8 @@ public static class WebRenderTreeBuilderExtensions
     /// for a specified event.
     /// </summary>
     /// <param name="builder">The <see cref="RenderTreeBuilder"/>.</param>
-    /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
+    /// <param name="sequence">An integer that represents the position of the instruction in the source
+    // code.</param>
     /// <param name="eventName">The name of the event to be affected.</param>
     /// <param name="value">True if the default action is to be prevented, otherwise false.</param>
     public static void AddEventPreventDefaultAttribute(
@@ -47,7 +48,8 @@ public static class WebRenderTreeBuilderExtensions
     /// propagating beyond the current element.
     /// </summary>
     /// <param name="builder">The <see cref="RenderTreeBuilder"/>.</param>
-    /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
+    /// <param name="sequence">An integer that represents the position of the instruction in the source
+    // code.</param>
     /// <param name="eventName">The name of the event to be affected.</param>
     /// <param name="value">True if propagation should be stopped here, otherwise false.</param>
     public static void AddEventStopPropagationAttribute(

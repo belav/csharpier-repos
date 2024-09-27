@@ -686,7 +686,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.regclass.regclass022.regclass022
 {
-    // <Title> Tests regular class auto property used in field initailizer outside of constructor.</Title>
+    // <Title> Tests regular class auto property used in field initailizer outside of
+    // constructor.</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>

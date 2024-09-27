@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis
         /// Generic type arguments, including those for containing types.
         /// </param>
         /// <param name="refersToNoPiaLocalType">
-        /// Flags for arguments. Each item indicates whether corresponding argument refers to NoPia local types.
+        /// Flags for arguments. Each item indicates whether corresponding argument refers to NoPia local
+        // types.
         /// </param>
         internal abstract TypeSymbol SubstituteTypeParameters(
             ModuleSymbol moduleSymbol,

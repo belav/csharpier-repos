@@ -81,55 +81,55 @@ namespace System.DirectoryServices
             sValues.Add(oValue);
         }
 
-        /*
-                public bool IsFixedSize
-                {
-                    get{return m_oKeys.IsFixedSize;}
-                }
-        
-                public bool IsReadOnly
-                {
-                    get{return m_oKeys.IsReadOnly;}
-                }
-        
-                public ICollection Keys
-                {
-                    get{return m_oValues.Keys;}
-                }
-                
-                public void Clear()
-                {
-                    m_oValues.Clear();
-                    m_oKeys.Clear();
-                }
-        
-                public bool Contains(object oKey)
-                {
-                    return m_oValues.Contains(oKey);
-                }
-        
-                public bool ContainsKey(object oKey)
-                {
-                    return m_oValues.ContainsKey(oKey);
-                }
-        
-                public IDictionaryEnumerator GetEnumerator()
-                {
-                    return m_oValues.GetEnumerator();
-                }
-        
-                public void Remove(object oKey)
-                {
-                    m_oValues.Remove(oKey);
-                    m_oKeys.Remove(oKey);
-                }
-               
-                public object this[object oKey]
-                {
-                    get{return m_oValues[oKey];}
-                    set{m_oValues[oKey] = value;}
-                }
-        */
+/*
+public bool IsFixedSize
+{
+get{return m_oKeys.IsFixedSize;}
+}
+
+public bool IsReadOnly
+{
+get{return m_oKeys.IsReadOnly;}
+}
+
+public ICollection Keys
+{
+get{return m_oValues.Keys;}
+}
+
+public void Clear()
+{
+m_oValues.Clear();
+m_oKeys.Clear();
+}
+
+public bool Contains(object oKey)
+{
+return m_oValues.Contains(oKey);
+}
+
+public bool ContainsKey(object oKey)
+{
+return m_oValues.ContainsKey(oKey);
+}
+
+public IDictionaryEnumerator GetEnumerator()
+{
+return m_oValues.GetEnumerator();
+}
+
+public void Remove(object oKey)
+{
+m_oValues.Remove(oKey);
+m_oKeys.Remove(oKey);
+}
+
+public object this[object oKey]
+{
+get{return m_oValues[oKey];}
+set{m_oValues[oKey] = value;}
+}
+*/
         bool Contains(object oValues)
         {
             return sValues.Contains(oValues);
@@ -145,11 +145,11 @@ namespace System.DirectoryServices
             get { return (SearchResult)sValues[index]; }
         }
 
-        /*		public ICollection Values
-                {
-                    get{return m_oValues.Values;}
-                }
-        */
+/*		public ICollection Values
+{
+get{return m_oValues.Values;}
+}
+*/
         public int IndexOf(SearchResult result)
         {
             return sValues.IndexOf(result);

@@ -95,7 +95,8 @@ namespace Roslyn.Utilities
         internal static class TestAccessor
         {
             /// <summary>
-            /// Creates a <see cref="ReferenceHolder{T}"/> for a weakly-held reference that has since been collected.
+            /// Creates a <see cref="ReferenceHolder{T}"/> for a weakly-held reference that has since been
+            // collected.
             /// </summary>
             /// <param name="hashCode">The hash code of the collected value.</param>
             /// <returns>A weak <see cref="ReferenceHolder{T}"/> which was already collected.</returns>

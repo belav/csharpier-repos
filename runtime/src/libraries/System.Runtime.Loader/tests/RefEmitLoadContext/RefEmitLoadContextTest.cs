@@ -16,7 +16,8 @@ namespace System.Runtime.Loader.Tests
     {
         protected override Assembly Load(AssemblyName assemblyName)
         {
-            // We implement Load override since the assembly being loaded (this assembly) is already loaded in the DefaultContext
+            // We implement Load override since the assembly being loaded (this assembly) is already loaded in
+            // the DefaultContext
             // and we want to load a different copy of it in the custom load context.
             var loadPath = Path.Combine(
                 RefEmitLoadContextTests.s_loadFromPath,
@@ -51,7 +52,8 @@ namespace System.Runtime.Loader.Tests
             // Finally, copy the file to the temp location from where we expect to load it
             File.Copy(sourcePath, targetPath);
 
-            // Copy the current assembly to the target location as well since we will load it in the custom load context via the
+            // Copy the current assembly to the target location as well since we will load it in the custom load
+            // context via the
             // RefEmitted assembly.
             var asmCurrentAssembly = typeof(RefEmitLoadContext).GetTypeInfo().Assembly.GetName();
             var pathCurrentAssembly = typeof(RefEmitLoadContext).GetTypeInfo().Assembly.Location;
@@ -132,13 +134,15 @@ namespace System.Runtime.Loader.Tests
             var asmRefEmitLoadedStatic = method.Invoke(null, new object[] { assemblyStaticToLoad });
             Assert.NotNull(asmRefEmitLoadedStatic);
 
-            // Load context of the statically loaded assembly is the custom load context in which dynamic assembly was created
+            // Load context of the statically loaded assembly is the custom load context in which dynamic
+            // assembly was created
             Assert.Equal(
                 loadContextRefEmitAssembly,
                 AssemblyLoadContext.GetLoadContext((Assembly)asmRefEmitLoadedStatic)
             );
 
-            // Enumerate the assemblies in the AppDomain and confirm that the Dynamically generated assembly is present.
+            // Enumerate the assemblies in the AppDomain and confirm that the Dynamically generated assembly is
+            // present.
             var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             bool fDynamicAssemblyFound = false;
             foreach (Assembly asm in loadedAssemblies)

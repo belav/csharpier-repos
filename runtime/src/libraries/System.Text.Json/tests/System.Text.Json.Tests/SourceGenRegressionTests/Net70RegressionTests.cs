@@ -208,7 +208,8 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
                 ),
             };
 
-            // Unlike v6, v7 Contexts do implement IJsonTypeInfoResolver so combined resolvers will produce the expected output.
+            // Unlike v6, v7 Contexts do implement IJsonTypeInfoResolver so combined resolvers will produce the
+            // expected output.
             string expected = JsonSerializer.Serialize(
                 new HighLowTemps(),
                 Net70GeneratedContext.Default.HighLowTemps

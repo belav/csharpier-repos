@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -28,7 +29,8 @@ namespace System.Net.Http.Formatting.Parsers
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpStatusLineParser"/> class.
         /// </summary>
-        /// <param name="httpResponse"><see cref="HttpUnsortedResponse"/> instance where the response line properties will be set as they are parsed.</param>
+        /// <param name="httpResponse"><see cref="HttpUnsortedResponse"/> instance where the response line
+        // properties will be set as they are parsed.</param>
         /// <param name="maxStatusLineSize">Maximum length of HTTP header.</param>
         public HttpStatusLineParser(HttpUnsortedResponse httpResponse, int maxStatusLineSize)
         {
@@ -63,7 +65,8 @@ namespace System.Net.Http.Formatting.Parsers
 
         /// <summary>
         /// Parse an HTTP status line.
-        /// Bytes are parsed in a consuming manner from the beginning of the response buffer meaning that the same bytes can not be
+        /// Bytes are parsed in a consuming manner from the beginning of the response buffer meaning that
+        // the same bytes can not be
         /// present in the response buffer.
         /// </summary>
         /// <param name="buffer">Response buffer from where response is read</param>

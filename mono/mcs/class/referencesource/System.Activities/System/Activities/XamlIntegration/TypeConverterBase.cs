@@ -14,7 +14,8 @@ namespace System.Activities.XamlIntegration
 
     public abstract class TypeConverterBase : TypeConverter
     {
-        // Give the Lazy<T> a Func<T> to create the ConcurrentDictionary<Type, TypeConverterHelper> because TypeConverterHelper is
+        // Give the Lazy<T> a Func<T> to create the ConcurrentDictionary<Type, TypeConverterHelper> because
+        // TypeConverterHelper is
         // internal and we want to avoid the demand for ReflectionPermission(MemberAccess).
         Lazy<ConcurrentDictionary<Type, TypeConverterHelper>> helpers = new Lazy<
             ConcurrentDictionary<Type, TypeConverterHelper>

@@ -18,10 +18,12 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// A loop binder that (1) knows how to bind foreach loops and (2) has the foreach iteration variable in scope.
+    /// A loop binder that (1) knows how to bind foreach loops and (2) has the foreach iteration
+    // variable in scope.
     /// </summary>
     /// <remarks>
-    /// This binder produces BoundForEachStatements.  The lowering described in the spec is performed in ControlFlowRewriter.
+    /// This binder produces BoundForEachStatements.  The lowering described in the spec is performed in
+    // ControlFlowRewriter.
     /// </remarks>
     internal sealed class ForEachLoopBinder : LoopBinder
     {
@@ -212,7 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Like BindForEachParts, but only bind the deconstruction part of the foreach, for purpose of inferring the types of the declared locals.
+        /// Like BindForEachParts, but only bind the deconstruction part of the foreach, for purpose of
+        // inferring the types of the declared locals.
         /// </summary>
         internal override BoundStatement BindForEachDeconstruction(
             BindingDiagnosticBag diagnostics,
@@ -238,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ExpressionSyntax variables = ((ForEachVariableStatementSyntax)_syntax).Variable;
 
-            // Tracking narrowest safe-to-escape scope by default, the proper val escape will be set when doing full binding of the foreach statement
+            // Tracking narrowest safe-to-escape scope by default, the proper val escape will be set when doing
+            // full binding of the foreach statement
             var valuePlaceholder = new BoundDeconstructValuePlaceholder(
                 _syntax.Expression,
                 variableSymbol: null,
@@ -293,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 out builder
             );
 
-            // These occur when special types are missing or malformed, or the patterns are incompletely implemented.
+            // These occur when special types are missing or malformed, or the patterns are incompletely
+            // implemented.
             hasErrors |= builder.IsIncomplete;
 
             BoundAwaitableInfo awaitInfo = null;
@@ -581,8 +586,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics
             );
 
-            // NOTE: in error cases, binder may collect all kind of variables, not just formally declared iteration variables.
-            //       As a matter of error recovery, we will treat such variables the same as the iteration variables.
+            // NOTE: in error cases, binder may collect all kind of variables, not just formally declared
+            // iteration variables.
+            //       As a matter of error recovery, we will treat such variables the same as the iteration
+            // variables.
             //       I.E. - they will be considered declared and assigned in each iteration step.
             ImmutableArray<LocalSymbol> iterationVariables = this.Locals;
 
@@ -600,7 +607,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 || boundIterationVariableType.HasErrors
                 || iterationVariableType.Type.IsErrorType();
 
-            // Skip the conversion checks and array/enumerator differentiation if we know we have an error (except local name conflicts).
+            // Skip the conversion checks and array/enumerator differentiation if we know we have an error
+            // (except local name conflicts).
             if (hasErrors)
             {
                 return new BoundForEachStatement(
@@ -636,8 +644,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 foreachKeyword,
                 isDelegateConversion: false
             );
-            // MoveNext is an instance method, so it does not need to have unmanaged callers only diagnostics reported.
-            // Either a diagnostic was reported at the declaration of the method (for the invalid attribute), or MoveNext
+            // MoveNext is an instance method, so it does not need to have unmanaged callers only diagnostics
+            // reported.
+            // Either a diagnostic was reported at the declaration of the method (for the invalid attribute), or
+            // MoveNext
             // is marked as not supported and we won't get here in the first place (for metadata import).
             ReportDiagnosticsIfObsolete(
                 diagnostics,
@@ -658,7 +668,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasBaseReceiver: false
             );
 
-            // We want to convert from inferredType in the array/string case and builder.ElementType in the enumerator case,
+            // We want to convert from inferredType in the array/string case and builder.ElementType in the
+            // enumerator case,
             // but it turns out that these are equivalent (when both are available).
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
@@ -767,7 +778,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             createConversionDiagnostics.Free();
 
             // Spec (§8.8.4):
-            // If the type X of expression is dynamic then there is an implicit conversion from >>expression<< (not the type of the expression)
+            // If the type X of expression is dynamic then there is an implicit conversion from >>expression<<
+            // (not the type of the expression)
             // to the System.Collections.IEnumerable interface (§6.1.8).
             Conversion collectionConversionClassification =
                 this.Conversions.ClassifyConversionFromExpression(
@@ -880,7 +892,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     ||
                     // For compat behavior, we can enumerate over System.String even if it's not IEnumerable. That will
-                    // result in an explicit reference conversion in the bound nodes, but that conversion won't be emitted.
+                    // result in an explicit reference conversion in the bound nodes, but that conversion won't be
+                    // emitted.
                     (
                         collectionConversionClassification.Kind == ConversionKind.ExplicitReference
                         && collectionExpr.Type.SpecialType == SpecialType.System_String
@@ -1064,7 +1077,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             TypeSymbol collectionExprType = collectionExpr.Type;
 
-            // If collectionExprType is a nullable type, then use the underlying type and take the value (i.e. .Value) of collectionExpr.
+            // If collectionExprType is a nullable type, then use the underlying type and take the value (i.e.
+            // .Value) of collectionExpr.
             // This behavior is not spec'd, but it's what Dev10 does.
             if ((object)collectionExprType != null && collectionExprType.IsNullableType())
             {
@@ -1116,15 +1130,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///   2) Enumerator type
         ///   3) Element type
         ///
-        /// The implementation details are a bit different.  If we're iterating over a string or an array, then we don't need to record anything
-        /// but the inferredType (in case the iteration variable is implicitly typed).  If we're iterating over anything else, then we want the
+        /// The implementation details are a bit different.  If we're iterating over a string or an array,
+        // then we don't need to record anything
+        /// but the inferredType (in case the iteration variable is implicitly typed).  If we're iterating
+        // over anything else, then we want the
         /// inferred type plus a ForEachEnumeratorInfo.Builder with:
         ///   1) Collection type
         ///   2) Element type
-        ///   3) GetEnumerator (or GetAsyncEnumerator) method of the collection type (return type will be the enumerator type from the spec)
+        ///   3) GetEnumerator (or GetAsyncEnumerator) method of the collection type (return type will be
+        // the enumerator type from the spec)
         ///   4) Current property and MoveNext (or MoveNextAsync) method of the enumerator type
         ///
-        /// The caller will have to do some extra conversion checks before creating a ForEachEnumeratorInfo for the BoundForEachStatement.
+        /// The caller will have to do some extra conversion checks before creating a ForEachEnumeratorInfo
+        // for the BoundForEachStatement.
         /// </summary>
         /// <param name="builder">Builder to fill in (partially, all but conversions).</param>
         /// <param name="collectionExpr">The expression over which to iterate.</param>
@@ -1520,7 +1538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!isAsync && IsIEnumerable(unwrappedCollectionExprType))
                 {
                     collectionExpr = unwrappedCollectionExpr;
-                    // This indicates a problem with the special IEnumerable type - it should have satisfied the GetEnumerator pattern.
+                    // This indicates a problem with the special IEnumerable type - it should have satisfied the
+                    // GetEnumerator pattern.
                     diagnostics.Add(
                         ErrorCode.ERR_ForEachMissingMember,
                         collectionSyntax.Location,
@@ -1532,7 +1551,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (isAsync && IsIAsyncEnumerable(unwrappedCollectionExprType))
                 {
                     collectionExpr = unwrappedCollectionExpr;
-                    // This indicates a problem with the well-known IAsyncEnumerable type - it should have satisfied the GetAsyncEnumerator pattern.
+                    // This indicates a problem with the well-known IAsyncEnumerable type - it should have satisfied the
+                    // GetAsyncEnumerator pattern.
                     diagnostics.Add(
                         ErrorCode.ERR_AwaitForEachMissingMember,
                         collectionSyntax.Location,
@@ -1562,7 +1582,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // COMPAT:
                 // In some rare cases, like MicroFramework, System.String does not implement foreach pattern.
                 // For compat reasons we must still treat System.String as valid to use in a foreach
-                // Similarly to the cases with array and dynamic, we will default to IEnumerable for binding purposes.
+                // Similarly to the cases with array and dynamic, we will default to IEnumerable for binding
+                // purposes.
                 // Lowering will not use iterator info with strings, so it is ok.
                 if (!isAsync && collectionExprType.SpecialType == SpecialType.System_String)
                 {
@@ -1731,12 +1752,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         isOptional: false
                     );
 
-                    // Well-known members are matched by signature: we shouldn't find it if it doesn't have exactly 1 parameter.
+                    // Well-known members are matched by signature: we shouldn't find it if it doesn't have exactly 1
+                    // parameter.
                     Debug.Assert(getEnumeratorMethod is null or { ParameterCount: 1 });
 
                     if (getEnumeratorMethod?.Parameters[0].IsOptional == false)
                     {
-                        // This indicates a problem with the well-known IAsyncEnumerable type - it should have an optional cancellation token.
+                        // This indicates a problem with the well-known IAsyncEnumerable type - it should have an optional
+                        // cancellation token.
                         diagnostics.Add(
                             ErrorCode.ERR_AwaitForEachMissingMember,
                             collectionSyntax.Location,
@@ -1774,8 +1797,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         expanded: false,
                         collectionExpr.Syntax,
                         diagnostics,
-                        // C# 8 shipped allowing the CancellationToken of `IAsyncEnumerable.GetAsyncEnumerator` to be non-optional,
-                        // filling in a default value in that case. https://github.com/dotnet/roslyn/issues/50182 tracks making
+                        // C# 8 shipped allowing the CancellationToken of `IAsyncEnumerable.GetAsyncEnumerator` to be
+                        // non-optional,
+                        // filling in a default value in that case. https://github.com/dotnet/roslyn/issues/50182 tracks
+                        // making
                         // this an error and breaking the scenario.
                         assertMissingParametersAreOptional: false
                     );
@@ -1883,7 +1908,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // We don't know the runtime type, so we will have to insert a runtime check for IDisposable (with a conditional call to IDisposable.Dispose).
+            // We don't know the runtime type, so we will have to insert a runtime check for IDisposable (with a
+            // conditional call to IDisposable.Dispose).
             builder.NeedsDisposal = true;
             return EnumeratorResult.Succeeded;
         }
@@ -1910,9 +1936,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            // NOTE: if IDisposable is not available at all, no diagnostics will be reported - we will just assume that
-            // the enumerator is not disposable.  If it has IDisposable in its interface list, there will be a diagnostic there.
-            // If IDisposable is available but its Dispose method is not, then diagnostics will be reported only if the enumerator
+            // NOTE: if IDisposable is not available at all, no diagnostics will be reported - we will just
+            // assume that
+            // the enumerator is not disposable.  If it has IDisposable in its interface list, there will be a
+            // diagnostic there.
+            // If IDisposable is available but its Dispose method is not, then diagnostics will be reported only
+            // if the enumerator
             // is potentially disposable.
 
             TypeSymbol enumeratorType = builder.GetEnumeratorInfo.Method.ReturnType;
@@ -2033,7 +2062,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // CONSIDER:
-            // For arrays and string none of these members will actually be emitted, so it seems strange to prevent compilation if they can't be found.
+            // For arrays and string none of these members will actually be emitted, so it seems strange to
+            // prevent compilation if they can't be found.
             // skip this work in the batch case?
             builder.GetEnumeratorInfo = GetParameterlessSpecialTypeMemberInfo(
                 SpecialMember.System_Collections_IEnumerable__GetEnumerator,
@@ -2060,19 +2090,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
             );
 
-            // We don't know the runtime type, so we will have to insert a runtime check for IDisposable (with a conditional call to IDisposable.Dispose).
+            // We don't know the runtime type, so we will have to insert a runtime check for IDisposable (with a
+            // conditional call to IDisposable.Dispose).
             builder.NeedsDisposal = true;
             return builder;
         }
 
         /// <summary>
-        /// Check for a GetEnumerator (or GetAsyncEnumerator) method on collectionExprType.  Failing to satisfy the pattern is not an error -
+        /// Check for a GetEnumerator (or GetAsyncEnumerator) method on collectionExprType.  Failing to
+        // satisfy the pattern is not an error -
         /// it just means that we have to check for an interface instead.
         /// </summary>
         /// <param name="collectionExpr">Expression over which to iterate.</param>
         /// <param name="diagnostics">Populated with *warnings* if there are near misses.</param>
-        /// <param name="builder">Builder to fill in. <see cref="ForEachEnumeratorInfo.Builder.GetEnumeratorInfo"/> set if the pattern in satisfied.</param>
-        /// <returns>True if the method was found (still have to verify that the return (i.e. enumerator) type is acceptable).</returns>
+        /// <param name="builder">Builder to fill in. <see
+        // cref="ForEachEnumeratorInfo.Builder.GetEnumeratorInfo"/> set if the pattern in satisfied.</param>
+        /// <returns>True if the method was found (still have to verify that the return (i.e. enumerator)
+        // type is acceptable).</returns>
         /// <remarks>
         /// Only adds warnings, so does not affect control flow (i.e. no need to check for failure).
         /// </remarks>
@@ -2127,7 +2161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="patternType">Type to search.</param>
         /// <param name="methodName">Method to search for.</param>
         /// <param name="lookupResult">Passed in for reusability.</param>
-        /// <param name="warningsOnly">True if failures should result in warnings; false if they should result in errors.</param>
+        /// <param name="warningsOnly">True if failures should result in warnings; false if they should
+        // result in errors.</param>
         /// <param name="diagnostics">Populated with binding diagnostics.</param>
         /// <returns>The desired method or null.</returns>
         private MethodArgumentInfo FindForEachPatternMethod(
@@ -2143,7 +2178,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(lookupResult.IsClear);
 
-            // Not using LookupOptions.MustBeInvocableMember because we don't want the corresponding lookup error.
+            // Not using LookupOptions.MustBeInvocableMember because we don't want the corresponding lookup
+            // error.
             // We filter out non-methods below.
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
@@ -2241,7 +2277,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            // We create a dummy receiver of the invocation so MethodInvocationOverloadResolution knows it was invoked from an instance, not a type
+            // We create a dummy receiver of the invocation so MethodInvocationOverloadResolution knows it was
+            // invoked from an instance, not a type
             var dummyReceiver = new BoundImplicitReceiver(collectionSyntax, patternType);
             this.OverloadResolution.MethodInvocationOverloadResolution(
                 methods: candidateMethods,
@@ -2279,7 +2316,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (result.CallsAreOmitted(syntax.SyntaxTree))
                 {
-                    // Calls to this method are omitted in the current syntax tree, i.e it is either a partial method with no implementation part OR a conditional method whose condition is not true in this source file.
+                    // Calls to this method are omitted in the current syntax tree, i.e it is either a partial method
+                    // with no implementation part OR a conditional method whose condition is not true in this source
+                    // file.
                     // We don't want to allow this case.
                     result = null;
                 }
@@ -2367,7 +2406,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (result.CallsAreOmitted(syntax.SyntaxTree))
                 {
-                    // Calls to this method are omitted in the current syntax tree, i.e it is either a partial method with no implementation part OR a conditional method whose condition is not true in this source file.
+                    // Calls to this method are omitted in the current syntax tree, i.e it is either a partial method
+                    // with no implementation part OR a conditional method whose condition is not true in this source
+                    // file.
                     // We don't want to allow this case.
                     methodGroupResolutionResult.Free();
                     analyzedArguments.Free();
@@ -2385,7 +2426,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 diagnostics.Add(syntax, useSiteInfo);
 
-                // Unconditionally convert here, to match what we set the ConvertedExpression to in the main BoundForEachStatement node.
+                // Unconditionally convert here, to match what we set the ConvertedExpression to in the main
+                // BoundForEachStatement node.
                 Debug.Assert(!collectionConversion.IsUserDefined);
                 collectionExpr = new BoundConversion(
                     collectionExpr.Syntax,
@@ -2448,7 +2490,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Called after it is determined that the expression being enumerated is of a type that
-        /// has a GetEnumerator (or GetAsyncEnumerator) method.  Checks to see if the return type of the GetEnumerator
+        /// has a GetEnumerator (or GetAsyncEnumerator) method.  Checks to see if the return type of the
+        // GetEnumerator
         /// method is suitable (i.e. has Current and MoveNext for regular case,
         /// or Current and MoveNextAsync for async case).
         /// </summary>
@@ -2559,7 +2602,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (!isAccessible)
                     {
-                        // NOTE: per Dev10 and the spec, the property has to be public, but the accessor just has to be accessible
+                        // NOTE: per Dev10 and the spec, the property has to be public, but the accessor just has to be
+                        // accessible
                         return false;
                     }
                 }
@@ -2609,7 +2653,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            // SPEC VIOLATION: Dev10 checks the return type of the original definition, rather than the return type of the actual method.
+            // SPEC VIOLATION: Dev10 checks the return type of the original definition, rather than the return
+            // type of the actual method.
             return moveNextMethodCandidate.OriginalDefinition.ReturnType.SpecialType
                 != SpecialType.System_Boolean;
         }
@@ -2827,12 +2872,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Report appropriate diagnostics when lookup of a pattern member (i.e. GetEnumerator, Current, or MoveNext) fails.
+        /// Report appropriate diagnostics when lookup of a pattern member (i.e. GetEnumerator, Current, or
+        // MoveNext) fails.
         /// </summary>
         /// <param name="lookupResult">Failed lookup result.</param>
         /// <param name="patternType">Type in which member was looked up.</param>
         /// <param name="memberName">Name of looked up member.</param>
-        /// <param name="warningsOnly">True if failures should result in warnings; false if they should result in errors.</param>
+        /// <param name="warningsOnly">True if failures should result in warnings; false if they should
+        // result in errors.</param>
         /// <param name="diagnostics">Populated appropriately.</param>
         private void ReportPatternMemberLookupDiagnostics(
             ExpressionSyntax collectionSyntax,
@@ -2905,7 +2952,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 : null;
         }
 
-        /// <param name="extensionReceiverOpt">If method is an extension method, this must be non-null.</param>
+        /// <param name="extensionReceiverOpt">If method is an extension method, this must be
+        // non-null.</param>
         private MethodArgumentInfo BindDefaultArguments(
             MethodSymbol method,
             BoundExpression extensionReceiverOpt,

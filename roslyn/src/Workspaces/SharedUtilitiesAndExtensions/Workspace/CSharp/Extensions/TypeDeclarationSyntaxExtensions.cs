@@ -162,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 appendNewLineIfMissing: true
             );
 
-            // If we are adding braces, then remove any semicolon to we convert something like `record class X();` to
+            // If we are adding braces, then remove any semicolon to we convert something like `record class
+            // X();` to
             // `record class X { }`
             var addedBraces =
                 openBrace != typeDeclaration.OpenBraceToken

@@ -201,7 +201,8 @@ namespace Moq.Tests
             sequenceSetup.Returns("2"); // configure 2nd response
             sequenceSetup.Returns("3"); // configure 3nd response
 
-            // Act: 3rd invocation. will we get back the 2nd configured response, or the 3rd (since we're on the 3rd invocation)?
+            // Act: 3rd invocation. will we get back the 2nd configured response, or the 3rd (since we're on the
+            // 3rd invocation)?
             string actual = mock.Object.Value;
 
             // Assert: no configured response should be skipped, therefore we should get the 2nd one

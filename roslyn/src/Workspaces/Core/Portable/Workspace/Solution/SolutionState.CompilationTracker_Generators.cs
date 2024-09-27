@@ -93,7 +93,8 @@ internal partial class SolutionState
             CancellationToken cancellationToken
         )
         {
-            // First try to compute the SG docs in the remote process (if we're the host process), syncing the results
+            // First try to compute the SG docs in the remote process (if we're the host process), syncing the
+            // results
             // back over to us to ensure that both processes are in total agreement about the SG docs and their
             // contents.
             var result = await TryComputeNewGeneratorInfoInRemoteProcessAsync(
@@ -107,7 +108,8 @@ internal partial class SolutionState
             if (result.HasValue)
                 return result.Value;
 
-            // If that failed (OOP crash, or we are the OOP process ourselves), then generate the SG docs locally.
+            // If that failed (OOP crash, or we are the OOP process ourselves), then generate the SG docs
+            // locally.
             return await ComputeNewGeneratorInfoInCurrentProcessAsync(
                     solution,
                     compilationWithoutGeneratedFiles,
@@ -141,8 +143,10 @@ internal partial class SolutionState
             if (client is null)
                 return null;
 
-            // We're going to be making multiple calls over to OOP.  No point in resyncing data multiple times.  Keep a
-            // single connection, and keep this solution instance alive (and synced) on both sides of the connection
+            // We're going to be making multiple calls over to OOP.  No point in resyncing data multiple times.
+            // Keep a
+            // single connection, and keep this solution instance alive (and synced) on both sides of the
+            // connection
             // throughout the calls.
             var listenerProvider = solution
                 .Services.ExportProvider.GetExports<IAsynchronousOperationListenerProvider>()
@@ -156,7 +160,8 @@ internal partial class SolutionState
                 listenerProvider.GetListener(FeatureAttribute.Workspace)
             );
 
-            // First, grab the info from our external host about the generated documents it has for this project.
+            // First, grab the info from our external host about the generated documents it has for this
+            // project.
             var projectId = this.ProjectState.Id;
             var infosOpt = await connection
                 .TryInvokeAsync(
@@ -174,7 +179,8 @@ internal partial class SolutionState
             if (!infosOpt.HasValue)
                 return null;
 
-            // Next, figure out what is different locally.  Specifically, what documents we don't know about, or we
+            // Next, figure out what is different locally.  Specifically, what documents we don't know about, or
+            // we
             // know about but whose text contents are different.
             using var _1 = ArrayBuilder<DocumentId>.GetInstance(out var documentsToAddOrUpdate);
             using var _2 = PooledDictionary<DocumentId, int>.GetInstance(out var documentIdToIndex);
@@ -201,7 +207,8 @@ internal partial class SolutionState
                 documentsToAddOrUpdate.Add(documentId);
             }
 
-            // If we produced just as many documents as before, and none of them required any changes, then we can
+            // If we produced just as many documents as before, and none of them required any changes, then we
+            // can
             // reuse the prior compilation.
             if (
                 infos.Length == generatorInfo.Documents.Count
@@ -218,7 +225,8 @@ internal partial class SolutionState
                 );
             }
 
-            // Either we generated a different number of files, and/or we had contents of files that changed. Ensure
+            // Either we generated a different number of files, and/or we had contents of files that changed.
+            // Ensure
             // we know the contents of any new/changed files.
             var generatedSourcesOpt = await connection
                 .TryInvokeAsync(
@@ -240,7 +248,8 @@ internal partial class SolutionState
             var generatedSources = generatedSourcesOpt.Value;
             Contract.ThrowIfTrue(generatedSources.Length != documentsToAddOrUpdate.Count);
 
-            // Now go through and produce the new document states, using what we have already if it is unchanged, or
+            // Now go through and produce the new document states, using what we have already if it is
+            // unchanged, or
             // what we have retrieved for anything new/changed.
             using var generatedDocumentsBuilder =
                 TemporaryArray<SourceGeneratedDocumentState>.Empty;
@@ -355,7 +364,8 @@ internal partial class SolutionState
             else
             {
 #if DEBUG
-                // Assert that the generator driver is in sync with our additional document states; there's not a public
+                // Assert that the generator driver is in sync with our additional document states; there's not a
+                // public
                 // API to get this, but we'll reflect in DEBUG-only.
                 var driverType = generatorInfo.Driver.GetType();
                 var stateMember = driverType.GetField(
@@ -382,12 +392,18 @@ internal partial class SolutionState
 
             Contract.ThrowIfNull(generatorInfo.Driver);
 
-            // HACK HACK HACK HACK to address https://github.com/dotnet/roslyn/issues/59818. There, we were running into issues where
-            // a generator being present and consuming syntax was causing all red nodes to be processed. This was problematic when
-            // Razor design time files are also fed in, since those files tend to be quite large. The Razor design time files
-            // aren't produced via a generator, but rather via our legacy IDynamicFileInfo mechanism, so it's also a bit strange
-            // we'd even give them to other generators since that doesn't match the real compiler anyways. This simply removes
-            // all of those trees in an effort to speed things up, and also ensure the design time compilations are a bit more accurate.
+            // HACK HACK HACK HACK to address https://github.com/dotnet/roslyn/issues/59818. There, we were
+            // running into issues where
+            // a generator being present and consuming syntax was causing all red nodes to be processed. This
+            // was problematic when
+            // Razor design time files are also fed in, since those files tend to be quite large. The Razor
+            // design time files
+            // aren't produced via a generator, but rather via our legacy IDynamicFileInfo mechanism, so it's
+            // also a bit strange
+            // we'd even give them to other generators since that doesn't match the real compiler anyways. This
+            // simply removes
+            // all of those trees in an effort to speed things up, and also ensure the design time compilations
+            // are a bit more accurate.
             using var _ = ArrayBuilder<SyntaxTree>.GetInstance(out var treesToRemove);
 
             foreach (var documentState in ProjectState.DocumentStates.States)
@@ -422,10 +438,14 @@ internal partial class SolutionState
                 ProjectState
             );
 
-            // We may be able to reuse compilationWithStaleGeneratedTrees if the generated trees are identical. We will assign null
-            // to compilationWithStaleGeneratedTrees if we at any point realize it can't be used. We'll first check the count of trees
-            // if that changed then we absolutely can't reuse it. But if the counts match, we'll then see if each generated tree
-            // content is identical to the prior generation run; if we find a match each time, then the set of the generated trees
+            // We may be able to reuse compilationWithStaleGeneratedTrees if the generated trees are identical.
+            // We will assign null
+            // to compilationWithStaleGeneratedTrees if we at any point realize it can't be used. We'll first
+            // check the count of trees
+            // if that changed then we absolutely can't reuse it. But if the counts match, we'll then see if
+            // each generated tree
+            // content is identical to the prior generation run; if we find a match each time, then the set of
+            // the generated trees
             // and the prior generated trees are identical.
             if (compilationWithStaleGeneratedTrees != null)
             {
@@ -491,7 +511,8 @@ internal partial class SolutionState
                             )
                         );
 
-                        // The count of trees was the same, but something didn't match up. Since we're here, at least one tree
+                        // The count of trees was the same, but something didn't match up. Since we're here, at least one
+                        // tree
                         // was added, and an equal number must have been removed. Rather than trying to incrementally update
                         // this compilation, we'll just toss this and re-add all the trees.
                         compilationWithStaleGeneratedTrees = null;

@@ -192,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             //
             // It's no longer safe to use pattern-matching because 'field is string s' would never be true.
             //
-            // Additionally, also bail out if the assigned local is referenced (i.e. read/write/nameof) up to the point of null check.
+            // Additionally, also bail out if the assigned local is referenced (i.e. read/write/nameof) up to
+            // the point of null check.
             //      var s = field as string;
             //      MethodCall(flag: s == null);
             //      if (s != null) { ... }
@@ -255,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
             if (comparisonEnclosingBlock != enclosingBlock)
             {
-                // ok, the local variable is defined in a different block than the block that the `x != null` is in. If
+                // ok, the local variable is defined in a different block than the block that the `x != null` is in.
+                // If
                 // we then update the `x != null` to `o is X x` we may break scoping if the variable is referenced
                 // before/after that scope.
                 foreach (var descendentNode in enclosingBlock.DescendantNodes())
@@ -278,8 +280,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 }
             }
 
-            // If we have an annotated local (like `string? s = o as string`) we can't convert this to `o is string s`
-            // if there are any assignments to `s` that end up assigning a `string?`.  These will now give a nullable
+            // If we have an annotated local (like `string? s = o as string`) we can't convert this to `o is
+            // string s`
+            // if there are any assignments to `s` that end up assigning a `string?`.  These will now give a
+            // nullable
             // warning.
             if (localSymbol.Type.NullableAnnotation == NullableAnnotation.Annotated)
             {

@@ -293,7 +293,8 @@ class X
             Assert.Equal(3, ErrorFacts.GetWarningLevel(ErrorCode.WRN_IsDynamicIsConfusing));
             Assert.Equal(2, ErrorFacts.GetWarningLevel(ErrorCode.WRN_NoSources));
 
-            // If a new warning is added, this test will fail and adding the new case with the expected error level will be required.
+            // If a new warning is added, this test will fail and adding the new case with the expected error
+            // level will be required.
 
             foreach (ErrorCode errorCode in Enum.GetValues(typeof(ErrorCode)))
             {
@@ -631,7 +632,8 @@ public class C
             option = TestOptions.ReleaseExe.WithGeneralDiagnosticOption(ReportDiagnostic.Error);
             CreateCompilation(text, options: option)
                 .VerifyDiagnostics(
-                    // (10,19): error CS0420: Warning as Error: 'C.i': a reference to a volatile field will not be treated as volatile
+                    // (10,19): error CS0420: Warning as Error: 'C.i': a reference to a volatile field will not be
+                    // treated as volatile
                     //         Test (ref i);
                     Diagnostic(ErrorCode.WRN_VolatileByRef, "i")
                         .WithArguments("C.i")
@@ -644,7 +646,8 @@ public class C
                 .WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
                 .VerifyDiagnostics(
-                    // (10,19): error CS0420: Warning as Error: 'C.i': a reference to a volatile field will not be treated as volatile
+                    // (10,19): error CS0420: Warning as Error: 'C.i': a reference to a volatile field will not be
+                    // treated as volatile
                     //         Test (ref i);
                     Diagnostic(ErrorCode.WRN_VolatileByRef, "i")
                         .WithArguments("C.i")
@@ -2239,7 +2242,8 @@ public class C
         [Fact]
         public void PragmaWarning_MostKeywordsAreAllowedAsErrorCodes()
         {
-            // Lexing / parsing of identifiers inside #pragma is identical to that inside #define for the below cases.
+            // Lexing / parsing of identifiers inside #pragma is identical to that inside #define for the below
+            // cases.
             // The #define cases below also produce no errors in previous versions of the compiler.
             var text =
                 @"
@@ -2286,7 +2290,8 @@ public class C
             // A small number of keywords are not legal as error codes inside #pragma. This is because
             // the lexer processes these keywords specially inside preprocessor directives i.e. it returns
             // keyword tokens instead of identifier tokens for these.
-            // Lexing / parsing of identifiers inside #pragma is identical to that inside #define for the below cases.
+            // Lexing / parsing of identifiers inside #pragma is identical to that inside #define for the below
+            // cases.
             // The #define cases below also produce identical errors in previous versions of the compiler.
             var text =
                 @"
@@ -3006,7 +3011,8 @@ public class Test
             var compilation = CreateCompilation(text);
             var expected = new DiagnosticDescription[]
             {
-                // (6,26): error CS1624: The body of 'Test.Goo()' cannot be an iterator block because 'IMyEnumerator' is not an iterator interface type
+                // (6,26): error CS1624: The body of 'Test.Goo()' cannot be an iterator block because
+                // 'IMyEnumerator' is not an iterator interface type
                 //     static IMyEnumerator Goo()
                 Diagnostic(ErrorCode.ERR_BadIteratorReturn, "Goo")
                     .WithArguments("Test.Goo()", "IMyEnumerator")
@@ -3115,7 +3121,8 @@ public class A
         }
 
         /// <summary>
-        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is correctly emitted.
+        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is
+        // correctly emitted.
         /// </summary>
         [Fact]
         public void PossibleBadNegCast()
@@ -3168,7 +3175,8 @@ class Program
         }
 
         /// <summary>
-        ///    Tests if fixing CS0075 - "To cast a negative value, you must enclose the value in parentheses" works. (fixed version of <see cref="PossibleBadNegCast"/>).
+        ///    Tests if fixing CS0075 - "To cast a negative value, you must enclose the value in
+        // parentheses" works. (fixed version of <see cref="PossibleBadNegCast"/>).
         /// </summary>
         [Fact]
         public void PossibleBadNegCastFixed()
@@ -3203,7 +3211,8 @@ class Program
         }
 
         /// <summary>
-        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is only emitted if the left side is (would be) a cast expression.
+        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is
+        // only emitted if the left side is (would be) a cast expression.
         /// </summary>
         [Fact]
         public void PossibleBadNegCastNotEmitted()
@@ -3271,7 +3280,8 @@ class Program
         }
 
         /// <summary>
-        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is also emitted for dynamic casts.
+        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is
+        // also emitted for dynamic casts.
         /// </summary>
         [Fact]
         public void PossibleBadNegCastDynamic()
@@ -3313,7 +3323,8 @@ class Program
         }
 
         /// <summary>
-        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is also emitted for dynamic casts when a local variable called 'dynamic' is defined.
+        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is
+        // also emitted for dynamic casts when a local variable called 'dynamic' is defined.
         /// </summary>
         [Fact]
         public void PossibleBadNegCastDynamicWithLocal()
@@ -3334,7 +3345,8 @@ class Program
         }
 
         /// <summary>
-        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is also emitted for dynamic casts when a method called 'dynamic' is defined.
+        ///    Tests if CS0075 - "To cast a negative value, you must enclose the value in parentheses" is
+        // also emitted for dynamic casts when a method called 'dynamic' is defined.
         /// </summary>
         [Fact]
         public void PossibleBadNegCastDynamicWithMethod()
@@ -3501,7 +3513,8 @@ class Program
 
             ca.VerifyEmitDiagnostics(
                 EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
-                // error CS7028: Error signing output with public key from container 'bogus' -- Assembly signing not supported.
+                // error CS7028: Error signing output with public key from container 'bogus' -- Assembly signing not
+                // supported.
                 Diagnostic(ErrorCode.ERR_PublicKeyContainerFailure)
                     .WithArguments("bogus", "Assembly signing not supported.")
                     .WithLocation(1, 1)
@@ -3517,7 +3530,8 @@ class Program
         #endregion
 
         #region PathMap Linux Tests
-        // Like the above (CoreCLR Signing Tests), these aren't actually syntax tests, but this is in one of only two assemblies tested on linux
+        // Like the above (CoreCLR Signing Tests), these aren't actually syntax tests, but this is in one of
+        // only two assemblies tested on linux
 
         [Theory]
         [InlineData("C:\\", "/", "C:\\", "/")]

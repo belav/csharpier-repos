@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
         private readonly ExclusionFilters _filters;
 
         /// <summary>
-        /// Initializes an instance of <see cref="PhysicalDirectoryInfo"/> that wraps an instance of <see cref="System.IO.DirectoryInfo"/>
+        /// Initializes an instance of <see cref="PhysicalDirectoryInfo"/> that wraps an instance of <see
+        // cref="System.IO.DirectoryInfo"/>
         /// </summary>
         /// <param name="info">The directory</param>
         public PhysicalDirectoryInfo(DirectoryInfo info)

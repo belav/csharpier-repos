@@ -40,8 +40,10 @@ public class ActionContext
     /// Creates a new <see cref="ActionContext"/>.
     /// </summary>
     /// <param name="httpContext">The <see cref="Http.HttpContext"/> for the current request.</param>
-    /// <param name="routeData">The <see cref="AspNetCore.Routing.RouteData"/> for the current request.</param>
-    /// <param name="actionDescriptor">The <see cref="Abstractions.ActionDescriptor"/> for the selected action.</param>
+    /// <param name="routeData">The <see cref="AspNetCore.Routing.RouteData"/> for the current
+    // request.</param>
+    /// <param name="actionDescriptor">The <see cref="Abstractions.ActionDescriptor"/> for the selected
+    // action.</param>
     public ActionContext(
         HttpContext httpContext,
         RouteData routeData,
@@ -53,8 +55,10 @@ public class ActionContext
     /// Creates a new <see cref="ActionContext"/>.
     /// </summary>
     /// <param name="httpContext">The <see cref="Http.HttpContext"/> for the current request.</param>
-    /// <param name="routeData">The <see cref="AspNetCore.Routing.RouteData"/> for the current request.</param>
-    /// <param name="actionDescriptor">The <see cref="Abstractions.ActionDescriptor"/> for the selected action.</param>
+    /// <param name="routeData">The <see cref="AspNetCore.Routing.RouteData"/> for the current
+    // request.</param>
+    /// <param name="actionDescriptor">The <see cref="Abstractions.ActionDescriptor"/> for the selected
+    // action.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>.</param>
     public ActionContext(
         HttpContext httpContext,

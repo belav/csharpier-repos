@@ -66,7 +66,8 @@ public class OwinWebSocketAcceptAdapter
             _subProtocol = context.SubProtocol;
         }
 
-        // Accept may have been called synchronously on the original request thread, we might not have a task yet. Go async.
+        // Accept may have been called synchronously on the original request thread, we might not have a
+        // task yet. Go async.
         await _upstreamWentAsync.Task;
 
         _owinWebSocketAccept(options, OwinAcceptCallback);
@@ -101,13 +102,20 @@ public class OwinWebSocketAcceptAdapter
     // Order of operations:
     // 1. A WebSocket handshake request is received by the middleware.
     // 2. The middleware inserts an alternate Accept signature into the OWIN environment.
-    // 3. The middleware invokes Next and stores Next's Task locally. It then returns an alternate Task to the server.
-    // 4. The OwinFeatureCollection adapts the alternate Accept signature to IHttpWebSocketFeature.AcceptAsync.
-    // 5. A component later in the pipeline invokes IHttpWebSocketFeature.AcceptAsync (mapped to AcceptWebSocketAsync).
-    // 6. The middleware calls the OWIN Accept, providing a local callback, and returns an incomplete Task.
-    // 7. The middleware completes the alternate Task it returned from Invoke, telling the server that the request pipeline has completed.
-    // 8. The server invokes the middleware's callback, which creates a WebSocket adapter and completes the original Accept Task with it.
-    // 9. The middleware waits while the application uses the WebSocket, where the end is signaled by the Next's Task completion.
+    // 3. The middleware invokes Next and stores Next's Task locally. It then returns an alternate Task
+    // to the server.
+    // 4. The OwinFeatureCollection adapts the alternate Accept signature to
+    // IHttpWebSocketFeature.AcceptAsync.
+    // 5. A component later in the pipeline invokes IHttpWebSocketFeature.AcceptAsync (mapped to
+    // AcceptWebSocketAsync).
+    // 6. The middleware calls the OWIN Accept, providing a local callback, and returns an incomplete
+    // Task.
+    // 7. The middleware completes the alternate Task it returned from Invoke, telling the server that
+    // the request pipeline has completed.
+    // 8. The server invokes the middleware's callback, which creates a WebSocket adapter and completes
+    // the original Accept Task with it.
+    // 9. The middleware waits while the application uses the WebSocket, where the end is signaled by
+    // the Next's Task completion.
     //
     /// <summary>
     /// Adapt web sockets to OWIN.

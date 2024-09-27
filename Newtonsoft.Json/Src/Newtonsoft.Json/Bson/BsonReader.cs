@@ -90,10 +90,12 @@ namespace Newtonsoft.Json.Bson
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether binary data reading should be compatible with incorrect Json.NET 3.5 written binary.
+        /// Gets or sets a value indicating whether binary data reading should be compatible with incorrect
+        // Json.NET 3.5 written binary.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if binary data reading will be compatible with incorrect Json.NET 3.5 written binary; otherwise, <c>false</c>.
+        /// 	<c>true</c> if binary data reading will be compatible with incorrect Json.NET 3.5 written
+        // binary; otherwise, <c>false</c>.
         /// </value>
         [Obsolete("JsonNet35BinaryCompatibility will be removed in a future version of Json.NET.")]
         public bool JsonNet35BinaryCompatibility
@@ -115,9 +117,11 @@ namespace Newtonsoft.Json.Bson
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values from BSON.
+        /// Gets or sets the <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values
+        // from BSON.
         /// </summary>
-        /// <value>The <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values from BSON.</value>
+        /// <value>The <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values from
+        // BSON.</value>
         public DateTimeKind DateTimeKindHandling
         {
             get => _dateTimeKindHandling;
@@ -142,8 +146,10 @@ namespace Newtonsoft.Json.Bson
         /// Initializes a new instance of the <see cref="BsonReader"/> class.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the BSON data to read.</param>
-        /// <param name="readRootValueAsArray">if set to <c>true</c> the root object will be read as a JSON array.</param>
-        /// <param name="dateTimeKindHandling">The <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values from BSON.</param>
+        /// <param name="readRootValueAsArray">if set to <c>true</c> the root object will be read as a JSON
+        // array.</param>
+        /// <param name="dateTimeKindHandling">The <see cref="DateTimeKind" /> used when reading <see
+        // cref="DateTime"/> values from BSON.</param>
         public BsonReader(
             Stream stream,
             bool readRootValueAsArray,
@@ -161,8 +167,10 @@ namespace Newtonsoft.Json.Bson
         /// Initializes a new instance of the <see cref="BsonReader"/> class.
         /// </summary>
         /// <param name="reader">The <see cref="BinaryReader"/> containing the BSON data to read.</param>
-        /// <param name="readRootValueAsArray">if set to <c>true</c> the root object will be read as a JSON array.</param>
-        /// <param name="dateTimeKindHandling">The <see cref="DateTimeKind" /> used when reading <see cref="DateTime"/> values from BSON.</param>
+        /// <param name="readRootValueAsArray">if set to <c>true</c> the root object will be read as a JSON
+        // array.</param>
+        /// <param name="dateTimeKindHandling">The <see cref="DateTimeKind" /> used when reading <see
+        // cref="DateTime"/> values from BSON.</param>
         public BsonReader(
             BinaryReader reader,
             bool readRootValueAsArray,
@@ -187,7 +195,8 @@ namespace Newtonsoft.Json.Bson
         /// Reads the next JSON token from the underlying <see cref="Stream"/>.
         /// </summary>
         /// <returns>
-        /// <c>true</c> if the next token was read successfully; <c>false</c> if there are no more tokens to read.
+        /// <c>true</c> if the next token was read successfully; <c>false</c> if there are no more tokens to
+        // read.
         /// </returns>
         public override bool Read()
         {
@@ -239,7 +248,8 @@ namespace Newtonsoft.Json.Bson
 
         /// <summary>
         /// Changes the reader's state to <see cref="JsonReader.State.Closed"/>.
-        /// If <see cref="JsonReader.CloseInput"/> is set to <c>true</c>, the underlying <see cref="Stream"/> is also closed.
+        /// If <see cref="JsonReader.CloseInput"/> is set to <c>true</c>, the underlying <see
+        // cref="Stream"/> is also closed.
         /// </summary>
         public override void Close()
         {

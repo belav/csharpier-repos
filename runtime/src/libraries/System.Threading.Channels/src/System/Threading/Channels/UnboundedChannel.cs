@@ -23,7 +23,8 @@ namespace System.Threading.Channels
         /// <summary>Readers blocked reading from the channel.</summary>
         private readonly Deque<AsyncOperation<T>> _blockedReaders = new Deque<AsyncOperation<T>>();
 
-        /// <summary>Whether to force continuations to be executed asynchronously from producer writes.</summary>
+        /// <summary>Whether to force continuations to be executed asynchronously from producer
+        // writes.</summary>
         private readonly bool _runContinuationsAsynchronously;
 
         /// <summary>Readers waiting for a notification that data is available.</summary>
@@ -350,7 +351,8 @@ namespace System.Threading.Channels
                     )
                 );
 
-            /// <summary>Gets the number of items in the channel. This should only be used by the debugger.</summary>
+            /// <summary>Gets the number of items in the channel. This should only be used by the
+            // debugger.</summary>
             private int ItemsCountForDebugger => _parent._items.Count;
 
             /// <summary>Gets an enumerator the debugger can use to show the contents of the channel.</summary>
@@ -403,10 +405,12 @@ namespace System.Threading.Channels
             }
         }
 
-        /// <summary>Gets the number of items in the channel.  This should only be used by the debugger.</summary>
+        /// <summary>Gets the number of items in the channel.  This should only be used by the
+        // debugger.</summary>
         private int ItemsCountForDebugger => _items.Count;
 
-        /// <summary>Report if the channel is closed or not. This should only be used by the debugger.</summary>
+        /// <summary>Report if the channel is closed or not. This should only be used by the
+        // debugger.</summary>
         private bool ChannelIsClosedForDebugger => _doneWriting != null;
 
         /// <summary>Gets an enumerator the debugger can use to show the contents of the channel.</summary>

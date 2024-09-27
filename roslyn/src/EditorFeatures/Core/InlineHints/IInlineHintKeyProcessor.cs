@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
     internal interface IInlineHintKeyProcessor
     {
         /// <summary>
-        /// The current state of the keyprocessor.  i.e. whether or not the key binding is currently being held down or
+        /// The current state of the keyprocessor.  i.e. whether or not the key binding is currently being
+        // held down or
         /// not.  Can be read on any thread.
         /// </summary>
         bool State { get; }

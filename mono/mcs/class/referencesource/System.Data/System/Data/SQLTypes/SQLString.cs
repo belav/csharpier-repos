@@ -53,7 +53,8 @@ namespace System.Data.SqlTypes
 
     /// <devdoc>
     ///    <para>
-    ///       Represents a variable-length stream of characters to be stored in or retrieved from the database.
+    ///       Represents a variable-length stream of characters to be stored in or retrieved from the
+    // database.
     ///    </para>
     /// </devdoc>
     [Serializable]
@@ -69,7 +70,8 @@ namespace System.Data.SqlTypes
 
         /// <devdoc>
         ///    <para>
-        ///       Represents a null value that can be assigned to the <see cref='System.Data.SqlTypes.SqlString.Value'/> property of an instance of
+        ///       Represents a null value that can be assigned to the <see
+        // cref='System.Data.SqlTypes.SqlString.Value'/> property of an instance of
         ///       the <see cref='System.Data.SqlTypes.SqlString'/> class.
         ///    </para>
         /// </devdoc>
@@ -209,26 +211,26 @@ namespace System.Data.SqlTypes
         public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data)
             : this(lcid, compareOptions, data, 0, data.Length, true) { }
 
-        /*
-                //
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        */
+/*
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 
         /// <devdoc>
         ///    <para>
@@ -296,7 +298,8 @@ namespace System.Data.SqlTypes
         // INullable
         /// <devdoc>
         ///    <para>
-        ///       Gets whether the <see cref='System.Data.SqlTypes.SqlString.Value'/> of the <see cref='System.Data.SqlTypes.SqlString'/> is <see cref='System.Data.SqlTypes.SqlString.Null'/>.
+        ///       Gets whether the <see cref='System.Data.SqlTypes.SqlString.Value'/> of the <see
+        // cref='System.Data.SqlTypes.SqlString'/> is <see cref='System.Data.SqlTypes.SqlString.Null'/>.
         ///    </para>
         /// </devdoc>
         public bool IsNull
@@ -441,14 +444,14 @@ namespace System.Data.SqlTypes
             return cpe.GetBytes(m_value);
         }
 
-        /*
-                internal int GetSQLCID() {
-                    if (IsNull)
-                        throw new SqlNullValueException();
-        
-                    return MAKECID(m_lcid, m_flag);
-                }
-        */
+/*
+internal int GetSQLCID() {
+if (IsNull)
+throw new SqlNullValueException();
+
+return MAKECID(m_lcid, m_flag);
+}
+*/
 
         // Binary operators
 
@@ -473,9 +476,11 @@ namespace System.Data.SqlTypes
         }
 
         // StringCompare: Common compare function which is used by Compare and CompareTo
-        //  In the case of Compare (used by comparison operators) the int result needs to be converted to SqlBoolean type
+        //  In the case of Compare (used by comparison operators) the int result needs to be converted to
+        // SqlBoolean type
         //  while CompareTo needs the result in int type
-        //  Pre-requisite: the null condition of the both string needs to be checked and handled by the caller of this function
+        //  Pre-requisite: the null condition of the both string needs to be checked and handled by the
+        // caller of this function
         private static int StringCompare(SqlString x, SqlString y)
         {
             SQLDebug.Check(
@@ -877,26 +882,27 @@ namespace System.Data.SqlTypes
             return options;
         }
 
-        /*
-        private static SqlCompareOptions SqlCompareOptionsFromCompareOptions(CompareOptions compareOptions) {
-            SqlCompareOptions sqlOptions = SqlCompareOptions.None;
+/*
+private static SqlCompareOptions SqlCompareOptionsFromCompareOptions(CompareOptions compareOptions)
+{
+SqlCompareOptions sqlOptions = SqlCompareOptions.None;
 
-            if ((compareOptions & x_iValidCompareOptionMask) != compareOptions)
-                throw new ArgumentOutOfRangeException ("compareOptions");
-            else {
-                if ((compareOptions & CompareOptions.IgnoreCase) != 0)
-                    sqlOptions |= SqlCompareOptions.IgnoreCase;
-                if ((compareOptions & CompareOptions.IgnoreNonSpace) != 0)
-                    sqlOptions |= SqlCompareOptions.IgnoreNonSpace;
-                if ((compareOptions & CompareOptions.IgnoreKanaType) != 0)
-                    sqlOptions |= SqlCompareOptions.IgnoreKanaType;
-                if ((compareOptions & CompareOptions.IgnoreWidth) != 0)
-                    sqlOptions |= SqlCompareOptions.IgnoreWidth;
-            }
+if ((compareOptions & x_iValidCompareOptionMask) != compareOptions)
+throw new ArgumentOutOfRangeException ("compareOptions");
+else {
+if ((compareOptions & CompareOptions.IgnoreCase) != 0)
+sqlOptions |= SqlCompareOptions.IgnoreCase;
+if ((compareOptions & CompareOptions.IgnoreNonSpace) != 0)
+sqlOptions |= SqlCompareOptions.IgnoreNonSpace;
+if ((compareOptions & CompareOptions.IgnoreKanaType) != 0)
+sqlOptions |= SqlCompareOptions.IgnoreKanaType;
+if ((compareOptions & CompareOptions.IgnoreWidth) != 0)
+sqlOptions |= SqlCompareOptions.IgnoreWidth;
+}
 
-            return  sqlOptions;
-        }
-        */
+return  sqlOptions;
+}
+*/
 
         private bool FBinarySort()
         {
@@ -1011,24 +1017,24 @@ namespace System.Data.SqlTypes
             return 0;
         }
 
-        /*
-                private void Print() {
-                    Debug.WriteLine("SqlString - ");
-                    Debug.WriteLine("\tlcid = " + m_lcid.ToString());
-                    Debug.Write("\t");
-                    if ((m_flag & SqlCompareOptions.IgnoreCase) != 0)
-                        Debug.Write("IgnoreCase, ");
-                    if ((m_flag & SqlCompareOptions.IgnoreNonSpace) != 0)
-                        Debug.Write("IgnoreNonSpace, ");
-                    if ((m_flag & SqlCompareOptions.IgnoreKanaType) != 0)
-                        Debug.Write("IgnoreKanaType, ");
-                    if ((m_flag & SqlCompareOptions.IgnoreWidth) != 0)
-                        Debug.Write("IgnoreWidth, ");
-                    Debug.WriteLine("");
-                    Debug.WriteLine("\tvalue = " + m_value);
-                    Debug.WriteLine("\tcmpinfo = " + m_cmpInfo);
-                }
-        */
+/*
+private void Print() {
+Debug.WriteLine("SqlString - ");
+Debug.WriteLine("\tlcid = " + m_lcid.ToString());
+Debug.Write("\t");
+if ((m_flag & SqlCompareOptions.IgnoreCase) != 0)
+Debug.Write("IgnoreCase, ");
+if ((m_flag & SqlCompareOptions.IgnoreNonSpace) != 0)
+Debug.Write("IgnoreNonSpace, ");
+if ((m_flag & SqlCompareOptions.IgnoreKanaType) != 0)
+Debug.Write("IgnoreKanaType, ");
+if ((m_flag & SqlCompareOptions.IgnoreWidth) != 0)
+Debug.Write("IgnoreWidth, ");
+Debug.WriteLine("");
+Debug.WriteLine("\tvalue = " + m_value);
+Debug.WriteLine("\tcmpinfo = " + m_cmpInfo);
+}
+*/
         // IComparable
         // Compares this object to another object, returning an integer that
         // indicates the relationship.
@@ -1147,7 +1153,8 @@ namespace System.Data.SqlTypes
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
             if (isNull != null && XmlConvert.ToBoolean(isNull))
             {
-                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
+                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix -
+                // Read the next value.
                 reader.ReadElementString();
                 m_fNotNull = false;
             }
@@ -1182,84 +1189,84 @@ namespace System.Data.SqlTypes
         }
     } // SqlString
 
-    /*
-        internal struct SLocaleMapItem {
-            public int      lcid;           // the primary key, not nullable
-            public String   name;           // unique, nullable
-            public int      idCodePage;     // the ANSI default code page of the locale
-    
-            public SLocaleMapItem(int lid, String str, int cpid) {
-                lcid = lid;
-                name = str;
-                idCodePage = cpid;
-            }
-        }
-    
-        // Struct to map lcid to ordinal
-        internal struct SLcidOrdMapItem {
-            internal int    lcid;
-            internal int    uiOrd;
-        };
-    
-        // Class to store map of lcids to ordinal
-        internal class CBuildLcidOrdMap {
-            internal SLcidOrdMapItem[] m_rgLcidOrdMap;
-            internal int m_cValidLocales;
-            internal int m_uiPosEnglish; // Start binary searches here - this is index in array, not ordinal
-    
-            // Constructor builds the array sorted by lcid
-            // We use a simple n**2 sort because the array is mostly sorted anyway
-            // and objects of this class will be const, hence this will be called
-            // only by VC compiler
-            public CBuildLcidOrdMap() {
-                int i,j;
-    
-                m_rgLcidOrdMap = new SLcidOrdMapItem[SqlString.x_cLocales];
-    
-                // Compact the array
-                for (i=0,j=0; i < SqlString.x_cLocales; i++) {
-                    if (SqlString.x_rgLocaleMap[i].lcid != SqlString.x_lcidUnused) {
-                        m_rgLcidOrdMap[j].lcid = SqlString.x_rgLocaleMap[i].lcid;
-                        m_rgLcidOrdMap[j].uiOrd = i;
-                        j++;
-                    }
-                }
-    
-                m_cValidLocales = j;
-    
-                // Set the rest to invalid
-                while (j < SqlString.x_cLocales) {
-                    m_rgLcidOrdMap[j].lcid = SqlString.x_lcidUnused;
-                    m_rgLcidOrdMap[j].uiOrd = 0;
-                    j++;
-                }
-    
-                // Now sort in place
-                // Algo:
-                // Start from 1, assume list before i is sorted, if next item
-                // violates this assumption, exchange with prev items until the
-                // item is in its correct place
-                for (i=1; i<m_cValidLocales; i++) {
-                    for (j=i; j>0 &&
-                        m_rgLcidOrdMap[j].lcid < m_rgLcidOrdMap[j-1].lcid; j--) {
-                        // Swap with prev element
-                        int lcidTemp = m_rgLcidOrdMap[j-1].lcid;
-                        int uiOrdTemp = m_rgLcidOrdMap[j-1].uiOrd;
-                        m_rgLcidOrdMap[j-1].lcid = m_rgLcidOrdMap[j].lcid;
-                        m_rgLcidOrdMap[j-1].uiOrd = m_rgLcidOrdMap[j].uiOrd;
-                        m_rgLcidOrdMap[j].lcid = lcidTemp;
-                        m_rgLcidOrdMap[j].uiOrd = uiOrdTemp;
-                    }
-                }
-    
-                // Set the position of the US_English LCID (Latin1_General)
-                for (i=0; i<m_cValidLocales && m_rgLcidOrdMap[i].lcid != SqlString.x_lcidUSEnglish; i++)
-                    ; // Deliberately empty
-    
-                SQLDebug.Check(i<m_cValidLocales);  // Latin1_General better be present
-                m_uiPosEnglish = i;     // This is index in array, not ordinal
-            }
-    
-        } // CBuildLcidOrdMap
-    */
+/*
+internal struct SLocaleMapItem {
+public int      lcid;           // the primary key, not nullable
+public String   name;           // unique, nullable
+public int      idCodePage;     // the ANSI default code page of the locale
+
+public SLocaleMapItem(int lid, String str, int cpid) {
+lcid = lid;
+name = str;
+idCodePage = cpid;
+}
+}
+
+// Struct to map lcid to ordinal
+internal struct SLcidOrdMapItem {
+internal int    lcid;
+internal int    uiOrd;
+};
+
+// Class to store map of lcids to ordinal
+internal class CBuildLcidOrdMap {
+internal SLcidOrdMapItem[] m_rgLcidOrdMap;
+internal int m_cValidLocales;
+internal int m_uiPosEnglish; // Start binary searches here - this is index in array, not ordinal
+
+// Constructor builds the array sorted by lcid
+// We use a simple n**2 sort because the array is mostly sorted anyway
+// and objects of this class will be const, hence this will be called
+// only by VC compiler
+public CBuildLcidOrdMap() {
+int i,j;
+
+m_rgLcidOrdMap = new SLcidOrdMapItem[SqlString.x_cLocales];
+
+// Compact the array
+for (i=0,j=0; i < SqlString.x_cLocales; i++) {
+if (SqlString.x_rgLocaleMap[i].lcid != SqlString.x_lcidUnused) {
+m_rgLcidOrdMap[j].lcid = SqlString.x_rgLocaleMap[i].lcid;
+m_rgLcidOrdMap[j].uiOrd = i;
+j++;
+}
+}
+
+m_cValidLocales = j;
+
+// Set the rest to invalid
+while (j < SqlString.x_cLocales) {
+m_rgLcidOrdMap[j].lcid = SqlString.x_lcidUnused;
+m_rgLcidOrdMap[j].uiOrd = 0;
+j++;
+}
+
+// Now sort in place
+// Algo:
+// Start from 1, assume list before i is sorted, if next item
+// violates this assumption, exchange with prev items until the
+// item is in its correct place
+for (i=1; i<m_cValidLocales; i++) {
+for (j=i; j>0 &&
+m_rgLcidOrdMap[j].lcid < m_rgLcidOrdMap[j-1].lcid; j--) {
+// Swap with prev element
+int lcidTemp = m_rgLcidOrdMap[j-1].lcid;
+int uiOrdTemp = m_rgLcidOrdMap[j-1].uiOrd;
+m_rgLcidOrdMap[j-1].lcid = m_rgLcidOrdMap[j].lcid;
+m_rgLcidOrdMap[j-1].uiOrd = m_rgLcidOrdMap[j].uiOrd;
+m_rgLcidOrdMap[j].lcid = lcidTemp;
+m_rgLcidOrdMap[j].uiOrd = uiOrdTemp;
+}
+}
+
+// Set the position of the US_English LCID (Latin1_General)
+for (i=0; i<m_cValidLocales && m_rgLcidOrdMap[i].lcid != SqlString.x_lcidUSEnglish; i++)
+; // Deliberately empty
+
+SQLDebug.Check(i<m_cValidLocales);  // Latin1_General better be present
+m_uiPosEnglish = i;     // This is index in array, not ordinal
+}
+
+} // CBuildLcidOrdMap
+*/
 } // namespace System.Data.SqlTypes

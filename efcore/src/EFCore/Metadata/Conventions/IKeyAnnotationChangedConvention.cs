@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     Represents an operation that should be performed when an annotation is changed on a key.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public interface IKeyAnnotationChangedConvention : IConvention
 {

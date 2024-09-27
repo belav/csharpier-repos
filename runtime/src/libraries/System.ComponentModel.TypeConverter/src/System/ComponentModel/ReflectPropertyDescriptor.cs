@@ -277,7 +277,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// The EventDescriptor for the "{propertyname}Changed" event on the component, or null if there isn't one for this property.
+        /// The EventDescriptor for the "{propertyname}Changed" event on the component, or null if there
+        // isn't one for this property.
         /// </summary>
         private EventDescriptor ChangedEventValue
         {
@@ -294,7 +295,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// The EventDescriptor for the INotifyPropertyChanged.PropertyChanged event on the component, or null if there isn't one for this property.
+        /// The EventDescriptor for the INotifyPropertyChanged.PropertyChanged event on the component, or
+        // null if there isn't one for this property.
         /// </summary>
         private EventDescriptor IPropChangedEventValue
         {
@@ -592,7 +594,8 @@ namespace System.ComponentModel
             ArgumentNullException.ThrowIfNull(component);
             ArgumentNullException.ThrowIfNull(handler);
 
-            // If there's an event called <propertyname>Changed, hook the caller's handler directly up to that on the component
+            // If there's an event called <propertyname>Changed, hook the caller's handler directly up to that
+            // on the component
             EventDescriptor changedEvent = ChangedEventValue;
             if (changedEvent != null && changedEvent.EventType.IsInstanceOfType(handler))
             {
@@ -601,8 +604,10 @@ namespace System.ComponentModel
             // Otherwise let the base class add the handler to its ValueChanged event for this component
             else
             {
-                // Special case: If this will be the FIRST handler added for this component, and the component implements
-                // INotifyPropertyChanged, the property descriptor must START listening to the generic PropertyChanged event
+                // Special case: If this will be the FIRST handler added for this component, and the component
+                // implements
+                // INotifyPropertyChanged, the property descriptor must START listening to the generic
+                // PropertyChanged event
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
@@ -1150,8 +1155,10 @@ namespace System.ComponentModel
             {
                 base.RemoveValueChanged(component, handler);
 
-                // Special case: If that was the LAST handler removed for this component, and the component implements
-                // INotifyPropertyChanged, the property descriptor must STOP listening to the generic PropertyChanged event
+                // Special case: If that was the LAST handler removed for this component, and the component
+                // implements
+                // INotifyPropertyChanged, the property descriptor must STOP listening to the generic
+                // PropertyChanged event
                 if (GetValueChangedHandler(component) == null)
                 {
                     EventDescriptor iPropChangedEvent = IPropChangedEventValue;
@@ -1361,10 +1368,14 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Indicates whether value change notifications for this property may originate from outside the property
-        /// descriptor, such as from the component itself (value=true), or whether notifications will only originate
-        /// from direct calls made to PropertyDescriptor.SetValue (value=false). For example, the component may
-        /// implement the INotifyPropertyChanged interface, or may have an explicit '{name}Changed' event for this property.
+        /// Indicates whether value change notifications for this property may originate from outside the
+        // property
+        /// descriptor, such as from the component itself (value=true), or whether notifications will only
+        // originate
+        /// from direct calls made to PropertyDescriptor.SetValue (value=false). For example, the component
+        // may
+        /// implement the INotifyPropertyChanged interface, or may have an explicit '{name}Changed' event
+        // for this property.
         /// </summary>
         public override bool SupportsChangeEvents =>
             IPropChangedEventValue != null || ChangedEventValue != null;

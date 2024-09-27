@@ -4,11 +4,16 @@ using System.Runtime.InteropServices;
 using System.Web;
 using ApplicationPreStartMethods.Tests;
 
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "PublicStaticMethod")]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "PublicInstanceMethod")]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "InternalInstanceMethod")]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "InternalStaticMethod")]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "PrivateInstanceMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "PublicStaticMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "PublicInstanceMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "InternalInstanceMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "InternalStaticMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "PrivateInstanceMethod")]
 [assembly: PreApplicationStartMethod(
     typeof(ApplicationPreStartMethods.Tests.PreStartMethods),
     "PrivateStaticMethod"

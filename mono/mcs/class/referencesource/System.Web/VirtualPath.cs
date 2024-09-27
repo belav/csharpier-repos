@@ -811,7 +811,8 @@ namespace System.Web
                         );
                     }
 
-                    // Don't Reduce relative paths, since the Reduce method is broken (e.g. "../foo.aspx" --> "/foo.aspx!")
+                    // Don't Reduce relative paths, since the Reduce method is broken (e.g. "../foo.aspx" -->
+                    // "/foo.aspx!")
                     //
                     virtualPathObject._virtualPath = virtualPath;
                 }

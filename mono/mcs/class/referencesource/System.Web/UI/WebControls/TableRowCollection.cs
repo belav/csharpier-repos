@@ -14,7 +14,8 @@ namespace System.Web.UI.WebControls
     using System.Web.UI;
 
     /// <devdoc>
-    /// <para>Encapsulates the collection of <see cref='System.Web.UI.WebControls.TableRow'/> objects within a <see cref='System.Web.UI.WebControls.Table'/> control.</para>
+    /// <para>Encapsulates the collection of <see cref='System.Web.UI.WebControls.TableRow'/> objects
+    // within a <see cref='System.Web.UI.WebControls.Table'/> control.</para>
     /// </devdoc>
     [Editor(
         "System.Web.UI.Design.WebControls.TableRowsCollectionEditor, " + AssemblyRef.SystemDesign,
@@ -23,7 +24,8 @@ namespace System.Web.UI.WebControls
     public sealed class TableRowCollection : IList
     {
         /// <devdoc>
-        ///    A protected field of type <see cref='System.Web.UI.WebControls.Table'/>. Represents the <see cref='System.Web.UI.WebControls.TableRow'/> collection internally.
+        ///    A protected field of type <see cref='System.Web.UI.WebControls.Table'/>. Represents the <see
+        // cref='System.Web.UI.WebControls.TableRow'/> collection internally.
         /// </devdoc>
         private Table owner;
 
@@ -63,7 +65,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>
-        ///       Adds the specified <see cref='System.Web.UI.WebControls.TableRow'/> to the end of the collection.
+        ///       Adds the specified <see cref='System.Web.UI.WebControls.TableRow'/> to the end of the
+        // collection.
         ///    </para>
         /// </devdoc>
         public int Add(TableRow row)
@@ -74,7 +77,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>
-        ///       Adds the specified <see cref='System.Web.UI.WebControls.TableRow'/> to the collection at the specified
+        ///       Adds the specified <see cref='System.Web.UI.WebControls.TableRow'/> to the collection at
+        // the specified
         ///       index location.
         ///    </para>
         /// </devdoc>
@@ -102,7 +106,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Removes all <see cref='System.Web.UI.WebControls.TableRow'/> controls from the collection.</para>
+        /// <para>Removes all <see cref='System.Web.UI.WebControls.TableRow'/> controls from the
+        // collection.</para>
         /// </devdoc>
         public void Clear()
         {
@@ -128,7 +133,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>
-        ///       Returns an enumerator of all <see cref='System.Web.UI.WebControls.TableRow'/> controls within the
+        ///       Returns an enumerator of all <see cref='System.Web.UI.WebControls.TableRow'/> controls
+        // within the
         ///       collection.
         ///    </para>
         /// </devdoc>
@@ -138,7 +144,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies contents from the collection to the specified <see cref='System.Array' qualify='true'/> with the
+        /// <para>Copies contents from the collection to the specified <see cref='System.Array'
+        // qualify='true'/> with the
         ///    specified starting index.</para>
         /// </devdoc>
         public void CopyTo(Array array, int index)
@@ -180,7 +187,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Removes the specified <see cref='System.Web.UI.WebControls.TableRow'/> from the collection.</para>
+        /// <para>Removes the specified <see cref='System.Web.UI.WebControls.TableRow'/> from the
+        // collection.</para>
         /// </devdoc>
         public void Remove(TableRow row)
         {
@@ -188,7 +196,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Removes the <see cref='System.Web.UI.WebControls.TableRow'/> from the collection at the specified
+        /// <para>Removes the <see cref='System.Web.UI.WebControls.TableRow'/> from the collection at the
+        // specified
         ///    index location.</para>
         /// </devdoc>
         public void RemoveAt(int index)

@@ -29,7 +29,8 @@ namespace Microsoft.Interop
         {
             unsafe
             {
-                // We can pass a null Compilation here since our blittability check does not depend on the compilation.
+                // We can pass a null Compilation here since our blittability check does not depend on the
+                // compilation.
                 return IsBlittableWorker(
                     type,
                     ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default),
@@ -87,14 +88,17 @@ namespace Microsoft.Interop
                 }
                 else if (t.IsValueType)
                 {
-                    // If the containing assembly for the type is not the same assembly as the assembly defining the interop stub,
-                    // then we can't trust the type definition as it may differ at runtime from the compile-time definition.
+                    // If the containing assembly for the type is not the same assembly as the assembly defining the
+                    // interop stub,
+                    // then we can't trust the type definition as it may differ at runtime from the compile-time
+                    // definition.
                     if (
                         t.ContainingAssembly is not ISourceAssemblySymbol sourceAssembly
                         || sourceAssembly.Compilation != compilation
                     )
                     {
-                        // We have a few exceptions to this rule. We allow a select number of types that we know are unmanaged and will always be unmanaged.
+                        // We have a few exceptions to this rule. We allow a select number of types that we know are
+                        // unmanaged and will always be unmanaged.
                         if (
                             t.ToDisplayString()
                             is TypeNames.System_Runtime_InteropServices_CLong // CLong is an interop intrinsic type for the C long type
@@ -281,13 +285,20 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Reconstruct a possibly-nested type with the generic parameters of another type, accounting for type nesting and generic parameters split between different nesting levels.
+        /// Reconstruct a possibly-nested type with the generic parameters of another type, accounting for
+        // type nesting and generic parameters split between different nesting levels.
         /// </summary>
-        /// <param name="instantiatedTemplateType">The generic type from which to copy type arguments</param>
+        /// <param name="instantiatedTemplateType">The generic type from which to copy type
+        // arguments</param>
         /// <param name="unboundConstructedType">The type to recursively instantiate</param>
-        /// <param name="numOriginalTypeArgumentsSubstituted">How many type parameters from <c><paramref name="unboundConstructedType"/>.ConstructedFrom</c> that needed to be substituted to fill the generic parameter list.</param>
-        /// <param name="extraTypeArgumentsInTemplate">How many type parameters from <paramref name="instantiatedTemplateType"/>were unused.</param>
-        /// <returns>A fully constructed type based on <c><paramref name="unboundConstructedType"/>.ConstructedFrom</c> with the generic arguments from <paramref name="instantiatedTemplateType"/>.</returns>
+        /// <param name="numOriginalTypeArgumentsSubstituted">How many type parameters from <c><paramref
+        // name="unboundConstructedType"/>.ConstructedFrom</c> that needed to be substituted to fill the
+        // generic parameter list.</param>
+        /// <param name="extraTypeArgumentsInTemplate">How many type parameters from <paramref
+        // name="instantiatedTemplateType"/>were unused.</param>
+        /// <returns>A fully constructed type based on <c><paramref
+        // name="unboundConstructedType"/>.ConstructedFrom</c> with the generic arguments from <paramref
+        // name="instantiatedTemplateType"/>.</returns>
         public static INamedTypeSymbol ResolveUnboundConstructedTypeToConstructedType(
             this INamedTypeSymbol unboundConstructedType,
             INamedTypeSymbol instantiatedTemplateType,
@@ -298,8 +309,10 @@ namespace Microsoft.Interop
             var (typeArgumentsToSubstitute, nullableAnnotationsToSubstitute) =
                 instantiatedTemplateType.GetAllTypeArgumentsIncludingInContainingTypes();
 
-            // Build us a list of the type nesting of unboundConstructedType, with the outermost containing type on the top
-            // Use OriginalDefinition to get the generic definition for all containing types instead of having to unconstruct the generic at each loop iteration.
+            // Build us a list of the type nesting of unboundConstructedType, with the outermost containing type
+            // on the top
+            // Use OriginalDefinition to get the generic definition for all containing types instead of having
+            // to unconstruct the generic at each loop iteration.
             Stack<INamedTypeSymbol> originalNestedTypes = new();
             for (
                 INamedTypeSymbol originalTypeDefinition = unboundConstructedType.OriginalDefinition;
@@ -323,7 +336,8 @@ namespace Microsoft.Interop
                 }
                 else
                 {
-                    // If the type was nested, we need to look it up again on the (possibly constructed generic) containing type.
+                    // If the type was nested, we need to look it up again on the (possibly constructed generic)
+                    // containing type.
                     INamedTypeSymbol originalNestedType = originalNestedTypes.Pop();
                     currentType = currentType
                         .GetTypeMembers(originalNestedType.Name, originalNestedType.Arity)
@@ -332,9 +346,12 @@ namespace Microsoft.Interop
 
                 if (currentType.TypeParameters.Length > 0)
                 {
-                    // We will try to substitute as many generic parameters as possible from typeArgumentsToSubstitute and nullableAnnotationsToSubstitute.
-                    // If we run out of generic arguments to substitute, we will fill the rest of the generic arguments by propogating the corresponding type parameters from the type's generic definition.
-                    // This will enable us to correctly construct a generic type from a generic type definition for all scenarios.
+                    // We will try to substitute as many generic parameters as possible from typeArgumentsToSubstitute
+                    // and nullableAnnotationsToSubstitute.
+                    // If we run out of generic arguments to substitute, we will fill the rest of the generic arguments
+                    // by propogating the corresponding type parameters from the type's generic definition.
+                    // This will enable us to correctly construct a generic type from a generic type definition for all
+                    // scenarios.
                     //
                     // Examples:
                     //   type arguments: [A, B, C]
@@ -378,7 +395,8 @@ namespace Microsoft.Interop
                     {
                         int numArgumentsToPropogate = numArgumentsToInsert - numArgumentsToCopy;
                         // Record how many of the original generic type parameters we needed to use as arguments.
-                        // This value represents how many generic arguments the instantiatedTemplateType type would need to have the same total number of generic parameters as unboundConstructedType,
+                        // This value represents how many generic arguments the instantiatedTemplateType type would need to
+                        // have the same total number of generic parameters as unboundConstructedType,
                         // including accounting for nesting.
                         numOriginalTypeArgumentsSubstituted += numArgumentsToPropogate;
                         currentType
@@ -397,7 +415,8 @@ namespace Microsoft.Interop
                     );
                 }
             }
-            // Record how many type arguments we did not need to use from instantiatedTemplateType to instantiate unboundConstructedType.
+            // Record how many type arguments we did not need to use from instantiatedTemplateType to
+            // instantiate unboundConstructedType.
             extraTypeArgumentsInTemplate = typeArgumentsToSubstitute.Length - currentArityOffset;
 
             return currentType;
@@ -409,7 +428,8 @@ namespace Microsoft.Interop
         ) GetAllTypeArgumentsIncludingInContainingTypes(this INamedTypeSymbol genericType)
         {
             // Get the type arguments of the passed in type and all containing types
-            // with the outermost type on the top of the stack and the innermost type on the bottom of the stack.
+            // with the outermost type on the top of the stack and the innermost type on the bottom of the
+            // stack.
             Stack<(
                 ImmutableArray<ITypeSymbol>,
                 ImmutableArray<NullableAnnotation>
@@ -428,7 +448,8 @@ namespace Microsoft.Interop
                 );
             }
             // Turn our stack of lists of type arguments into one list,
-            // going from the first type argument of the outermost type to the last type argument of the innermost type.
+            // going from the first type argument of the outermost type to the last type argument of the
+            // innermost type.
             ImmutableArray<ITypeSymbol>.Builder typeArguments =
                 ImmutableArray.CreateBuilder<ITypeSymbol>();
             ImmutableArray<NullableAnnotation>.Builder nullableAnnotations =

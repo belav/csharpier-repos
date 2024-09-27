@@ -398,7 +398,7 @@ namespace MonoTests.System.Windows.Forms
             DataRowView v = (DataRowView)cm.Current;
             Assert.AreEqual("Miguel", v[0], "7");
 
-            /* try it again with the DoCommit before the DoEndEdit */
+/* try it again with the DoCommit before the DoEndEdit */
             cm.Position = 0;
             column.DoEdit(
                 cm,

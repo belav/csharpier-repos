@@ -49,9 +49,9 @@ namespace System.Web
 
         public void CopyTo(Array dest, int index)
         {
-            /* XXX this is kind of gross and inefficient
-             * since it makes a copy of the superclass's
-             * list */
+/* XXX this is kind of gross and inefficient
+* since it makes a copy of the superclass's
+* list */
             object[] values = BaseGetAllValues();
             values.CopyTo(dest, index);
         }

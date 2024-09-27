@@ -17,7 +17,8 @@ public sealed class ModelExpression
     /// String representation of the <see cref="System.Linq.Expressions.Expression"/> of interest.
     /// </param>
     /// <param name="modelExplorer">
-    /// Includes the model and metadata about the <see cref="System.Linq.Expressions.Expression"/> of interest.
+    /// Includes the model and metadata about the <see cref="System.Linq.Expressions.Expression"/> of
+    // interest.
     /// </param>
     public ModelExpression(string name, ModelExplorer modelExplorer)
     {

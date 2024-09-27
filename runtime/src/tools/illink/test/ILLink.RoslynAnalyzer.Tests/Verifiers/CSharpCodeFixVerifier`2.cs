@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -80,7 +81,8 @@ namespace ILLink.RoslynAnalyzer.Tests
         public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
             CSharpAnalyzerVerifier<TAnalyzer>.Diagnostic(descriptor);
 
-        /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
+        /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest}.VerifyAnalyzerAsync(string,
+        // DiagnosticResult[])"/>
         public static Task VerifyAnalyzerAsync(
             string source,
             bool consoleApplication,
@@ -97,23 +99,28 @@ namespace ILLink.RoslynAnalyzer.Tests
             );
 
         /// <summary>
-        /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the expected
+        /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the
+        // expected
         /// fixed code.
         /// </summary>
         /// <param name="source">The source text to test. Any diagnostics are defined in markup.</param>
-        /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined in markup.</param>
+        /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined
+        // in markup.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static Task VerifyCodeFixAsync(string source, string fixedSource) =>
             VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
 
         /// <summary>
-        /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the expected
+        /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the
+        // expected
         /// fixed code.
         /// </summary>
         /// <param name="source">The source text to test, which may include markup syntax.</param>
-        /// <param name="expected">The expected diagnostic. This diagnostic is in addition to any diagnostics defined in
+        /// <param name="expected">The expected diagnostic. This diagnostic is in addition to any
+        // diagnostics defined in
         /// markup.</param>
-        /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined in markup.</param>
+        /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined
+        // in markup.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static Task VerifyCodeFixAsync(
             string source,
@@ -122,13 +129,16 @@ namespace ILLink.RoslynAnalyzer.Tests
         ) => VerifyCodeFixAsync(source, new[] { expected }, fixedSource);
 
         /// <summary>
-        /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the expected
+        /// Verifies the analyzer provides diagnostics which, in combination with the code fix, produce the
+        // expected
         /// fixed code.
         /// </summary>
         /// <param name="source">The source text to test, which may include markup syntax.</param>
-        /// <param name="expected">The expected diagnostics. These diagnostics are in addition to any diagnostics
+        /// <param name="expected">The expected diagnostics. These diagnostics are in addition to any
+        // diagnostics
         /// defined in markup.</param>
-        /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined in markup.</param>
+        /// <param name="fixedSource">The expected fixed source text. Any remaining diagnostics are defined
+        // in markup.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static Task VerifyCodeFixAsync(
             string source,

@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 /// <summary>
-/// A <see cref="IActionResultExecutor{LocalRedirectResult}"/> that handles <see cref="LocalRedirectResult"/>.
+/// A <see cref="IActionResultExecutor{LocalRedirectResult}"/> that handles <see
+// cref="LocalRedirectResult"/>.
 /// </summary>
 public partial class LocalRedirectResultExecutor : IActionResultExecutor<LocalRedirectResult>
 {

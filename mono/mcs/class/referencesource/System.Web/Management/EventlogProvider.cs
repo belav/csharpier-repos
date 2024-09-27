@@ -148,7 +148,8 @@ namespace System.Web.Management
                 )
                 {
                     // Append message
-                    // Dev10 720406: ReportEvent treats %N as an insertion string, so we can't include this in the message.
+                    // Dev10 720406: ReportEvent treats %N as an insertion string, so we can't include this in the
+                    // message.
                     string msg = ReplaceInsertionStringPlaceholders(exception.Message);
                     sb.Append(msg); // Always append full message (shouldn't be too big)
 
@@ -344,7 +345,8 @@ namespace System.Web.Management
 
         public override void Shutdown() { }
 
-        // Dev10 720406: ReportEvent treats %N as an insertion string, so we can't include this in the message.
+        // Dev10 720406: ReportEvent treats %N as an insertion string, so we can't include this in the
+        // message.
         // Instead, we will replace such occurrences with [%]N.
         private static string ReplaceInsertionStringPlaceholders(string s)
         {

@@ -119,7 +119,7 @@ namespace System.Xml.Xsl.Xslt
                 : // ns:*
                 name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
                 : // *:foo
-                /*name  == nsUri == null*/f.True() // *
+/*name  == nsUri == null*/f.True() // *
             );
 
             XmlNodeKindFlags intersection = XPathBuilder.AxisTypeMask(
@@ -133,7 +133,7 @@ namespace System.Xml.Xsl.Xslt
                 : // input & required doesn't intersect
                 intersection == itr.XmlType.NodeKinds ? f.True()
                 : // input is subset of required
-                /*else*/f.IsType(itr, T.NodeChoice(intersection))
+/*else*/f.IsType(itr, T.NodeChoice(intersection))
             );
 
             QilLoop filter = f.BaseFactory.Filter(itr, f.And(typeTest, nameTest));
@@ -284,8 +284,10 @@ namespace System.Xml.Xsl.Xslt
         }
 
         //The structure of result is a Filter, variable is current node, body is the match condition.
-        //Previous predicate build logic in XPathPatternBuilder is match from right to left, which have 2^n complexiy when have lots of position predicates. TFS #368771
-        //Now change the logic to: If predicates contains position/last predicates, given the current node, filter out all the nodes that match the predicates,
+        //Previous predicate build logic in XPathPatternBuilder is match from right to left, which have 2^n
+        // complexiy when have lots of position predicates. TFS #368771
+        //Now change the logic to: If predicates contains position/last predicates, given the current node,
+        // filter out all the nodes that match the predicates,
         //and then check if current node is in the result set.
         public QilNode BuildPredicates(QilNode nodeset, List<QilNode> predicates)
         {
@@ -318,7 +320,8 @@ namespace System.Xml.Xsl.Xslt
                     null
                 );
             }
-            //If any preidcate contains last() or position() node, then the current node is based on previous predicates,
+            //If any preidcate contains last() or position() node, then the current node is based on previous
+            // predicates,
             //for instance, a[...][2] is match second node after filter 'a[...]' instead of second 'a'.
             else
             {
@@ -454,7 +457,8 @@ namespace System.Xml.Xsl.Xslt
             node.Annotation = null;
         }
 
-        // -------------------------------------- GetPredicateBuilder() ---------------------------------------
+        // -------------------------------------- GetPredicateBuilder()
+        // ---------------------------------------
 
         public IXPathBuilder<QilNode> GetPredicateBuilder(QilNode ctx)
         {
@@ -499,9 +503,9 @@ namespace System.Xml.Xsl.Xslt
                 );
             }
 
-            /*  ----------------------------------------------------------------------------
-                IXPathEnvironment interface
-            */
+/*  ----------------------------------------------------------------------------
+IXPathEnvironment interface
+*/
             public XPathQilFactory Factory
             {
                 get { return _f; }
@@ -556,9 +560,9 @@ namespace System.Xml.Xsl.Xslt
                 _current = current;
             }
 
-            /*  ----------------------------------------------------------------------------
-                IFocus interface
-            */
+/*  ----------------------------------------------------------------------------
+IFocus interface
+*/
             public QilNode GetCurrent()
             {
                 return _current;

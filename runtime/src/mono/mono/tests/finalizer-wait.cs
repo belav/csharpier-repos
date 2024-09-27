@@ -70,7 +70,7 @@ class Driver
                 collected = P.Count;
                 if (collected == 0)
                 {
-                    /* At least 1 finalizer started (as mre has been Set), but P.Count has not been incremented */
+/* At least 1 finalizer started (as mre has been Set), but P.Count has not been incremented */
                     Console.Write(String.Format("[{0}] Did not wait for finalizers to run\n", i));
                     return 2;
                 }
@@ -78,8 +78,8 @@ class Driver
 
             if (collected != total)
             {
-                /* Not all finalizer finished, before returning from WaitForPendingFinalizers. Or not all objects
-                 * have been garbage collected; this might be due to false pinning */
+/* Not all finalizer finished, before returning from WaitForPendingFinalizers. Or not all objects
+* have been garbage collected; this might be due to false pinning */
                 Console.Write(
                     String.Format("[{0}] Finalized {1} of {2} objects\n", i, collected, total)
                 );

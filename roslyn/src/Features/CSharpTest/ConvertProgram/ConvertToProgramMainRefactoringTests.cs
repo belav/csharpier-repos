@@ -65,7 +65,8 @@ $$
         [Fact]
         public async Task TestConvertToProgramMainWithDefaultTopLevelStatementPreference()
         {
-            // default preference is to prefer top level namespaces.  As such, we only offer to convert to the alternative as a refactoring.
+            // default preference is to prefer top level namespaces.  As such, we only offer to convert to the
+            // alternative as a refactoring.
             await new VerifyCS.Test
             {
                 TestCode =
@@ -104,7 +105,8 @@ $${|CS8805:System.Console.WriteLine(0);|}
         [Fact]
         public async Task TestConvertToProgramMainWithTopLevelStatementPreferenceSuggestion()
         {
-            // user actually prefers top level statements.  As such, we only offer to convert to the alternative as a refactoring.
+            // user actually prefers top level statements.  As such, we only offer to convert to the alternative
+            // as a refactoring.
             await new VerifyCS.Test
             {
                 TestCode =

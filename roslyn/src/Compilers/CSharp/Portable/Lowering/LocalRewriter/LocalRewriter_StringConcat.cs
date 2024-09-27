@@ -19,9 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// lowering and optimizations (including this one) is already done for the arguments.
         /// Based on the arguments we select the most appropriate pattern for the current node.
         ///
-        /// NOTE: it is not guaranteed that the node that we chose will be the most optimal since we have only
+        /// NOTE: it is not guaranteed that the node that we chose will be the most optimal since we have
+        // only
         ///       local information - i.e. we look at the arguments, but we do not know about siblings.
-        ///       When we move to the parent, the node may be rewritten by this or some another optimization.
+        ///       When we move to the parent, the node may be rewritten by this or some another
+        // optimization.
         ///
         /// Example:
         ///     result = ( "abc" + "def" + null ?? expr1 + "moo" + "baz" ) + expr2
@@ -29,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Will rewrite into:
         ///     result = Concat("abcdef", expr2)
         ///
-        /// However there will be transient nodes like  Concat(expr1 + "moo")  that will not be present in the
+        /// However there will be transient nodes like  Concat(expr1 + "moo")  that will not be present in
+        // the
         /// resulting tree.
         ///
         /// </summary>
@@ -163,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// digs into known concat operators and unwraps their arguments
         /// otherwise returns the expression as-is
         ///
-        /// Generally we only need to recognize same node patterns that we create as a result of concatenation rewrite.
+        /// Generally we only need to recognize same node patterns that we create as a result of
+        // concatenation rewrite.
         /// </summary>
         private void FlattenConcatArg(
             BoundExpression lowered,
@@ -182,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Determines whether an expression is a known string concat operator (with or without a subsequent ?? ""), and extracts
+        /// Determines whether an expression is a known string concat operator (with or without a subsequent
+        // ?? ""), and extracts
         /// its args if so.
         /// </summary>
         /// <returns>True if this is a call to a known string concat operator, false otherwise</returns>
@@ -346,10 +351,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // TODO: if transient string allocations are an issue, consider introducing constants that contain builders.
+            // TODO: if transient string allocations are an issue, consider introducing constants that contain
+            // builders.
             //       it may be not so easy to even get here though, since typical
             //       "A" + "B" + "C" + ... cases should be folded in the binder as spec requires so.
-            //       we would be mostly picking here edge cases like "A" + (object)null + "B" + (object)null + ...
+            //       we would be mostly picking here edge cases like "A" + (object)null + "B" + (object)null +
+            // ...
             return ConstantValue.Create(leftVal + rightVal);
         }
 
@@ -358,7 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private BoundExpression RewriteStringConcatenationOneExpr(BoundExpression loweredOperand)
         {
-            // If it's a call to 'string.Concat' (or is something which ends in '?? ""', which this method also extracts),
+            // If it's a call to 'string.Concat' (or is something which ends in '?? ""', which this method also
+            // extracts),
             // we know the result cannot be null. Otherwise return loweredOperand ?? ""
             if (TryExtractStringConcatArgs(loweredOperand, out _))
             {
@@ -608,8 +616,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // If it's a special value type (and not a field of a MarshalByRef object), it should have its own ToString method (but we might fail to find
-            // it if object.ToString is missing). Assume that this won't be removed, and emit a direct call rather
+            // If it's a special value type (and not a field of a MarshalByRef object), it should have its own
+            // ToString method (but we might fail to find
+            // it if object.ToString is missing). Assume that this won't be removed, and emit a direct call
+            // rather
             // than a constrained virtual call. This keeps in the spirit of #7079, but expands the range of
             // types to all special value types.
             if (
@@ -633,10 +643,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // - The type definitely doesn't have its own ToString method (i.e. we're definitely calling
             //   object.ToString on a struct type, not type parameter): no copy (yes this is a versioning issue,
             //   but that doesn't matter)
-            // - We're calling the type's own ToString method, and it's effectively readonly (the method or the whole
+            // - We're calling the type's own ToString method, and it's effectively readonly (the method or the
+            // whole
             //   type is readonly): no copy
             // - Otherwise: copy
-            // This is to mimic the old behaviour, where value types would be boxed before ToString was called on them,
+            // This is to mimic the old behaviour, where value types would be boxed before ToString was called
+            // on them,
             // but with optimizations for readonly methods.
             bool callWithoutCopy =
                 expr.Type.IsReferenceType

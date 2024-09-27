@@ -11,10 +11,12 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Authentication;
 
 /// <summary>
-/// An opinionated abstraction for an <see cref="AuthenticationHandler{TOptions}"/> that performs authentication using a separately hosted
+/// An opinionated abstraction for an <see cref="AuthenticationHandler{TOptions}"/> that performs
+// authentication using a separately hosted
 /// provider.
 /// </summary>
-/// <typeparam name="TOptions">The type for the options used to configure the authentication handler.</typeparam>
+/// <typeparam name="TOptions">The type for the options used to configure the authentication
+// handler.</typeparam>
 public abstract class RemoteAuthenticationHandler<TOptions>
     : AuthenticationHandler<TOptions>,
         IAuthenticationRequestHandler
@@ -30,8 +32,10 @@ public abstract class RemoteAuthenticationHandler<TOptions>
     protected string? SignInScheme => Options.SignInScheme;
 
     /// <summary>
-    /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
-    /// If it is not provided a default instance is supplied which does nothing when the methods are called.
+    /// The handler calls methods on the events which give the application control at certain points
+    // where processing is occurring.
+    /// If it is not provided a default instance is supplied which does nothing when the methods are
+    // called.
     /// </summary>
     protected new RemoteAuthenticationEvents Events
     {
@@ -73,16 +77,19 @@ public abstract class RemoteAuthenticationHandler<TOptions>
         Task.FromResult<object>(new RemoteAuthenticationEvents());
 
     /// <summary>
-    /// Gets a value that determines if the current authentication request should be handled by <see cref="HandleRequestAsync" />.
+    /// Gets a value that determines if the current authentication request should be handled by <see
+    // cref="HandleRequestAsync" />.
     /// </summary>
-    /// <returns><see langword="true"/> to handle the operation, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> to handle the operation, otherwise <see
+    // langword="false"/>.</returns>
     public virtual Task<bool> ShouldHandleRequestAsync() =>
         Task.FromResult(Options.CallbackPath == Request.Path);
 
     /// <summary>
     /// Handles the current authentication request.
     /// </summary>
-    /// <returns><see langword="true"/> if authentication was handled, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if authentication was handled, otherwise <see
+    // langword="false"/>.</returns>
     public virtual async Task<bool> HandleRequestAsync()
     {
         if (!await ShouldHandleRequestAsync())
@@ -220,7 +227,8 @@ public abstract class RemoteAuthenticationHandler<TOptions>
                 return result;
             }
 
-            // The SignInScheme may be shared with multiple providers, make sure this provider issued the identity.
+            // The SignInScheme may be shared with multiple providers, make sure this provider issued the
+            // identity.
             var ticket = result.Ticket;
             if (
                 ticket != null
@@ -248,7 +256,8 @@ public abstract class RemoteAuthenticationHandler<TOptions>
         Context.ForbidAsync(SignInScheme);
 
     /// <summary>
-    /// Produces a cookie containing a nonce used to correlate the current remote authentication request.
+    /// Produces a cookie containing a nonce used to correlate the current remote authentication
+    // request.
     /// </summary>
     /// <param name="properties"></param>
     protected virtual void GenerateCorrelationId(AuthenticationProperties properties)

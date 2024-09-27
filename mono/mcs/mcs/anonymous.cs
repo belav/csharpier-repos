@@ -1916,7 +1916,8 @@ namespace Mono.CSharp
                 //
                 // If e is synchronous the inferred return type is T
                 // If e is asynchronous and the body of F is either an expression classified as nothing
-                // or a statement block where no return statements have expressions, the inferred return type is Task
+                // or a statement block where no return statements have expressions, the inferred return type is
+                // Task
                 // If e is async and has an inferred result type T, the inferred return type is Task<T>
                 //
                 if (block.IsAsync && ReturnType != null)

@@ -305,7 +305,8 @@ public class DelegateTests : LoggedTest
         // Stop the receiver
         receiver?.Dispose();
 
-        // Start the receiver again but this time we need to use CreateOrAttach to attach to the existing queue and setup the UrlPrefixes
+        // Start the receiver again but this time we need to use CreateOrAttach to attach to the existing
+        // queue and setup the UrlPrefixes
         using var receiverRestarted = (MessagePump)
             Utilities.CreateHttpServer(
                 out receiverAddress,

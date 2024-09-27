@@ -461,8 +461,10 @@ namespace System.Xml.Xsl.XPath
                 }
             }
 
-            // If there is a preceding token and the preceding token is not one of '@', '::', '(', '[', ',' or an Operator,
-            // then a '*' must be recognized as a MultiplyOperator and an NCName must be recognized as an OperatorName.
+            // If there is a preceding token and the preceding token is not one of '@', '::', '(', '[', ',' or
+            // an Operator,
+            // then a '*' must be recognized as a MultiplyOperator and an NCName must be recognized as an
+            // OperatorName.
             if (_prevKind <= LexKind.LastOperator)
                 return false;
 
@@ -605,7 +607,8 @@ namespace System.Xml.Xsl.XPath
             }
         }
 
-        // May be called for the following tokens: Name, String, Eof, Comma, LParens, RParens, LBracket, RBracket, RBrace
+        // May be called for the following tokens: Name, String, Eof, Comma, LParens, RParens, LBracket,
+        // RBracket, RBrace
         private static string LexKindToString(LexKind t)
         {
             Debug.Assert(LexKind.FirstStringable <= t);

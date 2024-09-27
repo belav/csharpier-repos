@@ -55,7 +55,8 @@ namespace System.Activities.Core.Presentation
         {
             itemsToCopy.Remove(this.initialModelItem);
 
-            // If the item copied is Transition, save its destination state guid to find the destination state when pasting.
+            // If the item copied is Transition, save its destination state guid to find the destination state
+            // when pasting.
             if (itemsToCopy.Count == 1)
             {
                 ModelItem item = itemsToCopy.First();
@@ -78,7 +79,8 @@ namespace System.Activities.Core.Presentation
             itemsToCopy.RemoveAll(item => item.ItemType == typeof(Transition));
 
             // Save the locations of copied items relative to the statemachine editor to the metadata.
-            // The metadata will be used to translate the location view states of pasted items to the pasting target.
+            // The metadata will be used to translate the location view states of pasted items to the pasting
+            // target.
             PointCollection metaData = new PointCollection();
             foreach (ModelItem modelItem in itemsToCopy)
             {
@@ -141,7 +143,8 @@ namespace System.Activities.Core.Presentation
 
             foreach (ModelItem modelItem in allStateModelItemsToDelete)
             {
-                // We only need to delete incoming connectors to the states to be deleted; outgoing connectors will be deleted
+                // We only need to delete incoming connectors to the states to be deleted; outgoing connectors will
+                // be deleted
                 // automatically when the containing state is deleted.
                 List<Connector> incomingConnectors = StateContainerEditor.GetIncomingConnectors(
                     GetStateView(modelItem)
@@ -164,8 +167,10 @@ namespace System.Activities.Core.Presentation
                 }
             }
 
-            // If we don't need to remove incoming connectors, we still remove the transitions but then add them back later.
-            // This is in order to create an undo unit that contains the change notifications needed to make undo/redo work correctly.
+            // If we don't need to remove incoming connectors, we still remove the transitions but then add them
+            // back later.
+            // This is in order to create an undo unit that contains the change notifications needed to make
+            // undo/redo work correctly.
             foreach (Connector connector in connectorsToDelete)
             {
                 ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
@@ -464,7 +469,8 @@ namespace System.Activities.Core.Presentation
                         )
                 )
                 {
-                    // Fix 157591 by storing the height and width of the container "before" the new states are added to the
+                    // Fix 157591 by storing the height and width of the container "before" the new states are added to
+                    // the
                     // panel, and group the insertion inside one editing scope - such that Undo will also restore the
                     // size of the StateMachineContainer to pre-insert size.
                     StoreShapeSizeWithUndoRecursively(this.ModelItem);
@@ -588,7 +594,8 @@ namespace System.Activities.Core.Presentation
                 container != null,
                 "The view states must be calculated related to a parent StateContainerEditor."
             );
-            // If the states are not copied from state machine view (e.g., when the State designer is the breadcrumb root),
+            // If the states are not copied from state machine view (e.g., when the State designer is the
+            // breadcrumb root),
             // there is no meta data
             if (metaData != null && metaData.Count > 0)
             {
@@ -695,7 +702,8 @@ namespace System.Activities.Core.Presentation
             int offset = 0;
             if (itemsPasted.Count > 0)
             {
-                //Check to see if the first element in the input list needs offset. Generalize that information for all ModelItems in the input list.
+                //Check to see if the first element in the input list needs offset. Generalize that information for
+                // all ModelItems in the input list.
                 object location = this.ViewStateService.RetrieveViewState(
                     itemsPasted[0],
                     ShapeLocationViewStateKey

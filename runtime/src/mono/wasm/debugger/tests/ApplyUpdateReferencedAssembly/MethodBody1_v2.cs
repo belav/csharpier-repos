@@ -75,8 +75,8 @@ namespace ApplyUpdateReferencedAssembly
             Console.WriteLine(
                 $"add a breakpoint in the new static method, look at locals {newStaticField}"
             );
-            /*var newvar = new MethodBody6();
-            newvar.NewMethodInstance (10);*/
+/*var newvar = new MethodBody6();
+newvar.NewMethodInstance (10);*/
         }
 
         public static int newStaticField;
@@ -169,8 +169,8 @@ namespace ApplyUpdateReferencedAssembly
             int i = 20;
             Console.WriteLine($"add a breakpoint in the new static method, look at locals {i}");
             throw new Exception("my exception");
-            /*var newvar = new MethodBody6();
-            newvar.NewMethodInstance (10);*/
+/*var newvar = new MethodBody6();
+newvar.NewMethodInstance (10);*/
         }
     }
 }

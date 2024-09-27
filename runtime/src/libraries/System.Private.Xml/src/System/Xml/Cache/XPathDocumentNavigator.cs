@@ -27,8 +27,10 @@ namespace MS.Internal.Xml.Cache
         //-----------------------------------------------
 
         /// <summary>
-        /// Create a new navigator positioned on the specified current node.  If the current node is a namespace or a collapsed
-        /// text node, then the parent is a virtualized parent (may be different than .Parent on the current node).
+        /// Create a new navigator positioned on the specified current node.  If the current node is a
+        // namespace or a collapsed
+        /// text node, then the parent is a virtualized parent (may be different than .Parent on the current
+        // node).
         /// </summary>
         public XPathDocumentNavigator(
             XPathNode[]? pageCurrent,
@@ -113,7 +115,8 @@ namespace MS.Internal.Xml.Cache
                 string s = string.Empty;
                 StringBuilder? bldr = null;
 
-                // Get all text nodes which follow the current node in document order, but which are still descendants
+                // Get all text nodes which follow the current node in document order, but which are still
+                // descendants
                 page = pageEnd = _pageCurrent;
                 idx = idxEnd = _idxCurrent;
                 if (!XPathNodeHelper.GetNonDescendant(ref pageEnd, ref idxEnd))
@@ -254,7 +257,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Position the navigator on the first attribute of the current node and return true.  If no attributes
+        /// Position the navigator on the first attribute of the current node and return true.  If no
+        // attributes
         /// can be found, return false.
         /// </summary>
         public override bool MoveToFirstAttribute()
@@ -274,7 +278,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// If positioned on an attribute, move to its next sibling attribute.  If no attributes can be found,
+        /// If positioned on an attribute, move to its next sibling attribute.  If no attributes can be
+        // found,
         /// return false.
         /// </summary>
         public override bool MoveToNextAttribute()
@@ -364,7 +369,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Position the navigator on the next namespace within the specified scope.  If no matching namespace
+        /// Position the navigator on the next namespace within the specified scope.  If no matching
+        // namespace
         /// can be found, return false.
         /// </summary>
         public override bool MoveToNextNamespace(XPathNamespaceScope scope)
@@ -424,11 +430,13 @@ namespace MS.Internal.Xml.Cache
 
         /// <summary>
         /// If the current node is an attribute or namespace (not content), return false.  Otherwise,
-        /// move to the previous (sibling) content node.  Return false if there are no previous content nodes.
+        /// move to the previous (sibling) content node.  Return false if there are no previous content
+        // nodes.
         /// </summary>
         public override bool MoveToPrevious()
         {
-            // If parent exists, then this is a namespace, an attribute, or a collapsed text node, all of which do
+            // If parent exists, then this is a namespace, an attribute, or a collapsed text node, all of which
+            // do
             // not have previous siblings.
             if (_idxParent != 0)
                 return false;
@@ -523,7 +531,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Returns true if this navigator is positioned to the same node as the "other" navigator.  Returns false
+        /// Returns true if this navigator is positioned to the same node as the "other" navigator.  Returns
+        // false
         /// if not, or if the "other" navigator is not the same type as this navigator.
         /// </summary>
         public override bool IsSamePosition(XPathNavigator other)
@@ -630,8 +639,10 @@ namespace MS.Internal.Xml.Cache
 
         /// <summary>
         /// Move to the next element that:
-        ///   1. Follows the current node in document order (includes descendants, unlike XPath following axis)
-        ///   2. Precedes "end" in document order (if end is null, then all following nodes in the document are considered)
+        ///   1. Follows the current node in document order (includes descendants, unlike XPath following
+        // axis)
+        ///   2. Precedes "end" in document order (if end is null, then all following nodes in the document
+        // are considered)
         ///   3. Has the specified QName
         /// Return false if the current node has no matching following elements.
         /// </summary>
@@ -684,8 +695,10 @@ namespace MS.Internal.Xml.Cache
 
         /// <summary>
         /// Move to the next node that:
-        ///   1. Follows the current node in document order (includes descendants, unlike XPath following axis)
-        ///   2. Precedes "end" in document order (if end is null, then all following nodes in the document are considered)
+        ///   1. Follows the current node in document order (includes descendants, unlike XPath following
+        // axis)
+        ///   2. Precedes "end" in document order (if end is null, then all following nodes in the document
+        // are considered)
         ///   3. Has the specified XPathNodeType
         /// Return false if the current node has no matching following nodes.
         /// </summary>
@@ -702,7 +715,8 @@ namespace MS.Internal.Xml.Cache
             {
                 if (_pageCurrent[_idxCurrent].HasCollapsedText)
                 {
-                    // Positioned on an element with collapsed text, so return the virtual text node, assuming it's before "end"
+                    // Positioned on an element with collapsed text, so return the virtual text node, assuming it's
+                    // before "end"
                     if (
                         endTiny != null
                         && _idxCurrent == endTiny._idxParent
@@ -723,7 +737,8 @@ namespace MS.Internal.Xml.Cache
 
                 if (type == XPathNodeType.Text)
                 {
-                    // Get node on which scan ends (null if rest of document should be scanned, parent if positioned on virtual node)
+                    // Get node on which scan ends (null if rest of document should be scanned, parent if positioned on
+                    // virtual node)
                     idxEnd = GetFollowingEnd(endTiny, true, out pageEnd);
 
                     // If this navigator is positioned on a virtual node, then compute following of parent
@@ -773,7 +788,8 @@ namespace MS.Internal.Xml.Cache
                 }
             }
 
-            // Get node on which scan ends (null if rest of document should be scanned, parent + 1 if positioned on virtual node)
+            // Get node on which scan ends (null if rest of document should be scanned, parent + 1 if positioned
+            // on virtual node)
             idxEnd = GetFollowingEnd(endTiny, false, out pageEnd);
 
             // If this navigator is positioned on a virtual node, then compute following of parent
@@ -807,7 +823,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return an iterator that ranges over all children of the current node that match the specified XPathNodeType.
+        /// Return an iterator that ranges over all children of the current node that match the specified
+        // XPathNodeType.
         /// </summary>
         public override XPathNodeIterator SelectChildren(XPathNodeType type)
         {
@@ -815,7 +832,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return an iterator that ranges over all children of the current node that match the specified QName.
+        /// Return an iterator that ranges over all children of the current node that match the specified
+        // QName.
         /// </summary>
         public override XPathNodeIterator SelectChildren(string name, string namespaceURI)
         {
@@ -854,11 +872,14 @@ namespace MS.Internal.Xml.Cache
 
         /// <summary>
         /// Returns:
-        ///     XmlNodeOrder.Unknown -- This navigator and the "other" navigator are not of the same type, or the
+        ///     XmlNodeOrder.Unknown -- This navigator and the "other" navigator are not of the same type,
+        // or the
         ///                             navigator's are not positioned on nodes in the same document.
-        ///     XmlNodeOrder.Before -- This navigator's current node is before the "other" navigator's current node
+        ///     XmlNodeOrder.Before -- This navigator's current node is before the "other" navigator's
+        // current node
         ///                            in document order.
-        ///     XmlNodeOrder.After -- This navigator's current node is after the "other" navigator's current node
+        ///     XmlNodeOrder.After -- This navigator's current node is after the "other" navigator's current
+        // node
         ///                           in document order.
         ///     XmlNodeOrder.Same -- This navigator is positioned on the same node as the "other" navigator.
         /// </summary>
@@ -889,7 +910,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return true if the "other" navigator's current node is a descendant of this navigator's current node.
+        /// Return true if the "other" navigator's current node is a descendant of this navigator's current
+        // node.
         /// </summary>
         public override bool IsDescendant([NotNullWhen(true)] XPathNavigator? other)
         {
@@ -1015,7 +1037,8 @@ namespace MS.Internal.Xml.Cache
                 // Since we don't have any underlying PUBLIC object
                 //   the best one we can return is a clone of the navigator.
                 // Note that it should be a clone as the user might Move the returned navigator
-                //   around and thus cause unexpected behavior of the caller of this class (For example the validator)
+                //   around and thus cause unexpected behavior of the caller of this class (For example the
+                // validator)
                 return this.Clone();
             }
         }
@@ -1090,7 +1113,8 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// Return true if navigator is positioned to a node of the specified kind.  Whitespace/SignificantWhitespace/Text are
+        /// Return true if navigator is positioned to a node of the specified kind.
+        // Whitespace/SignificantWhitespace/Text are
         /// all treated the same (i.e. they all match each other).
         /// </summary>
         public bool IsKindMatch(XPathNodeType typ)
@@ -1099,10 +1123,12 @@ namespace MS.Internal.Xml.Cache
         }
 
         /// <summary>
-        /// "end" is positioned on a node which terminates a following scan.  Return the page and index of "end" if it
+        /// "end" is positioned on a node which terminates a following scan.  Return the page and index of
+        // "end" if it
         /// is positioned to a non-virtual node.  If "end" is positioned to a virtual node:
         ///    1. If useParentOfVirtual is true, then return the page and index of the virtual node's parent
-        ///    2. If useParentOfVirtual is false, then return the page and index of the virtual node's parent + 1.
+        ///    2. If useParentOfVirtual is false, then return the page and index of the virtual node's
+        // parent + 1.
         /// </summary>
         private int GetFollowingEnd(
             XPathDocumentNavigator? end,
@@ -1123,7 +1149,8 @@ namespace MS.Internal.Xml.Cache
                     return end._idxCurrent;
                 }
 
-                // If the ending navigator is positioned on an attribute, namespace, or virtual text node, then use the
+                // If the ending navigator is positioned on an attribute, namespace, or virtual text node, then use
+                // the
                 // next physical node instead, as the results will be the same.
                 pageEnd = end._pageParent;
                 return (useParentOfVirtual) ? end._idxParent : end._idxParent + 1;

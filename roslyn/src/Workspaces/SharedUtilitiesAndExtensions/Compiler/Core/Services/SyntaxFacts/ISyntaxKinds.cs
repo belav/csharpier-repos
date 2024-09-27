@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
         /// Gets the syntax kind for a multi-line comment.
         /// </summary>
         /// <value>
-        /// The raw syntax kind for a multi-line comment; otherwise, <see langword="null"/> if the language does not
+        /// The raw syntax kind for a multi-line comment; otherwise, <see langword="null"/> if the language
+        // does not
         /// support multi-line comments.
         /// </value>
         int? MultiLineCommentTrivia { get; }

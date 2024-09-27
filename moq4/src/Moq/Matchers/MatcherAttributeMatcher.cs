@@ -10,26 +10,26 @@ using System.Reflection;
 
 namespace Moq.Matchers
 {
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-        internal class MatcherAttributeMatcher : IMatcher
-    After:
-        class MatcherAttributeMatcher : IMatcher
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+internal class MatcherAttributeMatcher : IMatcher
+After:
+class MatcherAttributeMatcher : IMatcher
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-        internal class MatcherAttributeMatcher : IMatcher
-    After:
-        class MatcherAttributeMatcher : IMatcher
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+internal class MatcherAttributeMatcher : IMatcher
+After:
+class MatcherAttributeMatcher : IMatcher
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-        internal class MatcherAttributeMatcher : IMatcher
-    After:
-        class MatcherAttributeMatcher : IMatcher
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+internal class MatcherAttributeMatcher : IMatcher
+After:
+class MatcherAttributeMatcher : IMatcher
+*/
     /// <summary>
     /// Matcher to treat static functions as matchers.
     ///
@@ -49,32 +49,32 @@ namespace Moq.Matchers
     /// and fail with any other call.
     /// </summary>
     class MatcherAttributeMatcher : IMatcher
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-            private MethodInfo validatorMethod;
-            private MethodCallExpression expression;
-    After:
-            MethodInfo validatorMethod;
-            MethodCallExpression expression;
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private MethodInfo validatorMethod;
+private MethodCallExpression expression;
+After:
+MethodInfo validatorMethod;
+MethodCallExpression expression;
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-            private MethodInfo validatorMethod;
-            private MethodCallExpression expression;
-    After:
-            MethodInfo validatorMethod;
-            MethodCallExpression expression;
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private MethodInfo validatorMethod;
+private MethodCallExpression expression;
+After:
+MethodInfo validatorMethod;
+MethodCallExpression expression;
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-            private MethodInfo validatorMethod;
-            private MethodCallExpression expression;
-    After:
-            MethodInfo validatorMethod;
-            MethodCallExpression expression;
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private MethodInfo validatorMethod;
+private MethodCallExpression expression;
+After:
+MethodInfo validatorMethod;
+MethodCallExpression expression;
+*/
     {
         MethodInfo validatorMethod;
         MethodCallExpression expression;
@@ -84,26 +84,26 @@ namespace Moq.Matchers
             this.validatorMethod = ResolveValidatorMethod(expression);
             this.expression = expression;
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
-            After:
-                    static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
+After:
+static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
-            After:
-                    static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
+After:
+static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
-            After:
-                    static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
+After:
+static MethodInfo ResolveValidatorMethod(MethodCallExpression call)
+*/
         }
 
         static MethodInfo ResolveValidatorMethod(MethodCallExpression call)

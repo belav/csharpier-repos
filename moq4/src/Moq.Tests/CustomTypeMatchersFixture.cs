@@ -279,12 +279,12 @@ namespace Moq.Tests
 
         [TypeMatcher]
         public class Picky : ITypeMatcher
-        /* Unmerged change from project 'Moq.Tests(net6.0)'
-        Before:
-                    private readonly Type[] types;
-        After:
-                    readonly Type[] types;
-        */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private readonly Type[] types;
+After:
+readonly Type[] types;
+*/
         {
             readonly Type[] types;
 
@@ -321,12 +321,12 @@ namespace Moq.Tests
         }
 
         public class ObjectStringOrdinalIgnoreCaseComparer : IEqualityComparer<object>
-        /* Unmerged change from project 'Moq.Tests(net6.0)'
-        Before:
-                    private static IEqualityComparer<string> InternalComparer => StringComparer.OrdinalIgnoreCase;
-        After:
-                    static IEqualityComparer<string> InternalComparer => StringComparer.OrdinalIgnoreCase;
-        */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private static IEqualityComparer<string> InternalComparer => StringComparer.OrdinalIgnoreCase;
+After:
+static IEqualityComparer<string> InternalComparer => StringComparer.OrdinalIgnoreCase;
+*/
         {
             static IEqualityComparer<string> InternalComparer => StringComparer.OrdinalIgnoreCase;
 

@@ -43,7 +43,8 @@ namespace System.IdentityModel.Tokens
             ) { }
 
         /// <summary>
-        /// Constructs an encrypting credential based on the x509 certificate, key wrapping algorithm, and security key identifier.
+        /// Constructs an encrypting credential based on the x509 certificate, key wrapping algorithm, and
+        // security key identifier.
         /// </summary>
         /// <param name="certificate">The x509 certificate.</param>
         /// <param name="ski">The security key identifier to be used.</param>
@@ -83,7 +84,8 @@ namespace System.IdentityModel.Tokens
             ) { }
 
         /// <summary>
-        /// Constructs an encrypting credential based on the x509 token, key wrapping algorithm, and security key identifier.
+        /// Constructs an encrypting credential based on the x509 token, key wrapping algorithm, and
+        // security key identifier.
         /// </summary>
         /// <param name="token">The x509 security token.</param>
         /// <param name="ski">The security key identifier to be used.</param>

@@ -8,7 +8,8 @@ using System.Threading;
 using Xunit;
 
 // Test Description:
-// Just basic heavy reading and writing from ThreadStatic members in normal threads and threadpools threads as well.
+// Just basic heavy reading and writing from ThreadStatic members in normal threads and threadpools
+// threads as well.
 // Ported from .NET Framework test: BaseServices\Regression\V1\Threads\ThreadStatic\threadstatic1.cs
 
 public class Sensor

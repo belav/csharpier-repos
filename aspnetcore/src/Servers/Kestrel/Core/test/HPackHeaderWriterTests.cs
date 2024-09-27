@@ -40,7 +40,8 @@
 //                data.Add(
 //                    new[]
 //                    {
-//                        new KeyValuePair<string, string>("CustomHeader!#$%&'*+-.^_`|~", "CustomValue"),
+//                        new KeyValuePair<string, string>("CustomHeader!#$%&'*+-.^_`|~",
+// "CustomValue"),
 //                    },
 //                    new byte[]
 //                    {
@@ -63,7 +64,8 @@
 //                    new[]
 //                    {
 //                        new KeyValuePair<string, string>("date", "Mon, 24 Jul 2017 19:22:30 GMT"),
-//                        new KeyValuePair<string, string>("content-type", "text/html; charset=utf-8"),
+//                        new KeyValuePair<string, string>("content-type", "text/html;
+// charset=utf-8"),
 //                        new KeyValuePair<string, string>("server", "Kestrel")
 //                    },
 //                    new byte[]
@@ -89,23 +91,27 @@
 
 //        [Theory]
 //        [MemberData(nameof(SinglePayloadData))]
-//        public void EncodesHeadersInSinglePayloadWhenSpaceAvailable(KeyValuePair<string, string>[] headers, byte[] expectedPayload, int? statusCode)
+//        public void EncodesHeadersInSinglePayloadWhenSpaceAvailable(KeyValuePair<string, string>[]
+// headers, byte[] expectedPayload, int? statusCode)
 //        {
 //            var payload = new byte[1024];
 //            var length = 0;
 //            if (statusCode.HasValue)
 //            {
-//                Assert.True(HPackHeaderWriter.BeginEncodeHeaders(statusCode.Value, GetHeadersEnumerator(headers), payload, out length));
+//                Assert.True(HPackHeaderWriter.BeginEncodeHeaders(statusCode.Value,
+// GetHeadersEnumerator(headers), payload, out length));
 //            }
 //            else
 //            {
-//                Assert.True(HPackHeaderWriter.BeginEncodeHeaders(GetHeadersEnumerator(headers), payload, out length));
+//                Assert.True(HPackHeaderWriter.BeginEncodeHeaders(GetHeadersEnumerator(headers),
+// payload, out length));
 //            }
 //            Assert.Equal(expectedPayload.Length, length);
 
 //            for (var i = 0; i < length; i++)
 //            {
-//                Assert.True(expectedPayload[i] == payload[i], $"{expectedPayload[i]} != {payload[i]} at {i} (len {length})");
+//                Assert.True(expectedPayload[i] == payload[i], $"{expectedPayload[i]} !=
+// {payload[i]} at {i} (len {length})");
 //            }
 
 //            Assert.Equal(expectedPayload, new ArraySegment<byte>(payload, 0, length));
@@ -158,38 +164,48 @@
 //            var headerEnumerator = GetHeadersEnumerator(headers);
 
 //            // When !exactSize, slices are one byte short of fitting the next header
-//            var sliceLength = expectedStatusCodePayload.Length + (exactSize ? 0 : expectedDateHeaderPayload.Length - 1);
-//            Assert.False(HPackHeaderWriter.BeginEncodeHeaders(statusCode, headerEnumerator, payload.Slice(offset, sliceLength), out var length));
+//            var sliceLength = expectedStatusCodePayload.Length + (exactSize ? 0 :
+// expectedDateHeaderPayload.Length - 1);
+//            Assert.False(HPackHeaderWriter.BeginEncodeHeaders(statusCode, headerEnumerator,
+// payload.Slice(offset, sliceLength), out var length));
 //            Assert.Equal(expectedStatusCodePayload.Length, length);
 //            Assert.Equal(expectedStatusCodePayload, payload.Slice(0, length).ToArray());
 
 //            offset += length;
 
-//            sliceLength = expectedDateHeaderPayload.Length + (exactSize ? 0 : expectedContentTypeHeaderPayload.Length - 1);
-//            Assert.False(HPackHeaderWriter.ContinueEncodeHeaders(headerEnumerator, payload.Slice(offset, sliceLength), out length));
+//            sliceLength = expectedDateHeaderPayload.Length + (exactSize ? 0 :
+// expectedContentTypeHeaderPayload.Length - 1);
+//            Assert.False(HPackHeaderWriter.ContinueEncodeHeaders(headerEnumerator,
+// payload.Slice(offset, sliceLength), out length));
 //            Assert.Equal(expectedDateHeaderPayload.Length, length);
 //            Assert.Equal(expectedDateHeaderPayload, payload.Slice(offset, length).ToArray());
 
 //            offset += length;
 
-//            sliceLength = expectedContentTypeHeaderPayload.Length + (exactSize ? 0 : expectedServerHeaderPayload.Length - 1);
-//            Assert.False(HPackHeaderWriter.ContinueEncodeHeaders(headerEnumerator, payload.Slice(offset, sliceLength), out length));
+//            sliceLength = expectedContentTypeHeaderPayload.Length + (exactSize ? 0 :
+// expectedServerHeaderPayload.Length - 1);
+//            Assert.False(HPackHeaderWriter.ContinueEncodeHeaders(headerEnumerator,
+// payload.Slice(offset, sliceLength), out length));
 //            Assert.Equal(expectedContentTypeHeaderPayload.Length, length);
-//            Assert.Equal(expectedContentTypeHeaderPayload, payload.Slice(offset, length).ToArray());
+//            Assert.Equal(expectedContentTypeHeaderPayload, payload.Slice(offset,
+// length).ToArray());
 
 //            offset += length;
 
 //            sliceLength = expectedServerHeaderPayload.Length;
-//            Assert.True(HPackHeaderWriter.ContinueEncodeHeaders(headerEnumerator, payload.Slice(offset, sliceLength), out length));
+//            Assert.True(HPackHeaderWriter.ContinueEncodeHeaders(headerEnumerator,
+// payload.Slice(offset, sliceLength), out length));
 //            Assert.Equal(expectedServerHeaderPayload.Length, length);
 //            Assert.Equal(expectedServerHeaderPayload, payload.Slice(offset, length).ToArray());
 //        }
 
-//        private static Http2HeadersEnumerator GetHeadersEnumerator(IEnumerable<KeyValuePair<string, string>> headers)
+//        private static Http2HeadersEnumerator
+// GetHeadersEnumerator(IEnumerable<KeyValuePair<string, string>> headers)
 //        {
 //            var groupedHeaders = headers
 //                .GroupBy(k => k.Key)
-//                .ToDictionary(g => g.Key, g => new StringValues(g.Select(gg => gg.Value).ToArray()));
+//                .ToDictionary(g => g.Key, g => new StringValues(g.Select(gg =>
+// gg.Value).ToArray()));
 
 //            var enumerator = new Http2HeadersEnumerator();
 //            enumerator.Initialize(groupedHeaders);

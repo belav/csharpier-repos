@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            // Only potentially valid for string literal completion if not in an interpolated string brace completion context.
+            // Only potentially valid for string literal completion if not in an interpolated string brace
+            // completion context.
             if (
                 OpeningBrace == brace
                 && InterpolatedStringBraceCompletionService.IsPositionInInterpolatedStringContext(
@@ -105,8 +106,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 return true;
             }
 
-            // The character at the position is a double quote but the token's span start we found at the position
-            // doesn't match the position.  Check if we're in a verbatim string token @" where the token span start
+            // The character at the position is a double quote but the token's span start we found at the
+            // position
+            // doesn't match the position.  Check if we're in a verbatim string token @" where the token span
+            // start
             // is the @ character and the " is one past the token start.
             return token.SpanStart + 1 == position && token.IsVerbatimStringLiteral();
         }

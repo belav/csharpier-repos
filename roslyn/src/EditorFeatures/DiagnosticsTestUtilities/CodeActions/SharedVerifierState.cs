@@ -20,14 +20,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         /// <summary>
         /// The index in <see cref="Testing.ProjectState.AnalyzerConfigFiles"/> of the generated
-        /// <strong>.editorconfig</strong> file for <see cref="Options"/>, or <see langword="null"/> if no such
+        /// <strong>.editorconfig</strong> file for <see cref="Options"/>, or <see langword="null"/> if no
+        // such
         /// file has been generated yet.
         /// </summary>
         private int? _analyzerConfigIndex;
 
         /// <summary>
-        /// The index in <see cref="AnalyzerTest{TVerifier}.SolutionTransforms"/> of the options transformation for
-        /// remaining <see cref="Options"/>, or <see langword="null"/> if no such transfor has been generated yet.
+        /// The index in <see cref="AnalyzerTest{TVerifier}.SolutionTransforms"/> of the options
+        // transformation for
+        /// remaining <see cref="Options"/>, or <see langword="null"/> if no such transfor has been
+        // generated yet.
         /// </summary>
         private Func<Solution, ProjectId, Solution>? _remainingOptionsSolutionTransform;
 
@@ -41,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public string? EditorConfig { get; set; }
 
         /// <summary>
-        /// Gets a collection of options to apply to <see cref="Solution.Options"/> for testing. Values may be added
+        /// Gets a collection of options to apply to <see cref="Solution.Options"/> for testing. Values may
+        // be added
         /// using a collection initializer.
         /// </summary>
         internal OptionsCollection Options { get; }

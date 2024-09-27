@@ -439,8 +439,10 @@ namespace System.Net
             get { return m_HttpContext; }
         }
 
-        // Note: RequestBuffer may get moved in memory. If you dereference a pointer from inside the RequestBuffer,
-        // you must use 'OriginalBlobAddress' below to adjust the location of the pointer to match the location of
+        // Note: RequestBuffer may get moved in memory. If you dereference a pointer from inside the
+        // RequestBuffer,
+        // you must use 'OriginalBlobAddress' below to adjust the location of the pointer to match the
+        // location of
         // RequestBuffer.
         //
 
@@ -462,7 +464,8 @@ namespace System.Net
             }
         }
 
-        // Use this to save the blob from dispose if this object was never used (never given to a user) and is about to be
+        // Use this to save the blob from dispose if this object was never used (never given to a user) and
+        // is about to be
         // disposed.
         internal void DetachBlob(RequestContextBase memoryBlob)
         {
@@ -657,7 +660,8 @@ namespace System.Net
             }
         }
 
-        // Requires ControlPrincipal permission if the request was authenticated with Negotiate, NTLM, or Digest.
+        // Requires ControlPrincipal permission if the request was authenticated with Negotiate, NTLM, or
+        // Digest.
         public /* override */
         bool IsAuthenticated
         {
@@ -1473,17 +1477,17 @@ namespace System.Net
             }
         }
 
-        /*
-        private DateTime IfModifiedSince {
-            get {
-                string headerValue = GetKnownHeader(HttpRequestHeader.IfModifiedSince);
-                if (headerValue==null) {
-                    return DateTime.Now;
-                }
-                return DateTime.Parse(headerValue, CultureInfo.InvariantCulture);
-            }
-        }
-        */
+/*
+private DateTime IfModifiedSince {
+get {
+string headerValue = GetKnownHeader(HttpRequestHeader.IfModifiedSince);
+if (headerValue==null) {
+return DateTime.Now;
+}
+return DateTime.Parse(headerValue, CultureInfo.InvariantCulture);
+}
+}
+*/
 
         private string GetKnownHeader(HttpRequestHeader header)
         {
@@ -1534,7 +1538,8 @@ namespace System.Net
 
         /// <summary>
         /// Process the token binding information in the request and populate m_TokenBindings
-        /// This method should be called once only as token binding information is cached in m_TokenBindings for further use.
+        /// This method should be called once only as token binding information is cached in m_TokenBindings
+        // for further use.
         /// </summary>
         private void ProcessTlsTokenBindings()
         {
@@ -1584,7 +1589,8 @@ namespace System.Net
 
                 if (useV1TokenBinding && pTokenBindingInfo_V1 != null)
                 {
-                    // Old V1 Token Binding protocol is still being used, so we need to verify the binding message using the old API
+                    // Old V1 Token Binding protocol is still being used, so we need to verify the binding message using
+                    // the old API
                     m_TokenBindingVerifyMessageStatus =
                         UnsafeNclNativeMethods.HttpApi.TokenBindingVerifyMessage_V1(
                             pTokenBindingInfo_V1->TokenBinding + fixup,
@@ -1696,7 +1702,8 @@ namespace System.Net
 
                 if (pThisResultData != null)
                 {
-                    // Old V1 Token Binding protocol is still being used, so we need modify the binding message using the old behavior
+                    // Old V1 Token Binding protocol is still being used, so we need modify the binding message using
+                    // the old behavior
 
                     // Per http://tools.ietf.org/html/draft-ietf-tokbind-protocol-00, Sec. 4,
                     // We'll strip off the token binding type and return the remainder as an opaque blob.
@@ -2007,12 +2014,12 @@ namespace System.Net
                 {
                     // if there are no pending bytes treat 7 bit bytes as characters
                     // this optimization is temp disable as it doesn't work for some encodings
-                    /*
-                                    if (_numBytes == 0 && ((b & 0x80) == 0)) {
-                                        AddChar((char)b);
-                                    }
-                                    else
-                    */
+/*
+if (_numBytes == 0 && ((b & 0x80) == 0)) {
+AddChar((char)b);
+}
+else
+*/
                     {
                         if (_byteBuffer == null)
                             _byteBuffer = new byte[_bufferSize];

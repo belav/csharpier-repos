@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Runtime.InteropServices.Marshalling
 {
     /// <summary>
-    /// A marshaller for <see cref="SafeHandle"/>-derived types that marshals the handle following the lifetime rules for <see cref="SafeHandle"/>s.
+    /// A marshaller for <see cref="SafeHandle"/>-derived types that marshals the handle following the
+    // lifetime rules for <see cref="SafeHandle"/>s.
     /// </summary>
     /// <typeparam name="T">The <see cref="SafeHandle"/>-derived type.</typeparam>
     [CustomMarshaller(

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FileHeaders
                 var endIndex = triviaString.LastIndexOf("*/", StringComparison.Ordinal);
                 if (endIndex < startIndex)
                 {
-                    // While editing, it is possible to have a multiline comment trivia that does not contain the closing '*/' yet.
+                    // While editing, it is possible to have a multiline comment trivia that does not contain the
+                    // closing '*/' yet.
                     return triviaString.AsMemory()[startIndex..];
                 }
 

@@ -161,7 +161,8 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Raises the <see cref="ListChanged"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="ListChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="ListChangedEventArgs"/> instance containing the event
+        // data.</param>
         protected virtual void OnListChanged(ListChangedEventArgs e)
         {
             ListChangedEventHandler? handler = _listChanged;
@@ -184,7 +185,8 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Raises the <see cref="CollectionChanged"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event
+        // data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             NotifyCollectionChangedEventHandler? handler = _collectionChanged;
@@ -273,7 +275,8 @@ namespace Newtonsoft.Json.Linq
         /// Returns a collection of the child tokens of this token, in document order.
         /// </summary>
         /// <returns>
-        /// An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing the child tokens of this <see cref="JToken"/>, in document order.
+        /// An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing the child tokens of this <see
+        // cref="JToken"/>, in document order.
         /// </returns>
         public override JEnumerable<JToken> Children()
         {
@@ -285,7 +288,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type to convert the values to.</typeparam>
         /// <returns>
-        /// A <see cref="IEnumerable{T}"/> containing the child values of this <see cref="JToken"/>, in document order.
+        /// A <see cref="IEnumerable{T}"/> containing the child values of this <see cref="JToken"/>, in
+        // document order.
         /// </returns>
         public override IEnumerable<T?> Values<T>()
             where T : default
@@ -296,16 +300,19 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Returns a collection of the descendant tokens for this token in document order.
         /// </summary>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing the descendant tokens of the <see cref="JToken"/>.</returns>
+        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing the descendant
+        // tokens of the <see cref="JToken"/>.</returns>
         public IEnumerable<JToken> Descendants()
         {
             return GetDescendants(false);
         }
 
         /// <summary>
-        /// Returns a collection of the tokens that contain this token, and all descendant tokens of this token, in document order.
+        /// Returns a collection of the tokens that contain this token, and all descendant tokens of this
+        // token, in document order.
         /// </summary>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing this token, and all the descendant tokens of the <see cref="JToken"/>.</returns>
+        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> containing this token, and all
+        // the descendant tokens of the <see cref="JToken"/>.</returns>
         public IEnumerable<JToken> DescendantsAndSelf()
         {
             return GetDescendants(true);
@@ -811,7 +818,8 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Merge the specified content into this <see cref="JToken"/> using <see cref="JsonMergeSettings"/>.
+        /// Merge the specified content into this <see cref="JToken"/> using <see
+        // cref="JsonMergeSettings"/>.
         /// </summary>
         /// <param name="content">The content to be merged.</param>
         /// <param name="settings">The <see cref="JsonMergeSettings"/> used to merge the content.</param>

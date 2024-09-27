@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// canonical type couldn't be found.
     /// </summary>
     internal class NoPiaMissingCanonicalTypeSymbol : ErrorTypeSymbol
-    // TODO: Should probably inherit from MissingMetadataType.TopLevel, but review TypeOf checks for MissingMetadataType.
+    // TODO: Should probably inherit from MissingMetadataType.TopLevel, but review TypeOf checks for
+    // MissingMetadataType.
     {
         private readonly AssemblySymbol _embeddingAssembly;
         private readonly string _fullTypeName;

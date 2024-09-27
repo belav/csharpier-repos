@@ -217,17 +217,17 @@ namespace MonoTests.System.Data.SqlTypes
             Assert.AreEqual(SqlDecimal.Null, SqlDecimal.Ceiling(SqlDecimal.Null), "#D08");
 
             // Divide() => Notworking
-            /*
-            Assert.AreEqual ((SqlDecimal)(-1077.441066m), SqlDecimal.Divide (Test1, Test4), "#D09");
-            Assert.AreEqual (1.54687501546m, SqlDecimal.Divide (Test2, Test1).Value, "#D10");
+/*
+Assert.AreEqual ((SqlDecimal)(-1077.441066m), SqlDecimal.Divide (Test1, Test4), "#D09");
+Assert.AreEqual (1.54687501546m, SqlDecimal.Divide (Test2, Test1).Value, "#D10");
 
-            try {
-                SqlDecimal test = SqlDecimal.Divide(Test1, new SqlDecimal(0)).Value;
-                Assert.Fail ("#D11");
-            } catch (DivideByZeroException e) {
-                Assert.AreEqual (typeof (DivideByZeroException), e.GetType (), "#D12");
-            }
-            */
+try {
+SqlDecimal test = SqlDecimal.Divide(Test1, new SqlDecimal(0)).Value;
+Assert.Fail ("#D11");
+} catch (DivideByZeroException e) {
+Assert.AreEqual (typeof (DivideByZeroException), e.GetType (), "#D12");
+}
+*/
 
             Assert.AreEqual((SqlDecimal)6464m, SqlDecimal.Floor(Test1), "#D13");
 
@@ -382,14 +382,14 @@ namespace MonoTests.System.Data.SqlTypes
             Assert.IsTrue(SqlDecimal.NotEquals(SqlDecimal.Null, Test3).IsNull, "#H10");
         }
 
-        /* Don't do such environment-dependent test. It will never succeed under Portable.NET and MS.NET
-        [Test]
-        public void GetHashCodeTest()
-        {
-            // FIXME: Better way to test HashCode
-            Assert.AreEqual (-1281249885, Test1.GetHashCode (), "#I01");
-        }
-        */
+/* Don't do such environment-dependent test. It will never succeed under Portable.NET and MS.NET
+[Test]
+public void GetHashCodeTest()
+{
+// FIXME: Better way to test HashCode
+Assert.AreEqual (-1281249885, Test1.GetHashCode (), "#I01");
+}
+*/
 
         [Test]
         public void GetTypeTest()

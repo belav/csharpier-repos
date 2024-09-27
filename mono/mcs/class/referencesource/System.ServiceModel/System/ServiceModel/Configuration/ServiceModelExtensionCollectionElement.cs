@@ -350,7 +350,8 @@ namespace System.ServiceModel.Configuration
         }
 
         /// <summary>
-        /// Returns the extension element, or null if the type cannot be loaded in certain situations (see the code for details).
+        /// Returns the extension element, or null if the type cannot be loaded in certain situations (see
+        // the code for details).
         /// </summary>
         TServiceModelExtensionElement CreateNewSection(string name)
         {

@@ -91,7 +91,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public static bool HasConditionalDependenciesDueToMethodCodePresence(MethodDesc method)
         {
-            // NICE: would be nice if the metadata managed could decide this but we don't have a way to get at it
+            // NICE: would be nice if the metadata managed could decide this but we don't have a way to get at
+            // it
             return method.HasInstantiation || method.OwningType.HasInstantiation;
         }
 

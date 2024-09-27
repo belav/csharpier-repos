@@ -28,7 +28,8 @@ namespace ILCompiler
 
         /// <summary>
         /// Gets the target object of the lookup. Only valid when <see cref="UseHelper"/> is true.
-        /// This is typically a <see cref="TypeDesc"/> whose <see cref="TypeDesc.IsRuntimeDeterminedSubtype"/>
+        /// This is typically a <see cref="TypeDesc"/> whose <see
+        // cref="TypeDesc.IsRuntimeDeterminedSubtype"/>
         /// is true, a <see cref="FieldDesc"/> on a runtime determined type, a <see cref="MethodDesc"/>, or
         /// a <see cref="DelegateCreationInfo"/>.
         /// </summary>

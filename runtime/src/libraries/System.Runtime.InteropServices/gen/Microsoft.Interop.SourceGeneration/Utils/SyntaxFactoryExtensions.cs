@@ -29,7 +29,8 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// <code><paramref name="typeSyntax"/> <paramref name="identifier"/> = <paramref name="identifier"/>;</code>
+        /// <code><paramref name="typeSyntax"/> <paramref name="identifier"/> = <paramref
+        // name="identifier"/>;</code>
         /// or
         /// <code><paramref name="typeSyntax"/> <paramref name="identifier"/>;</code>
         /// </summary>
@@ -145,7 +146,8 @@ namespace Microsoft.Interop
         /// <summary>
         /// Returns a for loop with no body:
         /// <code>
-        /// for(int <paramref name="indexerIdentifier"/>; <paramref name="indexerIdentifier"/> &lt; <paramref name="lengthExpression"/>; ++<paramref name="indexerIdentifier"/>)
+        /// for(int <paramref name="indexerIdentifier"/>; <paramref name="indexerIdentifier"/> &lt;
+        // <paramref name="lengthExpression"/>; ++<paramref name="indexerIdentifier"/>)
         /// ;
         /// </code>
         /// </summary>

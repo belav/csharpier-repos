@@ -10,7 +10,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         private static readonly Encoding s_asciiEncoding = new ASCIIEncoding();
         private static readonly byte[] s_helloBytes = s_asciiEncoding.GetBytes("Hello");
 
-        // This is the expected output of many decryptions. Changing this value requires re-generating test input.
+        // This is the expected output of many decryptions. Changing this value requires re-generating test
+        // input.
         private static readonly byte[] s_multiBlockBytes = s_asciiEncoding.GetBytes(
             "This is a sentence that is longer than a block, it ensures that multi-block functions work."
         );

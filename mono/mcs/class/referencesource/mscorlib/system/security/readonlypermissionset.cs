@@ -14,16 +14,23 @@ using System.Runtime.Serialization;
 namespace System.Security
 {
     /// <summary>
-    ///     Read only permission sets are created from explicit XML and cannot be modified after creation time.
-    ///     This allows us to round trip the permission set to the same XML that it was originally created
-    ///     from - which allows permission sets to be created from XML representing a permission set in a
+    ///     Read only permission sets are created from explicit XML and cannot be modified after
+    // creation time.
+    ///     This allows us to round trip the permission set to the same XML that it was originally
+    // created
+    ///     from - which allows permission sets to be created from XML representing a permission set in
+    // a
     ///     previous version of the framework to be deserialized on the current version while still
     ///     serializing back to XML that makes sense on the original framework version.
     ///
-    ///     Note that while we protect against modifications of the permission set itself (such as adding or
-    ///     removing permissions), we do not make any attempt to guard against modification to the permissions
-    ///     which are members of the set.  Permission accesor APIs always return a copy of the permission in
-    ///     question, although it may be mutable depending upon the permission class.  If it is mutable, users
+    ///     Note that while we protect against modifications of the permission set itself (such as
+    // adding or
+    ///     removing permissions), we do not make any attempt to guard against modification to the
+    // permissions
+    ///     which are members of the set.  Permission accesor APIs always return a copy of the
+    // permission in
+    ///     question, although it may be mutable depending upon the permission class.  If it is mutable,
+    // users
     ///     will only be modifing a copy of the permission, and not modifying the state of the
     ///     ReadOnlyPermissionSet.
     /// </summary>

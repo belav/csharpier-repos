@@ -280,7 +280,8 @@ namespace Internal.IL
         /// </summary>
         /// <param name="valueA">The value to be merged with <paramref name="valueB"/>.</param>
         /// <param name="valueB">The value to be merged with <paramref name="valueA"/>.</param>
-        /// <param name="merged">The resulting type of merging <paramref name="valueA"/> and <paramref name="valueB"/>.</param>
+        /// <param name="merged">The resulting type of merging <paramref name="valueA"/> and <paramref
+        // name="valueB"/>.</param>
         /// <returns>True if merge operation was successful, false if the merge operation failed.</returns>
         public static bool TryMergeStackValues(
             StackValue valueA,

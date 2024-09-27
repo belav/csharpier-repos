@@ -21,7 +21,8 @@ public interface IModelBinder
     /// <see cref="ModelBindingResult.IsModelSet"/> set to <c>true</c>.
     /// </para>
     /// <para>
-    /// A model binder that completes successfully should set <see cref="ModelBindingContext.Result"/> to
+    /// A model binder that completes successfully should set <see cref="ModelBindingContext.Result"/>
+    // to
     /// a value returned from <see cref="ModelBindingResult.Success"/>.
     /// </para>
     /// </returns>

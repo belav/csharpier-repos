@@ -13,13 +13,15 @@ namespace System.Web.Services.Protocols
     {
         PatternMatcher matcher;
 
-        /// <include file='doc\TextReturnReader.uex' path='docs/doc[@for="TextReturnReader.Initialize"]/*' />
+        /// <include file='doc\TextReturnReader.uex' path='docs/doc[@for="TextReturnReader.Initialize"]/*'
+        // />
         public override void Initialize(object o)
         {
             matcher = (PatternMatcher)o;
         }
 
-        /// <include file='doc\TextReturnReader.uex' path='docs/doc[@for="TextReturnReader.GetInitializer"]/*' />
+        /// <include file='doc\TextReturnReader.uex'
+        // path='docs/doc[@for="TextReturnReader.GetInitializer"]/*' />
         public override object GetInitializer(LogicalMethodInfo methodInfo)
         {
             return new PatternMatcher(methodInfo.ReturnType);

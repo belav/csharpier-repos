@@ -199,15 +199,19 @@ namespace System.Linq.Expressions.Interpreter
                     frame.InstructionIndex = index;
                 }
 
-                // Exception is stored in a local at start of the filter, and loaded from it at the end, so it is now
+                // Exception is stored in a local at start of the filter, and loaded from it at the end, so it is
+                // now
                 // on the top of the stack. It may have been assigned to in the course of the filter running.
-                // If this is the handler that will be executed, then if the filter has assigned to the exception variable
-                // that change should be visible to the handler. Otherwise, it should not, so we write it back only on true.
+                // If this is the handler that will be executed, then if the filter has assigned to the exception
+                // variable
+                // that change should be visible to the handler. Otherwise, it should not, so we write it back only
+                // on true.
                 object? exceptionLocal = frame.Pop();
                 if ((bool)frame.Pop()!)
                 {
                     exception = exceptionLocal;
-                    // Stack and instruction indices will be overwritten in the catch block anyway, so no need to restore.
+                    // Stack and instruction indices will be overwritten in the catch block anyway, so no need to
+                    // restore.
                     return true;
                 }
             }
@@ -762,7 +766,8 @@ namespace System.Linq.Expressions.Interpreter
             }
             else
             {
-                // other types inherited from MemberInfo (EventInfo\MethodBase\Type) cannot be used in MemberAssignment
+                // other types inherited from MemberInfo (EventInfo\MethodBase\Type) cannot be used in
+                // MemberAssignment
                 var fi = (FieldInfo)refMember;
                 Debug.Assert(fi != null);
                 if (fi.IsLiteral)
@@ -863,14 +868,14 @@ namespace System.Linq.Expressions.Interpreter
                         case ExpressionType.Equal:
                         case ExpressionType.NotEqual:
                             /* generating (equal/not equal):
-                                * if (left == null) {
-                                *      right == null/right != null
-                                * }else if (right == null) {
-                                *      False/True
-                                * }else{
-                                *      op_Equality(left, right)/op_Inequality(left, right)
-                                * }
-                                */
+                            * if (left == null) {
+                            *      right == null/right != null
+                            * }else if (right == null) {
+                            *      False/True
+                            * }else{
+                            *      op_Equality(left, right)/op_Inequality(left, right)
+                            * }
+                            */
                             if (node.IsLiftedToNull)
                             {
                                 goto default;
@@ -2739,7 +2744,8 @@ namespace System.Linq.Expressions.Interpreter
             }
             else
             {
-                // MemberExpression can use either FieldInfo or PropertyInfo - other types derived from MemberInfo are not permitted
+                // MemberExpression can use either FieldInfo or PropertyInfo - other types derived from MemberInfo
+                // are not permitted
                 var pi = (PropertyInfo)member;
                 if (pi != null)
                 {

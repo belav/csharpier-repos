@@ -169,9 +169,9 @@ namespace System.Diagnostics
             return machine == ".";
         }
 
-        /* the perf counter has changed, ensure it's valid and setup it to
-         * be able to collect/update data
-         */
+/* the perf counter has changed, ensure it's valid and setup it to
+* be able to collect/update data
+*/
         void UpdateInfo()
         {
             // need to free the previous info

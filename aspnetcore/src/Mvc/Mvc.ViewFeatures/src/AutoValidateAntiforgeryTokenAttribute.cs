@@ -10,13 +10,15 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// An attribute that causes validation of antiforgery tokens for all unsafe HTTP methods. An antiforgery
+/// An attribute that causes validation of antiforgery tokens for all unsafe HTTP methods. An
+// antiforgery
 /// token is required for HTTP methods other than GET, HEAD, OPTIONS, and TRACE.
 /// </summary>
 /// <remarks>
 /// <see cref="AutoValidateAntiforgeryTokenAttribute"/> can be applied as a global filter to trigger
 /// validation of antiforgery tokens by default for an application. Use
-/// <see cref="IgnoreAntiforgeryTokenAttribute"/> to suppress validation of the antiforgery token for
+/// <see cref="IgnoreAntiforgeryTokenAttribute"/> to suppress validation of the antiforgery token
+// for
 /// a controller or action.
 /// </remarks>
 [AttributeUsage(
@@ -32,11 +34,14 @@ public class AutoValidateAntiforgeryTokenAttribute : Attribute, IFilterFactory, 
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Filters are executed in a sequence determined by an ascending sort of the <see cref="Order"/> property.
+    /// Filters are executed in a sequence determined by an ascending sort of the <see cref="Order"/>
+    // property.
     /// </para>
     /// <para>
-    /// The default Order for this attribute is 1000 because it must run after any filter which does authentication
-    /// or login in order to allow them to behave as expected (ie Unauthenticated or Redirect instead of 400).
+    /// The default Order for this attribute is 1000 because it must run after any filter which does
+    // authentication
+    /// or login in order to allow them to behave as expected (ie Unauthenticated or Redirect instead of
+    // 400).
     /// </para>
     /// <para>
     /// Look at <see cref="IOrderedFilter.Order"/> for more detailed info.

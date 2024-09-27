@@ -5,7 +5,8 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.CommandLine
 {
     /// <summary>
-    /// This test will use only keep used attributes, which is disabled by default, to infer that the rsp file worked
+    /// This test will use only keep used attributes, which is disabled by default, to infer that the
+    // rsp file worked
     /// </summary>
     [SetupLinkerResponseFileAttribute("Dependencies/ResponseFilesWork.rsp")]
     public class ResponseFilesWork

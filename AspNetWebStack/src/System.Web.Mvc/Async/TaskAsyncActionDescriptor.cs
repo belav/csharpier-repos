@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ using System.Web.Mvc.Properties;
 namespace System.Web.Mvc.Async
 {
     /// <summary>
-    /// When an action method returns either Task or Task{T} the TaskAsyncActionDescriptor provides information about the action.
+    /// When an action method returns either Task or Task{T} the TaskAsyncActionDescriptor provides
+    // information about the action.
     /// </summary>
     public class TaskAsyncActionDescriptor : AsyncActionDescriptor, IMethodInfoActionDescriptor
     {
@@ -192,7 +194,8 @@ namespace System.Web.Mvc.Async
                         tokenSource.Dispose();
                         if (tokenSource.IsCancellationRequested)
                         {
-                            // Give Timeout exceptions higher priority over other exceptions, mainly OperationCancelled exceptions
+                            // Give Timeout exceptions higher priority over other exceptions, mainly OperationCancelled
+                            // exceptions
                             // that were signaled with out timeout token.
                             throw new TimeoutException();
                         }
@@ -337,7 +340,8 @@ namespace System.Web.Mvc.Async
         {
             if (useCache && GetType() == typeof(TaskAsyncActionDescriptor))
             {
-                // Do not look at cache in types derived from this type because they might incorrectly implement GetCustomAttributes
+                // Do not look at cache in types derived from this type because they might incorrectly implement
+                // GetCustomAttributes
                 return ReflectedAttributeCache.GetMethodFilterAttributes(TaskMethodInfo);
             }
             return base.GetFilterAttributes(useCache);

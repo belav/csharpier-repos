@@ -178,7 +178,8 @@ namespace System.Security.Principal
                 else
                 {
                     //
-                    // Rare case that we have defined a type of identity reference and not included it in the code logic above.
+                    // Rare case that we have defined a type of identity reference and not included it in the code logic
+                    // above.
                     // To avoid this we do not allow IdentityReference to be subclassed outside of the BCL.
                     //
                     Debug.Fail(
@@ -242,7 +243,8 @@ namespace System.Security.Principal
                     else
                     {
                         //
-                        // Rare case that we have defined a type of identity reference and not included it in the code logic above.
+                        // Rare case that we have defined a type of identity reference and not included it in the code logic
+                        // above.
                         // To avoid this we do not allow IdentityReference to be subclassed outside of the BCL.
                         //
                         Debug.Fail(
@@ -345,7 +347,8 @@ namespace System.Security.Principal
                     else
                     {
                         //
-                        // Rare case that we have defined a type of identity reference and not included it in the code logic above.
+                        // Rare case that we have defined a type of identity reference and not included it in the code logic
+                        // above.
                         // To avoid this we do not allow IdentityReference to be subclassed outside of the BCL.
                         //
                         Debug.Fail(

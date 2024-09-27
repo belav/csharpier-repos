@@ -59,7 +59,8 @@ public class ViewExecutor
     /// </summary>
     /// <param name="writerFactory">The <see cref="IHttpResponseStreamWriterFactory"/>.</param>
     /// <param name="viewEngine">The <see cref="ICompositeViewEngine"/>.</param>
-    /// <param name="diagnosticListener">The <see cref="System.Diagnostics.DiagnosticListener"/>.</param>
+    /// <param name="diagnosticListener">The <see
+    // cref="System.Diagnostics.DiagnosticListener"/>.</param>
     protected ViewExecutor(
         IHttpResponseStreamWriterFactory writerFactory,
         ICompositeViewEngine viewEngine,
@@ -108,7 +109,8 @@ public class ViewExecutor
     /// <summary>
     /// Executes a view asynchronously.
     /// </summary>
-    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
+    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current
+    // request.</param>
     /// <param name="view">The <see cref="IView"/>.</param>
     /// <param name="viewData">The <see cref="ViewDataDictionary"/>.</param>
     /// <param name="tempData">The <see cref="ITempDataDictionary"/>.</param>
@@ -181,7 +183,8 @@ public class ViewExecutor
     /// <summary>
     /// Executes a view asynchronously.
     /// </summary>
-    /// <param name="viewContext">The <see cref="ViewContext"/> associated with the current request.</param>
+    /// <param name="viewContext">The <see cref="ViewContext"/> associated with the current
+    // request.</param>
     /// <param name="contentType">
     /// The content-type header value to set in the response. If <c>null</c>,
     /// <see cref="DefaultContentType"/> will be used.
@@ -236,8 +239,10 @@ public class ViewExecutor
                 viewContext.Writer = oldWriter;
             }
 
-            // Perf: Invoke FlushAsync to ensure any buffered content is asynchronously written to the underlying
-            // response asynchronously. In the absence of this line, the buffer gets synchronously written to the
+            // Perf: Invoke FlushAsync to ensure any buffered content is asynchronously written to the
+            // underlying
+            // response asynchronously. In the absence of this line, the buffer gets synchronously written to
+            // the
             // response as part of the Dispose which has a perf impact.
             await writer.FlushAsync();
         }

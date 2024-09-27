@@ -58,7 +58,8 @@
             // Always see check if the base found anything first then fall back to the simple field template
             IFieldTemplate fieldTemplate = base.CreateFieldTemplate(column, mode, uiHint);
 
-            // If there was no field template found and the user specified a uiHint then use the default behavior
+            // If there was no field template found and the user specified a uiHint then use the default
+            // behavior
             if (!String.IsNullOrEmpty(uiHint))
             {
                 return fieldTemplate;

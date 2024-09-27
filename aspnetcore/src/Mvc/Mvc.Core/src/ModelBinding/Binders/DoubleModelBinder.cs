@@ -10,7 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 /// <summary>
-/// An <see cref="IModelBinder"/> for <see cref="double"/> and <see cref="Nullable{T}"/> where <c>T</c> is
+/// An <see cref="IModelBinder"/> for <see cref="double"/> and <see cref="Nullable{T}"/> where
+// <c>T</c> is
 /// <see cref="double"/>.
 /// </summary>
 public class DoubleModelBinder : IModelBinder

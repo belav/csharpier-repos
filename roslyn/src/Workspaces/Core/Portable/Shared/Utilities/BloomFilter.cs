@@ -40,7 +40,8 @@ internal partial class BloomFilter
         var m = Math.Max(1, ComputeM(expectedCount, falsePositiveProbability));
         var k = Math.Max(1, ComputeK(expectedCount, falsePositiveProbability));
 
-        // We must have size in even bytes, so that when we deserialize from bytes we get a bit array with the same count.
+        // We must have size in even bytes, so that when we deserialize from bytes we get a bit array with
+        // the same count.
         // The count is used by the hash functions.
         var sizeInEvenBytes = (m + 7) & ~7;
 

@@ -22,7 +22,8 @@
 
         private bool IsUrlRewriterTurnedOn(HttpContextBase httpContext)
         {
-            // Need to do double-check locking because a single instance of this class is shared in the entire app domain (see PathHelpers)
+            // Need to do double-check locking because a single instance of this class is shared in the entire
+            // app domain (see PathHelpers)
             if (!_urlRewriterIsTurnedOnCalculated)
             {
                 lock (_lockObject)

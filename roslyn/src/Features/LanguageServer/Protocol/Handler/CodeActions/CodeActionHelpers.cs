@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
     internal static class CodeActionHelpers
     {
         /// <summary>
-        /// Get, order, and filter code actions, and then transform them into VSCodeActions or CodeActions based on <paramref name="hasVsLspCapability"/>.
+        /// Get, order, and filter code actions, and then transform them into VSCodeActions or CodeActions
+        // based on <paramref name="hasVsLspCapability"/>.
         /// </summary>
         /// <remarks>
         /// Used by CodeActionsHandler.
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     .GetValueTextAsync(cancellationToken)
                     .ConfigureAwait(false);
 
-                // Each suggested action set should have a unique set number, which is used for grouping code actions together.
+                // Each suggested action set should have a unique set number, which is used for grouping code
+                // actions together.
                 var currentHighestSetNumber = 0;
 
                 foreach (var set in actionSets)
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         }
 
         private static bool IsCodeActionNotSupportedByLSP(IUnifiedSuggestedAction suggestedAction)
-            // Filter out code actions with options since they'll show dialogs and we can't remote the UI and the options.
+            // Filter out code actions with options since they'll show dialogs and we can't remote the UI and
+            // the options.
             =>
             suggestedAction.OriginalCodeAction is CodeActionWithOptions
             // Skip code actions that requires non-document changes.  We can't apply them in LSP currently.
@@ -129,7 +132,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             );
 
         /// <summary>
-        /// Generate the matching code actions for <paramref name="suggestedAction"/>. If it contains nested code actions, flatten them into an array.
+        /// Generate the matching code actions for <paramref name="suggestedAction"/>. If it contains nested
+        // code actions, flatten them into an array.
         /// </summary>
         private static LSP.CodeAction[] GenerateCodeActions(
             CodeActionParams request,
@@ -341,7 +345,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         {
             if (!string.IsNullOrEmpty(currentTitle))
             {
-                // Adding a delimiter for nested code actions, e.g. 'Suppress or Configure issues|Suppress IDEXXXX|in Source'
+                // Adding a delimiter for nested code actions, e.g. 'Suppress or Configure issues|Suppress
+                // IDEXXXX|in Source'
                 currentTitle += '|';
             }
 
@@ -350,7 +355,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
 
             var diagnosticsForFix = GetApplicableDiagnostics(request.Context, suggestedAction);
 
-            // Nested code actions' unique identifiers consist of: parent code action unique identifier + '|' + title of code action
+            // Nested code actions' unique identifiers consist of: parent code action unique identifier + '|' +
+            // title of code action
             var nestedActions = GenerateNestedVSCodeActions(
                 request,
                 documentText,
@@ -439,7 +445,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 && context.Diagnostics != null
             )
             {
-                // Associate the diagnostics from the request that match the diagnostic fixed by the code action by ID.
+                // Associate the diagnostics from the request that match the diagnostic fixed by the code action by
+                // ID.
                 // The request diagnostics are already restricted to the code fix location by the request.
                 var diagnosticCodesFixedByAction = codeFixAction.CodeFix.Diagnostics.Select(d =>
                     d.Id
@@ -493,7 +500,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             {
                 foreach (var suggestedAction in set.Actions)
                 {
-                    // Filter out code actions with options since they'll show dialogs and we can't remote the UI and the options.
+                    // Filter out code actions with options since they'll show dialogs and we can't remote the UI and
+                    // the options.
                     if (suggestedAction.OriginalCodeAction is CodeActionWithOptions)
                     {
                         continue;

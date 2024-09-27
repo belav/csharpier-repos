@@ -306,9 +306,12 @@ namespace System.Data.Objects.ELinq
                     return result;
                 }
 
-                // Translator for spatial properties into canonical functions. Both static and instance properties are handled.
-                // Unless a canonical function name is explicitly specified for a property, the mapping from property name to
-                // canonical function name consists simply of applying the 'ST' prefix. Then, translation proceeds as follows:
+                // Translator for spatial properties into canonical functions. Both static and instance properties
+                // are handled.
+                // Unless a canonical function name is explicitly specified for a property, the mapping from
+                // property name to
+                // canonical function name consists simply of applying the 'ST' prefix. Then, translation proceeds
+                // as follows:
                 //      object.PropertyName  -> CanonicalFunctionName(object)
                 //      Type.PropertyName  -> CanonicalFunctionName()
                 internal override DbExpression Translate(

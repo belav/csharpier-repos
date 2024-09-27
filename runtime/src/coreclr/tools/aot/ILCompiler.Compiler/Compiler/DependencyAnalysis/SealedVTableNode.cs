@@ -49,7 +49,8 @@ namespace ILCompiler.DependencyAnalysis
         public override bool StaticDependenciesAreComputed => true;
 
         /// <summary>
-        /// Returns the number of sealed vtable slots on the type. This API should only be called after successfully
+        /// Returns the number of sealed vtable slots on the type. This API should only be called after
+        // successfully
         /// building the sealed vtable slots.
         /// </summary>
         public int NumSealedVTableEntries
@@ -70,7 +71,8 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         /// <summary>
-        /// Returns the slot of a method in the sealed vtable, or -1 if not found. This API should only be called after
+        /// Returns the slot of a method in the sealed vtable, or -1 if not found. This API should only be
+        // called after
         /// successfully building the sealed vtable slots.
         /// </summary>
         public int ComputeSealedVTableSlot(MethodDesc method)
@@ -194,7 +196,8 @@ namespace ILCompiler.DependencyAnalysis
                             declMethod
                         );
 
-                    // Interface methods first implemented by a base type in the hierarchy will return null for the implMethod (runtime interface
+                    // Interface methods first implemented by a base type in the hierarchy will return null for the
+                    // implMethod (runtime interface
                     // dispatch will walk the inheritance chain).
                     if (implMethod != null)
                     {
@@ -332,7 +335,8 @@ namespace ILCompiler.DependencyAnalysis
                     && implMethod.IsCanonicalMethod(CanonicalFormKind.Any)
                 )
                 {
-                    // Canonical instance default interface methods need to go through a thunk that acquires the generic context from `this`.
+                    // Canonical instance default interface methods need to go through a thunk that acquires the generic
+                    // context from `this`.
                     // Static methods have their generic context passed explicitly.
                     implMethod =
                         factory.TypeSystemContext.GetDefaultInterfaceMethodImplementationThunk(
@@ -351,7 +355,8 @@ namespace ILCompiler.DependencyAnalysis
             {
                 if (_method == method)
                 {
-                    // It is not valid to ask for slots of default implementations of interfaces on canonical version of the type.
+                    // It is not valid to ask for slots of default implementations of interfaces on canonical version of
+                    // the type.
                     //
                     // Consider:
                     //
@@ -359,7 +364,8 @@ namespace ILCompiler.DependencyAnalysis
                     // class Base<T> : IFoo<T> { }
                     // class Derived<T, U> : Base<T>, IFoo<U> { }
                     //
-                    // If we ask what's the slot of IFoo<__Canon>.Frob on Derived<__Canon, __Canon>, the answer is actually
+                    // If we ask what's the slot of IFoo<__Canon>.Frob on Derived<__Canon, __Canon>, the answer is
+                    // actually
                     // "two slots". We need extra data (the interface implementation on the definition of the type -
                     // e.g. "IFace<!0>") to disambiguate. Use the other overload.
                     Debug.Assert(

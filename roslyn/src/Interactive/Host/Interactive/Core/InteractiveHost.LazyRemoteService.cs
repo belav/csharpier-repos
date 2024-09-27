@@ -143,8 +143,10 @@ namespace Microsoft.CodeAnalysis.Interactive
                     Contract.ThrowIfNull(result.InitializationResult);
 
                     // Hook up a handler that initiates restart when the process exits.
-                    // Note that this is just so that we restart the process as soon as we see it dying and it doesn't need to be 100% bullet-proof.
-                    // If we don't receive the "process exited" event we will restart the process upon the next remote operation.
+                    // Note that this is just so that we restart the process as soon as we see it dying and it doesn't
+                    // need to be 100% bullet-proof.
+                    // If we don't receive the "process exited" event we will restart the process upon the next remote
+                    // operation.
                     remoteService.HookAutoRestartEvent();
 
                     Host.ProcessInitialized?.Invoke(remoteService.PlatformInfo, Options, result);
@@ -242,8 +244,10 @@ namespace Microsoft.CodeAnalysis.Interactive
                     _cancellationSource.Cancel();
                 }
 
-                // Connecting the named pipe client would block if the process exits before the connection is established,
-                // as the client waits for the server to become available. We signal the cancellation token to abort.
+                // Connecting the named pipe client would block if the process exits before the connection is
+                // established,
+                // as the client waits for the server to become available. We signal the cancellation token to
+                // abort.
                 newProcess.Exited += ProcessExitedBeforeEstablishingConnection;
 
                 InteractiveHostPlatformInfo platformInfo;

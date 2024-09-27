@@ -468,8 +468,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Perform lookup (optionally, in a specified container).  If nothing is found and the member name matches the containing type
-        /// name, then use the instance constructors of the type instead.  The resulting symbols are sorted since tie-breaking is based
+        /// Perform lookup (optionally, in a specified container).  If nothing is found and the member name
+        // matches the containing type
+        /// name, then use the instance constructors of the type instead.  The resulting symbols are sorted
+        // since tie-breaking is based
         /// on order and we want cref binding to be repeatable.
         /// </summary>
         /// <remarks>
@@ -564,15 +566,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     result.Free(); // Won't be using this.
 
-                    // Dev11 has a complicated two-stage process for determining when a cref is really referring to a constructor.
-                    // Under two sets of conditions, XmlDocCommentBinder::bindXMLReferenceName will decide that a name refers
-                    // to a constructor and under one set of conditions, the calling method, XmlDocCommentBinder::bindXMLReference,
+                    // Dev11 has a complicated two-stage process for determining when a cref is really referring to a
+                    // constructor.
+                    // Under two sets of conditions, XmlDocCommentBinder::bindXMLReferenceName will decide that a name
+                    // refers
+                    // to a constructor and under one set of conditions, the calling method,
+                    // XmlDocCommentBinder::bindXMLReference,
                     // will roll back that decision and return null.
 
                     // In XmlDocCommentBinder::bindXMLReferenceName:
-                    //   1) If an unqualified, non-generic name didn't bind to anything and the name matches the name of the type
+                    //   1) If an unqualified, non-generic name didn't bind to anything and the name matches the name of
+                    // the type
                     //      to which the doc comment is applied, then bind to a constructor.
-                    //   2) If a qualified, non-generic name didn't bind to anything and the LHS of the qualified name is a type
+                    //   2) If a qualified, non-generic name didn't bind to anything and the LHS of the qualified name
+                    // is a type
                     //      with the same name, then bind to a constructor.
 
                     // Quoted from XmlDocCommentBinder::bindXMLReference:
@@ -1013,7 +1020,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Given a list of method and/or property candidates, choose the first one (if any) with a signature
+        /// Given a list of method and/or property candidates, choose the first one (if any) with a
+        // signature
         /// that matches the parameter list in the cref.  Return null if there isn't one.
         /// </summary>
         /// <remarks>
@@ -1033,11 +1041,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (Symbol candidate in candidates)
             {
-                // BREAK: In dev11, any candidate with the type "dynamic" anywhere in its parameter list would be skipped
-                // (see XmlDocCommentBinder::bindXmlReference).  Apparently, this was because "the params that the xml doc
-                // comments produce never will."  This does not appear to have made sense in dev11 (skipping dropping the
-                // candidate doesn't cause anything to blow up and may cause resolution to start succeeding) and it almost
-                // certainly does not in roslyn (the signature comparer ignores the object-dynamic distinction anyway).
+                // BREAK: In dev11, any candidate with the type "dynamic" anywhere in its parameter list would be
+                // skipped
+                // (see XmlDocCommentBinder::bindXmlReference).  Apparently, this was because "the params that the
+                // xml doc
+                // comments produce never will."  This does not appear to have made sense in dev11 (skipping
+                // dropping the
+                // candidate doesn't cause anything to blow up and may cause resolution to start succeeding) and it
+                // almost
+                // certainly does not in roslyn (the signature comparer ignores the object-dynamic distinction
+                // anyway).
 
                 Symbol signatureMember;
                 switch (candidate.Kind)
@@ -1054,7 +1067,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 ? 0
                                 : (arity == 0 ? candidateMethod.Arity : arity);
 
-                        // CONSIDER: we might want to reuse this method symbol (as long as the MethodKind and Vararg-ness match).
+                        // CONSIDER: we might want to reuse this method symbol (as long as the MethodKind and Vararg-ness
+                        // match).
                         signatureMember = new SignatureOnlyMethodSymbol(
                             methodKind: candidateMethodKind,
                             typeParameters: IndexedTypeParameterSymbol.TakeSymbols(
@@ -1165,7 +1179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If the member is generic, construct it with the CrefTypeParameterSymbols that should be in scope.
+        /// If the member is generic, construct it with the CrefTypeParameterSymbols that should be in
+        // scope.
         /// </summary>
         private Symbol ConstructWithCrefTypeParameters(
             int arity,
@@ -1295,9 +1310,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BinderFlags.CrefParameterOrReturnType
             );
 
-            // It would be nice to pull this binder out of the factory so we wouldn't have to worry about them getting out
+            // It would be nice to pull this binder out of the factory so we wouldn't have to worry about them
+            // getting out
             // of sync, but this code is also used for included crefs, which don't have BinderFactories.
-            // As a compromise, we'll assert that the binding locations match in scenarios where we can go through the factory.
+            // As a compromise, we'll assert that the binding locations match in scenarios where we can go
+            // through the factory.
             Debug.Assert(
                 !this.Compilation.ContainsSyntaxTree(typeSyntax.SyntaxTree)
                     || this.Compilation.GetBinderFactory(typeSyntax.SyntaxTree)

@@ -9,11 +9,11 @@ using System.Diagnostics;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * List Data Helper class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* List Data Helper class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
@@ -120,41 +120,41 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /*
-        internal int DataSourceCount
-        {
-            get
-            {
-                if (_dataSourceCount == -1)
-                {
-                    IEnumerable dataSource = ResolvedDataSource;
-                    if (dataSource != null)
-                    {
-                        ICollection collection = dataSource as ICollection;
-                        if (collection != null)
-                        {
-                            _dataSourceCount = collection.Count;
-                        }
-                        else
-                        {
-                            int count = 0;
-                            IEnumerator enumerator = dataSource.GetEnumerator();
-                            while (enumerator.MoveNext())
-                            {
-                                count++;
-                            }
-                            _dataSourceCount = count;
-                        }
-                    }
-                    else
-                    {
-                        _dataSourceCount = 0;
-                    }
-                }
-                return _dataSourceCount;
-            }
-        }
-        */
+/*
+internal int DataSourceCount
+{
+get
+{
+if (_dataSourceCount == -1)
+{
+IEnumerable dataSource = ResolvedDataSource;
+if (dataSource != null)
+{
+ICollection collection = dataSource as ICollection;
+if (collection != null)
+{
+_dataSourceCount = collection.Count;
+}
+else
+{
+int count = 0;
+IEnumerator enumerator = dataSource.GetEnumerator();
+while (enumerator.MoveNext())
+{
+count++;
+}
+_dataSourceCount = count;
+}
+}
+else
+{
+_dataSourceCount = 0;
+}
+}
+return _dataSourceCount;
+}
+}
+*/
 
         internal /*public*/
         void CreateItems(IEnumerable dataSource)

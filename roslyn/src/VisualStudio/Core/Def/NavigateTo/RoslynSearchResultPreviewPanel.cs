@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo;
 internal sealed partial class RoslynSearchItemsSourceProvider
 {
     /// <summary>
-    /// Roslyn preview for our nav-to result.  We just provide a code-editor with the caret positioned in the
+    /// Roslyn preview for our nav-to result.  We just provide a code-editor with the caret positioned
+    // in the
     /// correct location.
     /// </summary>
     private sealed class RoslynSearchResultPreviewPanel : SearchResultPreviewPanelBase

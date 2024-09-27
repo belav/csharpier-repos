@@ -15,8 +15,10 @@ namespace System.IO.IsolatedStorage
         private static string? s_userRootDirectory;
 
         /// <summary>
-        /// The full root directory is the relevant special folder from Environment.GetFolderPath() plus IsolatedStorageDirectoryName
-        /// and a set of random directory names if not roaming. (The random directories aren't created for Android/iOS as
+        /// The full root directory is the relevant special folder from Environment.GetFolderPath() plus
+        // IsolatedStorageDirectoryName
+        /// and a set of random directory names if not roaming. (The random directories aren't created for
+        // Android/iOS as
         /// the FolderPath locations for Android/iOS are app isolated already.)
         ///
         /// Examples:
@@ -25,7 +27,8 @@ namespace System.IO.IsolatedStorage
         ///     User|Roaming: @"C:\Users\jerem\AppData\Roaming\IsolatedStorage\"
         ///     Machine: @"C:\ProgramData\IsolatedStorage\nin03cyc.wr0\o3j0urs3.0sn\"
         ///     Android path: "/data/user/0/{packageName}/files/.config/.isolated-storage"
-        ///     iOS path: "/var/mobile/Containers/Data/Application/A323CBB9-A2B3-4432-9449-48CC20C07A7D/Documents/.config/.isolated-storage"
+        ///     iOS path:
+        // "/var/mobile/Containers/Data/Application/A323CBB9-A2B3-4432-9449-48CC20C07A7D/Documents/.config/.isolated-storage"
         ///
         /// Identity for the current store gets tacked on after this.
         /// </summary>
@@ -103,12 +106,15 @@ namespace System.IO.IsolatedStorage
             //  4. Site
             //  5. Zone
             //
-            // For .NET Core StrongName and Url are the only relevant types. By default evidence for the Domain comes
+            // For .NET Core StrongName and Url are the only relevant types. By default evidence for the Domain
+            // comes
             // from the Assembly which comes from the EntryAssembly(). We'll emulate the legacy default behavior
             // by pulling directly from EntryAssembly.
             //
-            // Note that it is possible that there won't be an EntryAssembly, which is something the .NET Framework doesn't
-            // have to deal with and isn't likely on .NET Core due to a single AppDomain. The exception is Android which
+            // Note that it is possible that there won't be an EntryAssembly, which is something the .NET
+            // Framework doesn't
+            // have to deal with and isn't likely on .NET Core due to a single AppDomain. The exception is
+            // Android which
             // doesn't set an EntryAssembly.
 
             Assembly? assembly = Assembly.GetEntryAssembly();
@@ -131,7 +137,8 @@ namespace System.IO.IsolatedStorage
                 }
             }
 
-            // In case of SingleFile deployment, Assembly.Location is empty. On Android there is no entry assembly.
+            // In case of SingleFile deployment, Assembly.Location is empty. On Android there is no entry
+            // assembly.
             if (string.IsNullOrEmpty(location))
                 location = Environment.ProcessPath;
             if (string.IsNullOrEmpty(location))

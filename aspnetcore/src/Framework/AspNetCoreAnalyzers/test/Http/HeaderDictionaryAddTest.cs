@@ -160,9 +160,11 @@ context.Request.Headers.Append(""Accept"", ""text/html"");",
         string fixedSource
     )
     {
-        // Source is cloned on Windows with CRLF line endings, then the test is run by Helix in Windows/Linux/macOS.
+        // Source is cloned on Windows with CRLF line endings, then the test is run by Helix in
+        // Windows/Linux/macOS.
         // When Roslyn adds a new `using`, it gets added followed by Environment.NewLine.
-        // For Linux/macOS, the actual result is `\n`, however, the source is cloned on Windows with CRLF expectation.
+        // For Linux/macOS, the actual result is `\n`, however, the source is cloned on Windows with CRLF
+        // expectation.
         // We replace all line endings with Environment.NewLine to avoid this.
 
         // Arrange & Act & Assert

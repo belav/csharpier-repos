@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 .ConfigureAwait(false);
 
         /// <summary>
-        /// Adds namespace imports / using directives for namespace references found in the document within the span specified.
+        /// Adds namespace imports / using directives for namespace references found in the document within
+        // the span specified.
         /// </summary>
         public static Task<Document> AddImportsAsync(
             Document document,
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editing
         ) => AddImportsFromSyntaxesAsync(document, new[] { span }, options, cancellationToken);
 
         /// <summary>
-        /// Adds namespace imports / using directives for namespace references found in the document within the sub-trees annotated with the <see cref="SyntaxAnnotation"/>.
+        /// Adds namespace imports / using directives for namespace references found in the document within
+        // the sub-trees annotated with the <see cref="SyntaxAnnotation"/>.
         /// </summary>
         public static async Task<Document> AddImportsAsync(
             Document document,
@@ -85,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 .ConfigureAwait(false);
 
         /// <summary>
-        /// Adds namespace imports / using directives for namespace references found in the document within the spans specified.
+        /// Adds namespace imports / using directives for namespace references found in the document within
+        // the spans specified.
         /// </summary>
         public static Task<Document> AddImportsAsync(
             Document document,
@@ -107,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 return document;
             }
 
-            // Since no public options affect the behavior we can ignore options parameter and pass no fallback options:
+            // Since no public options affect the behavior we can ignore options parameter and pass no fallback
+            // options:
             var addImportOptions = await document
                 .GetAddImportPlacementOptionsAsync(
                     CodeActionOptions.DefaultProvider,
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 .ConfigureAwait(false);
 
         /// <summary>
-        /// Adds namespace imports / using directives for namespace references found in the document within the sub-trees annotated with the <see cref="SyntaxAnnotation"/>.
+        /// Adds namespace imports / using directives for namespace references found in the document within
+        // the sub-trees annotated with the <see cref="SyntaxAnnotation"/>.
         /// </summary>
         internal static async Task<Document> AddImportsFromSyntaxesAsync(
             Document document,
@@ -160,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 .ConfigureAwait(false);
 
         /// <summary>
-        /// Adds namespace imports / using directives for namespace references found in the document within the spans specified.
+        /// Adds namespace imports / using directives for namespace references found in the document within
+        // the spans specified.
         /// </summary>
         internal static Task<Document> AddImportsFromSyntaxesAsync(
             Document document,
@@ -195,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 .ConfigureAwait(false);
 
         /// <summary>
-        /// Adds namespace imports / using directives for namespace references found in the document within the sub-trees annotated with the <see cref="SyntaxAnnotation"/>.
+        /// Adds namespace imports / using directives for namespace references found in the document within
+        // the sub-trees annotated with the <see cref="SyntaxAnnotation"/>.
         /// </summary>
         internal static async Task<Document> AddImportsFromSymbolAnnotationAsync(
             Document document,

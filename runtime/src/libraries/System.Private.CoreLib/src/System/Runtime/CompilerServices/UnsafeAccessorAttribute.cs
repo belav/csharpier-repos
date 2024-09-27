@@ -4,7 +4,8 @@
 namespace System.Runtime.CompilerServices
 {
     /// <summary>
-    /// Specifies the kind of target to which an <see cref="UnsafeAccessorAttribute" /> is providing access.
+    /// Specifies the kind of target to which an <see cref="UnsafeAccessorAttribute" /> is providing
+    // access.
     /// </summary>
     public enum UnsafeAccessorKind
     {
@@ -49,19 +50,29 @@ namespace System.Runtime.CompilerServices
     /// is not walked looking for a match.
     ///
     /// For <see cref="UnsafeAccessorKind.Method"/>, <see cref="UnsafeAccessorKind.StaticMethod"/>,
-    /// <see cref="UnsafeAccessorKind.Field"/>, and <see cref="UnsafeAccessorKind.StaticField"/>, the type of
+    /// <see cref="UnsafeAccessorKind.Field"/>, and <see cref="UnsafeAccessorKind.StaticField"/>, the
+    // type of
     /// the first argument of the annotated <code>extern</code> method identifies the owning type.
-    /// The value of the first argument is treated as <code>this</code> pointer for instance fields and methods.
-    /// The first argument must be passed as <code>ref</code> for instance fields and methods on structs.
-    /// The value of the first argument is not used by the implementation for <code>static</code> fields and methods.
+    /// The value of the first argument is treated as <code>this</code> pointer for instance fields and
+    // methods.
+    /// The first argument must be passed as <code>ref</code> for instance fields and methods on
+    // structs.
+    /// The value of the first argument is not used by the implementation for <code>static</code> fields
+    // and methods.
     ///
-    /// Return type is considered for the signature match. modreqs and modopts are initially not considered for
-    /// the signature match. However, if an ambiguity exists ignoring modreqs and modopts, a precise match
-    /// is attempted. If an ambiguity still exists <see cref="System.Reflection.AmbiguousMatchException" /> is thrown.
+    /// Return type is considered for the signature match. modreqs and modopts are initially not
+    // considered for
+    /// the signature match. However, if an ambiguity exists ignoring modreqs and modopts, a precise
+    // match
+    /// is attempted. If an ambiguity still exists <see cref="System.Reflection.AmbiguousMatchException"
+    // /> is thrown.
     ///
-    /// By default, the attributed method's name dictates the name of the method/field. This can cause confusion
-    /// in some cases since language abstractions, like C# local functions, generate mangled IL names. The
-    /// solution to this is to use the <code>nameof</code> mechanism and define the <see cref="Name"/> property.
+    /// By default, the attributed method's name dictates the name of the method/field. This can cause
+    // confusion
+    /// in some cases since language abstractions, like C# local functions, generate mangled IL names.
+    // The
+    /// solution to this is to use the <code>nameof</code> mechanism and define the <see cref="Name"/>
+    // property.
     ///
     /// <code>
     /// public void Method(Class c)
@@ -78,14 +89,18 @@ namespace System.Runtime.CompilerServices
     {
         // Block of text to include above when Generics support is added:
         //
-        // The generic parameters of the <code>extern static</code> method are a concatenation of the type and
+        // The generic parameters of the <code>extern static</code> method are a concatenation of the type
+        // and
         // method generic arguments of the target method. For example,
         // <code>extern static void Method1&lt;T1, T2&gt;(Class1&lt;T1&gt; @this)</code>
-        // can be used to call <code>Class1&lt;T1&gt;.Method1&lt;T2&gt;()</code>. The generic constraints of the
-        // <code>extern static</code> method must match generic constraints of the target type, field or method.
+        // can be used to call <code>Class1&lt;T1&gt;.Method1&lt;T2&gt;()</code>. The generic constraints of
+        // the
+        // <code>extern static</code> method must match generic constraints of the target type, field or
+        // method.
 
         /// <summary>
-        /// Instantiates an <see cref="UnsafeAccessorAttribute"/> providing access to a member of kind <see cref="UnsafeAccessorKind"/>.
+        /// Instantiates an <see cref="UnsafeAccessorAttribute"/> providing access to a member of kind <see
+        // cref="UnsafeAccessorKind"/>.
         /// </summary>
         /// <param name="kind">The kind of the target to which access is provided.</param>
         public UnsafeAccessorAttribute(UnsafeAccessorKind kind) => Kind = kind;

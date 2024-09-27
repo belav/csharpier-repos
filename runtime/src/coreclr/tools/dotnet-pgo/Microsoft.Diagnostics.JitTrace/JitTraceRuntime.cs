@@ -13,7 +13,8 @@ namespace Microsoft.Diagnostics.JitTrace
     {
         /// <summary>
         /// When a jittrace entry caused a failure, it will call this event with the
-        /// line in the jittrace file that triggered the failure. "" will be passed for stream reading failures.
+        /// line in the jittrace file that triggered the failure. "" will be passed for stream reading
+        // failures.
         /// </summary>
         public static event Action<string> LogFailure;
 
@@ -30,8 +31,10 @@ namespace Microsoft.Diagnostics.JitTrace
         /// Prepare all the methods specified in a .jittrace file for execution
         /// </summary>
         /// <param name="fileName">Filename of .jittrace file</param>
-        /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
-        /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
+        /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of
+        // lines in the jittrace file due to fuzzy matching</param>
+        /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines
+        // in the jittrace file due to fuzzy matching</param>
         public static void Prepare(
             FileInfo fileName,
             out int successfulPrepares,
@@ -68,8 +71,10 @@ namespace Microsoft.Diagnostics.JitTrace
         /// for execution. Useful for embedding via data via resource.
         /// </summary>
         /// <param name="jittraceString">string with .jittrace data</param>
-        /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
-        /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
+        /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of
+        // lines in the jittrace file due to fuzzy matching</param>
+        /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines
+        // in the jittrace file due to fuzzy matching</param>
         public static void Prepare(
             string jittraceString,
             out int successfulPrepares,
@@ -98,8 +103,10 @@ namespace Microsoft.Diagnostics.JitTrace
         /// for execution. Handles general purpose stream data.
         /// </summary>
         /// <param name="jittraceStream">Stream with .jittrace data</param>
-        /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
-        /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
+        /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of
+        // lines in the jittrace file due to fuzzy matching</param>
+        /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines
+        // in the jittrace file due to fuzzy matching</param>
         public static void Prepare(
             StreamReader jittraceStream,
             out int successfulPrepares,

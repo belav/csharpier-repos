@@ -36,7 +36,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     or during a <see cref="INotifyComposablePartCatalogChanged.Changed"/> event.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="addedDefinitions"/> or <paramref name="removedDefinitions"/> is <see langword="null"/>.
+        ///     <paramref name="addedDefinitions"/> or <paramref name="removedDefinitions"/> is <see
+        // langword="null"/>.
         /// </exception>
         public ComposablePartCatalogChangeEventArgs(
             IEnumerable<ComposablePartDefinition> addedDefinitions,

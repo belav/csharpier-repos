@@ -14,7 +14,8 @@ namespace System.Reflection.TypeLoading
         private volatile IList<CustomAttributeNamedArgument>? _lazyNamedArguments;
 
         //
-        // For complex custom attributes, use this overload to defer the work of constructing the argument lists until needed.
+        // For complex custom attributes, use this overload to defer the work of constructing the argument
+        // lists until needed.
         //
         internal RoPseudoCustomAttributeData(
             ConstructorInfo constructor,

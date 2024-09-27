@@ -34,7 +34,8 @@ namespace System.ServiceModel.Security
     using STS = System.IdentityModel.SecurityTokenService;
 
     /// <summary>
-    /// Definition of Trust Contract Implementation. Implements the following ServiceContract interfaces,
+    /// Definition of Trust Contract Implementation. Implements the following ServiceContract
+    // interfaces,
     /// 1. IWSTrustFeb2005SyncContract
     /// 2. IWSTrust13SyncContract
     /// 3. IWSTrustFeb2005AsyncContract
@@ -67,7 +68,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Initializes an instance of <see cref="WSTrustServiceContract"/>
         /// </summary>
-        /// <param name="securityTokenServiceConfiguration">Configuration object that initializes this instance.</param>
+        /// <param name="securityTokenServiceConfiguration">Configuration object that initializes this
+        // instance.</param>
         public WSTrustServiceContract(
             SecurityTokenServiceConfiguration securityTokenServiceConfiguration
         )
@@ -93,8 +95,10 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Returns the <see cref="SecurityTokenResolver" /> that resolves the following security tokens contained
-        /// in the current WCF message request's security header: protection token, endorsing, or signed endorsing
+        /// Returns the <see cref="SecurityTokenResolver" /> that resolves the following security tokens
+        // contained
+        /// in the current WCF message request's security header: protection token, endorsing, or signed
+        // endorsing
         /// supporting tokens.
         /// </summary>
         /// <remarks>
@@ -170,7 +174,8 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Returns the <see cref="SecurityTokenResolver" /> that will be used when resolving tokens and keys in the
+        /// Returns the <see cref="SecurityTokenResolver" /> that will be used when resolving tokens and
+        // keys in the
         /// Trust message body.
         /// </summary>
         /// <returns>A <see cref="SecurityTokenResolver" /> instance.</returns>
@@ -225,7 +230,8 @@ namespace System.ServiceModel.Security
         /// Creates a WSTrustSerializationContext using the local resolver information
         /// of the WSTrustServiceClient.
         /// </summary>
-        /// <returns>A WSTrustSerializationContext initialized with the current resolver information.</returns>
+        /// <returns>A WSTrustSerializationContext initialized with the current resolver
+        // information.</returns>
         protected virtual WSTrustSerializationContext CreateSerializationContext()
         {
             return new WSTrustSerializationContext(
@@ -244,7 +250,8 @@ namespace System.ServiceModel.Security
         /// dispatch is complete.</param>
         /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous
         /// dispatch request from other requests.</param>
-        /// <returns><see cref="IAsyncResult"/> that represents the asynchronous operation. Used as the input
+        /// <returns><see cref="IAsyncResult"/> that represents the asynchronous operation. Used as the
+        // input
         /// to <see cref="EndDispatchRequest"/>.</returns>
         protected virtual IAsyncResult BeginDispatchRequest(
             DispatchContext dispatchContext,
@@ -426,7 +433,8 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Creates a <see cref="DispatchContext"/> object for use by the <see cref="DispatchRequest"/> method.
+        /// Creates a <see cref="DispatchContext"/> object for use by the <see cref="DispatchRequest"/>
+        // method.
         /// </summary>
         /// <param name="requestMessage">The incoming request message.</param>
         /// <param name="requestAction">The SOAP action of the request.</param>
@@ -460,7 +468,8 @@ namespace System.ServiceModel.Security
             XmlReader requestBodyReader = requestMessage.GetReaderAtBodyContents();
             //
             // Take a peek at the request with the serializers to figure out if this is a standard incoming
-            // RST or if this is an instance of a challenge-response style message pattern where an RSTR comes in.
+            // RST or if this is an instance of a challenge-response style message pattern where an RSTR comes
+            // in.
             //
             if (requestSerializer.CanRead(requestBodyReader))
             {
@@ -630,7 +639,8 @@ namespace System.ServiceModel.Security
         /// <param name="trustNamespace">Namespace URI of the trust version of the incoming request.</param>
         /// <param name="callback">Callback that gets invoked when the Asynchronous call ends.</param>
         /// <param name="state">state information of the Asynchronous call.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         /// <exception cref="ArgumentNullException">One of the argument is null.</exception>
         protected virtual IAsyncResult BeginProcessCore(
             Message requestMessage,
@@ -737,7 +747,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to the STS.
         /// </summary>
-        /// <param name="ar">IAsyncResult that was returned by the call to the Asynchronous Begin method.</param>
+        /// <param name="ar">IAsyncResult that was returned by the call to the Asynchronous Begin
+        // method.</param>
         /// <param name="requestAction">Request SOAP Action.</param>
         /// <param name="responseAction">Response SOAP Action.</param>
         /// <param name="trustNamespace">Namespace URI of the current trust version.</param>
@@ -790,8 +801,10 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Raises the Error Event and converts the given exception to a FaultException if required. If the original
-        /// exception was a FaultException or PreserveOriginalException flag is set to true then the conversion to
+        /// Raises the Error Event and converts the given exception to a FaultException if required. If the
+        // original
+        /// exception was a FaultException or PreserveOriginalException flag is set to true then the
+        // conversion to
         /// FaultException is not done.
         /// </summary>
         /// <param name="ex">The original exception.</param>
@@ -1157,7 +1170,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13Cancel(
             Message request,
             AsyncCallback callback,
@@ -1179,7 +1193,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 Cancel message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13Cancel(IAsyncResult ar)
         {
@@ -1197,7 +1212,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13Issue(Message request, AsyncCallback callback, object state)
         {
             return BeginProcessCore(
@@ -1215,7 +1231,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 Issue message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13Issue(IAsyncResult ar)
         {
@@ -1233,7 +1250,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13Renew(Message request, AsyncCallback callback, object state)
         {
             return BeginProcessCore(
@@ -1251,7 +1269,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 Renew message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13Renew(IAsyncResult ar)
         {
@@ -1269,7 +1288,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13Validate(
             Message request,
             AsyncCallback callback,
@@ -1291,7 +1311,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 Validate message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13Validate(IAsyncResult ar)
         {
@@ -1309,7 +1330,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13CancelResponse(
             Message request,
             AsyncCallback callback,
@@ -1331,7 +1353,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 RSTR/Cancel message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13CancelResponse(IAsyncResult ar)
         {
@@ -1349,7 +1372,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13IssueResponse(
             Message request,
             AsyncCallback callback,
@@ -1371,7 +1395,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 RSTR/Issue message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13IssueResponse(IAsyncResult ar)
         {
@@ -1389,7 +1414,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13RenewResponse(
             Message request,
             AsyncCallback callback,
@@ -1411,7 +1437,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 RSTR/Renew message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13RenewResponse(IAsyncResult ar)
         {
@@ -1429,7 +1456,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrust13ValidateResponse(
             Message request,
             AsyncCallback callback,
@@ -1451,7 +1479,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust 1.3 RSTR/Validate message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrust13ValidateResponse(IAsyncResult ar)
         {
@@ -1469,7 +1498,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005Cancel(
             Message request,
             AsyncCallback callback,
@@ -1491,7 +1521,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 Cancel message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005Cancel(IAsyncResult ar)
         {
@@ -1509,7 +1540,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005Issue(
             Message request,
             AsyncCallback callback,
@@ -1531,7 +1563,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 Issue message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005Issue(IAsyncResult ar)
         {
@@ -1549,7 +1582,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005Renew(
             Message request,
             AsyncCallback callback,
@@ -1571,7 +1605,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 Renew message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005Renew(IAsyncResult ar)
         {
@@ -1589,7 +1624,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005Validate(
             Message request,
             AsyncCallback callback,
@@ -1611,7 +1647,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 Validate message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005Validate(IAsyncResult ar)
         {
@@ -1629,7 +1666,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005CancelResponse(
             Message request,
             AsyncCallback callback,
@@ -1651,7 +1689,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 RSTR/Cancel message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005CancelResponse(IAsyncResult ar)
         {
@@ -1669,7 +1708,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005IssueResponse(
             Message request,
             AsyncCallback callback,
@@ -1691,7 +1731,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 RSTR/Issue message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005IssueResponse(IAsyncResult ar)
         {
@@ -1709,7 +1750,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005RenewResponse(
             Message request,
             AsyncCallback callback,
@@ -1731,7 +1773,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 RSTR/Renew message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005RenewResponse(IAsyncResult ar)
         {
@@ -1749,7 +1792,8 @@ namespace System.ServiceModel.Security
         /// <param name="request">Incoming Request message.</param>
         /// <param name="callback">Callback to be invoked when the Asynchronous operation ends.</param>
         /// <param name="state">Asynchronous state.</param>
-        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous call.</returns>
+        /// <returns>IAsyncResult that should be passed back to the End method to complete the Asynchronous
+        // call.</returns>
         public IAsyncResult BeginTrustFeb2005ValidateResponse(
             Message request,
             AsyncCallback callback,
@@ -1771,7 +1815,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Completes an Asynchronous call to Trust Feb 2005 RSTR/Validate message.
         /// </summary>
-        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous call.</param>
+        /// <param name="ar">IAsyncResult object returned by the Begin method that started the Asynchronous
+        // call.</param>
         /// <returns>Message containing the Serialized RSTR.</returns>
         public Message EndTrustFeb2005ValidateResponse(IAsyncResult ar)
         {
@@ -2147,7 +2192,8 @@ namespace System.ServiceModel.Security
         /// does nothing. Can be overriden in the derived class for specific behavior.
         /// </summary>
         /// <param name="exporter">The WsdlExporter that exports the contract information.</param>
-        /// <param name="context">Provides mappings from exported WSDL elements to the contract description.</param>
+        /// <param name="context">Provides mappings from exported WSDL elements to the contract
+        // description.</param>
         public virtual void ExportContract(
             WsdlExporter exporter,
             WsdlContractConversionContext context
@@ -2168,8 +2214,10 @@ namespace System.ServiceModel.Security
         ///     messages.
         /// </summary>
         /// <param name="exporter">The WsdlExporter that exports the contract information.</param>
-        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint description.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'exporter' or 'context' is null.</exception>
+        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint
+        // description.</param>
+        /// <exception cref="ArgumentNullException">The input argument 'exporter' or 'context' is
+        // null.</exception>
         public virtual void ExportEndpoint(
             WsdlExporter exporter,
             WsdlEndpointConversionContext context
@@ -2513,7 +2561,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Adds the required WS-Trust namespaces to the WSDL if not already present.
         /// </summary>
-        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint description.</param>
+        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint
+        // description.</param>
         /// <param name="prefix">The prefix of the namespace to be included.</param>
         /// <param name="ns">Namespace to be included.</param>
         /// <exception cref="ArgumentException">Either 'prefix' or 'ns' is null or empty string.</exception>
@@ -2565,11 +2614,15 @@ namespace System.ServiceModel.Security
         /// Derived classes can override this method to import other schemas.
         /// </summary>
         /// <param name="exporter">The WsdlExporter that exports the contract information.</param>
-        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint description.</param>
+        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint
+        // description.</param>
         /// <param name="ns">The current WS-Trust namespace for which the schemas are imported.</param>
-        /// <exception cref="ArgumentNullException">The parameter 'exporter' or 'context' is null.</exception>
-        /// <exception cref="ArgumentException">The parameter 'ns' is either null or String.Empty.</exception>
-        /// <exception cref="InvalidOperationException">The namespace 'ns' is not a recognized WS-Trust namespace.</exception>
+        /// <exception cref="ArgumentNullException">The parameter 'exporter' or 'context' is
+        // null.</exception>
+        /// <exception cref="ArgumentException">The parameter 'ns' is either null or
+        // String.Empty.</exception>
+        /// <exception cref="InvalidOperationException">The namespace 'ns' is not a recognized WS-Trust
+        // namespace.</exception>
         protected virtual void ImportSchema(
             WsdlExporter exporter,
             WsdlEndpointConversionContext context,
@@ -2632,14 +2685,17 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// For a given namespace this method looks up the WsdlExporter to see if an XmlSchema has been cached and returns that.
+        /// For a given namespace this method looks up the WsdlExporter to see if an XmlSchema has been
+        // cached and returns that.
         /// Else it loads the schema for that given namespace and returns the loaded XmlSchema.
         /// </summary>
         /// <param name="exporter">The WsdlExporter that exports the contract information.</param>
         /// <param name="ns">The namespace for which the schema is to be obtained.</param>
         /// <exception cref="ArgumentNullException">The parameter 'exporter' is null.</exception>
-        /// <exception cref="ArgumentException">The parameter 'ns' is either null or String.Empty.</exception>
-        /// <exception cref="InvalidOperationException">The namespace 'ns' is not a recognized WS-Trust namespace.</exception>
+        /// <exception cref="ArgumentException">The parameter 'ns' is either null or
+        // String.Empty.</exception>
+        /// <exception cref="InvalidOperationException">The namespace 'ns' is not a recognized WS-Trust
+        // namespace.</exception>
         static XmlSchema GetXmlSchema(WsdlExporter exporter, string ns)
         {
             if (exporter == null)
@@ -2687,14 +2743,17 @@ namespace System.ServiceModel.Security
         /// During WSDL generation, the method fixes a given operation message element to refer to the
         /// RST and RSTR elements of the appropriate WS-Trust version.
         /// </summary>
-        /// <param name="serviceDescription">The ServiceDescription that has the current state of the exported
+        /// <param name="serviceDescription">The ServiceDescription that has the current state of the
+        // exported
         /// WSDL.</param>
         /// <param name="portType">The WSDL PortType whose messages are to be fixed.</param>
-        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint description.</param>
+        /// <param name="context">Provides mappings from exported WSDL elements to the endpoint
+        // description.</param>
         /// <param name="operationName">The operation name inside the PortType.</param>
         /// <param name="inputMessageElement">The XmlQualifiedName of the input message element.</param>
         /// <param name="outputMessageElement">The XmlQualifiedName of the output message element.</param>
-        /// <exception cref="ArgumentNullException">The parameter 'serviceDescription', 'portType', 'inputMessageType'
+        /// <exception cref="ArgumentNullException">The parameter 'serviceDescription', 'portType',
+        // 'inputMessageType'
         /// or 'outputMessageType' is null.</exception>
         /// <exception cref="ArgumentException">The parameter 'operationName' is null or Empty.</exception>
         /// <remarks>

@@ -15,17 +15,21 @@ namespace System.ComponentModel
     using System.Runtime.Remoting;
     using System.Security.Permissions;
 
-    /// <include file='doc\LicFileLicenseProvider.uex' path='docs/doc[@for="LicFileLicenseProvider"]/*' />
+    /// <include file='doc\LicFileLicenseProvider.uex' path='docs/doc[@for="LicFileLicenseProvider"]/*'
+    // />
     /// <devdoc>
-    /// <para>Provides an implementation of a <see cref='System.ComponentModel.LicenseProvider'/>. The provider works in
+    /// <para>Provides an implementation of a <see cref='System.ComponentModel.LicenseProvider'/>. The
+    // provider works in
     ///    a similar fashion to Microsoft .NET Framework standard licensing module.</para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
     public class LicFileLicenseProvider : LicenseProvider
     {
-        /// <include file='doc\LicFileLicenseProvider.uex' path='docs/doc[@for="LicFileLicenseProvider.IsKeyValid"]/*' />
+        /// <include file='doc\LicFileLicenseProvider.uex'
+        // path='docs/doc[@for="LicFileLicenseProvider.IsKeyValid"]/*' />
         /// <devdoc>
-        /// <para>Determines if the key retrieved by the <see cref='System.ComponentModel.LicFileLicenseProvider.GetLicense'/> method is valid
+        /// <para>Determines if the key retrieved by the <see
+        // cref='System.ComponentModel.LicFileLicenseProvider.GetLicense'/> method is valid
         ///    for the specified type.</para>
         /// </devdoc>
         protected virtual bool IsKeyValid(string key, Type type)
@@ -37,7 +41,8 @@ namespace System.ComponentModel
             return false;
         }
 
-        /// <include file='doc\LicFileLicenseProvider.uex' path='docs/doc[@for="LicFileLicenseProvider.GetKey"]/*' />
+        /// <include file='doc\LicFileLicenseProvider.uex'
+        // path='docs/doc[@for="LicFileLicenseProvider.GetKey"]/*' />
         /// <devdoc>
         ///    Creates a key for the specified type.
         /// </devdoc>
@@ -52,7 +57,8 @@ namespace System.ComponentModel
             );
         }
 
-        /// <include file='doc\LicFileLicenseProvider.uex' path='docs/doc[@for="LicFileLicenseProvider.GetLicense"]/*' />
+        /// <include file='doc\LicFileLicenseProvider.uex'
+        // path='docs/doc[@for="LicFileLicenseProvider.GetLicense"]/*' />
         /// <devdoc>
         ///    <para>Gets a license for the instance of the component and determines if it is valid.</para>
         /// </devdoc>

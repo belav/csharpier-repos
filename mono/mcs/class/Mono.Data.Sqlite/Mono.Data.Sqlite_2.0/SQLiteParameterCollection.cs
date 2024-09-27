@@ -1,9 +1,9 @@
 ﻿/********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -196,7 +196,8 @@ namespace Mono.Data.Sqlite
         /// <summary>
         /// Adds a named/unnamed parameter and its value to the parameter collection.
         /// </summary>
-        /// <param name="parameterName">Name of the parameter, or null to indicate an unnamed parameter</param>
+        /// <param name="parameterName">Name of the parameter, or null to indicate an unnamed
+        // parameter</param>
         /// <param name="value">The initial value of the parameter</param>
         /// <returns>Returns the SqliteParameter object created during the call.</returns>
         public SqliteParameter AddWithValue(string parameterName, object value)
@@ -422,7 +423,8 @@ namespace Mono.Data.Sqlite
 
         /// <summary>
         /// This function attempts to map all parameters in the collection to all statements in a Command.
-        /// Since named parameters may span multiple statements, this function makes sure all statements are bound
+        /// Since named parameters may span multiple statements, this function makes sure all statements are
+        // bound
         /// to the same named parameter.  Unnamed parameters are bound in sequence.
         /// </summary>
         internal void MapParameters(SqliteStatement activeStatement)
@@ -472,7 +474,8 @@ namespace Mono.Data.Sqlite
                     stmt = null;
                 }
 
-                // If the parameter has a name, but the SQL statement uses unnamed references, this can happen -- attempt to map
+                // If the parameter has a name, but the SQL statement uses unnamed references, this can happen --
+                // attempt to map
                 // the parameter by its index in the collection
                 if (isMapped == false)
                 {

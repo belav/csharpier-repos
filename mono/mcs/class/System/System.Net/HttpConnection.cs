@@ -534,15 +534,15 @@ namespace System.Net
                 force_close |= !context.Request.KeepAlive;
                 if (!force_close)
                     force_close = (context.Response.Headers["connection"] == "close");
-                /*
-                if (!force_close) {
+/*
+if (!force_close) {
 //					bool conn_close = (status_code == 400 || status_code == 408 || status_code == 411 ||
 //							status_code == 413 || status_code == 414 || status_code == 500 ||
 //							status_code == 503);
 
-                    force_close |= (context.Request.ProtocolVersion <= HttpVersion.Version10);
-                }
-                */
+force_close |= (context.Request.ProtocolVersion <= HttpVersion.Version10);
+}
+*/
 
                 if (!force_close && context.Request.FlushInput())
                 {

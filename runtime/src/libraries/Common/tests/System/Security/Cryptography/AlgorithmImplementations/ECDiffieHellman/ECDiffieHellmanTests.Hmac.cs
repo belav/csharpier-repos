@@ -436,7 +436,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             if (ECDiffieHellmanFactory.SupportsSha3)
             {
                 // Created with:
-                // (echo -n -e '\x01\x03\0x05'; openssl pkeyutl -derive -inkey private.key -peerkey public.key; echo -n -e '\x02\x04\0x06\0x08') | openssl sha3-256 -mac HMAC -macopt hexkey:030609
+                // (echo -n -e '\x01\x03\0x05'; openssl pkeyutl -derive -inkey private.key -peerkey public.key; echo
+                // -n -e '\x02\x04\0x06\0x08') | openssl sha3-256 -mac HMAC -macopt hexkey:030609
                 yield return new object[]
                 {
                     HashAlgorithmName.SHA3_256,
@@ -447,7 +448,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 };
 
                 // Created with:
-                // (echo -n -e '\x01\x03\0x05'; openssl pkeyutl -derive -inkey private.key -peerkey public.key; echo -n -e '\x02\x04\0x06\0x08') | openssl sha3-384 -mac HMAC -macopt hexkey:030609
+                // (echo -n -e '\x01\x03\0x05'; openssl pkeyutl -derive -inkey private.key -peerkey public.key; echo
+                // -n -e '\x02\x04\0x06\0x08') | openssl sha3-384 -mac HMAC -macopt hexkey:030609
                 yield return new object[]
                 {
                     HashAlgorithmName.SHA3_384,
@@ -458,7 +460,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 };
 
                 // Created with:
-                // (echo -n -e '\x01\x03\0x05'; openssl pkeyutl -derive -inkey private.key -peerkey public.key; echo -n -e '\x02\x04\0x06\0x08') | openssl sha3-512 -mac HMAC -macopt hexkey:030609
+                // (echo -n -e '\x01\x03\0x05'; openssl pkeyutl -derive -inkey private.key -peerkey public.key; echo
+                // -n -e '\x02\x04\0x06\0x08') | openssl sha3-512 -mac HMAC -macopt hexkey:030609
                 yield return new object[]
                 {
                     HashAlgorithmName.SHA3_512,

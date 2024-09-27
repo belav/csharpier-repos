@@ -329,9 +329,12 @@ namespace System.ServiceModel.Channels
                     this.WebSocketSettings.SubProtocol;
             }
 
-            // These headers were added for WCF specific handshake to avoid encoder or transfermode mismatch between client and server.
-            // For BinaryMessageEncoder, since we are using a sessionful channel for websocket, the encoder is actually different when
-            // we are using Buffered or Stramed transfermode. So we need an extra header to identify the transfermode we are using, just
+            // These headers were added for WCF specific handshake to avoid encoder or transfermode mismatch
+            // between client and server.
+            // For BinaryMessageEncoder, since we are using a sessionful channel for websocket, the encoder is
+            // actually different when
+            // we are using Buffered or Stramed transfermode. So we need an extra header to identify the
+            // transfermode we are using, just
             // to make people a little bit easier to diagnose these mismatch issues.
             if (this.channelFactory.MessageVersion != MessageVersion.None)
             {
@@ -445,8 +448,10 @@ namespace System.ServiceModel.Channels
                 true
             );
 
-            // If a web socket connection factory is specified (for example, when using web sockets on pre-Win8 OS),
-            // we're going to use the protocol version from it. At the moment, on pre-Win8 OS, the HttpWebRequest
+            // If a web socket connection factory is specified (for example, when using web sockets on pre-Win8
+            // OS),
+            // we're going to use the protocol version from it. At the moment, on pre-Win8 OS, the
+            // HttpWebRequest
             // created above doesn't have the version header specified.
             if (this.connectionFactory != null)
             {
@@ -736,7 +741,8 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            // The returned WebSocket should be valid (non-null), in an opened state and with the same SubProtocol that we requested.
+            // The returned WebSocket should be valid (non-null), in an opened state and with the same
+            // SubProtocol that we requested.
             if (ws == null)
             {
                 throw FxTrace.Exception.AsError(

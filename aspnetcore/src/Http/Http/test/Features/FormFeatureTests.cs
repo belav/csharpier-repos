@@ -135,7 +135,8 @@ public class FormFeatureTests
 
     private const string EmptyMultipartForm = "--WebKitFormBoundary5pDRpGheQXaM8k3T--";
 
-    // Note that CRLF (\r\n) is required. You can't use multi-line C# strings here because the line breaks on Linux are just LF.
+    // Note that CRLF (\r\n) is required. You can't use multi-line C# strings here because the line
+    // breaks on Linux are just LF.
     private const string MultipartFormEnd = "--WebKitFormBoundary5pDRpGheQXaM8k3T--\r\n";
 
     private const string MultipartFormEndWithSpecialCharacters =

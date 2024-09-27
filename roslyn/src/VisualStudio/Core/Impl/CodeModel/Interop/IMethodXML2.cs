@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     internal interface IMethodXML2
     {
         /// <summary>
-        /// Returns a string reader of the XML. Unlike IMethodXML, this doesn't require us to convert our XML string to
+        /// Returns a string reader of the XML. Unlike IMethodXML, this doesn't require us to convert our
+        // XML string to
         /// BSTR and back.
         /// </summary>
         /// <returns>A System.IO.StringReader, even though we just say object here.</returns>

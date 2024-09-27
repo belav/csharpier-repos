@@ -613,7 +613,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.True(@class.Interfaces().Contains(cyclicInterface));
 
             var classMethod = (MethodSymbol)@class.GetMembers("Method").Single();
-            //we couldn't find an interface method that's explicitly implemented, so we have no reason to believe the method isn't ordinary
+            //we couldn't find an interface method that's explicitly implemented, so we have no reason to
+            // believe the method isn't ordinary
             Assert.Equal(MethodKind.Ordinary, classMethod.MethodKind);
 
             var explicitImpls = classMethod.ExplicitInterfaceImplementations;
@@ -878,28 +879,36 @@ class Abstract : MetadataModifiers
                 new[] { TestReferences.SymbolsTests.Methods.ILMethods }
             );
             compilation.VerifyDiagnostics(
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M02()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M02()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M02()"),
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M05()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M05()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M05()"),
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M08()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M08()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M08()"),
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M09()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M09()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M09()"),
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M11()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M11()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M11()"),
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M12()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M12()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M12()"),
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M14()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M14()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M14()"),
-                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M15()'
+                // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member
+                // 'MetadataModifiers.M15()'
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
                     .WithArguments("Abstract", "MetadataModifiers.M15()")
             );
@@ -935,22 +944,28 @@ class Override : MetadataModifiers
                 new[] { TestReferences.SymbolsTests.Methods.ILMethods }
             );
             compilation.VerifyDiagnostics(
-                // (4,26): error CS0506: 'Override.M00()': cannot override inherited member 'MetadataModifiers.M00()' because it is not marked virtual, abstract, or override
+                // (4,26): error CS0506: 'Override.M00()': cannot override inherited member
+                // 'MetadataModifiers.M00()' because it is not marked virtual, abstract, or override
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M00")
                     .WithArguments("Override.M00()", "MetadataModifiers.M00()"),
-                // (5,26): error CS0506: 'Override.M01()': cannot override inherited member 'MetadataModifiers.M01()' because it is not marked virtual, abstract, or override
+                // (5,26): error CS0506: 'Override.M01()': cannot override inherited member
+                // 'MetadataModifiers.M01()' because it is not marked virtual, abstract, or override
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M01")
                     .WithArguments("Override.M01()", "MetadataModifiers.M01()"),
-                // (8,26): error CS0506: 'Override.M04()': cannot override inherited member 'MetadataModifiers.M04()' because it is not marked virtual, abstract, or override
+                // (8,26): error CS0506: 'Override.M04()': cannot override inherited member
+                // 'MetadataModifiers.M04()' because it is not marked virtual, abstract, or override
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M04")
                     .WithArguments("Override.M04()", "MetadataModifiers.M04()"),
-                // (11,26): error CS0506: 'Override.M07()': cannot override inherited member 'MetadataModifiers.M07()' because it is not marked virtual, abstract, or override
+                // (11,26): error CS0506: 'Override.M07()': cannot override inherited member
+                // 'MetadataModifiers.M07()' because it is not marked virtual, abstract, or override
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M07")
                     .WithArguments("Override.M07()", "MetadataModifiers.M07()"),
-                // (14,26): error CS0239: 'Override.M10()': cannot override inherited member 'MetadataModifiers.M10()' because it is sealed
+                // (14,26): error CS0239: 'Override.M10()': cannot override inherited member
+                // 'MetadataModifiers.M10()' because it is sealed
                 Diagnostic(ErrorCode.ERR_CantOverrideSealed, "M10")
                     .WithArguments("Override.M10()", "MetadataModifiers.M10()"),
-                // (17,26): error CS0506: 'Override.M13()': cannot override inherited member 'MetadataModifiers.M13()' because it is not marked virtual, abstract, or override
+                // (17,26): error CS0506: 'Override.M13()': cannot override inherited member
+                // 'MetadataModifiers.M13()' because it is not marked virtual, abstract, or override
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M13")
                     .WithArguments("Override.M13()", "MetadataModifiers.M13()")
             );
@@ -959,7 +974,8 @@ class Override : MetadataModifiers
         [ClrOnlyFact]
         public void TestVirtualnessFlags_CSharpRepresentation()
         {
-            // All combinations of VirtualContract, NewSlotVTable, AbstractImpl, and FinalContract - without explicit overriding
+            // All combinations of VirtualContract, NewSlotVTable, AbstractImpl, and FinalContract - without
+            // explicit overriding
             // NOTE: some won't peverify (newslot/final/abstract without virtual, abstract with final)
 
             CheckLoadingVirtualnessFlags(
@@ -1050,7 +1066,8 @@ class Override : MetadataModifiers
                 isExplicitOverride: false
             );
 
-            // All combinations of VirtualContract, NewSlotVTable, AbstractImpl, and FinalContract - with explicit overriding
+            // All combinations of VirtualContract, NewSlotVTable, AbstractImpl, and FinalContract - with
+            // explicit overriding
 
             CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, 0, isExplicitOverride: true);
 
@@ -1658,7 +1675,8 @@ public class D
 
             var comp = CreateCompilation(source, references: references);
 
-            // The method, field and nested type with public and private accessibility flags get loaded as private.
+            // The method, field and nested type with public and private accessibility flags get loaded as
+            // private.
             comp.VerifyDiagnostics(
                 // (6,15): error CS0122: 'C.M()' is inaccessible due to its protection level
                 //       new C().M();

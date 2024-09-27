@@ -11,7 +11,8 @@ namespace System.Web.Util
     using System.Security.Permissions;
     using Microsoft.Win32;
 
-    // See DevDiv #461378 for a description of why we authored the EnableViewStateMac patch using this helper class.
+    // See DevDiv #461378 for a description of why we authored the EnableViewStateMac patch using this
+    // helper class.
     internal static class EnableViewStateMacRegistryHelper
     {
         // Returns 'true' if the EnableViewStateMac patch (DevDiv #461378) is enabled,

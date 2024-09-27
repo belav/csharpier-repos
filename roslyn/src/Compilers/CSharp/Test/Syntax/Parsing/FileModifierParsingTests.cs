@@ -109,7 +109,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (1,19): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // (1,19): error CS0267: The 'partial' modifier can only appear immediately before 'class',
+                // 'record', 'struct', 'interface', or a method return type.
                 // file partial enum C { }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "C").WithLocation(1, 19),
             }
@@ -149,7 +150,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'partial' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // partial file interface C { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
                     .WithArguments("partial")
@@ -206,7 +208,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new DiagnosticDescription[]
             {
-                // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record',
+                // 'struct', 'interface', or a method return type.
                 // partial file record C { }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
             }
@@ -261,7 +264,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new DiagnosticDescription[]
             {
-                // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record',
+                // 'struct', 'interface', or a method return type.
                 // partial file record struct C { }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
             }
@@ -304,7 +308,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file partial ref struct C { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -376,7 +381,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file partial ref struct C { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -449,7 +455,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'partial' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // partial file ref struct C { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
                     .WithArguments("partial")
@@ -630,7 +637,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular10,
             expectedBindingDiagnostics: new[]
             {
-                // (1,12): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (1,12): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language
+                // version 11.0 or greater.
                 // file class C { }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C")
                     .WithArguments("file types", "11.0")
@@ -767,7 +775,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
+                // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is
+                // a nested type.
                 //     file class C { }
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
                     .WithArguments("Outer.C")
@@ -817,7 +826,8 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "M")
                     .WithArguments("file")
                     .WithLocation(3, 31),
-                // (3,31): error CS0501: 'C.M()' must declare a body because it is not marked abstract, extern, or partial
+                // (3,31): error CS0501: 'C.M()' must declare a body because it is not marked abstract, extern, or
+                // partial
                 //     file delegate*<int, void> M();
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "M")
                     .WithArguments("C.M()")
@@ -993,7 +1003,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (3,16): error CS0246: The type or namespace name 'Action' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,16): error CS0246: The type or namespace name 'Action' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file event Action x;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Action")
                     .WithArguments("Action")
@@ -1119,7 +1130,9 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "M")
                     .WithArguments("file")
                     .WithLocation(3, 21),
-                // (3,21): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (3,21): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     async file void M() { }
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(3, 21),
             }
@@ -1268,7 +1281,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (3,11): error CS0246: The type or namespace name 'Action' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,11): error CS0246: The type or namespace name 'Action' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     event Action file;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Action")
                     .WithArguments("Action")
@@ -1398,7 +1412,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular10,
             expectedBindingDiagnostics: new[]
             {
-                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file async;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -1496,7 +1511,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular10,
             expectedBindingDiagnostics: new[]
             {
-                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file item;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -1653,7 +1669,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular10,
             expectedBindingDiagnostics: new[]
             {
-                // (1,7): warning CS8981: The type name 'file' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'file' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // class file { }
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "file")
                     .WithArguments("file")
@@ -1721,7 +1738,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular10,
             expectedBindingDiagnostics: new[]
             {
-                // (1,15): warning CS8981: The type name 'file' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,15): warning CS8981: The type name 'file' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // public struct file { public int item; }
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "file")
                     .WithArguments("file")
@@ -1998,7 +2016,8 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "_ptr")
                     .WithArguments("file")
                     .WithLocation(7, 18),
-                // (7,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('?')
+                // (7,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('?')
                 //     public file* _ptr;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "_ptr")
                     .WithArguments("?")
@@ -2222,7 +2241,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -2279,7 +2299,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -2333,7 +2354,8 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "file")
                     .WithArguments("file")
                     .WithLocation(1, 1),
-                // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 // file;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1),
             }
@@ -2371,7 +2393,8 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "file")
                     .WithArguments("file")
                     .WithLocation(1, 1),
-                // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 // file;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1),
             }
@@ -2414,7 +2437,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file namespace NS;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -2484,7 +2508,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file namespace NS;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -2555,7 +2580,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file namespace NS { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -2622,7 +2648,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file namespace NS { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -2747,12 +2774,14 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
-                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file record();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
                     .WithLocation(3, 5),
-                // (3,10): error CS0501: 'C.record()' must declare a body because it is not marked abstract, extern, or partial
+                // (3,10): error CS0501: 'C.record()' must declare a body because it is not marked abstract, extern,
+                // or partial
                 //     file record();
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "record")
                     .WithArguments("C.record()")
@@ -2849,7 +2878,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
-                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file record() { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -2959,7 +2989,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
-                // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file record X();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
@@ -2969,7 +3000,8 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "X")
                     .WithArguments("file")
                     .WithLocation(3, 17),
-                // (3,17): error CS0501: 'C.X()' must declare a body because it is not marked abstract, extern, or partial
+                // (3,17): error CS0501: 'C.X()' must declare a body because it is not marked abstract, extern, or
+                // partial
                 //     file record X();
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "X")
                     .WithArguments("C.X()")
@@ -3018,7 +3050,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
+                // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a
+                // nested type.
                 //     file record X();
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
                     .WithArguments("C.X")
@@ -3065,7 +3098,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
-                // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file record X() { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
@@ -3128,7 +3162,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
+                // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a
+                // nested type.
                 //     file record X() { }
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
                     .WithArguments("C.X")
@@ -3176,7 +3211,8 @@ public class FileModifierParsingTests : ParsingTests
             options: TestOptions.Regular8,
             expectedBindingDiagnostics: new[]
             {
-                // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     file record X;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
@@ -3236,7 +3272,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
+                // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a
+                // nested type.
                 //     file record X;
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
                     .WithArguments("C.X")
@@ -3688,7 +3725,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,1): error CS8183: Cannot infer the type of implicitly-typed discard.
                 // _ = file () => { };
                 Diagnostic(ErrorCode.ERR_DiscardTypeInferenceFailed, "_").WithLocation(1, 1),
-                // (1,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // _ = file () => { };
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -3744,7 +3782,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // file local() { };
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -3819,7 +3858,8 @@ public class FileModifierParsingTests : ParsingTests
             },
             expectedBindingDiagnostics: new[]
             {
-                // (3,12): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,12): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     void M(file int x) { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
@@ -3895,7 +3935,8 @@ public class FileModifierParsingTests : ParsingTests
             """,
             expectedBindingDiagnostics: new[]
             {
-                // (3,12): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,12): error CS0246: The type or namespace name 'file' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     void M(file x) { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")

@@ -455,7 +455,8 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }
 
-            // Ensure derived class polymorphic configuration is not inherited by base class polymorphic configuration
+            // Ensure derived class polymorphic configuration is not inherited by base class polymorphic
+            // configuration
             [JsonPolymorphic(TypeDiscriminatorPropertyName = "$case")]
             [JsonDerivedType(typeof(DerivedClass), "derivedClassOfDerivedClass1")]
             public class DerivedClass1_TypeDiscriminator : PolymorphicClass

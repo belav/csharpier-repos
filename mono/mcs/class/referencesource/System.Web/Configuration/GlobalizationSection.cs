@@ -18,24 +18,24 @@ namespace System.Web.Configuration
     using System.Web.Util;
     using System.Xml;
 
-    /*
-        <!--
-        globalization Attributes:
-          requestEncoding="[Encoding value]" - Encoding to use for request
-          responseEncoding="[Encoding value]" - Encoding to use for response
-          enableBestFitResponseEncoding="[true|false]" - Enable best fit character encoding for response
-          responseHeaderEncoding="[Encoding value]" - Encoding to use for response headers (default is utf-8)
-          fileEncoding="[Encoding value]" - Encoding to use for files
-          culture="[Culture]" - default Thread.CurrentCulture
-          uiCulture="[Culture]" - default Thread.CurrentUICulture
-          resourceProviderFactoryType="[type]"
-        -->
-        <globalization
-                requestEncoding="utf-8"
-                responseEncoding="utf-8"
-        />
+/*
+<!--
+globalization Attributes:
+requestEncoding="[Encoding value]" - Encoding to use for request
+responseEncoding="[Encoding value]" - Encoding to use for response
+enableBestFitResponseEncoding="[true|false]" - Enable best fit character encoding for response
+responseHeaderEncoding="[Encoding value]" - Encoding to use for response headers (default is utf-8)
+fileEncoding="[Encoding value]" - Encoding to use for files
+culture="[Culture]" - default Thread.CurrentCulture
+uiCulture="[Culture]" - default Thread.CurrentUICulture
+resourceProviderFactoryType="[type]"
+-->
+<globalization
+requestEncoding="utf-8"
+responseEncoding="utf-8"
+/>
 
-    */
+*/
 
     public sealed class GlobalizationSection : ConfigurationSection
     {

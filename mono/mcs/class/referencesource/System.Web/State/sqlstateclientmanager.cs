@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * SqlSessionStateStore.cs
- *
- * Copyright (c) 1998-2000, Microsoft Corporation
- *
- */
+* SqlSessionStateStore.cs
+*
+* Copyright (c) 1998-2000, Microsoft Corporation
+*
+*/
 
 namespace System.Web.SessionState
 {
@@ -35,8 +35,8 @@ namespace System.Web.SessionState
     using System.Xml;
 
     /*
-     * Provides session state via SQL Server
-     */
+    * Provides session state via SQL Server
+    */
     internal class SqlSessionStateStore : SessionStateStoreProviderBase
     {
         internal enum SupportFlags : uint
@@ -210,10 +210,10 @@ namespace System.Web.SessionState
         internal IPartitionInfo CreatePartitionInfo(string sqlConnectionString)
         {
             /*
-             * Parse the connection string for errors. We want to ensure
-             * that the user's connection string doesn't contain an
-             * Initial Catalog entry, so we must first create a dummy connection.
-             */
+            * Parse the connection string for errors. We want to ensure
+            * that the user's connection string doesn't contain an
+            * Initial Catalog entry, so we must first create a dummy connection.
+            */
             SqlConnection dummyConnection;
             string attachDBFilename = null;
 
@@ -558,8 +558,10 @@ namespace System.Web.SessionState
             //
             // Version 1
             // ---------
-            // In v1, the lockDate is generated and stored in SQL using local time, and we calculate the "lockage"
-            // (i.e. how long the item is locked) by having the web server read lockDate from SQL and substract it
+            // In v1, the lockDate is generated and stored in SQL using local time, and we calculate the
+            // "lockage"
+            // (i.e. how long the item is locked) by having the web server read lockDate from SQL and substract
+            // it
             // from DateTime.Now.  But this approach introduced two problems:
             //  1. SQL server and web servers need to be in the same time zone.
             //  2. Daylight savings problem.
@@ -578,7 +580,8 @@ namespace System.Web.SessionState
             //         TempGetStateItemExclusive.  However, we modify it a bit so that they use
             //         UTC time to update Expires column.
             //
-            // If using SQL 7, we decided not to fix the problem, and the SQL scripts for SQL 7 remain pretty much
+            // If using SQL 7, we decided not to fix the problem, and the SQL scripts for SQL 7 remain pretty
+            // much
             // the same. That means v1.1 web server will continue to call TempGetStateItem and
             // TempGetStateItemExclusive and use v1 way to calculate the "lockage".
             //
@@ -1398,79 +1401,82 @@ namespace System.Web.SessionState
         };
 
         /*
-            Here are all the sprocs created for session state and how they're used:
-
-            CreateTempTables
-            - Called during setup
-
-            DeleteExpiredSessions
-            - Called by SQL agent to remove expired sessions
-
-            GetHashCode
-            - Called by sproc TempGetAppID
-
-            GetMajorVersion
-            - Called during setup
-
-            TempGetAppID
-            - Called when an asp.net application starts up
-
-            TempGetStateItem
-            - Used for ReadOnly session state
-            - Called by v1 asp.net
-            - Called by v1.1 asp.net against SQL 7
-
-            TempGetStateItem2
-            - Used for ReadOnly session state
-            - Called by v1.1 asp.net against SQL 2000
-
-            TempGetStateItem3
-            - Used for ReadOnly session state
-            - Called by v2 asp.net
-
-            TempGetStateItemExclusive
-            - Called by v1 asp.net
-            - Called by v1.1 asp.net against SQL 7
-
-            TempGetStateItemExclusive2
-            - Called by v1.1 asp.net against SQL 2000
-
-            TempGetStateItemExclusive3
-            - Called by v2 asp.net
-
-            TempGetVersion
-            - Called by v2 asp.net when an application starts up
-
-            TempInsertStateItemLong
-            - Used when creating a new session state with size > 7000 bytes
-
-            TempInsertStateItemShort
-            - Used when creating a new session state with size <= 7000 bytes
-
-            TempInsertUninitializedItem
-            - Used when creating a new uninitilized session state (cookieless="true" and regenerateExpiredSessionId="true" in config)
-
-            TempReleaseStateItemExclusive
-            - Used when a request that has acquired the session state (exclusively) hit an error during the page execution
-
-            TempRemoveStateItem
-            - Used when a session is abandoned
-
-            TempResetTimeout
-            - Used when a request (with an active session state) is handled by an HttpHandler which doesn't support IRequiresSessionState interface.
-
-            TempUpdateStateItemLong
-            - Used when updating a session state with size > 7000 bytes
-
-            TempUpdateStateItemLongNullShort
-            - Used when updating a session state where original size <= 7000 bytes but new size > 7000 bytes
-
-            TempUpdateStateItemShort
-            - Used when updating a session state with size <= 7000 bytes
-
-            TempUpdateStateItemShortNullLong
-            - Used when updating a session state where original size > 7000 bytes but new size <= 7000 bytes
-
+        Here are all the sprocs created for session state and how they're used:
+        
+        CreateTempTables
+        - Called during setup
+        
+        DeleteExpiredSessions
+        - Called by SQL agent to remove expired sessions
+        
+        GetHashCode
+        - Called by sproc TempGetAppID
+        
+        GetMajorVersion
+        - Called during setup
+        
+        TempGetAppID
+        - Called when an asp.net application starts up
+        
+        TempGetStateItem
+        - Used for ReadOnly session state
+        - Called by v1 asp.net
+        - Called by v1.1 asp.net against SQL 7
+        
+        TempGetStateItem2
+        - Used for ReadOnly session state
+        - Called by v1.1 asp.net against SQL 2000
+        
+        TempGetStateItem3
+        - Used for ReadOnly session state
+        - Called by v2 asp.net
+        
+        TempGetStateItemExclusive
+        - Called by v1 asp.net
+        - Called by v1.1 asp.net against SQL 7
+        
+        TempGetStateItemExclusive2
+        - Called by v1.1 asp.net against SQL 2000
+        
+        TempGetStateItemExclusive3
+        - Called by v2 asp.net
+        
+        TempGetVersion
+        - Called by v2 asp.net when an application starts up
+        
+        TempInsertStateItemLong
+        - Used when creating a new session state with size > 7000 bytes
+        
+        TempInsertStateItemShort
+        - Used when creating a new session state with size <= 7000 bytes
+        
+        TempInsertUninitializedItem
+        - Used when creating a new uninitilized session state (cookieless="true" and
+        regenerateExpiredSessionId="true" in config)
+        
+        TempReleaseStateItemExclusive
+        - Used when a request that has acquired the session state (exclusively) hit an error during the page
+        execution
+        
+        TempRemoveStateItem
+        - Used when a session is abandoned
+        
+        TempResetTimeout
+        - Used when a request (with an active session state) is handled by an HttpHandler which doesn't
+        support IRequiresSessionState interface.
+        
+        TempUpdateStateItemLong
+        - Used when updating a session state with size > 7000 bytes
+        
+        TempUpdateStateItemLongNullShort
+        - Used when updating a session state where original size <= 7000 bytes but new size > 7000 bytes
+        
+        TempUpdateStateItemShort
+        - Used when updating a session state with size <= 7000 bytes
+        
+        TempUpdateStateItemShortNullLong
+        - Used when updating a session state where original size > 7000 bytes but new size <= 7000 bytes
+        
         */
         class SqlStateConnection : IDisposable
         {

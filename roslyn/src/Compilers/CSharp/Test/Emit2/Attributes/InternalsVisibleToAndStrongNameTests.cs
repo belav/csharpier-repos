@@ -98,8 +98,10 @@ public class Test
 }
 ";
             // Dev11 RC gives error now (CS1548) + two warnings
-            // Diagnostic(ErrorCode.WRN_UseSwitchInsteadOfAttribute).WithArguments(@"/keyfile", "AssemblyKeyFile"),
-            // Diagnostic(ErrorCode.WRN_UseSwitchInsteadOfAttribute).WithArguments(@"/keycontainer", "AssemblyKeyName")
+            // Diagnostic(ErrorCode.WRN_UseSwitchInsteadOfAttribute).WithArguments(@"/keyfile",
+            // "AssemblyKeyFile"),
+            // Diagnostic(ErrorCode.WRN_UseSwitchInsteadOfAttribute).WithArguments(@"/keycontainer",
+            // "AssemblyKeyName")
             var c = CreateCompilation(
                 source,
                 options: TestOptions.ReleaseDll.WithStrongNameProvider(
@@ -234,7 +236,8 @@ public class Test
 
             Assert.True(comp.Assembly.Identity.PublicKey.IsEmpty);
 
-            // verify success with custom assembly key file resolver with keyFileDir\TempSubDir added to search paths
+            // verify success with custom assembly key file resolver with keyFileDir\TempSubDir added to search
+            // paths
             comp = CSharpCompilation.Create(
                 GetUniqueName(),
                 new[] { syntaxTree },
@@ -348,7 +351,8 @@ public class Test
             );
 
             comp.VerifyEmitDiagnostics(
-                // error CS7027: Error signing output with public key from file '..\KeyPair_6187d0d6-f691-47fd-985b-03570bc0668d.snk' -- aaa.dll not found.
+                // error CS7027: Error signing output with public key from file
+                // '..\KeyPair_6187d0d6-f691-47fd-985b-03570bc0668d.snk' -- aaa.dll not found.
                 Diagnostic(ErrorCode.ERR_PublicKeyFileFailure)
                     .WithArguments("..\\" + keyFileName, "aaa.dll not found.")
                     .WithLocation(1, 1)
@@ -502,7 +506,8 @@ public class Test
                 // error CS7027: Error extracting public key from file 'PublicKeyFile.snk' -- File not found.
                 Diagnostic(ErrorCode.ERR_PublicKeyFileFailure)
                     .WithArguments(publicKeyFileName, CodeAnalysisResources.FileNotFound),
-                // warning CS7033: Delay signing was specified and requires a public key, but no public key was specified
+                // warning CS7033: Delay signing was specified and requires a public key, but no public key was
+                // specified
                 Diagnostic(ErrorCode.WRN_DelaySignButNoKey)
             );
 
@@ -574,7 +579,8 @@ public class Test
                 parseOptions: parseOptions
             );
 
-            // error CS7028: Error signing output with public key from container 'goo' -- Keyset does not exist (Exception from HRESULT: 0x80090016)
+            // error CS7028: Error signing output with public key from container 'goo' -- Keyset does not exist
+            // (Exception from HRESULT: 0x80090016)
             var err = other.GetDiagnostics().Single();
 
             Assert.Equal((int)ErrorCode.ERR_PublicKeyContainerFailure, err.Code);
@@ -739,11 +745,13 @@ public class C {}
                 parseOptions: parseOptions
             );
             c.VerifyDiagnostics(
-                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyNameAttribute' is ignored when public signing is specified.
+                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyNameAttribute' is ignored when public
+                // signing is specified.
                 Diagnostic(ErrorCode.WRN_AttributeIgnoredWhenPublicSigning)
                     .WithArguments("System.Reflection.AssemblyKeyNameAttribute")
                     .WithLocation(1, 1),
-                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyFileAttribute' is ignored when public signing is specified.
+                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyFileAttribute' is ignored when public
+                // signing is specified.
                 Diagnostic(ErrorCode.WRN_AttributeIgnoredWhenPublicSigning)
                     .WithArguments("System.Reflection.AssemblyKeyFileAttribute")
                     .WithLocation(1, 1)
@@ -782,7 +790,8 @@ public class C {}
             );
 
             c.VerifyDiagnostics(
-                // error CS7091: Attribute 'System.Reflection.AssemblyKeyFileAttribute' given in a source file conflicts with option 'CryptoKeyFile'.
+                // error CS7091: Attribute 'System.Reflection.AssemblyKeyFileAttribute' given in a source file
+                // conflicts with option 'CryptoKeyFile'.
                 Diagnostic(ErrorCode.ERR_CmdOptionConflictsSource)
                     .WithArguments("System.Reflection.AssemblyKeyFileAttribute", "CryptoKeyFile")
                     .WithLocation(1, 1),
@@ -829,11 +838,13 @@ public class C {}
                 parseOptions: parseOptions
             );
             c.VerifyDiagnostics(
-                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyFileAttribute' is ignored when public signing is specified.
+                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyFileAttribute' is ignored when public
+                // signing is specified.
                 Diagnostic(ErrorCode.WRN_AttributeIgnoredWhenPublicSigning)
                     .WithArguments("System.Reflection.AssemblyKeyFileAttribute")
                     .WithLocation(1, 1),
-                // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                // error CS8102: Public signing was specified and requires a public key, but no public key was
+                // specified.
                 Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
             );
 
@@ -856,11 +867,13 @@ public class C {}
                 parseOptions: parseOptions
             );
             c.VerifyDiagnostics(
-                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyNameAttribute' is ignored when public signing is specified.
+                // warning CS7103: Attribute 'System.Reflection.AssemblyKeyNameAttribute' is ignored when public
+                // signing is specified.
                 Diagnostic(ErrorCode.WRN_AttributeIgnoredWhenPublicSigning)
                     .WithArguments("System.Reflection.AssemblyKeyNameAttribute")
                     .WithLocation(1, 1),
-                // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                // error CS8102: Public signing was specified and requires a public key, but no public key was
+                // specified.
                 Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
             );
 
@@ -944,7 +957,8 @@ public class C {}",
             );
 
             comp.VerifyDiagnostics(
-                // warning CS1616: Option 'PublicSign' overrides attribute 'System.Reflection.AssemblyDelaySignAttribute' given in a source file or added module
+                // warning CS1616: Option 'PublicSign' overrides attribute
+                // 'System.Reflection.AssemblyDelaySignAttribute' given in a source file or added module
                 Diagnostic(ErrorCode.WRN_CmdOptionConflictsSource)
                     .WithArguments("PublicSign", "System.Reflection.AssemblyDelaySignAttribute")
                     .WithLocation(1, 1)
@@ -971,11 +985,13 @@ public class C {}",
             );
 
             comp.VerifyDiagnostics(
-                // error CS7102: Compilation options 'PublicSign' and 'CryptoKeyContainer' can't both be specified at the same time.
+                // error CS7102: Compilation options 'PublicSign' and 'CryptoKeyContainer' can't both be specified
+                // at the same time.
                 Diagnostic(ErrorCode.ERR_MutuallyExclusiveOptions)
                     .WithArguments("PublicSign", "CryptoKeyContainer")
                     .WithLocation(1, 1),
-                // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                // error CS8102: Public signing was specified and requires a public key, but no public key was
+                // specified.
                 Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
             );
         }
@@ -993,11 +1009,13 @@ public class C {}",
             );
 
             comp.VerifyDiagnostics(
-                // error CS7102: Compilation options 'PublicSign' and 'CryptoKeyContainer' can't both be specified at the same time.
+                // error CS7102: Compilation options 'PublicSign' and 'CryptoKeyContainer' can't both be specified
+                // at the same time.
                 Diagnostic(ErrorCode.ERR_MutuallyExclusiveOptions)
                     .WithArguments("PublicSign", "CryptoKeyContainer")
                     .WithLocation(1, 1),
-                // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                // error CS8102: Public signing was specified and requires a public key, but no public key was
+                // specified.
                 Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
             );
 
@@ -1023,7 +1041,8 @@ public class C {}",
             );
 
             comp.VerifyDiagnostics(
-                // error CS7102: Compilation options 'PublicSign' and 'DelaySign' can't both be specified at the same time.
+                // error CS7102: Compilation options 'PublicSign' and 'DelaySign' can't both be specified at the
+                // same time.
                 Diagnostic(ErrorCode.ERR_MutuallyExclusiveOptions)
                     .WithArguments("PublicSign", "DelaySign")
                     .WithLocation(1, 1)
@@ -1065,7 +1084,8 @@ public class C {}",
             );
 
             comp.VerifyDiagnostics(
-                // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                // error CS8102: Public signing was specified and requires a public key, but no public key was
+                // specified.
                 Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
             );
             Assert.True(comp.Options.PublicSign);
@@ -1088,11 +1108,13 @@ public class C {}",
             );
 
             c.VerifyDiagnostics(
-                // error CS7102: Compilation options 'CryptoPublicKey' and 'CryptoKeyFile' can't both be specified at the same time.
+                // error CS7102: Compilation options 'CryptoPublicKey' and 'CryptoKeyFile' can't both be specified
+                // at the same time.
                 Diagnostic(ErrorCode.ERR_MutuallyExclusiveOptions)
                     .WithArguments("CryptoPublicKey", "CryptoKeyFile")
                     .WithLocation(1, 1),
-                // error CS7102: Compilation options 'CryptoPublicKey' and 'CryptoKeyContainer' can't both be specified at the same time.
+                // error CS7102: Compilation options 'CryptoPublicKey' and 'CryptoKeyContainer' can't both be
+                // specified at the same time.
                 Diagnostic(ErrorCode.ERR_MutuallyExclusiveOptions)
                     .WithArguments("CryptoPublicKey", "CryptoKeyContainer")
                     .WithLocation(1, 1),
@@ -1302,11 +1324,14 @@ public class C {}",
                 parseOptions: parseOptions
             );
 
-            // We allow John to access Paul's internal Goo even though strong-named John should not be referencing weak-named Paul.
+            // We allow John to access Paul's internal Goo even though strong-named John should not be
+            // referencing weak-named Paul.
             // Paul has, after all, specifically granted access to John.
 
-            // During emit time we should produce an error that says that a strong-named assembly cannot reference
-            // a weak-named assembly. But the C# compiler doesn't currently do that. See https://github.com/dotnet/roslyn/issues/26722
+            // During emit time we should produce an error that says that a strong-named assembly cannot
+            // reference
+            // a weak-named assembly. But the C# compiler doesn't currently do that. See
+            // https://github.com/dotnet/roslyn/issues/26722
             requestor.VerifyDiagnostics();
         }
 
@@ -1353,7 +1378,9 @@ public class Test
                 parseOptions: parseOptions
             );
             other.VerifyDiagnostics(
-                // (7,15): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (7,15): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified
+                // by the InternalsVisibleTo attribute in the granting assembly.
                 // 		PublicClass.InternalMethod();
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "InternalMethod")
                     .WithArguments(
@@ -1371,7 +1398,9 @@ public class Test
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "PrivateMethod")
                     .WithArguments("PublicClass", "PrivateMethod")
                     .WithLocation(9, 21),
-                // (10,21): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (10,21): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified
+                // by the InternalsVisibleTo attribute in the granting assembly.
                 //         PublicClass.InternalProtectedMethod();
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "InternalProtectedMethod")
                     .WithArguments(
@@ -1379,7 +1408,9 @@ public class Test
                         ""
                     )
                     .WithLocation(10, 21),
-                // (11,21): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (11,21): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified
+                // by the InternalsVisibleTo attribute in the granting assembly.
                 //         PublicClass.PrivateProtectedMethod();
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PrivateProtectedMethod")
                     .WithArguments(
@@ -1427,7 +1458,8 @@ public class Test
                 parseOptions: parseOptions
             );
 
-            // (7, 3): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('')
+            // (7, 3): error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral,
+            // PublicKeyToken=null', but the public key of the output assembly ('')
             // does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
             // 		FriendClass.MyMethod ();
             other.VerifyDiagnostics(
@@ -1478,11 +1510,14 @@ public class Test
                 parseOptions: parseOptions
             );
 
-            // We allow John to access Paul's internal Goo even though strong-named John should not be referencing weak-named Paul.
+            // We allow John to access Paul's internal Goo even though strong-named John should not be
+            // referencing weak-named Paul.
             // Paul has, after all, specifically granted access to John.
 
-            // During emit time we should produce an error that says that a strong-named assembly cannot reference
-            // a weak-named assembly. But the C# compiler doesn't currently do that. See https://github.com/dotnet/roslyn/issues/26722
+            // During emit time we should produce an error that says that a strong-named assembly cannot
+            // reference
+            // a weak-named assembly. But the C# compiler doesn't currently do that. See
+            // https://github.com/dotnet/roslyn/issues/26722
             requestor.VerifyDiagnostics();
         }
 
@@ -1693,8 +1728,10 @@ public class A
                 ByteSequenceComparer.Equals(s_publicKey, requestor.Assembly.Identity.PublicKey)
             );
             requestor.VerifyDiagnostics(
-                // error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2',
-                // but the public key of the output assembly ('John, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2')
+                // error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2',
+                // but the public key of the output assembly ('John, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2')
                 // does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
@@ -1831,8 +1868,10 @@ public class A
 
             Assert.False(other.Assembly.GivesAccessTo(requestor.Assembly));
             requestor.VerifyDiagnostics(
-                // error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2',
-                // but the public key of the output assembly ('John, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2')
+                // error CS0281: Friend access was granted by 'Paul, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2',
+                // but the public key of the output assembly ('John, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2')
                 // does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
@@ -2189,7 +2228,8 @@ public class Z
 
             other = CreateCompilation(s, new[] { reference }, TestOptions.SigningReleaseDll);
 
-            // error CS7028: Error signing output with public key from container 'bogus' -- Keyset does not exist (Exception from HRESULT: 0x80090016)
+            // error CS7028: Error signing output with public key from container 'bogus' -- Keyset does not
+            // exist (Exception from HRESULT: 0x80090016)
             var err = other.GetDiagnostics().Single();
 
             Assert.Equal((int)ErrorCode.ERR_PublicKeyContainerFailure, err.Code);
@@ -2323,7 +2363,8 @@ public class C {}";
             var success = other.Emit(outStrm);
             Assert.False(success.Success);
             success.Diagnostics.Verify(
-                // error CS7091: Attribute 'System.Reflection.AssemblyKeyNameAttribute' given in a source file conflicts with option 'CryptoKeyContainer'.
+                // error CS7091: Attribute 'System.Reflection.AssemblyKeyNameAttribute' given in a source file
+                // conflicts with option 'CryptoKeyContainer'.
                 Diagnostic(ErrorCode.ERR_CmdOptionConflictsSource)
                     .WithArguments(
                         "System.Reflection.AssemblyKeyNameAttribute",
@@ -2441,7 +2482,8 @@ public class C {}";
             var success = other.Emit(outStrm);
             Assert.False(success.Success);
             success.Diagnostics.Verify(
-                // error CS7091: Attribute 'System.Reflection.AssemblyKeyFileAttribute' given in a source file conflicts with option 'CryptoKeyFile'.
+                // error CS7091: Attribute 'System.Reflection.AssemblyKeyFileAttribute' given in a source file
+                // conflicts with option 'CryptoKeyFile'.
                 Diagnostic(ErrorCode.ERR_CmdOptionConflictsSource)
                     .WithArguments("System.Reflection.AssemblyKeyFileAttribute", "CryptoKeyFile")
             );
@@ -2554,9 +2596,11 @@ public class C
 
             var outStrm = new MemoryStream();
             var emitResult = other.Emit(outStrm);
-            // Dev11: warning CS1699: Use command line option '/delaysign' or appropriate project settings instead of 'AssemblyDelaySignAttribute'
+            // Dev11: warning CS1699: Use command line option '/delaysign' or appropriate project settings
+            // instead of 'AssemblyDelaySignAttribute'
             //        warning CS1607: Assembly generation -- Delay signing was requested, but no key was given
-            // Roslyn: warning CS7033: Delay signing was specified and requires a public key, but no public key was specified
+            // Roslyn: warning CS7033: Delay signing was specified and requires a public key, but no public key
+            // was specified
             other.VerifyDiagnostics(Diagnostic(ErrorCode.WRN_DelaySignButNoKey));
             Assert.True(emitResult.Success);
         }
@@ -3136,15 +3180,19 @@ public class C : B
             );
 
             comp3.VerifyDiagnostics(
-                // (7,9): error CS7036: There is no argument given that corresponds to the required parameter 'a' of 'B.F(int[])'
+                // (7,9): error CS7036: There is no argument given that corresponds to the required parameter 'a' of
+                // 'B.F(int[])'
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "F")
                     .WithArguments("a", "B.F(int[])")
                     .WithLocation(7, 11),
-                // (8,20): error CS1061: 'object' does not contain a definition for 'Bar' and no extension method 'Bar' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
+                // (8,20): error CS1061: 'object' does not contain a definition for 'Bar' and no extension method
+                // 'Bar' accepting a first argument of type 'object' could be found (are you missing a using directive
+                // or an assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Bar")
                     .WithArguments("object", "Bar")
                     .WithLocation(8, 20),
-                // (10,17): error CS7036: There is no argument given that corresponds to the required parameter 'a' of 'B.this[int, int[]]'
+                // (10,17): error CS7036: There is no argument given that corresponds to the required parameter 'a'
+                // of 'B.this[int, int[]]'
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c[1]")
                     .WithArguments("a", "B.this[int, int[]]")
                     .WithLocation(10, 17)
@@ -3261,7 +3309,8 @@ public class C
                 Assert.True(emitResult.Success);
 
                 emitResult.Diagnostics.Verify(
-                    // warning CS8002: Referenced assembly 'Unsigned, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' does not have a strong name.
+                    // warning CS8002: Referenced assembly 'Unsigned, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null' does not have a strong name.
                     Diagnostic(ErrorCode.WRN_ReferencedAssemblyDoesNotHaveStrongName)
                         .WithArguments(
                             "Unsigned, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -3309,7 +3358,8 @@ e29df38b5c72727c1333f32001949a0a0e2c10f8af0a344300ab2123052840cb16e30176c7281810
                     .WithCryptoKeyFile(s_keyPairFile)
             );
 
-            // ACTUAL: error CS8002: Referenced assembly 'Signed, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' does not have a strong name.
+            // ACTUAL: error CS8002: Referenced assembly 'Signed, Version=1.0.0.0, Culture=neutral,
+            // PublicKeyToken=null' does not have a strong name.
             // EXPECTED: no errors
             compilation.VerifyEmitDiagnostics();
         }
@@ -3375,7 +3425,8 @@ public class C
                 Assert.False(success.Success);
                 success.Diagnostics.Verify(
                     // (3,1): error CS8003: Invalid signature public key specified in AssemblySignatureKeyAttribute.
-                    // "xxx 00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb",
+                    // "xxx
+                    // 00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb",
                     Diagnostic(
                         ErrorCode.ERR_InvalidSignaturePublicKey,
                         @"""xxx 00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb"""
@@ -3415,7 +3466,8 @@ public class C
                 var result = other.Emit(outStrm);
                 Assert.False(result.Success);
                 result.Diagnostics.VerifyErrorCodes(
-                    // error CS7027: Error signing output with public key from file 'KeyPairFile.snk' -- Invalid countersignature specified in AssemblySignatureKeyAttribute. (Exception from HRESULT: 0x80131423)
+                    // error CS7027: Error signing output with public key from file 'KeyPairFile.snk' -- Invalid
+                    // countersignature specified in AssemblySignatureKeyAttribute. (Exception from HRESULT: 0x80131423)
                     Diagnostic(ErrorCode.ERR_PublicKeyFileFailure)
                 );
             }
@@ -3450,7 +3502,8 @@ public class C
                 Assert.False(success.Success);
                 success.Diagnostics.Verify(
                     // (3,1): error CS8003: Invalid signature public key specified in AssemblySignatureKeyAttribute.
-                    // "xxx 00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb",
+                    // "xxx
+                    // 00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb",
                     Diagnostic(
                         ErrorCode.ERR_InvalidSignaturePublicKey,
                         @"""xxx 00240000048000009400000006020000002400005253413100040000010001002b986f6b5ea5717d35c72d38561f413e267029efa9b5f107b9331d83df657381325b3a67b75812f63a9436ceccb49494de8f574f8e639d4d26c0fcf8b0e9a1a196b80b6f6ed053628d10d027e032df2ed1d60835e5f47d32c9ef6da10d0366a319573362c821b5f8fa5abc5bb22241de6f666a85d82d6ba8c3090d01636bd2bb"""
@@ -3685,8 +3738,10 @@ class B
 
             var ca = CreateCompilation(source, parseOptions: parseOptions);
             ca.VerifyDiagnostics(
-                // (1,12): warning CS1700: Assembly reference 'System.Runtime.Serialization, PublicKey = 10000000000000000400000000000000' is invalid and cannot be resolved
-                // [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("System.Runtime.Serialization, PublicKey = 10000000000000000400000000000000")]
+                // (1,12): warning CS1700: Assembly reference 'System.Runtime.Serialization, PublicKey =
+                // 10000000000000000400000000000000' is invalid and cannot be resolved
+                // [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("System.Runtime.Serialization,
+                // PublicKey = 10000000000000000400000000000000")]
                 Diagnostic(
                         ErrorCode.WRN_InvalidAssemblyName,
                         @"System.Runtime.CompilerServices.InternalsVisibleTo(""System.Runtime.Serialization, PublicKey = 10000000000000000400000000000000"")"
@@ -3760,7 +3815,8 @@ class B
             Assert.Null(options.CryptoKeyFile);
             CreateCompilation(string.Empty, options: options, parseOptions: parseOptions)
                 .VerifyDiagnostics(
-                    // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                    // error CS8102: Public signing was specified and requires a public key, but no public key was
+                    // specified.
                     Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
                 );
         }
@@ -3775,7 +3831,8 @@ class B
             var options = TestOptions.DebugDll.WithCryptoKeyFile(string.Empty).WithPublicSign(true);
             CreateCompilation(string.Empty, options: options, parseOptions: parseOptions)
                 .VerifyDiagnostics(
-                    // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                    // error CS8102: Public signing was specified and requires a public key, but no public key was
+                    // specified.
                     Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
                 );
         }
@@ -3854,7 +3911,8 @@ public class Class1 : TestBaseClass
     protected internal override bool SupportSvgImages { get { return true; } }
 }
 ";
-            // To find what the property overrides, an IVT check is involved so we need to bind assembly-level attributes
+            // To find what the property overrides, an IVT check is involved so we need to bind assembly-level
+            // attributes
             var c2 = CreateCompilation(
                 new[] { source1, source2 },
                 new[] { libRef },
@@ -3903,7 +3961,8 @@ public class Class1 : TestBaseClass
     protected internal override bool SupportSvgImages { get { return true; } }
 }
 ";
-            // To find what the property overrides, an IVT check is involved so we need to bind assembly-level attributes
+            // To find what the property overrides, an IVT check is involved so we need to bind assembly-level
+            // attributes
             var c2 = CreateCompilation(
                 new[] { source1, source2 },
                 new[] { libRef },
@@ -3946,7 +4005,9 @@ class TestAttribute : System.Attribute
             );
             var expected = new[]
             {
-                // (2,40): error CS0281: Friend access was granted by 'Issue57742_01_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly
+                // (2,40): error CS0281: Friend access was granted by 'Issue57742_01_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly
                 // [assembly: TestAttribute("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -3996,7 +4057,9 @@ using System.Runtime.CompilerServices;
             );
             var expected = new[]
             {
-                // (4,45): error CS0281: Friend access was granted by 'Issue57742_02_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (4,45): error CS0281: Friend access was granted by 'Issue57742_02_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: InternalsVisibleTo("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4053,18 +4116,24 @@ class TestAttribute : System.Attribute
             );
             var expected = new[]
             {
-                // error CS7027: Error signing output with public key from file 'somethingSomething' -- Assembly signing not supported.
+                // error CS7027: Error signing output with public key from file 'somethingSomething' -- Assembly
+                // signing not supported.
                 Diagnostic(ErrorCode.ERR_PublicKeyFileFailure)
                     .WithArguments("somethingSomething", "Assembly signing not supported.")
                     .WithLocation(1, 1),
-                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo
+                // attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 1),
-                // (4,40): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (4,40): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: TestAttribute("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4072,7 +4141,9 @@ class TestAttribute : System.Attribute
                         ""
                     )
                     .WithLocation(4, 40),
-                // (5,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (5,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: AssemblyKeyFile("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4112,18 +4183,24 @@ class TestAttribute : System.Attribute
             );
             var expected2 = new[]
             {
-                // error CS7028: Error signing output with public key from container 'somethingSomething' -- Assembly signing not supported.
+                // error CS7028: Error signing output with public key from container 'somethingSomething' --
+                // Assembly signing not supported.
                 Diagnostic(ErrorCode.ERR_PublicKeyContainerFailure)
                     .WithArguments("somethingSomething", "Assembly signing not supported.")
                     .WithLocation(1, 1),
-                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo
+                // attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 1),
-                // (4,40): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (4,40): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: TestAttribute("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4131,7 +4208,9 @@ class TestAttribute : System.Attribute
                         ""
                     )
                     .WithLocation(4, 40),
-                // (5,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (5,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: AssemblyKeyName("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4164,18 +4243,24 @@ using System.Reflection;
             );
             var expected3 = new[]
             {
-                // error CS7027: Error signing output with public key from file 'somethingSomething' -- Assembly signing not supported.
+                // error CS7027: Error signing output with public key from file 'somethingSomething' -- Assembly
+                // signing not supported.
                 Diagnostic(ErrorCode.ERR_PublicKeyFileFailure)
                     .WithArguments("somethingSomething", "Assembly signing not supported.")
                     .WithLocation(1, 1),
-                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo
+                // attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 1),
-                // (4,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (4,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: AssemblyKeyFile("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4208,18 +4293,24 @@ using System.Reflection;
             );
             var expected4 = new[]
             {
-                // error CS7028: Error signing output with public key from container 'somethingSomething' -- Assembly signing not supported.
+                // error CS7028: Error signing output with public key from container 'somethingSomething' --
+                // Assembly signing not supported.
                 Diagnostic(ErrorCode.ERR_PublicKeyContainerFailure)
                     .WithArguments("somethingSomething", "Assembly signing not supported.")
                     .WithLocation(1, 1),
-                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('Issue57742_03, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo
+                // attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Issue57742_03, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 1),
-                // (4,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (4,42): error CS0281: Friend access was granted by 'Issue57742_03_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: AssemblyKeyName("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4272,18 +4363,24 @@ using System.Runtime.CompilerServices;
             );
             var expected = new[]
             {
-                // error CS7027: Error signing output with public key from file 'somethingSomething' -- Assembly signing not supported.
+                // error CS7027: Error signing output with public key from file 'somethingSomething' -- Assembly
+                // signing not supported.
                 Diagnostic(ErrorCode.ERR_PublicKeyFileFailure)
                     .WithArguments("somethingSomething", "Assembly signing not supported.")
                     .WithLocation(1, 1),
-                // error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('Issue57742_04, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('Issue57742_04, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo
+                // attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
                         "Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Issue57742_04, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 1),
-                // (5,45): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (5,45): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: InternalsVisibleTo("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4291,7 +4388,9 @@ using System.Runtime.CompilerServices;
                         ""
                     )
                     .WithLocation(5, 45),
-                // (6,42): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (6,42): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: AssemblyKeyFile("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4327,18 +4426,24 @@ using System.Runtime.CompilerServices;
             );
             var expected2 = new[]
             {
-                // error CS7028: Error signing output with public key from container 'somethingSomething' -- Assembly signing not supported.
+                // error CS7028: Error signing output with public key from container 'somethingSomething' --
+                // Assembly signing not supported.
                 Diagnostic(ErrorCode.ERR_PublicKeyContainerFailure)
                     .WithArguments("somethingSomething", "Assembly signing not supported.")
                     .WithLocation(1, 1),
-                // error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('Issue57742_04, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null', but the public key of the output assembly ('Issue57742_04, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null') does not match that specified by the InternalsVisibleTo
+                // attribute in the granting assembly.
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis)
                     .WithArguments(
                         "Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Issue57742_04, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 1),
-                // (5,45): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (5,45): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: InternalsVisibleTo("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4346,7 +4451,9 @@ using System.Runtime.CompilerServices;
                         ""
                     )
                     .WithLocation(5, 45),
-                // (6,42): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (6,42): error CS0281: Friend access was granted by 'Issue57742_04_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: AssemblyKeyName("something" + PublicKeyConstants.PublicKey)]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "PublicKeyConstants")
                     .WithArguments(
@@ -4391,7 +4498,9 @@ internal class C {}
             );
             var expected = new[]
             {
-                // (2,67): error CS0281: Friend access was granted by 'Issue57742_05_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match that specified by the InternalsVisibleTo attribute in the granting assembly.
+                // (2,67): error CS0281: Friend access was granted by 'Issue57742_05_Lib, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null', but the public key of the output assembly ('') does not match
+                // that specified by the InternalsVisibleTo attribute in the granting assembly.
                 // [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(C))]
                 Diagnostic(ErrorCode.ERR_FriendRefNotEqualToThis, "C")
                     .WithArguments(

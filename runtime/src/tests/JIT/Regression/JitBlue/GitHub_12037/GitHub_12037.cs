@@ -28,11 +28,16 @@ public class TailCallOptTest
         return (res1 && res2) ? 100 : 0;
     }
 
-    // In this test typedDouble2 is passed to Caller1 on the stack. Then typedDouble2.Value is passed to Callee1 in a register.
-    // Since Calee1 also has a stack argument (typedDouble3.Value) and the call is dispatched as a fast tail call,
-    // it's set up in the incoming argument area of Caller1. JIT lowering code needs to ensure that typedDouble2
-    // in that area is not overwritten by typedDouble3.Value before typedDouble2.Value is computed. The JIT had a bug in that code
-    // because typedDouble2.Value was represented as GT_LCL_FLD and it was incorrectly converted into GT_LCL_VAR resulting in type
+    // In this test typedDouble2 is passed to Caller1 on the stack. Then typedDouble2.Value is passed to
+    // Callee1 in a register.
+    // Since Calee1 also has a stack argument (typedDouble3.Value) and the call is dispatched as a fast
+    // tail call,
+    // it's set up in the incoming argument area of Caller1. JIT lowering code needs to ensure that
+    // typedDouble2
+    // in that area is not overwritten by typedDouble3.Value before typedDouble2.Value is computed. The
+    // JIT had a bug in that code
+    // because typedDouble2.Value was represented as GT_LCL_FLD and it was incorrectly converted into
+    // GT_LCL_VAR resulting in type
     // mismatches (long vs. double since the struct is passed as a long but its only field is double).
     public static bool Caller1(
         object parameters,
@@ -96,11 +101,15 @@ public class TailCallOptTest
         }
     }
 
-    // In this test twoInts is passed to Caller2 on the stack. Then twoInts.Value1 and twoInts.Value2 were passed to Callee2 in registers.
+    // In this test twoInts is passed to Caller2 on the stack. Then twoInts.Value1 and twoInts.Value2
+    // were passed to Callee2 in registers.
     // Since Calee2 also has a stack argument (i3) and the call is dispatched as a fast tail call,
-    // it's set up in the incoming argument area of Caller2. JIT lowering code needs to ensure that twoInts
-    // in that area is not overwritten by i3 before twoInts.Value1 and twoInts.Value2 are computed. The JIT had a bug in that code
-    // because twoInts.Value1 and twoInts.Value2 were represented as GT_LCL_FLD and they were incorrectly converted into GT_LCL_VAR
+    // it's set up in the incoming argument area of Caller2. JIT lowering code needs to ensure that
+    // twoInts
+    // in that area is not overwritten by i3 before twoInts.Value1 and twoInts.Value2 are computed. The
+    // JIT had a bug in that code
+    // because twoInts.Value1 and twoInts.Value2 were represented as GT_LCL_FLD and they were
+    // incorrectly converted into GT_LCL_VAR
     // resulting in an identical value passed for both fields.
     public static bool Caller2(
         object parameters,

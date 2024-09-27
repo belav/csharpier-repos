@@ -21,10 +21,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * ChtmlMobileTextWriter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * ChtmlMobileTextWriter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\ChtmlMobileTextWriter.uex' path='docs/doc[@for="ChtmlMobileTextWriter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -39,7 +39,8 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class ChtmlMobileTextWriter : HtmlMobileTextWriter
     {
-        /// <include file='doc\ChtmlMobileTextWriter.uex' path='docs/doc[@for="ChtmlMobileTextWriter.ChtmlMobileTextWriter"]/*' />
+        /// <include file='doc\ChtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="ChtmlMobileTextWriter.ChtmlMobileTextWriter"]/*' />
         public ChtmlMobileTextWriter(TextWriter writer, MobileCapabilities device)
             : base(writer, device) { }
     }

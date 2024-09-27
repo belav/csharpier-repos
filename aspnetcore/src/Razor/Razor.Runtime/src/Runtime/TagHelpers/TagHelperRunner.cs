@@ -14,7 +14,8 @@ public class TagHelperRunner
     /// <summary>
     /// Calls the <see cref="ITagHelperComponent.ProcessAsync"/> method on <see cref="ITagHelper"/>s.
     /// </summary>
-    /// <param name="executionContext">Contains information associated with running <see cref="ITagHelper"/>s.
+    /// <param name="executionContext">Contains information associated with running <see
+    // cref="ITagHelper"/>s.
     /// </param>
     /// <returns>Resulting <see cref="TagHelperOutput"/> from processing all of the
     /// <paramref name="executionContext"/>'s <see cref="ITagHelper"/>s.</returns>

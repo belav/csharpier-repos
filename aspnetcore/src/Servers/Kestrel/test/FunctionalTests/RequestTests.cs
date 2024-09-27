@@ -944,7 +944,8 @@ public class RequestTests : LoggedTest
                 catch (IOException)
                 {
                     // The server is forcefully closing the connection so an IOException:
-                    // "Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host."
+                    // "Unable to read data from the transport connection: An existing connection was forcibly closed by
+                    // the remote host."
                     // isn't guaranteed but not unexpected.
                 }
             }
@@ -1162,7 +1163,8 @@ public class RequestTests : LoggedTest
 
                 var ignore = connection.Stream.WriteAsync(scratchBuffer, 0, scratchBuffer.Length);
 
-                // Wait until the read callback is no longer hooked up so that the connection disconnect isn't observed.
+                // Wait until the read callback is no longer hooked up so that the connection disconnect isn't
+                // observed.
                 await readCallbackUnwired.Task.DefaultTimeout();
             }
 
@@ -1287,8 +1289,10 @@ public class RequestTests : LoggedTest
         }
     }
 
-    // THIS IS NOT GENERAL PURPOSE. If the initial characters could repeat, this is broken. However, since we're
-    // looking for /bytesWritten: \d+/ and the initial "b" cannot occur elsewhere in the pattern, this works.
+    // THIS IS NOT GENERAL PURPOSE. If the initial characters could repeat, this is broken. However,
+    // since we're
+    // looking for /bytesWritten: \d+/ and the initial "b" cannot occur elsewhere in the pattern, this
+    // works.
     private static async Task AssertStreamContains(Stream stream, string expectedSubstring)
     {
         var expectedBytes = Encoding.ASCII.GetBytes(expectedSubstring);

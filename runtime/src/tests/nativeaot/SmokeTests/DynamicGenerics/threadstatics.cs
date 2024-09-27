@@ -14,7 +14,8 @@ using TypeOfRepo;
 
 namespace ThreadLocalStatics
 {
-    // disable "'field' is never used" warning (we have some static unused fields to test TS field offsets)
+    // disable "'field' is never used" warning (we have some static unused fields to test TS field
+    // offsets)
 #pragma warning disable 0169
 
     public class MyType1<T>
@@ -483,7 +484,8 @@ namespace ThreadLocalStatics
             string sval2 = "string2_thread#" + Environment.CurrentManagedThreadId;
             double dval = (Environment.CurrentManagedThreadId | 1) * 15.123;
 
-            // Test static function calls on the types. Static functions do some read/write operations on the TS fields
+            // Test static function calls on the types. Static functions do some read/write operations on the TS
+            // fields
             {
                 InvokerHelper(
                     new MethodInfo[] { t1_set1, t2_set1, t3_set1 },
@@ -619,7 +621,8 @@ namespace ThreadLocalStatics
             string sval = "teststring_thread#" + Environment.CurrentManagedThreadId;
             double dval = (Environment.CurrentManagedThreadId | 3) * 159.87;
 
-            // Test static function calls on the types. Static functions do some read/write operations on the TS fields
+            // Test static function calls on the types. Static functions do some read/write operations on the TS
+            // fields
             {
                 InvokerHelper(
                     new MethodInfo[] { t1_set1, t2_set1 },

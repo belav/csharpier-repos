@@ -7,7 +7,8 @@ namespace System.Net.Http
     {
         //
         // Workarounds for poor .NET API
-        // Instead of having SerializeToStreamAsync with CancellationToken as public API. Only LoadIntoBufferAsync
+        // Instead of having SerializeToStreamAsync with CancellationToken as public API. Only
+        // LoadIntoBufferAsync
         // called internally from the send worker can be cancelled and user cannot see/do it
         //
         [Obsolete(

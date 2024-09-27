@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI
 {
@@ -24,7 +24,8 @@ namespace System.Web.UI
         private readonly string name;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.ValidationPropertyAttribute'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.ValidationPropertyAttribute'/>
+        // class.</para>
         /// </devdoc>
         public ValidationPropertyAttribute(string name)
         {

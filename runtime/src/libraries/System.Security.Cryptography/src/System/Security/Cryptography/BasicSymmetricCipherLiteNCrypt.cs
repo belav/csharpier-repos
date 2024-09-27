@@ -92,9 +92,12 @@ namespace System.Security.Cryptography
 
             if (numBytesWritten != input.Length)
             {
-                // CNG gives us no way to tell NCryptDecrypt() that we're decrypting the final block, nor is it performing any
-                // padding /depadding for us. So there's no excuse for a provider to hold back output for "future calls." Though
-                // this isn't technically our problem to detect, we might as well detect it now for easier diagnosis.
+                // CNG gives us no way to tell NCryptDecrypt() that we're decrypting the final block, nor is it
+                // performing any
+                // padding /depadding for us. So there's no excuse for a provider to hold back output for "future
+                // calls." Though
+                // this isn't technically our problem to detect, we might as well detect it now for easier
+                // diagnosis.
                 throw new CryptographicException(SR.Cryptography_UnexpectedTransformTruncation);
             }
 

@@ -33,7 +33,8 @@ namespace System.Text.Encodings.Web
         }
 
         /// <summary>
-        /// Instantiates the filter where only the character ranges specified by <paramref name="allowedRanges"/>
+        /// Instantiates the filter where only the character ranges specified by <paramref
+        // name="allowedRanges"/>
         /// are allowed by the filter.
         /// </summary>
         public TextEncoderSettings(params UnicodeRange[] allowedRanges)

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -58,7 +59,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 typeof(AnnotatedField).GetField("_annotatedField").GetValue(null);
             }
 
-            // DynamicDependency is not supported yet in the analyzer https://github.com/dotnet/runtime/issues/83080
+            // DynamicDependency is not supported yet in the analyzer
+            // https://github.com/dotnet/runtime/issues/83080
             [ExpectedWarning(
                 "IL2110",
                 nameof(_annotatedField),
@@ -71,7 +73,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicDependency(DynamicallyAccessedMemberTypes.PublicFields, typeof(AnnotatedField))]
             static void DynamicDependencySuppressedByRUC() { }
 
-            // DynamicDependency is not supported yet in the analyzer https://github.com/dotnet/runtime/issues/83080
+            // DynamicDependency is not supported yet in the analyzer
+            // https://github.com/dotnet/runtime/issues/83080
             [ExpectedWarning(
                 "IL2110",
                 nameof(_annotatedField),
@@ -246,7 +249,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [AttributeWithConstructorWithAnnotation(typeof(TestType))]
             static void AnnotatedAttributeConstructor() { }
 
-            // DynamicDependency is not supported yet in the analyzer https://github.com/dotnet/runtime/issues/83080
+            // DynamicDependency is not supported yet in the analyzer
+            // https://github.com/dotnet/runtime/issues/83080
             [ExpectedWarning(
                 "IL2111",
                 nameof(MethodWithSingleAnnotatedParameter),
@@ -265,7 +269,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void DynamicDependencySuppressedByRUC() { }
 
-            // DynamicDependency is not supported yet in the analyzer https://github.com/dotnet/runtime/issues/83080
+            // DynamicDependency is not supported yet in the analyzer
+            // https://github.com/dotnet/runtime/issues/83080
             [ExpectedWarning(
                 "IL2111",
                 nameof(MethodWithSingleAnnotatedParameter),
@@ -466,7 +471,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             public virtual Type VirtualMethodWithAnnotatedReturnValue() => null;
 
-            // Only virtual methods should warn - the problem is only possible if something overrides a virtual method.
+            // Only virtual methods should warn - the problem is only possible if something overrides a virtual
+            // method.
             // Getting an annotated value in itself is not dangerous in any way.
 
             static void ReflectionOnStatic()
@@ -499,7 +505,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     .Invoke(null, null);
             }
 
-            // DynamicDependency is not supported yet in the analyzer https://github.com/dotnet/runtime/issues/83080
+            // DynamicDependency is not supported yet in the analyzer
+            // https://github.com/dotnet/runtime/issues/83080
             [ExpectedWarning(
                 "IL2111",
                 nameof(VirtualMethodWithAnnotatedReturnValue),
@@ -530,7 +537,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void DynamicDependencyByNameOnInstance() { }
 
-            // DynamicDependency is not supported yet in the analyzer https://github.com/dotnet/runtime/issues/83080
+            // DynamicDependency is not supported yet in the analyzer
+            // https://github.com/dotnet/runtime/issues/83080
             [ExpectedWarning(
                 "IL2111",
                 nameof(VirtualMethodWithAnnotatedReturnValue),
@@ -716,7 +724,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [AttributeWithPropertyWithAnnotation(PropertyWithAnnotation = typeof(TestType))]
             static void AnnotatedAttributeProperty() { }
 
-            // DynamicDependency is not supported yet in the analyzer https://github.com/dotnet/runtime/issues/83080
+            // DynamicDependency is not supported yet in the analyzer
+            // https://github.com/dotnet/runtime/issues/83080
             [ExpectedWarning(
                 "IL2111",
                 nameof(Property1WithAnnotation) + ".set",
@@ -786,7 +795,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [ExpectedWarning("IL2026", nameof(DynamicDependencySuppressedByRUC), "test")]
             [ExpectedWarning("IL2026", nameof(DynamicallyAccessedMembersSuppressedByRUC), "test")]
             [ExpectedWarning("IL2026", nameof(ReflectionOnPropertyItselfSuppressedByRUC), "test")]
-            // Duplicated warnings for trimming and analyzer see bug https://github.com/dotnet/linker/issues/2462
+            // Duplicated warnings for trimming and analyzer see bug
+            // https://github.com/dotnet/linker/issues/2462
             [ExpectedWarning("IL2111", nameof(AnnotatedProperty.Property1WithAnnotation) + ".set")]
             [ExpectedWarning("IL2111", nameof(AnnotatedProperty.Property1WithAnnotation) + ".set")]
             [ExpectedWarning(
@@ -822,7 +832,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [ExpectedWarning("IL2026", nameof(DynamicDependencySuppressedByRUC), "test")]
             [ExpectedWarning("IL2026", nameof(DynamicallyAccessedMembersSuppressedByRUC), "test")]
             [ExpectedWarning("IL2026", nameof(ReflectionOnPropertyItselfSuppressedByRUC), "test")]
-            // Duplicated warnings for trimming and analyzer see bug https://github.com/dotnet/linker/issues/2462
+            // Duplicated warnings for trimming and analyzer see bug
+            // https://github.com/dotnet/linker/issues/2462
             [ExpectedWarning("IL2111", nameof(AnnotatedProperty.Property1WithAnnotation) + ".set")]
             [ExpectedWarning("IL2111", nameof(AnnotatedProperty.Property1WithAnnotation) + ".set")]
             [ExpectedWarning(
@@ -929,7 +940,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [ExpectedWarning("IL2070", "MakeGenericMethod")]
             static void InstantiateGeneric(Type type = null)
             {
-                // This should warn due to MakeGenericMethod - in this case the generic parameter is unannotated type
+                // This should warn due to MakeGenericMethod - in this case the generic parameter is unannotated
+                // type
                 typeof(AnnotatedGenerics)
                     .GetMethod(nameof(GenericWithAnnotation))
                     .MakeGenericMethod(type);
@@ -1030,7 +1042,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static void LdToken()
             {
                 // Note that this should warn even though the code looks "Correct"
-                // That is because under the hood the expression tree create MethodInfo which is accessible by anything
+                // That is because under the hood the expression tree create MethodInfo which is accessible by
+                // anything
                 // which gets the expression tree as input (so some queryable) and that could invoke the method
                 // with a different parameter value and thus violate the requirements.
                 Expression<Action> _ = () =>
@@ -1058,7 +1071,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public Type _typeField;
             }
 
-            // Analyzer doesn't take into account interop attributes https://github.com/dotnet/linker/issues/2562
+            // Analyzer doesn't take into account interop attributes
+            // https://github.com/dotnet/linker/issues/2562
             [ExpectedWarning(
                 "IL2110",
                 nameof(ValueWithAnnotatedField._typeField),
@@ -1067,7 +1081,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DllImport("nonexistent")]
             static extern ValueWithAnnotatedField GetValueWithAnnotatedField();
 
-            // Analyzer doesn't take into account interop attributes https://github.com/dotnet/linker/issues/2562
+            // Analyzer doesn't take into account interop attributes
+            // https://github.com/dotnet/linker/issues/2562
             [ExpectedWarning(
                 "IL2110",
                 nameof(ValueWithAnnotatedField._typeField),

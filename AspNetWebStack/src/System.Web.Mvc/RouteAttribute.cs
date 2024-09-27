@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -9,7 +10,8 @@ namespace System.Web.Mvc
 {
     /// <summary>
     /// Place on a controller or action to expose it directly via a route.
-    /// When placed on a controller, it applies to actions that do not have any <see cref="RouteAttribute"/>s on them.
+    /// When placed on a controller, it applies to actions that do not have any <see
+    // cref="RouteAttribute"/>s on them.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Method | AttributeTargets.Class,

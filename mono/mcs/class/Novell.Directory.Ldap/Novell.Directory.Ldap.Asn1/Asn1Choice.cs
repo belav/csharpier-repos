@@ -36,8 +36,8 @@ namespace Novell.Directory.Ldap.Asn1
     /// <summary> The Asn1Choice object represents the choice of any Asn1Object. All
     /// Asn1Object methods are delegated to the object this Asn1Choice contains.
     /// </summary>
-    /* Can a CHOICE contain anything BUT a TAGGED Type?
-    */
+/* Can a CHOICE contain anything BUT a TAGGED Type?
+*/
     public class Asn1Choice : Asn1Object
     {
         /// <summary> Sets the CHOICE value stored in this Asn1Choice.
@@ -59,8 +59,8 @@ namespace Novell.Directory.Ldap.Asn1
 
         private Asn1Object content;
 
-        /* Constructors for Asn1Choice
-        */
+/* Constructors for Asn1Choice
+*/
 
         /// <summary> Constructs an Asn1Choice object using an Asn1Object value.
         ///
@@ -86,8 +86,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1Object implementation
-        */
+/* Asn1Object implementation
+*/
 
 
         /// <summary> Call this method to encode the contents of this Asn1Choice
@@ -107,8 +107,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1Choice specific methods
-        */
+/* Asn1Choice specific methods
+*/
 
         /// <summary> Returns the CHOICE value stored in this Asn1Choice
         /// as an Asn1Object.

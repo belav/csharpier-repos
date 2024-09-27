@@ -8,13 +8,18 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///         and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
+///         and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries
+// work</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public interface INavigationExpansionExtensibilityHelper
@@ -22,7 +27,8 @@ public interface INavigationExpansionExtensibilityHelper
     /// <summary>
     ///     Creates a new <see cref="EntityQueryRootExpression" />.
     /// </summary>
-    /// <param name="entityType">Entity type of the new <see cref="EntityQueryRootExpression" />.</param>
+    /// <param name="entityType">Entity type of the new <see cref="EntityQueryRootExpression"
+    // />.</param>
     /// <param name="source">Source expression.</param>
     EntityQueryRootExpression CreateQueryRoot(
         IEntityType entityType,
@@ -32,7 +38,8 @@ public interface INavigationExpansionExtensibilityHelper
     /// <summary>
     ///     Validates whether a new <see cref="EntityQueryRootExpression" /> can be created.
     /// </summary>
-    /// <param name="entityType">Entity type of the new <see cref="EntityQueryRootExpression" />.</param>
+    /// <param name="entityType">Entity type of the new <see cref="EntityQueryRootExpression"
+    // />.</param>
     /// <param name="source">Source expression.</param>
     void ValidateQueryRootCreation(IEntityType entityType, EntityQueryRootExpression? source);
 

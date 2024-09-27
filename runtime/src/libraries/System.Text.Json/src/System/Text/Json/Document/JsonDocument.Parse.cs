@@ -30,7 +30,8 @@ namespace System.Text.Json
         ///   </para>
         ///
         ///   <para>
-        ///     Because the input is considered to be text, a UTF-8 Byte-Order-Mark (BOM) must not be present.
+        ///     Because the input is considered to be text, a UTF-8 Byte-Order-Mark (BOM) must not be
+        // present.
         ///   </para>
         /// </remarks>
         /// <param name="utf8Json">JSON text to parse.</param>
@@ -63,7 +64,8 @@ namespace System.Text.Json
         ///   </para>
         ///
         ///   <para>
-        ///     Because the input is considered to be text, a UTF-8 Byte-Order-Mark (BOM) must not be present.
+        ///     Because the input is considered to be text, a UTF-8 Byte-Order-Mark (BOM) must not be
+        // present.
         ///   </para>
         /// </remarks>
         /// <param name="utf8Json">JSON text to parse.</param>
@@ -650,7 +652,8 @@ namespace System.Text.Json
                     {
                         if (shouldThrow)
                         {
-                            // Default case would only hit if TokenType equals JsonTokenType.EndObject or JsonTokenType.EndArray in which case it would never be sequence
+                            // Default case would only hit if TokenType equals JsonTokenType.EndObject or JsonTokenType.EndArray
+                            // in which case it would never be sequence
                             Debug.Assert(!reader.HasValueSequence);
                             byte displayByte = reader.ValueSpan[0];
 

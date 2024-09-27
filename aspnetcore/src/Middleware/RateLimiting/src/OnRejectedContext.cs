@@ -17,7 +17,8 @@ public sealed class OnRejectedContext
     public required HttpContext HttpContext { get; init; }
 
     /// <summary>
-    /// Gets or sets the failed <see cref="RateLimitLease"/> that the OnRejected callback will have access to
+    /// Gets or sets the failed <see cref="RateLimitLease"/> that the OnRejected callback will have
+    // access to
     /// </summary>
     public required RateLimitLease Lease { get; init; }
 }

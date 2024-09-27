@@ -15,7 +15,8 @@ internal readonly struct SolutionAsset
     /// <summary>
     /// Indicates what kind of object it.
     ///
-    /// Used in transportation framework and deserialization service to hand shake how to send over data and
+    /// Used in transportation framework and deserialization service to hand shake how to send over data
+    // and
     /// deserialize serialized data.
     /// </summary>
     public readonly WellKnownSynchronizationKind Kind;
@@ -30,7 +31,8 @@ internal readonly struct SolutionAsset
     public SolutionAsset(Checksum checksum, object value)
     {
         var kind = value.GetWellKnownSynchronizationKind();
-        // SolutionAsset is not allowed to hold strong references to SourceText. SerializableSourceText is used
+        // SolutionAsset is not allowed to hold strong references to SourceText. SerializableSourceText is
+        // used
         // instead to allow data to be released from process address space when it is also held in temporary
         // storage.
         // https://github.com/dotnet/roslyn/issues/43802

@@ -8,7 +8,10 @@ using Xunit;
 // Seed: 16489483397161801783
 // Reduced from 251.9 KiB to 1.7 KiB in 02:46:36
 //
-// Assert failure(PID 27840 [0x00006cc0], Thread: 1464 [0x05b8]): Assertion failed '!m_VariableLiveRanges->back().m_EndEmitLocation.Valid()' in 'Program:M51(System.Boolean[],System.UInt16[],System.Boolean[],long,System.Int32[],byref)' during 'Generate code' (IL size 140)
+// Assert failure(PID 27840 [0x00006cc0], Thread: 1464 [0x05b8]): Assertion failed
+// '!m_VariableLiveRanges->back().m_EndEmitLocation.Valid()' in
+// 'Program:M51(System.Boolean[],System.UInt16[],System.Boolean[],long,System.Int32[],byref)' during
+// 'Generate code' (IL size 140)
 //
 //     File: D:\dev\dotnet\runtime\src\coreclr\jit\codegencommon.cpp Line: 11990
 //     Image: D:\dev\Fuzzlyn\Fuzzlyn\publish\windows-x64\Fuzzlyn.exe

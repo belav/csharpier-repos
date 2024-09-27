@@ -165,7 +165,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        ///    <para>Gets or sets the position in the stream. Always throws <see cref='NotSupportedException'/>.</para>
+        ///    <para>Gets or sets the position in the stream. Always throws <see
+        // cref='NotSupportedException'/>.</para>
         /// </devdoc>
         public override long Position
         {

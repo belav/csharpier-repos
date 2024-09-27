@@ -86,7 +86,8 @@ namespace Newtonsoft.Json.Tests.Utilities
         }
 
         #region Test data
-        // test data from https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
+        // test data from
+        // https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
         public static IEnumerable<object[]> Parse_TestData()
         {
             // SByte
@@ -169,7 +170,8 @@ namespace Newtonsoft.Json.Tests.Utilities
             yield return new object[] { "   -42 ", (SimpleEnum)(-42) };
         }
 
-        // test data from https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
+        // test data from
+        // https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
         public static IEnumerable<object[]> Parse_Invalid_TestData()
         {
             // SimpleEnum
@@ -219,7 +221,8 @@ namespace Newtonsoft.Json.Tests.Utilities
             };
         }
 
-        // test data from https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
+        // test data from
+        // https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/EnumTests.cs
         public static IEnumerable<object[]> ToString_Format_TestData()
         {
             yield return new object[] { SByteEnum.Min, "Min" };

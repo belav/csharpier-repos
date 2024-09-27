@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             new UnsupportedMetadataTypeSymbol();
 
         /// <summary>
-        /// This symbol is used as the return type of a LambdaSymbol when we failed to infer its return type.
+        /// This symbol is used as the return type of a LambdaSymbol when we failed to infer its return
+        // type.
         /// </summary>
         internal static readonly TypeSymbol InferenceFailureReturnType =
             new UnsupportedMetadataTypeSymbol();
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _isSynthesized = unboundLambda.WasCompilerGenerated;
             _isAsync = unboundLambda.IsAsync;
             _isStatic = unboundLambda.IsStatic;
-            // No point in making this lazy. We are always going to need these soon after creation of the symbol.
+            // No point in making this lazy. We are always going to need these soon after creation of the
+            // symbol.
             _parameters = MakeParameters(
                 compilation,
                 unboundLambda,
@@ -236,8 +238,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// GetFirstLocation() on lambda symbols covers the entire syntax, which is inconvenient but remains for compatibility.
-        /// For better diagnostics quality, use the DiagnosticLocation instead, which points to the "delegate" or the "=>".
+        /// GetFirstLocation() on lambda symbols covers the entire syntax, which is inconvenient but remains
+        // for compatibility.
+        /// For better diagnostics quality, use the DiagnosticLocation instead, which points to the
+        // "delegate" or the "=>".
         /// </summary>
         internal Location DiagnosticLocation
         {

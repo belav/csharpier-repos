@@ -26,7 +26,8 @@ namespace System.ComponentModel.Design.Serialization
     public abstract class SerializationStore : IDisposable
     {
         /// <devdoc>
-        ///    If there were errors generated during serialization or deserialization of the store, they will be
+        ///    If there were errors generated during serialization or deserialization of the store, they
+        // will be
         ///    added to this collection.
         /// </devdoc>
         public abstract ICollection Errors { get; }

@@ -184,7 +184,8 @@ namespace System.Reflection
                 if (arg is not null)
                 {
                     // For nullable Enum types, the ParameterInfo.DefaultValue returns a raw value which
-                    // needs to be parsed to the Enum type, for more info: https://github.com/dotnet/runtime/issues/12924
+                    // needs to be parsed to the Enum type, for more info:
+                    // https://github.com/dotnet/runtime/issues/12924
                     Type argumentType = sigType.GetGenericArguments()[0];
                     if (argumentType.IsEnum)
                     {
@@ -261,12 +262,15 @@ namespace System.Reflection
             internal ArgumentData<bool> _shouldCopyBack;
         }
 
-        // Helper struct to avoid intermediate IntPtr[] allocation and RegisterForGCReporting in calls to the native reflection stack.
+        // Helper struct to avoid intermediate IntPtr[] allocation and RegisterForGCReporting in calls to
+        // the native reflection stack.
         [InlineArray(MaxStackAllocArgCount)]
         internal ref struct StackAllocatedByRefs
         {
-            // We're intentionally taking advantage of the runtime functionality, even if the language functionality won't work
-            // CS9184: 'Inline arrays' language feature is not supported for inline array types with element field which is either a 'ref' field, or has type that is not valid as a type argument.
+            // We're intentionally taking advantage of the runtime functionality, even if the language
+            // functionality won't work
+            // CS9184: 'Inline arrays' language feature is not supported for inline array types with element
+            // field which is either a 'ref' field, or has type that is not valid as a type argument.
 
 #pragma warning disable CS9184
             internal ref byte _arg0;

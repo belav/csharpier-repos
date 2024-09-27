@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt
+// in the project root for license information.
 
 using System;
 using System.Collections.Generic;
@@ -362,15 +363,18 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         /// <summary>
         /// Gets the only <see cref="DocumentId"/>.
         /// </summary>
-        /// <param name="solution">A Solution containing a single Project containing a single Document.</param>
+        /// <param name="solution">A Solution containing a single Project containing a single
+        // Document.</param>
         /// <returns>The only document id.</returns>
         internal ImmutableArray<DocumentId> GetOnlyFileToFormat(Solution solution) =>
             ImmutableArray.Create(GetOnlyDocument(solution).Id);
 
         /// <summary>
-        /// Gets the only <see cref="Document"/> contained within the only <see cref="Project"/> within the <see cref="Solution"/>.
+        /// Gets the only <see cref="Document"/> contained within the only <see cref="Project"/> within the
+        // <see cref="Solution"/>.
         /// </summary>
-        /// <param name="solution">A Solution containing a single Project containing a single Document.</param>
+        /// <param name="solution">A Solution containing a single Project containing a single
+        // Document.</param>
         /// <returns>The document contained within.</returns>
         public Document GetOnlyDocument(Solution solution) =>
             solution.Projects.Single().Documents.Single();
@@ -379,20 +383,24 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         /// Gets the collection of inputs to provide to the XML documentation resolver.
         /// </summary>
         /// <remarks>
-        /// <para>Files in this collection may be referenced via <c>&lt;include&gt;</c> elements in documentation
+        /// <para>Files in this collection may be referenced via <c>&lt;include&gt;</c> elements in
+        // documentation
         /// comments.</para>
         /// </remarks>
         public Dictionary<string, string> XmlReferences { get; } = new Dictionary<string, string>();
 
         /// <summary>
-        /// Given an array of strings as sources and a language, turn them into a <see cref="Project"/> and return the
+        /// Given an array of strings as sources and a language, turn them into a <see cref="Project"/> and
+        // return the
         /// solution.
         /// </summary>
         /// <param name="sources">Classes in the form of strings.</param>
         /// <param name="additionalFiles">Additional documents to include in the project.</param>
-        /// <param name="additionalMetadataReferences">Additional metadata references to include in the project.</param>
+        /// <param name="additionalMetadataReferences">Additional metadata references to include in the
+        // project.</param>
         /// <param name="editorConfig">The .editorconfig to apply to this solution.</param>
-        /// <returns>A solution containing a project with the specified sources and additional files.</returns>
+        /// <returns>A solution containing a project with the specified sources and additional
+        // files.</returns>
         private protected async Task<(Workspace workspace, Solution solution)> GetSolutionAsync(
             (string filename, SourceText content)[] sources,
             (string filename, SourceText content)[] additionalFiles,
@@ -411,14 +419,17 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         }
 
         /// <summary>
-        /// Given an array of strings as sources and a language, turn them into a <see cref="Project"/> and return the
+        /// Given an array of strings as sources and a language, turn them into a <see cref="Project"/> and
+        // return the
         /// solution.
         /// </summary>
         /// <param name="sources">Classes in the form of strings.</param>
         /// <param name="additionalFiles">Additional documents to include in the project.</param>
-        /// <param name="additionalMetadataReferences">Additional metadata references to include in the project.</param>
+        /// <param name="additionalMetadataReferences">Additional metadata references to include in the
+        // project.</param>
         /// <param name="editorConfig">The .editorconfig to apply to this solution.</param>
-        /// <returns>A solution containing a project with the specified sources and additional files.</returns>
+        /// <returns>A solution containing a project with the specified sources and additional
+        // files.</returns>
         private protected async Task<(Workspace workspace, Solution solution)> GetSolutionAsync(
             (string filename, SourceText content)[] sources,
             (string filename, SourceText content)[] additionalFiles,
@@ -443,16 +454,20 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         /// Create a project using the input strings as sources.
         /// </summary>
         /// <remarks>
-        /// <para>This method first creates a <see cref="Project"/> by calling <see cref="CreateProjectImpl"/>, and then
-        /// applies compilation options to the project by calling <see cref="ApplyCompilationOptions"/>.</para>
+        /// <para>This method first creates a <see cref="Project"/> by calling <see
+        // cref="CreateProjectImpl"/>, and then
+        /// applies compilation options to the project by calling <see
+        // cref="ApplyCompilationOptions"/>.</para>
         /// </remarks>
         /// <param name="sources">Classes in the form of strings.</param>
         /// <param name="additionalFiles">Additional documents to include in the project.</param>
-        /// <param name="additionalMetadataReferences">Additional metadata references to include in the project.</param>
+        /// <param name="additionalMetadataReferences">Additional metadata references to include in the
+        // project.</param>
         /// <param name="language">The language the source classes are in. Values may be taken from the
         /// <see cref="LanguageNames"/> class.</param>
         /// <param name="editorConfigText">The .editorconfig to apply to this project.</param>
-        /// <returns>A <see cref="Project"/> created out of the <see cref="Document"/>s created from the source
+        /// <returns>A <see cref="Project"/> created out of the <see cref="Document"/>s created from the
+        // source
         /// strings.</returns>
         protected async Task<(Workspace workspace, Project project)> CreateProjectAsync(
             (string filename, SourceText content)[] sources,
@@ -479,11 +494,13 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         /// </summary>
         /// <param name="sources">Classes in the form of strings.</param>
         /// <param name="additionalFiles">Additional documents to include in the project.</param>
-        /// <param name="additionalMetadataReferences">Additional metadata references to include in the project.</param>
+        /// <param name="additionalMetadataReferences">Additional metadata references to include in the
+        // project.</param>
         /// <param name="language">The language the source classes are in. Values may be taken from the
         /// <see cref="LanguageNames"/> class.</param>
         /// <param name="editorConfigText">The .editorconfig to apply to this project.</param>
-        /// <returns>A <see cref="Project"/> created out of the <see cref="Document"/>s created from the source
+        /// <returns>A <see cref="Project"/> created out of the <see cref="Document"/>s created from the
+        // source
         /// strings.</returns>
         protected virtual async Task<(Workspace workspace, Project project)> CreateProjectImplAsync(
             (string filename, SourceText content)[] sources,

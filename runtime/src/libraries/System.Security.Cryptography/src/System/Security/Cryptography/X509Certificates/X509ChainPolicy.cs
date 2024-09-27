@@ -37,7 +37,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   an X.509 certificate chain.
         /// </summary>
         /// <value>
-        ///   <see langword="true" /> to ignore <see cref="VerificationTime"/> and use the current system time; otherwise <see langword="false"/>.
+        ///   <see langword="true" /> to ignore <see cref="VerificationTime"/> and use the current system
+        // time; otherwise <see langword="false"/>.
         ///   The default is <see langword="true" />.
         /// </value>
         public bool VerificationTimeIgnored { get; set; }

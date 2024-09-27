@@ -128,7 +128,9 @@ namespace System.Text.Json.Serialization.Tests
             ex = Assert.Throws<InvalidOperationException>(
                 () => JsonSerializer.Serialize(new PocoWithInvalidConverter())
             );
-            // Message should be in the form "The converter specified on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt' does not derive from JsonConverter or have a public parameterless constructor."
+            // Message should be in the form "The converter specified on
+            // 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt' does not
+            // derive from JsonConverter or have a public parameterless constructor."
             Assert.Contains(
                 "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt'",
                 ex.Message
@@ -145,7 +147,9 @@ namespace System.Text.Json.Serialization.Tests
             ex = Assert.Throws<InvalidOperationException>(
                 () => JsonSerializer.Serialize(new PocoWithNullConverter())
             );
-            // Message should be in the form "The converter specified on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'  is not compatible with the type 'System.Int32'."
+            // Message should be in the form "The converter specified on
+            // 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'  is not
+            // compatible with the type 'System.Int32'."
             Assert.Contains(
                 "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'",
                 ex.Message
@@ -203,7 +207,10 @@ namespace System.Text.Json.Serialization.Tests
             ex = Assert.Throws<InvalidOperationException>(
                 () => JsonSerializer.Serialize(value, type)
             );
-            // Message should be in the form "The converter specified on 'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClass.MyEnumValues' is not compatible with the type 'System.Collections.Generic.ICollection`1[System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterEnum]'."
+            // Message should be in the form "The converter specified on
+            // 'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClass.MyEnumValues'
+            // is not compatible with the type
+            // 'System.Collections.Generic.ICollection`1[System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterEnum]'."
             Assert.Contains($"'{propertyName}'", ex.Message);
 
             ex = Assert.Throws<InvalidOperationException>(
@@ -272,7 +279,8 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ConverterFactoryThatReturnsNull());
 
-            // A null return value from CreateConverter() will generate a InvalidOperationException with the type name.
+            // A null return value from CreateConverter() will generate a InvalidOperationException with the
+            // type name.
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
                 () => JsonSerializer.Serialize(0, options)
             );
@@ -483,7 +491,9 @@ namespace System.Text.Json.Serialization.Tests
             ex = Assert.Throws<InvalidOperationException>(
                 () => JsonSerializer.Serialize(new PocoWithTwoConvertersOnProperty())
             );
-            // Message should be in the form "The attribute 'System.Text.Json.Serialization.JsonConverterAttribute' cannot exist more than once on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'."
+            // Message should be in the form "The attribute
+            // 'System.Text.Json.Serialization.JsonConverterAttribute' cannot exist more than once on
+            // 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'."
             Assert.Contains("'System.Text.Json.Serialization.JsonConverterAttribute'", ex.Message);
             Assert.Contains(
                 "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'",
@@ -515,7 +525,9 @@ namespace System.Text.Json.Serialization.Tests
             ex = Assert.Throws<InvalidOperationException>(
                 () => JsonSerializer.Serialize(new PocoWithTwoConverters())
             );
-            // Message should be in the form "The attribute 'System.Text.Json.Serialization.JsonConverterAttribute' cannot exist more than once on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'."
+            // Message should be in the form "The attribute
+            // 'System.Text.Json.Serialization.JsonConverterAttribute' cannot exist more than once on
+            // 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'."
             Assert.Contains("'System.Text.Json.Serialization.JsonConverterAttribute'", ex.Message);
             Assert.Contains(
                 "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'",

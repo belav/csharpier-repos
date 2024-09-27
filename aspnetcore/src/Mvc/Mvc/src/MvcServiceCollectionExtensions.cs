@@ -26,7 +26,8 @@ public static class MvcServiceCollectionExtensions
     /// Adds MVC services to the specified <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     [RequiresUnreferencedCode(
         "MVC does not currently support trimming or native AOT.",
         Url = "https://aka.ms/aspnet/trimming"
@@ -43,8 +44,10 @@ public static class MvcServiceCollectionExtensions
     /// Adds MVC services to the specified <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <param name="setupAction">An <see cref="Action{MvcOptions}"/> to configure the provided <see cref="MvcOptions"/>.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <param name="setupAction">An <see cref="Action{MvcOptions}"/> to configure the provided <see
+    // cref="MvcOptions"/>.</param>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     [RequiresUnreferencedCode(
         "MVC does not currently support trimming or native AOT.",
         Url = "https://aka.ms/aspnet/trimming"
@@ -64,15 +67,19 @@ public static class MvcServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method will not
+    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method
+    // will not
     /// register services used for views or pages.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     /// <remarks>
     /// <para>
-    /// This method configures the MVC services for the commonly used features with controllers for an API. This
-    /// combines the effects of <see cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
+    /// This method configures the MVC services for the commonly used features with controllers for an
+    // API. This
+    /// combines the effects of <see
+    // cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
     /// <see cref="MvcApiExplorerMvcCoreBuilderExtensions.AddApiExplorer(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCoreMvcCoreBuilderExtensions.AddAuthorization(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCorsMvcCoreBuilderExtensions.AddCors(IMvcCoreBuilder)"/>,
@@ -80,7 +87,8 @@ public static class MvcServiceCollectionExtensions
     /// and <see cref="MvcCoreMvcCoreBuilderExtensions.AddFormatterMappings(IMvcCoreBuilder)"/>.
     /// </para>
     /// <para>
-    /// To add services for controllers with views call <see cref="AddControllersWithViews(IServiceCollection)"/>
+    /// To add services for controllers with views call <see
+    // cref="AddControllersWithViews(IServiceCollection)"/>
     /// on the resulting builder.
     /// </para>
     /// <para>
@@ -101,16 +109,21 @@ public static class MvcServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method will not
+    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method
+    // will not
     /// register services used for views or pages.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <param name="configure">An <see cref="Action{MvcOptions}"/> to configure the provided <see cref="MvcOptions"/>.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <param name="configure">An <see cref="Action{MvcOptions}"/> to configure the provided <see
+    // cref="MvcOptions"/>.</param>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     /// <remarks>
     /// <para>
-    /// This method configures the MVC services for the commonly used features with controllers for an API. This
-    /// combines the effects of <see cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
+    /// This method configures the MVC services for the commonly used features with controllers for an
+    // API. This
+    /// combines the effects of <see
+    // cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
     /// <see cref="MvcApiExplorerMvcCoreBuilderExtensions.AddApiExplorer(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCoreMvcCoreBuilderExtensions.AddAuthorization(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCorsMvcCoreBuilderExtensions.AddCors(IMvcCoreBuilder)"/>,
@@ -118,7 +131,8 @@ public static class MvcServiceCollectionExtensions
     /// and <see cref="MvcCoreMvcCoreBuilderExtensions.AddFormatterMappings(IMvcCoreBuilder)"/>.
     /// </para>
     /// <para>
-    /// To add services for controllers with views call <see cref="AddControllersWithViews(IServiceCollection)"/>
+    /// To add services for controllers with views call <see
+    // cref="AddControllersWithViews(IServiceCollection)"/>
     /// on the resulting builder.
     /// </para>
     /// <para>
@@ -169,15 +183,19 @@ public static class MvcServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method will not
+    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method
+    // will not
     /// register services used for pages.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     /// <remarks>
     /// <para>
-    /// This method configures the MVC services for the commonly used features with controllers with views. This
-    /// combines the effects of <see cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
+    /// This method configures the MVC services for the commonly used features with controllers with
+    // views. This
+    /// combines the effects of <see
+    // cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
     /// <see cref="MvcApiExplorerMvcCoreBuilderExtensions.AddApiExplorer(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCoreMvcCoreBuilderExtensions.AddAuthorization(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCorsMvcCoreBuilderExtensions.AddCors(IMvcCoreBuilder)"/>,
@@ -204,16 +222,21 @@ public static class MvcServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method will not
+    /// Adds services for controllers to the specified <see cref="IServiceCollection"/>. This method
+    // will not
     /// register services used for pages.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <param name="configure">An <see cref="Action{MvcOptions}"/> to configure the provided <see cref="MvcOptions"/>.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <param name="configure">An <see cref="Action{MvcOptions}"/> to configure the provided <see
+    // cref="MvcOptions"/>.</param>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     /// <remarks>
     /// <para>
-    /// This method configures the MVC services for the commonly used features with controllers with views. This
-    /// combines the effects of <see cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
+    /// This method configures the MVC services for the commonly used features with controllers with
+    // views. This
+    /// combines the effects of <see
+    // cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
     /// <see cref="MvcApiExplorerMvcCoreBuilderExtensions.AddApiExplorer(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCoreMvcCoreBuilderExtensions.AddAuthorization(IMvcCoreBuilder)"/>,
     /// <see cref="MvcCorsMvcCoreBuilderExtensions.AddCors(IMvcCoreBuilder)"/>,
@@ -264,11 +287,13 @@ public static class MvcServiceCollectionExtensions
     /// Adds services for pages to the specified <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     /// <remarks>
     /// <para>
     /// This method configures the MVC services for the commonly used features for pages. This
-    /// combines the effects of <see cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
+    /// combines the effects of <see
+    // cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
     /// <see cref="MvcCoreMvcCoreBuilderExtensions.AddAuthorization(IMvcCoreBuilder)"/>,
     /// <see cref="MvcDataAnnotationsMvcCoreBuilderExtensions.AddDataAnnotations(IMvcCoreBuilder)"/>,
     /// <see cref="TagHelperServicesExtensions.AddCacheTagHelper(IMvcCoreBuilder)"/>,
@@ -278,7 +303,8 @@ public static class MvcServiceCollectionExtensions
     /// To add services for controllers for APIs call <see cref="AddControllers(IServiceCollection)"/>.
     /// </para>
     /// <para>
-    /// To add services for controllers with views call <see cref="AddControllersWithViews(IServiceCollection)"/>.
+    /// To add services for controllers with views call <see
+    // cref="AddControllersWithViews(IServiceCollection)"/>.
     /// </para>
     /// </remarks>
     [RequiresUnreferencedCode(
@@ -297,12 +323,15 @@ public static class MvcServiceCollectionExtensions
     /// Adds services for pages to the specified <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <param name="configure">An <see cref="Action{MvcOptions}"/> to configure the provided <see cref="MvcOptions"/>.</param>
-    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
+    /// <param name="configure">An <see cref="Action{MvcOptions}"/> to configure the provided <see
+    // cref="MvcOptions"/>.</param>
+    /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC
+    // services.</returns>
     /// <remarks>
     /// <para>
     /// This method configures the MVC services for the commonly used features for pages. This
-    /// combines the effects of <see cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
+    /// combines the effects of <see
+    // cref="MvcCoreServiceCollectionExtensions.AddMvcCore(IServiceCollection)"/>,
     /// <see cref="MvcCoreMvcCoreBuilderExtensions.AddAuthorization(IMvcCoreBuilder)"/>,
     /// <see cref="MvcDataAnnotationsMvcCoreBuilderExtensions.AddDataAnnotations(IMvcCoreBuilder)"/>,
     /// <see cref="TagHelperServicesExtensions.AddCacheTagHelper(IMvcCoreBuilder)"/>,
@@ -312,7 +341,8 @@ public static class MvcServiceCollectionExtensions
     /// To add services for controllers for APIs call <see cref="AddControllers(IServiceCollection)"/>.
     /// </para>
     /// <para>
-    /// To add services for controllers with views call <see cref="AddControllersWithViews(IServiceCollection)"/>.
+    /// To add services for controllers with views call <see
+    // cref="AddControllersWithViews(IServiceCollection)"/>.
     /// </para>
     /// </remarks>
     [RequiresUnreferencedCode(
@@ -337,7 +367,8 @@ public static class MvcServiceCollectionExtensions
 
     private static IMvcCoreBuilder AddRazorPagesCore(IServiceCollection services)
     {
-        // This method includes the minimal things controllers need. It's not really feasible to exclude the services
+        // This method includes the minimal things controllers need. It's not really feasible to exclude the
+        // services
         // for controllers.
         var builder = services
             .AddMvcCore()

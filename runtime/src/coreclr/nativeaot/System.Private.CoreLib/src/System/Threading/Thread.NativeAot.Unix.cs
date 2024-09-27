@@ -46,7 +46,8 @@ namespace System.Threading
             Thread? currentThread = t_currentThread;
             if (currentThread != null)
             {
-                // Inform the wait subsystem that the thread is exiting. For instance, this would abandon any mutexes locked by
+                // Inform the wait subsystem that the thread is exiting. For instance, this would abandon any
+                // mutexes locked by
                 // the thread.
                 currentThread._waitInfo.OnThreadExiting();
                 StopThread(currentThread);
@@ -60,7 +61,8 @@ namespace System.Threading
             Debug.Assert(!GetThreadStateBit(ThreadState.Unstarted) || (millisecondsTimeout == 0));
             SafeWaitHandle waitHandle = _stopped.SafeWaitHandle;
 
-            // If an OS thread is terminated and its Thread object is resurrected, waitHandle may be finalized and closed
+            // If an OS thread is terminated and its Thread object is resurrected, waitHandle may be finalized
+            // and closed
             if (waitHandle.IsClosed)
             {
                 return true;

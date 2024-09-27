@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// </summary>
         /// <param name="text">The text of the tag or attribute.</param>
         /// <param name="leading">The leading trivia of the token.</param>
-        /// <returns>The SyntaxToken representing the well-known tag or attribute or null if it's not well-known.</returns>
+        /// <returns>The SyntaxToken representing the well-known tag or attribute or null if it's not
+        // well-known.</returns>
         public static SyntaxToken? LookupToken(string text, SyntaxListBuilder? leading)
         {
             if (leading == null)

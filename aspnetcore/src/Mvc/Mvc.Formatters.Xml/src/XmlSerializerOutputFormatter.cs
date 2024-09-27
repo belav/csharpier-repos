@@ -271,9 +271,11 @@ public partial class XmlSerializerOutputFormatter : TextOutputFormatter
     }
 
     /// <summary>
-    /// Serializes value using the passed in <paramref name="xmlSerializer"/> and <paramref name="xmlWriter"/>.
+    /// Serializes value using the passed in <paramref name="xmlSerializer"/> and <paramref
+    // name="xmlWriter"/>.
     /// </summary>
-    /// <param name="xmlSerializer">The serializer used to serialize the <paramref name="value"/>.</param>
+    /// <param name="xmlSerializer">The serializer used to serialize the <paramref
+    // name="value"/>.</param>
     /// <param name="xmlWriter">The writer used by the serializer <paramref name="xmlSerializer"/>
     /// to serialize the <paramref name="value"/>.</param>
     /// <param name="value">The value to be serialized.</param>

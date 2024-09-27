@@ -57,8 +57,10 @@ namespace System.Reflection
         private RoAssembly? _coreAssembly;
 
         /// <summary>
-        /// Returns a lazily created and cached Type instance corresponding to the indicated core type. This method throws
-        /// if the core assembly name wasn't supplied, the core assembly could not be loaded for some reason or if the specified
+        /// Returns a lazily created and cached Type instance corresponding to the indicated core type. This
+        // method throws
+        /// if the core assembly name wasn't supplied, the core assembly could not be loaded for some reason
+        // or if the specified
         /// type does not exist in the core assembly.
         /// </summary>
         internal RoType GetCoreType(CoreType coreType)
@@ -69,8 +71,10 @@ namespace System.Reflection
         }
 
         /// <summary>
-        /// Returns a lazily created and cached Type instance corresponding to the indicated core type. This method returns null
-        /// if the core assembly name wasn't supplied, the core assembly could not be loaded for some reason or if the specified
+        /// Returns a lazily created and cached Type instance corresponding to the indicated core type. This
+        // method returns null
+        /// if the core assembly name wasn't supplied, the core assembly could not be loaded for some reason
+        // or if the specified
         /// type does not exist in the core assembly.
         /// </summary>
         internal RoType? TryGetCoreType(CoreType coreType)
@@ -80,8 +84,10 @@ namespace System.Reflection
         }
 
         /// <summary>
-        /// Returns a cached array containing the resolved CoreTypes, indexed by the CoreType enum cast to an int.
-        /// If the core assembly was not specified, not locatable or if one or more core types aren't present in the core assembly,
+        /// Returns a cached array containing the resolved CoreTypes, indexed by the CoreType enum cast to
+        // an int.
+        /// If the core assembly was not specified, not locatable or if one or more core types aren't
+        // present in the core assembly,
         /// the corresponding elements will be null.
         /// </summary>
         internal CoreTypes GetAllFoundCoreTypes() => _coreTypes;
@@ -89,7 +95,8 @@ namespace System.Reflection
         private readonly CoreTypes _coreTypes;
 
         //
-        // Seriously, ugh - the default binder for Reflection has a dependency on checking types for equality with System.Object - for that
+        // Seriously, ugh - the default binder for Reflection has a dependency on checking types for
+        // equality with System.Object - for that
         // one reason, we have to instance it per MetadataLoadContext.
         //
         internal Binder GetDefaultBinder() => _lazyDefaultBinder ??= new DefaultBinder(this);

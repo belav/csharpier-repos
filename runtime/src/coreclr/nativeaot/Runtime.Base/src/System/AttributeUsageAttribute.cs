@@ -12,7 +12,7 @@
 
 namespace System
 {
-    /* By default, attributes are inherited and multiple attributes are not allowed */
+/* By default, attributes are inherited and multiple attributes are not allowed */
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageAttribute : Attribute
     {
@@ -25,8 +25,10 @@ namespace System
 #pragma warning restore IDE0060
 
         //Properties.
-        // Allowing the set properties as it allows a more readable syntax in the specifiers (and are commonly used)
-        // The get properties will be needed only if these attributes are used at Runtime, however, the compiler
+        // Allowing the set properties as it allows a more readable syntax in the specifiers (and are
+        // commonly used)
+        // The get properties will be needed only if these attributes are used at Runtime, however, the
+        // compiler
         // is getting an internal error if the gets are not defined.
 #pragma warning disable CA1822
         public bool AllowMultiple

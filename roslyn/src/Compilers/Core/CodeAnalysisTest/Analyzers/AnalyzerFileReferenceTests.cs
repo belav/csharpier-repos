@@ -358,7 +358,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(1, errors.Count);
             var error = errors[0];
 
-            // failure is in the analyzer itself, i.e. abstract members on DiagnosticAnalyzer are not implemented.
+            // failure is in the analyzer itself, i.e. abstract members on DiagnosticAnalyzer are not
+            // implemented.
             Assert.Equal(
                 AnalyzerLoadFailureEventArgs.FailureErrorCode.UnableToCreateAnalyzer,
                 error.ErrorCode
@@ -908,9 +909,11 @@ public class Generator : ISourceGenerator
             );
         }
 
-        // NOTE: the order in which these are emitted can change the test 'TestLoadedAnalyzerOrderIsDeterministic'
+        // NOTE: the order in which these are emitted can change the test
+        // 'TestLoadedAnalyzerOrderIsDeterministic'
         //       and other determinism tests in this file.
-        //       Ensure you do not re-arrange them alphabetically, as that will invalidate the tests, without
+        //       Ensure you do not re-arrange them alphabetically, as that will invalidate the tests,
+        // without
         //       explicitly failing them
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, new string[] { LanguageNames.VisualBasic })]

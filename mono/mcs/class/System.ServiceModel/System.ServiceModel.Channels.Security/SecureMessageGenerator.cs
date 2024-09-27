@@ -63,7 +63,9 @@ namespace System.ServiceModel.Channels.Security
             // FIXME: I believe it should be done at channel
             // creation phase, but WinFX does not.
             //			if (!security.InitiatorParameters.InternalHasAsymmetricKey)
-            //				throw new InvalidOperationException ("Wrong security token parameters: it must have an asymmetric key (HasAsymmetricKey). There is likely a misconfiguration in the custom security binding element.");
+            //				throw new InvalidOperationException ("Wrong security token parameters: it must have an
+            // asymmetric key (HasAsymmetricKey). There is likely a misconfiguration in the custom security binding
+            // element.");
 
             this.security = security;
             this.message_to = messageTo;
@@ -285,7 +287,7 @@ namespace System.ServiceModel.Channels.Security
             nsmgr.AddNamespace("u", Constants.WsuNamespace);
             nsmgr.AddNamespace("o11", Constants.Wss11Namespace);
 
-            /*WrappedKey*/SecurityToken primaryToken = null;
+/*WrappedKey*/SecurityToken primaryToken = null;
             SecurityToken actualToken = null;
             SecurityKeyIdentifierClause actualClause = null;
 

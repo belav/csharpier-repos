@@ -7,7 +7,8 @@ using System.Linq;
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 /// <summary>
-/// Serializes <see cref="IEnumerable{T}"/> types by delegating them through a concrete implementation.
+/// Serializes <see cref="IEnumerable{T}"/> types by delegating them through a concrete
+// implementation.
 /// </summary>
 /// <typeparam name="TWrapped">The wrapping or original type of the <see cref="IEnumerable{T}"/>
 /// to proxy.</typeparam>
@@ -22,7 +23,8 @@ public class DelegatingEnumerable<TWrapped, TDeclared> : IEnumerable<TWrapped>
     /// Initializes a <see cref="DelegatingEnumerable{TWrapped, TDeclared}"/>.
     /// </summary>
     /// <remarks>
-    /// This constructor is necessary for <see cref="System.Runtime.Serialization.DataContractSerializer"/>
+    /// This constructor is necessary for <see
+    // cref="System.Runtime.Serialization.DataContractSerializer"/>
     /// to serialize.
     /// </remarks>
     public DelegatingEnumerable()
@@ -34,8 +36,10 @@ public class DelegatingEnumerable<TWrapped, TDeclared> : IEnumerable<TWrapped>
     /// Initializes a <see cref="DelegatingEnumerable{TWrapped, TDeclared}"/> with the original
     ///  <see cref="IEnumerable{T}"/> and the wrapper provider for wrapping individual elements.
     /// </summary>
-    /// <param name="source">The <see cref="IEnumerable{T}"/> instance to get the enumerator from.</param>
-    /// <param name="elementWrapperProvider">The wrapper provider for wrapping individual elements.</param>
+    /// <param name="source">The <see cref="IEnumerable{T}"/> instance to get the enumerator
+    // from.</param>
+    /// <param name="elementWrapperProvider">The wrapper provider for wrapping individual
+    // elements.</param>
     public DelegatingEnumerable(
         IEnumerable<TDeclared> source,
         IWrapperProvider elementWrapperProvider
@@ -51,7 +55,8 @@ public class DelegatingEnumerable<TWrapped, TDeclared> : IEnumerable<TWrapped>
     /// Gets a delegating enumerator of the original <see cref="IEnumerable{T}"/> source which is being
     /// wrapped.
     /// </summary>
-    /// <returns>The delegating enumerator of the original <see cref="IEnumerable{T}"/> source.</returns>
+    /// <returns>The delegating enumerator of the original <see cref="IEnumerable{T}"/>
+    // source.</returns>
     public IEnumerator<TWrapped> GetEnumerator()
     {
         return new DelegatingEnumerator<TWrapped, TDeclared>(
@@ -76,7 +81,8 @@ public class DelegatingEnumerable<TWrapped, TDeclared> : IEnumerable<TWrapped>
     /// Gets a delegating enumerator of the original <see cref="IEnumerable{T}"/> source which is being
     /// wrapped.
     /// </summary>
-    /// <returns>The delegating enumerator of the original <see cref="IEnumerable{T}"/> source.</returns>
+    /// <returns>The delegating enumerator of the original <see cref="IEnumerable{T}"/>
+    // source.</returns>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();

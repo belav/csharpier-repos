@@ -203,7 +203,8 @@ namespace Castle.DynamicProxy.Generators
                     InvocationMethods.GetReturnValue
                 );
 
-                // Emit code to ensure a value type return type is not null, otherwise the cast will cause a null-deref
+                // Emit code to ensure a value type return type is not null, otherwise the cast will cause a
+                // null-deref
                 if (emitter.ReturnType.IsValueType && !emitter.ReturnType.IsNullableType())
                 {
                     LocalReference returnValue = emitter.CodeBuilder.DeclareLocal(typeof(object));

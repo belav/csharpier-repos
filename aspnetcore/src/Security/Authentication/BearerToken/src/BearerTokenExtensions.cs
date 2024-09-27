@@ -15,9 +15,12 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class BearerTokenExtensions
 {
     /// <summary>
-    /// Adds bearer token authentication. The default scheme is specified by <see cref="BearerTokenDefaults.AuthenticationScheme"/>.
+    /// Adds bearer token authentication. The default scheme is specified by <see
+    // cref="BearerTokenDefaults.AuthenticationScheme"/>.
     /// <para>
-    /// Bearer tokens can be obtained by calling <see cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?, System.Security.Claims.ClaimsPrincipal)" />.
+    /// Bearer tokens can be obtained by calling <see
+    // cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?,
+    // System.Security.Claims.ClaimsPrincipal)" />.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
@@ -28,7 +31,9 @@ public static class BearerTokenExtensions
     /// <summary>
     /// Adds bearer token authentication.
     /// <para>
-    /// Bearer tokens can be obtained by calling <see cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?, System.Security.Claims.ClaimsPrincipal)" />.
+    /// Bearer tokens can be obtained by calling <see
+    // cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?,
+    // System.Security.Claims.ClaimsPrincipal)" />.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
@@ -40,13 +45,17 @@ public static class BearerTokenExtensions
     ) => builder.AddBearerToken(authenticationScheme, _ => { });
 
     /// <summary>
-    /// Adds bearer token authentication. The default scheme is specified by <see cref="BearerTokenDefaults.AuthenticationScheme"/>.
+    /// Adds bearer token authentication. The default scheme is specified by <see
+    // cref="BearerTokenDefaults.AuthenticationScheme"/>.
     /// <para>
-    /// Bearer tokens can be obtained by calling <see cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?, System.Security.Claims.ClaimsPrincipal)" />.
+    /// Bearer tokens can be obtained by calling <see
+    // cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?,
+    // System.Security.Claims.ClaimsPrincipal)" />.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
-    /// <param name="configure">Action used to configure the bearer token authentication options.</param>
+    /// <param name="configure">Action used to configure the bearer token authentication
+    // options.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddBearerToken(
         this AuthenticationBuilder builder,
@@ -56,12 +65,15 @@ public static class BearerTokenExtensions
     /// <summary>
     /// Adds bearer token authentication.
     /// <para>
-    /// Bearer tokens can be obtained by calling <see cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?, System.Security.Claims.ClaimsPrincipal)" />.
+    /// Bearer tokens can be obtained by calling <see
+    // cref="AuthenticationHttpContextExtensions.SignInAsync(AspNetCore.Http.HttpContext, string?,
+    // System.Security.Claims.ClaimsPrincipal)" />.
     /// </para>
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
-    /// <param name="configure">Action used to configure the bearer token authentication options.</param>
+    /// <param name="configure">Action used to configure the bearer token authentication
+    // options.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddBearerToken(
         this AuthenticationBuilder builder,

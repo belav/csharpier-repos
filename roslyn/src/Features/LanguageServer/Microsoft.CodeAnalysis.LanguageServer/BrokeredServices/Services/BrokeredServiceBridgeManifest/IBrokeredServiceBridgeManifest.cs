@@ -9,9 +9,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.BrokeredServices.Services.Broker
 
 /// <summary>
 /// Defines a service to be used by the remote party to determine which services from this container
-/// it should add to its container.  This is useful in the case where the remote party connects to other processes
+/// it should add to its container.  This is useful in the case where the remote party connects to
+// other processes
 /// that proffer the same services as we do (e.g. intrinsic services).
-/// Both are proffered as <see cref="ServiceSource.OtherProcessOnSameMachine"/> and therefore conflict.
+/// Both are proffered as <see cref="ServiceSource.OtherProcessOnSameMachine"/> and therefore
+// conflict.
 /// </summary>
 internal interface IBrokeredServiceBridgeManifest
 {

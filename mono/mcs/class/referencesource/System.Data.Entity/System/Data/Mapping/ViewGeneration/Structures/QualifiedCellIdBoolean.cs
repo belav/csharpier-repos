@@ -46,7 +46,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             bool skipIsNotNull
         )
         {
-            // QualifiedCellIdBoolean is only used during JOIN processing where there is no single input, hence blockAlias is expected to be null.
+            // QualifiedCellIdBoolean is only used during JOIN processing where there is no single input, hence
+            // blockAlias is expected to be null.
             Debug.Assert(blockAlias == null, "QualifiedCellIdBoolean: blockAlias mismatch");
             return base.AsEsql(builder, m_block.CqlAlias, skipIsNotNull);
         }

@@ -27,8 +27,8 @@ namespace System.Web
         internal static readonly IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
 
         /*
-         * ADVAPI32.dll
-         */
+        * ADVAPI32.dll
+        */
         [DllImport(ModName.ADVAPI32_FULL_NAME)]
         internal static extern int SetThreadToken(IntPtr threadref, IntPtr token);
 
@@ -89,8 +89,8 @@ namespace System.Web
         );
 
         /*
-         * ASPNET_STATE.EXE
-         */
+        * ASPNET_STATE.EXE
+        */
 
         [DllImport(ModName.STATE_FULL_NAME)]
         internal static extern void STWNDCloseConnection(IntPtr tracker);
@@ -127,8 +127,8 @@ namespace System.Web
         );
 
         /*
-         * KERNEL32.DLL
-         */
+        * KERNEL32.DLL
+        */
         internal const int FILE_ATTRIBUTE_READONLY = 0x00000001;
         internal const int FILE_ATTRIBUTE_HIDDEN = 0x00000002;
         internal const int FILE_ATTRIBUTE_SYSTEM = 0x00000004;
@@ -450,8 +450,8 @@ namespace System.Web
         );
 
         /*
-         * webengine.dll
-         */
+        * webengine.dll
+        */
 
 #if !FEATURE_PAL // FEATURE_PAL does not enable IIS-based hosting features
         [DllImport(ModName.ENGINE_FULL_NAME, CharSet = CharSet.Unicode, BestFitMapping = false)]
@@ -1233,8 +1233,8 @@ namespace System.Web
         internal static extern void BufferPoolReleaseBuffer(IntPtr buffer);
 
         /*
-         * ASPNET_WP.EXE
-         */
+        * ASPNET_WP.EXE
+        */
 
 
         [DllImport(ModName.WP_FULL_NAME, EntryPoint = "PMGetTraceContextId")]
@@ -1527,8 +1527,8 @@ namespace System.Web
         internal static extern bool IsValidResource(IntPtr hModule, IntPtr ip, int size);
 
         /*
-         * Fusion API's (now coming from mscorwks.dll)
-         */
+        * Fusion API's (now coming from mscorwks.dll)
+        */
         [DllImport(ModName.MSCORWKS_FULL_NAME, CharSet = CharSet.Unicode)]
         internal static extern int GetCachePath(
             int dwCacheFlags,

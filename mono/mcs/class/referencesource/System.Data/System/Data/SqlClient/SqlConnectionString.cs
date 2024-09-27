@@ -264,7 +264,8 @@ namespace System.Data.SqlClient
 
         private readonly string _expandedAttachDBFilename; // expanded during construction so that CreatePermissionSet & Expand are consistent
 
-        // SxS: reading Software\\Microsoft\\MSSQLServer\\Client\\SuperSocketNetLib\Encrypt value from registry
+        // SxS: reading Software\\Microsoft\\MSSQLServer\\Client\\SuperSocketNetLib\Encrypt value from
+        // registry
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         internal SqlConnectionString(string connectionString)
@@ -650,7 +651,8 @@ namespace System.Data.SqlClient
             }
         }
 
-        // This c-tor is used to create SSE and user instance connection strings when user instance is set to true
+        // This c-tor is used to create SSE and user instance connection strings when user instance is set
+        // to true
         //
         internal SqlConnectionString(
             SqlConnectionString connectionOptions,
@@ -1121,8 +1123,10 @@ namespace System.Data.SqlClient
                 return DEFAULT.ApplicationIntent;
             }
 
-            // when wrong value is used in the connection string provided to SqlConnection.ConnectionString or c-tor,
-            // wrap Format and Overflow exceptions with Argument one, to be consistent with rest of the keyword types (like int and bool)
+            // when wrong value is used in the connection string provided to SqlConnection.ConnectionString or
+            // c-tor,
+            // wrap Format and Overflow exceptions with Argument one, to be consistent with rest of the keyword
+            // types (like int and bool)
             try
             {
                 return DbConnectionStringBuilderUtil.ConvertToApplicationIntent(

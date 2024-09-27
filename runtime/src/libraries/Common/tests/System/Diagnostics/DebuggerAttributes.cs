@@ -91,7 +91,8 @@ namespace System.Diagnostics
             Type debuggerAttributeType
         )
         {
-            // The debugger doesn't evaluate non-public members of type proxies. GetGetMethod returns null if the getter is non-public.
+            // The debugger doesn't evaluate non-public members of type proxies. GetGetMethod returns null if
+            // the getter is non-public.
             IEnumerable<PropertyInfo> visibleProperties = debuggerAttributeType
                 .GetProperties()
                 .Where(pi =>

@@ -234,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             IsInRefContext(expression, out _);
 
         /// <summary>
-        /// Returns true if this expression is in some <c>ref</c> keyword context.  If <see langword="true"/> then
+        /// Returns true if this expression is in some <c>ref</c> keyword context.  If <see
+        // langword="true"/> then
         /// <paramref name="refParent"/> will be the node containing the <see langword="ref"/> keyword.
         /// </summary>
         public static bool IsInRefContext(
@@ -415,7 +416,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return true;
             }
 
-            // Similar to `ref x`, `&x` allows reads and write of the value, meaning `x` may be (but is not definitely)
+            // Similar to `ref x`, `&x` allows reads and write of the value, meaning `x` may be (but is not
+            // definitely)
             // written to.
             if (expression.Parent.IsKind(SyntaxKind.AddressOfExpression))
                 return true;
@@ -446,7 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
             }
 
-            // An inline array passed as a Span<T> can be written into by the callee, despite no ref at the callsite.  e.g.:
+            // An inline array passed as a Span<T> can be written into by the callee, despite no ref at the
+            // callsite.  e.g.:
             //
             // void Mutate(Span<byte> bytes);
             // Mutate(this.inlineArray)
@@ -597,8 +600,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // If we are a conditional access expression:
             // case (1) : obj?.Method(), obj1.obj2?.Property
             // case (2) : obj?.GetAnotherObj()?.Length, obj?.AnotherObj?.Length
-            // in case (1), the entire expression forms the conditional access expression, which can be replaced with an LValue.
-            // in case (2), the nested conditional access expression is ".GetAnotherObj()?.Length" or ".AnotherObj()?.Length"
+            // in case (1), the entire expression forms the conditional access expression, which can be replaced
+            // with an LValue.
+            // in case (2), the nested conditional access expression is ".GetAnotherObj()?.Length" or
+            // ".AnotherObj()?.Length"
             // essentially, the first expression (before the operator) in a nested conditional access expression
             // is some form of member binding expression and they cannot be replaced with an LValue.
             if (expression.IsKind(SyntaxKind.ConditionalAccessExpression))
@@ -643,8 +648,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 // Case (2) : The Expression clause always starts with a MemberBindingExpression if
                 // the grandparent is a conditional access expression.
                 //              expression '.Method' in a?.Method()?.Length
-                // Case (3) : The child Conditional access expression always starts with a MemberBindingExpression if
-                // the parent is a conditional access expression. This case is already covered before the parent kind switch
+                // Case (3) : The child Conditional access expression always starts with a MemberBindingExpression
+                // if
+                // the parent is a conditional access expression. This case is already covered before the parent
+                // kind switch
                 case SyntaxKind.ConditionalAccessExpression:
                     var parentConditionalAccessExpression = (ConditionalAccessExpressionSyntax)
                         expression.Parent;
@@ -843,7 +850,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 case SyntaxKind.SizeOfExpression:
                 case SyntaxKind.PointerMemberAccessExpression:
                     // From C# spec, 7.3.1:
-                    // Primary: x.y  x?.y  x?[y]  f(x)  a[x]  x++  x--  new  typeof  default  checked  unchecked  delegate  x!
+                    // Primary: x.y  x?.y  x?[y]  f(x)  a[x]  x++  x--  new  typeof  default  checked  unchecked
+                    // delegate  x!
 
                     return OperatorPrecedence.Primary;
 
@@ -865,7 +873,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     return OperatorPrecedence.Unary;
 
                 case SyntaxKind.RangeExpression:
-                    // From C# spec, https://github.com/dotnet/csharplang/blob/main/proposals/csharp-8.0/ranges.md#systemrange
+                    // From C# spec,
+                    // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-8.0/ranges.md#systemrange
                     // Range: ..
 
                     return OperatorPrecedence.Range;

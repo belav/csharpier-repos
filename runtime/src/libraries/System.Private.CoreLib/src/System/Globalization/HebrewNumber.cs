@@ -352,8 +352,9 @@ namespace System.Globalization
         //
         private static readonly HS[] s_numberPassingState =
         {
-            // 400            300/200         100             90~10           8~1      6,       7,       9,          '           "
-            /* 0 */
+            // 400            300/200         100             90~10           8~1      6,       7,       9,
+            // '           "
+/* 0 */
             HS.S400,
             HS.X00,
             HS.X00,
@@ -364,7 +365,7 @@ namespace System.Globalization
             HS.S9,
             HS._err,
             HS._err,
-            /* 1: S400 */
+/* 1: S400 */
             HS.S400_400,
             HS.S400_X00,
             HS.S400_X00,
@@ -375,7 +376,7 @@ namespace System.Globalization
             HS.X00_S9,
             HS.END,
             HS.S400_DQ,
-            /* 2: S400_400 */
+/* 2: S400_400 */
             HS._err,
             HS._err,
             HS.S400_400_100,
@@ -386,7 +387,7 @@ namespace System.Globalization
             HS.X00_S9,
             HS._err,
             HS.S400_400_DQ,
-            /* 3: S400_X00 */
+/* 3: S400_X00 */
             HS._err,
             HS._err,
             HS._err,
@@ -397,7 +398,7 @@ namespace System.Globalization
             HS.X00_S9,
             HS._err,
             HS.X00_DQ,
-            /* 4: S400_X0 */
+/* 4: S400_X0 */
             HS._err,
             HS._err,
             HS._err,
@@ -408,7 +409,7 @@ namespace System.Globalization
             HS._err,
             HS._err,
             HS.X0_DQ,
-            /* 5: X00_DQ */
+/* 5: X00_DQ */
             HS._err,
             HS._err,
             HS._err,
@@ -419,7 +420,7 @@ namespace System.Globalization
             HS.END,
             HS._err,
             HS._err,
-            /* 6: S400_X00_X0 */
+/* 6: S400_X00_X0 */
             HS._err,
             HS._err,
             HS._err,
@@ -430,7 +431,7 @@ namespace System.Globalization
             HS._err,
             HS._err,
             HS.X0_DQ,
-            /* 7: X0_DQ */
+/* 7: X0_DQ */
             HS._err,
             HS._err,
             HS._err,
@@ -441,7 +442,7 @@ namespace System.Globalization
             HS.END,
             HS._err,
             HS._err,
-            /* 8: X */
+/* 8: X */
             HS._err,
             HS._err,
             HS._err,
@@ -452,7 +453,7 @@ namespace System.Globalization
             HS._err,
             HS.END,
             HS._err,
-            /* 9: X0 */
+/* 9: X0 */
             HS._err,
             HS._err,
             HS._err,
@@ -463,7 +464,7 @@ namespace System.Globalization
             HS._err,
             HS.END,
             HS.X0_DQ,
-            /* 10: X00 */
+/* 10: X00 */
             HS._err,
             HS._err,
             HS._err,
@@ -474,7 +475,7 @@ namespace System.Globalization
             HS.X00_S9,
             HS.END,
             HS.X00_DQ,
-            /* 11: S400_DQ */
+/* 11: S400_DQ */
             HS.END,
             HS.END,
             HS.END,
@@ -485,7 +486,7 @@ namespace System.Globalization
             HS.END,
             HS._err,
             HS._err,
-            /* 12: S400_400_DQ*/
+/* 12: S400_400_DQ*/
             HS._err,
             HS._err,
             HS.END,
@@ -496,7 +497,7 @@ namespace System.Globalization
             HS.END,
             HS._err,
             HS._err,
-            /* 13: S400_400_100*/
+/* 13: S400_400_100*/
             HS._err,
             HS._err,
             HS._err,
@@ -507,7 +508,7 @@ namespace System.Globalization
             HS.X00_S9,
             HS._err,
             HS.X00_DQ,
-            /* 14: S9 */
+/* 14: S9 */
             HS._err,
             HS._err,
             HS._err,
@@ -518,7 +519,7 @@ namespace System.Globalization
             HS._err,
             HS.END,
             HS.S9_DQ,
-            /* 15: X00_S9 */
+/* 15: X00_S9 */
             HS._err,
             HS._err,
             HS._err,
@@ -529,7 +530,7 @@ namespace System.Globalization
             HS._err,
             HS._err,
             HS.S9_DQ,
-            /* 16: S9_DQ */
+/* 16: S9_DQ */
             HS._err,
             HS._err,
             HS._err,

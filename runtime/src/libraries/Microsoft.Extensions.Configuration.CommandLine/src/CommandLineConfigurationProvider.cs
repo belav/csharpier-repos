@@ -89,7 +89,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
                         {
                             key = mappedKey;
                         }
-                        // If the switch starts with a single "-" and it isn't in given mappings , it is an invalid usage so ignore it
+                        // If the switch starts with a single "-" and it isn't in given mappings , it is an invalid usage so
+                        // ignore it
                         else if (keyStartIndex == 1)
                         {
                             continue;
@@ -150,7 +151,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine
         {
             // The dictionary passed in might be constructed with a case-sensitive comparer
             // However, the keys in configuration providers are all case-insensitive
-            // So we check whether the given switch mappings contain duplicated keys with case-insensitive comparer
+            // So we check whether the given switch mappings contain duplicated keys with case-insensitive
+            // comparer
             var switchMappingsCopy = new Dictionary<string, string>(
                 switchMappings.Count,
                 StringComparer.OrdinalIgnoreCase

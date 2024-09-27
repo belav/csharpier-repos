@@ -83,16 +83,16 @@ namespace Mono.Security.Interface
         }
     }
 
-    /**
-     * Internal interface - do not implement
-     */
+/**
+* Internal interface - do not implement
+*/
     public interface ICertificateValidator
     {
         MonoTlsSettings Settings { get; }
 
-        /*
-         * Returns `true` if a client certificate has been selected (which could be `null`).
-         */
+/*
+* Returns `true` if a client certificate has been selected (which could be `null`).
+*/
         bool SelectClientCertificate(
             string targetHost,
             X509CertificateCollection localCertificates,
@@ -101,9 +101,10 @@ namespace Mono.Security.Interface
             out X509Certificate clientCertificate
         );
 
-        /*
-         * If @serverMode is true, then we're a server and want to validate a certificate that we received from a client.
-         */
+/*
+* If @serverMode is true, then we're a server and want to validate a certificate that we received
+from a client.
+*/
         ValidationResult ValidateCertificate(
             string targetHost,
             bool serverMode,
@@ -149,9 +150,9 @@ namespace Mono.Security.Interface
             get { return supportsTrustAnchors; }
         }
 
-        /*
-         * Use this overloaded version in user code.
-         */
+/*
+* Use this overloaded version in user code.
+*/
         public static ICertificateValidator GetValidator(MonoTlsSettings settings)
         {
             return (ICertificateValidator)NoReflectionHelper.GetDefaultValidator(settings);

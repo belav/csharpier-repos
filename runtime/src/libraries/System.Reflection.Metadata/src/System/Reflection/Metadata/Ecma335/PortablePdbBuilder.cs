@@ -39,11 +39,13 @@ namespace System.Reflection.Metadata.Ecma335
         /// </param>
         /// <param name="idProvider">
         /// Function calculating id of content represented as a sequence of blobs.
-        /// If not specified a default function that ignores the content and returns current time-based content id is used
+        /// If not specified a default function that ignores the content and returns current time-based
+        // content id is used
         /// (<see cref="BlobContentId.GetTimeBasedProvider()"/>).
         /// You must specify a deterministic function to produce a deterministic Portable PDB image.
         /// </param>
-        /// <exception cref="ArgumentNullException"><paramref name="tablesAndHeaps"/> or <paramref name="typeSystemRowCounts"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="tablesAndHeaps"/> or <paramref
+        // name="typeSystemRowCounts"/> is null.</exception>
         public PortablePdbBuilder(
             MetadataBuilder tablesAndHeaps,
             ImmutableArray<int> typeSystemRowCounts,

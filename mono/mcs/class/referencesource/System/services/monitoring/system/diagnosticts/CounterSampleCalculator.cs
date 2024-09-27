@@ -143,7 +143,8 @@ namespace System.Diagnostics
             return (float)pdhFormattedValue.data;
         }
 
-        // This method figures out which values are supposed to go into which structures so that PDH can do the
+        // This method figures out which values are supposed to go into which structures so that PDH can do
+        // the
         // calculation for us.  This was ported from Window's cutils.c
         private static void FillInValues(
             CounterSample oldSample,

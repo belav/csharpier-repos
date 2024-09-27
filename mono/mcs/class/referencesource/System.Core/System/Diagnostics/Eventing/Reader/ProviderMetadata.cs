@@ -45,7 +45,8 @@ namespace System.Diagnostics.Eventing.Reader
         private CultureInfo cultureInfo;
         private string logFilePath;
 
-        //caching of the IEnumerable<EventLevel>, <EventTask>, <EventKeyword>, <EventOpcode> on the ProviderMetadata
+        //caching of the IEnumerable<EventLevel>, <EventTask>, <EventKeyword>, <EventOpcode> on the
+        // ProviderMetadata
         //they do not change with every call.
         private IList<EventLevel> levels = null;
         private IList<EventOpcode> opcodes = null;

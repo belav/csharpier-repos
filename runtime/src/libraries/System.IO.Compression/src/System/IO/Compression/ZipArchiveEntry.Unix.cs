@@ -13,7 +13,8 @@ namespace System.IO.Compression
         /// This method takes in a FullName and the platform of the ZipArchiveEntry and returns
         /// the platform-correct file name.
         /// </summary>
-        /// <remarks>This method ensures no validation on the paths. Invalid characters are allowed.</remarks>
+        /// <remarks>This method ensures no validation on the paths. Invalid characters are
+        // allowed.</remarks>
         internal static string ParseFileName(
             string path,
             ZipVersionMadeByPlatform madeByPlatform

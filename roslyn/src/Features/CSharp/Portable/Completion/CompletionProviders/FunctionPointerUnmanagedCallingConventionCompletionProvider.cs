@@ -119,8 +119,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         )
         {
             // We have to find the set of types that meet the criteria listed in
+            //
             // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/function-pointers.md#mapping-the-calling_convention_specifier-to-a-callkind
-            // We skip the check of an type being in the core assembly since that's not really necessary for our work.
+            // We skip the check of an type being in the core assembly since that's not really necessary for our
+            // work.
             var compilerServicesNamespace =
                 semanticModel.Compilation.GlobalNamespace.GetQualifiedNamespace(
                     "System.Runtime.CompilerServices"

@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Rename
                     }
                 }
 
-                // cascade from property accessor to property (someone in C# renames base.get_X, or the accessor override)
+                // cascade from property accessor to property (someone in C# renames base.get_X, or the accessor
+                // override)
                 if (
                     await IsPropertyAccessorOrAnOverrideAsync(
                             referencedSymbol,
@@ -309,8 +310,10 @@ namespace Microsoft.CodeAnalysis.Rename
                     RoslynDebug.Assert(location.IsInSource);
                     var document = solution.GetRequiredDocument(location.SourceTree);
 
-                    // If the location is in a source generated file, we won't rename it. Our assumption in this case is we
-                    // have cascaded to this symbol from our original source symbol, and the generator will update this file
+                    // If the location is in a source generated file, we won't rename it. Our assumption in this case is
+                    // we
+                    // have cascaded to this symbol from our original source symbol, and the generator will update this
+                    // file
                     // based on the renamed symbol.
                     if (document is not SourceGeneratedDocument)
                         results.Add(
@@ -333,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 CancellationToken cancellationToken
             )
             {
-                // We won't try to update references in source generated files; we'll assume the generator will rerun
+                // We won't try to update references in source generated files; we'll assume the generator will
+                // rerun
                 // and produce an updated document with the new name.
                 if (location.Document is SourceGeneratedDocument)
                 {

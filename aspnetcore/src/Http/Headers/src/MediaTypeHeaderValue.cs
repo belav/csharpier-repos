@@ -32,7 +32,8 @@ public class MediaTypeHeaderValue
     private static readonly HttpHeaderParser<MediaTypeHeaderValue> MultipleValueParser =
         new GenericHeaderParser<MediaTypeHeaderValue>(true, GetMediaTypeLength);
 
-    // Use a collection instead of a dictionary since we may have multiple parameters with the same name.
+    // Use a collection instead of a dictionary since we may have multiple parameters with the same
+    // name.
     private ObjectCollection<NameValueHeaderValue>? _parameters;
     private StringSegment _mediaType;
     private bool _isReadOnly;
@@ -237,7 +238,8 @@ public class MediaTypeHeaderValue
     /// <example>
     /// For the media type <c>"application/json"</c>, the property gives the value <c>"application"</c>.
     /// </example>
-    /// <remarks>See <see href="https://tools.ietf.org/html/rfc6838#section-4.2"/> for more details on the type.</remarks>
+    /// <remarks>See <see href="https://tools.ietf.org/html/rfc6838#section-4.2"/> for more details on
+    // the type.</remarks>
     public StringSegment Type
     {
         get { return _mediaType.Subsegment(0, _mediaType.IndexOf(ForwardSlashCharacter)); }
@@ -250,14 +252,16 @@ public class MediaTypeHeaderValue
     /// For the media type <c>"application/vnd.example+json"</c>, the property gives the value
     /// <c>"vnd.example+json"</c>.
     /// </example>
-    /// <remarks>See <see href="https://tools.ietf.org/html/rfc6838#section-4.2"/> for more details on the subtype.</remarks>
+    /// <remarks>See <see href="https://tools.ietf.org/html/rfc6838#section-4.2"/> for more details on
+    // the subtype.</remarks>
     public StringSegment SubType
     {
         get { return _mediaType.Subsegment(_mediaType.IndexOf(ForwardSlashCharacter) + 1); }
     }
 
     /// <summary>
-    /// Gets subtype of the <see cref="MediaTypeHeaderValue"/>, excluding any structured syntax suffix. Returns <see cref="StringSegment.Empty"/>
+    /// Gets subtype of the <see cref="MediaTypeHeaderValue"/>, excluding any structured syntax suffix.
+    // Returns <see cref="StringSegment.Empty"/>
     /// if there is no subtype without suffix.
     /// </summary>
     /// <example>
@@ -283,7 +287,8 @@ public class MediaTypeHeaderValue
 
     /// <summary>
     /// Gets the structured syntax suffix of the <see cref="MediaTypeHeaderValue"/> if it has one.
-    /// See <see href="https://tools.ietf.org/html/rfc6838#section-4.8">The RFC documentation on structured syntaxes.</see>
+    /// See <see href="https://tools.ietf.org/html/rfc6838#section-4.8">The RFC documentation on
+    // structured syntaxes.</see>
     /// </summary>
     /// <example>
     /// For the media type <c>"application/vnd.example+json"</c>, the property gives the value
@@ -309,7 +314,8 @@ public class MediaTypeHeaderValue
     /// <summary>
     /// Get a <see cref="IList{T}"/> of facets of the <see cref="MediaTypeHeaderValue"/>. Facets are a
     /// period separated list of StringSegments in the <see cref="SubTypeWithoutSuffix"/>.
-    /// See <see href="https://tools.ietf.org/html/rfc6838#section-3">The RFC documentation on facets.</see>
+    /// See <see href="https://tools.ietf.org/html/rfc6838#section-3">The RFC documentation on
+    // facets.</see>
     /// </summary>
     /// <example>
     /// For the media type <c>"application/vnd.example+json"</c>, the property gives the value:
@@ -337,7 +343,8 @@ public class MediaTypeHeaderValue
     public bool MatchesAllSubTypes => SubType.Equals(WildcardString, StringComparison.Ordinal);
 
     /// <summary>
-    /// Gets whether this <see cref="MediaTypeHeaderValue"/> matches all subtypes, ignoring any structured syntax suffix.
+    /// Gets whether this <see cref="MediaTypeHeaderValue"/> matches all subtypes, ignoring any
+    // structured syntax suffix.
     /// </summary>
     /// <example>
     /// For the media type <c>"application/*+json"</c>, this property is <c>true</c>.
@@ -358,8 +365,10 @@ public class MediaTypeHeaderValue
 
     /// <summary>
     /// Gets a value indicating whether this <see cref="MediaTypeHeaderValue"/> is a subset of
-    /// <paramref name="otherMediaType"/>. A "subset" is defined as the same or a more specific media type
-    /// according to the precedence described in <see href="https://www.ietf.org/rfc/rfc2068.txt"/> section 14.1, Accept.
+    /// <paramref name="otherMediaType"/>. A "subset" is defined as the same or a more specific media
+    // type
+    /// according to the precedence described in <see href="https://www.ietf.org/rfc/rfc2068.txt"/>
+    // section 14.1, Accept.
     /// </summary>
     /// <param name="otherMediaType">The <see cref="MediaTypeHeaderValue"/> to compare.</param>
     /// <returns>
@@ -430,8 +439,10 @@ public class MediaTypeHeaderValue
 
     /// <summary>
     /// Gets a value indicating whether <paramref name="otherMediaType"/> is a subset of
-    /// this <see cref="MediaTypeHeaderValue"/> in terms of type/subType. A "subset" is defined as the same or a more specific media type
-    /// according to the precedence described in <see href="https://www.ietf.org/rfc/rfc2068.txt"/> section 14.1, Accept.
+    /// this <see cref="MediaTypeHeaderValue"/> in terms of type/subType. A "subset" is defined as the
+    // same or a more specific media type
+    /// according to the precedence described in <see href="https://www.ietf.org/rfc/rfc2068.txt"/>
+    // section 14.1, Accept.
     /// </summary>
     /// <param name="otherMediaType">The <see cref="StringSegment"/> to compare.</param>
     /// <returns>
@@ -490,7 +501,8 @@ public class MediaTypeHeaderValue
     }
 
     /// <summary>
-    /// Takes a media type and parses it into the <see cref="MediaTypeHeaderValue" /> and its associated parameters.
+    /// Takes a media type and parses it into the <see cref="MediaTypeHeaderValue" /> and its associated
+    // parameters.
     /// </summary>
     /// <param name="input">The <see cref="StringSegment"/> with the media type.</param>
     /// <returns>The parsed <see cref="MediaTypeHeaderValue"/>.</returns>
@@ -501,9 +513,11 @@ public class MediaTypeHeaderValue
     }
 
     /// <summary>
-    /// Takes a media type, which can include parameters, and parses it into the <see cref="MediaTypeHeaderValue" /> and its associated parameters.
+    /// Takes a media type, which can include parameters, and parses it into the <see
+    // cref="MediaTypeHeaderValue" /> and its associated parameters.
     /// </summary>
-    /// <param name="input">The <see cref="StringSegment"/> with the media type. The media type constructed here must not have an y</param>
+    /// <param name="input">The <see cref="StringSegment"/> with the media type. The media type
+    // constructed here must not have an y</param>
     /// <param name="parsedValue">The parsed <see cref="MediaTypeHeaderValue"/></param>
     /// <returns>True if the value was successfully parsed.</returns>
     public static bool TryParse(
@@ -516,7 +530,8 @@ public class MediaTypeHeaderValue
     }
 
     /// <summary>
-    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see cref="MediaTypeHeaderValue"></see> and its associated parameters.
+    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see
+    // cref="MediaTypeHeaderValue"></see> and its associated parameters.
     /// </summary>
     /// <param name="inputs">A list of media types</param>
     /// <returns>The parsed <see cref="MediaTypeHeaderValue"/>.</returns>
@@ -526,7 +541,8 @@ public class MediaTypeHeaderValue
     }
 
     /// <summary>
-    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see cref="MediaTypeHeaderValue"></see> and its associated parameters.
+    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see
+    // cref="MediaTypeHeaderValue"></see> and its associated parameters.
     /// Throws if there is invalid data in a string.
     /// </summary>
     /// <param name="inputs">A list of media types</param>
@@ -537,7 +553,8 @@ public class MediaTypeHeaderValue
     }
 
     /// <summary>
-    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see cref="MediaTypeHeaderValue"></see> and its associated parameters.
+    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see
+    // cref="MediaTypeHeaderValue"></see> and its associated parameters.
     /// </summary>
     /// <param name="inputs">A list of media types</param>
     /// <param name="parsedValues">The parsed <see cref="MediaTypeHeaderValue"/>.</param>
@@ -551,7 +568,8 @@ public class MediaTypeHeaderValue
     }
 
     /// <summary>
-    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see cref="MediaTypeHeaderValue"></see> and its associated parameters.
+    /// Takes an <see cref="IList{T}"/> of <see cref="string"/> and parses it into the <see
+    // cref="MediaTypeHeaderValue"></see> and its associated parameters.
     /// </summary>
     /// <param name="inputs">A list of media types</param>
     /// <param name="parsedValues">The parsed <see cref="MediaTypeHeaderValue"/>.</param>
@@ -650,7 +668,8 @@ public class MediaTypeHeaderValue
         current++; // skip delimiter.
         current = current + HttpRuleParser.GetWhitespaceLength(input, current);
 
-        // Parse the subtype, i.e. <subtype> in media type string "<type>/<subtype>; param1=value1; param2=value2"
+        // Parse the subtype, i.e. <subtype> in media type string "<type>/<subtype>; param1=value1;
+        // param2=value2"
         var subtypeLength = HttpRuleParser.GetTokenLength(input, current);
 
         if (subtypeLength == 0)
@@ -658,7 +677,8 @@ public class MediaTypeHeaderValue
             return 0;
         }
 
-        // If there is no whitespace between <type> and <subtype> in <type>/<subtype> get the media type using
+        // If there is no whitespace between <type> and <subtype> in <type>/<subtype> get the media type
+        // using
         // one Substring call. Otherwise get substrings for <type> and <subtype> and combine them.
         var mediaTypeLength = current + subtypeLength - startIndex;
         if (typeLength + subtypeLength + 1 == mediaTypeLength)

@@ -30,7 +30,8 @@ public interface IOutputCacheStore
     /// <param name="key">The cache key to store the response under.</param>
     /// <param name="value">The response cache entry to store.</param>
     /// <param name="tags">The tags associated with the cache entry to store.</param>
-    /// <param name="validFor">The amount of time the entry will be kept in the cache before expiring, relative to now.</param>
+    /// <param name="validFor">The amount of time the entry will be kept in the cache before expiring,
+    // relative to now.</param>
     /// <param name="cancellationToken">Indicates that the operation should be cancelled.</param>
     ValueTask SetAsync(
         string key,

@@ -29,7 +29,8 @@ public class ClientErrorResultFilterConvention : IActionModelConvention
     }
 
     /// <summary>
-    /// Determines if this instance of <see cref="IActionModelConvention"/> applies to a specified <paramref name="action"/>.
+    /// Determines if this instance of <see cref="IActionModelConvention"/> applies to a specified
+    // <paramref name="action"/>.
     /// </summary>
     /// <param name="action">The <see cref="ActionModel"/>.</param>
     /// <returns>

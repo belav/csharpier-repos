@@ -162,7 +162,8 @@ namespace Microsoft.SqlServer.Server
             return DeNormalizeInternal(t, s);
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         private object DeNormalizeInternal(Type t, Stream s)
         {
@@ -247,28 +248,28 @@ namespace Microsoft.SqlServer.Server
 
     internal abstract class Normalizer
     {
-        /*
-        protected internal static string GetString(byte[] array)
-        {
-          StringBuilder sb = new StringBuilder();
-          //sb.Append("0x");
-          foreach (byte b in array)
-          {
-            sb.Append(b.ToString("X2", CultureInfo.InvariantCulture));
-          }
-          return sb.ToString();
-        }
-        */
+/*
+protected internal static string GetString(byte[] array)
+{
+StringBuilder sb = new StringBuilder();
+//sb.Append("0x");
+foreach (byte b in array)
+{
+sb.Append(b.ToString("X2", CultureInfo.InvariantCulture));
+}
+return sb.ToString();
+}
+*/
 
         protected bool m_skipNormalize;
 
-        /*
-        internal static bool IsByteOrderedUdt(Type t)
-        {
-          SqlUserDefinedTypeAttribute a = SerializationHelper.GetUdtAttribute(t);
-          return a.IsByteOrdered;
-        }
-        */
+/*
+internal static bool IsByteOrderedUdt(Type t)
+{
+SqlUserDefinedTypeAttribute a = SerializationHelper.GetUdtAttribute(t);
+return a.IsByteOrdered;
+}
+*/
 
         internal static Normalizer GetNormalizer(Type t)
         {

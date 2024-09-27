@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 /// <summary>
-/// <see cref="ITagHelper"/> implementation targeting &lt;span&gt; elements with an <c>asp-validation-for</c>
+/// <see cref="ITagHelper"/> implementation targeting &lt;span&gt; elements with an
+// <c>asp-validation-for</c>
 /// attribute.
 /// </summary>
 [HtmlTargetElement("span", Attributes = ValidationForAttributeName)]
@@ -37,7 +38,8 @@ public class ValidationMessageTagHelper : TagHelper
     public ViewContext ViewContext { get; set; }
 
     /// <summary>
-    /// Gets the <see cref="IHtmlGenerator"/> used to generate the <see cref="ValidationMessageTagHelper"/>'s output.
+    /// Gets the <see cref="IHtmlGenerator"/> used to generate the <see
+    // cref="ValidationMessageTagHelper"/>'s output.
     /// </summary>
     protected IHtmlGenerator Generator { get; }
 
@@ -56,8 +58,10 @@ public class ValidationMessageTagHelper : TagHelper
 
         if (For != null)
         {
-            // Ensure Generator does not throw due to empty "fullName" if user provided data-valmsg-for attribute.
-            // Assume data-valmsg-for value is non-empty if attribute is present at all. Should align with name of
+            // Ensure Generator does not throw due to empty "fullName" if user provided data-valmsg-for
+            // attribute.
+            // Assume data-valmsg-for value is non-empty if attribute is present at all. Should align with name
+            // of
             // another tag helper e.g. an <input/> and those tag helpers bind Name.
             IDictionary<string, object> htmlAttributes = null;
             if (

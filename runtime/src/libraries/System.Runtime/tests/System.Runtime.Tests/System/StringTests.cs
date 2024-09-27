@@ -930,7 +930,8 @@ namespace System.Tests
             {
                 Assert.Equal(expected, string.Join(separator, values));
                 Assert.Equal(expected, string.Join(separator, (IEnumerable<string>)values));
-                // We are using concat to force the value to be an IEnumerable and avoid the optimizations for List<T> and T[]
+                // We are using concat to force the value to be an IEnumerable and avoid the optimizations for
+                // List<T> and T[]
                 Assert.Equal(expected, string.Join(separator, values.Concat(new string[0])));
                 // Validate the optimization for List<T>
                 Assert.Equal(expected, string.Join(separator, new List<string>(values)));
@@ -1910,7 +1911,8 @@ namespace System.Tests
                 ilGen.Emit(OpCodes.Ldarg_0); // get value of input.GetPinnableReference()
                 ilGen.Emit(OpCodes.Callvirt, typeof(string).GetMethod("GetPinnableReference"));
 
-                // At this point, the top of the evaluation stack is traditional (fixed char* = input) and input.GetPinnableReference().
+                // At this point, the top of the evaluation stack is traditional (fixed char* = input) and
+                // input.GetPinnableReference().
                 // Compare for equality and return.
 
                 ilGen.Emit(OpCodes.Ceq);
@@ -2762,7 +2764,8 @@ namespace System.Tests
         }
 
         /// <summary>
-        /// Returns true only if U+0020 SPACE is represented as the single byte 0x20 in the active code page.
+        /// Returns true only if U+0020 SPACE is represented as the single byte 0x20 in the active code
+        // page.
         /// </summary>
         public static unsafe bool IsSimpleActiveCodePage
         {

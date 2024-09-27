@@ -39,8 +39,10 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
 
     public void OnProvidersExecuting(PageRouteModelProviderContext context)
     {
-        // When RootDirectory and AreaRootDirectory overlap, e.g. RootDirectory = /, AreaRootDirectory = /Areas;
-        // we need to ensure that the page is only route-able via the area route. By adding area routes first,
+        // When RootDirectory and AreaRootDirectory overlap, e.g. RootDirectory = /, AreaRootDirectory =
+        // /Areas;
+        // we need to ensure that the page is only route-able via the area route. By adding area routes
+        // first,
         // we'll ensure non area routes get skipped when it encounters an IsAlreadyRegistered check.
 
         AddAreaPageModels(context);
@@ -58,10 +60,12 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
                 )
             )
             {
-                // A route for this file was already registered either by the CompiledPageRouteModel or as an area route.
+                // A route for this file was already registered either by the CompiledPageRouteModel or as an area
+                // route.
                 // by this provider. Skip registering an additional entry.
 
-                // Note: We're comparing duplicates based on root-relative paths. This eliminates a page from being discovered
+                // Note: We're comparing duplicates based on root-relative paths. This eliminates a page from being
+                // discovered
                 // by overlapping area and non-area routes where ViewEnginePath would be different.
                 continue;
             }

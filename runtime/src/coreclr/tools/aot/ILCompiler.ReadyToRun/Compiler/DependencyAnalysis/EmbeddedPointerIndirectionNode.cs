@@ -8,7 +8,8 @@ using Internal.Text;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// An <see cref="EmbeddedObjectNode"/> whose sole value is a pointer to a different <see cref="ISymbolNode"/>.
+    /// An <see cref="EmbeddedObjectNode"/> whose sole value is a pointer to a different <see
+    // cref="ISymbolNode"/>.
     /// <typeparamref name="TTarget"/> represents the node type this pointer points to.
     /// </summary>
     public abstract class EmbeddedPointerIndirectionNode<TTarget>

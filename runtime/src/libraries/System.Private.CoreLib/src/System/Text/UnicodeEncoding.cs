@@ -2,7 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //
-// Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be confused.
+// Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be
+// confused.
 //
 
 // This define can be used to turn off the fast loops. Useful for finding whether
@@ -2067,7 +2068,8 @@ namespace System.Text
             // Might also need an extra 1 if there's a left over high surrogate in the decoder.
             long charCount = (long)(byteCount >> 1) + (byteCount & 1) + 1;
 
-            // Don't forget fallback (in case they have a bunch of lonely surrogates or something bizarre like that)
+            // Don't forget fallback (in case they have a bunch of lonely surrogates or something bizarre like
+            // that)
             if (DecoderFallback.MaxCharCount > 1)
                 charCount *= DecoderFallback.MaxCharCount;
 
@@ -2091,7 +2093,8 @@ namespace System.Text
                 return (CodePage == that.CodePage)
                     && byteOrderMark == that.byteOrderMark
                     &&
-                    // isThrowException == that.isThrowException &&  // Same as Encoder/Decoder being exception fallbacks
+                    // isThrowException == that.isThrowException &&  // Same as Encoder/Decoder being exception
+                    // fallbacks
                     bigEndian == that.bigEndian
                     && (EncoderFallback.Equals(that.EncoderFallback))
                     && (DecoderFallback.Equals(that.DecoderFallback));

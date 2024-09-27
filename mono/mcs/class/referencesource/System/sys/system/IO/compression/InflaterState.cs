@@ -20,7 +20,7 @@ namespace System.IO.Compression
         HaveFullLength = 12, // Ditto, now have the full match length (incl. extra length bits)
         HaveDistCode = 13, // Ditto, now have the distance code also, need extra dist bits
 
-        /* uncompressed blocks */
+/* uncompressed blocks */
         UncompressedAligning = 15,
         UncompressedByte1 = 16,
         UncompressedByte2 = 17,

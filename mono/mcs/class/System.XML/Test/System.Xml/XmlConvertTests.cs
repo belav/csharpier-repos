@@ -136,25 +136,30 @@ namespace MonoTests.System.Xml
                 632001798000000000L,
                 XmlConvert.ToDateTime("2003-09-26T13:30:00.0000000").Ticks
             );
-            /*
-            // These tests also failed on MS.NET
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00+13:00").Ticks);
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0+13:00").Ticks);
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.00+13:00").Ticks);
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.000+13:00").Ticks);
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0000+13:00").Ticks);
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.00000+13:00").Ticks);
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.000000+13:00").Ticks);
-            Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0000000+13:00").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00Z").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0Z").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.00Z").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.000Z").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0000Z").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.00000Z").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.000000Z").Ticks);
-            Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0000000Z").Ticks);
-            */
+/*
+// These tests also failed on MS.NET
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00+13:00").Ticks);
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0+13:00").Ticks);
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.00+13:00").Ticks);
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime
+("2003-09-26T13:30:00.000+13:00").Ticks);
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime
+("2003-09-26T13:30:00.0000+13:00").Ticks);
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime
+("2003-09-26T13:30:00.00000+13:00").Ticks);
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime
+("2003-09-26T13:30:00.000000+13:00").Ticks);
+Assert.AreEqual (632001150000000000L, XmlConvert.ToDateTime
+("2003-09-26T13:30:00.0000000+13:00").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00Z").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0Z").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.00Z").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.000Z").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0000Z").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.00000Z").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.000000Z").Ticks);
+Assert.AreEqual (632001618000000000L, XmlConvert.ToDateTime ("2003-09-26T13:30:00.0000000Z").Ticks);
+*/
             //time
             DateTime t1 = new DateTime(DateTime.Today.Year, 1, 1);
             t1 = DateTime.Today + new TimeSpan(12, 0, 0);
@@ -167,21 +172,30 @@ namespace MonoTests.System.Xml
             Assert.AreEqual(t1.Ticks, XmlConvert.ToDateTime("12:00:00.000000").Ticks);
             Assert.AreEqual(t1.Ticks, XmlConvert.ToDateTime("12:00:00.0000000").Ticks);
             //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00+13:00").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.f+13:00").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ff+13:00").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fff+13:00").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffff+13:00").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffff+13:00").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffffff+13:00").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffffff+13:00").Ticks);//doesn't work on .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.f+13:00").Ticks);//doesn't work on
+            // .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ff+13:00").Ticks);//doesn't work on
+            // .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fff+13:00").Ticks);//doesn't work on
+            // .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffff+13:00").Ticks);//doesn't work on
+            // .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffff+13:00").Ticks);//doesn't work on
+            // .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffffff+13:00").Ticks);//doesn't work
+            // on .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffffff+13:00").Ticks);//doesn't work
+            // on .NET
             //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00Z").Ticks);//doesn't work on .NET
             //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fZ").Ticks);//doesn't work on .NET
             //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffZ").Ticks);//doesn't work on .NET
             //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffZ").Ticks);//doesn't work on .NET
             //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffffZ").Ticks);//doesn't work on .NET
             //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffffZ").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffffffZ").Ticks);//doesn't work on .NET
-            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffffffZ").Ticks);//doesn't work on .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.ffffffZ").Ticks);//doesn't work on
+            // .NET
+            //Assert.AreEqual (t1.Ticks, XmlConvert.ToDateTime ("12:00:00.fffffffZ").Ticks);//doesn't work on
+            // .NET
             //date
             Assert.AreEqual(632001312000000000L, XmlConvert.ToDateTime("2003-09-26").Ticks);
             //			Assert.AreEqual (632000664000000000L, XmlConvert.ToDateTime ("2003-09-26+13:00").Ticks);
@@ -196,14 +210,20 @@ namespace MonoTests.System.Xml
             //			Assert.AreEqual (631769544000000000L, XmlConvert.ToDateTime ("2003Z").Ticks);
             //gMonthDay
             // Don't try locale-dependent test
-            //			Assert.AreEqual (632001312000000000L, XmlConvert.ToDateTime ("--09-26").Ticks);//shouldn't have a hardcoded value
-            //			Assert.AreEqual (632000664000000000L, XmlConvert.ToDateTime ("--09-26+13:00").Ticks);//shouldn't have a hardcoded value
-            //			Assert.AreEqual (632001132000000000L, XmlConvert.ToDateTime ("--09-26Z").Ticks);//shouldn't have a hardcoded value
+            //			Assert.AreEqual (632001312000000000L, XmlConvert.ToDateTime ("--09-26").Ticks);//shouldn't have
+            // a hardcoded value
+            //			Assert.AreEqual (632000664000000000L, XmlConvert.ToDateTime
+            // ("--09-26+13:00").Ticks);//shouldn't have a hardcoded value
+            //			Assert.AreEqual (632001132000000000L, XmlConvert.ToDateTime ("--09-26Z").Ticks);//shouldn't
+            // have a hardcoded value
             //gDay
             // Don't try locale-dependent test
-            //			Assert.AreEqual (631791360000000000L, XmlConvert.ToDateTime ("---26").Ticks);//shouldn't have a hardcoded value
-            //			Assert.AreEqual (631790676000000000L, XmlConvert.ToDateTime ("---26+13:00").Ticks);//shouldn't have a hardcoded value
-            //			Assert.AreEqual (631791144000000000L, XmlConvert.ToDateTime ("---26Z").Ticks);//shouldn't have a hardcoded value
+            //			Assert.AreEqual (631791360000000000L, XmlConvert.ToDateTime ("---26").Ticks);//shouldn't have a
+            // hardcoded value
+            //			Assert.AreEqual (631790676000000000L, XmlConvert.ToDateTime ("---26+13:00").Ticks);//shouldn't
+            // have a hardcoded value
+            //			Assert.AreEqual (631791144000000000L, XmlConvert.ToDateTime ("---26Z").Ticks);//shouldn't have
+            // a hardcoded value
             try
             {
                 Assert.AreEqual(45L, XmlConvert.ToDateTime(";ljdfas;kl").Ticks);

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc;
 public sealed class TempDataAttribute : Attribute
 {
     /// <summary>
-    /// Gets or sets the key used to get or add the property from value from <see cref="ITempDataDictionary"/>.
+    /// Gets or sets the key used to get or add the property from value from <see
+    // cref="ITempDataDictionary"/>.
     /// When unspecified, the key is derived from the property name.
     /// </summary>
     public string? Key { get; set; }

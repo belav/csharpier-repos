@@ -8,7 +8,8 @@ using System.Linq.Expressions.Compiler;
 namespace System.Runtime.CompilerServices
 {
     /// <summary>
-    /// This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.
+    /// This API supports the .NET Framework infrastructure and is not intended to be used directly from
+    // your code.
     /// Contains helper methods called from dynamically generated methods.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never), DebuggerStepThrough]
@@ -18,7 +19,8 @@ namespace System.Runtime.CompilerServices
         /// Creates an interface that can be used to modify closed over variables at runtime.
         /// </summary>
         /// <param name="data">The closure array.</param>
-        /// <param name="indexes">An array of indexes into the closure array where variables are found.</param>
+        /// <param name="indexes">An array of indexes into the closure array where variables are
+        // found.</param>
         /// <returns>An interface to access variables.</returns>
         [
             Obsolete("RuntimeOps has been deprecated and is not supported.", true),

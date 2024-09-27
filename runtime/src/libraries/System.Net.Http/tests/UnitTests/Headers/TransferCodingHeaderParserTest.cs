@@ -72,12 +72,14 @@ namespace System.Net.Http.Tests
             CheckValidParsedValue("  ", 0, null, 2);
             CheckValidParsedValue("  ,,", 0, null, 4);
 
-            // Note that even if the whole string is invalid, the first transfer-coding value is valid. When the parser
+            // Note that even if the whole string is invalid, the first transfer-coding value is valid. When the
+            // parser
             // gets called again using the result-index (9), then it fails: I.e. we have 1 valid transfer-coding
             // and an invalid one.
             CheckValidParsedValue("custom , \u4F1A", 0, expected, 9);
 
-            // We don't have to test all possible input strings, since most of the pieces are handled by other parsers.
+            // We don't have to test all possible input strings, since most of the pieces are handled by other
+            // parsers.
             // The purpose of this test is to verify that these other parsers are combined correctly to build a
             // transfer-coding parser.
             expected.Parameters.Add(new NameValueHeaderValue("name", "value"));

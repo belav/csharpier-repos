@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Allows SQL Server specific configuration to be performed on <see cref="DbContextOptions" />.
 /// </summary>
 /// <remarks>
-///     Instances of this class are returned from a call to <see cref="O:SqlServerDbContextOptionsExtensions.UseSqlServer" />
+///     Instances of this class are returned from a call to <see
+// cref="O:SqlServerDbContextOptionsExtensions.UseSqlServer" />
 ///     and it is not designed to be directly constructed in your application code.
 /// </remarks>
 public class LazyLoadingProxiesOptionsBuilder
@@ -29,12 +30,14 @@ public class LazyLoadingProxiesOptionsBuilder
     protected virtual DbContextOptionsBuilder OptionsBuilder { get; }
 
     /// <summary>
-    ///     Configures the proxies to ignore navigations that are not virtual. By default, an exception will be thrown if a non-virtual
+    ///     Configures the proxies to ignore navigations that are not virtual. By default, an exception
+    // will be thrown if a non-virtual
     ///     navigation is found.
     /// </summary>
     /// <param name="ignoreNonVirtualNavigations">
     ///     <see langword="true" /> to ignore navigations that are not virtual. The default value is
-    ///     <see langword="false" />, meaning an exception will be thrown if a non-virtual navigation is found.
+    ///     <see langword="false" />, meaning an exception will be thrown if a non-virtual navigation is
+    // found.
     /// </param>
     public virtual LazyLoadingProxiesOptionsBuilder IgnoreNonVirtualNavigations(
         bool ignoreNonVirtualNavigations = true

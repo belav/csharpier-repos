@@ -4,7 +4,9 @@
 namespace System.Runtime.CompilerServices
 {
     /// <summary>
-    /// An interface implemented by all <see cref="AsyncTaskMethodBuilder{TResult}.AsyncStateMachineBox{TStateMachine}"/> instances, regardless of generics.
+    /// An interface implemented by all <see
+    // cref="AsyncTaskMethodBuilder{TResult}.AsyncStateMachineBox{TStateMachine}"/> instances, regardless
+    // of generics.
     /// </summary>
     internal interface IAsyncStateMachineBox
     {
@@ -17,7 +19,8 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         Action MoveNextAction { get; }
 
-        /// <summary>Gets the state machine as a boxed object.  This should only be used for debugging purposes.</summary>
+        /// <summary>Gets the state machine as a boxed object.  This should only be used for debugging
+        // purposes.</summary>
         IAsyncStateMachine GetStateMachineObject();
 
         /// <summary>Clears the state of the box.</summary>

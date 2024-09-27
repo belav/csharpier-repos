@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Roslyn.Utilities
 {
     /// <summary>
-    /// Implements <see cref="ValueTask"/> and <see cref="ValueTask{TResult}"/> static members that are only available in .NET 5.
+    /// Implements <see cref="ValueTask"/> and <see cref="ValueTask{TResult}"/> static members that are
+    // only available in .NET 5.
     /// </summary>
     internal static class ValueTaskFactory
     {

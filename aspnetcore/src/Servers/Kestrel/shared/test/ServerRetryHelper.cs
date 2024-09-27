@@ -18,12 +18,14 @@ public static class ServerRetryHelper
     {
         var retryCount = 0;
 
-        // Add a random number to starting port to reduce chance of conflicts because of multiple tests using this retry.
+        // Add a random number to starting port to reduce chance of conflicts because of multiple tests
+        // using this retry.
         var nextPortAttempt = 30000 + Random.Shared.Next(10000);
 
         while (true)
         {
-            // Find a port that's available for TCP and UDP. Start with the given port search upwards from there.
+            // Find a port that's available for TCP and UDP. Start with the given port search upwards from
+            // there.
             var port = GetAvailablePort(nextPortAttempt, logger);
 
             try

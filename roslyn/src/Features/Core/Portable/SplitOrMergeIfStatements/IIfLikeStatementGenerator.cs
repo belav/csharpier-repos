@@ -11,8 +11,10 @@ using Microsoft.CodeAnalysis.Host;
 namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 {
     /// <summary>
-    /// When querying the syntax, C# else if chains are "flattened" and modeled to look like VB else-if clauses,
-    /// so an "ifOrElseIf" can be followed a sequence of else-if clauses and an optional final else clause.
+    /// When querying the syntax, C# else if chains are "flattened" and modeled to look like VB else-if
+    // clauses,
+    /// so an "ifOrElseIf" can be followed a sequence of else-if clauses and an optional final else
+    // clause.
     /// These else-if clauses are treated as independent when removing or inserting.
     /// </summary>
     internal interface IIfLikeStatementGenerator : ILanguageService
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         SyntaxNode WithElseIfAndElseClausesOf(SyntaxNode ifStatement, SyntaxNode otherIfStatement);
 
         /// <summary>
-        /// Converts an else-if clause to an if statement, preserving its subsequent else-if and else clauses.
+        /// Converts an else-if clause to an if statement, preserving its subsequent else-if and else
+        // clauses.
         /// </summary>
         SyntaxNode ToIfStatement(SyntaxNode ifOrElseIf);
 
@@ -66,7 +69,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         );
 
         /// <summary>
-        /// Removes <paramref name="elseIfClause"/> from a sequence of else-if clauses, preserving any subsequent clauses.
+        /// Removes <paramref name="elseIfClause"/> from a sequence of else-if clauses, preserving any
+        // subsequent clauses.
         /// </summary>
         void RemoveElseIfClause(SyntaxEditor editor, SyntaxNode elseIfClause);
     }

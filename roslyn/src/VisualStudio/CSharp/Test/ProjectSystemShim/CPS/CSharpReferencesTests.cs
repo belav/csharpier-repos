@@ -48,7 +48,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             // Add project reference
             project3.AddProjectReference(project1, new MetadataReferenceProperties());
 
-            // Add project reference as metadata reference: since this is known to be the output path of project1, the metadata reference is converted to a project reference
+            // Add project reference as metadata reference: since this is known to be the output path of
+            // project1, the metadata reference is converted to a project reference
             project3.AddMetadataReference(@"c:\project2.dll", new MetadataReferenceProperties());
 
             // Add project reference with no output path
@@ -91,7 +92,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             // Remove project reference
             project3.RemoveProjectReference(project1);
 
-            // Remove project reference as metadata reference: since this is known to be the output path of project1, the metadata reference is converted to a project reference
+            // Remove project reference as metadata reference: since this is known to be the output path of
+            // project1, the metadata reference is converted to a project reference
             project3.RemoveMetadataReference(@"c:\project2.dll");
 
             // Remove metadata reference
@@ -120,7 +122,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             );
             var project2 = await CreateCSharpCPSProjectAsync(environment, "project2");
 
-            // Add project reference as metadata reference: since this is known to be the output path of project1, the metadata reference is converted to a project reference
+            // Add project reference as metadata reference: since this is known to be the output path of
+            // project1, the metadata reference is converted to a project reference
             project2.AddMetadataReference(@"c:\project1.dll", new MetadataReferenceProperties());
             Assert.Single(
                 environment.Workspace.CurrentSolution.GetProject(project2.Id).AllProjectReferences
@@ -160,7 +163,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
                 MetadataReferenceProperties.Assembly
             );
 
-            // We should not have converted that to a project reference, because we would have no way to produce the compilation
+            // We should not have converted that to a project reference, because we would have no way to produce
+            // the compilation
             Assert.Empty(
                 environment.Workspace.CurrentSolution.GetProject(project1.Id).AllProjectReferences
             );

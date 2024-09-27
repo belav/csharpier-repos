@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
     );
 
     /// <summary>
-    /// General options for controlling the code produced by the <see cref="CodeGenerator"/> that apply to all documents.
+    /// General options for controlling the code produced by the <see cref="CodeGenerator"/> that apply
+    // to all documents.
     /// </summary>
     internal sealed class CodeGenerationContext
     {
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// preferred if it comes from the same SyntaxTree as this location.  If there is no
         /// such part, then any part may be used for generation.
         ///
-        /// This option is not necessary if <see cref="AfterThisLocation"/> or <see cref="BeforeThisLocation"/> are
+        /// This option is not necessary if <see cref="AfterThisLocation"/> or <see
+        // cref="BeforeThisLocation"/> are
         /// provided.
         /// </summary>
         public Location? ContextLocation { get; }
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// placed.  Code will be generated after this location if the location is valid in the type
         /// or symbol being generated into, and it is possible to generate the code after it.
         ///
-        /// If this option is provided, neither <see cref="ContextLocation"/> nor <see cref="BeforeThisLocation"/> are
+        /// If this option is provided, neither <see cref="ContextLocation"/> nor <see
+        // cref="BeforeThisLocation"/> are
         /// needed.
         /// </summary>
         public Location? AfterThisLocation { get; }
@@ -52,14 +55,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// placed.  Code will be generated before this location if the location is valid in the type
         /// or symbol being generated into, and it is possible to generate the code after it.
         ///
-        /// If this option is provided, neither <see cref="ContextLocation"/> nor <see cref="AfterThisLocation"/> are
+        /// If this option is provided, neither <see cref="ContextLocation"/> nor <see
+        // cref="AfterThisLocation"/> are
         /// needed.
         /// </summary>
         public Location? BeforeThisLocation { get; }
 
         /// <summary>
         /// True if the code generation service should add <see cref="Simplifier.AddImportsAnnotation"/>,
-        /// and when not generating directly into a declaration, should try to automatically add imports to the file
+        /// and when not generating directly into a declaration, should try to automatically add imports to
+        // the file
         /// for any generated code.
         /// Defaults to true.
         /// </summary>
@@ -129,9 +134,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public bool SortMembers { get; }
 
         /// <summary>
-        /// True if the code generator should attempt to reuse the syntax of the constituent entities, such as members, access modifier tokens, etc. while attempting to generate code.
-        /// If any of the member symbols have zero declaring syntax references (non-source symbols) OR two or more declaring syntax references (partial definitions), then syntax is not reused.
-        /// If false, then the code generator will always synthesize a new syntax node and ignore the declaring syntax references.
+        /// True if the code generator should attempt to reuse the syntax of the constituent entities, such
+        // as members, access modifier tokens, etc. while attempting to generate code.
+        /// If any of the member symbols have zero declaring syntax references (non-source symbols) OR two
+        // or more declaring syntax references (partial definitions), then syntax is not reused.
+        /// If false, then the code generator will always synthesize a new syntax node and ignore the
+        // declaring syntax references.
         /// </summary>
         public bool ReuseSyntax { get; }
 

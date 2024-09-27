@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     event with reduced allocations.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class EventDefinition : EventDefinitionBase
@@ -23,7 +24,8 @@ public class EventDefinition : EventDefinitionBase
     /// <param name="level">The <see cref="LogLevel" /> at which the event will be logged.</param>
     /// <param name="logActionFunc">Function to create a cached delegate for logging the event.</param>
     /// <param name="eventIdCode">
-    ///     A string representing the code that should be passed to <see cref="DbContextOptionsBuilder.ConfigureWarnings" />.
+    ///     A string representing the code that should be passed to <see
+    // cref="DbContextOptionsBuilder.ConfigureWarnings" />.
     /// </param>
     public EventDefinition(
         ILoggingOptions loggingOptions,

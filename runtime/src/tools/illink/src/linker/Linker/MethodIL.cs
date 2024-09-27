@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -8,8 +9,10 @@ using Mono.Collections.Generic;
 namespace Mono.Linker
 {
     /// <summary>
-    /// This is a wrapper which should be used by anything accessing method's body - see LinkContext.GetMethodIL for more details.
-    /// Any accesses made throught this wrapper are considered "safe"/OK since the wrapper is only created
+    /// This is a wrapper which should be used by anything accessing method's body - see
+    // LinkContext.GetMethodIL for more details.
+    /// Any accesses made throught this wrapper are considered "safe"/OK since the wrapper is only
+    // created
     /// once all of the optimizations are applied.
     /// </summary>
     public readonly record struct MethodIL

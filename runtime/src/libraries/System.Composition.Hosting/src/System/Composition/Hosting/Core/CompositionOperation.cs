@@ -24,7 +24,8 @@ namespace System.Composition.Hosting.Core
         /// Execute a new composition operation starting within the specified lifetime
         /// context, for the specified activator.
         /// </summary>
-        /// <param name="outermostLifetimeContext">Context in which to begin the operation (the operation can flow
+        /// <param name="outermostLifetimeContext">Context in which to begin the operation (the operation
+        // can flow
         /// to the parents of the context if required).</param>
         /// <param name="compositionRootActivator">Activator that will drive the operation.</param>
         /// <returns>The composed object graph.</returns>

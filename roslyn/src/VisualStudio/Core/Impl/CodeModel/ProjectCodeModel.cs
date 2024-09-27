@@ -118,15 +118,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public void OnSourceFileRemoved(string fileName)
         {
-            // This uses the field directly. If we haven't yet created the CodeModelProjectCache, then we most definitely
-            // don't have any source files we need to zombie when they go away. There's no reason to create a cache in that case.
+            // This uses the field directly. If we haven't yet created the CodeModelProjectCache, then we most
+            // definitely
+            // don't have any source files we need to zombie when they go away. There's no reason to create a
+            // cache in that case.
             _codeModelCache?.OnSourceFileRemoved(fileName);
         }
 
         public void OnSourceFileRenaming(string filePath, string newFilePath)
         {
-            // This uses the field directly. If we haven't yet created the CodeModelProjectCache, then we most definitely
-            // don't have any source files we need to handle a rename for. There's no reason to create a cache in that case.
+            // This uses the field directly. If we haven't yet created the CodeModelProjectCache, then we most
+            // definitely
+            // don't have any source files we need to handle a rename for. There's no reason to create a cache
+            // in that case.
             _codeModelCache?.OnSourceFileRenaming(filePath, newFilePath);
         }
 
@@ -139,7 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             SourceGeneratedDocument sourceGeneratedDocument
         )
         {
-            // Unlike for "regular" documents, we make no effort to cache these between callers or hold them for longer lifetimes with
+            // Unlike for "regular" documents, we make no effort to cache these between callers or hold them for
+            // longer lifetimes with
             // events.
             return FileCodeModel
                 .Create(

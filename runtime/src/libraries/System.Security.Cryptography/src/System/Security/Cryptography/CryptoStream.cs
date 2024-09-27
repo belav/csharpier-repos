@@ -107,7 +107,8 @@ namespace System.Security.Cryptography
             get { return _finalBlockTransformed; }
         }
 
-        // The flush final block functionality used to be part of close, but that meant you couldn't do something like this:
+        // The flush final block functionality used to be part of close, but that meant you couldn't do
+        // something like this:
         // MemoryStream ms = new MemoryStream();
         // CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
         // cs.Write(foo, 0, foo.Length);
@@ -125,7 +126,8 @@ namespace System.Security.Cryptography
         /// Asynchronously updates the underlying data source or repository with the
         /// current state of the buffer, then clears the buffer.
         /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+        // value is <see cref="CancellationToken.None"/>.</param>
         /// <returns>A task that represents the asynchronous flush operation.</returns>
         public ValueTask FlushFinalBlockAsync(CancellationToken cancellationToken = default)
         {
@@ -169,7 +171,8 @@ namespace System.Security.Cryptography
                 }
             }
 
-            // If the inner stream is a CryptoStream, then we want to call FlushFinalBlock on it too, otherwise just Flush.
+            // If the inner stream is a CryptoStream, then we want to call FlushFinalBlock on it too, otherwise
+            // just Flush.
             if (_stream is CryptoStream innerCryptoStream)
             {
                 if (!innerCryptoStream.HasFlushedFinalBlock)
@@ -385,7 +388,8 @@ namespace System.Security.Cryptography
                 int bytesRead = 0;
                 bool eof = false;
 
-                // If the transform supports transforming multiple blocks, try to read as large a chunk as would yield
+                // If the transform supports transforming multiple blocks, try to read as large a chunk as would
+                // yield
                 // data to fill the output buffer and do the appropriate transform directly into the output buffer.
                 int blocksToProcess = buffer.Length / _outputBlockSize;
                 if (blocksToProcess > 1 && _transform.CanTransformMultipleBlocks)
@@ -525,7 +529,8 @@ namespace System.Security.Cryptography
                     }
                 }
 
-                // Read enough to fill one input block, as anything less won't be able to be transformed to produce output.
+                // Read enough to fill one input block, as anything less won't be able to be transformed to produce
+                // output.
                 if (!eof)
                 {
                     while (_inputBufferIndex < _inputBlockSize)
@@ -658,7 +663,8 @@ namespace System.Security.Cryptography
         /// <inheritdoc/>
         public override void Write(ReadOnlySpan<byte> buffer)
         {
-            // Logically this is doing the same thing as the base Stream, however CryptoStream clears arrays before
+            // Logically this is doing the same thing as the base Stream, however CryptoStream clears arrays
+            // before
             // returning them to the pool, whereas the base Stream does not.
             // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
             byte[] sharedBuffer = ArrayPool<byte>.Shared.Rent(buffer.Length);

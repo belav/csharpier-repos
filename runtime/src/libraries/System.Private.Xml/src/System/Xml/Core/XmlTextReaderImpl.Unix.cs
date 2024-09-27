@@ -12,7 +12,8 @@ namespace System.Xml
             XmlResolver? resolver
         )
         {
-            // new Uri(uri, UriKind.RelativeOrAbsolute) returns a Relative Uri for absolute unix paths (e.g. /tmp).
+            // new Uri(uri, UriKind.RelativeOrAbsolute) returns a Relative Uri for absolute unix paths (e.g.
+            // /tmp).
             // We convert the native unix path to a 'file://' uri string to make it an Absolute Uri.
             if (url != null && url.Length > 0 && url[0] == '/')
             {

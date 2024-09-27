@@ -67,7 +67,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Contains("OnlyVarargs", errorMessage);
             Assert.Contains("0", errorMessage);
             errorMessage = Assert.Throws<RuntimeBinderException>(() => d.OnlyVarargs(1)).Message;
-            // "The best overloaded method match for 'Microsoft.CSharp.RuntimeBinder.Tests.VarArgsTests.HasVarargs.OnlyVarargs(__arglist)' has some invalid arguments"
+            // "The best overloaded method match for
+            // 'Microsoft.CSharp.RuntimeBinder.Tests.VarArgsTests.HasVarargs.OnlyVarargs(__arglist)' has some
+            // invalid arguments"
             // Localized form should contain the name,
             Assert.Contains(
                 "Microsoft.CSharp.RuntimeBinder.Tests.VarArgsTests.HasVarargs.OnlyVarargs(__arglist)",

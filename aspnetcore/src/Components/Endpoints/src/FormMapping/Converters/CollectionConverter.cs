@@ -9,13 +9,16 @@ namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
 // The algorithm for collections is always the same. There are two main cases:
 // The collection can be modified, so we can add items to it.
-// The collection cannot be modified, so we need to use a buffer and copy the items to it once we are done.
+// The collection cannot be modified, so we need to use a buffer and copy the items to it once we
+// are done.
 // When adding to the buffer, there are two cases:
 // The buffer implements ICollection<T>, so we can add items to it.
 // The buffer does not implement ICollection<T>, so we need to use custom code to add items to it.
 // These aspects are captured in the TCollectionPolicy type parameter.
-// Instead of creating a hierachy with virtual members, we are using generics and virtual interface dispatch to achieve the same result.
-// This allows us to avoid virtual dispatch at runtime, and enables us to easily adapt to different types of collections.
+// Instead of creating a hierachy with virtual members, we are using generics and virtual interface
+// dispatch to achieve the same result.
+// This allows us to avoid virtual dispatch at runtime, and enables us to easily adapt to different
+// types of collections.
 
 internal abstract class CollectionConverter<TCollection> : FormDataConverter<TCollection> { }
 
@@ -153,7 +156,8 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
         bool foundCurrentElement;
         bool currentElementSuccess;
         bool succeded;
-        // Even though we have indexes, we special case 0 an 1 and use literals directly. We leave them in the indexes
+        // Even though we have indexes, we special case 0 an 1 and use literals directly. We leave them in
+        // the indexes
         // collection because it makes other indexes align.
         try
         {
@@ -184,7 +188,8 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
 
         // We already know we found an element;
         found = true;
-        // At this point we have at least found one element, we can create the collection and assign it to it.
+        // At this point we have at least found one element, we can create the collection and assign it to
+        // it.
         buffer = TCollectionPolicy.CreateBuffer();
         buffer = TCollectionPolicy.Add(ref buffer, currentElement!);
 
@@ -217,11 +222,15 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
 
         var maxCollectionSize = options.MaxCollectionSize;
 
-        // We need to iterate while we keep finding values, even if some of them have errors. This is because we don't want data to be lost just
-        // because we are not able to parse it. For example, if [5] = "asdf", we don't want to loose the values for [6], [7], etc. that can be
+        // We need to iterate while we keep finding values, even if some of them have errors. This is
+        // because we don't want data to be lost just
+        // because we are not able to parse it. For example, if [5] = "asdf", we don't want to loose the
+        // values for [6], [7], etc. that can be
         // valid.
-        // There will be a limit to how many errors we collect, at which point we will stop capturing errors.
-        // Similarly, over 100 elements, we'll start doing more work to compute the index prefix. We chose 100 because that's the default
+        // There will be a limit to how many errors we collect, at which point we will stop capturing
+        // errors.
+        // Similarly, over 100 elements, we'll start doing more work to compute the index prefix. We chose
+        // 100 because that's the default
         // max collection size that we will support.
         var index = 2;
         var lastElementWithComputedIndex = 100 < maxCollectionSize ? 100 : maxCollectionSize;
@@ -270,7 +279,8 @@ internal class CollectionConverter<TCollection, TCollectionPolicy, TBuffer, TEle
         }
 
         // We need to compute the prefix for the index, since it's not precomputed.
-        // The biggest UInt32 representation is 4294967295, which is 10 characters, so 16 chars is more than enough to
+        // The biggest UInt32 representation is 4294967295, which is 10 characters, so 16 chars is more than
+        // enough to
         // hold the representation.
         Span<char> computedPrefix = stackalloc char[16];
         computedPrefix[0] = '[';

@@ -189,7 +189,7 @@ namespace System.IO
             }
         }
 
-        /* Returns the name of the directory that the file is in */
+/* Returns the name of the directory that the file is in */
         public String DirectoryName
         {
             [System.Security.SecuritySafeCritical]
@@ -220,7 +220,7 @@ namespace System.IO
             }
         }
 
-        /* Creates an instance of the the parent directory */
+/* Creates an instance of the the parent directory */
         public DirectoryInfo Directory
         {
             [ResourceExposure(ResourceScope.Machine)]

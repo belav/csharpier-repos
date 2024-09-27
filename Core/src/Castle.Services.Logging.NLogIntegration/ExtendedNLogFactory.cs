@@ -33,7 +33,8 @@ namespace Castle.Services.Logging.NLogIntegration
             : this(NLogFactory.defaultConfigFileName) { }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="ExtendedNLogFactory" /> class with the configfile specified by <paramref
+        ///   Initializes a new instance of the <see cref="ExtendedNLogFactory" /> class with the configfile
+        // specified by <paramref
         ///    name="configFile" />
         /// </summary>
         /// <param name="configFile"> The config file. </param>
@@ -46,7 +47,9 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Initializes a new instance of the <see cref="ExtendedNLogFactory" /> class.
         /// </summary>
-        /// <param name="configuredExternally"> If <c>true</c> . Skips the initialization of log4net assuming it will happen externally. Useful if you're using another framework that wants to take over configuration of NLog. </param>
+        /// <param name="configuredExternally"> If <c>true</c> . Skips the initialization of log4net
+        // assuming it will happen externally. Useful if you're using another framework that wants to take over
+        // configuration of NLog. </param>
         public ExtendedNLogFactory(bool configuredExternally)
         {
             if (configuredExternally)

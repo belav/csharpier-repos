@@ -6,9 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    // For each object or array being read off the stream, an ObjectProgress object is created. This object
+    // For each object or array being read off the stream, an ObjectProgress object is created. This
+    // object
     // keeps track of the progress of the parsing. When an object is being parsed, it keeps track of
-    // the object member being parsed. When an array is being parsed it keeps track of the position within the
+    // the object member being parsed. When an array is being parsed it keeps track of the position
+    // within the
     // array.
     internal sealed class ObjectProgress
     {

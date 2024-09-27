@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
     /// <summary>
-    /// Provides an argument provider that always appears before any built-in argument provider. This argument
+    /// Provides an argument provider that always appears before any built-in argument provider. This
+    // argument
     /// provider does not provide any argument values.
     /// </summary>
     [ExportArgumentProvider(nameof(FirstBuiltInArgumentProvider), LanguageNames.CSharp)]

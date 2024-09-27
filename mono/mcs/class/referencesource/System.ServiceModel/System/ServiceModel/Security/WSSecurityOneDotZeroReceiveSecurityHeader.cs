@@ -934,11 +934,14 @@ namespace System.ServiceModel.Security
                         XD.UtilityDictionary.Namespace
                     );
 
-                    // DevDiv:938534 - We added a flag that allow unsigned headers. If this is set, we do not throw an Exception but move on to CompleteSignatureVerification()
+                    // DevDiv:938534 - We added a flag that allow unsigned headers. If this is set, we do not throw an
+                    // Exception but move on to CompleteSignatureVerification()
                     if (LocalAppContextSwitches.AllowUnsignedToHeader)
                     {
-                        // The lack of an id indicates that the sender did not wish to sign the header. We can safely assume that null indicates this header is not signed.
-                        // If id is not null, then we need to validate the Digest and ensure signature is valid. The exception is thrown deeper in the System.IdentityModel stack.
+                        // The lack of an id indicates that the sender did not wish to sign the header. We can safely assume
+                        // that null indicates this header is not signed.
+                        // If id is not null, then we need to validate the Digest and ensure signature is valid. The
+                        // exception is thrown deeper in the System.IdentityModel stack.
                         if (id != null)
                         {
                             signedXml.EnsureDigestValidityIfIdMatches(id, toHeaderReader);
@@ -1041,7 +1044,8 @@ namespace System.ServiceModel.Security
                                                 == ReceiveSecurityHeaderElementCategory.Token;
                                     }
                                     this.ElementManager.SetSigned(tokenIndex);
-                                    // We pass true if it is a signed supporting token, signed primary token or a SignedEndorsing token. We pass false if it is a SignedEncrypted Token.
+                                    // We pass true if it is a signed supporting token, signed primary token or a SignedEndorsing token.
+                                    // We pass false if it is a SignedEncrypted Token.
                                     reader = this.ElementManager.GetReader(
                                         tokenIndex,
                                         isSignedToken
@@ -1071,7 +1075,8 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            // This check makes sure that if RequireSignedPrimaryToken is true (ProtectTokens is enabled on sbe) then the incoming message
+            // This check makes sure that if RequireSignedPrimaryToken is true (ProtectTokens is enabled on sbe)
+            // then the incoming message
             // should have the primary signature over the primary(signing)token.
             if (
                 isPrimarySignature
@@ -1089,7 +1094,8 @@ namespace System.ServiceModel.Security
                 );
             }
 
-            // NOTE: On both client and server side, WCF quietly consumes protected tokens even if protect token is not enabled on sbe.
+            // NOTE: On both client and server side, WCF quietly consumes protected tokens even if protect token
+            // is not enabled on sbe.
             // To change this behaviour add another check below and throw appropriate exception message.
         }
 

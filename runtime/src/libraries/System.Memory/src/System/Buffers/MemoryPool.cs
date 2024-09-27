@@ -8,7 +8,8 @@ namespace System.Buffers
     /// </summary>
     public abstract class MemoryPool<T> : IDisposable
     {
-        // Store the shared ArrayMemoryPool in a field of its derived sealed type so the Jit can "see" the exact type
+        // Store the shared ArrayMemoryPool in a field of its derived sealed type so the Jit can "see" the
+        // exact type
         // when the Shared property is inlined which will allow it to devirtualize calls made on it.
         private static readonly ArrayMemoryPool<T> s_shared = new ArrayMemoryPool<T>();
 
@@ -18,9 +19,11 @@ namespace System.Buffers
         public static MemoryPool<T> Shared => s_shared;
 
         /// <summary>
-        /// Returns a memory block capable of holding at least <paramref name="minBufferSize" /> elements of T.
+        /// Returns a memory block capable of holding at least <paramref name="minBufferSize" /> elements of
+        // T.
         /// </summary>
-        /// <param name="minBufferSize">If -1 is passed, this is set to a default value for the pool.</param>
+        /// <param name="minBufferSize">If -1 is passed, this is set to a default value for the
+        // pool.</param>
         public abstract IMemoryOwner<T> Rent(int minBufferSize = -1);
 
         /// <summary>

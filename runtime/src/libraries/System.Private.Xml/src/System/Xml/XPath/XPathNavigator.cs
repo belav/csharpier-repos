@@ -1860,7 +1860,8 @@ namespace System.Xml.XPath
         //  3. same id is generated for the same node
         //  4. ids are unique
         //
-        //  id = node type letter + reverse path to root in terms of encoded IndexInParent integers from node to root separated by 0's if needed
+        //  id = node type letter + reverse path to root in terms of encoded IndexInParent integers from
+        // node to root separated by 0's if needed
         internal virtual string UniqueId
         {
             get
@@ -2003,7 +2004,8 @@ namespace System.Xml.XPath
             return mngr;
         }
 
-        // Get mask that will allow XPathNodeType content matching to be performed using only a shift and an and operation
+        // Get mask that will allow XPathNodeType content matching to be performed using only a shift and an
+        // and operation
         internal const int AllMask = 0x7FFFFFFF;
         internal const int NoAttrNmspMask =
             AllMask & ~(1 << (int)XPathNodeType.Attribute) & ~(1 << (int)XPathNodeType.Namespace);

@@ -57,7 +57,8 @@ public static class HandshakeProtocol
         _successHandshakeData.Span;
 
     /// <summary>
-    /// Writes the serialized representation of a <see cref="HandshakeRequestMessage"/> to the specified writer.
+    /// Writes the serialized representation of a <see cref="HandshakeRequestMessage"/> to the specified
+    // writer.
     /// </summary>
     /// <param name="requestMessage">The message to write.</param>
     /// <param name="output">The output writer.</param>
@@ -88,7 +89,8 @@ public static class HandshakeProtocol
     }
 
     /// <summary>
-    /// Writes the serialized representation of a <see cref="HandshakeResponseMessage"/> to the specified writer.
+    /// Writes the serialized representation of a <see cref="HandshakeResponseMessage"/> to the
+    // specified writer.
     /// </summary>
     /// <param name="responseMessage">The message to write.</param>
     /// <param name="output">The output writer.</param>
@@ -122,11 +124,13 @@ public static class HandshakeProtocol
     }
 
     /// <summary>
-    /// Creates a new <see cref="HandshakeResponseMessage"/> from the specified serialized representation.
+    /// Creates a new <see cref="HandshakeResponseMessage"/> from the specified serialized
+    // representation.
     /// </summary>
     /// <param name="buffer">The serialized representation of the message.</param>
     /// <param name="responseMessage">When this method returns, contains the parsed message.</param>
-    /// <returns>A value that is <c>true</c> if the <see cref="HandshakeResponseMessage"/> was successfully parsed; otherwise, <c>false</c>.</returns>
+    /// <returns>A value that is <c>true</c> if the <see cref="HandshakeResponseMessage"/> was
+    // successfully parsed; otherwise, <c>false</c>.</returns>
     public static bool TryParseResponseMessage(
         ref ReadOnlySequence<byte> buffer,
         [NotNullWhen(true)] out HandshakeResponseMessage? responseMessage
@@ -184,11 +188,13 @@ public static class HandshakeProtocol
     }
 
     /// <summary>
-    /// Creates a new <see cref="HandshakeRequestMessage"/> from the specified serialized representation.
+    /// Creates a new <see cref="HandshakeRequestMessage"/> from the specified serialized
+    // representation.
     /// </summary>
     /// <param name="buffer">The serialized representation of the message.</param>
     /// <param name="requestMessage">When this method returns, contains the parsed message.</param>
-    /// <returns>A value that is <c>true</c> if the <see cref="HandshakeRequestMessage"/> was successfully parsed; otherwise, <c>false</c>.</returns>
+    /// <returns>A value that is <c>true</c> if the <see cref="HandshakeRequestMessage"/> was
+    // successfully parsed; otherwise, <c>false</c>.</returns>
     public static bool TryParseRequestMessage(
         ref ReadOnlySequence<byte> buffer,
         [NotNullWhen(true)] out HandshakeRequestMessage? requestMessage

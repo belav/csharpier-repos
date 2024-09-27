@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Net.Http.Formatting;
@@ -11,7 +12,8 @@ namespace System.Web.Http.Controllers
 {
     /// <summary>
     /// Convenience helpers to easily create specific types of parameter bindings
-    /// These provide a direct programmatic counterpart to the <see cref="ParameterBindingAttribute"/> attributes.
+    /// These provide a direct programmatic counterpart to the <see cref="ParameterBindingAttribute"/>
+    // attributes.
     /// </summary>
     public static class ParameterBindingExtensions
     {
@@ -178,7 +180,8 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <param name="parameter">parameter to provide binding for.</param>
         /// <param name="formatters">formatters to choose from when binding the body</param>
-        /// <param name="bodyModelValidator">a validator. Null to disable validation for this parameter.</param>
+        /// <param name="bodyModelValidator">a validator. Null to disable validation for this
+        // parameter.</param>
         /// <returns>a binding</returns>
         public static HttpParameterBinding BindWithFormatter(
             this HttpParameterDescriptor parameter,

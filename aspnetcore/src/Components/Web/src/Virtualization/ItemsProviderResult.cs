@@ -23,7 +23,8 @@ public readonly struct ItemsProviderResult<TItem>
     /// Instantiates a new <see cref="ItemsProviderResult{TItem}"/> instance.
     /// </summary>
     /// <param name="items">The items to provide.</param>
-    /// <param name="totalItemCount">The total item count in the source generating the items provided.</param>
+    /// <param name="totalItemCount">The total item count in the source generating the items
+    // provided.</param>
     public ItemsProviderResult(IEnumerable<TItem> items, int totalItemCount)
     {
         Items = items;

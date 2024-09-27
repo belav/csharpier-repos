@@ -180,8 +180,10 @@ namespace System.Net.Http.Metrics
             {
                 int statusCode = (int)response.StatusCode;
 
-                // In case the status code indicates a client or a server error, return the string representation of the status code.
+                // In case the status code indicates a client or a server error, return the string representation of
+                // the status code.
                 // See the paragraph Status and the definition of 'error.type' in
+                //
                 // https://github.com/open-telemetry/semantic-conventions/blob/2bad9afad58fbd6b33cc683d1ad1f006e35e4a5d/docs/http/http-spans.md
                 if (statusCode >= 400 && statusCode <= 599)
                 {
@@ -214,7 +216,8 @@ namespace System.Net.Http.Metrics
                 HttpRequestError.ResponseEnded => "response_ended",
                 HttpRequestError.ConfigurationLimitExceeded => "configuration_limit_exceeded",
 
-                // Fall back to the exception type name in case of HttpRequestError.Unknown or when exception is not an HttpRequestException.
+                // Fall back to the exception type name in case of HttpRequestError.Unknown or when exception is not
+                // an HttpRequestException.
                 _ => exception.GetType().FullName!,
             };
             return true;

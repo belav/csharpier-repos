@@ -50,7 +50,8 @@ namespace Microsoft.Extensions.Options
         }
 
         /// <summary>
-        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see cref="Options.DefaultName"/>.
+        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see
+        // cref="Options.DefaultName"/>.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
         public void Configure(TOptions options) => Configure(Options.DefaultName, options);
@@ -110,7 +111,8 @@ namespace Microsoft.Extensions.Options
         }
 
         /// <summary>
-        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see cref="Options.DefaultName"/>.
+        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see
+        // cref="Options.DefaultName"/>.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
         public void Configure(TOptions options) => Configure(Options.DefaultName, options);
@@ -184,7 +186,8 @@ namespace Microsoft.Extensions.Options
         }
 
         /// <summary>
-        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see cref="Options.DefaultName"/>.
+        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see
+        // cref="Options.DefaultName"/>.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
         public void Configure(TOptions options) => Configure(Options.DefaultName, options);
@@ -269,7 +272,8 @@ namespace Microsoft.Extensions.Options
         }
 
         /// <summary>
-        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see cref="Options.DefaultName"/>.
+        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see
+        // cref="Options.DefaultName"/>.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
         public void Configure(TOptions options) => Configure(Options.DefaultName, options);
@@ -364,7 +368,8 @@ namespace Microsoft.Extensions.Options
         }
 
         /// <summary>
-        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see cref="Options.DefaultName"/>.
+        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see
+        // cref="Options.DefaultName"/>.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
         public void Configure(TOptions options) => Configure(Options.DefaultName, options);
@@ -476,7 +481,8 @@ namespace Microsoft.Extensions.Options
         }
 
         /// <summary>
-        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see cref="Options.DefaultName"/>.
+        /// Invoked to configure a <typeparamref name="TOptions"/> instance with the <see
+        // cref="Options.DefaultName"/>.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
         public void Configure(TOptions options) => Configure(Options.DefaultName, options);

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal partial class Binder
     {
         /// <summary>
-        /// If the left and right are tuples of matching cardinality, we'll try to bind the operator element-wise.
+        /// If the left and right are tuples of matching cardinality, we'll try to bind the operator
+        // element-wise.
         /// When that succeeds, the element-wise conversions are collected. We keep them for semantic model.
         /// The element-wise binary operators are collected and stored as a tree for lowering.
         /// </summary>
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (convertedType is null)
             {
-                // Note: issues with default will already have been reported by BindSimpleBinaryOperator (ie. we couldn't find a suitable element-wise operator)
+                // Note: issues with default will already have been reported by BindSimpleBinaryOperator (ie. we
+                // couldn't find a suitable element-wise operator)
                 if (
                     @operator.InfoKind == TupleBinaryOperatorInfoKind.Multiple
                     && expr is BoundTupleLiteral tuple
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return BindToNaturalType(expr, diagnostics, reportNoTargetType: false);
             }
 
-            // We were able to determine a converted type (for this tuple literal or element), we can just convert to it
+            // We were able to determine a converted type (for this tuple literal or element), we can just
+            // convert to it
             return GenerateConversionForAssignment(convertedType, expr, diagnostics);
         }
 
@@ -212,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// If an element-wise binary operator returns a non-bool type, we will either:
         /// - prepare a conversion to bool if one exists
-        /// - prepare a truth operator: op_false in the case of an equality (<c>a == b</c> will be lowered to <c>!((a == b).op_false)</c>) or op_true in the case of inequality,
+        /// - prepare a truth operator: op_false in the case of an equality (<c>a == b</c> will be lowered
+        // to <c>!((a == b).op_false)</c>) or op_true in the case of inequality,
         ///     with the conversion being used for its input.
         /// </summary>
         private void PrepareBoolConversionAndTruthOperator(
@@ -351,8 +355,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 : kind.WithType(BinaryOperatorKind.Dynamic);
             TypeSymbol dynamicType = hasError ? CreateErrorType() : Compilation.DynamicType;
 
-            // We'll want to dynamically invoke operators op_true (/op_false) for equality (/inequality) comparison, but we don't need
-            // to prepare either a conversion or a truth operator. Those can just be synthesized during lowering.
+            // We'll want to dynamically invoke operators op_true (/op_false) for equality (/inequality)
+            // comparison, but we don't need
+            // to prepare either a conversion or a truth operator. Those can just be synthesized during
+            // lowering.
             return new TupleBinaryOperatorInfo.Single(
                 dynamicType,
                 dynamicType,
@@ -467,10 +473,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If an element in a tuple literal has an explicit name which doesn't match the name on the other side, we'll warn.
+        /// If an element in a tuple literal has an explicit name which doesn't match the name on the other
+        // side, we'll warn.
         /// The user can either remove the name, or fix it.
         ///
-        /// This method handles two expressions, each of which is either a tuple literal or an expression with tuple type.
+        /// This method handles two expressions, each of which is either a tuple literal or an expression
+        // with tuple type.
         /// In a tuple literal, each element can have an explicit name, an inferred name or no name.
         /// In an expression of tuple type, each element can have a name or not.
         /// </summary>
@@ -615,7 +623,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return (tuple.Arguments, tuple.ArgumentNamesOpt);
             }
 
-            // placeholder bound nodes with the proper types are sufficient to bind the element-wise binary operators
+            // placeholder bound nodes with the proper types are sufficient to bind the element-wise binary
+            // operators
             TypeSymbol tupleType = expr.Type.StrippedType();
             ImmutableArray<BoundExpression> placeholders =
                 tupleType.TupleElementTypesWithAnnotations.SelectAsArray(
@@ -627,7 +636,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Make a tuple type (with appropriate nesting) from the types (on the left or on the right) collected
+        /// Make a tuple type (with appropriate nesting) from the types (on the left or on the right)
+        // collected
         /// from binding element-wise binary operators.
         /// If any of the elements is typeless, then the tuple is typeless too.
         /// </summary>

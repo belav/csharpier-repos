@@ -53,14 +53,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             var info = await GetDeclarationInfoWorkerAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
 
-            // if we bound to some error type, and that error type itself didn't start with an uppercase letter, then
-            // it's almost certainly just an error case where the user was referencing something that was not a type.
+            // if we bound to some error type, and that error type itself didn't start with an uppercase letter,
+            // then
+            // it's almost certainly just an error case where the user was referencing something that was not a
+            // type.
             // for example:
             //
             //  goo $$
             //  goo = ...
             //
-            // This syntactically looks like a type, but really isn't.  We don't want to offer anything here as it's far
+            // This syntactically looks like a type, but really isn't.  We don't want to offer anything here as
+            // it's far
             // more likely to be an error rather than a true new declaration.
             if (
                 info.Type is IErrorTypeSymbol { Name.Length: > 0 }
@@ -266,8 +269,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
 
             // we have something like `x.y $$`.
             //
-            // For this to actually be the start of a local declaration or function x.y needs to bind to an actual
-            // type symbol, not just any arbitrary expression that might have a type (e.g. `Console.BackgroundColor $$).
+            // For this to actually be the start of a local declaration or function x.y needs to bind to an
+            // actual
+            // type symbol, not just any arbitrary expression that might have a type (e.g.
+            // `Console.BackgroundColor $$).
             var symbol = semanticModel.GetSymbolInfo(expression, cancellationToken).GetAnySymbol();
             return symbol is ITypeSymbol;
         }
@@ -487,7 +492,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             out NameDeclarationInfo result
         )
         {
-            // If we only have a type, this can still end up being a local function (depending on the modifiers).
+            // If we only have a type, this can still end up being a local function (depending on the
+            // modifiers).
             var possibleDeclarationComputer = token.IsKind(SyntaxKind.CommaToken)
                 ? (Func<DeclarationModifiers, ImmutableArray<SymbolKindOrTypeKind>>)(
                     _ => ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local))

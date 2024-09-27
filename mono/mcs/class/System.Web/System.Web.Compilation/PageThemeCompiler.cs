@@ -56,13 +56,13 @@ namespace System.Web.Compilation
             CodeMemberField fld;
             CodeMemberProperty prop;
 
-            /* override the following abstract PageTheme properties:
-               protected abstract string AppRelativeTemplateSourceDirectory { get; }
-               protected abstract IDictionary ControlSkins { get; }
-               protected abstract string[] LinkedStyleSheets { get; }
-            */
+/* override the following abstract PageTheme properties:
+protected abstract string AppRelativeTemplateSourceDirectory { get; }
+protected abstract IDictionary ControlSkins { get; }
+protected abstract string[] LinkedStyleSheets { get; }
+*/
 
-            /* ControlSkins */
+/* ControlSkins */
             fld = new CodeMemberField(typeof(HybridDictionary), "__controlSkins");
             fld.Attributes = MemberAttributes.Private;
             fld.InitExpression = new CodeObjectCreateExpression(typeof(HybridDictionary));
@@ -77,7 +77,7 @@ namespace System.Web.Compilation
             );
             mainClass.Members.Add(prop);
 
-            /* LinkedStyleSheets */
+/* LinkedStyleSheets */
             fld = new CodeMemberField(typeof(string[]), "__linkedStyleSheets");
             fld.Attributes = MemberAttributes.Private;
             fld.InitExpression = CreateLinkedStyleSheets();
@@ -94,7 +94,7 @@ namespace System.Web.Compilation
             );
             mainClass.Members.Add(prop);
 
-            /* AppRelativeTemplateSourceDirectory */
+/* AppRelativeTemplateSourceDirectory */
             prop = new CodeMemberProperty();
             prop.Name = "AppRelativeTemplateSourceDirectory";
             prop.Attributes = MemberAttributes.Family | MemberAttributes.Override;
@@ -204,7 +204,7 @@ namespace System.Web.Compilation
 
                         if (itemsProp != null)
                         {
-                            /* emit a prop.Clear call before populating the collection */;
+/* emit a prop.Clear call before populating the collection */;
                             CodePropertyReferenceExpression prop =
                                 new CodePropertyReferenceExpression(ctrlVar, b.TagName);
                             CodePropertyReferenceExpression items =
@@ -251,7 +251,8 @@ namespace System.Web.Compilation
                     if (skinId == null)
                         skinId = "";
 
-                    // private static object __BuildControl__$id_skinKey = System.Web.UI.PageTheme.CreateSkinKey(typeof($controlType), "$skinID")
+                    // private static object __BuildControl__$id_skinKey =
+                    // System.Web.UI.PageTheme.CreateSkinKey(typeof($controlType), "$skinID")
                     //
                     CodeMemberField fld = new CodeMemberField(
                         typeof(object),
@@ -296,7 +297,8 @@ namespace System.Web.Compilation
                     if (localVars == null)
                         localVars = new CodeStatementCollection();
 
-                    // this.__controlSkins[__BuildControl_$id_skinKey] = new System.Web.UI.ControlSkin(typeof ($controlType), this.__BuildControl__$id)
+                    // this.__controlSkins[__BuildControl_$id_skinKey] = new System.Web.UI.ControlSkin(typeof
+                    // ($controlType), this.__BuildControl__$id)
                     //
                     localVars.Add(
                         new CodeAssignStatement(

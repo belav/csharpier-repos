@@ -53,7 +53,7 @@ namespace System.Reflection.Emit
 
             CreateDynMethod();
 
-            /* Can't cache the delegate since it is different for each target */
+/* Can't cache the delegate since it is different for each target */
             return Delegate.CreateDelegate(delegateType, target, this);
         }
 
@@ -157,7 +157,7 @@ namespace System.Reflection.Emit
                 _refs = new_refs;
             }
             _refs[_nrefs] = reference;
-            /* Reserved by the runtime */
+/* Reserved by the runtime */
             _refs[_nrefs + 1] = null;
             _nrefs += 2;
             return _nrefs - 1;

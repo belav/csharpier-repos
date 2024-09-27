@@ -5,8 +5,10 @@
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Represents a <see cref="CSharpSyntaxVisitor"/> that descends an entire <see cref="CSharpSyntaxNode"/> graph
-    /// visiting each CSharpSyntaxNode and its child SyntaxNodes and <see cref="SyntaxToken"/>s in depth-first order.
+    /// Represents a <see cref="CSharpSyntaxVisitor"/> that descends an entire <see
+    // cref="CSharpSyntaxNode"/> graph
+    /// visiting each CSharpSyntaxNode and its child SyntaxNodes and <see cref="SyntaxToken"/>s in
+    // depth-first order.
     /// </summary>
     public abstract class CSharpSyntaxWalker : CSharpSyntaxVisitor
     {

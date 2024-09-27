@@ -21,7 +21,8 @@ namespace MonoTests.System.Xml
     [TestFixture]
     public class XmlSchemaTests : XmlSchemaAssertion
     {
-        // Whatever this flag is used is buggy tests. Now mono implementation is MS reference source based, so enabled.
+        // Whatever this flag is used is buggy tests. Now mono implementation is MS reference source based,
+        // so enabled.
         static readonly bool StrictMsCompliant = true; // Environment.GetEnvironmentVariable ("MONO_STRICT_MS_COMPLIANT") == "yes";
 
         [Test]
@@ -311,7 +312,8 @@ namespace MonoTests.System.Xml
             xs.Write(xw);
             doc.LoadXml(sw.ToString());
             // commenting out. .NET 2.0 outputs xs:schema instead of schema, that also makes sense.
-            // Assert.AreEqual ("<schema xmlns:hoge=\"urn:hoge\" xmlns=\"http://www.w3.org/2001/XMLSchema\" />", doc.DocumentElement.OuterXml, "#3");
+            // Assert.AreEqual ("<schema xmlns:hoge=\"urn:hoge\" xmlns=\"http://www.w3.org/2001/XMLSchema\" />",
+            // doc.DocumentElement.OuterXml, "#3");
 
             // TargetNamespace + XmlSerializerNamespaces
             xs = new XmlSchema();
@@ -322,7 +324,8 @@ namespace MonoTests.System.Xml
             xs.Write(xw);
             doc.LoadXml(sw.ToString());
             // commenting out. .NET 2.0 outputs xs:schema instead of schema, that also makes sense.
-            // Assert.AreEqual ("<schema xmlns:hoge=\"urn:hoge\" targetNamespace=\"urn:foo\" xmlns=\"http://www.w3.org/2001/XMLSchema\" />", doc.DocumentElement.OuterXml, "#4");
+            // Assert.AreEqual ("<schema xmlns:hoge=\"urn:hoge\" targetNamespace=\"urn:foo\"
+            // xmlns=\"http://www.w3.org/2001/XMLSchema\" />", doc.DocumentElement.OuterXml, "#4");
 
             // Add XmlSchema.Namespace to XmlSerializerNamespaces
             xs = new XmlSchema();
@@ -347,7 +350,8 @@ namespace MonoTests.System.Xml
             xs.Write(xw);
             doc.LoadXml(sw.ToString());
             // commenting out. .NET 2.0 outputs xs:schema instead of schema, that also makes sense.
-            // Assert.AreEqual ("<schema xmlns:hoge=\"urn:hoge\" hoge=\"\" xmlns=\"http://www.w3.org/2001/XMLSchema\" />", doc.DocumentElement.OuterXml, "#6");
+            // Assert.AreEqual ("<schema xmlns:hoge=\"urn:hoge\" hoge=\"\"
+            // xmlns=\"http://www.w3.org/2001/XMLSchema\" />", doc.DocumentElement.OuterXml, "#6");
 
             // Adding xmlns to UnhandledAttributes -> no output
             xs = new XmlSchema();
@@ -394,20 +398,23 @@ namespace MonoTests.System.Xml
             sw = new StringWriter();
             xs.Write(new XmlTextWriter(sw));
             // commenting out. .NET 2.0 outputs xs:schema instead of schema, that also makes sense.
-            // Assert.AreEqual (xmldecl + "<schema xmlns:foo=\"urn:foo\" xmlns=\"http://www.w3.org/2001/XMLSchema\" />", sw.ToString (), "#3");
+            // Assert.AreEqual (xmldecl + "<schema xmlns:foo=\"urn:foo\"
+            // xmlns=\"http://www.w3.org/2001/XMLSchema\" />", sw.ToString (), "#3");
 
             nss.Add("", "urn:foo");
             sw = new StringWriter();
             xs.Write(new XmlTextWriter(sw));
             // commenting out. .NET 2.0 outputs xs:schema instead of q1:schema, that also makes sense.
-            // Assert.AreEqual (xmldecl + "<q1:schema xmlns:foo=\"urn:foo\" xmlns=\"urn:foo\" xmlns:q1=\"http://www.w3.org/2001/XMLSchema\" />", sw.ToString (), "#4");
+            // Assert.AreEqual (xmldecl + "<q1:schema xmlns:foo=\"urn:foo\" xmlns=\"urn:foo\"
+            // xmlns:q1=\"http://www.w3.org/2001/XMLSchema\" />", sw.ToString (), "#4");
 
             nss.Add("q1", "urn:q1");
             sw = new StringWriter();
             xs.Write(new XmlTextWriter(sw));
             //Not sure if testing for exact order of these name spaces is
             // relevent, so using less strict test that passes on MS.NET
-            //Assert.AreEqual (xmldecl + "<q2:schema xmlns:foo=\"urn:foo\" xmlns:q1=\"urn:q1\" xmlns=\"urn:foo\" xmlns:q2=\"http://www.w3.org/2001/XMLSchema\" />", sw.ToString ());
+            //Assert.AreEqual (xmldecl + "<q2:schema xmlns:foo=\"urn:foo\" xmlns:q1=\"urn:q1\" xmlns=\"urn:foo\"
+            // xmlns:q2=\"http://www.w3.org/2001/XMLSchema\" />", sw.ToString ());
             Assert.IsTrue(sw.ToString().IndexOf("xmlns:q1=\"urn:q1\"") != -1, "q1");
         }
 

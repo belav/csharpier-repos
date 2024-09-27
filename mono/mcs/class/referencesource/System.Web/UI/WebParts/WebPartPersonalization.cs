@@ -108,7 +108,8 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        // Returns true if the current user in the current scope on the current page has personalization data
+        // Returns true if the current user in the current scope on the current page has personalization
+        // data
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool HasPersonalizationState
         {

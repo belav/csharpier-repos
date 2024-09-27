@@ -90,7 +90,7 @@ namespace System.Web.Configuration
 
         static void ValidateElement(object o)
         {
-            /* XXX do some sort of element validation here? */
+/* XXX do some sort of element validation here? */
         }
 
         protected internal override ConfigurationElementProperty ElementProperty

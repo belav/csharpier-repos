@@ -81,7 +81,8 @@ Is the file loaded as an assembly (e.g. via Assembly.LoadFile)?
         internal static void PrepareDeleteOnCloseStreamForDisposal(FileStream stream)
         {
             // tomat: Set disposition to "delete" on the stream, so to avoid ForeFront EndPoint
-            // Protection driver scanning the file. Note that after calling this on a file that's open with DeleteOnClose,
+            // Protection driver scanning the file. Note that after calling this on a file that's open with
+            // DeleteOnClose,
             // the file can't be opened again, not even by the same process.
             uint trueValue = 1;
             SetFileInformationByHandle(

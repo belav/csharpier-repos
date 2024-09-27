@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
         /// <summary>
         /// If we're adding <see cref="PortableExecutableReferenceFilePathToAdd"/> then this
-        /// is the id for the <see cref="Project"/> we can find that <see cref="PortableExecutableReference"/>
+        /// is the id for the <see cref="Project"/> we can find that <see
+        // cref="PortableExecutableReference"/>
         /// referenced from.
         /// </summary>
         [DataMember(Order = 6)]

@@ -4,10 +4,12 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures the table name based on the <see cref="DbSet{TEntity}" /> property name.
+///     A convention that configures the table name based on the <see cref="DbSet{TEntity}" />
+// property name.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class TableNameFromDbSetConvention
     : IEntityTypeAddedConvention,
@@ -21,7 +23,8 @@ public class TableNameFromDbSetConvention
     ///     Creates a new instance of <see cref="TableNameFromDbSetConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public TableNameFromDbSetConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

@@ -8,7 +8,8 @@ namespace Microsoft.NET.HostModel.AppHost
 {
     internal static class ElfUtils
     {
-        // First four bytes of valid ELF, as defined in https://github.com/torvalds/linux/blob/aae703b/include/uapi/linux/elf.h
+        // First four bytes of valid ELF, as defined in
+        // https://github.com/torvalds/linux/blob/aae703b/include/uapi/linux/elf.h
         //    0x7f (DEL), 'E', 'L', 'F'
         private static ReadOnlySpan<byte> ElfMagic => "\u007f"u8 + "ELF"u8;
 

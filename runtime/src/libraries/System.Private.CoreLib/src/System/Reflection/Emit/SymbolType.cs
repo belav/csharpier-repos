@@ -15,12 +15,14 @@ namespace System.Reflection.Emit
         IsByRef = 3,
     }
 
-    // This is a kind of Type object that will represent the compound expression of a parameter type or field type.
+    // This is a kind of Type object that will represent the compound expression of a parameter type or
+    // field type.
     internal sealed partial class SymbolType : TypeInfo
     {
         #region Data Members
         #region Fields need to be kept in order
-        // For Mono runtime its important to keep this declaration order in sync with MonoReflectionSymbolType struct in object-internals.h
+        // For Mono runtime its important to keep this declaration order in sync with
+        // MonoReflectionSymbolType struct in object-internals.h
         internal Type _baseType = null!;
         internal TypeKind _typeKind;
         internal int _rank; // count of dimension
@@ -51,7 +53,8 @@ namespace System.Reflection.Emit
             //          the first dimension)
             // Example: []* - pointer to a one dimensional array
             // Example: *[] - one dimensional array. The element type is a pointer to the baseType
-            // Example: []& - ByRef of a single dimensional array. Only one & is allowed and it must appear the last!
+            // Example: []& - ByRef of a single dimensional array. Only one & is allowed and it must appear the
+            // last!
             // Example: [?] - Array with unknown bound
 
             SymbolType symbolType;
@@ -91,7 +94,8 @@ namespace System.Reflection.Emit
 
                 // Example: [2..4]  - one dimension array with lower bound 2 and size of 3
                 // Example: [3, 5, 6] - three dimension array with lower bound 3, 5, 6
-                // Example: [-3, ] [] - one dimensional array of two dimensional array (with lower bound -3 sepcified)
+                // Example: [-3, ] [] - one dimensional array of two dimensional array (with lower bound -3
+                // sepcified)
 
                 while (format[curIndex] != ']')
                 {

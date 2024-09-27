@@ -21,13 +21,15 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Only accessible where both protected and internal members are accessible
-        /// (more restrictive than <see cref="Protected"/>, <see cref="Internal"/> and <see cref="ProtectedOrInternal"/>).
+        /// (more restrictive than <see cref="Protected"/>, <see cref="Internal"/> and <see
+        // cref="ProtectedOrInternal"/>).
         /// </summary>
         ProtectedAndInternal = 2,
 
         /// <summary>
         /// Only accessible where both protected and friend members are accessible
-        /// (more restrictive than <see cref="Protected"/>, <see cref="Friend"/> and <see cref="ProtectedOrFriend"/>).
+        /// (more restrictive than <see cref="Protected"/>, <see cref="Friend"/> and <see
+        // cref="ProtectedOrFriend"/>).
         /// </summary>
         ProtectedAndFriend = ProtectedAndInternal,
 
@@ -38,13 +40,15 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Accessible wherever either protected or internal members are accessible
-        /// (less restrictive than <see cref="Protected"/>, <see cref="Internal"/> and <see cref="ProtectedAndInternal"/>).
+        /// (less restrictive than <see cref="Protected"/>, <see cref="Internal"/> and <see
+        // cref="ProtectedAndInternal"/>).
         /// </summary>
         ProtectedOrInternal = 5,
 
         /// <summary>
         /// Accessible wherever either protected or friend members are accessible
-        /// (less restrictive than <see cref="Protected"/>, <see cref="Friend"/> and <see cref="ProtectedAndFriend"/>).
+        /// (less restrictive than <see cref="Protected"/>, <see cref="Friend"/> and <see
+        // cref="ProtectedAndFriend"/>).
         /// </summary>
         ProtectedOrFriend = ProtectedOrInternal,
 

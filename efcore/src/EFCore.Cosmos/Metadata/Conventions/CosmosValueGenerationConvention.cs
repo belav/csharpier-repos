@@ -6,12 +6,15 @@ using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures store value generation as <see cref="ValueGenerated.OnAdd" /> on properties that are
-///     part of the primary key and not part of any foreign keys or were configured to have a database default value.
+///     A convention that configures store value generation as <see cref="ValueGenerated.OnAdd" />
+// on properties that are
+///     part of the primary key and not part of any foreign keys or were configured to have a
+// database default value.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
-///     <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for
+// more information and examples.
 /// </remarks>
 public class CosmosValueGenerationConvention
     : ValueGenerationConvention,

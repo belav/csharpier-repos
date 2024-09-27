@@ -60,7 +60,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationResult">The value describing the validation error</param>
         /// <param name="validatingAttribute">The attribute that triggered this exception</param>
-        /// <param name="value">The value that caused the validating attribute to trigger the exception</param>
+        /// <param name="value">The value that caused the validating attribute to trigger the
+        // exception</param>
         public ValidationException(
             ValidationResult validationResult,
             ValidationAttribute validatingAttribute,
@@ -76,7 +77,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="errorMessage">The localized error message</param>
         /// <param name="validatingAttribute">The attribute that triggered this exception</param>
-        /// <param name="value">The value that caused the validating attribute to trigger the exception</param>
+        /// <param name="value">The value that caused the validating attribute to trigger the
+        // exception</param>
         public ValidationException(
             string errorMessage,
             ValidationAttribute validatingAttribute,
@@ -93,14 +95,16 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Default constructor.
         /// </summary>
-        /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
+        /// <remarks>The long form of this constructor is preferred because it gives better error
+        // reporting.</remarks>
         public ValidationException()
             : base() { }
 
         /// <summary>
         /// Constructor that accepts only a localized message
         /// </summary>
-        /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
+        /// <remarks>The long form of this constructor is preferred because it gives better error
+        // reporting.</remarks>
         /// <param name="message">The localized message</param>
         public ValidationException(string message)
             : base(message) { }
@@ -108,7 +112,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Constructor that accepts a localized message and an inner exception
         /// </summary>
-        /// <remarks>The long form of this constructor is preferred because it gives better error reporting</remarks>
+        /// <remarks>The long form of this constructor is preferred because it gives better error
+        // reporting</remarks>
         /// <param name="message">The localized error message</param>
         /// <param name="innerException">inner exception</param>
         public ValidationException(string message, Exception innerException)

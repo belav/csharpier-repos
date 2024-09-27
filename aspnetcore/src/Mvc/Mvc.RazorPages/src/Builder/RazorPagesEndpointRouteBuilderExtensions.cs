@@ -21,7 +21,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// Adds endpoints for Razor Pages to the <see cref="IEndpointRouteBuilder"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
-    /// <returns>An <see cref="PageActionEndpointConventionBuilder"/> for endpoints associated with Razor Pages.</returns>
+    /// <returns>An <see cref="PageActionEndpointConventionBuilder"/> for endpoints associated with
+    // Razor Pages.</returns>
     public static PageActionEndpointConventionBuilder MapRazorPages(
         this IEndpointRouteBuilder endpoints
     )
@@ -34,26 +35,34 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a page endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // page endpoint that
     /// matches <paramref name="page"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="page">The page name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string)"/> is intended to handle cases where URL path of
-    /// the request does not contain a file name, and no other endpoint has matched. This is convenient for routing
-    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string)"/> is intended to handle cases where
+    // URL path of
+    /// the request does not contain a file name, and no other endpoint has matched. This is convenient
+    // for routing
+    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent
+    // files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string)"/> registers an endpoint using the pattern
+    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string)"/> registers an endpoint using the
+    // pattern
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the <c>path</c> route value
+    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string)"/> does not re-execute routing, and
+    // will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the
+    // <c>path</c> route value
     /// will be available.
     /// </para>
     /// </remarks>
@@ -87,8 +96,10 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a page endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // page endpoint that
     /// matches <paramref name="page"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
@@ -96,21 +107,27 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// <param name="page">The action name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string, string)"/> is intended to handle cases where URL path of
-    /// the request does not contain a file name, and no other endpoint has matched. This is convenient for routing
-    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string, string)"/> is intended to handle
+    // cases where URL path of
+    /// the request does not contain a file name, and no other endpoint has matched. This is convenient
+    // for routing
+    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent
+    // files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
     /// The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c> route contraint
+    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c>
+    // route contraint
     /// to exclude requests for static files.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the route values provided by matching
+    /// <see cref="MapFallbackToPage(IEndpointRouteBuilder, string, string)"/> does not re-execute
+    // routing, and will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the route
+    // values provided by matching
     /// <paramref name="pattern"/> will be available.
     /// </para>
     /// </remarks>
@@ -146,8 +163,10 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a page endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // page endpoint that
     /// matches <paramref name="page"/>, and <paramref name="area"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
@@ -155,18 +174,24 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// <param name="area">The area name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string)"/> is intended to handle cases where URL path of
-    /// the request does not contain a file name, and no other endpoint has matched. This is convenient for routing
-    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string)"/> is intended to handle
+    // cases where URL path of
+    /// the request does not contain a file name, and no other endpoint has matched. This is convenient
+    // for routing
+    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent
+    // files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string)"/> registers an endpoint using the pattern
+    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string)"/> registers an endpoint
+    // using the pattern
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the <c>path</c> route value
+    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string)"/> does not re-execute
+    // routing, and will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the
+    // <c>path</c> route value
     /// will be available.
     /// </para>
     /// </remarks>
@@ -201,8 +226,10 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
-    /// requests for non-file-names with the lowest possible priority. The request will be routed to a page endpoint that
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will match
+    /// requests for non-file-names with the lowest possible priority. The request will be routed to a
+    // page endpoint that
     /// matches <paramref name="page"/>, and <paramref name="area"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
@@ -211,21 +238,27 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     /// <param name="area">The area name.</param>
     /// <remarks>
     /// <para>
-    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string, string)"/> is intended to handle cases where URL path of
-    /// the request does not contain a file name, and no other endpoint has matched. This is convenient for routing
-    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent files to
+    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string, string)"/> is intended
+    // to handle cases where URL path of
+    /// the request does not contain a file name, and no other endpoint has matched. This is convenient
+    // for routing
+    /// requests for dynamic content to a SPA framework, while also allowing requests for non-existent
+    // files to
     /// result in an HTTP 404.
     /// </para>
     /// <para>
     /// The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// <para>
-    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c> route contraint
+    /// This overload will use the provided <paramref name="pattern"/> verbatim. Use the <c>:nonfile</c>
+    // route contraint
     /// to exclude requests for static files.
     /// </para>
     /// <para>
-    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string, string)"/> does not re-execute routing, and will
-    /// not generate route values based on routes defined elsewhere. When using this overload, the route values provided by matching
+    /// <see cref="MapFallbackToAreaPage(IEndpointRouteBuilder, string, string, string)"/> does not
+    // re-execute routing, and will
+    /// not generate route values based on routes defined elsewhere. When using this overload, the route
+    // values provided by matching
     /// <paramref name="pattern"/> will be available.
     /// </para>
     /// </remarks>
@@ -262,20 +295,25 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will
     /// attempt to select a page using the route values produced by <typeparamref name="TTransformer"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
-    /// <typeparam name="TTransformer">The type of a <see cref="DynamicRouteValueTransformer"/>.</typeparam>
+    /// <typeparam name="TTransformer">The type of a <see
+    // cref="DynamicRouteValueTransformer"/>.</typeparam>
     /// <remarks>
     /// <para>
-    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see cref="DynamicRouteValueTransformer"/>
+    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see
+    // cref="DynamicRouteValueTransformer"/>
     /// that combine to dynamically select a page using custom logic.
     /// </para>
     /// <para>
-    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency injection container.
-    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
+    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency
+    // injection container.
+    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in
+    // <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
     public static void MapDynamicPageRoute<TTransformer>(
@@ -288,21 +326,27 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will
     /// attempt to select a page using the route values produced by <typeparamref name="TTransformer"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
-    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" /> instance.</param>
-    /// <typeparam name="TTransformer">The type of a <see cref="DynamicRouteValueTransformer"/>.</typeparam>
+    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" />
+    // instance.</param>
+    /// <typeparam name="TTransformer">The type of a <see
+    // cref="DynamicRouteValueTransformer"/>.</typeparam>
     /// <remarks>
     /// <para>
-    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see cref="DynamicRouteValueTransformer"/>
+    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see
+    // cref="DynamicRouteValueTransformer"/>
     /// that combine to dynamically select a page using custom logic.
     /// </para>
     /// <para>
-    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency injection container.
-    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
+    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency
+    // injection container.
+    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in
+    // <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
     public static void MapDynamicPageRoute<TTransformer>(
@@ -325,22 +369,28 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will
+    /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that
+    // will
     /// attempt to select a page using the route values produced by <typeparamref name="TTransformer"/>.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The URL pattern of the route.</param>
-    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" /> instance.</param>
+    /// <param name="state">A state object to provide to the <typeparamref name="TTransformer" />
+    // instance.</param>
     /// <param name="order">The matching order for the dynamic route.</param>
-    /// <typeparam name="TTransformer">The type of a <see cref="DynamicRouteValueTransformer"/>.</typeparam>
+    /// <typeparam name="TTransformer">The type of a <see
+    // cref="DynamicRouteValueTransformer"/>.</typeparam>
     /// <remarks>
     /// <para>
-    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see cref="DynamicRouteValueTransformer"/>
+    /// This method allows the registration of a <see cref="RouteEndpoint"/> and <see
+    // cref="DynamicRouteValueTransformer"/>
     /// that combine to dynamically select a page using custom logic.
     /// </para>
     /// <para>
-    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency injection container.
-    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
+    /// The instance of <typeparamref name="TTransformer"/> will be retrieved from the dependency
+    // injection container.
+    /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in
+    // <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
     public static void MapDynamicPageRoute<TTransformer>(

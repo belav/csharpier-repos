@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Remote
     internal static class CancellationTokenSourceExtensions
     {
         /// <summary>
-        /// Automatically cancels the <paramref name="cancellationTokenSource"/> if the input <paramref name="task"/>
+        /// Automatically cancels the <paramref name="cancellationTokenSource"/> if the input <paramref
+        // name="task"/>
         /// completes in a <see cref="TaskStatus.Canceled"/> or <see cref="TaskStatus.Faulted"/> state.
         /// </summary>
         /// <param name="cancellationTokenSource">The cancellation token source.</param>

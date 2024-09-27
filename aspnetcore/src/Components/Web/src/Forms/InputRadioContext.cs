@@ -20,7 +20,8 @@ internal sealed class InputRadioContext
     /// Instantiates a new <see cref="InputRadioContext" />.
     /// </summary>
     /// <param name="parentContext">The parent context, if any.</param>
-    /// <param name="changeEventCallback">The event callback to be invoked when the selected value is changed.</param>
+    /// <param name="changeEventCallback">The event callback to be invoked when the selected value is
+    // changed.</param>
     public InputRadioContext(
         InputRadioContext? parentContext,
         EventCallback<ChangeEventArgs> changeEventCallback
@@ -31,7 +32,8 @@ internal sealed class InputRadioContext
     }
 
     /// <summary>
-    /// Finds an <see cref="InputRadioContext"/> in the context's ancestors with the matching <paramref name="groupName"/>.
+    /// Finds an <see cref="InputRadioContext"/> in the context's ancestors with the matching <paramref
+    // name="groupName"/>.
     /// </summary>
     /// <param name="groupName">The group name of the ancestor <see cref="InputRadioContext"/>.</param>
     /// <returns>The <see cref="InputRadioContext"/>, or <c>null</c> if none was found.</returns>

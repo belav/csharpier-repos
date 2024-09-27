@@ -75,7 +75,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 }
             }
 
-            // On Windows, we want to avoid using "cmd" if possible (it mangles the colors, and a bunch of other things)
+            // On Windows, we want to avoid using "cmd" if possible (it mangles the colors, and a bunch of other
+            // things)
             // So, do a quick path search to see if we can just directly invoke it
             var useCmd = ShouldUseCmd(executable);
 
@@ -219,7 +220,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         /// <summary>
         /// Wait for the command to exit and dispose of the underlying process.
         /// </summary>
-        /// <param name="expectedToFail">Whether or not the command is expected to fail (non-zero exit code)</param>
+        /// <param name="expectedToFail">Whether or not the command is expected to fail (non-zero exit
+        // code)</param>
         /// <param name="timeoutMilliseconds">Time in milliseconds to wait for the command to exit</param>
         /// <returns>Result of the command</returns>
         public CommandResult WaitForExit(
@@ -254,7 +256,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         /// <summary>
         /// Execute the command and wait for it to exit.
         /// </summary>
-        /// <param name="expectedToFail">Whether or not the command is expected to fail (non-zero exit code)</param>
+        /// <param name="expectedToFail">Whether or not the command is expected to fail (non-zero exit
+        // code)</param>
         /// <returns>Result of the command</returns>
         public CommandResult Execute(bool expectedToFail)
         {

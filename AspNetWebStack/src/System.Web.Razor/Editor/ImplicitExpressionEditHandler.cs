@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -75,9 +76,12 @@ namespace System.Web.Razor.Editor
                 return PartialParseResult.Rejected;
             }
 
-            // In some editors intellisense insertions are handled as "dotless commits".  If an intellisense selection is confirmed
-            // via something like '.' a dotless commit will append a '.' and then insert the remaining intellisense selection prior
-            // to the appended '.'.  This 'if' statement attempts to accept the intermediate steps of a dotless commit via
+            // In some editors intellisense insertions are handled as "dotless commits".  If an intellisense
+            // selection is confirmed
+            // via something like '.' a dotless commit will append a '.' and then insert the remaining
+            // intellisense selection prior
+            // to the appended '.'.  This 'if' statement attempts to accept the intermediate steps of a dotless
+            // commit via
             // intellisense.  It will accept two cases:
             //     1. '@foo.' -> '@foobaz.'.
             //     2. '@foobaz..' -> '@foobaz.bar.'. Includes Sub-cases '@foobaz()..' -> '@foobaz().bar.' etc.
@@ -139,7 +143,8 @@ namespace System.Web.Razor.Editor
                 || IsSecondaryDotlessCommitInsertion(target, change);
         }
 
-        // Completing 'DateTime' in intellisense with a '.' could result in: '@DateT' -> '@DateT.' -> '@DateTime.' which is accepted.
+        // Completing 'DateTime' in intellisense with a '.' could result in: '@DateT' -> '@DateT.' ->
+        // '@DateTime.' which is accepted.
         private static bool IsNewDotlessCommitInsertion(Span target, TextChange change)
         {
             return !IsAtEndOfSpan(target, change)
@@ -153,9 +158,12 @@ namespace System.Web.Razor.Editor
                 );
         }
 
-        // Once a dotless commit has been performed you then have something like '@DateTime.'.  This scenario is used to detect the
-        // situation when you try to perform another dotless commit resulting in a textchange with '..'.  Completing 'DateTime.Now'
-        // in intellisense with a '.' could result in: '@DateTime.' -> '@DateTime..' -> '@DateTime.Now.' which is accepted.
+        // Once a dotless commit has been performed you then have something like '@DateTime.'.  This
+        // scenario is used to detect the
+        // situation when you try to perform another dotless commit resulting in a textchange with '..'.
+        // Completing 'DateTime.Now'
+        // in intellisense with a '.' could result in: '@DateTime.' -> '@DateTime..' -> '@DateTime.Now.'
+        // which is accepted.
         private static bool IsSecondaryDotlessCommitInsertion(Span target, TextChange change)
         {
             // Do not need to worry about other punctuation, just looking for double '.' (after change)
@@ -193,8 +201,10 @@ namespace System.Web.Razor.Editor
                         && symbol.Type == CSharpSymbolType.Identifier
                     )
                     {
-                        // The symbol we're changing happens to be an identifier. Need to check if its transformed state is also one.
-                        // We do this transformation logic to capture the case that the new text change happens to not be an identifier;
+                        // The symbol we're changing happens to be an identifier. Need to check if its transformed state is
+                        // also one.
+                        // We do this transformation logic to capture the case that the new text change happens to not be an
+                        // identifier;
                         // i.e. "5". Alone, it's numeric, within an identifier it's classified as identifier.
                         string transformedContent = change.ApplyChange(
                             symbol.Content,
@@ -204,7 +214,8 @@ namespace System.Web.Razor.Editor
 
                         if (newSymbols.Count() != 1)
                         {
-                            // The transformed content resulted in more than one symbol; we can only replace a single identifier with
+                            // The transformed content resulted in more than one symbol; we can only replace a single identifier
+                            // with
                             // another single identifier.
                             break;
                         }
@@ -247,7 +258,8 @@ namespace System.Web.Razor.Editor
                 );
         }
 
-        // Accepts character insertions at the end of spans.  AKA: '@foo' -> '@fooo' or '@foo' -> '@foo   ' etc.
+        // Accepts character insertions at the end of spans.  AKA: '@foo' -> '@fooo' or '@foo' -> '@foo   '
+        // etc.
         private static bool IsAcceptableEndInsertion(Span target, TextChange change)
         {
             Debug.Assert(change.IsInsert);
@@ -293,7 +305,8 @@ namespace System.Web.Razor.Editor
         private PartialParseResult HandleReplacement(Span target, TextChange change)
         {
             // Special Case for IntelliSense commits.
-            //  When IntelliSense commits, we get two changes (for example user typed "Date", then committed "DateTime" by pressing ".")
+            //  When IntelliSense commits, we get two changes (for example user typed "Date", then committed
+            // "DateTime" by pressing ".")
             //  1. Insert "." at the end of this span
             //  2. Replace the "Date." at the end of the span with "DateTime."
             //  We need partial parsing to accept case #2.

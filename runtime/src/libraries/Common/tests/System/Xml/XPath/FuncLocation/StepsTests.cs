@@ -73,7 +73,8 @@ namespace XPathTests.FunctionalTests.Location
         }
 
         /// <summary>
-        /// Invalid Location Step - Multiple axis. Location step can have only one axis. Test expression uses multiple axis. Expected error.
+        /// Invalid Location Step - Multiple axis. Location step can have only one axis. Test expression
+        // uses multiple axis. Expected error.
         /// /bookstore/child::ancestor::book
         /// </summary>
         [Theory]
@@ -93,7 +94,8 @@ namespace XPathTests.FunctionalTests.Location
         }
 
         /// <summary>
-        /// Invalid Location Step - Multiple node tests using | - Multiple node-tests are not allowed. Test uses | to union two node tests. Error expected.
+        /// Invalid Location Step - Multiple node tests using | - Multiple node-tests are not allowed. Test
+        // uses | to union two node tests. Error expected.
         /// /bookstore/child::(book | magazine)
         /// </summary>
         [Theory]
@@ -113,7 +115,8 @@ namespace XPathTests.FunctionalTests.Location
         }
 
         /// <summary>
-        /// Invalid Location Step - Multiple node tests using | - Multiple node-tests are not allowed. Test uses 'and' to combine two node tests. Error expected.
+        /// Invalid Location Step - Multiple node tests using | - Multiple node-tests are not allowed. Test
+        // uses 'and' to combine two node tests. Error expected.
         /// /bookstore/book and magazine
         /// </summary>
         [Theory]
@@ -133,7 +136,8 @@ namespace XPathTests.FunctionalTests.Location
         }
 
         /// <summary>
-        /// Invalid Location Step - Multiple node tests using 'or' - Multiple node-tests are not allowed. Test uses 'or' to combine two node tests. Error expected.
+        /// Invalid Location Step - Multiple node tests using 'or' - Multiple node-tests are not allowed.
+        // Test uses 'or' to combine two node tests. Error expected.
         /// /bookstore/book or magazine
         /// </summary>
         [Theory]
@@ -426,7 +430,8 @@ namespace XPathTests.FunctionalTests.Location
         }
 
         /// <summary>
-        /// Check order of predicates - Test to check if the predicates are applied in the correct order. Should select the 3rd book node in the XML doc.
+        /// Check order of predicates - Test to check if the predicates are applied in the correct order.
+        // Should select the 3rd book node in the XML doc.
         /// /bookstore/book [position() = 1 or position() = 3 or position() = 6][position() = 2]
         /// </summary>
         [Theory]
@@ -513,7 +518,8 @@ namespace XPathTests.FunctionalTests.Location
         }
 
         /// <summary>
-        /// Invalid Expression '..' with node test. Node test is not allowed with an abbreviated axis specifier
+        /// Invalid Expression '..' with node test. Node test is not allowed with an abbreviated axis
+        // specifier
         /// /bookstore/*/title/.. book
         /// </summary>
         [Theory]
@@ -533,7 +539,8 @@ namespace XPathTests.FunctionalTests.Location
         }
 
         /// <summary>
-        /// Invalid Expression '.' with node test. Predicates are not allowed with abbreviated axis specifiers.
+        /// Invalid Expression '.' with node test. Predicates are not allowed with abbreviated axis
+        // specifiers.
         /// /bookstore/*/title/.[name()='book']
         /// </summary>
         [Theory]

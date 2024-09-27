@@ -65,13 +65,15 @@ namespace System.Globalization
         // WARNING
         // WARNING: All member fields declared here must also be in ndp/clr/src/vm/object.h
         // WARNING: They aren't really private because object.h can access them, but other C# stuff cannot
-        // WARNING: The type loader will rearrange class member offsets so the mscorwks!CultureInfoBaseObject
+        // WARNING: The type loader will rearrange class member offsets so the
+        // mscorwks!CultureInfoBaseObject
         // WARNING: must be manually structured to match the true loaded class layout
         // WARNING
         internal bool m_isReadOnly;
         internal CompareInfo compareInfo;
         internal TextInfo textInfo;
-        // Not serialized for now since we only build it privately for use in the CARIB (so rebuilding is OK)
+        // Not serialized for now since we only build it privately for use in the CARIB (so rebuilding is
+        // OK)
 #if !FEATURE_CORECLR
         [NonSerialized]
         internal RegionInfo regionInfo;
@@ -90,8 +92,10 @@ namespace System.Globalization
 
         //
         // The CultureData instance that we are going to read data from.
-        // For supported culture, this will be the CultureData instance that read data from mscorlib assembly.
-        // For customized culture, this will be the CultureData instance that read data from user customized culture binary file.
+        // For supported culture, this will be the CultureData instance that read data from mscorlib
+        // assembly.
+        // For customized culture, this will be the CultureData instance that read data from user customized
+        // culture binary file.
         //
         [NonSerialized]
         internal CultureData m_cultureData;
@@ -164,7 +168,8 @@ namespace System.Globalization
         private static volatile CultureInfo s_DefaultThreadCurrentUICulture;
         private static volatile CultureInfo s_DefaultThreadCurrentCulture;
 
-        //This is a cache of all previously created cultures.  Valid keys are LCIDs or the name.  We use two hashtables to track them,
+        //This is a cache of all previously created cultures.  Valid keys are LCIDs or the name.  We use two
+        // hashtables to track them,
         // depending on how they are called.
         private static volatile Hashtable s_LcidCachedCultures;
         private static volatile Hashtable s_NameCachedCultures;
@@ -242,7 +247,8 @@ namespace System.Globalization
         {
             String strDefault = GetUserDefaultUILanguage();
 
-            // In most of cases, UserDefaultCulture == UserDefaultUICulture, so we should use the same instance if possible.
+            // In most of cases, UserDefaultCulture == UserDefaultUICulture, so we should use the same instance
+            // if possible.
             if (strDefault == UserDefaultCulture.Name)
             {
                 return (UserDefaultCulture);
@@ -1130,7 +1136,8 @@ namespace System.Globalization
             {
                 int keyId = this.m_cultureData.IINPUTLANGUAGEHANDLE;
 
-                // Not a customized culture, return the default Keyboard layout ID, which is the same as the language ID.
+                // Not a customized culture, return the default Keyboard layout ID, which is the same as the
+                // language ID.
                 return (keyId);
             }
         }
@@ -1609,14 +1616,16 @@ namespace System.Globalization
             CultureData.ClearCachedData();
         }
 
-        /*=================================GetCalendarInstance==========================
-        **Action: Map a Win32 CALID to an instance of supported calendar.
-        **Returns: An instance of calendar.
-        **Arguments: calType    The Win32 CALID
-        **Exceptions:
-        **      Shouldn't throw exception since the calType value is from our data table or from Win32 registry.
-        **      If we are in trouble (like getting a weird value from Win32 registry), just return the GregorianCalendar.
-        ============================================================================*/
+/*=================================GetCalendarInstance==========================
+**Action: Map a Win32 CALID to an instance of supported calendar.
+**Returns: An instance of calendar.
+**Arguments: calType    The Win32 CALID
+**Exceptions:
+**      Shouldn't throw exception since the calType value is from our data table or from Win32
+registry.
+**      If we are in trouble (like getting a weird value from Win32 registry), just return the
+GregorianCalendar.
+============================================================================*/
         internal static Calendar GetCalendarInstance(int calType)
         {
             if (calType == Calendar.CAL_GREGORIAN)
@@ -1668,14 +1677,14 @@ namespace System.Globalization
             return (new GregorianCalendar());
         }
 
-        /*=================================Calendar==========================
-        **Action: Return/set the default calendar used by this culture.
-        ** This value can be overridden by regional option if this is a current culture.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        **  ArgumentNull_Obj if the set value is null.
-        ============================================================================*/
+/*=================================Calendar==========================
+**Action: Return/set the default calendar used by this culture.
+** This value can be overridden by regional option if this is a current culture.
+**Returns:
+**Arguments:
+**Exceptions:
+**  ArgumentNull_Obj if the set value is null.
+============================================================================*/
 
 
         public virtual Calendar Calendar
@@ -1701,12 +1710,12 @@ namespace System.Globalization
             }
         }
 
-        /*=================================OptionCalendars==========================
-        **Action: Return an array of the optional calendar for this culture.
-        **Returns: an array of Calendar.
-        **Arguments:
-        **Exceptions:
-        ============================================================================*/
+/*=================================OptionCalendars==========================
+**Action: Return an array of the optional calendar for this culture.
+**Returns: an array of Calendar.
+**Arguments:
+**Exceptions:
+============================================================================*/
 
 
         public virtual Calendar[] OptionalCalendars
@@ -1758,7 +1767,8 @@ namespace System.Globalization
             CultureInfo ci = (CultureInfo)MemberwiseClone();
             ci.m_isReadOnly = false;
 
-            //If this is exactly our type, we can make certain optimizations so that we don't allocate NumberFormatInfo or DTFI unless
+            //If this is exactly our type, we can make certain optimizations so that we don't allocate
+            // NumberFormatInfo or DTFI unless
             //they've already been allocated.  If this is a derived type, we'll take a more generic codepath.
             if (!m_isInherited)
             {
@@ -1807,7 +1817,8 @@ namespace System.Globalization
 
             if (!ci.IsNeutralCulture)
             {
-                //If this is exactly our type, we can make certain optimizations so that we don't allocate NumberFormatInfo or DTFI unless
+                //If this is exactly our type, we can make certain optimizations so that we don't allocate
+                // NumberFormatInfo or DTFI unless
                 //they've already been allocated.  If this is a derived type, we'll take a more generic codepath.
                 if (!ci.m_isInherited)
                 {
@@ -2170,7 +2181,8 @@ namespace System.Globalization
         //  Helper Methods.
         //
 
-        // Get Locale Info Ex calls.  So we don't have to muck with the different int/string return types we declared two of these:
+        // Get Locale Info Ex calls.  So we don't have to muck with the different int/string return types we
+        // declared two of these:
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

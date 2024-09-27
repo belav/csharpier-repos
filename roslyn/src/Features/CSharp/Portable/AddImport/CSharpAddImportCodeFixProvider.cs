@@ -123,28 +123,35 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         public const string CS0281 = nameof(CS0281);
 
         /// <summary>
-        /// 'X' does not contain a definition for 'Y' and no extension method 'Y' accepting a first argument of type 'X' could be found (are you missing a using directive for 'System'?)
+        /// 'X' does not contain a definition for 'Y' and no extension method 'Y' accepting a first argument
+        // of type 'X' could be found (are you missing a using directive for 'System'?)
         /// Specialized for WinRT
         /// </summary>
         public const string CS4036 = nameof(CS4036);
 
         /// <summary>
-        /// foreach statement cannot operate on variables of type 'X' because 'X' does not contain a public instance or extension definition for 'GetEnumerator'
+        /// foreach statement cannot operate on variables of type 'X' because 'X' does not contain a public
+        // instance or extension definition for 'GetEnumerator'
         /// </summary>
         public const string CS1579 = nameof(CS1579);
 
         /// <summary>
-        /// foreach statement cannot operate on variables of type 'X' because 'X' does not contain a public instance or extension definition for 'GetEnumerator'. Did you mean 'await foreach' rather than 'foreach'?
+        /// foreach statement cannot operate on variables of type 'X' because 'X' does not contain a public
+        // instance or extension definition for 'GetEnumerator'. Did you mean 'await foreach' rather than
+        // 'foreach'?
         /// </summary>
         public const string CS8414 = nameof(CS8414);
 
         /// <summary>
-        /// Asynchronous foreach statement cannot operate on variables of type 'X' because 'X' does not contain a suitable public instance or extension definition for 'GetAsyncEnumerator'
+        /// Asynchronous foreach statement cannot operate on variables of type 'X' because 'X' does not
+        // contain a suitable public instance or extension definition for 'GetAsyncEnumerator'
         /// </summary>
         public const string CS8411 = nameof(CS8411);
 
         /// <summary>
-        /// Asynchronous foreach statement cannot operate on variables of type 'X' because 'X' does not contain a suitable public instance or extension definition for 'GetAsyncEnumerator'. Did you mean 'foreach' rather than 'await foreach'?
+        /// Asynchronous foreach statement cannot operate on variables of type 'X' because 'X' does not
+        // contain a suitable public instance or extension definition for 'GetAsyncEnumerator'. Did you mean
+        // 'foreach' rather than 'await foreach'?
         /// </summary>
         public const string CS8415 = nameof(CS8415);
 

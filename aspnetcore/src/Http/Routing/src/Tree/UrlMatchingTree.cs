@@ -23,7 +23,8 @@ internal class UrlMatchingTree
     /// <summary>
     /// Initializes a new instance of <see cref="UrlMatchingTree"/>.
     /// </summary>
-    /// <param name="order">The order associated with routes in this <see cref="UrlMatchingTree"/>.</param>
+    /// <param name="order">The order associated with routes in this <see
+    // cref="UrlMatchingTree"/>.</param>
     public UrlMatchingTree(int order)
     {
         Order = order;
@@ -66,8 +67,10 @@ internal class UrlMatchingTree
         //
         // When the tree router tries to match a route, it iterates the list of url matching trees
         // in ascending order. For each tree it traverses each node starting from the root in the
-        // following order: Literals, constrained parameters, parameters, constrained catch all routes, catch alls.
-        // When it gets to a node of the same length as the route its trying to match, it simply looks at the list of
+        // following order: Literals, constrained parameters, parameters, constrained catch all routes,
+        // catch alls.
+        // When it gets to a node of the same length as the route its trying to match, it simply looks at
+        // the list of
         // candidates (which is in precence order) and tries to match the url against it.
         //
 

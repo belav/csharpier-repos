@@ -1727,7 +1727,8 @@ namespace System.Text.Json.Tests
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
                 for (int i = 0; i < 10; i++)
                 {
-                    // start object, property, start object, property, string value, property, start object, property, start array
+                    // start object, property, start object, property, string value, property, start object, property,
+                    // start array
                     Assert.True(json.Read());
                 }
                 Assert.Equal(JsonTokenType.StartArray, json.TokenType);
@@ -1742,7 +1743,8 @@ namespace System.Text.Json.Tests
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
                 for (int i = 0; i < 11; i++)
                 {
-                    // start object, property, start object, property, string value, property, start object, property, start array, number value
+                    // start object, property, start object, property, string value, property, start object, property,
+                    // start array, number value
                     Assert.True(json.Read());
                 }
                 Assert.Equal(JsonTokenType.Number, json.TokenType);

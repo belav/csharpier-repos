@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal sealed class AddressBinder
 {
-    // note this doesn't copy the ListenOptions[], only call this with an array that isn't mutated elsewhere
+    // note this doesn't copy the ListenOptions[], only call this with an array that isn't mutated
+    // elsewhere
     public static Task BindAsync(
         ListenOptions[] listenOptions,
         AddressBindContext context,
@@ -68,7 +69,8 @@ internal sealed class AddressBinder
         }
         else if (hasAddresses)
         {
-            // If no endpoints are configured directly using KestrelServerOptions, use those configured via the IServerAddressesFeature.
+            // If no endpoints are configured directly using KestrelServerOptions, use those configured via the
+            // IServerAddressesFeature.
             return new AddressesStrategy(addresses, useHttps);
         }
         else

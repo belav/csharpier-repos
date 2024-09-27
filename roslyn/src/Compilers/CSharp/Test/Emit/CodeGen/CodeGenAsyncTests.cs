@@ -967,10 +967,12 @@ class Driver
 
             var diagnostics = new[]
             {
-                // (12,29): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                // (12,29): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                // async methods.
                 //             Console.Write(*&x);
                 Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(12, 29),
-                // (17,29): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                // (17,29): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                // async methods.
                 //             Console.Write(*&x);
                 Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(17, 29),
             };
@@ -1046,10 +1048,12 @@ class Driver
 
             var diagnostics = new[]
             {
-                // (12,29): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                // (12,29): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                // async methods.
                 //             Console.Write(*&x);
                 Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(12, 29),
-                // (19,29): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                // (19,29): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                // async methods.
                 //             Console.Write(*&x);
                 Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(19, 29),
             };
@@ -1141,31 +1145,39 @@ class Driver
 
             CreateCompilation(source, options: TestOptions.UnsafeDebugExe)
                 .VerifyDiagnostics(
-                    // (11,20): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (11,20): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         int* ptr = &prog.F; // 1
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&prog.F").WithLocation(11, 20),
-                    // (15,26): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                    // (15,26): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                    // async methods.
                     //         int* localPtr = &local; // 2
                     Diagnostic(ErrorCode.WRN_AddressOfInAsync, "local").WithLocation(15, 26),
-                    // (16,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (16,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* localPtr1 = &local) { } // 3, 4
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&local").WithLocation(16, 33),
-                    // (16,34): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                    // (16,34): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                    // async methods.
                     //         fixed (int* localPtr1 = &local) { } // 3, 4
                     Diagnostic(ErrorCode.WRN_AddressOfInAsync, "local").WithLocation(16, 34),
-                    // (19,26): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                    // (19,26): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                    // async methods.
                     //         int* innerPtr = &structLocal.F; // 5
                     Diagnostic(ErrorCode.WRN_AddressOfInAsync, "structLocal.F")
                         .WithLocation(19, 26),
-                    // (20,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (20,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* innerPtr1 = &structLocal.F) { } // 6, 7
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&structLocal.F")
                         .WithLocation(20, 33),
-                    // (20,34): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                    // (20,34): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                    // async methods.
                     //         fixed (int* innerPtr1 = &structLocal.F) { } // 6, 7
                     Diagnostic(ErrorCode.WRN_AddressOfInAsync, "structLocal.F")
                         .WithLocation(20, 34),
-                    // (33,39): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
+                    // (33,39): warning CS9123: The '&' operator should not be used on parameters or local variables in
+                    // async methods.
                     //             int* localFuncLocalPtr = &localFuncLocal; // 8
                     Diagnostic(ErrorCode.WRN_AddressOfInAsync, "localFuncLocal")
                         .WithLocation(33, 39)
@@ -1173,13 +1185,16 @@ class Driver
 
             CreateCompilation(source, options: TestOptions.UnsafeDebugExe.WithWarningLevel(7))
                 .VerifyDiagnostics(
-                    // (11,20): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (11,20): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         int* ptr = &prog.F; // 1
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&prog.F").WithLocation(11, 20),
-                    // (16,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (16,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* localPtr1 = &local) { } // 3, 4
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&local").WithLocation(16, 33),
-                    // (20,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (20,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* innerPtr1 = &structLocal.F) { } // 6, 7
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&structLocal.F")
                         .WithLocation(20, 33)
@@ -3517,17 +3532,22 @@ class C
                 TestOptions.ReleaseDll
             ); // NOTE: 4.0, not 4.5, so it's missing the async helpers.
 
-            // CONSIDER: It would be nice if we didn't squiggle the whole method body, but this is a corner case.
+            // CONSIDER: It would be nice if we didn't squiggle the whole method body, but this is a corner
+            // case.
             comp.VerifyEmitDiagnostics(
-                // (4,16): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (4,16): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     async void M() {}
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 16),
-                // (4,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncVoidMethodBuilder' is not defined or imported
+                // (4,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncVoidMethodBuilder' is
+                // not defined or imported
                 //     async void M() {}
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "{}")
                     .WithArguments("System.Runtime.CompilerServices.AsyncVoidMethodBuilder")
                     .WithLocation(4, 20),
-                // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Create'
+                // (4,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Create'
                 //     async void M() {}
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{}")
                     .WithArguments(
@@ -3535,12 +3555,14 @@ class C
                         "Create"
                     )
                     .WithLocation(4, 20),
-                // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
+                // (4,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
                 //     async void M() {}
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{}")
                     .WithArguments("System.Runtime.CompilerServices.IAsyncStateMachine", "MoveNext")
                     .WithLocation(4, 20),
-                // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
+                // (4,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
                 //     async void M() {}
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{}")
                     .WithArguments(
@@ -3566,15 +3588,19 @@ class C
                 TestOptions.ReleaseDll
             ); // NOTE: 4.0, not 4.5, so it's missing the async helpers.
             comp.VerifyEmitDiagnostics(
-                // (4,16): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (4,16): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     async Task M() {}
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 16),
-                // (4,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder' is not defined or imported
+                // (4,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder' is
+                // not defined or imported
                 //     async Task M() {}
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "{}")
                     .WithArguments("System.Runtime.CompilerServices.AsyncTaskMethodBuilder")
                     .WithLocation(4, 20),
-                // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Create'
+                // (4,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Create'
                 //     async Task M() {}
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{}")
                     .WithArguments(
@@ -3582,17 +3608,20 @@ class C
                         "Create"
                     )
                     .WithLocation(4, 20),
-                // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Task'
+                // (4,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Task'
                 //     async Task M() {}
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{}")
                     .WithArguments("System.Runtime.CompilerServices.AsyncTaskMethodBuilder", "Task")
                     .WithLocation(4, 20),
-                // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
+                // (4,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
                 //     async Task M() {}
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{}")
                     .WithArguments("System.Runtime.CompilerServices.IAsyncStateMachine", "MoveNext")
                     .WithLocation(4, 20),
-                // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
+                // (4,20): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
                 //     async Task M() {}
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{}")
                     .WithArguments(
@@ -3618,15 +3647,19 @@ class C
                 TestOptions.ReleaseDll
             ); // NOTE: 4.0, not 4.5, so it's missing the async helpers.
             comp.VerifyEmitDiagnostics(
-                // (4,21): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (4,21): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     async Task<int> F() => 3;
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F").WithLocation(4, 21),
-                // (4,25): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1' is not defined or imported
+                // (4,25): error CS0518: Predefined type 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1'
+                // is not defined or imported
                 //     async Task<int> F() => 3;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "=> 3")
                     .WithArguments("System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1")
                     .WithLocation(4, 25),
-                // (4,25): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Create'
+                // (4,25): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Create'
                 //     async Task<int> F() => 3;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> 3")
                     .WithArguments(
@@ -3634,7 +3667,8 @@ class C
                         "Create"
                     )
                     .WithLocation(4, 25),
-                // (4,25): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Task'
+                // (4,25): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Task'
                 //     async Task<int> F() => 3;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> 3")
                     .WithArguments(
@@ -3642,12 +3676,14 @@ class C
                         "Task"
                     )
                     .WithLocation(4, 25),
-                // (4,25): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
+                // (4,25): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
                 //     async Task<int> F() => 3;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> 3")
                     .WithArguments("System.Runtime.CompilerServices.IAsyncStateMachine", "MoveNext")
                     .WithLocation(4, 25),
-                // (4,25): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
+                // (4,25): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
                 //     async Task<int> F() => 3;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> 3")
                     .WithArguments(
@@ -3826,77 +3862,100 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             comp.VerifyEmitDiagnostics(
-                // (17,27): error CS8940: A generic task-like return type was expected, but the type 'N.BG<int>' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (17,27): error CS8940: A generic task-like return type was expected, but the type 'N.BG<int>'
+                // found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of
+                // arity one, and its containing type (if any) must be non-generic.
                 //     async T_NIT<int> f1() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_WrongArityAsyncReturn, "=> await Task.FromResult(1)")
                     .WithArguments("N.BG<int>")
                     .WithLocation(17, 27),
-                // (18,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (18,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     async T_NIN f2() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_BadAsyncReturn, "=> await Task.FromResult(1)")
                     .WithLocation(18, 22),
                 // (19,27): error CS0656: Missing compiler required member 'N.BG<int>.Task'
-                //     async T_NOT<int> f3() => await Task.FromResult(1); // ok builderType genericity (but missing members)
+                //     async T_NOT<int> f3() => await Task.FromResult(1); // ok builderType genericity (but missing
+                // members)
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> await Task.FromResult(1)")
                     .WithArguments("N.BG<int>", "Task")
                     .WithLocation(19, 27),
                 // (19,27): error CS0656: Missing compiler required member 'N.BG<int>.Create'
-                //     async T_NOT<int> f3() => await Task.FromResult(1); // ok builderType genericity (but missing members)
+                //     async T_NOT<int> f3() => await Task.FromResult(1); // ok builderType genericity (but missing
+                // members)
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> await Task.FromResult(1)")
                     .WithArguments("N.BG<int>", "Create")
                     .WithLocation(19, 27),
-                // (20,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (20,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     async T_NON f4() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_BadAsyncReturn, "=> await Task.FromResult(1)")
                     .WithLocation(20, 22),
-                // (21,27): error CS8940: A generic task-like return type was expected, but the type 'N.BN' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (21,27): error CS8940: A generic task-like return type was expected, but the type 'N.BN' found in
+                // 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one,
+                // and its containing type (if any) must be non-generic.
                 //     async T_NNT<int> f5() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_WrongArityAsyncReturn, "=> await Task.FromResult(1)")
                     .WithArguments("N.BN")
                     .WithLocation(21, 27),
                 // (22,22): error CS0656: Missing compiler required member 'N.BN.Task'
-                //     async T_NNN f6() => await Task.FromResult(1);      // ok builderType genericity (but missing members)
+                //     async T_NNN f6() => await Task.FromResult(1);      // ok builderType genericity (but missing
+                // members)
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> await Task.FromResult(1)")
                     .WithArguments("N.BN", "Task")
                     .WithLocation(22, 22),
                 // (22,22): error CS0656: Missing compiler required member 'N.BN.Create'
-                //     async T_NNN f6() => await Task.FromResult(1);      // ok builderType genericity (but missing members)
+                //     async T_NNN f6() => await Task.FromResult(1);      // ok builderType genericity (but missing
+                // members)
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=> await Task.FromResult(1)")
                     .WithArguments("N.BN", "Create")
                     .WithLocation(22, 22),
-                // (39,27): error CS8940: A generic task-like return type was expected, but the type 'G<int>.BG<int>' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (39,27): error CS8940: A generic task-like return type was expected, but the type
+                // 'G<int>.BG<int>' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound
+                // generic type of arity one, and its containing type (if any) must be non-generic.
                 //     async T_IIT<int> g1() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_WrongArityAsyncReturn, "=> await Task.FromResult(1)")
                     .WithArguments("G<int>.BG<int>")
                     .WithLocation(39, 27),
-                // (40,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (40,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     async T_IIN g2() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_BadAsyncReturn, "=> await Task.FromResult(1)")
                     .WithLocation(40, 22),
-                // (41,27): error CS8940: A generic task-like return type was expected, but the type 'G<int>.BN' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (41,27): error CS8940: A generic task-like return type was expected, but the type 'G<int>.BN'
+                // found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of
+                // arity one, and its containing type (if any) must be non-generic.
                 //     async T_INT<int> g3() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_WrongArityAsyncReturn, "=> await Task.FromResult(1)")
                     .WithArguments("G<int>.BN")
                     .WithLocation(41, 27),
-                // (42,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
-                //     async T_INN g4() => await Task.FromResult(1);      // might have been ok builder genericity but we decided not
+                // (42,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                //     async T_INN g4() => await Task.FromResult(1);      // might have been ok builder genericity
+                // but we decided not
                 Diagnostic(ErrorCode.ERR_BadAsyncReturn, "=> await Task.FromResult(1)")
                     .WithLocation(42, 22),
-                // (43,27): error CS8940: A generic task-like return type was expected, but the type 'G<>.BG<>' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (43,27): error CS8940: A generic task-like return type was expected, but the type 'G<>.BG<>'
+                // found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of
+                // arity one, and its containing type (if any) must be non-generic.
                 //     async T_OOT<int> g5() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_WrongArityAsyncReturn, "=> await Task.FromResult(1)")
                     .WithArguments("G<>.BG<>")
                     .WithLocation(43, 27),
-                // (44,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (44,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     async T_OON g6() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_BadAsyncReturn, "=> await Task.FromResult(1)")
                     .WithLocation(44, 22),
-                // (45,27): error CS8940: A generic task-like return type was expected, but the type 'G<>.BN' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (45,27): error CS8940: A generic task-like return type was expected, but the type 'G<>.BN' found
+                // in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one,
+                // and its containing type (if any) must be non-generic.
                 //     async T_ONT<int> g7() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_WrongArityAsyncReturn, "=> await Task.FromResult(1)")
                     .WithArguments("G<>.BN")
                     .WithLocation(45, 27),
-                // (46,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (46,22): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     async T_ONN g8() => await Task.FromResult(1);
                 Diagnostic(ErrorCode.ERR_BadAsyncReturn, "=> await Task.FromResult(1)")
                     .WithLocation(46, 22)
@@ -3981,7 +4040,8 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
 
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             comp.VerifyEmitDiagnostics(
-                // (5,22): error CS0246: The type or namespace name 'Nonexistent' could not be found (are you missing a using directive or an assembly reference?)
+                // (5,22): error CS0246: The type or namespace name 'Nonexistent' could not be found (are you
+                // missing a using directive or an assembly reference?)
                 // [AsyncMethodBuilder(typeof(Nonexistent))] class T { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Nonexistent")
                     .WithArguments("Nonexistent")
@@ -4378,12 +4438,15 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
 ";
             var comp = CreateCompilationWithMscorlib45(source);
             comp.VerifyEmitDiagnostics(
-                // (5,30): error CS8940: A generic task-like return type was expected, but the type 'Mismatch1MethodBuilder' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (5,30): error CS8940: A generic task-like return type was expected, but the type
+                // 'Mismatch1MethodBuilder' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an
+                // unbound generic type of arity one, and its containing type (if any) must be non-generic.
                 //     async Mismatch1<int> f() { await (Task)null; return 1; }
                 Diagnostic(ErrorCode.ERR_WrongArityAsyncReturn, "{ await (Task)null; return 1; }")
                     .WithArguments("Mismatch1MethodBuilder")
                     .WithLocation(5, 30),
-                // (6,45): error CS1997: Since 'C.g()' is an async method that returns 'Mismatch2', a return keyword must not be followed by an object expression
+                // (6,45): error CS1997: Since 'C.g()' is an async method that returns 'Mismatch2', a return keyword
+                // must not be followed by an object expression
                 //     async Mismatch2 g() { await (Task)null; return 1; }
                 Diagnostic(ErrorCode.ERR_TaskRetNoObjectRequired, "return")
                     .WithArguments("C.g()", "Mismatch2")
@@ -4428,7 +4491,9 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
 
             var comp1 = CreateCompilation(source1, options: TestOptions.DebugExe);
             comp1.VerifyEmitDiagnostics(
-                // (8,22): error CS0311: The type 'C.<f>d__1' cannot be used as type parameter 'TSM' in the generic type or method 'MyTaskBuilder.Start<TSM>(ref TSM)'. There is no implicit reference conversion from 'C.<f>d__1' to 'I'.
+                // (8,22): error CS0311: The type 'C.<f>d__1' cannot be used as type parameter 'TSM' in the generic
+                // type or method 'MyTaskBuilder.Start<TSM>(ref TSM)'. There is no implicit reference conversion from
+                // 'C.<f>d__1' to 'I'.
                 //     async MyTask f() { await (Task)null; }
                 Diagnostic(
                         ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
@@ -5417,9 +5482,11 @@ class C
             var compilation = CreateEmptyCompilation(new[] { Parse(source) });
 
             compilation.VerifyEmitDiagnostics(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                // was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                // (70,37): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Create'
+                // (70,37): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Create'
                 //     async Task GetNumber(Task task) { await task; }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ await task; }")
                     .WithArguments(
@@ -5427,12 +5494,14 @@ class C
                         "Create"
                     )
                     .WithLocation(70, 37),
-                // (70,37): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
+                // (70,37): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext'
                 //     async Task GetNumber(Task task) { await task; }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ await task; }")
                     .WithArguments("System.Runtime.CompilerServices.IAsyncStateMachine", "MoveNext")
                     .WithLocation(70, 37),
-                // (70,37): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
+                // (70,37): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.IAsyncStateMachine.SetStateMachine'
                 //     async Task GetNumber(Task task) { await task; }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "{ await task; }")
                     .WithArguments(
@@ -5481,8 +5550,11 @@ namespace System.Runtime.CompilerServices
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             compilation.VerifyEmitDiagnostics(
-                // (8,53): error CS8940: A generic task-like return type was expected, but the type 'CustomAsyncTaskMethodBuilder<,>' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
-                //     public async MyAwesomeType<string> CustomTask() { await Task.Delay(1000); return string.Empty; }
+                // (8,53): error CS8940: A generic task-like return type was expected, but the type
+                // 'CustomAsyncTaskMethodBuilder<,>' found in 'AsyncMethodBuilder' attribute was not suitable. It must
+                // be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                //     public async MyAwesomeType<string> CustomTask() { await Task.Delay(1000); return
+                // string.Empty; }
                 Diagnostic(
                         ErrorCode.ERR_WrongArityAsyncReturn,
                         "{ await Task.Delay(1000); return string.Empty; }"
@@ -5533,7 +5605,9 @@ namespace System.Runtime.CompilerServices
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             compilation.VerifyEmitDiagnostics(
-                // (8,37): error CS8204: For type 'AsyncValueTaskMethodBuilder' to be used as an AsyncMethodBuilder for type 'G<T>.ValueTask', its Task property should return type 'G<T>.ValueTask' instead of type 'G<int>.ValueTask'.
+                // (8,37): error CS8204: For type 'AsyncValueTaskMethodBuilder' to be used as an AsyncMethodBuilder
+                // for type 'G<T>.ValueTask', its Task property should return type 'G<T>.ValueTask' instead of type
+                // 'G<int>.ValueTask'.
                 //     public async ValueTask Method() { await Task.Delay(5); return; }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
@@ -5577,7 +5651,8 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             compilation.VerifyEmitDiagnostics(
-                // (7,29): error CS8204: For type 'MyTaskBuilder' to be used as an AsyncMethodBuilder for type 'MyTask', its Task property should return type 'MyTask' instead of type 'int'.
+                // (7,29): error CS8204: For type 'MyTaskBuilder' to be used as an AsyncMethodBuilder for type
+                // 'MyTask', its Task property should return type 'MyTask' instead of type 'int'.
                 //     static async MyTask M() { await Task.Delay(5); throw null; }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
@@ -6225,7 +6300,8 @@ class Program
             // The diagnostic message isn't great, but it is correct that we report an error
             var c = CreateCompilation(source, options: TestOptions.DebugDll);
             c.VerifyDiagnostics(
-                // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (8,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         b ? await Task.Delay(1) : await Task.Delay(2));
                 Diagnostic(
                         ErrorCode.ERR_IllegalStatement,
@@ -6347,7 +6423,9 @@ class IntCode
 ";
             var diags = new[]
             {
-                // (12,30): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (12,30): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     public static async Task CompletedTask()
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "CompletedTask").WithLocation(12, 30),
             };
@@ -6388,12 +6466,14 @@ class IntCode
 ";
             var expected = new[]
             {
-                // (8,9): error CS8178: A reference returned by a call to 'IntCode.ReadMemory()' cannot be preserved across 'await' or 'yield' boundary.
+                // (8,9): error CS8178: A reference returned by a call to 'IntCode.ReadMemory()' cannot be preserved
+                // across 'await' or 'yield' boundary.
                 //         ReadMemory() = await t;
                 Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "ReadMemory()")
                     .WithArguments("IntCode.ReadMemory()")
                     .WithLocation(8, 9),
-                // (9,9): error CS8178: A reference returned by a call to 'IntCode.ReadMemory()' cannot be preserved across 'await' or 'yield' boundary.
+                // (9,9): error CS8178: A reference returned by a call to 'IntCode.ReadMemory()' cannot be preserved
+                // across 'await' or 'yield' boundary.
                 //         ReadMemory() += await t;
                 Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "ReadMemory()")
                     .WithArguments("IntCode.ReadMemory()")

@@ -428,11 +428,17 @@ namespace System.Web.UI.WebControls
                 + ((m.Groups[3].Length > 0) ? "." + m.Groups[3].Value : string.Empty);
         }
 
+        //
         // ****************************************************************************************************************
-        // **                                                                                                            **
-        // ** NOTE: When updating the regular expressions in this method, you must also update the regular expressions   **
-        // **       in WebUIValidation.js::ValidatorConvert().  The server and client regular expressions must match.    **
-        // **                                                                                                            **
+        // **
+        // **
+        // ** NOTE: When updating the regular expressions in this method, you must also update the regular
+        // expressions   **
+        // **       in WebUIValidation.js::ValidatorConvert().  The server and client regular expressions
+        // must match.    **
+        // **
+        // **
+        //
         // ****************************************************************************************************************
         private static object ConvertDate(string text, string dateElementOrder)
         {

@@ -36,10 +36,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ActualApiResponseMeta
 
             if (id == 0)
             {
-                /*MM1*/return NoContent();
+/*MM1*/return NoContent();
             }
 
-            /*MM2*/return new TryGetActualResponseMetadataModel();
+/*MM2*/return new TryGetActualResponseMetadataModel();
         }
 
         public IActionResult ActionWithActionResultOfTReturningOkResultExpression() => Ok();

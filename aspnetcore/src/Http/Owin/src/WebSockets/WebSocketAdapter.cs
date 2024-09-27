@@ -87,7 +87,8 @@ public class WebSocketAdapter
         CancellationToken cancel
     )
     {
-        // Remap close messages to CloseAsync.  System.Net.WebSockets.WebSocket.SendAsync does not allow close messages.
+        // Remap close messages to CloseAsync.  System.Net.WebSockets.WebSocket.SendAsync does not allow
+        // close messages.
         if (messageType == 0x8)
         {
             return RedirectSendToCloseAsync(buffer, cancel);

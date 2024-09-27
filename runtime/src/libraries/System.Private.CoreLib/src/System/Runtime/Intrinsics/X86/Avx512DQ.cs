@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.Intrinsics.X86
 {
-    /// <summary>This class provides access to X86 AVX512DQ hardware instructions via intrinsics</summary>
+    /// <summary>This class provides access to X86 AVX512DQ hardware instructions via
+    // intrinsics</summary>
     [Intrinsic]
     [CLSCompliant(false)]
     public abstract class Avx512DQ : Avx512F
@@ -763,7 +764,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128 _mm_reduce_ss(__m128 a, __m128 b, int imm);
         ///   VREDUCESS xmm1 {k1}{z}, xmm2, xmm3/m32{sae}, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> ReduceScalar(
             Vector128<float> upper,
@@ -774,7 +776,8 @@ namespace System.Runtime.Intrinsics.X86
         /// <summary>
         /// __m128d _mm_reduce_sd(__m128d a, __m128d b, int imm);
         ///   VREDUCESD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}, imm8
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> ReduceScalar(
             Vector128<double> upper,

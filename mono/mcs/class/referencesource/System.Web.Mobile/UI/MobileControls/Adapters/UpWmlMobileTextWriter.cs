@@ -26,10 +26,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * UpWmlMobileTextWriter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * UpWmlMobileTextWriter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
 
     /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter"]/*' />
     [AspNetHostingPermission(
@@ -68,7 +68,8 @@ namespace System.Web.UI.MobileControls.Adapters
         private bool _encodeUrl = false;
         private bool _useMenuOptionTitle = false;
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.UpWmlMobileTextWriter"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.UpWmlMobileTextWriter"]/*' />
         public UpWmlMobileTextWriter(TextWriter writer, MobileCapabilities device, MobilePage page)
             : base(writer, device, page)
         {
@@ -82,7 +83,8 @@ namespace System.Web.UI.MobileControls.Adapters
             get { return (UpCard)_cards[_currentCardIndex]; }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.BeginForm"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.BeginForm"]/*' />
         public override void BeginForm(Form form)
         {
             ResetState();
@@ -161,7 +163,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private String _cachedFormQueryString;
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.CalculateFormQueryString"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.CalculateFormQueryString"]/*' />
         protected override String CalculateFormQueryString()
         {
             if (_cachedFormQueryString != null)
@@ -213,7 +216,8 @@ namespace System.Web.UI.MobileControls.Adapters
             return base.ShouldWriteFormID(form);
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.EndForm"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.EndForm"]/*' />
         public override void EndForm()
         {
             if (AnalyzeMode)
@@ -229,7 +233,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndForm"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndForm"]/*' />
         protected override void RenderEndForm()
         {
             base.RenderEndForm();
@@ -255,7 +260,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderText"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderText"]/*' />
         public override void RenderText(String text, bool breakAfter, bool encodeText)
         {
             if (AnalyzeMode)
@@ -344,7 +350,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginHyperlink"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginHyperlink"]/*' />
         public override void RenderBeginHyperlink(
             String targetUrl,
             bool encodeUrl,
@@ -415,7 +422,8 @@ namespace System.Web.UI.MobileControls.Adapters
             _inHyperlink = true;
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndHyperlink"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndHyperlink"]/*' />
         public override void RenderEndHyperlink(bool breakAfter)
         {
             if (!_inHyperlink)
@@ -495,7 +503,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderTextBox"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderTextBox"]/*' />
         public override void RenderTextBox(
             String id,
             String value,
@@ -572,7 +581,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderImage"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderImage"]/*' />
         public override void RenderImage(
             String source,
             String localSource,
@@ -634,7 +644,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginPostBack"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginPostBack"]/*' />
         public override void RenderBeginPostBack(
             String softkeyLabel,
             bool implicitSoftkeyLabel,
@@ -686,7 +697,8 @@ namespace System.Web.UI.MobileControls.Adapters
             _inPostBack = true;
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndPostBack"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndPostBack"]/*' />
         public override void RenderEndPostBack(
             String target,
             String argument,
@@ -836,7 +848,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.BeginCustomMarkup"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.BeginCustomMarkup"]/*' />
         public override void BeginCustomMarkup()
         {
             if (!AnalyzeMode && !CurrentCard.MenuOpened)
@@ -845,7 +858,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.AnalyzePostBack"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.AnalyzePostBack"]/*' />
         protected override void AnalyzePostBack(
             bool includeVariables,
             WmlPostFieldType postBackType
@@ -873,7 +887,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginSelect"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderBeginSelect"]/*' />
         public override void RenderBeginSelect(
             String name,
             String iname,
@@ -913,7 +928,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndSelect"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderEndSelect"]/*' />
         public override void RenderEndSelect(bool breakAfter)
         {
             if (AnalyzeMode)
@@ -948,7 +964,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderSelectOption"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderSelectOption"]/*' />
         public override void RenderSelectOption(String text)
         {
             if (AnalyzeMode)
@@ -961,7 +978,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.RenderSelectOption1"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.RenderSelectOption1"]/*' />
         public override void RenderSelectOption(String text, String value)
         {
             if (AnalyzeMode)
@@ -1046,7 +1064,8 @@ namespace System.Web.UI.MobileControls.Adapters
         // Overriden to convert relative file paths to absolute file paths,
         // due to a redirection issue on UP phones.
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.CalculateFormPostBackUrl"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.CalculateFormPostBackUrl"]/*' />
         protected override String CalculateFormPostBackUrl(bool externalSubmit, ref bool encode)
         {
             String url = CurrentForm.Action;
@@ -1082,7 +1101,8 @@ namespace System.Web.UI.MobileControls.Adapters
         // Overriden to always write the "align" or "wrap" attributes when
         // they are changing, even if they are set to defaults.
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.OpenParagraph"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.OpenParagraph"]/*' />
         protected override void OpenParagraph(
             WmlLayout layout,
             bool writeAlignment,
@@ -1160,7 +1180,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\UpWmlMobileTextWriter.uex' path='docs/doc[@for="UpWmlMobileTextWriter.PostAnalyzeForm"]/*' />
+        /// <include file='doc\UpWmlMobileTextWriter.uex'
+        // path='docs/doc[@for="UpWmlMobileTextWriter.PostAnalyzeForm"]/*' />
         protected override void PostAnalyzeForm()
         {
             base.PostAnalyzeForm();

@@ -238,8 +238,10 @@ namespace System.Net
             base.ClearState();
         }
 
-        //    This is called by underlying base class code, each time a new response is received from the wire or a protocol stage is resumed.
-        //    This function controls the setting up of a data socket/connection, and of saving off the server responses.
+        //    This is called by underlying base class code, each time a new response is received from the
+        // wire or a protocol stage is resumed.
+        //    This function controls the setting up of a data socket/connection, and of saving off the
+        // server responses.
         protected override PipelineInstruction PipelineCallback(
             PipelineEntry? entry,
             ResponseDescription? response,
@@ -553,7 +555,8 @@ namespace System.Net
                 if (domainUserName.Length == 0 && password.Length == 0)
                 {
                     domainUserName = "anonymous";
-                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Anonymous FTP credential in production code.")]
+                    // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+                    // approved. Anonymous FTP credential in production code.")]
                     password = "anonymous@";
                 }
 
@@ -565,8 +568,10 @@ namespace System.Net
                     )
                 );
 
-                // If SSL, always configure data channel encryption after authentication to maximum RFC compatibility.   The RFC allows for
-                // PBSZ/PROT commands to come either before or after the USER/PASS, but some servers require USER/PASS immediately after
+                // If SSL, always configure data channel encryption after authentication to maximum RFC
+                // compatibility.   The RFC allows for
+                // PBSZ/PROT commands to come either before or after the USER/PASS, but some servers require
+                // USER/PASS immediately after
                 // the AUTH TLS command.
                 if (request.EnableSsl && !UsingSecureStream)
                 {
@@ -607,7 +612,8 @@ namespace System.Net
             )
                 throw new WebException(SR.net_ftp_invalid_uri);
 
-            // We optimize for having the current working directory staying at the login directory.  This ensure that
+            // We optimize for having the current working directory staying at the login directory.  This ensure
+            // that
             // our relative paths work right and reduces unnecessary CWD commands.
             // Usually, we don't change the working directory except for some FTP commands.  If necessary,
             // we need to reset our working directory back to the login directory.
@@ -923,7 +929,8 @@ namespace System.Net
         {
             byte[] localAddressInBytes = address.GetAddressBytes();
 
-            // produces a string in FTP IPAddress/Port encoding (a1, a2, a3, a4, p1, p2), for sending as a parameter
+            // produces a string in FTP IPAddress/Port encoding (a1, a2, a3, a4, p1, p2), for sending as a
+            // parameter
             // to the port command.
             StringBuilder sb = new StringBuilder(32);
             for (int i = address.IsIPv4MappedToIPv6 ? 12 : 0; i < localAddressInBytes.Length; i++)
@@ -1223,7 +1230,8 @@ namespace System.Net
         }
 
         /// <summary>
-        ///    <para>Builds a command line to send to the server with proper port and IP address of client</para>
+        ///    <para>Builds a command line to send to the server with proper port and IP address of
+        // client</para>
         /// </summary>
         private string GetPortCommandLine()
         {
@@ -1315,7 +1323,8 @@ namespace System.Net
             // Otherwise, if there is no status code for this response yet, get one.
             if (response.Status == ResponseDescription.NoStatus)
             {
-                // If the response does not start with three digits, then it is not a valid response from an FTP server.
+                // If the response does not start with three digits, then it is not a valid response from an FTP
+                // server.
                 if (
                     !(
                         char.IsDigit(responseString[0])
@@ -1336,7 +1345,8 @@ namespace System.Net
                     );
                 }
 
-                // IF a hyphen follows the status code on the first line of the response, then we have a multiline response coming.
+                // IF a hyphen follows the status code on the first line of the response, then we have a multiline
+                // response coming.
                 if (responseString[3] == '-')
                 {
                     response.Multiline = true;
@@ -1350,7 +1360,8 @@ namespace System.Net
             // If this was a multiline response (indicated by three digits followed by a '-' in the first line),
             // then we see if the last line received started with the same three digits followed by a space.
             // If it did, then this is the sign of a complete multiline response.
-            // If the line contained three other digits followed by the response, then this is a violation of the
+            // If the line contained three other digits followed by the response, then this is a violation of
+            // the
             // FTP protocol for multiline responses.
             // All other cases indicate that the response is not yet complete.
             int index;

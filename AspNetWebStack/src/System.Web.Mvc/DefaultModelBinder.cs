@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -92,7 +93,8 @@ namespace System.Web.Mvc
             object model = bindingContext.Model;
             Type modelType = bindingContext.ModelType;
 
-            // if we're being asked to create an array, create a list instead, then coerce to an array after the list is created
+            // if we're being asked to create an array, create a list instead, then coerce to an array after the
+            // list is created
             if (model == null && modelType.IsArray)
             {
                 Type elementType = modelType.GetElementType();
@@ -217,7 +219,8 @@ namespace System.Web.Mvc
                 && !bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName)
             )
             {
-                // We couldn't find any entry that began with the prefix. If this is the top-level element, fall back
+                // We couldn't find any entry that began with the prefix. If this is the top-level element, fall
+                // back
                 // to the empty prefix.
                 if (bindingContext.FallbackToEmptyPrefix)
                 {
@@ -236,7 +239,8 @@ namespace System.Web.Mvc
                 }
             }
 
-            // Simple model = int, string, etc.; determined by calling TypeConverter.CanConvertFrom(typeof(string))
+            // Simple model = int, string, etc.; determined by calling
+            // TypeConverter.CanConvertFrom(typeof(string))
             // or by seeing if a value in the request exactly matches the name of the model we're binding.
             // Complex type = everything else.
             if (!performedFallback)
@@ -291,7 +295,8 @@ namespace System.Web.Mvc
             PropertyDescriptor propertyDescriptor
         )
         {
-            // need to skip properties that aren't part of the request, else we might hit a StackOverflowException
+            // need to skip properties that aren't part of the request, else we might hit a
+            // StackOverflowException
             string fullPropertyKey = CreateSubPropertyName(
                 bindingContext.ModelName,
                 propertyDescriptor.Name
@@ -948,13 +953,16 @@ namespace System.Web.Mvc
                 || bindingContext.ModelMetadata == null
             )
             {
-                // To make unit testing easier, if the caller hasn't specified enough contextual information we just default
+                // To make unit testing easier, if the caller hasn't specified enough contextual information we just
+                // default
                 // to always pulling the data from a collection that goes through request validation.
                 return true;
             }
 
-            // We should perform request validation only if both the controller and the model ask for it. This is the
-            // default behavior for both. If either the controller (via [ValidateInput(false)]) or the model (via [AllowHtml])
+            // We should perform request validation only if both the controller and the model ask for it. This
+            // is the
+            // default behavior for both. If either the controller (via [ValidateInput(false)]) or the model
+            // (via [AllowHtml])
             // opts out, we don't validate.
             return (
                 controllerContext.Controller.ValidateRequest
@@ -1187,10 +1195,14 @@ namespace System.Web.Mvc
             return new KeyValuePair<object, object>(modelKey, thisValue);
         }
 
-        // This helper type is used because we're working with strongly-typed collections, but we don't know the Ts
-        // ahead of time. By using the generic methods below, we can consolidate the collection-specific code in a
-        // single helper type rather than having reflection-based calls spread throughout the DefaultModelBinder type.
-        // There is a single point of entry to each of the methods below, so they're fairly simple to maintain.
+        // This helper type is used because we're working with strongly-typed collections, but we don't know
+        // the Ts
+        // ahead of time. By using the generic methods below, we can consolidate the collection-specific
+        // code in a
+        // single helper type rather than having reflection-based calls spread throughout the
+        // DefaultModelBinder type.
+        // There is a single point of entry to each of the methods below, so they're fairly simple to
+        // maintain.
 
         private static class CollectionHelpers
         {

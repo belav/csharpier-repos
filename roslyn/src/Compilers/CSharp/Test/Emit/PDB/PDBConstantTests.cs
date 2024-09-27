@@ -37,8 +37,10 @@ public class T
                 options: TestOptions.DebugDll
             );
 
-            // Note:  U+FFFD is the Unicode 'replacement character' point and is used to replace an incoming character
-            //        whose value is unknown or unrepresentable in Unicode.  This is what our pdb writer does with
+            // Note:  U+FFFD is the Unicode 'replacement character' point and is used to replace an incoming
+            // character
+            //        whose value is unknown or unrepresentable in Unicode.  This is what our pdb writer does
+            // with
             //        unpaired surrogates.
             c.VerifyPdb(
                 @"
@@ -113,8 +115,10 @@ public class T
                 options: TestOptions.DebugDll
             );
 
-            // Note:  U+FFFD is the Unicode 'replacement character' point and is used to replace an incoming character
-            //        whose value is unknown or unrepresentable in Unicode.  This is what our pdb writer does with
+            // Note:  U+FFFD is the Unicode 'replacement character' point and is used to replace an incoming
+            // character
+            //        whose value is unknown or unrepresentable in Unicode.  This is what our pdb writer does
+            // with
             //        unpaired surrogates.
             c.VerifyPdb(
                 @"
@@ -594,24 +598,33 @@ class C
 
             //  old behavior. This new warning was abandoned
             //
-            // result.Diagnostics.Verify(// warning CS7063: Constant string value of 'goo' is too long to be used in a PDB file. Only the debug experience may be affected.
-            //                           Diagnostic(ErrorCode.WRN_PDBConstantStringValueTooLong).WithArguments("goo", longStringValue.Substring(0, 20) + "..."));
+            // result.Diagnostics.Verify(// warning CS7063: Constant string value of 'goo' is too long to be
+            // used in a PDB file. Only the debug experience may be affected.
+            //
+            // Diagnostic(ErrorCode.WRN_PDBConstantStringValueTooLong).WithArguments("goo",
+            // longStringValue.Substring(0, 20) + "..."));
             //
             // //make sure that this warning is suppressable
-            // compilation = CreateCompilationWithMscorlib(text, compOptions: Options.Exe.WithDebugInformationKind(Common.DebugInformationKind.Full).WithOptimizations(false).
-            //     WithSpecificDiagnosticOptions(new Dictionary<int, ReportWarning>(){ {(int)ErrorCode.WRN_PDBConstantStringValueTooLong, ReportWarning.Suppress} }));
+            // compilation = CreateCompilationWithMscorlib(text, compOptions:
+            // Options.Exe.WithDebugInformationKind(Common.DebugInformationKind.Full).WithOptimizations(false).
+            //     WithSpecificDiagnosticOptions(new Dictionary<int, ReportWarning>(){
+            // {(int)ErrorCode.WRN_PDBConstantStringValueTooLong, ReportWarning.Suppress} }));
             //
             // result = compilation.Emit(exebits, null, "DontCare", pdbbits, null);
             // result.Diagnostics.Verify();
             //
             // //make sure that this warning can be turned into an error.
-            // compilation = CreateCompilationWithMscorlib(text, compOptions: Options.Exe.WithDebugInformationKind(Common.DebugInformationKind.Full).WithOptimizations(false).
-            //     WithSpecificDiagnosticOptions(new Dictionary<int, ReportWarning>() { { (int)ErrorCode.WRN_PDBConstantStringValueTooLong, ReportWarning.Error } }));
+            // compilation = CreateCompilationWithMscorlib(text, compOptions:
+            // Options.Exe.WithDebugInformationKind(Common.DebugInformationKind.Full).WithOptimizations(false).
+            //     WithSpecificDiagnosticOptions(new Dictionary<int, ReportWarning>() { {
+            // (int)ErrorCode.WRN_PDBConstantStringValueTooLong, ReportWarning.Error } }));
             //
             // result = compilation.Emit(exebits, null, "DontCare", pdbbits, null);
             // Assert.False(result.Success);
             // result.Diagnostics.Verify(
-            //                          Diagnostic(ErrorCode.WRN_PDBConstantStringValueTooLong).WithArguments("goo", longStringValue.Substring(0, 20) + "...").WithWarningAsError(true));
+            //
+            // Diagnostic(ErrorCode.WRN_PDBConstantStringValueTooLong).WithArguments("goo",
+            // longStringValue.Substring(0, 20) + "...").WithWarningAsError(true));
         }
 
         [Fact]

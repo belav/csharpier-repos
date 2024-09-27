@@ -25,7 +25,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
             // Prepare the dotnet installation mock
 
-            // ./dotnet.exe - used as a convenient way to load and invoke hostfxr. May change in the future to use test-specific executable
+            // ./dotnet.exe - used as a convenient way to load and invoke hostfxr. May change in the future to
+            // use test-specific executable
             var builtDotNetCli = new DotNetCli(builtDotnet);
             File.Copy(
                 builtDotNetCli.DotnetExecutablePath,
@@ -50,14 +51,16 @@ namespace Microsoft.DotNet.CoreSetup.Test
         /// </summary>
         /// <param name="version">Version to add</param>
         /// <remarks>
-        /// Product runtime binaries are not added. All the added mock framework will contain is a mock version of host policy.
+        /// Product runtime binaries are not added. All the added mock framework will contain is a mock
+        // version of host policy.
         /// </remarks>
         public DotNetBuilder AddMicrosoftNETCoreAppFrameworkMockHostPolicy(string version)
         {
             // ./shared/Microsoft.NETCore.App/<version> - create a mock of the root framework
             string netCoreAppPath = AddFramework(Constants.MicrosoftNETCoreApp, version);
 
-            // ./shared/Microsoft.NETCore.App/<version>/hostpolicy.dll - this is a mock, will not actually load CoreCLR
+            // ./shared/Microsoft.NETCore.App/<version>/hostpolicy.dll - this is a mock, will not actually load
+            // CoreCLR
             File.Copy(
                 Binaries.HostPolicy.MockPath,
                 Path.Combine(netCoreAppPath, Binaries.HostPolicy.FileName),
@@ -147,7 +150,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
                             null,
                             g =>
                                 g
-                                // ./shared/Microsoft.NETCore.App/<version>/coreclr.dll - this is a mock, will not actually run CoreClr
+                                // ./shared/Microsoft.NETCore.App/<version>/coreclr.dll - this is a mock, will not actually run
+                                // CoreClr
                                 .WithAsset(
                                     (
                                         new NetCoreAppBuilder.RuntimeFileBuilder(
@@ -167,7 +171,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
                             null,
                             g =>
                                 g
-                                // ./shared/Microsoft.NETCore.App/<version>/hostpolicy.dll - this is the real component and will load CoreClr library
+                                // ./shared/Microsoft.NETCore.App/<version>/hostpolicy.dll - this is the real component and will
+                                // load CoreClr library
                                 .WithAsset(
                                     (
                                         new NetCoreAppBuilder.RuntimeFileBuilder(

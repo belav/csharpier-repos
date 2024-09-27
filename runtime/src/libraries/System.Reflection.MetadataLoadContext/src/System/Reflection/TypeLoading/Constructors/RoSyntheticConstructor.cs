@@ -9,7 +9,8 @@ using System.Globalization;
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// Base class for all RoConstructors objects created by a MetadataLoadContext that appear on arrays.
+    /// Base class for all RoConstructors objects created by a MetadataLoadContext that appear on
+    // arrays.
     /// </summary>
     internal sealed partial class RoSyntheticConstructor : RoConstructor
     {

@@ -484,7 +484,8 @@ public class KnownHeaders
         }
 
         // Group headers together that have the same ignore equal case equals check for the first term.
-        // There will probably only be more than one item in a group for Content-Encoding, Content-Language, Content-Location.
+        // There will probably only be more than one item in a group for Content-Encoding, Content-Language,
+        // Content-Location.
         var groups = values
             .GroupBy(header => header.EqualIgnoreCaseBytesFirstTerm())
             .OrderBy(g => g.First(), KnownHeaderComparer.Instance)
@@ -842,7 +843,8 @@ public class KnownHeaders
         Debug.Assert(requestHeaders.Length <= 64);
         Debug.Assert(requestHeaders.Max(x => x.Index) <= 62);
 
-        // 63 for responseHeaders as it steals one bit for Content-Length in CopyTo(ref MemoryPoolIterator output)
+        // 63 for responseHeaders as it steals one bit for Content-Length in CopyTo(ref MemoryPoolIterator
+        // output)
         var responseHeaders = ResponseHeaders;
         Debug.Assert(responseHeaders.Length <= 63);
         Debug.Assert(responseHeaders.Count(x => x.Index == 63) == 1);

@@ -191,7 +191,8 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
         return false;
     }
 
-    // it could happen that there are too many entries before we start measuring the interesting part, rather clean it before
+    // it could happen that there are too many entries before we start measuring the interesting part,
+    // rather clean it before
     private void CleanPerfEntries()
     {
         var checkScript = $"window.performance.clearResourceTimings();";

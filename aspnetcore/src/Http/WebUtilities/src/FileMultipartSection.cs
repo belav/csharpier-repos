@@ -15,7 +15,8 @@ public class FileMultipartSection
     /// <summary>
     /// Creates a new instance of the <see cref="FileMultipartSection"/> class
     /// </summary>
-    /// <param name="section">The section from which to create the <see cref="FileMultipartSection"/></param>
+    /// <param name="section">The section from which to create the <see
+    // cref="FileMultipartSection"/></param>
     /// <remarks>Reparses the content disposition header</remarks>
     public FileMultipartSection(MultipartSection section)
         : this(section, section.GetContentDispositionHeader()) { }
@@ -23,7 +24,8 @@ public class FileMultipartSection
     /// <summary>
     /// Creates a new instance of the <see cref="FileMultipartSection"/> class
     /// </summary>
-    /// <param name="section">The section from which to create the <see cref="FileMultipartSection"/></param>
+    /// <param name="section">The section from which to create the <see
+    // cref="FileMultipartSection"/></param>
     /// <param name="header">An already parsed content disposition header</param>
     public FileMultipartSection(MultipartSection section, ContentDispositionHeaderValue? header)
     {

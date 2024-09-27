@@ -17,7 +17,7 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool ConvertStringSdToSd(
             string stringSd,
-            /* DWORD */uint stringSdRevision,
+/* DWORD */uint stringSdRevision,
             out IntPtr resultSd,
             ref uint resultSdLength
         );

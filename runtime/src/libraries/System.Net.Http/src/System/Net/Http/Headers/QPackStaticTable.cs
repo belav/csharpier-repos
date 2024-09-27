@@ -6,7 +6,8 @@ namespace System.Net.Http.Headers
     internal static class QPackStaticTable
     {
         // https://tools.ietf.org/html/draft-ietf-quic-qpack-11#appendix-A
-        // TODO: can we put some of this logic into H3StaticTable and/or generate it using data that is already there?
+        // TODO: can we put some of this logic into H3StaticTable and/or generate it using data that is
+        // already there?
         internal static (HeaderDescriptor descriptor, string value)[] HeaderLookup { get; } =
             new (HeaderDescriptor descriptor, string value)[]
             {

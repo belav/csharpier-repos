@@ -110,7 +110,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         serverName
                     );
 
-                    // force binding (needed otherwise S.DS throw an exception while releasing the COM interface pointer)
+                    // force binding (needed otherwise S.DS throw an exception while releasing the COM interface
+                    // pointer)
                     _ = (string?)
                         PropertyManager.GetPropertyValue(
                             context,
@@ -754,7 +755,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     exception = ExceptionHelper.CreateSyncAllException(temp, true);
                     if (exception == null)
                     {
-                        // this is the special case that we ignore the failure when SyncAllOptions.CheckServerAlivenessOnly is specified
+                        // this is the special case that we ignore the failure when SyncAllOptions.CheckServerAlivenessOnly
+                        // is specified
                         return true;
                     }
                 }

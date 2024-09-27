@@ -27,10 +27,13 @@ public class ComponentState : IAsyncDisposable
     /// <summary>
     /// Constructs an instance of <see cref="ComponentState"/>.
     /// </summary>
-    /// <param name="renderer">The <see cref="Renderer"/> with which the new instance should be associated.</param>
-    /// <param name="componentId">The externally visible identifier for the <see cref="IComponent"/>. The identifier must be unique in the context of the <see cref="Renderer"/>.</param>
+    /// <param name="renderer">The <see cref="Renderer"/> with which the new instance should be
+    // associated.</param>
+    /// <param name="componentId">The externally visible identifier for the <see cref="IComponent"/>.
+    // The identifier must be unique in the context of the <see cref="Renderer"/>.</param>
     /// <param name="component">The <see cref="IComponent"/> whose state is being tracked.</param>
-    /// <param name="parentComponentState">The <see cref="ComponentState"/> for the parent component, or null if this is a root component.</param>
+    /// <param name="parentComponentState">The <see cref="ComponentState"/> for the parent component, or
+    // null if this is a root component.</param>
     public ComponentState(
         Renderer renderer,
         int componentId,
@@ -93,12 +96,14 @@ public class ComponentState : IAsyncDisposable
     public IComponent Component { get; }
 
     /// <summary>
-    /// Gets the <see cref="ComponentState"/> of the parent component, or null if this is a root component.
+    /// Gets the <see cref="ComponentState"/> of the parent component, or null if this is a root
+    // component.
     /// </summary>
     public ComponentState? ParentComponentState { get; }
 
     /// <summary>
-    /// Gets the <see cref="ComponentState"/> of the logical parent component, or null if this is a root component.
+    /// Gets the <see cref="ComponentState"/> of the logical parent component, or null if this is a root
+    // component.
     /// </summary>
     public ComponentState? LogicalParentComponentState { get; }
 
@@ -129,14 +134,17 @@ public class ComponentState : IAsyncDisposable
         }
         catch (Exception ex)
         {
-            // If an exception occurs in the render fragment delegate, we won't process the diff in any way, so child components,
-            // event handlers, etc., will all be left untouched as if this component didn't re-render at all. The Renderer will
+            // If an exception occurs in the render fragment delegate, we won't process the diff in any way, so
+            // child components,
+            // event handlers, etc., will all be left untouched as if this component didn't re-render at all.
+            // The Renderer will
             // then forcibly clear the descendant subtree by rendering an empty fragment for this component.
             renderFragmentException = ex;
             return;
         }
 
-        // We don't want to make errors from this be recoverable, because there's no legitimate reason for them to happen
+        // We don't want to make errors from this be recoverable, because there's no legitimate reason for
+        // them to happen
         _nextRenderTree.AssertTreeIsValid(Component);
 
         // Swap the old and new tree builders
@@ -210,9 +218,12 @@ public class ComponentState : IAsyncDisposable
 
     private void StopSupplyingSingleDeliveryCascadingParameters()
     {
-        // We're optimizing for the case where there are no single-delivery parameters, or if there were, we already
-        // removed them. In those cases _cascadingParameters is already up-to-date and gets used as-is without any filtering.
-        // In the unusual case were there are single-delivery parameters and we haven't yet removed them, it's OK to
+        // We're optimizing for the case where there are no single-delivery parameters, or if there were, we
+        // already
+        // removed them. In those cases _cascadingParameters is already up-to-date and gets used as-is
+        // without any filtering.
+        // In the unusual case were there are single-delivery parameters and we haven't yet removed them,
+        // it's OK to
         // go through the extra work and allocation of creating a new list.
         List<CascadingParameterState>? remainingCascadingParameters = null;
         foreach (var param in _cascadingParameters)
@@ -236,9 +247,12 @@ public class ComponentState : IAsyncDisposable
 
     internal void NotifyCascadingValueChanged(in ParameterViewLifetime lifetime)
     {
-        // If the component was already disposed, we must not try to supply new parameters. Among other reasons,
-        // _latestDirectParametersSnapshot will already have been disposed and that puts it into an invalid state
-        // so we can't even read from it. Note that disposal doesn't instantly trigger unsubscription from cascading
+        // If the component was already disposed, we must not try to supply new parameters. Among other
+        // reasons,
+        // _latestDirectParametersSnapshot will already have been disposed and that puts it into an invalid
+        // state
+        // so we can't even read from it. Note that disposal doesn't instantly trigger unsubscription from
+        // cascading
         // values - that only happens when the ComponentState is processed later by the disposal queue.
         if (_componentWasDisposed)
         {
@@ -253,8 +267,10 @@ public class ComponentState : IAsyncDisposable
         SupplyCombinedParameters(allParams);
     }
 
-    // This should not be called from anywhere except SetDirectParameters or NotifyCascadingValueChanged.
-    // Those two methods know how to correctly combine both cascading and non-cascading parameters to supply
+    // This should not be called from anywhere except SetDirectParameters or
+    // NotifyCascadingValueChanged.
+    // Those two methods know how to correctly combine both cascading and non-cascading parameters to
+    // supply
     // a consistent set to the recipient.
     private void SupplyCombinedParameters(ParameterView directAndCascadingParameters)
     {

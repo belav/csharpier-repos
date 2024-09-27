@@ -20,7 +20,8 @@ namespace System.Reflection.Internal
         /// <summary>
         /// Creates and hydrates a memory block representing data in the specified range.
         /// </summary>
-        /// <param name="start">Starting offset relative to the beginning of the data represented by this provider.</param>
+        /// <param name="start">Starting offset relative to the beginning of the data represented by this
+        // provider.</param>
         /// <param name="size">Size of the resulting block.</param>
         /// <exception cref="IOException">Error while reading from the memory source.</exception>
         public AbstractMemoryBlock GetMemoryBlock(int start, int size)
@@ -40,8 +41,10 @@ namespace System.Reflection.Internal
 
         /// <summary>
         /// Gets a seekable and readable <see cref="Stream"/> that can be used to read all data.
-        /// The operations on the stream has to be done under a lock of <see cref="StreamConstraints.GuardOpt"/> if non-null.
-        /// The image starts at <see cref="StreamConstraints.ImageStart"/> and has size <see cref="StreamConstraints.ImageSize"/>.
+        /// The operations on the stream has to be done under a lock of <see
+        // cref="StreamConstraints.GuardOpt"/> if non-null.
+        /// The image starts at <see cref="StreamConstraints.ImageStart"/> and has size <see
+        // cref="StreamConstraints.ImageSize"/>.
         /// It is the caller's responsibility not to read outside those bounds.
         /// </summary>
         public abstract Stream GetStream(out StreamConstraints constraints);

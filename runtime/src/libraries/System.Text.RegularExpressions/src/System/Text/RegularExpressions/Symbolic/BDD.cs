@@ -10,14 +10,20 @@ using System.Runtime.CompilerServices;
 namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>
-    /// Represents nodes in a Binary Decision Diagram (BDD), which compactly represent sets of integers and allow for fast
-    /// querying of whether an integer is in the set (and if so, what value it maps to, typically True or False).
+    /// Represents nodes in a Binary Decision Diagram (BDD), which compactly represent sets of integers
+    // and allow for fast
+    /// querying of whether an integer is in the set (and if so, what value it maps to, typically True
+    // or False).
     /// </summary>
     /// <remarks>
-    /// All non-leaf nodes have an Ordinal, which indicates the position of the bit the node relates to (0 for the least significant
-    /// bit), and two children, One and Zero, for the cases of the current bit being 1 or 0, respectively. An integer
-    /// belongs to the set represented by the BDD if the path from the root following the branches that correspond to
-    /// the bits of the integer leads to the True leaf. This class also supports multi-terminal BDDs (MTBDD), i.e. ones where
+    /// All non-leaf nodes have an Ordinal, which indicates the position of the bit the node relates to
+    // (0 for the least significant
+    /// bit), and two children, One and Zero, for the cases of the current bit being 1 or 0,
+    // respectively. An integer
+    /// belongs to the set represented by the BDD if the path from the root following the branches that
+    // correspond to
+    /// the bits of the integer leads to the True leaf. This class also supports multi-terminal BDDs
+    // (MTBDD), i.e. ones where
     /// the leaves are something other than True or False, which are used for representing classifiers.
     /// </remarks>
     internal sealed class BDD : IComparable<BDD>, IEquatable<BDD>
@@ -144,10 +150,12 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>Gets a hashcode for the BDD.</summary>
         public override int GetHashCode() => _hashcode;
 
-        /// <summary>A shallow equality check that holds if ordinals are identical and one's are identical and zero's are identical.</summary>
+        /// <summary>A shallow equality check that holds if ordinals are identical and one's are identical
+        // and zero's are identical.</summary>
         public override bool Equals(object? obj) => Equals(obj as BDD);
 
-        /// <summary>A shallow equality check that holds if ordinals are identical and one's are identical and zero's are identical.</summary>
+        /// <summary>A shallow equality check that holds if ordinals are identical and one's are identical
+        // and zero's are identical.</summary>
         public bool Equals(BDD? bdd) =>
             bdd is not null
             && (this == bdd || (Ordinal == bdd.Ordinal && One == bdd.One && Zero == bdd.Zero));
@@ -155,10 +163,12 @@ namespace System.Text.RegularExpressions.Symbolic
         #region Serialization
 #if DEBUG // currently used only from the debug-only code that regenerates the embedded serialized BDD data
         /// <summary>
-        /// Serialize this BDD in a flat ulong array. The BDD may have at most 2^k ordinals and 2^n nodes, such that k+2n &lt; 64
+        /// Serialize this BDD in a flat ulong array. The BDD may have at most 2^k ordinals and 2^n nodes,
+        // such that k+2n &lt; 64
         /// BDD.False is represented by return value ulong[]{0}.
         /// BDD.True is represented by return value ulong[]{1}.
-        /// Serializer uses more compacted representations when fewer bits are needed, which is reflected in the first
+        /// Serializer uses more compacted representations when fewer bits are needed, which is reflected in
+        // the first
         /// two numbers of the return value. MTBDD terminals are represented by negated numbers as -id.
         /// </summary>
         [ExcludeFromCodeCoverage(Justification = "Used only to generate src data files")]
@@ -287,7 +297,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            // Flush the grouped non-terminals into the sorted nodes from smallest to highest ordinal. The highest
+            // Flush the grouped non-terminals into the sorted nodes from smallest to highest ordinal. The
+            // highest
             // ordinal is guaranteed to have only one node, which places the root of the BDD at the end.
             for (int i = 0; i < nonterminals.Length; i++)
             {
@@ -480,7 +491,8 @@ namespace System.Text.RegularExpressions.Symbolic
         public bool Contains(int input) => Find(input) == TrueOrdinal; //-2 is the Ordinal of BDD.True
 
         /// <summary>
-        /// Returns true if the only other terminal besides False is a MTBDD terminal that is different from True.
+        /// Returns true if the only other terminal besides False is a MTBDD terminal that is different from
+        // True.
         /// If this is the case, outputs that terminal.
         /// </summary>
         public bool IsEssentiallyBoolean([NotNullWhen(true)] out BDD? terminalActingAsTrue)

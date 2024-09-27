@@ -224,37 +224,37 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     _ => null,
                 };
 
-            /*
-               From: https://tools.ietf.org/html/rfc8259
-             
-               The representation of numbers is similar to that used in most
-               programming languages.  A number is represented in base 10 using
-               decimal digits.  It contains an integer component that may be
-               prefixed with an optional minus sign, which may be followed by a
-               fraction part and/or an exponent part.  Leading zeros are not
-               allowed.
+/*
+From: https://tools.ietf.org/html/rfc8259
 
-               A fraction part is a decimal point followed by one or more digits.
+The representation of numbers is similar to that used in most
+programming languages.  A number is represented in base 10 using
+decimal digits.  It contains an integer component that may be
+prefixed with an optional minus sign, which may be followed by a
+fraction part and/or an exponent part.  Leading zeros are not
+allowed.
 
-               An exponent part begins with the letter E in uppercase or lowercase,
-               which may be followed by a plus or minus sign.  The E and optional
-               sign are followed by one or more digits.
+A fraction part is a decimal point followed by one or more digits.
 
-               Numeric values that cannot be represented in the grammar below (such
-               as Infinity and NaN) are not permitted.
+An exponent part begins with the letter E in uppercase or lowercase,
+which may be followed by a plus or minus sign.  The E and optional
+sign are followed by one or more digits.
 
-                  number = [ minus ] int [ frac ] [ exp ]
-                  decimal-point = %x2E       ; .
-                  digit1-9 = %x31-39         ; 1-9
-                  e = %x65 / %x45            ; e E
+Numeric values that cannot be represented in the grammar below (such
+as Infinity and NaN) are not permitted.
 
-                  exp = e [ minus / plus ] 1*DIGIT
-                  frac = decimal-point 1*DIGIT
-                  int = zero / ( digit1-9 *DIGIT )
-                  minus = %x2D               ; -
-                  plus = %x2B                ; +
-                  zero = %x30                ; 0
-            */
+number = [ minus ] int [ frac ] [ exp ]
+decimal-point = %x2E       ; .
+digit1-9 = %x31-39         ; 1-9
+e = %x65 / %x45            ; e E
+
+exp = e [ minus / plus ] 1*DIGIT
+frac = decimal-point 1*DIGIT
+int = zero / ( digit1-9 *DIGIT )
+minus = %x2D               ; -
+plus = %x2B                ; +
+zero = %x30                ; 0
+*/
 
             private static readonly Regex s_validNumberRegex =
                 new(

@@ -7,7 +7,8 @@ using System.Runtime.InteropServices;
 namespace System.Threading
 {
     //
-    // Implementation of ThreadPoolBoundHandle that sits on top of the CLR's ThreadPool and Overlapped infrastructure
+    // Implementation of ThreadPoolBoundHandle that sits on top of the CLR's ThreadPool and Overlapped
+    // infrastructure
     //
 
     /// <summary>
@@ -94,7 +95,8 @@ namespace System.Threading
         {
             ArgumentNullException.ThrowIfNull(overlapped);
 
-            // Note: we explicitly allow FreeNativeOverlapped calls after the ThreadPoolBoundHandle has been Disposed.
+            // Note: we explicitly allow FreeNativeOverlapped calls after the ThreadPoolBoundHandle has been
+            // Disposed.
 
             ThreadPoolBoundHandleOverlapped wrapper = GetOverlappedWrapper(overlapped);
 

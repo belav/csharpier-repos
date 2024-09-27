@@ -661,7 +661,8 @@ class Program
                 .GetCompilationUnitRoot()
                 .FindToken(sampleProgram.IndexOf("ct", StringComparison.Ordinal));
 
-            // Get the diagnostics from the ExpressionStatement Syntax node which is the current token's Parent's Parent
+            // Get the diagnostics from the ExpressionStatement Syntax node which is the current token's
+            // Parent's Parent
             var expressionDiags = syntaxTree.GetDiagnostics(token.Parent.Parent);
 
             expressionDiags.First().Location.GetLineSpan();

@@ -1275,7 +1275,8 @@ namespace System.Workflow.Activities.Rules
             // include interface checks
             if (toType.IsInterface)
             {
-                // from any class-type S to any interface-type T, provided S is not sealed and provided S does not implement T.
+                // from any class-type S to any interface-type T, provided S is not sealed and provided S does not
+                // implement T.
                 // latter part should be handled by implicit conversion, so we are ok as long as class is not sealed
                 if ((fromType.IsClass) && (!fromType.IsSealed))
                     return true;
@@ -1286,7 +1287,8 @@ namespace System.Workflow.Activities.Rules
             }
             if (fromType.IsInterface)
             {
-                // from any interface-type S to any class-type T, provided T is not sealed or provided T implements S.
+                // from any interface-type S to any class-type T, provided T is not sealed or provided T implements
+                // S.
                 if (
                     (toType.IsClass)
                     && ((!toType.IsSealed) || (InterfaceMatch(toType.GetInterfaces(), fromType)))

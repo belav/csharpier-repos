@@ -192,7 +192,8 @@ namespace System.DirectoryServices.Protocols
                     string attribute = null;
                     object[] o = BerConverter.TryDecode("{ea}", value, out bool decodeSucceeded);
 
-                    // decode might fail as AD for example never returns attribute name, we don't want to unnecessarily throw and catch exception
+                    // decode might fail as AD for example never returns attribute name, we don't want to unnecessarily
+                    // throw and catch exception
                     if (decodeSucceeded)
                     {
                         Debug.Assert(o != null && o.Length == 2);
@@ -389,7 +390,8 @@ namespace System.DirectoryServices.Protocols
             SecurityMasks = masks;
         }
 
-        // We don't do validation to the dirsync flag here as underneath API does not check for it and we don't want to put
+        // We don't do validation to the dirsync flag here as underneath API does not check for it and we
+        // don't want to put
         // unnecessary limitation on it.
         public SecurityMasks SecurityMasks { get; set; }
 
@@ -544,7 +546,8 @@ namespace System.DirectoryServices.Protocols
             set => _dirsyncCookie = value;
         }
 
-        // We don't do validation to the dirsync flag here as underneath API does not check for it and we don't want to put
+        // We don't do validation to the dirsync flag here as underneath API does not check for it and we
+        // don't want to put
         // unnecessary limitation on it.
         public DirectorySynchronizationOptions Option { get; set; }
 

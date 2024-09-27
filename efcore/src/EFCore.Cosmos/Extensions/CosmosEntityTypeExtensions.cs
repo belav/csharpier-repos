@@ -10,8 +10,10 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Entity type extension methods for Cosmos metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see>, and
-///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see>, and
+///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see>
+// for more information and examples.
 /// </remarks>
 public static class CosmosEntityTypeExtensions
 {
@@ -49,7 +51,8 @@ public static class CosmosEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the container name for.</param>
     /// <param name="name">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static string? SetContainer(
         this IConventionEntityType entityType,
         string? name,
@@ -65,10 +68,12 @@ public static class CosmosEntityTypeExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for the container to which the entity type is mapped.
+    ///     Gets the <see cref="ConfigurationSource" /> for the container to which the entity type is
+    // mapped.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the container to which the entity type is mapped.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the container to which the entity type is
+    // mapped.</returns>
     public static ConfigurationSource? GetContainerConfigurationSource(
         this IConventionEntityType entityType
     ) => entityType.FindAnnotation(CosmosAnnotationNames.ContainerName)?.GetConfigurationSource();
@@ -106,7 +111,8 @@ public static class CosmosEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the containing property name for.</param>
     /// <param name="name">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static string? SetContainingPropertyName(
         this IConventionEntityType entityType,
         string? name,
@@ -122,10 +128,12 @@ public static class CosmosEntityTypeExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for the parent property to which the entity type is mapped.
+    ///     Gets the <see cref="ConfigurationSource" /> for the parent property to which the entity type
+    // is mapped.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the parent property to which the entity type is mapped.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the parent property to which the entity type
+    // is mapped.</returns>
     public static ConfigurationSource? GetContainingPropertyNameConfigurationSource(
         this IConventionEntityType entityType
     ) => entityType.FindAnnotation(CosmosAnnotationNames.PropertyName)?.GetConfigurationSource();
@@ -157,7 +165,8 @@ public static class CosmosEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the partition key property name for.</param>
     /// <param name="name">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static string? SetPartitionKeyPropertyName(
         this IConventionEntityType entityType,
         string? name,
@@ -173,7 +182,8 @@ public static class CosmosEntityTypeExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for the property that is used to store the partition key.
+    ///     Gets the <see cref="ConfigurationSource" /> for the property that is used to store the
+    // partition key.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the partition key property.</returns>
@@ -260,7 +270,8 @@ public static class CosmosEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the ETag property name for.</param>
     /// <param name="name">The name to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static string? SetETagPropertyName(
         this IConventionEntityType entityType,
         string? name,
@@ -288,7 +299,8 @@ public static class CosmosEntityTypeExtensions
     ///     Gets the property on this entity that is mapped to Cosmos ETag, if it exists.
     /// </summary>
     /// <param name="entityType">The entity type to get the ETag property for.</param>
-    /// <returns>The property mapped to ETag, or <see langword="null" /> if no property is mapped to ETag.</returns>
+    /// <returns>The property mapped to ETag, or <see langword="null" /> if no property is mapped to
+    // ETag.</returns>
     public static IReadOnlyProperty? GetETagProperty(this IReadOnlyEntityType entityType)
     {
         var etagPropertyName = entityType.GetETagPropertyName();
@@ -302,7 +314,8 @@ public static class CosmosEntityTypeExtensions
     ///     Gets the property on this entity that is mapped to Cosmos ETag, if it exists.
     /// </summary>
     /// <param name="entityType">The entity type to get the ETag property for.</param>
-    /// <returns>The property mapped to etag, or <see langword="null" /> if no property is mapped to ETag.</returns>
+    /// <returns>The property mapped to etag, or <see langword="null" /> if no property is mapped to
+    // ETag.</returns>
     public static IMutableProperty? GetETagProperty(this IMutableEntityType entityType) =>
         (IMutableProperty?)((IReadOnlyEntityType)entityType).GetETagProperty();
 
@@ -310,7 +323,8 @@ public static class CosmosEntityTypeExtensions
     ///     Gets the property on this entity that is mapped to Cosmos ETag, if it exists.
     /// </summary>
     /// <param name="entityType">The entity type to get the ETag property for.</param>
-    /// <returns>The property mapped to etag, or <see langword="null" /> if no property is mapped to ETag.</returns>
+    /// <returns>The property mapped to etag, or <see langword="null" /> if no property is mapped to
+    // ETag.</returns>
     public static IConventionProperty? GetETagProperty(this IConventionEntityType entityType) =>
         (IConventionProperty?)((IReadOnlyEntityType)entityType).GetETagProperty();
 
@@ -318,7 +332,8 @@ public static class CosmosEntityTypeExtensions
     ///     Gets the property on this entity that is mapped to Cosmos ETag, if it exists.
     /// </summary>
     /// <param name="entityType">The entity type to get the ETag property for.</param>
-    /// <returns>The property mapped to etag, or <see langword="null" /> if no property is mapped to ETag.</returns>
+    /// <returns>The property mapped to etag, or <see langword="null" /> if no property is mapped to
+    // ETag.</returns>
     public static IProperty? GetETagProperty(this IEntityType entityType) =>
         (IProperty?)((IReadOnlyEntityType)entityType).GetETagProperty();
 
@@ -347,7 +362,8 @@ public static class CosmosEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="seconds">The time to live to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static int? SetAnalyticalStoreTimeToLive(
         this IConventionEntityType entityType,
         int? seconds,
@@ -363,10 +379,12 @@ public static class CosmosEntityTypeExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for the time to live for analytical store in seconds at container scope.
+    ///     Gets the <see cref="ConfigurationSource" /> for the time to live for analytical store in
+    // seconds at container scope.
     /// </summary>
     /// <param name="entityType">The entity typer.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the time to live for analytical store.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the time to live for analytical
+    // store.</returns>
     public static ConfigurationSource? GetAnalyticalStoreTimeToLiveConfigurationSource(
         this IConventionEntityType entityType
     ) =>
@@ -397,7 +415,8 @@ public static class CosmosEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="seconds">The time to live to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static int? SetDefaultTimeToLive(
         this IConventionEntityType entityType,
         int? seconds,
@@ -413,7 +432,8 @@ public static class CosmosEntityTypeExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for the default time to live in seconds at container scope.
+    ///     Gets the <see cref="ConfigurationSource" /> for the default time to live in seconds at
+    // container scope.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the default time to live.</returns>
@@ -458,7 +478,8 @@ public static class CosmosEntityTypeExtensions
     /// <param name="entityType">The entity type.</param>
     /// <param name="throughput">The throughput to set.</param>
     /// <param name="autoscale">Whether autoscale is enabled.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static int? SetThroughput(
         this IConventionEntityType entityType,
         int? throughput,
@@ -478,7 +499,8 @@ public static class CosmosEntityTypeExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the <see cref="ConfigurationSource" /> for the provisioned throughput at container scope.
+    ///     Gets the <see cref="ConfigurationSource" /> for the provisioned throughput at container
+    // scope.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the throughput.</returns>

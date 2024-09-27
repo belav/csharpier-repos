@@ -21,17 +21,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
     /// An abstract flow pass that takes some shortcuts in analyzing finally blocks, in order to enable
-    /// the analysis to take place without tracking exceptions or repeating the analysis of a finally block
+    /// the analysis to take place without tracking exceptions or repeating the analysis of a finally
+    // block
     /// for each exit from a try statement.  The shortcut results in a slightly less precise
     /// (but still conservative) analysis, but that less precise analysis is all that is required for
     /// the language specification.  The most significant shortcut is that we do not track the state
     /// where exceptions can arise.  That does not affect the soundness for most analyses, but for those
-    /// analyses whose soundness would be affected (e.g. "data flows out"), we track "unassignments" to keep
+    /// analyses whose soundness would be affected (e.g. "data flows out"), we track "unassignments" to
+    // keep
     /// the analysis sound.
     /// </summary>
     /// <remarks>
     /// Formally, this is a fairly conventional lattice flow analysis (<see
-    /// href="https://en.wikipedia.org/wiki/Data-flow_analysis"/>) that moves upward through the <see cref="Join(ref
+    /// href="https://en.wikipedia.org/wiki/Data-flow_analysis"/>) that moves upward through the <see
+    // cref="Join(ref
     /// TLocalState, ref TLocalState)"/> operation.
     /// </remarks>
     internal abstract partial class AbstractFlowPass<TLocalState, TLocalFunctionState>
@@ -60,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected Symbol _symbol;
 
         /// <summary>
-        /// Reflects the enclosing member, lambda or local function at the current location (in the bound tree).
+        /// Reflects the enclosing member, lambda or local function at the current location (in the bound
+        // tree).
         /// </summary>
         protected Symbol CurrentSymbol;
 
@@ -690,8 +694,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// assigned (or not). That is, we will not be needing AssignedWhenTrue and
         /// AssignedWhenFalse.
         /// </summary>
-        /// <param name="isKnownToBeAnLvalue">True when visiting an rvalue that will actually be used as an lvalue,
-        /// for example a ref parameter when simulating a read of it, or an argument corresponding to an in parameter</param>
+        /// <param name="isKnownToBeAnLvalue">True when visiting an rvalue that will actually be used as an
+        // lvalue,
+        /// for example a ref parameter when simulating a read of it, or an argument corresponding to an in
+        // parameter</param>
         protected virtual void VisitRvalue(BoundExpression node, bool isKnownToBeAnLvalue = false)
         {
             Visit(node);
@@ -886,7 +892,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// - new labels are removed (no longer can be reached)
         /// - unresolved pending branches are carried forward
         /// </summary>
-        /// <param name="oldPending">The old pending branches, which are to be merged with the current ones</param>
+        /// <param name="oldPending">The old pending branches, which are to be merged with the current
+        // ones</param>
         protected void RestorePending(SavedPending oldPending)
         {
             foreach (var node in _labelsSeen)
@@ -925,8 +932,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             PendingBranches.Free();
             PendingBranches = oldPending.PendingBranches;
 
-            // We only use SavePending/RestorePending when there could be no branch into the region between them.
-            // So there is no need to save the labels seen between the calls.  If there were such a need, we would
+            // We only use SavePending/RestorePending when there could be no branch into the region between
+            // them.
+            // So there is no need to save the labels seen between the calls.  If there were such a need, we
+            // would
             // do "this.labelsSeen.UnionWith(oldPending.LabelsSeen);" instead of the following assignment
             _labelsSeen.Free();
             _labelsSeen = oldPending.LabelsSeen;
@@ -937,7 +946,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         #region visitors
 
         /// <summary>
-        /// Since each language construct must be handled according to the rules of the language specification,
+        /// Since each language construct must be handled according to the rules of the language
+        // specification,
         /// the default visitor reports that the construct for the node is not implemented in the compiler.
         /// </summary>
         public override BoundNode DefaultVisit(BoundNode node)
@@ -1002,7 +1012,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (IsConditionalState)
             {
                 // Patterns which only match a single boolean value should propagate conditional state
-                // for example, `(a != null && a.M(out x)) is true` should have the same conditional state as `(a != null && a.M(out x))`.
+                // for example, `(a != null && a.M(out x)) is true` should have the same conditional state as `(a !=
+                // null && a.M(out x))`.
                 if (isBoolTest(pattern) is bool value)
                 {
                     if (!value)
@@ -1499,7 +1510,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Certain (struct) types are known by the compiler to be immutable.  In these cases calling a method on
+        /// Certain (struct) types are known by the compiler to be immutable.  In these cases calling a
+        // method on
         /// the type is known (by flow analysis) not to write the receiver.
         /// </summary>
         /// <param name="t"></param>
@@ -1864,9 +1876,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // NOTE: At this point all branches that are internal to try or catch blocks have been resolved.
             //       However we have not yet restored the oldPending branches. Therefore all the branches
-            //       that are currently pending must have been introduced in try/catch and do not terminate inside those blocks.
+            //       that are currently pending must have been introduced in try/catch and do not terminate
+            // inside those blocks.
             //
-            //       With exception of YieldReturn, these branches logically go through finally, if such present,
+            //       With exception of YieldReturn, these branches logically go through finally, if such
+            // present,
             //       so we must Union/Intersect finally state as appropriate
 
             if (node.FinallyBlockOpt != null)
@@ -2249,7 +2263,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             OutDeconstructVarPendingInference node
         )
         {
-            // OutDeconstructVarPendingInference nodes are only used within initial binding, but don't survive past that stage
+            // OutDeconstructVarPendingInference nodes are only used within initial binding, but don't survive
+            // past that stage
             throw ExceptionUtilities.Unreachable();
         }
 
@@ -2643,8 +2658,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void VisitBinaryOperatorChildren(BoundBinaryOperator node)
         {
-            // It is common in machine-generated code for there to be deep recursion on the left side of a binary
-            // operator, for example, if you have "a + b + c + ... " then the bound tree will be deep on the left
+            // It is common in machine-generated code for there to be deep recursion on the left side of a
+            // binary
+            // operator, for example, if you have "a + b + c + ... " then the bound tree will be deep on the
+            // left
             // hand side. To mitigate the risk of stack overflow we use an explicit stack.
             //
             // Of course we must ensure that we visit the left hand side before the right hand side.
@@ -2670,7 +2687,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var binary = stack.Pop();
 
-            // Only the leftmost operator of a left-associative binary operator chain can learn from a conditional access on the left
+            // Only the leftmost operator of a left-associative binary operator chain can learn from a
+            // conditional access on the left
             // For simplicity, we just special case it here.
             // For example, `a?.b(out x) == true` has a conditional access on the left of the operator,
             // but `expr == a?.b(out x) == true` has a conditional access on the right of the operator
@@ -2682,8 +2700,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_nonMonotonicTransfer)
                 {
-                    // In this very specific scenario, we need to do extra work to track unassignments for region analysis.
-                    // See `AbstractFlowPass.VisitCatchBlockWithAnyTransferFunction` for a similar scenario in catch blocks.
+                    // In this very specific scenario, we need to do extra work to track unassignments for region
+                    // analysis.
+                    // See `AbstractFlowPass.VisitCatchBlockWithAnyTransferFunction` for a similar scenario in catch
+                    // blocks.
                     Optional<TLocalState> oldState = NonMonotonicState;
                     NonMonotonicState = ReachableBottomState();
 
@@ -2918,7 +2938,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (node.OperatorKind == UnaryOperatorKind.BoolLogicalNegation)
             {
-                // We have a special case for the ! unary operator, which can operate in a boolean context (5.3.3.26)
+                // We have a special case for the ! unary operator, which can operate in a boolean context
+                // (5.3.3.26)
                 VisitCondition(node.Operand);
                 // it inverts the sense of assignedWhenTrue and assignedWhenFalse.
                 SetConditionalState(StateWhenFalse, StateWhenTrue);
@@ -3082,7 +3103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (node.ReceiverOpt != null)
             {
-                // An explicit or implicit receiver, for example in an expression such as (x.Goo is Action, or Goo is Action), is considered to be read.
+                // An explicit or implicit receiver, for example in an expression such as (x.Goo is Action, or Goo
+                // is Action), is considered to be read.
                 VisitRvalue(node.ReceiverOpt);
             }
 
@@ -3166,7 +3188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// "State when not null" can only propagate out of a conditional access if
-        /// it is not subject to a user-defined conversion whose parameter is not of a non-nullable value type.
+        /// it is not subject to a user-defined conversion whose parameter is not of a non-nullable value
+        // type.
         /// </summary>
         protected static bool CanPropagateStateWhenNotNull(Conversion conversion)
         {
@@ -3229,7 +3252,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Consider a scenario like `"a"?.M0(x = 1)?.M0(y = 1)`.
                 // We can "know" that `.M0(x = 1)` was evaluated unconditionally but not `M0(y = 1)`.
-                // Therefore we do a VisitPossibleConditionalAccess here which unconditionally includes the "after receiver" state in State
+                // Therefore we do a VisitPossibleConditionalAccess here which unconditionally includes the "after
+                // receiver" state in State
                 // and includes the "after subsequent conditional accesses" in stateWhenNotNull
                 if (
                     VisitPossibleConditionalAccess(
@@ -3259,22 +3283,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // We want to preserve stateWhenNotNull from accesses in the same "chain":
-                // a?.b(out x)?.c(out y); // expected to preserve stateWhenNotNull from both ?.b(out x) and ?.c(out y)
+                // a?.b(out x)?.c(out y); // expected to preserve stateWhenNotNull from both ?.b(out x) and ?.c(out
+                // y)
                 // but not accesses in nested expressions:
-                // a?.b(out x, c?.d(out y)); // expected to preserve stateWhenNotNull from a?.b(out x, ...) but not from c?.d(out y)
+                // a?.b(out x, c?.d(out y)); // expected to preserve stateWhenNotNull from a?.b(out x, ...) but not
+                // from c?.d(out y)
                 BoundExpression expr = node.AccessExpression;
                 while (expr is BoundConditionalAccess innerCondAccess)
                 {
                     Debug.Assert(
                         innerCondAccess.Receiver is not (BoundConditionalAccess or BoundConversion)
                     );
-                    // we assume that non-conditional accesses can never contain conditional accesses from the same "chain".
-                    // that is, we never have to dig through non-conditional accesses to find and handle conditional accesses.
+                    // we assume that non-conditional accesses can never contain conditional accesses from the same
+                    // "chain".
+                    // that is, we never have to dig through non-conditional accesses to find and handle conditional
+                    // accesses.
                     VisitRvalue(innerCondAccess.Receiver);
                     expr = innerCondAccess.AccessExpression;
 
-                    // The savedState here represents the scenario where 0 or more of the access expressions could have been evaluated.
-                    // e.g. after visiting `a?.b(x = null)?.c(x = new object())`, the "state when not null" of `x` is NotNull, but the "state when maybe null" of `x` is MaybeNull.
+                    // The savedState here represents the scenario where 0 or more of the access expressions could have
+                    // been evaluated.
+                    // e.g. after visiting `a?.b(x = null)?.c(x = new object())`, the "state when not null" of `x` is
+                    // NotNull, but the "state when maybe null" of `x` is MaybeNull.
                     Join(ref savedState, ref State);
                 }
 
@@ -4088,7 +4118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// The possible places that we are processing when there is a region.
     /// </summary>
     /// <remarks>
-    /// This should be nested inside <see cref="AbstractFlowPass{TLocalState, TLocalFunctionState}"/> but is not due to https://github.com/dotnet/roslyn/issues/36992 .
+    /// This should be nested inside <see cref="AbstractFlowPass{TLocalState, TLocalFunctionState}"/>
+    // but is not due to https://github.com/dotnet/roslyn/issues/36992 .
     /// </remarks>
     internal enum RegionPlace
     {

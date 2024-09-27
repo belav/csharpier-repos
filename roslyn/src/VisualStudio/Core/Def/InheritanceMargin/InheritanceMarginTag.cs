@@ -58,7 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             Moniker = InheritanceMarginHelpers.GetMoniker(relationship);
         }
 
-        // Intentionally throwing, we have never supported this facility, and there is no contract around placing
+        // Intentionally throwing, we have never supported this facility, and there is no contract around
+        // placing
         // these tags in sets or maps.
         public override int GetHashCode() => throw new NotImplementedException();
 

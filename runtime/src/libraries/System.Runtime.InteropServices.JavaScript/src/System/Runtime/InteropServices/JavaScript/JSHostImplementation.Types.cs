@@ -15,7 +15,8 @@ namespace System.Runtime.InteropServices.JavaScript
             public nint GCVHandle;
             public ToManagedCallback? Callback;
 #if FEATURE_WASM_THREADS
-            // the JavaScript object could only exist on the single web worker and can't migrate to other workers
+            // the JavaScript object could only exist on the single web worker and can't migrate to other
+            // workers
             internal int OwnerThreadId;
             internal SynchronizationContext? SynchronizationContext;
 #endif

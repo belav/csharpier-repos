@@ -50,15 +50,22 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
         protected override VirtualCharSequence TryConvertToVirtualCharsWorker(SyntaxToken token)
         {
-            // C# preprocessor directives can contain string literals.  However, these string literals do not behave
-            // like normal literals.  Because they are used for paths (i.e. in a #line directive), the language does not
-            // do any escaping within them.  i.e. if you have a \ it's just a \   Note that this is not a verbatim
+            // C# preprocessor directives can contain string literals.  However, these string literals do not
+            // behave
+            // like normal literals.  Because they are used for paths (i.e. in a #line directive), the language
+            // does not
+            // do any escaping within them.  i.e. if you have a \ it's just a \   Note that this is not a
+            // verbatim
             // string.  You can't put a double quote in it either, and you cannot have newlines and whatnot.
             //
-            // We technically could convert this trivially to an array of virtual chars.  After all, there would just be
-            // a 1:1 correspondence with the literal contents and the chars returned.  However, we don't even both
-            // returning anything here.  That's because there's no useful features we can offer here.  Because there are
-            // no escape characters we won't classify any escape characters.  And there is no way that these strings
+            // We technically could convert this trivially to an array of virtual chars.  After all, there would
+            // just be
+            // a 1:1 correspondence with the literal contents and the chars returned.  However, we don't even
+            // both
+            // returning anything here.  That's because there's no useful features we can offer here.  Because
+            // there are
+            // no escape characters we won't classify any escape characters.  And there is no way that these
+            // strings
             // would be Regex/Json snippets.  So it's easier to just bail out and return nothing.
             if (IsInDirective(token.Parent))
                 return default;
@@ -216,13 +223,18 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
         }
 
         /// <summary>
-        /// Creates the sequence for the <b>content</b> characters in this <paramref name="token"/>.  This will not
+        /// Creates the sequence for the <b>content</b> characters in this <paramref name="token"/>.  This
+        // will not
         /// include indentation whitespace that the language specifies is not part of the content.
         /// </summary>
-        /// <param name="parentExpression">The containing expression for this token.  This is needed so that we can
-        /// determine the indentation whitespace based on the last line of the containing multiline literal.</param>
-        /// <param name="tokenIncludeDelimiters">If this token includes the quote (<c>"</c>) characters for the
-        /// delimiters inside of it or not.  If so, then those quotes will need to be skipped when determining the
+        /// <param name="parentExpression">The containing expression for this token.  This is needed so that
+        // we can
+        /// determine the indentation whitespace based on the last line of the containing multiline
+        // literal.</param>
+        /// <param name="tokenIncludeDelimiters">If this token includes the quote (<c>"</c>) characters for
+        // the
+        /// delimiters inside of it or not.  If so, then those quotes will need to be skipped when
+        // determining the
         /// content</param>
         private static VirtualCharSequence TryConvertMultiLineRawStringToVirtualChars(
             SyntaxToken token,
@@ -230,8 +242,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             bool tokenIncludeDelimiters
         )
         {
-            // if this is the first text content chunk of the multi-line literal.  The first chunk contains the leading
-            // indentation of the line it's on (which thus must be trimmed), while all subsequent chunks do not (because
+            // if this is the first text content chunk of the multi-line literal.  The first chunk contains the
+            // leading
+            // indentation of the line it's on (which thus must be trimmed), while all subsequent chunks do not
+            // (because
             // they start right after some `{...}` interpolation
             var isFirstChunk =
                 parentExpression is LiteralExpressionSyntax
@@ -244,22 +258,26 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             if (parentExpression.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
                 return default;
 
-            // Use the parent multi-line expression to determine what whitespace to remove from the start of each line.
+            // Use the parent multi-line expression to determine what whitespace to remove from the start of
+            // each line.
             var parentSourceText = parentExpression.SyntaxTree.GetText();
             var indentationLength =
                 parentSourceText
                     .Lines.GetLineFromPosition(parentExpression.Span.End)
                     .GetFirstNonWhitespaceOffset() ?? 0;
 
-            // Create a source-text view over the token.  This makes it very easy to treat the token as a set of lines
+            // Create a source-text view over the token.  This makes it very easy to treat the token as a set of
+            // lines
             // that can be processed sensibly.
             var tokenSourceText = SourceText.From(token.Text);
 
-            // If we're on the very first chunk of the multi-line raw string literal, then we want to start on line 1 so
+            // If we're on the very first chunk of the multi-line raw string literal, then we want to start on
+            // line 1 so
             // we skip the space and newline that follow the initial `"""`.
             var startLineInclusive = tokenIncludeDelimiters ? 1 : 0;
 
-            // Similarly, if we're on the very last chunk of hte multi-line raw string literal, then we don't want to
+            // Similarly, if we're on the very last chunk of hte multi-line raw string literal, then we don't
+            // want to
             // include the line contents for the line that has the final `    """` on it.
             var lastLineExclusive = tokenIncludeDelimiters
                 ? tokenSourceText.Lines.Count - 1
@@ -272,8 +290,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                 var lineSpan = currentLine.Span;
                 var lineStart = lineSpan.Start;
 
-                // If we're on the second line onwards, we want to trim the indentation if we have it.  We also always
-                // do this for the first line of the first chunk as that will contain the initial leading whitespace.
+                // If we're on the second line onwards, we want to trim the indentation if we have it.  We also
+                // always
+                // do this for the first line of the first chunk as that will contain the initial leading
+                // whitespace.
                 if (isFirstChunk || lineNumber > startLineInclusive)
                 {
                     lineStart =
@@ -288,7 +308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                         ? currentLine.End
                         : currentLine.EndIncludingLineBreak;
 
-                // Now that we've found the start and end portions of that line, convert all the characters within to
+                // Now that we've found the start and end portions of that line, convert all the characters within
+                // to
                 // virtual chars and return.
                 for (var i = lineStart; i < lineEnd; )
                     i += ConvertTextAtIndexToRune(tokenSourceText, i, result, token.SpanStart);
@@ -327,8 +348,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             var startIndexInclusive = startDelimiter.Length;
             var endIndexExclusive = tokenText.Length - endDelimiter.Length;
 
-            // Do things in two passes.  First, convert everything in the string to a 16-bit-char+span.  Then walk
-            // again, trying to create Runes from the 16-bit-chars. We do this to simplify complex cases where we may
+            // Do things in two passes.  First, convert everything in the string to a 16-bit-char+span.  Then
+            // walk
+            // again, trying to create Runes from the 16-bit-chars. We do this to simplify complex cases where
+            // we may
             // have escapes and non-escapes mixed together.
 
             using var _ = ArrayBuilder<(char ch, TextSpan span)>.GetInstance(out var charResults);

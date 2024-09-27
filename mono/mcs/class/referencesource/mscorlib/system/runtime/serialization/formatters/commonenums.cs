@@ -4,14 +4,14 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: FormatterEnums
- **
- **
- ** Purpose: Soap XML Formatter Enums
- **
- **
- ===========================================================*/
+**
+** Class: FormatterEnums
+**
+**
+** Purpose: Soap XML Formatter Enums
+**
+**
+===========================================================*/
 
 namespace System.Runtime.Serialization.Formatters
 {

@@ -94,7 +94,8 @@ namespace System.ComponentModel.Design
             return CreateDesignSurfaceCore(this);
         }
 
-        // MSDN: parentProvider - A parent service provider. A new merged service provider will be created that
+        // MSDN: parentProvider - A parent service provider. A new merged service provider will be created
+        // that
         // will first ask this provider for a service, and then delegate any failures to the design surface
         // manager object. This merged provider will be passed into the CreateDesignSurfaceCore method.
         //

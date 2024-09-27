@@ -99,7 +99,8 @@ internal sealed class HostingStartupWebHostBuilder
         return _builder.UseStartup(startupType);
     }
 
-    // Note: This method isn't 100% compatible with trimming. It is possible for the factory to return a derived type from TStartup.
+    // Note: This method isn't 100% compatible with trimming. It is possible for the factory to return a
+    // derived type from TStartup.
     // RequiresUnreferencedCode isn't on this method because the majority of people won't do that.
     public IWebHostBuilder UseStartup<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup

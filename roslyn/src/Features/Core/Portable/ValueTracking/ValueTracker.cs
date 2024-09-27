@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                             )
                             .ConfigureAwait(false);
 
-                        // If the current parameter is a parameter symbol for the previous tracked method it should be treated differently.
+                        // If the current parameter is a parameter symbol for the previous tracked method it should be
+                        // treated differently.
                         // For example:
                         // string PrependString(string pre, string s) => pre + s;
                         //        ^--- previously tracked          ^---- current parameter being tracked
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                         // [|v|] is the interesting part, we don't care what the method returns
                         var isRefOrOut = parameterSymbol.IsRefOrOut();
 
-                        // Always track the parameter assignments as variables, in case they are assigned anywhere in the method
+                        // Always track the parameter assignments as variables, in case they are assigned anywhere in the
+                        // method
                         await TrackVariableReferencesAsync(
                                 parameterSymbol,
                                 operationCollector,
@@ -288,7 +290,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 return;
             }
 
-            // TODO: Use DFA to find meaningful returns? https://github.com/dotnet/roslyn-analyzers/blob/9e5f533cbafcc5579e4d758bc9bde27b7611ca54/docs/Writing%20dataflow%20analysis%20based%20analyzers.md
+            // TODO: Use DFA to find meaningful returns?
+            // https://github.com/dotnet/roslyn-analyzers/blob/9e5f533cbafcc5579e4d758bc9bde27b7611ca54/docs/Writing%20dataflow%20analysis%20based%20analyzers.md
             if (HasAValueReturn(methodSymbol))
             {
                 foreach (var location in methodSymbol.GetDefinitionLocationsToShow())

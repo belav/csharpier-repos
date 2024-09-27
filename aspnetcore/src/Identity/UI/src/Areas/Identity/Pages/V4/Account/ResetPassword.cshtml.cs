@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 
 /// <summary>
-///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+// be used
 ///     directly from your code. This API may change or be removed in future releases.
 /// </summary>
 [AllowAnonymous]
@@ -19,20 +20,23 @@ namespace Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 public abstract class ResetPasswordModel : PageModel
 {
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     [BindProperty]
     public InputModel Input { get; set; } = default!;
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public class InputModel
     {
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+        // be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required]
@@ -40,7 +44,8 @@ public abstract class ResetPasswordModel : PageModel
         public string Email { get; set; } = default!;
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+        // be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required]
@@ -53,7 +58,8 @@ public abstract class ResetPasswordModel : PageModel
         public string Password { get; set; } = default!;
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+        // be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [DataType(DataType.Password)]
@@ -62,7 +68,8 @@ public abstract class ResetPasswordModel : PageModel
         public string? ConfirmPassword { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+        // be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required]
@@ -70,13 +77,15 @@ public abstract class ResetPasswordModel : PageModel
     }
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public virtual IActionResult OnGet(string? code = null) => throw new NotImplementedException();
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();

@@ -30,7 +30,8 @@ namespace BuildBoss
     ///     - There is no project which is guaranteed to have a superset of dependencies
     ///     - There is no syntax for using the union of DLLs in a NuSpec file
     ///
-    /// The most straightforward solution that could be decided on was to manage the list of dependencies
+    /// The most straightforward solution that could be decided on was to manage the list of
+    // dependencies
     /// by hand in the NuSpec file and then rigorously verify the solution here.
     /// </summary>
     internal sealed class PackageContentsChecker : ICheckerUtil
@@ -378,8 +379,10 @@ namespace BuildBoss
         }
 
         /// <summary>
-        /// Verifies the VS.ExternalAPIs.Roslyn package is self consistent. Need to ensure that we insert all of the project dependencies
-        /// that we build into the package. If we miss a dependency then the VS insertion will fail. Big refactorings can often forget to
+        /// Verifies the VS.ExternalAPIs.Roslyn package is self consistent. Need to ensure that we insert
+        // all of the project dependencies
+        /// that we build into the package. If we miss a dependency then the VS insertion will fail. Big
+        // refactorings can often forget to
         /// properly update this package.
         /// </summary>
         /// <param name="textWriter"></param>
@@ -437,8 +440,10 @@ namespace BuildBoss
                     return;
                 }
 
-                // As a simplification we only validate the assembly names that begin with Microsoft.CodeAnalysis. This is a good
-                // hueristic for finding assemblies that we build. Can be expanded in the future if we find more assemblies that
+                // As a simplification we only validate the assembly names that begin with Microsoft.CodeAnalysis.
+                // This is a good
+                // hueristic for finding assemblies that we build. Can be expanded in the future if we find more
+                // assemblies that
                 // are worth validating here.
                 var neededDllNames = neededDllNameSet
                     .Where(x => x.StartsWith("Microsoft.CodeAnalysis"))

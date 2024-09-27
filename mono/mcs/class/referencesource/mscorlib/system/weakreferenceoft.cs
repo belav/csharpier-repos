@@ -27,7 +27,8 @@ namespace System
     {
         // If you fix bugs here, please fix them in WeakReference at the same time.
 
-        // This field is not a regular GC handle. It can have a special values that are used to prevent ----s between setting the target and finalization.
+        // This field is not a regular GC handle. It can have a special values that are used to prevent
+        // ----s between setting the target and finalization.
         internal IntPtr m_handle;
 
         // Creates a new WeakReference that keeps track of target.
@@ -58,7 +59,8 @@ namespace System
         }
 
         //
-        // We are exposing TryGetTarget instead of a simple getter to avoid a common problem where people write incorrect code like:
+        // We are exposing TryGetTarget instead of a simple getter to avoid a common problem where people
+        // write incorrect code like:
         //
         //      WeakReference ref = ...;
         //      if (ref.Target != null)
@@ -78,7 +80,8 @@ namespace System
             this.Target = target;
         }
 
-        // This is property for better debugging experience (VS debugger shows values of properties when you hover over the variables)
+        // This is property for better debugging experience (VS debugger shows values of properties when you
+        // hover over the variables)
         private extern T Target
         {
             [ResourceExposure(ResourceScope.None)]

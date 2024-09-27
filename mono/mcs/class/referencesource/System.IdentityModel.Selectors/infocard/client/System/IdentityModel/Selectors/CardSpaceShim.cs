@@ -30,7 +30,8 @@ namespace System.IdentityModel.Selectors
     //
     // Summary:
     // If v2 is installed, this class will route calls to the native dll that was installed with v2.
-    // This class essentially mimics the behavior in CSD Main 58552 which has been checked into the .Net branch for Win7
+    // This class essentially mimics the behavior in CSD Main 58552 which has been checked into the .Net
+    // branch for Win7
     //
     class CardSpaceShim
     {

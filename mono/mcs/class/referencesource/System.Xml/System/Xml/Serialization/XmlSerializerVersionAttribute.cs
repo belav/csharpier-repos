@@ -9,7 +9,8 @@ namespace System.Xml.Serialization
 {
     using System;
 
-    /// <include file='doc\XmlSerializerVersionAttribute.uex' path='docs/doc[@for="XmlSerializerVersionAttribute"]/*' />
+    /// <include file='doc\XmlSerializerVersionAttribute.uex'
+    // path='docs/doc[@for="XmlSerializerVersionAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -21,13 +22,15 @@ namespace System.Xml.Serialization
         string ns;
         Type type;
 
-        /// <include file='doc\XmlSerializerVersionAttribute.uex' path='docs/doc[@for="XmlSerializerVersionAttribute.XmlSerializerVersionAttribute"]/*' />
+        /// <include file='doc\XmlSerializerVersionAttribute.uex'
+        // path='docs/doc[@for="XmlSerializerVersionAttribute.XmlSerializerVersionAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public XmlSerializerVersionAttribute() { }
 
-        /// <include file='doc\XmlSerializerVersionAttribute.uex' path='docs/doc[@for="XmlSerializerVersionAttribute.XmlSerializerAssemblyAttribute1"]/*' />
+        /// <include file='doc\XmlSerializerVersionAttribute.uex'
+        // path='docs/doc[@for="XmlSerializerVersionAttribute.XmlSerializerAssemblyAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -36,7 +39,8 @@ namespace System.Xml.Serialization
             this.type = type;
         }
 
-        /// <include file='doc\XmlSerializerVersionAttribute.uex' path='docs/doc[@for="XmlSerializerVersionAttribute.ParentAssemblyId"]/*' />
+        /// <include file='doc\XmlSerializerVersionAttribute.uex'
+        // path='docs/doc[@for="XmlSerializerVersionAttribute.ParentAssemblyId"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -46,7 +50,8 @@ namespace System.Xml.Serialization
             set { mvid = value; }
         }
 
-        /// <include file='doc\XmlSerializerVersionAttribute.uex' path='docs/doc[@for="XmlSerializerVersionAttribute.ParentAssemblyId"]/*' />
+        /// <include file='doc\XmlSerializerVersionAttribute.uex'
+        // path='docs/doc[@for="XmlSerializerVersionAttribute.ParentAssemblyId"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -56,7 +61,8 @@ namespace System.Xml.Serialization
             set { serializerVersion = value; }
         }
 
-        /// <include file='doc\XmlSerializerVersionAttribute.uex' path='docs/doc[@for="XmlSerializerVersionAttribute.Namespace"]/*' />
+        /// <include file='doc\XmlSerializerVersionAttribute.uex'
+        // path='docs/doc[@for="XmlSerializerVersionAttribute.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -66,7 +72,8 @@ namespace System.Xml.Serialization
             set { ns = value; }
         }
 
-        /// <include file='doc\XmlSerializerVersionAttribute.uex' path='docs/doc[@for="XmlSerializerVersionAttribute.TypeName"]/*' />
+        /// <include file='doc\XmlSerializerVersionAttribute.uex'
+        // path='docs/doc[@for="XmlSerializerVersionAttribute.TypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

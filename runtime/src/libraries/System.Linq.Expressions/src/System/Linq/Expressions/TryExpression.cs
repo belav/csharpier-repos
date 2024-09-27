@@ -37,13 +37,16 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Gets the static type of the expression that this <see cref="Expression"/> represents. (Inherited from <see cref="Expression"/>.)
+        /// Gets the static type of the expression that this <see cref="Expression"/> represents. (Inherited
+        // from <see cref="Expression"/>.)
         /// </summary>
-        /// <returns>The <see cref="System.Type"/> that represents the static type of the expression.</returns>
+        /// <returns>The <see cref="System.Type"/> that represents the static type of the
+        // expression.</returns>
         public sealed override Type Type { get; }
 
         /// <summary>
-        /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
+        /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see
+        // cref="Expression"/>.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
         public sealed override ExpressionType NodeType => ExpressionType.Try;
@@ -85,7 +88,8 @@ namespace System.Linq.Expressions
         /// <param name="handlers">The <see cref="Handlers"/> property of the result.</param>
         /// <param name="finally">The <see cref="Finally"/> property of the result.</param>
         /// <param name="fault">The <see cref="Fault"/> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public TryExpression Update(
             Expression body,
             IEnumerable<CatchBlock>? handlers,
@@ -108,7 +112,8 @@ namespace System.Linq.Expressions
     public partial class Expression
     {
         /// <summary>
-        /// Creates a <see cref="TryExpression"/> representing a try block with a fault block and no catch statements.
+        /// Creates a <see cref="TryExpression"/> representing a try block with a fault block and no catch
+        // statements.
         /// </summary>
         /// <param name="body">The body of the try block.</param>
         /// <param name="fault">The body of the fault block.</param>
@@ -119,7 +124,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="TryExpression"/> representing a try block with a finally block and no catch statements.
+        /// Creates a <see cref="TryExpression"/> representing a try block with a finally block and no catch
+        // statements.
         /// </summary>
         /// <param name="body">The body of the try block.</param>
         /// <param name="finally">The body of the finally block.</param>
@@ -130,10 +136,12 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="TryExpression"/> representing a try block with any number of catch statements and neither a fault nor finally block.
+        /// Creates a <see cref="TryExpression"/> representing a try block with any number of catch
+        // statements and neither a fault nor finally block.
         /// </summary>
         /// <param name="body">The body of the try block.</param>
-        /// <param name="handlers">The array of zero or more <see cref="CatchBlock"/>s representing the catch statements to be associated with the try block.</param>
+        /// <param name="handlers">The array of zero or more <see cref="CatchBlock"/>s representing the
+        // catch statements to be associated with the try block.</param>
         /// <returns>The created <see cref="TryExpression"/>.</returns>
         public static TryExpression TryCatch(Expression body, params CatchBlock[]? handlers)
         {
@@ -141,11 +149,13 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="TryExpression"/> representing a try block with any number of catch statements and a finally block.
+        /// Creates a <see cref="TryExpression"/> representing a try block with any number of catch
+        // statements and a finally block.
         /// </summary>
         /// <param name="body">The body of the try block.</param>
         /// <param name="finally">The body of the finally block.</param>
-        /// <param name="handlers">The array of zero or more <see cref="CatchBlock"/>s representing the catch statements to be associated with the try block.</param>
+        /// <param name="handlers">The array of zero or more <see cref="CatchBlock"/>s representing the
+        // catch statements to be associated with the try block.</param>
         /// <returns>The created <see cref="TryExpression"/>.</returns>
         public static TryExpression TryCatchFinally(
             Expression body,
@@ -159,11 +169,15 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="TryExpression"/> representing a try block with the specified elements.
         /// </summary>
-        /// <param name="type">The result type of the try expression. If null, body and all handlers must have identical type.</param>
+        /// <param name="type">The result type of the try expression. If null, body and all handlers must
+        // have identical type.</param>
         /// <param name="body">The body of the try block.</param>
-        /// <param name="finally">The body of the finally block. Pass null if the try block has no finally block associated with it.</param>
-        /// <param name="fault">The body of the t block. Pass null if the try block has no fault block associated with it.</param>
-        /// <param name="handlers">A collection of <see cref="CatchBlock"/>s representing the catch statements to be associated with the try block.</param>
+        /// <param name="finally">The body of the finally block. Pass null if the try block has no finally
+        // block associated with it.</param>
+        /// <param name="fault">The body of the t block. Pass null if the try block has no fault block
+        // associated with it.</param>
+        /// <param name="handlers">A collection of <see cref="CatchBlock"/>s representing the catch
+        // statements to be associated with the try block.</param>
         /// <returns>The created <see cref="TryExpression"/>.</returns>
         public static TryExpression MakeTry(
             Type? type,
@@ -199,7 +213,8 @@ namespace System.Linq.Expressions
             return new TryExpression(type ?? body.Type, body, @finally, fault, @catch);
         }
 
-        //Validate that the body of the try expression must have the same type as the body of every try block.
+        //Validate that the body of the try expression must have the same type as the body of every try
+        // block.
         private static void ValidateTryAndCatchHaveSameType(
             Type? type,
             Expression tryBody,

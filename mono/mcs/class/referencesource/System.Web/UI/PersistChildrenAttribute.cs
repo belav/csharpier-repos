@@ -13,7 +13,8 @@ namespace System.Web.UI
     ///    <para>
     ///       Indicates whether
     ///       the contents within a tag representing a custom
-    ///       or Web control should be treated as literal text. Web controls supporting complex properties, like
+    ///       or Web control should be treated as literal text. Web controls supporting complex
+    // properties, like
     ///       templates, and
     ///       so on, typically mark themselves as "literals", thereby letting the designer
     ///       infra-structure deal with the persistence of those attributes.</para>
@@ -33,7 +34,8 @@ namespace System.Web.UI
         public static readonly PersistChildrenAttribute No = new PersistChildrenAttribute(false);
 
         /// <devdoc>
-        ///     This marks the default child persistence behavior for a control at design time. (equal to Yes.)
+        ///     This marks the default child persistence behavior for a control at design time. (equal to
+        // Yes.)
         /// </devdoc>
         public static readonly PersistChildrenAttribute Default = Yes;
 

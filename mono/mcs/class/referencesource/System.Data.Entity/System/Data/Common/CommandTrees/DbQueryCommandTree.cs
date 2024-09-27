@@ -29,7 +29,8 @@ namespace System.Data.Common.CommandTrees
         // Query expression
         private readonly DbExpression _query;
 
-        // Parameter information (will be retrieved from the query expression of the command tree during construction)
+        // Parameter information (will be retrieved from the query expression of the command tree during
+        // construction)
         private System.Collections.ObjectModel.ReadOnlyCollection<DbParameterReferenceExpression> _parameters;
 
         private DbQueryCommandTree(
@@ -61,10 +62,13 @@ namespace System.Data.Common.CommandTrees
         /// Constructs a new DbQueryCommandTree that uses the specified metadata workspace.
         /// </summary>
         /// <param name="metadata">The metadata workspace that the command tree should use.</param>
-        /// <param name="dataSpace">The logical 'space' that metadata in the expressions used in this command tree must belong to.</param>
+        /// <param name="dataSpace">The logical 'space' that metadata in the expressions used in this
+        // command tree must belong to.</param>
         /// <param name="query">A <see cref="DbExpression"/> that defines the logic of the query.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="metadata"/> or <paramref name="query"/> is null</exception>
-        /// <exception cref="ArgumentException"><paramref name="dataSpace"/> does not represent a valid data space</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="metadata"/> or <paramref name="query"/>
+        // is null</exception>
+        /// <exception cref="ArgumentException"><paramref name="dataSpace"/> does not represent a valid data
+        // space</exception>
         /*CQT_PUBLIC_API(*/internal /*)*/
         DbQueryCommandTree(MetadataWorkspace metadata, DataSpace dataSpace, DbExpression query)
             : this(metadata, dataSpace, query, true) { }

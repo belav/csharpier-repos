@@ -234,24 +234,40 @@ namespace XLinqTests
             );
         }
 
-        //[Variation(Priority = 1, Desc = "Add attribute (empty elem I., no attrs)", Params = new object[] { "<A></A>", "a1", "a1" })]
-        //[Variation(Priority = 0, Desc = "Add attribute (empty elem II., no attrs)", Params = new object[] { "<A/>", "a1", "a1" })]
-        //[Variation(Priority = 0, Desc = "Add attribute (empty elem)", Params = new object[] { "<A a='a' b='b'/>", "a1", "a1" })]
-        //[Variation(Priority = 0, Desc = "Add attribute (empty elem, namespaces)", Params = new object[] { "<A a1='a1' b='b'/>", "{ns}a1", "ns_a1" })]
-        //[Variation(Priority = 1, Desc = "Add attribute", Params = new object[] { "<A a1='a1' b='b'>text<B/></A>", "{ns}a1", "ns_a1" })]
-        //[Variation(Priority = 2, Desc = "Add attribute (content text only)", Params = new object[] { "<A a1='a1' b='b'>text</A>", "{ns}a1", "ns_a1" })]
+        //[Variation(Priority = 1, Desc = "Add attribute (empty elem I., no attrs)", Params = new object[] {
+        // "<A></A>", "a1", "a1" })]
+        //[Variation(Priority = 0, Desc = "Add attribute (empty elem II., no attrs)", Params = new object[]
+        // { "<A/>", "a1", "a1" })]
+        //[Variation(Priority = 0, Desc = "Add attribute (empty elem)", Params = new object[] { "<A a='a'
+        // b='b'/>", "a1", "a1" })]
+        //[Variation(Priority = 0, Desc = "Add attribute (empty elem, namespaces)", Params = new object[] {
+        // "<A a1='a1' b='b'/>", "{ns}a1", "ns_a1" })]
+        //[Variation(Priority = 1, Desc = "Add attribute", Params = new object[] { "<A a1='a1'
+        // b='b'>text<B/></A>", "{ns}a1", "ns_a1" })]
+        //[Variation(Priority = 2, Desc = "Add attribute (content text only)", Params = new object[] { "<A
+        // a1='a1' b='b'>text</A>", "{ns}a1", "ns_a1" })]
 
-        //[Variation(Priority = 0, Desc = "Replace attribute (empty elem, only one attr.)", Params = new object[] { "<A a1='original' />", "a1", "a1" })]
-        //[Variation(Priority = 0, Desc = "Replace attribute (empty elem, multiple attr., namespaces)", Params = new object[] { "<A p:a1='x' a1='original' xmlns:p='ns'/>", "{ns}a1", "ns_a1" })]
-        //[Variation(Priority = 1, Desc = "Replace attribute (multiple attr. (first))", Params = new object[] { "<A a1='original' x='x' y='y'>text</A>", "a1", "a1" })]
-        //[Variation(Priority = 1, Desc = "Replace attribute (multiple attr. (mIddle))", Params = new object[] { "<A x='x' a1='original' y='y'>text</A>", "a1", "a1" })]
-        //[Variation(Priority = 1, Desc = "Replace attribute (multiple attr. (last))", Params = new object[] { "<A x='x' y='y' a1='original'>text</A>", "a1", "a1" })]
+        //[Variation(Priority = 0, Desc = "Replace attribute (empty elem, only one attr.)", Params = new
+        // object[] { "<A a1='original' />", "a1", "a1" })]
+        //[Variation(Priority = 0, Desc = "Replace attribute (empty elem, multiple attr., namespaces)",
+        // Params = new object[] { "<A p:a1='x' a1='original' xmlns:p='ns'/>", "{ns}a1", "ns_a1" })]
+        //[Variation(Priority = 1, Desc = "Replace attribute (multiple attr. (first))", Params = new
+        // object[] { "<A a1='original' x='x' y='y'>text</A>", "a1", "a1" })]
+        //[Variation(Priority = 1, Desc = "Replace attribute (multiple attr. (mIddle))", Params = new
+        // object[] { "<A x='x' a1='original' y='y'>text</A>", "a1", "a1" })]
+        //[Variation(Priority = 1, Desc = "Replace attribute (multiple attr. (last))", Params = new object[]
+        // { "<A x='x' y='y' a1='original'>text</A>", "a1", "a1" })]
 
-        //[Variation(Priority = 0, Desc = "Remove attribute (only attribute)", Params = new object[] { "<A a1='original'></A>", "a1", null })]
-        //[Variation(Priority = 0, Desc = "Remove attribute (from multiple attribs)", Params = new object[] { "<A y='y' a1='original' x='x'></A>", "a1", null })]
-        //[Variation(Priority = 1, Desc = "Remove attribute (from multiple attribs, namespace)", Params = new object[] { "<A a1='original' p:a1='o' xmlns:p='A' ></A>", "{A}a1", null })]
-        //[Variation(Priority = 1, Desc = "Remove attribute (from multiple attribs, content)", Params = new object[] { "<A x='t' a1='original' y='r'>trt</A>", "a1", null })]
-        //[Variation(Priority = 1, Desc = "Remove attribute (nonexisting)", Params = new object[] { "<A x='t' a1='original' y='r'>trt</A>", "nonex", null })]
+        //[Variation(Priority = 0, Desc = "Remove attribute (only attribute)", Params = new object[] { "<A
+        // a1='original'></A>", "a1", null })]
+        //[Variation(Priority = 0, Desc = "Remove attribute (from multiple attribs)", Params = new object[]
+        // { "<A y='y' a1='original' x='x'></A>", "a1", null })]
+        //[Variation(Priority = 1, Desc = "Remove attribute (from multiple attribs, namespace)", Params =
+        // new object[] { "<A a1='original' p:a1='o' xmlns:p='A' ></A>", "{A}a1", null })]
+        //[Variation(Priority = 1, Desc = "Remove attribute (from multiple attribs, content)", Params = new
+        // object[] { "<A x='t' a1='original' y='r'>trt</A>", "a1", null })]
+        //[Variation(Priority = 1, Desc = "Remove attribute (nonexisting)", Params = new object[] { "<A
+        // x='t' a1='original' y='r'>trt</A>", "nonex", null })]
 
         public void OnXElement()
         {

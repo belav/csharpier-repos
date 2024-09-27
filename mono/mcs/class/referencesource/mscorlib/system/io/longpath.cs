@@ -526,8 +526,10 @@ namespace System.IO
             String fullPath = LongPath.NormalizePath(path);
 
             // You need read access to the directory to be returned back and write access to all the directories
-            // that you need to create. If we fail any security checks we will not create any directories at all.
-            // We attempt to create directories only after all the security checks have passed. This is avoid doing
+            // that you need to create. If we fail any security checks we will not create any directories at
+            // all.
+            // We attempt to create directories only after all the security checks have passed. This is avoid
+            // doing
             // a demand at every level.
             String demandDir = GetDemandDir(fullPath, true);
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, demandDir, false, false);
@@ -676,7 +678,8 @@ namespace System.IO
                         firstError = currentError;
                     else
                     {
-                        // If there's a file in this directory's place, or if we have ERROR_ACCESS_DENIED when checking if the directory already exists throw.
+                        // If there's a file in this directory's place, or if we have ERROR_ACCESS_DENIED when checking if
+                        // the directory already exists throw.
                         if (
                             LongPathFile.InternalExists(name)
                             || (
@@ -782,7 +785,8 @@ namespace System.IO
                     hr = Win32Native.ERROR_PATH_NOT_FOUND;
                     __Error.WinIOError(hr, fullsourceDirName);
                 }
-                // This check was originally put in for Win9x (unfortunately without special casing it to be for Win9x only). We can't change the NT codepath now for backcomp reasons.
+                // This check was originally put in for Win9x (unfortunately without special casing it to be for
+                // Win9x only). We can't change the NT codepath now for backcomp reasons.
                 if (hr == Win32Native.ERROR_ACCESS_DENIED) // WinNT throws IOException. This check is for Win9x. We can't change it for backcomp.
                     throw new IOException(
                         Environment.GetResourceString(
@@ -1035,7 +1039,8 @@ namespace System.IO
                 hr = Marshal.GetLastWin32Error();
                 if (hr == Win32Native.ERROR_FILE_NOT_FOUND) // A dubious error code.
                     hr = Win32Native.ERROR_PATH_NOT_FOUND;
-                // This check was originally put in for Win9x (unfortunately without special casing it to be for Win9x only). We can't change the NT codepath now for backcomp reasons.
+                // This check was originally put in for Win9x (unfortunately without special casing it to be for
+                // Win9x only). We can't change the NT codepath now for backcomp reasons.
                 if (hr == Win32Native.ERROR_ACCESS_DENIED)
                     throw new IOException(
                         Environment.GetResourceString("UnauthorizedAccess_IODenied_Path", userPath)

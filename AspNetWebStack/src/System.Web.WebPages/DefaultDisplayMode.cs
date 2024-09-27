@@ -1,12 +1,14 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.IO;
 
 namespace System.Web.WebPages
 {
     /// <summary>
-    /// The <see cref="DefaultDisplayMode"/> can take any suffix and determine if there is a corresponding
+    /// The <see cref="DefaultDisplayMode"/> can take any suffix and determine if there is a
+    // corresponding
     /// file that exists given a path and request by transforming the path to contain the suffix.
     /// Add a new DefaultDisplayMode to the Modes collection to handle a new suffix or inherit from
     /// DefaultDisplayMode to provide custom logic to transform paths with a suffix.
@@ -24,7 +26,8 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// When set, the <see cref="DefaultDisplayMode"/> will only be available to return Display Info for a request
+        /// When set, the <see cref="DefaultDisplayMode"/> will only be available to return Display Info for
+        // a request
         /// if the ContextCondition evaluates to true.
         /// </summary>
         public Func<HttpContextBase, bool> ContextCondition { get; set; }

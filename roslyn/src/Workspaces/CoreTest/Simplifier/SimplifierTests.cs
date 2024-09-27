@@ -150,7 +150,8 @@ public class SimplifierTests
                 await Simplifier.GetOptionsAsync(vbDocument, updatedOptions, CancellationToken.None)
         );
 
-        // Validate that options are read from solution snapshot as a fallback (we have no editorconfig file, so all options should fall back):
+        // Validate that options are read from solution snapshot as a fallback (we have no editorconfig
+        // file, so all options should fall back):
 
         var solutionWithUpdatedOptions = workspace.CurrentSolution.WithOptions(updatedOptions);
         var csDocumentWithUpdatedOptions = solutionWithUpdatedOptions.GetRequiredDocument(

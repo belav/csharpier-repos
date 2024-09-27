@@ -45,8 +45,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public override NullableContextOptions NullableContextOptions { get; protected set; }
 
-        // Defaults correspond to the compiler's defaults or indicate that the user did not specify when that is significant.
-        // That's significant when one option depends on another's setting. SubsystemVersion depends on Platform and Target.
+        // Defaults correspond to the compiler's defaults or indicate that the user did not specify when
+        // that is significant.
+        // That's significant when one option depends on another's setting. SubsystemVersion depends on
+        // Platform and Target.
         public CSharpCompilationOptions(
             OutputKind outputKind,
             bool reportSuppressedDiagnostics = false,
@@ -1128,6 +1130,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // Bad constructor -- DO NOT USE
         // Violates the rules for optional parameter overloads detailed at
+        //
         // https://github.com/dotnet/roslyn/blob/e8fdb391703dcb5712ff6a5b83d768d784cba4cf/docs/Adding%20Optional%20Parameters%20in%20Public%20API.md
         [EditorBrowsable(EditorBrowsableState.Never)]
         public CSharpCompilationOptions(

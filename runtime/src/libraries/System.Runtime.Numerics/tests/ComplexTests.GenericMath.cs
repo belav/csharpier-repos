@@ -1089,7 +1089,9 @@ namespace System.Numerics.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(9223372036854775808.0, NumberBaseHelper<Complex>.CreateChecked<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual(9223372036854775808.0,
+                // NumberBaseHelper<Complex>.CreateChecked<nuint>(unchecked((nuint)0x8000000000000000)));
+                //
                 // AssertBitwiseEqual(18446744073709551615.0,NumberBaseHelper<Complex>.CreateChecked<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
@@ -1108,8 +1110,10 @@ namespace System.Numerics.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(2147483648.0, NumberBaseHelper<Complex>.CreateChecked<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual(4294967295.0, NumberBaseHelper<Complex>.CreateChecked<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual(2147483648.0,
+                // NumberBaseHelper<Complex>.CreateChecked<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual(4294967295.0,
+                // NumberBaseHelper<Complex>.CreateChecked<nuint>((nuint)0xFFFFFFFF));
             }
         }
 
@@ -1641,8 +1645,10 @@ namespace System.Numerics.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(9223372036854775808.0, NumberBaseHelper<Complex>.CreateSaturating<nuint>(unchecked((nuint)0x8000000000000000)));
-                // AssertBitwiseEqual(18446744073709551615.0, NumberBaseHelper<Complex>.CreateSaturating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
+                // AssertBitwiseEqual(9223372036854775808.0,
+                // NumberBaseHelper<Complex>.CreateSaturating<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual(18446744073709551615.0,
+                // NumberBaseHelper<Complex>.CreateSaturating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
             {
@@ -1660,8 +1666,10 @@ namespace System.Numerics.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(2147483648.0, NumberBaseHelper<Complex>.CreateSaturating<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual(4294967295.0, NumberBaseHelper<Complex>.CreateSaturating<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual(2147483648.0,
+                // NumberBaseHelper<Complex>.CreateSaturating<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual(4294967295.0,
+                // NumberBaseHelper<Complex>.CreateSaturating<nuint>((nuint)0xFFFFFFFF));
             }
         }
 
@@ -2193,8 +2201,10 @@ namespace System.Numerics.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(9223372036854775808.0, NumberBaseHelper<Complex>.CreateTruncating<nuint>(unchecked((nuint)0x8000000000000000)));
-                // AssertBitwiseEqual(18446744073709551615.0, NumberBaseHelper<Complex>.CreateTruncating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
+                // AssertBitwiseEqual(9223372036854775808.0,
+                // NumberBaseHelper<Complex>.CreateTruncating<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual(18446744073709551615.0,
+                // NumberBaseHelper<Complex>.CreateTruncating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
             {
@@ -2212,8 +2222,10 @@ namespace System.Numerics.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual(2147483648.0, NumberBaseHelper<Complex>.CreateTruncating<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual(4294967295.0, NumberBaseHelper<Complex>.CreateTruncating<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual(2147483648.0,
+                // NumberBaseHelper<Complex>.CreateTruncating<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual(4294967295.0,
+                // NumberBaseHelper<Complex>.CreateTruncating<nuint>((nuint)0xFFFFFFFF));
             }
         }
 
@@ -5274,17 +5286,23 @@ namespace System.Numerics.Tests
         {
             // if (Environment.Is64BitProcess)
             // {
-            //     Assert.Equal(unchecked((nuint)0x0000_0000_0000_0000), NumberBaseHelper<nuint>.CreateSaturating<Complex>(0.0));
-            //     Assert.Equal(unchecked((nuint)0x0000_0000_0000_0001), NumberBaseHelper<nuint>.CreateSaturating<Complex>(1.0));
-            //     Assert.Equal(unchecked((nuint)0x8000_0000_0000_0000), NumberBaseHelper<nuint>.CreateSaturating<Complex>(9223372036854775808.0));
-            //     Assert.Equal(unchecked((nuint)0xFFFF_FFFF_FFFF_FFFF), NumberBaseHelper<nuint>.CreateSaturating<Complex>(18446744073709551615.0));
+            //     Assert.Equal(unchecked((nuint)0x0000_0000_0000_0000),
+            // NumberBaseHelper<nuint>.CreateSaturating<Complex>(0.0));
+            //     Assert.Equal(unchecked((nuint)0x0000_0000_0000_0001),
+            // NumberBaseHelper<nuint>.CreateSaturating<Complex>(1.0));
+            //     Assert.Equal(unchecked((nuint)0x8000_0000_0000_0000),
+            // NumberBaseHelper<nuint>.CreateSaturating<Complex>(9223372036854775808.0));
+            //     Assert.Equal(unchecked((nuint)0xFFFF_FFFF_FFFF_FFFF),
+            // NumberBaseHelper<nuint>.CreateSaturating<Complex>(18446744073709551615.0));
             // }
             // else
             // {
             //     Assert.Equal((nuint)0x0000_0000, NumberBaseHelper<nuint>.CreateSaturating<Complex>(0.0));
             //     Assert.Equal((nuint)0x0000_0001, NumberBaseHelper<nuint>.CreateSaturating<Complex>(1.0));
-            //     Assert.Equal((nuint)0x8000_0000, NumberBaseHelper<nuint>.CreateSaturating<Complex>(2147483648.0));
-            //     Assert.Equal((nuint)0xFFFF_FFFF, NumberBaseHelper<nuint>.CreateSaturating<Complex>(4294967295.0));
+            //     Assert.Equal((nuint)0x8000_0000,
+            // NumberBaseHelper<nuint>.CreateSaturating<Complex>(2147483648.0));
+            //     Assert.Equal((nuint)0xFFFF_FFFF,
+            // NumberBaseHelper<nuint>.CreateSaturating<Complex>(4294967295.0));
             // }
         }
 

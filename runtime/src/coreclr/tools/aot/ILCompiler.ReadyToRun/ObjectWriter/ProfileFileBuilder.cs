@@ -302,7 +302,8 @@ namespace ILCompiler.PEWriter
                 return CrossPageCall.No;
             }
 
-            // Pessimistic estimate - we don't know where exactly the call is, we just know that it might cross a page.
+            // Pessimistic estimate - we don't know where exactly the call is, we just know that it might cross
+            // a page.
             return CrossPageCall.Yes;
         }
     }

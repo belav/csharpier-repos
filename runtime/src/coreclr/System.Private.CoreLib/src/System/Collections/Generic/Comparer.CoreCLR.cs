@@ -7,7 +7,8 @@ namespace System.Collections.Generic
 {
     public abstract partial class Comparer<T> : IComparer, IComparer<T>
     {
-        // To minimize generic instantiation overhead of creating the comparer per type, we keep the generic portion of the code as small
+        // To minimize generic instantiation overhead of creating the comparer per type, we keep the generic
+        // portion of the code as small
         // as possible and define most of the creation logic in a non-generic class.
         public static Comparer<T> Default
         {

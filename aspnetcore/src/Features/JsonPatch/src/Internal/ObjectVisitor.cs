@@ -30,7 +30,8 @@ public class ObjectVisitor
     /// </summary>
     /// <param name="path">The path of the JsonPatch operation</param>
     /// <param name="contractResolver">The <see cref="IContractResolver"/>.</param>
-    /// <param name="adapterFactory">The <see cref="IAdapterFactory"/> to use when creating adaptors.</param>
+    /// <param name="adapterFactory">The <see cref="IAdapterFactory"/> to use when creating
+    // adaptors.</param>
     public ObjectVisitor(
         ParsedPath path,
         IContractResolver contractResolver,

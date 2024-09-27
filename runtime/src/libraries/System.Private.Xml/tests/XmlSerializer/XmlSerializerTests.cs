@@ -22,7 +22,8 @@ using SerializationTypes;
 using Xunit;
 
 #if !ReflectionOnly && !XMLSERIALIZERGENERATORTESTS
-// Many test failures due to trimming and MakeGeneric. XmlSerializer is not currently supported with NativeAOT.
+// Many test failures due to trimming and MakeGeneric. XmlSerializer is not currently supported with
+// NativeAOT.
 [ConditionalClass(
     typeof(PlatformDetection),
     nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
@@ -223,7 +224,8 @@ public static partial class XmlSerializerTests
 
         Assert.NotNull(y);
         // XmlSerializer seems not complain about missing public setter of Array property
-        // However, it does not serialize the property. So for this test case, I'll use it to verify there are no complaints about missing public setter
+        // However, it does not serialize the property. So for this test case, I'll use it to verify there
+        // are no complaints about missing public setter
     }
 
     [Fact]
@@ -245,9 +247,12 @@ public static partial class XmlSerializerTests
         Assert.Equal((string)x[1], (string)y[1]);
     }
 
-    // ROC and Immutable types are not types from 'SerializableAssembly.dll', so they were not included in the
-    // pregenerated serializers for the sgen tests. We could wrap them in a type that does exist there...
-    // but I think the RO/Immutable story is wonky enough and RefEmit vs Reflection is near enough on the
+    // ROC and Immutable types are not types from 'SerializableAssembly.dll', so they were not included
+    // in the
+    // pregenerated serializers for the sgen tests. We could wrap them in a type that does exist
+    // there...
+    // but I think the RO/Immutable story is wonky enough and RefEmit vs Reflection is near enough on
+    // the
     // horizon that it's not worth the trouble.
 #if !XMLSERIALIZERGENERATORTESTS
     [Fact]
@@ -297,8 +302,10 @@ public static partial class XmlSerializerTests
     {
         XmlSerializer serializer;
 
-        // Some collections implement the required enumerator/Add combo (ImmutableList, ImmutableArray) and some don't (ImmutableStack,
-        // ImmutableQueue). If they do not, they will throw upon serializer construction in RefEmit mode. They should throw when
+        // Some collections implement the required enumerator/Add combo (ImmutableList, ImmutableArray) and
+        // some don't (ImmutableStack,
+        // ImmutableQueue). If they do not, they will throw upon serializer construction in RefEmit mode.
+        // They should throw when
         // first using the serializer in Reflection mode.
 #if ReflectionOnly
         serializer = new XmlSerializer(type);
@@ -323,8 +330,10 @@ public static partial class XmlSerializerTests
         serializer = new XmlSerializer(type);
 #endif
 
-        // If they do meet the signature requirement, they may succeed or fail depending on whether their Add/Indexer explicitly throw
-        // or not. (ImmutableArray throws. ImmutableList does not - it returns a new copy instead... which gets ignored and is thus
+        // If they do meet the signature requirement, they may succeed or fail depending on whether their
+        // Add/Indexer explicitly throw
+        // or not. (ImmutableArray throws. ImmutableList does not - it returns a new copy instead... which
+        // gets ignored and is thus
         // essentially a silent failure.) Serializing out to a string first should work though.
         string serializedValue = Serialize(collection, expectedXml, () => serializer);
 
@@ -336,7 +345,8 @@ public static partial class XmlSerializerTests
             return;
         }
 
-        // In this case, we can execute everything without exception. But since our calls to '.Add()' do nothing, we end up
+        // In this case, we can execute everything without exception. But since our calls to '.Add()' do
+        // nothing, we end up
         // with an empty collection
         var rttCollection = Deserialize(serializer, serializedValue);
         Assert.NotNull(rttCollection);
@@ -1322,7 +1332,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_DeserializeOutOfRangeByteProperty()
     {
-        //Deserialize an instance with out-of-range value for the byte property, expecting exception from deserialization process
+        //Deserialize an instance with out-of-range value for the byte property, expecting exception from
+        // deserialization process
         var serializer = new XmlSerializer(typeof(TypeWithByteProperty));
         using (var stream = new MemoryStream())
         {

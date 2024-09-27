@@ -83,25 +83,30 @@ internal sealed class LegacyGlobalOptionService(IGlobalOptionService globalOptio
         }
 
         // Update workspaces even when value of public internally defined options have not actually changed.
-        // This is necessary since these options may have been changed previously directly via IGlobalOptionService,
-        // without updating the workspaces and thus the values stored in IGlobalOptionService may not match the values
+        // This is necessary since these options may have been changed previously directly via
+        // IGlobalOptionService,
+        // without updating the workspaces and thus the values stored in IGlobalOptionService may not match
+        // the values
         // stored on current solution snapshots.
         //
         // Updating workspaces more often than strictly needed is not a functional issue -
-        // it's just adding a bit of extra overhead since the options need to be re-read from global options.
+        // it's just adding a bit of extra overhead since the options need to be re-read from global
+        // options.
         if (!internallyDefinedOptions.IsEmpty || anyExternallyDefinedOptionChanged)
         {
             UpdateRegisteredWorkspaces();
         }
 
         // Update global options after updating registered workspaces,
-        // so that the handler of the changed event has access to the updated values through the current solution.
+        // so that the handler of the changed event has access to the updated values through the current
+        // solution.
         GlobalOptions.SetGlobalOptions(internallyDefinedOptions);
     }
 
     public void UpdateRegisteredWorkspaces()
     {
-        // Ensure that the Workspace's CurrentSolution snapshot is updated with new options for all registered workspaces
+        // Ensure that the Workspace's CurrentSolution snapshot is updated with new options for all
+        // registered workspaces
         // prior to raising option changed event handlers.
         foreach (var weakWorkspace in _registeredWorkspaces)
         {

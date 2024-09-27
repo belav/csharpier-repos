@@ -325,7 +325,7 @@ namespace MonoTests.System.Data.SqlTypes
             NUnit.Framework.Assert.AreEqual("base64Binary", qualifiedName.Name, "#A01");
         }
 
-        /* Read tests */
+/* Read tests */
         [Test]
         public void Read_SuccessTest1()
         {
@@ -454,7 +454,7 @@ namespace MonoTests.System.Data.SqlTypes
             Assert.Fail("#12 Should throw ArgumentOutOfRangeException");
         }
 
-        /* Write Tests */
+/* Write Tests */
         [Test]
         public void Write_SuccessTest1()
         {

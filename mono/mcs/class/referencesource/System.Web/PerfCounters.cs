@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * PerfCounters class
- */
+* PerfCounters class
+*/
 namespace System.Web
 {
     using System.Runtime.InteropServices;

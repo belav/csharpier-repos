@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Collections.Generic;
@@ -65,7 +65,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Gets the static type of the expression that this <see cref="Expression" /> represents. (Inherited from <see cref="Expression"/>.)
+        /// Gets the static type of the expression that this <see cref="Expression" /> represents.
+        // (Inherited from <see cref="Expression"/>.)
         /// </summary>
         /// <returns>The <see cref="Type"/> that represents the static type of the expression.</returns>
         public sealed override Type Type
@@ -74,7 +75,10 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Gets the bounds of the array if the value of the <see cref="P:NodeType"/> property is NewArrayBounds, or the values to initialize the elements of the new array if the value of the <see cref="P:NodeType"/> property is NewArrayInit.
+        /// Gets the bounds of the array if the value of the <see cref="P:NodeType"/> property is
+        // NewArrayBounds, or the values to initialize the elements of the new array if the value of the
+        // <see
+        // cref="P:NodeType"/> property is NewArrayInit.
         /// </summary>
         public ReadOnlyCollection<Expression> Expressions
         {
@@ -95,7 +99,8 @@ namespace System.Linq.Expressions
         /// return this expression.
         /// </summary>
         /// <param name="expressions">The <see cref="Expressions" /> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public NewArrayExpression Update(IEnumerable<Expression> expressions)
         {
             if (expressions == Expressions)
@@ -116,7 +121,8 @@ namespace System.Linq.Expressions
             : base(type, expressions) { }
 
         /// <summary>
-        /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression" />.)
+        /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression"
+        // />.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
         public sealed override ExpressionType NodeType
@@ -131,7 +137,8 @@ namespace System.Linq.Expressions
             : base(type, expressions) { }
 
         /// <summary>
-        /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression" />.)
+        /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression"
+        // />.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
         public sealed override ExpressionType NodeType
@@ -220,22 +227,28 @@ namespace System.Linq.Expressions
 
 
         /// <summary>
-        /// Creates a <see cref="NewArrayExpression"/> that represents creating an array that has a specified rank.
+        /// Creates a <see cref="NewArrayExpression"/> that represents creating an array that has a
+        // specified rank.
         /// </summary>
         /// <param name="type">A <see cref="Type"/> that represents the element type of the array.</param>
-        /// <param name="bounds">An array that contains Expression objects to use to populate the Expressions collection.</param>
-        /// <returns>A <see cref="NewArrayExpression"/> that has the <see cref="P:NodeType"/> property equal to type and the <see cref="P:Expressions"/> property set to the specified value.</returns>
+        /// <param name="bounds">An array that contains Expression objects to use to populate the
+        // Expressions collection.</param>
+        /// <returns>A <see cref="NewArrayExpression"/> that has the <see cref="P:NodeType"/> property equal
+        // to type and the <see cref="P:Expressions"/> property set to the specified value.</returns>
         public static NewArrayExpression NewArrayBounds(Type type, params Expression[] bounds)
         {
             return NewArrayBounds(type, (IEnumerable<Expression>)bounds);
         }
 
         /// <summary>
-        /// Creates a <see cref="NewArrayExpression"/> that represents creating an array that has a specified rank.
+        /// Creates a <see cref="NewArrayExpression"/> that represents creating an array that has a
+        // specified rank.
         /// </summary>
         /// <param name="type">A <see cref="Type"/> that represents the element type of the array.</param>
-        /// <param name="bounds">An IEnumerable{T} that contains Expression objects to use to populate the Expressions collection.</param>
-        /// <returns>A <see cref="NewArrayExpression"/> that has the <see cref="P:NodeType"/> property equal to type and the <see cref="P:Expressions"/> property set to the specified value.</returns>
+        /// <param name="bounds">An IEnumerable{T} that contains Expression objects to use to populate the
+        // Expressions collection.</param>
+        /// <returns>A <see cref="NewArrayExpression"/> that has the <see cref="P:NodeType"/> property equal
+        // to type and the <see cref="P:Expressions"/> property set to the specified value.</returns>
         public static NewArrayExpression NewArrayBounds(Type type, IEnumerable<Expression> bounds)
         {
             ContractUtils.RequiresNotNull(type, "type");

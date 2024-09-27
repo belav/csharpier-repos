@@ -8,9 +8,9 @@
 //
 
 /*********************************************************************
- * NOTE: A copy of this file exists at: WF\Common\Shared
- * The two files must be kept in sync.  Any change made here must also
- * be made to WF\Common\Shared\NativeMethods.cs
+* NOTE: A copy of this file exists at: WF\Common\Shared
+* The two files must be kept in sync.  Any change made here must also
+* be made to WF\Common\Shared\NativeMethods.cs
 *********************************************************************/
 namespace System.Workflow.Activities.Common
 {
@@ -249,13 +249,16 @@ namespace System.Workflow.Activities.Common
             return (success != IntPtr.Zero) ? true : false;
         }
 
-        //[DllImport("gdi32.dll", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        //[DllImport("gdi32.dll", ExactSpelling = true, CharSet =
+        // System.Runtime.InteropServices.CharSet.Auto)]
         //public static extern IntPtr CreateSolidBrush(int crColor);
 
         //[DllImport("gdi32.dll", ExactSpelling = true, CharSet = CharSet.Auto)]
-        //internal static extern bool RoundRect(HandleRef hDC, int left, int top, int right, int bottom, int width, int height);
+        //internal static extern bool RoundRect(HandleRef hDC, int left, int top, int right, int bottom, int
+        // width, int height);
 
-        //[DllImport("gdi32.dll", ExactSpelling = true, EntryPoint = "CreatePen", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        //[DllImport("gdi32.dll", ExactSpelling = true, EntryPoint = "CreatePen", CharSet =
+        // System.Runtime.InteropServices.CharSet.Auto)]
         //internal static extern IntPtr CreatePen(int nStyle, int nWidth, int crColor);
 
         [DllImport("gdi32", EntryPoint = "DeleteObject", CharSet = CharSet.Auto)]

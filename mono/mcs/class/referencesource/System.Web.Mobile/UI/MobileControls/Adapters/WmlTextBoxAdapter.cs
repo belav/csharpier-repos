@@ -20,10 +20,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlTextBoxAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * WmlTextBoxAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\WmlTextBoxAdapter.uex' path='docs/doc[@for="WmlTextBoxAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -116,7 +116,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlTextBoxAdapter.uex' path='docs/doc[@for="WmlTextBoxAdapter.GetPostBackValue"]/*' />
+        /// <include file='doc\WmlTextBoxAdapter.uex'
+        // path='docs/doc[@for="WmlTextBoxAdapter.GetPostBackValue"]/*' />
         protected override String GetPostBackValue()
         {
             // Optimization - if viewstate is enabled for this control, and the

@@ -4,7 +4,8 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
     /// <summary>
-    /// It's much harder to know if a com interface will be needed since so much can be on the native side.
+    /// It's much harder to know if a com interface will be needed since so much can be on the native
+    // side.
     /// As a precaution we will not apply the unused interface rules to com interfaces
     /// </summary>
     public class UnusedComInterfaceIsKept

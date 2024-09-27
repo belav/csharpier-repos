@@ -327,8 +327,10 @@ namespace Microsoft.CodeAnalysis.Features.RQName
             }
             else if (symbol.TypeKind == TypeKind.Dynamic)
             {
-                // NOTE: Because RQNames were defined as an interchange format before C# had "dynamic", and we didn't want
-                // all consumers to have to update their logic to crack the attributes about whether something is object or
+                // NOTE: Because RQNames were defined as an interchange format before C# had "dynamic", and we
+                // didn't want
+                // all consumers to have to update their logic to crack the attributes about whether something is
+                // object or
                 // not, we just erase dynamic to object here.
                 return RQType.ObjectType;
             }

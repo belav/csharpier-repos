@@ -216,7 +216,8 @@ namespace System
             GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, types, null);
 
         /// <summary>
-        /// Searches for a constructor whose parameters match the specified argument types, using the specified binding constraints.
+        /// Searches for a constructor whose parameters match the specified argument types, using the
+        // specified binding constraints.
         /// </summary>
         /// <param name="bindingAttr">
         /// A bitwise combination of the enumeration values that specify how the search is conducted.
@@ -224,14 +225,17 @@ namespace System
         /// Default to return null.
         /// </param>
         /// <param name="types">
-        /// An array of Type objects representing the number, order, and type of the parameters for the constructor to get.
+        /// An array of Type objects representing the number, order, and type of the parameters for the
+        // constructor to get.
         /// -or-
-        /// An empty array of the type <see cref="Type"/> (that is, Type[] types = Array.Empty{Type}()) to get a constructor that takes no parameters.
+        /// An empty array of the type <see cref="Type"/> (that is, Type[] types = Array.Empty{Type}()) to
+        // get a constructor that takes no parameters.
         /// -or-
         /// <see cref="EmptyTypes"/>.
         /// </param>
         /// <returns>
-        /// A <see cref="ConstructorInfo"/> object representing the constructor that matches the specified requirements, if found; otherwise, null.
+        /// A <see cref="ConstructorInfo"/> object representing the constructor that matches the specified
+        // requirements, if found; otherwise, null.
         /// </returns>
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicConstructors
@@ -370,15 +374,20 @@ namespace System
         public MemberInfo[] GetMembers() => GetMembers(DefaultLookup);
 
         /// <summary>
-        /// Searches for the <see cref="MemberInfo"/> on the current <see cref="Type"/> that matches the specified <see cref="MemberInfo"/>.
+        /// Searches for the <see cref="MemberInfo"/> on the current <see cref="Type"/> that matches the
+        // specified <see cref="MemberInfo"/>.
         /// </summary>
         /// <param name="member">
         /// The <see cref="MemberInfo"/> to find on the current <see cref="Type"/>.
         /// </param>
-        /// <returns>An object representing the member on the current <see cref="Type"/> that matches the specified member.</returns>
-        /// <remarks>This method can be used to find a constructed generic member given a member from a generic type definition.</remarks>
-        /// <exception cref="ArgumentNullException"><paramref name="member"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="member"/> does not match a member on the current <see cref="Type"/>.</exception>
+        /// <returns>An object representing the member on the current <see cref="Type"/> that matches the
+        // specified member.</returns>
+        /// <remarks>This method can be used to find a constructed generic member given a member from a
+        // generic type definition.</remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="member"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="member"/> does not match a member on the
+        // current <see cref="Type"/>.</exception>
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2085:UnrecognizedReflectionPattern",
@@ -431,7 +440,8 @@ namespace System
         }
 
         /// <summary>
-        /// Searches for the specified method whose parameters match the specified argument types, using the specified binding constraints.
+        /// Searches for the specified method whose parameters match the specified argument types, using the
+        // specified binding constraints.
         /// </summary>
         /// <param name="name">The string containing the name of the method to get.</param>
         /// <param name="bindingAttr">
@@ -440,11 +450,14 @@ namespace System
         /// Default to return null.
         /// </param>
         /// <param name="types">
-        /// An array of <see cref="Type"/> objects representing the number, order, and type of the parameters for the method to get.
+        /// An array of <see cref="Type"/> objects representing the number, order, and type of the
+        // parameters for the method to get.
         /// -or-
-        /// An empty array of <see cref="Type"/> objects (as provided by the <see cref="EmptyTypes"/> field) to get a method that takes no parameters.
+        /// An empty array of <see cref="Type"/> objects (as provided by the <see cref="EmptyTypes"/> field)
+        // to get a method that takes no parameters.
         /// </param>
-        /// <returns>An object representing the method that matches the specified requirements, if found; otherwise, null.</returns>
+        /// <returns>An object representing the method that matches the specified requirements, if found;
+        // otherwise, null.</returns>
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicMethods
                 | DynamicallyAccessedMemberTypes.NonPublicMethods
@@ -940,10 +953,14 @@ namespace System
         /// Retrieves an array of the values of the underlying type constants of this enumeration type.
         /// </summary>
         /// <remarks>
-        /// You can use this method to get enumeration values when it's hard to create an array of the enumeration type.
-        /// For example, you might use this method for the <see cref="T:System.Reflection.MetadataLoadContext" /> enumeration or on a platform where run-time code generation is not available.
+        /// You can use this method to get enumeration values when it's hard to create an array of the
+        // enumeration type.
+        /// For example, you might use this method for the <see
+        // cref="T:System.Reflection.MetadataLoadContext" /> enumeration or on a platform where run-time code
+        // generation is not available.
         /// </remarks>
-        /// <returns>An array that contains the values of the underlying type constants in this enumeration type.</returns>
+        /// <returns>An array that contains the values of the underlying type constants in this enumeration
+        // type.</returns>
         /// <exception cref="T:System.ArgumentException">This type is not an enumeration type.</exception>
         public virtual Array GetEnumValuesAsUnderlyingType() =>
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
@@ -978,11 +995,15 @@ namespace System
             return new SignatureGenericMethodParameterType(position);
         }
 
-        // This is used by the ToString() overrides of all reflection types. The legacy behavior has the following problems:
-        //  1. Use only Name for nested types, which can be confused with global types and generic parameters of the same name.
-        //  2. Use only Name for generic parameters, which can be confused with nested types and global types of the same name.
+        // This is used by the ToString() overrides of all reflection types. The legacy behavior has the
+        // following problems:
+        //  1. Use only Name for nested types, which can be confused with global types and generic
+        // parameters of the same name.
+        //  2. Use only Name for generic parameters, which can be confused with nested types and global
+        // types of the same name.
         //  3. Use only Name for all primitive types, void and TypedReference
-        //  4. MethodBase.ToString() use "ByRef" for byref parameters which is different than Type.ToString().
+        //  4. MethodBase.ToString() use "ByRef" for byref parameters which is different than
+        // Type.ToString().
         //  5. ConstructorInfo.ToString() outputs "Void" as the return type. Why Void?
         internal string FormatTypeName()
         {

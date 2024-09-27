@@ -314,7 +314,9 @@ namespace System.Diagnostics.Tests
                     );
 
                 // There is some prefix string already attached to the message passed
-                // The description for Event ID '0' in Source 'SourceWriteEntryWithTypeIDAndCategory' cannot be found.  The local computer may not have the necessary registry information or message DLL files to display the message, or you may not have permission
+                // The description for Event ID '0' in Source 'SourceWriteEntryWithTypeIDAndCategory' cannot be
+                // found.  The local computer may not have the necessary registry information or message DLL files to
+                // display the message, or you may not have permission
                 // to access them.  The following information is part of the event:'EventLogWriteEntryTestsMessage'
                 // The last part is the associated message
                 // The initial message is due in insufficient permission to access resource library EventLogMsgs.dll

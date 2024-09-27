@@ -149,7 +149,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets a color which will be replaced with a transparent color while drawing the image.
         /// </summary>
         /// <value>
-        /// A <see cref="Color"/> value which will be replaced with a transparent color while drawing the image.
+        /// A <see cref="Color"/> value which will be replaced with a transparent color while drawing the
+        // image.
         /// </value>
         [
             SRCategory("CategoryAttributeImage"),
@@ -176,7 +177,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ContentAlignment"/> value that represents the content alignment.
         /// </value>
         /// <remarks>
-        /// This property is used to align text for <see cref="TextAnnotation"/>, <see cref="RectangleAnnotation"/>,
+        /// This property is used to align text for <see cref="TextAnnotation"/>, <see
+        // cref="RectangleAnnotation"/>,
         /// <see cref="EllipseAnnotation"/> and <see cref="CalloutAnnotation"/> objects, and to align
         /// a non-scaled image inside an <see cref="ImageAnnotation"/> object.
         /// </remarks>

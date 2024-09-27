@@ -170,7 +170,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Fills the elements of a specified span with items chosen at random from the provided set of choices.
+        ///   Fills the elements of a specified span with items chosen at random from the provided set of
+        // choices.
         /// </summary>
         /// <param name="choices">The items to use to fill the buffer.</param>
         /// <param name="destination">The buffer to receive the items.</param>
@@ -254,12 +255,15 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="destination">The buffer to receive the characters.</param>
         /// <param name="lowercase">
-        ///   <see langword="true" /> if the hexadecimal characters should be lowercase; <see langword="false" /> if they should be uppercase.
+        ///   <see langword="true" /> if the hexadecimal characters should be lowercase; <see
+        // langword="false" /> if they should be uppercase.
         ///   The default is <see langword="false" />.
         /// </param>
         /// <remarks>
-        ///   The behavior of this is the same as using <seealso cref="GetItems{T}(ReadOnlySpan{T}, Span{T})" /> and
-        ///   specifying hexadecimal characters as the choices. This implementation is optimized specifically for
+        ///   The behavior of this is the same as using <seealso cref="GetItems{T}(ReadOnlySpan{T},
+        // Span{T})" /> and
+        ///   specifying hexadecimal characters as the choices. This implementation is optimized
+        // specifically for
         ///   hexadecimal characters.
         /// </remarks>
         public static void GetHexString(Span<char> destination, bool lowercase = false)
@@ -275,13 +279,15 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="stringLength">The length of string to create.</param>
         /// <param name="lowercase">
-        ///   <see langword="true" /> if the hexadecimal characters should be lowercase; <see langword="false" /> if they should be uppercase.
+        ///   <see langword="true" /> if the hexadecimal characters should be lowercase; <see
+        // langword="false" /> if they should be uppercase.
         ///   The default is <see langword="false" />.
         /// </param>
         /// <returns>A string populated with random hexadecimal characters.</returns>
         /// <remarks>
         ///   The behavior of this is the same as using <seealso cref="GetString" /> and
-        ///   specifying hexadecimal characters as the choices. This implementation is optimized specifically for
+        ///   specifying hexadecimal characters as the choices. This implementation is optimized
+        // specifically for
         ///   hexadecimal characters.
         /// </remarks>
         public static string GetHexString(int stringLength, bool lowercase = false)
@@ -324,13 +330,15 @@ namespace System.Security.Cryptography
                 ? HexConverter.Casing.Lower
                 : HexConverter.Casing.Upper;
 
-            // Don't overfill the buffer if the destination is smaller than the buffer size. We need to round up when
+            // Don't overfill the buffer if the destination is smaller than the buffer size. We need to round up
+            // when
             // when dividing by two to account for an odd-length destination.
             int needed = (destination.Length + 1) / 2;
             Span<byte> remainingRandom = randomBuffer.Slice(0, Math.Min(RandomBufferSize, needed));
             RandomNumberGenerator.Fill(remainingRandom);
 
-            // HexConverter can only write in multiples of two. If the length is odd, get back to an even length.
+            // HexConverter can only write in multiples of two. If the length is odd, get back to an even
+            // length.
             if (destination.Length % 2 != 0)
             {
                 destination[0] = lowercase

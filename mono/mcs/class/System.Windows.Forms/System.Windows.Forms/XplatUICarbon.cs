@@ -402,10 +402,10 @@ namespace System.Windows.Forms
         )
         {
             /* From XplatUIX11
-             * If this is a form with no window manager, X is handling all the border and caption painting
-             * so remove that from the area (since the area we set of the window here is the part of the window
-             * we're painting in only)
-             */
+            * If this is a form with no window manager, X is handling all the border and caption painting
+            * so remove that from the area (since the area we set of the window here is the part of the window
+            * we're painting in only)
+            */
             Rectangle rect = hwnd.ClientRect;
             Form form = ctrl as Form;
             CreateParams cp = null;
@@ -448,10 +448,10 @@ namespace System.Windows.Forms
         internal static Size TranslateWindowSizeToQuartzWindowSize(CreateParams cp, Size size)
         {
             /* From XplatUIX11
-             * If this is a form with no window manager, X is handling all the border and caption painting
-             * so remove that from the area (since the area we set of the window here is the part of the window
-             * we're painting in only)
-             */
+            * If this is a form with no window manager, X is handling all the border and caption painting
+            * so remove that from the area (since the area we set of the window here is the part of the window
+            * we're painting in only)
+            */
             Form form = cp.control as Form;
             if (
                 form != null
@@ -481,10 +481,10 @@ namespace System.Windows.Forms
         )
         {
             /* From XplatUIX11
-             * If this is a form with no window manager, X is handling all the border and caption painting
-             * so remove that from the area (since the area we set of the window here is the part of the window
-             * we're painting in only)
-             */
+            * If this is a form with no window manager, X is handling all the border and caption painting
+            * so remove that from the area (since the area we set of the window here is the part of the window
+            * we're painting in only)
+            */
             Size size = new Size(width, height);
             Form form = cp.control as Form;
             if (
@@ -1658,9 +1658,9 @@ namespace System.Windows.Forms
             // TODO: This is crashing swf-messageboxes
             /*
             if (false && hwnd.whole_window != IntPtr.Zero)
-                CFRelease (hwnd.whole_window);
+            CFRelease (hwnd.whole_window);
             if (false && hwnd.client_window != IntPtr.Zero)
-                CFRelease (hwnd.client_window);
+            CFRelease (hwnd.client_window);
             */
 
             if (WindowMapping[handle] != null)
@@ -2047,8 +2047,8 @@ namespace System.Windows.Forms
                 foreach (Rectangle r in hwnd.ClipRectangles)
                 {
                     /* Expand the region slightly.
-                     * See bug 464464.
-                     */
+                    * See bug 464464.
+                    */
                     Rectangle r2 = Rectangle.FromLTRB(r.Left, r.Top, r.Right, r.Bottom + 1);
                     clip_region.Union(r2);
                 }
@@ -2231,11 +2231,11 @@ namespace System.Windows.Forms
         )
         {
             /*
-             * This used to use a HIViewScrollRect but this causes issues with the fact that we dont coalesce
-             * updates properly with our short-circuiting of the window manager.  For now we'll do a less
-             * efficient invalidation of the entire handle which appears to fix the problem
-             * see bug #381084
-             */
+            * This used to use a HIViewScrollRect but this causes issues with the fact that we dont coalesce
+            * updates properly with our short-circuiting of the window manager.  For now we'll do a less
+            * efficient invalidation of the entire handle which appears to fix the problem
+            * see bug #381084
+            */
             Hwnd hwnd = Hwnd.ObjectFromHandle(handle);
             Invalidate(handle, new Rectangle(0, 0, hwnd.Width, hwnd.Height), false);
         }
@@ -2878,14 +2878,14 @@ namespace System.Windows.Forms
 
         #region Reversible regions
         /*
-         * Quartz has no concept of XOR drawing due to its compositing nature
-         * We fake this by mapping a overlay window on the first draw and mapping it on the second.
-         * This has some issues with it because its POSSIBLE for ControlPaint.DrawReversible* to actually
-         * reverse two regions at once.  We dont do this in MWF, but this behaviour woudn't work.
-         * We could in theory cache the Rectangle/Color combination to handle this behaviour.
-         *
-         * PROBLEMS: This has some flicker / banding
-         */
+        * Quartz has no concept of XOR drawing due to its compositing nature
+        * We fake this by mapping a overlay window on the first draw and mapping it on the second.
+        * This has some issues with it because its POSSIBLE for ControlPaint.DrawReversible* to actually
+        * reverse two regions at once.  We dont do this in MWF, but this behaviour woudn't work.
+        * We could in theory cache the Rectangle/Color combination to handle this behaviour.
+        *
+        * PROBLEMS: This has some flicker / banding
+        */
         internal void SizeWindow(Rectangle rect, IntPtr window)
         {
             Carbon.Rect qrect = new Carbon.Rect();

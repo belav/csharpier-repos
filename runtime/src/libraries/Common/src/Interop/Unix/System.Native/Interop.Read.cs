@@ -15,7 +15,8 @@ internal static partial class Interop
         /// <param name="count">The size of the buffer</param>
         /// <returns>
         /// Returns the number of bytes read on success; otherwise, -1 is returned
-        /// Note - on fail. the position of the stream may change depending on the platform; consult man 2 read for more info
+        /// Note - on fail. the position of the stream may change depending on the platform; consult man 2
+        // read for more info
         /// </returns>
         [LibraryImport(
             Libraries.SystemNative,

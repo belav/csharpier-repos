@@ -1,7 +1,8 @@
 ﻿namespace System.Web.UI.WebControls
 {
     /// <summary>
-    /// Represents data that is passed into an <see cref='System.Web.UI.WebControls.CreatingModelDataSourceEventHandler' /> delegate.
+    /// Represents data that is passed into an <see
+    // cref='System.Web.UI.WebControls.CreatingModelDataSourceEventHandler' /> delegate.
     /// </summary>
     public class CreatingModelDataSourceEventArgs : EventArgs
     {

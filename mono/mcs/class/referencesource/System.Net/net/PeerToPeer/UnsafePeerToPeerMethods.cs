@@ -86,16 +86,18 @@ namespace System.Net.PeerToPeer
         );
 
         //[DllImport(P2P, CharSet = CharSet.Unicode)]
-        //internal extern static Int32 PeerCreatePeerName(string identity, string classfier, out SafePeerData peerName);
+        //internal extern static Int32 PeerCreatePeerName(string identity, string classfier, out
+        // SafePeerData peerName);
 
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
         internal static extern Int32 PeerIdentityGetDefault(out SafePeerData defaultIdentity);
 
-        /*
-        [DllImport(P2P, CharSet = CharSet.Unicode)]
-        internal extern static Int32 PeerIdentityCreate(string classifier, string friendlyName, IntPtr hCryptoProv, out SafePeerData defaultIdentity);
-        */
+/*
+[DllImport(P2P, CharSet = CharSet.Unicode)]
+internal extern static Int32 PeerIdentityCreate(string classifier, string friendlyName, IntPtr
+hCryptoProv, out SafePeerData defaultIdentity);
+*/
         [SecurityCritical]
         [DllImport(P2P, CharSet = CharSet.Unicode)]
         internal static extern Int32 PeerNameToPeerHostName(
@@ -285,10 +287,13 @@ namespace System.Net.PeerToPeer
         private static SafeLoadLibrary s_P2PLibrary = null;
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeSystemNativeMethods.GetProcAddress(System.Net.SafeLoadLibrary,System.String):System.IntPtr" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeSystemNativeMethods.GetProcAddress(System.Net.SafeLoadLibrary,System.String):System.IntPtr"
+        // />
         // <SatisfiesLinkDemand Name="SafeHandle.get_IsInvalid():System.Boolean" />
         // <ReferencesCritical Name="Field: s_P2PLibrary" Ring="1" />
-        // <ReferencesCritical Name="Method: SafeLoadLibrary.LoadLibraryEx(System.String):System.Net.SafeLoadLibrary" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // SafeLoadLibrary.LoadLibraryEx(System.String):System.Net.SafeLoadLibrary" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static PeerToPeerOSHelper()
@@ -335,7 +340,8 @@ namespace System.Net.PeerToPeer
         [RegistryPermission(SecurityAction.Assert, Read = OSInstallTypeRegKeyPath)]
         private static bool IsServerCore()
         {
-            // This code does the same as System.Net.ComNetOS.GetWindowsInstallType(). Since ComNetOS is internal and
+            // This code does the same as System.Net.ComNetOS.GetWindowsInstallType(). Since ComNetOS is
+            // internal and
             // we don't want to add InternalsVisibleToAttribute to System.dll, we have to duplicate the code.
             try
             {

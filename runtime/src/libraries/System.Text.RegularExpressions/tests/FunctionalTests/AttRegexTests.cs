@@ -2,31 +2,31 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- *	Glenn Fowler <gsf@research.att.com>
- *	AT&T Research
- *
- * PLEASE: publish your tests so everyone can benefit
- *
- * The following license covers testregex.c and all associated test data.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of THIS SOFTWARE FILE (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, and/or sell copies of the
- * Software, and to permit persons to whom the Software is furnished to do
- * so, subject to the following disclaimer:
- *
- * THIS SOFTWARE IS PROVIDED BY AT&T ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL AT&T BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*	Glenn Fowler <gsf@research.att.com>
+*	AT&T Research
+*
+* PLEASE: publish your tests so everyone can benefit
+*
+* The following license covers testregex.c and all associated test data.
+*
+* Permission is hereby granted, free of charge, to any person obtaining a
+* copy of THIS SOFTWARE FILE (the "Software"), to deal in the Software
+* without restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, and/or sell copies of the
+* Software, and to permit persons to whom the Software is furnished to do
+* so, subject to the following disclaimer:
+*
+* THIS SOFTWARE IS PROVIDED BY AT&T ``AS IS'' AND ANY EXPRESS OR IMPLIED
+* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+* IN NO EVENT SHALL AT&T BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+* SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+* DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+* THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
 // Tests sourced from .dat files at http://gsf.cococlyde.org/download.
 // Then some inputs were deleted / tweaked based on expected differences in behavior.
@@ -488,7 +488,8 @@ namespace System.Text.RegularExpressions.Tests
                 match.Groups.Cast<Group>().Select(g => (start: g.Index, end: g.Index + g.Length))
             );
 
-            // The .NET implementation sometimes has extra captures beyond what the original data specifies, so we assert a subset.
+            // The .NET implementation sometimes has extra captures beyond what the original data specifies, so
+            // we assert a subset.
             if (!expectedSet.IsSubsetOf(actualSet))
             {
                 throw new Xunit.Sdk.XunitException(

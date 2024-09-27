@@ -16,6 +16,7 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void GetFileNamesEnumerable()
         {
+            //
             // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
             File.Create(Path.Join(testDirectory.FullName, "one")).Dispose();
@@ -62,6 +63,7 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void TestGetFilesWithExtensions()
         {
+            //
             // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
             File.Create(Path.Join(testDirectory.FullName, "file.one")).Dispose();
@@ -100,6 +102,7 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void TestCountFiles()
         {
+            //
             // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
             File.Create(Path.Join(testDirectory.FullName, "file.one")).Dispose();
@@ -130,6 +133,7 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void TestCountFileBytes()
         {
+            //
             // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
             FileInfo firstFile = new FileInfo(Path.Join(testDirectory.FullName, "file.one"));

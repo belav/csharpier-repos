@@ -18,11 +18,11 @@ using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * DeviceSpecificChoice object.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* DeviceSpecificChoice object.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice"]/*' />
     [
@@ -54,7 +54,8 @@ namespace System.Web.UI.MobileControls
             CultureInfo.InvariantCulture
         );
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Filter"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.Filter"]/*' />
         [DefaultValue("")]
         public String Filter
         {
@@ -73,7 +74,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Argument"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.Argument"]/*' />
         public String Argument
         {
             get { return _argument; }
@@ -81,7 +83,8 @@ namespace System.Web.UI.MobileControls
         }
 
         // This property is used by the Designer, and has no runtime effect
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Xmlns"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.Xmlns"]/*' />
         [DefaultValue("")]
         public String Xmlns
         {
@@ -89,7 +92,8 @@ namespace System.Web.UI.MobileControls
             set { _xmlns = value; }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Contents"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.Contents"]/*' />
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public IDictionary Contents
         {
@@ -103,7 +107,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Templates"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.Templates"]/*' />
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public IDictionary Templates
         {
@@ -117,7 +122,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.HasTemplates"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.HasTemplates"]/*' />
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasTemplates
         {
@@ -341,7 +347,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.IAttributeAccessor.GetAttribute"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.IAttributeAccessor.GetAttribute"]/*' />
         /// <internalonly/>
         protected String GetAttribute(String key)
         {
@@ -355,14 +362,16 @@ namespace System.Web.UI.MobileControls
             return (String)o;
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.IAttributeAccessor.SetAttribute"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.IAttributeAccessor.SetAttribute"]/*' />
         /// <internalonly/>
         protected void SetAttribute(String key, String value)
         {
             Contents[key] = value;
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.IParserAccessor.AddParsedSubObject"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoice.IParserAccessor.AddParsedSubObject"]/*' />
         /// <internalonly/>
         protected void AddParsedSubObject(Object obj)
         {
@@ -455,13 +464,14 @@ namespace System.Web.UI.MobileControls
     // then extracts the template referred to by the Template property of the object, and
     // uses the Name property to add it to the template bag. Presto, we have a general template bag.
 
-    /*
-     * DeviceSpecificChoice control builder. For more information, see note on "Template Bag" above.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* DeviceSpecificChoice control builder. For more information, see note on "Template Bag" above.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder"]/*' />
+    /// <include file='doc\DeviceSpecificChoice.uex'
+    // path='docs/doc[@for="DeviceSpecificChoiceControlBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -482,7 +492,8 @@ namespace System.Web.UI.MobileControls
             return _isDeviceIndependent;
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.Init"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.Init"]/*' />
         public override void Init(
             TemplateParser parser,
             ControlBuilder parentBuilder,
@@ -504,13 +515,15 @@ namespace System.Web.UI.MobileControls
             base.Init(parser, parentBuilder, type, tagName, id, attributes);
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.AppendLiteralString"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.AppendLiteralString"]/*' />
         public override void AppendLiteralString(String text)
         {
             // Ignore literal strings.
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.GetChildControlType"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.GetChildControlType"]/*' />
         public override Type GetChildControlType(String tagName, IDictionary attributes)
         {
             // Assume children are templates.
@@ -518,7 +531,8 @@ namespace System.Web.UI.MobileControls
             return typeof(DeviceSpecificChoiceTemplateType);
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.AppendSubBuilder"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.AppendSubBuilder"]/*' />
         public override void AppendSubBuilder(ControlBuilder subBuilder)
         {
             DeviceSpecificChoiceTemplateBuilder tplBuilder =
@@ -557,13 +571,13 @@ namespace System.Web.UI.MobileControls
         }
     }
 
-    /*
-     * DeviceSpecificChoiceTemplateType - marker type for a template that goes inside
-     *      a Choice. Used only at compile time, and never instantiated. See note
-     *      on "Template Bag" above.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* DeviceSpecificChoiceTemplateType - marker type for a template that goes inside
+*      a Choice. Used only at compile time, and never instantiated. See note
+*      on "Template Bag" above.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     [ControlBuilderAttribute(typeof(DeviceSpecificChoiceTemplateBuilder))]
     [Obsolete(
@@ -576,16 +590,17 @@ namespace System.Web.UI.MobileControls
         void IParserAccessor.AddParsedSubObject(Object o) { }
     }
 
-    /*
-     * DeviceSpecificChoiceTemplateBuilder - builder for a template that goes inside
-     *      a Choice. See note on "Template Bag" above.
-     *      When a Choice is device-independent, it also parses literal text content.
-     *      The code for this is copied from LiteralTextContainerControlBuilder.cs
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* DeviceSpecificChoiceTemplateBuilder - builder for a template that goes inside
+*      a Choice. See note on "Template Bag" above.
+*      When a Choice is device-independent, it also parses literal text content.
+*      The code for this is copied from LiteralTextContainerControlBuilder.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder"]/*' />
+    /// <include file='doc\DeviceSpecificChoice.uex'
+    // path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -626,7 +641,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder.Init"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder.Init"]/*' />
         public override void Init(
             TemplateParser parser,
             ControlBuilder parentBuilder,
@@ -652,7 +668,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder.AppendLiteralString"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder.AppendLiteralString"]/*' />
         public override void AppendLiteralString(String text)
         {
             if (_doLiteralText)
@@ -668,7 +685,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder.AppendSubBuilder"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder.AppendSubBuilder"]/*' />
         public override void AppendSubBuilder(ControlBuilder subBuilder)
         {
             if (_doLiteralText)
@@ -704,16 +722,17 @@ namespace System.Web.UI.MobileControls
         }
     }
 
-    /*
-     * DeviceSpecificChoiceTemplateContainer - "dummy" container object for
-     *      a template that goes inside a Choice. Once the Choice receives and
-     *      extracts the information out of it, this object is simply discarded.
-     *      See note on "Template Bag" above.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* DeviceSpecificChoiceTemplateContainer - "dummy" container object for
+*      a template that goes inside a Choice. Once the Choice receives and
+*      extracts the information out of it, this object is simply discarded.
+*      See note on "Template Bag" above.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer"]/*' />
+    /// <include file='doc\DeviceSpecificChoice.uex'
+    // path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -730,7 +749,8 @@ namespace System.Web.UI.MobileControls
         private ITemplate _template;
         private String _name;
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer.Template"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer.Template"]/*' />
         [Filterable(false), TemplateContainer(typeof(TemplateContainer))]
         public ITemplate Template
         {
@@ -738,7 +758,8 @@ namespace System.Web.UI.MobileControls
             set { _template = value; }
         }
 
-        /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer.Name"]/*' />
+        /// <include file='doc\DeviceSpecificChoice.uex'
+        // path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer.Name"]/*' />
         public String Name
         {
             get { return _name; }

@@ -10,14 +10,16 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Relational-specific model extension methods.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public static class RelationalModelExtensions
 {
     #region Default schema
 
     /// <summary>
-    ///     Returns the default schema to use for the model, or <see langword="null" /> if none has been set.
+    ///     Returns the default schema to use for the model, or <see langword="null" /> if none has been
+    // set.
     /// </summary>
     /// <param name="model">The model to get the default schema for.</param>
     /// <returns>The default schema.</returns>
@@ -40,7 +42,8 @@ public static class RelationalModelExtensions
     /// </summary>
     /// <param name="model">The model to set the default schema for.</param>
     /// <param name="value">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured schema.</returns>
     public static string? SetDefaultSchema(
         this IConventionModel model,
@@ -109,7 +112,8 @@ public static class RelationalModelExtensions
     /// </summary>
     /// <param name="model">The model to set the default schema for.</param>
     /// <param name="length">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static int? SetMaxIdentifierLength(
         this IConventionModel model,
@@ -208,12 +212,14 @@ public static class RelationalModelExtensions
         (ISequence?)((IReadOnlyModel)model).FindSequence(name, schema);
 
     /// <summary>
-    ///     Either returns the existing <see cref="IMutableSequence" /> with the given name in the given schema
+    ///     Either returns the existing <see cref="IMutableSequence" /> with the given name in the given
+    // schema
     ///     or creates a new sequence with the given name and schema.
     /// </summary>
     /// <param name="model">The model to add the sequence to.</param>
     /// <param name="name">The sequence name.</param>
-    /// <param name="schema">The schema name, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The schema name, or <see langword="null" /> to use the default
+    // schema.</param>
     /// <returns>The sequence.</returns>
     public static IMutableSequence AddSequence(
         this IMutableModel model,
@@ -222,13 +228,16 @@ public static class RelationalModelExtensions
     ) => Sequence.AddSequence(model, name, schema, ConfigurationSource.Explicit);
 
     /// <summary>
-    ///     Either returns the existing <see cref="IMutableSequence" /> with the given name in the given schema
+    ///     Either returns the existing <see cref="IMutableSequence" /> with the given name in the given
+    // schema
     ///     or creates a new sequence with the given name and schema.
     /// </summary>
     /// <param name="model">The model to add the sequence to.</param>
     /// <param name="name">The sequence name.</param>
-    /// <param name="schema">The schema name, or <see langword="null" /> to use the default schema.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="schema">The schema name, or <see langword="null" /> to use the default
+    // schema.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The sequence.</returns>
     public static IConventionSequence? AddSequence(
         this IConventionModel model,
@@ -250,7 +259,8 @@ public static class RelationalModelExtensions
     /// <param name="name">The sequence name.</param>
     /// <param name="schema">The schema that contains the sequence.</param>
     /// <returns>
-    ///     The removed <see cref="IMutableSequence" /> or <see langword="null" /> if no sequence with the given name in
+    ///     The removed <see cref="IMutableSequence" /> or <see langword="null" /> if no sequence with
+    // the given name in
     ///     the given schema was found.
     /// </returns>
     public static IMutableSequence? RemoveSequence(
@@ -266,7 +276,8 @@ public static class RelationalModelExtensions
     /// <param name="name">The sequence name.</param>
     /// <param name="schema">The schema that contains the sequence.</param>
     /// <returns>
-    ///     The removed <see cref="IConventionSequence" /> or <see langword="null" /> if no sequence with the given name in
+    ///     The removed <see cref="IConventionSequence" /> or <see langword="null" /> if no sequence
+    // with the given name in
     ///     the given schema was found.
     /// </returns>
     public static IConventionSequence? RemoveSequence(
@@ -308,10 +319,12 @@ public static class RelationalModelExtensions
     #region DbFunction
 
     /// <summary>
-    ///     Finds a function that is mapped to the method represented by the given <see cref="MethodInfo" />.
+    ///     Finds a function that is mapped to the method represented by the given <see
+    // cref="MethodInfo" />.
     /// </summary>
     /// <param name="model">The model to find the function in.</param>
-    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
+    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
     /// <returns>The function or <see langword="null" /> if the method is not mapped.</returns>
     public static IReadOnlyDbFunction? FindDbFunction(
         this IReadOnlyModel model,
@@ -319,19 +332,23 @@ public static class RelationalModelExtensions
     ) => DbFunction.FindDbFunction(model, Check.NotNull(method, nameof(method)));
 
     /// <summary>
-    ///     Finds a function that is mapped to the method represented by the given <see cref="MethodInfo" />.
+    ///     Finds a function that is mapped to the method represented by the given <see
+    // cref="MethodInfo" />.
     /// </summary>
     /// <param name="model">The model to find the function in.</param>
-    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
+    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
     /// <returns>The function or <see langword="null" /> if the method is not mapped.</returns>
     public static IMutableDbFunction? FindDbFunction(this IMutableModel model, MethodInfo method) =>
         (IMutableDbFunction?)((IReadOnlyModel)model).FindDbFunction(method);
 
     /// <summary>
-    ///     Finds a function that is mapped to the method represented by the given <see cref="MethodInfo" />.
+    ///     Finds a function that is mapped to the method represented by the given <see
+    // cref="MethodInfo" />.
     /// </summary>
     /// <param name="model">The model to find the function in.</param>
-    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
+    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
     /// <returns>The function or <see langword="null" /> if the method is not mapped.</returns>
     public static IConventionDbFunction? FindDbFunction(
         this IConventionModel model,
@@ -339,10 +356,12 @@ public static class RelationalModelExtensions
     ) => (IConventionDbFunction?)((IReadOnlyModel)model).FindDbFunction(method);
 
     /// <summary>
-    ///     Finds a function that is mapped to the method represented by the given <see cref="MethodInfo" />.
+    ///     Finds a function that is mapped to the method represented by the given <see
+    // cref="MethodInfo" />.
     /// </summary>
     /// <param name="model">The model to find the function in.</param>
-    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
+    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
     /// <returns>The function or <see langword="null" /> if the method is not mapped.</returns>
     public static IDbFunction? FindDbFunction(this IModel model, MethodInfo method) =>
         DbFunction.FindDbFunction(model, method);
@@ -387,7 +406,8 @@ public static class RelationalModelExtensions
     ///     Creates an <see cref="IMutableDbFunction" /> mapped to the given method.
     /// </summary>
     /// <param name="model">The model to add the function to.</param>
-    /// <param name="methodInfo">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
+    /// <param name="methodInfo">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
     /// <returns>The new <see cref="IMutableDbFunction" />.</returns>
     public static IMutableDbFunction AddDbFunction(
         this IMutableModel model,
@@ -403,8 +423,10 @@ public static class RelationalModelExtensions
     ///     Creates a function mapped to the given method.
     /// </summary>
     /// <param name="model">The model to add the function to.</param>
-    /// <param name="methodInfo">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="methodInfo">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new function.</returns>
     public static IConventionDbFunction AddDbFunction(
         this IConventionModel model,
@@ -442,7 +464,8 @@ public static class RelationalModelExtensions
     /// <param name="model">The model to add the function to.</param>
     /// <param name="name">The model name of the function.</param>
     /// <param name="returnType">The function return type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new function.</returns>
     public static IConventionDbFunction AddDbFunction(
         this IConventionModel model,
@@ -462,7 +485,8 @@ public static class RelationalModelExtensions
     ///     <see cref="MethodInfo" />.
     /// </summary>
     /// <param name="model">The model to find the function in.</param>
-    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
+    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
     /// <returns>The removed function or <see langword="null" /> if the method is not mapped.</returns>
     public static IMutableDbFunction? RemoveDbFunction(
         this IMutableModel model,
@@ -474,7 +498,8 @@ public static class RelationalModelExtensions
     ///     <see cref="MethodInfo" />.
     /// </summary>
     /// <param name="model">The model to find the function in.</param>
-    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the function.</param>
+    /// <param name="method">The <see cref="MethodInfo" /> for the method that is mapped to the
+    // function.</param>
     /// <returns>The removed function or <see langword="null" /> if the method is not mapped.</returns>
     public static IConventionDbFunction? RemoveDbFunction(
         this IConventionModel model,
@@ -561,7 +586,8 @@ public static class RelationalModelExtensions
     /// </summary>
     /// <param name="model">The model to set the collation for.</param>
     /// <param name="value">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured collation.</returns>
     public static string? SetCollation(
         this IConventionModel model,

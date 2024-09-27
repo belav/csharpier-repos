@@ -14,7 +14,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Serialization;
 
 /// <summary>
-/// A wrapper around an array of <see cref="Microsoft.CodeAnalysis.Checksum"/>s, which also combines the value into a
+/// A wrapper around an array of <see cref="Microsoft.CodeAnalysis.Checksum"/>s, which also combines
+// the value into a
 /// single aggregate checksum exposed through <see cref="Checksum"/>.
 /// </summary>
 internal readonly struct ChecksumCollection(ImmutableArray<Checksum> children)

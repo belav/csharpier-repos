@@ -69,12 +69,15 @@ internal static class UseCollectionInitializerHelpers
     )
         where TStatementSyntax : SyntaxNode
     {
-        // If containing statement is inside a block (e.g. method), than we need to iterate through its child
-        // statements. If containing statement is in top-level code, than we need to iterate through child statements of
+        // If containing statement is inside a block (e.g. method), than we need to iterate through its
+        // child
+        // statements. If containing statement is in top-level code, than we need to iterate through child
+        // statements of
         // containing compilation unit.
         var containingBlockOrCompilationUnit = initialStatement.GetRequiredParent();
 
-        // In case of top-level code parent of the statement will be GlobalStatementSyntax, so we need to get its parent
+        // In case of top-level code parent of the statement will be GlobalStatementSyntax, so we need to
+        // get its parent
         // in order to get CompilationUnitSyntax
         if (syntaxFacts.IsGlobalStatement(containingBlockOrCompilationUnit))
             containingBlockOrCompilationUnit = containingBlockOrCompilationUnit.Parent!;

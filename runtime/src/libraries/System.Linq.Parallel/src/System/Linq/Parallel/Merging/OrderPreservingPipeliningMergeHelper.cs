@@ -28,9 +28,12 @@ namespace System.Linq.Parallel
     /// Correct, or in some special cases with the Increasing order, we could yield sooner. The
     /// current algorithm does not take advantage of this.)
     ///
-    /// The consumer maintains a producer heap, and uses it to decide which producer should yield the next output
-    /// result. After yielding an element from a particular producer, the consumer will take another element
-    /// from the same producer. However, if the producer buffer exceeded a particular threshold, the consumer
+    /// The consumer maintains a producer heap, and uses it to decide which producer should yield the
+    // next output
+    /// result. After yielding an element from a particular producer, the consumer will take another
+    // element
+    /// from the same producer. However, if the producer buffer exceeded a particular threshold, the
+    // consumer
     /// will take the entire buffer, and give the producer an empty buffer to fill.
     ///
     /// Finally, if the producer notices that its buffer has exceeded an even greater threshold, it will
@@ -291,7 +294,8 @@ namespace System.Linq.Parallel
                 if (!_initialized)
                 {
                     //
-                    // Initialization: wait until each producer has produced at least one element. Since the order indices
+                    // Initialization: wait until each producer has produced at least one element. Since the order
+                    // indices
                     // are increasing, we cannot start yielding until we have at least one element from each producer.
                     //
 
@@ -412,7 +416,8 @@ namespace System.Linq.Parallel
             /// <summary>
             /// Wait until a producer's buffer is non-empty, or until that producer is done.
             /// </summary>
-            /// <returns>false if there is no element to yield because the producer is done, true otherwise</returns>
+            /// <returns>false if there is no element to yield because the producer is done, true
+            // otherwise</returns>
             private bool TryWaitForElement(int producer, ref Pair<TKey, TOutput> element)
             {
                 Queue<Pair<TKey, TOutput>> buffer = _mergeHelper._buffers[producer];

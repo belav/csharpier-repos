@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         }
 
         /// <summary>
-        /// Indicates whether make abstract check box is enabled or not. (e.g. When user selects on interface destination, it will be disabled)
+        /// Indicates whether make abstract check box is enabled or not. (e.g. When user selects on
+        // interface destination, it will be disabled)
         /// </summary>
         public bool IsMakeAbstractCheckable
         {

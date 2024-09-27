@@ -12,21 +12,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///         Instances of this class are returned from methods when using the <see
+// cref="ModelBuilder" /> API
 ///         and it is not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
 public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBuilder>
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public PrimitiveCollectionBuilder(IMutableProperty property)
@@ -54,7 +60,8 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// </summary>
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder HasAnnotation(string annotation, object? value)
     {
         Check.NotEmpty(annotation, nameof(annotation));
@@ -65,12 +72,14 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     }
 
     /// <summary>
-    ///     Configures whether this property must have a value assigned or <see langword="null" /> is a valid value.
+    ///     Configures whether this property must have a value assigned or <see langword="null" /> is a
+    // valid value.
     ///     A property can only be configured as non-required if it is based on a CLR type that can be
     ///     assigned <see langword="null" />.
     /// </summary>
     /// <param name="required">A value indicating whether the property is required.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder IsRequired(bool required = true)
     {
         Builder.IsRequired(required, ConfigurationSource.Explicit);
@@ -80,12 +89,15 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
 
     /// <summary>
     ///     Configures the maximum length of data that can be stored in this property.
-    ///     Maximum length can only be set on array properties (including <see cref="string" /> properties).
+    ///     Maximum length can only be set on array properties (including <see cref="string" />
+    // properties).
     /// </summary>
     /// <param name="maxLength">
-    ///     The maximum length of data allowed in the property. A value of <c>-1</c> indicates that the property has no maximum length.
+    ///     The maximum length of data allowed in the property. A value of <c>-1</c> indicates that the
+    // property has no maximum length.
     /// </param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder HasMaxLength(int maxLength)
     {
         Builder.HasMaxLength(maxLength, ConfigurationSource.Explicit);
@@ -94,12 +106,15 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     }
 
     /// <summary>
-    ///     Configures the value that will be used to determine if the property has been set or not. If the property is set to the
-    ///     sentinel value, then it is considered not set. By default, the sentinel value is the CLR default value for the type of
+    ///     Configures the value that will be used to determine if the property has been set or not. If
+    // the property is set to the
+    ///     sentinel value, then it is considered not set. By default, the sentinel value is the CLR
+    // default value for the type of
     ///     the property.
     /// </summary>
     /// <param name="sentinel">The sentinel value.</param>
-    /// <returns>The same builder instance if the configuration was applied, <see langword="null" /> otherwise.</returns>
+    /// <returns>The same builder instance if the configuration was applied, <see langword="null" />
+    // otherwise.</returns>
     public virtual PrimitiveCollectionBuilder HasSentinel(object? sentinel)
     {
         Builder.HasSentinel(sentinel, ConfigurationSource.Explicit);
@@ -111,8 +126,10 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     ///     Configures whether the property as capable of persisting unicode characters.
     ///     Can only be set on <see cref="string" /> properties.
     /// </summary>
-    /// <param name="unicode">A value indicating whether the property can contain unicode characters.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <param name="unicode">A value indicating whether the property can contain unicode
+    // characters.</param>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder IsUnicode(bool unicode = true)
     {
         Builder.IsUnicode(unicode, ConfigurationSource.Explicit);
@@ -126,21 +143,28 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <remarks>
     ///     <para>
     ///         Values are generated when the entity is added to the context using, for example,
-    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is assigned
-    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for <c>int</c>,
+    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is
+    // assigned
+    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for
+    // <c>int</c>,
     ///         <c>Guid.Empty</c> for <c>Guid</c>, etc.).
     ///     </para>
     ///     <para>
-    ///         A single instance of this type will be created and used to generate values for this property in all
-    ///         instances of the entity type. The type must be instantiable and have a parameterless constructor.
+    ///         A single instance of this type will be created and used to generate values for this
+    // property in all
+    ///         instances of the entity type. The type must be instantiable and have a parameterless
+    // constructor.
     ///     </para>
     ///     <para>
-    ///         This method is intended for use with custom value generation. Value generation for common cases is
+    ///         This method is intended for use with custom value generation. Value generation for
+    // common cases is
     ///         usually handled automatically by the database provider.
     ///     </para>
     /// </remarks>
-    /// <typeparam name="TGenerator">A type that inherits from <see cref="ValueGenerator" />.</typeparam>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <typeparam name="TGenerator">A type that inherits from <see cref="ValueGenerator"
+    // />.</typeparam>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder HasValueGenerator<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
             TGenerator
@@ -158,25 +182,34 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <remarks>
     ///     <para>
     ///         Values are generated when the entity is added to the context using, for example,
-    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is assigned
-    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for <c>int</c>,
+    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is
+    // assigned
+    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for
+    // <c>int</c>,
     ///         <c>Guid.Empty</c> for <c>Guid</c>, etc.).
     ///     </para>
     ///     <para>
-    ///         A single instance of this type will be created and used to generate values for this property in all
-    ///         instances of the entity type. The type must be instantiable and have a parameterless constructor.
+    ///         A single instance of this type will be created and used to generate values for this
+    // property in all
+    ///         instances of the entity type. The type must be instantiable and have a parameterless
+    // constructor.
     ///     </para>
     ///     <para>
-    ///         This method is intended for use with custom value generation. Value generation for common cases is
+    ///         This method is intended for use with custom value generation. Value generation for
+    // common cases is
     ///         usually handled automatically by the database provider.
     ///     </para>
     ///     <para>
-    ///         Setting <see langword="null" /> does not disable value generation for this property, it just clears any generator explicitly
-    ///         configured for this property. The database provider may still have a value generator for the property type.
+    ///         Setting <see langword="null" /> does not disable value generation for this property, it
+    // just clears any generator explicitly
+    ///         configured for this property. The database provider may still have a value generator for
+    // the property type.
     ///     </para>
     /// </remarks>
-    /// <param name="valueGeneratorType">A type that inherits from <see cref="ValueGenerator" />.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <param name="valueGeneratorType">A type that inherits from <see cref="ValueGenerator"
+    // />.</param>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder HasValueGenerator(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
             Type? valueGeneratorType
@@ -188,62 +221,82 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     }
 
     /// <summary>
-    ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
+    ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see
+    // cref="ValueGenerator" />
     ///     to use to generate values for this property.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         Values are generated when the entity is added to the context using, for example,
-    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is assigned
-    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for <c>int</c>,
+    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is
+    // assigned
+    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for
+    // <c>int</c>,
     ///         <c>Guid.Empty</c> for <c>Guid</c>, etc.).
     ///     </para>
     ///     <para>
-    ///         A single instance of this type will be created and used to generate values for this property in all
-    ///         instances of the entity type. The type must be instantiable and have a parameterless constructor.
+    ///         A single instance of this type will be created and used to generate values for this
+    // property in all
+    ///         instances of the entity type. The type must be instantiable and have a parameterless
+    // constructor.
     ///     </para>
     ///     <para>
-    ///         This method is intended for use with custom value generation. Value generation for common cases is
+    ///         This method is intended for use with custom value generation. Value generation for
+    // common cases is
     ///         usually handled automatically by the database provider.
     ///     </para>
     ///     <para>
-    ///         Setting <see langword="null" /> does not disable value generation for this property, it just clears any generator explicitly
-    ///         configured for this property. The database provider may still have a value generator for the property type.
+    ///         Setting <see langword="null" /> does not disable value generation for this property, it
+    // just clears any generator explicitly
+    ///         configured for this property. The database provider may still have a value generator for
+    // the property type.
     ///     </para>
     /// </remarks>
-    /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory" />.</typeparam>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory"
+    // />.</typeparam>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder HasValueGeneratorFactory<
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory
     >()
         where TFactory : ValueGeneratorFactory => HasValueGeneratorFactory(typeof(TFactory));
 
     /// <summary>
-    ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
+    ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see
+    // cref="ValueGenerator" />
     ///     to use to generate values for this property.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         Values are generated when the entity is added to the context using, for example,
-    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is assigned
-    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for <c>int</c>,
+    ///         <see cref="DbContext.Add{TEntity}" />. Values are generated only when the property is
+    // assigned
+    ///         the CLR default value (<see langword="null" /> for <c>string</c>, <c>0</c> for
+    // <c>int</c>,
     ///         <c>Guid.Empty</c> for <c>Guid</c>, etc.).
     ///     </para>
     ///     <para>
-    ///         A single instance of this type will be created and used to generate values for this property in all
-    ///         instances of the entity type. The type must be instantiable and have a parameterless constructor.
+    ///         A single instance of this type will be created and used to generate values for this
+    // property in all
+    ///         instances of the entity type. The type must be instantiable and have a parameterless
+    // constructor.
     ///     </para>
     ///     <para>
-    ///         This method is intended for use with custom value generation. Value generation for common cases is
+    ///         This method is intended for use with custom value generation. Value generation for
+    // common cases is
     ///         usually handled automatically by the database provider.
     ///     </para>
     ///     <para>
-    ///         Setting <see langword="null" /> does not disable value generation for this property, it just clears any generator explicitly
-    ///         configured for this property. The database provider may still have a value generator for the property type.
+    ///         Setting <see langword="null" /> does not disable value generation for this property, it
+    // just clears any generator explicitly
+    ///         configured for this property. The database provider may still have a value generator for
+    // the property type.
     ///     </para>
     /// </remarks>
-    /// <param name="valueGeneratorFactoryType">A type that inherits from <see cref="ValueGeneratorFactory" />.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <param name="valueGeneratorFactoryType">A type that inherits from <see
+    // cref="ValueGeneratorFactory" />.</param>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder HasValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
             Type? valueGeneratorFactoryType
@@ -255,14 +308,20 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     }
 
     /// <summary>
-    ///     Configures whether this property should be used as a concurrency token. When a property is configured
-    ///     as a concurrency token the value in the database will be checked when an instance of this entity type
-    ///     is updated or deleted during <see cref="DbContext.SaveChanges()" /> to ensure it has not changed since
-    ///     the instance was retrieved from the database. If it has changed, an exception will be thrown and the
+    ///     Configures whether this property should be used as a concurrency token. When a property is
+    // configured
+    ///     as a concurrency token the value in the database will be checked when an instance of this
+    // entity type
+    ///     is updated or deleted during <see cref="DbContext.SaveChanges()" /> to ensure it has not
+    // changed since
+    ///     the instance was retrieved from the database. If it has changed, an exception will be thrown
+    // and the
     ///     changes will not be applied to the database.
     /// </summary>
-    /// <param name="concurrencyToken">A value indicating whether this property is a concurrency token.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <param name="concurrencyToken">A value indicating whether this property is a concurrency
+    // token.</param>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder IsConcurrencyToken(bool concurrencyToken = true)
     {
         Builder.IsConcurrencyToken(concurrencyToken, ConfigurationSource.Explicit);
@@ -271,12 +330,15 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     }
 
     /// <summary>
-    ///     Configures a property to never have a value generated by the database when an instance of this
+    ///     Configures a property to never have a value generated by the database when an instance of
+    // this
     ///     entity type is saved.
     /// </summary>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     /// <remarks>
-    ///     Note that values may still be generated by a client-side value generator, if one is set explicitly or by a convention.
+    ///     Note that values may still be generated by a client-side value generator, if one is set
+    // explicitly or by a convention.
     /// </remarks>
     public virtual PrimitiveCollectionBuilder ValueGeneratedNever()
     {
@@ -286,12 +348,16 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     }
 
     /// <summary>
-    ///     Configures a property to have a value generated only when saving a new entity, unless a non-null,
-    ///     non-temporary value has been set, in which case the set value will be saved instead. The value
-    ///     may be generated by a client-side value generator or may be generated by the database as part
+    ///     Configures a property to have a value generated only when saving a new entity, unless a
+    // non-null,
+    ///     non-temporary value has been set, in which case the set value will be saved instead. The
+    // value
+    ///     may be generated by a client-side value generator or may be generated by the database as
+    // part
     ///     of saving the entity.
     /// </summary>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder ValueGeneratedOnAdd()
     {
         Builder.ValueGenerated(ValueGenerated.OnAdd, ConfigurationSource.Explicit);
@@ -302,7 +368,8 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <summary>
     ///     Configures a property to have a value generated when saving a new or existing entity.
     /// </summary>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder ValueGeneratedOnAddOrUpdate()
     {
         Builder.ValueGenerated(ValueGenerated.OnAddOrUpdate, ConfigurationSource.Explicit);
@@ -313,7 +380,8 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <summary>
     ///     Configures a property to have a value generated when saving an existing entity.
     /// </summary>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder ValueGeneratedOnUpdate()
     {
         Builder.ValueGenerated(ValueGenerated.OnUpdate, ConfigurationSource.Explicit);
@@ -322,9 +390,11 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     }
 
     /// <summary>
-    ///     Configures a property to have a value generated under certain conditions when saving an existing entity.
+    ///     Configures a property to have a value generated under certain conditions when saving an
+    // existing entity.
     /// </summary>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder ValueGeneratedOnUpdateSometimes()
     {
         Builder.ValueGenerated(ValueGenerated.OnUpdateSometimes, ConfigurationSource.Explicit);
@@ -348,11 +418,13 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     ///         <see cref="UsePropertyAccessMode" />.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-backing-fields">Backing fields</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-backing-fields">Backing fields</see> for more
+    // information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="fieldName">The field name.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder HasField(string fieldName)
     {
         Check.NotEmpty(fieldName, nameof(fieldName));
@@ -371,8 +443,10 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// <summary>
     ///     Configures the elements of this collection.
     /// </summary>
-    /// <param name="builderAction">An action that performs configuration of the collection element type.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <param name="builderAction">An action that performs configuration of the collection element
+    // type.</param>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder ElementType(Action<ElementTypeBuilder> builderAction)
     {
         builderAction(ElementType());
@@ -385,9 +459,11 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         By default, the backing field, if one is found by convention or has been specified, is used when
+    ///         By default, the backing field, if one is found by convention or has been specified, is
+    // used when
     ///         new objects are constructed, typically when entities are queried from the database.
-    ///         Properties are used for all other accesses. Calling this method will change that behavior
+    ///         Properties are used for all other accesses. Calling this method will change that
+    // behavior
     ///         for this property as described in the <see cref="PropertyAccessMode" /> enum.
     ///     </para>
     ///     <para>
@@ -395,8 +471,10 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     ///         entity type or model.
     ///     </para>
     /// </remarks>
-    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this
+    // property.</param>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual PrimitiveCollectionBuilder UsePropertyAccessMode(
         PropertyAccessMode propertyAccessMode
     )
@@ -419,7 +497,8 @@ public class PrimitiveCollectionBuilder : IInfrastructure<IConventionPropertyBui
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
     public override bool Equals(object? obj) => base.Equals(obj);

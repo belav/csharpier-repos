@@ -22,7 +22,8 @@ public static class OpenApiEndpointConventionBuilderExtensions
     /// with the current endpoint.
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
-    /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
+    /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the
+    // endpoint.</returns>
     public static TBuilder WithOpenApi<TBuilder>(this TBuilder builder)
         where TBuilder : IEndpointConventionBuilder
     {
@@ -35,8 +36,10 @@ public static class OpenApiEndpointConventionBuilderExtensions
     /// with the current endpoint and modifies it with the given <paramref name="configureOperation"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
-    /// <param name="configureOperation">An <see cref="Func{T, TResult}"/> that returns a new OpenAPI annotation given a generated operation.</param>
-    /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
+    /// <param name="configureOperation">An <see cref="Func{T, TResult}"/> that returns a new OpenAPI
+    // annotation given a generated operation.</param>
+    /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the
+    // endpoint.</returns>
     public static TBuilder WithOpenApi<TBuilder>(
         this TBuilder builder,
         Func<OpenApiOperation, OpenApiOperation> configureOperation
@@ -66,7 +69,8 @@ public static class OpenApiEndpointConventionBuilderExtensions
                     {
                         endpointBuilder.Metadata.Remove(existingOperation);
 
-                        // The only way configureOperation could be null here is if configureOperation violated it's signature and returned null.
+                        // The only way configureOperation could be null here is if configureOperation violated it's
+                        // signature and returned null.
                         // We could throw or something, removing the previous metadata seems fine.
                         if (configuredOperation is not null)
                         {

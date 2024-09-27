@@ -10,18 +10,21 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
-    /// Unique identification of an emitted entity (method, lambda, closure) used for debugging purposes (EnC).
+    /// Unique identification of an emitted entity (method, lambda, closure) used for debugging purposes
+    // (EnC).
     /// </summary>
     /// <remarks>
     /// When used for a synthesized method the ordinal and generation numbers are included its name.
-    /// For user defined methods the ordinal is included in Custom Debug Information record attached to the method.
+    /// For user defined methods the ordinal is included in Custom Debug Information record attached to
+    // the method.
     /// </remarks>
     internal readonly record struct DebugId : IComparable<DebugId>
     {
         public const int UndefinedOrdinal = -1;
 
         /// <summary>
-        /// The index of the method in member list of the containing type, or <see cref="UndefinedOrdinal"/> if undefined.
+        /// The index of the method in member list of the containing type, or <see cref="UndefinedOrdinal"/>
+        // if undefined.
         /// </summary>
         public readonly int Ordinal;
 

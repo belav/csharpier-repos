@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -1330,7 +1331,8 @@ namespace System.Web.Http.WebHost
         [Fact]
         public async Task CopyResponseAsync_Returns_InternalServerError_And_No_Content_When_Content_Negotiation_Cannot_Find_Formatter_For_Error_Response()
         {
-            // Create a content negotiator that works attempting a normal response but fails when creating the error response.
+            // Create a content negotiator that works attempting a normal response but fails when creating the
+            // error response.
             Mock<IContentNegotiator> negotiatorMock = new Mock<IContentNegotiator>()
             {
                 CallBase = true,

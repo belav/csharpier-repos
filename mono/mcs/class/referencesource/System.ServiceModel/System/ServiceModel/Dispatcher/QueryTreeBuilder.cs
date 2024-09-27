@@ -96,15 +96,21 @@ namespace System.ServiceModel.Dispatcher
                 {
                     Fx.Assert(treePath[i].ID == insertPath[i].ID, "");
                     JumpOpcode insertJump = (JumpOpcode)insertPath[i];
-                    // Opcodes in 'insertPath' have equivalent opcodes in the query tree: i.e. the query tree contains an
-                    // an equivalent execution path (upto the point of divergence naturally) that will produce in an identical
-                    // result. The remainder of the query tree (anything that lies beyond the point of divergence) represents
-                    // a distinct execution path and is grafted onto the tree as a new branch. In fact, we simply break off
+                    // Opcodes in 'insertPath' have equivalent opcodes in the query tree: i.e. the query tree contains
+                    // an
+                    // an equivalent execution path (upto the point of divergence naturally) that will produce in an
+                    // identical
+                    // result. The remainder of the query tree (anything that lies beyond the point of divergence)
+                    // represents
+                    // a distinct execution path and is grafted onto the tree as a new branch. In fact, we simply break
+                    // off
                     // the remainder from the query being inserted and graft it onto the query tree.
                     // If there are jumps on the insert path that jump to opcodes NOT in the insert path, then the jumps
-                    // will reach opcodes in the new branch we will add(see above). However, because the actual jump opcodes
+                    // will reach opcodes in the new branch we will add(see above). However, because the actual jump
+                    // opcodes
                     // are shared (used as is from the query tree), the actual jump must also be branched. One jump will
-                    // continue to jump to the original opcode and the second new one will jump to an opcode in the grafted branch.
+                    // continue to jump to the original opcode and the second new one will jump to an opcode in the
+                    // grafted branch.
                     if (-1 == insertPath.IndexOf(insertJump.Jump, i + 1))
                     {
                         Fx.Assert(insertJump.Jump.ID == OpcodeID.BlockEnd, "");

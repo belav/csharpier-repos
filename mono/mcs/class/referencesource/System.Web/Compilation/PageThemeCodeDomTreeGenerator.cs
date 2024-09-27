@@ -73,7 +73,8 @@ namespace System.Web.Compilation
             string keyVarName = GetMethodNameForBuilder(buildMethodPrefix, builder) + "_skinKey";
 
             // e.g.
-            // private static object __BuildControl__control3_skinKey = PageTheme.CreateSkinKey(typeof({controlType}), {skinID});
+            // private static object __BuildControl__control3_skinKey =
+            // PageTheme.CreateSkinKey(typeof({controlType}), {skinID});
             CodeMemberField field = new CodeMemberField(typeof(object), keyVarName);
             field.Attributes = MemberAttributes.Static | MemberAttributes.Private;
             CodeMethodInvokeExpression cmie = new CodeMethodInvokeExpression();

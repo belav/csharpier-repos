@@ -187,7 +187,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="graphics">Graphics on which to draw the image</param>
         /// <param name="image">Image to be drawn</param>
         /// <param name="destination">Bounding rectangle for the image</param>
-        /// <param name="alignment">Alignment specifying how the image will be aligned against bounding rectangle</param>
+        /// <param name="alignment">Alignment specifying how the image will be aligned against bounding
+        // rectangle</param>
         public static void DrawImage(
             Graphics graphics,
             Image image,
@@ -237,7 +238,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="image">Image to be drawn</param>
         /// <param name="destination">Bounding rectangle for the image</param>
         /// <param name="source">Source rectangle of the image</param>
-        /// <param name="alignment">Alignment specifying how image will be aligned against the bounding rectangle</param>
+        /// <param name="alignment">Alignment specifying how image will be aligned against the bounding
+        // rectangle</param>
         /// <param name="transparency">Transparency for the image</param>
         /// <param name="grayscale">Value indicating if the image should be gray scaled</param>
         public static void DrawImage(
@@ -583,8 +585,10 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="graphics">Graphics on which to draw the button</param>
         /// <param name="boundingRect">Bounding rectangle for the button</param>
-        /// <param name="drawExpanded">Value indicating if the button should be drawn in expanded state</param>
-        /// <param name="compositeDesignerTheme">Theme associated with the designer used in rendering of the button</param>
+        /// <param name="drawExpanded">Value indicating if the button should be drawn in expanded
+        // state</param>
+        /// <param name="compositeDesignerTheme">Theme associated with the designer used in rendering of the
+        // button</param>
         public static void DrawExpandButton(
             Graphics graphics,
             Rectangle boundingRect,
@@ -660,8 +664,10 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="shadowSourceRectangle">Rectangle around which to draw the shadow</param>
         /// <param name="baseColor">Base color used to draw the shadow</param>
         /// <param name="shadowDepth">Depth of the shadow, this has to be between 1 and 12 inclusive</param>
-        /// <param name="lightSourcePosition">Position of the light source determining the way shadow will be drawn</param>
-        /// <param name="lightSourceIntensity">Intensity of the light source, this needs to be inbetween 0.01 and 1</param>
+        /// <param name="lightSourcePosition">Position of the light source determining the way shadow will
+        // be drawn</param>
+        /// <param name="lightSourceIntensity">Intensity of the light source, this needs to be inbetween
+        // 0.01 and 1</param>
         /// <param name="roundEdges">Flag indicating whether to round the edges of the shadow</param>
         internal static void DrawDropShadow(
             Graphics graphics,
@@ -2197,7 +2203,8 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     visitedComponents[component.GetHashCode()] = component;
 
-                    //add custom readonly type descriptor to the component (to set ForceReadonly flag in the property grid)
+                    //add custom readonly type descriptor to the component (to set ForceReadonly flag in the property
+                    // grid)
                     TypeDescriptor.AddProvider(
                         new ReadonlyTypeDescriptonProvider(TypeDescriptor.GetProvider(component)),
                         component

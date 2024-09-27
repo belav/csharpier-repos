@@ -187,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Editor
         bool HasOverloads { get; }
 
         /// <summary>
-        /// True if overloads must be renamed (the user is not given a choice). Used if rename is invoked from within a nameof expression.
+        /// True if overloads must be renamed (the user is not given a choice). Used if rename is invoked
+        // from within a nameof expression.
         /// </summary>
         bool MustRenameOverloads { get; }
 
@@ -252,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor
 
         /// <summary>
         /// Called before the rename is applied to the specified documents in the workspace.  Return
-        /// <see langword="true"/> if rename should proceed, or <see langword="false"/> if it should be canceled.
+        /// <see langword="true"/> if rename should proceed, or <see langword="false"/> if it should be
+        // canceled.
         /// </summary>
         bool TryOnBeforeGlobalSymbolRenamed(
             Workspace workspace,

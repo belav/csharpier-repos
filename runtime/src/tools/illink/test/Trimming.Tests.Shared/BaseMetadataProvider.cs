@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 #nullable enable
 using System;
@@ -79,7 +80,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
                 if (topMostDirectory == null)
                 {
-                    // Before giving up, try and detect the naming scheme for tests that use a dot in the top level directory name.
+                    // Before giving up, try and detect the naming scheme for tests that use a dot in the top level
+                    // directory name.
                     // Ex:
                     // Attributes.Debugger
                     // + 1 because the file name is one of the elements

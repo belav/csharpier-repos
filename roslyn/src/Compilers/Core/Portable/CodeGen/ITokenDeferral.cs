@@ -28,8 +28,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             DiagnosticBag diagnostics
         );
 
-        /// <summary>Gets a field that may be used to lazily cache an array created to store the specified data.</summary>
-        /// <remarks>This is used to cache an array created with the data passed to <see cref="GetFieldForData"/>.</remarks>
+        /// <summary>Gets a field that may be used to lazily cache an array created to store the specified
+        // data.</summary>
+        /// <remarks>This is used to cache an array created with the data passed to <see
+        // cref="GetFieldForData"/>.</remarks>
         Cci.IFieldReference GetArrayCachingFieldForData(
             ImmutableArray<byte> data,
             Cci.IArrayTypeReference arrayType,
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         string GetStringFromToken(uint token);
 
         /// <summary>
-        /// Gets the <see cref="Cci.IReference"/> or <see cref="Cci.ISignature"/> corresponding to this token.
+        /// Gets the <see cref="Cci.IReference"/> or <see cref="Cci.ISignature"/> corresponding to this
+        // token.
         /// </summary>
         object GetReferenceFromToken(uint token);
 

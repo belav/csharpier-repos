@@ -250,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 )
             )
             {
-                // We enable the parameter in RaiseEvent, if the Event is declared with a signature. If the Event is declared as a
+                // We enable the parameter in RaiseEvent, if the Event is declared with a signature. If the Event is
+                // declared as a
                 // delegate type, we do not have a connection between the delegate type and the event.
                 // this prevents a rename in this case :(.
                 return new SymbolicRenameInfo(FeaturesResources.You_cannot_rename_this_element);
@@ -312,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Rename
                     }
                     else
                     {
-                        // We eventually need to return the symbol locations, so we must convert each location to a DocumentSpan since our return type is language-agnostic.
+                        // We eventually need to return the symbol locations, so we must convert each location to a
+                        // DocumentSpan since our return type is language-agnostic.
                         documentSpans.Add(new DocumentSpan(sourceDocument, location.SourceSpan));
                     }
                 }

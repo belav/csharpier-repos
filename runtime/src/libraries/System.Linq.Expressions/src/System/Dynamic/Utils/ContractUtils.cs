@@ -31,7 +31,8 @@ namespace System.Dynamic.Utils
         /// The precondition to check for being <c>true</c>.
         /// </param>
         /// <param name="paramName">
-        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an exception is thrown.
+        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an
+        // exception is thrown.
         /// </param>
         /// <exception cref="ArgumentException">
         /// Thrown if <paramref name="precondition"/> is <c>false</c>.
@@ -53,11 +54,13 @@ namespace System.Dynamic.Utils
         /// The value to check for being non-<c>null</c>.
         /// </param>
         /// <param name="paramName">
-        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an exception is thrown.
+        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an
+        // exception is thrown.
         /// </param>
         /// <param name="index">
         /// The index of the argument being checked for <c>null</c>.
-        /// If an exception is thrown, this value is used in <see cref="ArgumentException.ParamName"/> if it's greater than or equal to 0.
+        /// If an exception is thrown, this value is used in <see cref="ArgumentException.ParamName"/> if
+        // it's greater than or equal to 0.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// Thrown if <paramref name="value"/> is <c>null</c>.
@@ -79,7 +82,8 @@ namespace System.Dynamic.Utils
         /// The collection to check for being non-empty.
         /// </param>
         /// <param name="paramName">
-        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an exception is thrown.
+        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an
+        // exception is thrown.
         /// </param>
         /// <exception cref="ArgumentException">
         /// Thrown if the <paramref name="collection"/> is empty.
@@ -100,7 +104,8 @@ namespace System.Dynamic.Utils
         /// The array to check for being non-<c>null</c> and containing non-<c>null</c> items.
         /// </param>
         /// <param name="arrayName">
-        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an exception is thrown.
+        /// The parameter name to use in the <see cref="ArgumentException.ParamName"/> property when an
+        // exception is thrown.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// Thrown if the <paramref name="array"/> or any of its items is <c>null</c>.

@@ -22,29 +22,38 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 /// <remarks>
 ///     <para>
 ///         Providers should create an instance of this class, use its methods to register
-///         services, and then call <see cref="TryAddCoreServices" /> to fill out the remaining Entity
+///         services, and then call <see cref="TryAddCoreServices" /> to fill out the remaining
+// Entity
 ///         Framework services.
 ///     </para>
 ///     <para>
 ///         Relational providers should use 'EntityFrameworkRelationalServicesBuilder instead.
 ///     </para>
 ///     <para>
-///         Entity Framework ensures that services are registered with the appropriate scope. In some cases a provider
-///         may register a service with a different scope, but great care must be taken that all its dependencies
-///         can handle the new scope, and that it does not cause issue for services that depend on it.
+///         Entity Framework ensures that services are registered with the appropriate scope. In
+// some cases a provider
+///         may register a service with a different scope, but great care must be taken that all its
+// dependencies
+///         can handle the new scope, and that it does not cause issue for services that depend on
+// it.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
 public class EntityFrameworkServicesBuilder
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     /// <remarks>
     ///     This dictionary is exposed for testing and provider-validation only.
@@ -233,7 +242,8 @@ public class EntityFrameworkServicesBuilder
     ///     'EntityFrameworkRelationalServicesBuilder'.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="serviceCollection">The collection to which services will be registered.</param>
@@ -246,7 +256,8 @@ public class EntityFrameworkServicesBuilder
     ///     Access to the underlying <see cref="ServiceCollectionMap" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     protected virtual ServiceCollectionMap ServiceCollectionMap { get; }
@@ -255,7 +266,8 @@ public class EntityFrameworkServicesBuilder
     ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="serviceType">The type that defines the service API.</param>
@@ -272,11 +284,13 @@ public class EntityFrameworkServicesBuilder
     ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="serviceType">The type that defines the service API.</param>
-    /// <returns>The <see cref="ServiceCharacteristics" /> for the type or <see langword="null" /> if it's not an EF service.</returns>
+    /// <returns>The <see cref="ServiceCharacteristics" /> for the type or <see langword="null" /> if
+    // it's not an EF service.</returns>
     protected virtual ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType) =>
         !CoreServices.TryGetValue(serviceType, out var characteristics) ? null : characteristics;
 
@@ -287,7 +301,8 @@ public class EntityFrameworkServicesBuilder
     ///     <see cref="EntityFrameworkServicesBuilder" /> and not through this method.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="serviceMap">The underlying map to which provider services should be added.</param>
@@ -319,7 +334,8 @@ public class EntityFrameworkServicesBuilder
     ///     after all provider services have been registered.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <returns>This builder, such that further calls can be chained.</returns>
@@ -461,11 +477,13 @@ public class EntityFrameworkServicesBuilder
         serviceProvider.GetRequiredService<IDbContextServices>();
 
     /// <summary>
-    ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
+    ///     Adds an implementation of an Entity Framework service only if one has not already been
+    // registered.
     ///     The scope of the service is automatically defined by Entity Framework.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TService">The contract for the service.</typeparam>
@@ -481,11 +499,13 @@ public class EntityFrameworkServicesBuilder
         TryAdd(typeof(TService), typeof(TImplementation));
 
     /// <summary>
-    ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
+    ///     Adds an implementation of an Entity Framework service only if one has not already been
+    // registered.
     ///     The scope of the service is automatically defined by Entity Framework.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="serviceType">The contract for the service.</param>
@@ -520,7 +540,8 @@ public class EntityFrameworkServicesBuilder
     ///     The scope of the service is automatically defined by Entity Framework.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TService">The contract for the service.</typeparam>
@@ -536,7 +557,8 @@ public class EntityFrameworkServicesBuilder
     ///     The scope of the service is automatically defined by Entity Framework.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TService">The contract for the service.</typeparam>
@@ -557,7 +579,8 @@ public class EntityFrameworkServicesBuilder
     ///     The scope of the service is automatically defined by Entity Framework.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="serviceType">The contract for the service.</param>
@@ -598,11 +621,13 @@ public class EntityFrameworkServicesBuilder
     }
 
     /// <summary>
-    ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
+    ///     Adds an implementation of an Entity Framework service only if one has not already been
+    // registered.
     ///     This method can only be used for singleton services.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <typeparam name="TService">The contract for the service.</typeparam>
@@ -612,11 +637,13 @@ public class EntityFrameworkServicesBuilder
         where TService : class => TryAdd(typeof(TService), implementation);
 
     /// <summary>
-    ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
+    ///     Adds an implementation of an Entity Framework service only if one has not already been
+    // registered.
     ///     This method can only be used for singleton services.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+    ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+    // and extensions</see>
     ///     for more information and examples.
     /// </remarks>
     /// <param name="serviceType">The contract for the service.</param>

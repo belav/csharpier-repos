@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -292,7 +293,8 @@ namespace System.Web.Http.Tracing
             }
         }
 
-        // Following filters work best if there are no duplicate tracer types in AllKnownTracers. Currently the case.
+        // Following filters work best if there are no duplicate tracer types in AllKnownTracers. Currently
+        // the case.
         public static TheoryDataSet<Type, Type> AllKnownTracers_NoExclusions
         {
             get
@@ -491,7 +493,8 @@ namespace System.Web.Http.Tracing
                 return;
             }
 
-            // Allow exclusion list to be short name or long name, because some members are up the inheritance chain
+            // Allow exclusion list to be short name or long name, because some members are up the inheritance
+            // chain
             string visibleMemberName = String.Format(
                 "{0}.{1}",
                 methodInfo.DeclaringType.Name,

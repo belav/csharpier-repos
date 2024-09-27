@@ -65,11 +65,11 @@ namespace Mono.ILASM
                     token = Token.INSTR_R;
                     break;
 
-                /*
-                case OperandType.InlineRVA:
-                    token = Token.INSTR_RVA;
-                    break;
-                */
+/*
+case OperandType.InlineRVA:
+token = Token.INSTR_RVA;
+break;
+*/
 
                 case OperandType.InlineSig:
                     token = Token.INSTR_SIG;

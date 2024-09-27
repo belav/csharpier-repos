@@ -12,7 +12,8 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions.Symbolic
 {
-    /// <summary>Represents a regex matching engine that performs regex matching using symbolic derivatives.</summary>
+    /// <summary>Represents a regex matching engine that performs regex matching using symbolic
+    // derivatives.</summary>
     internal abstract class SymbolicRegexMatcher
     {
 #if DEBUG
@@ -33,7 +34,8 @@ namespace System.Text.RegularExpressions.Symbolic
 #endif
     }
 
-    /// <summary>Represents a regex matching engine that performs regex matching using symbolic derivatives.</summary>
+    /// <summary>Represents a regex matching engine that performs regex matching using symbolic
+    // derivatives.</summary>
     /// <typeparam name="TSet">Character set type.</typeparam>
     internal sealed partial class SymbolicRegexMatcher<TSet> : SymbolicRegexMatcher
         where TSet : IComparable<TSet>, IEquatable<TSet>
@@ -55,16 +57,25 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary><see cref="_pattern"/> prefixed with [0-0xFFFF]*</summary>
         /// <remarks>
         /// The matching engine first uses <see cref="_dotStarredPattern"/> to find whether there is a match
-        /// and where that match might end.  Prepending the .* prefix onto the original pattern provides the DFA
+        /// and where that match might end.  Prepending the .* prefix onto the original pattern provides the
+        // DFA
         /// with the ability to continue to process input characters even if those characters aren't part of
-        /// the match. If Regex.IsMatch is used, nothing further is needed beyond this prefixed pattern.  If, however,
-        /// other matching operations are performed that require knowing the exact start and end of the match,
-        /// the engine then needs to process the pattern in reverse to find where the match actually started;
-        /// for that, it uses the <see cref="_reversePattern"/> and walks backwards through the input characters
-        /// from where <see cref="_dotStarredPattern"/> left off.  At this point we know that there was a match,
-        /// where it started, and where it could have ended, but that ending point could be influenced by the
-        /// selection of the starting point.  So, to find the actual ending point, the original <see cref="_pattern"/>
-        /// is then used from that starting point to walk forward through the input characters again to find the
+        /// the match. If Regex.IsMatch is used, nothing further is needed beyond this prefixed pattern.
+        // If, however,
+        /// other matching operations are performed that require knowing the exact start and end of the
+        // match,
+        /// the engine then needs to process the pattern in reverse to find where the match actually
+        // started;
+        /// for that, it uses the <see cref="_reversePattern"/> and walks backwards through the input
+        // characters
+        /// from where <see cref="_dotStarredPattern"/> left off.  At this point we know that there was a
+        // match,
+        /// where it started, and where it could have ended, but that ending point could be influenced by
+        // the
+        /// selection of the starting point.  So, to find the actual ending point, the original <see
+        // cref="_pattern"/>
+        /// is then used from that starting point to walk forward through the input characters again to find
+        // the
         /// actual end point used for the match.
         /// </remarks>
         internal readonly SymbolicRegexNode<TSet> _dotStarredPattern;
@@ -84,49 +95,65 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>true iff timeout checking is enabled.</summary>
         private readonly bool _checkTimeout;
 
-        /// <summary>Timeout in milliseconds. This is only used if <see cref="_checkTimeout"/> is true.</summary>
+        /// <summary>Timeout in milliseconds. This is only used if <see cref="_checkTimeout"/> is
+        // true.</summary>
         private readonly int _timeout;
 
-        /// <summary>Data and routines for skipping ahead to the next place a match could potentially start.</summary>
+        /// <summary>Data and routines for skipping ahead to the next place a match could potentially
+        // start.</summary>
         private readonly RegexFindOptimizations? _findOpts;
 
-        /// <summary>The initial states for the original pattern, keyed off of the previous character kind.</summary>
-        /// <remarks>If the pattern doesn't contain any anchors, there will only be a single initial state.</remarks>
+        /// <summary>The initial states for the original pattern, keyed off of the previous character
+        // kind.</summary>
+        /// <remarks>If the pattern doesn't contain any anchors, there will only be a single initial
+        // state.</remarks>
         private readonly MatchingState<TSet>[] _initialStates;
 
-        /// <summary>The initial states for the dot-star pattern, keyed off of the previous character kind.</summary>
-        /// <remarks>If the pattern doesn't contain any anchors, there will only be a single initial state.</remarks>
+        /// <summary>The initial states for the dot-star pattern, keyed off of the previous character
+        // kind.</summary>
+        /// <remarks>If the pattern doesn't contain any anchors, there will only be a single initial
+        // state.</remarks>
         private readonly MatchingState<TSet>[] _dotstarredInitialStates;
 
-        /// <summary>The initial states for the reverse pattern, keyed off of the previous character kind.</summary>
-        /// <remarks>If the pattern doesn't contain any anchors, there will only be a single initial state.</remarks>
+        /// <summary>The initial states for the reverse pattern, keyed off of the previous character
+        // kind.</summary>
+        /// <remarks>If the pattern doesn't contain any anchors, there will only be a single initial
+        // state.</remarks>
         private readonly MatchingState<TSet>[] _reverseInitialStates;
 
         /// <summary>Partition of the input space of sets.</summary>
         private readonly TSet[] _minterms;
 
         /// <summary>
-        /// Character kinds <see cref="CharKind"/> for all minterms in <see cref="_minterms"/> as well as two special
-        /// cases: character positions outside the input bounds and an end-of-line as the last input character.
+        /// Character kinds <see cref="CharKind"/> for all minterms in <see cref="_minterms"/> as well as
+        // two special
+        /// cases: character positions outside the input bounds and an end-of-line as the last input
+        // character.
         /// </summary>
         private readonly uint[] _positionKinds;
 
         /// <summary>
-        /// The smallest k s.t. 2^k >= minterms.Length + 1. The "delta arrays", e.g., <see cref="_dfaDelta"/> allocate 2^k
-        /// consecutive slots for each state ID to represent the transitions for each minterm. The extra slot at index
-        /// _minterms.Length is used to represent an \n occurring at the very end of input, for supporting the \Z anchor.
+        /// The smallest k s.t. 2^k >= minterms.Length + 1. The "delta arrays", e.g., <see
+        // cref="_dfaDelta"/> allocate 2^k
+        /// consecutive slots for each state ID to represent the transitions for each minterm. The extra
+        // slot at index
+        /// _minterms.Length is used to represent an \n occurring at the very end of input, for supporting
+        // the \Z anchor.
         /// </summary>
         private readonly int _mintermsLog;
 
         /// <summary>Number of capture groups.</summary>
         private readonly int _capsize;
 
-        /// <summary>Gets whether the regular expression contains captures (beyond the implicit root-level capture).</summary>
-        /// <remarks>This determines whether the matcher uses the special capturing NFA simulation mode.</remarks>
+        /// <summary>Gets whether the regular expression contains captures (beyond the implicit root-level
+        // capture).</summary>
+        /// <remarks>This determines whether the matcher uses the special capturing NFA simulation
+        // mode.</remarks>
         internal bool HasSubcaptures => _capsize > 1;
 
         /// <remarks>
-        /// Both solvers supported here, <see cref="UInt64Solver"/> and <see cref="BitVectorSolver"/> are thread safe.
+        /// Both solvers supported here, <see cref="UInt64Solver"/> and <see cref="BitVectorSolver"/> are
+        // thread safe.
         /// </remarks>
         private ISolver<TSet> Solver => _builder._solver;
 
@@ -195,8 +222,10 @@ namespace System.Text.RegularExpressions.Symbolic
             TSet[]? solverMinterms = builder._solver.GetMinterms();
             Debug.Assert(solverMinterms is not null);
             _minterms = solverMinterms;
-            // BitOperations.Log2 gives the integer floor of the log, so the +1 below either rounds up with non-power-of-two
-            // minterms or adds an extra bit with power-of-two minterms. The extra slot at index _minterms.Length is used to
+            // BitOperations.Log2 gives the integer floor of the log, so the +1 below either rounds up with
+            // non-power-of-two
+            // minterms or adds an extra bit with power-of-two minterms. The extra slot at index
+            // _minterms.Length is used to
             // represent an \n occurring at the very end of input, for supporting the \Z anchor.
             _mintermsLog = BitOperations.Log2((uint)_minterms.Length) + 1;
             _mintermClassifier = builder._solver is UInt64Solver bv64
@@ -209,7 +238,8 @@ namespace System.Text.RegularExpressions.Symbolic
             _stateFlagsArray = new StateFlags[InitialDfaStateCapacity];
             _dfaDelta = new int[InitialDfaStateCapacity << _mintermsLog];
 
-            // Initialize a lookup array for the character kinds of each minterm ID. This includes one "special" minterm
+            // Initialize a lookup array for the character kinds of each minterm ID. This includes one "special"
+            // minterm
             // ID _minterms.Length, which is used to represent a \n at the very end of input, and another ID -1,
             // which is used to represent any position outside the bounds of the input.
             _positionKinds = new uint[_minterms.Length + 2];
@@ -218,7 +248,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 _positionKinds[mintermId + 1] = CalculateMintermIdKind(mintermId);
             }
 
-            // Store the find optimizations that can be used to jump ahead to the next possible starting location.
+            // Store the find optimizations that can be used to jump ahead to the next possible starting
+            // location.
             // If there's a leading beginning anchor, the find optimizations are unnecessary on top of the DFA's
             // handling for beginning anchors.
             if (
@@ -233,7 +264,8 @@ namespace System.Text.RegularExpressions.Symbolic
             // character kind 0 is ever going to be used for all initial states.
             int statesCount = _pattern._info.ContainsSomeAnchor ? CharKind.CharKindCount : 1;
 
-            // The loops below and how character kinds are calculated assume that the "general" character kind is zero
+            // The loops below and how character kinds are calculated assume that the "general" character kind
+            // is zero
             Debug.Assert(CharKind.General == 0);
 
             // Create the initial states for the original pattern.
@@ -336,7 +368,8 @@ namespace System.Text.RegularExpressions.Symbolic
         private uint GetPositionKind(int positionId) => _positionKinds[positionId + 1];
 
         /// <summary>
-        /// Lookup the actual minterm based on its ID. Also get its character kind, which is a general categorization of
+        /// Lookup the actual minterm based on its ID. Also get its character kind, which is a general
+        // categorization of
         /// characters used for cheaply deciding the nullability of anchors.
         /// </summary>
         internal TSet GetMintermFromId(int mintermId)
@@ -402,11 +435,15 @@ namespace System.Text.RegularExpressions.Symbolic
             }
 
             // Phase 1:
-            // Determine the end point of the match.  The returned index is one-past-the-end index for the characters
-            // in the match.  Note that -1 is a valid end point for an empty match at the beginning of the input.
+            // Determine the end point of the match.  The returned index is one-past-the-end index for the
+            // characters
+            // in the match.  Note that -1 is a valid end point for an empty match at the beginning of the
+            // input.
             // It returns NoMatchExists (-2) when there is no match.
-            // As an example, consider the pattern a{1,3}(b*) run against an input of aacaaaabbbc: phase 1 will find
-            // the position of the last b: aacaaaabbbc.  It additionally records the position of the first a after
+            // As an example, consider the pattern a{1,3}(b*) run against an input of aacaaaabbbc: phase 1 will
+            // find
+            // the position of the last b: aacaaaabbbc.  It additionally records the position of the first a
+            // after
             // the c as the low boundary for the starting position.
             int matchStartLowBoundary,
                 matchStartLengthMarker;
@@ -528,7 +565,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 return SymbolicMatch.NoMatch;
             }
 
-            // A match exists. If we don't need further details, e.g. because IsMatch was used (and thus we don't
+            // A match exists. If we don't need further details, e.g. because IsMatch was used (and thus we
+            // don't
             // need the exact bounds of the match, captures, etc.), we're done.
             if (mode == RegexRunnerMode.ExistenceRequired)
             {
@@ -536,10 +574,14 @@ namespace System.Text.RegularExpressions.Symbolic
             }
 
             // Phase 2:
-            // Match backwards through the input matching against the reverse of the pattern, looking for the earliest
-            // start position.  That tells us the actual starting position of the match.  We can skip this phase if we
-            // recorded a fixed-length marker for the portion of the pattern that matched, as we can then jump that
-            // exact number of positions backwards.  Continuing the previous example, phase 2 will walk backwards from
+            // Match backwards through the input matching against the reverse of the pattern, looking for the
+            // earliest
+            // start position.  That tells us the actual starting position of the match.  We can skip this phase
+            // if we
+            // recorded a fixed-length marker for the portion of the pattern that matched, as we can then jump
+            // that
+            // exact number of positions backwards.  Continuing the previous example, phase 2 will walk
+            // backwards from
             // that last b until it finds the 4th a: aaabbbc.
             int matchStart;
             if (matchStartLengthMarker >= 0)
@@ -577,9 +619,12 @@ namespace System.Text.RegularExpressions.Symbolic
             }
 
             // Phase 3:
-            // If there are no subcaptures (or if they're not needed), the matching process is done.  For patterns with subcaptures
-            // (captures other than the top-level capture for the whole match), we need to do an additional pass to find their bounds.
-            // Continuing for the previous example, phase 3 will be executed for the characters inside the match, aaabbbc,
+            // If there are no subcaptures (or if they're not needed), the matching process is done.  For
+            // patterns with subcaptures
+            // (captures other than the top-level capture for the whole match), we need to do an additional pass
+            // to find their bounds.
+            // Continuing for the previous example, phase 3 will be executed for the characters inside the
+            // match, aaabbbc,
             // and will find associate the one capture (b*) with it's match: bbb.
             if (!HasSubcaptures || mode < RegexRunnerMode.FullMatchRequired)
             {
@@ -604,16 +649,20 @@ namespace System.Text.RegularExpressions.Symbolic
             }
         }
 
-        /// <summary>Performs the initial Phase 1 match to find the end position of the match, or first final state if this is an isMatch call.</summary>
+        /// <summary>Performs the initial Phase 1 match to find the end position of the match, or first
+        // final state if this is an isMatch call.</summary>
         /// <param name="input">The input text.</param>
         /// <param name="pos">The starting position in <paramref name="input"/>.</param>
-        /// <param name="timeoutOccursAt">The time at which timeout occurs, if timeouts are being checked.</param>
+        /// <param name="timeoutOccursAt">The time at which timeout occurs, if timeouts are being
+        // checked.</param>
         /// <param name="mode">The mode of execution based on the regex operation being performed.</param>
-        /// <param name="initialStatePos">The last position the initial state of <see cref="_dotStarredPattern"/> was visited before the end position was found.</param>
+        /// <param name="initialStatePos">The last position the initial state of <see
+        // cref="_dotStarredPattern"/> was visited before the end position was found.</param>
         /// <param name="matchLength">Length of the match if there's a match; otherwise, -1.</param>
         /// <param name="perThreadData">Per thread data reused between calls.</param>
         /// <returns>
-        /// A one-past-the-end index into input for the preferred match, or first final state position if isMatch is true, or NoMatchExists if no match exists.
+        /// A one-past-the-end index into input for the preferred match, or first final state position if
+        // isMatch is true, or NoMatchExists if no match exists.
         /// </returns>
         private int FindEndPosition<TInputReader, TFindOptimizationsHandler, TNullabilityHandler>(
             ReadOnlySpan<char> input,
@@ -640,12 +689,18 @@ namespace System.Text.RegularExpressions.Symbolic
 
             while (true)
             {
-                // Now run the DFA or NFA traversal from the current point using the current state. If timeouts are being checked,
-                // we need to pop out of the inner loop every now and then to do the timeout check in this outer loop. Note that
-                // the timeout exists not to provide perfect guarantees around execution time but rather as a mitigation against
-                // catastrophic backtracking.  Catastrophic backtracking is not an issue for the NonBacktracking engine, but we
-                // still check the timeout now and again to provide some semblance of the behavior a developer experiences with
-                // the backtracking engines.  We can, however, choose a large number here, since it's not actually needed for security.
+                // Now run the DFA or NFA traversal from the current point using the current state. If timeouts are
+                // being checked,
+                // we need to pop out of the inner loop every now and then to do the timeout check in this outer
+                // loop. Note that
+                // the timeout exists not to provide perfect guarantees around execution time but rather as a
+                // mitigation against
+                // catastrophic backtracking.  Catastrophic backtracking is not an issue for the NonBacktracking
+                // engine, but we
+                // still check the timeout now and again to provide some semblance of the behavior a developer
+                // experiences with
+                // the backtracking engines.  We can, however, choose a large number here, since it's not actually
+                // needed for security.
                 const int CharsPerTimeoutCheck = 1_000;
                 int innerLoopLength =
                     _checkTimeout && input.Length - pos > CharsPerTimeoutCheck
@@ -686,19 +741,23 @@ namespace System.Text.RegularExpressions.Symbolic
                         ref initialStatePosCandidate
                     );
 
-                // If the inner loop indicates that the search finished (for example due to reaching a deadend state) or
+                // If the inner loop indicates that the search finished (for example due to reaching a deadend
+                // state) or
                 // there is no more input available, then the whole search is done.
                 if (done || pos >= input.Length)
                 {
                     break;
                 }
 
-                // The search did not finish, so we either failed to transition (which should only happen if we were in DFA mode and
-                // need to switch over to NFA mode) or ran out of input in the inner loop. Check if the inner loop still had more
+                // The search did not finish, so we either failed to transition (which should only happen if we were
+                // in DFA mode and
+                // need to switch over to NFA mode) or ran out of input in the inner loop. Check if the inner loop
+                // still had more
                 // input available.
                 if (pos < innerLoopLength)
                 {
-                    // Because there was still more input available, a failure to transition in DFA mode must be the cause
+                    // Because there was still more input available, a failure to transition in DFA mode must be the
+                    // cause
                     // of the early exit. Upgrade to NFA mode.
                     NfaMatchingState nfaState = perThreadData.NfaState;
                     nfaState.InitializeFrom(this, GetState(currentState.DfaStateId));
@@ -722,19 +781,26 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Workhorse inner loop for <see cref="FindEndPosition"/>.  Consumes the <paramref name="input"/> character by character,
-        /// starting at <paramref name="posRef"/>, for each character transitioning from one state in the DFA or NFA graph to the next state,
+        /// Workhorse inner loop for <see cref="FindEndPosition"/>.  Consumes the <paramref name="input"/>
+        // character by character,
+        /// starting at <paramref name="posRef"/>, for each character transitioning from one state in the
+        // DFA or NFA graph to the next state,
         /// lazily building out the graph as needed.
         /// </summary>
         /// <remarks>
-        /// The <typeparamref name="TStateHandler"/> supplies the actual transitioning logic, controlling whether processing is
-        /// performed in DFA mode or in NFA mode.  However, it expects <paramref name="state"/> to be configured to match,
-        /// so for example if <typeparamref name="TStateHandler"/> is a <see cref="DfaStateHandler"/>, it expects the <paramref name="state"/>'s
-        /// <see cref="CurrentState.DfaStateId"/> to be non-negative and its <see cref="CurrentState.NfaState"/> to be null; vice versa for
+        /// The <typeparamref name="TStateHandler"/> supplies the actual transitioning logic, controlling
+        // whether processing is
+        /// performed in DFA mode or in NFA mode.  However, it expects <paramref name="state"/> to be
+        // configured to match,
+        /// so for example if <typeparamref name="TStateHandler"/> is a <see cref="DfaStateHandler"/>, it
+        // expects the <paramref name="state"/>'s
+        /// <see cref="CurrentState.DfaStateId"/> to be non-negative and its <see
+        // cref="CurrentState.NfaState"/> to be null; vice versa for
         /// <see cref="NfaStateHandler"/>.
         /// </remarks>
         /// <returns>
-        /// A positive value if iteration completed because it reached a deadend state or nullable state and the call is an isMatch.
+        /// A positive value if iteration completed because it reached a deadend state or nullable state and
+        // the call is an isMatch.
         /// 0 if iteration completed because we reached an initial state.
         /// A negative value if iteration completed because we ran out of input or we failed to transition.
         /// </returns>
@@ -759,7 +825,8 @@ namespace System.Text.RegularExpressions.Symbolic
             where TFindOptimizationsHandler : struct, IInitialStateHandler
             where TNullabilityHandler : struct, INullabilityHandler
         {
-            // To avoid frequent reads/writes to ref and out values, make and operate on local copies, which we then copy back once before returning.
+            // To avoid frequent reads/writes to ref and out values, make and operate on local copies, which we
+            // then copy back once before returning.
             int pos = posRef;
             int endPos = endPosRef;
             int endStateId = endStateIdRef;
@@ -772,7 +839,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 {
                     StateFlags flags = TStateHandler.GetStateFlags(this, in state);
 
-                    // Check if currentState represents an initial state. If it does, call into any possible find optimizations
+                    // Check if currentState represents an initial state. If it does, call into any possible find
+                    // optimizations
                     // to hopefully more quickly find the next possible starting location.
                     if (flags.IsInitial())
                     {
@@ -851,16 +919,20 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Phase 2 of matching. From a found ending position, walk in reverse through the input using the reverse pattern to find the
+        /// Phase 2 of matching. From a found ending position, walk in reverse through the input using the
+        // reverse pattern to find the
         /// start position of match.
         /// </summary>
         /// <remarks>
         /// The start position is known to exist; this function just needs to determine exactly what it is.
-        /// We need to find the earliest (lowest index) starting position that's not earlier than <paramref name="matchStartBoundary"/>.
+        /// We need to find the earliest (lowest index) starting position that's not earlier than <paramref
+        // name="matchStartBoundary"/>.
         /// </remarks>
         /// <param name="input">The input text.</param>
-        /// <param name="i">The ending position to walk backwards from. <paramref name="i"/> points one past the last character of the match.</param>
-        /// <param name="matchStartBoundary">The initial starting location discovered in phase 1, a point we must not walk earlier than.</param>
+        /// <param name="i">The ending position to walk backwards from. <paramref name="i"/> points one past
+        // the last character of the match.</param>
+        /// <param name="matchStartBoundary">The initial starting location discovered in phase 1, a point we
+        // must not walk earlier than.</param>
         /// <param name="perThreadData">Per thread data reused between calls.</param>
         /// <returns>The found starting position for the match.</returns>
         private int FindStartPosition<TInputReader, TNullabilityHandler>(
@@ -879,7 +951,8 @@ namespace System.Text.RegularExpressions.Symbolic
             );
             Debug.Assert(i >= matchStartBoundary, $"Expected {i} >= {matchStartBoundary}.");
 
-            // Get the starting state for the reverse pattern. This depends on previous character (which, because we're
+            // Get the starting state for the reverse pattern. This depends on previous character (which,
+            // because we're
             // going backwards, is character number i).
             var currentState = new CurrentState(
                 _reverseInitialStates[GetCharKind<TInputReader>(input, i)]
@@ -887,7 +960,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
             int lastStart = -1; // invalid sentinel value
 
-            // Walk backwards to the furthest accepting state of the reverse pattern but no earlier than matchStartBoundary.
+            // Walk backwards to the furthest accepting state of the reverse pattern but no earlier than
+            // matchStartBoundary.
             while (true)
             {
                 // Run the DFA or NFA traversal backwards from the current point using the current state.
@@ -913,8 +987,10 @@ namespace System.Text.RegularExpressions.Symbolic
                     break;
                 }
 
-                // We didn't find the starting position but we did exit out of the backwards traversal.  That should only happen
-                // if we were unable to transition, which should only happen if we were in DFA mode and exceeded our graph size.
+                // We didn't find the starting position but we did exit out of the backwards traversal.  That should
+                // only happen
+                // if we were unable to transition, which should only happen if we were in DFA mode and exceeded our
+                // graph size.
                 // Upgrade to NFA mode and continue.
                 Debug.Assert(i >= matchStartBoundary);
                 NfaMatchingState nfaState = perThreadData.NfaState;
@@ -927,8 +1003,10 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Workhorse inner loop for <see cref="FindStartPosition"/>.  Consumes the <paramref name="input"/> character by character in reverse,
-        /// starting at <paramref name="i"/>, for each character transitioning from one state in the DFA or NFA graph to the next state,
+        /// Workhorse inner loop for <see cref="FindStartPosition"/>.  Consumes the <paramref name="input"/>
+        // character by character in reverse,
+        /// starting at <paramref name="i"/>, for each character transitioning from one state in the DFA or
+        // NFA graph to the next state,
         /// lazily building out the graph as needed.
         /// </summary>
         private bool FindStartPositionDeltas<TStateHandler, TInputReader, TNullabilityHandler>(
@@ -942,7 +1020,8 @@ namespace System.Text.RegularExpressions.Symbolic
             where TInputReader : struct, IInputReader
             where TNullabilityHandler : struct, INullabilityHandler
         {
-            // To avoid frequent reads/writes to ref values, make and operate on local copies, which we then copy back once before returning.
+            // To avoid frequent reads/writes to ref values, make and operate on local copies, which we then
+            // copy back once before returning.
             int pos = i;
             try
             {
@@ -953,7 +1032,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                     int positionId = TInputReader.GetPositionId(this, input, pos - 1);
 
-                    // If the state accepts the empty string, we found a valid starting position.  Record it and keep going,
+                    // If the state accepts the empty string, we found a valid starting position.  Record it and keep
+                    // going,
                     // since we're looking for the earliest one to occur within bounds.
                     if (
                         TNullabilityHandler.IsNullableAt<TStateHandler>(
@@ -982,7 +1062,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         return false;
                     }
 
-                    // Since we successfully transitioned, update our current index to match the fact that we consumed the previous character in the input.
+                    // Since we successfully transitioned, update our current index to match the fact that we consumed
+                    // the previous character in the input.
                     pos--;
                 }
             }
@@ -1019,7 +1100,8 @@ namespace System.Text.RegularExpressions.Symbolic
             Array.Fill(initialRegisters.CaptureEnds, -1);
 
             // Use two maps from state IDs to register values for the current and next set of states.
-            // Note that these maps use insertion order, which is used to maintain priorities between states in a way
+            // Note that these maps use insertion order, which is used to maintain priorities between states in
+            // a way
             // that matches the order the backtracking engines visit paths.
             Debug.Assert(perThreadData.Current is not null && perThreadData.Next is not null);
             SparseIntMap<Registers> current = perThreadData.Current,
@@ -1124,7 +1206,8 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>Stores additional data for tracking capture start and end positions.</summary>
-        /// <remarks>The NFA simulation based third phase has one of these for each current state in the current set of live states.</remarks>
+        /// <remarks>The NFA simulation based third phase has one of these for each current state in the
+        // current set of live states.</remarks>
         internal struct Registers
         {
             public Registers(int[] captureStarts, int[] captureEnds)
@@ -1137,7 +1220,8 @@ namespace System.Text.RegularExpressions.Symbolic
             public int[] CaptureEnds { get; set; }
 
             /// <summary>
-            /// Applies a list of effects in order to these registers at the provided input position. The order of effects
+            /// Applies a list of effects in order to these registers at the provided input position. The order
+            // of effects
             /// should not matter though, as multiple effects to the same capture start or end do not arise.
             /// </summary>
             /// <param name="effects">list of effects to be applied</param>
@@ -1176,7 +1260,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 new Registers((int[])CaptureStarts.Clone(), (int[])CaptureEnds.Clone());
 
             /// <summary>
-            /// Copy register values from another set of registers, possibly allocating new arrays if they were not yet allocated.
+            /// Copy register values from another set of registers, possibly allocating new arrays if they were
+            // not yet allocated.
             /// </summary>
             /// <param name="other">the registers to copy from</param>
             public void Assign(Registers other)
@@ -1198,7 +1283,8 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Per thread data to be held by the regex runner and passed into every call to FindMatch. This is used to
+        /// Per thread data to be held by the regex runner and passed into every call to FindMatch. This is
+        // used to
         /// avoid repeated memory allocation.
         /// </summary>
         internal sealed class PerThreadData
@@ -1265,8 +1351,10 @@ namespace System.Text.RegularExpressions.Symbolic
             }
         }
 
-        /// <summary>Represents a current state in a DFA or NFA graph walk while processing a regular expression.</summary>
-        /// <remarks>This is a discriminated union between a DFA state and an NFA state. One and only one will be non-null.</remarks>
+        /// <summary>Represents a current state in a DFA or NFA graph walk while processing a regular
+        // expression.</summary>
+        /// <remarks>This is a discriminated union between a DFA state and an NFA state. One and only one
+        // will be non-null.</remarks>
         private struct CurrentState
         {
             /// <summary>Initializes the state as a DFA state.</summary>
@@ -1324,7 +1412,8 @@ namespace System.Text.RegularExpressions.Symbolic
             );
         }
 
-        /// <summary>An <see cref="IStateHandler"/> for operating over <see cref="CurrentState"/> instances configured as DFA states.</summary>
+        /// <summary>An <see cref="IStateHandler"/> for operating over <see cref="CurrentState"/> instances
+        // configured as DFA states.</summary>
         private readonly struct DfaStateHandler : IStateHandler
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1340,7 +1429,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 uint nextCharKind
             ) => matcher.GetState(state.DfaStateId).IsNullableFor(nextCharKind);
 
-            /// <summary>Gets the preferred DFA state for nullability. In DFA mode this is just the state itself.</summary>
+            /// <summary>Gets the preferred DFA state for nullability. In DFA mode this is just the state
+            // itself.</summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int ExtractNullableCoreStateId(
                 SymbolicRegexMatcher<TSet> matcher,
@@ -1349,7 +1439,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 int pos
             ) => state.DfaStateId;
 
-            /// <summary>Gets the length of any fixed-length marker that exists for this state, or -1 if there is none.</summary>
+            /// <summary>Gets the length of any fixed-length marker that exists for this state, or -1 if there
+            // is none.</summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int FixedLength(
                 SymbolicRegexMatcher<TSet> matcher,
@@ -1417,7 +1508,8 @@ namespace System.Text.RegularExpressions.Symbolic
             ) => matcher._stateFlagsArray[state.DfaStateId];
         }
 
-        /// <summary>An <see cref="IStateHandler"/> for operating over <see cref="CurrentState"/> instances configured as NFA states.</summary>
+        /// <summary>An <see cref="IStateHandler"/> for operating over <see cref="CurrentState"/> instances
+        // configured as NFA states.</summary>
         private readonly struct NfaStateHandler : IStateHandler
         {
             /// <summary>Check if any underlying core state starts with a line anchor.</summary>
@@ -1441,7 +1533,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 return false;
             }
 
-            /// <summary>Check if any underlying core state is nullable in the context of the next character kind.</summary>
+            /// <summary>Check if any underlying core state is nullable in the context of the next character
+            // kind.</summary>
             public static bool IsNullableFor(
                 SymbolicRegexMatcher<TSet> matcher,
                 in CurrentState state,
@@ -1467,7 +1560,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 return false;
             }
 
-            /// <summary>Gets the preferred DFA state for nullability. In DFA mode this is just the state itself.</summary>
+            /// <summary>Gets the preferred DFA state for nullability. In DFA mode this is just the state
+            // itself.</summary>
             public static int ExtractNullableCoreStateId(
                 SymbolicRegexMatcher<TSet> matcher,
                 in CurrentState state,
@@ -1497,7 +1591,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 return -1;
             }
 
-            /// <summary>Gets the length of any fixed-length marker that exists for this state, or -1 if there is none.</summary>
+            /// <summary>Gets the length of any fixed-length marker that exists for this state, or -1 if there
+            // is none.</summary>
             public static int FixedLength(
                 SymbolicRegexMatcher<TSet> matcher,
                 in CurrentState state,
@@ -1634,8 +1729,10 @@ namespace System.Text.RegularExpressions.Symbolic
             /// <remarks>
             /// In NFA mode:
             /// - an empty set of states means that it is a dead end
-            /// - no set of states qualifies as an initial state. This could be made more accurate, but with that the
-            ///   matching logic would need to be updated to handle the fact that <see cref="InitialStateFindOptimizationsHandler"/>
+            /// - no set of states qualifies as an initial state. This could be made more accurate, but with
+            // that the
+            ///   matching logic would need to be updated to handle the fact that <see
+            // cref="InitialStateFindOptimizationsHandler"/>
             ///   can transition back to a DFA state.
             /// </remarks>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1647,13 +1744,15 @@ namespace System.Text.RegularExpressions.Symbolic
                 SparseIntMap<int> stateSet = state.NfaState!.NfaStateSet;
                 if (stateSet.Count == 0)
                 {
-                    // In NFA state sets dead ends are never included. Instead an empty set of states represents a dead end.
+                    // In NFA state sets dead ends are never included. Instead an empty set of states represents a dead
+                    // end.
                     return StateFlags.IsDeadendFlag;
                 }
                 else
                 {
                     // Build the flags for the set of states by taking a bitwise Or of all the per-state flags and then
-                    // masking out the irrelevant ones. This works because IsNullable and CanBeNullable should be true if
+                    // masking out the irrelevant ones. This works because IsNullable and CanBeNullable should be true
+                    // if
                     // they are true for any state in the set; SimulatesBacktracking is true for all the states if
                     // it is true for any state (since it is a phase-wide property); and all other flags are masked out.
                     StateFlags flags = 0;
@@ -1702,10 +1801,14 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         /// <summary>
-        /// Interface for mapping positions in the input to position IDs, which capture all the information necessary to
-        /// both take transitions and decide nullability. For positions of valid characters that are handled normally,
-        /// these IDs coincide with minterm IDs (i.e. indices to <see cref="_minterms"/>). Positions outside the bounds
-        /// of the input are mapped to -1. Optionally, an end-of-line as the very last character in the input may be
+        /// Interface for mapping positions in the input to position IDs, which capture all the information
+        // necessary to
+        /// both take transitions and decide nullability. For positions of valid characters that are handled
+        // normally,
+        /// these IDs coincide with minterm IDs (i.e. indices to <see cref="_minterms"/>). Positions outside
+        // the bounds
+        /// of the input are mapped to -1. Optionally, an end-of-line as the very last character in the
+        // input may be
         /// mapped to _minterms.Length for supporting the \Z anchor.
         /// </summary>
         private interface IInputReader
@@ -1730,7 +1833,8 @@ namespace System.Text.RegularExpressions.Symbolic
                     : matcher._mintermClassifier.GetMintermID(input[pos]);
         }
 
-        /// <summary>This reader includes full handling of an \n as the last character of input for the \Z anchor.</summary>
+        /// <summary>This reader includes full handling of an \n as the last character of input for the \Z
+        // anchor.</summary>
         private readonly struct FullInputReader : IInputReader
         {
             public static int GetPositionId(
@@ -1744,7 +1848,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 int c = input[pos];
 
-                // Find the minterm, handling the special case for the last \n for states that start with a relevant anchor
+                // Find the minterm, handling the special case for the last \n for states that start with a relevant
+                // anchor
                 return c == '\n' && pos == input.Length - 1
                     ? matcher._minterms.Length
                     : // mintermId = minterms.Length represents an \n at the very end of input

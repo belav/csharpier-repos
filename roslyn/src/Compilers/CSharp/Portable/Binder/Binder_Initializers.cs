@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // decimals. Other constants do not need field initializers.
                     if (!fieldSymbol.IsMetadataConstant)
                     {
-                        //Can't assert that this is a regular C# compilation, because we could be in a nested type of a script class.
+                        //Can't assert that this is a regular C# compilation, because we could be in a nested type of a
+                        // script class.
                         SyntaxReference syntaxRef = initializer.Syntax;
 
                         switch (syntaxRef.GetSyntax())
@@ -351,7 +352,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                // don't allow trailing expressions after labels (as in regular C#, labels must be followed by a statement):
+                // don't allow trailing expressions after labels (as in regular C#, labels must be followed by a
+                // statement):
                 if (statement.Kind == BoundKind.LabeledStatement)
                 {
                     var labeledStatementBody = ((BoundLabeledStatement)statement).Body;
@@ -392,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isImplicitlyTypedField =
                 (object?)sourceField != null && sourceField.FieldTypeInferred(fieldsBeingBound);
 
-            // If the type is implicitly typed, the initializer diagnostics have already been reported, so ignore them here:
+            // If the type is implicitly typed, the initializer diagnostics have already been reported, so
+            // ignore them here:
             // CONSIDER (tomat): reusing the bound field initializers for implicitly typed fields.
             BindingDiagnosticBag initializerDiagnostics;
             if (isImplicitlyTypedField)

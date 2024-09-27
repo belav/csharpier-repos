@@ -34,8 +34,10 @@ namespace System.Reflection.Runtime.General
         public T[] ToArray()
         {
 #if DEBUG
-            // ListBuilder does not always allocate a new array, though the ToArray() name connotates that it does (and in fact, we do pass the results
-            // of this method across api boundaries.) The minimizing of allocations is desirable, however, so instead, we restrict you to one call per ListBuilder.
+            // ListBuilder does not always allocate a new array, though the ToArray() name connotates that it
+            // does (and in fact, we do pass the results
+            // of this method across api boundaries.) The minimizing of allocations is desirable, however, so
+            // instead, we restrict you to one call per ListBuilder.
             Debug.Assert(
                 !_toArrayAlreadyCalled,
                 "Cannot call ListBuilder.ToArray() a second time. Copy the one you already got."

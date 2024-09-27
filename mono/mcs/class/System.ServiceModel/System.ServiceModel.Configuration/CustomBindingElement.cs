@@ -196,7 +196,8 @@ namespace System.ServiceModel.Configuration
             XmlReader reader
         )
         {
-            //ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).BindingElementExtensions;
+            //ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection
+            // ("system.serviceModel/extensions")).BindingElementExtensions;
             ExtensionElementCollection extensions = ConfigUtil
                 .ExtensionsSection
                 .BindingElementExtensions;

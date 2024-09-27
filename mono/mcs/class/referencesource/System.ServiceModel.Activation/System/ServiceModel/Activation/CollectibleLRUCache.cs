@@ -14,37 +14,49 @@ namespace System.ServiceModel.Activation
 
     // This class implements an LRU cache that support recycling of oldest items.
     //
-    // The read path is very light-weighted. It takes the reader lock, do a cache lookup, and increment the counter to
+    // The read path is very light-weighted. It takes the reader lock, do a cache lookup, and increment
+    // the counter to
     // make sure the item is up-to-date.
     //
-    // It exposes the writer lock through an IDisposable object through CreateWriterLockScope(). Whenever a modification
+    // It exposes the writer lock through an IDisposable object through CreateWriterLockScope().
+    // Whenever a modification
     // is required to the cache, we create a scope to perform the work.
     //
-    // It exposes a list of "unsafe" methods for cache modifications. These operations should be invoked only inside a
+    // It exposes a list of "unsafe" methods for cache modifications. These operations should be invoked
+    // only inside a
     // WriterLockScope.
     //
-    // Recycling happens in batches. The method UnsafeBeginBatchCollect() finds a batch of items, remove them from the
+    // Recycling happens in batches. The method UnsafeBeginBatchCollect() finds a batch of items, remove
+    // them from the
     // cache, and have them closed. The counter is updated whenever Collect happens.
     //
-    // It supports the recycling for the whole cache. In order to avoid blocking the closing, the asynchronous method
+    // It supports the recycling for the whole cache. In order to avoid blocking the closing, the
+    // asynchronous method
     // UnsafeBeginCollectAll() is used to initiate the close operations for all of the nodes.
     //
-    // Since the cache favors reads than writes, the items in the cache are not sorted until a Collect operation happens.
-    // When the Collect operation happens, items are sorted by the LastCounter field of CollectibleNode. Oldest items which
+    // Since the cache favors reads than writes, the items in the cache are not sorted until a Collect
+    // operation happens.
+    // When the Collect operation happens, items are sorted by the LastCounter field of CollectibleNode.
+    // Oldest items which
     // are collectible (CanClose returns true) are moved into the batch for collection.
     //
     // Here are some fields of the class that control the recycling logic to achieve best results:
-    // - collectPercentageInOneBatch: This defines how many items the batch can have for a single Collect operation.
-    //   We need to best leverage the machine capacity but at the same time have an efficient recycling result. This
-    //   number defines the percentage of items in the cache to be collected. The value is hard-coded to be 25%.
-    // - minSkipCountForWrites: This defines the consecutive writes (service activation, for example) before the next
+    // - collectPercentageInOneBatch: This defines how many items the batch can have for a single
+    // Collect operation.
+    //   We need to best leverage the machine capacity but at the same time have an efficient recycling
+    // result. This
+    //   number defines the percentage of items in the cache to be collected. The value is hard-coded to
+    // be 25%.
+    // - minSkipCountForWrites: This defines the consecutive writes (service activation, for example)
+    // before the next
     // Collect operation.
     class CollectibleLRUCache<TKey, TValue>
     {
         // Collect x% of items when a collection happens
         readonly double collectPercentageInOneBatch = 0.25;
 
-        // After an immediate collection, we skip this number of new writes before performing another collection
+        // After an immediate collection, we skip this number of new writes before performing another
+        // collection
         readonly int minSkipCountForWrites = 4;
 
         // The look up counter that simulates the timestamp
@@ -259,7 +271,8 @@ namespace System.ServiceModel.Activation
         {
             CollectibleNode[] array = directory.Values.ToArray();
 
-            // Reset the counters so that the integer counters are not wrapped (overflow from positive to negative)
+            // Reset the counters so that the integer counters are not wrapped (overflow from positive to
+            // negative)
             for (int i = 0; i < array.Length; i++)
             {
                 array[i].LastCounter -= this.counter;

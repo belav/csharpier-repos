@@ -25,7 +25,8 @@ public class CertificateAuthenticationOptions : AuthenticationSchemeOptions
         new X509Certificate2Collection();
 
     /// <summary>
-    /// Collection of X509 certificates which are added to the X509Chain.ChainPolicy.ExtraStore of the certificate chain.
+    /// Collection of X509 certificates which are added to the X509Chain.ChainPolicy.ExtraStore of the
+    // certificate chain.
     /// </summary>
     public X509Certificate2Collection AdditionalChainCertificates { get; set; } =
         new X509Certificate2Collection();
@@ -36,7 +37,8 @@ public class CertificateAuthenticationOptions : AuthenticationSchemeOptions
     /// <value>
     /// Defaults to <see cref="X509ChainTrustMode.System"/>.
     /// </value>
-    /// <remarks>This property must be set to <see cref="X509ChainTrustMode.CustomRootTrust"/> to enable <see cref="CustomTrustStore"/> to be used in certificate chain validation.</remarks>
+    /// <remarks>This property must be set to <see cref="X509ChainTrustMode.CustomRootTrust"/> to enable
+    // <see cref="CustomTrustStore"/> to be used in certificate chain validation.</remarks>
     public X509ChainTrustMode ChainTrustValidationMode { get; set; } = X509ChainTrustMode.System;
 
     /// <summary>
@@ -67,7 +69,8 @@ public class CertificateAuthenticationOptions : AuthenticationSchemeOptions
     public X509RevocationFlag RevocationFlag { get; set; } = X509RevocationFlag.ExcludeRoot;
 
     /// <summary>
-    /// Specifies conditions under which verification of certificates in the X509 chain should be conducted.
+    /// Specifies conditions under which verification of certificates in the X509 chain should be
+    // conducted.
     /// </summary>
     /// <value>
     /// Defaults to <see cref="X509RevocationMode.Online" />.
@@ -75,8 +78,10 @@ public class CertificateAuthenticationOptions : AuthenticationSchemeOptions
     public X509RevocationMode RevocationMode { get; set; } = X509RevocationMode.Online;
 
     /// <summary>
-    /// The object provided by the application to process events raised by the certificate authentication middleware.
-    /// The application may implement the interface fully, or it may create an instance of CertificateAuthenticationEvents
+    /// The object provided by the application to process events raised by the certificate
+    // authentication middleware.
+    /// The application may implement the interface fully, or it may create an instance of
+    // CertificateAuthenticationEvents
     /// and assign delegates only to the events it wants to process.
     /// </summary>
     public new CertificateAuthenticationEvents? Events

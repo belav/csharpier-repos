@@ -48,7 +48,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2AuthenticationContext"/> used by the authenticating authority up to and including
+        /// Gets or sets the <see cref="Saml2AuthenticationContext"/> used by the authenticating authority
+        // up to and including
         /// the authentication event that yielded this statement. [Saml2Core, 2.7.2]
         /// </summary>
         public Saml2AuthenticationContext AuthenticationContext
@@ -96,7 +97,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2SubjectLocality"/> which contains the DNS domain name and IP address for the system from which
+        /// Gets or sets the <see cref="Saml2SubjectLocality"/> which contains the DNS domain name and IP
+        // address for the system from which
         /// the assertion subject was authenticated. [Saml2Core, 2.7.2]
         /// </summary>
         public Saml2SubjectLocality SubjectLocality

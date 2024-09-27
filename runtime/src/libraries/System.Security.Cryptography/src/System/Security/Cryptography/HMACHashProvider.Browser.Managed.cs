@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Security.Cryptography
 {
-    // ported from https://github.com/microsoft/referencesource/blob/5697c29004a34d80acdaf5742d7e699022c64ecd/mscorlib/system/security/cryptography/hmac.cs
+    // ported from
+    // https://github.com/microsoft/referencesource/blob/5697c29004a34d80acdaf5742d7e699022c64ecd/mscorlib/system/security/cryptography/hmac.cs
     internal sealed class HMACManagedHashProvider : HashProvider
     {
         private bool _hashing;

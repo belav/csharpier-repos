@@ -114,7 +114,8 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
          } // end of class System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute
         """;
 
-    // This IL is equivalent to the following definition, which format holes for the required attribute under test:
+    // This IL is equivalent to the following definition, which format holes for the required attribute
+    // under test:
     // [CompilerFeatureRequired("test")]
     // public class OnType
     // {

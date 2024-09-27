@@ -19,7 +19,8 @@ namespace System.Data.Query.PlanCompiler
     /// This is a halper module for <see cref="JoinElimination"/>
     /// The VarRefManager keeps track of the child-parent relationships in order to be able
     /// to decide whether a given var is referenced by children on right-side relatives of a given node.
-    /// It is used in JoinElimination when deciding whether it is possible to eliminate the child table participating
+    /// It is used in JoinElimination when deciding whether it is possible to eliminate the child table
+    // participating
     /// in a left-outer join when there is a 1 - 0..1 FK relationship.
     /// </summary>
     internal class VarRefManager
@@ -53,21 +54,25 @@ namespace System.Data.Query.PlanCompiler
         {
             for (int i = 0; i < parent.Children.Count; i++)
             {
-                //We do not use add on purpose, we may be updating a child's parent after join elimination in a subtree
+                //We do not use add on purpose, we may be updating a child's parent after join elimination in a
+                // subtree
                 m_nodeToParentMap[parent.Children[i]] = parent;
                 m_nodeToSiblingNumber[parent.Children[i]] = i;
             }
         }
 
         /// <summary>
-        /// Determines whether any var from a given list of keys is referenced by any of defining node's right relatives,
+        /// Determines whether any var from a given list of keys is referenced by any of defining node's
+        // right relatives,
         /// with the exception of the relatives brunching at the given targetJoinNode.
         /// </summary>
         /// <param name="keys">A list of vars to check for</param>
         /// <param name="definingNode">The node considered to be the defining node</param>
         /// <param name="targetJoinNode">The relatives branching at this node are skipped</param>
-        /// <returns>False, only it can determine that not a single var from a given list of keys is referenced by any
-        /// of defining node's right relatives, with the exception of the relatives brunching at the given targetJoinNode. </returns>
+        /// <returns>False, only it can determine that not a single var from a given list of keys is
+        // referenced by any
+        /// of defining node's right relatives, with the exception of the relatives brunching at the given
+        // targetJoinNode. </returns>
         internal bool HasKeyReferences(VarVec keys, Node definingNode, Node targetJoinNode)
         {
             Node currentChild = definingNode;
@@ -127,9 +132,11 @@ namespace System.Data.Query.PlanCompiler
         /// This is used for SetOp-s, to be able to locate the appropriate var map that will give the
         /// vars corresponding to the given once</param>
         /// <param name="continueUp">If the OpType of the node's Op is such that it 'hides' the input, i.e.
-        /// the decision of whether the given vars are referenced can be made on this level, it returns true,
+        /// the decision of whether the given vars are referenced can be made on this level, it returns
+        // true,
         /// false otherwise</param>
-        /// <returns>True if the given node has references to any of the vars in the given VarVec, false otherwise</returns>
+        /// <returns>True if the given node has references to any of the vars in the given VarVec, false
+        // otherwise</returns>
         private static bool HasVarReferencesShallow(
             Node node,
             VarVec vars,

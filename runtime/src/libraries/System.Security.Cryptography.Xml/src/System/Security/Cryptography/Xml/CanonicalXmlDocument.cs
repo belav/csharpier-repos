@@ -7,7 +7,8 @@ using System.Xml;
 namespace System.Security.Cryptography.Xml
 {
     // all input types eventually lead to the creation of an XmlDocument document
-    // of this type. it maintains the node subset state and performs output rendering during canonicalization
+    // of this type. it maintains the node subset state and performs output rendering during
+    // canonicalization
     internal sealed class CanonicalXmlDocument : XmlDocument, ICanonicalizableNode
     {
         private readonly bool _defaultNodeSetInclusionState;

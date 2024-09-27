@@ -110,7 +110,8 @@ namespace System.ServiceModel.Channels
             {
                 context.Endpoint.Address = address;
 
-                // Replace the http BE with https BE only if the uri scheme is https and the transport binding element is a HttpTransportBindingElement but not HttpsTransportBindingElement
+                // Replace the http BE with https BE only if the uri scheme is https and the transport binding
+                // element is a HttpTransportBindingElement but not HttpsTransportBindingElement
                 if (
                     address.Uri.Scheme == Uri.UriSchemeHttps
                     && transportBindingElement is HttpTransportBindingElement

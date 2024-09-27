@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -15,7 +16,8 @@ using System.Web.Http.Properties;
 namespace System.Web.Http.Results
 {
     /// <summary>
-    /// Represents an action result that returns a <see cref="HttpStatusCode.InternalServerError"/> response and
+    /// Represents an action result that returns a <see cref="HttpStatusCode.InternalServerError"/>
+    // response and
     /// performs content negotiation on an <see cref="HttpError"/> based on an <see cref="Exception"/>.
     /// </summary>
     public class ExceptionResult : IHttpActionResult
@@ -26,7 +28,8 @@ namespace System.Web.Http.Results
         /// <summary>Initializes a new instance of the <see cref="ExceptionResult"/> class.</summary>
         /// <param name="exception">The exception to include in the error.</param>
         /// <param name="includeErrorDetail">
-        /// <see langword="true"/> if the error should include exception messages; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if the error should include exception messages; otherwise, <see
+        // langword="false"/>.
         /// </param>
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
@@ -50,7 +53,8 @@ namespace System.Web.Http.Results
 
         /// <summary>Initializes a new instance of the <see cref="ExceptionResult"/> class.</summary>
         /// <param name="exception">The exception to include in the error.</param>
-        /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
+        /// <param name="controller">The controller from which to obtain the dependencies needed for
+        // execution.</param>
         public ExceptionResult(Exception exception, ApiController controller)
             : this(exception, new ApiControllerDependencyProvider(controller)) { }
 
@@ -117,8 +121,10 @@ namespace System.Web.Http.Results
 
         /// <summary>Defines a provider for dependencies that are not always directly available.</summary>
         /// <remarks>
-        /// This abstraction supports the unit testing scenario of creating the result without creating a content
-        /// negotiator, request message, or formatters. (The ApiController provider implementation does lazy evaluation
+        /// This abstraction supports the unit testing scenario of creating the result without creating a
+        // content
+        /// negotiator, request message, or formatters. (The ApiController provider implementation does lazy
+        // evaluation
         /// to make that scenario work.)
         /// </remarks>
         internal interface IDependencyProvider

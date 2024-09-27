@@ -487,31 +487,38 @@ Class2.Method(4, 5, c)",
             );
 
             comp.VerifyDiagnostics(
-                // (11,40): warning CS1066: The default value specified for parameter 'b' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                // (11,40): warning CS1066: The default value specified for parameter 'b' will have no effect
+                // because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a, long b = 3, string c = "", params List<string>[] d)
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "b")
                     .WithArguments("b"),
-                // (11,54): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                // (11,54): warning CS1066: The default value specified for parameter 'c' will have no effect
+                // because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a, long b = 3, string c = "", params List<string>[] d)
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
                     .WithArguments("c"),
-                // (17,50): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                // (17,50): warning CS1066: The default value specified for parameter 'c' will have no effect
+                // because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a, long b, string c = "", params List<string>[] d)
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
                     .WithArguments("c"),
-                // (24,32): warning CS1066: The default value specified for parameter 'a' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                // (24,32): warning CS1066: The default value specified for parameter 'a' will have no effect
+                // because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "a")
                     .WithArguments("a"),
-                // (24,44): warning CS1066: The default value specified for parameter 'b' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                // (24,44): warning CS1066: The default value specified for parameter 'b' will have no effect
+                // because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "b")
                     .WithArguments("b"),
-                // (24,58): warning CS1066: The default value specified for parameter 'c' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                // (24,58): warning CS1066: The default value specified for parameter 'c' will have no effect
+                // because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "c")
                     .WithArguments("c"),
-                // (24,81): warning CS1066: The default value specified for parameter 'd' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                // (24,81): warning CS1066: The default value specified for parameter 'd' will have no effect
+                // because it applies to a member that is used in contexts that do not allow optional arguments
                 //     void I1<string>.Method(int a = 4, long b = 3, string c = "", List<string>[] d = null)
                 Diagnostic(ErrorCode.WRN_DefaultValueForUnconsumedLocation, "d")
                     .WithArguments("d")
@@ -523,7 +530,8 @@ Class2.Method(4, 5, c)",
         public void TestImplementingGenericNestedInterfaces_Explicit()
         {
             // Tests:
-            // Sanity check – use open (T) and closed (C<String>) generic types in the signature of implemented methods
+            // Sanity check – use open (T) and closed (C<String>) generic types in the signature of implemented
+            // methods
             // Implement members of generic interface nested inside other generic classes
 
             var source =
@@ -785,19 +793,24 @@ Derived1.Method`2",
             );
 
             comp.VerifyDiagnostics(
-                // (11,25): warning CS0693: Type parameter 'V' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Interface<V, W>'
+                // (11,25): warning CS0693: Type parameter 'V' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Interface<V, W>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "V")
                     .WithArguments("V", "Outer<T>.Inner<U>.Interface<V, W>"),
-                // (11,28): warning CS0693: Type parameter 'W' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Interface<V, W>'
+                // (11,28): warning CS0693: Type parameter 'W' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Interface<V, W>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "W")
                     .WithArguments("W", "Outer<T>.Inner<U>.Interface<V, W>"),
-                // (15,67): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Derived1<X, Y>'
+                // (15,67): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Derived1<X, Y>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "X")
                     .WithArguments("X", "Outer<T>.Inner<U>.Derived1<X, Y>"),
-                // (19,67): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Derived1<X, Y>'
+                // (19,67): warning CS0693: Type parameter 'X' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Derived1<X, Y>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "X")
                     .WithArguments("X", "Outer<T>.Inner<U>.Derived1<X, Y>"),
-                // (19,70): warning CS0693: Type parameter 'Y' has the same name as the type parameter from outer type 'Outer<T>.Inner<U>.Derived1<X, Y>'
+                // (19,70): warning CS0693: Type parameter 'Y' has the same name as the type parameter from outer
+                // type 'Outer<T>.Inner<U>.Derived1<X, Y>'
                 Diagnostic(ErrorCode.WRN_TypeParameterSameAsOuterTypeParameter, "Y")
                     .WithArguments("Y", "Outer<T>.Inner<U>.Derived1<X, Y>")
             );

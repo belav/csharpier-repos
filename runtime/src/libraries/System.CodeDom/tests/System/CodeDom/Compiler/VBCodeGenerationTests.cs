@@ -2156,14 +2156,14 @@ namespace System.CodeDom.Compiler.Tests
             nestedStructMethod.Statements.Add(varStructA);
             nestedStructMethod.Statements.Add(
                 new CodeAssignStatement(
-                    /* Expression1 */new CodeFieldReferenceExpression(
+/* Expression1 */new CodeFieldReferenceExpression(
                         new CodeFieldReferenceExpression(
                             new CodeVariableReferenceExpression("varStructA"),
                             "innerStruct"
                         ),
                         "int1"
                     ),
-                    /* Expression1 */new CodePrimitiveExpression(3)
+/* Expression1 */new CodePrimitiveExpression(3)
                 )
             );
             nestedStructMethod.Statements.Add(
@@ -2191,11 +2191,11 @@ namespace System.CodeDom.Compiler.Tests
             nonPrimitiveStructMethod.Statements.Add(varStructC);
             nonPrimitiveStructMethod.Statements.Add(
                 new CodeAssignStatement(
-                    /* Expression1 */new CodeFieldReferenceExpression(
+/* Expression1 */new CodeFieldReferenceExpression(
                         new CodeVariableReferenceExpression("varStructC"),
                         "pt1"
                     ),
-                    /* Expression2 */new CodeObjectCreateExpression(
+/* Expression2 */new CodeObjectCreateExpression(
                         "DateTime",
                         new CodeExpression[]
                         {
@@ -4177,14 +4177,14 @@ namespace System.CodeDom.Compiler.Tests
                     nestedStructMethod.Statements.Add(varStructA);
                     nestedStructMethod.Statements.Add(
                         new CodeAssignStatement(
-                            /* Expression1 */new CodeFieldReferenceExpression(
+/* Expression1 */new CodeFieldReferenceExpression(
                                 new CodeFieldReferenceExpression(
                                     new CodeVariableReferenceExpression("varStructA"),
                                     "innerStruct"
                                 ),
                                 "int1"
                             ),
-                            /* Expression1 */new CodePrimitiveExpression(3)
+/* Expression1 */new CodePrimitiveExpression(3)
                         )
                     );
                     nestedStructMethod.Statements.Add(

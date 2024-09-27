@@ -31,7 +31,8 @@ namespace System.Xml.Xsl
         /// Create an XmlQueryType from an XmlTypeCode.
         /// </summary>
         /// <param name="code">the type code of the item</param>
-        /// <param name="isStrict">true if the dynamic type is guaranteed to match the static type exactly</param>
+        /// <param name="isStrict">true if the dynamic type is guaranteed to match the static type
+        // exactly</param>
         /// <returns>the atomic value type</returns>
         public static XmlQueryType Type(XmlTypeCode code, bool isStrict)
         {
@@ -42,7 +43,8 @@ namespace System.Xml.Xsl
         /// Create an XmlQueryType from an Xsd simple type (where variety can be Atomic, List, or Union).
         /// </summary>
         /// <param name="schemaType">the simple Xsd schema type of the atomic value</param>
-        /// <param name="isStrict">true if the dynamic type is guaranteed to match the static type exactly</param>
+        /// <param name="isStrict">true if the dynamic type is guaranteed to match the static type
+        // exactly</param>
         /// <returns>the atomic value type</returns>
         public static XmlQueryType Type(XmlSchemaSimpleType schemaType, bool isStrict)
         {
@@ -56,7 +58,8 @@ namespace System.Xml.Xsl
                 return ItemType.Create(schemaType, isStrict);
             }
 
-            // Skip restrictions. It is safe to do that because this is a list or union, so it's not a build in type
+            // Skip restrictions. It is safe to do that because this is a list or union, so it's not a build in
+            // type
             while (schemaType.DerivedBy == XmlSchemaDerivationMethod.Restriction)
                 schemaType = (XmlSchemaSimpleType)schemaType.BaseXmlSchemaType;
 
@@ -350,7 +353,8 @@ namespace System.Xml.Xsl
         //-----------------------------------------------
 
         /// <summary>
-        /// Construct the union of two lists of prime XmlQueryTypes.  Types are added to "accumulator" as necessary to ensure
+        /// Construct the union of two lists of prime XmlQueryTypes.  Types are added to "accumulator" as
+        // necessary to ensure
         /// it contains a superset of "types".
         /// </summary>
         private static List<XmlQueryType> PrimeChoice(
@@ -366,7 +370,8 @@ namespace System.Xml.Xsl
         }
 
         /// <summary>
-        /// Adds itemType to a union. Returns false if new item is a subtype of one of the types in the list.
+        /// Adds itemType to a union. Returns false if new item is a subtype of one of the types in the
+        // list.
         /// </summary>
         private static void AddItemToChoice(List<XmlQueryType> accumulator, XmlQueryType itemType)
         {
@@ -409,16 +414,16 @@ namespace System.Xml.Xsl
         /// </summary>
         private static readonly XmlTypeCode[] NodeKindToTypeCode =
         {
-            /* XPathNodeType.Root */XmlTypeCode.Document,
-            /* XPathNodeType.Element */XmlTypeCode.Element,
-            /* XPathNodeType.Attribute */XmlTypeCode.Attribute,
-            /* XPathNodeType.Namespace */XmlTypeCode.Namespace,
-            /* XPathNodeType.Text */XmlTypeCode.Text,
-            /* XPathNodeType.SignificantWhitespace */XmlTypeCode.Text,
-            /* XPathNodeType.Whitespace */XmlTypeCode.Text,
-            /* XPathNodeType.ProcessingInstruction */XmlTypeCode.ProcessingInstruction,
-            /* XPathNodeType.Comment */XmlTypeCode.Comment,
-            /* XPathNodeType.All */XmlTypeCode.Node,
+/* XPathNodeType.Root */XmlTypeCode.Document,
+/* XPathNodeType.Element */XmlTypeCode.Element,
+/* XPathNodeType.Attribute */XmlTypeCode.Attribute,
+/* XPathNodeType.Namespace */XmlTypeCode.Namespace,
+/* XPathNodeType.Text */XmlTypeCode.Text,
+/* XPathNodeType.SignificantWhitespace */XmlTypeCode.Text,
+/* XPathNodeType.Whitespace */XmlTypeCode.Text,
+/* XPathNodeType.ProcessingInstruction */XmlTypeCode.ProcessingInstruction,
+/* XPathNodeType.Comment */XmlTypeCode.Comment,
+/* XPathNodeType.All */XmlTypeCode.Node,
         };
         #endregion
 
@@ -617,7 +622,8 @@ namespace System.Xml.Xsl
             /// </summary>
             public static XmlQueryType Create(XmlTypeCode code, bool isStrict)
             {
-                // No objects need to be allocated, as corresponding ItemTypes for all type codes have been statically allocated
+                // No objects need to be allocated, as corresponding ItemTypes for all type codes have been
+                // statically allocated
                 if (isStrict)
                     return BuiltInItemTypesStrict[(int)code];
 
@@ -1035,7 +1041,8 @@ namespace System.Xml.Xsl
                         // Node combined with node is node
                         if (this.code == t.TypeCode)
                         {
-                            // Element or attribute combined with element or attribute can be summarized as element(*, XmlSchemaComplexType.AnyType) or attribute(*, DatatypeImplementation.AnySimpleType)
+                            // Element or attribute combined with element or attribute can be summarized as element(*,
+                            // XmlSchemaComplexType.AnyType) or attribute(*, DatatypeImplementation.AnySimpleType)
                             if (this.code == XmlTypeCode.Element)
                                 this.schemaType = XmlSchemaComplexType.AnyType;
                             else if (this.code == XmlTypeCode.Attribute)
@@ -1067,14 +1074,14 @@ namespace System.Xml.Xsl
 
             private static readonly XmlTypeCode[] NodeKindToTypeCode =
             {
-                /* None */XmlTypeCode.None,
-                /* Document */XmlTypeCode.Document,
-                /* Element */XmlTypeCode.Element,
-                /* Attribute */XmlTypeCode.Attribute,
-                /* Text */XmlTypeCode.Text,
-                /* Comment */XmlTypeCode.Comment,
-                /* PI */XmlTypeCode.ProcessingInstruction,
-                /* Namespace */XmlTypeCode.Namespace,
+/* None */XmlTypeCode.None,
+/* Document */XmlTypeCode.Document,
+/* Element */XmlTypeCode.Element,
+/* Attribute */XmlTypeCode.Attribute,
+/* Text */XmlTypeCode.Text,
+/* Comment */XmlTypeCode.Comment,
+/* PI */XmlTypeCode.ProcessingInstruction,
+/* Namespace */XmlTypeCode.Namespace,
             };
 
             //-----------------------------------------------
@@ -1531,7 +1538,8 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Create an XmlQueryType having an XSD name test, content type and nillable.
         /// </summary>
-        /// <param name="code">unless code is Document, Element, or Attribute, "contentType" is ignored</param>
+        /// <param name="code">unless code is Document, Element, or Attribute, "contentType" is
+        // ignored</param>
         /// <param name="nameTest">name test on the node</param>
         /// <param name="contentType">content type of the node</param>
         /// <param name="isNillable">nillable property</param>
@@ -1576,7 +1584,8 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Create an XmlQueryType having an XSD name test, content type, nillable and cardinality.
         /// </summary>
-        /// <param name="code">unless code is Document, Element, or Attribute, "contentType" is ignored</param>
+        /// <param name="code">unless code is Document, Element, or Attribute, "contentType" is
+        // ignored</param>
         /// <param name="nameTest">name test on the node</param>
         /// <param name="contentType">content type of the node</param>
         /// <param name="isNillable">nillable property</param>

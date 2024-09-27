@@ -12,7 +12,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     ///
     /// Nested types enumerate a little differently than other members:
     ///    Base classes are never searched, regardless of BindingFlags.DeclaredOnly value.
-    ///    Public|NonPublic|IgnoreCase are the only relevant BindingFlags. The apis ignore any other bits.
+    ///    Public|NonPublic|IgnoreCase are the only relevant BindingFlags. The apis ignore any other
+    // bits.
     ///    There is no such thing as a "static" or "instanced" nested type. For enumeration purposes,
     ///    we'll arbitrarily denote all nested types as "static."
     /// </summary>
@@ -47,7 +48,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             isVirtual = false;
             isNewSlot = false;
 
-            // Since we never search base types for nested types, we don't need to map every visibility value one to one.
+            // Since we never search base types for nested types, we don't need to map every visibility value
+            // one to one.
             // We just need to distinguish between "public" and "everything else."
             visibility = member.IsNestedPublic ? MethodAttributes.Public : MethodAttributes.Private;
         }

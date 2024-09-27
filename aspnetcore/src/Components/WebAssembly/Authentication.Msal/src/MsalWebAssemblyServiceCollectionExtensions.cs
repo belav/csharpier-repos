@@ -21,7 +21,8 @@ public static class MsalWebAssemblyServiceCollectionExtensions
     /// Adds authentication using msal.js to Blazor applications.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="configure">A callback to configure the <see cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
+    /// <param name="configure">A callback to configure the <see
+    // cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IRemoteAuthenticationBuilder<
         RemoteAuthenticationState,
@@ -37,9 +38,11 @@ public static class MsalWebAssemblyServiceCollectionExtensions
     /// <summary>
     /// Adds authentication using msal.js to Blazor applications.
     /// </summary>
-    /// <typeparam name="TRemoteAuthenticationState">The type of the remote authentication state.</typeparam>
+    /// <typeparam name="TRemoteAuthenticationState">The type of the remote authentication
+    // state.</typeparam>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="configure">A callback to configure the <see cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
+    /// <param name="configure">A callback to configure the <see
+    // cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IRemoteAuthenticationBuilder<
         TRemoteAuthenticationState,
@@ -61,10 +64,12 @@ public static class MsalWebAssemblyServiceCollectionExtensions
     /// <summary>
     /// Adds authentication using msal.js to Blazor applications.
     /// </summary>
-    /// <typeparam name="TRemoteAuthenticationState">The type of the remote authentication state.</typeparam>
+    /// <typeparam name="TRemoteAuthenticationState">The type of the remote authentication
+    // state.</typeparam>
     /// <typeparam name="TAccount">The type of the <see cref="RemoteUserAccount"/>.</typeparam>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-    /// <param name="configure">A callback to configure the <see cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
+    /// <param name="configure">A callback to configure the <see
+    // cref="RemoteAuthenticationOptions{MsalProviderOptions}"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IRemoteAuthenticationBuilder<
         TRemoteAuthenticationState,

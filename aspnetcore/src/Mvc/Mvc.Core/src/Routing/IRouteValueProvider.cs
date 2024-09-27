@@ -9,12 +9,14 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 /// <summary>
 /// <para>
 /// A metadata interface which specifies a route value which is required for the action selector to
-/// choose an action. When applied to an action using attribute routing, the route value will be added
+/// choose an action. When applied to an action using attribute routing, the route value will be
+// added
 /// to the <see cref="RouteData.Values"/> when the action is selected.
 /// </para>
 /// <para>
 /// When an <see cref="IRouteValueProvider"/> is used to provide a new route value to an action, all
-/// actions in the application must also have a value associated with that key, or have an implicit value
+/// actions in the application must also have a value associated with that key, or have an implicit
+// value
 /// of <c>null</c>. See remarks for more details.
 /// </para>
 /// </summary>
@@ -36,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 /// If areas are in use in the application (see <see cref="AreaAttribute"/> which implements
 /// <see cref="IRouteValueProvider"/>) then all actions are consider either in an area by having a
 /// non-<c>null</c> area value (specified by <see cref="AreaAttribute"/> or another
-/// <see cref="IRouteValueProvider"/>) or are considered 'outside' of areas by having the value <c>null</c>.
+/// <see cref="IRouteValueProvider"/>) or are considered 'outside' of areas by having the value
+// <c>null</c>.
 /// </para>
 /// <example>
 /// Consider an application with two controllers, each with an <c>Index</c> action method:
@@ -63,8 +66,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 /// }
 ///
 /// <c>MyApp.Area.Blog.Controllers.HomeController.Index()</c> will be selected.
-/// <c>MyApp.Controllers.HomeController.Index()</c> is not considered eligible because the route values
-/// contain a value for 'area'. <c>MyApp.Controllers.HomeController.Index()</c> cannot match any value
+/// <c>MyApp.Controllers.HomeController.Index()</c> is not considered eligible because the route
+// values
+/// contain a value for 'area'. <c>MyApp.Controllers.HomeController.Index()</c> cannot match any
+// value
 /// for 'area' other than <c>null</c>.
 /// </example>
 /// </remarks>
@@ -76,7 +81,8 @@ public interface IRouteValueProvider
     string RouteKey { get; }
 
     /// <summary>
-    /// The route value. If <c>null</c> or empty, requires the route value associated with <see cref="RouteKey"/>
+    /// The route value. If <c>null</c> or empty, requires the route value associated with <see
+    // cref="RouteKey"/>
     /// to be missing or <c>null</c>.
     /// </summary>
     string? RouteValue { get; }

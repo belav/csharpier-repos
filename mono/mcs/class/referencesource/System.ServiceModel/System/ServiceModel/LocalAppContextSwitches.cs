@@ -9,7 +9,8 @@ namespace System.ServiceModel
     // When adding a quirk, name it such that false is new behavior and true is old behavior.
     // You are opting IN to old behavior. The new behavior is default.
     // For example, we want to enable the functionality to explicitly add a connection close header
-    // in 4.6 and above. So we set DisableExplicitConnectionCloseHeader to true if running 4.5.2 or less.
+    // in 4.6 and above. So we set DisableExplicitConnectionCloseHeader to true if running 4.5.2 or
+    // less.
     internal static class LocalAppContextSwitches
     {
         internal const string DisableExplicitConnectionCloseHeaderString =

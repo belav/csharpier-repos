@@ -6,7 +6,8 @@ using System;
 namespace Microsoft.CSharp.RuntimeBinder
 {
     /// <summary>
-    /// Represents information about a <see cref="CSharpInvokeBinder" /> or <see cref="CSharpInvokeMemberBinder" /> that
+    /// Represents information about a <see cref="CSharpInvokeBinder" /> or <see
+    // cref="CSharpInvokeMemberBinder" /> that
     /// is not specific to any particular argument given to those operations.
     /// </summary>
     [Flags]

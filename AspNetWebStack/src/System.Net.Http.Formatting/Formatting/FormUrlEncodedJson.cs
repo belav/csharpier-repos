@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -13,9 +14,11 @@ using Newtonsoft.Json.Linq;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// This class provides a low-level API for parsing HTML form URL-encoded data, also known as <c>application/x-www-form-urlencoded</c>
+    /// This class provides a low-level API for parsing HTML form URL-encoded data, also known as
+    // <c>application/x-www-form-urlencoded</c>
     /// data. The output of the parser is a <see cref="JObject"/> instance.
-    /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
+    /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for
+    // performance and
     /// is not intended to be called directly from user code.</remarks>
     /// </summary>
     internal static class FormUrlEncodedJson
@@ -28,9 +31,11 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for
+        // performance and
         /// is not intended to be called directly from user code.</remarks>
-        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
+        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical
+        // order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
         /// <returns>The <see cref="JObject"/> corresponding to the given query string values.</returns>
         public static JObject Parse(IEnumerable<KeyValuePair<string, string>> nameValuePairs)
@@ -41,11 +46,14 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for
+        // performance and
         /// is not intended to be called directly from user code.</remarks>
-        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
+        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical
+        // order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
-        /// <param name="maxDepth">The maximum depth of object graph encoded as <c>x-www-form-urlencoded</c>.</param>
+        /// <param name="maxDepth">The maximum depth of object graph encoded as
+        // <c>x-www-form-urlencoded</c>.</param>
         /// <returns>The <see cref="JObject"/> corresponding to the given query string values.</returns>
         public static JObject Parse(
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
@@ -58,12 +66,15 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for
+        // performance and
         /// is not intended to be called directly from user code.</remarks>
-        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
+        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical
+        // order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
         /// <param name="value">The parsed result or null if parsing failed.</param>
-        /// <returns><c>true</c> if <paramref name="nameValuePairs"/> was parsed successfully; otherwise false.</returns>
+        /// <returns><c>true</c> if <paramref name="nameValuePairs"/> was parsed successfully; otherwise
+        // false.</returns>
         public static bool TryParse(
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
             out JObject value
@@ -75,13 +86,17 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for
+        // performance and
         /// is not intended to be called directly from user code.</remarks>
-        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
+        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical
+        // order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
-        /// <param name="maxDepth">The maximum depth of object graph encoded as <c>x-www-form-urlencoded</c>.</param>
+        /// <param name="maxDepth">The maximum depth of object graph encoded as
+        // <c>x-www-form-urlencoded</c>.</param>
         /// <param name="value">The parsed result or null if parsing failed.</param>
-        /// <returns><c>true</c> if <paramref name="nameValuePairs"/> was parsed successfully; otherwise false.</returns>
+        /// <returns><c>true</c> if <paramref name="nameValuePairs"/> was parsed successfully; otherwise
+        // false.</returns>
         public static bool TryParse(
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
             int maxDepth,
@@ -94,12 +109,16 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Parses a collection of query string values as a <see cref="JObject"/>.
         /// </summary>
-        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for performance and
+        /// <remarks>This is a low-level API intended for use by other APIs. It has been optimized for
+        // performance and
         /// is not intended to be called directly from user code.</remarks>
-        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical order. Both names
+        /// <param name="nameValuePairs">The collection of query string name-value pairs parsed in lexical
+        // order. Both names
         /// and values must be un-escaped so that they don't contain any <see cref="Uri"/> encoding.</param>
-        /// <param name="maxDepth">The maximum depth of object graph encoded as <c>x-www-form-urlencoded</c>.</param>
-        /// <param name="throwOnError">Indicates whether to throw an exception on error or return false</param>
+        /// <param name="maxDepth">The maximum depth of object graph encoded as
+        // <c>x-www-form-urlencoded</c>.</param>
+        /// <param name="throwOnError">Indicates whether to throw an exception on error or return
+        // false</param>
         /// <returns>The <see cref="JObject"/> corresponding to the given query string values.</returns>
         private static JObject ParseInternal(
             IEnumerable<KeyValuePair<string, string>> nameValuePairs,
@@ -123,7 +142,8 @@ namespace System.Net.Http.Formatting
                 string key = nameValuePair.Key;
                 string value = nameValuePair.Value;
 
-                // value is preserved, even if it's null, "undefined", "null", String.Empty, etc when converting to JToken.
+                // value is preserved, even if it's null, "undefined", "null", String.Empty, etc when converting to
+                // JToken.
 
                 if (key == null)
                 {
@@ -414,7 +434,8 @@ namespace System.Net.Http.Formatting
             else
             {
                 // if the object didn't contain the key, simply add it now
-                // the null check here is necessary because otherwise the created JValue type will be implictly cast as a string JValue
+                // the null check here is necessary because otherwise the created JValue type will be implictly cast
+                // as a string JValue
                 if (value == null)
                 {
                     obj[key] = null;
@@ -647,7 +668,8 @@ namespace System.Net.Http.Formatting
         /// Class that wraps key-value pairs.
         /// </summary>
         /// <remarks>
-        /// This use of this class avoids a FxCop warning CA908 which happens if using various generic types.
+        /// This use of this class avoids a FxCop warning CA908 which happens if using various generic
+        // types.
         /// </remarks>
         private class ArrayCandidate
         {

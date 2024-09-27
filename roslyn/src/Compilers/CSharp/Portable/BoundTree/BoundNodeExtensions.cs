@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && ((BoundSequence)expression).SideEffects.IsDefaultOrEmpty
                 )
                 {
-                    // in case there is a pattern variable declared in a ctor-initializer, it gets wrapped in a bound sequence.
+                    // in case there is a pattern variable declared in a ctor-initializer, it gets wrapped in a bound
+                    // sequence.
                     expression = ((BoundSequence)expression).Value;
                 }
 
@@ -109,9 +110,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Visits the binary operator tree of interpolated string additions in a depth-first pre-order visit,
+        /// Visits the binary operator tree of interpolated string additions in a depth-first pre-order
+        // visit,
         /// meaning parent, left, then right.
-        /// <paramref name="stringCallback"/> controls whether to continue the visit by returning true or false:
+        /// <paramref name="stringCallback"/> controls whether to continue the visit by returning true or
+        // false:
         /// if true, the visit will continue. If false, the walk will be cut off.
         /// </summary>
         public static bool VisitBinaryOperatorInterpolatedString<TInterpolatedStringType, TArg>(
@@ -184,18 +187,23 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Rewrites a BoundBinaryOperator composed of interpolated strings (either converted or unconverted) iteratively, without
-        /// recursion on the left side of the tree. Nodes of the tree are rewritten in a depth-first post-order fashion, meaning
+        /// Rewrites a BoundBinaryOperator composed of interpolated strings (either converted or
+        // unconverted) iteratively, without
+        /// recursion on the left side of the tree. Nodes of the tree are rewritten in a depth-first
+        // post-order fashion, meaning
         /// left, then right, then parent.
         /// </summary>
         /// <param name="binary">The original top of the binary operations.</param>
         /// <param name="arg">The callback args.</param>
         /// <param name="interpolatedStringFactory">
-        /// Rewriter for the BoundInterpolatedString or BoundUnconvertedInterpolatedString parts of the binary operator. Passed the callback
-        /// parameter, the original interpolated string, and the index of the interpolated string in the tree.
+        /// Rewriter for the BoundInterpolatedString or BoundUnconvertedInterpolatedString parts of the
+        // binary operator. Passed the callback
+        /// parameter, the original interpolated string, and the index of the interpolated string in the
+        // tree.
         /// </param>
         /// <param name="binaryOperatorFactory">
-        /// Rewriter for the BoundBinaryOperator parts fo the binary operator. Passed the callback parameter, the original binary operator, and
+        /// Rewriter for the BoundBinaryOperator parts fo the binary operator. Passed the callback
+        // parameter, the original binary operator, and
         /// the rewritten left and right components.
         /// </param>
         public static TResult RewriteInterpolatedStringAddition<
@@ -249,9 +257,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Left.Kind),
                     };
 
-                    // For simplicity, we use recursion for binary operators on the right side of the tree. We're not traditionally concerned
-                    // with long chains of operators on the right side, as without parentheses we'll naturally make a tree that is deep on the
-                    // left side. If this ever changes, we can make this algorithm a more complex post-order iterative rewrite instead.
+                    // For simplicity, we use recursion for binary operators on the right side of the tree. We're not
+                    // traditionally concerned
+                    // with long chains of operators on the right side, as without parentheses we'll naturally make a
+                    // tree that is deep on the
+                    // left side. If this ever changes, we can make this algorithm a more complex post-order iterative
+                    // rewrite instead.
 
                     var rewrittenRight = currentBinary.Right switch
                     {

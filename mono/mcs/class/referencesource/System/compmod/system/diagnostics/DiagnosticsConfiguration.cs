@@ -224,7 +224,8 @@ namespace System.Diagnostics
             // (such as Trace.WriteLine) could potentially lead to deadlock between 2 threads that are
             // executing these critical sections (and consequently obtaining the 2 locks) in the reverse order.
             // Using the same lock for DiagnosticsConfiguration as well as TraceInternal avoids this issue.
-            // Sequential locks on TraceInternal.critSec by the same thread is a non issue for this critical section.
+            // Sequential locks on TraceInternal.critSec by the same thread is a non issue for this critical
+            // section.
             lock (TraceInternal.critSec)
             {
                 // because some of the code used to load config also uses diagnostics

@@ -22,12 +22,15 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 /// </summary>
 public partial class RedisCache : IDistributedCache, IDisposable
 {
-    // Note that the "force reconnect" pattern as described https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-best-practices-connection#using-forcereconnect-with-stackexchangeredis
-    // can be enabled via the "Microsoft.AspNetCore.Caching.StackExchangeRedis.UseForceReconnect" app-context switch
+    // Note that the "force reconnect" pattern as described
+    // https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-best-practices-connection#using-forcereconnect-with-stackexchangeredis
+    // can be enabled via the "Microsoft.AspNetCore.Caching.StackExchangeRedis.UseForceReconnect"
+    // app-context switch
     //
     // -- Explanation of why two kinds of SetScript are used --
     // * Redis 2.0 had HSET key field value for setting individual hash fields,
-    // and HMSET key field value [field value ...] for setting multiple hash fields (against the same key).
+    // and HMSET key field value [field value ...] for setting multiple hash fields (against the same
+    // key).
     // * Redis 4.0 added HSET key field value [field value ...] and deprecated HMSET.
     //
     // On Redis versions that don't have the newer HSET variant, we use SetScriptPreExtendedSetCommand
@@ -36,7 +39,8 @@ public partial class RedisCache : IDistributedCache, IDisposable
     // KEYS[1] = = key
     // ARGV[1] = absolute-expiration - ticks as long (-1 for none)
     // ARGV[2] = sliding-expiration - ticks as long (-1 for none)
-    // ARGV[3] = relative-expiration (long, in seconds, -1 for none) - Min(absolute-expiration - Now, sliding-expiration)
+    // ARGV[3] = relative-expiration (long, in seconds, -1 for none) - Min(absolute-expiration - Now,
+    // sliding-expiration)
     // ARGV[4] = data - byte[]
     // this order should not change LUA script depends on it
     private const string SetScript = (
@@ -410,7 +414,8 @@ public partial class RedisCache : IDistributedCache, IDisposable
         var cache = Connect();
 
         // This also resets the LRU status as desired.
-        // TODO: Can this be done in one operation on the server side? Probably, the trick would just be the DateTimeOffset math.
+        // TODO: Can this be done in one operation on the server side? Probably, the trick would just be the
+        // DateTimeOffset math.
         RedisValue[] results;
         try
         {
@@ -450,7 +455,8 @@ public partial class RedisCache : IDistributedCache, IDisposable
         Debug.Assert(cache is not null);
 
         // This also resets the LRU status as desired.
-        // TODO: Can this be done in one operation on the server side? Probably, the trick would just be the DateTimeOffset math.
+        // TODO: Can this be done in one operation on the server side? Probably, the trick would just be the
+        // DateTimeOffset math.
         RedisValue[] results;
         try
         {
@@ -676,7 +682,8 @@ public partial class RedisCache : IDistributedCache, IDisposable
             var previousConnectTime = ReadTimeTicks(ref _lastConnectTicks);
             TimeSpan elapsedSinceLastReconnect = utcNow - previousConnectTime;
 
-            // We want to limit how often we perform this top-level reconnect, so we check how long it's been since our last attempt.
+            // We want to limit how often we perform this top-level reconnect, so we check how long it's been
+            // since our last attempt.
             if (elapsedSinceLastReconnect < ReconnectMinInterval)
             {
                 return;

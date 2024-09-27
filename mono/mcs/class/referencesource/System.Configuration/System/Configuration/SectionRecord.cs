@@ -113,7 +113,8 @@ namespace System.Configuration
             get
             {
                 // Start assuming we dont have a file input
-                // When we don't have file input the lock mode for children is the same for LockChildren and LockChildrenWithoutFileInput
+                // When we don't have file input the lock mode for children is the same for LockChildren and
+                // LockChildrenWithoutFileInput
                 bool result = LockChildren;
 
                 if (HasFileInput)
@@ -218,7 +219,8 @@ namespace System.Configuration
                     // Store the current setting before applying the lock from the file input
                     // So that if the user changes the current OverrideMode on this configKey to "Inherit"
                     // we will know what we are going to inherit ( used in SectionInformation.OverrideModeEffective )
-                    // Note that we cannot use BaseConfigurationRecord.ResolveOverrideModeFromParent as it gives us only the lock
+                    // Note that we cannot use BaseConfigurationRecord.ResolveOverrideModeFromParent as it gives us only
+                    // the lock
                     // resolved up to our immediate parent which does not inlcude normal and indirect location imputs
                     _flags[Flag_ChildrenLockWithoutFileInput] = LockChildren;
 
@@ -303,7 +305,8 @@ namespace System.Configuration
             // Only the overrideMode from the parent thats closest to the SectionRecord has effect
             //
             // For location input:
-            // Remember that this method will be called for location inputs comming from the immediate parent first
+            // Remember that this method will be called for location inputs comming from the immediate parent
+            // first
             // and then walking the hierarchy up to the root level
             //
             // For indirect location input:

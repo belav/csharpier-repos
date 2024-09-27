@@ -75,7 +75,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The pre-existing composition is in an unknown state, depending on the errors that occurred.
         /// </exception>
         /// <exception cref="ChangeRejectedException">
-        ///     An error occurred during the previewing and <paramref name="atomicComposition"/> is not null.
+        ///     An error occurred during the previewing and <paramref name="atomicComposition"/> is not
+        // null.
         ///     <see cref="CompositionException.Errors"/> will contain a collection of errors that occurred.
         ///     The pre-existing composition remains in valid state.
         /// </exception>
@@ -94,13 +95,18 @@ namespace System.ComponentModel.Composition.Hosting
                 return;
             }
 
-            // NOTE : this is a very intricate area threading-wise, please use caution when changing, otherwise state corruption or deadlocks will ensue
+            // NOTE : this is a very intricate area threading-wise, please use caution when changing, otherwise
+            // state corruption or deadlocks will ensue
             // The gist of what we are doing is as follows:
-            // We need to lock the composition, as we will proceed modifying our internal state. The tricky part is when we release the lock
-            // Due to the fact that some actions will take place AFTER we leave this method, we need to KEEP THAT LOCK HELD until the transation is commiited or rolled back
+            // We need to lock the composition, as we will proceed modifying our internal state. The tricky part
+            // is when we release the lock
+            // Due to the fact that some actions will take place AFTER we leave this method, we need to KEEP
+            // THAT LOCK HELD until the transation is commiited or rolled back
             // This is the reason we CAN'T use "using here.
-            // Instead, if the transaction is present we will queue up the release of the lock, otherwise we will release it when we exit this method
-            // We add the "release" lock to BOTH Commit and Revert queues, because they are mutually exclusive, and we need to release the lock regardless.
+            // Instead, if the transaction is present we will queue up the release of the lock, otherwise we
+            // will release it when we exit this method
+            // We add the "release" lock to BOTH Commit and Revert queues, because they are mutually exclusive,
+            // and we need to release the lock regardless.
 
             // This will take the lock, if necessary
             IDisposable? compositionLockHolder = _lock.IsThreadSafe
@@ -109,7 +115,8 @@ namespace System.ComponentModel.Composition.Hosting
             bool compositionLockTaken = (compositionLockHolder != null);
             try
             {
-                // revert actions are processed in the reverse order, so we have to add the "release lock" action now
+                // revert actions are processed in the reverse order, so we have to add the "release lock" action
+                // now
                 if (compositionLockTaken && (atomicComposition != null))
                 {
                     atomicComposition.AddRevertAction(() => compositionLockHolder!.Dispose());
@@ -245,7 +252,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -256,7 +264,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

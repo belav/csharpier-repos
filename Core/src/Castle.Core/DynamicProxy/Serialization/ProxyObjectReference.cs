@@ -55,12 +55,15 @@ namespace Castle.DynamicProxy.Serialization
         }
 
         /// <summary>
-        ///   Resets the <see cref="ModuleScope" /> used for deserialization to a given <paramref name="scope" />.
+        ///   Resets the <see cref="ModuleScope" /> used for deserialization to a given <paramref
+        // name="scope" />.
         /// </summary>
         /// <param name="scope"> The scope to be used for deserialization. </param>
         /// <remarks>
-        ///   By default, the deserialization process uses a different scope than the rest of the application, which can lead to multiple proxies
-        ///   being generated for the same type. By explicitly setting the deserialization scope to the application's scope, this can be avoided.
+        ///   By default, the deserialization process uses a different scope than the rest of the
+        // application, which can lead to multiple proxies
+        ///   being generated for the same type. By explicitly setting the deserialization scope to the
+        // application's scope, this can be avoided.
         /// </remarks>
         public static void SetScope(ModuleScope scope)
         {
@@ -74,8 +77,10 @@ namespace Castle.DynamicProxy.Serialization
         /// <summary>
         ///   Gets the <see cref="ModuleScope" /> used for deserialization.
         /// </summary>
-        /// <value> As <see cref="ProxyObjectReference" /> has no way of automatically determining the scope used by the application (and the application might use more than one scope at the same time), <see
-        ///    cref="ProxyObjectReference" /> uses a dedicated scope instance for deserializing proxy types. This instance can be reset and set to a specific value via <see
+        /// <value> As <see cref="ProxyObjectReference" /> has no way of automatically determining the scope
+        // used by the application (and the application might use more than one scope at the same time), <see
+        ///    cref="ProxyObjectReference" /> uses a dedicated scope instance for deserializing proxy types.
+        // This instance can be reset and set to a specific value via <see
         ///    cref="ResetScope" /> and <see cref="SetScope" /> . </value>
         public static ModuleScope ModuleScope
         {
@@ -101,7 +106,8 @@ namespace Castle.DynamicProxy.Serialization
                 info.GetValue("__proxyGenerationOptions", typeof(ProxyGenerationOptions));
             proxy = RecreateProxy();
 
-            // We'll try to deserialize as much of the proxy state as possible here. This is just best effort; due to deserialization dependency reasons,
+            // We'll try to deserialize as much of the proxy state as possible here. This is just best effort;
+            // due to deserialization dependency reasons,
             // we need to repeat this in OnDeserialization to guarantee correct state deserialization.
             DeserializeProxyState();
         }
@@ -241,7 +247,8 @@ namespace Castle.DynamicProxy.Serialization
 
             DeserializeProxyMembers();
 
-            // Get the proxy state again, to get all those members we couldn't get in the constructor due to deserialization ordering.
+            // Get the proxy state again, to get all those members we couldn't get in the constructor due to
+            // deserialization ordering.
             DeserializeProxyState();
             InvokeCallback(proxy);
         }

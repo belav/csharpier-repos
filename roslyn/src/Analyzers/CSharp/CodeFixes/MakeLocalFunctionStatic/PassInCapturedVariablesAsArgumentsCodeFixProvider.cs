@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                 cancellationToken
             );
 
-        // The purpose of this wrapper is to share some common logic between FixOne and FixAll. The main reason we chose
+        // The purpose of this wrapper is to share some common logic between FixOne and FixAll. The main
+        // reason we chose
         // this approach over the typical "FixOne calls FixAll" approach is to avoid duplicate code.
         private static async Task WrapFixAsync(
             Document document,
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                 .GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            // Even when the language version doesn't support static local function, the compiler will still generate
+            // Even when the language version doesn't support static local function, the compiler will still
+            // generate
             // this error. So we need to check to make sure we don't provide incorrect fix.
             if (
                 !MakeLocalFunctionStaticHelper.IsStaticLocalFunctionSupported(

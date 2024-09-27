@@ -39,7 +39,8 @@ public static class QueryHelpers
     /// <param name="queryString">A dictionary of query keys and values to append.</param>
     /// <returns>The combined result.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="uri"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is
+    // <c>null</c>.</exception>
     public static string AddQueryString(string uri, IDictionary<string, string?> queryString)
     {
         ArgumentNullException.ThrowIfNull(uri);
@@ -55,7 +56,8 @@ public static class QueryHelpers
     /// <param name="queryString">A collection of query names and values to append.</param>
     /// <returns>The combined result.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="uri"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is
+    // <c>null</c>.</exception>
     public static string AddQueryString(
         string uri,
         IEnumerable<KeyValuePair<string, StringValues>> queryString
@@ -80,7 +82,8 @@ public static class QueryHelpers
     /// <param name="queryString">A collection of name value query pairs to append.</param>
     /// <returns>The combined result.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="uri"/> is <c>null</c>.</exception>
-    /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is <c>null</c>.</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is
+    // <c>null</c>.</exception>
     public static string AddQueryString(
         string uri,
         IEnumerable<KeyValuePair<string, string?>> queryString

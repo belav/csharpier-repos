@@ -23,7 +23,8 @@ public class ControllerActivatorProvider : IControllerActivatorProvider
     /// <summary>
     /// Initializes a new instance of <see cref="ControllerActivatorProvider"/>.
     /// </summary>
-    /// <param name="controllerActivator">A <see cref="IControllerActivator"/> which is delegated to when not the default implementation.</param>
+    /// <param name="controllerActivator">A <see cref="IControllerActivator"/> which is delegated to
+    // when not the default implementation.</param>
     public ControllerActivatorProvider(IControllerActivator controllerActivator)
     {
         ArgumentNullException.ThrowIfNull(controllerActivator);

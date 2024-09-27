@@ -487,7 +487,8 @@ public class LinkTagHelperTest
                     {
                         new TagHelperAttribute("asp-fallback-href", "test.css"),
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
-                        // This is commented out on purpose: new TagHelperAttribute("asp-fallback-test-property", "visibility"),
+                        // This is commented out on purpose: new TagHelperAttribute("asp-fallback-test-property",
+                        // "visibility"),
                         // Note asp-href-include attribute isn't included.
                         new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                     },
@@ -502,7 +503,8 @@ public class LinkTagHelperTest
                 {
                     new TagHelperAttributeList
                     {
-                        // This is commented out on purpose: new TagHelperAttribute("asp-fallback-href-include", "test.css"),
+                        // This is commented out on purpose: new TagHelperAttribute("asp-fallback-href-include",
+                        // "test.css"),
                         new TagHelperAttribute("asp-fallback-href-exclude", "**/*.min.css"),
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),

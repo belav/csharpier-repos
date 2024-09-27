@@ -81,7 +81,8 @@ public class AutoReleaseTest
                 evt.Set();
             });
             evt.WaitOne();
-            // Wait 60 ms after the signal to ensure that the thread has finished the work item and has drained the thread's autorelease pool.
+            // Wait 60 ms after the signal to ensure that the thread has finished the work item and has drained
+            // the thread's autorelease pool.
             Thread.Sleep(60);
             Assert.Equal(numReleaseCalls + 1, ObjectiveC.getNumReleaseCalls());
         }

@@ -81,7 +81,7 @@ namespace System.ServiceModel.Description
                     String.Format("Unexpected : <{0} ..", reader.LocalName)
                 );
 
-            /* Move to MetadataSections */
+/* Move to MetadataSections */
             reader.Read();
 
             MetadataSectionSerializer xs = new MetadataSectionSerializer();

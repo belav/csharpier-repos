@@ -67,10 +67,12 @@ namespace System.Collections.Immutable.Tests
         }
 
         /// <summary>
-        /// Verifies that a binary tree is no taller than necessary to store the data if it were optimally balanced.
+        /// Verifies that a binary tree is no taller than necessary to store the data if it were optimally
+        // balanced.
         /// </summary>
         /// <param name="node">The root node.</param>
-        /// <param name="count">The number of nodes in the tree. May be <c>null</c> if <see cref="IBinaryTree.Count"/> is functional.</param>
+        /// <param name="count">The number of nodes in the tree. May be <c>null</c> if <see
+        // cref="IBinaryTree.Count"/> is functional.</param>
         internal static void VerifyHeightIsWithinTolerance(this IBinaryTree node, int? count = null)
         {
             // http://en.wikipedia.org/wiki/AVL_tree

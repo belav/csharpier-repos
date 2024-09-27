@@ -1144,7 +1144,8 @@ Block[B2] - Exit
         [Fact]
         public void AnonymousObjectCreation_NoControlFlow_Error03()
         {
-            // Invalid expression as initializer target, ensure we don't drop this expression from the flow graph.
+            // Invalid expression as initializer target, ensure we don't drop this expression from the flow
+            // graph.
             string source =
                 @"
 using System;
@@ -1219,11 +1220,13 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,19): error CS0746: Invalid anonymous type member declarator. Anonymous type members must be declared with a member assignment, simple name or member access.
+                // file.cs(8,19): error CS0746: Invalid anonymous type member declarator. Anonymous type members
+                // must be declared with a member assignment, simple name or member access.
                 //         p = new { M2() = i };
                 Diagnostic(ErrorCode.ERR_InvalidAnonymousTypeMemberDeclarator, "M2() = i")
                     .WithLocation(8, 19),
-                // file.cs(8,19): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                // file.cs(8,19): error CS0131: The left-hand side of an assignment must be a variable, property or
+                // indexer
                 //         p = new { M2() = i };
                 Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "M2()").WithLocation(8, 19),
             };
@@ -1311,7 +1314,8 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,19): error CS0746: Invalid anonymous type member declarator. Anonymous type members must be declared with a member assignment, simple name or member access.
+                // file.cs(8,19): error CS0746: Invalid anonymous type member declarator. Anonymous type members
+                // must be declared with a member assignment, simple name or member access.
                 //         p = new { a[i] = j };
                 Diagnostic(ErrorCode.ERR_InvalidAnonymousTypeMemberDeclarator, "a[i] = j")
                     .WithLocation(8, 19),

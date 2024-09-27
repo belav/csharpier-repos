@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 _isInitialized = true;
             }
 
-            // We need to update the theme whenever the Editor Color Scheme setting changes or the VS Theme changes.
+            // We need to update the theme whenever the Editor Color Scheme setting changes or the VS Theme
+            // changes.
             await TaskScheduler.Default;
             var settingsManager = await _asyncServiceProvider
                 .GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>(
@@ -95,9 +96,12 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
             // Try to migrate the `useEnhancedColorsSetting` to the new `ColorSchemeName` setting.
             _settings.MigrateToColorSchemeSetting();
 
-            // Since the Roslyn colors are now defined in the Roslyn repo and no longer applied by the VS pkgdef built from EditorColors.xml,
-            // We attempt to apply a color scheme when the Roslyn package is loaded. This is our chance to update the configuration registry
-            // with the Roslyn colors before they are seen by the user. This is important because the MEF exported Roslyn classification
+            // Since the Roslyn colors are now defined in the Roslyn repo and no longer applied by the VS pkgdef
+            // built from EditorColors.xml,
+            // We attempt to apply a color scheme when the Roslyn package is loaded. This is our chance to
+            // update the configuration registry
+            // with the Roslyn colors before they are seen by the user. This is important because the MEF
+            // exported Roslyn classification
             // colors are only applicable to the Blue and Light VS themes.
 
             // If the color scheme has updated, apply the scheme.
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
         private async Task QueueColorSchemeUpdateAsync()
         {
-            // Wait until things have settled down from the theme change, since we will potentially be changing theme colors.
+            // Wait until things have settled down from the theme change, since we will potentially be changing
+            // theme colors.
             await VsTaskLibraryHelper.StartOnIdle(
                 _threadingContext.JoinableTaskFactory,
                 () => UpdateColorSchemeAsync(_threadingContext.DisposalToken)
@@ -154,8 +159,10 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 .GetAppliedColorSchemeAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            // If this is a supported theme then, use the users configured scheme, otherwise fallback to the VS 2017.
-            // Custom themes would be based on the MEF exported color information for classifications which matches the VS 2017 theme.
+            // If this is a supported theme then, use the users configured scheme, otherwise fallback to the VS
+            // 2017.
+            // Custom themes would be based on the MEF exported color information for classifications which
+            // matches the VS 2017 theme.
             var configuredColorScheme = await IsSupportedThemeAsync(cancellationToken)
                 .ConfigureAwait(false)
                 ? _settings.GetConfiguredColorScheme()
@@ -218,7 +225,8 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
             return Guid.Parse(currentThemeString);
         }
 
-        // NOTE: This service is not public or intended for use by teams/individuals outside of Microsoft. Any data stored is subject to deletion without warning.
+        // NOTE: This service is not public or intended for use by teams/individuals outside of Microsoft.
+        // Any data stored is subject to deletion without warning.
         [Guid("9B164E40-C3A2-4363-9BC5-EB4039DEF653")]
         private class SVsSettingsPersistenceManager { }
     }

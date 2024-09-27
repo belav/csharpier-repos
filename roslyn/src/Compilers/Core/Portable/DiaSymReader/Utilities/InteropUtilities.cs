@@ -54,7 +54,8 @@ namespace Microsoft.DiaSymReader
                 if (qualifiedName != null)
                 {
                     // If the buffer is given return the length of the possibly truncated name not including NUL.
-                    // If we returned length greater than the buffer length the SymWriter would replace the name with CRC32 hash.
+                    // If we returned length greater than the buffer length the SymWriter would replace the name with
+                    // CRC32 hash.
                     *qualifiedNameLength = Math.Min(
                         fullLength,
                         Math.Max(0, qualifiedNameBufferLength - 1)

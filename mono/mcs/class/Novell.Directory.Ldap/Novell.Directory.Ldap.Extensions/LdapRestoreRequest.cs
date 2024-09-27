@@ -73,26 +73,26 @@ namespace Novell.Directory.Ldap.Extensions
 {
     public class LdapRestoreRequest : LdapExtendedOperation
     {
-        /**
-        *
-        * Constructs an extended operations object which contains the ber encoded
-        * restore data.
-        *
-        * @param objectDN The object DN to restore
-        * <br>
-        * @param passwd 		The encrypted password required for the object to
-        * be backed up
-        * <br>
-        * @param bufferLength The length of backed up data
-        * <br>
-        * @param chunkSizesString The String containing number of chunks and
-        * each chunk elements representing chunk sizes
-        * <br>
-        * @param returnedBuffer The actual data in byte[]
-        * <br><br>
-        * @exception LdapException A general exception which includes an error
-        *                          message and an LDAP error code.
-        */
+/**
+*
+* Constructs an extended operations object which contains the ber encoded
+* restore data.
+*
+* @param objectDN The object DN to restore
+* <br>
+* @param passwd 		The encrypted password required for the object to
+* be backed up
+* <br>
+* @param bufferLength The length of backed up data
+* <br>
+* @param chunkSizesString The String containing number of chunks and
+* each chunk elements representing chunk sizes
+* <br>
+* @param returnedBuffer The actual data in byte[]
+* <br><br>
+* @exception LdapException A general exception which includes an error
+*                          message and an LDAP error code.
+*/
 
         public LdapRestoreRequest(
             String objectDN,
@@ -118,11 +118,11 @@ namespace Novell.Directory.Ldap.Extensions
                 if (passwd == null)
                     passwd = System.Text.Encoding.UTF8.GetBytes("");
 
-                /*
-                 * From the input argument chunkSizesString get::
-                 * chunkSize => Represents the number of chunks of data returned from server
-                 * sizeOf each chunk => int represents the size of each chunk
-                */
+/*
+* From the input argument chunkSizesString get::
+* chunkSize => Represents the number of chunks of data returned from server
+* sizeOf each chunk => int represents the size of each chunk
+*/
                 int index;
                 int chunkSize;
                 int[] chunks = null;
@@ -147,10 +147,10 @@ namespace Novell.Directory.Ldap.Extensions
                 int chunkIndex;
                 //Construct chunks array
                 chunks = new int[chunkSize];
-                /*
-                * Iterate through each member in buffer and
-                * assign to chunks array elements
-                */
+/*
+* Iterate through each member in buffer and
+* assign to chunks array elements
+*/
                 for (int i = 0; i < chunkSize; i++)
                 {
                     chunkIndex = chunkSizesString.IndexOf(';');

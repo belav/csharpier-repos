@@ -50,7 +50,8 @@ namespace System
 
         private static string? GetFolderPathCoreWithoutValidation(SpecialFolder folder)
         {
-            // First handle any paths that involve only static paths, avoiding the overheads of getting user-local paths.
+            // First handle any paths that involve only static paths, avoiding the overheads of getting
+            // user-local paths.
             // https://www.freedesktop.org/software/systemd/man/file-hierarchy.html
             switch (folder)
             {
@@ -99,6 +100,8 @@ namespace System
                 case SpecialFolder.Templates:
                     return ReadXdgDirectory(home, "XDG_TEMPLATES_DIR", "Templates");
                 // TODO: Consider merging the OSX path with the rest of the Apple systems here:
+                //
+                //
                 // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Environment.iOS.cs
 #if TARGET_OSX
                 case SpecialFolder.Desktop:
@@ -130,8 +133,10 @@ namespace System
                 case SpecialFolder.ApplicationData:
                     return GetXdgConfig(home);
                 case SpecialFolder.LocalApplicationData:
-                    // "$XDG_DATA_HOME defines the base directory relative to which user specific data files should be stored."
-                    // "If $XDG_DATA_HOME is either not set or empty, a default equal to $HOME/.local/share should be used."
+                    // "$XDG_DATA_HOME defines the base directory relative to which user specific data files should be
+                    // stored."
+                    // "If $XDG_DATA_HOME is either not set or empty, a default equal to $HOME/.local/share should be
+                    // used."
                     string? data = GetEnvironmentVariable("XDG_DATA_HOME");
                     if (data is null || !data.StartsWith('/'))
                     {
@@ -157,8 +162,10 @@ namespace System
 
         private static string GetXdgConfig(string home)
         {
-            // "$XDG_CONFIG_HOME defines the base directory relative to which user specific configuration files should be stored."
-            // "If $XDG_CONFIG_HOME is either not set or empty, a default equal to $HOME/.config should be used."
+            // "$XDG_CONFIG_HOME defines the base directory relative to which user specific configuration files
+            // should be stored."
+            // "If $XDG_CONFIG_HOME is either not set or empty, a default equal to $HOME/.config should be
+            // used."
             string? config = GetEnvironmentVariable("XDG_CONFIG_HOME");
             if (config is null || !config.StartsWith('/'))
             {
@@ -181,8 +188,10 @@ namespace System
 
             // Use the user-dirs.dirs file to look up the right config.
             // Note that the docs also highlight a list of directories in which to look for this file:
-            // "$XDG_CONFIG_DIRS defines the preference-ordered set of base directories to search for configuration files in addition
-            //  to the $XDG_CONFIG_HOME base directory. The directories in $XDG_CONFIG_DIRS should be separated with a colon ':'. If
+            // "$XDG_CONFIG_DIRS defines the preference-ordered set of base directories to search for
+            // configuration files in addition
+            //  to the $XDG_CONFIG_HOME base directory. The directories in $XDG_CONFIG_DIRS should be separated
+            // with a colon ':'. If
             //  $XDG_CONFIG_DIRS is either not set or empty, a value equal to / etc / xdg should be used."
             // For simplicity, we don't currently do that.  We can add it if/when necessary.
 

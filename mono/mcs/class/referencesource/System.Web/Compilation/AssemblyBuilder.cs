@@ -32,16 +32,18 @@ namespace System.Web.Compilation
     using System.Xml;
     using System.Xml.Schema;
 
-    /*
-     * This class is used to handle a single compilation using a CodeDom compiler.
-     * It is instantiated via CompilerType.CreateAssemblyBuilder.
-     */
+/*
+* This class is used to handle a single compilation using a CodeDom compiler.
+* It is instantiated via CompilerType.CreateAssemblyBuilder.
+*/
     public class AssemblyBuilder
     {
         private CompilationSection _compConfig;
 
-        // CodeChecksumPragma.ChecksumAlgorithmId takes this GUID to represent a SHA1 hash of the file contents
-        // See: http://msdn.microsoft.com/en-us/library/system.codedom.codechecksumpragma.checksumalgorithmid.aspx
+        // CodeChecksumPragma.ChecksumAlgorithmId takes this GUID to represent a SHA1 hash of the file
+        // contents
+        // See:
+        // http://msdn.microsoft.com/en-us/library/system.codedom.codechecksumpragma.checksumalgorithmid.aspx
         private static readonly Guid s_codeChecksumSha1Id = new Guid(
             0xff1816ec,
             0xaa5e,
@@ -819,9 +821,12 @@ namespace System.Web.Compilation
 
             // Generate a SHA1 hash from the contents of the file
 
-            // The VS debugger uses a cryptographic hash of the file being debugged so that it doesn't accidentally
-            // display to the user the wrong version of the file. This is merely a convenience feature for debugging
-            // purposes and is not security-related in any way. Since VS only supports MD5 and SHA1 hashes, we just
+            // The VS debugger uses a cryptographic hash of the file being debugged so that it doesn't
+            // accidentally
+            // display to the user the wrong version of the file. This is merely a convenience feature for
+            // debugging
+            // purposes and is not security-related in any way. Since VS only supports MD5 and SHA1 hashes, we
+            // just
             // use SHA1 and suppress the [Obsolete] warning.
 #pragma warning disable 618
             using (
@@ -983,7 +988,8 @@ namespace System.Web.Compilation
             CompilerParameters compilParams
         )
         {
-            // The mscorlib reference is special cased, and needs to be passed via the CoreAssemblyFileName property.
+            // The mscorlib reference is special cased, and needs to be passed via the CoreAssemblyFileName
+            // property.
             if (
                 BuildManagerHost.InClientBuildManager
                 && !MultiTargetingUtil.IsTargetFramework20
@@ -998,9 +1004,12 @@ namespace System.Web.Compilation
                 compilParams.CoreAssemblyFileName = coreAssemblyFile;
             }
 
-            // DevDiv 404267: If the developer enabled 'warnings as errors', we should disable [Obsolete] warnings. This helps
-            // prevent in-place framework updates from breaking runtime compilation of pages. We only respect this attribute
-            // when not in the CBM, as CBM is a design-time feature instead of a runtime feature, and the developer probably
+            // DevDiv 404267: If the developer enabled 'warnings as errors', we should disable [Obsolete]
+            // warnings. This helps
+            // prevent in-place framework updates from breaking runtime compilation of pages. We only respect
+            // this attribute
+            // when not in the CBM, as CBM is a design-time feature instead of a runtime feature, and the
+            // developer probably
             // wants to be notified of all errors at design time.
             bool disableObsoleteWarnings =
                 !BuildManagerHost.InClientBuildManager
@@ -1008,7 +1017,8 @@ namespace System.Web.Compilation
 
             // If C#, remove the warning that complains about variables that start with "__"
             // Also ignore warning that complains about assemblyKeyName and delaysign
-            // Also ignore warning about assuming assembly versions matching (CS1701, DevDiv 137847, warning about System.Web.Extensions v1.0 matching v3.5)
+            // Also ignore warning about assuming assembly versions matching (CS1701, DevDiv 137847, warning
+            // about System.Web.Extensions v1.0 matching v3.5)
             if (codeDomProviderType == typeof(Microsoft.CSharp.CSharpCodeProvider))
             {
                 List<string> noWarnStrings = new List<string>(5);
@@ -1074,7 +1084,8 @@ namespace System.Web.Compilation
         // To get warnings only, the workaround is to use /warnaserror- in CompilerOptions.
         // However this does not work in some cases, as TreatWarningAsErrors set to true still emits
         // /warnaserror+.
-        // So, whenever the user wants /warnaserror[+|-|numberlist], we explicitly set TreatWarningsAsErrors to false,
+        // So, whenever the user wants /warnaserror[+|-|numberlist], we explicitly set TreatWarningsAsErrors
+        // to false,
         // so that the /warnaserror+ is not emitted, and the user can specify exactly what is desired.
         internal static void FixTreatWarningsAsErrors(
             Type codeDomProviderType,
@@ -1098,7 +1109,8 @@ namespace System.Web.Compilation
                 compilParams.TreatWarningsAsErrors = false;
         }
 
-        // Check for OptionInfer and WarnAsError. This is the workaround as use of compilerOptions is not allowed in partial trust.
+        // Check for OptionInfer and WarnAsError. This is the workaround as use of compilerOptions is not
+        // allowed in partial trust.
         // Devdiv 130325
         //
         private static void ProcessProviderOptions(
@@ -1408,10 +1420,10 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Fix up all the source files in the errors in case they are HTTP (VS compiler scenario).
-         * Also, fix the error in case the base class was incorrect in the code beside model
-         */
+/*
+* Fix up all the source files in the errors in case they are HTTP (VS compiler scenario).
+* Also, fix the error in case the base class was incorrect in the code beside model
+*/
         private void FixUpLinePragmas(CompilerResults results)
         {
             CompilerError badBaseClassError = null;
@@ -1501,13 +1513,13 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Attempt to find the generated source file that has the error, and return
-         * its contents as a string (for error reproting purposes).
-         * Note that when debug is false, we set tempFiles.KeepFiles to false, and
-         * all the sources will be gone by the time we get here.  I filed VSWhidbey 103673,
-         * to get a solution to this from BCL.
-         */
+/*
+* Attempt to find the generated source file that has the error, and return
+* its contents as a string (for error reproting purposes).
+* Note that when debug is false, we set tempFiles.KeepFiles to false, and
+* all the sources will be gone by the time we get here.  I filed VSWhidbey 103673,
+* to get a solution to this from BCL.
+*/
         private string GetErrorSourceFileContents(CompilerResults results)
         {
             if (!results.Errors.HasErrors)
@@ -1592,11 +1604,11 @@ namespace System.Web.Compilation
         }
     }
 
-    /*
-     * This class is used intead of AssemblyBuilder when handling
-     * ClientBuildManager.GetCodeDirectoryInformation
-     * It is instantiated via CompilerType.CreateAssemblyBuilder.
-     */
+/*
+* This class is used intead of AssemblyBuilder when handling
+* ClientBuildManager.GetCodeDirectoryInformation
+* It is instantiated via CompilerType.CreateAssemblyBuilder.
+*/
     internal class CbmCodeGeneratorBuildProviderHost : AssemblyBuilder
     {
         private string _generatedFilesDir;

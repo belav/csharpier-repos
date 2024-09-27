@@ -386,7 +386,8 @@ class Test9
     }
 }
 
-// Mutual polymorphic recursion through classes, structs and fields, where structs have one field (these are optimized)
+// Mutual polymorphic recursion through classes, structs and fields, where structs have one field
+// (these are optimized)
 class Test10
 {
 #pragma warning disable 649

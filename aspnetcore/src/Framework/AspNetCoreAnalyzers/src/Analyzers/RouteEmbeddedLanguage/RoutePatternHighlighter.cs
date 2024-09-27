@@ -68,7 +68,8 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
             var resolvedParameters = routeUsage.UsageContext.ResolvedParameters;
 
             // Match route parameter to method parameter. Parameters in a route aren't case sensitive.
-            // It's possible to match multiple parameters, either based on parameter name, or [FromRoute(Name = "XXX")] attribute.
+            // It's possible to match multiple parameters, either based on parameter name, or [FromRoute(Name =
+            // "XXX")] attribute.
             var parameterName = node.ParameterNameToken.Value!.ToString();
             foreach (
                 var matchingParameter in resolvedParameters.Where(s =>

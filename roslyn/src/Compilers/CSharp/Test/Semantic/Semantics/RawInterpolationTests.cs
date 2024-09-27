@@ -332,7 +332,8 @@ class Program
 }";
         CreateCompilation(source)
             .VerifyDiagnostics(
-                // (12,1): error CS8999: Line does not start with the same whitespace as the closing line of the raw string literal.
+                // (12,1): error CS8999: Line does not start with the same whitespace as the closing line of the raw
+                // string literal.
                 // {
                 Diagnostic(ErrorCode.ERR_LineDoesNotStartWithSameWhitespace, "{")
                     .WithLocation(12, 1)
@@ -361,7 +362,8 @@ class Program
 }";
         CreateCompilation(source)
             .VerifyDiagnostics(
-                // (12,1): error CS8999: Line does not start with the same whitespace as the closing line of the raw string literal.
+                // (12,1): error CS8999: Line does not start with the same whitespace as the closing line of the raw
+                // string literal.
                 //   {
                 Diagnostic(ErrorCode.ERR_LineDoesNotStartWithSameWhitespace, "  ")
                     .WithLocation(12, 1)
@@ -606,7 +608,8 @@ class Program
     {
         Console.WriteLine( ";
         var normal = "$\"\"\"";
-        // ensure reparsing of interpolated string token is precise in error scenarios (assertions do not fail)
+        // ensure reparsing of interpolated string token is precise in error scenarios (assertions do not
+        // fail)
         Assert.True(
             SyntaxFactory
                 .ParseSyntaxTree(source + normal)
@@ -748,7 +751,8 @@ class Program
 }";
         CreateCompilationWithMscorlib45(source)
             .VerifyDiagnostics(
-                // (5,24): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (5,24): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         var s = $"""{1,1E10}""";
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1E10")
                     .WithArguments("double", "int")
@@ -756,7 +760,8 @@ class Program
                 // (5,24): error CS0150: A constant value is expected
                 //         var s = $"""{1,1E10}""";
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "1E10").WithLocation(5, 24),
-                // (6,24): error CS0221: Constant value '10000000000' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                // (6,24): error CS0221: Constant value '10000000000' cannot be converted to a 'int' (use
+                // 'unchecked' syntax to override)
                 //         var t = $"""{1,(int)1E10}""";
                 Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)1E10")
                     .WithArguments("10000000000", "int")
@@ -986,7 +991,8 @@ class Program {
 }";
         CreateCompilationWithMscorlib40(source)
             .VerifyEmitDiagnostics(
-                // (5,26): error CS0518: Predefined type 'System.Runtime.CompilerServices.FormattableStringFactory' is not defined or imported
+                // (5,26): error CS0518: Predefined type 'System.Runtime.CompilerServices.FormattableStringFactory'
+                // is not defined or imported
                 //         IFormattable f = $"""test""";
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"$""""""test""""""")
                     .WithArguments("System.Runtime.CompilerServices.FormattableStringFactory")
@@ -1057,22 +1063,26 @@ class Program {
 }";
         CreateCompilation(source)
             .VerifyDiagnostics(
-                // (5,44): warning CS8094: Alignment value 32768 has a magnitude greater than 32767 and may result in a large formatted string.
+                // (5,44): warning CS8094: Alignment value 32768 has a magnitude greater than 32767 and may result
+                // in a large formatted string.
                 //         Console.WriteLine($"""X = { 123 , (32768) }.""");
                 Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "32768")
                     .WithArguments("32768", "32767")
                     .WithLocation(5, 44),
-                // (6,43): warning CS8094: Alignment value -32768 has a magnitude greater than 32767 and may result in a large formatted string.
+                // (6,43): warning CS8094: Alignment value -32768 has a magnitude greater than 32767 and may result
+                // in a large formatted string.
                 //         Console.WriteLine($"""X = { 123 , -(32768) }.""");
                 Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "-(32768)")
                     .WithArguments("-32768", "32767")
                     .WithLocation(6, 43),
-                // (9,43): warning CS8094: Alignment value 2147483647 has a magnitude greater than 32767 and may result in a large formatted string.
+                // (9,43): warning CS8094: Alignment value 2147483647 has a magnitude greater than 32767 and may
+                // result in a large formatted string.
                 //         Console.WriteLine($"""X = { 123 , int.MaxValue }.""");
                 Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "int.MaxValue")
                     .WithArguments("2147483647", "32767")
                     .WithLocation(9, 43),
-                // (10,43): warning CS8094: Alignment value -2147483648 has a magnitude greater than 32767 and may result in a large formatted string.
+                // (10,43): warning CS8094: Alignment value -2147483648 has a magnitude greater than 32767 and may
+                // result in a large formatted string.
                 //         Console.WriteLine($"""X = { 123 , int.MinValue }.""");
                 Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "int.MinValue")
                     .WithArguments("-2147483648", "32767")
@@ -1122,7 +1132,8 @@ class Program {
                 // (5,38): error CS8917: The delegate type could not be inferred.
                 //         Console.WriteLine($"""X = { x=>3 }.""");
                 Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "=>").WithLocation(5, 38),
-                // (6,37): warning CS8974: Converting method group 'Main' to non-delegate type 'object'. Did you intend to invoke the method?
+                // (6,37): warning CS8974: Converting method group 'Main' to non-delegate type 'object'. Did you
+                // intend to invoke the method?
                 //         Console.WriteLine($"""X = { Program.Main }.""");
                 Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "Program.Main")
                     .WithArguments("Main", "object")
@@ -1379,12 +1390,14 @@ class Program {
 }";
         CreateCompilationWithMscorlib40AndSystemCore(text)
             .VerifyDiagnostics(
-                // (3,19): error CS0110: The evaluation of the constant value for 'C.a' involves a circular definition
+                // (3,19): error CS0110: The evaluation of the constant value for 'C.a' involves a circular
+                // definition
                 //     const dynamic a = a;
                 Diagnostic(ErrorCode.ERR_CircConstValue, "a")
                     .WithArguments("C.a")
                     .WithLocation(3, 19),
-                // (3,23): error CS0134: 'C.a' is of type 'dynamic'. A const field of a reference type other than string can only be initialized with null.
+                // (3,23): error CS0134: 'C.a' is of type 'dynamic'. A const field of a reference type other than
+                // string can only be initialized with null.
                 //     const dynamic a = a;
                 Diagnostic(ErrorCode.ERR_NotNullConstRefField, "a")
                     .WithArguments("C.a", "dynamic")
@@ -1473,7 +1486,8 @@ class C
                 )
             )
             .VerifyDiagnostics(
-                // (6,16): error CS8026: Feature 'interpolated strings' is not available in C# 5. Please use language version 6 or greater.
+                // (6,16): error CS8026: Feature 'interpolated strings' is not available in C# 5. Please use
+                // language version 6 or greater.
                 //         return $"""hello""";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, @"$""""""hello""""""")
                     .WithArguments("interpolated strings", "6")
@@ -1502,12 +1516,14 @@ class C
                 )
             )
             .VerifyDiagnostics(
-                // (6,24): error CS8026: Feature 'raw string literals' is not available in C# 5. Please use language version 11.0 or greater.
+                // (6,24): error CS8026: Feature 'raw string literals' is not available in C# 5. Please use language
+                // version 11.0 or greater.
                 //         string other = """world""";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, @"""""""world""""""")
                     .WithArguments("raw string literals", "11.0")
                     .WithLocation(6, 24),
-                // (7,16): error CS8026: Feature 'interpolated strings' is not available in C# 5. Please use language version 6 or greater.
+                // (7,16): error CS8026: Feature 'interpolated strings' is not available in C# 5. Please use
+                // language version 6 or greater.
                 //         return $"""hello + {other}""";
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion5,

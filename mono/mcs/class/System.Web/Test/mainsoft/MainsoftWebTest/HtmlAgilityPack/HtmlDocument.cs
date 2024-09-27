@@ -95,7 +95,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Gets the absolute stream position of this error in the document, relative to the start of the document.
+        /// Gets the absolute stream position of this error in the document, relative to the start of the
+        // document.
         /// </summary>
         public int StreamPosition
         {
@@ -162,7 +163,8 @@ namespace HtmlAgilityPack
 
         /// <summary>
         /// Defines if declared encoding must be read from the document.
-        /// Declared encoding is determined using the meta http-equiv="content-type" content="text/html;charset=XXXXX" html node.
+        /// Declared encoding is determined using the meta http-equiv="content-type"
+        // content="text/html;charset=XXXXX" html node.
         /// Default is true.
         /// </summary>
         public bool OptionReadEncoding = true;
@@ -193,7 +195,8 @@ namespace HtmlAgilityPack
         public bool OptionOutputUpperCase = false;
 
         /// <summary>
-        /// Defines if attribute value output must be optimized (not bound with double quotes if it is possible). Default is false.
+        /// Defines if attribute value output must be optimized (not bound with double quotes if it is
+        // possible). Default is false.
         /// </summary>
         public bool OptionOutputOptimizeAttributeValues = false;
 
@@ -204,7 +207,8 @@ namespace HtmlAgilityPack
 
         /// <summary>
         /// Defines if source text must be extracted while parsing errors.
-        /// If the document has a lot of errors, or cascading errors, parsing performance can be dramatically affected if set to true.
+        /// If the document has a lot of errors, or cascading errors, parsing performance can be
+        // dramatically affected if set to true.
         /// Default is false.
         /// </summary>
         public bool OptionExtractErrorSourceText = false; // turning this on can dramatically slow performance if a lot of errors are detected
@@ -216,7 +220,8 @@ namespace HtmlAgilityPack
         public bool OptionAutoCloseOnEnd = false; // close errors at the end
 
         /// <summary>
-        /// Defines if LI, TR, TH, TD tags must be partially fixed when nesting errors are detected. Default is false.
+        /// Defines if LI, TR, TH, TD tags must be partially fixed when nesting errors are detected. Default
+        // is false.
         /// </summary>
         public bool OptionFixNestedTags = false; // fix li, tr, th, td tags
 
@@ -231,7 +236,8 @@ namespace HtmlAgilityPack
         public System.Text.Encoding OptionDefaultStreamEncoding = System.Text.Encoding.Default;
 
         /// <summary>
-        /// Defines the name of a node that will throw the StopperNodeException when found as an end node. Default is null.
+        /// Defines the name of a node that will throw the StopperNodeException when found as an end node.
+        // Default is null.
         /// </summary>
         public string OptionStopperNodeName = null;
 
@@ -271,7 +277,8 @@ namespace HtmlAgilityPack
 
         /// <summary>
         /// Gets the document's declared encoding.
-        /// Declared encoding is determined using the meta http-equiv="content-type" content="text/html;charset=XXXXX" html node.
+        /// Declared encoding is determined using the meta http-equiv="content-type"
+        // content="text/html;charset=XXXXX" html node.
         /// </summary>
         public System.Text.Encoding DeclaredEncoding
         {
@@ -339,7 +346,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Detects the encoding of an HTML file.
         /// </summary>
-        /// <param name="path">Path for the file containing the HTML document to detect. May not be null.</param>
+        /// <param name="path">Path for the file containing the HTML document to detect. May not be
+        // null.</param>
         /// <returns>The detected encoding.</returns>
         public Encoding DetectEncoding(string path)
         {
@@ -439,7 +447,8 @@ namespace HtmlAgilityPack
         /// Loads an HTML document from a stream.
         /// </summary>
         /// <param name="stream">The input stream.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the stream.</param>
         public void Load(Stream stream, bool detectEncodingFromByteOrderMarks)
         {
             Load(new StreamReader(stream, detectEncodingFromByteOrderMarks));
@@ -460,7 +469,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="stream">The input stream.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the stream.</param>
         public void Load(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks)
         {
             Load(new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks));
@@ -471,7 +481,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="stream">The input stream.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the stream.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the stream.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
         public void Load(
             Stream stream,
@@ -502,7 +513,8 @@ namespace HtmlAgilityPack
         /// Loads an HTML document from a file.
         /// </summary>
         /// <param name="path">The complete file path to be read. May not be null.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public void Load(string path, bool detectEncodingFromByteOrderMarks)
         {
             if (path == null)
@@ -539,7 +551,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="path">The complete file path to be read. May not be null.</param>
         /// <param name="encoding">The character encoding to use. May not be null.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public void Load(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks)
         {
             if (path == null)
@@ -560,7 +573,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="path">The complete file path to be read. May not be null.</param>
         /// <param name="encoding">The character encoding to use. May not be null.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
         public void Load(
             string path,
@@ -645,7 +659,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Loads the HTML document from the specified TextReader.
         /// </summary>
-        /// <param name="reader">The TextReader used to feed the HTML data into the document. May not be null.</param>
+        /// <param name="reader">The TextReader used to feed the HTML data into the document. May not be
+        // null.</param>
         public void Load(TextReader reader)
         {
             // all Load methods pass down to this one
@@ -803,7 +818,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Saves the mixed document to the specified file.
         /// </summary>
-        /// <param name="filename">The location of the file where you want to save the document. May not be null.</param>
+        /// <param name="filename">The location of the file where you want to save the document. May not be
+        // null.</param>
         /// <param name="encoding">The character encoding to use. May not be null.</param>
         public void Save(string filename, System.Text.Encoding encoding)
         {
@@ -855,7 +871,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Creates a new XPathNavigator object for navigating this HTML document.
         /// </summary>
-        /// <returns>An XPathNavigator object. The XPathNavigator is positioned on the root of the document.</returns>
+        /// <returns>An XPathNavigator object. The XPathNavigator is positioned on the root of the
+        // document.</returns>
         public XPathNavigator CreateNavigator()
         {
             return new HtmlNodeNavigator(this, _documentnode);
@@ -878,7 +895,8 @@ namespace HtmlAgilityPack
                     ((name[i] >= 'a') && (name[i] <= 'z'))
                     || ((name[i] >= '0') && (name[i] <= '9'))
                     ||
-                    //					(name[i]==':') || (name[i]=='_') || (name[i]=='-') || (name[i]=='.')) // these are bads in fact
+                    //					(name[i]==':') || (name[i]=='_') || (name[i]=='-') || (name[i]=='.')) // these are bads in
+                    // fact
                     (name[i] == '_')
                     || (name[i] == '-')
                     || (name[i] == '.')
@@ -1078,7 +1096,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Gets the document CRC32 checksum if OptionComputeChecksum was set to true before parsing, 0 otherwise.
+        /// Gets the document CRC32 checksum if OptionComputeChecksum was set to true before parsing, 0
+        // otherwise.
         /// </summary>
         public int CheckSum
         {

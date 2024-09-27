@@ -125,9 +125,12 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
 
         if (actionDescriptorProvider is null)
         {
-            // RuntimeCompilation registers an instance of PageActionDescriptorProvider (PageADP). CompiledPageADP and runtime compilation
-            // cannot co-exist since CompiledPageADP will attempt to resolve action descriptors for lazily compiled views (such as for
-            // ones from non-physical file providers). We'll instead avoid adding it if PageADP is already registered. Similarly,
+            // RuntimeCompilation registers an instance of PageActionDescriptorProvider (PageADP).
+            // CompiledPageADP and runtime compilation
+            // cannot co-exist since CompiledPageADP will attempt to resolve action descriptors for lazily
+            // compiled views (such as for
+            // ones from non-physical file providers). We'll instead avoid adding it if PageADP is already
+            // registered. Similarly,
             // AddRazorRuntimeCompilation will remove CompiledPageADP if it is registered.
             services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<

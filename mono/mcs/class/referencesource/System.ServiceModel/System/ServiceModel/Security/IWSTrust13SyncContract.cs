@@ -72,7 +72,8 @@ namespace System.ServiceModel.Security
         /// <returns>Response message containing the RSTR.</returns>
         //
         // NOTE:
-        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in the
+        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in
+        // the
         //      WCF-generated WSDL. This is desired.
         //
         [OperationContract(
@@ -89,7 +90,8 @@ namespace System.ServiceModel.Security
         /// <returns>Response message containing the RSTR.</returns>
         //
         // NOTE:
-        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in the
+        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in
+        // the
         //      WCF-generated WSDL. This is desired.
         //
         [OperationContract(
@@ -106,7 +108,8 @@ namespace System.ServiceModel.Security
         /// <returns>Response message containing the RSTR.</returns>
         //
         // NOTE:
-        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in the
+        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in
+        // the
         //      WCF-generated WSDL. This is desired.
         //
         [OperationContract(
@@ -123,7 +126,8 @@ namespace System.ServiceModel.Security
         /// <returns>Response message containing the RSTR.</returns>
         //
         // NOTE:
-        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in the
+        //      ReplyAction = "*" has a side effect of not generating this operation, port, or messages in
+        // the
         //      WCF-generated WSDL. This is desired.
         //
         [OperationContract(

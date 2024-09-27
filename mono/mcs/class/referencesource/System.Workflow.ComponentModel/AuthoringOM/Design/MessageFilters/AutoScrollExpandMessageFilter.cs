@@ -43,7 +43,8 @@
             this.startAutoScroll = true;
 
             //We do not allow drag drop when we are auto scrolling
-            //Also the drag image updation occures automatically as on AutoScroll we invalidate the whole client area
+            //Also the drag image updation occures automatically as on AutoScroll we invalidate the whole client
+            // area
             //todo add quick and medium autoscroll zones
             Point clientPoint = ParentView.PointToClient(new Point(eventArgs.X, eventArgs.Y));
             AutoScrollDirection = AutoScrollDirectionFromPoint(clientPoint);

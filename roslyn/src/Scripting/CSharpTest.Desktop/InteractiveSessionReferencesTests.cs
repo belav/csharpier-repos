@@ -174,7 +174,8 @@ new System.Data.DataSet()
                 // #r "System.Data.dll"
                 Diagnostic(ErrorCode.ERR_NoMetadataFile, @"#r ""System.Data.dll""")
                     .WithArguments("System.Data.dll"),
-                // (3,12): error CS0234: The type or namespace name 'Data' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                // (3,12): error CS0234: The type or namespace name 'Data' does not exist in the namespace 'System'
+                // (are you missing an assembly reference?)
                 // new System.Data.DataSet()
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Data")
                     .WithArguments("Data", "System")
@@ -387,8 +388,10 @@ System.Diagnostics.Process.GetCurrentProcess()
             // TODO (https://github.com/dotnet/roslyn/issues/6456):
             // This is not correct. "global" alias should be recursively applied on all
             // dependencies of System, V4. The problem is in ResolveReferencedAssembly which considers
-            // System, V2 equivalent to System, V4 and immediately returns, instead of checking if a better match exists.
-            // This is not a problem in csc since it can't have both System, V2 and System, V4 among definitions.
+            // System, V2 equivalent to System, V4 and immediately returns, instead of checking if a better
+            // match exists.
+            // This is not a problem in csc since it can't have both System, V2 and System, V4 among
+            // definitions.
             script1
                 .GetCompilation()
                 .VerifyAssemblyVersionsAndAliases(

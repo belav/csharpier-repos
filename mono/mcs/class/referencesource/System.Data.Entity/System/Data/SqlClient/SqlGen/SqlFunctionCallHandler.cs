@@ -23,12 +23,17 @@ namespace System.Data.SqlClient.SqlGen
     using System.Text;
 
     /// <summary>
-    /// Enacapsulates the logic required to translate function calls represented as instances of DbFunctionExpression into SQL.
+    /// Enacapsulates the logic required to translate function calls represented as instances of
+    // DbFunctionExpression into SQL.
     /// There are several special cases that modify how the translation should proceed. These include:
-    /// - 'Special' canonical functions, for which the function name or arguments differ between the EDM canonical function and the SQL function
-    /// - 'Special' server functions, which are similar to the 'special' canonical functions but sourced by the SQL Server provider manifest
-    /// - Niladic functions, which require the parentheses that would usually follow the function name to be omitted
-    /// - Spatial canonical functions, which must translate to a static method call, instance method call, or instance property access against
+    /// - 'Special' canonical functions, for which the function name or arguments differ between the EDM
+    // canonical function and the SQL function
+    /// - 'Special' server functions, which are similar to the 'special' canonical functions but sourced
+    // by the SQL Server provider manifest
+    /// - Niladic functions, which require the parentheses that would usually follow the function name
+    // to be omitted
+    /// - Spatial canonical functions, which must translate to a static method call, instance method
+    // call, or instance property access against
     ///   one of the built-in spatial CLR UDTs (geography/geometry).
     /// </summary>
     internal static class SqlFunctionCallHandler
@@ -462,7 +467,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Initalizes the mapping from names of canonical function that represent static geography methods to their corresponding
+        /// Initalizes the mapping from names of canonical function that represent static geography methods
+        // to their corresponding
         /// static method name, qualified with the 'geography::' prefix.
         /// </summary>
         /// <returns></returns>
@@ -613,7 +619,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Initalizes the mapping from names of canonical function that represent geography instance properties to their corresponding
+        /// Initalizes the mapping from names of canonical function that represent geography instance
+        // properties to their corresponding
         /// store property name.
         /// </summary>
         /// <returns></returns>
@@ -635,7 +642,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Initalizes the mapping of canonical function name to instance method name for geography instance functions that differ in name from the sql server equivalent.
+        /// Initalizes the mapping of canonical function name to instance method name for geography instance
+        // functions that differ in name from the sql server equivalent.
         /// </summary>
         /// <returns></returns>
         private static Dictionary<
@@ -674,7 +682,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Initalizes the mapping from names of canonical function that represent static geometry methods to their corresponding
+        /// Initalizes the mapping from names of canonical function that represent static geometry methods
+        // to their corresponding
         /// static method name, qualified with the 'geometry::' prefix.
         /// </summary>
         /// <returns></returns>
@@ -825,7 +834,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Initalizes the mapping from names of canonical function that represent geometry instance properties to their corresponding
+        /// Initalizes the mapping from names of canonical function that represent geometry instance
+        // properties to their corresponding
         /// store property name.
         /// </summary>
         /// <returns></returns>
@@ -847,7 +857,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Initalizes the mapping of canonical function name to instance method name for geometry instance functions that differ in name from the sql server equivalent.
+        /// Initalizes the mapping of canonical function name to instance method name for geometry instance
+        // functions that differ in name from the sql server equivalent.
         /// </summary>
         /// <returns></returns>
         private static Dictionary<string, string> InitializeRenamedGeometryInstanceMethodFunctions()
@@ -1394,7 +1405,8 @@ namespace System.Data.SqlClient.SqlGen
             }
             else
             {
-                // Default translation pattern is instance method; the instance method name may differ from that of the spatial canonical function
+                // Default translation pattern is instance method; the instance method name may differ from that of
+                // the spatial canonical function
                 Debug.Assert(
                     functionExpression.Function.Parameters.Count > 0
                         && Helper.IsSpatialType(
@@ -1413,7 +1425,8 @@ namespace System.Data.SqlClient.SqlGen
                     effectiveFunctionName = functionExpression.Function.Name;
                 }
 
-                // For AsGml() calls, the XML result must be cast to string to match the declared function result type.
+                // For AsGml() calls, the XML result must be cast to string to match the declared function result
+                // type.
                 string castResultType = null;
                 if (effectiveFunctionName == "AsGml")
                 {
@@ -1498,7 +1511,8 @@ namespace System.Data.SqlClient.SqlGen
         /// Also, the arguments can be optionaly enclosed in parethesis
         /// </summary>
         /// <param name="e"></param>
-        /// <param name="parenthesiseArguments">Whether the arguments should be enclosed in parethesis</param>
+        /// <param name="parenthesiseArguments">Whether the arguments should be enclosed in
+        // parethesis</param>
         /// <returns></returns>
         private static ISqlFragment HandleSpecialFunctionToOperator(
             SqlGenerator sqlgen,
@@ -1834,21 +1848,28 @@ namespace System.Data.SqlClient.SqlGen
         ///
         /// The given expression is in general trainslated into:
         ///
-        /// CONVERT(@typename, [datePart] + [timePart] + [timeZonePart], 121), where the datePart and the timeZonePart are optional
+        /// CONVERT(@typename, [datePart] + [timePart] + [timeZonePart], 121), where the datePart and the
+        // timeZonePart are optional
         ///
-        /// Only on Katmai, if a date part is present it is wrapped with a call for adding years as shown below.
+        /// Only on Katmai, if a date part is present it is wrapped with a call for adding years as shown
+        // below.
         /// The individual parts are translated as:
         ///
         /// Date part:
-        ///     PRE KATMAI: convert(varchar(255), @year) + '-' + convert(varchar(255), @month) + '-' + convert(varchar(255), @day)
-        ///         KATMAI: DateAdd(year, @year-1, covert(@typename, '0001' + '-' + convert(varchar(255), @month) + '-' + convert(varchar(255), @day)  + [possibly time ], 121)
+        ///     PRE KATMAI: convert(varchar(255), @year) + '-' + convert(varchar(255), @month) + '-' +
+        // convert(varchar(255), @day)
+        ///         KATMAI: DateAdd(year, @year-1, covert(@typename, '0001' + '-' + convert(varchar(255),
+        // @month) + '-' + convert(varchar(255), @day)  + [possibly time ], 121)
         ///
         /// Time part:
-        /// PRE KATMAI:  convert(varchar(255), @hour)+ ':' + convert(varchar(255), @minute)+ ':' + str(@second, 6, 3)
-        ///     KATMAI:  convert(varchar(255), @hour)+ ':' + convert(varchar(255), @minute)+ ':' + str(@second, 10, 7)
+        /// PRE KATMAI:  convert(varchar(255), @hour)+ ':' + convert(varchar(255), @minute)+ ':' +
+        // str(@second, 6, 3)
+        ///     KATMAI:  convert(varchar(255), @hour)+ ':' + convert(varchar(255), @minute)+ ':' +
+        // str(@second, 10, 7)
         ///
         /// Time zone part:
-        ///     (case when @tzoffset >= 0 then '+' else '-' end) + convert(varchar(255), ABS(@tzoffset)/60) + ':' + convert(varchar(255), ABS(@tzoffset)%60)
+        ///     (case when @tzoffset >= 0 then '+' else '-' end) + convert(varchar(255), ABS(@tzoffset)/60)
+        // + ':' + convert(varchar(255), ABS(@tzoffset)%60)
         ///
         /// </summary>
         /// <param name="typeName"></param>
@@ -1966,12 +1987,16 @@ namespace System.Data.SqlClient.SqlGen
 
         /// <summary>
         /// TruncateTime(DateTime X)
-        ///   PreKatmai:    TRUNCATETIME(X) => CONVERT(DATETIME, CONVERT(VARCHAR(255), expression, 102),  102)
-        ///      Katmai:    TRUNCATETIME(X) => CONVERT(DATETIME2, CONVERT(VARCHAR(255), expression, 102),  102)
+        ///   PreKatmai:    TRUNCATETIME(X) => CONVERT(DATETIME, CONVERT(VARCHAR(255), expression, 102),
+        // 102)
+        ///      Katmai:    TRUNCATETIME(X) => CONVERT(DATETIME2, CONVERT(VARCHAR(255), expression, 102),
+        // 102)
         ///
         /// TruncateTime(DateTimeOffset X)
-        ///                 TRUNCATETIME(X) => CONVERT(datetimeoffset, CONVERT(VARCHAR(255), expression,  102)
-        ///                                     + ' 00:00:00 ' +  Right(convert(varchar(255), @arg, 121), 6),  102)
+        ///                 TRUNCATETIME(X) => CONVERT(datetimeoffset, CONVERT(VARCHAR(255), expression,
+        // 102)
+        ///                                     + ' 00:00:00 ' +  Right(convert(varchar(255), @arg, 121),
+        // 6),  102)
         ///
         /// </summary>
         /// <param name="sqlgen"></param>
@@ -2150,8 +2175,10 @@ namespace System.Data.SqlClient.SqlGen
         )
         {
             // We are aware of SQL Server's trimming of trailing spaces. We disclaim that behavior in general.
-            // It's up to the user to decide whether to trim them explicitly or to append a non-blank space char explicitly.
-            // Once SQL Server implements a function that computes Length correctly, we'll use it here instead of LEN,
+            // It's up to the user to decide whether to trim them explicitly or to append a non-blank space char
+            // explicitly.
+            // Once SQL Server implements a function that computes Length correctly, we'll use it here instead
+            // of LEN,
             // and we'll drop the disclaimer.
             return HandleFunctionDefaultGivenName(sqlgen, e, "LEN");
         }
@@ -2172,7 +2199,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Truncate(numericExpression) -> Round(numericExpression, 0, 1); (does not exist as canonical function yet)
+        /// Truncate(numericExpression) -> Round(numericExpression, 0, 1); (does not exist as canonical
+        // function yet)
         /// Truncate(numericExpression, digits) -> Round(numericExpression, digits, 1);
         /// </summary>
         /// <param name="sqlgen"></param>
@@ -2321,8 +2349,10 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Function to translate the StartsWith, EndsWith and Contains canonical functions to LIKE expression in T-SQL
-        /// and also add the trailing ESCAPE '~' when escaping of the search string for the LIKE expression has occurred
+        /// Function to translate the StartsWith, EndsWith and Contains canonical functions to LIKE
+        // expression in T-SQL
+        /// and also add the trailing ESCAPE '~' when escaping of the search string for the LIKE expression
+        // has occurred
         /// </summary>
         /// <param name="sqlgen"></param>
         /// <param name="targetExpression"></param>
@@ -2415,10 +2445,13 @@ namespace System.Data.SqlClient.SqlGen
             }
             else
             {
-                // We use CHARINDEX when the search param is a DbNullExpression because all of SQL Server 2008, 2005 and 2000
+                // We use CHARINDEX when the search param is a DbNullExpression because all of SQL Server 2008, 2005
+                // and 2000
                 // consistently return NULL as the result.
-                //  However, if instead we use the optimized LIKE translation when the search param is a DbNullExpression,
-                //  only SQL Server 2005 yields a True instead of a DbNull as compared to SQL Server 2008 and 2000. This is
+                //  However, if instead we use the optimized LIKE translation when the search param is a
+                // DbNullExpression,
+                //  only SQL Server 2005 yields a True instead of a DbNull as compared to SQL Server 2008 and 2000.
+                // This is
                 //  tracked in SQLBUDT #32315 in LIKE in SQL Server 2005.
                 result.Append("CHARINDEX( ");
                 result.Append(args[1].Accept(sqlgen));
@@ -2475,10 +2508,13 @@ namespace System.Data.SqlClient.SqlGen
             }
             else
             {
-                // We use CHARINDEX when the search param is a DbNullExpression because all of SQL Server 2008, 2005 and 2000
+                // We use CHARINDEX when the search param is a DbNullExpression because all of SQL Server 2008, 2005
+                // and 2000
                 // consistently return NULL as the result.
-                //      However, if instead we use the optimized LIKE translation when the search param is a DbNullExpression,
-                //      only SQL Server 2005 yields a True instead of a DbNull as compared to SQL Server 2008 and 2000. This is
+                //      However, if instead we use the optimized LIKE translation when the search param is a
+                // DbNullExpression,
+                //      only SQL Server 2005 yields a True instead of a DbNull as compared to SQL Server 2008 and
+                // 2000. This is
                 //      bug 32315 in LIKE in SQL Server 2005.
                 result.Append("CHARINDEX( ");
                 result.Append(args[1].Accept(sqlgen));
@@ -2529,10 +2565,12 @@ namespace System.Data.SqlClient.SqlGen
             )
             {
                 // The LIKE optimization for EndsWith can only be used when the target is a column in table and
-                // the search string is a constant. This is because SQL Server ignores a trailing space in a query like:
+                // the search string is a constant. This is because SQL Server ignores a trailing space in a query
+                // like:
                 // EndsWith('abcd ', 'cd'), which translates to:
                 //      SELECT
-                //      CASE WHEN ('abcd ' LIKE '%cd') THEN cast(1 as bit) WHEN ( NOT ('abcd ' LIKE '%cd')) THEN cast(0 as bit) END AS [C1]
+                //      CASE WHEN ('abcd ' LIKE '%cd') THEN cast(1 as bit) WHEN ( NOT ('abcd ' LIKE '%cd')) THEN
+                // cast(0 as bit) END AS [C1]
                 //      FROM ( SELECT 1 AS X ) AS [SingleRowTable1]
                 // and "incorrectly" returns 1 (true), but the CLR would expect a 0 (false) back.
 
@@ -2558,7 +2596,8 @@ namespace System.Data.SqlClient.SqlGen
 
         /// <summary>
         /// Turns a predicate into a statement returning a bit
-        /// PREDICATE => CASE WHEN (PREDICATE) THEN CAST(1 AS BIT) WHEN (NOT (PREDICATE)) CAST (O AS BIT) END
+        /// PREDICATE => CASE WHEN (PREDICATE) THEN CAST(1 AS BIT) WHEN (NOT (PREDICATE)) CAST (O AS BIT)
+        // END
         /// The predicate is produced by the given predicateTranslator.
         /// </summary>
         /// <param name="predicateTranslator"></param>
@@ -2626,7 +2665,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Is this a Store function (ie) does it have the builtinAttribute specified and it is not a canonical function?
+        /// Is this a Store function (ie) does it have the builtinAttribute specified and it is not a
+        // canonical function?
         /// </summary>
         /// <param name="function"></param>
         /// <returns></returns>

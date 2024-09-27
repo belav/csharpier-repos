@@ -75,8 +75,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 return null;
             }
 
-            // Any Diagnostic spans produced in binding will be offset by the length of the "target" expression text.
-            // If we want to support live squiggles in debugger windows, SemanticModel, etc, we'll want to address this.
+            // Any Diagnostic spans produced in binding will be offset by the length of the "target" expression
+            // text.
+            // If we want to support live squiggles in debugger windows, SemanticModel, etc, we'll want to
+            // address this.
             var targetSyntax = ParseDebuggerExpressionInternal(
                 SourceText.From(target, encoding: null, SourceHashAlgorithms.Default),
                 consumeFullText: true

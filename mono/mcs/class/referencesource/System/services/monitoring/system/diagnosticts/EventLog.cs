@@ -185,8 +185,10 @@ namespace System.Diagnostics
                 );
                 EventLogInternal oldLog = m_underlyingEventLog;
 
-                // EnableRaisingEvents and Close demand Write permission but that permission might be removed upstack
-                // previously we didn't call Close() since we were reusing the same object.  We assert the permission here.
+                // EnableRaisingEvents and Close demand Write permission but that permission might be removed
+                // upstack
+                // previously we didn't call Close() since we were reusing the same object.  We assert the
+                // permission here.
                 new EventLogPermission(EventLogPermissionAccess.Write, oldLog.machineName).Assert();
                 if (oldLog.EnableRaisingEvents)
                 {
@@ -225,8 +227,10 @@ namespace System.Diagnostics
                 );
                 EventLogInternal oldLog = m_underlyingEventLog;
 
-                // EnableRaisingEvents and Close demand Write permission but that permission might be removed upstack
-                // previously we didn't call Close() since we were reusing the same object.  We assert the permission here.
+                // EnableRaisingEvents and Close demand Write permission but that permission might be removed
+                // upstack
+                // previously we didn't call Close() since we were reusing the same object.  We assert the
+                // permission here.
                 new EventLogPermission(EventLogPermissionAccess.Write, oldLog.machineName).Assert();
                 if (oldLog.EnableRaisingEvents)
                 {
@@ -340,8 +344,10 @@ namespace System.Diagnostics
                 );
                 EventLogInternal oldLog = m_underlyingEventLog;
 
-                // EnableRaisingEvents and Close demand Write permission but that permission might be removed upstack
-                // previously we didn't call Close() since we were reusing the same object.  We assert the permission here.
+                // EnableRaisingEvents and Close demand Write permission but that permission might be removed
+                // upstack
+                // previously we didn't call Close() since we were reusing the same object.  We assert the
+                // permission here.
                 new EventLogPermission(EventLogPermissionAccess.Write, oldLog.machineName).Assert();
                 if (oldLog.EnableRaisingEvents)
                 {
@@ -605,7 +611,8 @@ namespace System.Diagnostics
                         logKey = eventKey.CreateSubKey(logName);
 
                         // NOTE: We shouldn't set "Sources" explicitly, the OS will automatically set it.
-                        // The EventLog service doesn't use it for anything it is just an helping hand for event viewer filters.
+                        // The EventLog service doesn't use it for anything it is just an helping hand for event viewer
+                        // filters.
                         // Writing this value explicitly might confuse the service as it might perceive it as a change and
                         // start initializing again
 
@@ -1605,8 +1612,10 @@ namespace System.Diagnostics
             return UnsafeTryFormatMessage(hModule, messageNum, insertionStrings);
         }
 
-        // FormatMessageW will AV if you don't pass in enough format strings.  If you call TryFormatMessage we ensure insertionStrings
-        // is long enough.  You don't want to call this directly unless you're sure insertionStrings is long enough!
+        // FormatMessageW will AV if you don't pass in enough format strings.  If you call TryFormatMessage
+        // we ensure insertionStrings
+        // is long enough.  You don't want to call this directly unless you're sure insertionStrings is long
+        // enough!
         internal static string UnsafeTryFormatMessage(
             SafeLibraryHandle hModule,
             uint messageNum,
@@ -1625,9 +1634,11 @@ namespace System.Diagnostics
             GCHandle[] handles = new GCHandle[insertionStrings.Length];
             GCHandle stringsRoot = GCHandle.Alloc(addresses, GCHandleType.Pinned);
 
-            // Make sure that we don't try to pass in a zero length array of addresses.  If there are no insertion strings,
+            // Make sure that we don't try to pass in a zero length array of addresses.  If there are no
+            // insertion strings,
             // we'll use the FORMAT_MESSAGE_IGNORE_INSERTS flag .
-            // If you change this behavior, make sure you look at TryFormatMessage which depends on this behavior!
+            // If you change this behavior, make sure you look at TryFormatMessage which depends on this
+            // behavior!
             if (insertionStrings.Length == 0)
             {
                 flags |= NativeMethods.FORMAT_MESSAGE_IGNORE_INSERTS;
@@ -1678,7 +1689,8 @@ namespace System.Diagnostics
             if (msgLen > 0)
             {
                 msg = buf.ToString();
-                // chop off a single CR/LF pair from the end if there is one. FormatMessage always appends one extra.
+                // chop off a single CR/LF pair from the end if there is one. FormatMessage always appends one
+                // extra.
                 if (msg.Length > 1 && msg[msg.Length - 1] == '\n')
                     msg = msg.Substring(0, msg.Length - 2);
             }
@@ -1738,7 +1750,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>
-        ///       Writes an entry of the specified <see cref='System.Diagnostics.EventLogEntryType'/> to the event log. Valid types are
+        ///       Writes an entry of the specified <see cref='System.Diagnostics.EventLogEntryType'/> to the
+        // event log. Valid types are
         ///    <see langword='Error'/>, <see langword='Warning'/>, <see langword='Information'/>,
         ///    <see langword='Success Audit'/>, and <see langword='Failure Audit'/>.
         ///    </para>
@@ -1837,7 +1850,8 @@ namespace System.Diagnostics
         /// <devdoc>
         ///    <para>
         ///       Writes an entry of the specified type with the
-        ///       user-defined <paramref name="eventID"/> and <paramref name="category"/> to the event log, and appends binary data to
+        ///       user-defined <paramref name="eventID"/> and <paramref name="category"/> to the event log,
+        // and appends binary data to
         ///       the message. The Event Viewer does not interpret this data; it
         ///       displays raw data only in a combined hexadecimal and text format.
         ///    </para>
@@ -1898,7 +1912,8 @@ namespace System.Diagnostics
             }
         }
 
-        // The EventLog.set_Source used to do some normalization and throw some exceptions.  We mimic that behavior here.
+        // The EventLog.set_Source used to do some normalization and throw some exceptions.  We mimic that
+        // behavior here.
         private static string CheckAndNormalizeSourceName(string source)
         {
             if (source == null)

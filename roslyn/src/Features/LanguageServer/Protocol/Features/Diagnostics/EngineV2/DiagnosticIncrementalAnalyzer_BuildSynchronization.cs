@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     var newResult = CreateAnalysisResults(project, stateSets, diagnostics);
 
                     // PERF: Save the diagnostics into in-memory cache on the main thread.
-                    //       Saving them into persistent storage is expensive, so we invoke that operation on a separate task queue
+                    //       Saving them into persistent storage is expensive, so we invoke that operation on a separate
+                    // task queue
                     //       to ensure faster error list refresh.
                     foreach (var stateSet in stateSets)
                     {
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             .ConfigureAwait(false);
                     }
 
-                    // Raise diagnostic updated events after the new diagnostics have been stored into the in-memory cache.
+                    // Raise diagnostic updated events after the new diagnostics have been stored into the in-memory
+                    // cache.
                     if (diagnostics.IsEmpty)
                     {
                         ClearAllDiagnostics(stateSets, projectId);

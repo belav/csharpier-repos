@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeWriterHelpers;
 
 /// <summary>
-/// This wraps PipeWriter.FlushAsync() in a way that allows multiple awaiters making it safe to call from publicly
+/// This wraps PipeWriter.FlushAsync() in a way that allows multiple awaiters making it safe to call
+// from publicly
 /// exposed Stream implementations while also tracking response data rate.
 /// </summary>
 internal sealed class TimingPipeFlusher
@@ -63,7 +64,8 @@ internal sealed class TimingPipeFlusher
     {
         if (minRate is object)
         {
-            // Call BytesWrittenToBuffer before FlushAsync() to make testing easier, otherwise the Flush can cause test code to run before the timeout
+            // Call BytesWrittenToBuffer before FlushAsync() to make testing easier, otherwise the Flush can
+            // cause test code to run before the timeout
             // control updates and if the test checks for a timeout it can fail
             _timeoutControl!.BytesWrittenToBuffer(minRate, count);
         }

@@ -19,13 +19,15 @@ namespace System.Web.Services.Description
     {
         SoapProtocolImporter protocolImporter;
 
-        /// <include file='doc\SoapExtensionImporter.uex' path='docs/doc[@for="SoapExtensionImporter.ImportMethod"]/*' />
+        /// <include file='doc\SoapExtensionImporter.uex'
+        // path='docs/doc[@for="SoapExtensionImporter.ImportMethod"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public abstract void ImportMethod(CodeAttributeDeclarationCollection metadata);
 
-        /// <include file='doc\SoapExtensionImporter.uex' path='docs/doc[@for="SoapExtensionImporter.ImportContext"]/*' />
+        /// <include file='doc\SoapExtensionImporter.uex'
+        // path='docs/doc[@for="SoapExtensionImporter.ImportContext"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

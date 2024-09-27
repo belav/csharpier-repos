@@ -36,7 +36,8 @@ namespace System.Text
         }
 
         //
-        // WARNING: GetByteCount(string chars), GetBytes(string chars,...), and GetString(byte[] byteIndex...)
+        // WARNING: GetByteCount(string chars), GetBytes(string chars,...), and GetString(byte[]
+        // byteIndex...)
         // WARNING: have different variable names than EncodingNLS.cs, so this can't just be cut & pasted,
         // WARNING: or it'll break VB's way of calling these.
         //
@@ -525,7 +526,8 @@ namespace System.Text
                     "[ASCIICodePageEncoding.GetByteCount]Expected empty fallback buffer"
                 );
                 //                if (encoder.InternalHasFallbackBuffer && encoder.FallbackBuffer.Remaining > 0)
-                //                    throw new ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
+                //                    throw new
+                // ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
                 //                    this.EncodingName, encoder.Fallback.GetType()));
             }
             else
@@ -537,9 +539,11 @@ namespace System.Text
             // then we may have a complicated count.
             if (fallback != null && fallback.MaxCharCount == 1)
             {
-                // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is always
+                // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is
+                // always
                 // same as input size.
-                // Note that no existing SBCS code pages map code points to supplimentary characters, so this is easy.
+                // Note that no existing SBCS code pages map code points to supplimentary characters, so this is
+                // easy.
 
                 // We could however have 1 extra byte if the last call had an encoder and a funky fallback and
                 // if we don't use the funky fallback this time.
@@ -696,7 +700,8 @@ namespace System.Text
                 );
                 //                if (encoder.m_throwOnOverflow && encoder.InternalHasFallbackBuffer &&
                 //                  encoder.FallbackBuffer.Remaining > 0)
-                //                  throw new ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
+                //                  throw new
+                // ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
                 //                        this.EncodingName, encoder.Fallback.GetType()));
             }
             else
@@ -883,7 +888,8 @@ namespace System.Text
             Contract.Assert(bytes != null, "[ASCIIEncoding.GetCharCount]bytes is null");
             Contract.Assert(count >= 0, "[ASCIIEncoding.GetCharCount]byteCount is negative");
 
-            // ASCII doesn't do best fit, so don't have to check for it, find out which decoder fallback we're using
+            // ASCII doesn't do best fit, so don't have to check for it, find out which decoder fallback we're
+            // using
             DecoderReplacementFallback fallback = null;
 
             if (decoder == null)
@@ -907,7 +913,8 @@ namespace System.Text
                 return count;
             }
 
-            // Only need decoder fallback buffer if not using default replacement fallback, no best fit for ASCII
+            // Only need decoder fallback buffer if not using default replacement fallback, no best fit for
+            // ASCII
             DecoderFallbackBuffer fallbackBuffer = null;
 
             // Have to do it the hard way.
@@ -976,7 +983,8 @@ namespace System.Text
 
             // Note: ASCII doesn't do best fit, but we have to fallback if they use something > 0x7f
             // Only need decoder fallback buffer if not using ? fallback.
-            // ASCII doesn't do best fit, so don't have to check for it, find out which decoder fallback we're using
+            // ASCII doesn't do best fit, so don't have to check for it, find out which decoder fallback we're
+            // using
             DecoderReplacementFallback fallback = null;
 
             if (decoder == null)
@@ -1134,7 +1142,8 @@ namespace System.Text
             // Just return length, SBCS stay the same length because they don't map to surrogate
             long charCount = (long)byteCount;
 
-            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be longer.
+            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be
+            // longer.
             if (DecoderFallback.MaxCharCount > 1)
                 charCount *= DecoderFallback.MaxCharCount;
 

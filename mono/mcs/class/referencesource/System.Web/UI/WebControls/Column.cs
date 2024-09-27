@@ -13,7 +13,8 @@ namespace System.Web.UI.WebControls
     using System.Web.UI;
 
     /// <devdoc>
-    ///    Creates a column and is the base class for all <see cref='System.Web.UI.WebControls.DataGrid'/> column types.
+    ///    Creates a column and is the base class for all <see
+    // cref='System.Web.UI.WebControls.DataGrid'/> column types.
     /// </devdoc>
     [TypeConverterAttribute(typeof(ExpandableObjectConverter))]
     public abstract class DataGridColumn : IStateManager
@@ -132,7 +133,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the style properties for the header of the System.Web.UI.WebControls.Column. This property is read-only.</para>
+        /// <para>Gets the style properties for the header of the System.Web.UI.WebControls.Column. This
+        // property is read-only.</para>
         /// </devdoc>
         [
             WebCategory("Styles"),
@@ -188,7 +190,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the style properties of an item within the System.Web.UI.WebControls.Column. This property is read-only.</para>
+        /// <para>Gets the style properties of an item within the System.Web.UI.WebControls.Column. This
+        // property is read-only.</para>
         /// </devdoc>
         [
             WebCategory("Styles"),
@@ -219,7 +222,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the System.Web.UI.WebControls.DataGrid that the System.Web.UI.WebControls.Column is a part of. This property is read-only.</para>
+        /// <para>Gets the System.Web.UI.WebControls.DataGrid that the System.Web.UI.WebControls.Column is a
+        // part of. This property is read-only.</para>
         /// </devdoc>
         protected DataGrid Owner
         {
@@ -227,7 +231,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the expression used when this column is used to sort the data source> by.</para>
+        /// <para>Gets or sets the expression used when this column is used to sort the data source>
+        // by.</para>
         /// </devdoc>
         [
             WebCategory("Behavior"),
@@ -251,7 +256,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the statebag for the System.Web.UI.WebControls.Column. This property is read-only.</para>
+        /// <para>Gets the statebag for the System.Web.UI.WebControls.Column. This property is
+        // read-only.</para>
         /// </devdoc>
         protected StateBag ViewState
         {
@@ -259,7 +265,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets a value to indicate whether the System.Web.UI.WebControls.Column is visible.</para>
+        /// <para>Gets or sets a value to indicate whether the System.Web.UI.WebControls.Column is
+        // visible.</para>
         /// </devdoc>
         [WebCategory("Behavior"), DefaultValue(true), WebSysDescription(SR.DataGridColumn_Visible)]
         public bool Visible

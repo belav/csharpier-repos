@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -67,7 +68,8 @@ namespace System.CommandLine.Invocation
                         {
                             // Handlers may not implement cancellation.
                             // In such cases, when CancelOnProcessTermination is configured and user presses Ctrl+C,
-                            // ProcessTerminationCompletionSource completes first, with the result equal to native exit code for given signal.
+                            // ProcessTerminationCompletionSource completes first, with the result equal to native exit code for
+                            // given signal.
                             Task<int> firstCompletedTask = await Task.WhenAny(
                                 startedInvocation,
                                 terminationHandler.ProcessTerminationCompletionSource.Task

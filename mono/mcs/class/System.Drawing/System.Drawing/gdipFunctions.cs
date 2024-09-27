@@ -3472,7 +3472,8 @@ namespace System.Drawing
             out int retCount
         );
 
-        //internal static extern Status GdipGetFontCollectionFamilyList( IntPtr collection, int getCount, [Out] FontFamily [] familyList, out int retCount );
+        //internal static extern Status GdipGetFontCollectionFamilyList( IntPtr collection, int getCount,
+        // [Out] FontFamily [] familyList, out int retCount );
 
         [DllImport(GdiPlus)]
         internal static extern int GdipNewInstalledFontCollection(out IntPtr collection);

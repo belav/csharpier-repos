@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
             );
 
-            // Second, start a synchronous request. While we are in the GetValue, we will record which thread is being occupied by the request
+            // Second, start a synchronous request. While we are in the GetValue, we will record which thread is
+            // being occupied by the request
             Thread? synchronousRequestThread = null;
             Task.Factory.StartNew(
                 () =>
@@ -92,9 +93,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // Wait until this request has actually started
             synchronousComputationStartedEvent.WaitOne();
 
-            // Good, we now have a synchronous request running. An async request should simply create a task that would
-            // be completed when the synchronous request completes. We want to assert that if we were to run a continuation
-            // from this task that's marked ExecuteSynchronously, we do not run it inline atop the synchronous request.
+            // Good, we now have a synchronous request running. An async request should simply create a task
+            // that would
+            // be completed when the synchronous request completes. We want to assert that if we were to run a
+            // continuation
+            // from this task that's marked ExecuteSynchronously, we do not run it inline atop the synchronous
+            // request.
             bool? asyncContinuationRanSynchronously = null;
             TaskStatus? observedAntecedentTaskStatus = null;
 
@@ -150,7 +154,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void GetValueAsyncThrowsCorrectExceptionDuringCancellation()
         {
-            // NOTE: since GetValueAsync inlines the call to the async computation, the GetValueAsync call will throw
+            // NOTE: since GetValueAsync inlines the call to the async computation, the GetValueAsync call will
+            // throw
             // immediately instead of returning a task that transitions to the cancelled state
             GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(
                 (lazy, ct) => lazy.GetValueAsync(ct),
@@ -173,8 +178,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             bool includeSynchronousComputation
         )
         {
-            // A call to GetValue/GetValueAsync with a token that is cancelled should throw an OperationCancelledException, but it's
-            // important to make sure the correct token is cancelled. It should be cancelled with the token passed
+            // A call to GetValue/GetValueAsync with a token that is cancelled should throw an
+            // OperationCancelledException, but it's
+            // important to make sure the correct token is cancelled. It should be cancelled with the token
+            // passed
             // to GetValue, not the cancellation that was thrown by the computation function
 
             var computeFunctionRunning = new ManualResetEvent(initialState: false);
@@ -354,8 +361,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public async Task CancelledAndReranAsynchronousComputationDoesNotBreakSynchronousRequest()
         {
-            // We're going to create an AsyncLazy where we will call GetValue synchronously, and while that operation is
-            // running we're going to call GetValueAsync() more than once; the first time we will let cancel, the second time will
+            // We're going to create an AsyncLazy where we will call GetValue synchronously, and while that
+            // operation is
+            // running we're going to call GetValueAsync() more than once; the first time we will let cancel,
+            // the second time will
             // run to completion.
             var synchronousComputationStartedEvent = new ManualResetEvent(initialState: false);
             var synchronousComputationShouldCompleteEvent = new ManualResetEvent(
@@ -387,7 +396,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var synchronousRequest = Task.Run(() => lazy.GetValue(CancellationToken.None));
             synchronousComputationStartedEvent.WaitOne();
 
-            // Step 2: it's running, so let's let a async operation get started and then cancel. We're ensuring that if this cancels, we might forget we have
+            // Step 2: it's running, so let's let a async operation get started and then cancel. We're ensuring
+            // that if this cancels, we might forget we have
             // the synchronous operation running if we weren't careful.
             var cancellationTokenSource = new CancellationTokenSource();
 
@@ -418,7 +428,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // We're going to do the following sequence of operations:
             //
             // 1. Start an asynchronous request
-            // 2. Cancel the asynchronous request (but it's still consuming CPU because it hasn't observed the cancellation yet)
+            // 2. Cancel the asynchronous request (but it's still consuming CPU because it hasn't observed the
+            // cancellation yet)
             // 3. Start a synchronous request
             // 4. Let the asynchronous request complete, as if the cancellation was never observed
             // 5. Complete the synchronous request
@@ -459,14 +470,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
             );
 
-            // Steps 1 and 2: start asynchronous computation and wait until it's running; this will cancel itself once it's started
+            // Steps 1 and 2: start asynchronous computation and wait until it's running; this will cancel
+            // itself once it's started
             var asynchronousRequest = Task.Run(
                 () => lazy.GetValueAsync(asynchronousRequestCancellationToken.Token)
             );
 
             asynchronousComputationReadyToComplete.WaitOne();
 
-            // Step 3: while the async request is cancelled but still "thinking", let's start the synchronous request
+            // Step 3: while the async request is cancelled but still "thinking", let's start the synchronous
+            // request
             var synchronousRequest = Task.Run(() => lazy.GetValue(CancellationToken.None));
             synchronousComputationStartedEvent.WaitOne();
 
@@ -483,7 +496,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var synchronousResult = await synchronousRequest;
 
-            // We expect that in this case, the synchronous result should have been thrown away since the async result was computed first
+            // We expect that in this case, the synchronous result should have been thrown away since the async
+            // result was computed first
             Assert.Equal(asyncResult, synchronousResult);
         }
     }

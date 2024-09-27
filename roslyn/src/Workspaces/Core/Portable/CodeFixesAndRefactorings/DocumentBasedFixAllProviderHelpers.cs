@@ -39,13 +39,16 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 
             var solution = originalFixAllContext.Solution;
 
-            // For code fixes, we have 3 pieces of work per project.  Computing diagnostics, computing fixes, and applying fixes.
-            // For refactorings, we have 2 pieces of work per project.  Computing refactorings, and applying refactorings.
+            // For code fixes, we have 3 pieces of work per project.  Computing diagnostics, computing fixes,
+            // and applying fixes.
+            // For refactorings, we have 2 pieces of work per project.  Computing refactorings, and applying
+            // refactorings.
             var fixAllKind = originalFixAllContext.State.FixAllKind;
             var workItemCount = fixAllKind == FixAllKind.CodeFix ? 3 : 2;
             progressTracker.AddItems(fixAllContexts.Length * workItemCount);
 
-            // Process each context one at a time, allowing us to dump any information we computed for each once done with it.
+            // Process each context one at a time, allowing us to dump any information we computed for each once
+            // done with it.
             var currentSolution = solution;
             foreach (var fixAllContext in fixAllContexts)
             {
@@ -97,8 +100,10 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         }
 
         /// <summary>
-        /// Take all the fixed documents and format/simplify/clean them up (if the language supports that), and take the
-        /// resultant text and apply it to the solution.  If the language doesn't support cleanup, then just take the
+        /// Take all the fixed documents and format/simplify/clean them up (if the language supports that),
+        // and take the
+        /// resultant text and apply it to the solution.  If the language doesn't support cleanup, then just
+        // take the
         /// given text and apply that instead.
         /// </summary>
         private static async Task<Solution> CleanupAndApplyChangesAsync(
@@ -112,11 +117,15 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 
             if (docIdToNewRootOrText.Count > 0)
             {
-                // Next, go and insert those all into the solution so all the docs in this particular project point at
-                // the new trees (or text).  At this point though, the trees have not been cleaned up.  We don't cleanup
+                // Next, go and insert those all into the solution so all the docs in this particular project point
+                // at
+                // the new trees (or text).  At this point though, the trees have not been cleaned up.  We don't
+                // cleanup
                 // the documents as they are created, or one at a time as we add them, as that would cause us to run
-                // cleanup on N different solution forks (which would be very expensive).  Instead, by adding all the
-                // changed documents to one solution, and hten cleaning *those* we only perform cleanup semantics on one
+                // cleanup on N different solution forks (which would be very expensive).  Instead, by adding all
+                // the
+                // changed documents to one solution, and hten cleaning *those* we only perform cleanup semantics on
+                // one
                 // forked solution.
                 foreach (var (docId, (newRoot, newText)) in docIdToNewRootOrText)
                 {
@@ -127,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 }
 
                 // Next, go and cleanup any trees we inserted. Once we clean the document, we get the text of it and
-                // insert that back into the final solution.  This way we can release both the original fixed tree, and
+                // insert that back into the final solution.  This way we can release both the original fixed tree,
+                // and
                 // the cleaned tree (both of which can be much more expensive than just text).
                 //
                 // Do this in parallel across all the documents that were fixed.
@@ -175,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         }
 
         /// <summary>
-        /// Dummy class just to get access to <see cref="CodeAction.PostProcessChangesAsync(Document, CancellationToken)"/>
+        /// Dummy class just to get access to <see cref="CodeAction.PostProcessChangesAsync(Document,
+        // CancellationToken)"/>
         /// </summary>
         private class PostProcessCodeAction : CodeAction
         {

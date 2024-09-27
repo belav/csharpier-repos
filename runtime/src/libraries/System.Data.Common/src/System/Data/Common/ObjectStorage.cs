@@ -332,7 +332,8 @@ namespace System.Data.Common
             _values = newValues;
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public override object ConvertXmlToObject(string s)
@@ -372,7 +373,8 @@ namespace System.Data.Common
             return (deserializerWithOutRootAttribute.Deserialize(strreader))!;
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public override object ConvertXmlToObject(XmlReader xmlReader, XmlRootAttribute? xmlAttrib)
@@ -605,12 +607,16 @@ namespace System.Data.Common
             new XmlSerializerFactory();
 
         /// <summary>
-        /// throw an InvalidOperationException if type implements IDynamicMetaObjectProvider and not IXmlSerializable
-        /// because XmlSerializerFactory will only serialize the type's declared properties, not its dynamic properties
+        /// throw an InvalidOperationException if type implements IDynamicMetaObjectProvider and not
+        // IXmlSerializable
+        /// because XmlSerializerFactory will only serialize the type's declared properties, not its dynamic
+        // properties
         /// </summary>
         /// <param name="type">type to test for IDynamicMetaObjectProvider</param>
-        /// <exception cref="InvalidOperationException">DataSet will not serialize types that implement IDynamicMetaObjectProvider but do not also implement IXmlSerializable</exception>
-        /// <remarks>IDynamicMetaObjectProvider was introduced in .NET Framework V4.0 into System.Core</remarks>
+        /// <exception cref="InvalidOperationException">DataSet will not serialize types that implement
+        // IDynamicMetaObjectProvider but do not also implement IXmlSerializable</exception>
+        /// <remarks>IDynamicMetaObjectProvider was introduced in .NET Framework V4.0 into
+        // System.Core</remarks>
         internal static void VerifyIDynamicMetaObjectProvider(Type type)
         {
             if (
@@ -643,7 +649,8 @@ namespace System.Data.Common
                 attribute
             );
 
-            // _tempAssemblyCache is a readonly instance, lock on write to copy & add then replace the original instance.
+            // _tempAssemblyCache is a readonly instance, lock on write to copy & add then replace the original
+            // instance.
             Dictionary<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer>? cache =
                 s_tempAssemblyCache;
             if ((null == cache) || !cache.TryGetValue(key, out serializer))

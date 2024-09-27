@@ -81,21 +81,21 @@ namespace Mono.Security.Cryptography
         }
 
         /*
-         * PrivateKeyInfo ::= SEQUENCE {
-         *	version Version,
-         *	privateKeyAlgorithm PrivateKeyAlgorithmIdentifier,
-         *	privateKey PrivateKey,
-         *	attributes [0] IMPLICIT Attributes OPTIONAL
-         * }
-         *
-         * Version ::= INTEGER
-         *
-         * PrivateKeyAlgorithmIdentifier ::= AlgorithmIdentifier
-         *
-         * PrivateKey ::= OCTET STRING
-         *
-         * Attributes ::= SET OF Attribute
-         */
+        * PrivateKeyInfo ::= SEQUENCE {
+        *	version Version,
+        *	privateKeyAlgorithm PrivateKeyAlgorithmIdentifier,
+        *	privateKey PrivateKey,
+        *	attributes [0] IMPLICIT Attributes OPTIONAL
+        * }
+        *
+        * Version ::= INTEGER
+        *
+        * PrivateKeyAlgorithmIdentifier ::= AlgorithmIdentifier
+        *
+        * PrivateKey ::= OCTET STRING
+        *
+        * Attributes ::= SET OF Attribute
+        */
         public class PrivateKeyInfo
         {
             private int _version;
@@ -247,19 +247,19 @@ namespace Mono.Security.Cryptography
             }
 
             /*
-             * RSAPrivateKey ::= SEQUENCE {
-             *	version           Version,
-             *	modulus           INTEGER,  -- n
-             *	publicExponent    INTEGER,  -- e
-             *	privateExponent   INTEGER,  -- d
-             *	prime1            INTEGER,  -- p
-             *	prime2            INTEGER,  -- q
-             *	exponent1         INTEGER,  -- d mod (p-1)
-             *	exponent2         INTEGER,  -- d mod (q-1)
-             *	coefficient       INTEGER,  -- (inverse of q) mod p
-             *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
-             * }
-             */
+            * RSAPrivateKey ::= SEQUENCE {
+            *	version           Version,
+            *	modulus           INTEGER,  -- n
+            *	publicExponent    INTEGER,  -- e
+            *	privateExponent   INTEGER,  -- d
+            *	prime1            INTEGER,  -- p
+            *	prime2            INTEGER,  -- q
+            *	exponent1         INTEGER,  -- d mod (p-1)
+            *	exponent2         INTEGER,  -- d mod (q-1)
+            *	coefficient       INTEGER,  -- (inverse of q) mod p
+            *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
+            * }
+            */
             static public RSA DecodeRSA(byte[] keypair)
             {
                 ASN1 privateKey = new ASN1(keypair);
@@ -313,19 +313,19 @@ namespace Mono.Security.Cryptography
             }
 
             /*
-             * RSAPrivateKey ::= SEQUENCE {
-             *	version           Version,
-             *	modulus           INTEGER,  -- n
-             *	publicExponent    INTEGER,  -- e
-             *	privateExponent   INTEGER,  -- d
-             *	prime1            INTEGER,  -- p
-             *	prime2            INTEGER,  -- q
-             *	exponent1         INTEGER,  -- d mod (p-1)
-             *	exponent2         INTEGER,  -- d mod (q-1)
-             *	coefficient       INTEGER,  -- (inverse of q) mod p
-             *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
-             * }
-             */
+            * RSAPrivateKey ::= SEQUENCE {
+            *	version           Version,
+            *	modulus           INTEGER,  -- n
+            *	publicExponent    INTEGER,  -- e
+            *	privateExponent   INTEGER,  -- d
+            *	prime1            INTEGER,  -- p
+            *	prime2            INTEGER,  -- q
+            *	exponent1         INTEGER,  -- d mod (p-1)
+            *	exponent2         INTEGER,  -- d mod (q-1)
+            *	coefficient       INTEGER,  -- (inverse of q) mod p
+            *	otherPrimeInfos   OtherPrimeInfos OPTIONAL
+            * }
+            */
             static public byte[] Encode(RSA rsa)
             {
                 RSAParameters param = rsa.ExportParameters(true);
@@ -383,27 +383,27 @@ namespace Mono.Security.Cryptography
         }
 
         /*
-         * EncryptedPrivateKeyInfo ::= SEQUENCE {
-         *	encryptionAlgorithm EncryptionAlgorithmIdentifier,
-         *	encryptedData EncryptedData
-         * }
-         *
-         * EncryptionAlgorithmIdentifier ::= AlgorithmIdentifier
-         *
-         * EncryptedData ::= OCTET STRING
-         *
-         * --
-         *  AlgorithmIdentifier  ::= SEQUENCE {
-         *	algorithm  OBJECT IDENTIFIER,
-         *	parameters ANY DEFINED BY algorithm OPTIONAL
-         * }
-         *
-         * -- from PKCS#5
-         * PBEParameter ::= SEQUENCE {
-         *	salt OCTET STRING SIZE(8),
-         *	iterationCount INTEGER
-         * }
-         */
+        * EncryptedPrivateKeyInfo ::= SEQUENCE {
+        *	encryptionAlgorithm EncryptionAlgorithmIdentifier,
+        *	encryptedData EncryptedData
+        * }
+        *
+        * EncryptionAlgorithmIdentifier ::= AlgorithmIdentifier
+        *
+        * EncryptedData ::= OCTET STRING
+        *
+        * --
+        *  AlgorithmIdentifier  ::= SEQUENCE {
+        *	algorithm  OBJECT IDENTIFIER,
+        *	parameters ANY DEFINED BY algorithm OPTIONAL
+        * }
+        *
+        * -- from PKCS#5
+        * PBEParameter ::= SEQUENCE {
+        *	salt OCTET STRING SIZE(8),
+        *	iterationCount INTEGER
+        * }
+        */
         public class EncryptedPrivateKeyInfo
         {
             private string _algorithm;

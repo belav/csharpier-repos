@@ -7834,7 +7834,8 @@ Path '', line 1, position 1."
                 };
 
             //MemoryStream ms = new MemoryStream();
-            //DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataContractSerializationAttributesClass));
+            //DataContractJsonSerializer serializer = new
+            // DataContractJsonSerializer(typeof(DataContractSerializationAttributesClass));
             //serializer.WriteObject(ms, dataContract);
 
             //Console.WriteLine(Encoding.UTF8.GetString(ms.ToArray()));
@@ -8963,7 +8964,8 @@ This is just junk, though.";
 
             //
             // Case 1: Serialize the concrete value and restore it from the interface
-            // Therefore we need dynamic handling of type information if the type is not serialized with the type converter directly
+            // Therefore we need dynamic handling of type information if the type is not serialized with the
+            // type converter directly
             //
             var text1 = JsonConvert.SerializeObject(consoleWriter, Formatting.Indented, options);
             Assert.AreEqual(@"""Console Writer""", text1);
@@ -8973,7 +8975,8 @@ This is just junk, though.";
 
             //
             // Case 2: Serialize a dictionary where the interface is the key
-            // The key is always serialized with its ToString() method and therefore needs a mechanism to be restored from that (using the type converter)
+            // The key is always serialized with its ToString() method and therefore needs a mechanism to be
+            // restored from that (using the type converter)
             //
             var dict2 = new Dictionary<IMyInterface, string>();
             dict2.Add(consoleWriter, "Console");
@@ -8994,7 +8997,8 @@ This is just junk, though.";
 
             //
             // Case 3 Serialize a dictionary where the interface is the value
-            // The key is always serialized with its ToString() method and therefore needs a mechanism to be restored from that (using the type converter)
+            // The key is always serialized with its ToString() method and therefore needs a mechanism to be
+            // restored from that (using the type converter)
             //
             var dict3 = new Dictionary<string, IMyInterface>();
             dict3.Add("Console", consoleWriter);

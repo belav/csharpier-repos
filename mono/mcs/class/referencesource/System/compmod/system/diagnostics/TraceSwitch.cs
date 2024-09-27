@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Diagnostics
 {
@@ -22,7 +22,8 @@ namespace System.Diagnostics
     public class TraceSwitch : Switch
     {
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceSwitch'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceSwitch'/>
+        // class.</para>
         /// </devdoc>
         public TraceSwitch(string displayName, string description)
             : base(displayName, description) { }

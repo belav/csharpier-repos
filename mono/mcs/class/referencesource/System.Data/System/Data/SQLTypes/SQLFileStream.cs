@@ -436,8 +436,10 @@ namespace System.Data.SqlTypes
         static private readonly char[] InvalidPathChars = Path.GetInvalidPathChars();
 
         // path length limitations:
-        // 1. path length storage (in bytes) in UNICODE_STRING is limited to UInt16.MaxValue bytes = Int16.MaxValue chars
-        // 2. GetFullPathName API of kernel32 does not accept paths with length (in chars) greater than 32766
+        // 1. path length storage (in bytes) in UNICODE_STRING is limited to UInt16.MaxValue bytes =
+        // Int16.MaxValue chars
+        // 2. GetFullPathName API of kernel32 does not accept paths with length (in chars) greater than
+        // 32766
         //    (32766 is actually Int16.MaxValue - 1, while (-1) is for NULL termination)
         // We must check for the lowest value between the the two
         private const int MaxWin32PathLength = Int16.MaxValue - 1;
@@ -509,8 +511,10 @@ namespace System.Data.SqlTypes
                 "GetFullPathName returns path longer than max expected!"
             );
 
-            // CONSIDER: is this a precondition validation that can be done above? Or must the path be normalized first?
-            // after normalization, we have to ensure that the path does not attempt to refer to a root device, etc.
+            // CONSIDER: is this a precondition validation that can be done above? Or must the path be
+            // normalized first?
+            // after normalization, we have to ensure that the path does not attempt to refer to a root device,
+            // etc.
             if (path.StartsWith(@"\\.\", StringComparison.Ordinal))
             {
                 throw ADP.Argument(
@@ -563,16 +567,22 @@ namespace System.Data.SqlTypes
 
             if (pathTooLong)
             {
-                // SQLBUVSTS bugs 192677 and 203422: currently, FileIOPermission does not support path longer than MAX_PATH (260)
+                // SQLBUVSTS bugs 192677 and 203422: currently, FileIOPermission does not support path longer than
+                // MAX_PATH (260)
                 // so we cannot demand permissions for long files. We are going to open bug for FileIOPermission to
                 // support this.
 
-                // In the meanwhile, we agreed to have try-catch block on the permission demand instead of checking the path length.
-                // This way, if/when the 260-chars limitation is fixed in FileIOPermission, we will not need to change our code
+                // In the meanwhile, we agreed to have try-catch block on the permission demand instead of checking
+                // the path length.
+                // This way, if/when the 260-chars limitation is fixed in FileIOPermission, we will not need to
+                // change our code
 
-                // since we do not want to relax security checks, we have to demand this permission for AllFiles in order to continue!
-                // Note: demand for AllFiles will fail in scenarios where the running code does not have this permission (such as ASP.Net)
-                // and the only workaround will be reducing the total path length, which means reducing the length of SqlFileStream path
+                // since we do not want to relax security checks, we have to demand this permission for AllFiles in
+                // order to continue!
+                // Note: demand for AllFiles will fail in scenarios where the running code does not have this
+                // permission (such as ASP.Net)
+                // and the only workaround will be reducing the total path length, which means reducing the length
+                // of SqlFileStream path
                 // components, such as instance name, table name, etc.. to fit into 260 characters
                 filePerm = new FileIOPermission(PermissionState.Unrestricted);
                 filePerm.AllFiles = demandPermissions;
@@ -817,7 +827,8 @@ namespace System.Data.SqlTypes
                 }
 
                 // if the user is opening the SQL FileStream in read/write mode, we assume that they want to scan
-                //   through current data and then append new data to the end, so we need to tell SQL Server to preserve
+                //   through current data and then append new data to the end, so we need to tell SQL Server to
+                // preserve
                 //   the existing file contents.
                 if (access == System.IO.FileAccess.ReadWrite)
                 {
@@ -918,7 +929,8 @@ namespace System.Data.SqlTypes
         #region private helper methods
 
         // This method exists to ensure that the requested path name is unique so that SMB/DNS is prevented
-        //   from collapsing a file open request to a file handle opened previously. In the SQL FILESTREAM case,
+        //   from collapsing a file open request to a file handle opened previously. In the SQL FILESTREAM
+        // case,
         //   this would likely be a file open in another transaction, so this mechanism ensures isolation.
         static private string InitializeNtPath(string path)
         {

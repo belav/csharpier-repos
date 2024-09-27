@@ -132,25 +132,25 @@ namespace System.Web.Services.Protocols
             get { return outHeaderMappings; }
         }
 
-        /*
-         * WSE3 does not require access to Extension data
-         *
-        public SoapReflectedExtension[] Extensions
-        {
-            get
-            {
-                return extensions;
-            }
-        }
+/*
+* WSE3 does not require access to Extension data
+*
+public SoapReflectedExtension[] Extensions
+{
+get
+{
+return extensions;
+}
+}
 
-        public object[] ExtensionInitializers
-        {
-            get
-            {
-                return extensionInitializers;
-            }
-        }
-        */
+public object[] ExtensionInitializers
+{
+get
+{
+return extensionInitializers;
+}
+}
+*/
 
         public string Action
         {

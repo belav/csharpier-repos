@@ -13,13 +13,13 @@ using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * ControlAdapter Interface.
-     * A control adapter handles all of the (potentially) device specific
-     * functionality for a mobile control.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* ControlAdapter Interface.
+* A control adapter handles all of the (potentially) device specific
+* functionality for a mobile control.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -56,13 +56,16 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.OnUnload"]/*' />
         void OnUnload(EventArgs e);
 
-        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.CreateTemplatedUI"]/*' />
+        /// <include file='doc\IControlAdapter.uex'
+        // path='docs/doc[@for="IControlAdapter.CreateTemplatedUI"]/*' />
         void CreateTemplatedUI(bool doDataBind);
 
-        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.HandlePostBackEvent"]/*' />
+        /// <include file='doc\IControlAdapter.uex'
+        // path='docs/doc[@for="IControlAdapter.HandlePostBackEvent"]/*' />
         bool HandlePostBackEvent(String eventArgument);
 
-        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.LoadPostData"]/*' />
+        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.LoadPostData"]/*'
+        // />
 
         // used by controls that implement IPostBackDataHandler to handle
         // situations where the post data is interpreted based upon generating
@@ -75,14 +78,17 @@ namespace System.Web.UI.MobileControls
             out bool dataChanged
         );
 
-        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.LoadAdapterState"]/*' />
+        /// <include file='doc\IControlAdapter.uex'
+        // path='docs/doc[@for="IControlAdapter.LoadAdapterState"]/*' />
 
         void LoadAdapterState(Object state);
 
-        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.SaveAdapterState"]/*' />
+        /// <include file='doc\IControlAdapter.uex'
+        // path='docs/doc[@for="IControlAdapter.SaveAdapterState"]/*' />
         Object SaveAdapterState();
 
-        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.VisibleWeight"]/*' />
+        /// <include file='doc\IControlAdapter.uex' path='docs/doc[@for="IControlAdapter.VisibleWeight"]/*'
+        // />
 
         int VisibleWeight { get; }
 

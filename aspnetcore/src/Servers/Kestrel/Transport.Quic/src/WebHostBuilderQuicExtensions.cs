@@ -9,7 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Hosting;
 
 /// <summary>
-/// <see cref="IWebHostBuilder" /> extension methods to configure the Quic transport to be used by Kestrel.
+/// <see cref="IWebHostBuilder" /> extension methods to configure the Quic transport to be used by
+// Kestrel.
 /// </summary>
 public static class WebHostBuilderQuicExtensions
 {

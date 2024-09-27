@@ -143,7 +143,8 @@ internal sealed class TryParseModelBinder : IModelBinder
 
         // var tempSourceString = valueProviderResult.FirstValue;
         // object model = null;
-        // if ([modeltype].TryParse(tempSourceString, [valueProviderResult.Culture,] out [modelType] parsedValue))
+        // if ([modeltype].TryParse(tempSourceString, [valueProviderResult.Culture,] out [modelType]
+        // parsedValue))
         // {
         //     model = (object)parsedValue;
         //     bindingContext.Result = ModelBindingResult.Success(model);

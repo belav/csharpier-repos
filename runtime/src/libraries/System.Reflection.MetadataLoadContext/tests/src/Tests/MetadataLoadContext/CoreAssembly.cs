@@ -56,7 +56,8 @@ namespace System.Reflection.Tests
                 )
             )
             {
-                // This is a sanity check to ensure that "TestData.s_PhonyCoreAssemblyFullName" is actually the def-name of this
+                // This is a sanity check to ensure that "TestData.s_PhonyCoreAssemblyFullName" is actually the
+                // def-name of this
                 // assembly. It better be since we told our MetadataLoadContext to use it as our core assembly.
                 Assembly aAgain = lc.LoadFromAssemblyName(TestData.s_PhonyCoreAssemblyFullName);
 
@@ -66,9 +67,12 @@ namespace System.Reflection.Tests
                     ignoreCase: false
                 );
 
-                // Calling BaseType causes the MetadataLoadContext to parse the typespec "Base<object>". Since "object" is a primitive
-                // type, it should be encoded using the short-form "ELEMENT_TYPE_OBJECT." Hence, the MetadataLoadContext is forced
-                // to look up "System.Object" in the core assembly we assigned to it, which in this case is "PhonyCoreAssembly"
+                // Calling BaseType causes the MetadataLoadContext to parse the typespec "Base<object>". Since
+                // "object" is a primitive
+                // type, it should be encoded using the short-form "ELEMENT_TYPE_OBJECT." Hence, the
+                // MetadataLoadContext is forced
+                // to look up "System.Object" in the core assembly we assigned to it, which in this case is
+                // "PhonyCoreAssembly"
                 // which type-forwards System.Object to "mscorlib".
                 Type baseType = derived.BaseType;
 

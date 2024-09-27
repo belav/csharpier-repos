@@ -358,7 +358,8 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 if (e.ErrorCode == unchecked((int)0x8007203a))
                 {
-                    // server is down , so try again with force rediscovery if the flags did not already contain force rediscovery
+                    // server is down , so try again with force rediscovery if the flags did not already contain force
+                    // rediscovery
                     if ((flag & LocatorOptions.ForceRediscovery) == 0)
                     {
                         retry = true;
@@ -512,7 +513,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     null
                 );
             }
-            // this can only occur when flag is being explicitly passed (since the flags that we pass internally are valid)
+            // this can only occur when flag is being explicitly passed (since the flags that we pass internally
+            // are valid)
             if (errorCode == NativeMethods.ERROR_INVALID_FLAGS)
             {
                 throw new ArgumentException(SR.InvalidFlags, nameof(flag));

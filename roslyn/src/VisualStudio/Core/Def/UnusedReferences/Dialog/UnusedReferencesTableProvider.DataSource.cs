@@ -143,7 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                             content = ReferenceUpdate.ReferenceInfo.ReferenceType;
                             break;
                         case UnusedReferencesTableKeyNames.ReferenceName:
-                            // For Project and Assembly references, use the file name instead of overwhelming the user with the full path.
+                            // For Project and Assembly references, use the file name instead of overwhelming the user with the
+                            // full path.
                             content =
                                 ReferenceUpdate.ReferenceInfo.ReferenceType != ReferenceType.Package
                                     ? Path.GetFileName(

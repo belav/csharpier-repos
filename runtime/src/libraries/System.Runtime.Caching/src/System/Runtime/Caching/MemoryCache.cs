@@ -395,8 +395,10 @@ namespace System.Runtime.Caching
             Init(config);
         }
 
-        // ignoreConfigSection is used when redirecting ASP.NET cache into the MemoryCache.  This avoids infinite recursion
-        // due to the fact that the (ASP.NET) config system uses the cache, and the cache uses the config system.
+        // ignoreConfigSection is used when redirecting ASP.NET cache into the MemoryCache.  This avoids
+        // infinite recursion
+        // due to the fact that the (ASP.NET) config system uses the cache, and the cache uses the config
+        // system.
         public MemoryCache(string name, NameValueCollection config, bool ignoreConfigSection)
         {
             if (name is null)

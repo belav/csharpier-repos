@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         // target assembly of a namespace import (C#, Portable)
         public readonly IAssemblySymbolInternal? TargetAssembly;
 
-        // target assembly of a namespace import is identified by an extern alias which needs to be bound in the context (C#, native PDB)
+        // target assembly of a namespace import is identified by an extern alias which needs to be bound in
+        // the context (C#, native PDB)
         public readonly string? TargetAssemblyAlias;
 
         public ImportRecord(

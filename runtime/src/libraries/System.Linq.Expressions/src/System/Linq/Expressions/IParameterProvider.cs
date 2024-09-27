@@ -12,7 +12,8 @@ namespace System.Linq.Expressions
         /// Gets the parameter expression with the specified <paramref name="index"/>.
         /// </summary>
         /// <param name="index">The index of the argument expression to get.</param>
-        /// <returns>The expression representing the parameter at the specified <paramref name="index"/>.</returns>
+        /// <returns>The expression representing the parameter at the specified <paramref
+        // name="index"/>.</returns>
         ParameterExpression GetParameter(int index);
 
         /// <summary>

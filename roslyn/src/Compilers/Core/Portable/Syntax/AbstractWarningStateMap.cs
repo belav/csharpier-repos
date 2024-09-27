@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Syntax
         }
 
         /// <summary>
-        /// Struct that represents an entry in the warning state map. Sorts by position in the associated syntax tree.
+        /// Struct that represents an entry in the warning state map. Sorts by position in the associated
+        // syntax tree.
         /// </summary>
         protected readonly struct WarningStateMapEntry : IComparable<WarningStateMapEntry>
         {
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Syntax
             // the general option applicable to all warnings, accumulated of all #pragma up to the current Line.
             public readonly TWarningState GeneralWarningOption;
 
-            // the mapping of the specific warning to the option, accumulated of all #pragma up to the current Line.
+            // the mapping of the specific warning to the option, accumulated of all #pragma up to the current
+            // Line.
             public readonly ImmutableDictionary<string, TWarningState> SpecificWarningOption;
 
             public WarningStateMapEntry(int position)

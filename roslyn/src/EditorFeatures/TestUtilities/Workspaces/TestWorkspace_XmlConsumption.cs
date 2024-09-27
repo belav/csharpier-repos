@@ -40,8 +40,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     public partial class TestWorkspace
     {
         /// <summary>
-        /// This place-holder value is used to set a project's file path to be null.  It was explicitly chosen to be
-        /// convoluted to avoid any accidental usage (e.g., what if I really wanted FilePath to be the string "null"?),
+        /// This place-holder value is used to set a project's file path to be null.  It was explicitly
+        // chosen to be
+        /// convoluted to avoid any accidental usage (e.g., what if I really wanted FilePath to be the
+        // string "null"?),
         /// obvious to anybody debugging that it is a special value, and invalid as an actual file path.
         /// </summary>
         public const string NullFilePath = "NullFilePath::{AFA13775-BB7D-4020-9E58-C68CF43D8A68}";
@@ -1069,8 +1071,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             if (isMarkup)
             {
-                // if the caller doesn't want us caring about positions, then replace any $'s with a character unlikely
-                // to ever show up in the doc naturally.  Then, after we convert things, change that character back. We
+                // if the caller doesn't want us caring about positions, then replace any $'s with a character
+                // unlikely
+                // to ever show up in the doc naturally.  Then, after we convert things, change that character back.
+                // We
                 // do this as a single character so that all the positions of the spans do not change.
                 if ((string)markupAttribute == "SpansOnly")
                     markupCode = markupCode.Replace("$", "\uD7FF");
@@ -1082,8 +1086,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     out spans
                 );
 
-                // if we were told SpansOnly then that means that $$ isn't actually a caret (but is something like a raw
-                // interpolated string delimiter.  In that case, if we did see a $$ add it back it at the location we
+                // if we were told SpansOnly then that means that $$ isn't actually a caret (but is something like a
+                // raw
+                // interpolated string delimiter.  In that case, if we did see a $$ add it back it at the location
+                // we
                 // found it, and set the cursor back to null as the test will be specifying that location manually
                 // itself.
                 if ((string)markupAttribute == "SpansOnly")
@@ -1354,8 +1360,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             foreach (var reference in element.Elements(MetadataReferenceElementName))
             {
                 // Read the image to an ImmutableArray<byte>, since the GC does a better job of tracking these than
-                // Marshal.AllocHGlobal and thus knowing when it's necessary to run finalizers to clean up old Metadata
-                // objects that are no longer in use. There are no public APIs available to directly dispose of these
+                // Marshal.AllocHGlobal and thus knowing when it's necessary to run finalizers to clean up old
+                // Metadata
+                // objects that are no longer in use. There are no public APIs available to directly dispose of
+                // these
                 // images, so we are relying on GC running finalizers to avoid OutOfMemoryException during tests.
                 var content = File.ReadAllBytes(reference.Value);
                 references.Add(

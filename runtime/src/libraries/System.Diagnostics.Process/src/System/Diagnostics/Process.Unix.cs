@@ -172,7 +172,8 @@ namespace System.Diagnostics
         /// <summary>Additional configuration when a process ID is set.</summary>
         partial void ConfigureAfterProcessIdSet()
         {
-            // Make sure that we configure the wait state holder for this process object, which we can only do once we have a process ID.
+            // Make sure that we configure the wait state holder for this process object, which we can only do
+            // once we have a process ID.
             Debug.Assert(
                 _haveProcessId,
                 $"{nameof(ConfigureAfterProcessIdSet)} should only be called once a process ID is set"
@@ -224,7 +225,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Instructs the Process component to wait the specified number of milliseconds for the associated process to exit.
+        /// Instructs the Process component to wait the specified number of milliseconds for the associated
+        // process to exit.
         /// </summary>
         private bool WaitForExitCore(int milliseconds)
         {
@@ -456,7 +458,8 @@ namespace System.Diagnostics
             // .NET applications don't echo characters unless there is a Console.Read operation.
             // Unix applications expect the terminal to be in an echoing state by default.
             // To support processes that interact with the terminal (e.g. 'vi'), we need to configure the
-            // terminal to echo. We keep this configuration as long as there are children possibly using the terminal.
+            // terminal to echo. We keep this configuration as long as there are children possibly using the
+            // terminal.
             bool usesTerminal = !(
                 startInfo.RedirectStandardInput
                 && startInfo.RedirectStandardOutput
@@ -710,7 +713,8 @@ namespace System.Diagnostics
         /// <summary>Size to use for redirect streams and stream readers/writers.</summary>
         private const int StreamBufferSize = 4096;
 
-        /// <summary>Converts the filename and arguments information from a ProcessStartInfo into an argv array.</summary>
+        /// <summary>Converts the filename and arguments information from a ProcessStartInfo into an argv
+        // array.</summary>
         /// <param name="psi">The ProcessStartInfo.</param>
         /// <param name="resolvedExe">Resolved executable to open ProcessStartInfo.FileName</param>
         /// <param name="ignoreArguments">Don't pass ProcessStartInfo.Arguments</param>
@@ -757,7 +761,8 @@ namespace System.Diagnostics
             return argvList.ToArray();
         }
 
-        /// <summary>Converts the environment variables information from a ProcessStartInfo into an envp array.</summary>
+        /// <summary>Converts the environment variables information from a ProcessStartInfo into an envp
+        // array.</summary>
         /// <param name="psi">The ProcessStartInfo.</param>
         /// <returns>The envp array.</returns>
         private static string[] CreateEnvp(ProcessStartInfo psi)
@@ -800,7 +805,8 @@ namespace System.Diagnostics
             else
             {
                 // The WorkingDirectory property specifies the location of the executable.
-                // If WorkingDirectory is an empty string, the current directory is understood to contain the executable.
+                // If WorkingDirectory is an empty string, the current directory is understood to contain the
+                // executable.
                 workingDirectory =
                     workingDirectory != null
                         ? Path.GetFullPath(workingDirectory)
@@ -991,7 +997,8 @@ namespace System.Diagnostics
             return TimeSpan.FromSeconds(ticks / (double)ticksPerSecond);
         }
 
-        /// <summary>Opens a stream around the specified file descriptor and with the specified access.</summary>
+        /// <summary>Opens a stream around the specified file descriptor and with the specified
+        // access.</summary>
         /// <param name="fd">The file descriptor.</param>
         /// <param name="direction">The pipe direction.</param>
         /// <returns>The opened stream.</returns>
@@ -1151,7 +1158,8 @@ namespace System.Diagnostics
         {
             Interop.Sys.Passwd? passwd;
             // First try with a buffer that should suffice for 99% of cases.
-            // Note: on CentOS/RedHat 7.1 systems, getpwnam_r returns 'user not found' if the buffer is too small
+            // Note: on CentOS/RedHat 7.1 systems, getpwnam_r returns 'user not found' if the buffer is too
+            // small
             // see https://bugs.centos.org/view.php?id=7324
             const int BufLen = Interop.Sys.Passwd.InitialBufferSize;
             byte* stackBuf = stackalloc byte[BufLen];

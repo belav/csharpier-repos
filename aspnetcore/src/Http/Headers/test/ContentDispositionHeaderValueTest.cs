@@ -23,7 +23,8 @@ public class ContentDispositionHeaderValueTest
     [Fact]
     public void Ctor_ContentDispositionInvalidFormat_ThrowFormatException()
     {
-        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are allowed.
+        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are
+        // allowed.
         AssertFormatException(" inline ");
         AssertFormatException(" inline");
         AssertFormatException("inline ");
@@ -477,7 +478,8 @@ public class ContentDispositionHeaderValueTest
         CheckValidParse("\r\n inline  ", expected);
         CheckValidParse("inline", expected);
 
-        // We don't have to test all possible input strings, since most of the pieces are handled by other parsers.
+        // We don't have to test all possible input strings, since most of the pieces are handled by other
+        // parsers.
         // The purpose of this test is to verify that these other parsers are combined correctly to build a
         // Content-Disposition parser.
         expected.Name = "myName";
@@ -516,7 +518,8 @@ public class ContentDispositionHeaderValueTest
         CheckValidTryParse("\r\n inline  ", expected);
         CheckValidTryParse("inline", expected);
 
-        // We don't have to test all possible input strings, since most of the pieces are handled by other parsers.
+        // We don't have to test all possible input strings, since most of the pieces are handled by other
+        // parsers.
         // The purpose of this test is to verify that these other parsers are combined correctly to build a
         // Content-Disposition parser.
         expected.Name = "myName";
@@ -835,11 +838,14 @@ public class ContentDispositionHeaderValueTest
     [InlineData(@"""attachment""")] // @"'attachment' only, using double quotes", false) },
     [InlineData(@"attachment; filename=foo bar.html")] // @"'attachment', specifying a filename of foo bar.html without using quoting.", false) },
     // Duplicate file name parameter
-    // @"attachment; filename=""foo.html""; // filename=""bar.html""", @"'attachment', specifying two filename parameters. This is invalid syntax.", false) },
+    // @"attachment; filename=""foo.html""; // filename=""bar.html""", @"'attachment', specifying two
+    // filename parameters. This is invalid syntax.", false) },
     [InlineData(@"attachment; filename=foo[1](2).html")] // @"'attachment', specifying a filename of foo[1](2).html, but missing the quotes. Also, ""["", ""]"", ""("" and "")"" are not allowed in the HTTP <a href=""http://greenbytes.de/tech/webdav/draft-ietf-httpbis-p1-messaging-latest.html#rfc.section.1.2.2"">token</a> production.", false) },
     [InlineData(@"attachment; filename=foo-ä.html")] // @"'attachment', specifying a filename of foo-ä.html, but missing the quotes.", false) },
     // HTML escaping, not supported
-    // @"attachment; filename=foo-&#xc3;&#xa4;.html", // "'attachment', specifying a filename of foo-&#xc3;&#xa4;.html (which happens to be foo-ä.html using UTF-8 encoding) but missing the quotes.", false) },
+    // @"attachment; filename=foo-&#xc3;&#xa4;.html", // "'attachment', specifying a filename of
+    // foo-&#xc3;&#xa4;.html (which happens to be foo-ä.html using UTF-8 encoding) but missing the
+    // quotes.", false) },
     [InlineData(@"filename=foo.html")] // @"Disposition type missing, filename specified.", false) },
     [InlineData(@"x=y; filename=foo.html")] // @"Disposition type missing, filename specified after extension parameter.", false) },
     [InlineData(@"""foo; filename=bar;baz""; filename=qux")] // @"Disposition type missing, filename ""qux"". Can it be more broken? (Probably)", false) },
@@ -855,11 +861,14 @@ public class ContentDispositionHeaderValueTest
     [InlineData(@"attachment; filename=foo.html, attachment; filename=bar.html")] // @"'attachment', two comma-separated instances of the header field. As Content-Disposition doesn't use a list-style syntax, this is invalid syntax and, according to <a href=""http://greenbytes.de/tech/webdav/rfc2616.html#rfc.section.4.2.p.5"">RFC 2616, Section 4.2</a>, roughly equivalent to having two separate header field instances.", false) },
     [InlineData(@"filename=foo.html; attachment")] // @"filename parameter and disposition type reversed.", false) },
     // Escaping is not verified
-    // @"attachment; filename*=iso-8859-1''foo-%c3%a4-%e2%82%ac.html", // @"'attachment', specifying a filename of foo-ä-&#x20ac;.html, using RFC2231 encoded UTF-8, but declaring ISO-8859-1", false) },
+    // @"attachment; filename*=iso-8859-1''foo-%c3%a4-%e2%82%ac.html", // @"'attachment', specifying a
+    // filename of foo-ä-&#x20ac;.html, using RFC2231 encoded UTF-8, but declaring ISO-8859-1", false) },
     // Escaping is not verified
-    // @"attachment; filename *=UTF-8''foo-%c3%a4.html", // @"'attachment', specifying a filename of foo-ä.html, using RFC2231 encoded UTF-8, with whitespace before ""*=""", false) },
+    // @"attachment; filename *=UTF-8''foo-%c3%a4.html", // @"'attachment', specifying a filename of
+    // foo-ä.html, using RFC2231 encoded UTF-8, with whitespace before ""*=""", false) },
     // Escaping is not verified
-    // @"attachment; filename*=""UTF-8''foo-%c3%a4.html""", // @"'attachment', specifying a filename of foo-ä.html, using RFC2231 encoded UTF-8, with double quotes around the parameter value.", false) },
+    // @"attachment; filename*=""UTF-8''foo-%c3%a4.html""", // @"'attachment', specifying a filename of
+    // foo-ä.html, using RFC2231 encoded UTF-8, with double quotes around the parameter value.", false) },
     [InlineData(@"attachment; filename==?ISO-8859-1?Q?foo-=E4.html?=")] // @"Uses RFC 2047 style encoded word. ""="" is invalid inside the token production, so this is invalid.", false) },
     [InlineData(@"attachment; filename==?utf-8?B?Zm9vLeQuaHRtbA==?=")] // @"Uses RFC 2047 style encoded word. ""="" is invalid inside the token production, so this is invalid.", false) },
     public void ContentDispositionHeaderValue_ParseInvalid_Throws(string input)

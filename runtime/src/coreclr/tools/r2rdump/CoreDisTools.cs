@@ -198,11 +198,13 @@ namespace R2RDump
             }
             else
             {
-                // The length of the byte dump starting with the first hexadecimal digit and ending with the final space
+                // The length of the byte dump starting with the first hexadecimal digit and ending with the final
+                // space
                 int byteDumpLength = _reader.Machine switch
                 {
                     // Most instructions are no longer than 7 bytes. CorDisasm::dumpInstruction always pads byte dumps
-                    // to 7 * 3 characters; see https://github.com/dotnet/llilc/blob/master/lib/CoreDisTools/coredistools.cpp.
+                    // to 7 * 3 characters; see
+                    // https://github.com/dotnet/llilc/blob/master/lib/CoreDisTools/coredistools.cpp.
                     Machine.I386 => 7 * 3,
                     Machine.Amd64 => 7 * 3,
 
@@ -246,7 +248,8 @@ namespace R2RDump
         /// <param name="imageOffset">Offset within the PE image byte array</param>
         /// <param name="rtfOffset">Instruction offset within the runtime function</param>
         /// <param name="instruction">Output text representation of the instruction</param>
-        /// <returns>Instruction size in bytes - i.o.w. the next instruction starts at rtfOffset + (the return value)</returns>
+        /// <returns>Instruction size in bytes - i.o.w. the next instruction starts at rtfOffset + (the
+        // return value)</returns>
         public int GetInstruction(
             RuntimeFunction rtf,
             int imageOffset,
@@ -273,7 +276,8 @@ namespace R2RDump
             //
             //      address: bytes [padding] \t mnemonic [\t operands] \n
             //
-            // However, due to an LLVM issue regarding instruction prefixes (https://bugs.llvm.org/show_bug.cgi?id=7709),
+            // However, due to an LLVM issue regarding instruction prefixes
+            // (https://bugs.llvm.org/show_bug.cgi?id=7709),
             // multiple lines may be returned for a single x86/x64 instruction.
 
             var builder = new StringBuilder();
@@ -522,7 +526,8 @@ namespace R2RDump
         }
 
         /// <summary>
-        /// X86 disassembler has a bug in decoding absolute indirections, mistaking them for RIP-relative indirections
+        /// X86 disassembler has a bug in decoding absolute indirections, mistaking them for RIP-relative
+        // indirections
         /// </summary>
         /// <param name="rtf">Runtime function</param>
         /// <param name="imageOffset">Offset within the image byte array</param>
@@ -1394,7 +1399,8 @@ namespace R2RDump
         }
 
         /// <summary>
-        /// Determine whether a given instruction is an LDR immediate 64-bit with the zero offset, e.g., <c>ldr x12, [x12]</c>.
+        /// Determine whether a given instruction is an LDR immediate 64-bit with the zero offset, e.g.,
+        // <c>ldr x12, [x12]</c>.
         /// </summary>
         /// <param name="imageOffset">Offset within the PE image byte array.</param>
         private bool IsArm64LdrImmediate64ZeroOffsetInstruction(

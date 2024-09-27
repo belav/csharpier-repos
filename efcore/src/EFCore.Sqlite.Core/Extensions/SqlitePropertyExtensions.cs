@@ -10,8 +10,10 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Extension methods for <see cref="IProperty" /> for SQLite metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see>, and
+///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+// for more information and examples.
 /// </remarks>
 public static class SqlitePropertyExtensions
 {
@@ -56,7 +58,8 @@ public static class SqlitePropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="value">The SRID.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     public static int? SetSrid(
         this IConventionProperty property,
         int? value,

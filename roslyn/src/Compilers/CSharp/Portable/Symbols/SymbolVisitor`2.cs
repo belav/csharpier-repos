@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal abstract class CSharpSymbolVisitor<TArgument, TResult>
     {
         /// <summary>
-        /// Call the correct VisitXXX method in this class based on the particular type of symbol that is passed in.
+        /// Call the correct VisitXXX method in this class based on the particular type of symbol that is
+        // passed in.
         /// Return default(TResult) if symbol is null
         /// </summary>
         public virtual TResult Visit(Symbol symbol, TArgument argument = default(TArgument))

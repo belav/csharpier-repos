@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     A <see cref="DiagnosticSource" /> event payload used when a <see cref="DbUpdateConcurrencyException" /> is being thrown.
+///     A <see cref="DiagnosticSource" /> event payload used when a <see
+// cref="DbUpdateConcurrencyException" /> is being thrown.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public class ConcurrencyExceptionEventData : DbContextErrorEventData
 {
@@ -23,7 +25,8 @@ public class ConcurrencyExceptionEventData : DbContextErrorEventData
     /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
     /// <param name="context">The current <see cref="DbContext" />.</param>
     /// <param name="entries">The entries that were involved in the concurrency violation.</param>
-    /// <param name="exception">The exception that will be thrown, unless throwing is suppressed.</param>
+    /// <param name="exception">The exception that will be thrown, unless throwing is
+    // suppressed.</param>
     public ConcurrencyExceptionEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,

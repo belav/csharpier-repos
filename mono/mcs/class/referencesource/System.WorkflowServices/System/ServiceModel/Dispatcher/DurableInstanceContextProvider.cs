@@ -397,7 +397,8 @@ namespace System.ServiceModel.Dispatcher
             }
 
             //Helper method to call from GetExistingInstanceContext
-            //returns true  : If InstanceContext is found in cache & guaranteed to stay in cache until ReleaseReference is called.
+            //returns true  : If InstanceContext is found in cache & guaranteed to stay in cache until
+            // ReleaseReference is called.
             //returns false : If InstanceContext is not found in cache;
             //               reference & slot is created for the ID;
             //               InitializeInstanceContext to call AddInstanceContext.

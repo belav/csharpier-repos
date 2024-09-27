@@ -18,8 +18,10 @@ namespace CoreFXTestLibrary.Internal
         public abstract bool IsValueCreated { get; }
     }
 
-    // Factory method used to instatiate the object to help ensure generated code is used instead of default(T) or new T().
-    // Very simple implementation of Lazy<T> here to ensure instance methods only created when they will be used.
+    // Factory method used to instatiate the object to help ensure generated code is used instead of
+    // default(T) or new T().
+    // Very simple implementation of Lazy<T> here to ensure instance methods only created when they will
+    // be used.
     // This Method is not thread safe!!!!!
     public class ClassInfo<T> : ClassInfo
     {

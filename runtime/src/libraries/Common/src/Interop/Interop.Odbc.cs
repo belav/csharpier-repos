@@ -382,7 +382,8 @@ internal static partial class Interop
         );
 
         [LibraryImport(Interop.Libraries.Odbc32)]
-        // user can set SQL_ATTR_CONNECTION_POOLING attribute with envHandle = null, this attribute is process-level attribute
+        // user can set SQL_ATTR_CONNECTION_POOLING attribute with envHandle = null, this attribute is
+        // process-level attribute
         internal static partial ODBC32.SQLRETURN SQLSetEnvAttr(
             /*SQLHENV*/OdbcEnvironmentHandle EnvironmentHandle,
             /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,

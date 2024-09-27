@@ -195,19 +195,29 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
         /// <remarks>
         ///     <list type="bullet">
         ///         <item><description>
-        ///         XmlnsMappings for static assemblies are not GC'd. In v4.0 we can assume that all static assemblies
-        ///         containing XmlnsDefinition attributes are non-collectible. The CLR will provide no public mechanism
-        ///         for unloading a static assembly or specifying that a static assembly is collectible. While there
-        ///         may be some small number of assemblies identified by the CLR as collectible, none will contain
-        ///         XmlnsDefinition attributes. Should the CLR provide a public mechanism for unloading a static assembly
-        ///         or specifying that a static assembly is collectible, we should revisit this decision based on scenarios
+        ///         XmlnsMappings for static assemblies are not GC'd. In v4.0 we can assume that all static
+        // assemblies
+        ///         containing XmlnsDefinition attributes are non-collectible. The CLR will provide no
+        // public mechanism
+        ///         for unloading a static assembly or specifying that a static assembly is collectible.
+        // While there
+        ///         may be some small number of assemblies identified by the CLR as collectible, none will
+        // contain
+        ///         XmlnsDefinition attributes. Should the CLR provide a public mechanism for unloading a
+        // static assembly
+        ///         or specifying that a static assembly is collectible, we should revisit this decision
+        // based on scenarios
         ///         that flow from these mechanisms.
         ///         </description></item>
         ///         <item><description>
-        ///         XmlnsMappings for dynamic assemblies are not created. This is because the hosted Visual Basic compiler
-        ///         does not support dynamic assembly references. Should support for dynamic assembly references be
-        ///         added to the Visual Basic compiler, we should strip away Assembly.IsDynamic checks from this class and
-        ///         update the code ensure that VisualBasicImportReference instances are removed in a timely manner.
+        ///         XmlnsMappings for dynamic assemblies are not created. This is because the hosted Visual
+        // Basic compiler
+        ///         does not support dynamic assembly references. Should support for dynamic assembly
+        // references be
+        ///         added to the Visual Basic compiler, we should strip away Assembly.IsDynamic checks from
+        // this class and
+        ///         update the code ensure that VisualBasicImportReference instances are removed in a timely
+        // manner.
         ///         </description></item>
         ///     </list>
         /// </remarks>
@@ -418,7 +428,8 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 this.wrappedReference = referenceToWrap;
             }
 
-            // If this is ever needed, uncomment this. It is commented out now to avoid FxCop violation because it is not called.
+            // If this is ever needed, uncomment this. It is commented out now to avoid FxCop violation because
+            // it is not called.
             //internal string Assembly
             //{
             //    get
@@ -427,7 +438,8 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
             //    }
             //}
 
-            // If this is ever needed, uncomment this. It is commented out now to avoid FxCop violation because it is not called.
+            // If this is ever needed, uncomment this. It is commented out now to avoid FxCop violation because
+            // it is not called.
             //internal string Import
             //{
             //    get
@@ -486,7 +498,8 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 return this.wrappedReference.GetHashCode();
             }
 
-            // If this is ever needed, uncomment this. It is commented out now to avoid FxCop violation because it is not called.
+            // If this is ever needed, uncomment this. It is commented out now to avoid FxCop violation because
+            // it is not called.
             //public bool Equals(VisualBasicImportReference other)
             //{
             //    return this.wrappedReference.Equals(other);

@@ -26,7 +26,8 @@ namespace System.Collections.Tests
         /// <summary>
         /// Creates an instance of an ICollection{T} that can be used for testing.
         /// </summary>
-        /// <param name="count">The number of unique items that the returned ICollection{T} contains.</param>
+        /// <param name="count">The number of unique items that the returned ICollection{T}
+        // contains.</param>
         /// <returns>An instance of an ICollection{T} that can be used for testing.</returns>
         protected virtual ICollection<T> GenericICollectionFactory(int count)
         {

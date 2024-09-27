@@ -23,7 +23,8 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void CreateCompositionService_ImmutableCatalog_ShouldSucceed()
         {
-            //Create and dispose an empty immutable catalog, I.e no INotifyComposablePartCatalogChanged interface
+            //Create and dispose an empty immutable catalog, I.e no INotifyComposablePartCatalogChanged
+            // interface
             var catalog = new TypeCatalog();
             using (var cs = catalog.CreateCompositionService())
             {

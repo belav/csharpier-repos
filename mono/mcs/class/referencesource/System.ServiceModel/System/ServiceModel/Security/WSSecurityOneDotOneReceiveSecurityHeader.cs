@@ -40,7 +40,8 @@ namespace System.ServiceModel.Security
             WrappedKeySecurityToken wrappedKeyToken
         )
         {
-            // If it is the client, then we may need to read the GenericXmlSecurityKeyIdentoifoer clause while reading EncryptedData.
+            // If it is the client, then we may need to read the GenericXmlSecurityKeyIdentoifoer clause while
+            // reading EncryptedData.
             EncryptedHeaderXml headerXml = new EncryptedHeaderXml(
                 this.Version,
                 this.MessageDirection == MessageDirection.Output

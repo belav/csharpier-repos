@@ -23,7 +23,8 @@ namespace System.Security.Cryptography
             // We should only be calling this in the constructor, so there shouldn't be a previous key.
             Debug.Assert(_key is null);
 
-            // Pin the array on the POH so that the GC doesn't move it around to allow zeroing to be more effective.
+            // Pin the array on the POH so that the GC doesn't move it around to allow zeroing to be more
+            // effective.
             _key = GC.AllocateArray<byte>(key.Length, pinned: true);
             key.CopyTo(_key);
         }

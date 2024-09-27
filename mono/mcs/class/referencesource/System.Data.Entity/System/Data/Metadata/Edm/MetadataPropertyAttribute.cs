@@ -15,7 +15,8 @@ using System.Diagnostics;
 namespace System.Data.Metadata.Edm
 {
     /// <summary>
-    /// Attribute used to mark up properties that should appear in the MetadataItem.MetadataProperties collection
+    /// Attribute used to mark up properties that should appear in the MetadataItem.MetadataProperties
+    // collection
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     internal sealed class MetadataPropertyAttribute : Attribute

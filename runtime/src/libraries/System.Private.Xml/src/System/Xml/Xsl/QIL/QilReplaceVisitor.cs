@@ -46,7 +46,8 @@ namespace System.Xml.Xsl.Qil
                 else
                     newChild = Visit(oldChild!);
 
-                // Only replace child and recalculate type if oldChild != newChild or oldChild.XmlType != newChild.XmlType
+                // Only replace child and recalculate type if oldChild != newChild or oldChild.XmlType !=
+                // newChild.XmlType
                 if (
                     (object?)oldChild != (object)newChild
                     || (newChild != null && (object?)oldChildType != (object?)newChild.XmlType)
@@ -78,7 +79,8 @@ namespace System.Xml.Xsl.Qil
 
             // Note the use of AtMost to account for cases when folding of Error nodes in the graph cause
             // cardinality to be recalculated.
-            // For example, (Sequence (TextCtor (Error "error")) (Int32 1)) => (Sequence (Error "error") (Int32 1))
+            // For example, (Sequence (TextCtor (Error "error")) (Int32 1)) => (Sequence (Error "error") (Int32
+            // 1))
             // In this case, cardinality has gone from More to One
             Debug.Assert(
                 newType.IsSubtypeOf(XmlQueryTypeFactory.AtMost(oldType, oldType.Cardinality)),

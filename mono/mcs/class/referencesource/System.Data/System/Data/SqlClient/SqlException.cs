@@ -90,7 +90,7 @@ namespace System.Data.SqlClient
             get { return this._clientConnectionId; }
         }
 
-        /*virtual protected*/private bool ShouldSerializeErrors()
+/*virtual protected*/private bool ShouldSerializeErrors()
         { // MDAC 65548
             return ((null != _errors) && (0 < _errors.Count));
         }

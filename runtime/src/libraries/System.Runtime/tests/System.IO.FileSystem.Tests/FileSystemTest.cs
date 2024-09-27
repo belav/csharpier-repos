@@ -78,7 +78,8 @@ namespace System.IO.Tests
         /// <summary>
         /// Do a test action against read only file system (for Unix).
         /// </summary>
-        /// <param name="testAction">Test action to perform. The string argument will be read only directory.</param>
+        /// <param name="testAction">Test action to perform. The string argument will be read only
+        // directory.</param>
         /// <param name="subDirectoryName">Optional subdirectory to create.</param>
         protected void ReadOnly_FileSystemHelper(
             Action<string> testAction,
@@ -125,12 +126,15 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Determines whether the file system is case sensitive by creating a file in the specified folder and observing the result.
+        /// Determines whether the file system is case sensitive by creating a file in the specified folder
+        // and observing the result.
         /// </summary>
         /// <remarks>
         /// Ideally we'd use something like pathconf with _PC_CASE_SENSITIVE, but that is non-portable,
-        /// not supported on Windows or Linux, etc. For now, this function creates a tmp file with capital letters
-        /// and then tests for its existence with lower-case letters.  This could return invalid results in corner
+        /// not supported on Windows or Linux, etc. For now, this function creates a tmp file with capital
+        // letters
+        /// and then tests for its existence with lower-case letters.  This could return invalid results in
+        // corner
         /// cases where, for example, different file systems are mounted with differing sensitivities.
         /// </remarks>
         protected static bool GetIsCaseSensitiveByProbing(string probingDirectory)

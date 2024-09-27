@@ -178,18 +178,18 @@ namespace Microsoft.VisualBasic
             else
                 args.Append("/target:library ");
 
-            /* Disabled. It causes problems now. -- Gonzalo
-            if (options.IncludeDebugInformation)
-                args.AppendFormat("/debug ");
-            */
+/* Disabled. It causes problems now. -- Gonzalo
+if (options.IncludeDebugInformation)
+args.AppendFormat("/debug ");
+*/
 
             if (options.TreatWarningsAsErrors)
                 args.Append("/warnaserror ");
 
-            /* Disabled. vbnc does not support warninglevels.
-            if (options.WarningLevel != -1)
-                args.AppendFormat ("/wlevel:{0} ", options.WarningLevel);
-            */
+/* Disabled. vbnc does not support warninglevels.
+if (options.WarningLevel != -1)
+args.AppendFormat ("/wlevel:{0} ", options.WarningLevel);
+*/
 
             if (options.OutputAssembly == null || options.OutputAssembly.Length == 0)
             {
@@ -231,9 +231,9 @@ namespace Microsoft.VisualBasic
                 args.Append(options.CompilerOptions);
                 args.Append(" ");
             }
-            /* Disabled, vbnc does not support this.
-            args.Append (" -- "); // makes vbnc not try to process filenames as options
-            */
+/* Disabled, vbnc does not support this.
+args.Append (" -- "); // makes vbnc not try to process filenames as options
+*/
             foreach (string source in fileNames)
                 args.AppendFormat(" \"{0}\" ", source);
 

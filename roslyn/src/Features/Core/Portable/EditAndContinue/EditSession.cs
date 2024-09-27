@@ -27,12 +27,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal readonly DebuggingSession DebuggingSession;
         internal readonly EditSessionTelemetry Telemetry;
 
-        // Maps active statement instructions reported by the debugger to their latest spans that might not yet have been applied
-        // (remapping not triggered yet). Consumed by the next edit session and updated when changes are committed at the end of the edit session.
+        // Maps active statement instructions reported by the debugger to their latest spans that might not
+        // yet have been applied
+        // (remapping not triggered yet). Consumed by the next edit session and updated when changes are
+        // committed at the end of the edit session.
         //
-        // Consider a function F containing a call to function G. While G is being executed, F is updated a couple of times (in two edit sessions)
-        // before the thread returns from G and is remapped to the latest version of F. At the start of the second edit session,
-        // the active instruction reported by the debugger is still at the original location since function F has not been remapped yet (G has not returned yet).
+        // Consider a function F containing a call to function G. While G is being executed, F is updated a
+        // couple of times (in two edit sessions)
+        // before the thread returns from G and is remapped to the latest version of F. At the start of the
+        // second edit session,
+        // the active instruction reported by the debugger is still at the original location since function
+        // F has not been remapped yet (G has not returned yet).
         //
         // '>' indicates an active statement instruction for non-leaf frame reported by the debugger.
         // v1 - before first edit, G executing
@@ -55,7 +60,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         // 1st break: get active statements returns (F, v=1, il=1, span1) the active statement is up-to-date
         // 1st apply: detected span change for active statement (F, v=1, il=1): span1->span2
         // 2nd break: previously updated statements contains (F, v=1, il=1)->span2
-        //            get active statements returns (F, v=1, il=1, span1) which is mapped to (F, v=1, il=1, span2) using previously updated statements
+        //            get active statements returns (F, v=1, il=1, span1) which is mapped to (F, v=1, il=1,
+        // span2) using previously updated statements
         // 2nd apply: detected span change for active statement (F, v=1, il=1): span2->span3
         // 3rd break: previously updated statements contains (F, v=1, il=1)->span3
         //            get active statements returns (F, v=3, il=3, span3) the active statement is up-to-date
@@ -67,13 +73,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// Gets the capabilities of the runtime with respect to applying code changes.
-        /// Retrieved lazily from <see cref="DebuggingSession.DebuggerService"/> since they are only needed when changes are detected in the solution.
+        /// Retrieved lazily from <see cref="DebuggingSession.DebuggerService"/> since they are only needed
+        // when changes are detected in the solution.
         /// </summary>
         internal readonly AsyncLazy<EditAndContinueCapabilities> Capabilities;
 
         /// <summary>
         /// Map of base active statements.
-        /// Calculated lazily based on info retrieved from <see cref="DebuggingSession.DebuggerService"/> since it is only needed when changes are detected in the solution.
+        /// Calculated lazily based on info retrieved from <see cref="DebuggingSession.DebuggerService"/>
+        // since it is only needed when changes are detected in the solution.
         /// </summary>
         internal readonly AsyncLazy<ActiveStatementsMap> BaseActiveStatements;
 
@@ -90,7 +98,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// A <see cref="DocumentId"/> is added whenever EnC analyzer reports
-        /// rude edits or module diagnostics. At the end of the session we ask the diagnostic analyzer to reanalyze
+        /// rude edits or module diagnostics. At the end of the session we ask the diagnostic analyzer to
+        // reanalyze
         /// the documents to clean up the diagnostics.
         /// </summary>
         private readonly HashSet<DocumentId> _documentsWithReportedDiagnostics = new();
@@ -127,7 +136,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// The compiler has various scenarios that will cause it to synthesize things that might not be covered
+        /// The compiler has various scenarios that will cause it to synthesize things that might not be
+        // covered
         /// by existing rude edits, but we still need to ensure the runtime supports them before we proceed.
         /// </summary>
         private async Task<Diagnostic?> GetUnsupportedChangesDiagnosticAsync(
@@ -149,7 +159,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 .ConfigureAwait(false);
             if (!capabilities.HasFlag(EditAndContinueCapabilities.NewTypeDefinition))
             {
-                // If the runtime doesn't support adding new types then we expect every row number for any type that is
+                // If the runtime doesn't support adding new types then we expect every row number for any type that
+                // is
                 // emitted will be less than or equal to the number of rows in the original metadata.
                 var highestEmittedTypeDefRow = emitResult.ChangedTypes.Max(t =>
                     MetadataTokens.GetRowNumber(t)
@@ -171,7 +182,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// Errors to be reported when a project is updated but the corresponding module does not support EnC.
+        /// Errors to be reported when a project is updated but the corresponding module does not support
+        // EnC.
         /// </summary>
         /// <returns><see langword="default"/> if the module is not loaded.</returns>
         public async Task<ImmutableArray<Diagnostic>?> GetModuleDiagnosticsAsync(
@@ -327,7 +339,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             try
             {
-                // Last committed solution reflects the state of the source that is in sync with the binaries that are loaded in the debuggee.
+                // Last committed solution reflects the state of the source that is in sync with the binaries that
+                // are loaded in the debuggee.
                 var debugInfos = await DebuggingSession
                     .DebuggerService.GetActiveStatementsAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -403,7 +416,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
 
-            // The number of projects in both solution is the same and there are no new projects and no changes in existing projects.
+            // The number of projects in both solution is the same and there are no new projects and no changes
+            // in existing projects.
             // Therefore there are no changes.
             return false;
         }
@@ -414,14 +428,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             CancellationToken cancellationToken
         )
         {
-            // Check if the currently observed document content has changed compared to the base document content.
-            // This is an important optimization that aims to avoid IO while stepping in sources that have not changed.
+            // Check if the currently observed document content has changed compared to the base document
+            // content.
+            // This is an important optimization that aims to avoid IO while stepping in sources that have not
+            // changed.
             //
-            // We may be comparing out-of-date committed document content but we only make a decision based on that content
-            // if it matches the current content. If the current content is equal to baseline content that does not match
-            // the debuggee then the workspace has not observed the change made to the file on disk since baseline was captured
-            // (there had to be one as the content doesn't match). When we are about to apply changes it is ok to ignore this
-            // document because the user does not see the change yet in the buffer (if the doc is open) and won't be confused
+            // We may be comparing out-of-date committed document content but we only make a decision based on
+            // that content
+            // if it matches the current content. If the current content is equal to baseline content that does
+            // not match
+            // the debuggee then the workspace has not observed the change made to the file on disk since
+            // baseline was captured
+            // (there had to be one as the content doesn't match). When we are about to apply changes it is ok
+            // to ignore this
+            // document because the user does not see the change yet in the buffer (if the doc is open) and
+            // won't be confused
             // if it is not applied yet. The change will be applied later after it's observed by the workspace.
             var oldSource = await oldDocument
                 .GetValueTextAsync(cancellationToken)
@@ -552,7 +573,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
 
-            // TODO: should handle removed documents above (detect them as edits) https://github.com/dotnet/roslyn/issues/62848
+            // TODO: should handle removed documents above (detect them as edits)
+            // https://github.com/dotnet/roslyn/issues/62848
             if (
                 newProject
                     .State.DocumentStates.GetRemovedStateIds(oldProject.State.DocumentStates)
@@ -662,7 +684,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// Enumerates <see cref="DocumentId"/>s of changed (not added or removed) <see cref="Document"/>s (not additional nor analyzer config).
+        /// Enumerates <see cref="DocumentId"/>s of changed (not added or removed) <see cref="Document"/>s
+        // (not additional nor analyzer config).
         /// </summary>
         internal static async IAsyncEnumerable<DocumentId> GetChangedDocumentsAsync(
             Project oldProject,
@@ -1112,7 +1135,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 mergedUpdateEditSyntaxMaps.Add(partialTypeEdits.Key, mergedSyntaxMap);
             }
 
-            // Deduplicate edits based on their target symbol and use merged syntax map calculated above for a given partial type.
+            // Deduplicate edits based on their target symbol and use merged syntax map calculated above for a
+            // given partial type.
 
             using var _3 = PooledHashSet<ISymbol>.GetInstance(out var visitedSymbols);
 
@@ -1187,8 +1211,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                         // TODO (https://github.com/dotnet/roslyn/issues/1204):
                         //
-                        // When debugging session is started some projects might not have been loaded to the workspace yet (may be explicitly unloaded by the user).
-                        // We capture the base solution. Edits in files that are in projects that haven't been loaded won't be applied
+                        // When debugging session is started some projects might not have been loaded to the workspace yet
+                        // (may be explicitly unloaded by the user).
+                        // We capture the base solution. Edits in files that are in projects that haven't been loaded won't
+                        // be applied
                         // and will result in source mismatch when the user steps into them.
                         //
                         // We can allow project to be added by including all its documents here.
@@ -1222,9 +1248,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         .ConfigureAwait(false);
                     if (mvidReadError != null)
                     {
-                        // The error hasn't been reported by GetDocumentDiagnosticsAsync since it might have been intermittent.
+                        // The error hasn't been reported by GetDocumentDiagnosticsAsync since it might have been
+                        // intermittent.
                         // The MVID is required for emit so we consider the error permanent and report it here.
-                        // Bail before analyzing documents as the analysis needs to read the PDB which will likely fail if we can't even read the MVID.
+                        // Bail before analyzing documents as the analysis needs to read the PDB which will likely fail if
+                        // we can't even read the MVID.
                         diagnostics.Add(new(newProject.Id, ImmutableArray.Create(mvidReadError)));
 
                         Telemetry.LogProjectAnalysisSummary(
@@ -1242,19 +1270,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         continue;
                     }
 
-                    // Ensure that all changed documents are in-sync. Once a document is in-sync it can't get out-of-sync.
-                    // Therefore, results of further computations based on base snapshots of changed documents can't be invalidated by
+                    // Ensure that all changed documents are in-sync. Once a document is in-sync it can't get
+                    // out-of-sync.
+                    // Therefore, results of further computations based on base snapshots of changed documents can't be
+                    // invalidated by
                     // incoming events updating the content of out-of-sync documents.
                     //
-                    // If in past we concluded that a document is out-of-sync, attempt to check one more time before we block apply.
+                    // If in past we concluded that a document is out-of-sync, attempt to check one more time before we
+                    // block apply.
                     // The source file content might have been updated since the last time we checked.
                     //
                     // TODO (investigate): https://github.com/dotnet/roslyn/issues/38866
-                    // It is possible that the result of Rude Edit semantic analysis of an unchanged document will change if there
-                    // another document is updated. If we encounter a significant case of this we should consider caching such a result per project,
-                    // rather then per document. Also, we might be observing an older semantics if the document that is causing the change is out-of-sync --
-                    // e.g. the binary was built with an overload C.M(object), but a generator updated class C to also contain C.M(string),
-                    // which change we have not observed yet. Then call-sites of C.M in a changed document observed by the analysis will be seen as C.M(object)
+                    // It is possible that the result of Rude Edit semantic analysis of an unchanged document will
+                    // change if there
+                    // another document is updated. If we encounter a significant case of this we should consider
+                    // caching such a result per project,
+                    // rather then per document. Also, we might be observing an older semantics if the document that is
+                    // causing the change is out-of-sync --
+                    // e.g. the binary was built with an overload C.M(object), but a generator updated class C to also
+                    // contain C.M(string),
+                    // which change we have not observed yet. Then call-sites of C.M in a changed document observed by
+                    // the analysis will be seen as C.M(object)
                     // instead of the true C.M(string).
 
                     var (changedDocumentAnalyses, documentDiagnostics) =
@@ -1266,9 +1302,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             .ConfigureAwait(false);
                     if (documentDiagnostics.Any())
                     {
-                        // The diagnostic hasn't been reported by GetDocumentDiagnosticsAsync since out-of-sync documents are likely to be synchronized
-                        // before the changes are attempted to be applied. If we still have any out-of-sync documents we report warnings and ignore changes in them.
-                        // If in future the file is updated so that its content matches the PDB checksum, the document transitions to a matching state,
+                        // The diagnostic hasn't been reported by GetDocumentDiagnosticsAsync since out-of-sync documents
+                        // are likely to be synchronized
+                        // before the changes are attempted to be applied. If we still have any out-of-sync documents we
+                        // report warnings and ignore changes in them.
+                        // If in future the file is updated so that its content matches the PDB checksum, the document
+                        // transitions to a matching state,
                         // and we consider any further changes to it for application.
                         diagnostics.Add(new(newProject.Id, documentDiagnostics));
                     }
@@ -1294,8 +1333,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         continue;
                     }
 
-                    // The capability of a module to apply edits may change during edit session if the user attaches debugger to
-                    // an additional process that doesn't support EnC (or detaches from such process). Before we apply edits
+                    // The capability of a module to apply edits may change during edit session if the user attaches
+                    // debugger to
+                    // an additional process that doesn't support EnC (or detaches from such process). Before we apply
+                    // edits
                     // we need to check with the debugger.
                     var (moduleDiagnostics, isModuleLoaded) = await GetModuleDiagnosticsAsync(
                             mvid,
@@ -1370,8 +1411,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     {
                         Debug.Assert(!createBaselineDiagnostics.IsEmpty);
 
-                        // Report diagnosics even when the module is never going to be loaded (e.g. in multi-targeting scenario, where only one framework being debugged).
-                        // This is consistent with reporting compilation errors - the IDE reports them for all TFMs regardless of what framework the app is running on.
+                        // Report diagnosics even when the module is never going to be loaded (e.g. in multi-targeting
+                        // scenario, where only one framework being debugged).
+                        // This is consistent with reporting compilation errors - the IDE reports them for all TFMs
+                        // regardless of what framework the app is running on.
                         diagnostics.Add(new(newProject.Id, createBaselineDiagnostics));
                         Telemetry.LogProjectAnalysisSummary(
                             projectSummary,
@@ -1456,13 +1499,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     // project must support compilations since it supports EnC
                     Contract.ThrowIfNull(newCompilation);
 
-                    // The compiler only uses this predicate to determine if CS7101: "Member 'X' added during the current debug session
+                    // The compiler only uses this predicate to determine if CS7101: "Member 'X' added during the
+                    // current debug session
                     // can only be accessed from within its declaring assembly 'Lib'" should be reported.
                     // Prior to .NET 8 Preview 4 the runtime failed to apply such edits.
-                    // This was fixed in Preview 4 along with support for generics. If we see a generic capability we can disable reporting
-                    // this compiler error. Otherwise, we leave the check as is in order to detect at least some runtime failures on .NET Framework.
+                    // This was fixed in Preview 4 along with support for generics. If we see a generic capability we
+                    // can disable reporting
+                    // this compiler error. Otherwise, we leave the check as is in order to detect at least some runtime
+                    // failures on .NET Framework.
                     // Note that the analysis in the compiler detecting the circumstances under which the runtime fails
-                    // to apply the change has both false positives (flagged generic updates that shouldn't be flagged) and negatives
+                    // to apply the change has both false positives (flagged generic updates that shouldn't be flagged)
+                    // and negatives
                     // (didn't flag cases like https://github.com/dotnet/roslyn/issues/68293).
                     var capabilities = await Capabilities
                         .GetValueAsync(cancellationToken)
@@ -1476,7 +1523,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     EmitDifferenceResult emitResult;
 
                     // The lock protects underlying baseline readers from being disposed while emitting delta.
-                    // If the lock is disposed at this point the session has been incorrectly disposed while operations on it are in progress.
+                    // If the lock is disposed at this point the session has been incorrectly disposed while operations
+                    // on it are in progress.
                     using (baselineAccessLock.DisposableRead())
                     {
                         DebuggingSession.ThrowIfDisposed();
@@ -1586,9 +1634,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     // TODO: https://github.com/dotnet/roslyn/issues/36061
                     // We should only report diagnostics from emit phase.
                     // Syntax and semantic diagnostics are already reported by the diagnostic analyzer.
-                    // Currently we do not have means to distinguish between diagnostics reported from compilation and emit phases.
+                    // Currently we do not have means to distinguish between diagnostics reported from compilation and
+                    // emit phases.
                     // Querying diagnostics of the entire compilation or just the updated files migth be slow.
-                    // In fact, it is desirable to allow emitting deltas for symbols affected by the change while allowing untouched
+                    // In fact, it is desirable to allow emitting deltas for symbols affected by the change while
+                    // allowing untouched
                     // method bodies to have errors.
                     if (!emitResult.Diagnostics.IsEmpty)
                     {
@@ -1723,7 +1773,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 NonRemappableRegion Region
             )>.GetInstance();
 
-            // Process active statements and their exception regions in changed documents of this project/module:
+            // Process active statements and their exception regions in changed documents of this
+            // project/module:
             foreach (
                 var (
                     oldActiveStatements,
@@ -1766,7 +1817,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         bool isExceptionRegion
                     )
                     {
-                        // TODO: Remove comparer, the path should match exactly. Workaround for https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1830914.
+                        // TODO: Remove comparer, the path should match exactly. Workaround for
+                        // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1830914.
                         Debug.Assert(
                             string.Equals(
                                 oldSpan.Path,
@@ -1777,7 +1829,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             )
                         );
 
-                        // The up-to-date flag is copied when new active statement is created from the corresponding old one.
+                        // The up-to-date flag is copied when new active statement is created from the corresponding old
+                        // one.
                         Debug.Assert(
                             oldActiveStatement.IsMethodUpToDate
                                 == newActiveStatement.IsMethodUpToDate
@@ -1786,7 +1839,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         if (oldActiveStatement.IsMethodUpToDate)
                         {
                             // Start tracking non-remappable regions for active statements in methods that were up-to-date
-                            // when break state was entered and now being updated (regardless of whether the active span changed or not).
+                            // when break state was entered and now being updated (regardless of whether the active span changed
+                            // or not).
                             if (isMethodUpdated)
                             {
                                 nonRemappableRegionsBuilder.Add(
@@ -1798,14 +1852,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             }
                             else if (!isExceptionRegion)
                             {
-                                // If the method has been up-to-date and it is not updated now then either the active statement span has not changed,
-                                // or the entire method containing it moved. In neither case do we need to start tracking non-remapable region
-                                // for the active statement since movement of whole method bodies (if any) is handled only on PDB level without
+                                // If the method has been up-to-date and it is not updated now then either the active statement span
+                                // has not changed,
+                                // or the entire method containing it moved. In neither case do we need to start tracking
+                                // non-remapable region
+                                // for the active statement since movement of whole method bodies (if any) is handled only on PDB
+                                // level without
                                 // triggering any remapping on the IL level.
                                 //
-                                // That said, we still add a non-remappable region for this active statement, so that we know in future sessions
-                                // that this active statement existed and its span has not changed. We don't report these regions to the debugger,
-                                // but we use them to map active statement spans to the baseline snapshots of following edit sessions.
+                                // That said, we still add a non-remappable region for this active statement, so that we know in
+                                // future sessions
+                                // that this active statement existed and its span has not changed. We don't report these regions to
+                                // the debugger,
+                                // but we use them to map active statement spans to the baseline snapshots of following edit
+                                // sessions.
                                 nonRemappableRegionsBuilder.Add(
                                     (
                                         methodId,
@@ -1820,7 +1880,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         }
                         else if (oldSpan.Span != newSpan.Span)
                         {
-                            // The method is not up-to-date hence we might have a previous non-remappable span mapping that needs to be brought forward to the new snapshot.
+                            // The method is not up-to-date hence we might have a previous non-remappable span mapping that
+                            // needs to be brought forward to the new snapshot.
                             changedNonRemappableSpans[(methodId, oldSpan)] = newSpan;
                         }
                     }
@@ -1831,7 +1892,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         isExceptionRegion: false
                     );
 
-                    // The spans of the exception regions are known (non-default) for active statements in changed documents
+                    // The spans of the exception regions are known (non-default) for active statements in changed
+                    // documents
                     // as we ensured earlier that all changed documents are in-sync.
 
                     for (var j = 0; j < oldActiveStatementExceptionRegions.Spans.Length; j++)
@@ -1861,7 +1923,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             // Update previously calculated non-remappable region mappings.
-            // These map to the old snapshot and we need them to map to the new snapshot, which will be the baseline for the next session.
+            // These map to the old snapshot and we need them to map to the new snapshot, which will be the
+            // baseline for the next session.
             if (unremappedActiveMethods.Count > 0)
             {
                 foreach (var (methodInstance, regionsInMethod) in previousNonRemappableRegions)
@@ -1872,8 +1935,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         continue;
                     }
 
-                    // Skip no longer active methods - all active statements in these method instances have been remapped to newer versions.
-                    // New active statement can't appear in a stale method instance since such instance can't be invoked.
+                    // Skip no longer active methods - all active statements in these method instances have been
+                    // remapped to newer versions.
+                    // New active statement can't appear in a stale method instance since such instance can't be
+                    // invoked.
                     if (!unremappedActiveMethods.Contains(methodInstance.Method))
                     {
                         continue;

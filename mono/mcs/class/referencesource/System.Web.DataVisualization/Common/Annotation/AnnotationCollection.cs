@@ -136,7 +136,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     textAnnotation.Text = item.Name;
                 }
 
-                //If the collection belongs to annotation group we need to pass a ref to this group to all the child annotations
+                //If the collection belongs to annotation group we need to pass a ref to this group to all the child
+                // annotations
                 if (this.AnnotationGroup != null)
                 {
                     item.annotationGroup = this.AnnotationGroup;
@@ -237,7 +238,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         chartPicture.nonTopLevelChartBuffer = null;
                     }
 
-                    // Copy chart area plotting rectangle from the chart's dubble buffer image into area dubble buffer image
+                    // Copy chart area plotting rectangle from the chart's dubble buffer image into area dubble buffer
+                    // image
                     if (
                         this.Chart.paintBufferBitmap != null
                         && this.Chart.paintBufferBitmap.Size.Width >= chartPosition.Size.Width
@@ -435,7 +437,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Mouse button pressed in the control.
         /// </summary>
         /// <param name="e">Event arguments.</param>
-        /// <param name="isHandled">Returns true if event is handled and no further processing required.</param>
+        /// <param name="isHandled">Returns true if event is handled and no further processing
+        // required.</param>
         internal void OnMouseDown(MouseEventArgs e, ref bool isHandled)
         {
             // Reset last clicked annotation object and stop text editing
@@ -641,14 +644,14 @@ namespace System.Web.UI.DataVisualization.Charting
                 Annotation annotation = this[index];
 
                 // NOTE: Automatic deleting feature was disabled. -AG.
-                /*
-                // Delete all annotation objects moved outside clipping region
-                if( annotation.outsideClipRegion )
-                {
-                    this.List.RemoveAt(index);
-                    --index;
-                }
-                */
+/*
+// Delete all annotation objects moved outside clipping region
+if( annotation.outsideClipRegion )
+{
+this.List.RemoveAt(index);
+--index;
+}
+*/
 
                 // Reset start position/location fields
                 annotation.startMovePositionRel = RectangleF.Empty;
@@ -911,7 +914,8 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Event handlers
         internal void ChartAreaNameReferenceChanged(object sender, NameReferenceChangedEventArgs e)
         {
-            // If all the chart areas are removed and then a new one is inserted - Annotations don't get bound to it by default
+            // If all the chart areas are removed and then a new one is inserted - Annotations don't get bound
+            // to it by default
             if (e.OldElement == null)
                 return;
 

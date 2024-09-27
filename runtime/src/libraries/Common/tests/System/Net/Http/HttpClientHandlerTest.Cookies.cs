@@ -475,7 +475,8 @@ namespace System.Net.Http.Functional.Tests
                         CookieCollection collection = handler.CookieContainer.GetCookies(url);
                         Assert.Equal(3, collection.Count);
 
-                        // Convert to array so we can more easily process contents, since CookieCollection does not implement IEnumerable<Cookie>
+                        // Convert to array so we can more easily process contents, since CookieCollection does not
+                        // implement IEnumerable<Cookie>
                         Cookie[] cookies = new Cookie[3];
                         collection.CopyTo(cookies, 0);
 
@@ -490,7 +491,8 @@ namespace System.Net.Http.Functional.Tests
         // Default path should be calculated according to https://tools.ietf.org/html/rfc6265#section-5.1.4
         // When a cookie is being sent without an explicitly defined Path for a URL with URL-Path /path/sub,
         // the cookie should be added with Path=/path.
-        // ConditionalFact: CookieContainer does not follow RFC6265 on .NET Framework, therefore the (WinHttpHandler) test is expected to fail
+        // ConditionalFact: CookieContainer does not follow RFC6265 on .NET Framework, therefore the
+        // (WinHttpHandler) test is expected to fail
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotNetFramework))]
         [SkipOnPlatform(TestPlatforms.Browser, "CookieContainer is not supported on Browser")]
         public async Task GetAsync_NoPathDefined_CookieAddedWithDefaultPath()
@@ -520,7 +522,8 @@ namespace System.Net.Http.Functional.Tests
 
         // According to RFC6265, cookie path is not expected to match the request's path,
         // these cookies should be accepted by the client.
-        // ConditionalFact: CookieContainer does not follow RFC6265 on .NET Framework, therefore the (WinHttpHandler) test is expected to fail
+        // ConditionalFact: CookieContainer does not follow RFC6265 on .NET Framework, therefore the
+        // (WinHttpHandler) test is expected to fail
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotNetFramework))]
         [SkipOnPlatform(TestPlatforms.Browser, "CookieContainer is not supported on Browser")]
         public async Task GetAsync_CookiePathDoesNotMatchRequestPath_CookieAccepted()
@@ -552,7 +555,8 @@ namespace System.Net.Http.Functional.Tests
         // Based on the OIDC login scenario described in comments:
         // https://github.com/dotnet/runtime/pull/39250#issuecomment-659783480
         // https://github.com/dotnet/runtime/issues/26141#issuecomment-612097147
-        // ConditionalFact: CookieContainer does not follow RFC6265 on .NET Framework, therefore the (WinHttpHandler) test is expected to fail
+        // ConditionalFact: CookieContainer does not follow RFC6265 on .NET Framework, therefore the
+        // (WinHttpHandler) test is expected to fail
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotNetFramework))]
         [SkipOnPlatform(TestPlatforms.Browser, "CookieContainer is not supported on Browser")]
         public async Task GetAsync_Redirect_CookiesArePreserved()
@@ -708,7 +712,8 @@ namespace System.Net.Http.Functional.Tests
                         CookieCollection collection = handler.CookieContainer.GetCookies(url);
                         Assert.Equal(2, collection.Count);
 
-                        // Convert to array so we can more easily process contents, since CookieCollection does not implement IEnumerable<Cookie>
+                        // Convert to array so we can more easily process contents, since CookieCollection does not
+                        // implement IEnumerable<Cookie>
                         Cookie[] cookies = new Cookie[3];
                         collection.CopyTo(cookies, 0);
 
@@ -748,7 +753,8 @@ namespace System.Net.Http.Functional.Tests
 
                         Assert.Equal(2, collection.Count);
 
-                        // Convert to array so we can more easily process contents, since CookieCollection does not implement IEnumerable<Cookie>
+                        // Convert to array so we can more easily process contents, since CookieCollection does not
+                        // implement IEnumerable<Cookie>
                         Cookie[] cookies = new Cookie[2];
                         collection.CopyTo(cookies, 0);
 
@@ -811,7 +817,8 @@ namespace System.Net.Http.Functional.Tests
 
                         Assert.Equal(2, collection.Count);
 
-                        // Convert to array so we can more easily process contents, since CookieCollection does not implement IEnumerable<Cookie>
+                        // Convert to array so we can more easily process contents, since CookieCollection does not
+                        // implement IEnumerable<Cookie>
                         Cookie[] cookies = new Cookie[2];
                         collection.CopyTo(cookies, 0);
 
@@ -979,7 +986,8 @@ namespace System.Net.Http.Functional.Tests
                         CookieCollection collection = handler.CookieContainer.GetCookies(url);
                         Assert.Equal(3, collection.Count);
 
-                        // Convert to array so we can more easily process contents, since CookieCollection does not implement IEnumerable<Cookie>
+                        // Convert to array so we can more easily process contents, since CookieCollection does not
+                        // implement IEnumerable<Cookie>
                         Cookie[] cookies = new Cookie[3];
                         collection.CopyTo(cookies, 0);
 

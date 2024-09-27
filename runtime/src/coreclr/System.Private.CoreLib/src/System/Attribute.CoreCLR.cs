@@ -115,7 +115,8 @@ namespace System
 
                 if (rtPropAccessor != null)
                 {
-                    // There is a public overload of Type.GetProperty that takes both a BingingFlags enum and a return type.
+                    // There is a public overload of Type.GetProperty that takes both a BingingFlags enum and a return
+                    // type.
                     // However, we cannot use that because it doesn't accept null for "types".
                     return rtPropAccessor.DeclaringType!.GetProperty(
                         property.Name,
@@ -271,11 +272,15 @@ namespace System
         {
             Debug.Assert(param != null);
 
-            // For ParameterInfo's we need to make sure that we chain through all the MethodInfo's in the inheritance chain that
-            // have this ParameterInfo defined. .We pick up all the CustomAttributes for the starting ParameterInfo. We need to pick up only attributes
+            // For ParameterInfo's we need to make sure that we chain through all the MethodInfo's in the
+            // inheritance chain that
+            // have this ParameterInfo defined. .We pick up all the CustomAttributes for the starting
+            // ParameterInfo. We need to pick up only attributes
             // that are marked inherited from the remainder of the MethodInfo's in the inheritance chain.
-            // For MethodInfo's on an interface we do not do an inheritance walk so the default ParameterInfo attributes are returned.
-            // For MethodInfo's on a class we walk up the inheritance chain but do not look at the MethodInfo's on the interfaces that the
+            // For MethodInfo's on an interface we do not do an inheritance walk so the default ParameterInfo
+            // attributes are returned.
+            // For MethodInfo's on a class we walk up the inheritance chain but do not look at the MethodInfo's
+            // on the interfaces that the
             // class inherits from and return the respective ParameterInfo attributes
 
             List<Type> disAllowMultiple = new List<Type>();
@@ -361,11 +366,14 @@ namespace System
             Debug.Assert(param != null);
             Debug.Assert(type != null);
 
-            // For ParameterInfo's we need to make sure that we chain through all the MethodInfo's in the inheritance chain.
-            // We pick up all the CustomAttributes for the starting ParameterInfo. We need to pick up only attributes
+            // For ParameterInfo's we need to make sure that we chain through all the MethodInfo's in the
+            // inheritance chain.
+            // We pick up all the CustomAttributes for the starting ParameterInfo. We need to pick up only
+            // attributes
             // that are marked inherited from the remainder of the ParameterInfo's in the inheritance chain.
             // For MethodInfo's on an interface we do not do an inheritance walk. For ParameterInfo's on a
-            // Class we walk up the inheritance chain but do not look at the MethodInfo's on the interfaces that the class inherits from.
+            // Class we walk up the inheritance chain but do not look at the MethodInfo's on the interfaces that
+            // the class inherits from.
 
             if (param.IsDefined(type, false))
                 return true;
@@ -555,7 +563,8 @@ namespace System
             ArgumentNullException.ThrowIfNull(element);
             ArgumentNullException.ThrowIfNull(attributeType);
 
-            // Returns true if a custom attribute subclass of attributeType class/interface with inheritance walk
+            // Returns true if a custom attribute subclass of attributeType class/interface with inheritance
+            // walk
             if (
                 !attributeType.IsSubclassOf(typeof(Attribute))
                 && attributeType != typeof(Attribute)
@@ -659,7 +668,8 @@ namespace System
             ArgumentNullException.ThrowIfNull(element);
             ArgumentNullException.ThrowIfNull(attributeType);
 
-            // Returns true is a custom attribute subclass of attributeType class/interface with inheritance walk
+            // Returns true is a custom attribute subclass of attributeType class/interface with inheritance
+            // walk
 
             if (
                 !attributeType.IsSubclassOf(typeof(Attribute))
@@ -697,7 +707,8 @@ namespace System
             bool inherit
         )
         {
-            // Returns an Attribute of base class/interface attributeType on the ParameterInfo or null if none exists.
+            // Returns an Attribute of base class/interface attributeType on the ParameterInfo or null if none
+            // exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
 
@@ -759,7 +770,8 @@ namespace System
             ArgumentNullException.ThrowIfNull(element);
             ArgumentNullException.ThrowIfNull(attributeType);
 
-            // Returns true is a custom attribute subclass of attributeType class/interface with no inheritance walk
+            // Returns true is a custom attribute subclass of attributeType class/interface with no inheritance
+            // walk
 
             if (
                 !attributeType.IsSubclassOf(typeof(Attribute))
@@ -843,7 +855,8 @@ namespace System
             ArgumentNullException.ThrowIfNull(element);
             ArgumentNullException.ThrowIfNull(attributeType);
 
-            // Returns true is a custom attribute subclass of attributeType class/interface with no inheritance walk
+            // Returns true is a custom attribute subclass of attributeType class/interface with no inheritance
+            // walk
 
             if (
                 !attributeType.IsSubclassOf(typeof(Attribute))
@@ -865,7 +878,8 @@ namespace System
             bool inherit
         )
         {
-            // Returns an Attribute of base class/interface attributeType on the Assembly or null if none exists.
+            // Returns an Attribute of base class/interface attributeType on the Assembly or null if none
+            // exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
 

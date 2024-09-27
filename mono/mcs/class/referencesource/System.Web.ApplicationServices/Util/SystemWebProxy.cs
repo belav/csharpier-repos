@@ -13,9 +13,12 @@ namespace System.Web.Util
     using System.Security.Permissions;
     using System.Web.Security;
 
-    // Because this assembly ships in the client SKU, whereas System.Web.dll ships in the Extended SKU, we need to
-    // proxy any usage of System.Web.dll. This allows us to fail gracefully if the Extended SKU is not present.
-    // Users can avoid this failure by overridding all virtual members on both of these types which will prevent
+    // Because this assembly ships in the client SKU, whereas System.Web.dll ships in the Extended SKU,
+    // we need to
+    // proxy any usage of System.Web.dll. This allows us to fail gracefully if the Extended SKU is not
+    // present.
+    // Users can avoid this failure by overridding all virtual members on both of these types which will
+    // prevent
     // this class, and hence, System.Web.dll, from ever being called.
     internal static class SystemWebProxy
     {

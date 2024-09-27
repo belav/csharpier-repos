@@ -14,7 +14,8 @@ namespace Internal.Runtime.CompilerHelpers
     internal static class ArrayHelpers
     {
         /// <summary>
-        /// Helper for array allocations via `newobj` IL instruction. Dimensions are passed in as block of integers.
+        /// Helper for array allocations via `newobj` IL instruction. Dimensions are passed in as block of
+        // integers.
         /// The content of the dimensions block may be modified by the helper.
         /// </summary>
         public static unsafe Array NewObjArray(IntPtr pEEType, int nDimensions, int* pDimensions)
@@ -47,7 +48,8 @@ namespace Internal.Runtime.CompilerHelpers
         }
 
         /// <summary>
-        /// Helper for array allocations via `newobj` IL instruction. Dimensions are passed in as block of integers.
+        /// Helper for array allocations via `newobj` IL instruction. Dimensions are passed in as block of
+        // integers.
         /// The content of the dimensions block may be modified by the helper.
         /// </summary>
         [UnconditionalSuppressMessage(

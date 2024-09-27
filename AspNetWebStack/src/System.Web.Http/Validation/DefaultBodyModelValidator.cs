@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,13 +22,17 @@ namespace System.Web.Http.Validation
     public class DefaultBodyModelValidator : IBodyModelValidator
     {
         /// <summary>
-        /// Determines whether the <paramref name="model"/> is valid and adds any validation errors to the <paramref name="actionContext"/>'s <see cref="ModelStateDictionary"/>
+        /// Determines whether the <paramref name="model"/> is valid and adds any validation errors to the
+        // <paramref name="actionContext"/>'s <see cref="ModelStateDictionary"/>
         /// </summary>
         /// <param name="model">The model to be validated.</param>
         /// <param name="type">The <see cref="Type"/> to use for validation.</param>
-        /// <param name="metadataProvider">The <see cref="ModelMetadataProvider"/> used to provide the model metadata.</param>
-        /// <param name="actionContext">The <see cref="HttpActionContext"/> within which the model is being validated.</param>
-        /// <param name="keyPrefix">The <see cref="string"/> to append to the key for any validation errors.</param>
+        /// <param name="metadataProvider">The <see cref="ModelMetadataProvider"/> used to provide the model
+        // metadata.</param>
+        /// <param name="actionContext">The <see cref="HttpActionContext"/> within which the model is being
+        // validated.</param>
+        /// <param name="keyPrefix">The <see cref="string"/> to append to the key for any validation
+        // errors.</param>
         /// <returns><c>true</c>if <paramref name="model"/> is valid, <c>false</c> otherwise.</returns>
         public bool Validate(
             object model,
@@ -137,8 +142,10 @@ namespace System.Web.Http.Validation
             catch
             {
                 // Retrieving the model failed - typically caused by a property getter throwing
-                // Being unable to retrieve a property is not a validation error - many properties can only be retrieved if certain conditions are met
-                // For example, Uri.AbsoluteUri throws for relative URIs but it shouldn't be considered a validation error
+                // Being unable to retrieve a property is not a validation error - many properties can only be
+                // retrieved if certain conditions are met
+                // For example, Uri.AbsoluteUri throws for relative URIs but it shouldn't be considered a validation
+                // error
                 return true;
             }
 
@@ -247,7 +254,8 @@ namespace System.Web.Http.Validation
         /// <summary>
         /// Recursively validate the elements of the <paramref name="model"/> collection.
         /// </summary>
-        /// <param name="model">The <see cref="IEnumerable"/> instance containing the elements to validate.</param>
+        /// <param name="model">The <see cref="IEnumerable"/> instance containing the elements to
+        // validate.</param>
         /// <param name="validationContext">The <see cref="BodyModelValidatorContext"/>.</param>
         /// <returns>
         /// <see langword="true"/> if validation succeeds for all elements of <paramref name="model"/>;

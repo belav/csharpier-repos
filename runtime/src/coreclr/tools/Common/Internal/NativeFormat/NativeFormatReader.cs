@@ -496,7 +496,8 @@ namespace Internal.NativeFormat
                         return _parser.GetParserFromRelativeOffset();
                     }
 
-                    // The entries are sorted by hashcode within the bucket. It allows us to terminate the lookup prematurely.
+                    // The entries are sorted by hashcode within the bucket. It allows us to terminate the lookup
+                    // prematurely.
                     if (lowHashcode > _lowHashcode)
                     {
                         _endOffset = _parser.Offset; // Ensure that extra call to GetNext returns null parser again
@@ -573,13 +574,16 @@ namespace Internal.NativeFormat
 
         // The recommended code pattern to perform lookup is:
         //
-        //  var lookup = t.Lookup(TypeHashingAlgorithms.ComputeGenericInstanceHashCode(genericTypeDefinitionHandle, genericTypeArgumentHandles));
+        //  var lookup =
+        // t.Lookup(TypeHashingAlgorithms.ComputeGenericInstanceHashCode(genericTypeDefinitionHandle,
+        // genericTypeArgumentHandles));
         //  NativeParser typeParser;
         //  while (!(typeParser = lookup.GetNext()).IsNull)
         //  {
         //      typeParser.GetTypeSignatureKind(out index);
         //      ... create RuntimeTypeHandle from the external reference RVAs at [index]
-        //      ... compare if RuntimeTypeHandle is an instance of pair (genericTypeDefinitionHandle, genericTypeArgumentHandles)
+        //      ... compare if RuntimeTypeHandle is an instance of pair (genericTypeDefinitionHandle,
+        // genericTypeArgumentHandles)
         //  }
         //
         public Enumerator Lookup(int hashcode)

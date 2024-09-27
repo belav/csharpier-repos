@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * Response intrinsic
- */
+* Response intrinsic
+*/
 namespace System.Web
 {
     using System.Collections;
@@ -108,7 +108,8 @@ namespace System.Web
 
         // These flags for content-type are only used in integrated mode.
         // DevDivBugs 146983: Content-Type should not be sent when the resonse buffers are empty
-        // DevDivBugs 195148: need to send Content-Type when the handler is managed and the response buffers are non-empty
+        // DevDivBugs 195148: need to send Content-Type when the handler is managed and the response buffers
+        // are non-empty
         // Dev10 750934: need to send Content-Type when explicitly set by managed caller
         private bool _contentTypeSetByManagedCaller;
         private bool _contentTypeSetByManagedHandler;
@@ -150,11 +151,11 @@ namespace System.Web
         }
 
         /*
-         * Internal package visible constructor to create responses that
-         * have HttpWorkerRequest
-         *
-         * @param wr Worker Request
-         */
+        * Internal package visible constructor to create responses that
+        * have HttpWorkerRequest
+        *
+        * @param wr Worker Request
+        */
         internal HttpResponse(HttpWorkerRequest wr, HttpContext context)
         {
             _wr = wr;
@@ -185,8 +186,8 @@ namespace System.Web
         }
 
         /*
-         *  Cleanup code
-         */
+        *  Cleanup code
+        */
         internal void Dispose()
         {
             // recycle buffers
@@ -491,9 +492,9 @@ namespace System.Web
                     }
 
                     /*
-                     * Ensure that cacheability is set to cache-control: private
-                     * if it is not explicitly set.
-                     */
+                    * Ensure that cacheability is set to cache-control: private
+                    * if it is not explicitly set.
+                    */
                     if (!_cacheControlHeaderAdded && sendCacheControlHeader)
                     {
                         headers.Add(
@@ -688,7 +689,8 @@ namespace System.Web
                             bufferedLength = _httpWriter.GetBufferedLength();
 
                             // Calculate content-length if not set explicitely
-                            // WOS #1380818: Content-Length should not be set for response with 304 status (HTTP.SYS doesn't, and HTTP 1.1 spec implies it)
+                            // WOS #1380818: Content-Length should not be set for response with 304 status (HTTP.SYS doesn't,
+                            // and HTTP 1.1 spec implies it)
                             if (!_contentLengthSet && _statusCode != 304)
                                 _wr.SendCalculatedContentLength(bufferedLength);
                         }
@@ -935,9 +937,9 @@ namespace System.Web
         }
 
         /*
-         * Disable kernel caching for this response.  If kernel caching is not supported, this method
-         * returns without performing any action.
-         */
+        * Disable kernel caching for this response.  If kernel caching is not supported, this method
+        * returns without performing any action.
+        */
         public void DisableKernelCache()
         {
             if (_wr == null)
@@ -949,9 +951,10 @@ namespace System.Web
         }
 
         /*
-         * Disable IIS user-mode caching for this response.  If IIS user-mode caching is not supported, this method
-         * returns without performing any action.
-         */
+        * Disable IIS user-mode caching for this response.  If IIS user-mode caching is not supported, this
+        method
+        * returns without performing any action.
+        */
         public void DisableUserCache()
         {
             if (_wr == null)
@@ -1008,8 +1011,8 @@ namespace System.Web
         }
 
         /*
-         * Is the entire response buffered so far
-         */
+        * Is the entire response buffered so far
+        */
         internal bool IsBuffered()
         {
             return !_headersWritten && UsingHttpWriter;
@@ -1070,8 +1073,8 @@ namespace System.Web
         }
 
         /*
-         * Add dependency on a file to the current response
-         */
+        * Add dependency on a file to the current response
+        */
 
         /// <devdoc>
         ///    <para>Adds dependency on a file to the current response.</para>
@@ -1383,7 +1386,8 @@ namespace System.Web
             }
             else
             {
-                // get the UI culture under which the error text must be created (use LKG to avoid errors while reporting error)
+                // get the UI culture under which the error text must be created (use LKG to avoid errors while
+                // reporting error)
                 GlobalizationSection globConfig = RuntimeConfig
                     .GetLKGConfig(_context)
                     .Globalization;
@@ -1650,8 +1654,10 @@ namespace System.Web
                             break;
 
                         default:
-                            // DevDiv #70492 - If we tried to display the custom error page but failed in doing so, we should display
-                            // a generic error message instead of trying to display the original error. We have a compat switch on
+                            // DevDiv #70492 - If we tried to display the custom error page but failed in doing so, we should
+                            // display
+                            // a generic error message instead of trying to display the original error. We have a compat switch
+                            // on
                             // the <customErrors> element to control this behavior.
 
                             if (customErrorsSetting.AllowNestedErrors)
@@ -1829,8 +1835,8 @@ namespace System.Web
         }
 
         /*
-         * Http status description string
-         */
+        * Http status description string
+        */
 
         // Http status description string
         //    Gets or sets the HTTP status string of output returned to the client.
@@ -1888,7 +1894,9 @@ namespace System.Web
         /// policy has been specified for this response. This property allows suppressing this default
         /// response header on a per-request basis. It can still be suppressed for the entire application
         /// by setting the appropriate value in &lt;httpRuntime&gt; or &lt;outputCache&gt;. See
-        /// http://msdn.microsoft.com/en-us/library/system.web.configuration.httpruntimesection.sendcachecontrolheader.aspx
+        ///
+        //
+        // http://msdn.microsoft.com/en-us/library/system.web.configuration.httpruntimesection.sendcachecontrolheader.aspx
         /// for more information on those config elements.
         /// </summary>
         /// <remarks>
@@ -1944,8 +1952,8 @@ namespace System.Web
         }
 
         /*
-         * Content-type
-         */
+        * Content-type
+        */
 
         /// <devdoc>
         ///    <para>Gets or sets the
@@ -2221,7 +2229,8 @@ namespace System.Web
         }
 
         /// <devdoc>
-        ///    <para>Gets or Sets a redirection string (value of location resposne header) for redirect response.</para>
+        ///    <para>Gets or Sets a redirection string (value of location resposne header) for redirect
+        // response.</para>
         /// </devdoc>
         public String RedirectLocation
         {
@@ -2239,8 +2248,8 @@ namespace System.Web
         }
 
         /*
-         * Disconnect client
-         */
+        * Disconnect client
+        */
 
         /// <devdoc>
         ///    <para>Closes the socket connection to a client.</para>
@@ -2340,11 +2349,11 @@ namespace System.Web
         //
 
         /*
-          * Add Http custom header
-          *
-          * @param name header name
-          * @param value header value
-          */
+        * Add Http custom header
+        *
+        * @param name header name
+        * @param value header value
+        */
 
         /// <devdoc>
         ///    <para>Adds an HTTP
@@ -2547,8 +2556,8 @@ namespace System.Web
         }
 
         /*
-         * Clear response buffer and headers. (For ASP compat doesn't clear headers)
-         */
+        * Clear response buffer and headers. (For ASP compat doesn't clear headers)
+        */
 
         /// <devdoc>
         ///    <para>Clears all headers and content output from the buffer stream.</para>
@@ -2567,8 +2576,8 @@ namespace System.Web
         }
 
         /*
-         * Clear response buffer and headers. Internal. Used to be 'Clear'.
-         */
+        * Clear response buffer and headers. Internal. Used to be 'Clear'.
+        */
         internal void ClearAll()
         {
             if (!_headersWritten)
@@ -2577,8 +2586,8 @@ namespace System.Web
         }
 
         /*
-         * Flush response currently buffered
-         */
+        * Flush response currently buffered
+        */
 
         /// <devdoc>
         ///    <para>Sends all currently buffered output to the client.</para>
@@ -2641,10 +2650,10 @@ namespace System.Web
         }
 
         /*
-         * Append string to the log record
-         *
-         * @param param string to append to the log record
-         */
+        * Append string to the log record
+        *
+        * @param param string to append to the log record
+        */
 
         /// <devdoc>
         ///    <para>Adds custom log information to the IIS log file.</para>
@@ -3191,11 +3200,11 @@ namespace System.Web
         }
 
         /*
-         * Helper method to write from file stream
-         *
-         * Handles only TextWriter case. For real requests
-         * HttpWorkerRequest can take files
-         */
+        * Helper method to write from file stream
+        *
+        * Handles only TextWriter case. For real requests
+        * HttpWorkerRequest can take files
+        */
         private void WriteStreamAsText(Stream f, long offset, long size)
         {
             if (size < 0)
@@ -3267,11 +3276,11 @@ namespace System.Web
         }
 
         /*
-         * Write file
-         *
-         * @param filename file to write
-         * @readIntoMemory flag to read contents into memory immediately
-         */
+        * Write file
+        *
+        * @param filename file to write
+        * @readIntoMemory flag to read contents into memory immediately
+        */
 
         /// <devdoc>
         ///    <para> Reads a file into a memory block.</para>
@@ -3413,12 +3422,12 @@ namespace System.Web
         }
 
         /*
-         * Write file
-         *
-         * @param filename file to write
-         * @param offset file offset to start writing
-         * @param size number of bytes to write
-         */
+        * Write file
+        *
+        * @param filename file to write
+        * @param offset file offset to start writing
+        * @param size number of bytes to write
+        */
 
         /// <devdoc>
         ///    <para>Writes a file directly to an HTTP content output stream.</para>
@@ -3461,12 +3470,12 @@ namespace System.Web
         }
 
         /*
-         * Write file
-         *
-         * @param handle file to write
-         * @param offset file offset to start writing
-         * @param size number of bytes to write
-         */
+        * Write file
+        *
+        * @param handle file to write
+        * @param offset file offset to start writing
+        * @param size number of bytes to write
+        */
 
         /// <devdoc>
         ///    <para>Writes a file directly to an HTTP content output stream.</para>
@@ -3657,10 +3666,10 @@ namespace System.Web
         }
 
         /*
-         * Cancelles handler processing of the current request
-         * throws special [non-]exception uncatchable by the user code
-         * to tell application to stop module execution.
-         */
+        * Cancelles handler processing of the current request
+        * throws special [non-]exception uncatchable by the user code
+        * to tell application to stop module execution.
+        */
 
         /// <devdoc>
         ///    <para>Sends all currently buffered output to the client then closes the
@@ -3712,8 +3721,8 @@ namespace System.Web
         }
 
         /*
-         * ASP compatible caching properties
-         */
+        * ASP compatible caching properties
+        */
 
 
         /// <devdoc>
@@ -3740,7 +3749,8 @@ namespace System.Web
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the absolute time that cached information
-        ///       will be removed from the cache. Provided for ASP compatiblility. Use the <see cref='System.Web.HttpResponse.Cache'/>
+        ///       will be removed from the cache. Provided for ASP compatiblility. Use the <see
+        // cref='System.Web.HttpResponse.Cache'/>
         ///       property instead.
         ///    </para>
         /// </devdoc>
@@ -3962,7 +3972,8 @@ namespace System.Web
         {
             // Bug 86594: Should not encode the domain part of the url. For example,
             // http://�bersite/�berpage.aspx should only encode the 2nd �.
-            // To accomplish this we must separate the scheme+host+port portion of the url from the path portion,
+            // To accomplish this we must separate the scheme+host+port portion of the url from the path
+            // portion,
             // encode the path portion, then reconstruct the url.
             Debug.Assert(!url.Contains("?"), "Querystring should have been stripped off.");
 
@@ -4029,7 +4040,8 @@ namespace System.Web
             // WOS 1841024 - Don't set _suppressContent to true for HEAD requests.  IIS needs the content
             // in order to correctly set the Content-Length header.
             // WOS 1634512 - need to clear buffers if _ended == true
-            // WOS 1850019 - Breaking Change: ASP.NET v2.0: Content-Length is not correct for pages that call HttpResponse.SuppressContent
+            // WOS 1850019 - Breaking Change: ASP.NET v2.0: Content-Length is not correct for pages that call
+            // HttpResponse.SuppressContent
             if (
                 (_suppressContent && Request != null && Request.HttpVerb != HttpVerb.HEAD) || _ended
             )
@@ -4190,12 +4202,15 @@ namespace System.Web
             //
             // Additionally, we should not set this header during an SSL request, as certain versions
             // of IE don't handle it properly and simply refuse to render the page. More info:
+            //
+            //
             // http://blogs.msdn.com/b/ieinternals/archive/2009/10/02/internet-explorer-cannot-download-over-https-when-no-cache.aspx
             //
             // Finally, we don't need to set 'no-cache' if the response is not publicly cacheable,
             // as ASP.NET won't cache the response (due to the cookies) and proxies won't cache
             // the response (due to Cache-Control: private).
-            // If _cachePolicy isn't set, then Cache.GetCacheability() will contruct a default one (which causes Cache-Control: private)
+            // If _cachePolicy isn't set, then Cache.GetCacheability() will contruct a default one (which causes
+            // Cache-Control: private)
             if (
                 !Request.IsSecureConnection
                 && ContainsNonShareableCookies()
@@ -4209,10 +4224,13 @@ namespace System.Web
             if (_cachePolicy != null && _cookies != null && _cookies.Count != 0)
             {
                 _cachePolicy.SetHasSetCookieHeader();
-                // In integrated mode, the cookies will eventually be sent to IIS via IIS7WorkerRequest.SetUnknownResponseHeader,
-                // where we will disable both HTTP.SYS kernel cache and IIS user mode cache (DevDiv 113142 & 255268). In classic
+                // In integrated mode, the cookies will eventually be sent to IIS via
+                // IIS7WorkerRequest.SetUnknownResponseHeader,
+                // where we will disable both HTTP.SYS kernel cache and IIS user mode cache (DevDiv 113142 &
+                // 255268). In classic
                 // mode, the cookies will be sent to IIS via ISAPIWorkerRequest.SendUnknownResponseHeader and
-                // ISAPIWorkerRequest.SendKnownResponseHeader (DevDiv 113142), where we also disables the kernel cache. So the
+                // ISAPIWorkerRequest.SendKnownResponseHeader (DevDiv 113142), where we also disables the kernel
+                // cache. So the
                 // call of DisableKernelCache below is not really needed.
                 DisableKernelCache();
             }
@@ -4221,8 +4239,10 @@ namespace System.Web
         private void EnsureSessionStateIfNecessary()
         {
             // Ensure the session state is in complete state before sending the response headers
-            // Due to optimization and delay initialization sometimes we create and store the session state id in ReleaseSessionState.
-            // But it's too late in case of Flush. Session state id must be written (if used) before sending the headers.
+            // Due to optimization and delay initialization sometimes we create and store the session state id
+            // in ReleaseSessionState.
+            // But it's too late in case of Flush. Session state id must be written (if used) before sending the
+            // headers.
             if (AppSettings.EnsureSessionStateLockedOnFlush)
             {
                 _context.EnsureSessionStateIfNecessary();

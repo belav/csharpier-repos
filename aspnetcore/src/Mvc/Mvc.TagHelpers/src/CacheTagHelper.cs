@@ -19,16 +19,21 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 public class CacheTagHelper : CacheTagHelperBase
 {
     /// <summary>
-    /// Prefix used by <see cref="CacheTagHelper"/> instances when creating entries in <see cref="MemoryCache"/>.
+    /// Prefix used by <see cref="CacheTagHelper"/> instances when creating entries in <see
+    // cref="MemoryCache"/>.
     /// </summary>
     public static readonly string CacheKeyPrefix = nameof(CacheTagHelper);
 
     private const string CachePriorityAttributeName = "priority";
 
-    // We need to come up with a value for the size of entries when storing a gating Task on the cache. Any value
-    // greater than 0 will suffice. We choose 56 bytes as an approximation of the size of the task that we store
-    // in the cache. This size got calculated as an upper bound for the size of an actual task on an x64 architecture
-    // and corresponds to 24 bytes for the object header block plus the 40 bytes added by the members of the task
+    // We need to come up with a value for the size of entries when storing a gating Task on the cache.
+    // Any value
+    // greater than 0 will suffice. We choose 56 bytes as an approximation of the size of the task that
+    // we store
+    // in the cache. This size got calculated as an upper bound for the size of an actual task on an x64
+    // architecture
+    // and corresponds to 24 bytes for the object header block plus the 40 bytes added by the members of
+    // the task
     // object.
     private const int PlaceholderSize = 64;
 
@@ -127,7 +132,8 @@ public class CacheTagHelper : CacheTagHelperBase
             // can't be put inside a using block.
             entry.Dispose();
 
-            // Set the result on the TCS once we've committed the entry to the cache since commiting to the cache
+            // Set the result on the TCS once we've committed the entry to the cache since commiting to the
+            // cache
             // may throw.
             tcs.SetResult(content);
             return content;

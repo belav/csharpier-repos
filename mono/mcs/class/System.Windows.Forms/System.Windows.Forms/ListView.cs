@@ -4163,7 +4163,8 @@ namespace System.Windows.Forms
                 return;
 
             Rectangle view_rect = item_control.ClientRectangle;
-            // Avoid direct access to items in virtual mode, and use item bounds otherwise, since we could have reordered items
+            // Avoid direct access to items in virtual mode, and use item bounds otherwise, since we could have
+            // reordered items
             Rectangle bounds = virtual_mode
                 ? new Rectangle(GetItemLocation(index), ItemSize)
                 : items[index].Bounds;
@@ -5907,7 +5908,8 @@ namespace System.Windows.Forms
             }
 
             // This method is intended to be used from ListViewGroup.Items, not from ListView.Items,
-            // added for performance reasons (avoid calling manually Remove for every item on ListViewGroup.Items)
+            // added for performance reasons (avoid calling manually Remove for every item on
+            // ListViewGroup.Items)
             void ClearItemsWithSameListView()
             {
                 if (is_main_collection)

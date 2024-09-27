@@ -150,8 +150,10 @@ internal partial class CircuitHost : IAsyncDisposable
                 // Now we wait for all components to finish rendering.
                 await Task.WhenAll(pendingRenders);
 
-                // At this point all components have successfully produced an initial render and we can clear the contents of the component
-                // application state store. This ensures the memory that was not used during the initial render of these components gets
+                // At this point all components have successfully produced an initial render and we can clear the
+                // contents of the component
+                // application state store. This ensures the memory that was not used during the initial render of
+                // these components gets
                 // reclaimed since no-one else is holding on to it any longer.
                 // This is also important because otherwise components will keep reusing the existing state after
                 // the initial render instead of initializing their state from the original sources like the Db or a
@@ -198,7 +200,8 @@ internal partial class CircuitHost : IAsyncDisposable
                 return;
             }
 
-            // Make sure that no hub or connection can refer to this circuit anymore now that it's shutting down.
+            // Make sure that no hub or connection can refer to this circuit anymore now that it's shutting
+            // down.
             Handle.CircuitHost = null;
             _disposed = true;
 
@@ -453,7 +456,8 @@ internal partial class CircuitHost : IAsyncDisposable
         }
         catch (Exception ex)
         {
-            // We don't expect any of this code to actually throw, because DotNetDispatcher.BeginInvoke doesn't throw
+            // We don't expect any of this code to actually throw, because DotNetDispatcher.BeginInvoke doesn't
+            // throw
             // however, we still want this to get logged if we do.
             Log.BeginInvokeDotNetFailed(
                 _logger,
@@ -790,8 +794,10 @@ internal partial class CircuitHost : IAsyncDisposable
         AssertNotDisposed();
 
         // Dispatch any buffered renders we accumulated during a disconnect.
-        // Note that while the rendering is async, we cannot await it here. The Task returned by ProcessBufferedRenderBatches relies on
-        // OnRenderCompletedAsync to be invoked to complete, and SignalR does not allow concurrent hub method invocations.
+        // Note that while the rendering is async, we cannot await it here. The Task returned by
+        // ProcessBufferedRenderBatches relies on
+        // OnRenderCompletedAsync to be invoked to complete, and SignalR does not allow concurrent hub
+        // method invocations.
         _ = Renderer.Dispatcher.InvokeAsync(Renderer.ProcessBufferedRenderBatches);
     }
 
@@ -887,7 +893,8 @@ internal partial class CircuitHost : IAsyncDisposable
         }
     }
 
-    // exception is only populated when either the renderer or the synchronization context signal exceptions.
+    // exception is only populated when either the renderer or the synchronization context signal
+    // exceptions.
     // In other cases it is null and should never be sent to the client.
     // error contains the information to send to the client.
     private async Task TryNotifyClientErrorAsync(
@@ -996,7 +1003,8 @@ internal partial class CircuitHost : IAsyncDisposable
                             }
                             break;
                         case RootComponentOperationType.Update:
-                            // We don't need to await component updates as any unhandled exception will be reported and terminate the circuit.
+                            // We don't need to await component updates as any unhandled exception will be reported and
+                            // terminate the circuit.
                             _ = webRootComponentManager.UpdateRootComponentAsync(
                                 operation.SsrComponentId,
                                 operation.Descriptor.ComponentType,
@@ -1033,8 +1041,10 @@ internal partial class CircuitHost : IAsyncDisposable
             {
                 if (shouldClearStore)
                 {
-                    // At this point all components have successfully produced an initial render and we can clear the contents of the component
-                    // application state store. This ensures the memory that was not used during the initial render of these components gets
+                    // At this point all components have successfully produced an initial render and we can clear the
+                    // contents of the component
+                    // application state store. This ensures the memory that was not used during the initial render of
+                    // these components gets
                     // reclaimed since no-one else is holding on to it any longer.
                     store.ExistingState.Clear();
                 }

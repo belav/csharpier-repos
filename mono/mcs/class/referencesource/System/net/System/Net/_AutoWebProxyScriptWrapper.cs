@@ -5,7 +5,8 @@
 //------------------------------------------------------------------------------
 
 
-// Two implementations of AutoWebProxyScriptWrapper live in this file.  The first uses jscript.dll via COM, the second
+// Two implementations of AutoWebProxyScriptWrapper live in this file.  The first uses jscript.dll
+// via COM, the second
 // uses Microsoft.JScript using an external AppDomain.
 
 #pragma warning disable 618
@@ -471,7 +472,8 @@ namespace System.Net
     using System.Security.Policy;
     using System.Threading;
 
-    // This interface is useless to users.  We need it to interact with our Microsoft.JScript helper class.
+    // This interface is useless to users.  We need it to interact with our Microsoft.JScript helper
+    // class.
     public interface IWebProxyScript
     {
         bool Load(Uri scriptLocation, string script, Type helperType);
@@ -483,13 +485,16 @@ namespace System.Net
     {
         private const string c_appDomainName = "WebProxyScript";
 
-        // The index is required for the hashtable because calling GetHashCode() on an unloaded AppDomain throws.
+        // The index is required for the hashtable because calling GetHashCode() on an unloaded AppDomain
+        // throws.
         private int appDomainIndex;
         private AppDomain scriptDomain;
         private IWebProxyScript site;
 
-        // s_ExcessAppDomain is a holding spot for the most recently created AppDomain.  Until we guarantee it gets
-        // into s_AppDomains (or is unloaded), no additional AppDomains can be created, to avoid leaking them.
+        // s_ExcessAppDomain is a holding spot for the most recently created AppDomain.  Until we guarantee
+        // it gets
+        // into s_AppDomains (or is unloaded), no additional AppDomains can be created, to avoid leaking
+        // them.
         private static volatile AppDomain s_ExcessAppDomain;
         private static Hashtable s_AppDomains = new Hashtable();
         private static bool s_CleanedUp;
@@ -617,7 +622,8 @@ namespace System.Net
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.ControlAppDomain)]
         private void CreateAppDomain()
         {
-            // Locking s_AppDomains must happen in a CER so we don't orphan a lock that gets taken by AppDomain.DomainUnload.
+            // Locking s_AppDomains must happen in a CER so we don't orphan a lock that gets taken by
+            // AppDomain.DomainUnload.
             bool lockHeld = false;
             RuntimeHelpers.PrepareConstrainedRegions();
             try
@@ -742,12 +748,16 @@ namespace System.Net
 
         // Bug 434828
         //
-        // It's very hard to guarantee cleanup of an AppDomain.  They aren't garbage collected, and Unload() is synchronous and
-        // can't be called from the finalizer thread.  So we must have a finalizer that uses another thread, in this case the
+        // It's very hard to guarantee cleanup of an AppDomain.  They aren't garbage collected, and Unload()
+        // is synchronous and
+        // can't be called from the finalizer thread.  So we must have a finalizer that uses another thread,
+        // in this case the
         // TimerThread, to unload the domain.
         //
-        // A case this will come up is if the user replaces the DefaultWebProxy.  The old one will be GC'd - there's no chance to
-        // clean it up properly.  If the user wants to avoid the TimerThread being spun up for that purpose, they should save the
+        // A case this will come up is if the user replaces the DefaultWebProxy.  The old one will be GC'd -
+        // there's no chance to
+        // clean it up properly.  If the user wants to avoid the TimerThread being spun up for that purpose,
+        // they should save the
         // existing DefaultWebProxy in a static before replacing it.
         ~AutoWebProxyScriptWrapper()
         {
@@ -799,7 +809,8 @@ namespace System.Net
         {
             AppDomain appDomain;
 
-            // Locking s_AppDomains must happen in a CER so we don't orphan a lock that gets taken by AppDomain.DomainUnload.
+            // Locking s_AppDomains must happen in a CER so we don't orphan a lock that gets taken by
+            // AppDomain.DomainUnload.
             bool lockHeld = false;
             RuntimeHelpers.PrepareConstrainedRegions();
             try

@@ -178,7 +178,8 @@ namespace System.ServiceModel.Diagnostics
 
         public override void WriteChars(Char[] buffer, int index, int count)
         {
-            // Exceptions being thrown as per data found at http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpref/html/frlrfsystemxmlxmlwriterclasswritecharstopic.asp
+            // Exceptions being thrown as per data found at
+            // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpref/html/frlrfsystemxmlxmlwriterclasswritecharstopic.asp
             if (buffer == null)
             {
                 throw new ArgumentNullException("buffer");

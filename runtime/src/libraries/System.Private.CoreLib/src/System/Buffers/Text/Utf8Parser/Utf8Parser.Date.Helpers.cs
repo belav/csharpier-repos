@@ -53,8 +53,10 @@ namespace System.Buffers.Text
             }
             catch (ArgumentOutOfRangeException)
             {
-                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year range. This case seems rare enough
-                // that it's better to catch the exception rather than replicate DateTime's range checking (which it's going to do anyway.)
+                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year
+                // range. This case seems rare enough
+                // that it's better to catch the exception rather than replicate DateTime's range checking (which
+                // it's going to do anyway.)
                 value = default;
                 return false;
             }
@@ -152,8 +154,10 @@ namespace System.Buffers.Text
             }
             catch (ArgumentOutOfRangeException)
             {
-                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year range. This case seems rare enough
-                // that it's better to catch the exception rather than replicate DateTime's range checking (which it's going to do anyway.)
+                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year
+                // range. This case seems rare enough
+                // that it's better to catch the exception rather than replicate DateTime's range checking (which
+                // it's going to do anyway.)
 
                 value = default;
                 return false;

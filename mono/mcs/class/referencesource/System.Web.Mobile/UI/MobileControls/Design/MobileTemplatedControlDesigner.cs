@@ -622,7 +622,8 @@ namespace System.Web.UI.Design.MobileControls
 
         /// <summary>
         ///    <para>
-        ///       Gets the HTML to be persisted for the content present within the associated server control runtime.
+        ///       Gets the HTML to be persisted for the content present within the associated server control
+        // runtime.
         ///    </para>
         /// </summary>
         /// <returns>
@@ -827,18 +828,20 @@ namespace System.Web.UI.Design.MobileControls
 
                 // This code won't work in Venus now since there are no viewlinks and
                 // they don't support this kind of schema.
-                /*
-                NativeMethods.IHTMLElement htmlElement = (NativeMethods.IHTMLElement) ((IHtmlControlDesignerBehavior) Behavior).DesignTimeElementView;
-                Debug.Assert(htmlElement != null,
-                    "Invalid HTML element in MobileTemplateControlDesigner.OnTemplateModeChanged");
-                NativeMethods.IHTMLDocument2 htmlDocument2 = (NativeMethods.IHTMLDocument2) htmlElement.GetDocument();
-                Debug.Assert(htmlDocument2 != null,
-                    "Invalid HTML Document2 in MobileTemplateControlDesigner.OnTemplateModeChanged");
-                NativeMethods.IHTMLElement htmlBody = (NativeMethods.IHTMLElement) htmlDocument2.GetBody();
-                Debug.Assert(htmlBody != null,
-                    "Invalid HTML Body in MobileTemplateControlDesigner.OnTemplateModeChanged");
-                htmlBody.SetAttribute("xmlns", (Object) CurrentChoice.Xmlns, 0);
-                */
+/*
+NativeMethods.IHTMLElement htmlElement = (NativeMethods.IHTMLElement)
+((IHtmlControlDesignerBehavior) Behavior).DesignTimeElementView;
+Debug.Assert(htmlElement != null,
+"Invalid HTML element in MobileTemplateControlDesigner.OnTemplateModeChanged");
+NativeMethods.IHTMLDocument2 htmlDocument2 = (NativeMethods.IHTMLDocument2)
+htmlElement.GetDocument();
+Debug.Assert(htmlDocument2 != null,
+"Invalid HTML Document2 in MobileTemplateControlDesigner.OnTemplateModeChanged");
+NativeMethods.IHTMLElement htmlBody = (NativeMethods.IHTMLElement) htmlDocument2.GetBody();
+Debug.Assert(htmlBody != null,
+"Invalid HTML Body in MobileTemplateControlDesigner.OnTemplateModeChanged");
+htmlBody.SetAttribute("xmlns", (Object) CurrentChoice.Xmlns, 0);
+*/
             }
         }
 

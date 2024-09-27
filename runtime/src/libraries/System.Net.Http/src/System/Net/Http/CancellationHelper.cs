@@ -13,9 +13,11 @@ namespace System.Net.Http
         private static readonly string s_cancellationMessage =
             new OperationCanceledException().Message; // use same message as the default ctor
 
-        /// <summary>Determines whether to wrap an <see cref="Exception"/> in a cancellation exception.</summary>
+        /// <summary>Determines whether to wrap an <see cref="Exception"/> in a cancellation
+        // exception.</summary>
         /// <param name="exception">The exception.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that may have triggered the exception.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that may have triggered the
+        // exception.</param>
         /// <returns>true if the exception should be wrapped; otherwise, false.</returns>
         internal static bool ShouldWrapInOperationCanceledException(
             Exception exception,
@@ -25,7 +27,8 @@ namespace System.Net.Http
 
         /// <summary>Creates a cancellation exception.</summary>
         /// <param name="innerException">The inner exception to wrap. May be null.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that triggered the cancellation.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that triggered the
+        // cancellation.</param>
         /// <returns>The cancellation exception.</returns>
         internal static Exception CreateOperationCanceledException(
             Exception? innerException,
@@ -34,13 +37,15 @@ namespace System.Net.Http
 
         /// <summary>Throws a cancellation exception.</summary>
         /// <param name="innerException">The inner exception to wrap. May be null.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that triggered the cancellation.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that triggered the
+        // cancellation.</param>
         private static void ThrowOperationCanceledException(
             Exception? innerException,
             CancellationToken cancellationToken
         ) => throw CreateOperationCanceledException(innerException, cancellationToken);
 
-        /// <summary>Throws a cancellation exception if cancellation has been requested via <paramref name="cancellationToken"/>.</summary>
+        /// <summary>Throws a cancellation exception if cancellation has been requested via <paramref
+        // name="cancellationToken"/>.</summary>
         /// <param name="cancellationToken">The token to check for a cancellation request.</param>
         internal static void ThrowIfCancellationRequested(CancellationToken cancellationToken)
         {

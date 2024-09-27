@@ -315,7 +315,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
             {
                 var cancellationToken = context.UserCancellationToken;
 
-                // If we are fixing selected diagnostics in error list, then get the diagnostics from error list entry
+                // If we are fixing selected diagnostics in error list, then get the diagnostics from error list
+                // entry
                 // snapshots. Otherwise, get all diagnostics from the diagnostic service.
                 var diagnosticsToFixTask = selectedEntriesOnly
                     ? _suppressionStateService.GetSelectedItemsAsync(
@@ -463,7 +464,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // Equivalence key determines what fix will be applied.
-                // Make sure we don't include any specific diagnostic ID, as we want all of the given diagnostics (which can have varied ID) to be fixed.
+                // Make sure we don't include any specific diagnostic ID, as we want all of the given diagnostics
+                // (which can have varied ID) to be fixed.
                 var equivalenceKey = isAddSuppression
                     ? (
                         isSuppressionInSource
@@ -482,7 +484,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 var progress = context.GetCodeAnalysisProgress();
                 foreach (var languageService in languageServices)
                 {
-                    // Use the Fix multiple occurrences service to compute a bulk suppression fix for the specified document and project diagnostics,
+                    // Use the Fix multiple occurrences service to compute a bulk suppression fix for the specified
+                    // document and project diagnostics,
                     // show a preview changes dialog and then apply the fix to the workspace.
 
                     cancellationToken.ThrowIfCancellationRequested();

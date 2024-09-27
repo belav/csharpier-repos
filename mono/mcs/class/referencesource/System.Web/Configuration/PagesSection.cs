@@ -17,72 +17,74 @@ namespace System.Web.Configuration
     using System.Web.Util;
     using System.Xml;
 
-    /*                <!-- pages Attributes:
-          buffer="[true|false]"                         // Default: true
-          enableSessionState="[true|false|ReadOnly]"    // Default: true
-          enableViewState="[true|false]"                // Default: true
-          enableViewStateMac="[true|false]"             // Default: true
-          enableEventValidation="[true|false]"          // Default: true
-          maxPageStateFieldLength="[int]"               // Default: -1(off)
-          smartNavigation="[true|false]"                // Default: false
-          autoEventWireup="[true|false]"                // Default: true
-          pageBaseType="[typename]"                     // Default: System.Web.UI.Page
-          userControlBaseType="[typename]"              // Default: System.Web.UI.UserControl
-          validateRequest="[true|false]"                // Default: true
-          compilationMode="[Auto|Never|Always]"         // Default: Always
-          viewStateEncryptionMode=[Auto|Never|Always]"  // Default: Auto
-          maintainScrollPositionOnPostBack="[true|false]"   // Default: false
-          asyncTimeout="[seconds]"                      // Default: 45
-          renderAllHiddenFieldsAtTopOfForm="[true|false]"   // Default: true
-          clientIDMode="[Inherit|AutoID|Predictable|Static]"    // Default: Predictable
-        -->
-        <pages buffer="true" enableSessionState="true" enableViewState="true"
-            enableViewStateMac="true" enableEventValidation="true" autoEventWireup="true" validateRequest="true" maintainScrollPositionOnPostBack="true">
+/*                <!-- pages Attributes:
+buffer="[true|false]"                         // Default: true
+enableSessionState="[true|false|ReadOnly]"    // Default: true
+enableViewState="[true|false]"                // Default: true
+enableViewStateMac="[true|false]"             // Default: true
+enableEventValidation="[true|false]"          // Default: true
+maxPageStateFieldLength="[int]"               // Default: -1(off)
+smartNavigation="[true|false]"                // Default: false
+autoEventWireup="[true|false]"                // Default: true
+pageBaseType="[typename]"                     // Default: System.Web.UI.Page
+userControlBaseType="[typename]"              // Default: System.Web.UI.UserControl
+validateRequest="[true|false]"                // Default: true
+compilationMode="[Auto|Never|Always]"         // Default: Always
+viewStateEncryptionMode=[Auto|Never|Always]"  // Default: Auto
+maintainScrollPositionOnPostBack="[true|false]"   // Default: false
+asyncTimeout="[seconds]"                      // Default: 45
+renderAllHiddenFieldsAtTopOfForm="[true|false]"   // Default: true
+clientIDMode="[Inherit|AutoID|Predictable|Static]"    // Default: Predictable
+-->
+<pages buffer="true" enableSessionState="true" enableViewState="true"
+enableViewStateMac="true" enableEventValidation="true" autoEventWireup="true" validateRequest="true"
+maintainScrollPositionOnPostBack="true">
 
-            <!-- controls example:
-            Note that this section is only valid in web.config in the application root.
-            The same tagPrefix can be used to map to multiple assemblies or namespaces
-            as shown in the example.
-            <controls>
-                <add tagPrefix="acme" tagName="uc" src="controls/uc.ascx" />
-                <add tagPrefix="my" namespace="MyControls.BasicControls" assembly="MyControls" />
-                <add tagPrefix="my" namespace="MyControls.EnhancedControls" assembly="MyControls" />
-            </controls>
-            -->
+<!-- controls example:
+Note that this section is only valid in web.config in the application root.
+The same tagPrefix can be used to map to multiple assemblies or namespaces
+as shown in the example.
+<controls>
+<add tagPrefix="acme" tagName="uc" src="controls/uc.ascx" />
+<add tagPrefix="my" namespace="MyControls.BasicControls" assembly="MyControls" />
+<add tagPrefix="my" namespace="MyControls.EnhancedControls" assembly="MyControls" />
+</controls>
+-->
 
-            <controls>
-                <add tagPrefix="asp" namespace="System.Web.UI.WebControls.WebParts" assembly="System.Web, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-            </controls>
+<controls>
+<add tagPrefix="asp" namespace="System.Web.UI.WebControls.WebParts" assembly="System.Web,
+Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+</controls>
 
-            <namespaces>
-                <add namespace="System" />
-                <add namespace="System.Collections" />
-                <add namespace="System.Collections.Specialized" />
-                <add namespace="System.ComponentModel" />
-                <add namespace="System.Configuration" />
-                <add namespace="System.Text" />
-                <add namespace="System.Text.RegularExpressions" />
-                <add namespace="System.Web" />
-                <add namespace="System.Web.Caching" />
-                <add namespace="System.Web.SessionState" />
-                <add namespace="System.Web.Security" />
-                <add namespace="System.Web.Profile" />
-                <add namespace="System.Web.UI" />
-                <add namespace="System.Web.UI.Imaging" />
-                <add namespace="System.Web.UI.WebControls" />
-                <add namespace="System.Web.UI.WebControls.WebParts" />
-                <add namespace="System.Web.UI.HtmlControls" />
-            </namespaces>
+<namespaces>
+<add namespace="System" />
+<add namespace="System.Collections" />
+<add namespace="System.Collections.Specialized" />
+<add namespace="System.ComponentModel" />
+<add namespace="System.Configuration" />
+<add namespace="System.Text" />
+<add namespace="System.Text.RegularExpressions" />
+<add namespace="System.Web" />
+<add namespace="System.Web.Caching" />
+<add namespace="System.Web.SessionState" />
+<add namespace="System.Web.Security" />
+<add namespace="System.Web.Profile" />
+<add namespace="System.Web.UI" />
+<add namespace="System.Web.UI.Imaging" />
+<add namespace="System.Web.UI.WebControls" />
+<add namespace="System.Web.UI.WebControls.WebParts" />
+<add namespace="System.Web.UI.HtmlControls" />
+</namespaces>
 
-            <!-- tagMapping example:
-            <tagMapping>
-                <add tagTypeName="[type name]"
-                     mappedTagTypeName="[type name]" />
-                <remove tagTypeName="[type name]" />
-                <clear />
-            </tagMapping>
-            -->
-        </pages>
+<!-- tagMapping example:
+<tagMapping>
+<add tagTypeName="[type name]"
+mappedTagTypeName="[type name]" />
+<remove tagTypeName="[type name]" />
+<clear />
+</tagMapping>
+-->
+</pages>
 
 
 
@@ -324,16 +326,17 @@ namespace System.Web.Configuration
 
         public PagesSection() { }
 
-        /*
-        protected override void InitializeDefault()
-        {
+/*
+protected override void InitializeDefault()
+{
 /* No Init Basic Map
-    Controls.Add(new TagPrefixInfo("asp", "System.Web.UI.WebControls.WebParts",
-                "System.Web, Version="+ThisAssembly.Version+", Culture=neutral, PublicKeyToken="+AssemblyRef.MicrosoftPublicKey,
-                null, null));
+Controls.Add(new TagPrefixInfo("asp", "System.Web.UI.WebControls.WebParts",
+"System.Web, Version="+ThisAssembly.Version+", Culture=neutral,
+PublicKeyToken="+AssemblyRef.MicrosoftPublicKey,
+null, null));
 */
-        /*
-        }
+/*
+}
 */
         protected override ConfigurationPropertyCollection Properties
         {
@@ -992,7 +995,8 @@ namespace System.Web.Configuration
             }
         }
 
-        // This is called as the last step of the deserialization process before the newly created section is seen by the consumer.
+        // This is called as the last step of the deserialization process before the newly created section
+        // is seen by the consumer.
         // We can use it to change defaults on-the-fly.
         protected override void SetReadOnly()
         {

@@ -39,11 +39,11 @@ namespace TestMonoWeb
                 HttpRuntime.ProcessRequest(requests[pos]);
 
             HttpRuntime.Close();
-            /*
-                        Console.Write("Press Enter to quit.");
-                        Console.WriteLine();
-                        Console.ReadLine();
-            */
+/*
+Console.Write("Press Enter to quit.");
+Console.WriteLine();
+Console.ReadLine();
+*/
         }
     }
 }

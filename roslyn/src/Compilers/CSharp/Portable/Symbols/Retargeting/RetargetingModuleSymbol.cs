@@ -18,15 +18,19 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
-    /// Represents a primary module of a <see cref="RetargetingAssemblySymbol"/>. Essentially this is a wrapper around
-    /// another <see cref="SourceModuleSymbol"/> that is responsible for retargeting symbols from one assembly to another.
+    /// Represents a primary module of a <see cref="RetargetingAssemblySymbol"/>. Essentially this is a
+    // wrapper around
+    /// another <see cref="SourceModuleSymbol"/> that is responsible for retargeting symbols from one
+    // assembly to another.
     /// It can retarget symbols for multiple assemblies at the same time.
     ///
     /// Here is how retargeting is implemented in general:
     /// - Symbols from underlying module are substituted with retargeting symbols.
-    /// - Symbols from referenced assemblies that can be reused as is (i.e. don't have to be retargeted) are
+    /// - Symbols from referenced assemblies that can be reused as is (i.e. don't have to be retargeted)
+    // are
     ///   used as is.
-    /// - Symbols from referenced assemblies that must be retargeted are substituted with result of retargeting.
+    /// - Symbols from referenced assemblies that must be retargeted are substituted with result of
+    // retargeting.
     /// </summary>
     internal sealed partial class RetargetingModuleSymbol : NonMissingModuleSymbol
     {
@@ -36,14 +40,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         private readonly RetargetingAssemblySymbol _retargetingAssembly;
 
         /// <summary>
-        /// The underlying <see cref="ModuleSymbol"/>, cannot be another <see cref="RetargetingModuleSymbol"/>.
+        /// The underlying <see cref="ModuleSymbol"/>, cannot be another <see
+        // cref="RetargetingModuleSymbol"/>.
         /// </summary>
         private readonly SourceModuleSymbol _underlyingModule;
 
         /// <summary>
         /// The map that captures information about what assembly should be retargeted
         /// to what assembly. Key is the <see cref="AssemblySymbol"/> referenced by the underlying module,
-        /// value is the corresponding <see cref="AssemblySymbol"/> referenced by this module, and corresponding
+        /// value is the corresponding <see cref="AssemblySymbol"/> referenced by this module, and
+        // corresponding
         /// retargeting map for symbols.
         /// </summary>
         private readonly Dictionary<AssemblySymbol, DestinationData> _retargetingAssemblyMap =

@@ -28,7 +28,8 @@ public class JsonResult : ActionResult, IStatusCodeActionResult
     /// <param name="serializerSettings">
     /// The serializer settings to be used by the formatter.
     /// <para>
-    /// When using <c>System.Text.Json</c>, this should be an instance of <see cref="JsonSerializerOptions" />.
+    /// When using <c>System.Text.Json</c>, this should be an instance of <see
+    // cref="JsonSerializerOptions" />.
     /// </para>
     /// <para>
     /// When using <c>Newtonsoft.Json</c>, this should be an instance of <c>JsonSerializerSettings</c>.
@@ -41,14 +42,16 @@ public class JsonResult : ActionResult, IStatusCodeActionResult
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="Net.Http.Headers.MediaTypeHeaderValue"/> representing the Content-Type header of the response.
+    /// Gets or sets the <see cref="Net.Http.Headers.MediaTypeHeaderValue"/> representing the
+    // Content-Type header of the response.
     /// </summary>
     public string? ContentType { get; set; }
 
     /// <summary>
     /// Gets or sets the serializer settings.
     /// <para>
-    /// When using <c>System.Text.Json</c>, this should be an instance of <see cref="JsonSerializerOptions" />
+    /// When using <c>System.Text.Json</c>, this should be an instance of <see
+    // cref="JsonSerializerOptions" />
     /// </para>
     /// <para>
     /// When using <c>Newtonsoft.Json</c>, this should be an instance of <c>JsonSerializerSettings</c>.

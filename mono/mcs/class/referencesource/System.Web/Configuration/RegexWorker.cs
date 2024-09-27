@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Base class for browser capabilities object: just a read-only dictionary
- * holder that supports Init()
- *
- *
+* Base class for browser capabilities object: just a read-only dictionary
+* holder that supports Init()
+*
+*
 
 
 */

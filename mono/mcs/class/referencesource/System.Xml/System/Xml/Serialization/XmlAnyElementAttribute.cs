@@ -10,7 +10,8 @@ namespace System.Xml.Serialization
     using System;
     using System.Xml.Schema;
 
-    /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute"]/*' />
+    /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -28,13 +29,15 @@ namespace System.Xml.Serialization
         int order = -1;
         bool nsSpecified = false;
 
-        /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.XmlAnyElementAttribute"]/*' />
+        /// <include file='doc\XmlAnyElementAttribute.uex'
+        // path='docs/doc[@for="XmlAnyElementAttribute.XmlAnyElementAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public XmlAnyElementAttribute() { }
 
-        /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.XmlAnyElementAttribute1"]/*' />
+        /// <include file='doc\XmlAnyElementAttribute.uex'
+        // path='docs/doc[@for="XmlAnyElementAttribute.XmlAnyElementAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -43,7 +46,8 @@ namespace System.Xml.Serialization
             this.name = name;
         }
 
-        /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.XmlAnyElementAttribute2"]/*' />
+        /// <include file='doc\XmlAnyElementAttribute.uex'
+        // path='docs/doc[@for="XmlAnyElementAttribute.XmlAnyElementAttribute2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -54,7 +58,8 @@ namespace System.Xml.Serialization
             nsSpecified = true;
         }
 
-        /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.Name"]/*' />
+        /// <include file='doc\XmlAnyElementAttribute.uex'
+        // path='docs/doc[@for="XmlAnyElementAttribute.Name"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -64,7 +69,8 @@ namespace System.Xml.Serialization
             set { name = value; }
         }
 
-        /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.Namespace"]/*' />
+        /// <include file='doc\XmlAnyElementAttribute.uex'
+        // path='docs/doc[@for="XmlAnyElementAttribute.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -78,7 +84,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlAnyElementAttribute.uex' path='docs/doc[@for="XmlAnyElementAttribute.Order"]/*' />
+        /// <include file='doc\XmlAnyElementAttribute.uex'
+        // path='docs/doc[@for="XmlAnyElementAttribute.Order"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

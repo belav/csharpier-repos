@@ -103,7 +103,8 @@ namespace System.Runtime.Versioning
         // Parses strings in the following format: "<identifier>, Version=[v|V]<version>, Profile=<profile>"
         //  - The identifier and version is required, profile is optional
         //  - Only three components are allowed.
-        //  - The version string must be in the System.Version format; an optional "v" or "V" prefix is allowed
+        //  - The version string must be in the System.Version format; an optional "v" or "V" prefix is
+        // allowed
         public FrameworkName(string frameworkName)
         {
             ArgumentException.ThrowIfNullOrEmpty(frameworkName);

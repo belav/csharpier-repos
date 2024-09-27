@@ -36,7 +36,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="namespaceName">namespace of the structural type</param>
         /// <param name="version">version of the structural type</param>
         /// <param name="dataSpace">dataSpace in which this edmtype belongs to</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version arguments are null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version
+        // arguments are null</exception>
         internal StructuralType(string name, string namespaceName, DataSpace dataSpace)
             : base(name, namespaceName, dataSpace)
         {

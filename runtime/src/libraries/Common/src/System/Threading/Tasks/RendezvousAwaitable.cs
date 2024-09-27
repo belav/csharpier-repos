@@ -10,16 +10,19 @@ using System.Runtime.ExceptionServices;
 
 namespace System.Threading.Tasks
 {
-    /// <summary>Provides a reusable object that can be awaited by a consumer and manually completed by a producer.</summary>
+    /// <summary>Provides a reusable object that can be awaited by a consumer and manually completed by
+    // a producer.</summary>
     /// <typeparam name="TResult">The type of data being passed from producer to consumer.</typeparam>
     internal class RendezvousAwaitable<TResult> : ICriticalNotifyCompletion
     {
-        /// <summary>Sentinel object indicating that the operation has completed prior to OnCompleted being called.</summary>
+        /// <summary>Sentinel object indicating that the operation has completed prior to OnCompleted being
+        // called.</summary>
         private static readonly Action s_completionSentinel = static () =>
             Debug.Fail("Completion sentinel should never be invoked");
 
         /// <summary>
-        /// The continuation to invoke when the operation completes, or <see cref="s_completionSentinel"/> if the operation
+        /// The continuation to invoke when the operation completes, or <see cref="s_completionSentinel"/>
+        // if the operation
         /// has completed before OnCompleted is called.
         /// </summary>
         private Action? _continuation;
@@ -33,7 +36,8 @@ namespace System.Threading.Tasks
         private bool _resultSet;
 #endif
 
-        /// <summary>true if the producer should invoke the continuation asynchronously; otherwise, false.</summary>
+        /// <summary>true if the producer should invoke the continuation asynchronously; otherwise,
+        // false.</summary>
         public bool RunContinuationsAsynchronously { get; set; } = true;
 
         /// <summary>Gets this instance as an awaiter.</summary>

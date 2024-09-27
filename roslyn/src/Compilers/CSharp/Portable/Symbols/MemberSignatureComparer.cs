@@ -59,11 +59,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// The member names, parameters, and (return) types must match. Custom modifiers are ignored.
         /// </summary>
         /// <remarks>
-        /// One would expect this comparer to have requireSourceMethod = true, but it doesn't because (for source types)
-        /// we allow inexact matching of custom modifiers when computing implicit member implementations. Consider the
-        /// following scenario: interface I has a method M with custom modifiers C1, source type ST includes I in its
-        /// interface list but has no method M, and metadata type MT has a method M with custom modifiers C2.
-        /// In this scenario, we want to compare I.M to MT.M without regard to custom modifiers, because if C1 != C2,
+        /// One would expect this comparer to have requireSourceMethod = true, but it doesn't because (for
+        // source types)
+        /// we allow inexact matching of custom modifiers when computing implicit member implementations.
+        // Consider the
+        /// following scenario: interface I has a method M with custom modifiers C1, source type ST includes
+        // I in its
+        /// interface list but has no method M, and metadata type MT has a method M with custom modifiers
+        // C2.
+        /// In this scenario, we want to compare I.M to MT.M without regard to custom modifiers, because if
+        // C1 != C2,
         /// we can just synthesize an explicit implementation of I.M in ST that calls MT.M.
         /// </remarks>
         public static readonly MemberSignatureComparer CSharpImplicitImplementationComparer =
@@ -79,8 +84,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// This instance is used as a fallback when it is determined that one member does not implicitly implement
-        /// another. It applies a looser check to determine whether the proposed implementation should be reported
+        /// This instance is used as a fallback when it is determined that one member does not implicitly
+        // implement
+        /// another. It applies a looser check to determine whether the proposed implementation should be
+        // reported
         /// as "close".
         /// </summary>
         public static readonly MemberSignatureComparer CSharpCloseImplicitImplementationComparer =
@@ -96,9 +103,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ); //shouldn't actually matter for source members
 
         /// <summary>
-        /// This instance is used to determine if two C# member declarations in source conflict with each other.
+        /// This instance is used to determine if two C# member declarations in source conflict with each
+        // other.
         /// Names, arities, and parameter types are considered.
-        /// Return types, type parameter constraints, custom modifiers, and parameter ref kinds, etc are ignored.
+        /// Return types, type parameter constraints, custom modifiers, and parameter ref kinds, etc are
+        // ignored.
         /// </summary>
         /// <remarks>
         /// This does the same comparison that MethodSignature used to do.
@@ -161,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Determines if an interceptor has a compatible signature with an interceptable method.
-        /// NB: when a classic extension method is intercepting an instance method call, a normalization to 'ReducedExtensionMethodSymbol' must be performed first.
+        /// NB: when a classic extension method is intercepting an instance method call, a normalization to
+        // 'ReducedExtensionMethodSymbol' must be performed first.
         /// </summary>
         public static readonly MemberSignatureComparer InterceptorsComparer =
             new MemberSignatureComparer(
@@ -177,8 +187,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Determines if an interceptor has a compatible signature with an interceptable method.
-        /// If methods are considered equal by <see cref="InterceptorsComparer"/>, but not equal by this comparer, a warning is reported.
-        /// NB: when a classic extension method is intercepting an instance method call, a normalization to 'ReducedExtensionMethodSymbol' must be performed first.
+        /// If methods are considered equal by <see cref="InterceptorsComparer"/>, but not equal by this
+        // comparer, a warning is reported.
+        /// NB: when a classic extension method is intercepting an instance method call, a normalization to
+        // 'ReducedExtensionMethodSymbol' must be performed first.
         /// </summary>
         public static readonly MemberSignatureComparer InterceptorsStrictComparer =
             new MemberSignatureComparer(
@@ -193,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// This instance is used to check whether one member overrides another, according to the C# definition.
+        /// This instance is used to check whether one member overrides another, according to the C#
+        // definition.
         /// </summary>
         public static readonly MemberSignatureComparer CSharpOverrideComparer =
             new MemberSignatureComparer(
@@ -208,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// This instance checks whether two signatures match including tuples names, in both return type and parameters.
+        /// This instance checks whether two signatures match including tuples names, in both return type
+        // and parameters.
         /// It is used to detect tuple-name-only differences.
         /// </summary>
         private static readonly MemberSignatureComparer CSharpWithTupleNamesComparer =
@@ -223,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// This instance checks whether two signatures match excluding tuples names, in both return type and parameters.
+        /// This instance checks whether two signatures match excluding tuples names, in both return type
+        // and parameters.
         /// It is used to detect tuple-name-only differences.
         /// </summary>
         private static readonly MemberSignatureComparer CSharpWithoutTupleNamesComparer =
@@ -238,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// This instance is used to check whether one property or event overrides another, according to the C# definition.
+        /// This instance is used to check whether one property or event overrides another, according to the
+        // C# definition.
         /// <para>NOTE: C# ignores accessor member names.</para>
         /// </summary>
         public static readonly MemberSignatureComparer CSharpAccessorOverrideComparer =
@@ -254,8 +270,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// Same as <see cref="CSharpOverrideComparer"/> except that it pays attention to custom modifiers and return type.
-        /// Normally, the return type isn't considered during overriding, but this comparer is actually used to find
+        /// Same as <see cref="CSharpOverrideComparer"/> except that it pays attention to custom modifiers
+        // and return type.
+        /// Normally, the return type isn't considered during overriding, but this comparer is actually used
+        // to find
         /// exact matches (i.e. before tie-breaking takes place amongst close matches).
         /// </summary>
         public static readonly MemberSignatureComparer CSharpCustomModifierOverrideComparer =
@@ -273,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// If this returns false, then the real override comparer (whichever one is appropriate for the scenario)
+        /// If this returns false, then the real override comparer (whichever one is appropriate for the
+        // scenario)
         /// will also return false.
         /// </summary>
         internal static readonly MemberSignatureComparer SloppyOverrideComparer =
@@ -291,8 +310,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// This instance is intended to reflect the definition of signature equality used by the runtime
-        /// (<a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf">ECMA-335</a>, Partition I, §8.6.1.6 Signature Matching).
-        /// It considers return type, name, parameters, calling convention, and custom modifiers, but ignores
+        /// (<a
+        // href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf">ECMA-335</a>,
+        // Partition I, §8.6.1.6 Signature Matching).
+        /// It considers return type, name, parameters, calling convention, and custom modifiers, but
+        // ignores
         /// the difference between <see cref="RefKind.Out"/> and <see cref="RefKind.Ref"/>.
         /// </summary>
         public static readonly MemberSignatureComparer RuntimeSignatureComparer =
@@ -325,8 +347,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// Same as <see cref="RuntimeSignatureComparer"/>, but distinguishes between <c>ref</c> and <c>out</c>. During override resolution,
-        /// if we find two methods that match except for <c>ref</c>/<c>out</c>, we want to prefer the one that matches, even
+        /// Same as <see cref="RuntimeSignatureComparer"/>, but distinguishes between <c>ref</c> and
+        // <c>out</c>. During override resolution,
+        /// if we find two methods that match except for <c>ref</c>/<c>out</c>, we want to prefer the one
+        // that matches, even
         /// if the runtime doesn't.
         /// </summary>
         public static readonly MemberSignatureComparer RuntimePlusRefOutSignatureComparer =
@@ -379,7 +403,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// This instance is used for performing approximate overload resolution of documentation
-        /// comment <c>cref</c> attributes. It ignores the name, because the candidates were all found by lookup.
+        /// comment <c>cref</c> attributes. It ignores the name, because the candidates were all found by
+        // lookup.
         /// </summary>
         public static readonly MemberSignatureComparer CrefComparer = new MemberSignatureComparer(
             considerName: false, //handled by lookup
@@ -394,7 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         );
 
         /// <summary>
-        /// Compare signatures of methods from a method group (only used in logic for older language version).
+        /// Compare signatures of methods from a method group (only used in logic for older language
+        // version).
         /// </summary>
         internal static readonly MemberSignatureComparer CSharp10MethodGroupSignatureComparer =
             new MemberSignatureComparer(
@@ -586,9 +612,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 // The purpose of this check is to determine whether the interface parts of the member names agree,
-                // but to do so using robust symbolic checks, rather than syntactic ones.  Therefore, if neither member
+                // but to do so using robust symbolic checks, rather than syntactic ones.  Therefore, if neither
+                // member
                 // name contains an interface name, this check is not relevant.
-                // Phrased differently, the explicitly implemented interface is not part of the signature unless it's
+                // Phrased differently, the explicitly implemented interface is not part of the signature unless
+                // it's
                 // part of the name.
                 if (sawInterfaceInName1)
                 {
@@ -1005,7 +1033,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var refKind1 = param1.RefKind;
                 var refKind2 = param2.RefKind;
 
-                // Metadata signatures don't distinguish ref/out, but C# does - even when comparing metadata method signatures.
+                // Metadata signatures don't distinguish ref/out, but C# does - even when comparing metadata method
+                // signatures.
                 if ((refKindCompareMode & RefKindCompareMode.ConsiderDifferences) != 0)
                 {
                     if (!areRefKindsCompatible(refKindCompareMode, refKind1, refKind2))
@@ -1098,7 +1127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Do the members differ in terms of tuple names (both in their return type and parameters), but would match ignoring names?
+        /// Do the members differ in terms of tuple names (both in their return type and parameters), but
+        // would match ignoring names?
         ///
         /// We'll look at the result of equality without tuple names (1) and with tuple names (2).
         /// The question is whether there is a change in tuple element names only (3).

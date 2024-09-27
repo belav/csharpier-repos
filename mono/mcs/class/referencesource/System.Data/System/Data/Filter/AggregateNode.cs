@@ -151,7 +151,8 @@ namespace System.Data
                 list.Add(column);
             }
 
-            // SQLBU 383715: Staleness of computed values in expression column as the relationship end columns are not being added to the dependent column list.
+            // SQLBU 383715: Staleness of computed values in expression column as the relationship end columns
+            // are not being added to the dependent column list.
             AggregateNode.Bind(relation, list);
         }
 

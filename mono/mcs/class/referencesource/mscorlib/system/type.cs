@@ -41,7 +41,8 @@ namespace System
     public abstract partial class Type : MemberInfo, _Type, IReflect
     {
         //
-        // System.Type is appdomain agile type. Appdomain agile types cannot have precise static constructors. Make
+        // System.Type is appdomain agile type. Appdomain agile types cannot have precise static
+        // constructors. Make
         // sure to never introduce one here!
         //
         public static readonly MemberFilter FilterAttribute = new MemberFilter(
@@ -1814,7 +1815,8 @@ namespace System
             }
 
             // Insertion Sort these values in ascending order.
-            // We use this O(n^2) algorithm, but it turns out that most of the time the elements are already in sorted order and
+            // We use this O(n^2) algorithm, but it turns out that most of the time the elements are already in
+            // sorted order and
             // the common case performance will be faster than quick sorting this.
             IComparer comparer = Comparer.Default;
             for (int i = 1; i < values.Length; i++)
@@ -1824,7 +1826,8 @@ namespace System
                 object val = values[i];
                 bool exchanged = false;
 
-                // Since the elements are sorted we only need to do one comparision, we keep the check for j inside the loop.
+                // Since the elements are sorted we only need to do one comparision, we keep the check for j inside
+                // the loop.
                 while (comparer.Compare(values[j - 1], val) > 0)
                 {
                     names[j] = names[j - 1];
@@ -1911,7 +1914,8 @@ namespace System
             if (Type.IsIntegerType(valueType))
             {
                 Type underlyingType = GetEnumUnderlyingType();
-                // We cannot compare the types directly because valueType is always a runtime type but underlyingType might not be.
+                // We cannot compare the types directly because valueType is always a runtime type but
+                // underlyingType might not be.
                 if (underlyingType.GetTypeCodeImpl() != valueType.GetTypeCodeImpl())
                     throw new ArgumentException(
                         Environment.GetResourceString(

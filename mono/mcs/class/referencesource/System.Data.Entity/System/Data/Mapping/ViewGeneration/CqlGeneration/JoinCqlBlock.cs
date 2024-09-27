@@ -24,8 +24,10 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
     {
         #region Constructor
         /// <summary>
-        /// Creates a join block (type given by <paramref name="opType"/>) with SELECT (<paramref name="slotInfos"/>), FROM (<paramref name="children"/>),
-        /// ON (<paramref name="onClauses"/> - one for each child except 0th), WHERE (true), AS (<paramref name="blockAliasNum"/>).
+        /// Creates a join block (type given by <paramref name="opType"/>) with SELECT (<paramref
+        // name="slotInfos"/>), FROM (<paramref name="children"/>),
+        /// ON (<paramref name="onClauses"/> - one for each child except 0th), WHERE (true), AS (<paramref
+        // name="blockAliasNum"/>).
         /// </summary>
         internal JoinCqlBlock(
             CellTreeOpType opType,
@@ -139,7 +141,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
                 else
                 {
                     // Update the joinTreeCtxParentQualifiers.
-                    // Note that all blocks that already participate in the left expression tree share the same copy of the joinTreeContext.
+                    // Note that all blocks that already participate in the left expression tree share the same copy of
+                    // the joinTreeContext.
                     joinTreeCtxParentQualifiers.Add(join.Left.VariableName);
                 }
 
@@ -155,7 +158,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         #endregion
 
         /// <summary>
-        /// Represents a complete ON clause "slot1 == slot2 AND "slot3 == slot4" ... for two <see cref="JoinCqlBlock"/>s.
+        /// Represents a complete ON clause "slot1 == slot2 AND "slot3 == slot4" ... for two <see
+        // cref="JoinCqlBlock"/>s.
         /// </summary>
         internal sealed class OnClause : InternalBase
         {
@@ -172,7 +176,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 
             #region Methods
             /// <summary>
-            /// Adds an <see cref="SingleClause"/> element for a join of the form <paramref name="leftSlot"/> = <paramref name="rightSlot"/>.
+            /// Adds an <see cref="SingleClause"/> element for a join of the form <paramref name="leftSlot"/> =
+            // <paramref name="rightSlot"/>.
             /// </summary>
             internal void Add(
                 QualifiedSlot leftSlot,

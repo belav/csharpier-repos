@@ -46,7 +46,8 @@ namespace System.Data.ProviderBase
         /// Constructor for the type.
         /// </summary>
         /// <param name="stsAuthority">Token Endpoint URL</param>
-        /// <param name="servicePrincipalName">SPN representing the SQL service in an active directory.</param>
+        /// <param name="servicePrincipalName">SPN representing the SQL service in an active
+        // directory.</param>
         internal DbConnectionPoolAuthenticationContextKey(
             string stsAuthority,
             string servicePrincipalName

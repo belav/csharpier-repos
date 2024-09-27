@@ -380,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 return true;
             }
 
-            // TODO: actually adornments do not make much sense on "cropped" spans either - Consider line separator on "nd Su"
+            // TODO: actually adornments do not make much sense on "cropped" spans either - Consider line
+            // separator on "nd Su"
             // is it possible to cheaply detect cropping?
             var spans = mappingSpan.GetSpans(viewSnapshot);
             if (spans.Count != 1)

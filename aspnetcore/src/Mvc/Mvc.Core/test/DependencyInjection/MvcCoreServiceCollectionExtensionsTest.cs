@@ -21,11 +21,14 @@ namespace Microsoft.AspNetCore.Mvc;
 
 public class MvcCoreServiceCollectionExtensionsTest
 {
-    // Some MVC services can be registered multiple times, for example, 'IConfigureOptions<MvcOptions>' can
-    // be registered by calling 'ConfigureMvc(...)' before the call to 'AddMvc()' in which case the options
+    // Some MVC services can be registered multiple times, for example, 'IConfigureOptions<MvcOptions>'
+    // can
+    // be registered by calling 'ConfigureMvc(...)' before the call to 'AddMvc()' in which case the
+    // options
     // configuration is run in the order they were registered.
     //
-    // For these kind of multi registration service types, we want to make sure that MVC will still add its
+    // For these kind of multi registration service types, we want to make sure that MVC will still add
+    // its
     // services if the implementation type is different.
     [Fact]
     public void MultiRegistrationServiceTypes_AreRegistered_MultipleTimes()

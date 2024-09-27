@@ -38,7 +38,8 @@ namespace System
     /// Their frequencies are very different. Ephemeral GCs happen much more often than
     /// the other two kinds. Background GCs usually happen infrequently, and
     /// full blocking GCs usually happen very infrequently. In order to sample the very
-    /// infrequent GCs, collections are separated into kinds so callers can ask for all three kinds while maintaining
+    /// infrequent GCs, collections are separated into kinds so callers can ask for all three kinds
+    // while maintaining
     /// a reasonable sampling rate, e.g. if you are sampling once every second, without this
     /// distinction, you may never observe a background GC. With this distinction, you can
     /// always get info of the last GC of the kind you specify.
@@ -93,9 +94,11 @@ namespace System
             MemoryMarshal.CreateReadOnlySpan(ref _pauseDuration0, 2);
     }
 
-    /// <summary>Provides a set of APIs that can be used to retrieve garbage collection information.</summary>
+    /// <summary>Provides a set of APIs that can be used to retrieve garbage collection
+    // information.</summary>
     /// <remarks>
-    /// A GC is identified by its Index. which starts from 1 and increases with each GC (see more explanation
+    /// A GC is identified by its Index. which starts from 1 and increases with each GC (see more
+    // explanation
     /// of it in the Index prooperty).
     /// If you are asking for a GC that does not exist, eg, you called the GC.GetGCMemoryInfo API
     /// before a GC happened, or you are asking for a GC of GCKind.FullBlocking and no full blocking
@@ -126,8 +129,10 @@ namespace System
         ///
         /// If the environment variable DOTNET_GCHeapHardLimit is set,
         /// or "Server.GC.HeapHardLimit" is in runtimeconfig.json, this will come from that.
-        /// If the program is run in a container, this will be an implementation-defined fraction of the container's size.
-        /// Else, this is the physical memory on the machine that was available for the GC to use when this GC occurred.
+        /// If the program is run in a container, this will be an implementation-defined fraction of the
+        // container's size.
+        /// Else, this is the physical memory on the machine that was available for the GC to use when this
+        // GC occurred.
         /// </summary>
         public long TotalAvailableMemoryBytes => _data._totalAvailableMemoryBytes;
 
@@ -142,10 +147,12 @@ namespace System
         /// Let's take the example below:
         ///  | OBJ_A |     OBJ_B     | OBJ_C |   OBJ_D   | OBJ_E |
         ///
-        /// Let's say OBJ_B, OBJ_C and and OBJ_E are garbage and get collected, but the heap does not get compacted, the resulting heap will look like the following:
+        /// Let's say OBJ_B, OBJ_C and and OBJ_E are garbage and get collected, but the heap does not get
+        // compacted, the resulting heap will look like the following:
         ///  | OBJ_A |           F           |   OBJ_D   |
         ///
-        /// The memory between OBJ_A and OBJ_D marked `F` is considered part of the FragmentedBytes, and will be used to allocate new objects. The memory after OBJ_D will not be
+        /// The memory between OBJ_A and OBJ_D marked `F` is considered part of the FragmentedBytes, and
+        // will be used to allocate new objects. The memory after OBJ_D will not be
         /// considered part of the FragmentedBytes, and will also be used to allocate new objects
         /// </summary>
         public long FragmentedBytes => _data._fragmentedBytes;

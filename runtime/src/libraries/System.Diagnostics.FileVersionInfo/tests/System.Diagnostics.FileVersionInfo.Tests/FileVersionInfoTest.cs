@@ -12,7 +12,8 @@ namespace System.Diagnostics.Tests
         private const string TestAssemblyFileName =
             "System.Diagnostics.FileVersionInfo.TestAssembly.dll";
 
-        // On Unix the internal name's extension is .exe if OutputType is exe even though the TargetExt is .dll.
+        // On Unix the internal name's extension is .exe if OutputType is exe even though the TargetExt is
+        // .dll.
         private readonly string OriginalTestAssemblyInternalName = PlatformDetection.IsWindows
             ? "System.Diagnostics.FileVersionInfo.TestAssembly.dll"
             : "System.Diagnostics.FileVersionInfo.TestAssembly.exe";
@@ -129,7 +130,8 @@ namespace System.Diagnostics.Tests
             {
                 File.WriteAllText(kernelBasePath, "bogus kernelbase.dll");
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(kernelBasePath);
-                // File name should be the full path to the local kernelbase.dll, not the relative path or the path to the system .dll
+                // File name should be the full path to the local kernelbase.dll, not the relative path or the path
+                // to the system .dll
                 Assert.Equal(Path.GetFullPath(kernelBasePath), fvi.FileName);
                 // FileDescription should be null in the local kernelbase.dll
                 Assert.Null(fvi.FileDescription);

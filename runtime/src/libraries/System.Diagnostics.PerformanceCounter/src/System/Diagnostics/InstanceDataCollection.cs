@@ -8,7 +8,8 @@ using System.Globalization;
 namespace System.Diagnostics
 {
     /// <summary>
-    ///     A collection containing all the instance data for a counter.  This collection is contained in the
+    ///     A collection containing all the instance data for a counter.  This collection is contained
+    // in the
     ///     <see cref='System.Diagnostics.InstanceDataCollectionCollection'/> when using the
     ///     <see cref='System.Diagnostics.PerformanceCounterCategory.ReadCategory'/> method.
     /// </summary>

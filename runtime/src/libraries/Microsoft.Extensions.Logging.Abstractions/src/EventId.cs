@@ -7,7 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.Extensions.Logging
 {
     /// <summary>
-    /// Identifies a logging event. The primary identifier is the "Id" property, with the "Name" property providing a short description of this type of event.
+    /// Identifies a logging event. The primary identifier is the "Id" property, with the "Name"
+    // property providing a short description of this type of event.
     /// </summary>
     public readonly struct EventId : IEquatable<EventId>
     {
@@ -21,7 +22,8 @@ namespace Microsoft.Extensions.Logging
         }
 
         /// <summary>
-        /// Checks if two specified <see cref="EventId"/> instances have the same value. They are equal if they have the same Id.
+        /// Checks if two specified <see cref="EventId"/> instances have the same value. They are equal if
+        // they have the same Id.
         /// </summary>
         /// <param name="left">The first <see cref="EventId"/>.</param>
         /// <param name="right">The second <see cref="EventId"/>.</param>
@@ -70,10 +72,12 @@ namespace Microsoft.Extensions.Logging
         }
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type. Two events are equal if they have the same id.
+        /// Indicates whether the current object is equal to another object of the same type. Two events are
+        // equal if they have the same id.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
-        /// <returns><see langword="true" /> if the current object is equal to the other parameter; otherwise, <see langword="false" />.</returns>
+        /// <returns><see langword="true" /> if the current object is equal to the other parameter;
+        // otherwise, <see langword="false" />.</returns>
         public bool Equals(EventId other)
         {
             return Id == other.Id;

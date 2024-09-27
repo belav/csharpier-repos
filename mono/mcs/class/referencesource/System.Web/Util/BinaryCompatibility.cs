@@ -9,12 +9,15 @@ namespace System.Web.Util
     using System;
     using System.Runtime.Versioning;
 
-    // This class contains utility methods that mimic the mscorlib internal System.Runtime.Versioning.BinaryCompatibility type.
+    // This class contains utility methods that mimic the mscorlib internal
+    // System.Runtime.Versioning.BinaryCompatibility type.
 
     internal sealed class BinaryCompatibility
     {
-        // We need to use this AppDomain key instead of AppDomainSetup.TargetFrameworkName since we don't want applications
-        // which happened to set TargetFrameworkName and are calling into ASP.NET APIs to suddenly start getting new behaviors.
+        // We need to use this AppDomain key instead of AppDomainSetup.TargetFrameworkName since we don't
+        // want applications
+        // which happened to set TargetFrameworkName and are calling into ASP.NET APIs to suddenly start
+        // getting new behaviors.
         internal const string TargetFrameworkKey = "ASPNET_TARGETFRAMEWORK";
 
         // quick accessor for the current AppDomain's instance

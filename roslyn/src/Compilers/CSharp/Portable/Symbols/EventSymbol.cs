@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
-        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined in
+        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined
+        // in
         /// source or metadata.
         /// </summary>
         public new virtual EventSymbol OriginalDefinition
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is false if the symbol is static.
+        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is
+        // false if the symbol is static.
         /// </summary>
         public virtual bool RequiresInstanceReceiver => !IsStatic;
 
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// True if the event itself is excluded from code coverage instrumentation.
-        /// True for source events marked with <see cref="AttributeDescription.ExcludeFromCodeCoverageAttribute"/>.
+        /// True for source events marked with <see
+        // cref="AttributeDescription.ExcludeFromCodeCoverageAttribute"/>.
         /// </summary>
         internal virtual bool IsDirectlyExcludedFromCodeCoverage
         {
@@ -179,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //      public class C : B { ... new B().E += null ... }       // A.E is not accessible from here
                 //   }
                 //
-                // See InternalsVisibleToAndStrongNameTests: IvtVirtualCall1, IvtVirtualCall2, IvtVirtual_ParamsAndDynamic.
+                // See InternalsVisibleToAndStrongNameTests: IvtVirtualCall1, IvtVirtualCall2,
+                // IvtVirtual_ParamsAndDynamic.
                 EventSymbol? overridden = e.OverriddenEvent;
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                 if (
@@ -360,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return true;
             }
 
-            // This checks if the events have the same definition and the type parameters on the containing types have been
+            // This checks if the events have the same definition and the type parameters on the containing
+            // types have been
             // substituted in the same way.
             return TypeSymbol.Equals(this.ContainingType, other.ContainingType, compareKind)
                 && ReferenceEquals(this.OriginalDefinition, other.OriginalDefinition);

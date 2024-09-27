@@ -5,7 +5,8 @@ using System.Diagnostics;
 
 namespace System.Net.Http.Headers
 {
-    // The purpose of this type is to extract the handling of general headers in one place rather than duplicating
+    // The purpose of this type is to extract the handling of general headers in one place rather than
+    // duplicating
     // functionality in both HttpRequestHeaders and HttpResponseHeaders.
     internal sealed class HttpGeneralHeaders
     {

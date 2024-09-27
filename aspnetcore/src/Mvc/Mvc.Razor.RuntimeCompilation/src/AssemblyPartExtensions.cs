@@ -19,7 +19,8 @@ public static class AssemblyPartExtensions
 
         if (assembly.IsDynamic)
         {
-            // Skip loading process for dynamic assemblies. This prevents DependencyContextLoader from reading the
+            // Skip loading process for dynamic assemblies. This prevents DependencyContextLoader from reading
+            // the
             // .deps.json file from either manifest resources or the assembly location, which will fail.
             return Enumerable.Empty<string>();
         }
@@ -32,9 +33,12 @@ public static class AssemblyPartExtensions
             );
         }
 
-        // If an application has been compiled without preserveCompilationContext, return the path to the assembly
-        // as a reference. For runtime compilation, this will allow the compilation to succeed as long as it least
-        // one application part has been compiled with preserveCompilationContext and contains a super set of types
+        // If an application has been compiled without preserveCompilationContext, return the path to the
+        // assembly
+        // as a reference. For runtime compilation, this will allow the compilation to succeed as long as it
+        // least
+        // one application part has been compiled with preserveCompilationContext and contains a super set
+        // of types
         // required for the compilation to succeed.
         return new[] { assembly.Location };
     }

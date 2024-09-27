@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace Microsoft.TestCommon
         /// <summary>
         /// Instantiates a new <see cref="TheoryDiscoverer"/> instance.
         /// </summary>
-        /// <param name="diagnosticMessageSink">The <see cref="IMessageSink"/> used to send diagnostic messages.</param>
+        /// <param name="diagnosticMessageSink">The <see cref="IMessageSink"/> used to send diagnostic
+        // messages.</param>
         public TheoryDiscoverer(IMessageSink diagnosticMessageSink)
             : base(diagnosticMessageSink)
         {

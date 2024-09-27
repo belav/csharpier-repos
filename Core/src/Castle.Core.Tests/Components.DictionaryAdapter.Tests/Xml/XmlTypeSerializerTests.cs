@@ -99,6 +99,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             // NOTE: This test will allow 2 different roundtrip results due to
             // some roundtripping changes introduced in .NET Core 3.0. See:
             //
+            //
             // https://devblogs.microsoft.com/dotnet/floating-point-parsing-and-formatting-improvements-in-net-core-3-0/
             //
             // This test will cause a `double.ToString("R")` to be executed

@@ -32,8 +32,10 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Adds the given <see cref="ILoggerProvider"/> to the <see cref="ILoggingBuilder"/>
         /// </summary>
-        /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the <paramref name="provider"/> to.</param>
-        /// <param name="provider">The <see cref="ILoggerProvider"/> to add to the <paramref name="builder"/>.</param>
+        /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the <paramref name="provider"/>
+        // to.</param>
+        /// <param name="provider">The <see cref="ILoggerProvider"/> to add to the <paramref
+        // name="builder"/>.</param>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddProvider(
             this ILoggingBuilder builder,
@@ -47,7 +49,8 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Removes all <see cref="ILoggerProvider"/>s from <paramref name="builder"/>.
         /// </summary>
-        /// <param name="builder">The <see cref="ILoggingBuilder"/> to remove <see cref="ILoggerProvider"/>s from.</param>
+        /// <param name="builder">The <see cref="ILoggingBuilder"/> to remove <see cref="ILoggerProvider"/>s
+        // from.</param>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder ClearProviders(this ILoggingBuilder builder)
         {
@@ -58,7 +61,8 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Configure the <paramref name="builder"/> with the <see cref="LoggerFactoryOptions"/>.
         /// </summary>
-        /// <param name="builder">The <see cref="ILoggingBuilder"/> to be configured with <see cref="LoggerFactoryOptions"/></param>
+        /// <param name="builder">The <see cref="ILoggingBuilder"/> to be configured with <see
+        // cref="LoggerFactoryOptions"/></param>
         /// <param name="action">The action used to configure the logger factory</param>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder Configure(

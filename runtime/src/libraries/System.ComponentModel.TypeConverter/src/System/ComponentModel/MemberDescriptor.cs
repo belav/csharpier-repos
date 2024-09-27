@@ -29,13 +29,15 @@ namespace System.ComponentModel
         private readonly object _lockCookie = new object();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the specified <paramref name="name"/> and no attributes.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class
+        // with the specified <paramref name="name"/> and no attributes.
         /// </summary>
         protected MemberDescriptor(string name)
             : this(name, null) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the specified <paramref name="name"/> and <paramref name="attributes "/> array.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class
+        // with the specified <paramref name="name"/> and <paramref name="attributes "/> array.
         /// </summary>
         protected MemberDescriptor(string name, Attribute[]? attributes)
         {
@@ -60,7 +62,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the specified <see cref='System.ComponentModel.MemberDescriptor'/>.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class
+        // with the specified <see cref='System.ComponentModel.MemberDescriptor'/>.
         /// </summary>
         protected MemberDescriptor(MemberDescriptor descr)
         {
@@ -79,9 +82,11 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class with the name in the specified
+        /// Initializes a new instance of the <see cref='System.ComponentModel.MemberDescriptor'/> class
+        // with the name in the specified
         /// <see cref='System.ComponentModel.MemberDescriptor'/> and the attributes
-        /// in both the old <see cref='System.ComponentModel.MemberDescriptor'/> and the <see cref='System.Attribute'/> array.
+        /// in both the old <see cref='System.ComponentModel.MemberDescriptor'/> and the <see
+        // cref='System.Attribute'/> array.
         /// </summary>
         protected MemberDescriptor(MemberDescriptor oldMemberDescriptor, Attribute[]? newAttributes)
         {
@@ -168,7 +173,8 @@ namespace System.ComponentModel
             _category ??= ((CategoryAttribute)Attributes[typeof(CategoryAttribute)]!).Category;
 
         /// <summary>
-        /// Gets the description of the member as specified in the <see cref='System.ComponentModel.DescriptionAttribute'/>.
+        /// Gets the description of the member as specified in the <see
+        // cref='System.ComponentModel.DescriptionAttribute'/>.
         /// </summary>
         public virtual string Description =>
             _description ??= (
@@ -188,7 +194,8 @@ namespace System.ComponentModel
         public virtual string Name => _name ?? "";
 
         /// <summary>
-        /// Gets the hash code for the name of the member as specified in <see cref='string.GetHashCode()'/>.
+        /// Gets the hash code for the name of the member as specified in <see
+        // cref='string.GetHashCode()'/>.
         /// </summary>
         protected virtual int NameHashCode => _nameHash;
 
@@ -247,7 +254,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Compares this instance to the specified <see cref='System.ComponentModel.MemberDescriptor'/> to see if they are equivalent.
+        /// Compares this instance to the specified <see cref='System.ComponentModel.MemberDescriptor'/> to
+        // see if they are equivalent.
         /// NOTE: If you make a change here, you likely need to change GetHashCode() as well.
         /// </summary>
         public override bool Equals([NotNullWhen(true)] object? obj)

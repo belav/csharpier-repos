@@ -31,7 +31,8 @@ namespace System.Tests
                 retry = 0;
             do
             {
-                // very small chance the child and parent hashcode are the same. To further reduce chance of collision we try up to 3 times
+                // very small chance the child and parent hashcode are the same. To further reduce chance of
+                // collision we try up to 3 times
                 using (
                     RemoteInvokeHandle handle = RemoteExecutor.Invoke(
                         method,

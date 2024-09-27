@@ -1,13 +1,16 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 
 namespace System.Web
 {
     /// <summary>
-    /// This is a container for prefix values. It normalizes all the values into dotted-form and then stores
-    /// them in a sorted array. All queries for prefixes are also normalized to dotted-form, and searches
+    /// This is a container for prefix values. It normalizes all the values into dotted-form and then
+    // stores
+    /// them in a sorted array. All queries for prefixes are also normalized to dotted-form, and
+    // searches
     /// for ContainsPrefix are done with a binary search.
     /// </summary>
     internal class PrefixContainer
@@ -55,7 +58,8 @@ namespace System.Web
             return containsPrefix;
         }
 
-        // Given "foo.bar", "foo.hello", "something.other", foo[abc].baz and asking for prefix "foo" will return:
+        // Given "foo.bar", "foo.hello", "something.other", foo[abc].baz and asking for prefix "foo" will
+        // return:
         // - "bar"/"foo.bar"
         // - "hello"/"foo.hello"
         // - "abc"/"foo[abc]"

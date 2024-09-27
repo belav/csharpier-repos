@@ -20,7 +20,8 @@ namespace System.Text.Json
         /// should be set to use the reflection-based <see cref="DefaultJsonTypeInfoResolver"/>.
         /// </summary>
         /// <remarks>
-        /// The value of the property is backed by the "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"
+        /// The value of the property is backed by the
+        // "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"
         /// <see cref="AppContext"/> setting and defaults to <see langword="true"/> if unset.
         /// </remarks>
         public static bool IsReflectionEnabledByDefault { get; } =

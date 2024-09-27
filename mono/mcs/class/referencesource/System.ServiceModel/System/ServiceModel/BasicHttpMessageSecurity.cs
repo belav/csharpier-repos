@@ -50,7 +50,8 @@ namespace System.ServiceModel
             }
         }
 
-        // if any changes are made to this method, please reflect them in the corresponding TryCrete() method
+        // if any changes are made to this method, please reflect them in the corresponding TryCrete()
+        // method
         internal SecurityBindingElement CreateMessageSecurity(bool isSecureTransportMode)
         {
             SecurityBindingElement result;

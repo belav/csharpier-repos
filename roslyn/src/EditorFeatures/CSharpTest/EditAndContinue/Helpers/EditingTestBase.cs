@@ -197,7 +197,8 @@ namespace System.Runtime.CompilerServices { class CreateNewOnMetadataUpdateAttri
         }
 
         /// <summary>
-        /// Gets method edits on the current level of the source hierarchy. This means that edits on lower labeled levels of the hierarchy are not expected to be returned.
+        /// Gets method edits on the current level of the source hierarchy. This means that edits on lower
+        // labeled levels of the hierarchy are not expected to be returned.
         /// </summary>
         internal static EditScript<SyntaxNode> GetMethodEdits(
             string src1,
@@ -274,7 +275,8 @@ namespace System.Runtime.CompilerServices { class CreateNewOnMetadataUpdateAttri
             }
 
             // We need to preserve the parent node to allow detection of state machine methods in the analyzer.
-            // If we are not testing a state machine method we only use the body to avoid updating positions in all existing tests.
+            // If we are not testing a state machine method we only use the body to avoid updating positions in
+            // all existing tests.
             var bodyNode =
                 (kind != MethodKind.Regular)
                     ? (

@@ -6,7 +6,8 @@ using System.Diagnostics;
 namespace System.Buffers
 {
     /// <summary>
-    /// Represents a heap-based, array-backed output sink into which <typeparam name="T"/> data can be written.
+    /// Represents a heap-based, array-backed output sink into which <typeparam name="T"/> data can be
+    // written.
     /// </summary>
 #if MAKE_ABW_PUBLIC
     public
@@ -38,7 +39,8 @@ namespace System.Buffers
         /// Creates an instance of an <see cref="ArrayBufferWriter{T}"/>, in which data can be written to,
         /// with an initial capacity specified.
         /// </summary>
-        /// <param name="initialCapacity">The minimum capacity with which to initialize the underlying buffer.</param>
+        /// <param name="initialCapacity">The minimum capacity with which to initialize the underlying
+        // buffer.</param>
         /// <exception cref="ArgumentException">
         /// Thrown when <paramref name="initialCapacity"/> is not positive (i.e. less than or equal to 0).
         /// </exception>
@@ -72,7 +74,8 @@ namespace System.Buffers
         public int Capacity => _buffer.Length;
 
         /// <summary>
-        /// Returns the amount of space available that can still be written into without forcing the underlying buffer to grow.
+        /// Returns the amount of space available that can still be written into without forcing the
+        // underlying buffer to grow.
         /// </summary>
         public int FreeCapacity => _buffer.Length - _index;
 
@@ -84,7 +87,8 @@ namespace System.Buffers
         /// You must reset or clear the <see cref="ArrayBufferWriter{T}"/> before trying to re-use it.
         /// </para>
         /// <para>
-        /// The <see cref="ResetWrittenCount"/> method is faster since it only sets to zero the writer's index
+        /// The <see cref="ResetWrittenCount"/> method is faster since it only sets to zero the writer's
+        // index
         /// while the <see cref="Clear"/> method additionally zeroes the content of the underlying buffer.
         /// </para>
         /// </remarks>
@@ -104,14 +108,16 @@ namespace System.Buffers
         /// You must reset or clear the <see cref="ArrayBufferWriter{T}"/> before trying to re-use it.
         /// </para>
         /// <para>
-        /// If you reset the writer using the <see cref="ResetWrittenCount"/> method, the underlying buffer will not be cleared.
+        /// If you reset the writer using the <see cref="ResetWrittenCount"/> method, the underlying buffer
+        // will not be cleared.
         /// </para>
         /// </remarks>
         /// <seealso cref="Clear"/>
         public void ResetWrittenCount() => _index = 0;
 
         /// <summary>
-        /// Notifies <see cref="IBufferWriter{T}"/> that <paramref name="count"/> amount of data was written to the output <see cref="Span{T}"/>/<see cref="Memory{T}"/>
+        /// Notifies <see cref="IBufferWriter{T}"/> that <paramref name="count"/> amount of data was written
+        // to the output <see cref="Span{T}"/>/<see cref="Memory{T}"/>
         /// </summary>
         /// <exception cref="ArgumentException">
         /// Thrown when <paramref name="count"/> is negative.
@@ -120,7 +126,8 @@ namespace System.Buffers
         /// Thrown when attempting to advance past the end of the underlying buffer.
         /// </exception>
         /// <remarks>
-        /// You must request a new buffer after calling Advance to continue writing more data and cannot write to a previously acquired buffer.
+        /// You must request a new buffer after calling Advance to continue writing more data and cannot
+        // write to a previously acquired buffer.
         /// </remarks>
         public void Advance(int count)
         {
@@ -134,8 +141,10 @@ namespace System.Buffers
         }
 
         /// <summary>
-        /// Returns a <see cref="Memory{T}"/> to write to that is at least the requested length (specified by <paramref name="sizeHint"/>).
-        /// If no <paramref name="sizeHint"/> is provided (or it's equal to <code>0</code>), some non-empty buffer is returned.
+        /// Returns a <see cref="Memory{T}"/> to write to that is at least the requested length (specified
+        // by <paramref name="sizeHint"/>).
+        /// If no <paramref name="sizeHint"/> is provided (or it's equal to <code>0</code>), some non-empty
+        // buffer is returned.
         /// </summary>
         /// <exception cref="ArgumentException">
         /// Thrown when <paramref name="sizeHint"/> is negative.
@@ -145,16 +154,20 @@ namespace System.Buffers
         /// This will never return an empty <see cref="Memory{T}"/>.
         /// </para>
         /// <para>
-        /// There is no guarantee that successive calls will return the same buffer or the same-sized buffer.
+        /// There is no guarantee that successive calls will return the same buffer or the same-sized
+        // buffer.
         /// </para>
         /// <para>
-        /// You must request a new buffer after calling Advance to continue writing more data and cannot write to a previously acquired buffer.
+        /// You must request a new buffer after calling Advance to continue writing more data and cannot
+        // write to a previously acquired buffer.
         /// </para>
         /// <para>
-        /// If you reset the writer using the <see cref="ResetWrittenCount"/> method, this method may return a non-cleared <see cref="Memory{T}"/>.
+        /// If you reset the writer using the <see cref="ResetWrittenCount"/> method, this method may return
+        // a non-cleared <see cref="Memory{T}"/>.
         /// </para>
         /// <para>
-        /// If you clear the writer using the <see cref="Clear"/> method, this method will return a <see cref="Memory{T}"/> with its content zeroed.
+        /// If you clear the writer using the <see cref="Clear"/> method, this method will return a <see
+        // cref="Memory{T}"/> with its content zeroed.
         /// </para>
         /// </remarks>
         public Memory<T> GetMemory(int sizeHint = 0)
@@ -165,8 +178,10 @@ namespace System.Buffers
         }
 
         /// <summary>
-        /// Returns a <see cref="Span{T}"/> to write to that is at least the requested length (specified by <paramref name="sizeHint"/>).
-        /// If no <paramref name="sizeHint"/> is provided (or it's equal to <code>0</code>), some non-empty buffer is returned.
+        /// Returns a <see cref="Span{T}"/> to write to that is at least the requested length (specified by
+        // <paramref name="sizeHint"/>).
+        /// If no <paramref name="sizeHint"/> is provided (or it's equal to <code>0</code>), some non-empty
+        // buffer is returned.
         /// </summary>
         /// <exception cref="ArgumentException">
         /// Thrown when <paramref name="sizeHint"/> is negative.
@@ -176,16 +191,20 @@ namespace System.Buffers
         /// This will never return an empty <see cref="Span{T}"/>.
         /// </para>
         /// <para>
-        /// There is no guarantee that successive calls will return the same buffer or the same-sized buffer.
+        /// There is no guarantee that successive calls will return the same buffer or the same-sized
+        // buffer.
         /// </para>
         /// <para>
-        /// You must request a new buffer after calling Advance to continue writing more data and cannot write to a previously acquired buffer.
+        /// You must request a new buffer after calling Advance to continue writing more data and cannot
+        // write to a previously acquired buffer.
         /// </para>
         /// <para>
-        /// If you reset the writer using the <see cref="ResetWrittenCount"/> method, this method may return a non-cleared <see cref="Span{T}"/>.
+        /// If you reset the writer using the <see cref="ResetWrittenCount"/> method, this method may return
+        // a non-cleared <see cref="Span{T}"/>.
         /// </para>
         /// <para>
-        /// If you clear the writer using the <see cref="Clear"/> method, this method will return a <see cref="Span{T}"/> with its content zeroed.
+        /// If you clear the writer using the <see cref="Clear"/> method, this method will return a <see
+        // cref="Span{T}"/> with its content zeroed.
         /// </para>
         /// </remarks>
         public Span<T> GetSpan(int sizeHint = 0)

@@ -558,8 +558,10 @@ namespace System.Dynamic.Utils
             //     That is, S = D<S1...>, T = D<T1...>.
             //   o If type parameter Xi is declared to be invariant then Si must be identical to Ti.
             //   o If type parameter Xi is declared to be covariant ("out") then Si must be convertible
-            //     to Ti via an identify conversion,  implicit reference conversion, or explicit reference conversion.
-            //   o If type parameter Xi is declared to be contravariant ("in") then either Si must be identical to Ti,
+            //     to Ti via an identify conversion,  implicit reference conversion, or explicit reference
+            // conversion.
+            //   o If type parameter Xi is declared to be contravariant ("in") then either Si must be identical
+            // to Ti,
             //     or Si and Ti must both be reference types.
 
             if (

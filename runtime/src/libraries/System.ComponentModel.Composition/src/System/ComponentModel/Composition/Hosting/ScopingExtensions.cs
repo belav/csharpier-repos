@@ -62,7 +62,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <param name="contractName">Name of the contract.</param>
         /// <param name="importCardinality">The import cardinality.</param>
         /// <returns>
-        ///     <c>true</c> if the specified part imports the specified contract with the given cardinality; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified part imports the specified contract with the given cardinality;
+        // otherwise, <c>false</c>.
         /// </returns>
         public static bool Imports(
             this ComposablePartDefinition part,
@@ -93,7 +94,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <param name="part">The part.</param>
         /// <param name="key">The key.</param>
         /// <returns>
-        ///     <c>true</c> if the part contains a metadata entry with the specified key; otherwise, <c>false</c>.
+        ///     <c>true</c> if the part contains a metadata entry with the specified key; otherwise,
+        // <c>false</c>.
         /// </returns>
         public static bool ContainsPartMetadataWithKey(
             this ComposablePartDefinition part,
@@ -107,14 +109,16 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        /// Determines whether the specified part contains a metadata entry with the specified key and value.
+        /// Determines whether the specified part contains a metadata entry with the specified key and
+        // value.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="part">The part.</param>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <returns>
-        ///     <c>true</c> the specified part contains a metadata entry with the specified key and value; otherwise, <c>false</c>.
+        ///     <c>true</c> the specified part contains a metadata entry with the specified key and value;
+        // otherwise, <c>false</c>.
         /// </returns>
         public static bool ContainsPartMetadata<T>(
             this ComposablePartDefinition part,

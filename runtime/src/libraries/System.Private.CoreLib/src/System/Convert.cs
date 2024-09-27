@@ -121,7 +121,8 @@ namespace System
         // typeCode and boxing the result.
         //
         // The method first checks if the given object implements IConvertible. If not,
-        // the only permitted conversion is from a null to TypeCode.Empty/TypeCode.String/TypeCode.Object, the
+        // the only permitted conversion is from a null to TypeCode.Empty/TypeCode.String/TypeCode.Object,
+        // the
         // result of which is null.
         [return: NotNullIfNotNull(nameof(value))]
         public static object? ChangeType(object? value, TypeCode typeCode)
@@ -386,7 +387,8 @@ namespace System
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static bool ToBoolean(char value)
         {
             return ((IConvertible)value).ToBoolean(null);
@@ -555,21 +557,24 @@ namespace System
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static char ToChar(float value)
         {
             return ((IConvertible)value).ToChar(null);
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static char ToChar(double value)
         {
             return ((IConvertible)value).ToChar(null);
         }
 
         // To be consistent with IConvertible in the base data types else we get different semantics
-        // with widening operations. Without this operator this widen succeeds,with this API the widening throws.
+        // with widening operations. Without this operator this widen succeeds,with this API the widening
+        // throws.
         public static char ToChar(decimal value)
         {
             return ((IConvertible)value).ToChar(null);
@@ -2686,10 +2691,12 @@ namespace System
             return true;
         }
 
-        /// <summary>Base64 encodes the bytes from <paramref name="bytes"/> into <paramref name="chars"/>.</summary>
+        /// <summary>Base64 encodes the bytes from <paramref name="bytes"/> into <paramref
+        // name="chars"/>.</summary>
         /// <param name="bytes">The bytes to encode.</param>
         /// <param name="chars">The destination buffer large enough to handle the encoded chars.</param>
-        /// <param name="charLengthRequired">The pre-calculated, exact number of chars that will be written.</param>
+        /// <param name="charLengthRequired">The pre-calculated, exact number of chars that will be
+        // written.</param>
         private static unsafe void ToBase64CharsLargeNoLineBreaks(
             ReadOnlySpan<byte> bytes,
             Span<char> chars,
@@ -2702,7 +2709,8 @@ namespace System
             Debug.Assert(chars.Length >= charLengthRequired);
             Debug.Assert(charLengthRequired % 4 == 0);
 
-            // Base64-encode the bytes directly into the destination char buffer (reinterpreted as a byte buffer).
+            // Base64-encode the bytes directly into the destination char buffer (reinterpreted as a byte
+            // buffer).
             OperationStatus status = Base64.EncodeToUtf8(
                 bytes,
                 MemoryMarshal.AsBytes(chars),
@@ -2711,14 +2719,17 @@ namespace System
             );
             Debug.Assert(status == OperationStatus.Done && charLengthRequired == bytesWritten);
 
-            // Now widen the ASCII bytes in-place to chars (if the vectorized Ascii.WidenAsciiToUtf16 is ever updated
-            // to support in-place updates, it should be used here instead). Since the base64 bytes are all valid ASCII, the byte
+            // Now widen the ASCII bytes in-place to chars (if the vectorized Ascii.WidenAsciiToUtf16 is ever
+            // updated
+            // to support in-place updates, it should be used here instead). Since the base64 bytes are all
+            // valid ASCII, the byte
             // data is guaranteed to be 1/2 as long as the char data, and we can widen in-place.
             ref ushort dest = ref Unsafe.As<char, ushort>(ref MemoryMarshal.GetReference(chars));
             ref byte src = ref Unsafe.As<ushort, byte>(ref dest);
             ref byte srcBeginning = ref src;
 
-            // We process the bytes/chars from right to left to avoid overwriting the remaining unprocessed data.
+            // We process the bytes/chars from right to left to avoid overwriting the remaining unprocessed
+            // data.
             // The refs start out pointing just past the end of the data, and each iteration of a loop bumps
             // the refs back the apropriate amount and performs the copy/widening.
             dest = ref Unsafe.Add(ref dest, charLengthRequired);
@@ -2886,7 +2897,8 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the specified string, which encodes binary data as Base64 digits, to the equivalent byte array.
+        /// Converts the specified string, which encodes binary data as Base64 digits, to the equivalent
+        // byte array.
         /// </summary>
         /// <param name="s">The string to convert</param>
         /// <returns>The array of bytes represented by the specified Base64 string.</returns>
@@ -2924,7 +2936,8 @@ namespace System
             out int bytesWritten
         )
         {
-            // This is actually local to one of the nested blocks but is being declared at the top as we don't want multiple stackallocs
+            // This is actually local to one of the nested blocks but is being declared at the top as we don't
+            // want multiple stackallocs
             // for each iteraton of the loop.
             Span<char> tempBuffer = stackalloc char[4]; // Note: The tempBuffer size could be made larger than 4 but the size must be a multiple of 4.
 
@@ -2949,7 +2962,8 @@ namespace System
                 Debug.Assert(chars.Length != 0); // If TryDecodeFromUtf16() consumed the entire buffer, it could not have returned false.
                 if (chars[0].IsSpace())
                 {
-                    // If we got here, the very first character not consumed was a whitespace. We can skip past any consecutive whitespace, then continue decoding.
+                    // If we got here, the very first character not consumed was a whitespace. We can skip past any
+                    // consecutive whitespace, then continue decoding.
 
                     int indexOfFirstNonSpace = 1;
                     while (true)
@@ -2965,7 +2979,8 @@ namespace System
 
                     if ((bytesWrittenInThisIteration % 3) != 0 && chars.Length != 0)
                     {
-                        // If we got here, the last successfully decoded block encountered an end-marker, yet we have trailing non-whitespace characters.
+                        // If we got here, the last successfully decoded block encountered an end-marker, yet we have
+                        // trailing non-whitespace characters.
                         // That is not allowed.
                         bytesWritten = default;
                         return false;
@@ -2977,9 +2992,12 @@ namespace System
                 {
                     Debug.Assert(chars.Length != 0 && !chars[0].IsSpace());
 
-                    // If we got here, it is possible that there is whitespace that occurred in the middle of a 4-byte chunk. That is, we still have
-                    // up to three Base64 characters that were left undecoded by the fast-path helper because they didn't form a complete 4-byte chunk.
-                    // This is hopefully the rare case (multiline-formatted base64 message with a non-space character width that's not a multiple of 4.)
+                    // If we got here, it is possible that there is whitespace that occurred in the middle of a 4-byte
+                    // chunk. That is, we still have
+                    // up to three Base64 characters that were left undecoded by the fast-path helper because they
+                    // didn't form a complete 4-byte chunk.
+                    // This is hopefully the rare case (multiline-formatted base64 message with a non-space character
+                    // width that's not a multiple of 4.)
                     // We'll filter out whitespace and copy the remaining characters into a temporary buffer.
                     CopyToTempBufferWithoutWhiteSpace(
                         chars,
@@ -2989,7 +3007,8 @@ namespace System
                     );
                     if ((charsWritten & 0x3) != 0)
                     {
-                        // Even after stripping out whitespace, the number of characters is not divisible by 4. This cannot be a legal Base64 string.
+                        // Even after stripping out whitespace, the number of characters is not divisible by 4. This cannot
+                        // be a legal Base64 string.
                         bytesWritten = default;
                         return false;
                     }
@@ -3013,7 +3032,8 @@ namespace System
 
                     if ((bytesWrittenFromTempBuffer % 3) != 0)
                     {
-                        // If we got here, this decode contained one or more padding characters ('='). We can accept trailing whitespace after this
+                        // If we got here, this decode contained one or more padding characters ('='). We can accept
+                        // trailing whitespace after this
                         // but nothing else.
                         for (int i = 0; i < chars.Length; i++)
                         {
@@ -3063,7 +3083,8 @@ namespace System
         private static bool IsSpace(this char c) => c == ' ' || c == '\t' || c == '\r' || c == '\n';
 
         /// <summary>
-        /// Converts the specified range of a Char array, which encodes binary data as Base64 digits, to the equivalent byte array.
+        /// Converts the specified range of a Char array, which encodes binary data as Base64 digits, to the
+        // equivalent byte array.
         /// </summary>
         /// <param name="inArray">Chars representing Base64 encoding characters</param>
         /// <param name="offset">A position within the input array.</param>
@@ -3141,7 +3162,8 @@ namespace System
             )
                 throw new FormatException(SR.Format_BadBase64Char);
 
-            // Note that the number of bytes written can differ from resultLength if the caller is modifying the array
+            // Note that the number of bytes written can differ from resultLength if the caller is modifying the
+            // array
             // as it is being converted. Silently ignore the failure.
             // Consider throwing exception in an non in-place release.
 
@@ -3172,7 +3194,8 @@ namespace System
 
                 // We want to be as fast as possible and filter out spaces with as few comparisons as possible.
                 // We end up accepting a number of illegal chars as legal white-space chars.
-                // This is ok: as soon as we hit them during actual decode we will recognise them as illegal and throw.
+                // This is ok: as soon as we hit them during actual decode we will recognise them as illegal and
+                // throw.
                 if (c <= intSpace)
                     usefulInputLength--;
                 else if (c == intEq)
@@ -3188,7 +3211,8 @@ namespace System
             // We will notice it at decode when we see a '=' at the wrong place.
             Debug.Assert(0 <= padding);
 
-            // Perf: reuse the variable that stored the number of '=' to store the number of bytes encoded by the
+            // Perf: reuse the variable that stored the number of '=' to store the number of bytes encoded by
+            // the
             // last group that contains the '=':
             if (padding != 0)
             {
@@ -3205,13 +3229,17 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the specified string, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer array.
+        /// Converts the specified string, which encodes binary data as hex characters, to an equivalent
+        // 8-bit unsigned integer array.
         /// </summary>
         /// <param name="s">The string to convert.</param>
-        /// <returns>An array of 8-bit unsigned integers that is equivalent to <paramref name="s"/>.</returns>
+        /// <returns>An array of 8-bit unsigned integers that is equivalent to <paramref
+        // name="s"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="s"/> is <code>null</code>.</exception>
-        /// <exception cref="FormatException">The length of <paramref name="s"/>, is not zero or a multiple of 2.</exception>
-        /// <exception cref="FormatException">The format of <paramref name="s"/> is invalid. <paramref name="s"/> contains a non-hex character.</exception>
+        /// <exception cref="FormatException">The length of <paramref name="s"/>, is not zero or a multiple
+        // of 2.</exception>
+        /// <exception cref="FormatException">The format of <paramref name="s"/> is invalid. <paramref
+        // name="s"/> contains a non-hex character.</exception>
         public static byte[] FromHexString(string s)
         {
             if (s == null)
@@ -3223,12 +3251,16 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the span, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer array.
+        /// Converts the span, which encodes binary data as hex characters, to an equivalent 8-bit unsigned
+        // integer array.
         /// </summary>
         /// <param name="chars">The span to convert.</param>
-        /// <returns>An array of 8-bit unsigned integers that is equivalent to <paramref name="chars"/>.</returns>
-        /// <exception cref="FormatException">The length of <paramref name="chars"/>, is not zero or a multiple of 2.</exception>
-        /// <exception cref="FormatException">The format of <paramref name="chars"/> is invalid. <paramref name="chars"/> contains a non-hex character.</exception>
+        /// <returns>An array of 8-bit unsigned integers that is equivalent to <paramref
+        // name="chars"/>.</returns>
+        /// <exception cref="FormatException">The length of <paramref name="chars"/>, is not zero or a
+        // multiple of 2.</exception>
+        /// <exception cref="FormatException">The format of <paramref name="chars"/> is invalid. <paramref
+        // name="chars"/> contains a non-hex character.</exception>
         public static byte[] FromHexString(ReadOnlySpan<char> chars)
         {
             if (chars.Length == 0)
@@ -3245,18 +3277,24 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the string, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer span.
+        /// Converts the string, which encodes binary data as hex characters, to an equivalent 8-bit
+        // unsigned integer span.
         /// </summary>
         /// <param name="source">The string to convert.</param>
         /// <param name="destination">
-        /// The span in which to write the converted 8-bit unsigned integers. When this method returns value different than <see cref="OperationStatus.Done"/>,
-        /// either the span remains unmodified or contains an incomplete conversion of <paramref name="source"/>,
+        /// The span in which to write the converted 8-bit unsigned integers. When this method returns value
+        // different than <see cref="OperationStatus.Done"/>,
+        /// either the span remains unmodified or contains an incomplete conversion of <paramref
+        // name="source"/>,
         /// up to the last valid character.
         /// </param>
-        /// <param name="bytesWritten">When this method returns, contains the number of bytes that were written to <paramref name="destination"/>.</param>
-        /// <param name="charsConsumed">When this method returns, contains the number of characters that were consumed from <paramref name="source"/>.</param>
+        /// <param name="bytesWritten">When this method returns, contains the number of bytes that were
+        // written to <paramref name="destination"/>.</param>
+        /// <param name="charsConsumed">When this method returns, contains the number of characters that
+        // were consumed from <paramref name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
-        /// <exception cref="ArgumentNullException">Passed string <paramref name="source"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">Passed string <paramref name="source"/> is
+        // null.</exception>
         public static OperationStatus FromHexString(
             string source,
             Span<byte> destination,
@@ -3270,16 +3308,21 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the span of chars, which encodes binary data as hex characters, to an equivalent 8-bit unsigned integer span.
+        /// Converts the span of chars, which encodes binary data as hex characters, to an equivalent 8-bit
+        // unsigned integer span.
         /// </summary>
         /// <param name="source">The span to convert.</param>
         /// <param name="destination">
-        /// The span in which to write the converted 8-bit unsigned integers. When this method returns value different than <see cref="OperationStatus.Done"/>,
-        /// either the span remains unmodified or contains an incomplete conversion of <paramref name="source"/>,
+        /// The span in which to write the converted 8-bit unsigned integers. When this method returns value
+        // different than <see cref="OperationStatus.Done"/>,
+        /// either the span remains unmodified or contains an incomplete conversion of <paramref
+        // name="source"/>,
         /// up to the last valid character.
         /// </param>
-        /// <param name="bytesWritten">When this method returns, contains the number of bytes that were written to <paramref name="destination"/>.</param>
-        /// <param name="charsConsumed">When this method returns, contains the number of characters that were consumed from <paramref name="source"/>.</param>
+        /// <param name="bytesWritten">When this method returns, contains the number of bytes that were
+        // written to <paramref name="destination"/>.</param>
+        /// <param name="charsConsumed">When this method returns, contains the number of characters that
+        // were consumed from <paramref name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         public static OperationStatus FromHexString(
             ReadOnlySpan<char> source,
@@ -3325,12 +3368,16 @@ namespace System
         }
 
         /// <summary>
-        /// Converts an array of 8-bit unsigned integers to its equivalent string representation that is encoded with uppercase hex characters.
+        /// Converts an array of 8-bit unsigned integers to its equivalent string representation that is
+        // encoded with uppercase hex characters.
         /// </summary>
         /// <param name="inArray">An array of 8-bit unsigned integers.</param>
-        /// <returns>The string representation in hex of the elements in <paramref name="inArray"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is <code>null</code>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be encoded.</exception>
+        /// <returns>The string representation in hex of the elements in <paramref
+        // name="inArray"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is
+        // <code>null</code>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be
+        // encoded.</exception>
         public static string ToHexString(byte[] inArray)
         {
             ArgumentNullException.ThrowIfNull(inArray);
@@ -3339,17 +3386,24 @@ namespace System
         }
 
         /// <summary>
-        /// Converts a subset of an array of 8-bit unsigned integers to its equivalent string representation that is encoded with uppercase hex characters.
-        /// Parameters specify the subset as an offset in the input array and the number of elements in the array to convert.
+        /// Converts a subset of an array of 8-bit unsigned integers to its equivalent string representation
+        // that is encoded with uppercase hex characters.
+        /// Parameters specify the subset as an offset in the input array and the number of elements in the
+        // array to convert.
         /// </summary>
         /// <param name="inArray">An array of 8-bit unsigned integers.</param>
         /// <param name="offset">An offset in <paramref name="inArray"/>.</param>
         /// <param name="length">The number of elements of <paramref name="inArray"/> to convert.</param>
-        /// <returns>The string representation in hex of <paramref name="length"/> elements of <paramref name="inArray"/>, starting at position <paramref name="offset"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is <code>null</code>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> or <paramref name="length"/> is negative.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> plus <paramref name="length"/> is greater than the length of <paramref name="inArray"/>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be encoded.</exception>
+        /// <returns>The string representation in hex of <paramref name="length"/> elements of <paramref
+        // name="inArray"/>, starting at position <paramref name="offset"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is
+        // <code>null</code>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> or <paramref
+        // name="length"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> plus <paramref
+        // name="length"/> is greater than the length of <paramref name="inArray"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be
+        // encoded.</exception>
         public static string ToHexString(byte[] inArray, int offset, int length)
         {
             ArgumentNullException.ThrowIfNull(inArray);
@@ -3362,11 +3416,13 @@ namespace System
         }
 
         /// <summary>
-        /// Converts a span of 8-bit unsigned integers to its equivalent string representation that is encoded with uppercase hex characters.
+        /// Converts a span of 8-bit unsigned integers to its equivalent string representation that is
+        // encoded with uppercase hex characters.
         /// </summary>
         /// <param name="bytes">A span of 8-bit unsigned integers.</param>
         /// <returns>The string representation in hex of the elements in <paramref name="bytes"/>.</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/> is too large to be encoded.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/> is too large to be
+        // encoded.</exception>
         public static string ToHexString(ReadOnlySpan<byte> bytes)
         {
             if (bytes.Length == 0)
@@ -3381,11 +3437,14 @@ namespace System
         }
 
         /// <summary>
-        /// Converts a span of 8-bit unsigned integers to its equivalent span representation that is encoded with uppercase hex characters.
+        /// Converts a span of 8-bit unsigned integers to its equivalent span representation that is encoded
+        // with uppercase hex characters.
         /// </summary>
         /// <param name="source">A span of 8-bit unsigned integers.</param>
-        /// <param name="destination">The span representation in hex of the elements in <paramref name="source"/>.</param>
-        /// <param name="charsWritten">When this method returns, contains the number of chars that were written in <paramref name="destination"/>.</param>
+        /// <param name="destination">The span representation in hex of the elements in <paramref
+        // name="source"/>.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of chars that were
+        // written in <paramref name="destination"/>.</param>
         /// <returns>true if the conversion was successful; otherwise, false.</returns>
         public static bool TryToHexString(
             ReadOnlySpan<byte> source,
@@ -3410,12 +3469,16 @@ namespace System
         }
 
         /// <summary>
-        /// Converts an array of 8-bit unsigned integers to its equivalent string representation that is encoded with lowercase hex characters.
+        /// Converts an array of 8-bit unsigned integers to its equivalent string representation that is
+        // encoded with lowercase hex characters.
         /// </summary>
         /// <param name="inArray">An array of 8-bit unsigned integers.</param>
-        /// <returns>The string representation in hex of the elements in <paramref name="inArray"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is <code>null</code>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be encoded.</exception>
+        /// <returns>The string representation in hex of the elements in <paramref
+        // name="inArray"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is
+        // <code>null</code>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be
+        // encoded.</exception>
         public static string ToHexStringLower(byte[] inArray)
         {
             ArgumentNullException.ThrowIfNull(inArray);
@@ -3424,17 +3487,24 @@ namespace System
         }
 
         /// <summary>
-        /// Converts a subset of an array of 8-bit unsigned integers to its equivalent string representation that is encoded with lowercase hex characters.
-        /// Parameters specify the subset as an offset in the input array and the number of elements in the array to convert.
+        /// Converts a subset of an array of 8-bit unsigned integers to its equivalent string representation
+        // that is encoded with lowercase hex characters.
+        /// Parameters specify the subset as an offset in the input array and the number of elements in the
+        // array to convert.
         /// </summary>
         /// <param name="inArray">An array of 8-bit unsigned integers.</param>
         /// <param name="offset">An offset in <paramref name="inArray"/>.</param>
         /// <param name="length">The number of elements of <paramref name="inArray"/> to convert.</param>
-        /// <returns>The string representation in hex of <paramref name="length"/> elements of <paramref name="inArray"/>, starting at position <paramref name="offset"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is <code>null</code>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> or <paramref name="length"/> is negative.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> plus <paramref name="length"/> is greater than the length of <paramref name="inArray"/>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be encoded.</exception>
+        /// <returns>The string representation in hex of <paramref name="length"/> elements of <paramref
+        // name="inArray"/>, starting at position <paramref name="offset"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="inArray"/> is
+        // <code>null</code>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> or <paramref
+        // name="length"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> plus <paramref
+        // name="length"/> is greater than the length of <paramref name="inArray"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="inArray"/> is too large to be
+        // encoded.</exception>
         public static string ToHexStringLower(byte[] inArray, int offset, int length)
         {
             ArgumentNullException.ThrowIfNull(inArray);
@@ -3447,11 +3517,13 @@ namespace System
         }
 
         /// <summary>
-        /// Converts a span of 8-bit unsigned integers to its equivalent string representation that is encoded with lowercase hex characters.
+        /// Converts a span of 8-bit unsigned integers to its equivalent string representation that is
+        // encoded with lowercase hex characters.
         /// </summary>
         /// <param name="bytes">A span of 8-bit unsigned integers.</param>
         /// <returns>The string representation in hex of the elements in <paramref name="bytes"/>.</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/> is too large to be encoded.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/> is too large to be
+        // encoded.</exception>
         public static string ToHexStringLower(ReadOnlySpan<byte> bytes)
         {
             if (bytes.Length == 0)
@@ -3466,11 +3538,14 @@ namespace System
         }
 
         /// <summary>
-        /// Converts a span of 8-bit unsigned integers to its equivalent span representation that is encoded with lowercase hex characters.
+        /// Converts a span of 8-bit unsigned integers to its equivalent span representation that is encoded
+        // with lowercase hex characters.
         /// </summary>
         /// <param name="source">A span of 8-bit unsigned integers.</param>
-        /// <param name="destination">The span representation in hex of the elements in <paramref name="source"/>.</param>
-        /// <param name="charsWritten">When this method returns, contains the number of chars that were written in <paramref name="destination"/>.</param>
+        /// <param name="destination">The span representation in hex of the elements in <paramref
+        // name="source"/>.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of chars that were
+        // written in <paramref name="destination"/>.</param>
         /// <returns>true if the conversion was successful; otherwise, false.</returns>
         public static bool TryToHexStringLower(
             ReadOnlySpan<byte> source,

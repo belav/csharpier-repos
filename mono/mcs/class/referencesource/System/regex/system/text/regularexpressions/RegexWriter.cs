@@ -43,10 +43,10 @@ namespace System.Text.RegularExpressions
         internal const int BeforeChild = 64;
         internal const int AfterChild = 128;
 
-        /*
-         * This is the only function that should be called from outside.
-         * It takes a RegexTree and creates a corresponding RegexCode.
-         */
+/*
+* This is the only function that should be called from outside.
+* It takes a RegexTree and creates a corresponding RegexCode.
+*/
         internal static RegexCode Write(RegexTree t)
         {
             RegexWriter w = new RegexWriter();
@@ -61,9 +61,9 @@ namespace System.Text.RegularExpressions
             return retval;
         }
 
-        /*
-         * private constructor; can't be created outside
-         */
+/*
+* private constructor; can't be created outside
+*/
         private RegexWriter()
         {
             _intStack = new int[32];
@@ -72,10 +72,10 @@ namespace System.Text.RegularExpressions
             _stringtable = new List<String>();
         }
 
-        /*
-         * To avoid recursion, we use a simple integer stack.
-         * This is the push.
-         */
+/*
+* To avoid recursion, we use a simple integer stack.
+* This is the push.
+*/
         internal void PushInt(int I)
         {
             if (_depth >= _intStack.Length)
@@ -90,44 +90,44 @@ namespace System.Text.RegularExpressions
             _intStack[_depth++] = I;
         }
 
-        /*
-         * True if the stack is empty.
-         */
+/*
+* True if the stack is empty.
+*/
         internal bool EmptyStack()
         {
             return _depth == 0;
         }
 
-        /*
-         * This is the pop.
-         */
+/*
+* This is the pop.
+*/
         internal int PopInt()
         {
             return _intStack[--_depth];
         }
 
-        /*
-         * Returns the current position in the emitted code.
-         */
+/*
+* Returns the current position in the emitted code.
+*/
         internal int CurPos()
         {
             return _curpos;
         }
 
-        /*
-         * Fixes up a jump instruction at the specified offset
-         * so that it jumps to the specified jumpDest.
-         */
+/*
+* Fixes up a jump instruction at the specified offset
+* so that it jumps to the specified jumpDest.
+*/
         internal void PatchJump(int Offset, int jumpDest)
         {
             _emitted[Offset + 1] = jumpDest;
         }
 
-        /*
-         * Emits a zero-argument operation. Note that the emit
-         * functions all run in two modes: they can emit code, or
-         * they can just count the size of the code.
-         */
+/*
+* Emits a zero-argument operation. Note that the emit
+* functions all run in two modes: they can emit code, or
+* they can just count the size of the code.
+*/
         internal void Emit(int op)
         {
             if (_counting)
@@ -140,9 +140,9 @@ namespace System.Text.RegularExpressions
             _emitted[_curpos++] = op;
         }
 
-        /*
-         * Emits a one-argument operation.
-         */
+/*
+* Emits a one-argument operation.
+*/
         internal void Emit(int op, int opd1)
         {
             if (_counting)
@@ -156,9 +156,9 @@ namespace System.Text.RegularExpressions
             _emitted[_curpos++] = opd1;
         }
 
-        /*
-         * Emits a two-argument operation.
-         */
+/*
+* Emits a two-argument operation.
+*/
         internal void Emit(int op, int opd1, int opd2)
         {
             if (_counting)
@@ -173,10 +173,10 @@ namespace System.Text.RegularExpressions
             _emitted[_curpos++] = opd2;
         }
 
-        /*
-         * Returns an index in the string table for a string;
-         * uses a hashtable to eliminate duplicates.
-         */
+/*
+* Returns an index in the string table for a string;
+* uses a hashtable to eliminate duplicates.
+*/
         internal int StringCode(String str)
         {
             Int32 i;
@@ -201,20 +201,20 @@ namespace System.Text.RegularExpressions
             return i;
         }
 
-        /*
-         * Just returns an exception; should be dead code
-         */
+/*
+* Just returns an exception; should be dead code
+*/
         internal ArgumentException MakeException(String message)
         {
             return new ArgumentException(message);
         }
 
-        /*
-         * When generating code on a regex that uses a sparse set
-         * of capture slots, we hash them to a dense set of indices
-         * for an array of capture slots. Instead of doing the hash
-         * at match time, it's done at compile time, here.
-         */
+/*
+* When generating code on a regex that uses a sparse set
+* of capture slots, we hash them to a dense set of indices
+* for an array of capture slots. Instead of doing the hash
+* at match time, it's done at compile time, here.
+*/
         internal int MapCapnum(int capnum)
         {
             if (capnum == -1)
@@ -230,15 +230,15 @@ namespace System.Text.RegularExpressions
                 return capnum;
         }
 
-        /*
-         * The top level RegexCode generator. It does a depth-first walk
-         * through the tree and calls EmitFragment to emits code before
-         * and after each child of an interior node, and at each leaf.
-         *
-         * It runs two passes, first to count the size of the generated
-         * code, and second to generate the code.
-         *
-         * <
+/*
+* The top level RegexCode generator. It does a depth-first walk
+* through the tree and calls EmitFragment to emits code before
+* and after each child of an interior node, and at each leaf.
+*
+* It runs two passes, first to count the size of the generated
+* code, and second to generate the code.
+*
+* <
 
 */
         internal RegexCode RegexCodeFromRegexTree(RegexTree tree)
@@ -343,11 +343,11 @@ namespace System.Text.RegularExpressions
             );
         }
 
-        /*
-         * The main RegexCode generator. It does a depth-first walk
-         * through the tree and calls EmitFragment to emits code before
-         * and after each child of an interior node, and at each leaf.
-         */
+/*
+* The main RegexCode generator. It does a depth-first walk
+* through the tree and calls EmitFragment to emits code before
+* and after each child of an interior node, and at each leaf.
+*/
         internal void EmitFragment(int nodetype, RegexNode node, int CurIndex)
         {
             int bits = 0;

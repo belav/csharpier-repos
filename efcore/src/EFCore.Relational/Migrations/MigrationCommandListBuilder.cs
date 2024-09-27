@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations;
 ///     executed to migrate a database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 public class MigrationCommandListBuilder
 {
@@ -42,7 +43,8 @@ public class MigrationCommandListBuilder
     ///     The next call to one of the builder methods will start building a new command.
     /// </summary>
     /// <param name="suppressTransaction">
-    ///     Indicates whether or not transactions should be suppressed while executing the built command.
+    ///     Indicates whether or not transactions should be suppressed while executing the built
+    // command.
     /// </param>
     /// <returns>This builder so that additional calls can be chained.</returns>
     public virtual MigrationCommandListBuilder EndCommand(bool suppressTransaction = false)
@@ -117,7 +119,8 @@ public class MigrationCommandListBuilder
     ///     Starts a new indentation block, so all 'Append...' calls until the
     ///     block is disposed will be indented one level more than the current level.
     /// </summary>
-    /// <returns>The object to dispose to indicate that the indentation should go back up a level.</returns>
+    /// <returns>The object to dispose to indicate that the indentation should go back up a
+    // level.</returns>
     public virtual IDisposable Indent() => _commandBuilder.Indent();
 
     /// <summary>

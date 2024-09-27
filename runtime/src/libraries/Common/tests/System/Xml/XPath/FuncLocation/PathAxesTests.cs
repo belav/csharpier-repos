@@ -4387,7 +4387,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Return all text nodes after first book.  CDATA is grouped into text nodes so CDATA should also be returned.
+        /// Return all text nodes after first book.  CDATA is grouped into text nodes so CDATA should also
+        // be returned.
         /// book[1]/following::text(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]

@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Appends a command-line switch that takes a compound string parameter. The parameter is built up from the item-spec and
+        /// Appends a command-line switch that takes a compound string parameter. The parameter is built up
+        // from the item-spec and
         /// the specified attributes. The switch is appended as many times as there are parameters given.
         /// </summary>
         internal void AppendSwitchIfNotNull(

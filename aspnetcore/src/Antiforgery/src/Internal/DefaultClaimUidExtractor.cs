@@ -84,7 +84,8 @@ internal sealed class DefaultClaimUidExtractor : IClaimUidExtractor
             }
         }
 
-        // We do not understand any of the ClaimsIdentity instances, fallback on serializing all claims in every claims Identity.
+        // We do not understand any of the ClaimsIdentity instances, fallback on serializing all claims in
+        // every claims Identity.
         var allClaims = new List<Claim>();
         for (var i = 0; i < identitiesList.Count; i++)
         {

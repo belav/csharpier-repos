@@ -20,7 +20,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             return Guid.NewGuid().ToString("N");
         }
 
-        /// <summary>Creates a map name guaranteed to be unique and contain only whitespace characters.</summary>
+        /// <summary>Creates a map name guaranteed to be unique and contain only whitespace
+        // characters.</summary>
         protected static string CreateUniqueWhitespaceMapName()
         {
             var data = Guid.NewGuid().ToByteArray();
@@ -39,7 +40,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         /// <summary>An array of four whitespace characters.</summary>
         private static readonly char[] s_fourWhitespaceCharacters = { ' ', '\t', '\r', '\n' };
 
-        /// <summary>Creates a set of valid map names to use to test various map creation scenarios.</summary>
+        /// <summary>Creates a set of valid map names to use to test various map creation
+        // scenarios.</summary>
         public static IEnumerable<object[]> CreateValidMapNames() // often used with [MemberData]
         {
             // Normal name

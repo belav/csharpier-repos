@@ -20,7 +20,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
         protected const string TestVersionsPackage = "Test.Versions.Package";
 
-        // The test framework above has 4 assemblies in it each with different set of assembly and file versions.
+        // The test framework above has 4 assemblies in it each with different set of assembly and file
+        // versions.
         // The version values are always (if present)
         // - assembly version: 2.1.1.1
         // - file version:     3.2.2.2
@@ -262,7 +263,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 )
             );
 
-            // For component dependency resolution, frameworks are not considered, so the assembly from the component always wins
+            // For component dependency resolution, frameworks are not considered, so the assembly from the
+            // component always wins
             string expectedTestAssemblyPath = Path.Combine(
                 component.Location,
                 testAssemblyName + ".dll"

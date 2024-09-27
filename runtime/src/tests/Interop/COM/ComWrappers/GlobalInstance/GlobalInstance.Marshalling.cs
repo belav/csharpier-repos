@@ -54,7 +54,8 @@ namespace ComWrappersTests.GlobalInstance
                 // RegFree COM is not supported on Windows Nano Server
                 if (!builtInComDisabled && !Utilities.IsWindowsNanoServer)
                 {
-                    // This calls ValidateNativeServerActivation which calls Marshal.GetTypeFromCLSID that is not supported
+                    // This calls ValidateNativeServerActivation which calls Marshal.GetTypeFromCLSID that is not
+                    // supported
                     ValidateComActivation(validateUseRegistered: true);
                     ValidateComActivation(validateUseRegistered: false);
                 }

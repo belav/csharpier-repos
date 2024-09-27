@@ -25,9 +25,11 @@ public class HubOptionsSetup : IConfigureOptions<HubOptions>
     private readonly List<string> _defaultProtocols = new List<string>();
 
     /// <summary>
-    /// Constructs the <see cref="HubOptionsSetup"/> with a list of protocols added to Dependency Injection.
+    /// Constructs the <see cref="HubOptionsSetup"/> with a list of protocols added to Dependency
+    // Injection.
     /// </summary>
-    /// <param name="protocols">The list of <see cref="IHubProtocol"/>s that are from Dependency Injection.</param>
+    /// <param name="protocols">The list of <see cref="IHubProtocol"/>s that are from Dependency
+    // Injection.</param>
     public HubOptionsSetup(IEnumerable<IHubProtocol> protocols)
     {
         foreach (var hubProtocol in protocols)
@@ -56,7 +58,8 @@ public class HubOptionsSetup : IConfigureOptions<HubOptions>
     {
         if (options.KeepAliveInterval == null)
         {
-            // The default keep - alive interval. This is set to exactly half of the default client timeout window,
+            // The default keep - alive interval. This is set to exactly half of the default client timeout
+            // window,
             // to ensure a ping can arrive in time to satisfy the client timeout.
             options.KeepAliveInterval = DefaultKeepAliveInterval;
         }

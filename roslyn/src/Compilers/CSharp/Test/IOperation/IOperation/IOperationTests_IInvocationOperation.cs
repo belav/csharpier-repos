@@ -37,7 +37,8 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(9,19): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(9,19): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference;
+                // qualify it with a type name instead
                 //         /*<bind>*/c.M1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.M1")
                     .WithArguments("C.M1()")
@@ -107,7 +108,8 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,19): error CS0120: An object reference is required for the non-static field, method, or property 'C.M1()'
+                // file.cs(8,19): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'C.M1()'
                 //         /*<bind>*/C.M1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "C.M1")
                     .WithArguments("C.M1()")
@@ -676,12 +678,14 @@ public class MyClass
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,9): error CS0176: Member 'MyClass.M2(object)' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(6,9): error CS0176: Member 'MyClass.M2(object)' cannot be accessed with an instance
+                // reference; qualify it with a type name instead
                 //         c1.M2(o1);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.M2")
                     .WithArguments("MyClass.M2(object)")
                     .WithLocation(6, 9),
-                // file.cs(7,9): error CS0176: Member 'MyClass.M2(object)' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(7,9): error CS0176: Member 'MyClass.M2(object)' cannot be accessed with an instance
+                // reference; qualify it with a type name instead
                 //         (c1 ?? c2).M2(o2);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M2")
                     .WithArguments("MyClass.M2(object)")

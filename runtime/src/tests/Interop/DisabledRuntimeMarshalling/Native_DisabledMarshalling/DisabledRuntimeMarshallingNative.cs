@@ -277,8 +277,10 @@ public unsafe class DisabledRuntimeMarshallingNative
     [DllImport(nameof(DisabledRuntimeMarshallingNative), EntryPoint = "Invalid")]
     public static extern void CallWith(Vector<int> v);
 
-    // Apply the UnmanagedFunctionPointer attributes with the default calling conventions so that Mono's AOT compiler
-    // recognizes that these delegate types are used in interop and should have managed->native thunks generated for them.
+    // Apply the UnmanagedFunctionPointer attributes with the default calling conventions so that Mono's
+    // AOT compiler
+    // recognizes that these delegate types are used in interop and should have managed->native thunks
+    // generated for them.
     [UnmanagedFunctionPointer(CallingConvention.Winapi)]
     public delegate bool CheckStructWithShortAndBoolCallback(
         StructWithShortAndBool str,

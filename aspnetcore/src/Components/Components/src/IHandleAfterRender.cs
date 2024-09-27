@@ -11,6 +11,7 @@ public interface IHandleAfterRender
     /// <summary>
     /// Notifies the component that it has been rendered.
     /// </summary>
-    /// <returns>A <see cref="Task"/> that represents the asynchronous event handling operation.</returns>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous event handling
+    // operation.</returns>
     Task OnAfterRenderAsync();
 }

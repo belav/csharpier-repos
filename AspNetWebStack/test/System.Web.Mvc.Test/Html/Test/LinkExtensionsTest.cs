@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Web.Routing;
 using Microsoft.TestCommon;
@@ -737,7 +738,8 @@ namespace System.Web.Mvc.Html.Test
                             )
                     ),
                 },
-                // ActionLink(string linkText, string actionName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+                // ActionLink(string linkText, string actionName, RouteValueDictionary routeValues,
+                // IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
@@ -759,7 +761,8 @@ namespace System.Web.Mvc.Html.Test
                         () => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName")
                     ),
                 },
-                // ActionLink(string linkText, string actionName, string controllerName, object routeValues, object htmlAttributes)
+                // ActionLink(string linkText, string actionName, string controllerName, object routeValues, object
+                // htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
@@ -774,7 +777,8 @@ namespace System.Web.Mvc.Html.Test
                             )
                     ),
                 },
-                // ActionLink(string linkText, string actionName, string controllerName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+                // ActionLink(string linkText, string actionName, string controllerName, RouteValueDictionary
+                // routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
@@ -789,7 +793,9 @@ namespace System.Web.Mvc.Html.Test
                             )
                     ),
                 },
-                // ActionLink(string linkText, string actionName, string controllerName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+                // ActionLink(string linkText, string actionName, string controllerName, string protocol, string
+                // hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object>
+                // htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
@@ -820,7 +826,8 @@ namespace System.Web.Mvc.Html.Test
                             )
                     ),
                 },
-                // RouteLink(string linkText, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+                // RouteLink(string linkText, RouteValueDictionary routeValues, IDictionary<string, object>
+                // htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
@@ -909,7 +916,8 @@ namespace System.Web.Mvc.Html.Test
                             )
                     ),
                 },
-                // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+                // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues,
+                // IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",
@@ -923,7 +931,8 @@ namespace System.Web.Mvc.Html.Test
                             )
                     ),
                 },
-                // RouteLink(string linkText, string routeName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+                // RouteLink(string linkText, string routeName, string protocol, string hostName, string fragment,
+                // RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
                 {
                     Parameter = "linkText",

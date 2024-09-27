@@ -7,10 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGenerator
 {
     /// <summary>
-    ///     Initializes a new instance of the <see cref="RelationalCompiledQueryCacheKeyGenerator" /> class.
+    ///     Initializes a new instance of the <see cref="RelationalCompiledQueryCacheKeyGenerator" />
+    // class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
+    /// <param name="relationalDependencies">Parameter object containing relational dependencies for
+    // this service.</param>
     public RelationalCompiledQueryCacheKeyGenerator(
         CompiledQueryCacheKeyGeneratorDependencies dependencies,
         RelationalCompiledQueryCacheKeyGeneratorDependencies relationalDependencies
@@ -33,7 +35,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
     ///     Generates the cache key for the given query.
     /// </summary>
     /// <param name="query">The query to get the cache key for.</param>
-    /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
+    /// <param name="async">A value indicating whether the query will be executed
+    // asynchronously.</param>
     /// <returns>The cache key.</returns>
     protected new RelationalCompiledQueryCacheKey GenerateCacheKeyCore(Expression query, bool async) // Intentionally non-virtual
     {
@@ -56,7 +59,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
     ///         compiled versions of a query in a cache.
     ///     </para>
     ///     <para>
-    ///         This type is typically used by database providers (and other extensions). It is generally
+    ///         This type is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -73,7 +77,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
         /// </summary>
         /// <param name="compiledQueryCacheKey">The non-relational cache key.</param>
         /// <param name="useRelationalNulls">True to use relational null logic.</param>
-        /// <param name="querySplittingBehavior"><see cref="QuerySplittingBehavior" /> to use when loading related collections.</param>
+        /// <param name="querySplittingBehavior"><see cref="QuerySplittingBehavior" /> to use when loading
+        // related collections.</param>
         /// <param name="shouldBuffer"><see langword="true" /> if the query should be buffered.</param>
         public RelationalCompiledQueryCacheKey(
             CompiledQueryCacheKey compiledQueryCacheKey,

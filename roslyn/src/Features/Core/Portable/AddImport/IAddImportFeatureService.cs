@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.AddImport
     internal interface IAddImportFeatureService : ILanguageService
     {
         /// <summary>
-        /// Gets data for how to fix a particular <see cref="Diagnostic" /> id within the specified Document.
-        /// Useful when you do not have an instance of the diagnostic, such as when invoked as a remote service.
+        /// Gets data for how to fix a particular <see cref="Diagnostic" /> id within the specified
+        // Document.
+        /// Useful when you do not have an instance of the diagnostic, such as when invoked as a remote
+        // service.
         /// </summary>
         Task<ImmutableArray<AddImportFixData>> GetFixesAsync(
             Document document,
@@ -68,8 +70,10 @@ namespace Microsoft.CodeAnalysis.AddImport
         );
 
         /// <summary>
-        /// Gets data for how to fix a particular <see cref="Diagnostic" /> id within the specified Document.
-        /// Similar to <see cref="GetFixesAsync(Document, TextSpan, string, int, ISymbolSearchService, AddImportOptions, ImmutableArray{PackageSource}, CancellationToken)"/>
+        /// Gets data for how to fix a particular <see cref="Diagnostic" /> id within the specified
+        // Document.
+        /// Similar to <see cref="GetFixesAsync(Document, TextSpan, string, int, ISymbolSearchService,
+        // AddImportOptions, ImmutableArray{PackageSource}, CancellationToken)"/>
         /// except it only returns fix data when there is a single using fix for a given span
         /// </summary>
         Task<ImmutableArray<AddImportFixData>> GetUniqueFixesAsync(

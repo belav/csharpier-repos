@@ -12,7 +12,8 @@ using Microsoft.JSInterop;
 namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload;
 
 /// <summary>
-/// Contains methods called by interop. Intended for framework use only, not supported for use in application
+/// Contains methods called by interop. Intended for framework use only, not supported for use in
+// application
 /// code.
 /// </summary>
 [EditorBrowsable(EditorBrowsableState.Never)]
@@ -30,8 +31,10 @@ public static partial class WebAssemblyHotReload
             && OperatingSystem.IsBrowser()
         )
         {
-            // Attempt to read previously applied hot reload deltas if the ASP.NET Core browser tools are available (indicated by the presence of the Environment variable).
-            // The agent is injected in to the hosted app and can serve this script that can provide results from local-storage.
+            // Attempt to read previously applied hot reload deltas if the ASP.NET Core browser tools are
+            // available (indicated by the presence of the Environment variable).
+            // The agent is injected in to the hosted app and can serve this script that can provide results
+            // from local-storage.
             // See https://github.com/dotnet/aspnetcore/issues/37357#issuecomment-941237000
             await JSHost.ImportAsync(BlazorHotReloadModuleName, "/_framework/blazor-hotreload.js");
             await ReceiveHotReloadAsync();
@@ -49,7 +52,8 @@ public static partial class WebAssemblyHotReload
         byte[] pdbBytes
     )
     {
-        // Analyzer has a bug where it doesn't handle ConditionalAttribute: https://github.com/dotnet/roslyn/issues/63464
+        // Analyzer has a bug where it doesn't handle ConditionalAttribute:
+        // https://github.com/dotnet/roslyn/issues/63464
 #pragma warning disable IDE0200 // Remove unnecessary lambda expression
         Interlocked.CompareExchange(
             ref _hotReloadAgent,

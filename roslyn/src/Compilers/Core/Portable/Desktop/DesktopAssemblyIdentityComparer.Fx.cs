@@ -1170,8 +1170,10 @@ namespace Microsoft.CodeAnalysis
                     s_VER_ASSEMBLYVERSION_STR_L
                 },
                 // FX 3.0 assemblies:
-                // Note: we shipped .NET 4.0 with entries in this list for PresentationCFFRasterizer and System.ServiceModel.Install
-                // even though these assemblies did not ship with .NET 4.0. To maintain 100% compatibility with 4.0 we will keep
+                // Note: we shipped .NET 4.0 with entries in this list for PresentationCFFRasterizer and
+                // System.ServiceModel.Install
+                // even though these assemblies did not ship with .NET 4.0. To maintain 100% compatibility with 4.0
+                // we will keep
                 // these in .NET 4.5, but we should remove them in a future SxS version of the Framework.
                 {
                     "PresentationCFFRasterizer",
@@ -1331,7 +1333,8 @@ namespace Microsoft.CodeAnalysis
                     s_SHAREDLIB_PUBLICKEY_STR_L,
                     s_VER_ASSEMBLYVERSION_STR_L
                 },
-                // Microsoft.Data.Entity.Build.Tasks.dll should not be unified on purpose - it is supported SxS, i.e. both 3.5 and 4.0 versions can be loaded into CLR 4.0+.
+                // Microsoft.Data.Entity.Build.Tasks.dll should not be unified on purpose - it is supported SxS,
+                // i.e. both 3.5 and 4.0 versions can be loaded into CLR 4.0+.
                 // {"Microsoft.Data.Entity.Build.Tasks", MICROSOFT_PUBLICKEY_STR_L, VER_ASSEMBLYVERSION_STR_L},
 
                 // FX 3.5 SP1 assemblies:
@@ -1382,7 +1385,8 @@ namespace Microsoft.CodeAnalysis
                 { "System.Numerics", s_ECMA_PUBLICKEY_STR_L, s_VER_ASSEMBLYVERSION_STR_L },
                 { "System.Xaml", s_ECMA_PUBLICKEY_STR_L, s_VER_ASSEMBLYVERSION_STR_L },
                 // Microsoft.Workflow.Compiler.exe:
-                // System.Workflow.ComponentModel.dll started to depend on Microsoft.Workflow.Compiler.exe in 4.0 RTM
+                // System.Workflow.ComponentModel.dll started to depend on Microsoft.Workflow.Compiler.exe in 4.0
+                // RTM
                 {
                     "Microsoft.Workflow.Compiler",
                     s_SHAREDLIB_PUBLICKEY_STR_L,

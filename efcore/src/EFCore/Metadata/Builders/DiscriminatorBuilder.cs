@@ -11,15 +11,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Provides a simple API surface for setting discriminator values.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public DiscriminatorBuilder(IMutableEntityType entityType)
@@ -28,10 +33,14 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalEntityTypeBuilder EntityTypeBuilder { get; }
@@ -85,7 +94,8 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// <summary>
     ///     Configures the discriminator value to use for entities of the given generic type.
     /// </summary>
-    /// <typeparam name="TEntity">The entity type for which a discriminator value is being set.</typeparam>
+    /// <typeparam name="TEntity">The entity type for which a discriminator value is being
+    // set.</typeparam>
     /// <param name="value">The discriminator value.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
     public virtual DiscriminatorBuilder HasValue<
@@ -114,7 +124,8 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// <summary>
     ///     Configures the discriminator value to use for entities of the given type.
     /// </summary>
-    /// <param name="entityTypeName">The name of the entity type for which a discriminator value is being set.</param>
+    /// <param name="entityTypeName">The name of the entity type for which a discriminator value is
+    // being set.</param>
     /// <param name="value">The discriminator value.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
     public virtual DiscriminatorBuilder HasValue(string entityTypeName, object? value)
@@ -258,7 +269,8 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
     public override bool Equals(object? obj) => base.Equals(obj);

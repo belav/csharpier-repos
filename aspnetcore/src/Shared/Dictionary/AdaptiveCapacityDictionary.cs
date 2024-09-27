@@ -12,7 +12,8 @@ using System.Runtime.InteropServices;
 namespace Microsoft.AspNetCore.Internal;
 
 /// <summary>
-/// An <see cref="IDictionary{String, Object}"/> type to hold a small amount of items (10 or less in the common case).
+/// An <see cref="IDictionary{String, Object}"/> type to hold a small amount of items (10 or less in
+// the common case).
 /// </summary>
 internal sealed class AdaptiveCapacityDictionary<TKey, TValue>
     : IDictionary<TKey, TValue>,
@@ -78,7 +79,8 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue>
     }
 
     /// <summary>
-    /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/> initialized with the specified <paramref name="dict"/>.
+    /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/> initialized with the specified
+    // <paramref name="dict"/>.
     /// </summary>
     /// <param name="dict">A dictionary to use.
     /// </param>
@@ -402,10 +404,12 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue>
     }
 
     /// <summary>
-    /// Attempts to remove and return the value that has the specified key from the <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
+    /// Attempts to remove and return the value that has the specified key from the <see
+    // cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
     /// </summary>
     /// <param name="key">The key of the element to remove and return.</param>
-    /// <param name="value">When this method returns, contains the object removed from the <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>, or <c>null</c> if key does not exist.</param>
+    /// <param name="value">When this method returns, contains the object removed from the <see
+    // cref="AdaptiveCapacityDictionary{TKey, TValue}"/>, or <c>null</c> if key does not exist.</param>
     /// <returns>
     /// <c>true</c> if the object was removed successfully; otherwise, <c>false</c>.
     /// </returns>
@@ -444,11 +448,13 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue>
     }
 
     /// <summary>
-    /// Attempts to the add the provided <paramref name="key"/> and <paramref name="value"/> to the dictionary.
+    /// Attempts to the add the provided <paramref name="key"/> and <paramref name="value"/> to the
+    // dictionary.
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="value">The value.</param>
-    /// <returns>Returns <c>true</c> if the value was added. Returns <c>false</c> if the key was already present.</returns>
+    /// <returns>Returns <c>true</c> if the value was added. Returns <c>false</c> if the key was already
+    // present.</returns>
     public bool TryAdd(TKey key, TValue value)
     {
         if (key == null)
@@ -639,7 +645,8 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue>
         /// </summary>
         public void Dispose() { }
 
-        // Similar to the design of List<T>.Enumerator - Split into fast path and slow path for inlining friendliness
+        // Similar to the design of List<T>.Enumerator - Split into fast path and slow path for inlining
+        // friendliness
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MoveNext()

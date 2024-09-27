@@ -35,7 +35,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
         }
 
         //
-        // Creates the appropriate flavor of Invoker depending on the calling convention "shape" (static, instance or virtual.)
+        // Creates the appropriate flavor of Invoker depending on the calling convention "shape" (static,
+        // instance or virtual.)
         //
         internal static MethodBaseInvoker CreateMethodInvoker(
             RuntimeTypeHandle declaringTypeHandle,

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -165,7 +166,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             GetRefReturnInt(t) += 0;
         }
 
-        // Ensure analyzer visits LHS of a compound assignment when the assignment target is a flow-capture reference.
+        // Ensure analyzer visits LHS of a compound assignment when the assignment target is a flow-capture
+        // reference.
         [ExpectedWarning(
             "IL2067",
             nameof(GetRefReturnInt),
@@ -178,7 +180,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             GetRefReturnInt(t) += b ? 0 : 1;
         }
 
-        // Same as above, with assignment to a flow-capture reference that references multiple captured values.
+        // Same as above, with assignment to a flow-capture reference that references multiple captured
+        // values.
         [ExpectedWarning(
             "IL2067",
             nameof(GetRefReturnInt),

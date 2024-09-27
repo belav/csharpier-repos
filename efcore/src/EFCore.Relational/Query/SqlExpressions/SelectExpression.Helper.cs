@@ -355,9 +355,11 @@ public sealed partial class SelectExpression
                     // Visiting the join predicate will add some columns for join table.
                     // But if all the referenced columns are in join predicate only then we can remove the join table.
                     // So if there are no referenced columns yet means there is still potential to remove this table,
-                    // In such case we moved the columns encountered in join predicate to other dictionary and later merge
+                    // In such case we moved the columns encountered in join predicate to other dictionary and later
+                    // merge
                     // if there are more references to the join table outside of join predicate.
-                    // We should also remove references to the outer if this column gets removed then that subquery can also remove projections
+                    // We should also remove references to the outer if this column gets removed then that subquery can
+                    // also remove projections
                     // But currently we only remove table for TPT & entity splitting scenario
                     // in which there are all table expressions which connects via joins.
                     var joinOnSameLevel = _columnReferenced!.ContainsKey(predicateJoinTableAlias);
@@ -528,7 +530,8 @@ public sealed partial class SelectExpression
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            // We only need to visit the table reference expression since TableReferenceUpdatingExpressionVisitor may need to modify it; it
+            // We only need to visit the table reference expression since
+            // TableReferenceUpdatingExpressionVisitor may need to modify it; it
             // mutates TableReferenceExpression (a new TableReferenceExpression is never returned).
             var newTable = (TableReferenceExpression)visitor.Visit(_table);
             Check.DebugAssert(
@@ -892,8 +895,10 @@ public sealed partial class SelectExpression
                         );
 
                     // Since we are cloning we need to generate new table references
-                    // In other cases (like VisitChildren), we just reuse the same table references and update the SelectExpression inside it.
-                    // We initially assign old SelectExpression in table references and later update it once we construct clone
+                    // In other cases (like VisitChildren), we just reuse the same table references and update the
+                    // SelectExpression inside it.
+                    // We initially assign old SelectExpression in table references and later update it once we
+                    // construct clone
                     var newTableReferences = selectExpression
                         ._tableReferences.Select(e => new TableReferenceExpression(
                             selectExpression,
@@ -950,7 +955,8 @@ public sealed partial class SelectExpression
                             kvp.Value;
                     }
 
-                    // Since identifiers are ColumnExpression, they are not visited since they don't contain SelectExpression inside it.
+                    // Since identifiers are ColumnExpression, they are not visited since they don't contain
+                    // SelectExpression inside it.
                     newSelectExpression._identifier.AddRange(selectExpression._identifier);
                     newSelectExpression._childIdentifiers.AddRange(
                         selectExpression._childIdentifiers
@@ -962,7 +968,8 @@ public sealed partial class SelectExpression
                         tableReference.UpdateTableReference(selectExpression, newSelectExpression);
                     }
 
-                    // Now that we have SelectExpression, we visit all components and update table references inside columns
+                    // Now that we have SelectExpression, we visit all components and update table references inside
+                    // columns
                     newSelectExpression = (SelectExpression)
                         new ColumnExpressionReplacingExpressionVisitor(
                             selectExpression,
@@ -1032,7 +1039,8 @@ public sealed partial class SelectExpression
                     return newTableValuedFunctionExpression;
                 }
 
-                // join and set operations are fine, because they contain other TableExpressionBases inside, that will get cloned
+                // join and set operations are fine, because they contain other TableExpressionBases inside, that
+                // will get cloned
                 // and therefore set expression's Update function will generate a new instance.
                 case JoinExpressionBase
                 or SetOperationBase:
@@ -1137,7 +1145,8 @@ public sealed partial class SelectExpression
                         // In Exists like query there is no projection
                         // In InExpression with subquery there will be only 1 projection
                         // In top-level the ordering of projection matters for shaper
-                        // So for all cases in case of identity select when we are doing the lift, we need to remap projections
+                        // So for all cases in case of identity select when we are doing the lift, we need to remap
+                        // projections
                         reindexingMap = new int[selectExpression.Projection.Count];
                         var innerProjections = firstSelectExpression
                             .Projection.Select(e => e.Alias)
@@ -1226,7 +1235,8 @@ public sealed partial class SelectExpression
                             result._clientProjections = selectExpression._clientProjections;
                         }
 
-                        // Since identity select implies only 1 table so we can return without worrying about another iteration.
+                        // Since identity select implies only 1 table so we can return without worrying about another
+                        // iteration.
                         // Identity select shouldn't require base visit.
                         return result;
                     }

@@ -99,7 +99,8 @@ public sealed class OutputCachePolicyBuilder
     /// <param name="queryKey">The query key to vary the cached responses by.</param>
     /// <param name="queryKeys">The extra query keys to vary the cached responses by.</param>
     /// <remarks>
-    /// By default all query keys vary the cache entries. However when specific query keys are specified only these are then taken into account.
+    /// By default all query keys vary the cache entries. However when specific query keys are specified
+    // only these are then taken into account.
     /// </remarks>
     public OutputCachePolicyBuilder SetVaryByQuery(string queryKey, params string[] queryKeys)
     {
@@ -113,7 +114,8 @@ public sealed class OutputCachePolicyBuilder
     /// </summary>
     /// <param name="queryKeys">The query keys to vary the cached responses by.</param>
     /// <remarks>
-    /// By default all query keys vary the cache entries. However when specific query keys are specified only these are then taken into account.
+    /// By default all query keys vary the cache entries. However when specific query keys are specified
+    // only these are then taken into account.
     /// </remarks>
     public OutputCachePolicyBuilder SetVaryByQuery(string[] queryKeys)
     {
@@ -148,7 +150,8 @@ public sealed class OutputCachePolicyBuilder
     /// Adds a policy to vary the cached responses by route value.
     /// </summary>
     /// <param name="routeValueName">The route value name to vary the cached responses by.</param>
-    /// <param name="routeValueNames">The extra route value names to vary the cached responses by.</param>
+    /// <param name="routeValueNames">The extra route value names to vary the cached responses
+    // by.</param>
     public OutputCachePolicyBuilder SetVaryByRouteValue(
         string routeValueName,
         params string[] routeValueNames

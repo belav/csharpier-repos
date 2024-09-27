@@ -101,7 +101,8 @@ namespace IlasmPortablePdbTests
         }
 
         // Tests whether the portable PDB has all document name properly defined
-        // The test source file includes external source reference and thus has 2 variants depending on OS type
+        // The test source file includes external source reference and thus has 2 variants depending on OS
+        // type
         [Fact]
         public void TestPortablePdbDocuments()
         {
@@ -193,7 +194,8 @@ namespace IlasmPortablePdbTests
         }
 
         // Tests whether the portable PDB has appropriate sequence points defined
-        // The test source file includes external source reference and thus has 2 variants depending on OS type
+        // The test source file includes external source reference and thus has 2 variants depending on OS
+        // type
         [Fact]
         public void TestPortablePdbMethodDebugInformation2()
         {

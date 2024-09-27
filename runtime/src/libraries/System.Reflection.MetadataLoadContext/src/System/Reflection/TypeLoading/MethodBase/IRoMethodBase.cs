@@ -3,7 +3,8 @@
 
 namespace System.Reflection.TypeLoading
 {
-    // Implemented by RoMethod and RoConstructor. Because it's impossible for those two types to have a common base type we control,
+    // Implemented by RoMethod and RoConstructor. Because it's impossible for those two types to have a
+    // common base type we control,
     // we use this interface when we want to talk about them collectively.
     internal interface IRoMethodBase
     {

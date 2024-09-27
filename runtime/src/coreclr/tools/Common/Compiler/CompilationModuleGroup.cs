@@ -20,7 +20,8 @@ namespace ILCompiler
         /// <summary>
         /// Decide whether a given call may get inlined by JIT.
         /// </summary>
-        /// <param name="callerMethod">Calling method the assembly code of is about to receive the callee code</param>
+        /// <param name="callerMethod">Calling method the assembly code of is about to receive the callee
+        // code</param>
         /// <param name="calleeMethod">The called method to be inlined into the caller</param>
         public virtual bool CanInline(MethodDesc callerMethod, MethodDesc calleeMethod) => true;
     }

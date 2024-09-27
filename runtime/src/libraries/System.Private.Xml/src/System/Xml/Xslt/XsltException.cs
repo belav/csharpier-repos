@@ -58,7 +58,8 @@ namespace System.Xml.Xsl
             }
             else
             {
-                // deserializing V2 or higher exception -> exception message is serialized by the base class (Exception._message)
+                // deserializing V2 or higher exception -> exception message is serialized by the base class
+                // (Exception._message)
                 _message = null;
             }
         }

@@ -41,7 +41,7 @@ namespace System.Runtime.InteropServices
     [StructLayout(LayoutKind.Sequential)]
     public sealed class MarshalAsAttribute : Attribute
     {
-        /*keep these fields in sync with object-internals.h*/
+/*keep these fields in sync with object-internals.h*/
 #pragma warning disable 169, 414
         public string MarshalCookie;
 

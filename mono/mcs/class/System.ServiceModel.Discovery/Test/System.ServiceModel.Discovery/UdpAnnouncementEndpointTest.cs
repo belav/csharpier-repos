@@ -71,7 +71,8 @@ namespace MonoTests.System.ServiceModel.Discovery
                 "#14"
             );
 
-            // .NET has two endpoint behaviors: DiscoveryViaBehavior and UdpContractFilterBehavior. Not worthy of testing that though.
+            // .NET has two endpoint behaviors: DiscoveryViaBehavior and UdpContractFilterBehavior. Not worthy
+            // of testing that though.
             // Assert.AreEqual (2, de.Behaviors.Count, "#15");
             // foreach (var eb in de.Behaviors) Console.Error.WriteLine (eb);
         }

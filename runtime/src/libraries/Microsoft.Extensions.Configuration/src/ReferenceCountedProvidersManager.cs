@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Configuration
 {
-    // ReferenceCountedProviderManager is used by ConfigurationManager to provide copy-on-write references that support concurrently
-    // reading config while modifying sources. It waits for readers to unreference the providers before disposing them
+    // ReferenceCountedProviderManager is used by ConfigurationManager to provide copy-on-write
+    // references that support concurrently
+    // reading config while modifying sources. It waits for readers to unreference the providers before
+    // disposing them
     // without blocking on any concurrent operations.
     internal sealed class ReferenceCountedProviderManager : IDisposable
     {
@@ -17,20 +19,24 @@ namespace Microsoft.Extensions.Configuration
         );
         private bool _disposed;
 
-        // This is only used to support IConfigurationRoot.Providers because we cannot track the lifetime of that reference.
+        // This is only used to support IConfigurationRoot.Providers because we cannot track the lifetime of
+        // that reference.
         public IEnumerable<IConfigurationProvider> NonReferenceCountedProviders =>
             _refCountedProviders.NonReferenceCountedProviders;
 
         public ReferenceCountedProviders GetReference()
         {
-            // Lock to ensure oldRefCountedProviders.Dispose() in ReplaceProviders() or Dispose() doesn't decrement ref count to zero
+            // Lock to ensure oldRefCountedProviders.Dispose() in ReplaceProviders() or Dispose() doesn't
+            // decrement ref count to zero
             // before calling _refCountedProviders.AddReference().
             lock (_replaceProvidersLock)
             {
                 if (_disposed)
                 {
-                    // Return a non-reference-counting ReferenceCountedProviders instance now that the ConfigurationManager is disposed.
-                    // We could preemptively throw an ODE instead, but this might break existing apps that were previously able to
+                    // Return a non-reference-counting ReferenceCountedProviders instance now that the
+                    // ConfigurationManager is disposed.
+                    // We could preemptively throw an ODE instead, but this might break existing apps that were
+                    // previously able to
                     // continue to read configuration after disposing an ConfigurationManager.
                     return ReferenceCountedProviders.CreateDisposed(
                         _refCountedProviders.NonReferenceCountedProviders
@@ -86,7 +92,8 @@ namespace Microsoft.Extensions.Configuration
         {
             ReferenceCountedProviders oldRefCountedProviders = _refCountedProviders;
 
-            // This lock ensures that we cannot reduce the ref count to zero before GetReference() calls AddReference().
+            // This lock ensures that we cannot reduce the ref count to zero before GetReference() calls
+            // AddReference().
             // Once _disposed is set, GetReference() stops reference counting.
             lock (_replaceProvidersLock)
             {

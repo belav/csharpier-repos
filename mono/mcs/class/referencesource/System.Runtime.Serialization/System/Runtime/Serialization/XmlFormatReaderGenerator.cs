@@ -222,7 +222,8 @@ namespace System.Runtime.Serialization
                     ilg.Load(objectLocal);
 
                     // Do a conversion back from DateTimeOffsetAdapter to DateTimeOffset after deserialization.
-                    // DateTimeOffsetAdapter is used here for deserialization purposes to bypass the ISerializable implementation
+                    // DateTimeOffsetAdapter is used here for deserialization purposes to bypass the ISerializable
+                    // implementation
                     // on DateTimeOffset; which does not work in partial trust.
 
                     if (classContract.UnderlyingType == Globals.TypeOfDateTimeOffsetAdapter)

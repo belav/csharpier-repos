@@ -164,7 +164,9 @@ set DOTNET_TieredCompilation=0
 set DOTNET_TailCallLoopOpt=0
 set DOTNET_JitStressRegs=4
 
-Assert failure(PID 103568 [0x00019490], Thread: 7492 [0x1d44]): Assertion failed 'gtOper < GT_COUNT' in 'TestClass:Method7(S1,S2,byref,byref,S1,byref,S2,S2):short:this' during 'Assertion prop' (IL size 61)
-    File: D:\git\dotnet-runtime\src\coreclr\jit\gentree.h Line: 1041
-    Image: d:\git\dotnet-runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
+Assert failure(PID 103568 [0x00019490], Thread: 7492 [0x1d44]): Assertion failed 'gtOper < GT_COUNT'
+in 'TestClass:Method7(S1,S2,byref,byref,S1,byref,S2,S2):short:this' during 'Assertion prop' (IL size
+61)
+File: D:\git\dotnet-runtime\src\coreclr\jit\gentree.h Line: 1041
+Image: d:\git\dotnet-runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
 */

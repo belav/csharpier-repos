@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel.Design
 {
     using System;
@@ -164,7 +164,8 @@ namespace System.ComponentModel.Design
         }
 
         /// <devdoc>
-        /// <para>Gets the <see cref='System.ComponentModel.Design.CommandID'/> associated with this menu command.</para>
+        /// <para>Gets the <see cref='System.ComponentModel.Design.CommandID'/> associated with this menu
+        // command.</para>
         /// </devdoc>
         public virtual CommandID CommandID
         {

@@ -58,13 +58,16 @@ namespace System.Diagnostics.Metrics
     /// Instrument{T} is the base class from which all non-observable instruments will inherit from.
     /// </summary>
     /// <remarks>
-    /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
+    /// This class supports only the following generic parameter types: <see cref="byte" />, <see
+    // cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double"
+    // />, and <see cref="decimal" />
     /// </remarks>
     public abstract partial class Instrument<T> : Instrument
         where T : struct
     {
         /// <summary>
-        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
+        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to
+        // this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tag">A key-value pair tag associated with the measurement.</param>
@@ -76,7 +79,8 @@ namespace System.Diagnostics.Metrics
         }
 
         /// <summary>
-        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
+        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to
+        // this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
@@ -93,7 +97,8 @@ namespace System.Diagnostics.Metrics
         }
 
         /// <summary>
-        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
+        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to
+        // this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
@@ -112,10 +117,12 @@ namespace System.Diagnostics.Metrics
         }
 
         /// <summary>
-        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to this instrument.
+        /// Record the measurement by notifying all <see cref="MeterListener" /> objects which listening to
+        // this instrument.
         /// </summary>
         /// <param name="measurement">The measurement value.</param>
-        /// <param name="tagList">A <see cref="T:System.Diagnostics.TagList" /> of tags associated with the measurement.</param>
+        /// <param name="tagList">A <see cref="T:System.Diagnostics.TagList" /> of tags associated with the
+        // measurement.</param>
         protected void RecordMeasurement(T measurement, in TagList tagList)
         {
             KeyValuePair<string, object?>[]? tags = tagList.Tags;

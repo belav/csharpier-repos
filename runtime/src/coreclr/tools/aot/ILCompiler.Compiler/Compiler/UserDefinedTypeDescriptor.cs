@@ -81,6 +81,7 @@ namespace ILCompiler
                         // holds the initial value of parameters, the current state, the current thread ID, etc.).
                         // The set of fields we're going to touch is tagged as "parsed by the expression evaluator"
                         // in the Roslyn codebase, so it's somewhat safe to do this.
+                        //
                         // https://github.com/dotnet/roslyn/blob/afd10305a37c0ffb2cfb2c2d8446154c68cfa87a/src/Compilers/CSharp/Portable/Symbols/Synthesized/GeneratedNameKind.cs#L15-L22
                         string fieldNameEmit = fieldDesc.Name;
                         if (fieldNameEmit.Length > 0 && fieldNameEmit[0] == '<')
@@ -184,7 +185,9 @@ namespace ILCompiler
                     return typeIndex;
 
                 PointerTypeDescriptor descriptor = default(PointerTypeDescriptor);
-                // Note the use of GetTypeIndex here instead of GetVariableTypeIndex (We need the type exactly, not a reference to the type (as would happen for arrays/classes), and not a primitive value (as would happen for primitives))
+                // Note the use of GetTypeIndex here instead of GetVariableTypeIndex (We need the type exactly, not
+                // a reference to the type (as would happen for arrays/classes), and not a primitive value (as would
+                // happen for primitives))
                 descriptor.ElementType = GetTypeIndex(type, true);
                 descriptor.Is64Bit = Is64Bit ? 1 : 0;
                 descriptor.IsConst = 1;
@@ -325,7 +328,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Get type index for type without the type being wrapped as a reference (as a variable or field must be)
+        /// Get type index for type without the type being wrapped as a reference (as a variable or field
+        // must be)
         /// </summary>
         /// <param name="type"></param>
         /// <param name="needsCompleteType"></param>
@@ -558,7 +562,8 @@ namespace ILCompiler
 
         private TypeDesc GetDebugType(TypeDesc type)
         {
-            // To avoid infinite generic recursion issues, attempt to use canonical form for fields with high generic complexity.
+            // To avoid infinite generic recursion issues, attempt to use canonical form for fields with high
+            // generic complexity.
             if (
                 type.IsCanonicalSubtype(CanonicalFormKind.Specific)
                 || ShouldUseCanonicalTypeRecord(type)

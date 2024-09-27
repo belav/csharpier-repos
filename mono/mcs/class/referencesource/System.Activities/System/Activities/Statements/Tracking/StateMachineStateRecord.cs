@@ -15,7 +15,8 @@ namespace System.Activities.Statements.Tracking
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// Represents a tracking record that is created when an state machine instance transitions to a state.
+    /// Represents a tracking record that is created when an state machine instance transitions to a
+    // state.
     /// </summary>
     [Fx.Tag.XamlVisible(false)]
     [DataContract]

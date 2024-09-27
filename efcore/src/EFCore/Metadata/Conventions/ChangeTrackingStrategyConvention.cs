@@ -6,11 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that sets a flag on the model to always skip detecting changes if no entity type is using the
+///     A convention that sets a flag on the model to always skip detecting changes if no entity
+// type is using the
 ///     <see cref="ChangeTrackingStrategy.Snapshot" /> strategy.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class ChangeTrackingStrategyConvention : IModelFinalizingConvention
 {

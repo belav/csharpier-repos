@@ -125,7 +125,8 @@ namespace System.Configuration
                 {
                     // There could be more then one validator attribute specified on a property
                     // Currently we consider this an error since it's too late to fix it for whidbey
-                    // but the right thing to do is to introduce new validator type ( CompositeValidator ) that is a list of validators and executes
+                    // but the right thing to do is to introduce new validator type ( CompositeValidator ) that is a
+                    // list of validators and executes
                     // them all
 
                     if (validator != null)

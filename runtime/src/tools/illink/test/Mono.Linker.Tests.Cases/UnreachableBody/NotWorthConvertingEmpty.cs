@@ -4,7 +4,8 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
     /// <summary>
-    /// Stubbing an empty method would result in more instructions.  It's more size efficient to just leave it alone
+    /// Stubbing an empty method would result in more instructions.  It's more size efficient to just
+    // leave it alone
     /// </summary>
     [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class NotWorthConvertingEmpty

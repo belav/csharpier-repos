@@ -14,8 +14,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     /// <summary>
-    /// An XML parser that is designed to parse small fragments of XML such as those that appear in documentation comments.
-    /// PERF: We try to re-use the same underlying <see cref="XmlReader"/> to reduce the allocation costs of multiple parses.
+    /// An XML parser that is designed to parse small fragments of XML such as those that appear in
+    // documentation comments.
+    /// PERF: We try to re-use the same underlying <see cref="XmlReader"/> to reduce the allocation
+    // costs of multiple parses.
     /// </summary>
     internal sealed class XmlFragmentParser
     {
@@ -26,15 +28,18 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             SharedPools.Default<XmlFragmentParser>();
 
         /// <summary>
-        /// Parse the given XML fragment. The given callback is executed until either the end of the fragment
+        /// Parse the given XML fragment. The given callback is executed until either the end of the
+        // fragment
         /// is reached or an exception occurs.
         /// </summary>
-        /// <typeparam name="TArg">Type of an additional argument passed to the <paramref name="callback"/> delegate.</typeparam>
+        /// <typeparam name="TArg">Type of an additional argument passed to the <paramref name="callback"/>
+        // delegate.</typeparam>
         /// <param name="xmlFragment">The fragment to parse.</param>
         /// <param name="callback">Action to execute while there is still more to read.</param>
         /// <param name="arg">Additional argument passed to the callback.</param>
         /// <remarks>
-        /// It is important that the <paramref name="callback"/> action advances the <see cref="XmlReader"/>,
+        /// It is important that the <paramref name="callback"/> action advances the <see
+        // cref="XmlReader"/>,
         /// otherwise parsing will never complete.
         /// </remarks>
         public static void ParseFragment<TArg>(
@@ -113,8 +118,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         /// <summary>
-        /// A text reader over a synthesized XML stream consisting of a single root element followed by a potentially
-        /// infinite stream of fragments. Each time "SetText" is called the stream is rewound to the element immediately
+        /// A text reader over a synthesized XML stream consisting of a single root element followed by a
+        // potentially
+        /// infinite stream of fragments. Each time "SetText" is called the stream is rewound to the element
+        // immediately
         /// following the synthetic root node.
         /// </summary>
         private sealed class Reader : TextReader
@@ -126,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             private int _position;
 
-            // Base the root element name on a GUID to avoid accidental (or intentional) collisions. An underscore is
+            // Base the root element name on a GUID to avoid accidental (or intentional) collisions. An
+            // underscore is
             // prefixed because element names must not start with a number.
             private static readonly string s_rootElementName = "_" + Guid.NewGuid().ToString("N");
 

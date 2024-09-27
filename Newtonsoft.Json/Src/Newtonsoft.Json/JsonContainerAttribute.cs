@@ -59,14 +59,17 @@ namespace Newtonsoft.Json
         public Type? ItemConverterType { get; set; }
 
         /// <summary>
-        /// The parameter list to use when constructing the <see cref="JsonConverter"/> described by <see cref="ItemConverterType"/>.
+        /// The parameter list to use when constructing the <see cref="JsonConverter"/> described by <see
+        // cref="ItemConverterType"/>.
         /// If <c>null</c>, the default constructor is used.
-        /// When non-<c>null</c>, there must be a constructor defined in the <see cref="JsonConverter"/> that exactly matches the number,
+        /// When non-<c>null</c>, there must be a constructor defined in the <see cref="JsonConverter"/>
+        // that exactly matches the number,
         /// order, and type of these parameters.
         /// </summary>
         /// <example>
         /// <code>
-        /// [JsonContainer(ItemConverterType = typeof(MyContainerConverter), ItemConverterParameters = new object[] { 123, "Four" })]
+        /// [JsonContainer(ItemConverterType = typeof(MyContainerConverter), ItemConverterParameters = new
+        // object[] { 123, "Four" })]
         /// </code>
         /// </example>
         public object[]? ItemConverterParameters { get; set; }
@@ -86,14 +89,17 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// The parameter list to use when constructing the <see cref="NamingStrategy"/> described by <see cref="NamingStrategyType"/>.
+        /// The parameter list to use when constructing the <see cref="NamingStrategy"/> described by <see
+        // cref="NamingStrategyType"/>.
         /// If <c>null</c>, the default constructor is used.
-        /// When non-<c>null</c>, there must be a constructor defined in the <see cref="NamingStrategy"/> that exactly matches the number,
+        /// When non-<c>null</c>, there must be a constructor defined in the <see cref="NamingStrategy"/>
+        // that exactly matches the number,
         /// order, and type of these parameters.
         /// </summary>
         /// <example>
         /// <code>
-        /// [JsonContainer(NamingStrategyType = typeof(MyNamingStrategy), NamingStrategyParameters = new object[] { 123, "Four" })]
+        /// [JsonContainer(NamingStrategyType = typeof(MyNamingStrategy), NamingStrategyParameters = new
+        // object[] { 123, "Four" })]
         /// </code>
         /// </example>
         public object[]? NamingStrategyParameters
@@ -133,7 +139,8 @@ namespace Newtonsoft.Json
         /// Gets or sets a value that indicates whether to preserve collection's items references.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> to keep collection's items object references; otherwise, <c>false</c>. The default is <c>false</c>.
+        /// 	<c>true</c> to keep collection's items object references; otherwise, <c>false</c>. The default
+        // is <c>false</c>.
         /// </value>
         public bool ItemIsReference
         {
@@ -167,7 +174,8 @@ namespace Newtonsoft.Json
         protected JsonContainerAttribute() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonContainerAttribute"/> class with the specified container Id.
+        /// Initializes a new instance of the <see cref="JsonContainerAttribute"/> class with the specified
+        // container Id.
         /// </summary>
         /// <param name="id">The container Id.</param>
         protected JsonContainerAttribute(string id)

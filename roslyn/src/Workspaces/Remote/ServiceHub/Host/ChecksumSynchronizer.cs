@@ -41,7 +41,8 @@ internal sealed partial class AssetProvider
             SolutionStateChecksums solutionChecksumObject;
             using (await s_gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
-                // this will make 4 round trip to data source (VS) to get all assets that belong to the given solution checksum
+                // this will make 4 round trip to data source (VS) to get all assets that belong to the given
+                // solution checksum
 
                 // first, get solution checksum object for the given solution checksum
                 solutionChecksumObject = await _assetProvider

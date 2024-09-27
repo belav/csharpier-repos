@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// <param name="text">The source text.</param>
         /// <param name="span">The span of the line.</param>
         /// <returns>An instance of <see cref="TextLine"/>.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The span does not represent a text line.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The span does not represent a text
+        // line.</exception>
         public static TextLine FromSpan(SourceText text, TextSpan span)
         {
             if (text == null)

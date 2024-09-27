@@ -350,7 +350,8 @@ namespace System.Globalization.Tests
                 1,
             };
 
-            // Malformed Unicode - Invalid Surrogates (there is nothing special about them, they don't have a special treatment)
+            // Malformed Unicode - Invalid Surrogates (there is nothing special about them, they don't have a
+            // special treatment)
             yield return new object[]
             {
                 s_invariantCompare,
@@ -397,7 +398,8 @@ namespace System.Globalization.Tests
             }
 
             // Platform differences
-            // in HybridGlobalization on Browser we use TextEncoder that is not supported for v8 and the manual decoding works like NLS
+            // in HybridGlobalization on Browser we use TextEncoder that is not supported for v8 and the manual
+            // decoding works like NLS
             bool behavesLikeNls =
                 PlatformDetection.IsNlsGlobalization
                 || (
@@ -515,7 +517,8 @@ namespace System.Globalization.Tests
             }
 
             // ICU bugs
-            // UInt16 overflow: https://unicode-org.atlassian.net/browse/ICU-20832 fixed in https://github.com/unicode-org/icu/pull/840 (ICU 65)
+            // UInt16 overflow: https://unicode-org.atlassian.net/browse/ICU-20832 fixed in
+            // https://github.com/unicode-org/icu/pull/840 (ICU 65)
             if (PlatformDetection.IsNlsGlobalization || PlatformDetection.ICUVersion.Major >= 65)
             {
                 yield return new object[]

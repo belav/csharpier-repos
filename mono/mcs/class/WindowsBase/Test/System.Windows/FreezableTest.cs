@@ -80,7 +80,8 @@ namespace MonoTests.System.Windows
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.RegisterAttached("Value", typeof(string), typeof(FreezableTest));
 
-        // Test that the Frezzable.Freeze () and that a cloned object with Clone () is not frozen even if the source is frozen
+        // Test that the Frezzable.Freeze () and that a cloned object with Clone () is not frozen even if
+        // the source is frozen
         [Test]
         public void TestFreezeClone()
         {
@@ -128,7 +129,8 @@ namespace MonoTests.System.Windows
             freezable.onChangedCalled = false;
         }
 
-        // Test that CanFreeze test child freezable properties and that Freeze also freeze all Freezable childs
+        // Test that CanFreeze test child freezable properties and that Freeze also freeze all Freezable
+        // childs
         [Test]
         public void TestFreezePropagation()
         {

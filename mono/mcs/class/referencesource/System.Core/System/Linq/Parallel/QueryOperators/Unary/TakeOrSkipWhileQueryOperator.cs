@@ -93,7 +93,8 @@ namespace System.Linq.Parallel
         /// </summary>
         private void InitOrderIndexState()
         {
-            // SkipWhile/TakeWhile needs an increasing index. However, if the predicate expression depends on the index,
+            // SkipWhile/TakeWhile needs an increasing index. However, if the predicate expression depends on
+            // the index,
             // the index needs to be correct, not just increasing.
 
             OrdinalIndexState requiredIndexState = OrdinalIndexState.Increasing;

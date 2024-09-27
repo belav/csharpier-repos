@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a SemanticModel for a true field initializer (field = value) of a named type (incl. Enums).
+        /// Creates a SemanticModel for a true field initializer (field = value) of a named type (incl.
+        // Enums).
         /// </summary>
         internal static InitializerSemanticModel Create(
             SyntaxTreeSemanticModel containingSemanticModel,
@@ -111,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a speculative SemanticModel for an initializer node (field initializer, constructor initializer, or parameter default value)
+        /// Creates a speculative SemanticModel for an initializer node (field initializer, constructor
+        // initializer, or parameter default value)
         /// that did not appear in the original source code.
         /// </summary>
         internal static SpeculativeSemanticModelWithMemberModel CreateSpeculative(
@@ -389,7 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // https://github.com/dotnet/roslyn/issues/46424
-            // Bind and analyze preceding field initializers in order to give an accurate initial nullable state.
+            // Bind and analyze preceding field initializers in order to give an accurate initial nullable
+            // state.
             return NullableWalker.AnalyzeAndRewrite(
                 Compilation,
                 MemberSymbol,

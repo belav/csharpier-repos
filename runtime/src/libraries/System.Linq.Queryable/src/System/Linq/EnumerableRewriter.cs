@@ -15,11 +15,13 @@ namespace System.Linq
     [RequiresDynamicCode("Requires MakeGenericType")]
     internal sealed class EnumerableRewriter : ExpressionVisitor
     {
-        // We must ensure that if a LabelTarget is rewritten that it is always rewritten to the same new target
+        // We must ensure that if a LabelTarget is rewritten that it is always rewritten to the same new
+        // target
         // or otherwise expressions using it won't match correctly.
         private Dictionary<LabelTarget, LabelTarget>? _targetCache;
 
-        // Finding equivalent types can be relatively expensive, and hitting with the same types repeatedly is quite likely.
+        // Finding equivalent types can be relatively expensive, and hitting with the same types repeatedly
+        // is quite likely.
         private Dictionary<Type, Type>? _equivalentTypeCache;
 
         public EnumerableRewriter() { }
@@ -279,7 +281,8 @@ namespace System.Linq
             MethodInfo ApplyTypeArgs(MethodInfo methodInfo) =>
                 typeArgs == null ? methodInfo : methodInfo.MakeGenericMethod(typeArgs);
 
-            // In certain cases, there might be ambiguities when resolving matching overloads, for example between
+            // In certain cases, there might be ambiguities when resolving matching overloads, for example
+            // between
             //   1. FirstOrDefault<object>(IEnumerable<object> source, Func<object, bool> predicate) and
             //   2. FirstOrDefault<object>(IEnumerable<object> source, object defaultvalue).
             // In such cases we disambiguate by picking a method with the most derived signature.
@@ -290,8 +293,10 @@ namespace System.Linq
                     .Select(m => m.GetParameters())
                     .ToArray();
 
-                // `AreAssignableFrom[Strict]` defines a partial order on method signatures; pick a maximal element using that order.
-                // It is assumed that `matchingMethods` is a small array, so a naive quadratic search is probably better than
+                // `AreAssignableFrom[Strict]` defines a partial order on method signatures; pick a maximal element
+                // using that order.
+                // It is assumed that `matchingMethods` is a small array, so a naive quadratic search is probably
+                // better than
                 // doing some variant of topological sorting.
 
                 for (int i = 0; i < matchingMethods.Length; i++)

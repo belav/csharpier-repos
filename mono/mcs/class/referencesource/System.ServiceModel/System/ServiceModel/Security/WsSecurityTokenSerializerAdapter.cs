@@ -19,8 +19,10 @@ using System.Xml;
 namespace System.ServiceModel.Security
 {
     /// <summary>
-    /// This class derives from System.ServiceModel.Security.WSSecurityTokenSerializer and wraps a collection of SecurityTokenHandlers.
-    /// Any call to this serilaizer is delegated to the token handler and delegated to the base class if no token handler
+    /// This class derives from System.ServiceModel.Security.WSSecurityTokenSerializer and wraps a
+    // collection of SecurityTokenHandlers.
+    /// Any call to this serilaizer is delegated to the token handler and delegated to the base class if
+    // no token handler
     /// is registered to handle this particular token or KeyIdentifier.
     /// </summary>
     class WsSecurityTokenSerializerAdapter : WSSecurityTokenSerializer
@@ -34,7 +36,8 @@ namespace System.ServiceModel.Security
         /// Initializes an instance of <see cref="WsSecurityTokenSerializerAdapter"/>
         /// </summary>
         /// <param name="securityTokenHandlerCollection">
-        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </param>
         public WsSecurityTokenSerializerAdapter(
@@ -47,10 +50,12 @@ namespace System.ServiceModel.Security
         /// Initializes an instance of <see cref="WsSecurityTokenSerializerAdapter"/>
         /// </summary>
         /// <param name="securityTokenHandlerCollection">
-        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </param>
-        /// <param name="securityVersion">The SecurityTokenVersion of the base WSSecurityTokenSerializer.</param>
+        /// <param name="securityVersion">The SecurityTokenVersion of the base
+        // WSSecurityTokenSerializer.</param>
         public WsSecurityTokenSerializerAdapter(
             SecurityTokenHandlerCollection securityTokenHandlerCollection,
             SecurityVersion securityVersion
@@ -68,11 +73,13 @@ namespace System.ServiceModel.Security
         /// Initializes an instance of <see cref="WsSecurityTokenSerializerAdapter"/>
         /// </summary>
         /// <param name="securityTokenHandlerCollection">
-        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </param>
         /// <param name="securityVersion">The SecurityVersion of the base WSSecurityTokenSerializer.</param>
-        /// <param name="emitBspAttributes">Flag that determines if the serailization shoudl be BSP compliant.</param>
+        /// <param name="emitBspAttributes">Flag that determines if the serailization shoudl be BSP
+        // compliant.</param>
         /// <param name="samlSerializer">Serializer for SAML 1.1 tokens.</param>
         /// <param name="stateEncoder">SecurityStateEncoder used for resolving SCT.</param>
         /// <param name="knownTypes">The collection of known claim types.</param>
@@ -99,13 +106,15 @@ namespace System.ServiceModel.Security
         /// Initializes an instance of <see cref="WsSecurityTokenSerializerAdapter"/>
         /// </summary>
         /// <param name="securityTokenHandlerCollection">
-        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </param>
         /// <param name="securityVersion">The SecurityVersion of the base WSSecurityTokenSerializer.</param>
         /// <param name="trustVersion">The TrustVersion of the serializer uses.</param>
         /// <param name="secureConversationVersion">The SecureConversationVersion of the serializer.</param>
-        /// <param name="emitBspAttributes">Flag that determines if the serailization shoudl be BSP compliant.</param>
+        /// <param name="emitBspAttributes">Flag that determines if the serailization shoudl be BSP
+        // compliant.</param>
         /// <param name="samlSerializer">Serializer for SAML 1.1 tokens.</param>
         /// <param name="stateEncoder">SecurityStateEncoder used for resolving SCT.</param>
         /// <param name="knownTypes">The collection of known claim types.</param>
@@ -297,7 +306,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="writer">XmlWriter to write to.</param>
         /// <param name="token">The SecurityToken to serializer.</param>
-        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'token' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'token' is
+        // null.</exception>
         protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
         {
             if (writer == null)
@@ -388,10 +398,12 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Reads an SecurityKeyIdentifier from a XML stream.
         /// </summary>
-        /// <param name="reader">An XML reader positioned at an SecurityKeyIdentifier (ds: KeyInfo) as defined in 'http://www.w3.org/TR/xmldsig-core'.</param>
+        /// <param name="reader">An XML reader positioned at an SecurityKeyIdentifier (ds: KeyInfo) as
+        // defined in 'http://www.w3.org/TR/xmldsig-core'.</param>
         /// <returns>SecurityKeyIdentifier.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">If the <paramref name="reader"/> is not positioned at KeyInfo element.</exception>
+        /// <exception cref="InvalidOperationException">If the <paramref name="reader"/> is not positioned
+        // at KeyInfo element.</exception>
         protected override SecurityKeyIdentifier ReadKeyIdentifierCore(XmlReader reader)
         {
             if (reader == null)
@@ -450,7 +462,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be checked.</param>
         /// <returns>'True' if the SecurityTokenKeyIdentifierClause can be written.</returns>
-        /// <exception cref="ArgumentNullException">The input parameter 'keyIdentifierClause' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'keyIdentifierClause' is
+        // null.</exception>
         protected override bool CanWriteKeyIdentifierClauseCore(
             SecurityKeyIdentifierClause keyIdentifierClause
         )
@@ -522,7 +535,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="writer">XmlWriter to write into.</param>
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be written.</param>
-        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'keyIdentifierClause' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'keyIdentifierClause' is
+        // null.</exception>
         protected override void WriteKeyIdentifierClauseCore(
             XmlWriter writer,
             SecurityKeyIdentifierClause keyIdentifierClause

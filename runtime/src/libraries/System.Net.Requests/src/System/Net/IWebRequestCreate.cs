@@ -5,7 +5,8 @@ namespace System.Net
 {
     /// <devdoc>
     ///    <para>
-    ///       The <see cref='System.Net.IWebRequestCreate'/> interface is used by the <see cref='System.Net.WebRequest'/>
+    ///       The <see cref='System.Net.IWebRequestCreate'/> interface is used by the <see
+    // cref='System.Net.WebRequest'/>
     ///       class to create <see cref='System.Net.WebRequest'/>
     ///       instances for a registered scheme.
     ///    </para>

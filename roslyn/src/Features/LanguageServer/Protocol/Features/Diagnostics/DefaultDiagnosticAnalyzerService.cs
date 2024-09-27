@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             if (_globalOptions.IsLspPullDiagnostics())
             {
-                // We rely on LSP to query us for diagnostics when things have changed and poll us for changes that might
+                // We rely on LSP to query us for diagnostics when things have changed and poll us for changes that
+                // might
                 // have happened to the project or closed files outside of VS.
                 return NoOpIncrementalAnalyzer.Instance;
             }
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             remove { }
         }
 
-        // this only support push model, pull model will be provided by DiagnosticService by caching everything this one pushed
+        // this only support push model, pull model will be provided by DiagnosticService by caching
+        // everything this one pushed
         public bool SupportGetDiagnostics => false;
 
         public ValueTask<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
@@ -197,11 +199,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ///
             /// This is a simple API to get all diagnostics for the given document.
             ///
-            /// The intended audience for this API is for ones that pefer simplicity over performance such as document that belong to misc project.
-            /// this doesn't cache nor use cache for anything. it will re-caculate new diagnostics every time for the given document.
+            /// The intended audience for this API is for ones that pefer simplicity over performance such as
+            // document that belong to misc project.
+            /// this doesn't cache nor use cache for anything. it will re-caculate new diagnostics every time
+            // for the given document.
             /// it will not persist any data on disk nor use OOP to calculate the data.
             ///
-            /// This should never be used when performance is a big concern. for such context, use much complex API from IDiagnosticAnalyzerService
+            /// This should never be used when performance is a big concern. for such context, use much complex
+            // API from IDiagnosticAnalyzerService
             /// that provide all kinds of knobs/cache/persistency/OOP to get better perf over simplicity.
             /// </summary>
             private async Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
@@ -286,9 +291,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // a file is removed from a solution
                 //
                 // here syntax and semantic indicates type of errors not where it is originated from.
-                // Option.Semantic or Option.ScriptSemantic indicates what kind of document we will produce semantic errors from.
+                // Option.Semantic or Option.ScriptSemantic indicates what kind of document we will produce semantic
+                // errors from.
                 // Option.Semantic == true means we will generate semantic errors for all document type
-                // Option.ScriptSemantic == true means we will generate semantic errors only for script document type
+                // Option.ScriptSemantic == true means we will generate semantic errors only for script document
+                // type
                 // both of them at the end generates semantic errors
                 RaiseEmptyDiagnosticUpdated(AnalysisKind.Syntax, documentId);
                 RaiseEmptyDiagnosticUpdated(AnalysisKind.Semantic, documentId);

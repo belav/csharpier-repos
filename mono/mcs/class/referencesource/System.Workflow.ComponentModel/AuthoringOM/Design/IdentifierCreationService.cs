@@ -129,10 +129,12 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// This method will ensure that the identifiers of the activities to be added to the parent activity
+        /// This method will ensure that the identifiers of the activities to be added to the parent
+        // activity
         /// are unique within the scope of the parent activity.
         /// </summary>
-        /// <param name="parentActivity">THis activity is the parent activity which the child activities are being added</param>
+        /// <param name="parentActivity">THis activity is the parent activity which the child activities are
+        // being added</param>
         /// <param name="childActivities"></param>
         void IIdentifierCreationService.EnsureUniqueIdentifiers(
             CompositeActivity parentActivity,

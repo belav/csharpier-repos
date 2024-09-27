@@ -31,13 +31,18 @@ public class StatePersistenceTest
     public override Task InitializeAsync() =>
         InitializeAsync(BrowserFixture.StreamingContext + _nextStreamingIdContext++);
 
-    // Validates that we can use persisted state across server, webasembly, and auto modes, with and without
+    // Validates that we can use persisted state across server, webasembly, and auto modes, with and
+    // without
     // streaming rendering.
-    // For streaming rendering, we validate that the state is captured and restored after streaming completes.
-    // For enhanced navigation we validate that the state is captured at the time components are rendered for
+    // For streaming rendering, we validate that the state is captured and restored after streaming
+    // completes.
+    // For enhanced navigation we validate that the state is captured at the time components are
+    // rendered for
     // the first time on the page.
-    // For auto mode, we validate that the state is captured and restored for both server and wasm runtimes.
-    // In each case, we validate that the state is available until the initial set of components first render reaches quiescence. Similar to how it works for Server and WebAssembly.
+    // For auto mode, we validate that the state is captured and restored for both server and wasm
+    // runtimes.
+    // In each case, we validate that the state is available until the initial set of components first
+    // render reaches quiescence. Similar to how it works for Server and WebAssembly.
     // For server we validate that the state is provided every time a circuit is initialized.
     [Theory]
     [InlineData(true, typeof(InteractiveServerRenderMode), (string)null)]
@@ -45,13 +50,16 @@ public class StatePersistenceTest
     [InlineData(true, typeof(InteractiveWebAssemblyRenderMode), (string)null)]
     [InlineData(true, typeof(InteractiveWebAssemblyRenderMode), "WebAssemblyStreaming")]
     [InlineData(true, typeof(InteractiveAutoRenderMode), (string)null)]
-    // [InlineData(true, typeof(InteractiveAutoRenderMode), "AutoStreaming")] https://github.com/dotnet/aspnetcore/issues/50810
+    // [InlineData(true, typeof(InteractiveAutoRenderMode), "AutoStreaming")]
+    // https://github.com/dotnet/aspnetcore/issues/50810
     [InlineData(false, typeof(InteractiveServerRenderMode), (string)null)]
     [InlineData(false, typeof(InteractiveServerRenderMode), "ServerStreaming")]
     [InlineData(false, typeof(InteractiveWebAssemblyRenderMode), (string)null)]
     [InlineData(false, typeof(InteractiveWebAssemblyRenderMode), "WebAssemblyStreaming")]
-    // [InlineData(false, typeof(InteractiveAutoRenderMode), (string)null)] https://github.com/dotnet/aspnetcore/issues/50810
-    // [InlineData(false, typeof(InteractiveAutoRenderMode), "AutoStreaming")] https://github.com/dotnet/aspnetcore/issues/50810
+    // [InlineData(false, typeof(InteractiveAutoRenderMode), (string)null)]
+    // https://github.com/dotnet/aspnetcore/issues/50810
+    // [InlineData(false, typeof(InteractiveAutoRenderMode), "AutoStreaming")]
+    // https://github.com/dotnet/aspnetcore/issues/50810
     public void CanRenderComponentWithPersistedState(
         bool suppressEnhancedNavigation,
         Type renderMode,
@@ -196,7 +204,8 @@ public class StatePersistenceTest
     )
     {
         stateValue ??= "restored";
-        // No need to navigate if we are using enhanced navigation, the tests will have already navigated to the page via a link.
+        // No need to navigate if we are using enhanced navigation, the tests will have already navigated to
+        // the page via a link.
         if (suppresEnhancedNavigation)
         {
             // In this case we suppress auto start to check some server side state before we boot Blazor.

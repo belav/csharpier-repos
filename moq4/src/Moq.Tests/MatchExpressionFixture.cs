@@ -105,12 +105,12 @@ namespace Moq.Tests
             mock.Object.M(5);
             mock.Verify();
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private Expression<Action<IX>> GetExpression()
-            After:
-                    Expression<Action<IX>> GetExpression()
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private Expression<Action<IX>> GetExpression()
+After:
+Expression<Action<IX>> GetExpression()
+*/
         }
 
         Expression<Action<IX>> GetExpression()
@@ -127,12 +127,12 @@ namespace Moq.Tests
                 x
             );
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private Expression<Action<IX>> GetItIsAnyExpression()
-            After:
-                    Expression<Action<IX>> GetItIsAnyExpression()
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private Expression<Action<IX>> GetItIsAnyExpression()
+After:
+Expression<Action<IX>> GetItIsAnyExpression()
+*/
         }
 
         Expression<Action<IX>> GetItIsAnyExpression()
@@ -143,12 +143,12 @@ namespace Moq.Tests
                 x
             );
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private Expression<Action<IX>> GetItIsAnyMatchExpression()
-            After:
-                    Expression<Action<IX>> GetItIsAnyMatchExpression()
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private Expression<Action<IX>> GetItIsAnyMatchExpression()
+After:
+Expression<Action<IX>> GetItIsAnyMatchExpression()
+*/
         }
 
         Expression<Action<IX>> GetItIsAnyMatchExpression()
@@ -170,12 +170,12 @@ namespace Moq.Tests
                 x
             );
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private static MatchExpression FindMatchExpression(Expression expression)
-            After:
-                    static MatchExpression FindMatchExpression(Expression expression)
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private static MatchExpression FindMatchExpression(Expression expression)
+After:
+static MatchExpression FindMatchExpression(Expression expression)
+*/
         }
 
         static MatchExpression FindMatchExpression(Expression expression)

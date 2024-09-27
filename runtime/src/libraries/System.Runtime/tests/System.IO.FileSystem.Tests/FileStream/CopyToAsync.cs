@@ -115,7 +115,8 @@ namespace System.IO.Tests
             )
             using (Stream dst = createDestinationStream(dstPath))
             {
-                // If configured to expose the handle, do so.  This influences the stream's need to ensure the position is in sync.
+                // If configured to expose the handle, do so.  This influences the stream's need to ensure the
+                // position is in sync.
                 if (exposeHandle)
                 {
                     _ = src.SafeFileHandle;

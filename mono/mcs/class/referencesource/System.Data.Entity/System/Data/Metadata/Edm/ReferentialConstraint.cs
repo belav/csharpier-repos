@@ -24,9 +24,12 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="fromRole">role from which the relationship originates</param>
         /// <param name="toRole">role to which the relationship is linked/targeted to</param>
-        /// <param name="toProperties">properties on entity type of from role which take part in the constraint</param>
-        /// <param name="fromProperties">properties on entity type of to role which take part in the constraint</param>
-        /// <exception cref="ArgumentNullException">Argument Null exception if any of the arguments is null</exception>
+        /// <param name="toProperties">properties on entity type of from role which take part in the
+        // constraint</param>
+        /// <param name="fromProperties">properties on entity type of to role which take part in the
+        // constraint</param>
+        /// <exception cref="ArgumentNullException">Argument Null exception if any of the arguments is
+        // null</exception>
         internal ReferentialConstraint(
             RelationshipEndMember fromRole,
             RelationshipEndMember toRole,
@@ -76,8 +79,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the FromRole which takes part in this referential constraint
         /// </summary>
-        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is null</exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if the ReferentialConstraint instance is in ReadOnly state</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is
+        // null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the ReferentialConstraint instance
+        // is in ReadOnly state</exception>
         [MetadataProperty(BuiltInTypeKind.RelationshipEndMember, false)]
         public RelationshipEndMember FromRole
         {
@@ -87,8 +92,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the ToRole which takes part in this referential constraint
         /// </summary>
-        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is null</exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if the ReferentialConstraint instance is in ReadOnly state</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if value passed into setter is
+        // null</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the ReferentialConstraint instance
+        // is in ReadOnly state</exception>
         [MetadataProperty(BuiltInTypeKind.RelationshipEndMember, false)]
         public RelationshipEndMember ToRole
         {

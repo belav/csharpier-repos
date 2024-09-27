@@ -16,8 +16,10 @@ namespace System.Security.Cryptography
     [System.Runtime.InteropServices.ComVisible(true)]
 #endif // !FEATURE_CORECLR && !SILVERLIGHT
     public abstract partial class RandomNumberGenerator
-        // On Orcas RandomNumberGenerator is not disposable, so we cannot add the IDisposable implementation to the
-        // CoreCLR mscorlib.  However, this type does need to be disposable since subtypes can and do hold onto
+        // On Orcas RandomNumberGenerator is not disposable, so we cannot add the IDisposable implementation
+        // to the
+        // CoreCLR mscorlib.  However, this type does need to be disposable since subtypes can and do hold
+        // onto
         // native resources. Therefore, on desktop mscorlibs we add an IDisposable implementation.
 #if !FEATURE_CORECLR || FEATURE_CORESYSTEM
         : IDisposable

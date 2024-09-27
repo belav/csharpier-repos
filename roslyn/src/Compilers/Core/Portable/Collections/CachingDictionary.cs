@@ -34,9 +34,12 @@ namespace Microsoft.CodeAnalysis.Collections
         private readonly Func<IEqualityComparer<TKey>, SegmentedHashSet<TKey>> _getKeys;
         private readonly IEqualityComparer<TKey> _comparer;
 
-        // The underlying dictionary. It may be null (indicating that nothing is cached), a ConcurrentDictionary
-        // or something frozen (usually a regular Dictionary). The frozen Dictionary is used only once the collection
-        // is fully populated. This is a memory optimization so that we don't hold onto relatively ConcurrentDictionary
+        // The underlying dictionary. It may be null (indicating that nothing is cached), a
+        // ConcurrentDictionary
+        // or something frozen (usually a regular Dictionary). The frozen Dictionary is used only once the
+        // collection
+        // is fully populated. This is a memory optimization so that we don't hold onto relatively
+        // ConcurrentDictionary
         // instances once the cache is fully populated.
         private IDictionary<TKey, ImmutableArray<TElement>>? _map;
 
@@ -48,10 +51,12 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <summary>
         /// Create a CachingLookup.
         /// </summary>
-        /// <param name="getElementsOfKey">A function that takes a key, and returns an IEnumerable of values that
+        /// <param name="getElementsOfKey">A function that takes a key, and returns an IEnumerable of values
+        // that
         /// correspond to that key. If no values correspond, the function may either return null or an empty
         /// IEnumerable.</param>
-        /// <param name="getKeys">A function that returns an IEnumerable of all keys that have associated values.</param>
+        /// <param name="getKeys">A function that returns an IEnumerable of all keys that have associated
+        // values.</param>
         /// <param name="comparer">A IEqualityComparer used to compare keys.</param>
         public CachingDictionary(
             Func<TKey, ImmutableArray<TElement>> getElementsOfKey,
@@ -171,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Collections
             // How we proceed depends on whether we're fully populated.
             concurrentMap = localMap as ConcurrentDictionary<TKey, ImmutableArray<TElement>>;
 
-            // If we're fully populated, the value wasn't found. Otherwise, lookup the new value and add it to the concurrent map.
+            // If we're fully populated, the value wasn't found. Otherwise, lookup the new value and add it to
+            // the concurrent map.
             return concurrentMap == null ? s_emptySentinel : AddToConcurrentMap(concurrentMap, key);
         }
 
@@ -180,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         /// <param name="map">The concurrent map to augment.</param>
         /// <param name="key">The key of the new entry.</param>
-        /// <returns>The added entry. If there was a race, and another thread beat this one, then this returns the previously added entry.</returns>
+        /// <returns>The added entry. If there was a race, and another thread beat this one, then this
+        // returns the previously added entry.</returns>
         private ImmutableArray<TElement> AddToConcurrentMap(
             ConcurrentDictionary<TKey, ImmutableArray<TElement>> map,
             TKey key

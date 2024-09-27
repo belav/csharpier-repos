@@ -58,7 +58,8 @@ namespace System.Collections.Immutable
             private Node? _right;
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="ImmutableSortedDictionary{TKey, TValue}.Node"/> class
+            /// Initializes a new instance of the <see cref="ImmutableSortedDictionary{TKey, TValue}.Node"/>
+            // class
             /// that is pre-frozen.
             /// </summary>
             private Node()
@@ -68,7 +69,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="ImmutableSortedDictionary{TKey, TValue}.Node"/> class
+            /// Initializes a new instance of the <see cref="ImmutableSortedDictionary{TKey, TValue}.Node"/>
+            // class
             /// that is not yet frozen.
             /// </summary>
             /// <param name="key">The key.</param>
@@ -300,7 +302,8 @@ namespace System.Collections.Immutable
             /// <param name="value">The value.</param>
             /// <param name="keyComparer">The key comparer.</param>
             /// <param name="valueComparer">The value comparer.</param>
-            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+            // this operation.</param>
             internal Node Add(
                 TKey key,
                 TValue value,
@@ -331,8 +334,10 @@ namespace System.Collections.Immutable
             /// <param name="value">The value.</param>
             /// <param name="keyComparer">The key comparer.</param>
             /// <param name="valueComparer">The value comparer.</param>
-            /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
-            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+            /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was
+            // replaced.</param>
+            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+            // this operation.</param>
             internal Node SetItem(
                 TKey key,
                 TValue value,
@@ -362,7 +367,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="key">The key.</param>
             /// <param name="keyComparer">The key comparer.</param>
-            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+            // this operation.</param>
             /// <returns>The new AVL tree.</returns>
             internal Node Remove(TKey key, IComparer<TKey> keyComparer, out bool mutated)
             {
@@ -426,7 +432,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="equalKey">The key to search for.</param>
             /// <param name="keyComparer">The key comparer.</param>
-            /// <param name="actualKey">The key from the dictionary that the search found, or <paramref name="equalKey"/> if the search yielded no match.</param>
+            /// <param name="actualKey">The key from the dictionary that the search found, or <paramref
+            // name="equalKey"/> if the search yielded no match.</param>
             /// <returns>A value indicating whether the search was successful.</returns>
             /// <remarks>
             /// This can be useful when you want to reuse a previously stored reference instead of
@@ -528,7 +535,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Freezes this node and all descendant nodes so that any mutations require a new instance of the nodes.
+            /// Freezes this node and all descendant nodes so that any mutations require a new instance of the
+            // nodes.
             /// </summary>
             internal void Freeze()
             {
@@ -623,7 +631,8 @@ namespace System.Collections.Immutable
             /// Returns a value indicating whether the tree is in balance.
             /// </summary>
             /// <param name="tree">The tree.</param>
-            /// <returns>0 if the tree is in balance, a positive integer if the right side is heavy, or a negative integer if the left side is heavy.</returns>
+            /// <returns>0 if the tree is in balance, a positive integer if the right side is heavy, or a
+            // negative integer if the left side is heavy.</returns>
             private static int Balance(Node tree)
             {
                 Requires.NotNull(tree, nameof(tree));
@@ -684,9 +693,12 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Creates a node tree that contains the contents of a list.
             /// </summary>
-            /// <param name="items">An indexable list with the contents that the new node tree should contain.</param>
-            /// <param name="start">The starting index within <paramref name="items"/> that should be captured by the node tree.</param>
-            /// <param name="length">The number of elements from <paramref name="items"/> that should be captured by the node tree.</param>
+            /// <param name="items">An indexable list with the contents that the new node tree should
+            // contain.</param>
+            /// <param name="start">The starting index within <paramref name="items"/> that should be captured
+            // by the node tree.</param>
+            /// <param name="length">The number of elements from <paramref name="items"/> that should be
+            // captured by the node tree.</param>
             /// <returns>The root of the created node tree.</returns>
             private static Node NodeTreeFromList(
                 IOrderedCollection<KeyValuePair<TKey, TValue>> items,
@@ -718,9 +730,12 @@ namespace System.Collections.Immutable
             /// <param name="value">The value.</param>
             /// <param name="keyComparer">The key comparer.</param>
             /// <param name="valueComparer">The value comparer.</param>
-            /// <param name="overwriteExistingValue">if <c>true</c>, an existing key=value pair will be overwritten with the new one.</param>
-            /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
-            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+            /// <param name="overwriteExistingValue">if <c>true</c>, an existing key=value pair will be
+            // overwritten with the new one.</param>
+            /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was
+            // replaced.</param>
+            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+            // this operation.</param>
             /// <returns>The new AVL tree.</returns>
             private Node SetOrAdd(
                 TKey key,
@@ -805,7 +820,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="key">The key.</param>
             /// <param name="keyComparer">The key comparer.</param>
-            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+            /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+            // this operation.</param>
             /// <returns>The new AVL tree.</returns>
             private Node RemoveRecursive(TKey key, IComparer<TKey> keyComparer, out bool mutated)
             {
@@ -888,7 +904,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
+            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone
+            // of this node
             /// with the described changes.
             /// </summary>
             /// <param name="left">The left branch of the mutated node.</param>

@@ -259,8 +259,10 @@ namespace System.Security.Cryptography
             int outputOffset
         )
         {
-            // Note: special handling required if decrypting & using padding because the padding adds to the end of the last
-            // block, we have to buffer an entire block's worth of bytes in case what I just transformed turns out to be
+            // Note: special handling required if decrypting & using padding because the padding adds to the end
+            // of the last
+            // block, we have to buffer an entire block's worth of bytes in case what I just transformed turns
+            // out to be
             // the last block Then in TransformFinalBlock we strip off the padding.
 
             if (inputBuffer == null)

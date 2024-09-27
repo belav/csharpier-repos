@@ -159,7 +159,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         [Fact]
-        //[Variation(Desc = "v8 - 378346: CopyTo throws correct exception for index < 0 but incorrect exception for index > maxLength of array.", Priority = 0)]
+        //[Variation(Desc = "v8 - 378346: CopyTo throws correct exception for index < 0 but incorrect
+        // exception for index > maxLength of array.", Priority = 0)]
         public void v8()
         {
             try

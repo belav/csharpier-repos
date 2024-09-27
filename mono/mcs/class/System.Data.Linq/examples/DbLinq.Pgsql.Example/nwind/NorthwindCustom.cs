@@ -16,15 +16,15 @@ namespace nwind
         }
     }
 
-    /* partial class Employee
-    {
-        [Column(Storage = "_employeeID", Name = "EmployeeID", DbType = "serial", IsDbGenerated = false)]
-        public string Identifier
-        {
-            get { return this._employeeID.ToString(); }
-            set {}
-        }
-    } */
+/* partial class Employee
+{
+[Column(Storage = "_employeeID", Name = "EmployeeID", DbType = "serial", IsDbGenerated = false)]
+public string Identifier
+{
+get { return this._employeeID.ToString(); }
+set {}
+}
+} */
 
     [Table(Name = "public.\"Categories\"")]
     public partial class NoStorageCategory

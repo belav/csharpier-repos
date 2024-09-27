@@ -699,7 +699,8 @@ namespace System.Drawing
 
             // note: we can't return the original image because
             // (a) we have no control over the bitmap instance we return (i.e. it could be disposed)
-            // (b) the palette, flags won't match MS results. See MonoTests.System.Drawing.Imaging.IconCodecTest.
+            // (b) the palette, flags won't match MS results. See
+            // MonoTests.System.Drawing.Imaging.IconCodecTest.
             //     Image16 for the differences
             return new Bitmap(GetInternalBitmap());
         }

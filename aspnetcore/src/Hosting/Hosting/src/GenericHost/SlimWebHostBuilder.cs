@@ -46,7 +46,8 @@ internal sealed class SlimWebHostBuilder : WebHostBuilderBase, ISupportsStartup
                     options.WebHostOptions = webHostOptions;
                 });
 
-                // REVIEW: This is bad since we don't own this type. Anybody could add one of these and it would mess things up
+                // REVIEW: This is bad since we don't own this type. Anybody could add one of these and it would
+                // mess things up
                 // We need to flow this differently
                 services.TryAddSingleton(sp => new DiagnosticListener("Microsoft.AspNetCore"));
                 services.TryAddSingleton<DiagnosticSource>(sp =>

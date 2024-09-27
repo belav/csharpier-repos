@@ -64,7 +64,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     /// <summary>
     /// Gets the <see cref="Metadata.DefaultModelBindingMessageProvider"/>.
     /// </summary>
-    /// <value>Same as <see cref="MvcOptions.ModelBindingMessageProvider"/> in all production scenarios.</value>
+    /// <value>Same as <see cref="MvcOptions.ModelBindingMessageProvider"/> in all production
+    // scenarios.</value>
     protected DefaultModelBindingMessageProvider ModelBindingMessageProvider { get; }
 
     internal void ClearCache() => _modelMetadataCache.Clear();
@@ -157,7 +158,8 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     {
         ModelMetadataCacheEntry cacheEntry;
 
-        // Perf: We cached model metadata cache entry for "object" type to save ConcurrentDictionary lookups.
+        // Perf: We cached model metadata cache entry for "object" type to save ConcurrentDictionary
+        // lookups.
         if (modelType == typeof(object))
         {
             cacheEntry = _metadataCacheEntryForObjectType;

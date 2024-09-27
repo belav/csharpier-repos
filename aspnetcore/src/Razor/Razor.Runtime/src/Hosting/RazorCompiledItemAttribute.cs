@@ -18,7 +18,8 @@ public sealed class RazorCompiledItemAttribute : Attribute
     /// </summary>
     /// <param name="type">The <see cref="Type"/> of the compiled item.</param>
     /// <param name="kind">
-    /// The kind of the compiled item. The kind is used programmatically to associate behaviors with the item.
+    /// The kind of the compiled item. The kind is used programmatically to associate behaviors with the
+    // item.
     /// </param>
     /// <param name="identifier">
     /// The identifier associated with the item. The identifier is used programmatically to locate
@@ -35,19 +36,22 @@ public sealed class RazorCompiledItemAttribute : Attribute
     }
 
     /// <summary>
-    /// Gets the kind of compiled item. The kind is used programmatically to associate behaviors and semantics
+    /// Gets the kind of compiled item. The kind is used programmatically to associate behaviors and
+    // semantics
     /// with the item.
     /// </summary>
     public string Kind { get; }
 
     /// <summary>
-    /// Gets the identifier associated with the compiled item. The identifier is used programmatically to locate
+    /// Gets the identifier associated with the compiled item. The identifier is used programmatically
+    // to locate
     /// a specific item of a specific kind and should be unique within the assembly.
     /// </summary>
     public string Identifier { get; }
 
     /// <summary>
-    /// Gets the <see cref="Type"/> of the compiled item. The type should be contained in the assembly associated
+    /// Gets the <see cref="Type"/> of the compiled item. The type should be contained in the assembly
+    // associated
     /// with this instance of <see cref="RazorCompiledItemAttribute"/>.
     /// </summary>
     public Type Type { get; }

@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
 
             static bool IsOk(SyntaxToken token)
             {
-                // Only care about tokens that are actually present.  Missing ones mean the code is incomplete and we
+                // Only care about tokens that are actually present.  Missing ones mean the code is incomplete and
+                // we
                 // don't want to complain about those.
                 if (token.IsMissing)
                     return true;

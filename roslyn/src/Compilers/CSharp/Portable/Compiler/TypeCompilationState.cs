@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private Dictionary<MethodSymbol, MethodSymbol>? _wrappers;
 
         /// <summary>
-        /// Type symbol being compiled, or null if we compile a synthesized type that doesn't have a symbol (e.g. PrivateImplementationDetails).
+        /// Type symbol being compiled, or null if we compile a synthesized type that doesn't have a symbol
+        // (e.g. PrivateImplementationDetails).
         /// </summary>
         private readonly NamedTypeSymbol? _typeOpt;
 

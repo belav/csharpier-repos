@@ -64,7 +64,8 @@ namespace System.Management
         //
 
         /// <summary>
-        /// <para>Gets or sets the number of objects in the <see cref='System.Management.PropertyDataCollection'/>.</para>
+        /// <para>Gets or sets the number of objects in the <see
+        // cref='System.Management.PropertyDataCollection'/>.</para>
         /// </summary>
         /// <value>
         ///    <para>The number of objects in the collection.</para>
@@ -131,7 +132,8 @@ namespace System.Management
         /// <summary>
         /// <para>Copies the <see cref='System.Management.PropertyDataCollection'/> into an array.</para>
         /// </summary>
-        /// <param name='array'>The array to which to copy the <see cref='System.Management.PropertyDataCollection'/>. </param>
+        /// <param name='array'>The array to which to copy the <see
+        // cref='System.Management.PropertyDataCollection'/>. </param>
         /// <param name='index'>The index from which to start copying. </param>
         public void CopyTo(Array array, int index)
         {
@@ -176,10 +178,12 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Copies the <see cref='System.Management.PropertyDataCollection'/> to a specialized <see cref='System.Management.PropertyData'/> object
+        /// <para>Copies the <see cref='System.Management.PropertyDataCollection'/> to a specialized <see
+        // cref='System.Management.PropertyData'/> object
         ///    array.</para>
         /// </summary>
-        /// <param name='propertyArray'>The destination array to contain the copied <see cref='System.Management.PropertyDataCollection'/>.</param>
+        /// <param name='propertyArray'>The destination array to contain the copied <see
+        // cref='System.Management.PropertyDataCollection'/>.</param>
         /// <param name=' index'>The index in the destination array from which to start copying.</param>
         public void CopyTo(PropertyData[] propertyArray, int index)
         {
@@ -195,7 +199,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Returns the enumerator for this <see cref='System.Management.PropertyDataCollection'/>.</para>
+        /// <para>Returns the enumerator for this <see
+        // cref='System.Management.PropertyDataCollection'/>.</para>
         /// </summary>
         /// <returns>
         /// <para>An <see cref='System.Collections.IEnumerator'/>
@@ -221,7 +226,8 @@ namespace System.Management
         /// {
         ///     public static int Main(string[] args) {
         ///         ManagementObject disk = new ManagementObject("Win32_LogicalDisk.DeviceID='C:'");
-        ///         PropertyDataCollection.PropertyDataEnumerator propertyEnumerator = disk.Properties.GetEnumerator();
+        ///         PropertyDataCollection.PropertyDataEnumerator propertyEnumerator =
+        // disk.Properties.GetEnumerator();
         ///         while(propertyEnumerator.MoveNext()) {
         ///             PropertyData p = (PropertyData)propertyEnumerator.Current;
         ///             Console.WriteLine("Property found: " + p.Name);
@@ -294,7 +300,8 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para>Gets the current <see cref='System.Management.PropertyData'/> in the <see cref='System.Management.PropertyDataCollection'/> enumeration.</para>
+            /// <para>Gets the current <see cref='System.Management.PropertyData'/> in the <see
+            // cref='System.Management.PropertyDataCollection'/> enumeration.</para>
             /// </summary>
             /// <value>
             ///    The current <see cref='System.Management.PropertyData'/>
@@ -329,7 +336,8 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para>Resets the enumerator to the beginning of the <see cref='System.Management.PropertyDataCollection'/>
+            /// <para>Resets the enumerator to the beginning of the <see
+            // cref='System.Management.PropertyDataCollection'/>
             /// enumeration.</para>
             /// </summary>
             public void Reset()
@@ -343,7 +351,8 @@ namespace System.Management
         //
 
         /// <summary>
-        /// <para> Returns the specified property from the <see cref='System.Management.PropertyDataCollection'/>, using [] syntax.</para>
+        /// <para> Returns the specified property from the <see
+        // cref='System.Management.PropertyDataCollection'/>, using [] syntax.</para>
         /// </summary>
         /// <param name='propertyName'>The name of the property to retrieve.</param>
         /// <value>
@@ -370,7 +379,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Removes a <see cref='System.Management.PropertyData'/> from the <see cref='System.Management.PropertyDataCollection'/>.</para>
+        /// <para>Removes a <see cref='System.Management.PropertyData'/> from the <see
+        // cref='System.Management.PropertyDataCollection'/>.</para>
         /// </summary>
         /// <param name='propertyName'>The name of the property to be removed.</param>
         /// <remarks>
@@ -412,14 +422,16 @@ namespace System.Management
         /// <para>Adds a new <see cref='System.Management.PropertyData'/> with the specified value.</para>
         /// </overload>
         /// <summary>
-        /// <para>Adds a new <see cref='System.Management.PropertyData'/> with the specified value. The value cannot
+        /// <para>Adds a new <see cref='System.Management.PropertyData'/> with the specified value. The
+        // value cannot
         ///    be null and must be convertible to a CIM type.</para>
         /// </summary>
         /// <param name='propertyName'>The name of the new property.</param>
         /// <param name='propertyValue'>The value of the property (cannot be null).</param>
         /// <remarks>
         ///    <para> Properties can only be added to class definitions, not
-        ///       to instances. This method is only valid when invoked on a <see cref='System.Management.PropertyDataCollection'/>
+        ///       to instances. This method is only valid when invoked on a <see
+        // cref='System.Management.PropertyDataCollection'/>
         ///       in
         ///       a <see cref='System.Management.ManagementClass'/>.</para>
         /// </remarks>
@@ -455,14 +467,16 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Adds a new <see cref='System.Management.PropertyData'/> with the specified value and CIM type.</para>
+        /// <para>Adds a new <see cref='System.Management.PropertyData'/> with the specified value and CIM
+        // type.</para>
         /// </summary>
         /// <param name='propertyName'>The name of the property.</param>
         /// <param name='propertyValue'>The value of the property (which can be null).</param>
         /// <param name='propertyType'>The CIM type of the property.</param>
         /// <remarks>
         ///    <para> Properties can only be added to class definitions, not
-        ///       to instances. This method is only valid when invoked on a <see cref='System.Management.PropertyDataCollection'/>
+        ///       to instances. This method is only valid when invoked on a <see
+        // cref='System.Management.PropertyDataCollection'/>
         ///       in
         ///       a <see cref='System.Management.ManagementClass'/>.</para>
         /// </remarks>
@@ -501,10 +515,12 @@ namespace System.Management
         /// </summary>
         /// <param name='propertyName'>The name of the property.</param>
         /// <param name='propertyType'>The CIM type of the property.</param>
-        /// <param name='isArray'><see langword='true'/> to specify that the property is an array type; otherwise, <see langword='false'/>.</param>
+        /// <param name='isArray'><see langword='true'/> to specify that the property is an array type;
+        // otherwise, <see langword='false'/>.</param>
         /// <remarks>
         ///    <para> Properties can only be added to class definitions, not
-        ///       to instances. This method is only valid when invoked on a <see cref='System.Management.PropertyDataCollection'/>
+        ///       to instances. This method is only valid when invoked on a <see
+        // cref='System.Management.PropertyDataCollection'/>
         ///       in
         ///       a <see cref='System.Management.ManagementClass'/>.</para>
         /// </remarks>

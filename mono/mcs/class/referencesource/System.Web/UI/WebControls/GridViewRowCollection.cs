@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -13,14 +13,16 @@ namespace System.Web.UI.WebControls
     using System.Collections;
 
     /// <devdoc>
-    /// <para>Represents the collection of <see cref='System.Web.UI.WebControls.GridViewRow'/> objects.</para>
+    /// <para>Represents the collection of <see cref='System.Web.UI.WebControls.GridViewRow'/>
+    // objects.</para>
     /// </devdoc>
     public class GridViewRowCollection : ICollection
     {
         private ArrayList _rows;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.GridViewRowCollection'/> class.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.GridViewRowCollection'/> class.</para>
         /// </devdoc>
         public GridViewRowCollection(ArrayList rows)
         {
@@ -36,7 +38,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a value that specifies whether rows in the <see cref='System.Web.UI.WebControls.GridViewRowCollection'/> can be
+        /// <para>Gets a value that specifies whether rows in the <see
+        // cref='System.Web.UI.WebControls.GridViewRowCollection'/> can be
         ///    modified. This property is read-only.</para>
         /// </devdoc>
         public bool IsReadOnly
@@ -45,7 +48,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a value that indicates whether the <see cref='System.Web.UI.WebControls.GridViewRowCollection'/> is
+        /// <para>Gets a value that indicates whether the <see
+        // cref='System.Web.UI.WebControls.GridViewRowCollection'/> is
         ///    thread-safe. This property is read-only.</para>
         /// </devdoc>
         public bool IsSynchronized
@@ -54,7 +58,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets the object used to synchronize access to the collection. This property is read-only. </para>
+        ///    <para>Gets the object used to synchronize access to the collection. This property is
+        // read-only. </para>
         /// </devdoc>
         public object SyncRoot
         {
@@ -71,7 +76,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies the contents of the entire collection into an <see cref='System.Array' qualify='true'/> appending
+        /// <para>Copies the contents of the entire collection into an <see cref='System.Array'
+        // qualify='true'/> appending
         ///    at the specified index of the <see cref='System.Array' qualify='true'/>.</para>
         /// </devdoc>
         public void CopyTo(GridViewRow[] array, int index)
@@ -87,7 +93,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Creates an enumerator for the <see cref='System.Web.UI.WebControls.GridViewRowCollection'/> used to
+        /// <para>Creates an enumerator for the <see
+        // cref='System.Web.UI.WebControls.GridViewRowCollection'/> used to
         ///    iterate through the collection.</para>
         /// </devdoc>
         public IEnumerator GetEnumerator()

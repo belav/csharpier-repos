@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel.DataAnnotations;
 using System.Data.Linq;
@@ -431,7 +432,8 @@ namespace System.Web.Mvc.Html.Test
             );
         }
 
-        // No need for CheckBox_AttributeEncodes_Value() because CheckBox value is always true and hidden value
+        // No need for CheckBox_AttributeEncodes_Value() because CheckBox value is always true and hidden
+        // value
         // is always false.
 
         // CheckBoxFor
@@ -697,7 +699,8 @@ namespace System.Web.Mvc.Html.Test
             );
         }
 
-        // No need for CheckBoxFor_AttributeEncodes_Value() because CheckBox value is always true and hidden value
+        // No need for CheckBoxFor_AttributeEncodes_Value() because CheckBox value is always true and hidden
+        // value
         // is always false.
 
         // Culture tests
@@ -4063,7 +4066,8 @@ namespace System.Web.Mvc.Html.Test
 
         public void Dispose()
         {
-            // Reset ScopeStorage (written via e.g. ViewContext.ClientValidationEnabled) between tests to avoid unexpected interactions.
+            // Reset ScopeStorage (written via e.g. ViewContext.ClientValidationEnabled) between tests to avoid
+            // unexpected interactions.
             ScopeStorage.CurrentProvider = new StaticScopeStorageProvider();
             ScopeStorage.GlobalScope.Clear();
         }

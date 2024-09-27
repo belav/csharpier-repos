@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     A <see cref="DiagnosticSource" /> event payload class for Cosmos query events.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public class CosmosQueryEventData : EventData
 {
@@ -20,7 +21,8 @@ public class CosmosQueryEventData : EventData
     /// <param name="partitionKey">The key of the Cosmos partition that the query is using.</param>
     /// <param name="parameters">Name/values for each parameter in the Cosmos Query.</param>
     /// <param name="querySql">The SQL representing the query.</param>
-    /// <param name="logSensitiveData">Indicates whether the application allows logging of sensitive data.</param>
+    /// <param name="logSensitiveData">Indicates whether the application allows logging of sensitive
+    // data.</param>
     public CosmosQueryEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,

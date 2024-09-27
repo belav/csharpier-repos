@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InheritanceMargin
             foreach (var typeDeclarationNode in typeDeclarationNodes)
             {
                 // 1. Add the type declaration node.(e.g. class, struct etc..)
-                // Use its identifier's position as the line number, since we want the margin to be placed with the identifier
+                // Use its identifier's position as the line number, since we want the margin to be placed with the
+                // identifier
                 builder.Add(typeDeclarationNode);
 
                 // 2. Add type members inside this type declaration.

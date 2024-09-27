@@ -186,7 +186,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -195,7 +196,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -204,7 +206,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -213,7 +216,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -222,7 +226,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -237,7 +242,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -246,7 +252,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -286,7 +293,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -295,7 +303,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -304,7 +313,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -313,7 +323,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -322,7 +333,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -337,7 +349,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -346,7 +359,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -649,7 +663,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -658,7 +673,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -667,7 +683,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -676,7 +693,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -685,7 +703,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -700,7 +719,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -709,7 +729,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -749,7 +770,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -758,7 +780,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -767,7 +790,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -776,7 +800,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -785,7 +810,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -800,7 +826,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 
@@ -809,7 +836,8 @@ namespace System.Data.Spatial
             int spatialReferenceSystemId
         )
         {
-            // Without a backing implementation, this method cannot enforce the requirement that the result be of the specified geometry type
+            // Without a backing implementation, this method cannot enforce the requirement that the result be
+            // of the specified geometry type
             throw SpatialServicesUnavailable();
         }
 

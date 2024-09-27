@@ -44,7 +44,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     Construct a <see cref="ValidationContext" /> for a given object instance being validated.
         /// </summary>
         /// <param name="instance">The object instance being validated.  It cannot be <c>null</c>.</param>
-        /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is
+        // <c>null</c></exception>
         [RequiresUnreferencedCode(InstanceTypeNotStaticallyDiscovered)]
         public ValidationContext(object instance)
             : this(instance, null, null) { }
@@ -56,10 +57,12 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="instance">The object instance being validated.  It cannot be null.</param>
         /// <param name="items">
         ///     Optional set of key/value pairs to make available to consumers via <see cref="Items" />.
-        ///     If null, an empty dictionary will be created.  If not null, the set of key/value pairs will be copied into a
+        ///     If null, an empty dictionary will be created.  If not null, the set of key/value pairs will
+        // be copied into a
         ///     new dictionary, preventing consumers from modifying the original dictionary.
         /// </param>
-        /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is
+        // <c>null</c></exception>
         [RequiresUnreferencedCode(InstanceTypeNotStaticallyDiscovered)]
         public ValidationContext(object instance, IDictionary<object, object?>? items)
             : this(instance, null, items) { }
@@ -76,10 +79,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <param name="items">
         ///     Optional set of key/value pairs to make available to consumers via <see cref="Items" />.
-        ///     If null, an empty dictionary will be created.  If not null, the set of key/value pairs will be copied into a
+        ///     If null, an empty dictionary will be created.  If not null, the set of key/value pairs will
+        // be copied into a
         ///     new dictionary, preventing consumers from modifying the original dictionary.
         /// </param>
-        /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is
+        // <c>null</c></exception>
         [RequiresUnreferencedCode(InstanceTypeNotStaticallyDiscovered)]
         public ValidationContext(
             object instance,
@@ -107,13 +112,16 @@ namespace System.ComponentModel.DataAnnotations
         #region Properties
 
         /// <summary>
-        ///     Gets the object instance being validated.  While it will not be null, the state of the instance is indeterminate
+        ///     Gets the object instance being validated.  While it will not be null, the state of the
+        // instance is indeterminate
         ///     as it might only be partially initialized during validation.
         ///     <para>Consume this instance with caution!</para>
         /// </summary>
         /// <remarks>
-        ///     During validation, especially property-level validation, the object instance might be in an indeterminate state.
-        ///     For example, the property being validated, as well as other properties on the instance might not have been
+        ///     During validation, especially property-level validation, the object instance might be in an
+        // indeterminate state.
+        ///     For example, the property being validated, as well as other properties on the instance might
+        // not have been
         ///     updated to their new values.
         /// </remarks>
         public object ObjectInstance { get; }
@@ -127,7 +135,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     Gets or sets the user-visible name of the type or property being validated.
         /// </summary>
         /// <value>
-        ///     If this name was not explicitly set, this property will consult an associated <see cref="DisplayAttribute" />
+        ///     If this name was not explicitly set, this property will consult an associated <see
+        // cref="DisplayAttribute" />
         ///     to see if can use that instead.  Lacking that, it returns <see cref="MemberName" />.  The
         ///     <see cref="ObjectInstance" />
         ///     type name will be used if MemberName has not been set.
@@ -160,7 +169,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     Gets or sets the name of the type or property being validated.
         /// </summary>
         /// <value>
-        ///     This name reflects the API name of the member being validated, not a localized name.  It should be set
+        ///     This name reflects the API name of the member being validated, not a localized name.  It
+        // should be set
         ///     only for property or parameter contexts.
         /// </value>
         public string? MemberName { get; set; }
@@ -170,7 +180,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <value>
         ///     This property will never be null, but the dictionary may be empty.  Changes made
-        ///     to items in this dictionary will never affect the original dictionary specified in the constructor.
+        ///     to items in this dictionary will never affect the original dictionary specified in the
+        // constructor.
         /// </value>
         public IDictionary<object, object?> Items => _items;
 
@@ -203,9 +214,11 @@ namespace System.ComponentModel.DataAnnotations
         #region Methods
 
         /// <summary>
-        ///     Looks up the display name using the DisplayAttribute attached to the respective type or property.
+        ///     Looks up the display name using the DisplayAttribute attached to the respective type or
+        // property.
         /// </summary>
-        /// <returns>A display-friendly name of the member represented by the <see cref="MemberName" />.</returns>
+        /// <returns>A display-friendly name of the member represented by the <see cref="MemberName"
+        // />.</returns>
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",

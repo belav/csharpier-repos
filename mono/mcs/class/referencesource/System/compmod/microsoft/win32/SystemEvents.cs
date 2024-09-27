@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace Microsoft.Win32
 {
     using System;
@@ -434,7 +434,8 @@ namespace Microsoft.Win32
             domainQualifier++;
         }
 
-        /// <include file='doc\SystemEvents.uex' path='docs/doc[@for="SystemEvents.CreateBroadcastWindow"]/*' />
+        /// <include file='doc\SystemEvents.uex'
+        // path='docs/doc[@for="SystemEvents.CreateBroadcastWindow"]/*' />
         /// <devdoc>
         ///      Goes through the work to register and create a window.
         /// </devdoc>
@@ -921,7 +922,8 @@ namespace Microsoft.Win32
         }
 
         /// <devdoc>
-        ///     Executes the given delegate on the thread that listens for system events.  Similar to Control.Invoke().
+        ///     Executes the given delegate on the thread that listens for system events.  Similar to
+        // Control.Invoke().
         /// </devdoc>
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
@@ -1152,7 +1154,8 @@ namespace Microsoft.Win32
         private void OnThemeChanged()
         {
             //we need to fire a changing event handler for Themes.
-            //note that it needs to be documented that accessing theme information during the changing event is forbidden.
+            //note that it needs to be documented that accessing theme information during the changing event is
+            // forbidden.
             RaiseEvent(
                 OnUserPreferenceChangingEvent,
                 this,
@@ -1650,7 +1653,8 @@ namespace Microsoft.Win32
         }
 
         /// <devdoc>
-        ///     This method is invoked via reflection from windows forms.  Why?  Because when the runtime is hosted in IE,
+        ///     This method is invoked via reflection from windows forms.  Why?  Because when the runtime is
+        // hosted in IE,
         ///     IE doesn't tell it when to shut down.  The first notification the runtime gets is
         ///     DLL_PROCESS_DETACH, at which point it is too late for us to run any managed code.  But,
         ///     if we don't destroy our system events window the HWND will fault if it
@@ -1674,7 +1678,8 @@ namespace Microsoft.Win32
         }
 
         /// <devdoc>
-        ///     This method is invoked via reflection from windows forms.  Why?  Because when the runtime is hosted in IE,
+        ///     This method is invoked via reflection from windows forms.  Why?  Because when the runtime is
+        // hosted in IE,
         ///     IE doesn't tell it when to shut down.  The first notification the runtime gets is
         ///     DLL_PROCESS_DETACH, at which point it is too late for us to run any managed code.  But,
         ///     if we don't destroy our system events window the HWND will fault if it

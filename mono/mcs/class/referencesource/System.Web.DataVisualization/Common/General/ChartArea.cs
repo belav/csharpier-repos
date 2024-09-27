@@ -545,7 +545,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets an ElementPosition object, which defines the position of a chart area object within the chart image.
+        /// Gets or sets an ElementPosition object, which defines the position of a chart area object within
+        // the chart image.
         /// </summary>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -612,7 +613,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets an ElementPosition object, which defines the inner plot position of a chart area object.
+        /// Gets or sets an ElementPosition object, which defines the inner plot position of a chart area
+        // object.
         /// </summary>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -775,7 +777,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets the color of a ChartArea object's background image that will be drawn as transparent.
+        /// Gets or sets the color of a ChartArea object's background image that will be drawn as
+        // transparent.
         /// </summary>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -1103,8 +1106,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 if (this.Area3DStyle.Rotation > 90 || this.Area3DStyle.Rotation < -90)
                 {
                     // This method depends on the 'switchValueAxes' field which is calculated based on the chart types
-                    // of the series associated with the chart area. We need to call SetData method to make sure this field
-                    // is correctly initialized. Because we only need to collect information about the series, we pass 'false'
+                    // of the series associated with the chart area. We need to call SetData method to make sure this
+                    // field
+                    // is correctly initialized. Because we only need to collect information about the series, we pass
+                    // 'false'
                     // as parameters to limit the amount of work this function does.
                     this.SetData(false, false);
 
@@ -2546,7 +2551,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             chartPicture.nonTopLevelChartBuffer = null;
                         }
 
-                        // Copy chart area plotting rectangle from the chart's dubble buffer image into area dubble buffer image
+                        // Copy chart area plotting rectangle from the chart's dubble buffer image into area dubble buffer
+                        // image
                         if (chart.paintBufferBitmap != null)
                         {
                             areaBufferBitmap = chart.paintBufferBitmap.Clone(
@@ -3266,7 +3272,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Usage",
             "CA2213:DisposableFieldsShouldBeDisposed",

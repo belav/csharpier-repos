@@ -55,21 +55,21 @@ namespace System.Web.ApplicationServices
             set { _isReadOnly = value; }
         }
 
-        /* Uncommnet once accessmode is available
-        public ProfileServiceAccess _accessMode;
-        [DataMember]
-        public ProfileServiceAccess AccessMode
-        {
-            get
-            {
-                return _accessMode;
-            }
-            set
-            {
-                _accessMode = value;
-            }
-        }
-        */
+/* Uncommnet once accessmode is available
+public ProfileServiceAccess _accessMode;
+[DataMember]
+public ProfileServiceAccess AccessMode
+{
+get
+{
+return _accessMode;
+}
+set
+{
+_accessMode = value;
+}
+}
+*/
         private int _serializeAs;
 
         [DataMember]

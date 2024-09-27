@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net.Http.Formatting.Parsers;
 using System.Net.Http.Headers;
@@ -7,7 +8,8 @@ using System.Net.Http.Headers;
 namespace System.Net.Http
 {
     /// <summary>
-    /// Represents the HTTP Request Line and header parameters parsed by <see cref="HttpRequestLineParser"/>
+    /// Represents the HTTP Request Line and header parameters parsed by <see
+    // cref="HttpRequestLineParser"/>
     /// and <see cref="HttpRequestHeaderParser"/>.
     /// </summary>
     internal class HttpUnsortedRequest
@@ -31,7 +33,8 @@ namespace System.Net.Http
         public HttpMethod Method { get; set; }
 
         /// <summary>
-        /// Gets or sets the HTTP request URI portion that is carried in the RequestLine (i.e the URI path + query).
+        /// Gets or sets the HTTP request URI portion that is carried in the RequestLine (i.e the URI path +
+        // query).
         /// </summary>
         /// <value>
         /// The request URI.

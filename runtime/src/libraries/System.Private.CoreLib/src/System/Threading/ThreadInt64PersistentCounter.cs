@@ -156,7 +156,8 @@ namespace System.Threading
 
                 // Accumulate the count for this add into the overflow count and reset the thread-local count
 
-                // The lock, in coordination with other places that read these values, ensures that both changes below become
+                // The lock, in coordination with other places that read these values, ensures that both changes
+                // below become
                 // visible together
                 ThreadInt64PersistentCounter counter = _counter;
                 counter._lock.Acquire();

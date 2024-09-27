@@ -5,7 +5,8 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptCtor
 {
     /// <summary>
-    /// The interface can still be removed in this case because PreserveDependency is just preserving Foo() on the current type
+    /// The interface can still be removed in this case because PreserveDependency is just preserving
+    // Foo() on the current type
     /// </summary>
     [SetupCompileBefore(
         "FakeSystemAssembly.dll",

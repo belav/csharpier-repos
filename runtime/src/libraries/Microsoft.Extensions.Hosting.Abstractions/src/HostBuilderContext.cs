@@ -8,14 +8,16 @@ using Microsoft.Extensions.Configuration;
 namespace Microsoft.Extensions.Hosting
 {
     /// <summary>
-    /// Context containing the common services on the <see cref="IHost" />. Some properties may be null until set by the <see cref="IHost" />.
+    /// Context containing the common services on the <see cref="IHost" />. Some properties may be null
+    // until set by the <see cref="IHost" />.
     /// </summary>
     public class HostBuilderContext
     {
         /// <summary>
         /// Initializes a new instance of <see cref="HostBuilderContext"/>.
         /// </summary>
-        /// <param name="properties">A non-null <see cref="IDictionary{TKey, TValue}"/> for sharing state between components during the host building process.</param>
+        /// <param name="properties">A non-null <see cref="IDictionary{TKey, TValue}"/> for sharing state
+        // between components during the host building process.</param>
         public HostBuilderContext(IDictionary<object, object> properties)
         {
             ThrowHelper.ThrowIfNull(properties);
@@ -29,7 +31,8 @@ namespace Microsoft.Extensions.Hosting
         public IHostEnvironment HostingEnvironment { get; set; } = null!;
 
         /// <summary>
-        /// The <see cref="IConfiguration" /> containing the merged configuration of the application and the <see cref="IHost" />.
+        /// The <see cref="IConfiguration" /> containing the merged configuration of the application and the
+        // <see cref="IHost" />.
         /// </summary>
         public IConfiguration Configuration { get; set; } = null!;
 

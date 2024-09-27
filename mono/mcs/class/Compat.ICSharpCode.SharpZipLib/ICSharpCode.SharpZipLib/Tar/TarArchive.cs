@@ -218,19 +218,19 @@ namespace ICSharpCode.SharpZipLib.Tar
             this.asciiTranslate = asciiTranslate;
         }
 
-        /*
-                /// <summary>
-                /// Set the object that will determine if a file is of type
-                /// ascii text for translation purposes.
-                /// </summary>
-                /// <param name="transTyper">
-                /// The new TransFileTyper object.
-                /// </param>
-                public void SetTransFileTyper(TarTransFileTyper transTyper)
-                {
-                    this.transTyper = transTyper;
-                }
-        */
+/*
+/// <summary>
+/// Set the object that will determine if a file is of type
+/// ascii text for translation purposes.
+/// </summary>
+/// <param name="transTyper">
+/// The new TransFileTyper object.
+/// </param>
+public void SetTransFileTyper(TarTransFileTyper transTyper)
+{
+this.transTyper = transTyper;
+}
+*/
 
         /// <summary>
         /// Set user and group information that will be used to fill in the
@@ -509,7 +509,8 @@ namespace ICSharpCode.SharpZipLib.Tar
                         //						}
                         //
                         //						if (this.debug) {
-                        //							Console.Error.WriteLine(("EXTRACT TRANS? '" + asciiTrans + "'  ContentType='" + contentType + "'  PrimaryType='" + mime.getPrimaryType() + "'" );
+                        //							Console.Error.WriteLine(("EXTRACT TRANS? '" + asciiTrans + "'  ContentType='" + contentType
+                        // + "'  PrimaryType='" + mime.getPrimaryType() + "'" );
                         //						}
                     }
 
@@ -636,7 +637,8 @@ namespace ICSharpCode.SharpZipLib.Tar
                 //			    	}
                 //
                 //		    	if (this.debug) {
-                //		    		Console.Error.WriteLine("CREATE TRANS? '" + asciiTrans + "'  ContentType='" + contentType + "'  PrimaryType='" + mime.getPrimaryType()+ "'" );
+                //		    		Console.Error.WriteLine("CREATE TRANS? '" + asciiTrans + "'  ContentType='" + contentType
+                // + "'  PrimaryType='" + mime.getPrimaryType()+ "'" );
                 //		    	}
 
                 if (asciiTrans)
@@ -738,16 +740,16 @@ namespace ICSharpCode.SharpZipLib.Tar
     }
 }
 /* The original Java file had this header:
-    ** Authored by Timothy Gerard Endres
-    ** <mailto:time@gjt.org>  <http://www.trustice.com>
-    **
-    ** This work has been placed into the public domain.
-    ** You may use this work in any way and for any purpose you wish.
-    **
-    ** THIS SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY OF ANY KIND,
-    ** NOT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY. THE AUTHOR
-    ** OF THIS SOFTWARE, ASSUMES _NO_ RESPONSIBILITY FOR ANY
-    ** CONSEQUENCE RESULTING FROM THE USE, MODIFICATION, OR
-    ** REDISTRIBUTION OF THIS SOFTWARE.
-    **
-    */
+** Authored by Timothy Gerard Endres
+** <mailto:time@gjt.org>  <http://www.trustice.com>
+**
+** This work has been placed into the public domain.
+** You may use this work in any way and for any purpose you wish.
+**
+** THIS SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY OF ANY KIND,
+** NOT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY. THE AUTHOR
+** OF THIS SOFTWARE, ASSUMES _NO_ RESPONSIBILITY FOR ANY
+** CONSEQUENCE RESULTING FROM THE USE, MODIFICATION, OR
+** REDISTRIBUTION OF THIS SOFTWARE.
+**
+*/

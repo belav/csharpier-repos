@@ -34,8 +34,10 @@ namespace System.Configuration
             : base() { }
 
         /// <summary>
-        /// Constructor that takes an IComponent. The IComponent acts as the "owner" of this settings class. One
-        /// of the things we do is query the component's site to see if it has a SettingsProvider service. If it
+        /// Constructor that takes an IComponent. The IComponent acts as the "owner" of this settings class.
+        // One
+        /// of the things we do is query the component's site to see if it has a SettingsProvider service.
+        // If it
         /// does, we allow it to override the providers specified in the metadata.
         /// </summary>
         protected ApplicationSettingsBase(IComponent owner)
@@ -86,7 +88,8 @@ namespace System.Configuration
         }
 
         /// <summary>
-        /// The Context to pass on to the provider. Currently, this will just contain the settings group name.
+        /// The Context to pass on to the provider. Currently, this will just contain the settings group
+        // name.
         /// </summary>
         [Browsable(false)]
         public override SettingsContext Context
@@ -118,8 +121,10 @@ namespace System.Configuration
         }
 
         /// <summary>
-        /// The SettingsBase class queries this to get the collection of SettingsProperty objects. We reflect over
-        /// the properties defined on the current object's type and use the metadata on those properties to form
+        /// The SettingsBase class queries this to get the collection of SettingsProperty objects. We
+        // reflect over
+        /// the properties defined on the current object's type and use the metadata on those properties to
+        // form
         /// this collection.
         /// </summary>
         [Browsable(false)]
@@ -519,7 +524,8 @@ namespace System.Configuration
         }
 
         /// <summary>
-        /// Ensures this class is initialized. Initialization involves reflecting over properties and building
+        /// Ensures this class is initialized. Initialization involves reflecting over properties and
+        // building
         /// a list of SettingsProperty's.
         /// </summary>
         private void EnsureInitialized()
@@ -685,15 +691,18 @@ namespace System.Configuration
         /// <summary>
         /// Retrieves the value of a setting. We need this method so we can fire the SettingsLoaded event
         /// when settings are loaded from the providers.Ideally, this should be fired from SettingsBase,
-        /// but unfortunately that will not happen in Whidbey. Instead, we check to see if the value has already
-        /// been retrieved. If not, we fire the load event, since we expect SettingsBase to load all the settings
+        /// but unfortunately that will not happen in Whidbey. Instead, we check to see if the value has
+        // already
+        /// been retrieved. If not, we fire the load event, since we expect SettingsBase to load all the
+        // settings
         /// from this setting's provider.
         /// </summary>
         private object GetPropertyValue(string propertyName)
         {
             if (PropertyValues[propertyName] == null)
             {
-                // we query the value first so that we initialize all values from value providers and so that we don't end up
+                // we query the value first so that we initialize all values from value providers and so that we
+                // don't end up
                 // on an infinite recursion when calling Properties[propertyName] as that calls this.
                 _ = base[propertyName];
                 SettingsProperty setting = Properties[propertyName];

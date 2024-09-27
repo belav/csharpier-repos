@@ -50,7 +50,8 @@ public static class CorsEndpointConventionBuilderExtensions
     /// Adds the specified CORS policy to the endpoint(s).
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
-    /// <param name="configurePolicy">A delegate which can use a policy builder to build a policy.</param>
+    /// <param name="configurePolicy">A delegate which can use a policy builder to build a
+    // policy.</param>
     /// <returns>The original convention builder parameter.</returns>
     public static TBuilder RequireCors<TBuilder>(
         this TBuilder builder,

@@ -35,9 +35,12 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.CompilerServices
 {
-    // NOTE: YieldAwaitable currently has no state; while developers are encouraged to use Task.Yield() to produce one,
-    // no validation is performed to ensure that the developer isn't doing "await new YieldAwaitable()".  Such validation
-    // would require additional, useless state to be stored, and as this is a type in the CompilerServices namespace, and
+    // NOTE: YieldAwaitable currently has no state; while developers are encouraged to use Task.Yield()
+    // to produce one,
+    // no validation is performed to ensure that the developer isn't doing "await new YieldAwaitable()".
+    // Such validation
+    // would require additional, useless state to be stored, and as this is a type in the
+    // CompilerServices namespace, and
     // as the above example isn't harmful, we take the cheaper approach of not validating anything.
 
     /// <summary>Provides an awaitable context for switching into a target environment.</summary>
@@ -66,7 +69,8 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>Posts the <paramref name="continuation"/> back to the current context.</summary>
             /// <param name="continuation">The action to invoke asynchronously.</param>
-            /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is null (Nothing in Visual Basic).</exception>
+            /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is
+            // null (Nothing in Visual Basic).</exception>
             [SecuritySafeCritical]
             public void OnCompleted(Action continuation)
             {
@@ -75,7 +79,8 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>Posts the <paramref name="continuation"/> back to the current context.</summary>
             /// <param name="continuation">The action to invoke asynchronously.</param>
-            /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is null (Nothing in Visual Basic).</exception>
+            /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is
+            // null (Nothing in Visual Basic).</exception>
             [SecurityCritical]
             public void UnsafeOnCompleted(Action continuation)
             {
@@ -84,8 +89,10 @@ namespace System.Runtime.CompilerServices
 
             /// <summary>Posts the <paramref name="continuation"/> back to the current context.</summary>
             /// <param name="continuation">The action to invoke asynchronously.</param>
-            /// <param name="flowContext">true to flow ExecutionContext; false if flowing is not required.</param>
-            /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is null (Nothing in Visual Basic).</exception>
+            /// <param name="flowContext">true to flow ExecutionContext; false if flowing is not
+            // required.</param>
+            /// <exception cref="System.ArgumentNullException">The <paramref name="continuation"/> argument is
+            // null (Nothing in Visual Basic).</exception>
             [SecurityCritical]
             private static void QueueContinuation(Action continuation, bool flowContext)
             {
@@ -112,8 +119,10 @@ namespace System.Runtime.CompilerServices
                 else
                 {
                     // If we're targeting the default scheduler, queue to the thread pool, so that we go into the global
-                    // queue.  As we're going into the global queue, we might as well use QUWI, which for the global queue is
-                    // just a tad faster than task, due to a smaller object getting allocated and less work on the execution path.
+                    // queue.  As we're going into the global queue, we might as well use QUWI, which for the global
+                    // queue is
+                    // just a tad faster than task, due to a smaller object getting allocated and less work on the
+                    // execution path.
                     TaskScheduler scheduler = TaskScheduler.Current;
                     if (scheduler == TaskScheduler.Default)
                     {

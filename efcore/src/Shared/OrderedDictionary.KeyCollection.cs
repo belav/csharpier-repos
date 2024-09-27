@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
     internal partial class OrderedDictionary<TKey, TValue>
     {
         /// <summary>
-        /// Represents the collection of keys in a <see cref="OrderedDictionary{TKey, TValue}" />. This class cannot be inherited.
+        /// Represents the collection of keys in a <see cref="OrderedDictionary{TKey, TValue}" />. This
+        // class cannot be inherited.
         /// </summary>
         [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
@@ -19,9 +20,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             private readonly OrderedDictionary<TKey, TValue> _orderedDictionary;
 
             /// <summary>
-            /// Gets the number of elements contained in the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" />.
+            /// Gets the number of elements contained in the <see cref="OrderedDictionary{TKey,
+            // TValue}.KeyCollection" />.
             /// </summary>
-            /// <returns>The number of elements contained in the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" />.</returns>
+            /// <returns>The number of elements contained in the <see cref="OrderedDictionary{TKey,
+            // TValue}.KeyCollection" />.</returns>
             public int Count => _orderedDictionary.Count;
 
             /// <summary>
@@ -29,7 +32,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             /// </summary>
             /// <param name="index">The zero-based index of the key to get.</param>
             /// <returns>The key at the specified index.</returns>
-            /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> is less than 0.-or-<paramref name="index" /> is equal to or greater than <see cref="OrderedDictionary{TKey, TValue}.KeyCollection.Count" />.</exception>
+            /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> is less than
+            // 0.-or-<paramref name="index" /> is equal to or greater than <see cref="OrderedDictionary{TKey,
+            // TValue}.KeyCollection.Count" />.</exception>
             public TKey this[int index] =>
                 ((IList<KeyValuePair<TKey, TValue>>)_orderedDictionary)[index].Key;
 
@@ -47,9 +52,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             }
 
             /// <summary>
-            /// Returns an enumerator that iterates through the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" />.
+            /// Returns an enumerator that iterates through the <see cref="OrderedDictionary{TKey,
+            // TValue}.KeyCollection" />.
             /// </summary>
-            /// <returns>A <see cref="OrderedDictionary{TKey, TValue}.KeyCollection.Enumerator" /> for the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" />.</returns>
+            /// <returns>A <see cref="OrderedDictionary{TKey, TValue}.KeyCollection.Enumerator" /> for the <see
+            // cref="OrderedDictionary{TKey, TValue}.KeyCollection" />.</returns>
             public Enumerator GetEnumerator() => new Enumerator(_orderedDictionary);
 
             IEnumerator<TKey> IEnumerable<TKey>.GetEnumerator() => GetEnumerator();
@@ -103,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 /// <summary>
                 /// Gets the element at the current position of the enumerator.
                 /// </summary>
-                /// <returns>The element in the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" /> at the current position of the enumerator.</returns>
+                /// <returns>The element in the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" /> at the
+                // current position of the enumerator.</returns>
                 public readonly TKey Current => _current;
 
                 readonly object? IEnumerator.Current => _current;
@@ -117,15 +125,19 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 }
 
                 /// <summary>
-                /// Releases all resources used by the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection.Enumerator" />.
+                /// Releases all resources used by the <see cref="OrderedDictionary{TKey,
+                // TValue}.KeyCollection.Enumerator" />.
                 /// </summary>
                 public void Dispose() { }
 
                 /// <summary>
-                /// Advances the enumerator to the next element of the <see cref="OrderedDictionary{TKey, TValue}.KeyCollection" />.
+                /// Advances the enumerator to the next element of the <see cref="OrderedDictionary{TKey,
+                // TValue}.KeyCollection" />.
                 /// </summary>
-                /// <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</returns>
-                /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was created.</exception>
+                /// <returns>true if the enumerator was successfully advanced to the next element; false if the
+                // enumerator has passed the end of the collection.</returns>
+                /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was
+                // created.</exception>
                 public bool MoveNext()
                 {
                     if (_version != _orderedDictionary._version)

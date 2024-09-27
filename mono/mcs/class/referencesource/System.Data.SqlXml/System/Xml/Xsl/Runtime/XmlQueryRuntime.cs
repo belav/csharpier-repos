@@ -74,7 +74,8 @@ namespace System.Xml.Xsl.Runtime
         //-----------------------------------------------
 
         /// <summary>
-        /// This constructor is internal so that external users cannot construct it (and therefore we do not have to test it separately).
+        /// This constructor is internal so that external users cannot construct it (and therefore we do not
+        // have to test it separately).
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
@@ -176,7 +177,8 @@ namespace System.Xml.Xsl.Runtime
         //-----------------------------------------------
 
         /// <summary>
-        /// Return array containing the names of all the global variables and parameters used in this query, in this format:
+        /// Return array containing the names of all the global variables and parameters used in this query,
+        // in this format:
         ///     {namespace}prefix:local-name
         /// </summary>
         public string[] DebugGetGlobalNames()
@@ -185,7 +187,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Get the value of a global value having the specified name.  Always return the global value as a list of XPathItem.
+        /// Get the value of a global value having the specified name.  Always return the global value as a
+        // list of XPathItem.
         /// Return null if there is no global value having the specified name.
         /// </summary>
         public IList DebugGetGlobalValue(string name)
@@ -209,7 +212,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Set the value of a global value having the specified name.  If there is no such value, this method is a no-op.
+        /// Set the value of a global value having the specified name.  If there is no such value, this
+        // method is a no-op.
         /// </summary>
         public void DebugSetGlobalValue(string name, object value)
         {
@@ -270,7 +274,8 @@ namespace System.Xml.Xsl.Runtime
             BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
         /// <summary>
-        /// Return the object that manages external user context information such as data sources, parameters, extension objects, etc.
+        /// Return the object that manages external user context information such as data sources,
+        // parameters, extension objects, etc.
         /// </summary>
         public XmlQueryContext ExternalContext
         {
@@ -294,7 +299,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Get the early-bound extension object identified by "index".  If it does not yet exist, create an instance using the
+        /// Get the early-bound extension object identified by "index".  If it does not yet exist, create an
+        // instance using the
         /// corresponding ConstructorInfo.
         /// </summary>
         public object GetEarlyBoundObject(int index)
@@ -317,7 +323,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return true if the early bound object identified by "namespaceUri" contains a method that matches "name".
+        /// Return true if the early bound object identified by "namespaceUri" contains a method that
+        // matches "name".
         /// </summary>
         public bool EarlyBoundFunctionExists(string name, string namespaceUri)
         {
@@ -422,7 +429,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Parse the specified tag name (foo:bar) and resolve the resulting prefix.  If the prefix cannot be resolved,
+        /// Parse the specified tag name (foo:bar) and resolve the resulting prefix.  If the prefix cannot
+        // be resolved,
         /// then throw an error.  Return an XmlQualifiedName.
         /// </summary>
         public XmlQualifiedName ParseTagName(string tagName, int indexPrefixMappings)
@@ -437,7 +445,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Parse the specified tag name (foo:bar).  Return an XmlQualifiedName consisting of the parsed local name
+        /// Parse the specified tag name (foo:bar).  Return an XmlQualifiedName consisting of the parsed
+        // local name
         /// and the specified namespace.
         /// </summary>
         public XmlQualifiedName ParseTagName(string tagName, string ns)
@@ -451,7 +460,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Parse the specified tag name (foo:bar) and resolve the resulting prefix.  If the prefix cannot be resolved,
+        /// Parse the specified tag name (foo:bar) and resolve the resulting prefix.  If the prefix cannot
+        // be resolved,
         /// then throw an error.  Return the prefix, localName, and namespace URI.
         /// </summary>
         internal void ParseTagName(
@@ -495,7 +505,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return true if the nav1's LocalName and NamespaceURI properties equal nav2's corresponding properties.
+        /// Return true if the nav1's LocalName and NamespaceURI properties equal nav2's corresponding
+        // properties.
         /// </summary>
         public bool IsQNameEqual(XPathNavigator n1, XPathNavigator n2)
         {
@@ -510,7 +521,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return true if the specified navigator's LocalName and NamespaceURI properties equal the argument names.
+        /// Return true if the specified navigator's LocalName and NamespaceURI properties equal the
+        // argument names.
         /// </summary>
         public bool IsQNameEqual(
             XPathNavigator navigator,
@@ -683,7 +695,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Convert from the Clr type of "value" to the default Clr type that ILGen uses to represent the xml type, using
+        /// Convert from the Clr type of "value" to the default Clr type that ILGen uses to represent the
+        // xml type, using
         /// the conversion rules of the xml type.
         /// </summary>
         internal object ChangeTypeXsltResult(XmlQueryType xmlType, object value)
@@ -1026,7 +1039,8 @@ namespace System.Xml.Xsl.Runtime
         //-----------------------------------------------
 
         /// <summary>
-        /// Compare the relative positions of two navigators.  Return -1 if navThis is before navThat, 1 if after, and
+        /// Compare the relative positions of two navigators.  Return -1 if navThis is before navThat, 1 if
+        // after, and
         /// 0 if they are positioned to the same node.
         /// </summary>
         public int ComparePosition(XPathNavigator navigatorThis, XPathNavigator navigatorThat)
@@ -1035,7 +1049,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Get a comparer which guarantees a stable ordering among nodes, even those from different documents.
+        /// Get a comparer which guarantees a stable ordering among nodes, even those from different
+        // documents.
         /// </summary>
         public IList<XPathNavigator> DocOrderDistinct(IList<XPathNavigator> seq)
         {
@@ -1050,7 +1065,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Generate a unique string identifier for the specified node.  Do this by asking the navigator for an identifier
+        /// Generate a unique string identifier for the specified node.  Do this by asking the navigator for
+        // an identifier
         /// that is unique within the document, and then prepend a document index.
         /// </summary>
         public string GenerateId(XPathNavigator navigator)
@@ -1067,7 +1083,8 @@ namespace System.Xml.Xsl.Runtime
         //-----------------------------------------------
 
         /// <summary>
-        /// If an index having the specified Id has already been created over the "context" document, then return it
+        /// If an index having the specified Id has already been created over the "context" document, then
+        // return it
         /// in "index" and return true.  Otherwise, create a new, empty index and return false.
         /// </summary>
         public bool FindIndex(XPathNavigator context, int indexId, out XmlILIndex index)
@@ -1080,7 +1097,8 @@ namespace System.Xml.Xsl.Runtime
             navRoot = context.Clone();
             navRoot.MoveToRoot();
 
-            // Search pre-existing indexes in order to determine whether the specified index has already been created
+            // Search pre-existing indexes in order to determine whether the specified index has already been
+            // created
             if (this.indexes != null && indexId < this.indexes.Length)
             {
                 docIndexes = (ArrayList)this.indexes[indexId];
@@ -1105,7 +1123,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Add a newly built index over the specified "context" document to the existing collection of indexes.
+        /// Add a newly built index over the specified "context" document to the existing collection of
+        // indexes.
         /// </summary>
         public void AddNewIndex(XPathNavigator context, int indexId, XmlILIndex index)
         {
@@ -1183,7 +1202,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Start construction of an Rtf. Return a new XmlQueryOutput object that will be used to construct this Rtf.
+        /// Start construction of an Rtf. Return a new XmlQueryOutput object that will be used to construct
+        // this Rtf.
         /// </summary>
         public void StartRtfConstruction(string baseUri, out XmlQueryOutput output)
         {
@@ -1195,7 +1215,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// End construction of an Rtf and return it as an RtfNavigator.  Return previous XmlQueryOutput object.
+        /// End construction of an Rtf and return it as an RtfNavigator.  Return previous XmlQueryOutput
+        // object.
         /// </summary>
         public XPathNavigator EndRtfConstruction(out XmlQueryOutput output)
         {
@@ -1212,7 +1233,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Construct a new RtfTextNavigator from the specified "text".  This is much more efficient than calling
+        /// Construct a new RtfTextNavigator from the specified "text".  This is much more efficient than
+        // calling
         /// StartNodeConstruction(), StartRtf(), WriteString(), EndRtf(), and EndNodeConstruction().
         /// </summary>
         public XPathNavigator TextRtfConstruction(string text, string baseUri)

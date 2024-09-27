@@ -107,8 +107,11 @@ namespace Newtonsoft.Json.Serialization
                 Type? type = assembly.GetType(typeName);
                 if (type == null)
                 {
-                    // if generic type, try manually parsing the type arguments for the case of dynamically loaded assemblies
-                    // example generic typeName format: System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+                    // if generic type, try manually parsing the type arguments for the case of dynamically loaded
+                    // assemblies
+                    // example generic typeName format: System.Collections.Generic.Dictionary`2[[System.String,
+                    // mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String,
+                    // mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
                     if (StringUtils.IndexOf(typeName, '`') >= 0)
                     {
                         try
@@ -208,8 +211,10 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// When overridden in a derived class, controls the binding of a serialized object to a type.
         /// </summary>
-        /// <param name="assemblyName">Specifies the <see cref="Assembly"/> name of the serialized object.</param>
-        /// <param name="typeName">Specifies the <see cref="System.Type"/> name of the serialized object.</param>
+        /// <param name="assemblyName">Specifies the <see cref="Assembly"/> name of the serialized
+        // object.</param>
+        /// <param name="typeName">Specifies the <see cref="System.Type"/> name of the serialized
+        // object.</param>
         /// <returns>
         /// The type of the object the formatter creates a new instance of.
         /// </returns>
@@ -221,9 +226,12 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// When overridden in a derived class, controls the binding of a serialized object to a type.
         /// </summary>
-        /// <param name="serializedType">The type of the object the formatter creates a new instance of.</param>
-        /// <param name="assemblyName">Specifies the <see cref="Assembly"/> name of the serialized object.</param>
-        /// <param name="typeName">Specifies the <see cref="System.Type"/> name of the serialized object.</param>
+        /// <param name="serializedType">The type of the object the formatter creates a new instance
+        // of.</param>
+        /// <param name="assemblyName">Specifies the <see cref="Assembly"/> name of the serialized
+        // object.</param>
+        /// <param name="typeName">Specifies the <see cref="System.Type"/> name of the serialized
+        // object.</param>
         public
 #if HAVE_SERIALIZATION_BINDER_BIND_TO_NAME
         override

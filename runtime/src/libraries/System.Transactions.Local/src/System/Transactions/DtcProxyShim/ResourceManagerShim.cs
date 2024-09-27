@@ -42,8 +42,10 @@ internal sealed class ResourceManagerShim
 
     public void Reenlist(byte[] prepareInfo, out OletxTransactionOutcome outcome)
     {
-        // Call Reenlist on the proxy, waiting for 5 milliseconds for it to get the outcome.  If it doesn't know that outcome in that
-        // amount of time, tell the caller we don't know the outcome yet.  The managed code will reschedule the check by using the
+        // Call Reenlist on the proxy, waiting for 5 milliseconds for it to get the outcome.  If it doesn't
+        // know that outcome in that
+        // amount of time, tell the caller we don't know the outcome yet.  The managed code will reschedule
+        // the check by using the
         // ReenlistThread.
         try
         {

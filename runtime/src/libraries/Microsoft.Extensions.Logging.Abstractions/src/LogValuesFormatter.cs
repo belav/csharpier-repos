@@ -11,7 +11,8 @@ using System.Text;
 namespace Microsoft.Extensions.Logging
 {
     /// <summary>
-    /// Formatter to convert the named format items like {NamedformatItem} to <see cref="string.Format(IFormatProvider, string, object)"/> format.
+    /// Formatter to convert the named format items like {NamedformatItem} to <see
+    // cref="string.Format(IFormatProvider, string, object)"/> format.
     /// </summary>
     internal sealed class LogValuesFormatter
     {
@@ -163,7 +164,8 @@ namespace Microsoft.Extensions.Logging
                 for (int i = 0; i < values.Length; i++)
                 {
                     object formattedValue = FormatArgument(values[i]);
-                    // If the formatted value is changed, we allocate and copy items to a new array to avoid mutating the array passed in to this method
+                    // If the formatted value is changed, we allocate and copy items to a new array to avoid mutating
+                    // the array passed in to this method
                     if (!ReferenceEquals(formattedValue, values[i]))
                     {
                         formattedValues = new object[values.Length];
@@ -185,7 +187,8 @@ namespace Microsoft.Extensions.Logging
             );
         }
 
-        // NOTE: This method mutates the items in the array if needed to avoid extra allocations, and should only be used when caller expects this to happen
+        // NOTE: This method mutates the items in the array if needed to avoid extra allocations, and should
+        // only be used when caller expects this to happen
         internal string FormatWithOverwrite(object?[]? values)
         {
             if (values != null)

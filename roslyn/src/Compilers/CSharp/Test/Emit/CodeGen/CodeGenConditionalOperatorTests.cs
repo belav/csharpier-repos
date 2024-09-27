@@ -2360,7 +2360,8 @@ class Program
   IL_000a:  call       ""void System.Console.WriteLine(object)""
   IL_000f:  ret       
 }";
-            // Dev11 compiler reports WRN_UnreachableExpr, but reachability is defined for statements not for expressions.
+            // Dev11 compiler reports WRN_UnreachableExpr, but reachability is defined for statements not for
+            // expressions.
             // We don't report the warning.
             CompileAndVerify(source, expectedOutput: expectedOutput)
                 .VerifyIL("Program.Main", expectedIL)
@@ -2439,7 +2440,8 @@ class Program
                 @"1
 2
 3";
-            // Dev11 compiler reports WRN_UnreachableExpr, but reachability is defined for statements not for expressions.
+            // Dev11 compiler reports WRN_UnreachableExpr, but reachability is defined for statements not for
+            // expressions.
             // We don't report the warning.
             CompileAndVerify(source, expectedOutput: expectedOutput).VerifyDiagnostics();
         }

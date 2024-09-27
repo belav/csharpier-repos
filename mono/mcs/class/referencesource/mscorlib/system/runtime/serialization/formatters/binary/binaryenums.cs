@@ -4,14 +4,14 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: BinaryEnums
- **
- **
- ** Purpose: Soap XML Formatter Enums
- **
- **
- ===========================================================*/
+**
+** Class: BinaryEnums
+**
+**
+** Purpose: Soap XML Formatter Enums
+**
+**
+===========================================================*/
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {

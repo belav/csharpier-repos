@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     a query expression.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public class QueryExpressionEventData : DbContextEventData
 {
@@ -17,9 +18,11 @@ public class QueryExpressionEventData : DbContextEventData
     /// </summary>
     /// <param name="eventDefinition">The event definition.</param>
     /// <param name="messageGenerator">A delegate that generates a log message for this event.</param>
-    /// <param name="context">The current <see cref="DbContext" />, or <see langword="null" /> if not known.</param>
+    /// <param name="context">The current <see cref="DbContext" />, or <see langword="null" /> if not
+    // known.</param>
     /// <param name="queryExpression">The <see cref="Expression" />.</param>
-    /// <param name="expressionPrinter">An <see cref="ExpressionPrinter" /> that can be used to render the <see cref="Expression" />.</param>
+    /// <param name="expressionPrinter">An <see cref="ExpressionPrinter" /> that can be used to render
+    // the <see cref="Expression" />.</param>
     public QueryExpressionEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
@@ -39,7 +42,8 @@ public class QueryExpressionEventData : DbContextEventData
     public virtual Expression Expression { get; }
 
     /// <summary>
-    ///     An <see cref="ExpressionPrinter" /> that can be used to render the <see cref="Expression" />.
+    ///     An <see cref="ExpressionPrinter" /> that can be used to render the <see cref="Expression"
+    // />.
     /// </summary>
     public virtual ExpressionPrinter ExpressionPrinter { get; }
 }

@@ -199,38 +199,38 @@ namespace MonoTests.System.Web.UI.HtmlControls
             sel.Multiple = true;
             Assert.AreEqual(true, sel.Multiple, "Multiple");
             sel.SelectedIndex = 6;
-            /* This doesn't stick */
+/* This doesn't stick */
             Assert.AreEqual(-1, sel.SelectedIndex, "SelectedIndex");
             sel.Size = 7;
             Assert.AreEqual(7, sel.Size, "Size");
             sel.Value = "*8*";
-            /* Neither does this */
+/* Neither does this */
             Assert.AreEqual(String.Empty, sel.Value, "Value");
 
             Assert.AreEqual(5, sel.Attributes.Count, "Attributes.Count");
-            /*
-            foreach (string key in sel.Attributes.Keys) {
-                Console.WriteLine ("attr key {0} is {1}", key, sel.Attributes[key]);
-            }
-            */
+/*
+foreach (string key in sel.Attributes.Keys) {
+Console.WriteLine ("attr key {0} is {1}", key, sel.Attributes[key]);
+}
+*/
 
             StateBag sb = sel.GetViewState();
             Assert.AreEqual(5, sb.Count, "ViewState Count");
 
-            /*
-            foreach (string key in sb.Keys) {
-                Console.WriteLine ("vs key {0} is {1}", key, sb[key]);
-            }
-            */
+/*
+foreach (string key in sb.Keys) {
+Console.WriteLine ("vs key {0} is {1}", key, sb[key]);
+}
+*/
         }
 
         [Test]
         public void InternalDetails()
         {
-            /* Test the undocumented but visible
-             * properties and methods SelectedIndices,
-             * ClearSelection () and Select ()
-             */
+/* Test the undocumented but visible
+* properties and methods SelectedIndices,
+* ClearSelection () and Select ()
+*/
             TestHtmlSelect sel = new TestHtmlSelect();
             ListItemCollection items;
 
@@ -285,10 +285,10 @@ namespace MonoTests.System.Web.UI.HtmlControls
             Assert.AreEqual(0, sel.SelectedIndex, "SelectedIndex after clear");
             Assert.AreEqual(0, indices.Length, "SelectIndices Length after clear");
 
-            /* NB: !multiple and size <= 1, therefore
-             * there must be one selected after
-             * SelectedIndex is called
-             */
+/* NB: !multiple and size <= 1, therefore
+* there must be one selected after
+* SelectedIndex is called
+*/
             Assert.IsTrue(item1.Selected, "Item1 after clear");
             Assert.IsFalse(item2.Selected, "Item2 after clear");
             Assert.IsFalse(item3.Selected, "Item3 after clear");

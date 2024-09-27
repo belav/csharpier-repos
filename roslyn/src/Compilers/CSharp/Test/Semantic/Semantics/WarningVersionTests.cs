@@ -11,7 +11,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     /// <summary>
-    /// Tests that exercise warnings that are under control of the compiler option <see cref="CompilationOptions.WarningLevel"/>
+    /// Tests that exercise warnings that are under control of the compiler option <see
+    // cref="CompilationOptions.WarningLevel"/>
     /// for values >= 5.
     /// </summary>
     public class WarningVersionTests : CompilingTestBase
@@ -39,12 +40,14 @@ struct S
 ";
             var whenWave5 = new[]
             {
-                // (6,13): warning CS8073: The result of the expression is always 'false' since a value of type 'S' is never equal to 'null' of type 'S?'
+                // (6,13): warning CS8073: The result of the expression is always 'false' since a value of type 'S'
+                // is never equal to 'null' of type 'S?'
                 //         if (s == null) { }
                 Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "s == null")
                     .WithArguments("false", "S", "S?")
                     .WithLocation(6, 13),
-                // (7,13): warning CS8073: The result of the expression is always 'true' since a value of type 'S' is never equal to 'null' of type 'S?'
+                // (7,13): warning CS8073: The result of the expression is always 'true' since a value of type 'S'
+                // is never equal to 'null' of type 'S?'
                 //         if (s != null) { }
                 Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "s != null")
                     .WithArguments("true", "S", "S?")
@@ -84,12 +87,14 @@ static class SC { }
 ";
             var whenWave5 = new[]
             {
-                // (6,13): warning CS7023: The second operand of an 'is' or 'as' operator may not be static type 'SC'
+                // (6,13): warning CS7023: The second operand of an 'is' or 'as' operator may not be static type
+                // 'SC'
                 //         if (o is SC)
                 Diagnostic(ErrorCode.WRN_StaticInAsOrIs, "o is SC")
                     .WithArguments("SC")
                     .WithLocation(6, 13),
-                // (7,17): warning CS7023: The second operand of an 'is' or 'as' operator may not be static type 'SC'
+                // (7,17): warning CS7023: The second operand of an 'is' or 'as' operator may not be static type
+                // 'SC'
                 //             _ = o as SC;
                 Diagnostic(ErrorCode.WRN_StaticInAsOrIs, "o as SC")
                     .WithArguments("SC")
@@ -136,12 +141,14 @@ class P
 }";
             var whenWave5 = new[]
             {
-                // (15,26): warning CS8848: Operator 'from' cannot be used here due to precedence. Use parentheses to disambiguate.
+                // (15,26): warning CS8848: Operator 'from' cannot be used here due to precedence. Use parentheses
+                // to disambiguate.
                 //         var b = false && from x in src select x;
                 Diagnostic(ErrorCode.WRN_PrecedenceInversion, "from x in src")
                     .WithArguments("from")
                     .WithLocation(15, 26),
-                // (20,24): warning CS8848: Operator '+' cannot be used here due to precedence. Use parentheses to disambiguate.
+                // (20,24): warning CS8848: Operator '+' cannot be used here due to precedence. Use parentheses to
+                // disambiguate.
                 //         var i = ()=>{} + x;
                 Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+")
                     .WithArguments("+")
@@ -214,7 +221,9 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (4,12): warning CS8880: Auto-implemented property 'Program.Property' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the property.
+                // (4,12): warning CS8880: Auto-implemented property 'Program.Property' must be fully assigned
+                // before control is returned to the caller. Consider updating to language version '11.0' to
+                // auto-default the property.
                 //     public Program(int dummy)
                 Diagnostic(ErrorCode.WRN_UnassignedThisAutoPropertyUnsupportedVersion, "Program")
                     .WithArguments("Program.Property", "11.0")
@@ -243,7 +252,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (4,12): warning CS9020: Control is returned to caller before auto-implemented property 'Program.Property' is explicitly assigned, causing a preceding implicit assignment of 'default'.
+                // (4,12): warning CS9020: Control is returned to caller before auto-implemented property
+                // 'Program.Property' is explicitly assigned, causing a preceding implicit assignment of 'default'.
                 //     public Program(int dummy)
                 Diagnostic(ErrorCode.WRN_UnassignedThisAutoPropertySupportedVersion, "Program")
                     .WithArguments("Program.Property")
@@ -306,7 +316,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (4,12): warning CS8881: Field 'Program.Field' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
+                // (4,12): warning CS8881: Field 'Program.Field' must be fully assigned before control is returned
+                // to the caller. Consider updating to language version '11.0' to auto-default the field.
                 //     public Program(int dummy)
                 Diagnostic(ErrorCode.WRN_UnassignedThisUnsupportedVersion, "Program")
                     .WithArguments("Program.Field", "11.0")
@@ -335,7 +346,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (4,12): warning CS9021: Control is returned to caller before field 'Program.Field' is explicitly assigned, causing a preceding implicit assignment of 'default'.
+                // (4,12): warning CS9021: Control is returned to caller before field 'Program.Field' is explicitly
+                // assigned, causing a preceding implicit assignment of 'default'.
                 //     public Program(int dummy)
                 Diagnostic(ErrorCode.WRN_UnassignedThisSupportedVersion, "Program")
                     .WithArguments("Program.Field")
@@ -405,7 +417,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (4,12): warning CS8881: Field 'Program.Field' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
+                // (4,12): warning CS8881: Field 'Program.Field' must be fully assigned before control is returned
+                // to the caller. Consider updating to language version '11.0' to auto-default the field.
                 //     public Program(int dummy)
                 Diagnostic(ErrorCode.WRN_UnassignedThisUnsupportedVersion, "Program")
                     .WithArguments("Program.Field", "11.0")
@@ -445,7 +458,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (4,12): warning CS9021: Control is returned to caller before field 'Program.Field' is explicitly assigned, causing a preceding implicit assignment of 'default'.
+                // (4,12): warning CS9021: Control is returned to caller before field 'Program.Field' is explicitly
+                // assigned, causing a preceding implicit assignment of 'default'.
                 //     public Program(int dummy)
                 Diagnostic(ErrorCode.WRN_UnassignedThisSupportedVersion, "Program")
                     .WithArguments("Program.Field")
@@ -493,7 +507,8 @@ public struct Struct
                     options: TestOptions.ReleaseDll.WithWarningLevel(5)
                 )
                 .VerifyDiagnostics(
-                    // (3,10): warning CS8824: The out parameter 'param' must be assigned to before control leaves the current method
+                    // (3,10): warning CS8824: The out parameter 'param' must be assigned to before control leaves the
+                    // current method
                     //     void M(out Struct param)
                     Diagnostic(ErrorCode.WRN_ParamUnassigned, "M")
                         .WithArguments("param")
@@ -564,7 +579,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (6,21): warning CS9016: Use of possibly unassigned auto-implemented property 'Property'. Consider updating to language version '11.0' to auto-default the property.
+                // (6,21): warning CS9016: Use of possibly unassigned auto-implemented property 'Property'. Consider
+                // updating to language version '11.0' to auto-default the property.
                 //         Struct v2 = Property;
                 Diagnostic(ErrorCode.WRN_UseDefViolationPropertyUnsupportedVersion, "Property")
                     .WithArguments("Property", "11.0")
@@ -665,7 +681,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (6,21): warning CS9017: Use of possibly unassigned field 'Field'. Consider updating to language version '11.0' to auto-default the field.
+                // (6,21): warning CS9017: Use of possibly unassigned field 'Field'. Consider updating to language
+                // version '11.0' to auto-default the field.
                 //         Struct v2 = Field;
                 Diagnostic(ErrorCode.WRN_UseDefViolationFieldUnsupportedVersion, "Field")
                     .WithArguments("Field", "11.0")
@@ -766,7 +783,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (6,22): warning CS8885: The 'this' object cannot be used before all of its fields have been assigned. Consider updating to language version '11.0' to auto-default the unassigned fields.
+                // (6,22): warning CS8885: The 'this' object cannot be used before all of its fields have been
+                // assigned. Consider updating to language version '11.0' to auto-default the unassigned fields.
                 //         Program p2 = this;
                 Diagnostic(ErrorCode.WRN_UseDefViolationThisUnsupportedVersion, "this")
                     .WithArguments("11.0")
@@ -795,7 +813,8 @@ public struct Struct
                 verify: Verification.Skipped
             );
             verifier.VerifyDiagnostics(
-                // (6,22): warning CS9020: The 'this' object is read before all of its fields have been assigned, causing preceding implicit assignments of 'default' to non-explicitly assigned fields.
+                // (6,22): warning CS9020: The 'this' object is read before all of its fields have been assigned,
+                // causing preceding implicit assignments of 'default' to non-explicitly assigned fields.
                 //         Program p2 = this;
                 Diagnostic(ErrorCode.WRN_UseDefViolationThisSupportedVersion, "this")
                     .WithLocation(6, 22)

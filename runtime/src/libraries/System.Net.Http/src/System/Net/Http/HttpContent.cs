@@ -165,7 +165,8 @@ namespace System.Net.Http
 
         protected HttpContent()
         {
-            // Log to get an ID for the current content. This ID is used when the content gets associated to a message.
+            // Log to get an ID for the current content. This ID is used when the content gets associated to a
+            // message.
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this);
 
@@ -243,7 +244,8 @@ namespace System.Net.Http
                 }
             }
 
-            // If no content encoding is listed in the ContentType HTTP header, or no Content-Type header present,
+            // If no content encoding is listed in the ContentType HTTP header, or no Content-Type header
+            // present,
             // then check for a BOM in the data to figure out the encoding.
             if (encoding == null)
             {
@@ -310,7 +312,8 @@ namespace System.Net.Http
             }
             else // have a Task<Stream>
             {
-                // Throw if ReadAsStreamAsync has been called previously since _contentReadStream contains a cached task.
+                // Throw if ReadAsStreamAsync has been called previously since _contentReadStream contains a cached
+                // task.
                 throw new HttpRequestException(SR.net_http_content_read_as_stream_has_task);
             }
         }
@@ -322,7 +325,8 @@ namespace System.Net.Http
             CheckDisposed();
 
             // _contentReadStream will be either null (nothing yet initialized), a Stream (it was previously
-            // initialized in TryReadAsStream/ReadAsStream), or a Task<Stream> (it was previously initialized here
+            // initialized in TryReadAsStream/ReadAsStream), or a Task<Stream> (it was previously initialized
+            // here
             // in ReadAsStreamAsync).
 
             if (_contentReadStream == null) // don't yet have a Stream
@@ -361,7 +365,8 @@ namespace System.Net.Http
             CheckDisposed();
 
             // _contentReadStream will be either null (nothing yet initialized), a Stream (it was previously
-            // initialized in TryReadAsStream/ReadAsStream), or a Task<Stream> (it was previously initialized here
+            // initialized in TryReadAsStream/ReadAsStream), or a Task<Stream> (it was previously initialized
+            // here
             // in ReadAsStreamAsync).
 
             if (_contentReadStream == null) // don't yet have a Stream
@@ -389,7 +394,8 @@ namespace System.Net.Http
 
         protected abstract Task SerializeToStreamAsync(Stream stream, TransportContext? context);
 
-        // We cannot add abstract member to a public class in order to not to break already established contract of this class.
+        // We cannot add abstract member to a public class in order to not to break already established
+        // contract of this class.
         // So we add virtual method, override it everywhere internally and provide proper implementation.
         // Unfortunately we cannot force everyone to implement so in such case we throw NSE.
         protected virtual void SerializeToStream(
@@ -414,12 +420,18 @@ namespace System.Net.Http
             CancellationToken cancellationToken
         ) => SerializeToStreamAsync(stream, context);
 
-        // TODO https://github.com/dotnet/runtime/issues/31316: Expose something to enable this publicly.  For very specific
-        // HTTP/2 scenarios (e.g. gRPC), we need to be able to allow request content to continue sending after SendAsync has
-        // completed, which goes against the previous design of content, and which means that with some servers, even outside
-        // of desired scenarios we could end up unexpectedly having request content still sending even after the response
-        // completes, which could lead to spurious failures in unsuspecting client code.  To mitigate that, we prohibit duplex
-        // on all known HttpContent types, waiting for the request content to complete before completing the SendAsync task.
+        // TODO https://github.com/dotnet/runtime/issues/31316: Expose something to enable this publicly.
+        // For very specific
+        // HTTP/2 scenarios (e.g. gRPC), we need to be able to allow request content to continue sending
+        // after SendAsync has
+        // completed, which goes against the previous design of content, and which means that with some
+        // servers, even outside
+        // of desired scenarios we could end up unexpectedly having request content still sending even after
+        // the response
+        // completes, which could lead to spurious failures in unsuspecting client code.  To mitigate that,
+        // we prohibit duplex
+        // on all known HttpContent types, waiting for the request content to complete before completing the
+        // SendAsync task.
         internal virtual bool AllowDuplex => true;
 
         public void CopyTo(
@@ -523,8 +535,10 @@ namespace System.Net.Http
             }
 
             // Register for cancellation and tear down the underlying stream in case of cancellation/timeout.
-            // We're only comfortable disposing of the HttpContent instance like this because LoadIntoBuffer is internal and
-            // we're only using it on content instances we get back from a handler's Send call that haven't been given out to the user yet.
+            // We're only comfortable disposing of the HttpContent instance like this because LoadIntoBuffer is
+            // internal and
+            // we're only using it on content instances we get back from a handler's Send call that haven't been
+            // given out to the user yet.
             // If we were to ever make LoadIntoBuffer public, we'd need to rethink this.
             CancellationTokenRegistration cancellationRegistration = cancellationToken.Register(
                 static s => ((HttpContent)s!).Dispose(),
@@ -563,9 +577,11 @@ namespace System.Net.Http
 
         public Task LoadIntoBufferAsync() => LoadIntoBufferAsync(MaxBufferSize);
 
-        // No "CancellationToken" parameter needed since canceling the CTS will close the connection, resulting
+        // No "CancellationToken" parameter needed since canceling the CTS will close the connection,
+        // resulting
         // in an exception being thrown while we're buffering.
-        // If buffering is used without a connection, it is supposed to be fast, thus no cancellation required.
+        // If buffering is used without a connection, it is supposed to be fast, thus no cancellation
+        // required.
         public Task LoadIntoBufferAsync(long maxBufferSize) =>
             LoadIntoBufferAsync(maxBufferSize, CancellationToken.None);
 
@@ -644,10 +660,14 @@ namespace System.Net.Http
         /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
         /// <returns>The output memory stream which contains the serialized HTTP content.</returns>
         /// <remarks>
-        /// Once the operation completes, the returned memory stream represents the HTTP content. The returned stream can then be used to read the content using various stream APIs.
-        /// The <see cref="CreateContentReadStream(CancellationToken)"/> method buffers the content to a memory stream.
-        /// Derived classes can override this behavior if there is a better way to retrieve the content as stream.
-        /// For example, a byte array or a string could use a more efficient method way such as wrapping a read-only MemoryStream around the bytes or string.
+        /// Once the operation completes, the returned memory stream represents the HTTP content. The
+        // returned stream can then be used to read the content using various stream APIs.
+        /// The <see cref="CreateContentReadStream(CancellationToken)"/> method buffers the content to a
+        // memory stream.
+        /// Derived classes can override this behavior if there is a better way to retrieve the content as
+        // stream.
+        /// For example, a byte array or a string could use a more efficient method way such as wrapping a
+        // read-only MemoryStream around the bytes or string.
         /// </remarks>
         protected virtual Stream CreateContentReadStream(CancellationToken cancellationToken)
         {
@@ -658,7 +678,8 @@ namespace System.Net.Http
         protected virtual Task<Stream> CreateContentReadStreamAsync()
         {
             // By default just buffer the content to a memory stream. Derived classes can override this behavior
-            // if there is a better way to retrieve the content as stream (e.g. byte array/string use a more efficient
+            // if there is a better way to retrieve the content as stream (e.g. byte array/string use a more
+            // efficient
             // way, like wrapping a read-only MemoryStream around the bytes/string)
             return WaitAndReturnAsync(
                 LoadIntoBufferAsync(),
@@ -671,18 +692,23 @@ namespace System.Net.Http
             CancellationToken cancellationToken
         )
         {
-            // Drops the CT for compatibility reasons, see https://github.com/dotnet/runtime/issues/916#issuecomment-562083237
+            // Drops the CT for compatibility reasons, see
+            // https://github.com/dotnet/runtime/issues/916#issuecomment-562083237
             return CreateContentReadStreamAsync();
         }
 
-        // As an optimization for internal consumers of HttpContent (e.g. HttpClient.GetStreamAsync), and for
-        // HttpContent-derived implementations that override CreateContentReadStreamAsync in a way that always
+        // As an optimization for internal consumers of HttpContent (e.g. HttpClient.GetStreamAsync), and
+        // for
+        // HttpContent-derived implementations that override CreateContentReadStreamAsync in a way that
+        // always
         // or frequently returns synchronously-completed tasks, we can avoid the task allocation by enabling
         // callers to try to get the Stream first synchronously.
         internal virtual Stream? TryCreateContentReadStream() => null;
 
-        // Derived types return true if they're able to compute the length. It's OK if derived types return false to
-        // indicate that they're not able to compute the length. The transport channel needs to decide what to do in
+        // Derived types return true if they're able to compute the length. It's OK if derived types return
+        // false to
+        // indicate that they're not able to compute the length. The transport channel needs to decide what
+        // to do in
         // that case (send chunked, buffer first, etc.).
         protected internal abstract bool TryComputeLength(out long length);
 
@@ -695,7 +721,8 @@ namespace System.Net.Http
                 return _bufferedContent!.Length;
             }
 
-            // If we already tried to calculate the length, but the derived class returned 'false', then don't try
+            // If we already tried to calculate the length, but the derived class returned 'false', then don't
+            // try
             // again; just return null.
             if (_canCalculateLength)
             {
@@ -705,7 +732,8 @@ namespace System.Net.Http
                     return length;
                 }
 
-                // Set flag to make sure next time we don't try to compute the length, since we know that we're unable
+                // Set flag to make sure next time we don't try to compute the length, since we know that we're
+                // unable
                 // to do so.
                 _canCalculateLength = false;
             }
@@ -831,14 +859,19 @@ namespace System.Net.Http
 
         private static Exception GetStreamCopyException(Exception originalException)
         {
-            // HttpContent derived types should throw HttpRequestExceptions if there is an error. However, since the stream
-            // provided by CopyToAsync() can also throw, we wrap such exceptions in HttpRequestException. This way custom content
-            // types don't have to worry about it. The goal is that users of HttpContent don't have to catch multiple
+            // HttpContent derived types should throw HttpRequestExceptions if there is an error. However, since
+            // the stream
+            // provided by CopyToAsync() can also throw, we wrap such exceptions in HttpRequestException. This
+            // way custom content
+            // types don't have to worry about it. The goal is that users of HttpContent don't have to catch
+            // multiple
             // exceptions (depending on the underlying transport), but just HttpRequestExceptions
             // Custom stream should throw either IOException or HttpRequestException.
-            // We don't want to wrap other exceptions thrown by Stream (e.g. InvalidOperationException), since we
+            // We don't want to wrap other exceptions thrown by Stream (e.g. InvalidOperationException), since
+            // we
             // don't want to hide such "usage error" exceptions in HttpRequestException.
-            // ObjectDisposedException is also wrapped, since aborting HWR after a request is complete will result in
+            // ObjectDisposedException is also wrapped, since aborting HWR after a request is complete will
+            // result in
             // the response stream being closed.
             return StreamCopyExceptionNeedsWrapping(originalException)
                 ? WrapStreamCopyException(originalException)

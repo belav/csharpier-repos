@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.WebSockets;
 
 internal static class HandshakeHelpers
 {
-    // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
+    // This uses C# compiler's ability to refer to static data directly. For more information see
+    // https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
     private static ReadOnlySpan<byte> EncodedWebSocketKey =>
         "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"u8;
 
@@ -59,11 +60,13 @@ internal static class HandshakeHelpers
     public static string CreateResponseKey(string requestKey)
     {
         // "The value of this header field is constructed by concatenating /key/, defined above in step 4
-        // in Section 4.2.2, with the string "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", taking the SHA-1 hash of
+        // in Section 4.2.2, with the string "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", taking the SHA-1 hash
+        // of
         // this concatenated value to obtain a 20-byte value and base64-encoding"
         // https://tools.ietf.org/html/rfc6455#section-4.2.2
 
-        // requestKey is already verified to be small (24 bytes) by 'IsRequestKeyValid()' and everything is 1:1 mapping to UTF8 bytes
+        // requestKey is already verified to be small (24 bytes) by 'IsRequestKeyValid()' and everything is
+        // 1:1 mapping to UTF8 bytes
         // so this can be hardcoded to 60 bytes for the requestKey + static websocket string
         Span<byte> mergedBytes = stackalloc byte[60];
         Encoding.UTF8.GetBytes(requestKey, mergedBytes);
@@ -232,7 +235,8 @@ internal static class HandshakeHelpers
             {
                 var startIndex = value.IndexOf('=');
 
-                // parameters can be sent without a value by the client, we'll use the values set by the app developer or the default of 15
+                // parameters can be sent without a value by the client, we'll use the values set by the app
+                // developer or the default of 15
                 if (startIndex < 0)
                 {
                     parsedValue = null;

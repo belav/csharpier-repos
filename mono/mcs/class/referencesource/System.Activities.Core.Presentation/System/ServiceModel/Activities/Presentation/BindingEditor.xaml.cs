@@ -135,7 +135,8 @@ namespace System.ServiceModel.Activities.Presentation
                 }
             }
 
-            // Make combo appear empty if the binding is not one of the ones known to us, e.g., has been custom-tweaked in XAML.
+            // Make combo appear empty if the binding is not one of the ones known to us, e.g., has been
+            // custom-tweaked in XAML.
             BindingDescriptor toSelect = null;
             Func<BindingDescriptor, bool> where = p =>
                 null != p.Value && p.Value.BindingType == bindingType;
@@ -150,7 +151,8 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 toSelect = editor.bindingElements.Where(where).FirstOrDefault();
             }
-            //prevent OnSelectionChanged now - the binding is set directly to the object, no need to set again through event handler
+            //prevent OnSelectionChanged now - the binding is set directly to the object, no need to set again
+            // through event handler
             editor.isInitializing = true;
             if (null != toSelect)
             {

@@ -147,7 +147,8 @@ namespace System.ServiceModel.Channels
             get { return listenIPAddress; }
             set
             {
-                // No validation necessary at this point. When the service is opened, it will throw if the IP address is invalid
+                // No validation necessary at this point. When the service is opened, it will throw if the IP
+                // address is invalid
                 lock (ThisLock)
                 {
                     ThrowIfOpen();
@@ -1171,9 +1172,12 @@ namespace System.ServiceModel.Channels
         }
 
         // Queued callback to actually process the address change
-        // The design is such that any address change notifications are queued just like Open/Close operations.
-        // So, we need not worry about address changes racing with other address changes or Open/Close operations.
-        // Abort can happen at any time. However, Abort skips unregistering addresses, so this method doesn't have
+        // The design is such that any address change notifications are queued just like Open/Close
+        // operations.
+        // So, we need not worry about address changes racing with other address changes or Open/Close
+        // operations.
+        // Abort can happen at any time. However, Abort skips unregistering addresses, so this method
+        // doesn't have
         // to worry about undoing its work if Abort happens.
         void OnIPAddressChange()
         {

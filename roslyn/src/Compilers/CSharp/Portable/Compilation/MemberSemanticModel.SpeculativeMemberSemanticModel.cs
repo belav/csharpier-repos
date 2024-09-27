@@ -15,13 +15,15 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal abstract partial class MemberSemanticModel
     {
         /// <summary>
-        /// Allows asking semantic questions about a TypeSyntax (or its descendants) within a member, that did not appear in the original source code.
+        /// Allows asking semantic questions about a TypeSyntax (or its descendants) within a member, that
+        // did not appear in the original source code.
         /// Typically, an instance is obtained by a call to SemanticModel.TryGetSpeculativeSemanticModel.
         /// </summary>
         internal sealed class SpeculativeMemberSemanticModel : MemberSemanticModel
         {
             /// <summary>
-            /// Creates a speculative SemanticModel for a TypeSyntax node at a position within an existing MemberSemanticModel.
+            /// Creates a speculative SemanticModel for a TypeSyntax node at a position within an existing
+            // MemberSemanticModel.
             /// </summary>
             public SpeculativeMemberSemanticModel(
                 PublicSemanticModel containingPublicSemanticModel,
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override NullableWalker.SnapshotManager GetSnapshotManager()
             {
-                // In this override, current nullability state cannot influence anything of speculatively bound expressions.
+                // In this override, current nullability state cannot influence anything of speculatively bound
+                // expressions.
                 return (
                     (SpeculativeSemanticModelWithMemberModel)_containingPublicSemanticModel
                 ).ParentSnapshotManagerOpt;

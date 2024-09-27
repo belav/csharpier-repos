@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     internal static partial class SourceTextExtensions
     {
         /// <summary>
-        /// Returns the leading whitespace of the line located at the specified position in the given snapshot.
+        /// Returns the leading whitespace of the line located at the specified position in the given
+        // snapshot.
         /// </summary>
         public static string GetLeadingWhitespaceOfLineAtPosition(
             this SourceText text,

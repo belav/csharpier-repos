@@ -79,18 +79,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         )
         {
-            // SPEC: Given the set of applicable candidate function members, the best function member in that set is located.
-            // SPEC: If the set contains only one function member, then that function member is the best function member.
+            // SPEC: Given the set of applicable candidate function members, the best function member in that
+            // set is located.
+            // SPEC: If the set contains only one function member, then that function member is the best
+            // function member.
 
             if (result.SingleValid())
             {
                 return;
             }
 
-            // SPEC: Otherwise, the best function member is the one function member that is better than all other function
-            // SPEC: members with respect to the given argument list, provided that each function member is compared to all
-            // SPEC: other function members using the rules in 7.5.3.2. If there is not exactly one function member that is
-            // SPEC: better than all other function members, then the function member invocation is ambiguous and a binding-time
+            // SPEC: Otherwise, the best function member is the one function member that is better than all
+            // other function
+            // SPEC: members with respect to the given argument list, provided that each function member is
+            // compared to all
+            // SPEC: other function members using the rules in 7.5.3.2. If there is not exactly one function
+            // member that is
+            // SPEC: better than all other function members, then the function member invocation is ambiguous
+            // and a binding-time
             // SPEC: error occurs.
 
             var candidates = result.Results;
@@ -457,13 +463,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC: operators is the set provided by the direct base class of T0, or the effective
             // SPEC: base class of T0 if T0 is a type parameter.
 
-            // https://github.com/dotnet/roslyn/issues/34451: The spec quote should be adjusted to cover operators from interfaces as well.
+            // https://github.com/dotnet/roslyn/issues/34451: The spec quote should be adjusted to cover
+            // operators from interfaces as well.
             // From https://github.com/dotnet/csharplang/blob/main/meetings/2017/LDM-2017-06-27.md:
-            // - We only even look for operator implementations in interfaces if one of the operands has a type that is an interface or
+            // - We only even look for operator implementations in interfaces if one of the operands has a type
+            // that is an interface or
             // a type parameter with a non-empty effective base interface list.
-            // - The applicable operators from classes / structs shadow those in interfaces.This matters for constrained type parameters:
+            // - The applicable operators from classes / structs shadow those in interfaces.This matters for
+            // constrained type parameters:
             // the effective base class can shadow operators from effective base interfaces.
-            // - If we find an applicable candidate in an interface, that candidate shadows all applicable operators in base interfaces:
+            // - If we find an applicable candidate in an interface, that candidate shadows all applicable
+            // operators in base interfaces:
             // we stop looking.
 
             TypeSymbol type0 = operand.Type.StrippedType();

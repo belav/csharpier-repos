@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -63,31 +64,36 @@ namespace WebMatrix.WebData
         }
 
         // Public properties
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool EnablePasswordRetrieval
         {
             get { return InitializeCalled ? false : PreviousProvider.EnablePasswordRetrieval; }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool EnablePasswordReset
         {
             get { return InitializeCalled ? false : PreviousProvider.EnablePasswordReset; }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool RequiresQuestionAndAnswer
         {
             get { return InitializeCalled ? false : PreviousProvider.RequiresQuestionAndAnswer; }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool RequiresUniqueEmail
         {
             get { return InitializeCalled ? false : PreviousProvider.RequiresUniqueEmail; }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override MembershipPasswordFormat PasswordFormat
         {
             get
@@ -98,7 +104,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override int MaxInvalidPasswordAttempts
         {
             get
@@ -109,7 +116,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override int PasswordAttemptWindow
         {
             get
@@ -118,13 +126,15 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override int MinRequiredPasswordLength
         {
             get { return InitializeCalled ? 0 : PreviousProvider.MinRequiredPasswordLength; }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override int MinRequiredNonAlphanumericCharacters
         {
             get
@@ -133,7 +143,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string PasswordStrengthRegularExpression
         {
             get
@@ -144,7 +155,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string ApplicationName
         {
             get
@@ -212,10 +224,12 @@ namespace WebMatrix.WebData
         public string UserIdColumn { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="WebMatrix.WebData.SimpleMembershipProviderCasingBehavior"/> for this provider.
+        /// Gets or sets the <see cref="WebMatrix.WebData.SimpleMembershipProviderCasingBehavior"/> for this
+        // provider.
         /// </summary>
         /// <remarks>
-        /// This value configures whether or not queries for user names normalize the user name to uppercase. See
+        /// This value configures whether or not queries for user names normalize the user name to
+        // uppercase. See
         /// <see cref="WebMatrix.WebData.SimpleMembershipProviderCasingBehavior"/> for a full description.
         /// </remarks>
         public SimpleMembershipProviderCasingBehavior CasingBehavior
@@ -252,7 +266,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from ProviderBase - The "previous provider" we get has already been initialized by the Config system,
+        // Inherited from ProviderBase - The "previous provider" we get has already been initialized by the
+        // Config system,
         // so we shouldn't forward this call
         public override void Initialize(string name, NameValueCollection config)
         {
@@ -357,7 +372,8 @@ namespace WebMatrix.WebData
                         PasswordVerificationTokenExpirationDate datetime)"
                     );
                     // TODO: Do we want to add FK constraint to user table too?
-                    //                        CONSTRAINT fk_UserId FOREIGN KEY (UserId) REFERENCES "+UserTableName+"("+UserIdColumn+"))");
+                    //                        CONSTRAINT fk_UserId FOREIGN KEY (UserId) REFERENCES
+                    // "+UserTableName+"("+UserIdColumn+"))");
                 }
             }
         }
@@ -408,7 +424,8 @@ namespace WebMatrix.WebData
             dynamic result;
             if (casingBehavior == SimpleMembershipProviderCasingBehavior.NormalizeCasing)
             {
-                // Casing is normalized in Sql to allow the database to normalize username according to its collation. The common issue
+                // Casing is normalized in Sql to allow the database to normalize username according to its
+                // collation. The common issue
                 // that can occur here is the 'Turkish i problem', where the uppercase of 'i' is not 'I' in Turkish.
                 result = db.QueryValue(
                     @"SELECT "
@@ -425,7 +442,8 @@ namespace WebMatrix.WebData
                 casingBehavior == SimpleMembershipProviderCasingBehavior.RelyOnDatabaseCollation
             )
             {
-                // When this option is supplied we assume the database has been configured with an appropriate casing, and don't normalize
+                // When this option is supplied we assume the database has been configured with an appropriate
+                // casing, and don't normalize
                 // the user name. This is performant but requires appropriate configuration on the database.
                 result = db.QueryValue(
                     @"SELECT "
@@ -451,7 +469,8 @@ namespace WebMatrix.WebData
             return -1;
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override int GetUserIdFromPasswordResetToken(string token)
         {
             VerifyInitialized();
@@ -471,7 +490,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool ChangePasswordQuestionAndAnswer(
             string username,
             string password,
@@ -494,14 +514,17 @@ namespace WebMatrix.WebData
         /// <summary>
         /// Sets the confirmed flag for the username if it is correct.
         /// </summary>
-        /// <returns>True if the account could be successfully confirmed. False if the username was not found or the confirmation token is invalid.</returns>
-        /// <remarks>Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method</remarks>
+        /// <returns>True if the account could be successfully confirmed. False if the username was not
+        // found or the confirmation token is invalid.</returns>
+        /// <remarks>Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use
+        // this method</remarks>
         public override bool ConfirmAccount(string userName, string accountConfirmationToken)
         {
             VerifyInitialized();
             using (var db = ConnectToDatabase())
             {
-                // We need to compare the token using a case insensitive comparison however it seems tricky to do this uniformly across databases when representing the token as a string.
+                // We need to compare the token using a case insensitive comparison however it seems tricky to do
+                // this uniformly across databases when representing the token as a string.
                 // Therefore verify the case on the client
                 var row = db.QuerySingle(
                     "SELECT m.[UserId], m.[ConfirmationToken] FROM "
@@ -544,17 +567,22 @@ namespace WebMatrix.WebData
         /// <summary>
         /// Sets the confirmed flag for the username if it is correct.
         /// </summary>
-        /// <returns>True if the account could be successfully confirmed. False if the username was not found or the confirmation token is invalid.</returns>
-        /// <remarks>Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method.
-        /// There is a tiny possibility where this method fails to work correctly. Two or more users could be assigned the same token but specified using different cases.
-        /// A workaround for this would be to use the overload that accepts both the user name and confirmation token.
+        /// <returns>True if the account could be successfully confirmed. False if the username was not
+        // found or the confirmation token is invalid.</returns>
+        /// <remarks>Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use
+        // this method.
+        /// There is a tiny possibility where this method fails to work correctly. Two or more users could
+        // be assigned the same token but specified using different cases.
+        /// A workaround for this would be to use the overload that accepts both the user name and
+        // confirmation token.
         /// </remarks>
         public override bool ConfirmAccount(string accountConfirmationToken)
         {
             VerifyInitialized();
             using (var db = ConnectToDatabase())
             {
-                // We need to compare the token using a case insensitive comparison however it seems tricky to do this uniformly across databases when representing the token as a string.
+                // We need to compare the token using a case insensitive comparison however it seems tricky to do
+                // this uniformly across databases when representing the token as a string.
                 // Therefore verify the case on the client
                 var rows = db.Query(
                         "SELECT [UserId], [ConfirmationToken] FROM "
@@ -589,7 +617,8 @@ namespace WebMatrix.WebData
             return new DatabaseWrapper(ConnectionInfo.Connect());
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override string CreateAccount(
             string userName,
             string password,
@@ -675,7 +704,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override MembershipUser CreateUser(
             string username,
             string password,
@@ -759,7 +789,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override string CreateUserAndAccount(
             string userName,
             string password,
@@ -776,7 +807,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string GetPassword(string username, string answer)
         {
             if (!InitializeCalled)
@@ -808,7 +840,8 @@ namespace WebMatrix.WebData
             return result > 0;
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             if (!InitializeCalled)
@@ -857,7 +890,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string ResetPassword(string username, string answer)
         {
             if (!InitializeCalled)
@@ -867,7 +901,8 @@ namespace WebMatrix.WebData
             throw new NotSupportedException();
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
             if (!InitializeCalled)
@@ -877,7 +912,8 @@ namespace WebMatrix.WebData
             throw new NotSupportedException();
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
             if (!InitializeCalled)
@@ -912,7 +948,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string GetUserNameByEmail(string email)
         {
             if (!InitializeCalled)
@@ -922,7 +959,8 @@ namespace WebMatrix.WebData
             throw new NotSupportedException();
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override bool DeleteAccount(string userName)
         {
             VerifyInitialized();
@@ -943,7 +981,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
             if (!InitializeCalled)
@@ -977,7 +1016,8 @@ namespace WebMatrix.WebData
             return (DeleteAccount(userName) && DeleteUser(userName, false));
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override MembershipUserCollection GetAllUsers(
             int pageIndex,
             int pageSize,
@@ -991,7 +1031,8 @@ namespace WebMatrix.WebData
             throw new NotSupportedException();
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override int GetNumberOfUsersOnline()
         {
             if (!InitializeCalled)
@@ -1001,7 +1042,8 @@ namespace WebMatrix.WebData
             throw new NotSupportedException();
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override MembershipUserCollection FindUsersByName(
             string usernameToMatch,
             int pageIndex,
@@ -1021,7 +1063,8 @@ namespace WebMatrix.WebData
             throw new NotSupportedException();
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override MembershipUserCollection FindUsersByEmail(
             string emailToMatch,
             int pageIndex,
@@ -1056,7 +1099,8 @@ namespace WebMatrix.WebData
             return -1;
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override int GetPasswordFailuresSinceLastSuccess(string userName)
         {
             using (var db = ConnectToDatabase())
@@ -1077,7 +1121,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override DateTime GetCreateDate(string userName)
         {
             using (var db = ConnectToDatabase())
@@ -1106,7 +1151,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override DateTime GetPasswordChangedDate(string userName)
         {
             using (var db = ConnectToDatabase())
@@ -1137,7 +1183,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override DateTime GetLastPasswordFailureDate(string userName)
         {
             using (var db = ConnectToDatabase())
@@ -1292,7 +1339,8 @@ namespace WebMatrix.WebData
             return HttpServerUtility.UrlTokenEncode(tokenBytes);
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override string GeneratePasswordResetToken(
             string userName,
             int tokenExpirationInMinutesFromNow
@@ -1342,7 +1390,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override bool IsConfirmed(string userName)
         {
             VerifyInitialized();
@@ -1361,7 +1410,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this method
+        // Inherited from ExtendedMembershipProvider ==> Simple Membership MUST be enabled to use this
+        // method
         public override bool ResetPasswordWithToken(string token, string newPassword)
         {
             VerifyInitialized();
@@ -1407,7 +1457,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override void UpdateUser(MembershipUser user)
         {
             if (!InitializeCalled)
@@ -1420,7 +1471,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool UnlockUser(string userName)
         {
             if (!InitializeCalled)
@@ -1453,7 +1505,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool ValidateUser(string username, string password)
         {
             if (!InitializeCalled)
@@ -1760,7 +1813,8 @@ namespace WebMatrix.WebData
         }
 
         /// <summary>
-        /// Determines whether there exists a local account (as opposed to OAuth account) with the specified userId.
+        /// Determines whether there exists a local account (as opposed to OAuth account) with the specified
+        // userId.
         /// </summary>
         /// <param name="userId">The user id to check for local account.</param>
         /// <returns>

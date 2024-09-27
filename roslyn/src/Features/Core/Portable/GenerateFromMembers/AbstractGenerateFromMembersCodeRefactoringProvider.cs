@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
 
         /// <summary>
         /// Returns an array of parameter symbols that correspond to selected member symbols.
-        /// If a selected member symbol has an empty base identifier name, the parameter symbol will not be added.
+        /// If a selected member symbol has an empty base identifier name, the parameter symbol will not be
+        // added.
         /// </summary>
         /// <param name="selectedMembers"></param>
         /// <param name="rules"></param>

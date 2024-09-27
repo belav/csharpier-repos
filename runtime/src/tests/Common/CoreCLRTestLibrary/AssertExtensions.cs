@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Note: Exception messages call ToString instead of Name to avoid MissingMetadataException when just outputting basic info
+// Note: Exception messages call ToString instead of Name to avoid MissingMetadataException when
+// just outputting basic info
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace Xunit
     public static class AssertExtensions
     {
         /// <summary>
-        ///     Asserts that the given delegate throws an <see cref="ArgumentException"/> with the given parameter name.
+        ///     Asserts that the given delegate throws an <see cref="ArgumentException"/> with the given
+        // parameter name.
         /// </summary>
         /// <param name="action">
         ///     The delegate of type <see cref="Action"/> to execute.
@@ -21,7 +23,8 @@ namespace Xunit
         ///     A <see cref="String"/> containing additional information for when the assertion fails.
         /// </param>
         /// <param name="parameterName">
-        ///     A <see cref="String"/> containing the parameter of name to check, <see langword="null"/> to skip parameter validation.
+        ///     A <see cref="String"/> containing the parameter of name to check, <see langword="null"/> to
+        // skip parameter validation.
         /// </param>
         /// <returns>
         ///     The thrown <see cref="ArgumentException"/>.
@@ -39,10 +42,12 @@ namespace Xunit
         }
 
         /// <summary>
-        ///     Asserts that the given delegate throws an <see cref="ArgumentException"/> of type <typeparamref name="T"/> with the given parameter name.
+        ///     Asserts that the given delegate throws an <see cref="ArgumentException"/> of type
+        // <typeparamref name="T"/> with the given parameter name.
         /// </summary>
         /// <param name="parameterName">
-        ///     A <see cref="String"/> containing the parameter of name to check, <see langword="null"/> to skip parameter validation.
+        ///     A <see cref="String"/> containing the parameter of name to check, <see langword="null"/> to
+        // skip parameter validation.
         /// </param>
         /// <param name="action">
         ///     The delegate of type <see cref="Action"/> to execute.
@@ -72,10 +77,12 @@ namespace Xunit
         }
 
         /// <summary>
-        ///     Asserts that the given delegate throws an <see cref="MissingMemberException"/> of type <typeparamref name="T"/> with the given parameter name.
+        ///     Asserts that the given delegate throws an <see cref="MissingMemberException"/> of type
+        // <typeparamref name="T"/> with the given parameter name.
         /// </summary>
         /// <param name="memberName">
-        ///     A <see cref="String"/> containing the parameter of name to check, <see langword="null"/> to skip parameter validation.
+        ///     A <see cref="String"/> containing the parameter of name to check, <see langword="null"/> to
+        // skip parameter validation.
         /// </param>
         /// <param name="action">
         ///     The delegate of type <see cref="Action"/> to execute.
@@ -88,7 +95,8 @@ namespace Xunit
         ///     <para>
         ///         -or-
         ///     </para>
-        ///     <see cref="MissingMemberException.Message"/> does not contain <paramref name="memberName"/> .
+        ///     <see cref="MissingMemberException.Message"/> does not contain <paramref name="memberName"/>
+        // .
         /// </exception>
         public static T ThrowsMissingMemberException<T>(string memberName, Action action)
             where T : MissingMemberException
@@ -102,7 +110,8 @@ namespace Xunit
         }
 
         /// <summary>
-        ///     Asserts that the given async delegate throws an <see cref="Exception"/> of type <typeparam name="T" /> and <see cref="Exception.InnerException"/>
+        ///     Asserts that the given async delegate throws an <see cref="Exception"/> of type <typeparam
+        // name="T" /> and <see cref="Exception.InnerException"/>
         ///     returns an <see cref="Exception"/> of type <typeparam name="TInner" />.
         /// </summary>
         /// <param name="action">
@@ -112,7 +121,9 @@ namespace Xunit
         ///     A <see cref="String"/> containing additional information for when the assertion fails.
         /// </param>
         /// <param name="options">
-        ///     Specifies whether <see cref="Assert.Throws{T}"/> should require an exact type match when comparing the expected exception type with the thrown exception. The default is <see cref="AssertThrowsOptions.None"/>.
+        ///     Specifies whether <see cref="Assert.Throws{T}"/> should require an exact type match when
+        // comparing the expected exception type with the thrown exception. The default is <see
+        // cref="AssertThrowsOptions.None"/>.
         /// </param>
         /// <returns>
         ///     The thrown inner <see cref="Exception"/>.
@@ -153,7 +164,8 @@ namespace Xunit
         }
 
         /// <summary>
-        /// Tests whether the two lists are the same length and contain the same objects (using Object.Equals()) in the same order and
+        /// Tests whether the two lists are the same length and contain the same objects (using
+        // Object.Equals()) in the same order and
         /// throws an exception if it is not.
         /// </summary>
         /// <param name="expected">Expected list.</param>
@@ -168,7 +180,8 @@ namespace Xunit
         }
 
         /// <summary>
-        /// Tests whether the two enumerables are the same length and contain the same objects (using Object.Equals()) in the same order and
+        /// Tests whether the two enumerables are the same length and contain the same objects (using
+        // Object.Equals()) in the same order and
         /// throws an exception if it is not.
         /// </summary>
         /// <param name="expected">Expected enumerables.</param>
@@ -180,7 +193,8 @@ namespace Xunit
         }
 
         /// <summary>
-        /// Iterates through an IEnumerable to generate an array of elements. The rational for using this instead of
+        /// Iterates through an IEnumerable to generate an array of elements. The rational for using this
+        // instead of
         /// System.Linq.ToArray is that this will not require a dependency on System.Linq.dll
         /// </summary>
         private static T[] CopyToArray<T>(IEnumerable<T> source)

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Specialized;
 
@@ -57,7 +58,8 @@ namespace System.Web.WebPages
 
         private bool IsUrlRewriterTurnedOn(HttpContextBase httpContext)
         {
-            // Need to do double-check locking because a single instance of this class is shared in the entire app domain (see PathHelpers)
+            // Need to do double-check locking because a single instance of this class is shared in the entire
+            // app domain (see PathHelpers)
             if (!_urlRewriterIsTurnedOnCalculated)
             {
                 lock (_lockObject)

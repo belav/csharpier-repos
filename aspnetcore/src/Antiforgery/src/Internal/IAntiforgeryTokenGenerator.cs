@@ -20,7 +20,8 @@ internal interface IAntiforgeryTokenGenerator
     /// <summary>
     /// Generates a request token corresponding to <paramref name="cookieToken"/>.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="cookieToken">A valid cookie token.</param>
     /// <returns>An <see cref="AntiforgeryToken"/>.</returns>
     AntiforgeryToken GenerateRequestToken(HttpContext httpContext, AntiforgeryToken cookieToken);
@@ -33,9 +34,11 @@ internal interface IAntiforgeryTokenGenerator
     bool IsCookieTokenValid(AntiforgeryToken? cookieToken);
 
     /// <summary>
-    /// Attempts to validate a cookie and request token set for the given <paramref name="httpContext"/>.
+    /// Attempts to validate a cookie and request token set for the given <paramref
+    // name="httpContext"/>.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="cookieToken">A cookie token.</param>
     /// <param name="requestToken">A request token.</param>
     /// <param name="message">

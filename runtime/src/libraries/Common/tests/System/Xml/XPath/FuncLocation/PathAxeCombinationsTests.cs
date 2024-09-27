@@ -3776,7 +3776,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines ancestor-or-self axis with following-sibling axis
-        /// ancestor-or-self::magazine/following-sibling::magazine | ancestor-or-self::magazine/following-sibling::book
+        /// ancestor-or-self::magazine/following-sibling::magazine |
+        // ancestor-or-self::magazine/following-sibling::book
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -3878,7 +3879,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines ancestor-or-self axis with preceding axis
-        /// ancestor-or-self::magazine/preceding::book | ancestor-or-self::magazine/following::book | ancestor-or-self::magazine/child::*
+        /// ancestor-or-self::magazine/preceding::book | ancestor-or-self::magazine/following::book |
+        // ancestor-or-self::magazine/child::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -9985,7 +9987,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines descendant axis with descendant-or-self axis
-        /// descendant::magazine[@frequency="monthly"]/descendant-or-self::*[descendant-or-self::*/child::text()]
+        ///
+        // descendant::magazine[@frequency="monthly"]/descendant-or-self::*[descendant-or-self::*/child::text()]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -11972,7 +11975,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// I accidentally put fasle() instead of false(), so I should get an exception!
-        /// Copy of node()/descendant::node()/self::node [self::text() = false() and self::attribute=fasle()]
+        /// Copy of node()/descendant::node()/self::node [self::text() = false() and
+        // self::attribute=fasle()]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -12727,7 +12731,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines following-sibling axis with ancestor-or-self axis
-        /// node()/node()/following-sibling::node()/ancestor-or-self::node()[preceding::node() and following::node() and self::node() and preceding-sibling::node() and following-sibling::node()]
+        /// node()/node()/following-sibling::node()/ancestor-or-self::node()[preceding::node() and
+        // following::node() and self::node() and preceding-sibling::node() and following-sibling::node()]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -13846,7 +13851,9 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines following-sibling axis with descendant-or-self axis
-        /// magazine/following-sibling::*[local-name()="magazine"]/descendant-or-self::node[local-name()="title" or local-name()=""]
+        ///
+        // magazine/following-sibling::*[local-name()="magazine"]/descendant-or-self::node[local-name()="title"
+        // or local-name()=""]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -16037,7 +16044,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines descendant-or-self axis with ancestor axis
-        /// descendant-or-self::node()/ancestor::node[self::book or self::magazine and self::* and self::node()]
+        /// descendant-or-self::node()/ancestor::node[self::book or self::magazine and self::* and
+        // self::node()]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -16399,7 +16407,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines descendant-or-self axis with child axis
-        /// descendant-or-self::*/child::text() | descendant-or-self::*/child::processing-instruction() | descendant-or-self::comment(Utils.NavigatorKind kind)
+        /// descendant-or-self::*/child::text() | descendant-or-self::*/child::processing-instruction() |
+        // descendant-or-self::comment(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -17074,7 +17083,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines descendant-or-self axis with child axis
-        /// descendant-or-self::*/child::text() | descendant-or-self::*/child::processing-instruction() | descendant-or-self::comment()|descendant-or-self::*/attribute::*
+        /// descendant-or-self::*/child::text() | descendant-or-self::*/child::processing-instruction() |
+        // descendant-or-self::comment()|descendant-or-self::*/attribute::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21400,7 +21410,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines descendant-or-self axis with preceding axis
-        /// descendant-or-self::node()[position()>=3 and position()<=15]/preceding::node(Utils.NavigatorKind kind)
+        /// descendant-or-self::node()[position()>=3 and position()<=15]/preceding::node(Utils.NavigatorKind
+        // kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -22414,7 +22425,9 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines descendant-or-self axis with self axis
-        /// descendant-or-self::node()/self::attribute | descendant-or-self::processing-instruction()/self::comment() | //self::text(Utils.NavigatorKind kind)
+        /// descendant-or-self::node()/self::attribute |
+        // descendant-or-self::processing-instruction()/self::comment() | //self::text(Utils.NavigatorKind
+        // kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -23157,7 +23170,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Combines descendant-or-self axis with parent axis
-        /// descendant-or-self::node() [self::text() or self::comment() or self::@*]/parent::node(Utils.NavigatorKind kind)
+        /// descendant-or-self::node() [self::text() or self::comment() or
+        // self::@*]/parent::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -42975,7 +42989,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// descendant::*/self::node()[self::* and not(self::comment()) or self::text() or self::processing-instruction()]
+        /// descendant::*/self::node()[self::* and not(self::comment()) or self::text() or
+        // self::processing-instruction()]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -55069,7 +55084,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore::*[name()!='book' and name()!= 'magazine'])/descendant::title
+        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore::*[name()!='book' and name()!=
+        // 'magazine'])/descendant::title
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -55090,7 +55106,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// Copy of (bookstore/book |/bookstore/magazine | bookstore | bookstore/*[name()!='book' and name()!= 'magazine'])/descendant::title
+        /// Copy of (bookstore/book |/bookstore/magazine | bookstore | bookstore/*[name()!='book' and
+        // name()!= 'magazine'])/descendant::title
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -55219,7 +55236,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/descendant-or-self::title
+        /// (bookstore/book |/bookstore/magazine | bookstore |
+        // bookstore//*//title)/descendant-or-self::title
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -55348,7 +55366,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/ancestor::node(Utils.NavigatorKind kind)
+        /// (bookstore/book |/bookstore/magazine | bookstore |
+        // bookstore//*//title)/ancestor::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -55686,7 +55705,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/following::node(Utils.NavigatorKind kind)
+        /// (bookstore/book |/bookstore/magazine | bookstore |
+        // bookstore//*//title)/following::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -57416,7 +57436,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/following-sibling::node(Utils.NavigatorKind kind)
+        /// (bookstore/book |/bookstore/magazine | bookstore |
+        // bookstore//*//title)/following-sibling::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -57924,7 +57945,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/preceding::node(Utils.NavigatorKind kind)
+        /// (bookstore/book |/bookstore/magazine | bookstore |
+        // bookstore//*//title)/preceding::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -59920,7 +59942,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/descendant::* | ancestor::*
+        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/descendant::* |
+        // ancestor::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -61031,7 +61054,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)[descendant-or-self::title]
+        /// (bookstore/book |/bookstore/magazine | bookstore |
+        // bookstore//*//title)[descendant-or-self::title]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -61289,7 +61313,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 71209
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/node()[ancestor::title | descendant::title]
+        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/node()[ancestor::title |
+        // descendant::title]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -62575,7 +62600,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// (/comment() | /bookstore/book[2]/author[1]/publication/text())/following-sibling::node(Utils.NavigatorKind kind)
+        /// (/comment() |
+        // /bookstore/book[2]/author[1]/publication/text())/following-sibling::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -62639,7 +62665,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// (/comment() | /bookstore/book[2]/author[1]/publication/text())/following-sibling::node(Utils.NavigatorKind kind)
+        /// (/comment() |
+        // /bookstore/book[2]/author[1]/publication/text())/following-sibling::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -62718,7 +62745,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Regression case for 72027
-        /// (bookstore/book |/bookstore/magazine | bookstore | bookstore//*//title)/following::node(Utils.NavigatorKind kind)
+        /// (bookstore/book |/bookstore/magazine | bookstore |
+        // bookstore//*//title)/following::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]

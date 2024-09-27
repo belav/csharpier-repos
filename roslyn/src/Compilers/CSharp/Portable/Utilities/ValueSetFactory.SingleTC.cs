@@ -22,9 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             float INumericTC<float>.Zero => 0;
 
             /// <summary>
-            /// The implementation of Next depends critically on the internal representation of an IEEE floating-point
+            /// The implementation of Next depends critically on the internal representation of an IEEE
+            // floating-point
             /// number.  Every bit sequence between the representation of 0 and MaxValue represents a distinct
-            /// value, and the integer representations are ordered by value the same as the floating-point numbers they represent.
+            /// value, and the integer representations are ordered by value the same as the floating-point
+            // numbers they represent.
             /// </summary>
             public float Next(float value)
             {
@@ -89,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ConstantValue.Create(value);
 
             /// <summary>
-            /// Produce a string for testing purposes that is likely to be the same independent of platform and locale.
+            /// Produce a string for testing purposes that is likely to be the same independent of platform and
+            // locale.
             /// </summary>
             string INumericTC<float>.ToString(float value) =>
                 float.IsNaN(value) ? "NaN"

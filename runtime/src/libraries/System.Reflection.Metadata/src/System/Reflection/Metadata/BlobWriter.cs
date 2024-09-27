@@ -77,7 +77,8 @@ namespace System.Reflection.Metadata
             return ToArray(0, Offset);
         }
 
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
         public byte[] ToArray(int start, int byteCount)
         {
             BlobUtilities.ValidateRange(Length, start, byteCount, nameof(byteCount));
@@ -90,7 +91,8 @@ namespace System.Reflection.Metadata
             return ToImmutableArray(0, Offset);
         }
 
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
         public ImmutableArray<byte> ToImmutableArray(int start, int byteCount)
         {
             BlobUtilities.ValidateRange(Length, start, byteCount, nameof(byteCount));
@@ -112,7 +114,8 @@ namespace System.Reflection.Metadata
             return position;
         }
 
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
         public void WriteBytes(byte value, int byteCount)
         {
             if (byteCount < 0)
@@ -125,7 +128,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
         public unsafe void WriteBytes(byte* buffer, int byteCount)
         {
             if (buffer is null)
@@ -159,7 +163,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
         public int WriteBytes(Stream source, int byteCount)
         {
             if (source is null)
@@ -190,7 +195,9 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the <paramref name="buffer"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the <paramref
+        // name="buffer"/>.</exception>
         public void WriteBytes(ImmutableArray<byte> buffer, int start, int byteCount)
         {
             if (buffer.IsDefault)
@@ -215,7 +222,9 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the <paramref name="buffer"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the <paramref
+        // name="buffer"/>.</exception>
         public void WriteBytes(byte[] buffer, int start, int byteCount)
         {
             if (buffer is null)
@@ -343,7 +352,8 @@ namespace System.Reflection.Metadata
         /// Writes a reference to a heap (heap offset) or a table (row number).
         /// </summary>
         /// <param name="reference">Heap offset or table row number.</param>
-        /// <param name="isSmall">True to encode the reference as 16-bit integer, false to encode as 32-bit integer.</param>
+        /// <param name="isSmall">True to encode the reference as 16-bit integer, false to encode as 32-bit
+        // integer.</param>
         public void WriteReference(int reference, bool isSmall)
         {
             // This code is a very hot path, hence we don't check if the reference actually fits 2B.
@@ -409,7 +419,8 @@ namespace System.Reflection.Metadata
         /// The string is UTF-8 encoded and prefixed by the its size in bytes.
         /// Null string is represented as a single byte 0xFF.
         /// </remarks>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteSerializedString(string? str)
         {
             if (str == null)
@@ -427,11 +438,15 @@ namespace System.Reflection.Metadata
         /// <remarks>
         /// The string is UTF-16 encoded and prefixed by the its size in bytes.
         ///
-        /// This final byte holds the value 1 if and only if any UTF-16 character within the string has any bit set in its top byte,
-        /// or its low byte is any of the following: 0x01-0x08, 0x0E-0x1F, 0x27, 0x2D, 0x7F. Otherwise, it holds 0.
-        /// The 1 signifies Unicode characters that require handling beyond that normally provided for 8-bit encoding sets.
+        /// This final byte holds the value 1 if and only if any UTF-16 character within the string has any
+        // bit set in its top byte,
+        /// or its low byte is any of the following: 0x01-0x08, 0x0E-0x1F, 0x27, 0x2D, 0x7F. Otherwise, it
+        // holds 0.
+        /// The 1 signifies Unicode characters that require handling beyond that normally provided for 8-bit
+        // encoding sets.
         /// </remarks>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUserString(string value)
         {
             if (value is null)
@@ -482,26 +497,34 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// Implements compressed signed integer encoding as defined by ECMA-335-II chapter 23.2: Blobs and signatures.
+        /// Implements compressed signed integer encoding as defined by ECMA-335-II chapter 23.2: Blobs and
+        // signatures.
         /// </summary>
         /// <remarks>
-        /// If the value lies between -64 (0xFFFFFFC0) and 63 (0x3F), inclusive, encode as a one-byte integer:
+        /// If the value lies between -64 (0xFFFFFFC0) and 63 (0x3F), inclusive, encode as a one-byte
+        // integer:
         /// bit 7 clear, value bits 5 through 0 held in bits 6 through 1, sign bit (value bit 31) in bit 0.
         ///
-        /// If the value lies between -8192 (0xFFFFE000) and 8191 (0x1FFF), inclusive, encode as a two-byte integer:
-        /// 15 set, bit 14 clear, value bits 12 through 0 held in bits 13 through 1, sign bit(value bit 31) in bit 0.
+        /// If the value lies between -8192 (0xFFFFE000) and 8191 (0x1FFF), inclusive, encode as a two-byte
+        // integer:
+        /// 15 set, bit 14 clear, value bits 12 through 0 held in bits 13 through 1, sign bit(value bit 31)
+        // in bit 0.
         ///
-        /// If the value lies between -268435456 (0xF000000) and 268435455 (0x0FFFFFFF), inclusive, encode as a four-byte integer:
-        /// 31 set, 30 set, bit 29 clear, value bits 27 through 0 held in bits 28 through 1, sign bit(value bit 31) in bit 0.
+        /// If the value lies between -268435456 (0xF000000) and 268435455 (0x0FFFFFFF), inclusive, encode
+        // as a four-byte integer:
+        /// 31 set, 30 set, bit 29 clear, value bits 27 through 0 held in bits 28 through 1, sign bit(value
+        // bit 31) in bit 0.
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a compressed signed integer.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a
+        // compressed signed integer.</exception>
         public void WriteCompressedSignedInteger(int value)
         {
             BlobWriterImpl.WriteCompressedSignedInteger(ref this, value);
         }
 
         /// <summary>
-        /// Implements compressed unsigned integer encoding as defined by ECMA-335-II chapter 23.2: Blobs and signatures.
+        /// Implements compressed unsigned integer encoding as defined by ECMA-335-II chapter 23.2: Blobs
+        // and signatures.
         /// </summary>
         /// <remarks>
         /// If the value lies between 0 (0x00) and 127 (0x7F), inclusive,
@@ -510,9 +533,11 @@ namespace System.Reflection.Metadata
         /// If the value lies between 28 (0x80) and 214 - 1 (0x3FFF), inclusive,
         /// encode as a 2-byte integer with bit 15 set, bit 14 clear(value held in bits 13 through 0).
         ///
-        /// Otherwise, encode as a 4-byte integer, with bit 31 set, bit 30 set, bit 29 clear (value held in bits 28 through 0).
+        /// Otherwise, encode as a 4-byte integer, with bit 31 set, bit 30 set, bit 29 clear (value held in
+        // bits 28 through 0).
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a compressed unsigned integer.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a
+        // compressed unsigned integer.</exception>
         public void WriteCompressedInteger(int value)
         {
             BlobWriterImpl.WriteCompressedInteger(ref this, unchecked((uint)value));
@@ -521,7 +546,8 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Writes a constant value (see ECMA-335 Partition II section 22.9) at the current position.
         /// </summary>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is not of a constant type.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is not of a constant
+        // type.</exception>
         public void WriteConstant(object? value)
         {
             BlobWriterImpl.WriteConstant(ref this, value);

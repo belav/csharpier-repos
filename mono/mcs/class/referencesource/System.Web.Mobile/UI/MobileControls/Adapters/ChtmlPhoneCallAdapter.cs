@@ -14,8 +14,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * ChtmlPhoneCallAdapter class.
-     */
+    * ChtmlPhoneCallAdapter class.
+    */
     /// <include file='doc\ChtmlPhoneCallAdapter.uex' path='docs/doc[@for="ChtmlPhoneCallAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -30,7 +30,8 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class ChtmlPhoneCallAdapter : HtmlPhoneCallAdapter
     {
-        /// <include file='doc\ChtmlPhoneCallAdapter.uex' path='docs/doc[@for="ChtmlPhoneCallAdapter.AddAttributes"]/*' />
+        /// <include file='doc\ChtmlPhoneCallAdapter.uex'
+        // path='docs/doc[@for="ChtmlPhoneCallAdapter.AddAttributes"]/*' />
         protected override void AddAttributes(HtmlMobileTextWriter writer)
         {
             AddAccesskeyAttribute(writer);

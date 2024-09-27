@@ -49,10 +49,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the metadata module the location is associated with or <c>null</c> if the module is not available.
+        /// Returns the metadata module the location is associated with or <c>null</c> if the module is not
+        // available.
         /// </summary>
         /// <remarks>
-        /// Might return null even if <see cref="IsInMetadata"/> returns true. The module symbol might not be available anymore,
+        /// Might return null even if <see cref="IsInMetadata"/> returns true. The module symbol might not
+        // be available anymore,
         /// for example, if the location is serialized and deserialized.
         /// </remarks>
         public IModuleSymbol? MetadataModule
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis
         /// The location within the syntax tree that this location is associated with.
         /// </summary>
         /// <remarks>
-        /// If <see cref="IsInSource"/> returns False this method returns an empty <see cref="TextSpan"/> which starts at position 0.
+        /// If <see cref="IsInSource"/> returns False this method returns an empty <see cref="TextSpan"/>
+        // which starts at position 0.
         /// </remarks>
         public virtual TextSpan SourceSpan
         {
@@ -82,7 +85,8 @@ namespace Microsoft.CodeAnalysis
         /// <returns>
         /// <see cref="FileLinePositionSpan"/> that contains path, line and column information.
         ///
-        /// Returns an invalid span (see <see cref="FileLinePositionSpan.IsValid"/>) if the information is not available.
+        /// Returns an invalid span (see <see cref="FileLinePositionSpan.IsValid"/>) if the information is
+        // not available.
         ///
         /// The values are not affected by line mapping directives (#line in C# or #ExternalSource in VB).
         /// </returns>
@@ -92,7 +96,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the location in terms of path, line and column after applying source line mapping directives
+        /// Gets the location in terms of path, line and column after applying source line mapping
+        // directives
         /// (<c>#line</c> in C# or <c>#ExternalSource</c> in VB).
         /// </summary>
         /// <returns>
@@ -212,7 +217,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates an instance of a <see cref="Location"/> for a span in a file with a mapped file and span.
+        /// Creates an instance of a <see cref="Location"/> for a span in a file with a mapped file and
+        // span.
         /// </summary>
         public static Location Create(
             string filePath,

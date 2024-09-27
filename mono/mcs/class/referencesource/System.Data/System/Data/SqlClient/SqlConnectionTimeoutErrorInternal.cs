@@ -59,7 +59,8 @@ namespace System.Data.SqlClient
 
         internal void StopCapture()
         {
-            //Debug.Assert(swDuration.IsRunning == true, "The stop opertaion of the stopwatch cannot be called when it is not running.");
+            //Debug.Assert(swDuration.IsRunning == true, "The stop opertaion of the stopwatch cannot be called
+            // when it is not running.");
             if (swDuration.IsRunning == true)
                 swDuration.Stop();
         }
@@ -107,7 +108,8 @@ namespace System.Data.SqlClient
 
             if (currentSourceType == SqlConnectionInternalSourceType.RoutingDestination)
             {
-                // When we get routed, save the current phase durations so that we can use them in the error message later
+                // When we get routed, save the current phase durations so that we can use them in the error message
+                // later
                 Debug.Assert(
                     currentPhase == SqlConnectionTimeoutErrorPhase.PostLogin,
                     "Should not be switching to the routing destination until Post Login is completed"
@@ -287,7 +289,8 @@ namespace System.Data.SqlClient
                 && (currentPhase != SqlConnectionTimeoutErrorPhase.Complete)
             )
             {
-                // NOTE: In case of a failover scenario, add a string that this failure occured as part of the primary or secondary server
+                // NOTE: In case of a failover scenario, add a string that this failure occured as part of the
+                // primary or secondary server
                 if (isFailoverScenario)
                 {
                     errorBuilder.Append("  ");

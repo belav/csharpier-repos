@@ -13,26 +13,26 @@ using TypeNameFormatter;
 
 namespace Moq
 {
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-        internal static class MatcherFactory
-    After:
-        static class MatcherFactory
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+internal static class MatcherFactory
+After:
+static class MatcherFactory
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-        internal static class MatcherFactory
-    After:
-        static class MatcherFactory
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+internal static class MatcherFactory
+After:
+static class MatcherFactory
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-        internal static class MatcherFactory
-    After:
-        static class MatcherFactory
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+internal static class MatcherFactory
+After:
+static class MatcherFactory
+*/
     static class MatcherFactory
     {
         public static Pair<IMatcher[], Expression[]> CreateMatchers(
@@ -184,8 +184,10 @@ namespace Moq
             // expects, say, a double, a Convert node will be on
             // the expression.
             //
-            // Another case is VB.NET explicitly upcasting generic type parameters to the type they're constrained to,
-            // in places where the constrained-to type is expected. Say you have a parameter with static type `TBase`,
+            // Another case is VB.NET explicitly upcasting generic type parameters to the type they're
+            // constrained to,
+            // in places where the constrained-to type is expected. Say you have a parameter with static type
+            // `TBase`,
             // and you're passing `It.IsAny<T>()` where `T : TBase`. VB.NET will then transform this call to
             // `(TBase)(object)It.IsAny<T>()`.
             var originalExpression = expression;

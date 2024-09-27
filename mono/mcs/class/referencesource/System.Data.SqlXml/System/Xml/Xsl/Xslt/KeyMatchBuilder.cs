@@ -55,7 +55,8 @@ namespace System.Xml.Xsl.Xslt
             return result;
         }
 
-        // -------------------------------------- GetPredicateBuilder() ---------------------------------------
+        // -------------------------------------- GetPredicateBuilder()
+        // ---------------------------------------
 
         public virtual IXPathBuilder<QilNode> GetPredicateBuilder(QilNode ctx)
         {
@@ -101,7 +102,8 @@ namespace System.Xml.Xsl.Xslt
             }
 
             // Filers that travers Content being converted to global travers:
-            // Filter($j= ... Filter($i = Content(fixup), ...))  -> Filter($j= ... Filter($i = Loop($j = DesendentOrSelf(Root(fixup)), Content($j), ...)))
+            // Filter($j= ... Filter($i = Content(fixup), ...))  -> Filter($j= ... Filter($i = Loop($j =
+            // DesendentOrSelf(Root(fixup)), Content($j), ...)))
             protected override QilNode VisitLoop(QilLoop n)
             {
                 if (

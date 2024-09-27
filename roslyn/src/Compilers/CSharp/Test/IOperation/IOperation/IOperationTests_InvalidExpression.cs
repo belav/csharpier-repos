@@ -175,7 +175,9 @@ IVariableDeclaratorOperation (Symbol: ? y) (OperationKind.VariableDeclarator, Ty
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1061: 'Program' does not contain a definition for 'MissingField' and no extension method 'MissingField' accepting a first argument of type 'Program' could be found (are you missing a using directive or an assembly reference?)
+                // CS1061: 'Program' does not contain a definition for 'MissingField' and no extension method
+                // 'MissingField' accepting a first argument of type 'Program' could be found (are you missing a using
+                // directive or an assembly reference?)
                 //         var y /*<bind>*/= x.MissingField/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "MissingField")
                     .WithArguments("Program", "MissingField")
@@ -583,7 +585,8 @@ IArrayInitializerOperation (2 elements) (OperationKind.ArrayInitializer, Type: n
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0623: Array initializers can only be used in a variable or field initializer. Try using a new expression instead.
+                // CS0623: Array initializers can only be used in a variable or field initializer. Try using a new
+                // expression instead.
                 //         var x = new int[2, 2] /*<bind>*/{ { { 1, 1 } }, { 2, 2 } }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ArrayInitInBadPlace, "{ 1, 1 }").WithLocation(6, 45),
                 // CS0847: An array initializer of length '2' is expected
@@ -638,7 +641,8 @@ IArrayCreationOperation (OperationKind.ArrayCreation, Type: X[], IsInvalid) (Syn
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or an assembly reference?)
+                // CS0246: The type or namespace name 'X' could not be found (are you missing a using directive or
+                // an assembly reference?)
                 //         var x = /*<bind>*/new X[Program] { { 1 } }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "X")
                     .WithArguments("X")
@@ -648,7 +652,8 @@ IArrayCreationOperation (OperationKind.ArrayCreation, Type: X[], IsInvalid) (Syn
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "Program")
                     .WithArguments("Program", "type")
                     .WithLocation(6, 33),
-                // CS0623: Array initializers can only be used in a variable or field initializer. Try using a new expression instead.
+                // CS0623: Array initializers can only be used in a variable or field initializer. Try using a new
+                // expression instead.
                 //         var x = /*<bind>*/new X[Program] { { 1 } }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ArrayInitInBadPlace, "{ 1 }").WithLocation(6, 44),
             };

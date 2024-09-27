@@ -62,7 +62,8 @@ namespace System.ServiceModel.Syndication
         public AtomPub10ServiceDocumentFormatter(ServiceDocument documentToWrite)
             : base(documentToWrite)
         {
-            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base class
+            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base
+            // class
             this.maxExtensionSize = int.MaxValue;
             preserveAttributeExtensions = true;
             preserveElementExtensions = true;

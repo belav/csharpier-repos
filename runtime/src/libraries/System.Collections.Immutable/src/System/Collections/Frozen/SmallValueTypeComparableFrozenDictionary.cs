@@ -8,12 +8,17 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides a frozen dictionary to use when the key is a value type, the default comparer is used, and the item count is small.</summary>
+    /// <summary>Provides a frozen dictionary to use when the key is a value type, the default comparer
+    // is used, and the item count is small.</summary>
     /// <remarks>
-    /// While not constrained in this manner, the <typeparamref name="TKey"/> must be an <see cref="IComparable{T}"/>.
-    /// This implementation is only used for a set of types that have a known-good <see cref="IComparable{T}"/> implementation; it's not
-    /// used for an <see cref="IComparable{T}"/> as we can't know for sure whether it's valid, e.g. if the TKey is a ValueTuple`2, it itself
-    /// is comparable, but its items might not be such that trying to compare it will result in exception.
+    /// While not constrained in this manner, the <typeparamref name="TKey"/> must be an <see
+    // cref="IComparable{T}"/>.
+    /// This implementation is only used for a set of types that have a known-good <see
+    // cref="IComparable{T}"/> implementation; it's not
+    /// used for an <see cref="IComparable{T}"/> as we can't know for sure whether it's valid, e.g. if
+    // the TKey is a ValueTuple`2, it itself
+    /// is comparable, but its items might not be such that trying to compare it will result in
+    // exception.
     /// </remarks>
     internal sealed class SmallValueTypeComparableFrozenDictionary<TKey, TValue>
         : FrozenDictionary<TKey, TValue>

@@ -192,7 +192,8 @@ namespace System.Web.UI.WebControls
             if (Page != null && !_pagePreLoadFired && ViewState[DataBoundViewStateKey] == null)
             {
                 // If the control was added after PagePreLoad, we still need to databind it because it missed its
-                // first change in PagePreLoad.  If this control was created by a call to a parent control's DataBind
+                // first change in PagePreLoad.  If this control was created by a call to a parent control's
+                // DataBind
                 // in Page_Load (with is relatively common), this control will already have been databound even
                 // though pagePreLoad never fired and the page isn't a postback.
                 if (!Page.IsPostBack)
@@ -201,7 +202,8 @@ namespace System.Web.UI.WebControls
                 }
                 // If the control was added to the page after page.PreLoad, we'll never get the event and we'll
                 // never databind the control.  So if we're catching up and Load happens but PreLoad never happened,
-                // call DataBind.  This may make the control get databound twice if the user called DataBind on the control
+                // call DataBind.  This may make the control get databound twice if the user called DataBind on the
+                // control
                 // directly in Page.OnLoad, but better to bind twice than never to bind at all.
                 else if (IsViewStateEnabled)
                 {
@@ -245,7 +247,8 @@ namespace System.Web.UI.WebControls
         protected internal virtual void PerformDataBinding() { }
 
         /// <summary>
-        ///  Issues an asynchronous request for data to the data source using the arguments from CreateDataSourceSelectArguments.
+        ///  Issues an asynchronous request for data to the data source using the arguments from
+        // CreateDataSourceSelectArguments.
         /// </summary>
         protected override void PerformSelect()
         {

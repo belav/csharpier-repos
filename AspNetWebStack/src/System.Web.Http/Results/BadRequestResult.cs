@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net;
@@ -10,7 +11,8 @@ using System.Threading.Tasks;
 namespace System.Web.Http.Results
 {
     /// <summary>
-    /// Represents an action result that returns an empty <see cref="HttpStatusCode.BadRequest"/> response.
+    /// Represents an action result that returns an empty <see cref="HttpStatusCode.BadRequest"/>
+    // response.
     /// </summary>
     public class BadRequestResult : IHttpActionResult
     {
@@ -22,7 +24,8 @@ namespace System.Web.Http.Results
             : this(new StatusCodeResult.DirectDependencyProvider(request)) { }
 
         /// <summary>Initializes a new instance of the <see cref="BadRequestResult"/> class.</summary>
-        /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
+        /// <param name="controller">The controller from which to obtain the dependencies needed for
+        // execution.</param>
         public BadRequestResult(ApiController controller)
             : this(new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
 

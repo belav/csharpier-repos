@@ -108,7 +108,8 @@ namespace Roslyn.Test.Utilities
         }
 
         /// <summary>
-        /// Emit all of the references which are not directly or indirectly a <see cref="Compilation"/> value.
+        /// Emit all of the references which are not directly or indirectly a <see cref="Compilation"/>
+        // value.
         /// </summary>
         internal static void EmitReferences(
             Compilation compilation,
@@ -117,7 +118,8 @@ namespace Roslyn.Test.Utilities
             AssemblyIdentity corLibIdentity
         )
         {
-            // NOTE: specifically don't need to consider previous submissions since they will always be compilations.
+            // NOTE: specifically don't need to consider previous submissions since they will always be
+            // compilations.
             foreach (var metadataReference in compilation.References)
             {
                 if (metadataReference is CompilationReference)
@@ -234,8 +236,10 @@ namespace Roslyn.Test.Utilities
                 .GetSpecialType(SpecialType.System_Object)
                 .ContainingAssembly.Identity;
 
-            // A Compilation can appear multiple times in a dependency graph as both a Compilation and as a MetadataReference
-            // value.  Iterate the Compilations eagerly so they are always emitted directly and later references can re-use
+            // A Compilation can appear multiple times in a dependency graph as both a Compilation and as a
+            // MetadataReference
+            // value.  Iterate the Compilations eagerly so they are always emitted directly and later references
+            // can re-use
             // the value.  This gives better, and consistent, diagnostic information.
             var referencedCompilations = FindReferencedCompilations(compilation);
             var fullNameSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);

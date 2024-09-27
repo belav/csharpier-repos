@@ -23,12 +23,15 @@ namespace System.Data.Objects.ELinq
 
     /// <summary>
     /// Determines which leaves of a LINQ expression tree should be evaluated locally before
-    /// sending a query to the store. These sub-expressions may map to query parameters (e.g. local variables),
+    /// sending a query to the store. These sub-expressions may map to query parameters (e.g. local
+    // variables),
     /// to constants (e.g. literals 'new DateTime(2008, 1, 1)') or query sub-expression
     /// (e.g. 'context.Products'). Parameter expressions are replaced with QueryParameterExpression
-    /// nodes. All other elements are swapped in place with either expanded expressions (for sub-queries)
+    /// nodes. All other elements are swapped in place with either expanded expressions (for
+    // sub-queries)
     /// or constants. Where the expression includes mutable state that may influence the translation
-    /// to a query, a Func(Of Boolean) delegate is returned indicating when a recompilation is necessary.
+    /// to a query, a Func(Of Boolean) delegate is returned indicating when a recompilation is
+    // necessary.
     /// </summary>
     internal sealed class Funcletizer
     {
@@ -166,7 +169,8 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Replaces context parameter (e.g. 'ctx' in CompiledQuery.Compile(ctx => ctx.Products)) with constant
+        /// Replaces context parameter (e.g. 'ctx' in CompiledQuery.Compile(ctx => ctx.Products)) with
+        // constant
         /// containing the object context.
         /// </summary>
         private Expression ReplaceRootContextParameter(Expression expression)
@@ -494,7 +498,8 @@ namespace System.Data.Objects.ELinq
 
                 if (parameterExp.Type.Equals(expression.Type))
                 {
-                    // If the expression type is the same as the parameter type, indicate that the parameter type is not valid.
+                    // If the expression type is the same as the parameter type, indicate that the parameter type is not
+                    // valid.
                     return EntityUtil.NotSupported(
                         Strings.CompiledELinq_UnsupportedNamedParameterType(
                             parameterExp.Name,
@@ -504,7 +509,8 @@ namespace System.Data.Objects.ELinq
                 }
                 else
                 {
-                    // Otherwise, indicate that using the specified parameter to produce a value of the expression's type is not supported in compiled query
+                    // Otherwise, indicate that using the specified parameter to produce a value of the expression's
+                    // type is not supported in compiled query
                     return EntityUtil.NotSupported(
                         Strings.CompiledELinq_UnsupportedNamedParameterUseAsType(
                             parameterExp.Name,

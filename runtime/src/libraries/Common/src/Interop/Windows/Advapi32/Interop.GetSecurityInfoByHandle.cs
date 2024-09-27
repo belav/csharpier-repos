@@ -11,8 +11,8 @@ internal static partial class Interop
         [LibraryImport(Interop.Libraries.Advapi32, EntryPoint = "GetSecurityInfo")]
         internal static unsafe partial uint GetSecurityInfoByHandle(
             SafeHandle handle,
-            /*DWORD*/uint objectType,
-            /*DWORD*/uint securityInformation,
+/*DWORD*/uint objectType,
+/*DWORD*/uint securityInformation,
             IntPtr* sidOwner,
             IntPtr* sidGroup,
             IntPtr* dacl,

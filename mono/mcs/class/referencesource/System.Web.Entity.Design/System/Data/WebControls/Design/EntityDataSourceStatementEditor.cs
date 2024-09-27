@@ -23,7 +23,8 @@ namespace System.Web.UI.Design.WebControls
     {
         private bool EditQueryChangeCallback(object pair)
         {
-            // pair.First is a wrapper that contains the EntityDataSource instance and property name being edited
+            // pair.First is a wrapper that contains the EntityDataSource instance and property name being
+            // edited
             // pair.Second contains the value of the property being edited
             ITypeDescriptorContext context = (ITypeDescriptorContext)((Pair)pair).First;
             string value = (string)((Pair)pair).Second;
@@ -64,7 +65,8 @@ namespace System.Web.UI.Design.WebControls
             return value;
         }
 
-        // Determines if the specified property is one that has an associated "AutoGenerateXXXClause" property
+        // Determines if the specified property is one that has an associated "AutoGenerateXXXClause"
+        // property
         private static bool GetAutoGen(
             string operation,
             EntityDataSourceDesigner entityDataSourceDesigner
@@ -100,7 +102,8 @@ namespace System.Web.UI.Design.WebControls
             return null;
         }
 
-        // Gets the label text or accessible name to display over the textbox for editing the specified property name
+        // Gets the label text or accessible name to display over the textbox for editing the specified
+        // property name
         private static string GetStatementLabel(string propertyName, bool accessible)
         {
             switch (propertyName)

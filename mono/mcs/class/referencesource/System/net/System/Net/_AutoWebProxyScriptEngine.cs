@@ -26,7 +26,8 @@ namespace System.Net
     // This class (and its helper classes implementing IWebRequestFinder interface) are responsible for
     // determining the location of the PAC file, download and execute it, in order to retrieve proxy
     // information.
-    // This class also monitors the Registry and re-reads proxy configuration settings, if the corresponding
+    // This class also monitors the Registry and re-reads proxy configuration settings, if the
+    // corresponding
     // Registry values change.
     internal class AutoWebProxyScriptEngine
     {
@@ -83,7 +84,8 @@ namespace System.Net
             webProxyFinder = new HybridWebProxyFinder(this);
         }
 
-        // AutoWebProxyScriptEngine has special abortable locking.  No one should ever lock (this) except the locking helper methods below.
+        // AutoWebProxyScriptEngine has special abortable locking.  No one should ever lock (this) except
+        // the locking helper methods below.
         private static class SyncStatus
         {
             internal const int Unlocked = 0;
@@ -478,7 +480,9 @@ namespace System.Net
                         UnsafeNclNativeMethods.RegistryHelper.KEY_READ,
                         out key
                     );
-                    //GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) + "::ListenForRegistry() RegOpenKeyEx() returned errorCode:" + errorCode + " key:" + key.DangerousGetHandle().ToString("x"));
+                    //GlobalLog.Print("AutoWebProxyScriptEngine#" + ValidationHelper.HashString(this) +
+                    // "::ListenForRegistry() RegOpenKeyEx() returned errorCode:" + errorCode + " key:" +
+                    // key.DangerousGetHandle().ToString("x"));
                 }
                 if (errorCode == 0)
                 {
@@ -565,8 +569,10 @@ namespace System.Net
                     SR.GetString(SR.net_log_proxy_update_due_to_ip_config_change)
                 );
 
-            // Get the new connectoid/detector.  Only do this after detecting a change, to avoid ----s with other people detecting changes.
-            // (We don't want to end up using a detector/connectoid that doesn't match what we read from the registry.)
+            // Get the new connectoid/detector.  Only do this after detecting a change, to avoid ----s with
+            // other people detecting changes.
+            // (We don't want to end up using a detector/connectoid that doesn't match what we read from the
+            // registry.)
             m_AutoDetector = AutoDetector.CurrentAutoDetector;
 
             if (m_UseRegistry)

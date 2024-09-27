@@ -297,7 +297,8 @@ namespace System.Collections.Generic
     internal sealed partial class GenericArraySortHelper<T>
         where T : IComparable<T>
     {
-        // Do not add a constructor to this class because ArraySortHelper<T>.CreateSortHelper will not execute it
+        // Do not add a constructor to this class because ArraySortHelper<T>.CreateSortHelper will not
+        // execute it
 
         #region IArraySortHelper<T> Members
 
@@ -422,7 +423,8 @@ namespace System.Collections.Generic
             return ~lo;
         }
 
-        /// <summary>Swaps the values in the two references if the first is greater than the second.</summary>
+        /// <summary>Swaps the values in the two references if the first is greater than the
+        // second.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void SwapIfGreater(ref T i, ref T j)
         {
@@ -432,7 +434,8 @@ namespace System.Collections.Generic
             }
         }
 
-        /// <summary>Swaps the values in the two references, regardless of whether the two references are the same.</summary>
+        /// <summary>Swaps the values in the two references, regardless of whether the two references are
+        // the same.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void Swap(ref T i, ref T j)
         {
@@ -497,7 +500,8 @@ namespace System.Collections.Generic
         {
             Debug.Assert(keys.Length >= Array.IntrosortSizeThreshold);
 
-            // Use median-of-three to select a pivot. Grab a reference to the 0th, Length-1th, and Length/2th elements, and sort them.
+            // Use median-of-three to select a pivot. Grab a reference to the 0th, Length-1th, and Length/2th
+            // elements, and sort them.
             ref T zeroRef = ref MemoryMarshal.GetReference(keys);
             ref T lastRef = ref Unsafe.Add(ref zeroRef, keys.Length - 1);
             ref T middleRef = ref Unsafe.Add(ref zeroRef, (keys.Length - 1) >> 1);
@@ -628,12 +632,16 @@ namespace System.Collections.Generic
         }
 
         // - These methods exist for use in sorting, where the additional operations present in
-        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial overhead,
+        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial
+        // overhead,
         //   in particular for floating point where the CompareTo methods need to factor in NaNs.
-        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting routines
-        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being sorted
+        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting
+        // routines
+        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being
+        // sorted
         //   by moving them all to the front first and then sorting the rest.
-        // - These are duplicated here rather than being on a helper type due to current limitations around generic inlining.
+        // - These are duplicated here rather than being on a helper type due to current limitations around
+        // generic inlining.
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool LessThan(ref T left, ref T right)
@@ -1222,12 +1230,16 @@ namespace System.Collections.Generic
         }
 
         // - These methods exist for use in sorting, where the additional operations present in
-        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial overhead,
+        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial
+        // overhead,
         //   in particular for floating point where the CompareTo methods need to factor in NaNs.
-        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting routines
-        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being sorted
+        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting
+        // routines
+        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being
+        // sorted
         //   by moving them all to the front first and then sorting the rest.
-        // - These are duplicated here rather than being on a helper type due to current limitations around generic inlining.
+        // - These are duplicated here rather than being on a helper type due to current limitations around
+        // generic inlining.
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool LessThan(ref TKey left, ref TKey right)

@@ -11,27 +11,39 @@ using ErrorCode = Interop.NCrypt.ErrorCode;
 namespace Microsoft.Win32.SafeHandles
 {
     /// <summary>
-    ///     Base class for NCrypt handles which need to support being pseudo-duplicated. This class is not for
+    ///     Base class for NCrypt handles which need to support being pseudo-duplicated. This class is
+    // not for
     ///     external use (instead applications should consume the concrete subclasses of this class).
     /// </summary>
     /// <remarks>
     ///     Since NCrypt handles do not have a native DuplicateHandle type call, we need to do manual
-    ///     reference counting in managed code whenever we hand out an extra reference to one of these handles.
-    ///     This class wraps up the logic to correctly duplicate and free these handles to simulate a native
+    ///     reference counting in managed code whenever we hand out an extra reference to one of these
+    // handles.
+    ///     This class wraps up the logic to correctly duplicate and free these handles to simulate a
+    // native
     ///     duplication.
     ///
     ///     Each open handle object can be thought of as being in one of three states:
-    ///        1. Owner     - created via the marshaler, traditional style safe handle. Notably, only one owner
+    ///        1. Owner     - created via the marshaler, traditional style safe handle. Notably, only
+    // one owner
     ///                       handle exists for a given native handle.
-    ///        2. Duplicate - points at a handle in the Holder state. Releasing a handle in the duplicate state
-    ///                       results only in decrementing the reference count of the holder, not in a release
+    ///        2. Duplicate - points at a handle in the Holder state. Releasing a handle in the
+    // duplicate state
+    ///                       results only in decrementing the reference count of the holder, not in a
+    // release
     ///                       of the native handle.
-    ///        3. Holder    - holds onto a native handle and is referenced by handles in the duplicate state.
-    ///                       When all duplicate handles are closed, the holder handle releases the native
-    ///                       handle. A holder handle will never be finalized, since this results in a race
-    ///                       between the finalizers of the duplicate handles and the holder handle. Instead,
-    ///                       it relies upon all of the duplicate handles to be finalized and decrement the
-    ///                       ref count to zero.  Instances of a holder handle should never be referenced by
+    ///        3. Holder    - holds onto a native handle and is referenced by handles in the duplicate
+    // state.
+    ///                       When all duplicate handles are closed, the holder handle releases the
+    // native
+    ///                       handle. A holder handle will never be finalized, since this results in a
+    // race
+    ///                       between the finalizers of the duplicate handles and the holder handle.
+    // Instead,
+    ///                       it relies upon all of the duplicate handles to be finalized and decrement
+    // the
+    ///                       ref count to zero.  Instances of a holder handle should never be
+    // referenced by
     ///                       anything but a duplicate handle.
     /// </remarks>
     public abstract class SafeNCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
@@ -58,7 +70,8 @@ namespace Microsoft.Win32.SafeHandles
         private OwnershipState _ownershipState;
 
         /// <summary>
-        ///     If the handle is a Duplicate, this points at the safe handle which actually owns the native handle.
+        ///     If the handle is a Duplicate, this points at the safe handle which actually owns the native
+        // handle.
         /// </summary>
         private SafeNCryptHandle? _holder;
 
@@ -88,7 +101,8 @@ namespace Microsoft.Win32.SafeHandles
             // otherwise Dispose will try to call the underlying Free function.
             SetHandle(handle);
 
-            // But if this handle value IsInvalid then we'll never call ReleaseHandle, which leaves the parent open
+            // But if this handle value IsInvalid then we'll never call ReleaseHandle, which leaves the parent
+            // open
             // forever.  Instead, release such a parent now.
             if (IsInvalid)
             {
@@ -299,15 +313,18 @@ namespace Microsoft.Win32.SafeHandles
         ///     Release the handle
         /// </summary>
         /// <remarks>
-        ///     Similar to duplication, releasing a handle performs different operations based upon the state
+        ///     Similar to duplication, releasing a handle performs different operations based upon the
+        // state
         ///     of the handle.
         ///
-        ///     An instance which was constructed with a parentHandle value will only call DangerousRelease on
+        ///     An instance which was constructed with a parentHandle value will only call DangerousRelease
+        // on
         ///     the parentHandle object. Otherwise the behavior is dictated by the ownership state.
         ///
         ///     * Owner     - Simply call the release P/Invoke method
         ///     * Duplicate - Decrement the reference count of the current holder
-        ///     * Holder    - Call the release P/Invoke. Note that ReleaseHandle on a holder implies a reference
+        ///     * Holder    - Call the release P/Invoke. Note that ReleaseHandle on a holder implies a
+        // reference
         ///                   count of zero.
         /// </remarks>
         protected override bool ReleaseHandle()
@@ -334,7 +351,8 @@ namespace Microsoft.Win32.SafeHandles
         protected abstract bool ReleaseNativeHandle();
 
         /// <summary>
-        ///     Since all NCrypt handles are released the same way, no sense in writing the same code three times.
+        ///     Since all NCrypt handles are released the same way, no sense in writing the same code three
+        // times.
         /// </summary>
         internal bool ReleaseNativeWithNCryptFreeObject()
         {

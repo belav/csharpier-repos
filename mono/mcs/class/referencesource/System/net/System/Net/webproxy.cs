@@ -35,7 +35,8 @@ namespace System.Net
     // 1. web.config/app.config: if available, use settings specified in <system.net><defaultProxy>
     // 2. If the config file doesn't contain proxy settings, read the IE proxy settings
     //
-    // If the IE proxy settings contain invalid settings (e.g. "invalid;host" - note the semicolon), then
+    // If the IE proxy settings contain invalid settings (e.g. "invalid;host" - note the semicolon),
+    // then
     // a FormatException will be thrown.
     [Serializable]
     public class WebProxy : IAutoWebProxy, ISerializable
@@ -536,7 +537,8 @@ namespace System.Net
             if (useRegistry)
             {
                 // just make the proxy advanced, don't populate with any settings
-                // note - this will happen in the context of the user performing the deserialization (their proxy settings get read)
+                // note - this will happen in the context of the user performing the deserialization (their proxy
+                // settings get read)
 #if MONO_FEATURE_CAS
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 #endif
@@ -580,7 +582,8 @@ namespace System.Net
         }
 
         //
-        // FxCop: provide a way for derived classes to access this method even if they reimplement ISerializable.
+        // FxCop: provide a way for derived classes to access this method even if they reimplement
+        // ISerializable.
         //
         [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
         protected virtual void GetObjectData(
@@ -781,7 +784,8 @@ namespace System.Net
                 return false;
             }
 
-            // Returning null in case 'proxies.Count == 0' means, no proxy available (incl. DIRECT), the request is prohibited.
+            // Returning null in case 'proxies.Count == 0' means, no proxy available (incl. DIRECT), the request
+            // is prohibited.
             if (proxies.Count > 0)
             {
                 if (AreAllBypassed(proxies, true))

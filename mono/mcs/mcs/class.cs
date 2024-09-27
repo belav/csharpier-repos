@@ -1030,7 +1030,8 @@ namespace Mono.CSharp
         }
 
         /// <summary>
-        /// Indexer has special handling in constrast to other AddXXX because the name can be driven by IndexerNameAttribute
+        /// Indexer has special handling in constrast to other AddXXX because the name can be driven by
+        // IndexerNameAttribute
         /// </summary>
         public void AddIndexer(Indexer i)
         {

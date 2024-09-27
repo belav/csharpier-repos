@@ -12,7 +12,8 @@ namespace System.IO.Ports.Tests
     public class BaudRate_Property : PortsTest
     {
         //The default ammount of time the a transfer should take at any given baud rate.
-        //The bytes sent should be adjusted to take this ammount of time to transfer at the specified baud rate.
+        //The bytes sent should be adjusted to take this ammount of time to transfer at the specified baud
+        // rate.
         private const int DEFAULT_TIME = 750;
 
         //If the percentage difference between the expected BaudRate and the actual baudrate
@@ -331,7 +332,8 @@ namespace System.IO.Ports.Tests
                 // Note - this was originally com2.ReadBufferSize = numBytesToSend, but
                 // that seems to cause a deadlock with FTDI-based devices where you can't actually
                 // get all the data buffered so you can't read it back
-                // At 115200 we were seeing numBytesToSend = 8640, however, we only get 8627 waiting in the input buffer
+                // At 115200 we were seeing numBytesToSend = 8640, however, we only get 8627 waiting in the input
+                // buffer
                 // this might be an FTDI bug, but it's not a System.Io.SerialPort bug
                 com2.ReadBufferSize = numBytesToSend + 16;
                 com2.BaudRate = com1.BaudRate;

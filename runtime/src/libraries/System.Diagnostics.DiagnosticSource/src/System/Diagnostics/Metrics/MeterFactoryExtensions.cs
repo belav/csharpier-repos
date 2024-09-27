@@ -12,13 +12,16 @@ namespace System.Diagnostics.Metrics
     public static class MeterFactoryExtensions
     {
         /// <summary>
-        /// Creates a <see cref="Meter" /> with the specified <paramref name="name" />, <paramref name="version" />, and <paramref name="tags" />.
+        /// Creates a <see cref="Meter" /> with the specified <paramref name="name" />, <paramref
+        // name="version" />, and <paramref name="tags" />.
         /// </summary>
-        /// <param name="meterFactory">The <see cref="IMeterFactory" /> to use to create the <see cref="Meter" />.</param>
+        /// <param name="meterFactory">The <see cref="IMeterFactory" /> to use to create the <see
+        // cref="Meter" />.</param>
         /// <param name="name">The name of the <see cref="Meter" />.</param>
         /// <param name="version">The version of the <see cref="Meter" />.</param>
         /// <param name="tags">The tags to associate with the <see cref="Meter" />.</param>
-        /// <returns>A <see cref="Meter" /> with the specified <paramref name="name" />, <paramref name="version" />, and <paramref name="tags" />.</returns>
+        /// <returns>A <see cref="Meter" /> with the specified <paramref name="name" />, <paramref
+        // name="version" />, and <paramref name="tags" />.</returns>
         public static Meter Create(
             this IMeterFactory meterFactory,
             string name,

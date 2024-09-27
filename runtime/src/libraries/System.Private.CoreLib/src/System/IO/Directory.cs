@@ -37,18 +37,27 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Creates all directories and subdirectories in the specified path with the specified permissions unless they already exist.
+        /// Creates all directories and subdirectories in the specified path with the specified permissions
+        // unless they already exist.
         /// </summary>
         /// <param name="path">The directory to create.</param>
         /// <param name="unixCreateMode">Unix file mode used to create directories.</param>
-        /// <returns>An object that represents the directory at the specified path. This object is returned regardless of whether a directory at the specified path already exists.</returns>
-        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is a zero-length string, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see langword="null" />.</exception>
-        /// <exception cref="T:System.ArgumentException">The caller attempts to use an invalid file mode.</exception>
-        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.</exception>
-        /// <exception cref="T:System.IO.PathTooLongException">The specified path exceeds the system-defined maximum length.</exception>
+        /// <returns>An object that represents the directory at the specified path. This object is returned
+        // regardless of whether a directory at the specified path already exists.</returns>
+        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is a zero-length string,
+        // or contains one or more invalid characters. You can query for invalid characters by using the <see
+        // cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> is <see
+        // langword="null" />.</exception>
+        /// <exception cref="T:System.ArgumentException">The caller attempts to use an invalid file
+        // mode.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required
+        // permission.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path exceeds the system-defined
+        // maximum length.</exception>
         /// <exception cref="T:System.IO.IOException"><paramref name="path" /> is a file.</exception>
-        /// <exception cref="T:System.IO.DirectoryNotFoundException">A component of the <paramref name="path" /> is not a directory.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">A component of the <paramref
+        // name="path" /> is not a directory.</exception>
         [UnsupportedOSPlatform("windows")]
         public static DirectoryInfo CreateDirectory(string path, UnixFileMode unixCreateMode) =>
             CreateDirectoryCore(path, unixCreateMode);
@@ -56,9 +65,11 @@ namespace System.IO
         /// <summary>
         /// Creates a uniquely-named, empty directory in the current user's temporary directory.
         /// </summary>
-        /// <param name="prefix">An optional string to add to the beginning of the subdirectory name.</param>
+        /// <param name="prefix">An optional string to add to the beginning of the subdirectory
+        // name.</param>
         /// <returns>An object that represents the directory that was created.</returns>
-        /// <exception cref="ArgumentException"><paramref name="prefix" /> contains a directory separator.</exception>
+        /// <exception cref="ArgumentException"><paramref name="prefix" /> contains a directory
+        // separator.</exception>
         /// <exception cref="IOException">A new directory cannot be created.</exception>
         public static unsafe DirectoryInfo CreateTempSubdirectory(string? prefix = null)
         {
@@ -425,18 +436,24 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Creates a directory symbolic link identified by <paramref name="path"/> that points to <paramref name="pathToTarget"/>.
+        /// Creates a directory symbolic link identified by <paramref name="path"/> that points to <paramref
+        // name="pathToTarget"/>.
         /// </summary>
         /// <param name="path">The absolute path where the symbolic link should be created.</param>
         /// <param name="pathToTarget">The target directory of the symbolic link.</param>
-        /// <returns>A <see cref="DirectoryInfo"/> instance that wraps the newly created directory symbolic link.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="path"/> or <paramref name="pathToTarget"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="path"/> or <paramref name="pathToTarget"/> is empty.
+        /// <returns>A <see cref="DirectoryInfo"/> instance that wraps the newly created directory symbolic
+        // link.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="path"/> or <paramref
+        // name="pathToTarget"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="path"/> or <paramref name="pathToTarget"/>
+        // is empty.
         /// -or-
         /// <paramref name="path"/> is not an absolute path.
         /// -or-
-        /// <paramref name="path"/> or <paramref name="pathToTarget"/> contains invalid path characters.</exception>
-        /// <exception cref="IOException">A file or directory already exists in the location of <paramref name="path"/>.
+        /// <paramref name="path"/> or <paramref name="pathToTarget"/> contains invalid path
+        // characters.</exception>
+        /// <exception cref="IOException">A file or directory already exists in the location of <paramref
+        // name="path"/>.
         /// -or-
         /// An I/O error occurred.</exception>
         public static FileSystemInfo CreateSymbolicLink(string path, string pathToTarget)
@@ -452,14 +469,18 @@ namespace System.IO
         /// Gets the target of the specified directory link.
         /// </summary>
         /// <param name="linkPath">The path of the directory link.</param>
-        /// <param name="returnFinalTarget"><see langword="true"/> to follow links to the final target; <see langword="false"/> to return the immediate next link.</param>
-        /// <returns>A <see cref="DirectoryInfo"/> instance if <paramref name="linkPath"/> exists, independently if the target exists or not. <see langword="null"/> if <paramref name="linkPath"/> is not a link.</returns>
+        /// <param name="returnFinalTarget"><see langword="true"/> to follow links to the final target; <see
+        // langword="false"/> to return the immediate next link.</param>
+        /// <returns>A <see cref="DirectoryInfo"/> instance if <paramref name="linkPath"/> exists,
+        // independently if the target exists or not. <see langword="null"/> if <paramref name="linkPath"/> is
+        // not a link.</returns>
         /// <exception cref="IOException">The directory on <paramref name="linkPath"/> does not exist.
         /// -or-
         /// The link's file system entry type is inconsistent with that of its target.
         /// -or-
         /// Too many levels of symbolic links.</exception>
-        /// <remarks>When <paramref name="returnFinalTarget"/> is <see langword="true"/>, the maximum number of symbolic links that are followed are 40 on Unix and 63 on Windows.</remarks>
+        /// <remarks>When <paramref name="returnFinalTarget"/> is <see langword="true"/>, the maximum number
+        // of symbolic links that are followed are 40 on Unix and 63 on Windows.</remarks>
         public static FileSystemInfo? ResolveLinkTarget(string linkPath, bool returnFinalTarget)
         {
             FileSystem.VerifyValidPath(linkPath, nameof(linkPath));

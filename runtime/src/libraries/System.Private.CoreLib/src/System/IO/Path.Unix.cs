@@ -66,7 +66,8 @@ namespace System.IO
                 path = Combine(Interop.Sys.GetCwd(), path);
             }
 
-            // We would ideally use realpath to do this, but it resolves symlinks and requires that the file actually exist.
+            // We would ideally use realpath to do this, but it resolves symlinks and requires that the file
+            // actually exist.
             string collapsedString = PathInternal.RemoveRelativeSegments(
                 path,
                 PathInternal.GetRootLength(path)
@@ -116,7 +117,8 @@ namespace System.IO
 
 #if TARGET_BROWSER
             // https://github.com/emscripten-core/emscripten/issues/18591
-            // The emscripten implementation of __randname uses pointer address as another entry into the randomness.
+            // The emscripten implementation of __randname uses pointer address as another entry into the
+            // randomness.
             Span<byte> path = new byte[totalByteCount];
 #else
             Span<byte> path =

@@ -3,16 +3,16 @@ Copyright (c) 2000 Microsoft Corporation
 
 Module Name:
 
-    _StreamFramer.cs
+_StreamFramer.cs
 
 Abstract:
 
 
 Author:
 
-    Mauro Ottaviani   original implementation
-    Alexei Vopilov    20-Jul-2002 made it generic enough
-                      (still not perfect, consider IStreamFramer interface)
+Mauro Ottaviani   original implementation
+Alexei Vopilov    20-Jul-2002 made it generic enough
+(still not perfect, consider IStreamFramer interface)
 
 Revision History:
 
@@ -73,20 +73,20 @@ namespace System.Net
             m_BeginWriteCallback = new AsyncCallback(BeginWriteCallback);
         }
 
-        /*
-        // Consider removing.
-        public FrameHeader m_ReadVerifierHeader {
-            get {
-                return m_ReadVerifier;
-            }
-            // May not be called while IO is in progress
-            set {
-                m_ReadVerifier = value;
-                m_CurReadHeader = m_ReadVerifier.Clone();
-                m_ReadHeaderBuffer = new byte[m_CurReadHeader.Size];
-            }
-        }
-        */
+/*
+// Consider removing.
+public FrameHeader m_ReadVerifierHeader {
+get {
+return m_ReadVerifier;
+}
+// May not be called while IO is in progress
+set {
+m_ReadVerifier = value;
+m_CurReadHeader = m_ReadVerifier.Clone();
+m_ReadHeaderBuffer = new byte[m_CurReadHeader.Size];
+}
+}
+*/
 
         public FrameHeader ReadHeader
         {
@@ -96,14 +96,14 @@ namespace System.Net
         public FrameHeader WriteHeader
         {
             get { return m_WriteHeader; }
-            /*
-            // Consider removing.
-            // May not be called while IO is in progress
-            set {
-                m_WriteHeader = value;
-                m_WriteHeaderBuffer = new byte[m_WriteHeader.Size];
-            }
-            */
+/*
+// Consider removing.
+// May not be called while IO is in progress
+set {
+m_WriteHeader = value;
+m_WriteHeaderBuffer = new byte[m_WriteHeader.Size];
+}
+*/
         }
 
         public Stream Transport
@@ -111,32 +111,32 @@ namespace System.Net
             get { return m_Transport; }
         }
 
-        /*
-        // Consider removing.
-        public bool EndOfFile {
-            get {
-                return m_Eof;
-            }
-        }
-        */
+/*
+// Consider removing.
+public bool EndOfFile {
+get {
+return m_Eof;
+}
+}
+*/
 
-        /*
-        // Consider removing.
-        public bool CanRead {
-            get {
-                return Transport.CanRead;
-            }
-        }
-        */
+/*
+// Consider removing.
+public bool CanRead {
+get {
+return Transport.CanRead;
+}
+}
+*/
 
-        /*
-        // Consider removing.
-        public bool CanWrite {
-            get {
-                return Transport.CanWrite;
-            }
-        }
-        */
+/*
+// Consider removing.
+public bool CanWrite {
+get {
+return Transport.CanWrite;
+}
+}
+*/
 
         public byte[] ReadMessage()
         {
@@ -624,12 +624,12 @@ namespace System.Net
             }
         }
 
-        /*
-        // Consider removing.
-        public void Close() {
-            Transport.Close();
-        }
-        */
+/*
+// Consider removing.
+public void Close() {
+Transport.Close();
+}
+*/
     }
 
     //
@@ -640,10 +640,10 @@ namespace System.Net
     // - If ParentResult == null, then real user IO request is wrapped
     //
 
-    /*
-    // Consider removing.
-    internal delegate void WorkerCallback(WorkerAsyncResult result);
-    */
+/*
+// Consider removing.
+internal delegate void WorkerCallback(WorkerAsyncResult result);
+*/
 
     internal class WorkerAsyncResult : LazyAsyncResult
     {
@@ -653,10 +653,10 @@ namespace System.Net
         public bool IsWrite;
         public WorkerAsyncResult ParentResult;
 
-        /*
-        // Consider removing.
-        public WorkerCallback StepDoneCallback;
-        */
+/*
+// Consider removing.
+public WorkerCallback StepDoneCallback;
+*/
         public bool HeaderDone; // This migth be reworked so we read both header and frame in one chunk
         public bool HandshakeDone;
 
@@ -675,17 +675,17 @@ namespace System.Net
             End = end;
         }
 
-        /*
-        // Consider removing.
-        public WorkerAsyncResult(WorkerAsyncResult parentResult, byte[] buffer, int offset, int end)
-             : base(null, null, null) {
+/*
+// Consider removing.
+public WorkerAsyncResult(WorkerAsyncResult parentResult, byte[] buffer, int offset, int end)
+: base(null, null, null) {
 
-                ParentResult = parentResult;
-                Buffer      = buffer;
-                Offset      = offset;
-                End         = end;
-        }
-        */
+ParentResult = parentResult;
+Buffer      = buffer;
+Offset      = offset;
+End         = end;
+}
+*/
     }
 
     // This guy describes the header used in framing of the stream data.
@@ -719,12 +719,12 @@ namespace System.Net
             _PayloadSize = -1;
         }
 
-        /*
-        // Consider removing.
-        public FrameHeader Clone() {
-            return new FrameHeader(_MessageId, _MajorV, _MinorV);
-        }
-        */
+/*
+// Consider removing.
+public FrameHeader Clone() {
+return new FrameHeader(_MessageId, _MajorV, _MinorV);
+}
+*/
 
         public int Size
         {

@@ -245,7 +245,8 @@ namespace System.Net
 
         private bool m_CacheDone; // Not sure why but the command stream wants to notify the request on every pipiline closure closure by invoking RequestCallback.
 
-        // m_CacheDone is to facilitate PutConnection decision and to prevent bothering cache protocol when it's all completed.
+        // m_CacheDone is to facilitate PutConnection decision and to prevent bothering cache protocol when
+        // it's all completed.
 
         private bool m_Async;
         private bool m_Aborted;
@@ -278,7 +279,8 @@ namespace System.Net
         private static readonly CreateConnectionDelegate m_CreateConnectionCallback =
             new CreateConnectionDelegate(CreateFtpConnection);
 
-        // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Anonymous FTP credential in production code.")]
+        // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Anonymous FTP
+        // credential in production code.")]
         private static readonly NetworkCredential DefaultFtpNetworkCredential =
             new NetworkCredential("anonymous", "anonymous@", String.Empty);
         private static readonly int s_DefaultTimeout = WebRequest.DefaultTimeout;
@@ -311,7 +313,8 @@ namespace System.Net
             }
             set
             {
-                // This is a replacement of RequestCachePermission demand since we are not including the latest in the product.
+                // This is a replacement of RequestCachePermission demand since we are not including the latest in
+                // the product.
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
 
                 RequestCacheBinding binding = RequestCacheManager.GetBinding(Uri.UriSchemeFtp);
@@ -416,7 +419,8 @@ namespace System.Net
         }
 
         /// <summary>
-        /// <para>Timeout of the blocking calls such as GetResponse and GetRequestStream (default 100 secs)</para>
+        /// <para>Timeout of the blocking calls such as GetResponse and GetRequestStream (default 100
+        // secs)</para>
         /// </summary>
         public override int Timeout
         {
@@ -453,7 +457,8 @@ namespace System.Net
 
         /// <devdoc>
         ///    <para>Used to control the Timeout when calling Stream.Read (AND) Stream.Write.
-        ///         Effects Streams returned from GetResponse().GetResponseStream() (AND) GetRequestStream().
+        ///         Effects Streams returned from GetResponse().GetResponseStream() (AND)
+        // GetRequestStream().
         ///         Default is 5 mins.
         ///    </para>
         /// </devdoc>
@@ -547,7 +552,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        /// <para>Generates a service point for this request, and allows setting of Connection settings</para>
+        /// <para>Generates a service point for this request, and allows setting of Connection
+        // settings</para>
         /// </devdoc>
         public ServicePoint ServicePoint
         {
@@ -825,7 +831,8 @@ namespace System.Net
             return m_FtpWebResponse;
         }
 
-        /// <include file='doc\FtpWebRequest.uex' path='docs/doc[@for="FtpWebRequest.BeginGetResponse"]/*' />
+        /// <include file='doc\FtpWebRequest.uex' path='docs/doc[@for="FtpWebRequest.BeginGetResponse"]/*'
+        // />
         /// <summary>
         /// <para>Used to query for the Response of an FTP request [async version]</para>
         /// </summary>
@@ -1325,7 +1332,8 @@ namespace System.Net
         }
 
         //
-        // NOTE1: The caller must synchronize access to SubmitRequest(), only one call is even allowed for a particular request!
+        // NOTE1: The caller must synchronize access to SubmitRequest(), only one call is even allowed for a
+        // particular request!
         // NOTE2: This method eats all exceptions so the caller must rethrow them
         //
         private void SubmitRequest(bool async)
@@ -1548,7 +1556,8 @@ namespace System.Net
         }
 
         /// <summary>
-        ///    <para>Because this is called from the timer thread, neither it nor any methods it calls can call user code.</para>
+        ///    <para>Because this is called from the timer thread, neither it nor any methods it calls can
+        // call user code.</para>
         /// </summary>
         private void TimerCallback(TimerThread.Timer timer, int timeNoticed, object context)
         {
@@ -1707,7 +1716,8 @@ namespace System.Net
             }
         }
 
-        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is available.
+        // Return null only on Sync (if we're on the Sync thread).  Otherwise throw if no context is
+        // available.
         //
         //
 
@@ -1781,7 +1791,8 @@ namespace System.Net
                         EnsureFtpWebResponse(null);
 
                         // This to update response status and exit message if any
-                        // Note that due to a design of FtpControlStream the status 221 "Service closing control connection" is always suppresses.
+                        // Note that due to a design of FtpControlStream the status 221 "Service closing control connection"
+                        // is always suppresses.
                         m_FtpWebResponse.UpdateStatus(
                             connection.StatusCode,
                             connection.StatusLine,
@@ -1940,7 +1951,8 @@ namespace System.Net
                             EnsureFtpWebResponse(null);
 
                             // This to update response status and exit message if any
-                            // Note that due to a design of FtpControlStream the status 221 "Service closing control connection" is always suppresses.
+                            // Note that due to a design of FtpControlStream the status 221 "Service closing control connection"
+                            // is always suppresses.
                             m_FtpWebResponse.UpdateStatus(
                                 connection.StatusCode,
                                 connection.StatusLine,
@@ -2083,9 +2095,11 @@ namespace System.Net
                         }
                         else if (m_FtpWebResponse.IsFromCache && !KeepAlive)
                         {
-                            // This means the response has been revalidated and found as good means the commands pipleline is completed.
+                            // This means the response has been revalidated and found as good means the commands pipleline is
+                            // completed.
                             // Now if this request was NOT KeepAlive we want to be fair and close the control connection.
-                            // That becomes unnecessary complicated in the async case to support "QUIT" command semantic, so simply close the socket
+                            // That becomes unnecessary complicated in the async case to support "QUIT" command semantic, so
+                            // simply close the socket
                             // and let pool collect the object.
                             connection.Quit();
                         }
@@ -2145,7 +2159,8 @@ namespace System.Net
         }
 
         //
-        // Used only in the async case and only for the initial callback from the pool when connection is established.
+        // Used only in the async case and only for the initial callback from the pool when connection is
+        // established.
         //
         private static void AsyncCallbackWrapper(object request, object state)
         {
@@ -2230,7 +2245,8 @@ namespace System.Net
         /// <include file='doc\FtpWebRequest.uex' path='docs/doc[@for="FtpWebRequest.KeepAlive"]/*' />
         /// <summary>
         /// <para>
-        /// If KeepAlive is set to false, then the control connection to the server will be closed when the request completes.
+        /// If KeepAlive is set to false, then the control connection to the server will be closed when the
+        // request completes.
         /// Default is true
         /// </para>
         /// </summary>
@@ -2412,7 +2428,8 @@ namespace System.Net
         }
 
         /// <summary>
-        ///    <para>Creates an FTP WebResponse based off the responseStream and our active Connection</para>
+        ///    <para>Creates an FTP WebResponse based off the responseStream and our active
+        // Connection</para>
         /// </summary>
         private void EnsureFtpWebResponse(Exception exception)
         {
@@ -2882,7 +2899,8 @@ namespace System.Net
                     }
                     catch (ObjectDisposedException)
                     {
-                        // ObjectDisposedException is expected here in the following sequuence: ftpWebRequest.GetResponse().Dispose() -> ftpWebRequest.GetResponse()
+                        // ObjectDisposedException is expected here in the following sequuence:
+                        // ftpWebRequest.GetResponse().Dispose() -> ftpWebRequest.GetResponse()
                         // on the second call to GetResponse() we cannot determine the statusCode.
                     }
                 }
@@ -2908,7 +2926,8 @@ namespace System.Net
                 }
                 catch (ObjectDisposedException)
                 {
-                    // ObjectDisposedException is expected here in the following sequuence: ftpWebRequest.GetResponse().Dispose() -> ftpWebRequest.GetResponse()
+                    // ObjectDisposedException is expected here in the following sequuence:
+                    // ftpWebRequest.GetResponse().Dispose() -> ftpWebRequest.GetResponse()
                     // on the second call to GetResponse() we cannot determine the statusCode.
                 }
             }

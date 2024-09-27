@@ -4,7 +4,8 @@
 namespace System.ComponentModel.Composition.Primitives
 {
     /// <summary>
-    ///     Indicates the cardinality of the <see cref="Export"/> objects required by an <see cref="ImportDefinition"/>.
+    ///     Indicates the cardinality of the <see cref="Export"/> objects required by an <see
+    // cref="ImportDefinition"/>.
     /// </summary>
     public enum ImportCardinality
     {

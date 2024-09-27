@@ -58,7 +58,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Retrieves the set of validation attributes for the property
         /// </summary>
-        /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
+        /// <param name="validationContext">The context that describes the property.  It cannot be
+        // null.</param>
         /// <returns>The collection of validation attributes.  It could be empty.</returns>
         internal IEnumerable<ValidationAttribute> GetPropertyValidationAttributes(
             ValidationContext validationContext
@@ -73,7 +74,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Retrieves the <see cref="DisplayAttribute"/> associated with the given property
         /// </summary>
-        /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
+        /// <param name="validationContext">The context that describes the property.  It cannot be
+        // null.</param>
         /// <returns>The display attribute instance, if present.</returns>
         internal DisplayAttribute GetPropertyDisplayAttribute(ValidationContext validationContext)
         {
@@ -86,7 +88,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Retrieves the Type of the given property.
         /// </summary>
-        /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
+        /// <param name="validationContext">The context that describes the property.  It cannot be
+        // null.</param>
         /// <returns>The type of the specified property</returns>
         internal Type GetPropertyType(ValidationContext validationContext)
         {
@@ -102,7 +105,8 @@ namespace System.ComponentModel.DataAnnotations
         /// the <see cref="ValidationContext.ObjectType"/>.
         /// </summary>
         /// <param name="validationContext">The <see cref="ValidationContext"/> to check.</param>
-        /// <returns><c>true</c> when the <paramref name="validationContext"/> represents a property, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> when the <paramref name="validationContext"/> represents a property,
+        // <c>false</c> otherwise.</returns>
         internal bool IsPropertyContext(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -275,14 +279,16 @@ namespace System.ComponentModel.DataAnnotations
 
 #if !SILVERLIGHT
             /// <summary>
-            /// Method to extract only the explicitly specified attributes from a <see cref="PropertyDescriptor"/>
+            /// Method to extract only the explicitly specified attributes from a <see
+            // cref="PropertyDescriptor"/>
             /// </summary>
             /// <remarks>
             /// Normal TypeDescriptor semantics are to inherit the attributes of a property's type.  This method
             /// exists to suppress those inherited attributes.
             /// </remarks>
             /// <param name="propertyDescriptor">The property descriptor whose attributes are needed.</param>
-            /// <returns>A new <see cref="AttributeCollection"/> stripped of any attributes from the property's type.</returns>
+            /// <returns>A new <see cref="AttributeCollection"/> stripped of any attributes from the property's
+            // type.</returns>
             public static AttributeCollection GetExplicitAttributes(
                 PropertyDescriptor propertyDescriptor
             )

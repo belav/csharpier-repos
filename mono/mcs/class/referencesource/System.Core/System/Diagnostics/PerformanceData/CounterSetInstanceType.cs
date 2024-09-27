@@ -7,7 +7,8 @@
 namespace System.Diagnostics.PerformanceData
 {
     /// <summary>
-    /// Enum of friendly names to CounterSet instance type (maps directory to the native types defined in perflib.h)
+    /// Enum of friendly names to CounterSet instance type (maps directory to the native types defined
+    // in perflib.h)
     /// </summary>
     public enum CounterSetInstanceType
     {
@@ -22,7 +23,8 @@ namespace System.Diagnostics.PerformanceData
         Multiple = 0x00000002, // PERF_COUNTERSET_MULTI_INSTANCES
 
         /// <summary>
-        /// GlobalAggregate means that CounterSet could have multiple active instances, but counter consumption
+        /// GlobalAggregate means that CounterSet could have multiple active instances, but counter
+        // consumption
         /// applications (for example, perfmon) would aggregate raw counter data from different instances.
         /// </summary>
         GlobalAggregate = 0x00000004, // PERF_COUNTERSET_SINGLE_AGGREGATE

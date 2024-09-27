@@ -76,17 +76,23 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v4.6 - Remove  A(ns-a) include B(ns-a) which includes C(ns-a) ", Priority = 1, Params = new object[] { "include_v7_a.xsd" })]
+        //[Variation(Desc = "v4.6 - Remove  A(ns-a) include B(ns-a) which includes C(ns-a) ", Priority = 1,
+        // Params = new object[] { "include_v7_a.xsd" })]
         [InlineData("include_v7_a.xsd")]
-        //[Variation(Desc = "v4.5 - Remove: A with NS includes B and C with no NS", Priority = 1, Params = new object[] { "include_v6_a.xsd" })]
+        //[Variation(Desc = "v4.5 - Remove: A with NS includes B and C with no NS", Priority = 1, Params =
+        // new object[] { "include_v6_a.xsd" })]
         [InlineData("include_v6_a.xsd")]
-        //[Variation(Desc = "v4.4 - Remove: A with NS includes B and C with no NS, B also includes C", Priority = 1, Params = new object[] { "include_v5_a.xsd" })]
+        //[Variation(Desc = "v4.4 - Remove: A with NS includes B and C with no NS, B also includes C",
+        // Priority = 1, Params = new object[] { "include_v5_a.xsd" })]
         [InlineData("include_v5_a.xsd")]
-        //[Variation(Desc = "v4.3 - Remove: A with NS includes B with no NS, which includes C with no NS", Priority = 1, Params = new object[] { "include_v4_a.xsd" })]
+        //[Variation(Desc = "v4.3 - Remove: A with NS includes B with no NS, which includes C with no NS",
+        // Priority = 1, Params = new object[] { "include_v4_a.xsd" })]
         [InlineData("include_v4_a.xsd")]
-        //[Variation(Desc = "v4.2 - Remove: A with no NS includes B with no NS", Params = new object[] { "include_v3_a.xsd" })]
+        //[Variation(Desc = "v4.2 - Remove: A with no NS includes B with no NS", Params = new object[] {
+        // "include_v3_a.xsd" })]
         [InlineData("include_v3_a.xsd")]
-        //[Variation(Desc = "v4.1 - Remove: A with NS includes B with no NS", Params = new object[] { "include_v1_a.xsd", })]
+        //[Variation(Desc = "v4.1 - Remove: A with NS includes B with no NS", Params = new object[] {
+        // "include_v1_a.xsd", })]
         [InlineData("include_v1_a.xsd")]
         [Theory]
         public void v4(object param0)
@@ -114,11 +120,14 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v5.3 - Remove: A(ns-a) which imports B (no ns)", Priority = 1, Params = new object[] { "import_v4_a.xsd", 2 })]
+        //[Variation(Desc = "v5.3 - Remove: A(ns-a) which imports B (no ns)", Priority = 1, Params = new
+        // object[] { "import_v4_a.xsd", 2 })]
         [InlineData("import_v4_a.xsd", 2)]
-        //[Variation(Desc = "v5.2 - Remove: A(ns-a) improts B (ns-b)", Priority = 1, Params = new object[] { "import_v2_a.xsd", 2 })]
+        //[Variation(Desc = "v5.2 - Remove: A(ns-a) improts B (ns-b)", Priority = 1, Params = new object[] {
+        // "import_v2_a.xsd", 2 })]
         [InlineData("import_v2_a.xsd", 2)]
-        //[Variation(Desc = "v5.1 - Remove: A with NS imports B with no NS", Priority = 1, Params = new object[] { "import_v1_a.xsd", 2 })]
+        //[Variation(Desc = "v5.1 - Remove: A with NS imports B with no NS", Priority = 1, Params = new
+        // object[] { "import_v1_a.xsd", 2 })]
         [InlineData("import_v1_a.xsd", 2)]
         [Theory]
         public void v5(object param0, object param1)
@@ -145,7 +154,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v6 - Remove: Add B(NONS) to a namespace, Add A(ns-a) which imports B, Remove B(nons)", Priority = 1)]
+        //[Variation(Desc = "v6 - Remove: Add B(NONS) to a namespace, Add A(ns-a) which imports B, Remove
+        // B(nons)", Priority = 1)]
         [Fact]
         public void v6()
         {
@@ -173,7 +183,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v7 - Remove: Add B(NONS) to a namespace, Add A(ns-a) which improts B, Remove B(ns-b)", Priority = 1)]
+        //[Variation(Desc = "v7 - Remove: Add B(NONS) to a namespace, Add A(ns-a) which improts B, Remove
+        // B(ns-b)", Priority = 1)]
         [Fact]
         public void v7()
         {
@@ -206,9 +217,11 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v8.2 - Remove: A(ns-a) imports B(NO NS) imports C (ns-c)", Priority = 1, Params = new object[] { "import_v10_a.xsd", "ns-a", "", "ns-c" })]
+        //[Variation(Desc = "v8.2 - Remove: A(ns-a) imports B(NO NS) imports C (ns-c)", Priority = 1, Params
+        // = new object[] { "import_v10_a.xsd", "ns-a", "", "ns-c" })]
         [InlineData("import_v10_a.xsd", "ns-a", "", "ns-c")]
-        //[Variation(Desc = "v8.1 - Remove: A(ns-a) imports B(ns-b) imports C (ns-c)", Priority = 1, Params = new object[] { "import_v9_a.xsd", "ns-a", "ns-b", "ns-c" })]
+        //[Variation(Desc = "v8.1 - Remove: A(ns-a) imports B(ns-b) imports C (ns-c)", Priority = 1, Params
+        // = new object[] { "import_v9_a.xsd", "ns-a", "ns-b", "ns-c" })]
         [InlineData("import_v9_a.xsd", "ns-a", "ns-b", "ns-c")]
         [Theory]
         public void v8(object param0, object param1, object param2, object param3)
@@ -250,7 +263,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v9 - Remove: A imports B and B and C, B imports C and D, C imports D and A", Priority = 1, Params = new object[] { "import_v13_a.xsd" })]
+        //[Variation(Desc = "v9 - Remove: A imports B and B and C, B imports C and D, C imports D and A",
+        // Priority = 1, Params = new object[] { "import_v13_a.xsd" })]
         [InlineData("import_v13_a.xsd")]
         [Theory]
         public void v9(object param0)
@@ -324,9 +338,11 @@ namespace System.Xml.XmlSchemaTests
             Assert.Fail();
         }
 
-        //[Variation(Desc = "v11.2 - Remove: A(ns-a) improts B (ns-b), Remove imported schema", Priority = 2, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd" })]
+        //[Variation(Desc = "v11.2 - Remove: A(ns-a) improts B (ns-b), Remove imported schema", Priority =
+        // 2, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd" })]
         [InlineData("import_v2_a.xsd", "import_v2_b.xsd")]
-        //[Variation(Desc = "v11.1 - Remove: A with NS imports B with no NS, Remove imported schema", Priority = 2, Params = new object[] { "import_v1_a.xsd", "include_v1_b.xsd" })]
+        //[Variation(Desc = "v11.1 - Remove: A with NS imports B with no NS, Remove imported schema",
+        // Priority = 2, Params = new object[] { "import_v1_a.xsd", "include_v1_b.xsd" })]
         [InlineData("import_v1_a.xsd", "include_v1_b.xsd")]
         [Theory]
         public void v11(object param0, object param1)
@@ -353,7 +369,8 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v20 - 358206 : Removing the last schema from the set should clear the global tables", Priority = 2)]
+        //[Variation(Desc = "v20 - 358206 : Removing the last schema from the set should clear the global
+        // tables", Priority = 2)]
         [Fact]
         public void v20()
         {

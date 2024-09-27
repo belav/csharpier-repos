@@ -68,11 +68,11 @@ namespace System.Web.Security
         {
             HttpApplication app = (HttpApplication)sender;
 
-            /* if we're disabled, bail out early */
+/* if we're disabled, bail out early */
             if (_config == null || !_config.Enabled)
                 return;
 
-            /* allow the user to populate the Role */
+/* allow the user to populate the Role */
             RoleManagerEventHandler eh = events[getRolesEvent] as RoleManagerEventHandler;
             if (eh != null)
             {
@@ -109,7 +109,7 @@ namespace System.Web.Security
             }
             else
             {
-                /* anonymous request */
+/* anonymous request */
 
                 if (cookie != null)
                 {
@@ -127,19 +127,19 @@ namespace System.Web.Security
         {
             HttpApplication app = (HttpApplication)sender;
 
-            /* if we're not enabled or configured to cache
-             * cookies, bail out */
+/* if we're not enabled or configured to cache
+* cookies, bail out */
             if (_config == null || !_config.Enabled || !_config.CacheRolesInCookie)
                 return;
 
-            /* if the user isn't authenticated, bail
-             * out */
+/* if the user isn't authenticated, bail
+* out */
             if (!app.Request.IsAuthenticated)
                 return;
 
-            /* if the configuration requires ssl for
-             * cookies and we're not on an ssl connection,
-             * bail out */
+/* if the configuration requires ssl for
+* cookies and we're not on an ssl connection,
+* bail out */
             if (_config.CookieRequireSSL && !app.Request.IsSecureConnection)
                 return;
 

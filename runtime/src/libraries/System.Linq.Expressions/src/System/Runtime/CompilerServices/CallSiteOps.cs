@@ -12,7 +12,8 @@ namespace System.Runtime.CompilerServices
     // we don't want users to see them
 
     /// <summary>
-    /// This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.
+    /// This API supports the .NET Framework infrastructure and is not intended to be used directly from
+    // your code.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never), DebuggerStepThrough]
     public static class CallSiteOps

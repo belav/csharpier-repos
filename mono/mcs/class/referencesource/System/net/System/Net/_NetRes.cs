@@ -11,34 +11,34 @@ namespace System.Net
 
     internal class NetRes
     {
-        /*++
-            Constructor
+/*++
+Constructor
 
-            This is the constructor, marked private because this class shouldn't
-            be instantiated.
+This is the constructor, marked private because this class shouldn't
+be instantiated.
 
-        --*/
+--*/
         private NetRes() { }
 
-        /*++
+/*++
 
-            GetWebStatusString - Get a WebExceptionStatus-specific resource string
+GetWebStatusString - Get a WebExceptionStatus-specific resource string
 
 
-            This method takes an input string and a WebExceptionStatus. We use the input
-            string as a key to find a status message and the webStatus to produce
-            a status-specific message, then we combine the two.
+This method takes an input string and a WebExceptionStatus. We use the input
+string as a key to find a status message and the webStatus to produce
+a status-specific message, then we combine the two.
 
-            Input:
+Input:
 
-                Res             - Id for resource string.
-                Status          - The WebExceptionStatus to be formatted.
+Res             - Id for resource string.
+Status          - The WebExceptionStatus to be formatted.
 
-            Returns:
+Returns:
 
-                string for localized message.
+string for localized message.
 
-        --*/
+--*/
         public static string GetWebStatusString(string Res, WebExceptionStatus Status)
         {
             string Msg;
@@ -61,23 +61,23 @@ namespace System.Net
             return SR.GetString(WebExceptionMapping.GetWebStatusString(Status));
         }
 
-        /*++
+/*++
 
-            GetWebStatusCodeString - Get a StatusCode-specific resource string
+GetWebStatusCodeString - Get a StatusCode-specific resource string
 
-            This method is used to map a HTTP status code to a specific user
-            readable error code.
+This method is used to map a HTTP status code to a specific user
+readable error code.
 
-            Input:
+Input:
 
-                statusCode      - Id for resource string.
-                Status          - The WebExceptionStatus to be formatted.
+statusCode      - Id for resource string.
+Status          - The WebExceptionStatus to be formatted.
 
-            Returns:
+Returns:
 
-                string for localized message.
+string for localized message.
 
-        --*/
+--*/
         public static string GetWebStatusCodeString(
             HttpStatusCode statusCode,
             string statusDescription

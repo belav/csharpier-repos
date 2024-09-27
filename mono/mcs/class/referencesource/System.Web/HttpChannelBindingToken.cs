@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HttpChannelBindingToken class
- *
- * Copyright (c) 2008 Microsoft Corporation
- */
+* HttpChannelBindingToken class
+*
+* Copyright (c) 2008 Microsoft Corporation
+*/
 
 namespace System.Web
 {

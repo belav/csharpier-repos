@@ -19,7 +19,8 @@ using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    // This is a set of stub methods implementing the support for the IBindableVector interface on managed
+    // This is a set of stub methods implementing the support for the IBindableVector interface on
+    // managed
     // objects that implement IList. Used by the interop mashaling infrastructure.
     //
     // The methods on this class must be written VERY carefully to avoid introducing security holes.

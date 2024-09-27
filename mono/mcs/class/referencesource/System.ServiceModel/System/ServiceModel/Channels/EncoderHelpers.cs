@@ -19,7 +19,8 @@ namespace System.ServiceModel.Channels
             XmlDictionaryReaderQuotas bufferedReadQuotas = new XmlDictionaryReaderQuotas();
             encoderQuotas.CopyTo(bufferedReadQuotas);
 
-            // now we have the quotas from the encoder, we need to update the values with the new quotas from the default read quotas.
+            // now we have the quotas from the encoder, we need to update the values with the new quotas from
+            // the default read quotas.
             if (
                 IsDefaultQuota(
                     bufferedReadQuotas,

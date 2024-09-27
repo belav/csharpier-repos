@@ -461,7 +461,8 @@ namespace System.Xml
         }
 
         /// <summary>
-        /// All other WriteValue methods are implemented by XmlWriter to delegate to WriteValue(object) or WriteValue(string), so
+        /// All other WriteValue methods are implemented by XmlWriter to delegate to WriteValue(object) or
+        // WriteValue(string), so
         /// only these two methods need to be implemented.
         /// </summary>
         public override void WriteValue(object value)
@@ -615,7 +616,8 @@ namespace System.Xml
         }
 
         /// <summary>
-        /// Caches information for XML events like BeginElement, String, and EndAttribute so that they can be replayed later.
+        /// Caches information for XML events like BeginElement, String, and EndAttribute so that they can
+        // be replayed later.
         /// </summary>
         private struct XmlEvent
         {

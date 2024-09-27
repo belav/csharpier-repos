@@ -106,9 +106,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 RValueType = rValueType;
                 LValueType = lValueType;
-                // https://github.com/dotnet/roslyn/issues/34993: Doesn't hold true for Tuple_Assignment_10. See if we can make it hold true
+                // https://github.com/dotnet/roslyn/issues/34993: Doesn't hold true for Tuple_Assignment_10. See if
+                // we can make it hold true
                 //Debug.Assert((RValueType.Type is null && LValueType.TypeSymbol is null) ||
-                //             RValueType.Type.Equals(LValueType.TypeSymbol, TypeCompareKind.ConsiderEverything | TypeCompareKind.AllIgnoreOptions));
+                //             RValueType.Type.Equals(LValueType.TypeSymbol, TypeCompareKind.ConsiderEverything |
+                // TypeCompareKind.AllIgnoreOptions));
             }
 
             public VisitResult(
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// 'true' if non-nullable member warnings should be issued at return points.
-        /// One situation where this is 'false' is when we are analyzing field initializers and there is a constructor symbol in the type.
+        /// One situation where this is 'false' is when we are analyzing field initializers and there is a
+        // constructor symbol in the type.
         /// </summary>
         private readonly bool _useConstructorExitWarnings;
 
@@ -190,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private MethodSymbol? _delegateInvokeMethod;
 
         /// <summary>
-        /// Return statements and the result types from analyzing the returned expressions. Used when inferring lambda return type in MethodTypeInferrer.
+        /// Return statements and the result types from analyzing the returned expressions. Used when
+        // inferring lambda return type in MethodTypeInferrer.
         /// </summary>
         private ArrayBuilder<(BoundReturnStatement, TypeWithAnnotations)>? _returnTypesOpt;
 
@@ -204,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         );
 
         /// <summary>
-        /// Contains the map of expressions to inferred nullabilities and types used by the optional rewriter phase of the
+        /// Contains the map of expressions to inferred nullabilities and types used by the optional
+        // rewriter phase of the
         /// compiler.
         /// </summary>
         private readonly ImmutableDictionary<
@@ -245,9 +250,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         >? _targetTypedAnalysisCompletionOpt;
 
         /// <summary>
-        /// Map from a target-typed expression (such as a target-typed conditional, switch or new) to the delegate
+        /// Map from a target-typed expression (such as a target-typed conditional, switch or new) to the
+        // delegate
         /// that completes analysis once the target type is known.
-        /// The delegate is invoked by <see cref="VisitConversion(BoundConversion, BoundExpression, Conversion, TypeWithAnnotations, TypeWithState, bool, bool, bool, AssignmentKind, ParameterSymbol, bool, bool, bool, Optional&lt;LocalState&gt;,bool, Location, ArrayBuilder&lt;VisitResult&gt;)"/>.
+        /// The delegate is invoked by <see cref="VisitConversion(BoundConversion, BoundExpression,
+        // Conversion, TypeWithAnnotations, TypeWithState, bool, bool, bool, AssignmentKind,
+        // ParameterSymbol,
+        // bool, bool, bool, Optional&lt;LocalState&gt;,bool, Location, ArrayBuilder&lt;VisitResult&gt;)"/>.
         /// </summary>
         private PooledDictionary<
             BoundExpression,
@@ -273,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 #if DEBUG
         /// <summary>
-        /// Contains the expressions that should not be inserted into <see cref="_analyzedNullabilityMapOpt"/>.
+        /// Contains the expressions that should not be inserted into <see
+        // cref="_analyzedNullabilityMapOpt"/>.
         /// </summary>
         private static readonly ImmutableArray<BoundKind> s_skippedExpressions =
             ImmutableArray.Create(
@@ -293,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// The visit result of the receiver for the current conditional access.
         ///
         /// For example: A conditional invocation uses a placeholder as a receiver. By storing the
-        /// visit result from the actual receiver ahead of time, we can give this placeholder a correct result.
+        /// visit result from the actual receiver ahead of time, we can give this placeholder a correct
+        // result.
         /// </summary>
         private VisitResult _currentConditionalReceiverVisitResult;
 
@@ -413,7 +424,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
 
 #if DEBUG
-            // https://github.com/dotnet/roslyn/issues/34993: This assert is essential for ensuring that we aren't
+            // https://github.com/dotnet/roslyn/issues/34993: This assert is essential for ensuring that we
+            // aren't
             // changing the observable results of GetTypeInfo beyond nullability information.
             //Debug.Assert(AreCloseEnough(expr.Type, result.RValueType.Type),
             //             $"Cannot change the type of {expr} from {expr.Type} to {result.RValueType.Type}");
@@ -452,7 +464,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         result.LValueType.ToPublicAnnotation(),
                         result.RValueType.State.ToPublicFlowState()
                     ),
-                    // https://github.com/dotnet/roslyn/issues/35046 We're dropping the result if the type doesn't match up completely
+                    // https://github.com/dotnet/roslyn/issues/35046 We're dropping the result if the type doesn't match
+                    // up completely
                     // with the existing type
                     expr.Type?.Equals(result.RValueType.Type, TypeCompareKind.AllIgnoreOptions)
                     == true
@@ -479,7 +492,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool _expressionIsRead = true;
 
         /// <summary>
-        /// Used to allow <see cref="MakeSlot(BoundExpression)"/> to substitute the correct slot for a <see cref="BoundConditionalReceiver"/> when
+        /// Used to allow <see cref="MakeSlot(BoundExpression)"/> to substitute the correct slot for a <see
+        // cref="BoundConditionalReceiver"/> when
         /// it's encountered.
         /// </summary>
         private int _lastConditionalAccessSlot = -1;
@@ -558,7 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        // For purpose of nullability analysis, awaits create pending branches, so async usings and foreachs do too
+        // For purpose of nullability analysis, awaits create pending branches, so async usings and foreachs
+        // do too
         public sealed override bool AwaitUsingAndForeachAddsPendingBranch => true;
 
         protected override void EnsureSufficientExecutionStack(int recursionDepth)
@@ -674,7 +689,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 makeNotNullMembersMaybeNull();
-                // We need to create a snapshot even of the first node, because we want to have the state of the initial parameters.
+                // We need to create a snapshot even of the first node, because we want to have the state of the
+                // initial parameters.
                 _snapshotBuilderOpt?.TakeIncrementalSnapshot(methodMainNode, State);
             }
 
@@ -723,15 +739,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                             Debug.Assert(thisParameter is object);
                             thisSlot = GetOrCreateSlot(thisParameter);
                         }
-                        // https://github.com/dotnet/roslyn/issues/46718: give diagnostics on return points, not constructor signature
+                        // https://github.com/dotnet/roslyn/issues/46718: give diagnostics on return points, not constructor
+                        // signature
                         var exitLocation = method.DeclaringSyntaxReferences.IsEmpty
                             ? null
                             : method.TryGetFirstLocation();
                         bool constructorEnforcesRequiredMembers =
                             method.ShouldCheckRequiredMembers();
 
-                        // Required properties can be attributed MemberNotNull, indicating that if the property is set, the field will be set as well.
-                        // If we're enforcing required members (ie, the constructor is not attributed with SetsRequiredMembers), we also want to
+                        // Required properties can be attributed MemberNotNull, indicating that if the property is set, the
+                        // field will be set as well.
+                        // If we're enforcing required members (ie, the constructor is not attributed with
+                        // SetsRequiredMembers), we also want to
                         // not warn for members named in such attributes.
                         var membersWithStateEnforcedByRequiredMembers =
                             constructorEnforcesRequiredMembers
@@ -752,8 +771,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var alreadyWarnedMembers = PooledHashSet<Symbol>.GetInstance();
                         foreach (var member in method.ContainingType.GetMembersUnordered())
                         {
-                            // If this constructor has `SetsRequiredMembers`, then we need to check the state of _all_ required properties, regardless of whether they are auto-properties or not.
-                            // For auto-properties, `GetMembersUnordered()` will return the backing field, and `checkStateOnConstructorExit` will follow that to the property itself, so we only need
+                            // If this constructor has `SetsRequiredMembers`, then we need to check the state of _all_ required
+                            // properties, regardless of whether they are auto-properties or not.
+                            // For auto-properties, `GetMembersUnordered()` will return the backing field, and
+                            // `checkStateOnConstructorExit` will follow that to the property itself, so we only need
                             // to force property analysis if the member is required and _does not_ have a backing field.
                             var shouldForcePropertyAnalysis =
                                 !constructorEnforcesRequiredMembers
@@ -770,9 +791,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                             );
                         }
 
-                        // If this constructor is adding `SetsRequiredMembers` and the base or this constructor did not have it, we need
-                        // to restore the nullable warnings for all members that were not initialized in this constructor, including those
-                        // from base types that were expected to have been initialized by the consumer at the construction site.
+                        // If this constructor is adding `SetsRequiredMembers` and the base or this constructor did not have
+                        // it, we need
+                        // to restore the nullable warnings for all members that were not initialized in this constructor,
+                        // including those
+                        // from base types that were expected to have been initialized by the consumer at the construction
+                        // site.
 
                         var chainedConstructorEnforcesRequiredMembers =
                             GetBaseOrThisInitializer()?.ShouldCheckRequiredMembers() ?? false;
@@ -783,8 +807,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             && method.ContainingType.BaseTypeNoUseSiteDiagnostics is { } baseType
                         )
                         {
-                            // Members of the current type were checked above. We need to grab all the required members from the base
-                            // type and enforce them as well. We don't need to check the non-required members: those warnings would have
+                            // Members of the current type were checked above. We need to grab all the required members from the
+                            // base
+                            // type and enforce them as well. We don't need to check the non-required members: those warnings
+                            // would have
                             // been reported in constructor of the type that defined them.
                             foreach (var (_, member) in baseType.AllRequiredMembers)
                             {
@@ -1022,7 +1048,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 foreach (var member in members)
                 {
-                    // For non-constant values, only complain if we were able to analyze a difference for this member between two branches
+                    // For non-constant values, only complain if we were able to analyze a difference for this member
+                    // between two branches
                     if (memberHasBadState(member, state) != memberHasBadState(member, otherState))
                     {
                         reportMemberIfBadConditionalState(syntaxOpt, sense, member, state);
@@ -1191,24 +1218,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     {
                         var baseOrThisInitializer = GetBaseOrThisInitializer();
-                        // If there's an error in the base or this initializer, presume that we should set all required members to default.
+                        // If there's an error in the base or this initializer, presume that we should set all required
+                        // members to default.
                         includeBaseRequiredMembers =
                             baseOrThisInitializer?.ShouldCheckRequiredMembers() ?? true;
                         if (initializerKind == (int)SyntaxKind.ThisConstructorInitializer)
                         {
                             hasThisConstructorInitializer = true;
-                            // If we chained to a `this` constructor, a SetsRequiredMembers attribute applies to both the current type's required members and the base type's required members.
+                            // If we chained to a `this` constructor, a SetsRequiredMembers attribute applies to both the
+                            // current type's required members and the base type's required members.
                             includeCurrentTypeRequiredMembers = includeBaseRequiredMembers;
                         }
                         else if (initializerKind == (int)SyntaxKind.BaseConstructorInitializer)
                         {
-                            // If we chained to a `base` constructor, a SetsRequiredMembers attribute applies to the base type's required members only, and the current type's required members
+                            // If we chained to a `base` constructor, a SetsRequiredMembers attribute applies to the base type's
+                            // required members only, and the current type's required members
                             // are not assumed to be initialized.
                             includeCurrentTypeRequiredMembers = true;
                         }
                     }
 
-                    // Pre-C# 11, we don't use a default initial state for value type instance constructors without `: this()`
+                    // Pre-C# 11, we don't use a default initial state for value type instance constructors without `:
+                    // this()`
                     // because any usages of uninitialized fields will get definite assignment errors anyway.
                     if (
                         !hasThisConstructorInitializer
@@ -1227,7 +1258,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                     }
 
-                    // We want to presume all required members of the type are uninitialized, and in addition we want to set all fields to
+                    // We want to presume all required members of the type are uninitialized, and in addition we want to
+                    // set all fields to
                     // default if we can get to this constructor by doing so (ie, : this() in a value type).
                     return membersToBeInitialized(
                         method.ContainingType,
@@ -1418,8 +1450,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// We have multiple ways of entering the nullable walker: we could be just analyzing the initializers, with a BoundStatementList body and _baseOrThisInitializer
-        /// having been provided, or we could be analyzing the body of a constructor, with a BoundConstructorBody body and _baseOrThisInitializer being null.
+        /// We have multiple ways of entering the nullable walker: we could be just analyzing the
+        // initializers, with a BoundStatementList body and _baseOrThisInitializer
+        /// having been provided, or we could be analyzing the body of a constructor, with a
+        // BoundConstructorBody body and _baseOrThisInitializer being null.
         /// </summary>
         private MethodSymbol? GetBaseOrThisInitializer()
         {
@@ -1461,7 +1495,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     foreach (var parameter in parameters)
                     {
-                        // For non-constant values, only complain if we were able to analyze a difference for this parameter between two branches
+                        // For non-constant values, only complain if we were able to analyze a difference for this parameter
+                        // between two branches
                         if (
                             GetOrCreateSlot(parameter) is > 0 and var slot
                             && GetState(ref pendingReturn.StateWhenTrue, slot)
@@ -1606,7 +1641,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var parameterState = GetState(ref stateWhen, slot);
 
                     // On a parameter marked with MaybeNullWhen, we would have not reported an assignment warning.
-                    // We should only check if an assignment warning would have been warranted ignoring the MaybeNullWhen.
+                    // We should only check if an assignment warning would have been warranted ignoring the
+                    // MaybeNullWhen.
                     FlowAnalysisAnnotations annotations = parameter.FlowAnalysisAnnotations;
                     if (sense)
                     {
@@ -1740,8 +1776,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (compilation.IsNullableAnalysisEnabledAlways)
                 {
-                    // Once we address https://github.com/dotnet/roslyn/issues/46579 we should also always pass `getFinalNullableState: true` in debug mode.
-                    // We will likely always need to write a 'null' out for the out parameter in this code path, though, because
+                    // Once we address https://github.com/dotnet/roslyn/issues/46579 we should also always pass
+                    // `getFinalNullableState: true` in debug mode.
+                    // We will likely always need to write a 'null' out for the out parameter in this code path, though,
+                    // because
                     // we don't want to introduce behavior differences between debug and release builds
                     Analyze(
                         compilation,
@@ -2004,7 +2042,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (NullabilityInfo, TypeSymbol?)
             >(EqualityComparer<BoundExpression>.Default, NullabilityInfoTypeComparer.Instance);
 
-            // Attributes don't have a symbol, which is what SnapshotBuilder uses as an index for maintaining global state.
+            // Attributes don't have a symbol, which is what SnapshotBuilder uses as an index for maintaining
+            // global state.
             // Until we have a workaround for this, disable snapshots for null symbols.
             // https://github.com/dotnet/roslyn/issues/36066
             var snapshotBuilder =
@@ -2131,7 +2170,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             if (remappedSymbols is object)
             {
-                // When we're rewriting for the speculative model, there will be a set of originally-mapped symbols, and we need to
+                // When we're rewriting for the speculative model, there will be a set of originally-mapped symbols,
+                // and we need to
                 // use them in addition to any symbols found during this pass of the walker.
                 remappedSymbolsBuilder.AddRange(remappedSymbols);
             }
@@ -2152,7 +2192,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the nullable analysis is needed for the region represented by <paramref name="syntaxNode"/>.
+        /// Returns true if the nullable analysis is needed for the region represented by <paramref
+        // name="syntaxNode"/>.
         /// The syntax node is used to determine the overall nullable context for the region.
         /// </summary>
         internal static bool NeedsAnalysis(CSharpCompilation compilation, SyntaxNode syntaxNode)
@@ -2164,8 +2205,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
         }
 
-        /// <summary>Analyzes a node in a "one-off" context, such as for attributes or parameter default values.</summary>
-        /// <remarks><paramref name="syntax"/> is the syntax span used to determine the overall nullable context.</remarks>
+        /// <summary>Analyzes a node in a "one-off" context, such as for attributes or parameter default
+        // values.</summary>
+        /// <remarks><paramref name="syntax"/> is the syntax span used to determine the overall nullable
+        // context.</remarks>
         internal static void AnalyzeIfNeeded(
             Binder binder,
             BoundNode node,
@@ -2887,8 +2930,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Should we warn for assigning this state into this type?
         ///
-        /// This should often be checked together with <seealso cref="IsDisallowedNullAssignment(TypeWithState, FlowAnalysisAnnotations)"/>
-        /// It catches putting a `null` into a `[DisallowNull]int?` for example, which cannot simply be represented as a non-nullable target type.
+        /// This should often be checked together with <seealso
+        // cref="IsDisallowedNullAssignment(TypeWithState, FlowAnalysisAnnotations)"/>
+        /// It catches putting a `null` into a `[DisallowNull]int?` for example, which cannot simply be
+        // represented as a non-nullable target type.
         /// </summary>
         private static bool ShouldReportNullableAssignment(
             TypeWithAnnotations type,
@@ -3073,7 +3118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     == FlowAnalysisAnnotations.NotNull;
                 if (overriddenHasNotNull && !overridingHasNotNull && !forRef)
                 {
-                    // Overriding doesn't conform to contract of overridden (ie. promise not to return if parameter is null)
+                    // Overriding doesn't conform to contract of overridden (ie. promise not to return if parameter is
+                    // null)
                     return false;
                 }
 
@@ -3085,7 +3131,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     == FlowAnalysisAnnotations.MaybeNull;
                 if (overriddenHasMaybeNull && !overridingHasMaybeNull && !forRef)
                 {
-                    // Overriding doesn't conform to contract of overridden (ie. promise to only return if parameter is null)
+                    // Overriding doesn't conform to contract of overridden (ie. promise to only return if parameter is
+                    // null)
                     return false;
                 }
             }
@@ -3476,9 +3523,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Whenever assigning a variable, and that variable is not declared at the point the state is being set,
-        /// and the new state is not <see cref="NullableFlowState.NotNull"/>, this method should be called to perform the
-        /// state setting and to ensure the mutation is visible outside the finally block when the mutation occurs in a
+        /// Whenever assigning a variable, and that variable is not declared at the point the state is being
+        // set,
+        /// and the new state is not <see cref="NullableFlowState.NotNull"/>, this method should be called
+        // to perform the
+        /// state setting and to ensure the mutation is visible outside the finally block when the mutation
+        // occurs in a
         /// finally block.
         /// </summary>
         private void SetStateAndTrackForFinally(
@@ -3627,7 +3677,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // The partial definition part may include optional parameters whose default values we want to simulate assigning at the beginning of the method
+            // The partial definition part may include optional parameters whose default values we want to
+            // simulate assigning at the beginning of the method
             methodSymbol = methodSymbol.PartialDefinitionPart ?? methodSymbol;
 
             var methodParameters = methodSymbol.Parameters;
@@ -3635,12 +3686,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _useDelegateInvokeParameterTypes ? _delegateInvokeMethod! : methodSymbol
             ).Parameters;
 
-            // save a state representing the possibility that parameter default values were not assigned to the parameters.
+            // save a state representing the possibility that parameter default values were not assigned to the
+            // parameters.
             var parameterDefaultsNotAssignedState = State.Clone();
             for (int i = 0; i < methodParameters.Length; i++)
             {
                 var parameter = methodParameters[i];
-                // In error scenarios, the method can potentially have more parameters than the signature. If so, use the parameter type for those
+                // In error scenarios, the method can potentially have more parameters than the signature. If so,
+                // use the parameter type for those
                 // errored parameters
                 var parameterType =
                     i >= signatureParameters.Length
@@ -3739,7 +3792,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            // Should not convert to method return type when inferring return type (when _returnTypesOpt != null).
+            // Should not convert to method return type when inferring return type (when _returnTypesOpt !=
+            // null).
             if (
                 _returnTypesOpt == null
                 && TryGetReturnType(
@@ -3753,7 +3807,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && returnType.Type.SpecialType == SpecialType.System_Boolean
                 )
                 {
-                    // visit the expression without unsplitting, then check parameters marked with flow analysis attributes
+                    // visit the expression without unsplitting, then check parameters marked with flow analysis
+                    // attributes
                     Visit(expr);
                 }
                 else
@@ -3945,8 +4000,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
             )
             {
-                // When the local is used before or during initialization, there can potentially be a mismatch between node.LocalSymbol.Type and node.Type. We
-                // need to prefer node.Type as we shouldn't be changing the type of the BoundLocal node during rewrite.
+                // When the local is used before or during initialization, there can potentially be a mismatch
+                // between node.LocalSymbol.Type and node.Type. We
+                // need to prefer node.Type as we shouldn't be changing the type of the BoundLocal node during
+                // rewrite.
                 // https://github.com/dotnet/roslyn/issues/34158
                 Debug.Assert(node.Type.IsErrorType() || type.Type.IsErrorType());
                 type = TypeWithAnnotations.Create(node.Type, type.NullableAnnotation);
@@ -4203,7 +4260,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultState,
                 MakeSlot(receiver)
             );
-            // use the declared nullability of Clone() for the top-level nullability of the result of the with-expression.
+            // use the declared nullability of Clone() for the top-level nullability of the result of the
+            // with-expression.
             SetResult(withExpr, resultState, resultType);
             VisitObjectCreationInitializer(
                 resultSlot,
@@ -4212,7 +4270,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 delayCompletionForType: false
             );
 
-            // Note: this does not account for the scenario where `Clone()` returns maybe-null and the with-expression has no initializers.
+            // Note: this does not account for the scenario where `Clone()` returns maybe-null and the
+            // with-expression has no initializers.
             // Tracking in https://github.com/dotnet/roslyn/issues/44759
             return null;
         }
@@ -4384,7 +4443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         // For asserts only.
         private static bool AreCloseEnough(TypeSymbol? typeA, TypeSymbol? typeB)
         {
-            // https://github.com/dotnet/roslyn/issues/34993: We should be able to tighten this to ensure that we're actually always returning the same type,
+            // https://github.com/dotnet/roslyn/issues/34993: We should be able to tighten this to ensure that
+            // we're actually always returning the same type,
             // not error if one is null or ignoring certain types
             if ((object?)typeA == typeB)
             {
@@ -4854,7 +4914,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else if (constructor?.ParameterCount == 1)
                             {
-                                // if we deal with one-parameter ctor that takes underlying, then Value state is inferred from the argument.
+                                // if we deal with one-parameter ctor that takes underlying, then Value state is inferred from the
+                                // argument.
                                 var parameterType = constructor.ParameterTypesWithAnnotations[0];
                                 if (
                                     AreNullableAndUnderlyingTypes(
@@ -4911,7 +4972,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If <paramref name="delayCompletionForType"/>, <paramref name="containingSlot"/> is known only within returned delegate.
+        /// If <paramref name="delayCompletionForType"/>, <paramref name="containingSlot"/> is known only
+        // within returned delegate.
         /// </summary>
         /// <returns>A delegate to complete the initializer analysis.</returns>
         private Action<int, TypeSymbol>? VisitObjectCreationInitializer(
@@ -4975,7 +5037,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If <paramref name="delayCompletionForType"/>, <paramref name="containingSlot"/> is known only within returned delegate.
+        /// If <paramref name="delayCompletionForType"/>, <paramref name="containingSlot"/> is known only
+        // within returned delegate.
         /// </summary>
         /// <returns>A delegate to complete the element initializer analysis.</returns>
         private Action<int, TypeSymbol>? VisitObjectElementInitializer(
@@ -5021,7 +5084,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ArgumentsCompletionDelegate? argumentsCompletion = null;
                 if (!objectInitializer.Arguments.IsDefaultOrEmpty)
                 {
-                    // It is an error for an interpolated string to use the receiver of an object initializer indexer here, so we just use
+                    // It is an error for an interpolated string to use the receiver of an object initializer indexer
+                    // here, so we just use
                     // a default visit result
                     (_, argumentResults, _, argumentsCompletion) = VisitArguments(
                         objectInitializer,
@@ -5061,7 +5125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             delayCompletionForType
                         );
                     }
-                    // https://github.com/dotnet/roslyn/issues/35040: Should likely be setting _resultType in VisitObjectCreationInitializer
+                    // https://github.com/dotnet/roslyn/issues/35040: Should likely be setting _resultType in
+                    // VisitObjectCreationInitializer
                     // and using that value instead of reconstructing here
                 }
 
@@ -5624,7 +5689,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var property = AnonymousTypeManager.GetAnonymousTypeProperty(anonymousType, i);
                     if (property.Type.SpecialType != SpecialType.System_Void)
                     {
-                        // A void element results in an error type in the anonymous type but not in the property's container!
+                        // A void element results in an error type in the anonymous type but not in the property's
+                        // container!
                         // To avoid failing an assertion later, we skip them.
                         var slot = GetOrCreateSlot(property, receiverSlot);
                         TrackNullableStateForAssignment(
@@ -5784,7 +5850,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (bestType is object)
                 {
-                    // Convert elements to best type to determine element top-level nullability and to report nested nullability warnings
+                    // Convert elements to best type to determine element top-level nullability and to report nested
+                    // nullability warnings
                     for (int i = 0; i < n; i++)
                     {
                         var expressionNoConversion = expressionsNoConversions[i];
@@ -5889,8 +5956,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Applies analysis similar to <see cref="VisitArrayCreation"/>.
-        /// The expressions returned from a lambda are not converted though, so we'll have to classify fresh conversions.
-        /// Note: even if some conversions fail, we'll proceed to infer top-level nullability. That is reasonable in common cases.
+        /// The expressions returned from a lambda are not converted though, so we'll have to classify fresh
+        // conversions.
+        /// Note: even if some conversions fail, we'll proceed to infer top-level nullability. That is
+        // reasonable in common cases.
         /// </summary>
         internal static TypeWithAnnotations BestTypeForLambdaReturns(
             ArrayBuilder<(
@@ -6158,7 +6227,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 includeExplicitConversions: false
             );
 
-            // Only the leftmost operator of a left-associative binary operator chain can learn from a conditional access on the left
+            // Only the leftmost operator of a left-associative binary operator chain can learn from a
+            // conditional access on the left
             // For simplicity, we just special case it here.
             // For example, `a?.b(out x) == true` has a conditional access on the left of the operator,
             // but `expr == a?.b(out x) == true` has a conditional access on the right of the operator
@@ -6182,11 +6252,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // `a?.b(x = null) == c.d(x = new object())` // `x` is not-null after expression
 
                 // In this scenario, we visit the RHS twice:
-                // (1) Once using the single "stateWhenNotNull" after the LHS, in order to update the "stateWhenNotNull" with the effects of the RHS
+                // (1) Once using the single "stateWhenNotNull" after the LHS, in order to update the
+                // "stateWhenNotNull" with the effects of the RHS
                 // (2) Once using the "worst case" state after the LHS for diagnostics and public API
 
-                // After the two visits of the RHS, we may set a conditional state using the state after (1) as the StateWhenTrue and the state after (2) as the StateWhenFalse.
-                // Depending on whether `==` or `!=` was used, and depending on the value of the RHS, we may then swap the StateWhenTrue with the StateWhenFalse.
+                // After the two visits of the RHS, we may set a conditional state using the state after (1) as the
+                // StateWhenTrue and the state after (2) as the StateWhenFalse.
+                // Depending on whether `==` or `!=` was used, and depending on the value of the RHS, we may then
+                // swap the StateWhenTrue with the StateWhenFalse.
 
                 var oldDisableDiagnostics = _disableDiagnostics;
                 _disableDiagnostics = true;
@@ -6201,7 +6274,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _disableDiagnostics = oldDisableDiagnostics;
 
                 // Now visit the right side for public API and diagnostics using the worst-case state from the LHS.
-                // Note that we do this visit last to try and make sure that the "visit for public API" overwrites walker state recorded during previous visits where possible.
+                // Note that we do this visit last to try and make sure that the "visit for public API" overwrites
+                // walker state recorded during previous visits where possible.
                 SetState(stateAfterLeft);
                 var rightType = VisitRvalueWithState(rightOperand);
                 ReinferBinaryOperatorAndSetResult(
@@ -6277,7 +6351,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         is { IsBoolean: true, BooleanValue: var boolValue }
                 )
                 {
-                    // can preserve conditional state from `.TryGetValue` in `dict?.TryGetValue(key, out value) == true`,
+                    // can preserve conditional state from `.TryGetValue` in `dict?.TryGetValue(key, out value) ==
+                    // true`,
                     // but not in `dict?.TryGetValue(key, out value) != false`
                     stateWhenNotNull = boolValue
                         ? conditionalStateWhenNotNull.StateWhenTrue
@@ -6338,7 +6413,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
 
-                // can only learn from a bool constant operand here if it's using the built in `bool operator ==(bool left, bool right)`
+                // can only learn from a bool constant operand here if it's using the built in `bool operator
+                // ==(bool left, bool right)`
                 if (binary.OperatorKind.IsUserDefined())
                 {
                     return false;
@@ -6575,7 +6651,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SplitAndLearnFromNonNullTest(right, whenTrue: true);
             }
 
-            // For nested binary operators, this can be the only time they're visited due to explicit stack used in AbstractFlowPass.VisitBinaryOperator,
+            // For nested binary operators, this can be the only time they're visited due to explicit stack used
+            // in AbstractFlowPass.VisitBinaryOperator,
             // so we need to set the flow-analyzed type here.
             var inferredResult = InferResultNullability(
                 operatorKind,
@@ -6660,7 +6737,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     bool nonNullCase = op != BinaryOperatorKind.Equal; // true represents WhenTrue
                     SplitAndLearnFromNonNullTest(operandComparedToNull, whenTrue: nonNullCase);
 
-                    // `x == null` and `x != null` are pure null tests so update the null-state in the alternative branch too
+                    // `x == null` and `x != null` are pure null tests so update the null-state in the alternative
+                    // branch too
                     LearnFromNullTest(
                         operandComparedToNull,
                         ref nonNullCase ? ref StateWhenFalse : ref StateWhenTrue
@@ -6748,10 +6826,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// If we learn that the operand is non-null, we can infer that certain
         /// sub-expressions were also non-null.
-        /// Get all nested conditional slots for those sub-expressions. For example in a?.b?.c we'll set a, b, and c.
+        /// Get all nested conditional slots for those sub-expressions. For example in a?.b?.c we'll set a,
+        // b, and c.
         /// Only returns slots for tracked expressions.
         /// </summary>
-        /// <remarks>https://github.com/dotnet/roslyn/issues/53397 This method should potentially be removed.</remarks>
+        /// <remarks>https://github.com/dotnet/roslyn/issues/53397 This method should potentially be
+        // removed.</remarks>
         private void GetSlotsToMarkAsNotNullable(
             BoundExpression operand,
             ArrayBuilder<int> slotBuilder
@@ -6764,16 +6844,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 while (true)
                 {
-                    // Due to the nature of binding, if there are conditional access they will be at the top of the bound tree,
-                    // potentially with a conversion on top of it. We go through any conditional accesses, adding slots for the
-                    // conditional receivers if they have them. If we ever get to a receiver that MakeSlot doesn't return a slot
+                    // Due to the nature of binding, if there are conditional access they will be at the top of the
+                    // bound tree,
+                    // potentially with a conversion on top of it. We go through any conditional accesses, adding slots
+                    // for the
+                    // conditional receivers if they have them. If we ever get to a receiver that MakeSlot doesn't
+                    // return a slot
                     // for, nothing underneath is trackable and we bail at that point. Example:
                     //
                     //     a?.GetB()?.C // a is a field, GetB is a method, and C is a property
                     //
-                    // The top of the tree is the a?.GetB() conditional call. We'll ask for a slot for a, and we'll get one because
-                    // fields have slots. The AccessExpression of the BoundConditionalAccess is another BoundConditionalAccess, this time
-                    // with a receiver of the GetB() BoundCall. Attempting to get a slot for this receiver will fail, and we'll
+                    // The top of the tree is the a?.GetB() conditional call. We'll ask for a slot for a, and we'll get
+                    // one because
+                    // fields have slots. The AccessExpression of the BoundConditionalAccess is another
+                    // BoundConditionalAccess, this time
+                    // with a receiver of the GetB() BoundCall. Attempting to get a slot for this receiver will fail,
+                    // and we'll
                     // return an array with just the slot for a.
                     int slot;
                     switch (operand.Kind)
@@ -6817,7 +6903,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // Attempt to create a slot for the current thing. If there were any more conditional accesses,
                             // they would have been on top, so this is the last thing we need to specially handle.
 
-                            // https://github.com/dotnet/roslyn/issues/33879 When we handle unconditional access survival (ie after
+                            // https://github.com/dotnet/roslyn/issues/33879 When we handle unconditional access survival (ie
+                            // after
                             // c.D has been invoked, c must be nonnull or we've thrown a NullRef), revisit whether
                             // we need more special handling here
 
@@ -6886,7 +6973,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (expression.ConstantValueOpt != null)
                 return;
 
-            // We should not blindly strip conversions here. Tracked by https://github.com/dotnet/roslyn/issues/36164
+            // We should not blindly strip conversions here. Tracked by
+            // https://github.com/dotnet/roslyn/issues/36164
             var expressionWithoutConversion = RemoveConversion(
                 expression,
                 includeExplicitConversions: true
@@ -6895,9 +6983,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Since we know for sure the slot is null (we just tested it), we know that dependent slots are not
             // reachable and therefore can be treated as not null.  However, we have not computed the proper
-            // (inferred) type for the expression, so we cannot compute the correct symbols for the member slots here
+            // (inferred) type for the expression, so we cannot compute the correct symbols for the member slots
+            // here
             // (using the incorrect symbols would result in computing an incorrect default state for them).
-            // Therefore we do not mark dependent slots not null.  See https://github.com/dotnet/roslyn/issues/39624
+            // Therefore we do not mark dependent slots not null.  See
+            // https://github.com/dotnet/roslyn/issues/39624
             LearnFromNullTest(
                 slot,
                 expressionWithoutConversion.Type,
@@ -7229,7 +7319,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         node.LeftOperand,
                         conversion,
                         TypeWithAnnotations.Create(rightType),
-                        // When considering the conversion on the left node, it can only occur in the case where the underlying
+                        // When considering the conversion on the left node, it can only occur in the case where the
+                        // underlying
                         // execution returned non-null
                         TypeWithState.Create(leftType, NullableFlowState.NotNull),
                         checkConversion: false,
@@ -7308,7 +7399,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            // in case we *didn't* have a conditional access, the only thing we learn in the "state when not null"
+            // in case we *didn't* have a conditional access, the only thing we learn in the "state when not
+            // null"
             // is that the top-level expression was non-null.
             Visit(node);
             stateWhenNotNull = PossiblyConditionalState.Create(this);
@@ -7350,7 +7442,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Consider a scenario like `"a"?.M0(x = 1)?.M0(y = 1)`.
                 // We can "know" that `.M0(x = 1)` was evaluated unconditionally but not `M0(y = 1)`.
-                // Therefore we do a VisitPossibleConditionalAccess here which unconditionally includes the "after receiver" state in State
+                // Therefore we do a VisitPossibleConditionalAccess here which unconditionally includes the "after
+                // receiver" state in State
                 // and includes the "after subsequent conditional accesses" in stateWhenNotNull
                 VisitPossibleConditionalAccess(node.AccessExpression, out stateWhenNotNull);
             }
@@ -7372,14 +7465,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // We want to preserve stateWhenNotNull from accesses in the same "chain":
-                // a?.b(out x)?.c(out y); // expected to preserve stateWhenNotNull from both ?.b(out x) and ?.c(out y)
+                // a?.b(out x)?.c(out y); // expected to preserve stateWhenNotNull from both ?.b(out x) and ?.c(out
+                // y)
                 // but not accesses in nested expressions:
-                // a?.b(out x, c?.d(out y)); // expected to preserve stateWhenNotNull from a?.b(out x, ...) but not from c?.d(out y)
+                // a?.b(out x, c?.d(out y)); // expected to preserve stateWhenNotNull from a?.b(out x, ...) but not
+                // from c?.d(out y)
                 BoundExpression expr = node.AccessExpression;
                 while (expr is BoundConditionalAccess innerCondAccess)
                 {
-                    // we assume that non-conditional accesses can never contain conditional accesses from the same "chain".
-                    // that is, we never have to dig through non-conditional accesses to find and handle conditional accesses.
+                    // we assume that non-conditional accesses can never contain conditional accesses from the same
+                    // "chain".
+                    // that is, we never have to dig through non-conditional accesses to find and handle conditional
+                    // accesses.
                     Debug.Assert(
                         innerCondAccess.Receiver is not (BoundConditionalAccess or BoundConversion)
                     );
@@ -7387,8 +7484,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _currentConditionalReceiverVisitResult = _visitResult;
                     makeAndAdjustReceiverSlot(innerCondAccess.Receiver);
 
-                    // The savedState here represents the scenario where 0 or more of the access expressions could have been evaluated.
-                    // e.g. after visiting `a?.b(x = null)?.c(x = new object())`, the "state when not null" of `x` is NotNull, but the "state when maybe null" of `x` is MaybeNull.
+                    // The savedState here represents the scenario where 0 or more of the access expressions could have
+                    // been evaluated.
+                    // e.g. after visiting `a?.b(x = null)?.c(x = new object())`, the "state when not null" of `x` is
+                    // NotNull, but the "state when maybe null" of `x` is MaybeNull.
                     Join(ref savedState, ref State);
 
                     expr = innerCondAccess.AccessExpression;
@@ -7400,7 +7499,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 expr = node.AccessExpression;
                 while (expr is BoundConditionalAccess innerCondAccess)
                 {
-                    // The resulting nullability of each nested conditional access is the same as the resulting nullability of the rightmost access.
+                    // The resulting nullability of each nested conditional access is the same as the resulting
+                    // nullability of the rightmost access.
                     SetAnalyzedNullability(innerCondAccess, _visitResult);
                     expr = innerCondAccess.AccessExpression;
                 }
@@ -7579,10 +7679,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (!wasTargetTyped)
                 {
-                    // This can happen when we're inferring the return type of a lambda or visiting a node without diagnostics like
+                    // This can happen when we're inferring the return type of a lambda or visiting a node without
+                    // diagnostics like
                     // BoundConvertedTupleLiteral.SourceTuple. For these cases, we don't need to do any work,
-                    // the unconverted conditional operator can't contribute info. The conversion that should be on top of this
-                    // can add or remove nullability, and nested nodes aren't being publicly exposed by the semantic model.
+                    // the unconverted conditional operator can't contribute info. The conversion that should be on top
+                    // of this
+                    // can add or remove nullability, and nested nodes aren't being publicly exposed by the semantic
+                    // model.
                     Debug.Assert(node is BoundUnconvertedConditionalOperator);
                     Debug.Assert(_returnTypesOpt is not null || _disableDiagnostics);
                     SetResultType(node, TypeWithState.Create(resultType, default));
@@ -7816,7 +7919,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Placeholders are bound expressions with type and state.
-        /// But for typeless expressions (such as `null` or `(null, null)` we hold onto the original bound expression,
+        /// But for typeless expressions (such as `null` or `(null, null)` we hold onto the original bound
+        // expression,
         /// as it will be useful for conversions from expression.
         /// </summary>
         private static BoundExpression CreatePlaceholderIfNecessary(
@@ -8133,13 +8237,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var constructedType = wellKnownType.Construct(ImmutableArray.Create(parameterType));
                 var constructedMethod = wellKnownMethod.AsMember(constructedType);
 
-                // FindImplementationForInterfaceMember doesn't check if this method is itself the interface method we're looking for
+                // FindImplementationForInterfaceMember doesn't check if this method is itself the interface method
+                // we're looking for
                 if (constructedMethod.Equals(method))
                 {
                     return true;
                 }
 
-                // check whether 'method', when called on this receiver, is an implementation of 'constructedMethod'.
+                // check whether 'method', when called on this receiver, is an implementation of
+                // 'constructedMethod'.
                 for (
                     var baseType = receiverType;
                     baseType is object && method is object;
@@ -8157,7 +8263,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (implementationMethod.ContainingType.IsInterface)
                     {
-                        // this method cannot be called directly from source because an interface can only explicitly implement a method from its base interface.
+                        // this method cannot be called directly from source because an interface can only explicitly
+                        // implement a method from its base interface.
                         return false;
                     }
 
@@ -8174,8 +8281,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                     }
 
-                    // the Equals method being called isn't the method that implements the interface method in this type.
-                    // it could be a method that implements the interface on a base type, so check again with the base type of 'implementationMethod.ContainingType'
+                    // the Equals method being called isn't the method that implements the interface method in this
+                    // type.
+                    // it could be a method that implements the interface on a base type, so check again with the base
+                    // type of 'implementationMethod.ContainingType'
 
                     // e.g. in this hierarchy:
                     // class A -> B -> C -> D
@@ -8188,7 +8297,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // 4. give up when checking A, since B.Equals is not overriding anything in A
 
                     // we know that implementationMethod.ContainingType is the same type or a base type of 'baseType',
-                    // and that the implementation method will be the same between 'baseType' and 'implementationMethod.ContainingType'.
+                    // and that the implementation method will be the same between 'baseType' and
+                    // 'implementationMethod.ContainingType'.
                     // we step through the intermediate bases in order to skip unnecessary override methods.
                     while (
                         !baseType.Equals(implementationMethod.ContainingType) && method is object
@@ -8349,8 +8459,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method
         )
         {
-            // methods which are members of Nullable<T> (ex: ToString, GetHashCode) can be invoked on null receiver.
-            // However, inherited methods (ex: GetType) are invoked on a boxed value (since base types are reference types)
+            // methods which are members of Nullable<T> (ex: ToString, GetHashCode) can be invoked on null
+            // receiver.
+            // However, inherited methods (ex: GetType) are invoked on a boxed value (since base types are
+            // reference types)
             // and therefore in those cases nullable receivers should be checked for nullness.
             bool checkNullableValueType = false;
 
@@ -8368,9 +8480,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 == compilation.GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_Value)
             )
             {
-                // call to get_Value may not occur directly in source, but may be inserted as a result of premature lowering.
+                // call to get_Value may not occur directly in source, but may be inserted as a result of premature
+                // lowering.
                 // One example where we do it is foreach with nullables.
-                // The reason is Dev10 compatibility (see: UnwrapCollectionExpressionIfNullable in ForEachLoopBinder.cs)
+                // The reason is Dev10 compatibility (see: UnwrapCollectionExpressionIfNullable in
+                // ForEachLoopBinder.cs)
                 // Regardless of the reasons, we know that the method does not tolerate nulls.
                 checkNullableValueType = true;
             }
@@ -8412,8 +8526,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Fix a TypeWithAnnotations based on Allow/DisallowNull annotations prior to a conversion or assignment.
-        /// Note this does not work for nullable value types, so an additional check with <see cref="CheckDisallowedNullAssignment"/> may be required.
+        /// Fix a TypeWithAnnotations based on Allow/DisallowNull annotations prior to a conversion or
+        // assignment.
+        /// Note this does not work for nullable value types, so an additional check with <see
+        // cref="CheckDisallowedNullAssignment"/> may be required.
         /// </summary>
         private static TypeWithAnnotations ApplyLValueAnnotations(
             TypeWithAnnotations declaredType,
@@ -8594,7 +8710,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If you pass in a method symbol, its type arguments will be re-inferred and the re-inferred method will be returned.
+        /// If you pass in a method symbol, its type arguments will be re-inferred and the re-inferred
+        // method will be returned.
         /// </summary>
         private (
             MethodSymbol? method,
@@ -8907,7 +9024,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     for (int i = 0; i < arguments.Length; i++)
                     {
-                        // We can hit this case when dynamic methods are involved, or when there are errors. In either case we have no information,
+                        // We can hit this case when dynamic methods are involved, or when there are errors. In either case
+                        // we have no information,
                         // so just assume that the conversions have the same nullability as the underlying result
                         var argument = arguments[i];
                         var result = results[i];
@@ -8982,7 +9100,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 // It looks like in some error scenarios we can get here without params array created.
-                // At the moment, there is only one test that gets here like that - Microsoft.CodeAnalysis.CSharp.UnitTests.AttributeTests.TestBadParamsCtor.
+                // At the moment, there is only one test that gets here like that -
+                // Microsoft.CodeAnalysis.CSharp.UnitTests.AttributeTests.TestBadParamsCtor.
                 // And we get here for the erroneous attribute application, constructor is inaccessible.
                 // Perhaps that shouldn't cancel the default values / params array processing?
                 Debug.Assert(arguments.Count(a => a.IsParamsArray) <= 1);
@@ -9365,7 +9484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case RefKind.None:
                 case RefKind.In:
                     {
-                        // Note: for lambda arguments, they will be converted in the context/state we saved for that argument
+                        // Note: for lambda arguments, they will be converted in the context/state we saved for that
+                        // argument
                         if (conversion is { Kind: ConversionKind.ImplicitUserDefined })
                         {
                             var argumentResultType = resultType.Type;
@@ -9473,7 +9593,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(!this.IsConditionalState);
         }
 
-        /// <summary>Returns <see langword="true"/> if this is an assignment forbidden by DisallowNullAttribute, otherwise <see langword="false"/>.</summary>
+        /// <summary>Returns <see langword="true"/> if this is an assignment forbidden by
+        // DisallowNullAttribute, otherwise <see langword="false"/>.</summary>
         private bool CheckDisallowedNullAssignment(
             TypeWithState state,
             FlowAnalysisAnnotations annotations,
@@ -9622,7 +9743,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             parameterAnnotations
                         );
 
-                        // Adjust parameter state if MaybeNull or MaybeNullWhen are present (for `var` type and for assignment warnings)
+                        // Adjust parameter state if MaybeNull or MaybeNullWhen are present (for `var` type and for
+                        // assignment warnings)
                         var worstCaseParameterWithState = applyPostConditionsUnconditionally(
                             parameterWithState,
                             parameterAnnotations
@@ -10043,7 +10165,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(method.IsGenericMethod);
 
-            // https://github.com/dotnet/roslyn/issues/27961 OverloadResolution.IsMemberApplicableInNormalForm and
+            // https://github.com/dotnet/roslyn/issues/27961 OverloadResolution.IsMemberApplicableInNormalForm
+            // and
             // IsMemberApplicableInExpandedForm use the least overridden method. We need to do the same here.
             var definition = method.ConstructedFrom;
             var refKinds = ArrayBuilder<RefKind>.GetInstance();
@@ -10052,7 +10175,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 refKinds.AddRange(argumentRefKindsOpt);
             }
 
-            // https://github.com/dotnet/roslyn/issues/27961 Do we really need OverloadResolution.GetEffectiveParameterTypes?
+            // https://github.com/dotnet/roslyn/issues/27961 Do we really need
+            // OverloadResolution.GetEffectiveParameterTypes?
             // Aren't we doing roughly the same calculations in GetCorrespondingParameter?
             OverloadResolution.GetEffectiveParameterTypes(
                 definition,
@@ -10179,7 +10303,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var visitArgumentResult = argumentResults[i];
                 var lambdaState = visitArgumentResult.StateForLambda;
-                // Note: for `out` arguments, the argument result contains the declaration type (see `VisitArgumentEvaluate`)
+                // Note: for `out` arguments, the argument result contains the declaration type (see
+                // `VisitArgumentEvaluate`)
                 var argumentResult = visitArgumentResult.RValueType.ToTypeWithAnnotations(
                     compilation
                 );
@@ -10463,8 +10588,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Gets the corresponding member for a symbol from initial binding to match an updated receiver type in NullableWalker.
-        /// For instance, this will map from List&lt;string~&gt;.Add(string~) to List&lt;string?&gt;.Add(string?) in the following example:
+        /// Gets the corresponding member for a symbol from initial binding to match an updated receiver
+        // type in NullableWalker.
+        /// For instance, this will map from List&lt;string~&gt;.Add(string~) to
+        // List&lt;string?&gt;.Add(string?) in the following example:
         /// <example>
         /// string s = null;
         /// var list = new[] { s }.ToList();
@@ -10578,7 +10705,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode? VisitConversion(BoundConversion node)
         {
-            // https://github.com/dotnet/roslyn/issues/35732: Assert VisitConversion is only used for explicit conversions.
+            // https://github.com/dotnet/roslyn/issues/35732: Assert VisitConversion is only used for explicit
+            // conversions.
             //Debug.Assert(node.ExplicitCastInCode);
             //Debug.Assert(node.ConversionGroupOpt != null);
             //Debug.Assert(node.ConversionGroupOpt.ExplicitType.HasType);
@@ -10797,7 +10925,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(!IsConditionalState);
             var savedState = this.State.Clone();
             // Visit the source tuple so that the semantic model can correctly report nullability for it
-            // Disable diagnostics, as we don't want to duplicate any that are produced by visiting the converted literal below
+            // Disable diagnostics, as we don't want to duplicate any that are produced by visiting the
+            // converted literal below
             VisitWithoutDiagnostics(node.SourceTuple);
 
             this.SetState(savedState);
@@ -11219,11 +11348,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            // Parameter nullability is expected to match exactly. This corresponds to the behavior of initial binding.
-            //    Action<string> x = (object o) => { }; // error CS1661: Cannot convert lambda expression to delegate type 'Action<string>' because the parameter types do not match the delegate parameter types
-            //    Action<object> y = (object? o) => { }; // warning CS8622: Nullability of reference types in type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'Action<object>'.
+            // Parameter nullability is expected to match exactly. This corresponds to the behavior of initial
+            // binding.
+            //    Action<string> x = (object o) => { }; // error CS1661: Cannot convert lambda expression to
+            // delegate type 'Action<string>' because the parameter types do not match the delegate parameter
+            // types
+            //    Action<object> y = (object? o) => { }; // warning CS8622: Nullability of reference types in
+            // type of parameter 'o' of 'lambda expression' doesn't match the target delegate 'Action<object>'.
             // We check that by calling CheckValidNullableMethodOverride in both directions.
-            // https://github.com/dotnet/roslyn/issues/35564: Consider relaxing and allow implicit conversions of nullability (as we do for method group conversions).
+            // https://github.com/dotnet/roslyn/issues/35564: Consider relaxing and allow implicit conversions
+            // of nullability (as we do for method group conversions).
 
             if (lambda.Syntax is LambdaExpressionSyntax lambdaSyntax)
             {
@@ -11297,7 +11431,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Location location
             )
             {
-                // For anonymous functions with implicit parameters, no need to report this since the parameters can't be referenced
+                // For anonymous functions with implicit parameters, no need to report this since the parameters
+                // can't be referenced
                 if (unboundLambda.HasSignature)
                 {
                     ReportDiagnostic(
@@ -11353,7 +11488,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// will be copied to the converted result when possible.
         /// </param>
         /// <param name="useLegacyWarnings">
-        /// If <see langword="true"/>, indicates that the "non-safety" diagnostic <see cref="ErrorCode.WRN_ConvertingNullableToNonNullable"/>
+        /// If <see langword="true"/>, indicates that the "non-safety" diagnostic <see
+        // cref="ErrorCode.WRN_ConvertingNullableToNonNullable"/>
         /// should be given for an invalid conversion.
         /// </param>
         private TypeWithState VisitConversion(
@@ -11764,7 +11900,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (checkConversion && !targetType.IsErrorType())
                     {
-                        // https://github.com/dotnet/roslyn/issues/29699: Report warnings for user-defined conversions on tuple elements.
+                        // https://github.com/dotnet/roslyn/issues/29699: Report warnings for user-defined conversions on
+                        // tuple elements.
                         conversion = GenerateConversion(
                             _conversions,
                             conversionOperand,
@@ -12084,16 +12221,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         case BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter:
                         case BoundInterpolatedStringArgumentPlaceholder.UnspecifiedParameter:
-                        // We presume that all instance parameters were dereferenced by calling the instance method this handler was passed to. This isn't strictly
-                        // true: the handler constructor will be run before the receiver is dereferenced. However, if the dereference isn't safe, that will be a
+                        // We presume that all instance parameters were dereferenced by calling the instance method this
+                        // handler was passed to. This isn't strictly
+                        // true: the handler constructor will be run before the receiver is dereferenced. However, if the
+                        // dereference isn't safe, that will be a
                         // much better error to report than a mismatched argument nullability error.
                         case BoundInterpolatedStringArgumentPlaceholder.InstanceParameter:
                             break;
                         default:
                             if (previousArgumentConversionResults.Count > placeholder.ArgumentIndex)
                             {
-                                // We intentionally do not give a replacement bound node for this placeholder, as we do not propagate any post conditions from the constructor
-                                // to the original location of the node. This is because the nullable walker is not a true evaluation-order walker, and doing so would cause
+                                // We intentionally do not give a replacement bound node for this placeholder, as we do not
+                                // propagate any post conditions from the constructor
+                                // to the original location of the node. This is because the nullable walker is not a true
+                                // evaluation-order walker, and doing so would cause
                                 // us to miss real warnings.
                                 AddPlaceholderReplacement(
                                     placeholder,
@@ -12234,7 +12375,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnosticLocation: operandLocation
             );
 
-            // in the case of a lifted conversion, we assume that the call to the operator occurs only if the argument is not-null
+            // in the case of a lifted conversion, we assume that the call to the operator occurs only if the
+            // argument is not-null
             if (
                 !isLiftedConversion
                 && CheckDisallowedNullAssignment(
@@ -12878,7 +13020,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode? VisitLambda(BoundLambda node)
         {
             // Lambda bodies are usually visited in VisitConversion (we need to know the target delegate type),
-            // but in erroneous code, the lambda-to-delegate conversion might be missing, then we visit the lambda here.
+            // but in erroneous code, the lambda-to-delegate conversion might be missing, then we visit the
+            // lambda here.
             if (!node.InAnonymousFunctionConversion)
             {
                 VisitLambda(node, delegateTypeOpt: null);
@@ -12982,8 +13125,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             var left = node.Left;
             switch (left)
             {
-                // when binding initializers, we treat assignments to auto-properties or field-like events as direct assignments to the underlying field.
-                // in order to track member state based on these initializers, we need to see the assignment in terms of the associated member
+                // when binding initializers, we treat assignments to auto-properties or field-like events as direct
+                // assignments to the underlying field.
+                // in order to track member state based on these initializers, we need to see the assignment in
+                // terms of the associated member
                 case BoundFieldAccess
                 {
                     ExpressionSymbol: FieldSymbol { AssociatedSymbol: PropertySymbol autoProperty }
@@ -13105,7 +13250,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// When the allowed output of a property/indexer is not-null but the allowed input is maybe-null, we store a not-null value instead.
+        /// When the allowed output of a property/indexer is not-null but the allowed input is maybe-null,
+        // we store a not-null value instead.
         /// This way, assignment of a legal input value results in a legal output value.
         /// This adjustment doesn't apply to oblivious properties/indexers.
         /// </summary>
@@ -13196,7 +13342,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 == FlowAnalysisAnnotations.NotNull
             )
             {
-                // NotNullWhenTrue and NotNullWhenFalse don't count on their own. Only NotNull (ie. both flags) matters.
+                // NotNullWhenTrue and NotNullWhenFalse don't count on their own. Only NotNull (ie. both flags)
+                // matters.
                 annotations |= FlowAnalysisAnnotations.DisallowNull;
             }
             return annotations;
@@ -13253,8 +13400,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             variables.FreeAll(v => v.NestedVariables);
 
-            // https://github.com/dotnet/roslyn/issues/33011: Result type should be inferred and the constraints should
-            // be re-verified. Even though the standard tuple type has no constraints we support that scenario. Constraints_78
+            // https://github.com/dotnet/roslyn/issues/33011: Result type should be inferred and the constraints
+            // should
+            // be re-verified. Even though the standard tuple type has no constraints we support that scenario.
+            // Constraints_78
             // has a test for this case that should start failing when this is fixed.
             SetNotNullResult(node);
 
@@ -13672,7 +13821,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (expr.Type is NamedTypeSymbol { IsTupleType: true } tupleType)
             {
-                // https://github.com/dotnet/roslyn/issues/33011: Should include conversion.UnderlyingConversions[i].
+                // https://github.com/dotnet/roslyn/issues/33011: Should include
+                // conversion.UnderlyingConversions[i].
                 // For instance, Boxing conversions (see Deconstruction_ImplicitBoxingConversion_02) and
                 // ImplicitNullable conversions (see Deconstruction_ImplicitNullableConversion_02).
                 var fields = tupleType.TupleElements;
@@ -13706,7 +13856,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AssignmentKind assignmentKind = AssignmentKind.Assignment;
                 ParameterSymbol? parameter = null;
 
-                // Analyze operator call properly (honoring [Disallow|Allow|Maybe|NotNull] attribute annotations) https://github.com/dotnet/roslyn/issues/32671
+                // Analyze operator call properly (honoring [Disallow|Allow|Maybe|NotNull] attribute annotations)
+                // https://github.com/dotnet/roslyn/issues/32671
                 // https://github.com/dotnet/roslyn/issues/29961 Update conversion method based on operand type.
                 if (
                     node.OperandConversion is BoundConversion { Conversion: var operandConversion }
@@ -13736,7 +13887,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (targetTypeOfOperandConversion.HasType)
                 {
-                    // https://github.com/dotnet/roslyn/issues/29961 Should something special be done for targetTypeOfOperandConversion for lifted case?
+                    // https://github.com/dotnet/roslyn/issues/29961 Should something special be done for
+                    // targetTypeOfOperandConversion for lifted case?
                     resultOfOperandConversionType = VisitConversion(
                         conversionOpt: null,
                         node.Operand,
@@ -14258,7 +14410,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (node.Expression.Kind != BoundKind.Conversion)
             {
-                // If we're in this scenario, there was a binding error, and we should suppress any further warnings.
+                // If we're in this scenario, there was a binding error, and we should suppress any further
+                // warnings.
                 Debug.Assert(node.HasErrors);
                 VisitRvalue(node.Expression);
                 Visit(node.AwaitOpt);
@@ -14272,27 +14425,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             SnapshotWalkerThroughConversionGroup(node.Expression, expr);
 
             // There are 7 ways that a foreach can be created:
-            //    1. The collection type is an array type. For this, initial binding will generate an implicit reference conversion to
+            //    1. The collection type is an array type. For this, initial binding will generate an implicit
+            // reference conversion to
             //       IEnumerable, and we do not need to do any reinferring of enumerators here.
             //    2. The collection type is dynamic. For this we do the same as 1.
-            //    3. The collection type implements the GetEnumerator pattern. For this, there is an identity conversion. Because
-            //       this identity conversion uses nested types from initial binding, we cannot trust them and must instead use
+            //    3. The collection type implements the GetEnumerator pattern. For this, there is an identity
+            // conversion. Because
+            //       this identity conversion uses nested types from initial binding, we cannot trust them and
+            // must instead use
             //       the type of the expression returned from VisitResult to reinfer the enumerator information.
-            //    4. The collection type implements IEnumerable<T>. Only a few cases can hit this without being caught by number 3,
-            //       such as a type with a private implementation of IEnumerable<T>, or a type parameter constrained to that type.
-            //       In these cases, there will be an implicit conversion to IEnumerable<T>, but this will use types from
-            //       initial binding. For this scenario, we need to look through the list of implemented interfaces on the type and
-            //       find the version of IEnumerable<T> that it has after nullable analysis, as type substitution could have changed
+            //    4. The collection type implements IEnumerable<T>. Only a few cases can hit this without being
+            // caught by number 3,
+            //       such as a type with a private implementation of IEnumerable<T>, or a type parameter
+            // constrained to that type.
+            //       In these cases, there will be an implicit conversion to IEnumerable<T>, but this will use
+            // types from
+            //       initial binding. For this scenario, we need to look through the list of implemented
+            // interfaces on the type and
+            //       find the version of IEnumerable<T> that it has after nullable analysis, as type
+            // substitution could have changed
             //       nested nullability of type parameters. See ForEach_22 for a concrete example of this.
-            //    5. The collection type implements IEnumerable (non-generic). Because this version isn't generic, we don't need to
+            //    5. The collection type implements IEnumerable (non-generic). Because this version isn't
+            // generic, we don't need to
             //       do any reinference, and the existing conversion can stand as is.
-            //    6. The target framework's System.String doesn't implement IEnumerable. This is a compat case: System.String normally
-            //       does implement IEnumerable, but there are certain target frameworks where this isn't the case. The compiler will
+            //    6. The target framework's System.String doesn't implement IEnumerable. This is a compat case:
+            // System.String normally
+            //       does implement IEnumerable, but there are certain target frameworks where this isn't the
+            // case. The compiler will
             //       still emit code for foreach in these scenarios.
-            //    7. The collection type implements the GetEnumerator pattern via an extension GetEnumerator. For this, there will be
+            //    7. The collection type implements the GetEnumerator pattern via an extension GetEnumerator.
+            // For this, there will be
             //       conversion to the parameter of the extension method.
-            //    8. Some binding error occurred, and some other error has already been reported. Usually this doesn't have any kind
-            //       of conversion on top, but if there was an explicit conversion in code then we could get past the initial check
+            //    8. Some binding error occurred, and some other error has already been reported. Usually this
+            // doesn't have any kind
+            //       of conversion on top, but if there was an explicit conversion in code then we could get
+            // past the initial check
             //       for a BoundConversion node.
 
             var resultTypeWithState = VisitRvalueWithState(expr);
@@ -14312,8 +14479,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 // this is case 7
-                // We do not need to do this same analysis for non-extension methods because they do not have generic parameters that
-                // can be inferred from usage like extension methods can. We don't warn about default arguments at the call site, so
+                // We do not need to do this same analysis for non-extension methods because they do not have
+                // generic parameters that
+                // can be inferred from usage like extension methods can. We don't warn about default arguments at
+                // the call site, so
                 // there's nothing that can be learned from the non-extension case.
                 var (method, results, _) = VisitArguments(
                     node,
@@ -14357,7 +14526,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                 )
                 {
-                    // This is case 4. We need to look for the IEnumerable<T> that this reinferred expression implements,
+                    // This is case 4. We need to look for the IEnumerable<T> that this reinferred expression
+                    // implements,
                     // so that we pick up any nested type substitutions that could have occurred.
                     var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                     targetTypeWithAnnotations = TypeWithAnnotations.Create(
@@ -14374,7 +14544,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    // This is case 8. There was not a successful binding, as a successful binding will _always_ generate one of the
+                    // This is case 8. There was not a successful binding, as a successful binding will _always_
+                    // generate one of the
                     // above conversions. Just return, as we want to suppress further errors.
                     return;
                 }
@@ -14415,14 +14586,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (resultType is ArrayTypeSymbol arrayType)
             {
-                // Even though arrays use the IEnumerator pattern, we use the array element type as the foreach target type, so
+                // Even though arrays use the IEnumerator pattern, we use the array element type as the foreach
+                // target type, so
                 // directly get our source type from there instead of doing method reinference.
                 currentPropertyGetterTypeWithState =
                     arrayType.ElementTypeWithAnnotations.ToTypeWithState();
             }
             else if (resultType.SpecialType == SpecialType.System_String)
             {
-                // There are frameworks where System.String does not implement IEnumerable, but we still lower it to a for loop
+                // There are frameworks where System.String does not implement IEnumerable, but we still lower it to
+                // a for loop
                 // using the indexer over the individual characters anyway. So the type must be not annotated char.
                 currentPropertyGetterTypeWithState = TypeWithAnnotations
                     .Create(node.EnumeratorInfoOpt.ElementType, NullableAnnotation.NotAnnotated)
@@ -14581,7 +14754,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     sourceState.HasNullType ? (TypeWithState?)null : sourceState
                 );
 
-                // https://github.com/dotnet/roslyn/issues/35010: if the iteration variable is a tuple deconstruction, we need to put something in the tree
+                // https://github.com/dotnet/roslyn/issues/35010: if the iteration variable is a tuple
+                // deconstruction, we need to put something in the tree
                 Visit(node.IterationVariableType);
             }
             else
@@ -14652,7 +14826,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             );
                         }
 
-                        // In non-error cases we'll only run this loop a single time. In error cases we'll set the nullability of the VariableType multiple times, but at least end up with something
+                        // In non-error cases we'll only run this loop a single time. In error cases we'll set the
+                        // nullability of the VariableType multiple times, but at least end up with something
                         SetAnalyzedNullability(
                             node.IterationVariableType,
                             new VisitResult(resultForType, destinationType),
@@ -14695,7 +14870,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (var child in node.ChildBoundNodes)
             {
-                // https://github.com/dotnet/roslyn/issues/35042, we need to implement similar workarounds for object, collection, and dynamic initializers.
+                // https://github.com/dotnet/roslyn/issues/35042, we need to implement similar workarounds for
+                // object, collection, and dynamic initializers.
                 if (child is BoundLambda lambda)
                 {
                     TakeIncrementalSnapshot(lambda);
@@ -14786,7 +14962,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             operandType.Type!.StrippedType(),
                             method
                         );
-                        // Analyze operator call properly (honoring [Disallow|Allow|Maybe|NotNull] attribute annotations) https://github.com/dotnet/roslyn/issues/32671
+                        // Analyze operator call properly (honoring [Disallow|Allow|Maybe|NotNull] attribute annotations)
+                        // https://github.com/dotnet/roslyn/issues/32671
                         var parameter = method.Parameters[0];
                         _ = VisitConversion(
                             node.Operand as BoundConversion,
@@ -14877,7 +15054,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // Update method based on inferred operand types: see https://github.com/dotnet/roslyn/issues/29605.
-            // Analyze operator result properly (honoring [Maybe|NotNull] and [Maybe|NotNullWhen] attribute annotations) https://github.com/dotnet/roslyn/issues/32671
+            // Analyze operator result properly (honoring [Maybe|NotNull] and [Maybe|NotNullWhen] attribute
+            // annotations) https://github.com/dotnet/roslyn/issues/32671
             if ((object)node.LogicalOperator != null && node.LogicalOperator.ParameterCount == 2)
             {
                 return GetReturnTypeWithState(node.LogicalOperator);
@@ -14899,7 +15077,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(!IsConditionalState);
             TypeWithState leftType = ResultType;
-            // https://github.com/dotnet/roslyn/issues/29605 Update operator methods based on inferred operand types.
+            // https://github.com/dotnet/roslyn/issues/29605 Update operator methods based on inferred operand
+            // types.
             MethodSymbol? logicalOperator = null;
             MethodSymbol? trueFalseOperator = null;
             BoundExpression? left = null;
@@ -14936,7 +15115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(trueFalseOperator is null || logicalOperator is object);
             Debug.Assert(logicalOperator is null || left is object);
 
-            // Analyze operator call properly (honoring [Disallow|Allow|Maybe|NotNull] attribute annotations) https://github.com/dotnet/roslyn/issues/32671
+            // Analyze operator call properly (honoring [Disallow|Allow|Maybe|NotNull] attribute annotations)
+            // https://github.com/dotnet/roslyn/issues/32671
             if (trueFalseOperator is object)
             {
                 ReportArgumentWarnings(left!, leftType, trueFalseOperator.Parameters[0]);
@@ -15008,7 +15188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                // It is possible for the awaiter type returned from GetAwaiter to not be a named type. e.g. it could be a type parameter.
+                // It is possible for the awaiter type returned from GetAwaiter to not be a named type. e.g. it
+                // could be a type parameter.
                 // Proper handling of this is additional work which only benefits a very uncommon scenario,
                 // so we will just use the originally bound GetResult method in this case.
                 var getResult = awaitableInfo.GetResult;
@@ -15076,7 +15257,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // https://github.com/dotnet/roslyn/issues/33344: this fails to produce an updated tuple type for a default expression
+            // https://github.com/dotnet/roslyn/issues/33344: this fails to produce an updated tuple type for a
+            // default expression
             // (should produce nullable element types for those elements that are of reference types)
             SetResultType(node, TypeWithState.ForType(type));
             return result;
@@ -15330,7 +15512,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // Only reachable from bad expression. Otherwise handled in VisitObjectCreationExpression().
-            // https://github.com/dotnet/roslyn/issues/35042: Do we need to analyze child expressions anyway for the public API?
+            // https://github.com/dotnet/roslyn/issues/35042: Do we need to analyze child expressions anyway for
+            // the public API?
             SetNotNullResult(node);
             return null;
         }
@@ -15340,7 +15523,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // Only reachable from bad expression. Otherwise handled in VisitObjectCreationExpression().
-            // https://github.com/dotnet/roslyn/issues/35042: Do we need to analyze child expressions anyway for the public API?
+            // https://github.com/dotnet/roslyn/issues/35042: Do we need to analyze child expressions anyway for
+            // the public API?
             SetNotNullResult(node);
             return null;
         }
@@ -15350,7 +15534,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // Only reachable from bad expression. Otherwise handled in VisitObjectCreationExpression().
-            // https://github.com/dotnet/roslyn/issues/35042: Do we need to analyze child expressions anyway for the public API?
+            // https://github.com/dotnet/roslyn/issues/35042: Do we need to analyze child expressions anyway for
+            // the public API?
             SetNotNullResult(node);
             return null;
         }
@@ -15574,7 +15759,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundUnconvertedInterpolatedString node
         )
         {
-            // This is only involved with unbound lambdas or when visiting the source of a converted tuple literal
+            // This is only involved with unbound lambdas or when visiting the source of a converted tuple
+            // literal
             var result = base.VisitUnconvertedInterpolatedString(node);
             SetResultType(node, TypeWithState.Create(node.Type, NullableFlowState.NotNull));
             return result;
@@ -15967,10 +16153,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// A bit array containing the nullability of variables associated with a method scope. If the method is a
-        /// nested function (a lambda or a local function), there is a reference to the corresponding instance for
+        /// A bit array containing the nullability of variables associated with a method scope. If the
+        // method is a
+        /// nested function (a lambda or a local function), there is a reference to the corresponding
+        // instance for
         /// the containing method scope. The instances in the chain are associated with a corresponding
-        /// <see cref="Variables"/> chain, and the <see cref="Id"/> field in this type matches <see cref="Variables.Id"/>.
+        /// <see cref="Variables"/> chain, and the <see cref="Id"/> field in this type matches <see
+        // cref="Variables.Id"/>.
         /// </summary>
         [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
         internal struct LocalState : ILocalDataFlowState
@@ -16475,8 +16664,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 RoslynDebug.Assert(x.symbol is object);
                 RoslynDebug.Assert(y.symbol is object);
 
-                // We specifically use reference equality for the symbols here because the BoundNode should be immutable.
-                // We should be storing and retrieving the exact same instance of the symbol, not just an "equivalent"
+                // We specifically use reference equality for the symbols here because the BoundNode should be
+                // immutable.
+                // We should be storing and retrieving the exact same instance of the symbol, not just an
+                // "equivalent"
                 // symbol.
                 return x.expr == y.expr && (object)x.symbol == y.symbol;
             }

@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Workspaces
 
         private void UpdateAllAssociatedViews(ReadOnlyCollection<ITextBuffer> subjectBuffers)
         {
-            // Whenever views get attached/detached from buffers, make sure we're hooked up to the appropriate events
+            // Whenever views get attached/detached from buffers, make sure we're hooked up to the appropriate
+            // events
             // for them.
             foreach (var buffer in subjectBuffers)
             {
@@ -97,9 +98,12 @@ namespace Microsoft.CodeAnalysis.Workspaces
             if (views.Length == 0)
                 return true;
 
-            // if any of the views were *not* the right kind of text views, assume the buffer is visible.  We don't know
-            // how to determine the visibility of this buffer.  While unlikely to happen, this is possible with VS's
-            // extensibility model, which allows for a plugin to host an ITextBuffer in their own impl of an ITextView.
+            // if any of the views were *not* the right kind of text views, assume the buffer is visible.  We
+            // don't know
+            // how to determine the visibility of this buffer.  While unlikely to happen, this is possible with
+            // VS's
+            // extensibility model, which allows for a plugin to host an ITextBuffer in their own impl of an
+            // ITextView.
             // For those cases, just assume these buffers are visible.
             if (views.Any(static v => v is not TTextView))
                 return true;
@@ -123,14 +127,16 @@ namespace Microsoft.CodeAnalysis.Workspaces
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            // Both of these methods must succeed.  Otherwise we're somehow unregistering something we don't know about.
+            // Both of these methods must succeed.  Otherwise we're somehow unregistering something we don't
+            // know about.
             Contract.ThrowIfFalse(
                 _subjectBufferToCallbacks.TryGetValue(subjectBuffer, out var data)
             );
             Contract.ThrowIfFalse(data.Callbacks.Contains(callback));
             data.RemoveCallback(callback);
 
-            // If we have nothing that wants to listen to information about this buffer anymore, then disconnect it
+            // If we have nothing that wants to listen to information about this buffer anymore, then disconnect
+            // it
             // from all events and remove our map.
             if (data.Callbacks.Count == 0)
             {
@@ -172,8 +178,10 @@ namespace Microsoft.CodeAnalysis.Workspaces
             private readonly TVisibilityChangedCallback _visibilityChangedCallback;
 
             /// <summary>
-            /// The callbacks that want to be notified when our <see cref="TextViews"/> change visibility.  Stored as an
-            /// <see cref="ImmutableHashSet{T}"/> so we can enumerate it safely without it changing underneath us.
+            /// The callbacks that want to be notified when our <see cref="TextViews"/> change visibility.
+            // Stored as an
+            /// <see cref="ImmutableHashSet{T}"/> so we can enumerate it safely without it changing underneath
+            // us.
             /// </summary>
             public ImmutableHashSet<Action> Callbacks { get; private set; } =
                 ImmutableHashSet<Action>.Empty;
@@ -194,10 +202,12 @@ namespace Microsoft.CodeAnalysis.Workspaces
             {
                 _tracker._threadingContext.ThrowIfNotOnUIThread();
 
-                // Shouldn't be disposing of this if we still have clients that want to hear about visibility changes.
+                // Shouldn't be disposing of this if we still have clients that want to hear about visibility
+                // changes.
                 Contract.ThrowIfTrue(Callbacks.Count > 0);
 
-                // Clear out all our textviews.  This will disconnect us from any events we have registered with them.
+                // Clear out all our textviews.  This will disconnect us from any events we have registered with
+                // them.
                 UpdateTextViews(Array.Empty<ITextView>());
 
                 Contract.ThrowIfTrue(TextViews.Count > 0);

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis
         /// Specifies an encoding to be used if the actual encoding of the file
         /// can't be determined from the stream content (the stream doesn't start with Byte Order Mark).
         /// If <c>null</c> auto-detect heuristics are used to determine the encoding.
-        /// Note that if the stream starts with Byte Order Mark the value of <see cref="DefaultEncoding"/> is ignored.
+        /// Note that if the stream starts with Byte Order Mark the value of <see cref="DefaultEncoding"/>
+        // is ignored.
         /// </summary>
         public Encoding? DefaultEncoding { get; }
 
@@ -43,9 +44,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="path">An absolute file path.</param>
         /// <param name="defaultEncoding">
-        /// Specifies an encoding to be used if the actual encoding can't be determined from the stream content (the stream doesn't start with Byte Order Mark).
+        /// Specifies an encoding to be used if the actual encoding can't be determined from the stream
+        // content (the stream doesn't start with Byte Order Mark).
         /// If not specified auto-detect heuristics are used to determine the encoding.
-        /// Note that if the stream starts with Byte Order Mark the value of <paramref name="defaultEncoding"/> is ignored.
+        /// Note that if the stream starts with Byte Order Mark the value of <paramref
+        // name="defaultEncoding"/> is ignored.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="path"/> is not an absolute path.</exception>
@@ -58,7 +61,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// We have this limit on file size to reduce a chance of OOM when user adds massive files to the solution (often by accident).
+        /// We have this limit on file size to reduce a chance of OOM when user adds massive files to the
+        // solution (often by accident).
         /// The threshold is 100MB which came from some internal data on big files and some discussion.
         /// </summary>
         internal virtual int MaxFileLength => 100 * 1024 * 1024;
@@ -278,9 +282,12 @@ namespace Microsoft.CodeAnalysis
             TextAndVersion textAndVersion
         )
         {
-            // Check if the file was definitely modified and closed while we were reading. In this case, we know the
-            // read we got was probably invalid, so throw an IOException which indicates to our caller that we should
-            // automatically attempt a re-read. If the file hasn't been closed yet and there's another writer, we will
+            // Check if the file was definitely modified and closed while we were reading. In this case, we know
+            // the
+            // read we got was probably invalid, so throw an IOException which indicates to our caller that we
+            // should
+            // automatically attempt a re-read. If the file hasn't been closed yet and there's another writer,
+            // we will
             // rely on file change notifications to notify us and reload the file.
             var newLastWriteTime = FileUtilities.GetFileTimeStamp(Path);
             if (!newLastWriteTime.Equals(prevLastWriteTime))
@@ -304,8 +311,10 @@ namespace Microsoft.CodeAnalysis
             // InvalidDataException to caller of FileTextLoader.LoadText to deal with
             // the situation.
             //
-            // check this (http://source.roslyn.io/#Microsoft.CodeAnalysis.Workspaces/Workspace/Solution/TextDocumentState.cs,132)
-            // to see how workspace deal with exception from FileTextLoader. other consumer can handle the exception differently
+            // check this
+            // (http://source.roslyn.io/#Microsoft.CodeAnalysis.Workspaces/Workspace/Solution/TextDocumentState.cs,132)
+            // to see how workspace deal with exception from FileTextLoader. other consumer can handle the
+            // exception differently
             if (fileLength > MaxFileLength)
             {
                 // log max file length which will log to VS telemetry in VS host

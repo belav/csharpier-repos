@@ -52,7 +52,8 @@ namespace System.IO
         /// Returns 0 on success, otherwise a Win32 error code.  Note that
         /// classes should use -1 as the uninitialized state for dataInitialized.
         /// </summary>
-        /// <param name="path">The file path from which the file attribute information will be filled.</param>
+        /// <param name="path">The file path from which the file attribute information will be
+        // filled.</param>
         /// <param name="data">A struct that will contain the attribute information.</param>
         /// <param name="returnErrorOnNotFound">Return the error code for not found errors?</param>
         internal static int FillAttributeInfo(

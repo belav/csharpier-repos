@@ -12,10 +12,12 @@ namespace Microsoft.AspNetCore.SignalR;
 public static class GetHttpContextExtensions
 {
     /// <summary>
-    /// Gets <see cref="HttpContext"/> from the specified connection, or <c>null</c> if the connection is not associated with an HTTP request.
+    /// Gets <see cref="HttpContext"/> from the specified connection, or <c>null</c> if the connection
+    // is not associated with an HTTP request.
     /// </summary>
     /// <param name="connection">The connection.</param>
-    /// <returns>The <see cref="HttpContext"/> for the connection, or <c>null</c> if the connection is not associated with an HTTP request.</returns>
+    /// <returns>The <see cref="HttpContext"/> for the connection, or <c>null</c> if the connection is
+    // not associated with an HTTP request.</returns>
     public static HttpContext? GetHttpContext(this HubCallerContext connection)
     {
         ArgumentNullException.ThrowIfNull(connection);
@@ -23,10 +25,12 @@ public static class GetHttpContextExtensions
     }
 
     /// <summary>
-    /// Gets <see cref="HttpContext"/> from the specified connection, or <c>null</c> if the connection is not associated with an HTTP request.
+    /// Gets <see cref="HttpContext"/> from the specified connection, or <c>null</c> if the connection
+    // is not associated with an HTTP request.
     /// </summary>
     /// <param name="connection">The connection.</param>
-    /// <returns>The <see cref="HttpContext"/> for the connection, or <c>null</c> if the connection is not associated with an HTTP request.</returns>
+    /// <returns>The <see cref="HttpContext"/> for the connection, or <c>null</c> if the connection is
+    // not associated with an HTTP request.</returns>
     public static HttpContext? GetHttpContext(this HubConnectionContext connection)
     {
         ArgumentNullException.ThrowIfNull(connection);

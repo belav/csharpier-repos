@@ -39,39 +39,39 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private Dependency[][] _ppDependencies;
         private bool _dependenciesDirty;
 
-        /*
-        SPEC:
+/*
+SPEC:
 
-        CType inference occurs as part of the compile-time processing of a method invocation
-        and takes place before the overload resolution step of the invocation. When a
-        particular method group is specified in a method invocation, and no CType arguments
-        are specified as part of the method invocation, CType inference is applied to each
-        generic method in the method group. If CType inference succeeds, then the inferred
-        CType arguments are used to determine the types of formal parameters for subsequent
-        overload resolution. If overload resolution chooses a generic method as the one to
-        invoke then the inferred CType arguments are used as the actual CType arguments for the
-        invocation. If CType inference for a particular method fails, that method does not
-        participate in overload resolution. The failure of CType inference, in and of itself,
-        does not cause a compile-time error. However, it often leads to a compile-time error
-        when overload resolution then fails to find any applicable methods.
+CType inference occurs as part of the compile-time processing of a method invocation
+and takes place before the overload resolution step of the invocation. When a
+particular method group is specified in a method invocation, and no CType arguments
+are specified as part of the method invocation, CType inference is applied to each
+generic method in the method group. If CType inference succeeds, then the inferred
+CType arguments are used to determine the types of formal parameters for subsequent
+overload resolution. If overload resolution chooses a generic method as the one to
+invoke then the inferred CType arguments are used as the actual CType arguments for the
+invocation. If CType inference for a particular method fails, that method does not
+participate in overload resolution. The failure of CType inference, in and of itself,
+does not cause a compile-time error. However, it often leads to a compile-time error
+when overload resolution then fails to find any applicable methods.
 
-        If the supplied number of arguments is different than the number of parameters in
-        the method, then inference immediately fails. Otherwise, assume that the generic
-        method has the following signature:
+If the supplied number of arguments is different than the number of parameters in
+the method, then inference immediately fails. Otherwise, assume that the generic
+method has the following signature:
 
-        Tr M<X1...Xn>(T1 x1 ... Tm xm)
+Tr M<X1...Xn>(T1 x1 ... Tm xm)
 
-        With a method call of the form M(E1...Em) the task of CType inference is to find
-        unique CType arguments S1...Sn for each of the CType parameters X1...Xn so that the
-        call M<S1...Sn>(E1...Em)becomes valid.
+With a method call of the form M(E1...Em) the task of CType inference is to find
+unique CType arguments S1...Sn for each of the CType parameters X1...Xn so that the
+call M<S1...Sn>(E1...Em)becomes valid.
 
-        During the process of inference each CType parameter Xi is either fixed to a particular
-        CType Si or unfixed with an associated set of bounds. Each of the bounds is some CType T.
-        Each bound is classified as an upper bound, lower bound or exact bound.
-        Initially each CType variable Xi is unfixed with an empty set of bounds.
+During the process of inference each CType parameter Xi is either fixed to a particular
+CType Si or unfixed with an associated set of bounds. Each of the bounds is some CType T.
+Each bound is classified as an upper bound, lower bound or exact bound.
+Initially each CType variable Xi is unfixed with an empty set of bounds.
 
 
-        */
+*/
 
         // This file contains the implementation for method CType inference on calls (with
         // arguments, and method CType inference on conversion of method groups to delegate
@@ -1065,24 +1065,24 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        /*
-        bool LowerBoundNullableInference(CType pSource, CType pDest)
-        {
-            // SPEC ISSUE: As noted above, the spec does not clearly call out how
-            // SPEC ISSUE: to do CType inference to a nullable target. I propose the
-            // SPEC ISSUE: following:
-            // SPEC ISSUE:
-            // SPEC ISSUE:  Otherwise, if V is nullable CType V1? and U is a
-            // SPEC ISSUE:   non-nullable struct CType then an exact inference is made from U to V1.
+/*
+bool LowerBoundNullableInference(CType pSource, CType pDest)
+{
+// SPEC ISSUE: As noted above, the spec does not clearly call out how
+// SPEC ISSUE: to do CType inference to a nullable target. I propose the
+// SPEC ISSUE: following:
+// SPEC ISSUE:
+// SPEC ISSUE:  Otherwise, if V is nullable CType V1? and U is a
+// SPEC ISSUE:   non-nullable struct CType then an exact inference is made from U to V1.
 
-            if (!pDest.IsNullableType() || !pSource.isStructType() || pSource.IsNullableType())
-            {
-                return false;
-            }
-            ExactInference(pSource, pDest.AsNullableType().UnderlyingType);
-            return true;
-        }
-         * */
+if (!pDest.IsNullableType() || !pSource.isStructType() || pSource.IsNullableType())
+{
+return false;
+}
+ExactInference(pSource, pDest.AsNullableType().UnderlyingType);
+return true;
+}
+* */
 
         ////////////////////////////////////////////////////////////////////////////////
 

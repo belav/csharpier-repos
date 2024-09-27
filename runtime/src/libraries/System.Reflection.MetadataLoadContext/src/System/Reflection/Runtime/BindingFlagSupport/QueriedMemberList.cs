@@ -10,19 +10,25 @@ using RuntimeTypeInfo = System.Reflection.TypeLoading.RoType;
 namespace System.Reflection.Runtime.BindingFlagSupport
 {
     //
-    // Stores the result of a member filtering that's filtered by name and visibility from base class (as defined by the Type.Get*() family of apis).
+    // Stores the result of a member filtering that's filtered by name and visibility from base class
+    // (as defined by the Type.Get*() family of apis).
     //
-    // The results are as if you'd passed in a bindingFlags value of "Public | NonPublic | Instance | Static | FlattenHierarchy"
+    // The results are as if you'd passed in a bindingFlags value of "Public | NonPublic | Instance |
+    // Static | FlattenHierarchy"
     // In addition, if "ignoreCase" was passed to Create(), BindingFlags.IgnoreCase is also in effect.
     //
-    // Results are sorted by declaring type. The members declared by the most derived type appear first, then those declared by its base class, and so on.
+    // Results are sorted by declaring type. The members declared by the most derived type appear first,
+    // then those declared by its base class, and so on.
     // The Disambiguation logic takes advantage of this.
     //
     // This object is a good candidate for long term caching.
     //
-    // QueryMemberList's come in two flavors: ImmediateTypeOnly and full. The immediateTypeOnly only holds the results for one type, not any of its
-    // base types. This is used when the binding flags passed to a Get() api limit the search to the immediate type only in order to avoid triggering
-    // unnecessary assembly resolving and a lot of unnecessary ParameterInfo creation and comparison checks.
+    // QueryMemberList's come in two flavors: ImmediateTypeOnly and full. The immediateTypeOnly only
+    // holds the results for one type, not any of its
+    // base types. This is used when the binding flags passed to a Get() api limit the search to the
+    // immediate type only in order to avoid triggering
+    // unnecessary assembly resolving and a lot of unnecessary ParameterInfo creation and comparison
+    // checks.
     //
     internal sealed class QueriedMemberList<M>
         where M : MemberInfo
@@ -50,7 +56,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         }
 
         /// <summary>
-        /// Returns the # of candidates for a non-DeclaredOnly search. Caution: Can throw MissingMetadataException. Use DeclaredOnlyCount if you don't want to search base classes.
+        /// Returns the # of candidates for a non-DeclaredOnly search. Caution: Can throw
+        // MissingMetadataException. Use DeclaredOnlyCount if you don't want to search base classes.
         /// </summary>
         public int TotalCount
         {

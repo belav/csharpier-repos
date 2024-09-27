@@ -23,13 +23,16 @@ namespace System.IO.Ports.Tests
         ///   the error behaviour to be different, and SerialPort isn't prepared for this
         ///
         /// To test this, we need to do the following
-        /// 1. Open the port, then use a private SerialStream method to set fAbortOnError to TRUE and then close the port
+        /// 1. Open the port, then use a private SerialStream method to set fAbortOnError to TRUE and then
+        // close the port
         /// 2. Reopen the port
         /// 3. Verify that the fAbortOnError flag is clear
         ///
         /// </summary>
-        // This test requires access, via reflection, to internal type SerialStream and respective methods GetDcbFlag and
-        // SetDcbFlag, however, that requires either changes to the public type (increasing its size) or to the test itself.
+        // This test requires access, via reflection, to internal type SerialStream and respective methods
+        // GetDcbFlag and
+        // SetDcbFlag, however, that requires either changes to the public type (increasing its size) or to
+        // the test itself.
         [PlatformSpecific(TestPlatforms.Windows)] // depends on Windows implementation detail
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void AbortOnErrorShouldBeClearedOnOpen()

@@ -158,7 +158,8 @@ namespace System.Activities.Debugger
         public XamlDebuggerXmlReader(XamlReader underlyingReader, TextReader textReader)
             : this(underlyingReader, underlyingReader as IXamlLineInfo, textReader) { }
 
-        // This one is worse because in implementation we expect the same object instance through two parameters.
+        // This one is worse because in implementation we expect the same object instance through two
+        // parameters.
         [Obsolete(
             "Don't use this constructor. Use \"public XamlDebuggerXmlReader(TextReader underlyingTextReader)\" or \"public XamlDebuggerXmlReader(TextReader underlyingTextReader, XamlSchemaContext schemaContext)\" instead."
         )]
@@ -529,8 +530,10 @@ namespace System.Activities.Debugger
                         case XamlNodeType.StartMember:
 
                             // When we reach a StartMember node, the next node to come might be a Value.
-                            // To correctly pass SourceLocation information, we need to rewrite this node to use ValueNodeXamlMemberInvoker.
-                            // But we don't know if the next node is a Value node yet, so we are buffering here and look ahead for a single node.
+                            // To correctly pass SourceLocation information, we need to rewrite this node to use
+                            // ValueNodeXamlMemberInvoker.
+                            // But we don't know if the next node is a Value node yet, so we are buffering here and look ahead
+                            // for a single node.
                             UnitTestUtility.Assert(
                                 this.bufferedXamlNodes.Count == 0,
                                 "this.bufferedXamlNodes should be empty when we reach this code path."
@@ -582,7 +585,8 @@ namespace System.Activities.Debugger
 
                                 if (isInAttribute || (isInContent && !isInitializationValue))
                                 {
-                                    // For Value Node with known line info, we want to route the value setting process through this Reader.
+                                    // For Value Node with known line info, we want to route the value setting process through this
+                                    // Reader.
                                     // Therefore we need to go back to the member node and replace the XamlMemberInvoker.
                                     XamlNode startMemberNodeForValue =
                                         this.bufferedXamlNodes.Peek();
@@ -821,7 +825,8 @@ namespace System.Activities.Debugger
                 --this.suppressMarkupExtensionLevel;
             }
 
-            // We need to make sure we also buffer the current node so that this is not missed when the buffer exhausts.
+            // We need to make sure we also buffer the current node so that this is not missed when the buffer
+            // exhausts.
             this.bufferedXamlNodes.Enqueue(this.Current);
         }
 
@@ -876,7 +881,8 @@ namespace System.Activities.Debugger
 
             // For Argument containing an IValueSerializable expression serializing as a ValueNode.
             // We associate the SourceLocation to the expression instead of the Argument.
-            // For example, when we have <WriteLine Text="[abc]" />, Then the SourceLocation found for the InArgument object
+            // For example, when we have <WriteLine Text="[abc]" />, Then the SourceLocation found for the
+            // InArgument object
             // is associated with the VisualBasicValue object instead.
             if (
                 argumentInstance != null

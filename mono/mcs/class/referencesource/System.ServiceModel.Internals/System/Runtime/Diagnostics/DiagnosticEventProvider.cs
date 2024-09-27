@@ -17,7 +17,8 @@ namespace System.Runtime.Diagnostics
     using Microsoft.Win32;
 
     // This is a class defined based on CLR's internal implementation of ETW provider
-    // This class should be replaced with CLR's version (whenever avaialble) that exposes callback functionality
+    // This class should be replaced with CLR's version (whenever avaialble) that exposes callback
+    // functionality
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     abstract class DiagnosticsEventProvider : IDisposable
     {
@@ -265,7 +266,8 @@ namespace System.Runtime.Diagnostics
         /// </summary>
         /// <param name="data">argument to be decoded</param>
         /// <param name="dataDescriptor">pointer to the descriptor to be filled</param>
-        /// <param name="dataBuffer">storage buffer for storing user data, needed because cant get the address of the object</param>
+        /// <param name="dataBuffer">storage buffer for storing user data, needed because cant get the
+        // address of the object</param>
         /// <returns>null if the object is a basic type other than string. String otherwise</returns>
 
         [SecurityCritical]

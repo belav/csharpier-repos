@@ -35,7 +35,8 @@ namespace System.Data.Odbc
             DbConnection? owningObject
         )
         {
-            // TODO: owningObject may actually be null (see DbConnectionPool.CreateObject), in which case this will throw...
+            // TODO: owningObject may actually be null (see DbConnectionPool.CreateObject), in which case this
+            // will throw...
             DbConnectionInternal result = new OdbcConnectionOpen(
                 (owningObject as OdbcConnection)!,
                 (options as OdbcConnectionString)!

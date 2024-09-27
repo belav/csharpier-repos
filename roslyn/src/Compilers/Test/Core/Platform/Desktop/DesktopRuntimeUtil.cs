@@ -33,9 +33,12 @@ namespace Roslyn.Test.Utilities.Desktop
         /// Hex digits are case-insensitive and can be separated by spaces or newlines.
         /// Cannot be null.
         /// </param>
-        /// <param name="properties">Reference properties (extern aliases, type embedding, <see cref="MetadataImageKind"/>).</param>
-        /// <param name="documentation">Provides XML documentation for symbol found in the reference.</param>
-        /// <param name="filePath">Optional path that describes the location of the metadata. The file doesn't need to exist on disk. The path is opaque to the compiler.</param>
+        /// <param name="properties">Reference properties (extern aliases, type embedding, <see
+        // cref="MetadataImageKind"/>).</param>
+        /// <param name="documentation">Provides XML documentation for symbol found in the
+        // reference.</param>
+        /// <param name="filePath">Optional path that describes the location of the metadata. The file
+        // doesn't need to exist on disk. The path is opaque to the compiler.</param>
         internal static PortableExecutableReference CreateMetadataReferenceFromHexGZipImage(
             string image,
             MetadataReferenceProperties properties = default(MetadataReferenceProperties),
@@ -84,7 +87,8 @@ namespace Roslyn.Test.Utilities.Desktop
         }
 
         /// <summary>
-        /// Loads given array of bytes as an assembly image using <see cref="Assembly.Load(byte[])"/> or <see cref="Assembly.ReflectionOnlyLoad(byte[])"/>.
+        /// Loads given array of bytes as an assembly image using <see cref="Assembly.Load(byte[])"/> or
+        // <see cref="Assembly.ReflectionOnlyLoad(byte[])"/>.
         /// </summary>
         internal static Assembly LoadAsAssembly(
             string moduleName,

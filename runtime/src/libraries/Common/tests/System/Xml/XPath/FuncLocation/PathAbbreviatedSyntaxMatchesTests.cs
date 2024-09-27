@@ -36,7 +36,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
         }
 
         /// <summary>
-        /// Expected: False (based on context node).  Fix test code to move to testexpr node, thus expected=true.
+        /// Expected: False (based on context node).  Fix test code to move to testexpr node, thus
+        // expected=true.
         /// @* (Matches = true)
         /// </summary>
         [Theory]
@@ -84,7 +85,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
         }
 
         /// <summary>
-        /// Expected: False (based on context node).  Fix test code to move to testexpr node, thus expected=true.
+        /// Expected: False (based on context node).  Fix test code to move to testexpr node, thus
+        // expected=true.
         /// @attr (Matches = true)
         /// </summary>
         [Theory]

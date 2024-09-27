@@ -20,7 +20,8 @@ using Grpc.Core;
 
 namespace Grpc.Shared.TestAssets
 {
-    // Implementation copied from https://github.com/grpc/grpc/blob/master/src/csharp/Grpc.Core/Utils/AsyncStreamExtensions.cs
+    // Implementation copied from
+    // https://github.com/grpc/grpc/blob/master/src/csharp/Grpc.Core/Utils/AsyncStreamExtensions.cs
     internal static class AsyncStreamExtensions
     {
         /// <summary>

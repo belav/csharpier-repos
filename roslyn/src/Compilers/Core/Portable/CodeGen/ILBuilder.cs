@@ -56,10 +56,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// don't know the actual IL offset, but only {block/offset-in-the-block} pair.
         ///
         /// Thus, whenever we need to mark some IL position we allocate a new marker id, store it
-        /// in <see cref="_allocatedILMarkers"/> and reference this IL marker in the entity requiring the IL offset.
+        /// in <see cref="_allocatedILMarkers"/> and reference this IL marker in the entity requiring the IL
+        // offset.
         ///
         /// IL markers will be 'materialized' when the builder is realized; the resulting offsets
-        /// will be put into <see cref="_allocatedILMarkers"/> array. Note that only markers from reachable blocks
+        /// will be put into <see cref="_allocatedILMarkers"/> array. Note that only markers from reachable
+        // blocks
         /// are materialized, the rest will have offset -1.
         /// </summary>
         private ArrayBuilder<ILMarker> _allocatedILMarkers;
@@ -848,7 +850,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         /// <summary>
         /// Returns true if any branches were optimized (that does not include shortening)
-        /// We need this because optimizing a branch may result in unreachable code that needs to be eliminated.
+        /// We need this because optimizing a branch may result in unreachable code that needs to be
+        // eliminated.
         ///
         /// === Example:
         ///
@@ -1117,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         ///
         /// This is used for synthetic code that is reachable through labels.
         ///
-        /// If such code is not separated from previous sequence point by the means of a hidden sequence point
+        /// If such code is not separated from previous sequence point by the means of a hidden sequence
+        // point
         /// It looks as a part of the statement that previous sequence point specifies.
         /// As a result, when user steps through the code and goes through a jump to such label,
         /// it will appear as if the jump landed at the beginning of the previous statement.
@@ -1191,7 +1195,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             if (scopeType == ScopeType.Finally)
             {
                 // WORKAROUND:
-                // This is a workaround to an unexpected consequence of a CLR update that causes try nested in finally not verify
+                // This is a workaround to an unexpected consequence of a CLR update that causes try nested in
+                // finally not verify
                 // if there is no code before try. ( DevDiv: 563799 )
                 // If we will treat finally as a label, the code above will force a nop before try starts.
                 _instructionCountAtLastLabel = _emitState.InstructionsEmitted;
@@ -1260,7 +1265,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal void DefineUserDefinedStateMachineHoistedLocal(int slotIndex)
         {
             // Add user-defined local into the current scope.
-            // We emit custom debug information for these locals that is used by the EE to reconstruct their scopes.
+            // We emit custom debug information for these locals that is used by the EE to reconstruct their
+            // scopes.
             _scopeManager.AddUserHoistedLocal(slotIndex);
         }
 

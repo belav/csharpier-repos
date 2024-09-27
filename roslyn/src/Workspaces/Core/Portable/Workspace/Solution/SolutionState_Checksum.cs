@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis
             return collection.Checksum;
         }
 
-        /// <summary>Gets the checksum for only the requested project (and any project it depends on)</summary>
+        /// <summary>Gets the checksum for only the requested project (and any project it depends
+        // on)</summary>
         public async Task<SolutionStateChecksums> GetStateChecksumsAsync(
             ProjectId projectId,
             CancellationToken cancellationToken
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        /// <summary>Gets the checksum for only the requested project (and any project it depends on)</summary>
+        /// <summary>Gets the checksum for only the requested project (and any project it depends
+        // on)</summary>
         public async Task<Checksum> GetChecksumAsync(
             ProjectId projectId,
             CancellationToken cancellationToken
@@ -133,7 +135,8 @@ namespace Microsoft.CodeAnalysis
             return checksums.Checksum;
         }
 
-        /// <param name="projectsToInclude">Cone of projects to compute a checksum for.  Pass in <see langword="null"/>
+        /// <param name="projectsToInclude">Cone of projects to compute a checksum for.  Pass in <see
+        // langword="null"/>
         /// to get a checksum for the entire solution</param>
         private async Task<SolutionStateChecksums> ComputeChecksumsAsync(
             HashSet<ProjectId>? projectsToInclude,

@@ -22,9 +22,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
     using static StringCopyPasteHelpers;
 
     /// <summary>
-    /// Implementation of <see cref="AbstractPasteProcessor"/> used when we know the original string literal expression
-    /// we were copying text out of.  Because we know the original literal expression, we can determine what the
-    /// characters being pasted meant in the original context and we can attempt to preserve that as closely as
+    /// Implementation of <see cref="AbstractPasteProcessor"/> used when we know the original string
+    // literal expression
+    /// we were copying text out of.  Because we know the original literal expression, we can determine
+    // what the
+    /// characters being pasted meant in the original context and we can attempt to preserve that as
+    // closely as
     /// possible.
     /// </summary>
     internal class KnownSourcePasteProcessor(
@@ -64,8 +67,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
         public override ImmutableArray<TextChange> GetEdits()
         {
-            // For pastes into non-raw strings, we can just determine how the change should be escaped in-line at that
-            // same location the paste originally happened at.  For raw-strings things get more complex as we have to
+            // For pastes into non-raw strings, we can just determine how the change should be escaped in-line
+            // at that
+            // same location the paste originally happened at.  For raw-strings things get more complex as we
+            // have to
             // deal with things like indentation and potentially adding newlines to make things legal.
 
             // Smart Pasting into raw string not supported yet.
@@ -78,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             EscapeForNonRawStringLiteral_DoNotCallDirectly(
                 IsVerbatimStringExpression(StringExpressionBeforePaste),
                 StringExpressionBeforePaste is InterpolatedStringExpressionSyntax,
-                // We do not want to try skipping escapes in the 'value'.  We know exactly what 'value' means and don't
+                // We do not want to try skipping escapes in the 'value'.  We know exactly what 'value' means and
+                // don't
                 // want it touched.
                 trySkipExistingEscapes: false,
                 value
@@ -146,19 +152,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             // To make a change to a raw string we have to go through several passes to determine what to do.
             //
             // First, just take the copied text and determine the most basic edit that would insert it into the
-            // destination string.  Importantly, do not insert interpolations in this step (instead just replace them
+            // destination string.  Importantly, do not insert interpolations in this step (instead just replace
+            // them
             // with a dummy character).
             //
-            // Second, after this text is inserted, look at the content regions of the string after the paste and look
-            // at the sequences of `"` and `{` in them to see if we need to update the delimiters of the raw string.
-            // Note: this is why it is critical that any interpolations are not inserted.  We don't want the content of
-            // the interpolation to affect the delimiters.  e.g. a interpolation containing `""""` *inside* of it
+            // Second, after this text is inserted, look at the content regions of the string after the paste
+            // and look
+            // at the sequences of `"` and `{` in them to see if we need to update the delimiters of the raw
+            // string.
+            // Note: this is why it is critical that any interpolations are not inserted.  We don't want the
+            // content of
+            // the interpolation to affect the delimiters.  e.g. a interpolation containing `""""` *inside* of
+            // it
             // doesn't require updating the delimiters of the outer raw-string expression.
             //
-            // Also, after the text is inserted, look to see if we need to convert a single-line raw expression to
+            // Also, after the text is inserted, look to see if we need to convert a single-line raw expression
+            // to
             // multi-line.
             //
-            // At this point, we will now have the information necessary to actually insert the content and do things
+            // At this point, we will now have the information necessary to actually insert the content and do
+            // things
             // like give interpolations the proper number of braces for the final string we're making.
 
             var (quotesToAdd, dollarSignsToAdd, convertToMultiLine) =
@@ -202,8 +215,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                 dollarSignCount: -1
             );
 
-            // We want to map spans forward (which requires tracking spans), but we don't want to modify the original
-            // text buffer.  So clone the text buffer to a new one where we can then make the change without touching
+            // We want to map spans forward (which requires tracking spans), but we don't want to modify the
+            // original
+            // text buffer.  So clone the text buffer to a new one where we can then make the change without
+            // touching
             // the original.
             var clonedBuffer = _textBufferFactoryService.CreateTextBuffer(
                 new SnapshotSpan(SnapshotBeforePaste, 0, SnapshotBeforePaste.Length),
@@ -253,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                     )
                 );
 
-            // A newline and the indentation to start with.  Note: adding the indentation here means that existing
+            // A newline and the indentation to start with.  Note: adding the indentation here means that
+            // existing
             // content will start at the right location, as will any content we are pasting in.
             if (convertToMultiLine)
                 edits.Add(
@@ -263,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                     )
                 );
 
-            // If we need to add braces to existing interpolations, do so now for the interpolations after the selection.
+            // If we need to add braces to existing interpolations, do so now for the interpolations after the
+            // selection.
             if (dollarSignsToAdd != null)
                 UpdateExistingInterpolationBraces(
                     edits,
@@ -275,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             // indentation/interpolations correctly.
             edits.Add(GetContentEditForRawString(insertInterpolations: true, finalDollarSignCount));
 
-            // If we need to add braces to existing interpolations, do so now for the interpolations before the selection.
+            // If we need to add braces to existing interpolations, do so now for the interpolations before the
+            // selection.
             if (dollarSignsToAdd != null)
                 UpdateExistingInterpolationBraces(
                     edits,

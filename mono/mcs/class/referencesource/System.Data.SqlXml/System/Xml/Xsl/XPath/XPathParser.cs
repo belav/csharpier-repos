@@ -222,7 +222,8 @@ namespace System.Xml.Xsl.XPath
         }
 
         /*
-        *   NodeTest ::= NameTest | ('comment' | 'text' | 'node') '(' ')' | 'processing-instruction' '('  Literal? ')'
+        *   NodeTest ::= NameTest | ('comment' | 'text' | 'node') '(' ')' | 'processing-instruction' '('
+        Literal? ')'
         *   NameTest ::= '*' | NCName ':' '*' | QName
         */
         private Node ParseNodeTest(XPathAxis axis)

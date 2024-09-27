@@ -152,8 +152,10 @@ namespace System.Globalization
 #endif
 
             // Check if we are getting the English Name at the end of the returned list.
-            // ICU usually return long list including all Era names written in Japanese characters except the recent eras which actually we support will be returned in English.
-            // We have the following check as older ICU versions doesn't carry the English names (e.g. ICU version 50).
+            // ICU usually return long list including all Era names written in Japanese characters except the
+            // recent eras which actually we support will be returned in English.
+            // We have the following check as older ICU versions doesn't carry the English names (e.g. ICU
+            // version 50).
             if (
                 abbrevEnglishEraNames[abbrevEnglishEraNames.Length - 1].Length == 0
                 || abbrevEnglishEraNames[abbrevEnglishEraNames.Length - 1][0] > '\u007F'
@@ -192,7 +194,8 @@ namespace System.Globalization
         private static string GetAbbreviatedEraName(string[] eraNames, int eraIndex)
         {
             // This matches the behavior on Win32 - only returning the first character of the era name.
-            // See Calendar.EraAsString(Int32) - https://msdn.microsoft.com/en-us/library/windows/apps/br206751.aspx
+            // See Calendar.EraAsString(Int32) -
+            // https://msdn.microsoft.com/en-us/library/windows/apps/br206751.aspx
             return eraNames[eraIndex].Substring(0, 1);
         }
 

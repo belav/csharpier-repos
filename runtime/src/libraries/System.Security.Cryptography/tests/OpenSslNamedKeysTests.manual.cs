@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    // See osslplugins/README.md for instructions on how to build and install the test engine and setup for TPM tests.
+    // See osslplugins/README.md for instructions on how to build and install the test engine and setup
+    // for TPM tests.
     public class OpenSslNamedKeysTests
     {
         private const string EnvVarPrefix = "DOTNET_CRYPTOGRAPHY_TESTS_ENGINE_";

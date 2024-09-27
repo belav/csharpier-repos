@@ -47,7 +47,8 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             // Typically we'd want to use the right reference assemblies, but as we're not persisting any
-            // assets and only using this for testing purposes, referencing implementation assemblies is sufficient.
+            // assets and only using this for testing purposes, referencing implementation assemblies is
+            // sufficient.
             string corelibPath = typeof(object).Assembly.Location;
             return new[]
             {
@@ -238,8 +239,10 @@ namespace System.Text.RegularExpressions.Tests
             CancellationToken cancellationToken = default
         )
         {
-            // Un-ifdef to compile each regex individually, which can be useful if one regex among thousands is causing a failure.
-            // We compile them all en mass for test efficiency, but it can make it harder to debug a compilation failure in one of them.
+            // Un-ifdef to compile each regex individually, which can be useful if one regex among thousands is
+            // causing a failure.
+            // We compile them all en mass for test efficiency, but it can make it harder to debug a compilation
+            // failure in one of them.
 #if false
             if (regexes.Length > 1)
             {
@@ -413,7 +416,8 @@ namespace System.Text.RegularExpressions.Tests
                     .Select((line, lineNumber) => $"{lineNumber, 6}: {line}")
             );
 
-        /// <summary>Simple AssemblyLoadContext used to load source generated regex assemblies so they can be unloaded.</summary>
+        /// <summary>Simple AssemblyLoadContext used to load source generated regex assemblies so they can
+        // be unloaded.</summary>
         private sealed class RegexLoadContext : AssemblyLoadContext
         {
             private readonly AssemblyDependencyResolver _resolver;

@@ -38,6 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         public static string ExtractErrorCodeFromCheckId(this string checkId)
         {
             // checkId short and long name rules:
+            //
             // https://docs.microsoft.com/en-us/visualstudio/code-quality/in-source-suppression-overview?view=vs-2019#suppressmessage-attribute
             var position = checkId.IndexOf(':');
             var errorCode = position == -1 ? checkId : checkId[..position];

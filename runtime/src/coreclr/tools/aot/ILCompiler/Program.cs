@@ -138,7 +138,8 @@ namespace ILCompiler
             );
 
             //
-            // TODO: To support our pre-compiled test tree, allow input files that aren't managed assemblies since
+            // TODO: To support our pre-compiled test tree, allow input files that aren't managed assemblies
+            // since
             // some tests contain a mixture of both managed and native binaries.
             //
             // See: https://github.com/dotnet/corert/issues/2785
@@ -348,7 +349,8 @@ namespace ILCompiler
                 {
                     if (typeSystemContext.InputFilePaths.ContainsKey(unmanagedEntryPointsAssembly))
                     {
-                        // Skip adding UnmanagedEntryPointsRootProvider for modules that have been already registered as an input module
+                        // Skip adding UnmanagedEntryPointsRootProvider for modules that have been already registered as an
+                        // input module
                         continue;
                     }
                     EcmaModule module = typeSystemContext.GetModuleForSimpleName(
@@ -696,7 +698,8 @@ namespace ILCompiler
                         .UseReadOnlyFieldPolicy(readOnlyFieldPolicy);
                 }
 
-                // If we have a scanner, we can inline threadstatics storage using the information we collected at scanning time.
+                // If we have a scanner, we can inline threadstatics storage using the information we collected at
+                // scanning time.
                 if (
                     !Get(_command.NoInlineTls)
                     && (
@@ -794,12 +797,15 @@ namespace ILCompiler
 #if DEBUG
             if (scannerConstructedTypes != null)
             {
-                // If the scanner and compiler don't agree on what to compile, the outputs of the scanner might not actually be usable.
+                // If the scanner and compiler don't agree on what to compile, the outputs of the scanner might not
+                // actually be usable.
                 // We are going to check this two ways:
                 // 1. The methods and types generated during compilation are a subset of method and types scanned
-                // 2. The methods and types scanned are a subset of methods and types compiled (this has a chance to hold for unoptimized builds only).
+                // 2. The methods and types scanned are a subset of methods and types compiled (this has a chance to
+                // hold for unoptimized builds only).
 
-                // Check that methods and types generated during compilation are a subset of method and types scanned
+                // Check that methods and types generated during compilation are a subset of method and types
+                // scanned
                 bool scanningFail = false;
                 DiffCompilationResults(
                     ref scanningFail,
@@ -824,9 +830,12 @@ namespace ILCompiler
 
                 static bool IsRelatedToInvalidInput(MethodDesc method)
                 {
-                    // RyuJIT is more sensitive to invalid input and might detect cases that the scanner didn't have trouble with.
-                    // If we find logic related to compiling fallback method bodies (methods that just throw) that got compiled
-                    // but not scanned, it's usually fine. If it wasn't fine, we would probably crash before getting here.
+                    // RyuJIT is more sensitive to invalid input and might detect cases that the scanner didn't have
+                    // trouble with.
+                    // If we find logic related to compiling fallback method bodies (methods that just throw) that got
+                    // compiled
+                    // but not scanned, it's usually fine. If it wasn't fine, we would probably crash before getting
+                    // here.
                     return method.OwningType is MetadataType mdType
                         && mdType.Module == method.Context.SystemModule
                         && (
@@ -835,16 +844,20 @@ namespace ILCompiler
                         );
                 }
 
-                // If optimizations are enabled, the results will for sure not match in the other direction due to inlining, etc.
-                // But there's at least some value in checking the scanner doesn't expand the universe too much in debug.
+                // If optimizations are enabled, the results will for sure not match in the other direction due to
+                // inlining, etc.
+                // But there's at least some value in checking the scanner doesn't expand the universe too much in
+                // debug.
                 if (_command.OptimizationMode == OptimizationMode.None)
                 {
                     // Check that methods and types scanned are a subset of methods and types compiled
 
-                    // If we find diffs here, they're not critical, but still might be causing a Size on Disk regression.
+                    // If we find diffs here, they're not critical, but still might be causing a Size on Disk
+                    // regression.
                     bool dummy = false;
 
-                    // We additionally skip methods in SIMD module because there's just too many intrisics to handle and IL scanner
+                    // We additionally skip methods in SIMD module because there's just too many intrisics to handle and
+                    // IL scanner
                     // doesn't expand them. They would show up as noisy diffs.
                     DiffCompilationResults(
                         ref dummy,

@@ -12,12 +12,15 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     internal partial class RoslynEventSource
     {
         /// <summary>
-        /// Logs an informational block with given <paramref name="entity"/>'s <see cref="object.ToString"/> representation as the message
+        /// Logs an informational block with given <paramref name="entity"/>'s <see cref="object.ToString"/>
+        // representation as the message
         /// and specified <paramref name="functionId"/>.
-        /// On dispose of the returned disposable object, it logs the 'tick' count between the start and end of the block.
+        /// On dispose of the returned disposable object, it logs the 'tick' count between the start and end
+        // of the block.
         /// Unlike other logging methods on <see cref="RoslynEventSource"/>, this method does not check
         /// if the specified <paramref name="functionId"/> was explicitly enabled.
-        /// Instead it checks if the <see cref="RoslynEventSource"/> was enabled at <see cref="EventLevel.Informational"/> level.
+        /// Instead it checks if the <see cref="RoslynEventSource"/> was enabled at <see
+        // cref="EventLevel.Informational"/> level.
         /// </summary>
         public static LogBlock LogInformationalBlock(
             FunctionId functionId,
@@ -26,11 +29,14 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         ) => LogBlock.Create(functionId, entity, EventLevel.Informational, cancellationToken);
 
         /// <summary>
-        /// Logs an informational message block with the given <paramref name="message"/>> and specified <paramref name="functionId"/>.
-        /// On dispose of the returned disposable object, it logs the 'tick' count between the start and end of the block.
+        /// Logs an informational message block with the given <paramref name="message"/>> and specified
+        // <paramref name="functionId"/>.
+        /// On dispose of the returned disposable object, it logs the 'tick' count between the start and end
+        // of the block.
         /// Unlike other logging methods on <see cref="RoslynEventSource"/>, this method does not check
         /// if the specified <paramref name="functionId"/> was explicitly enabled.
-        /// Instead it checks if the <see cref="RoslynEventSource"/> was enabled at <see cref="EventLevel.Informational"/> level.
+        /// Instead it checks if the <see cref="RoslynEventSource"/> was enabled at <see
+        // cref="EventLevel.Informational"/> level.
         /// </summary>
         public static LogBlock LogInformationalBlock(
             FunctionId functionId,
@@ -40,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         /// <summary>
         /// This tracks the logged message. On instantiation, it logs 'Started block' with other event data.
-        /// On dispose, it logs 'Ended block' with the same event data so we can track which block started and ended when looking at logs.
+        /// On dispose, it logs 'Ended block' with the same event data so we can track which block started
+        // and ended when looking at logs.
         /// </summary>
         internal struct LogBlock : IDisposable
         {

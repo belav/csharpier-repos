@@ -40,21 +40,21 @@ namespace System.Workflow.Runtime
         /// Statically set up trace sources
         ///
         /// To enable logging to a file, add lines like the following to your app config file.
-        /*
-            <system.diagnostics>
-                <switches>
-                    <add name="System.Workflow LogToFile" value="1" />
-                </switches>
-            </system.diagnostics>
-        */
+/*
+<system.diagnostics>
+<switches>
+<add name="System.Workflow LogToFile" value="1" />
+</switches>
+</system.diagnostics>
+*/
         /// To enable tracing to default trace listeners, add lines like the following
-        /*
-            <system.diagnostics>
-                <switches>
-                    <add name="System.Workflow LogToTraceListener" value="1" />
-                </switches>
-            </system.diagnostics>
-        */
+/*
+<system.diagnostics>
+<switches>
+<add name="System.Workflow LogToTraceListener" value="1" />
+</switches>
+</system.diagnostics>
+*/
         /// </summary>
         static WorkflowTrace()
         {

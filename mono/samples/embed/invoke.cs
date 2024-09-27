@@ -53,7 +53,7 @@ namespace Embed
 
         static void Main()
         {
-            /* we do nothing here... */
+/* we do nothing here... */
         }
     }
 }

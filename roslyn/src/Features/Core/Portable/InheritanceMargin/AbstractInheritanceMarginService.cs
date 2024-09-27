@@ -57,8 +57,10 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                 .ConfigureAwait(false);
             if (remoteClient != null)
             {
-                // Also, make it clear to the remote side that they should be using frozen semantics, just like we are.
-                // we want results quickly, without waiting for the entire source generator pass to run.  The user will still get
+                // Also, make it clear to the remote side that they should be using frozen semantics, just like we
+                // are.
+                // we want results quickly, without waiting for the entire source generator pass to run.  The user
+                // will still get
                 // accurate results in the future because taggers are set to recompute when compilations are fully
                 // available on the OOP side.
                 var result = await remoteClient

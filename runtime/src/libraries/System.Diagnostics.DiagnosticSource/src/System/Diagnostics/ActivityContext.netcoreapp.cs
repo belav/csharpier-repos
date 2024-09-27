@@ -4,8 +4,10 @@
 namespace System.Diagnostics
 {
     /// <summary>
-    /// ActivityContext representation conforms to the w3c TraceContext specification. It contains two identifiers
-    /// a TraceId and a SpanId - along with a set of common TraceFlags and system-specific TraceState values.
+    /// ActivityContext representation conforms to the w3c TraceContext specification. It contains two
+    // identifiers
+    /// a TraceId and a SpanId - along with a set of common TraceFlags and system-specific TraceState
+    // values.
     /// </summary>
     public readonly partial struct ActivityContext : IEquatable<ActivityContext>
     {

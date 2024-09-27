@@ -165,7 +165,8 @@ public class NativeLibraryTests : IDisposable
             )
         );
 
-        // Library should not be found in the assembly directory, but should fall back to the default OS search which includes CWD on Windows
+        // Library should not be found in the assembly directory, but should fall back to the default OS
+        // search which includes CWD on Windows
         EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory));
         EXPECT(
             TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory)
@@ -248,7 +249,8 @@ public class NativeLibraryTests : IDisposable
         if (TestLibrary.Utilities.IsNativeAot)
         {
             // For NativeAOT, validate the case where the native library is next to the AOT application.
-            // The passing of DllImportSearchPath.System32 is done to ensure on Windows the runtime won't fallback
+            // The passing of DllImportSearchPath.System32 is done to ensure on Windows the runtime won't
+            // fallback
             // and try to search the application directory by default.
             string libNameAot = $"{NativeLibraryToLoad.Name}-in-native";
             EXPECT(
@@ -274,7 +276,8 @@ public class NativeLibraryTests : IDisposable
             {
                 Environment.CurrentDirectory = subdirectory;
 
-                // Library should not be found in the assembly directory, but should fall back to the default OS search which includes CWD on Windows
+                // Library should not be found in the assembly directory, but should fall back to the default OS
+                // search which includes CWD on Windows
                 EXPECT(
                     LoadLibrary_WithAssembly(
                         libName,

@@ -30,7 +30,8 @@ public sealed partial class LazyAssemblyLoader
     /// context, this method will look for the assemblies already loaded in the runtime
     /// and return them.
     /// </summary>
-    /// <param name="assembliesToLoad">The names of the assemblies to load (e.g. "MyAssembly.dll")</param>
+    /// <param name="assembliesToLoad">The names of the assemblies to load (e.g.
+    // "MyAssembly.dll")</param>
     /// <returns>A list of the loaded <see cref="Assembly"/></returns>
     [RequiresUnreferencedCode("Types and members the loaded assemblies depend on might be removed")]
     public Task<IEnumerable<Assembly>> LoadAssembliesAsync(IEnumerable<string> assembliesToLoad)

@@ -35,12 +35,14 @@ namespace System.Data
         /// Constructs a new InvalidCommandTreeException with the specified message and inner exception.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        /// <param name="innerException">The exception that is the cause of this InvalidCommandTreeException.</param>
+        /// <param name="innerException">The exception that is the cause of this
+        // InvalidCommandTreeException.</param>
         public InvalidCommandTreeException(string message, Exception innerException)
             : base(message, innerException) { }
 
         /// <summary>
-        /// Constructs a new InvalidCommandTreeException from the specified serialization info and streaming context.
+        /// Constructs a new InvalidCommandTreeException from the specified serialization info and streaming
+        // context.
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>

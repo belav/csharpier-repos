@@ -20,26 +20,39 @@ using System.Security;
 
 namespace System.Threading.Tasks.Dataflow.Internal
 {
-    // SpscTargetCore provides a fast target core for use in blocks that will only have single-producer-single-consumer
-    // semantics.  Blocks configured with the default DOP==1 will be single consumer, so whether this core may be
-    // used is largely up to whether the block is also single-producer.  The ExecutionDataflowBlockOptions.SingleProducerConstrained
-    // option can be used by a developer to inform a block that it will only be accessed by one producer at a time,
-    // and a block like ActionBlock can utilize that knowledge to choose this target instead of the default TargetCore.
+    // SpscTargetCore provides a fast target core for use in blocks that will only have
+    // single-producer-single-consumer
+    // semantics.  Blocks configured with the default DOP==1 will be single consumer, so whether this
+    // core may be
+    // used is largely up to whether the block is also single-producer.  The
+    // ExecutionDataflowBlockOptions.SingleProducerConstrained
+    // option can be used by a developer to inform a block that it will only be accessed by one producer
+    // at a time,
+    // and a block like ActionBlock can utilize that knowledge to choose this target instead of the
+    // default TargetCore.
     // However, there are further constraints that might prevent this core from being used.
-    //     - If the user specifies a CancellationToken, this core can't be used, as the cancellation request
-    //       could come in concurrently with the single producer accessing the block, thus resulting in multiple producers.
-    //     - If the user specifies a bounding capacity, this core can't be used, as the consumer processing items
-    //       needs to synchronize with producers around the change in bounding count, and the consumer is again
+    //     - If the user specifies a CancellationToken, this core can't be used, as the cancellation
+    // request
+    //       could come in concurrently with the single producer accessing the block, thus resulting in
+    // multiple producers.
+    //     - If the user specifies a bounding capacity, this core can't be used, as the consumer
+    // processing items
+    //       needs to synchronize with producers around the change in bounding count, and the consumer
+    // is again
     //       in effect another producer.
-    //     - If the block has a source half (e.g. TransformBlock) and that source could potentially call back
-    //       to the target half to, for example, notify it of exceptions occurring, again there would potentially
+    //     - If the block has a source half (e.g. TransformBlock) and that source could potentially call
+    // back
+    //       to the target half to, for example, notify it of exceptions occurring, again there would
+    // potentially
     //       be multiple producers.
     // Thus, when and how this SpscTargetCore may be applied is significantly constrained.
 
     /// <summary>
-    /// Provides a core implementation of <see cref="ITargetBlock{TInput}"/> for use when there's only a single producer posting data.
+    /// Provides a core implementation of <see cref="ITargetBlock{TInput}"/> for use when there's only a
+    // single producer posting data.
     /// </summary>
-    /// <typeparam name="TInput">Specifies the type of data accepted by the <see cref="TargetCore{TInput}"/>.</typeparam>
+    /// <typeparam name="TInput">Specifies the type of data accepted by the <see
+    // cref="TargetCore{TInput}"/>.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     internal sealed class SpscTargetCore<TInput>
     {
@@ -50,13 +63,15 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private readonly SingleProducerSingleConsumerQueue<TInput> _messages =
             new SingleProducerSingleConsumerQueue<TInput>();
 
-        /// <summary>The options to use to configure this block. The target core assumes these options are immutable.</summary>
+        /// <summary>The options to use to configure this block. The target core assumes these options are
+        // immutable.</summary>
         private readonly ExecutionDataflowBlockOptions _dataflowBlockOptions;
 
         /// <summary>An action to invoke for every accepted message.</summary>
         private readonly Action<TInput> _action;
 
-        /// <summary>Exceptions that may have occurred and gone unhandled during processing.  This field is lazily initialized.</summary>
+        /// <summary>Exceptions that may have occurred and gone unhandled during processing.  This field is
+        // lazily initialized.</summary>
         private volatile List<Exception>? _exceptions;
 
         /// <summary>Whether to stop accepting new messages.</summary>
@@ -66,19 +81,23 @@ namespace System.Threading.Tasks.Dataflow.Internal
         private volatile bool _completionReserved;
 
         /// <summary>
-        /// The Task currently active to process the block. This field is used to synchronize between producer and consumer,
-        /// and it should not be set to null once the block completes, as doing so would allow for races where the producer
+        /// The Task currently active to process the block. This field is used to synchronize between
+        // producer and consumer,
+        /// and it should not be set to null once the block completes, as doing so would allow for races
+        // where the producer
         /// gets another consumer task queued even though the block has completed.
         /// </summary>
         private volatile Task? _activeConsumer;
 
-        /// <summary>A task representing the completion of the block.  This field is lazily initialized.</summary>
+        /// <summary>A task representing the completion of the block.  This field is lazily
+        // initialized.</summary>
         private TaskCompletionSource<VoidResult>? _completionTask;
 
         /// <summary>Initialize the SPSC target core.</summary>
         /// <param name="owningTarget">The owning target block.</param>
         /// <param name="action">The action to be invoked for every message.</param>
-        /// <param name="dataflowBlockOptions">The options to use to configure this block. The target core assumes these options are immutable.</param>
+        /// <param name="dataflowBlockOptions">The options to use to configure this block. The target core
+        // assumes these options are immutable.</param>
         internal SpscTargetCore(
             ITargetBlock<TInput> owningTarget,
             Action<TInput> action,
@@ -104,10 +123,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
             Interlocked.MemoryBarrier(); // ensure the read of _activeConsumer doesn't move up before the writes in Enqueue
 
-            // Make sure there's an active task available to handle processing this message.  If we find the task
-            // is null, we'll try to schedule one using an interlocked operation.  If we find the task is non-null,
-            // then there must be a task actively running.  If there's a race where the task is about to complete
-            // and nulls out its reference (using a barrier), it'll subsequently check whether there are any messages in the queue,
+            // Make sure there's an active task available to handle processing this message.  If we find the
+            // task
+            // is null, we'll try to schedule one using an interlocked operation.  If we find the task is
+            // non-null,
+            // then there must be a task actively running.  If there's a race where the task is about to
+            // complete
+            // and nulls out its reference (using a barrier), it'll subsequently check whether there are any
+            // messages in the queue,
             // and since we put the messages into the queue before now, it'll find them and use an interlocked
             // to re-launch itself.
             if (_activeConsumer == null)
@@ -118,7 +141,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             return true;
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
         internal DataflowMessageStatus OfferMessage(
             DataflowMessageHeader messageHeader,
             TInput messageValue,
@@ -136,7 +160,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="messageHeader">The message header for the offered value.</param>
         /// <param name="messageValue">The offered value.</param>
         /// <param name="source">The source offering the message. This may be null.</param>
-        /// <param name="consumeToAccept">true if we need to call back to the source to consume the message; otherwise, false if we can simply accept it directly.</param>
+        /// <param name="consumeToAccept">true if we need to call back to the source to consume the message;
+        // otherwise, false if we can simply accept it directly.</param>
         /// <returns>The status of the message.</returns>
         private DataflowMessageStatus OfferMessage_Slow(
             DataflowMessageHeader messageHeader,
@@ -185,7 +210,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <summary>Schedules a consumer task if there's none currently running.</summary>
-        /// <param name="isReplica">Whether the new consumer is being scheduled to replace a currently running consumer.</param>
+        /// <param name="isReplica">Whether the new consumer is being scheduled to replace a currently
+        // running consumer.</param>
         private void ScheduleConsumerIfNecessary(bool isReplica)
         {
             // If there's currently no active task...
@@ -336,7 +362,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <summary>
-        /// Completes the target core.  If an exception is provided, the block will end up in a faulted state.
+        /// Completes the target core.  If an exception is provided, the block will end up in a faulted
+        // state.
         /// If Complete is invoked more than once, or if it's invoked after the block is already
         /// completing, all invocations after the first are ignored.
         /// </summary>
@@ -379,7 +406,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <summary>
-        /// Completes the block.  This must only be called once, and only once all of the completion conditions are met.
+        /// Completes the block.  This must only be called once, and only once all of the completion
+        // conditions are met.
         /// </summary>
         private void CompleteBlockOncePossible()
         {
@@ -388,7 +416,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 "Should only invoke once completion has been reserved."
             );
 
-            // Dump any messages that might remain in the queue, which could happen if we completed due to exceptions.
+            // Dump any messages that might remain in the queue, which could happen if we completed due to
+            // exceptions.
             while (_messages.TryDequeue(out _))
                 ;
 
@@ -418,7 +447,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
         internal Task Completion
         {
             get { return CompletionSource.Task; }

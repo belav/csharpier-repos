@@ -24,13 +24,15 @@ namespace System
     /// <summary>Specifies the behavior for a forced garbage collection.</summary>
     public enum GCCollectionMode
     {
-        /// <summary>The default setting for this enumeration, which is currently <see cref="Forced" />.</summary>
+        /// <summary>The default setting for this enumeration, which is currently <see cref="Forced"
+        // />.</summary>
         Default = 0,
 
         /// <summary>Forces the garbage collection to occur immediately.</summary>
         Forced = 1,
 
-        /// <summary>Allows the garbage collector to determine whether the current time is optimal to reclaim objects.</summary>
+        /// <summary>Allows the garbage collector to determine whether the current time is optimal to
+        // reclaim objects.</summary>
         Optimized = 2,
 
         /// <summary>Requests that the garbage collector decommit as much memory as possible.</summary>
@@ -67,12 +69,14 @@ namespace System
         private static extern void GetMemoryInfo(GCMemoryInfoData data, int kind);
 
         /// <summary>Gets garbage collection memory information.</summary>
-        /// <returns>An object that contains information about the garbage collector's memory usage.</returns>
+        /// <returns>An object that contains information about the garbage collector's memory
+        // usage.</returns>
         public static GCMemoryInfo GetGCMemoryInfo() => GetGCMemoryInfo(GCKind.Any);
 
         /// <summary>Gets garbage collection memory information.</summary>
         /// <param name="kind">The kind of collection for which to retrieve memory information.</param>
-        /// <returns>An object that contains information about the garbage collector's memory usage.</returns>
+        /// <returns>An object that contains information about the garbage collector's memory
+        // usage.</returns>
         public static GCMemoryInfo GetGCMemoryInfo(GCKind kind)
         {
             if ((kind < GCKind.Any) || (kind > GCKind.Background))
@@ -398,7 +402,8 @@ namespace System
         /// <summary>
         /// Get a count of the bytes allocated over the lifetime of the process.
         /// </summary>
-        /// <param name="precise">If true, gather a precise number, otherwise gather a fairly count. Gathering a precise value triggers at a significant performance penalty.</param>
+        /// <param name="precise">If true, gather a precise number, otherwise gather a fairly count.
+        // Gathering a precise value triggers at a significant performance penalty.</param>
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern long GetTotalAllocatedBytes(bool precise = false);
 
@@ -608,11 +613,13 @@ namespace System
                     return true;
                 }
 
-                // We need to take a snapshot of s_notifications.Count, so that in the case that s_notifications[i].Notification() registers new notifications,
+                // We need to take a snapshot of s_notifications.Count, so that in the case that
+                // s_notifications[i].Notification() registers new notifications,
                 // we neither get rid of them nor iterate over them
                 int count = s_notifications.Count;
 
-                // If there is no existing notifications, we won't be iterating over any and we won't be adding any new one. Also, there wasn't any added since
+                // If there is no existing notifications, we won't be iterating over any and we won't be adding any
+                // new one. Also, there wasn't any added since
                 // we last invoked this method so it's safe to assume we can reset s_previousMemoryLoad.
                 if (count == 0)
                 {
@@ -623,7 +630,8 @@ namespace System
                 int last = 0;
                 for (int i = 0; i < count; ++i)
                 {
-                    // If s_notifications[i] changes from within s_previousMemoryLoad bound to outside s_previousMemoryLoad, we trigger the notification
+                    // If s_notifications[i] changes from within s_previousMemoryLoad bound to outside
+                    // s_previousMemoryLoad, we trigger the notification
                     if (
                         s_notifications[i].LowMemoryPercent <= s_previousMemoryLoad
                         && s_previousMemoryLoad <= s_notifications[i].HighMemoryPercent
@@ -652,12 +660,17 @@ namespace System
         }
 
         /// <summary>
-        /// Register a notification to occur *AFTER* a GC occurs in which the memory load changes from within the bound specified
-        /// to outside of the bound specified. This notification will occur once. If repeated notifications are required, the notification
-        /// must be reregistered. The notification will occur on a thread which should not be blocked. Complex processing in the notification should defer work to the threadpool.
+        /// Register a notification to occur *AFTER* a GC occurs in which the memory load changes from
+        // within the bound specified
+        /// to outside of the bound specified. This notification will occur once. If repeated notifications
+        // are required, the notification
+        /// must be reregistered. The notification will occur on a thread which should not be blocked.
+        // Complex processing in the notification should defer work to the threadpool.
         /// </summary>
-        /// <param name="lowMemoryPercent">percent of HighMemoryLoadThreshold to use as lower bound. Must be a number >= 0 or an ArgumentOutOfRangeException will be thrown.</param>
-        /// <param name="highMemoryPercent">percent of HighMemoryLoadThreshold use to use as lower bound. Must be a number > lowMemory or an ArgumentOutOfRangeException will be thrown. </param>
+        /// <param name="lowMemoryPercent">percent of HighMemoryLoadThreshold to use as lower bound. Must be
+        // a number >= 0 or an ArgumentOutOfRangeException will be thrown.</param>
+        /// <param name="highMemoryPercent">percent of HighMemoryLoadThreshold use to use as lower bound.
+        // Must be a number > lowMemory or an ArgumentOutOfRangeException will be thrown. </param>
         /// <param name="notification">delegate to invoke when operation occurs</param>s
         internal static void RegisterMemoryLoadChangeNotification(
             float lowMemoryPercent,
@@ -709,14 +722,17 @@ namespace System
         }
 
         /// <summary>
-        /// Registers a callback to be invoked when a certain amount of memory is allocated in the no GC region.
+        /// Registers a callback to be invoked when a certain amount of memory is allocated in the no GC
+        // region.
         /// </summary>
         /// <param name="totalSize">The total size of the no GC region.</param>
         /// <param name="callback">The callback to be executed.</param>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="totalSize"/> is less than or equal to 0.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="callback"/> argument is null.</exception>
-        /// <exception cref="InvalidOperationException"><para>The GC is not currently under a no GC region.</para>
+        /// <exception cref="ArgumentNullException">The <paramref name="callback"/> argument is
+        // null.</exception>
+        /// <exception cref="InvalidOperationException"><para>The GC is not currently under a no GC
+        // region.</para>
         /// <para>-or-</para>
         /// <para>Another callback is already registered.</para>
         /// <para>-or-</para>
@@ -812,7 +828,8 @@ namespace System
                     }
                 }
 
-                // We only register the callback from the runtime in InvokeMemoryLoadChangeNotifications, so to avoid race conditions between
+                // We only register the callback from the runtime in InvokeMemoryLoadChangeNotifications, so to
+                // avoid race conditions between
                 // UnregisterMemoryLoadChangeNotification and InvokeMemoryLoadChangeNotifications in native.
             }
         }
@@ -846,7 +863,8 @@ namespace System
 #endif
             }
 
-            // Runtime overrides GC_ALLOC_ZEROING_OPTIONAL if the type contains references, so we don't need to worry about that.
+            // Runtime overrides GC_ALLOC_ZEROING_OPTIONAL if the type contains references, so we don't need to
+            // worry about that.
             GC_ALLOC_FLAGS flags = GC_ALLOC_FLAGS.GC_ALLOC_ZEROING_OPTIONAL;
             if (pinned)
                 flags |= GC_ALLOC_FLAGS.GC_ALLOC_PINNED_OBJECT_HEAP;
@@ -939,10 +957,13 @@ namespace System
         }
 
         /// <summary>
-        /// Gets the Configurations used by the Garbage Collector. The value of these configurations used don't necessarily have to be the same as the ones that are passed by the user.
-        /// For example for the "GCHeapCount" configuration, if the user supplies a value higher than the number of CPUs, the configuration that will be used is that of the number of CPUs.
+        /// Gets the Configurations used by the Garbage Collector. The value of these configurations used
+        // don't necessarily have to be the same as the ones that are passed by the user.
+        /// For example for the "GCHeapCount" configuration, if the user supplies a value higher than the
+        // number of CPUs, the configuration that will be used is that of the number of CPUs.
         /// </summary>
-        /// <returns> A Read Only Dictionary with configuration names and values of the configuration as the keys and values of the dictionary, respectively.</returns>
+        /// <returns> A Read Only Dictionary with configuration names and values of the configuration as the
+        // keys and values of the dictionary, respectively.</returns>
         public static unsafe IReadOnlyDictionary<string, object> GetConfigurationVariables()
         {
             GCConfigurationContext context = new GCConfigurationContext
@@ -954,7 +975,8 @@ namespace System
             return context.Configurations!;
         }
 
-        // Corresponding Enum for the managed side of things in gcinterface.h that indicates the type of the configuration.
+        // Corresponding Enum for the managed side of things in gcinterface.h that indicates the type of the
+        // configuration.
         internal enum GCConfigurationType
         {
             Int64,
@@ -980,9 +1002,11 @@ namespace System
 
         /// <summary>
         ///
-        /// Instructs the Garbage Collector to reconfigure itself by detecting the various memory limits on the system.
+        /// Instructs the Garbage Collector to reconfigure itself by detecting the various memory limits on
+        // the system.
         ///
-        /// In addition to actual physical memory limit and container limit settings, these configuration settings can be overwritten:
+        /// In addition to actual physical memory limit and container limit settings, these configuration
+        // settings can be overwritten:
         ///
         /// - GCHeapHardLimit
         /// - GCHeapHardLimitPercent
@@ -993,14 +1017,21 @@ namespace System
         /// - GCHeapHardLimitLOHPercent
         /// - GCHeapHardLimitPOHPercent
         ///
-        /// Instead of updating the environment variable (which will not be read), these are overridden setting a ulong value in the AppContext.
+        /// Instead of updating the environment variable (which will not be read), these are overridden
+        // setting a ulong value in the AppContext.
         ///
-        /// For example, you can use AppContext.SetData("GCHeapHardLimit", (ulong) 100 * 1024 * 1024) to override the GCHeapHardLimit to a 100M.
+        /// For example, you can use AppContext.SetData("GCHeapHardLimit", (ulong) 100 * 1024 * 1024) to
+        // override the GCHeapHardLimit to a 100M.
         ///
-        /// This API will only handle configs that could be handled when the runtime is loaded, for example, for configs that don't have any effects on 32-bit systems (like the GCHeapHardLimit* ones), this API will not handle it.
+        /// This API will only handle configs that could be handled when the runtime is loaded, for example,
+        // for configs that don't have any effects on 32-bit systems (like the GCHeapHardLimit* ones), this API
+        // will not handle it.
         ///
-        /// <exception cref="InvalidOperationException">If the hard limit is too low. This can happen if the heap hard limit that the refresh will set, either because of new AppData settings or implied by the container memory limit changes, is lower than what is already committed.</exception>
-        /// <exception cref="InvalidOperationException">If the hard limit is invalid. This can happen, for example, with negative heap hard limit percentages.</exception>
+        /// <exception cref="InvalidOperationException">If the hard limit is too low. This can happen if the
+        // heap hard limit that the refresh will set, either because of new AppData settings or implied by the
+        // container memory limit changes, is lower than what is already committed.</exception>
+        /// <exception cref="InvalidOperationException">If the hard limit is invalid. This can happen, for
+        // example, with negative heap hard limit percentages.</exception>
         ///
         /// </summary>
         public static void RefreshMemoryLimit()

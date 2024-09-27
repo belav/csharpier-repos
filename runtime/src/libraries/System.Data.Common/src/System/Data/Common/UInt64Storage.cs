@@ -191,7 +191,8 @@ namespace System.Data.Common
                 return -1;
             }
             return valueNo1.CompareTo((ulong)value);
-            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to UInt64.CompareTo(UInt64)
+            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to
+            // UInt64.CompareTo(UInt64)
         }
 
         public override object ConvertValue(object? value)

@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
-///     <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-sequences">Database sequences</see> for more
+// information and examples.
 /// </remarks>
 public class SequenceUniquificationConvention : IModelFinalizingConvention
 {
@@ -19,7 +20,8 @@ public class SequenceUniquificationConvention : IModelFinalizingConvention
     ///     Creates a new instance of <see cref="SequenceUniquificationConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies">Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies">Parameter object containing relational dependencies for
+    // this convention.</param>
     public SequenceUniquificationConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

@@ -93,7 +93,8 @@ namespace System.Security.Cryptography.Tests
             char[] context
         )
         {
-            // The actual implementation uses a stricter UTF8 encoding/decoding but we know our test data does not contain
+            // The actual implementation uses a stricter UTF8 encoding/decoding but we know our test data does
+            // not contain
             // invalid UTF8.
             byte[] labelBytes = System.Text.Encoding.UTF8.GetBytes(label);
             byte[] contextBytes = System.Text.Encoding.UTF8.GetBytes(context);

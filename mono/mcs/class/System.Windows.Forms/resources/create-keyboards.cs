@@ -3919,8 +3919,8 @@ public class CreateKeyboards
 
     private static readonly short[] main_key_scan_qwerty = new short[]
     {
-        /* this is my (102-key) keyboard layout, sorry if it doesn't quite match yours */
-        /* `	1    2	  3    4    5	 6    7	   8	9    0	  -    = */
+/* this is my (102-key) keyboard layout, sorry if it doesn't quite match yours */
+/* `	1    2	  3    4    5	 6    7	   8	9    0	  -    = */
         0x29,
         0x02,
         0x03,
@@ -3934,7 +3934,7 @@ public class CreateKeyboards
         0x0B,
         0x0C,
         0x0D,
-        /* q	w    e	  r    t    y	 u    i	   o	p    [	  ] */
+/* q	w    e	  r    t    y	 u    i	   o	p    [	  ] */
         0x10,
         0x11,
         0x12,
@@ -3947,7 +3947,7 @@ public class CreateKeyboards
         0x19,
         0x1A,
         0x1B,
-        /* a	s    d	  f    g    h	 j    k	   l	;    '	  \ */
+/* a	s    d	  f    g    h	 j    k	   l	;    '	  \ */
         0x1E,
         0x1F,
         0x20,
@@ -3960,7 +3960,7 @@ public class CreateKeyboards
         0x27,
         0x28,
         0x2B,
-        /* z	x    c	  v    b    n	 m    ,	   .	/ */
+/* z	x    c	  v    b    n	 m    ,	   .	/ */
         0x2C,
         0x2D,
         0x2E,
@@ -3977,7 +3977,7 @@ public class CreateKeyboards
 
     private static readonly short[] main_key_scan_dvorak = new short[]
     {
-        /* `	1    2	  3    4    5	 6    7	   8	9    0	  [    ] */
+/* `	1    2	  3    4    5	 6    7	   8	9    0	  [    ] */
         0x29,
         0x02,
         0x03,
@@ -3991,7 +3991,7 @@ public class CreateKeyboards
         0x0B,
         0x1A,
         0x1B,
-        /* '	,    .	  p    y    f	 g    c	   r	l    /	  = */
+/* '	,    .	  p    y    f	 g    c	   r	l    /	  = */
         0x28,
         0x33,
         0x34,
@@ -4004,7 +4004,7 @@ public class CreateKeyboards
         0x26,
         0x35,
         0x0D,
-        /* a	o    e	  u    i    d	 h    t	   n	s    -	  \ */
+/* a	o    e	  u    i    d	 h    t	   n	s    -	  \ */
         0x1E,
         0x18,
         0x12,
@@ -4017,7 +4017,7 @@ public class CreateKeyboards
         0x1F,
         0x0C,
         0x2B,
-        /* ;	q    j	  k    x    b	 m    w	   v	z */
+/* ;	q    j	  k    x    b	 m    w	   v	z */
         0x27,
         0x10,
         0x24,
@@ -4524,22 +4524,22 @@ public class CreateKeyboards
         VirtualKeys.VK_OEM_5,
     };
 
-    /*
-    private static readonly VirtualKeys [] main_key_vkey_qwerty_jp = new VirtualKeys []
-    {
-        VirtualKeys.VK_1, VirtualKeys.VK_2, VirtualKeys.VK_3, VirtualKeys.VK_4,
-        VirtualKeys.VK_5, VirtualKeys.VK_6, VirtualKeys.VK_7, VirtualKeys.VK_8, VirtualKeys.VK_9,
-        VirtualKeys.VK_0, VirtualKeys.VK_OEM_MINUS, VirtualKeys.VK_OEM_PLUS,VirtualKeys.VK_OEM_3,
-        VirtualKeys.VK_Q, VirtualKeys.VK_W, VirtualKeys.VK_E, VirtualKeys.VK_R, VirtualKeys.VK_T
-        VirtualKeys.VK_Y, VirtualKeys.VK_U, VirtualKeys.VK_I, VirtualKeys.VK_O, VirtualKeys.VK_P
-        VirtualKeys.VK_OEM_4,VirtualKeys.VK_OEM_6,
-        VirtualKeys.VK_A, VirtualKeys.VK_S, VirtualKeys.VK_D, VirtualKeys.VK_F,
-        VirtualKeys.VK_G, VirtualKeys.VK_H, VirtualKeys.VK_J, VirtualKeys.VK_K, VirtualKeys.VK_L,
-        VirtualKeys.VK_OEM_1, VirtualKeys.VK_OEM_7, VirtualKeys.VK_OEM_5, VirtualKeys.VK_Z,
-        VirtualKeys.VK_X, VirtualKeys.VK_C, VirtualKeys.VK_V, VirtualKeys.VK_B, VirtualKeys.VK_N,
-        VirtualKeys.VK_M, VirtualKeys.VK_OEM_COMMA, VirtualKeys.VK_OEM_PERIOD, VirtualKeys.VK_OEM_2,
-        VirtualKeys.VK_OEM_102
-        };*/
+/*
+private static readonly VirtualKeys [] main_key_vkey_qwerty_jp = new VirtualKeys []
+{
+VirtualKeys.VK_1, VirtualKeys.VK_2, VirtualKeys.VK_3, VirtualKeys.VK_4,
+VirtualKeys.VK_5, VirtualKeys.VK_6, VirtualKeys.VK_7, VirtualKeys.VK_8, VirtualKeys.VK_9,
+VirtualKeys.VK_0, VirtualKeys.VK_OEM_MINUS, VirtualKeys.VK_OEM_PLUS,VirtualKeys.VK_OEM_3,
+VirtualKeys.VK_Q, VirtualKeys.VK_W, VirtualKeys.VK_E, VirtualKeys.VK_R, VirtualKeys.VK_T
+VirtualKeys.VK_Y, VirtualKeys.VK_U, VirtualKeys.VK_I, VirtualKeys.VK_O, VirtualKeys.VK_P
+VirtualKeys.VK_OEM_4,VirtualKeys.VK_OEM_6,
+VirtualKeys.VK_A, VirtualKeys.VK_S, VirtualKeys.VK_D, VirtualKeys.VK_F,
+VirtualKeys.VK_G, VirtualKeys.VK_H, VirtualKeys.VK_J, VirtualKeys.VK_K, VirtualKeys.VK_L,
+VirtualKeys.VK_OEM_1, VirtualKeys.VK_OEM_7, VirtualKeys.VK_OEM_5, VirtualKeys.VK_Z,
+VirtualKeys.VK_X, VirtualKeys.VK_C, VirtualKeys.VK_V, VirtualKeys.VK_B, VirtualKeys.VK_N,
+VirtualKeys.VK_M, VirtualKeys.VK_OEM_COMMA, VirtualKeys.VK_OEM_PERIOD, VirtualKeys.VK_OEM_2,
+VirtualKeys.VK_OEM_102
+};*/
 
     internal enum VirtualKeys
     {

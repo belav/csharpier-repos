@@ -19,7 +19,8 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
     public MediaTypeCollection SupportedMediaTypes { get; } = new MediaTypeCollection();
 
     /// <summary>
-    /// Gets the default value for a given type. Used to return a default value when the body contains no content.
+    /// Gets the default value for a given type. Used to return a default value when the body contains
+    // no content.
     /// </summary>
     /// <param name="modelType">The type of the value.</param>
     /// <returns>The default value for the <paramref name="modelType"/> type.</returns>
@@ -59,7 +60,8 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
             return false;
         }
 
-        // Confirm the request's content type is more specific than a media type this formatter supports e.g. OK if
+        // Confirm the request's content type is more specific than a media type this formatter supports
+        // e.g. OK if
         // client sent "text/plain" data and this formatter supports "text/*".
         return IsSubsetOfAnySupportedContentType(contentType);
     }
@@ -83,7 +85,8 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
     /// <paramref name="type"/>.
     /// </summary>
     /// <param name="type">The <see cref="Type"/> of object that will be read.</param>
-    /// <returns><c>true</c> if the <paramref name="type"/> can be read, otherwise <c>false</c>.</returns>
+    /// <returns><c>true</c> if the <paramref name="type"/> can be read, otherwise
+    // <c>false</c>.</returns>
     protected virtual bool CanReadType(Type type)
     {
         return true;
@@ -152,7 +155,8 @@ public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadat
             List<string>? mediaTypes = null;
 
             // Confirm this formatter supports a more specific media type than requested e.g. OK if "text/*"
-            // requested and formatter supports "text/plain". Treat contentType like it came from an Content-Type header.
+            // requested and formatter supports "text/plain". Treat contentType like it came from an
+            // Content-Type header.
             foreach (var mediaType in SupportedMediaTypes)
             {
                 var parsedMediaType = new MediaType(mediaType);

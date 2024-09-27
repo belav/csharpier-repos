@@ -54,16 +54,19 @@ namespace Mono.Security.Protocol.Ntlm
         // Indicates that NTLM authentication is supported.
         NegotiateNtlm = 0x00000200,
 
-        // When set, the client will send with the message the name of the domain in which the workstation has membership.
+        // When set, the client will send with the message the name of the domain in which the workstation
+        // has membership.
         NegotiateDomainSupplied = 0x00001000,
 
         // Indicates that the client is sending its workstation name with the message.
         NegotiateWorkstationSupplied = 0x00002000,
 
-        // Indicates that communication between the client and server after authentication should carry a "dummy" signature.
+        // Indicates that communication between the client and server after authentication should carry a
+        // "dummy" signature.
         NegotiateAlwaysSign = 0x00008000,
 
-        // Indicates that this client supports the NTLM2 signing and sealing scheme; if negotiated, this can also affect the response calculations.
+        // Indicates that this client supports the NTLM2 signing and sealing scheme; if negotiated, this can
+        // also affect the response calculations.
         NegotiateNtlm2Key = 0x00080000,
 
         // Indicates that this client supports strong (128-bit) encryption.

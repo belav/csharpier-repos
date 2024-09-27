@@ -22,7 +22,8 @@ public interface IRazorComponentEndpointInvoker
     /// Invokes the Razor component endpoint.
     /// </summary>
     /// <param name="context">The <see cref="HttpContext"/> for the current request.</param>
-    /// <returns>A <see cref="Task"/> that completes when the endpoint has been invoked and the component
+    /// <returns>A <see cref="Task"/> that completes when the endpoint has been invoked and the
+    // component
     /// has been rendered into the response.</returns>
     Task Render(HttpContext context);
 }

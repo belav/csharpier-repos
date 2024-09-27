@@ -73,7 +73,7 @@ public class CairoGraphic : DrawingArea
         gr.ArcNegative(xc, yc, radius, angle1, angle2);
         gr.Stroke();
 
-        /* draw helping lines */
+/* draw helping lines */
         gr.Color = new Color(1, 0.2, 0.2, 0.6);
         gr.Arc(xc, yc, 0.05, 0, 2 * M_PI);
         gr.Fill();

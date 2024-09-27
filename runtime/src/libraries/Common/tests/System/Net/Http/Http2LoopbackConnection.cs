@@ -137,13 +137,17 @@ namespace System.Net.Test.Common
 
             if (_prefix.AsSpan().IndexOf("HTTP/1.1"u8) >= 0)
             {
-                // Tests that use HttpAgnosticLoopbackServer will attempt to send an HTTP/1.1 request to an HTTP/2 server.
+                // Tests that use HttpAgnosticLoopbackServer will attempt to send an HTTP/1.1 request to an HTTP/2
+                // server.
                 // This is invalid and we should terminate the connection.
-                // However, if we simply terminate the connection without sending anything, then this could be interpreted
+                // However, if we simply terminate the connection without sending anything, then this could be
+                // interpreted
                 // as a server disconnect that should be retried by SocketsHttpHandler.
-                // Since those tests are not set up to handle multiple retries, we instead just send back an invalid response here
+                // Since those tests are not set up to handle multiple retries, we instead just send back an invalid
+                // response here
                 // so that SocketsHttpHandler will not induce retry.
-                // The contents of what we send don't really matter, as long as it is interpreted by SocketsHttpHandler as an invalid response.
+                // The contents of what we send don't really matter, as long as it is interpreted by
+                // SocketsHttpHandler as an invalid response.
                 await _connectionStream.WriteAsync("HTTP/2.0 400 Bad Request\r\n\r\n"u8.ToArray());
                 _connectionSocket.Shutdown(SocketShutdown.Send);
                 // If WinHTTP doesn't support streaming a request without a length then it will fallback
@@ -1047,7 +1051,8 @@ namespace System.Net.Test.Common
 
         public override async ValueTask DisposeAsync()
         {
-            // Might have been already shutdown manually via WaitForConnectionShutdownAsync which nulls the _connectionStream.
+            // Might have been already shutdown manually via WaitForConnectionShutdownAsync which nulls the
+            // _connectionStream.
             if (_connectionStream != null)
             {
                 await ShutdownIgnoringErrorsAsync(_lastStreamId);

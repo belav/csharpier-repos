@@ -250,7 +250,8 @@ namespace System.ServiceModel.Channels
             get { return this.HostNameComparisonModeInternal; }
         }
 
-        //Returns true if one of the non-anonymous authentication schemes is set on this.AuthenticationScheme
+        //Returns true if one of the non-anonymous authentication schemes is set on
+        // this.AuthenticationScheme
         protected bool IsAuthenticationSupported
         {
             get { return this.authenticationScheme != AuthenticationSchemes.Anonymous; }
@@ -440,7 +441,8 @@ namespace System.ServiceModel.Channels
             {
                 if (this.AuthenticationScheme == AuthenticationSchemes.Basic)
                 {
-                    // when Basic authentiction is enabled - but Digest and Windows are disabled use the UsernameAuthenticationSetting
+                    // when Basic authentiction is enabled - but Digest and Windows are disabled use the
+                    // UsernameAuthenticationSetting
                     this.extractGroupsForWindowsAccounts = serviceCredentials
                         .UserNameAuthentication
                         .IncludeWindowsGroups;
@@ -453,7 +455,8 @@ namespace System.ServiceModel.Channels
                             != serviceCredentials.WindowsAuthentication.IncludeWindowsGroups
                     )
                     {
-                        // Ensure there are no inconsistencies when Basic and (Digest and/or Ntlm and/or Negotiate) are both enabled
+                        // Ensure there are no inconsistencies when Basic and (Digest and/or Ntlm and/or Negotiate) are both
+                        // enabled
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -472,7 +475,8 @@ namespace System.ServiceModel.Channels
                         .IncludeWindowsGroups;
                 }
 
-                // we will only support custom and windows validation modes, if anything else is specified, we'll fall back to windows user name.
+                // we will only support custom and windows validation modes, if anything else is specified, we'll
+                // fall back to windows user name.
                 if (
                     serviceCredentials.UserNameAuthentication.UserNamePasswordValidationMode
                     == UserNamePasswordValidationMode.Custom
@@ -936,7 +940,8 @@ namespace System.ServiceModel.Channels
         )
         {
             //In 3.5 SP1, we started sending the HOST/xyz format, so we have to accept it for compat reasons.
-            //with this change, we will be changing our client so that it lets System.Net pick the SPN by default
+            //with this change, we will be changing our client so that it lets System.Net pick the SPN by
+            // default
             //which will usually mean they use the HTTP/xyz format, which is more likely to interop with
             //other web service stacks that support windows auth...
             const string hostSpnFormat = "HOST/{0}";
@@ -1266,7 +1271,8 @@ namespace System.ServiceModel.Channels
                 );
             httpRequestContext.WebSocketChannel = channel;
 
-            // webSocketLifetimeManager hooks into the channel.Closed event as well and will take care of cleaning itself up OnClosed.
+            // webSocketLifetimeManager hooks into the channel.Closed event as well and will take care of
+            // cleaning itself up OnClosed.
             // We want to be called before any user-specified close handlers are called.
             this.webSocketLifetimeManager.Add(channel);
             this.Acceptor.EnqueueAndDispatch((TChannel)(object)channel, dequeuedCallback, true);
@@ -1887,7 +1893,8 @@ namespace System.ServiceModel.Channels
     }
 
     /// <summary>
-    /// Handler wrapping the bottom (towards network) of the <see cref="HttpMessageHandler"/> and integrates
+    /// Handler wrapping the bottom (towards network) of the <see cref="HttpMessageHandler"/> and
+    // integrates
     /// back into the <see cref="IReplyChannel"/>.
     /// </summary>
     class TransportIntegrationHandler : DelegatingHandler
@@ -1895,7 +1902,8 @@ namespace System.ServiceModel.Channels
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportIntegrationHandler"/> class.
         /// </summary>
-        /// <param name="innerChannel">The inner <see cref="HttpMessageHandler"/> on which we send the <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="innerChannel">The inner <see cref="HttpMessageHandler"/> on which we send the <see
+        // cref="HttpRequestMessage"/>.</param>
         public TransportIntegrationHandler(HttpMessageHandler innerChannel)
             : base(innerChannel) { }
 
@@ -1986,7 +1994,8 @@ namespace System.ServiceModel.Channels
     }
 
     /// <summary>
-    /// Handler wrapping the top (towards Channel Model) of the <see cref="HttpMessageHandler"/> and integrates
+    /// Handler wrapping the top (towards Channel Model) of the <see cref="HttpMessageHandler"/> and
+    // integrates
     /// bask into the <see cref="IReplyChannel"/>.
     /// </summary>
     class ChannelModelIntegrationHandler : HttpMessageHandler

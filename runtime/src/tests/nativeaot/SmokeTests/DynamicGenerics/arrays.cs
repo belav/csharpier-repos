@@ -383,7 +383,8 @@ namespace ArrayTests
         [TestMethod]
         public static void TestArrayIndexOfNullableStructOfCanon_Canon()
         {
-            // Force canonical implementation Array.IndexOf<GenStructImplementsIEquatable2<__Canon>?>() to be generated and used
+            // Force canonical implementation Array.IndexOf<GenStructImplementsIEquatable2<__Canon>?>() to be
+            // generated and used
             GenStructImplementsIEquatable2<object>?[] arr =
                 new GenStructImplementsIEquatable2<object>?[10];
             IndexOfValBase indexOfValCanonForcer =

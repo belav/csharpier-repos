@@ -329,7 +329,8 @@ namespace System.Reflection.Tests
             Type[] gps = declaringMethod.GetGenericArguments();
             Assert.Equal(gps[position], type);
 
-            // There is only one generic parameter instance even if it was queried from a method from an instantiated type or
+            // There is only one generic parameter instance even if it was queried from a method from an
+            // instantiated type or
             // a method with an alternate ReflectedType.
             Assert.False(declaringType.IsConstructedGenericType);
             Assert.Equal(declaringType, declaringMethod.ReflectedType);
@@ -337,7 +338,8 @@ namespace System.Reflection.Tests
 
         private static void TestTypeCommonInvariants(this Type type)
         {
-            // Ensure that ToString() doesn't throw and that it returns some non-null value. Exact contents are considered implementation detail.
+            // Ensure that ToString() doesn't throw and that it returns some non-null value. Exact contents are
+            // considered implementation detail.
             string typeString = type.ToString();
             Assert.NotNull(typeString);
 

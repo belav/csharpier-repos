@@ -16,7 +16,8 @@ namespace System
     // string[] split = str.Split(',', StringSplitOptions.TrimEntries);
     // split := [ "a", "", "b", "c", "", "d", "e" ]
     //
-    // string[] split = str.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    // string[] split = str.Split(',', StringSplitOptions.RemoveEmptyEntries |
+    // StringSplitOptions.TrimEntries);
     // split := [ "a", "b", "c", "d", "e" ]
 
     /// <summary>

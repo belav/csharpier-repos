@@ -134,8 +134,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             var userPrefersExpressionBodies = preference.Value != ExpressionBodyPreference.Never;
             var analyzerDisabled = preference.Notification.Severity == ReportDiagnostic.Suppress;
 
-            // If the user likes expression bodies, then we offer expression bodies from the diagnostic analyzer.
-            // If the user does not like expression bodies then we offer expression bodies from the refactoring provider.
+            // If the user likes expression bodies, then we offer expression bodies from the diagnostic
+            // analyzer.
+            // If the user does not like expression bodies then we offer expression bodies from the refactoring
+            // provider.
             // If the analyzer is disabled completely, the refactoring is enabled in both directions.
             if (userPrefersExpressionBodies == forAnalyzer || (!forAnalyzer && analyzerDisabled))
             {

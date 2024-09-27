@@ -199,8 +199,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             );
         }
 
-        // 3.17 The brfalse instruction transfers control to target if value (of type int32, int64, object reference, managed
-        //pointer, unmanaged pointer or native int) is zero (false). If value is non-zero (true), execution continues at
+        // 3.17 The brfalse instruction transfers control to target if value (of type int32, int64, object
+        // reference, managed
+        //pointer, unmanaged pointer or native int) is zero (false). If value is non-zero (true), execution
+        // continues at
         //the next instruction.
 
         private static bool CanPassToBrfalse(TypeSymbol ts)
@@ -888,7 +890,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private bool ShouldUseIndirectReturn()
         {
             // If the method/lambda body is a block we define a sequence point for the closing brace of the body
-            // and associate it with the ret instruction. If there is a return statement we need to store the value
+            // and associate it with the ret instruction. If there is a return statement we need to store the
+            // value
             // to a long-lived synthesized local since a sequence point requires an empty evaluation stack.
             //
             // The emitted pattern is:
@@ -1103,14 +1106,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         ///         Push Condition ? 1 : 0
         ///     }
         /// End Filter // leaves 1 or 0 on the stack
-        /// Catch      // gets called after finalization of nested exception frames if condition above produced 1
+        /// Catch      // gets called after finalization of nested exception frames if condition above
+        // produced 1
         ///     Pop    // CLR pushes the exception object again
         ///     variable ex can be used here
         ///     Handler
         /// EndCatch
         ///
         /// When evaluating `Condition` requires additional statements be executed first, those
-        /// statements are stored in `catchBlock.ExceptionFilterPrologueOpt` and emitted before the condition.
+        /// statements are stored in `catchBlock.ExceptionFilterPrologueOpt` and emitted before the
+        // condition.
         /// </remarks>
         private void EmitCatchBlock(BoundCatchBlock catchBlock)
         {
@@ -1491,7 +1496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             //
             //   var lengthTmp = keyTemp.Length;
             //   switch dispatch on lengthTemp using fallThroughLabel and cases:
-            //     lengthConstant -> corresponding label (may be the label to a CharJumpTable, or to a StringJumpTable in 1-length scenario, or in 0-length scenario, a final case label)
+            //     lengthConstant -> corresponding label (may be the label to a CharJumpTable, or to a
+            // StringJumpTable in 1-length scenario, or in 0-length scenario, a final case label)
             //
             //   var charTemp;
             //
@@ -1499,7 +1505,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             //   label for CharJumpTable:
             //   charTemp = keyTemp[selectedCharPosition];
             //   switch dispatch on charTemp using fallThroughLabel and cases:
-            //     charConstant -> corresponding label (may be the label for a StringJumpTable or, in 1-length scenario, a final case label)
+            //     charConstant -> corresponding label (may be the label for a StringJumpTable or, in 1-length
+            // scenario, a final case label)
             //
             // For each StringJumpTable label, emit:
             //   label for StringJumpTable:
@@ -1704,7 +1711,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
             LocalDefinition keyHash = null;
 
-            // Condition is necessary, but not sufficient (e.g. might be missing a special or well-known member).
+            // Condition is necessary, but not sufficient (e.g. might be missing a special or well-known
+            // member).
             if (SwitchStringJumpTableEmitter.ShouldGenerateHashTableSwitch(switchCaseLabels.Length))
             {
                 var privateImplClass = _module
@@ -2053,7 +2061,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <summary>
-        /// Delegate to emit ReadOnlySpanChar compare with string and conditional branch based on the compare result.
+        /// Delegate to emit ReadOnlySpanChar compare with string and conditional branch based on the
+        // compare result.
         /// </summary>
         /// <param name="key">Key to compare</param>
         /// <param name="syntaxNode">Node for diagnostics.</param>
@@ -2176,8 +2185,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 );
             }
 
-            // Even though we don't need the token immediately, we will need it later when signature for the local is emitted.
-            // Also, requesting the token has side-effect of registering types used, which is critical for embedded types (NoPia, VBCore, etc).
+            // Even though we don't need the token immediately, we will need it later when signature for the
+            // local is emitted.
+            // Also, requesting the token has side-effect of registering types used, which is critical for
+            // embedded types (NoPia, VBCore, etc).
             _module.GetFakeSymbolTokenForIL(translatedType, syntaxNode, _diagnostics.DiagnosticBag);
 
             LocalDebugId localId;
@@ -2236,9 +2247,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // only user-defined locals should be named during lowering:
             Debug.Assert((local.Name == null) == (localKind != SynthesizedLocalKind.UserDefined));
 
-            // Generating debug names for instrumentation payloads should be allowed, as described in https://github.com/dotnet/roslyn/issues/11024.
-            // For now, skip naming locals generated by instrumentation as they might not have a local syntax offset.
-            // Locals generated by instrumentation might exist in methods which do not contain a body (auto property initializers).
+            // Generating debug names for instrumentation payloads should be allowed, as described in
+            // https://github.com/dotnet/roslyn/issues/11024.
+            // For now, skip naming locals generated by instrumentation as they might not have a local syntax
+            // offset.
+            // Locals generated by instrumentation might exist in methods which do not contain a body (auto
+            // property initializers).
             if (
                 !localKind.IsLongLived()
                 || localKind == SynthesizedLocalKind.InstrumentationPayload

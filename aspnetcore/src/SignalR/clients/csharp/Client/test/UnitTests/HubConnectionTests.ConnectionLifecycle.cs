@@ -24,7 +24,9 @@ public partial class HubConnectionTests
 {
     public class ConnectionLifecycle : VerifiableLoggedTest
     {
-        // This tactic (using names and a dictionary) allows non-serializable data (like a Func) to be used in a theory AND get it to show in the new hierarchical view in Test Explorer as separate tests you can run individually.
+        // This tactic (using names and a dictionary) allows non-serializable data (like a Func) to be used
+        // in a theory AND get it to show in the new hierarchical view in Test Explorer as separate tests you
+        // can run individually.
         private static readonly IDictionary<
             string,
             Func<HubConnection, Task>
@@ -153,7 +155,8 @@ public partial class HubConnectionTests
 
                     var stopTask = connection.StopAsync();
 
-                    // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the connection state)
+                    // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the
+                    // connection state)
                     await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
                     // We should not yet be able to start now because StopAsync hasn't completed
@@ -399,7 +402,8 @@ public partial class HubConnectionTests
         public async Task StopAsyncOnInactiveConnectionDoesNotAffectNextStartAsync()
         {
             // Regression test:
-            // If there wasn't an active underlying connection, StopAsync would leave a CTS canceled which would cause the next StartAsync to fail
+            // If there wasn't an active underlying connection, StopAsync would leave a CTS canceled which would
+            // cause the next StartAsync to fail
             var testConnection = new TestConnection();
             await AsyncUsing(
                 CreateHubConnection(testConnection),
@@ -519,7 +523,8 @@ public partial class HubConnectionTests
                     // Complete the transport side and wait for the connection to close
                     testConnection.CompleteFromTransport();
 
-                    // Start stopping manually (these can't be synchronized by a Sync Point because the transport is disposed outside the lock)
+                    // Start stopping manually (these can't be synchronized by a Sync Point because the transport is
+                    // disposed outside the lock)
                     var stopTask = connection.StopAsync();
 
                     await testConnection.Disposed.DefaultTimeout();
@@ -556,11 +561,13 @@ public partial class HubConnectionTests
                 {
                     await connection.StartAsync().DefaultTimeout();
 
-                    // Stop and invoke the method. These two aren't synchronizable via a Sync Point any more because the transport is disposed
+                    // Stop and invoke the method. These two aren't synchronizable via a Sync Point any more because the
+                    // transport is disposed
                     // outside the lock :(
                     var disposeTask = connection.StopAsync();
 
-                    // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the connection state)
+                    // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the
+                    // connection state)
                     await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
                     var targetTask = method(connection);
@@ -755,7 +762,8 @@ public partial class HubConnectionTests
             );
         }
 
-        // A helper that we wouldn't want to use in product code, but is fine for testing until IAsyncDisposable arrives :)
+        // A helper that we wouldn't want to use in product code, but is fine for testing until
+        // IAsyncDisposable arrives :)
         private static async Task AsyncUsing(
             HubConnection connection,
             Func<HubConnection, Task> action

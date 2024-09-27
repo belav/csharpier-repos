@@ -13,7 +13,8 @@ namespace System.Reflection.Metadata.Ecma335
     // This is not handled via dispose because the only resource is managed memory
     // and we don't have user visible disposable object that could own this memory.
     //
-    // Since the number of virtual blobs we need is small (the number of attribute classes in .winmd files)
+    // Since the number of virtual blobs we need is small (the number of attribute classes in .winmd
+    // files)
     // we can create a pinned handle for each of them.
     // If we needed many more blobs we could create and pin a single byte[] and allocate blobs there.
     internal sealed class VirtualHeap : CriticalDisposableObject

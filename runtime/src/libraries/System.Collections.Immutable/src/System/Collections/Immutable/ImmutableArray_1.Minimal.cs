@@ -17,7 +17,8 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">The type of element stored by the array.</typeparam>
     /// <devremarks>
     /// This type has a documented contract of being exactly one reference-type field in size.
-    /// Our own <see cref="System.Collections.Immutable.ImmutableInterlocked"/> class depends on it, as well as others externally.
+    /// Our own <see cref="System.Collections.Immutable.ImmutableInterlocked"/> class depends on it, as
+    // well as others externally.
     /// IMPORTANT NOTICE FOR MAINTAINERS AND REVIEWERS:
     /// This type should be thread-safe. As a struct, it cannot protect its own fields
     /// from being changed from one thread while its members are executing on other threads
@@ -48,7 +49,8 @@ namespace System.Collections.Immutable
 #pragma warning restore CA1825
 
         /// <summary>
-        /// The backing field for this instance. References to this value should never be shared with outside code.
+        /// The backing field for this instance. References to this value should never be shared with
+        // outside code.
         /// </summary>
         /// <remarks>
         /// This would be private, but we make it internal so that our own extension methods can access it.
@@ -73,7 +75,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="left">The instance to the left of the operator.</param>
         /// <param name="right">The instance to the right of the operator.</param>
-        /// <returns><c>true</c> if the values' underlying arrays are reference equal; <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if the values' underlying arrays are reference equal; <c>false</c>
+        // otherwise.</returns>
         [NonVersionable]
         public static bool operator ==(ImmutableArray<T> left, ImmutableArray<T> right)
         {
@@ -85,7 +88,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="left">The instance to the left of the operator.</param>
         /// <param name="right">The instance to the right of the operator.</param>
-        /// <returns><c>true</c> if the values' underlying arrays are reference not equal; <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if the values' underlying arrays are reference not equal; <c>false</c>
+        // otherwise.</returns>
         [NonVersionable]
         public static bool operator !=(ImmutableArray<T> left, ImmutableArray<T> right)
         {
@@ -97,7 +101,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="left">The instance to the left of the operator.</param>
         /// <param name="right">The instance to the right of the operator.</param>
-        /// <returns><c>true</c> if the values' underlying arrays are reference equal; <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if the values' underlying arrays are reference equal; <c>false</c>
+        // otherwise.</returns>
         public static bool operator ==(ImmutableArray<T>? left, ImmutableArray<T>? right)
         {
             return left.GetValueOrDefault().Equals(right.GetValueOrDefault());
@@ -108,7 +113,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="left">The instance to the left of the operator.</param>
         /// <param name="right">The instance to the right of the operator.</param>
-        /// <returns><c>true</c> if the values' underlying arrays are reference not equal; <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if the values' underlying arrays are reference not equal; <c>false</c>
+        // otherwise.</returns>
         public static bool operator !=(ImmutableArray<T>? left, ImmutableArray<T>? right)
         {
             return !left.GetValueOrDefault().Equals(right.GetValueOrDefault());
@@ -139,7 +145,8 @@ namespace System.Collections.Immutable
         /// Gets a read-only reference to the element at the specified index in the read-only list.
         /// </summary>
         /// <param name="index">The zero-based index of the element to get a reference to.</param>
-        /// <returns>A read-only reference to the element at the specified index in the read-only list.</returns>
+        /// <returns>A read-only reference to the element at the specified index in the read-only
+        // list.</returns>
         public ref readonly T ItemRef(int index)
         {
             // We intentionally do not check this.array != null, and throw NullReferenceException
@@ -237,7 +244,8 @@ namespace System.Collections.Immutable
         /// Copies the contents of this array to the specified array.
         /// </summary>
         /// <param name="destination">The array to copy to.</param>
-        /// <param name="destinationIndex">The index into the destination array to which the first copied element is written.</param>
+        /// <param name="destinationIndex">The index into the destination array to which the first copied
+        // element is written.</param>
         public void CopyTo(T[] destination, int destinationIndex)
         {
             ImmutableArray<T> self = this;
@@ -250,7 +258,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="sourceIndex">The index into this collection of the first element to copy.</param>
         /// <param name="destination">The array to copy to.</param>
-        /// <param name="destinationIndex">The index into the destination array to which the first copied element is written.</param>
+        /// <param name="destinationIndex">The index into the destination array to which the first copied
+        // element is written.</param>
         /// <param name="length">The number of elements to copy.</param>
         public void CopyTo(int sourceIndex, T[] destination, int destinationIndex, int length)
         {
@@ -292,7 +301,8 @@ namespace System.Collections.Immutable
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a
+        // hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -305,7 +315,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise,
+        // <c>false</c>.
         /// </returns>
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
@@ -327,12 +338,14 @@ namespace System.Collections.Immutable
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImmutableArray{T}"/> struct based on the contents
-        /// of an existing instance, allowing a covariant static cast to efficiently reuse the existing array.
+        /// of an existing instance, allowing a covariant static cast to efficiently reuse the existing
+        // array.
         /// </summary>
         /// <param name="items">The array to initialize the array with. No copy is made.</param>
         /// <remarks>
         /// Covariant upcasts from this method may be reversed by calling the
-        /// <see cref="ImmutableArray{T}.As{TOther}"/>  or <see cref="ImmutableArray{T}.CastArray{TOther}"/>method.
+        /// <see cref="ImmutableArray{T}.As{TOther}"/>  or <see
+        // cref="ImmutableArray{T}.CastArray{TOther}"/>method.
         /// </remarks>
         public static ImmutableArray<
 #nullable disable
@@ -345,7 +358,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImmutableArray{T}"/> struct by casting the underlying
+        /// Initializes a new instance of the <see cref="ImmutableArray{T}"/> struct by casting the
+        // underlying
         /// array to an array of type <typeparam name="TOther"/>.
         /// </summary>
         /// <exception cref="InvalidCastException">Thrown if the cast is illegal.</exception>
@@ -388,7 +402,8 @@ namespace System.Collections.Immutable
         /// Returns an enumerator for the contents of the array.
         /// </summary>
         /// <returns>An enumerator.</returns>
-        /// <exception cref="InvalidOperationException">Thrown if the <see cref="IsDefault"/> property returns true.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if the <see cref="IsDefault"/> property
+        // returns true.</exception>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             ImmutableArray<T> self = this;
@@ -400,7 +415,8 @@ namespace System.Collections.Immutable
         /// Returns an enumerator for the contents of the array.
         /// </summary>
         /// <returns>An enumerator.</returns>
-        /// <exception cref="InvalidOperationException">Thrown if the <see cref="IsDefault"/> property returns true.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if the <see cref="IsDefault"/> property
+        // returns true.</exception>
         IEnumerator IEnumerable.GetEnumerator()
         {
             ImmutableArray<T> self = this;
@@ -425,7 +441,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Throws an <see cref="InvalidOperationException"/> if the <see cref="array"/> field is null, i.e. the
+        /// Throws an <see cref="InvalidOperationException"/> if the <see cref="array"/> field is null, i.e.
+        // the
         /// <see cref="IsDefault"/> property returns true.  The
         /// <see cref="InvalidOperationException"/> message specifies that the operation cannot be performed
         /// on a default instance of <see cref="ImmutableArray{T}"/>.

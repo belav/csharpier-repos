@@ -73,7 +73,8 @@ namespace Castle.DynamicProxy.Internal
                 argument.ArgumentType.IsArray && value is IList<CustomAttributeTypedArgument> values
             )
             {
-                // `CustomAttributeInfo` represents array values as `ReadOnlyCollection<CustomAttributeTypedArgument>`,
+                // `CustomAttributeInfo` represents array values as
+                // `ReadOnlyCollection<CustomAttributeTypedArgument>`,
                 // but `CustomAttributeBuilder` will require plain arrays, so we need a (recursive) conversion:
                 var arguments = GetArguments(values);
                 var array = new object[arguments.Length];

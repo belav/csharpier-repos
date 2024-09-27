@@ -456,8 +456,8 @@ namespace Mono.Unix.Native
         _SC_SIGQUEUE_MAX,
         _SC_TIMER_MAX,
 
-        /* Values for the argument to `sysconf'
-             corresponding to _POSIX2_* symbols.  */
+/* Values for the argument to `sysconf'
+corresponding to _POSIX2_* symbols.  */
         _SC_BC_BASE_MAX,
         _SC_BC_DIM_MAX,
         _SC_BC_SCALE_MAX,
@@ -491,7 +491,7 @@ namespace Mono.Unix.Native
         _SC_PII_OSI_M,
         _SC_T_IOV_MAX,
 
-        /* Values according to POSIX 1003.1c (POSIX threads).  */
+/* Values according to POSIX 1003.1c (POSIX threads).  */
         _SC_THREADS,
         _SC_THREAD_SAFE_FUNCTIONS,
         _SC_GETGR_R_SIZE_MAX,
@@ -1784,7 +1784,8 @@ namespace Mono.Unix.Native
             get { return size; }
         }
 
-        // Read a struct cmsghdr from msgh.msg_control at offset cmsg and convert it to managed Cmsghdr structure
+        // Read a struct cmsghdr from msgh.msg_control at offset cmsg and convert it to managed Cmsghdr
+        // structure
         public static unsafe Cmsghdr ReadFromBuffer(Msghdr msgh, long cmsg)
         {
             if (msgh == null)
@@ -2167,7 +2168,8 @@ namespace Mono.Unix.Native
     }
 
     // This struct is used by the native code.
-    // Its layout must be the same as the start of the Sockaddr class and the start of the _SockaddrDynamic struct
+    // Its layout must be the same as the start of the Sockaddr class and the start of the
+    // _SockaddrDynamic struct
     [Map]
     [StructLayout(LayoutKind.Sequential)]
     internal struct _SockaddrHeader
@@ -2178,7 +2180,8 @@ namespace Mono.Unix.Native
 
     // Base class for all Sockaddr types.
     // This class is not abstract, instances of this class can be used to determine the sa_family value.
-    // This class and all classes which are deriving from it and are passed to the native code have to be blittable.
+    // This class and all classes which are deriving from it and are passed to the native code have to
+    // be blittable.
     [CLSCompliant(false)]
     [StructLayout(LayoutKind.Sequential)]
     public class Sockaddr
@@ -2226,7 +2229,8 @@ namespace Mono.Unix.Native
             return size;
         }
 
-        // In order to create a wrapper for a syscall which accepts a "struct sockaddr" argument but does not modify it, use:
+        // In order to create a wrapper for a syscall which accepts a "struct sockaddr" argument but does
+        // not modify it, use:
 
         // fixed (SockaddrType* addr = &Sockaddr.GetAddress (address).type)
         // fixed (byte* data = Sockaddr.GetDynamicData (address)) {
@@ -2318,8 +2322,10 @@ namespace Mono.Unix.Native
         }
     }
 
-    // This struct is required to manually marshal Sockaddr* classes which include an array (currently SockaddrStorage and SockaddrUn).
-    // This is needed because the marshalling code will not work if the classes derived from Sockaddr aren't blittable.
+    // This struct is required to manually marshal Sockaddr* classes which include an array (currently
+    // SockaddrStorage and SockaddrUn).
+    // This is needed because the marshalling code will not work if the classes derived from Sockaddr
+    // aren't blittable.
     [Map]
     unsafe struct _SockaddrDynamic
     {
@@ -2368,11 +2374,14 @@ namespace Mono.Unix.Native
         }
     };
 
-    // This is a class which can store arbitrary sockaddrs, even if they are not known the the Mono.Unix wrapper or the family does not have a corresponding value in the UnixAddressFamily enumeration.
+    // This is a class which can store arbitrary sockaddrs, even if they are not known the the Mono.Unix
+    // wrapper or the family does not have a corresponding value in the UnixAddressFamily enumeration.
     [CLSCompliant(false)]
     public sealed class SockaddrStorage : Sockaddr, IEquatable<SockaddrStorage>
     {
-        // Note: The sa_family field is ignored when passing a SockaddrStorage to a syscall (but it will be set when a SockaddrStorage is returned from a syscall). Instead of the sa_family field, the value embedded in data is used.
+        // Note: The sa_family field is ignored when passing a SockaddrStorage to a syscall (but it will be
+        // set when a SockaddrStorage is returned from a syscall). Instead of the sa_family field, the value
+        // embedded in data is used.
         public byte[] data { get; set; }
         public long data_len { get; set; }
 
@@ -6322,7 +6331,8 @@ namespace Mono.Unix.Native
         }
 
         // recvfrom(2)
-        //    ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen);
+        //    ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr,
+        // socklen_t *addrlen);
         [DllImport(MPH, SetLastError = true, EntryPoint = "Mono_Posix_Syscall_recvfrom")]
         static extern unsafe long sys_recvfrom(
             int socket,
@@ -6383,7 +6393,8 @@ namespace Mono.Unix.Native
         }
 
         // sendto(2)
-        //    ssize_t sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr, socklen_t addrlen);
+        //    ssize_t sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr
+        // *dest_addr, socklen_t addrlen);
         [DllImport(MPH, SetLastError = true, EntryPoint = "Mono_Posix_Syscall_sendto")]
         static extern unsafe long sys_sendto(
             int socket,

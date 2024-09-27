@@ -165,7 +165,8 @@ namespace System.Data.ProviderBase
                 }
             }
 
-            // Finally, return the pool collection count - this may be non-zero if something was added while we were clearing
+            // Finally, return the pool collection count - this may be non-zero if something was added while we
+            // were clearing
             return _poolCollection.Count;
         }
 

@@ -31,10 +31,12 @@ namespace MonoTests.System.Net
             s1 = new SocketPermission(NetworkAccess.Connect, TransportType.Tcp, "12.13.14.15", 80);
             //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "localhost", 8080);
             //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "123", SocketPermission.AllPorts);
-            //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "www.ximian.com", SocketPermission.AllPorts);
+            //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "www.ximian.com",
+            // SocketPermission.AllPorts);
             //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "120.4.3.2", SocketPermission.AllPorts);
             //s1.AddPermission(NetworkAccess.Accept, TransportType.Tcp, "www.example.com", 80);
-            //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "1.*.10.*.99", SocketPermission.AllPorts);
+            //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "1.*.10.*.99",
+            // SocketPermission.AllPorts);
             //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "128.0.0.1", SocketPermission.AllPorts);
             //s1.AddPermission(NetworkAccess.Accept, TransportType.All, "0.0.0.0", SocketPermission.AllPorts);
             s1.AddPermission(
@@ -47,7 +49,8 @@ namespace MonoTests.System.Net
             s2 = new SocketPermission(NetworkAccess.Connect, TransportType.All, "12.13.14.15", 80);
             //s2.AddPermission(NetworkAccess.Accept, TransportType.All, "localhost", 8080);
             //s2.AddPermission(NetworkAccess.Accept, TransportType.All, "123", 8080);
-            //s2.AddPermission(NetworkAccess.Accept, TransportType.Tcp, "www.example.com", SocketPermission.AllPorts);
+            //s2.AddPermission(NetworkAccess.Accept, TransportType.Tcp, "www.example.com",
+            // SocketPermission.AllPorts);
             s2.AddPermission(
                 NetworkAccess.Accept,
                 TransportType.All,
@@ -64,7 +67,8 @@ namespace MonoTests.System.Net
             //s2.AddPermission(NetworkAccess.Accept, TransportType.All, "128.0.0.1", SocketPermission.AllPorts);
             //s2.AddPermission(NetworkAccess.Accept, TransportType.Tcp, "120.4.3.2", 80);
             //s2.AddPermission(NetworkAccess.Accept, TransportType.All, "196.*.*.*", SocketPermission.AllPorts);
-            //s2.AddPermission(NetworkAccess.Accept, TransportType.All, "1.*.*.*.99", SocketPermission.AllPorts);
+            //s2.AddPermission(NetworkAccess.Accept, TransportType.All, "1.*.*.*.99",
+            // SocketPermission.AllPorts);
             s2.AddPermission(NetworkAccess.Accept, TransportType.All, "10.11.*.*", 9090);
             //s2.AddPermission(NetworkAccess.Accept, TransportType.All, "10.11.4.7", SocketPermission.AllPorts);
         }

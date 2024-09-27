@@ -19,7 +19,8 @@ namespace System.Web.UI.WebControls.WebParts
     using System.Web.Util;
 
     /// <devdoc>
-    /// Base class for all zone classes that host WebPart controls.  Inherits from Zone, adding client-side
+    /// Base class for all zone classes that host WebPart controls.  Inherits from Zone, adding
+    // client-side
     /// dragging, verbs, and additional styles.  Zones that are database driven should inherit from
     /// this class.
     /// </devdoc>
@@ -752,7 +753,8 @@ namespace System.Web.UI.WebControls.WebParts
         }
 
         /// <devdoc>
-        /// Shows the icon image in the title bar of a part, if the TitleIconImageUrl is specified for a part.
+        /// Shows the icon image in the title bar of a part, if the TitleIconImageUrl is specified for a
+        // part.
         /// </devdoc>
         [
             DefaultValue(true),

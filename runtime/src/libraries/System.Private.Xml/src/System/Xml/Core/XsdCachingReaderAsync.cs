@@ -43,7 +43,8 @@ namespace System.Xml
                         switch (_coreReader.NodeType)
                         {
                             case XmlNodeType.Element:
-                                //Dont record element within the content of a union type since the main reader will break on this and the underlying coreReader will be positioned on this node
+                                //Dont record element within the content of a union type since the main reader will break on this
+                                // and the underlying coreReader will be positioned on this node
                                 _cacheState = CachingReaderState.ReaderClosed;
                                 return false;
 

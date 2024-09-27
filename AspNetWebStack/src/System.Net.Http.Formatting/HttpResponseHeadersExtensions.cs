@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,15 +22,19 @@ namespace System.Net.Http
         /// represented as one <see cref="CookieHeaderValue"/> instance. A <see cref="CookieHeaderValue"/>
         /// contains information about the domain, path, and other cookie information as well as one or
         /// more <see cref="CookieState"/> instances. Each <see cref="CookieState"/> instance contains
-        /// a cookie name and whatever cookie state is associate with that name. The state is in the form of a
-        /// <see cref="System.Collections.Specialized.NameValueCollection"/> which on the wire is encoded as HTML Form URL-encoded data.
+        /// a cookie name and whatever cookie state is associate with that name. The state is in the form of
+        // a
+        /// <see cref="System.Collections.Specialized.NameValueCollection"/> which on the wire is encoded as
+        // HTML Form URL-encoded data.
         /// This representation allows for multiple related "cookies" to be carried within the same
         /// <c>Cookie</c> header while still providing separation between each cookie state. A sample
         /// <c>Cookie</c> header is shown below. In this example, there are two <see cref="CookieState"/>
-        /// with names <c>state1</c> and <c>state2</c> respectively. Further, each cookie state contains two name/value
+        /// with names <c>state1</c> and <c>state2</c> respectively. Further, each cookie state contains two
+        // name/value
         /// pairs (name1/value1 and name2/value2) and (name3/value3 and name4/value4).
         /// <code>
-        /// Set-Cookie: state1:name1=value1&amp;name2=value2; state2:name3=value3&amp;name4=value4; domain=domain1; path=path1;
+        /// Set-Cookie: state1:name1=value1&amp;name2=value2; state2:name3=value3&amp;name4=value4;
+        // domain=domain1; path=path1;
         /// </code>
         /// </summary>
         /// <param name="headers">The response headers</param>

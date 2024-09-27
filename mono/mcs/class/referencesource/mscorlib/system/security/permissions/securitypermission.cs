@@ -33,9 +33,9 @@ namespace System.Security.Permissions
     {
         NoFlags = 0x00,
 
-        /* The following enum value is used in the EE (ASSERT_PERMISSION in security.cpp)
-         * Should this value change, make corresponding changes there
-         */
+/* The following enum value is used in the EE (ASSERT_PERMISSION in security.cpp)
+* Should this value change, make corresponding changes there
+*/
         Assertion = 0x01,
         UnmanagedCode = 0x02, // Update vm\Security.h if you change this !
         SkipVerification = 0x04, // Update vm\Security.h if you change this !
@@ -140,9 +140,9 @@ namespace System.Security.Permissions
         // CodeAccessPermission methods
         //
 
-        /*
-          * IPermission interface implementation
-          */
+/*
+* IPermission interface implementation
+*/
 
         public override bool IsSubsetOf(IPermission target)
         {

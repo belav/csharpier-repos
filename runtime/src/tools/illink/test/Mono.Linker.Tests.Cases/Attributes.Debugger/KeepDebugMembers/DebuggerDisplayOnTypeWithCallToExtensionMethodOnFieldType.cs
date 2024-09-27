@@ -21,7 +21,8 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
         [Kept]
         [KeptMember(".ctor()")]
         [KeptAttributeAttribute(typeof(DebuggerDisplayAttribute))]
-        // Calling extension methods on members from DebuggerDisplay doesn't seem to work so in this case we shouldn't mark `Field.Count()`
+        // Calling extension methods on members from DebuggerDisplay doesn't seem to work so in this case we
+        // shouldn't mark `Field.Count()`
         [DebuggerDisplay("Count = {Field.Count()}")]
         class Foo
         {

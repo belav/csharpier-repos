@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +73,8 @@ namespace System.Web.Mvc.Test
             Assert.NotNull(vpd);
             Assert.Equal(routes["admin_default"], vpd.Route);
 
-            // note presence of 'area' query string parameter; RVD should not be modified if route name was provided
+            // note presence of 'area' query string parameter; RVD should not be modified if route name was
+            // provided
             Assert.Equal("/app/admin-area?area=some-area", vpd.VirtualPath);
         }
 
@@ -451,7 +453,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             var routes = new RouteCollection();
 
-            // We can't easily mock the ValidateConstraint method because all of this logic is in extension methods,
+            // We can't easily mock the ValidateConstraint method because all of this logic is in extension
+            // methods,
             // so we're just assuming here that it was called.
             var constraint = "product|products";
             var constraints = new RouteValueDictionary();
@@ -470,7 +473,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             var routes = new RouteCollection();
 
-            // We can't easily mock the ValidateConstraint method because all of this logic is in extension methods,
+            // We can't easily mock the ValidateConstraint method because all of this logic is in extension
+            // methods,
             // so we're just assuming here that it was called.
             var constraint = new Uri("http://localhost/");
             var constraints = new RouteValueDictionary();

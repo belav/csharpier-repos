@@ -5,11 +5,12 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.Web.UI.WebControls
 {
     /// <devdoc>
-    /// <para>Represents the method that will handle the <see langword='VIsibleMonthChanged '/>event of a <see cref='System.Web.UI.WebControls.Calendar'/> .</para>
+    /// <para>Represents the method that will handle the <see langword='VIsibleMonthChanged '/>event of
+    // a <see cref='System.Web.UI.WebControls.Calendar'/> .</para>
     /// </devdoc>
     public delegate void MonthChangedEventHandler(object sender, MonthChangedEventArgs e);
 }

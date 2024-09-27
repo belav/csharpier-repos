@@ -22,13 +22,15 @@ namespace Microsoft.Extensions.Logging.Console
         public bool IncludeScopes { get; set; }
 
         /// <summary>
-        /// Gets or sets format string used to format timestamp in logging messages. Defaults to <c>null</c>.
+        /// Gets or sets format string used to format timestamp in logging messages. Defaults to
+        // <c>null</c>.
         /// </summary>
         [StringSyntax(StringSyntaxAttribute.DateTimeFormat)]
         public string? TimestampFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets indication whether or not UTC timezone should be used to format timestamps in logging messages. Defaults to <c>false</c>.
+        /// Gets or sets indication whether or not UTC timezone should be used to format timestamps in
+        // logging messages. Defaults to <c>false</c>.
         /// </summary>
         public bool UseUtcTimestamp { get; set; }
 

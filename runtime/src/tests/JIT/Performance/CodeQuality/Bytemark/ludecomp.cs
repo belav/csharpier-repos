@@ -65,12 +65,12 @@ internal class LUDecomp : LUStruct
         long accumtime;
         double iterations;
 
-        /*
-        ** Our first step is to build a "solvable" problem.  This
-        ** will become the "seed" set that all others will be
-        ** derived from. (I.E., we'll simply copy these arrays
-        ** into the others.
-        */
+/*
+** Our first step is to build a "solvable" problem.  This
+** will become the "seed" set that all others will be
+** derived from. (I.E., we'll simply copy these arrays
+** into the others.
+*/
         a = new double[global.LUARRAYROWS][];
         for (int j = 0; j < global.LUARRAYROWS; j++)
         {

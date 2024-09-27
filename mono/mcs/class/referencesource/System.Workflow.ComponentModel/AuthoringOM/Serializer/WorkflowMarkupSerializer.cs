@@ -667,7 +667,8 @@ namespace System.Workflow.ComponentModel.Serialization
                     );
                     do
                     {
-                        // Extended property should be deserialized, this is required for primitive types which have extended property as children
+                        // Extended property should be deserialized, this is required for primitive types which have
+                        // extended property as children
                         // We should  not ignore
                         if (
                             extendedPropertyQualifiedName != null
@@ -974,7 +975,8 @@ namespace System.Workflow.ComponentModel.Serialization
             WorkflowMarkupSerializer serializer = null;
             try
             {
-                //Now get the serializer to persist the properties, if the serializer is not found then we dont serialize the properties
+                //Now get the serializer to persist the properties, if the serializer is not found then we dont
+                // serialize the properties
                 serializer =
                     serializationManager.GetSerializer(
                         obj.GetType(),
@@ -1160,8 +1162,10 @@ namespace System.Workflow.ComponentModel.Serialization
             }
             if (dependencyProperties != null)
             {
-                // For attached properties that does not have a corresponding real property on the object, if the value is a design time
-                // type, it may not be set through dependency property SetValue, therefore will not be present in the dependencyProperties
+                // For attached properties that does not have a corresponding real property on the object, if the
+                // value is a design time
+                // type, it may not be set through dependency property SetValue, therefore will not be present in
+                // the dependencyProperties
                 // collection, we'll have to get the dependency property object ourselves.
                 if (designTimeTypeNames != null)
                 {
@@ -1390,7 +1394,8 @@ namespace System.Workflow.ComponentModel.Serialization
                     if (propertyValue != null)
                         propertyValueType = propertyValue.GetType();
 
-                    //Now get the serializer to persist the properties, if the serializer is not found then we dont serialize the properties
+                    //Now get the serializer to persist the properties, if the serializer is not found then we dont
+                    // serialize the properties
                     serializationManager.Context.Push(propertyObj);
                     WorkflowMarkupSerializer propValueSerializer = null;
                     try
@@ -1440,8 +1445,10 @@ namespace System.Workflow.ComponentModel.Serialization
                             )
                         )
                         {
-                            //NOTE: THE FOLLOWING CONDITION ABOUT propertyInfoType != typeof(object) is VALID AS WE SHOULD NOT SERIALIZE A PROPERTY OF TYPE OBJECT TO STRING
-                            //IF WE DO THAT THEN WE DO NOT KNOWN WHAT WAS THE TYPE OF ORIGINAL OBJECT AND SERIALIZER WONT BE ABLE TO GET THE STRING BACK INTO THE CORRECT TYPE,
+                            //NOTE: THE FOLLOWING CONDITION ABOUT propertyInfoType != typeof(object) is VALID AS WE SHOULD NOT
+                            // SERIALIZE A PROPERTY OF TYPE OBJECT TO STRING
+                            //IF WE DO THAT THEN WE DO NOT KNOWN WHAT WAS THE TYPE OF ORIGINAL OBJECT AND SERIALIZER WONT BE
+                            // ABLE TO GET THE STRING BACK INTO THE CORRECT TYPE,
                             //AS THE TYPE INFORMATION IS LOST
                             if (
                                 propValueSerializer.CanSerializeToString(
@@ -1460,7 +1467,8 @@ namespace System.Workflow.ComponentModel.Serialization
                                     )
                                 )
                                 {
-                                    //This is a work around to special case the markup extension serializer as it writes to the stream using writer
+                                    //This is a work around to special case the markup extension serializer as it writes to the stream
+                                    // using writer
                                     if (propValueSerializer is MarkupExtensionSerializer)
                                     {
                                         propValueSerializer.SerializeToString(
@@ -1681,8 +1689,10 @@ namespace System.Workflow.ComponentModel.Serialization
 
 
 
-                            //NOTE: THE FOLLOWING CONDITION ABOUT contentProperty.Property.PropertyType != typeof(object) is VALID AS WE SHOULD NOT SERIALIZE A PROPERTY OF TYPE OBJECT TO STRING
-                            //IF WE DO THAT THEN WE DO NOT KNOWN WHAT WAS THE TYPE OF ORIGINAL OBJECT AND SERIALIZER WONT BE ABLE TO GET THE STRING BACK INTO THE CORRECT TYPE,
+                            //NOTE: THE FOLLOWING CONDITION ABOUT contentProperty.Property.PropertyType != typeof(object) is
+                            // VALID AS WE SHOULD NOT SERIALIZE A PROPERTY OF TYPE OBJECT TO STRING
+                            //IF WE DO THAT THEN WE DO NOT KNOWN WHAT WAS THE TYPE OF ORIGINAL OBJECT AND SERIALIZER WONT BE
+                            // ABLE TO GET THE STRING BACK INTO THE CORRECT TYPE,
                             //AS THE TYPE INFORMATION IS LOST
                             if (
                                 propValueSerializer.CanSerializeToString(
@@ -2310,7 +2320,8 @@ namespace System.Workflow.ComponentModel.Serialization
                     )
                         continue;
 
-                    //If the dependency property is readonly and we have not marked it with DesignerSerializationVisibility.Content attribute the we should not
+                    //If the dependency property is readonly and we have not marked it with
+                    // DesignerSerializationVisibility.Content attribute the we should not
                     //serialize it
                     if (
                         (
@@ -2377,7 +2388,8 @@ namespace System.Workflow.ComponentModel.Serialization
                         )
                         {
                             PropertyInfo propertyInfo = obj1 as PropertyInfo;
-                            // if the propertyValue is assignable to the type in of the .net property then call the .net property's getter also
+                            // if the propertyValue is assignable to the type in of the .net property then call the .net
+                            // property's getter also
                             // else add the keep the value that we got
                             if (
                                 propValue != null
@@ -2582,7 +2594,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 {
                     List<PropertyInfo> pis = new List<PropertyInfo>();
                     pis.AddRange(GetProperties(serializationManager, obj));
-                    //The following condition is workaround for the partner team as they depend on the dependencyObject.SetValue being called
+                    //The following condition is workaround for the partner team as they depend on the
+                    // dependencyObject.SetValue being called
                     //for non assignable property values
                     PropertyInfo pi = LookupProperty(pis, dependencyProperty.Name);
                     if (
@@ -3382,8 +3395,10 @@ namespace System.Workflow.ComponentModel.Serialization
             if (ownerType == null)
                 return null;
 
-            //We need to make sure that the register method is always called for the dynamic property before we try to resolve it
-            //In cases of attached properties if this statement is not there then the dynamic property wont be found as it is
+            //We need to make sure that the register method is always called for the dynamic property before we
+            // try to resolve it
+            //In cases of attached properties if this statement is not there then the dynamic property wont be
+            // found as it is
             //not registered till the first access of the static field
             DependencyProperty dependencyProperty = null;
 
@@ -3600,7 +3615,8 @@ namespace System.Workflow.ComponentModel.Serialization
         // We also support positional arguments, so the above expression is equivalent to
         // {wcm:ActivityBind Workflow1, Path=error1} or {wcm:ActivityBind Workflow1, error1}
         // Notice that the object must have the appropriate constructor to support positional arugments.
-        // There should be no constructors that takes the same number of arugments, regardless of their types.
+        // There should be no constructors that takes the same number of arugments, regardless of their
+        // types.
         internal object DeserializeFromCompactFormat(
             WorkflowMarkupSerializationManager serializationManager,
             XmlReader reader,
@@ -3847,7 +3863,8 @@ namespace System.Workflow.ComponentModel.Serialization
         }
 
         // This function splits the argument string into an array of tokens.
-        // For example: ID=Workflow1, Path=error1} would become an array that contains the following elements
+        // For example: ID=Workflow1, Path=error1} would become an array that contains the following
+        // elements
         // {ID} {=} {Workflwo1} {,} {Path} {=} {error1}
         // Note that the input string should start with the first argument and end with '}'.
         private ArrayList TokenizeAttributes(

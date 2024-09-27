@@ -356,7 +356,8 @@ namespace System.Web.Compilation
             //     Else destination type is value type:
             //         {{target}}.{{targetPropertyName}} = ( {{destinationType}} ) ({value});
             // Else use SetAttribute (expandos):
-            //     ((IAttributeAccessor) {{target}} ).SetAttribute( {{targetPropertyName}} , System.Convert.ToString( {{value}} ));
+            //     ((IAttributeAccessor) {{target}} ).SetAttribute( {{targetPropertyName}} ,
+            // System.Convert.ToString( {{value}} ));
 
             bool useSetAttribute = false;
             // This signifies it's using SetAttribute
@@ -367,14 +368,16 @@ namespace System.Web.Compilation
 
             if (useSetAttribute)
             {
-                // ((IAttributeAccessor) {{target}} ).SetAttribute( {{targetPropertyName}} , System.Convert.ToString( {{value}} ));
+                // ((IAttributeAccessor) {{target}} ).SetAttribute( {{targetPropertyName}} ,
+                // System.Convert.ToString( {{value}} ));
                 CodeMethodInvokeExpression methodInvoke = new CodeMethodInvokeExpression();
                 CodeExpressionStatement setAttributeCall = new CodeExpressionStatement(
                     methodInvoke
                 );
                 setAttributeCall.LinePragma = linePragma;
 
-                // Dev11 128332: Ensure style attribute on html control is lowercase as required for xhtml validation
+                // Dev11 128332: Ensure style attribute on html control is lowercase as required for xhtml
+                // validation
                 if (targetPropertyName.Equals("Style", StringComparison.Ordinal))
                 {
                     targetPropertyName = "style";
@@ -495,9 +498,12 @@ namespace System.Web.Compilation
             CodeExpression expression
         )
         {
-            // VJ# does not support automatic boxing of value types, so passing a simple type, say a bool, into a method
-            // expecting an object will give a compiler error.  We are working around this issue by adding special code for
-            // VJ# that will cast the expression for boxing.  When the VJ# team adds implicit boxing of value types, we
+            // VJ# does not support automatic boxing of value types, so passing a simple type, say a bool, into
+            // a method
+            // expecting an object will give a compiler error.  We are working around this issue by adding
+            // special code for
+            // VJ# that will cast the expression for boxing.  When the VJ# team adds implicit boxing of value
+            // types, we
             // should remove this code.  VSWhidbey 269028
             CodeCastExpression castedExpression = new CodeCastExpression(castType, expression);
             castedExpression.UserData.Add("CastIsBoxing", true);

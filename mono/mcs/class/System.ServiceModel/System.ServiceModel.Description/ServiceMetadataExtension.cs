@@ -102,7 +102,8 @@ namespace System.ServiceModel.Description
             return sme;
         }
 
-        // FIXME: if the ServiceDescription has a base address (e.g. http://localhost:8080) and HttpGetUrl is empty, it returns UnknownDestination while it is expected to return the HTTP help page.
+        // FIXME: if the ServiceDescription has a base address (e.g. http://localhost:8080) and HttpGetUrl
+        // is empty, it returns UnknownDestination while it is expected to return the HTTP help page.
         internal void EnsureChannelDispatcher(
             bool isMex,
             string scheme,
@@ -274,7 +275,7 @@ namespace System.ServiceModel.Description
             return CreateHelpPage(req);
         }
 
-        /* Code from HttpListenerRequest */
+/* Code from HttpListenerRequest */
         NameValueCollection CreateQueryString(string query)
         {
             NameValueCollection query_string = new NameValueCollection();

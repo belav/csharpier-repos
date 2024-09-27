@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal sealed override ObsoleteAttributeData? ObsoleteAttributeData
         {
@@ -145,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return true;
             }
 
-            // If we have no location, we have no way to compare two distinct range variables for equality.  So if we
+            // If we have no location, we have no way to compare two distinct range variables for equality.  So
+            // if we
             // don't have the exact same instance, we have to presume these are not the same.
             if (_location is null)
             {

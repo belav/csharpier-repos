@@ -9,7 +9,8 @@ using Newtonsoft.Json;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     /// <summary>
-    /// Derived version of <see cref="DocumentSymbol" /> used so we can pass additional information we do not want lost for our
+    /// Derived version of <see cref="DocumentSymbol" /> used so we can pass additional information we
+    // do not want lost for our
     /// internal consumers.  For example, the richer <see cref="Glyph"/> which is a superset of <see
     /// cref="DocumentSymbol.Kind"/>.
     /// </summary>
@@ -18,7 +19,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         [DataMember(IsRequired = false, Name = "glyph")]
         public int Glyph { get; set; }
 
-        // Deliberately override the value in the base so that our serializers/deserializers know to include the custom
+        // Deliberately override the value in the base so that our serializers/deserializers know to include
+        // the custom
         // data we have on the children as well.
         [DataMember(Name = "children")]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

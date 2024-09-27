@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 return true;
             }
 
-            // there is a return statement, and current position is reachable. let's check whether this is a case where that is okay
+            // there is a return statement, and current position is reachable. let's check whether this is a
+            // case where that is okay
             return IsFinalSpanSemanticallyValidSpan(
                 semanticModel.SyntaxTree.GetRoot(cancellationToken),
                 textSpan,
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             where T : SyntaxNode
         {
             // use top-down approach to find smallest statement range that contains given span.
-            // this approach is more expansive than bottom-up approach I used before but way simpler and easy to understand
+            // this approach is more expansive than bottom-up approach I used before but way simpler and easy to
+            // understand
             var token1 = root.FindToken(textSpan.Start);
             var token2 = root.FindTokenFromEnd(textSpan.End);
 
@@ -189,7 +191,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             where T : SyntaxNode
         {
             // use top-down approach to find largest statement range contained in the given span
-            // this method is a bit more expensive than bottom-up approach, but way more simpler than the other approach.
+            // this method is a bit more expensive than bottom-up approach, but way more simpler than the other
+            // approach.
             var token1 = root.FindToken(textSpan.Start);
             var token2 = root.FindTokenFromEnd(textSpan.End);
 

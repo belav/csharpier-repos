@@ -10,7 +10,8 @@ namespace System.Xml.Serialization
     using System;
     using System.Xml.Schema;
 
-    /// <include file='doc\XmlNamespaceDeclarationsAttribute.uex' path='docs/doc[@for="XmlNamespaceDeclarationsAttribute"]/*' />
+    /// <include file='doc\XmlNamespaceDeclarationsAttribute.uex'
+    // path='docs/doc[@for="XmlNamespaceDeclarationsAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -22,7 +23,8 @@ namespace System.Xml.Serialization
     )]
     public class XmlNamespaceDeclarationsAttribute : System.Attribute
     {
-        /// <include file='doc\XmlNamespaceDeclarationsAttribute.uex' path='docs/doc[@for="XmlNamespaceDeclarationsAttribute.XmlNamespaceDeclarationsAttribute"]/*' />
+        /// <include file='doc\XmlNamespaceDeclarationsAttribute.uex'
+        // path='docs/doc[@for="XmlNamespaceDeclarationsAttribute.XmlNamespaceDeclarationsAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

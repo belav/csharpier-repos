@@ -38,19 +38,19 @@ namespace DbLinq.MySql.Example
     {
         static void Main(string[] args)
         {
-            /*            if (args.Length != 4)
-                        {
-                            Logger.Write("Usage: DbLinq.MySql.Example.exe server user password database");
-                            Logger.Write("Debug arguments can be set on project properties in visual studio.");
-                            Logger.Write("Press enter to continue.");
-                            Console.ReadLine();
-                            return;
-                        }
-            
-                        string connStr = String.Format("server={0};user id={1}; password={2}; database={3}", args);
-                        insertTest(connStr);
-                        return;
-            */
+/*            if (args.Length != 4)
+{
+Logger.Write("Usage: DbLinq.MySql.Example.exe server user password database");
+Logger.Write("Debug arguments can be set on project properties in visual studio.");
+Logger.Write("Press enter to continue.");
+Console.ReadLine();
+return;
+}
+
+string connStr = String.Format("server={0};user id={1}; password={2}; database={3}", args);
+insertTest(connStr);
+return;
+*/
 #if false
             MySqlCommand cmd = new MySqlCommand("select hello(?s)", new MySqlConnection(connStr));
             //cmd.CommandType = CommandType.StoredProcedure;
@@ -151,11 +151,15 @@ namespace DbLinq.MySql.Example
             // BUG: This currently will insert 3 rows when it should insert only 2
             // SubmitChanges isn't clearing the client side transaction data
             //Console.Clear();
-            //Console.WriteLine( "db.Orders.Add(new Order { ProductID = 7, CustomerId = 1, OrderDate = DateTime.Now });");
-            //db.Orders.InsertOnSubmit(new Order { EmployeeID = 1, CustomerId = "ALFKI", OrderDate = DateTime.Now });
+            //Console.WriteLine( "db.Orders.Add(new Order { ProductID = 7, CustomerId = 1, OrderDate =
+            // DateTime.Now });");
+            //db.Orders.InsertOnSubmit(new Order { EmployeeID = 1, CustomerId = "ALFKI", OrderDate =
+            // DateTime.Now });
             //db.SubmitChanges();
-            //Console.WriteLine( "db.Orders.Add(new Order { ProductID = 2, CustomerId = 2, OrderDate = DateTime.Now });");
-            //db.Orders.InsertOnSubmit(new Order { EmployeeID = 1, CustomerId = "ALFKI", OrderDate = DateTime.Now });
+            //Console.WriteLine( "db.Orders.Add(new Order { ProductID = 2, CustomerId = 2, OrderDate =
+            // DateTime.Now });");
+            //db.Orders.InsertOnSubmit(new Order { EmployeeID = 1, CustomerId = "ALFKI", OrderDate =
+            // DateTime.Now });
             //db.SubmitChanges();
             //foreach (var v in db.Orders)
             //    ObjectDumper.Write(v);

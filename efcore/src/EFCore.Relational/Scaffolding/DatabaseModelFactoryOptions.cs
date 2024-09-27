@@ -7,8 +7,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding;
 ///     Specifies which metadata to read from the database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-scaffolding">Reverse engineering (scaffolding) an existing database</see>, and
-///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time services</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-scaffolding">Reverse engineering (scaffolding) an
+// existing database</see>, and
+///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time
+// services</see> for more information and examples.
 /// </remarks>
 public class DatabaseModelFactoryOptions
 {

@@ -51,7 +51,8 @@ namespace System.Security.Cryptography.Cose
         /// <summary>
         /// Gets the raw bytes of the protected header parameters associated with this message.
         /// </summary>
-        /// <value>A region of memory that contains the raw bytes of the protected header parameters associated with this message.</value>
+        /// <value>A region of memory that contains the raw bytes of the protected header parameters
+        // associated with this message.</value>
         public ReadOnlyMemory<byte> RawProtectedHeaders => _protectedHeaderAsBstr;
 
         internal CoseMessage(
@@ -70,9 +71,11 @@ namespace System.Security.Cryptography.Cose
         }
 
         /// <summary>
-        /// Gets the content of this message or <see langword="null"/> if the content was detached from the message.
+        /// Gets the content of this message or <see langword="null"/> if the content was detached from the
+        // message.
         /// </summary>
-        /// <value>A region of memory that contains the content of this message or <see langword="null"/> if the content was detached from the message.</value>
+        /// <value>A region of memory that contains the content of this message or <see langword="null"/> if
+        // the content was detached from the message.</value>
         // Sign and MAC also refer to the content as payload.
         // Encrypt also refers to the content as cyphertext.
         public ReadOnlyMemory<byte>? Content
@@ -96,8 +99,10 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="cborPayload">The sequence of bytes to decode.</param>
         /// <returns>The decoded message.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="cborPayload"/> is <see langword="null"/>.</exception>
-        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as a COSE_Sign1 message.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="cborPayload"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as
+        // a COSE_Sign1 message.</exception>
         public static CoseSign1Message DecodeSign1(byte[] cborPayload)
         {
             if (cborPayload is null)
@@ -111,7 +116,8 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="cborPayload">The sequence of CBOR-encoded bytes to decode.</param>
         /// <returns>The decoded message.</returns>
-        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as a COSE_Sign1 message.</exception>
+        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as
+        // a COSE_Sign1 message.</exception>
         public static CoseSign1Message DecodeSign1(ReadOnlySpan<byte> cborPayload)
         {
             unsafe
@@ -207,8 +213,10 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="cborPayload">The sequence of bytes to decode.</param>
         /// <returns>The decoded message.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="cborPayload"/> is <see langword="null"/>.</exception>
-        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as a COSE_Sign message.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="cborPayload"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as
+        // a COSE_Sign message.</exception>
         public static CoseMultiSignMessage DecodeMultiSign(byte[] cborPayload)
         {
             if (cborPayload is null)
@@ -222,7 +230,8 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="cborPayload">The sequence of bytes to decode.</param>
         /// <returns>The decoded message.</returns>
-        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as a COSE_Sign message.</exception>
+        /// <exception cref="CryptographicException"><paramref name="cborPayload"/> could not be decoded as
+        // a COSE_Sign message.</exception>
         public static CoseMultiSignMessage DecodeMultiSign(ReadOnlySpan<byte> cborPayload)
         {
             unsafe
@@ -765,7 +774,8 @@ namespace System.Security.Cryptography.Cose
         /// Encodes this message as CBOR.
         /// </summary>
         /// <returns>The message encoded as CBOR.</returns>
-        /// <exception cref="InvalidOperationException">The <see cref="ProtectedHeaders"/> and <see cref="UnprotectedHeaders"/> collections have one or more labels in common.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="ProtectedHeaders"/> and <see
+        // cref="UnprotectedHeaders"/> collections have one or more labels in common.</exception>
         public byte[] Encode()
         {
             byte[] buffer = new byte[GetEncodedLength()];
@@ -780,9 +790,12 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="destination">The buffer in which to write the encoded value.</param>
         /// <returns>The number of bytes written to <paramref name="destination"/>.</returns>
-        /// <remarks>Use <see cref="GetEncodedLength()"/> to determine how many bytes result in encoding this message.</remarks>
-        /// <exception cref="ArgumentException"><paramref name="destination"/> is too small to hold the value.</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="ProtectedHeaders"/> and <see cref="UnprotectedHeaders"/> collections have one or more labels in common.</exception>
+        /// <remarks>Use <see cref="GetEncodedLength()"/> to determine how many bytes result in encoding
+        // this message.</remarks>
+        /// <exception cref="ArgumentException"><paramref name="destination"/> is too small to hold the
+        // value.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="ProtectedHeaders"/> and <see
+        // cref="UnprotectedHeaders"/> collections have one or more labels in common.</exception>
         /// <seealso cref="GetEncodedLength()"/>
         public int Encode(Span<byte> destination)
         {
@@ -801,15 +814,20 @@ namespace System.Security.Cryptography.Cose
         /// When overriden in a derived class, attempts to encode this message into the specified buffer.
         /// </summary>
         /// <param name="destination">The buffer in which to write the encoded value.</param>
-        /// <param name="bytesWritten">On success, receives the number of bytes written to <paramref name="destination"/>. This parameter is treated as uninitialized.</param>
-        /// <returns><see langword="true"/> if <paramref name="destination"/> had sufficient length to receive the value; otherwise, <see langword="false"/>.</returns>
-        /// <remarks>Use <see cref="GetEncodedLength()"/> to determine how many bytes result in encoding this message.</remarks>
-        /// <exception cref="InvalidOperationException">The <see cref="ProtectedHeaders"/> and <see cref="UnprotectedHeaders"/> collections have one or more labels in common.</exception>
+        /// <param name="bytesWritten">On success, receives the number of bytes written to <paramref
+        // name="destination"/>. This parameter is treated as uninitialized.</param>
+        /// <returns><see langword="true"/> if <paramref name="destination"/> had sufficient length to
+        // receive the value; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>Use <see cref="GetEncodedLength()"/> to determine how many bytes result in encoding
+        // this message.</remarks>
+        /// <exception cref="InvalidOperationException">The <see cref="ProtectedHeaders"/> and <see
+        // cref="UnprotectedHeaders"/> collections have one or more labels in common.</exception>
         /// <seealso cref="GetEncodedLength()"/>
         public abstract bool TryEncode(Span<byte> destination, out int bytesWritten);
 
         /// <summary>
-        /// When overriden in a derived class, calculates the number of bytes produced by encoding this <see cref="CoseMessage"/>.
+        /// When overriden in a derived class, calculates the number of bytes produced by encoding this <see
+        // cref="CoseMessage"/>.
         /// </summary>
         /// <returns>The number of bytes produced by encoding this message.</returns>
         public abstract int GetEncodedLength();

@@ -10,7 +10,8 @@ namespace System.Web.UI.WebControls
 
     /// <devdoc>
     ///    <para>Represents the method that will handle the
-    ///    <see langword='DataListItem'/> event of a <see cref='System.Web.UI.WebControls.DataList'/> .</para>
+    ///    <see langword='DataListItem'/> event of a <see cref='System.Web.UI.WebControls.DataList'/>
+    // .</para>
     /// </devdoc>
     public delegate void DataListItemEventHandler(object sender, DataListItemEventArgs e);
 }

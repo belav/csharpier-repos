@@ -19,7 +19,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 10).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 10).
         /// </param>
         /// <returns>
         ///   The slice of the buffer containing the bytes of the Enumerated value,
@@ -73,7 +74,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 10).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 10).
         /// </param>
         /// <typeparam name="TEnum">Destination enum type</typeparam>
         /// <returns>
@@ -145,7 +147,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 10).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 10).
         /// </param>
         /// <returns>
         ///   The Enumerated value converted to a <paramref name="enumType"/>.
@@ -280,7 +283,8 @@ namespace System.Formats.Asn1
         ///   as a <see cref="ReadOnlyMemory{T}"/> over the original data.
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 10).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 10).
         /// </param>
         /// <returns>
         ///   The bytes of the Enumerated value, in signed big-endian form.
@@ -323,7 +327,8 @@ namespace System.Formats.Asn1
         ///   non-[<see cref="FlagsAttribute"/>] enum specified by <typeparamref name="TEnum"/>.
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 10).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 10).
         /// </param>
         /// <typeparam name="TEnum">Destination enum type</typeparam>
         /// <returns>
@@ -381,7 +386,8 @@ namespace System.Formats.Asn1
         /// </summary>
         /// <param name="enumType">Type object representing the destination type.</param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 10).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 10).
         /// </param>
         /// <returns>
         ///   The Enumerated value converted to a <paramref name="enumType"/>.

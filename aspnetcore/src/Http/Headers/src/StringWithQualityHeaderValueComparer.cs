@@ -25,9 +25,12 @@ public class StringWithQualityHeaderValueComparer : IComparer<StringWithQualityH
     /// <summary>
     /// Compares two <see cref="StringWithQualityHeaderValue"/> based on their quality value
     /// (a.k.a their "q-value").
-    /// Values with identical q-values are considered equal (i.e the result is 0) with the exception of wild-card
-    /// values (i.e. a value of "*") which are considered less than non-wild-card values. This allows to sort
-    /// a sequence of <see cref="StringWithQualityHeaderValue"/> following their q-values ending up with any
+    /// Values with identical q-values are considered equal (i.e the result is 0) with the exception of
+    // wild-card
+    /// values (i.e. a value of "*") which are considered less than non-wild-card values. This allows to
+    // sort
+    /// a sequence of <see cref="StringWithQualityHeaderValue"/> following their q-values ending up with
+    // any
     /// wild-cards at the end.
     /// </summary>
     /// <param name="stringWithQuality1">The first value to compare.</param>

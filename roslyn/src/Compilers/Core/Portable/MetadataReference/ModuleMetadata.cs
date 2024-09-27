@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Represents an immutable snapshot of module CLI metadata.
     /// </summary>
-    /// <remarks>This object may allocate significant resources or lock files depending upon how it is constructed.</remarks>
+    /// <remarks>This object may allocate significant resources or lock files depending upon how it is
+    // constructed.</remarks>
     public sealed partial class ModuleMetadata : Metadata
     {
         private readonly PEModule _module;
@@ -69,30 +70,37 @@ namespace Microsoft.CodeAnalysis
         {
             _module = metadata.Module;
 
-            // note: we intentionally do not pass the _onDispose callback to the copy.  Only the owner owns the callback
-            // and controls calling it.  This does mean that the callback (and underlying memory it holds onto) may
-            // disappear once the owner is disposed or GC'd.  But that's ok as that is expected semantics.  Once an image
+            // note: we intentionally do not pass the _onDispose callback to the copy.  Only the owner owns the
+            // callback
+            // and controls calling it.  This does mean that the callback (and underlying memory it holds onto)
+            // may
+            // disappear once the owner is disposed or GC'd.  But that's ok as that is expected semantics.  Once
+            // an image
             // owner is gone, all copies are no longer in a valid state for use.
         }
 
         /// <summary>
-        /// Create metadata module from a raw memory pointer to metadata directory of a PE image or .cormeta section of an object file.
+        /// Create metadata module from a raw memory pointer to metadata directory of a PE image or .cormeta
+        // section of an object file.
         /// Only manifest modules are currently supported.
         /// </summary>
         /// <param name="metadata">Pointer to the start of metadata block.</param>
         /// <param name="size">The size of the metadata block.</param>
         /// <exception cref="ArgumentNullException"><paramref name="metadata"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/> is not positive.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/> is not
+        // positive.</exception>
         public static ModuleMetadata CreateFromMetadata(nint metadata, int size) =>
             CreateFromMetadataWorker(metadata, size, onDispose: null);
 
         /// <summary>
-        /// Create metadata module from a raw memory pointer to metadata directory of a PE image or .cormeta section of an object file.
+        /// Create metadata module from a raw memory pointer to metadata directory of a PE image or .cormeta
+        // section of an object file.
         /// Only manifest modules are currently supported.
         /// </summary>
         /// <param name="metadata">Pointer to the start of metadata block.</param>
         /// <param name="size">The size of the metadata block.</param>
-        /// <param name="onDispose">Action to run when the metadata module is disposed.  This will only be called then
+        /// <param name="onDispose">Action to run when the metadata module is disposed.  This will only be
+        // called then
         /// this actual metadata instance is disposed.  Any instances created from this using <see
         /// cref="Metadata.Copy"/> will not call this when they are disposed.</param>
         /// <exception cref="ArgumentNullException"><paramref name="onDispose"/> is null.</exception>
@@ -160,7 +168,8 @@ namespace Microsoft.CodeAnalysis
         /// <param name="peImage">Pointer to the DOS header ("MZ") of a portable executable image.</param>
         /// <param name="size">The size of the image pointed to by <paramref name="peImage"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="peImage"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/> is not positive.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/> is not
+        // positive.</exception>
         public static unsafe ModuleMetadata CreateFromImage(nint peImage, int size) =>
             CreateFromImage((byte*)peImage, size, onDispose: null);
 
@@ -189,7 +198,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create metadata module from a sequence of bytes.
         /// </summary>
-        /// <param name="peImage">The portable executable image beginning with the DOS header ("MZ").</param>
+        /// <param name="peImage">The portable executable image beginning with the DOS header
+        // ("MZ").</param>
         /// <exception cref="ArgumentNullException"><paramref name="peImage"/> is null.</exception>
         public static ModuleMetadata CreateFromImage(IEnumerable<byte> peImage)
         {
@@ -219,9 +229,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create metadata module from a stream.
         /// </summary>
-        /// <param name="peStream">Stream containing portable executable image. Position zero should contain the first byte of the DOS header ("MZ").</param>
+        /// <param name="peStream">Stream containing portable executable image. Position zero should contain
+        // the first byte of the DOS header ("MZ").</param>
         /// <param name="leaveOpen">
-        /// False to close the stream upon disposal of the metadata (the responsibility for disposal of the stream is transferred upon entry of the constructor
+        /// False to close the stream upon disposal of the metadata (the responsibility for disposal of the
+        // stream is transferred upon entry of the constructor
         /// unless the arguments given are invalid).
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
@@ -237,20 +249,28 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create metadata module from a stream.
         /// </summary>
-        /// <param name="peStream">Stream containing portable executable image. Position zero should contain the first byte of the DOS header ("MZ").</param>
+        /// <param name="peStream">Stream containing portable executable image. Position zero should contain
+        // the first byte of the DOS header ("MZ").</param>
         /// <param name="options">
         /// Options specifying how sections of the PE image are read from the stream.
-        /// Unless <see cref="PEStreamOptions.LeaveOpen"/> is specified, the responsibility for disposal of the stream is transferred upon entry of the constructor
+        /// Unless <see cref="PEStreamOptions.LeaveOpen"/> is specified, the responsibility for disposal of
+        // the stream is transferred upon entry of the constructor
         /// unless the arguments given are invalid.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
-        /// <exception cref="ArgumentException">The stream doesn't support read and seek operations.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="options"/> has an invalid value.</exception>
+        /// <exception cref="ArgumentException">The stream doesn't support read and seek
+        // operations.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="options"/> has an invalid
+        // value.</exception>
         /// <exception cref="BadImageFormatException">
-        /// <see cref="PEStreamOptions.PrefetchMetadata"/> or <see cref="PEStreamOptions.PrefetchEntireImage"/> is specified and the PE headers of the image are invalid.
+        /// <see cref="PEStreamOptions.PrefetchMetadata"/> or <see
+        // cref="PEStreamOptions.PrefetchEntireImage"/> is specified and the PE headers of the image are
+        // invalid.
         /// </exception>
         /// <exception cref="IOException">
-        /// <see cref="PEStreamOptions.PrefetchMetadata"/> or <see cref="PEStreamOptions.PrefetchEntireImage"/> is specified and an error occurs while reading the stream.
+        /// <see cref="PEStreamOptions.PrefetchMetadata"/> or <see
+        // cref="PEStreamOptions.PrefetchEntireImage"/> is specified and an error occurs while reading the
+        // stream.
         /// </exception>
         public static ModuleMetadata CreateFromStream(Stream peStream, PEStreamOptions options)
         {
@@ -271,11 +291,15 @@ namespace Microsoft.CodeAnalysis
                 (options & (PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata))
                 != 0;
 
-            // If this stream is an UnmanagedMemoryStream, we can heavily optimize creating the metadata by directly
-            // accessing the underlying memory. Note: we can only do this if the caller asked us not to prefetch the
+            // If this stream is an UnmanagedMemoryStream, we can heavily optimize creating the metadata by
+            // directly
+            // accessing the underlying memory. Note: we can only do this if the caller asked us not to prefetch
+            // the
             // metadata from the stream.  In that case, we want to fall through below and have the PEReader read
-            // everything into a copy immediately.  If, however, we are allowed to be lazy, we can create an efficient
-            // metadata that is backed directly by the memory that is backed in, and which will release that memory (if
+            // everything into a copy immediately.  If, however, we are allowed to be lazy, we can create an
+            // efficient
+            // metadata that is backed directly by the memory that is backed in, and which will release that
+            // memory (if
             // requested) once it is done with it.
             if (!prefetch && peStream is UnmanagedMemoryStream unmanagedMemoryStream)
             {
@@ -318,9 +342,11 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="path"/> is invalid.</exception>
-        /// <exception cref="IOException">Error opening file <paramref name="path"/>. See <see cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="IOException">Error opening file <paramref name="path"/>. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
         /// <exception cref="FileNotFoundException">File <paramref name="path"/> not found.</exception>
-        /// <exception cref="NotSupportedException">Reading from a file path is not supported by the platform.</exception>
+        /// <exception cref="NotSupportedException">Reading from a file path is not supported by the
+        // platform.</exception>
         public static ModuleMetadata CreateFromFile(string path)
         {
             return CreateFromStream(
@@ -337,10 +363,12 @@ namespace Microsoft.CodeAnalysis
         /// Creates a shallow copy of this object.
         /// </summary>
         /// <remarks>
-        /// The resulting copy shares the metadata image and metadata information read from it with the original.
+        /// The resulting copy shares the metadata image and metadata information read from it with the
+        // original.
         /// It doesn't own the underlying metadata image and is not responsible for its disposal.
         ///
-        /// This is used, for example, when a metadata cache needs to return the cached metadata to its users
+        /// This is used, for example, when a metadata cache needs to return the cached metadata to its
+        // users
         /// while keeping the ownership of the cached metadata object.
         /// </remarks>
         internal new ModuleMetadata Copy()
@@ -421,7 +449,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns the file names of linked managed modules.
         /// </summary>
-        /// <exception cref="BadImageFormatException">When an invalid module name is encountered.</exception>
+        /// <exception cref="BadImageFormatException">When an invalid module name is
+        // encountered.</exception>
         /// <exception cref="ObjectDisposedException">Module has been disposed.</exception>
         public ImmutableArray<string> GetModuleNames()
         {
@@ -432,7 +461,8 @@ namespace Microsoft.CodeAnalysis
         /// Returns the metadata reader.
         /// </summary>
         /// <exception cref="ObjectDisposedException">Module has been disposed.</exception>
-        /// <exception cref="BadImageFormatException">When an invalid module name is encountered.</exception>
+        /// <exception cref="BadImageFormatException">When an invalid module name is
+        // encountered.</exception>
         public MetadataReader GetMetadataReader() => MetadataReader;
 
         internal MetadataReader MetadataReader => Module.MetadataReader;
@@ -440,8 +470,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a reference to the module metadata.
         /// </summary>
-        /// <param name="documentation">Provider of XML documentation comments for the metadata symbols contained in the module.</param>
-        /// <param name="filePath">Path describing the location of the metadata, or null if the metadata have no location.</param>
+        /// <param name="documentation">Provider of XML documentation comments for the metadata symbols
+        // contained in the module.</param>
+        /// <param name="filePath">Path describing the location of the metadata, or null if the metadata
+        // have no location.</param>
         /// <param name="display">Display string used in error messages to identity the reference.</param>
         /// <returns>A reference to the module metadata.</returns>
         public PortableExecutableReference GetReference(

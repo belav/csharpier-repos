@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.Diagnostics
 {
     using System;
@@ -28,22 +28,26 @@ namespace System.Diagnostics
         String fileName = null;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/>
+        // class with
         /// <see cref='System.IO.TextWriter'/>
         /// as the output recipient.</para>
         /// </devdoc>
         public TextWriterTraceListener() { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class, using the
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/>
+        // class, using the
         ///    stream as the recipient of the debugging and tracing output.</para>
         /// </devdoc>
         public TextWriterTraceListener(Stream stream)
             : this(stream, string.Empty) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with the
-        ///    specified name and using the stream as the recipient of the debugging and tracing output.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/>
+        // class with the
+        ///    specified name and using the stream as the recipient of the debugging and tracing
+        // output.</para>
         /// </devdoc>
         public TextWriterTraceListener(Stream stream, string name)
             : base(name)
@@ -54,14 +58,16 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class using the
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/>
+        // class using the
         ///    specified writer as recipient of the tracing or debugging output.</para>
         /// </devdoc>
         public TextWriterTraceListener(TextWriter writer)
             : this(writer, string.Empty) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with the
+        /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/>
+        // class with the
         ///    specified name and using the specified writer as recipient of the tracing or
         ///    debugging
         ///    output.</para>
@@ -108,7 +114,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        /// <para>Closes the <see cref='System.Diagnostics.TextWriterTraceListener.Writer'/> so that it no longer
+        /// <para>Closes the <see cref='System.Diagnostics.TextWriterTraceListener.Writer'/> so that it no
+        // longer
         ///    receives tracing or debugging output.</para>
         /// </devdoc>
         public override void Close()
@@ -155,7 +162,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        /// <para>Flushes the output buffer for the <see cref='System.Diagnostics.TextWriterTraceListener.Writer'/>.</para>
+        /// <para>Flushes the output buffer for the <see
+        // cref='System.Diagnostics.TextWriterTraceListener.Writer'/>.</para>
         /// </devdoc>
         public override void Flush()
         {
@@ -187,7 +195,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>Writes a message
-        ///       to this instance's <see cref='System.Diagnostics.TextWriterTraceListener.Writer'/> followed by a line terminator. The
+        ///       to this instance's <see cref='System.Diagnostics.TextWriterTraceListener.Writer'/>
+        // followed by a line terminator. The
         ///       default line terminator is a carriage return followed by a line feed (\r\n).</para>
         /// </devdoc>
         public override void WriteLine(string message)
@@ -255,7 +264,8 @@ namespace System.Diagnostics
                     catch (IOException)
                     {
                         // Should we do this only for ERROR_SHARING_VIOLATION?
-                        //if (InternalResources.MakeErrorCodeFromHR(Marshal.GetHRForException(ioexc)) == InternalResources.ERROR_SHARING_VIOLATION) {
+                        //if (InternalResources.MakeErrorCodeFromHR(Marshal.GetHRForException(ioexc)) ==
+                        // InternalResources.ERROR_SHARING_VIOLATION) {
 
                         fileNameOnly = Guid.NewGuid().ToString() + fileNameOnly;
                         fullPath = Path.Combine(dirPath, fileNameOnly);

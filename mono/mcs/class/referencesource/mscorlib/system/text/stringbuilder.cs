@@ -429,7 +429,8 @@ namespace System.Text
                     {
                         if (chunk.m_ChunkLength > 0)
                         {
-                            // Copy these into local variables so that they are stable even in the presence of ----s (hackers might do this)
+                            // Copy these into local variables so that they are stable even in the presence of ----s (hackers
+                            // might do this)
                             char[] sourceArray = chunk.m_ChunkChars;
                             int chunkOffset = chunk.m_ChunkOffset;
                             int chunkLength = chunk.m_ChunkLength;
@@ -529,7 +530,8 @@ namespace System.Text
 
                             if (chunkCount > 0)
                             {
-                                // work off of local variables so that they are stable even in the presence of ----s (hackers might do this)
+                                // work off of local variables so that they are stable even in the presence of ----s (hackers might
+                                // do this)
                                 char[] sourceArray = chunk.m_ChunkChars;
 
                                 // Check that we will not overrun our boundaries.
@@ -617,7 +619,8 @@ namespace System.Text
                 // if the specified length is greater than the current length
                 if (delta > 0)
                 {
-                    // the end of the string value of the current StringBuilder object is padded with the Unicode NULL character
+                    // the end of the string value of the current StringBuilder object is padded with the Unicode NULL
+                    // character
                     Append('\0', delta); // We could improve on this, but who does this anyway?
                 }
                 // if the specified length is less than or equal to the current length
@@ -626,7 +629,8 @@ namespace System.Text
                     StringBuilder chunk = FindChunkForIndex(value);
                     if (chunk != this)
                     {
-                        // we crossed a chunk boundary when reducing the Length, we must replace this middle-chunk with a new
+                        // we crossed a chunk boundary when reducing the Length, we must replace this middle-chunk with a
+                        // new
                         // larger chunk to ensure the original capacity is preserved
                         int newLen = originalCapacity - chunk.m_ChunkOffset;
                         char[] newArray = new char[newLen];
@@ -737,7 +741,8 @@ namespace System.Text
             return this;
         }
 
-        // Appends an array of characters at the end of this string builder. The capacity is adjusted as needed.
+        // Appends an array of characters at the end of this string builder. The capacity is adjusted as
+        // needed.
         [System.Security.SecuritySafeCritical] // auto-generated
         public StringBuilder Append(char[] value, int startIndex, int charCount)
         {
@@ -1418,7 +1423,8 @@ namespace System.Text
 
         // Returns a reference to the StringBuilder with charCount characters from
         // value inserted into the buffer at index.  Existing characters are shifted
-        // to make room for the new text and capacity is adjusted as required.  If value is null, the StringBuilder
+        // to make room for the new text and capacity is adjusted as required.  If value is null, the
+        // StringBuilder
         // is unchanged.  Characters are taken from value starting at position startIndex.
         [System.Security.SecuritySafeCritical] // auto-generated
         public StringBuilder Insert(int index, char[] value, int startIndex, int charCount)

@@ -29,7 +29,8 @@ using Microsoft.VisualStudio.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
 {
     /// <summary>
-    /// When user types <c>;</c> in a statement, semicolon is added and caret is placed after the semicolon
+    /// When user types <c>;</c> in a statement, semicolon is added and caret is placed after the
+    // semicolon
     /// </summary>
     [Export(typeof(ICommandHandler))]
     [Export]
@@ -174,9 +175,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             // start analysis with node outside of delimiters.
             //
             // Examples,
-            //    `obj.ToString$()` where `token` references `(` but the caret isn't actually inside the argument list.
-            //    `obj.ToString()$` or `obj.method()$ .method()` where `token` references `)` but the caret isn't inside the argument list.
-            //    `defa$$ult(object)` where `token` references `default` but the caret isn't inside the parentheses.
+            //    `obj.ToString$()` where `token` references `(` but the caret isn't actually inside the
+            // argument list.
+            //    `obj.ToString()$` or `obj.method()$ .method()` where `token` references `)` but the caret
+            // isn't inside the argument list.
+            //    `defa$$ult(object)` where `token` references `default` but the caret isn't inside the
+            // parentheses.
             if (HasDelimitersButCaretIsOutside(startingNode, caretPosition))
             {
                 startingNode = startingNode.GetRequiredParent();
@@ -424,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                     return true;
                 case SyntaxKind.ForStatement:
                     // `For` statements can have semicolon after initializer/declaration or after condition.
-                    // If caret is in initialer/declaration or condition, AND is inside other delimiters, complete statement
+                    // If caret is in initialer/declaration or condition, AND is inside other delimiters, complete
+                    // statement
                     // Otherwise, return without moving the caret.
                     return isInsideDelimiters
                         && TryGetForStatementCaret(
@@ -541,17 +546,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
         /// Determines if a statement ends with a closing delimiter, and that closing delimiter exists.
         /// </summary>
         /// <remarks>
-        /// <para>Statements such as <c>do { } while (expression);</c> contain embedded enclosing delimiters immediately
-        /// preceding the semicolon. These delimiters are not part of the expression, but they behave like an argument
+        /// <para>Statements such as <c>do { } while (expression);</c> contain embedded enclosing delimiters
+        // immediately
+        /// preceding the semicolon. These delimiters are not part of the expression, but they behave like
+        // an argument
         /// list for the purposes of identifying relevant places for statement completion:</para>
         /// <list type="bullet">
-        /// <item><description>The closing delimiter is typically inserted by the Automatic Brace Completion feature.</description></item>
-        /// <item><description>It is not syntactically valid to place a semicolon <em>directly</em> within the delimiters.</description></item>
+        /// <item><description>The closing delimiter is typically inserted by the Automatic Brace Completion
+        // feature.</description></item>
+        /// <item><description>It is not syntactically valid to place a semicolon <em>directly</em> within
+        // the delimiters.</description></item>
         /// </list>
         /// </remarks>
         /// <param name="currentNode"></param>
-        /// <returns><see langword="true"/> if <paramref name="currentNode"/> is a statement that ends with a closing
-        /// delimiter, and that closing delimiter exists in the source code; otherwise, <see langword="false"/>.
+        /// <returns><see langword="true"/> if <paramref name="currentNode"/> is a statement that ends with
+        // a closing
+        /// delimiter, and that closing delimiter exists in the source code; otherwise, <see
+        // langword="false"/>.
         /// </returns>
         private static bool StatementClosingDelimiterIsMissing(SyntaxNode currentNode)
         {
@@ -572,16 +583,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
         /// Determines if a syntax node includes all required closing delimiters.
         /// </summary>
         /// <remarks>
-        /// <para>Some syntax nodes, such as parenthesized expressions, require a matching closing delimiter to end the
-        /// syntax node. If this node is omitted from the source code, the parser will automatically insert a zero-width
-        /// "missing" closing delimiter token to produce a valid syntax tree. This method determines if required closing
+        /// <para>Some syntax nodes, such as parenthesized expressions, require a matching closing delimiter
+        // to end the
+        /// syntax node. If this node is omitted from the source code, the parser will automatically insert
+        // a zero-width
+        /// "missing" closing delimiter token to produce a valid syntax tree. This method determines if
+        // required closing
         /// delimiters are present in the original source.</para>
         /// </remarks>
         /// <param name="currentNode"></param>
         /// <returns>
         /// <list type="bullet">
-        /// <item><description><see langword="true"/> if <paramref name="currentNode"/> requires a closing delimiter and the closing delimiter is present in the source (i.e. not missing)</description></item>
-        /// <item><description><see langword="true"/> if <paramref name="currentNode"/> does not require a closing delimiter</description></item>
+        /// <item><description><see langword="true"/> if <paramref name="currentNode"/> requires a closing
+        // delimiter and the closing delimiter is present in the source (i.e. not missing)</description></item>
+        /// <item><description><see langword="true"/> if <paramref name="currentNode"/> does not require a
+        // closing delimiter</description></item>
         /// <item><description>otherwise, <see langword="false"/>.</description></item>
         /// </list>
         /// </returns>

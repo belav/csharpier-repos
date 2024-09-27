@@ -191,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Pre-4.0 version
                 // L $lock = `argument`;           // sequence point
-                // Monitor.Enter($lock);           // NB: before try-finally so we don't Exit if an exception prevents us from acquiring the lock.
+                // Monitor.Enter($lock);           // NB: before try-finally so we don't Exit if an exception
+                // prevents us from acquiring the lock.
                 // try
                 // {
                 //     `body`                      // sequence point

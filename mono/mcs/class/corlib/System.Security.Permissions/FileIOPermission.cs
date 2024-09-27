@@ -504,7 +504,8 @@ namespace System.Security.Permissions
                 );
                 throw new ArgumentException(msg, "path");
             }
-            // LAMESPEC: docs don't say it must be a rooted path, but the MS implementation enforces it, so we will too.
+            // LAMESPEC: docs don't say it must be a rooted path, but the MS implementation enforces it, so we
+            // will too.
             if (!Path.IsPathRooted(path))
             {
                 string msg = Locale.GetText("Absolute path information is required.");

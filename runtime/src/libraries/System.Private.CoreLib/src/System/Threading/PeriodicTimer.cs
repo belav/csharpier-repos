@@ -8,11 +8,15 @@ using System.Threading.Tasks.Sources;
 
 namespace System.Threading
 {
-    /// <summary>Provides a periodic timer that enables waiting asynchronously for timer ticks.</summary>
+    /// <summary>Provides a periodic timer that enables waiting asynchronously for timer
+    // ticks.</summary>
     /// <remarks>
-    /// This timer is intended to be used only by a single consumer at a time: only one call to <see cref="WaitForNextTickAsync" />
-    /// may be in flight at any given moment.  <see cref="Dispose"/> may be used concurrently with an active <see cref="WaitForNextTickAsync"/>
-    /// to interrupt it and cause it to return false. Similarly, <see cref="Period"/> may be used concurrently with a consumer accessing
+    /// This timer is intended to be used only by a single consumer at a time: only one call to <see
+    // cref="WaitForNextTickAsync" />
+    /// may be in flight at any given moment.  <see cref="Dispose"/> may be used concurrently with an
+    // active <see cref="WaitForNextTickAsync"/>
+    /// to interrupt it and cause it to return false. Similarly, <see cref="Period"/> may be used
+    // concurrently with a consumer accessing
     /// <see cref="WaitForNextTickAsync"/> in order to change the timer's period.
     /// </remarks>
     public sealed class PeriodicTimer : IDisposable
@@ -20,7 +24,8 @@ namespace System.Threading
         /// <summary>The underlying timer.</summary>
         private readonly ITimer _timer;
 
-        /// <summary>All state other than the _timer, so that the rooted timer's callback doesn't indirectly root itself by referring to _timer.</summary>
+        /// <summary>All state other than the _timer, so that the rooted timer's callback doesn't indirectly
+        // root itself by referring to _timer.</summary>
         private readonly State _state;
 
         /// <summary>The timer's current period.</summary>
@@ -28,7 +33,9 @@ namespace System.Threading
 
         /// <summary>Initializes the timer.</summary>
         /// <param name="period">The period between ticks</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="period"/> must be <see cref="Timeout.InfiniteTimeSpan"/> or represent a number of milliseconds equal to or larger than 1 and smaller than <see cref="uint.MaxValue"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="period"/> must be <see
+        // cref="Timeout.InfiniteTimeSpan"/> or represent a number of milliseconds equal to or larger than 1
+        // and smaller than <see cref="uint.MaxValue"/>.</exception>
         public PeriodicTimer(TimeSpan period)
         {
             if (!TryGetMilliseconds(period, out uint ms))
@@ -51,8 +58,11 @@ namespace System.Threading
 
         /// <summary>Initializes the timer.</summary>
         /// <param name="period">The period between ticks</param>
-        /// <param name="timeProvider">The <see cref="TimeProvider"/> used to interpret <paramref name="period"/>.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="period"/> must be <see cref="Timeout.InfiniteTimeSpan"/> or represent a number of milliseconds equal to or larger than 1 and smaller than <see cref="uint.MaxValue"/>.</exception>
+        /// <param name="timeProvider">The <see cref="TimeProvider"/> used to interpret <paramref
+        // name="period"/>.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="period"/> must be <see
+        // cref="Timeout.InfiniteTimeSpan"/> or represent a number of milliseconds equal to or larger than 1
+        // and smaller than <see cref="uint.MaxValue"/>.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="timeProvider"/> is null</exception>
         public PeriodicTimer(TimeSpan period, TimeProvider timeProvider)
         {
@@ -86,10 +96,14 @@ namespace System.Threading
         }
 
         /// <summary>Gets or sets the period between ticks.</summary>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> must be <see cref="Timeout.InfiniteTimeSpan"/> or represent a number of milliseconds equal to or larger than 1 and smaller than <see cref="uint.MaxValue"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> must be <see
+        // cref="Timeout.InfiniteTimeSpan"/> or represent a number of milliseconds equal to or larger than 1
+        // and smaller than <see cref="uint.MaxValue"/>.</exception>
         /// <remarks>
-        /// All prior ticks of the timer, including any that may be waiting to be consumed by <see cref="WaitForNextTickAsync"/>,
-        /// are unaffected by changes to <see cref="Period"/>. Setting <see cref="Period"/> affects only and all subsequent times
+        /// All prior ticks of the timer, including any that may be waiting to be consumed by <see
+        // cref="WaitForNextTickAsync"/>,
+        /// are unaffected by changes to <see cref="Period"/>. Setting <see cref="Period"/> affects only and
+        // all subsequent times
         /// at which the timer will tick.
         /// </remarks>
         public TimeSpan Period
@@ -130,14 +144,19 @@ namespace System.Threading
 
         /// <summary>Wait for the next tick of the timer, or for the timer to be stopped.</summary>
         /// <param name="cancellationToken">
-        /// A <see cref="CancellationToken"/> to use to cancel the asynchronous wait. If cancellation is requested, it affects only the single wait operation;
+        /// A <see cref="CancellationToken"/> to use to cancel the asynchronous wait. If cancellation is
+        // requested, it affects only the single wait operation;
         /// the underlying timer continues firing.
         /// </param>
-        /// <returns>A task that will be completed due to the timer firing, <see cref="Dispose"/> being called to stop the timer, or cancellation being requested.</returns>
+        /// <returns>A task that will be completed due to the timer firing, <see cref="Dispose"/> being
+        // called to stop the timer, or cancellation being requested.</returns>
         /// <remarks>
-        /// The <see cref="PeriodicTimer"/> behaves like an auto-reset event, in that multiple ticks are coalesced into a single tick if they occur between
-        /// calls to <see cref="WaitForNextTickAsync"/>.  Similarly, a call to <see cref="Dispose"/> will void any tick not yet consumed. <see cref="WaitForNextTickAsync"/>
-        /// may only be used by one consumer at a time, and may be used concurrently with a single call to <see cref="Dispose"/>.
+        /// The <see cref="PeriodicTimer"/> behaves like an auto-reset event, in that multiple ticks are
+        // coalesced into a single tick if they occur between
+        /// calls to <see cref="WaitForNextTickAsync"/>.  Similarly, a call to <see cref="Dispose"/> will
+        // void any tick not yet consumed. <see cref="WaitForNextTickAsync"/>
+        /// may only be used by one consumer at a time, and may be used concurrently with a single call to
+        // <see cref="Dispose"/>.
         /// </remarks>
         public ValueTask<bool> WaitForNextTickAsync(
             CancellationToken cancellationToken = default
@@ -145,7 +164,8 @@ namespace System.Threading
 
         /// <summary>Stops the timer and releases associated managed resources.</summary>
         /// <remarks>
-        /// <see cref="Dispose"/> will cause an active wait with <see cref="WaitForNextTickAsync"/> to complete with a value of false.
+        /// <see cref="Dispose"/> will cause an active wait with <see cref="WaitForNextTickAsync"/> to
+        // complete with a value of false.
         /// All subsequent <see cref="WaitForNextTickAsync"/> invocations will produce a value of false.
         /// </remarks>
         public void Dispose()
@@ -155,7 +175,8 @@ namespace System.Threading
             _state.Signal(stopping: true);
         }
 
-        /// <summary>Ensures that resources are freed and other cleanup operations are performed when the garbage collector reclaims the <see cref="PeriodicTimer" /> object.</summary>
+        /// <summary>Ensures that resources are freed and other cleanup operations are performed when the
+        // garbage collector reclaims the <see cref="PeriodicTimer" /> object.</summary>
         ~PeriodicTimer() => Dispose();
 
         /// <summary>Core implementation for the periodic timer.</summary>
@@ -163,22 +184,31 @@ namespace System.Threading
         {
             /// <summary>The associated <see cref="PeriodicTimer"/>.</summary>
             /// <remarks>
-            /// This should refer to the parent instance only when there's an active waiter, and be null when there
-            /// isn't. The TimerQueueTimer in the PeriodicTimer strongly roots itself, and it references this State
+            /// This should refer to the parent instance only when there's an active waiter, and be null when
+            // there
+            /// isn't. The TimerQueueTimer in the PeriodicTimer strongly roots itself, and it references this
+            // State
             /// object:
             ///     PeriodicTimer (finalizable) --ref--> TimerQueueTimer (rooted) --ref--> State --ref--> null
-            /// If this State object then references the PeriodicTimer, it creates a strongly-rooted cycle that prevents anything from
+            /// If this State object then references the PeriodicTimer, it creates a strongly-rooted cycle that
+            // prevents anything from
             /// being GC'd:
             ///     PeriodicTimer (finalizable) --ref--> TimerQueueTimer (rooted) --ref--> State --v
             ///           ^--ref-------------------------------------------------------------------|
-            /// When this field is null, the cycle is broken, and dropping all references to the PeriodicTimer allows the
-            /// PeriodicTimer to be finalized and unroot the TimerQueueTimer. Thus, we keep this field set during<see cref="WaitForNextTickAsync"/>
-            /// so that the timer roots any async continuation chain awaiting it, and then keep it unset otherwise so that everything
+            /// When this field is null, the cycle is broken, and dropping all references to the PeriodicTimer
+            // allows the
+            /// PeriodicTimer to be finalized and unroot the TimerQueueTimer. Thus, we keep this field set
+            // during<see cref="WaitForNextTickAsync"/>
+            /// so that the timer roots any async continuation chain awaiting it, and then keep it unset
+            // otherwise so that everything
             /// can be GC'd appropriately.
             ///
-            /// Note that if the period is set to infinite, even when there's an active waiter the PeriodicTimer won't
-            /// be rooted because TimerQueueTimer won't be rooted via the static linked list.  That's fine, as the timer
-            /// will never tick in such a case, and for the timer's period to be changed, the user's code would need
+            /// Note that if the period is set to infinite, even when there's an active waiter the PeriodicTimer
+            // won't
+            /// be rooted because TimerQueueTimer won't be rooted via the static linked list.  That's fine, as
+            // the timer
+            /// will never tick in such a case, and for the timer's period to be changed, the user's code would
+            // need
             /// some other reference to PeriodicTimer keeping it alive, anyway.
             /// </remarks>
             private PeriodicTimer? _owner;
@@ -186,13 +216,15 @@ namespace System.Threading
             /// <summary>Core of the <see cref="IValueTaskSource{TResult}"/> implementation.</summary>
             private ManualResetValueTaskSourceCore<bool> _mrvtsc;
 
-            /// <summary>Cancellation registration for any active <see cref="WaitForNextTickAsync"/> call.</summary>
+            /// <summary>Cancellation registration for any active <see cref="WaitForNextTickAsync"/>
+            // call.</summary>
             private CancellationTokenRegistration _ctr;
 
             /// <summary>Whether the timer has been stopped.</summary>
             private bool _stopped;
 
-            /// <summary>Whether there's a pending notification to be received.  This could be due to the timer firing, the timer being stopped, or cancellation being requested.</summary>
+            /// <summary>Whether there's a pending notification to be received.  This could be due to the timer
+            // firing, the timer being stopped, or cancellation being requested.</summary>
             private bool _signaled;
 
             /// <summary>Whether there's a <see cref="WaitForNextTickAsync"/> call in flight.</summary>
@@ -208,7 +240,8 @@ namespace System.Threading
                 {
                     if (_activeWait)
                     {
-                        // WaitForNextTickAsync should only be used by one consumer at a time.  Failing to do so is an error.
+                        // WaitForNextTickAsync should only be used by one consumer at a time.  Failing to do so is an
+                        // error.
                         ThrowHelper.ThrowInvalidOperationException();
                     }
 
@@ -267,10 +300,14 @@ namespace System.Threading
                 {
                     if (cancellationToken.IsCancellationRequested)
                     {
-                        // If cancellation is requested just before the UnsafeRegister call, it's possible this will end up being invoked
-                        // as part of the WaitForNextTickAsync call and thus as part of holding the lock.  The goal of completeTask
-                        // was to escape that lock, so that we don't invoke any synchronous continuations from the ValueTask as part
-                        // of completing _mrvtsc.  However, in that case, we also haven't returned the ValueTask to the caller, so there
+                        // If cancellation is requested just before the UnsafeRegister call, it's possible this will end up
+                        // being invoked
+                        // as part of the WaitForNextTickAsync call and thus as part of holding the lock.  The goal of
+                        // completeTask
+                        // was to escape that lock, so that we don't invoke any synchronous continuations from the ValueTask
+                        // as part
+                        // of completing _mrvtsc.  However, in that case, we also haven't returned the ValueTask to the
+                        // caller, so there
                         // won't be any continuations yet, which makes this safe.
                         _mrvtsc.SetException(
                             ExceptionDispatchInfo.SetCurrentStackTrace(
@@ -294,9 +331,11 @@ namespace System.Threading
                 // in turn try to take the lock.  For valid usage, GetResult is only called once _ctr has been
                 // successfully initialized before WaitForNextTickAsync returns to its synchronous caller, and
                 // there should be no race conditions accessing it, as concurrent consumption is invalid. If there
-                // is invalid usage, with GetResult used erroneously/concurrently, the worst that happens is cancellation
+                // is invalid usage, with GetResult used erroneously/concurrently, the worst that happens is
+                // cancellation
                 // may not take effect for the in-flight operation, with its registration erroneously disposed.
-                // Note we use Dispose rather than Unregister (which wouldn't risk deadlock) so that we know that thecancellation callback associated with this operation
+                // Note we use Dispose rather than Unregister (which wouldn't risk deadlock) so that we know that
+                // thecancellation callback associated with this operation
                 // won't potentially still fire after we've completed this GetResult and a new operation
                 // has potentially started.
                 _ctr.Dispose();

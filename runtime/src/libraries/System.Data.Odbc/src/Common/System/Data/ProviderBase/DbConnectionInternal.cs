@@ -123,7 +123,8 @@ namespace System.Data.ProviderBase
                     {
                         ReleaseAdditionalLocksForClose(lockToken);
                         // if a ThreadAbort puts us here then its possible the outer connection will not reference
-                        // this and this will be orphaned, not reclaimed by object pool until outer connection goes out of scope.
+                        // this and this will be orphaned, not reclaimed by object pool until outer connection goes out of
+                        // scope.
                         connectionFactory.SetInnerConnectionEvent(
                             owningObject,
                             DbConnectionClosedPreviouslyOpened.SingletonInstance

@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.FileProviders
     /// Looks up files using the on-disk file system
     /// </summary>
     /// <remarks>
-    /// When the environment variable "DOTNET_USE_POLLING_FILE_WATCHER" is set to "1" or "true", calls to
+    /// When the environment variable "DOTNET_USE_POLLING_FILE_WATCHER" is set to "1" or "true", calls
+    // to
     /// <see cref="Watch(string)" /> will use <see cref="PollingFileChangeToken" />.
     /// </remarks>
     public class PhysicalFileProvider : IFileProvider, IDisposable
@@ -75,14 +76,17 @@ namespace Microsoft.Extensions.FileProviders
         /// Gets or sets a value that determines if this instance of <see cref="PhysicalFileProvider"/>
         /// uses polling to determine file changes.
         /// <para>
-        /// By default, <see cref="PhysicalFileProvider"/>  uses <see cref="FileSystemWatcher"/> to listen to file change events
-        /// for <see cref="Watch(string)"/>. <see cref="FileSystemWatcher"/> is ineffective in some scenarios such as mounted drives.
+        /// By default, <see cref="PhysicalFileProvider"/>  uses <see cref="FileSystemWatcher"/> to listen
+        // to file change events
+        /// for <see cref="Watch(string)"/>. <see cref="FileSystemWatcher"/> is ineffective in some
+        // scenarios such as mounted drives.
         /// Polling is required to effectively watch for file changes.
         /// </para>
         /// <seealso cref="UseActivePolling"/>.
         /// </summary>
         /// <value>
-        /// The default value of this property is determined by the value of environment variable named <c>DOTNET_USE_POLLING_FILE_WATCHER</c>.
+        /// The default value of this property is determined by the value of environment variable named
+        // <c>DOTNET_USE_POLLING_FILE_WATCHER</c>.
         /// When <c>true</c> or <c>1</c>, this property defaults to <c>true</c>; otherwise false.
         /// </value>
         public bool UsePollingFileWatcher
@@ -118,15 +122,18 @@ namespace Microsoft.Extensions.FileProviders
         /// Gets or sets a value that determines if this instance of <see cref="PhysicalFileProvider"/>
         /// actively polls for file changes.
         /// <para>
-        /// When <see langword="true"/>, <see cref="IChangeToken"/> returned by <see cref="Watch(string)"/> will actively poll for file changes
-        /// (<see cref="IChangeToken.ActiveChangeCallbacks"/> will be <see langword="true"/>) instead of being passive.
+        /// When <see langword="true"/>, <see cref="IChangeToken"/> returned by <see cref="Watch(string)"/>
+        // will actively poll for file changes
+        /// (<see cref="IChangeToken.ActiveChangeCallbacks"/> will be <see langword="true"/>) instead of
+        // being passive.
         /// </para>
         /// <para>
         /// This property is only effective when <see cref="UsePollingFileWatcher"/> is set.
         /// </para>
         /// </summary>
         /// <value>
-        /// The default value of this property is determined by the value of environment variable named <c>DOTNET_USE_POLLING_FILE_WATCHER</c>.
+        /// The default value of this property is determined by the value of environment variable named
+        // <c>DOTNET_USE_POLLING_FILE_WATCHER</c>.
         /// When <c>true</c> or <c>1</c>, this property defaults to <c>true</c>; otherwise false.
         /// </value>
         public bool UseActivePolling
@@ -169,7 +176,8 @@ namespace Microsoft.Extensions.FileProviders
 
             FileSystemWatcher? watcher;
 #if NETCOREAPP
-            //  For browser/iOS/tvOS we will proactively fallback to polling since FileSystemWatcher is not supported.
+            //  For browser/iOS/tvOS we will proactively fallback to polling since FileSystemWatcher is not
+            // supported.
             if (
                 OperatingSystem.IsBrowser()
                 || (OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst())
@@ -271,7 +279,8 @@ namespace Microsoft.Extensions.FileProviders
         /// Locate a file at the given path by directly mapping path segments to physical directories.
         /// </summary>
         /// <param name="subpath">A path under the root directory</param>
-        /// <returns>The file information. Caller must check <see cref="IFileInfo.Exists"/> property. </returns>
+        /// <returns>The file information. Caller must check <see cref="IFileInfo.Exists"/> property.
+        // </returns>
         public IFileInfo GetFileInfo(string subpath)
         {
             if (string.IsNullOrEmpty(subpath) || PathUtils.HasInvalidPathChars(subpath))
@@ -308,8 +317,10 @@ namespace Microsoft.Extensions.FileProviders
         /// </summary>
         /// <param name="subpath">A path under the root directory. Leading slashes are ignored.</param>
         /// <returns>
-        /// Contents of the directory. Caller must check <see cref="IDirectoryContents.Exists"/> property. <see cref="NotFoundDirectoryContents" /> if
-        /// <paramref name="subpath" /> is absolute, if the directory does not exist, or <paramref name="subpath" /> has invalid
+        /// Contents of the directory. Caller must check <see cref="IDirectoryContents.Exists"/> property.
+        // <see cref="NotFoundDirectoryContents" /> if
+        /// <paramref name="subpath" /> is absolute, if the directory does not exist, or <paramref
+        // name="subpath" /> has invalid
         /// characters.
         /// </returns>
         public IDirectoryContents GetDirectoryContents(string subpath)
@@ -344,17 +355,22 @@ namespace Microsoft.Extensions.FileProviders
         }
 
         /// <summary>
-        ///     <para>Creates a <see cref="IChangeToken" /> for the specified <paramref name="filter" />.</para>
-        ///     <para>Globbing patterns are interpreted by <seealso cref="Microsoft.Extensions.FileSystemGlobbing.Matcher" />.</para>
+        ///     <para>Creates a <see cref="IChangeToken" /> for the specified <paramref name="filter"
+        // />.</para>
+        ///     <para>Globbing patterns are interpreted by <seealso
+        // cref="Microsoft.Extensions.FileSystemGlobbing.Matcher" />.</para>
         /// </summary>
         /// <param name="filter">
         /// Filter string used to determine what files or folders to monitor. Example: **/*.cs, *.*,
         /// subFolder/**/*.cshtml.
         /// </param>
         /// <returns>
-        /// An <see cref="IChangeToken" /> that is notified when a file matching <paramref name="filter" /> is added,
-        /// modified or deleted. Returns a <see cref="NullChangeToken" /> if <paramref name="filter" /> has invalid filter
-        /// characters or if <paramref name="filter" /> is an absolute path or outside the root directory specified in the
+        /// An <see cref="IChangeToken" /> that is notified when a file matching <paramref name="filter" />
+        // is added,
+        /// modified or deleted. Returns a <see cref="NullChangeToken" /> if <paramref name="filter" /> has
+        // invalid filter
+        /// characters or if <paramref name="filter" /> is an absolute path or outside the root directory
+        // specified in the
         /// constructor <seealso cref="PhysicalFileProvider(string)" />.
         /// </returns>
         public IChangeToken Watch(string filter)

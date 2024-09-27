@@ -2,15 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //
-// This tool exists to transform a high level description of Crst dependencies (i.e. which Crst type may be
-// acquired before or after other Crst types) into a header file that defines a enum to describe each Crst
+// This tool exists to transform a high level description of Crst dependencies (i.e. which Crst type
+// may be
+// acquired before or after other Crst types) into a header file that defines a enum to describe
+// each Crst
 // type and tables that map type to numerical ranking and a string based name.
 //
 // To use the tool, run "csc.exe CrstTypeTool.cs" and run the resulting executable.
 //
-// The Crst type definition file is written in a very simple language. Comments begin with '//' and continue
-// to the end of the line. All remaining tokens after comment removal are simply sequences of non-whitespace
-// characters separated by whitespace. Keywords are case-insensitive and identifiers (which are always Crst
+// The Crst type definition file is written in a very simple language. Comments begin with '//' and
+// continue
+// to the end of the line. All remaining tokens after comment removal are simply sequences of
+// non-whitespace
+// characters separated by whitespace. Keywords are case-insensitive and identifiers (which are
+// always Crst
 // type names) are case sensitive. The language grammar is given below in EBNF-like form:
 //
 //      TopLevel        ::= CrstDefinition*
@@ -22,25 +27,36 @@
 //                      |   'SameLevelAs' <Crst type name>*
 //                      |   'Unordered'
 //
-// Crst type names match the CrstType enums used in the source code minus the 'Crst' prefix. For example
+// Crst type names match the CrstType enums used in the source code minus the 'Crst' prefix. For
+// example
 // CrstAppDomainCache is written as 'AppDomainCache' in the .def file.
 //
-// The dependency "A 'AcquiredBefore' B" indicates that CrstA may be legally held while CrstB is acquired.
-// Similarly "A 'AcquiredAfter' B" indicates that CrstA may be legally acquired while CrstB is held. "A
-// 'AcquiredBefore' B" is logically equivalent to "B 'AcquiredAfter' A" and authors may enter the dependency
+// The dependency "A 'AcquiredBefore' B" indicates that CrstA may be legally held while CrstB is
+// acquired.
+// Similarly "A 'AcquiredAfter' B" indicates that CrstA may be legally acquired while CrstB is held.
+// "A
+// 'AcquiredBefore' B" is logically equivalent to "B 'AcquiredAfter' A" and authors may enter the
+// dependency
 // is whichever seems to make the most sense to them (or add both rules if they so desire).
 //
-// 'Unordered' indicates that the Crst type does not participate in ranking (there should be very few Crsts
+// 'Unordered' indicates that the Crst type does not participate in ranking (there should be very
+// few Crsts
 // like this and those that are know how to avoid or deal with deadlocks manually).
 //
-// 'SameLevelAs' indicates the given Crst type may be acquired alongside any number of instances of the Crst
-// types indicated. "A 'SameLevel' B" automatically implies "B 'SameLevel' A" so it's not necessary to specify
+// 'SameLevelAs' indicates the given Crst type may be acquired alongside any number of instances of
+// the Crst
+// types indicated. "A 'SameLevel' B" automatically implies "B 'SameLevel' A" so it's not necessary
+// to specify
 // the dependency both ways though authors can do so if they wish.
 //
-// Simple validation of the .def file (over and above syntax checking) is performed by this tool prior to
-// emitting the header file. This will catch logic errors such as referencing a Crst type that is not
-// defined or using the 'Unordered' attribute along with any other attribute within a single definition. It
-// will also catch cycles in the dependency graph (i.e. definitions that logically describe a system where the
+// Simple validation of the .def file (over and above syntax checking) is performed by this tool
+// prior to
+// emitting the header file. This will catch logic errors such as referencing a Crst type that is
+// not
+// defined or using the 'Unordered' attribute along with any other attribute within a single
+// definition. It
+// will also catch cycles in the dependency graph (i.e. definitions that logically describe a system
+// where the
 // Crst types can't be ranked).
 //
 
@@ -53,7 +69,8 @@ using System.Text.RegularExpressions;
 // The main application class containing the program entry point.
 class CrstTypeTool
 {
-    // A hash containing every Crst type defined by the input .def file along with its attributes. Keyed by
+    // A hash containing every Crst type defined by the input .def file along with its attributes. Keyed
+    // by
     // Crst type name (which is case sensitive and doesn't include the 'Crst' enum prefix).
     Dictionary<string, CrstType> m_crsts = new Dictionary<string, CrstType>();
 
@@ -66,7 +83,8 @@ class CrstTypeTool
             string inputFile = "CrstTypes.def";
             string outputFile = "crsttypes_generated.h";
 
-            // A common error is to forget to check out the crsttypes_generated.h file first. Handle this case specially
+            // A common error is to forget to check out the crsttypes_generated.h file first. Handle this case
+            // specially
             // so we can give a good error message.
             if (
                 File.Exists(outputFile)
@@ -129,7 +147,8 @@ class CrstTypeTool
         );
         StreamWriter writer = new StreamWriter(stream);
 
-        // Create a collection based on all the Crst types we've stored in the hash. We do this so we can sort
+        // Create a collection based on all the Crst types we've stored in the hash. We do this so we can
+        // sort
         // the Crst types we emit (lexically, based on type name).
         Dictionary<string, CrstType>.ValueCollection crstCollection = m_crsts.Values;
         CrstType[] crsts = new CrstType[crstCollection.Count];
@@ -213,7 +232,8 @@ class CrstTypeTool
         writer.WriteLine("#define CRSTUNORDERED (-1)");
         writer.WriteLine();
 
-        // Emit a couple of inline helpers to map type to rank or name (and validate the type while they're at
+        // Emit a couple of inline helpers to map type to rank or name (and validate the type while they're
+        // at
         // it).
         writer.WriteLine("// Define inline helpers to map Crst types to names and levels.");
         writer.WriteLine("inline static int GetCrstLevel(CrstType crstType)");
@@ -237,8 +257,10 @@ class CrstTypeTool
         stream.Close();
     }
 
-    // Perform checking of the Crst type definitions we've read just read. Various forms of logic error are
-    // scanned for including cycles in the dependency graph. Returns true if no errors are found. If false is
+    // Perform checking of the Crst type definitions we've read just read. Various forms of logic error
+    // are
+    // scanned for including cycles in the dependency graph. Returns true if no errors are found. If
+    // false is
     // returned a descriptive error message will have already been written to the console.
     bool ValidateCrsts()
     {
@@ -321,8 +343,10 @@ class CrstTypeTool
         CrstTypeGroup.NormalizeAllRules();
 
         // The normalization process could have introduced cycles in the dependency graph so run the cycle
-        // detection pass again. We do separate passes like this since normalizing can lead to less intuitive
-        // error messages if a cycle is found: so if the cycle exists before normalization takes place we want
+        // detection pass again. We do separate passes like this since normalizing can lead to less
+        // intuitive
+        // error messages if a cycle is found: so if the cycle exists before normalization takes place we
+        // want
         // to generate an error message then.
         foreach (CrstType crst in m_crsts.Values)
         {
@@ -347,13 +371,17 @@ class CrstTypeTool
         return true;
     }
 
-    // Recursively determine if a cycle exists in the Crst type dependency graph rooted at the 'rootCrst'
+    // Recursively determine if a cycle exists in the Crst type dependency graph rooted at the
+    // 'rootCrst'
     // type. The 'currCrst' indicates the next dependency to be examined (it will be the same as the
     // 'rootCrst' when we're first called). The 'cycleList' argument contains a list of Crst types we've
-    // already examined in this branch of the algorithm and serves both to avoid checking the same node twice
+    // already examined in this branch of the algorithm and serves both to avoid checking the same node
+    // twice
     // and to provide a list of the involved Crst types should a cycle be detected.
-    // Note that this algorithm is not designed to detect general cycles in the graph, only those that involve
-    // the 'rootCrst' directly. This is somewhat inefficient but gives us a simple way to generate clear error
+    // Note that this algorithm is not designed to detect general cycles in the graph, only those that
+    // involve
+    // the 'rootCrst' directly. This is somewhat inefficient but gives us a simple way to generate clear
+    // error
     // messages.
     bool FindCycle(CrstType rootCrst, CrstType currCrst, List<CrstType> cycleList)
     {
@@ -375,27 +403,34 @@ class CrstTypeTool
                     return true;
         }
 
-        // Didn't find any cycles involving the root and this node; remove this node from the potential cycle
+        // Didn't find any cycles involving the root and this node; remove this node from the potential
+        // cycle
         // list and return up to our caller indicating such.
         cycleList.RemoveAt(cycleList.Count - 1);
 
         return false;
     }
 
-    // Topologically sort all the Crsts so we can assign a total ordering to them (in the form of a numeric
-    // ranking). Ranks start from 0 (Crst types that may be acquired at any time) and increment from there
+    // Topologically sort all the Crsts so we can assign a total ordering to them (in the form of a
+    // numeric
+    // ranking). Ranks start from 0 (Crst types that may be acquired at any time) and increment from
+    // there
     // (Crst types that may only be acquired if a lower type is not already held).
-    // **** NOTE: The leveling process is destructive in that we will lose all dependency information from the
+    // **** NOTE: The leveling process is destructive in that we will lose all dependency information
+    // from the
     // Crst type definitions during the course of the algorithm.
     void LevelCrsts()
     {
         // Note that Crst type dependency rules have been normalized (by the input parser) so that all
-        // AcquiredBefore/AcquiredAfter relationships have been reduced to AcquiredBefore relationships (i.e.
+        // AcquiredBefore/AcquiredAfter relationships have been reduced to AcquiredBefore relationships
+        // (i.e.
         // any rule of the form "A AcquiredAfter B" has been converted to "B AcquiredBefore A". Any
         // normalization makes the algorithm easier to program, but a normaliztion to AcquiredBefore
-        // relationships was chosen since it makes it particularly easy to implement an algorithm that assigns
+        // relationships was chosen since it makes it particularly easy to implement an algorithm that
+        // assigns
         // ranks beginning with zero and moving up to an arbitrary level. Any type that doesn't have any
-        // AcquiredBefore dependencies can always be ranked at a lower level than any remaining unranked types
+        // AcquiredBefore dependencies can always be ranked at a lower level than any remaining unranked
+        // types
         // by definition and from this we can derive a simple iterative process to rank all the crst types.
 
         // Calculate how many Crst types we have left to rank (some are not included in this step because
@@ -515,7 +550,8 @@ class CrstTypeTool
         }
     }
 
-    // Predicate method used with List<T>.FindAll() to locate Crst types that haven't had their rank assigned
+    // Predicate method used with List<T>.FindAll() to locate Crst types that haven't had their rank
+    // assigned
     // yet.
     static bool Unleveled(CrstType crst)
     {
@@ -523,8 +559,10 @@ class CrstTypeTool
     }
 }
 
-// Class used to parse a CrstTypes.def file into a dictionary of Crst type definitions. It uses a simple lexer
-// that removes comments then forms tokens out of any consecutive non-whitespace characters. An equally simple
+// Class used to parse a CrstTypes.def file into a dictionary of Crst type definitions. It uses a
+// simple lexer
+// that removes comments then forms tokens out of any consecutive non-whitespace characters. An
+// equally simple
 // recursive descent parser forms Crst instances by parsing the token stream.
 class TypeFileParser
 {
@@ -540,7 +578,8 @@ class TypeFileParser
     Token[] m_tokens;
     int m_currToken;
 
-    // Parse the given file into Crst type definitions and place these definitions in the dictionary provided.
+    // Parse the given file into Crst type definitions and place these definitions in the dictionary
+    // provided.
     // Syntax errors are signalled via ParseError derived exceptions.
     public void ParseFile(string typeFileName, Dictionary<string, CrstType> crsts)
     {
@@ -745,7 +784,8 @@ class TypeFileParser
         m_currToken--;
     }
 
-    // The various keywords we can encounter (plus Id for identifiers, which are currently always Crst type
+    // The various keywords we can encounter (plus Id for identifiers, which are currently always Crst
+    // type
     // names).
     internal enum KeywordId
     {
@@ -840,7 +880,8 @@ class TypeFileParser
         }
     }
 
-    // Syntax error used when an unexpected token is encountered which further lists the valid tokens that
+    // Syntax error used when an unexpected token is encountered which further lists the valid tokens
+    // that
     // would otherwise have been accepted.
     internal class UnexpectedTokenError : ParseError
     {
@@ -879,11 +920,13 @@ class TypeFileParser
     }
 }
 
-// This class represents an instance of a Crst type. These are unqiuely identified by case-sensitive name (the
+// This class represents an instance of a Crst type. These are unqiuely identified by case-sensitive
+// name (the
 // same as the enum name used in vm code, minus the 'Crst' prefix).
 class CrstType : IComparable
 {
-    // Special level constants used to indicate unordered Crst types or those types we haven't gotten around
+    // Special level constants used to indicate unordered Crst types or those types we haven't gotten
+    // around
     // to ranking yet.
     public static readonly int CrstUnordered = -1;
     public static readonly int CrstUnassigned = -2;
@@ -895,16 +938,19 @@ class CrstType : IComparable
     // CrstUnordered (while parsing the input file) or a number >= 0 (during LevelCrsts()).
     int m_level;
 
-    // List of Crst types that can be legally acquired while this one is held. (AcquiredAfter relationships
+    // List of Crst types that can be legally acquired while this one is held. (AcquiredAfter
+    // relationships
     // are by switching the terms and adding to the second type's AcquiredBefore list).
     List<CrstType> m_acquiredBeforeCrsts;
 
     // Either null if this Crst type is not in (or has not yet been determined to be in) a SameLevelAs
-    // relationship or points to a CrstTypeGroup that records all the sibling types at the same level (that
+    // relationship or points to a CrstTypeGroup that records all the sibling types at the same level
+    // (that
     // have been discovered thus far during parsing).
     CrstTypeGroup m_group;
 
-    // Set once a definition for this type has been discovered. Used to detect double definitions and types
+    // Set once a definition for this type has been discovered. Used to detect double definitions and
+    // types
     // referenced without definitions.
     bool m_defined;
 
@@ -949,16 +995,26 @@ class CrstType : IComparable
     }
 }
 
-// Every time a SameLevelAs relationship is used we need to be careful to keep track of the transitive closure
-// of all types bound in the relationship. That's because such a relationship impacts the other dependency
-// rules (each member of a SameLevelAs group must behave as though it has exactly the same dependency rules as
-// all the others). Identifying all the members is tricky because "A SameLevelAs B" and "B SameLevelAs C"
-// implies "A SameLevelAs C". So we use a separate tracking structure, instances of the CrstTypeGroup type, to
-// do the bookkeeping for us. Each Crst type belongs to either zero or one CrstTypeGroups. As we find new
-// SameLevelAs relationships we create new groups, add types to existing groups or merge groups (as previous
-// distinct groups are merged by the discovery of a SameLevelAs relationship that links them). By the time
-// parsing has finished we are guaranteed to have discovered all the distinct, disjoint groups and to have
-// fully populated them with the transitive closure of all related types. We can them normalize all groups
+// Every time a SameLevelAs relationship is used we need to be careful to keep track of the
+// transitive closure
+// of all types bound in the relationship. That's because such a relationship impacts the other
+// dependency
+// rules (each member of a SameLevelAs group must behave as though it has exactly the same
+// dependency rules as
+// all the others). Identifying all the members is tricky because "A SameLevelAs B" and "B
+// SameLevelAs C"
+// implies "A SameLevelAs C". So we use a separate tracking structure, instances of the
+// CrstTypeGroup type, to
+// do the bookkeeping for us. Each Crst type belongs to either zero or one CrstTypeGroups. As we
+// find new
+// SameLevelAs relationships we create new groups, add types to existing groups or merge groups (as
+// previous
+// distinct groups are merged by the discovery of a SameLevelAs relationship that links them). By
+// the time
+// parsing has finished we are guaranteed to have discovered all the distinct, disjoint groups and
+// to have
+// fully populated them with the transitive closure of all related types. We can them normalize all
+// groups
 // members so they share the same AcquiredBefore relationships.
 class CrstTypeGroup
 {
@@ -968,9 +1024,12 @@ class CrstTypeGroup
     // Crst types that are members of the current group. There are no duplicates in this list.
     List<CrstType> m_members = new List<CrstType>();
 
-    // Declare a SameLevelAs relationship between the two Crst types given. Groups will be assigned, created
-    // or merged as required to maintain our guarantees (each CrstType is a member of at most one group and
-    // all CrstTypes involved in the same transitive closure of a SameLevelAs relationship are members of one
+    // Declare a SameLevelAs relationship between the two Crst types given. Groups will be assigned,
+    // created
+    // or merged as required to maintain our guarantees (each CrstType is a member of at most one group
+    // and
+    // all CrstTypes involved in the same transitive closure of a SameLevelAs relationship are members
+    // of one
     // group).
     public static void Join(CrstType crst1, CrstType crst2)
     {
@@ -1038,15 +1097,18 @@ class CrstTypeGroup
         // this case.
     }
 
-    // Normalize all the groups we created during parsing. See below for the definition of normalization.
+    // Normalize all the groups we created during parsing. See below for the definition of
+    // normalization.
     public static void NormalizeAllRules()
     {
         foreach (CrstTypeGroup group in s_groups)
             group.NormalizeRules();
     }
 
-    // Normalize this group. This involves adjusting the AcquiredBefore list of each member to be the union of
-    // all such rules within the group. This step allows us to detect cycles in the dependency graph that
+    // Normalize this group. This involves adjusting the AcquiredBefore list of each member to be the
+    // union of
+    // all such rules within the group. This step allows us to detect cycles in the dependency graph
+    // that
     // would otherwise remain hidden if we only examined the unnormalized AcquiredBefore rules.
     void NormalizeRules()
     {
@@ -1063,7 +1125,8 @@ class CrstTypeGroup
         }
 
         // Reset each member's AcquiredBefore list to a copy of the union we calculated. Note it's important
-        // to make a (shallow) copy because the ranking process modifies this list and so a shared copy would
+        // to make a (shallow) copy because the ranking process modifies this list and so a shared copy
+        // would
         // cause unexpected results.
         foreach (CrstType crst in m_members)
             crst.AcquiredBeforeList = acquiredBeforeList.GetRange(0, acquiredBeforeList.Count);

@@ -75,12 +75,12 @@ namespace Mono.ILASM
                     {
                         ch = reader.Read();
 
-                        /*
-                         * Long string can be broken across multiple lines
-                         * by using '\' as the last char in line.
-                         * Any white space chars between '\' and the first
-                         * char on the next line are ignored.
-                         */
+/*
+* Long string can be broken across multiple lines
+* by using '\' as the last char in line.
+* Any white space chars between '\' and the first
+* char on the next line are ignored.
+*/
                         if (ch == '\n')
                         {
                             reader.SkipWhitespace();

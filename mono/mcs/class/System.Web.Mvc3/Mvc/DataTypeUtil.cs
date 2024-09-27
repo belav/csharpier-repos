@@ -32,7 +32,8 @@
             }
 
             // GetDataTypeName is virtual, so this is only safe if they haven't derived from DataTypeAttribute.
-            // However, if they derive from DataTypeAttribute, they can help their own perf by overriding GetDataTypeName
+            // However, if they derive from DataTypeAttribute, they can help their own perf by overriding
+            // GetDataTypeName
             // and returning an appropriate string without invoking the ToString() on the enum.
             if (isDataType(attribute))
             {

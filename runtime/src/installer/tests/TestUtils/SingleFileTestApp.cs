@@ -30,7 +30,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         }
 
         /// <summary>
-        /// Create a framework-dependent single-file test app from pre-built output of <paramref name="appName"/>.
+        /// Create a framework-dependent single-file test app from pre-built output of <paramref
+        // name="appName"/>.
         /// </summary>
         /// <param name="appName">Name of pre-built app</param>
         /// <returns>
@@ -41,7 +42,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             Create(appName, selfContained: false);
 
         /// <summary>
-        /// Create a self-contained single-file test app from pre-built output of <paramref name="appName"/>.
+        /// Create a self-contained single-file test app from pre-built output of <paramref
+        // name="appName"/>.
         /// </summary>
         /// <param name="appName">Name of pre-built app</param>
         /// <returns>

@@ -47,7 +47,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the Parameter class with the specified parameter name, db type, and default value.
+        /// Creates an instance of the Parameter class with the specified parameter name, db type, and
+        // default value.
         /// </devdoc>
         public Parameter(string name, DbType dbType, string defaultValue)
         {
@@ -66,7 +67,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the Parameter class with the specified parameter name, type, and default value.
+        /// Creates an instance of the Parameter class with the specified parameter name, type, and default
+        // value.
         /// </devdoc>
         public Parameter(string name, TypeCode type, string defaultValue)
         {
@@ -451,7 +453,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Gets/sets whether an empty string should be treated as a null value. If this property is set to true
+        /// Gets/sets whether an empty string should be treated as a null value. If this property is set to
+        // true
         /// and the value is an empty string, the default value will be used.
         /// </devdoc>
         [
@@ -621,7 +624,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Raises the ParameterChanged event. This notifies a listener that it should re-evaluate the value.
+        /// Raises the ParameterChanged event. This notifies a listener that it should re-evaluate the
+        // value.
         /// </devdoc>
         protected void OnParameterChanged()
         {
@@ -678,7 +682,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// Updates the value of parameter.
-        /// If the value changed, this will raise the ParametersChanged event of the ParameterCollection it belongs to.
+        /// If the value changed, this will raise the ParametersChanged event of the ParameterCollection it
+        // belongs to.
         /// The control parameter is used to access the page's framework.
         /// </devdoc>
         internal void UpdateValue(HttpContext context, Control control)
@@ -688,10 +693,14 @@ namespace System.Web.UI.WebControls
 
             ViewState["ParameterValue"] = newValue;
 
-            // If you have chains of dependency, like one control with a control parameter on another, and then a third with a control
-            // parameter on the second, the order in which the evaluations take place is non-deterministic and may create incorrect
-            // evaluation of parameters because all our evaluation happens during LoadComplete.  The correct solution is to call DataBind
-            // on the third control when the second control's selected value changes.  Hacky, but we don't support specifying dependency
+            // If you have chains of dependency, like one control with a control parameter on another, and then
+            // a third with a control
+            // parameter on the second, the order in which the evaluations take place is non-deterministic and
+            // may create incorrect
+            // evaluation of parameters because all our evaluation happens during LoadComplete.  The correct
+            // solution is to call DataBind
+            // on the third control when the second control's selected value changes.  Hacky, but we don't
+            // support specifying dependency
             // chains on data sources.
             if (
                 (newValue == null && oldValue != null)

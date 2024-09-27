@@ -77,7 +77,8 @@ namespace System.Xml.Xsl.XsltOld
 
         private static Hashtable s_table = CreatePropsTable();
 
-        //        static private HtmlElementProps  s_otherElements = Create(false, false, false, false, false, false, false);
+        //        static private HtmlElementProps  s_otherElements = Create(false, false, false, false,
+        // false, false, false);
 
         static public HtmlElementProps GetProps(string name)
         {

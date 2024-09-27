@@ -79,7 +79,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int initEvent(
-            /*DOMString*/HandleRef eventTypeArg,
+/*DOMString*/HandleRef eventTypeArg,
             bool canBubbleArg,
             bool cancelableArg
         );
@@ -98,7 +98,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int initUIEvent(
-            /*DOMString*/HandleRef typeArg,
+/*DOMString*/HandleRef typeArg,
             bool canBubbleArg,
             bool cancelableArg,
             [MarshalAs(UnmanagedType.Interface)] nsIDOMAbstractView viewArg,
@@ -151,7 +151,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int initMouseEvent(
-            /*DOMString*/HandleRef typeArg,
+/*DOMString*/HandleRef typeArg,
             bool canBubbleArg,
             bool cancelableArg,
             [MarshalAs(UnmanagedType.Interface)] nsIDOMAbstractView viewArg,

@@ -86,7 +86,8 @@ namespace System.ServiceModel.Activities
                 return false;
             }
 
-            // if the expression type of Message matches the declared message type, no need to serialize duplicative information
+            // if the expression type of Message matches the declared message type, no need to serialize
+            // duplicative information
             if (this.Message != null && this.DeclaredMessageType == this.Message.ArgumentType)
             {
                 return false;

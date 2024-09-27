@@ -25,7 +25,8 @@ namespace System.Linq.Parallel.Tests
         /// <param name="counts">The sizes of ranges to return.</param>
         /// <returns>Entries for test data.
         /// The first element is the Labeled{ParallelQuery{int}} range,
-        /// the second element is the count, and the third is the number of partitions or degrees of parallelism to use.</returns>
+        /// the second element is the count, and the third is the number of partitions or degrees of
+        // parallelism to use.</returns>
         public static IEnumerable<object[]> PartitioningData(int[] counts)
         {
             foreach (
@@ -41,7 +42,8 @@ namespace System.Linq.Parallel.Tests
 
         // For each source, run with each buffering option.
         /// <summary>
-        /// Get a set of ranges, and running for each count in `counts`, with each possible ParallelMergeOption
+        /// Get a set of ranges, and running for each count in `counts`, with each possible
+        // ParallelMergeOption
         /// </summary>
         /// <param name="counts">The sizes of ranges to return.</param>
         /// <returns>Entries for test data.
@@ -61,7 +63,8 @@ namespace System.Linq.Parallel.Tests
         }
 
         /// <summary>
-        ///For each count, return an Enumerable source that fails (throws an exception) on that count, with each buffering option.
+        ///For each count, return an Enumerable source that fails (throws an exception) on that count, with
+        // each buffering option.
         /// </summary>
         /// <param name="counts">The sizes of ranges to return.</param>
         /// <returns>Entries for test data.
@@ -222,7 +225,8 @@ namespace System.Linq.Parallel.Tests
             nameof(PlatformDetection.IsThreadingSupported)
         )]
         [MemberData(nameof(ThrowOnCount_AllMergeOptions_MemberData), new[] { 4, 8 })]
-        // FailingMergeData has enumerables that throw errors when attempting to perform the nth enumeration.
+        // FailingMergeData has enumerables that throw errors when attempting to perform the nth
+        // enumeration.
         // This test checks whether the query runs in a pipelined or buffered fashion.
         public static void Merge_Ordered_Pipelining(
             Labeled<ParallelQuery<int>> labeled,

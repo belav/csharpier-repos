@@ -373,7 +373,8 @@ namespace System.Activities.XamlIntegration
                                     this.activityReplacementXamlType.GetMember("Attributes"),
                                     this.innerReaderLineInfo
                                 );
-                                // x:ClassAttributes directive has no following GetObject, but Attributes does since it's not a directive
+                                // x:ClassAttributes directive has no following GetObject, but Attributes does since it's not a
+                                // directive
                                 WriteWrappedMember(false);
                                 processedNode = true;
                                 return true;
@@ -502,7 +503,8 @@ namespace System.Activities.XamlIntegration
             return false;
         }
 
-        // used for a number of cases when wrapping we need to add a GetObject/StartMember(_Items) since XAML directives intrinsically
+        // used for a number of cases when wrapping we need to add a GetObject/StartMember(_Items) since
+        // XAML directives intrinsically
         // take care of it
         void WriteWrappedMember(bool stripWhitespace)
         {
@@ -513,7 +515,8 @@ namespace System.Activities.XamlIntegration
             // 1) Read past the start member since we wrote it above
             subReader.Read();
 
-            // 2) copy over the rest of the subnodes, possibly discarding top-level whitespace from WhitespaceSignificantCollection
+            // 2) copy over the rest of the subnodes, possibly discarding top-level whitespace from
+            // WhitespaceSignificantCollection
             subReader.Read();
             while (!subReader.IsEof)
             {
@@ -542,8 +545,10 @@ namespace System.Activities.XamlIntegration
                 }
             }
 
-            // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node (EndMember)
-            // rather than inserting EndMember/EndObject before the last EndMember since all EndMembers are interchangable from a state perspective
+            // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node
+            // (EndMember)
+            // rather than inserting EndMember/EndObject before the last EndMember since all EndMembers are
+            // interchangable from a state perspective
             this.nodeQueue.Writer.WriteEndObject(this.innerReaderLineInfo);
             this.nodeQueue.Writer.WriteEndMember(this.innerReaderLineInfo);
 
@@ -608,7 +613,8 @@ namespace System.Activities.XamlIntegration
             }
 
             // GetXamlNamespaces is a superset of PreferredXamlNamespace, it's not a must for the above code
-            // to check for preferredXamlNamespace, but since the old code uses .Contains(), which was a minor bug,
+            // to check for preferredXamlNamespace, but since the old code uses .Contains(), which was a minor
+            // bug,
             // we decide to use StartsWith in new code and keep the old code for back compatible reason.
             IList<string> namespaces = xamlType.GetXamlNamespaces();
             foreach (string ns in namespaces)
@@ -711,8 +717,10 @@ namespace System.Activities.XamlIntegration
 
             // Whenever we encounter a StartMember, we buffer it (and any namespace nodes folllowing it)
             // until we see its contents (SO/GO/V).
-            // If the content is a PropertyReferenceExtension, then we convert it to an ActivityPropertyReference
-            // in the parent object's ActivityBuilder.PropertyReference collection, and dont' write out the member.
+            // If the content is a PropertyReferenceExtension, then we convert it to an
+            // ActivityPropertyReference
+            // in the parent object's ActivityBuilder.PropertyReference collection, and dont' write out the
+            // member.
             // If the content is not a PropertyReferenceExtension, or there's no content (i.e. we hit an EM),
             // we flush the buffered SM + NS*, and continue as normal.
             public void ProcessNode(
@@ -969,9 +977,12 @@ namespace System.Activities.XamlIntegration
             }
         }
 
-        // This class exists to "zip" together <x:Member> property definitions (to be rewritten as <DynamicActivityProperty> nodes)
-        // with their corresponding default values <MyClass.Foo> (to be rewritten as <DynamicActivityProperty.Value> nodes).
-        // Definitions come all at once, but values could come anywhere in the XAML document, so we save them all almost until the end of
+        // This class exists to "zip" together <x:Member> property definitions (to be rewritten as
+        // <DynamicActivityProperty> nodes)
+        // with their corresponding default values <MyClass.Foo> (to be rewritten as
+        // <DynamicActivityProperty.Value> nodes).
+        // Definitions come all at once, but values could come anywhere in the XAML document, so we save
+        // them all almost until the end of
         // the document and write them all out at once using BufferedPropertyList.CopyTo().
         class BufferedPropertyList
         {
@@ -1040,8 +1051,10 @@ namespace System.Activities.XamlIntegration
                     }
                 }
 
-                // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node (EndMember)
-                // rather than inserting EndMember/EndObject before the last EndMember since all EndMembers are interchangable from a state perspective
+                // close the GetObject added above. Note that we are doing EndObject/EndMember after the last node
+                // (EndMember)
+                // rather than inserting EndMember/EndObject before the last EndMember since all EndMembers are
+                // interchangable from a state perspective
                 this.outerNodes.Writer.WriteEndObject(readerLineInfo);
                 this.outerNodes.Writer.WriteEndMember(readerLineInfo);
                 subReader.Close();
@@ -1052,7 +1065,8 @@ namespace System.Activities.XamlIntegration
 
             void FlushValueHolders()
             {
-                // We've seen all the property definitions we're going to see. Write out any values already accumulated.
+                // We've seen all the property definitions we're going to see. Write out any values already
+                // accumulated.
 
                 // If we have picked up any values already before definitions, process them immediately
                 // (and throw as usual if corresponding definition doesn't exist)

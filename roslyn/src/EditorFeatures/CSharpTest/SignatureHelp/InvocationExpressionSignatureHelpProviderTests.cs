@@ -3521,7 +3521,8 @@ class C
 
             if (typeParameterProvided)
             {
-                // If generic method is instantiated, non-generic overloads would be excluded (desciption would be instantiated as well, i.e. object instead of T)
+                // If generic method is instantiated, non-generic overloads would be excluded (desciption would be
+                // instantiated as well, i.e. object instead of T)
                 expectedItems.Add(
                     new SignatureHelpTestItem(
                         $"void C.M<object>(Action<object> arg1, object arg2, bool flag)\r\n\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj2", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}",

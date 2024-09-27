@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
         public List<OptionViewModel> Options { get; set; }
 
         /// <summary>
-        /// <see langword="true"/> if 'Select All' was chosen.  <see langword="false"/> if 'Deselect All' was chosen.
+        /// <see langword="true"/> if 'Select All' was chosen.  <see langword="false"/> if 'Deselect All'
+        // was chosen.
         /// </summary>
         public bool SelectedAll { get; set; }
 

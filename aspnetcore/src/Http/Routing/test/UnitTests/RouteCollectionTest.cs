@@ -543,7 +543,8 @@ public class RouteCollectionTest
                 "2",
             };
 
-            // Here the segment 'a' is valid but 'b' is not as it would be empty. This would be an invalid route match, but
+            // Here the segment 'a' is valid but 'b' is not as it would be empty. This would be an invalid route
+            // match, but
             // the route value of 'a' should still be present to be evaluated for the next available route.
             yield return new object[]
             {

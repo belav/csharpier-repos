@@ -318,7 +318,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleAes128_IssuerAndSerial()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSAKeyTransfer1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSAKeyTransfer1.GetCertificate()
             // and of type IssuerAndSerialNumber. The symmetric algorithm is Aes128
             byte[] encryptedMessage = (
                 "3082011F06092A864886F70D010703A08201103082010C0201003181C83081C5020100302E301A311830160"
@@ -343,7 +344,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleAes192_IssuerAndSerial()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSAKeyTransfer1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSAKeyTransfer1.GetCertificate()
             // and of type IssuerAndSerialNumber. The symmetric algorithm used is Aes192
             byte[] encryptedMessage = (
                 "3082011F06092A864886F70D010703A08201103082010C0201003181C83081C5020100302E301A311830160"
@@ -368,7 +370,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleAes256_IssuerAndSerial()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSAKeyTransfer1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSAKeyTransfer1.GetCertificate()
             // and of type IssuerAndSerialNumber. The symmetric algorithm used is Aes256
             byte[] encryptedMessage = (
                 "3082011F06092A864886F70D010703A08201103082010C0201003181C83081C5020100302E301A311830160"
@@ -393,7 +396,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleTripleDes_IssuerAndSerial()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSAKeyTransfer1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSAKeyTransfer1.GetCertificate()
             // and of type IssuerAndSerialNumber. The symmetric algorithm used is 3DES-CBC
             byte[] encryptedMessage = (
                 "3082010C06092A864886F70D010703A081FE3081FB0201003181C83081C5020100302E301A3118301606035"
@@ -418,7 +422,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleAes256_Ski()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSAKeyTransfer1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSAKeyTransfer1.GetCertificate()
             // and of type SubjectKeyIdentifier. The symmetric algorithm used is Aes256
             byte[] encryptedMessage = (
                 "3082010306092A864886F70D010703A081F53081F20201023181AE3081AB0201028014F2008AA9FA3742E83"
@@ -443,7 +448,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleAes256_RsaTransferCapi()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSAKeyTransferCapi1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSAKeyTransferCapi1.GetCertificate()
             // and of type IssuerAndSerialNumber. The symmetric algorithm used is Aes256
             byte[] encryptedMessage = (
                 "3082012306092A864886F70D010703A0820114308201100201003181CC3081C90201003032301E311C301A0"
@@ -469,7 +475,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void TestDecryptSimpleAes256_RsaSha256()
         {
             // Message encrypted on framework for a recipient using the certificate returned by
-            // Certificates.RSASha256KeyTransfer1.GetCertificate() and of type IssuerAndSerialNumber. The symmetric algorithm used is Aes256
+            // Certificates.RSASha256KeyTransfer1.GetCertificate() and of type IssuerAndSerialNumber. The
+            // symmetric algorithm used is Aes256
             byte[] encryptedMessage = (
                 "3082012506092A864886F70D010703A0820116308201120201003181CE3081CB02010030343020311E301C0"
                 + "60355040313155253415368613235364B65795472616E7366657231021072C6C7734916468C4D608253DA01"
@@ -493,7 +500,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleAes256_RsaSha384()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSASha384KeyTransfer1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSASha384KeyTransfer1.GetCertificate()
             // and of type IssuerAndSerialNumber. The symmetric algorithm used is Aes256
             byte[] encryptedMessage = (
                 "3082012506092A864886F70D010703A0820116308201120201003181CE3081CB02010030343020311E301C0"
@@ -518,7 +526,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimpleAes256_RsaSha512()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSASha512KeyTransfer1.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSASha512KeyTransfer1.GetCertificate()
             // and of type IssuerAndSerialNumber. The symmetric algorithm used is Aes256
             byte[] encryptedMessage = (
                 "3082012506092A864886F70D010703A0820116308201120201003181CE3081CB02010030343020311E301C0"
@@ -543,7 +552,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         )]
         public void TestDecryptSimple_ExplicitSki()
         {
-            // Message encrypted on framework for a recipient using the certificate returned by Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate()
+            // Message encrypted on framework for a recipient using the certificate returned by
+            // Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate()
             // and of type SubjectKeyIdentifier. The symmetric algorithm used is Aes256
             byte[] encryptedMessage = (
                 "3082018806092A864886F70D010703A082017930820175020102318201303082012C020102801401952851C"
@@ -688,7 +698,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void TestDecryptSimpleAes256_RsaOaepSha256()
         {
             // Generated with:
-            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep -keyopt rsa_mgf1_md:sha256 --aes256 -keyopt rsa_oaep_md:sha256
+            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep
+            // -keyopt rsa_mgf1_md:sha256 --aes256 -keyopt rsa_oaep_md:sha256
             byte[] encodedMessage = Convert.FromBase64String(
                 "MIIBUAYJKoZIhvcNAQcDoIIBQTCCAT0CAQAxgfkwgfYCAQAwNDAgMR4wHAYDVQQD"
                     + "ExVSU0FTaGEyNTZLZXlUcmFuc2ZlcjECEHLGx3NJFkaMTWCCU9oBdnYwOAYJKoZI"
@@ -716,7 +727,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void TestDecryptSimpleAes256_RsaOaepSha384()
         {
             // Generated with:
-            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep -keyopt rsa_mgf1_md:sha384 --aes256 -keyopt rsa_oaep_md:sha384
+            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep
+            // -keyopt rsa_mgf1_md:sha384 --aes256 -keyopt rsa_oaep_md:sha384
             byte[] encodedMessage = Convert.FromBase64String(
                 "MIIB0AYJKoZIhvcNAQcDoIIBwTCCAb0CAQAxggF4MIIBdAIBADAxMCQxIjAgBgNV"
                     + "BAMMGVJTQTIwNDhTaGEyNTZLZXlUcmFuc2ZlcjECCQDc5NcqfzyljjA4BgkqhkiG"
@@ -746,7 +758,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void TestDecryptSimpleAes256_RsaOaepSha512()
         {
             // Generated with:
-            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep -keyopt rsa_mgf1_md:sha512 --aes256 -keyopt rsa_oaep_md:sha512
+            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep
+            // -keyopt rsa_mgf1_md:sha512 --aes256 -keyopt rsa_oaep_md:sha512
             byte[] encodedMessage = Convert.FromBase64String(
                 "MIIB0AYJKoZIhvcNAQcDoIIBwTCCAb0CAQAxggF4MIIBdAIBADAxMCQxIjAgBgNV"
                     + "BAMMGVJTQTIwNDhTaGEyNTZLZXlUcmFuc2ZlcjECCQDc5NcqfzyljjA4BgkqhkiG"
@@ -776,7 +789,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void TestDecryptSimpleAes256_RsaOaepSha1_Default()
         {
             // Generated with:
-            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep -keyopt rsa_mgf1_md:sha1 --aes256 -keyopt rsa_oaep_md:sha1
+            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep
+            // -keyopt rsa_mgf1_md:sha1 --aes256 -keyopt rsa_oaep_md:sha1
             byte[] encodedMessage = Convert.FromBase64String(
                 "MIIBJQYJKoZIhvcNAQcDoIIBFjCCARICAQAxgc4wgcsCAQAwNDAgMR4wHAYDVQQD"
                     + "ExVSU0FTaGEyNTZLZXlUcmFuc2ZlcjECEHLGx3NJFkaMTWCCU9oBdnYwDQYJKoZI"
@@ -803,7 +817,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void TestDecryptSimpleAes256_RsaOaep_MaskGenFunc_HashFunc_Mismatch()
         {
             // Generated with:
-            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep -keyopt rsa_mgf1_md:sha1 --aes256 -keyopt rsa_oaep_md:sha256
+            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep
+            // -keyopt rsa_mgf1_md:sha1 --aes256 -keyopt rsa_oaep_md:sha256
             byte[] encodedMessage = Convert.FromBase64String(
                 "MIIBNAYJKoZIhvcNAQcDoIIBJTCCASECAQAxgd0wgdoCAQAwNDAgMR4wHAYDVQQD"
                     + "ExVSU0FTaGEyNTZLZXlUcmFuc2ZlcjECEHLGx3NJFkaMTWCCU9oBdnYwHAYJKoZI"
@@ -1044,7 +1059,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ContentInfo expectedContentInfo = null
         )
         {
-            // Deep-copy the contentInfo since the real ContentInfo doesn't do this. This defends against a bad implementation changing
+            // Deep-copy the contentInfo since the real ContentInfo doesn't do this. This defends against a bad
+            // implementation changing
             // our "expectedContentInfo" to match what it produces.
             expectedContentInfo =
                 expectedContentInfo
@@ -1070,8 +1086,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 encodedMessage = ecms.Encode();
             }
 
-            // We don't pass "certificate" down because it's expected that the certificate used for encrypting doesn't have a private key (part of the purpose of this test is
-            // to ensure that you don't need the recipient's private key to encrypt.) The decrypt phase will have to locate the matching cert with the private key.
+            // We don't pass "certificate" down because it's expected that the certificate used for encrypting
+            // doesn't have a private key (part of the purpose of this test is
+            // to ensure that you don't need the recipient's private key to encrypt.) The decrypt phase will
+            // have to locate the matching cert with the private key.
             VerifySimpleDecrypt(encodedMessage, certLoader, expectedContentInfo);
         }
 

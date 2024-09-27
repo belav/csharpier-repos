@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis
         public abstract ITypeSymbol? Type { get; }
 
         /// <summary>
-        /// The source language of the IOperation. Possible values are <see cref="LanguageNames.CSharp"/> and <see cref="LanguageNames.VisualBasic"/>.
+        /// The source language of the IOperation. Possible values are <see cref="LanguageNames.CSharp"/>
+        // and <see cref="LanguageNames.VisualBasic"/>.
         /// </summary>
 
         public string Language
@@ -99,7 +100,10 @@ namespace Microsoft.CodeAnalysis
         internal abstract CodeAnalysis.ConstantValue? OperationConstantValue { get; }
 
         /// <summary>
-        /// If the operation is an expression that evaluates to a constant value, <see cref="Optional{Object}.HasValue"/> is true and <see cref="Optional{Object}.Value"/> is the value of the expression. Otherwise, <see cref="Optional{Object}.HasValue"/> is false.
+        /// If the operation is an expression that evaluates to a constant value, <see
+        // cref="Optional{Object}.HasValue"/> is true and <see cref="Optional{Object}.Value"/> is the value
+        // of
+        // the expression. Otherwise, <see cref="Optional{Object}.HasValue"/> is false.
         /// </summary>
         public Optional<object?> ConstantValue
         {
@@ -144,7 +148,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the owning semantic model for this operation node.
         /// Note that this may be different than <see cref="IOperation.SemanticModel"/>, which
-        /// is the semantic model on which <see cref="SemanticModel.GetOperation(SyntaxNode, CancellationToken)"/> was invoked
+        /// is the semantic model on which <see cref="SemanticModel.GetOperation(SyntaxNode,
+        // CancellationToken)"/> was invoked
         /// to create this node.
         /// </summary>
         internal SemanticModel? OwningSemanticModel => _owningSemanticModelOpt;

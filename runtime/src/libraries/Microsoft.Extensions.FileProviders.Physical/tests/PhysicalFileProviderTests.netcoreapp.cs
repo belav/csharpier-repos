@@ -108,7 +108,8 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             using var rootOfFile = new TempDirectory(GetTestFilePath());
-            // Create file 2 first as we want to verify that the change is reported regardless of the timestamp being older.
+            // Create file 2 first as we want to verify that the change is reported regardless of the timestamp
+            // being older.
             string file2Path = Path.Combine(rootOfFile.Path, GetTestFileName());
             File.WriteAllText(file2Path, "v2.1");
 

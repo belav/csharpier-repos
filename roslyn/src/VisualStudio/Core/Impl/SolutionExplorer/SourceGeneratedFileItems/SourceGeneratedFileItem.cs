@@ -75,7 +75,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                             item.Workspace.Services.GetService<IDocumentNavigationService>();
                         if (documentNavigationService != null)
                         {
-                            // TODO: we're navigating back to the top of the file, do we have a way to just bring it to the focus and that's it?
+                            // TODO: we're navigating back to the top of the file, do we have a way to just bring it to the
+                            // focus and that's it?
                             // TODO: Use a threaded-wait-dialog here so we can cancel navigation.
                             didNavigate |= await documentNavigationService
                                 .TryNavigateToPositionAsync(

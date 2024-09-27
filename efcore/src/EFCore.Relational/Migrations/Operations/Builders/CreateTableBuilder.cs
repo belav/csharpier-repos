@@ -35,7 +35,8 @@ public class CreateTableBuilder<TColumns> : OperationBuilder<CreateTableOperatio
     /// <param name="column">The column used for the foreign key.</param>
     /// <param name="principalTable">The table to which the foreign key is constrained.</param>
     /// <param name="principalColumn">The column to which the foreign key column is constrained.</param>
-    /// <param name="principalSchema">The schema that contains the table to which the foreign key is constrained.</param>
+    /// <param name="principalSchema">The schema that contains the table to which the foreign key is
+    // constrained.</param>
     /// <param name="onUpdate">The <see cref="ReferentialAction" /> to use for updates.</param>
     /// <param name="onDelete">The <see cref="ReferentialAction" /> to use for deletes.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
@@ -64,8 +65,10 @@ public class CreateTableBuilder<TColumns> : OperationBuilder<CreateTableOperatio
     /// <param name="name">The foreign key constraint name.</param>
     /// <param name="columns">The columns used for the foreign key.</param>
     /// <param name="principalTable">The table to which the foreign key is constrained.</param>
-    /// <param name="principalColumns">The columns to which the foreign key column is constrained.</param>
-    /// <param name="principalSchema">The schema that contains the table to which the foreign key is constrained.</param>
+    /// <param name="principalColumns">The columns to which the foreign key column is
+    // constrained.</param>
+    /// <param name="principalSchema">The schema that contains the table to which the foreign key is
+    // constrained.</param>
     /// <param name="onUpdate">The <see cref="ReferentialAction" /> to use for updates.</param>
     /// <param name="onDelete">The <see cref="ReferentialAction" /> to use for deletes.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>

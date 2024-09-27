@@ -460,7 +460,7 @@ namespace System.ServiceModel.Description
 
                 foreach (OperationMessage opmsg in op.Messages)
                 {
-                    /* OperationMessageCollection */
+/* OperationMessageCollection */
                     MessageDescription msg_descr;
                     MessageDirection dir = MessageDirection.Input;
                     string action = "";
@@ -469,7 +469,7 @@ namespace System.ServiceModel.Description
                         dir = MessageDirection.Input;
                     else if (opmsg.GetType() == typeof(OperationOutput))
                         dir = MessageDirection.Output;
-                    /* FIXME: OperationFault--> OperationDescription.Faults ? */
+/* FIXME: OperationFault--> OperationDescription.Faults ? */
 
                     if (opmsg.ExtensibleAttributes != null)
                     {
@@ -480,9 +480,9 @@ namespace System.ServiceModel.Description
                                 && opmsg.ExtensibleAttributes[i].NamespaceURI
                                     == "http://www.w3.org/2006/05/addressing/wsdl"
                             )
-                                /* addressing:Action */
+/* addressing:Action */
                                 action = opmsg.ExtensibleAttributes[i].Value;
-                            /* FIXME: other attributes ? */
+/* FIXME: other attributes ? */
                         }
                     }
 
@@ -496,7 +496,7 @@ namespace System.ServiceModel.Description
                     }
 
                     msg_descr = new MessageDescription(action, dir);
-                    /* FIXME: Headers ? */
+/* FIXME: Headers ? */
 
                     op_descr.Messages.Add(msg_descr);
                 }

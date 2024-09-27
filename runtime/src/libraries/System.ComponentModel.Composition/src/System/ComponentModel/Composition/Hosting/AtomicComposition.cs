@@ -28,8 +28,10 @@ namespace System.ComponentModel.Composition.Hosting
     /// accessed through the Query methods which provide automatic chaining to execute queries
     /// across the target atomicComposition and its inner atomicComposition as appropriate.
     ///
-    /// Lastly, when a nested atomicComposition is created for a given outer the outer atomicComposition is locked.
-    /// It remains locked until the inner atomicComposition is disposed or completeed preventing the addition of
+    /// Lastly, when a nested atomicComposition is created for a given outer the outer atomicComposition
+    // is locked.
+    /// It remains locked until the inner atomicComposition is disposed or completeed preventing the
+    // addition of
     /// state, actions or other inner atomicCompositions.
     /// </summary>
     public class AtomicComposition : IDisposable
@@ -207,7 +209,8 @@ namespace System.ComponentModel.Composition.Hosting
                     }
                     catch (Exception e)
                     {
-                        //If any exceptions leak through the actions we will swallow them for now complete processing the list
+                        //If any exceptions leak through the actions we will swallow them for now complete processing the
+                        // list
                         // and we will throw InvalidOperationException with an AggregateException as it's innerException
                         exceptions ??= new List<Exception>();
                         exceptions.Add(e);

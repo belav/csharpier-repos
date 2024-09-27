@@ -26,7 +26,8 @@ namespace System.Speech.Internal.ObjectTokens
 
         /// <summary>
         /// Retrieve the Multimedia device ID. If the entry 'DefaultTokenId' is defined in the registry
-        /// under 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech\AudioOutput' then a multimedia device is looked
+        /// under 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech\AudioOutput' then a multimedia device is
+        // looked
         /// for with this token. Otherwise, picks the default WAVE_MAPPER is returned.
         /// </summary>
         internal static int DefaultDeviceOut()
@@ -176,7 +177,8 @@ namespace System.Speech.Internal.ObjectTokens
 
         /// <summary>
         /// Takes two tokens and compares them using version info.
-        /// Note only tokens that match on Vendor, ProductLine, Language get compared, the pfDidCompare flag indicates this
+        /// Note only tokens that match on Vendor, ProductLine, Language get compared, the pfDidCompare flag
+        // indicates this
         /// </summary>
         private static int CompareTokenVersions(
             ObjectToken token1,

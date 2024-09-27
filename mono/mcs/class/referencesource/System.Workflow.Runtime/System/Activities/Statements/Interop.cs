@@ -66,7 +66,8 @@ namespace System.Activities.Statements
 
         object thisLock;
 
-        // true if the body type is a valid activity. used so we can have delayed validation support in the designer
+        // true if the body type is a valid activity. used so we can have delayed validation support in the
+        // designer
         bool hasValidBody;
 
         // true if the V3 activity property names will conflict with our generated argument names
@@ -221,7 +222,8 @@ namespace System.Activities.Statements
                     }
                 }
 
-                //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
+                //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut
+                // (Argument)
                 PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                 // recheck for name collisions
                 this.hasNameCollision = InteropEnvironment.ParameterHelper.HasPropertyNameCollision(
@@ -232,7 +234,8 @@ namespace System.Activities.Statements
                     if (InteropEnvironment.ParameterHelper.IsBindable(propertyInfo))
                     {
                         string propertyInName;
-                        //If there are any Property/PropertyOut name pairs already extant, we fall back to renaming the InArgument half of the pair as well
+                        //If there are any Property/PropertyOut name pairs already extant, we fall back to renaming the
+                        // InArgument half of the pair as well
                         if (this.hasNameCollision)
                         {
                             propertyInName = propertyInfo.Name + Interop.InArgumentSuffix;
@@ -736,7 +739,8 @@ namespace System.Activities.Statements
                 // First, cache the full set of body properties
                 if (!this.exposedBodyPropertiesCacheIsValid)
                 {
-                    //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
+                    //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut
+                    // (Argument)
                     PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                     // recheck for name collisions
                     this.hasNameCollision =
@@ -752,7 +756,8 @@ namespace System.Activities.Statements
                             )
                         )
                         {
-                            // Propagate the attributes to the PropertyDescriptor, appending a DesignerSerializationVisibility attribute
+                            // Propagate the attributes to the PropertyDescriptor, appending a DesignerSerializationVisibility
+                            // attribute
                             Attribute[] customAttributes = Attribute.GetCustomAttributes(
                                 property,
                                 true
@@ -783,7 +788,8 @@ namespace System.Activities.Statements
                             else
                             {
                                 InteropProperty inDescriptor;
-                                //If there are any Property/PropertyOut name pairs already extant, we fall back to renaming the InArgument half of the pair as well
+                                //If there are any Property/PropertyOut name pairs already extant, we fall back to renaming the
+                                // InArgument half of the pair as well
                                 if (this.hasNameCollision)
                                 {
                                     inDescriptor = new ArgumentProperty(
@@ -898,7 +904,8 @@ namespace System.Activities.Statements
                 {
                     // The V1 workflow faulted and there is an uncaught exception. We cannot throw
                     // the exception right away because we must Persist in order to process the WorkBatch.
-                    // So we are saving the uncaught exception and scheduling the Persist activity with a completion callback.
+                    // So we are saving the uncaught exception and scheduling the Persist activity with a completion
+                    // callback.
                     // We will throw the exception from OnPersistComplete.
                     this.outstandingException.Set(context, exception);
 
@@ -1065,12 +1072,14 @@ namespace System.Activities.Statements
                 Name = "parent",
             };
 
-            //This will accumulate all potential violations at the root level. See the use case DIRECT of the Interop spec
+            //This will accumulate all potential violations at the root level. See the use case DIRECT of the
+            // Interop spec
             Variable<HashSet<InteropValidationEnum>> rootValidationDataVar = new Variable<
                 HashSet<InteropValidationEnum>
             >(context => new HashSet<InteropValidationEnum>());
 
-            //This will accumulate all violations at the nested level. See the use case NESTED of the Interop spec
+            //This will accumulate all violations at the nested level. See the use case NESTED of the Interop
+            // spec
             Variable<HashSet<InteropValidationEnum>> nestedChildrenValidationDataVar = new Variable<
                 HashSet<InteropValidationEnum>
             >(context => new HashSet<InteropValidationEnum>());
@@ -1089,7 +1098,8 @@ namespace System.Activities.Statements
                             Variables = { rootValidationDataVar, nestedChildrenValidationDataVar },
                             Activities =
                             {
-                                //First traverse the interop body and collect all available data for validation. This is done at all levels, DIRECT and NESTED
+                                //First traverse the interop body and collect all available data for validation. This is done at all
+                                // levels, DIRECT and NESTED
                                 new WalkInteropBodyAndGatherData()
                                 {
                                     RootLevelValidationData = new InArgument<
@@ -1107,7 +1117,8 @@ namespace System.Activities.Statements
                                     NestedChildrenValidationData = nestedChildrenValidationDataVar,
                                     Interop = element,
                                 },
-                                //Traverse the parent chain of the Interop activity to look for specifc violations regarding composition of 3.0 activities within 4.0 activities.
+                                //Traverse the parent chain of the Interop activity to look for specifc violations regarding
+                                // composition of 3.0 activities within 4.0 activities.
                                 //Specifically,
                                 //  - 3.0 TransactionScope within a 4.0 TransactionScope
                                 //  - 3.0 PersistOnClose within a 4.0 TransactionScope
@@ -1344,7 +1355,8 @@ namespace System.Activities.Statements
                     )
                 )
                 {
-                    //We care to mark PersistOnClose during the walking algorithm because we need to check if it happens under a 4.0 TransactionScopActivity and flag that
+                    //We care to mark PersistOnClose during the walking algorithm because we need to check if it happens
+                    // under a 4.0 TransactionScopActivity and flag that
                     //That is done later, so skip here.
                     if (validationEnum != InteropValidationEnum.PersistOnClose)
                     {
@@ -1364,7 +1376,8 @@ namespace System.Activities.Statements
                     )
                 )
                 {
-                    //We care to mark PersistOnClose or TransactionScope during the walking algorithm because we need to check if it happens under a 4.0 TransactionScopActivity and flag that
+                    //We care to mark PersistOnClose or TransactionScope during the walking algorithm because we need to
+                    // check if it happens under a 4.0 TransactionScopActivity and flag that
                     //That is done later, so skip here.
                     if (
                         (validationEnum != InteropValidationEnum.PersistOnClose)

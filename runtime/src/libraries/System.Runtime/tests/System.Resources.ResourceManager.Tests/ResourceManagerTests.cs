@@ -112,9 +112,11 @@ namespace System.Resources.Tests
         [Fact]
         public static void GetString_FromTestClassWithoutNeutralResources()
         {
-            // This test is designed to complement the GetString_FromCulutureAndResourceType "fr" & "fr-CA" cases
+            // This test is designed to complement the GetString_FromCulutureAndResourceType "fr" & "fr-CA"
+            // cases
             // Together these tests cover the case where there exists a satellite assembly for "fr" which has
-            // resources for some types, but not all.  This confirms the fallback through a satellite which matches
+            // resources for some types, but not all.  This confirms the fallback through a satellite which
+            // matches
             // culture but does not match resource file
             Type resourceType = typeof(Resources.TestClassWithoutNeutralResources);
             ResourceManager resourceManager = new ResourceManager(resourceType);
@@ -269,16 +271,22 @@ namespace System.Resources.Tests
         }
 
         /// <summary>
-        /// This test has multiple threads simultaneously loop over the keys of a moderately-sized resx using
-        /// <see cref="ResourceManager"/> and call <see cref="ResourceManager.GetString(string)"/> for each key.
-        /// This has historically been prone to thread-safety bugs because of the shared cache state and internal
+        /// This test has multiple threads simultaneously loop over the keys of a moderately-sized resx
+        // using
+        /// <see cref="ResourceManager"/> and call <see cref="ResourceManager.GetString(string)"/> for each
+        // key.
+        /// This has historically been prone to thread-safety bugs because of the shared cache state and
+        // internal
         /// method calls between RuntimeResourceSet and <see cref="ResourceReader"/>.
         ///
-        /// Running with <paramref name="useEnumeratorEntry"/> TRUE replicates https://github.com/dotnet/runtime/issues/74868,
-        /// while running with FALSE replicates the error from https://github.com/dotnet/runtime/issues/74052.
+        /// Running with <paramref name="useEnumeratorEntry"/> TRUE replicates
+        // https://github.com/dotnet/runtime/issues/74868,
+        /// while running with FALSE replicates the error from
+        // https://github.com/dotnet/runtime/issues/74052.
         /// </summary>
         /// <param name="useEnumeratorEntry">
-        /// Whether to use <see cref="IDictionaryEnumerator.Entry"/> vs. <see cref="IDictionaryEnumerator.Key"/> when enumerating;
+        /// Whether to use <see cref="IDictionaryEnumerator.Entry"/> vs. <see
+        // cref="IDictionaryEnumerator.Key"/> when enumerating;
         /// these follow fairly different code paths.
         /// </param>
         [Theory]

@@ -1767,7 +1767,8 @@ End Class
             string rootNamespace = null
         );
 
-        // Generate a diagnostic on every token in the specified spans, and verify that only the specified diagnostics are not suppressed
+        // Generate a diagnostic on every token in the specified spans, and verify that only the specified
+        // diagnostics are not suppressed
         private Task VerifyTokenDiagnosticsAsync(
             string markup,
             string language,

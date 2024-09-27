@@ -455,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
                     if (revBrOp != ILOpCode.Nop)
                     {
-                        // we are effectively removing blocks between this and the BranchBlock (including next) from the block chain.
+                        // we are effectively removing blocks between this and the BranchBlock (including next) from the
+                        // block chain.
                         // that is ok, since branch-to-branch should already eliminate any possible branches to these blocks
                         // and they were only reachable from current via NextBlock which we are re-directing.
                         var toRemove = this.NextBlock;

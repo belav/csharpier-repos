@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         <see cref="ShapedQueryExpression.ShaperExpression" />.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -19,9 +20,12 @@ public class RelationalGroupByResultExpression : Expression, IPrintableExpressio
     ///     Creates a new instance of the <see cref="RelationalGroupByResultExpression" /> class.
     /// </summary>
     /// <param name="keyIdentifier">An identifier for the parent element.</param>
-    /// <param name="keyIdentifierValueComparers">A list of value comparers to compare parent identifier.</param>
-    /// <param name="keyShaper">An expression used to create individual elements of the collection.</param>
-    /// <param name="elementShaper">An expression used to create individual elements of the collection.</param>
+    /// <param name="keyIdentifierValueComparers">A list of value comparers to compare parent
+    // identifier.</param>
+    /// <param name="keyShaper">An expression used to create individual elements of the
+    // collection.</param>
+    /// <param name="elementShaper">An expression used to create individual elements of the
+    // collection.</param>
     public RelationalGroupByResultExpression(
         Expression keyIdentifier,
         IReadOnlyList<ValueComparer> keyIdentifierValueComparers,
@@ -73,13 +77,15 @@ public class RelationalGroupByResultExpression : Expression, IPrintableExpressio
     }
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="keyIdentifier">The <see cref="KeyIdentifier" /> property of the result.</param>
     /// <param name="keyShaper">The <see cref="KeyShaper" /> property of the result.</param>
     /// <param name="elementShaper">The <see cref="ElementShaper" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual RelationalGroupByResultExpression Update(
         Expression keyIdentifier,
         Expression keyShaper,

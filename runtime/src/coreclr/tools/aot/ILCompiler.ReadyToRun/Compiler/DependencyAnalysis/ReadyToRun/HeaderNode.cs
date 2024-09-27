@@ -218,7 +218,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 builder.EmitReloc(item.StartSymbol, RelocType.IMAGE_REL_BASED_ADDR32NB);
 
-                // The header entry for the runtime functions table should not include the 4 byte 0xffffffff sentinel
+                // The header entry for the runtime functions table should not include the 4 byte 0xffffffff
+                // sentinel
                 // value in the covered range.
                 int delta =
                     item.Id == ReadyToRunSectionType.RuntimeFunctions

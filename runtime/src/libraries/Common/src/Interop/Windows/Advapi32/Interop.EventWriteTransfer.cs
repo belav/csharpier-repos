@@ -11,7 +11,8 @@ internal static partial class Interop
     {
         /// <summary>
         ///  Call the ETW native API EventWriteTransfer and checks for invalid argument error.
-        ///  The implementation of EventWriteTransfer on some older OSes (Windows 2008) does not accept null relatedActivityId.
+        ///  The implementation of EventWriteTransfer on some older OSes (Windows 2008) does not accept null
+        // relatedActivityId.
         ///  So, for these cases we will retry the call with an empty Guid.
         /// </summary>
         internal static unsafe int EventWriteTransfer(

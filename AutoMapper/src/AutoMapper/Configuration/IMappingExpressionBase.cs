@@ -69,7 +69,8 @@ public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpre
     where TMappingExpression : IMappingExpressionBase<TSource, TDestination, TMappingExpression>
 {
     /// <summary>
-    /// Disable constructor validation. During mapping this map is used against an existing destination object and never constructed itself.
+    /// Disable constructor validation. During mapping this map is used against an existing destination
+    // object and never constructed itself.
     /// </summary>
     /// <returns>Itself</returns>
     TMappingExpression DisableCtorValidation();
@@ -137,7 +138,8 @@ public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpre
         where TMappingAction : IMappingAction<TSource, TDestination>;
 
     /// <summary>
-    /// Include this configuration in all derived types' maps. Works by scanning all type maps for matches during configuration.
+    /// Include this configuration in all derived types' maps. Works by scanning all type maps for
+    // matches during configuration.
     /// </summary>
     /// <returns>Itself</returns>
     TMappingExpression IncludeAllDerived();
@@ -161,7 +163,8 @@ public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpre
     /// <summary>
     /// Customize configuration for an individual source member. Member name not known until runtime
     /// </summary>
-    /// <param name="sourceMemberName">Expression to source member. Must be a member of the <typeparamref name="TSource"/> type</param>
+    /// <param name="sourceMemberName">Expression to source member. Must be a member of the
+    // <typeparamref name="TSource"/> type</param>
     /// <param name="memberOptions">Callback for member configuration options</param>
     /// <returns>Itself</returns>
     TMappingExpression ForSourceMember(
@@ -170,22 +173,29 @@ public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpre
     );
 
     /// <summary>
-    /// Ignores all <typeparamref name="TDestination"/> properties that have either a private or protected setter, forcing the mapper to respect encapsulation (note: order matters, so place this before explicit configuration of any properties with an inaccessible setter)
+    /// Ignores all <typeparamref name="TDestination"/> properties that have either a private or
+    // protected setter, forcing the mapper to respect encapsulation (note: order matters, so place this
+    // before explicit configuration of any properties with an inaccessible setter)
     /// </summary>
     /// <returns>Itself</returns>
     TMappingExpression IgnoreAllPropertiesWithAnInaccessibleSetter();
 
     /// <summary>
-    /// When using ReverseMap, ignores all <typeparamref name="TSource"/> properties that have either a private or protected setter, keeping the reverse mapping consistent with the forward mapping (note: <typeparamref name="TDestination"/> properties with an inaccessible setter may still be mapped unless IgnoreAllPropertiesWithAnInaccessibleSetter is also used)
+    /// When using ReverseMap, ignores all <typeparamref name="TSource"/> properties that have either a
+    // private or protected setter, keeping the reverse mapping consistent with the forward mapping (note:
+    // <typeparamref name="TDestination"/> properties with an inaccessible setter may still be mapped
+    // unless IgnoreAllPropertiesWithAnInaccessibleSetter is also used)
     /// </summary>
     /// <returns>Itself</returns>
     TMappingExpression IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
 
     /// <summary>
-    /// Supply a custom instantiation function for the destination type, based on the entire resolution context
+    /// Supply a custom instantiation function for the destination type, based on the entire resolution
+    // context
     /// </summary>
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
-    /// <param name="ctor">Callback to create the destination type given the current resolution context</param>
+    /// <param name="ctor">Callback to create the destination type given the current resolution
+    // context</param>
     /// <returns>Itself</returns>
     TMappingExpression ConstructUsing(Func<TSource, ResolutionContext, TDestination> ctor);
 
@@ -202,7 +212,8 @@ public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpre
     TMappingExpression AsProxy();
 
     /// <summary>
-    /// Skip normal member mapping and convert using a <see cref="ITypeConverter{TSource,TDestination}"/> instantiated during mapping
+    /// Skip normal member mapping and convert using a <see
+    // cref="ITypeConverter{TSource,TDestination}"/> instantiated during mapping
     /// Use this method if you need to specify the converter type at runtime
     /// </summary>
     /// <param name="typeConverterType">Type converter type</param>
@@ -212,14 +223,16 @@ public interface IMappingExpressionBase<TSource, TDestination, out TMappingExpre
     /// Skip member mapping and use a custom function to convert to the destination type
     /// </summary>
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
-    /// <param name="mappingFunction">Callback to convert from source type to destination type, including destination object</param>
+    /// <param name="mappingFunction">Callback to convert from source type to destination type,
+    // including destination object</param>
     void ConvertUsing(Func<TSource, TDestination, TDestination> mappingFunction);
 
     /// <summary>
     /// Skip member mapping and use a custom function to convert to the destination type
     /// </summary>
     /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
-    /// <param name="mappingFunction">Callback to convert from source type to destination type, with source, destination and context</param>
+    /// <param name="mappingFunction">Callback to convert from source type to destination type, with
+    // source, destination and context</param>
     void ConvertUsing(Func<TSource, TDestination, ResolutionContext, TDestination> mappingFunction);
 
     /// <summary>

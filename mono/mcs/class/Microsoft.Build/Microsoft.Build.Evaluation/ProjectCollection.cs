@@ -266,7 +266,8 @@ namespace Microsoft.Build.Evaluation
 
         readonly List<Toolset> toolsets = new List<Toolset>();
 
-        // so what should we do without ToolLocationHelper in Microsoft.Build.Utilities.dll? There is no reference to it in this dll.
+        // so what should we do without ToolLocationHelper in Microsoft.Build.Utilities.dll? There is no
+        // reference to it in this dll.
         public ICollection<Toolset> Toolsets
         {
             // For ConfigurationFile and None, they cannot be added externally.
@@ -678,7 +679,8 @@ namespace Microsoft.Build.Evaluation
             yield return create("MSBuildToolsVersion", () => toolset.ToolsVersion);
 
             // This is an implementation specific special property for this Microsoft.Build.dll to differentiate
-            // the build from Microsoft.Build.Engine.dll. It is significantly used in some *.targets file we share
+            // the build from Microsoft.Build.Engine.dll. It is significantly used in some *.targets file we
+            // share
             // between old and new build engine.
             yield return create("MonoUseMicrosoftBuildDll", () => "True");
         }

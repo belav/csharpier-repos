@@ -14,15 +14,18 @@ namespace System.Security.Cryptography.X509Certificates
 
         internal static bool TryDecodePem(ReadOnlySpan<byte> rawData, DerCallback derCallback)
         {
-            // If the character is a control character that isn't whitespace, then we're probably using a DER encoding
+            // If the character is a control character that isn't whitespace, then we're probably using a DER
+            // encoding
             // and not using a PEM encoding in ASCII.
             if (char.IsControl((char)rawData[0]) && !char.IsWhiteSpace((char)rawData[0]))
             {
                 return false;
             }
 
-            // Look for the PEM marker. This doesn't guarantee it will be a valid PEM since we don't check whether
-            // the marker is at the beginning of line or whether the line is a complete marker. It's just a quick
+            // Look for the PEM marker. This doesn't guarantee it will be a valid PEM since we don't check
+            // whether
+            // the marker is at the beginning of line or whether the line is a complete marker. It's just a
+            // quick
             // check to avoid conversion from bytes to characters if the content is DER encoded.
             if (rawData.IndexOf("-----BEGIN "u8) < 0)
             {

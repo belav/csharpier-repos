@@ -75,13 +75,19 @@ namespace System.Security.Cryptography.Pkcs
 
         /// <summary>Create a timestamp request using a pre-computed hash value.</summary>
         /// <param name="hash">The pre-computed hash value to be timestamped.</param>
-        /// <param name="hashAlgorithmId">The Object Identifier (OID) for the hash algorithm that produced <paramref name="hash" />.</param>
-        /// <param name="requestedPolicyId">The Object Identifier (OID) for a timestamp policy the Timestamp Authority (TSA) should use, or <see langword="null" /> to express no preference.</param>
-        /// <param name="nonce">An optional nonce (number used once) to uniquely identify this request to pair it with the response. The value is interpreted as an unsigned big-endian integer and may be normalized to the encoding format.</param>
+        /// <param name="hashAlgorithmId">The Object Identifier (OID) for the hash algorithm that produced
+        // <paramref name="hash" />.</param>
+        /// <param name="requestedPolicyId">The Object Identifier (OID) for a timestamp policy the Timestamp
+        // Authority (TSA) should use, or <see langword="null" /> to express no preference.</param>
+        /// <param name="nonce">An optional nonce (number used once) to uniquely identify this request to
+        // pair it with the response. The value is interpreted as an unsigned big-endian integer and may be
+        // normalized to the encoding format.</param>
         /// <param name="requestSignerCertificates">
-        ///   <see langword="true" /> to indicate the Timestamp Authority (TSA) must include the signing certificate in the issued timestamp token; otherwise, <see langword="false" />.</param>
+        ///   <see langword="true" /> to indicate the Timestamp Authority (TSA) must include the signing
+        // certificate in the issued timestamp token; otherwise, <see langword="false" />.</param>
         /// <param name="extensions">RFC3161 extensions to present with the request.</param>
-        /// <returns>An <see cref="T:System.Security.Cryptography.Pkcs.Rfc3161TimestampRequest" /> representing the chosen values.</returns>
+        /// <returns>An <see cref="T:System.Security.Cryptography.Pkcs.Rfc3161TimestampRequest" />
+        // representing the chosen values.</returns>
         public static Rfc3161TimestampRequest CreateFromHash(
             ReadOnlyMemory<byte> hash,
             Oid hashAlgorithmId,

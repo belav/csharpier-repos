@@ -8,14 +8,16 @@ using System.Globalization;
 namespace TypeConverterAttributeTest
 {
     /// <summary>
-    /// Tests that the public constructors of types passed into System.ComponentModel.TypeConverterAttribute
+    /// Tests that the public constructors of types passed into
+    // System.ComponentModel.TypeConverterAttribute
     /// are not trimmed out when needed in a trimmed application.
     /// </summary>
     class Program
     {
         static int Main(string[] args)
         {
-            // Type-based TypeConverterAttribute ctor overload, ensure public parameterized ctor of TypeConverter type is preserved.
+            // Type-based TypeConverterAttribute ctor overload, ensure public parameterized ctor of
+            // TypeConverter type is preserved.
             TypeDescriptor.AddAttributes(
                 typeof(DayOfWeek),
                 new TypeConverterAttribute(typeof(MyDayOfWeekConverter))

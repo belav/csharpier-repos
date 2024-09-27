@@ -11,10 +11,12 @@ namespace System.Net.NetworkInformation
         /// Gets the number of User Datagram Protocol (UDP) datagrams sent.
         public abstract long DatagramsSent { get; }
 
-        /// Gets the number of User Datagram Protocol (UDP) datagrams received and discarded due to port errors.
+        /// Gets the number of User Datagram Protocol (UDP) datagrams received and discarded due to port
+        // errors.
         public abstract long IncomingDatagramsDiscarded { get; }
 
-        /// Gets the number of User Datagram Protocol (UDP) datagrams received and discarded due to errors other than bad port information.
+        /// Gets the number of User Datagram Protocol (UDP) datagrams received and discarded due to errors
+        // other than bad port information.
         public abstract long IncomingDatagramsWithErrors { get; }
 
         /// Gets the number of local endpoints listening for User Datagram Protocol (UDP) datagrams.

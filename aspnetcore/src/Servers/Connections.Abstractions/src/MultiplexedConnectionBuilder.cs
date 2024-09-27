@@ -23,7 +23,8 @@ public class MultiplexedConnectionBuilder : IMultiplexedConnectionBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="MultiplexedConnectionBuilder"/>.
     /// </summary>
-    /// <param name="applicationServices">The application services <see cref="IServiceProvider"/>.</param>
+    /// <param name="applicationServices">The application services <see
+    // cref="IServiceProvider"/>.</param>
     public MultiplexedConnectionBuilder(IServiceProvider applicationServices)
     {
         ApplicationServices = applicationServices;

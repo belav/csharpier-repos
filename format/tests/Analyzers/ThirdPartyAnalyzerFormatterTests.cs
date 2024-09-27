@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt
+// in the project root for license information.
 
 using System.Collections.Generic;
 using System.IO;
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
 
             try
             {
-                // Restore the Analyzer packages that have been added to `for_analyzer_formatter/analyzer_project/analyzer_project.csproj`
+                // Restore the Analyzer packages that have been added to
+                // `for_analyzer_formatter/analyzer_project/analyzer_project.csproj`
                 var exitCode = await DotNetHelper.PerformRestoreAsync(
                     s_analyzerProjectFilePath,
                     TestOutputHelper

@@ -266,7 +266,8 @@ namespace Internal.NativeFormat
 
             int offset = val._offset;
 
-            // If the offset was not update in this iteration yet, adjust it by delta we have accumulated in this iteration so far.
+            // If the offset was not update in this iteration yet, adjust it by delta we have accumulated in
+            // this iteration so far.
             // This adjustment allows the offsets to converge faster.
             if (val._iteration < _iteration)
                 offset += _offsetAdjustment;
@@ -286,7 +287,8 @@ namespace Internal.NativeFormat
 
             int offset = val._offset;
 
-            // If the offset was not update in this iteration yet, adjust it by delta we have accumulated in this iteration so far.
+            // If the offset was not update in this iteration yet, adjust it by delta we have accumulated in
+            // this iteration so far.
             // This adjustment allows the offsets to converge faster.
             if (val._iteration < _iteration)
                 offset += _offsetAdjustment;
@@ -380,7 +382,8 @@ namespace Internal.NativeFormat
 #endif
                 }
 
-                // We are not able to shrink anymore. We cannot just return here. It is possible that we have rolledback
+                // We are not able to shrink anymore. We cannot just return here. It is possible that we have
+                // rolledback
                 // above because of we shrunk too much.
                 if (_offsetAdjustment == 0)
                     break;
@@ -2108,10 +2111,12 @@ namespace Internal.NativeFormat
 
         private List<Entry> _Entries;
 
-        // How many entries to target per bucket. Higher fill factor means smaller size, but worse runtime perf.
+        // How many entries to target per bucket. Higher fill factor means smaller size, but worse runtime
+        // perf.
         private int _nFillFactor;
 
-        // Number of buckets chosen for the table. Must be power of two. 0 means that the table is still open for mutation.
+        // Number of buckets chosen for the table. Must be power of two. 0 means that the table is still
+        // open for mutation.
         private uint _nBuckets;
 
         // Current size of index entry

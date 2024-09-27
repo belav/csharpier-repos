@@ -40,18 +40,21 @@ namespace Wasm.Build.Tests
         private ProjectProviderBase _providerOfBaseType;
 
         /* This will trigger importing WasmOverridePacks.targets for the tests,
-         * which will override the runtime pack with with the locally built one.
-         * But note that this only partially helps with "switching workloads" because
-         * the tasks/targets, aot compiler, etc would still be from the old version
-         */
+        * which will override the runtime pack with with the locally built one.
+        * But note that this only partially helps with "switching workloads" because
+        * the tasks/targets, aot compiler, etc would still be from the old version
+        */
         public bool UseWBTOverridePackTargets = false;
 
         private static readonly char[] s_charsToReplace = new[] { '.', '-', '+' };
         private static bool s_isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-        // changing Windows's language programistically is complicated and Node is using OS's language to determine
-        // what is client's preferred locale and then to load corresponding ICU => skip automatic icu testing with Node
-        // on Linux sharding does not work because we rely on LANG env var to check locale and emcc is overwriting it
+        // changing Windows's language programistically is complicated and Node is using OS's language to
+        // determine
+        // what is client's preferred locale and then to load corresponding ICU => skip automatic icu
+        // testing with Node
+        // on Linux sharding does not work because we rely on LANG env var to check locale and emcc is
+        // overwriting it
         protected static RunHost s_hostsForOSLocaleSensitiveTests = RunHost.Chrome;
 
         // FIXME: use an envvar to override this
@@ -311,7 +314,8 @@ namespace Wasm.Build.Tests
 
             if (s_isWindows && buildArgs.ProjectName.Contains(s_unicodeChar))
             {
-                // unicode chars in output on Windows are decoded in unknown way, so finding utf8 string is more complicated
+                // unicode chars in output on Windows are decoded in unknown way, so finding utf8 string is more
+                // complicated
                 string projectNameCore = buildArgs.ProjectName.Trim(new char[] { s_unicodeChar });
                 TestUtils.AssertMatches(
                     @$"AOT: image '{projectNameCore}\S+' found.",
@@ -667,6 +671,8 @@ namespace Wasm.Build.Tests
 
                 // this will ensure that all the async event handling has completed
                 // and should be called after process.WaitForExit(int)
+                //
+                //
                 // https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process.waitforexit?view=net-5.0#System_Diagnostics_Process_WaitForExit_System_Int32_
                 process.WaitForExit();
 

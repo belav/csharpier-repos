@@ -28,7 +28,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// MethodDef or MemberRef handle specifying to which generic method this <see cref="MethodSpecification"/> refers,
+        /// MethodDef or MemberRef handle specifying to which generic method this <see
+        // cref="MethodSpecification"/> refers,
         /// that is which generic method is it an instantiation of.
         /// </summary>
         public EntityHandle Method

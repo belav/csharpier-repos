@@ -49,7 +49,8 @@ namespace System.Net.NetworkInformation
             get { return _routingEnabled; }
         }
 
-        /// Auto configuration of an ipv4 address for a client on a network where a DHCP server isn't available.
+        /// Auto configuration of an ipv4 address for a client on a network where a DHCP server isn't
+        // available.
         public override bool IsAutomaticPrivateAddressingEnabled
         {
             get { return _autoConfigEnabled; }

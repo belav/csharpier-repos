@@ -83,22 +83,22 @@ namespace Mono.Net.Dns
             return;
 
             /*
-                        List<IPEndPoint> eps = new List<IPEndPoint> ();
-                        foreach (NetworkInterface iface in NetworkInterface.GetAllNetworkInterfaces ()) {
-                            if (NetworkInterfaceType.Loopback == iface.NetworkInterfaceType)
-                                continue;
+            List<IPEndPoint> eps = new List<IPEndPoint> ();
+            foreach (NetworkInterface iface in NetworkInterface.GetAllNetworkInterfaces ()) {
+            if (NetworkInterfaceType.Loopback == iface.NetworkInterfaceType)
+            continue;
             
-                            foreach (IPAddress addr in iface.GetIPProperties ().DnsAddresses) {
-                                if (AddressFamily.InterNetworkV6 == addr.AddressFamily)
-                                    continue;
-                                IPEndPoint ep = new IPEndPoint (addr, 53);
-                                if (eps.Contains (ep))
-                                    continue;
+            foreach (IPAddress addr in iface.GetIPProperties ().DnsAddresses) {
+            if (AddressFamily.InterNetworkV6 == addr.AddressFamily)
+            continue;
+            IPEndPoint ep = new IPEndPoint (addr, 53);
+            if (eps.Contains (ep))
+            continue;
             
-                                eps.Add (ep);
-                            }
-                        }
-                        endpoints = eps.ToArray ();
+            eps.Add (ep);
+            }
+            }
+            endpoints = eps.ToArray ();
             */
         }
 
@@ -456,9 +456,9 @@ namespace Mono.Net.Dns
             DnsQuestion question = q[0];
             /* The answer might have dot at the end, etc...
             if (String.Compare (question.Name, args.HostName) != 0) {
-                args.ResolverError = ResolverError.ResponseHeaderError;
-                args.ErrorMessage = "HostName - " + question.Name + " != " + args.HostName;
-                return;
+            args.ResolverError = ResolverError.ResponseHeaderError;
+            args.ErrorMessage = "HostName - " + question.Name + " != " + args.HostName;
+            return;
             }
             */
 

@@ -1,5 +1,6 @@
 //
-// AlternateViewCollectionTest.cs - NUnit Test Cases for System.Net.MailAddress.AlternateViewCollection
+// AlternateViewCollectionTest.cs - NUnit Test Cases for
+// System.Net.MailAddress.AlternateViewCollection
 //
 // Authors:
 //   John Luke (john.luke@gmail.com)

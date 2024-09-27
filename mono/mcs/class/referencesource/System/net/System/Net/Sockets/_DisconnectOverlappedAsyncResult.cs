@@ -13,7 +13,8 @@ namespace System.Net.Sockets
     using Microsoft.Win32;
 
     //
-    //  DisconnectOverlappedAsyncResult - used to take care of storage for async Socket BeginAccept call.
+    //  DisconnectOverlappedAsyncResult - used to take care of storage for async Socket BeginAccept
+    // call.
     //
     internal class DisconnectOverlappedAsyncResult : BaseOverlappedAsyncResult
     {

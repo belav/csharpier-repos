@@ -688,7 +688,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         [Fact]
         public async Task NotMergedIntoParentWithUnmatchingStatements4()
         {
-            // Do not consider the using statement to be a simple block (as might be suggested by some language-agnostic helpers).
+            // Do not consider the using statement to be a simple block (as might be suggested by some
+            // language-agnostic helpers).
             await TestMissingInRegularAndScriptAsync(
                 @"class C
 {

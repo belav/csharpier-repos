@@ -78,10 +78,12 @@ namespace Microsoft.CodeAnalysis.Scripting
             Debug.Assert((exceptionHolderOpt != null) == (catchExceptionOpt != null));
 
             // Each executor points to a <Factory> method of the Submission class.
-            // The method creates an instance of the Submission class passing the submission states to its constructor.
+            // The method creates an instance of the Submission class passing the submission states to its
+            // constructor.
             // The consturctor initializes the links between submissions and stores the Submission instance to
             // a slot in submission states that corresponds to the submission.
-            // The <Factory> method then calls the <Initialize> method that consists of top-level script code statements.
+            // The <Factory> method then calls the <Initialize> method that consists of top-level script code
+            // statements.
 
             int executorIndex = 0;
             try
@@ -101,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Scripting
                     finally
                     {
                         // The submission constructor always runs into completion (unless we emitted bad code).
-                        // We need to advance the counter to reflect the updates to submission states done in the constructor.
+                        // We need to advance the counter to reflect the updates to submission states done in the
+                        // constructor.
                         AdvanceStateCounter();
                     }
                 }
@@ -121,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Scripting
                 finally
                 {
                     // The submission constructor always runs into completion (unless we emitted bad code).
-                    // We need to advance the counter to reflect the updates to submission states done in the constructor.
+                    // We need to advance the counter to reflect the updates to submission states done in the
+                    // constructor.
                     AdvanceStateCounter();
                 }
 

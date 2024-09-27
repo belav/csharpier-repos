@@ -472,13 +472,16 @@ namespace System.Web.Management
             return msg;
         }
 
-        // Both WebBaseEvents and HealthMonitoringSectionHelper has to store information per {event type, event code}.
+        // Both WebBaseEvents and HealthMonitoringSectionHelper has to store information per {event type,
+        // event code}.
         // But for system event type, eventCode and event type has a N:1 relationship.  Meaning every event
-        // code can be mapped to one and only one event type.  So instead of using {event type, event code} as
+        // code can be mapped to one and only one event type.  So instead of using {event type, event code}
+        // as
         // the key, we can use just the event code as the key.
 
         // The simplest way is to use a hashtable.  But in order to boost performance, we store those
-        // information using an array with event code as the key.  However, because the event code range is not
+        // information using an array with event code as the key.  However, because the event code range is
+        // not
         // continuous, and has large gap between categories, instead we use an NxM array, when N is number
         // of major event code categories (e.g. ApplicationCodeBase and RequestCodeBase), and M is the
         // max number of per category event code among all the catogories.

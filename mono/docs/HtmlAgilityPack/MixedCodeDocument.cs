@@ -6,7 +6,8 @@ using System.Text;
 namespace HtmlAgilityPack
 {
     /// <summary>
-    /// Represents a document with mixed code and text. ASP, ASPX, JSP, are good example of such documents.
+    /// Represents a document with mixed code and text. ASP, ASPX, JSP, are good example of such
+    // documents.
     /// </summary>
     public class MixedCodeDocument
     {
@@ -162,7 +163,8 @@ namespace HtmlAgilityPack
         /// Loads a mixed code document from a stream.
         /// </summary>
         /// <param name="stream">The input stream.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public void Load(Stream stream, bool detectEncodingFromByteOrderMarks)
         {
             Load(new StreamReader(stream, detectEncodingFromByteOrderMarks));
@@ -183,7 +185,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="stream">The input stream.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public void Load(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks)
         {
             Load(new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks));
@@ -194,7 +197,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="stream">The input stream.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
         public void Load(
             Stream stream,
@@ -219,7 +223,8 @@ namespace HtmlAgilityPack
         /// Loads a mixed code document from a file.
         /// </summary>
         /// <param name="path">The complete file path to be read.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public void Load(string path, bool detectEncodingFromByteOrderMarks)
         {
             Load(new StreamReader(path, detectEncodingFromByteOrderMarks));
@@ -240,7 +245,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="path">The complete file path to be read.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         public void Load(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks)
         {
             Load(new StreamReader(path, encoding, detectEncodingFromByteOrderMarks));
@@ -251,7 +257,8 @@ namespace HtmlAgilityPack
         /// </summary>
         /// <param name="path">The complete file path to be read.</param>
         /// <param name="encoding">The character encoding to use.</param>
-        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
+        /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at
+        // the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
         public void Load(
             string path,

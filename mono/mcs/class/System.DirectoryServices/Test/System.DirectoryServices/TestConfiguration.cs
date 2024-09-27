@@ -50,7 +50,8 @@ namespace MonoTests.System.DirectoryServices
                         _authenticationType |= type;
             }
 
-            //Console.WriteLine ("Connecting to {0} with credentials {1}:{2} and security {3}",ConnectionString,Username,Password,AuthenticationType);
+            //Console.WriteLine ("Connecting to {0} with credentials {1}:{2} and security
+            // {3}",ConnectionString,Username,Password,AuthenticationType);
         }
 
         #endregion // Constructors

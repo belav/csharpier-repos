@@ -8,13 +8,17 @@ using System.Runtime.CompilerServices;
 namespace System.Threading
 {
     /// <summary>
-    /// Provides a way to get mutual exclusion in regions of code between different threads. A lock may be held by one thread at
+    /// Provides a way to get mutual exclusion in regions of code between different threads. A lock may
+    // be held by one thread at
     /// a time.
     /// </summary>
     /// <remarks>
-    /// Threads that cannot immediately enter the lock may wait for the lock to be exited or until a specified timeout. A thread
-    /// that holds a lock may enter the lock repeatedly without exiting it, such as recursively, in which case the thread should
-    /// eventually exit the lock the same number of times to fully exit the lock and allow other threads to enter the lock.
+    /// Threads that cannot immediately enter the lock may wait for the lock to be exited or until a
+    // specified timeout. A thread
+    /// that holds a lock may enter the lock repeatedly without exiting it, such as recursively, in
+    // which case the thread should
+    /// eventually exit the lock the same number of times to fully exit the lock and allow other threads
+    // to enter the lock.
     /// </remarks>
     [Runtime.Versioning.RequiresPreviewFeatures]
     public sealed partial class Lock
@@ -26,8 +30,10 @@ namespace System.Threading
 
         private static long s_contentionCount;
 
-        // The field's type is not ThreadId to try to retain the relative order of fields of intrinsic types. The type system
-        // appears to place struct fields after fields of other types, in which case there can be a greater chance that
+        // The field's type is not ThreadId to try to retain the relative order of fields of intrinsic
+        // types. The type system
+        // appears to place struct fields after fields of other types, in which case there can be a greater
+        // chance that
         // _owningThreadId is not in the same cache line as _state.
 #if TARGET_OSX && !NATIVEAOT
         private ulong _owningThreadId;
@@ -42,15 +48,19 @@ namespace System.Threading
         private AutoResetEvent? _waitEvent;
 
         /// <summary>
-        /// Enters the lock. Once the method returns, the calling thread would be the only thread that holds the lock.
+        /// Enters the lock. Once the method returns, the calling thread would be the only thread that holds
+        // the lock.
         /// </summary>
         /// <remarks>
-        /// If the lock cannot be entered immediately, the calling thread waits for the lock to be exited. If the lock is
-        /// already held by the calling thread, the lock is entered again. The calling thread should exit the lock as many times
+        /// If the lock cannot be entered immediately, the calling thread waits for the lock to be exited.
+        // If the lock is
+        /// already held by the calling thread, the lock is entered again. The calling thread should exit
+        // the lock as many times
         /// as it had entered the lock to fully exit the lock and allow other threads to enter the lock.
         /// </remarks>
         /// <exception cref="LockRecursionException">
-        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is expected to be high
+        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is
+        // expected to be high
         /// enough that it would typically not be reached when the lock is used properly.
         /// </exception>
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -70,29 +80,37 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Enters the lock and returns a <see cref="Scope"/> that may be disposed to exit the lock. Once the method returns,
-        /// the calling thread would be the only thread that holds the lock. This method is intended to be used along with a
-        /// language construct that would automatically dispose the <see cref="Scope"/>, such as with the C# <code>using</code>
+        /// Enters the lock and returns a <see cref="Scope"/> that may be disposed to exit the lock. Once
+        // the method returns,
+        /// the calling thread would be the only thread that holds the lock. This method is intended to be
+        // used along with a
+        /// language construct that would automatically dispose the <see cref="Scope"/>, such as with the C#
+        // <code>using</code>
         /// statement.
         /// </summary>
         /// <returns>
         /// A <see cref="Scope"/> that may be disposed to exit the lock.
         /// </returns>
         /// <remarks>
-        /// If the lock cannot be entered immediately, the calling thread waits for the lock to be exited. If the lock is
-        /// already held by the calling thread, the lock is entered again. The calling thread should exit the lock, such as by
-        /// disposing the returned <see cref="Scope"/>, as many times as it had entered the lock to fully exit the lock and
+        /// If the lock cannot be entered immediately, the calling thread waits for the lock to be exited.
+        // If the lock is
+        /// already held by the calling thread, the lock is entered again. The calling thread should exit
+        // the lock, such as by
+        /// disposing the returned <see cref="Scope"/>, as many times as it had entered the lock to fully
+        // exit the lock and
         /// allow other threads to enter the lock.
         /// </remarks>
         /// <exception cref="LockRecursionException">
-        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is expected to be high
+        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is
+        // expected to be high
         /// enough that it would typically not be reached when the lock is used properly.
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Scope EnterScope() => new Scope(this, EnterAndGetCurrentThreadId());
 
         /// <summary>
-        /// A disposable structure that is returned by <see cref="EnterScope()"/>, which when disposed, exits the lock.
+        /// A disposable structure that is returned by <see cref="EnterScope()"/>, which when disposed,
+        // exits the lock.
         /// </summary>
         public ref struct Scope
         {
@@ -110,7 +128,8 @@ namespace System.Threading
             /// Exits the lock.
             /// </summary>
             /// <remarks>
-            /// If the calling thread holds the lock multiple times, such as recursively, the lock is exited only once. The
+            /// If the calling thread holds the lock multiple times, such as recursively, the lock is exited
+            // only once. The
             /// calling thread should ensure that each enter is matched with an exit.
             /// </remarks>
             /// <exception cref="SynchronizationLockException">
@@ -129,47 +148,58 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Tries to enter the lock without waiting. If the lock is entered, the calling thread would be the only thread that
+        /// Tries to enter the lock without waiting. If the lock is entered, the calling thread would be the
+        // only thread that
         /// holds the lock.
         /// </summary>
         /// <returns>
         /// <code>true</code> if the lock was entered, <code>false</code> otherwise.
         /// </returns>
         /// <remarks>
-        /// If the lock cannot be entered immediately, the method returns <code>false</code>. If the lock is already held by the
-        /// calling thread, the lock is entered again. The calling thread should exit the lock as many times as it had entered
+        /// If the lock cannot be entered immediately, the method returns <code>false</code>. If the lock is
+        // already held by the
+        /// calling thread, the lock is entered again. The calling thread should exit the lock as many times
+        // as it had entered
         /// the lock to fully exit the lock and allow other threads to enter the lock.
         /// </remarks>
         /// <exception cref="LockRecursionException">
-        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is expected to be high
+        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is
+        // expected to be high
         /// enough that it would typically not be reached when the lock is used properly.
         /// </exception>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public bool TryEnter() => TryEnter_Inlined(timeoutMs: 0).IsInitialized;
 
         /// <summary>
-        /// Tries to enter the lock, waiting for roughly the specified duration. If the lock is entered, the calling thread
+        /// Tries to enter the lock, waiting for roughly the specified duration. If the lock is entered, the
+        // calling thread
         /// would be the only thread that holds the lock.
         /// </summary>
         /// <param name="millisecondsTimeout">
-        /// The rough duration in milliseconds for which the method will wait if the lock is not available. A value of
-        /// <code>0</code> specifies that the method should not wait, and a value of <see cref="Timeout.Infinite"/> or
+        /// The rough duration in milliseconds for which the method will wait if the lock is not available.
+        // A value of
+        /// <code>0</code> specifies that the method should not wait, and a value of <see
+        // cref="Timeout.Infinite"/> or
         /// <code>-1</code> specifies that the method should wait indefinitely until the lock is entered.
         /// </param>
         /// <returns>
         /// <code>true</code> if the lock was entered, <code>false</code> otherwise.
         /// </returns>
         /// <remarks>
-        /// If the lock cannot be entered immediately, the calling thread waits for roughly the specified duration for the lock
-        /// to be exited. If the lock is already held by the calling thread, the lock is entered again. The calling thread
-        /// should exit the lock as many times as it had entered the lock to fully exit the lock and allow other threads to
+        /// If the lock cannot be entered immediately, the calling thread waits for roughly the specified
+        // duration for the lock
+        /// to be exited. If the lock is already held by the calling thread, the lock is entered again. The
+        // calling thread
+        /// should exit the lock as many times as it had entered the lock to fully exit the lock and allow
+        // other threads to
         /// enter the lock.
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="millisecondsTimeout"/> is less than <code>-1</code>.
         /// </exception>
         /// <exception cref="LockRecursionException">
-        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is expected to be high
+        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is
+        // expected to be high
         /// enough that it would typically not be reached when the lock is used properly.
         /// </exception>
         public bool TryEnter(int millisecondsTimeout)
@@ -179,31 +209,41 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Tries to enter the lock, waiting for roughly the specified duration. If the lock is entered, the calling thread
+        /// Tries to enter the lock, waiting for roughly the specified duration. If the lock is entered, the
+        // calling thread
         /// would be the only thread that holds the lock.
         /// </summary>
         /// <param name="timeout">
-        /// The rough duration for which the method will wait if the lock is not available. The timeout is converted to a number
-        /// of milliseconds by casting <see cref="TimeSpan.TotalMilliseconds"/> of the timeout to an integer value. A value
-        /// representing <code>0</code> milliseconds specifies that the method should not wait, and a value representing
-        /// <see cref="Timeout.Infinite"/> or <code>-1</code> milliseconds specifies that the method should wait indefinitely
+        /// The rough duration for which the method will wait if the lock is not available. The timeout is
+        // converted to a number
+        /// of milliseconds by casting <see cref="TimeSpan.TotalMilliseconds"/> of the timeout to an integer
+        // value. A value
+        /// representing <code>0</code> milliseconds specifies that the method should not wait, and a value
+        // representing
+        /// <see cref="Timeout.Infinite"/> or <code>-1</code> milliseconds specifies that the method should
+        // wait indefinitely
         /// until the lock is entered.
         /// </param>
         /// <returns>
         /// <code>true</code> if the lock was entered, <code>false</code> otherwise.
         /// </returns>
         /// <remarks>
-        /// If the lock cannot be entered immediately, the calling thread waits for roughly the specified duration for the lock
-        /// to be exited. If the lock is already held by the calling thread, the lock is entered again. The calling thread
-        /// should exit the lock as many times as it had entered the lock to fully exit the lock and allow other threads to
+        /// If the lock cannot be entered immediately, the calling thread waits for roughly the specified
+        // duration for the lock
+        /// to be exited. If the lock is already held by the calling thread, the lock is entered again. The
+        // calling thread
+        /// should exit the lock as many times as it had entered the lock to fully exit the lock and allow
+        // other threads to
         /// enter the lock.
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="timeout"/>, after its conversion to an integer millisecond value, represents a value that is less
+        /// <paramref name="timeout"/>, after its conversion to an integer millisecond value, represents a
+        // value that is less
         /// than <code>-1</code> milliseconds or greater than <see cref="int.MaxValue"/> milliseconds.
         /// </exception>
         /// <exception cref="LockRecursionException">
-        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is expected to be high
+        /// The lock has reached the limit of recursive enters. The limit is implementation-defined, but is
+        // expected to be high
         /// enough that it would typically not be reached when the lock is used properly.
         /// </exception>
         public bool TryEnter(TimeSpan timeout) =>
@@ -233,7 +273,8 @@ namespace System.Threading
         /// Exits the lock.
         /// </summary>
         /// <remarks>
-        /// If the calling thread holds the lock multiple times, such as recursively, the lock is exited only once. The
+        /// If the calling thread holds the lock multiple times, such as recursively, the lock is exited
+        // only once. The
         /// calling thread should ensure that each enter is matched with an exit.
         /// </remarks>
         /// <exception cref="SynchronizationLockException">
@@ -300,7 +341,8 @@ namespace System.Threading
 
             if (!currentThreadId.IsInitialized)
             {
-                // The thread info hasn't been initialized yet for this thread, and the fast path hasn't been tried yet. After
+                // The thread info hasn't been initialized yet for this thread, and the fast path hasn't been tried
+                // yet. After
                 // initializing the thread info, try the fast path first.
                 currentThreadId.InitializeForCurrentThread();
                 Debug.Assert(_owningThreadId != currentThreadId.Id);
@@ -344,14 +386,16 @@ namespace System.Threading
             short spinCount = _spinCount;
             if (spinCount < 0)
             {
-                // When negative, the spin count serves as a counter for contentions such that a spin-wait can be attempted
+                // When negative, the spin count serves as a counter for contentions such that a spin-wait can be
+                // attempted
                 // periodically to see if it would be beneficial. Increment the spin count and skip spin-waiting.
                 Debug.Assert(IsAdaptiveSpinEnabled(minSpinCount));
                 _spinCount = (short)(spinCount + 1);
                 goto Wait;
             }
 
-            // Try to acquire the lock, and check if non-waiters should stop preempting waiters. If this thread should not
+            // Try to acquire the lock, and check if non-waiters should stop preempting waiters. If this thread
+            // should not
             // preempt waiters, skip spin-waiting. Upon contention, register a spinner.
             TryLockResult tryLockResult = State.TryLockBeforeSpinLoop(
                 this,
@@ -367,8 +411,10 @@ namespace System.Threading
 
             if (isFirstSpinner)
             {
-                // Whether a full-length spin-wait would be effective is determined by having the first spinner do a full-length
-                // spin-wait to see if it is effective. Shorter spin-waits would more often be ineffective just because they are
+                // Whether a full-length spin-wait would be effective is determined by having the first spinner do a
+                // full-length
+                // spin-wait to see if it is effective. Shorter spin-waits would more often be ineffective just
+                // because they are
                 // shorter.
                 spinCount = maxSpinCount;
             }
@@ -394,7 +440,8 @@ namespace System.Threading
                 {
                     if (isFirstSpinner && IsAdaptiveSpinEnabled(minSpinCount))
                     {
-                        // Since the first spinner does a full-length spin-wait, and to keep upward and downward changes to the
+                        // Since the first spinner does a full-length spin-wait, and to keep upward and downward changes to
+                        // the
                         // spin count more balanced, only the first spinner adjusts the spin count
                         spinCount = _spinCount;
                         if (spinCount < maxSpinCount)
@@ -415,7 +462,8 @@ namespace System.Threading
             tryLockResult = State.TryLockAfterSpinLoop(this);
             if (isFirstSpinner && IsAdaptiveSpinEnabled(minSpinCount))
             {
-                // Since the first spinner does a full-length spin-wait, and to keep upward and downward changes to the
+                // Since the first spinner does a full-length spin-wait, and to keep upward and downward changes to
+                // the
                 // spin count more balanced, only the first spinner adjusts the spin count
                 if (tryLockResult == TryLockResult.Locked)
                 {
@@ -427,8 +475,10 @@ namespace System.Threading
                 }
                 else
                 {
-                    // If the spin count is already zero, skip spin-waiting for a while, even for the first spinners. After a
-                    // number of contentions, the first spinner will attempt a spin-wait again to see if it is effective.
+                    // If the spin count is already zero, skip spin-waiting for a while, even for the first spinners.
+                    // After a
+                    // number of contentions, the first spinner will attempt a spin-wait again to see if it is
+                    // effective.
                     Debug.Assert(tryLockResult == TryLockResult.Wait);
                     spinCount = _spinCount;
                     _spinCount = spinCount > 0 ? (short)(spinCount - 1) : minSpinCount;
@@ -462,7 +512,8 @@ namespace System.Threading
                 goto Locked;
             }
 
-            // Lock was not acquired and a waiter was registered. All following paths need to unregister the waiter, including
+            // Lock was not acquired and a waiter was registered. All following paths need to unregister the
+            // waiter, including
             // exceptional paths.
             try
             {
@@ -486,13 +537,18 @@ namespace System.Threading
                     }
 
                     // Spin a bit while trying to acquire the lock. This has a few benefits:
-                    // - Spinning helps to reduce waiter starvation. Since other non-waiter threads can take the lock while
-                    //   there are waiters (see State.TryLock()), once a waiter wakes it will be able to better compete with
+                    // - Spinning helps to reduce waiter starvation. Since other non-waiter threads can take the lock
+                    // while
+                    //   there are waiters (see State.TryLock()), once a waiter wakes it will be able to better compete
+                    // with
                     //   other spinners for the lock.
-                    // - If there is another thread that is repeatedly acquiring and releasing the lock, spinning before waiting
+                    // - If there is another thread that is repeatedly acquiring and releasing the lock, spinning before
+                    // waiting
                     //   again helps to prevent a waiter from repeatedly context-switching in and out
-                    // - Further in the same situation above, waking up and waiting shortly thereafter deprioritizes this waiter
-                    //   because events release waiters in FIFO order. Spinning a bit helps a waiter to retain its priority at
+                    // - Further in the same situation above, waking up and waiting shortly thereafter deprioritizes
+                    // this waiter
+                    //   because events release waiters in FIFO order. Spinning a bit helps a waiter to retain its
+                    // priority at
                     //   least for one spin duration before it gets deprioritized behind all other waiters.
                     for (short spinIndex = 0; spinIndex < maxSpinCount; spinIndex++)
                     {
@@ -532,8 +588,10 @@ namespace System.Threading
 
                 if (acquiredLock)
                 {
-                    // In NativeAOT, ensure that class construction cycles do not occur after the lock is acquired but before
-                    // the state is fully updated. Update the state to fully reflect that this thread owns the lock before doing
+                    // In NativeAOT, ensure that class construction cycles do not occur after the lock is acquired but
+                    // before
+                    // the state is fully updated. Update the state to fully reflect that this thread owns the lock
+                    // before doing
                     // other things.
                     Debug.Assert(!new ThreadId(_owningThreadId).IsInitialized);
                     Debug.Assert(_recursionCount == 0);
@@ -832,20 +890,31 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool TryLock(Lock lockObj)
             {
-                // The lock is mostly fair to release waiters in a typically FIFO order (though the order is not guaranteed).
+                // The lock is mostly fair to release waiters in a typically FIFO order (though the order is not
+                // guaranteed).
                 // However, it allows non-waiters to acquire the lock if it's available to avoid lock convoys.
                 //
-                // Lock convoys can be detrimental to performance in scenarios where work is being done on multiple threads and
-                // the work involves periodically taking a particular lock for a short time to access shared resources. With a
-                // lock convoy, once there is a waiter for the lock (which is not uncommon in such scenarios), a worker thread
-                // would be forced to context-switch on the subsequent attempt to acquire the lock, often long before the worker
-                // thread exhausts its time slice. This process repeats as long as the lock has a waiter, forcing every worker
-                // to context-switch on each attempt to acquire the lock, killing performance and creating a positive feedback
-                // loop that makes it more likely for the lock to have waiters. To avoid the lock convoy, each worker needs to
-                // be allowed to acquire the lock multiple times in sequence despite there being a waiter for the lock in order
-                // to have the worker continue working efficiently during its time slice as long as the lock is not contended.
+                // Lock convoys can be detrimental to performance in scenarios where work is being done on multiple
+                // threads and
+                // the work involves periodically taking a particular lock for a short time to access shared
+                // resources. With a
+                // lock convoy, once there is a waiter for the lock (which is not uncommon in such scenarios), a
+                // worker thread
+                // would be forced to context-switch on the subsequent attempt to acquire the lock, often long
+                // before the worker
+                // thread exhausts its time slice. This process repeats as long as the lock has a waiter, forcing
+                // every worker
+                // to context-switch on each attempt to acquire the lock, killing performance and creating a
+                // positive feedback
+                // loop that makes it more likely for the lock to have waiters. To avoid the lock convoy, each
+                // worker needs to
+                // be allowed to acquire the lock multiple times in sequence despite there being a waiter for the
+                // lock in order
+                // to have the worker continue working efficiently during its time slice as long as the lock is not
+                // contended.
                 //
-                // This scheme has the possibility to starve waiters. Waiter starvation is mitigated by other means, see
+                // This scheme has the possibility to starve waiters. Waiter starvation is mitigated by other means,
+                // see
                 // TryLockBeforeSpinLoop() and references to ShouldNotPreemptWaiters.
 
                 var state = new State(lockObj);
@@ -877,33 +946,49 @@ namespace System.Threading
                 out bool isFirstSpinner
             )
             {
-                // Normally, threads are allowed to preempt waiters to acquire the lock in order to avoid creating lock convoys,
-                // see TryLock(). There can be cases where waiters can be easily starved as a result. For example, a thread that
-                // holds a lock for a significant amount of time (much longer than the time it takes to do a context switch),
-                // then releases and reacquires the lock in quick succession, and repeats. Though a waiter would be woken upon
-                // lock release, usually it will not have enough time to context-switch-in and take the lock, and can be starved
+                // Normally, threads are allowed to preempt waiters to acquire the lock in order to avoid creating
+                // lock convoys,
+                // see TryLock(). There can be cases where waiters can be easily starved as a result. For example, a
+                // thread that
+                // holds a lock for a significant amount of time (much longer than the time it takes to do a context
+                // switch),
+                // then releases and reacquires the lock in quick succession, and repeats. Though a waiter would be
+                // woken upon
+                // lock release, usually it will not have enough time to context-switch-in and take the lock, and
+                // can be starved
                 // for an unreasonably long duration.
                 //
-                // In order to prevent such starvation and force a bit of fair forward progress, it is sometimes necessary to
-                // change the normal policy and disallow threads from preempting waiters. ShouldNotPreemptWaiters() indicates
-                // the current state of the policy and this method determines whether the policy should be changed to disallow
+                // In order to prevent such starvation and force a bit of fair forward progress, it is sometimes
+                // necessary to
+                // change the normal policy and disallow threads from preempting waiters. ShouldNotPreemptWaiters()
+                // indicates
+                // the current state of the policy and this method determines whether the policy should be changed
+                // to disallow
                 // non-waiters from preempting waiters.
-                //   - When the first waiter begins waiting, it records the current time as a "waiter starvation start time".
-                //     That is a point in time after which no forward progress has occurred for waiters. When a waiter acquires
+                //   - When the first waiter begins waiting, it records the current time as a "waiter starvation
+                // start time".
+                //     That is a point in time after which no forward progress has occurred for waiters. When a
+                // waiter acquires
                 //     the lock, the time is updated to the current time.
                 //   - This method checks whether the starvation duration has crossed a threshold and if so, sets
                 //     ShouldNotPreemptWaitersMask
                 //
-                // When unreasonable starvation is occurring, the lock will be released occasionally and if caused by spinners,
+                // When unreasonable starvation is occurring, the lock will be released occasionally and if caused
+                // by spinners,
                 // those threads may start to spin again.
-                //   - Before starting to spin this method is called. If ShouldNotPreemptWaitersMask is set, the spinner will
+                //   - Before starting to spin this method is called. If ShouldNotPreemptWaitersMask is set, the
+                // spinner will
                 //     skip spinning and wait instead. Spinners that are already registered at the time
-                //     ShouldNotPreemptWaitersMask is set will stop spinning as necessary. Eventually, all spinners will drain
+                //     ShouldNotPreemptWaitersMask is set will stop spinning as necessary. Eventually, all spinners
+                // will drain
                 //     and no new ones will be registered.
-                //   - Upon releasing a lock, if there are no spinners, a waiter will be signaled to wake. On that path,
+                //   - Upon releasing a lock, if there are no spinners, a waiter will be signaled to wake. On that
+                // path,
                 //     TrySetIsWaiterSignaledToWake() is called.
-                //   - Eventually, after spinners have drained, only a waiter will be able to acquire the lock. When a waiter
-                //     acquires the lock, or when the last waiter unregisters itself, ShouldNotPreemptWaitersMask is cleared to
+                //   - Eventually, after spinners have drained, only a waiter will be able to acquire the lock. When
+                // a waiter
+                //     acquires the lock, or when the last waiter unregisters itself, ShouldNotPreemptWaitersMask is
+                // cleared to
                 //     restore the normal policy.
 
                 Debug.Assert(spinCount >= 0);
@@ -960,7 +1045,8 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static TryLockResult TryLockInsideSpinLoop(Lock lockObj)
             {
-                // This method is called from inside a spin loop, it must unregister the spinner if the lock is acquired
+                // This method is called from inside a spin loop, it must unregister the spinner if the lock is
+                // acquired
 
                 var state = new State(lockObj);
                 while (true)
@@ -990,8 +1076,10 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static TryLockResult TryLockAfterSpinLoop(Lock lockObj)
             {
-                // This method is called at the end of a spin loop, it must unregister the spinner always and acquire the lock
-                // if it's available. If the lock is available, a spinner must acquire the lock along with unregistering itself,
+                // This method is called at the end of a spin loop, it must unregister the spinner always and
+                // acquire the lock
+                // if it's available. If the lock is available, a spinner must acquire the lock along with
+                // unregistering itself,
                 // because a lock releaser does not wake a waiter when there is a spinner registered.
 
                 var state = new State(
@@ -1023,7 +1111,8 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool TryLockBeforeWait(Lock lockObj)
             {
-                // This method is called before waiting. It must either acquire the lock or register a waiter. It also keeps
+                // This method is called before waiting. It must either acquire the lock or register a waiter. It
+                // also keeps
                 // track of the waiter starvation start time.
 
                 var state = new State(lockObj);
@@ -1077,8 +1166,10 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool TryLockInsideWaiterSpinLoop(Lock lockObj)
             {
-                // This method is called from inside the waiter's spin loop and should observe the wake signal only if the lock
-                // is taken, to prevent a lock releaser from waking another waiter while one is already spinning to acquire the
+                // This method is called from inside the waiter's spin loop and should observe the wake signal only
+                // if the lock
+                // is taken, to prevent a lock releaser from waking another waiter while one is already spinning to
+                // acquire the
                 // lock
 
                 bool waiterStartTimeWasRecorded = false;
@@ -1136,10 +1227,14 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool TryLockAfterWaiterSpinLoop(Lock lockObj)
             {
-                // This method is called at the end of the waiter's spin loop. It must observe the wake signal always, and if
-                // the lock is available, it must acquire the lock and unregister the waiter. If the lock is available, a waiter
-                // must acquire the lock along with observing the wake signal, because a lock releaser does not wake a waiter
-                // when a waiter was signaled but the wake signal has not been observed. If the lock is acquired, the waiter
+                // This method is called at the end of the waiter's spin loop. It must observe the wake signal
+                // always, and if
+                // the lock is available, it must acquire the lock and unregister the waiter. If the lock is
+                // available, a waiter
+                // must acquire the lock along with observing the wake signal, because a lock releaser does not wake
+                // a waiter
+                // when a waiter was signaled but the wake signal has not been observed. If the lock is acquired,
+                // the waiter
                 // starvation start time is also updated.
 
                 var state = new State(
@@ -1201,8 +1296,10 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static void UnregisterWaiter(Lock lockObj)
             {
-                // This method is called upon an exception while waiting, or when a wait has timed out. It must unregister the
-                // waiter, and if it's the last waiter, clear ShouldNotPreemptWaitersMask to allow other threads to acquire the
+                // This method is called upon an exception while waiting, or when a wait has timed out. It must
+                // unregister the
+                // waiter, and if it's the last waiter, clear ShouldNotPreemptWaitersMask to allow other threads to
+                // acquire the
                 // lock.
 
                 var state = new State(lockObj);
@@ -1230,13 +1327,20 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool TrySetIsWaiterSignaledToWake(Lock lockObj, State state)
             {
-                // Determine whether we must signal a waiter to wake. Keep track of whether a thread has been signaled to wake
-                // but has not yet woken from the wait. IsWaiterSignaledToWakeMask is cleared when a signaled thread wakes up by
-                // observing a signal. Since threads can preempt waiting threads and acquire the lock (see TryLock()), it allows
-                // for example, one thread to acquire and release the lock multiple times while there are multiple waiting
-                // threads. In such a case, we don't want that thread to signal a waiter every time it releases the lock, as
-                // that will cause unnecessary context switches with more and more signaled threads waking up, finding that the
-                // lock is still locked, and going back into a wait state. So, signal only one waiting thread at a time.
+                // Determine whether we must signal a waiter to wake. Keep track of whether a thread has been
+                // signaled to wake
+                // but has not yet woken from the wait. IsWaiterSignaledToWakeMask is cleared when a signaled thread
+                // wakes up by
+                // observing a signal. Since threads can preempt waiting threads and acquire the lock (see
+                // TryLock()), it allows
+                // for example, one thread to acquire and release the lock multiple times while there are multiple
+                // waiting
+                // threads. In such a case, we don't want that thread to signal a waiter every time it releases the
+                // lock, as
+                // that will cause unnecessary context switches with more and more signaled threads waking up,
+                // finding that the
+                // lock is still locked, and going back into a wait state. So, signal only one waiting thread at a
+                // time.
 
                 Debug.Assert(state.HasAnyWaiters);
 

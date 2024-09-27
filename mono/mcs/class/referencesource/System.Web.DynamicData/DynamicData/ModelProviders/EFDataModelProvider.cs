@@ -40,7 +40,8 @@ namespace System.Web.DynamicData.ModelProviders
 
             var tables = new List<TableProvider>();
 
-            // Create a dictionary from entity type to entity set. The entity type should be at the root of any inheritance chain.
+            // Create a dictionary from entity type to entity set. The entity type should be at the root of any
+            // inheritance chain.
             IDictionary<EntityType, EntitySet> entitySetLookup = container
                 .BaseEntitySets.OfType<EntitySet>()
                 .ToDictionary(e => e.ElementType);
@@ -58,7 +59,8 @@ namespace System.Web.DynamicData.ModelProviders
             // null -> Person
             // Person -> Employee, Contact
             // Employee -> SalesPerson, Programmer
-            // We'll walk the children in a depth first order -> Person, Employee, SalesPerson, Programmer, Contact.
+            // We'll walk the children in a depth first order -> Person, Employee, SalesPerson, Programmer,
+            // Contact.
             var objectStack = new Stack<EntityType>();
             // Start will null (the root of the hierarchy)
             objectStack.Push(null);

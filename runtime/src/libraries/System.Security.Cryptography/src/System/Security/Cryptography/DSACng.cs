@@ -38,7 +38,8 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="key">Key to use for DSA operations</param>
         /// <param name="transferOwnership">
-        /// Must be true. Signals that ownership of <paramref name="key"/> will be transferred to the new instance.
+        /// Must be true. Signals that ownership of <paramref name="key"/> will be transferred to the new
+        // instance.
         /// </param>
         [SupportedOSPlatform("windows")]
         internal DSACng(CngKey key, bool transferOwnership)

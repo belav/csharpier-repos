@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal static class Utilities
 {
-    // When tests projects are run in parallel, overlapping port ranges can cause a race condition when looking for free
+    // When tests projects are run in parallel, overlapping port ranges can cause a race condition when
+    // looking for free
     // ports during dynamic port allocation.
     private const int BaseHttpsPort = 44300;
     private const int MaxHttpsPort = 44399;

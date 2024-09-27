@@ -17,7 +17,8 @@ namespace System.Data.Mapping.ViewGeneration.Utils
     // error code means, please see the code that uses the particular enum
     // AND the corresponding resource string
 
-    // error numbers end up being hard coded in test cases; they can be removed, but should not be changed.
+    // error numbers end up being hard coded in test cases; they can be removed, but should not be
+    // changed.
     // reusing error numbers is probably OK, but not recommended.
     //
     // The acceptable range for this enum is
@@ -129,7 +130,8 @@ namespace System.Data.Mapping.ViewGeneration.Utils
         //Mapping fragments don't overlap on a key or foreign key under read-only scenario
         NoJoinKeyOrFKProvidedInMapping = Value + 36,
 
-        //If there is a fragment with distinct flag, there should be no othe fragment between that C and S extent
+        //If there is a fragment with distinct flag, there should be no othe fragment between that C and S
+        // extent
         MultipleFragmentsBetweenCandSExtentWithDistinct = Value + 37,
     }
 }

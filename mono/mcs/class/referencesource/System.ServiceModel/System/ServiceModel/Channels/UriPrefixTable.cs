@@ -102,7 +102,8 @@ namespace System.ServiceModel.Channels
             object value = this.lookupCache.GetValue(ThisLock, key);
 
             // We might return null and true in the case of DBNull (cached negative result).
-            // When TItem is object, the cast isn't sufficient to ---- out DBNulls, so we need an explicit check.
+            // When TItem is object, the cast isn't sufficient to ---- out DBNulls, so we need an explicit
+            // check.
             item = value == DBNull.Value ? null : (TItem)value;
             return value != null;
         }

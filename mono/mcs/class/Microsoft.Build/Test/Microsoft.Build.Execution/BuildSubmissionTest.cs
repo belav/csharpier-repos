@@ -57,7 +57,8 @@ namespace MonoTests.Microsoft.Build.Execution
             Assert.IsNull(sub.BuildResult, "#1");
         }
 
-        // This checks if the build output for each task is written to the loggers and not directly thrown as a Project loader error.
+        // This checks if the build output for each task is written to the loggers and not directly thrown
+        // as a Project loader error.
         [Test]
         public void TaskOutputsToLoggers()
         {

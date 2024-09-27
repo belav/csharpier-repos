@@ -26,13 +26,15 @@ namespace Microsoft.CodeAnalysis.FindUsages
         );
 
         /// <summary>
-        /// Report a failure message to be displayed to the user.  This will be reported if the find operation returns
+        /// Report a failure message to be displayed to the user.  This will be reported if the find
+        // operation returns
         /// no results.
         /// </summary>
         ValueTask ReportMessageAsync(string message, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Report a informational message to be displayed to the user.  This may appear to the user in the results
+        /// Report a informational message to be displayed to the user.  This may appear to the user in the
+        // results
         /// UI in some fashion (for example: in an info-bar).
         /// </summary>
         ValueTask ReportInformationalMessageAsync(

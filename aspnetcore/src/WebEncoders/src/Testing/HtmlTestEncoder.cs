@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Shared;
 namespace Microsoft.Extensions.WebEncoders.Testing;
 
 /// <summary>
-/// <see cref="HtmlEncoder"/> used for unit testing. This encoder does not perform any encoding and should not be used in application code.
+/// <see cref="HtmlEncoder"/> used for unit testing. This encoder does not perform any encoding and
+// should not be used in application code.
 /// </summary>
 public sealed class HtmlTestEncoder : HtmlEncoder
 {

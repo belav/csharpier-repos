@@ -9,10 +9,10 @@ public class NoNamespace { }
 
 namespace System
 {
-    /*
-     * The System namespace gets special treatment, e.g. instead of
-     * System.Environment C# declarations it's just Environment.
-     */
+/*
+* The System namespace gets special treatment, e.g. instead of
+* System.Environment C# declarations it's just Environment.
+*/
     /// <remarks><c>T:System.Action`1</c></remarks>
     public delegate void Action<T>(T obj);
 
@@ -269,7 +269,8 @@ namespace Mono.DocTest
         ///  <para><c>C:Mono.DocTest.Widget</c>.</para>
         ///  <para><c>M:Mono.DocTest.Widget.#ctor</c>.</para>
         ///  <para><see cref="C:Mono.DocTest.Widget(System.String)" /></para>
-        ///  <para><see cref="C:Mono.DocTest.Widget(System.Converter{System.String,System.String})" /></para>
+        ///  <para><see cref="C:Mono.DocTest.Widget(System.Converter{System.String,System.String})"
+        // /></para>
         /// </remarks>
         public Widget() { }
 
@@ -292,7 +293,8 @@ namespace Mono.DocTest
         /// <param name="c">A <see cref="T:System.Char" />.</param>
         /// <param name="f">A <see cref="T:System.Single" />.</param>
         /// <param name="v">A <see cref="T:Mono.DocTest.DocValueType" />.</param>
-        /// <remarks><c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>.</remarks>
         [return: Doc("return:DocAttribute", Property = typeof(Widget))]
         [Doc("normal DocAttribute", Field = true)]
         public void M1(
@@ -307,12 +309,14 @@ namespace Mono.DocTest
         /// <param name="x1">A <see cref="T:System.Int16" /> array.</param>
         /// <param name="x2">A <see cref="T:System.Int32" /> array.</param>
         /// <param name="x3">A <see cref="T:System.Int64" /> array.</param>
-        /// <remarks><c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>.</remarks>
         public void M2(short[] x1, int[,] x2, long[][] x3) { }
 
         /// <param name="x3">Another <see cref="T:System.Int64" /> array.</param>
         /// <param name="x4">A <see cref="T:Mono.DocTest.Widget" /> array.</param>
-        /// <remarks><c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>.</remarks>
         protected void M3(long[][] x3, Widget[][,,] x4) { }
 
         /// <param name="pc">A <see cref="T:System.Char" /> pointer.</param>
@@ -330,7 +334,8 @@ namespace Mono.DocTest
         /// <remarks><c>M:Mono.DocTest.Widget.M6(System.Int32,System.Object[])</c>.</remarks>
         protected void M6(int i, params object[] args) { }
 
-        /// <remarks><c>M:Mono.DocTest.Widget.M7(Mono.DocTest.Widget.NestedClass.Double.Triple.Quadruple)</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.M7(Mono.DocTest.Widget.NestedClass.Double.Triple.Quadruple)</c>.</remarks>
         public void M7(Widget.NestedClass.Double.Triple.Quadruple a) { }
 
         /// <value>A <see cref="T:System.Int32" /> value...</value>
@@ -415,7 +420,8 @@ namespace Mono.DocTest
 
         /// <param name="x1">Yet Another <see cref="T:Mono.DocTest.Widget" />.</param>
         /// <param name="x2">Yay, <see cref="T:Mono.DocTest.Widget" />s.</param>
-        /// <remarks><c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>.</remarks>
         /// <returns>A <see cref="T:Mono.DocTest.Widget" /> instance (2).</returns>
         public static Widget operator +(Widget x1, Widget x2)
         {
@@ -450,19 +456,22 @@ namespace Mono.DocTest
             return a + b;
         }
 
-        /// <remarks><c>M:Mono.DocTest.Widget.Dynamic1(System.Collections.Generic.Dictionary{System.Object,System.Object})</c></remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.Dynamic1(System.Collections.Generic.Dictionary{System.Object,System.Object})</c></remarks>
         public Dictionary<dynamic, string> Dynamic1(Dictionary<dynamic, string> value)
         {
             return value;
         }
 
-        /// <remarks><c>M:Mono.DocTest.Widget.Dynamic2(System.Func{System.String,System.Object})</c></remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.Dynamic2(System.Func{System.String,System.Object})</c></remarks>
         public Func<string, dynamic> Dynamic2(Func<string, dynamic> value)
         {
             return value;
         }
 
-        /// <remarks><c>M:Mono.DocTest.Widget.Dynamic3(System.Func{System.Func{System.String,System.Object},System.Func{System.Object,System.String}})</c></remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Widget.Dynamic3(System.Func{System.Func{System.String,System.Object},System.Func{System.Object,System.String}})</c></remarks>
         public Func<Func<string, dynamic>, Func<dynamic, string>> Dynamic3(
             Func<Func<string, dynamic>, Func<dynamic, string>> value
         )
@@ -510,7 +519,8 @@ namespace Mono.DocTest
 
         /// <param name="list">Another <see cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />.</param>
         /// <remarks>
-        ///  <para><c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>.</para>
+        ///
+        // <para><c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>.</para>
         /// <para><see cref="M:System.Collections.Generic.List{System.Int32}.Remove(`0)" /></para>
         /// </remarks>
         /// <exception name="Whatever">text!</exception>
@@ -536,8 +546,10 @@ namespace Mono.DocTest
             array[0, 0] = 42;
         }
 
-        /// <param name="list">A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}" />.</param>
-        /// <remarks><c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>.</remarks>
+        /// <param name="list">A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}"
+        // />.</param>
+        ///
+        // <remarks><c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>.</remarks>
         public void Process(List<Predicate<int>> list)
         {
             if (list == null)
@@ -545,20 +557,24 @@ namespace Mono.DocTest
             Process<int>(list);
         }
 
-        /// <param name="list">A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}" />.</param>
+        /// <param name="list">A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}"
+        // />.</param>
         /// <typeparam name="T">Something Else</typeparam>
-        /// <remarks><c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>.</remarks>
         public void Process<T>(List<Predicate<T>> list)
         {
             if (list.Any(p => p == null))
                 throw new ArgumentException("predicate null");
         }
 
-        /// <param name="helper">A <see cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}" />.</param>
+        /// <param name="helper">A <see cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}"
+        // />.</param>
         /// <typeparam name="T"><c>T</c></typeparam>
         /// <typeparam name="U"><c>U</c></typeparam>
         /// <typeparam name="V"><c>V</c></typeparam>
-        /// <remarks><c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
         public void UseHelper<T, U, V>(Generic.MyList<T>.Helper<U, V> helper) { }
     }
 }
@@ -644,7 +660,8 @@ namespace Mono.DocTest.Generic
         public const int ConstField1 = 1;
 
         /// <param name="list">Insert description here</param>
-        /// <remarks><c>M:Mono.DocTest.GenericBase`1.op_Explicit(Mono.DocTest.GenericBase{`0})~`0</c></remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.GenericBase`1.op_Explicit(Mono.DocTest.GenericBase{`0})~`0</c></remarks>
         /// <returns>The default value for <typeparamref name="U"/>.</returns>
         public static explicit operator U(GenericBase<U> list)
         {
@@ -703,7 +720,8 @@ namespace Mono.DocTest.Generic
         /// <param name="helper">A <see cref="T:Mono.DocTest.Generic.MyList`1.Helper`2" />.</param>
         /// <typeparam name="U">Argh!</typeparam>
         /// <typeparam name="V">Foo Argh!</typeparam>
-        /// <remarks><c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
         public void UseHelper<U, V>(Helper<U, V> helper) { }
 
         /// <remarks><c>M:Mono.DocTest.Generic.MyList`1.GetHelper``2</c>.</remarks>
@@ -792,7 +810,8 @@ namespace Mono.DocTest.Generic
         }
 
         // IEnumerable<T>
-        /// <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>.</remarks>
         /// <returns>A <see cref="T:System.Collections.Generic.IEnumerator{`0}" />.</returns>
         IEnumerator<A> IEnumerable<A>.GetEnumerator()
         {
@@ -814,7 +833,8 @@ namespace Mono.DocTest.Generic
             get { return 0; }
         }
 
-        /// <remarks><c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>.</remarks>
+        ///
+        // <remarks><c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>.</remarks>
         /// <value>A <see cref="T:System.Boolean" />.</value>
         bool ICollection<A>.IsReadOnly
         {
@@ -822,14 +842,17 @@ namespace Mono.DocTest.Generic
         }
 
         /// <param name="item">The item to add.</param>
-        /// <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Add(`0)</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Add(`0)</c>.</remarks>
         void ICollection<A>.Add(A item) { }
 
-        /// <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>.</remarks>
         void ICollection<A>.Clear() { }
 
         /// <param name="item">The item to check for</param>
-        /// <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>.</remarks>
         /// <returns>A <see cref="T:System.Boolean" /> instance (<see langword="false" />).</returns>
         bool ICollection<A>.Contains(A item)
         {
@@ -842,7 +865,8 @@ namespace Mono.DocTest.Generic
         public void CopyTo(A[] array, int arrayIndex) { }
 
         /// <param name="item">the item to remove</param>
-        /// <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Remove(`0)</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Remove(`0)</c>.</remarks>
         /// <returns>Whether the item was removed.</returns>
         bool ICollection<A>.Remove(A item)
         {
@@ -857,7 +881,8 @@ namespace Mono.DocTest.Generic
 
         // IFoo members
         /// <typeparam name="U">U generic param on MyList`2</typeparam>
-        /// <remarks><c>M:Mono.DocTest.Generic.MyList`2.Mono#DocTest#Generic#IFoo{A}#Method``1(`0,``0)</c>.</remarks>
+        ///
+        // <remarks><c>M:Mono.DocTest.Generic.MyList`2.Mono#DocTest#Generic#IFoo{A}#Method``1(`0,``0)</c>.</remarks>
         A IFoo<A>.Method<U>(A a, U u)
         {
             return default(A);

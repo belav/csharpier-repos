@@ -39,7 +39,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2Id"/> of a SAML protocol message in response to which an attesting entity can
+        /// Gets or sets the <see cref="Saml2Id"/> of a SAML protocol message in response to which an
+        // attesting entity can
         /// present the assertion. [Saml2Core, 2.4.1.2]
         /// </summary>
         public Saml2Id InResponseTo
@@ -49,7 +50,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets a collection of <see cref="SecurityKeyIdentifier"/> which can be used to authenticate an attesting entity. [Saml2Core, 2.4.1.3]
+        /// Gets a collection of <see cref="SecurityKeyIdentifier"/> which can be used to authenticate an
+        // attesting entity. [Saml2Core, 2.4.1.3]
         /// </summary>
         public Collection<SecurityKeyIdentifier> KeyIdentifiers
         {
@@ -66,7 +68,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets a time instant at which the subject can no longer be confirmed. [Saml2Core, 2.4.1.2]
+        /// Gets or sets a time instant at which the subject can no longer be confirmed. [Saml2Core,
+        // 2.4.1.2]
         /// </summary>
         public DateTime? NotOnOrAfter
         {

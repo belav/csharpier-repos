@@ -10,17 +10,22 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Entity type extension methods for Sqlite-specific metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing Sqlite databases with EF Core</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see>, and
+///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing Sqlite databases with EF Core</see>
+// for more information and examples.
 /// </remarks>
 public static class SqliteEntityTypeExtensions
 {
     /// <summary>
-    ///     Returns a value indicating whether to use the SQL RETURNING clause when saving changes to the table.
-    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or tables with AFTER triggers.
+    ///     Returns a value indicating whether to use the SQL RETURNING clause when saving changes to
+    // the table.
+    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or
+    // tables with AFTER triggers.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
-    /// <returns><see langword="true" /> if the SQL RETURNING clause is used to save changes to the table.</returns>
+    /// <returns><see langword="true" /> if the SQL RETURNING clause is used to save changes to the
+    // table.</returns>
     public static bool IsSqlReturningClauseUsed(this IReadOnlyEntityType entityType)
     {
         if (
@@ -53,8 +58,10 @@ public static class SqliteEntityTypeExtensions
     }
 
     /// <summary>
-    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the table.
-    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or tables with AFTER triggers.
+    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the
+    // table.
+    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or
+    // tables with AFTER triggers.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="useSqlReturningClause">The value to set.</param>
@@ -68,12 +75,15 @@ public static class SqliteEntityTypeExtensions
         );
 
     /// <summary>
-    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the table.
-    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or tables with AFTER triggers.
+    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the
+    // table.
+    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or
+    // tables with AFTER triggers.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="useSqlReturningClause">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? UseSqlReturningClause(
         this IConventionEntityType entityType,
@@ -90,7 +100,8 @@ public static class SqliteEntityTypeExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the configuration source for whether to use the SQL RETURNING clause when saving changes to the table.
+    ///     Gets the configuration source for whether to use the SQL RETURNING clause when saving
+    // changes to the table.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <returns>The configuration source for the memory-optimized setting.</returns>
@@ -102,12 +113,15 @@ public static class SqliteEntityTypeExtensions
             ?.GetConfigurationSource();
 
     /// <summary>
-    ///     Returns a value indicating whether to use the SQL RETURNING clause when saving changes to the table.
-    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or tables with AFTER triggers.
+    ///     Returns a value indicating whether to use the SQL RETURNING clause when saving changes to
+    // the table.
+    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or
+    // tables with AFTER triggers.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="storeObject">The identifier of the table-like store object.</param>
-    /// <returns><see langword="true" /> if the SQL RETURNING clause is used to save changes to the table.</returns>
+    /// <returns><see langword="true" /> if the SQL RETURNING clause is used to save changes to the
+    // table.</returns>
     public static bool IsSqlReturningClauseUsed(
         this IReadOnlyEntityType entityType,
         in StoreObjectIdentifier storeObject
@@ -147,8 +161,10 @@ public static class SqliteEntityTypeExtensions
     }
 
     /// <summary>
-    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the table.
-    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or tables with AFTER triggers.
+    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the
+    // table.
+    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or
+    // tables with AFTER triggers.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="useSqlReturningClause">The value to set.</param>
@@ -171,13 +187,16 @@ public static class SqliteEntityTypeExtensions
     }
 
     /// <summary>
-    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the table.
-    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or tables with AFTER triggers.
+    ///     Sets a value indicating whether to use the SQL RETURNING clause when saving changes to the
+    // table.
+    ///     The RETURNING clause is incompatible with certain Sqlite features, such as virtual tables or
+    // tables with AFTER triggers.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="useSqlReturningClause">The value to set.</param>
     /// <param name="storeObject">The identifier of the table-like store object.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? UseSqlReturningClause(
         this IConventionEntityType entityType,

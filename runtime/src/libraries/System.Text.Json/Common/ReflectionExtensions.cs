@@ -338,13 +338,15 @@ namespace System.Text.Json.Reflection
                 return null;
             }
 
-            // DBNull.Value is sometimes used as the default value (returned by reflection) of nullable params in place of null.
+            // DBNull.Value is sometimes used as the default value (returned by reflection) of nullable params
+            // in place of null.
             if (defaultValue == DBNull.Value && parameterType != typeof(DBNull))
             {
                 return null;
             }
 
-            // Default values of enums or nullable enums are represented using the underlying type and need to be cast explicitly
+            // Default values of enums or nullable enums are represented using the underlying type and need to
+            // be cast explicitly
             // cf. https://github.com/dotnet/runtime/issues/68647
             if (parameterType.IsEnum)
             {
@@ -363,7 +365,8 @@ namespace System.Text.Json.Reflection
         }
 
         /// <summary>
-        /// Returns the type hierarchy for the given type, starting from the current type up to the base type(s) in the hierarchy.
+        /// Returns the type hierarchy for the given type, starting from the current type up to the base
+        // type(s) in the hierarchy.
         /// Interface hierarchies with multiple inheritance will return results using topological sorting.
         /// </summary>
         [RequiresUnreferencedCode("Should only be used by the reflection-based serializer.")]

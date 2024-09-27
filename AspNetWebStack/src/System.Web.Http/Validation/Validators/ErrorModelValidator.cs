@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Web.Http.Metadata;
@@ -7,7 +8,8 @@ using System.Web.Http.Metadata;
 namespace System.Web.Http.Validation.Validators
 {
     /// <summary>
-    /// A <see cref="ModelValidator"/> to represent an error. This validator will always throw an exception regardless of the actual model value.
+    /// A <see cref="ModelValidator"/> to represent an error. This validator will always throw an
+    // exception regardless of the actual model value.
     /// </summary>
     public class ErrorModelValidator : ModelValidator
     {

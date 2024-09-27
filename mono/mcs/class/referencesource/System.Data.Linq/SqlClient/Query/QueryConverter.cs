@@ -158,7 +158,8 @@ namespace System.Data.Linq.SqlClient
         /// Convert inner expression from C# expression to basic SQL Query.
         /// </summary>
         /// <param name="node">The expression to convert.</param>
-        /// <param name="dominantExpression">Current dominating expression, used for producing meaningful exception text.</param>
+        /// <param name="dominantExpression">Current dominating expression, used for producing meaningful
+        // exception text.</param>
         /// <returns>The converted SQL query.</returns>
         internal SqlNode ConvertInner(Expression node, Expression dominantExpression)
         {
@@ -2366,7 +2367,8 @@ namespace System.Data.Linq.SqlClient
                     return new SqlColumnRef(c);
                 }
             }
-            // Otherwise, if we cannot optimize then fall back to generating a nested aggregate in a correlated sub query
+            // Otherwise, if we cannot optimize then fall back to generating a nested aggregate in a correlated
+            // sub query
             //
             // SCALAR(SELECT Agg(exp) FROM seq)
             {

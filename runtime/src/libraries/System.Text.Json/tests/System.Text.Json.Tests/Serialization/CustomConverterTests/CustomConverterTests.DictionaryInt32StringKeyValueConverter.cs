@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization.Tests
     public static partial class CustomConverterTests
     {
         /// <summary>
-        /// Demonstrates a <see cref="Dictionary{int, string}"> converter using a JSON array containing KeyValuePair objects.
+        /// Demonstrates a <see cref="Dictionary{int, string}"> converter using a JSON array containing
+        // KeyValuePair objects.
         /// Sample JSON: [{"Key":1,"Value":"One"},{"Key":2,"Value":"Two"}]
         /// </summary>
         internal class DictionaryInt32StringKeyValueConverter

@@ -19,8 +19,10 @@ public interface IUserLoginStore<TUser> : IUserStore<TUser>
     /// Adds an external <see cref="UserLoginInfo"/> to the specified <paramref name="user"/>.
     /// </summary>
     /// <param name="user">The user to add the login to.</param>
-    /// <param name="login">The external <see cref="UserLoginInfo"/> to add to the specified <paramref name="user"/>.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="login">The external <see cref="UserLoginInfo"/> to add to the specified <paramref
+    // name="user"/>.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     Task AddLoginAsync(TUser user, UserLoginInfo login, CancellationToken cancellationToken);
 
@@ -30,8 +32,10 @@ public interface IUserLoginStore<TUser> : IUserStore<TUser>
     /// </summary>
     /// <param name="user">The user to remove the login information from.</param>
     /// <param name="loginProvider">The login provide whose information should be removed.</param>
-    /// <param name="providerKey">The key given by the external login provider for the specified user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="providerKey">The key given by the external login provider for the specified
+    // user.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     Task RemoveLoginAsync(
         TUser user,
@@ -44,20 +48,26 @@ public interface IUserLoginStore<TUser> : IUserStore<TUser>
     /// Retrieves the associated logins for the specified <param ref="user"/>.
     /// </summary>
     /// <param name="user">The user whose associated logins to retrieve.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// The <see cref="Task"/> for the asynchronous operation, containing a list of <see cref="UserLoginInfo"/> for the specified <paramref name="user"/>, if any.
+    /// The <see cref="Task"/> for the asynchronous operation, containing a list of <see
+    // cref="UserLoginInfo"/> for the specified <paramref name="user"/>, if any.
     /// </returns>
     Task<IList<UserLoginInfo>> GetLoginsAsync(TUser user, CancellationToken cancellationToken);
 
     /// <summary>
     /// Retrieves the user associated with the specified login provider and login provider key.
     /// </summary>
-    /// <param name="loginProvider">The login provider who provided the <paramref name="providerKey"/>.</param>
-    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="loginProvider">The login provider who provided the <paramref
+    // name="providerKey"/>.</param>
+    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a
+    // user.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched the specified login provider and key.
+    /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched
+    // the specified login provider and key.
     /// </returns>
     Task<TUser?> FindByLoginAsync(
         string loginProvider,

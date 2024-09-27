@@ -127,7 +127,8 @@ namespace tests.system_data_dll.System_Data
             {
                 BeginCase("Rule = None, Delete Exception");
                 fc.DeleteRule = Rule.None;
-                //Exception = "Cannot delete this row because constraints are enforced on relation Constraint1, and deleting this row will strand child rows."
+                //Exception = "Cannot delete this row because constraints are enforced on relation Constraint1, and
+                // deleting this row will strand child rows."
                 try
                 {
                     dtParent.Rows.Find(1).Delete();
@@ -207,10 +208,10 @@ namespace tests.system_data_dll.System_Data
 
                 DataRow[] arr = ds1.Tables[1].Select("ChildId is null");
 
-                /*foreach (DataRow dr in arr)
-                {
-                    Compare(dr["ChildId"],null);
-                }*/
+/*foreach (DataRow dr in arr)
+{
+Compare(dr["ChildId"],null);
+}*/
 
                 Compare(arr.Length, 4);
             }

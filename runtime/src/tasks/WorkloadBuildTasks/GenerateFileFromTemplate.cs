@@ -13,7 +13,8 @@ using Microsoft.Build.Utilities;
 /// Generates a new file at <see cref="OutputPath"/>.
 /// </para>
 /// <para>
-/// The <see cref="TemplateFile"/> can define variables for substitution using <see cref="Properties"/>.
+/// The <see cref="TemplateFile"/> can define variables for substitution using <see
+// cref="Properties"/>.
 /// </para>
 /// <example>
 /// The input file might look like this:
@@ -31,7 +32,8 @@ public class GenerateFileFromTemplate : Task
     /// <summary>
     /// The template file.
     /// Variable syntax: ${VarName}
-    /// If your template file needs to output this format, you can escape the dollar sign with a backtick, e.g. `${NotReplaced}
+    /// If your template file needs to output this format, you can escape the dollar sign with a
+    // backtick, e.g. `${NotReplaced}
     /// </summary>
     [NotNull]
     [Required]

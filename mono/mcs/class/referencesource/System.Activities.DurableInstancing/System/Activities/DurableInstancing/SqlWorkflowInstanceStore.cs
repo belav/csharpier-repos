@@ -44,7 +44,8 @@ namespace System.Activities.DurableInstancing
 
         AsyncCallback unlockInstanceCallback;
 
-        // Volatile: multiple threads could simultaneously do a TestVersionAndRunAsyncResult, and read/update this value.
+        // Volatile: multiple threads could simultaneously do a TestVersionAndRunAsyncResult, and
+        // read/update this value.
         volatile Version databaseVersion;
 
         public SqlWorkflowInstanceStore()
@@ -746,7 +747,8 @@ namespace System.Activities.DurableInstancing
 
         internal void UpdateEventStatus(bool signalEvent, InstancePersistenceEvent eventToUpdate)
         {
-            // FindEventWithReset will allow the event to be cleaned up, even if it is signalled.  The returned event will
+            // FindEventWithReset will allow the event to be cleaned up, even if it is signalled.  The returned
+            // event will
             // always be reset.
             InstanceOwner instanceOwner;
             InstancePersistenceEvent requiredEvent = this.FindEventWithReset(
@@ -830,7 +832,8 @@ namespace System.Activities.DurableInstancing
 
                 if (instanceOwner != null)
                 {
-                    // Reset first.  That will allow the event to be cleaned up, so GetEvents won't return it (it will always return signalled events).
+                    // Reset first.  That will allow the event to be cleaned up, so GetEvents won't return it (it will
+                    // always return signalled events).
                     if (withReset)
                     {
                         base.ResetEvent(eventType, instanceOwner);

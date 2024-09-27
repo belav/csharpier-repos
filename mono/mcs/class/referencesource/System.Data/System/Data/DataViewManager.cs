@@ -319,14 +319,14 @@ namespace System.Data
             throw NotSupported;
         }
 
-        /*
-        string IBindingList.GetListName() {
-            return ((System.Data.ITypedList)this).GetListName(null);
-        }
-        string IBindingList.GetListName(PropertyDescriptor[] listAccessors) {
-            return ((System.Data.ITypedList)this).GetListName(listAccessors);
-        }
-        */
+/*
+string IBindingList.GetListName() {
+return ((System.Data.ITypedList)this).GetListName(null);
+}
+string IBindingList.GetListName(PropertyDescriptor[] listAccessors) {
+return ((System.Data.ITypedList)this).GetListName(listAccessors);
+}
+*/
 
         // Microsoft: GetListName and GetItemProperties almost the same in DataView and DataViewManager
         string System.ComponentModel.ITypedList.GetListName(PropertyDescriptor[] listAccessors)
@@ -423,7 +423,7 @@ namespace System.Data
                         new DataTablePropertyDescriptor((System.Data.DataTable)e.Element)
                     )
                 :
-                /*default*/null
+/*default*/null
             );
         }
 
@@ -444,7 +444,7 @@ namespace System.Data
                         new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element)
                     )
                 :
-                /*default*/null
+/*default*/null
             );
         }
     }

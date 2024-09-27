@@ -26,7 +26,8 @@ namespace MonoTests.System.Net.Mail
             msg = new MailMessage("from@example.com", "to@example.com");
             msg.Subject = "the subject";
             msg.Body = "hello";
-            //msg.AlternateViews.Add (AlternateView.CreateAlternateViewFromString ("<html><body>hello</body></html>", "text/html"));
+            //msg.AlternateViews.Add (AlternateView.CreateAlternateViewFromString
+            // ("<html><body>hello</body></html>", "text/html"));
             //Attachment a = Attachment.CreateAttachmentFromString ("blah blah", "text/plain");
             //msg.Attachments.Add (a);
 
@@ -69,21 +70,21 @@ namespace MonoTests.System.Net.Mail
             new MailMessage(new MailAddress("from@example.com"), null);
         }
 
-        /*[Test]
-        public void AlternateView ()
-        {
-            Assert.AreEqual (msg.AlternateViews.Count, 1);
-            AlternateView av = msg.AlternateViews[0];
-            // test that the type is ok, etc.
-        }*/
+/*[Test]
+public void AlternateView ()
+{
+Assert.AreEqual (msg.AlternateViews.Count, 1);
+AlternateView av = msg.AlternateViews[0];
+// test that the type is ok, etc.
+}*/
 
-        /*[Test]
-        public void Attachment ()
-        {
-            Assert.AreEqual (msg.Attachments.Count, 1);
-            Attachment at = msg.Attachments[0];
-            Assert.AreEqual (at.ContentType.MediaType, "text/plain");
-        }*/
+/*[Test]
+public void Attachment ()
+{
+Assert.AreEqual (msg.Attachments.Count, 1);
+Attachment at = msg.Attachments[0];
+Assert.AreEqual (at.ContentType.MediaType, "text/plain");
+}*/
 
         [Test]
         public void Body()

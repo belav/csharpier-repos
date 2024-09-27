@@ -622,7 +622,8 @@ namespace System.Data.Odbc
                     // from SqlClient ...
                     if (_internalPrecision != 0)
                     {
-                        // devnote: If the userspecified precision (_internalPrecision) is less than the actual values precision
+                        // devnote: If the userspecified precision (_internalPrecision) is less than the actual values
+                        // precision
                         // we silently adjust the userspecified precision to the values precision.
                         byte precision = ((SqlDecimal)(decimal)value).Precision;
                         _internalPrecision = Math.Max(_internalPrecision, precision); // silently adjust the precision
@@ -814,7 +815,8 @@ namespace System.Data.Odbc
                     break;
             } // end switch
 
-            // Conversation from WCHAR to CHAR, VARCHAR or LONVARCHAR (AnsiString) is different for some providers
+            // Conversation from WCHAR to CHAR, VARCHAR or LONVARCHAR (AnsiString) is different for some
+            // providers
             // we need to chonvert WCHAR to CHAR and bind as sql_c_type = CHAR
             //
             sql_c_type = _bindtype._sql_c;
@@ -849,21 +851,24 @@ namespace System.Data.Odbc
             switch (_bindtype._sql_type)
             {
                 case ODBC32.SQL_TYPE.VARBINARY: // MDAC 74372
-                    // Note: per definition DbType.Binary does not support more than 8000 bytes so we change the type for binding
+                    // Note: per definition DbType.Binary does not support more than 8000 bytes so we change the type
+                    // for binding
                     if ((cbParameterSize > 8000))
                     {
                         _bindtype = TypeMap._Image;
                     } // will change to LONGVARBINARY
                     break;
                 case ODBC32.SQL_TYPE.VARCHAR: // MDAC 74372
-                    // Note: per definition DbType.Binary does not support more than 8000 bytes so we change the type for binding
+                    // Note: per definition DbType.Binary does not support more than 8000 bytes so we change the type
+                    // for binding
                     if ((cbParameterSize > 8000))
                     {
                         _bindtype = TypeMap._Text;
                     } // will change to LONGVARCHAR
                     break;
                 case ODBC32.SQL_TYPE.WVARCHAR: // MDAC 75099
-                    // Note: per definition DbType.Binary does not support more than 8000 bytes so we change the type for binding
+                    // Note: per definition DbType.Binary does not support more than 8000 bytes so we change the type
+                    // for binding
                     if ((cbParameterSize > 4000))
                     {
                         _bindtype = TypeMap._NText;
@@ -912,7 +917,8 @@ namespace System.Data.Odbc
             //
             if (ODBC32.SQL_C.NUMERIC == sql_c_type)
             {
-                // for input/output parameters we need to adjust the scale of the input value since the convert function in
+                // for input/output parameters we need to adjust the scale of the input value since the convert
+                // function in
                 // sqlsrv32 takes this scale for the output parameter (possible bug in sqlsrv32?)
                 //
                 if ((ODBC32.SQL_PARAM.INPUT_OUTPUT == sqldirection) && (value is Decimal))
@@ -928,7 +934,8 @@ namespace System.Data.Odbc
                 }
                 SetInputValue(value, sql_c_type, cbValueSize, precision, 0, parameterBuffer);
 
-                // for output parameters we need to write precision and scale to the buffer since the convert function in
+                // for output parameters we need to write precision and scale to the buffer since the convert
+                // function in
                 // sqlsrv32 expects these values there (possible bug in sqlsrv32?)
                 //
                 if (ODBC32.SQL_PARAM.INPUT != sqldirection)

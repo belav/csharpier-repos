@@ -20,7 +20,8 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             base.OnBeforeSerializeContents(serializationManager, obj);
 
-            //For root activity we will go through all the nested activities and put the namespaces at the top level
+            //For root activity we will go through all the nested activities and put the namespaces at the top
+            // level
             CompositeActivity compositeActivity = obj as CompositeActivity;
             XmlWriter writer =
                 serializationManager.WorkflowMarkupStack[typeof(XmlWriter)] as XmlWriter;

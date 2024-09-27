@@ -76,7 +76,8 @@ namespace System.Windows.Forms.VisualStyles
     /// <summary>
     /// </summary>
     /// <remarks>
-    /// Inspired by ThemeGtk and QGtkStyle (http://labs.trolltech.com/page/Projects/Styles/GtkStyle). Tries to use the exact GTK+ logic in order to be compatible with all its themes.
+    /// Inspired by ThemeGtk and QGtkStyle (http://labs.trolltech.com/page/Projects/Styles/GtkStyle).
+    // Tries to use the exact GTK+ logic in order to be compatible with all its themes.
     /// </remarks>
     class GtkPlus
     {

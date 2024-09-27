@@ -15,18 +15,22 @@ namespace Roslyn.Test.Utilities
     public static class DescriptorFactory
     {
         /// <summary>
-        /// Creates a <see cref="DiagnosticDescriptor"/> with specified <see cref="DiagnosticDescriptor.Id"/>.
+        /// Creates a <see cref="DiagnosticDescriptor"/> with specified <see
+        // cref="DiagnosticDescriptor.Id"/>.
         /// </summary>
         /// <remarks>
         /// Returned <see cref="DiagnosticDescriptor"/> has
         /// - empty <see cref="DiagnosticDescriptor.Title"/> and <see cref="DiagnosticDescriptor.Category"/>
         /// - <see cref="DiagnosticDescriptor.MessageFormat"/> set to <paramref name="id"/>
-        /// - <see cref="DiagnosticDescriptor.DefaultSeverity"/> set to <see cref="DiagnosticSeverity.Hidden"/>
-        /// - <see cref="WellKnownDiagnosticTags.NotConfigurable"/> custom tag added in <see cref="DiagnosticDescriptor.CustomTags"/>.
+        /// - <see cref="DiagnosticDescriptor.DefaultSeverity"/> set to <see
+        // cref="DiagnosticSeverity.Hidden"/>
+        /// - <see cref="WellKnownDiagnosticTags.NotConfigurable"/> custom tag added in <see
+        // cref="DiagnosticDescriptor.CustomTags"/>.
         /// </remarks>
         /// <param name="id">The value for <see cref="DiagnosticDescriptor.Id"/>.</param>
         /// <param name="additionalCustomTags">Additional custom tags</param>
-        /// <returns>A <see cref="DiagnosticDescriptor"/> with specified <see cref="DiagnosticDescriptor.Id"/>.</returns>
+        /// <returns>A <see cref="DiagnosticDescriptor"/> with specified <see
+        // cref="DiagnosticDescriptor.Id"/>.</returns>
         public static DiagnosticDescriptor CreateSimpleDescriptor(
             string id,
             params string[] additionalCustomTags

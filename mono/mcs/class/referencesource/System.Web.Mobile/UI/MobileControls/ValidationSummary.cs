@@ -20,13 +20,13 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile ValidationSummary class.
-     * The ValidationSummary shows all the validation errors in a Form in a
-     * summary view.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile ValidationSummary class.
+* The ValidationSummary shows all the validation errors in a Form in a
+* summary view.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary"]/*' />
     [
         DefaultProperty("FormToValidate"),
@@ -52,7 +52,8 @@ namespace System.Web.UI.MobileControls
     {
         private bool _callValidate = true;
 
-        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.ValidationSummary"]/*' />
+        /// <include file='doc\ValidationSummary.uex'
+        // path='docs/doc[@for="ValidationSummary.ValidationSummary"]/*' />
         public ValidationSummary()
         {
             StyleReference = Constants.ErrorStyle;
@@ -62,7 +63,8 @@ namespace System.Web.UI.MobileControls
         // Mimic some properties exposed in the original ValidatorSummary.
         ////////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.HeaderText"]/*' />
+        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.HeaderText"]/*'
+        // />
         [
             Bindable(true),
             DefaultValue(""),
@@ -79,7 +81,8 @@ namespace System.Web.UI.MobileControls
             set { ViewState["HeaderText"] = value; }
         }
 
-        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.FormToValidate"]/*' />
+        /// <include file='doc\ValidationSummary.uex'
+        // path='docs/doc[@for="ValidationSummary.FormToValidate"]/*' />
         [
             Bindable(true),
             DefaultValue(""),
@@ -97,7 +100,8 @@ namespace System.Web.UI.MobileControls
             set { ViewState["FormToValidate"] = value; }
         }
 
-        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.BackLabel"]/*' />
+        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.BackLabel"]/*'
+        // />
         [
             Bindable(true),
             DefaultValue(""),
@@ -111,7 +115,8 @@ namespace System.Web.UI.MobileControls
         }
 
         // Designer needs to know the correct default value in order to persist it correctly.
-        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.StyleReference"]/*' />
+        /// <include file='doc\ValidationSummary.uex'
+        // path='docs/doc[@for="ValidationSummary.StyleReference"]/*' />
         [DefaultValue(Constants.ErrorStyle)]
         public override String StyleReference
         {
@@ -164,7 +169,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.GetErrorMessages"]/*' />
+        /// <include file='doc\ValidationSummary.uex'
+        // path='docs/doc[@for="ValidationSummary.GetErrorMessages"]/*' />
         public String[] GetErrorMessages()
         {
             String[] errorDescriptions = null;

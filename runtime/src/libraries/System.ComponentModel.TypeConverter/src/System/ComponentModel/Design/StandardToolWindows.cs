@@ -4,7 +4,8 @@
 namespace System.ComponentModel.Design
 {
     /// <summary>
-    /// Defines GUID specifiers that contain GUIDs which reference the standard set of tool windows that are available in
+    /// Defines GUID specifiers that contain GUIDs which reference the standard set of tool windows that
+    // are available in
     /// the design environment.
     /// </summary>
     public class StandardToolWindows

@@ -642,8 +642,10 @@ class C : IDisposable
     }/*</bind>*/
 }
 ";
-            // Capturing the whole block here, to show that the using statement is actually being bound as a using statement, followed by
-            // an expression and a separate block, rather than being bound as a using statement with an invalid expression as the resources
+            // Capturing the whole block here, to show that the using statement is actually being bound as a
+            // using statement, followed by
+            // an expression and a separate block, rather than being bound as a using statement with an invalid
+            // expression as the resources
             string expectedOperationTree =
                 @"
 IBlockOperation (5 statements, 2 locals) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
@@ -792,7 +794,8 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (va
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1674: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                // CS1674: 'C': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'
                 //         /*<bind>*/using (var c1 = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var c1 = new C()")
                     .WithArguments("C")
@@ -850,7 +853,8 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (c1
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1674: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                // CS1674: 'C': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'
                 //         /*<bind>*/using (c1)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "c1")
                     .WithArguments("C")
@@ -1543,10 +1547,12 @@ Block[B4] - Exit
             );
         }
 
-        //THEORY: we won't ever call a params in normal form, because we ignore the default value in metadata.
+        //THEORY: we won't ever call a params in normal form, because we ignore the default value in
+        // metadata.
         //        So: it's either a valid params parameter, in which case we call it in the extended way.
         //        Or its an invalid params parameter, in which case we can't use it, and we error out.
-        //        Interestingly we check params before we check default, so a params int = 3 will be callable with an
+        //        Interestingly we check params before we check default, so a params int = 3 will be
+        // callable with an
         //        argument, but not without.
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -1800,17 +1806,20 @@ class C
 
             var expectedDiagnostics = new[]
             {
-                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params int)'
+                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params int)'
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
                     .WithArguments("extras", "S.Dispose(params int)")
                     .WithLocation(6, 15),
-                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
                     .WithArguments("S")
                     .WithLocation(6, 15),
-                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params int)'
+                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params int)'
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params int)")
@@ -1959,17 +1968,20 @@ class C
 
             var expectedDiagnostics = new[]
             {
-                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params int)'
+                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params int)'
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
                     .WithArguments("extras", "S.Dispose(params int)")
                     .WithLocation(6, 15),
-                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
                     .WithArguments("S")
                     .WithLocation(6, 15),
-                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params int)'
+                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params int)'
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params int)")
@@ -2118,17 +2130,20 @@ class C
 
             var expectedDiagnostics = new[]
             {
-                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params int)'
+                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params int)'
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
                     .WithArguments("extras", "S.Dispose(params int)")
                     .WithLocation(6, 15),
-                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
                     .WithArguments("S")
                     .WithLocation(6, 15),
-                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params int)'
+                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params int)'
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params int)")
@@ -2278,17 +2293,20 @@ class C
 
             var expectedDiagnostics = new[]
             {
-                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params object[], int)'
+                // (6,15): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params object[], int)'
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
                     .WithArguments("extras", "S.Dispose(params object[], int)")
                     .WithLocation(6, 15),
-                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to
+                // 'System.IDisposable'.
                 //         using(var s = new S())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
                     .WithArguments("S")
                     .WithLocation(6, 15),
-                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'S.Dispose(params object[], int)'
+                // (14,11): error CS7036: There is no argument given that corresponds to the required parameter
+                // 'extras' of 'S.Dispose(params object[], int)'
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params object[], int)")
@@ -3279,7 +3297,8 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(6,16): error CS1674: 'NotDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                // file.cs(6,16): error CS1674: 'NotDisposable': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'
                 //         using (GetDisposable() ?? input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input")
                     .WithArguments("NotDisposable")
@@ -3388,7 +3407,8 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(6,16): error CS1674: 'MyDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                // file.cs(6,16): error CS1674: 'MyDisposable': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'
                 //         using (b ? GetDisposable() : input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable() : input")
                     .WithArguments("MyDisposable")
@@ -3505,7 +3525,8 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(6,16): error CS1674: 'MyDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                // file.cs(6,16): error CS1674: 'MyDisposable': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'
                 //         using (b ? GetDisposable<MyDisposable>() : input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable<MyDisposable>() : input")
                     .WithArguments("MyDisposable")
@@ -3637,7 +3658,8 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(6,16): error CS1674: 'MyDisposable?': type used in a using statement must be implicitly convertible to 'System.IDisposable'
+                // file.cs(6,16): error CS1674: 'MyDisposable?': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'
                 //         using (GetDisposable() ?? input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input")
                     .WithArguments("MyDisposable?")
@@ -4478,7 +4500,8 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                // (9,22): error CS8410: 'S?': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // (9,22): error CS8410: 'S?': type used in an asynchronous using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (s)
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "s")
                     .WithArguments("S?")
@@ -4856,12 +4879,14 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(8,21): error CS7036: There is no argument given that corresponds to the required parameter 'extras' of 'C.DisposeAsync(int, params int[], bool)'
+                // file.cs(8,21): error CS7036: There is no argument given that corresponds to the required
+                // parameter 'extras' of 'C.DisposeAsync(int, params int[], bool)'
                 //         await using(this){}
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "this")
                     .WithArguments("extras", "C.DisposeAsync(int, params int[], bool)")
                     .WithLocation(8, 21),
-                // file.cs(8,21): error CS8410: 'C': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                // file.cs(8,21): error CS8410: 'C': type used in an asynchronous using statement must be implicitly
+                // convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using(this){}
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "this")
                     .WithArguments("C")
@@ -7225,7 +7250,8 @@ class P : System.IDisposable
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(13,9): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
+                // file.cs(13,9): error CS8649: A goto cannot jump to a location before a using declaration within
+                // the same block.
                 //         goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
                     .WithLocation(13, 9),
@@ -7336,7 +7362,8 @@ class P : System.IDisposable
                 // file.cs(12,9): warning CS0162: Unreachable code detected
                 //         int x = 0;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "int").WithLocation(12, 9),
-                // file.cs(15,9): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
+                // file.cs(15,9): error CS8649: A goto cannot jump to a location before a using declaration within
+                // the same block.
                 //         goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
                     .WithLocation(15, 9),
@@ -7546,7 +7573,8 @@ class P : System.IDisposable
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(14,13): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
+                // file.cs(14,13): error CS8649: A goto cannot jump to a location before a using declaration within
+                // the same block.
                 //             goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
                     .WithLocation(14, 13),
@@ -7666,7 +7694,8 @@ class P : System.IDisposable
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(17,13): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
+                // file.cs(17,13): error CS8649: A goto cannot jump to a location before a using declaration within
+                // the same block.
                 //             goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
                     .WithLocation(17, 13),
@@ -7825,12 +7854,14 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(8,13): warning CS0280: 'P' does not implement the 'disposable' pattern. 'P.Dispose()' has the wrong signature.
+                // file.cs(8,13): warning CS0280: 'P' does not implement the 'disposable' pattern. 'P.Dispose()' has
+                // the wrong signature.
                 //             using var x = new P();
                 Diagnostic(ErrorCode.WRN_PatternBadSignature, "using var x = new P();")
                     .WithArguments("P", "disposable", "P.Dispose()")
                     .WithLocation(8, 13),
-                // file.cs(8,13): error CS1674: 'P': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // file.cs(8,13): error CS1674: 'P': type used in a using statement must be implicitly convertible
+                // to 'System.IDisposable'.
                 //             using var x = new P();
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "using var x = new P();")
                     .WithArguments("P")
@@ -9147,7 +9178,8 @@ class C2
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(14,17): error CS8647: A using variable cannot be used directly within a switch section (consider using braces).
+                // file.cs(14,17): error CS8647: A using variable cannot be used directly within a switch section
+                // (consider using braces).
                 //                 using C1 o1 = new C1();
                 Diagnostic(ErrorCode.ERR_UsingVarInSwitchCase, "using C1 o1 = new C1();")
                     .WithLocation(14, 17),

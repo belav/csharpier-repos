@@ -444,7 +444,8 @@ namespace System.Configuration
         }
 
         //
-        // Copy an XML element but skip all its child elements, then continue copying until we've hit the next element.
+        // Copy an XML element but skip all its child elements, then continue copying until we've hit the
+        // next element.
         //
         internal bool SkipChildElementsAndCopyOuterXmlToNextElement(XmlUtilWriter utilWriter)
         {

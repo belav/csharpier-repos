@@ -21,7 +21,8 @@ namespace System.ComponentModel
             : this(string.Empty) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.DescriptionAttribute'/> class.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.DescriptionAttribute'/>
+        // class.
         /// </summary>
         public DescriptionAttribute(string description)
         {

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     /// other layers can behave differently (for example, running the engine out-of-process).
     /// </summary>
     /// <remarks>
-    /// This returns an No-op engine on non-Windows OS, because the backing storage depends on Windows APIs.
+    /// This returns an No-op engine on non-Windows OS, because the backing storage depends on Windows
+    // APIs.
     /// </remarks>
     internal static class SymbolSearchUpdateEngineFactory
     {
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         }
 
         /// <summary>
-        /// This returns a No-op engine if called on non-Windows OS, because the backing storage depends on Windows APIs.
+        /// This returns a No-op engine if called on non-Windows OS, because the backing storage depends on
+        // Windows APIs.
         /// </summary>
         public static ISymbolSearchUpdateEngine CreateEngineInProcess(
             IFileDownloaderFactory fileDownloaderFactory

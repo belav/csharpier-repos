@@ -17,7 +17,8 @@ namespace System.Web.Security.Cryptography
     internal static class CryptoUtil
     {
         /// <summary>
-        /// Similar to Encoding.UTF8, but throws on invalid bytes. Useful for security routines where we need
+        /// Similar to Encoding.UTF8, but throws on invalid bytes. Useful for security routines where we
+        // need
         /// strong guarantees that we're always producing valid UTF8 streams.
         /// </summary>
         public static readonly UTF8Encoding SecureUTF8Encoding = new UTF8Encoding(
@@ -49,9 +50,11 @@ namespace System.Web.Security.Cryptography
             return new string(hex);
         }
 
-        // Determines if two buffer instances are equal, e.g. whether they contain the same payload. This method
+        // Determines if two buffer instances are equal, e.g. whether they contain the same payload. This
+        // method
         // is written in such a manner that it should take the same amount of time to execute regardless of
-        // whether the result is success or failure. The modulus operation is intended to make the check take the
+        // whether the result is success or failure. The modulus operation is intended to make the check
+        // take the
         // same amount of time, even if the buffers are of different lengths.
         //
         // !! DO NOT CHANGE THIS METHOD WITHOUT SECURITY

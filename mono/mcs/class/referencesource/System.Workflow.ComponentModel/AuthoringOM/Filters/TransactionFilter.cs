@@ -100,7 +100,8 @@ namespace System.Workflow.ComponentModel
                 {
                     try
                     {
-                        // 1st param is for transactional, means if the release lock on status change will try to persist the workflow instace
+                        // 1st param is for transactional, means if the release lock on status change will try to persist
+                        // the workflow instace
                         // if that fails, then locks will be reacquired, otherwise they will be released.
                         context.ReleaseLocks(true);
                         context.Activity.UnregisterForStatusChange(

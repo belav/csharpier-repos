@@ -8,9 +8,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides a frozen dictionary to use when the key is an <see cref="int"/> and the default comparer is used.</summary>
+    /// <summary>Provides a frozen dictionary to use when the key is an <see cref="int"/> and the
+    // default comparer is used.</summary>
     /// <remarks>
-    /// This dictionary type is specialized as a memory optimization, as the frozen hash table already contains the array of all
+    /// This dictionary type is specialized as a memory optimization, as the frozen hash table already
+    // contains the array of all
     /// int values, and we can thus use its array as the keys rather than maintaining a duplicate copy.
     /// </remarks>
     internal sealed class Int32FrozenDictionary<TValue> : FrozenDictionary<int, TValue>

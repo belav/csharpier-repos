@@ -228,10 +228,14 @@ namespace System.Activities.Runtime
             return result;
         }
 
-        // This method translates from a bookmark that we may have received from the outside world (IE - new Bookmark(someName))
-        // to our internal Bookmark object.  This is necessary because we use bookmark objects as the key to our dictionary
-        // (hence our ability to resolve an externally created one), but we keep a lot of important information on our internal
-        // instance of that bookmark.  We must always perform this translation when doing exclusive handle housekeeping.
+        // This method translates from a bookmark that we may have received from the outside world (IE - new
+        // Bookmark(someName))
+        // to our internal Bookmark object.  This is necessary because we use bookmark objects as the key to
+        // our dictionary
+        // (hence our ability to resolve an externally created one), but we keep a lot of important
+        // information on our internal
+        // instance of that bookmark.  We must always perform this translation when doing exclusive handle
+        // housekeeping.
         public bool TryGetBookmarkFromInternalList(
             Bookmark bookmark,
             out Bookmark internalBookmark,
@@ -347,7 +351,8 @@ namespace System.Activities.Runtime
 
         public bool Remove(Bookmark bookmark, ActivityInstance instanceAttemptingRemove)
         {
-            // We need to translate to our internal instance of the bookmark.  See TryGetBookmarkFromInternalList
+            // We need to translate to our internal instance of the bookmark.  See
+            // TryGetBookmarkFromInternalList
             // for more details.
             BookmarkCallbackWrapper callbackWrapper;
             Bookmark internalBookmark;

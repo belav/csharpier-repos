@@ -70,12 +70,15 @@ namespace System.Security.Cryptography
         ///  The maximum number of bytes an RSA operation can produce.
         /// </returns>
         /// <remarks>
-        ///   The maximum output size is defined by the RSA modulus, or key size. The key size, in bytes, is the maximum
-        ///   output size. If the key size is not an even number of bytes, then it is rounded up to the nearest number of
+        ///   The maximum output size is defined by the RSA modulus, or key size. The key size, in bytes, is
+        // the maximum
+        ///   output size. If the key size is not an even number of bytes, then it is rounded up to the
+        // nearest number of
         ///   whole bytes for purposes of determining the maximum output size.
         /// </remarks>
         /// <exception cref="CryptographicException">
-        ///   <see cref="AsymmetricAlgorithm.KeySize" /> returned a value that is not a possible RSA key size.
+        ///   <see cref="AsymmetricAlgorithm.KeySize" /> returned a value that is not a possible RSA key
+        // size.
         /// </exception>
         public int GetMaxOutputSize()
         {
@@ -181,7 +184,8 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para> -or- </para>
         ///   <para>
-        ///     The length of data is too long for the combination of <see cref="AsymmetricAlgorithm.KeySize" /> and the selected padding.
+        ///     The length of data is too long for the combination of <see
+        // cref="AsymmetricAlgorithm.KeySize" /> and the selected padding.
         ///   </para>
         ///   <para> -or- </para>
         ///   <para>
@@ -189,7 +193,8 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="NotImplementedException">
-        ///   This implementation has not implemented one of <see cref="Encrypt(byte[], RSAEncryptionPadding)" /> or
+        ///   This implementation has not implemented one of <see cref="Encrypt(byte[],
+        // RSAEncryptionPadding)" /> or
         ///   <see cref="TryEncrypt" />.
         /// </exception>
         /// <seealso cref="Encrypt(byte[], RSAEncryptionPadding)" />
@@ -232,7 +237,8 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para> -or- </para>
         ///   <para>
-        ///     The length of data is too long for the combination of <see cref="AsymmetricAlgorithm.KeySize" /> and the selected padding.
+        ///     The length of data is too long for the combination of <see
+        // cref="AsymmetricAlgorithm.KeySize" /> and the selected padding.
         ///   </para>
         ///   <para> -or- </para>
         ///   <para>
@@ -240,7 +246,8 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="NotImplementedException">
-        ///   This implementation has not implemented one of <see cref="Encrypt(byte[], RSAEncryptionPadding)" /> or
+        ///   This implementation has not implemented one of <see cref="Encrypt(byte[],
+        // RSAEncryptionPadding)" /> or
         ///   <see cref="TryEncrypt" />.
         /// </exception>
         /// <seealso cref="Encrypt(byte[], RSAEncryptionPadding)" />
@@ -281,7 +288,8 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="NotImplementedException">
-        ///   This implementation has not implemented one of <see cref="Decrypt(byte[], RSAEncryptionPadding)" /> or
+        ///   This implementation has not implemented one of <see cref="Decrypt(byte[],
+        // RSAEncryptionPadding)" /> or
         ///   <see cref="TryDecrypt" />.
         /// </exception>
         /// <seealso cref="Decrypt(byte[], RSAEncryptionPadding)" />
@@ -328,7 +336,8 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="NotImplementedException">
-        ///   This implementation has not implemented one of <see cref="Decrypt(byte[], RSAEncryptionPadding)" /> or
+        ///   This implementation has not implemented one of <see cref="Decrypt(byte[],
+        // RSAEncryptionPadding)" /> or
         ///   <see cref="TryDecrypt" />.
         /// </exception>
         /// <seealso cref="Decrypt(byte[], RSAEncryptionPadding)" />
@@ -529,7 +538,8 @@ namespace System.Security.Cryptography
         /// <param name="padding">The padding mode.</param>
         /// <returns>The RSA signature for the specified data.</returns>
         /// <exception cref="ArgumentNullException">
-        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is <see langword="null" />.
+        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see
+        // cref="HashAlgorithmName.Name" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="ArgumentException">
         ///   <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is an empty string.
@@ -548,7 +558,8 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="NotImplementedException">
-        ///   This implementation has not implemented one of <see cref="TrySignData" />, <see cref="TrySignHash" />,
+        ///   This implementation has not implemented one of <see cref="TrySignData" />, <see
+        // cref="TrySignHash" />,
         ///   or <see cref="SignHash(byte[], HashAlgorithmName, RSASignaturePadding)" />.
         /// </exception>
         public byte[] SignData(
@@ -594,11 +605,13 @@ namespace System.Security.Cryptography
         /// <param name="padding">The padding mode.</param>
         /// <returns>The total number of bytes written to <paramref name="destination" />.</returns>
         /// <exception cref="ArgumentNullException">
-        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is <see langword="null" />.
+        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see
+        // cref="HashAlgorithmName.Name" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="ArgumentException">
         ///   <para>
-        ///     <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is an empty string.
+        ///     <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is an empty
+        // string.
         ///   </para>
         ///   <para> -or- </para>
         ///   <para>
@@ -619,7 +632,8 @@ namespace System.Security.Cryptography
         ///   </para>
         /// </exception>
         /// <exception cref="NotImplementedException">
-        ///   This implementation has not implemented one of <see cref="TrySignData" />, <see cref="TrySignHash" />,
+        ///   This implementation has not implemented one of <see cref="TrySignData" />, <see
+        // cref="TrySignHash" />,
         ///   or <see cref="SignHash(byte[], HashAlgorithmName, RSASignaturePadding)" />.
         /// </exception>
         public int SignData(
@@ -644,11 +658,13 @@ namespace System.Security.Cryptography
         ///   Computes the signature for the specified hash value using the specified padding.
         /// </summary>
         /// <param name="hash">The hash value of the data to be signed.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to create the hash of <paramref name="hash" />.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to create the hash of <paramref name="hash"
+        // />.</param>
         /// <param name="padding">The padding mode.</param>
         /// <returns>The RSA signature for the specified hash value.</returns>
         /// <exception cref="ArgumentNullException">
-        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is <see langword="null" />.
+        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see
+        // cref="HashAlgorithmName.Name" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="ArgumentException">
         ///   <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is an empty string.
@@ -704,15 +720,18 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="hash">The hash value of the data to be signed.</param>
         /// <param name="destination">The buffer to receive the RSA signature.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to create the hash of <paramref name="hash" />.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to create the hash of <paramref name="hash"
+        // />.</param>
         /// <param name="padding">The padding mode.</param>
         /// <returns>The total number of bytes written to <paramref name="destination" />.</returns>
         /// <exception cref="ArgumentNullException">
-        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is <see langword="null" />.
+        ///   <paramref name="padding" /> or <paramref name="hashAlgorithm" />'s <see
+        // cref="HashAlgorithmName.Name" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="ArgumentException">
         ///   <para>
-        ///     <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is an empty string.
+        ///     <paramref name="hashAlgorithm" />'s <see cref="HashAlgorithmName.Name" /> is an empty
+        // string.
         ///   </para>
         ///   <para> -or- </para>
         ///   <para>
@@ -1340,8 +1359,10 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         ///   <para>
-        ///   When the base-64 decoded contents of <paramref name="input" /> indicate an algorithm that uses PBKDF1
-        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function 2),
+        ///   When the base-64 decoded contents of <paramref name="input" /> indicate an algorithm that uses
+        // PBKDF1
+        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function
+        // 2),
         ///   the password is converted to bytes via the UTF-8 encoding.
         ///   </para>
         ///   <para>
@@ -1617,15 +1638,19 @@ namespace System.Security.Cryptography
         )
         {
             // In normal circumstances, the signing and encryption size is the key size.
-            // In the case of decryption, it will be at most the size of the key, but the final output size is not
+            // In the case of decryption, it will be at most the size of the key, but the final output size is
+            // not
             // deterministic, so start with the key size.
             int resultSize = GetMaxOutputSize();
             int written;
 
-            // For scenarios where we are confident that we can get the output side right on the first try, we allocate
-            // and use that as the buffer. This is the case for signing and encryption since that is always going to be
+            // For scenarios where we are confident that we can get the output side right on the first try, we
+            // allocate
+            // and use that as the buffer. This is the case for signing and encryption since that is always
+            // going to be
             // the modulus size.
-            // For decryption, we go straight to renting as there is no way to know the size of the final output prior
+            // For decryption, we go straight to renting as there is no way to know the size of the final output
+            // prior
             // to decryption, so the allocation would probably be wasted.
             if (tryKeySizeFirst)
             {
@@ -1647,7 +1672,8 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Argument_DestinationTooShort);
                 }
 
-                // We're about to try renting from the pool, so the next rental should be bigger than what we just tried.
+                // We're about to try renting from the pool, so the next rental should be bigger than what we just
+                // tried.
                 resultSize = checked(resultSize * 2);
             }
 

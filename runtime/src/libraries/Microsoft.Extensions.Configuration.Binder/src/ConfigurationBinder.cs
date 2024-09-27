@@ -120,7 +120,8 @@ namespace Microsoft.Extensions.Configuration
         }
 
         /// <summary>
-        /// Attempts to bind the given object instance to the configuration section specified by the key by matching property names against configuration keys recursively.
+        /// Attempts to bind the given object instance to the configuration section specified by the key by
+        // matching property names against configuration keys recursively.
         /// </summary>
         /// <param name="configuration">The configuration instance to bind.</param>
         /// <param name="key">The key of the configuration section to bind.</param>
@@ -134,7 +135,8 @@ namespace Microsoft.Extensions.Configuration
         }
 
         /// <summary>
-        /// Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.
+        /// Attempts to bind the given object instance to configuration values by matching property names
+        // against configuration keys recursively.
         /// </summary>
         /// <param name="configuration">The configuration instance to bind.</param>
         /// <param name="instance">The object to bind.</param>
@@ -144,7 +146,8 @@ namespace Microsoft.Extensions.Configuration
             configuration.Bind(instance, null);
 
         /// <summary>
-        /// Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.
+        /// Attempts to bind the given object instance to configuration values by matching property names
+        // against configuration keys recursively.
         /// </summary>
         /// <param name="configuration">The configuration instance to bind.</param>
         /// <param name="instance">The object to bind.</param>
@@ -321,8 +324,10 @@ namespace Microsoft.Extensions.Configuration
                 false
             );
 
-            // For property binding, there are some cases when HasNewValue is not set in BindingPoint while a non-null Value inside that object can be retrieved from the property getter.
-            // As example, when binding a property which not having a configuration entry matching this property and the getter can initialize the Value.
+            // For property binding, there are some cases when HasNewValue is not set in BindingPoint while a
+            // non-null Value inside that object can be retrieved from the property getter.
+            // As example, when binding a property which not having a configuration entry matching this property
+            // and the getter can initialize the Value.
             // It is important to call the property setter as the setters can have a logic adjusting the Value.
             if (!propertyBindingPoint.IsReadOnly && propertyBindingPoint.Value is not null)
             {
@@ -377,7 +382,8 @@ namespace Microsoft.Extensions.Configuration
 
             if (config.GetChildren().Any())
             {
-                // for arrays and read-only list-like interfaces, we concatenate on to what is already there, if we can
+                // for arrays and read-only list-like interfaces, we concatenate on to what is already there, if we
+                // can
                 if (type.IsArray || IsImmutableArrayCompatibleInterface(type))
                 {
                     if (!bindingPoint.IsReadOnly)
@@ -391,15 +397,24 @@ namespace Microsoft.Extensions.Configuration
                     return;
                 }
 
+                //
+                //
                 // -----------------------------------------------------------------------------------------------------------------------------
                 //                  |  bindingPoint |  bindingPoint |
                 //     Interface    |     Value     |   IsReadOnly  |  Behavior
+                //
+                //
                 // -----------------------------------------------------------------------------------------------------------------------------
-                //  ISet<T>         |   not null    |  true/false   | Use the Value instance to populate the configuration
-                //  ISet<T>         |     null      |     false     | Create HashSet<T> instance to populate the configuration
+                //  ISet<T>         |   not null    |  true/false   | Use the Value instance to populate the
+                // configuration
+                //  ISet<T>         |     null      |     false     | Create HashSet<T> instance to populate the
+                // configuration
                 //  ISet<T>         |     null      |     true      | nothing
-                //  IReadOnlySet<T> | null/not null |     false     | Create HashSet<T> instance, copy over existing values, and populate the configuration
+                //  IReadOnlySet<T> | null/not null |     false     | Create HashSet<T> instance, copy over existing
+                // values, and populate the configuration
                 //  IReadOnlySet<T> | null/not null |     true      | nothing
+                //
+                //
                 // -----------------------------------------------------------------------------------------------------------------------------
                 if (TypeIsASetInterface(type))
                 {
@@ -420,15 +435,24 @@ namespace Microsoft.Extensions.Configuration
                     return;
                 }
 
+                //
+                //
                 // -----------------------------------------------------------------------------------------------------------------------------
                 //                         |  bindingPoint |  bindingPoint |
                 //       Interface         |     Value     |   IsReadOnly  |  Behavior
+                //
+                //
                 // -----------------------------------------------------------------------------------------------------------------------------
-                //  IDictionary<T>         |   not null    |  true/false   | Use the Value instance to populate the configuration
-                //  IDictionary<T>         |     null      |     false     | Create Dictionary<T> instance to populate the configuration
+                //  IDictionary<T>         |   not null    |  true/false   | Use the Value instance to populate the
+                // configuration
+                //  IDictionary<T>         |     null      |     false     | Create Dictionary<T> instance to
+                // populate the configuration
                 //  IDictionary<T>         |     null      |     true      | nothing
-                //  IReadOnlyDictionary<T> | null/not null |     false     | Create Dictionary<K,V> instance, copy over existing values, and populate the configuration
+                //  IReadOnlyDictionary<T> | null/not null |     false     | Create Dictionary<K,V> instance, copy
+                // over existing values, and populate the configuration
                 //  IReadOnlyDictionary<T> | null/not null |     true      | nothing
+                //
+                //
                 // -----------------------------------------------------------------------------------------------------------------------------
                 if (TypeIsADictionaryInterface(type))
                 {
@@ -485,7 +509,8 @@ namespace Microsoft.Extensions.Configuration
 
                 Debug.Assert(bindingPoint.Value is not null);
 
-                // At this point we know that we have a non-null bindingPoint.Value, we just have to populate the items
+                // At this point we know that we have a non-null bindingPoint.Value, we just have to populate the
+                // items
                 // using the IDictionary<> or ICollection<> interfaces, or properties using reflection.
                 Type? dictionaryInterface = FindOpenGenericInterface(typeof(IDictionary<,>), type);
 
@@ -712,7 +737,8 @@ namespace Microsoft.Extensions.Configuration
                 return null;
             }
 
-            // addMethod can only be null if dictionaryType is IReadOnlyDictionary<TKey, TValue> rather than IDictionary<TKey, TValue>.
+            // addMethod can only be null if dictionaryType is IReadOnlyDictionary<TKey, TValue> rather than
+            // IDictionary<TKey, TValue>.
             MethodInfo? addMethod = dictionaryType.GetMethod("Add", DeclaredOnlyLookup);
             if (addMethod is null || source is null)
             {
@@ -753,7 +779,8 @@ namespace Microsoft.Extensions.Configuration
         // This differs from BindDictionaryInterface because this method doesn't clone
         // the dictionary; it sets and/or overwrites values directly.
         // When a user specifies a concrete dictionary or a concrete class implementing IDictionary<,>
-        // in their config class, then that value is used as-is. When a user specifies an interface (instantiated)
+        // in their config class, then that value is used as-is. When a user specifies an interface
+        // (instantiated)
         // in their config class, then it is cloned to a new dictionary, the same way as other collections.
         [RequiresDynamicCode(DynamicCodeWarningMessage)]
         [RequiresUnreferencedCode(

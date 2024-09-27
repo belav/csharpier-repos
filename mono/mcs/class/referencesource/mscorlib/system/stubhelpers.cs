@@ -22,8 +22,10 @@ namespace System.StubHelpers
     [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
     internal static class AnsiCharMarshaler
     {
-        // The length of the returned array is an approximation based on the length of the input string and the system
-        // character set. It is only guaranteed to be larger or equal to cbLength, don't depend on the exact value.
+        // The length of the returned array is an approximation based on the length of the input string and
+        // the system
+        // character set. It is only guaranteed to be larger or equal to cbLength, don't depend on the exact
+        // value.
         [System.Security.SecurityCritical]
         internal static unsafe byte[] DoAnsiConversion(
             string str,
@@ -96,8 +98,10 @@ namespace System.StubHelpers
 
             if (pbNativeBuffer != null || Marshal.SystemMaxDBCSCharSize == 1)
             {
-                // If we are marshaling into a stack buffer or we can accurately estimate the size of the required heap
-                // space, we will use a "1-pass" mode where we convert the string directly into the unmanaged buffer.
+                // If we are marshaling into a stack buffer or we can accurately estimate the size of the required
+                // heap
+                // space, we will use a "1-pass" mode where we convert the string directly into the unmanaged
+                // buffer.
 
                 // + 1 for the null character from the user
                 nb = (strManaged.Length + 1) * Marshal.SystemMaxDBCSCharSize;
@@ -119,9 +123,12 @@ namespace System.StubHelpers
             }
             else
             {
-                // Otherwise we use a slower "2-pass" mode where we first marshal the string into an intermediate buffer
-                // (managed byte array) and then allocate exactly the right amount of unmanaged memory. This is to avoid
-                // wasting memory on systems with multibyte character sets where the buffer we end up with is often much
+                // Otherwise we use a slower "2-pass" mode where we first marshal the string into an intermediate
+                // buffer
+                // (managed byte array) and then allocate exactly the right amount of unmanaged memory. This is to
+                // avoid
+                // wasting memory on systems with multibyte character sets where the buffer we end up with is often
+                // much
                 // smaller than the upper bound for the given managed string.
 
                 byte[] bytes = AnsiCharMarshaler.DoAnsiConversion(
@@ -594,8 +601,10 @@ namespace System.StubHelpers
             Int64 managedUtcTicks = ManagedUtcTicksAtNativeZero + nativeTicks.UniversalTime;
             DateTimeOffset managedUtcDTO = new DateTimeOffset(managedUtcTicks, TimeSpan.Zero);
 
-            // Some Utc times cannot be represented in local time in certain timezones. E.g. 0001-01-01 12:00:00 AM cannot
-            // be represented in any timezones with a negative offset from Utc. We throw an ArgumentException in that case.
+            // Some Utc times cannot be represented in local time in certain timezones. E.g. 0001-01-01 12:00:00
+            // AM cannot
+            // be represented in any timezones with a negative offset from Utc. We throw an ArgumentException in
+            // that case.
             managedLocalDTO = managedUtcDTO.ToLocalTime(true);
         }
     } // class DateTimeOffsetMarshaler
@@ -628,10 +637,13 @@ namespace System.StubHelpers
         }
 
         // Fast-path, which creates a reference over a pinned managed string.  This may only be used if the
-        // pinned string and HSTRING_HEADER will outlive the HSTRING produced (for instance, as an in parameter).
+        // pinned string and HSTRING_HEADER will outlive the HSTRING produced (for instance, as an in
+        // parameter).
         //
-        // Note that the managed string input to this method MUST be pinned, and stay pinned for the lifetime of
-        // the returned HSTRING object.  If the string is not pinned, or becomes unpinned before the HSTRING's
+        // Note that the managed string input to this method MUST be pinned, and stay pinned for the
+        // lifetime of
+        // the returned HSTRING object.  If the string is not pinned, or becomes unpinned before the
+        // HSTRING's
         // lifetime ends, the HSTRING instance will be corrupted.
         [SecurityCritical]
         internal static unsafe IntPtr ConvertToNativeReference(
@@ -729,7 +741,8 @@ namespace System.StubHelpers
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern double ConvertToNative(DateTime managedDate);
 
-        // The return type is really DateTime but we use long to avoid the pain associated with returning structures.
+        // The return type is really DateTime but we use long to avoid the pain associated with returning
+        // structures.
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern long ConvertToManaged(double nativeDate);
     } // class DateMarshaler
@@ -1432,9 +1445,12 @@ namespace System.StubHelpers
         {
             IntPtr pNativeHome;
 
-            // P/Invoke can be used to call Win32 apis that don't strictly follow CLR in/out semantics and thus may
-            // leave garbage in the buffer in circumstances that we can't detect. To prevent us from crashing when
-            // converting the contents back to managed, put a hidden NULL terminator past the end of the official buffer.
+            // P/Invoke can be used to call Win32 apis that don't strictly follow CLR in/out semantics and thus
+            // may
+            // leave garbage in the buffer in circumstances that we can't detect. To prevent us from crashing
+            // when
+            // converting the contents back to managed, put a hidden NULL terminator past the end of the
+            // official buffer.
 
             // Unmanaged layout:
             // +====================================+
@@ -1944,7 +1960,8 @@ namespace System.StubHelpers
         ushort wReserved2;
         ushort wReserved3;
 
-        // The union portion of the structure contains at least one 64-bit type that on some 32-bit platforms
+        // The union portion of the structure contains at least one 64-bit type that on some 32-bit
+        // platforms
         // (notably  ARM) requires 64-bit alignment. So on 32-bit platforms we'll actually size the variant
         // portion of the struct with an Int64 so the type loader notices this requirement (a no-op on x86,
         // but on ARM it will allow us to correctly determine the layout of native argument lists containing

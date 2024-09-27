@@ -2249,7 +2249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         public async Task DoNotRemoveNecessaryCastBeforePointerDereference3()
         {
             // Conservatively disable cast simplifications for casts involving pointer conversions.
-            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
+            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this
+            // scenario.
 
             var source = """
                 class C
@@ -2269,7 +2270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         public async Task DoNotRemoveNumericCastInUncheckedExpression()
         {
             // Conservatively disable cast simplifications within explicit checked/unchecked expressions.
-            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
+            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this
+            // scenario.
 
             var source = """
                 class C
@@ -2294,7 +2296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         public async Task DoNotRemoveNumericCastInUncheckedStatement()
         {
             // Conservatively disable cast simplifications within explicit checked/unchecked statements.
-            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
+            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this
+            // scenario.
 
             var source = """
                 class C
@@ -2322,7 +2325,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         public async Task DoNotRemoveNumericCastInCheckedExpression()
         {
             // Conservatively disable cast simplifications within explicit checked/unchecked expressions.
-            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
+            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this
+            // scenario.
 
             var source = """
                 class C
@@ -2347,7 +2351,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         public async Task DoNotRemoveNumericCastInCheckedStatement()
         {
             // Conservatively disable cast simplifications within explicit checked/unchecked statements.
-            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
+            // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this
+            // scenario.
 
             var source = """
                 class C
@@ -3291,7 +3296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         .CompilerError("CS0535")
                         .WithSpan(8, 18, 8, 19)
                         .WithArguments("C", "I.this[int, int]"),
-                    // /0/Test0.cs(10,16): error CS0548: 'C.this[(int y, ?), int]': property or indexer must have at least one accessor
+                    // /0/Test0.cs(10,16): error CS0548: 'C.this[(int y, ?), int]': property or indexer must have at
+                    // least one accessor
                     DiagnosticResult
                         .CompilerError("CS0548")
                         .WithSpan(10, 16, 10, 20)
@@ -3301,7 +3307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         .CompilerError("CS1003")
                         .WithSpan(10, 20, 10, 21)
                         .WithArguments("["),
-                    // /0/Test0.cs(10,27): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type '(int y, ?)'
+                    // /0/Test0.cs(10,27): error CS1750: A value of type 'int' cannot be used as a default parameter
+                    // because there are no standard conversions to type '(int y, ?)'
                     DiagnosticResult
                         .CompilerError("CS1750")
                         .WithSpan(10, 27, 10, 27)
@@ -5120,7 +5127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 source,
-                // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could not be found (are you missing a using directive or an assembly reference?)
+                // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could
+                // not be found (are you missing a using directive or an assembly reference?)
                 DiagnosticResult
                     .CompilerError("CS0246")
                     .WithSpan(12, 21, 12, 46)
@@ -5151,7 +5159,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await VerifyCS.VerifyCodeFixAsync(
                 source,
-                // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could not be found (are you missing a using directive or an assembly reference?)
+                // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could
+                // not be found (are you missing a using directive or an assembly reference?)
                 DiagnosticResult
                     .CompilerError("CS0246")
                     .WithSpan(12, 21, 12, 46)
@@ -5509,7 +5518,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Sources = { source },
                     ExpectedDiagnostics =
                     {
-                        // /0/Test0.cs(11,2): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                        // /0/Test0.cs(11,2): error CS0182: An attribute argument must be a constant expression, typeof
+                        // expression or array creation expression of an attribute parameter type
                         DiagnosticResult.CompilerError("CS0182").WithSpan(10, 2, 10, 75),
                     },
                 },
@@ -5518,7 +5528,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Sources = { fixedSource },
                     ExpectedDiagnostics =
                     {
-                        // /0/Test0.cs(11,2): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                        // /0/Test0.cs(11,2): error CS0182: An attribute argument must be a constant expression, typeof
+                        // expression or array creation expression of an attribute parameter type
                         DiagnosticResult.CompilerError("CS0182").WithSpan(10, 2, 10, 67),
                     },
                 },
@@ -6786,7 +6797,8 @@ enum Sign
         public async Task TestMissingOnInterfaceCallOnReadOnlyStruct()
         {
             // We technically could support this.  But we choose not to for simplicity. While semantics could be
-            // preserved, the semantics around interfaces are subtle and we don't want to make a change that might
+            // preserved, the semantics around interfaces are subtle and we don't want to make a change that
+            // might
             // negatively impact the user if they make other code changes.
             var source = """
                 using System;
@@ -7503,7 +7515,8 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase2()
         {
-            // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
+            // there is a sign extension warning both before and after.  so this is not worse to remove the
+            // cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
                 public class sign
@@ -7563,7 +7576,8 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCase4()
         {
-            // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
+            // there is a sign extension warning both before and after.  so this is not worse to remove the
+            // cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
                 public class sign
@@ -7748,7 +7762,8 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable2()
         {
-            // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
+            // there is a sign extension warning both before and after.  so this is not worse to remove the
+            // cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
                 public class sign
@@ -7808,7 +7823,8 @@ enum Sign
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40414")]
         public async Task TestSignExtensionWithOrCompilerCaseNullable4()
         {
-            // there is a sign extension warning both before and after.  so this is not worse to remove the cast.
+            // there is a sign extension warning both before and after.  so this is not worse to remove the
+            // cast.
             await VerifyCS.VerifyCodeFixAsync(
                 """
                 public class sign

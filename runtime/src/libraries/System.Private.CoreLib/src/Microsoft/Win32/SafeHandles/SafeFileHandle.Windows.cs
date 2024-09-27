@@ -51,7 +51,8 @@ namespace Microsoft.Win32.SafeHandles
             using (DisableMediaInsertionPrompt.Create())
             {
                 // we don't use NtCreateFile as there is no public and reliable way
-                // of converting DOS to NT file paths (RtlDosPathNameToRelativeNtPathName_U_WithStatus is not documented)
+                // of converting DOS to NT file paths (RtlDosPathNameToRelativeNtPathName_U_WithStatus is not
+                // documented)
                 SafeFileHandle fileHandle = CreateFile(fullPath, mode, access, share, options);
 
                 if (preallocationSize > 0)
@@ -363,7 +364,8 @@ namespace Microsoft.Win32.SafeHandles
 
                 // In theory when GetFileInformationByHandleEx fails, then
                 // a) IsDevice can modify last error (not true today, but can be in the future),
-                // b) DeviceIoControl can succeed (last error set to ERROR_SUCCESS) but return fewer bytes than requested.
+                // b) DeviceIoControl can succeed (last error set to ERROR_SUCCESS) but return fewer bytes than
+                // requested.
                 // The error is stored and in such cases exception for the first failure is going to be thrown.
                 int lastError = Marshal.GetLastPInvokeError();
 

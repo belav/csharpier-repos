@@ -761,7 +761,8 @@ namespace System.Net.Mail
 #if !FEATURE_PAL
                     CredentialCache cache;
                     // Skip token capturing if no credentials are used or they don't include a default one.
-                    // Also do capture the token if ICredential is not of CredentialCache type so we don't know what the exact credential response will be.
+                    // Also do capture the token if ICredential is not of CredentialCache type so we don't know what the
+                    // exact credential response will be.
                     transport.IdentityRequired =
                         Credentials != null
                         && (

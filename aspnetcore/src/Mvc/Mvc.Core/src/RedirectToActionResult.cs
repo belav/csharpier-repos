@@ -9,7 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// An <see cref="ActionResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect (307),
+/// An <see cref="ActionResult"/> that returns a Found (302), Moved Permanently (301), Temporary
+// Redirect (307),
 /// or Permanent Redirect (308) response with a Location header.
 /// Targets a controller action.
 /// </summary>
@@ -48,7 +49,8 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
     /// <param name="actionName">The name of the action to use for generating the URL.</param>
     /// <param name="controllerName">The name of the controller to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
     public RedirectToActionResult(
         string? actionName,
         string? controllerName,
@@ -64,8 +66,10 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
     /// <param name="actionName">The name of the action to use for generating the URL.</param>
     /// <param name="controllerName">The name of the controller to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent
+    // redirect (308) preserve the initial request method.</param>
     public RedirectToActionResult(
         string? actionName,
         string? controllerName,
@@ -83,7 +87,8 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
     /// <param name="actionName">The name of the action to use for generating the URL.</param>
     /// <param name="controllerName">The name of the controller to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     public RedirectToActionResult(
         string? actionName,
@@ -108,8 +113,10 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
     /// <param name="actionName">The name of the action to use for generating the URL.</param>
     /// <param name="controllerName">The name of the controller to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) and permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) and permanent
+    // redirect (308) preserve the initial request method.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     public RedirectToActionResult(
         string? actionName,

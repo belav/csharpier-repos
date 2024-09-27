@@ -12,13 +12,15 @@ namespace System.Xml.Serialization
     using System.ComponentModel;
     using System.Reflection;
 
-    /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes"]/*' />
+    /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public class XmlArrayItemAttributes : CollectionBase
     {
-        /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes.this"]/*' />
+        /// <include file='doc\XmlArrayItemAttributes.uex'
+        // path='docs/doc[@for="XmlArrayItemAttributes.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -28,7 +30,8 @@ namespace System.Xml.Serialization
             set { List[index] = value; }
         }
 
-        /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes.Add"]/*' />
+        /// <include file='doc\XmlArrayItemAttributes.uex'
+        // path='docs/doc[@for="XmlArrayItemAttributes.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -37,7 +40,8 @@ namespace System.Xml.Serialization
             return List.Add(attribute);
         }
 
-        /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes.Insert"]/*' />
+        /// <include file='doc\XmlArrayItemAttributes.uex'
+        // path='docs/doc[@for="XmlArrayItemAttributes.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -46,7 +50,8 @@ namespace System.Xml.Serialization
             List.Insert(index, attribute);
         }
 
-        /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes.IndexOf"]/*' />
+        /// <include file='doc\XmlArrayItemAttributes.uex'
+        // path='docs/doc[@for="XmlArrayItemAttributes.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -55,7 +60,8 @@ namespace System.Xml.Serialization
             return List.IndexOf(attribute);
         }
 
-        /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes.Contains"]/*' />
+        /// <include file='doc\XmlArrayItemAttributes.uex'
+        // path='docs/doc[@for="XmlArrayItemAttributes.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -64,7 +70,8 @@ namespace System.Xml.Serialization
             return List.Contains(attribute);
         }
 
-        /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes.Remove"]/*' />
+        /// <include file='doc\XmlArrayItemAttributes.uex'
+        // path='docs/doc[@for="XmlArrayItemAttributes.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -73,7 +80,8 @@ namespace System.Xml.Serialization
             List.Remove(attribute);
         }
 
-        /// <include file='doc\XmlArrayItemAttributes.uex' path='docs/doc[@for="XmlArrayItemAttributes.CopyTo"]/*' />
+        /// <include file='doc\XmlArrayItemAttributes.uex'
+        // path='docs/doc[@for="XmlArrayItemAttributes.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

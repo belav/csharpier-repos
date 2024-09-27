@@ -95,7 +95,8 @@ namespace System.Threading
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Unix-specific implementation
 
         private const int SystemCallErrorsBufferSize = 256;
@@ -115,7 +116,8 @@ namespace System.Threading
                 SystemCallErrorsBufferSize
             );
 
-            // Get the error code even if the handle is valid, as it could be ERROR_ALREADY_EXISTS, indicating that the mutex
+            // Get the error code even if the handle is valid, as it could be ERROR_ALREADY_EXISTS, indicating
+            // that the mutex
             // already exists and was opened
             errorCode = Marshal.GetLastPInvokeError();
 

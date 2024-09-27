@@ -13,7 +13,8 @@ using System.Runtime.CompilerServices;
 namespace Microsoft.Extensions.Options
 {
     /// <summary>
-    /// Implementation of <see cref="IValidateOptions{TOptions}"/> that uses DataAnnotation's <see cref="Validator"/> for validation.
+    /// Implementation of <see cref="IValidateOptions{TOptions}"/> that uses DataAnnotation's <see
+    // cref="Validator"/> for validation.
     /// </summary>
     /// <typeparam name="TOptions">The instance being validated.</typeparam>
     public class DataAnnotationValidateOptions<

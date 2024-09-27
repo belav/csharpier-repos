@@ -35,7 +35,8 @@ namespace System.ComponentModel.DataAnnotations
         public int Length { get; }
 
         /// <summary>
-        ///     Determines whether a specified object is valid. (Overrides <see cref="ValidationAttribute.IsValid(object)" />)
+        ///     Determines whether a specified object is valid. (Overrides <see
+        // cref="ValidationAttribute.IsValid(object)" />)
         /// </summary>
         /// <remarks>
         ///     This method returns <c>true</c> if the <paramref name="value" /> is null.
@@ -43,7 +44,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </remarks>
         /// <param name="value">The object to validate.</param>
         /// <returns>
-        ///     <c>true</c> if the value is null or greater than or equal to the specified minimum length, otherwise
+        ///     <c>true</c> if the value is null or greater than or equal to the specified minimum length,
+        // otherwise
         ///     <c>false</c>
         /// </returns>
         /// <exception cref="InvalidOperationException">Length is less than zero.</exception>
@@ -58,7 +60,8 @@ namespace System.ComponentModel.DataAnnotations
             EnsureLegalLengths();
 
             int length;
-            // Automatically pass if value is null. RequiredAttribute should be used to assert a value is not null.
+            // Automatically pass if value is null. RequiredAttribute should be used to assert a value is not
+            // null.
             if (value == null)
             {
                 return true;
@@ -79,7 +82,8 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        ///     Applies formatting to a specified error message. (Overrides <see cref="ValidationAttribute.FormatErrorMessage" />)
+        ///     Applies formatting to a specified error message. (Overrides <see
+        // cref="ValidationAttribute.FormatErrorMessage" />)
         /// </summary>
         /// <param name="name">The name to include in the formatted string.</param>
         /// <returns>A localized string to describe the minimum acceptable length.</returns>

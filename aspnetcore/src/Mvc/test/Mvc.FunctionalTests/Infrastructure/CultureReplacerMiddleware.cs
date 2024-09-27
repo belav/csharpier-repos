@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 /// <summary>
-/// A middleware that ensures web sites run in a consistent culture. Currently useful for tests that format dates,
+/// A middleware that ensures web sites run in a consistent culture. Currently useful for tests that
+// format dates,
 /// times, or numbers. Will be more useful when we have localized resources.
 /// </summary>
 public class CultureReplacerMiddleware
@@ -30,7 +31,8 @@ public class CultureReplacerMiddleware
     public async Task Invoke(HttpContext context)
     {
         // Use ReplaceCultureAttribute to avoid thread consistency checks in CultureReplacer. await doesn't
-        // necessarily end on the original thread. For this case, problems arise when next middleware throws. Can
+        // necessarily end on the original thread. For this case, problems arise when next middleware
+        // throws. Can
         // remove the thread consistency checks once culture is (at least for .NET 4.6) handled using
         // AsyncLocal<CultureInfo>.
         try

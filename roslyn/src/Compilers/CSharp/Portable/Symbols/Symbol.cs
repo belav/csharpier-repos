@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ISymbol _lazyISymbol;
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // Changes to the public interface of this class should remain synchronized with the VB version of Symbol.
+        // Changes to the public interface of this class should remain synchronized with the VB version of
+        // Symbol.
         // Do not make any changes to the public interface without making the corresponding change
         // to the VB version.
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -238,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 //
-                // We need to relax visibility of members in interactive submissions since they might be emitted into multiple assemblies.
+                // We need to relax visibility of members in interactive submissions since they might be emitted
+                // into multiple assemblies.
                 //
                 // Top-level:
                 //   private                       -> public
@@ -358,7 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
-        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined in
+        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined
+        // in
         /// source or metadata.
         /// </summary>
         public Symbol OriginalDefinition
@@ -423,9 +426,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public Location GetFirstLocationOrNone() => TryGetFirstLocation() ?? Location.None;
 
         /// <summary>
-        /// Determines if there is a location (see <see cref="Locations"/>) for this symbol whose span is in <paramref
-        /// name="tree"/> and is contained within <paramref name="declarationSpan"/>.  Subclasses can override this to
-        /// be more efficient if desired (especially if avoiding allocations of the <see cref="Locations"/> array is
+        /// Determines if there is a location (see <see cref="Locations"/>) for this symbol whose span is in
+        // <paramref
+        /// name="tree"/> and is contained within <paramref name="declarationSpan"/>.  Subclasses can
+        // override this to
+        /// be more efficient if desired (especially if avoiding allocations of the <see cref="Locations"/>
+        // array is
         /// desired).
         /// </summary>
         public virtual bool HasLocationContainedWithin(
@@ -478,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <para>
         /// Note that for namespace symbol, the declaring syntax might be declaring a nested
         /// namespace. For example, the declaring syntax node for N1 in "namespace N1.N2 {...}" is
-        /// the entire <see cref="BaseNamespaceDeclarationSyntax"/> for N1.N2. For the global namespace, the declaring
+        /// the entire <see cref="BaseNamespaceDeclarationSyntax"/> for N1.N2. For the global namespace, the
+        // declaring
         /// syntax will be the <see cref="CompilationUnitSyntax"/>.
         /// </para>
         /// </summary>
@@ -493,7 +500,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public abstract ImmutableArray<SyntaxReference> DeclaringSyntaxReferences { get; }
 
         /// <summary>
-        /// Helper for implementing <see cref="DeclaringSyntaxReferences"/> for derived classes that store a location but not a
+        /// Helper for implementing <see cref="DeclaringSyntaxReferences"/> for derived classes that store a
+        // location but not a
         /// <see cref="CSharpSyntaxNode"/> or <see cref="SyntaxReference"/>.
         /// </summary>
         internal static ImmutableArray<SyntaxReference> GetDeclaringSyntaxReferenceHelper<TNode>(
@@ -587,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// something, but (erroneously) no member to override exists.
         /// </summary>
         /// <remarks>
-        /// Even for metadata symbols, <see cref="IsOverride"/> = true does not imply that <see cref="IMethodSymbol.OverriddenMethod"/> will
+        /// Even for metadata symbols, <see cref="IsOverride"/> = true does not imply that <see
+        // cref="IMethodSymbol.OverriddenMethod"/> will
         /// be non-null.
         /// </remarks>
         public abstract bool IsOverride { get; }
@@ -602,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Returns true if this symbol was declared to override a base class member and was also
         /// sealed from further overriding; i.e., declared with the <c>sealed</c> modifier. Also set for
-        /// types that do not allow a derived class (declared with <c>sealed</c> or <c>static</c> or <c>struct</c>
+        /// types that do not allow a derived class (declared with <c>sealed</c> or <c>static</c> or
+        // <c>struct</c>
         /// or <c>enum</c> or <c>delegate</c>).
         /// </summary>
         public abstract bool IsSealed { get; }
@@ -733,7 +743,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// As an optimization, viability checking in the lookup code should use this property instead
-        /// of <see cref="CanBeReferencedByName"/>. The full name check will then be performed in the <see cref="CSharpSemanticModel"/>.
+        /// of <see cref="CanBeReferencedByName"/>. The full name check will then be performed in the <see
+        // cref="CSharpSemanticModel"/>.
         /// </summary>
         /// <remarks>
         /// This property exists purely for performance reasons.
@@ -781,7 +792,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Compare two symbol objects to see if they refer to the same symbol. You should always
-        /// use <see cref="operator =="/> and <see cref="operator !="/>, or the <see cref="Equals(object)"/> method, to compare two symbols for equality.
+        /// use <see cref="operator =="/> and <see cref="operator !="/>, or the <see cref="Equals(object)"/>
+        // method, to compare two symbols for equality.
         /// </summary>
         public static bool operator ==(Symbol left, Symbol right)
         {
@@ -868,7 +880,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// for placing in an error message.
         /// </summary>
         /// <remarks>
-        /// This will provide a useful representation, but it would be clearer to call <see cref="ToDisplayString"/>
+        /// This will provide a useful representation, but it would be clearer to call <see
+        // cref="ToDisplayString"/>
         /// directly and provide an explicit format.
         /// Sealed so that <see cref="ToString"/> and <see cref="ToDisplayString"/> can't get out of sync.
         /// </remarks>
@@ -900,7 +913,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) { }
 
         /// <summary>
-        /// Convenience helper called by subclasses to add a synthesized attribute to a collection of attributes.
+        /// Convenience helper called by subclasses to add a synthesized attribute to a collection of
+        // attributes.
         /// </summary>
         internal static void AddSynthesizedAttribute(
             ref ArrayBuilder<SynthesizedAttributeData> attributes,
@@ -920,10 +934,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// <see cref="CharSet"/> effective for this symbol (type or DllImport method).
-        /// Nothing if <see cref="DefaultCharSetAttribute"/> isn't applied on the containing module or it doesn't apply on this symbol.
+        /// Nothing if <see cref="DefaultCharSetAttribute"/> isn't applied on the containing module or it
+        // doesn't apply on this symbol.
         /// </summary>
         /// <remarks>
-        /// Determined based upon value specified via <see cref="DefaultCharSetAttribute"/> applied on the containing module.
+        /// Determined based upon value specified via <see cref="DefaultCharSetAttribute"/> applied on the
+        // containing module.
         /// </remarks>
         internal CharSet? GetEffectiveDefaultMarshallingCharSet()
         {
@@ -948,7 +964,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </para>
         /// <para>
         /// Unlike in VB, we are not allowing retargeting symbols.  This method is used as an approximation
-        /// for <see cref="IsFromCompilation"/> when a compilation is not available and that method will never return
+        /// for <see cref="IsFromCompilation"/> when a compilation is not available and that method will
+        // never return
         /// true for retargeting symbols.
         /// </para>
         /// </remarks>
@@ -1044,9 +1061,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Fetches the documentation comment for this element with a cancellation token.
         /// </summary>
-        /// <param name="preferredCulture">Optionally, retrieve the comments formatted for a particular culture. No impact on source documentation comments.</param>
-        /// <param name="expandIncludes">Optionally, expand <![CDATA[<include>]]> elements. No impact on non-source documentation comments.</param>
-        /// <param name="cancellationToken">Optionally, allow cancellation of documentation comment retrieval.</param>
+        /// <param name="preferredCulture">Optionally, retrieve the comments formatted for a particular
+        // culture. No impact on source documentation comments.</param>
+        /// <param name="expandIncludes">Optionally, expand <![CDATA[<include>]]> elements. No impact on
+        // non-source documentation comments.</param>
+        /// <param name="cancellationToken">Optionally, allow cancellation of documentation comment
+        // retrieval.</param>
         /// <returns>The XML that would be written to the documentation file for the symbol.</returns>
         public virtual string GetDocumentationCommentXml(
             CultureInfo? preferredCulture = null,
@@ -1113,7 +1133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns diagnostic info that should be reported at the use site of the symbol, or default if there is none.
+        /// Returns diagnostic info that should be reported at the use site of the symbol, or default if
+        // there is none.
         /// </summary>
         internal virtual UseSiteInfo<AssemblySymbol> GetUseSiteInfo()
         {
@@ -1135,7 +1156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the error code is the highest priority while calculating use site error for this symbol.
+        /// Returns true if the error code is the highest priority while calculating use site error for this
+        // symbol.
         /// Supposed to be ErrorCode, but it causes inconsistent accessibility error.
         /// </summary>
         protected virtual bool IsHighestPriorityUseSiteErrorCode(int code) => true;
@@ -1148,8 +1170,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///    - ByRef return type
         ///    - Required custom modifiers
         ///
-        /// This is distinguished from, for example, references to metadata symbols defined in assemblies that weren't referenced.
-        /// Symbols where this returns true can never be used successfully, and thus should never appear in any IDE feature.
+        /// This is distinguished from, for example, references to metadata symbols defined in assemblies
+        // that weren't referenced.
+        /// Symbols where this returns true can never be used successfully, and thus should never appear in
+        // any IDE feature.
         ///
         /// This is set for metadata symbols, as follows:
         /// Type - if a type is unsupported (e.g., a pointer type, etc.)
@@ -1247,8 +1271,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // Unlike VB the C# Dev11 compiler reports only a single unification error/warning.
-            // By dropping the location we effectively merge all unification use-site errors that have the same error code into a single error.
-            // The error message clearly explains how to fix the problem and reporting the error for each location wouldn't add much value.
+            // By dropping the location we effectively merge all unification use-site errors that have the same
+            // error code into a single error.
+            // The error message clearly explains how to fix the problem and reporting the error for each
+            // location wouldn't add much value.
             if (
                 info.Code == (int)ErrorCode.WRN_UnifyReferenceBldRev
                 || info.Code == (int)ErrorCode.WRN_UnifyReferenceMajMin
@@ -1462,7 +1488,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     requiredModifiersFound |= current;
                 }
 
-                // Unbound generic type is valid as a modifier, let's not report any use site diagnostics because of that.
+                // Unbound generic type is valid as a modifier, let's not report any use site diagnostics because of
+                // that.
                 if (modifierType.IsUnboundGenericType)
                 {
                     modifierType = modifierType.OriginalDefinition;
@@ -1600,7 +1627,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #nullable enable
         /// <summary>
         /// True if this symbol has been marked with the <see cref="ObsoleteAttribute"/> attribute.
-        /// This property returns <see cref="ThreeState.Unknown"/> if the <see cref="ObsoleteAttribute"/> attribute hasn't been cracked yet.
+        /// This property returns <see cref="ThreeState.Unknown"/> if the <see cref="ObsoleteAttribute"/>
+        // attribute hasn't been cracked yet.
         /// </summary>
         internal ThreeState ObsoleteState
         {
@@ -1621,7 +1649,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// True if this symbol has been marked with the System.Diagnostics.CodeAnalysis.ExperimentalAttribute attribute.
+        /// True if this symbol has been marked with the
+        // System.Diagnostics.CodeAnalysis.ExperimentalAttribute attribute.
         /// This property returns <see cref="ThreeState.Unknown"/> if the attribute hasn't been cracked yet.
         /// </summary>
         internal ThreeState ExperimentalState
@@ -1650,8 +1679,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns data decoded from <see cref="ObsoleteAttribute"/>/Experimental attribute or null if there is no <see cref="ObsoleteAttribute"/>/Experimental attribute.
-        /// This property returns <see cref="Microsoft.CodeAnalysis.ObsoleteAttributeData.Uninitialized"/> if attribute arguments haven't been decoded yet.
+        /// Returns data decoded from <see cref="ObsoleteAttribute"/>/Experimental attribute or null if
+        // there is no <see cref="ObsoleteAttribute"/>/Experimental attribute.
+        /// This property returns <see cref="Microsoft.CodeAnalysis.ObsoleteAttributeData.Uninitialized"/>
+        // if attribute arguments haven't been decoded yet.
         /// </summary>
         internal abstract ObsoleteAttributeData? ObsoleteAttributeData { get; }
 
@@ -1849,7 +1880,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && attribute.IsTargetAttribute(AttributeDescription.RequiredMemberAttribute)
             )
             {
-                // Do not use 'System.Runtime.CompilerServices.RequiredMemberAttribute'. Use the 'required' keyword on required fields and properties instead.
+                // Do not use 'System.Runtime.CompilerServices.RequiredMemberAttribute'. Use the 'required' keyword
+                // on required fields and properties instead.
                 diagnostics.Add(
                     ErrorCode.ERR_ExplicitRequiredMember,
                     arguments.AttributeSyntaxOpt.Location
@@ -1860,7 +1892,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && attribute.IsTargetAttribute(AttributeDescription.ScopedRefAttribute)
             )
             {
-                // Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the 'scoped' keyword instead.
+                // Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the 'scoped' keyword
+                // instead.
                 diagnostics.Add(
                     ErrorCode.ERR_ExplicitScopedRef,
                     arguments.AttributeSyntaxOpt.Location

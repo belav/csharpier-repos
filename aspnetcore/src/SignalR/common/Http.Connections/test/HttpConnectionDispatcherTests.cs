@@ -621,7 +621,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                     Environment.TickCount64 - (long)disconnectTimeout.TotalMilliseconds - 1;
 
                 // The application is still running here because the poll is only killed
-                // by the heartbeat so we pretend to do a scan and this should force the application task to complete
+                // by the heartbeat so we pretend to do a scan and this should force the application task to
+                // complete
                 manager.Scan();
 
                 // The application task should complete gracefully

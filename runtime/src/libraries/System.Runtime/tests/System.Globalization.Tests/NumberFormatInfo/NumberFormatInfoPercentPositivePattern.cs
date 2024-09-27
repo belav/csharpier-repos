@@ -18,7 +18,8 @@ namespace System.Globalization.Tests
 
         /// <summary>
         /// Not testing for NLS as the culture data can change
-        /// https://blogs.msdn.microsoft.com/shawnste/2005/04/05/culture-data-shouldnt-be-considered-stable-except-for-invariant/
+        ///
+        // https://blogs.msdn.microsoft.com/shawnste/2005/04/05/culture-data-shouldnt-be-considered-stable-except-for-invariant/
         /// In the CultureInfoAll test class we are testing the expected behavior
         /// for NLS by enumerating all locales on the system and then test them.
         /// </summary>

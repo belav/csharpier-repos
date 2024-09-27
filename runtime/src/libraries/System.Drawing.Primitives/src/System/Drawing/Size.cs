@@ -37,7 +37,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Drawing.Size'/> class from the specified dimensions.
+        /// Initializes a new instance of the <see cref='System.Drawing.Size'/> class from the specified
+        // dimensions.
         /// </summary>
         public Size(int width, int height)
         {
@@ -46,7 +47,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Converts the specified <see cref='System.Drawing.Size'/> to a <see cref='System.Drawing.SizeF'/>.
+        /// Converts the specified <see cref='System.Drawing.Size'/> to a <see
+        // cref='System.Drawing.SizeF'/>.
         /// </summary>
         public static implicit operator SizeF(Size p) => new SizeF(p.Width, p.Height);
 
@@ -122,7 +124,8 @@ namespace System.Drawing
         public static bool operator !=(Size sz1, Size sz2) => !(sz1 == sz2);
 
         /// <summary>
-        /// Converts the specified <see cref='System.Drawing.Size'/> to a <see cref='System.Drawing.Point'/>.
+        /// Converts the specified <see cref='System.Drawing.Size'/> to a <see
+        // cref='System.Drawing.Point'/>.
         /// </summary>
         public static explicit operator Point(Size size) => new Point(size.Width, size.Height);
 
@@ -187,7 +190,8 @@ namespace System.Drawing
             );
 
         /// <summary>
-        /// Tests to see whether the specified object is a <see cref='System.Drawing.Size'/>  with the same dimensions
+        /// Tests to see whether the specified object is a <see cref='System.Drawing.Size'/>  with the same
+        // dimensions
         /// as this <see cref='System.Drawing.Size'/>.
         /// </summary>
         public override readonly bool Equals([NotNullWhen(true)] object? obj) =>

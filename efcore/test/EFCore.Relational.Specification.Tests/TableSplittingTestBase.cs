@@ -219,14 +219,16 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
             context.SaveChanges();
 
-            //Assert.Equal(scooter.SeatingCapacity, scooterEntry.ComplexProperty(v => v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
+            //Assert.Equal(scooter.SeatingCapacity, scooterEntry.ComplexProperty(v =>
+            // v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
         }
 
         //using (var context = CreateContext())
         //{
         //    var scooter = context.Set<PoweredVehicle>().Single(v => v.Name == "Electric scooter");
 
-        //    Assert.Equal(scooter.SeatingCapacity, context.Entry(scooter).ComplexProperty(v => v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
+        //    Assert.Equal(scooter.SeatingCapacity, context.Entry(scooter).ComplexProperty(v =>
+        // v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
         //}
     }
 
@@ -383,7 +385,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         //    scooter.Engine = new Engine();
 
-        //    var engineCapacityEntry = context.Entry(scooter).ComplexProperty(v => v.Engine).TargetEntry.Property<int>("SeatingCapacity");
+        //    var engineCapacityEntry = context.Entry(scooter).ComplexProperty(v =>
+        // v.Engine).TargetEntry.Property<int>("SeatingCapacity");
 
         //    Assert.Equal(0, engineCapacityEntry.OriginalValue);
 
@@ -397,7 +400,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
         //{
         //    var scooter = context.Set<PoweredVehicle>().Single(v => v.Name == "Electric scooter");
 
-        //    Assert.Equal(scooter.SeatingCapacity, context.Entry(scooter).ComplexProperty(v => v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
+        //    Assert.Equal(scooter.SeatingCapacity, context.Entry(scooter).ComplexProperty(v =>
+        // v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
 
         //    scooter.SeatingCapacity = 2;
         //    context.SaveChanges();
@@ -405,10 +409,12 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         //using (var context = CreateContext())
         //{
-        //    var scooter = context.Set<PoweredVehicle>().Include(v => v.Engine).Single(v => v.Name == "Electric scooter");
+        //    var scooter = context.Set<PoweredVehicle>().Include(v => v.Engine).Single(v => v.Name ==
+        // "Electric scooter");
 
         //    Assert.Equal(2, scooter.SeatingCapacity);
-        //    Assert.Equal(2, context.Entry(scooter).ComplexProperty(v => v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
+        //    Assert.Equal(2, context.Entry(scooter).ComplexProperty(v =>
+        // v.Engine).TargetEntry.Property<int>("SeatingCapacity").CurrentValue);
         //}
     }
 

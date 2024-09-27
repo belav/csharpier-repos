@@ -335,7 +335,8 @@ namespace System.SpanTests
             }
         }
 
-        // Wrappers for {Last}IndexOfAny{Except}InRange that invoke both the Span and ReadOnlySpan overloads,
+        // Wrappers for {Last}IndexOfAny{Except}InRange that invoke both the Span and ReadOnlySpan
+        // overloads,
         // ensuring they both produce the same result, and returning that result.
         // This avoids needing to code the same call sites twice in all the above tests.
 

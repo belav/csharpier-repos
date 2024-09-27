@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Operations
     public static partial class OperationExtensions
     {
         /// <summary>
-        /// Helper function to simplify the access to the function pointer signature of an FunctionPointerInvocationOperation
+        /// Helper function to simplify the access to the function pointer signature of an
+        // FunctionPointerInvocationOperation
         /// </summary>
         public static IMethodSymbol GetFunctionPointerSignature(
             this IFunctionPointerInvocationOperation functionPointer
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// This will check whether context around the operation has any error such as syntax or semantic error
+        /// This will check whether context around the operation has any error such as syntax or semantic
+        // error
         /// </summary>
         internal static bool HasErrors(
             this IOperation operation,
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 return true;
             }
 
-            // if wrong compilation is given, GetSemanticModel will throw due to tree not belong to the given compilation.
+            // if wrong compilation is given, GetSemanticModel will throw due to tree not belong to the given
+            // compilation.
             var model = operation.SemanticModel;
 
             // An IOperation tree for a simple program includes statements from all compilation units involved,
@@ -72,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Returns all the descendant operations of the given <paramref name="operation"/> in evaluation order.
+        /// Returns all the descendant operations of the given <paramref name="operation"/> in evaluation
+        // order.
         /// </summary>
         /// <param name="operation">Operation whose descendants are to be fetched.</param>
         public static IEnumerable<IOperation> Descendants(this IOperation? operation)
@@ -81,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Returns all the descendant operations of the given <paramref name="operation"/> including the given <paramref name="operation"/> in evaluation order.
+        /// Returns all the descendant operations of the given <paramref name="operation"/> including the
+        // given <paramref name="operation"/> in evaluation order.
         /// </summary>
         /// <param name="operation">Operation whose descendants are to be fetched.</param>
         public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation? operation)
@@ -181,10 +186,12 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Gets the variable initializer for the given <paramref name="declarationOperation"/>, checking to see if there is a parent initializer
+        /// Gets the variable initializer for the given <paramref name="declarationOperation"/>, checking to
+        // see if there is a parent initializer
         /// if the single variable initializer is null.
         /// </summary>
-        /// <param name="declarationOperation">Single variable declaration to retrieve initializer for.</param>
+        /// <param name="declarationOperation">Single variable declaration to retrieve initializer
+        // for.</param>
         public static IVariableInitializerOperation? GetVariableInitializer(
             this IVariableDeclaratorOperation declarationOperation
         )
@@ -199,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Get an optional argument name for a named argument to the given <paramref name="dynamicOperation"/> at the given <paramref name="index"/>.
+        /// Get an optional argument name for a named argument to the given <paramref
+        // name="dynamicOperation"/> at the given <paramref name="index"/>.
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
@@ -217,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Get an optional argument name for a named argument to the given <paramref name="dynamicOperation"/> at the given <paramref name="index"/>.
+        /// Get an optional argument name for a named argument to the given <paramref
+        // name="dynamicOperation"/> at the given <paramref name="index"/>.
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
@@ -235,7 +244,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Get an optional argument name for a named argument to the given <paramref name="dynamicOperation"/> at the given <paramref name="index"/>.
+        /// Get an optional argument name for a named argument to the given <paramref
+        // name="dynamicOperation"/> at the given <paramref name="index"/>.
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
@@ -253,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Get an optional argument name for a named argument to the given <paramref name="dynamicOperation"/> at the given <paramref name="index"/>.
+        /// Get an optional argument name for a named argument to the given <paramref
+        // name="dynamicOperation"/> at the given <paramref name="index"/>.
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
@@ -277,7 +288,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Get an optional argument <see cref="RefKind"/> for an argument at the given <paramref name="index"/> to the given <paramref name="dynamicOperation"/>.
+        /// Get an optional argument <see cref="RefKind"/> for an argument at the given <paramref
+        // name="index"/> to the given <paramref name="dynamicOperation"/>.
         /// Returns a non-null argument <see cref="RefKind"/> for C#.
         /// Always returns null for VB as <see cref="RefKind"/> cannot be specified for an argument in VB.
         /// </summary>
@@ -297,7 +309,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Get an optional argument <see cref="RefKind"/> for an argument at the given <paramref name="index"/> to the given <paramref name="dynamicOperation"/>.
+        /// Get an optional argument <see cref="RefKind"/> for an argument at the given <paramref
+        // name="index"/> to the given <paramref name="dynamicOperation"/>.
         /// Returns a non-null argument <see cref="RefKind"/> for C#.
         /// Always returns null for VB as <see cref="RefKind"/> cannot be specified for an argument in VB.
         /// </summary>
@@ -317,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Get an optional argument <see cref="RefKind"/> for an argument at the given <paramref name="index"/> to the given <paramref name="dynamicOperation"/>.
+        /// Get an optional argument <see cref="RefKind"/> for an argument at the given <paramref
+        // name="index"/> to the given <paramref name="dynamicOperation"/>.
         /// Returns a non-null argument <see cref="RefKind"/> for C#.
         /// Always returns null for VB as <see cref="RefKind"/> cannot be specified for an argument in VB.
         /// </summary>
@@ -360,7 +374,8 @@ namespace Microsoft.CodeAnalysis.Operations
 
             if (argumentRefKinds.IsEmpty)
             {
-                // C# case where no explicit RefKind was specified for any argument, hence all arguments have RefKind.None.
+                // C# case where no explicit RefKind was specified for any argument, hence all arguments have
+                // RefKind.None.
                 return RefKind.None;
             }
 
@@ -368,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Operations
         }
 
         /// <summary>
-        /// Gets the root operation for the <see cref="IOperation"/> tree containing the given <paramref name="operation"/>.
+        /// Gets the root operation for the <see cref="IOperation"/> tree containing the given <paramref
+        // name="operation"/>.
         /// </summary>
         /// <param name="operation">Operation whose root is requested.</param>
         internal static IOperation GetRootOperation(this IOperation operation)
@@ -386,10 +402,13 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <summary>
         /// Gets either a loop or a switch operation that corresponds to the given branch operation.
         /// </summary>
-        /// <param name="operation">The branch operation for which a corresponding operation is looked up</param>
-        /// <returns>The corresponding operation or <c>null</c> in case not found (e.g. no loop or switch syntax, or the branch is not a break or continue)</returns>
+        /// <param name="operation">The branch operation for which a corresponding operation is looked
+        // up</param>
+        /// <returns>The corresponding operation or <c>null</c> in case not found (e.g. no loop or switch
+        // syntax, or the branch is not a break or continue)</returns>
         /// <exception cref="ArgumentNullException"><paramref name="operation"/> is null</exception>
-        /// <exception cref="InvalidOperationException">The operation is a part of Control Flow Graph</exception>
+        /// <exception cref="InvalidOperationException">The operation is a part of Control Flow
+        // Graph</exception>
         public static IOperation? GetCorrespondingOperation(this IBranchOperation operation)
         {
             if (operation == null)

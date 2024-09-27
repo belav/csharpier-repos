@@ -2584,14 +2584,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 FixedCode = code,
                 ExpectedDiagnostics =
                 {
-                    // /0/Test0.cs(7,17): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                    // /0/Test0.cs(7,17): error CS0116: A namespace cannot directly contain members such as fields,
+                    // methods or statements
                     DiagnosticResult.CompilerError("CS0116").WithSpan(7, 17, 7, 18),
-                    // /0/Test0.cs(7,17): error CS0547: '<invalid-global-code>.N': property or indexer cannot have void type
+                    // /0/Test0.cs(7,17): error CS0547: '<invalid-global-code>.N': property or indexer cannot have void
+                    // type
                     DiagnosticResult
                         .CompilerError("CS0547")
                         .WithSpan(7, 17, 7, 18)
                         .WithArguments("N.<invalid-global-code>.N"),
-                    // /0/Test0.cs(7,17): error CS0548: '<invalid-global-code>.N': property or indexer must have at least one accessor
+                    // /0/Test0.cs(7,17): error CS0548: '<invalid-global-code>.N': property or indexer must have at
+                    // least one accessor
                     DiagnosticResult
                         .CompilerError("CS0548")
                         .WithSpan(7, 17, 7, 18)

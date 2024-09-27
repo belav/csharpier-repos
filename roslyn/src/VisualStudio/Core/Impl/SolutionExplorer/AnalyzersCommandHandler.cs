@@ -575,7 +575,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         || SdkUiUtilities.IsBuiltInRuleSet(pathToRuleSet, _serviceProvider)
                     )
                     {
-                        // If project is using the default built-in ruleset or no ruleset, then prefer .editorconfig for severity configuration.
+                        // If project is using the default built-in ruleset or no ruleset, then prefer .editorconfig for
+                        // severity configuration.
                         if (pathToAnalyzerConfigDoc != null)
                         {
                             using var scope1 = context.AddScope(

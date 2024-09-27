@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 // This is needed due to NativeAOT which doesn't enable nullable globally yet
 #nullable enable
@@ -48,8 +49,10 @@ namespace ILLink.Shared.TrimAnalysis
 
         /// <summary>
         /// <list type="table">
-        /// <item><see cref="System.Reflection.MethodBase.GetMethodFromHandle(System.RuntimeMethodHandle)"/></item>
-        /// <item><see cref="System.Reflection.MethodBase.GetMethodFromHandle(System.RuntimeMethodHandle, System.RuntimeTypeHandle)"/></item>
+        /// <item><see
+        // cref="System.Reflection.MethodBase.GetMethodFromHandle(System.RuntimeMethodHandle)"/></item>
+        /// <item><see cref="System.Reflection.MethodBase.GetMethodFromHandle(System.RuntimeMethodHandle,
+        // System.RuntimeTypeHandle)"/></item>
         /// </list>
         /// </summary>
         MethodBase_GetMethodFromHandle,
@@ -73,18 +76,28 @@ namespace ILLink.Shared.TrimAnalysis
         /// <item><see cref="System.Type.GetType(string)"/></item>
         /// <item><see cref= "System.Type.GetType(string, bool)" /></item>
         /// <item><see cref="System.Type.GetType(string, bool, bool)"/></item>
-        /// <item><see cref="System.Type.GetType(string, System.Func{System.Reflection.AssemblyName, System.Reflection.Assembly?}?, System.Func{System.Reflection.Assembly?, string, bool, System.Type?}?)"/></item>
-        /// <item><see cref="System.Type.GetType(string, System.Func{System.Reflection.AssemblyName, System.Reflection.Assembly?}?, System.Func{System.Reflection.Assembly?, string, bool, System.Type?}?, bool)"/></item>
-        /// <item><see cref="System.Type.GetType(string, System.Func{System.Reflection.AssemblyName, System.Reflection.Assembly?}?, System.Func{System.Reflection.Assembly?, string, bool, System.Type?}?, bool, bool)"/></item>
+        /// <item><see cref="System.Type.GetType(string, System.Func{System.Reflection.AssemblyName,
+        // System.Reflection.Assembly?}?, System.Func{System.Reflection.Assembly?, string, bool,
+        // System.Type?}?)"/></item>
+        /// <item><see cref="System.Type.GetType(string, System.Func{System.Reflection.AssemblyName,
+        // System.Reflection.Assembly?}?, System.Func{System.Reflection.Assembly?, string, bool,
+        // System.Type?}?, bool)"/></item>
+        /// <item><see cref="System.Type.GetType(string, System.Func{System.Reflection.AssemblyName,
+        // System.Reflection.Assembly?}?, System.Func{System.Reflection.Assembly?, string, bool,
+        // System.Type?}?, bool, bool)"/></item>
         /// </list>
         /// </summary>
         Type_GetType,
 
         /// <summary>
         /// <item><see cref="System.Type.GetConstructor(System.Type[])"/></item>
-        /// <item><see cref="System.Type.GetConstructor(System.Reflection.BindingFlags, System.Type[])"/></item>
-        /// <item><see cref="System.Type.GetConstructor(System.Reflection.BindingFlags, System.Reflection.Binder?, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
-        /// <item><see cref="System.Type.GetConstructor(System.Reflection.BindingFlags, System.Reflection.Binder?, System.Reflection.CallingConventions, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetConstructor(System.Reflection.BindingFlags,
+        // System.Type[])"/></item>
+        /// <item><see cref="System.Type.GetConstructor(System.Reflection.BindingFlags,
+        // System.Reflection.Binder?, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetConstructor(System.Reflection.BindingFlags,
+        // System.Reflection.Binder?, System.Reflection.CallingConventions, System.Type[],
+        // System.Reflection.ParameterModifier[]?)"/></item>
         /// </list>
         /// </summary>
         Type_GetConstructor,
@@ -98,14 +111,23 @@ namespace ILLink.Shared.TrimAnalysis
         /// <item><see cref="System.Type.GetMethod(string)"/></item>
         /// <item><see cref="System.Type.GetMethod(string, System.Reflection.BindingFlags)"/></item>
         /// <item><see cref="System.Type.GetMethod(string, System.Type[])"/></item>
-        /// <item><see cref="System.Type.GetMethod(string, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
-        /// <item><see cref="System.Type.GetMethod(string, System.Reflection.BindingFlags, System.Type[])"/></item>
-        /// <item><see cref="System.Type.GetMethod(string, System.Reflection.BindingFlags, System.Reflection.Binder, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
-        /// <item><see cref="System.Type.GetMethod(string, System.Reflection.BindingFlags, System.Reflection.Binder, System.Reflection.CallingConventions, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetMethod(string, System.Type[],
+        // System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetMethod(string, System.Reflection.BindingFlags,
+        // System.Type[])"/></item>
+        /// <item><see cref="System.Type.GetMethod(string, System.Reflection.BindingFlags,
+        // System.Reflection.Binder, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetMethod(string, System.Reflection.BindingFlags,
+        // System.Reflection.Binder, System.Reflection.CallingConventions, System.Type[],
+        // System.Reflection.ParameterModifier[]?)"/></item>
         /// <item><see cref="System.Type.GetMethod(string, int, System.Type[])"/></item>
-        /// <item><see cref="System.Type.GetMethod(string, int, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
-        /// <item><see cref="System.Type.GetMethod(string, int, System.Reflection.BindingFlags, System.Reflection.Binder?, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
-        /// <item><see cref="System.Type.GetMethod(string, int, System.Reflection.BindingFlags, System.Reflection.Binder?, System.Reflection.CallingConventions, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetMethod(string, int, System.Type[],
+        // System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetMethod(string, int, System.Reflection.BindingFlags,
+        // System.Reflection.Binder?, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetMethod(string, int, System.Reflection.BindingFlags,
+        // System.Reflection.Binder?, System.Reflection.CallingConventions, System.Type[],
+        // System.Reflection.ParameterModifier[]?)"/></item>
         /// </list>
         /// </summary>
         Type_GetMethod,
@@ -135,8 +157,11 @@ namespace ILLink.Shared.TrimAnalysis
         /// <item><see cref="System.Type.GetProperty(string, System.Type?)"/></item>
         /// <item><see cref="System.Type.GetProperty(string, System.Type[])"/></item>
         /// <item><see cref="System.Type.GetProperty(string, System.Type?, System.Type[])"/></item>
-        /// <item><see cref="System.Type.GetProperty(string, System.Type?, System.Type[], System.Reflection.ParameterModifier[])"/></item>
-        /// <item><see cref="System.Type.GetProperty(string, System.Reflection.BindingFlags, System.Reflection.Binder?, System.Type?, System.Type[], System.Reflection.ParameterModifier[]?)"/></item>
+        /// <item><see cref="System.Type.GetProperty(string, System.Type?, System.Type[],
+        // System.Reflection.ParameterModifier[])"/></item>
+        /// <item><see cref="System.Type.GetProperty(string, System.Reflection.BindingFlags,
+        // System.Reflection.Binder?, System.Type?, System.Type[],
+        // System.Reflection.ParameterModifier[]?)"/></item>
         /// </list>
         /// </summary>
         Type_GetProperty,
@@ -176,7 +201,8 @@ namespace ILLink.Shared.TrimAnalysis
         /// <list type="table">
         /// <item><see cref="System.Type.GetMember(string)"/></item>
         /// <item><see cref="System.Type.GetMember(string, System.Reflection.BindingFlags)"/></item>
-        /// <item><see cref="System.Type.GetMember(string, System.Reflection.MemberTypes, System.Reflection.BindingFlags)"/></item>
+        /// <item><see cref="System.Type.GetMember(string, System.Reflection.MemberTypes,
+        // System.Reflection.BindingFlags)"/></item>
         /// </list>
         /// </summary>
         Type_GetMember,
@@ -210,19 +236,25 @@ namespace ILLink.Shared.TrimAnalysis
         Type_get_BaseType,
 
         /// <summary>
-        /// <see cref="System.Linq.Expressions.Expression.Call(System.Type, string, System.Type[]?, System.Linq.Expressions.Expression[]?))"/>
+        /// <see cref="System.Linq.Expressions.Expression.Call(System.Type, string, System.Type[]?,
+        // System.Linq.Expressions.Expression[]?))"/>
         /// </summary>
         Expression_Call,
 
         /// <summary>
-        /// <see cref="System.Linq.Expressions.Expression.Field(System.Linq.Expressions.Expression?, System.Type, string)"/>
+        /// <see cref="System.Linq.Expressions.Expression.Field(System.Linq.Expressions.Expression?,
+        // System.Type, string)"/>
         /// </summary>
         Expression_Field,
 
         /// <summary>
         /// <list type="table">
-        /// <item><see cref="System.Linq.Expressions.Expression.Property(System.Linq.Expressions.Expression?, System.Reflection.MethodInfo)"/></item>
-        /// <item><see cref="System.Linq.Expressions.Expression.Property(System.Linq.Expressions.Expression?, System.Type, string)"/></item>
+        /// <item><see
+        // cref="System.Linq.Expressions.Expression.Property(System.Linq.Expressions.Expression?,
+        // System.Reflection.MethodInfo)"/></item>
+        /// <item><see
+        // cref="System.Linq.Expressions.Expression.Property(System.Linq.Expressions.Expression?, System.Type,
+        // string)"/></item>
         /// </list>
         /// </summary>
         Expression_Property,
@@ -258,7 +290,8 @@ namespace ILLink.Shared.TrimAnalysis
         Marshal_DestroyStructure,
 
         /// <summary>
-        /// <see cref="System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(nint, System.Type)"/>
+        /// <see cref="System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(nint,
+        // System.Type)"/>
         /// </summary>
         Marshal_GetDelegateForFunctionPointer,
 
@@ -267,15 +300,19 @@ namespace ILLink.Shared.TrimAnalysis
         /// <item><see cref="System.Activator.CreateInstance(System.Type, bool)"/></item>
         /// <item><see cref="System.Activator.CreateInstance(System.Type, object[])"/></item>
         /// <item><see cref="System.Activator.CreateInstance(System.Type, object[], object[])"/></item>
-        /// <item><see cref="System.Activator.CreateInstance(System.Type, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo)"/></item>
-        /// <item><see cref="System.Activator.CreateInstance(System.Type, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.Activator.CreateInstance(System.Type, System.Reflection.BindingFlags,
+        // System.Reflection.Binder, object[], System.Globalization.CultureInfo)"/></item>
+        /// <item><see cref="System.Activator.CreateInstance(System.Type, System.Reflection.BindingFlags,
+        // System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
         /// </list>
         Activator_CreateInstance__Type,
 
         /// <summary>
         /// <list type="table">
         /// <item><see cref="System.Activator.CreateInstance(string, string)"/></item>
-        /// <item><see cref="System.Activator.CreateInstance(string, string, bool, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.Activator.CreateInstance(string, string, bool,
+        // System.Reflection.BindingFlags, System.Reflection.Binder, object[],
+        // System.Globalization.CultureInfo, object[])"/></item>
         /// <item><see cref="System.Activator.CreateInstance(string, string, object[])"/></item>
         /// </list>
         /// </summary>
@@ -284,7 +321,9 @@ namespace ILLink.Shared.TrimAnalysis
         /// <summary>
         /// <list type="table">
         /// <item><see cref="System.Activator.CreateInstanceFrom(string, string)"/></item>
-        /// <item><see cref="System.Activator.CreateInstanceFrom(string, string, bool, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.Activator.CreateInstanceFrom(string, string, bool,
+        // System.Reflection.BindingFlags, System.Reflection.Binder, object[],
+        // System.Globalization.CultureInfo, object[])"/></item>
         /// <item><see cref="System.Activator.CreateInstanceFrom(string, string, object[])"/></item>
         /// </list>
         /// </summary>
@@ -293,7 +332,9 @@ namespace ILLink.Shared.TrimAnalysis
         /// <summary>
         /// <list type="table">
         /// <item><see cref="System.AppDomain.CreateInstance(string, string)"/></item>
-        /// <item><see cref="System.AppDomain.CreateInstance(string, string, bool, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.AppDomain.CreateInstance(string, string, bool,
+        // System.Reflection.BindingFlags, System.Reflection.Binder, object[],
+        // System.Globalization.CultureInfo, object[])"/></item>
         /// <item><see cref="System.AppDomain.CreateInstance(string, string, object[])"/></item>
         /// </list>
         /// </summary>
@@ -302,7 +343,9 @@ namespace ILLink.Shared.TrimAnalysis
         /// <summary>
         /// <list type="table">
         /// <item><see cref="System.AppDomain.CreateInstanceAndUnwrap(string, string)"/></item>
-        /// <item><see cref="System.AppDomain.CreateInstanceAndUnwrap(string, string, bool, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.AppDomain.CreateInstanceAndUnwrap(string, string, bool,
+        // System.Reflection.BindingFlags, System.Reflection.Binder, object[],
+        // System.Globalization.CultureInfo, object[])"/></item>
         /// <item><see cref="System.AppDomain.CreateInstanceAndUnwrap(string, string, object[])"/></item>
         /// </list>
         /// </summary>
@@ -311,7 +354,9 @@ namespace ILLink.Shared.TrimAnalysis
         /// <summary>
         /// <list type="table">
         /// <item><see cref="System.AppDomain.CreateInstanceFrom(string, string)"/></item>
-        /// <item><see cref="System.AppDomain.CreateInstanceFrom(string, string, bool, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.AppDomain.CreateInstanceFrom(string, string, bool,
+        // System.Reflection.BindingFlags, System.Reflection.Binder, object[],
+        // System.Globalization.CultureInfo, object[])"/></item>
         /// <item><see cref="System.AppDomain.CreateInstanceFrom(string, string, object[])"/></item>
         /// </list>
         /// </summary>
@@ -320,8 +365,11 @@ namespace ILLink.Shared.TrimAnalysis
         /// <summary>
         /// <list type="table">
         /// <item><see cref="System.AppDomain.CreateInstanceFromAndUnwrap(string, string)"/></item>
-        /// <item><see cref="System.AppDomain.CreateInstanceFromAndUnwrap(string, string, bool, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
-        /// <item><see cref="System.AppDomain.CreateInstanceFromAndUnwrap(string, string, object[])"/></item>
+        /// <item><see cref="System.AppDomain.CreateInstanceFromAndUnwrap(string, string, bool,
+        // System.Reflection.BindingFlags, System.Reflection.Binder, object[],
+        // System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.AppDomain.CreateInstanceFromAndUnwrap(string, string,
+        // object[])"/></item>
         /// </list>
         /// </summary>
         AppDomain_CreateInstanceFromAndUnwrap,
@@ -330,7 +378,9 @@ namespace ILLink.Shared.TrimAnalysis
         /// <list type="table">
         /// <item><see cref="System.Reflection.Assembly.CreateInstance(string)"/></item>
         /// <item><see cref="System.Reflection.Assembly.CreateInstance(string, bool)"/></item>
-        /// <item><see cref="System.Reflection.Assembly.CreateInstance(string, bool, System.Reflection.BindingFlags, System.Reflection.Binder, object[], System.Globalization.CultureInfo, object[])"/></item>
+        /// <item><see cref="System.Reflection.Assembly.CreateInstance(string, bool,
+        // System.Reflection.BindingFlags, System.Reflection.Binder, object[],
+        // System.Globalization.CultureInfo, object[])"/></item>
         /// </list>
         /// </summary>
         Assembly_CreateInstance,
@@ -372,17 +422,20 @@ namespace ILLink.Shared.TrimAnalysis
         RuntimeReflectionExtensions_GetRuntimeField,
 
         /// <summary>
-        /// <see cref="System.Reflection.RuntimeReflectionExtensions.GetRuntimeMethod(System.Type, string, System.Type[])"/>
+        /// <see cref="System.Reflection.RuntimeReflectionExtensions.GetRuntimeMethod(System.Type, string,
+        // System.Type[])"/>
         /// </summary>
         RuntimeReflectionExtensions_GetRuntimeMethod,
 
         /// <summary>
-        /// <see cref="System.Reflection.RuntimeReflectionExtensions.GetRuntimeProperty(System.Type, string)"/>
+        /// <see cref="System.Reflection.RuntimeReflectionExtensions.GetRuntimeProperty(System.Type,
+        // string)"/>
         /// </summary>
         RuntimeReflectionExtensions_GetRuntimeProperty,
 
         /// <summary>
-        /// <see cref="System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(System.RuntimeTypeHandle)"/>
+        /// <see
+        // cref="System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(System.RuntimeTypeHandle)"/>
         /// </summary>
         RuntimeHelpers_RunClassConstructor,
 

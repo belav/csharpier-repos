@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     /// <remarks>
     /// Please add your tests to other files if possible:
     ///     * FlowDiagnosticTests.cs - all tests on Diagnostics
-    ///     * IterationJumpYieldStatementTests.cs - while, do, for, foreach, break, continue, goto, iterator (yield break, yield return)
+    ///     * IterationJumpYieldStatementTests.cs - while, do, for, foreach, break, continue, goto,
+    // iterator (yield break, yield return)
     ///     * TryLockUsingStatementTests.cs - try-catch-finally, lock, &amp; using statement
     ///     * PatternsVsRegions.cs - region analysis tests for pattern matching
     /// </remarks>
@@ -1643,7 +1644,8 @@ class C {
 "
             );
 
-            //  NOTE: 'f' should not be reported in results1.AlwaysAssigned, this issue will be addressed separately
+            //  NOTE: 'f' should not be reported in results1.AlwaysAssigned, this issue will be addressed
+            // separately
             Assert.Equal(
                 GetSymbolNamesJoined(results1.AlwaysAssigned),
                 GetSymbolNamesJoined(results2.AlwaysAssigned)
@@ -2804,7 +2806,8 @@ class Test
         [Fact]
         public void UnaryPlus()
         {
-            // reported at https://social.msdn.microsoft.com/Forums/vstudio/en-US/f5078027-def2-429d-9fef-ab7f240883d2/writteninside-for-unary-operators?forum=roslyn
+            // reported at
+            // https://social.msdn.microsoft.com/Forums/vstudio/en-US/f5078027-def2-429d-9fef-ab7f240883d2/writteninside-for-unary-operators?forum=roslyn
             var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowStatements(
                 @"
 class Main
@@ -4471,7 +4474,8 @@ class C {
         //            Assert.Null(GetSymbolNamesSortedAndJoined(dataFlowAnalysisResults.ReadInside));
         //            Assert.Null(GetSymbolNamesSortedAndJoined(dataFlowAnalysisResults.ReadOutside));
         //            Assert.Null(GetSymbolNamesSortedAndJoined(dataFlowAnalysisResults.WrittenInside));
-        //            Assert.Equal("x", GetSymbolNamesSortedAndJoined(dataFlowAnalysisResults.WrittenOutside));
+        //            Assert.Equal("x",
+        // GetSymbolNamesSortedAndJoined(dataFlowAnalysisResults.WrittenOutside));
         //        }
 
         [Fact]
@@ -7383,7 +7387,8 @@ public class ExportedSymbol
 }";
             var compilation = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             compilation.VerifyDiagnostics(
-                // (6,18): error CS9015: Use of possibly unassigned field 'value'. Consider updating to language version '11.0' to auto-default the field.
+                // (6,18): error CS9015: Use of possibly unassigned field 'value'. Consider updating to language
+                // version '11.0' to auto-default the field.
                 //         S.Equals(value , value);
                 Diagnostic(ErrorCode.ERR_UseDefViolationFieldUnsupportedVersion, "value")
                     .WithArguments("value", "11.0")
@@ -9022,7 +9027,8 @@ class C {
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            // The foreach loop is broken, so its embedded statement is filled in during syntax error recovery. It is zero-width.
+            // The foreach loop is broken, so its embedded statement is filled in during syntax error recovery.
+            // It is zero-width.
             var stmt = tree.GetCompilationUnitRoot()
                 .DescendantNodesAndSelf()
                 .OfType<ForEachStatementSyntax>()
@@ -9237,7 +9243,8 @@ class Program
 }";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (4,42): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (4,42): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     static void F([DefaultParameterValue(() => { return 0; })] object obj)
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "() => { return 0; }")
                     .WithLocation(4, 42)
@@ -9267,7 +9274,8 @@ class Program
 }";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (8,22): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (8,22): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     static void F([A(() => { return 0; })] object obj)
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "() => { return 0; }")
                     .WithLocation(8, 22)
@@ -10723,12 +10731,14 @@ public struct C
 "
             );
             comp.VerifyDiagnostics(
-                // (23,24): error CS0176: Member 'C.M()' cannot be accessed with an instance reference; qualify it with a type name instead
+                // (23,24): error CS0176: Member 'C.M()' cannot be accessed with an instance reference; qualify it
+                // with a type name instead
                 //         a = new Action(this.M);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "this.M")
                     .WithArguments("C.M()")
                     .WithLocation(23, 24),
-                // (29,24): error CS0176: Member 'C.M()' cannot be accessed with an instance reference; qualify it with a type name instead
+                // (29,24): error CS0176: Member 'C.M()' cannot be accessed with an instance reference; qualify it
+                // with a type name instead
                 //         a = new Action(c.M);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.M")
                     .WithArguments("C.M()")
@@ -10765,12 +10775,14 @@ public static class Extension
 "
             );
             comp.VerifyDiagnostics(
-                // (8,24): error CS1113: Extension method 'Extension.M(C)' defined on value type 'C' cannot be used to create delegates
+                // (8,24): error CS1113: Extension method 'Extension.M(C)' defined on value type 'C' cannot be used
+                // to create delegates
                 //         a = new Action(this.M);
                 Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "this.M")
                     .WithArguments("Extension.M(C)", "C")
                     .WithLocation(8, 24),
-                // (14,24): error CS1113: Extension method 'Extension.M(C)' defined on value type 'C' cannot be used to create delegates
+                // (14,24): error CS1113: Extension method 'Extension.M(C)' defined on value type 'C' cannot be used
+                // to create delegates
                 //         a = new Action(c.M);
                 Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "c.M")
                     .WithArguments("Extension.M(C)", "C")

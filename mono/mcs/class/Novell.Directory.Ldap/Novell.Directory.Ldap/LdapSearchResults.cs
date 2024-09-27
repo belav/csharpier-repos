@@ -150,7 +150,8 @@ namespace Novell.Directory.Ldap
                                 )
                                 {
                                     // Following referrals
-                                    //									referralConn = conn.chaseReferral(queue, cons, resp, resp.Referrals, 0, false, referralConn);
+                                    //									referralConn = conn.chaseReferral(queue, cons, resp, resp.Referrals, 0, false,
+                                    // referralConn);
                                 }
                                 else if (resultCode != LdapException.SUCCESS)
                                 {
@@ -223,7 +224,7 @@ namespace Novell.Directory.Ldap
         /// </param>
         /// <param name="cons">The LdapSearchConstraints associated with this search
         /// </param>
-        /* package */
+/* package */
         internal LdapSearchResults(
             LdapConnection conn,
             LdapSearchQueue queue,
@@ -272,9 +273,9 @@ namespace Novell.Directory.Ldap
             return ret;
         }
 
-        /*
-        * If both of the vectors are empty, get more data for them.
-        */
+/*
+* If both of the vectors are empty, get more data for them.
+*/
         private void resetVectors()
         {
             // If we're done, no further checking needed
@@ -396,7 +397,7 @@ namespace Novell.Directory.Ldap
         }
 
         /// <summary> Cancels the search request and clears the message and enumeration.</summary>
-        /*package*/
+/*package*/
         internal virtual void Abandon()
         {
             // first, remove message ID and timer and any responses in the queue

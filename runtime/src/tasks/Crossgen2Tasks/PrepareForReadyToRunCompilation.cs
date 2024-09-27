@@ -36,15 +36,18 @@ namespace Microsoft.NET.Build.Tasks
         public ITaskItem CrossgenTool { get; set; }
         public ITaskItem Crossgen2Tool { get; set; }
 
-        // Output lists of files to compile. Currently crossgen has to run in two steps, the first to generate the R2R image
-        // and the second to create native PDBs for the compiled images (the output of the first step is an input to the second step)
+        // Output lists of files to compile. Currently crossgen has to run in two steps, the first to
+        // generate the R2R image
+        // and the second to create native PDBs for the compiled images (the output of the first step is an
+        // input to the second step)
         [Output]
         public ITaskItem[] ReadyToRunCompileList => _compileList.ToArray();
 
         [Output]
         public ITaskItem[] ReadyToRunSymbolsCompileList => _symbolsCompileList.ToArray();
 
-        // Output files to publish after compilation. These lists are equivalent to the input list, but contain the new
+        // Output files to publish after compilation. These lists are equivalent to the input list, but
+        // contain the new
         // paths to the compiled R2R images and native PDBs.
         [Output]
         public ITaskItem[] ReadyToRunFilesToPublish => _r2rFiles.ToArray();
@@ -227,7 +230,8 @@ namespace Microsoft.NET.Build.Tasks
 
                 if (eligibility.CompileSeparately)
                 {
-                    // This TaskItem is the IL->R2R entry, for an input assembly that needs to be compiled into a R2R image. This will be used as
+                    // This TaskItem is the IL->R2R entry, for an input assembly that needs to be compiled into a R2R
+                    // image. This will be used as
                     // an input to the ReadyToRunCompiler task
                     TaskItem r2rCompilationEntry = new TaskItem(file);
                     r2rCompilationEntry.SetMetadata(MetadataKeys.OutputR2RImage, outputR2RImage);
@@ -247,22 +251,27 @@ namespace Microsoft.NET.Build.Tasks
                     r2rCompositeInputList.Add(file);
                 }
 
-                // This TaskItem corresponds to the output R2R image. It is equivalent to the input TaskItem, only the ItemSpec for it points to the new path
+                // This TaskItem corresponds to the output R2R image. It is equivalent to the input TaskItem, only
+                // the ItemSpec for it points to the new path
                 // for the newly created R2R image
                 TaskItem r2rFileToPublish = new TaskItem(file);
                 r2rFileToPublish.ItemSpec = outputR2RImage;
                 r2rFileToPublish.RemoveMetadata(MetadataKeys.OriginalItemSpec);
                 r2rFilesPublishList.Add(r2rFileToPublish);
 
-                // Note: ReadyToRun PDB/Map files are not needed for debugging. They are only used for profiling, therefore the default behavior is to not generate them
-                // unless an explicit PublishReadyToRunEmitSymbols flag is enabled by the app developer. There is also another way to profile that the runtime supports, which does
-                // not rely on the native PDBs/Map files, so creating them is really an opt-in option, typically used by advanced users.
+                // Note: ReadyToRun PDB/Map files are not needed for debugging. They are only used for profiling,
+                // therefore the default behavior is to not generate them
+                // unless an explicit PublishReadyToRunEmitSymbols flag is enabled by the app developer. There is
+                // also another way to profile that the runtime supports, which does
+                // not rely on the native PDBs/Map files, so creating them is really an opt-in option, typically
+                // used by advanced users.
                 // For debugging, only the IL PDBs are required.
                 if (eligibility.CompileSeparately && outputPDBImage != null)
                 {
                     if (!ReadyToRunUseCrossgen2 || _crossgen2IsVersion5)
                     {
-                        // This TaskItem is the R2R->R2RPDB entry, for a R2R image that was just created, and for which we need to create native PDBs. This will be used as
+                        // This TaskItem is the R2R->R2RPDB entry, for a R2R image that was just created, and for which we
+                        // need to create native PDBs. This will be used as
                         // an input to the ReadyToRunCompiler task
                         TaskItem pdbCompilationEntry = new TaskItem(file);
                         pdbCompilationEntry.ItemSpec = outputR2RImage;
@@ -277,7 +286,8 @@ namespace Microsoft.NET.Build.Tasks
                         symbolsCompilationList.Add(pdbCompilationEntry);
                     }
 
-                    // This TaskItem corresponds to the output PDB image. It is equivalent to the input TaskItem, only the ItemSpec for it points to the new path
+                    // This TaskItem corresponds to the output PDB image. It is equivalent to the input TaskItem, only
+                    // the ItemSpec for it points to the new path
                     // for the newly created PDB image.
                     TaskItem r2rSymbolsFileToPublish = new TaskItem(file);
                     r2rSymbolsFileToPublish.ItemSpec = outputPDBImage;
@@ -563,7 +573,8 @@ namespace Microsoft.NET.Build.Tasks
                         // save these most expensive checks for last. We don't want to scan all references for IL code
                         if (ReferencesWinMD(mdReader) || !HasILCode(mdReader))
                         {
-                            // Forwarder assemblies are not separately compiled via R2R, but when performing composite compilation, they are included in the bundle
+                            // Forwarder assemblies are not separately compiled via R2R, but when performing composite
+                            // compilation, they are included in the bundle
                             if (excludeFromComposite || !compositeCompile)
                                 return Eligibility.CreateReferenceEligibility(excludeFromComposite);
                         }

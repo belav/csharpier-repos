@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 // C5 example: Graph representation with basic algorithms using C5
@@ -257,10 +257,12 @@ namespace Graph
         /// </summary>
         /// <param name="start">The vertex to start the search at</param>
         /// <param name="beforevertex">Action to perform when a vertex is first encountered.</param>
-        /// <param name="aftervertex">Action to perform when all edges out of a vertex has been handles.</param>
+        /// <param name="aftervertex">Action to perform when all edges out of a vertex has been
+        // handles.</param>
         /// <param name="onfollow">Action to perform as an edge is traversed.</param>
         /// <param name="onfollowed">Action to perform when an edge is travesed back.</param>
-        /// <param name="onnotfollowed">Action to perform when an edge (a backedge)is seen, but not followed.</param>
+        /// <param name="onnotfollowed">Action to perform when an edge (a backedge)is seen, but not
+        // followed.</param>
         void DepthFirstSearch(
             V start,
             Action<V> beforevertex,
@@ -283,7 +285,8 @@ namespace Graph
         void PriorityFirstTraverse(bool accumulating, V start, EdgeAction<V, E, W> act);
 
         /// <summary>
-        /// Compute the (a) shortest path from start to end. THrow an exception if end cannot be reached rom start.
+        /// Compute the (a) shortest path from start to end. THrow an exception if end cannot be reached rom
+        // start.
         /// </summary>
         /// <param name="weight"></param>
         /// <param name="start"></param>
@@ -292,7 +295,8 @@ namespace Graph
         ICollectionValue<Edge<V, E>> ShortestPath(V start, V end);
 
         /// <summary>
-        /// Compute the Distance from start to end, i.e. the total weight of a shortest path from start to end.
+        /// Compute the Distance from start to end, i.e. the total weight of a shortest path from start to
+        // end.
         /// Throw an exception if end cannot be reached rom start.
         /// </summary>
         /// <param name="start"></param>
@@ -474,26 +478,28 @@ namespace Graph
     /// <returns></returns>
     delegate bool EdgeAction<V, E, U>(Edge<V, E> edge, U extra);
 
-    /*
-      For a dense graph, we would use data fields:
-    
-      E'[,] or E'[][] for the matrix. Possibly E'[][] for a triangular one!
-      Here E' = struct{E edgedata, bool present} or class{E edgedata}, or if E is a class just E.
-      Thus E' is E! for value types. Or we could have two matrices: E[][] and bool[][].
-    
-      HashDictionary<V,int> to map vertex ids to indices.
-      ArrayList<V> for the map the other way.
-      Or simply a HashedArrayList<V> to get both?
-    
-      PresentList<int>, FreeList<int> or similar, if we do not want to compact the indices in the matrix on each delete.
-      If we compact, we always do a delete on the vertex<->index map by a replace and a removelast:
-        vimap[ind]=vimap[vimap.Count]; vimap.RemoveLast(); //also reorder matrix!
-      
-    
-    */
+/*
+For a dense graph, we would use data fields:
+
+E'[,] or E'[][] for the matrix. Possibly E'[][] for a triangular one!
+Here E' = struct{E edgedata, bool present} or class{E edgedata}, or if E is a class just E.
+Thus E' is E! for value types. Or we could have two matrices: E[][] and bool[][].
+
+HashDictionary<V,int> to map vertex ids to indices.
+ArrayList<V> for the map the other way.
+Or simply a HashedArrayList<V> to get both?
+
+PresentList<int>, FreeList<int> or similar, if we do not want to compact the indices in the matrix
+on each delete.
+If we compact, we always do a delete on the vertex<->index map by a replace and a removelast:
+vimap[ind]=vimap[vimap.Count]; vimap.RemoveLast(); //also reorder matrix!
+
+
+*/
 
     /// <summary>
-    /// An implementation of IGraph&le;V,E,W&ge; based on an adjacency list representation using hash dictionaries.
+    /// An implementation of IGraph&le;V,E,W&ge; based on an adjacency list representation using hash
+    // dictionaries.
     /// As a consequence, this will be most efficient for sparse graphs.
     /// </summary>
     /// <typeparam name="V"></typeparam>
@@ -1267,7 +1273,7 @@ namespace Graph
         /// <returns></returns>
         public IDirectedCollectionValue<V> ApproximateTSP2()
         {
-            /* Construct a minimum spanning tree for the graph */
+/* Construct a minimum spanning tree for the graph */
             V root;
             IGraph<V, E, W> tree = MinimumSpanningTree(out root);
 
@@ -1318,11 +1324,11 @@ namespace Graph
         [UsedBy("testTSP")]
         public IDirectedCollectionValue<V> ApproximateTSP()
         {
-            /* Construct a minimum spanning tree for the graph */
+/* Construct a minimum spanning tree for the graph */
             V root;
             IGraph<V, E, W> tree = MinimumSpanningTree(out root);
 
-            /* (Virtually) double all edges of MST and construct an Euler tour of the vertices*/
+/* (Virtually) double all edges of MST and construct an Euler tour of the vertices*/
             LinkedList<V> tour = new LinkedList<V>();
             tour.Add(root);
             tour.Add(root);
@@ -1341,7 +1347,7 @@ namespace Graph
 
             tree.TraverseVertices(false, root, onfollow);
 
-            /* Finally, slide along the Euler tour and shortcut by removing vertices already seen*/
+/* Finally, slide along the Euler tour and shortcut by removing vertices already seen*/
             HashSet<V> seen = new HashSet<V>();
             view = tour.View(0, tour.Count);
             while (view.Offset < tour.Count - 1)
@@ -1786,58 +1792,58 @@ namespace Graph
             foreach (string s in g.ApproximateTSP2())
                 Console.WriteLine("# " + s);
             //g.Print(Console.Out);
-            /*
-              Console.WriteLine("========= MST =========");
-              string root;
-              IGraph<string, double, double> mst = g.MinimumSpanningTree(out root);
-              mst.TraverseVertices(false,
-                 root,
-                 delegate(Edge<string, double> e) { Console.WriteLine("Edge: {0} -> {1}", e.start, e.end); });
-              ArrayList<string> oddvertices = new ArrayList<string>();
-              foreach (string v in mst.Vertices())
-                  if (mst.Adjacent(v).Count % 2 != 0)
-                      oddvertices.Add(v);
-      
-              Console.WriteLine("========= Matching of odd vertices of mst =========");
-              ICollectionValue<Edge<string, double>> matching = g.SubGraph(oddvertices).ApproximateMWPM();
-      
-              Console.WriteLine("========= Add matching to mst =========");
-              //We must split the edges of the matchin with fake temporary vertices
-              //(For a general vertex type, we would have to augment it to Pair<V,int>
-              int fake = 0;
-              foreach (Edge<string, double> e in matching)
-              {
-                  string fakevertex = "_" + (fake++);
-                  mst.AddEdge(e.start, fakevertex, 0);
-                  mst.AddEdge(fakevertex, e.end, e.edgedata);
-              }
-              //mst.Print(Console.Out);
-      
-              IList<string> tour = mst.EulerTour(), view = tour.View(1, tour.Count - 1);
-      
-              //Remove fake vertices
-               while (view.Count > 0)
-                  if (view[0].StartsWith("_"))
-                      view.RemoveFirst();
-                  else
-                      view.Slide(1, view.Count - 1);
-      
-              Console.WriteLine("========= Approximate TSP 2 =========");
-              //Short cut
-              view = tour.View(1, tour.Count - 1);
-              HashSet<string> seen = new HashSet<string>();
-      
-              while (view.Count > 0)
-              {
-                  string s = view[0];
-                  if (seen.FindOrAdd(ref s))
-                      view.RemoveFirst();
-                  else
-                      view.Slide(1, view.Count - 1);
-              }
-      
-              foreach (string s in tour)
-                  Console.WriteLine(". " + s);*/
+/*
+Console.WriteLine("========= MST =========");
+string root;
+IGraph<string, double, double> mst = g.MinimumSpanningTree(out root);
+mst.TraverseVertices(false,
+root,
+delegate(Edge<string, double> e) { Console.WriteLine("Edge: {0} -> {1}", e.start, e.end); });
+ArrayList<string> oddvertices = new ArrayList<string>();
+foreach (string v in mst.Vertices())
+if (mst.Adjacent(v).Count % 2 != 0)
+oddvertices.Add(v);
+
+Console.WriteLine("========= Matching of odd vertices of mst =========");
+ICollectionValue<Edge<string, double>> matching = g.SubGraph(oddvertices).ApproximateMWPM();
+
+Console.WriteLine("========= Add matching to mst =========");
+//We must split the edges of the matchin with fake temporary vertices
+//(For a general vertex type, we would have to augment it to Pair<V,int>
+int fake = 0;
+foreach (Edge<string, double> e in matching)
+{
+string fakevertex = "_" + (fake++);
+mst.AddEdge(e.start, fakevertex, 0);
+mst.AddEdge(fakevertex, e.end, e.edgedata);
+}
+//mst.Print(Console.Out);
+
+IList<string> tour = mst.EulerTour(), view = tour.View(1, tour.Count - 1);
+
+//Remove fake vertices
+while (view.Count > 0)
+if (view[0].StartsWith("_"))
+view.RemoveFirst();
+else
+view.Slide(1, view.Count - 1);
+
+Console.WriteLine("========= Approximate TSP 2 =========");
+//Short cut
+view = tour.View(1, tour.Count - 1);
+HashSet<string> seen = new HashSet<string>();
+
+while (view.Count > 0)
+{
+string s = view[0];
+if (seen.FindOrAdd(ref s))
+view.RemoveFirst();
+else
+view.Slide(1, view.Count - 1);
+}
+
+foreach (string s in tour)
+Console.WriteLine(". " + s);*/
         }
 
         /// <summary>

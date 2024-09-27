@@ -154,7 +154,8 @@ namespace System.Net
                     m_password = String.Empty;
                 else
                     m_password = value;
-                //                GlobalLog.Print("NetworkCredential::set_Password: m_password: \"" + m_password + "\"" );
+                //                GlobalLog.Print("NetworkCredential::set_Password: m_password: \"" + m_password +
+                // "\"" );
 #else //!FEATURE_PAL
                 m_password = UnsafeNclNativeMethods.SecureStringHelper.CreateSecureString(value);
                 //                GlobalLog.Print("NetworkCredential::set_Password: value = " + value);

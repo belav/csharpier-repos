@@ -55,7 +55,8 @@ namespace System.Net
                 // On Windows and OSX CheckSupportsStore is not defined, so the call is eliminated and the
                 // if should be folded out.
                 //
-                // On Unix it will prevent the lock from being held and released over and over for the LocalMachine store.
+                // On Unix it will prevent the lock from being held and released over and over for the LocalMachine
+                // store.
                 bool supportsStore = true;
                 CheckSupportsStore(storeLocation, ref supportsStore);
 
@@ -72,7 +73,8 @@ namespace System.Net
                     {
                         try
                         {
-                            // NOTE: that if this call fails we won't keep track and the next time we enter we will try to open the store again.
+                            // NOTE: that if this call fails we won't keep track and the next time we enter we will try to open
+                            // the store again.
                             store = OpenStore(storeLocation);
 
                             if (NetEventSource.Log.IsEnabled())

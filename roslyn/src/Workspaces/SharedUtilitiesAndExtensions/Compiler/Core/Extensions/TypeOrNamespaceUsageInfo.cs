@@ -15,15 +15,19 @@ namespace Microsoft.CodeAnalysis
         None = 0x0,
 
         /// <summary>
-        /// Represents a reference to a namespace or type on the left side of a dotted name (qualified name or member access).
-        /// For example, 'NS' in <code>NS.Type x = new NS.Type();</code> or <code>NS.Type.StaticMethod();</code> or
-        /// 'Type' in <code>Type.NestedType x = new Type.NestedType();</code> or <code>Type.StaticMethod();</code>
+        /// Represents a reference to a namespace or type on the left side of a dotted name (qualified name
+        // or member access).
+        /// For example, 'NS' in <code>NS.Type x = new NS.Type();</code> or
+        // <code>NS.Type.StaticMethod();</code> or
+        /// 'Type' in <code>Type.NestedType x = new Type.NestedType();</code> or
+        // <code>Type.StaticMethod();</code>
         /// </summary>
         Qualified = 0x01,
 
         /// <summary>
         /// Represents a generic type argument reference.
-        /// For example, 'Type' in <code>Generic{Type} x = ...;</code> or <code>class Derived : Base{Type} { }</code>
+        /// For example, 'Type' in <code>Generic{Type} x = ...;</code> or <code>class Derived : Base{Type} {
+        // }</code>
         /// </summary>
         TypeArgument = 0x02,
 
@@ -47,7 +51,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Represents a reference to a namespace or type within a using or imports directive.
-        /// For example, <code>using NS;</code> or <code>using static NS.Extensions</code> or <code>using Alias = MyType</code>.
+        /// For example, <code>using NS;</code> or <code>using static NS.Extensions</code> or <code>using
+        // Alias = MyType</code>.
         /// </summary>
         Import = 0x20,
 

@@ -8,11 +8,13 @@ namespace Microsoft.EntityFrameworkCore.Update;
 ///         Parameters for creating a <see cref="IModificationCommand" /> instance.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers; it is generally not used in application code.
+///         This type is typically used by database providers; it is generally not used in
+// application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public readonly record struct ModificationCommandParameters
@@ -22,11 +24,13 @@ public readonly record struct ModificationCommandParameters
     /// </summary>
     /// <param name="table">The table containing the data to be modified.</param>
     /// <param name="storeStoredProcedure">The stored procedure to use for updating the data.</param>
-    /// <param name="sensitiveLoggingEnabled">Indicates whether potentially sensitive data (e.g. database values) can be logged.</param>
+    /// <param name="sensitiveLoggingEnabled">Indicates whether potentially sensitive data (e.g.
+    // database values) can be logged.</param>
     /// <param name="detailedErrorsEnabled">Indicates whether detailed errors should be logged.</param>
     /// <param name="comparer">An <see cref="IComparer{T}" /> for <see cref="IUpdateEntry" />.</param>
     /// <param name="generateParameterName">A delegate to generate parameter names.</param>
-    /// <param name="logger">An <see cref="IDiagnosticsLogger{TLoggerCategory}" /> for <see cref="DbLoggerCategory.Update" />.</param>
+    /// <param name="logger">An <see cref="IDiagnosticsLogger{TLoggerCategory}" /> for <see
+    // cref="DbLoggerCategory.Update" />.</param>
     public ModificationCommandParameters(
         ITable table,
         IStoreStoredProcedure? storeStoredProcedure,
@@ -52,11 +56,13 @@ public readonly record struct ModificationCommandParameters
     ///     Creates a new <see cref="ModificationCommandParameters" /> instance.
     /// </summary>
     /// <param name="table">The table containing the data to be modified.</param>
-    /// <param name="sensitiveLoggingEnabled">Indicates whether potentially sensitive data (e.g. database values) can be logged.</param>
+    /// <param name="sensitiveLoggingEnabled">Indicates whether potentially sensitive data (e.g.
+    // database values) can be logged.</param>
     /// <param name="detailedErrorsEnabled">Indicates whether detailed errors should be logged.</param>
     /// <param name="comparer">An <see cref="IComparer{T}" /> for <see cref="IUpdateEntry" />.</param>
     /// <param name="generateParameterName">A delegate to generate parameter names.</param>
-    /// <param name="logger">An <see cref="IDiagnosticsLogger{TLoggerCategory}" /> for <see cref="DbLoggerCategory.Update" />.</param>
+    /// <param name="logger">An <see cref="IDiagnosticsLogger{TLoggerCategory}" /> for <see
+    // cref="DbLoggerCategory.Update" />.</param>
     public ModificationCommandParameters(
         ITable table,
         bool sensitiveLoggingEnabled,

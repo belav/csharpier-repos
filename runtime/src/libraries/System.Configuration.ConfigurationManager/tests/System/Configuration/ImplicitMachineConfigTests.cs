@@ -100,7 +100,8 @@ namespace System.ConfigurationTests
         [Fact]
         public void DesignTimeAppSettingsFailWithEmptyMachineConfig()
         {
-            // If we've explicitly specified a machine config and it doesn't define the AppSettingsType we shouldn't be able
+            // If we've explicitly specified a machine config and it doesn't define the AppSettingsType we
+            // shouldn't be able
             // to get it (e.g. we haven't stubbed in overtop).
             using (var temp = new TempConfig(TestData.EmptyConfig))
             {
@@ -121,7 +122,8 @@ namespace System.ConfigurationTests
                 : "System.Configuration.ConfigurationManager";
 
             // InternalConfigFactory allows you to specify your own host / hostInitParams
-            // Ensure ImplicitMachineConfigHost can init within this process and not throw an Invalid cast exception
+            // Ensure ImplicitMachineConfigHost can init within this process and not throw an Invalid cast
+            // exception
             using (var temp = new TempConfig(TestData.EmptyConfig))
             {
                 string typeName =

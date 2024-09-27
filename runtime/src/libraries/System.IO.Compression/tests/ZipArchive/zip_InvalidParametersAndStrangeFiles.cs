@@ -1133,8 +1133,10 @@ namespace System.IO.Compression.Tests
         /// 1. EmptyFileCompressedWithEOT has
         /// Deflate 0x08, _uncompressedSize 0, _compressedSize 2, compressed data: 0x0300 (\u0003 ETX)
         /// 2. EmptyFileCompressedWrongSize has
-        /// Deflate 0x08, _uncompressedSize 0, _compressedSize 4, compressed data: 0xBAAD0300 (just bad data)
-        /// ZipArchive is expected to change compression method to Stored (0x00) and ignore "bad" compressed size
+        /// Deflate 0x08, _uncompressedSize 0, _compressedSize 4, compressed data: 0xBAAD0300 (just bad
+        // data)
+        /// ZipArchive is expected to change compression method to Stored (0x00) and ignore "bad" compressed
+        // size
         /// </summary>
         [Theory]
         [MemberData(nameof(EmptyFiles))]
@@ -1274,9 +1276,12 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// This test verifies that we can successfully read Zip archives that are "slightly incorrect" in that there is a Zip64 extra field
-        /// that contains space for 64-bit values which should only be present if the 32-bit fields read earlier were all 0xFF bytes.
-        /// Although this contravenes the Zip spec, such files are created by common tools and are successfully read by Python, Go and Rust, and
+        /// This test verifies that we can successfully read Zip archives that are "slightly incorrect" in
+        // that there is a Zip64 extra field
+        /// that contains space for 64-bit values which should only be present if the 32-bit fields read
+        // earlier were all 0xFF bytes.
+        /// Although this contravenes the Zip spec, such files are created by common tools and are
+        // successfully read by Python, Go and Rust, and
         /// 7zip (albeit with a warning)
         /// </summary>
         [Fact]
@@ -1293,7 +1298,8 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// As above, but the compressed size in the central directory record is less than 0xFFFFFFFF so the value in that location
+        /// As above, but the compressed size in the central directory record is less than 0xFFFFFFFF so the
+        // value in that location
         /// should be used instead of in the Zip64 extra field.
         /// </summary>
         [Fact]
@@ -1309,7 +1315,8 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// As above, but the uncompressed size in the central directory record is less than 0xFFFFFFFF so the value in that location
+        /// As above, but the uncompressed size in the central directory record is less than 0xFFFFFFFF so
+        // the value in that location
         /// should be used instead of in the Zip64 extra field.
         /// </summary>
         [Fact]
@@ -1325,7 +1332,8 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// This test checks behavior of ZipArchive when the startDiskNumber in the extraField is greater than IntMax
+        /// This test checks behavior of ZipArchive when the startDiskNumber in the extraField is greater
+        // than IntMax
         /// </summary>
         [Fact]
         public void ReadArchive_WithDiskStartNumberGreaterThanIntMax()
@@ -1703,7 +1711,8 @@ namespace System.IO.Compression.Tests
             0x00,
             0x00,
             0x00,
-            // total number of entries in CD on this disk, and overall  (-1 indicates refer to Zip64 extra fields)
+            // total number of entries in CD on this disk, and overall  (-1 indicates refer to Zip64 extra
+            // fields)
             0xff,
             0xff,
             0xff,
@@ -2105,7 +2114,8 @@ namespace System.IO.Compression.Tests
             0x00,
             0x00,
             0x00,
-            // total number of entries in CD on this disk, and overall  (-1 indicates refer to Zip64 extra fields)
+            // total number of entries in CD on this disk, and overall  (-1 indicates refer to Zip64 extra
+            // fields)
             0xff,
             0xff,
             0xff,

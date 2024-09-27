@@ -22,7 +22,8 @@ namespace System.Xml.Serialization
     using System.Threading;
     using System.Xml.Schema;
 
-    /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter"]/*' />
+    /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter"]/*'
+    // />
     ///<internalonly/>
     public abstract class XmlSerializationWriter : XmlSerializationGeneratedCode
     {
@@ -56,21 +57,24 @@ namespace System.Xml.Serialization
             Init(tempAssembly);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.EscapeName"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.EscapeName"]/*' />
         protected bool EscapeName
         {
             get { return escapeName; }
             set { escapeName = value; }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.Writer"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.Writer"]/*' />
         protected XmlWriter Writer
         {
             get { return w; }
             set { w = value; }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.Namespaces"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.Namespaces"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -92,90 +96,105 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromByteArrayBase64"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromByteArrayBase64"]/*' />
         protected static byte[] FromByteArrayBase64(byte[] value)
         {
             // Unlike other "From" functions that one is just a place holder for automatic code generation.
             // The reason is performance and memory consumption for (potentially) big 64base-encoded chunks
-            // And it is assumed that the caller generates the code that will distinguish between byte[] and string return types
+            // And it is assumed that the caller generates the code that will distinguish between byte[] and
+            // string return types
             //
             return value;
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.ResolveDynamicAssembly"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.ResolveDynamicAssembly"]/*' />
         ///<internalonly/>
         protected static Assembly ResolveDynamicAssembly(string assemblyFullName)
         {
             return DynamicAssemblies.Get(assemblyFullName);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromByteArrayHex"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromByteArrayHex"]/*' />
         protected static string FromByteArrayHex(byte[] value)
         {
             return XmlCustomFormatter.FromByteArrayHex(value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromDateTime"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromDateTime"]/*' />
         protected static string FromDateTime(DateTime value)
         {
             return XmlCustomFormatter.FromDateTime(value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromDate"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromDate"]/*' />
         protected static string FromDate(DateTime value)
         {
             return XmlCustomFormatter.FromDate(value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromTime"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromTime"]/*' />
         protected static string FromTime(DateTime value)
         {
             return XmlCustomFormatter.FromTime(value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromChar"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromChar"]/*' />
         protected static string FromChar(char value)
         {
             return XmlCustomFormatter.FromChar(value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromEnum"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromEnum"]/*' />
         protected static string FromEnum(long value, string[] values, long[] ids)
         {
             return XmlCustomFormatter.FromEnum(value, values, ids, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromEnum1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromEnum1"]/*' />
         protected static string FromEnum(long value, string[] values, long[] ids, string typeName)
         {
             return XmlCustomFormatter.FromEnum(value, values, ids, typeName);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromXmlName"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromXmlName"]/*' />
         protected static string FromXmlName(string name)
         {
             return XmlCustomFormatter.FromXmlName(name);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromXmlNCName"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromXmlNCName"]/*' />
         protected static string FromXmlNCName(string ncName)
         {
             return XmlCustomFormatter.FromXmlNCName(ncName);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromXmlNmToken"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromXmlNmToken"]/*' />
         protected static string FromXmlNmToken(string nmToken)
         {
             return XmlCustomFormatter.FromXmlNmToken(nmToken);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromXmlNmTokens"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromXmlNmTokens"]/*' />
         protected static string FromXmlNmTokens(string nmTokens)
         {
             return XmlCustomFormatter.FromXmlNmTokens(nmTokens);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteXsiType"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteXsiType"]/*' />
         protected void WriteXsiType(string name, string ns)
         {
             WriteAttribute("type", XmlSchema.InstanceNamespace, GetQualifiedName(name, ns));
@@ -273,7 +292,8 @@ namespace System.Xml.Serialization
             return new XmlQualifiedName(typeName, typeNs);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteTypedPrimitive"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteTypedPrimitive"]/*' />
         protected void WriteTypedPrimitive(string name, string ns, object o, bool xsiType)
         {
             string value = null;
@@ -456,13 +476,15 @@ namespace System.Xml.Serialization
             return prefix + ":" + name;
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromXmlQualifiedName"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromXmlQualifiedName"]/*' />
         protected string FromXmlQualifiedName(XmlQualifiedName xmlQualifiedName)
         {
             return FromXmlQualifiedName(xmlQualifiedName, true);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.FromXmlQualifiedName"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.FromXmlQualifiedName"]/*' />
         protected string FromXmlQualifiedName(XmlQualifiedName xmlQualifiedName, bool ignoreEmpty)
         {
             if (xmlQualifiedName == null)
@@ -477,37 +499,43 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteStartElement"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteStartElement"]/*' />
         protected void WriteStartElement(string name)
         {
             WriteStartElement(name, null, null, false, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteStartElement1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteStartElement1"]/*' />
         protected void WriteStartElement(string name, string ns)
         {
             WriteStartElement(name, ns, null, false, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteStartElement4"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteStartElement4"]/*' />
         protected void WriteStartElement(string name, string ns, bool writePrefixed)
         {
             WriteStartElement(name, ns, null, writePrefixed, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteStartElement2"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteStartElement2"]/*' />
         protected void WriteStartElement(string name, string ns, object o)
         {
             WriteStartElement(name, ns, o, false, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteStartElement3"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteStartElement3"]/*' />
         protected void WriteStartElement(string name, string ns, object o, bool writePrefixed)
         {
             WriteStartElement(name, ns, o, writePrefixed, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteStartElement5"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteStartElement5"]/*' />
         protected void WriteStartElement(
             string name,
             string ns,
@@ -579,7 +607,8 @@ namespace System.Xml.Serialization
                     {
                         if (w.LookupPrefix(aliasNs) == null)
                         {
-                            // write the default namespace declaration only if we have not written it already, over wise we just ignore one provided by the user
+                            // write the default namespace declaration only if we have not written it already, over wise we just
+                            // ignore one provided by the user
                             if (prefix == null && alias.Length == 0)
                                 break;
                             WriteAttribute("xmlns", alias, null, aliasNs);
@@ -642,13 +671,15 @@ namespace System.Xml.Serialization
             return null;
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullTagEncoded"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullTagEncoded"]/*' />
         protected void WriteNullTagEncoded(string name)
         {
             WriteNullTagEncoded(name, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullTagEncoded1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullTagEncoded1"]/*' />
         protected void WriteNullTagEncoded(string name, string ns)
         {
             if (name == null || name.Length == 0)
@@ -658,13 +689,15 @@ namespace System.Xml.Serialization
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullTagLiteral"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullTagLiteral"]/*' />
         protected void WriteNullTagLiteral(string name)
         {
             WriteNullTagLiteral(name, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullTag1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullTag1"]/*' />
         protected void WriteNullTagLiteral(string name, string ns)
         {
             if (name == null || name.Length == 0)
@@ -674,13 +707,15 @@ namespace System.Xml.Serialization
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteEmptyTag"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteEmptyTag"]/*' />
         protected void WriteEmptyTag(string name)
         {
             WriteEmptyTag(name, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteEmptyTag1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteEmptyTag1"]/*' />
         protected void WriteEmptyTag(string name, string ns)
         {
             if (name == null || name.Length == 0)
@@ -689,13 +724,15 @@ namespace System.Xml.Serialization
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteEndElement"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteEndElement"]/*' />
         protected void WriteEndElement()
         {
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteEndElement1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteEndElement1"]/*' />
         protected void WriteEndElement(object o)
         {
             w.WriteEndElement();
@@ -703,7 +740,8 @@ namespace System.Xml.Serialization
             if (o != null && objectsInUse != null)
             {
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (!objectsInUse.ContainsKey(o))
                     throw new InvalidOperationException(
                         Res.GetString(
@@ -717,7 +755,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteSerializable"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteSerializable"]/*' />
         protected void WriteSerializable(
             IXmlSerializable serializable,
             string name,
@@ -728,7 +767,8 @@ namespace System.Xml.Serialization
             WriteSerializable(serializable, name, ns, isNullable, true);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteSerializable1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteSerializable1"]/*' />
         protected void WriteSerializable(
             IXmlSerializable serializable,
             string name,
@@ -754,7 +794,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringEncoded"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringEncoded"]/*' />
         protected void WriteNullableStringEncoded(
             string name,
             string ns,
@@ -768,7 +809,8 @@ namespace System.Xml.Serialization
                 WriteElementString(name, ns, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringLiteral"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringLiteral"]/*' />
         protected void WriteNullableStringLiteral(string name, string ns, string value)
         {
             if (value == null)
@@ -777,7 +819,8 @@ namespace System.Xml.Serialization
                 WriteElementString(name, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringEncodedRaw"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringEncodedRaw"]/*' />
         protected void WriteNullableStringEncodedRaw(
             string name,
             string ns,
@@ -791,7 +834,8 @@ namespace System.Xml.Serialization
                 WriteElementStringRaw(name, ns, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringEncodedRaw1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringEncodedRaw1"]/*' />
         protected void WriteNullableStringEncodedRaw(
             string name,
             string ns,
@@ -805,7 +849,8 @@ namespace System.Xml.Serialization
                 WriteElementStringRaw(name, ns, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringLiteralRaw"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringLiteralRaw"]/*' />
         protected void WriteNullableStringLiteralRaw(string name, string ns, string value)
         {
             if (value == null)
@@ -814,7 +859,8 @@ namespace System.Xml.Serialization
                 WriteElementStringRaw(name, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringLiteralRaw1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableStringLiteralRaw1"]/*' />
         protected void WriteNullableStringLiteralRaw(string name, string ns, byte[] value)
         {
             if (value == null)
@@ -823,7 +869,8 @@ namespace System.Xml.Serialization
                 WriteElementStringRaw(name, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableQualifiedNameEncoded"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableQualifiedNameEncoded"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -840,7 +887,8 @@ namespace System.Xml.Serialization
                 WriteElementQualifiedName(name, ns, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNullableQualifiedNameLiteral"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNullableQualifiedNameLiteral"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -856,7 +904,8 @@ namespace System.Xml.Serialization
                 WriteElementQualifiedName(name, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementEncoded"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementEncoded"]/*' />
         protected void WriteElementEncoded(
             XmlNode node,
             string name,
@@ -874,7 +923,8 @@ namespace System.Xml.Serialization
             WriteElement(node, name, ns, isNullable, any);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementLiteral"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementLiteral"]/*' />
         protected void WriteElementLiteral(
             XmlNode node,
             string name,
@@ -932,13 +982,15 @@ namespace System.Xml.Serialization
                 w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateUnknownTypeException"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateUnknownTypeException"]/*' />
         protected Exception CreateUnknownTypeException(object o)
         {
             return CreateUnknownTypeException(o.GetType());
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateUnknownTypeException1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateUnknownTypeException1"]/*' />
         protected Exception CreateUnknownTypeException(Type type)
         {
             if (typeof(IXmlSerializable).IsAssignableFrom(type))
@@ -955,7 +1007,8 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateMismatchChoiceException"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateMismatchChoiceException"]/*' />
         protected Exception CreateMismatchChoiceException(
             string value,
             string elementName,
@@ -968,13 +1021,15 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateUnknownAnyElementException"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateUnknownAnyElementException"]/*' />
         protected Exception CreateUnknownAnyElementException(string name, string ns)
         {
             return new InvalidOperationException(Res.GetString(Res.XmlUnknownAnyElement, name, ns));
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateInvalidChoiceIdentifierValueException"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateInvalidChoiceIdentifierValueException"]/*' />
         protected Exception CreateInvalidChoiceIdentifierValueException(
             string type,
             string identifier
@@ -985,7 +1040,8 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateChoiceIdentifierValueException"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateChoiceIdentifierValueException"]/*' />
         protected Exception CreateChoiceIdentifierValueException(
             string value,
             string identifier,
@@ -993,13 +1049,15 @@ namespace System.Xml.Serialization
             string ns
         )
         {
-            // XmlChoiceIdentifierMismatch=Value '{0}' of the choice identifier '{1}' does not match element '{2}' from namespace '{3}'.
+            // XmlChoiceIdentifierMismatch=Value '{0}' of the choice identifier '{1}' does not match element
+            // '{2}' from namespace '{3}'.
             return new InvalidOperationException(
                 Res.GetString(Res.XmlChoiceIdentifierMismatch, value, identifier, name, ns)
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateInvalidEnumValueException"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateInvalidEnumValueException"]/*' />
         protected Exception CreateInvalidEnumValueException(object value, string typeName)
         {
             return new InvalidOperationException(
@@ -1007,13 +1065,15 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateInvalidAnyTypeException"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateInvalidAnyTypeException"]/*' />
         protected Exception CreateInvalidAnyTypeException(object o)
         {
             return CreateInvalidAnyTypeException(o.GetType());
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.CreateInvalidAnyTypeException1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.CreateInvalidAnyTypeException1"]/*' />
         protected Exception CreateInvalidAnyTypeException(Type type)
         {
             return new InvalidOperationException(
@@ -1021,13 +1081,15 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteReferencingElement"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteReferencingElement"]/*' />
         protected void WriteReferencingElement(string n, string ns, object o)
         {
             WriteReferencingElement(n, ns, o, false);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteReferencingElement1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteReferencingElement1"]/*' />
         protected void WriteReferencingElement(string n, string ns, object o, bool isNullable)
         {
             if (o == null)
@@ -1070,7 +1132,8 @@ namespace System.Xml.Serialization
             return id;
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteId"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteId"]/*' />
         protected void WriteId(object o)
         {
             WriteId(o, true);
@@ -1084,13 +1147,15 @@ namespace System.Xml.Serialization
                 w.WriteAttributeString("id", GetId(o, addToReferencesList));
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteXmlAttribute1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteXmlAttribute1"]/*' />
         protected void WriteXmlAttribute(XmlNode node)
         {
             WriteXmlAttribute(node, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteXmlAttribute2"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteXmlAttribute2"]/*' />
         protected void WriteXmlAttribute(XmlNode node, object container)
         {
             XmlAttribute attr = node as XmlAttribute;
@@ -1109,7 +1174,8 @@ namespace System.Xml.Serialization
 
                     string value = FromXmlQualifiedName(qname, true) + dims;
 
-                    //<xsd:attribute xmlns:q3="s0" wsdl:arrayType="q3:FoosBase[]" xmlns:q4="http://schemas.xmlsoap.org/soap/encoding/" ref="q4:arrayType" />
+                    //<xsd:attribute xmlns:q3="s0" wsdl:arrayType="q3:FoosBase[]"
+                    // xmlns:q4="http://schemas.xmlsoap.org/soap/encoding/" ref="q4:arrayType" />
                     WriteAttribute(Wsdl.ArrayType, Wsdl.Namespace, value);
                 }
                 else
@@ -1119,7 +1185,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteAttribute"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteAttribute"]/*' />
         protected void WriteAttribute(string localName, string ns, string value)
         {
             if (value == null)
@@ -1153,7 +1220,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteAttribute0"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteAttribute0"]/*' />
         protected void WriteAttribute(string localName, string ns, byte[] value)
         {
             if (value == null)
@@ -1190,7 +1258,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteAttribute1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteAttribute1"]/*' />
         protected void WriteAttribute(string localName, string value)
         {
             if (value == null)
@@ -1198,7 +1267,8 @@ namespace System.Xml.Serialization
             w.WriteAttributeString(localName, null, value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteAttribute01"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteAttribute01"]/*' />
         protected void WriteAttribute(string localName, byte[] value)
         {
             if (value == null)
@@ -1209,7 +1279,8 @@ namespace System.Xml.Serialization
             w.WriteEndAttribute();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteAttribute2"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteAttribute2"]/*' />
         protected void WriteAttribute(string prefix, string localName, string ns, string value)
         {
             if (value == null)
@@ -1217,7 +1288,8 @@ namespace System.Xml.Serialization
             w.WriteAttributeString(prefix, localName, null, value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteValue"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteValue"]/*' />
         protected void WriteValue(string value)
         {
             if (value == null)
@@ -1225,7 +1297,8 @@ namespace System.Xml.Serialization
             w.WriteString(value);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteValue01"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteValue01"]/*' />
         protected void WriteValue(byte[] value)
         {
             if (value == null)
@@ -1233,7 +1306,8 @@ namespace System.Xml.Serialization
             XmlCustomFormatter.WriteArrayBase64(w, value, 0, value.Length);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteStartDocument"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteStartDocument"]/*' />
         protected void WriteStartDocument()
         {
             if (w.WriteState == WriteState.Start)
@@ -1242,25 +1316,29 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementString"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementString"]/*' />
         protected void WriteElementString(String localName, String value)
         {
             WriteElementString(localName, null, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementString1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementString1"]/*' />
         protected void WriteElementString(String localName, String ns, String value)
         {
             WriteElementString(localName, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementString2"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementString2"]/*' />
         protected void WriteElementString(String localName, String value, XmlQualifiedName xsiType)
         {
             WriteElementString(localName, null, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementString3"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementString3"]/*' />
         protected void WriteElementString(
             String localName,
             String ns,
@@ -1281,31 +1359,36 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw"]/*' />
         protected void WriteElementStringRaw(String localName, String value)
         {
             WriteElementStringRaw(localName, null, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw0"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw0"]/*' />
         protected void WriteElementStringRaw(String localName, byte[] value)
         {
             WriteElementStringRaw(localName, null, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw1"]/*' />
         protected void WriteElementStringRaw(String localName, String ns, String value)
         {
             WriteElementStringRaw(localName, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw01"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw01"]/*' />
         protected void WriteElementStringRaw(String localName, String ns, byte[] value)
         {
             WriteElementStringRaw(localName, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw2"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw2"]/*' />
         protected void WriteElementStringRaw(
             String localName,
             String value,
@@ -1315,7 +1398,8 @@ namespace System.Xml.Serialization
             WriteElementStringRaw(localName, null, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw02"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw02"]/*' />
         protected void WriteElementStringRaw(
             String localName,
             byte[] value,
@@ -1325,7 +1409,8 @@ namespace System.Xml.Serialization
             WriteElementStringRaw(localName, null, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw3"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw3"]/*' />
         protected void WriteElementStringRaw(
             String localName,
             String ns,
@@ -1342,7 +1427,8 @@ namespace System.Xml.Serialization
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw03"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementStringRaw03"]/*' />
         protected void WriteElementStringRaw(
             String localName,
             String ns,
@@ -1359,7 +1445,8 @@ namespace System.Xml.Serialization
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteRpcResult"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteRpcResult"]/*' />
         protected void WriteRpcResult(string name, string ns)
         {
             if (!soap12)
@@ -1372,7 +1459,8 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1381,7 +1469,8 @@ namespace System.Xml.Serialization
             WriteElementQualifiedName(localName, null, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName1"]/*' />
         protected void WriteElementQualifiedName(
             string localName,
             XmlQualifiedName value,
@@ -1391,7 +1480,8 @@ namespace System.Xml.Serialization
             WriteElementQualifiedName(localName, null, value, xsiType);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName2"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1404,7 +1494,8 @@ namespace System.Xml.Serialization
             WriteElementQualifiedName(localName, ns, value, null);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName3"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteElementQualifiedName3"]/*' />
         protected void WriteElementQualifiedName(
             string localName,
             string ns,
@@ -1427,7 +1518,8 @@ namespace System.Xml.Serialization
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.AddWriteCallback"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.AddWriteCallback"]/*' />
         protected void AddWriteCallback(
             Type type,
             string typeName,
@@ -1566,7 +1658,8 @@ namespace System.Xml.Serialization
             else
             {
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (!typeof(IEnumerable).IsAssignableFrom(type))
                     throw new InvalidOperationException(
                         Res.GetString(
@@ -1621,13 +1714,15 @@ namespace System.Xml.Serialization
             w.WriteEndElement();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement"]/*' />
         protected void WritePotentiallyReferencingElement(string n, string ns, object o)
         {
             WritePotentiallyReferencingElement(n, ns, o, null, false, false);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement1"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement1"]/*' />
         protected void WritePotentiallyReferencingElement(
             string n,
             string ns,
@@ -1638,7 +1733,8 @@ namespace System.Xml.Serialization
             WritePotentiallyReferencingElement(n, ns, o, ambientType, false, false);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement2"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement2"]/*' />
         protected void WritePotentiallyReferencingElement(
             string n,
             string ns,
@@ -1650,7 +1746,8 @@ namespace System.Xml.Serialization
             WritePotentiallyReferencingElement(n, ns, o, ambientType, suppressReference, false);
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement3"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WritePotentiallyReferencingElement3"]/*' />
         protected void WritePotentiallyReferencingElement(
             string n,
             string ns,
@@ -1757,10 +1854,12 @@ namespace System.Xml.Serialization
             return (TypeEntry)typeEntries[t];
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.InitCallbacks"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.InitCallbacks"]/*' />
         protected abstract void InitCallbacks();
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteReferencedElements"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteReferencedElements"]/*' />
         protected void WriteReferencedElements()
         {
             if (referencesToWrite == null)
@@ -1772,13 +1871,15 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.TopLevelElement"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.TopLevelElement"]/*' />
         protected void TopLevelElement()
         {
             objectsInUse = new Hashtable();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.WriteNamespaceDeclarations"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.WriteNamespaceDeclarations"]/*' />
         ///<internalonly/>
         protected void WriteNamespaceDeclarations(XmlSerializerNamespaces xmlns)
         {
@@ -1832,7 +1933,8 @@ namespace System.Xml.Serialization
         }
     }
 
-    /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriteCallback"]/*' />
+    /// <include file='doc\XmlSerializationWriter.uex'
+    // path='docs/doc[@for="XmlSerializationWriteCallback"]/*' />
     ///<internalonly/>
     public delegate void XmlSerializationWriteCallback(object o);
 
@@ -2016,7 +2118,8 @@ namespace System.Xml.Serialization
             string methodName = ReferenceMapping(mapping);
 
 #if DEBUG
-            // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+            // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+            // as aspnet_ewp.exe
             if (methodName == null)
                 throw new InvalidOperationException(
                     Res.GetString(Res.XmlInternalErrorMethod, mapping.TypeDesc.Name)
@@ -2080,7 +2183,8 @@ namespace System.Xml.Serialization
                 if (mapping is EnumMapping)
                 {
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (defaultValue.GetType() != typeof(string))
                         throw new InvalidOperationException(
                             Res.GetString(
@@ -2422,7 +2526,8 @@ namespace System.Xml.Serialization
                     }
 
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (enumSource == null)
                         throw new InvalidOperationException(
                             Res.GetString(
@@ -2706,7 +2811,8 @@ namespace System.Xml.Serialization
                 string methodName = ReferenceMapping(derived);
 
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (methodName == null)
                     throw new InvalidOperationException(
                         "deriaved from "
@@ -2752,7 +2858,8 @@ namespace System.Xml.Serialization
                         string methodName = ReferenceMapping(mapping);
 
 #if DEBUG
-                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                        // as aspnet_ewp.exe
                         if (methodName == null)
                             throw new InvalidOperationException(
                                 Res.GetString(Res.XmlInternalErrorMethod, mapping.TypeDesc.Name)
@@ -3142,7 +3249,8 @@ namespace System.Xml.Serialization
                     {
                         if (memberTypeDesc.UseReflection)
                         {
-                            // we use wildcard method name for generic GetEnumerator method, so we cannot use GetStringForMethodInvoke call here
+                            // we use wildcard method name for generic GetEnumerator method, so we cannot use
+                            // GetStringForMethodInvoke call here
                             Writer.Write("(");
                             Writer.Write(typeof(IEnumerator).FullName);
                             Writer.Write(")");
@@ -3428,7 +3536,8 @@ namespace System.Xml.Serialization
                 {
                     if (arrayTypeDesc.UseReflection)
                     {
-                        // we use wildcard method name for generic GetEnumerator method, so we cannot use GetStringForMethodInvoke call here
+                        // we use wildcard method name for generic GetEnumerator method, so we cannot use
+                        // GetStringForMethodInvoke call here
                         Writer.Write("(");
                         Writer.Write(typeof(IEnumerator).FullName);
                         Writer.Write(")");
@@ -4202,7 +4311,8 @@ namespace System.Xml.Serialization
                     string methodName = ReferenceMapping(mapping);
 
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (methodName == null)
                         throw new InvalidOperationException(
                             Res.GetString(Res.XmlInternalErrorMethod, mapping.TypeDesc.Name)
@@ -5030,7 +5140,8 @@ namespace System.Xml.Serialization
                 string assemblyName =
                     (iComma > -1) ? assemblyFullName.Substring(0, iComma) : assemblyFullName;
                 assemblyVariable = GenerateVariableName("assembly", assemblyName);
-                //writer.WriteLine("static "+ typeof(Assembly).FullName+" "+assemblyVariable+" = "+typeof(Assembly).FullName+".Load(");
+                //writer.WriteLine("static "+ typeof(Assembly).FullName+" "+assemblyVariable+" =
+                // "+typeof(Assembly).FullName+".Load(");
                 writer.Write(
                     "static "
                         + typeof(Assembly).FullName
@@ -5294,17 +5405,17 @@ namespace System.Xml.Serialization
 
         /*
         Exception GetReflectionVariableException(string typeFullName, string memberName){
-            string key;
-            if(memberName == null)
-                key = typeFullName;
-            else
-                key = memberName+":"+typeFullName;
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            foreach(object varAvail in reflectionVariables.Keys){
-                sb.Append(varAvail.ToString());
-                sb.Append("\n");
-            }
-            return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
+        string key;
+        if(memberName == null)
+        key = typeFullName;
+        else
+        key = memberName+":"+typeFullName;
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        foreach(object varAvail in reflectionVariables.Keys){
+        sb.Append(varAvail.ToString());
+        sb.Append("\n");
+        }
+        return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
         }*/
 
         internal string GetStringForEnumMember(

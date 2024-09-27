@@ -64,7 +64,8 @@ internal sealed class AspNetTestMethodRunner : XunitTestMethodRunner
 
         if (testCase.GetType() == typeof(XunitTheoryTestCase))
         {
-            // If we get here this is a 'regular' theory test case, not something that represents a skipped test.
+            // If we get here this is a 'regular' theory test case, not something that represents a skipped
+            // test.
             //
             // We can take control of it's invocation thusly.
             var runner = new AspNetTheoryTestCaseRunner(

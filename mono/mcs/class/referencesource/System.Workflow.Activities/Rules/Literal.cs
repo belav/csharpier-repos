@@ -998,7 +998,8 @@ namespace System.Workflow.Activities.Rules
                                 )
                             )
                             {
-                                // expression not passed to TypesAreAssignable, so not looking for constants (since 0 is all we care about)
+                                // expression not passed to TypesAreAssignable, so not looking for constants (since 0 is all we care
+                                // about)
                                 error = null;
                                 return new EnumOperationMethodInfo(lhs, op, rhs, false);
                             }
@@ -1083,7 +1084,8 @@ namespace System.Workflow.Activities.Rules
                                 )
                             )
                             {
-                                // expression not passed to TypesAreAssignable, so not looking for constants (since 0 is all we care about)
+                                // expression not passed to TypesAreAssignable, so not looking for constants (since 0 is all we care
+                                // about)
                                 error = null;
                                 return new EnumOperationMethodInfo(lhs, op, rhs, false);
                             }

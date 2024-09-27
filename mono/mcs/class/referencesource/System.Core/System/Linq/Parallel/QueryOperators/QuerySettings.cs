@@ -179,8 +179,10 @@ namespace System.Linq.Parallel
         {
             //Initialize a new QuerySettings structure and copy in the current settings.
             //Note: this has the very important effect of newing a fresh CancellationSettings,
-            //      and _not_ copying in the current internalCancellationSource or topLevelDisposedFlag which should not be
-            //      propogated to internal query executions. (This affects SelectMany execution and specifically fixes bug:535510)
+            //      and _not_ copying in the current internalCancellationSource or topLevelDisposedFlag which
+            // should not be
+            //      propogated to internal query executions. (This affects SelectMany execution and specifically
+            // fixes bug:535510)
             //      The fresh toplevel parameters are used instead.
             QuerySettings settings = new QuerySettings(
                 TaskScheduler,

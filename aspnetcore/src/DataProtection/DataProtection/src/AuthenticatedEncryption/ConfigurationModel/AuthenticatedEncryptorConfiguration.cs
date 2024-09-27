@@ -47,7 +47,8 @@ public sealed class AuthenticatedEncryptorConfiguration
     void IInternalAlgorithmConfiguration.Validate()
     {
         var factory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
-        // Run a sample payload through an encrypt -> decrypt operation to make sure data round-trips properly.
+        // Run a sample payload through an encrypt -> decrypt operation to make sure data round-trips
+        // properly.
         using var secret = Secret.Random(512 / 8);
         var encryptor = factory.CreateAuthenticatedEncryptorInstance(secret, this);
         try

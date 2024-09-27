@@ -151,7 +151,8 @@ internal sealed class HostingApplicationDiagnostics
         HostingApplication.Context context
     )
     {
-        // Local cache items resolved multiple items, in order of use so they are primed in cpu pipeline when used
+        // Local cache items resolved multiple items, in order of use so they are primed in cpu pipeline
+        // when used
         var startTimestamp = context.StartTimestamp;
         long currentTimestamp = 0;
 
@@ -466,7 +467,8 @@ internal sealed class HostingApplicationDiagnostics
                 )
             )
             {
-                // The requestId used the W3C ID format. Unfortunately, the ActivitySource.CreateActivity overload that
+                // The requestId used the W3C ID format. Unfortunately, the ActivitySource.CreateActivity overload
+                // that
                 // takes a string parentId never sets HasRemoteParent to true. We work around that by calling the
                 // ActivityContext overload instead which sets HasRemoteParent to parentContext.IsRemote.
                 // https://github.com/dotnet/aspnetcore/pull/41568#discussion_r868733305
@@ -526,9 +528,12 @@ internal sealed class HostingApplicationDiagnostics
                 }
             );
 
-            // AddBaggage adds items at the beginning  of the list, so we need to add them in reverse to keep the same order as the client
-            // By contract, the propagator has already reversed the order of items so we need not reverse it again
-            // Order could be important if baggage has two items with the same key (that is allowed by the contract)
+            // AddBaggage adds items at the beginning  of the list, so we need to add them in reverse to keep
+            // the same order as the client
+            // By contract, the propagator has already reversed the order of items so we need not reverse it
+            // again
+            // Order could be important if baggage has two items with the same key (that is allowed by the
+            // contract)
             if (baggage is not null)
             {
                 foreach (var baggageItem in baggage)
@@ -570,8 +575,10 @@ internal sealed class HostingApplicationDiagnostics
         }
     }
 
-    // These are versions of DiagnosticSource.Start/StopActivity that don't allocate strings per call (see https://github.com/dotnet/corefx/issues/37055)
+    // These are versions of DiagnosticSource.Start/StopActivity that don't allocate strings per call
+    // (see https://github.com/dotnet/corefx/issues/37055)
     // DynamicDependency matches the properties selected in:
+    //
     // https://github.com/dotnet/diagnostics/blob/7cc6fbef613cdfe5ff64393120d59d7a15e98bd6/src/Microsoft.Diagnostics.Monitoring.EventPipe/Configuration/HttpRequestSourceConfiguration.cs#L20-L33
     [DynamicDependency(nameof(HttpContext.Request), typeof(HttpContext))]
     [DynamicDependency(nameof(HttpRequest.Scheme), typeof(HttpRequest))]
@@ -584,7 +591,8 @@ internal sealed class HostingApplicationDiagnostics
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(QueryString))]
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(HostString))]
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(PathString))]
-    // OpenTelemetry gets the context from the context using the DefaultHttpContext.HttpContext property.
+    // OpenTelemetry gets the context from the context using the DefaultHttpContext.HttpContext
+    // property.
     [DynamicDependency(nameof(DefaultHttpContext.HttpContext), typeof(DefaultHttpContext))]
     private Activity StartActivity(Activity activity, HttpContext httpContext)
     {
@@ -594,11 +602,13 @@ internal sealed class HostingApplicationDiagnostics
     }
 
     // DynamicDependency matches the properties selected in:
+    //
     // https://github.com/dotnet/diagnostics/blob/7cc6fbef613cdfe5ff64393120d59d7a15e98bd6/src/Microsoft.Diagnostics.Monitoring.EventPipe/Configuration/HttpRequestSourceConfiguration.cs#L35-L38
     [DynamicDependency(nameof(HttpContext.Response), typeof(HttpContext))]
     [DynamicDependency(nameof(HttpResponse.StatusCode), typeof(HttpResponse))]
     [DynamicDependency(nameof(HttpResponse.Headers), typeof(HttpResponse))]
-    // OpenTelemetry gets the context from the context using the DefaultHttpContext.HttpContext property.
+    // OpenTelemetry gets the context from the context using the DefaultHttpContext.HttpContext
+    // property.
     [DynamicDependency(nameof(DefaultHttpContext.HttpContext), typeof(DefaultHttpContext))]
     private void StopActivity(Activity activity, HttpContext httpContext)
     {

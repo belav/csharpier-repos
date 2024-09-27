@@ -19,7 +19,8 @@ public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser>
     /// </summary>
     /// <param name="user">The user to store new recovery codes for.</param>
     /// <param name="recoveryCodes">The new recovery codes for the user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The new recovery codes for the user.</returns>
     Task ReplaceCodesAsync(
         TUser user,
@@ -33,7 +34,8 @@ public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser>
     /// </summary>
     /// <param name="user">The user who owns the recovery code.</param>
     /// <param name="code">The recovery code to use.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>True if the recovery code was found for the user.</returns>
     Task<bool> RedeemCodeAsync(TUser user, string code, CancellationToken cancellationToken);
 
@@ -41,7 +43,8 @@ public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser>
     /// Returns how many recovery code are still valid for a user.
     /// </summary>
     /// <param name="user">The user who owns the recovery code.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The number of valid recovery codes for the user..</returns>
     Task<int> CountCodesAsync(TUser user, CancellationToken cancellationToken);
 }

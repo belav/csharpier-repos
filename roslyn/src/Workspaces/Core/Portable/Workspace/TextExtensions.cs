@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Text
     internal static class TextExtensions
     {
         /// <summary>
-        /// Gets the documents from the corresponding workspace's current solution that are associated with the source text's container,
+        /// Gets the documents from the corresponding workspace's current solution that are associated with
+        // the source text's container,
         /// updated to contain the same text as the source if necessary.
         /// </summary>
         public static ImmutableArray<Document> GetRelatedDocumentsWithChanges(this SourceText text)
@@ -35,9 +36,12 @@ namespace Microsoft.CodeAnalysis.Text
                     )
                 )
                 {
-                    // For source generated documents, we won't count them as linked across multiple projects; this is because
-                    // the generated documents in each target may have different source so other features might be surprised if we
-                    // return the same documents but with different text. So in this case, we'll just return a single document.
+                    // For source generated documents, we won't count them as linked across multiple projects; this is
+                    // because
+                    // the generated documents in each target may have different source so other features might be
+                    // surprised if we
+                    // return the same documents but with different text. So in this case, we'll just return a single
+                    // document.
                     return ImmutableArray.Create(
                         solution.WithFrozenSourceGeneratedDocument(documentIdentity, text)
                     );
@@ -59,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Gets the <see cref="Document"/> from the corresponding workspace's current solution that is associated with the source text's container
+        /// Gets the <see cref="Document"/> from the corresponding workspace's current solution that is
+        // associated with the source text's container
         /// in its current project context, updated to contain the same text as the source if necessary.
         /// </summary>
         public static Document? GetOpenDocumentInCurrentContextWithChanges(this SourceText text) =>
@@ -67,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Text
                 text.GetOpenTextDocumentInCurrentContextWithChanges(sourceDocumentOnly: true);
 
         /// <summary>
-        /// Gets the <see cref="TextDocument"/> from the corresponding workspace's current solution that is associated with the source text's container
+        /// Gets the <see cref="TextDocument"/> from the corresponding workspace's current solution that is
+        // associated with the source text's container
         /// in its current project context, updated to contain the same text as the source if necessary.
         /// </summary>
         public static TextDocument? GetOpenTextDocumentInCurrentContextWithChanges(
@@ -138,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Gets the documents from the corresponding workspace's current solution that are associated with the text container.
+        /// Gets the documents from the corresponding workspace's current solution that are associated with
+        // the text container.
         /// </summary>
         public static ImmutableArray<Document> GetRelatedDocuments(
             this SourceTextContainer container
@@ -162,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Gets the document from the corresponding workspace's current solution that is associated with the text container
+        /// Gets the document from the corresponding workspace's current solution that is associated with
+        // the text container
         /// in its current project context.
         /// </summary>
         public static Document? GetOpenDocumentInCurrentContext(this SourceTextContainer container)

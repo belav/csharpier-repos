@@ -1429,8 +1429,10 @@ class A
             AnalyzerRegisterActionKind actionKind
         )
         {
-            // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE in-proc diagnostic computation in presence of an OperationCanceledException during analysis.
-            // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic computation, which we want to avoid.
+            // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE
+            // in-proc diagnostic computation in presence of an OperationCanceledException during analysis.
+            // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic
+            // computation, which we want to avoid.
 
             var source =
                 @"
@@ -1489,7 +1491,8 @@ class A
 
             OpenDocumentAndMakeActive(document, workspace);
 
-            // First invoke analysis with cancellation token, and verify canceled compilation and no reported diagnostics.
+            // First invoke analysis with cancellation token, and verify canceled compilation and no reported
+            // diagnostics.
             Assert.Empty(analyzer.CanceledCompilations);
             try
             {
@@ -1701,10 +1704,14 @@ class B
             AnalyzerRegisterActionKind actionKind
         )
         {
-            // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE OutOfProc diagnostic computation in presence of an OperationCanceledException during analysis.
-            // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic computation, which we want to avoid.
-            // NOTE: Unfortunately, we cannot perform an end-to-end OutOfProc test, similar to the InProc test above because AnalyzerImageReference is not serializable.
-            //       So, we perform a very targeted test which directly uses the 'DiagnosticComputer' type that is used for all OutOfProc diagnostic computation.
+            // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE
+            // OutOfProc diagnostic computation in presence of an OperationCanceledException during analysis.
+            // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic
+            // computation, which we want to avoid.
+            // NOTE: Unfortunately, we cannot perform an end-to-end OutOfProc test, similar to the InProc test
+            // above because AnalyzerImageReference is not serializable.
+            //       So, we perform a very targeted test which directly uses the 'DiagnosticComputer' type that
+            // is used for all OutOfProc diagnostic computation.
 
             var source =
                 @"
@@ -1737,7 +1744,8 @@ class A
                     : AnalysisKind.Semantic;
             var analyzerIds = new[] { analyzer.GetAnalyzerId() };
 
-            // First invoke analysis with cancellation token, and verify canceled compilation and no reported diagnostics.
+            // First invoke analysis with cancellation token, and verify canceled compilation and no reported
+            // diagnostics.
             Assert.Empty(analyzer.CanceledCompilations);
             try
             {

@@ -131,7 +131,8 @@ public partial class ModelBinderFactory : IModelBinderFactory
         // per-operation cache for cycle breaking because the global cache (_cache) needs to always stay
         // in a valid state.
         //
-        // We store null as a sentinel inside the providerContext.Visited to track the fact that we've visited
+        // We store null as a sentinel inside the providerContext.Visited to track the fact that we've
+        // visited
         // a given node but haven't yet created a binder for it. We don't want to eagerly create a
         // PlaceholderBinder because that would result in lots of unnecessary indirection and allocations.
         var visited = providerContext.Visited;
@@ -291,8 +292,10 @@ public partial class ModelBinderFactory : IModelBinderFactory
     // This key allows you to specify a ModelMetadata which represents the type/property being bound
     // and a 'token' which acts as an arbitrary discriminator.
     //
-    // This is necessary because the same metadata might be bound as a top-level parameter (with BindingInfo on
-    // the ParameterDescriptor) or in a call to TryUpdateModel (no BindingInfo) or as a collection element.
+    // This is necessary because the same metadata might be bound as a top-level parameter (with
+    // BindingInfo on
+    // the ParameterDescriptor) or in a call to TryUpdateModel (no BindingInfo) or as a collection
+    // element.
     //
     // We need to be able to tell the difference between these things to avoid over-caching.
     private readonly struct Key : IEquatable<Key>

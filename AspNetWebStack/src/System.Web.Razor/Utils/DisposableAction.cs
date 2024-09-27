@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 namespace System.Web.Razor.Utils
 {
@@ -24,7 +25,8 @@ namespace System.Web.Razor.Utils
 
         protected virtual void Dispose(bool disposing)
         {
-            // If we were disposed by the finalizer it's because the user didn't use a "using" block, so don't do anything!
+            // If we were disposed by the finalizer it's because the user didn't use a "using" block, so don't
+            // do anything!
             if (disposing)
             {
                 _action();

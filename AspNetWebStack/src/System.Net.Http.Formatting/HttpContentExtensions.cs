@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,8 @@ using System.Web.Http;
 namespace System.Net.Http
 {
     /// <summary>
-    /// Extension methods to allow strongly typed objects to be read from <see cref="HttpContent"/> instances.
+    /// Extension methods to allow strongly typed objects to be read from <see cref="HttpContent"/>
+    // instances.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class HttpContentExtensions
@@ -43,7 +45,8 @@ namespace System.Net.Http
         /// <remarks>This override use the built-in collection of formatters.</remarks>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
         /// <param name="type">The type of the object to read.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<object> ReadAsAsync(this HttpContent content, Type type)
         {
             return content.ReadAsAsync(type, DefaultMediaTypeFormatterCollection);
@@ -57,7 +60,8 @@ namespace System.Net.Http
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
         /// <param name="type">The type of the object to read.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<object> ReadAsAsync(
             this HttpContent content,
             Type type,
@@ -73,13 +77,16 @@ namespace System.Net.Http
 
         /// <summary>
         /// Returns a <see cref="Task"/> that will yield an object of the specified <paramref name="type"/>
-        /// from the <paramref name="content"/> instance using one of the provided <paramref name="formatters"/>
+        /// from the <paramref name="content"/> instance using one of the provided <paramref
+        // name="formatters"/>
         /// to deserialize the content.
         /// </summary>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
         /// <param name="type">The type of the object to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<object> ReadAsAsync(
             this HttpContent content,
             Type type,
@@ -91,14 +98,17 @@ namespace System.Net.Http
 
         /// <summary>
         /// Returns a <see cref="Task"/> that will yield an object of the specified <paramref name="type"/>
-        /// from the <paramref name="content"/> instance using one of the provided <paramref name="formatters"/>
+        /// from the <paramref name="content"/> instance using one of the provided <paramref
+        // name="formatters"/>
         /// to deserialize the content.
         /// </summary>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
         /// <param name="type">The type of the object to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<object> ReadAsAsync(
             this HttpContent content,
             Type type,
@@ -111,14 +121,17 @@ namespace System.Net.Http
 
         /// <summary>
         /// Returns a <see cref="Task"/> that will yield an object of the specified <paramref name="type"/>
-        /// from the <paramref name="content"/> instance using one of the provided <paramref name="formatters"/>
+        /// from the <paramref name="content"/> instance using one of the provided <paramref
+        // name="formatters"/>
         /// to deserialize the content.
         /// </summary>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
         /// <param name="type">The type of the object to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<object> ReadAsAsync(
             this HttpContent content,
             Type type,
@@ -131,15 +144,18 @@ namespace System.Net.Http
 
         /// <summary>
         /// Returns a <see cref="Task"/> that will yield an object of the specified <paramref name="type"/>
-        /// from the <paramref name="content"/> instance using one of the provided <paramref name="formatters"/>
+        /// from the <paramref name="content"/> instance using one of the provided <paramref
+        // name="formatters"/>
         /// to deserialize the content.
         /// </summary>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
         /// <param name="type">The type of the object to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<object> ReadAsAsync(
             this HttpContent content,
             Type type,
@@ -164,7 +180,8 @@ namespace System.Net.Http
         /// <remarks>This override use the built-in collection of formatters.</remarks>
         /// <typeparam name="T">The type of the object to read.</typeparam>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<T> ReadAsAsync<T>(this HttpContent content)
         {
             return content.ReadAsAsync<T>(DefaultMediaTypeFormatterCollection);
@@ -178,7 +195,8 @@ namespace System.Net.Http
         /// <typeparam name="T">The type of the object to read.</typeparam>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<T> ReadAsAsync<T>(
             this HttpContent content,
             CancellationToken cancellationToken
@@ -193,8 +211,10 @@ namespace System.Net.Http
         /// </summary>
         /// <typeparam name="T">The type of the object to read.</typeparam>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<T> ReadAsAsync<T>(
             this HttpContent content,
             IEnumerable<MediaTypeFormatter> formatters
@@ -209,9 +229,11 @@ namespace System.Net.Http
         /// </summary>
         /// <typeparam name="T">The type of the object to read.</typeparam>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<T> ReadAsAsync<T>(
             this HttpContent content,
             IEnumerable<MediaTypeFormatter> formatters,
@@ -227,9 +249,11 @@ namespace System.Net.Http
         /// </summary>
         /// <typeparam name="T">The type of the object to read.</typeparam>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<T> ReadAsAsync<T>(
             this HttpContent content,
             IEnumerable<MediaTypeFormatter> formatters,
@@ -245,10 +269,12 @@ namespace System.Net.Http
         /// </summary>
         /// <typeparam name="T">The type of the object to read.</typeparam>
         /// <param name="content">The <see cref="HttpContent"/> instance from which to read.</param>
-        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to use.</param>
+        /// <param name="formatters">The collection of <see cref="MediaTypeFormatter"/> instances to
+        // use.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task object representing reading the content as an object of the specified type.</returns>
+        /// <returns>A task object representing reading the content as an object of the specified
+        // type.</returns>
         public static Task<T> ReadAsAsync<T>(
             this HttpContent content,
             IEnumerable<MediaTypeFormatter> formatters,
@@ -281,7 +307,8 @@ namespace System.Net.Http
             );
         }
 
-        // There are many helper overloads for ReadAs*(). Provide one worker function to ensure the logic is shared.
+        // There are many helper overloads for ReadAs*(). Provide one worker function to ensure the logic is
+        // shared.
         //
         // For loosely typed, T = Object, type = specific class.
         // For strongly typed, T == type.GetType()
@@ -317,7 +344,8 @@ namespace System.Net.Http
             }
 
             MediaTypeFormatter formatter = null;
-            // Default to "application/octet-stream" if there is no content-type in accordance with section 7.2.1 of the HTTP spec
+            // Default to "application/octet-stream" if there is no content-type in accordance with section
+            // 7.2.1 of the HTTP spec
             MediaTypeHeaderValue mediaType =
                 content.Headers.ContentType ?? MediaTypeConstants.ApplicationOctetStreamMediaType;
 

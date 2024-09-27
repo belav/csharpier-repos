@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.Symbols
     {
         /// <summary>
         /// We should not see new anonymous types from source after we finished emit phase.
-        /// If this field is true, the collection is sealed; in DEBUG it also is used to check the assertion.
+        /// If this field is true, the collection is sealed; in DEBUG it also is used to check the
+        // assertion.
         /// </summary>
         private ThreeState _templatesSealed = ThreeState.False;
 

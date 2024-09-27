@@ -10,7 +10,8 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 {
     /// <summary>
-    /// The start/end line/column ranges for a contiguous span of text. These should be all zero-indexed.
+    /// The start/end line/column ranges for a contiguous span of text. These should be all
+    // zero-indexed.
     /// This is an alias for TextSpan structures.
     /// </summary>
     [DataContract]
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         public int StartLine { get; }
 
         /// <summary>
-        /// Zero-based integer for the starting source column. If column information is missing (e.g. language service doesn't support it),
+        /// Zero-based integer for the starting source column. If column information is missing (e.g.
+        // language service doesn't support it),
         /// this value should be treated as -1.
         /// </summary>
         [DataMember(Name = "startColumn")]
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         public int EndLine { get; }
 
         /// <summary>
-        /// Zero-based integer for the ending source column. If column information is missing (e.g. language service doesn't support it),
+        /// Zero-based integer for the ending source column. If column information is missing (e.g. language
+        // service doesn't support it),
         /// this value should be treated as -1.
         /// </summary>
         [DataMember(Name = "endColumn")]

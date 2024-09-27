@@ -204,15 +204,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         {
             if (_analyzersFolder.Workspace is VisualStudioWorkspaceImpl)
             {
-                /*
-                var vsProject = vsWorkspace.DeferredState?.ProjectTracker.GetProject(_analyzersFolder.ProjectId);
-                var vsAnalyzersMap = vsProject?.GetProjectAnalyzersMap();
+/*
+var vsProject = vsWorkspace.DeferredState?.ProjectTracker.GetProject(_analyzersFolder.ProjectId);
+var vsAnalyzersMap = vsProject?.GetProjectAnalyzersMap();
 
-                if (vsAnalyzersMap != null)
-                {
-                    return vsAnalyzersMap.Where(kvp => kvp.Value.HasLoadErrors).Select(kvp => kvp.Key).ToImmutableHashSet();
-                }
-                */
+if (vsAnalyzersMap != null)
+{
+return vsAnalyzersMap.Where(kvp => kvp.Value.HasLoadErrors).Select(kvp =>
+kvp.Key).ToImmutableHashSet();
+}
+*/
             }
 
             return ImmutableHashSet<string>.Empty;
@@ -225,7 +226,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         {
             var analyzersWithLoadErrors = GetAnalyzersWithLoadErrors();
 
-            // Filter out analyzer dependencies which have no diagnostic analyzers, but still retain the unresolved analyzers and analyzers with load errors.
+            // Filter out analyzer dependencies which have no diagnostic analyzers, but still retain the
+            // unresolved analyzers and analyzers with load errors.
             var builder = ArrayBuilder<AnalyzerReference>.GetInstance();
             foreach (var analyzerReference in analyzerReferences)
             {

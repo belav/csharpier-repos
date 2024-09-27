@@ -78,7 +78,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ForceUtf8EncodingWithFlagWhenEncoding()
         {
-            // Even though these values are encodable as a PrintableString, the flag should force them to be encoded
+            // Even though these values are encodable as a PrintableString, the flag should force them to be
+            // encoded
             // as UTF8String.
             X500DistinguishedName name = new X500DistinguishedName(
                 "CN=potato, O=jicama",

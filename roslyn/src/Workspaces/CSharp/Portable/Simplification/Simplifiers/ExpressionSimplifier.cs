@@ -282,7 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 }
             }
 
-            // Try to eliminate cases without actually calling CanReplaceWithReducedName. For expressions of the form
+            // Try to eliminate cases without actually calling CanReplaceWithReducedName. For expressions of the
+            // form
             // 'this.Name' or 'base.Name', no additional check here is required.
             if (!memberAccess.Expression.IsKind(SyntaxKind.BaseExpression))
             {
@@ -343,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         }
 
         /// <summary>
-        /// Determines if <paramref name="speculativeSymbols"/> and <paramref name="speculativeNamespacesAndTypes"/>
+        /// Determines if <paramref name="speculativeSymbols"/> and <paramref
+        // name="speculativeNamespacesAndTypes"/>
         /// together contain a superset of the symbols in <paramref name="actualSymbol"/>.
         /// </summary>
         private static bool IsReplacementCandidate(
@@ -567,11 +569,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             return false;
         }
 
-        /*
-         * Name Reduction, to implicitly mean "this", is possible only after the initialization of all member variables but
-         * since the check for initialization of all member variable is a lot of work for this simplification we don't simplify
-         * even if all the member variables are initialized
-         */
+/*
+* Name Reduction, to implicitly mean "this", is possible only after the initialization of all member
+variables but
+* since the check for initialization of all member variable is a lot of work for this simplification
+we don't simplify
+* even if all the member variables are initialized
+*/
         private static bool AccessMethodWithDynamicArgumentInsideStructConstructor(
             MemberAccessExpressionSyntax memberAccess,
             SemanticModel semanticModel
@@ -595,7 +599,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 == CandidateReason.LateBound;
         }
 
-        // Note: The caller needs to verify that replacement doesn't change semantics of the original expression.
+        // Note: The caller needs to verify that replacement doesn't change semantics of the original
+        // expression.
         private static bool TrySimplifyMemberAccessOrQualifiedName(
             ExpressionSyntax left,
             ExpressionSyntax right,
@@ -663,7 +668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             }
 
                             // We have a static member access or a nested type member access using a more derived type.
-                            // Simplify syntax so as to use accessed member's most immediate containing type instead of the derived type.
+                            // Simplify syntax so as to use accessed member's most immediate containing type instead of the
+                            // derived type.
                             replacementNode = containingType
                                 .GenerateTypeSyntax()
                                 .WithLeadingTrivia(left.GetLeadingTrivia())

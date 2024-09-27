@@ -400,7 +400,8 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
+                // CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation
+                // without first casting it to a delegate or expression tree type.
                 //         var x = /*<bind>*/c[delegate { }, y]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, "delegate { }")
                     .WithLocation(9, 29),

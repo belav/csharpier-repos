@@ -27,7 +27,8 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     /// <summary>
-    /// Service to maintain information about the suppression state of specific set of items in the error list.
+    /// Service to maintain information about the suppression state of specific set of items in the
+    // error list.
     /// </summary>
     [Export(typeof(IVisualStudioDiagnosticListSuppressionStateService))]
     [Export(typeof(VisualStudioDiagnosticListSuppressionStateService))]
@@ -91,14 +92,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public bool CanRemoveSuppressionsSelectedEntries => _selectedSuppressedItems > 0;
 
         // If at least one Roslyn active item with location is selected, we enable suppress in source.
-        // Note that we do not support suppress in source when mix of Roslyn and non-Roslyn items are selected as in-source suppression has different meaning and implementation for these.
+        // Note that we do not support suppress in source when mix of Roslyn and non-Roslyn items are
+        // selected as in-source suppression has different meaning and implementation for these.
         public bool CanSuppressSelectedEntriesInSource =>
             _selectedActiveItems > 0
             && _selectedRoslynItems == _selectedActiveItems
             && (_selectedRoslynItems - _selectedNoLocationDiagnosticItems) > 0;
 
         // If at least one Roslyn active item is selected, we enable suppress in suppression file.
-        // Also, compiler diagnostics cannot be suppressed in suppression file, so there must be at least one non-compiler item.
+        // Also, compiler diagnostics cannot be suppressed in suppression file, so there must be at least
+        // one non-compiler item.
         public bool CanSuppressSelectedEntriesInSuppressionFiles =>
             _selectedActiveItems > 0
             && (_selectedRoslynItems - _selectedCompilerDiagnosticItems) > 0;
@@ -141,7 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             var hasAddedSuppressionStateEntry = ProcessEntries(e.AddedEntries, added: true);
             var hasRemovedSuppressionStateEntry = ProcessEntries(e.RemovedEntries, added: false);
 
-            // If any entry that supports suppression state was ever involved, update query status since each item in the error list
+            // If any entry that supports suppression state was ever involved, update query status since each
+            // item in the error list
             // can have different context menu.
             if (hasAddedSuppressionStateEntry || hasRemovedSuppressionStateEntry)
             {
@@ -385,7 +389,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             continue;
                         }
 
-                        // TODO: should we use the tree of the document (if available) to get the correct mapped span for this location?
+                        // TODO: should we use the tree of the document (if available) to get the correct mapped span for
+                        // this location?
                         var text = await document
                             .GetValueTextAsync(cancellationToken)
                             .ConfigureAwait(false);
@@ -401,7 +406,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                         Contract.ThrowIfNull(project);
 
-                        // Create a diagnostic with correct values for fields we care about: id, category, message, isSuppressed, location
+                        // Create a diagnostic with correct values for fields we care about: id, category, message,
+                        // isSuppressed, location
                         // and default values for the rest of the fields (not used by suppression fixer).
                         diagnosticData = new DiagnosticData(
                             id: errorCode,
@@ -502,7 +508,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         private void UpdateQueryStatus()
         {
-            // Force the shell to refresh the QueryStatus for all the command since default behavior is it only does query
+            // Force the shell to refresh the QueryStatus for all the command since default behavior is it only
+            // does query
             // when focus on error list has changed, not individual items.
             _shellService?.UpdateCommandUI(0);
         }

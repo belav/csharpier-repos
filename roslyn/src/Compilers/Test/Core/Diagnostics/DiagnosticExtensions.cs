@@ -483,10 +483,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Given a set of compiler or <see cref="DiagnosticAnalyzer"/> generated <paramref name="diagnostics"/>, returns the effective diagnostics after applying the below filters:
-        /// 1) <see cref="CompilationOptions.SpecificDiagnosticOptions"/> specified for the given <paramref name="compilation"/>.
-        /// 2) <see cref="CompilationOptions.GeneralDiagnosticOption"/> specified for the given <paramref name="compilation"/>.
-        /// 3) Diagnostic suppression through applied <see cref="System.Diagnostics.CodeAnalysis.SuppressMessageAttribute"/>.
+        /// Given a set of compiler or <see cref="DiagnosticAnalyzer"/> generated <paramref
+        // name="diagnostics"/>, returns the effective diagnostics after applying the below filters:
+        /// 1) <see cref="CompilationOptions.SpecificDiagnosticOptions"/> specified for the given <paramref
+        // name="compilation"/>.
+        /// 2) <see cref="CompilationOptions.GeneralDiagnosticOption"/> specified for the given <paramref
+        // name="compilation"/>.
+        /// 3) Diagnostic suppression through applied <see
+        // cref="System.Diagnostics.CodeAnalysis.SuppressMessageAttribute"/>.
         /// 4) Pragma directives for the given <paramref name="compilation"/>.
         /// </summary>
         public static IEnumerable<Diagnostic> GetEffectiveDiagnostics(
@@ -498,7 +502,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through options.
+        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through
+        // options.
         /// </summary>
         [Obsolete(
             "This API is no longer supported. See https://github.com/dotnet/roslyn/issues/67592 for details"

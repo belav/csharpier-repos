@@ -14,7 +14,8 @@ namespace System.Data.SqlClient
     using System.Text;
 
     /// <summary>
-    /// <para> Implements a global directory of all the encryption algorithms registered with client.</para>
+    /// <para> Implements a global directory of all the encryption algorithms registered with
+    // client.</para>
     /// </summary>
     sealed internal class SqlClientEncryptionAlgorithmFactoryList
     {
@@ -80,7 +81,8 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Gets the algorithm handle instance for a given algorithm and instantiates it using the provided key and the encryption type.
+        /// Gets the algorithm handle instance for a given algorithm and instantiates it using the provided
+        // key and the encryption type.
         /// </summary>
         /// <param name="key"></param>
         /// <param name="type"></param>

@@ -166,9 +166,12 @@ namespace Microsoft.CodeAnalysis.Remote
         // project, no callback.
 
         /// <summary>
-        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum, CancellationToken, ValueTask}, CancellationToken)"/>
-        /// except that only the project (and its dependent projects) will be sync'ed to the remote host before executing.
-        /// This is useful for operations that don't every do any work outside of that project-cone and do not want to pay
+        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum,
+        // CancellationToken, ValueTask}, CancellationToken)"/>
+        /// except that only the project (and its dependent projects) will be sync'ed to the remote host
+        // before executing.
+        /// This is useful for operations that don't every do any work outside of that project-cone and do
+        // not want to pay
         /// the high potential cost of a full sync.
         /// </summary>
         public async ValueTask<bool> TryInvokeAsync<TService>(
@@ -185,9 +188,12 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         /// <summary>
-        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum, CancellationToken, ValueTask}, CancellationToken)"/>
-        /// except that only the project (and its dependent projects) will be sync'ed to the remote host before executing.
-        /// This is useful for operations that don't every do any work outside of that project-cone and do not want to pay
+        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum,
+        // CancellationToken, ValueTask}, CancellationToken)"/>
+        /// except that only the project (and its dependent projects) will be sync'ed to the remote host
+        // before executing.
+        /// This is useful for operations that don't every do any work outside of that project-cone and do
+        // not want to pay
         /// the high potential cost of a full sync.
         /// </summary>
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
@@ -248,9 +254,12 @@ namespace Microsoft.CodeAnalysis.Remote
         // project, callback:
 
         /// <summary>
-        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum, RemoteServiceCallbackId, CancellationToken, ValueTask}, object, CancellationToken)"/>
-        /// except that only the project (and its dependent projects) will be sync'ed to the remote host before executing.
-        /// This is useful for operations that don't every do any work outside of that project-cone and do not want to pay
+        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum,
+        // RemoteServiceCallbackId, CancellationToken, ValueTask}, object, CancellationToken)"/>
+        /// except that only the project (and its dependent projects) will be sync'ed to the remote host
+        // before executing.
+        /// This is useful for operations that don't every do any work outside of that project-cone and do
+        // not want to pay
         /// the high potential cost of a full sync.
         /// </summary>
         public async ValueTask<bool> TryInvokeAsync<TService>(
@@ -274,9 +283,12 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         /// <summary>
-        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum, RemoteServiceCallbackId, CancellationToken, ValueTask}, object, CancellationToken)"/>
-        /// except that only the project (and its dependent projects) will be sync'ed to the remote host before executing.
-        /// This is useful for operations that don't every do any work outside of that project-cone and do not want to pay
+        /// Equivalent to <see cref="TryInvokeAsync{TService}(Solution, Func{TService, Checksum,
+        // RemoteServiceCallbackId, CancellationToken, ValueTask}, object, CancellationToken)"/>
+        /// except that only the project (and its dependent projects) will be sync'ed to the remote host
+        // before executing.
+        /// This is useful for operations that don't every do any work outside of that project-cone and do
+        // not want to pay
         /// the high potential cost of a full sync.
         /// </summary>
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(

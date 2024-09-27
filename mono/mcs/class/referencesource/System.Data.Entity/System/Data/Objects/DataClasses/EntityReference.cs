@@ -34,7 +34,8 @@ namespace System.Data.Objects.DataClasses
         // serialized fields. If you need to make this kind of change, it may be possible, but it
         // will require some custom serialization/deserialization code.
 
-        // The following field is valid only for detached EntityReferences, see EntityKey property for more details.
+        // The following field is valid only for detached EntityReferences, see EntityKey property for more
+        // details.
         private EntityKey _detachedEntityKey = null;
 
         // The following field is used to cache the FK value to the principal for FK relationships.
@@ -49,7 +50,8 @@ namespace System.Data.Objects.DataClasses
 
         /// <summary>
         /// The default constructor is required for some serialization scenarios. It should not be used to
-        /// create new EntityReferences. Use the GetRelatedReference or GetRelatedEnd methods on the RelationshipManager
+        /// create new EntityReferences. Use the GetRelatedReference or GetRelatedEnd methods on the
+        // RelationshipManager
         /// class instead.
         /// </summary>
         internal EntityReference() { }
@@ -65,18 +67,24 @@ namespace System.Data.Objects.DataClasses
         /// Returns the EntityKey of the target entity associated with this EntityReference.
         ///
         /// Is non-null in the following scenarios:
-        /// (a) Entities are tracked by a context and an Unchanged or Added client-side relationships exists for this EntityReference's owner with the
-        ///     same RelationshipName and source role. This relationship could have been created explicitly by the user (e.g. by setting
-        ///     the EntityReference.Value, setting this property directly, or by calling EntityCollection.Add) or automatically through span queries.
-        /// (b) If the EntityKey was non-null before detaching an entity from the context, it will still be non-null after detaching, until any operation
+        /// (a) Entities are tracked by a context and an Unchanged or Added client-side relationships exists
+        // for this EntityReference's owner with the
+        ///     same RelationshipName and source role. This relationship could have been created explicitly
+        // by the user (e.g. by setting
+        ///     the EntityReference.Value, setting this property directly, or by calling
+        // EntityCollection.Add) or automatically through span queries.
+        /// (b) If the EntityKey was non-null before detaching an entity from the context, it will still be
+        // non-null after detaching, until any operation
         ///     occurs that would set it to null, as described below.
         /// (c) Entities are detached and the EntityKey is explicitly set to non-null by the user.
         /// (d) Entity graph was created using a NoTracking query with full span
         ///
         /// Is null in the following scenarios:
-        /// (a) Entities are tracked by a context but there is no Unchanged or Added client-side relationship for this EntityReference's owner with the
+        /// (a) Entities are tracked by a context but there is no Unchanged or Added client-side
+        // relationship for this EntityReference's owner with the
         ///     same RelationshipName and source role.
-        /// (b) Entities are tracked by a context and a relationship exists, but the target entity has a temporary key (i.e. it is Added) or the key
+        /// (b) Entities are tracked by a context and a relationship exists, but the target entity has a
+        // temporary key (i.e. it is Added) or the key
         ///     is one of the special keys
         /// (c) Entities are detached and the relationship was explicitly created by the user.
         /// </summary>
@@ -125,7 +133,8 @@ namespace System.Data.Objects.DataClasses
                             }
                             else
                             {
-                                // Principal ends or ends that haven't been fixed up yet (i.e during Add/Attach) should use the DetachedEntityKey value
+                                // Principal ends or ends that haven't been fixed up yet (i.e during Add/Attach) should use the
+                                // DetachedEntityKey value
                                 // that contains the last known value that was set
                                 attachedKey = DetachedEntityKey;
                             }
@@ -140,7 +149,8 @@ namespace System.Data.Objects.DataClasses
                                 )
                             )
                             {
-                                // We only care about the relationships that match the AssociationSet and source role for the owner of this EntityReference
+                                // We only care about the relationships that match the AssociationSet and source role for the owner
+                                // of this EntityReference
                                 if (
                                     relationshipEntry.State != EntityState.Deleted
                                     && relationshipEntry.IsSameAssociationSetAndRole(
@@ -185,12 +195,17 @@ namespace System.Data.Objects.DataClasses
                 && (ReferenceValue.Entity != null || (ReferenceValue.Entity == null && !forceFixup))
             )
             {
-                // "no-op" -- this is not really no-op in the attached case, because at a minimum we have to do a key lookup,
+                // "no-op" -- this is not really no-op in the attached case, because at a minimum we have to do a
+                // key lookup,
                 // worst case we have to review all relationships for the owner entity
-                // However, if we don't do this, we can get into a scenario where we are setting the key to the same thing it's already set to
-                // and this could have side effects, especially with RI constraints and cascade delete. We don't want to delete something
-                // and then add it back, if that deleting could have additional unexpected effects. Don't bother doing this check if value is
-                // null, because EntityKey could be null even if there are Added/Unchanged relationships, if the target entity has a temporary key.
+                // However, if we don't do this, we can get into a scenario where we are setting the key to the same
+                // thing it's already set to
+                // and this could have side effects, especially with RI constraints and cascade delete. We don't
+                // want to delete something
+                // and then add it back, if that deleting could have additional unexpected effects. Don't bother
+                // doing this check if value is
+                // null, because EntityKey could be null even if there are Added/Unchanged relationships, if the
+                // target entity has a temporary key.
                 // In that case, we still need to delete that existing relationship, so it's not a no-op
                 return;
             }
@@ -203,7 +218,8 @@ namespace System.Data.Objects.DataClasses
                 );
 
                 // null is a valid value for the EntityKey, but temporary and special keys are not
-                // devnote: Can't check this on detached references because this property could be set to a temp key during deserialization,
+                // devnote: Can't check this on detached references because this property could be set to a temp key
+                // during deserialization,
                 //          if the key hasn't finished deserializing yet.
                 if (value != null && !IsValidEntityKeyType(value))
                 {
@@ -320,8 +336,10 @@ namespace System.Data.Objects.DataClasses
                             // Add the relationship in the unchanged state if
                             EntityState relationshipState = EntityState.Added;
 
-                            // If this is an unchanged/modified dependent end of a relationship and we are allowing the EntityKey to be set
-                            // create the relationship in the Unchanged state because the state must "match" the dependent end state
+                            // If this is an unchanged/modified dependent end of a relationship and we are allowing the
+                            // EntityKey to be set
+                            // create the relationship in the Unchanged state because the state must "match" the dependent end
+                            // state
                             if (
                                 !ownerKey.IsTemporary
                                 && IsDependentEndOfReferentialConstraint(false)
@@ -535,15 +553,18 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// Takes key values from the given principal entity and transfers them to the foreign key properties
+        /// Takes key values from the given principal entity and transfers them to the foreign key
+        // properties
         /// of the dependant entry.  This method requires a context, but does not require that either
         /// entity is in the context.  This allows it to work in NoTracking cases where we have the context
         /// but we're not tracked by that context.
         /// </summary>
         /// <param name="dependentEntity">The entity into which foreign key values will be written</param>
         /// <param name="principalEntity">The entity from which key values will be obtained</param>
-        /// <param name="changedFKs">If non-null, then keeps track of FKs that have already been set such that an exception can be thrown if we find conflicting values</param>
-        /// <param name="forceChange">If true, then the property setter is called even if FK values already match,
+        /// <param name="changedFKs">If non-null, then keeps track of FKs that have already been set such
+        // that an exception can be thrown if we find conflicting values</param>
+        /// <param name="forceChange">If true, then the property setter is called even if FK values already
+        // match,
         ///                           which causes the FK properties to be marked as modified.</param>
         internal void UpdateForeignKeyValues(
             IEntityWrapper dependentEntity,
@@ -626,8 +647,10 @@ namespace System.Data.Objects.DataClasses
                                 changingForeignKeyValue: valueChanging
                             );
                         }
-                        // If we're tracking FK values that have already been set, then compare the value we are about to set
-                        // to the value we previously set for this ordinal, if such a value exists.  If they don't match then
+                        // If we're tracking FK values that have already been set, then compare the value we are about to
+                        // set
+                        // to the value we previously set for this ordinal, if such a value exists.  If they don't match
+                        // then
                         // it means that we got conflicting FK values from two different PKs and we should throw.
                         if (changedFKs != null)
                         {
@@ -706,7 +729,8 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// Takes key values from the given principal key and transfers them to the foreign key properties
         /// of the dependant entry.  This method requires a context, but does not require that either
-        /// entity or key is in the context.  This allows it to work in NoTracking cases where we have the context
+        /// entity or key is in the context.  This allows it to work in NoTracking cases where we have the
+        // context
         /// but we're not tracked by that context.
         /// </summary>
         /// <param name="dependentEntity">The entity into which foreign key values will be written</param>
@@ -929,7 +953,8 @@ namespace System.Data.Objects.DataClasses
                                     }
 
                                     // Note that the realKey can still be null here for a situation where the key is marked not nullable
-                                    // in o-space and yet the underlying type is nullable and the entity has been added or attached with a null
+                                    // in o-space and yet the underlying type is nullable and the entity has been added or attached with
+                                    // a null
                                     // value for the property. This will cause SaveChanges to throw unless the entity is marked
                                     // as deleted before SaveChanges is called, in which case we don't want to set a conceptual
                                     // null here as the call might very well succeed in the database since, unless the FK is

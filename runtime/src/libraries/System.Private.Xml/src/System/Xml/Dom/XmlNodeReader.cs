@@ -208,7 +208,8 @@ namespace System.Xml
         {
             //In DOM, DocumentType node and XmlDeclaration node doesn't value
             //In XPathNavigator, XmlDeclaration node's value is its InnerText; DocumentType doesn't have value
-            //In XmlReader, DocumentType node's value is its InternalSubset which is never null ( at least String.Empty )
+            //In XmlReader, DocumentType node's value is its InternalSubset which is never null ( at least
+            // String.Empty )
             get
             {
                 if (_nAttrInd != -1)
@@ -372,7 +373,8 @@ namespace System.Xml
             ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(attributeIndex, AttributeCount);
         }
 
-        //8 functions below are the helper functions to deal with virtual attributes of XmlDeclaration nodes and DocumentType nodes.
+        //8 functions below are the helper functions to deal with virtual attributes of XmlDeclaration nodes
+        // and DocumentType nodes.
         private void InitDecAttr()
         {
             int i = 0;
@@ -1118,7 +1120,8 @@ namespace System.Xml
                 if (nextSibling == null)
                 {
                     XmlNode? parentNode = _curNode.ParentNode;
-                    //Check if its parent is entity ref node is sufficient, because in this senario, ent ref node can't have more than 1 level of children that are not other ent ref nodes
+                    //Check if its parent is entity ref node is sufficient, because in this senario, ent ref node can't
+                    // have more than 1 level of children that are not other ent ref nodes
                     if (parentNode != null && parentNode.NodeType == XmlNodeType.EntityReference)
                     {
                         //come back from ent ref node
@@ -1588,7 +1591,8 @@ namespace System.Xml
 
             bool bDrillDown = !fSkipChildren;
             XmlNodeType nt = _readerNav.NodeType;
-            //only goes down when nav.NodeType is of element or of document at the initial state, other nav.NodeType will not be parsed down
+            //only goes down when nav.NodeType is of element or of document at the initial state, other
+            // nav.NodeType will not be parsed down
             //if nav.NodeType is of EntityReference, ResolveEntity() could be called to get the content parsed;
             bDrillDown =
                 bDrillDown
@@ -1690,7 +1694,8 @@ namespace System.Xml
                 //already on top most node and we shouldn't move to next
                 return ReadAtZeroLevel(fSkipChildren);
             }
-            //else either we are not on top level or we are starting from the document at the very beginning in which case
+            //else either we are not on top level or we are starting from the document at the very beginning in
+            // which case
             //  we will need to read all the "top" most nodes
             if (_readerNav.MoveToNext())
             {
@@ -1723,7 +1728,8 @@ namespace System.Xml
             return false;
         }
 
-        //the function reset the marks used for ReadChars() and MoveToAttribute(...), ReadAttributeValue(...)
+        //the function reset the marks used for ReadChars() and MoveToAttribute(...),
+        // ReadAttributeValue(...)
         private void ReSetReadingMarks()
         {
             //_attrValInd = -1;
@@ -1848,7 +1854,8 @@ namespace System.Xml
                 );
             }
 
-            // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off bInReadBinary in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _bInReadBinary = false;
 
             // call to the helper
@@ -1875,7 +1882,8 @@ namespace System.Xml
                 );
             }
 
-            // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off bInReadBinary in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _bInReadBinary = false;
 
             // call to the helper
@@ -1902,7 +1910,8 @@ namespace System.Xml
                 );
             }
 
-            // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off bInReadBinary in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _bInReadBinary = false;
 
             // call to the helper
@@ -1929,7 +1938,8 @@ namespace System.Xml
                 );
             }
 
-            // turn off bInReadBinary in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off bInReadBinary in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _bInReadBinary = false;
 
             // call to the helper

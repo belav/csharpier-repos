@@ -40,7 +40,8 @@ namespace System.Diagnostics.Metrics
         public IEnumerable<KeyValuePair<string, object?>>? Tags { get; set; }
 
         /// <summary>
-        /// The optional opaque object to attach to the Meter. The scope object can be attached to multiple meters for scoping purposes.
+        /// The optional opaque object to attach to the Meter. The scope object can be attached to multiple
+        // meters for scoping purposes.
         /// </summary>
         public object? Scope { get; set; }
 

@@ -4,7 +4,8 @@
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
-///     This type is added as a singleton service to the application service provider to provide access to the
+///     This type is added as a singleton service to the application service provider to provide
+// access to the
 ///     root service provider.
 /// </summary>
 public class ServiceProviderAccessor

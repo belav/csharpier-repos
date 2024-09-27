@@ -30,9 +30,12 @@ public class TestAssemblyLoad
 
     public static int test_0_LoadFromSimpleNamePreload()
     {
-        // The Makefile arranges for assembly-dep-simplename.dll to reference "LibSimpleName, Version=1.0.0.0"
-        // At runtime, we will preload "libsimplename, Version=2.0.0.0" (note case and version are different).
-        // When we create an instance from assembly-dep-simplename, we expect it to bind to the preloaded libsimplename Version=2.0.0.0, and for no additional assemblies to be loaded.
+        // The Makefile arranges for assembly-dep-simplename.dll to reference "LibSimpleName,
+        // Version=1.0.0.0"
+        // At runtime, we will preload "libsimplename, Version=2.0.0.0" (note case and version are
+        // different).
+        // When we create an instance from assembly-dep-simplename, we expect it to bind to the preloaded
+        // libsimplename Version=2.0.0.0, and for no additional assemblies to be loaded.
         string path1 = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
             "assembly-dep-simplename.dll"

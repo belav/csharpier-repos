@@ -72,8 +72,10 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             }
 
             // If both assignments are discards type check is required.
-            // Since discard can discard value of any type, after converting if statement to a conditional expression
-            // it can produce compiler error if types are not the same and there is no implicit conversion between them, e.g.:
+            // Since discard can discard value of any type, after converting if statement to a conditional
+            // expression
+            // it can produce compiler error if types are not the same and there is no implicit conversion
+            // between them, e.g.:
             // if (flag)
             // {
             //     _ = 5;

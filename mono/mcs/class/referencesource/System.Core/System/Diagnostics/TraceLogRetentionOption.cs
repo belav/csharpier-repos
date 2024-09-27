@@ -25,7 +25,8 @@ namespace System.Diagnostics
 
         // Finite number of circular sequential files, each with maxFileSize.
         // When MaxFileSize is reached, writing starts in a new file with an incremented integer suffix.
-        // When MaxNumberOfFiles is reached first file is overwritten.  Files are then incrementally overwritten in a circular manner.
+        // When MaxNumberOfFiles is reached first file is overwritten.  Files are then incrementally
+        // overwritten in a circular manner.
         LimitedCircularFiles = 1,
     }
 }

@@ -141,7 +141,8 @@ namespace System.Globalization.Tests
             {
                 CultureInfo ci = CultureInfo.GetCultureInfo(cultureName);
 
-                // Some OS's set the DigitSubstitution to Context for the culture "prs" and "prs-AF". Majority of Os's set it to NativeNational.
+                // Some OS's set the DigitSubstitution to Context for the culture "prs" and "prs-AF". Majority of
+                // Os's set it to NativeNational.
                 Assert.True(
                     ci.NumberFormat.DigitSubstitution == DigitShapes.Context
                         || ci.NumberFormat.DigitSubstitution == DigitShapes.NativeNational

@@ -66,7 +66,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference (<fxRefVersion>, <rollForward>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is higher.
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is higher.
         [Theory] // fxRefVersion  rollForward                               resolvedFramework
         [InlineData(
             "5.0.0",
@@ -124,7 +125,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference (<fxRefVersion>, <rollForward>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is higher.
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is higher.
         // In this case the direct reference from app is first, so the framework reference from app
         // is actually resolved against the disk - and the resolved framework is than compared to
         // the inner framework reference (potentially causing re-resolution).
@@ -185,7 +187,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference (<fxRefVersion>, <rollForward>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is lower.
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is lower.
         // Also validates that since all relevant available versions are release,
         // the DOTNET_ROLL_FORWARD_TO_PRERELEASE has no effect on the result.
         [Theory] // fxRefVersion  rollForward                               rollForwardToPreRelease resolvedFramework
@@ -271,7 +274,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference (<fxRefVersion>, <rollForward>)
-        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App fx reference is lower.
+        // is correctly reconciled with app's framework reference 5.1.1 (defaults = RollForward:Minor). App
+        // fx reference is lower.
         // In this case the direct reference from app is first, so the framework reference from app
         // is actually resolved against the disk - and the resolved framework is than compared to
         // the inner framework reference (potentially causing re-resolution).
@@ -327,7 +331,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference (<fxRefVersion>, <rollForward>)
-        // is correctly reconciled with app's framework reference 6.1.1-preview.0 (defaults = RollForward:Minor).
+        // is correctly reconciled with app's framework reference 6.1.1-preview.0 (defaults =
+        // RollForward:Minor).
         // Also validates the effect of DOTNET_ROLL_FORWARD_TO_PRERELEASE on the result.
         [Theory] // fxRefVersion       rollForward                               rollForwardToPreRelease resolvedFramework
         [InlineData("6.0.0-preview.1", null, false, "6.1.1-preview.2")]
@@ -796,7 +801,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with another framework's framework reference (<fxRefVersion>, <rollForward>).
+        // is correctly reconciled with another framework's framework reference (<fxRefVersion>,
+        // <rollForward>).
         // The higher framework has fx reference with higher version.
         [Theory] // fxRefVersion  rollForward                               resolvedFramework
         [InlineData(
@@ -859,7 +865,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         }
 
         // Verify that inner framework reference 5.1.1 (defaults = RollForward:Minor)
-        // is correctly reconciled with another framework's framework reference (<fxRefVersion>, <rollForward>).
+        // is correctly reconciled with another framework's framework reference (<fxRefVersion>,
+        // <rollForward>).
         // The higher framework has fx reference with lower version.
         [Theory] // fxRefVersion  rollForward                               resolvedFramework
         [InlineData("5.1.3", Constants.RollForwardSetting.Disable, "5.1.3")]
@@ -917,7 +924,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         //  - Loads HighWare which has 5.4.1
         //    - This forces a retry since 5.1.3 was hard resolved, so we have reload with 5.4.1 instead
         //  - Loads MiddleWare which has 5.6.0
-        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with 5.6.0 instead
+        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with
+        // 5.6.0 instead
         [Fact]
         public void FrameworkResolutionRetry_FrameworkChain()
         {
@@ -953,7 +961,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         //  - Loads MiddleWare which has 5.4.1
         //    - This forces a retry since 5.1.3 was hard resolved, so we have reload with 5.4.1 instead
         //  - Loads AnotherMiddleWare which has 5.6.0
-        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with 5.6.0 instead
+        //    - This forces a retry since by this time 5.4.1 was hard resolved, so we have to reload with
+        // 5.6.0 instead
         [Fact]
         public void FrameworkResolutionRetry_FrameworkTree()
         {
@@ -985,7 +994,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
-        // Verifies that reconciling framework references correctly remembers whether it should prefer release versions or not.
+        // Verifies that reconciling framework references correctly remembers whether it should prefer
+        // release versions or not.
         [Theory]
         [InlineData("6.0.0", "6.1.1-preview.0", "6.2.1")] // Release should prefer release even if there's a pre-release in the middle
         [InlineData("6.1.0", "6.1.1-preview.0", "6.2.1")] // Release should prefer release even if there's a pre-release in the middle
@@ -1020,11 +1030,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         // Verify that inner framework reference (<fxRefVersion>, <fxRollForward>)
         // is correctly reconciled with app's framework reference (<appRefVersion>, <appRollForward>).
-        // It then also tests it the other way round (as the result should not depend on which setting comes from FX and which from app)
+        // It then also tests it the other way round (as the result should not depend on which setting comes
+        // from FX and which from app)
         // In this case the direct reference from app is first, so the framework reference from app
         // is actually resolved against the disk - and the resolved framework is than compared to
         // the inner framework reference (potentially causing re-resolution).
-        // This is mostly a collection of interesting cases as testing the full matrix is prohibitively large
+        // This is mostly a collection of interesting cases as testing the full matrix is prohibitively
+        // large
         [Theory] // appRefVersion appRollForward                            fxRefVersion fxRollForward                             resolvedFramework
         // Disable + anything -> Disable
         [InlineData(
@@ -1209,7 +1221,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         // Verify that the "roll to highest version" flag is propagated into inner framework reference.
         // The app references MiddleWare framework with the specified appRollForward setting
-        // then the MiddleWare framework references Microsoft.NETCore.App with the specified fxRefVersion and fxRollForward.
+        // then the MiddleWare framework references Microsoft.NETCore.App with the specified fxRefVersion
+        // and fxRollForward.
         [Theory] // appRollForward                            fxRefVersion       fxRollForward                             resolvedFramework
         // LatestPatch does not imply roll_to_highest
         [InlineData(
@@ -1336,8 +1349,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             Constants.RollForwardSetting.LatestMajor,
             "6.2.1"
         )]
-        // In this case the "roll to highest" should not impact the pre-release search since it should not have any influence on LatestPatch behavior
-        // which for pre-release versions is to pick the closest match - in this case the exact match exists, so it should pick that one.
+        // In this case the "roll to highest" should not impact the pre-release search since it should not
+        // have any influence on LatestPatch behavior
+        // which for pre-release versions is to pick the closest match - in this case the exact match
+        // exists, so it should pick that one.
         [InlineData(
             Constants.RollForwardSetting.LatestMinor,
             "6.1.1-preview.2",
@@ -1382,8 +1397,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             Constants.RollForwardSetting.LatestMajor,
             "6.2.1"
         )]
-        // In this case the "roll to highest" should not impact the pre-release search since it should not have any influence on LatestPatch behavior
-        // which for pre-release versions is to pick the closest match - in this case the exact match exists, so it should pick that one.
+        // In this case the "roll to highest" should not impact the pre-release search since it should not
+        // have any influence on LatestPatch behavior
+        // which for pre-release versions is to pick the closest match - in this case the exact match
+        // exists, so it should pick that one.
         [InlineData(
             Constants.RollForwardSetting.LatestMajor,
             "6.1.1-preview.2",
@@ -1423,8 +1440,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
 
-        // Verify that the "roll to highest version" flag is propagated across multiple layers of framework references.
-        // The app references HighWare framework, which in turn references MiddleWare framework which then references
+        // Verify that the "roll to highest version" flag is propagated across multiple layers of framework
+        // references.
+        // The app references HighWare framework, which in turn references MiddleWare framework which then
+        // references
         // Microsoft.NETCore.App. Each level specify a roll forward option.
         [Theory] // appRollForward                            fxRefVersion higherFxRollForward                       lowerFxRollForward                        resolvedFramework
         [InlineData(

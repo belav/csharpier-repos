@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -263,7 +263,8 @@ namespace System.ComponentModel
             : this("Default") { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/> class with
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/>
+        // class with
         ///    the specified category name.</para>
         /// </devdoc>
         public CategoryAttribute(string category)

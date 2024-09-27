@@ -107,16 +107,16 @@ namespace MonoTests.System.Xml
 
             // Can't append to a readonly node.
             /* TODO put this in when I figure out how to create a read-only node.
-                        try
-                        {
-                            XmlElement element3 = (XmlElement)element.CloneNode (false);
-                            Assert.IsTrue (!element.IsReadOnly);
-                            Assert.IsTrue (element3.IsReadOnly);
-                            element2 = document.CreateElement ("quux");
-                            element3.AppendChild (element2);
-                            Assert.Fail ("Expected an ArgumentException to be thrown.");
-                        }
-                        catch (ArgumentException) {}
+            try
+            {
+            XmlElement element3 = (XmlElement)element.CloneNode (false);
+            Assert.IsTrue (!element.IsReadOnly);
+            Assert.IsTrue (element3.IsReadOnly);
+            element2 = document.CreateElement ("quux");
+            element3.AppendChild (element2);
+            Assert.Fail ("Expected an ArgumentException to be thrown.");
+            }
+            catch (ArgumentException) {}
             */
         }
 

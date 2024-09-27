@@ -91,7 +91,8 @@ namespace System.Xml
         private static bool IsNamespaceNode(XmlNodeType nt, string ns) =>
             nt == XmlNodeType.Attribute && ns == StrReservedXmlns;
 
-        //when the constructor is called, the node has to be a valid XPath node at the valid location ( for example, the first
+        //when the constructor is called, the node has to be a valid XPath node at the valid location ( for
+        // example, the first
         //text/WS/SWS/CData nodes of a series continuous text-like nodes.
         internal XPathNodePointer(
             DataDocumentXPathNavigator owner,
@@ -127,7 +128,8 @@ namespace System.Xml
             _fOnValue = bOnValue;
             _parentOfNS = parentOfNS;
 
-            // Add this pointer to the document so it will be updated each time region changes it's foliation state.
+            // Add this pointer to the document so it will be updated each time region changes it's foliation
+            // state.
             _doc.AddPointer(this);
             _bNeedFoliate = false;
             AssertValid();
@@ -188,7 +190,8 @@ namespace System.Xml
         }
 
         //LDAI: From CodeReview: Perf: We should have another array similar w/
-        //  xmlNodeType_To_XpathNodeType_Map that will return String.Empty for everything but the element and
+        //  xmlNodeType_To_XpathNodeType_Map that will return String.Empty for everything but the element
+        // and
         //  attribute case.
         internal string LocalName
         {
@@ -632,8 +635,10 @@ namespace System.Xml
                 return false;
             if (_node != null)
             {
-                //_column.ColumnMapping checkin below is not really needed since the pointer should be pointing at the node before this
-                // function should even be called ( there is always a call MoveToOwnerElement() before MoveToAttribute(..)
+                //_column.ColumnMapping checkin below is not really needed since the pointer should be pointing at
+                // the node before this
+                // function should even be called ( there is always a call MoveToOwnerElement() before
+                // MoveToAttribute(..)
                 if (
                     (_column == null || _column.ColumnMapping == MappingType.Attribute)
                     && _node.NodeType == XmlNodeType.Element
@@ -1390,7 +1395,8 @@ namespace System.Xml
             if (n == null)
                 throw new InvalidOperationException(SR.DataDom_Foliation);
 
-            // Cannot use MoveTo( n ); b/c the initial state for MoveTo is invalid (region is foliated but this is not)
+            // Cannot use MoveTo( n ); b/c the initial state for MoveTo is invalid (region is foliated but this
+            // is not)
             _node = n;
             _column = null;
             _fOnValue = false;
@@ -1398,7 +1404,8 @@ namespace System.Xml
             _bNeedFoliate = false;
         }
 
-        //The function only helps to find out if there is a namespace declaration of given name is defined on the given node
+        //The function only helps to find out if there is a namespace declaration of given name is defined
+        // on the given node
         //It will not check the ancestor of the given node.
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private string? GetNamespace(XmlBoundElement be, string name)
@@ -1479,7 +1486,8 @@ namespace System.Xml
         internal bool MoveToNamespace(string name)
         {
             _parentOfNS = _node as XmlBoundElement;
-            //only need to check with _node, even if _column is not null and its mapping type is element, it can't have attributes
+            //only need to check with _node, even if _column is not null and its mapping type is element, it
+            // can't have attributes
             if (_parentOfNS == null)
                 return false;
             RealFoliate();
@@ -1530,7 +1538,8 @@ namespace System.Xml
             return false;
         }
 
-        //the function will find the next namespace node on the given bound element starting with the given column or attribute
+        //the function will find the next namespace node on the given bound element starting with the given
+        // column or attribute
         // whether to use column or attribute depends on if the bound element is foliated or not.
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private bool MoveToNextNamespace(
@@ -1595,13 +1604,15 @@ namespace System.Xml
             return false;
         }
 
-        //Caller( DataDocumentXPathNavigator will make sure that the node is at the right position for this call )
+        //Caller( DataDocumentXPathNavigator will make sure that the node is at the right position for this
+        // call )
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
         {
             RealFoliate();
             _parentOfNS = _node as XmlBoundElement;
-            //only need to check with _node, even if _column is not null and its mapping type is element, it can't have attributes
+            //only need to check with _node, even if _column is not null and its mapping type is element, it
+            // can't have attributes
             if (_parentOfNS == null)
                 return false;
             XmlNode? node = _node;
@@ -1653,7 +1664,8 @@ namespace System.Xml
             return false;
         }
 
-        //Caller( DataDocumentXPathNavigator will make sure that the node is at the right position for this call )
+        //Caller( DataDocumentXPathNavigator will make sure that the node is at the right position for this
+        // call )
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
         {
@@ -1708,7 +1720,8 @@ namespace System.Xml
                     node = node.ParentNode;
                 } while (node != null && node.NodeType != XmlNodeType.Element);
             }
-            // till now, node should be the next ancestor (bound) element of the element parent of current namespace node (attribute or data column)
+            // till now, node should be the next ancestor (bound) element of the element parent of current
+            // namespace node (attribute or data column)
             while (node != null)
             {
                 //try the namespace attributes from the same element

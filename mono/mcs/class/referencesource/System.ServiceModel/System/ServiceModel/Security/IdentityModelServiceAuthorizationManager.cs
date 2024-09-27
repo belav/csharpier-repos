@@ -44,7 +44,8 @@ namespace System.ServiceModel.Security
         /// Override of the base class method. Substitues WCF IAuthorizationPolicy with
         /// <see cref="System.IdentityModel.Tokens.AuthorizationPolicy"/>.
         /// </summary>
-        /// <param name="operationContext">Current OperationContext that contains all the IAuthorizationPolicies.</param>
+        /// <param name="operationContext">Current OperationContext that contains all the
+        // IAuthorizationPolicies.</param>
         /// <returns>Read-Only collection of <see cref="IAuthorizationPolicy"/> </returns>
         protected override ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies(
             OperationContext operationContext
@@ -52,9 +53,11 @@ namespace System.ServiceModel.Security
         {
             //
             // Make sure we always return at least one claims identity, if there are no auth policies
-            // that contain any identities, then return an anonymous identity wrapped in an authorization policy.
+            // that contain any identities, then return an anonymous identity wrapped in an authorization
+            // policy.
             //
-            // If we do not, then Thread.CurrentPrincipal may end up being null inside service operations after the
+            // If we do not, then Thread.CurrentPrincipal may end up being null inside service operations after
+            // the
             // authorization polices are evaluated since ServiceCredentials.ConfigureServiceHost will
             // turn the PrincipalPermissionMode knob to Custom.
             //
@@ -252,7 +255,8 @@ namespace System.ServiceModel.Security
             //
             // There are 5 well-known Client Authentication types at the transport layer. Each of these will
             // result either in a WindowsSecurityToken, X509SecurityToken or UserNameSecurityToken.
-            // All other type of credentials (like OAuth token) result other token that will be passed trough regular validation process.
+            // All other type of credentials (like OAuth token) result other token that will be passed trough
+            // regular validation process.
             //
             //      ClientCredential Type     ||        Transport Token Type
             // -------------------------------------------------------------------
@@ -297,12 +301,14 @@ namespace System.ServiceModel.Security
 
         /// <summary>
         /// Given a collection of IAuthorizationPolicies this method will eliminate the IAuthorizationPolicy
-        /// that was created for the given transport Security Token. The method modifies the given collection
+        /// that was created for the given transport Security Token. The method modifies the given
+        // collection
         /// of IAuthorizationPolicy.
         /// </summary>
         /// <param name="transportToken">Client's Security Token provided at the transport layer.</param>
         /// <param name="tranportTokenIdentities"></param>
-        /// <param name="baseAuthorizationPolicies">Collection of IAuthorizationPolicies that were created by WCF.</param>
+        /// <param name="baseAuthorizationPolicies">Collection of IAuthorizationPolicies that were created
+        // by WCF.</param>
         static void EliminateTransportTokenPolicy(
             SecurityToken transportToken,
             IEnumerable<ClaimsIdentity> tranportTokenIdentities,
@@ -341,9 +347,11 @@ namespace System.ServiceModel.Security
 
             //
             // We will process one IAuthorizationPolicy at a time. Transport token will have been authenticated
-            // by WCF and would have created a IAuthorizationPolicy for the same. If the transport token is a X.509
+            // by WCF and would have created a IAuthorizationPolicy for the same. If the transport token is a
+            // X.509
             // SecurityToken and 'mapToWindows' was set to true then the IAuthorizationPolicy that was created
-            // by WCF will have two Claimsets, a X509ClaimSet and a WindowsClaimSet. We need to prune out this case
+            // by WCF will have two Claimsets, a X509ClaimSet and a WindowsClaimSet. We need to prune out this
+            // case
             // and ignore both these Claimsets as we have made a call to the token handler to authenticate this
             // token above. If we create a AuthorizationContext using all the IAuthorizationPolicies then all
             // the claimsets are merged and it becomes hard to identify this case.
@@ -379,9 +387,11 @@ namespace System.ServiceModel.Security
         /// The method can handle only X509SecurityToken and WindowsSecurityToken.
         /// </summary>
         /// <param name="transportToken">Client's Security Token provided at the transport layer.</param>
-        /// <param name="tranportTokenIdentities">A collection of <see cref="ClaimsIdentity"/> to match.</param>
+        /// <param name="tranportTokenIdentities">A collection of <see cref="ClaimsIdentity"/> to
+        // match.</param>
         /// <param name="authPolicy">IAuthorizationPolicy to check.</param>
-        /// <returns>True if the IAuthorizationPolicy could have been created from the given Transpor token.</returns>
+        /// <returns>True if the IAuthorizationPolicy could have been created from the given Transpor
+        // token.</returns>
         static bool DoesPolicyMatchTransportToken(
             SecurityToken transportToken,
             IEnumerable<ClaimsIdentity> tranportTokenIdentities,
@@ -548,7 +558,8 @@ namespace System.ServiceModel.Security
                             SysAuthorizationContext.CreateDefaultAuthorizationContext(
                                 new List<IAuthorizationPolicy>() { policy }
                             );
-                        // Kerberos creates only one ClaimSet. So any more ClaimSet would mean that this is not a Policy created from Kerberos.
+                        // Kerberos creates only one ClaimSet. So any more ClaimSet would mean that this is not a Policy
+                        // created from Kerberos.
                         if (authContext.ClaimSets.Count == 1)
                         {
                             bool allClaimsMatched = true;
@@ -607,7 +618,8 @@ namespace System.ServiceModel.Security
         /// Converts a given set of WCF ClaimSets to IDFx ClaimsIdentity.
         /// </summary>
         /// <param name="claimSets">Collection of <see cref="ClaimSet"/> to convert to IDFx.</param>
-        /// <param name="securityTokenHandlerConfiguration">The SecurityTokenHandlerConfiguration to use.</param>
+        /// <param name="securityTokenHandlerConfiguration">The SecurityTokenHandlerConfiguration to
+        // use.</param>
         /// <returns>ClaimsIdentity</returns>
         static ClaimsIdentity ConvertToIDFxIdentity(
             IList<ClaimSet> claimSets,
@@ -788,7 +800,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Checks authorization for the given operation context based on policy evaluation.
         /// </summary>
-        /// <param name="operationContext">The OperationContext for the current authorization request.</param>
+        /// <param name="operationContext">The OperationContext for the current authorization
+        // request.</param>
         /// <returns>true if authorized, false otherwise</returns>
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
@@ -826,7 +839,8 @@ namespace System.ServiceModel.Security
 
             //
             // CheckAccess is called prior to impersonation in WCF, so we need to pull
-            // the ClaimsPrincipal from the OperationContext.ServiceSecurityContext.AuthorizationContext.Properties[ "Principal" ].
+            // the ClaimsPrincipal from the
+            // OperationContext.ServiceSecurityContext.AuthorizationContext.Properties[ "Principal" ].
             //
             ClaimsPrincipal claimsPrincipal =
                 operationContext.ServiceSecurityContext.AuthorizationContext.Properties[

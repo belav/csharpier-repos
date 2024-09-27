@@ -312,11 +312,14 @@ namespace System.DirectoryServices.AccountManagement
             //
             // Get SID of current user (via OpenThreadToken/GetTokenInformation/CloseHandle for TokenUser)
             //
-            // Is the user SID of the form S-1-5-21-... (does GetSidIdentityAuthority(u) == 5 and GetSidSubauthority(u, 0) == 21)?
+            // Is the user SID of the form S-1-5-21-... (does GetSidIdentityAuthority(u) == 5 and
+            // GetSidSubauthority(u, 0) == 21)?
             // If NO ---> is local user
             // If YES --->
-            //      Get machine domain SID (via LsaOpenPolicy/LsaQueryInformationPolicy for PolicyAccountDomainInformation/LsaClose)
-            //      Does EqualDomainSid indicate the current user SID and the machine domain SID have the same domain?
+            //      Get machine domain SID (via LsaOpenPolicy/LsaQueryInformationPolicy for
+            // PolicyAccountDomainInformation/LsaClose)
+            //      Does EqualDomainSid indicate the current user SID and the machine domain SID have the same
+            // domain?
             //      If YES -->
             //          IS the local machine a DC
             //          If NO --> is local user
@@ -353,7 +356,8 @@ namespace System.DirectoryServices.AccountManagement
                     // Since both pCopyOfUserSid and pMachineDomainSid should always be account SIDs
                     Debug.Assert(success);
 
-                    // If user SID is the same domain as the machine domain, and the machine is not a DC then the user is a local (machine) user
+                    // If user SID is the same domain as the machine domain, and the machine is not a DC then the user
+                    // is a local (machine) user
                     return sameDomain ? !IsMachineDC(null) : false;
                 }
                 else

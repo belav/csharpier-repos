@@ -132,22 +132,22 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 code += blCount[bits] << (16 - bits);
                 if (bits >= 10)
                 {
-                    /* We need an extra table for bit lengths >= 10. */
+/* We need an extra table for bit lengths >= 10. */
                     int start = nextCode[bits] & 0x1ff80;
                     int end = code & 0x1ff80;
                     treeSize += (end - start) >> (16 - bits);
                 }
             }
 
-            /* -jr comment this out! doesnt work for dynamic trees and pkzip 2.04g
-                        if (code != 65536)
-                        {
-                            throw new SharpZipBaseException("Code lengths don't add up properly.");
-                        }
-            */
-            /* Now create and fill the extra tables from longest to shortest
-            * bit len.  This way the sub trees will be aligned.
-            */
+/* -jr comment this out! doesnt work for dynamic trees and pkzip 2.04g
+if (code != 65536)
+{
+throw new SharpZipBaseException("Code lengths don't add up properly.");
+}
+*/
+/* Now create and fill the extra tables from longest to shortest
+* bit len.  This way the sub trees will be aligned.
+*/
             tree = new short[treeSize];
             int treePtr = 512;
             for (int bits = MAX_BITLEN; bits >= 10; bits--)

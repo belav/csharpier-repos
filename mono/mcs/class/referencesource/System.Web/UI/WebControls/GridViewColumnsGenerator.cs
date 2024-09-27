@@ -204,7 +204,8 @@ namespace System.Web.UI.WebControls
                 && AutoGenerateEnumFields == null
             )
             {
-                //This is for backward compatibility. Before 4.5, auto generating fields used to call into this method
+                //This is for backward compatibility. Before 4.5, auto generating fields used to call into this
+                // method
                 //and if someone has overriden this method to force generation of columns, the scenario should still
                 //work.
                 return gridView.IsBindableType(propertyType);

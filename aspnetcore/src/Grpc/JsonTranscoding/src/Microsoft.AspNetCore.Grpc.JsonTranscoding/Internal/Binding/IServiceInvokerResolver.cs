@@ -10,7 +10,8 @@ internal interface IServiceInvokerResolver<TService>
     where TService : class
 {
     /// <summary>
-    /// Creates a service invoker delegate and associated metadata using the service type, method name, and HTTP binding.
+    /// Creates a service invoker delegate and associated metadata using the service type, method name,
+    // and HTTP binding.
     /// </summary>
     (TDelegate invoker, List<object> metadata) CreateModelCore<TDelegate>(
         string methodName,

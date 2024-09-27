@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* TEST:        delete_next_card_table
- * DESCRIPTION: gains 14 blocks in gc.cpp
-                mscorwks!WKS::delete_next_card_table: (7 blocks, 11 arcs)
-                mscorwks!SVR::delete_next_card_table: (7 blocks, 11 arcs)
- */
+* DESCRIPTION: gains 14 blocks in gc.cpp
+mscorwks!WKS::delete_next_card_table: (7 blocks, 11 arcs)
+mscorwks!SVR::delete_next_card_table: (7 blocks, 11 arcs)
+*/
 
 using System;
 using System.Collections;

@@ -449,8 +449,10 @@ public class RemoteAttributeTest
     {
         var builder = GetRouteBuilder(serviceProvider);
 
-        // Setting IsBound to true makes order more important than usual. First try the route that requires the
-        // area value. Skip usual "area:exists" constraint because that isn't relevant for link generation and it
+        // Setting IsBound to true makes order more important than usual. First try the route that requires
+        // the
+        // area value. Skip usual "area:exists" constraint because that isn't relevant for link generation
+        // and it
         // complicates the setup significantly.
         builder.MapRoute("areaRoute", "{area}/{controller}/{action}");
         builder.MapRoute(
@@ -483,7 +485,8 @@ public class RemoteAttributeTest
         RouteData routeData
     )
     {
-        // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
+        // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory
+        // instance)
         // through the HttpContext.
         var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
 

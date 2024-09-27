@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -11,7 +12,8 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting.Parsers
 {
     /// <summary>
-    /// Buffer-oriented parsing of HTML form URL-ended, also known as <c>application/x-www-form-urlencoded</c>, data.
+    /// Buffer-oriented parsing of HTML form URL-ended, also known as
+    // <c>application/x-www-form-urlencoded</c>, data.
     /// </summary>
     internal class FormUrlEncodedParser
     {
@@ -26,7 +28,8 @@ namespace System.Net.Http.Formatting.Parsers
         /// <summary>
         /// Initializes a new instance of the <see cref="FormUrlEncodedParser"/> class.
         /// </summary>
-        /// <param name="nameValuePairs">The collection to which name value pairs are added as they are parsed.</param>
+        /// <param name="nameValuePairs">The collection to which name value pairs are added as they are
+        // parsed.</param>
         /// <param name="maxMessageSize">Maximum length of all the individual name value pairs.</param>
         public FormUrlEncodedParser(
             ICollection<KeyValuePair<string, string>> nameValuePairs,
@@ -61,14 +64,17 @@ namespace System.Net.Http.Formatting.Parsers
 
         /// <summary>
         /// Parse a buffer of URL form-encoded name-value pairs and add them to the collection.
-        /// Bytes are parsed in a consuming manner from the beginning of the buffer meaning that the same bytes can not be
+        /// Bytes are parsed in a consuming manner from the beginning of the buffer meaning that the same
+        // bytes can not be
         /// present in the buffer.
         /// </summary>
         /// <param name="buffer">Buffer from where data is read</param>
         /// <param name="bytesReady">Size of buffer</param>
         /// <param name="bytesConsumed">Offset into buffer</param>
-        /// <param name="isFinal">Indicates whether the end of the URL form-encoded data has been reached.</param>
-        /// <returns>State of the parser. Call this method with new data until it reaches a final state.</returns>
+        /// <param name="isFinal">Indicates whether the end of the URL form-encoded data has been
+        // reached.</param>
+        /// <returns>State of the parser. Call this method with new data until it reaches a final
+        // state.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",

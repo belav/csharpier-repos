@@ -299,7 +299,8 @@ namespace System.Reflection
 #endif // FEATURE_CAS_POLICY
 
         // Locate an assembly by the long form of the assembly name.
-        // eg. "Toolbox.dll, version=1.1.10.1220, locale=en, publickey=1234567890123456789012345678901234567890"
+        // eg. "Toolbox.dll, version=1.1.10.1220, locale=en,
+        // publickey=1234567890123456789012345678901234567890"
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public static Assembly Load(String assemblyString)
@@ -316,16 +317,20 @@ namespace System.Reflection
             );
         }
 
-        // Returns type from the assembly while keeping compatibility with Assembly.Load(assemblyString).GetType(typeName) for managed types.
+        // Returns type from the assembly while keeping compatibility with
+        // Assembly.Load(assemblyString).GetType(typeName) for managed types.
         // Calls Type.GetType for WinRT types.
-        // Note: Type.GetType fails for assembly names that start with weird characters like '['. By calling it for managed types we would
+        // Note: Type.GetType fails for assembly names that start with weird characters like '['. By calling
+        // it for managed types we would
         // break AppCompat.
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         internal static Type GetType_Compat(String assemblyString, String typeName)
         {
-            // Normally we would get the stackMark only in public APIs. This is internal API, but it is AppCompat replacement of public API
-            // call Assembly.Load(assemblyString).GetType(typeName), therefore we take the stackMark here as well, to be fully compatible with
+            // Normally we would get the stackMark only in public APIs. This is internal API, but it is
+            // AppCompat replacement of public API
+            // call Assembly.Load(assemblyString).GetType(typeName), therefore we take the stackMark here as
+            // well, to be fully compatible with
             // the call sequence.
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
 
@@ -370,7 +375,8 @@ namespace System.Reflection
         }
 
         // Locate an assembly for reflection by the long form of the assembly name.
-        // eg. "Toolbox.dll, version=1.1.10.1220, locale=en, publickey=1234567890123456789012345678901234567890"
+        // eg. "Toolbox.dll, version=1.1.10.1220, locale=en,
+        // publickey=1234567890123456789012345678901234567890"
         //
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
@@ -724,8 +730,8 @@ namespace System.Reflection
 #endif //FEATURE_CORECLR
 
         /*
-         * Get the assembly that the current code is running from.
-         */
+        * Get the assembly that the current code is running from.
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public static Assembly GetExecutingAssembly()
@@ -1194,7 +1200,7 @@ namespace System.Reflection
         }
 
         /*
-          Returns true if the assembly was loaded from the global assembly cache.
+        Returns true if the assembly was loaded from the global assembly cache.
         */
         public virtual bool GlobalAssemblyCache
         {
@@ -1821,7 +1827,8 @@ namespace System.Reflection
         }
 
 #if FEATURE_HOSTED_BINDER
-        // Wrapper function to wrap the typical use of InternalLoad. Matches exactly with the signature below if FEATURE_HOSTED_BINDER is not set
+        // Wrapper function to wrap the typical use of InternalLoad. Matches exactly with the signature
+        // below if FEATURE_HOSTED_BINDER is not set
         [System.Security.SecurityCritical] // auto-generated
         internal static RuntimeAssembly InternalLoad(
             String assemblyString,
@@ -1905,7 +1912,8 @@ namespace System.Reflection
         }
 
 #if FEATURE_HOSTED_BINDER
-        // Wrapper function to wrap the typical use of InternalLoadAssemblyName. Matches exactly with the signature below if FEATURE_HOSTED_BINDER is not set
+        // Wrapper function to wrap the typical use of InternalLoadAssemblyName. Matches exactly with the
+        // signature below if FEATURE_HOSTED_BINDER is not set
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
@@ -3510,7 +3518,8 @@ namespace System.Reflection
                 }
                 catch (FileNotFoundException)
                 {
-                    // Create our own exception since the one caught doesn't have a filename associated with it, making it less useful for debugging.
+                    // Create our own exception since the one caught doesn't have a filename associated with it, making
+                    // it less useful for debugging.
                     dllNotFoundException = new FileNotFoundException(
                         String.Format(
                             culture,

@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Components.Endpoints;
 namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>
-/// Builds conventions that will be used for customization of <see cref="EndpointBuilder"/> instances.
+/// Builds conventions that will be used for customization of <see cref="EndpointBuilder"/>
+// instances.
 /// </summary>
 public sealed class RazorComponentsEndpointConventionBuilder : IEndpointConventionBuilder
 {

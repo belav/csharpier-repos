@@ -997,9 +997,11 @@ namespace System.ServiceModel.Description
                     new CodeParameterDeclarationExpression(typeof(object), "userState")
                 );
 
-                // if (onBeginBarOperDelegate == null) onBeginBarOperDelegate = new BeginOperationDelegate (OnBeginBarOper);
+                // if (onBeginBarOperDelegate == null) onBeginBarOperDelegate = new BeginOperationDelegate
+                // (OnBeginBarOper);
                 // if (onEndBarOperDelegate == null) onEndBarOperDelegate = new EndOperationDelegate (OnEndBarOper);
-                // if (onBarOperCompletedDelegate == null) onBarOperCompletedDelegate = new BeginOperationDelegate (OnBarOperCompleted);
+                // if (onBarOperCompletedDelegate == null) onBarOperCompletedDelegate = new BeginOperationDelegate
+                // (OnBarOperCompleted);
                 var beginOperDelegateRef = new CodeFieldReferenceExpression(
                     thisExpr,
                     "onBegin" + od.Name + "Delegate"
@@ -1062,7 +1064,8 @@ namespace System.ServiceModel.Description
                 );
                 cm.Statements.Add(ifstmt);
 
-                // InvokeAsync (onBeginBarOperDelegate, inValues, onEndBarOperDelegate, onBarOperCompletedDelegate, userState);
+                // InvokeAsync (onBeginBarOperDelegate, inValues, onEndBarOperDelegate, onBarOperCompletedDelegate,
+                // userState);
 
                 inArgs.Add(new CodeParameterDeclarationExpression(typeof(object), "userState"));
 

@@ -11,9 +11,11 @@ namespace Microsoft.AspNetCore.Hosting.WindowsServices;
 public static class WebHostWindowsServiceExtensions
 {
     /// <summary>
-    ///     Runs the specified web application inside a Windows service and blocks until the service is stopped.
+    ///     Runs the specified web application inside a Windows service and blocks until the service is
+    // stopped.
     /// </summary>
-    /// <param name="host">An instance of the <see cref="IWebHost"/> to host in the Windows service.</param>
+    /// <param name="host">An instance of the <see cref="IWebHost"/> to host in the Windows
+    // service.</param>
     /// <example>
     ///     This example shows how to use <see cref="RunAsService"/>.
     ///     <code>

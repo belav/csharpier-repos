@@ -160,7 +160,8 @@ namespace System.IO.Compression
             if (GetType() != typeof(GZipStream))
             {
                 // GZipStream is not sealed, and a derived type may have overridden Write(byte[], int, int) prior
-                // to this Write(ReadOnlySpan<byte>) overload being introduced.  In that case, this Write(ReadOnlySpan<byte>) overload
+                // to this Write(ReadOnlySpan<byte>) overload being introduced.  In that case, this
+                // Write(ReadOnlySpan<byte>) overload
                 // should use the behavior of Write(byte[],int,int) overload.
                 base.Write(buffer);
             }
@@ -230,8 +231,10 @@ namespace System.IO.Compression
         {
             if (GetType() != typeof(GZipStream))
             {
-                // GZipStream is not sealed, and a derived type may have overridden ReadAsync(byte[], int, int) prior
-                // to this ReadAsync(Memory<byte>) overload being introduced.  In that case, this ReadAsync(Memory<byte>) overload
+                // GZipStream is not sealed, and a derived type may have overridden ReadAsync(byte[], int, int)
+                // prior
+                // to this ReadAsync(Memory<byte>) overload being introduced.  In that case, this
+                // ReadAsync(Memory<byte>) overload
                 // should use the behavior of ReadAsync(byte[],int,int) overload.
                 return base.ReadAsync(buffer, cancellationToken);
             }
@@ -260,9 +263,11 @@ namespace System.IO.Compression
         {
             if (GetType() != typeof(GZipStream))
             {
-                // GZipStream is not sealed, and a derived type may have overridden WriteAsync(byte[], int, int) prior
+                // GZipStream is not sealed, and a derived type may have overridden WriteAsync(byte[], int, int)
+                // prior
                 // to this WriteAsync(ReadOnlyMemory<byte>) overload being introduced.  In that case, this
-                // WriteAsync(ReadOnlyMemory<byte>) overload should use the behavior of Write(byte[],int,int) overload.
+                // WriteAsync(ReadOnlyMemory<byte>) overload should use the behavior of Write(byte[],int,int)
+                // overload.
                 return base.WriteAsync(buffer, cancellationToken);
             }
             else

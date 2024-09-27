@@ -52,7 +52,8 @@ internal static class EmitterExtensions
                 ? endpointParameter.EmitHandlerArgument()
                 : $"{endpointParameter.EmitHandlerArgument()}!",
             // When a BindAsync parameter is required, make sure that we are using `.Value` to access
-            // the underlying value for a nullable value type instead of using the non-nullable reference type modifier.
+            // the underlying value for a nullable value type instead of using the non-nullable reference type
+            // modifier.
             EndpointParameterSource.BindAsync => endpointParameter.IsOptional
                 ? endpointParameter.EmitHandlerArgument()
             : endpointParameter.Type.IsValueType

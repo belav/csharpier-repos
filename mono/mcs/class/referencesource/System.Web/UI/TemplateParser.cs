@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements the ASP.NET template parser
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Implements the ASP.NET template parser
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 // Turn this on to do regex profiling
 //#define PROFILE_REGEX
@@ -668,8 +668,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Do some initialization before the parsing
-         */
+        * Do some initialization before the parsing
+        */
         internal virtual void PrepareParse()
         {
             if (_circularReferenceChecker == null)
@@ -829,8 +829,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Parse the input
-         */
+        * Parse the input
+        */
         internal void Parse()
         {
             // Always set the culture to Invariant when parsing (ASURT 99071)
@@ -895,8 +895,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Parse the contents of the input file
-         */
+        * Parse the contents of the input file
+        */
 
         protected void ParseFile(string physicalPath, string virtualPath)
         {
@@ -951,8 +951,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Parse the contents of the TextReader
-         */
+        * Parse the contents of the TextReader
+        */
         private void ParseReader(StreamReader reader, VirtualPath virtualPath)
         {
             string s = reader.ReadToEnd();
@@ -980,17 +980,17 @@ namespace System.Web.UI
         }
 
         /*
-         * Update the hash code of the Type we're creating by xor'ing it with
-         * a string.
-         */
+        * Update the hash code of the Type we're creating by xor'ing it with
+        * a string.
+        */
         internal void UpdateTypeHashCode(string text)
         {
             _typeHashCode.AddObject(text);
         }
 
         /*
-         * Parse the contents of the string, and catch exceptions
-         */
+        * Parse the contents of the string, and catch exceptions
+        */
         internal void ParseString(string text, VirtualPath virtualPath, Encoding fileEncoding)
         {
             System.Web.Util.Debug.Trace("Template", "Starting parse at " + DateTime.Now);
@@ -1159,8 +1159,8 @@ namespace System.Web.UI
 #endif // PROFILE_REGEX
 
         /*
-         * Parse the contents of the string
-         */
+        * Parse the contents of the string
+        */
         private void ParseStringInternal(string text, Encoding fileEncoding)
         {
             int textPos = 0;
@@ -1465,8 +1465,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Do what needs to be done before returning after the parsing is complete
-         */
+        * Do what needs to be done before returning after the parsing is complete
+        */
         internal virtual void HandlePostParse()
         {
             // If there was no main directive in the page, process settings that may have come from config
@@ -1557,8 +1557,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process all the text in the literal StringBuilder, and reset it
-         */
+        * Process all the text in the literal StringBuilder, and reset it
+        */
         private void ProcessLiteral()
         {
             // Debug.Trace("Template", "Literal text: \"" + _literalBuilder.ToString() + "\"");
@@ -1603,7 +1603,8 @@ namespace System.Web.UI
 
                 if (!fIgnoreThisLiteral)
                 {
-                    // Process the settings that may come from config when the first non-trivial literal is parsed. VS Whidbey 141882
+                    // Process the settings that may come from config when the first non-trivial literal is parsed. VS
+                    // Whidbey 141882
                     if (!flags[mainDirectiveHandled])
                     {
                         ProcessMainDirective(_mainDirectiveConfigSettings);
@@ -1646,8 +1647,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process a server side SCRIPT tag
-         */
+        * Process a server side SCRIPT tag
+        */
         private void ProcessServerScript()
         {
             // Get the contents of the script tag
@@ -1703,8 +1704,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process an Object tag, depending on its scope
-         */
+        * Process an Object tag, depending on its scope
+        */
         private void ProcessObjectTag(ObjectTagBuilder objectBuilder)
         {
             ObjectTagScope scope = objectBuilder.Scope;
@@ -1747,8 +1748,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add a child builder to a builder
-         */
+        * Add a child builder to a builder
+        */
         private void AppendSubBuilder(ControlBuilder builder, ControlBuilder subBuilder)
         {
             // Check if it's an object tag
@@ -1762,8 +1763,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process an opening tag (possibly self-closed)
-         */
+        * Process an opening tag (possibly self-closed)
+        */
         // Used to generate unique id's
         private int _controlCount;
 
@@ -1793,7 +1794,8 @@ namespace System.Web.UI
                 return true;
             }
 
-            // Process the settings that may come from config when the first non-trivial tag is parsed.  VS Whidbey 141882
+            // Process the settings that may come from config when the first non-trivial tag is parsed.  VS
+            // Whidbey 141882
             if (!flags[mainDirectiveHandled])
             {
                 ProcessMainDirective(_mainDirectiveConfigSettings);
@@ -1992,8 +1994,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process a <script runat=server> tag
-         */
+        * Process a <script runat=server> tag
+        */
         private void ProcessScriptTag(
             Match match,
             string text,
@@ -2067,9 +2069,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Called when a '</' sequence is seen. This means we can start closing
-         * tags.
-         */
+        * Called when a '</' sequence is seen. This means we can start closing
+        * tags.
+        */
         private bool ProcessEndTag(Match match)
         {
             string tagName = match.Groups["tagname"].Value;
@@ -2114,8 +2116,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process a <%@ %> block
-         */
+        * Process a <%@ %> block
+        */
         internal virtual void ProcessDirective(string directiveName, IDictionary directive)
         {
             // Check for the main directive, which is "page" for an aspx,
@@ -2637,9 +2639,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Process a language attribute, as can appear in the Page directive and in
-         * <script runat=server> tags.
-         */
+        * Process a language attribute, as can appear in the Page directive and in
+        * <script runat=server> tags.
+        */
         private void ProcessLanguageAttribute(string language)
         {
             if (language == null)
@@ -2669,8 +2671,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process a compileFile attribute (aka code besides)
-         */
+        * Process a compileFile attribute (aka code besides)
+        */
         private void ProcessCodeFile(VirtualPath codeFileVirtualPath)
         {
             Debug.Assert(_codeFileVirtualPath == null);
@@ -2708,8 +2710,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Compile a source file into an assembly, and import it
-         */
+        * Compile a source file into an assembly, and import it
+        */
         private Assembly ImportSourceFile(VirtualPath virtualPath)
         {
             // If it's a no-compile page, ignore the imported source file
@@ -2752,9 +2754,9 @@ namespace System.Web.UI
         }
 
         /*
-         * If we could not match the '<' at all, check for some specific syntax
-         * errors.
-         */
+        * If we could not match the '<' at all, check for some specific syntax
+        * errors.
+        */
         private void DetectSpecialServerTagError(string text, int textPos)
         {
             if (IgnoreParseErrors)
@@ -2814,8 +2816,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add an entry to our list of NamespaceEntry's
-         */
+        * Add an entry to our list of NamespaceEntry's
+        */
         internal void AddImportEntry(string ns)
         {
             // We're about to modify the list of namespaces, so if we already
@@ -2855,8 +2857,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Look for a type by name in the assemblies that this page links with
-         */
+        * Look for a type by name in the assemblies that this page links with
+        */
         internal Type GetType(string typeName, bool ignoreCase, bool throwOnError)
         {
             // If it contains an assembly name, parse it out and load the assembly (ASURT 53589)
@@ -2904,8 +2906,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Look for a type by name in the assemblies that this page links with
-         */
+        * Look for a type by name in the assemblies that this page links with
+        */
         internal Type GetType(string typeName)
         {
             return GetType(
@@ -2915,8 +2917,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Process a server side include.  e.g. <!-- #include file="foo.inc" -->
-         */
+        * Process a server side include.  e.g. <!-- #include file="foo.inc" -->
+        */
         private void ProcessServerInclude(Match match)
         {
             if (flags[inScriptTag])
@@ -3019,8 +3021,8 @@ namespace System.Web.UI
         private static char[] s_newlineChars = new char[] { '\r', '\n' };
 
         /*
-         *  Handle <%= ... %>, <%# ... %> and <% ... %> blocks
-         */
+        *  Handle <%= ... %>, <%# ... %> and <% ... %> blocks
+        */
         private void ProcessCodeBlock(Match match, CodeBlockType blockType, string text)
         {
             // Take care of the previous literal string
@@ -3234,11 +3236,11 @@ namespace System.Web.UI
         }
 
         /*
-         * Adds attributes and their values to the attribs
-         * Sets the _id and isServerTag data members as appropriate.
-         * If fDirective is true, we are being called for a <%@ %> block, in
-         * which case the name of the directive is returned (e.g. "page")
-         */
+        * Adds attributes and their values to the attribs
+        * Sets the _id and isServerTag data members as appropriate.
+        * If fDirective is true, we are being called for a <%@ %> block, in
+        * which case the name of the directive is returned (e.g. "page")
+        */
         private string ProcessAttributes(
             string text,
             Match match,
@@ -3351,12 +3353,15 @@ namespace System.Web.UI
                         }
 
                         attribs.AddFilteredAttribute(filter, realAttributeName, attribValue);
-                        //Since the attribute column values are only used for generating line pragmas at design time for intellisense to work,
+                        //Since the attribute column values are only used for generating line pragmas at design time for
+                        // intellisense to work,
                         //we populate that only at design time so that runtime memory usage is not affected.
                         if (BuildManagerHost.InClientBuildManager)
                         {
-                            //Linenumber = Linenumber of tag beginning + new lines between tag beginning and attribute value beginning.
-                            //Column = number of characters from the last new line (before the attrValue in the entire Text) till attrValue.
+                            //Linenumber = Linenumber of tag beginning + new lines between tag beginning and attribute value
+                            // beginning.
+                            //Column = number of characters from the last new line (before the attrValue in the entire Text)
+                            // till attrValue.
                             int lineNumber =
                                 _lineNumber + Util.LineCount(text, match.Index, attrValue.Index);
                             int column =
@@ -3465,16 +3470,16 @@ namespace System.Web.UI
         }
 
         /*
-         * Map a type name to a Type.
-         */
+        * Map a type name to a Type.
+        */
         internal Type MapStringToType(string typeName, IDictionary attribs)
         {
             return RootBuilder.GetChildControlType(typeName, attribs);
         }
 
         /*
-         * Add a file as a dependency of the file we're parsing
-         */
+        * Add a file as a dependency of the file we're parsing
+        */
         internal void AddSourceDependency(VirtualPath fileName)
         {
             // Tell the filter that a dependency was added
@@ -3488,8 +3493,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add a file as a dependency of the file we're parsing
-         */
+        * Add a file as a dependency of the file we're parsing
+        */
         private void AddSourceDependency2(VirtualPath fileName)
         {
             if (_sourceDependencies == null)
@@ -3499,8 +3504,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add a BuildResult's source dependencies to our own source dependencies
-         */
+        * Add a BuildResult's source dependencies to our own source dependencies
+        */
         internal void AddBuildResultDependency(BuildResult result)
         {
             // Add one direct dependency
@@ -3521,8 +3526,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add a type that we must 'link' with in order to build
-         */
+        * Add a type that we must 'link' with in order to build
+        */
         internal void AddTypeDependency(Type type)
         {
             // We must link with all the types in the inheritance hierarchy (ASURT 83509)
@@ -3538,9 +3543,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Add as dependencies all the assembly in the inheritance chain of a Type,
-         * including interfaces.
-         */
+        * Add as dependencies all the assembly in the inheritance chain of a Type,
+        * including interfaces.
+        */
         private void AddBaseTypeDependencies(Type type)
         {
             Assembly a = type.Module.Assembly;
@@ -3566,8 +3571,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add an assembly that we must 'link' with in order to build
-         */
+        * Add an assembly that we must 'link' with in order to build
+        */
         internal Assembly AddAssemblyDependency(string assemblyName, bool addDependentAssemblies)
         {
             Assembly assembly = LoadAssembly(
@@ -3590,8 +3595,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add an assembly that we must 'link' with in order to build
-         */
+        * Add an assembly that we must 'link' with in order to build
+        */
         internal void AddAssemblyDependency(Assembly assembly, bool addDependentAssemblies)
         {
             if (_assemblyDependencies == null)
@@ -3619,8 +3624,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Add a set of assemblies that we must 'link' with in order to build
-         */
+        * Add a set of assemblies that we must 'link' with in order to build
+        */
         private void AddAssemblyDependencies(AssemblySet assemblyDependencies)
         {
             if (assemblyDependencies == null)
@@ -3666,8 +3671,8 @@ namespace System.Web.UI
     }
 
     /*
-     * Base class for classes that contain source file & line information for error reporting
-     */
+    * Base class for classes that contain source file & line information for error reporting
+    */
     internal abstract class SourceLineInfo
     {
         // Source file where the information appears
@@ -3688,8 +3693,8 @@ namespace System.Web.UI
     }
 
     /*
-     * Objects that are placed on the BuilderStack
-     */
+    * Objects that are placed on the BuilderStack
+    */
     internal class BuilderStackEntry : SourceLineInfo
     {
         internal BuilderStackEntry(
@@ -3723,9 +3728,9 @@ namespace System.Web.UI
     }
 
     /*
-     * Entry representing an import directive.
-     * e.g. <%@ import namespace="System.Web.UI" %>
-     */
+    * Entry representing an import directive.
+    * e.g. <%@ import namespace="System.Web.UI" %>
+    */
     internal class NamespaceEntry : SourceLineInfo
     {
         private string _namespace;

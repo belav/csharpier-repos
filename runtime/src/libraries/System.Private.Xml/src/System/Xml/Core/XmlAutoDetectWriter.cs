@@ -12,7 +12,8 @@ using System.Xml.Schema;
 namespace System.Xml
 {
     /// <summary>
-    /// This writer implements XmlOutputMethod.AutoDetect.  If the first element is "html", then output will be
+    /// This writer implements XmlOutputMethod.AutoDetect.  If the first element is "html", then output
+    // will be
     /// directed to an Html writer.  Otherwise, output will be directed to an Xml writer.
     /// </summary>
     internal sealed class XmlAutoDetectWriter : XmlRawWriter, IRemovableWriter
@@ -56,7 +57,8 @@ namespace System.Xml
         //-----------------------------------------------
 
         /// <summary>
-        /// This writer will raise this event once it has determined whether to replace itself with the Html or Xml writer.
+        /// This writer will raise this event once it has determined whether to replace itself with the Html
+        // or Xml writer.
         /// </summary>
         public OnRemoveWriter? OnRemoveWriterEvent
         {
@@ -360,8 +362,10 @@ namespace System.Xml
         }
 
         /// <summary>
-        /// If the specified text consist only of whitespace, then cache the whitespace, as it is not enough to
-        /// force the creation of a wrapped writer.  Otherwise, create a wrapped writer if one has not yet been
+        /// If the specified text consist only of whitespace, then cache the whitespace, as it is not enough
+        // to
+        /// force the creation of a wrapped writer.  Otherwise, create a wrapped writer if one has not yet
+        // been
         /// created and return true.
         /// </summary>
         [MemberNotNullWhen(true, nameof(_wrapped))]

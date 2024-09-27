@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a SQL query string.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF Core</see>
+///     See <see href="https://aka.ms/efcore-docs-raw-sql">Executing raw SQL commands with EF
+// Core</see>
 ///     for more information and examples.
 /// </remarks>
 public interface ISqlQuery : ITableBase
@@ -25,12 +26,14 @@ public interface ISqlQuery : ITableBase
     new IEnumerable<ISqlQueryColumn> Columns { get; }
 
     /// <summary>
-    ///     Gets the column with the given name. Returns <see langword="null" /> if no column with the given name is defined.
+    ///     Gets the column with the given name. Returns <see langword="null" /> if no column with the
+    // given name is defined.
     /// </summary>
     new ISqlQueryColumn? FindColumn(string name);
 
     /// <summary>
-    ///     Gets the column mapped to the given property. Returns <see langword="null" /> if no column is mapped to the given property.
+    ///     Gets the column mapped to the given property. Returns <see langword="null" /> if no column
+    // is mapped to the given property.
     /// </summary>
     new ISqlQueryColumn? FindColumn(IProperty property);
 

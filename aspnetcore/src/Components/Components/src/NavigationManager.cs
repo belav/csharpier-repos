@@ -45,7 +45,8 @@ public abstract class NavigationManager
     private bool _isInitialized;
 
     /// <summary>
-    /// Gets or sets the current base URI. The <see cref="BaseUri" /> is always represented as an absolute URI in string form with trailing slash.
+    /// Gets or sets the current base URI. The <see cref="BaseUri" /> is always represented as an
+    // absolute URI in string form with trailing slash.
     /// Typically this corresponds to the 'href' attribute on the document's &lt;base&gt; element.
     /// </summary>
     /// <remarks>
@@ -70,7 +71,8 @@ public abstract class NavigationManager
     }
 
     /// <summary>
-    /// Gets or sets the current URI. The <see cref="Uri" /> is always represented as an absolute URI in string form.
+    /// Gets or sets the current URI. The <see cref="Uri" /> is always represented as an absolute URI in
+    // string form.
     /// </summary>
     /// <remarks>
     /// Setting <see cref="Uri" /> will not trigger the <see cref="LocationChanged" /> event.
@@ -93,7 +95,8 @@ public abstract class NavigationManager
     /// Gets or sets the state associated with the current navigation.
     /// </summary>
     /// <remarks>
-    /// Setting <see cref="HistoryEntryState" /> will not trigger the <see cref="LocationChanged" /> event.
+    /// Setting <see cref="HistoryEntryState" /> will not trigger the <see cref="LocationChanged" />
+    // event.
     /// </remarks>
     public string? HistoryEntryState { get; protected set; }
 
@@ -102,7 +105,9 @@ public abstract class NavigationManager
     /// </summary>
     /// <param name="uri">The destination URI. This can be absolute, or relative to the base URI
     /// (as returned by <see cref="BaseUri"/>).</param>
-    /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the new page from the server, whether or not the URI would normally be handled by the client-side router.</param>
+    /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the
+    // new page from the server, whether or not the URI would normally be handled by the client-side
+    // router.</param>
     public void NavigateTo(
         [StringSyntax(StringSyntaxAttribute.Uri)] string uri,
         bool forceLoad
@@ -114,8 +119,11 @@ public abstract class NavigationManager
     /// </summary>
     /// <param name="uri">The destination URI. This can be absolute, or relative to the base URI
     /// (as returned by <see cref="BaseUri"/>).</param>
-    /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the new page from the server, whether or not the URI would normally be handled by the client-side router.</param>
-    /// <param name="replace">If true, replaces the current entry in the history stack. If false, appends the new entry to the history stack.</param>
+    /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the
+    // new page from the server, whether or not the URI would normally be handled by the client-side
+    // router.</param>
+    /// <param name="replace">If true, replaces the current entry in the history stack. If false,
+    // appends the new entry to the history stack.</param>
     public void NavigateTo(
         [StringSyntax(StringSyntaxAttribute.Uri)] string uri,
         bool forceLoad = false,
@@ -159,10 +167,15 @@ public abstract class NavigationManager
     /// </summary>
     /// <param name="uri">The destination URI. This can be absolute, or relative to the base URI
     /// (as returned by <see cref="BaseUri"/>).</param>
-    /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the new page from the server, whether or not the URI would normally be handled by the client-side router.</param>
-    // The reason this overload exists and is virtual is for back-compat with < 6.0. Existing NavigationManager subclasses may
-    // already override this, so the framework needs to keep using it for the cases when only pre-6.0 options are used.
-    // However, for anyone implementing a new NavigationManager post-6.0, we don't want them to have to override this
+    /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the
+    // new page from the server, whether or not the URI would normally be handled by the client-side
+    // router.</param>
+    // The reason this overload exists and is virtual is for back-compat with < 6.0. Existing
+    // NavigationManager subclasses may
+    // already override this, so the framework needs to keep using it for the cases when only pre-6.0
+    // options are used.
+    // However, for anyone implementing a new NavigationManager post-6.0, we don't want them to have to
+    // override this
     // overload any more, so there's now a default implementation that calls the updated overload.
     protected virtual void NavigateToCore(
         [StringSyntax(StringSyntaxAttribute.Uri)] string uri,
@@ -188,7 +201,8 @@ public abstract class NavigationManager
     /// </summary>
     /// <remarks>
     /// If <paramref name="forceReload"/> is <c>true</c>, a full page reload will always be performed.
-    /// Otherwise, the response HTML may be merged with the document's existing HTML to preserve client-side state,
+    /// Otherwise, the response HTML may be merged with the document's existing HTML to preserve
+    // client-side state,
     /// falling back on a full page reload if necessary.
     /// </remarks>
     public virtual void Refresh(bool forceReload = false) =>
@@ -196,7 +210,8 @@ public abstract class NavigationManager
 
     /// <summary>
     /// Called to initialize BaseURI and current URI before these values are used for the first time.
-    /// Override <see cref="EnsureInitialized" /> and call this method to dynamically calculate these values.
+    /// Override <see cref="EnsureInitialized" /> and call this method to dynamically calculate these
+    // values.
     /// </summary>
     protected void Initialize(string baseUri, string uri)
     {
@@ -217,7 +232,8 @@ public abstract class NavigationManager
     }
 
     /// <summary>
-    /// Allows derived classes to lazily self-initialize. Implementations that support lazy-initialization should override
+    /// Allows derived classes to lazily self-initialize. Implementations that support
+    // lazy-initialization should override
     /// this method and call <see cref="Initialize(string, string)" />.
     /// </summary>
     protected virtual void EnsureInitialized() { }
@@ -349,10 +365,13 @@ public abstract class NavigationManager
     /// <summary>
     /// Notifies the registered handlers of the current location change.
     /// </summary>
-    /// <param name="uri">The destination URI. This can be absolute, or relative to the base URI.</param>
+    /// <param name="uri">The destination URI. This can be absolute, or relative to the base
+    // URI.</param>
     /// <param name="state">The state associated with the target history entry.</param>
-    /// <param name="isNavigationIntercepted">Whether this navigation was intercepted from a link.</param>
-    /// <returns>A <see cref="ValueTask{TResult}"/> representing the completion of the operation. If the result is <see langword="true"/>, the navigation should continue.</returns>
+    /// <param name="isNavigationIntercepted">Whether this navigation was intercepted from a
+    // link.</param>
+    /// <returns>A <see cref="ValueTask{TResult}"/> representing the completion of the operation. If the
+    // result is <see langword="true"/>, the navigation should continue.</returns>
     protected async ValueTask<bool> NotifyLocationChangingAsync(
         string uri,
         string? state,
@@ -525,8 +544,10 @@ public abstract class NavigationManager
         );
 
     /// <summary>
-    /// Sets whether navigation is currently locked. If it is, then implementations should not update <see cref="Uri"/> and call
-    /// <see cref="NotifyLocationChanged(bool)"/> until they have first confirmed the navigation by calling
+    /// Sets whether navigation is currently locked. If it is, then implementations should not update
+    // <see cref="Uri"/> and call
+    /// <see cref="NotifyLocationChanged(bool)"/> until they have first confirmed the navigation by
+    // calling
     /// <see cref="NotifyLocationChangingAsync(string, string?, bool)"/>.
     /// </summary>
     /// <param name="value">Whether navigation is currently locked.</param>
@@ -539,7 +560,8 @@ public abstract class NavigationManager
     /// Registers a handler to process incoming navigation events.
     /// </summary>
     /// <param name="locationChangingHandler">The handler to process incoming navigation events.</param>
-    /// <returns>An <see cref="IDisposable"/> that can be disposed to unregister the location changing handler.</returns>
+    /// <returns>An <see cref="IDisposable"/> that can be disposed to unregister the location changing
+    // handler.</returns>
     public IDisposable RegisterLocationChangingHandler(
         Func<LocationChangingContext, ValueTask> locationChangingHandler
     )

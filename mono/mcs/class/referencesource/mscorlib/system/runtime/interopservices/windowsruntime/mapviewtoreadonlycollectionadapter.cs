@@ -17,16 +17,21 @@ using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    // These stubs will be used when a call via IReadOnlyCollection<KeyValuePair<K, V>> is made in managed code.
+    // These stubs will be used when a call via IReadOnlyCollection<KeyValuePair<K, V>> is made in
+    // managed code.
     // This can mean two things - either the underlying unmanaged object implements IMapView<K, V> or it
-    // implements IVectorView<IKeyValuePair<K, V>> and we cannot determine this statically in the general
+    // implements IVectorView<IKeyValuePair<K, V>> and we cannot determine this statically in the
+    // general
     // case so we have to cast at run-time. Used by the interop mashaling infrastructure.
     //
     // The methods on this class must be written VERY carefully to avoid introducing security holes.
     // That's because they are invoked with special "this"! The "this" object
-    // for all of these methods are not MapViewToReadOnlyCollectionAdapter objects. Rather, they are of type
-    // IVectorView<KeyValuePair<K, V>> or IMapView<K, V>. No actual MapViewToReadOnlyCollectionAdapter object is ever
-    // instantiated. Thus, you will see a lot of expressions that cast "this" to "IVectorView<KeyValuePair<K, V>>"
+    // for all of these methods are not MapViewToReadOnlyCollectionAdapter objects. Rather, they are of
+    // type
+    // IVectorView<KeyValuePair<K, V>> or IMapView<K, V>. No actual MapViewToReadOnlyCollectionAdapter
+    // object is ever
+    // instantiated. Thus, you will see a lot of expressions that cast "this" to
+    // "IVectorView<KeyValuePair<K, V>>"
     // or "IMapView<K, V>".
     internal sealed class MapViewToReadOnlyCollectionAdapter
     {

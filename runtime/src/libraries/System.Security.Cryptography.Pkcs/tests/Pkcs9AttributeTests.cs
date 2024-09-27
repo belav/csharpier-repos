@@ -156,7 +156,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void Pkcs9AttributeCopyFromAsnNotAPkcs9Attribute()
         {
-            // Pkcs9AttributeObject.CopyFrom(AsnEncodedData) refuses to accept any AsnEncodedData that isn't a Pkcs9AttributeObject-derived class.
+            // Pkcs9AttributeObject.CopyFrom(AsnEncodedData) refuses to accept any AsnEncodedData that isn't a
+            // Pkcs9AttributeObject-derived class.
             Pkcs9AttributeObject p = new Pkcs9AttributeObject();
             byte[] rawData =
                 "041e4d00790020004400650073006300720069007000740069006f006e000000".HexToByteArray();

@@ -234,10 +234,10 @@ namespace Novell.Directory.Ldap
             AttributeQualifier attrQualifier = new AttributeQualifier(name, values);
             SupportClass.PutElement(hashQualifier, name, attrQualifier);
 
-            /*
-            * This is the only method that modifies the schema element.
-            * We need to reset the attribute value since it has changed.
-            */
+/*
+* This is the only method that modifies the schema element.
+* We need to reset the attribute value since it has changed.
+*/
             base.Value = formatString();
             return;
         }

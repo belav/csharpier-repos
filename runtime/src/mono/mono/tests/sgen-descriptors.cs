@@ -199,7 +199,7 @@ class Driver
             if ((i % 10000) == 0)
                 current[11] = new LargeStruct2[1];
 
-            /* Test for 64 bit bitmap descriptors (#14834) */
+/* Test for 64 bit bitmap descriptors (#14834) */
             current[12] = new Non32bitBitmap()
             {
                 o = new object(),

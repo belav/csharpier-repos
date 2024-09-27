@@ -521,8 +521,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <summary>
-        /// Emits boolean expression without branching if possible (i.e., no logical operators, only comparisons).
-        /// Leaves a boolean (int32, 0 or 1) value on the stack which conforms to sense, i.e., <c>condition == sense</c>.
+        /// Emits boolean expression without branching if possible (i.e., no logical operators, only
+        // comparisons).
+        /// Leaves a boolean (int32, 0 or 1) value on the stack which conforms to sense, i.e., <c>condition
+        // == sense</c>.
         /// </summary>
         private bool TryEmitComparison(BoundExpression condition, bool sense)
         {
@@ -589,8 +591,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             //   long operator –(long x)
             //
             // The result is computed by subtracting x from zero.
-            // If the value of x is the smallest representable value of the operand type (−2^31 for int or −2^63 for long),
-            // then the mathematical negation of x is not representable within the operand type. If this occurs within a checked context,
+            // If the value of x is the smallest representable value of the operand type (−2^31 for int or −2^63
+            // for long),
+            // then the mathematical negation of x is not representable within the operand type. If this occurs
+            // within a checked context,
             // a System.OverflowException is thrown; if it occurs within an unchecked context,
             // the result is the value of the operand and the overflow is not reported.
             Debug.Assert(

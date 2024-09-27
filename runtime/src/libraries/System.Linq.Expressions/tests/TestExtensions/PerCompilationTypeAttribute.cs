@@ -9,7 +9,8 @@ using Xunit.Sdk;
 namespace System.Linq.Expressions.Tests
 {
     /// <summary>
-    /// Operates as per <see cref="MemberDataAttribute"/>, but adds a final boolean value to the list of arguments,
+    /// Operates as per <see cref="MemberDataAttribute"/>, but adds a final boolean value to the list of
+    // arguments,
     /// permuted through both false and true.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]

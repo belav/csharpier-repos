@@ -9,7 +9,8 @@ namespace System
     internal static partial class PasteArguments
     {
         /// <summary>
-        /// Repastes a set of arguments into a linear string that parses back into the originals under pre- or post-2008 VC parsing rules.
+        /// Repastes a set of arguments into a linear string that parses back into the originals under pre-
+        // or post-2008 VC parsing rules.
         /// On Unix: the rules for parsing the executable name (argv[0]) are ignored.
         /// </summary>
         internal static string Paste(

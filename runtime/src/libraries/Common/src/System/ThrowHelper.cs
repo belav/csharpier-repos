@@ -4,16 +4,19 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-// This file is intended to be used by components that don't have access to ArgumentNullException.ThrowIfNull.
+// This file is intended to be used by components that don't have access to
+// ArgumentNullException.ThrowIfNull.
 #pragma warning disable CS0436 // Type conflicts with imported type
 
 namespace System
 {
     internal static partial class ThrowHelper
     {
-        /// <summary>Throws an <see cref="ArgumentNullException"/> if <paramref name="argument"/> is null.</summary>
+        /// <summary>Throws an <see cref="ArgumentNullException"/> if <paramref name="argument"/> is
+        // null.</summary>
         /// <param name="argument">The reference type argument to validate as non-null.</param>
-        /// <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
+        /// <param name="paramName">The name of the parameter with which <paramref name="argument"/>
+        // corresponds.</param>
         internal static void ThrowIfNull(
 #if NETCOREAPP3_0_OR_GREATER
             [NotNull]
@@ -34,7 +37,8 @@ namespace System
         private static void Throw(string? paramName) => throw new ArgumentNullException(paramName);
 
         /// <summary>
-        /// Throws either an <see cref="System.ArgumentNullException"/> or an <see cref="System.ArgumentException"/>
+        /// Throws either an <see cref="System.ArgumentNullException"/> or an <see
+        // cref="System.ArgumentException"/>
         /// if the specified string is <see langword="null"/> or whitespace respectively.
         /// </summary>
         /// <param name="argument">String to be checked for <see langword="null"/> or whitespace.</param>

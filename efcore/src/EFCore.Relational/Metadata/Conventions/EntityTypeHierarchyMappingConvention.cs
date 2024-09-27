@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that removes discriminators from non-TPH entity types and unmaps the inherited properties for TPT entity types.
+///     A convention that removes discriminators from non-TPH entity types and unmaps the inherited
+// properties for TPT entity types.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
-///     <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for
+// more information and examples.
 /// </remarks>
 public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
 {
@@ -16,7 +18,8 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
     ///     Creates a new instance of <see cref="EntityTypeHierarchyMappingConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public EntityTypeHierarchyMappingConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

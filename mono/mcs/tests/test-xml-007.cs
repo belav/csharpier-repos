@@ -13,11 +13,11 @@ namespace Testing
     /// </incorrect>
     public delegate void MyDelegate2(object o, EventArgs e);
 
-    /**
-    <summary>
-    Javadoc comment for delegate type
-    </summary>
-    */
+/**
+<summary>
+Javadoc comment for delegate type
+</summary>
+*/
     public delegate void MyDelegate3(object o, EventArgs e);
 
     public class Test

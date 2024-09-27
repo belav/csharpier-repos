@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.PooledObjects;
 namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
     /// <summary>
-    /// Represents a control flow branch from a <see cref="Source"/> basic block to a <see cref="Destination"/>
+    /// Represents a control flow branch from a <see cref="Source"/> basic block to a <see
+    // cref="Destination"/>
     /// basic block in a <see cref="ControlFlowGraph"/>.
     /// </summary>
     public sealed class ControlFlowBranch
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public ControlFlowBranchSemantics Semantics { get; }
 
         /// <summary>
-        /// Indicates if this branch represents <see cref="BasicBlock.ConditionalSuccessor"/> of the <see cref="Source"/> basic block.
+        /// Indicates if this branch represents <see cref="BasicBlock.ConditionalSuccessor"/> of the <see
+        // cref="Source"/> basic block.
         /// </summary>
         public bool IsConditionalSuccessor { get; }
 

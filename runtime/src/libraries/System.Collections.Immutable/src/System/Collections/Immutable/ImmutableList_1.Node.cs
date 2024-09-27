@@ -256,9 +256,12 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Creates a node tree that contains the contents of a list.
             /// </summary>
-            /// <param name="items">An indexable list with the contents that the new node tree should contain.</param>
-            /// <param name="start">The starting index within <paramref name="items"/> that should be captured by the node tree.</param>
-            /// <param name="length">The number of elements from <paramref name="items"/> that should be captured by the node tree.</param>
+            /// <param name="items">An indexable list with the contents that the new node tree should
+            // contain.</param>
+            /// <param name="start">The starting index within <paramref name="items"/> that should be captured
+            // by the node tree.</param>
+            /// <param name="length">The number of elements from <paramref name="items"/> that should be
+            // captured by the node tree.</param>
             /// <returns>The root of the created node tree.</returns>
             internal static Node NodeTreeFromList(
                 IOrderedCollection<T> items,
@@ -666,7 +669,8 @@ namespace System.Collections.Immutable
             /// <paramref name="index"/> is less than 0.-or-<paramref name="count"/> is less than 0.
             /// </exception>
             /// <exception cref="ArgumentException">
-            /// <paramref name="index"/> and <paramref name="count"/> do not denote a valid range in the <see cref="ImmutableList{T}"/>.
+            /// <paramref name="index"/> and <paramref name="count"/> do not denote a valid range in the <see
+            // cref="ImmutableList{T}"/>.
             /// </exception>
             /// <exception cref="InvalidOperationException">
             /// <paramref name="comparer"/> is null, and the default comparer <see cref="Comparer{T}.Default"/>
@@ -743,7 +747,8 @@ namespace System.Collections.Immutable
             /// The object to locate in the <see cref="ImmutableList{T}"/>. The value
             /// can be null for reference types.
             /// </param>
-            /// <param name="equalityComparer">The equality comparer to use for testing the match of two elements.</param>
+            /// <param name="equalityComparer">The equality comparer to use for testing the match of two
+            // elements.</param>
             /// <returns>
             /// The zero-based index of the first occurrence of <paramref name="item"/> within the entire
             /// <see cref="ImmutableList{T}"/>, if found; otherwise, -1.
@@ -752,7 +757,8 @@ namespace System.Collections.Immutable
                 this.IndexOf(item, 0, this.Count, equalityComparer);
 
             /// <summary>
-            /// Searches for the specified object and returns <c>true</c> if it is found, <c>false</c> otherwise.
+            /// Searches for the specified object and returns <c>true</c> if it is found, <c>false</c>
+            // otherwise.
             /// </summary>
             /// <param name="item">
             /// The object to locate in the <see cref="ImmutableList{T}"/>. The value
@@ -833,9 +839,11 @@ namespace System.Collections.Immutable
             /// </param>
             /// <param name="index">The zero-based starting index of the backward search.</param>
             /// <param name="count">The number of elements in the section to search.</param>
-            /// <param name="equalityComparer">The equality comparer to use for testing the match of two elements.</param>
+            /// <param name="equalityComparer">The equality comparer to use for testing the match of two
+            // elements.</param>
             /// <returns>
-            /// The zero-based index of the last occurrence of <paramref name="item"/> within the range of elements
+            /// The zero-based index of the last occurrence of <paramref name="item"/> within the range of
+            // elements
             /// in the <see cref="ImmutableList{T}"/> that contains <paramref name="count"/> number of elements
             /// and ends at <paramref name="index"/>, if found; otherwise, -1.
             /// </returns>
@@ -933,7 +941,8 @@ namespace System.Collections.Immutable
             /// copied from <see cref="ImmutableList{T}"/>. The <see cref="Array"/> must have
             /// zero-based indexing.
             /// </param>
-            /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying
+            // begins.</param>
             /// <param name="count">The number of elements to copy.</param>
             internal void CopyTo(int index, T[] array, int arrayIndex, int count)
             {
@@ -954,10 +963,14 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
+            /// Copies the elements of the <see cref="ICollection"/> to an <see cref="Array"/>, starting at a
+            // particular <see cref="Array"/> index.
             /// </summary>
-            /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based indexing.</param>
-            /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the
+            // elements copied from <see cref="ICollection"/>. The <see cref="Array"/> must have zero-based
+            // indexing.</param>
+            /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying
+            // begins.</param>
             internal void CopyTo(Array array, int arrayIndex)
             {
                 Requires.NotNull(array, nameof(array));
@@ -1142,7 +1155,8 @@ namespace System.Collections.Immutable
             /// from the specified index to the last element.
             /// </summary>
             /// <param name="startIndex">The zero-based starting index of the search.</param>
-            /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the element to search for.</param>
+            /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the
+            // element to search for.</param>
             /// <returns>
             /// The zero-based index of the first occurrence of an element that matches the
             /// conditions defined by <paramref name="match"/>, if found; otherwise, -1.
@@ -1163,7 +1177,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="startIndex">The zero-based starting index of the search.</param>
             /// <param name="count">The number of elements in the section to search.</param>
-            /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the element to search for.</param>
+            /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the
+            // element to search for.</param>
             /// <returns>
             /// The zero-based index of the first occurrence of an element that matches the
             /// conditions defined by <paramref name="match"/>, if found; otherwise, -1.
@@ -1249,7 +1264,8 @@ namespace System.Collections.Immutable
             /// from the first element to the specified index.
             /// </summary>
             /// <param name="startIndex">The zero-based starting index of the backward search.</param>
-            /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the element
+            /// <param name="match">The <see cref="Predicate{T}"/> delegate that defines the conditions of the
+            // element
             /// to search for.</param>
             /// <returns>
             /// The zero-based index of the last occurrence of an element that matches the
@@ -1312,7 +1328,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Freezes this node and all descendant nodes so that any mutations require a new instance of the nodes.
+            /// Freezes this node and all descendant nodes so that any mutations require a new instance of the
+            // nodes.
             /// </summary>
             internal void Freeze()
             {
@@ -1361,7 +1378,8 @@ namespace System.Collections.Immutable
                 Debug.Assert(!_right!.IsEmpty);
                 Debug.Assert(!_right!._left!.IsEmpty);
 
-                // The following is an optimized version of rotating the right child right, then rotating the parent left.
+                // The following is an optimized version of rotating the right child right, then rotating the parent
+                // left.
                 Node right = _right;
                 Node rightLeft = right._left;
                 return rightLeft.MutateBoth(
@@ -1380,7 +1398,8 @@ namespace System.Collections.Immutable
                 Debug.Assert(!_left!.IsEmpty);
                 Debug.Assert(!_left._right!.IsEmpty);
 
-                // The following is an optimized version of rotating the left child left, then rotating the parent right.
+                // The following is an optimized version of rotating the left child left, then rotating the parent
+                // right.
                 Node left = _left;
                 Node leftRight = left._right;
                 return leftRight.MutateBoth(
@@ -1393,7 +1412,8 @@ namespace System.Collections.Immutable
             /// Gets a value indicating whether this tree is in balance.
             /// </summary>
             /// <returns>
-            /// 0 if the heights of both sides are the same, a positive integer if the right side is taller, or a negative integer if the left side is taller.
+            /// 0 if the heights of both sides are the same, a positive integer if the right side is taller, or
+            // a negative integer if the left side is taller.
             /// </returns>
             private int BalanceFactor
             {
@@ -1492,7 +1512,8 @@ namespace System.Collections.Immutable
             #endregion
 
             /// <summary>
-            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
+            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone
+            // of this node
             /// with the described changes.
             /// </summary>
             /// <param name="left">The left branch of the mutated node.</param>
@@ -1519,7 +1540,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
+            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone
+            // of this node
             /// with the described changes.
             /// </summary>
             /// <param name="left">The left branch of the mutated node.</param>
@@ -1543,7 +1565,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
+            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone
+            // of this node
             /// with the described changes.
             /// </summary>
             /// <param name="right">The right branch of the mutated node.</param>
@@ -1585,7 +1608,8 @@ namespace System.Collections.Immutable
             private static int ParentCount(Node left, Node right) => 1 + left._count + right._count;
 
             /// <summary>
-            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
+            /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone
+            // of this node
             /// with the described changes.
             /// </summary>
             /// <param name="key">The new key for this node.</param>
@@ -1631,7 +1655,8 @@ namespace System.Collections.Immutable
                 new Node(key, left: EmptyNode, right: EmptyNode);
 
             /// <summary>
-            /// Traverses the node tree looking for a node with the provided value. The provided node will be checked
+            /// Traverses the node tree looking for a node with the provided value. The provided node will be
+            // checked
             /// then we will recursively check it's left and right nodes.
             /// </summary>
             /// <param name="node">

@@ -29,8 +29,10 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="codeBuilder">Builder to write encoded instructions to.</param>
         /// <param name="controlFlowBuilder">
         /// Builder tracking labels, branches and exception handlers.
-        /// Must be specified to be able to use some of the control-flow factory methods of <see cref="InstructionEncoder"/>,
-        /// such as <see cref="Branch(ILOpCode, LabelHandle)"/>, <see cref="DefineLabel"/>, <see cref="MarkLabel(LabelHandle)"/> etc.
+        /// Must be specified to be able to use some of the control-flow factory methods of <see
+        // cref="InstructionEncoder"/>,
+        /// such as <see cref="Branch(ILOpCode, LabelHandle)"/>, <see cref="DefineLabel"/>, <see
+        // cref="MarkLabel(LabelHandle)"/> etc.
         /// </param>
         public InstructionEncoder(
             BlobBuilder codeBuilder,
@@ -239,7 +241,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Encodes local variable load instruction.
         /// </summary>
         /// <param name="slotIndex">Index of the local variable slot.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="slotIndex"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="slotIndex"/> is
+        // negative.</exception>
         public void LoadLocal(int slotIndex)
         {
             switch (slotIndex)
@@ -281,7 +284,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Encodes local variable store instruction.
         /// </summary>
         /// <param name="slotIndex">Index of the local variable slot.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="slotIndex"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="slotIndex"/> is
+        // negative.</exception>
         public void StoreLocal(int slotIndex)
         {
             switch (slotIndex)
@@ -323,7 +327,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Encodes local variable address load instruction.
         /// </summary>
         /// <param name="slotIndex">Index of the local variable slot.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="slotIndex"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="slotIndex"/> is
+        // negative.</exception>
         public void LoadLocalAddress(int slotIndex)
         {
             if (unchecked((uint)slotIndex) <= byte.MaxValue)
@@ -346,7 +351,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Encodes argument load instruction.
         /// </summary>
         /// <param name="argumentIndex">Index of the argument.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="argumentIndex"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="argumentIndex"/> is
+        // negative.</exception>
         public void LoadArgument(int argumentIndex)
         {
             switch (argumentIndex)
@@ -388,7 +394,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Encodes argument address load instruction.
         /// </summary>
         /// <param name="argumentIndex">Index of the argument.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="argumentIndex"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="argumentIndex"/> is
+        // negative.</exception>
         public void LoadArgumentAddress(int argumentIndex)
         {
             if (unchecked((uint)argumentIndex) <= byte.MaxValue)
@@ -411,7 +418,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Encodes argument store instruction.
         /// </summary>
         /// <param name="argumentIndex">Index of the argument.</param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="argumentIndex"/> is negative.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="argumentIndex"/> is
+        // negative.</exception>
         public void StoreArgument(int argumentIndex)
         {
             if (unchecked((uint)argumentIndex) <= byte.MaxValue)
@@ -431,10 +439,12 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         /// <summary>
-        /// Defines a label that can later be used to mark and refer to a location in the instruction stream.
+        /// Defines a label that can later be used to mark and refer to a location in the instruction
+        // stream.
         /// </summary>
         /// <returns>Label handle.</returns>
-        /// <exception cref="InvalidOperationException"><see cref="ControlFlowBuilder"/> is null.</exception>
+        /// <exception cref="InvalidOperationException"><see cref="ControlFlowBuilder"/> is
+        // null.</exception>
         public LabelHandle DefineLabel()
         {
             return GetBranchBuilder().AddLabel();
@@ -467,9 +477,12 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <param name="code">Branch instruction to encode.</param>
         /// <param name="label">Label of the target location in instruction stream.</param>
-        /// <exception cref="ArgumentException"><paramref name="code"/> is not a branch instruction.</exception>
-        /// <exception cref="ArgumentException"><paramref name="label"/> was not defined by this encoder.</exception>
-        /// <exception cref="InvalidOperationException"><see cref="ControlFlowBuilder"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="code"/> is not a branch
+        // instruction.</exception>
+        /// <exception cref="ArgumentException"><paramref name="label"/> was not defined by this
+        // encoder.</exception>
+        /// <exception cref="InvalidOperationException"><see cref="ControlFlowBuilder"/> is
+        // null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="label"/> has default value.</exception>
         public void Branch(ILOpCode code, LabelHandle label)
         {
@@ -526,8 +539,10 @@ namespace System.Reflection.Metadata.Ecma335
         /// <remarks>
         /// A single label may be marked multiple times, the last offset wins.
         /// </remarks>
-        /// <exception cref="InvalidOperationException"><see cref="ControlFlowBuilder"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="label"/> was not defined by this encoder.</exception>
+        /// <exception cref="InvalidOperationException"><see cref="ControlFlowBuilder"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="label"/> was not defined by this
+        // encoder.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="label"/> has default value.</exception>
         public void MarkLabel(LabelHandle label)
         {

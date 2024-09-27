@@ -722,9 +722,9 @@ namespace DebuggerTests
 
         [Theory]
         [InlineData(137, 12, "MethodWithLocalsForToStringTest", false, false)]
-        /*[InlineData(147, 12, "MethodWithArgumentsForToStringTest", true, false)]
-        [InlineData(192, 12, "MethodWithArgumentsForToStringTestAsync", true, true)]
-        [InlineData(182, 12, "MethodWithArgumentsForToStringTestAsync", false, true)]*/
+/*[InlineData(147, 12, "MethodWithArgumentsForToStringTest", true, false)]
+[InlineData(192, 12, "MethodWithArgumentsForToStringTestAsync", true, true)]
+[InlineData(182, 12, "MethodWithArgumentsForToStringTestAsync", false, true)]*/
         public async Task InspectLocalsForToStringDescriptions(
             int line,
             int col,
@@ -1318,11 +1318,14 @@ namespace DebuggerTests
         [Fact]
         public async Task InspectLocalsUsingClassFromLibraryUsingDebugTypeFull()
         {
-            /*DebugType.Full generates symbols in a format that we don't understand (vs portable). If JMC=true (default for tests) then we will not load the assemblies
-            that don't have debug symbols. With JMC=false, the assembly will be loaded, even with unusable symbols, and the proxy will use the assembly metadata
-            instead.
+/*DebugType.Full generates symbols in a format that we don't understand (vs portable). If JMC=true
+(default for tests) then we will not load the assemblies
+that don't have debug symbols. With JMC=false, the assembly will be loaded, even with unusable
+symbols, and the proxy will use the assembly metadata
+instead.
 
-            This test specifically tries to inspect an object defined in the external library, so we need JMC=false here.*/
+This test specifically tries to inspect an object defined in the external library, so we need
+JMC=false here.*/
             await SetJustMyCode(false);
             var expression =
                 $"{{ invoke_static_method('[debugger-test] DebugTypeFull:CallToEvaluateLocal'); }}";
@@ -1417,7 +1420,8 @@ namespace DebuggerTests
         [InlineData("DebugWithoutDebugSymbols", 1160)]
         public async Task InspectPropertiesOfObjectFromExternalLibrary(string className, int line)
         {
-            //Setting JustMyCode = false because we are trying to inspect an object from an external library, and this is only allowed when JMC is disabled
+            //Setting JustMyCode = false because we are trying to inspect an object from an external library,
+            // and this is only allowed when JMC is disabled
             await SetJustMyCode(false);
             var expression = $"{{ invoke_static_method('[debugger-test] {className}:Run'); }}";
 

@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static readonly Dictionary<string, PfxInfo> s_certificatesDictionary =
             PfxIterationCountTests.s_certificates.ToDictionary((c) => c.Name);
 
-        // We need to use virtual in a non-abstract class because RemoteExecutor can't work on abstract classes.
+        // We need to use virtual in a non-abstract class because RemoteExecutor can't work on abstract
+        // classes.
         internal virtual X509Certificate Import(byte[] blob) => new X509Certificate(blob);
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -225,7 +226,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         if (OperatingSystem.IsWindows())
                         {
-                            // Opting-out with AppContext data value -1 will still give us error because cert is beyond Windows limit.
+                            // Opting-out with AppContext data value -1 will still give us error because cert is beyond Windows
+                            // limit.
                             // But we will get the CryptoThrowHelper+WindowsCryptographicException.
                             PfxIterationCountTests.VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(
                                 () => Import(pfxInfo.Blob)

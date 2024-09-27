@@ -67,9 +67,12 @@ namespace System.Runtime.DurableInstancing
 
         internal InstanceOwner Owner { get; private set; }
 
-        // Since writing to a Guid field is not atomic, we need synchronization between reading and writing. The idIsSet boolean field can only
-        // appear true once the id field is completely written due to the memory barriers implied by the reads and writes to a volatile field.
-        // Writes to bool fields are atomic, and this property is only written to once. By checking the bool prior to reading the Guid, we can
+        // Since writing to a Guid field is not atomic, we need synchronization between reading and writing.
+        // The idIsSet boolean field can only
+        // appear true once the id field is completely written due to the memory barriers implied by the
+        // reads and writes to a volatile field.
+        // Writes to bool fields are atomic, and this property is only written to once. By checking the bool
+        // prior to reading the Guid, we can
         // be sure that the Guid is fully materialized when read.
         internal Guid Id
         {
@@ -219,7 +222,8 @@ namespace System.Runtime.DurableInstancing
                         }
                         else if (Version != -1)
                         {
-                            // This means the handle was successfully bound in the past.  Need to remove it from the table of handles.
+                            // This means the handle was successfully bound in the past.  Need to remove it from the table of
+                            // handles.
                             Owner.Unbind(this);
                         }
                     }
@@ -455,7 +459,8 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        // After calling this method, the caller doesn't need to wait for the wait handle to become set (but they can).
+        // After calling this method, the caller doesn't need to wait for the wait handle to become set (but
+        // they can).
         internal void CancelReclaim(Exception reason)
         {
             List<InstanceHandleReference> handlesPendingResolution = null;
@@ -806,7 +811,8 @@ namespace System.Runtime.DurableInstancing
                     }
                     else if (Version != -1 && !IsValid)
                     {
-                        // This means the handle was successfully bound in the past.  Need to remove it from the table of handles.
+                        // This means the handle was successfully bound in the past.  Need to remove it from the table of
+                        // handles.
                         Owner.Unbind(this);
                     }
 
@@ -1029,7 +1035,8 @@ namespace System.Runtime.DurableInstancing
                         );
 
                         // If the transaction matches but is already completed (or completing), the easiest ting to do
-                        // is wait for it to complete, then try to re-enlist, and have that failure be the failure mode for Execute.
+                        // is wait for it to complete, then try to re-enlist, and have that failure be the failure mode for
+                        // Execute.
                         // We do that by following the regular, non-matching transaction path.
                         if (
                             transactionWait.HostTransaction.Equals(hostTransaction)

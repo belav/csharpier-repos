@@ -85,7 +85,8 @@ namespace System.ServiceModel.Syndication
         public Atom10FeedFormatter(SyndicationFeed feedToWrite)
             : base(feedToWrite)
         {
-            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base class
+            // No need to check that the parameter passed is valid - it is checked by the c'tor of the base
+            // class
             _maxExtensionSize = int.MaxValue;
             FeedType = feedToWrite.GetType();
         }

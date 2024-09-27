@@ -71,9 +71,20 @@ namespace tests.system_data_dll.System_Data
 
         public void run()
         {
-            //References by name to tables and relations in a DataSet are case-sensitive. Two or more tables or relations can exist in a DataSet that have the same name, but that differ in case. For example you can have Table1 and table1. In this situation, a reference to one of the tables by name must match the case of the table name exactly, otherwise an exception is thrown. For example, if the DataSet myDS contains tables Table1 and table1, you would reference Table1 by name as myDS.Tables["Table1"], and table1 as myDS.Tables ["table1"]. Attempting to reference either of the tables as myDS.Tables ["TABLE1"] would generate an exception.
-            //The case-sensitivity rule does not apply if only one table or relation exists with a particular name. That is, if no other table or relation object in the DataSet matches the name of that particular table or relation object, even by a difference in case, you can reference the object by name using any case and no exception is thrown. For example, if the DataSet has only Table1, you can reference it using myDS.Tables["TABLE1"].
-            //The CaseSensitive property of the DataSet does not affect this behavior. The CaseSensitive property
+            //References by name to tables and relations in a DataSet are case-sensitive. Two or more tables or
+            // relations can exist in a DataSet that have the same name, but that differ in case. For example you
+            // can have Table1 and table1. In this situation, a reference to one of the tables by name must match
+            // the case of the table name exactly, otherwise an exception is thrown. For example, if the DataSet
+            // myDS contains tables Table1 and table1, you would reference Table1 by name as myDS.Tables["Table1"],
+            // and table1 as myDS.Tables ["table1"]. Attempting to reference either of the tables as myDS.Tables
+            // ["TABLE1"] would generate an exception.
+            //The case-sensitivity rule does not apply if only one table or relation exists with a particular
+            // name. That is, if no other table or relation object in the DataSet matches the name of that
+            // particular table or relation object, even by a difference in case, you can reference the object by
+            // name using any case and no exception is thrown. For example, if the DataSet has only Table1, you can
+            // reference it using myDS.Tables["TABLE1"].
+            //The CaseSensitive property of the DataSet does not affect this behavior. The CaseSensitive
+            // property
 
             Exception exp = null;
             DataSet ds = new DataSet();

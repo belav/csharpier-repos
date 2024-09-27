@@ -21,7 +21,8 @@ namespace System.Data.Objects
     using System.Security.Permissions;
 
     /// <summary>
-    /// CodeGenerator class: use lightweight code gen to dynamically generate code to get/set properties.
+    /// CodeGenerator class: use lightweight code gen to dynamically generate code to get/set
+    // properties.
     /// </summary>
     internal static class LightweightCodeGenerator
     {
@@ -75,7 +76,8 @@ namespace System.Data.Objects
         /// If the property setter is not public or declaring class is not public.
         /// </permission>
         /// <permission cref="System.Security.NamedPermissionSet">
-        /// Demand for FullTrust if the property setter or declaring class has a <see cref="System.Security.Permissions.SecurityAction.LinkDemand"/>
+        /// Demand for FullTrust if the property setter or declaring class has a <see
+        // cref="System.Security.Permissions.SecurityAction.LinkDemand"/>
         /// </permission>
         internal static void SetValue(EdmProperty property, object target, object value)
         {
@@ -83,7 +85,8 @@ namespace System.Data.Objects
             setter(target, value);
         }
 
-        /// <summary>For an OSpace property, gets the delegate to set the property value on a clr instance.</summary>
+        /// <summary>For an OSpace property, gets the delegate to set the property value on a clr
+        // instance.</summary>
         internal static Action<object, object> GetSetterDelegateForProperty(EdmProperty property)
         {
             Action<object, object> setter = property.ValueSetter;
@@ -147,7 +150,8 @@ namespace System.Data.Objects
             }
 
             // the setter always skips visibility so that we can call our internal method to handle errors
-            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be treated carefully
+            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be
+            // treated carefully
             DynamicMethod method = CreateDynamicMethod(
                 mi.Name,
                 typeof(void),
@@ -200,7 +204,8 @@ namespace System.Data.Objects
         {
             ConstructorInfo ci = GetConstructorForType(type);
 
-            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be treated carefully
+            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be
+            // treated carefully
             DynamicMethod method = CreateDynamicMethod(
                 ci.DeclaringType.Name,
                 typeof(object),
@@ -218,7 +223,8 @@ namespace System.Data.Objects
         /// generate a delegate equivalent to
         /// private object MemberGetter(object target) { return target.PropertyX; }
         /// or if the property is Nullable<> generate a delegate equivalent to
-        /// private object MemberGetter(object target) { Nullable<X> y = target.PropertyX; return ((y.HasValue) ? y.Value : null); }
+        /// private object MemberGetter(object target) { Nullable<X> y = target.PropertyX; return
+        // ((y.HasValue) ? y.Value : null); }
         /// </summary>
         private static Func<object, object> CreatePropertyGetter(
             RuntimeTypeHandle entityDeclaringType,
@@ -260,7 +266,8 @@ namespace System.Data.Objects
                 ThrowPropertyUnsupportedType();
             }
 
-            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be treated carefully
+            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be
+            // treated carefully
             DynamicMethod method = CreateDynamicMethod(
                 mi.Name,
                 typeof(object),
@@ -352,7 +359,8 @@ namespace System.Data.Objects
         /// If the method is missing or static or has indexed parameters.
         /// Or if the delcaring type is a value type.
         /// Or if the parameter type is a pointer.
-        /// Or if the method or declaring class has a <see cref="System.Security.Permissions.StrongNameIdentityPermissionAttribute"/>.
+        /// Or if the method or declaring class has a <see
+        // cref="System.Security.Permissions.StrongNameIdentityPermissionAttribute"/>.
         /// </exception>
         private static Action<object, object> CreatePropertySetter(
             RuntimeTypeHandle entityDeclaringType,
@@ -365,7 +373,8 @@ namespace System.Data.Objects
             ValidateSetterProperty(entityDeclaringType, rmh, out mi, out realType);
 
             // the setter always skips visibility so that we can call our internal method to handle errors
-            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be treated carefully
+            // because CreateDynamicMethod asserts ReflectionPermission, method is "elevated" and must be
+            // treated carefully
             DynamicMethod method = CreateDynamicMethod(
                 mi.Name,
                 typeof(void),
@@ -516,9 +525,11 @@ namespace System.Data.Objects
             }
         }
 
-        /// <summary>Determines if the specified method requires permission demands to be invoked safely.</summary>
+        /// <summary>Determines if the specified method requires permission demands to be invoked
+        // safely.</summary>
         /// <param name="mi">Method instance to check.</param>
-        /// <returns>true if the specified method requires permission demands to be invoked safely, false otherwise.</returns>
+        /// <returns>true if the specified method requires permission demands to be invoked safely, false
+        // otherwise.</returns>
         internal static bool RequiresPermissionDemands(MethodBase mi)
         {
             System.Diagnostics.Debug.Assert(mi != null);
@@ -551,7 +562,8 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Create delegate used to invoke either the GetRelatedReference or GetRelatedCollection generic method on the RelationshipManager.
+        /// Create delegate used to invoke either the GetRelatedReference or GetRelatedCollection generic
+        // method on the RelationshipManager.
         /// </summary>
         /// <param name="sourceMember">source end of the relationship for the requested navigation</param>
         /// <param name="targetMember">target end of the relationship for the requested navigation</param>
@@ -748,7 +760,8 @@ namespace System.Data.Objects
         // we could cache more, like 'new Type[] { ... }' and 'typeof(object)'
         // but pruned as much as possible for the workingset helps, even little things
 
-        // Assert MemberAccess to skip visibility check & ReflectionEmit so we can generate the method (make calls to EF internals).
+        // Assert MemberAccess to skip visibility check & ReflectionEmit so we can generate the method (make
+        // calls to EF internals).
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2128")]
         [System.Security.SecuritySafeCritical]
         [ReflectionPermission(SecurityAction.Assert, MemberAccess = true)]
@@ -758,7 +771,8 @@ namespace System.Data.Objects
             Type[] parameterTypes
         )
         {
-            // Create a transparent dynamic method (Module not specified) to ensure we do not satisfy any link demands
+            // Create a transparent dynamic method (Module not specified) to ensure we do not satisfy any link
+            // demands
             // in method callees.
             return new DynamicMethod(name, returnType, parameterTypes, true);
         }

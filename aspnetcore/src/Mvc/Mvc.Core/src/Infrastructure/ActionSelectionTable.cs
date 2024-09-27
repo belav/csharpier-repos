@@ -15,24 +15,32 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 // Common infrastructure for things that look up actions by route values.
 //
 // The ActionSelectionTable stores a mapping of route-values -> items for each known set of
-// of route-values. We actually build two of these mappings, one for case-sensitive (fast path) and one for
+// of route-values. We actually build two of these mappings, one for case-sensitive (fast path) and
+// one for
 // case-insensitive (slow path).
 //
-// This is necessary because MVC routing/action-selection is always case-insensitive. So we're going to build
-// a case-sensitive dictionary that will behave like the a case-insensitive dictionary when you hit one of the
-// canonical entries. When you don't hit a case-sensitive match it will try the case-insensitive dictionary
+// This is necessary because MVC routing/action-selection is always case-insensitive. So we're going
+// to build
+// a case-sensitive dictionary that will behave like the a case-insensitive dictionary when you hit
+// one of the
+// canonical entries. When you don't hit a case-sensitive match it will try the case-insensitive
+// dictionary
 // so you still get correct behaviors.
 //
-// The difference here is because while MVC is case-insensitive, doing a case-sensitive comparison is much
-// faster. We also expect that most of the URLs we process are canonically-cased because they were generated
+// The difference here is because while MVC is case-insensitive, doing a case-sensitive comparison
+// is much
+// faster. We also expect that most of the URLs we process are canonically-cased because they were
+// generated
 // by Url.Action or another routing api.
 //
 // This means that for a set of actions like:
 //      { controller = "Home", action = "Index" } -> HomeController::Index1()
 //      { controller = "Home", action = "index" } -> HomeController::Index2()
 //
-// Both of these actions match "Index" case-insensitively, but there exist two known canonical casings,
-// so we will create an entry for "Index" and an entry for "index". Both of these entries match **both**
+// Both of these actions match "Index" case-insensitively, but there exist two known canonical
+// casings,
+// so we will create an entry for "Index" and an entry for "index". Both of these entries match
+// **both**
 // actions.
 internal sealed class ActionSelectionTable<TItem>
 {
@@ -167,7 +175,8 @@ internal sealed class ActionSelectionTable<TItem>
 
     public IReadOnlyList<TItem> Select(RouteValueDictionary values)
     {
-        // Select works based on a string[] of the route values in a pre-calculated order. This code extracts
+        // Select works based on a string[] of the route values in a pre-calculated order. This code
+        // extracts
         // those values in the correct order.
         var routeKeys = RouteKeys;
         var routeValues = new string[routeKeys.Length];

@@ -3612,12 +3612,14 @@ class Program
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use language version 7.0 or greater.
+                // (6,9): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use
+                // language version 7.0 or greater.
                 //         ref int rl = ref (new int[1])[0];
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "ref")
                     .WithArguments("byref locals and returns", "7.0")
                     .WithLocation(6, 9),
-                // (6,22): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use language version 7.0 or greater.
+                // (6,22): error CS8059: Feature 'byref locals and returns' is not available in C# 6. Please use
+                // language version 7.0 or greater.
                 //         ref int rl = ref (new int[1])[0];
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "ref")
                     .WithArguments("byref locals and returns", "7.0")
@@ -3678,7 +3680,8 @@ class C
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (2,7): warning CS8981: The type name 'var' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (2,7): warning CS8981: The type name 'var' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using var = C;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "var")
                     .WithArguments("var")
@@ -3779,7 +3782,8 @@ public class C
                         "b = ref {4, 5, 6}"
                     )
                     .WithLocation(11, 17),
-                // (14,28): error CS0622: Can only use array initializer expressions to assign to array types. Try using a new expression instead.
+                // (14,28): error CS0622: Can only use array initializer expressions to assign to array types. Try
+                // using a new expression instead.
                 //         ref object c = ref {7,8,9};
                 Diagnostic(ErrorCode.ERR_ArrayInitToNonArrayType, "{7,8,9}").WithLocation(14, 28)
             );

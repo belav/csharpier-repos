@@ -33,7 +33,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 cancellationToken
             );
 
-            // Suspend file change notification during code action application, since spurious file change notifications
+            // Suspend file change notification during code action application, since spurious file change
+            // notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
                 var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(

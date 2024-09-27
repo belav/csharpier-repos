@@ -12,10 +12,12 @@ namespace System.Runtime.InteropServices
     using System.Security.Permissions;
     using Microsoft.Win32;
 
-    /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject"]/*' />
+    /// <include file='doc\StandardOleMarshalObject.uex'
+    // path='docs/doc[@for="StandardOleMarshalObject"]/*' />
     /// <internalonly/>
     /// <devdoc>
-    /// Replaces the standard CLR free-threaded marshaler with the standard OLE STA one.  This prevents the calls made into
+    /// Replaces the standard CLR free-threaded marshaler with the standard OLE STA one.  This prevents
+    // the calls made into
     /// our hosting object by OLE from coming in on threads other than the UI thread.
     ///
     /// </devdoc>
@@ -98,7 +100,8 @@ namespace System.Runtime.InteropServices
             );
         }
 
-        /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.GetUnmarshalClass"]/*' />
+        /// <include file='doc\StandardOleMarshalObject.uex'
+        // path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.GetUnmarshalClass"]/*' />
         /// <internalonly/>
         [System.Security.Permissions.SecurityPermission(
             System.Security.Permissions.SecurityAction.Demand,
@@ -117,7 +120,8 @@ namespace System.Runtime.InteropServices
             return NativeMethods.S_OK;
         }
 
-        /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.GetMarshalSizeMax"]/*' />
+        /// <include file='doc\StandardOleMarshalObject.uex'
+        // path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.GetMarshalSizeMax"]/*' />
         /// <internalonly/>
         [System.Security.Permissions.SecurityPermission(
             System.Security.Permissions.SecurityAction.Demand,
@@ -136,8 +140,10 @@ namespace System.Runtime.InteropServices
 
             try
             {
-                // we must not wrap pStandardMarshal with an RCW because that would trigger QIs for random IIDs and the marshaler
-                // (aka stub manager object) does not really handle these well and we would risk triggering an AppVerifier break
+                // we must not wrap pStandardMarshal with an RCW because that would trigger QIs for random IIDs and
+                // the marshaler
+                // (aka stub manager object) does not really handle these well and we would risk triggering an
+                // AppVerifier break
                 IntPtr vtable = *(IntPtr*)pStandardMarshal.ToPointer();
                 IntPtr method = *((IntPtr*)vtable.ToPointer() + 4); // GetMarshalSizeMax is 4th slot
 
@@ -162,7 +168,8 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.MarshalInterface"]/*' />
+        /// <include file='doc\StandardOleMarshalObject.uex'
+        // path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.MarshalInterface"]/*' />
         /// <internalonly/>
         [System.Security.Permissions.SecurityPermission(
             System.Security.Permissions.SecurityAction.Demand,
@@ -181,8 +188,10 @@ namespace System.Runtime.InteropServices
 
             try
             {
-                // we must not wrap pStandardMarshal with an RCW because that would trigger QIs for random IIDs and the marshaler
-                // (aka stub manager object) does not really handle these well and we would risk triggering an AppVerifier break
+                // we must not wrap pStandardMarshal with an RCW because that would trigger QIs for random IIDs and
+                // the marshaler
+                // (aka stub manager object) does not really handle these well and we would risk triggering an
+                // AppVerifier break
                 IntPtr vtable = *(IntPtr*)pStandardMarshal.ToPointer();
                 IntPtr method = *((IntPtr*)vtable.ToPointer() + 5); // GetMarshalSizeMax is 5th slot
 
@@ -207,7 +216,9 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.UnmarshalInterface"]/*' />
+        /// <include file='doc\StandardOleMarshalObject.uex'
+        // path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.UnmarshalInterface"]/*'
+        // />
         /// <internalonly/>
         [System.Security.Permissions.SecurityPermission(
             System.Security.Permissions.SecurityAction.Demand,
@@ -219,13 +230,16 @@ namespace System.Runtime.InteropServices
             out IntPtr ppv
         )
         {
-            // this should never be called on this interface, but on the standard one handed back by the previous calls.
+            // this should never be called on this interface, but on the standard one handed back by the
+            // previous calls.
             Debug.Fail("IMarshal::UnmarshalInterface should not be called.");
             ppv = IntPtr.Zero;
             return NativeMethods.E_NOTIMPL;
         }
 
-        /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.ReleaseMarshalData"]/*' />
+        /// <include file='doc\StandardOleMarshalObject.uex'
+        // path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.ReleaseMarshalData"]/*'
+        // />
         /// <internalonly/>
         [System.Security.Permissions.SecurityPermission(
             System.Security.Permissions.SecurityAction.Demand,
@@ -233,12 +247,14 @@ namespace System.Runtime.InteropServices
         )]
         int UnsafeNativeMethods.IMarshal.ReleaseMarshalData(IntPtr pStm)
         {
-            // this should never be called on this interface, but on the standard one handed back by the previous calls.
+            // this should never be called on this interface, but on the standard one handed back by the
+            // previous calls.
             Debug.Fail("IMarshal::ReleaseMarshalData should not be called.");
             return NativeMethods.E_NOTIMPL;
         }
 
-        /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.DisconnectObject"]/*' />
+        /// <include file='doc\StandardOleMarshalObject.uex'
+        // path='docs/doc[@for="StandardOleMarshalObject.UnsafeNativeMethods.IMarshal.DisconnectObject"]/*' />
         /// <internalonly/>
         [System.Security.Permissions.SecurityPermission(
             System.Security.Permissions.SecurityAction.Demand,
@@ -246,7 +262,8 @@ namespace System.Runtime.InteropServices
         )]
         int UnsafeNativeMethods.IMarshal.DisconnectObject(int dwReserved)
         {
-            // this should never be called on this interface, but on the standard one handed back by the previous calls.
+            // this should never be called on this interface, but on the standard one handed back by the
+            // previous calls.
             Debug.Fail("IMarshal::DisconnectObject should not be called.");
             return NativeMethods.E_NOTIMPL;
         }

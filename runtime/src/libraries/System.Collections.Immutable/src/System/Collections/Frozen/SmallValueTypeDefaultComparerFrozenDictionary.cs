@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.Frozen
 {
-    /// <summary>Provides a frozen dictionary to use when the key is a value type, the default comparer is used, and the item count is small.</summary>
+    /// <summary>Provides a frozen dictionary to use when the key is a value type, the default comparer
+    // is used, and the item count is small.</summary>
     internal sealed class SmallValueTypeDefaultComparerFrozenDictionary<TKey, TValue>
         : FrozenDictionary<TKey, TValue>
         where TKey : notnull

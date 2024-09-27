@@ -42,7 +42,8 @@ public class AccessDeniedContext : HandleRequestContext<RemoteAuthenticationOpti
 
     /// <summary>
     /// Gets or sets the parameter name that will be used to flow the return URL.
-    /// By default, this property is set to <see cref="RemoteAuthenticationOptions.ReturnUrlParameter"/>.
+    /// By default, this property is set to <see
+    // cref="RemoteAuthenticationOptions.ReturnUrlParameter"/>.
     /// </summary>
     public string ReturnUrlParameter { get; set; } = default!;
 }

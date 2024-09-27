@@ -21,9 +21,9 @@ namespace System.Threading
     [System.Runtime.InteropServices.ComVisible(true)]
     public enum ApartmentState
     {
-        /*=========================================================================
-        ** Constants for thread apartment states.
-        =========================================================================*/
+/*=========================================================================
+** Constants for thread apartment states.
+=========================================================================*/
         STA = 0,
         MTA = 1,
         Unknown = 2,

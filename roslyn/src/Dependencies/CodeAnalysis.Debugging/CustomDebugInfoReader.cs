@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         }
 
         /// <summary>
-        /// After the global header (see <see cref="ReadGlobalHeader"/> comes list of custom debug info record.
+        /// After the global header (see <see cref="ReadGlobalHeader"/> comes list of custom debug info
+        // record.
         /// Each record begins with a standard header.
         /// </summary>
         private static void ReadRecordHeader(
@@ -173,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// info of another method (specified by token).
         /// </summary>
         /// <remarks>
-        /// Appears when multiple method would otherwise have identical using records (see <see cref="DecodeUsingRecord"/>).
+        /// Appears when multiple method would otherwise have identical using records (see <see
+        // cref="DecodeUsingRecord"/>).
         /// Exposed for <see cref="T:Roslyn.Test.PdbUtilities.PdbToXmlConverter"/>.
         /// </remarks>
         public static int DecodeForwardRecord(ImmutableArray<byte> bytes)
@@ -264,8 +266,10 @@ namespace Microsoft.CodeAnalysis.Debugging
         }
 
         /// <summary>
-        /// Does for locals what System.Runtime.CompilerServices.DynamicAttribute does for parameters, return types, and fields.
-        /// In particular, indicates which occurrences of <see cref="object"/> in the signature are really dynamic.
+        /// Does for locals what System.Runtime.CompilerServices.DynamicAttribute does for parameters,
+        // return types, and fields.
+        /// In particular, indicates which occurrences of <see cref="object"/> in the signature are really
+        // dynamic.
         /// </summary>
         /// <remarks>
         /// Appears when there are dynamic locals.
@@ -774,7 +778,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// Parse a string representing a VB import statement.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="import"/> is null.</exception>
-        /// <exception cref="ArgumentException">Format of <paramref name="import"/> is not valid.</exception>
+        /// <exception cref="ArgumentException">Format of <paramref name="import"/> is not
+        // valid.</exception>
         public static bool TryParseVisualBasicImportString(
             string import,
             out string alias,
@@ -807,11 +812,13 @@ namespace Microsoft.CodeAnalysis.Debugging
             switch (import[pos])
             {
                 case '&':
-                // Indicates the presence of embedded PIA types from a given assembly.  No longer required (as of Roslyn).
+                // Indicates the presence of embedded PIA types from a given assembly.  No longer required (as of
+                // Roslyn).
                 case '$':
                 case '#':
                     // From ProcedureContext::LoadImportsAndDefaultNamespaceNormal:
-                    //   "Module Imports and extension types are no longer needed since we are not doing custom name lookup"
+                    //   "Module Imports and extension types are no longer needed since we are not doing custom name
+                    // lookup"
                     alias = null;
                     target = import;
                     kind = ImportTargetKind.Defunct;

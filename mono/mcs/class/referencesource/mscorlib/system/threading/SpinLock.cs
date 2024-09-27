@@ -7,9 +7,12 @@
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
 // SpinLock.cs
-// A spin lock is a mutual exclusion lock primitive where a thread trying to acquire the lock waits in a loop ("spins")
-// repeatedly checking until the lock becomes available. As the thread remains active performing a non-useful task,
-// the use of such a lock is a kind of busy waiting and consumes CPU resources without performing real work.
+// A spin lock is a mutual exclusion lock primitive where a thread trying to acquire the lock waits
+// in a loop ("spins")
+// repeatedly checking until the lock becomes available. As the thread remains active performing a
+// non-useful task,
+// the use of such a lock is a kind of busy waiting and consumes CPU resources without performing
+// real work.
 //
 // <OWNER>Microsoft</OWNER>
 //
@@ -25,27 +28,36 @@ using System.Security.Permissions;
 namespace System.Threading
 {
     /// <summary>
-    /// Provides a mutual exclusion lock primitive where a thread trying to acquire the lock waits in a loop
+    /// Provides a mutual exclusion lock primitive where a thread trying to acquire the lock waits in a
+    // loop
     /// repeatedly checking until the lock becomes available.
     /// </summary>
     /// <remarks>
     /// <para>
     /// Spin locks can be used for leaf-level locks where the object allocation implied by using a <see
     /// cref="System.Threading.Monitor"/>, in size or due to garbage collection pressure, is overly
-    /// expensive. Avoiding blocking is another reason that a spin lock can be useful, however if you expect
+    /// expensive. Avoiding blocking is another reason that a spin lock can be useful, however if you
+    // expect
     /// any significant amount of blocking, you are probably best not using spin locks due to excessive
-    /// spinning. Spinning can be beneficial when locks are fine grained and large in number (for example, a
+    /// spinning. Spinning can be beneficial when locks are fine grained and large in number (for
+    // example, a
     /// lock per node in a linked list) as well as when lock hold times are always extremely short. In
     /// general, while holding a spin lock, one should avoid blocking, calling anything that itself may
-    /// block, holding more than one spin lock at once, making dynamically dispatched calls (interface and
-    /// virtuals), making statically dispatched calls into any code one doesn't own, or allocating memory.
+    /// block, holding more than one spin lock at once, making dynamically dispatched calls (interface
+    // and
+    /// virtuals), making statically dispatched calls into any code one doesn't own, or allocating
+    // memory.
     /// </para>
     /// <para>
-    /// <see cref="SpinLock"/> should only be used when it's been determined that doing so will improve an
-    /// application's performance. It's also important to note that <see cref="SpinLock"/> is a value type,
+    /// <see cref="SpinLock"/> should only be used when it's been determined that doing so will improve
+    // an
+    /// application's performance. It's also important to note that <see cref="SpinLock"/> is a value
+    // type,
     /// for performance reasons. As such, one must be very careful not to accidentally copy a SpinLock
-    /// instance, as the two instances (the original and the copy) would then be completely independent of
-    /// one another, which would likely lead to erroneous behavior of the application. If a SpinLock instance
+    /// instance, as the two instances (the original and the copy) would then be completely independent
+    // of
+    /// one another, which would likely lead to erroneous behavior of the application. If a SpinLock
+    // instance
     /// must be passed around, it should be passed by reference rather than by value.
     /// </para>
     /// <para>
@@ -75,7 +87,8 @@ namespace System.Threading
         private volatile int m_owner;
 
         // The multiplier factor for the each spinning iteration
-        // This number has been chosen after trying different numbers on different CPUs (4, 8 and 16 ) and this provided the best results
+        // This number has been chosen after trying different numbers on different CPUs (4, 8 and 16 ) and
+        // this provided the best results
         private const int SPINNING_FACTOR = 100;
 
         // After how many yields, call Sleep(1)
@@ -96,7 +109,8 @@ namespace System.Threading
         // Waiters mask if the thread tracking is disabled
         private const int WAITERS_MASK = ~(LOCK_ID_DISABLE_MASK | 1); //0111 1111 1111 1111 1111 1111 1111 1110
 
-        // The Thread tacking is disabled and the lock bit is set, used in Enter fast path to make sure the id is disabled and lock is available
+        // The Thread tacking is disabled and the lock bit is set, used in Enter fast path to make sure the
+        // id is disabled and lock is available
         private const int ID_DISABLED_AND_ANONYMOUS_OWNED = unchecked((int)0x80000001); //1000 0000 0000 0000 0000 0000 0000 0001
 
         // If the thread is unowned if:
@@ -105,7 +119,8 @@ namespace System.Threading
         private const int LOCK_UNOWNED = 0;
 
         // The maximum number of waiters (only used if the thread tracking is disabled)
-        // The actual maximum waiters count is this number divided by two because each waiter increments the waiters count by 2
+        // The actual maximum waiters count is this number divided by two because each waiter increments the
+        // waiters count by 2
         // The waiters count is calculated by m_owner & WAITERS_MASK 01111....110
         private static int MAXIMUM_WAITERS = WAITERS_MASK;
 
@@ -160,7 +175,8 @@ namespace System.Threading
 #if !FEATURE_CORECLR
             Thread.BeginCriticalRegion();
 #endif
-            //Try to keep the code and branching in this method as small as possible in order to inline the method
+            //Try to keep the code and branching in this method as small as possible in order to inline the
+            // method
             int observedOwner = m_owner;
             if (
                 lockTaken
@@ -193,7 +209,8 @@ namespace System.Threading
         /// Thread ownership tracking is enabled, and the current thread has already acquired this lock.
         /// </exception>
         /// <exception cref="T:System.ArgumentException">
-        /// The <paramref name="lockTaken"/> argument must be initialized to false prior to calling TryEnter.
+        /// The <paramref name="lockTaken"/> argument must be initialized to false prior to calling
+        // TryEnter.
         /// </exception>
         public void TryEnter(ref bool lockTaken)
         {
@@ -212,7 +229,8 @@ namespace System.Threading
         /// has expired.
         /// </remarks>
         /// <param name="timeout">A <see cref="System.TimeSpan"/> that represents the number of milliseconds
-        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait indefinitely.
+        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait
+        // indefinitely.
         /// </param>
         /// <param name="lockTaken">True if the lock is acquired; otherwise, false. <paramref
         /// name="lockTaken"/> must be initialized to false prior to calling this method.</param>
@@ -220,7 +238,8 @@ namespace System.Threading
         /// Thread ownership tracking is enabled, and the current thread has already acquired this lock.
         /// </exception>
         /// <exception cref="T:System.ArgumentException">
-        /// The <paramref name="lockTaken"/> argument must be initialized to false prior to calling TryEnter.
+        /// The <paramref name="lockTaken"/> argument must be initialized to false prior to calling
+        // TryEnter.
         /// </exception>
         /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="timeout"/> is a negative
         /// number other than -1 milliseconds, which represents an infinite time-out -or- timeout is greater
@@ -261,7 +280,8 @@ namespace System.Threading
         /// Thread ownership tracking is enabled, and the current thread has already acquired this lock.
         /// </exception>
         /// <exception cref="T:System.ArgumentException">
-        /// The <paramref name="lockTaken"/> argument must be initialized to false prior to calling TryEnter.
+        /// The <paramref name="lockTaken"/> argument must be initialized to false prior to calling
+        // TryEnter.
         /// </exception>
         /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is
         /// a negative number other than -1, which represents an infinite time-out.</exception>
@@ -291,7 +311,8 @@ namespace System.Threading
 
         /// <summary>
         /// Try acquire the lock with long path, this is usually called after the first path in Enter and
-        /// TryEnter failed The reason for short path is to make it inline in the run time which improves the
+        /// TryEnter failed The reason for short path is to make it inline in the run time which improves
+        // the
         /// performance. This method assumed that the parameter are validated in Enter ir TryENter method
         /// </summary>
         /// <param name="millisecondsTimeout">The timeout milliseconds</param>
@@ -342,13 +363,16 @@ namespace System.Threading
 
             // then thread tracking is disabled
             // In this case there are three ways to acquire the lock
-            // 1- the first way the thread either tries to get the lock if it's free or updates the waiters, if the turn >= the processors count then go to 3 else go to 2
-            // 2- In this step the waiter threads spins and tries to acquire the lock, the number of spin iterations and spin count is dependent on the thread turn
+            // 1- the first way the thread either tries to get the lock if it's free or updates the waiters, if
+            // the turn >= the processors count then go to 3 else go to 2
+            // 2- In this step the waiter threads spins and tries to acquire the lock, the number of spin
+            // iterations and spin count is dependent on the thread turn
             // the late the thread arrives the more it spins and less frequent it check the lock avilability
             // Also the spins count is increases each iteration
             // If the spins iterations finished and failed to acquire the lock, go to step 3
             // 3- This is the yielding step, there are two ways of yielding Thread.Yield and Sleep(1)
-            // If the timeout is expired in after step 1, we need to decrement the waiters count before returning
+            // If the timeout is expired in after step 1, we need to decrement the waiters count before
+            // returning
 
             int observedOwner;
             int turn = int.MaxValue;
@@ -661,7 +685,8 @@ namespace System.Threading
         /// </summary>
         /// <remarks>
         /// The default overload of <see cref="Exit()"/> provides the same behavior as if calling <see
-        /// cref="Exit(Boolean)"/> using true as the argument, but Exit() could be slightly faster than Exit(true).
+        /// cref="Exit(Boolean)"/> using true as the argument, but Exit() could be slightly faster than
+        // Exit(true).
         /// </remarks>
         /// <exception cref="SynchronizationLockException">
         /// Thread ownership tracking is enabled, and the current thread is not the owner of this lock.
@@ -699,9 +724,12 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public void Exit(bool useMemoryBarrier)
         {
-            // This is the fast path for the thread tracking is diabled and not to use memory barrier, otherwise go to the slow path
-            // The reason not to add else statement if the usememorybarrier is that it will add more barnching in the code and will prevent
-            // method inlining, so this is optimized for useMemoryBarrier=false and Exit() overload optimized for useMemoryBarrier=true
+            // This is the fast path for the thread tracking is diabled and not to use memory barrier, otherwise
+            // go to the slow path
+            // The reason not to add else statement if the usememorybarrier is that it will add more barnching
+            // in the code and will prevent
+            // method inlining, so this is optimized for useMemoryBarrier=false and Exit() overload optimized
+            // for useMemoryBarrier=true
             if ((m_owner & LOCK_ID_DISABLE_MASK) != 0 && !useMemoryBarrier)
             {
                 int tmpOwner = m_owner;
@@ -773,7 +801,8 @@ namespace System.Threading
         /// Gets whether the lock is held by the current thread.
         /// </summary>
         /// <remarks>
-        /// If the lock was initialized to track owner threads, this will return whether the lock is acquired
+        /// If the lock was initialized to track owner threads, this will return whether the lock is
+        // acquired
         /// by the current thread. It is invalid to use this property when the lock was initialized to not
         /// track thread ownership.
         /// </remarks>

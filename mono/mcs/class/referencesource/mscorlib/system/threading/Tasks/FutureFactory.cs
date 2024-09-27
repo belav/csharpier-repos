@@ -28,11 +28,13 @@ namespace System.Threading.Tasks
     /// <see cref="T:System.Threading.Tasks.Task{TResult}">Task{TResult}</see> objects.
     /// </summary>
     /// <typeparam name="TResult">The type of the results that are available though
-    /// the <see cref="T:System.Threading.Tasks.Task{TResult}">Task{TResult}</see> objects that are associated with
+    /// the <see cref="T:System.Threading.Tasks.Task{TResult}">Task{TResult}</see> objects that are
+    // associated with
     /// the methods in this class.</typeparam>
     /// <remarks>
     /// <para>
-    /// There are many common patterns for which tasks are relevant. The <see cref="TaskFactory{TResult}"/>
+    /// There are many common patterns for which tasks are relevant. The <see
+    // cref="TaskFactory{TResult}"/>
     /// class encodes some of these patterns into methods that pick up default settings, which are
     /// configurable through its constructors.
     /// </para>
@@ -79,13 +81,14 @@ namespace System.Threading.Tasks
                 return TaskScheduler.Default;
         }
 
-        /* Constructors */
+/* Constructors */
 
         /// <summary>
         /// Initializes a <see cref="TaskFactory{TResult}"/> instance with the default configuration.
         /// </summary>
         /// <remarks>
-        /// This constructor creates a <see cref="TaskFactory{TResult}"/> instance with a default configuration. The
+        /// This constructor creates a <see cref="TaskFactory{TResult}"/> instance with a default
+        // configuration. The
         /// <see cref="TaskCreationOptions"/> property is initialized to
         /// <see cref="System.Threading.Tasks.TaskCreationOptions.None">TaskCreationOptions.None</see>, the
         /// <see cref="TaskContinuationOptions"/> property is initialized to <see
@@ -105,11 +108,14 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Initializes a <see cref="TaskFactory{TResult}"/> instance with the default configuration.
         /// </summary>
-        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be assigned
-        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is explicitly specified
+        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be
+        // assigned
+        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is
+        // explicitly specified
         /// while calling the factory methods.</param>
         /// <remarks>
-        /// This constructor creates a <see cref="TaskFactory{TResult}"/> instance with a default configuration. The
+        /// This constructor creates a <see cref="TaskFactory{TResult}"/> instance with a default
+        // configuration. The
         /// <see cref="TaskCreationOptions"/> property is initialized to
         /// <see cref="System.Threading.Tasks.TaskCreationOptions.None">TaskCreationOptions.None</see>, the
         /// <see cref="TaskContinuationOptions"/> property is initialized to <see
@@ -127,7 +133,8 @@ namespace System.Threading.Tasks
         /// </summary>
         /// <param name="scheduler">
         /// The <see cref="System.Threading.Tasks.TaskScheduler">
-        /// TaskScheduler</see> to use to schedule any tasks created with this TaskFactory{TResult}. A null value
+        /// TaskScheduler</see> to use to schedule any tasks created with this TaskFactory{TResult}. A null
+        // value
         /// indicates that the current TaskScheduler should be used.
         /// </param>
         /// <remarks>
@@ -158,7 +165,8 @@ namespace System.Threading.Tasks
         /// </param>
         /// <param name="continuationOptions">
         /// The default <see cref="System.Threading.Tasks.TaskContinuationOptions">
-        /// TaskContinuationOptions</see> to use when creating continuation tasks with this TaskFactory{TResult}.
+        /// TaskContinuationOptions</see> to use when creating continuation tasks with this
+        // TaskFactory{TResult}.
         /// </param>
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         /// The exception that is thrown when the
@@ -184,8 +192,10 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Initializes a <see cref="TaskFactory{TResult}"/> instance with the specified configuration.
         /// </summary>
-        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be assigned
-        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is explicitly specified
+        /// <param name="cancellationToken">The default <see cref="CancellationToken"/> that will be
+        // assigned
+        /// to tasks created by this <see cref="TaskFactory"/> unless another CancellationToken is
+        // explicitly specified
         /// while calling the factory methods.</param>
         /// <param name="creationOptions">
         /// The default <see cref="System.Threading.Tasks.TaskCreationOptions">
@@ -193,11 +203,13 @@ namespace System.Threading.Tasks
         /// </param>
         /// <param name="continuationOptions">
         /// The default <see cref="System.Threading.Tasks.TaskContinuationOptions">
-        /// TaskContinuationOptions</see> to use when creating continuation tasks with this TaskFactory{TResult}.
+        /// TaskContinuationOptions</see> to use when creating continuation tasks with this
+        // TaskFactory{TResult}.
         /// </param>
         /// <param name="scheduler">
         /// The default <see cref="System.Threading.Tasks.TaskScheduler">
-        /// TaskScheduler</see> to use to schedule any Tasks created with this TaskFactory{TResult}. A null value
+        /// TaskScheduler</see> to use to schedule any Tasks created with this TaskFactory{TResult}. A null
+        // value
         /// indicates that TaskScheduler.Current should be used.
         /// </param>
         /// <exception cref="T:System.ArgumentOutOfRangeException">
@@ -232,7 +244,7 @@ namespace System.Threading.Tasks
             m_defaultContinuationOptions = continuationOptions;
         }
 
-        /* Properties */
+/* Properties */
 
         /// <summary>
         /// Gets the default <see cref="System.Threading.CancellationToken">CancellationToken</see> of this
@@ -268,7 +280,8 @@ namespace System.Threading.Tasks
         /// </see> value of this TaskFactory{TResult}.
         /// </summary>
         /// <remarks>
-        /// This property returns the default creation options for this factory.  They will be used to create all
+        /// This property returns the default creation options for this factory.  They will be used to
+        // create all
         /// tasks unless other options are explicitly specified during calls to this factory's methods.
         /// </remarks>
         public TaskCreationOptions CreationOptions
@@ -281,20 +294,23 @@ namespace System.Threading.Tasks
         /// </see> value of this TaskFactory{TResult}.
         /// </summary>
         /// <remarks>
-        /// This property returns the default continuation options for this factory.  They will be used to create
-        /// all continuation tasks unless other options are explicitly specified during calls to this factory's methods.
+        /// This property returns the default continuation options for this factory.  They will be used to
+        // create
+        /// all continuation tasks unless other options are explicitly specified during calls to this
+        // factory's methods.
         /// </remarks>
         public TaskContinuationOptions ContinuationOptions
         {
             get { return m_defaultContinuationOptions; }
         }
 
-        /* StartNew */
+/* StartNew */
 
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
         /// <returns>The started <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the <paramref
@@ -326,14 +342,17 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <returns>The started <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the <paramref
         /// name="function"/>
         /// argument is null.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -362,7 +381,8 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
@@ -400,12 +420,14 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
         /// <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="scheduler">The <see
         /// cref="T:System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
         /// that is used to schedule the created <see cref="T:System.Threading.Tasks.Task{TResult}">
@@ -420,7 +442,8 @@ namespace System.Threading.Tasks
         /// <exception cref="T:System.ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="creationOptions"/> argument specifies an invalid TaskCreationOptions
         /// value.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -453,7 +476,8 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
@@ -488,16 +512,19 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <returns>The started <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the <paramref
         /// name="function"/>
         /// argument is null.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -531,7 +558,8 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
@@ -576,11 +604,13 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Creates and starts a <see cref="T:System.Threading.Tasks.Task{TResult}"/>.
         /// </summary>
-        /// <param name="function">A function delegate that returns the future result to be available through
+        /// <param name="function">A function delegate that returns the future result to be available
+        // through
         /// the <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
         /// <param name="state">An object containing data to be used by the <paramref name="function"/>
         /// delegate.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the new task.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that will be assigned to the
+        // new task.</param>
         /// <param name="creationOptions">A TaskCreationOptions value that controls the behavior of the
         /// created
         /// <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
@@ -598,7 +628,8 @@ namespace System.Threading.Tasks
         /// <exception cref="T:System.ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="creationOptions"/> argument specifies an invalid TaskCreationOptions
         /// value.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
@@ -634,7 +665,8 @@ namespace System.Threading.Tasks
         // APM Factory methods
         //
 
-        // Common core logic for FromAsync calls.  This minimizes the chance of "drift" between overload implementations.
+        // Common core logic for FromAsync calls.  This minimizes the chance of "drift" between overload
+        // implementations.
         private static void FromAsyncCoreLogic(
             IAsyncResult iar,
             Func<IAsyncResult, TResult> endFunction,
@@ -821,7 +853,8 @@ namespace System.Threading.Tasks
         }
 
         // internal overload that supports StackCrawlMark
-        // We also need this logic broken out into a static method so that the similar TaskFactory.FromAsync()
+        // We also need this logic broken out into a static method so that the similar
+        // TaskFactory.FromAsync()
         // method can access the logic w/o declaring a TaskFactory<TResult> instance.
         internal static Task<TResult> FromAsyncImpl(
             IAsyncResult asyncResult,
@@ -936,7 +969,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <param name="beginMethod">The delegate that begins the asynchronous operation.</param>
@@ -962,7 +996,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <param name="beginMethod">The delegate that begins the asynchronous operation.</param>
@@ -1035,7 +1070,8 @@ namespace System.Threading.Tasks
             {
                 // Do NOT change the code below.
                 // 4.5 relies on the fact that IAsyncResult CompletedSynchronously flag needs to be set correctly,
-                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any other
+                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any
+                // other
                 // change will likely brake 4.5 behavior so if possible never touch this code again.
                 if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5)
                 {
@@ -1116,7 +1152,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <typeparam name="TArg1">The type of the first argument passed to the <paramref
@@ -1154,7 +1191,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <typeparam name="TArg1">The type of the first argument passed to the <paramref
@@ -1233,7 +1271,8 @@ namespace System.Threading.Tasks
             {
                 // Do NOT change the code below.
                 // 4.5 relies on the fact that IAsyncResult CompletedSynchronously flag needs to be set correctly,
-                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any other
+                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any
+                // other
                 // change will likely brake 4.5 behavior so if possible never touch this code again.
                 if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5)
                 {
@@ -1315,7 +1354,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <typeparam name="TArg1">The type of the first argument passed to the <paramref
@@ -1359,7 +1399,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <typeparam name="TArg1">The type of the first argument passed to the <paramref
@@ -1444,7 +1485,8 @@ namespace System.Threading.Tasks
             {
                 // Do NOT change the code below.
                 // 4.5 relies on the fact that IAsyncResult CompletedSynchronously flag needs to be set correctly,
-                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any other
+                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any
+                // other
                 // change will likely brake 4.5 behavior so if possible never touch this code again.
                 if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5)
                 {
@@ -1528,7 +1570,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <typeparam name="TArg1">The type of the first argument passed to the <paramref
@@ -1578,7 +1621,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair of
+        /// Creates a <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see> that represents a pair
+        // of
         /// begin and end methods that conform to the Asynchronous Programming Model pattern.
         /// </summary>
         /// <typeparam name="TArg1">The type of the first argument passed to the <paramref
@@ -1678,7 +1722,8 @@ namespace System.Threading.Tasks
             {
                 // Do NOT change the code below.
                 // 4.5 relies on the fact that IAsyncResult CompletedSynchronously flag needs to be set correctly,
-                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any other
+                // sadly this has not been the case that is why the behaviour from 4.5 broke 4.0 buggy apps. Any
+                // other
                 // change will likely brake 4.5 behavior so if possible never touch this code again.
                 if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5)
                 {
@@ -1768,7 +1813,8 @@ namespace System.Threading.Tasks
         /// APM implementations with minimal overhead, avoiding unnecessary closure
         /// and delegate allocations.
         /// </summary>
-        /// <typeparam name="TInstance">Specifies the type of the instance on which the APM implementation lives.</typeparam>
+        /// <typeparam name="TInstance">Specifies the type of the instance on which the APM implementation
+        // lives.</typeparam>
         /// <typeparam name="TArg1">Specifies the type containing the arguments.</typeparam>
         /// <param name="thisRef">The instance from which the begin and end methods are invoked.</param>
         /// <param name="beginMethod">The begin method.</param>
@@ -1800,7 +1846,8 @@ namespace System.Threading.Tasks
                 promise
             );
 
-            // If the IAsyncResult completed asynchronously, completing the promise will be handled by the callback.
+            // If the IAsyncResult completed asynchronously, completing the promise will be handled by the
+            // callback.
             // If it completed synchronously, we'll handle that here.
             if (asyncResult != null && asyncResult.CompletedSynchronously)
             {
@@ -1819,7 +1866,8 @@ namespace System.Threading.Tasks
         /// A specialized task used by FromAsyncTrim.  Stores relevant information as instance
         /// state so that we can avoid unnecessary closure/delegate allocations.
         /// </summary>
-        /// <typeparam name="TInstance">Specifies the type of the instance on which the APM implementation lives.</typeparam>
+        /// <typeparam name="TInstance">Specifies the type of the instance on which the APM implementation
+        // lives.</typeparam>
         private sealed class FromAsyncTrimPromise<TInstance> : Task<TResult>
             where TInstance : class
         {
@@ -1834,7 +1882,8 @@ namespace System.Threading.Tasks
             private Func<TInstance, IAsyncResult, TResult> m_endMethod;
 
             /// <summary>Initializes the promise.</summary>
-            /// <param name="thisRef">A reference to the object on which the begin/end methods are invoked.</param>
+            /// <param name="thisRef">A reference to the object on which the begin/end methods are
+            // invoked.</param>
             /// <param name="endMethod">The end method.</param>
             internal FromAsyncTrimPromise(
                 TInstance thisRef,
@@ -1869,7 +1918,8 @@ namespace System.Threading.Tasks
                         "asyncResult"
                     );
 
-                // Grab the relevant state and then null it out so that the task doesn't hold onto the state unnecessarily
+                // Grab the relevant state and then null it out so that the task doesn't hold onto the state
+                // unnecessarily
                 var thisRef = promise.m_thisRef;
                 var endMethod = promise.m_endMethod;
                 promise.m_thisRef = default(TInstance);
@@ -1972,7 +2022,8 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in
         /// the <paramref name="tasks"/> array have completed.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2010,9 +2061,11 @@ namespace System.Threading.Tasks
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in
         /// the <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2021,7 +2074,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="T:System.ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2052,12 +2106,15 @@ namespace System.Threading.Tasks
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
         /// <param name="tasks">The array of tasks from which to continue.</param>
-        /// <param name="continuationFunction">The function delegate to execute when all tasks in the <paramref
+        /// <param name="continuationFunction">The function delegate to execute when all tasks in the
+        // <paramref
         /// name="tasks"/> array have completed.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2070,8 +2127,10 @@ namespace System.Threading.Tasks
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2102,17 +2161,21 @@ namespace System.Threading.Tasks
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
         /// <param name="tasks">The array of tasks from which to continue.</param>
-        /// <param name="continuationFunction">The function delegate to execute when all tasks in the <paramref
+        /// <param name="continuationFunction">The function delegate to execute when all tasks in the
+        // <paramref
         /// name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
         /// <param name="scheduler">The <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
         /// that is used to schedule the created continuation <see
         /// cref="T:System.Threading.Tasks.Task">Task</see>.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2126,12 +2189,15 @@ namespace System.Threading.Tasks
         /// <exception cref="T:System.ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2163,7 +2229,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
@@ -2202,11 +2269,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2217,7 +2286,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="T:System.ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2247,11 +2317,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
         /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</returns>
@@ -2267,8 +2339,10 @@ namespace System.Threading.Tasks
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2298,13 +2372,16 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of a set of provided Tasks.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue.</param>
         /// <param name="continuationFunction">The function delegate to execute when all tasks in the
         /// <paramref name="tasks"/> array have completed.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
         /// <param name="scheduler">The <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
@@ -2324,12 +2401,15 @@ namespace System.Threading.Tasks
         /// <exception cref="T:System.ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2517,9 +2597,11 @@ namespace System.Threading.Tasks
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
-        /// <param name="continuationFunction">The function delegate to execute when one task in the <paramref
+        /// <param name="continuationFunction">The function delegate to execute when one task in the
+        // <paramref
         /// name="tasks"/> array completes.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2552,11 +2634,14 @@ namespace System.Threading.Tasks
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
-        /// <param name="continuationFunction">The function delegate to execute when one task in the <paramref
+        /// <param name="continuationFunction">The function delegate to execute when one task in the
+        // <paramref
         /// name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2565,7 +2650,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="T:System.ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2596,12 +2682,15 @@ namespace System.Threading.Tasks
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
-        /// <param name="continuationFunction">The function delegate to execute when one task in the <paramref
+        /// <param name="continuationFunction">The function delegate to execute when one task in the
+        // <paramref
         /// name="tasks"/> array completes.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2614,8 +2703,10 @@ namespace System.Threading.Tasks
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2646,17 +2737,21 @@ namespace System.Threading.Tasks
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
-        /// <param name="continuationFunction">The function delegate to execute when one task in the <paramref
+        /// <param name="continuationFunction">The function delegate to execute when one task in the
+        // <paramref
         /// name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
         /// <param name="scheduler">The <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
         /// that is used to schedule the created continuation <see
         /// cref="T:System.Threading.Tasks.Task">Task</see>.</param>
-        /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
+        /// <returns>The new continuation <see
+        // cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is null.</exception>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2670,12 +2765,15 @@ namespace System.Threading.Tasks
         /// <exception cref="T:System.ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2707,7 +2805,8 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
@@ -2746,11 +2845,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
         /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</returns>
         /// <exception cref="T:System.ArgumentNullException">The exception that is thrown when the
@@ -2761,7 +2862,8 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="T:System.ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2791,11 +2893,13 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
         /// <returns>The new continuation <see cref="T:System.Threading.Tasks.Task{TResult}"/>.</returns>
@@ -2811,8 +2915,10 @@ namespace System.Threading.Tasks
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -2842,13 +2948,16 @@ namespace System.Threading.Tasks
         /// Creates a continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>
         /// that will be started upon the completion of any Task in the provided set.
         /// </summary>
-        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref name="tasks"/>.</typeparam>
+        /// <typeparam name="TAntecedentResult">The type of the result of the antecedent <paramref
+        // name="tasks"/>.</typeparam>
         /// <param name="tasks">The array of tasks from which to continue when one task completes.</param>
         /// <param name="continuationFunction">The function delegate to execute when one task in the
         /// <paramref name="tasks"/> array completes.</param>
-        /// <param name="cancellationToken">The <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <param name="cancellationToken">The <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// that will be assigned to the new continuation task.</param>
-        /// <param name="continuationOptions">The <see cref="System.Threading.Tasks.TaskContinuationOptions">
+        /// <param name="continuationOptions">The <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">
         /// TaskContinuationOptions</see> value that controls the behavior of
         /// the created continuation <see cref="T:System.Threading.Tasks.Task{TResult}">Task</see>.</param>
         /// <param name="scheduler">The <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
@@ -2868,12 +2977,15 @@ namespace System.Threading.Tasks
         /// <exception cref="T:System.ArgumentOutOfRangeException">The exception that is thrown when the
         /// <paramref name="continuationOptions"/> argument specifies an invalid TaskContinuationOptions
         /// value.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The provided <see cref="System.Threading.CancellationToken">CancellationToken</see>
+        /// <exception cref="T:System.ObjectDisposedException">The provided <see
+        // cref="System.Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
         /// <remarks>
-        /// The NotOn* and OnlyOn* <see cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
-        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states a continuation
+        /// The NotOn* and OnlyOn* <see
+        // cref="System.Threading.Tasks.TaskContinuationOptions">TaskContinuationOptions</see>,
+        /// which constrain for which <see cref="System.Threading.Tasks.TaskStatus">TaskStatus</see> states
+        // a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var have to be marked non-inlineable
@@ -3057,7 +3169,8 @@ namespace System.Threading.Tasks
     // TAntecedentResult and TResult.  The GenericDelegateCache serves as a cache for those delegates.
     internal static class GenericDelegateCache<TAntecedentResult, TResult>
     {
-        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(non-null continuationFunction)
+        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(non-null
+        // continuationFunction)
         internal static Func<Task<Task>, object, TResult> CWAnyFuncDelegate = (
             Task<Task> wrappedWinner,
             object state
@@ -3068,7 +3181,8 @@ namespace System.Threading.Tasks
             return func(arg);
         };
 
-        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(non-null continuationAction)
+        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAnyImpl<TAntecedentResult>(non-null
+        // continuationAction)
         internal static Func<Task<Task>, object, TResult> CWAnyActionDelegate = (
             Task<Task> wrappedWinner,
             object state
@@ -3080,7 +3194,8 @@ namespace System.Threading.Tasks
             return default(TResult);
         };
 
-        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(non-null continuationFunction)
+        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(non-null
+        // continuationFunction)
         internal static Func<Task<Task<TAntecedentResult>[]>, object, TResult> CWAllFuncDelegate = (
             Task<Task<TAntecedentResult>[]> wrappedAntecedents,
             object state
@@ -3091,7 +3206,8 @@ namespace System.Threading.Tasks
             return func(wrappedAntecedents.Result);
         };
 
-        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(non-null continuationAction)
+        // ContinueWith delegate for TaskFactory<TResult>.ContinueWhenAllImpl<TAntecedentResult>(non-null
+        // continuationAction)
         internal static Func<Task<Task<TAntecedentResult>[]>, object, TResult> CWAllActionDelegate =
             (Task<Task<TAntecedentResult>[]> wrappedAntecedents, object state) =>
             {

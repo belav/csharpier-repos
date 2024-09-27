@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -91,7 +92,8 @@ namespace Microsoft.Web.WebPages.OAuth
             {
                 try
                 {
-                    // use temp variable to keep both out parameters consistent and only set them when the input stream is read completely
+                    // use temp variable to keep both out parameters consistent and only set them when the input stream
+                    // is read completely
                     string name = br.ReadString();
                     string userId = br.ReadString();
 

@@ -380,7 +380,8 @@ public class AuthenticationService : IAuthenticationService
 
         if (string.IsNullOrEmpty(schemes))
         {
-            // CookieAuth is the most common implementation of sign-out, but OpenIdConnect and WsFederation also support it.
+            // CookieAuth is the most common implementation of sign-out, but OpenIdConnect and WsFederation also
+            // support it.
             return new InvalidOperationException(
                 $"No sign-out authentication handlers are registered." + footer
             );
@@ -404,7 +405,8 @@ public class AuthenticationService : IAuthenticationService
 
         if (string.IsNullOrEmpty(schemes))
         {
-            // CookieAuth is the most common implementation of sign-out, but OpenIdConnect and WsFederation also support it.
+            // CookieAuth is the most common implementation of sign-out, but OpenIdConnect and WsFederation also
+            // support it.
             return new InvalidOperationException(
                 mismatchError
                     + $"Did you forget to call AddAuthentication().AddCookie(\"Cookies\") and {nameof(SignOutAsync)}(\"Cookies\",...)?"

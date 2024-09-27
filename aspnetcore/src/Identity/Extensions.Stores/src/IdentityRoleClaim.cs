@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// <summary>
 /// Represents a claim that is granted to all users within a role.
 /// </summary>
-/// <typeparam name="TKey">The type of the primary key of the role associated with this claim.</typeparam>
+/// <typeparam name="TKey">The type of the primary key of the role associated with this
+// claim.</typeparam>
 public class IdentityRoleClaim<TKey>
     where TKey : IEquatable<TKey>
 {

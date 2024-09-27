@@ -10,7 +10,8 @@ using Xunit.Sdk;
 
 namespace System.Xml.XmlWriterApiTests
 {
-    // Based on https://github.com/xunit/xunit/blob/bccfcccf26b2c63c90573fe1a17e6572882ef39c/src/xunit.core/Sdk/InlineDataDiscoverer.cs
+    // Based on
+    // https://github.com/xunit/xunit/blob/bccfcccf26b2c63c90573fe1a17e6572882ef39c/src/xunit.core/Sdk/InlineDataDiscoverer.cs
     public class XmlWriterInlineDataDiscoverer : IDataDiscoverer
     {
         public static IEnumerable<object[]> GenerateTestCases(
@@ -109,7 +110,8 @@ namespace System.Xml.XmlWriterApiTests
         }
     }
 
-    // Based on https://github.com/xunit/xunit/blob/bccfcccf26b2c63c90573fe1a17e6572882ef39c/src/xunit.core/InlineDataAttribute.cs
+    // Based on
+    // https://github.com/xunit/xunit/blob/bccfcccf26b2c63c90573fe1a17e6572882ef39c/src/xunit.core/InlineDataAttribute.cs
     [DataDiscoverer(
         "System.Xml.XmlWriterApiTests.XmlWriterInlineDataDiscoverer",
         "System.Private.Xml.Tests"

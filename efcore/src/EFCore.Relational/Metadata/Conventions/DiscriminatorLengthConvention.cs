@@ -8,11 +8,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The maximum length is set to a value large enough to cover all discriminator values in the hierarchy.
+///         The maximum length is set to a value large enough to cover all discriminator values in
+// the hierarchy.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
-///         <see href="https://aka.ms/efcore-docs-inheritance">TPH mapping of inheritance hierarchies</see> for more information
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>
+// and
+///         <see href="https://aka.ms/efcore-docs-inheritance">TPH mapping of inheritance
+// hierarchies</see> for more information
 ///         and examples.
 ///     </para>
 /// </remarks>
@@ -22,7 +25,8 @@ public class DiscriminatorLengthConvention : IModelFinalizingConvention
     ///     Creates a new instance of <see cref="DiscriminatorLengthConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public DiscriminatorLengthConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

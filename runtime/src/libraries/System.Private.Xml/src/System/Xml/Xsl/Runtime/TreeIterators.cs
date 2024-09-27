@@ -43,7 +43,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next descendant node.  Return false if there are no more descendant nodes.
+        /// Position this iterator to the next descendant node.  Return false if there are no more
+        // descendant nodes.
         /// Return true if the Current property is set to the next node in the iteration.
         /// </summary>
         public bool MoveNext()
@@ -66,7 +67,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all descendant content nodes according to XPath descendant axis rules.  Eliminate duplicates by not
+    /// Iterate over all descendant content nodes according to XPath descendant axis rules.  Eliminate
+    // duplicates by not
     /// querying over nodes that are contained in the subtree of the previous node.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -87,7 +89,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Initialize the DescendantIterator (merge multiple sets of descendant nodes in document order and remove duplicates).
+        /// Initialize the DescendantIterator (merge multiple sets of descendant nodes in document order and
+        // remove duplicates).
         /// </summary>
         public void Create(XmlNavigatorFilter filter, bool orSelf)
         {
@@ -97,9 +100,12 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next descendant node.  Return IteratorResult.NoMoreNodes if there are no more
-        /// descendant nodes.  Return IteratorResult.NeedInputNode if the next input node needs to be fetched.
-        /// Return IteratorResult.HaveCurrent if the Current property is set to the next node in the iteration.
+        /// Position this iterator to the next descendant node.  Return IteratorResult.NoMoreNodes if there
+        // are no more
+        /// descendant nodes.  Return IteratorResult.NeedInputNode if the next input node needs to be
+        // fetched.
+        /// Return IteratorResult.HaveCurrent if the Current property is set to the next node in the
+        // iteration.
         /// </summary>
         public IteratorResult MoveNext(XPathNavigator input)
         {
@@ -135,7 +141,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return the current result navigator.  This is only defined after MoveNext() has returned true or IteratorResult.HaveCurrentNode.
+        /// Return the current result navigator.  This is only defined after MoveNext() has returned true or
+        // IteratorResult.HaveCurrentNode.
         /// </summary>
         public XPathNavigator Current
         {
@@ -190,7 +197,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all ancestor nodes according to XPath ancestor axis rules, returning nodes in reverse
+    /// Iterate over all ancestor nodes according to XPath ancestor axis rules, returning nodes in
+    // reverse
     /// document order.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -247,7 +255,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all ancestor nodes according to XPath ancestor axis rules, but return the nodes in document order.
+    /// Iterate over all ancestor nodes according to XPath ancestor axis rules, but return the nodes in
+    // document order.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public struct AncestorDocOrderIterator
@@ -256,7 +265,8 @@ namespace System.Xml.Xsl.Runtime
         private XPathNavigator _navCurrent;
 
         /// <summary>
-        /// Initialize the AncestorDocOrderIterator (return ancestor nodes in document order, no possibility of duplicates).
+        /// Initialize the AncestorDocOrderIterator (return ancestor nodes in document order, no possibility
+        // of duplicates).
         /// </summary>
         public void Create(XPathNavigator context, XmlNavigatorFilter filter, bool orSelf)
         {
@@ -291,8 +301,10 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all following nodes according to XPath following axis rules.  These rules specify that
-    /// descendants are not included, even though they follow the starting node in document order.  For the
+    /// Iterate over all following nodes according to XPath following axis rules.  These rules specify
+    // that
+    /// descendants are not included, even though they follow the starting node in document order.  For
+    // the
     /// "true" following axis, see FollowingIterator.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -314,7 +326,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next following node.  Return false if there are no more following nodes.
+        /// Position this iterator to the next following node.  Return false if there are no more following
+        // nodes.
         /// Return true if the Current property is set to the next node in the iteration.
         /// </summary>
         public bool MoveNext()
@@ -340,12 +353,14 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position "nav" to the matching node which follows it in document order but is not a descendant node.
+        /// Position "nav" to the matching node which follows it in document order but is not a descendant
+        // node.
         /// Return false if this is no such matching node.
         /// </summary>
         internal static bool MoveFirst(XmlNavigatorFilter filter, XPathNavigator nav)
         {
-            // Attributes and namespace nodes include descendants of their owner element in the set of following nodes
+            // Attributes and namespace nodes include descendants of their owner element in the set of following
+            // nodes
             if (nav.NodeType == XPathNodeType.Attribute || nav.NodeType == XPathNodeType.Namespace)
             {
                 if (!nav.MoveToParent())
@@ -384,7 +399,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all following nodes according to XPath following axis rules.  Merge multiple sets of following nodes
+    /// Iterate over all following nodes according to XPath following axis rules.  Merge multiple sets
+    // of following nodes
     /// in document order and remove duplicates.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -405,7 +421,8 @@ namespace System.Xml.Xsl.Runtime
         };
 
         /// <summary>
-        /// Initialize the XPathFollowingMergeIterator (merge multiple sets of following nodes in document order and remove duplicates).
+        /// Initialize the XPathFollowingMergeIterator (merge multiple sets of following nodes in document
+        // order and remove duplicates).
         /// </summary>
         public void Create(XmlNavigatorFilter filter)
         {
@@ -449,7 +466,8 @@ namespace System.Xml.Xsl.Runtime
                     if (_navCurrent.IsDescendant(input))
                         goto case IteratorState.NeedCandidateCurrent;
 
-                    // Found node on which to perform following scan.  Now skip past all input nodes in the same document.
+                    // Found node on which to perform following scan.  Now skip past all input nodes in the same
+                    // document.
                     _state = IteratorState.HaveCurrentNeedNext;
                     goto case IteratorState.HaveCurrentNeedNext;
 
@@ -462,7 +480,8 @@ namespace System.Xml.Xsl.Runtime
                         return MoveFirst();
                     }
 
-                    // Skip input node unless it's in a different document than the node on which the following scan was performed
+                    // Skip input node unless it's in a different document than the node on which the following scan was
+                    // performed
                     if (_navCurrent.ComparePosition(input) != XmlNodeOrder.Unknown)
                         return IteratorResult.NeedInputNode;
 
@@ -479,7 +498,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return the current result navigator.  This is only defined after MoveNext() has returned true or IteratorResult.HaveCurrentNode.
+        /// Return the current result navigator.  This is only defined after MoveNext() has returned true or
+        // IteratorResult.HaveCurrentNode.
         /// </summary>
         public XPathNavigator Current
         {
@@ -487,7 +507,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Called when an attempt to move to a following node failed.  If a Next node exists, then make that the new
+        /// Called when an attempt to move to a following node failed.  If a Next node exists, then make
+        // that the new
         /// candidate current node.  Otherwise, iteration is complete.
         /// </summary>
         private IteratorResult MoveFailed()
@@ -517,7 +538,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this.navCurrent to the node which follows it in document order but is not a descendant node.
+        /// Position this.navCurrent to the node which follows it in document order but is not a descendant
+        // node.
         /// </summary>
         private IteratorResult MoveFirst()
         {
@@ -534,7 +556,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all content-typed nodes which precede the starting node in document order.  Return nodes
+    /// Iterate over all content-typed nodes which precede the starting node in document order.  Return
+    // nodes
     /// in reverse document order.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -588,8 +611,10 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in reverse
-    /// document order.  These rules specify that ancestors are not included, even though they precede the
+    /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in
+    // reverse
+    /// document order.  These rules specify that ancestors are not included, even though they precede
+    // the
     /// starting node in document order.  For the "true" preceding axis, see PrecedingIterator.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -634,7 +659,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in document order.
+    /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in
+    // document order.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public struct XPathPrecedingDocOrderIterator
@@ -644,7 +670,8 @@ namespace System.Xml.Xsl.Runtime
         private XmlNavigatorStack _navStack;
 
         /// <summary>
-        /// Initialize the XPathPrecedingDocOrderIterator (return preceding nodes in document order, no possibility of duplicates).
+        /// Initialize the XPathPrecedingDocOrderIterator (return preceding nodes in document order, no
+        // possibility of duplicates).
         /// </summary>
         public void Create(XPathNavigator input, XmlNavigatorFilter filter)
         {
@@ -655,7 +682,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next preceding node.  Return false if there are no more preceding nodes.
+        /// Position this iterator to the next preceding node.  Return false if there are no more preceding
+        // nodes.
         /// Return true if the Current property is set to the next node in the iteration.
         /// </summary>
         public bool MoveNext()
@@ -691,7 +719,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Push all ancestors of this.navCurrent onto a stack.  The set of preceding nodes should not contain any of these
+        /// Push all ancestors of this.navCurrent onto a stack.  The set of preceding nodes should not
+        // contain any of these
         /// ancestors.
         /// </summary>
         private void PushAncestors()
@@ -708,8 +737,10 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all preceding nodes according to XPath preceding axis rules, except that nodes are always
-    /// returned in document order.  Merge multiple sets of preceding nodes in document order and remove duplicates.
+    /// Iterate over all preceding nodes according to XPath preceding axis rules, except that nodes are
+    // always
+    /// returned in document order.  Merge multiple sets of preceding nodes in document order and remove
+    // duplicates.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public struct XPathPrecedingMergeIterator
@@ -729,7 +760,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Initialize the XPathPrecedingMergeIterator (merge multiple sets of preceding nodes in document order and remove duplicates).
+        /// Initialize the XPathPrecedingMergeIterator (merge multiple sets of preceding nodes in document
+        // order and remove duplicates).
         /// </summary>
         public void Create(XmlNavigatorFilter filter)
         {
@@ -739,7 +771,8 @@ namespace System.Xml.Xsl.Runtime
 
         /// <summary>
         /// Position this iterator to the next preceding node in document order.  Discard all input nodes
-        /// that are followed by another input node in the same document.  This leaves one node per document from
+        /// that are followed by another input node in the same document.  This leaves one node per document
+        // from
         /// which the complete set of preceding nodes can be derived without possibility of duplicates.
         /// Return IteratorResult.NeedInputNode if the next input node needs to be fetched first.  Return
         /// IteratorResult.HaveCurrent if the Current property is set to the next node in the iteration.
@@ -756,7 +789,8 @@ namespace System.Xml.Xsl.Runtime
                     // Save input node as current node
                     _navCurrent = XmlQueryRuntime.SyncToNavigator(_navCurrent, input);
 
-                    // Scan for additional input nodes within the same document (since they are after navCurrent in docorder)
+                    // Scan for additional input nodes within the same document (since they are after navCurrent in
+                    // docorder)
                     _state = IteratorState.HaveCandidateCurrent;
                     return IteratorResult.NeedInputNode;
 
@@ -826,7 +860,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Push all ancestors of this.navCurrent onto a stack.  The set of preceding nodes should not contain any of these
+        /// Push all ancestors of this.navCurrent onto a stack.  The set of preceding nodes should not
+        // contain any of these
         /// ancestors.
         /// </summary>
         private void PushAncestors()
@@ -848,7 +883,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over these nodes in document order (filtering out those that do not match the filter test):
+    /// Iterate over these nodes in document order (filtering out those that do not match the filter
+    // test):
     ///   1. Starting node
     ///   2. All content-typed nodes which follow the starting node until the ending node is reached
     ///   3. Ending node
@@ -900,8 +936,10 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next following node.  Return false if there are no more following nodes,
-        /// or if the end node has been reached.  Return true if the Current property is set to the next node in
+        /// Position this iterator to the next following node.  Return false if there are no more following
+        // nodes,
+        /// or if the end node has been reached.  Return true if the Current property is set to the next
+        // node in
         /// the iteration.
         /// </summary>
         public bool MoveNext()

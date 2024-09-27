@@ -69,7 +69,8 @@ namespace MonoTests.System.Security.Cryptography
             );
             // after installing the WSDK - changes to the machine.config file (not documented)
             //		CreateFromName ("SHA1", "System.Security.Cryptography.SHA1Managed");
-            //		CreateFromName ("System.Security.Cryptography.SHA1", "System.Security.Cryptography.SHA1Managed");
+            //		CreateFromName ("System.Security.Cryptography.SHA1",
+            // "System.Security.Cryptography.SHA1Managed");
             CreateFromName(
                 "System.Security.Cryptography.HashAlgorithm",
                 "System.Security.Cryptography.SHA1CryptoServiceProvider"
@@ -253,7 +254,8 @@ namespace MonoTests.System.Security.Cryptography
                 "System.Security.Cryptography.Xml.XmlDsigBase64Transform"
             );
             // after installing the WSDK - changes to the machine.config file (not documented)
-            //		CreateFromName ("http://www.w3.org/TR/1999/REC-xpath-19991116", "Microsoft.WSDK.Security.XmlDsigXPathTransform");
+            //		CreateFromName ("http://www.w3.org/TR/1999/REC-xpath-19991116",
+            // "Microsoft.WSDK.Security.XmlDsigXPathTransform");
             CreateFromName(
                 "http://www.w3.org/TR/1999/REC-xpath-19991116",
                 "System.Security.Cryptography.Xml.XmlDsigXPathTransform"

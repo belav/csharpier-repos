@@ -1354,7 +1354,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             // Create a new set of input values that differs in length.
             inputNodeValue = ImmutableArray.Create(1, 4, 5, 6);
 
-            // second time through should show any repeating elements as cached and any other elements as added/removed.
+            // second time through should show any repeating elements as cached and any other elements as
+            // added/removed.
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), true);
             var table = dstBuilder.GetLatestStateTableForNode(inputNode);
 
@@ -1430,7 +1431,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             // Create a new set of input values that differs in length to force add/remove semantics.
             inputNodeValue = ImmutableArray.Create(1, 4, 5, 6);
 
-            // second time through should show any repeating elements as cached and any other elements as added/removed.
+            // second time through should show any repeating elements as cached and any other elements as
+            // added/removed.
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), true);
             var table = dstBuilder.GetLatestStateTableForNode(transformNode);
 
@@ -1487,7 +1489,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             // Create a new set of input values that differs in length to force add/remove semantics.
             inputNodeValue = ImmutableArray.Create(1, 4, 5, 6);
 
-            // second time through should show any repeating elements as cached and any other elements as added/removed.
+            // second time through should show any repeating elements as cached and any other elements as
+            // added/removed.
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), true);
             var table = dstBuilder.GetLatestStateTableForNode(combineNode);
 
@@ -1579,7 +1582,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             DriverStateTable.Builder dstBuilder = GetBuilder(DriverStateTable.Empty);
             _ = dstBuilder.GetLatestStateTableForNode(inputNode);
 
-            // second time through should show as cached, even though we supplied a comparer (comparer should only used to turn modified => cached)
+            // second time through should show as cached, even though we supplied a comparer (comparer should
+            // only used to turn modified => cached)
             dstBuilder = GetBuilder(dstBuilder.ToImmutable());
             var table = dstBuilder.GetLatestStateTableForNode(inputNode);
 
@@ -1634,7 +1638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             thirdValue = 4;
 
-            // second time through we should be able to see that the third input value was 4 when getting to the batch node through tree traversal.
+            // second time through we should be able to see that the third input value was 4 when getting to the
+            // batch node through tree traversal.
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), trackIncrementalGeneratorSteps: true);
             var table = dstBuilder.GetLatestStateTableForNode(addOneNode);
 
@@ -1671,7 +1676,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             values = ImmutableArray<int>.Empty;
 
-            // second time we'll see that the "Input" step is modified, but the outputs of the "SelectMany" step are removed.
+            // second time we'll see that the "Input" step is modified, but the outputs of the "SelectMany" step
+            // are removed.
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), trackIncrementalGeneratorSteps: true);
             var table = dstBuilder.GetLatestStateTableForNode(transformNode);
 
@@ -1715,7 +1721,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             values = ImmutableArray.Create(1, 2, 3);
 
-            // second time we'll see that the "Input" step is modified, but the outputs of the "SelectMany" step are new.
+            // second time we'll see that the "Input" step is modified, but the outputs of the "SelectMany" step
+            // are new.
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), trackIncrementalGeneratorSteps: true);
             var table = dstBuilder.GetLatestStateTableForNode(transformNode);
 

@@ -85,7 +85,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 return new TypeSystemEntityOrUnknown(type);
             }
-            // Unknown type, apply unique value, but keep the upper byte zeroed so that it can be distinguished from a token
+            // Unknown type, apply unique value, but keep the upper byte zeroed so that it can be distinguished
+            // from a token
             return new TypeSystemEntityOrUnknown(
                 System.HashCode.Combine(input) & 0x7FFFFF | 0x800000
             );
@@ -107,7 +108,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 return new TypeSystemEntityOrUnknown(method);
             }
-            // Unknown type, apply unique value, but keep the upper byte zeroed so that it can be distinguished from a token
+            // Unknown type, apply unique value, but keep the upper byte zeroed so that it can be distinguished
+            // from a token
             return new TypeSystemEntityOrUnknown(
                 System.HashCode.Combine(input) & 0x7FFFFF | 0x800000
             );
@@ -951,7 +953,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         }
 
         /// <summary>
-        /// Prints a histogram for "likelihoods" distribution for a specific likely class (e.g. most popular one)
+        /// Prints a histogram for "likelihoods" distribution for a specific likely class (e.g. most popular
+        // one)
         /// </summary>
         /// <param name="likelihoods">Array of likelihoods 0-100.0</param>
         private static void PrintLikelihoodHistogram(double[] likelihoods)
@@ -1185,7 +1188,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         return new GetLikelyClassResult { IsNull = true };
 
                     int totalCount = histogram.Sum(g => g.Count());
-                    // The number of unknown type handles matters for the likelihood, but not for the most likely class that we pick, so we can remove them now.
+                    // The number of unknown type handles matters for the likelihood, but not for the most likely class
+                    // that we pick, so we can remove them now.
                     histogram.RemoveAll(e => e.Key.IsNull || e.Key.IsUnknown);
                     if (histogram.Count == 0)
                         return new GetLikelyClassResult { IsUnknown = true };
@@ -1195,7 +1199,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     Trace.Assert(best.Key.AsType != null);
                     int likelihood = best.Count() * 100 / totalCount;
                     // The threshold is different for interfaces and classes.
-                    // A flag in the Other field of the TypeHandleHistogram*Count entry indicates which kind of call site this is.
+                    // A flag in the Other field of the TypeHandleHistogram*Count entry indicates which kind of call
+                    // site this is.
                     bool isInterface = (elem.Other & (uint)ClassProfileFlags.IsInterface) != 0;
                     int threshold = isInterface ? 25 : 30;
                     return new GetLikelyClassResult
@@ -1273,10 +1278,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             );
 
             // For SPGO we need to be able to map raw IPs back to IL offsets in methods.
-            // Normally TraceEvent facilitates this remapping automatically and discards the IL<->IP mapping table events.
-            // However, we have found TraceEvent's remapping to be imprecise (see https://github.com/microsoft/perfview/issues/1410).
+            // Normally TraceEvent facilitates this remapping automatically and discards the IL<->IP mapping
+            // table events.
+            // However, we have found TraceEvent's remapping to be imprecise (see
+            // https://github.com/microsoft/perfview/issues/1410).
             // Thus, when SPGO is requested, we need to keep these events.
-            // Note that we always request these events to be kept because if one switches back and forth between SPGO and non-SPGO,
+            // Note that we always request these events to be kept because if one switches back and forth
+            // between SPGO and non-SPGO,
             // the cached .etlx file will not update.
             using (
                 var traceLog = TraceLog.OpenOrConvert(
@@ -1560,7 +1568,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         }
                     }
 
-                    // AutomaticReferences set to false disables this error, as no more references can actually be loaded past this point and cause a problem.
+                    // AutomaticReferences set to false disables this error, as no more references can actually be
+                    // loaded past this point and cause a problem.
                     if (loadedViaReference == null && Get(_command.AutomaticReferences))
                     {
                         duplicateError = true;
@@ -1655,7 +1664,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         );
                     }
 
-                    // TODO find some way to match on MVID as only some dlls have managed pdbs, and this won't find issues with embedded pdbs
+                    // TODO find some way to match on MVID as only some dlls have managed pdbs, and this won't find
+                    // issues with embedded pdbs
                 }
 
                 if (mismatchErrors != 0)
@@ -2177,8 +2187,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     );
 
                                     LbrTraceEventData64* data = (LbrTraceEventData64*)e.DataStart;
-                                    // TODO: The process ID check is not sufficient as PIDs can be reused, so we need to use timestamps too,
-                                    // but we do not have access to PerfView functions to convert it. Hopefully TraceEvent will handle this
+                                    // TODO: The process ID check is not sufficient as PIDs can be reused, so we need to use timestamps
+                                    // too,
+                                    // but we do not have access to PerfView functions to convert it. Hopefully TraceEvent will handle
+                                    // this
                                     // for us in the future.
                                     if (data->ProcessId != p.ProcessID)
                                         continue;
@@ -2448,9 +2460,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 methodPrepareInstruction.Clear();
                 instantiationBuilder.Clear();
-                // Format is FriendlyNameOfMethod~typeIndex~ArgCount~GenericParameterCount:genericParamsSeparatedByColons~MethodName
-                // This format is not sufficient to exactly describe methods, so the runtime component may compile similar methods
-                // In the various strings \ is escaped to \\ and in the outer ~ csv the ~ character is escaped to \s. In the inner csv : is escaped to \s
+                // Format is
+                //
+                // FriendlyNameOfMethod~typeIndex~ArgCount~GenericParameterCount:genericParamsSeparatedByColons~MethodName
+                // This format is not sufficient to exactly describe methods, so the runtime component may compile
+                // similar methods
+                // In the various strings \ is escaped to \\ and in the outer ~ csv the ~ character is escaped to
+                // \s. In the inner csv : is escaped to \s
                 try
                 {
                     string timeStampAddon = "";

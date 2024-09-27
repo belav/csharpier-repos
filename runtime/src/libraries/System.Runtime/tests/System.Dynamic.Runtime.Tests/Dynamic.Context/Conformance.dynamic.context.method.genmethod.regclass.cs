@@ -151,8 +151,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             return "";
         }
 
-        //These are negative methods... you should not be able to call them with the dynamic type because the dynamic type would not satisfy the constraints
-        //you cannot call this like: Method_ReturnsUConstraint<dynamic>(d); because object does not derive from C
+        //These are negative methods... you should not be able to call them with the dynamic type because
+        // the dynamic type would not satisfy the constraints
+        //you cannot call this like: Method_ReturnsUConstraint<dynamic>(d); because object does not derive
+        // from C
         public U Method_ReturnsUNegConstraint<U>(U u)
             where U : C
         {
@@ -447,7 +449,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.regclass.regclass008.regclass008
 {
-    // <Title> Tests regular class generic method used in method body of method with conditional attribute.</Title>
+    // <Title> Tests regular class generic method used in method body of method with conditional
+    // attribute.</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>

@@ -10,7 +10,8 @@ namespace System.Text.Json
     public sealed partial class Utf8JsonWriter
     {
         /// <summary>
-        /// Writes the pre-encoded property name and <see cref="ulong"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the pre-encoded property name and <see cref="ulong"/> value (as a JSON number) as part of
+        // a name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The JSON-encoded name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -18,7 +19,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'),
+        // for example: 32767.
         /// </remarks>
         [CLSCompliant(false)]
         public void WriteNumber(JsonEncodedText propertyName, ulong value)
@@ -33,7 +35,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="ulong"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="ulong"/> value (as a JSON number) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -47,7 +50,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'),
+        // for example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         [CLSCompliant(false)]
@@ -61,7 +65,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="ulong"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="ulong"/> value (as a JSON number) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -72,7 +77,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'),
+        // for example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         [CLSCompliant(false)]
@@ -87,7 +93,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="ulong"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="ulong"/> value (as a JSON number) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="utf8PropertyName">The UTF-8 encoded name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -98,7 +105,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="ulong"/> using the default <see cref="StandardFormat"/> (that is, 'G'),
+        // for example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         [CLSCompliant(false)]
@@ -113,7 +121,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the pre-encoded property name and <see cref="uint"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the pre-encoded property name and <see cref="uint"/> value (as a JSON number) as part of
+        // a name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The JSON-encoded name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -121,14 +130,16 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for
+        // example: 32767.
         /// </remarks>
         [CLSCompliant(false)]
         public void WriteNumber(JsonEncodedText propertyName, uint value) =>
             WriteNumber(propertyName, (ulong)value);
 
         /// <summary>
-        /// Writes the property name and <see cref="uint"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="uint"/> value (as a JSON number) as part of a name/value
+        // pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -142,7 +153,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for
+        // example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         [CLSCompliant(false)]
@@ -156,7 +168,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="uint"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="uint"/> value (as a JSON number) as part of a name/value
+        // pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -167,7 +180,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for
+        // example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         [CLSCompliant(false)]
@@ -175,7 +189,8 @@ namespace System.Text.Json
             WriteNumber(propertyName, (ulong)value);
 
         /// <summary>
-        /// Writes the property name and <see cref="uint"/> value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="uint"/> value (as a JSON number) as part of a name/value
+        // pair of a JSON object.
         /// </summary>
         /// <param name="utf8PropertyName">The UTF-8 encoded name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -186,7 +201,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="uint"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for
+        // example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         [CLSCompliant(false)]
@@ -341,7 +357,8 @@ namespace System.Text.Json
                         - 4
             );
 
-            // All ASCII, 2 quotes for property name, and 1 colon => escapedPropertyName.Length + JsonConstants.MaximumFormatUInt64Length + 3
+            // All ASCII, 2 quotes for property name, and 1 colon => escapedPropertyName.Length +
+            // JsonConstants.MaximumFormatUInt64Length + 3
             // Optionally, 1 list separator, and up to 3x growth when transcoding
             int maxRequired =
                 (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
@@ -428,7 +445,8 @@ namespace System.Text.Json
                         - s_newLineLength
             );
 
-            // All ASCII, 2 quotes for property name, 1 colon, and 1 space => escapedPropertyName.Length + JsonConstants.MaximumFormatUInt64Length + 4
+            // All ASCII, 2 quotes for property name, 1 colon, and 1 space => escapedPropertyName.Length +
+            // JsonConstants.MaximumFormatUInt64Length + 4
             // Optionally, 1 list separator, 1-2 bytes for new line, and up to 3x growth when transcoding
             int maxRequired =
                 indent

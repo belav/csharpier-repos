@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 codeActionEquivalenceKey
             )
         {
-            // We need the trigger diagnostic span for span based fix all scopes, i.e. FixAllScope.ContainingMember and FixAllScope.ContainingType
+            // We need the trigger diagnostic span for span based fix all scopes, i.e.
+            // FixAllScope.ContainingMember and FixAllScope.ContainingType
             Debug.Assert(
                 diagnosticSpan.HasValue
                     || scope is not FixAllScope.ContainingMember or FixAllScope.ContainingType

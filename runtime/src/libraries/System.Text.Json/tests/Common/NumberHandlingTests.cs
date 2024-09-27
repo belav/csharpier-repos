@@ -1038,7 +1038,8 @@ namespace System.Text.Json.Serialization.Tests
             MyClassWithNumbers_PropsHasAttribute obj =
                 await Serializer.DeserializeWrapper<MyClassWithNumbers_PropsHasAttribute>(json);
 
-            // Number serialized as JSON number due to strict handling on property which overrides loose global policy.
+            // Number serialized as JSON number due to strict handling on property which overrides loose global
+            // policy.
             Assert.Equal(json, await Serializer.SerializeWrapper(obj, s_optionReadAndWriteFromStr));
         }
 
@@ -2433,7 +2434,8 @@ namespace System.Text.Json.Serialization.Tests
                 Converters = { new ConverterForInt32() },
             };
 
-            // Assert converter methods are called and not Read/WriteWithNumberHandling (which would throw InvalidOperationException).
+            // Assert converter methods are called and not Read/WriteWithNumberHandling (which would throw
+            // InvalidOperationException).
             // Converter returns 25 regardless of input.
             Assert.Equal(
                 25,
@@ -2455,7 +2457,8 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal("Converter was called", ex.Message);
 
-            // Okay to set number handling for number collection property when number is handled with custom converter;
+            // Okay to set number handling for number collection property when number is handled with custom
+            // converter;
             // converter Read/Write methods called.
             ClassWithListPropAndAttribute obj1 =
                 await Serializer.DeserializeWrapper<ClassWithListPropAndAttribute>(
@@ -2499,7 +2502,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task InternalCollectionConverter_CustomNumberConverter_OnProperty()
         {
-            // Invalid to set number handling for number collection property when number is handled with custom converter.
+            // Invalid to set number handling for number collection property when number is handled with custom
+            // converter.
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
                 async () =>
                     await Serializer.DeserializeWrapper<ClassWithListPropAndAttribute_ConverterOnProp>(
@@ -2586,7 +2590,8 @@ namespace System.Text.Json.Serialization.Tests
                 Converters = { new ConverterForNullableInt32() },
             };
 
-            // Assert converter methods are called and not Read/WriteWithNumberHandling (which would throw InvalidOperationException).
+            // Assert converter methods are called and not Read/WriteWithNumberHandling (which would throw
+            // InvalidOperationException).
             // Converter returns 25 regardless of input.
             Assert.Equal(
                 25,

@@ -228,7 +228,8 @@ namespace System.Net.Tests
                 "Length Required",
             };
 
-            // ? prior to path and query.  This may or may not fail, depending on the OS, but in either case it shouldn't crash.
+            // ? prior to path and query.  This may or may not fail, depending on the OS, but in either case it
+            // shouldn't crash.
             yield return new object[] { "GET http://ab?cd{path} HTTP/1.1", null, null, null, "" };
 
             // Path ending with an incomplete percent encoded byte or "%uXXXX"

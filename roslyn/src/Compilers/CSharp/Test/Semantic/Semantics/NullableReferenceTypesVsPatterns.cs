@@ -673,7 +673,8 @@ class C
 }";
             var comp = CreateNullableCompilation(source);
             comp.VerifyDiagnostics(
-                // (18,19): warning CS8604: Possible null reference argument for parameter 'o' in 'void C.F(object o)'.
+                // (18,19): warning CS8604: Possible null reference argument for parameter 'o' in 'void C.F(object
+                // o)'.
                 //                 F(x); // 1
                 Diagnostic(ErrorCode.WRN_NullReferenceArgument, "x")
                     .WithArguments("o", "void C.F(object o)")
@@ -1392,37 +1393,45 @@ class Program
 ";
             var comp = CreateNullableCompilation(source);
             comp.VerifyDiagnostics(
-                // (18,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
+                // (18,15): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 1 not exhaustive
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, _)")
                     .WithLocation(18, 15),
-                // (27,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
+                // (27,15): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 2 not exhaustive
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, _)")
                     .WithLocation(27, 15),
-                // (36,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(not null, null)' is not covered.
+                // (36,15): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(not null, null)' is not covered.
                 //         _ = t switch // 3 not exhaustive
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(not null, null)")
                     .WithLocation(36, 15),
-                // (46,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
+                // (46,15): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 4 not exhaustive
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, _)")
                     .WithLocation(46, 15),
-                // (55,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
+                // (55,15): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         _ = t switch // 5 not exhaustive
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, _)")
                     .WithLocation(55, 15),
-                // (64,15): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(not null, null)' is not covered.
+                // (64,15): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(not null, null)' is not covered.
                 //         _ = t switch // 6 not exhaustive
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(not null, null)")
                     .WithLocation(64, 15),
-                // (73,15): warning CS8847: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered. However, a pattern with a 'when' clause might successfully match this value.
+                // (73,15): warning CS8847: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern 'null' is not covered. However, a pattern with a 'when' clause
+                // might successfully match this value.
                 //         _ = o switch // 7 not exhaustive
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNullWithWhen, "switch")
                     .WithArguments("null")
@@ -1473,22 +1482,26 @@ class Test
 }";
             var comp = CreateNullableCompilation(source);
             comp.VerifyDiagnostics(
-                // (12,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
+                // (12,25): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         return (s1, s2) switch { // 1
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, _)")
                     .WithLocation(12, 25),
-                // (18,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
+                // (18,25): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         return (s1, s2) switch { // 2
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, _)")
                     .WithLocation(18, 25),
-                // (24,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, _)' is not covered.
+                // (24,25): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, _)' is not covered.
                 //         return (s1, s2) switch { // 3
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, _)")
                     .WithLocation(24, 25),
-                // (30,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, "")' is not covered.
+                // (30,25): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, "")' is not covered.
                 //         return (s1, s2) switch { // 4
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, \"\")")
@@ -2111,12 +2124,14 @@ public interface IOut<out T> { }
                 //         _ = i switch { 5 => y, _ => x }/*T:<null>!*//*CT:!*/; // 2
                 Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
                     .WithLocation(34, 15),
-                // (39,37): warning CS8619: Nullability of reference types in value of type 'I<string?>' doesn't match target type 'I<string>'.
+                // (39,37): warning CS8619: Nullability of reference types in value of type 'I<string?>' doesn't
+                // match target type 'I<string>'.
                 //         _ = i switch { 6 => x, _ => y }/*T:I<string!>!*/; // 3
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "y")
                     .WithArguments("I<string?>", "I<string>")
                     .WithLocation(39, 37),
-                // (40,29): warning CS8619: Nullability of reference types in value of type 'I<string?>' doesn't match target type 'I<string>'.
+                // (40,29): warning CS8619: Nullability of reference types in value of type 'I<string?>' doesn't
+                // match target type 'I<string>'.
                 //         _ = i switch { 6 => y, _ => x }/*T:I<string!>!*/; // 4
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "y")
                     .WithArguments("I<string?>", "I<string>")
@@ -2606,10 +2621,12 @@ class C
 
             comp.VerifyDiagnostics(
                 // (8,57): warning CS8602: Dereference of a possibly null reference.
-                //         var a = (Func<string>)(b switch { true => () => s.ToString(), false => () => s?.ToString() });
+                //         var a = (Func<string>)(b switch { true => () => s.ToString(), false => () =>
+                // s?.ToString() });
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(8, 57),
                 // (8,86): warning CS8603: Possible null reference return.
-                //         var a = (Func<string>)(b switch { true => () => s.ToString(), false => () => s?.ToString() });
+                //         var a = (Func<string>)(b switch { true => () => s.ToString(), false => () =>
+                // s?.ToString() });
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "s?.ToString()").WithLocation(8, 86)
             );
         }
@@ -2676,7 +2693,8 @@ class C
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (9,24): error CS1660: Cannot convert lambda expression to type 'object' because it is not a delegate type
+                // (9,24): error CS1660: Cannot convert lambda expression to type 'object' because it is not a
+                // delegate type
                 //             true => () => s.ToString(),
                 Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                     .WithArguments("lambda expression", "object")
@@ -2684,7 +2702,8 @@ class C
                 // (9,27): warning CS8602: Dereference of a possibly null reference.
                 //             true => () => s.ToString(),
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(9, 27),
-                // (10,25): error CS1660: Cannot convert lambda expression to type 'object' because it is not a delegate type
+                // (10,25): error CS1660: Cannot convert lambda expression to type 'object' because it is not a
+                // delegate type
                 //             false => () => s?.ToString()
                 Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                     .WithArguments("lambda expression", "object")
@@ -2757,7 +2776,8 @@ class C
             );
 
             comp.VerifyDiagnostics(
-                // (9,15): warning CS8604: Possible null reference argument for parameter 't2' in 'I C.M1<I>(I t1, I t2)'.
+                // (9,15): warning CS8604: Possible null reference argument for parameter 't2' in 'I C.M1<I>(I t1, I
+                // t2)'.
                 //         M1(i, @bool switch { true => a, false => b }).ToString();
                 Diagnostic(
                         ErrorCode.WRN_NullReferenceArgument,
@@ -2944,7 +2964,8 @@ public class C
                 // (43,23): warning CS8602: Dereference of a possibly null reference.
                 //             (_, _) => a.ToString() // 6
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "a").WithLocation(43, 23),
-                // (54,20): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(_, null)' is not covered.
+                // (54,20): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(_, null)' is not covered.
                 //         => (1, a)! switch // 7
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(_, null)")
@@ -2952,7 +2973,8 @@ public class C
                 // (62,28): warning CS8602: Dereference of a possibly null reference.
                 //             (_, (_, C)) => a.ToString() // 8
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "a").WithLocation(62, 28),
-                // (66,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(_, (_, null))' is not covered.
+                // (66,25): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(_, (_, null))' is not covered.
                 //         => (1, (1, a)!) switch  // 9
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(_, (_, null))")
@@ -2960,7 +2982,8 @@ public class C
                 // (68,28): warning CS8602: Dereference of a possibly null reference.
                 //             (_, (_, C)) => a.ToString() // 10
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "a").WithLocation(68, 28),
-                // (72,25): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(_, (_, null))' is not covered.
+                // (72,25): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(_, (_, null))' is not covered.
                 //         => (1, (1, a))! switch  // 11
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(_, (_, null))")
@@ -2999,19 +3022,22 @@ public class Class2
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "Test")
                     .WithArguments("Class2.Test()")
                     .WithLocation(11, 17),
-                // (14,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (14,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         test switch { { Inner1: "" } => "" };
                 Diagnostic(
                         ErrorCode.ERR_IllegalStatement,
                         @"test switch { { Inner1: """" } => """" }"
                     )
                     .WithLocation(14, 9),
-                // (14,25): error CS0572: 'Inner1': cannot reference a type through an expression; try 'Class1.Inner1' instead
+                // (14,25): error CS0572: 'Inner1': cannot reference a type through an expression; try
+                // 'Class1.Inner1' instead
                 //         test switch { { Inner1: "" } => "" };
                 Diagnostic(ErrorCode.ERR_BadTypeReference, "Inner1")
                     .WithArguments("Inner1", "Class1.Inner1")
                     .WithLocation(14, 25),
-                // (14,25): error CS0154: The property or indexer 'Inner1' cannot be used in this context because it lacks the get accessor
+                // (14,25): error CS0154: The property or indexer 'Inner1' cannot be used in this context because it
+                // lacks the get accessor
                 //         test switch { { Inner1: "" } => "" };
                 Diagnostic(ErrorCode.ERR_PropertyLacksGet, "Inner1")
                     .WithArguments("Inner1")
@@ -3049,19 +3075,22 @@ public class Class2
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "Test")
                     .WithArguments("Class2.Test()")
                     .WithLocation(13, 17),
-                // (16,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (16,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         test switch { { Next.Inner1: "" } => "" };
                 Diagnostic(
                         ErrorCode.ERR_IllegalStatement,
                         @"test switch { { Next.Inner1: """" } => """" }"
                     )
                     .WithLocation(16, 9),
-                // (16,30): error CS0572: 'Inner1': cannot reference a type through an expression; try 'Class1.Inner1' instead
+                // (16,30): error CS0572: 'Inner1': cannot reference a type through an expression; try
+                // 'Class1.Inner1' instead
                 //         test switch { { Next.Inner1: "" } => "" };
                 Diagnostic(ErrorCode.ERR_BadTypeReference, "Inner1")
                     .WithArguments("Inner1", "Class1.Inner1")
                     .WithLocation(16, 30),
-                // (16,30): error CS0154: The property or indexer 'Inner1' cannot be used in this context because it lacks the get accessor
+                // (16,30): error CS0154: The property or indexer 'Inner1' cannot be used in this context because it
+                // lacks the get accessor
                 //         test switch { { Next.Inner1: "" } => "" };
                 Diagnostic(ErrorCode.ERR_PropertyLacksGet, "Inner1")
                     .WithArguments("Inner1")
@@ -3097,14 +3126,16 @@ public class Class2
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "Test")
                     .WithArguments("Class2.Test()")
                     .WithLocation(11, 17),
-                // (14,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (14,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         test switch { { Method: "" } => "" };
                 Diagnostic(
                         ErrorCode.ERR_IllegalStatement,
                         @"test switch { { Method: """" } => """" }"
                     )
                     .WithLocation(14, 9),
-                // (14,25): error CS0154: The property or indexer 'Method' cannot be used in this context because it lacks the get accessor
+                // (14,25): error CS0154: The property or indexer 'Method' cannot be used in this context because it
+                // lacks the get accessor
                 //         test switch { { Method: "" } => "" };
                 Diagnostic(ErrorCode.ERR_PropertyLacksGet, "Method")
                     .WithArguments("Method")

@@ -25,21 +25,21 @@ namespace System.Collections
 
         private const int _ShrinkThreshold = 256;
 
-        /*=========================================================================
-        ** Allocates space to hold length bit values. All of the values in the bit
-        ** array are set to false.
-        **
-        ** Exceptions: ArgumentException if length < 0.
-        =========================================================================*/
+/*=========================================================================
+** Allocates space to hold length bit values. All of the values in the bit
+** array are set to false.
+**
+** Exceptions: ArgumentException if length < 0.
+=========================================================================*/
         public BitArray(int length)
             : this(length, false) { }
 
-        /*=========================================================================
-        ** Allocates space to hold length bit values. All of the values in the bit
-        ** array are set to defaultValue.
-        **
-        ** Exceptions: ArgumentOutOfRangeException if length < 0.
-        =========================================================================*/
+/*=========================================================================
+** Allocates space to hold length bit values. All of the values in the bit
+** array are set to defaultValue.
+**
+** Exceptions: ArgumentOutOfRangeException if length < 0.
+=========================================================================*/
         public BitArray(int length, bool defaultValue)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(length);
@@ -62,14 +62,14 @@ namespace System.Collections
             _version = 0;
         }
 
-        /*=========================================================================
-        ** Allocates space to hold the bit values in bytes. bytes[0] represents
-        ** bits 0 - 7, bytes[1] represents bits 8 - 15, etc. The LSB of each byte
-        ** represents the lowest index value; bytes[0] & 1 represents bit 0,
-        ** bytes[0] & 2 represents bit 1, bytes[0] & 4 represents bit 2, etc.
-        **
-        ** Exceptions: ArgumentException if bytes == null.
-        =========================================================================*/
+/*=========================================================================
+** Allocates space to hold the bit values in bytes. bytes[0] represents
+** bits 0 - 7, bytes[1] represents bits 8 - 15, etc. The LSB of each byte
+** represents the lowest index value; bytes[0] & 1 represents bit 0,
+** bytes[0] & 2 represents bit 1, bytes[0] & 4 represents bit 2, etc.
+**
+** Exceptions: ArgumentException if bytes == null.
+=========================================================================*/
         public BitArray(byte[] bytes)
         {
             ArgumentNullException.ThrowIfNull(bytes);
@@ -132,8 +132,10 @@ namespace System.Collections
                 goto LessThan32;
             }
 
-            // Comparing with 1s would get rid of the final negation, however this would not work for some CLR bools
-            // (true for any non-zero values, false for 0) - any values between 2-255 will be interpreted as false.
+            // Comparing with 1s would get rid of the final negation, however this would not work for some CLR
+            // bools
+            // (true for any non-zero values, false for 0) - any values between 2-255 will be interpreted as
+            // false.
             // Instead, We compare with zeroes (== false) then negate the result to ensure compatibility.
 
             ref byte value = ref Unsafe.As<bool, byte>(
@@ -212,14 +214,14 @@ namespace System.Collections
             _version = 0;
         }
 
-        /*=========================================================================
-        ** Allocates space to hold the bit values in values. values[0] represents
-        ** bits 0 - 31, values[1] represents bits 32 - 63, etc. The LSB of each
-        ** integer represents the lowest index value; values[0] & 1 represents bit
-        ** 0, values[0] & 2 represents bit 1, values[0] & 4 represents bit 2, etc.
-        **
-        ** Exceptions: ArgumentException if values == null.
-        =========================================================================*/
+/*=========================================================================
+** Allocates space to hold the bit values in values. values[0] represents
+** bits 0 - 31, values[1] represents bits 32 - 63, etc. The LSB of each
+** integer represents the lowest index value; values[0] & 1 represents bit
+** 0, values[0] & 2 represents bit 1, values[0] & 4 represents bit 2, etc.
+**
+** Exceptions: ArgumentException if values == null.
+=========================================================================*/
         public BitArray(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -240,11 +242,11 @@ namespace System.Collections
             _version = 0;
         }
 
-        /*=========================================================================
-        ** Allocates a new BitArray with the same length and bit values as bits.
-        **
-        ** Exceptions: ArgumentException if bits == null.
-        =========================================================================*/
+/*=========================================================================
+** Allocates a new BitArray with the same length and bit values as bits.
+**
+** Exceptions: ArgumentException if bits == null.
+=========================================================================*/
         public BitArray(BitArray bits)
         {
             ArgumentNullException.ThrowIfNull(bits);
@@ -267,12 +269,12 @@ namespace System.Collections
             set => Set(index, value);
         }
 
-        /*=========================================================================
-        ** Returns the bit value at position index.
-        **
-        ** Exceptions: ArgumentOutOfRangeException if index < 0 or
-        **             index >= GetLength().
-        =========================================================================*/
+/*=========================================================================
+** Returns the bit value at position index.
+**
+** Exceptions: ArgumentOutOfRangeException if index < 0 or
+**             index >= GetLength().
+=========================================================================*/
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Get(int index)
         {
@@ -282,12 +284,12 @@ namespace System.Collections
             return (m_array[index >> 5] & (1 << index)) != 0;
         }
 
-        /*=========================================================================
-        ** Sets the bit value at position index to value.
-        **
-        ** Exceptions: ArgumentOutOfRangeException if index < 0 or
-        **             index >= GetLength().
-        =========================================================================*/
+/*=========================================================================
+** Sets the bit value at position index to value.
+**
+** Exceptions: ArgumentOutOfRangeException if index < 0 or
+**             index >= GetLength().
+=========================================================================*/
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Set(int index, bool value)
         {
@@ -309,9 +311,9 @@ namespace System.Collections
             _version++;
         }
 
-        /*=========================================================================
-        ** Sets all the bit values to value.
-        =========================================================================*/
+/*=========================================================================
+** Sets all the bit values to value.
+=========================================================================*/
         public void SetAll(bool value)
         {
             int arrayLength = GetInt32ArrayLengthFromBitLength(Length);
@@ -335,12 +337,12 @@ namespace System.Collections
             _version++;
         }
 
-        /*=========================================================================
-        ** Returns a reference to the current instance ANDed with value.
-        **
-        ** Exceptions: ArgumentException if value == null or
-        **             value.Length != this.Length.
-        =========================================================================*/
+/*=========================================================================
+** Returns a reference to the current instance ANDed with value.
+**
+** Exceptions: ArgumentException if value == null or
+**             value.Length != this.Length.
+=========================================================================*/
         public unsafe BitArray And(BitArray value)
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -349,7 +351,8 @@ namespace System.Collections
             // buggy code concurrently mutating these instances in a way that could cause memory corruption,
             // we snapshot the arrays from both and then operate only on those snapshots, while also validating
             // that the count we iterate to is within the bounds of both arrays.  We don't care about such code
-            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not meant
+            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not
+            // meant
             // to be thread-safe; we only care about avoiding buffer overruns.
             int[] thisArray = m_array;
             int[] valueArray = value.m_array;
@@ -442,12 +445,12 @@ namespace System.Collections
             return this;
         }
 
-        /*=========================================================================
-        ** Returns a reference to the current instance ORed with value.
-        **
-        ** Exceptions: ArgumentException if value == null or
-        **             value.Length != this.Length.
-        =========================================================================*/
+/*=========================================================================
+** Returns a reference to the current instance ORed with value.
+**
+** Exceptions: ArgumentException if value == null or
+**             value.Length != this.Length.
+=========================================================================*/
         public unsafe BitArray Or(BitArray value)
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -456,7 +459,8 @@ namespace System.Collections
             // buggy code concurrently mutating these instances in a way that could cause memory corruption,
             // we snapshot the arrays from both and then operate only on those snapshots, while also validating
             // that the count we iterate to is within the bounds of both arrays.  We don't care about such code
-            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not meant
+            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not
+            // meant
             // to be thread-safe; we only care about avoiding buffer overruns.
             int[] thisArray = m_array;
             int[] valueArray = value.m_array;
@@ -549,12 +553,12 @@ namespace System.Collections
             return this;
         }
 
-        /*=========================================================================
-        ** Returns a reference to the current instance XORed with value.
-        **
-        ** Exceptions: ArgumentException if value == null or
-        **             value.Length != this.Length.
-        =========================================================================*/
+/*=========================================================================
+** Returns a reference to the current instance XORed with value.
+**
+** Exceptions: ArgumentException if value == null or
+**             value.Length != this.Length.
+=========================================================================*/
         public unsafe BitArray Xor(BitArray value)
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -563,7 +567,8 @@ namespace System.Collections
             // buggy code concurrently mutating these instances in a way that could cause memory corruption,
             // we snapshot the arrays from both and then operate only on those snapshots, while also validating
             // that the count we iterate to is within the bounds of both arrays.  We don't care about such code
-            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not meant
+            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not
+            // meant
             // to be thread-safe; we only care about avoiding buffer overruns.
             int[] thisArray = m_array;
             int[] valueArray = value.m_array;
@@ -657,17 +662,18 @@ namespace System.Collections
             return this;
         }
 
-        /*=========================================================================
-        ** Inverts all the bit values. On/true bit values are converted to
-        ** off/false. Off/false bit values are turned on/true. The current instance
-        ** is updated and returned.
-        =========================================================================*/
+/*=========================================================================
+** Inverts all the bit values. On/true bit values are converted to
+** off/false. Off/false bit values are turned on/true. The current instance
+** is updated and returned.
+=========================================================================*/
         public unsafe BitArray Not()
         {
             // This method uses unsafe code to manipulate data in the BitArray.  To avoid issues with
             // buggy code concurrently mutating this instance in a way that could cause memory corruption,
             // we snapshot the array then operate only on this snapshot.  We don't care about such code
-            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not meant
+            // corrupting the BitArray data in a way that produces incorrect answers, since BitArray is not
+            // meant
             // to be thread-safe; we only care about avoiding buffer overruns.
             int[] thisArray = m_array;
 
@@ -749,12 +755,12 @@ namespace System.Collections
             return this;
         }
 
-        /*=========================================================================
-        ** Shift all the bit values to right on count bits. The current instance is
-        ** updated and returned.
-        *
-        ** Exceptions: ArgumentOutOfRangeException if count < 0
-        =========================================================================*/
+/*=========================================================================
+** Shift all the bit values to right on count bits. The current instance is
+** updated and returned.
+*
+** Exceptions: ArgumentOutOfRangeException if count < 0
+=========================================================================*/
         public BitArray RightShift(int count)
         {
             if (count <= 0)
@@ -783,7 +789,8 @@ namespace System.Collections
                         // is greater than or equal to the width in bits of the promoted left operand,
                         // https://docs.microsoft.com/en-us/cpp/c-language/bitwise-shift-operators?view=vs-2017
                         // However, the compiler protects us from undefined behaviour by constraining the
-                        // right operand to between 0 and width - 1 (inclusive), i.e. right_operand = (right_operand % width).
+                        // right operand to between 0 and width - 1 (inclusive), i.e. right_operand = (right_operand %
+                        // width).
                         uint mask = uint.MaxValue >> (BitsPerInt32 - extraBits);
                         m_array[ints - 1] &= (int)mask;
                     }
@@ -813,12 +820,12 @@ namespace System.Collections
             return this;
         }
 
-        /*=========================================================================
-        ** Shift all the bit values to left on count bits. The current instance is
-        ** updated and returned.
-        *
-        ** Exceptions: ArgumentOutOfRangeException if count < 0
-        =========================================================================*/
+/*=========================================================================
+** Shift all the bit values to left on count bits. The current instance is
+** updated and returned.
+*
+** Exceptions: ArgumentOutOfRangeException if count < 0
+=========================================================================*/
         public BitArray LeftShift(int count)
         {
             if (count <= 0)
@@ -991,8 +998,10 @@ namespace System.Collections
                     goto LessThan32;
 
                 // The mask used when shuffling a single int into Vector128/256/512.
-                // On little endian machines, the lower 8 bits of int belong in the first byte, next lower 8 in the second and so on.
-                // We place the bytes that contain the bits to its respective byte so that we can mask out only the relevant bits later.
+                // On little endian machines, the lower 8 bits of int belong in the first byte, next lower 8 in the
+                // second and so on.
+                // We place the bytes that contain the bits to its respective byte so that we can mask out only the
+                // relevant bits later.
                 Vector128<byte> lowerShuffleMask_CopyToBoolArray = Vector128
                     .Create(0, 0x01010101_01010101)
                     .AsByte();
@@ -1189,7 +1198,8 @@ namespace System.Collections
         /// <summary>
         /// Determines whether all bits in the <see cref="BitArray"/> are set to <c>true</c>.
         /// </summary>
-        /// <returns><c>true</c> if every bit in the <see cref="BitArray"/> is set to <c>true</c>, or if <see cref="BitArray"/> is empty; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if every bit in the <see cref="BitArray"/> is set to <c>true</c>, or if
+        // <see cref="BitArray"/> is empty; otherwise, <c>false</c>.</returns>
         public bool HasAllSet()
         {
             Div32Rem(m_length, out int extraBits);
@@ -1220,7 +1230,8 @@ namespace System.Collections
         /// <summary>
         /// Determines whether any bit in the <see cref="BitArray"/> is set to <c>true</c>.
         /// </summary>
-        /// <returns><c>true</c> if <see cref="BitArray"/> is not empty and at least one of its bit is set to <c>true</c>; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if <see cref="BitArray"/> is not empty and at least one of its bit is set
+        // to <c>true</c>; otherwise, <c>false</c>.</returns>
         public bool HasAnySet()
         {
             Div32Rem(m_length, out int extraBits);

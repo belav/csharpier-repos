@@ -26,7 +26,8 @@ public sealed class LocationChangingContext
     public bool IsNavigationIntercepted { get; init; }
 
     /// <summary>
-    /// Gets a <see cref="System.Threading.CancellationToken"/> that can be used to determine if this navigation was canceled
+    /// Gets a <see cref="System.Threading.CancellationToken"/> that can be used to determine if this
+    // navigation was canceled
     /// (for example, because the user has triggered a different navigation).
     /// </summary>
     public CancellationToken CancellationToken { get; init; }

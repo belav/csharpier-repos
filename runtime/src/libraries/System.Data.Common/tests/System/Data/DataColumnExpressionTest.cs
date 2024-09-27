@@ -341,7 +341,8 @@ namespace System.Data.Tests
                         operand2,
                         new SqlBoolean(equation.Result),
                     };
-                    // BUG? Result type of comparison of two SQL types (when one operard is Null) is the type itself, not SqlBoolean.
+                    // BUG? Result type of comparison of two SQL types (when one operard is Null) is the type itself,
+                    // not SqlBoolean.
                     yield return new object[]
                     {
                         type,
